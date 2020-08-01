@@ -5,7 +5,7 @@ description: 瞭解應用程式的 Blazor 設定，包括應用程式設定、�
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 06/10/2020
+ms.date: 07/29/2020
 no-loc:
 - Blazor
 - Blazor Server
@@ -15,24 +15,29 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/fundamentals/configuration
-ms.openlocfilehash: f78803a3954feb98a39f26874b9de0aa08dc6327
-ms.sourcegitcommit: 384833762c614851db653b841cc09fbc944da463
+ms.openlocfilehash: 9ae0dcc16b9debd47a61010953243b0abe499c4f
+ms.sourcegitcommit: ca6a1f100c1a3f59999189aa962523442dd4ead1
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 07/17/2020
-ms.locfileid: "86445212"
+ms.lasthandoff: 07/30/2020
+ms.locfileid: "87443964"
 ---
-# <a name="aspnet-core-blazor-configuration"></a>ASP.NET Core Blazor 設定
+# <a name="aspnet-core-no-locblazor-configuration"></a>ASP.NET Core Blazor 設定
 
 > [!NOTE]
 > 本主題適用于 Blazor WebAssembly 。 如需 ASP.NET Core 應用程式設定的一般指引，請參閱 <xref:fundamentals/configuration/index> 。
 
-Blazor WebAssembly從載入設定：
+Blazor WebAssembly預設會從應用程式佈建檔案載入設定：
 
-* 應用程式佈建檔案（預設為）：
-  * `wwwroot/appsettings.json`
-  * `wwwroot/appsettings.{ENVIRONMENT}.json`
-* 應用程式註冊的其他設定[提供者](xref:fundamentals/configuration/index)。 並非所有提供者都適用于 Blazor WebAssembly 應用程式。 澄清 WASM 的設定 Blazor WebAssembly [提供者 Blazor （dotnet/AspNetCore.Docs #18134）](https://github.com/dotnet/AspNetCore.Docs/issues/18134)可追蹤支援的提供者的詳細資訊。
+* `wwwroot/appsettings.json`
+* `wwwroot/appsettings.{ENVIRONMENT}.json`
+
+應用程式所註冊的其他設定提供者也可以提供設定。
+
+並非所有提供者或提供者功能都適用于 Blazor WebAssembly 應用程式：
+
+* [Azure Key Vault 設定提供者](xref:security/key-vault-configuration)：提供者不支援使用用戶端秘密案例的受控識別和應用程式識別碼（用戶端識別碼）。 不建議將具有用戶端密碼的應用程式識別碼用於任何 ASP.NET Core 應用程式，特別是應用程式，因為用戶端 Blazor WebAssembly 密碼無法安全地存取服務。
+* [Azure App 設定提供者](/azure/azure-app-configuration/quickstart-aspnet-core-app)：提供者不適合 Blazor WebAssembly 應用程式，因為 Blazor WebAssembly 應用程式不會在 Azure 中的伺服器上執行。
 
 > [!WARNING]
 > Blazor WebAssembly使用者可以看到應用程式中的設定。 **請勿在設定中儲存應用程式秘密或認證。**
@@ -61,7 +66,31 @@ Blazor WebAssembly從載入設定：
 <p>Message: @Configuration["message"]</p>
 ```
 
-## <a name="provider-configuration"></a>提供者設定
+## <a name="custom-configuration-provider-with-ef-core"></a>具有 EF Core 的自訂設定提供者
+
+中示範的 EF Core 自訂設定提供者可 <xref:fundamentals/configuration/index#custom-configuration-provider> 搭配 Blazor WebAssembly 應用程式使用。
+
+在（）中，使用下列程式碼新增範例的設定提供者 `Program.Main` `Program.cs` ：
+
+```csharp
+builder.Configuration.AddEFConfiguration(
+    options => options.UseInMemoryDatabase("InMemoryDb"));
+```
+
+將 <xref:Microsoft.Extensions.Configuration.IConfiguration> 實例插入元件以存取設定資料：
+
+```razor
+@using Microsoft.Extensions.Configuration
+@inject IConfiguration Configuration
+
+<ul>
+    <li>@Configuration["quote1"]</li>
+    <li>@Configuration["quote2"]</li>
+    <li>@Configuration["quote3"]</li>
+</ul>
+```
+
+## <a name="memory-configuration-source"></a>記憶體設定來源
 
 下列範例會使用 <xref:Microsoft.Extensions.Configuration.Memory.MemoryConfigurationSource> 來提供額外的設定：
 

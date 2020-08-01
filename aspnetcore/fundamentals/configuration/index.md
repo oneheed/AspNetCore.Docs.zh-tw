@@ -15,12 +15,12 @@ no-loc:
 - Razor
 - SignalR
 uid: fundamentals/configuration/index
-ms.openlocfilehash: 6e47e627915bd8988d161f7d5af4a89f3671c0a7
-ms.sourcegitcommit: 384833762c614851db653b841cc09fbc944da463
+ms.openlocfilehash: a08993a7909d67be34446815b10d32089d9e0629
+ms.sourcegitcommit: ca6a1f100c1a3f59999189aa962523442dd4ead1
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 07/17/2020
-ms.locfileid: "86445446"
+ms.lasthandoff: 07/30/2020
+ms.locfileid: "87444146"
 ---
 # <a name="configuration-in-aspnet-core"></a>ASP.NET Core 的設定
 
@@ -32,7 +32,7 @@ ASP.NET Core 中的設定是使用一或多個設定[提供者](#cp)來執行。
 
 * 設定檔案，例如*appsettings.js*
 * 環境變數
-* Azure Key Vault
+* Azure 金鑰保存庫
 * Azure 應用程式組態
 * 命令列引數
 * 已安裝或建立的自訂提供者
@@ -79,7 +79,7 @@ ASP.NET Core 以[dotnet new](/dotnet/core/tools/dotnet-new)或 Visual Studio 建
 預設會 <xref:Microsoft.Extensions.Configuration.Json.JsonConfigurationProvider> 以下列順序載入設定：
 
 1. *appsettings.json*
-1. *appsettings。* `Environment`*. json* ：例如， *appsettings*。***生產***。*json*和*appsettings*。***開發***。*json*檔案。 檔案的環境版本是根據[IHostingEnvironment. EnvironmentName](xref:Microsoft.Extensions.Hosting.IHostingEnvironment.EnvironmentName*)載入。 如需詳細資訊，請參閱 <xref:fundamentals/environments> 。
+1. *appsettings。* `Environment`*. json* ：例如， *appsettings*。***生產***。*json*和*appsettings*。***開發***。*json*檔案。 檔案的環境版本是根據[IHostingEnvironment. EnvironmentName](xref:Microsoft.Extensions.Hosting.IHostingEnvironment.EnvironmentName*)載入。 如需詳細資訊，請參閱 <xref:fundamentals/environments>。
 
 *appsettings*。 `Environment`*json*值會覆寫中*appsettings.js的*索引鍵。 例如，根據預設：
 
@@ -113,7 +113,7 @@ ASP.NET Core 以[dotnet new](/dotnet/core/tools/dotnet-new)或 Visual Studio 建
 * <xref:fundamentals/environments>
 * <xref:security/app-secrets>：包含有關使用環境變數來儲存敏感性資料的建議。 秘密管理員會使用檔案設定[提供者](#fcp)，將使用者秘密儲存在本機系統上的 JSON 檔案中。
 
-[Azure Key Vault](https://azure.microsoft.com/services/key-vault/) 可安全地儲存 ASP.NET Core 應用程式的應用程式祕密。 如需詳細資訊，請參閱 <xref:security/key-vault-configuration> 。
+[Azure Key Vault](https://azure.microsoft.com/services/key-vault/) 可安全地儲存 ASP.NET Core 應用程式的應用程式祕密。 如需詳細資訊，請參閱 <xref:security/key-vault-configuration>。
 
 <a name="evcp"></a>
 
@@ -307,7 +307,7 @@ dotnet run -k1=value1 -k2 value2 --alt3=value2 /alt4=value3 --alt5 value5 /alt6 
 
 | 提供者 | 從提供設定 |
 | -------- | ----------------------------------- |
-| [Azure Key Vault 設定提供者](xref:security/key-vault-configuration) | Azure Key Vault |
+| [Azure Key Vault 設定提供者](xref:security/key-vault-configuration) | Azure 金鑰保存庫 |
 | [Azure App 設定提供者](/azure/azure-app-configuration/quickstart-aspnet-core-app) | Azure 應用程式組態 |
 | [命令列設定提供者](#clcp) | 命令列參數 |
 | [自訂設定提供者](#custom-configuration-provider) | 自訂來源 |
@@ -675,7 +675,7 @@ Index: 5  Value: value5
 
 下列程式碼顯示如何在 *Program.cs* 中使用自訂 `EFConfigurationProvider`：
 
-[!code-csharp[](index/samples/3.x/ConfigurationSample/Program.cs?name=snippet_Program&highlight=29-30)]
+[!code-csharp[](index/samples_snippets/3.x/ConfigurationSample/Program.cs?highlight=7-8)]
 
 <a name="acs"></a>
 
@@ -687,7 +687,7 @@ Index: 5  Value: value5
 
 如需使用啟動方便方法來存取設定的範例，請參閱[應用程式啟動：方便方法](xref:fundamentals/startup#convenience-methods)。
 
-## <a name="access-configuration-in-razor-pages"></a>頁面中的存取設定 Razor
+## <a name="access-configuration-in-no-locrazor-pages"></a>頁面中的存取設定 Razor
 
 下列程式碼會在頁面中顯示設定資料 Razor ：
 
@@ -761,7 +761,7 @@ Index: 5  Value: value5
 
 ## <a name="add-configuration-from-an-external-assembly"></a>從外部組件新增設定
 
-<xref:Microsoft.AspNetCore.Hosting.IHostingStartup> 實作允許在啟動時從應用程式 `Startup` 類別外部的外部組件，針對應用程式新增增強功能。 如需詳細資訊，請參閱 <xref:fundamentals/configuration/platform-specific-configuration> 。
+<xref:Microsoft.AspNetCore.Hosting.IHostingStartup> 實作允許在啟動時從應用程式 `Startup` 類別外部的外部組件，針對應用程式新增增強功能。 如需詳細資訊，請參閱 <xref:fundamentals/configuration/platform-specific-configuration>。
 
 ## <a name="additional-resources"></a>其他資源
 
@@ -775,7 +775,7 @@ Index: 5  Value: value5
 
 ASP.NET Core 中的應用程式設定是以由*設定提供者*所建立的機碼值組為基礎。 設定提供者會從各種設定來源將設定資料讀取到機碼值組中：
 
-* Azure Key Vault
+* Azure 金鑰保存庫
 * Azure 應用程式組態
 * 命令列引數
 * 自訂提供者 (已安裝或已建立)
@@ -792,7 +792,7 @@ ASP.NET Core 中的應用程式設定是以由*設定提供者*所建立的機�
 using Microsoft.Extensions.Configuration;
 ```
 
-*選項模式*是此主題中所述之設定概念的延伸。 選項使用類別來代表一組相關的設定。 如需詳細資訊，請參閱 <xref:fundamentals/configuration/options> 。
+*選項模式*是此主題中所述之設定概念的延伸。 選項使用類別來代表一組相關的設定。 如需詳細資訊，請參閱 <xref:fundamentals/configuration/options>。
 
 [查看或下載範例程式碼](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/configuration/index/samples)（[如何下載](xref:index#how-to-download-a-sample)）
 
@@ -842,7 +842,7 @@ using Microsoft.Extensions.Configuration;
 * <xref:fundamentals/environments>
 * <xref:security/app-secrets>：包含有關使用環境變數來儲存敏感性資料的建議。 「祕密管理員」使用「檔案設定提供者」以 JSON 檔案在本機系統上存放使用者祕密。 此主題稍後將說明「檔案設定提供者」。
 
-[Azure Key Vault](https://azure.microsoft.com/services/key-vault/) 可安全地儲存 ASP.NET Core 應用程式的應用程式祕密。 如需詳細資訊，請參閱 <xref:security/key-vault-configuration> 。
+[Azure Key Vault](https://azure.microsoft.com/services/key-vault/) 可安全地儲存 ASP.NET Core 應用程式的應用程式祕密。 如需詳細資訊，請參閱 <xref:security/key-vault-configuration>。
 
 ## <a name="hierarchical-configuration-data"></a>階層式設定資料
 
@@ -910,7 +910,7 @@ public class HomeController : Controller
 
 設定提供者無法使用 DI，因為當它們由主機設定時，它無法使用。
 
-### <a name="keys"></a>按鍵
+### <a name="keys"></a>索引鍵
 
 設定機碼會採用下列慣例：
 
@@ -935,7 +935,7 @@ public class HomeController : Controller
 
 | 提供者 | 從&hellip;提供設定 |
 | -------- | ----------------------------------- |
-| [Azure Key Vault 設定提供者](xref:security/key-vault-configuration) (*安全性*主題) | Azure Key Vault |
+| [Azure Key Vault 設定提供者](xref:security/key-vault-configuration) (*安全性*主題) | Azure 金鑰保存庫 |
 | [Azure 應用程式組態提供者](/azure/azure-app-configuration/quickstart-aspnet-core-app) (Azure 文件) | Azure 應用程式組態 |
 | [命令列設定提供者](#command-line-configuration-provider) | 命令列參數 |
 | [自訂設定提供者](#custom-configuration-provider) | 自訂來源 |
@@ -1108,7 +1108,7 @@ public static readonly Dictionary<string, string> _switchMappings =
 
 建立切換對應字典之後，它會包含下表中所示的資料。
 
-| Key       | 值             |
+| 機碼       | 值             |
 | --------- | ----------------- |
 | `-CLKey1` | `CommandLineKey1` |
 | `-CLKey2` | `CommandLineKey2` |
@@ -1121,7 +1121,7 @@ dotnet run -CLKey1=value1 -CLKey2=value2
 
 執行上述命令之後，設定包含下表中顯示的值。
 
-| Key               | 值    |
+| 機碼               | 值    |
 | ----------------- | -------- |
 | `CommandLineKey1` | `value1` |
 | `CommandLineKey2` | `value2` |
@@ -1625,7 +1625,7 @@ TvShow = tvShow;
 
 考慮下表中顯示的設定機碼與值。
 
-| Key             | 值  |
+| 機碼             | 值  |
 | :-------------: | :----: |
 | array:entries:0 | value0 |
 | array:entries:1 | value1 |
@@ -1685,7 +1685,7 @@ config.AddJsonFile(
 
 表格中顯示的機碼值組會載入到設定中。
 
-| Key             | 值  |
+| 機碼             | 值  |
 | :-------------: | :----: |
 | array:entries:3 | value3 |
 
@@ -1708,7 +1708,7 @@ config.AddJsonFile(
 
 「JSON 設定提供者」會將設定資料讀入到下列機碼值組：
 
-| Key                     | 值  |
+| 機碼                     | 值  |
 | ----------------------- | :----: |
 | json_array:key          | valueA |
 | json_array:subsection:0 | valueB |
@@ -1799,7 +1799,7 @@ public class Startup
 
 如需使用啟動方便方法來存取設定的範例，請參閱[應用程式啟動：方便方法](xref:fundamentals/startup#convenience-methods)。
 
-## <a name="access-configuration-in-a-razor-pages-page-or-mvc-view"></a>Razor頁面頁面或 MVC 視圖中的存取設定
+## <a name="access-configuration-in-a-no-locrazor-pages-page-or-mvc-view"></a>Razor頁面頁面或 MVC 視圖中的存取設定
 
 若要存取 Razor [頁面] 頁面或 MVC 視圖中的設定，請為[Microsoft.Extensions.Configuration 命名空間](xref:Microsoft.Extensions.Configuration)新增[using](xref:mvc/views/razor#using)指示詞（[c # 參考： using](/dotnet/csharp/language-reference/keywords/using-directive)指示詞），並將其插入 <xref:Microsoft.Extensions.Configuration.IConfiguration> 頁面或視圖中。
 
@@ -1843,7 +1843,7 @@ public class Startup
 
 ## <a name="add-configuration-from-an-external-assembly"></a>從外部組件新增設定
 
-<xref:Microsoft.AspNetCore.Hosting.IHostingStartup> 實作允許在啟動時從應用程式 `Startup` 類別外部的外部組件，針對應用程式新增增強功能。 如需詳細資訊，請參閱 <xref:fundamentals/configuration/platform-specific-configuration> 。
+<xref:Microsoft.AspNetCore.Hosting.IHostingStartup> 實作允許在啟動時從應用程式 `Startup` 類別外部的外部組件，針對應用程式新增增強功能。 如需詳細資訊，請參閱 <xref:fundamentals/configuration/platform-specific-configuration>。
 
 ## <a name="additional-resources"></a>其他資源
 

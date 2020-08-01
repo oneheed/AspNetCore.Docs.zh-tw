@@ -14,14 +14,14 @@ no-loc:
 - Razor
 - SignalR
 uid: razor-pages/index
-ms.openlocfilehash: e7e9bc76a2bba1c15b32c97f0f3629285f256499
-ms.sourcegitcommit: d9ae1f352d372a20534b57e23646c1a1d9171af1
+ms.openlocfilehash: bd9f991a2aba32cbbeb193ad422005f910e6795b
+ms.sourcegitcommit: ca6a1f100c1a3f59999189aa962523442dd4ead1
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 07/21/2020
-ms.locfileid: "86568701"
+ms.lasthandoff: 07/30/2020
+ms.locfileid: "87444073"
 ---
-# <a name="introduction-to-razor-pages-in-aspnet-core"></a>RazorASP.NET Core 中的頁面簡介
+# <a name="introduction-to-no-locrazor-pages-in-aspnet-core"></a>RazorASP.NET Core 中的頁面簡介
 
 ::: moniker range=">= aspnetcore-3.0"
 
@@ -33,13 +33,13 @@ Razor頁面可讓撰寫以頁面為焦點的案例更輕鬆且更具生產力，
 
 本檔提供 Razor 頁面簡介。 它不是逐步教學課程。 如果您發現某些區段太先進，請參閱[開始使用 Razor 頁面](xref:tutorials/razor-pages/razor-pages-start)。 如需 ASP.NET Core 的概觀，請參閱[ASP.NET Core 簡介](xref:index)。
 
-## <a name="prerequisites"></a>必要條件
+## <a name="prerequisites"></a>先決條件
 
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
 [!INCLUDE[](~/includes/net-core-prereqs-vs-3.0.md)]
 
-# <a name="visual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code) \(英文\)
+# <a name="visual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code)
 
 [!INCLUDE[](~/includes/net-core-prereqs-vsc-3.0.md)]
 
@@ -51,13 +51,13 @@ Razor頁面可讓撰寫以頁面為焦點的案例更輕鬆且更具生產力，
 
 <a name="rpvs17"></a>
 
-## <a name="create-a-razor-pages-project"></a>建立 Razor 頁面專案
+## <a name="create-a-no-locrazor-pages-project"></a>建立 Razor 頁面專案
 
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
 如需如何建立頁面專案的詳細指示，請參閱[開始使用 Razor 頁面](xref:tutorials/razor-pages/razor-pages-start) Razor 。
 
-# <a name="visual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code) \(英文\)
+# <a name="visual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code)
 
 從命令列執行 `dotnet new webapp`。
 
@@ -67,7 +67,7 @@ Razor頁面可讓撰寫以頁面為焦點的案例更輕鬆且更具生產力，
 
 ---
 
-## <a name="razor-pages"></a>Razor頁面
+## <a name="no-locrazor-pages"></a>Razor頁面
 
 Razor頁面已在*Startup.cs*中啟用：
 
@@ -108,6 +108,8 @@ Razor頁面已在*Startup.cs*中啟用：
 Razor頁面的設計目的是要在建立應用程式時，讓與網頁瀏覽器搭配使用的常見模式變得容易執行。 [模型](xref:mvc/models/model-binding)系結、[標記](xref:mvc/views/tag-helpers/intro)協助程式和 HTML 協助程式都*只*會使用頁面類別中定義的屬性 Razor 。 `Contact` 模型請考慮實作基本的「與我們連絡」格式頁面：
 
 本文件中的範例，會在 [Startup.cs](https://github.com/dotnet/AspNetCore.Docs/blob/master/aspnetcore/razor-pages/index/3.0sample/RazorPagesContacts/Startup.cs#L23-L24) 檔案中初始化 `DbContext`。
+
+記憶體中的資料庫需要 `Microsoft.EntityFrameworkCore.InMemory` NuGet 套件。
 
 [!code-csharp[](index/3.0sample/RazorPagesContacts/Startup.cs?name=snippet)]
 
@@ -340,13 +342,13 @@ Razor`OnGet`如果未 `OnHead` 定義任何處理程式，則頁面會回復為�
 
 <a name="xsrf"></a>
 
-## <a name="xsrfcsrf-and-razor-pages"></a>XSRF/CSRF 和 Razor Pages
+## <a name="xsrfcsrf-and-no-locrazor-pages"></a>XSRF/CSRF 和 Razor Pages
 
 Razor頁面會受到[Antiforgery 驗證](xref:security/anti-request-forgery)的保護。 [FormTagHelper](xref:mvc/views/working-with-forms#the-form-tag-helper)會將 antiforgery TOKEN 插入 HTML 表單元素中。
 
 <a name="layout"></a>
 
-## <a name="using-layouts-partials-templates-and-tag-helpers-with-razor-pages"></a>搭配頁面使用版面配置、部分、範本和標籤協助程式 Razor
+## <a name="using-layouts-partials-templates-and-tag-helpers-with-no-locrazor-pages"></a>搭配頁面使用版面配置、部分、範本和標籤協助程式 Razor
 
 頁面會與視圖引擎的所有功能搭配使用 Razor 。 版面配置、部分、範本、標記協助程式、 *_ViewStart*和 *_ViewImports。 cshtml*的工作方式與傳統 Razor 視圖相同。
 
@@ -585,13 +587,13 @@ public string Message { get; set; }
 
 若要先行編譯視圖，請參閱[ Razor view 編譯](xref:mvc/views/view-compilation)。
 
-### <a name="specify-that-razor-pages-are-at-the-content-root"></a>指定 Razor 頁面位於內容根目錄
+### <a name="specify-that-no-locrazor-pages-are-at-the-content-root"></a>指定 Razor 頁面位於內容根目錄
 
 根據預設， Razor 頁面會以根方式在 */Pages*目錄中。 新增 <xref:Microsoft.Extensions.DependencyInjection.MvcRazorPagesMvcBuilderExtensions.WithRazorPagesAtContentRoot*> 以指定您的 Razor 頁面位於應用程式的[內容根目錄](xref:fundamentals/index#content-root)（ <xref:Microsoft.AspNetCore.Hosting.IHostingEnvironment.ContentRootPath> ）：
 
 [!code-csharp[](index/3.0sample/RazorPagesContacts/StartupWithRazorPagesAtContentRoot.cs?name=snippet)]
 
-### <a name="specify-that-razor-pages-are-at-a-custom-root-directory"></a>指定 Razor 頁面位於自訂根目錄
+### <a name="specify-that-no-locrazor-pages-are-at-a-custom-root-directory"></a>指定 Razor 頁面位於自訂根目錄
 
 新增 <xref:Microsoft.Extensions.DependencyInjection.MvcRazorPagesMvcCoreBuilderExtensions.WithRazorPagesRoot*> 以指定 Razor 頁面位於應用程式中的自訂根目錄（提供相對路徑）：
 
@@ -624,13 +626,13 @@ Razor頁面是 ASP.NET Core MVC 的新層面，可讓撰寫以頁面為焦點的
 
 本檔提供 Razor 頁面簡介。 它不是逐步教學課程。 如果您發現某些區段太先進，請參閱[開始使用 Razor 頁面](xref:tutorials/razor-pages/razor-pages-start)。 如需 ASP.NET Core 的概觀，請參閱[ASP.NET Core 簡介](xref:index)。
 
-## <a name="prerequisites"></a>必要條件
+## <a name="prerequisites"></a>先決條件
 
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
 [!INCLUDE[](~/includes/net-core-prereqs-vs2019-2.2.md)]
 
-# <a name="visual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code) \(英文\)
+# <a name="visual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code)
 
 [!INCLUDE[](~/includes/net-core-prereqs-vsc-2.2.md)]
 
@@ -642,7 +644,7 @@ Razor頁面是 ASP.NET Core MVC 的新層面，可讓撰寫以頁面為焦點的
 
 <a name="rpvs17"></a>
 
-## <a name="create-a-razor-pages-project"></a>建立 Razor 頁面專案
+## <a name="create-a-no-locrazor-pages-project"></a>建立 Razor 頁面專案
 
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
@@ -654,13 +656,13 @@ Razor頁面是 ASP.NET Core MVC 的新層面，可讓撰寫以頁面為焦點的
 
 從 Visual Studio for Mac 開啟已產生的 *.csproj* 檔案。
 
-# <a name="visual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code) \(英文\)
+# <a name="visual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code)
 
 從命令列執行 `dotnet new webapp`。
 
 ---
 
-## <a name="razor-pages"></a>Razor頁面
+## <a name="no-locrazor-pages"></a>Razor頁面
 
 Razor頁面已在*Startup.cs*中啟用：
 
@@ -860,13 +862,13 @@ services.AddMvc()
 
 <a name="xsrf"></a>
 
-## <a name="xsrfcsrf-and-razor-pages"></a>XSRF/CSRF 和 Razor Pages
+## <a name="xsrfcsrf-and-no-locrazor-pages"></a>XSRF/CSRF 和 Razor Pages
 
 您不必撰寫任何[防偽驗證](xref:security/anti-request-forgery)程式碼。 Antiforgery 權杖的產生和驗證會自動包含在 Razor 頁面中。
 
 <a name="layout"></a>
 
-## <a name="using-layouts-partials-templates-and-tag-helpers-with-razor-pages"></a>搭配頁面使用版面配置、部分、範本和標籤協助程式 Razor
+## <a name="using-layouts-partials-templates-and-tag-helpers-with-no-locrazor-pages"></a>搭配頁面使用版面配置、部分、範本和標籤協助程式 Razor
 
 頁面會與視圖引擎的所有功能搭配使用 Razor 。 版面配置、部分、範本、標記協助程式、 *_ViewStart* *_ViewImports cshtml*的工作方式，與傳統 Razor 視圖相同。
 
@@ -981,7 +983,7 @@ services.AddMvc()
 RedirectToPage("/Index", new { area = "Services" });
 ```
 
-如需詳細資訊，請參閱 <xref:mvc/controllers/areas> 。
+如需詳細資訊，請參閱 <xref:mvc/controllers/areas>。
 
 ## <a name="viewdata-attribute"></a>ViewData 屬性
 
@@ -1094,7 +1096,7 @@ public string Message { get; set; }
 
 請參閱[開始使用 Razor 頁面](xref:tutorials/razor-pages/razor-pages-start)，這會在此簡介中建立。
 
-### <a name="specify-that-razor-pages-are-at-the-content-root"></a>指定 Razor 頁面位於內容根目錄
+### <a name="specify-that-no-locrazor-pages-are-at-the-content-root"></a>指定 Razor 頁面位於內容根目錄
 
 根據預設， Razor 頁面會以根方式在 */Pages*目錄中。 將[ Razor PagesAtContentRoot](/dotnet/api/microsoft.extensions.dependencyinjection.mvcrazorpagesmvcbuilderextensions.withrazorpagesatcontentroot)新增至[AddMvc](/dotnet/api/microsoft.extensions.dependencyinjection.mvcservicecollectionextensions.addmvc#Microsoft_Extensions_DependencyInjection_MvcServiceCollectionExtensions_AddMvc_Microsoft_Extensions_DependencyInjection_IServiceCollection_) ，以指定您的 Razor 頁面位於應用程式的[內容根目錄](xref:fundamentals/index#content-root)（[ContentRootPath](/dotnet/api/microsoft.aspnetcore.hosting.ihostingenvironment.contentrootpath)）：
 
@@ -1107,7 +1109,7 @@ services.AddMvc()
     .WithRazorPagesAtContentRoot();
 ```
 
-### <a name="specify-that-razor-pages-are-at-a-custom-root-directory"></a>指定 Razor 頁面位於自訂根目錄
+### <a name="specify-that-no-locrazor-pages-are-at-a-custom-root-directory"></a>指定 Razor 頁面位於自訂根目錄
 
 將[ Razor PagesRoot](/dotnet/api/microsoft.extensions.dependencyinjection.mvcrazorpagesmvccorebuilderextensions.withrazorpagesroot)新增至[AddMvc](/dotnet/api/microsoft.extensions.dependencyinjection.mvcservicecollectionextensions.addmvc#Microsoft_Extensions_DependencyInjection_MvcServiceCollectionExtensions_AddMvc_Microsoft_Extensions_DependencyInjection_IServiceCollection_) ，以指定您的 Razor 頁面位於應用程式中的自訂根目錄（提供相對路徑）：
 

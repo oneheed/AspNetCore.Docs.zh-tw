@@ -13,12 +13,12 @@ no-loc:
 - Razor
 - SignalR
 uid: mvc/controllers/routing
-ms.openlocfilehash: b917671053313c74acfff36518e8f36d5ef2eb22
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: 962b42239b2101fc95e55fb38ce214481bf0ef01
+ms.sourcegitcommit: ca6a1f100c1a3f59999189aa962523442dd4ead1
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85405480"
+ms.lasthandoff: 07/30/2020
+ms.locfileid: "87444140"
 ---
 # <a name="routing-to-controller-actions-in-aspnet-core"></a>ASP.NET Core 中的路由至控制器動作
 
@@ -52,7 +52,7 @@ ASP.NET Core 控制器會使用路由[中介軟體](xref:fundamentals/middleware
 
 [!code-csharp[](routing/samples/3.x/main/StartupDefaultMVC.cs?name=snippet)]
 
-在呼叫內 <xref:Microsoft.AspNetCore.Builder.EndpointRoutingApplicationBuilderExtensions.UseEndpoints*> ， <xref:Microsoft.AspNetCore.Builder.ControllerEndpointRouteBuilderExtensions.MapControllerRoute*> 是用來建立單一路由。 單一路由的名稱為 `default` route。 大部分具有控制器和視圖的應用程式會使用類似路由的路由範本 `default` 。 REST Api 應該使用[屬性路由](#ar)。
+在呼叫內 <xref:Microsoft.AspNetCore.Builder.EndpointRoutingApplicationBuilderExtensions.UseEndpoints%2A> ， <xref:Microsoft.AspNetCore.Builder.ControllerEndpointRouteBuilderExtensions.MapControllerRoute%2A> 是用來建立單一路由。 單一路由的名稱為 `default` route。 大部分具有控制器和視圖的應用程式會使用類似路由的路由範本 `default` 。 REST Api 應該使用[屬性路由](#ar)。
 
 路由範本 `"{controller=Home}/{action=Index}/{id?}"` ：
 
@@ -89,7 +89,7 @@ public class HomeController : Controller
 
 URL 路徑會 `/` 使用路由範本的預設 `Home` 控制器和 `Index` 動作。 URL 路徑會 `/Home` 使用路由範本預設 `Index` 動作。
 
-<xref:Microsoft.AspNetCore.Builder.ControllerEndpointRouteBuilderExtensions.MapDefaultControllerRoute*> 方法很方便：
+<xref:Microsoft.AspNetCore.Builder.ControllerEndpointRouteBuilderExtensions.MapDefaultControllerRoute%2A> 方法很方便：
 
 ```csharp
 endpoints.MapDefaultControllerRoute();
@@ -102,10 +102,10 @@ endpoints.MapControllerRoute("default", "{controller=Home}/{action=Index}/{id?}"
 ```
 
 > [!IMPORTANT]
-> 路由是使用 <xref:Microsoft.AspNetCore.Builder.EndpointRoutingApplicationBuilderExtensions.UseRouting*> 和 <xref:Microsoft.AspNetCore.Builder.EndpointRoutingApplicationBuilderExtensions.UseEndpoints*> 中介軟體來設定。 若要使用控制器：
+> 路由是使用 <xref:Microsoft.AspNetCore.Builder.EndpointRoutingApplicationBuilderExtensions.UseRouting%2A> 和 <xref:Microsoft.AspNetCore.Builder.EndpointRoutingApplicationBuilderExtensions.UseEndpoints%2A> 中介軟體來設定。 若要使用控制器：
 >
-> * <xref:Microsoft.AspNetCore.Builder.ControllerEndpointRouteBuilderExtensions.MapControllers*>在內部呼叫 `UseEndpoints` 來對應[屬性路由](#ar)控制器。
-> * 呼叫 <xref:Microsoft.AspNetCore.Builder.ControllerEndpointRouteBuilderExtensions.MapControllerRoute*> 或 <xref:Microsoft.AspNetCore.Builder.ControllerEndpointRouteBuilderExtensions.MapAreaControllerRoute*> ，以對應[傳統路由](#cr)控制器和[屬性路由](#ar)控制器。
+> * <xref:Microsoft.AspNetCore.Builder.ControllerEndpointRouteBuilderExtensions.MapControllers%2A>在內部呼叫 `UseEndpoints` 來對應[屬性路由](#ar)控制器。
+> * 呼叫 <xref:Microsoft.AspNetCore.Builder.ControllerEndpointRouteBuilderExtensions.MapControllerRoute%2A> 或 <xref:Microsoft.AspNetCore.Builder.ControllerEndpointRouteBuilderExtensions.MapAreaControllerRoute%2A> ，以對應[傳統路由](#cr)控制器和[屬性路由](#ar)控制器。
 
 <a name="routing-conventional-ref-label"></a>
 <a name="crd"></a>
@@ -151,7 +151,7 @@ endpoints.MapControllerRoute("default", "{controller=Home}/{action=Index}/{id?}"
 * 適合作為 UI 型應用程式的起點。
 * 是許多 web UI 應用程式唯一需要的路由範本。 對於較大的 web UI 應用程式，如果經常需要，請使用[區域](#areas)的另一個路由。
 
-<xref:Microsoft.AspNetCore.Builder.ControllerEndpointRouteBuilderExtensions.MapControllerRoute*>和 <xref:Microsoft.AspNetCore.Builder.MvcAreaRouteBuilderExtensions.MapAreaRoute*> ：
+<xref:Microsoft.AspNetCore.Builder.ControllerEndpointRouteBuilderExtensions.MapControllerRoute%2A>和 <xref:Microsoft.AspNetCore.Builder.MvcAreaRouteBuilderExtensions.MapAreaRoute%2A> ：
 
 * 根據叫用的順序，自動指派**訂單**值給其端點。
 
@@ -168,7 +168,7 @@ ASP.NET Core 3.0 和更新版本中的端點路由：
 
 ### <a name="multiple-conventional-routes"></a>多個傳統路由
 
-藉[conventional routes](#cr) `UseEndpoints` 由新增更多對和的呼叫，可以在內加入多個傳統路由 <xref:Microsoft.AspNetCore.Builder.ControllerEndpointRouteBuilderExtensions.MapControllerRoute*> <xref:Microsoft.AspNetCore.Builder.ControllerEndpointRouteBuilderExtensions.MapAreaControllerRoute*> 。 這麼做可讓您定義多個慣例，或新增特定[動作](#action)專用的傳統路由，例如：
+藉[conventional routes](#cr) `UseEndpoints` 由新增更多對和的呼叫，可以在內加入多個傳統路由 <xref:Microsoft.AspNetCore.Builder.ControllerEndpointRouteBuilderExtensions.MapControllerRoute%2A> <xref:Microsoft.AspNetCore.Builder.ControllerEndpointRouteBuilderExtensions.MapAreaControllerRoute%2A> 。 這麼做可讓您定義多個慣例，或新增特定[動作](#action)專用的傳統路由，例如：
 
 [!code-csharp[](routing/samples/3.x/main/Startup.cs?name=snippet_1)]
 
@@ -189,7 +189,7 @@ ASP.NET Core 3.0 和更新版本中的端點路由：
 上述範例：
 
 * `blog`路由的比對優先順序高於 `default` 路由，因為它會先新增。
-* 這是[輔助](https://developer.mozilla.org/docs/Glossary/Slug)專案樣式路由的範例，在此情況下，通常會有發行項名稱做為 URL 的一部分。
+* 這是可在 URL 中使用發行項名稱的[資訊](https://developer.mozilla.org/docs/Glossary/Slug)類型路由範例。
 
 > [!WARNING]
 > 在 ASP.NET Core 3.0 和更新版本中，路由不會：
@@ -203,7 +203,7 @@ ASP.NET Core 3.0 和更新版本中的端點路由：
 ### <a name="conventional-routing-order"></a>傳統路由順序
 
 傳統路由只會符合應用程式所定義的動作和控制器組合。 這是為了簡化傳統路由重迭的情況。
-使用、和新增路由，並根據叫用 <xref:Microsoft.AspNetCore.Builder.ControllerEndpointRouteBuilderExtensions.MapControllerRoute*> <xref:Microsoft.AspNetCore.Builder.ControllerEndpointRouteBuilderExtensions.MapDefaultControllerRoute*> <xref:Microsoft.AspNetCore.Builder.ControllerEndpointRouteBuilderExtensions.MapAreaControllerRoute*> 的順序，自動指派順序值給其端點。 從稍早出現的路由進行比對的優先順序較高。 慣例路由與順序息息相關。 一般而言，具有區域的路由應該放在較早的位置，因為它們比沒有區域的路由更明確。 具有 catch-all 路由參數（例如）的[專用傳統路由](#dcr) `{*article}` 會使路由過於[貪婪](xref:fundamentals/routing#greedy)，這表示它會比對您要與其他路由比對的 url。 將貪婪路由放在路由表中，以避免發生貪婪的相符。
+使用、和新增路由，並根據叫用 <xref:Microsoft.AspNetCore.Builder.ControllerEndpointRouteBuilderExtensions.MapControllerRoute%2A> <xref:Microsoft.AspNetCore.Builder.ControllerEndpointRouteBuilderExtensions.MapDefaultControllerRoute%2A> <xref:Microsoft.AspNetCore.Builder.ControllerEndpointRouteBuilderExtensions.MapAreaControllerRoute%2A> 的順序，自動指派順序值給其端點。 從稍早出現的路由進行比對的優先順序較高。 慣例路由與順序息息相關。 一般而言，具有區域的路由應該放在較早的位置，因為它們比沒有區域的路由更明確。 具有 catch-all 路由參數（例如）的[專用傳統路由](#dcr) `{*article}` 會使路由過於[貪婪](xref:fundamentals/routing#greedy)，這表示它會比對您要與其他路由比對的 url。 將貪婪路由放在路由表中，以避免發生貪婪的相符。
 
 [!INCLUDE[](~/includes/catchall.md)]
 
@@ -272,7 +272,7 @@ REST Api 應使用屬性路由，將應用程式的功能模型建立為一組�
 
 [!code-csharp[](routing/samples/3.x/main/StartupAPI.cs?name=snippet)]
 
-在上述程式碼中， <xref:Microsoft.AspNetCore.Builder.ControllerEndpointRouteBuilderExtensions.MapControllers*> 會在內部呼叫 `UseEndpoints` 來對應屬性路由控制器。
+在上述程式碼中， <xref:Microsoft.AspNetCore.Builder.ControllerEndpointRouteBuilderExtensions.MapControllers%2A> 會在內部呼叫 `UseEndpoints` 來對應屬性路由控制器。
 
 在下例中︰
 
@@ -758,7 +758,7 @@ Url 的數個多載[。動作](xref:Microsoft.AspNetCore.Mvc.IUrlHelper.Action*)
 
 <a name="routing-gen-urls-html-ref-label"></a>
 
-### <a name="generate-urls-in-html-and-razor"></a>以 HTML 和產生 UrlRazor
+### <a name="generate-urls-in-html-and-no-locrazor"></a>以 HTML 和產生 UrlRazor
 
 <xref:Microsoft.AspNetCore.Mvc.Rendering.IHtmlHelper>提供 <xref:Microsoft.AspNetCore.Mvc.ViewFeatures.HtmlHelper> [Html.beginform](xref:Microsoft.AspNetCore.Mvc.Rendering.IHtmlHelper.BeginForm*)和[.html](xref:Microsoft.AspNetCore.Mvc.Rendering.IHtmlHelper.ActionLink*)方法， `<form>` 分別產生和 `<a>` 元素。 這些方法會使用[url. Action](xref:Microsoft.AspNetCore.Mvc.IUrlHelper.Action*)方法來產生 url，並接受類似的引數。 `HtmlHelper` 的成對 `Url.RouteUrl` 為 `Html.BeginRouteForm` 和 `Html.RouteLink`，這兩者的功能很類似。
 
@@ -776,7 +776,7 @@ TagHelper 透過 `form` TagHelper 和 `<a>` TagHelper 產生 URL。 這兩者使
 
 [!code-csharp[](routing/samples/3.x/main/Controllers/CustomerController.cs?name=snippet)]
 
-動作結果處理站方法（例如 <xref:Microsoft.AspNetCore.Mvc.ControllerBase.RedirectToAction*> 和） <xref:Microsoft.AspNetCore.Mvc.ControllerBase.CreatedAtAction*> 遵循類似于中方法的模式 `IUrlHelper` 。
+動作結果處理站方法（例如 <xref:Microsoft.AspNetCore.Mvc.ControllerBase.RedirectToAction%2A> 和） <xref:Microsoft.AspNetCore.Mvc.ControllerBase.CreatedAtAction%2A> 遵循類似于中方法的模式 `IUrlHelper` 。
 
 <a name="routing-dedicated-ref-label"></a>
 
@@ -805,7 +805,7 @@ TagHelper 透過 `form` TagHelper 和 `<a>` TagHelper 產生 URL。 這兩者使
 
 [!code-csharp[](routing/samples/3.x/AreasRouting/Startup.cs?name=snippet1)]
 
-在上述程式碼中， <xref:Microsoft.AspNetCore.Builder.ControllerEndpointRouteBuilderExtensions.MapAreaControllerRoute*> 會呼叫來建立 `"blog_route"` 。 第二個參數 `"Blog"` 是區功能變數名稱稱。
+在上述程式碼中， <xref:Microsoft.AspNetCore.Builder.ControllerEndpointRouteBuilderExtensions.MapAreaControllerRoute%2A> 會呼叫來建立 `"blog_route"` 。 第二個參數 `"Blog"` 是區功能變數名稱稱。
 
 當符合之類的 URL 路徑時 `/Manage/Users/AddUser` ， `"blog_route"` 路由會產生路由值 `{ area = Blog, controller = Users, action = AddUser }` 。 `area`路由值是由的預設值所產生 `area` 。 所建立的路由 `MapAreaControllerRoute` 相當於下列內容：
 

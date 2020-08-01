@@ -5,7 +5,7 @@ description: 瞭解如何 Blazor 使用 ASP.NET Core、內容傳遞網路（CDN�
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 07/09/2020
+ms.date: 07/27/2020
 no-loc:
 - Blazor
 - Blazor Server
@@ -15,14 +15,14 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/host-and-deploy/webassembly
-ms.openlocfilehash: 2a2b0dabc26c14624144ce7eceb5861fe56f1054
-ms.sourcegitcommit: 384833762c614851db653b841cc09fbc944da463
+ms.openlocfilehash: 15c5f02043a83e499eb5ec36fda52171124fe202
+ms.sourcegitcommit: ca6a1f100c1a3f59999189aa962523442dd4ead1
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 07/17/2020
-ms.locfileid: "86445134"
+ms.lasthandoff: 07/30/2020
+ms.locfileid: "87443985"
 ---
-# <a name="host-and-deploy-aspnet-core-blazor-webassembly"></a>裝載和部署 ASP.NET CoreBlazor WebAssembly
+# <a name="host-and-deploy-aspnet-core-no-locblazor-webassembly"></a>裝載和部署 ASP.NET CoreBlazor WebAssembly
 
 By [Luke Latham](https://github.com/guardrex)、 [Rainer Stropek](https://www.timecockpit.com)、 [Daniel Roth](https://github.com/danroth27)、 [Ben Adams](https://twitter.com/ben_a_adams)和[Safia Abdalla](https://safia.rocks)
 
@@ -48,32 +48,32 @@ Blazor依賴主機來提供適當的壓縮檔案。 當使用 ASP.NET Core 裝�
 * 如需 IIS `web.config` 壓縮設定，請參閱[Iis： Brotli 和 Gzip 壓縮](#brotli-and-gzip-compression)一節。 
 * 在不支援靜態壓縮檔案內容協商（例如 GitHub 頁面）的靜態裝載解決方案上裝載時，請考慮將應用程式設定為提取和解碼 Brotli 壓縮檔案：
 
-  * 從應用程式中的[google/Brotli GitHub 存放庫](https://github.com/google/brotli/)參考 Brotli 解碼器。
+  * 從[google/Brotli GitHub 存放庫](https://github.com/google/brotli)取得 JavaScript Brotli 解碼器。 從2020年7月起，會將此解碼器檔案命名為 `decode.min.js` ，並在存放庫的[ `js` 資料夾](https://github.com/google/brotli/tree/master/js)中找到。
   * 更新應用程式以使用此解碼器。 將中結束記號內的標記變更 `<body>` `wwwroot/index.html` 為下列內容：
   
     ```html
-    <script src="brotli.decode.min.js"></script>
+    <script src="decode.min.js"></script>
     <script src="_framework/blazor.webassembly.js" autostart="false"></script>
     <script>
-    Blazor.start({
-      loadBootResource: function (type, name, defaultUri, integrity) {
-        if (type !== 'dotnetjs' && location.hostname !== 'localhost') {
-          return (async function () {
-            const response = await fetch(defaultUri + '.br', { cache: 'no-cache' });
-            if (!response.ok) {
-              throw new Error(response.statusText);
-            }
-            const originalResponseBuffer = await response.arrayBuffer();
-            const originalResponseArray = new Int8Array(originalResponseBuffer);
-            const decompressedResponseArray = BrotliDecode(originalResponseArray);
-            const contentType = type === 
-              'dotnetwasm' ? 'application/wasm' : 'application/octet-stream';
-            return new Response(decompressedResponseArray, 
-              { headers: { 'content-type': contentType } });
-          })();
+      Blazor.start({
+        loadBootResource: function (type, name, defaultUri, integrity) {
+          if (type !== 'dotnetjs' && location.hostname !== 'localhost') {
+            return (async function () {
+              const response = await fetch(defaultUri + '.br', { cache: 'no-cache' });
+              if (!response.ok) {
+                throw new Error(response.statusText);
+              }
+              const originalResponseBuffer = await response.arrayBuffer();
+              const originalResponseArray = new Int8Array(originalResponseBuffer);
+              const decompressedResponseArray = BrotliDecode(originalResponseArray);
+              const contentType = type === 
+                'dotnetwasm' ? 'application/wasm' : 'application/octet-stream';
+              return new Response(decompressedResponseArray, 
+                { headers: { 'content-type': contentType } });
+            })();
+          }
         }
-      }
-    });
+      });
     </script>
     ```
  
@@ -412,7 +412,7 @@ COPY nginx.conf /etc/nginx/nginx.conf
 
 ## <a name="configure-the-linker"></a>設定連結器
 
-Blazor在每個發行組建上執行中繼語言（IL）連結，以從輸出元件移除不必要的 IL。 如需詳細資訊，請參閱 <xref:blazor/host-and-deploy/configure-linker> 。
+Blazor在每個發行組建上執行中繼語言（IL）連結，以從輸出元件移除不必要的 IL。 如需詳細資訊，請參閱 <xref:blazor/host-and-deploy/configure-linker>。
 
 ## <a name="custom-boot-resource-loading"></a>自訂開機資源載入
 
@@ -424,7 +424,7 @@ Blazor WebAssembly應用程式可以使用函式進行初始化 `loadBootResourc
 
 `loadBootResource`參數會出現在下表中。
 
-| 參數    | 描述 |
+| 參數    | 說明 |
 | ------------ | ----------- |
 | `type`       | 資源類型。 運算子類型： `assembly` 、 `pdb` 、 `dotnetjs` 、 `dotnetwasm` 、`timezonedata` |
 | `name`       | 資源名稱。 |

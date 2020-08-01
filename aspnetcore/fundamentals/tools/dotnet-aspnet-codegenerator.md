@@ -14,12 +14,12 @@ no-loc:
 - Razor
 - SignalR
 uid: fundamentals/tools/dotnet-aspnet-codegenerator
-ms.openlocfilehash: a106654c8a37e84e9186a2f06d90605df753e8a7
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: af151b65d3fefb5863529de1cd97c6315f11ca82
+ms.sourcegitcommit: ca6a1f100c1a3f59999189aa962523442dd4ead1
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85405597"
+ms.lasthandoff: 07/30/2020
+ms.locfileid: "87444129"
 ---
 # <a name="dotnet-aspnet-codegenerator"></a>dotnet aspnet-codegenerator
 
@@ -60,15 +60,15 @@ dotnet aspnet-codegenerator [-h|--help]
 
 要執行的程式碼產生器。 可用產生器如下︰
 
-| 產生器 | 作業 |
-| ----------------- | ------------ | 
-| 區域      | [架起區域](/aspnet/core/mvc/controllers/areas) |
-  controller| [架起控制器](/aspnet/core/tutorials/first-mvc-app/adding-model) |
-  身分識別  | [ScaffoldIdentity](/aspnet/core/security/authentication/scaffold-identity) |
-  razorpage | [Scaffold Razor 頁面](/aspnet/core/tutorials/razor-pages/model) |
-  檢視      | [架起檢視](/aspnet/core/mvc/views/overview) |
+| 產生器  | 作業                                                            |
+| ---------- | -------------------------------------------------------------------- |
+| 區域       | [架起區域](xref:mvc/controllers/areas)                      |
+| controller | [架起控制器](xref:tutorials/first-mvc-app/adding-model)  |
+| 身分識別   | [ScaffoldIdentity](xref:security/authentication/scaffold-identity) |
+| razorpage  | [Scaffold Razor 頁面](xref:tutorials/razor-pages/model)            |
+| 檢視       | [架起檢視](xref:mvc/views/overview)                          |
 
-## <a name="options"></a>選項
+## <a name="options"></a>選項。
 
 `-n|--nuget-package-dir`
 
@@ -135,13 +135,13 @@ dotnet aspnet-codegenerator [-h|--help]
 
 下表列出 `aspnet-codegenerator controller` 的專用選項：
 
-| 選項               | 說明|
-| ----------------- | ------------ |
-| --controllerName 或 -name | 控制器的名稱。 |
-| --useAsyncActions 或 -async | 產生非同步控制器動作。 |
-| --noViews 或 -nv | **不**產生任何檢視。 |
-| --restWithNoViews 或 -api  | 使用 REST 樣式 API 產生控制器。 假設使用 `noViews` 且會忽略所有檢視相關選項。 |
-| --readWriteActions 或 -actions | 在不使用模型的情況下使用讀取/寫入動作產生控制器。 |
+| 選項                         | 說明                                                                                               |
+| ------------------------------ | --------------------------------------------------------------------------------------------------------- |
+| --controllerName 或 -name      | 控制器的名稱。                                                                                   |
+| --useAsyncActions 或 -async    | 產生非同步控制器動作。                                                                        |
+| --noViews 或 -nv               | **不**產生任何檢視。                                                                                    |
+| --restWithNoViews 或 -api      | 使用 REST 樣式 API 產生控制器。 假設使用 `noViews` 且會忽略所有檢視相關選項。 |
+| --readWriteActions 或 -actions | 在不使用模型的情況下使用讀取/寫入動作產生控制器。                                              |
 
 使用 `-h` 參數取得 `aspnet-codegenerator controller` 命令的說明：
 
@@ -149,9 +149,9 @@ dotnet aspnet-codegenerator [-h|--help]
 dotnet aspnet-codegenerator controller -h
 ```
 
-請參閱[架起電影模型](/aspnet/core/tutorials/razor-pages/model)以取得 `dotnet aspnet-codegenerator controller` 的範例。
+請參閱[架起電影模型](xref:tutorials/first-mvc-app/adding-model)以取得 `dotnet aspnet-codegenerator controller` 的範例。
 
-### <a name="razorpage"></a>Razorpage
+### <a name="no-locrazorpage"></a>Razorpage
 
 <a name="rp"></a>
 
@@ -184,11 +184,11 @@ dotnet aspnet-codegenerator razorpage MyEdit Edit -m Movie -dc RazorPagesMovieCo
 
 下表列出 `aspnet-codegenerator razorpage` 的專用選項：
 
-| 選項               | 說明|
-| ----------------- | ------------ |
-|   --namespaceName 或 -namespace | 要用於產生之 PageModel 的命名空間名稱 |
-| --partialView 或 -partial | 產生部分檢視。 若指定此選項，會忽略版面配置選項 -l 與 -udl。 |
-| --noPageModel 或 -npm | 切換為不產生空白範本的 PageModel 類別 |
+| 選項                        | 說明                                                                           |
+| ----------------------------- | ------------------------------------------------------------------------------------- |
+| --namespaceName 或 -namespace | 要用於產生之 PageModel 的命名空間名稱                          |
+| --partialView 或 -partial     | 產生部分檢視。 若指定此選項，會忽略版面配置選項 -l 與 -udl。 |
+| --noPageModel 或 -npm         | 切換為不產生空白範本的 PageModel 類別                           |
 
 使用 `-h` 參數取得 `aspnet-codegenerator razorpage` 命令的說明：
 
@@ -196,8 +196,8 @@ dotnet aspnet-codegenerator razorpage MyEdit Edit -m Movie -dc RazorPagesMovieCo
 dotnet aspnet-codegenerator razorpage -h
 ```
 
-請參閱[架起電影模型](/aspnet/core/tutorials/razor-pages/model)以取得 `dotnet aspnet-codegenerator razorpage` 的範例。
+請參閱[架起電影模型](xref:tutorials/razor-pages/model)以取得 `dotnet aspnet-codegenerator razorpage` 的範例。
 
 ### Identity
 
-請[參閱 Identity Scaffold](/aspnet/core/security/authentication/scaffold-identity)
+請[參閱 Identity Scaffold](xref:security/authentication/scaffold-identity)

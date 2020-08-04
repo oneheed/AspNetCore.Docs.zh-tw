@@ -5,7 +5,7 @@ description: 瞭解如何調試 Blazor 程式。
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 07/27/2020
+ms.date: 07/30/2020
 no-loc:
 - Blazor
 - Blazor Server
@@ -15,12 +15,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/debug
-ms.openlocfilehash: b4199c3a99af5875c5d9a87f29f7c7e2758ffd71
-ms.sourcegitcommit: 5a36758cca2861aeb10840093e46d273a6e6e91d
+ms.openlocfilehash: cb0a8737fb975db285986d18b995e488f09580e8
+ms.sourcegitcommit: 37f6f2e13ceb4eae268d20973d76e4b83acf6a24
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 07/28/2020
-ms.locfileid: "87303556"
+ms.lasthandoff: 08/03/2020
+ms.locfileid: "87526286"
 ---
 # <a name="debug-aspnet-core-no-locblazor-webassembly"></a>Debug ASP.NET CoreBlazor WebAssembly
 
@@ -44,7 +44,7 @@ Blazor WebAssembly應用程式可以使用瀏覽器開發工具，以 Chromium �
 
 我們將繼續改善即將發行的版本中的調試過程。
 
-## <a name="prerequisites"></a>Prerequisites
+## <a name="prerequisites"></a>先決條件
 
 調試需要下列其中一個瀏覽器：
 
@@ -162,7 +162,7 @@ Blazor WebAssembly應用程式可以使用瀏覽器開發工具，以 Chromium �
 
 以下是針對 `blazorwasm` debug 類型（）支援的啟動設定選項 `.vscode/launch.json` 。
 
-| 選項    | 描述 |
+| 選項    | 說明 |
 | --------- | ----------- |
 | `request` | 使用 `launch` 來啟動並將偵錯工具連結至 Blazor WebAssembly 應用程式，或將 `attach` 偵錯工具附加至已在執行中的應用程式。 |
 | `url`     | 要在瀏覽器中開啟的 URL。 預設為 `https://localhost:5001`。 |
@@ -243,5 +243,35 @@ Blazor提供的偵錯工具 proxy 會執行[Chrome DevTools 通訊協定](https:
 如果您遇到錯誤，下列秘訣可能會有説明：
 
 * 在 [**偵錯工具**] 索引標籤中，開啟瀏覽器中的開發人員工具。 在主控台中，執行 `localStorage.clear()` 以移除任何中斷點。
-* 確認您已安裝並信任 ASP.NET Core 的 HTTPS 開發憑證。 如需詳細資訊，請參閱 <xref:security/enforcing-ssl#troubleshoot-certificate-problems>。
+* 確認您已安裝並信任 ASP.NET Core 的 HTTPS 開發憑證。 如需詳細資訊，請參閱 <xref:security/enforcing-ssl#troubleshoot-certificate-problems> 。
 * Visual Studio 需要 [**工具**] [選項] [一般] 中的 [**啟用 ASP.NET （Chrome、Edge 和 IE）的 JavaScript 偵錯工具**] 選項  >  **Options**  >  **Debugging**  >  ** **。 這是 Visual Studio 的預設設定。 如果偵錯工具無法運作，請確認已選取此選項。
+
+### <a name="breakpoints-in-oninitializedasync-not-hit"></a>`OnInitialized{Async}`未命中中斷點
+
+Blazor架構的偵錯工具 proxy 需要短暫的時間來啟動，所以可能不會叫用[ `OnInitialized{Async}` 生命週期方法](xref:blazor/components/lifecycle#component-initialization-methods)中的中斷點。 建議您在方法主體的開頭新增延遲，以便在叫用中斷點之前，讓 debug proxy 有一些時間啟動。 您可以根據[ `if` 編譯器](/dotnet/csharp/language-reference/preprocessor-directives/preprocessor-if)指示詞來包含延遲，以確保應用程式的發行組建不會有延遲。
+
+<xref:Microsoft.AspNetCore.Components.ComponentBase.OnInitialized%2A>:
+
+```csharp
+protected override void OnInitialized()
+{
+#if DEBUG
+    Thread.Sleep(10000)
+#endif
+
+    ...
+}
+```
+
+<xref:Microsoft.AspNetCore.Components.ComponentBase.OnInitializedAsync%2A>:
+
+```csharp
+protected override async Task OnInitializedAsync()
+{
+#if DEBUG
+    await Task.Delay(10000)
+#endif
+
+    ...
+}
+```

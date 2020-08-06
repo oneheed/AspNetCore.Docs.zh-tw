@@ -15,12 +15,12 @@ no-loc:
 - Razor
 - SignalR
 uid: signalr/hubcontext
-ms.openlocfilehash: 85f0f48dd6586b40b8db21eb4b59793069afe2c5
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: d38cb5b3e818879d3ec40a927acfdd69dc85377a
+ms.sourcegitcommit: 84150702757cf7a7b839485382420e8db8e92b9c
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85405805"
+ms.lasthandoff: 08/05/2020
+ms.locfileid: "87819246"
 ---
 # <a name="send-messages-from-outside-a-hub"></a>從中樞外部傳送訊息
 
@@ -28,7 +28,7 @@ ms.locfileid: "85405805"
 
 SignalR中樞是核心的抽象概念，可將訊息傳送給連接到伺服器的用戶端 SignalR 。 也可以使用服務，從應用程式中的其他位置傳送訊息 `IHubContext` 。 本文說明如何存取 SignalR `IHubContext` ，以從中樞外部傳送通知給用戶端。
 
-[查看或下載範例程式碼](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/signalr/hubcontext/sample/) [（如何下載）](xref:index#how-to-download-a-sample)
+[查看或下載範例程式碼](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/signalr/hubcontext/sample/) [ (如何下載) ](xref:index#how-to-download-a-sample)
 
 ## <a name="get-an-instance-of-ihubcontext"></a>取得 IHubCoNtext 的實例
 
@@ -114,5 +114,5 @@ public class ChatController : Controller
 ## <a name="related-resources"></a>相關資源
 
 * [開始使用](xref:tutorials/signalr)
-* [中樞](xref:signalr/hubs)
+* [集線器](xref:signalr/hubs)
 * [發佈至 Azure](xref:signalr/publish-to-azure-web-app)

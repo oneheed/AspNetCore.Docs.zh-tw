@@ -15,12 +15,12 @@ no-loc:
 - Razor
 - SignalR
 uid: fundamentals/configuration/index
-ms.openlocfilehash: a08993a7909d67be34446815b10d32089d9e0629
-ms.sourcegitcommit: ca6a1f100c1a3f59999189aa962523442dd4ead1
+ms.openlocfilehash: 9f143523a6d02ac018ad2a869cc9d768ee25681f
+ms.sourcegitcommit: 84150702757cf7a7b839485382420e8db8e92b9c
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 07/30/2020
-ms.locfileid: "87444146"
+ms.lasthandoff: 08/05/2020
+ms.locfileid: "87819259"
 ---
 # <a name="configuration-in-aspnet-core"></a>ASP.NET Core 的設定
 
@@ -39,7 +39,7 @@ ASP.NET Core 中的設定是使用一或多個設定[提供者](#cp)來執行。
 * 目錄檔案
 * 記憶體內部 .NET 物件
 
-[查看或下載範例程式碼](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/configuration/index/samples)（[如何下載](xref:index#how-to-download-a-sample)）
+[查看或下載範例程式碼](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/configuration/index/samples) ([如何下載](xref:index#how-to-download-a-sample)) 
 
 <a name="default"></a>
 
@@ -79,7 +79,7 @@ ASP.NET Core 以[dotnet new](/dotnet/core/tools/dotnet-new)或 Visual Studio 建
 預設會 <xref:Microsoft.Extensions.Configuration.Json.JsonConfigurationProvider> 以下列順序載入設定：
 
 1. *appsettings.json*
-1. *appsettings。* `Environment`*. json* ：例如， *appsettings*。***生產***。*json*和*appsettings*。***開發***。*json*檔案。 檔案的環境版本是根據[IHostingEnvironment. EnvironmentName](xref:Microsoft.Extensions.Hosting.IHostingEnvironment.EnvironmentName*)載入。 如需詳細資訊，請參閱 <xref:fundamentals/environments>。
+1. *appsettings。* `Environment`*. json* ：例如， *appsettings*。***生產***。*json*和*appsettings*。***開發***。*json*檔案。 檔案的環境版本是根據[IHostingEnvironment. EnvironmentName](xref:Microsoft.Extensions.Hosting.IHostingEnvironment.EnvironmentName*)載入。 如需詳細資訊，請參閱<xref:fundamentals/environments>。
 
 *appsettings*。 `Environment`*json*值會覆寫中*appsettings.js的*索引鍵。 例如，根據預設：
 
@@ -113,7 +113,7 @@ ASP.NET Core 以[dotnet new](/dotnet/core/tools/dotnet-new)或 Visual Studio 建
 * <xref:fundamentals/environments>
 * <xref:security/app-secrets>：包含有關使用環境變數來儲存敏感性資料的建議。 秘密管理員會使用檔案設定[提供者](#fcp)，將使用者秘密儲存在本機系統上的 JSON 檔案中。
 
-[Azure Key Vault](https://azure.microsoft.com/services/key-vault/) 可安全地儲存 ASP.NET Core 應用程式的應用程式祕密。 如需詳細資訊，請參閱 <xref:security/key-vault-configuration>。
+[Azure Key Vault](https://azure.microsoft.com/services/key-vault/) 可安全地儲存 ASP.NET Core 應用程式的應用程式祕密。 如需詳細資訊，請參閱<xref:security/key-vault-configuration>。
 
 <a name="evcp"></a>
 
@@ -195,7 +195,7 @@ dotnet run
 使用[預設](#default)設定時，會在 <xref:Microsoft.Extensions.Configuration.CommandLine.CommandLineConfigurationProvider> 下列設定來源之後，從命令列引數的機碼值組載入設定：
 
 * *appsettings.json*和*appsettings*. `Environment` 。*json*檔案。
-* 開發環境中的[應用程式秘密（秘密管理員）](xref:security/app-secrets) 。
+* [應用程式秘密 (](xref:security/app-secrets)在開發環境中的秘密管理員) 。
 * 環境變數。
 
 根據[預設](#default)，在命令列上設定的設定值會覆寫所有其他設定提供者所設定的設定值。
@@ -356,6 +356,35 @@ dotnet run -k1=value1 -k2 value2 --alt3=value2 /alt4=value3 --alt5 value5 /alt6 
 | `SQLAZURECONNSTR_{KEY}`  | `ConnectionStrings:{KEY}`   | 機碼：`ConnectionStrings:{KEY}_ProviderName`：<br>值：`System.Data.SqlClient`  |
 | `SQLCONNSTR_{KEY}`       | `ConnectionStrings:{KEY}`   | 機碼：`ConnectionStrings:{KEY}_ProviderName`：<br>值：`System.Data.SqlClient`  |
 
+## <a name="file-configuration-provider"></a>檔案設定提供者
+
+<xref:Microsoft.Extensions.Configuration.FileConfigurationProvider> 是用於從檔案系統載入設定的基底類別。 下列是衍生自的設定提供者 `FileConfigurationProvider` ：
+
+* [INI 設定提供者](#ini-configuration-provider)
+* [JSON 設定提供者](#jcp)
+* [XML 設定提供者](#xml-configuration-provider)
+
+### <a name="ini-configuration-provider"></a>INI 設定提供者
+
+<xref:Microsoft.Extensions.Configuration.Ini.IniConfigurationProvider> 會在執行階段從 INI 檔案機碼值組載入設定。
+
+下列程式碼會清除所有設定提供者，並新增數個設定提供者：
+
+[!code-csharp[](index/samples/3.x/ConfigSample/ProgramINI.cs?name=snippet&highlight=10-30)]
+
+在上述程式碼中， *MyIniConfig.ini*和*MyIniConfig*中的設定 `Environment` 。*ini*檔案會由中的設定覆寫：
+
+* [環境變數設定提供者](#evcp)
+* [命令列設定提供者](#clcp)。
+
+[範例下載](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/configuration/index/samples/3.x/ConfigSample)包含下列*MyIniConfig.ini*檔案：
+
+[!code-ini[](index/samples/3.x/ConfigSample/MyIniConfig.ini)]
+
+[範例下載](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/configuration/index/samples/3.x/ConfigSample)中的下列程式碼會顯示上述幾個設定值：
+
+[!code-csharp[](index/samples/3.x/ConfigSample/Pages/Test.cshtml.cs?name=snippet)]
+
 <a name="jcp"></a>
 
 ### <a name="json-configuration-provider"></a>JSON 設定提供者
@@ -398,35 +427,6 @@ dotnet run -k1=value1 -k2 value2 --alt3=value2 /alt4=value3 --alt5 value5 /alt6 
 [!code-csharp[](index/samples/3.x/ConfigSample/Pages/Test.cshtml.cs?name=snippet)]
 
 <a name="fcp"></a>
-
-## <a name="file-configuration-provider"></a>檔案設定提供者
-
-<xref:Microsoft.Extensions.Configuration.FileConfigurationProvider> 是用於從檔案系統載入設定的基底類別。 下列是衍生自的設定提供者 `FileConfigurationProvider` ：
-
-* [INI 設定提供者](#ini-configuration-provider)
-* [JSON 設定提供者](#jcp)
-* [XML 設定提供者](#xml-configuration-provider)
-
-### <a name="ini-configuration-provider"></a>INI 設定提供者
-
-<xref:Microsoft.Extensions.Configuration.Ini.IniConfigurationProvider> 會在執行階段從 INI 檔案機碼值組載入設定。
-
-下列程式碼會清除所有設定提供者，並新增數個設定提供者：
-
-[!code-csharp[](index/samples/3.x/ConfigSample/ProgramINI.cs?name=snippet&highlight=10-30)]
-
-在上述程式碼中， *MyIniConfig.ini*和*MyIniConfig*中的設定 `Environment` 。*ini*檔案會由中的設定覆寫：
-
-* [環境變數設定提供者](#evcp)
-* [命令列設定提供者](#clcp)。
-
-[範例下載](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/configuration/index/samples/3.x/ConfigSample)包含下列*MyIniConfig.ini*檔案：
-
-[!code-ini[](index/samples/3.x/ConfigSample/MyIniConfig.ini)]
-
-[範例下載](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/configuration/index/samples/3.x/ConfigSample)中的下列程式碼會顯示上述幾個設定值：
-
-[!code-csharp[](index/samples/3.x/ConfigSample/Pages/Test.cshtml.cs?name=snippet)]
 
 ### <a name="xml-configuration-provider"></a>XML 設定提供者
 
@@ -661,7 +661,7 @@ Index: 5  Value: value5
 
 [!code-csharp[](index/samples/3.x/ConfigurationSample/EFConfigurationProvider/EFConfigurationSource.cs?name=snippet1)]
 
-透過繼承自 <xref:Microsoft.Extensions.Configuration.ConfigurationProvider> 來建立自訂設定提供者。 若資料庫是空的，設定提供者會初始化資料庫。 由於設定索引[鍵不區分大小寫](#keys)，用來初始化資料庫的字典會以不區分大小寫的比較子（[StringComparer. OrdinalIgnoreCase](xref:System.StringComparer.OrdinalIgnoreCase)）來建立。
+透過繼承自 <xref:Microsoft.Extensions.Configuration.ConfigurationProvider> 來建立自訂設定提供者。 若資料庫是空的，設定提供者會初始化資料庫。 由於設定索引[鍵不區分大小寫](#keys)，用來初始化資料庫的字典會使用不區分大小寫的比較子來建立 ([StringComparer. OrdinalIgnoreCase](xref:System.StringComparer.OrdinalIgnoreCase)) 。
 
 *EFConfigurationProvider/EFConfigurationProvider.cs*：
 
@@ -736,7 +736,7 @@ Index: 5  Value: value5
 如需使用 [Web 主機](xref:fundamentals/host/web-host)時預設組態的詳細資料，請參閱[本主題的 ASP.NET Core 2.2 版本](/aspnet/core/fundamentals/configuration/?view=aspnetcore-2.2)。
 
 * 主機組態的提供來源：
-  * 前面加上的環境變數 `DOTNET_` （例如 `DOTNET_ENVIRONMENT` ），並使用[環境變數設定提供者](#environment-variables)。 載入設定機碼值組時，會移除前置詞 (`DOTNET_`)。
+  * 前面加 `DOTNET_` 上 (的環境變數，例如， `DOTNET_ENVIRONMENT` 使用[環境變數設定提供者](#environment-variables)) 。 載入設定機碼值組時，會移除前置詞 (`DOTNET_`)。
   * 使用[命令列設定提供者](#command-line-configuration-provider)的命令列引數。
 * 已建立 Web 主機預設組態 (`ConfigureWebHostDefaults`)：
   * Kestrel 會用作為網頁伺服器，並使用應用程式的組態提供者來設定。
@@ -761,7 +761,7 @@ Index: 5  Value: value5
 
 ## <a name="add-configuration-from-an-external-assembly"></a>從外部組件新增設定
 
-<xref:Microsoft.AspNetCore.Hosting.IHostingStartup> 實作允許在啟動時從應用程式 `Startup` 類別外部的外部組件，針對應用程式新增增強功能。 如需詳細資訊，請參閱 <xref:fundamentals/configuration/platform-specific-configuration>。
+<xref:Microsoft.AspNetCore.Hosting.IHostingStartup> 實作允許在啟動時從應用程式 `Startup` 類別外部的外部組件，針對應用程式新增增強功能。 如需詳細資訊，請參閱<xref:fundamentals/configuration/platform-specific-configuration>。
 
 ## <a name="additional-resources"></a>其他資源
 
@@ -792,9 +792,9 @@ ASP.NET Core 中的應用程式設定是以由*設定提供者*所建立的機�
 using Microsoft.Extensions.Configuration;
 ```
 
-*選項模式*是此主題中所述之設定概念的延伸。 選項使用類別來代表一組相關的設定。 如需詳細資訊，請參閱 <xref:fundamentals/configuration/options>。
+*選項模式*是此主題中所述之設定概念的延伸。 選項使用類別來代表一組相關的設定。 如需詳細資訊，請參閱<xref:fundamentals/configuration/options>。
 
-[查看或下載範例程式碼](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/configuration/index/samples)（[如何下載](xref:index#how-to-download-a-sample)）
+[查看或下載範例程式碼](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/configuration/index/samples) ([如何下載](xref:index#how-to-download-a-sample)) 
 
 ## <a name="host-versus-app-configuration"></a>主機與應用程式組態的比較
 
@@ -842,7 +842,7 @@ using Microsoft.Extensions.Configuration;
 * <xref:fundamentals/environments>
 * <xref:security/app-secrets>：包含有關使用環境變數來儲存敏感性資料的建議。 「祕密管理員」使用「檔案設定提供者」以 JSON 檔案在本機系統上存放使用者祕密。 此主題稍後將說明「檔案設定提供者」。
 
-[Azure Key Vault](https://azure.microsoft.com/services/key-vault/) 可安全地儲存 ASP.NET Core 應用程式的應用程式祕密。 如需詳細資訊，請參閱 <xref:security/key-vault-configuration>。
+[Azure Key Vault](https://azure.microsoft.com/services/key-vault/) 可安全地儲存 ASP.NET Core 應用程式的應用程式祕密。 如需詳細資訊，請參閱<xref:security/key-vault-configuration>。
 
 ## <a name="hierarchical-configuration-data"></a>階層式設定資料
 
@@ -949,7 +949,7 @@ public class HomeController : Controller
 
 典型的設定提供者順序是：
 
-1. Files （*appsettings.json*、 *appsettings. {環境}. json*，其中 `{Environment}` 是應用程式的目前裝載環境）
+1. 檔案 (*appsettings.js*， *appsettings。 {環境}. json*，其中 `{Environment}` 是應用程式的目前裝載環境) 
 1. [Azure Key Vault](xref:security/key-vault-configuration)
 1. [使用者祕密 (祕密管理員)](xref:security/app-secrets) (僅限開發環境)
 1. 環境變數
@@ -1108,7 +1108,7 @@ public static readonly Dictionary<string, string> _switchMappings =
 
 建立切換對應字典之後，它會包含下表中所示的資料。
 
-| 機碼       | 值             |
+| Key       | 值             |
 | --------- | ----------------- |
 | `-CLKey1` | `CommandLineKey1` |
 | `-CLKey2` | `CommandLineKey2` |
@@ -1121,7 +1121,7 @@ dotnet run -CLKey1=value1 -CLKey2=value2
 
 執行上述命令之後，設定包含下表中顯示的值。
 
-| 機碼               | 值    |
+| Key               | 值    |
 | ----------------- | -------- |
 | `CommandLineKey1` | `value1` |
 | `CommandLineKey2` | `value2` |
@@ -1616,7 +1616,7 @@ TvShow = tvShow;
 
 範例應用程式示範此節中解釋的概念。**
 
-<xref:Microsoft.Extensions.Configuration.ConfigurationBinder.Bind*> 支援在設定機碼中使用陣列索引將陣列繫結到物件。 公開數值索引鍵區段（、、）的任何陣列格式， `:0:` `:1:` 都能夠系結 &hellip; `:{n}:` 至 POCO 類別陣列的陣列。
+<xref:Microsoft.Extensions.Configuration.ConfigurationBinder.Bind*> 支援在設定機碼中使用陣列索引將陣列繫結到物件。 公開數位索引鍵區段 (、、) 的任何陣列格式， `:0:` `:1:` 都能夠系結 &hellip; `:{n}:` 至 POCO 類別陣列。
 
 > [!NOTE]
 > 繫結是由慣例提供。 自訂設定提供者不需要實作陣列繫結。
@@ -1625,7 +1625,7 @@ TvShow = tvShow;
 
 考慮下表中顯示的設定機碼與值。
 
-| 機碼             | 值  |
+| Key             | 值  |
 | :-------------: | :----: |
 | array:entries:0 | value0 |
 | array:entries:1 | value1 |
@@ -1685,7 +1685,7 @@ config.AddJsonFile(
 
 表格中顯示的機碼值組會載入到設定中。
 
-| 機碼             | 值  |
+| Key             | 值  |
 | :-------------: | :----: |
 | array:entries:3 | value3 |
 
@@ -1708,7 +1708,7 @@ config.AddJsonFile(
 
 「JSON 設定提供者」會將設定資料讀入到下列機碼值組：
 
-| 機碼                     | 值  |
+| Key                     | 值  |
 | ----------------------- | :----: |
 | json_array:key          | valueA |
 | json_array:subsection:0 | valueB |
@@ -1801,7 +1801,7 @@ public class Startup
 
 ## <a name="access-configuration-in-a-no-locrazor-pages-page-or-mvc-view"></a>Razor頁面頁面或 MVC 視圖中的存取設定
 
-若要存取 Razor [頁面] 頁面或 MVC 視圖中的設定，請為[Microsoft.Extensions.Configuration 命名空間](xref:Microsoft.Extensions.Configuration)新增[using](xref:mvc/views/razor#using)指示詞（[c # 參考： using](/dotnet/csharp/language-reference/keywords/using-directive)指示詞），並將其插入 <xref:Microsoft.Extensions.Configuration.IConfiguration> 頁面或視圖中。
+若要存取 [頁面] Razor 頁面或 MVC 視圖中的設定，請將[using](xref:mvc/views/razor#using)指示詞新增 ([c # 參考：使用](/dotnet/csharp/language-reference/keywords/using-directive) [Microsoft.Extensions.Configuration 命名空間](xref:Microsoft.Extensions.Configuration)的指示詞) ，並將其插入 <xref:Microsoft.Extensions.Configuration.IConfiguration> 頁面或視圖中。
 
 在 [ Razor 頁面] 頁面中：
 
@@ -1843,7 +1843,7 @@ public class Startup
 
 ## <a name="add-configuration-from-an-external-assembly"></a>從外部組件新增設定
 
-<xref:Microsoft.AspNetCore.Hosting.IHostingStartup> 實作允許在啟動時從應用程式 `Startup` 類別外部的外部組件，針對應用程式新增增強功能。 如需詳細資訊，請參閱 <xref:fundamentals/configuration/platform-specific-configuration>。
+<xref:Microsoft.AspNetCore.Hosting.IHostingStartup> 實作允許在啟動時從應用程式 `Startup` 類別外部的外部組件，針對應用程式新增增強功能。 如需詳細資訊，請參閱<xref:fundamentals/configuration/platform-specific-configuration>。
 
 ## <a name="additional-resources"></a>其他資源
 

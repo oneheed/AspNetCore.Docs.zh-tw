@@ -15,18 +15,18 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/security/webassembly/standalone-with-authentication-library
-ms.openlocfilehash: 02960e6c7d70be3ea1be3ed9e2280e5b5847c926
-ms.sourcegitcommit: f7873c02c1505c99106cbc708f37e18fc0a496d1
+ms.openlocfilehash: d3611e26414f5dd1103ca9af15b17f9813023e21
+ms.sourcegitcommit: 84150702757cf7a7b839485382420e8db8e92b9c
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 07/08/2020
-ms.locfileid: "86147682"
+ms.lasthandoff: 08/05/2020
+ms.locfileid: "87818855"
 ---
-# <a name="secure-an-aspnet-core-blazor-webassembly-standalone-app-with-the-authentication-library"></a>Blazor WebAssembly使用驗證程式庫保護 ASP.NET Core 獨立應用程式
+# <a name="secure-an-aspnet-core-no-locblazor-webassembly-standalone-app-with-the-authentication-library"></a>Blazor WebAssembly使用驗證程式庫保護 ASP.NET Core 獨立應用程式
 
 By [Javier Calvarro Nelson](https://github.com/javiercn)和[Luke Latham](https://github.com/guardrex)
 
-*若為 Azure Active Directory （AAD）和 Azure Active Directory B2C （AAD B2C），請不要遵循本主題中的指導方針。請參閱此目錄節點中的 AAD 和 AAD B2C 主題。*
+*如需 Azure Active Directory (AAD) 和 Azure Active Directory B2C (AAD B2C) ，請不要遵循本主題中的指導方針。請參閱此目錄節點中的 AAD 和 AAD B2C 主題。*
 
 若要建立 Blazor WebAssembly 使用程式庫的獨立應用程式 [`Microsoft.AspNetCore.Components.WebAssembly.Authentication`](https://www.nuget.org/packages/Microsoft.AspNetCore.Components.WebAssembly.Authentication/) ，請遵循您選擇工具的指引。
 
@@ -58,7 +58,7 @@ dotnet new blazorwasm -au Individual -o {APP NAME}
 
 若要 Blazor WebAssembly 使用驗證機制建立新的專案：
 
-1. 在 [**設定新的 Blazor WebAssembly 應用程式**] 步驟上，從 [**驗證**] 下拉式選單選取 [**個別驗證（應用程式內）** ]。
+1. 在 [**設定新的 Blazor WebAssembly 應用程式**] 步驟中，從 [**驗證**] 下拉式下選取 [**個別驗證] ([應用程式內) ** ]。
 
 1. 應用程式會針對以 ASP.NET Core 儲存在應用程式中的個別使用者而建立 [Identity](xref:security/authentication/identity) 。
 
@@ -78,7 +78,7 @@ dotnet new blazorwasm -au Individual -o {APP NAME}
 
 ## <a name="authentication-service-support"></a>驗證服務支援
 
-使用封裝所提供的擴充方法，在服務容器中註冊驗證使用者的支援 <xref:Microsoft.Extensions.DependencyInjection.WebAssemblyAuthenticationServiceCollectionExtensions.AddOidcAuthentication%2A> [`Microsoft.AspNetCore.Components.WebAssembly.Authentication`](https://www.nuget.org/packages/Microsoft.AspNetCore.Components.WebAssembly.Authentication/) 。 這個方法會設定應用程式與 Identity 提供者（IP）互動所需的服務。
+使用封裝所提供的擴充方法，在服務容器中註冊驗證使用者的支援 <xref:Microsoft.Extensions.DependencyInjection.WebAssemblyAuthenticationServiceCollectionExtensions.AddOidcAuthentication%2A> [`Microsoft.AspNetCore.Components.WebAssembly.Authentication`](https://www.nuget.org/packages/Microsoft.AspNetCore.Components.WebAssembly.Authentication/) 。 這個方法會設定應用程式與 Identity 提供者 (IP) 互動所需的服務。
 
 `Program.cs`:
 
@@ -100,7 +100,7 @@ builder.Services.AddOidcAuthentication(options =>
 }
 ```
 
-獨立應用程式的驗證支援是使用 Open ID Connect （OIDC）提供。 <xref:Microsoft.Extensions.DependencyInjection.WebAssemblyAuthenticationServiceCollectionExtensions.AddOidcAuthentication%2A>方法會接受回呼來設定使用 OIDC 驗證應用程式所需的參數。 設定應用程式所需的值可從符合 OIDC 規範的 IP 取得。 當您註冊應用程式時，請取得這些值，這通常會發生在其線上入口網站中。
+獨立應用程式的驗證支援是使用 OpenID Connect (OIDC) 提供。 <xref:Microsoft.Extensions.DependencyInjection.WebAssemblyAuthenticationServiceCollectionExtensions.AddOidcAuthentication%2A>方法會接受回呼來設定使用 OIDC 驗證應用程式所需的參數。 設定應用程式所需的值可從符合 OIDC 規範的 IP 取得。 當您註冊應用程式時，請取得這些值，這通常會發生在其線上入口網站中。
 
 ## <a name="access-token-scopes"></a>存取權杖範圍
 
@@ -139,7 +139,7 @@ builder.Services.AddOidcAuthentication(options =>
 
 ## <a name="logindisplay-component"></a>LoginDisplay 元件
 
-`LoginDisplay`元件（ `Shared/LoginDisplay.razor` ）會在 `MainLayout` 元件（）中轉譯 `Shared/MainLayout.razor` ，並管理下列行為：
+`LoginDisplay`元件 (`Shared/LoginDisplay.razor`) 會在 `MainLayout` 元件 () 中呈現 `Shared/MainLayout.razor` ，並管理下列行為：
 
 * 針對已驗證的使用者：
   * 顯示目前的使用者名稱。

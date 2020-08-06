@@ -5,7 +5,7 @@ description: 探索如何將元件包含在 Blazor 來自外部元件程式庫�
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 03/23/2020
+ms.date: 07/27/2020
 no-loc:
 - Blazor
 - Blazor Server
@@ -15,18 +15,18 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/components/class-libraries
-ms.openlocfilehash: b172059407f9a08dacc0fadd804864c7aee7fb90
-ms.sourcegitcommit: 66fca14611eba141d455fe0bd2c37803062e439c
+ms.openlocfilehash: 8293d61f88f53e55d94b114ca2143fdfb6fd8468
+ms.sourcegitcommit: 84150702757cf7a7b839485382420e8db8e92b9c
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 07/03/2020
-ms.locfileid: "85944491"
+ms.lasthandoff: 08/05/2020
+ms.locfileid: "87819063"
 ---
-# <a name="aspnet-core-razor-components-class-libraries"></a>ASP.NET Core Razor 元件類別庫
+# <a name="aspnet-core-no-locrazor-components-class-libraries"></a>ASP.NET Core Razor 元件類別庫
 
 依[Simon Timms](https://github.com/stimms)
 
-元件可以在各個專案的[ Razor 類別庫（RCL）](xref:razor-pages/ui-class)中共用。 * Razor 元件類別庫*可以包含在：
+元件可以在類別庫中共用， (跨專案的[ Razor RCL) ](xref:razor-pages/ui-class) 。 * Razor 元件類別庫*可以包含在：
 
 * 方案中的另一個專案。
 * NuGet 套件。
@@ -39,16 +39,16 @@ ms.locfileid: "85944491"
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
 1. 建立新專案。
-1. 選取 [ ** Razor 類別庫**]。 選取 [下一步]。
+1. 選取 [ ** Razor 類別庫**]。 選取 [下一步]  。
 1. 在 [**建立新的 Razor 類別庫**] 對話方塊中，選取 [**建立**]。
-1. 在 [專案名稱]**** 欄位中提供專案名稱，或接受預設專案名稱。 本主題中的範例會使用專案名稱 `MyComponentLib1` 。 選取 [建立]。
+1. 在 [專案名稱]**** 欄位中提供專案名稱，或接受預設專案名稱。 本主題中的範例會使用專案名稱 `ComponentLibrary` 。 選取 [建立]。
 1. 將 RCL 新增至方案：
    1. 以滑鼠右鍵按一下方案。 選取 [**加入**  >  **現有專案**]。
    1. 流覽至 RCL 的專案檔。
-   1. 選取 RCL 的專案檔（ `.csproj` ）。
+   1. 選取 RCL 的專案檔案 (`.csproj`) ]。
 1. 從應用程式新增參考 RCL：
    1. 以滑鼠右鍵按一下應用程式專案。 選取 [**新增**  >  **參考**]。
-   1. 選取 [RCL] 專案。 選取 [確定]。
+   1. 選取 [RCL] 專案。 選取 [確定]  。
 
 > [!NOTE]
 > 從範本產生 RCL 時，如果已選取 [**支援頁面和視圖**] 核取方塊，則也會 `_Imports.razor` 使用下列內容將檔案新增至所產生專案的根目錄，以啟用 Razor 元件撰寫：
@@ -61,10 +61,10 @@ ms.locfileid: "85944491"
 
 # <a name="net-core-cli"></a>[.NET Core CLI](#tab/netcore-cli)
 
-1. 在命令 shell 中搭配命令使用** Razor 類別庫**範本（ `razorclasslib` ） [`dotnet new`](/dotnet/core/tools/dotnet-new) 。 在下列範例中，會建立名為的 RCL `MyComponentLib1` 。 `MyComponentLib1`執行命令時，會自動建立保存的資料夾：
+1. 使用 [ ** Razor 類別庫**] 範本 (`razorclasslib` [`dotnet new`](/dotnet/core/tools/dotnet-new) 在命令 shell 中使用命令) 。 在下列範例中，會建立名為的 RCL `ComponentLibrary` 。 `ComponentLibrary`執行命令時，會自動建立保存的資料夾：
 
    ```dotnetcli
-   dotnet new razorclasslib -o MyComponentLib1
+   dotnet new razorclasslib -o ComponentLibrary
    ```
 
    > [!NOTE]
@@ -91,35 +91,82 @@ ms.locfileid: "85944491"
 * 使用命名空間的完整類型名稱。
 * 使用 Razor 的指示詞 [`@using`](xref:mvc/views/razor#using) 。 個別元件可以依名稱新增。
 
-在下列範例中， `MyComponentLib1` 是包含元件的元件庫 `SalesReport` 。
+在下列範例中， `ComponentLibrary` 是包含 `Component1` 元件 () 的元件庫 `Component1.razor` 。 `Component1`元件是 RCL 專案範本在建立程式庫時自動新增的範例元件。
 
-`SalesReport`元件可以使用其完整型別名稱和命名空間來加以參考：
+參考 `Component1` 使用其命名空間的元件：
 
 ```razor
 <h1>Hello, world!</h1>
 
 Welcome to your new app.
 
-<MyComponentLib1.SalesReport />
+<ComponentLibrary.Component1 />
 ```
 
-如果使用指示詞將程式庫帶入範圍，也可以參考此元件 `@using` ：
+或者，將程式庫帶入具有指示詞的範圍， [`@using`](xref:mvc/views/razor#using) 並使用不含其命名空間的元件：
 
 ```razor
-@using MyComponentLib1
+@using ComponentLibrary
 
 <h1>Hello, world!</h1>
 
 Welcome to your new app.
 
-<SalesReport />
+<Component1 />
 ```
 
-`@using MyComponentLib1`請在最上層檔案中包含指示詞 `_Import.razor` ，讓程式庫的元件可供整個專案使用。 將指示詞新增至 `_Import.razor` 任何層級的檔案，以將命名空間套用至資料夾中的單一頁面或一組頁面。
+（選擇性）在最上層檔案中包含指示詞， `@using ComponentLibrary` `_Import.razor` 讓程式庫的元件可供整個專案使用。 將指示詞新增至 `_Import.razor` 任何層級的檔案，以將命名空間套用至資料夾內的單一元件或元件集。
 
-## <a name="create-a-razor-components-class-library-with-static-assets"></a>建立 Razor 具有靜態資產的元件類別庫
+::: moniker range=">= aspnetcore-5.0"
 
-RCL 可以包含靜態資產。 使用該程式庫的任何應用程式都可以使用靜態資產。 如需詳細資訊，請參閱 <xref:razor-pages/ui-class#create-an-rcl-with-static-assets> 。
+若要將 `Component1` 的 `my-component` CSS 類別提供給元件，請在中使用架構的[ `Link` 元件](xref:blazor/fundamentals/additional-scenarios#influence-html-head-tag-elements)連結至程式庫的樣式表單 `Component1.razor` ：
+
+```razor
+<div class="my-component">
+    <Link href="_content/ComponentLibrary/styles.css" rel="stylesheet" />
+
+    <p>
+        This Blazor component is defined in the <strong>ComponentLibrary</strong> package.
+    </p>
+</div>
+```
+
+若要在應用程式中提供樣式表單，您也可以在應用程式的檔案中連結至程式庫的樣式表單 `wwwroot/index.html` (Blazor WebAssembly) 或檔案 `Pages/_Host.cshtml` (Blazor Server) ：
+
+```html
+<head>
+    ...
+    <link href="_content/ComponentLibrary/styles.css" rel="stylesheet" />
+</head>
+```
+
+當 `Link` 元件在子元件中使用時，只要轉譯具有元件的子系，連結的資產也會提供給父元件的任何其他子元件 `Link` 。 在子元件中使用 `Link` 元件以及將 `<link>` HTML 標籤放在或中的區別，在於 `wwwroot/index.html` `Pages/_Host.cshtml` 架構元件的轉譯 HTML 標籤：
+
+* 可由應用程式狀態修改。 `<link>`應用程式狀態無法修改硬式編碼的 HTML 標籤。
+* 當父元件不再呈現時，會從 HTML 中移除 `<head>` 。
+
+::: moniker-end
+
+::: moniker range="< aspnetcore-5.0"
+
+若要提供 `Component1` 的 `my-component` CSS 類別，請連結至應用程式檔案中文件庫的樣式表單 `wwwroot/index.html` (Blazor WebAssembly) 或檔案 `Pages/_Host.cshtml` (Blazor Server) ：
+
+```html
+<head>
+    ...
+    <link href="_content/ComponentLibrary/styles.css" rel="stylesheet" />
+</head>
+```
+
+::: moniker-end
+
+## <a name="create-a-no-locrazor-components-class-library-with-static-assets"></a>建立 Razor 具有靜態資產的元件類別庫
+
+RCL 可以包含靜態資產。 使用該程式庫的任何應用程式都可以使用靜態資產。 如需詳細資訊，請參閱<xref:razor-pages/ui-class#create-an-rcl-with-static-assets>。
+
+## <a name="supply-components-and-static-assets-to-multiple-hosted-no-locblazor-apps"></a>將元件和靜態資產提供給多個託管 Blazor 應用程式
+
+如需詳細資訊，請參閱<xref:blazor/host-and-deploy/webassembly#static-assets-and-class-libraries>。
 
 ## <a name="build-pack-and-ship-to-nuget"></a>組建、封裝和寄送至 NuGet
 

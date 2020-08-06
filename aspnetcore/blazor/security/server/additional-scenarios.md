@@ -15,18 +15,18 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/security/server/additional-scenarios
-ms.openlocfilehash: 46de9a22dec540b8dfda7583b7a3c5c2dcbbc549
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: 8f112a4d71e44cae112e9854fc77dfda4af5a47a
+ms.sourcegitcommit: 84150702757cf7a7b839485382420e8db8e92b9c
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85402321"
+ms.lasthandoff: 08/05/2020
+ms.locfileid: "87818907"
 ---
-# <a name="aspnet-core-blazor-server-additional-security-scenarios"></a>ASP.NET Core Blazor Server 其他安全性案例
+# <a name="aspnet-core-no-locblazor-server-additional-security-scenarios"></a>ASP.NET Core Blazor Server 其他安全性案例
 
 By [Javier Calvarro Nelson](https://github.com/javiercn)
 
-## <a name="pass-tokens-to-a-blazor-server-app"></a>將權杖傳遞給 Blazor Server 應用程式
+## <a name="pass-tokens-to-a-no-locblazor-server-app"></a>將權杖傳遞給 Blazor Server 應用程式
 
 您 Razor Blazor Server 可以使用本節所述的方法，將應用程式中元件外部可用的權杖傳遞給元件。 如需範例程式碼，包括完整的 `Startup.ConfigureServices` 範例，請參閱將[權杖傳遞給伺服器端 Blazor 應用程式](https://github.com/javiercn/blazor-server-aad-sample)。
 
@@ -58,7 +58,7 @@ public class InitialApplicationState
 }
 ```
 
-定義可在應用程式內使用的**範圍**權杖提供者服務， Blazor 以從相依性[插入（DI）](xref:blazor/fundamentals/dependency-injection)解析權杖：
+定義可在應用程式內使用的**範圍**權杖提供者服務， Blazor 以從[ (DI) ](xref:blazor/fundamentals/dependency-injection)的相依性插入解析權杖：
 
 ```csharp
 public class TokenProvider
@@ -99,7 +99,7 @@ services.AddScoped<TokenProvider>();
 </app>
 ```
 
-在 `App` 元件（ `App.razor` ）中，解析服務，並使用參數中的資料進行初始化：
+在 `App` 元件 (`App.razor`) 中，解析服務，並使用參數中的資料將它初始化：
 
 ```razor
 @inject TokenProvider TokenProvider
@@ -162,9 +162,9 @@ endpoints.MapBlazorHub().RequireAuthorization(
     });
 ```
 
-## <a name="use-open-id-connect-oidc-v20-endpoints"></a>使用 Open ID Connect （OIDC） v2.0 端點
+## <a name="use-openid-connect-oidc-v20-endpoints"></a>使用 OpenID Connect (OIDC) v2.0 端點
 
-驗證程式庫和 Blazor 範本會使用 OPEN ID Connect （OIDC） v1.0 端點。 若要使用 v2.0 端點，請 <xref:Microsoft.AspNetCore.Builder.OpenIdConnectOptions.Authority?displayProperty=nameWithType> 在中設定選項 <xref:Microsoft.AspNetCore.Builder.OpenIdConnectOptions> ：
+驗證程式庫和 Blazor 範本會使用 OpenID connect (OIDC) v1.0 端點。 若要使用 v2.0 端點，請 <xref:Microsoft.AspNetCore.Builder.OpenIdConnectOptions.Authority?displayProperty=nameWithType> 在中設定選項 <xref:Microsoft.AspNetCore.Builder.OpenIdConnectOptions> ：
 
 ```csharp
 services.Configure<OpenIdConnectOptions>(AzureADDefaults.OpenIdScheme, 
@@ -174,7 +174,7 @@ services.Configure<OpenIdConnectOptions>(AzureADDefaults.OpenIdScheme,
     }
 ```
 
-或者，您也可以在應用程式設定（）檔案中進行設定 `appsettings.json` ：
+或者，您也可以在應用程式設定 () 檔案中進行設定 `appsettings.json` ：
 
 ```json
 {
@@ -189,7 +189,7 @@ services.Configure<OpenIdConnectOptions>(AzureADDefaults.OpenIdScheme,
 
 ### <a name="code-changes"></a>程式碼變更
 
-* 針對 v2.0 端點，識別碼權杖中的宣告清單會變更。 如需詳細資訊，請參閱[為何要更新至 Microsoft 身分識別平臺（v2.0）？](/azure/active-directory/azuread-dev/azure-ad-endpoint-comparison) 在 Azure 檔中。
+* 針對 v2.0 端點，識別碼權杖中的宣告清單會變更。 如需詳細資訊，請參閱[為何要將 Microsoft 身分識別平臺更新 (v2.0) ？](/azure/active-directory/azuread-dev/azure-ad-endpoint-comparison) 在 Azure 檔中。
 * 因為在 v2.0 端點的範圍 Uri 中指定了資源，所以請移除 <xref:Microsoft.AspNetCore.Builder.OpenIdConnectOptions.Resource?displayProperty=nameWithType> 中的屬性設定 <xref:Microsoft.AspNetCore.Builder.OpenIdConnectOptions> ：
 
   ```csharp

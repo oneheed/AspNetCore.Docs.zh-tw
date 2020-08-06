@@ -5,7 +5,7 @@ description: 瞭解如何設定 Blazor WebAssembly 其他安全性案例。
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 06/24/2020
+ms.date: 08/03/2020
 no-loc:
 - Blazor
 - Blazor Server
@@ -15,29 +15,79 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/security/webassembly/additional-scenarios
-ms.openlocfilehash: 79f7b2177d6d07101c73cde841c062b0e1468593
-ms.sourcegitcommit: 384833762c614851db653b841cc09fbc944da463
+ms.openlocfilehash: 81ab2bb139dfcbea712d4eb51acfc9d7f6767d46
+ms.sourcegitcommit: 84150702757cf7a7b839485382420e8db8e92b9c
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 07/17/2020
-ms.locfileid: "86445147"
+ms.lasthandoff: 08/05/2020
+ms.locfileid: "87818829"
 ---
-# <a name="aspnet-core-blazor-webassembly-additional-security-scenarios"></a>ASP.NET Core Blazor WebAssembly 其他安全性案例
+# <a name="aspnet-core-no-locblazor-webassembly-additional-security-scenarios"></a>ASP.NET Core Blazor WebAssembly 其他安全性案例
 
 By [Javier Calvarro Nelson](https://github.com/javiercn)和[Luke Latham](https://github.com/guardrex)
 
 ## <a name="attach-tokens-to-outgoing-requests"></a>將權杖附加到連出要求
 
-此 <xref:Microsoft.AspNetCore.Components.WebAssembly.Authentication.AuthorizationMessageHandler> 服務可與搭配使用 <xref:System.Net.Http.HttpClient> ，將存取權杖附加至傳出要求。 您可以使用現有的服務來取得權杖 <xref:Microsoft.AspNetCore.Components.WebAssembly.Authentication.IAccessTokenProvider> 。 如果無法取得權杖， <xref:Microsoft.AspNetCore.Components.WebAssembly.Authentication.AccessTokenNotAvailableException> 就會擲回。 <xref:Microsoft.AspNetCore.Components.WebAssembly.Authentication.AccessTokenNotAvailableException>具有 <xref:Microsoft.AspNetCore.Components.WebAssembly.Authentication.AccessTokenNotAvailableException.Redirect%2A> 方法，可以用來將使用者導覽至識別提供者，以取得新的權杖。 <xref:Microsoft.AspNetCore.Components.WebAssembly.Authentication.AuthorizationMessageHandler>可以使用方法，透過授權的 url、範圍和傳回 URL 來設定 <xref:Microsoft.AspNetCore.Components.WebAssembly.Authentication.AuthorizationMessageHandler.ConfigureHandler%2A> 。
+<xref:Microsoft.AspNetCore.Components.WebAssembly.Authentication.AuthorizationMessageHandler>是 <xref:System.Net.Http.DelegatingHandler> 用來將存取權杖附加至傳出 <xref:System.Net.Http.HttpResponseMessage> 實例的。 權杖是使用 <xref:Microsoft.AspNetCore.Components.WebAssembly.Authentication.IAccessTokenProvider> 由架構註冊的服務來取得。 如果無法取得權杖， <xref:Microsoft.AspNetCore.Components.WebAssembly.Authentication.AccessTokenNotAvailableException> 就會擲回。 <xref:Microsoft.AspNetCore.Components.WebAssembly.Authentication.AccessTokenNotAvailableException>具有 <xref:Microsoft.AspNetCore.Components.WebAssembly.Authentication.AccessTokenNotAvailableException.Redirect%2A> 方法，可以用來將使用者導覽至識別提供者，以取得新的權杖。
 
-使用下列其中一種方法來設定連出要求的訊息處理常式：
+為了方便起見，架構會提供 <xref:Microsoft.AspNetCore.Components.WebAssembly.Authentication.BaseAddressAuthorizationMessageHandler> 預先設定的應用程式基底位址作為授權 URL。 **只有當要求 URI 在應用程式的基底 URI 內時，才會新增存取權杖。** 當連出要求 Uri 不在應用程式的基底 URI 內時，請使用[自訂 `AuthorizationMessageHandler` 類別 (*建議*) ](#custom-authorizationmessagehandler-class)或[設定 `AuthorizationMessageHandler` ](#configure-authorizationmessagehandler)。
 
-* [自訂 `AuthorizationMessageHandler` 類別](#custom-authorizationmessagehandler-class)（*建議*）
-* [配置`AuthorizationMessageHandler`](#configure-authorizationmessagehandler)
+> [!NOTE]
+> 除了伺服器 API 存取的用戶端應用程式設定之外，當用戶端和伺服器不是位於相同的基底位址時，伺服器 API 也必須允許跨原始來源要求 (CORS) 。 如需伺服器端 CORS 設定的詳細資訊，請參閱本文稍後的[跨原始資源分享 (CORS) ](#cross-origin-resource-sharing-cors)一節。
 
-### <a name="custom-authorizationmessagehandler-class"></a>自訂 AuthorizationMessageHandler 類別
+在下例中︰
 
-在下列範例中，自訂類別 <xref:Microsoft.AspNetCore.Components.WebAssembly.Authentication.AuthorizationMessageHandler> 會擴充，可用於設定 <xref:System.Net.Http.HttpClient> ：
+* <xref:Microsoft.Extensions.DependencyInjection.HttpClientFactoryServiceCollectionExtensions.AddHttpClient%2A>將 <xref:System.Net.Http.IHttpClientFactory> 和相關服務新增至服務集合，並設定名為 <xref:System.Net.Http.HttpClient> (`ServerAPI`) 。 <xref:System.Net.Http.HttpClient.BaseAddress?displayProperty=nameWithType>這是傳送要求時的資源 URI 基底位址。 <xref:System.Net.Http.IHttpClientFactory>由 [`Microsoft.Extensions.Http`](https://www.nuget.org/packages/Microsoft.Extensions.Http) NuGet 套件提供。
+* <xref:Microsoft.AspNetCore.Components.WebAssembly.Authentication.BaseAddressAuthorizationMessageHandler>是 <xref:System.Net.Http.DelegatingHandler> 用來將存取權杖附加至傳出 <xref:System.Net.Http.HttpResponseMessage> 實例的。 只有當要求 URI 在應用程式的基底 URI 內時，才會新增存取權杖。
+* <xref:System.Net.Http.IHttpClientFactory.CreateClient%2A?displayProperty=nameWithType><xref:System.Net.Http.HttpClient>使用對應至已命名 () 的設定，建立並設定傳出要求的 <xref:System.Net.Http.HttpClient> 實例 `ServerAPI` 。
+
+```csharp
+using System.Net.Http;
+using Microsoft.AspNetCore.Components.WebAssembly.Authentication;
+
+...
+
+builder.Services.AddHttpClient("ServerAPI", 
+        client => client.BaseAddress = new Uri("https://www.example.com/base"))
+    .AddHttpMessageHandler<BaseAddressAuthorizationMessageHandler>();
+
+builder.Services.AddScoped(sp => sp.GetRequiredService<IHttpClientFactory>()
+    .CreateClient("ServerAPI"));
+```
+
+針對以 Blazor 託管專案範本為基礎的應用程式 Blazor WebAssembly ，要求 uri 預設會在應用程式的基底 URI 內。 因此， <xref:Microsoft.AspNetCore.Components.WebAssembly.Hosting.IWebAssemblyHostEnvironment.BaseAddress?displayProperty=nameWithType> (`new Uri(builder.HostEnvironment.BaseAddress)`) 會指派給 <xref:System.Net.Http.HttpClient.BaseAddress?displayProperty=nameWithType> 從專案範本產生之應用程式中的。
+
+已設定的 <xref:System.Net.Http.HttpClient> 會用來透過模式提出授權的要求 [`try-catch`](/dotnet/csharp/language-reference/keywords/try-catch) ：
+
+```razor
+@using Microsoft.AspNetCore.Components.WebAssembly.Authentication
+@inject HttpClient Client
+
+...
+
+protected override async Task OnInitializedAsync()
+{
+    private ExampleType[] examples;
+
+    try
+    {
+        examples = 
+            await Client.GetFromJsonAsync<ExampleType[]>("ExampleAPIMethod");
+
+        ...
+    }
+    catch (AccessTokenNotAvailableException exception)
+    {
+        exception.Redirect();
+    }
+}
+```
+
+### <a name="custom-authorizationmessagehandler-class"></a>自訂 `AuthorizationMessageHandler` 類別
+
+*對於對不在應用程式基底 URI 內的 Uri 提出連出要求的用戶端應用程式，建議本節中的本指南。*
+
+在下列範例中，自訂類別會擴充，做為的 <xref:Microsoft.AspNetCore.Components.WebAssembly.Authentication.AuthorizationMessageHandler> 使用 <xref:System.Net.Http.DelegatingHandler> <xref:System.Net.Http.HttpClient> 。 <xref:Microsoft.AspNetCore.Components.WebAssembly.Authentication.AuthorizationMessageHandler.ConfigureHandler%2A>設定此處理程式，以使用存取權杖來授權輸出 HTTP 要求。 只有在至少有一個授權 Url 是要求 URI () 的基底時，才會附加存取權杖 <xref:System.Net.Http.HttpRequestMessage.RequestUri?displayProperty=nameWithType> 。
 
 ```csharp
 using Microsoft.AspNetCore.Components;
@@ -56,7 +106,7 @@ public class CustomAuthorizationMessageHandler : AuthorizationMessageHandler
 }
 ```
 
-在 `Program.Main` （ `Program.cs` ）中， <xref:System.Net.Http.HttpClient> 會使用自訂授權訊息處理常式來設定：
+在 `Program.Main` (`Program.cs`) 中， `CustomAuthorizationMessageHandler` 會註冊為已設定範圍的服務，並設定為 <xref:System.Net.Http.DelegatingHandler> 名為之的傳出實例的 <xref:System.Net.Http.HttpResponseMessage> <xref:System.Net.Http.HttpClient> ：
 
 ```csharp
 builder.Services.AddScoped<CustomAuthorizationMessageHandler>();
@@ -66,9 +116,9 @@ builder.Services.AddHttpClient("ServerAPI",
     .AddHttpMessageHandler<CustomAuthorizationMessageHandler>();
 ```
 
-針對以裝載 Blazor 的範本為基礎的應用程式 Blazor WebAssembly ， <xref:Microsoft.AspNetCore.Components.WebAssembly.Hosting.IWebAssemblyHostEnvironment.BaseAddress?displayProperty=nameWithType> `new Uri(builder.HostEnvironment.BaseAddress)` 可以將（）指派給 <xref:System.Net.Http.HttpClient.BaseAddress?displayProperty=nameWithType> 。
+針對以裝載 Blazor 的專案範本為基礎的應用程式 Blazor WebAssembly ， <xref:Microsoft.AspNetCore.Components.WebAssembly.Hosting.IWebAssemblyHostEnvironment.BaseAddress?displayProperty=nameWithType> `new Uri(builder.HostEnvironment.BaseAddress)` 預設會將 () 指派給 <xref:System.Net.Http.HttpClient.BaseAddress?displayProperty=nameWithType> 。
 
-已設定的 <xref:System.Net.Http.HttpClient> 會用來透過模式提出授權的要求 [`try-catch`](/dotnet/csharp/language-reference/keywords/try-catch) 。 使用（package）建立用戶端的位置 <xref:System.Net.Http.IHttpClientFactory.CreateClient%2A> [`Microsoft.Extensions.Http`](https://www.nuget.org/packages/Microsoft.Extensions.Http) ，會在對 <xref:System.Net.Http.HttpClient> 伺服器 API 提出要求時，提供包含存取權杖的實例：
+已設定的 <xref:System.Net.Http.HttpClient> 會用來透過模式提出授權的要求 [`try-catch`](/dotnet/csharp/language-reference/keywords/try-catch) 。 建立用戶端時 <xref:System.Net.Http.IHttpClientFactory.CreateClient%2A> [`Microsoft.Extensions.Http`](https://www.nuget.org/packages/Microsoft.Extensions.Http) ，會使用 (封裝) ，而在對 <xref:System.Net.Http.HttpClient> 伺服器 API 提出要求時，會提供包含存取權杖的實例。 如果要求 URI 是相對 URI，如下列範例所示 (`ExampleAPIMethod`) 時，它會與 <xref:System.Net.Http.HttpClient.BaseAddress> 用戶端應用程式提出要求時的結合：
 
 ```razor
 @inject IHttpClientFactory ClientFactory
@@ -85,7 +135,7 @@ builder.Services.AddHttpClient("ServerAPI",
             var client = ClientFactory.CreateClient("ServerAPI");
 
             examples = 
-                await client.GetFromJsonAsync<ExampleType[]>("{API METHOD}");
+                await client.GetFromJsonAsync<ExampleType[]>("ExampleAPIMethod");
 
             ...
         }
@@ -93,14 +143,15 @@ builder.Services.AddHttpClient("ServerAPI",
         {
             exception.Redirect();
         }
-        
     }
 }
 ```
 
-### <a name="configure-authorizationmessagehandler"></a>設定 AuthorizationMessageHandler
+### <a name="configure-authorizationmessagehandler"></a>設定 `AuthorizationMessageHandler`
 
-在下列範例中，會 <xref:Microsoft.AspNetCore.Components.WebAssembly.Authentication.AuthorizationMessageHandler> <xref:System.Net.Http.HttpClient> 在 `Program.Main` （）中設定 `Program.cs` ：
+<xref:Microsoft.AspNetCore.Components.WebAssembly.Authentication.AuthorizationMessageHandler>可以使用方法來設定授權的 Url、範圍和傳回 URL <xref:Microsoft.AspNetCore.Components.WebAssembly.Authentication.AuthorizationMessageHandler.ConfigureHandler%2A> 。 <xref:Microsoft.AspNetCore.Components.WebAssembly.Authentication.AuthorizationMessageHandler.ConfigureHandler%2A>設定處理常式，以使用存取權杖來授權輸出 HTTP 要求。 只有在至少有一個授權 Url 是要求 URI () 的基底時，才會附加存取權杖 <xref:System.Net.Http.HttpRequestMessage.RequestUri?displayProperty=nameWithType> 。 如果要求 URI 是相對 URI，則會與結合 <xref:System.Net.Http.HttpClient.BaseAddress> 。
+
+在下列範例中，會 <xref:Microsoft.AspNetCore.Components.WebAssembly.Authentication.AuthorizationMessageHandler> <xref:System.Net.Http.HttpClient> 在 `Program.Main` () 中設定 `Program.cs` ：
 
 ```csharp
 using System.Net.Http;
@@ -118,58 +169,12 @@ builder.Services.AddScoped(sp => new HttpClient(
     });
 ```
 
-針對以裝載 Blazor 的範本為基礎的應用程式 Blazor WebAssembly ， <xref:Microsoft.AspNetCore.Components.WebAssembly.Hosting.IWebAssemblyHostEnvironment.BaseAddress?displayProperty=nameWithType> 可以指派給：
+針對以裝載 Blazor 的專案範本為基礎的應用程式 Blazor WebAssembly ， <xref:Microsoft.AspNetCore.Components.WebAssembly.Hosting.IWebAssemblyHostEnvironment.BaseAddress?displayProperty=nameWithType> 預設會指派給下列內容：
 
-* <xref:System.Net.Http.HttpClient.BaseAddress?displayProperty=nameWithType>（ `new Uri(builder.HostEnvironment.BaseAddress)` ）。
+* <xref:System.Net.Http.HttpClient.BaseAddress?displayProperty=nameWithType> (`new Uri(builder.HostEnvironment.BaseAddress)`) 。
 * 陣列的 URL `authorizedUrls` 。
 
-為了方便起見， <xref:Microsoft.AspNetCore.Components.WebAssembly.Authentication.BaseAddressAuthorizationMessageHandler> 會包含以應用程式的基底位址預先設定為授權 URL 的。 啟用驗證的 Blazor WebAssembly 範本會 <xref:System.Net.Http.IHttpClientFactory> [`Microsoft.Extensions.Http`](https://www.nuget.org/packages/Microsoft.Extensions.Http) 在伺服器 API 專案中使用（套件），以設定 <xref:System.Net.Http.HttpClient> 具有 <xref:Microsoft.AspNetCore.Components.WebAssembly.Authentication.BaseAddressAuthorizationMessageHandler> 下列專案的：
-
-```csharp
-using System.Net.Http;
-using Microsoft.AspNetCore.Components.WebAssembly.Authentication;
-
-...
-
-builder.Services.AddHttpClient("ServerAPI", 
-        client => client.BaseAddress = new Uri("https://www.example.com/base"))
-    .AddHttpMessageHandler<BaseAddressAuthorizationMessageHandler>();
-
-builder.Services.AddScoped(sp => sp.GetRequiredService<IHttpClientFactory>()
-    .CreateClient("ServerAPI"));
-```
-
-針對以裝載 Blazor 的範本為基礎的應用程式 Blazor WebAssembly ， <xref:Microsoft.AspNetCore.Components.WebAssembly.Hosting.IWebAssemblyHostEnvironment.BaseAddress?displayProperty=nameWithType> `new Uri(builder.HostEnvironment.BaseAddress)` 可以將（）指派給 <xref:System.Net.Http.HttpClient.BaseAddress?displayProperty=nameWithType> 。
-
-在上述範例中，會使用建立用戶端，而在對 <xref:System.Net.Http.IHttpClientFactory.CreateClient%2A> <xref:System.Net.Http.HttpClient> 伺服器專案提出要求時，會提供包含存取權杖的實例。
-
-已設定的 <xref:System.Net.Http.HttpClient> 會用來透過模式提出授權的要求 [`try-catch`](/dotnet/csharp/language-reference/keywords/try-catch) ：
-
-```razor
-@using Microsoft.AspNetCore.Components.WebAssembly.Authentication
-@inject HttpClient Client
-
-...
-
-protected override async Task OnInitializedAsync()
-{
-    private ExampleType[] examples;
-
-    try
-    {
-        examples = 
-            await Client.GetFromJsonAsync<ExampleType[]>("{API METHOD}");
-
-        ...
-    }
-    catch (AccessTokenNotAvailableException exception)
-    {
-        exception.Redirect();
-    }
-}
-```
-
-## <a name="typed-httpclient"></a>具類型的 HttpClient
+## <a name="typed-httpclient"></a>輸入`HttpClient`
 
 您可以定義具型別用戶端，以處理單一類別內的所有 HTTP 和權杖取得顧慮。
 
@@ -210,7 +215,7 @@ public class WeatherForecastClient
 }
 ```
 
-預留位置 `{APP ASSEMBLY}` 是應用程式的元件名稱（例如， `using static BlazorSample.Data;` ）。
+預留位置 `{APP ASSEMBLY}` 是應用程式的元件名稱 (例如， `using static BlazorSample.Data;`) 。
 
 `Program.Main` (`Program.cs`):
 
@@ -225,9 +230,9 @@ builder.Services.AddHttpClient<WeatherForecastClient>(
     .AddHttpMessageHandler<BaseAddressAuthorizationMessageHandler>();
 ```
 
-針對以裝載 Blazor 的範本為基礎的應用程式 Blazor WebAssembly ， <xref:Microsoft.AspNetCore.Components.WebAssembly.Hosting.IWebAssemblyHostEnvironment.BaseAddress?displayProperty=nameWithType> `new Uri(builder.HostEnvironment.BaseAddress)` 可以將（）指派給 <xref:System.Net.Http.HttpClient.BaseAddress?displayProperty=nameWithType> 。
+針對以裝載 Blazor 的專案範本為基礎的應用程式 Blazor WebAssembly ， <xref:Microsoft.AspNetCore.Components.WebAssembly.Hosting.IWebAssemblyHostEnvironment.BaseAddress?displayProperty=nameWithType> `new Uri(builder.HostEnvironment.BaseAddress)` 預設會將 () 指派給 <xref:System.Net.Http.HttpClient.BaseAddress?displayProperty=nameWithType> 。
 
-`FetchData`component （ `Pages/FetchData.razor` ）：
+`FetchData`元件 (`Pages/FetchData.razor`) ：
 
 ```razor
 @inject WeatherForecastClient Client
@@ -240,7 +245,7 @@ protected override async Task OnInitializedAsync()
 }
 ```
 
-## <a name="configure-the-httpclient-handler"></a>設定 HttpClient 處理常式
+## <a name="configure-the-httpclient-handler"></a>設定 `HttpClient` 處理常式
 
 您可以 <xref:Microsoft.AspNetCore.Components.WebAssembly.Authentication.AuthorizationMessageHandler.ConfigureHandler%2A> 針對輸出 HTTP 要求進一步設定處理常式。
 
@@ -255,9 +260,9 @@ builder.Services.AddHttpClient<WeatherForecastClient>(
         scopes: new[] { "example.read", "example.write" }));
 ```
 
-針對以裝載 Blazor 的範本為基礎的應用程式 Blazor WebAssembly ， <xref:Microsoft.AspNetCore.Components.WebAssembly.Hosting.IWebAssemblyHostEnvironment.BaseAddress?displayProperty=nameWithType> 可以指派給：
+針對以裝載 Blazor 的專案範本為基礎的應用程式 Blazor WebAssembly ， <xref:Microsoft.AspNetCore.Components.WebAssembly.Hosting.IWebAssemblyHostEnvironment.BaseAddress?displayProperty=nameWithType> 預設會指派給下列內容：
 
-* <xref:System.Net.Http.HttpClient.BaseAddress?displayProperty=nameWithType>（ `new Uri(builder.HostEnvironment.BaseAddress)` ）。
+* <xref:System.Net.Http.HttpClient.BaseAddress?displayProperty=nameWithType> (`new Uri(builder.HostEnvironment.BaseAddress)`) 。
 * 陣列的 URL `authorizedUrls` 。
 
 ## <a name="unauthenticated-or-unauthorized-web-api-requests-in-an-app-with-a-secure-default-client"></a>在具有安全預設用戶端的應用程式中，未經驗證或未經授權的 Web API 要求
@@ -271,11 +276,11 @@ builder.Services.AddHttpClient("ServerAPI.NoAuthenticationClient",
     client => client.BaseAddress = new Uri("https://www.example.com/base"));
 ```
 
-針對以裝載 Blazor 的範本為基礎的應用程式 Blazor WebAssembly ， <xref:Microsoft.AspNetCore.Components.WebAssembly.Hosting.IWebAssemblyHostEnvironment.BaseAddress?displayProperty=nameWithType> `new Uri(builder.HostEnvironment.BaseAddress)` 可以將（）指派給 <xref:System.Net.Http.HttpClient.BaseAddress?displayProperty=nameWithType> 。
+針對以裝載 Blazor 的專案範本為基礎的應用程式 Blazor WebAssembly ， <xref:Microsoft.AspNetCore.Components.WebAssembly.Hosting.IWebAssemblyHostEnvironment.BaseAddress?displayProperty=nameWithType> `new Uri(builder.HostEnvironment.BaseAddress)` 預設會將 () 指派給 <xref:System.Net.Http.HttpClient.BaseAddress?displayProperty=nameWithType> 。
 
 先前的註冊是除了現有的安全預設註冊之外 <xref:System.Net.Http.HttpClient> 。
 
-元件會 <xref:System.Net.Http.HttpClient> 從 <xref:System.Net.Http.IHttpClientFactory> （ [`Microsoft.Extensions.Http`](https://www.nuget.org/packages/Microsoft.Extensions.Http) 套件）建立，以提出未經驗證或未經授權的要求：
+元件會 <xref:System.Net.Http.HttpClient> 從 <xref:System.Net.Http.IHttpClientFactory> (封裝建立， [`Microsoft.Extensions.Http`](https://www.nuget.org/packages/Microsoft.Extensions.Http)) 以提出未經驗證或未經授權的要求：
 
 ```razor
 @inject IHttpClientFactory ClientFactory
@@ -306,7 +311,7 @@ builder.Services.AddHttpClient("ServerAPI.NoAuthenticationClient",
 
 呼叫可以手動取得存取權杖 `IAccessTokenProvider.RequestAccessToken` 。
 
-在下列範例中，應用程式需要額外的 Azure Active Directory （AAD） Microsoft Graph API 範圍，才能讀取使用者資料和傳送郵件。 在 Azure AAD 入口網站中新增 Microsoft Graph API 許可權之後，用戶端應用程式中會設定額外的範圍。
+在下列範例中，應用程式需要額外的 Azure Active Directory (AAD) Microsoft Graph API 範圍，才能讀取使用者資料及傳送郵件。 在 Azure AAD 入口網站中新增 Microsoft Graph API 許可權之後，用戶端應用程式中會設定額外的範圍。
 
 `Program.Main` (`Program.cs`):
 
@@ -350,9 +355,9 @@ if (tokenResult.TryGetToken(out var token))
 * `true`包含 `token` 使用的。
 * `false`如果未抓取權杖，則為。
 
-## <a name="httpclient-and-httprequestmessage-with-fetch-api-request-options"></a>具有 Fetch API 要求選項的 HttpClient 和 HttpRequestMessage
+## <a name="httpclient-and-httprequestmessage-with-fetch-api-request-options"></a>`HttpClient``HttpRequestMessage`使用 FETCH API 要求選項的和
 
-在應用程式中的 WebAssembly 上執行時 Blazor WebAssembly [`HttpClient`](xref:fundamentals/http-requests) （[API 檔](xref:System.Net.Http.HttpClient)），並 <xref:System.Net.Http.HttpRequestMessage> 可用於自訂要求。 例如，您可以指定 HTTP 方法和要求標頭。 下列元件會對 `POST` 伺服器上的 To Do LIST API 端點提出要求，並顯示回應主體：
+在應用程式中的 WebAssembly 上執行時 Blazor WebAssembly ， [`HttpClient`](xref:fundamentals/http-requests) ([API 檔](xref:System.Net.Http.HttpClient)) 並 <xref:System.Net.Http.HttpRequestMessage> 可用於自訂要求。 例如，您可以指定 HTTP 方法和要求標頭。 下列元件會對 `POST` 伺服器上的 To Do LIST API 端點提出要求，並顯示回應主體：
 
 ```razor
 @page "/todorequest"
@@ -414,7 +419,7 @@ if (tokenResult.TryGetToken(out var token))
 }
 ```
 
-.NET WebAssembly 的執行會 <xref:System.Net.Http.HttpClient> 使用[WindowOrWorkerGlobalScope。 fetch （）](https://developer.mozilla.org/docs/Web/API/WindowOrWorkerGlobalScope/fetch)。 Fetch 可讓您設定數個[要求特有的選項](https://developer.mozilla.org/docs/Web/API/WindowOrWorkerGlobalScope/fetch#Parameters)。 
+.NET WebAssembly 的執行會 <xref:System.Net.Http.HttpClient> 使用[WindowOrWorkerGlobalScope ( # B1 ](https://developer.mozilla.org/docs/Web/API/WindowOrWorkerGlobalScope/fetch)。 Fetch 可讓您設定數個[要求特有的選項](https://developer.mozilla.org/docs/Web/API/WindowOrWorkerGlobalScope/fetch#Parameters)。 
 
 您可以使用 <xref:System.Net.Http.HttpRequestMessage> 下表所示的擴充方法來設定 HTTP 提取要求選項。
 
@@ -435,18 +440,18 @@ HTTP 回應通常會在 Blazor WebAssembly 應用程式中進行緩衝處理，�
 requestMessage.SetBrowserRequestCredentials(BrowserRequestCredentials.Include);
 ```
 
-如需有關提取 API 選項的詳細資訊，請參閱[MDN web 檔： WindowOrWorkerGlobalScope。 Fetch （）:P arameters](https://developer.mozilla.org/docs/Web/API/WindowOrWorkerGlobalScope/fetch#Parameters)。
+如需有關 Fetch API 選項的詳細資訊，請參閱[MDN web 檔： WindowOrWorkerGlobalScope ( # A1： Parameters](https://developer.mozilla.org/docs/Web/API/WindowOrWorkerGlobalScope/fetch#Parameters)。
 
-## <a name="cross-origin-resource-sharing-cors"></a>跨原始來源資源分享（CORS）
+## <a name="cross-origin-resource-sharing-cors"></a>跨原始資源分享 (CORS) 
 
-在 CORS 要求上傳送認證（授權 cookie/標頭）時， `Authorization` cors 原則必須允許標頭。
+將認證傳送 (在 CORS 要求上) 授權 cookie/標頭時， `Authorization` cors 原則必須允許標頭。
 
 下列原則包含的設定：
 
-* 要求來源（ `http://localhost:5000` 、 `https://localhost:5001` ）。
-* Any 方法（動詞）。
-* `Content-Type`和 `Authorization` 標頭。 若要允許自訂標頭（例如 `x-custom-header` ），請在呼叫時列出標頭 <xref:Microsoft.AspNetCore.Cors.Infrastructure.CorsPolicyBuilder.WithHeaders*> 。
-* 用戶端 JavaScript 程式碼（ `credentials` 屬性設為）所設定的認證 `include` 。
+* 要求來源 (`http://localhost:5000` ， `https://localhost:5001`) 。
+* 任何方法 (動詞) 。
+* `Content-Type`和 `Authorization` 標頭。 若要允許自訂標頭 (例如， `x-custom-header`) ，請在呼叫時列出標頭 <xref:Microsoft.AspNetCore.Cors.Infrastructure.CorsPolicyBuilder.WithHeaders*> 。
+* 用戶端 JavaScript 程式碼所設定的認證 (`credentials` 屬性設為 `include`) 。
 
 ```csharp
 app.UseCors(policy => 
@@ -456,11 +461,13 @@ app.UseCors(policy =>
     .AllowCredentials());
 ```
 
-如需詳細資訊，請參閱 <xref:security/cors> 和範例應用程式的 HTTP 要求測試者元件（ `Components/HTTPRequestTester.razor` ）。
+以裝載 Blazor 的專案範本為基礎的託管解決方案，會 Blazor 針對用戶端和伺服器應用程式使用相同的基底位址。 用戶端應用程式的 <xref:System.Net.Http.HttpClient.BaseAddress?displayProperty=nameWithType> 預設會設定為的 URI `builder.HostEnvironment.BaseAddress` 。 從裝載的專案範本建立之託管應用程式的預設設定中，**不**需要 CORS 設定 Blazor 。 不是由伺服器專案裝載且不會共用伺服器應用程式基底位址的其他用戶端應用程式，**則需要伺服器**專案中的 CORS 設定。
+
+如需詳細資訊，請參閱 <xref:security/cors> 和範例應用程式的 HTTP 要求測試器元件 (`Components/HTTPRequestTester.razor`) 。
 
 ## <a name="handle-token-request-errors"></a>處理權杖要求錯誤
 
-當單一頁面應用程式（SPA）使用 Open ID Connect （OIDC）來驗證使用者時，驗證狀態會在 SPA 和 Identity 提供者（IP）中的本機維護，其格式為使用者提供其認證所設定的會話 cookie。
+當單一頁面應用程式 (SPA) 使用 OpenID Connect (OIDC) 來驗證使用者時，驗證狀態會在 SPA 和提供者中的本機維護 Identity (IP) 以設定為使用者提供其認證的結果的會話 cookie 形式。
 
 IP 為使用者發出的權杖通常會在短時間內有效，大約一小時，因此用戶端應用程式必須定期提取新的權杖。 否則，在授與的權杖過期之後，使用者會被登出。 在大多數情況下，OIDC 用戶端可以布建新的權杖，而不需要使用者重新驗證，因為它會保留在 IP 內的驗證狀態或「會話」。
 
@@ -480,7 +487,7 @@ IP 為使用者發出的權杖通常會在短時間內有效，大約一小時�
 
 當令牌要求失敗時，您必須決定是否要在執行重新導向之前，先儲存任何目前的狀態。 有數種方法存在，並增加複雜性層級：
 
-* 將目前的頁面狀態儲存在會話儲存體中。 在[ `OnInitializedAsync` 生命週期事件](xref:blazor/components/lifecycle#component-initialization-methods)（ <xref:Microsoft.AspNetCore.Components.ComponentBase.OnInitializedAsync%2A> ）期間，檢查是否可以還原狀態，再繼續進行。
+* 將目前的頁面狀態儲存在會話儲存體中。 在[ `OnInitializedAsync` 生命週期事件](xref:blazor/components/lifecycle#component-initialization-methods) (<xref:Microsoft.AspNetCore.Components.ComponentBase.OnInitializedAsync%2A>) 期間，檢查狀態是否可以還原，然後再繼續進行。
 * 新增查詢字串參數，並使用它來通知應用程式它需要重新序列化先前儲存的狀態。
 * 新增具有唯一識別碼的查詢字串參數，以將資料儲存在會話儲存體中，而不會有風險與其他專案衝突。
 
@@ -552,7 +559,7 @@ IP 為使用者發出的權杖通常會在短時間內有效，大約一小時�
 
 在驗證作業期間，某些情況下，您會想要在瀏覽器重新導向至 IP 之前，先儲存應用程式狀態。 當您使用狀態容器，而且想要在驗證成功之後還原狀態時，就可能發生這種情況。 您可以使用自訂驗證狀態物件來保留應用程式特定狀態或其參考，並在驗證作業成功完成後還原該狀態。 下列範例示範方法。
 
-狀態容器類別是在應用程式中建立，其中具有屬性來保存應用程式的狀態值。 在下列範例中，容器是用來維護預設範本 `Counter` 元件（）的計數器值 `Pages/Counter.razor` 。 序列化和還原序列化容器的方法是以為基礎 <xref:System.Text.Json> 。
+狀態容器類別是在應用程式中建立，其中具有屬性來保存應用程式的狀態值。 在下列範例中，容器是用來維護預設專案範本元件的計數器值 `Counter` (`Pages/Counter.razor`) 。 序列化和還原序列化容器的方法是以為基礎 <xref:System.Text.Json> 。
 
 ```csharp
 using System.Text.Json;
@@ -620,7 +627,7 @@ public class ApplicationAuthenticationState : RemoteAuthenticationState
 }
 ```
 
-`Authentication`元件（ `Pages/Authentication.razor` ）會使用本機會話儲存體搭配序列化和還原序列化方法，來儲存及還原應用程式的狀態 `StateContainer` ， `GetStateForLocalStorage` 以及 `SetStateFromLocalStorage` ：
+`Authentication`元件 (`Pages/Authentication.razor`) 使用本機會話儲存體搭配序列化和還原序列化方法，來儲存及還原應用程式的狀態 `StateContainer` ， `GetStateForLocalStorage` 以及 `SetStateFromLocalStorage` ：
 
 ```razor
 @page "/authentication/{action}"
@@ -672,9 +679,9 @@ public class ApplicationAuthenticationState : RemoteAuthenticationState
 }
 ```
 
-這個範例會使用 Azure Active Directory （AAD）進行驗證。 在 `Program.Main` （ `Program.cs` ）中：
+這個範例會使用 Azure Active Directory (AAD) 進行驗證。 在 `Program.Main` (`Program.cs`) 中：
 
-* `ApplicationAuthenticationState`已設定為 Microsoft 驗證 Library （MSAL） `RemoteAuthenticationState` 類型。
+* `ApplicationAuthenticationState`已設定為 Microsoft 驗證程式庫 (MSAL) `RemoteAuthenticationState` 類型。
 * 狀態容器會在服務容器中註冊。
 
 ```csharp
@@ -706,7 +713,7 @@ builder.Services.AddSingleton<StateContainer>();
 
 在下列範例中，所有路徑的前面都會加上 `/security` 。
 
-`Authentication`component （ `Pages/Authentication.razor` ）：
+`Authentication`元件 (`Pages/Authentication.razor`) ：
 
 ```razor
 @page "/security/{action}"
@@ -750,7 +757,7 @@ builder.Services.AddApiAuthorization(options => {
 
 <xref:Microsoft.AspNetCore.Components.WebAssembly.Authentication.RemoteAuthenticatorView>針對每個驗證狀態包含一組預設的 UI 元件。 您可以藉由傳入自訂來自訂每個狀態 <xref:Microsoft.AspNetCore.Components.RenderFragment> 。 若要在初始登入程式期間自訂顯示的文字，可以變更，如下所示 <xref:Microsoft.AspNetCore.Components.WebAssembly.Authentication.RemoteAuthenticatorView> 。
 
-`Authentication`component （ `Pages/Authentication.razor` ）：
+`Authentication`元件 (`Pages/Authentication.razor`) ：
 
 ```razor
 @page "/security/{action}"
@@ -892,7 +899,7 @@ public class CustomAccountFactory
 * 不需要授權的 Prerenders 路徑。
 * 不需要授權的已呈現路徑。
 
-在用戶端應用程式的 `Program` 類別（ `Program.cs` ）中，將常見的服務註冊因素劃分為不同的方法（例如， `ConfigureCommonServices` ）：
+在用戶端應用程式的 `Program` 類別 (`Program.cs`) 中，請將常見的服務註冊因素劃分為不同的方法 (例如 `ConfigureCommonServices`) ：
 
 ```csharp
 public class Program
@@ -975,7 +982,7 @@ app.UseEndpoints(endpoints =>
 
 Blazor WebAssembly使用協力廠商提供者驗證和授權託管應用程式時，有數個選項可用來驗證使用者。 您選擇哪一個取決於您的案例。
 
-如需詳細資訊，請參閱 <xref:security/authentication/social/additional-claims> 。
+如需詳細資訊，請參閱<xref:security/authentication/social/additional-claims>。
 
 ### <a name="authenticate-users-to-only-call-protected-third-party-apis"></a>驗證使用者只呼叫受保護的協力廠商 Api
 
@@ -1015,9 +1022,9 @@ Identity使用協力廠商登入提供者進行設定。 取得協力廠商 API 
 * 伺服器可以儲存重新整理權杖，並確保應用程式不會失去協力廠商資源的存取權。
 * 應用程式無法從可能包含更多敏感性許可權的伺服器洩漏存取權杖。
 
-## <a name="use-open-id-connect-oidc-v20-endpoints"></a>使用 Open ID Connect （OIDC） v2.0 端點
+## <a name="use-openid-connect-oidc-v20-endpoints"></a>使用 OpenID Connect (OIDC) v2.0 端點
 
-驗證程式庫和 Blazor 範本會使用 OPEN ID Connect （OIDC） v1.0 端點。 若要使用 v2.0 端點，請設定 JWT 持有人 <xref:Microsoft.AspNetCore.Builder.JwtBearerOptions.Authority?displayProperty=nameWithType> 選項。 在下列範例中，會將區段附加至屬性，以針對 v2.0 設定 AAD `v2.0` <xref:Microsoft.AspNetCore.Builder.JwtBearerOptions.Authority> ：
+驗證程式庫和 Blazor 專案範本會使用 OpenID connect (OIDC) v1.0 端點。 若要使用 v2.0 端點，請設定 JWT 持有人 <xref:Microsoft.AspNetCore.Builder.JwtBearerOptions.Authority?displayProperty=nameWithType> 選項。 在下列範例中，會將區段附加至屬性，以針對 v2.0 設定 AAD `v2.0` <xref:Microsoft.AspNetCore.Builder.JwtBearerOptions.Authority> ：
 
 ```csharp
 builder.Services.Configure<JwtBearerOptions>(
@@ -1028,7 +1035,7 @@ builder.Services.Configure<JwtBearerOptions>(
     });
 ```
 
-或者，您也可以在應用程式設定（）檔案中進行設定 `appsettings.json` ：
+或者，您也可以在應用程式設定 () 檔案中進行設定 `appsettings.json` ：
 
 ```json
 {
@@ -1039,16 +1046,16 @@ builder.Services.Configure<JwtBearerOptions>(
 }
 ```
 
-如果在區段上對授權單位的追蹤不適合應用程式的 OIDC 提供者（例如使用非 AAD 提供者），請 <xref:Microsoft.AspNetCore.Builder.OpenIdConnectOptions.Authority> 直接設定屬性。 請在 <xref:Microsoft.AspNetCore.Builder.JwtBearerOptions> 應用程式佈建檔案（）中， `appsettings.json` 使用金鑰來設定屬性 `Authority` 。
+如果在區段上對授權單位的追蹤不適合應用程式的 OIDC 提供者（例如使用非 AAD 提供者），請 <xref:Microsoft.AspNetCore.Builder.OpenIdConnectOptions.Authority> 直接設定屬性。 請在 <xref:Microsoft.AspNetCore.Builder.JwtBearerOptions> 或應用程式佈建檔案中設定屬性， (`appsettings.json`) 加上 `Authority` 金鑰。
 
-針對 v2.0 端點，識別碼權杖中的宣告清單會變更。 如需詳細資訊，請參閱[為何要更新至 Microsoft 身分識別平臺（v2.0）？](/azure/active-directory/azuread-dev/azure-ad-endpoint-comparison)。
+針對 v2.0 端點，識別碼權杖中的宣告清單會變更。 如需詳細資訊，請參閱[為何要將 Microsoft 身分識別平臺更新 (v2.0) ？](/azure/active-directory/azuread-dev/azure-ad-endpoint-comparison)。
 
 ## <a name="configure-and-use-grpc-in-components"></a>設定和使用元件中的 gRPC
 
 若要將 Blazor WebAssembly 應用程式設定為使用[ASP.NET Core gRPC 架構](xref:grpc/index)：
 
-* 在伺服器上啟用 gRPC-Web。 如需詳細資訊，請參閱 <xref:grpc/browser> 。
-* 為應用程式的訊息處理常式註冊 gRPC 服務。 下列範例會設定應用程式的授權訊息處理常式，以使用[ `GreeterClient` gRPC 教學](xref:tutorials/grpc/grpc-start#create-a-grpc-service)課程（）中的服務 `Program.Main` ：
+* 在伺服器上啟用 gRPC-Web。 如需詳細資訊，請參閱<xref:grpc/browser>。
+* 為應用程式的訊息處理常式註冊 gRPC 服務。 下列範例會設定應用程式的授權訊息處理常式，以使用[ `GreeterClient` gRPC 教學課程中的服務](xref:tutorials/grpc/grpc-start#create-a-grpc-service) (`Program.Main`) ：
 
 ```csharp
 using System.Net.Http;
@@ -1073,9 +1080,9 @@ builder.Services.AddScoped(sp =>
 });
 ```
 
-預留位置 `{APP ASSEMBLY}` 是應用程式的元件名稱（例如， `BlazorSample` ）。 將檔案放 `.proto` 在 `Shared` 託管方案的專案中 Blazor 。
+預留位置 `{APP ASSEMBLY}` 是應用程式的元件名稱 (例如， `BlazorSample`) 。 將檔案放 `.proto` 在 `Shared` 託管方案的專案中 Blazor 。
 
-用戶端應用程式中的元件可以使用 gRPC 用戶端（）進行 gRPC 呼叫 `Pages/Grpc.razor` ：
+用戶端應用程式中的元件可以使用 gRPC 用戶端 () 來進行 gRPC 呼叫 `Pages/Grpc.razor` ：
 
 ```razor
 @page "/grpc"
@@ -1115,6 +1122,6 @@ Server response: <strong>@serverResponse</strong>
 }
 ```
 
-預留位置 `{APP ASSEMBLY}` 是應用程式的元件名稱（例如， `BlazorSample` ）。 若要使用 `Status.DebugException` 屬性，請使用[Grpc .Net. Client](https://www.nuget.org/packages/Grpc.Net.Client) version 2.30.0 或更新版本。
+預留位置 `{APP ASSEMBLY}` 是應用程式的元件名稱 (例如， `BlazorSample`) 。 若要使用 `Status.DebugException` 屬性，請使用[Grpc .Net. Client](https://www.nuget.org/packages/Grpc.Net.Client) version 2.30.0 或更新版本。
 
 如需詳細資訊，請參閱<xref:grpc/browser>。

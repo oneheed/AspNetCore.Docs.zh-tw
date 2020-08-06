@@ -15,14 +15,14 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/components/integrate-components-into-razor-pages-and-mvc-apps
-ms.openlocfilehash: 6aef51a0f8bf4ec2e7cb6115856bc465a90ec2ee
-ms.sourcegitcommit: fa89d6553378529ae86b388689ac2c6f38281bb9
+ms.openlocfilehash: a28c43ed68adb7af9c30f7ae62872811361d8f9c
+ms.sourcegitcommit: 84150702757cf7a7b839485382420e8db8e92b9c
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 07/07/2020
-ms.locfileid: "86059842"
+ms.lasthandoff: 08/05/2020
+ms.locfileid: "87819089"
 ---
-# <a name="integrate-aspnet-core-razor-components-into-razor-pages-and-mvc-apps"></a>將 ASP.NET Core Razor 元件整合至 Razor 頁面和 MVC 應用程式
+# <a name="integrate-aspnet-core-no-locrazor-components-into-no-locrazor-pages-and-mvc-apps"></a>將 ASP.NET Core Razor 元件整合至 Razor 頁面和 MVC 應用程式
 
 By [Luke Latham](https://github.com/guardrex)和[Daniel Roth](https://github.com/danroth27)
 
@@ -39,7 +39,7 @@ Razor元件可以整合至 Razor 頁面和 MVC 應用程式中。 當頁面或�
 
 現有的 Razor 頁面或 MVC 應用程式可以將 Razor 元件整合至頁面和視圖：
 
-1. 在應用程式的版面配置檔案（ `_Layout.cshtml` ）中：
+1. 在應用程式的設定檔案中 (`_Layout.cshtml`) ：
 
    * 將下列 `<base>` 標記新增至 `<head>` 元素：
 
@@ -47,7 +47,7 @@ Razor元件可以整合至 Razor 頁面和 MVC 應用程式中。 當頁面或�
      <base href="~/" />
      ```
 
-     `href`上述範例中的值（*應用程式基底路徑*）假設應用程式位於根 URL 路徑（ `/` ）。 如果應用程式是子應用程式，請遵循文章的*應用程式基底路徑*一節中的指導方針 <xref:blazor/host-and-deploy/index#app-base-path> 。
+     在 `href` 上述範例中， (*應用程式基底路徑*) 的值假設應用程式位於根 URL 路徑 (`/`) 。 如果應用程式是子應用程式，請遵循文章的*應用程式基底路徑*一節中的指導方針 <xref:blazor/host-and-deploy/index#app-base-path> 。
 
      此檔案 `_Layout.cshtml` 位於 MVC 應用程式中頁面應用程式或 Views/shared 資料夾的*Pages/shared*資料夾中 Razor 。 *Views/Shared*
 
@@ -59,7 +59,7 @@ Razor元件可以整合至 Razor 頁面和 MVC 應用程式中。 當頁面或�
 
      架構會將*blazor.server.js*腳本新增至應用程式。 不需要手動將腳本新增至應用程式。
 
-1. `_Imports.razor`使用下列內容將檔案新增至專案的根資料夾（將最後一個命名空間變更 `MyAppNamespace` 為應用程式的命名空間）：
+1. `_Imports.razor`使用下列內容將檔案新增至專案的根資料夾， (將最後一個命名空間變更 `MyAppNamespace` 為應用程式) 的命名空間：
 
    ```razor
    @using System.Net.Http
@@ -86,7 +86,7 @@ Razor元件可以整合至 Razor 頁面和 MVC 應用程式中。 當頁面或�
 
 1. 將元件整合到任何頁面或視圖中。 如需詳細資訊，請參閱[從頁面或視圖呈現元件](#render-components-from-a-page-or-view)一節。
 
-## <a name="use-routable-components-in-a-razor-pages-app"></a>在頁面應用程式中使用可路由的元件 Razor
+## <a name="use-routable-components-in-a-no-locrazor-pages-app"></a>在頁面應用程式中使用可路由的元件 Razor
 
 *本節適用于新增可直接從使用者要求路由傳送的元件。*
 
@@ -99,7 +99,7 @@ Razor元件可以整合至 Razor 頁面和 MVC 應用程式中。 當頁面或�
    ```razor
    @using Microsoft.AspNetCore.Components.Routing
 
-   <Router AppAssembly="typeof(Program).Assembly">
+   <Router AppAssembly="@typeof(Program).Assembly">
        <Found Context="routeData">
            <RouteView RouteData="routeData" />
        </Found>
@@ -174,7 +174,7 @@ Razor在 MVC 應用程式中支援可路由的元件：
    ```razor
    @using Microsoft.AspNetCore.Components.Routing
 
-   <Router AppAssembly="typeof(Program).Assembly">
+   <Router AppAssembly="@typeof(Program).Assembly">
        <Found Context="routeData">
            <RouteView RouteData="routeData" />
        </Found>
@@ -274,7 +274,7 @@ Razor在 MVC 應用程式中支援可路由的元件：
 }
 ```
 
-如需詳細資訊，請參閱 <xref:mvc/views/tag-helpers/builtin-th/component-tag-helper> 。
+如需詳細資訊，請參閱<xref:mvc/views/tag-helpers/builtin-th/component-tag-helper>。
 
 ### <a name="render-noninteractive-components"></a>呈現非互動式元件
 
@@ -297,7 +297,7 @@ Razor在 MVC 應用程式中支援可路由的元件：
 }
 ```
 
-如需詳細資訊，請參閱 <xref:mvc/views/tag-helpers/builtin-th/component-tag-helper> 。
+如需詳細資訊，請參閱<xref:mvc/views/tag-helpers/builtin-th/component-tag-helper>。
 
 ## <a name="component-namespaces"></a>元件命名空間
 

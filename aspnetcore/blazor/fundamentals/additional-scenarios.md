@@ -15,20 +15,20 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/fundamentals/additional-scenarios
-ms.openlocfilehash: b28e4e43b88fcf8eab9e8959142cca21223c57ff
-ms.sourcegitcommit: e216e8f4afa21215dc38124c28d5ee19f5ed7b1e
+ms.openlocfilehash: b32710e515d111b7dd6556f1db55082cd56a82b5
+ms.sourcegitcommit: 84150702757cf7a7b839485382420e8db8e92b9c
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 07/10/2020
-ms.locfileid: "86239630"
+ms.lasthandoff: 08/05/2020
+ms.locfileid: "87818998"
 ---
-# <a name="aspnet-core-blazor-hosting-model-configuration"></a>ASP.NET Core Blazor 裝載模型設定
+# <a name="aspnet-core-no-locblazor-hosting-model-configuration"></a>ASP.NET Core Blazor 裝載模型設定
 
-作者：[Daniel Roth](https://github.com/danroth27) 和 [Luke Latham](https://github.com/guardrex)
+By [Daniel Roth](https://github.com/danroth27)、 [Mackinnon Buck](https://github.com/MackinnonBuck)和[Luke Latham](https://github.com/guardrex)
 
 本文涵蓋主控模型設定。
 
-### <a name="signalr-cross-origin-negotiation-for-authentication"></a>SignalR用於驗證的跨原始來源協調
+### <a name="no-locsignalr-cross-origin-negotiation-for-authentication"></a>SignalR用於驗證的跨原始來源協調
 
 *本節適用于 Blazor WebAssembly 。*
 
@@ -59,7 +59,7 @@ ms.locfileid: "86239630"
       }).Build();
   ```
 
-如需詳細資訊，請參閱 <xref:signalr/configuration#configure-additional-options> 。
+如需詳細資訊，請參閱<xref:signalr/configuration#configure-additional-options>。
 
 ## <a name="reflect-the-connection-state-in-the-ui"></a>反映 UI 中的連接狀態
 
@@ -125,7 +125,7 @@ Blazor Server在建立伺服器的用戶端連接之前，預設會將應用程�
 
 不支援從靜態 HTML 網頁轉譯伺服器元件。
 
-## <a name="configure-the-signalr-client-for-blazor-server-apps"></a>設定 SignalR 應用程式的用戶端 Blazor Server
+## <a name="configure-the-no-locsignalr-client-for-no-locblazor-server-apps"></a>設定 SignalR 應用程式的用戶端 Blazor Server
 
 *本節適用于 Blazor Server 。*
 
@@ -141,7 +141,7 @@ Blazor Server在建立伺服器的用戶端連接之前，預設會將應用程�
 ```cshtml
     ...
 
-    <script src="_framework/blazor.server.js" autostart="false"></script>
+    <script autostart="false" src="_framework/blazor.server.js"></script>
     <script>
       Blazor.start({
         configureSignalR: function (builder) {
@@ -169,7 +169,7 @@ Blazor Server在建立伺服器的用戶端連接之前，預設會將應用程�
 ```cshtml
     ...
 
-    <script src="_framework/blazor.server.js" autostart="false"></script>
+    <script autostart="false" src="_framework/blazor.server.js"></script>
     <script>
       Blazor.start({
         reconnectionHandler: {
@@ -191,7 +191,7 @@ Blazor Server在建立伺服器的用戶端連接之前，預設會將應用程�
 ```cshtml
     ...
 
-    <script src="_framework/blazor.server.js" autostart="false"></script>
+    <script autostart="false" src="_framework/blazor.server.js"></script>
     <script>
       Blazor.start({
         reconnectionOptions: {
@@ -213,7 +213,7 @@ Blazor Server在建立伺服器的用戶端連接之前，預設會將應用程�
 ```cshtml
     ...
 
-    <script src="_framework/blazor.server.js" autostart="false"></script>
+    <script autostart="false" src="_framework/blazor.server.js"></script>
     <script>
       window.addEventListener('beforeunload', function () {
         Blazor.defaultReconnectionHandler._reconnectionDisplay = {};
@@ -230,6 +230,41 @@ Blazor.defaultReconnectionHandler._reconnectionDisplay =
 ```
 
 預留位置 `{ELEMENT ID}` 是要顯示之 HTML 專案的識別碼。
+
+::: moniker range=">= aspnetcore-5.0"
+
+## <a name="influence-html-head-tag-elements"></a>影響 HTML `<head>` 標記元素
+
+*本節適用于 Blazor WebAssembly 和 Blazor Server 。*
+
+轉譯時，、 `Title` `Link` 和元件會 `Meta` 在 HTML 標籤元素中新增或更新資料 `<head>` ：
+
+```razor
+@using Microsoft.AspNetCore.Components.Web.Extensions.Head
+
+<Title Value="{TITLE}" />
+<Link href="{URL}" rel="stylesheet" />
+<Meta content="{DESCRIPTION}" name="description" />
+```
+
+在上述範例中，、和的預留位置為 `{TITLE}` `{URL}` `{DESCRIPTION}` 字串值、 Razor 變數或 Razor 運算式。
+
+適用下列特性：
+
+* 支援伺服器端預先呈現。
+* `Value`參數是元件唯一有效的參數 `Title` 。
+* 提供給和元件的 HTML 屬性 `Meta` `Link` 會在[其他屬性](xref:blazor/components/index#attribute-splatting-and-arbitrary-parameters)中捕捉，並傳遞至轉譯的 HTML 標籤。
+* 若為多個 `Title` 元件，頁面的標題會反映 `Value` 最後轉譯之 `Title` 元件的。
+* 如果 `Meta` 包含相同屬性的多個或 `Link` 元件，則每個或元件只會呈現一個 HTML 標籤 `Meta` `Link` 。 兩個 `Meta` 或 `Link` 元件不能參考相同的呈現 HTML 標籤。
+* 對現有或元件的參數所做的變更 `Meta` `Link` 會反映在其轉譯的 HTML 標籤中。
+* 當 `Link` 或 `Meta` 元件不再呈現，因而由架構處置時，會移除其呈現的 HTML 標籤。
+
+在子元件中使用其中一個 framework 元件時，只要呈現包含架構元件的子元件，轉譯的 HTML 標籤就會影響父元件的任何其他子元件。 在子元件中使用其中一個架構元件，並將 HTML 標籤放在或中的差異， `wwwroot/index.html` 在於 `Pages/_Host.cshtml` 架構元件的轉譯 HTML 標籤：
+
+* 可由應用程式狀態修改。 應用程式狀態無法修改硬式編碼的 HTML 標籤。
+* 當父元件不再呈現時，會從 HTML 中移除 `<head>` 。
+
+::: moniker-end
 
 ## <a name="additional-resources"></a>其他資源
 

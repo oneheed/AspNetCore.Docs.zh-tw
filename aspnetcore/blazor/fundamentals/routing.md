@@ -15,14 +15,14 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/fundamentals/routing
-ms.openlocfilehash: 4f85c4a9803482f39446dda599f10829c9879f27
-ms.sourcegitcommit: 6fb27ea41a92f6d0e91dfd0eba905d2ac1a707f7
+ms.openlocfilehash: f7110688a7a03dd0cf533fa5f9759af3363169f8
+ms.sourcegitcommit: 84150702757cf7a7b839485382420e8db8e92b9c
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 07/15/2020
-ms.locfileid: "86407758"
+ms.lasthandoff: 08/05/2020
+ms.locfileid: "87818933"
 ---
-# <a name="aspnet-core-blazor-routing"></a>ASP.NET Core Blazor 路由
+# <a name="aspnet-core-no-locblazor-routing"></a>ASP.NET Core Blazor 路由
 
 作者：[Luke Latham](https://github.com/guardrex)
 
@@ -43,7 +43,7 @@ Blazor Server已整合至[ASP.NET Core 端點路由](xref:fundamentals/routing)�
 此 <xref:Microsoft.AspNetCore.Components.Routing.Router> 元件可讓您使用指定的路由來路由傳送至每個元件。 <xref:Microsoft.AspNetCore.Components.Routing.Router>元件會出現在檔案中 `App.razor` ：
 
 ```razor
-<Router AppAssembly="typeof(Startup).Assembly">
+<Router AppAssembly="@typeof(Startup).Assembly">
     <Found Context="routeData">
         <RouteView RouteData="@routeData" DefaultLayout="@typeof(MainLayout)" />
     </Found>
@@ -58,7 +58,7 @@ Blazor Server已整合至[ASP.NET Core 端點路由](xref:fundamentals/routing)�
 在執行時間， <xref:Microsoft.AspNetCore.Components.RouteView> 元件：
 
 * 從接收， <xref:Microsoft.AspNetCore.Components.RouteData> <xref:Microsoft.AspNetCore.Components.Routing.Router> 連同任何想要的參數。
-* 使用指定的參數，以配置（或選擇性的預設版面配置）呈現指定的元件。
+* 使用指定的參數，將指定的元件及其配置 (或選擇性的預設版面配置) 呈現。
 
 您可以選擇性地指定 <xref:Microsoft.AspNetCore.Components.RouteView.DefaultLayout> 具有版面配置類別的參數，以用於未指定版面配置的元件。 預設 Blazor 範本會指定 `MainLayout` 元件。 `MainLayout.razor`位於範本專案的資料夾中 `Shared` 。 如需版面配置的詳細資訊，請參閱 <xref:blazor/layouts> 。
 
@@ -72,7 +72,7 @@ Blazor Server已整合至[ASP.NET Core 端點路由](xref:fundamentals/routing)�
 ```
 
 > [!IMPORTANT]
-> 為了讓 Url 正確解析，應用程式必須 `<base>` 在其檔案 `wwwroot/index.html` （）或檔案（）中包含標記，並在 Blazor WebAssembly `Pages/_Host.cshtml` Blazor Server 屬性中指定應用程式基底路徑 `href` （ `<base href="/">` ）。 如需詳細資訊，請參閱 <xref:blazor/host-and-deploy/index#app-base-path> 。
+> 為了讓 Url 正確解析，應用程式必須在其檔案中包含標籤 `<base>` `wwwroot/index.html` (Blazor WebAssembly) 或檔案 `Pages/_Host.cshtml` (Blazor Server) 並在 `href` 屬性 () 中指定應用程式基底路徑 `<base href="/">` 。 如需詳細資訊，請參閱<xref:blazor/host-and-deploy/index#app-base-path>。
 
 ## <a name="provide-custom-content-when-content-isnt-found"></a>在找不到內容時提供自訂內容
 
@@ -100,7 +100,7 @@ Blazor Server已整合至[ASP.NET Core 端點路由](xref:fundamentals/routing)�
 
 ```razor
 <Router
-    AppAssembly="typeof(Program).Assembly"
+    AppAssembly="@typeof(Program).Assembly"
     AdditionalAssemblies="new[] { typeof(Component1).Assembly }">
     ...
 </Router>
@@ -108,7 +108,7 @@ Blazor Server已整合至[ASP.NET Core 端點路由](xref:fundamentals/routing)�
 
 ## <a name="route-parameters"></a>路由參數
 
-路由器會使用路由參數來填入具有相同名稱的對應元件參數（不區分大小寫）：
+路由器會使用路由參數，以相同名稱填入對應的元件參數， (不區分大小寫) ：
 
 ```razor
 @page "/RouteParameter"
@@ -136,7 +136,7 @@ Blazor Server已整合至[ASP.NET Core 端點路由](xref:fundamentals/routing)�
 在下列範例中，對元件的路由 `Users` 只會符合下列條件：
 
 * `Id`要求 URL 上有路由區段。
-* `Id`區段是一個整數（ `int` ）。
+* `Id`區段是 () 的整數 `int` 。
 
 [!code-razor[](routing/samples_snapshot/3.x/Constraint.razor?highlight=1)]
 
@@ -144,21 +144,21 @@ Blazor Server已整合至[ASP.NET Core 端點路由](xref:fundamentals/routing)�
 
 | 條件約束 | 範例           | 範例相符項目                                                                  | 非變異值<br>culture<br>比對 |
 | ---------- | ----------------- | -------------------------------------------------------------------------------- | :------------------------------: |
-| `bool`     | `{active:bool}`   | `true`, `FALSE`                                                                  | No                               |
-| `datetime` | `{dob:datetime}`  | `2016-12-31`, `2016-12-31 7:32pm`                                                | Yes                              |
-| `decimal`  | `{price:decimal}` | `49.99`, `-1,000.01`                                                             | Yes                              |
-| `double`   | `{weight:double}` | `1.234`, `-1,001.01e8`                                                           | Yes                              |
-| `float`    | `{weight:float}`  | `1.234`, `-1,001.01e8`                                                           | Yes                              |
-| `guid`     | `{id:guid}`       | `CD2C1638-1638-72D5-1638-DEADBEEF1638`, `{CD2C1638-1638-72D5-1638-DEADBEEF1638}` | No                               |
-| `int`      | `{id:int}`        | `123456789`, `-123456789`                                                        | Yes                              |
-| `long`     | `{ticks:long}`    | `123456789`, `-123456789`                                                        | Yes                              |
+| `bool`     | `{active:bool}`   | `true`, `FALSE`                                                                  | 否                               |
+| `datetime` | `{dob:datetime}`  | `2016-12-31`, `2016-12-31 7:32pm`                                                | 是                              |
+| `decimal`  | `{price:decimal}` | `49.99`, `-1,000.01`                                                             | 是                              |
+| `double`   | `{weight:double}` | `1.234`, `-1,001.01e8`                                                           | 是                              |
+| `float`    | `{weight:float}`  | `1.234`, `-1,001.01e8`                                                           | 是                              |
+| `guid`     | `{id:guid}`       | `CD2C1638-1638-72D5-1638-DEADBEEF1638`, `{CD2C1638-1638-72D5-1638-DEADBEEF1638}` | 否                               |
+| `int`      | `{id:int}`        | `123456789`, `-123456789`                                                        | 是                              |
+| `long`     | `{ticks:long}`    | `123456789`, `-123456789`                                                        | 是                              |
 
 > [!WARNING]
 > 確認 URL 可以轉換成 CLR 類型的路由條件約束 (例如 `int` 或 <xref:System.DateTime>) 一律使用不因國別而異的文化特性。 這些條件約束假設 URL 不可當地語系化。
 
 ### <a name="routing-with-urls-that-contain-dots"></a>包含點的 Url 路由
 
-在 Blazor Server 應用程式中，中的預設路由 `_Host.cshtml` 是 `/` （ `@page "/"` ）。 包含點（）的要求 URL `.` 不符合預設路由，因為 URL 會顯示要求檔案。 如果 Blazor 靜態檔案不存在，應用程式會傳回*404-找不*到的回應。 若要使用包含點的路由，請 `_Host.cshtml` 使用下列路由範本進行設定：
+在 Blazor Server 應用程式中，中的預設路由 `_Host.cshtml` 會 `/` (`@page "/"`) 。 包含點 () 的要求 URL `.` 不符合預設路由，因為 URL 會顯示要求檔案。 如果 Blazor 靜態檔案不存在，應用程式會傳回*404-找不*到的回應。 若要使用包含點的路由，請 `_Host.cshtml` 使用下列路由範本進行設定：
 
 ```cshtml
 @page "/{**path}"
@@ -166,17 +166,17 @@ Blazor Server已整合至[ASP.NET Core 端點路由](xref:fundamentals/routing)�
 
 此 `"/{**path}"` 範本包含：
 
-* 雙星號*catch-all*語法（ `**` ）可跨多個資料夾界限捕捉路徑，而不需要編碼正斜線（ `/` ）。
+* 雙星號*catch-all*語法 (`**`) 在多個資料夾界限之間捕獲路徑，而不需要編碼正斜線 (`/`) 。
 * `path`路由參數名稱。
 
 > [!NOTE]
-> *Catch-all* `*` / `**` 元件（）中**不**支援 Catch Razor -all 參數語法（） `.razor` 。
+> *Catch-all*參數語法 (`*` / `**`) 在 () 的元件中**不**受支援 Razor `.razor` 。
 
-如需詳細資訊，請參閱 <xref:fundamentals/routing> 。
+如需詳細資訊，請參閱<xref:fundamentals/routing>。
 
 ## <a name="navlink-component"></a>NavLink 元件
 
-<xref:Microsoft.AspNetCore.Components.Routing.NavLink>建立導覽連結時，請使用元件來取代 HTML 超連結元素（ `<a>` ）。 <xref:Microsoft.AspNetCore.Components.Routing.NavLink>元件的行為類似 `<a>` 元素，但它會根據 `active` 其是否 `href` 符合目前的 URL 來切換 CSS 類別。 `active`類別可協助使用者瞭解在顯示的導覽連結中，哪個頁面是使用中的頁面。 （選擇性）將 CSS 類別名稱指派給， <xref:Microsoft.AspNetCore.Components.Routing.NavLink.ActiveClass?displayProperty=nameWithType> 以在目前的路由符合時，將自訂 css 類別套用至轉譯的連結 `href` 。
+<xref:Microsoft.AspNetCore.Components.Routing.NavLink>建立導覽連結時，請使用元件來取代 HTML 超連結元素 (`<a>`) 。 <xref:Microsoft.AspNetCore.Components.Routing.NavLink>元件的行為類似 `<a>` 元素，但它會根據 `active` 其是否 `href` 符合目前的 URL 來切換 CSS 類別。 `active`類別可協助使用者瞭解在顯示的導覽連結中，哪個頁面是使用中的頁面。 （選擇性）將 CSS 類別名稱指派給， <xref:Microsoft.AspNetCore.Components.Routing.NavLink.ActiveClass?displayProperty=nameWithType> 以在目前的路由符合時，將自訂 css 類別套用至轉譯的連結 `href` 。
 
 下列 `NavMenu` 元件 [`Bootstrap`](https://getbootstrap.com/docs/) 會建立導覽列，以示範如何使用 <xref:Microsoft.AspNetCore.Components.Routing.NavLink> 元件：
 
@@ -185,9 +185,9 @@ Blazor Server已整合至[ASP.NET Core 端點路由](xref:fundamentals/routing)�
 有兩個 <xref:Microsoft.AspNetCore.Components.Routing.NavLinkMatch> 選項可供您指派給 `Match` 元素的屬性 `<NavLink>` ：
 
 * <xref:Microsoft.AspNetCore.Components.Routing.NavLinkMatch.All?displayProperty=nameWithType>： <xref:Microsoft.AspNetCore.Components.Routing.NavLink> 當符合整個目前的 URL 時，就會作用中。
-* <xref:Microsoft.AspNetCore.Components.Routing.NavLinkMatch.Prefix?displayProperty=nameWithType>（*預設值*）： <xref:Microsoft.AspNetCore.Components.Routing.NavLink> 當它符合目前 URL 的任何前置詞時，就會作用中。
+* <xref:Microsoft.AspNetCore.Components.Routing.NavLinkMatch.Prefix?displayProperty=nameWithType> (*預設*) ： <xref:Microsoft.AspNetCore.Components.Routing.NavLink> 當它符合目前 URL 的任何前置詞時，就會作用中。
 
-在上述範例中，Home 會 <xref:Microsoft.AspNetCore.Components.Routing.NavLink> `href=""` 符合 home URL，而且只會 `active` 在應用程式的預設基底路徑 URL （例如，）接收 CSS 類別 `https://localhost:5001/` 。 第二個會在 <xref:Microsoft.AspNetCore.Components.Routing.NavLink> `active` 使用者造訪具有前置詞的任何 URL 時收到類別 `MyComponent` （例如， `https://localhost:5001/MyComponent` 和 `https://localhost:5001/MyComponent/AnotherSegment` ）。
+在上述範例中，Home 會 <xref:Microsoft.AspNetCore.Components.Routing.NavLink> `href=""` 符合 home URL，而且只會 `active` 在應用程式的預設基底路徑 URL 上接收 CSS 類別 (例如， `https://localhost:5001/`) 。 第二個會在 <xref:Microsoft.AspNetCore.Components.Routing.NavLink> `active` 使用者造訪具有前置詞 (的任何 URL 時收到類別 `MyComponent` ，例如， `https://localhost:5001/MyComponent` `https://localhost:5001/MyComponent/AnotherSegment`) 。
 
 其他 <xref:Microsoft.AspNetCore.Components.Routing.NavLink> 元件屬性會傳遞至呈現的錨點標記。 在下列範例中， <xref:Microsoft.AspNetCore.Components.Routing.NavLink> 元件包含 `target` 屬性：
 
@@ -202,7 +202,7 @@ Blazor Server已整合至[ASP.NET Core 端點路由](xref:fundamentals/routing)�
 ```
 
 > [!WARNING]
-> 由於 Blazor 呈現子內容的方式， `NavLink` 如果在 `for` `NavLink` （子系）元件的內容中使用遞增迴圈變數，迴圈內的轉譯元件需要區域索引變數：
+> 由於 Blazor 呈現子內容的方式， `NavLink` 如果在 `for` `NavLink` (子) 元件的內容中使用遞增迴圈變數，迴圈內的轉譯元件需要區域索引變數：
 >
 > ```razor
 > @for (int c = 0; c < 10; c++)
@@ -235,14 +235,14 @@ Blazor Server已整合至[ASP.NET Core 端點路由](xref:fundamentals/routing)�
 
 用於 <xref:Microsoft.AspNetCore.Components.NavigationManager> 在 c # 程式碼中處理 uri 和導覽。 <xref:Microsoft.AspNetCore.Components.NavigationManager>提供下表所示的事件和方法。
 
-| 成員 | Description |
+| 成員 | 說明 |
 | ------ | ----------- |
 | <xref:Microsoft.AspNetCore.Components.NavigationManager.Uri> | 取得目前的絕對 URI。 |
-| <xref:Microsoft.AspNetCore.Components.NavigationManager.BaseUri> | 取得可在相對 URI 路徑前面加上的基底 URI （含尾端斜線），以產生絕對 URI。 通常會 <xref:Microsoft.AspNetCore.Components.NavigationManager.BaseUri> 對應至 `href` `<base>` `wwwroot/index.html` （ Blazor WebAssembly ）或 `Pages/_Host.cshtml` （）中檔元素上的屬性 Blazor Server 。 |
+| <xref:Microsoft.AspNetCore.Components.NavigationManager.BaseUri> | 取得基底 URI (，並在相對 URI 路徑前面加上一個尾端斜線) ，以產生絕對 URI。 通常會 <xref:Microsoft.AspNetCore.Components.NavigationManager.BaseUri> 對應至 `href` `<base>` `wwwroot/index.html` (Blazor WebAssembly) 或 `Pages/_Host.cshtml` () 中檔元素上的屬性 Blazor Server 。 |
 | <xref:Microsoft.AspNetCore.Components.NavigationManager.NavigateTo%2A> | 導覽至指定的 URI。 如果 `forceLoad` 為 `true` ：<ul><li>已略過用戶端路由。</li><li>瀏覽器會強制從伺服器載入新頁面，無論 URI 是否通常由用戶端路由器處理。</li></ul> |
 | <xref:Microsoft.AspNetCore.Components.NavigationManager.LocationChanged> | 導覽位置變更時引發的事件。 |
 | <xref:Microsoft.AspNetCore.Components.NavigationManager.ToAbsoluteUri%2A> | 將相對 URI 轉換為絕對 URI。 |
-| <span style="word-break:normal;word-wrap:normal"><xref:Microsoft.AspNetCore.Components.NavigationManager.ToBaseRelativePath%2A></span> | 假設基底 URI （例如先前傳回的 URI <xref:Microsoft.AspNetCore.Components.NavigationManager.BaseUri> ），會將絕對 uri 轉換成相對於基底 uri 前置詞的 uri。 |
+| <span style="word-break:normal;word-wrap:normal"><xref:Microsoft.AspNetCore.Components.NavigationManager.ToBaseRelativePath%2A></span> | 假設基底 URI (例如，) 先前傳回的 URI <xref:Microsoft.AspNetCore.Components.NavigationManager.BaseUri> ，會將絕對 uri 轉換成相對於基底 URI 前置詞的 uri。 |
 
 下列元件 `Counter` 會在選取按鈕時，流覽至應用程式的元件：
 

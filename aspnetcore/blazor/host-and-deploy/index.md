@@ -15,14 +15,14 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/host-and-deploy/index
-ms.openlocfilehash: 77202cd60d357c27237cdb925e0adc00e66d2e56
-ms.sourcegitcommit: 6fb27ea41a92f6d0e91dfd0eba905d2ac1a707f7
+ms.openlocfilehash: d8c1d340a05ebdddffcdebad400b44e31159bc28
+ms.sourcegitcommit: 84150702757cf7a7b839485382420e8db8e92b9c
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 07/15/2020
-ms.locfileid: "86407706"
+ms.lasthandoff: 08/05/2020
+ms.locfileid: "87818894"
 ---
-# <a name="host-and-deploy-aspnet-core-blazor"></a>裝載和部署 ASP.NET CoreBlazor
+# <a name="host-and-deploy-aspnet-core-no-locblazor"></a>裝載和部署 ASP.NET CoreBlazor
 
 作者：[Luke Latham](https://github.com/guardrex)、[Rainer Stropek](https://www.timecockpit.com) 和 [Daniel Roth](https://github.com/danroth27)
 
@@ -75,7 +75,7 @@ dotnet publish -c Release
 
 若未指定的其他設定 `CoolApp` ，此案例中的子應用程式就不會知道其位於伺服器上的位置。 例如，應用程式無法在不知道其位於相對 URL 路徑的情況下，對其資源建立正確的相對 Url `/CoolApp/` 。
 
-若要為 Blazor 應用程式的基底路徑提供 `https://www.contoso.com/CoolApp/` 設定， `<base>` 標記的 `href` 屬性會設為檔案 `Pages/_Host.cshtml` （ Blazor Server ）或檔案 `wwwroot/index.html` （）中的相對根路徑 Blazor WebAssembly ：
+若要為 Blazor 應用程式的基底路徑提供 `https://www.contoso.com/CoolApp/` 設定， `<base>` 標記的 `href` 屬性會設為檔案中的相對根路徑 `Pages/_Host.cshtml` (Blazor Server) 或檔案 `wwwroot/index.html` (Blazor WebAssembly) ：
 
 ```html
 <base href="/CoolApp/">
@@ -89,17 +89,17 @@ app.UsePathBase("/CoolApp");
 
 藉由提供相對的 URL 路徑，不在根目錄中的元件可以針對應用程式的根路徑來建立 Url。 不同目錄結構層級的元件可以在整個應用程式的位置建立其他資源的連結。 應用程式基底路徑也會用來攔截選取的超連結，其中 `href` 連結的目標是在應用程式基底路徑 URI 空間內。 Blazor路由器會處理內部導覽。
 
-在許多裝載案例中，應用程式的相對 URL 路徑是應用程式的根目錄。 在這些情況下，應用程式的相對 URL 基底路徑是正斜線（ `<base href="/" />` ），這是應用程式的預設設定 Blazor 。 在其他裝載案例（例如 GitHub 頁面和 IIS 子應用程式）中，應用程式基底路徑必須設定為應用程式的伺服器相對 URL 路徑。
+在許多裝載案例中，應用程式的相對 URL 路徑是應用程式的根目錄。 在這些情況下，應用程式的相對 URL 基底路徑是正斜線 (`<base href="/" />`) ，這是應用程式的預設設定 Blazor 。 在其他裝載案例（例如 GitHub 頁面和 IIS 子應用程式）中，應用程式基底路徑必須設定為應用程式的伺服器相對 URL 路徑。
 
-若要設定應用程式的基底路徑，請更新檔案 `<base>` `<head>` `Pages/_Host.cshtml` （ Blazor Server ）或檔案 `wwwroot/index.html` （）之標記元素內的標記 Blazor WebAssembly 。 將 `href` 屬性值設定為 `/{RELATIVE URL PATH}/` （需要尾端斜線），其中 `{RELATIVE URL PATH}` 是應用程式的完整相對 URL 路徑。
+若要設定應用程式的基底路徑，請更新檔案 `<base>` `<head>` 之標記元素內的標記 `Pages/_Host.cshtml` (Blazor Server) 或檔案 `wwwroot/index.html` (Blazor WebAssembly) 。 將 `href` 屬性值設定為 `/{RELATIVE URL PATH}/` (需要尾端斜線) ，其中 `{RELATIVE URL PATH}` 是應用程式的完整相對 URL 路徑。
 
-針對 Blazor WebAssembly 具有非根相對 URL 路徑的應用程式（例如 `<base href="/CoolApp/">` ），在*本機執行時*，應用程式無法找到其資源。 若要在本機開發和測試期間解決這個問題，您可以提供「基底路徑」** 引數，讓它在執行時符合 `<base>` 標籤的 `href` 值。 不要包含尾端斜線。 若要在本機執行應用程式時傳遞 path base 引數，請 `dotnet run` 使用下列選項從應用程式的目錄執行命令 `--pathbase` ：
+針對 Blazor WebAssembly 具有非根相對 URL 路徑的應用程式 (例如， `<base href="/CoolApp/">`) ，應用程式*在本機執行時*，無法找到其資源。 若要在本機開發和測試期間解決這個問題，您可以提供「基底路徑」** 引數，讓它在執行時符合 `<base>` 標籤的 `href` 值。 不要包含尾端斜線。 若要在本機執行應用程式時傳遞 path base 引數，請 `dotnet run` 使用下列選項從應用程式的目錄執行命令 `--pathbase` ：
 
 ```dotnetcli
 dotnet run --pathbase=/{RELATIVE URL PATH (no trailing slash)}
 ```
 
-針對 Blazor WebAssembly 具有（）之相對 URL 路徑的應用程式 `/CoolApp/` `<base href="/CoolApp/">` ，命令為：
+針對 Blazor WebAssembly 具有 () 之相對 URL 路徑的應用程式 `/CoolApp/` `<base href="/CoolApp/">` ，命令為：
 
 ```dotnetcli
 dotnet run --pathbase=/CoolApp
@@ -115,11 +115,15 @@ Blazor WebAssembly應用程式會在本機回應，網址為 `http://localhost:p
 endpoints.MapFallbackToPage("/{RELATIVE PATH}/{**path:nonfile}");
 ```
 
-預留位置 `{RELATIVE PATH}` 是伺服器上的非根路徑。 例如， `CoolApp` 如果應用程式的非根 URL 為，則為預留位置區段 `https://{HOST}:{PORT}/CoolApp/` ：
+預留位置 `{RELATIVE PATH}` 是伺服器上的非根路徑。 例如， `CoolApp` 如果應用程式的非根 URL) ，就是預留位置區段 `https://{HOST}:{PORT}/CoolApp/` ：
 
 ```csharp
 endpoints.MapFallbackToPage("/CoolApp/{**path:nonfile}");
 ```
+
+**裝載多個 Blazor WebAssembly 應用程式**
+
+如需在託管解決方案中裝載多個應用程式的詳細資訊 Blazor WebAssembly Blazor ，請參閱 <xref:blazor/host-and-deploy/webassembly#hosted-deployment-with-multiple-blazor-webassembly-apps> 。
 
 ## <a name="deployment"></a>部署
 

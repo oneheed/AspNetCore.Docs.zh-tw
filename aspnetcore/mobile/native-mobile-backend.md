@@ -13,12 +13,12 @@ no-loc:
 - Razor
 - SignalR
 uid: mobile/native-mobile-backend
-ms.openlocfilehash: a6d99e4a8f05125e6e7968b088c5b7e29cb75e6c
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: b719c64e6976e65a725b28ae3f6c245f2f4874a4
+ms.sourcegitcommit: b0fa7ff0cb158277df61bcd08058a81222c3fe10
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85407560"
+ms.lasthandoff: 08/07/2020
+ms.locfileid: "87913595"
 ---
 # <a name="create-backend-services-for-native-mobile-apps-with-aspnet-core"></a>使用 ASP.NET Core 建立原生行動應用程式的後端服務
 
@@ -158,7 +158,7 @@ API 方法需要一些方式才能操作資料。 使用原始 Xamarin 範本使
 
 當您為您的應用程式開發後端服務時，您可能會想要想出一個一致的慣例組或原則來處理跨領域關注。 例如，在上述的服務中，要求找不到的特定記錄會讓使用者接收到 `NotFound` 回應，而非 `BadRequest` 回應。 同樣地，傳送到此服務的命令在傳遞到模型繫結類型時，也會檢查 `ModelState.IsValid`並針對無效的模型類型傳回 `BadRequest`。
 
-當您找到了適用於您 API 的常見原則時，您通常可以在[篩選條件](../mvc/controllers/filters.md)中封裝它。 深入了解[如何在 ASP.NET Core MVC 應用程式中封裝常見的 API 原則](https://msdn.microsoft.com/magazine/mt767699.aspx)。
+當您找到了適用於您 API 的常見原則時，您通常可以在[篩選條件](../mvc/controllers/filters.md)中封裝它。 深入了解[如何在 ASP.NET Core MVC 應用程式中封裝常見的 API 原則](/archive/msdn-magazine/2016/august/asp-net-core-real-world-asp-net-core-mvc-filters)。
 
 ## <a name="additional-resources"></a>其他資源
 

@@ -14,20 +14,20 @@ no-loc:
 - Razor
 - SignalR
 uid: security/data-protection/consumer-apis/dangerous-unprotect
-ms.openlocfilehash: a0b5bb29c509e8cc999b998776da3ab4ec27ec29
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: 55a7ec4052b3ab47d5ff41bbce3fc3f9662f609c
+ms.sourcegitcommit: b0fa7ff0cb158277df61bcd08058a81222c3fe10
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85408392"
+ms.lasthandoff: 08/07/2020
+ms.locfileid: "87913847"
 ---
 # <a name="unprotect-payloads-whose-keys-have-been-revoked-in-aspnet-core"></a>取消保護已在 ASP.NET Core 中撤銷其金鑰的承載
 
 <a name="data-protection-consumer-apis-dangerous-unprotect"></a>
 
-ASP.NET Core 的資料保護 Api 主要不適用於機密承載的無限持續性。 其他技術（如[WINDOWS CNG DPAPI](https://msdn.microsoft.com/library/windows/desktop/hh706794%28v=vs.85%29.aspx)和[Azure Rights Management](/rights-management/) ）更適用于不限數量的儲存體案例，而且它們已有更強的金鑰管理功能。 話雖如此，開發人員也不會使用 ASP.NET Core 的資料保護 Api 來長期保護機密資料。 金鑰永遠不會從金鑰環中移除，因此 `IDataProtector.Unprotect` 只要金鑰可供使用且有效，一律可以復原現有的裝載。
+ASP.NET Core 的資料保護 Api 主要不適用於機密承載的無限持續性。 其他技術（如[WINDOWS CNG DPAPI](/windows/win32/seccng/cng-dpapi)和[Azure Rights Management](/rights-management/) ）更適用于不限數量的儲存體案例，而且它們已有更強的金鑰管理功能。 話雖如此，開發人員也不會使用 ASP.NET Core 的資料保護 Api 來長期保護機密資料。 金鑰永遠不會從金鑰環中移除，因此 `IDataProtector.Unprotect` 只要金鑰可供使用且有效，一律可以復原現有的裝載。
 
-不過，當開發人員嘗試取消保護已撤銷的金鑰的資料時，就會發生問題，因為 `IDataProtector.Unprotect` 在此情況下會擲回例外狀況。 這可能適用于短期或暫時性的承載（例如驗證權杖），因為這種類型的裝載可輕易地由系統重新建立，而且在最糟的情況下，網站訪客可能需要再次登入。 但是對於保存的承載，具有 `Unprotect` throw 可能會導致無法接受的資料遺失。
+不過，當開發人員嘗試取消保護已撤銷的金鑰的資料時，就會發生問題，因為 `IDataProtector.Unprotect` 在此情況下會擲回例外狀況。 這可能適用于短期或暫時性的承載 (例如驗證權杖) ，因為這種類型的裝載可輕鬆地由系統重新建立，且最差的網站訪客可能需要再次登入。 但是對於保存的承載，具有 `Unprotect` throw 可能會導致無法接受的資料遺失。
 
 ## <a name="ipersisteddataprotector"></a>IPersistedDataProtector
 
@@ -43,7 +43,7 @@ DangerousUnprotect(byte[] protectedData, bool ignoreRevocationErrors,
      out bool requiresMigration, out bool wasRevoked) : byte[]
 ```
 
-此 API 會採用受保護的承載（做為位元組陣列），並傳回未受保護的裝載。 沒有以字串為基礎的多載。 這兩個輸出參數如下所示。
+此 API 會將受保護的承載 (為位元組陣列) 並傳回未受保護的裝載。 沒有以字串為基礎的多載。 這兩個輸出參數如下所示。
 
 * `requiresMigration`：如果用來保護此承載的金鑰已不再是作用中的預設金鑰（例如，用來保護此承載的金鑰已過時），而且已發生金鑰變換作業，則會設定為 true。 呼叫端可能會想要考慮根據其商務需求來重新保護裝載。
 

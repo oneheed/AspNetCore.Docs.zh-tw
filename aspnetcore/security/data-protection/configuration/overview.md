@@ -14,12 +14,12 @@ no-loc:
 - Razor
 - SignalR
 uid: security/data-protection/configuration/overview
-ms.openlocfilehash: 65ef506d5857afb71113a0309613a2cbd82893be
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: 096862b7149679c14e3d1ca17d38468a14e438a2
+ms.sourcegitcommit: b0fa7ff0cb158277df61bcd08058a81222c3fe10
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85399539"
+ms.lasthandoff: 08/07/2020
+ms.locfileid: "87913876"
 ---
 # <a name="configure-aspnet-core-data-protection"></a>設定 ASP.NET Core 資料保護
 
@@ -59,15 +59,15 @@ public void ConfigureServices(IServiceCollection services)
 }
 ```
 
-設定金鑰環形儲存位置（例如， [PersistKeysToAzureBlobStorage](/dotnet/api/microsoft.aspnetcore.dataprotection.azuredataprotectionbuilderextensions.persistkeystoazureblobstorage)）。 必須設定位置，因為呼叫 `ProtectKeysWithAzureKeyVault` 會執行停用自動資料保護設定的[IXmlEncryptor](/dotnet/api/microsoft.aspnetcore.dataprotection.xmlencryption.ixmlencryptor) ，包括金鑰環形儲存位置。 上述範例會使用 Azure Blob 儲存體來保存金鑰環。 如需詳細資訊，請參閱[金鑰儲存提供者： Azure 儲存體](xref:security/data-protection/implementation/key-storage-providers#azure-storage)。 您也可以使用[PersistKeysToFileSystem](xref:security/data-protection/implementation/key-storage-providers#file-system)在本機保存金鑰信號。
+設定 (的金鑰環形儲存位置，例如[PersistKeysToAzureBlobStorage](/dotnet/api/microsoft.aspnetcore.dataprotection.azuredataprotectionbuilderextensions.persistkeystoazureblobstorage)) 。 必須設定位置，因為呼叫 `ProtectKeysWithAzureKeyVault` 會執行停用自動資料保護設定的[IXmlEncryptor](/dotnet/api/microsoft.aspnetcore.dataprotection.xmlencryption.ixmlencryptor) ，包括金鑰環形儲存位置。 上述範例會使用 Azure Blob 儲存體來保存金鑰環。 如需詳細資訊，請參閱[金鑰儲存提供者： Azure 儲存體](xref:security/data-protection/implementation/key-storage-providers#azure-storage)。 您也可以使用[PersistKeysToFileSystem](xref:security/data-protection/implementation/key-storage-providers#file-system)在本機保存金鑰信號。
 
 `keyIdentifier`是用來加密金鑰的金鑰保存庫金鑰識別碼。 例如，在中名為的金鑰保存庫中建立的金鑰 `dataprotection` `contosokeyvault` 具有金鑰識別碼 `https://contosokeyvault.vault.azure.net/keys/dataprotection/` 。 提供具有解除包裝**金鑰的**應用程式和金鑰保存庫的**金鑰**許可權。
 
 `ProtectKeysWithAzureKeyVault`多載
 
-* [ProtectKeysWithAzureKeyVault （IDataProtectionBuilder，KeyVaultClient，String）](/dotnet/api/microsoft.aspnetcore.dataprotection.azuredataprotectionbuilderextensions.protectkeyswithazurekeyvault#Microsoft_AspNetCore_DataProtection_AzureDataProtectionBuilderExtensions_ProtectKeysWithAzureKeyVault_Microsoft_AspNetCore_DataProtection_IDataProtectionBuilder_Microsoft_Azure_KeyVault_KeyVaultClient_System_String_)允許使用[KeyVaultClient](/dotnet/api/microsoft.azure.keyvault.keyvaultclient) ，讓資料保護系統能夠使用金鑰保存庫。
-* [ProtectKeysWithAzureKeyVault （IDataProtectionBuilder，string，string，X509Certificate2）](/dotnet/api/microsoft.aspnetcore.dataprotection.azuredataprotectionbuilderextensions.protectkeyswithazurekeyvault#Microsoft_AspNetCore_DataProtection_AzureDataProtectionBuilderExtensions_ProtectKeysWithAzureKeyVault_Microsoft_AspNetCore_DataProtection_IDataProtectionBuilder_System_String_System_String_System_Security_Cryptography_X509Certificates_X509Certificate2_)允許使用 `ClientId` 和[X509Certificate](/dotnet/api/system.security.cryptography.x509certificates.x509certificate2) ，讓資料保護系統能夠使用金鑰保存庫。
-* [ProtectKeysWithAzureKeyVault （IDataProtectionBuilder，string，string，string）](/dotnet/api/microsoft.aspnetcore.dataprotection.azuredataprotectionbuilderextensions.protectkeyswithazurekeyvault#Microsoft_AspNetCore_DataProtection_AzureDataProtectionBuilderExtensions_ProtectKeysWithAzureKeyVault_Microsoft_AspNetCore_DataProtection_IDataProtectionBuilder_System_String_System_String_System_String_)允許使用 `ClientId` 和， `ClientSecret` 讓資料保護系統能夠使用金鑰保存庫。
+* [ProtectKeysWithAzureKeyVault (IDataProtectionBuilder、KeyVaultClient、String) ](/dotnet/api/microsoft.aspnetcore.dataprotection.azuredataprotectionbuilderextensions.protectkeyswithazurekeyvault#Microsoft_AspNetCore_DataProtection_AzureDataProtectionBuilderExtensions_ProtectKeysWithAzureKeyVault_Microsoft_AspNetCore_DataProtection_IDataProtectionBuilder_Microsoft_Azure_KeyVault_KeyVaultClient_System_String_)允許使用[KeyVaultClient](/dotnet/api/microsoft.azure.keyvault.keyvaultclient) ，讓資料保護系統能夠使用金鑰保存庫。
+* [ProtectKeysWithAzureKeyVault (IDataProtectionBuilder、string、string、X509Certificate2) ](/dotnet/api/microsoft.aspnetcore.dataprotection.azuredataprotectionbuilderextensions.protectkeyswithazurekeyvault#Microsoft_AspNetCore_DataProtection_AzureDataProtectionBuilderExtensions_ProtectKeysWithAzureKeyVault_Microsoft_AspNetCore_DataProtection_IDataProtectionBuilder_System_String_System_String_System_Security_Cryptography_X509Certificates_X509Certificate2_)允許使用 `ClientId` 和[X509Certificate](/dotnet/api/system.security.cryptography.x509certificates.x509certificate2) ，讓資料保護系統能夠使用金鑰保存庫。
+* [ProtectKeysWithAzureKeyVault (IDataProtectionBuilder、string、string、string) ](/dotnet/api/microsoft.aspnetcore.dataprotection.azuredataprotectionbuilderextensions.protectkeyswithazurekeyvault#Microsoft_AspNetCore_DataProtection_AzureDataProtectionBuilderExtensions_ProtectKeysWithAzureKeyVault_Microsoft_AspNetCore_DataProtection_IDataProtectionBuilder_System_String_System_String_System_String_)允許使用 `ClientId` 和， `ClientSecret` 讓資料保護系統能夠使用金鑰保存庫。
 
 使用 keyvault 和 azure 儲存體的組合來儲存和保護金鑰時，如果用 `System.UriFormatException` 來儲存金鑰的 blob 不存在，則會擲回。 這可以在執行應用程式之前手動建立，或是在 `.ProtectKeysWithAzureKeyVault()` 第一次執行時移除以建立 blob，然後將它新增至以供後續執行。 `.ProtectKeysWithAzureKeyVault()`建議移除，因為這會確保以適當的架構和值建立檔案。
 
@@ -189,7 +189,7 @@ public void ConfigureServices(IServiceCollection services)
 
 ## <a name="disableautomatickeygeneration"></a>DisableAutomaticKeyGeneration
 
-您可能會想要讓應用程式在接近到期的情況下自動變換金鑰（建立新的金鑰）。 其中一個範例可能是在主要/次要關係中設定的應用程式，其中只有主要應用程式會負責金鑰管理考慮，而次要應用程式只會有金鑰環的唯讀視圖。 次要應用程式可以設定為使用下列方式，將金鑰環視為唯讀 <xref:Microsoft.AspNetCore.DataProtection.DataProtectionBuilderExtensions.DisableAutomaticKeyGeneration*> ：
+您可能會有不想讓應用程式自動變換金鑰的案例 (建立新的金鑰，) 在其接近到期時。 其中一個範例可能是在主要/次要關係中設定的應用程式，其中只有主要應用程式會負責金鑰管理考慮，而次要應用程式只會有金鑰環的唯讀視圖。 次要應用程式可以設定為使用下列方式，將金鑰環視為唯讀 <xref:Microsoft.AspNetCore.DataProtection.DataProtectionBuilderExtensions.DisableAutomaticKeyGeneration*> ：
 
 ```csharp
 public void ConfigureServices(IServiceCollection services)
@@ -212,7 +212,7 @@ public void ConfigureServices(IServiceCollection services)
 
 這種隔離機制會假設應用程式不是惡意的。 惡意應用程式一律會影響在同一個工作者進程帳戶下執行的任何其他應用程式。 在應用程式互相不受信任的共用裝載環境中，主機服務提供者應採取步驟，以確保應用程式之間的作業系統層級隔離，包括分隔應用程式的基礎金鑰存放庫。
 
-如果資料保護系統不是由 ASP.NET Core 主機所提供（例如，如果您透過具體類型來具現化 `DataProtectionProvider` ），應用程式隔離會預設為停用。 當應用程式隔離停用時，所有由相同的金鑰內容所支援的應用程式都可以共用承載，只要它們提供適當的[用途](xref:security/data-protection/consumer-apis/purpose-strings)即可。 若要在此環境中提供應用程式隔離，請在設定物件上呼叫[SetApplicationName](#setapplicationname)方法，並為每個應用程式提供唯一的名稱。
+如果 ASP.NET Core 主機未提供資料保護系統 (例如，如果您透過具體) 類型具現化，則 `DataProtectionProvider` 預設會停用應用程式隔離。 當應用程式隔離停用時，所有由相同的金鑰內容所支援的應用程式都可以共用承載，只要它們提供適當的[用途](xref:security/data-protection/consumer-apis/purpose-strings)即可。 若要在此環境中提供應用程式隔離，請在設定物件上呼叫[SetApplicationName](#setapplicationname)方法，並為每個應用程式提供唯一的名稱。
 
 ## <a name="changing-algorithms-with-usecryptographicalgorithms"></a>使用 UseCryptographicAlgorithms 變更演算法
 
@@ -301,7 +301,7 @@ serviceCollection.AddDataProtection()
 
 ::: moniker-end
 
-一般來說， \* 型別屬性必須指向[System.security.cryptography.symmetricalgorithm](/dotnet/api/system.security.cryptography.symmetricalgorithm)和[KeyedHashAlgorithm](/dotnet/api/system.security.cryptography.keyedhashalgorithm)的具象、可具現化（透過公用無參數 ctor）的實作為，但有一些值是 `typeof(Aes)` 為了方便起見。
+一般來說 \* ，型別屬性必須透過[System.security.cryptography.symmetricalgorithm](/dotnet/api/system.security.cryptography.symmetricalgorithm)和[KeyedHashAlgorithm](/dotnet/api/system.security.cryptography.keyedhashalgorithm)的公用無參數 ctor) 的實值來指向具體的可具現化 (，不過，系統特殊案例則是 `typeof(Aes)` 為了方便起見，提供一些價值。
 
 > [!NOTE]
 > System.security.cryptography.symmetricalgorithm 必須具有≥128位的金鑰長度和≥64位的區塊大小，而且它必須支援具有 PKCS #7 填補的 CBC 模式加密。 KeyedHashAlgorithm 必須具有 >= 128 位的摘要大小，而且它必須支援長度等於雜湊演算法摘要長度的索引鍵。 KeyedHashAlgorithm 不一定要是 HMAC。
@@ -357,7 +357,7 @@ services.AddDataProtection()
 ::: moniker-end
 
 > [!NOTE]
-> 對稱式區塊加密演算法的金鑰長度必須為 >= 128 位、區塊大小 >= 64 位，而且必須支援具有 PKCS #7 填補的 CBC 模式加密。 雜湊演算法的摘要大小必須為 >= 128 位，而且必須支援使用 BCRYPT \_ ALG \_ HANDLE \_ HMAC \_ 旗標旗標來開啟。 \*提供者屬性可以設定為 null，以針對指定的演算法使用預設提供者。 如需詳細資訊，請參閱[BCryptOpenAlgorithmProvider](https://msdn.microsoft.com/library/windows/desktop/aa375479(v=vs.85).aspx)檔。
+> 對稱式區塊加密演算法的金鑰長度必須為 >= 128 位、區塊大小 >= 64 位，而且必須支援具有 PKCS #7 填補的 CBC 模式加密。 雜湊演算法的摘要大小必須為 >= 128 位，而且必須支援使用 BCRYPT \_ ALG \_ HANDLE \_ HMAC \_ 旗標旗標來開啟。 \*提供者屬性可以設定為 null，以針對指定的演算法使用預設提供者。 如需詳細資訊，請參閱[BCryptOpenAlgorithmProvider](/windows/win32/api/bcrypt/nf-bcrypt-bcryptopenalgorithmprovider)檔。
 
 ::: moniker range=">= aspnetcore-2.0"
 
@@ -400,11 +400,11 @@ services.AddDataProtection()
 ::: moniker-end
 
 > [!NOTE]
-> 對稱式區塊加密演算法的金鑰長度必須為 >= 128 位、剛好為128位的區塊大小，而且必須支援 GCM 加密。 您可以將[EncryptionAlgorithmProvider](/dotnet/api/microsoft.aspnetcore.dataprotection.authenticatedencryption.configurationmodel.cngcbcauthenticatedencryptorconfiguration.encryptionalgorithmprovider)屬性設定為 null，以針對指定的演算法使用預設提供者。 如需詳細資訊，請參閱[BCryptOpenAlgorithmProvider](https://msdn.microsoft.com/library/windows/desktop/aa375479(v=vs.85).aspx)檔。
+> 對稱式區塊加密演算法的金鑰長度必須為 >= 128 位、剛好為128位的區塊大小，而且必須支援 GCM 加密。 您可以將[EncryptionAlgorithmProvider](/dotnet/api/microsoft.aspnetcore.dataprotection.authenticatedencryption.configurationmodel.cngcbcauthenticatedencryptorconfiguration.encryptionalgorithmprovider)屬性設定為 null，以針對指定的演算法使用預設提供者。 如需詳細資訊，請參閱[BCryptOpenAlgorithmProvider](/windows/win32/api/bcrypt/nf-bcrypt-bcryptopenalgorithmprovider)檔。
 
 ### <a name="specifying-other-custom-algorithms"></a>指定其他自訂演算法
 
-雖然不會公開為第一類的 API，但資料保護系統的擴充性足以讓您指定幾乎任何類型的演算法。 例如，您可以保留硬體安全模組（HSM）中包含的所有金鑰，以及提供核心加密和解密常式的自訂執行。 如需詳細資訊，請參閱[核心密碼](xref:security/data-protection/extensibility/core-crypto)編譯擴充性中的[IAuthenticatedEncryptor](/dotnet/api/microsoft.aspnetcore.dataprotection.authenticatedencryption.iauthenticatedencryptor) 。
+雖然不會公開為第一類的 API，但資料保護系統的擴充性足以讓您指定幾乎任何類型的演算法。 例如，您可以將硬體安全模組中包含的所有金鑰保留 (HSM) ，並提供核心加密和解密常式的自訂執行。 如需詳細資訊，請參閱[核心密碼](xref:security/data-protection/extensibility/core-crypto)編譯擴充性中的[IAuthenticatedEncryptor](/dotnet/api/microsoft.aspnetcore.dataprotection.authenticatedencryption.iauthenticatedencryptor) 。
 
 ## <a name="persisting-keys-when-hosting-in-a-docker-container"></a>在 Docker 容器中裝載時保存金鑰
 

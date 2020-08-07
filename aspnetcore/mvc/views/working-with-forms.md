@@ -14,12 +14,12 @@ no-loc:
 - Razor
 - SignalR
 uid: mvc/views/working-with-forms
-ms.openlocfilehash: 7a92f2b5bc791f268b897878db08a9f9f4f7bf0c
-ms.sourcegitcommit: 50e7c970f327dbe92d45eaf4c21caa001c9106d0
+ms.openlocfilehash: 833939417c4973c61eca4d41aaeabe7856680190
+ms.sourcegitcommit: b0fa7ff0cb158277df61bcd08058a81222c3fe10
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 07/10/2020
-ms.locfileid: "86212409"
+ms.lasthandoff: 08/07/2020
+ms.locfileid: "87913855"
 ---
 # <a name="tag-helpers-in-forms-in-aspnet-core"></a>ASP.NET Core 表單中的標籤協助程式
 
@@ -89,7 +89,7 @@ MVC 執行階段會從表單標籤協助程式屬性 `asp-controller` 和 `asp-a
 |[asp-page](xref:mvc/views/tag-helpers/builtin-th/anchor-tag-helper#asp-page)|網頁的名稱 Razor 。|
 |[asp-page-handler](xref:mvc/views/tag-helpers/builtin-th/anchor-tag-helper#asp-page-handler)|Razor網頁處理常式的名稱。|
 |[asp-route](xref:mvc/views/tag-helpers/builtin-th/anchor-tag-helper#asp-route)|路由的名稱。|
-|[asp-route-{value}](xref:mvc/views/tag-helpers/builtin-th/anchor-tag-helper#asp-route-value)|單一 URL 路由值。 例如，`asp-route-id="1234"`。|
+|[asp-route-{value}](xref:mvc/views/tag-helpers/builtin-th/anchor-tag-helper#asp-route-value)|單一 URL 路由值。 例如： `asp-route-id="1234"` 。|
 |[asp-all-route-data](xref:mvc/views/tag-helpers/builtin-th/anchor-tag-helper#asp-all-route-data)|所有路由值。|
 |[asp-fragment](xref:mvc/views/tag-helpers/builtin-th/anchor-tag-helper#asp-fragment)|URL 片段。|
 
@@ -191,16 +191,16 @@ public class HomeController : Controller
 
 * 提供強型別。 如果屬性的名稱變更，而您未更新標籤協助程式，則會出現如下所示的錯誤：
 
-```
-An error occurred during the compilation of a resource required to process
-this request. Please review the following specific error details and modify
-your source code appropriately.
+  ```
+  An error occurred during the compilation of a resource required to process
+  this request. Please review the following specific error details and modify
+  your source code appropriately.
 
-Type expected
- 'RegisterViewModel' does not contain a definition for 'Email' and no
- extension method 'Email' accepting a first argument of type 'RegisterViewModel'
- could be found (are you missing a using directive or an assembly reference?)
-```
+  Type expected
+   'RegisterViewModel' does not contain a definition for 'Email' and no
+   extension method 'Email' accepting a first argument of type 'RegisterViewModel'
+   could be found (are you missing a using directive or an assembly reference?)
+  ```
 
 `Input` 標籤協助程式會根據 .NET 型別設定 HTML `type` 屬性。 下表列出一些常見的 .NET 型別和產生的 HTML 型別 (不是每個 .NET 類型都列出)。
 
@@ -461,7 +461,7 @@ public IActionResult Edit(int id, int colorIndex)
 |asp-validation-summary|顯示的驗證訊息|
 |--- |--- |
 |ValidationSummary.All|屬性和模型層級|
-|ValidationSummary.ModelOnly|型號|
+|ValidationSummary.ModelOnly|模型|
 |ValidationSummary.None|無|
 
 ### <a name="sample"></a>範例

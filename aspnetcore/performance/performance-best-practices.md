@@ -14,12 +14,12 @@ no-loc:
 - Razor
 - SignalR
 uid: performance/performance-best-practices
-ms.openlocfilehash: 15f3ce5a8e8d47ac567acaadcdc4bf8ba738b2ff
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: f74f6ce93093adbc931dd90b32a14de5d4f89096
+ms.sourcegitcommit: b0fa7ff0cb158277df61bcd08058a81222c3fe10
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85408171"
+ms.lasthandoff: 08/07/2020
+ms.locfileid: "87913884"
 ---
 # <a name="aspnet-core-performance-best-practices"></a>ASP.NET Core 效能最佳做法
 
@@ -29,7 +29,7 @@ ms.locfileid: "85408171"
 
 ## <a name="cache-aggressively"></a>主動快取
 
-本檔的數個部分會討論快取。 如需詳細資訊，請參閱 <xref:performance/caching/response> 。
+本檔的數個部分會討論快取。 如需詳細資訊，請參閱<xref:performance/caching/response>。
 
 ## <a name="understand-hot-code-paths"></a>瞭解熱程式碼路徑
 
@@ -50,14 +50,14 @@ ASP.NET Core 應用程式中常見的效能問題是封鎖可能是非同步呼�
 **Do**：
 
 * 將[熱程式碼路徑](#understand-hot-code-paths)設為非同步。
-* 如果有非同步 API 可供使用，請以非同步方式呼叫資料存取、i/o 和長時間執行的作業 Api。 請勿使用工作[。](/dotnet/api/system.threading.tasks.task.run) **請執行，** 讓 synchronus API 成為非同步。
+* 如果有非同步 API 可供使用，請以非同步方式呼叫資料存取、i/o 和長時間執行的作業 Api。 請勿**使用**工作[。](/dotnet/api/system.threading.tasks.task.run)請執行，讓同步 API 成為非同步。
 * 將控制器/ Razor 頁面動作設為非同步。 整個呼叫堆疊都是非同步，以便受益于[非同步/](/dotnet/csharp/programming-guide/concepts/async/)等候模式。
 
 分析工具（例如[PerfView](https://github.com/Microsoft/perfview)）可以用來尋找經常加入[執行緒集](/windows/desktop/procthread/thread-pools)區的執行緒。 `Microsoft-Windows-DotNETRuntime/ThreadPoolWorkerThread/Start`事件表示已加入執行緒集區的執行緒。 <!--  For more information, see [async guidance docs](TBD-Link_To_Davifowl_Doc)  -->
 
 ## <a name="minimize-large-object-allocations"></a>最小化大型物件配置
 
-[.Net Core 垃圾收集](/dotnet/standard/garbage-collection/)行程會自動管理 ASP.NET Core 應用程式中的記憶體配置和釋放。 自動垃圾收集通常表示開發人員不需要擔心釋放記憶體的方式或時機。 不過，清除未參考的物件會耗用 CPU 時間，因此開發人員應該盡可能減少在[熱程式碼路徑](#understand-hot-code-paths)中設定物件的情況。 垃圾收集特別耗費大量物件（> 85 K 位元組）。 大型物件會儲存在[大型物件堆積](/dotnet/standard/garbage-collection/large-object-heap)上，並要求完整（層代2）垃圾收集來進行清除。 不同于層代0和第1代回收，第2代回收需要暫時暫停應用程式執行。 大型物件的頻繁配置和取消配置可能會造成不一致的效能。
+[.Net Core 垃圾收集](/dotnet/standard/garbage-collection/)行程會自動管理 ASP.NET Core 應用程式中的記憶體配置和釋放。 自動垃圾收集通常表示開發人員不需要擔心釋放記憶體的方式或時機。 不過，清除未參考的物件會耗用 CPU 時間，因此開發人員應該盡可能減少在[熱程式碼路徑](#understand-hot-code-paths)中設定物件的情況。 垃圾收集對大型物件而言特別昂貴， ( # A0 85 K 位元組) 。 大型物件會儲存在[大型物件堆積](/dotnet/standard/garbage-collection/large-object-heap)上，而且需要完整的 (層代 2) 垃圾收集來進行清除。 不同于層代0和第1代回收，第2代回收需要暫時暫停應用程式執行。 大型物件的頻繁配置和取消配置可能會造成不一致的效能。
 
 建議：
 
@@ -65,7 +65,7 @@ ASP.NET Core 應用程式中常見的效能問題是封鎖可能是非同步呼�
 * 使用[ArrayPool \<T> ](/dotnet/api/system.buffers.arraypool-1)來儲存大型陣列，以**執行**集區緩衝區。
 * **請勿**在[熱程式碼路徑](#understand-hot-code-paths)上配置許多短期的大型物件。
 
-您可以藉由檢查[PerfView](https://github.com/Microsoft/perfview)中的垃圾收集（GC）統計資料並檢查，來診斷上述的記憶體問題：
+您可以藉由在[PerfView](https://github.com/Microsoft/perfview)和檢查中查看垃圾收集 (GC) 統計資料，來診斷記憶體問題（例如上述的）：
 
 * 垃圾收集暫停時間。
 * 花費在垃圾收集的處理器時間百分比。
@@ -81,10 +81,10 @@ ASP.NET Core 應用程式中常見的效能問題是封鎖可能是非同步呼�
 
 * **請**以非同步方式呼叫所有資料存取 api。
 * **請勿**抓取超過所需的資料。 撰寫查詢，只傳回目前 HTTP 要求所需的資料。
-* 如果可以接受稍微過期的資料，**請考慮快**取從資料庫或遠端服務抓取的經常存取資料。 根據案例而定，請使用[MemoryCache](xref:performance/caching/memory)或[microsoft.web.distributedcache](xref:performance/caching/distributed)。 如需詳細資訊，請參閱 <xref:performance/caching/response> 。
+* 如果可以接受稍微過期的資料，**請考慮快**取從資料庫或遠端服務抓取的經常存取資料。 根據案例而定，請使用[MemoryCache](xref:performance/caching/memory)或[microsoft.web.distributedcache](xref:performance/caching/distributed)。 如需詳細資訊，請參閱<xref:performance/caching/response>。
 * **儘量減少**網路來回行程。 其目標是要在單一呼叫中抓取所需的資料，而不是在數個呼叫中取得。
 * 在存取資料進行唯讀時，**請不要**在 Entity Framework Core 中使用[無追蹤查詢](/ef/core/querying/tracking#no-tracking-queries)。 EF Core 可以更有效率地傳回無追蹤查詢的結果。
-* **執行**篩選和匯總 LINQ 查詢（ `.Where` 例如，使用、 `.Select` 或 `.Sum` 語句），以便篩選由資料庫執行。
+* **執行**篩選和匯總 LINQ 查詢 (使用 `.Where` 、 `.Select` 或 `.Sum` 語句，例如) ，以便讓篩選由資料庫執行。
 * **請考慮 EF Core**在用戶端上解析一些查詢運算子，這可能會導致執行效率不佳的查詢。 如需詳細資訊，請參閱[用戶端評估效能問題](/ef/core/querying/client-eval#client-evaluation-performance-issues)。
 * **請勿**在集合上使用投射查詢，這可能會導致執行 "N + 1" SQL 查詢。 如需詳細資訊，請參閱相互[關聯子查詢的優化](/ef/core/what-is-new/ef-core-2.1#optimization-of-correlated-subqueries)。
 
@@ -116,7 +116,7 @@ ASP.NET Core 應用程式中常見的效能問題是封鎖可能是非同步呼�
 建議：
 
 * **請勿**使用具有長時間執行之工作的自訂中介軟體元件。
-* **請使用效能**分析工具（例如[Visual Studio 診斷工具](/visualstudio/profiling/profiling-feature-tour)或[PerfView](https://github.com/Microsoft/perfview)）來識別熱程式[代碼路徑](#understand-hot-code-paths)。
+* **請使用效能**分析工具，例如[Visual Studio 診斷工具](/visualstudio/profiling/profiling-feature-tour)或[PerfView](https://github.com/Microsoft/perfview)) ，以識別[熱程式碼路徑](#understand-hot-code-paths)。
 
 ## <a name="complete-long-running-tasks-outside-of-http-requests"></a>完成 HTTP 要求以外的長時間執行工作
 
@@ -146,7 +146,7 @@ ASP.NET Core 應用程式中常見的效能問題是封鎖可能是非同步呼�
 
 ## <a name="use-the-latest-aspnet-core-release"></a>使用最新的 ASP.NET Core 版本
 
-ASP.NET Core 的每個新版本都包含效能改進。 .NET Core 和 ASP.NET Core 的優化意味著較新的版本通常會優於較舊的版本。 例如，.NET Core 2.1 已新增對已編譯的正則運算式和[Span \<T> ](https://msdn.microsoft.com/magazine/mt814808.aspx)的受惠支援。 ASP.NET Core 2.2 已新增對 HTTP/2 的支援。 [ASP.NET Core 3.0 新增了許多改善](xref:aspnetcore-3.0)，可減少記憶體使用量並改善輸送量。 如果效能是優先順序，請考慮升級至目前版本的 ASP.NET Core。
+ASP.NET Core 的每個新版本都包含效能改進。 .NET Core 和 ASP.NET Core 的優化意味著較新的版本通常會優於較舊的版本。 例如，.NET Core 2.1 已新增對已編譯的正則運算式和[Span \<T> ](/archive/msdn-magazine/2018/january/csharp-all-about-span-exploring-a-new-net-mainstay)的受惠支援。 ASP.NET Core 2.2 已新增對 HTTP/2 的支援。 [ASP.NET Core 3.0 新增了許多改善](xref:aspnetcore-3.0)，可減少記憶體使用量並改善輸送量。 如果效能是優先順序，請考慮升級至目前版本的 ASP.NET Core。
 
 ## <a name="minimize-exceptions"></a>最小化例外狀況
 
@@ -182,7 +182,7 @@ ASP.NET Core 中的所有 i/o 都是非同步。 伺服器會執行 `Stream` 介
 上述程式碼會以非同步方式將整個 HTTP 要求主體讀取到記憶體中。
 
 > [!WARNING]
-> 如果要求很大，將整個 HTTP 要求主體讀取到記憶體中，可能會導致記憶體不足（OOM）狀況。 OOM 可能會導致拒絕服務。  如需詳細資訊，請參閱本檔中的[避免將大型要求內文或回應本文讀取到記憶體](#arlb)中。
+> 如果要求很大，將整個 HTTP 要求本文讀取到記憶體中，可能會導致記憶體不足 (OOM) 狀況。 OOM 可能會導致拒絕服務。  如需詳細資訊，請參閱本檔中的[避免將大型要求內文或回應本文讀取到記憶體](#arlb)中。
 
 **請這樣做：** 下列範例是使用非緩衝處理要求主體的完全非同步：
 
@@ -192,7 +192,7 @@ ASP.NET Core 中的所有 i/o 都是非同步。 伺服器會執行 `Stream` 介
 
 ## <a name="prefer-readformasync-over-requestform"></a>偏好透過要求 ReadFormAsync。表單
 
-使用 `HttpContext.Request.ReadFormAsync` 取代 `HttpContext.Request.Form`。
+使用 `HttpContext.Request.ReadFormAsync`，而不是 `HttpContext.Request.Form`。
 `HttpContext.Request.Form`只有在下列情況下，才能安全地讀取：
 
 * 已由呼叫讀取表單 `ReadFormAsync` ，且
@@ -211,14 +211,14 @@ ASP.NET Core 中的所有 i/o 都是非同步。 伺服器會執行 `Stream` 介
 
 ## <a name="avoid-reading-large-request-bodies-or-response-bodies-into-memory"></a>避免將大型要求內文或回應主體讀取到記憶體中
 
-在 .NET 中，大於 85 KB 的每個物件配置最後都會出現在大型物件堆積（[LOH](https://blogs.msdn.microsoft.com/maoni/2006/04/19/large-object-heap/)）中。 大型物件的成本很高，方法有兩種：
+在 .NET 中，大於 85 KB 的每個物件配置最後都會在大型物件堆積中 ([LOH](https://blogs.msdn.microsoft.com/maoni/2006/04/19/large-object-heap/)) 。 大型物件的成本很高，方法有兩種：
 
 * 配置成本很高，因為必須清除新配置之大型物件的記憶體。 CLR 保證會清除所有新設定物件的記憶體。
 * LOH 會隨著堆積的其餘部分一起收集。 LOH 需要完整的[垃圾收集](/dotnet/standard/garbage-collection/fundamentals)或[Gen2 集合](/dotnet/standard/garbage-collection/fundamentals#generations)。
 
 這[篇 blog 文章](https://adamsitnik.com/Array-Pool/#the-problem)會簡單說明此問題：
 
-> 配置大型物件時，會將它標示為 Gen 2 物件。 不是針對小型物件的 Gen 0。 結果是，如果您在 LOH 中用盡記憶體，GC 就會清除整個受控堆積，而不只是 LOH。 因此，它會清除 Gen 0、Gen 1 和 Gen 2，包括 LOH。 這稱為「完整垃圾收集」，而且是最耗時的垃圾收集。 對於許多應用程式而言，這可能是可接受的。 但絕對不適用於高效能 web 伺服器，因為需要幾個海量儲存體緩衝區來處理平均 web 要求（從通訊端讀取、解壓縮、解碼 JSON & 更多）。
+> 配置大型物件時，會將它標示為 Gen 2 物件。 不是針對小型物件的 Gen 0。 結果是，如果您在 LOH 中用盡記憶體，GC 就會清除整個受控堆積，而不只是 LOH。 因此，它會清除 Gen 0、Gen 1 和 Gen 2，包括 LOH。 這稱為「完整垃圾收集」，而且是最耗時的垃圾收集。 對於許多應用程式而言，這可能是可接受的。 但絕對不適用於高效能 web 伺服器，其中需要幾個海量儲存體緩衝區來處理平均 web 要求 (從通訊端讀取、解壓縮、解碼 JSON & 更多) 。
 
 輕鬆自在管理將大型要求或回應本文儲存成單一 `byte[]` 或 `string` ：
 
@@ -227,12 +227,12 @@ ASP.NET Core 中的所有 i/o 都是非同步。 伺服器會執行 `Stream` 介
 
 ## <a name="working-with-a-synchronous-data-processing-api"></a>使用同步資料處理 API
 
-使用僅支援同步讀取和寫入的序列化程式/還原序列化程式時（例如， [JSON.NET](https://www.newtonsoft.com/json/help/html/Introduction.htm)）：
+使用僅支援同步讀取和寫入的序列化程式/還原序列化程式時 (例如， [JSON.NET](https://www.newtonsoft.com/json/help/html/Introduction.htm)) ：
 
 * 將資料以非同步方式緩衝到記憶體中，然後再將它傳遞至序列化程式/還原序列化程式。
 
 > [!WARNING]
-> 如果要求很大，可能會導致記憶體不足（OOM）狀況。 OOM 可能會導致拒絕服務。  如需詳細資訊，請參閱本檔中的[避免將大型要求內文或回應本文讀取到記憶體](#arlb)中。
+> 如果要求很大，可能會導致記憶體不足 (OOM) 狀況。 OOM 可能會導致拒絕服務。  如需詳細資訊，請參閱本檔中的[避免將大型要求內文或回應本文讀取到記憶體](#arlb)中。
 
 ASP.NET Core 3.0 預設會使用 <xref:System.Text.Json> JSON 序列化。 <xref:System.Text.Json>:
 
@@ -351,6 +351,6 @@ ASP.NET Core 不會緩衝 HTTP 回應主體。 第一次寫入回應時：
 
 [!code-csharp[](performance-best-practices/samples/3.0/Startup22.cs?name=snippet3)]
 
-## <a name="do-not-call-next-if-you-have-already-started-writing-to-the-response-body"></a>如果您已經開始寫入回應主體，請勿呼叫 next （）
+## <a name="do-not-call-next-if-you-have-already-started-writing-to-the-response-body"></a>如果您已開始寫入回應主體，請勿呼叫下一個 ( # A1
 
 元件只有在可以處理和操作回應時才會被呼叫。

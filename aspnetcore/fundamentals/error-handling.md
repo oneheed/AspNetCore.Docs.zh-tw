@@ -7,6 +7,8 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 12/05/2019
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -15,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: fundamentals/error-handling
-ms.openlocfilehash: 7bc21901fe1e9ddf604abf3b5bfecdb8a319f12c
-ms.sourcegitcommit: ca6a1f100c1a3f59999189aa962523442dd4ead1
+ms.openlocfilehash: 2e6aabda449a24496916c6ea9fcbd38062b54c04
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 07/30/2020
-ms.locfileid: "87444102"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88017450"
 ---
 # <a name="handle-errors-in-aspnet-core"></a>處理 ASP.NET Core 中的錯誤
 
@@ -28,7 +30,7 @@ ms.locfileid: "87444102"
 
 本文涵蓋在 ASP.NET Core web 應用程式中處理錯誤的常見方法。 請參閱 <xref:web-api/handle-errors> 以取得 Web api。
 
-[查看或下載範例程式碼](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/error-handling/samples)。 （[如何下載](xref:index#how-to-download-a-sample)）。本文包含如何在範例應用程式中設定預處理器指示詞（ `#if` ， `#endif` ， `#define` ）以啟用不同案例的指示。
+[查看或下載範例程式碼](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/error-handling/samples)。  ([如何下載](xref:index#how-to-download-a-sample)。 ) 文章包含如何在範例應用程式中設定預處理器指示詞 (`#if` 、 `#endif` 、 `#define`) ，以啟用不同案例的指示。
 
 ## <a name="developer-exception-page"></a>開發人員例外狀況頁面
 
@@ -45,8 +47,8 @@ ms.locfileid: "87444102"
 
 * 堆疊追蹤
 * 查詢字串參數 (如果有的話)
-* Cookie (如果有的話)
-* headers
+* Cookies (是否有任何) 
+* 標頭
 
 若要在[範例應用程式](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/error-handling/samples) \(英文\) 中查看開發人員例外狀況頁面，請使用 `DevEnvironment` 前置處理器指示詞，並選取首頁上的 [觸發例外狀況]****。
 
@@ -61,7 +63,7 @@ ms.locfileid: "87444102"
 
 [!code-csharp[](error-handling/samples/2.x/ErrorHandlingSample/Startup.cs?name=snippet_DevPageAndHandlerPage&highlight=5-9)]
 
-RazorPages 應用程式範本會在 pages 資料夾中提供錯誤頁面（*. cshtml*）和 <xref:Microsoft.AspNetCore.Mvc.RazorPages.PageModel> 類別（ `ErrorModel` ）。 *Pages* 針對 MVC 應用程式，專案範本會包含 Error 動作方法和 Error 檢視。 以下為動作方法：
+[ Razor Pages] 應用程式範本會在 pages 資料夾中提供錯誤頁面 (*. Cshtml*) 和 <xref:Microsoft.AspNetCore.Mvc.RazorPages.PageModel> class (`ErrorModel`) *Pages* 。 針對 MVC 應用程式，專案範本會包含 Error 動作方法和 Error 檢視。 以下為動作方法：
 
 ```csharp
 [AllowAnonymous]
@@ -214,7 +216,7 @@ if (statusCodePagesFeature != null)
 * Dotnet 會處理損毀狀況。
 * 當 HTTP 伺服器是 [Kestrel](xref:fundamentals/servers/kestrel) 時，不會顯示任何錯誤頁面。
 
-在 [IIS](/iis) (或 Azure App Service) 或 [IIS Express](/iis/extensions/introduction-to-iis-express/iis-express-overview) 上執行時，如果無法啟動處理序，[模組](xref:host-and-deploy/aspnet-core-module)會傳回 *502.5 - 處理序失敗*。 如需詳細資訊，請參閱 <xref:test/troubleshoot-azure-iis>。
+在 [IIS](/iis) (或 Azure App Service) 或 [IIS Express](/iis/extensions/introduction-to-iis-express/iis-express-overview) 上執行時，如果無法啟動處理序，[模組](xref:host-and-deploy/aspnet-core-module)會傳回 *502.5 - 處理序失敗*。 如需詳細資訊，請參閱<xref:test/troubleshoot-azure-iis>。
 
 ## <a name="database-error-page"></a>資料庫錯誤頁面
 
@@ -233,7 +235,7 @@ if (env.IsDevelopment())
 
 ## <a name="exception-filters"></a>例外狀況篩選條件
 
-在 MVC 應用程式中，您能以全域設定例外狀況篩選條件，或是以每個控制器或每個動作為基礎的方式設定。 在 [ Razor 頁面應用程式] 中，您可以全域或根據頁面模型來設定它們。 這些篩選會處理在控制器動作或其他篩選條件執行期間發生但的任何未處理例外狀況。 如需詳細資訊，請參閱 <xref:mvc/controllers/filters#exception-filters>。
+在 MVC 應用程式中，您能以全域設定例外狀況篩選條件，或是以每個控制器或每個動作為基礎的方式設定。 在 [ Razor 頁面應用程式] 中，您可以全域或根據頁面模型來設定它們。 這些篩選會處理在控制器動作或其他篩選條件執行期間發生但的任何未處理例外狀況。 如需詳細資訊，請參閱<xref:mvc/controllers/filters#exception-filters>。
 
 > [!TIP]
 > 例外狀況篩選條件適合用來截獲 MVC 動作中發生的例外狀況，但是它們並不像例外狀況處理中介軟體那麼有彈性。 我們建議使用中介軟體。 請只在需要根據已選擇的 MVC 動作執行不同的錯誤處理時，才使用篩選條件。

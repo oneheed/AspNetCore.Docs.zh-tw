@@ -6,6 +6,8 @@ monikerRange: '>= aspnetcore-3.0'
 ms.author: johluo
 ms.date: 10/17/2019
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -14,18 +16,18 @@ no-loc:
 - Razor
 - SignalR
 uid: grpc/dotnet-grpc
-ms.openlocfilehash: 1e4e5cd6a4a687ecacf0c4803784e68aee228498
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: d41958d586f54d5944af187933f2b0248f763171
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85404206"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88016125"
 ---
 # <a name="manage-protobuf-references-with-dotnet-grpc"></a>使用 dotnet-grpc 管理 Protobuf 參考
 
 作者：[John Luo](https://github.com/juntaoluo)
 
-`dotnet-grpc`是 .NET Core 通用工具，可用於管理 .NET gRPC 專案內的[Protobuf （*. proto*）](xref:grpc/basics#proto-file)參考。 此工具可以用來新增、重新整理、移除和列出 Protobuf 的參考。
+`dotnet-grpc`是一種 .NET Core 通用工具，可用於管理 Protobuf 的 .NET gRPC 專案中的[ (*。 proto*) ](xref:grpc/basics#proto-file)參考。 此工具可以用來新增、重新整理、移除和列出 Protobuf 的參考。
 
 ## <a name="installation"></a>安裝
 
@@ -68,13 +70,13 @@ dotnet grpc add-file [options] <files>...
 
 #### <a name="arguments"></a>引數
 
-| 引數 | 說明 |
+| 引數 | 描述 |
 |-|-|
 | files | Protobuf 檔案會參考。 這些可以是本機 protobuf 檔案的 glob 路徑。 |
 
-#### <a name="options"></a>選項
+#### <a name="options"></a>選項。
 
-| Short 選項 | Long 選項 | 說明 |
+| Short 選項 | Long 選項 | 描述 |
 |-|-|-|
 | -p | --project | 要操作之專案檔的路徑。 如果未指定檔案，此命令會在目前的目錄中搜尋一個檔案。
 | -S | --服務 | 應產生的 gRPC 服務類型。 如果 `Default` 指定， `Both` 則會用於 Web 專案，並 `Client` 用於非 Web 專案。 接受的值為 `Both` 、 `Client` 、 `Default` 、 `None` 、 `Server` 。
@@ -93,13 +95,13 @@ dotnet-grpc add-url [options] <url>
 
 #### <a name="arguments"></a>引數
 
-| 引數 | 說明 |
+| 引數 | 描述 |
 |-|-|
 | url | 遠端 protobuf 檔的 URL。 |
 
-#### <a name="options"></a>選項
+#### <a name="options"></a>選項。
 
-| Short 選項 | Long 選項 | 說明 |
+| Short 選項 | Long 選項 | 描述 |
 |-|-|-|
 | -o | --output | 指定遠端 protobuf 檔的下載路徑。 這是必要選項。
 | -p | --project | 要操作之專案檔的路徑。 如果未指定檔案，此命令會在目前的目錄中搜尋一個檔案。
@@ -122,17 +124,17 @@ dotnet-grpc remove [options] <references>...
 
 ### <a name="arguments"></a>引數
 
-| 引數 | 說明 |
+| 引數 | 描述 |
 |-|-|
 | 參考 | 要移除之 protobuf 參考的 Url 或檔案路徑。 |
 
-### <a name="options"></a>選項
+### <a name="options"></a>選項。
 
-| Short 選項 | Long 選項 | 說明 |
+| Short 選項 | Long 選項 | 描述 |
 |-|-|-|
 | -p | --project | 要操作之專案檔的路徑。 如果未指定檔案，此命令會在目前的目錄中搜尋一個檔案。
 
-## <a name="refresh"></a>重新整理
+## <a name="refresh"></a>Refresh
 
 `refresh`命令是用來以來源 URL 的最新內容來更新遠端參考。 下載檔案路徑和來源 URL 都可以用來指定要更新的參考。 注意:
 
@@ -149,13 +151,13 @@ dotnet-grpc refresh [options] [<references>...]
 
 ### <a name="arguments"></a>引數
 
-| 引數 | 說明 |
+| 引數 | 描述 |
 |-|-|
 | 參考 | 應更新之遠端 protobuf 參考的 Url 或檔案路徑。 將此引數保留空白以重新整理所有遠端參考。 |
 
-### <a name="options"></a>選項
+### <a name="options"></a>選項。
 
-| Short 選項 | Long 選項 | 說明 |
+| Short 選項 | Long 選項 | 描述 |
 |-|-|-|
 | -p | --project | 要操作之專案檔的路徑。 如果未指定檔案，此命令會在目前的目錄中搜尋一個檔案。
 | | --試執行 | 輸出會更新而不下載任何新內容的檔案清單。
@@ -170,9 +172,9 @@ dotnet-grpc refresh [options] [<references>...]
 dotnet-grpc list [options]
 ```
 
-### <a name="options"></a>選項
+### <a name="options"></a>選項。
 
-| Short 選項 | Long 選項 | 說明 |
+| Short 選項 | Long 選項 | 描述 |
 |-|-|-|
 | -p | --project | 要操作之專案檔的路徑。 如果未指定檔案，此命令會在目前的目錄中搜尋一個檔案。
 

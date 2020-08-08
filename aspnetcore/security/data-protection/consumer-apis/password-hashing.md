@@ -5,6 +5,8 @@ description: 瞭解如何使用 ASP.NET Core 的資料保護 Api 來雜湊密碼
 ms.author: riande
 ms.date: 10/14/2016
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -13,12 +15,12 @@ no-loc:
 - Razor
 - SignalR
 uid: security/data-protection/consumer-apis/password-hashing
-ms.openlocfilehash: f7d15cab463972d9c0fff52b645be454865ce2ca
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: 643d468763c6a935fc618a22920cb79119258087
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85408951"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88018386"
 ---
 # <a name="hash-passwords-in-aspnet-core"></a>ASP.NET Core 中的雜湊密碼
 
@@ -26,11 +28,11 @@ ms.locfileid: "85408951"
 
 封裝目前提供的方法可 `KeyDerivation.Pbkdf2` 讓您使用[PBKDF2 演算法](https://tools.ietf.org/html/rfc2898#section-5.2)來對密碼進行雜湊處理。 此 API 與 .NET Framework 的現有[Rfc2898DeriveBytes 類型](/dotnet/api/system.security.cryptography.rfc2898derivebytes)非常類似，但有三個重要的差異：
 
-1. `KeyDerivation.Pbkdf2`方法支援使用多個 PRFs （目前為 `HMACSHA1` 、 `HMACSHA256` 和 `HMACSHA512` ），而 `Rfc2898DeriveBytes` 類型僅支援 `HMACSHA1` 。
+1. `KeyDerivation.Pbkdf2`方法支援使用多個 PRFs (目前 `HMACSHA1` 、 `HMACSHA256` 和 `HMACSHA512`) ，而 `Rfc2898DeriveBytes` 類型僅支援 `HMACSHA1` 。
 
-2. `KeyDerivation.Pbkdf2`方法會偵測目前的作業系統，並嘗試選擇最優化的常式執行，在某些情況下提供更好的效能。 （在 Windows 8 上，它提供的輸送量大約10倍 `Rfc2898DeriveBytes` ）。
+2. `KeyDerivation.Pbkdf2`方法會偵測目前的作業系統，並嘗試選擇最優化的常式執行，在某些情況下提供更好的效能。  (在 Windows 8 上，它提供了大約10倍的輸送量 `Rfc2898DeriveBytes` 。 ) 
 
-3. `KeyDerivation.Pbkdf2`方法會要求呼叫者指定所有參數（salt、PRF 和反復專案計數）。 型別會 `Rfc2898DeriveBytes` 提供這些的預設值。
+3. `KeyDerivation.Pbkdf2`方法需要呼叫端指定 (salt、PRF 和反復專案計數) 的所有參數。 型別會 `Rfc2898DeriveBytes` 提供這些的預設值。
 
 [!code-csharp[](password-hashing/samples/passwordhasher.cs)]
 

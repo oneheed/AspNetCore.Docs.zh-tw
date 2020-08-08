@@ -5,6 +5,8 @@ description: 驗證原則配置可讓您更輕鬆地擁有單一邏輯驗證架�
 ms.author: riande
 ms.date: 12/05/2019
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -13,16 +15,16 @@ no-loc:
 - Razor
 - SignalR
 uid: security/authentication/policyschemes
-ms.openlocfilehash: a8bde9633f06f41ebcb55480eb2322544db4b4da
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: ddee613bf9c603542f17adf59a835a2ddbdc25a3
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85408756"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88017801"
 ---
 # <a name="policy-schemes-in-aspnet-core"></a>ASP.NET Core 中的原則配置
 
-驗證原則配置可讓您更輕鬆地讓單一邏輯驗證架構使用多種方法。 例如，原則配置可能會針對挑戰使用 Google 驗證，並針對其他所有專案使用 cookie 驗證。 驗證原則配置會使其成為：
+驗證原則配置可讓您更輕鬆地讓單一邏輯驗證架構使用多種方法。 例如，原則配置可能會針對挑戰使用 Google 驗證，並針對 cookie 其他所有專案進行驗證。 驗證原則配置會使其成為：
 
 * 輕鬆將任何驗證動作轉送至另一個配置。
 * 根據要求動態轉送。
@@ -36,7 +38,7 @@ ms.locfileid: "85408756"
 
 ## <a name="examples"></a>範例
 
-下列範例顯示結合較低層級配置的較高層級架構。 Google 驗證用於挑戰，而 cookie 驗證則用於其他所有專案：
+下列範例顯示結合較低層級配置的較高層級架構。 Google 驗證會用於挑戰，而 cookie 驗證會用於其他任何專案：
 
 [!code-csharp[sample](policyschemes/samples/Startup.cs?name=snippet1)]
 

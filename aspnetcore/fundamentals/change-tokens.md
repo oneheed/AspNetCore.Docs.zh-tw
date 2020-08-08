@@ -6,6 +6,8 @@ monikerRange: '>= aspnetcore-2.1'
 ms.author: riande
 ms.date: 10/07/2019
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -14,12 +16,12 @@ no-loc:
 - Razor
 - SignalR
 uid: fundamentals/change-tokens
-ms.openlocfilehash: dd271f9db016c35eb072749258a499168b39010f
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: f52b210b33cd319e36570a1f731bb02a86189a96
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85408431"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88017476"
 ---
 # <a name="detect-changes-with-change-tokens-in-aspnet-core"></a>在 ASP.NET Core 中使用變更權杖來偵測變更
 
@@ -27,7 +29,7 @@ ms.locfileid: "85408431"
 
 「變更權杖」** 是用來追蹤狀態變更的一般用途低階建置組塊。
 
-[查看或下載範例程式碼](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/change-tokens/samples/)（[如何下載](xref:index#how-to-download-a-sample)）
+[查看或下載範例程式碼](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/change-tokens/samples/) ([如何下載](xref:index#how-to-download-a-sample)) 
 
 ## <a name="ichangetoken-interface"></a>IChangeToken 介面
 
@@ -38,18 +40,18 @@ ms.locfileid: "85408431"
 * <xref:Microsoft.Extensions.Primitives.IChangeToken.ActiveChangeCallbacks> 指出權杖是否主動引發回呼。 如果 `ActiveChangedCallbacks` 設定為 `false`，則絕不會呼叫回呼，而且應用程式必須輪詢 `HasChanged` 是否有變更。 如果未發生任何變更，或基礎變更接聽程式已遭處置或停用，權杖也可能永遠不會被取消。
 * <xref:Microsoft.Extensions.Primitives.IChangeToken.HasChanged> 會接收指出是否已發生變更的值。
 
-`IChangeToken`介面包含[RegisterChangeCallback （Action \<Object> ，Object）](xref:Microsoft.Extensions.Primitives.IChangeToken.RegisterChangeCallback*)方法，它會註冊在權杖變更時所叫用的回呼。 `HasChanged` 必須在叫用回呼之前設定。
+`IChangeToken`介面包含[RegisterChangeCallback (動作 \<Object> 、物件) ](xref:Microsoft.Extensions.Primitives.IChangeToken.RegisterChangeCallback*)方法，它會註冊在權杖變更時所叫用的回呼。 `HasChanged` 必須在叫用回呼之前設定。
 
 ## <a name="changetoken-class"></a>ChangeToken 類別
 
 <xref:Microsoft.Extensions.Primitives.ChangeToken> 靜態類別用來傳播已發生變更的通知。 `ChangeToken` 位於 <xref:Microsoft.Extensions.Primitives?displayProperty=fullName> 命名空間內。 會以隱含方式為 ASP.NET Core 應用程式提供了[Microsoft Extensions 原型](https://www.nuget.org/packages/Microsoft.Extensions.Primitives/)NuGet 套件。
 
-[ChangeToken （Func \<IChangeToken> ，Action）](xref:Microsoft.Extensions.Primitives.ChangeToken.OnChange*)方法會在 `Action` 權杖變更時，註冊以進行呼叫：
+[ChangeToken 會 (Func \<IChangeToken> ，Action) ](xref:Microsoft.Extensions.Primitives.ChangeToken.OnChange*)方法會 `Action` 在權杖變更時，註冊以進行呼叫：
 
 * `Func<IChangeToken>` 會產生權杖。
 * 在權杖變更時呼叫 `Action`。
 
-[ChangeToken \<TState> （Func \<IChangeToken> ，Action \<TState> ，TState）](xref:Microsoft.Extensions.Primitives.ChangeToken.OnChange*)多載會採用 `TState` 傳入權杖取用者的額外參數 `Action` 。
+[ChangeToken \<TState> (Func \<IChangeToken> 、Action \<TState> 、TState) ](xref:Microsoft.Extensions.Primitives.ChangeToken.OnChange*)多載會採用 `TState` 傳入權杖取用者的額外參數 `Action` 。
 
 `OnChange` 會傳回 <xref:System.IDisposable>。 呼叫 <xref:System.IDisposable.Dispose*> 將阻止權杖接聽其他變更和釋出權杖的資源。
 
@@ -225,7 +227,7 @@ var compositeChangeToken =
 
 「變更權杖」** 是用來追蹤狀態變更的一般用途低階建置組塊。
 
-[查看或下載範例程式碼](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/change-tokens/samples/)（[如何下載](xref:index#how-to-download-a-sample)）
+[查看或下載範例程式碼](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/change-tokens/samples/) ([如何下載](xref:index#how-to-download-a-sample)) 
 
 ## <a name="ichangetoken-interface"></a>IChangeToken 介面
 
@@ -236,18 +238,18 @@ var compositeChangeToken =
 * <xref:Microsoft.Extensions.Primitives.IChangeToken.ActiveChangeCallbacks> 指出權杖是否主動引發回呼。 如果 `ActiveChangedCallbacks` 設定為 `false`，則絕不會呼叫回呼，而且應用程式必須輪詢 `HasChanged` 是否有變更。 如果未發生任何變更，或基礎變更接聽程式已遭處置或停用，權杖也可能永遠不會被取消。
 * <xref:Microsoft.Extensions.Primitives.IChangeToken.HasChanged> 會接收指出是否已發生變更的值。
 
-`IChangeToken`介面包含[RegisterChangeCallback （Action \<Object> ，Object）](xref:Microsoft.Extensions.Primitives.IChangeToken.RegisterChangeCallback*)方法，它會註冊在權杖變更時所叫用的回呼。 `HasChanged` 必須在叫用回呼之前設定。
+`IChangeToken`介面包含[RegisterChangeCallback (動作 \<Object> 、物件) ](xref:Microsoft.Extensions.Primitives.IChangeToken.RegisterChangeCallback*)方法，它會註冊在權杖變更時所叫用的回呼。 `HasChanged` 必須在叫用回呼之前設定。
 
 ## <a name="changetoken-class"></a>ChangeToken 類別
 
 <xref:Microsoft.Extensions.Primitives.ChangeToken> 靜態類別用來傳播已發生變更的通知。 `ChangeToken` 位於 <xref:Microsoft.Extensions.Primitives?displayProperty=fullName> 命名空間內。 如需不使用 [Microsoft.AspNetCore.App 中繼套件](xref:fundamentals/metapackage-app)的應用程式，請建立 [Microsoft.Extensions.Primitives](https://www.nuget.org/packages/Microsoft.Extensions.Primitives/) NuGet 套件的套件參考。
 
-[ChangeToken （Func \<IChangeToken> ，Action）](xref:Microsoft.Extensions.Primitives.ChangeToken.OnChange*)方法會在 `Action` 權杖變更時，註冊以進行呼叫：
+[ChangeToken 會 (Func \<IChangeToken> ，Action) ](xref:Microsoft.Extensions.Primitives.ChangeToken.OnChange*)方法會 `Action` 在權杖變更時，註冊以進行呼叫：
 
 * `Func<IChangeToken>` 會產生權杖。
 * 在權杖變更時呼叫 `Action`。
 
-[ChangeToken \<TState> （Func \<IChangeToken> ，Action \<TState> ，TState）](xref:Microsoft.Extensions.Primitives.ChangeToken.OnChange*)多載會採用 `TState` 傳入權杖取用者的額外參數 `Action` 。
+[ChangeToken \<TState> (Func \<IChangeToken> 、Action \<TState> 、TState) ](xref:Microsoft.Extensions.Primitives.ChangeToken.OnChange*)多載會採用 `TState` 傳入權杖取用者的額外參數 `Action` 。
 
 `OnChange` 會傳回 <xref:System.IDisposable>。 呼叫 <xref:System.IDisposable.Dispose*> 將阻止權杖接聽其他變更和釋出權杖的資源。
 

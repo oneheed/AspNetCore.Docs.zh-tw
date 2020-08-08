@@ -5,6 +5,8 @@ description: 了解如何診斷 ASP.NET Core 應用程式的當地語系化問�
 ms.author: riande
 ms.date: 01/24/2019
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -13,12 +15,12 @@ no-loc:
 - Razor
 - SignalR
 uid: fundamentals/troubleshoot-aspnet-core-localization
-ms.openlocfilehash: 48f75b4fbfdb2078f07efeffd8d4105366998876
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: 801ae3a708d23308cbf909ceeace160e3c0db1bd
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85407079"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88016462"
 ---
 # <a name="troubleshoot-aspnet-core-localization"></a>針對 ASP.NET Core 當地語系化進行疑難排解
 
@@ -58,7 +60,7 @@ ASP.NET Core 已為當地語系化資源檔命名預先定義了規則與方針�
 - 某些語言的 `resx` 中缺少這項資源，但其他語言則有。
 - 如果您仍持續發生問題，請查看當地語系化記錄訊息 (在 `Debug` 記錄層級)，以獲取所缺少資源的詳細資料。
 
-_**提示：** 使用時 `CookieRequestCultureProvider` ，請確認單引號不會與當地語系化 cookie 值內的文化特性搭配使用。例如， `c='en-UK'|uic='en-US'` 是不正確 cookie 值，而 `c=en-UK|uic=en-US` 則是有效的。_
+_**提示：** 使用時 `CookieRequestCultureProvider` ，請確認不會將單引號用於當地語系化值內的文化特性 cookie 。例如， `c='en-UK'|uic='en-US'` 是不正確 cookie 值，而 `c=en-UK|uic=en-US` 則是有效的。_
 
 ## <a name="resources--class-libraries-issues"></a>資源與類別庫的問題
 

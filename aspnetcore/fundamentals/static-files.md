@@ -6,18 +6,20 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 6/23/2020
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: fundamentals/static-files
-ms.openlocfilehash: 3f4fc6f7d9d44d76d0504d9666df41571fd0b12c
-ms.sourcegitcommit: d306407dc5bfe6fdfbac482214b3f59371b582bc
+ms.openlocfilehash: 32f794d498533e846343831d2360e98939105fb1
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 07/04/2020
-ms.locfileid: "85951944"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88016671"
 ---
 # <a name="static-files-in-aspnet-core"></a>ASP.NET Core 中的靜態檔案
 
@@ -27,7 +29,7 @@ ms.locfileid: "85951944"
 
 靜態檔案（例如 HTML、CSS、影像和 JavaScript）是 ASP.NET Core 應用程式預設會直接提供給用戶端的資產。
 
-[查看或下載範例程式碼](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/static-files/samples)（[如何下載](xref:index#how-to-download-a-sample)）
+[查看或下載範例程式碼](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/static-files/samples) ([如何下載](xref:index#how-to-download-a-sample)) 
 
 ## <a name="serve-static-files"></a>提供靜態檔案
 
@@ -195,7 +197,7 @@ app.UseFileServer(enableDirectoryBrowsing: true);
 
 ![靜態檔案清單](static-files/_static/db2.png)
 
-<xref:Microsoft.AspNetCore.Builder.DefaultFilesExtensions.UseDefaultFiles*>和 <xref:Microsoft.AspNetCore.Builder.DirectoryBrowserExtensions.UseDirectoryBrowser*> 會從目標 uri 執行用戶端重新導向，而不使用尾端的 `/` 目標 uri `/` 。 例如，從 `https://<hostname>/StaticFiles` 到 `https://<hostname>/StaticFiles/` 。 *StaticFiles*目錄內的相對 url 無效，沒有尾端斜線（ `/` ）。
+<xref:Microsoft.AspNetCore.Builder.DefaultFilesExtensions.UseDefaultFiles*>和 <xref:Microsoft.AspNetCore.Builder.DirectoryBrowserExtensions.UseDirectoryBrowser*> 會從目標 uri 執行用戶端重新導向，而不使用尾端的 `/` 目標 uri `/` 。 例如，從 `https://<hostname>/StaticFiles` 到 `https://<hostname>/StaticFiles/` 。 在*StaticFiles*目錄內的相對 url 無效，沒有尾端斜線 (`/`) 。
 
 ## <a name="fileextensioncontenttypeprovider"></a>FileExtensionContentTypeProvider
 
@@ -264,7 +266,7 @@ app.UseFileServer(enableDirectoryBrowsing: true);
 
 HTML、CSS、影像和 JavaScript 這類靜態檔案都是 ASP.NET Core 應用程式直接提供給用戶端的資產。 您需要進行一些設定，才能提供這些檔案。
 
-[查看或下載範例程式碼](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/static-files/samples)（[如何下載](xref:index#how-to-download-a-sample)）
+[查看或下載範例程式碼](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/static-files/samples) ([如何下載](xref:index#how-to-download-a-sample)) 
 
 ## <a name="serve-static-files"></a>提供靜態檔案
 
@@ -464,7 +466,7 @@ app.UseFileServer(enableDirectoryBrowsing: true);
 ### <a name="considerations"></a>考量
 
 > [!WARNING]
-> `UseDirectoryBrowser` 和 `UseStaticFiles` 可能會導致洩漏祕密。 強烈建議您在生產環境中停用目錄瀏覽功能。 透過 `UseStaticFiles` 或 `UseDirectoryBrowser`，仔細檢閱要啟用哪些目錄。 因為整個目錄和其子目錄都可供公開存取。 儲存適用于在專用目錄中提供給公用的檔案，例如* \<content_root> /wwwroot*。 將這些檔案與 MVC views、 Razor Pages （僅限2.x）、設定檔等隔開。
+> `UseDirectoryBrowser` 和 `UseStaticFiles` 可能會導致洩漏祕密。 強烈建議您在生產環境中停用目錄瀏覽功能。 透過 `UseStaticFiles` 或 `UseDirectoryBrowser`，仔細檢閱要啟用哪些目錄。 因為整個目錄和其子目錄都可供公開存取。 儲存適用于在專用目錄中提供給公用的檔案，例如* \<content_root> /wwwroot*。 將這些檔案與 MVC views 分開， Razor 只有) 、設定檔等的頁面 (2.x。
 
 * 使用 `UseDirectoryBrowser` 和 `UseStaticFiles` 公開內容的 URL 可能有區分大小寫，並受限於基礎檔案系統的字元限制。 例如，Windows 不區分大小寫&mdash;macOS 和 Linux 則區分大小寫。
 
@@ -478,7 +480,7 @@ app.UseFileServer(enableDirectoryBrowsing: true);
 > [!WARNING]
 > 如果已啟用 IIS 靜態檔案處理常式，**但是**未正確設定 ASP.NET Core 模組，仍可提供靜態檔案。 舉例來說，未部署 *web.config* 檔案時可能會發生上述情況。
 
-* 將程式碼檔案（包括 *.cs*和*cshtml*）放在應用程式專案的[web 根目錄](xref:fundamentals/index#web-root)外部。 如此一來，即會建立應用程式的用戶端內容與伺服器端程式碼之間的邏輯分隔。 這樣可以防止伺服器端程式碼外洩。
+* 在應用程式專案的[web 根目錄](xref:fundamentals/index#web-root)外，將程式碼檔案 (包括 *.cs*和*cshtml*) 。 如此一來，即會建立應用程式的用戶端內容與伺服器端程式碼之間的邏輯分隔。 這樣可以防止伺服器端程式碼外洩。
 
 ## <a name="additional-resources"></a>其他資源
 

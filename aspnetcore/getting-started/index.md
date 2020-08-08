@@ -6,6 +6,8 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 01/07/2020
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -14,12 +16,12 @@ no-loc:
 - Razor
 - SignalR
 uid: getting-started
-ms.openlocfilehash: b88460cdff5d8c30c6a28afdb4f67e8e0b6b819c
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: 74df2ade64e0821dcbb28252e8a637f81d15e375
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85403361"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88016475"
 ---
 # <a name="tutorial-get-started-with-aspnet-core"></a>教學課程：ASP.NET Core 使用者入門
 
@@ -49,7 +51,7 @@ ms.locfileid: "85403361"
 dotnet new webapp -o aspnetcoreapp
 ```
 
-上述命令會：
+上述命令︰
 
 * 建立新的 web 應用程式。  
 * `-o aspnetcoreapp`參數會建立名為*aspnetcoreapp*的目錄，其中包含應用程式的來源檔案。
@@ -101,7 +103,7 @@ dotnet watch run
 
 命令殼層指出應用程式已啟動之後，瀏覽到 `https://localhost:5001`。
 
-## <a name="edit-a-razor-page"></a>編輯 Razor 頁面
+## <a name="edit-a-no-locrazor-page"></a>編輯 Razor 頁面
 
 開啟*Pages/Index. cshtml* ，並以下列反白顯示的標記修改並儲存頁面：
 

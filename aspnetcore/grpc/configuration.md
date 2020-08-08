@@ -7,6 +7,8 @@ ms.author: jamesnk
 ms.custom: mvc
 ms.date: 05/26/2020
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -15,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: grpc/configuration
-ms.openlocfilehash: e56410d2e9a893a406ec5b60841c2b70dca7205c
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: e6767aedcf9c6dbcbd7eec97e1c7a5b6161992aa
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85403556"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88016189"
 ---
 # <a name="grpc-for-net-configuration"></a>適用于 .NET 設定的 gRPC
 
@@ -28,11 +30,11 @@ ms.locfileid: "85403556"
 
 gRPC 服務會 `AddGrpc` 在*Startup.cs*中以設定。 下表說明設定 gRPC 服務的選項：
 
-| 選項 | 預設值 | 說明 |
+| 選項 | 預設值 | 描述 |
 | ------ | ------------- | ----------- |
 | MaxSendMessageSize | `null` | 可以從伺服器傳送的訊息大小上限（以位元組為單位）。 如果嘗試傳送的訊息超過設定的訊息大小上限，就會產生例外狀況。 當設定為時 `null` ，訊息大小不受限制。 |
 | MaxReceiveMessageSize | 4 MB | 伺服器可以接收的訊息大小上限（以位元組為單位）。 如果伺服器收到超過此限制的訊息，就會擲回例外狀況。 增加這個值可讓伺服器接收較大的訊息，但可能會對記憶體耗用量造成負面影響。 當設定為時 `null` ，訊息大小不受限制。 |
-| EnableDetailedErrors | `false` | 如果為，則在 `true` 服務方法中擲回例外狀況時，會將詳細的例外狀況訊息傳回給用戶端。 預設值為 `false`。 將設定 `EnableDetailedErrors` 為 `true` 可能會洩漏機密資訊。 |
+| EnableDetailedErrors | `false` | 如果為，則在 `true` 服務方法中擲回例外狀況時，會將詳細的例外狀況訊息傳回給用戶端。 預設為 `false`。 將設定 `EnableDetailedErrors` 為 `true` 可能會洩漏機密資訊。 |
 | CompressionProviders | gzip | 用來壓縮和解壓縮訊息的壓縮提供者集合。 您可以建立自訂壓縮提供者，並將其新增至集合。 預設設定的提供者支援**gzip**壓縮。 |
 | <span style="word-break:normal;word-wrap:normal">ResponseCompressionAlgorithm</span> | `null` | 壓縮演算法，用來壓縮從伺服器傳送的訊息。 演算法必須符合中的壓縮提供者 `CompressionProviders` 。 若要讓演算法壓縮回應，用戶端必須在**grpc-accept-encoding**標頭中傳送它，以指示它支援演算法。 |
 | ResponseCompressionLevel | `null` | 壓縮層級，用來壓縮從伺服器傳送的訊息。 |
@@ -51,7 +53,7 @@ gRPC 服務會 `AddGrpc` 在*Startup.cs*中以設定。 下表說明設定 gRPC 
 
 gRPC client configuration 已設定為 on `GrpcChannelOptions` 。 下表說明設定 gRPC 通道的選項：
 
-| 選項 | 預設值 | 說明 |
+| 選項 | 預設值 | 描述 |
 | ------ | ------------- | ----------- |
 | HttpHandler | 新增實例 | `HttpMessageHandler`用來進行 gRPC 呼叫的。 您可以設定用戶端，將自訂 `HttpClientHandler` 或新增額外的處理常式至 HTTP 管線以進行 gRPC 呼叫。 如果未 `HttpMessageHandler` 指定，則會為 `HttpClientHandler` 通道建立具有自動處置的新實例。 |
 | HttpClient | `null` | `HttpClient`用來進行 gRPC 呼叫的。 這項設定是的替代方法 `HttpHandler` 。 |

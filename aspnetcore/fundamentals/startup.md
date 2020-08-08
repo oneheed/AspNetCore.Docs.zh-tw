@@ -7,6 +7,8 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 12/05/2019
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -15,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: fundamentals/startup
-ms.openlocfilehash: 0d1bf0dd23b7f3b99d6e9383ffc72291c1b138ec
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: 84b2aa6185654789b925dc4a9262f446de6c0a3c
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85400709"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88016592"
 ---
 # <a name="app-startup-in-aspnet-core"></a>ASP.NET Core 中的應用程式啟動
 
@@ -34,7 +36,7 @@ ms.locfileid: "85400709"
 
 ASP.NET Core 應用程式使用 `Startup` 類別，其依慣例命名為 `Startup`。 `Startup` 類別：
 
-* 選擇性地包含 <xref:Microsoft.AspNetCore.Hosting.StartupBase.ConfigureServices*> 方法來設定應用程式的服務**。 服務的定義是可提供應用程式功能的可重複使用元件。 服務會在中*註冊*，並透過相依性 `ConfigureServices` [插入（DI）](xref:fundamentals/dependency-injection)或在整個應用程式中使用 <xref:Microsoft.AspNetCore.Builder.IApplicationBuilder.ApplicationServices*> 。
+* 選擇性地包含 <xref:Microsoft.AspNetCore.Hosting.StartupBase.ConfigureServices*> 方法來設定應用程式的服務**。 服務的定義是可提供應用程式功能的可重複使用元件。 服務會*registered*透過相依性 `ConfigureServices` [插入 (DI) ](xref:fundamentals/dependency-injection)或，在整個應用程式中註冊及使用 <xref:Microsoft.AspNetCore.Builder.IApplicationBuilder.ApplicationServices*> 。
 * 包含 <xref:Microsoft.AspNetCore.Hosting.StartupBase.Configure*> 方法來建立應用程式的要求處理管線。
 
 應用程式啟動時，ASP.NET Core 執行階段會呼叫 `ConfigureServices` 與 `Configure`：
@@ -50,7 +52,7 @@ ASP.NET Core 應用程式使用 `Startup` 類別，其依慣例命名為 `Startu
 
 主機會提供可供 `Startup` 類別建構函式使用的服務。 應用程式會透過 `ConfigureServices` 新增其他服務。 主機和應用程式服務都可以在 `Configure` 和整個應用程式中使用。
 
-`Startup`使用[泛型主機](xref:fundamentals/host/generic-host)（）時，只有下列服務類型可以插入至此函式 <xref:Microsoft.Extensions.Hosting.IHostBuilder> ：
+`Startup`使用[泛型主機](xref:fundamentals/host/generic-host) () 時，只有下列服務類型可以插入至此函式 <xref:Microsoft.Extensions.Hosting.IHostBuilder> ：
 
 * <xref:Microsoft.AspNetCore.Hosting.IWebHostEnvironment>
 * <xref:Microsoft.Extensions.Hosting.IHostEnvironment>
@@ -76,7 +78,7 @@ ASP.NET Core 應用程式使用 `Startup` 類別，其依慣例命名為 `Startu
 
 主機可能會在呼叫 `Startup` 方法之前，設定一些服務。 如需詳細資訊，請參閱[主機](xref:fundamentals/index#host)。
 
-對於需要大量安裝的功能，可從 <xref:Microsoft.Extensions.DependencyInjection.IServiceCollection> 上取得 `Add{Service}` 擴充方法。 例如 **Add**DbContext、**Add**DefaultIdentity、**Add**EntityFrameworkStores 和 **Add**RazorPages：
+對於需要大量安裝的功能，可從 <xref:Microsoft.Extensions.DependencyInjection.IServiceCollection> 上取得 `Add{Service}` 擴充方法。 例如，**新增**DbCoNtext、**新增**預設值 Identity 、**新增**EntityFrameworkStores，以及**新增** Razor 頁面：
 
 [!code-csharp[](startup/3.0_samples/StartupFilterSample/StartupIdentity.cs?name=snippet)]
 
@@ -151,7 +153,7 @@ ASP.NET Core 應用程式使用 `Startup` 類別，其依慣例命名為 `Startu
 
 ## <a name="add-configuration-at-startup-from-an-external-assembly"></a>在啟動時從外部組件新增組態
 
-<xref:Microsoft.AspNetCore.Hosting.IHostingStartup> 實作允許在啟動時從應用程式 `Startup` 類別外部的外部組件，針對應用程式新增增強功能。 如需詳細資訊，請參閱 <xref:fundamentals/configuration/platform-specific-configuration> 。
+<xref:Microsoft.AspNetCore.Hosting.IHostingStartup> 實作允許在啟動時從應用程式 `Startup` 類別外部的外部組件，針對應用程式新增增強功能。 如需詳細資訊，請參閱<xref:fundamentals/configuration/platform-specific-configuration>。
 
 ## <a name="additional-resources"></a>其他資源
 
@@ -169,7 +171,7 @@ ASP.NET Core 應用程式使用 `Startup` 類別，其依慣例命名為 `Startu
 
 ASP.NET Core 應用程式使用 `Startup` 類別，其依慣例命名為 `Startup`。 `Startup` 類別：
 
-* 選擇性地包含 <xref:Microsoft.AspNetCore.Hosting.StartupBase.ConfigureServices*> 方法來設定應用程式的服務**。 服務的定義是可提供應用程式功能的可重複使用元件。 服務會在中*註冊*，並透過相依性 `ConfigureServices` [插入（DI）](xref:fundamentals/dependency-injection)或在整個應用程式中使用 <xref:Microsoft.AspNetCore.Builder.IApplicationBuilder.ApplicationServices*> 。
+* 選擇性地包含 <xref:Microsoft.AspNetCore.Hosting.StartupBase.ConfigureServices*> 方法來設定應用程式的服務**。 服務的定義是可提供應用程式功能的可重複使用元件。 服務會*registered*透過相依性 `ConfigureServices` [插入 (DI) ](xref:fundamentals/dependency-injection)或，在整個應用程式中註冊及使用 <xref:Microsoft.AspNetCore.Builder.IApplicationBuilder.ApplicationServices*> 。
 * 包含 <xref:Microsoft.AspNetCore.Hosting.StartupBase.Configure*> 方法來建立應用程式的要求處理管線。
 
 應用程式啟動時，ASP.NET Core 執行階段會呼叫 `ConfigureServices` 與 `Configure`：
@@ -208,7 +210,7 @@ ASP.NET Core 應用程式使用 `Startup` 類別，其依慣例命名為 `Startu
 
 主機可能會在呼叫 `Startup` 方法之前，設定一些服務。 如需詳細資訊，請參閱[主機](xref:fundamentals/index#host)。
 
-對於需要大量安裝的功能，可從 <xref:Microsoft.Extensions.DependencyInjection.IServiceCollection> 上取得 `Add{Service}` 擴充方法。 例如 **Add**DbContext、**Add**DefaultIdentity、**Add**EntityFrameworkStores 和 **Add**RazorPages：
+對於需要大量安裝的功能，可從 <xref:Microsoft.Extensions.DependencyInjection.IServiceCollection> 上取得 `Add{Service}` 擴充方法。 例如，**新增**DbCoNtext、**新增**預設值 Identity 、**新增**EntityFrameworkStores，以及**新增** Razor 頁面：
 
 [!code-csharp[](startup/sample_snapshot/Startup3.cs)]
 
@@ -283,7 +285,7 @@ ASP.NET Core 應用程式使用 `Startup` 類別，其依慣例命名為 `Startu
 
 ## <a name="add-configuration-at-startup-from-an-external-assembly"></a>在啟動時從外部組件新增組態
 
-<xref:Microsoft.AspNetCore.Hosting.IHostingStartup> 實作允許在啟動時從應用程式 `Startup` 類別外部的外部組件，針對應用程式新增增強功能。 如需詳細資訊，請參閱 <xref:fundamentals/configuration/platform-specific-configuration> 。
+<xref:Microsoft.AspNetCore.Hosting.IHostingStartup> 實作允許在啟動時從應用程式 `Startup` 類別外部的外部組件，針對應用程式新增增強功能。 如需詳細資訊，請參閱<xref:fundamentals/configuration/platform-specific-configuration>。
 
 ## <a name="additional-resources"></a>其他資源
 

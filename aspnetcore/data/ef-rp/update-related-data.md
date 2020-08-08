@@ -5,6 +5,8 @@ description: 第7部分 Razor 頁面和 Entity Framework 教學課程系列。
 ms.author: riande
 ms.date: 07/22/2019
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -13,14 +15,14 @@ no-loc:
 - Razor
 - SignalR
 uid: data/ef-rp/update-related-data
-ms.openlocfilehash: b442a4ce1f63c047c123315626f559155fd06424
-ms.sourcegitcommit: fa89d6553378529ae86b388689ac2c6f38281bb9
+ms.openlocfilehash: 3807c52bb843c4d6403e8236fde50c034a8d1e2b
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 07/07/2020
-ms.locfileid: "86060133"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88017736"
 ---
-# <a name="part-7-razor-pages-with-ef-core-in-aspnet-core---update-related-data"></a>第7部分， Razor ASP.NET Core 更新相關資料中包含 EF Core 的頁面
+# <a name="part-7-no-locrazor-pages-with-ef-core-in-aspnet-core---update-related-data"></a>第7部分， Razor ASP.NET Core 更新相關資料中包含 EF Core 的頁面
 
 由[Tom 作者: dykstra](https://github.com/tdykstra)和[Rick Anderson](https://twitter.com/RickAndMSFT)
 
@@ -65,7 +67,7 @@ Course 會指派給 Department。 Create 和 Edit 頁面的基底類別會提供
 * 使用 `TryUpdateModelAsync` 來防止[大量指派](xref:data/ef-rp/crud#overposting) (overposting)。
 * 移除 `ViewData["DepartmentID"]`。 `DepartmentNameSL`從基類是強型別模型，而且會供 Razor 頁面使用。 強型別的模型優先於弱型別。 如需詳細資訊，請參閱[弱型別資料 (ViewData 和 ViewBag)](xref:mvc/views/overview#VD_VB)。
 
-### <a name="update-the-course-create-razor-page"></a>更新課程 [建立] Razor 頁面
+### <a name="update-the-course-create-no-locrazor-page"></a>更新課程 [建立] Razor 頁面
 
 使用下列程式碼更新 *Pages/Courses/Create.cshtml*：
 
@@ -92,7 +94,7 @@ Razor頁面會使用[選取](xref:mvc/views/working-with-forms#the-select-tag-he
 
 這些變更類似於 *Create* 頁面模型中所做的變更。 在上述程式碼中，`PopulateDepartmentsDropDownList` 會傳遞部門識別碼，其在下拉式清單中選取部門。
 
-### <a name="update-the-course-edit-razor-page"></a>更新課程 [編輯] Razor 頁面
+### <a name="update-the-course-edit-no-locrazor-page"></a>更新課程 [編輯] Razor 頁面
 
 使用下列程式碼更新 *Pages/Courses/Edit.cshtml*：
 
@@ -120,7 +122,7 @@ Razor頁面會使用[選取](xref:mvc/views/working-with-forms#the-select-tag-he
 
 [!code-csharp[](intro/samples/cu30/Pages/Courses/Details.cshtml.cs?highlight=28)]
 
-### <a name="update-the-course-razor-pages"></a>更新課程 Razor 頁面
+### <a name="update-the-course-no-locrazor-pages"></a>更新課程 Razor 頁面
 
 使用下列程式碼更新 *Pages/Courses/Delete.cshtml*：
 
@@ -197,7 +199,7 @@ Razor頁面會使用[選取](xref:mvc/views/working-with-forms#the-select-tag-he
 * 在 `OnPostAsync` 中呼叫 `UpdateInstructorCourses` 來將核取方塊的資訊套用到正在編輯的 Instructor 實體。
 * 若 `TryUpdateModel` 失敗，則在 `OnPostAsync` 中呼叫 `PopulateAssignedCourseData` 和 `UpdateInstructorCourses`。 這些方法呼叫會在重新顯示並附帶錯誤訊息時，還原在頁面上輸入的已指派課程資料。
 
-### <a name="update-the-instructor-edit-razor-page"></a>更新講師 [編輯] Razor 頁面
+### <a name="update-the-instructor-edit-no-locrazor-page"></a>更新講師 [編輯] Razor 頁面
 
 使用下列程式碼更新 *Pages/Instructors/Edit.cshtml*：
 

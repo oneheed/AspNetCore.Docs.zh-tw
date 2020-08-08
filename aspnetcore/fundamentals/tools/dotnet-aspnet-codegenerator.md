@@ -6,6 +6,8 @@ monikerRange: '>= aspnetcore-2.1'
 ms.author: riande
 ms.date: 07/04/2019
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -14,12 +16,12 @@ no-loc:
 - Razor
 - SignalR
 uid: fundamentals/tools/dotnet-aspnet-codegenerator
-ms.openlocfilehash: af151b65d3fefb5863529de1cd97c6315f11ca82
-ms.sourcegitcommit: ca6a1f100c1a3f59999189aa962523442dd4ead1
+ms.openlocfilehash: 071f2269081e63ad1355547bccb449180c59c997
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 07/30/2020
-ms.locfileid: "87444129"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88016501"
 ---
 # <a name="dotnet-aspnet-codegenerator"></a>dotnet aspnet-codegenerator
 
@@ -50,7 +52,7 @@ dotnet aspnet-codegenerator [arguments] [-p|--project] [-n|--nuget-package-dir] 
 dotnet aspnet-codegenerator [-h|--help]
 ```
 
-## <a name="description"></a>說明
+## <a name="description"></a>描述
 
 `dotnet aspnet-codegenerator` 全域命令會執行 ASP.NET Core 程式碼產生器與 Scaffolding 引擎。
 
@@ -80,7 +82,7 @@ dotnet aspnet-codegenerator [-h|--help]
 
 `-tfm|--target-framework`
 
-要使用的目標 [Framework](/dotnet/standard/frameworks)。 例如： `net46` 。
+要使用的目標 [Framework](/dotnet/standard/frameworks)。 例如，`net46`。
 
 `-b|--build-base-path`
 
@@ -135,7 +137,7 @@ dotnet aspnet-codegenerator [-h|--help]
 
 下表列出 `aspnet-codegenerator controller` 的專用選項：
 
-| 選項                         | 說明                                                                                               |
+| 選項                         | 描述                                                                                               |
 | ------------------------------ | --------------------------------------------------------------------------------------------------------- |
 | --controllerName 或 -name      | 控制器的名稱。                                                                                   |
 | --useAsyncActions 或 -async    | 產生非同步控制器動作。                                                                        |
@@ -184,7 +186,7 @@ dotnet aspnet-codegenerator razorpage MyEdit Edit -m Movie -dc RazorPagesMovieCo
 
 下表列出 `aspnet-codegenerator razorpage` 的專用選項：
 
-| 選項                        | 說明                                                                           |
+| 選項                        | 描述                                                                           |
 | ----------------------------- | ------------------------------------------------------------------------------------- |
 | --namespaceName 或 -namespace | 要用於產生之 PageModel 的命名空間名稱                          |
 | --partialView 或 -partial     | 產生部分檢視。 若指定此選項，會忽略版面配置選項 -l 與 -udl。 |

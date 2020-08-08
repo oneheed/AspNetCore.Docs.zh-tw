@@ -7,6 +7,8 @@ ms.author: scaddie
 ms.custom: mvc
 ms.date: 02/09/2020
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -15,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: fundamentals/http-requests
-ms.openlocfilehash: fb9001c06228b4290ca1e0c7cfb6b1338f431cd6
-ms.sourcegitcommit: ca6a1f100c1a3f59999189aa962523442dd4ead1
+ms.openlocfilehash: ef6ed0911c2615ea543b1c2cea31a9a453f0c604
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 07/30/2020
-ms.locfileid: "87444116"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88017229"
 ---
 # <a name="make-http-requests-using-ihttpclientfactory-in-aspnet-core"></a>在 ASP.NET Core 中使用 IHttpClientFactory 發出 HTTP 要求
 
@@ -32,7 +34,7 @@ ms.locfileid: "87444116"
 
 * 提供一個集中位置以便命名和設定邏輯 `HttpClient` 執行個體。 例如，名為*github*的用戶端可以註冊並設定為存取[github](https://github.com/)。 預設用戶端可以註冊以進行一般存取。
 * 透過委派中的處理常式，制訂外寄中介軟體的概念 `HttpClient` 。 提供 Polly 為基礎中介軟體的延伸模組，以利用中的委派處理常式 `HttpClient` 。
-* 管理基礎實例的共用和存留期 `HttpClientMessageHandler` 。 自動管理可避免在手動管理存留期時所發生的常見 DNS （網域名稱系統）問題 `HttpClient` 。
+* 管理基礎實例的共用和存留期 `HttpClientMessageHandler` 。 自動管理可避免常見的 DNS (網域名稱系統) 在手動管理存留期時所發生的問題 `HttpClient` 。
 * 針對透過處理站所建立之用戶端傳送的所有要求，新增可設定的記錄體驗 (透過 `ILogger`)。
 
 [檢視或下載範例程式碼](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/http-requests/samples) ([如何下載](xref:index#how-to-download-a-sample))。
@@ -56,7 +58,7 @@ ms.locfileid: "87444116"
 
 [!code-csharp[](http-requests/samples/3.x/HttpClientFactorySample/Startup.cs?name=snippet1)]
 
-`IHttpClientFactory`可以使用相依性[插入（DI）](xref:fundamentals/dependency-injection)要求。 下列程式碼會使用 `IHttpClientFactory` 來建立 `HttpClient` 實例：
+您 `IHttpClientFactory` 可以使用[ (DI) ](xref:fundamentals/dependency-injection)的相依性插入來要求。 下列程式碼會使用 `IHttpClientFactory` 來建立 `HttpClient` 實例：
 
 [!code-csharp[](http-requests/samples/3.x/HttpClientFactorySample/Pages/BasicUsage.cshtml.cs?name=snippet1&highlight=9-12,21)]
 
@@ -214,7 +216,7 @@ public class ValuesController : ControllerBase
 * 呼叫 <xref:System.Net.Http.HttpClient.PostAsync%2A> ，將 JSON 內容傳送至指定的 URL。 這是新增至 HttpClient 的相對 URL [。 BaseAddress](xref:System.Net.Http.HttpClient.BaseAddress)。
 * <xref:System.Net.Http.HttpResponseMessage.EnsureSuccessStatusCode%2A>如果回應狀態碼未指出成功，呼叫會擲回例外狀況。
 
-`HttpClient`也支援其他類型的內容。 例如 <xref:System.Net.Http.MultipartContent> 和 <xref:System.Net.Http.StreamContent>。 如需支援內容的完整清單，請參閱 <xref:System.Net.Http.HttpContent> 。
+`HttpClient`也支援其他類型的內容。 例如，<xref:System.Net.Http.MultipartContent> 與 <xref:System.Net.Http.StreamContent>。 如需支援內容的完整清單，請參閱 <xref:System.Net.Http.HttpContent> 。
 
 下列範例顯示 HTTP PUT 要求：
 
@@ -331,7 +333,7 @@ public class ValuesController : ControllerBase
 
 `IHttpClientFactory` 會將處理站所建立的 `HttpMessageHandler` 執行個體放入集區以減少資源耗用量。 建立新的 `HttpClient` 執行個體時，如果其存留期間尚未過期，`HttpMessageHandler` 執行個體可從集區重複使用。
 
-將處理常式放入集區非常實用，因為處理常式通常會管理自己專屬的底層 HTTP 連線。 建立比所需數目更多的處理常式，可能會導致連線延遲。 有些處理常式也會保持連線無限期地開啟，這可能導致處理常式無法回應 DNS （網域名稱系統）變更。
+將處理常式放入集區非常實用，因為處理常式通常會管理自己專屬的底層 HTTP 連線。 建立比所需數目更多的處理常式，可能會導致連線延遲。 有些處理常式也會保持連線無限期地開啟，這可能導致處理常式無法回應 DNS (網域名稱系統) 變更。
 
 預設處理常式存留時間為兩分鐘。 預設值可以根據每個命名的用戶端來覆寫：
 
@@ -359,9 +361,9 @@ public class ValuesController : ControllerBase
 - 會 `SocketsHttpHandler` 共用實例間的連接 `HttpClient` 。 此共用可防止通訊端耗盡。
 - 會 `SocketsHttpHandler` 根據來迴圈連接 `PooledConnectionLifetime` ，以避免過時的 DNS 問題。
 
-### <a name="cookies"></a>Cookie
+### <a name="no-loccookies"></a>Cookie
 
-集區 `HttpMessageHandler` 實例會導致 `CookieContainer` 共用物件。 意外 `CookieContainer` 的物件共用通常會導致不正確的程式碼。 針對需要 cookie 的應用程式，請考慮下列其中一項：
+集區 `HttpMessageHandler` 實例會導致 `CookieContainer` 共用物件。 意外 `CookieContainer` 的物件共用通常會導致不正確的程式碼。 針對需要的應用程式 cookie ，請考慮下列其中一項：
 
  - 停用自動 cookie 處理
  - 以免`IHttpClientFactory`
@@ -441,7 +443,7 @@ public class ValuesController : ControllerBase
 * 管理基礎 `HttpClientMessageHandler` 執行個體的共用和存留期，以避免在手動管理 `HttpClient` 存留期時，發生的常見 DNS 問題。
 * 針對透過處理站所建立之用戶端傳送的所有要求，新增可設定的記錄體驗 (透過 `ILogger`)。
 
-[查看或下載範例程式碼](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/http-requests/samples)（[如何下載](xref:index#how-to-download-a-sample)）
+[查看或下載範例程式碼](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/http-requests/samples) ([如何下載](xref:index#how-to-download-a-sample)) 
 
 ## <a name="consumption-patterns"></a>耗用量模式
 
@@ -460,7 +462,7 @@ public class ValuesController : ControllerBase
 
 [!code-csharp[](http-requests/samples/2.x/HttpClientFactorySample/Startup.cs?name=snippet1)]
 
-註冊之後，程式碼可以接受 `IHttpClientFactory` 可以使用相依性[插入（DI）](xref:fundamentals/dependency-injection)插入的任何位置服務。 `IHttpClientFactory`可以用來建立 `HttpClient` 實例：
+註冊之後，程式碼可以接受 `IHttpClientFactory` 可以使用相依性[插入 (DI) ](xref:fundamentals/dependency-injection)插入的任何位置服務。 `IHttpClientFactory`可以用來建立 `HttpClient` 實例：
 
 [!code-csharp[](http-requests/samples/2.x/HttpClientFactorySample/Pages/BasicUsage.cshtml.cs?name=snippet1&highlight=9-12,21)]
 
@@ -677,9 +679,9 @@ public class ValuesController : ControllerBase
 - 會 `SocketsHttpHandler` 共用實例間的連接 `HttpClient` 。 此共用可防止通訊端耗盡。
 - 會 `SocketsHttpHandler` 根據來迴圈連接 `PooledConnectionLifetime` ，以避免過時的 DNS 問題。
 
-### <a name="cookies"></a>Cookie
+### <a name="no-loccookies"></a>Cookie
 
-集區 `HttpMessageHandler` 實例會導致 `CookieContainer` 共用物件。 意外 `CookieContainer` 的物件共用通常會導致不正確的程式碼。 針對需要 cookie 的應用程式，請考慮下列其中一項：
+集區 `HttpMessageHandler` 實例會導致 `CookieContainer` 共用物件。 意外 `CookieContainer` 的物件共用通常會導致不正確的程式碼。 針對需要的應用程式 cookie ，請考慮下列其中一項：
 
  - 停用自動 cookie 處理
  - 以免`IHttpClientFactory`
@@ -742,9 +744,9 @@ public class ValuesController : ControllerBase
 * 管理基礎 `HttpClientMessageHandler` 執行個體的共用和存留期，以避免在手動管理 `HttpClient` 存留期時，發生的常見 DNS 問題。
 * 針對透過處理站所建立之用戶端傳送的所有要求，新增可設定的記錄體驗 (透過 `ILogger`)。
 
-[查看或下載範例程式碼](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/http-requests/samples)（[如何下載](xref:index#how-to-download-a-sample)）
+[查看或下載範例程式碼](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/http-requests/samples) ([如何下載](xref:index#how-to-download-a-sample)) 
 
-## <a name="prerequisites"></a>先決條件
+## <a name="prerequisites"></a>必要條件
 
 以 .NET Framework 為目標的專案，需要安裝 [Microsoft.Extensions.Http](https://www.nuget.org/packages/Microsoft.Extensions.Http/) NuGet 套件。 以 .NET Core 為目標且參考 [Microsoft.AspNetCore.App metapackage](xref:fundamentals/metapackage-app) 的專案，已包含 `Microsoft.Extensions.Http` 套件。
 
@@ -765,7 +767,7 @@ public class ValuesController : ControllerBase
 
 [!code-csharp[](http-requests/samples/2.x/HttpClientFactorySample/Startup.cs?name=snippet1)]
 
-註冊之後，程式碼可以接受 `IHttpClientFactory` 可以使用相依性[插入（DI）](xref:fundamentals/dependency-injection)插入的任何位置服務。 `IHttpClientFactory`可以用來建立 `HttpClient` 實例：
+註冊之後，程式碼可以接受 `IHttpClientFactory` 可以使用相依性[插入 (DI) ](xref:fundamentals/dependency-injection)插入的任何位置服務。 `IHttpClientFactory`可以用來建立 `HttpClient` 實例：
 
 [!code-csharp[](http-requests/samples/2.x/HttpClientFactorySample/Pages/BasicUsage.cshtml.cs?name=snippet1&highlight=9-12,21)]
 
@@ -985,9 +987,9 @@ public class ValuesController : ControllerBase
 - 會 `SocketsHttpHandler` 共用實例間的連接 `HttpClient` 。 此共用可防止通訊端耗盡。
 - 會 `SocketsHttpHandler` 根據來迴圈連接 `PooledConnectionLifetime` ，以避免過時的 DNS 問題。
 
-### <a name="cookies"></a>Cookie
+### <a name="no-loccookies"></a>Cookie
 
-集區 `HttpMessageHandler` 實例會導致 `CookieContainer` 共用物件。 意外 `CookieContainer` 的物件共用通常會導致不正確的程式碼。 針對需要 cookie 的應用程式，請考慮下列其中一項：
+集區 `HttpMessageHandler` 實例會導致 `CookieContainer` 共用物件。 意外 `CookieContainer` 的物件共用通常會導致不正確的程式碼。 針對需要的應用程式 cookie ，請考慮下列其中一項：
 
  - 停用自動 cookie 處理
  - 以免`IHttpClientFactory`

@@ -7,6 +7,8 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 04/09/2020
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -15,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: host-and-deploy/directory-structure
-ms.openlocfilehash: a4f02a021bc2317e9e63cead521ff4a031a5243b
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: 8756fa5b85deb3a30991062942803e701e5e0792
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85408093"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88015812"
 ---
 # <a name="aspnet-core-directory-structure"></a>ASP.NET Core 目錄結構
 
@@ -36,8 +38,8 @@ ms.locfileid: "85408093"
 
 | 應用程式類型 | 目錄結構 |
 | -------- | ------------------- |
-| [Framework 相依可執行檔（FDE）](/dotnet/core/deploying/#framework-dependent-executables-fde) | <ul><li>publish&dagger;<ul><li>Views &dagger; MVC 應用程式; 如果未先行編譯視圖</li><li>頁面 &dagger; MVC 或 Razor 頁面應用程式（如果未先行編譯頁面）</li><li>wwwroot&dagger;</li><li>\*.dll 檔案</li><li>{組件名稱}.deps.json</li><li>{組件名稱}.dll</li><li>{元件名稱}{.EXTENSION} 在 Windows 上的副檔名，在 macOS 或 Linux 上沒有延伸模組</li><li>{組件名稱}.pdb</li><li>{組件名稱}.Views.dll</li><li>{組件名稱}.Views.pdb</li><li>{組件名稱}.runtimeconfig.json</li><li>web.config (IIS 部署)</li><li>createdump （[Linux createdump 公用程式](https://github.com/dotnet/coreclr/blob/master/Documentation/botr/xplat-minidump-generation.md#configurationpolicy)）</li><li>\*。因此（Linux 共用物件程式庫）</li><li>\*. a （macOS archive）</li><li>\*. dylib （macOS 動態連結程式庫）</li></ul></li></ul> |
-| [獨立部署（SCD）](/dotnet/core/deploying/#self-contained-deployments-scd) | <ul><li>publish&dagger;<ul><li>&dagger;如果未先行編譯 views，則會查看 MVC 應用程式</li><li>頁面 &dagger; MVC 或 Razor 頁面應用程式（如果未先行編譯頁面）</li><li>wwwroot&dagger;</li><li>\*.dll 檔案</li><li>{組件名稱}.deps.json</li><li>{組件名稱}.dll</li><li>{組件名稱}.exe</li><li>{組件名稱}.pdb</li><li>{組件名稱}.Views.dll</li><li>{組件名稱}.Views.pdb</li><li>{組件名稱}.runtimeconfig.json</li><li>web.config (IIS 部署)</li></ul></li></ul> |
+| [Framework 相依可執行檔 (FDE) ](/dotnet/core/deploying/#framework-dependent-executables-fde) | <ul><li>publish&dagger;<ul><li>Views &dagger; MVC 應用程式; 如果未先行編譯視圖</li><li>頁面 &dagger; MVC 或 Razor 頁面應用程式（如果未先行編譯頁面）</li><li>wwwroot&dagger;</li><li>\*.dll 檔案</li><li>{組件名稱}.deps.json</li><li>{組件名稱}.dll</li><li>{元件名稱}{.EXTENSION} 在 Windows 上的副檔名，在 macOS 或 Linux 上沒有延伸模組</li><li>{組件名稱}.pdb</li><li>{組件名稱}.Views.dll</li><li>{組件名稱}.Views.pdb</li><li>{組件名稱}.runtimeconfig.json</li><li>web.config (IIS 部署)</li><li>createdump ([Linux createdump 公用程式](https://github.com/dotnet/coreclr/blob/master/Documentation/botr/xplat-minidump-generation.md#configurationpolicy)) </li><li>\* (Linux 共用物件程式庫) </li><li>\*。 (macOS archive) </li><li>\*. dylib (macOS 動態連結程式庫) </li></ul></li></ul> |
+| [獨立部署 (SCD) ](/dotnet/core/deploying/#self-contained-deployments-scd) | <ul><li>publish&dagger;<ul><li>&dagger;如果未先行編譯 views，則會查看 MVC 應用程式</li><li>頁面 &dagger; MVC 或 Razor 頁面應用程式（如果未先行編譯頁面）</li><li>wwwroot&dagger;</li><li>\*.dll 檔案</li><li>{組件名稱}.deps.json</li><li>{組件名稱}.dll</li><li>{組件名稱}.exe</li><li>{組件名稱}.pdb</li><li>{組件名稱}.Views.dll</li><li>{組件名稱}.Views.pdb</li><li>{組件名稱}.runtimeconfig.json</li><li>web.config (IIS 部署)</li></ul></li></ul> |
 
 &dagger;表示是目錄
 
@@ -66,8 +68,8 @@ ms.locfileid: "85408093"
 
 | 應用程式類型 | 目錄結構 |
 | -------- | ------------------- |
-| [Framework 相依可執行檔（FDE）](/dotnet/core/deploying/#framework-dependent-executables-fde) | <ul><li>publish&dagger;<ul><li>Views &dagger; MVC 應用程式; 如果未先行編譯視圖</li><li>頁面 &dagger; MVC 或 Razor 頁面應用程式（如果未先行編譯頁面）</li><li>wwwroot&dagger;</li><li>\*.dll 檔案</li><li>{組件名稱}.deps.json</li><li>{組件名稱}.dll</li><li>{元件名稱}{.EXTENSION} 在 Windows 上的副檔名，在 macOS 或 Linux 上沒有延伸模組</li><li>{組件名稱}.pdb</li><li>{組件名稱}.Views.dll</li><li>{組件名稱}.Views.pdb</li><li>{組件名稱}.runtimeconfig.json</li><li>web.config (IIS 部署)</li><li>createdump （[Linux createdump 公用程式](https://github.com/dotnet/coreclr/blob/master/Documentation/botr/xplat-minidump-generation.md#configurationpolicy)）</li><li>\*。因此（Linux 共用物件程式庫）</li><li>\*. a （macOS archive）</li><li>\*. dylib （macOS 動態連結程式庫）</li></ul></li></ul> |
-| [獨立部署（SCD）](/dotnet/core/deploying/#self-contained-deployments-scd) | <ul><li>publish&dagger;<ul><li>&dagger;如果未先行編譯 views，則會查看 MVC 應用程式</li><li>頁面 &dagger; MVC 或 Razor 頁面應用程式（如果未先行編譯頁面）</li><li>wwwroot&dagger;</li><li>\*.dll 檔案</li><li>{組件名稱}.deps.json</li><li>{組件名稱}.dll</li><li>{組件名稱}.exe</li><li>{組件名稱}.pdb</li><li>{組件名稱}.Views.dll</li><li>{組件名稱}.Views.pdb</li><li>{組件名稱}.runtimeconfig.json</li><li>web.config (IIS 部署)</li></ul></li></ul> |
+| [Framework 相依可執行檔 (FDE) ](/dotnet/core/deploying/#framework-dependent-executables-fde) | <ul><li>publish&dagger;<ul><li>Views &dagger; MVC 應用程式; 如果未先行編譯視圖</li><li>頁面 &dagger; MVC 或 Razor 頁面應用程式（如果未先行編譯頁面）</li><li>wwwroot&dagger;</li><li>\*.dll 檔案</li><li>{組件名稱}.deps.json</li><li>{組件名稱}.dll</li><li>{元件名稱}{.EXTENSION} 在 Windows 上的副檔名，在 macOS 或 Linux 上沒有延伸模組</li><li>{組件名稱}.pdb</li><li>{組件名稱}.Views.dll</li><li>{組件名稱}.Views.pdb</li><li>{組件名稱}.runtimeconfig.json</li><li>web.config (IIS 部署)</li><li>createdump ([Linux createdump 公用程式](https://github.com/dotnet/coreclr/blob/master/Documentation/botr/xplat-minidump-generation.md#configurationpolicy)) </li><li>\* (Linux 共用物件程式庫) </li><li>\*。 (macOS archive) </li><li>\*. dylib (macOS 動態連結程式庫) </li></ul></li></ul> |
+| [獨立部署 (SCD) ](/dotnet/core/deploying/#self-contained-deployments-scd) | <ul><li>publish&dagger;<ul><li>&dagger;如果未先行編譯 views，則會查看 MVC 應用程式</li><li>頁面 &dagger; MVC 或 Razor 頁面應用程式（如果未先行編譯頁面）</li><li>wwwroot&dagger;</li><li>\*.dll 檔案</li><li>{組件名稱}.deps.json</li><li>{組件名稱}.dll</li><li>{組件名稱}.exe</li><li>{組件名稱}.pdb</li><li>{組件名稱}.Views.dll</li><li>{組件名稱}.Views.pdb</li><li>{組件名稱}.runtimeconfig.json</li><li>web.config (IIS 部署)</li></ul></li></ul> |
 
 &dagger;表示是目錄
 

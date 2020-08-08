@@ -6,6 +6,8 @@ monikerRange: '>= aspnetcore-3.0'
 ms.author: jamesnk
 ms.date: 09/23/2019
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -14,12 +16,12 @@ no-loc:
 - Razor
 - SignalR
 uid: grpc/diagnostics
-ms.openlocfilehash: ca87ba5b03e7657132e5ebaba72370bde85c85d4
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: bf8068375da81288f2fbfa2c1bfafe97c03c70fc
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85406767"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88016176"
 ---
 # <a name="logging-and-diagnostics-in-grpc-on-net"></a>.NET 上 gRPC 中的記錄和診斷
 
@@ -54,7 +56,7 @@ gRPC 會將記錄新增至 `Grpc` 類別之下。 若要啟用 gRPC 的詳細記
 
 * `Logging:LogLevel:Grpc` = `Debug`
 
-請查看設定系統的檔，以判斷如何指定嵌套的設定值。 例如，使用環境變數時， `_` 會使用兩個字元，而不是 `:` （例如 `Logging__LogLevel__Grpc` ）。
+請查看設定系統的檔，以判斷如何指定嵌套的設定值。 例如，使用環境變數時， `_` 會使用兩個字元，而不是 `:` (，例如 `Logging__LogLevel__Grpc`) 。
 
 `Debug`針對您的應用程式收集更詳細的診斷資訊時，我們建議使用此層級。 `Trace`層級會產生非常低層級的診斷，而且很少需要診斷應用程式中的問題。
 
@@ -89,14 +91,14 @@ info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
 
 #### <a name="other-environments"></a>其他環境
 
-如果應用程式部署到另一個環境（例如 Docker、Kubernetes 或 Windows 服務），請參閱，以 <xref:fundamentals/logging/index> 取得有關如何設定適用于環境之記錄提供者的詳細資訊。
+如果應用程式部署到另一個環境 (例如 Docker、Kubernetes 或 Windows 服務) ，請參閱， <xref:fundamentals/logging/index> 以取得有關如何設定適用于環境之記錄提供者的詳細資訊。
 
 ### <a name="grpc-client-logging"></a>gRPC 用戶端記錄
 
 > [!WARNING]
 > 用戶端記錄可能包含來自您應用程式的機密資訊。 **絕對不要**將未經處理的記錄從生產應用程式張貼到 GitHub 之類的公用論壇。
 
-若要從 .NET 用戶端取得記錄，您可以在建立 `GrpcChannelOptions.LoggerFactory` 用戶端通道時設定屬性。 如果您是從 ASP.NET Core 應用程式呼叫 gRPC 服務，則可以從相依性插入（DI）解析記錄器 factory：
+若要從 .NET 用戶端取得記錄，您可以在建立 `GrpcChannelOptions.LoggerFactory` 用戶端通道時設定屬性。 如果您是從 ASP.NET Core 應用程式呼叫 gRPC 服務，則可以從 (DI) 的相依性插入來解析記錄器 factory：
 
 [!code-csharp[](diagnostics/sample/net-client-dependency-injection.cs?highlight=7,16)]
 
@@ -173,7 +175,7 @@ gRPC 服務裝載于 ASP.NET Core，其會報告傳入 HTTP 要求的相關事�
 
 事件來源上會回報 gRPC 伺服器計量 `Grpc.AspNetCore.Server` 。
 
-| 名稱                      | 說明                   |
+| 名稱                      | 描述                   |
 | --------------------------|-------------------------------|
 | `total-calls`             | 呼叫總數                   |
 | `current-calls`           | 目前的呼叫                 |
@@ -189,7 +191,7 @@ ASP.NET Core 也會在事件來源上提供自己的計量 `Microsoft.AspNetCore
 
 事件來源上會回報 gRPC 用戶端計量 `Grpc.Net.Client` 。
 
-| 名稱                      | 說明                   |
+| 名稱                      | 描述                   |
 | --------------------------|-------------------------------|
 | `total-calls`             | 呼叫總數                   |
 | `current-calls`           | 目前的呼叫                 |

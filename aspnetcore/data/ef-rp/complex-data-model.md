@@ -6,6 +6,8 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 07/22/2019
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -14,14 +16,14 @@ no-loc:
 - Razor
 - SignalR
 uid: data/ef-rp/complex-data-model
-ms.openlocfilehash: 38d3753b889da709e2d4691590290a5438208290
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: b3531f786b3101fcbea4b25d3950d1bce9a289dc
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85401450"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88018048"
 ---
-# <a name="part-5-razor-pages-with-ef-core-in-aspnet-core---data-model"></a>第5部分， Razor ASP.NET Core 資料模型中具有 EF Core 的頁面
+# <a name="part-5-no-locrazor-pages-with-ef-core-in-aspnet-core---data-model"></a>第5部分， Razor ASP.NET Core 資料模型中具有 EF Core 的頁面
 
 作者：[Tom Dykstra](https://github.com/tdykstra) 和 [Rick Anderson](https://twitter.com/RickAndMSFT)
 
@@ -29,7 +31,7 @@ ms.locfileid: "85401450"
 
 ::: moniker range=">= aspnetcore-3.0"
 
-先前的教學課程建立了基本的資料模型，該模型由三個實體組成。 在本教學課程中：
+先前的教學課程建立了基本的資料模型，該模型由三個實體組成。 本教學課程內容：
 
 * 新增更多實體和關聯性。
 * 藉由指定格式、驗證和資料庫對應規則來自訂資料模型。
@@ -618,7 +620,7 @@ For more information, see http://go.microsoft.com/fwlink/?LinkId=723262.
 
 * 開啟命令視窗並巡覽至專案資料夾。 專案資料夾包含 *ContosoUniversity.csproj* 檔案。
 
-* 執行以下命令：
+* 執行下列命令：
 
   ```dotnetcli
   dotnet ef database drop --force
@@ -733,7 +735,7 @@ For more information, see http://go.microsoft.com/fwlink/?LinkId=723262.
 
 ::: moniker range="< aspnetcore-3.0"
 
-先前的教學課程建立了基本的資料模型，該模型由三個實體組成。 在本教學課程中：
+先前的教學課程建立了基本的資料模型，該模型由三個實體組成。 本教學課程內容：
 
 * 新增更多實體和關聯性。
 * 藉由指定格式、驗證和資料庫對應規則來自訂資料模型。

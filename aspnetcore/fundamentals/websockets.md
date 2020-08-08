@@ -7,6 +7,8 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 11/12/2019
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -15,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: fundamentals/websockets
-ms.openlocfilehash: e2aff39db621ea6e71dce1f1560b1aa70fa865f0
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: d0116a50051c1e9ddc9783e0102a3b32fb20cdce
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85404089"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88016449"
 ---
 # <a name="websockets-support-in-aspnet-core"></a>ASP.NET Core 中的 WebSockets 支援
 
@@ -177,12 +179,12 @@ CORS 所提供的保護不套用至 WebSocket。 瀏覽器**不**會：
 > 使用 IIS Express 時，不需要這些步驟
 
 1. 使用來自 [管理]**** 功能表的 [新增角色及功能]**** 精靈，或是 [伺服器管理員]**** 中的連結。
-1. 選取 [角色型或功能型安裝]****。 選取 [下一步] 。
-1. 選取適當的伺服器 (預設會選取本機伺服器)。 選取 [下一步] 。
+1. 選取 [角色型或功能型安裝]****。 選取 [下一步]  。
+1. 選取適當的伺服器 (預設會選取本機伺服器)。 選取 [下一步]  。
 1. 展開 [角色]**** 樹狀目錄中的 [網頁伺服器 (IIS)]****，展開 [網頁伺服器]****，然後展開 [應用程式開發]****。
-1. 選取 [WebSocket 通訊協定]****。 選取 [下一步] 。
+1. 選取 [WebSocket 通訊協定]****。 選取 [下一步]  。
 1. 如果不需要額外的功能，請選取 [下一步]****。
-1. 選取 [安裝]。
+1. 選取 [安裝]  。
 1. 當安裝完成時，選取 [關閉]**** 來結束精靈。
 
 若要在 Windows 8 或更新版本中啟用 WebSocket 通訊協定的支援：
@@ -190,9 +192,9 @@ CORS 所提供的保護不套用至 WebSocket。 瀏覽器**不**會：
 > [!NOTE]
 > 使用 IIS Express 時，不需要這些步驟
 
-1. 流覽至 [**控制台**] [程式]  >  **Programs**  >  [**程式和功能**] [開啟  >  **或關閉 Windows 功能**] （畫面左側）。
+1. 流覽至 [**控制台**] [程式]  >  **Programs**  >  [**程式和功能**]  >  [**開啟或關閉 Windows 功能**] (畫面的左側) 。
 1. 開啟下列節點： **Internet Information Services**  >  **World Wide Web 服務**  >  **應用程式開發功能**。
-1. 選取 [WebSocket 通訊協定]**** 功能。 選取 [確定]****。
+1. 選取 [WebSocket 通訊協定]**** 功能。 選取 [確定]。
 
 ### <a name="disable-websocket-when-using-socketio-on-nodejs"></a>在 Node.js 上使用 socket.io 時停用 WebSocket
 

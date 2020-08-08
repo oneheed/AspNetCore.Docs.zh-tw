@@ -6,6 +6,8 @@ monikerRange: '>= aspnetcore-3.0'
 ms.author: johluo
 ms.date: 09/03/2019
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -14,12 +16,12 @@ no-loc:
 - Razor
 - SignalR
 uid: grpc/aspnetcore
-ms.openlocfilehash: 0d05a6dcaf6677e71181d522a9f501051ec34f9d
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: bd97ece1d42b1b90d0b8740e33924d80b91bf49a
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85407547"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88016436"
 ---
 # <a name="grpc-services-with-aspnet-core"></a>搭配 ASP.NET Core 的 gRPC 服務
 
@@ -78,7 +80,7 @@ ASP.NET Core 中介軟體和功能共用路由管線，因此可以將應用程�
 Kestrel gRPC 端點：
 
 * 需要 HTTP/2。
-* 應使用[傳輸層安全性（TLS）](https://tools.ietf.org/html/rfc5246)來保護。
+* 應該使用[ (TLS) 的傳輸層安全性](https://tools.ietf.org/html/rfc5246)來保護。
 
 #### <a name="http2"></a>HTTP/2
 
@@ -100,9 +102,9 @@ Kestrel 支援大多數新式作業系統上的[HTTP/2](xref:fundamentals/server
 
 #### <a name="protocol-negotiation"></a>通訊協定交涉
 
-TLS 用於保護通訊安全。 當端點支援多個通訊協定時，會使用 TLS[應用層通訊協定協商（ALPN）](https://tools.ietf.org/html/rfc7301#section-3)交握來協調用戶端與伺服器之間的連接通訊協定。 此協商會判斷連接使用的是 HTTP/1.1 或 HTTP/2。
+TLS 用於保護通訊安全。 當端點支援多個通訊協定時，會使用 TLS[應用層通訊協定 (ALPN) ](https://tools.ietf.org/html/rfc7301#section-3)交握來協調用戶端與伺服器之間的連接通訊協定。 此協商會判斷連接使用的是 HTTP/1.1 或 HTTP/2。
 
-如果在沒有 TLS 的情況下設定 HTTP/2 端點，則端點的[listenoptions 來](xref:fundamentals/servers/kestrel#listenoptionsprotocols)必須設定為 `HttpProtocols.Http2` 。 具有多個通訊協定（例如）的端點不能 `HttpProtocols.Http1AndHttp2` 在沒有 TLS 的情況下使用，因為沒有任何協商。 不安全端點的所有連接預設為 HTTP/1.1，而 gRPC 呼叫會失敗。
+如果在沒有 TLS 的情況下設定 HTTP/2 端點，則端點的[listenoptions 來](xref:fundamentals/servers/kestrel#listenoptionsprotocols)必須設定為 `HttpProtocols.Http2` 。 具有多個通訊協定的端點 (例如，) 不能 `HttpProtocols.Http1AndHttp2` 在沒有 TLS 的情況下使用，因為沒有任何協商。 不安全端點的所有連接預設為 HTTP/1.1，而 gRPC 呼叫會失敗。
 
 如需使用 Kestrel 啟用 HTTP/2 和 TLS 的詳細資訊，請參閱[Kestrel 端點](xref:fundamentals/servers/kestrel#endpoint-configuration)設定。
 
@@ -111,7 +113,7 @@ TLS 用於保護通訊安全。 當端點支援多個通訊協定時，會使用
 
 ## <a name="integration-with-aspnet-core-apis"></a>與 ASP.NET Core Api 整合
 
-gRPC 服務具有 ASP.NET Core 功能的完整存取權，例如相依性[插入](xref:fundamentals/dependency-injection)（DI）和[記錄](xref:fundamentals/logging/index)。 例如，服務執行可以透過此函式從 DI 容器解析記錄器服務：
+gRPC 服務具有 ASP.NET Core 功能的完整存取權，例如相依性[插入](xref:fundamentals/dependency-injection) (DI) 和[記錄](xref:fundamentals/logging/index)。 例如，服務執行可以透過此函式從 DI 容器解析記錄器服務：
 
 ```csharp
 public class GreeterService : Greeter.GreeterBase
@@ -122,7 +124,7 @@ public class GreeterService : Greeter.GreeterBase
 }
 ```
 
-根據預設，gRPC 服務執行可以使用任何存留期（單一、限定範圍或暫時性）來解析其他 DI 服務。
+根據預設，gRPC 服務執行可以使用任何存留期來解析其他 DI 服務， (單一、限定範圍或暫時性) 。
 
 ### <a name="resolve-httpcontext-in-grpc-methods"></a>解析 gRPC 方法中的 HttpCoNtext
 

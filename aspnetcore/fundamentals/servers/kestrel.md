@@ -7,6 +7,8 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 05/04/2020
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -15,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: fundamentals/servers/kestrel
-ms.openlocfilehash: 03c25c103f03c3f9b17311f468d96907d2498641
-ms.sourcegitcommit: fa89d6553378529ae86b388689ac2c6f38281bb9
+ms.openlocfilehash: ad15a7e3bfdb8da79db091f0116bdd2f580ccb31
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 07/07/2020
-ms.locfileid: "86060380"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88016696"
 ---
 # <a name="kestrel-web-server-implementation-in-aspnet-core"></a>ASP.NET Core 中的 Kestrel 網頁伺服器實作
 
@@ -41,7 +43,7 @@ Kestrel 支援下列案例：
 
 .NET Core 支援的所有平台和版本都支援 Kestrel。
 
-[查看或下載範例程式碼](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/servers/kestrel/samples)（[如何下載](xref:index#how-to-download-a-sample)）
+[查看或下載範例程式碼](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/servers/kestrel/samples) ([如何下載](xref:index#how-to-download-a-sample)) 
 
 ## <a name="http2-support"></a>HTTP/2 支援
 
@@ -354,7 +356,7 @@ webBuilder.ConfigureKestrel(serverOptions =>
 
 ### <a name="synchronous-io"></a>同步 I/O
 
-<xref:Microsoft.AspNetCore.Server.Kestrel.Core.KestrelServerOptions.AllowSynchronousIO>控制要求和回應是否允許同步的 i/o。 預設值為 `false`。
+<xref:Microsoft.AspNetCore.Server.Kestrel.Core.KestrelServerOptions.AllowSynchronousIO>控制要求和回應是否允許同步的 i/o。 預設值是 `false`。
 
 > [!WARNING]
 > 大量封鎖同步 i/o 作業可能會導致執行緒集區耗盡，讓應用程式無回應。 只有 `AllowSynchronousIO` 在使用不支援非同步 i/o 的程式庫時才啟用。
@@ -402,7 +404,7 @@ ASP.NET Core 預設會繫結至：
 
 `KestrelServerOptions`配置
 
-### <a name="configureendpointdefaultsactionlistenoptions"></a>ConfigureEndpointDefaults （動作 \<ListenOptions> ）
+### <a name="configureendpointdefaultsactionlistenoptions"></a>ConfigureEndpointDefaults (動作 \<ListenOptions>) 
 
 指定組態 `Action` 以針對每個指定端點執行。 呼叫 `ConfigureEndpointDefaults` 多次會以最後一個指定的 `Action` 取代之前的 `Action`。
 
@@ -419,7 +421,7 @@ webBuilder.ConfigureKestrel(serverOptions =>
 > [!NOTE]
 > <xref:Microsoft.AspNetCore.Server.Kestrel.Core.KestrelServerOptions.Listen*>**在呼叫之前**呼叫所建立 <xref:Microsoft.AspNetCore.Server.Kestrel.Core.KestrelServerOptions.ConfigureEndpointDefaults*> 的端點，將不會套用預設值。
 
-### <a name="configurehttpsdefaultsactionhttpsconnectionadapteroptions"></a>ConfigureHttpsDefaults （動作 \<HttpsConnectionAdapterOptions> ）
+### <a name="configurehttpsdefaultsactionhttpsconnectionadapteroptions"></a>ConfigureHttpsDefaults (動作 \<HttpsConnectionAdapterOptions>) 
 
 指定組態 `Action` 以針對每個 HTTPS 端點執行。 呼叫 `ConfigureHttpsDefaults` 多次會以最後一個指定的 `Action` 取代之前的 `Action`。
 
@@ -671,8 +673,8 @@ webBuilder.ConfigureKestrel(serverOptions =>
 
 [!code-csharp[](kestrel/samples/3.x/KestrelSample/Program.cs?name=snippet_UnixSocket)]
 
-* 在 Nginx 設定檔中，將 `server`  >  `location`  >  `proxy_pass` 專案設定為 `http://unix:/tmp/{KESTREL SOCKET}:/;` 。 `{KESTREL SOCKET}`這是提供給的通訊端名稱 <xref:Microsoft.AspNetCore.Server.Kestrel.Core.KestrelServerOptions.ListenUnixSocket*> （例如， `kestrel-test.sock` 在上述範例中為）。
-* 請確定通訊端可由 Nginx 寫入（例如， `chmod go+w /tmp/kestrel-test.sock` ）。
+* 在 Nginx 設定檔中，將 `server`  >  `location`  >  `proxy_pass` 專案設定為 `http://unix:/tmp/{KESTREL SOCKET}:/;` 。 `{KESTREL SOCKET}`這是提供給 (的通訊端名稱 <xref:Microsoft.AspNetCore.Server.Kestrel.Core.KestrelServerOptions.ListenUnixSocket*> ，例如， `kestrel-test.sock` 在上述範例中) 。
+* 請確定 Nginx (可寫入通訊端，例如 `chmod go+w /tmp/kestrel-test.sock`) 。
 
 ### <a name="port-0"></a>連接埠 0
 
@@ -712,7 +714,7 @@ Listening on the following addresses: http://127.0.0.1:48508
 | -------------------------- | ----------------------------- |
 | `Http1`                    | 僅限 HTTP/1.1。 可在具有或沒有 TLS 的情況下使用。 |
 | `Http2`                    | 僅限 HTTP/2。 只有在用戶端支援[先備知識模式](https://tools.ietf.org/html/rfc7540#section-3.4)時，才可以在沒有 TLS 的情況下使用。 |
-| `Http1AndHttp2`            | HTTP/1.1 和 HTTP/2。 HTTP/2 要求用戶端選取 TLS[應用層通訊協定協商（ALPN）](https://tools.ietf.org/html/rfc7301#section-3)交握中的 HTTP/2;否則，連接預設為 HTTP/1.1。 |
+| `Http1AndHttp2`            | HTTP/1.1 和 HTTP/2。 HTTP/2 要求用戶端在 TLS[應用層通訊協定協商](https://tools.ietf.org/html/rfc7301#section-3)中選取 HTTP/2 (ALPN) 交握;否則，連接預設為 HTTP/1.1。 |
 
 `ListenOptions.Protocols`任何端點的預設值為 `HttpProtocols.Http1AndHttp2` 。
 
@@ -722,8 +724,8 @@ HTTP/2 的 TLS 限制：
 * 已停用重新交涉
 * 已停用壓縮
 * 暫時金鑰交換大小下限：
-  * 橢圓曲線 Diffie-hellman （ECDHE） &lbrack; [RFC4492](https://www.ietf.org/rfc/rfc4492.txt) &rbrack; ：224位最小值
-  * 有限欄位 diffie-hellman （DHE） &lbrack; `TLS12` &rbrack; ：2048位最小值
+  * 橢圓曲線 Diffie-hellman (ECDHE) &lbrack; [RFC4492](https://www.ietf.org/rfc/rfc4492.txt) &rbrack; ：224位最小值
+  * 有限欄位 diffie-hellman (DHE) &lbrack; `TLS12` &rbrack; ：2048位最小值
 * 不禁止加密套件。 
 
 `TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256`&lbrack;`TLS-ECDHE`&rbrack;根據預設，支援 P-256 橢圓曲線 &lbrack; `FIPS186` &rbrack; 。
@@ -881,7 +883,7 @@ webBuilder.ConfigureKestrel(serverOptions =>
 
 ## <a name="transport-configuration"></a>傳輸組態
 
-針對需要使用 Libuv （）的專案 <xref:Microsoft.AspNetCore.Hosting.WebHostBuilderLibuvExtensions.UseLibuv*> ：
+針對需要使用 Libuv () 的專案 <xref:Microsoft.AspNetCore.Hosting.WebHostBuilderLibuvExtensions.UseLibuv*> ：
 
 * 將 [Microsoft.AspNetCore.Server.Kestrel.Transport.Libuv](https://www.nuget.org/packages/Microsoft.AspNetCore.Server.Kestrel.Transport.Libuv/) 套件的相依性新增至應用程式的專案檔中：
 
@@ -994,7 +996,7 @@ Kestrel 支援下列案例：
 
 .NET Core 支援的所有平台和版本都支援 Kestrel。
 
-[查看或下載範例程式碼](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/servers/kestrel/samples)（[如何下載](xref:index#how-to-download-a-sample)）
+[查看或下載範例程式碼](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/servers/kestrel/samples) ([如何下載](xref:index#how-to-download-a-sample)) 
 
 ## <a name="http2-support"></a>HTTP/2 支援
 
@@ -1383,7 +1385,7 @@ ASP.NET Core 預設會繫結至：
 
 `KestrelServerOptions`配置
 
-### <a name="configureendpointdefaultsactionlistenoptions"></a>ConfigureEndpointDefaults （動作 \<ListenOptions> ）
+### <a name="configureendpointdefaultsactionlistenoptions"></a>ConfigureEndpointDefaults (動作 \<ListenOptions>) 
 
 指定組態 `Action` 以針對每個指定端點執行。 呼叫 `ConfigureEndpointDefaults` 多次會以最後一個指定的 `Action` 取代之前的 `Action`。
 
@@ -1403,7 +1405,7 @@ public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
 > [!NOTE]
 > <xref:Microsoft.AspNetCore.Server.Kestrel.Core.KestrelServerOptions.Listen*>**在呼叫之前**呼叫所建立 <xref:Microsoft.AspNetCore.Server.Kestrel.Core.KestrelServerOptions.ConfigureEndpointDefaults*> 的端點，將不會套用預設值。
 
-### <a name="configurehttpsdefaultsactionhttpsconnectionadapteroptions"></a>ConfigureHttpsDefaults （動作 \<HttpsConnectionAdapterOptions> ）
+### <a name="configurehttpsdefaultsactionhttpsconnectionadapteroptions"></a>ConfigureHttpsDefaults (動作 \<HttpsConnectionAdapterOptions>) 
 
 指定組態 `Action` 以針對每個 HTTPS 端點執行。 呼叫 `ConfigureHttpsDefaults` 多次會以最後一個指定的 `Action` 取代之前的 `Action`。
 
@@ -1672,8 +1674,8 @@ webBuilder.ConfigureKestrel(serverOptions =>
 
 [!code-csharp[](kestrel/samples/2.x/KestrelSample/Program.cs?name=snippet_UnixSocket)]
 
-* 在 Nginx confiuguration 檔中，將 `server`  >  `location`  >  `proxy_pass` 專案設定為 `http://unix:/tmp/{KESTREL SOCKET}:/;` 。 `{KESTREL SOCKET}`這是提供給的通訊端名稱 <xref:Microsoft.AspNetCore.Server.Kestrel.Core.KestrelServerOptions.ListenUnixSocket*> （例如， `kestrel-test.sock` 在上述範例中為）。
-* 請確定通訊端可由 Nginx 寫入（例如， `chmod go+w /tmp/kestrel-test.sock` ）。 
+* 在 Nginx confiuguration 檔中，將 `server`  >  `location`  >  `proxy_pass` 專案設定為 `http://unix:/tmp/{KESTREL SOCKET}:/;` 。 `{KESTREL SOCKET}`這是提供給 (的通訊端名稱 <xref:Microsoft.AspNetCore.Server.Kestrel.Core.KestrelServerOptions.ListenUnixSocket*> ，例如， `kestrel-test.sock` 在上述範例中) 。
+* 請確定 Nginx (可寫入通訊端，例如 `chmod go+w /tmp/kestrel-test.sock`) 。 
 
 ### <a name="port-0"></a>連接埠 0
 
@@ -1713,7 +1715,7 @@ Listening on the following addresses: http://127.0.0.1:48508
 | -------------------------- | ----------------------------- |
 | `Http1`                    | 僅限 HTTP/1.1。 可在具有或沒有 TLS 的情況下使用。 |
 | `Http2`                    | 僅限 HTTP/2。 只有在用戶端支援[先備知識模式](https://tools.ietf.org/html/rfc7540#section-3.4)時，才可以在沒有 TLS 的情況下使用。 |
-| `Http1AndHttp2`            | HTTP/1.1 和 HTTP/2。 HTTP/2 需要 TLS 和[應用層通訊協定協商（ALPN）](https://tools.ietf.org/html/rfc7301#section-3)連線;否則，連接預設為 HTTP/1.1。 |
+| `Http1AndHttp2`            | HTTP/1.1 和 HTTP/2。 HTTP/2 需要 TLS 和[應用層通訊協定協商， (ALPN) ](https://tools.ietf.org/html/rfc7301#section-3)連接;否則，連接預設為 HTTP/1.1。 |
 
 預設通訊協定為 HTTP/1.1。
 
@@ -1723,8 +1725,8 @@ HTTP/2 的 TLS 限制：
 * 已停用重新交涉
 * 已停用壓縮
 * 暫時金鑰交換大小下限：
-  * 橢圓曲線 Diffie-hellman （ECDHE） &lbrack; [RFC4492](https://www.ietf.org/rfc/rfc4492.txt) &rbrack; ：224位最小值
-  * 有限欄位 diffie-hellman （DHE） &lbrack; `TLS12` &rbrack; ：2048位最小值
+  * 橢圓曲線 Diffie-hellman (ECDHE) &lbrack; [RFC4492](https://www.ietf.org/rfc/rfc4492.txt) &rbrack; ：224位最小值
+  * 有限欄位 diffie-hellman (DHE) &lbrack; `TLS12` &rbrack; ：2048位最小值
 * 未封鎖加密套件
 
 `TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256`&lbrack;`TLS-ECDHE`&rbrack;根據預設，支援 P-256 橢圓曲線 &lbrack; `FIPS186` &rbrack; 。
@@ -1909,7 +1911,7 @@ private class TlsFilterAdapter : IConnectionAdapter
 
 雖然 Kestrel 根據前置詞來支援組態，例如 `http://example.com:5000`，Kestrel 大多會忽略主機名稱。 主機 `localhost` 是特殊情況，用來繫結到回送位址。 任何非明確 IP 位址的主機，會繫結至所有公用 IP 位址。 `Host` 標頭未驗證。
 
-因應措施是使用主機篩選中介軟體。 主機篩選中介軟體是由[AspNetCore 中繼套件](xref:fundamentals/metapackage-app)（ASP.NET Core 2.1 或2.2）所包含的[HostFiltering](https://www.nuget.org/packages/Microsoft.AspNetCore.HostFiltering)套件所提供。 中介軟體是由 <xref:Microsoft.AspNetCore.WebHost.CreateDefaultBuilder*> 所新增，它會呼叫 <xref:Microsoft.AspNetCore.Builder.HostFilteringServicesExtensions.AddHostFiltering*>：
+因應措施是使用主機篩選中介軟體。 主機篩選中介軟體是由[AspNetCore. HostFiltering](https://www.nuget.org/packages/Microsoft.AspNetCore.HostFiltering)套件所提供，它包含在[AspNetCore 中繼套件](xref:fundamentals/metapackage-app) (ASP.NET Core 2.1 或 2.2) 中。 中介軟體是由 <xref:Microsoft.AspNetCore.WebHost.CreateDefaultBuilder*> 所新增，它會呼叫 <xref:Microsoft.AspNetCore.Builder.HostFilteringServicesExtensions.AddHostFiltering*>：
 
 [!code-csharp[](kestrel/samples-snapshot/2.x/KestrelSample/Program.cs?name=snippet_Program&highlight=9)]
 
@@ -1942,7 +1944,7 @@ Kestrel 支援下列案例：
 
 .NET Core 支援的所有平台和版本都支援 Kestrel。
 
-[查看或下載範例程式碼](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/servers/kestrel/samples)（[如何下載](xref:index#how-to-download-a-sample)）
+[查看或下載範例程式碼](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/servers/kestrel/samples) ([如何下載](xref:index#how-to-download-a-sample)) 
 
 ## <a name="when-to-use-kestrel-with-a-reverse-proxy"></a>何時搭配使用 Kestrel 與反向 Proxy
 
@@ -2248,7 +2250,7 @@ ASP.NET Core 預設會繫結至：
 
 `KestrelServerOptions`配置
 
-### <a name="configureendpointdefaultsactionlistenoptions"></a>ConfigureEndpointDefaults （動作 \<ListenOptions> ）
+### <a name="configureendpointdefaultsactionlistenoptions"></a>ConfigureEndpointDefaults (動作 \<ListenOptions>) 
 
 指定組態 `Action` 以針對每個指定端點執行。 呼叫 `ConfigureEndpointDefaults` 多次會以最後一個指定的 `Action` 取代之前的 `Action`。
 
@@ -2268,7 +2270,7 @@ public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
 > [!NOTE]
 > <xref:Microsoft.AspNetCore.Server.Kestrel.Core.KestrelServerOptions.Listen*>**在呼叫之前**呼叫所建立 <xref:Microsoft.AspNetCore.Server.Kestrel.Core.KestrelServerOptions.ConfigureEndpointDefaults*> 的端點，將不會套用預設值。
 
-### <a name="configurehttpsdefaultsactionhttpsconnectionadapteroptions"></a>ConfigureHttpsDefaults （動作 \<HttpsConnectionAdapterOptions> ）
+### <a name="configurehttpsdefaultsactionhttpsconnectionadapteroptions"></a>ConfigureHttpsDefaults (動作 \<HttpsConnectionAdapterOptions>) 
 
 指定組態 `Action` 以針對每個 HTTPS 端點執行。 呼叫 `ConfigureHttpsDefaults` 多次會以最後一個指定的 `Action` 取代之前的 `Action`。
 
@@ -2585,8 +2587,8 @@ public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
         });
 ```
 
-* 在 Nginx confiuguration 檔中，將 `server`  >  `location`  >  `proxy_pass` 專案設定為 `http://unix:/tmp/{KESTREL SOCKET}:/;` 。 `{KESTREL SOCKET}`這是提供給的通訊端名稱 <xref:Microsoft.AspNetCore.Server.Kestrel.Core.KestrelServerOptions.ListenUnixSocket*> （例如， `kestrel-test.sock` 在上述範例中為）。
-* 請確定通訊端可由 Nginx 寫入（例如， `chmod go+w /tmp/kestrel-test.sock` ）。 
+* 在 Nginx confiuguration 檔中，將 `server`  >  `location`  >  `proxy_pass` 專案設定為 `http://unix:/tmp/{KESTREL SOCKET}:/;` 。 `{KESTREL SOCKET}`這是提供給 (的通訊端名稱 <xref:Microsoft.AspNetCore.Server.Kestrel.Core.KestrelServerOptions.ListenUnixSocket*> ，例如， `kestrel-test.sock` 在上述範例中) 。
+* 請確定 Nginx (可寫入通訊端，例如 `chmod go+w /tmp/kestrel-test.sock`) 。 
 
 ### <a name="port-0"></a>連接埠 0
 
@@ -2699,7 +2701,7 @@ Listening on the following addresses: http://127.0.0.1:48508
 
 雖然 Kestrel 根據前置詞來支援組態，例如 `http://example.com:5000`，Kestrel 大多會忽略主機名稱。 主機 `localhost` 是特殊情況，用來繫結到回送位址。 任何非明確 IP 位址的主機，會繫結至所有公用 IP 位址。 `Host` 標頭未驗證。
 
-因應措施是使用主機篩選中介軟體。 主機篩選中介軟體是由[AspNetCore 中繼套件](xref:fundamentals/metapackage-app)（ASP.NET Core 2.1 或2.2）所包含的[HostFiltering](https://www.nuget.org/packages/Microsoft.AspNetCore.HostFiltering)套件所提供。 中介軟體是由 <xref:Microsoft.AspNetCore.WebHost.CreateDefaultBuilder*> 所新增，它會呼叫 <xref:Microsoft.AspNetCore.Builder.HostFilteringServicesExtensions.AddHostFiltering*>：
+因應措施是使用主機篩選中介軟體。 主機篩選中介軟體是由[AspNetCore. HostFiltering](https://www.nuget.org/packages/Microsoft.AspNetCore.HostFiltering)套件所提供，它包含在[AspNetCore 中繼套件](xref:fundamentals/metapackage-app) (ASP.NET Core 2.1 或 2.2) 中。 中介軟體是由 <xref:Microsoft.AspNetCore.WebHost.CreateDefaultBuilder*> 所新增，它會呼叫 <xref:Microsoft.AspNetCore.Builder.HostFilteringServicesExtensions.AddHostFiltering*>：
 
 [!code-csharp[](kestrel/samples-snapshot/2.x/KestrelSample/Program.cs?name=snippet_Program&highlight=9)]
 
@@ -2742,7 +2744,7 @@ Listening on the following addresses: http://127.0.0.1:48508
 * 不保證用戶端在連接關閉之前已讀取回應。
 * 呼叫 `Abort` 應該很罕見，並保留給嚴重的錯誤案例，而不是常見的錯誤。
   * 只有 `Abort` 在需要解決特定問題時，才呼叫。 例如， `Abort` 如果惡意用戶端正在嘗試資料， `POST` 或當用戶端程式代碼中發生錯誤而導致大型或多個要求時，請呼叫。
-  * 請勿呼叫 `Abort` 常見的錯誤狀況，例如 HTTP 404 （找不到）。
+  * 請勿呼叫 `Abort` 常見的錯誤狀況，例如 HTTP 404 (找不到) 。
 
 呼叫[HttpResponse](xref:Microsoft.AspNetCore.Http.HttpResponse.CompleteAsync%2A)之前，請先呼叫 CompleteAsync `Abort` ，以確保伺服器已完成寫入回應。 不過，用戶端行為無法預測，而且在中斷連線之前，它們可能不會讀取回應。
 

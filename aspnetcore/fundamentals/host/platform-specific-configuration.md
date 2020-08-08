@@ -7,6 +7,8 @@ ms.author: riande
 ms.custom: mvc, seodec18
 ms.date: 09/26/2019
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -15,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: fundamentals/configuration/platform-specific-configuration
-ms.openlocfilehash: 0636c62c4373533234ab252d64052b476b123bbf
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: 13728bca9d382bad39a85144ae9efd5b63a05dc4
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85405090"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88017385"
 ---
 # <a name="use-hosting-startup-assemblies-in-aspnet-core"></a>在 ASP.NET Core 中使用裝載啟動組件
 
@@ -28,9 +30,9 @@ ms.locfileid: "85405090"
 
 ::: moniker range=">= aspnetcore-3.0"
 
-<xref:Microsoft.AspNetCore.Hosting.IHostingStartup>（裝載啟動）會在啟動時從外部元件新增應用程式的增強功能。 例如，外部程式庫可以使用裝載啟動實作，向應用程式提供額外的組態提供者或服務。
+<xref:Microsoft.AspNetCore.Hosting.IHostingStartup>裝載啟動) 執行的 (，會在啟動時從外部元件新增應用程式的增強功能。 例如，外部程式庫可以使用裝載啟動實作，向應用程式提供額外的組態提供者或服務。
 
-[查看或下載範例程式碼](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/host/platform-specific-configuration/samples/)（[如何下載](xref:index#how-to-download-a-sample)）
+[查看或下載範例程式碼](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/host/platform-specific-configuration/samples/) ([如何下載](xref:index#how-to-download-a-sample)) 
 
 ## <a name="hostingstartup-attribute"></a>HostingStartup 屬性
 
@@ -91,7 +93,7 @@ ms.locfileid: "85405090"
 
 使用主機設定或環境變數停用裝載啟動組件會停用全域的組件，並且可能會停用數項應用程式特性。
 
-## <a name="project"></a>專案
+## <a name="project"></a>隨附此逐步解說的專案
 
 以下列兩種專案類型的任一類型建立裝載啟動：
 
@@ -378,8 +380,8 @@ NuGet 套件可以提供裝載啟動的增強功能。 此套件具有 `HostingS
   * 取用專案可存取的位置。
 * 裝載啟動的相依性檔案可提供增強應用程式使用，如[執行階段存放區](#runtime-store) 區段 (沒有編譯時間參考)。
 * 以 .NET Framework 為目標時，可在預設載入內容中載入組件，在 .NET Framework 上，這表示組件位於下列其中一個位置：
-  * 應用程式基底路徑：應用程式可執行檔（*.exe*）所在的*bin*資料夾。
-  * 全域組件快取（GAC）： GAC 會儲存數個 .NET Framework 應用程式共用的元件。 如需詳細資訊，請參閱 .NET Framework 檔中的[如何：將元件安裝到全域組件快取](/dotnet/framework/app-domains/how-to-install-an-assembly-into-the-gac)。
+  * 應用程式基底路徑 *：) 所在*的應用程式可執行檔 (的*bin*資料夾。
+  * 全域組件快取 (GAC) ： GAC 會儲存數個 .NET Framework 應用程式共用的元件。 如需詳細資訊，請參閱 .NET Framework 檔中的[如何：將元件安裝到全域組件快取](/dotnet/framework/app-domains/how-to-install-an-assembly-into-the-gac)。
 
 ## <a name="sample-code"></a>範例程式碼
 
@@ -422,7 +424,7 @@ dotnet nuget locals all --clear
 1. 使用 [dotnet build](/dotnet/core/tools/dotnet-build) 命令編譯 *HostingStartupLibrary* 類別庫。
 1. 將 *HostingStartupLibrary* 的類別庫組件名稱新增至 `ASPNETCORE_HOSTINGSTARTUPASSEMBLIES` 環境變數。
 1. 將 *HostingStartupLibrary.dll* 檔案從類別庫的編譯輸出複製到應用程式的 *bin/Debug* 資料夾，在應用程式的 *bin* 下部署類別庫組件。
-1. 編譯和執行應用程式。 `<ItemGroup>`應用程式專案檔中的會參考類別庫的元件（*.\bin\Debug\netcoreapp3.0\HostingStartupLibrary.dll*）（編譯時間參考）。 如需詳細資訊，請參閱 HostingStartupApp 專案檔中的資訊。
+1. 編譯和執行應用程式。 `<ItemGroup>`應用程式專案檔中的會參考類別庫的元件 (*.\bin\Debug\netcoreapp3.0\HostingStartupLibrary.dll*)  (編譯時間參考) 。 如需詳細資訊，請參閱 HostingStartupApp 專案檔中的資訊。
 
    ```xml
    <ItemGroup>
@@ -438,15 +440,15 @@ dotnet nuget locals all --clear
 **從部署在執行階段存放區的組件啟用**
 
 1. *StartupDiagnostics* 專案使用 [PowerShell](/powershell/scripting/powershell-scripting) 修改其 *StartupDiagnostics.deps.json* 檔案。 從 Windows 7 SP1 和 Windows Server 2008 R2 SP1 開始，會在 Windows 上預設安裝 PowerShell。 若要在其他平臺上取得 PowerShell，請參閱[安裝各種版本的 powershell](/powershell/scripting/install/installing-powershell)。
-1. 執行 *RuntimeStore* 資料夾中的 *build.ps1* 指令碼。 指令碼：
+1. 執行 *RuntimeStore* 資料夾中的 *build.ps1* 指令碼。 此指令碼會：
    * `StartupDiagnostics`在*obj\packages*資料夾中產生封裝。
    * 在 *store* 資料夾中產生 `StartupDiagnostics` 的執行階段存放區。 指令碼中的 `dotnet store` 命令會使用  的 `win7-x64` [runtime identifier (RID) (執行階段識別碼 (RID))](/dotnet/core/rid-catalog) 作為部署至 Windows 的裝載啟動。 為不同的執行階段提供裝載啟動時，請在指令碼的行 37 上替換成正確的 RID。 稍後的執行時間存放區會 `StartupDiagnostics` 移至要使用元件之電腦上的使用者或系統執行時間存放區。 元件的使用者執行時間存放區安裝位置 `StartupDiagnostics` 為 *. dotnet/store/x64/netcoreapp 3.0/startupdiagnostics/1.0.0/lib/netcoreapp 3.0/StartupDiagnostics.dll*。
    * `additionalDeps` `StartupDiagnostics` 在*additionalDeps*資料夾中產生的。 其他相依性稍後會移至使用者或系統的其他相依性。 使用者的 `StartupDiagnostics` 其他相依性安裝位置為 *. dotnet/X64/AdditionalDeps/StartupDiagnostics/Shared/NETCore。應用程式/3.0.0/StartupDiagnostics.deps.json*。
    * 將 *deploy.ps1* 檔案置於 *deployment* 資料夾中。
 1. 執行 *deployment* 資料夾中的 *deploy.ps1* 指令碼。 該指令碼會附加至：
    * `StartupDiagnostics` 至 `ASPNETCORE_HOSTINGSTARTUPASSEMBLIES` 環境變數。
-   * 裝載啟動相依性路徑（在 RuntimeStore 專案的*部署*資料夾中）到 `DOTNET_ADDITIONAL_DEPS` 環境變數。
-   * 執行時間存放區路徑（在 RuntimeStore 專案的*部署*資料夾中）到 `DOTNET_SHARED_STORE` 環境變數。
+   * 裝載啟動相依性路徑 (在 RuntimeStore 專案的*部署*資料夾中，) 到 `DOTNET_ADDITIONAL_DEPS` 環境變數。
+   * 執行時間存放區路徑 (在 RuntimeStore 專案的*部署*資料夾中，) 到 `DOTNET_SHARED_STORE` 環境變數。
 1. 執行範例應用程式。
 1. 要求 `/services` 端點來查看應用程式的註冊服務。 要求 `/diag` 端點來查看診斷資訊。
 
@@ -454,9 +456,9 @@ dotnet nuget locals all --clear
 
 ::: moniker range="< aspnetcore-3.0"
 
-<xref:Microsoft.AspNetCore.Hosting.IHostingStartup>（裝載啟動）會在啟動時從外部元件新增應用程式的增強功能。 例如，外部程式庫可以使用裝載啟動實作，向應用程式提供額外的組態提供者或服務。
+<xref:Microsoft.AspNetCore.Hosting.IHostingStartup>裝載啟動) 執行的 (，會在啟動時從外部元件新增應用程式的增強功能。 例如，外部程式庫可以使用裝載啟動實作，向應用程式提供額外的組態提供者或服務。
 
-[查看或下載範例程式碼](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/host/platform-specific-configuration/samples/)（[如何下載](xref:index#how-to-download-a-sample)）
+[查看或下載範例程式碼](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/host/platform-specific-configuration/samples/) ([如何下載](xref:index#how-to-download-a-sample)) 
 
 ## <a name="hostingstartup-attribute"></a>HostingStartup 屬性
 
@@ -489,7 +491,7 @@ dotnet nuget locals all --clear
 
 使用主機設定或環境變數停用裝載啟動組件會停用全域的組件，並且可能會停用數項應用程式特性。
 
-## <a name="project"></a>專案
+## <a name="project"></a>隨附此逐步解說的專案
 
 以下列兩種專案類型的任一類型建立裝載啟動：
 
@@ -764,8 +766,8 @@ NuGet 套件可以提供裝載啟動的增強功能。 此套件具有 `HostingS
   * 取用專案可存取的位置。
 * 裝載啟動的相依性檔案可提供增強應用程式使用，如[執行階段存放區](#runtime-store) 區段 (沒有編譯時間參考)。
 * 以 .NET Framework 為目標時，可在預設載入內容中載入組件，在 .NET Framework 上，這表示組件位於下列其中一個位置：
-  * 應用程式基底路徑：應用程式可執行檔（*.exe*）所在的*bin*資料夾。
-  * 全域組件快取（GAC）： GAC 會儲存數個 .NET Framework 應用程式共用的元件。 如需詳細資訊，請參閱 .NET Framework 檔中的[如何：將元件安裝到全域組件快取](/dotnet/framework/app-domains/how-to-install-an-assembly-into-the-gac)。
+  * 應用程式基底路徑 *：) 所在*的應用程式可執行檔 (的*bin*資料夾。
+  * 全域組件快取 (GAC) ： GAC 會儲存數個 .NET Framework 應用程式共用的元件。 如需詳細資訊，請參閱 .NET Framework 檔中的[如何：將元件安裝到全域組件快取](/dotnet/framework/app-domains/how-to-install-an-assembly-into-the-gac)。
 
 ## <a name="sample-code"></a>範例程式碼
 
@@ -824,15 +826,15 @@ dotnet nuget locals all --clear
 **從部署在執行階段存放區的組件啟用**
 
 1. *StartupDiagnostics* 專案使用 [PowerShell](/powershell/scripting/powershell-scripting) 修改其 *StartupDiagnostics.deps.json* 檔案。 從 Windows 7 SP1 和 Windows Server 2008 R2 SP1 開始，會在 Windows 上預設安裝 PowerShell。 若要在其他平臺上取得 PowerShell，請參閱[安裝各種版本的 powershell](/powershell/scripting/install/installing-powershell)。
-1. 執行 *RuntimeStore* 資料夾中的 *build.ps1* 指令碼。 指令碼：
+1. 執行 *RuntimeStore* 資料夾中的 *build.ps1* 指令碼。 此指令碼會：
    * `StartupDiagnostics`在*obj\packages*資料夾中產生封裝。
    * 在 *store* 資料夾中產生 `StartupDiagnostics` 的執行階段存放區。 指令碼中的 `dotnet store` 命令會使用  的 `win7-x64` [runtime identifier (RID) (執行階段識別碼 (RID))](/dotnet/core/rid-catalog) 作為部署至 Windows 的裝載啟動。 為不同的執行階段提供裝載啟動時，請在指令碼的行 37 上替換成正確的 RID。 稍後的執行時間存放區會 `StartupDiagnostics` 移至要使用元件之電腦上的使用者或系統執行時間存放區。 元件的使用者執行時間存放區安裝位置 `StartupDiagnostics` 為 *. dotnet/store/x64/netcoreapp 2.2/startupdiagnostics/1.0.0/lib/netcoreapp 2.2/StartupDiagnostics.dll*。
    * `additionalDeps` `StartupDiagnostics` 在*additionalDeps*資料夾中產生的。 其他相依性稍後會移至使用者或系統的其他相依性。 使用者的 `StartupDiagnostics` 其他相依性安裝位置為 *. dotnet/X64/AdditionalDeps/StartupDiagnostics/Shared/NETCore。應用程式/2.2.0/StartupDiagnostics.deps.json*。
    * 將 *deploy.ps1* 檔案置於 *deployment* 資料夾中。
 1. 執行 *deployment* 資料夾中的 *deploy.ps1* 指令碼。 該指令碼會附加至：
    * `StartupDiagnostics` 至 `ASPNETCORE_HOSTINGSTARTUPASSEMBLIES` 環境變數。
-   * 裝載啟動相依性路徑（在 RuntimeStore 專案的*部署*資料夾中）到 `DOTNET_ADDITIONAL_DEPS` 環境變數。
-   * 執行時間存放區路徑（在 RuntimeStore 專案的*部署*資料夾中）到 `DOTNET_SHARED_STORE` 環境變數。
+   * 裝載啟動相依性路徑 (在 RuntimeStore 專案的*部署*資料夾中，) 到 `DOTNET_ADDITIONAL_DEPS` 環境變數。
+   * 執行時間存放區路徑 (在 RuntimeStore 專案的*部署*資料夾中，) 到 `DOTNET_SHARED_STORE` 環境變數。
 1. 執行範例應用程式。
 1. 要求 `/services` 端點來查看應用程式的註冊服務。 要求 `/diag` 端點來查看診斷資訊。
 

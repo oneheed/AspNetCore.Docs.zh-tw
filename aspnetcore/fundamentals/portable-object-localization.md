@@ -5,6 +5,8 @@ description: 本文介紹可攜式物件檔案，並概述在具有 Orchard Core
 ms.author: scaddie
 ms.date: 09/26/2017
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -13,12 +15,12 @@ no-loc:
 - Razor
 - SignalR
 uid: fundamentals/portable-object-localization
-ms.openlocfilehash: 531e836db8613cc3382ef2f38f336a0986116334
-ms.sourcegitcommit: 66fca14611eba141d455fe0bd2c37803062e439c
+ms.openlocfilehash: 1c60f98ce08c5282986f688487339d378f28aaf7
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 07/03/2020
-ms.locfileid: "85944480"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88016800"
 ---
 # <a name="configure-portable-object-localization-in-aspnet-core"></a>使用 ASP.NET Core 設定可攜式物件當地語系化
 
@@ -28,7 +30,7 @@ ms.locfileid: "85944480"
 
 **注意：** Orchard Core 不是 Microsoft 產品。 因此，Microsoft 不提供這項功能的支援。
 
-[查看或下載範例程式碼](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/localization/sample/2.x/POLocalization)（[如何下載](xref:index#how-to-download-a-sample)）
+[查看或下載範例程式碼](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/localization/sample/2.x/POLocalization) ([如何下載](xref:index#how-to-download-a-sample)) 
 
 ## <a name="what-is-a-po-file"></a>什麼是 PO 檔案？
 
@@ -195,7 +197,7 @@ Existuje 5 položek.
 
 ### <a name="contextualizing-strings"></a>內容化字串
 
-應用程式通常包含要在數個位置中翻譯的字串。 相同的字串在應用程式內的特定位置（views 或類別檔案）可能會有不同的翻譯 Razor 。 PO 檔案支援檔案內容的概念，可用來對所表示的字串進行分類。 使用檔案內容，字串可以根據檔案內容 (或缺乏檔案內容) 翻譯成不同的內容。
+應用程式通常包含要在數個位置中翻譯的字串。 相同的字串在應用程式內的特定位置可能會有不同的轉譯 (Razor views 或 class 檔案) 。 PO 檔案支援檔案內容的概念，可用來對所表示的字串進行分類。 使用檔案內容，字串可以根據檔案內容 (或缺乏檔案內容) 翻譯成不同的內容。
 
 PO 當地語系化服務會使用翻譯字串時所使用的完整類別或檢視的名稱。 這是透過在 `msgctxt` 項目上設定值來完成的。
 

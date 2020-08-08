@@ -6,6 +6,8 @@ monikerRange: '>= aspnetcore-3.0'
 ms.author: jamesnk
 ms.date: 07/27/2020
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -14,12 +16,12 @@ no-loc:
 - Razor
 - SignalR
 uid: grpc/client
-ms.openlocfilehash: 0d8856bba5afaaed4d9552480e4ae5dcbb7704d5
-ms.sourcegitcommit: 5a36758cca2861aeb10840093e46d273a6e6e91d
+ms.openlocfilehash: 5aca81da34e5ed51b2dc4f404c1ba4d7377a422f
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 07/28/2020
-ms.locfileid: "87303543"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88016241"
 ---
 # <a name="call-grpc-services-with-the-net-client"></a>利用 .NET 用戶端呼叫 gRPC 服務
 
@@ -52,7 +54,7 @@ var counterClient = new Count.CounterClient(channel);
 
 ### <a name="configure-tls"></a>設定 TLS
 
-GRPC 用戶端必須使用與所呼叫服務相同的連接層級安全性。 建立 gRPC 通道時，會設定 gRPC 用戶端傳輸層安全性（TLS）。 當 gRPC 用戶端呼叫服務，且通道和服務的連線層級安全性不相符時，就會擲回錯誤。
+GRPC 用戶端必須使用與所呼叫服務相同的連接層級安全性。 gRPC 用戶端傳輸層安全性 (TLS) 會在建立 gRPC 通道時設定。 當 gRPC 用戶端呼叫服務，且通道和服務的連線層級安全性不相符時，就會擲回錯誤。
 
 若要將 gRPC 通道設定為使用 TLS，請確定伺服器位址的開頭為 `https` 。 例如，會 `GrpcChannel.ForAddress("https://localhost:5001")` 使用 HTTPS 通訊協定。 GRPC 通道會自動 negotates TLS 所保護的連接，並使用安全連線來進行 gRPC 呼叫。
 

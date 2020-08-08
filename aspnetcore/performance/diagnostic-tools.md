@@ -6,6 +6,8 @@ monikerRange: '>= aspnetcore-1.1'
 ms.author: riande
 ms.date: 04/11/2019
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -14,12 +16,12 @@ no-loc:
 - Razor
 - SignalR
 uid: performance/diagnostic-tools
-ms.openlocfilehash: 631dedddecfe3b443e38c6f5a1a182f98c79f0ad
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: 53c613b208c142e1323e593d0c57a42de3150621
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85399591"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88018061"
 ---
 # <a name="performance-diagnostic-tools"></a>效能診斷工具
 
@@ -65,13 +67,13 @@ Application Insights 可以在各種環境中使用：
 
 ## <a name="windows-performance-toolkit"></a>Windows Performance Toolkit
 
-[Windows 效能工具](/windows-hardware/test/wpt/)組（WPT）是由兩個元件所組成： Windows performance 錄製器（WPR）和 Windows performance ANALYZER （WPA）。 這些工具會產生 Windows 作業系統和應用程式的深入效能設定檔。 WPT 有更豐富的方式可將資料視覺化，但其資料收集的功能比 PerfView 的更強大。
+[Windows 效能工具](/windows-hardware/test/wpt/)組 (WPT) 由兩個元件所組成： Windows performance 記錄器 (WPR) 和 Windows performance ANALYZER (WPA) 。 這些工具會產生 Windows 作業系統和應用程式的深入效能設定檔。 WPT 有更豐富的方式可將資料視覺化，但其資料收集的功能比 PerfView 的更強大。
 
 ## <a name="perfcollect"></a>PerfCollect
 
 雖然 PerfView 是適用于 .NET 案例的實用效能分析工具，但它只會在 Windows 上執行，因此您無法使用它來收集來自在 Linux 環境中執行之 ASP.NET Core 應用程式的追蹤。
 
-[PerfCollect](https://github.com/dotnet/coreclr/blob/master/Documentation/project-docs/linux-performance-tracing.md)是一種 bash 腳本，它會使用原生 Linux 程式碼剖析工具（[Perf](https://perf.wiki.kernel.org/index.php/Main_Page)和[LTTng](https://lttng.org/)）來收集可由 PerfView 分析的 Linux 追蹤。 當效能問題顯示在無法直接使用 PerfView 的 Linux 環境中時，PerfCollect 會很有用。 相反地，PerfCollect 可以從 .NET Core 應用程式收集追蹤，然後使用 PerfView 在 Windows 電腦上進行分析。
+[PerfCollect](https://github.com/dotnet/coreclr/blob/master/Documentation/project-docs/linux-performance-tracing.md)是使用原生 Linux 分析[工具 (效能](https://perf.wiki.kernel.org/index.php/Main_Page)和[LTTng](https://lttng.org/)) 的 bash 腳本，可收集可由 PerfView 分析的 Linux 追蹤。 當效能問題顯示在無法直接使用 PerfView 的 Linux 環境中時，PerfCollect 會很有用。 相反地，PerfCollect 可以從 .NET Core 應用程式收集追蹤，然後使用 PerfView 在 Windows 電腦上進行分析。
 
 有關如何安裝和開始使用 PerfCollect 的詳細資訊，可[在 GitHub 上](https://github.com/dotnet/coreclr/blob/master/Documentation/project-docs/linux-performance-tracing.md)取得。
 

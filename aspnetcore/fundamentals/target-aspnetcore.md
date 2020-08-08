@@ -6,6 +6,8 @@ ms.author: scaddie
 ms.custom: mvc
 ms.date: 12/16/2019
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -14,12 +16,12 @@ no-loc:
 - Razor
 - SignalR
 uid: fundamentals/target-aspnetcore
-ms.openlocfilehash: 1c794092b856a916a318956d7cfb357d46a22d1d
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: a6c20c61f7f33706e620fcbc239b2cc4bace15f0
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85399643"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88016488"
 ---
 # <a name="use-aspnet-core-apis-in-a-class-library"></a>在類別庫中使用 ASP.NET Core Api
 
@@ -31,8 +33,8 @@ ms.locfileid: "85399643"
 
 ASP.NET Core 遵守[.Net Core 支援原則](https://dotnet.microsoft.com/platform/support/policy/dotnet-core)。 判斷要在程式庫中支援的 ASP.NET Core 版本時，請參閱支援原則。 程式庫應該：
 
-* 請致力於支援分類為*長期支援*（LTS）的所有 ASP.NET Core 版本。
-* 不是為了支援分類為*生命週期結束*（EOL）的 ASP.NET Core 版本而感到義務。
+* 請致力於支援分類為*長期支援* (LTS) 的所有 ASP.NET Core 版本。
+* 不會覺得支援 ASP.NET Core 版本分類為*生命週期結束*)  (。
 
 當 ASP.NET Core 的預覽版本可供使用時，會在[aspnet/公告](https://github.com/aspnet/Announcements/issues)GitHub 存放庫中公佈重大變更。 在開發架構功能時，可以執行程式庫的相容性測試。
 
@@ -48,9 +50,9 @@ ASP.NET Core 遵守[.Net Core 支援原則](https://dotnet.microsoft.com/platfor
 
 只有以 .NET Core 3.x 為目標的專案才支援以這種方式參考 ASP.NET Core。
 
-## <a name="include-blazor-extensibility"></a>包含 Blazor 擴充性
+## <a name="include-no-locblazor-extensibility"></a>包含 Blazor 擴充性
 
-Blazor支援 WebAssembly （WASM）和伺服器[裝載模型](xref:blazor/hosting-models)。 除非有特定的理由不這麼做，否則[ Razor 元件](xref:blazor/components/index)程式庫應該支援這兩種裝載模型。 Razor元件程式庫必須使用[Microsoft .net Sdk Razor 。SDK](xref:razor-pages/sdk)。
+Blazor支援 WebAssembly (WASM) 和伺服器[裝載模型](xref:blazor/hosting-models)。 除非有特定的理由不這麼做，否則[ Razor 元件](xref:blazor/components/index)程式庫應該支援這兩種裝載模型。 Razor元件程式庫必須使用[Microsoft .net Sdk Razor 。SDK](xref:razor-pages/sdk)。
 
 ### <a name="support-both-hosting-models"></a>同時支援這兩種裝載模型
 
@@ -109,7 +111,7 @@ dotnet new razorclasslib
 
 本節不會討論多個目標，以支援多個版本的 MVC。 如需支援多個 ASP.NET Core 版本的指引，請參閱[支援多個 ASP.NET Core 版本](#support-multiple-aspnet-core-versions)。
 
-### <a name="razor-views-or-razor-pages"></a>Razorviews 或 Razor Pages
+### <a name="no-locrazor-views-or-no-locrazor-pages"></a>Razorviews 或 Razor Pages
 
 包含[ Razor 視圖](xref:mvc/views/overview)或[ Razor 頁面](xref:razor-pages/index)的專案必須使用[Microsoft .net Sdk Razor 。SDK](xref:razor-pages/sdk)。
 
@@ -152,7 +154,7 @@ dotnet new razorclasslib -s
 
 [!code-xml[](target-aspnetcore/samples/single-tfm/netcoreapp3.0-basic-library.csproj)]
 
-如果目標 .NET Standard （以支援早于 ASP.NET Core 3.x 的版本），請將套件參考新增至[AspNetCore Razor ](https://www.nuget.org/packages/Microsoft.AspNetCore.Mvc.Razor)。 `Microsoft.AspNetCore.Mvc.Razor`封裝已移至共用架構中，因此不會再發行。 例如：
+如果目標 .NET Standard (以支援早于 ASP.NET Core 3.x) 的版本，請將套件參考新增至[AspNetCore Razor ](https://www.nuget.org/packages/Microsoft.AspNetCore.Mvc.Razor)。 `Microsoft.AspNetCore.Mvc.Razor`封裝已移至共用架構中，因此不會再發行。 例如：
 
 [!code-xml[](target-aspnetcore/samples/single-tfm/netstandard2.0-tag-helpers-library.csproj)]
 
@@ -162,7 +164,7 @@ dotnet new razorclasslib -s
 
 [!code-xml[](target-aspnetcore/samples/single-tfm/netcoreapp3.0-basic-library.csproj)]
 
-如果目標 .NET Standard （以支援早于 ASP.NET Core 3.x 的版本），請將套件參考新增至[AspNetCore ViewFeatures](https://www.nuget.org/packages/Microsoft.AspNetCore.Mvc.ViewFeatures)。 `Microsoft.AspNetCore.Mvc.ViewFeatures`封裝已移至共用架構中，因此不會再發行。 例如：
+如果目標 .NET Standard (以支援早于 ASP.NET Core 3.x) 的版本，請將套件參考新增至[ViewFeatures](https://www.nuget.org/packages/Microsoft.AspNetCore.Mvc.ViewFeatures)。 `Microsoft.AspNetCore.Mvc.ViewFeatures`封裝已移至共用架構中，因此不會再發行。 例如：
 
 [!code-xml[](target-aspnetcore/samples/single-tfm/netstandard2.0-view-components-library.csproj)]
 
@@ -206,7 +208,7 @@ dotnet new razorclasslib -s
 
 假設您要將程式庫從 .NET Core 2.2 升級至 .NET Core 3.0。 程式庫中使用的 ASP.NET Core API 在 ASP.NET Core 3.0 中有[重大變更](/dotnet/core/compatibility/breaking-changes)。 請考慮是否可以將程式庫改寫成不要在所有版本中使用中斷的 API。
 
-如果您可以重新撰寫程式庫，請執行此動作，並繼續以較早的目標架構（例如，.NET Standard 2.0 或 .NET Framework 4.6.1）為目標，並搭配套件參考。
+如果您可以重寫程式庫，請執行此動作並繼續以較早的目標 framework 為目標 (例如，.NET Standard 2.0 或 .NET Framework 4.6.1) 與套件參考。
 
 如果您無法重寫程式庫，請採取下列步驟：
 
@@ -220,7 +222,7 @@ dotnet new razorclasslib -s
 
 ## <a name="use-an-api-introduced-in-30"></a>使用3.0 中引進的 API
 
-假設您想要使用 ASP.NET Core 3.0 中引進的 ASP.NET Core API。 請考慮下列問題：
+假設您想要使用 ASP.NET Core 3.0 中引進的 ASP.NET Core API。 請考量下列問題：
 
 1. 程式庫的功能是否需要新的 API？
 1. 程式庫可以用不同的方式來執行這項功能嗎？

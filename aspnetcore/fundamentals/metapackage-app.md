@@ -6,6 +6,8 @@ monikerRange: '>= aspnetcore-2.1'
 ms.author: riande
 ms.date: 09/24/2019
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -14,18 +16,18 @@ no-loc:
 - Razor
 - SignalR
 uid: fundamentals/metapackage-app
-ms.openlocfilehash: 89f447699e8219ec4dd48b2342095d86a011860f
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: 182d167a1848492846a04c938749a6de30bce377
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85407963"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88017060"
 ---
 # <a name="microsoftaspnetcoreapp-for-aspnet-core"></a>ASP.NET Core 的 AspNetCore 應用程式
 
 ::: moniker range=">= aspnetcore-3.0"
 
- ASP.NET Core 共用架構（ `Microsoft.AspNetCore.App` ）包含由 Microsoft 開發及支援的元件。 `Microsoft.AspNetCore.App`安裝[.Net Core 3.0 或更新版本的 SDK](https://dotnet.microsoft.com/download/dotnet-core/3.0)時，會進行安裝。 *共用架構*是一組安裝在電腦上的元件（*.dll*檔案），其中包含執行時間元件和目標套件。 如需詳細資訊，請參閱[共用的架構](https://natemcmaster.com/blog/2018/08/29/netcore-primitives-2/) \(英文\)。
+ ASP.NET Core 共用架構 (`Microsoft.AspNetCore.App`) 包含 Microsoft 開發及支援的元件。 `Microsoft.AspNetCore.App`安裝[.Net Core 3.0 或更新版本的 SDK](https://dotnet.microsoft.com/download/dotnet-core/3.0)時，會進行安裝。 *共用架構*是安裝在電腦上的一組元件 () *.dll*檔案，其中包含執行時間元件和目標套件。 如需詳細資訊，請參閱[共用的架構](https://natemcmaster.com/blog/2018/08/29/netcore-primitives-2/) \(英文\)。
 
 * 以 SDK 為目標的專案會 `Microsoft.NET.Sdk.Web` 隱含地參考 `Microsoft.AspNetCore.App` 架構。
 

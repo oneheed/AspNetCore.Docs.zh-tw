@@ -5,6 +5,8 @@ description: 瞭解如何在 ASP.NET Core 資料保護 Api 中使用目的字串
 ms.author: riande
 ms.date: 10/14/2016
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -13,12 +15,12 @@ no-loc:
 - Razor
 - SignalR
 uid: security/data-protection/consumer-apis/purpose-strings
-ms.openlocfilehash: b52961fd33ce2d3708754f73ea38456d8d5f8f3c
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: 33139f6e5e36aed2cb54738fbd2487969844edc7
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85404284"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88018399"
 ---
 # <a name="purpose-strings-in-aspnet-core"></a>ASP.NET Core 中的目的字串
 
@@ -54,9 +56,9 @@ ms.locfileid: "85404284"
 
 * 針對指定的 `IDataProtectionProvider` 物件， `CreateProtector` 方法會建立唯一系結 `IDataProtector` 至 `IDataProtectionProvider` 建立它之物件的物件，以及傳遞至方法的目的參數。
 
-* 目的參數不得為 null。 （如果將目的指定為數組，這表示陣列的長度不能為零，而且陣列的所有元素都必須為非 null）。在技術上，您可以使用空的字串目的，但不建議您這麼做。
+* 目的參數不得為 null。  (如果目的是指定為數組，這表示陣列的長度不能為零，而且陣列的所有元素都必須為非 null ) 。在技術上，您可以使用空字串目的，但不建議這麼做。
 
-* 只有在以相同順序包含相同的字串（使用序數比較子）時，兩個目的引數才是相等的。 單一目的引數相當於對應的單一元素目的陣列。
+* 只有在兩個目的引數包含相同的字串 (使用序數比較子) 相同的順序時，才會是相等的。 單一目的引數相當於對應的單一元素目的陣列。
 
 * `IDataProtector`只有在從 `IDataProtectionProvider` 具有對等用途參數的對等物件建立時，才會有兩個物件相等。
 

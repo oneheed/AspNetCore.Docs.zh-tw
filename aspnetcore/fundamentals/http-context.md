@@ -7,6 +7,8 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 5/5/2020
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -15,18 +17,18 @@ no-loc:
 - Razor
 - SignalR
 uid: fundamentals/httpcontext
-ms.openlocfilehash: d4512c9fa136e518fa0230c0cf9c607519eed6d8
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: 2b8ac1d6c6cdeee14b74c5b14206bff51982c711
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85399448"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88017242"
 ---
 # <a name="access-httpcontext-in-aspnet-core"></a>存取 ASP.NET Core 中的 HttpContext
 
 ASP.NET Core 應用程式會 `HttpContext` 透過 <xref:Microsoft.AspNetCore.Http.IHttpContextAccessor> 介面和其預設實作為存取權 <xref:Microsoft.AspNetCore.Http.HttpContextAccessor> 。 只有當您需要存取服務內的 `HttpContext` 時，才需要使用 `IHttpContextAccessor`。
 
-## <a name="use-httpcontext-from-razor-pages"></a>從頁面使用 HttpCoNtext Razor
+## <a name="use-httpcontext-from-no-locrazor-pages"></a>從頁面使用 HttpCoNtext Razor
 
 這些 Razor 頁面會 <xref:Microsoft.AspNetCore.Mvc.RazorPages.PageModel> 公開 <xref:Microsoft.AspNetCore.Mvc.RazorPages.PageModel.HttpContext> 屬性：
 
@@ -42,9 +44,9 @@ public class AboutModel : PageModel
 }
 ```
 
-## <a name="use-httpcontext-from-a-razor-view"></a>從視圖使用 HttpCoNtext Razor
+## <a name="use-httpcontext-from-a-no-locrazor-view"></a>從視圖使用 HttpCoNtext Razor
 
-Razorviews 會 `HttpContext` 直接透過 view 的[RazorPage 內容](xref:Microsoft.AspNetCore.Mvc.Razor.RazorPage.Context)來公開。 下列範例會使用 Windows 驗證來抓取內部網路應用程式中目前的使用者名稱：
+Razorviews 會 `HttpContext` 直接透過頁面的[ Razor 上下文](xref:Microsoft.AspNetCore.Mvc.Razor.RazorPage.Context)屬性公開。 下列範例會使用 Windows 驗證來抓取內部網路應用程式中目前的使用者名稱：
 
 ```cshtml
 @{
@@ -173,6 +175,6 @@ public class EmailController : Controller
 }
 ```
 
-## <a name="blazor-and-shared-state"></a>Blazor和共用狀態
+## <a name="no-locblazor-and-shared-state"></a>Blazor和共用狀態
 
 [!INCLUDE[](~/includes/blazor-security/blazor-shared-state.md)]

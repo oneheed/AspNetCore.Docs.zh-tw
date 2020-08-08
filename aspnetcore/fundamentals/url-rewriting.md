@@ -7,6 +7,8 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 08/16/2019
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -15,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: fundamentals/url-rewriting
-ms.openlocfilehash: dbdb7cd86218fd9ba63ae4ac2aa516836d4fd1a1
-ms.sourcegitcommit: 66fca14611eba141d455fe0bd2c37803062e439c
+ms.openlocfilehash: 9f7eb15271a0b7adb3964b4fe039497bda7fef08
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 07/03/2020
-ms.locfileid: "85944291"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88016540"
 ---
 # <a name="url-rewriting-middleware-in-aspnet-core"></a>ASP.NET Core 的 URL 重寫中介軟體
 
@@ -43,7 +45,7 @@ URL 重寫是指根據一或多個預先定義的規則來修改要求 URL 的�
 > [!NOTE]
 > URL 重寫可能會降低應用程式的效能。 如果可行的話，請限制規則的數目與複雜程度。
 
-[查看或下載範例程式碼](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/url-rewriting/samples/)（[如何下載](xref:index#how-to-download-a-sample)）
+[查看或下載範例程式碼](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/url-rewriting/samples/) ([如何下載](xref:index#how-to-download-a-sample)) 
 
 ## <a name="url-redirect-and-url-rewrite"></a>URL 重新導向和 URL 重寫
 
@@ -94,7 +96,7 @@ URL 重寫是指根據一或多個預先定義的規則來修改要求 URL 的�
 
   如果要確實得知哪種方法會降低最多效能，或是降低的效能可以忽略的話，進行效能評定是唯一方法。
 
-## <a name="package"></a>套件
+## <a name="package"></a>Package
 
 URL 重寫中介軟體由 [Microsoft.AspNetCore.Rewrite](https://www.nuget.org/packages/Microsoft.AspNetCore.Rewrite) 套件所提供，其會以隱含方式包含在 ASP.NET Core 應用程式中。
 
@@ -194,15 +196,15 @@ public void Configure(IApplicationBuilder app)
 
 在先前的重新導向規則範例 `redirect-rule/(.*)` 中，Regex 的開頭沒有插入號 (`^`)。 因此，就算 `redirect-rule/` 前有任何字元也能成功比對。
 
-| 路徑                               | 比對 |
+| Path                               | 比對 |
 | ---------------------------------- | :---: |
-| `/redirect-rule/1234/5678`         | Yes   |
+| `/redirect-rule/1234/5678`         | 是   |
 | `/my-cool-redirect-rule/1234/5678` | 是   |
 | `/anotherredirect-rule/1234/5678`  | 是   |
 
 `^rewrite-rule/(\d+)/(\d+)` 重寫規則只會比對開頭為 `rewrite-rule/` 的路徑。 請注意下表中的比對差異。
 
-| 路徑                              | 比對 |
+| Path                              | 比對 |
 | --------------------------------- | :---: |
 | `/rewrite-rule/1234/5678`         | 是   |
 | `/my-cool-rewrite-rule/1234/5678` | 否    |
@@ -327,7 +329,7 @@ public void Configure(IApplicationBuilder app)
 
 | 重寫內容結果               | 動作                                                           |
 | ------------------------------------ | ---------------------------------------------------------------- |
-| `RuleResult.ContinueRules` (預設) | 繼續套用規則。                                         |
+| `RuleResult.ContinueRules` (預設值) | 繼續套用規則。                                         |
 | `RuleResult.EndResponse`             | 停止套用規則，並傳送回應。                       |
 | `RuleResult.SkipRemainingRules`      | 停止套用規則，並將內容傳送至下一個中介軟體。 |
 
@@ -395,7 +397,7 @@ URL 重寫是指根據一或多個預先定義的規則來修改要求 URL 的�
 > [!NOTE]
 > URL 重寫可能會降低應用程式的效能。 如果可行的話，請限制規則的數目與複雜程度。
 
-[查看或下載範例程式碼](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/url-rewriting/samples/)（[如何下載](xref:index#how-to-download-a-sample)）
+[查看或下載範例程式碼](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/url-rewriting/samples/) ([如何下載](xref:index#how-to-download-a-sample)) 
 
 ## <a name="url-redirect-and-url-rewrite"></a>URL 重新導向和 URL 重寫
 
@@ -446,7 +448,7 @@ URL 重寫是指根據一或多個預先定義的規則來修改要求 URL 的�
 
   如果要確實得知哪種方法會降低最多效能，或是降低的效能可以忽略的話，進行效能評定是唯一方法。
 
-## <a name="package"></a>套件
+## <a name="package"></a>Package
 
 若要在您的專案中包含中介軟體，請在包含 [Microsoft.AspNetCore.Rewrite](https://www.nuget.org/packages/Microsoft.AspNetCore.Rewrite) 套件的專案檔中，將套件參考新增至 [Microsoft.AspNetCore.App 中繼套件](xref:fundamentals/metapackage-app)。
 
@@ -548,15 +550,15 @@ public void Configure(IApplicationBuilder app)
 
 在先前的重新導向規則範例 `redirect-rule/(.*)` 中，Regex 的開頭沒有插入號 (`^`)。 因此，就算 `redirect-rule/` 前有任何字元也能成功比對。
 
-| 路徑                               | 比對 |
+| Path                               | 比對 |
 | ---------------------------------- | :---: |
-| `/redirect-rule/1234/5678`         | Yes   |
+| `/redirect-rule/1234/5678`         | 是   |
 | `/my-cool-redirect-rule/1234/5678` | 是   |
 | `/anotherredirect-rule/1234/5678`  | 是   |
 
 `^rewrite-rule/(\d+)/(\d+)` 重寫規則只會比對開頭為 `rewrite-rule/` 的路徑。 請注意下表中的比對差異。
 
-| 路徑                              | 比對 |
+| Path                              | 比對 |
 | --------------------------------- | :---: |
 | `/rewrite-rule/1234/5678`         | 是   |
 | `/my-cool-rewrite-rule/1234/5678` | 否    |
@@ -681,7 +683,7 @@ public void Configure(IApplicationBuilder app)
 
 | 重寫內容結果               | 動作                                                           |
 | ------------------------------------ | ---------------------------------------------------------------- |
-| `RuleResult.ContinueRules` (預設) | 繼續套用規則。                                         |
+| `RuleResult.ContinueRules` (預設值) | 繼續套用規則。                                         |
 | `RuleResult.EndResponse`             | 停止套用規則，並傳送回應。                       |
 | `RuleResult.SkipRemainingRules`      | 停止套用規則，並將內容傳送至下一個中介軟體。 |
 

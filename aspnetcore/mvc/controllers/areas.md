@@ -5,6 +5,8 @@ description: 了解其為 ASP.NET MVC 功能的區域，如何用來將相關功
 ms.author: riande
 ms.date: 03/21/2019
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -13,12 +15,12 @@ no-loc:
 - Razor
 - SignalR
 uid: mvc/controllers/areas
-ms.openlocfilehash: f4471f54e92b940ecb0eabab82f03e0c77a0509f
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: af765eebfa8bfd147bd3b721508b5794d15d64a7
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85406403"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88018438"
 ---
 # <a name="areas-in-aspnet-core"></a>ASP.NET Core 中的區域
 
@@ -68,7 +70,7 @@ By [Dhananjay Kumar](https://twitter.com/debug_mode)和[Rick Anderson](https://t
         * HomeController.cs
         * ManageController.cs
       * 檢視
-        * 首頁
+        * 家庭
           * Index.cshtml
         * 管理
           * Index.cshtml
@@ -77,7 +79,7 @@ By [Dhananjay Kumar](https://twitter.com/debug_mode)和[Rick Anderson](https://t
       * 控制器
         * HomeController.cs
       * 檢視
-        * 首頁
+        * 家庭
           * Index.cshtml
 
 儘管上述配置通常會在使用區域時使用，但是只需有檢視檔案，就能使用此資料夾結構。 檢視探索會依下列順序搜尋相符的區域檢視檔案：
@@ -162,7 +164,7 @@ By [Dhananjay Kumar](https://twitter.com/debug_mode)和[Rick Anderson](https://t
 
 <a name="arp"></a>
 
-## <a name="areas-with-razor-pages"></a>具有頁面的區域 Razor
+## <a name="areas-with-no-locrazor-pages"></a>具有頁面的區域 Razor
 
 具有頁面的區域 Razor 需要 `Areas/<area name>/Pages` 應用程式根目錄中的資料夾。 下列資料夾結構搭配[範例應用程式](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/mvc/controllers/areas/31samples)一起使用：
 
@@ -179,7 +181,7 @@ By [Dhananjay Kumar](https://twitter.com/debug_mode)和[Rick Anderson](https://t
           * 關於
           * 索引
 
-### <a name="link-generation-with-razor-pages-and-areas"></a>以 Razor 頁面和區域產生連結
+### <a name="link-generation-with-no-locrazor-pages-and-areas"></a>以 Razor 頁面和區域產生連結
 
 以下來自[範例下載](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/mvc/controllers/areas/samples/RPareas)的程式碼會顯示使用指定的區域 (例如 `asp-area="Products"`) 來產生連結：
 
@@ -222,7 +224,7 @@ By [Dhananjay Kumar](https://twitter.com/debug_mode)和[Rick Anderson](https://t
 
 如需詳細資訊，請參閱[管理標籤協助程式範圍](xref:mvc/views/tag-helpers/intro?view=aspnetcore-2.2#managing-tag-helper-scope)和[匯入共用指示詞](xref:mvc/views/layout#importing-shared-directives)。
 
-### <a name="shared-layout-for-razor-pages-areas"></a>頁面區域的共用版面配置 Razor
+### <a name="shared-layout-for-no-locrazor-pages-areas"></a>頁面區域的共用版面配置 Razor
 
 若要針對整個應用程式共用通用的配置，請將 *_ViewStart.cshtml* 移至應用程式根資料夾。
 
@@ -270,7 +272,7 @@ By [Dhananjay Kumar](https://twitter.com/debug_mode)和[Rick Anderson](https://t
         * HomeController.cs
         * ManageController.cs
       * 檢視
-        * 首頁
+        * 家庭
           * Index.cshtml
         * 管理
           * Index.cshtml
@@ -279,7 +281,7 @@ By [Dhananjay Kumar](https://twitter.com/debug_mode)和[Rick Anderson](https://t
       * 控制器
         * HomeController.cs
       * 檢視
-        * 首頁
+        * 家庭
           * Index.cshtml
 
 儘管上述配置通常會在使用區域時使用，但是只需有檢視檔案，就能使用此資料夾結構。 檢視探索會依下列順序搜尋相符的區域檢視檔案：
@@ -349,7 +351,7 @@ By [Dhananjay Kumar](https://twitter.com/debug_mode)和[Rick Anderson](https://t
 
 <a name="arp"></a>
 
-## <a name="areas-with-razor-pages"></a>具有頁面的區域 Razor
+## <a name="areas-with-no-locrazor-pages"></a>具有頁面的區域 Razor
 
 具有頁面的區域 Razor 需要 `Areas/<area name>/Pages` 應用程式根目錄中的資料夾。 下列資料夾結構搭配[範例應用程式](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/mvc/controllers/areas/samples)一起使用：
 
@@ -366,7 +368,7 @@ By [Dhananjay Kumar](https://twitter.com/debug_mode)和[Rick Anderson](https://t
           * 關於
           * 索引
 
-### <a name="link-generation-with-razor-pages-and-areas"></a>以 Razor 頁面和區域產生連結
+### <a name="link-generation-with-no-locrazor-pages-and-areas"></a>以 Razor 頁面和區域產生連結
 
 以下來自[範例下載](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/mvc/controllers/areas/samples/RPareas)的程式碼會顯示使用指定的區域 (例如 `asp-area="Products"`) 來產生連結：
 
@@ -411,7 +413,7 @@ By [Dhananjay Kumar](https://twitter.com/debug_mode)和[Rick Anderson](https://t
 
 如需詳細資訊，請參閱[管理標籤協助程式範圍](xref:mvc/views/tag-helpers/intro?view=aspnetcore-2.2#managing-tag-helper-scope)和[匯入共用指示詞](xref:mvc/views/layout#importing-shared-directives)。
 
-### <a name="shared-layout-for-razor-pages-areas"></a>頁面區域的共用版面配置 Razor
+### <a name="shared-layout-for-no-locrazor-pages-areas"></a>頁面區域的共用版面配置 Razor
 
 若要針對整個應用程式共用通用的配置，請將 *_ViewStart.cshtml* 移至應用程式根資料夾。
 

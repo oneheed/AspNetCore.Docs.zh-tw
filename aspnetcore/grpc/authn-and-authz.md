@@ -6,6 +6,8 @@ monikerRange: '>= aspnetcore-3.0'
 ms.author: jamesnk
 ms.date: 05/26/2020
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -14,18 +16,18 @@ no-loc:
 - Razor
 - SignalR
 uid: grpc/authn-and-authz
-ms.openlocfilehash: 4216a6f28d7c4fdcd45fbd639617fa99b91e784c
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: edaf96fb9c7f0f175efe82f8b85d4d1a41da87a5
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85407482"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88016345"
 ---
 # <a name="authentication-and-authorization-in-grpc-for-aspnet-core"></a>ASP.NET Core 的 gRPC 中的驗證和授權
 
 依[James 牛頓-王](https://twitter.com/jamesnk)
 
-[查看或下載範例程式碼](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/grpc/authn-and-authz/sample/) [（如何下載）](xref:index#how-to-download-a-sample)
+[查看或下載範例程式碼](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/grpc/authn-and-authz/sample/) [ (如何下載) ](xref:index#how-to-download-a-sample)
 
 ## <a name="authenticate-users-calling-a-grpc-service"></a>驗證呼叫 gRPC 服務的使用者
 
@@ -148,7 +150,7 @@ public Ticketer.TicketerClient CreateClientWithCert(
 
 * Azure Active Directory
 * 用戶端憑證
-* IdentityServer
+* Identity伺服器
 * JWT 權杖
 * OAuth 2.0
 * OpenID Connect
@@ -162,7 +164,7 @@ public Ticketer.TicketerClient CreateClientWithCert(
 * 每個 gRPC 呼叫都有一個選擇性 `CallOptions` 引數。 您可以使用選項的標頭集合來傳送自訂標頭。
 
 > [!NOTE]
-> Windows 驗證（NTLM/Kerberos/Negotiate）無法與 gRPC 搭配使用。 gRPC 需要 HTTP/2，而且 HTTP/2 不支援 Windows 驗證。
+>  (NTLM/Kerberos/Negotiate) 的 Windows 驗證無法與 gRPC 搭配使用。 gRPC 需要 HTTP/2，而且 HTTP/2 不支援 Windows 驗證。
 
 ## <a name="authorize-users-to-access-services-and-service-methods"></a>授權使用者存取服務和服務方法
 

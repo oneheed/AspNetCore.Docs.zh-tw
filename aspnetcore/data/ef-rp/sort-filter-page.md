@@ -6,6 +6,8 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 07/22/2019
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -14,14 +16,14 @@ no-loc:
 - Razor
 - SignalR
 uid: data/ef-rp/sort-filter-page
-ms.openlocfilehash: 496221bb4e34e1f9e4177d1934786a77d8c9b411
-ms.sourcegitcommit: 50e7c970f327dbe92d45eaf4c21caa001c9106d0
+ms.openlocfilehash: 5bfea63cc1ff85adbe5ce572858b78a8e86b2280
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 07/10/2020
-ms.locfileid: "86212535"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88017723"
 ---
-# <a name="part-3-razor-pages-with-ef-core-in-aspnet-core---sort-filter-paging"></a>第3部分， Razor ASP.NET Core 排序、篩選、分頁中有 EF Core 的頁面
+# <a name="part-3-no-locrazor-pages-with-ef-core-in-aspnet-core---sort-filter-paging"></a>第3部分， Razor ASP.NET Core 排序、篩選、分頁中有 EF Core 的頁面
 
 作者：[Tom Dykstra](https://github.com/tdykstra)、[Rick Anderson](https://twitter.com/RickAndMSFT)、[Jon P Smith](https://twitter.com/thereformedprog)
 
@@ -134,7 +136,7 @@ Where(s => s.LastName.ToUpper().Contains(searchString.ToUpper())`
 
 如需詳細資訊，請參閱 [How to use case-insensitive query with Sqlite provider](https://github.com/aspnet/EntityFrameworkCore/issues/11414) (如何搭配 Sqlite 提供者使用不區分大小寫查詢)。
 
-### <a name="update-the-razor-page"></a>更新 Razor 頁面
+### <a name="update-the-no-locrazor-page"></a>更新 Razor 頁面
 
 取代 *Pages/Students/Index.cshtml* 中的程式碼以建立 [搜尋]**** 按鈕和各種色彩。
 
@@ -211,7 +213,7 @@ https://localhost:<port>/Students?SearchString=an
 
   在 `PaginatedList.CreateAsync` 呼叫中，`pageIndex` 之後的兩個問號代表 [Null 聯合運算子](/dotnet/csharp/language-reference/operators/null-conditional-operator)。 Null 聯合運算子會針對可為 Null 的型別定義一個預設值。 運算式 `(pageIndex ?? 1)` 表示，如果 `pageIndex` 有一個值就將該值傳回。 如果 `pageIndex` 沒有值，則傳回 1。
 
-### <a name="add-paging-links-to-the-razor-page"></a>將分頁連結新增至 Razor 頁面
+### <a name="add-paging-links-to-the-no-locrazor-page"></a>將分頁連結新增至 Razor 頁面
 
 使用下列程式碼取代 student */Index. cshtml*中的程式碼。 所做的變更已醒目提示：
 
@@ -247,7 +249,7 @@ https://localhost:<port>/Students?SearchString=an
 
 [!code-csharp[Main](intro/samples/cu30/Models/SchoolViewModels/EnrollmentDateGroup.cs)]
 
-### <a name="create-the-razor-page"></a>建立 Razor 頁面
+### <a name="create-the-no-locrazor-page"></a>建立 Razor 頁面
 
 使用下列程式碼建立 *Pages/About.cshtml* 檔案：
 
@@ -467,7 +469,7 @@ http://localhost:5000/Students?SearchString=an
 
 在 `PaginatedList.CreateAsync` 中的兩個問號代表 [null 聯合運算子](/dotnet/csharp/language-reference/operators/null-conditional-operator)。 Null 聯合運算子會針對可為 Null 的型別定義一個預設值。 運算式 `(pageIndex ?? 1)` 表示，如果 `pageIndex` 有一個值就將該值傳回。 如果 `pageIndex` 沒有值，則傳回 1。
 
-## <a name="add-paging-links-to-the-student-razor-page"></a>將分頁連結新增至學生 Razor 頁面
+## <a name="add-paging-links-to-the-student-no-locrazor-page"></a>將分頁連結新增至學生 Razor 頁面
 
 更新 *Students/Index.cshtml* 中的標記。 所做的變更已醒目提示：
 
@@ -521,7 +523,7 @@ ASP.NET Core 2.2 中的 Web 範本不包括 [關於] 頁面。 如果您使用 A
 
 LINQ 陳述式會依註冊日期將學生實體組成群組、計算每個群組中的實體數目、將結果儲存在 `EnrollmentDateGroup` 檢視模型物件的集合中。
 
-### <a name="modify-the-about-razor-page"></a>修改 [關於] Razor 頁面
+### <a name="modify-the-about-no-locrazor-page"></a>修改 [關於] Razor 頁面
 
 以下列程式碼取代 *Pages/About.cshtml* 檔案中的程式碼：
 

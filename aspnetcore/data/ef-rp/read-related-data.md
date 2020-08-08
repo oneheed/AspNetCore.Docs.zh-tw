@@ -6,6 +6,8 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 09/28/2019
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -14,14 +16,14 @@ no-loc:
 - Razor
 - SignalR
 uid: data/ef-rp/read-related-data
-ms.openlocfilehash: 171607544bfe89fdd0a1ed9efb68f7a532f9aee1
-ms.sourcegitcommit: 50e7c970f327dbe92d45eaf4c21caa001c9106d0
+ms.openlocfilehash: d2594dd05ee6d7e8e0dbd3c279ecd8783d182b62
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 07/10/2020
-ms.locfileid: "86212658"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88017827"
 ---
-# <a name="part-6-razor-pages-with-ef-core-in-aspnet-core---read-related-data"></a>第6部分， Razor ASP.NET Core 讀取相關資料中有 EF Core 的頁面
+# <a name="part-6-no-locrazor-pages-with-ef-core-in-aspnet-core---read-related-data"></a>第6部分， Razor ASP.NET Core 讀取相關資料中有 EF Core 的頁面
 
 作者：[Tom Dykstra](https://github.com/tdykstra)、[Jon P Smith](https://twitter.com/thereformedprog)、[Rick Anderson](https://twitter.com/RickAndMSFT)
 
@@ -398,7 +400,7 @@ Course 實體包含導覽屬性，其中包含 `Department` 實體。 `Departmen
 
 # <a name="visual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code)
 
- 執行以下命令：
+ 執行下列命令：
 
   ```dotnetcli
   dotnet aspnet-codegenerator razorpage -m Course -dc SchoolContext -udl -outDir Pages\Courses --referenceScriptLibraries
@@ -485,7 +487,7 @@ Course 實體包含導覽屬性，其中包含 `Department` 實體。 `Departmen
 
 # <a name="visual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code)
 
- 執行以下命令：
+ 執行下列命令：
 
   ```dotnetcli
   dotnet aspnet-codegenerator razorpage -m Instructor -dc SchoolContext -udl -outDir Pages\Instructors --referenceScriptLibraries

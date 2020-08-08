@@ -6,6 +6,8 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 12/15/2019
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -14,14 +16,14 @@ no-loc:
 - Razor
 - SignalR
 uid: mvc/models/validation
-ms.openlocfilehash: e76ddad795237991c49bf2a3b1ca840795989260
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: c0edf56c966cb90c1c308f300a8944d392fdc0e7
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85404908"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88020973"
 ---
-# <a name="model-validation-in-aspnet-core-mvc-and-razor-pages"></a>ASP.NET Core MVC 和頁面中的模型驗證 Razor
+# <a name="model-validation-in-aspnet-core-mvc-and-no-locrazor-pages"></a>ASP.NET Core MVC 和頁面中的模型驗證 Razor
 
 ::: moniker range=">= aspnetcore-3.0"
 
@@ -267,7 +269,7 @@ public string MiddleName { get; set; }
 </div>
 ```
 
-請注意，HTML 輸出中的 `data-` 屬性 (attribute) 會對應至 `Movie.ReleaseDate` 屬性 (property) 的驗證屬性 (attribute)。 `data-val-required` 屬性包含使用者未填入發行日期欄位時所要顯示的錯誤訊息。 jQuery 不顯眼的驗證會將此值傳遞至 jQuery 驗證[所需的（）](https://jqueryvalidation.org/required-method/)方法，然後在伴隨的元素中顯示該訊息 **\<span>** 。
+請注意，HTML 輸出中的 `data-` 屬性 (attribute) 會對應至 `Movie.ReleaseDate` 屬性 (property) 的驗證屬性 (attribute)。 `data-val-required` 屬性包含使用者未填入發行日期欄位時所要顯示的錯誤訊息。 jQuery 不顯眼的驗證會將此值傳遞至所需的 jQuery 驗證[ ( # B1](https://jqueryvalidation.org/required-method/)方法，然後在伴隨的元素中顯示該訊息 **\<span>** 。
 
 資料型別驗證是根據屬性的 .NET 型別，除非是由 `[DataType]` 屬性覆寫。 瀏覽器具有自己的預設錯誤訊息，但 jQuery 驗證低調驗證套件可以覆寫這些訊息。 `[DataType]` 屬性和子類別 (例如 `[EmailAddress]`) 可讓您指定錯誤訊息。
 
@@ -384,7 +386,7 @@ $.get({
 * 將 `_ValidationScriptsPartial` 所有 *. cshtml*檔案中的參考批註在一起。
 * 移除*Pages\Shared \_ ValidationScriptsPartial. cshtml*檔案的內容。
 
-上述方法不會防止 ASP.NET Core 類別庫的用戶端驗證 Identity Razor 。 如需詳細資訊，請參閱 <xref:security/authentication/scaffold-identity> 。
+上述方法不會防止 ASP.NET Core 類別庫的用戶端驗證 Identity Razor 。 如需詳細資訊，請參閱<xref:security/authentication/scaffold-identity>。
 
 ## <a name="additional-resources"></a>其他資源
 
@@ -642,7 +644,7 @@ public string MiddleName { get; set; }
 </form>
 ```
 
-請注意，HTML 輸出中的 `data-` 屬性 (attribute) 會對應至 `ReleaseDate` 屬性 (property) 的驗證屬性 (attribute)。 `data-val-required` 屬性包含使用者未填入發行日期欄位時所要顯示的錯誤訊息。 jQuery 不顯眼的驗證會將此值傳遞至 jQuery Validate [required （）](https://jqueryvalidation.org/required-method/)方法，然後在伴隨的元素中顯示該訊息 **\<span>** 。
+請注意，HTML 輸出中的 `data-` 屬性 (attribute) 會對應至 `ReleaseDate` 屬性 (property) 的驗證屬性 (attribute)。 `data-val-required` 屬性包含使用者未填入發行日期欄位時所要顯示的錯誤訊息。 jQuery 不顯眼的驗證會將此值傳遞至 jQuery 驗證[所需 ( # B1](https://jqueryvalidation.org/required-method/)方法，然後在伴隨的元素中顯示該訊息 **\<span>** 。
 
 資料型別驗證是根據屬性的 .NET 型別，除非是由 `[DataType]` 屬性覆寫。 瀏覽器具有自己的預設錯誤訊息，但 jQuery 驗證低調驗證套件可以覆寫這些訊息。 `[DataType]` 屬性和子類別 (例如 `[EmailAddress]`) 可讓您指定錯誤訊息。
 

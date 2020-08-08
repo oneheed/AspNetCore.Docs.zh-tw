@@ -6,6 +6,8 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 12/05/2019
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -14,12 +16,12 @@ no-loc:
 - Razor
 - SignalR
 uid: aspnetcore-2.2
-ms.openlocfilehash: c2e23871866565a3f4ea0b0c72af5ec4fb770e6f
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: 354839abe295b4adcbf6becfd3bd926330f0823f
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85408704"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88021142"
 ---
 # <a name="whats-new-in-aspnet-core-22"></a>ASP.NET Core 2.2 的新功能
 
@@ -68,7 +70,7 @@ HTTP/2 是 HTTP 通訊協定的主要版本。 值得注意的 HTTP/2 功能包�
 * 支援標頭壓縮。
 * 透過單一連線的完整多工串流。
 
-雖然 HTTP/2 會保留 HTTP 的語法（例如，HTTP 標頭和方法），但這是從 HTTP/1.x 進行的重大變更，以瞭解資料在用戶端與伺服器之間的框架和傳送方式。
+雖然 HTTP/2 會保留 HTTP 的語義 (例如，HTTP 標頭和方法) ，但這是 HTTP/1.x 的重大變更，會說明資料在用戶端與伺服器之間的框架和傳送方式。
 
 這項框架處理變更導致伺服器和用戶端必須交涉所使用的通訊協定版本。 Application-Layer Protocol Negotiation (ALPN) 是 TLS 延伸模組，可讓伺服器和用戶端交涉在其 TLS 信號交換過程中所使用的通訊協定版本。 雖然您可能事先知道伺服器與用戶端之間的通訊協定，但所有主要瀏覽器都支援 ALPN 作為建立 HTTP/2 連線的唯一方式。
 
@@ -87,7 +89,7 @@ HTTP/2 是 HTTP 通訊協定的主要版本。 值得注意的 HTTP/2 功能包�
 
 如需詳細資訊，請參閱 [IIS 的同處理序裝載](xref:host-and-deploy/aspnet-core-module?view=aspnetcore-2.2#in-process-hosting-model)。
 
-## <a name="signalr-java-client"></a>SignalRJAVA 用戶端
+## <a name="no-locsignalr-java-client"></a>SignalRJAVA 用戶端
 
 ASP.NET Core 2.2 引進的 JAVA 用戶端 SignalR 。 此用戶端支援 SignalR 從 JAVA 程式碼連接到 ASP.NET Core 伺服器，包括 Android 應用程式。
 

@@ -6,6 +6,8 @@ monikerRange: '>= aspnetcore-2.1'
 ms.author: riande
 ms.date: 11/08/2019
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -14,16 +16,16 @@ no-loc:
 - Razor
 - SignalR
 uid: security/authorization/limitingidentitybyscheme
-ms.openlocfilehash: 042b22a220d961773437e9d85d5f0c5782e29bea
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: 66b307a3629e18e49b5bb6e65a156054c0002ba8
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85406013"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88022104"
 ---
 # <a name="authorize-with-a-specific-scheme-in-aspnet-core"></a>在 ASP.NET Core 中使用特定配置進行授權
 
-在某些情況下，例如單頁應用程式（Spa），通常會使用多個驗證方法。 例如，應用程式可能會使用以 cookie 為基礎的驗證來登入，並針對 JavaScript 要求進行 JWT 持有人驗證。 在某些情況下，應用程式可能會有多個驗證處理常式實例。 例如，兩個 cookie 處理常式，其中一個包含基本身分識別，而另一個則是在觸發多重要素驗證（MFA）時建立。 因為使用者要求的作業需要額外的安全性，所以可能會觸發 MFA。 如需在使用者要求需要 MFA 的資源時強制執行 MFA 的詳細資訊，請參閱 GitHub 問題[保護區段與 mfa](https://github.com/dotnet/AspNetCore.Docs/issues/15791#issuecomment-580464195)。
+在某些情況下，例如單一頁面應用程式 (Spa) ，通常會使用多個驗證方法。 例如，應用程式可能會使用 cookie 以為基礎的驗證來登入，並針對 JavaScript 要求進行 JWT 持有人驗證。 在某些情況下，應用程式可能會有多個驗證處理常式實例。 例如，兩個 cookie 處理常式，其中一個包含基本身分識別，而另一個則是在多因素驗證 (MFA) 已觸發時建立。 因為使用者要求的作業需要額外的安全性，所以可能會觸發 MFA。 如需在使用者要求需要 MFA 的資源時強制執行 MFA 的詳細資訊，請參閱 GitHub 問題[保護區段與 mfa](https://github.com/dotnet/AspNetCore.Docs/issues/15791#issuecomment-580464195)。
 
 驗證架構會在驗證期間設定驗證服務時命名。 例如：
 
@@ -43,7 +45,7 @@ public void ConfigureServices(IServiceCollection services)
         });
 ```
 
-在上述程式碼中，已新增兩個驗證處理常式：一個用於 cookie，一個用於持有人。
+在上述程式碼中，已加入兩個驗證處理常式：一個用於 cookie s，另一個用於持有人。
 
 >[!NOTE]
 >指定預設配置 `HttpContext.User` 會導致屬性設定為該身分識別。 如果不想要該行為，請叫用的無參數形式來停用它 `AddAuthentication` 。
@@ -63,7 +65,7 @@ public class MixedController : Controller
         JwtBearerDefaults.AuthenticationScheme;
 ```
 
-在上述範例中，cookie 和持有人處理常式都會執行，而且有機會建立和附加目前使用者的身分識別。 藉由僅指定單一配置，會執行對應的處理常式。
+在上述範例中， cookie 和持有人處理常式都會執行，而且有機會建立和附加目前使用者的身分識別。 藉由僅指定單一配置，會執行對應的處理常式。
 
 ```csharp
 [Authorize(AuthenticationSchemes = 
@@ -71,7 +73,7 @@ public class MixedController : Controller
 public class MixedController : Controller
 ```
 
-在上述程式碼中，只有具有「持有人」配置的處理常式才會執行。 系統會忽略任何以 cookie 為基礎的身分識別。
+在上述程式碼中，只有具有「持有人」配置的處理常式才會執行。 cookie系統會忽略任何以為基礎的身分識別。
 
 ## <a name="selecting-the-scheme-with-policies"></a>選取具有原則的配置
 

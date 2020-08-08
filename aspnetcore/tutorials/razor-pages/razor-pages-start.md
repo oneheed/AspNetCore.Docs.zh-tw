@@ -5,6 +5,8 @@ description: 這一系列的教學課程會示範如何使用 Razor ASP.NET Core
 ms.author: riande
 ms.date: 11/12/2019
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -13,14 +15,14 @@ no-loc:
 - Razor
 - SignalR
 uid: tutorials/razor-pages/razor-pages-start
-ms.openlocfilehash: 77b230f14b4eef60d771daf8fe09288a9dd3c69c
-ms.sourcegitcommit: 50e7c970f327dbe92d45eaf4c21caa001c9106d0
+ms.openlocfilehash: 5fb841de2fa9a04cf05aaf08f255041ee1952638
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 07/10/2020
-ms.locfileid: "86212996"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88021090"
 ---
-# <a name="tutorial-get-started-with-razor-pages-in-aspnet-core"></a>教學課程：開始使用 Razor ASP.NET Core 中的頁面
+# <a name="tutorial-get-started-with-no-locrazor-pages-in-aspnet-core"></a>教學課程：開始使用 Razor ASP.NET Core 中的頁面
 
 作者：[Rick Anderson](https://twitter.com/RickAndMSFT)
 
@@ -44,7 +46,7 @@ ms.locfileid: "86212996"
 
 ![Home 或 Index 頁面](razor-pages-start/_static/home2.2.png)
 
-## <a name="prerequisites"></a>先決條件
+## <a name="prerequisites"></a>必要條件
 
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
@@ -60,7 +62,7 @@ ms.locfileid: "86212996"
 
 ---
 
-## <a name="create-a-razor-pages-web-app"></a>建立 Razor 頁面 web 應用程式
+## <a name="create-a-no-locrazor-pages-web-app"></a>建立 Razor 頁面 web 應用程式
 
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
@@ -113,7 +115,7 @@ ms.locfileid: "86212996"
   * 確認 [**驗證**] 已設為 [**無驗證**]。
   * 如果提供選取**目標 Framework**的選項，請選取最新的3.x 版。
 
-  選取 [下一步]。
+  選取 [下一步]  。
 
 * 將專案命名為** Razor PagesMovie**，然後選取 [**建立**]。
 
@@ -138,23 +140,23 @@ ms.locfileid: "86212996"
 * 包含 HTML 標籤的*cshtml*檔案，其 c # 程式碼使用 Razor 語法。
 * *.cshtml.cs* 檔案，其中包含處理頁面事件的 C# 程式碼。
 
-支援檔案的名稱以底線開頭。 例如，_Layout 的 *. cshtml*檔案會設定所有頁面通用的 UI 元素。 此檔案會設定頁面頂端的導覽功能表和頁面底部的著作權標示。 如需詳細資訊，請參閱 <xref:mvc/views/layout> 。
+支援檔案的名稱以底線開頭。 例如，_Layout 的 *. cshtml*檔案會設定所有頁面通用的 UI 元素。 此檔案會設定頁面頂端的導覽功能表和頁面底部的著作權標示。 如需詳細資訊，請參閱<xref:mvc/views/layout>。
 
 ### <a name="wwwroot-folder"></a>wwwroot 資料夾
 
-包含靜態檔案，例如 HTML 檔案、JavaScript 檔案和 CSS 檔案。 如需詳細資訊，請參閱 <xref:fundamentals/static-files> 。
+包含靜態檔案，例如 HTML 檔案、JavaScript 檔案和 CSS 檔案。 如需詳細資訊，請參閱<xref:fundamentals/static-files>。
 
 ### <a name="appsettingsjson"></a>appSettings.json
 
-包含組態資料，例如連接字串。 如需詳細資訊，請參閱 <xref:fundamentals/configuration/index> 。
+包含組態資料，例如連接字串。 如需詳細資訊，請參閱<xref:fundamentals/configuration/index>。
 
 ### <a name="programcs"></a>Program.cs
 
-包含程式的進入點。 如需詳細資訊，請參閱 <xref:fundamentals/host/generic-host> 。
+包含程式的進入點。 如需詳細資訊，請參閱<xref:fundamentals/host/generic-host>。
 
 ### <a name="startupcs"></a>Startup.cs
 
-包含設定應用程式行為的程式碼。 如需詳細資訊，請參閱 <xref:fundamentals/startup> 。
+包含設定應用程式行為的程式碼。 如需詳細資訊，請參閱<xref:fundamentals/startup>。
 
 ## <a name="next-steps"></a>後續步驟
 
@@ -188,7 +190,7 @@ ms.locfileid: "86212996"
 
 ![Home 或 Index 頁面](razor-pages-start/_static/home2.2.png)
 
-## <a name="prerequisites"></a>先決條件
+## <a name="prerequisites"></a>必要條件
 
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
@@ -204,7 +206,7 @@ ms.locfileid: "86212996"
 
 ---
 
-## <a name="create-a-razor-pages-web-app"></a>建立 Razor 頁面 web 應用程式
+## <a name="create-a-no-locrazor-pages-web-app"></a>建立 Razor 頁面 web 應用程式
 
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
@@ -259,7 +261,7 @@ ms.locfileid: "86212996"
   * 確認 [**驗證**] 已設為 [**無驗證**]。
   * 如果提供選取**目標 Framework**的選項，請選取最新的2.x 版。
 
-  選取 [下一步]。
+  選取 [下一步]  。
 
 * 將專案命名為** Razor PagesMovie**，然後選取 [**建立**]。
 
@@ -340,23 +342,23 @@ ms.locfileid: "86212996"
 * 包含 HTML 標籤的*cshtml*檔案，其 c # 程式碼使用 Razor 語法。
 * *.cshtml.cs* 檔案，其中包含處理頁面事件的 C# 程式碼。
 
-支援檔案的名稱以底線開頭。 例如，_Layout 的 *. cshtml*檔案會設定所有頁面通用的 UI 元素。 此檔案會設定頁面頂端的導覽功能表和頁面底部的著作權標示。 如需詳細資訊，請參閱 <xref:mvc/views/layout> 。
+支援檔案的名稱以底線開頭。 例如，_Layout 的 *. cshtml*檔案會設定所有頁面通用的 UI 元素。 此檔案會設定頁面頂端的導覽功能表和頁面底部的著作權標示。 如需詳細資訊，請參閱<xref:mvc/views/layout>。
 
 ### <a name="wwwroot-folder"></a>wwwroot 資料夾
 
-包含靜態檔案，例如 HTML 檔案、JavaScript 檔案和 CSS 檔案。 如需詳細資訊，請參閱 <xref:fundamentals/static-files> 。
+包含靜態檔案，例如 HTML 檔案、JavaScript 檔案和 CSS 檔案。 如需詳細資訊，請參閱<xref:fundamentals/static-files>。
 
 ### <a name="appsettingsjson"></a>appSettings.json
 
-包含組態資料，例如連接字串。 如需詳細資訊，請參閱 <xref:fundamentals/configuration/index> 。
+包含組態資料，例如連接字串。 如需詳細資訊，請參閱<xref:fundamentals/configuration/index>。
 
 ### <a name="programcs"></a>Program.cs
 
-包含程式的進入點。 如需詳細資訊，請參閱 <xref:fundamentals/host/generic-host> 。
+包含程式的進入點。 如需詳細資訊，請參閱<xref:fundamentals/host/generic-host>。
 
 ### <a name="startupcs"></a>Startup.cs
 
-包含設定應用程式行為的程式碼，例如是否需要同意使用 Cookie。 如需詳細資訊，請參閱 <xref:fundamentals/startup> 。
+包含設定應用程式行為的程式碼，例如它是否需要的同意 cookie 。 如需詳細資訊，請參閱<xref:fundamentals/startup>。
 
 ## <a name="additional-resources"></a>其他資源
 

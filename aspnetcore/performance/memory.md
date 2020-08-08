@@ -1,11 +1,13 @@
 ---
 title: ASP.NET Core 中的記憶體管理和模式
 author: rick-anderson
-description: 瞭解記憶體在 ASP.NET Core 中的管理方式，以及垃圾收集行程（GC）的運作方式。
+description: 瞭解記憶體在 ASP.NET Core 中的管理方式，以及垃圾收集行程 (GC) 的運作方式。
 ms.author: riande
 ms.custom: mvc
 ms.date: 4/05/2019
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -14,23 +16,23 @@ no-loc:
 - Razor
 - SignalR
 uid: performance/memory
-ms.openlocfilehash: d261a26de7b9ba77e5f9787ae2eb37293257a0fc
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: 09df67657c9b6e4e59d6a1379bf801c289028819
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85406390"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88020934"
 ---
-# <a name="memory-management-and-garbage-collection-gc-in-aspnet-core"></a>ASP.NET Core 中的記憶體管理和垃圾收集（GC）
+# <a name="memory-management-and-garbage-collection-gc-in-aspnet-core"></a>記憶體管理和垃圾收集 (GC) ASP.NET Core
 
 By [Sébastien Ros](https://github.com/sebastienros)和[Rick Anderson](https://twitter.com/RickAndMSFT)
 
-記憶體管理是很複雜的，即使是在 .NET 之類的 managed 架構中也一樣。 分析和瞭解記憶體問題可能是一項挑戰。 本文：
+記憶體管理是很複雜的，即使是在 .NET 之類的 managed 架構中也一樣。 分析和瞭解記憶體問題可能是一項挑戰。 這篇文章：
 
 * 有許多*記憶體*流失和*GC 無法運作*的問題。 大部分的問題都是因為不了解記憶體耗用量在 .NET Core 中的運作方式，或不了解其測量方式所造成。
 * 示範有問題的記憶體使用，並建議替代的方法。
 
-## <a name="how-garbage-collection-gc-works-in-net-core"></a>垃圾收集（GC）在 .NET Core 中的運作方式
+## <a name="how-garbage-collection-gc-works-in-net-core"></a>垃圾收集 (GC) 在 .NET Core 中的運作方式
 
 GC 會配置堆積區段，其中每個區段都是連續的記憶體範圍。 放在堆積中的物件會分類成3個層代中的其中一個：0、1或2。 產生會決定 GC 嘗試釋放應用程式不再參考之受管理物件記憶體的頻率。 較低編號的層代會更頻繁地進行 GC。
 
@@ -83,7 +85,7 @@ GC 會配置堆積區段，其中每個區段都是連續的記憶體範圍。 �
 * 包含可提供各種記憶體負載模式的 API 控制器。
 * 不是支援的工具，不過，它可以用來顯示 ASP.NET Core 應用程式的記憶體使用模式。
 
-執行 MemoryLeak。 配置的記憶體會慢慢增加，直到發生 GC 為止。 記憶體會增加，因為此工具會配置自訂物件來捕獲資料。 下圖顯示發生 Gen 0 GC 時的 MemoryLeak 索引頁面。 此圖表顯示0個 RPS （每秒的要求數），因為尚未呼叫來自 API 控制器的 API 端點。
+執行 MemoryLeak。 配置的記憶體會慢慢增加，直到發生 GC 為止。 記憶體會增加，因為此工具會配置自訂物件來捕獲資料。 下圖顯示發生 Gen 0 GC 時的 MemoryLeak 索引頁面。 此圖表顯示0個 RPS (每秒要求數) ，因為尚未呼叫來自 API 控制器的 API 端點。
 
 ![先前的圖表](memory/_static/0RPS.png)
 
@@ -110,11 +112,11 @@ public ActionResult<string> GetBigString()
 
 上圖顯示：
 
-* 4K RPS （每秒的要求數）。
+* 每秒 4K RPS (要求數) 。
 * 層代 0 GC 回收大約每兩秒發生一次。
 * 工作集在大約 500 MB 是常數。
 * CPU 為12%。
-* 記憶體耗用量和釋放（透過 GC）是穩定的。
+* 記憶體耗用量和 release (透過 GC) 穩定。
 
 下圖是以機器可以處理的最大輸送量為依據。
 
@@ -127,8 +129,8 @@ public ActionResult<string> GetBigString()
 * 系統會觸發第1代集合，因為應用程式每秒配置的記憶體會大幅增加。
 * 工作集在大約 500 MB 是常數。
 * CPU 為33%。
-* 記憶體耗用量和釋放（透過 GC）是穩定的。
-* CPU （33%）未過度使用，因此垃圾收集可能會跟上大量的配置。
+* 記憶體耗用量和 release (透過 GC) 穩定。
+* CPU (33% ) 未過度使用，因此垃圾收集可能會跟上大量的配置。
 
 ### <a name="workstation-gc-vs-server-gc"></a>工作站 GC 與伺服器 GC 的比較
 
@@ -147,7 +149,7 @@ public ActionResult<string> GetBigString()
 
 `ServerGarbageCollection`在專案檔中變更需要重建應用程式。
 
-**注意：** 在具有單一核心的機器上**無法**使用伺服器垃圾收集。 如需詳細資訊，請參閱 <xref:System.Runtime.GCSettings.IsServerGC> 。
+**注意：** 在具有單一核心的機器上**無法**使用伺服器垃圾收集。 如需詳細資訊，請參閱<xref:System.Runtime.GCSettings.IsServerGC>。
 
 下圖顯示使用工作站 GC 之已測的 RPS 下的記憶體設定檔。
 
@@ -232,7 +234,7 @@ public void GetFileProvider()
 
 ### <a name="large-objects-heap"></a>大型物件堆積
 
-頻繁的記憶體配置/免費週期可以分割記憶體，特別是在配置大型記憶體區塊時。 物件會配置在連續的記憶體區塊中。 為了減輕片段，當 GC 釋放記憶體時，它嘗試重組。 此進程稱為「**壓縮**」。 壓縮牽涉到移動物件。 移動大型物件會對效能造成負面影響。 基於這個理由，GC 會為_大型_物件（稱為[大型物件堆積](/dotnet/standard/garbage-collection/large-object-heap)（LOH））建立一個特殊的記憶體區域。 大於85000位元組（大約 83 KB）的物件為：
+頻繁的記憶體配置/免費週期可以分割記憶體，特別是在配置大型記憶體區塊時。 物件會配置在連續的記憶體區塊中。 為了減輕片段，當 GC 釋放記憶體時，它嘗試重組。 此進程稱為「**壓縮**」。 壓縮牽涉到移動物件。 移動大型物件會對效能造成負面影響。 基於這個理由，GC 會為_大型_物件建立一個特殊的記憶體區域，稱為[大型物件堆積](/dotnet/standard/garbage-collection/large-object-heap) (LOH) 。 大於85000位元組 (大約 83 KB) 的物件為：
 
 * 放在 LOH 上。
 * 未壓縮。
@@ -277,7 +279,7 @@ public int GetLOH1(int size)
 比較上述兩個圖表：
 
 * 這兩種案例的工作集都很類似，大約是 450 MB。
-* [LOH 要求（84975位元組）] 底下顯示大部分的層代0回收。
+* [LOH 要求] 底下的 [ (84975 個位元組]) 顯示大部分的層代0回收。
 * Over LOH 要求會產生常數層代2回收。 第2代回收的成本很高。 需要更多的 CPU，輸送量幾乎下降了50%。
 
 暫存大型物件特別有問題，因為它們會造成 gen2 Gc。
@@ -289,7 +291,7 @@ public int GetLOH1(int size)
 * [ResponseCaching/資料流程/StreamUtilities .cs](https://github.com/dotnet/AspNetCore/blob/v3.0.0/src/Middleware/ResponseCaching/src/Streams/StreamUtilities.cs#L16)
 * [ResponseCaching/MemoryResponseCache .cs](https://github.com/aspnet/ResponseCaching/blob/c1cb7576a0b86e32aec990c22df29c780af29ca5/src/Microsoft.AspNetCore.ResponseCaching/Internal/MemoryResponseCache.cs#L55)
 
-如需詳細資訊，請參閱：
+如需詳細資訊，請參閱
 
 * [發現大型物件堆積](https://devblogs.microsoft.com/dotnet/large-object-heap-uncovered-from-an-old-msdn-article/)
 * [大型物件堆積](/dotnet/standard/garbage-collection/large-object-heap)
@@ -355,7 +357,7 @@ public async Task<int> GetHttpClient2(string url)
 * [HttpClient 和存留期管理](/aspnet/core/fundamentals/http-requests#httpclient-and-lifetime-management)
 * [HTTPClient factory 的 blog](https://devblogs.microsoft.com/aspnet/asp-net-core-2-1-preview1-introducing-httpclient-factory/)
  
-### <a name="object-pooling"></a>物件共用
+### <a name="object-pooling"></a>物件集區
 
 先前的範例示範如何將 `HttpClient` 實例設為靜態，並由所有要求重複使用。 重複使用會導致資源不足。
 

@@ -6,6 +6,8 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 02/02/2020
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -14,12 +16,12 @@ no-loc:
 - Razor
 - SignalR
 uid: performance/caching/memory
-ms.openlocfilehash: 8eec361efbc3c7dca6c0bef65b6f6b40b3b46798
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: 131fd5f2d09b20814cbd557d6b6d873ce15501db
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85404609"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88021220"
 ---
 # <a name="cache-in-memory-in-aspnet-core"></a>ASP.NET Core 中的記憶體快取
 
@@ -27,13 +29,13 @@ ms.locfileid: "85404609"
 
 作者： [Rick Anderson](https://twitter.com/RickAndMSFT)、 [John 羅文](https://github.com/JunTaoLuo)和[Steve Smith](https://ardalis.com/)
 
-[查看或下載範例程式碼](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/performance/caching/memory/3.0sample)（[如何下載](xref:index#how-to-download-a-sample)）
+[查看或下載範例程式碼](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/performance/caching/memory/3.0sample) ([如何下載](xref:index#how-to-download-a-sample)) 
 
 ## <a name="caching-basics"></a>快取基本概念
 
 快取可以藉由減少產生內容所需的工作，大幅改善應用程式的效能和擴充性。 快取最適用于不常變更**且**產生成本昂貴的資料。 快取會製作一份資料複本，其傳回的速度會比從來源快得多。 應用程式應撰寫並測試為**永遠不會**依賴快取的資料。
 
-ASP.NET Core 支援數種不同的快取。 最簡單的快取是以[IMemoryCache](/dotnet/api/microsoft.extensions.caching.memory.imemorycache)為基礎。 `IMemoryCache`代表儲存在 web 伺服器記憶體中的快取。 使用記憶體內部快取時，在伺服器陣列（多部伺服器）上執行的應用程式應該確保會話是固定的。 [粘滯會話] 可確保來自用戶端的後續要求都會移至相同的伺服器。 例如，Azure Web apps 會使用[應用程式要求路由](https://www.iis.net/learn/extensions/planning-for-arr)（ARR），將所有後續要求路由傳送至相同的伺服器。
+ASP.NET Core 支援數種不同的快取。 最簡單的快取是以[IMemoryCache](/dotnet/api/microsoft.extensions.caching.memory.imemorycache)為基礎。 `IMemoryCache`代表儲存在 web 伺服器記憶體中的快取。 在伺服器陣列 (多部伺服器上執行的應用程式) 應該在使用記憶體內部快取時，確保會話是固定的。 [粘滯會話] 可確保來自用戶端的後續要求都會移至相同的伺服器。 例如，Azure Web apps 會使用[應用程式要求路由](https://www.iis.net/learn/extensions/planning-for-arr) (ARR) ，將所有後續要求路由傳送至相同的伺服器。
 
 Web 伺服陣列中的非粘滯話需要[分散式](distributed.md)快取，以避免快取一致性問題。 針對某些應用程式，分散式快取可支援比記憶體內部快取更高的相應放大。 使用分散式快取會將快取記憶體卸載至外部進程。
 
@@ -41,13 +43,13 @@ Web 伺服陣列中的非粘滯話需要[分散式](distributed.md)快取，以�
 
 ## <a name="systemruntimecachingmemorycache"></a>System.web. Caching/MemoryCache
 
-<xref:System.Runtime.Caching>/<xref:System.Runtime.Caching.MemoryCache>（[NuGet 套件](https://www.nuget.org/packages/System.Runtime.Caching/)）可與搭配使用：
+<xref:System.Runtime.Caching>/<xref:System.Runtime.Caching.MemoryCache> ([NuGet 套件](https://www.nuget.org/packages/System.Runtime.Caching/)) 可與搭配使用：
 
 * .NET Standard 2.0 或更新版本。
 * 以 .NET Standard 2.0 或更新版本為目標的任何[.net 執行](/dotnet/standard/net-standard#net-implementation-support)。 例如，ASP.NET Core 2.0 或更新版本。
 * .NET Framework 4.5 或更新版本。
 
-建議使用[Microsoft Extensions. Caching. Memory](https://www.nuget.org/packages/Microsoft.Extensions.Caching.Memory/) / `IMemoryCache` （如本文所述）， `System.Runtime.Caching` / `MemoryCache` 因為它已更緊密整合到 ASP.NET Core 中。 例如，會 `IMemoryCache` 以原生方式使用 ASP.NET Core 相依性[插入](xref:fundamentals/dependency-injection)。
+[Microsoft.Extensions.Caching.Memory](https://www.nuget.org/packages/Microsoft.Extensions.Caching.Memory/) / `IMemoryCache` (本文所述的) 建議您不要這麼做， `System.Runtime.Caching` / `MemoryCache` 因為它已更緊密整合到 ASP.NET Core 中。 例如，會 `IMemoryCache` 以原生方式使用 ASP.NET Core 相依性[插入](xref:fundamentals/dependency-injection)。
 
 將程式 `System.Runtime.Caching` / `MemoryCache` 代碼從 ASP.NET 4.x 移植到 ASP.NET Core 時，請使用做為相容性橋接器。
 
@@ -174,7 +176,7 @@ Web 伺服陣列中的非粘滯話需要[分散式](distributed.md)快取，以�
 
 ## <a name="additional-notes"></a>其他注意事項
 
-* 到期不會在背景中發生。 沒有任何計時器會主動掃描快取中是否有過期的專案。 快取上的任何活動（ `Get` 、 `Set` 、 `Remove` ）都可以觸發過期專案的背景掃描。 （）上的 `CancellationTokenSource` 計時器 <xref:System.Threading.CancellationTokenSource.CancelAfter*> 也會移除專案，並觸發已過期專案的掃描。 下列範例會使用[CancellationTokenSource （TimeSpan）](/dotnet/api/system.threading.cancellationtokensource.-ctor)作為已註冊的權杖。 當此標記引發時，它會立即移除該專案，並引發收回回呼：
+* 到期不會在背景中發生。 沒有任何計時器會主動掃描快取中是否有過期的專案。 快取 (、) 上的任何活動 `Get` ， `Set` `Remove` 都可以觸發過期專案的背景掃描。  (上的計時器 `CancellationTokenSource` <xref:System.Threading.CancellationTokenSource.CancelAfter*>) 也會移除專案並觸發過期專案的掃描。 下列範例會針對已註冊的權杖使用[CancellationTokenSource (TimeSpan) ](/dotnet/api/system.threading.cancellationtokensource.-ctor) 。 當此標記引發時，它會立即移除該專案，並引發收回回呼：
 
 [!code-csharp[](memory/3.0sample/WebCacheSample/Controllers/HomeController.cs?name=snippet_ae)]
 
@@ -208,13 +210,13 @@ Web 伺服陣列中的非粘滯話需要[分散式](distributed.md)快取，以�
 <!-- This is the 2.1 version -->
 作者： [Rick Anderson](https://twitter.com/RickAndMSFT)、 [John 羅文](https://github.com/JunTaoLuo)和[Steve Smith](https://ardalis.com/)
 
-[查看或下載範例程式碼](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/performance/caching/memory/sample)（[如何下載](xref:index#how-to-download-a-sample)）
+[查看或下載範例程式碼](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/performance/caching/memory/sample) ([如何下載](xref:index#how-to-download-a-sample)) 
 
 ## <a name="caching-basics"></a>快取基本概念
 
 快取可以藉由減少產生內容所需的工作，大幅改善應用程式的效能和擴充性。 快取最適合不常變更的資料。 快取會製作一份資料複本，其傳回的速度會比原始來源更快。 撰寫和測試程式碼時，**絕對不**會依賴快取的資料。
 
-ASP.NET Core 支援數種不同的快取。 最簡單的快取是以[IMemoryCache](/dotnet/api/microsoft.extensions.caching.memory.imemorycache)為基礎，代表儲存在 web 伺服器記憶體中的快取。 在伺服器陣列（多部伺服器）上執行的應用程式應該在使用記憶體內部快取時，確保會話是粘滯的。 [粘滯會話] 可確保之後從用戶端提出的要求全都會移至相同的伺服器。 例如，Azure Web apps 會使用[應用程式要求路由](https://www.iis.net/learn/extensions/planning-for-arr)（ARR），將來自使用者代理程式的所有要求路由傳送至相同的伺服器。
+ASP.NET Core 支援數種不同的快取。 最簡單的快取是以[IMemoryCache](/dotnet/api/microsoft.extensions.caching.memory.imemorycache)為基礎，代表儲存在 web 伺服器記憶體中的快取。 在伺服器陣列 (多部伺服器上執行的應用程式) 應該確保在使用記憶體內部快取時，會話是固定的。 [粘滯會話] 可確保之後從用戶端提出的要求全都會移至相同的伺服器。 例如，Azure Web apps 會使用[應用程式要求路由](https://www.iis.net/learn/extensions/planning-for-arr) (ARR) ，將來自使用者代理程式的所有要求路由傳送至相同的伺服器。
 
 Web 伺服陣列中的非粘滯話需要[分散式](distributed.md)快取，以避免快取一致性問題。 針對某些應用程式，分散式快取可支援比記憶體內部快取更高的相應放大。 使用分散式快取會將快取記憶體卸載至外部進程。
 
@@ -222,13 +224,13 @@ Web 伺服陣列中的非粘滯話需要[分散式](distributed.md)快取，以�
 
 ## <a name="systemruntimecachingmemorycache"></a>System.web. Caching/MemoryCache
 
-<xref:System.Runtime.Caching>/<xref:System.Runtime.Caching.MemoryCache>（[NuGet 套件](https://www.nuget.org/packages/System.Runtime.Caching/)）可與搭配使用：
+<xref:System.Runtime.Caching>/<xref:System.Runtime.Caching.MemoryCache> ([NuGet 套件](https://www.nuget.org/packages/System.Runtime.Caching/)) 可與搭配使用：
 
 * .NET Standard 2.0 或更新版本。
 * 以 .NET Standard 2.0 或更新版本為目標的任何[.net 執行](/dotnet/standard/net-standard#net-implementation-support)。 例如，ASP.NET Core 2.0 或更新版本。
 * .NET Framework 4.5 或更新版本。
 
-建議使用[Microsoft Extensions. Caching. Memory](https://www.nuget.org/packages/Microsoft.Extensions.Caching.Memory/) / `IMemoryCache` （如本文所述）， `System.Runtime.Caching` / `MemoryCache` 因為它已更緊密整合到 ASP.NET Core 中。 例如，會 `IMemoryCache` 以原生方式使用 ASP.NET Core 相依性[插入](xref:fundamentals/dependency-injection)。
+[Microsoft.Extensions.Caching.Memory](https://www.nuget.org/packages/Microsoft.Extensions.Caching.Memory/) / `IMemoryCache` (本文所述的) 建議您不要這麼做， `System.Runtime.Caching` / `MemoryCache` 因為它已更緊密整合到 ASP.NET Core 中。 例如，會 `IMemoryCache` 以原生方式使用 ASP.NET Core 相依性[插入](xref:fundamentals/dependency-injection)。
 
 將程式 `System.Runtime.Caching` / `MemoryCache` 代碼從 ASP.NET 4.x 移植到 ASP.NET Core 時，請使用做為相容性橋接器。
 

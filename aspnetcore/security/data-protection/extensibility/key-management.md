@@ -6,6 +6,8 @@ ms.author: riande
 ms.custom: mvc, seodec18
 ms.date: 10/24/2018
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -14,12 +16,12 @@ no-loc:
 - Razor
 - SignalR
 uid: security/data-protection/extensibility/key-management
-ms.openlocfilehash: e319872799ef4994b55ba941956836f0848dd76d
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: 5f55b56bd35a583e1f078a5a281788b68412e4f7
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85408535"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88021688"
 ---
 # <a name="key-management-extensibility-in-aspnet-core"></a>ASP.NET Core 中的金鑰管理擴充性
 
@@ -29,7 +31,7 @@ ms.locfileid: "85408535"
 > [!WARNING]
 > 實作為下列任何介面的型別應該是多個呼叫端的安全線程。
 
-## <a name="key"></a>Key
+## <a name="key"></a>機碼
 
 `IKey`介面是 cryptosystem 中索引鍵的基本標記法。 這裡的關鍵字是用在抽象概念中，而不是「密碼編譯金鑰內容」的常值意義。 金鑰具有下列屬性：
 
@@ -37,7 +39,7 @@ ms.locfileid: "85408535"
 
 * 撤銷狀態
 
-* 金鑰識別碼（GUID）
+* GUID (的金鑰識別碼) 
 
 ::: moniker range=">= aspnetcore-2.0"
 
@@ -69,7 +71,7 @@ ms.locfileid: "85408535"
 
 ## <a name="xmlkeymanager"></a>XmlKeyManager
 
-`XmlKeyManager`類型是的內建實體執行 `IKeyManager` 。 它提供數個實用的功能，包括待用金鑰的金鑰委付和加密。 此系統中的索引鍵會以 XML 元素（具體而言是[system.xml.linq.xelement>](/dotnet/csharp/programming-guide/concepts/linq/xelement-class-overview)）來表示。
+`XmlKeyManager`類型是的內建實體執行 `IKeyManager` 。 它提供數個實用的功能，包括待用金鑰的金鑰委付和加密。 此系統中的索引鍵是以 XML 元素表示， (特別是[system.xml.linq.xelement>](/dotnet/csharp/programming-guide/concepts/linq/xelement-class-overview)) 。
 
 `XmlKeyManager`在完成其工作的過程中，相依于數個其他元件：
 
@@ -103,7 +105,7 @@ ms.locfileid: "85408535"
 
 *金鑰建立/CreateNewKey*
 
-在的執行中 `CreateNewKey` ， `AlgorithmConfiguration` 會使用元件來建立唯一的 `IAuthenticatedEncryptorDescriptor` ，然後將它序列化為 XML。 如果有金鑰委付接收，則會提供原始（未加密）的 XML 給接收以進行長期儲存。 未加密的 XML 接著會透過 `IXmlEncryptor` （如有需要）執行，以產生加密的 xml 檔。 此加密檔會透過保存到長期儲存體 `IXmlRepository` 。 （如果未 `IXmlEncryptor` 設定，則未加密的檔會保存在中 `IXmlRepository` ）。
+在的執行中 `CreateNewKey` ， `AlgorithmConfiguration` 會使用元件來建立唯一的 `IAuthenticatedEncryptorDescriptor` ，然後將它序列化為 XML。 如果有金鑰委付接收，則會提供原始 (未加密的) XML 給接收以進行長期儲存。 若有必要，則會透過 (執行未加密的 XML， `IXmlEncryptor`) 產生加密的 xml 檔。 此加密檔會透過保存到長期儲存體 `IXmlRepository` 。  (如果未 `IXmlEncryptor` 設定，則未加密的檔會保存在中 `IXmlRepository` 。 ) 
 
 ![金鑰抓取](key-management/_static/keyretrieval2.png)
 
@@ -115,7 +117,7 @@ ms.locfileid: "85408535"
 
 *金鑰建立/CreateNewKey*
 
-在的執行中 `CreateNewKey` ， `IAuthenticatedEncryptorConfiguration` 會使用元件來建立唯一的 `IAuthenticatedEncryptorDescriptor` ，然後將它序列化為 XML。 如果有金鑰委付接收，則會提供原始（未加密）的 XML 給接收以進行長期儲存。 未加密的 XML 接著會透過 `IXmlEncryptor` （如有需要）執行，以產生加密的 xml 檔。 此加密檔會透過保存到長期儲存體 `IXmlRepository` 。 （如果未 `IXmlEncryptor` 設定，則未加密的檔會保存在中 `IXmlRepository` ）。
+在的執行中 `CreateNewKey` ， `IAuthenticatedEncryptorConfiguration` 會使用元件來建立唯一的 `IAuthenticatedEncryptorDescriptor` ，然後將它序列化為 XML。 如果有金鑰委付接收，則會提供原始 (未加密的) XML 給接收以進行長期儲存。 若有必要，則會透過 (執行未加密的 XML， `IXmlEncryptor`) 產生加密的 xml 檔。 此加密檔會透過保存到長期儲存體 `IXmlRepository` 。  (如果未 `IXmlEncryptor` 設定，則未加密的檔會保存在中 `IXmlRepository` 。 ) 
 
 ![金鑰抓取](key-management/_static/keyretrieval1.png)
 
@@ -159,7 +161,7 @@ ms.locfileid: "85408535"
 
 如需詳細資訊，請參閱[金鑰儲存提供者檔](xref:security/data-protection/implementation/key-storage-providers)。
 
-`IXmlRepository`使用不同的備份存放區（例如 Azure 表格儲存體）時，註冊自訂是適當的。
+`IXmlRepository`當您使用不同的備份存放區 (例如 Azure 表格儲存體) 時，註冊自訂是適當的。
 
 若要變更預設的儲存機制應用程式範圍，請註冊自訂 `IXmlRepository` 實例：
 
@@ -183,7 +185,7 @@ services.AddSingleton<IXmlRepository>(new MyCustomXmlRepository());
 
 `IXmlEncryptor`介面代表可以加密純文字 XML 元素的類型。 它會公開單一 API：
 
-* Encrypt （System.xml.linq.xelement> plaiNtextElement）： EncryptedXmlInfo
+* 加密 (System.xml.linq.xelement> plaiNtextElement) ： EncryptedXmlInfo
 
 如果序列化 `IAuthenticatedEncryptorDescriptor` 包含標記為「需要加密」的任何元素，則 `XmlKeyManager` 會透過所設定的方法來執行這些專案， `IXmlEncryptor` `Encrypt` 而且它會將 enciphered 專案（而不是純文字元素）保存至 `IXmlRepository` 。 方法的輸出 `Encrypt` 是 `EncryptedXmlInfo` 物件。 這個物件是一個包裝函式，其中包含結果 enciphered `XElement` 和代表 `IXmlDecryptor` 可用來解密對應元素的類型。
 
@@ -218,25 +220,25 @@ services.AddSingleton<IXmlEncryptor>(new MyCustomXmlEncryptor());
 
 `IXmlDecryptor`介面代表的類型，知道如何解密透過 `XElement` enciphered 的 `IXmlEncryptor` 。 它會公開單一 API：
 
-* 解密（System.xml.linq.xelement> encryptedElement）： System.xml.linq.xelement>
+* 解密 (System.xml.linq.xelement> encryptedElement) ： System.xml.linq.xelement>
 
 `Decrypt`方法會復原所執行的加密 `IXmlEncryptor.Encrypt` 。 一般來說，每個具體 `IXmlEncryptor` 的執行都有對應的具體 `IXmlDecryptor` 執行。
 
 要執行的類型 `IXmlDecryptor` 應具有下列兩個公用函式的其中一個：
 
-* .ctor （IServiceProvider）
-* .ctor （）
+*  (IServiceProvider) 的 .ctor
+* .ctor ( # A1
 
 > [!NOTE]
 > `IServiceProvider`傳遞給此函式的可能是 null。
 
 ## <a name="ikeyescrowsink"></a>IKeyEscrowSink
 
-`IKeyEscrowSink`介面代表可執行機密資訊的類型。 回想一下，序列化的描述項可能包含機密資訊（例如密碼編譯內容），而這就是第一次引進[IXmlEncryptor](#ixmlencryptor)類型的地方。 不過，發生事故，而且可以刪除或損毀金鑰環。
+`IKeyEscrowSink`介面代表可執行機密資訊的類型。 回想一下，序列化的描述項可能包含機密資訊 (例如密碼編譯材料) ，這就是第一次引進[IXmlEncryptor](#ixmlencryptor)類型的結果。 不過，發生事故，而且可以刪除或損毀金鑰環。
 
 「證書處理」介面提供緊急的 escape 影線，允許在任何已設定的[IXmlEncryptor](#ixmlencryptor)轉換原始序列化的 XML 之前，先對其進行存取。 介面會公開單一 API：
 
-* Store （Guid keyId，System.xml.linq.xelement> 元素）
+* 儲存 (Guid keyId，System.xml.linq.xelement> 元素) 
 
 以安全的方式處理提供的專案是由 `IKeyEscrowSink` 商務原則一致的。 使用已知的公司 x.509 憑證（其中憑證的私密金鑰已委付）時，可能的執行方式之一是`CertificateXmlEncryptor`類型可以協助此。 `IKeyEscrowSink`執行也會負責適當保存提供的元素。
 

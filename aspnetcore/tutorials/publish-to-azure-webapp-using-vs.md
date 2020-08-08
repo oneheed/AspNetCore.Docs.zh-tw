@@ -6,6 +6,8 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 07/10/2019
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -14,12 +16,12 @@ no-loc:
 - Razor
 - SignalR
 uid: tutorials/publish-to-azure-webapp-using-vs
-ms.openlocfilehash: d805d57fd1e2d83d0148900993e4bf6108a13028
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: aa078fa30217d737d579b97d4de9704b5d1dd8a3
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85408405"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88022078"
 ---
 # <a name="publish-an-aspnet-core-app-to-azure-with-visual-studio"></a>使用 Visual Studio 將 ASP.NET Core 應用程式發行到 Azure
 
@@ -48,7 +50,7 @@ ms.locfileid: "85408405"
 完成 [新增專案]**** 對話方塊：
 
 * 選取 **ASP.NET Core Web 應用程式**。
-* 選取 [下一步] 。
+* 選取 [下一步]  。
 
 ![[新增專案] 對話方塊](publish-to-azure-webapp-using-vs/_static/new_prj.png)
 
@@ -97,14 +99,14 @@ Visual Studio 會建立解決方案。
 在 [發行]**** 對話方塊中：
 
 * 選取 [ **Azure**]。
-* 選取 [下一步] 。
+* 選取 [下一步]  。
 
 ![發佈對話方塊](publish-to-azure-webapp-using-vs/_static/maas1.png)
 
 在 [發行]**** 對話方塊中：
 
-* 選取 **[Azure App Service （Linux）**]。
-* 選取 [下一步] 。
+* 選取** (Linux) Azure App Service **。
+* 選取 [下一步]  。
 
 ![發佈對話方塊：選取 Azure 服務](publish-to-azure-webapp-using-vs/_static/maas2.png)
 
@@ -115,7 +117,7 @@ Visual Studio 會建立解決方案。
 [**建立 App Service** ] 對話方塊隨即出現：
 
 * 會填入 [應用程式名稱]****、[資源群組]**** 和 [App Service 方案]**** 輸入欄位。 您可以保留這些名稱，或變更它們。
-* 選取 [建立]****。
+* 選取 [建立]。
 
 ![建立 App Service 對話方塊](publish-to-azure-webapp-using-vs/_static/newrg1.png)
 
@@ -133,7 +135,7 @@ Visual Studio 會建立解決方案。
 [**設定**相依性] 對話方塊隨即出現：
 
 * 選取 [ **Azure SQL Database**]。
-* 選取 [下一步] 。
+* 選取 [下一步]  。
 
 ![設定 SQL Server 相依性對話方塊](publish-to-azure-webapp-using-vs/_static/sql1.png)
 
@@ -144,15 +146,15 @@ Visual Studio 會建立解決方案。
 [**建立 Azure SQL Database**隨即出現：
 
 * [**資料庫名稱**]、[**資源群組**]、[**資料庫伺服器**] 和 [ **App Service 方案**專案] 欄位都會填入。 您可以保留這些值或加以變更。
-* 輸入所選**資料庫伺服器**的**資料庫管理員使用者名稱**和**資料庫系統管理員密碼**（請注意，您使用的帳戶必須具有建立新 Azure SQL 資料庫所需的許可權）
-* 選取 [建立]****。
+* 輸入所選**資料庫伺服器**的**資料庫管理員使用者名稱**和**資料庫系統管理員密碼** (記下您使用的帳戶必須具有建立新 Azure SQL Database 的必要許可權) 
+* 選取 [建立]。
 
 ![新增 Azure SQL Database 對話方塊](publish-to-azure-webapp-using-vs/_static/sql_create.png)
 
 建立完成後，對話方塊會自動關閉，而且 [**設定 Azure SQL Database** ] 對話方塊會再次取得焦點：
 
 * 系統會自動選取剛建立的新實例。
-* 選取 [下一步] 。
+* 選取 [下一步]  。
 
 ![[設定 Azure SQL Database] 對話方塊](publish-to-azure-webapp-using-vs/_static/sql_select.png)
 
@@ -172,11 +174,11 @@ Visual Studio 會建立解決方案。
 * 展開 [資料庫]**** 並選取 [在執行階段使用此連接字串]****。
 * 展開 [ **Entity Framework 遷移**]，然後選取 [**在發行時套用此遷移**]。
 
-* 選取 [儲存]****。 Visual Studio 會回到 [發行]**** 對話方塊。 
+* 選取 [儲存]。 Visual Studio 會回到 [發行]**** 對話方塊。 
 
 ![[發行] 對話方塊：設定面板](publish-to-azure-webapp-using-vs/_static/pp_settings.png)
 
-按一下 **[發行]**。 Visual Studio 會將您的應用程式發佈至 Azure。 部署完成時，會在瀏覽器中開啟應用程式。
+按一下 [發佈]。 Visual Studio 會將您的應用程式發佈至 Azure。 部署完成時，會在瀏覽器中開啟應用程式。
 
 ![[發行] 對話方塊：設定面板](publish-to-azure-webapp-using-vs/_static/pp_publish.png)
 
@@ -206,7 +208,7 @@ Visual Studio 會建立解決方案。
 
 ![Azure 入口網站：[資源群組] 頁面](publish-to-azure-webapp-using-vs/_static/rgd.png)
 
-* 輸入資源群組的名稱，並選取 [刪除]****。 您在本教學課程中建立的應用程式和其他所有資源都會立即從 Azure 中刪除。
+* 輸入資源群組的名稱，然後選取 [**刪除**]。 您在本教學課程中建立的應用程式和其他所有資源都會立即從 Azure 中刪除。
 
 ### <a name="next-steps"></a>後續步驟
 

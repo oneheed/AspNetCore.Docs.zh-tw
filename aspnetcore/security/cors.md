@@ -6,6 +6,8 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 04/17/2020
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -14,12 +16,12 @@ no-loc:
 - Razor
 - SignalR
 uid: security/cors
-ms.openlocfilehash: dc8e68ef482025443147eeb27bd3f245c1a1a5ed
-ms.sourcegitcommit: 50e7c970f327dbe92d45eaf4c21caa001c9106d0
+ms.openlocfilehash: ee640ded37f40175e3e150f713fa970e9705b62c
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 07/10/2020
-ms.locfileid: "86212884"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88021103"
 ---
 # <a name="enable-cross-origin-requests-cors-in-aspnet-core"></a>在 ASP.NET Core 中啟用跨原始來源要求 (CORS) 
 
@@ -272,7 +274,7 @@ CORS 規格會呼叫這些標頭*簡單的回應標頭*。 若要讓應用程式
 [!code-csharp[](cors/3.1sample/Cors/WebAPI/StartupAllowSubdomain.cs?name=snippet5)]
 ### <a name="credentials-in-cross-origin-requests"></a>跨原始來源要求中的認證
 
-認證需要在 CORS 要求中進行特殊處理。 根據預設，瀏覽器不會傳送具有跨原始來源要求的認證。 認證包括 cookie 和 HTTP 驗證配置。 若要使用跨原始來源要求傳送認證，用戶端必須將設 `XMLHttpRequest.withCredentials` 為 `true` 。
+認證需要在 CORS 要求中進行特殊處理。 根據預設，瀏覽器不會傳送具有跨原始來源要求的認證。 認證包括 cookie s 和 HTTP 驗證配置。 若要使用跨原始來源要求傳送認證，用戶端必須將設 `XMLHttpRequest.withCredentials` 為 `true` 。
 
 `XMLHttpRequest`直接使用：
 
@@ -819,7 +821,7 @@ CORS 規格會呼叫這些標頭*簡單的回應標頭*。 若要讓應用程式
 
 ### <a name="credentials-in-cross-origin-requests"></a>跨原始來源要求中的認證
 
-認證需要在 CORS 要求中進行特殊處理。 根據預設，瀏覽器不會傳送具有跨原始來源要求的認證。 認證包括 cookie 和 HTTP 驗證配置。 若要使用跨原始來源要求傳送認證，用戶端必須將設 `XMLHttpRequest.withCredentials` 為 `true` 。
+認證需要在 CORS 要求中進行特殊處理。 根據預設，瀏覽器不會傳送具有跨原始來源要求的認證。 認證包括 cookie s 和 HTTP 驗證配置。 若要使用跨原始來源要求傳送認證，用戶端必須將設 `XMLHttpRequest.withCredentials` 為 `true` 。
 
 `XMLHttpRequest`直接使用：
 

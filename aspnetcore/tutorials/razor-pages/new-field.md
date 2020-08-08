@@ -6,6 +6,8 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 7/23/2019
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -14,14 +16,14 @@ no-loc:
 - Razor
 - SignalR
 uid: tutorials/razor-pages/new-field
-ms.openlocfilehash: 07350e127e2e529b5ad168c3e26c1ed33cd9b99f
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: 07a28333f86bb9b3c9f07b3ddf964edf5bf8dc96
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85407989"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88022039"
 ---
-# <a name="part-7-add-a-new-field-to-a-razor-page-in-aspnet-core"></a>第7部分，將新欄位新增至 Razor 頁面中的 ASP.NET Core
+# <a name="part-7-add-a-new-field-to-a-no-locrazor-page-in-aspnet-core"></a>第7部分，將新欄位新增至 Razor 頁面中的 ASP.NET Core
 
 作者：[Rick Anderson](https://twitter.com/RickAndMSFT)
 
@@ -117,7 +119,7 @@ Update-Database
 * 在 SSOX 中選取資料庫。
 * 以滑鼠右鍵按一下資料庫，然後選取 [刪除]**。
 * 勾選 [**關閉現有的連接**]。
-* 選取 [確定]****。
+* 選取 [確定]。
 * 在[PMC](xref:tutorials/razor-pages/new-field#pmc)中，更新資料庫：
 
   ```powershell
@@ -242,7 +244,7 @@ Update-Database
 * 在 SSOX 中選取資料庫。
 * 以滑鼠右鍵按一下資料庫，然後選取 [刪除]**。
 * 勾選 [**關閉現有的連接**]。
-* 選取 [確定]****。
+* 選取 [確定]。
 * 在[PMC](xref:tutorials/razor-pages/new-field#pmc)中，更新資料庫：
 
   ```powershell

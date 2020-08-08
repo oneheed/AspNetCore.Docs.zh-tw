@@ -7,6 +7,8 @@ ms.author: bradyg
 ms.custom: mvc
 ms.date: 11/12/2019
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -15,14 +17,14 @@ no-loc:
 - Razor
 - SignalR
 uid: signalr/background-services
-ms.openlocfilehash: bf5fff213b2cd7db0b3227922a8c5babba2fc904
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: 409ace5e3eaa4ab1de0b9d5f0cbd0e10d9243ea9
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85409081"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88022377"
 ---
-# <a name="host-aspnet-core-signalr-in-background-services"></a>SignalR背景服務中的主機 ASP.NET Core
+# <a name="host-aspnet-core-no-locsignalr-in-background-services"></a>SignalR背景服務中的主機 ASP.NET Core
 
 依[Brady Gaster](https://twitter.com/bradygaster)
 
@@ -33,27 +35,27 @@ ms.locfileid: "85409081"
 
 ::: moniker range=">= aspnetcore-3.0"
 
-[查看或下載範例程式碼](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/signalr/background-service/samples/3.x) [（如何下載）](xref:index#how-to-download-a-sample)
+[查看或下載範例程式碼](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/signalr/background-service/samples/3.x) [ (如何下載) ](xref:index#how-to-download-a-sample)
 
 ::: moniker-end
 ::: moniker range="<= aspnetcore-2.2"
 
-[查看或下載範例程式碼](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/signalr/background-service/samples/2.2) [（如何下載）](xref:index#how-to-download-a-sample)
+[查看或下載範例程式碼](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/signalr/background-service/samples/2.2) [ (如何下載) ](xref:index#how-to-download-a-sample)
 
 ::: moniker-end
 
-## <a name="enable-signalr-in-startup"></a>SignalR在啟動時啟用
+## <a name="enable-no-locsignalr-in-startup"></a>SignalR在啟動時啟用
 
 ::: moniker range=">= aspnetcore-3.0"
 
-SignalR在背景工作進程的內容中裝載 ASP.NET Core 中樞，等同于在 ASP.NET Core web 應用程式中裝載中樞。 在 `Startup.ConfigureServices` 方法中，呼叫會 `services.AddSignalR` 將必要的服務新增至 ASP.NET Core 相依性插入（DI）層以支援 SignalR 。 在中 `Startup.Configure` ， `MapHub` 會在回呼中呼叫方法， `UseEndpoints` 以連接 ASP.NET Core 要求管線中的中樞端點。
+SignalR在背景工作進程的內容中裝載 ASP.NET Core 中樞，等同于在 ASP.NET Core web 應用程式中裝載中樞。 在 `Startup.ConfigureServices` 方法中，呼叫會 `services.AddSignalR` 將所需的服務新增至 ASP.NET Core 相依性插入， (DI) 層來支援 SignalR 。 在中 `Startup.Configure` ， `MapHub` 會在回呼中呼叫方法， `UseEndpoints` 以連接 ASP.NET Core 要求管線中的中樞端點。
 
 [!code-csharp[Startup](background-service/samples/3.x/Server/Startup.cs?name=Startup)]
 
 ::: moniker-end
 ::: moniker range="<= aspnetcore-2.2"
 
-SignalR在背景工作進程的內容中裝載 ASP.NET Core 中樞，等同于在 ASP.NET Core web 應用程式中裝載中樞。 在 `Startup.ConfigureServices` 方法中，呼叫會 `services.AddSignalR` 將必要的服務新增至 ASP.NET Core 相依性插入（DI）層以支援 SignalR 。 在中 `Startup.Configure` ， `UseSignalR` 會呼叫方法來連接 ASP.NET Core 要求管線中的中樞端點。
+SignalR在背景工作進程的內容中裝載 ASP.NET Core 中樞，等同于在 ASP.NET Core web 應用程式中裝載中樞。 在 `Startup.ConfigureServices` 方法中，呼叫會 `services.AddSignalR` 將所需的服務新增至 ASP.NET Core 相依性插入， (DI) 層來支援 SignalR 。 在中 `Startup.Configure` ， `UseSignalR` 會呼叫方法，以在 ASP.NET Core 要求管線中連接中樞端點 (s) 。
 
 [!code-csharp[Startup](background-service/samples/2.2/Server/Startup.cs?name=Startup)]
 
@@ -90,7 +92,7 @@ SignalR在背景工作進程的內容中裝載 ASP.NET Core 中樞，等同于�
 
 ::: moniker-end
 
-## <a name="call-a-signalr-hub-from-a-background-service"></a>SignalR從背景服務呼叫中樞
+## <a name="call-a-no-locsignalr-hub-from-a-background-service"></a>SignalR從背景服務呼叫中樞
 
 在啟動期間， `Worker` `BackgroundService` 會使用來啟用類別（a） `AddHostedService` 。
 
@@ -113,7 +115,7 @@ services.AddHostedService<Worker>();
 
 隨著在 `ExecuteAsync` 背景服務中反復呼叫方法，伺服器的目前日期和時間會使用傳送至已連線的用戶端 `ClockHub` 。
 
-## <a name="react-to-signalr-events-with-background-services"></a>SignalR使用背景服務回應事件
+## <a name="react-to-no-locsignalr-events-with-background-services"></a>SignalR使用背景服務回應事件
 
 就像使用適用于的 JavaScript 用戶端或 .NET 傳統型應用程式的單一頁面應用程式 SignalR ，可以使用來執行 <xref:signalr/dotnet-client> ， `BackgroundService` 或執行 `IHostedService` 也可以用來連接到 SignalR 中樞並回應事件。
 
@@ -157,6 +159,6 @@ public partial class ClockHubClient : IClock, IHostedService
 ## <a name="additional-resources"></a>其他資源
 
 * [開始使用](xref:tutorials/signalr)
-* [中樞](xref:signalr/hubs)
+* [集線器](xref:signalr/hubs)
 * [發佈至 Azure](xref:signalr/publish-to-azure-web-app)
 * [強型別中樞](xref:signalr/hubs#strongly-typed-hubs)

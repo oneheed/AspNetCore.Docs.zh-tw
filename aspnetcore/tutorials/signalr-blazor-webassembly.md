@@ -7,6 +7,8 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 06/10/2020
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -15,14 +17,14 @@ no-loc:
 - Razor
 - SignalR
 uid: tutorials/signalr-blazor-webassembly
-ms.openlocfilehash: d5aa7520a637b18e014519134dfe2d2139e7c11d
-ms.sourcegitcommit: f7873c02c1505c99106cbc708f37e18fc0a496d1
+ms.openlocfilehash: 3d7ae49142849c589a1a20c33d30e87747ad1935
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 07/08/2020
-ms.locfileid: "86147782"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88021623"
 ---
-# <a name="use-aspnet-core-signalr-with-blazor-webassembly"></a>SignalR使用 ASP.NET Core 搭配Blazor WebAssembly
+# <a name="use-aspnet-core-no-locsignalr-with-no-locblazor-webassembly"></a>SignalR使用 ASP.NET Core 搭配Blazor WebAssembly
 
 作者：[Daniel Roth](https://github.com/danroth27) 和 [Luke Latham](https://github.com/guardrex)
 
@@ -37,9 +39,9 @@ ms.locfileid: "86147782"
 
 在本教學課程結尾，您將會有一個可運作的聊天應用程式。
 
-[查看或下載範例程式碼](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/tutorials/signalr-blazor-webassembly/samples/)（[如何下載](xref:index#how-to-download-a-sample)）
+[查看或下載範例程式碼](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/tutorials/signalr-blazor-webassembly/samples/) ([如何下載](xref:index#how-to-download-a-sample)) 
 
-## <a name="prerequisites"></a>先決條件
+## <a name="prerequisites"></a>必要條件
 
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
@@ -61,7 +63,7 @@ ms.locfileid: "86147782"
 
 ---
 
-## <a name="create-a-hosted-blazor-webassembly-app-project"></a>建立託管 Blazor WebAssembly 應用程式專案
+## <a name="create-a-hosted-no-locblazor-webassembly-app-project"></a>建立託管 Blazor WebAssembly 應用程式專案
 
 遵循您選擇的工具的指導方針：
 
@@ -102,15 +104,15 @@ ms.locfileid: "86147782"
 
 1. 在提要欄位中，選取 [ **Web 和主控台**  >  **應用程式**]。
 
-1. 選擇 [ ** Blazor WebAssembly 應用程式**] 範本。 選取 [下一步] 。
+1. 選擇 [ ** Blazor WebAssembly 應用程式**] 範本。 選取 [下一步]  。
 
-1. 確認 [**驗證**] 已設為 [**無驗證**]。 選取 [**主控 ASP.NET Core** ] 核取方塊。 選取 [下一步] 。
+1. 確認 [**驗證**] 已設為 [**無驗證**]。 選取 [**主控 ASP.NET Core** ] 核取方塊。 選取 [下一步]  。
 
 1. 在 [**專案名稱**] 欄位中，將應用程式命名為 `BlazorSignalRApp` 。 選取 [建立]。
 
    如果出現會信任開發憑證的提示，請信任憑證並繼續。 需要使用者和 keychain 密碼，才能信任憑證。
 
-1. 流覽至專案資料夾，然後開啟專案的方案檔（），以開啟專案 `.sln` 。
+1. 流覽至專案資料夾，然後開啟專案的方案檔 () ，以開啟專案 `.sln` 。
 
 # <a name="net-core-cli"></a>[.NET Core CLI](#tab/netcore-cli/)
 
@@ -122,7 +124,7 @@ dotnet new blazorwasm --hosted --output BlazorSignalRApp
 
 ---
 
-## <a name="add-the-signalr-client-library"></a>新增 SignalR 用戶端程式庫
+## <a name="add-the-no-locsignalr-client-library"></a>新增 SignalR 用戶端程式庫
 
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio/)
 
@@ -140,7 +142,7 @@ dotnet new blazorwasm --hosted --output BlazorSignalRApp
 
 # <a name="visual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code/)
 
-在**整合式終端**機（從工具列**觀看**  >  **終端**機）中，執行下列命令：
+在**整合式終端**機**View**中 ( >  從工具列) 查看**終端**機]，執行下列命令：
 
 ```dotnetcli
 dotnet add Client package Microsoft.AspNetCore.SignalR.Client
@@ -169,13 +171,13 @@ dotnet add Client package Microsoft.AspNetCore.SignalR.Client
 
 ---
 
-## <a name="add-a-signalr-hub"></a>新增 SignalR 中樞
+## <a name="add-a-no-locsignalr-hub"></a>新增 SignalR 中樞
 
-在 `BlazorSignalRApp.Server` 專案中，建立 `Hubs` （複數）資料夾，並新增下列 `ChatHub` 類別（ `Hubs/ChatHub.cs` ）：
+在 `BlazorSignalRApp.Server` 專案中，建立 `Hubs` (複數) 資料夾，並 () 加入下列 `ChatHub` 類別 `Hubs/ChatHub.cs` ：
 
 [!code-csharp[](signalr-blazor-webassembly/samples/3.x/BlazorSignalRApp/Server/Hubs/ChatHub.cs)]
 
-## <a name="add-services-and-an-endpoint-for-the-signalr-hub"></a>新增服務和中樞的端點 SignalR
+## <a name="add-services-and-an-endpoint-for-the-no-locsignalr-hub"></a>新增服務和中樞的端點 SignalR
 
 1. 在 `BlazorSignalRApp.Server` 專案中，開啟 `Startup.cs` 檔案。
 
@@ -196,7 +198,7 @@ dotnet add Client package Microsoft.AspNetCore.SignalR.Client
 
    [!code-csharp[](signalr-blazor-webassembly/samples/3.x/BlazorSignalRApp/Server/Startup.cs?name=snippet_Configure&highlight=3,25)]
 
-## <a name="add-razor-component-code-for-chat"></a>新增 Razor 聊天的元件程式碼
+## <a name="add-no-locrazor-component-code-for-chat"></a>新增 Razor 聊天的元件程式碼
 
 1. 在 `BlazorSignalRApp.Client` 專案中，開啟 `Pages/Index.razor` 檔案。
 
@@ -216,13 +218,13 @@ dotnet add Client package Microsoft.AspNetCore.SignalR.Client
 
 1. 選擇任一個瀏覽器、輸入名稱和訊息，然後選取按鈕來傳送訊息。 名稱和訊息會立即顯示在兩個頁面上：
 
-   ![SignalRBlazor WebAssembly範例應用程式會在兩個顯示交換訊息的瀏覽器視窗中開啟。](signalr-blazor-webassembly/_static/3.x/signalr-blazor-webassembly-finished.png)
+   ![：：：無-loc (SignalR) ：：：：：： no-loc (Blazor WebAssembly) ：：：範例應用程式在兩個顯示交換訊息的瀏覽器視窗中開啟。](signalr-blazor-webassembly/_static/3.x/signalr-blazor-webassembly-finished.png)
 
    引號：*星星 TREK VI：未發現的國家/地區* &copy; 1991[重要](https://www.paramountmovies.com/movies/star-trek-vi-the-undiscovered-country)
 
 # <a name="visual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code)
 
-1. 當 VS Code 提供來建立伺服器應用程式（）的啟動設定檔時 `.vscode/launch.json` ， `program` 專案會顯示如下，以指向應用程式的元件（ `{APPLICATION NAME}.Server.dll` ）：
+1. 當 VS Code 提供來建立伺服器應用程式 () 的啟動設定檔時 `.vscode/launch.json` ， `program` 專案看起來會像下面這樣，以指向應用程式的元件 (`{APPLICATION NAME}.Server.dll`) ：
 
    ```json
    "program": "${workspaceFolder}/Server/bin/Debug/netcoreapp3.1/{APPLICATION NAME}.Server.dll"
@@ -234,7 +236,7 @@ dotnet add Client package Microsoft.AspNetCore.SignalR.Client
 
 1. 選擇任一個瀏覽器、輸入名稱和訊息，然後選取按鈕來傳送訊息。 名稱和訊息會立即顯示在兩個頁面上：
 
-   ![SignalRBlazor WebAssembly範例應用程式會在兩個顯示交換訊息的瀏覽器視窗中開啟。](signalr-blazor-webassembly/_static/3.x/signalr-blazor-webassembly-finished.png)
+   ![：：：無-loc (SignalR) ：：：：：： no-loc (Blazor WebAssembly) ：：：範例應用程式在兩個顯示交換訊息的瀏覽器視窗中開啟。](signalr-blazor-webassembly/_static/3.x/signalr-blazor-webassembly-finished.png)
 
    引號：*星星 TREK VI：未發現的國家/地區* &copy; 1991[重要](https://www.paramountmovies.com/movies/star-trek-vi-the-undiscovered-country)
 
@@ -246,7 +248,7 @@ dotnet add Client package Microsoft.AspNetCore.SignalR.Client
 
 1. 選擇任一個瀏覽器、輸入名稱和訊息，然後選取按鈕來傳送訊息。 名稱和訊息會立即顯示在兩個頁面上：
 
-   ![SignalRBlazor WebAssembly範例應用程式會在兩個顯示交換訊息的瀏覽器視窗中開啟。](signalr-blazor-webassembly/_static/3.x/signalr-blazor-webassembly-finished.png)
+   ![：：：無-loc (SignalR) ：：：：：： no-loc (Blazor WebAssembly) ：：：範例應用程式在兩個顯示交換訊息的瀏覽器視窗中開啟。](signalr-blazor-webassembly/_static/3.x/signalr-blazor-webassembly-finished.png)
 
    引號：*星星 TREK VI：未發現的國家/地區* &copy; 1991[重要](https://www.paramountmovies.com/movies/star-trek-vi-the-undiscovered-country)
 
@@ -263,7 +265,7 @@ dotnet add Client package Microsoft.AspNetCore.SignalR.Client
 
 1. 選擇任一個瀏覽器、輸入名稱和訊息，然後選取按鈕來傳送訊息。 名稱和訊息會立即顯示在兩個頁面上：
 
-   ![SignalRBlazor WebAssembly範例應用程式會在兩個顯示交換訊息的瀏覽器視窗中開啟。](signalr-blazor-webassembly/_static/3.x/signalr-blazor-webassembly-finished.png)
+   ![：：：無-loc (SignalR) ：：：：：： no-loc (Blazor WebAssembly) ：：：範例應用程式在兩個顯示交換訊息的瀏覽器視窗中開啟。](signalr-blazor-webassembly/_static/3.x/signalr-blazor-webassembly-finished.png)
 
    引號：*星星 TREK VI：未發現的國家/地區* &copy; 1991[重要](https://www.paramountmovies.com/movies/star-trek-vi-the-undiscovered-country)
 

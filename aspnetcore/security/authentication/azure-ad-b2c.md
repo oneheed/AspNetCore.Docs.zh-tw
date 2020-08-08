@@ -6,6 +6,8 @@ ms.author: casoper
 ms.custom: mvc
 ms.date: 01/21/2019
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -14,21 +16,21 @@ no-loc:
 - Razor
 - SignalR
 uid: security/authentication/azure-ad-b2c
-ms.openlocfilehash: 4933203b8bdd8f653268c1df7ff83b8e9423341f
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: 78fe4d5dd9e3f64789956e58a4490bef6bdbca1e
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85405064"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88021701"
 ---
 # <a name="cloud-authentication-with-azure-active-directory-b2c-in-aspnet-core"></a>在 ASP.NET Core 中使用 Azure Active Directory B2C 進行雲端驗證
 
 作者 [Cam Soper](https://twitter.com/camsoper)
 
-[Azure Active Directory B2C](/azure/active-directory-b2c/active-directory-b2c-overview) （Azure AD B2C）是適用于 web 和行動應用程式的雲端身分識別管理解決方案。 此服務會針對雲端和內部部署中裝載的應用程式提供驗證。 驗證類型包括個別帳戶、社交網路帳戶和同盟企業帳戶。 此外，Azure AD B2C 可以使用最少的設定來提供多重要素驗證。
+[Azure Active Directory B2C](/azure/active-directory-b2c/active-directory-b2c-overview) (Azure AD B2C) 是適用于 web 和行動應用程式的雲端身分識別管理解決方案。 此服務會針對雲端和內部部署中裝載的應用程式提供驗證。 驗證類型包括個別帳戶、社交網路帳戶和同盟企業帳戶。 此外，Azure AD B2C 可以使用最少的設定來提供多重要素驗證。
 
 > [!TIP]
-> Azure Active Directory （Azure AD）和 Azure AD B2C 是個別的產品供應專案。 Azure AD 租使用者代表組織，而 Azure AD B2C 租使用者代表要與信賴憑證者應用程式搭配使用的身分識別集合。 若要深入瞭解，請參閱[Azure AD B2C：常見問題（FAQ）](/azure/active-directory-b2c/active-directory-b2c-faqs)。
+> Azure Active Directory (Azure AD) 和 Azure AD B2C 是個別的產品供應專案。 Azure AD 租使用者代表組織，而 Azure AD B2C 租使用者代表要與信賴憑證者應用程式搭配使用的身分識別集合。 若要深入瞭解，請參閱[Azure AD B2C：常見問題 (常見問題) ](/azure/active-directory-b2c/active-directory-b2c-faqs)。
 
 在本教學課程中，您將了解如何：
 
@@ -55,7 +57,7 @@ ms.locfileid: "85405064"
 
 輸入下列值：
 
-| 設定                       | 值                     | 注意                                                                                                                                                                                              |
+| 設定                       | 值                     | 備忘錄                                                                                                                                                                                              |
 |-------------------------------|---------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | **名稱**                      | *&lt;應用程式名稱&gt;*        | 輸入應用程式的**名稱**，以向取用者描述您的應用程式。                                                                                                                                 |
 | **包含 Web 應用程式 / Web API** | 是                       |                                                                                                                                                                                                    |
@@ -114,7 +116,7 @@ Visual Studio Web 應用程式範本可以設定為使用 Azure AD B2C 租使用
 > [!WARNING]
 > 請確定原則名稱與檔中所述的完全相同，因為 Visual Studio 中的 [**變更驗證**] 對話方塊中使用這些原則。 原則名稱可在*appsettings.js*中進行驗證。
 
-## <a name="configure-the-underlying-openidconnectoptionsjwtbearercookie-options"></a>設定基礎 OpenIdConnectOptions/Microsoft.aspnetcore.authentication.jwtbearer/Cookie 選項
+## <a name="configure-the-underlying-openidconnectoptionsjwtbearerno-loccookie-options"></a>設定基礎 OpenIdConnectOptions/Microsoft.aspnetcore.authentication.jwtbearer/ Cookie 選項
 
 若要直接設定基礎選項，請在中使用適當的配置常數 `Startup.ConfigureServices` ：
 
@@ -140,11 +142,11 @@ services.Configure<JwtBearerOptions>(
 
 ## <a name="run-the-app"></a>執行應用程式
 
-在 Visual Studio 中，按**F5**以建立並執行應用程式。 Web 應用程式啟動後，選取 [**接受**] 以接受 cookie 的使用（如果出現提示），然後選取 [登**入**]。
+在 Visual Studio 中，按**F5**以建立並執行應用程式。 在 web 應用程式啟動後，選取 [**接受**] 以接受使用 cookie s (（如果系統提示) ），然後選取 [登**入**]。
 
 ![登入應用程式](./azure-ad-b2c/_static/signin.png)
 
-瀏覽器會重新導向至 Azure AD B2C 的租使用者。 使用現有的帳戶登入（如果已建立測試原則），或選取 [**立即註冊**] 來建立新的帳戶。 [**忘記密碼？** ] 連結是用來重設忘記的密碼。
+瀏覽器會重新導向至 Azure AD B2C 的租使用者。 使用現有的帳戶登入 (如果已建立測試原則) 或選取 [**立即註冊**] 來建立新的帳戶。 [**忘記密碼？** ] 連結是用來重設忘記的密碼。
 
 ![Azure AD B2C 登入](./azure-ad-b2c/_static/b2csts.png)
 

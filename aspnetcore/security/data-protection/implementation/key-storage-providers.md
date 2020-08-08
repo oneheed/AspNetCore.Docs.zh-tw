@@ -5,6 +5,8 @@ description: 深入瞭解 ASP.NET Core 中的金鑰儲存提供者，以及如�
 ms.author: riande
 ms.date: 12/05/2019
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -13,12 +15,12 @@ no-loc:
 - Razor
 - SignalR
 uid: security/data-protection/implementation/key-storage-providers
-ms.openlocfilehash: 1bbea6f16d57d5cc107c95293e2788271bfce601
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: d54e8078180ce978b550963a03c0d4fdc6e9b12e
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85408041"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88021454"
 ---
 # <a name="key-storage-providers-in-aspnet-core"></a>ASP.NET Core 中的金鑰儲存提供者
 
@@ -39,11 +41,11 @@ public void ConfigureServices(IServiceCollection services)
 }
 ```
 
-`DirectoryInfo`可以指向本機電腦上的目錄，也可以指向網路共用上的資料夾。 如果指向本機電腦上的目錄（而且案例是只有本機電腦上的應用程式需要存取權才能使用此存放庫），請考慮使用[WINDOWS DPAPI](xref:security/data-protection/implementation/key-encryption-at-rest) （在 windows 上）來加密待用金鑰。 否則，請考慮使用[x.509 憑證](xref:security/data-protection/implementation/key-encryption-at-rest)來加密待用金鑰。
+`DirectoryInfo`可以指向本機電腦上的目錄，也可以指向網路共用上的資料夾。 如果指向本機電腦上的目錄 (，而案例是只有本機電腦上的應用程式需要存取才能使用此存放庫) ，請考慮在 Windows) 上使用[WINDOWS DPAPI](xref:security/data-protection/implementation/key-encryption-at-rest) (來加密待用金鑰。 否則，請考慮使用[x.509 憑證](xref:security/data-protection/implementation/key-encryption-at-rest)來加密待用金鑰。
 
 ## <a name="azure-storage"></a>Azure 儲存體
 
-[AspNetCore. DataProtection. AzureStorage](https://www.nuget.org/packages/Microsoft.AspNetCore.DataProtection.AzureStorage/)封裝可讓您將資料保護金鑰儲存在 Azure Blob 儲存體中。 金鑰可以在 web 應用程式的數個實例之間共用。 應用程式可以在多部伺服器之間共用驗證 cookie 或 CSRF 保護。
+[AspNetCore. DataProtection. AzureStorage](https://www.nuget.org/packages/Microsoft.AspNetCore.DataProtection.AzureStorage/)封裝可讓您將資料保護金鑰儲存在 Azure Blob 儲存體中。 金鑰可以在 web 應用程式的數個實例之間共用。 應用程式可以 cookie 在多部伺服器之間共用驗證或 CSRF 保護。
 
 若要設定 Azure Blob 儲存體提供者，請呼叫其中一個[PersistKeysToAzureBlobStorage](/dotnet/api/microsoft.aspnetcore.dataprotection.azuredataprotectionbuilderextensions.persistkeystoazureblobstorage)多載。
 
@@ -78,13 +80,13 @@ services.AddDataProtection()
 
 ::: moniker range=">= aspnetcore-2.2"
 
-[AspNetCore. DataProtection. StackExchangeRedis](https://www.nuget.org/packages/Microsoft.AspNetCore.DataProtection.StackExchangeRedis/)封裝可讓您將資料保護金鑰儲存在 Redis 快取中。 金鑰可以在 web 應用程式的數個實例之間共用。 應用程式可以在多部伺服器之間共用驗證 cookie 或 CSRF 保護。
+[AspNetCore. DataProtection. StackExchangeRedis](https://www.nuget.org/packages/Microsoft.AspNetCore.DataProtection.StackExchangeRedis/)封裝可讓您將資料保護金鑰儲存在 Redis 快取中。 金鑰可以在 web 應用程式的數個實例之間共用。 應用程式可以 cookie 在多部伺服器之間共用驗證或 CSRF 保護。
 
 ::: moniker-end
 
 ::: moniker range="< aspnetcore-2.2"
 
-[AspNetCore. DataProtection. Redis](https://www.nuget.org/packages/Microsoft.AspNetCore.DataProtection.Redis/)封裝可讓您將資料保護金鑰儲存在 Redis 快取中。 金鑰可以在 web 應用程式的數個實例之間共用。 應用程式可以在多部伺服器之間共用驗證 cookie 或 CSRF 保護。
+[AspNetCore. DataProtection. Redis](https://www.nuget.org/packages/Microsoft.AspNetCore.DataProtection.Redis/)封裝可讓您將資料保護金鑰儲存在 Redis 快取中。 金鑰可以在 web 應用程式的數個實例之間共用。 應用程式可以 cookie 在多部伺服器之間共用驗證或 CSRF 保護。
 
 ::: moniker-end
 
@@ -128,7 +130,7 @@ public void ConfigureServices(IServiceCollection services)
 
 **僅適用于 Windows 部署。**
 
-有時候應用程式可能沒有檔案系統的寫入權限。 假設應用程式是以虛擬服務帳戶（例如*w3wp.exe*的應用程式集區身分識別）執行的案例。 在這些情況下，系統管理員可以布建可由服務帳戶身分識別存取的登錄機碼。 呼叫[PersistKeysToRegistry](/dotnet/api/microsoft.aspnetcore.dataprotection.dataprotectionbuilderextensions.persistkeystoregistry)擴充方法，如下所示。 提供指向應儲存密碼編譯金鑰之位置的[RegistryKey](/dotnet/api/microsoft.aspnetcore.dataprotection.repositories.registryxmlrepository.registrykey) ：
+有時候應用程式可能沒有檔案系統的寫入權限。 假設應用程式是以虛擬服務帳戶的形式執行 (例如*w3wp.exe*的應用程式集區身分識別) 。 在這些情況下，系統管理員可以布建可由服務帳戶身分識別存取的登錄機碼。 呼叫[PersistKeysToRegistry](/dotnet/api/microsoft.aspnetcore.dataprotection.dataprotectionbuilderextensions.persistkeystoregistry)擴充方法，如下所示。 提供指向應儲存密碼編譯金鑰之位置的[RegistryKey](/dotnet/api/microsoft.aspnetcore.dataprotection.repositories.registryxmlrepository.registrykey) ：
 
 ```csharp
 public void ConfigureServices(IServiceCollection services)
@@ -163,7 +165,7 @@ public void ConfigureServices(IServiceCollection services)
 
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
-在 [**套件管理員主控台**] （PMC）視窗中執行下列命令：
+ (PMC) ] 視窗中，在 [**套件管理員主控台**] 中執行下列命令：
 
 ```powershell
 Add-Migration AddDataProtectionKeys -Context MyKeysContext

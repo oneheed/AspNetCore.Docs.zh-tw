@@ -5,6 +5,8 @@ description: 深入瞭解 ASP.NET Core 中的資料保護金鑰管理和存留�
 ms.author: riande
 ms.date: 10/14/2016
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -13,12 +15,12 @@ no-loc:
 - Razor
 - SignalR
 uid: security/data-protection/configuration/default-settings
-ms.openlocfilehash: f758c814280ee09a240d99cc59cdab2dc4590df6
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: b39187d93247dc83c34bbbe6ec6accfd77108794
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85407092"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88021376"
 ---
 # <a name="data-protection-key-management-and-lifetime-in-aspnet-core"></a>ASP.NET Core 中的資料保護金鑰管理和存留期
 
@@ -31,7 +33,7 @@ ms.locfileid: "85407092"
 1. 如果應用程式裝載于[Azure 應用程式](https://azure.microsoft.com/services/app-service/)中，金鑰會保存至 *%HOME%\ASP.NET\DataProtection-Keys*資料夾。 此資料夾使用網路儲存體進行保存，並會在裝載應用程式的所有電腦上同步。
    * 金鑰待用時不受保護。
    * [ *DataProtection Keys* ] 資料夾會在單一部署位置中，將金鑰環提供給應用程式的所有實例。
-   * 各部署位置，例如預備和生產位置，不會共用金鑰環。 當您在部署位置之間交換時（例如交換暫存至生產環境或使用 A/B 測試），任何使用資料保護的應用程式將無法使用先前插槽內的金鑰環來解密儲存的資料。 這會導致使用者登出使用標準 ASP.NET Core cookie 驗證的應用程式，因為它使用資料保護來保護其 cookie。 如果您想要與位置無關的金鑰環，請使用外部金鑰環形提供者，例如 Azure Blob 儲存體、Azure Key Vault、SQL 存放區或 Redis 快取。
+   * 各部署位置，例如預備和生產位置，不會共用金鑰環。 當您在部署位置之間交換時（例如交換暫存至生產環境或使用 A/B 測試），任何使用資料保護的應用程式將無法使用先前插槽內的金鑰環來解密儲存的資料。 這會導致使用者登出使用標準 ASP.NET Core 驗證的應用程式 cookie ，因為它使用資料保護來保護其 cookie 。 如果您想要與位置無關的金鑰環，請使用外部金鑰環形提供者，例如 Azure Blob 儲存體、Azure Key Vault、SQL 存放區或 Redis 快取。
 
 1. 如果有可用的使用者設定檔，金鑰會保存在 *%LOCALAPPDATA%\ASP.NET\DataProtection-Keys*資料夾中。 如果作業系統是 Windows，則會使用 DPAPI 在待用時加密金鑰。
 
@@ -48,7 +50,7 @@ ms.locfileid: "85407092"
 
 開發人員永遠都是完全控制，而且可以覆寫儲存金鑰的方式和位置。 上述前三個選項應該為大部分應用程式提供良好的預設值，類似于 ASP.NET **\<machineKey>** 自動產生常式過去的運作方式。 最終的 [回溯] 選項是唯一需要開發[人員指定預先](xref:security/data-protection/configuration/overview)設定的情況（如果他們想要保留金鑰），但只有在罕見的情況下才會發生這種情況。
 
-在 Docker 容器中裝載時，金鑰應保存在屬於 Docker 磁片區的資料夾中（共用磁片區或保存在容器存留期以外的主機裝載磁片區），或在外部提供者（例如[Azure Key Vault](https://azure.microsoft.com/services/key-vault/)或[Redis](https://redis.io/)）中。 如果應用程式無法存取共用網路磁片區，則外部提供者也適用于 web 伺服陣列案例（如需詳細資訊，請參閱[PersistKeysToFileSystem](xref:security/data-protection/configuration/overview#persistkeystofilesystem) ）。
+在 Docker 容器中裝載時，金鑰應保存在 Docker 磁片區所在的資料夾中 (共用磁片區或裝載在容器存留期以外的主機掛接磁片區) 或在外部提供者（例如[Azure Key Vault](https://azure.microsoft.com/services/key-vault/)或[Redis](https://redis.io/)）。 如果應用程式無法存取共用網路區，則外部提供者也適用于 web 伺服陣列案例 (如需詳細資訊，請參閱[PersistKeysToFileSystem](xref:security/data-protection/configuration/overview#persistkeystofilesystem)) 。
 
 > [!WARNING]
 > 如果開發人員覆寫上面所述的規則，並將資料保護系統指向特定的金鑰存放庫，則會停用待用金鑰的自動加密功能。 待用保護可以透過設定重新[啟用。](xref:security/data-protection/configuration/overview)

@@ -7,6 +7,8 @@ ms.author: bradyg
 ms.custom: mvc
 ms.date: 11/12/2019
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -15,14 +17,14 @@ no-loc:
 - Razor
 - SignalR
 uid: signalr/streaming
-ms.openlocfilehash: c7a3c7bb88230d84025bdf02deb98b51a2d1f92a
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: e0eabe711fd69e42bd9bfa5e03a92e1df780e4db
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85406169"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88022507"
 ---
-# <a name="use-streaming-in-aspnet-core-signalr"></a>在 ASP.NET Core 中使用串流SignalR
+# <a name="use-streaming-in-aspnet-core-no-locsignalr"></a>在 ASP.NET Core 中使用串流SignalR
 
 依[Brennan Conroy](https://github.com/BrennanConroy)
 
@@ -38,7 +40,7 @@ ASP.NET Core SignalR 支援伺服器方法的資料流程傳回值。 這適用�
 
 ::: moniker-end
 
-[查看或下載範例程式碼](https://github.com/dotnet/AspNetCore.Docs/tree/live/aspnetcore/signalr/streaming/samples/)（[如何下載](xref:index#how-to-download-a-sample)）
+[查看或下載範例程式碼](https://github.com/dotnet/AspNetCore.Docs/tree/live/aspnetcore/signalr/streaming/samples/) ([如何下載](xref:index#how-to-download-a-sample)) 
 
 ## <a name="set-up-a-hub-for-streaming"></a>設定用於串流的中樞
 
@@ -321,7 +323,7 @@ hubConnection.stream(String.class, "ExampleStreamingHubMethod", "Arg1")
 
 ## <a name="additional-resources"></a>其他資源
 
-* [中樞](xref:signalr/hubs)
+* [集線器](xref:signalr/hubs)
 * [.NET 用戶端](xref:signalr/dotnet-client)
 * [JavaScript 用戶端](xref:signalr/javascript-client)
 * [發佈至 Azure](xref:signalr/publish-to-azure-web-app)

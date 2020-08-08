@@ -7,6 +7,8 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 08/12/2019
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -15,22 +17,22 @@ no-loc:
 - Razor
 - SignalR
 uid: security/authorization/razor-pages-authorization
-ms.openlocfilehash: 0f4022e46993c6a957d3d0c133b3db56fa650edc
-ms.sourcegitcommit: d9ae1f352d372a20534b57e23646c1a1d9171af1
+ms.openlocfilehash: 5e0c76ea6c6b4af8e24693b1bfe8ac28bf2ce3a9
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 07/21/2020
-ms.locfileid: "86568817"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88022273"
 ---
-# <a name="razor-pages-authorization-conventions-in-aspnet-core"></a>RazorASP.NET Core 中的頁面授權慣例
+# <a name="no-locrazor-pages-authorization-conventions-in-aspnet-core"></a>RazorASP.NET Core 中的頁面授權慣例
 
 ::: moniker range=">= aspnetcore-3.0"
 
 控制頁面應用程式存取權的其中一種方式 Razor 是在啟動時使用授權慣例。 這些慣例可讓您授權使用者，並允許匿名使用者存取頁面的個別頁面或資料夾。 本主題中所述的慣例會自動套用[授權篩選](xref:mvc/controllers/filters#authorization-filters)來控制存取。
 
-[查看或下載範例程式碼](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/security/authorization/razor-pages-authorization/samples)（[如何下載](xref:index#how-to-download-a-sample)）
+[查看或下載範例程式碼](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/security/authorization/razor-pages-authorization/samples) ([如何下載](xref:index#how-to-download-a-sample)) 
 
-範例應用程式[會使用 cookie 驗證， Identity 而不 ASP.NET Core ](xref:security/authentication/cookie)。 本主題所顯示的概念和範例同樣適用于使用 ASP.NET Core 的應用程式 Identity 。 若要使用 ASP.NET Core Identity ，請遵循中的指導方針 <xref:security/authentication/identity> 。
+範例應用程式[ cookie 會使用驗證， Identity 而不 ASP.NET Core ](xref:security/authentication/cookie)。 本主題所顯示的概念和範例同樣適用于使用 ASP.NET Core 的應用程式 Identity 。 若要使用 ASP.NET Core Identity ，請遵循中的指導方針 <xref:security/authentication/identity> 。
 
 ## <a name="require-authorization-to-access-a-page"></a>需要授權才能存取頁面
 
@@ -140,9 +142,9 @@ options.Conventions.AuthorizeAreaFolder("Identity", "/Manage", "AtLeast21");
 
 控制頁面應用程式存取權的其中一種方式 Razor 是在啟動時使用授權慣例。 這些慣例可讓您授權使用者，並允許匿名使用者存取頁面的個別頁面或資料夾。 本主題中所述的慣例會自動套用[授權篩選](xref:mvc/controllers/filters#authorization-filters)來控制存取。
 
-[查看或下載範例程式碼](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/security/authorization/razor-pages-authorization/samples)（[如何下載](xref:index#how-to-download-a-sample)）
+[查看或下載範例程式碼](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/security/authorization/razor-pages-authorization/samples) ([如何下載](xref:index#how-to-download-a-sample)) 
 
-範例應用程式[會使用 cookie 驗證， Identity 而不 ASP.NET Core ](xref:security/authentication/cookie)。 本主題所顯示的概念和範例同樣適用于使用 ASP.NET Core 的應用程式 Identity 。 若要使用 ASP.NET Core Identity ，請遵循中的指導方針 <xref:security/authentication/identity> 。
+範例應用程式[ cookie 會使用驗證， Identity 而不 ASP.NET Core ](xref:security/authentication/cookie)。 本主題所顯示的概念和範例同樣適用于使用 ASP.NET Core 的應用程式 Identity 。 若要使用 ASP.NET Core Identity ，請遵循中的指導方針 <xref:security/authentication/identity> 。
 
 ## <a name="require-authorization-to-access-a-page"></a>需要授權才能存取頁面
 

@@ -7,6 +7,8 @@ ms.author: bradyg
 ms.custom: mvc
 ms.date: 11/27/2019
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -15,16 +17,16 @@ no-loc:
 - Razor
 - SignalR
 uid: signalr/introduction
-ms.openlocfilehash: 816ecfc5d23e8e1d2901a8c35c657cc968fa95df
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: 6f3cec83c9af5ec6e820db4a15061eddac613f36
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85404947"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88022169"
 ---
-# <a name="introduction-to-aspnet-core-signalr"></a>ASP.NET Core 簡介SignalR
+# <a name="introduction-to-aspnet-core-no-locsignalr"></a>ASP.NET Core 簡介SignalR
 
-## <a name="what-is-signalr"></a>什麼是 SignalR ？
+## <a name="what-is-no-locsignalr"></a>什麼是 SignalR ？
 
 ASP.NET Core SignalR 是一個開放原始碼程式庫，可簡化將即時 web 功能新增至應用程式的流程。 即時 web 功能可讓伺服器端程式碼立即將內容推送至用戶端。
 
@@ -35,7 +37,7 @@ ASP.NET Core SignalR 是一個開放原始碼程式庫，可簡化將即時 web 
 * 共同作業應用程式。 共同作業應用程式的範例包括白板應用程式和小組會議軟體。
 * 需要通知的應用程式。 社交網路、電子郵件、交談、遊戲、旅行警示和其他使用通知的應用程式。
 
-SignalR提供用來建立伺服器對用戶端[遠端程序呼叫（RPC）](https://wikipedia.org/wiki/Remote_procedure_call)的 API。 Rpc 會從伺服器端 .NET Core 程式碼呼叫用戶端上的 JavaScript 函數。
+SignalR提供 API，用於建立 (RPC) 的伺服器對用戶端[遠端程序呼叫](https://wikipedia.org/wiki/Remote_procedure_call)。 Rpc 會從伺服器端 .NET Core 程式碼呼叫用戶端上的 JavaScript 函數。
 
 以下是 SignalR ASP.NET Core 的一些功能：
 
@@ -48,7 +50,7 @@ SignalR提供用來建立伺服器對用戶端[遠端程序呼叫（RPC）](http
 
 ## <a name="transports"></a>傳輸
 
-SignalR支援下列用來處理即時通訊的技術（依正常回溯的順序）：
+SignalR支援下列用來處理即時通訊 (的技術，) 正常的回溯：
 
 * [WebSocket](https://tools.ietf.org/html/rfc7118)
 * 伺服器傳送的事件
@@ -56,7 +58,7 @@ SignalR支援下列用來處理即時通訊的技術（依正常回溯的順序�
 
 SignalR會自動選擇伺服器和用戶端功能內的最佳傳輸方法。
 
-## <a name="hubs"></a>中樞
+## <a name="hubs"></a>集線器
 
 SignalR會使用*中樞*在用戶端和伺服器之間進行通訊。
 
@@ -68,5 +70,5 @@ SignalR會使用*中樞*在用戶端和伺服器之間進行通訊。
 
 * [開始使用 SignalR 以取得 ASP.NET Core](xref:tutorials/signalr)
 * [支援的平臺](xref:signalr/supported-platforms)
-* [中樞](xref:signalr/hubs)
+* [集線器](xref:signalr/hubs)
 * [JavaScript 用戶端](xref:signalr/javascript-client)

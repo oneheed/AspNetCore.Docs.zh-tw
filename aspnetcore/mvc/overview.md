@@ -5,6 +5,8 @@ description: 了解 ASP.NET Core MVC 何以是建置使用模型檢視控制器�
 ms.author: riande
 ms.date: 02/12/2020
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -13,12 +15,12 @@ no-loc:
 - Razor
 - SignalR
 uid: mvc/overview
-ms.openlocfilehash: 68a0b14eb0897f6ff6e24e74b1fe5536bee1adfe
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: 64bee1966eff40e9057166adfafbf78d0cc5b6aa
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85405844"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88021441"
 ---
 # <a name="overview-of-aspnet-core-mvc"></a>ASP.NET Core MVC 概觀
 
@@ -71,7 +73,7 @@ ASP.NET Core MVC 包括下列各項：
 * [模型繫結](#model-binding)
 * [模型驗證](#model-validation)
 * [相依性插入](../fundamentals/dependency-injection.md)
-* [篩選器](#filters)
+* [篩選條件](#filters)
 * [區域](#areas)
 * [Web API](#web-apis)
 * [可測試性](#testability)
@@ -194,7 +196,7 @@ ASP.NET Core MVC 除了是建立網站的理想平台之外，也對建置 Web A
 
 此架構使用介面和相依性插入，因此相當適用於單元測試，而此架構所包含的功能 (例如 Entity Framework 的 TestHost 和 InMemory 提供者) 也讓您可以輕鬆快速地進行[整合測試](xref:test/integration-tests)。 深入了解[如何測試控制器邏輯](controllers/testing.md)。
 
-### <a name="razor-view-engine"></a>Razor視圖引擎
+### <a name="no-locrazor-view-engine"></a>Razor視圖引擎
 
 [ASP.NET CORE MVC views](views/overview.md)會使用[ Razor view engine](views/razor.md)來呈現 views。 Razor是一種精簡、表達和流暢的範本標記語言，可使用內嵌的 c # 程式碼來定義視圖。 Razor是用來在伺服器上動態產生 web 內容。 您可以完全混合伺服端程式碼以及用戶端內容和程式碼。
 
@@ -261,9 +263,9 @@ RazorMVC 中的 views 可以根據您的模型來進行強型別。 控制器可
 
 <xref:Microsoft.Extensions.DependencyInjection.MvcCoreMvcBuilderExtensions.SetCompatibilityVersion*> 方法可讓應用程式加入或退出 ASP.NET Core MVC 2.1 或更新版本所引入的可能重大行為變更。
 
-如需詳細資訊，請參閱 <xref:mvc/compatibility-version> 。
+如需詳細資訊，請參閱<xref:mvc/compatibility-version>。
 
 ## <a name="additional-resources"></a>其他資源
 
-* 適用于 ASP.NET Core MVC：強型別單元測試連結[庫的 MyTested AspNetCore](https://github.com/ivaylokenov/MyTested.AspNetCore.Mvc)，提供流暢的介面來測試 mvc 和 Web API 應用程式。 （*不是由 Microsoft 維護或支援）。*
+* 適用于 ASP.NET Core MVC：強型別單元測試連結[庫的 MyTested AspNetCore](https://github.com/ivaylokenov/MyTested.AspNetCore.Mvc)，提供流暢的介面來測試 mvc 和 Web API 應用程式。  (*不是由 Microsoft 維護或支援*) 
 * <xref:blazor/components/integrate-components-into-razor-pages-and-mvc-apps>

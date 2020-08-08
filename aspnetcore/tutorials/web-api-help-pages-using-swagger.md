@@ -6,6 +6,8 @@ ms.author: scaddie
 ms.custom: mvc
 ms.date: 07/06/2020
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -14,12 +16,12 @@ no-loc:
 - Razor
 - SignalR
 uid: tutorials/web-api-help-pages-using-swagger
-ms.openlocfilehash: 66b8278e84df5ee56582254ebe2dc99ada98a9dc
-ms.sourcegitcommit: fa89d6553378529ae86b388689ac2c6f38281bb9
+ms.openlocfilehash: a3b8efcdb1f196fc878e0ad29580d305bb24f50a
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 07/07/2020
-ms.locfileid: "86060302"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88021974"
 ---
 # <a name="aspnet-core-web-api-help-pages-with-swagger--openapi"></a>使用 Swagger/OpenAPI 的 ASP.NET Core Web API 說明頁面
 
@@ -37,9 +39,9 @@ ms.locfileid: "86060302"
 
 Swagger 是用來描述 [REST](https://en.wikipedia.org/wiki/Representational_state_transfer) API 的語言無關規格。 Swagger 專案已捐贈給 [OpenAPI Initiative](https://www.openapis.org/) (OpenAPI 方案)，目前在該方案中將其稱為 OpenAPI。 這兩個名稱可交替使用；不過，OpenAPI 是慣用名稱。 它可讓電腦和人類都了解服務的功能，而不必直接存取實作 (原始碼、網路存取、文件)。 其中一個目標是要將連線未相關聯之服務所需的工作量減到最少。 另一個目標則是減少正確記錄服務所需的時間量。
 
-## <a name="openapi-specification-openapijson"></a>OpenAPI 規格（openapi.js）
+## <a name="openapi-specification-openapijson"></a>) 上 ( # B0 的 OpenAPI 規格
 
-OpenAPI 流程的核心預設為規格，這是 &mdash; 名為*openapi.js*的檔。 它是由 OpenAPI 工具鏈（或它的協力廠商執行）依據您的服務所產生。 它會描述 API 的功能，以及如何使用 HTTP 來進行存取。 它可驅動 Swagger UI，並由工具鏈用來啟用探索和產生用戶端程式碼功能。 以下是 OpenAPI 規格的範例，為了簡潔起見，減少了：
+OpenAPI 流程的核心預設為規格，這是 &mdash; 名為*openapi.js*的檔。 它是由 OpenAPI 工具鏈所產生， (或 it) 的協力廠商執行（根據您的服務而定）。 它會描述 API 的功能，以及如何使用 HTTP 來進行存取。 它可驅動 Swagger UI，並由工具鏈用來啟用探索和產生用戶端程式碼功能。 以下是 OpenAPI 規格的範例，為了簡潔起見，減少了：
 
 ```json
 {

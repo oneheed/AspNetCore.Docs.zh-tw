@@ -6,6 +6,8 @@ monikerRange: '>= aspnetcore-2.1'
 ms.author: riande
 ms.date: 11/04/2019
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -14,18 +16,18 @@ no-loc:
 - Razor
 - SignalR
 uid: performance/caching/response
-ms.openlocfilehash: 5c3314991d05ea868fe9190bb3a0206b27fd920f
-ms.sourcegitcommit: b06511252f165dd4590ba9b5beca4153fa220779
+ms.openlocfilehash: 7d2d563eef60cb8eead95c6792bcac2cda16a859
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 06/27/2020
-ms.locfileid: "85459762"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88021337"
 ---
 # <a name="response-caching-in-aspnet-core"></a>ASP.NET Core 中的回應快取
 
 作者： [John 羅文](https://github.com/JunTaoLuo)、 [Rick Anderson](https://twitter.com/RickAndMSFT)和[Steve Smith](https://ardalis.com/)
 
-[查看或下載範例程式碼](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/performance/caching/response/samples)（[如何下載](xref:index#how-to-download-a-sample)）
+[查看或下載範例程式碼](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/performance/caching/response/samples) ([如何下載](xref:index#how-to-download-a-sample)) 
 
 回應快取可減少用戶端或 proxy 對 web 伺服器提出的要求數目。 回應快取也會減少 web 伺服器執行以產生回應的工作量。 回應快取是由標頭控制，可指定您希望用戶端、proxy 和中介軟體快取回應的方式。
 
@@ -42,16 +44,16 @@ ms.locfileid: "85459762"
 | 指示詞                                                       | 動作 |
 | --------------------------------------------------------------- | ------ |
 | [public](https://tools.ietf.org/html/rfc7234#section-5.2.2.5)   | 快取可能會儲存回應。 |
-| [私人](https://tools.ietf.org/html/rfc7234#section-5.2.2.6)  | 回應不得由共用快取儲存。 私用快取可能會儲存並重複使用回應。 |
-| [最大壽命](https://tools.ietf.org/html/rfc7234#section-5.2.1.1)  | 用戶端不接受其年齡大於指定秒數的回應。 範例： `max-age=60` （60秒）、 `max-age=2592000` （1個月） |
+| [private](https://tools.ietf.org/html/rfc7234#section-5.2.2.6)  | 回應不得由共用快取儲存。 私用快取可能會儲存並重複使用回應。 |
+| [最大壽命](https://tools.ietf.org/html/rfc7234#section-5.2.1.1)  | 用戶端不接受其年齡大於指定秒數的回應。 範例： `max-age=60` (60 秒) ， `max-age=2592000` (1 個月)  |
 | [no-cache](https://tools.ietf.org/html/rfc7234#section-5.2.1.4) | **在要求上**：快取不得使用預存回應來滿足要求。 源伺服器會重新產生用戶端的回應，中介軟體會在其快取中更新儲存的回應。<br><br>**回應時**：回應不得用於後續要求，而不需在源伺服器上進行驗證。 |
 | [否-存放區](https://tools.ietf.org/html/rfc7234#section-5.2.1.5) | **在要求上**：快取不得儲存要求。<br><br>**回應時**：快取不得儲存回應的任何部分。 |
 
 下表顯示在快取中扮演角色的其他快取標頭。
 
-| 頁首                                                     | 函式 |
+| 標頭                                                     | 函式 |
 | ---------------------------------------------------------- | -------- |
-| [Age](https://tools.ietf.org/html/rfc7234#section-5.1)     | 在源伺服器上產生或成功驗證回應後的時間量估計（以秒為單位）。 |
+| [年齡](https://tools.ietf.org/html/rfc7234#section-5.1)     | 在源伺服器上產生或成功驗證回應後的時間量估計（以秒為單位）。 |
 | [失效](https://tools.ietf.org/html/rfc7234#section-5.3) | 回應被視為過時的時間。 |
 | [雜](https://tools.ietf.org/html/rfc7234#section-5.4)  | 存在於與 HTTP/1.0 快取的回溯相容性，以進行設定 `no-cache` 行為。 如果 `Cache-Control` 標頭存在，則 `Pragma` 會忽略標頭。 |
 | [相同](https://tools.ietf.org/html/rfc7231#section-7.1.4)  | 指定不應傳送快取的回應，除非所有 `Vary` 標頭欄位都符合快取回應的原始要求和新的要求。 |
@@ -70,25 +72,25 @@ ms.locfileid: "85459762"
 
 記憶體內部快取會使用伺服器記憶體來儲存快取的資料。 這種類型的快取適用于單一伺服器，或使用*粘滯會話*的多部伺服器。 「粘滯話」表示用戶端的要求一律會路由傳送至相同的伺服器進行處理。
 
-如需詳細資訊，請參閱 <xref:performance/caching/memory> 。
+如需詳細資訊，請參閱<xref:performance/caching/memory>。
 
 ### <a name="distributed-cache"></a>分散式快取
 
 當應用程式裝載于雲端或伺服器陣列時，使用分散式快取將資料儲存在記憶體中。 快取會在處理要求的伺服器之間共用。 如果用戶端的快取資料可供使用，則用戶端可以提交由群組中的任何伺服器所處理的要求。 ASP.NET Core 適用于 SQL Server、 [Redis](https://www.nuget.org/packages/Microsoft.Extensions.Caching.StackExchangeRedis)和[NCache](https://www.nuget.org/packages/Alachisoft.NCache.OpenSource.SDK/)分散式快取。
 
-如需詳細資訊，請參閱 <xref:performance/caching/distributed> 。
+如需詳細資訊，請參閱<xref:performance/caching/distributed>。
 
 ### <a name="cache-tag-helper"></a>快取標籤協助程式
 
 使用快取標籤協助程式從 MVC 視圖或頁面快取內容 Razor 。 快取標記協助程式會使用記憶體內部快取來儲存資料。
 
-如需詳細資訊，請參閱 <xref:mvc/views/tag-helpers/builtin-th/cache-tag-helper> 。
+如需詳細資訊，請參閱<xref:mvc/views/tag-helpers/builtin-th/cache-tag-helper>。
 
 ### <a name="distributed-cache-tag-helper"></a>分散式快取標籤協助程式
 
 使用分散式快取標記協助程式 Razor ，從分散式雲端或 web 伺服陣列案例中的 MVC 視圖或頁面快取內容。 分散式快取標記協助程式會使用 SQL Server、 [Redis](https://www.nuget.org/packages/Microsoft.Extensions.Caching.StackExchangeRedis)或[NCache](https://www.nuget.org/packages/Alachisoft.NCache.OpenSource.SDK/)來儲存資料。
 
-如需詳細資訊，請參閱 <xref:mvc/views/tag-helpers/builtin-th/distributed-cache-tag-helper> 。
+如需詳細資訊，請參閱<xref:mvc/views/tag-helpers/builtin-th/distributed-cache-tag-helper>。
 
 ## <a name="responsecache-attribute"></a>ResponseCache 屬性
 
@@ -109,7 +111,7 @@ ms.locfileid: "85459762"
 
 第一個要求是由伺服器傳回，並在中介軟體中快取。 中介軟體會傳回第二個要求，因為查詢字串符合先前的要求。 第三個要求不在中介軟體快取中，因為查詢字串值不符合先前的要求。
 
-<xref:Microsoft.AspNetCore.Mvc.ResponseCacheAttribute>是用來設定和建立（via <xref:Microsoft.AspNetCore.Mvc.Filters.IFilterFactory> ） `Microsoft.AspNetCore.Mvc.Internal.ResponseCacheFilter` 。 會 `ResponseCacheFilter` 執行更新適當 HTTP 標頭和回應功能的工作。 篩選準則：
+<xref:Microsoft.AspNetCore.Mvc.ResponseCacheAttribute>是用來透過) 設定和建立 (<xref:Microsoft.AspNetCore.Mvc.Filters.IFilterFactory> `Microsoft.AspNetCore.Mvc.Internal.ResponseCacheFilter` 。 會 `ResponseCacheFilter` 執行更新適當 HTTP 標頭和回應功能的工作。 篩選準則：
 
 * 移除、和的任何現有標頭 `Vary` `Cache-Control` `Pragma` 。
 * 根據中設定的屬性寫出適當的標頭 <xref:Microsoft.AspNetCore.Mvc.ResponseCacheAttribute> 。
@@ -150,13 +152,13 @@ Pragma: no-cache
 
 ### <a name="location-and-duration"></a>位置和持續時間
 
-若要啟用快取， <xref:Microsoft.AspNetCore.Mvc.CacheProfile.Duration> 必須將設為正值，而且 <xref:Microsoft.AspNetCore.Mvc.CacheProfile.Location> 必須是 `Any` （預設值）或 `Client` 。 架構會將 `Cache-Control` 標頭設定為位置值，後面接著 `max-age` 回應的。
+若要啟用快取， <xref:Microsoft.AspNetCore.Mvc.CacheProfile.Duration> 必須將設為正值，而且 <xref:Microsoft.AspNetCore.Mvc.CacheProfile.Location> 必須是 `Any` (預設) 或 `Client` 。 架構會將 `Cache-Control` 標頭設定為位置值，後面接著 `max-age` 回應的。
 
 <xref:Microsoft.AspNetCore.Mvc.CacheProfile.Location>的選項 `Any` 和會 `Client` 分別轉譯為 `Cache-Control` 和的標頭值 `public` `private` 。 如[NoStore 和 Location. None](#nostore-and-locationnone)區段中所述，將設定 <xref:Microsoft.AspNetCore.Mvc.CacheProfile.Location> 為 `None` `Cache-Control` ，並將 `Pragma` 標頭設定為 `no-cache` 。
 
-`Location.Any`（ `Cache-Control` 設為 `public` ）表示*用戶端或任何中繼 proxy*可能會快取此值，包括回應快取[中介軟體](xref:performance/caching/middleware)。
+`Location.Any` (`Cache-Control` 設定為 `public`) 表示*用戶端或任何中繼 proxy*可能會快取此值，包括回應快取[中介軟體](xref:performance/caching/middleware)。
 
-`Location.Client`（ `Cache-Control` 設為 `private` ）表示*只有用戶端*可以快取此值。 任何中繼快取都不應該快取值，包括回應快取[中介軟體](xref:performance/caching/middleware)。
+`Location.Client` (`Cache-Control` 設定為 `private`) 表示*只有用戶端*可以快取此值。 任何中繼快取都不應該快取值，包括回應快取[中介軟體](xref:performance/caching/middleware)。
 
 快取控制標頭只會在和如何快取回應時，提供用戶端和中繼 proxy 的指引。 不保證用戶端和 proxy 會接受[HTTP 1.1](https://tools.ietf.org/html/rfc7234)快取規格。 [回應快取中介軟體](xref:performance/caching/middleware)一律會遵循規格所配置的快取規則。
 

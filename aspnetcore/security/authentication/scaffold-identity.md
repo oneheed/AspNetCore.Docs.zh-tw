@@ -7,6 +7,8 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 5/1/2020
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -15,20 +17,20 @@ no-loc:
 - Razor
 - SignalR
 uid: security/authentication/scaffold-identity
-ms.openlocfilehash: a8ca520d84d382b95cd4c0e2962ba4e5c922049e
-ms.sourcegitcommit: 3544941682869734ea0113e24e02ed0ec9e1a9ec
+ms.openlocfilehash: 4404a5513d9dc989e50c904f3e7863de59991939
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 07/18/2020
-ms.locfileid: "86464562"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88022325"
 ---
-# <a name="scaffold-identity-in-aspnet-core-projects"></a>IdentityASP.NET Core 專案中的 Scaffold
+# <a name="scaffold-no-locidentity-in-aspnet-core-projects"></a>IdentityASP.NET Core 專案中的 Scaffold
 
 作者：[Rick Anderson](https://twitter.com/RickAndMSFT)
 
 ::: moniker range=">= aspnetcore-3.0"
 
-ASP.NET Core 提供[ASP.NET Core Identity ](xref:security/authentication/identity)做為[ Razor 類別庫](xref:razor-pages/ui-class)。 包含的應用程式 Identity 可以套用 scaffolder，以選擇性地新增包含在 Identity Razor 類別庫（RCL）中的原始程式碼。 建議您產生原始程式碼，以便能夠修改程式碼並變更行為。 例如，您可以指示 Scaffolder 產生註冊使用的程式碼。 產生的程式碼優先于 RCL 中的相同程式碼 Identity 。 若要取得 UI 的完全控制，而不使用預設 RCL，請參閱[建立完整的 Identity UI 來源](#full)一節。
+ASP.NET Core 提供[ASP.NET Core Identity ](xref:security/authentication/identity)做為[ Razor 類別庫](xref:razor-pages/ui-class)。 包含的應用程式 Identity 可以套用 scaffolder，以選擇性地加入包含在類別庫中的原始程式碼， Identity Razor (RCL) 。 建議您產生原始程式碼，以便能夠修改程式碼並變更行為。 例如，您可以指示 Scaffolder 產生註冊使用的程式碼。 產生的程式碼優先于 RCL 中的相同程式碼 Identity 。 若要取得 UI 的完全控制，而不使用預設 RCL，請參閱[建立完整的 Identity UI 來源](#full)一節。
 
 **不**包含驗證的應用程式可以套用 scaffolder 來新增 RCL Identity 套件。 您可以選擇 Identity 要產生的程式碼。
 
@@ -52,7 +54,7 @@ ASP.NET Core 提供[ASP.NET Core Identity ](xref:security/authentication/identit
 
 一般而言，使用個別帳戶建立的應用程式***不***應該建立新的資料內容。
 
-## <a name="scaffold-identity-into-an-empty-project"></a>Scaffold Identity 至空的專案
+## <a name="scaffold-no-locidentity-into-an-empty-project"></a>Scaffold Identity 至空的專案
 
 [!INCLUDE[](~/includes/scaffold-identity/id-scaffold-dlg.md)]
 
@@ -64,7 +66,7 @@ ASP.NET Core 提供[ASP.NET Core Identity ](xref:security/authentication/identit
 
 [!INCLUDE[](~/includes/scaffold-identity/migrations.md)]
 
-## <a name="scaffold-identity-into-a-razor-project-without-existing-authorization"></a>Scaffold Identity 至 Razor 沒有現有授權的專案
+## <a name="scaffold-no-locidentity-into-a-no-locrazor-project-without-existing-authorization"></a>Scaffold Identity 至 Razor 沒有現有授權的專案
 
 <!--  Updated for 3.0
 set projNam=RPnoAuth
@@ -113,11 +115,11 @@ Identity會在*區域/ Identity / Identity HostingStartup.cs*中設定。 如需
 
 ### <a name="layout-changes"></a>版面配置變更
 
-選擇性：將登入部分（ `_LoginPartial` ）新增至配置檔案：
+選擇性：將登入部分 (`_LoginPartial`) 新增至配置檔案：
 
 [!code-cshtml[](scaffold-identity/3.1sample/_Layout.cshtml?highlight=20)]
 
-## <a name="scaffold-identity-into-a-razor-project-with-authorization"></a>Scaffold Identity 至 Razor 具有授權的專案
+## <a name="scaffold-no-locidentity-into-a-no-locrazor-project-with-authorization"></a>Scaffold Identity 至 Razor 具有授權的專案
 
 <!--
 Use >=2.1: dotnet new webapp -au Individual -o RPauth
@@ -134,7 +136,7 @@ dotnet aspnet-codegenerator identity -dc RPauth.Data.ApplicationDbContext --file
 
 有些 Identity 選項是在*Areas/ Identity / Identity HostingStartup.cs*中設定。 如需詳細資訊，請參閱[IHostingStartup](xref:fundamentals/configuration/platform-specific-configuration)。
 
-## <a name="scaffold-identity-into-an-mvc-project-without-existing-authorization"></a>Scaffold Identity 至沒有現有授權的 MVC 專案
+## <a name="scaffold-no-locidentity-into-an-mvc-project-without-existing-authorization"></a>Scaffold Identity 至沒有現有授權的 MVC 專案
 
 <!--
 set projNam=MvcNoAuth
@@ -152,7 +154,7 @@ dotnet ef database update
 
 [!INCLUDE[](~/includes/scaffold-identity/id-scaffold-dlg.md)]
 
-選擇性：將登入部分（ `_LoginPartial` ）新增至*Views/Shared/_Layout. cshtml*檔案：
+選擇性：將登入部分 (`_LoginPartial`) 新增至*Views/Shared/_Layout. cshtml*檔案：
 
 [!code-cshtml[](scaffold-identity/3.1sample/_Layout.cshtml?highlight=20)]
 
@@ -168,7 +170,7 @@ Identity會在*區域/ Identity / Identity HostingStartup.cs*中設定。 如需
 
 [!INCLUDE[](~/includes/scaffold-identity/hsts.md)]
 
-## <a name="scaffold-identity-into-an-mvc-project-with-authorization"></a>Scaffold Identity 至具有授權的 MVC 專案
+## <a name="scaffold-no-locidentity-into-an-mvc-project-with-authorization"></a>Scaffold Identity 至具有授權的 MVC 專案
 
 <!--
 dotnet new mvc -au Individual -o MvcAuth
@@ -180,7 +182,7 @@ dotnet aspnet-codegenerator identity -dc MvcAuth.Data.ApplicationDbContext  --fi
 
 [!INCLUDE[](~/includes/scaffold-identity/id-scaffold-dlg-auth.md)]
 
-## <a name="scaffold-identity-into-a-blazor-server-project-without-existing-authorization"></a>Scaffold Identity 至 Blazor Server 沒有現有授權的專案
+## <a name="scaffold-no-locidentity-into-a-no-locblazor-server-project-without-existing-authorization"></a>Scaffold Identity 至 Blazor Server 沒有現有授權的專案
 
 [!INCLUDE[](~/includes/scaffold-identity/id-scaffold-dlg.md)]
 
@@ -194,10 +196,10 @@ Identity會在*區域/ Identity / Identity HostingStartup.cs*中設定。 如需
 
 權杖可以傳遞給元件：
 
-* 當驗證權杖已布建並儲存至驗證 cookie 時，可以將它們傳遞給元件。
-* Razor元件無法 `HttpContext` 直接使用，因此無法取得[反要求偽造（XSRF）權杖](xref:security/anti-request-forgery)，以在張貼到 Identity 的登出端點 `/Identity/Account/Logout` 。 XSRF token 可以傳遞給元件。
+* 當驗證權杖已布建並儲存到驗證時 cookie ，可以傳遞給元件。
+* Razor元件無法 `HttpContext` 直接使用，因此無法取得[ (XSRF) 權杖的防要求偽造](xref:security/anti-request-forgery)，以張貼到 Identity 的登出端點 `/Identity/Account/Logout` 。 XSRF token 可以傳遞給元件。
 
-如需詳細資訊，請參閱 <xref:blazor/security/server/additional-scenarios#pass-tokens-to-a-blazor-server-app> 。
+如需詳細資訊，請參閱<xref:blazor/security/server/additional-scenarios#pass-tokens-to-a-blazor-server-app>。
 
 在*Pages/_Host. cshtml*檔案中，在將它加入和類別之後，建立權杖 `InitialApplicationState` `TokenProvider` ：
 
@@ -214,7 +216,7 @@ var tokens = new InitialApplicationState
 };
 ```
 
-更新 `App` 元件（*razor*）以指派 `InitialState.XsrfToken` ：
+`App` (*app.config*) 更新元件，以指派 `InitialState.XsrfToken` ：
 
 ```csharp
 @inject TokenProvider TokenProvider
@@ -242,7 +244,7 @@ TokenProvider.XsrfToken = InitialState.XsrfToken;
 
 ### <a name="layout-and-authentication-flow-changes"></a>版面配置和驗證流程變更
 
-`RedirectToLogin`在專案根目錄中，將元件（*RedirectToLogin*）新增至應用程式的*共用*資料夾：
+將 `RedirectToLogin` 元件 (*RedirectToLogin*) 新增至專案根目錄中應用程式的*共用*資料夾：
 
 ```razor
 @inject NavigationManager Navigation
@@ -255,7 +257,7 @@ TokenProvider.XsrfToken = InitialState.XsrfToken;
 }
 ```
 
-將 `LoginDisplay` 元件（*LoginDisplay*）新增至應用程式的*共用*資料夾。 [TokenProvider 服務](xref:blazor/security/server/additional-scenarios#pass-tokens-to-a-blazor-server-app)會針對張貼至的登出端點的 HTML 表單，提供 XSRF token Identity ：
+將 `LoginDisplay` 元件 (*LoginDisplay*) 新增至應用程式的*共用*資料夾。 [TokenProvider 服務](xref:blazor/security/server/additional-scenarios#pass-tokens-to-a-blazor-server-app)會針對張貼至的登出端點的 HTML 表單，提供 XSRF token Identity ：
 
 ```razor
 @using Microsoft.AspNetCore.Components.Authorization
@@ -280,7 +282,7 @@ TokenProvider.XsrfToken = InitialState.XsrfToken;
 </AuthorizeView>
 ```
 
-在 `MainLayout` 元件（*Shared/MainLayout*）中，將 `LoginDisplay` 元件加入至頂端資料列 `<div>` 元素的內容：
+在 `MainLayout` (*Shared/MainLayout*) 的元件中，將元件加入 `LoginDisplay` 至頂端資料列 `<div>` 元素的內容：
 
 ```razor
 <div class="top-row px-4 auth">
@@ -293,18 +295,18 @@ TokenProvider.XsrfToken = InitialState.XsrfToken;
 
 由於會 Blazor Server 使用 Razor 頁面 Identity 頁面，因此當訪客在 Identity 頁面和元件之間流覽時，UI 的樣式會變更。 您有兩個選項可解決 incongruous 樣式：
 
-#### <a name="build-identity-components"></a>組建 Identity 元件
+#### <a name="build-no-locidentity-components"></a>組建 Identity 元件
 
 不使用頁面的元件是用來 Identity 建立元件的方法 Identity 。 因為 `SignInManager` `UserManager` 元件中不支援和 Razor ，所以請使用應用程式中的 API 端點 Blazor Server 來處理使用者帳戶動作。
 
-#### <a name="use-a-custom-layout-with-blazor-app-styles"></a>使用具有 Blazor 應用程式樣式的自訂版面配置
+#### <a name="use-a-custom-layout-with-no-locblazor-app-styles"></a>使用具有 Blazor 應用程式樣式的自訂版面配置
 
 您 Identity 可以修改頁面版面配置和樣式，以產生使用預設主題的頁面 Blazor 。
 
 > [!NOTE]
 > 本節中的範例只是自訂的起點。 可能需要額外的工作，才能獲得最佳的使用者體驗。
 
-建立新的 `NavMenu_IdentityLayout` 元件（*Shared/NavMenu_ Identity Layout*）。 如需元件的標記和程式碼，請使用應用程式元件的相同內容 `NavMenu` （*Shared/navmenu.cshtml*）。 去除 `NavLink` 無法匿名連線的任何元件，因為元件中的自動重新導向在 `RedirectToLogin` 需要驗證或授權的元件中失敗。
+建立新的 `NavMenu_IdentityLayout` 元件 (*共用/NavMenu_ Identity 版面配置. razor*) 。 針對元件的標記和程式碼，請使用應用程式元件的相同內容， `NavMenu` (*Shared/navmenu.cshtml. razor*) 。 去除 `NavLink` 無法匿名連線的任何元件，因為元件中的自動重新導向在 `RedirectToLogin` 需要驗證或授權的元件中失敗。
 
 在*Pages/Shared/Layout*檔案中，進行下列變更：
 
@@ -362,7 +364,7 @@ TokenProvider.XsrfToken = InitialState.XsrfToken;
   <script src="_framework/blazor.server.js"></script>
   ```
 
-## <a name="scaffold-identity-into-a-blazor-server-project-with-authorization"></a>Scaffold Identity 至 Blazor Server 具有授權的專案
+## <a name="scaffold-no-locidentity-into-a-no-locblazor-server-project-with-authorization"></a>Scaffold Identity 至 Blazor Server 具有授權的專案
 
 [!INCLUDE[](~/includes/scaffold-identity/id-scaffold-dlg-auth.md)]
 
@@ -370,7 +372,7 @@ TokenProvider.XsrfToken = InitialState.XsrfToken;
 
 <a name="full"></a>
 
-## <a name="create-full-identity-ui-source"></a>建立完整的 Identity UI 來源
+## <a name="create-full-no-locidentity-ui-source"></a>建立完整的 Identity UI 來源
 
 若要維持 UI 的完全控制 Identity ，請執行 Identity scaffolder，然後選取 [覆**寫所有**檔案]。
 
@@ -476,7 +478,7 @@ dotnet aspnet-codegenerator identity -dc RPauth.Data.ApplicationDbContext --file
 
 針對生產案例，可以遵循類似的方法。
 
-## <a name="prevent-publish-of-static-identity-assets"></a>防止發行靜態 Identity 資產
+## <a name="prevent-publish-of-static-no-locidentity-assets"></a>防止發行靜態 Identity 資產
 
 若要防止將靜態 Identity 資產發行至 web 根目錄，請參閱 <xref:security/authentication/identity#prevent-publish-of-static-identity-assets> 。
 
@@ -488,7 +490,7 @@ dotnet aspnet-codegenerator identity -dc RPauth.Data.ApplicationDbContext --file
 
 ::: moniker range="< aspnetcore-3.0"
 
-ASP.NET Core 2.1 和更新版本[提供 Identity ASP.NET Core](xref:security/authentication/identity)做為[ Razor 類別庫](xref:razor-pages/ui-class)。 包含的應用程式 Identity 可以套用 scaffolder，以選擇性地新增包含在 Identity Razor 類別庫（RCL）中的原始程式碼。 建議您產生原始程式碼，以便能夠修改程式碼並變更行為。 例如，您可以指示 Scaffolder 產生註冊使用的程式碼。 產生的程式碼優先于 RCL 中的相同程式碼 Identity 。 若要取得 UI 的完全控制，而不使用預設 RCL，請參閱[建立完整身分識別 UI 來源](#full)一節。
+ASP.NET Core 2.1 和更新版本[提供 Identity ASP.NET Core](xref:security/authentication/identity)做為[ Razor 類別庫](xref:razor-pages/ui-class)。 包含的應用程式 Identity 可以套用 scaffolder，以選擇性地加入包含在類別庫中的原始程式碼， Identity Razor (RCL) 。 建議您產生原始程式碼，以便能夠修改程式碼並變更行為。 例如，您可以指示 Scaffolder 產生註冊使用的程式碼。 產生的程式碼優先于 RCL 中的相同程式碼 Identity 。 若要取得 UI 的完全控制，而不使用預設 RCL，請參閱[建立完整身分識別 UI 來源](#full)一節。
 
 **不**包含驗證的應用程式可以套用 scaffolder 來新增 RCL Identity 套件。 您可以選擇 Identity 要產生的程式碼。
 
@@ -501,7 +503,7 @@ Identity執行 scaffolder 時，會在專案目錄中建立*ScaffoldingReadme.tx
 > [!NOTE]
 > 使用[雙因素驗證](xref:security/authentication/identity-enable-qrcodes)、[帳戶確認和密碼](xref:security/authentication/accconfirm)復原，以及其他安全性功能時，都需要服務 Identity 。 當樣板時，不會產生服務或服務存根 Identity 。 啟用這些功能的服務必須手動新增。 例如，請參閱[需要電子郵件確認](xref:security/authentication/accconfirm#require-email-confirmation)。
 
-## <a name="scaffold-identity-into-an-empty-project"></a>Scaffold Identity 至空的專案
+## <a name="scaffold-no-locidentity-into-an-empty-project"></a>Scaffold Identity 至空的專案
 
 [!INCLUDE[](~/includes/scaffold-identity/id-scaffold-dlg.md)]
 
@@ -513,7 +515,7 @@ Identity執行 scaffolder 時，會在專案目錄中建立*ScaffoldingReadme.tx
 
 [!INCLUDE[](~/includes/scaffold-identity/migrations.md)]
 
-## <a name="scaffold-identity-into-a-razor-project-without-existing-authorization"></a>Scaffold Identity 至 Razor 沒有現有授權的專案
+## <a name="scaffold-no-locidentity-into-a-no-locrazor-project-without-existing-authorization"></a>Scaffold Identity 至 Razor 沒有現有授權的專案
 
 <!--  Updated for 3.0
 set projNam=RPnoAuth
@@ -554,11 +556,11 @@ Identity會在*區域/ Identity / Identity HostingStartup.cs*中設定。 如需
 
 ### <a name="layout-changes"></a>版面配置變更
 
-選擇性：將登入部分（ `_LoginPartial` ）新增至配置檔案：
+選擇性：將登入部分 (`_LoginPartial`) 新增至配置檔案：
 
 [!code-cshtml[](scaffold-identity/sample/_Layout.cshtml?highlight=37)]
 
-## <a name="scaffold-identity-into-a-razor-project-with-authorization"></a>Scaffold Identity 至 Razor 具有授權的專案
+## <a name="scaffold-no-locidentity-into-a-no-locrazor-project-with-authorization"></a>Scaffold Identity 至 Razor 具有授權的專案
 
 <!--
 Use >=2.1: dotnet new webapp -au Individual -o RPauth
@@ -575,7 +577,7 @@ dotnet aspnet-codegenerator identity -dc RPauth.Data.ApplicationDbContext --file
 
 有些 Identity 選項是在*Areas/ Identity / Identity HostingStartup.cs*中設定。 如需詳細資訊，請參閱[IHostingStartup](xref:fundamentals/configuration/platform-specific-configuration)。
 
-## <a name="scaffold-identity-into-an-mvc-project-without-existing-authorization"></a>Scaffold Identity 至沒有現有授權的 MVC 專案
+## <a name="scaffold-no-locidentity-into-an-mvc-project-without-existing-authorization"></a>Scaffold Identity 至沒有現有授權的 MVC 專案
 
 <!--
 set projNam=MvcNoAuth
@@ -593,7 +595,7 @@ dotnet ef database update
 
 [!INCLUDE[](~/includes/scaffold-identity/id-scaffold-dlg.md)]
 
-選擇性：將登入部分（ `_LoginPartial` ）新增至*Views/Shared/_Layout. cshtml*檔案：
+選擇性：將登入部分 (`_LoginPartial`) 新增至*Views/Shared/_Layout. cshtml*檔案：
 
 [!code-cshtml[](scaffold-identity/sample/_LayoutMvc.cshtml?highlight=37)]
 
@@ -609,7 +611,7 @@ Identity會在*區域/ Identity / Identity HostingStartup.cs*中設定。 如需
 
 [!INCLUDE[](~/includes/scaffold-identity/hsts.md)]
 
-## <a name="scaffold-identity-into-an-mvc-project-with-authorization"></a>Scaffold Identity 至具有授權的 MVC 專案
+## <a name="scaffold-no-locidentity-into-an-mvc-project-with-authorization"></a>Scaffold Identity 至具有授權的 MVC 專案
 
 <!--
 dotnet new mvc -au Individual -o MvcAuth
@@ -625,7 +627,7 @@ dotnet aspnet-codegenerator identity -dc MvcAuth.Data.ApplicationDbContext  --fi
 
 <a name="full"></a>
 
-## <a name="create-full-identity-ui-source"></a>建立完整的 Identity UI 來源
+## <a name="create-full-no-locidentity-ui-source"></a>建立完整的 Identity UI 來源
 
 若要維持 UI 的完全控制 Identity ，請執行 Identity scaffolder，然後選取 [覆**寫所有**檔案]。
 

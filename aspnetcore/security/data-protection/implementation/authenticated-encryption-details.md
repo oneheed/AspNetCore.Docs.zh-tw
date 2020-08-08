@@ -5,6 +5,8 @@ description: 瞭解 ASP.NET Core 資料保護已驗證加密的執行詳細資�
 ms.author: riande
 ms.date: 10/14/2016
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -13,12 +15,12 @@ no-loc:
 - Razor
 - SignalR
 uid: security/data-protection/implementation/authenticated-encryption-details
-ms.openlocfilehash: ab3be90d212c0cb7159a04694e7101c275157f00
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: ebd784b493b7f283df2cc84a39113e3d714472a0
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85408626"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88022065"
 ---
 # <a name="authenticated-encryption-details-in-aspnet-core"></a>ASP.NET Core 中已驗證的加密詳細資料
 
@@ -26,7 +28,7 @@ ms.locfileid: "85408626"
 
 Idataprotector 加密的呼叫是已驗證的加密作業。 保護方法提供機密性和真實性，並系結至用來從根 IDataProtectionProvider 衍生這個特定 Idataprotector 加密實例的目的鏈。
 
-Idataprotector 加密。保護採用 byte [] 純文字參數，並產生 byte [] 受保護的承載，其格式如下所述。 （還有一個擴充方法多載，它採用字串純文字參數，並傳回字串保護的裝載。 如果使用此 API，受保護的承載格式仍然會有下列結構，但它將會[base64url 編碼](https://tools.ietf.org/html/rfc4648#section-5)。）
+Idataprotector 加密。保護採用 byte [] 純文字參數，並產生 byte [] 受保護的承載，其格式如下所述。  (還有一個擴充方法多載，它會採用字串純文字參數，並傳回字串保護的裝載。 如果使用此 API，受保護的承載格式仍然會有下列結構，但它將會[base64url 編碼](https://tools.ietf.org/html/rfc4648#section-5)。 ) 
 
 ## <a name="protected-payload-format"></a>受保護的承載格式
 
@@ -56,11 +58,11 @@ AA FF EE 57 57 2F 40 4C 3F 7F CC 9D CC D9 32 3E
 52 C9 74 A0
 ```
 
-從高於前32位的承載格式，或4個位元組是識別版本的魔術標頭（09 F0 C9 F0）
+從高於前32位的承載格式，或4個位元組是識別版本 (09 F0 C9 F0 的魔術標頭) 
 
-下一個128位或16個位元組是金鑰識別碼（80 9C 81 0C 19 66 19 40 95 36 53 F8 AA FF EE 57）
+下一個128位或16個位元組是金鑰識別碼 (80 9C 81 0C 19 66 19 40 95 36 53 F8 AA FF EE 57) 
 
 餘數包含裝載，且為所用格式的特定內容。
 
 > [!WARNING]
-> 受指定金鑰保護的所有承載都將以相同的20位元組（魔術值、金鑰識別碼）標頭開頭。 系統管理員可以使用此事實來進行診斷，以估計承載的產生時間。 例如，上述裝載對應于 key {0c819c80-6619-4019-9536-53f8aaffee57}。 如果在檢查金鑰存放庫之後，發現此特定金鑰的啟用日期為2015-01-01，而其到期日為2015-03-01，則合理假設該視窗內產生的承載（如果未遭修改），則在任一側提供或採用小型巧克力因素。
+> 所有受指定金鑰保護的承載，都將以相同的20位元組 (魔術值、金鑰識別碼) 標頭開頭。 系統管理員可以使用此事實來進行診斷，以估計承載的產生時間。 例如，上述裝載對應于 key {0c819c80-6619-4019-9536-53f8aaffee57}。 如果在檢查金鑰存放庫之後，發現此特定金鑰的啟用日期為2015-01-01，而其到期日為2015-03-01，則合理地假設承載 (在該視窗內產生的) 不會遭到修改，請在任一端提供或採取較小的巧克力因素。

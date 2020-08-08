@@ -7,6 +7,8 @@ ms.author: bradyg
 ms.custom: mvc
 ms.date: 01/16/2020
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -15,24 +17,24 @@ no-loc:
 - Razor
 - SignalR
 uid: signalr/hubs
-ms.openlocfilehash: 1757d205b583c8b3f3bbf845594d7228f8d45175
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: bd7432fc29d0cda003abed1f0e522bdddf2e4efc
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85408548"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88022208"
 ---
-# <a name="use-hubs-in-signalr-for-aspnet-core"></a>使用中 SignalR 的中樞進行 ASP.NET Core
+# <a name="use-hubs-in-no-locsignalr-for-aspnet-core"></a>使用中 SignalR 的中樞進行 ASP.NET Core
 
 By [Rachel Appel](https://twitter.com/rachelappel)和[古柯 Griffin](https://twitter.com/1kevgriff)
 
-[查看或下載範例程式碼](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/signalr/hubs/sample/ ) [（如何下載）](xref:index#how-to-download-a-sample)
+[查看或下載範例程式碼](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/signalr/hubs/sample/ ) [ (如何下載) ](xref:index#how-to-download-a-sample)
 
-## <a name="what-is-a-signalr-hub"></a>什麼是 SignalR 中樞
+## <a name="what-is-a-no-locsignalr-hub"></a>什麼是 SignalR 中樞
 
 SignalR中樞 API 可讓您從伺服器呼叫已連線用戶端上的方法。 在伺服器程式碼中，您可以定義用戶端所呼叫的方法。 在用戶端程式代碼中，您可以定義從伺服器呼叫的方法。 SignalR會處理幕後的所有內容，讓您能夠即時進行用戶端對伺服器和伺服器對用戶端通訊。
 
-## <a name="configure-signalr-hubs"></a>設定 SignalR 中樞
+## <a name="configure-no-locsignalr-hubs"></a>設定 SignalR 中樞
 
 SignalR中介軟體需要一些服務，透過呼叫來設定 `services.AddSignalR` 。
 
@@ -86,7 +88,7 @@ public class ChatHub : Hub
 
 `Hub`類別具有 `Context` 屬性，其中包含下列具有連接相關資訊的屬性：
 
-| 屬性 | 說明 |
+| 屬性 | 描述 |
 | ------ | ----------- |
 | `ConnectionId` | 取得連接的唯一識別碼，由指派 SignalR 。 每個連接都有一個連接識別碼。|
 | `UserIdentifier` | 取得[使用者識別碼](xref:signalr/groups)。 根據預設，會 SignalR 使用 `ClaimTypes.NameIdentifier` `ClaimsPrincipal` 與連接相關聯的，做為使用者識別碼。 |
@@ -106,7 +108,7 @@ public class ChatHub : Hub
 
 `Hub`類別具有 `Clients` 屬性，其中包含伺服器和用戶端之間通訊的下列屬性：
 
-| 屬性 | 說明 |
+| 屬性 | 描述 |
 | ------ | ----------- |
 | `All` | 在所有已連線的用戶端上呼叫方法 |
 | `Caller` | 呼叫用戶端上叫用中樞方法的方法 |
@@ -176,7 +178,7 @@ SignalR中樞 API 提供 `OnConnectedAsync` 和 `OnDisconnectedAsync` 虛擬方�
 
 [!code-csharp[Handle connection](hubs/sample/hubs/chathub.cs?name=OnConnectedAsync)]
 
-覆寫 `OnDisconnectedAsync` 虛擬方法，以在用戶端中斷連線時執行動作。 如果用戶端刻意中斷連接（例如，藉由呼叫 `connection.stop()` ），則 `exception` 參數會是 `null` 。 不過，如果用戶端因為錯誤（例如網路故障）而中斷連線，此 `exception` 參數將會包含描述失敗的例外狀況。
+覆寫 `OnDisconnectedAsync` 虛擬方法，以在用戶端中斷連線時執行動作。 如果用戶端藉由呼叫（例如) ）刻意中斷連線 (`connection.stop()` ，則 `exception` 參數會是 `null` 。 不過，如果用戶端因為錯誤而中斷連線 (例如網路失敗) ， `exception` 參數將會包含描述失敗的例外狀況。
 
 [!code-csharp[Handle disconnection](hubs/sample/hubs/chathub.cs?name=OnDisconnectedAsync)]
 

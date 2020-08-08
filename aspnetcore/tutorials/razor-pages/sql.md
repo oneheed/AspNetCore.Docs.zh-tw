@@ -5,6 +5,8 @@ description: 頁面上教學課程系列的第4部分 Razor 。
 ms.author: riande
 ms.date: 7/22/2019
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -13,12 +15,12 @@ no-loc:
 - Razor
 - SignalR
 uid: tutorials/razor-pages/sql
-ms.openlocfilehash: 68764a5b8c908012cc0053aa4e3ea071f2ce423d
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: 6d1a93a9cab49d33181e88b7fdc0f203a1e2546c
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85400904"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88022416"
 ---
 # <a name="part-4-with-a-database-and-aspnet-core"></a>第4部分，含有資料庫和 ASP.NET Core
 
@@ -261,7 +263,7 @@ if (context.Movie.Any())
 
 生產環境應用程式不會呼叫 `Database.Migrate`。 它會新增至前面的程式碼以免在尚未執行 `Update-Database` 時發生下列例外狀況：
 
-SqlException：無法開啟登入要求的 "RazorPagesMovieContext-21" 資料庫。 登入失敗。
+SqlException：無法開啟 Razor 登入所要求的資料庫 "PagesMovieCoNtext-21"。 登入失敗。
 使用者 'user name' 登入失敗。
 
 ### <a name="test-the-app"></a>測試應用程式

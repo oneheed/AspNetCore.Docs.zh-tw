@@ -5,6 +5,8 @@ description: 瞭解如何使用電子郵件確認和密碼重設來建立 ASP.NE
 ms.author: riande
 ms.date: 03/11/2019
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -13,12 +15,12 @@ no-loc:
 - Razor
 - SignalR
 uid: security/authentication/accconfirm
-ms.openlocfilehash: 1156ddd2921afbfeccaf077ca29d267f8b1e844a
-ms.sourcegitcommit: 3544941682869734ea0113e24e02ed0ec9e1a9ec
+ms.openlocfilehash: 7016c2c1997d961f4b3d3cf513fc1769bd65247b
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 07/18/2020
-ms.locfileid: "86464549"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88021610"
 ---
 # <a name="account-confirmation-and-password-recovery-in-aspnet-core"></a>ASP.NET Core 中的帳戶確認和密碼復原
 
@@ -34,7 +36,7 @@ ms.locfileid: "86464549"
 
 ::: moniker range=">= aspnetcore-3.0"
 
-## <a name="prerequisites"></a>先決條件
+## <a name="prerequisites"></a>必要條件
 
 [.NET Core 3.0 SDK 或更新版本](https://dotnet.microsoft.com/download/dotnet-core/3.0)
 
@@ -169,7 +171,7 @@ https://github.com/dotnet/aspnetcore/blob/master/src/Identity/UI/src/Areas/Ident
 
 [!code-csharp[](accconfirm/sample/WebPWrecover30/StartupAllTokens.cs?name=snippet1&highlight=11-12)]
 
-內建的 Identity 使用者權杖（請參閱[AspNetCore/src/ Identity /Extensions.Core/src/TokenOptions.cs](https://github.com/dotnet/AspNetCore/blob/v2.2.2/src/Identity/Extensions.Core/src/TokenOptions.cs) ）有[一天的超時時間](https://github.com/dotnet/AspNetCore/blob/v2.2.2/src/Identity/Core/src/DataProtectionTokenProviderOptions.cs)。
+內建的 Identity 使用者權杖 (查看[AspNetCore/src/ Identity /Extensions.Core/src/TokenOptions.cs](https://github.com/dotnet/AspNetCore/blob/v2.2.2/src/Identity/Extensions.Core/src/TokenOptions.cs) ) 有[一天的超時時間](https://github.com/dotnet/AspNetCore/blob/v2.2.2/src/Identity/Core/src/DataProtectionTokenProviderOptions.cs)。
 
 ### <a name="change-the-email-token-lifespan"></a>變更電子郵件權杖生命週期
 
@@ -197,7 +199,7 @@ https://github.com/dotnet/aspnetcore/blob/master/src/Identity/UI/src/Areas/Ident
 * 建立[主控台應用程式，以](https://sendgrid.com/docs/Integrate/Code_Examples/v2_Mail/csharp.html)使用類似的程式碼將電子郵件傳送至 `EmailSender.Execute` 。
 * 查看[電子郵件活動](https://sendgrid.com/docs/User_Guide/email_activity.html)頁面。
 * 檢查您的垃圾郵件資料夾。
-* 在不同的電子郵件提供者（Microsoft、Yahoo、Gmail 等）上嘗試另一個電子郵件別名
+* 請在不同的電子郵件提供者上嘗試另一個電子郵件別名 (Microsoft、Yahoo、Gmail 等等 ) 
 * 嘗試傳送至不同的電子郵件帳戶。
 
 **安全性最佳做法**是**不要**在測試和開發中使用生產秘密。 如果您將應用程式發佈至 Azure，請在 Azure Web 應用程式入口網站中將 SendGrid 秘密設定為應用程式設定。 設定系統已設定為從環境變數讀取金鑰。
@@ -210,7 +212,7 @@ https://github.com/dotnet/aspnetcore/blob/master/src/Identity/UI/src/Areas/Ident
 
 ![Web 應用程式： RickAndMSFT@gmail.com 使用者驗證](accconfirm/_static/rick.png)
 
-按一下 [**管理**] 連結。 請注意與此帳戶相關聯的0外部（社交登入）。
+按一下 [**管理**] 連結。 請注意 0 external (社交登入) 與此帳戶相關聯。
 
 ![管理檢視](accconfirm/_static/manage.png)
 
@@ -231,11 +233,11 @@ https://github.com/dotnet/aspnetcore/blob/master/src/Identity/UI/src/Areas/Ident
 
 ::: moniker range="< aspnetcore-3.0"
 
-## <a name="prerequisites"></a>先決條件
+## <a name="prerequisites"></a>必要條件
 
 [.NET Core 2.2 SDK 或更新版本](https://dotnet.microsoft.com/download/dotnet-core)
 
-## <a name="create-a-web--app-and-scaffold-identity"></a>建立 web 應用程式和 scaffoldIdentity
+## <a name="create-a-web--app-and-scaffold-no-locidentity"></a>建立 web 應用程式和 scaffoldIdentity
 
 執行下列命令來建立具有驗證的 web 應用程式。
 
@@ -267,7 +269,7 @@ dotnet run
 
 ## <a name="require-email-confirmation"></a>需要電子郵件確認
 
-最佳做法是確認新使用者註冊的電子郵件。 電子郵件確認有助於確認他們不會模擬他人（也就是他們尚未向他人的電子郵件登錄）。 假設您有討論論壇，而您想要防止「」 yli@example.com 註冊為「」 nolivetto@contoso.com 。 若未確認電子郵件，" nolivetto@contoso.com " 可能會從您的應用程式收到不必要的電子郵件。 假設使用者不小心註冊為 " ylo@example.com "，且未注意到 "yli" 拼錯的錯誤。 因為應用程式沒有正確的電子郵件，所以無法使用密碼復原。 電子郵件確認為 bot 提供了有限的保護。 電子郵件確認無法保護具有許多電子郵件帳戶的惡意使用者。
+最佳做法是確認新使用者註冊的電子郵件。 電子郵件確認有助於確認他們不會模擬他人 (也就是，他們尚未向他人的電子郵件) 註冊。 假設您有討論論壇，而您想要防止「」 yli@example.com 註冊為「」 nolivetto@contoso.com 。 若未確認電子郵件，" nolivetto@contoso.com " 可能會從您的應用程式收到不必要的電子郵件。 假設使用者不小心註冊為 " ylo@example.com "，且未注意到 "yli" 拼錯的錯誤。 因為應用程式沒有正確的電子郵件，所以無法使用密碼復原。 電子郵件確認為 bot 提供了有限的保護。 電子郵件確認無法保護具有許多電子郵件帳戶的惡意使用者。
 
 您通常會想要防止新的使用者將任何資料張貼到您的網站，然後才會有已確認的電子郵件。
 
@@ -397,7 +399,7 @@ await _signInManager.SignInAsync(user, isPersistent: false);
 
 [!code-csharp[](accconfirm/sample/WebPWrecover22/StartupAllTokens.cs?name=snippet1&highlight=15-16)]
 
-內建的 Identity 使用者權杖（請參閱[AspNetCore/src/ Identity /Extensions.Core/src/TokenOptions.cs](https://github.com/dotnet/AspNetCore/blob/v2.2.2/src/Identity/Extensions.Core/src/TokenOptions.cs) ）有[一天的超時時間](https://github.com/dotnet/AspNetCore/blob/v2.2.2/src/Identity/Core/src/DataProtectionTokenProviderOptions.cs)。
+內建的 Identity 使用者權杖 (查看[AspNetCore/src/ Identity /Extensions.Core/src/TokenOptions.cs](https://github.com/dotnet/AspNetCore/blob/v2.2.2/src/Identity/Extensions.Core/src/TokenOptions.cs) ) 有[一天的超時時間](https://github.com/dotnet/AspNetCore/blob/v2.2.2/src/Identity/Core/src/DataProtectionTokenProviderOptions.cs)。
 
 ### <a name="change-the-email-token-lifespan"></a>變更電子郵件權杖生命週期
 
@@ -425,7 +427,7 @@ await _signInManager.SignInAsync(user, isPersistent: false);
 * 建立[主控台應用程式，以](https://sendgrid.com/docs/Integrate/Code_Examples/v2_Mail/csharp.html)使用類似的程式碼將電子郵件傳送至 `EmailSender.Execute` 。
 * 查看[電子郵件活動](https://sendgrid.com/docs/User_Guide/email_activity.html)頁面。
 * 檢查您的垃圾郵件資料夾。
-* 在不同的電子郵件提供者（Microsoft、Yahoo、Gmail 等）上嘗試另一個電子郵件別名
+* 請在不同的電子郵件提供者上嘗試另一個電子郵件別名 (Microsoft、Yahoo、Gmail 等等 ) 
 * 嘗試傳送至不同的電子郵件帳戶。
 
 **安全性最佳做法**是**不要**在測試和開發中使用生產秘密。 如果您將應用程式發行至 Azure，您可以在 Azure Web 應用程式入口網站中將 SendGrid 秘密設定為應用程式設定。 設定系統已設定為從環境變數讀取金鑰。
@@ -438,7 +440,7 @@ await _signInManager.SignInAsync(user, isPersistent: false);
 
 ![Web 應用程式： RickAndMSFT@gmail.com 使用者驗證](accconfirm/_static/rick.png)
 
-按一下 [**管理**] 連結。 請注意與此帳戶相關聯的0外部（社交登入）。
+按一下 [**管理**] 連結。 請注意 0 external (社交登入) 與此帳戶相關聯。
 
 ![管理檢視](accconfirm/_static/manage.png)
 

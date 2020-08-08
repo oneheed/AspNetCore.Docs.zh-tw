@@ -6,6 +6,8 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 5/12/2020
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -14,12 +16,12 @@ no-loc:
 - Razor
 - SignalR
 uid: test/middleware
-ms.openlocfilehash: f4ed16b136da37c093a72a8866301a188a8518a2
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: 235010c95cdd0c7ce1368b4abd91e75d81ae094b
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85406481"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88021896"
 ---
 # <a name="test-aspnet-core-middleware"></a>測試 ASP.NET Core 中介軟體
 
@@ -62,7 +64,7 @@ ms.locfileid: "85406481"
 
 判斷提示結果。 首先，請將判斷提示設為與預期結果相反的判斷提示。 具有錯誤正面判斷提示的初始執行，會確認中介軟體正常執行時測試失敗。 執行測試並確認測試失敗。
 
-在下列範例中，當要求根端點時，中介軟體應該會傳回404狀態碼（找*不到*）。 使用執行第一次測試 `Assert.NotEqual( ... );` ，這應該會失敗：
+在下列範例中，當要求根端點時，中介軟體應該會傳回404狀態碼 (*找不*到) 。 使用執行第一次測試 `Assert.NotEqual( ... );` ，這應該會失敗：
 
 [!code-csharp[](middleware/samples_snapshot/3.x/false-failure-check.cs?highlight=22)]
 
@@ -72,7 +74,7 @@ ms.locfileid: "85406481"
 
 ## <a name="send-requests-with-httpcontext"></a>使用 HttpCoNtext 傳送要求
 
-測試應用程式也可以使用[SendAsync （Action \<HttpContext> ，CancellationToken）](xref:Microsoft.AspNetCore.TestHost.TestServer.SendAsync%2A)傳送要求。 在下列範例中，當中間件處理時，會進行幾項檢查 `https://example.com/A/Path/?and=query` ：
+測試應用程式也可以使用[SendAsync (動作 \<HttpContext> CancellationToken) ](xref:Microsoft.AspNetCore.TestHost.TestServer.SendAsync%2A)來傳送要求。 在下列範例中，當中間件處理時，會進行幾項檢查 `https://example.com/A/Path/?and=query` ：
 
 ```csharp
 [Fact]

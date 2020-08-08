@@ -7,6 +7,8 @@ ms.author: bradyg
 ms.custom: mvc
 ms.date: 01/17/2020
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -15,14 +17,14 @@ no-loc:
 - Razor
 - SignalR
 uid: signalr/scale
-ms.openlocfilehash: cfa1a4c67649e1816f510a33cc53e559c4a59153
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: 2d128d54dc9b1189124563e45d72d74b19704ab1
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85408678"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88022520"
 ---
-# <a name="aspnet-core-signalr-hosting-and-scaling"></a>ASP.NET Core SignalR 裝載和調整
+# <a name="aspnet-core-no-locsignalr-hosting-and-scaling"></a>ASP.NET Core SignalR 裝載和調整
 
 [Andrew Stanton-護士](https://twitter.com/anurse)、 [Brady Gaster](https://twitter.com/bradygaster)和[Tom 作者: dykstra](https://github.com/tdykstra)，
 
@@ -30,13 +32,13 @@ ms.locfileid: "85408678"
 
 ## <a name="sticky-sessions"></a>粘滯話
 
-SignalR要求特定連接的所有 HTTP 要求都必須由相同的伺服器進程處理。 在 SignalR 伺服器陣列（多部伺服器）上執行時，必須使用「粘滯會話」。 某些負載平衡器也稱為「粘滯會話」的會話親和性。 Azure App Service 使用[應用程式要求路由](https://docs.microsoft.com/iis/extensions/planning-for-arr/application-request-routing-version-2-overview)（ARR）來路由傳送要求。 在您的 Azure App Service 中啟用「ARR 親和性」設定，將會啟用「粘滯會話」。 不需要粘滯會話的唯一情況如下：
+SignalR要求特定連接的所有 HTTP 要求都必須由相同的伺服器進程處理。 當在 SignalR 伺服器陣列上執行 (多部伺服器) 時，必須使用「粘滯會話」。 某些負載平衡器也稱為「粘滯會話」的會話親和性。 Azure App Service 使用[應用程式要求路由](https://docs.microsoft.com/iis/extensions/planning-for-arr/application-request-routing-version-2-overview) (ARR) 來路由傳送要求。 在您的 Azure App Service 中啟用「ARR 親和性」設定，將會啟用「粘滯會話」。 不需要粘滯會話的唯一情況如下：
 
 1. 在單一伺服器上裝載時，在單一進程中。
 1. 使用 Azure 服務時 SignalR 。
 1. 當所有用戶端都設定為**只**使用 websocket，**而且**用戶端設定中已啟用[SkipNegotiation 設定](xref:signalr/configuration#configure-additional-options)時。
 
-在所有其他情況下（包括使用 Redis 背板時），則必須針對 [粘滯會話] 設定伺服器環境。
+在所有其他情況下 (包括使用 Redis 背板) 時，必須針對 [粘滯會話] 設定伺服器環境。
 
 如需設定 Azure App Service 的相關指引 SignalR ，請參閱 <xref:signalr/publish-to-azure-web-app> 。
 
@@ -58,19 +60,19 @@ An attempt was made to access a socket in a way forbidden by its access permissi
 
 若要讓 SignalR 資源使用量不會造成應用程式中的錯誤 SignalR ，請相應放大以限制伺服器必須處理的連線數目。
 
-## <a name="scale-out"></a>相應放大
+## <a name="scale-out"></a>擴增
 
 使用的應用程式 SignalR 需要追蹤其所有連線，這會造成伺服器陣列的問題。 新增伺服器，並取得其他伺服器不知道的新連接。 例如，在 SignalR 下圖中的每一部伺服器上，都不知道其他伺服器上的連接。 當 SignalR 其中一個伺服器想要將訊息傳送至所有用戶端時，訊息只會移至連線到該伺服器的用戶端。
 
-![SignalR不使用背板進行縮放](scale/_static/scale-no-backplane.png)
+![調整：：：無-loc (SignalR) ：：：沒有背板](scale/_static/scale-no-backplane.png)
 
 解決此問題的選項包括[Azure SignalR 服務](#azure-signalr-service)和[Redis 背板](#redis-backplane)。
 
-## <a name="azure-signalr-service"></a>Azure SignalR 服務
+## <a name="azure-no-locsignalr-service"></a>Azure SignalR 服務
 
 Azure SignalR 服務是一個 proxy，而不是背板。 每次用戶端起始與伺服器的連線時，會將用戶端重新導向以連接到服務。 該程式如下圖所示：
 
-![建立 Azure 服務的連線 SignalR](scale/_static/azure-signalr-service-one-connection.png)
+![建立與 Azure：：： no-loc (SignalR) ：：：服務的連線](scale/_static/azure-signalr-service-one-connection.png)
 
 結果是服務會管理所有用戶端連線，而每個伺服器只需要少量的服務連線，如下圖所示：
 
@@ -126,7 +128,7 @@ proxy_set_header Connection $connection_upgrade;
 
 如需詳細資訊，請參閱[NGINX as a WebSocket Proxy](https://www.nginx.com/blog/websocket-nginx/)。
 
-## <a name="third-party-signalr-backplane-providers"></a>協力廠商 SignalR 背板提供者
+## <a name="third-party-no-locsignalr-backplane-providers"></a>協力廠商 SignalR 背板提供者
 
 * [NCache](https://www.alachisoft.com/ncache/asp-net-core-signalr.html)
 * [奧爾良](https://github.com/OrleansContrib/SignalR.Orleans)

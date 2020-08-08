@@ -6,6 +6,8 @@ monikerRange: '>= aspnetcore-3.0'
 ms.author: bdorrans
 ms.date: 07/16/2020
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -14,12 +16,12 @@ no-loc:
 - Razor
 - SignalR
 uid: security/authentication/certauth
-ms.openlocfilehash: 06803ee57824bbfac5725763938abbb9db0e360a
-ms.sourcegitcommit: d9ae1f352d372a20534b57e23646c1a1d9171af1
+ms.openlocfilehash: 7a23f2b17cc8fb3a4989b9fddd5c128add13db5b
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 07/21/2020
-ms.locfileid: "86568843"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88021948"
 ---
 # <a name="configure-certificate-authentication-in-aspnet-core"></a>在 ASP.NET Core 中設定憑證驗證
 
@@ -32,9 +34,9 @@ ms.locfileid: "86568843"
 憑證驗證是一種可設定狀態的案例，主要用於 proxy 或負載平衡器不會處理用戶端與伺服器之間的流量。 如果使用 proxy 或負載平衡器，憑證驗證僅適用于 proxy 或負載平衡器：
 
 * 處理驗證。
-* 將使用者驗證資訊傳遞給應用程式（例如，在要求標頭中），其作用於驗證資訊。
+* 將使用者驗證資訊傳遞給應用程式 (例如，在要求標頭) 中，其作用於驗證資訊。
 
-在使用 proxy 和負載平衡器的環境中，憑證驗證的替代方法是使用 OpenID Connect （OIDC） Active Directory 同盟服務（ADFS）。
+在使用 proxy 和負載平衡器的環境中，憑證驗證的替代方法是使用 OpenID Connect (OIDC) Active Directory 同盟服務 (ADFS) 。
 
 ## <a name="get-started"></a>開始使用
 
@@ -99,7 +101,7 @@ public void Configure(IApplicationBuilder app, IHostingEnvironment env)
 
 `CertificateAuthenticationOptions`處理常式有一些內建的驗證，這是您應該在憑證上執行的最小驗證。 預設會啟用這些設定。
 
-### <a name="allowedcertificatetypes--chained-selfsigned-or-all-chained--selfsigned"></a>AllowedCertificateTypes = 連鎖、Lnk-selfsigned 之類或 All （連鎖 |Lnk-selfsigned 之類
+### <a name="allowedcertificatetypes--chained-selfsigned-or-all-chained--selfsigned"></a>AllowedCertificateTypes = 連鎖、Lnk-selfsigned 之類或所有 (連結 |Lnk-selfsigned 之類) 
 
 預設值：`CertificateTypes.Chained`
 
@@ -109,7 +111,7 @@ public void Configure(IApplicationBuilder app, IHostingEnvironment env)
 
 預設值：`true`
 
-這項檢查會驗證用戶端所提供的憑證是否有用戶端驗證擴充金鑰使用（EKU），或完全沒有 Eku。 如規格所示，如果未指定任何 EKU，則所有 Eku 都會被視為有效。
+這項檢查會驗證用戶端所提供的憑證是否有用戶端驗證擴充金鑰使用 (EKU) ，或完全沒有 Eku。 如規格所示，如果未指定任何 EKU，則所有 Eku 都會被視為有效。
 
 ### <a name="validatevalidityperiod"></a>ValidateValidityPeriod
 
@@ -284,7 +286,7 @@ Azure 不需要轉送設定。 憑證轉送中介軟體已設定此功能。
 `AddCertificateForwarding`方法是用來指定：
 
 * 用戶端標頭名稱。
-* 如何載入憑證（使用 `HeaderConverter` 屬性）。
+* 如何使用屬性) 載入憑證 (`HeaderConverter` 。
 
 例如，在自訂的 web proxy 中，憑證會當做自訂要求標頭來傳遞 `X-SSL-CERT` 。 若要使用它，請在中設定憑證轉送 `Startup.ConfigureServices` ：
 
@@ -614,7 +616,7 @@ public void ConfigureServices(IServiceCollection services)
 }
 ```
 
-預設的快取執行會將結果儲存在記憶體中。 您可以透過使用相依性插入來執行和註冊，來提供自己的快取 `ICertificateValidationCache` 。 例如： `services.AddSingleton<ICertificateValidationCache, YourCache>()` 。
+預設的快取執行會將結果儲存在記憶體中。 您可以透過使用相依性插入來執行和註冊，來提供自己的快取 `ICertificateValidationCache` 。 例如，`services.AddSingleton<ICertificateValidationCache, YourCache>()`。
 
 ::: moniker-end
 
@@ -623,7 +625,7 @@ public void ConfigureServices(IServiceCollection services)
 本節提供的資訊適用于必須使用憑證保護應用程式子集的應用程式。 例如， Razor 應用程式中的頁面或控制器可能需要用戶端憑證。 這會以用戶端憑證的形式呈現挑戰：
   
 * 是 TLS 功能，不是 HTTP 功能。
-* 會針對每個連接進行協商，而且必須在連接開始時進行協商，才能使用任何 HTTP 資料。 在連接開始時，只會知道伺服器名稱指示（SNI） &dagger; 。 用戶端和伺服器憑證會在第一次要求連線之前進行協商，而要求通常無法重新協商。
+* 會針對每個連接進行協商，而且必須在連接開始時進行協商，才能使用任何 HTTP 資料。 在連接開始時，只會知道伺服器名稱指示 (SNI) &dagger; 。 用戶端和伺服器憑證會在第一次要求連線之前進行協商，而要求通常無法重新協商。
 
 TLS 重新協商是執行選用用戶端憑證的舊方式。 這不是建議的作法，因為：
 - 在 HTTP/1.1 中，POST 要求期間的重新交涉可能會造成鎖死，其中要求主體已填滿 TCP 視窗，而重新協商封包則無法接收。
@@ -636,7 +638,7 @@ ASP.NET Core 5 preview 7 和更新版本為選用的用戶端憑證增加了更�
 
 * 設定網域和子域的系結：
   * 例如，在和上設定系 `contoso.com` 結 `myClient.contoso.com` 。 `contoso.com`主機不需要用戶端憑證，而是 `myClient.contoso.com` 。
-  * 如需詳細資訊，請參閱：
+  * 如需詳細資訊，請參閱
     * [Kestrel](/fundamentals/servers/kestrel)：
       * [ListenOptions.UseHttps](xref:fundamentals/servers/kestrel#listenoptionsusehttps)
       * <xref:Microsoft.AspNetCore.Server.Kestrel.Https.HttpsConnectionAdapterOptions.ClientCertificateMode>
@@ -648,8 +650,8 @@ ASP.NET Core 5 preview 7 和更新版本為選用的用戶端憑證增加了更�
 * 對於需要用戶端憑證且沒有此 web 應用程式的要求：
   * 使用受用戶端憑證保護的子域重新導向至相同的頁面。
   * 例如，將重新導向至 `myClient.contoso.com/requestedPage` 。 因為對的要求 `myClient.contoso.com/requestedPage` 是與不同的主機名稱 `contoso.com/requestedPage` ，用戶端會建立不同的連線，並提供用戶端憑證。
-  * 如需詳細資訊，請參閱 <xref:security/authorization/introduction> 。
+  * 如需詳細資訊，請參閱<xref:security/authorization/introduction>。
 
 針對[此 GitHub 討論](https://github.com/dotnet/AspNetCore.Docs/issues/18720)問題中的選擇性用戶端憑證，留下問題、意見和其他意見反應。
 
-&dagger;伺服器名稱指示（SNI）是 TLS 延伸模組，可在 SSL 協調中包含虛擬網域。 這實際上表示虛擬功能變數名稱或主機名稱，可以用來識別網路端點。
+&dagger;伺服器名稱指示 (SNI) 是 TLS 延伸模組，可在 SSL 協調中包含虛擬網域。 這實際上表示虛擬功能變數名稱或主機名稱，可以用來識別網路端點。

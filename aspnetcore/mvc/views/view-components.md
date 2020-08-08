@@ -6,6 +6,8 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 12/18/2019
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -14,12 +16,12 @@ no-loc:
 - Razor
 - SignalR
 uid: mvc/views/view-components
-ms.openlocfilehash: 272b5a89601a9e6ef24f3e60a3da7e2a40297c97
-ms.sourcegitcommit: 50e7c970f327dbe92d45eaf4c21caa001c9106d0
+ms.openlocfilehash: 0c952502d58744bbbe06c92f51bd51bd547fb8ae
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 07/10/2020
-ms.locfileid: "86213113"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88020947"
 ---
 # <a name="view-components-in-aspnet-core"></a>檢視 ASP.NET Core 中的元件
 
@@ -50,7 +52,7 @@ ms.locfileid: "86213113"
 
 檢視元件是由兩個部分所組成：類別 (通常衍生自 [ViewComponent](/dotnet/api/microsoft.aspnetcore.mvc.viewcomponent)) 以及它所傳回的結果 (通常是檢視)。 與控制器類似，檢視元件可以是 POCO，但大部分開發人員會想要利用透過衍生自 `ViewComponent` 而取得的方法和屬性。
 
-考慮 view 元件是否符合應用程式的規格時，請考慮 Razor 改為使用元件。 Razor元件也會結合標記與 c # 程式碼，以產生可重複使用的 UI 單位。 Razor元件是針對開發人員在提供用戶端 UI 邏輯和組合時的生產力而設計的。 如需詳細資訊，請參閱 <xref:blazor/components/index> 。
+考慮 view 元件是否符合應用程式的規格時，請考慮 Razor 改為使用元件。 Razor元件也會結合標記與 c # 程式碼，以產生可重複使用的 UI 單位。 Razor元件是針對開發人員在提供用戶端 UI 邏輯和組合時的生產力而設計的。 如需詳細資訊，請參閱<xref:blazor/components/index>。
 
 ## <a name="creating-a-view-component"></a>建立檢視元件
 
@@ -189,7 +191,7 @@ ms.locfileid: "86213113"
 * `InvokeAsync` 會公開可以從檢視中呼叫的方法，而且可以採用任意數目的引數。
 * `InvokeAsync` 方法會傳回一組符合 `isDone` 和 `maxPriority` 參數的 `ToDo` 項目。
 
-### <a name="create-the-view-component-razor-view"></a>建立視圖元件 Razor 視圖
+### <a name="create-the-view-component-no-locrazor-view"></a>建立視圖元件 Razor 視圖
 
 * 建立 *Views/Shared/Components* 資料夾。 此資料夾**必須**命名為 *Components*。
 

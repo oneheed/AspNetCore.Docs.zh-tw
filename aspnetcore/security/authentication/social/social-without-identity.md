@@ -5,6 +5,8 @@ description: 使用 Facebook、Google、Twitter 等的說明，而不 ASP.NET Co
 ms.author: riande
 ms.date: 12/10/2019
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -13,14 +15,14 @@ no-loc:
 - Razor
 - SignalR
 uid: security/authentication/social/social-without-identity
-ms.openlocfilehash: ed908526604b04f9aebb93935aa3ad4719621526
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: 73055a262ac69c0fd6a7f59e77d23121e71ea3dd
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85406039"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88021662"
 ---
-# <a name="use-social-sign-in-provider-authentication-without-aspnet-core-identity"></a>使用不 ASP.NET Core 的社交登入提供者驗證Identity
+# <a name="use-social-sign-in-provider-authentication-without-aspnet-core-no-locidentity"></a>使用不 ASP.NET Core 的社交登入提供者驗證Identity
 
 By [Kirk Larkin](https://twitter.com/serpent5)和[Rick Anderson](https://twitter.com/RickAndMSFT)
 
@@ -37,7 +39,7 @@ By [Kirk Larkin](https://twitter.com/serpent5)和[Rick Anderson](https://twitter
 * [Twitter 驗證](xref:security/authentication/twitter-logins)
 * [其他提供者](xref:security/authentication/otherlogins)
 
-## <a name="configuration"></a>設定
+## <a name="configuration"></a>組態
 
 在 `ConfigureServices` 方法中，使用 <xref:Microsoft.Extensions.DependencyInjection.AuthenticationServiceCollectionExtensions.AddAuthentication*> 、 <xref:Microsoft.Extensions.DependencyInjection.CookieExtensions.AddCookie*> 和方法來設定應用程式的驗證配置 <xref:Microsoft.Extensions.DependencyInjection.GoogleExtensions.AddGoogle*> ：
 
@@ -51,7 +53,7 @@ By [Kirk Larkin](https://twitter.com/serpent5)和[Rick Anderson](https://twitter
 * <xref:Microsoft.AspNetCore.Authentication.AuthenticationHttpContextExtensions.SignInAsync*>
 * <xref:Microsoft.AspNetCore.Authentication.AuthenticationHttpContextExtensions.SignOutAsync*>
 
-將應用程式的設定 `DefaultScheme` 為[CookieAuthenticationDefaults. AuthenticationScheme](xref:Microsoft.AspNetCore.Authentication.Cookies.CookieAuthenticationDefaults.AuthenticationScheme) （"Cookies"），會將應用程式設為使用 cookie 做為這些擴充方法的預設配置。 將應用程式的設 <xref:Microsoft.AspNetCore.Authentication.AuthenticationOptions.DefaultChallengeScheme> 為[GoogleDefaults. AuthenticationScheme](xref:Microsoft.AspNetCore.Authentication.Google.GoogleDefaults.AuthenticationScheme) （"Google"），會將應用程式設定為使用 Google 做為呼叫的預設配置 `ChallengeAsync` 。 `DefaultChallengeScheme`覆寫 `DefaultScheme` 。 <xref:Microsoft.AspNetCore.Authentication.AuthenticationOptions>如需在設定時覆寫的其他屬性，請參閱 `DefaultScheme` 。
+將應用程式的設 `DefaultScheme` 為[ Cookie AuthenticationDefaults. AuthenticationScheme](xref:Microsoft.AspNetCore.Authentication.Cookies.CookieAuthenticationDefaults.AuthenticationScheme) ( " Cookie s" ) 會將應用程式設定為使用，做為 Cookie 這些擴充方法的預設配置。 將應用程式的設定 <xref:Microsoft.AspNetCore.Authentication.AuthenticationOptions.DefaultChallengeScheme> 為[GoogleDefaults. AuthenticationScheme](xref:Microsoft.AspNetCore.Authentication.Google.GoogleDefaults.AuthenticationScheme) ( "Google" ) 會將應用程式設為使用 Google 做為呼叫的預設配置 `ChallengeAsync` 。 `DefaultChallengeScheme`覆寫 `DefaultScheme` 。 <xref:Microsoft.AspNetCore.Authentication.AuthenticationOptions>如需在設定時覆寫的其他屬性，請參閱 `DefaultScheme` 。
 
 在中，在呼叫 `Startup.Configure` `UseAuthentication` `UseAuthorization` 和之間呼叫和 `UseRouting` `UseEndpoints` 。 這會設定 `HttpContext.User` 屬性，並執行要求的授權中介軟體：
 
@@ -67,7 +69,7 @@ By [Kirk Larkin](https://twitter.com/serpent5)和[Rick Anderson](https://twitter
 
 ## <a name="sign-out"></a>登出
 
-若要登出目前的使用者並刪除其 cookie，請呼叫[SignOutAsync](xref:Microsoft.AspNetCore.Authentication.AuthenticationHttpContextExtensions.SignOutAsync*)。 下列程式碼會將 `Logout` 頁面處理常式新增至 [*索引*] 頁面：
+若要登出目前的使用者並刪除其 cookie ，請呼叫[SignOutAsync](xref:Microsoft.AspNetCore.Authentication.AuthenticationHttpContextExtensions.SignOutAsync*)。 下列程式碼會將 `Logout` 頁面處理常式新增至 [*索引*] 頁面：
 
 [!code-csharp[](social-without-identity/samples_snapshot/3.x/Pages/Index.cshtml.cs?name=snippet&highlight=3-7)]
 
@@ -92,7 +94,7 @@ By [Kirk Larkin](https://twitter.com/serpent5)和[Rick Anderson](https://twitter
 * [Twitter 驗證](xref:security/authentication/twitter-logins)
 * [其他提供者](xref:security/authentication/otherlogins)
 
-## <a name="configuration"></a>設定
+## <a name="configuration"></a>組態
 
 在 `ConfigureServices` 方法中，使用 `AddAuthentication` 、 `AddCookie` 和方法來設定應用程式的驗證配置 `AddGoogle` ：
 
@@ -106,7 +108,7 @@ By [Kirk Larkin](https://twitter.com/serpent5)和[Rick Anderson](https://twitter
 * <xref:Microsoft.AspNetCore.Authentication.AuthenticationHttpContextExtensions.SignInAsync*>
 * <xref:Microsoft.AspNetCore.Authentication.AuthenticationHttpContextExtensions.SignOutAsync*>
 
-將應用程式的設定 `DefaultScheme` 為[CookieAuthenticationDefaults. AuthenticationScheme](xref:Microsoft.AspNetCore.Authentication.Cookies.CookieAuthenticationDefaults.AuthenticationScheme) （"Cookies"），會將應用程式設為使用 cookie 做為這些擴充方法的預設配置。 將應用程式的設 <xref:Microsoft.AspNetCore.Authentication.AuthenticationOptions.DefaultChallengeScheme> 為[GoogleDefaults. AuthenticationScheme](xref:Microsoft.AspNetCore.Authentication.Google.GoogleDefaults.AuthenticationScheme) （"Google"），會將應用程式設定為使用 Google 做為呼叫的預設配置 `ChallengeAsync` 。 `DefaultChallengeScheme`覆寫 `DefaultScheme` 。 <xref:Microsoft.AspNetCore.Authentication.AuthenticationOptions>如需在設定時覆寫的其他屬性，請參閱 `DefaultScheme` 。
+將應用程式的設 `DefaultScheme` 為[ Cookie AuthenticationDefaults. AuthenticationScheme](xref:Microsoft.AspNetCore.Authentication.Cookies.CookieAuthenticationDefaults.AuthenticationScheme) ( " Cookie s" ) 會將應用程式設定為使用，做為 Cookie 這些擴充方法的預設配置。 將應用程式的設定 <xref:Microsoft.AspNetCore.Authentication.AuthenticationOptions.DefaultChallengeScheme> 為[GoogleDefaults. AuthenticationScheme](xref:Microsoft.AspNetCore.Authentication.Google.GoogleDefaults.AuthenticationScheme) ( "Google" ) 會將應用程式設為使用 Google 做為呼叫的預設配置 `ChallengeAsync` 。 `DefaultChallengeScheme`覆寫 `DefaultScheme` 。 <xref:Microsoft.AspNetCore.Authentication.AuthenticationOptions>如需在設定時覆寫的其他屬性，請參閱 `DefaultScheme` 。
 
 在 `Configure` 方法中，呼叫 `UseAuthentication` 方法來叫用設定屬性的驗證中介軟體 `HttpContext.User` 。 呼叫 `UseAuthentication` 或之前，請先呼叫方法 `UseMvcWithDefaultRoute` `UseMvc` ：
 
@@ -122,7 +124,7 @@ By [Kirk Larkin](https://twitter.com/serpent5)和[Rick Anderson](https://twitter
 
 ## <a name="sign-out"></a>登出
 
-若要登出目前的使用者並刪除其 cookie，請呼叫[SignOutAsync](xref:Microsoft.AspNetCore.Authentication.AuthenticationHttpContextExtensions.SignOutAsync*)。 下列程式碼會將 `Logout` 頁面處理常式新增至 [*索引*] 頁面：
+若要登出目前的使用者並刪除其 cookie ，請呼叫[SignOutAsync](xref:Microsoft.AspNetCore.Authentication.AuthenticationHttpContextExtensions.SignOutAsync*)。 下列程式碼會將 `Logout` 頁面處理常式新增至 [*索引*] 頁面：
 
 [!code-csharp[](social-without-identity/samples_snapshot/2.x/Pages/Index.cshtml.cs?name=snippet&highlight=3-7)]
 

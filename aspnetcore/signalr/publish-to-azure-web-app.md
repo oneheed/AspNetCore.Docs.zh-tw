@@ -7,6 +7,8 @@ ms.author: bradyg
 ms.custom: mvc
 ms.date: 11/12/2019
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -15,14 +17,14 @@ no-loc:
 - Razor
 - SignalR
 uid: signalr/publish-to-azure-web-app
-ms.openlocfilehash: d3f48b3171012b03fcaf7665c2089b27d37bbeca
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: 3163a2743c544d0a07d92eb7547e77c3b200ac83
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85408834"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88022533"
 ---
-# <a name="publish-an-aspnet-core-signalr-app-to-azure-app-service"></a>SignalR將 ASP.NET Core 應用程式發佈至 Azure App Service
+# <a name="publish-an-aspnet-core-no-locsignalr-app-to-azure-app-service"></a>SignalR將 ASP.NET Core 應用程式發佈至 Azure App Service
 
 依[Brady Gaster](https://twitter.com/bradygaster)
 
@@ -52,7 +54,7 @@ ms.locfileid: "85408834"
 
 1. 在 [相依性] [新增] 下拉式清單中選取 [ **Azure SignalR 服務** **]**  >  **Add** ：
 
-   ![[相依性] 區域顯示 SignalR [新增] 下拉式清單中的 [Azure 服務] 的選取專案](publish-to-azure-web-app/_static/signalr-service-dependency.png)
+   ![[相依性] 區域會在 [新增] 下拉式清單中顯示 Azure：：： no loc (SignalR) ：：： Service 的選取專案](publish-to-azure-web-app/_static/signalr-service-dependency.png)
 
 1. 在 [ **Azure SignalR 服務**] 對話方塊中，選取 [**建立新的 Azure SignalR 服務實例**]。
 
@@ -74,11 +76,11 @@ Visual Studio 完成下列工作：
 > [!NOTE]
 > *本節僅適用于不使用 Azure 服務的應用程式 SignalR 。*
 >
-> 如果應用程式使用 Azure SignalR 服務，則 App Service 不需要設定本章節所述的應用程式要求路由（ARR）親和性和 Web 通訊端。 用戶端會將其 Web 通訊端連線至 Azure SignalR 服務，而不是直接連接至應用程式。
+> 如果應用程式使用 Azure SignalR 服務，則 App Service 不需要設定應用程式要求路由 (ARR) 親和性和 Web 通訊端這一節中所述。 用戶端會將其 Web 通訊端連線至 Azure SignalR 服務，而不是直接連接至應用程式。
 
 若為不含 Azure 服務的託管應用程式 SignalR ，請啟用：
 
-* [ARR 親和性](https://azure.github.io/AppService/2016/05/16/Disable-Session-affinity-cookie-(ARR-cookie)-for-Azure-web-apps.html)，可將來自使用者的要求路由回到相同的 App Service 實例。 預設設定為 [**開啟**]。
+* [ARR 親和性] (https://azure.github.io/AppService/2016/05/16/Disable-Session-affinity- cookie - (ARR- cookie) # B0 l) ，將來自使用者的要求路由傳送回相同的 App Service 實例。 預設設定為 [**開啟**]。
 * [Web 通訊端](xref:fundamentals/websockets)，允許 Web 通訊端傳輸運作。 預設設定為 [**關閉**]。
 
 1. 在 Azure 入口網站中，流覽至**應用程式服務**中的 web 應用程式。

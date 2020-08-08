@@ -5,6 +5,8 @@ description: 頁面上教學課程系列的第5部分 Razor 。
 ms.author: riande
 ms.date: 12/20/2018
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -13,12 +15,12 @@ no-loc:
 - Razor
 - SignalR
 uid: tutorials/razor-pages/da1
-ms.openlocfilehash: 9ab97ca9a79e055b9013801ccc65bd6707e2b312
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: d8f1a256bfa3491ff1cc7f38a23c61beb719bd49
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85404505"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88022091"
 ---
 # <a name="part-5-update-the-generated-pages-in-an-aspnet-core-app"></a>第5部分，更新 ASP.NET Core 應用程式中產生的頁面
 
@@ -48,7 +50,7 @@ Scaffolded 電影應用程式是一個不錯的起點，但其呈現效果卻不
 
 [!code-cshtml[](~/tutorials/razor-pages/razor-pages-start/snapshot_sample/RazorPagesMovie/Pages/Movies/Index.cshtml?highlight=16-18&range=32-)]
 
-[標記](xref:mvc/views/tag-helpers/intro)協助程式可讓伺服器端程式碼參與建立和轉譯檔案中的 HTML 元素 Razor 。 在上述程式碼中，會 `AnchorTagHelper` 從頁面動態產生 HTML `href` 屬性值 Razor （路由是相對的）、 `asp-page` 和路由識別碼（ `asp-route-id` ）。 如需詳細資訊，請參閱[頁面的 URL 產生](xref:razor-pages/index#url-generation-for-pages)。
+[標記](xref:mvc/views/tag-helpers/intro)協助程式可讓伺服器端程式碼參與建立和轉譯檔案中的 HTML 元素 Razor 。 在上述程式碼中， `AnchorTagHelper` `href` 會從頁面動態產生 HTML 屬性值 Razor ， (路由是相對) 、 `asp-page` 和路由識別碼 (`asp-route-id`) 。 如需詳細資訊，請參閱[頁面的 URL 產生](xref:razor-pages/index#url-generation-for-pages)。
 
 從您最愛的瀏覽器中使用 [檢視原始檔]**** 來檢查產生的標記。 產生的 HTML 部分如下所示：
 
@@ -163,7 +165,7 @@ Scaffolded 電影應用程式是一個不錯的起點，但其呈現效果卻不
 
 [!code-cshtml[](~/tutorials/razor-pages/razor-pages-start/snapshot_sample/RazorPagesMovie/Pages/Movies/Index.cshtml?highlight=16-18&range=32-)]
 
-[標記](xref:mvc/views/tag-helpers/intro)協助程式可讓伺服器端程式碼參與建立和轉譯檔案中的 HTML 元素 Razor 。 在上述程式碼中，會 `AnchorTagHelper` 從頁面動態產生 HTML `href` 屬性值 Razor （路由是相對的）、 `asp-page` 和路由識別碼（ `asp-route-id` ）。 如需詳細資訊，請參閱[頁面的 URL 產生](xref:razor-pages/index#url-generation-for-pages)。
+[標記](xref:mvc/views/tag-helpers/intro)協助程式可讓伺服器端程式碼參與建立和轉譯檔案中的 HTML 元素 Razor 。 在上述程式碼中， `AnchorTagHelper` `href` 會從頁面動態產生 HTML 屬性值 Razor ， (路由是相對) 、 `asp-page` 和路由識別碼 (`asp-route-id`) 。 如需詳細資訊，請參閱[頁面的 URL 產生](xref:razor-pages/index#url-generation-for-pages)。
 
 從您最愛的瀏覽器中使用 [檢視原始檔]**** 來檢查產生的標記。 產生的 HTML 部分如下所示：
 

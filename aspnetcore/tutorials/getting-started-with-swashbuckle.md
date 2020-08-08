@@ -6,6 +6,8 @@ ms.author: scaddie
 ms.custom: mvc
 ms.date: 06/26/2020
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -14,18 +16,18 @@ no-loc:
 - Razor
 - SignalR
 uid: tutorials/get-started-with-swashbuckle
-ms.openlocfilehash: bf6375f8f63bb9db50c423706a48363f53e96549
-ms.sourcegitcommit: f7873c02c1505c99106cbc708f37e18fc0a496d1
+ms.openlocfilehash: 5ecb6379f00c3ad505a447dfc0d3fac5f857cb09
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 07/08/2020
-ms.locfileid: "86147666"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88022182"
 ---
 # <a name="get-started-with-swashbuckle-and-aspnet-core"></a>Swashbuckle 與 ASP.NET Core 使用者入門
 
 由 [Shayne Boyer](https://twitter.com/spboyer) 和 [Scott Addie](https://twitter.com/Scott_Addie) 提供
 
-[查看或下載範例程式碼](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/tutorials/web-api-help-pages-using-swagger/samples/)（[如何下載](xref:index#how-to-download-a-sample)）
+[查看或下載範例程式碼](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/tutorials/web-api-help-pages-using-swagger/samples/) ([如何下載](xref:index#how-to-download-a-sample)) 
 
 Swashbuckle 有三個主要元件：
 
@@ -33,7 +35,7 @@ Swashbuckle 有三個主要元件：
 
 * [Swashbuckle.AspNetCore.SwaggerGen](https://www.nuget.org/packages/Swashbuckle.AspNetCore.SwaggerGen/)：Swagger 產生器，可直接從您的路由、控制器和模型建置 `SwaggerDocument` 物件。 它通常會結合 Swagger 端點中介軟體，以便自動公開 Swagger JSON。
 
-* [Swashbuckle.AspNetCore.SwaggerUI](https://www.nuget.org/packages/Swashbuckle.AspNetCore.SwaggerUI/)：Swagger UI 工具的內嵌版本。 它可解譯 Swagger JSON 來建置描述 Web API 功能的可自訂豐富體驗。 它包含公用方法的內建測試載入器。
+* [Swashbuckle.AspNetCore.SwaggerUI](https://www.nuget.org/packages/Swashbuckle.AspNetCore.SwaggerUI/)：Swagger UI 工具的內嵌版本。 它可以解譯 Swagger JSON，建置豐富、可自訂的 Web API 功能描述體驗。 其中包括公用方法的內建測試載入器。
 
 ## <a name="package-installation"></a>套件安裝
 
@@ -124,7 +126,7 @@ dotnet add TodoApi.csproj package Swashbuckle.AspNetCore -v 5.5.0
 
 上述 `UseSwaggerUI` 方法呼叫會啟用[靜態檔案中介軟體](xref:fundamentals/static-files)。 如果以 .NET Framework 或 .NET Core 1.x 為目標，請將[StaticFiles](https://www.nuget.org/packages/Microsoft.AspNetCore.StaticFiles/) NuGet 套件新增至專案。
 
-啟動應用程式，並巡覽至 `http://localhost:<port>/swagger/v1/swagger.json`。 描述端點的產生檔隨即出現，如[OpenAPI 規格（openapi.json）](xref:tutorials/web-api-help-pages-using-swagger#openapi-specification-openapijson)所示。
+啟動應用程式，並巡覽至 `http://localhost:<port>/swagger/v1/swagger.json`。 描述端點的產生檔隨即出現，如 OpenAPI 規格中所示， [ ( # B0 on) ](xref:tutorials/web-api-help-pages-using-swagger#openapi-specification-openapijson)。
 
 您可以在 `http://localhost:<port>/swagger` 找到 Swagger UI。 透過 Swagger UI 探索 API，並將其併入其他程式。
 
@@ -133,7 +135,7 @@ dotnet add TodoApi.csproj package Swashbuckle.AspNetCore -v 5.5.0
 >
 > [!code-csharp[](../tutorials/web-api-help-pages-using-swagger/samples/2.0/TodoApi.Swashbuckle/Startup3.cs?name=snippet_UseSwaggerUI&highlight=4)]
 
-若使用目錄搭配 IIS 或 反向 Proxy，請將 Swagger 端點設定為使用 `./` 前置詞的相對路徑。 例如： `./swagger/v1/swagger.json` 。 使用 `/swagger/v1/swagger.json` 指示應用程式在 URL 的真實根目錄 (若已使用，請加上路由前置詞) 尋找 JSON 檔案。 例如，請使用 `http://localhost:<port>/<route_prefix>/swagger/v1/swagger.json`，而不要使用 `http://localhost:<port>/<virtual_directory>/<route_prefix>/swagger/v1/swagger.json`。
+若使用目錄搭配 IIS 或 反向 Proxy，請將 Swagger 端點設定為使用 `./` 前置詞的相對路徑。 例如，`./swagger/v1/swagger.json`。 使用 `/swagger/v1/swagger.json` 指示應用程式在 URL 的真實根目錄 (若已使用，請加上路由前置詞) 尋找 JSON 檔案。 例如，請使用 `http://localhost:<port>/<route_prefix>/swagger/v1/swagger.json`，而不要使用 `http://localhost:<port>/<virtual_directory>/<route_prefix>/swagger/v1/swagger.json`。
 
 > [!NOTE]
 > 根據預設，Swashbuckle 會產生並公開3.0 版（ &mdash; 正式稱為 OpenAPI 規格）中的 SWAGGER JSON。 若要支援回溯相容性，您可以改為選擇以2.0 格式公開 JSON。 這種2.0 格式對於目前支援 OpenAPI 2.0 版的 Microsoft Power Apps 和 Microsoft Flow 等整合而言很重要。 若要選擇採用2.0 格式，請 `SerializeAsV2` 在中設定屬性 `Startup.Configure` ：
@@ -310,7 +312,7 @@ namespace TodoApi
 
 在上述程式碼中，[反映](/dotnet/csharp/programming-guide/concepts/reflection)是用來建立符合 Web API 專案的 XML 檔案名。 [AppContext.BaseDirectory](xref:System.AppContext.BaseDirectory*) 屬性用來建構 XML 檔案的路徑。 某些 Swagger 功能 (例如輸入參數的結構描述，或來自相對應屬性的 HTTP 方法和回應碼) 能在不使用 XML 文件檔案的情況下運作。 對於大部分的功能 (也就是方法摘要，以及參數和回應碼的描述) 而言，皆必須使用 XML 檔案。
 
-將三斜線註解新增至動作，即可透過將描述新增至區段標頭來增強 Swagger UI。 [\<summary>](/dotnet/csharp/programming-guide/xmldoc/summary)在動作上方加入元素 `Delete` ：
+透過在區段標題新增描述，對動作新增三斜線註解，可增強 Swagger UI。 [\<summary>](/dotnet/csharp/programming-guide/xmldoc/summary)在動作上方加入元素 `Delete` ：
 
 [!code-csharp[](../tutorials/web-api-help-pages-using-swagger/samples/2.0/TodoApi.Swashbuckle/Controllers/TodoController.cs?name=snippet_Delete&highlight=1-3)]
 
@@ -425,7 +427,7 @@ UI 是由產生的 JSON 結構描述所驅動：
 
 ::: moniker-end
 
-[回應內容類型]**** 下拉式清單會選取此內容類型，作為控制器 GET 動作的預設值：
+[**回應內容類型**] 下拉式選會選取此內容類型，做為控制器的 [取得] 動作的預設值：
 
 ![含有預設回應內容類型的 Swagger UI](web-api-help-pages-using-swagger/_static/json-response-content-type.png)
 
@@ -461,7 +463,7 @@ UI 是由產生的 JSON 結構描述所驅動：
 
 ::: moniker range=">= aspnetcore-2.2"
 
-在 ASP.NET Core 2.2 或更新版本中，慣例可作為使用 `[ProducesResponseType]` 明確裝飾個別動作的替代方案。 如需詳細資訊，請參閱 <xref:web-api/advanced/conventions> 。
+在 ASP.NET Core 2.2 或更新版本中，慣例可作為使用 `[ProducesResponseType]` 明確裝飾個別動作的替代方案。 如需詳細資訊，請參閱<xref:web-api/advanced/conventions>。
 
 為了支援 `[ProducesResponseType]` 裝飾， [Swashbuckle. AspNetCore](https://github.com/domaindrivendev/Swashbuckle.AspNetCore/blob/master/README.md#swashbuckleaspnetcoreannotations)封裝提供了擴充功能，可啟用並充實回應、架構和參數中繼資料。
 

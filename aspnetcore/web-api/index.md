@@ -7,6 +7,8 @@ ms.author: scaddie
 ms.custom: mvc
 ms.date: 07/20/2020
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -15,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: web-api/index
-ms.openlocfilehash: 98fb8c0a26f5f8e7ce5f07066f2f36e748ab2398
-ms.sourcegitcommit: d9ae1f352d372a20534b57e23646c1a1d9171af1
+ms.openlocfilehash: 7c59867f6d6fbf0f4d8207eb5d2919967d825e8b
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 07/21/2020
-ms.locfileid: "86568739"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88021298"
 ---
 # <a name="create-web-apis-with-aspnet-core"></a>使用 ASP.NET Core 建立 Web API
 
@@ -232,7 +234,7 @@ ASP.NET Core MVC 會使用 <xref:Microsoft.AspNetCore.Mvc.Infrastructure.ModelSt
 
 ### <a name="log-automatic-400-responses"></a>記錄自動 400 回應
 
-請參閱[如何在模型驗證錯誤（dotnet/AspNetCore.Docs # 12157）上記錄自動400回應](https://github.com/dotnet/AspNetCore.Docs/issues/12157)。
+請參閱[如何將模型驗證錯誤的自動400回應記錄 (dotnet/AspNetCore.Docs # 12157) ](https://github.com/dotnet/AspNetCore.Docs/issues/12157)。
 
 ### <a name="disable-automatic-400-response"></a>停用自動400回應
 

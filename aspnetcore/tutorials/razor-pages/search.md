@@ -5,6 +5,8 @@ description: 頁面上教學課程系列的第6部分 Razor 。
 ms.author: riande
 ms.date: 12/05/2019
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -13,14 +15,14 @@ no-loc:
 - Razor
 - SignalR
 uid: tutorials/razor-pages/search
-ms.openlocfilehash: b0ee3294a4646b199f85d6a023e152e5eabaa225
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: b28d228449549e1071df4100ee2d52626c50845b
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85408782"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88021636"
 ---
-# <a name="part-6-add-search-to-aspnet-core-razor-pages"></a>第6部分，將搜尋新增至 ASP.NET Core Razor 頁面
+# <a name="part-6-add-search-to-aspnet-core-no-locrazor-pages"></a>第6部分，將搜尋新增至 ASP.NET Core Razor 頁面
 
 作者：[Rick Anderson](https://twitter.com/RickAndMSFT)
 
@@ -109,7 +111,7 @@ HTML `<form>` 標籤會使用下列[標籤協助程式](xref:mvc/views/tag-helpe
 
 [!code-csharp[](razor-pages-start/sample/RazorPagesMovie30/Pages/Movies/Index.cshtml.cs?name=snippet_SelectList)]
 
-### <a name="add-search-by-genre-to-the-razor-page"></a>將依內容類型搜尋新增至 Razor 頁面
+### <a name="add-search-by-genre-to-the-no-locrazor-page"></a>將依內容類型搜尋新增至 Razor 頁面
 
 更新 *Index.cshtml*，如下所示：
 
@@ -211,7 +213,7 @@ HTML `<form>` 標籤會使用下列[標籤協助程式](xref:mvc/views/tag-helpe
 
 [!code-csharp[](razor-pages-start/sample/RazorPagesMovie22/Pages/Movies/Index.cshtml.cs?name=snippet_SelectList)]
 
-### <a name="add-search-by-genre-to-the-razor-page"></a>將依內容類型搜尋新增至 Razor 頁面
+### <a name="add-search-by-genre-to-the-no-locrazor-page"></a>將依內容類型搜尋新增至 Razor 頁面
 
 更新 *Index.cshtml*，如下所示：
 

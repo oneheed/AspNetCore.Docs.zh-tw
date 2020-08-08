@@ -6,6 +6,8 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 06/12/2019
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -14,18 +16,18 @@ no-loc:
 - Razor
 - SignalR
 uid: mvc/views/partial
-ms.openlocfilehash: 47bd91f4d2bf166a4d0c9a0829e24cbe26a81a10
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: 826d7cf96d95ee7eb98b0f05a233401a1e3bff33
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85399708"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88020830"
 ---
 # <a name="partial-views-in-aspnet-core"></a>ASP.NET Core 中的部分檢視
 
 作者：[Steve Smith](https://ardalis.com/)、[Maher JENDOUBI](https://twitter.com/maherjend)、[Rick Anderson](https://twitter.com/RickAndMSFT) 和 [Scott Sauber](https://twitter.com/scottsauber)
 
-部分視圖是在 [Razor](xref:mvc/views/razor) 另一個標記檔案轉譯輸出*中*呈現 HTML 輸出的標記檔案（*. cshtml*）。
+部分視圖是在 [Razor](xref:mvc/views/razor) 另一個標記檔案轉譯輸出*中*呈現 HTML 輸出的標記檔案 (*. cshtml*) 。
 
 ::: moniker range=">= aspnetcore-2.1"
 
@@ -33,7 +35,7 @@ ms.locfileid: "85399708"
 
 ::: moniker-end
 
-[查看或下載範例程式碼](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/mvc/views/partial/sample)（[如何下載](xref:index#how-to-download-a-sample)）
+[查看或下載範例程式碼](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/mvc/views/partial/sample) ([如何下載](xref:index#how-to-download-a-sample)) 
 
 ## <a name="when-to-use-partial-views"></a>使用部分檢視的時機
 
@@ -54,7 +56,7 @@ ms.locfileid: "85399708"
 
 ::: moniker range=">= aspnetcore-2.0"
 
-部分視圖是在*Views*資料夾（MVC）或*pages*資料夾（pages）中維護的 *. cshtml*標記檔案。 Razor
+部分視圖是在*Views*資料夾內維護的 *. cshtml*標記檔， (MVC) 或*pages*資料夾 (Razor 頁面) 。
 
 在 ASP.NET Core MVC 中，控制器的 <xref:Microsoft.AspNetCore.Mvc.ViewResult> 能夠傳回檢視或部分檢視。 在 Razor 頁面中， <xref:Microsoft.AspNetCore.Mvc.RazorPages.PageModel> 可以傳回以物件表示的部分視圖 <xref:Microsoft.AspNetCore.Mvc.PartialViewResult> 。 [參考部分檢視](#reference-a-partial-view)一節介紹參考和轉譯部分檢視。
 
@@ -80,7 +82,7 @@ ms.locfileid: "85399708"
 
 ::: moniker range=">= aspnetcore-2.0"
 
-### <a name="use-a-partial-view-in-a-razor-pages-pagemodel"></a>在頁面 PageModel 中使用部分視圖 Razor
+### <a name="use-a-partial-view-in-a-no-locrazor-pages-pagemodel"></a>在頁面 PageModel 中使用部分視圖 Razor
 
 在 ASP.NET Core 2.0 或2.1 中，下列處理常式方法會將* \_ AuthorPartialRP*部分視圖呈現給回應：
 
@@ -165,7 +167,7 @@ public IActionResult OnGetPartial() =>
 <partial name="../Account/_PartialName.cshtml" />
 ```
 
-如需詳細資訊，請參閱 <xref:mvc/views/tag-helpers/builtin-th/partial-tag-helper> 。
+如需詳細資訊，請參閱<xref:mvc/views/tag-helpers/builtin-th/partial-tag-helper>。
 
 ::: moniker-end
 

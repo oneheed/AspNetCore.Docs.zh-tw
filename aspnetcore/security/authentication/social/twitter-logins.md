@@ -7,6 +7,8 @@ ms.custom: mvc
 ms.date: 03/19/2020
 monikerRange: '>= aspnetcore-3.0'
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -15,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: security/authentication/twitter-logins
-ms.openlocfilehash: 61c983de33b91a16ad207d8a350daf4859c89eaf
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: 977ab550dab0e654352f20264e7b032e063690e4
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85406091"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88021818"
 ---
 # <a name="twitter-external-sign-in-setup-with-aspnet-core"></a>使用 ASP.NET Core 的 Twitter 外部登錄設定
 
@@ -34,13 +36,13 @@ ms.locfileid: "85406091"
 
 * 流覽至 [https://apps.twitter.com/](https://apps.twitter.com/) 並登入。 如果您還沒有 Twitter 帳戶，請使用 [**[立即註冊](https://twitter.com/signup)**] 連結來建立一個。
 
-* 選取 [**建立應用程式**]。 填寫 [應用程式**名稱**]、[**應用程式描述**] 和 [公用**網站**URI] （這可以是暫時性的，直到您註冊功能變數名稱）：
+* 選取 [**建立應用程式**]。 填寫 [應用程式**名稱**]、[**應用程式描述**] 和 [公用**網站**URI] (這可以是暫時性的，直到您註冊功能變數名稱) ：
 
 * 核取 [**啟用使用 Twitter 登入**] 旁的核取方塊
 
 * AspNetCore。Identity 根據預設，使用者需要有電子郵件地址。 前往 [**許可權**] 索引標籤，按一下 [**編輯**] 按鈕，然後核取 [**要求使用者的電子郵件地址**] 旁的方塊。
 
-* 輸入您的開發 URI，並 `/signin-twitter` 附加至 [**回呼 url** ] 欄位（例如： `https://webapp128.azurewebsites.net/signin-twitter` ）。 稍後在此範例中設定的 Twitter 驗證配置會自動處理 `/signin-twitter` 路由上的要求，以執行 OAuth 流程。
+* 輸入 `/signin-twitter` 附加至 [**回呼 url** ] 欄位的開發 URI， (例如： `https://webapp128.azurewebsites.net/signin-twitter`) 。 稍後在此範例中設定的 Twitter 驗證配置會自動處理 `/signin-twitter` 路由上的要求，以執行 OAuth 流程。
 
   > [!NOTE]
   > URI 區段 `/signin-twitter` 會設定為 Twitter 驗證提供者的預設回呼。 您可以在設定 Twitter 驗證中介軟體時，透過[TwitterOptions](/dotnet/api/microsoft.aspnetcore.authentication.twitter.twitteroptions)類別的繼承[RemoteAuthenticationOptions. CallbackPath](/dotnet/api/microsoft.aspnetcore.authentication.remoteauthenticationoptions.callbackpath)屬性來變更預設的回呼 URI。

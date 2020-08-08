@@ -6,6 +6,8 @@ ms.author: riande
 ms.date: 03/26/2020
 ms.custom: mvc, seodec18
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -14,14 +16,14 @@ no-loc:
 - Razor
 - SignalR
 uid: security/authentication/add-user-data
-ms.openlocfilehash: e5c23cc49a52b8772a43853e9e953dd416d69f69
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: d65974e9ff8e2f5be52ab79b063ed9d2dca557ea
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85408730"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88020856"
 ---
-# <a name="add-download-and-delete-custom-user-data-to-identity-in-an-aspnet-core-project"></a>在 ASP.NET Core 專案中加入、下載和刪除自訂使用者資料 Identity
+# <a name="add-download-and-delete-custom-user-data-to-no-locidentity-in-an-aspnet-core-project"></a>在 ASP.NET Core 專案中加入、下載和刪除自訂使用者資料 Identity
 
 作者：[Rick Anderson](https://twitter.com/RickAndMSFT)
 
@@ -32,7 +34,7 @@ ms.locfileid: "85408730"
 
 專案範例是從 Razor 頁面 web 應用程式建立的，但這些指示類似于 ASP.NET CORE MVC web 應用程式。
 
-[查看或下載範例程式碼](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/security/authentication/add-user-data)（[如何下載](xref:index#how-to-download-a-sample)）
+[查看或下載範例程式碼](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/security/authentication/add-user-data) ([如何下載](xref:index#how-to-download-a-sample)) 
 
 ## <a name="prerequisites"></a>必要條件
 
@@ -48,7 +50,7 @@ ms.locfileid: "85408730"
 
 ::: moniker-end
 
-## <a name="create-a-razor-web-app"></a>建立 Razor web 應用程式
+## <a name="create-a-no-locrazor-web-app"></a>建立 Razor web 應用程式
 
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
@@ -81,7 +83,7 @@ dotnet new webapp -o WebApp1
 
 ---
 
-## <a name="run-the-identity-scaffolder"></a>執行 Identity scaffolder
+## <a name="run-the-no-locidentity-scaffolder"></a>執行 Identity scaffolder
 
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
@@ -92,9 +94,9 @@ dotnet new webapp -o WebApp1
   * 選取要覆寫的下列檔案：
     * **帳戶/註冊**
     * **帳戶/管理/索引**
-  * 選取 [] **+** 按鈕以建立新的**資料內容類別**。 如果專案名為**WebApp1**，請接受類型（**WebApp1. WebApp1CoNtext** ）。
-  * 選取 [] **+** 按鈕以建立新的**使用者類別**。 接受類型（如果專案名為**WebApp1**，則為**WebApp1User** ） >**新增**]。
-* 選取 [新增]****。
+  * 選取 [] **+** 按鈕以建立新的**資料內容類別**。 如果專案名為**WebApp1**) ，請接受類型 (**WebApp1** 。
+  * 選取 [] **+** 按鈕以建立新的**使用者類別**。 如果專案的名稱為**WebApp1** ，請接受 (**WebApp1User**的類型) >**新增**]。
+* 選取 [新增]。
 
 # <a name="net-core-cli"></a>[.NET Core CLI](#tab/netcore-cli)
 
@@ -104,7 +106,7 @@ dotnet new webapp -o WebApp1
 dotnet tool install -g dotnet-aspnet-codegenerator
 ```
 
-將 Nswag.codegeneration.csharp 的套件參考新增至專案（.csproj）檔案。（ [VisualStudio](https://www.nuget.org/packages/Microsoft.VisualStudio.Web.CodeGeneration.Design/) ）。 在專案目錄中執行下列命令：
+將[VisualStudio](https://www.nuget.org/packages/Microsoft.VisualStudio.Web.CodeGeneration.Design/)的套件參考新增至專案 ( .csproj) 檔案中。 在專案目錄中執行下列命令：
 
 ```dotnetcli
 dotnet add package Microsoft.VisualStudio.Web.CodeGeneration.Design
@@ -132,12 +134,12 @@ dotnet aspnet-codegenerator identity -u WebApp1User -fi Account.Register;Account
 * 將加入至配置檔案 `<partial name="_LoginPartial" />` 。
 * 測試應用程式：
   * 註冊使用者
-  * 選取新的使用者名稱（[**登出**] 連結旁）。 您可能需要展開視窗，或選取 [導覽列] 圖示，以顯示使用者名稱和其他連結。
+  * 在 [**登出**] 連結) 旁，選取新的使用者名稱 (。 您可能需要展開視窗，或選取 [導覽列] 圖示，以顯示使用者名稱和其他連結。
   * 選取 [**個人資料**] 索引標籤。
   * 選取 [**下載**] 按鈕，並*在檔案上檢查PersonalData.js* 。
   * 測試**刪除**按鈕，這會刪除已登入的使用者。
 
-## <a name="add-custom-user-data-to-the-identity-db"></a>將自訂使用者資料新增至 Identity 資料庫
+## <a name="add-custom-user-data-to-the-no-locidentity-db"></a>將自訂使用者資料新增至 Identity 資料庫
 
 `IdentityUser`以自訂屬性更新衍生類別。 如果您將專案命名為 WebApp1，檔案就會命名為*Areas/ Identity /Data/WebApp1User.cs*。 使用下列程式碼更新檔案：
 
@@ -237,7 +239,7 @@ dotnet ef database update
 * 在頁面上，查看自訂使用者資料 `/Identity/Account/Manage` 。
 * 從頁面下載並查看使用者的個人資料 `/Identity/Account/Manage/PersonalData` 。
 
-## <a name="add-claims-to-identity-using-iuserclaimsprincipalfactoryapplicationuser"></a>使用 IUserClaimsPrincipalFactory 將宣告新增至 Identity<ApplicationUser>
+## <a name="add-claims-to-no-locidentity-using-iuserclaimsprincipalfactoryapplicationuser"></a>使用 IUserClaimsPrincipalFactory 將宣告新增至 Identity<ApplicationUser>
 
 > [!NOTE]
 > 本章節不是上一個教學課程的延伸。 若要將下列步驟套用至使用教學課程所建立的應用程式，請參閱[此 GitHub 問題](https://github.com/dotnet/AspNetCore.Docs/issues/18797)。

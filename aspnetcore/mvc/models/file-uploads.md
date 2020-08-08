@@ -7,6 +7,8 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 05/03/2020
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -15,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: mvc/models/file-uploads
-ms.openlocfilehash: 720da8a8fe22f0e1911fd554c094661b4465a335
-ms.sourcegitcommit: d9ae1f352d372a20534b57e23646c1a1d9171af1
+ms.openlocfilehash: a11e6325143b9db57d6fbd1cd67478dc1dd6122d
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 07/21/2020
-ms.locfileid: "86568830"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88021246"
 ---
 # <a name="upload-files-in-aspnet-core"></a>上傳 ASP.NET Core 中的檔案
 
@@ -30,7 +32,7 @@ ms.locfileid: "86568830"
 
 ASP.NET Core 支援針對較小的檔案上傳一個或多個檔案，並針對較大的檔案使用緩衝的串流處理。
 
-[查看或下載範例程式碼](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/mvc/models/file-uploads/samples/)（[如何下載](xref:index#how-to-download-a-sample)）
+[查看或下載範例程式碼](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/mvc/models/file-uploads/samples/) ([如何下載](xref:index#how-to-download-a-sample)) 
 
 ## <a name="security-considerations"></a>安全性考量
 
@@ -44,7 +46,7 @@ ASP.NET Core 支援針對較小的檔案上傳一個或多個檔案，並針對�
 
 * 將檔案上傳到專用的檔案上傳區域，最好是在非系統磁片磁碟機上。 專用位置可讓您更輕鬆地對上傳的檔案強加安全性限制。 停用檔案上傳位置的 execute 許可權。&dagger;
 * 請勿將上傳的**檔案保存在**與應用程式相同的目錄樹狀結構中。&dagger;
-* 使用應用程式所決定的安全檔案名。 請勿使用使用者所提供的檔案名或上傳檔案的不受信任檔案名。 &dagger;HTML 會在顯示不受信任的檔案名時進行編碼。 例如，記錄檔案名或在 UI 中顯示（自動以 Razor HTML 編碼輸出）。
+* 使用應用程式所決定的安全檔案名。 請勿使用使用者所提供的檔案名或上傳檔案的不受信任檔案名。 &dagger;HTML 會在顯示不受信任的檔案名時進行編碼。 例如，記錄檔案名或在 UI 中顯示 (Razor 會自動以 HTML 編碼輸出) 。
 * 僅允許應用程式設計規格的已核准副檔名。&dagger; <!-- * Check the file format signature to prevent a user from uploading a masqueraded file.&dagger; For example, don't permit a user to upload an *.exe* file with a *.txt* extension. Add this back when we get instructions how to do this.  -->
 * 確認用戶端檢查是在伺服器上執行。 &dagger;用戶端檢查很容易規避。
 * 檢查上傳檔案的大小。 設定最大大小限制以防止大量上傳。&dagger;
@@ -74,11 +76,11 @@ ASP.NET Core 支援針對較小的檔案上傳一個或多個檔案，並針對�
 
 * 資料庫
 
-  * 針對小型檔案上傳，資料庫的速度通常會比實體儲存體（檔案系統或網路共用）選項快。
-  * 資料庫通常比實體儲存體選項更方便，因為抓取使用者資料的資料庫記錄可以同時提供檔案內容（例如，頭像影像）。
+  * 針對小型檔案上傳，資料庫通常會比實體儲存體 (檔案系統或網路共用) 選項更快。
+  * 資料庫通常比實體儲存體選項更方便，因為抓取使用者資料的資料庫記錄可以同時提供檔案內容 (例如，) 的頭像影像。
   * 資料庫的成本可能比使用資料儲存體服務來得低。
 
-* 實體存放裝置（檔案系統或網路共用）
+* 實體存放裝置 (檔案系統或網路共用) 
 
   * 針對大型檔案上傳：
     * 資料庫限制可能會限制上傳的大小。
@@ -86,7 +88,7 @@ ASP.NET Core 支援針對較小的檔案上傳一個或多個檔案，並針對�
   * 實體儲存體的成本可能比使用資料儲存體服務來得低。
   * 應用程式的進程必須具有儲存位置的讀取和寫入權限。 **絕對不要授與 execute 許可權。**
 
-* 資料儲存體服務（例如[Azure Blob 儲存體](https://azure.microsoft.com/services/storage/blobs/)）
+* 資料儲存體服務 (例如[Azure Blob 儲存體](https://azure.microsoft.com/services/storage/blobs/)) 
 
   * 服務通常會針對內部部署解決方案提供改良的擴充性和彈性，通常會受到單一失敗點的影響。
   * 在大型儲存體基礎結構案例中，服務可能會降低成本。
@@ -101,7 +103,7 @@ ASP.NET Core 支援針對較小的檔案上傳一個或多個檔案，並針對�
 
 整個檔案會讀入 <xref:Microsoft.AspNetCore.Http.IFormFile> ，這是用來處理或儲存檔案之檔案的 c # 標記法。
 
-檔案上傳所使用的資源（磁片、記憶體）取決於並行檔案上傳的數目和大小。 如果應用程式嘗試緩衝過多上傳，則當網站用盡記憶體或磁碟空間時，會損毀。 如果檔案上傳的大小或頻率是耗盡應用程式資源，請使用串流。
+ (磁片的資源、檔案上傳所使用的記憶體) ，取決於並行檔案上傳的數目和大小。 如果應用程式嘗試緩衝過多上傳，則當網站用盡記憶體或磁碟空間時，會損毀。 如果檔案上傳的大小或頻率是耗盡應用程式資源，請使用串流。
 
 > [!NOTE]
 > 任何超過 64 KB 的已緩衝檔案都會從記憶體移至磁片上的暫存檔案。
@@ -121,7 +123,7 @@ ASP.NET Core 支援針對較小的檔案上傳一個或多個檔案，並針對�
 
 若要上傳小型檔案，請使用多部分表單，或使用 JavaScript 來建立 POST 要求。
 
-下列範例示範 Razor 如何使用頁面表單來上傳單一檔案（範例應用程式中的*Pages/BufferedSingleFileUploadPhysical. cshtml* ）：
+下列範例示範 Razor 如何使用頁面表單，將範例應用程式中的單一檔案 *（ (Pages/BufferedSingleFileUploadPhysical* ）上傳) ：
 
 ```cshtml
 <form enctype="multipart/form-data" method="post">
@@ -140,7 +142,7 @@ ASP.NET Core 支援針對較小的檔案上傳一個或多個檔案，並針對�
 
 下列範例類似于先前的範例，不同之處在于：
 
-* JavaScript 的（[FETCH API](https://developer.mozilla.org/docs/Web/API/Fetch_API)）是用來提交表單的資料。
+* JavaScript 的 ([FETCH API](https://developer.mozilla.org/docs/Web/API/Fetch_API)) 是用來提交表單的資料。
 * 沒有驗證。
 
 ```cshtml
@@ -190,8 +192,8 @@ ASP.NET Core 支援針對較小的檔案上傳一個或多個檔案，並針對�
 
 若要針對[不支援 FETCH API](https://caniuse.com/#feat=fetch)的用戶端，以 JavaScript 執行表單 POST，請使用下列其中一種方法：
 
-* 使用提取 Polyfill （例如，[fetch [Polyfill （github/fetch）]](https://github.com/github/fetch)）。
-* 使用 `XMLHttpRequest`。 例如：
+* 使用提取 Polyfill (例如， [ (github/提取) ](https://github.com/github/fetch)) 的 fetch Polyfill。
+* 請使用 `XMLHttpRequest`。 例如：
 
   ```javascript
   <script>
@@ -209,7 +211,7 @@ ASP.NET Core 支援針對較小的檔案上傳一個或多個檔案，並針對�
   </script>
   ```
 
-為了支援檔案上傳，HTML 表單必須指定的編碼類型（ `enctype` ） `multipart/form-data` 。
+為了支援檔案上傳，HTML 表單必須指定 (`enctype`) 的編碼類型 `multipart/form-data` 。
 
 `files`若要讓輸入元素支援上傳多個檔案，請在 `multiple` 元素上提供屬性 `<input>` ：
 
@@ -248,7 +250,7 @@ ASP.NET Core 支援針對較小的檔案上傳一個或多個檔案，並針對�
   * [名單](xref:System.Collections.Generic.List`1)\<<xref:Microsoft.AspNetCore.Http.IFormFile>>
 
 > [!NOTE]
-> 系結符合依名稱的表單檔案。 例如，中的 HTML `name` 值 `<input type="file" name="formFile">` 必須符合 c # 參數/屬性系結（ `FormFile` ）。 如需詳細資訊，請參閱[Match name 屬性值與 POST 方法的參數名稱](#match-name-attribute-value-to-parameter-name-of-post-method)一節。
+> 系結符合依名稱的表單檔案。 例如，中的 HTML `name` 值 `<input type="file" name="formFile">` 必須符合 c # 參數/屬性系結 (`FormFile`) 。 如需詳細資訊，請參閱[Match name 屬性值與 POST 方法的參數名稱](#match-name-attribute-value-to-parameter-name-of-post-method)一節。
 
 下列範例將：
 
@@ -414,7 +416,7 @@ public async Task<IActionResult> OnPostUploadAsync()
 
 下列範例示範如何使用 JavaScript 將檔案串流至控制器動作。 檔案的 antiforgery token 是使用自訂篩選屬性所產生，並傳遞至用戶端 HTTP 標頭，而不是在要求主體中。 由於動作方法會直接處理上傳的資料，因此表單模型系結會由另一個自訂篩選器停用。 在動作內，會使用 `MultipartReader` 來讀取表單內容，以讀取每個個別 `MultipartSection`、處理檔案，或視需要儲存內容。 讀取多部分區段之後，動作會執行自己的模型系結。
 
-初始頁面回應會載入表單，並將 antiforgery token 儲存在 cookie 中（透過 `GenerateAntiforgeryTokenCookieAttribute` 屬性）。 屬性會使用 ASP.NET Core 的內建[antiforgery 支援](xref:security/anti-request-forgery)來設定具有要求權杖的 cookie：
+初始頁面回應會載入表單，並透過) 的屬性，將 antiforgery token 儲存在 cookie (中 `GenerateAntiforgeryTokenCookieAttribute` 。 屬性會使用 ASP.NET Core 的內建[antiforgery 支援](xref:security/anti-request-forgery)來設定 cookie 具有要求權杖的：
 
 [!code-csharp[](file-uploads/samples/3.x/SampleApp/Filters/Antiforgery.cs?name=snippet_GenerateAntiforgeryTokenCookieAttribute)]
 
@@ -426,13 +428,13 @@ public async Task<IActionResult> OnPostUploadAsync()
 
 [!code-csharp[](file-uploads/samples/3.x/SampleApp/Startup.cs?name=snippet_AddRazorPages&highlight=7-10,16-19)]
 
-由於模型系結不會讀取表單，因此從表單系結的參數不會系結（查詢、路由及標頭會繼續正常執行）。 動作方法會直接與屬性搭配運作 `Request` 。 `MultipartReader` 是用來讀取每個區段。 索引鍵/值資料會儲存在中 `KeyValueAccumulator` 。 讀取多部分區段之後，會使用的內容將 `KeyValueAccumulator` 表單資料系結至模型類型。
+由於模型系結不會讀取表單，因此從表單系結的參數不會系結 (查詢、路由及標頭會繼續) 作業。 動作方法會直接與屬性搭配運作 `Request` 。 `MultipartReader` 是用來讀取每個區段。 索引鍵/值資料會儲存在中 `KeyValueAccumulator` 。 讀取多部分區段之後，會使用的內容將 `KeyValueAccumulator` 表單資料系結至模型類型。
 
 `StreamingController.UploadDatabase`使用 EF Core 串流至資料庫的完整方法：
 
 [!code-csharp[](file-uploads/samples/3.x/SampleApp/Controllers/StreamingController.cs?name=snippet_UploadDatabase)]
 
-`MultipartRequestHelper`（*公用程式/MultipartRequestHelper .cs*）：
+`MultipartRequestHelper` (*公用程式/MultipartRequestHelper .cs*) ：
 
 [!code-csharp[](file-uploads/samples/3.x/SampleApp/Utilities/MultipartRequestHelper.cs)]
 
@@ -508,7 +510,7 @@ using (var reader = new BinaryReader(uploadedFileData))
 
 ### <a name="file-name-security"></a>檔案名安全性
 
-絕對不要使用用戶端提供的檔案名將檔案儲存至實體存放裝置。 使用[GetRandomFileName](xref:System.IO.Path.GetRandomFileName*)或[GetTempFileName](xref:System.IO.Path.GetTempFileName*)建立檔案的安全檔案名，以建立暫存儲存體的完整路徑（包括檔案名）。
+絕對不要使用用戶端提供的檔案名將檔案儲存至實體存放裝置。 建立檔案的安全檔案名，方法是使用[GetRandomFileName](xref:System.IO.Path.GetRandomFileName*)或[GetTempFileName](xref:System.IO.Path.GetTempFileName*)來建立完整路徑， (包括暫時儲存) 的檔案名。
 
 Razor自動對屬性值進行 HTML 編碼以供顯示。 以下是可安全使用的程式碼：
 
@@ -530,7 +532,7 @@ Razor自動對屬性值進行 HTML 編碼以供顯示。 以下是可安全使�
 
 限制上傳檔案的大小。
 
-在範例應用程式中，檔案大小限制為 2 MB （以位元組表示）。 此限制是透過檔案[Configuration](xref:fundamentals/configuration/index) *上appsettings.js*的設定來提供：
+在範例應用程式中，檔案大小限制為 2 MB (以位元組) 表示。 此限制是透過檔案[Configuration](xref:fundamentals/configuration/index) *上appsettings.js*的設定來提供：
 
 ```json
 {
@@ -585,7 +587,7 @@ if (formFile.Length > _fileSizeLimit)
   }
   ```
 
-針對 c # 方法的參數使用相符的名稱（ `battlePlans` ）：
+針對 c # 方法的參數使用相符的名稱 (`battlePlans`) ：
 
 * 針對名為的 Razor 頁面頁面處理常式方法 `Upload` ：
 
@@ -603,7 +605,7 @@ if (formFile.Length > _fileSizeLimit)
 
 ### <a name="multipart-body-length-limit"></a>多部分主體長度限制
 
-<xref:Microsoft.AspNetCore.Http.Features.FormOptions.MultipartBodyLengthLimit>設定每個多部分主體的長度限制。 超過此限制的表單區段會 <xref:System.IO.InvalidDataException> 在剖析時擲回。 預設值為134217728（128 MB）。 使用中的設定來自訂限制 <xref:Microsoft.AspNetCore.Http.Features.FormOptions.MultipartBodyLengthLimit> `Startup.ConfigureServices` ：
+<xref:Microsoft.AspNetCore.Http.Features.FormOptions.MultipartBodyLengthLimit>設定每個多部分主體的長度限制。 超過此限制的表單區段會 <xref:System.IO.InvalidDataException> 在剖析時擲回。 預設值為 134217728 (128 MB) 。 使用中的設定來自訂限制 <xref:Microsoft.AspNetCore.Http.Features.FormOptions.MultipartBodyLengthLimit> `Startup.ConfigureServices` ：
 
 ```csharp
 public void ConfigureServices(IServiceCollection services)
@@ -707,7 +709,7 @@ public class BufferedSingleFileUploadPhysicalModel : PageModel
 
 ### <a name="iis-content-length-limit"></a>IIS 內容長度限制
 
-預設要求限制（ `maxAllowedContentLength` ）是30000000個位元組，大約是 28.6 mb。 自訂*web.config*檔案中的限制：
+ () 的預設要求限制 `maxAllowedContentLength` 為30000000個位元組，大約是 28.6 mb。 自訂*web.config*檔案中的限制：
 
 ```xml
 <system.webServer>
@@ -722,7 +724,7 @@ public class BufferedSingleFileUploadPhysicalModel : PageModel
 
 這個設定只適用於 IIS。 在 Kestrel 上裝載時，預設不會發生此行為。 如需詳細資訊，請參閱[要求限制 \<requestLimits> ](/iis/configuration/system.webServer/security/requestFiltering/requestLimits/)。
 
-ASP.NET Core 模組的限制或 IIS 要求篩選模組的存在，可能會將上傳限制為2或 4 GB。 如需詳細資訊，請參閱[無法上傳大小大於 2 gb 的檔案（dotnet/AspNetCore #2711）](https://github.com/dotnet/AspNetCore/issues/2711)。
+ASP.NET Core 模組的限制或 IIS 要求篩選模組的存在，可能會將上傳限制為2或 4 GB。 如需詳細資訊，請參閱[無法上傳大小大於 2 gb 的檔案 (dotnet/AspNetCore #2711) ](https://github.com/dotnet/AspNetCore/issues/2711)。
 
 ## <a name="troubleshoot"></a>疑難排解
 
@@ -757,7 +759,7 @@ The request filtering module is configured to deny a request that exceeds the re
 
 ASP.NET Core 支援針對較小的檔案上傳一個或多個檔案，並針對較大的檔案使用緩衝的串流處理。
 
-[查看或下載範例程式碼](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/mvc/models/file-uploads/samples/)（[如何下載](xref:index#how-to-download-a-sample)）
+[查看或下載範例程式碼](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/mvc/models/file-uploads/samples/) ([如何下載](xref:index#how-to-download-a-sample)) 
 
 ## <a name="security-considerations"></a>安全性考量
 
@@ -771,7 +773,7 @@ ASP.NET Core 支援針對較小的檔案上傳一個或多個檔案，並針對�
 
 * 將檔案上傳到專用的檔案上傳區域，最好是在非系統磁片磁碟機上。 專用位置可讓您更輕鬆地對上傳的檔案強加安全性限制。 停用檔案上傳位置的 execute 許可權。&dagger;
 * 請勿將上傳的**檔案保存在**與應用程式相同的目錄樹狀結構中。&dagger;
-* 使用應用程式所決定的安全檔案名。 請勿使用使用者所提供的檔案名或上傳檔案的不受信任檔案名。 &dagger;HTML 會在顯示不受信任的檔案名時進行編碼。 例如，記錄檔案名或在 UI 中顯示（自動以 Razor HTML 編碼輸出）。
+* 使用應用程式所決定的安全檔案名。 請勿使用使用者所提供的檔案名或上傳檔案的不受信任檔案名。 &dagger;HTML 會在顯示不受信任的檔案名時進行編碼。 例如，記錄檔案名或在 UI 中顯示 (Razor 會自動以 HTML 編碼輸出) 。
 * 僅允許應用程式設計規格的已核准副檔名。&dagger; <!-- * Check the file format signature to prevent a user from uploading a masqueraded file.&dagger; For example, don't permit a user to upload an *.exe* file with a *.txt* extension. Add this back when we get instructions how to do this.  -->
 * 確認用戶端檢查是在伺服器上執行。 &dagger;用戶端檢查很容易規避。
 * 檢查上傳檔案的大小。 設定最大大小限制以防止大量上傳。&dagger;
@@ -801,11 +803,11 @@ ASP.NET Core 支援針對較小的檔案上傳一個或多個檔案，並針對�
 
 * 資料庫
 
-  * 針對小型檔案上傳，資料庫的速度通常會比實體儲存體（檔案系統或網路共用）選項快。
-  * 資料庫通常比實體儲存體選項更方便，因為抓取使用者資料的資料庫記錄可以同時提供檔案內容（例如，頭像影像）。
+  * 針對小型檔案上傳，資料庫通常會比實體儲存體 (檔案系統或網路共用) 選項更快。
+  * 資料庫通常比實體儲存體選項更方便，因為抓取使用者資料的資料庫記錄可以同時提供檔案內容 (例如，) 的頭像影像。
   * 資料庫的成本可能比使用資料儲存體服務來得低。
 
-* 實體存放裝置（檔案系統或網路共用）
+* 實體存放裝置 (檔案系統或網路共用) 
 
   * 針對大型檔案上傳：
     * 資料庫限制可能會限制上傳的大小。
@@ -813,7 +815,7 @@ ASP.NET Core 支援針對較小的檔案上傳一個或多個檔案，並針對�
   * 實體儲存體的成本可能比使用資料儲存體服務來得低。
   * 應用程式的進程必須具有儲存位置的讀取和寫入權限。 **絕對不要授與 execute 許可權。**
 
-* 資料儲存體服務（例如[Azure Blob 儲存體](https://azure.microsoft.com/services/storage/blobs/)）
+* 資料儲存體服務 (例如[Azure Blob 儲存體](https://azure.microsoft.com/services/storage/blobs/)) 
 
   * 服務通常會針對內部部署解決方案提供改良的擴充性和彈性，通常會受到單一失敗點的影響。
   * 在大型儲存體基礎結構案例中，服務可能會降低成本。
@@ -828,7 +830,7 @@ ASP.NET Core 支援針對較小的檔案上傳一個或多個檔案，並針對�
 
 整個檔案會讀入 <xref:Microsoft.AspNetCore.Http.IFormFile> ，這是用來處理或儲存檔案之檔案的 c # 標記法。
 
-檔案上傳所使用的資源（磁片、記憶體）取決於並行檔案上傳的數目和大小。 如果應用程式嘗試緩衝過多上傳，則當網站用盡記憶體或磁碟空間時，會損毀。 如果檔案上傳的大小或頻率是耗盡應用程式資源，請使用串流。
+ (磁片的資源、檔案上傳所使用的記憶體) ，取決於並行檔案上傳的數目和大小。 如果應用程式嘗試緩衝過多上傳，則當網站用盡記憶體或磁碟空間時，會損毀。 如果檔案上傳的大小或頻率是耗盡應用程式資源，請使用串流。
 
 > [!NOTE]
 > 任何超過 64 KB 的已緩衝檔案都會從記憶體移至磁片上的暫存檔案。
@@ -848,7 +850,7 @@ ASP.NET Core 支援針對較小的檔案上傳一個或多個檔案，並針對�
 
 若要上傳小型檔案，請使用多部分表單，或使用 JavaScript 來建立 POST 要求。
 
-下列範例示範 Razor 如何使用頁面表單來上傳單一檔案（範例應用程式中的*Pages/BufferedSingleFileUploadPhysical. cshtml* ）：
+下列範例示範 Razor 如何使用頁面表單，將範例應用程式中的單一檔案 *（ (Pages/BufferedSingleFileUploadPhysical* ）上傳) ：
 
 ```cshtml
 <form enctype="multipart/form-data" method="post">
@@ -867,7 +869,7 @@ ASP.NET Core 支援針對較小的檔案上傳一個或多個檔案，並針對�
 
 下列範例類似于先前的範例，不同之處在于：
 
-* JavaScript 的（[FETCH API](https://developer.mozilla.org/docs/Web/API/Fetch_API)）是用來提交表單的資料。
+* JavaScript 的 ([FETCH API](https://developer.mozilla.org/docs/Web/API/Fetch_API)) 是用來提交表單的資料。
 * 沒有驗證。
 
 ```cshtml
@@ -917,8 +919,8 @@ ASP.NET Core 支援針對較小的檔案上傳一個或多個檔案，並針對�
 
 若要針對[不支援 FETCH API](https://caniuse.com/#feat=fetch)的用戶端，以 JavaScript 執行表單 POST，請使用下列其中一種方法：
 
-* 使用提取 Polyfill （例如，[fetch [Polyfill （github/fetch）]](https://github.com/github/fetch)）。
-* 使用 `XMLHttpRequest`。 例如：
+* 使用提取 Polyfill (例如， [ (github/提取) ](https://github.com/github/fetch)) 的 fetch Polyfill。
+* 請使用 `XMLHttpRequest`。 例如：
 
   ```javascript
   <script>
@@ -936,7 +938,7 @@ ASP.NET Core 支援針對較小的檔案上傳一個或多個檔案，並針對�
   </script>
   ```
 
-為了支援檔案上傳，HTML 表單必須指定的編碼類型（ `enctype` ） `multipart/form-data` 。
+為了支援檔案上傳，HTML 表單必須指定 (`enctype`) 的編碼類型 `multipart/form-data` 。
 
 `files`若要讓輸入元素支援上傳多個檔案，請在 `multiple` 元素上提供屬性 `<input>` ：
 
@@ -975,7 +977,7 @@ ASP.NET Core 支援針對較小的檔案上傳一個或多個檔案，並針對�
   * [名單](xref:System.Collections.Generic.List`1)\<<xref:Microsoft.AspNetCore.Http.IFormFile>>
 
 > [!NOTE]
-> 系結符合依名稱的表單檔案。 例如，中的 HTML `name` 值 `<input type="file" name="formFile">` 必須符合 c # 參數/屬性系結（ `FormFile` ）。 如需詳細資訊，請參閱[Match name 屬性值與 POST 方法的參數名稱](#match-name-attribute-value-to-parameter-name-of-post-method)一節。
+> 系結符合依名稱的表單檔案。 例如，中的 HTML `name` 值 `<input type="file" name="formFile">` 必須符合 c # 參數/屬性系結 (`FormFile`) 。 如需詳細資訊，請參閱[Match name 屬性值與 POST 方法的參數名稱](#match-name-attribute-value-to-parameter-name-of-post-method)一節。
 
 下列範例將：
 
@@ -1141,7 +1143,7 @@ public async Task<IActionResult> OnPostUploadAsync()
 
 下列範例示範如何使用 JavaScript 將檔案串流至控制器動作。 檔案的 antiforgery token 是使用自訂篩選屬性所產生，並傳遞至用戶端 HTTP 標頭，而不是在要求主體中。 由於動作方法會直接處理上傳的資料，因此表單模型系結會由另一個自訂篩選器停用。 在動作內，會使用 `MultipartReader` 來讀取表單內容，以讀取每個個別 `MultipartSection`、處理檔案，或視需要儲存內容。 讀取多部分區段之後，動作會執行自己的模型系結。
 
-初始頁面回應會載入表單，並將 antiforgery token 儲存在 cookie 中（透過 `GenerateAntiforgeryTokenCookieAttribute` 屬性）。 屬性會使用 ASP.NET Core 的內建[antiforgery 支援](xref:security/anti-request-forgery)來設定具有要求權杖的 cookie：
+初始頁面回應會載入表單，並透過) 的屬性，將 antiforgery token 儲存在 cookie (中 `GenerateAntiforgeryTokenCookieAttribute` 。 屬性會使用 ASP.NET Core 的內建[antiforgery 支援](xref:security/anti-request-forgery)來設定 cookie 具有要求權杖的：
 
 [!code-csharp[](file-uploads/samples/2.x/SampleApp/Filters/Antiforgery.cs?name=snippet_GenerateAntiforgeryTokenCookieAttribute)]
 
@@ -1153,13 +1155,13 @@ public async Task<IActionResult> OnPostUploadAsync()
 
 [!code-csharp[](file-uploads/samples/2.x/SampleApp/Startup.cs?name=snippet_AddMvc&highlight=8-11,17-20)]
 
-由於模型系結不會讀取表單，因此從表單系結的參數不會系結（查詢、路由及標頭會繼續正常執行）。 動作方法會直接與屬性搭配運作 `Request` 。 `MultipartReader` 是用來讀取每個區段。 索引鍵/值資料會儲存在中 `KeyValueAccumulator` 。 讀取多部分區段之後，會使用的內容將 `KeyValueAccumulator` 表單資料系結至模型類型。
+由於模型系結不會讀取表單，因此從表單系結的參數不會系結 (查詢、路由及標頭會繼續) 作業。 動作方法會直接與屬性搭配運作 `Request` 。 `MultipartReader` 是用來讀取每個區段。 索引鍵/值資料會儲存在中 `KeyValueAccumulator` 。 讀取多部分區段之後，會使用的內容將 `KeyValueAccumulator` 表單資料系結至模型類型。
 
 `StreamingController.UploadDatabase`使用 EF Core 串流至資料庫的完整方法：
 
 [!code-csharp[](file-uploads/samples/2.x/SampleApp/Controllers/StreamingController.cs?name=snippet_UploadDatabase)]
 
-`MultipartRequestHelper`（*公用程式/MultipartRequestHelper .cs*）：
+`MultipartRequestHelper` (*公用程式/MultipartRequestHelper .cs*) ：
 
 [!code-csharp[](file-uploads/samples/2.x/SampleApp/Utilities/MultipartRequestHelper.cs)]
 
@@ -1235,7 +1237,7 @@ using (var reader = new BinaryReader(uploadedFileData))
 
 ### <a name="file-name-security"></a>檔案名安全性
 
-絕對不要使用用戶端提供的檔案名將檔案儲存至實體存放裝置。 使用[GetRandomFileName](xref:System.IO.Path.GetRandomFileName*)或[GetTempFileName](xref:System.IO.Path.GetTempFileName*)建立檔案的安全檔案名，以建立暫存儲存體的完整路徑（包括檔案名）。
+絕對不要使用用戶端提供的檔案名將檔案儲存至實體存放裝置。 建立檔案的安全檔案名，方法是使用[GetRandomFileName](xref:System.IO.Path.GetRandomFileName*)或[GetTempFileName](xref:System.IO.Path.GetTempFileName*)來建立完整路徑， (包括暫時儲存) 的檔案名。
 
 Razor自動對屬性值進行 HTML 編碼以供顯示。 以下是可安全使用的程式碼：
 
@@ -1257,7 +1259,7 @@ Razor自動對屬性值進行 HTML 編碼以供顯示。 以下是可安全使�
 
 限制上傳檔案的大小。
 
-在範例應用程式中，檔案大小限制為 2 MB （以位元組表示）。 此限制是透過檔案[Configuration](xref:fundamentals/configuration/index) *上appsettings.js*的設定來提供：
+在範例應用程式中，檔案大小限制為 2 MB (以位元組) 表示。 此限制是透過檔案[Configuration](xref:fundamentals/configuration/index) *上appsettings.js*的設定來提供：
 
 ```json
 {
@@ -1312,7 +1314,7 @@ if (formFile.Length > _fileSizeLimit)
   }
   ```
 
-針對 c # 方法的參數使用相符的名稱（ `battlePlans` ）：
+針對 c # 方法的參數使用相符的名稱 (`battlePlans`) ：
 
 * 針對名為的 Razor 頁面頁面處理常式方法 `Upload` ：
 
@@ -1330,7 +1332,7 @@ if (formFile.Length > _fileSizeLimit)
 
 ### <a name="multipart-body-length-limit"></a>多部分主體長度限制
 
-<xref:Microsoft.AspNetCore.Http.Features.FormOptions.MultipartBodyLengthLimit>設定每個多部分主體的長度限制。 超過此限制的表單區段會 <xref:System.IO.InvalidDataException> 在剖析時擲回。 預設值為134217728（128 MB）。 使用中的設定來自訂限制 <xref:Microsoft.AspNetCore.Http.Features.FormOptions.MultipartBodyLengthLimit> `Startup.ConfigureServices` ：
+<xref:Microsoft.AspNetCore.Http.Features.FormOptions.MultipartBodyLengthLimit>設定每個多部分主體的長度限制。 超過此限制的表單區段會 <xref:System.IO.InvalidDataException> 在剖析時擲回。 預設值為 134217728 (128 MB) 。 使用中的設定來自訂限制 <xref:Microsoft.AspNetCore.Http.Features.FormOptions.MultipartBodyLengthLimit> `Startup.ConfigureServices` ：
 
 ```csharp
 public void ConfigureServices(IServiceCollection services)
@@ -1429,7 +1431,7 @@ public class BufferedSingleFileUploadPhysicalModel : PageModel
 
 ### <a name="iis-content-length-limit"></a>IIS 內容長度限制
 
-預設要求限制（ `maxAllowedContentLength` ）是30000000個位元組，大約是 28.6 mb。 自訂*web.config*檔案中的限制：
+ () 的預設要求限制 `maxAllowedContentLength` 為30000000個位元組，大約是 28.6 mb。 自訂*web.config*檔案中的限制：
 
 ```xml
 <system.webServer>
@@ -1444,7 +1446,7 @@ public class BufferedSingleFileUploadPhysicalModel : PageModel
 
 這個設定只適用於 IIS。 在 Kestrel 上裝載時，預設不會發生此行為。 如需詳細資訊，請參閱[要求限制 \<requestLimits> ](/iis/configuration/system.webServer/security/requestFiltering/requestLimits/)。
 
-ASP.NET Core 模組的限制或 IIS 要求篩選模組的存在，可能會將上傳限制為2或 4 GB。 如需詳細資訊，請參閱[無法上傳大小大於 2 gb 的檔案（dotnet/AspNetCore #2711）](https://github.com/dotnet/AspNetCore/issues/2711)。
+ASP.NET Core 模組的限制或 IIS 要求篩選模組的存在，可能會將上傳限制為2或 4 GB。 如需詳細資訊，請參閱[無法上傳大小大於 2 gb 的檔案 (dotnet/AspNetCore #2711) ](https://github.com/dotnet/AspNetCore/issues/2711)。
 
 ## <a name="troubleshoot"></a>疑難排解
 

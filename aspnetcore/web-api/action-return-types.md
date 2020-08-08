@@ -6,6 +6,8 @@ ms.author: scaddie
 ms.custom: mvc
 ms.date: 02/03/2020
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -14,18 +16,18 @@ no-loc:
 - Razor
 - SignalR
 uid: web-api/action-return-types
-ms.openlocfilehash: 7227a86db9b94cc68851cb1670ce9668148639ef
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: 3058fabb0c08ac62956c18f3c294692d35122e12
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85404440"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88022156"
 ---
 # <a name="controller-action-return-types-in-aspnet-core-web-api"></a>ASP.NET Core Web API 中的控制器動作傳回類型
 
 作者：[Scott Addie](https://github.com/scottaddie)
 
-[查看或下載範例程式碼](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/web-api/action-return-types/samples)（[如何下載](xref:index#how-to-download-a-sample)）
+[查看或下載範例程式碼](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/web-api/action-return-types/samples) ([如何下載](xref:index#how-to-download-a-sample)) 
 
 ASP.NET Core 提供 Web API 控制器動作傳回類型的下列選項：
 
@@ -58,7 +60,7 @@ ASP.NET Core 提供 Web API 控制器動作傳回類型的下列選項：
 
 ### <a name="return-ienumerablet-or-iasyncenumerablet"></a>傳回 IEnumerable \<T> 或 IAsyncEnumerable\<T>
 
-在 ASP.NET Core 2.2 和更早版本中， <xref:System.Collections.Generic.IEnumerable%601> 從動作傳回會導致序列化程式進行同步集合反復專案。 結果是封鎖呼叫，而且執行緒集區的可能會耗盡。 為了說明，請想像，Entity Framework （EF） Core 是用於 Web API 的資料存取需求。 在序列化期間，會同步列舉下列動作的傳回型別：
+在 ASP.NET Core 2.2 和更早版本中， <xref:System.Collections.Generic.IEnumerable%601> 從動作傳回會導致序列化程式進行同步集合反復專案。 結果是封鎖呼叫，而且執行緒集區的可能會耗盡。 為了說明，請想像，Entity Framework (EF) Core 用於 Web API 的資料存取需求。 在序列化期間，會同步列舉下列動作的傳回型別：
 
 ```csharp
 public IEnumerable<Product> GetOnSaleProducts() =>
@@ -98,7 +100,7 @@ public IEnumerable<Product> GetOnSaleProducts() =>
 
 ## <a name="iactionresult-type"></a>IActionResult 類型
 
-<xref:Microsoft.AspNetCore.Mvc.IActionResult>當 `ActionResult` 動作中可能有多個傳回類型時，傳回類型是適當的。 `ActionResult` 類型代表各種 HTTP 狀態碼。 衍生自的任何非抽象類別都 `ActionResult` 符合資格，做為有效的傳回型別。 此分類中的一些常見傳回類型為 <xref:Microsoft.AspNetCore.Mvc.BadRequestResult> （400）、 <xref:Microsoft.AspNetCore.Mvc.NotFoundResult> （404）和 <xref:Microsoft.AspNetCore.Mvc.OkObjectResult> （200）。 或者，您可以使用類別中的便利方法， <xref:Microsoft.AspNetCore.Mvc.ControllerBase> `ActionResult` 從動作傳回類型。 例如， `return BadRequest();` 是的簡短形式 `return new BadRequestResult();` 。
+<xref:Microsoft.AspNetCore.Mvc.IActionResult>當 `ActionResult` 動作中可能有多個傳回類型時，傳回類型是適當的。 `ActionResult` 類型代表各種 HTTP 狀態碼。 衍生自的任何非抽象類別都 `ActionResult` 符合資格，做為有效的傳回型別。 此類別中的某些常見傳回類型為 <xref:Microsoft.AspNetCore.Mvc.BadRequestResult> (400) 、 <xref:Microsoft.AspNetCore.Mvc.NotFoundResult> (404) 和 <xref:Microsoft.AspNetCore.Mvc.OkObjectResult> (200) 。 或者，您可以使用類別中的便利方法， <xref:Microsoft.AspNetCore.Mvc.ControllerBase> `ActionResult` 從動作傳回類型。 例如， `return BadRequest();` 是的簡短形式 `return new BadRequestResult();` 。
 
 由於此類型的動作中有多個傳回類型和路徑，因此 [`[ProducesResponseType]`](xref:Microsoft.AspNetCore.Mvc.ProducesResponseTypeAttribute) 需要使用屬性。 這個屬性會針對[Swagger](xref:tutorials/web-api-help-pages-using-swagger)之類的工具所產生的 Web API 說明頁面，產生更具描述性的回應詳細資料。 `[ProducesResponseType]` 表示已知類型和 HTTP 狀態碼要由動作傳回。
 
@@ -190,7 +192,7 @@ public ActionResult<IEnumerable<Product>> Get() =>
 
 在上述動作中：
 
-* 在 <xref:Microsoft.AspNetCore.Mvc.ControllerBase.BadRequest*> 下列情況中，ASP.NET Core 執行時間會傳回400狀態碼（）：
+* 在 <xref:Microsoft.AspNetCore.Mvc.ControllerBase.BadRequest*> 下列情況中，ASP.NET Core 執行時間會傳回400狀態碼 () ：
   * 已套用 [`[ApiController]`](xref:Microsoft.AspNetCore.Mvc.ApiControllerAttribute) 屬性，而且模型驗證失敗。
   * 產品描述包含 "XYZ Widget"。
 * 當建立產品時，方法會產生201狀態碼 <xref:Microsoft.AspNetCore.Mvc.ControllerBase.CreatedAtAction*> 。 在此程式碼路徑中， `Product` 會在回應主體中提供物件。 `Location`提供包含新建立之產品 URL 的回應標頭。

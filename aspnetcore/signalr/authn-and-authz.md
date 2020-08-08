@@ -7,6 +7,8 @@ ms.author: bradyg
 ms.custom: mvc
 ms.date: 12/05/2019
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -15,20 +17,20 @@ no-loc:
 - Razor
 - SignalR
 uid: signalr/authn-and-authz
-ms.openlocfilehash: 794465ceb69f47ee3d5cc8c100b321cb958d9cfe
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: 1e022c510dda3e39dd02d607f1d9c493aecdeb5a
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85407131"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88021558"
 ---
-# <a name="authentication-and-authorization-in-aspnet-core-signalr"></a>ASP.NET Core 中的驗證和授權SignalR
+# <a name="authentication-and-authorization-in-aspnet-core-no-locsignalr"></a>ASP.NET Core 中的驗證和授權SignalR
 
 [Andrew Stanton-護士](https://twitter.com/anurse)
 
-[查看或下載範例程式碼](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/signalr/authn-and-authz/sample/) [（如何下載）](xref:index#how-to-download-a-sample)
+[查看或下載範例程式碼](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/signalr/authn-and-authz/sample/) [ (如何下載) ](xref:index#how-to-download-a-sample)
 
-## <a name="authenticate-users-connecting-to-a-signalr-hub"></a>驗證連線到中樞的使用者 SignalR
+## <a name="authenticate-users-connecting-to-a-no-locsignalr-hub"></a>驗證連線到中樞的使用者 SignalR
 
 SignalR可以與[ASP.NET Core 驗證](xref:security/authentication/identity)搭配使用，以將使用者與每個連線建立關聯。 在中樞中，可以從[HubConnectionCoNtext 的使用者](/dotnet/api/microsoft.aspnetcore.signalr.hubconnectioncontext.user)屬性存取驗證資料。 驗證可讓中樞在與使用者相關聯的所有連接上呼叫方法。 如需詳細資訊，請參閱[管理中的 SignalR 使用者和群組](xref:signalr/groups)。 多個連接可能會與單一使用者相關聯。
 
@@ -86,15 +88,15 @@ public void Configure(IApplicationBuilder app)
 
 ::: moniker-end
 
-### <a name="cookie-authentication"></a>Cookie 驗證
+### <a name="no-loccookie-authentication"></a>Cookie 驗證
 
-在以瀏覽器為基礎的應用程式中，cookie 驗證可讓您現有的使用者認證自動流向連線 SignalR 。 使用瀏覽器用戶端時，不需要進行其他設定。 如果使用者已登入您的應用程式，則 SignalR 連接會自動繼承此驗證。
+在以瀏覽器為基礎的應用程式中， cookie 驗證可讓您現有的使用者認證自動流向連線 SignalR 。 使用瀏覽器用戶端時，不需要進行其他設定。 如果使用者已登入您的應用程式，則 SignalR 連接會自動繼承此驗證。
 
-Cookie 是用來傳送存取權杖的瀏覽器特定方式，但非瀏覽器用戶端可以傳送它們。 使用[.Net 用戶端](xref:signalr/dotnet-client)時， `Cookies` 可以在呼叫中設定屬性， `.WithUrl` 以提供 cookie。 不過，若要從 .NET 用戶端使用 cookie 驗證，應用程式必須提供 API 來交換 cookie 的驗證資料。
+Cookies 是用來傳送存取權杖的瀏覽器特定方法，但非瀏覽器用戶端可以傳送它們。 使用[.Net 用戶端](xref:signalr/dotnet-client)時， `Cookies` 可以在呼叫中設定屬性， `.WithUrl` 以提供 cookie 。 不過，使用 cookie 來自 .net 用戶端的驗證需要應用程式提供 API，以交換的驗證資料 cookie 。
 
 ### <a name="bearer-token-authentication"></a>持有人權杖驗證
 
-用戶端可以提供存取權杖，而不是使用 cookie。 伺服器會驗證權杖，並使用它來識別使用者。 只有在建立連接時，才會執行此驗證。 在連接的生命週期內，伺服器不會自動重新驗證以檢查權杖撤銷。
+用戶端可以提供存取權杖，而不是使用 cookie 。 伺服器會驗證權杖，並使用它來識別使用者。 只有在建立連接時，才會執行此驗證。 在連接的生命週期內，伺服器不會自動重新驗證以檢查權杖撤銷。
 
 在伺服器上，持有人權杖驗證是使用[JWT 持有人中介軟體](/dotnet/api/microsoft.extensions.dependencyinjection.jwtbearerextensions.addjwtbearer)來設定。
 
@@ -114,7 +116,7 @@ var connection = new HubConnectionBuilder()
 ```
 
 > [!NOTE]
-> 您提供的存取權杖函式會在**每個**發出的 HTTP 要求之前呼叫 SignalR 。 如果您需要更新權杖，以便讓連線保持作用中（因為它可能會在連線期間過期），請從這個函式中執行此動作，並傳回更新的權杖。
+> 您提供的存取權杖函式會在**每個**發出的 HTTP 要求之前呼叫 SignalR 。 如果您需要更新權杖，讓連接保持作用中 (，因為它可能會在連線) 期間過期，請在此函式中執行此動作，並傳回更新的權杖。
 
 在標準 web Api 中，會以 HTTP 標頭傳送持有人權杖。 不過， SignalR 使用某些傳輸時，無法在瀏覽器中設定這些標頭。 使用 Websocket 和伺服器傳送事件時，權杖會以查詢字串參數的形式傳送。 若要在伺服器上支援此設定，需要進行其他設定：
 
@@ -123,21 +125,21 @@ var connection = new HubConnectionBuilder()
 [!INCLUDE[request localized comments](~/includes/code-comments-loc.md)]
 
 > [!NOTE]
-> 由於瀏覽器 API 限制，在與 Websocket 和伺服器傳送的事件連接時，會在瀏覽器上使用查詢字串。 使用 HTTPS 時，查詢字串值會受到 TLS 連接的保護。 不過，許多伺服器會記錄查詢字串值。 如需詳細資訊，請參閱[ASP.NET Core SignalR 中的安全性考慮](xref:signalr/security)。 SignalR使用標頭在支援它們的環境（例如 .NET 和 JAVA 用戶端）中傳輸權杖。
+> 由於瀏覽器 API 限制，在與 Websocket 和伺服器傳送的事件連接時，會在瀏覽器上使用查詢字串。 使用 HTTPS 時，查詢字串值會受到 TLS 連接的保護。 不過，許多伺服器會記錄查詢字串值。 如需詳細資訊，請參閱[ASP.NET Core SignalR 中的安全性考慮](xref:signalr/security)。 SignalR使用標頭在支援 (的環境中傳輸權杖，例如 .NET 和 JAVA 用戶端) 。
 
-### <a name="cookies-vs-bearer-tokens"></a>Cookie 和持有人權杖 
+### <a name="no-loccookies-vs-bearer-tokens"></a>Cookies 與持有人權杖的比較 
 
-Cookie 是瀏覽器特有的。 相較于傳送持有人權杖，從其他類型的用戶端傳送它們會增加複雜性。 因此，除非應用程式只需要從瀏覽器用戶端驗證使用者，否則不建議使用 cookie 驗證。 使用瀏覽器用戶端以外的用戶端時，持有人權杖驗證是建議的方法。
+Cookie是瀏覽器專用的。 相較于傳送持有人權杖，從其他類型的用戶端傳送它們會增加複雜性。 因此， cookie 除非應用程式只需要從瀏覽器用戶端驗證使用者，否則不建議使用驗證。 使用瀏覽器用戶端以外的用戶端時，持有人權杖驗證是建議的方法。
 
 ### <a name="windows-authentication"></a>Windows 驗證
 
 如果您的應用程式中已設定[Windows 驗證](xref:security/authentication/windowsauth)，則 SignalR 可以使用該身分識別來保護中樞。 不過，若要將訊息傳送給個別使用者，您需要新增自訂使用者識別碼提供者。 Windows 驗證系統未提供「名稱識別碼」宣告。 SignalR使用宣告來判斷使用者名稱。
 
-加入新的類別， `IUserIdProvider` 以執行並抓取其中一個來自使用者的宣告，做為識別碼。 例如，若要使用 "Name" 宣告（這是格式的 Windows 使用者名稱 `[Domain]\[Username]` ），請建立下列類別：
+加入新的類別， `IUserIdProvider` 以執行並抓取其中一個來自使用者的宣告，做為識別碼。 例如，若要使用 "Name" 宣告 (這是) 格式的 Windows 使用者名稱 `[Domain]\[Username]` ，請建立下列類別：
 
 [!code-csharp[Name based provider](authn-and-authz/sample/nameuseridprovider.cs?name=NameUserIdProvider)]
 
-而不是 `ClaimTypes.Name` ，您可以使用中的任何值 `User` （例如 Windows SID 識別碼等等）。
+而不是 `ClaimTypes.Name` ，您可以使用 (的任何值 `User` ，例如 Windows SID 識別碼，依此類推) 。
 
 > [!NOTE]
 > 您選擇的值在系統中的所有使用者之間必須是唯一的。 否則，適用于某位使用者的訊息最後可能會到達不同的使用者。

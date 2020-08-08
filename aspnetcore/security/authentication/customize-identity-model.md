@@ -5,6 +5,8 @@ description: 本文說明如何自訂 ASP.NET Core 的基礎 Entity Framework Co
 ms.author: avickers
 ms.date: 07/01/2019
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -13,20 +15,20 @@ no-loc:
 - Razor
 - SignalR
 uid: security/authentication/customize_identity_model
-ms.openlocfilehash: 3a5bac0e3e34602b1f8a85a7bcde1ba92b372607
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: 4e6d91de013755f1ae998e36481f4c3b659270ae
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85399162"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88022000"
 ---
-# <a name="identity-model-customization-in-aspnet-core"></a>IdentityASP.NET Core 中的模型自訂
+# <a name="no-locidentity-model-customization-in-aspnet-core"></a>IdentityASP.NET Core 中的模型自訂
 
 依[Arthur Vickers](https://github.com/ajcvickers)
 
-ASP.NET Core Identity 提供在 ASP.NET Core 應用程式中管理及儲存使用者帳戶的架構。 Identity當您選取**個別使用者帳戶**做為驗證機制時，會新增至您的專案。 根據預設， Identity 會使用 Entity Framework （EF）核心資料模型。 本文說明如何自訂 Identity 模型。
+ASP.NET Core Identity 提供在 ASP.NET Core 應用程式中管理及儲存使用者帳戶的架構。 Identity當您選取**個別使用者帳戶**做為驗證機制時，會新增至您的專案。 根據預設， Identity 會使用 Entity Framework (EF) 核心資料模型。 本文說明如何自訂 Identity 模型。
 
-## <a name="identity-and-ef-core-migrations"></a>Identity和 EF Core 遷移
+## <a name="no-locidentity-and-ef-core-migrations"></a>Identity和 EF Core 遷移
 
 在檢查模型之前，請先瞭解如何 Identity 搭配[EF Core 遷移](/ef/core/managing-schemas/migrations/)來建立和更新資料庫。 在最上層，此程式為：
 
@@ -38,7 +40,7 @@ ASP.NET Core Identity 提供在 ASP.NET Core 應用程式中管理及儲存使�
 
 使用下列其中一種方法來新增和套用遷移：
 
-* [**套件管理員主控台**] （PMC）視窗（如果使用 Visual Studio）。 如需詳細資訊，請參閱[EF CORE PMC 工具](/ef/core/miscellaneous/cli/powershell)。
+* 如果使用 Visual Studio，**套件管理員主控台** (PMC) ] 視窗。 如需詳細資訊，請參閱[EF CORE PMC 工具](/ef/core/miscellaneous/cli/powershell)。
 * 如果使用命令列，則為 .NET Core CLI。 如需詳細資訊，請參閱[EF Core .net 命令列工具](/ef/core/miscellaneous/cli/dotnet)。
 * 在應用程式執行時，按一下 [錯誤] 頁面上的 [套用**遷移**] 按鈕。
 
@@ -52,13 +54,13 @@ ASP.NET Core 有開發階段錯誤頁面處理常式。 處理常式可以在應
 
 請重複上述步驟，因為對模型進行了變更。
 
-## <a name="the-identity-model"></a>Identity模型
+## <a name="the-no-locidentity-model"></a>Identity模型
 
 ### <a name="entity-types"></a>實體類型
 
 此 Identity 模型是由下列實體類型所組成。
 
-|實體類型|說明                                                  |
+|實體類型|描述                                                  |
 |-----------|-------------------------------------------------------------|
 |`User`     |代表使用者。                                         |
 |`Role`     |代表角色。                                           |
@@ -205,7 +207,7 @@ builder.Entity<TUserRole>(b =>
 
 ### <a name="model-generic-types"></a>模型泛型型別
 
-Identity針對以上所列的每個實體類型，定義預設的[Common Language Runtime](/dotnet/standard/glossary#clr) （CLR）類型。 這些類型的前面都會加上 *Identity* ：
+Identity針對以上所列的每個實體類型，定義預設的[Common Language Runtime](/dotnet/standard/glossary#clr) (CLR) 類型。 這些類型的前面都會加上 *Identity* ：
 
 * `IdentityUser`
 * `IdentityRole`
@@ -215,7 +217,7 @@ Identity針對以上所列的每個實體類型，定義預設的[Common Languag
 * `IdentityRoleClaim`
 * `IdentityUserRole`
 
-類型可以當做應用程式本身類型的基類使用，而不是直接使用這些類型。 所 `DbContext` 定義的類別 Identity 是泛型，因此可以將不同的 CLR 類型用於模型中的一或多個實體類型。 這些泛型型別也允許 `User` 變更主鍵（PK）資料類型。
+類型可以當做應用程式本身類型的基類使用，而不是直接使用這些類型。 所 `DbContext` 定義的類別 Identity 是泛型，因此可以將不同的 CLR 類型用於模型中的一或多個實體類型。 這些泛型型別也允許 `User` 變更主鍵 (PK) 資料類型。
 
 搭配角色的支援使用時 Identity ， <xref:Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityDbContext> 應該使用類別。 例如：
 
@@ -261,7 +263,7 @@ public abstract class IdentityDbContext<
          where TUserToken : IdentityUserToken<TKey>
 ```
 
-您也可以使用 Identity 沒有角色的（僅限宣告），在此情況下 <xref:Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityUserContext%601> 應該使用類別：
+您也可以使用 Identity 沒有角色 (只有宣告) ，在此情況下 <xref:Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityUserContext%601> 應該使用類別：
 
 ```csharp
 // Uses the built-in non-role Identity types except with a custom User type
@@ -355,7 +357,7 @@ public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
 @inject UserManager<ApplicationUser> UserManager
 ```
 
-更新*Areas/ Identity /IdentityHostingStartup.cs*或 `Startup.ConfigureServices` ，並將取代 `IdentityUser` 為 `ApplicationUser` 。
+更新*Areas/ Identity / Identity HostingStartup.cs*或 `Startup.ConfigureServices` ，並將取代 `IdentityUser` 為 `ApplicationUser` 。
 
 ```csharp
 services.AddIdentity<ApplicationUser>()
@@ -363,7 +365,7 @@ services.AddIdentity<ApplicationUser>()
         .AddDefaultUI();
 ```
 
-在 ASP.NET Core 2.1 或更新版本中， Identity 是以 Razor 類別庫的形式提供。 如需詳細資訊，請參閱 <xref:security/authentication/scaffold-identity> 。 因此，上述程式碼需要呼叫 <xref:Microsoft.AspNetCore.Identity.IdentityBuilderUIExtensions.AddDefaultUI*> 。 如果 Identity scaffolder 是用來將檔案加入至 Identity 專案，請移除對的呼叫 `AddDefaultUI` 。 如需詳細資訊，請參閱：
+在 ASP.NET Core 2.1 或更新版本中， Identity 是以 Razor 類別庫的形式提供。 如需詳細資訊，請參閱<xref:security/authentication/scaffold-identity>。 因此，上述程式碼需要呼叫 <xref:Microsoft.AspNetCore.Identity.IdentityBuilderUIExtensions.AddDefaultUI*> 。 如果 Identity scaffolder 是用來將檔案加入至 Identity 專案，請移除對的呼叫 `AddDefaultUI` 。 如需詳細資訊，請參閱
 
 * [ScaffoldIdentity](xref:security/authentication/scaffold-identity)
 * [新增、下載及刪除自訂使用者資料至Identity](xref:security/authentication/add-user-data)
@@ -374,8 +376,8 @@ services.AddIdentity<ApplicationUser>()
 
 請遵循下列步驟來變更 PK 類型：
 
-1. 如果資料庫是在 PK 變更之前建立的，請執行 `Drop-Database` （PMC）或 `dotnet ef database drop` （.NET Core CLI）將它刪除。
-2. 確認刪除資料庫之後，請使用 `Remove-Migration` （PMC）或 `dotnet ef migrations remove` （.NET Core CLI）移除初始遷移。
+1. 如果資料庫是在 PK 變更之前建立的，請執行 `Drop-Database` (PMC) 或 `dotnet ef database drop` ( .NET Core CLI) 將它刪除。
+2. 確認刪除資料庫之後，請使用 `Remove-Migration` (PMC) 或 `dotnet ef migrations remove` ( .NET Core CLI) 移除初始遷移。
 3. 將 `ApplicationDbContext` 類別更新為衍生自 <xref:Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityDbContext%603> 。 為指定新的金鑰類型 `TKey` 。 例如，若要使用 `Guid` 金鑰類型：
 
     ```csharp
@@ -472,7 +474,7 @@ services.AddIdentity<ApplicationUser>()
 
     主要索引鍵的資料類型是藉由分析[DbCoNtext](/dotnet/api/microsoft.entityframeworkcore.dbcontext)物件來推斷。
 
-    在 ASP.NET Core 2.1 或更新版本中， Identity 是以 Razor 類別庫的形式提供。 如需詳細資訊，請參閱 <xref:security/authentication/scaffold-identity> 。 因此，上述程式碼需要呼叫 <xref:Microsoft.AspNetCore.Identity.IdentityBuilderUIExtensions.AddDefaultUI*> 。 如果 Identity scaffolder 是用來將檔案加入至 Identity 專案，請移除對的呼叫 `AddDefaultUI` 。
+    在 ASP.NET Core 2.1 或更新版本中， Identity 是以 Razor 類別庫的形式提供。 如需詳細資訊，請參閱<xref:security/authentication/scaffold-identity>。 因此，上述程式碼需要呼叫 <xref:Microsoft.AspNetCore.Identity.IdentityBuilderUIExtensions.AddDefaultUI*> 。 如果 Identity scaffolder 是用來將檔案加入至 Identity 專案，請移除對的呼叫 `AddDefaultUI` 。
 
     ::: moniker-end
 
@@ -516,7 +518,7 @@ services.AddIdentity<ApplicationUser>()
 
     主要索引鍵的資料類型是藉由分析[DbCoNtext](/dotnet/api/microsoft.entityframeworkcore.dbcontext)物件來推斷。
 
-    在 ASP.NET Core 2.1 或更新版本中， Identity 是以 Razor 類別庫的形式提供。 如需詳細資訊，請參閱 <xref:security/authentication/scaffold-identity> 。 因此，上述程式碼需要呼叫 <xref:Microsoft.AspNetCore.Identity.IdentityBuilderUIExtensions.AddDefaultUI*> 。 如果 Identity scaffolder 是用來將檔案加入至 Identity 專案，請移除對的呼叫 `AddDefaultUI` 。
+    在 ASP.NET Core 2.1 或更新版本中， Identity 是以 Razor 類別庫的形式提供。 如需詳細資訊，請參閱<xref:security/authentication/scaffold-identity>。 因此，上述程式碼需要呼叫 <xref:Microsoft.AspNetCore.Identity.IdentityBuilderUIExtensions.AddDefaultUI*> 。 如果 Identity scaffolder 是用來將檔案加入至 Identity 專案，請移除對的呼叫 `AddDefaultUI` 。
 
     ::: moniker-end
 
@@ -546,7 +548,7 @@ services.AddIdentity<ApplicationUser>()
 
 ### <a name="add-navigation-properties"></a>新增導覽屬性
 
-變更關聯性的模型設定可能會比進行其他變更更棘手。 必須小心取代現有的關聯性，而不是建立新的其他關聯性。 特別是，已變更的關聯性必須指定與現有關聯性相同的外鍵（FK）屬性。 例如，和之間的關聯 `Users` 性 `UserClaims` 預設會依照下列方式指定：
+變更關聯性的模型設定可能會比進行其他變更更棘手。 必須小心取代現有的關聯性，而不是建立新的其他關聯性。 特別的是，已變更的關聯性必須指定與現有關聯性 (FK) 屬性相同的外鍵。 例如，和之間的關聯 `Users` 性 `UserClaims` 預設會依照下列方式指定：
 
 ```csharp
 builder.Entity<TUser>(b =>
@@ -924,7 +926,7 @@ protected override void OnModelCreating(ModelBuilder modelBuilder)
 }
 ```
 
-某些類型的資料庫資料行可以使用特定*facet*來設定（例如，允許的最大 `string` 長度）。 下列範例會在模型中設定數個屬性的資料行最大長度 `string` ：
+某些類型的資料庫資料行可以使用特定*facet*來設定 (例如，允許的最大 `string` 長度) 。 下列範例會在模型中設定數個屬性的資料行最大長度 `string` ：
 
 ```csharp
 protected override void OnModelCreating(ModelBuilder modelBuilder)

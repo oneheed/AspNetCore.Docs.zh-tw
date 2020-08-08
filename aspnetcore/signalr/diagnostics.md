@@ -7,6 +7,8 @@ ms.author: anurse
 ms.custom: signalr
 ms.date: 06/12/2020
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -15,14 +17,14 @@ no-loc:
 - Razor
 - SignalR
 uid: signalr/diagnostics
-ms.openlocfilehash: f2b864d47c98a031872be676a68143bd79f49829
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: 61733fe4fbcd7b94662404a39a288ff2ce75ec53
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85409094"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88021831"
 ---
-# <a name="logging-and-diagnostics-in-aspnet-core-signalr"></a>ASP.NET Core 中的記錄和診斷SignalR
+# <a name="logging-and-diagnostics-in-aspnet-core-no-locsignalr"></a>ASP.NET Core 中的記錄和診斷SignalR
 
 [Andrew Stanton-護士](https://twitter.com/anurse)
 
@@ -53,7 +55,7 @@ SignalR會使用兩個記錄器類別：
 * `Logging:LogLevel:Microsoft.AspNetCore.SignalR` = `Debug`
 * `Logging:LogLevel:Microsoft.AspNetCore.Http.Connections` = `Debug`
 
-請查看設定系統的檔，以判斷如何指定嵌套的設定值。 例如，使用環境變數時， `_` 會使用兩個字元，而不是 `:` （例如 `Logging__LogLevel__Microsoft.AspNetCore.SignalR` ）。
+請查看設定系統的檔，以判斷如何指定嵌套的設定值。 例如，使用環境變數時， `_` 會使用兩個字元，而不是 `:` (，例如 `Logging__LogLevel__Microsoft.AspNetCore.SignalR`) 。
 
 `Debug`針對您的應用程式收集更詳細的診斷資訊時，我們建議使用此層級。 `Trace`層級會產生非常低層級的診斷，而且很少需要診斷應用程式中的問題。
 
@@ -71,11 +73,11 @@ Visual Studio 會在 [**輸出**] 視窗中顯示記錄輸出。 選取 [ **ASP.
 
 ### <a name="azure-app-service"></a>Azure App Service
 
-在 Azure App Service 入口網站的 [**診斷記錄**] 區段中，啟用 [**應用程式記錄（Filesystem）** ] 選項，並將**層級**設定為 `Verbose` 。 記錄檔**串流**服務以及 App Service 的檔案系統上的記錄檔中，都應該可供使用。 如需詳細資訊，請參閱[Azure 記錄串流](xref:fundamentals/logging/index#azure-log-streaming)。
+在 Azure App Service 入口網站的 [**診斷記錄**] 區段中，啟用 [**應用程式記錄 (Filesystem) ** ] 選項，並將**層級**設定為 `Verbose` 。 記錄檔**串流**服務以及 App Service 的檔案系統上的記錄檔中，都應該可供使用。 如需詳細資訊，請參閱[Azure 記錄串流](xref:fundamentals/logging/index#azure-log-streaming)。
 
 ### <a name="other-environments"></a>其他環境
 
-如果應用程式部署到另一個環境（例如 Docker、Kubernetes 或 Windows 服務），請參閱，以 <xref:fundamentals/logging/index> 取得有關如何設定適用于環境之記錄提供者的詳細資訊。
+如果應用程式部署到另一個環境 (例如 Docker、Kubernetes 或 Windows 服務) ，請參閱， <xref:fundamentals/logging/index> 以取得有關如何設定適用于環境之記錄提供者的詳細資訊。
 
 ## <a name="javascript-client-logging"></a>JavaScript 用戶端記錄
 
@@ -100,7 +102,7 @@ Visual Studio 會在 [**輸出**] 視窗中顯示記錄輸出。 選取 [ **ASP.
 | `Debug` | 適用于偵錯工具的診斷訊息。 |
 | `Trace` | 專為診斷特定問題而設計的詳細診斷訊息。 |
 
-設定詳細資訊之後，記錄將會寫入至瀏覽器主控台（或 NodeJS 應用程式中的標準輸出）。
+設定詳細資訊之後，記錄將會寫入至瀏覽器主控台 (或 NodeJS 應用程式) 中的標準輸出。
 
 如果您想要將記錄檔傳送至自訂記錄系統，您可以提供執行介面的 JavaScript 物件 `ILogger` 。 唯一需要實作為的方法是 `log` ，它會接受事件的層級以及與事件相關聯的訊息。 例如：
 
@@ -146,7 +148,7 @@ SignalR支援其他記錄提供者，例如 Serilog、Seq、NLog，或與整合�
 
 如果您遇到問題，網路追蹤有時可能會提供很多有用的資訊。 如果您要在問題追蹤程式上提出問題，這會特別有用。
 
-## <a name="collect-a-network-trace-with-fiddler-preferred-option"></a>使用 Fiddler 收集網路追蹤（偏好選項）
+## <a name="collect-a-network-trace-with-fiddler-preferred-option"></a>使用 Fiddler (慣用選項收集網路追蹤) 
 
 這個方法適用于所有應用程式。
 
@@ -158,7 +160,7 @@ Fiddler 是一種非常強大的工具，可用於收集 HTTP 追蹤。 從[tele
 
 ![從 Fiddler 匯出所有會話](diagnostics/fiddler-export.png)
 
-## <a name="collect-a-network-trace-with-tcpdump-macos-and-linux-only"></a>使用 tcpdump 收集網路追蹤（僅限 macOS 和 Linux）
+## <a name="collect-a-network-trace-with-tcpdump-macos-and-linux-only"></a>只使用 tcpdump (macOS 和 Linux 來收集網路追蹤) 
 
 這個方法適用于所有應用程式。
 
@@ -168,21 +170,21 @@ Fiddler 是一種非常強大的工具，可用於收集 HTTP 追蹤。 從[tele
 tcpdump -i [interface] -w trace.pcap
 ```
 
-將取代為 `[interface]` 您想要在其中捕獲的網路介面。 通常，這類似于 `/dev/eth0` （適用于您的標準 Ethernet 介面）或 `/dev/lo0` （適用于 localhost 流量）。 如需詳細資訊，請參閱 `tcpdump` 主機系統上的 man 頁面。
+將取代為 `[interface]` 您想要在其中捕獲的網路介面。 通常，這就像是 `/dev/eth0` 標準 Ethernet 介面的 (，) 或 `/dev/lo0` (的 localhost 流量) 。 如需詳細資訊，請參閱 `tcpdump` 主機系統上的 man 頁面。
 
 ## <a name="collect-a-network-trace-in-the-browser"></a>在瀏覽器中收集網路追蹤
 
 這個方法僅適用于以瀏覽器為基礎的應用程式。
 
-大部分的瀏覽器開發人員工具都有一個 [網路] 索引標籤，可讓您在瀏覽器與伺服器之間捕獲網路活動。 不過，這些追蹤不會包含 WebSocket 和伺服器傳送的事件訊息。 如果您使用這些傳輸，使用 Fiddler 或 TcpDump 之類的工具（如下所述）是較好的方法。
+大部分的瀏覽器開發人員工具都有一個 [網路] 索引標籤，可讓您在瀏覽器與伺服器之間捕獲網路活動。 不過，這些追蹤不會包含 WebSocket 和伺服器傳送的事件訊息。 如果您使用這些傳輸，使用像是 Fiddler 或 TcpDump 的工具 (如下所述) 是較好的方法。
 
 ### <a name="microsoft-edge-and-internet-explorer"></a>Microsoft Edge 和 Internet Explorer
 
-（Edge 和 Internet Explorer 的指示都相同）
+ (Edge 和 Internet Explorer 的指示都相同) 
 
 1. 按 F12 開啟開發工具
 2. 按一下 [網路] 索引標籤
-3. 重新整理頁面（如有需要）並重現問題
+3. 視需要重新整理頁面 (，) 並重現問題
 4. 按一下工具列中的 [儲存] 圖示，將追蹤匯出為「HAR」檔案：
 
 ![[Microsoft Edge 開發人員工具網路] 索引標籤上的 [儲存] 圖示](diagnostics/ie-edge-har-export.png)
@@ -191,7 +193,7 @@ tcpdump -i [interface] -w trace.pcap
 
 1. 按 F12 開啟開發工具
 2. 按一下 [網路] 索引標籤
-3. 重新整理頁面（如有需要）並重現問題
+3. 視需要重新整理頁面 (，) 並重現問題
 4. 以滑鼠右鍵按一下要求清單中的任何位置，然後選擇 [以內容另存為 HAR]：
 
 ![Google Chrome Dev Tools 網路索引標籤中的 [以內容另存為 HAR] 選項](diagnostics/chrome-har-export.png)
@@ -200,7 +202,7 @@ tcpdump -i [interface] -w trace.pcap
 
 1. 按 F12 開啟開發工具
 2. 按一下 [網路] 索引標籤
-3. 重新整理頁面（如有需要）並重現問題
+3. 視需要重新整理頁面 (，) 並重現問題
 4. 以滑鼠右鍵按一下要求清單中的任何位置，然後選擇 [全部儲存為 HAR]
 
 ![Mozilla Firefox 開發工具 [網路] 索引標籤中的 [另存為 HAR] 選項](diagnostics/firefox-har-export.png)
@@ -218,11 +220,11 @@ tcpdump -i [interface] -w trace.pcap
 
 計量是一種時間間隔的資料量值標記法。 例如，每秒的要求數。 計量資料允許在高層級觀察應用程式的狀態。 .NET gRPC 計量是使用發出的 <xref:System.Diagnostics.Tracing.EventCounter> 。
 
-### <a name="signalr-server-metrics"></a>SignalR伺服器計量
+### <a name="no-locsignalr-server-metrics"></a>SignalR伺服器計量
 
 SignalR事件來源上會報表服務器計量 <xref:Microsoft.AspNetCore.Http.Connections> 。
 
-| 名稱                    | 說明                 |
+| 名稱                    | 描述                 |
 |-------------------------|-----------------------------|
 | `connections-started`   | 總連線數已啟動   |
 | `connections-stopped`   | 總連線數已停止   |

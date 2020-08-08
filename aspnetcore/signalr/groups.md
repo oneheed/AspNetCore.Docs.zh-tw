@@ -7,6 +7,8 @@ ms.author: bradyg
 ms.custom: mvc
 ms.date: 05/17/2020
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -15,22 +17,22 @@ no-loc:
 - Razor
 - SignalR
 uid: signalr/groups
-ms.openlocfilehash: af76402d02ee4273deadac246f275c1ae7ad84ac
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: 3a1182b793c7d05a11f0b5f16f4d406a9063f023
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85408509"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88021025"
 ---
-# <a name="manage-users-and-groups-in-signalr"></a>管理中的使用者和群組SignalR
+# <a name="manage-users-and-groups-in-no-locsignalr"></a>管理中的使用者和群組SignalR
 
 依[Brennan Conroy](https://github.com/BrennanConroy)
 
 SignalR允許訊息傳送至與特定使用者相關聯的所有連接，以及命名的連接群組。
 
-[查看或下載範例程式碼](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/signalr/groups/sample/) [（如何下載）](xref:index#how-to-download-a-sample)
+[查看或下載範例程式碼](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/signalr/groups/sample/) [ (如何下載) ](xref:index#how-to-download-a-sample)
 
-## <a name="users-in-signalr"></a>中的使用者SignalR
+## <a name="users-in-no-locsignalr"></a>中的使用者SignalR
 
 中的單一使用者 SignalR 可以有多個應用程式連接。 例如，使用者可以連線到桌上型電腦以及電話。 每個裝置都有個別的 SignalR 連線，但它們全都與相同的使用者相關聯。 如果訊息傳送給使用者，與該使用者相關聯的所有連接都會收到訊息。 中樞的屬性可以存取連接的使用者識別碼 `Context.UserIdentifier` 。
 
@@ -43,7 +45,7 @@ SignalR允許訊息傳送至與特定使用者相關聯的所有連接，以及�
 
 [!code-csharp[Configure service](groups/sample/Hubs/ChatHub.cs?range=29-32)]
 
-## <a name="groups-in-signalr"></a>群組于SignalR
+## <a name="groups-in-no-locsignalr"></a>群組于SignalR
 
 「群組」（group）是與名稱相關聯之連接的集合。 訊息可以傳送至群組中的所有連接。 群組是傳送至連線或多個連接的建議方式，因為這些群組是由應用程式所管理。 連接可以是多個群組的成員。 群組適用于類似聊天應用程式的專案，其中每個房間可以表示為一個群組。 您可以透過和方法，在群組中新增或移除連接 `AddToGroupAsync` `RemoveFromGroupAsync` 。
 
@@ -59,5 +61,5 @@ SignalR允許訊息傳送至與特定使用者相關聯的所有連接，以及�
 ## <a name="related-resources"></a>相關資源
 
 * [開始使用](xref:tutorials/signalr)
-* [中樞](xref:signalr/hubs)
+* [集線器](xref:signalr/hubs)
 * [發佈至 Azure](xref:signalr/publish-to-azure-web-app)

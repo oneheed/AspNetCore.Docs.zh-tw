@@ -7,6 +7,8 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 03/12/2020
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -15,18 +17,18 @@ no-loc:
 - Razor
 - SignalR
 uid: security/ip-safelist
-ms.openlocfilehash: 5b74205bc7b17d61edbb73cf309f6e24e4318391
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: 75c1ea3a6087f89a200d1f73b1ff65080c819ccd
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85409003"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88021766"
 ---
 # <a name="client-ip-safelist-for-aspnet-core"></a>ASP.NET Core 的用戶端 IP 安全
 
 By [Damien Bowden](https://twitter.com/damien_bod)和[Tom 作者: dykstra](https://github.com/tdykstra)
  
-本文說明三種在 ASP.NET Core 應用程式中執行 IP 位址安全清單（也稱為允許清單）的方式。 隨附的範例應用程式會示範這三種方法。 您可以使用：
+本文說明三種方式，可在 ASP.NET Core 應用程式中執行 IP 位址的安全清單 (也稱為允許清單) 。 隨附的範例應用程式會示範這三種方法。 您可以使用：
 
 * 中介軟體，以檢查每個要求的遠端 IP 位址。
 * MVC 動作篩選準則，以檢查特定控制器或動作方法的遠端 IP 位址要求。
@@ -39,18 +41,18 @@ By [Damien Bowden](https://twitter.com/damien_bod)和[Tom 作者: dykstra](https
 
 如果陣列包含 IP 位址，則允許存取。 否則，會傳回 HTTP 403 禁止狀態碼。
 
-[查看或下載範例程式碼](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/security/ip-safelist/samples)（[如何下載](xref:index#how-to-download-a-sample)）
+[查看或下載範例程式碼](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/security/ip-safelist/samples) ([如何下載](xref:index#how-to-download-a-sample)) 
 
 ## <a name="ip-address-safelist"></a>IP 位址的安全
 
 在範例應用程式中，IP 位址的「安全」是：
 
 * 由 `AdminSafeList` *appsettings.json*檔案中的屬性所定義。
-* 以分號分隔的字串，其中可能包含[網際網路通訊協定第4版（IPv4）](https://wikipedia.org/wiki/IPv4)和[網際網路通訊協定第6版（IPv6）](https://wikipedia.org/wiki/IPv6)位址。
+* 以分號分隔的字串，其中可能包含[網際網路通訊協定第4版 (IPv4) ](https://wikipedia.org/wiki/IPv4)和[網際網路通訊協定第6版 (IPv6) ](https://wikipedia.org/wiki/IPv6)位址。
 
 [!code-json[](ip-safelist/samples/3.x/ClientIpAspNetCore/appsettings.json?range=1-3&highlight=2)]
 
-在上述範例中，允許和的 IPv4 `127.0.0.1` 位址 `192.168.1.5` 和的 IPv6 回送位址 `::1` （的壓縮格式 `0:0:0:0:0:0:0:1` ）。
+在上述範例中，允許) 的 IPv4 位址 `127.0.0.1` 和 `192.168.1.5` `::1` (壓縮格式的 IPv6 回送位址 `0:0:0:0:0:0:0:1` 。
 
 ## <a name="middleware"></a>中介軟體
 
@@ -99,7 +101,7 @@ By [Damien Bowden](https://twitter.com/damien_bod)和[Tom 作者: dykstra](https
 
 * GET 以外的 HTTP 要求動詞， `AdminSafeListMiddleware` 中介軟體會驗證用戶端 IP 位址。
 
-## <a name="razor-pages-filter"></a>Razor頁面篩選
+## <a name="no-locrazor-pages-filter"></a>Razor頁面篩選
 
 如果您想要使用網頁應用程式的 [以安全] 為導向的存取控制 Razor ，請使用 [ Razor 頁面] 篩選準則。 例如：
 

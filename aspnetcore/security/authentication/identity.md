@@ -1,10 +1,12 @@
 ---
 title: 簡介 Identity ASP.NET Core
 author: rick-anderson
-description: 搭配 Identity ASP.NET Core 應用程式使用。 瞭解如何設定密碼需求（RequireDigit、RequiredLength、RequiredUniqueChars 等）。
+description: 搭配 Identity ASP.NET Core 應用程式使用。 瞭解如何 (RequireDigit、RequiredLength、RequiredUniqueChars 等) 設定密碼需求。
 ms.author: riande
 ms.date: 7/15/2020
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -13,12 +15,12 @@ no-loc:
 - Razor
 - SignalR
 uid: security/authentication/identity
-ms.openlocfilehash: 25070e90050db9dca8b003ae782662811096526a
-ms.sourcegitcommit: 5a36758cca2861aeb10840093e46d273a6e6e91d
+ms.openlocfilehash: 67bf24d8f871c4e80ed91f5f437895fe29e09087
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 07/28/2020
-ms.locfileid: "87160309"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88021233"
 ---
 # <a name="introduction-to-no-locidentity-on-aspnet-core"></a>簡介 Identity ASP.NET Core
 
@@ -28,7 +30,7 @@ ms.locfileid: "87160309"
 
 ASP.NET Core Identity ：
 
-* 是支援使用者介面（UI）登入功能的 API。
+* 是支援使用者介面 (UI) 登入功能的 API。
 * 管理使用者、密碼、設定檔資料、角色、宣告、權杖、電子郵件確認等等。
 
 使用者可以建立具有儲存在中之登入資訊的帳戶， Identity 或可以使用外部登入提供者。 支援的外部登入提供者包括[Facebook、Google、Microsoft 帳戶及 Twitter](xref:security/authentication/social/index)。
@@ -43,12 +45,12 @@ Identity通常會使用 SQL Server 資料庫來設定，以儲存使用者名稱
 
 [Microsoft 身分識別平臺](/azure/active-directory/develop/)是：
 
-* Azure Active Directory （Azure AD）開發人員平臺的演進。
+* Azure Active Directory (Azure AD) 開發人員平臺的演進。
 * 與 ASP.NET Core 無關 Identity 。
 
 [!INCLUDE[](~/includes/IdentityServer4.md)]
 
-[查看或下載範例程式碼](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/security/authentication/identity/sample)（[如何下載）](xref:index#how-to-download-a-sample)）。
+[查看或下載範例程式碼](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/security/authentication/identity/sample) ([如何下載](xref:index#how-to-download-a-sample)) 。
 
 <a name="adi"></a>
 
@@ -59,7 +61,7 @@ Identity通常會使用 SQL Server 資料庫來設定，以儲存使用者名稱
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
 * 選取 **[** 檔案] [ > **新增** > **專案**]。
-* 選取 **ASP.NET Core Web 應用程式**。 將專案命名為**WebApp1** ，使其命名空間與專案下載相同。 按一下 [確定]。
+* 選取 **ASP.NET Core Web 應用程式**。 將專案命名為**WebApp1** ，使其命名空間與專案下載相同。 按一下 [確定]  。
 * 選取 ASP.NET Core **Web 應用程式**，然後選取 [**變更驗證**]。
 * 選取 [**個別使用者帳戶**]，然後按一下 **[確定]**。
 
@@ -89,7 +91,7 @@ dotnet new webapp --auth Individual -uld -o WebApp1
 
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
-在 [套件管理員主控台] （PMC）中執行下列命令：
+在套件管理員主控台中執行下列命令 (PMC) ：
 
 `PM> Update-Database`
 
@@ -184,7 +186,7 @@ https://github.com/dotnet/aspnetcore/blob/master/src/Identity/UI/src/Areas/Ident
 
 在上述程式碼中，程式碼必須是重新導向，才能 `return RedirectToPage();` 讓瀏覽器執行新的要求，並更新使用者的身分識別。
 
-[SignOutAsync](/dotnet/api/microsoft.aspnetcore.identity.signinmanager-1.signoutasync#Microsoft_AspNetCore_Identity_SignInManager_1_SignOutAsync)會清除儲存在 cookie 中的使用者宣告。
+[SignOutAsync](/dotnet/api/microsoft.aspnetcore.identity.signinmanager-1.signoutasync#Microsoft_AspNetCore_Identity_SignInManager_1_SignOutAsync)會清除儲存在中的使用者宣告 cookie 。
 
 Post 是在*Pages/Shared/_LoginPartial*中指定的。 cshtml：
 
@@ -231,7 +233,7 @@ Post 是在*Pages/Shared/_LoginPartial*中指定的。 cshtml：
 
 ## <a name="prevent-publish-of-static-no-locidentity-assets"></a>防止發行靜態 Identity 資產
 
-若要防止將靜態 Identity 資產（適用于 UI 的樣式表單和 JavaScript 檔案 Identity ）發行至 web 根目錄，請將下列 `ResolveStaticWebAssetsInputsDependsOn` 屬性和 `RemoveIdentityAssets` 目標新增至應用程式的專案檔：
+若要防止將靜態 Identity 資產發行 (的樣式表單和 JavaScript 檔案，以供 Identity UI) 至 web 根目錄，請將下列 `ResolveStaticWebAssetsInputsDependsOn` 屬性和 `RemoveIdentityAssets` 目標新增至應用程式的專案檔：
 
 ```xml
 <PropertyGroup>
@@ -270,7 +272,7 @@ ASP.NET Core Identity 是將登入功能新增至 ASP.NET Core 應用程式的�
 
 Identity可以使用 SQL Server 資料庫來設定，以儲存使用者名稱、密碼和設定檔資料。 或者，也可以使用另一個持續性存放區，例如 Azure 表格儲存體。
 
-[查看或下載範例程式碼](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/security/authentication/identity/sample/src/ASPNETCore-IdentityDemoComplete/)（[如何下載）](xref:index#how-to-download-a-sample)）。
+[查看或下載範例程式碼](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/security/authentication/identity/sample/src/ASPNETCore-IdentityDemoComplete/) ([如何下載](xref:index#how-to-download-a-sample)) 。
 
 在本主題中，您將瞭解如何使用 Identity 來註冊、登入和登出使用者。 如需有關建立使用之應用程式的詳細指示 Identity ，請參閱本文結尾的後續步驟一節。
 
@@ -293,7 +295,7 @@ Identity可以使用 SQL Server 資料庫來設定，以儲存使用者名稱、
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
 * 選取 **[** 檔案] [ > **新增** > **專案**]。
-* 選取 **ASP.NET Core Web 應用程式**。 將專案命名為**WebApp1** ，使其命名空間與專案下載相同。 按一下 [確定]。
+* 選取 **ASP.NET Core Web 應用程式**。 將專案命名為**WebApp1** ，使其命名空間與專案下載相同。 按一下 [確定]  。
 * 選取 ASP.NET Core **Web 應用程式**，然後選取 [**變更驗證**]。
 * 選取 [**個別使用者帳戶**]，然後按一下 **[確定]**。
 
@@ -317,7 +319,7 @@ dotnet new webapp --auth Individual -o WebApp1
 
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
-在 [套件管理員主控台] （PMC）中執行下列命令：
+在套件管理員主控台中執行下列命令 (PMC) ：
 
 ```powershell
 Update-Database
@@ -403,7 +405,7 @@ PowerShell 使用分號做為命令分隔符號。 使用 PowerShell 時，請�
 
 [!code-csharp[](identity/sample/WebApp1/Areas/Identity/Pages/Account/Logout.cshtml.cs)]
 
-[SignOutAsync](/dotnet/api/microsoft.aspnetcore.identity.signinmanager-1.signoutasync#Microsoft_AspNetCore_Identity_SignInManager_1_SignOutAsync)會清除儲存在 cookie 中的使用者宣告。
+[SignOutAsync](/dotnet/api/microsoft.aspnetcore.identity.signinmanager-1.signoutasync#Microsoft_AspNetCore_Identity_SignInManager_1_SignOutAsync)會清除儲存在中的使用者宣告 cookie 。
 
 Post 是在*Pages/Shared/_LoginPartial*中指定的。 cshtml：
 

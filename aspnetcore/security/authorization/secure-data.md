@@ -6,6 +6,8 @@ ms.author: riande
 ms.date: 7/18/2020
 ms.custom: mvc, seodec18
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -14,12 +16,12 @@ no-loc:
 - Razor
 - SignalR
 uid: security/authorization/secure-data
-ms.openlocfilehash: 7d4c10fa0b1c569179fc3e0a518917ec0185c51f
-ms.sourcegitcommit: 1b89fc58114a251926abadfd5c69c120f1ba12d8
+ms.openlocfilehash: 44777369693f9eb29d78c3ba638db2e692f430ae
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 07/24/2020
-ms.locfileid: "87160281"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88021181"
 ---
 # <a name="create-an-aspnet-core-web-app-with-user-data-protected-by-authorization"></a>建立 ASP.NET Core web 應用程式，其中包含由授權保護的使用者資料
 
@@ -33,7 +35,7 @@ ms.locfileid: "87160281"
 
 ::: moniker range=">= aspnetcore-3.0"
 
-本教學課程示範如何建立 ASP.NET Core web 應用程式，其中包含由授權保護的使用者資料。 它會顯示已驗證（已註冊）使用者建立的連絡人清單。 有三個安全性群組：
+本教學課程示範如何建立 ASP.NET Core web 應用程式，其中包含由授權保護的使用者資料。 它會顯示已驗證 (註冊) 使用者已建立的連絡人清單。 有三個安全性群組：
 
 * **已註冊的使用者**可以查看所有核准的資料，而且可以編輯/刪除自己的資料。
 * **管理員**可以核准或拒絕連絡人資料。 使用者只能看到核准的連絡人。
@@ -41,7 +43,7 @@ ms.locfileid: "87160281"
 
 本檔中的影像不完全符合最新的範本。
 
-在下圖中，已登入使用者 Rick （ `rick@example.com` ）。 Rick 只能查看已核准的連絡人**Edit**，並 / **Delete** / 針對他的連絡人編輯 [刪除]**建立新**的連結。 只有 [Rick] 所建立的最後一筆記錄會顯示 [**編輯**] 和 [**刪除**] 連結。 在管理員或系統管理員將狀態變更為「已核准」之前，其他使用者將不會看到最後一筆記錄。
+在下圖中，已登入使用者 Rick (`rick@example.com`) 。 Rick 只能查看已核准的連絡人**Edit**，並 / **Delete** / 針對他的連絡人編輯 [刪除]**建立新**的連結。 只有 [Rick] 所建立的最後一筆記錄會顯示 [**編輯**] 和 [**刪除**] 連結。 在管理員或系統管理員將狀態變更為「已核准」之前，其他使用者將不會看到最後一筆記錄。
 
 ![顯示 Rick 已登入的螢幕擷取畫面](secure-data/_static/rick.png)
 
@@ -71,7 +73,7 @@ ms.locfileid: "87160281"
 * `ContactManagerAuthorizationHandler`：允許管理員核准或拒絕連絡人。
 * `ContactAdministratorsAuthorizationHandler`：可讓系統管理員核准或拒絕連絡人，以及編輯/刪除連絡人。
 
-## <a name="prerequisites"></a>先決條件
+## <a name="prerequisites"></a>必要條件
 
 本教學課程是先進的。 您應該已熟悉：
 
@@ -148,7 +150,7 @@ Fallback 驗證原則：
 
 ### <a name="configure-the-test-account"></a>設定測試帳戶
 
-`SeedData`類別會建立兩個帳戶：系統管理員和管理員。 使用[秘密管理員工具](xref:security/app-secrets)來設定這些帳戶的密碼。 從專案目錄（包含*Program.cs*的目錄）設定密碼：
+`SeedData`類別會建立兩個帳戶：系統管理員和管理員。 使用[秘密管理員工具](xref:security/app-secrets)來設定這些帳戶的密碼。 從專案目錄中設定密碼， (包含*Program.cs*) 的目錄：
 
 ```dotnetcli
 dotnet user-secrets set SeedUserPW <PW>
@@ -187,7 +189,7 @@ dotnet user-secrets set SeedUserPW <PW>
 
 ### <a name="create-a-manager-authorization-handler"></a>建立管理員授權處理常式
 
-`ContactManagerAuthorizationHandler`在 [*授權*] 資料夾中建立類別。 `ContactManagerAuthorizationHandler`會驗證對資源的使用者是否為管理員。 只有管理員可以核准或拒絕內容變更（新的或已變更）。
+`ContactManagerAuthorizationHandler`在 [*授權*] 資料夾中建立類別。 `ContactManagerAuthorizationHandler`會驗證對資源的使用者是否為管理員。 只有管理員可以核准或拒絕 (新增或變更) 的內容變更。
 
 [!code-csharp[](secure-data/samples/final3/Authorization/ContactManagerAuthorizationHandler.cs)]
 
@@ -321,7 +323,7 @@ dotnet user-secrets set SeedUserPW <PW>
 * 刪除資料表中的所有記錄 `Contact` 。
 * 重新開機應用程式以植入資料庫。
 
-測試已完成之應用程式的簡單方法，是啟動三個不同的瀏覽器（或 incognito/InPrivate 會話）。 在一個瀏覽器中，註冊新的使用者（例如 `test@example.com` ）。 使用不同的使用者登入每個瀏覽器。 確認下列作業：
+測試已完成之應用程式的簡單方法，就是啟動三個不同的瀏覽器 (或 incognito/InPrivate 會話) 。 在一個瀏覽器中，註冊新的使用者 (例如 `test@example.com`) 。 使用不同的使用者登入每個瀏覽器。 確認下列作業：
 
 * 已註冊的使用者可以查看所有已核准的連絡人資料。
 * 已註冊的使用者可以編輯/刪除自己的資料。
@@ -389,13 +391,13 @@ dotnet ef database update
 
 ::: moniker range=">= aspnetcore-2.1 < aspnetcore-3.0"
 
-本教學課程示範如何建立 ASP.NET Core web 應用程式，其中包含由授權保護的使用者資料。 它會顯示已驗證（已註冊）使用者建立的連絡人清單。 有三個安全性群組：
+本教學課程示範如何建立 ASP.NET Core web 應用程式，其中包含由授權保護的使用者資料。 它會顯示已驗證 (註冊) 使用者已建立的連絡人清單。 有三個安全性群組：
 
 * **已註冊的使用者**可以查看所有核准的資料，而且可以編輯/刪除自己的資料。
 * **管理員**可以核准或拒絕連絡人資料。 使用者只能看到核准的連絡人。
 * 系統**管理員**可以核准/拒絕和編輯/刪除任何資料。
 
-在下圖中，已登入使用者 Rick （ `rick@example.com` ）。 Rick 只能查看已核准的連絡人**Edit**，並 / **Delete** / 針對他的連絡人編輯 [刪除]**建立新**的連結。 只有 [Rick] 所建立的最後一筆記錄會顯示 [**編輯**] 和 [**刪除**] 連結。 在管理員或系統管理員將狀態變更為「已核准」之前，其他使用者將不會看到最後一筆記錄。
+在下圖中，已登入使用者 Rick (`rick@example.com`) 。 Rick 只能查看已核准的連絡人**Edit**，並 / **Delete** / 針對他的連絡人編輯 [刪除]**建立新**的連結。 只有 [Rick] 所建立的最後一筆記錄會顯示 [**編輯**] 和 [**刪除**] 連結。 在管理員或系統管理員將狀態變更為「已核准」之前，其他使用者將不會看到最後一筆記錄。
 
 ![顯示 Rick 已登入的螢幕擷取畫面](secure-data/_static/rick.png)
 
@@ -425,7 +427,7 @@ dotnet ef database update
 * `ContactManagerAuthorizationHandler`：允許管理員核准或拒絕連絡人。
 * `ContactAdministratorsAuthorizationHandler`：可讓系統管理員核准或拒絕連絡人，以及編輯/刪除連絡人。
 
-## <a name="prerequisites"></a>先決條件
+## <a name="prerequisites"></a>必要條件
 
 本教學課程是先進的。 您應該已熟悉：
 
@@ -484,7 +486,7 @@ dotnet ef database update
 
 ### <a name="configure-the-test-account"></a>設定測試帳戶
 
-`SeedData`類別會建立兩個帳戶：系統管理員和管理員。 使用[秘密管理員工具](xref:security/app-secrets)來設定這些帳戶的密碼。 從專案目錄（包含*Program.cs*的目錄）設定密碼：
+`SeedData`類別會建立兩個帳戶：系統管理員和管理員。 使用[秘密管理員工具](xref:security/app-secrets)來設定這些帳戶的密碼。 從專案目錄中設定密碼， (包含*Program.cs*) 的目錄：
 
 ```dotnetcli
 dotnet user-secrets set SeedUserPW <PW>
@@ -523,7 +525,7 @@ dotnet user-secrets set SeedUserPW <PW>
 
 ### <a name="create-a-manager-authorization-handler"></a>建立管理員授權處理常式
 
-`ContactManagerAuthorizationHandler`在 [*授權*] 資料夾中建立類別。 `ContactManagerAuthorizationHandler`會驗證對資源的使用者是否為管理員。 只有管理員可以核准或拒絕內容變更（新的或已變更）。
+`ContactManagerAuthorizationHandler`在 [*授權*] 資料夾中建立類別。 `ContactManagerAuthorizationHandler`會驗證對資源的使用者是否為管理員。 只有管理員可以核准或拒絕 (新增或變更) 的內容變更。
 
 [!code-csharp[](secure-data/samples/final2.1/Authorization/ContactManagerAuthorizationHandler.cs)]
 
@@ -648,7 +650,7 @@ dotnet user-secrets set SeedUserPW <PW>
 
 * 重新開機應用程式以植入資料庫。
 
-測試已完成之應用程式的簡單方法，是啟動三個不同的瀏覽器（或 incognito/InPrivate 會話）。 在一個瀏覽器中，註冊新的使用者（例如 `test@example.com` ）。 使用不同的使用者登入每個瀏覽器。 確認下列作業：
+測試已完成之應用程式的簡單方法，就是啟動三個不同的瀏覽器 (或 incognito/InPrivate 會話) 。 在一個瀏覽器中，註冊新的使用者 (例如 `test@example.com`) 。 使用不同的使用者登入每個瀏覽器。 確認下列作業：
 
 * 已註冊的使用者可以查看所有已核准的連絡人資料。
 * 已註冊的使用者可以編輯/刪除自己的資料。

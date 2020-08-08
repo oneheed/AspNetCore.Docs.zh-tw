@@ -5,6 +5,8 @@ description: ASP.NET Core MVC 之教學課程系列的第2部分。
 ms.author: riande
 ms.date: 08/05/2017
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -13,12 +15,12 @@ no-loc:
 - Razor
 - SignalR
 uid: tutorials/first-mvc-app/adding-controller
-ms.openlocfilehash: 30272900b2ff19879921f1954a1c9b3eba203ca4
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: 6a2c9fe6dde725129e293a3137c1281bfb1a30ef
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85400449"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88021051"
 ---
 # <a name="part-2-add-a-controller-to-an-aspnet-core-mvc-app"></a>第2部分，將控制器新增至 ASP.NET Core MVC 應用程式
 
@@ -100,7 +102,7 @@ MVC 會根據傳入 URL 叫用控制器類別 (和其中的動作方法)。 MVC 
 
 ![顯示應用程式回應 "This is the Welcome action method" 的瀏覽器視窗](~/tutorials/first-mvc-app/adding-controller/_static/welcome.png)
 
-修改程式碼 ，將 URL 中的某些參數資訊傳遞到控制器。 例如： `/HelloWorld/Welcome?name=Rick&numtimes=4` 。 變更 `Welcome` 方法以包含兩個參數，如下列程式碼所示。
+修改程式碼 ，將 URL 中的某些參數資訊傳遞到控制器。 例如，`/HelloWorld/Welcome?name=Rick&numtimes=4`。 變更 `Welcome` 方法以包含兩個參數，如下列程式碼所示。
 
 [!code-csharp[](~/tutorials/first-mvc-app/start-mvc/sample/MvcMovie/Controllers/HelloWorldController.cs?name=snippet_2)]
 
@@ -114,11 +116,11 @@ MVC 會根據傳入 URL 叫用控制器類別 (和其中的動作方法)。 MVC 
 
    `https://localhost:{PORT}/HelloWorld/Welcome?name=Rick&numtimes=4`
 
-（請 `{PORT}` 將取代為您的埠號碼）。您可以 `name` 在 URL 中針對和嘗試不同的值 `numtimes` 。 MVC [模型繫結](xref:mvc/models/model-binding)系統會自動將網址列上查詢字串中的具名參數對應至方法中的參數。 如需詳細資訊，請參閱[模型繫結](xref:mvc/models/model-binding)。
+ (將取代 `{PORT}` 為您的埠號碼。 ) 您可以 `name` `numtimes` 在 URL 中嘗試不同的和值。 MVC [模型繫結](xref:mvc/models/model-binding)系統會自動將網址列上查詢字串中的具名參數對應至方法中的參數。 如需詳細資訊，請參閱[模型繫結](xref:mvc/models/model-binding)。
 
 ![顯示應用程式回應 Hello Rick 的瀏覽器視窗，Numtimes is 是 \: 4](~/tutorials/first-mvc-app/adding-controller/_static/rick4.png)
 
-在上圖中， `Parameters` 不會使用 URL 區段（）， `name` 而且 `numTimes` 會在[查詢字串](https://wikipedia.org/wiki/Query_string)中傳遞和參數。 `?`上述 URL 中的（問號）是分隔符號，而查詢字串則如下所示。 `&`字元會分隔欄位-值組。
+在上圖中，未使用 URL 區段 (`Parameters`) ， `name` `numTimes` 會在[查詢字串](https://wikipedia.org/wiki/Query_string)中傳遞和參數。 `?`上述 URL 中的 (問號) 是分隔符號，而查詢字串則如下所示。 `&`字元會分隔欄位-值組。
 
 以下列程式碼取代 `Welcome` 方法：
 
@@ -219,7 +221,7 @@ Remove link for simplified tutorial.
 
 ![顯示應用程式回應 "This is the Welcome action method" 的瀏覽器視窗](~/tutorials/first-mvc-app/adding-controller/_static/welcome.png)
 
-修改程式碼 ，將 URL 中的某些參數資訊傳遞到控制器。 例如： `/HelloWorld/Welcome?name=Rick&numtimes=4` 。 變更 `Welcome` 方法以包含兩個參數，如下列程式碼所示。
+修改程式碼 ，將 URL 中的某些參數資訊傳遞到控制器。 例如，`/HelloWorld/Welcome?name=Rick&numtimes=4`。 變更 `Welcome` 方法以包含兩個參數，如下列程式碼所示。
 
 [!code-csharp[](~/tutorials/first-mvc-app/start-mvc/sample/MvcMovie/Controllers/HelloWorldController.cs?name=snippet_2)]
 
@@ -233,11 +235,11 @@ Remove link for simplified tutorial.
 
    `https://localhost:{PORT}/HelloWorld/Welcome?name=Rick&numtimes=4`
 
-（請 `{PORT}` 將取代為您的埠號碼）。您可以 `name` 在 URL 中針對和嘗試不同的值 `numtimes` 。 MVC [模型繫結](xref:mvc/models/model-binding)系統會自動將網址列上查詢字串中的具名參數對應至方法中的參數。 如需詳細資訊，請參閱[模型繫結](xref:mvc/models/model-binding)。
+ (將取代 `{PORT}` 為您的埠號碼。 ) 您可以 `name` `numtimes` 在 URL 中嘗試不同的和值。 MVC [模型繫結](xref:mvc/models/model-binding)系統會自動將網址列上查詢字串中的具名參數對應至方法中的參數。 如需詳細資訊，請參閱[模型繫結](xref:mvc/models/model-binding)。
 
 ![顯示應用程式回應 Hello Rick 的瀏覽器視窗，Numtimes is 是 \: 4](~/tutorials/first-mvc-app/adding-controller/_static/rick4.png)
 
-在上圖中， `Parameters` 不會使用 URL 區段（）， `name` 而且 `numTimes` 會在[查詢字串](https://wikipedia.org/wiki/Query_string)中傳遞和參數。 `?`上述 URL 中的（問號）是分隔符號，而查詢字串則如下所示。 `&`字元會分隔欄位-值組。
+在上圖中，未使用 URL 區段 (`Parameters`) ， `name` `numTimes` 會在[查詢字串](https://wikipedia.org/wiki/Query_string)中傳遞和參數。 `?`上述 URL 中的 (問號) 是分隔符號，而查詢字串則如下所示。 `&`字元會分隔欄位-值組。
 
 以下列程式碼取代 `Welcome` 方法：
 

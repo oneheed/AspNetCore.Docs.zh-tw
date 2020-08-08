@@ -5,6 +5,8 @@ description: 瞭解如何在 ASP.NET Core 應用程式中新增授權的宣告�
 ms.author: riande
 ms.date: 10/14/2016
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -13,12 +15,12 @@ no-loc:
 - Razor
 - SignalR
 uid: security/authorization/claims
-ms.openlocfilehash: 404e26f0fb5e71dbc22b1c08a2f8caf8461ad7e1
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: 639cacbab2688adfe769ef2c6954ea877cf0c66a
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85406377"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88022351"
 ---
 # <a name="claims-based-authorization-in-aspnet-core"></a>ASP.NET Core 中以宣告為基礎的授權
 
@@ -26,7 +28,7 @@ ms.locfileid: "85406377"
 
 建立身分識別時，可能會被指派一個或多個由信任方發行的宣告。 宣告是一組名稱值組，代表主旨，而不是主體可執行檔動作。 例如，您可能有一個駕駛者授權，由當地駕駛授權單位發行。 您的驅動程式授權已在此提供您的出生日期。 在此情況下，宣告名稱會是 `DateOfBirth` ，宣告值會是您的出生日期，例如， `8th June 1970` 而簽發者會是駕駛授權授權單位。 以宣告為基礎的授權，其最簡單的會檢查宣告的值，並允許根據該值來存取資源。 例如，如果您想要存取深夜俱樂部，授權程式可能如下：
 
-門安全主管會評估您的出生日期值，以及他們是否信任簽發者（駕駛授權授權單位），再授與您存取權。
+在授與您存取權之前，大門安全性主管會評估您的出生日期值，以及他們是否信任簽發者 (駕駛授權單位) 。
 
 身分識別可以包含多個具有多個值的宣告，而且可以包含相同類型的多個宣告。
 

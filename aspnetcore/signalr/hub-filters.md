@@ -7,6 +7,8 @@ ms.author: brecon
 ms.custom: mvc
 ms.date: 05/22/2020
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -15,14 +17,14 @@ no-loc:
 - Razor
 - SignalR
 uid: signalr/hub-filters
-ms.openlocfilehash: c7ba0fff8bca53e2d6d12add693ee391ffa789ca
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: db6439ab4e61d0412148c5ea72b52d429367491b
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85408561"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88022143"
 ---
-# <a name="use-hub-filters-in-aspnet-core-signalr"></a>在 ASP.NET Core 中使用中樞篩選器SignalR
+# <a name="use-hub-filters-in-aspnet-core-no-locsignalr"></a>在 ASP.NET Core 中使用中樞篩選器SignalR
 
 中樞篩選器：
 
@@ -58,7 +60,7 @@ public void ConfigureServices(IServiceCollection services)
     hubOptions.AddFilter<TFilter>();
     ```
 
-    這會從相依性插入（DI）或啟動類型中解析。
+    這會從相依性插入解析 (DI) 或啟用類型。
 
 * 依執行時間類型新增篩選準則：
 

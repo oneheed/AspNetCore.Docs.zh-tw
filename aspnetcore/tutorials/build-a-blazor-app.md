@@ -7,6 +7,8 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 07/30/2020
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -15,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: tutorials/build-a-blazor-app
-ms.openlocfilehash: b58c0c3db685d0a5b082aaf2eb434635bd10e2eb
-ms.sourcegitcommit: ca6a1f100c1a3f59999189aa962523442dd4ead1
+ms.openlocfilehash: 42c4f94869586bfcd4e8b27e4bdf4ef226094072
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 07/30/2020
-ms.locfileid: "87444040"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88022494"
 ---
 # <a name="build-a-no-locblazor-todo-list-app"></a>建立 Blazor 待辦事項清單應用程式
 
@@ -36,7 +38,7 @@ ms.locfileid: "87444040"
 
 在本教學課程結尾，您將會有一個可運作的待辦事項清單應用程式。
 
-## <a name="prerequisites"></a>先決條件
+## <a name="prerequisites"></a>必要條件
 
 [!INCLUDE[](~/includes/3.1-SDK.md)]
 
@@ -73,7 +75,7 @@ ms.locfileid: "87444040"
 
 1. 將 `Todo` 元件新增至導覽列。
 
-   `NavMenu`元件（ `Shared/NavMenu.razor` ）會用於應用程式的版面配置。 版面配置是可讓您避免應用程式中內容重複的元件。
+   `NavMenu`元件 (`Shared/NavMenu.razor`) 會用於應用程式的版面配置中。 版面配置是可讓您避免應用程式中內容重複的元件。
 
    新增 `<NavLink>` 元件的專案， `Todo` 方法是在檔案中的現有清單專案下方新增下列清單專案標記 `Shared/NavMenu.razor` ：
 
@@ -91,7 +93,7 @@ ms.locfileid: "87444040"
 
    [!code-csharp[](build-a-blazor-app/samples_snapshot/3.x/TodoItem.cs)]
 
-1. 回到 `Todo` 元件（ `Pages/Todo.razor` ）：
+1. 回到 `Todo` 元件 (`Pages/Todo.razor`) ：
 
    * 在 `@code` 區塊中新增待辦事項的欄位。 `Todo` 元件會使用此欄位來維護待辦事項清單的狀態。
    * 新增未排序的清單標記和 `foreach` 迴圈，將每個待辦事項轉譯為清單項目 (`<li>`)。
@@ -132,7 +134,7 @@ ms.locfileid: "87444040"
    <h3>Todo (@todos.Count(todo => !todo.IsDone))</h3>
    ```
 
-1. 完成的 `Todo` 元件（ `Pages/Todo.razor` ）：
+1. 已完成的 `Todo` 元件 (`Pages/Todo.razor`) ：
 
    [!code-razor[](build-a-blazor-app/samples_snapshot/3.x/Todo.razor)]
 

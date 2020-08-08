@@ -5,6 +5,8 @@ description: 示範如何防止對 ASP.NET Core 應用程式的開啟重新導�
 ms.author: riande
 ms.date: 07/07/2017
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -13,33 +15,33 @@ no-loc:
 - Razor
 - SignalR
 uid: security/preventing-open-redirects
-ms.openlocfilehash: eb18c599d84fd08ffe97867b67a837303af188db
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: 3a58c25bbd54803ce0b8c42a2667222d6e14c050
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85408145"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88021012"
 ---
 # <a name="prevent-open-redirect-attacks-in-aspnet-core"></a>防止 ASP.NET Core 中的開啟重新導向攻擊
 
 重新導向至透過要求（例如 querystring 或表單資料）所指定 URL 的 web 應用程式可能會遭到篡改，以將使用者重新導向至外部的惡意 URL。 這種篡改稱為開放式重新導向攻擊。
 
-每當您的應用程式邏輯重新導向至指定的 URL 時，您都必須確認重新導向 URL 未遭到篡改。 ASP.NET Core 具有內建功能，可協助保護應用程式不受開啟的重新導向（也稱為開放式重新導向）攻擊。
+每當您的應用程式邏輯重新導向至指定的 URL 時，您都必須確認重新導向 URL 未遭到篡改。 ASP.NET Core 具有內建功能，可協助保護應用程式不受開啟重新導向 (又稱為「開啟重新導向」) 攻擊。
 
 ## <a name="what-is-an-open-redirect-attack"></a>什麼是開啟的重新導向攻擊？
 
 Web 應用程式通常會在使用者存取需要驗證的資源時，將他們重新導向至登入頁面。 重新導向通常會包含 `returnUrl` querystring 參數，讓使用者可以在成功登入之後，傳回給原始要求的 URL。 使用者驗證之後，系統會將他們重新導向至原先要求的 URL。
 
-因為在要求的 querystring 中指定了目的地 URL，所以惡意使用者可能會篡改 querystring。 遭篡改的 querystring 可能會允許網站將使用者重新導向至外部的惡意網站。 這項技術稱為「開啟重新導向」（或「重新導向」）攻擊。
+因為在要求的 querystring 中指定了目的地 URL，所以惡意使用者可能會篡改 querystring。 遭篡改的 querystring 可能會允許網站將使用者重新導向至外部的惡意網站。 這項技術稱為開放式重新導向 (或重新導向) 攻擊。
 
 ### <a name="an-example-attack"></a>範例攻擊
 
 惡意使用者可能會開發攻擊，以允許惡意使用者存取使用者的認證或機密資訊。 若要開始攻擊，惡意使用者說服使用者按一下您網站登入頁面的連結，並將 `returnUrl` querystring 值新增至 URL。 例如，請考慮中的應用程式， `contoso.com` 其中包含的登入頁面 `http://contoso.com/Account/LogOn?returnUrl=/Home/About` 。 攻擊會遵循下列步驟：
 
-1. 使用者按一下的惡意連結 `http://contoso.com/Account/LogOn?returnUrl=http://contoso1.com/Account/LogOn` （第二個 URL 是 "contoso**1**.com"，而不是 "contoso.com"）。
+1. 使用者按一下惡意連結以 `http://contoso.com/Account/LogOn?returnUrl=http://contoso1.com/Account/LogOn` (第二個 URL 是 "contoso**1**.com"，而不是 "contoso.com" ) 。
 2. 使用者登入成功。
-3. 使用者會被重新導向（由網站）到 `http://contoso1.com/Account/LogOn` （看起來與實際網站完全類似的惡意網站）。
-4. 使用者再次登入（提供惡意網站的認證），然後重新導向至實際網站。
+3. 網站) 會將使用者重新導向 (，以 `http://contoso1.com/Account/LogOn` (與實際網站) 完全類似的惡意網站。
+4. 使用者再次登入 (提供惡意網站的認證) 並重新導向至實際網站。
 
 使用者可能認為第一次嘗試登入失敗，而第二次嘗試成功。 使用者很可能會不知道他們的認證會受到危害。
 
@@ -49,7 +51,7 @@ Web 應用程式通常會在使用者存取需要驗證的資源時，將他們�
 
 ## <a name="protecting-against-open-redirect-attacks"></a>防止開啟重新導向攻擊
 
-開發 web 應用程式時，將所有使用者提供的資料視為不受信任。 如果您的應用程式具有可根據 URL 內容重新導向使用者的功能，請確定這類重新導向只會在您的應用程式中本機完成（或至已知的 URL，而不是查詢字串中可能提供的任何 URL）。
+開發 web 應用程式時，將所有使用者提供的資料視為不受信任。 如果您的應用程式具有可根據 URL 內容重新導向使用者的功能，請確定這類重新導向只會在您的應用程式內本機完成， (或至已知的 URL，而不是查詢字串) 中可能提供的任何 URL。
 
 ### <a name="localredirect"></a>LocalRedirect
 

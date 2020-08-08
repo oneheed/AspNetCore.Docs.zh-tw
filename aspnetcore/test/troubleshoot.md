@@ -6,6 +6,8 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 07/10/2019
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -14,12 +16,12 @@ no-loc:
 - Razor
 - SignalR
 uid: test/troubleshoot
-ms.openlocfilehash: f3c975567ee9ea5a1d9f317d3bc77997f68be928
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: a05b5f85ee9e399daf35c32dabe0149be38ff6c2
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85398993"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88021350"
 ---
 # <a name="troubleshoot-and-debug-aspnet-core-projects"></a>疑難排解和調試 ASP.NET Core 專案
 
@@ -29,7 +31,7 @@ ms.locfileid: "85398993"
 
 * <xref:test/troubleshoot-azure-iis>
 * <xref:host-and-deploy/azure-iis-errors-reference>
-* [NDC 會議（倫敦，2018）：診斷 ASP.NET Core 應用程式中的問題](https://www.youtube.com/watch?v=RYI0DHoIVaA)
+* [NDC 會議 (倫敦，2018) ：診斷 ASP.NET Core 應用程式中的問題](https://www.youtube.com/watch?v=RYI0DHoIVaA)
 * [ASP.NET Blog：對 ASP.NET Core 效能問題進行疑難排解](https://blogs.msdn.microsoft.com/webdev/2018/05/23/asp-net-core-performance-improvements/)
 
 ## <a name="net-core-sdk-warnings"></a>.NET Core SDK 警告
@@ -40,7 +42,7 @@ ms.locfileid: "85398993"
 
 > 已安裝32位和64位版本的 .NET Core SDK。 只會顯示安裝在「C： \\ Program Files dotnet sdk」之64位版本的範本 \\ \\ \\ 。
 
-當安裝32位（x86）和64位（x64）版本的[.NET Core SDK](https://dotnet.microsoft.com/download/dotnet-core)時，就會出現這個警告。 可能會安裝這兩個版本的常見原因包括：
+當32位 (x86) 和64位 ([.NET Core SDK](https://dotnet.microsoft.com/download/dotnet-core)的 x64) 版本時，就會出現這個警告。 可能會安裝這兩個版本的常見原因包括：
 
 * 您一開始是使用32位電腦下載 .NET Core SDK 安裝程式，然後將它複製到64位電腦並加以安裝。
 * 32位 .NET Core SDK 是由另一個應用程式所安裝。
@@ -71,11 +73,11 @@ ms.locfileid: "85398993"
 當環境變數 `PATH` 未指向電腦上的任何 .Net Core sdk 時，就會出現這些警告。 若要解決此問題：
 
 * 安裝 .NET Core SDK。 從[.Net 下載](https://dotnet.microsoft.com/download)取得最新的安裝程式。
-* 確認 `PATH` 環境變數指向安裝 SDK 的位置（ `C:\Program Files\dotnet\` 適用于64位/x64 或 `C:\Program Files (x86)\dotnet\` 32 位/x86）。 SDK 安裝程式通常會設定 `PATH` 。 一律在同一部電腦上安裝相同的位 Sdk 和執行時間。
+* 確認 `PATH` 環境變數指向安裝 SDK 的位置 (`C:\Program Files\dotnet\` 64 位/x64 或 `C:\Program Files (x86)\dotnet\` 32 位/x86) 。 SDK 安裝程式通常會設定 `PATH` 。 一律在同一部電腦上安裝相同的位 Sdk 和執行時間。
 
 ### <a name="missing-sdk-after-installing-the-net-core-hosting-bundle"></a>安裝 .NET Core 裝載套件組合之後遺失 SDK
 
-安裝 .net core[裝載](xref:host-and-deploy/iis/index#install-the-net-core-hosting-bundle)套件組合 `PATH` 會在安裝 .net core 執行時間時修改，以指向 .net core 的32位（x86）版本（ `C:\Program Files (x86)\dotnet\` ）。 當使用32位（x86） .NET Core `dotnet` 命令（[未偵測到 .Net core sdk](#no-net-core-sdks-were-detected)）時，這可能會導致缺少 sdk。 若要解決這個問題，請移 `C:\Program Files\dotnet\` 至上之前的位置 `C:\Program Files (x86)\dotnet\` `PATH` 。
+安裝 .net core[裝載](xref:host-and-deploy/iis/index#install-the-net-core-hosting-bundle)套件組合時， `PATH` 會在安裝 .net core 執行時間時修改，以指向32位 (x86) 版本的 .net core (`C:\Program Files (x86)\dotnet\`) 。 這可能會在使用32位 (x86) .NET Core 命令時導致缺少 Sdk， `dotnet` (未偵測到) 的[.Net core sdk](#no-net-core-sdks-were-detected) 。 若要解決這個問題，請移 `C:\Program Files\dotnet\` 至上之前的位置 `C:\Program Files (x86)\dotnet\` `PATH` 。
 
 ## <a name="obtain-data-from-an-app"></a>從應用程式取得資料
 
@@ -93,7 +95,7 @@ ms.locfileid: "85398993"
 
 * 將插入 `IHostingEnvironment` 方法中 `Startup.Configure` ，並使用本機變數檢查環境。 下列範例程式碼示範這種方法。
 
-* 將環境指派給類別中的屬性 `Startup` 。 使用屬性檢查環境（例如， `if (Environment.IsDevelopment())` ）。
+* 將環境指派給類別中的屬性 `Startup` 。 使用屬性來檢查環境 (例如， `if (Environment.IsDevelopment())`) 。
 
 ```csharp
 public void Configure(IApplicationBuilder app, IHostingEnvironment env, 

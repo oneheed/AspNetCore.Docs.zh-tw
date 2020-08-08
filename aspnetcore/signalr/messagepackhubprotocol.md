@@ -7,6 +7,8 @@ ms.author: bradyg
 ms.custom: mvc
 ms.date: 04/13/2020
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -15,14 +17,14 @@ no-loc:
 - Razor
 - SignalR
 uid: signalr/messagepackhubprotocol
-ms.openlocfilehash: ff78321cba11b1c91a12b5c777c505b4c9b85309
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: 8e590c87f75d35cbafde1adbc87dea9c45eac92d
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85408314"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88022546"
 ---
-# <a name="use-messagepack-hub-protocol-in-signalr-for-aspnet-core"></a>在中使用 MessagePack 中樞通訊協定 SignalR 來 ASP.NET Core
+# <a name="use-messagepack-hub-protocol-in-no-locsignalr-for-aspnet-core"></a>在中使用 MessagePack 中樞通訊協定 SignalR 來 ASP.NET Core
 
 ::: moniker range=">= aspnetcore-5.0"
 
@@ -143,19 +145,19 @@ MessagePack 通訊協定不會提供方法來編碼的 `Kind` 值 `DateTime` 。
 
 ### <a name="datetimeminvalue-is-not-supported-by-messagepack-in-javascript"></a>JavaScript 中的 MessagePack 不支援 MinValue
 
-JavaScript 用戶端所使用的[msgpack5](https://github.com/mcollina/msgpack5)程式庫 SignalR 不支援 `timestamp96` MessagePack 中的類型。 這個型別是用來編碼非常大的日期值（在過去或未來很久的時候）。 的值 `DateTime.MinValue` 是 `January 1, 0001` ，必須以 `timestamp96` 值編碼。 因此， `DateTime.MinValue` 不支援傳送至 JavaScript 用戶端。 當 `DateTime.MinValue` JavaScript 用戶端收到時，會擲回下列錯誤：
+JavaScript 用戶端所使用的[msgpack5](https://github.com/mcollina/msgpack5)程式庫 SignalR 不支援 `timestamp96` MessagePack 中的類型。 這個型別是用來編碼非常大的日期值， (在未來的) 中非常早或非常遠。 的值 `DateTime.MinValue` 是 `January 1, 0001` ，必須以 `timestamp96` 值編碼。 因此， `DateTime.MinValue` 不支援傳送至 JavaScript 用戶端。 當 `DateTime.MinValue` JavaScript 用戶端收到時，會擲回下列錯誤：
 
 ```
 Uncaught Error: unable to find ext type 255 at decoder.js:427
 ```
 
-通常 `DateTime.MinValue` 會使用來編碼「遺漏」或 `null` 值。 如果您需要在 MessagePack 中將該值編碼，請使用可為 null 的 `DateTime` 值（ `DateTime?` ），或編碼個別的 `bool` 值，以指出日期是否存在。
+通常 `DateTime.MinValue` 會使用來編碼「遺漏」或 `null` 值。 如果您需要在 MessagePack 中編碼該值，請使用可為 null 的 `DateTime` 值 (`DateTime?`) 或編碼個別 `bool` 值，以指出日期是否存在。
 
 如需這項限制的詳細資訊，請參閱 GitHub 問題[aspnet/ SignalR #2228](https://github.com/aspnet/SignalR/issues/2228)。
 
 ### <a name="messagepack-support-in-ahead-of-time-compilation-environment"></a>「預先編譯」環境中的 MessagePack 支援
 
-.NET 用戶端和伺服器使用的[MessagePack-CSharp](https://github.com/neuecc/MessagePack-CSharp/tree/v2.1.90)程式庫會使用程式碼產生來優化序列化。 因此，在使用「預先」編譯的環境（例如 Xamarin iOS 或 Unity）上，預設不支援它。 在這些環境中，可以藉由「預先產生」序列化程式/還原序列化程式碼來使用 MessagePack。 如需詳細資訊，請參閱[MessagePack-CSharp 檔](https://github.com/neuecc/MessagePack-CSharp/tree/v2.1.90#aot-code-generation-to-support-unityxamarin)。 當您預先產生序列化程式之後，您可以使用傳遞至的設定委派來進行註冊 `AddMessagePackProtocol` ：
+.NET 用戶端和伺服器使用的[MessagePack-CSharp](https://github.com/neuecc/MessagePack-CSharp/tree/v2.1.90)程式庫會使用程式碼產生來優化序列化。 因此，在使用「預先」編譯 (（例如 Xamarin iOS 或 Unity) ）的環境中，預設並不支援。 在這些環境中，可以藉由「預先產生」序列化程式/還原序列化程式碼來使用 MessagePack。 如需詳細資訊，請參閱[MessagePack-CSharp 檔](https://github.com/neuecc/MessagePack-CSharp/tree/v2.1.90#aot-code-generation-to-support-unityxamarin)。 當您預先產生序列化程式之後，您可以使用傳遞至的設定委派來進行註冊 `AddMessagePackProtocol` ：
 
 ```csharp
 services.AddSignalR()
@@ -173,7 +175,7 @@ services.AddSignalR()
 
 ### <a name="type-checks-are-more-strict-in-messagepack"></a>MessagePack 中的類型檢查較嚴格
 
-JSON 中樞通訊協定會在還原序列化期間執行類型轉換。 例如，如果內送物件的屬性值是數位（ `{ foo: 42 }` ），但 .net 類別上的屬性類型為 `string` ，則會轉換此值。 不過，MessagePack 不會執行這項轉換，而且會擲回例外狀況，可在伺服器端記錄（和主控台）中看到：
+JSON 中樞通訊協定會在還原序列化期間執行類型轉換。 例如，如果內送物件的屬性值是 (的數位 `{ foo: 42 }`) 但 .net 類別上的屬性類型為 `string` ，則會轉換此值。 不過，MessagePack 不會執行這項轉換，而且將會擲回例外狀況，並可在伺服器端記錄中看到 (和主控台) ：
 
 ```
 InvalidDataException: Error binding arguments. Make sure that the types of the provided values match the types of the hub method being invoked.
@@ -320,19 +322,19 @@ MessagePack 通訊協定不會提供方法來編碼的 `Kind` 值 `DateTime` 。
 
 ### <a name="datetimeminvalue-is-not-supported-by-messagepack-in-javascript"></a>JavaScript 中的 MessagePack 不支援 MinValue
 
-JavaScript 用戶端所使用的[msgpack5](https://github.com/mcollina/msgpack5)程式庫 SignalR 不支援 `timestamp96` MessagePack 中的類型。 這個型別是用來編碼非常大的日期值（在過去或未來很久的時候）。 的值 `DateTime.MinValue` 是 `January 1, 0001` ，必須以 `timestamp96` 值編碼。 因此， `DateTime.MinValue` 不支援傳送至 JavaScript 用戶端。 當 `DateTime.MinValue` JavaScript 用戶端收到時，會擲回下列錯誤：
+JavaScript 用戶端所使用的[msgpack5](https://github.com/mcollina/msgpack5)程式庫 SignalR 不支援 `timestamp96` MessagePack 中的類型。 這個型別是用來編碼非常大的日期值， (在未來的) 中非常早或非常遠。 的值 `DateTime.MinValue` 是 `January 1, 0001` ，必須以 `timestamp96` 值編碼。 因此， `DateTime.MinValue` 不支援傳送至 JavaScript 用戶端。 當 `DateTime.MinValue` JavaScript 用戶端收到時，會擲回下列錯誤：
 
 ```
 Uncaught Error: unable to find ext type 255 at decoder.js:427
 ```
 
-通常 `DateTime.MinValue` 會使用來編碼「遺漏」或 `null` 值。 如果您需要在 MessagePack 中將該值編碼，請使用可為 null 的 `DateTime` 值（ `DateTime?` ），或編碼個別的 `bool` 值，以指出日期是否存在。
+通常 `DateTime.MinValue` 會使用來編碼「遺漏」或 `null` 值。 如果您需要在 MessagePack 中編碼該值，請使用可為 null 的 `DateTime` 值 (`DateTime?`) 或編碼個別 `bool` 值，以指出日期是否存在。
 
 如需這項限制的詳細資訊，請參閱 GitHub 問題[aspnet/ SignalR #2228](https://github.com/aspnet/SignalR/issues/2228)。
 
 ### <a name="messagepack-support-in-ahead-of-time-compilation-environment"></a>「預先編譯」環境中的 MessagePack 支援
 
-.NET 用戶端和伺服器使用的[MessagePack-CSharp](https://github.com/neuecc/MessagePack-CSharp/tree/v1.8.80)程式庫會使用程式碼產生來優化序列化。 因此，在使用「預先」編譯的環境（例如 Xamarin iOS 或 Unity）上，預設不支援它。 在這些環境中，可以藉由「預先產生」序列化程式/還原序列化程式碼來使用 MessagePack。 如需詳細資訊，請參閱[MessagePack-CSharp 檔](https://github.com/neuecc/MessagePack-CSharp/tree/v1.8.80#pre-code-generationunityxamarin-supports)。 當您預先產生序列化程式之後，您可以使用傳遞至的設定委派來進行註冊 `AddMessagePackProtocol` ：
+.NET 用戶端和伺服器使用的[MessagePack-CSharp](https://github.com/neuecc/MessagePack-CSharp/tree/v1.8.80)程式庫會使用程式碼產生來優化序列化。 因此，在使用「預先」編譯 (（例如 Xamarin iOS 或 Unity) ）的環境中，預設並不支援。 在這些環境中，可以藉由「預先產生」序列化程式/還原序列化程式碼來使用 MessagePack。 如需詳細資訊，請參閱[MessagePack-CSharp 檔](https://github.com/neuecc/MessagePack-CSharp/tree/v1.8.80#pre-code-generationunityxamarin-supports)。 當您預先產生序列化程式之後，您可以使用傳遞至的設定委派來進行註冊 `AddMessagePackProtocol` ：
 
 ```csharp
 services.AddSignalR()
@@ -348,7 +350,7 @@ services.AddSignalR()
 
 ### <a name="type-checks-are-more-strict-in-messagepack"></a>MessagePack 中的類型檢查較嚴格
 
-JSON 中樞通訊協定會在還原序列化期間執行類型轉換。 例如，如果內送物件的屬性值是數位（ `{ foo: 42 }` ），但 .net 類別上的屬性類型為 `string` ，則會轉換此值。 不過，MessagePack 不會執行這項轉換，而且會擲回例外狀況，可在伺服器端記錄（和主控台）中看到：
+JSON 中樞通訊協定會在還原序列化期間執行類型轉換。 例如，如果內送物件的屬性值是 (的數位 `{ foo: 42 }`) 但 .net 類別上的屬性類型為 `string` ，則會轉換此值。 不過，MessagePack 不會執行這項轉換，而且將會擲回例外狀況，並可在伺服器端記錄中看到 (和主控台) ：
 
 ```
 InvalidDataException: Error binding arguments. Make sure that the types of the provided values match the types of the hub method being invoked.
@@ -495,19 +497,19 @@ MessagePack 通訊協定不會提供方法來編碼的 `Kind` 值 `DateTime` 。
 
 ### <a name="datetimeminvalue-is-not-supported-by-messagepack-in-javascript"></a>JavaScript 中的 MessagePack 不支援 MinValue
 
-JavaScript 用戶端所使用的[msgpack5](https://github.com/mcollina/msgpack5)程式庫 SignalR 不支援 `timestamp96` MessagePack 中的類型。 這個型別是用來編碼非常大的日期值（在過去或未來很久的時候）。 的值 `DateTime.MinValue` `January 1, 0001` 必須以 `timestamp96` 值編碼。 因此， `DateTime.MinValue` 不支援傳送至 JavaScript 用戶端。 當 `DateTime.MinValue` JavaScript 用戶端收到時，會擲回下列錯誤：
+JavaScript 用戶端所使用的[msgpack5](https://github.com/mcollina/msgpack5)程式庫 SignalR 不支援 `timestamp96` MessagePack 中的類型。 這個型別是用來編碼非常大的日期值， (在未來的) 中非常早或非常遠。 的值 `DateTime.MinValue` `January 1, 0001` 必須以 `timestamp96` 值編碼。 因此， `DateTime.MinValue` 不支援傳送至 JavaScript 用戶端。 當 `DateTime.MinValue` JavaScript 用戶端收到時，會擲回下列錯誤：
 
 ```
 Uncaught Error: unable to find ext type 255 at decoder.js:427
 ```
 
-通常 `DateTime.MinValue` 會使用來編碼「遺漏」或 `null` 值。 如果您需要在 MessagePack 中將該值編碼，請使用可為 null 的 `DateTime` 值（ `DateTime?` ），或編碼個別的 `bool` 值，以指出日期是否存在。
+通常 `DateTime.MinValue` 會使用來編碼「遺漏」或 `null` 值。 如果您需要在 MessagePack 中編碼該值，請使用可為 null 的 `DateTime` 值 (`DateTime?`) 或編碼個別 `bool` 值，以指出日期是否存在。
 
 如需這項限制的詳細資訊，請參閱 GitHub 問題[aspnet/ SignalR #2228](https://github.com/aspnet/SignalR/issues/2228)。
 
 ### <a name="messagepack-support-in-ahead-of-time-compilation-environment"></a>「預先編譯」環境中的 MessagePack 支援
 
-.NET 用戶端和伺服器使用的[MessagePack-CSharp](https://github.com/neuecc/MessagePack-CSharp/tree/v1.8.80)程式庫會使用程式碼產生來優化序列化。 因此，在使用「預先」編譯的環境（例如 Xamarin iOS 或 Unity）上，預設不支援它。 在這些環境中，可以藉由「預先產生」序列化程式/還原序列化程式碼來使用 MessagePack。 如需詳細資訊，請參閱[MessagePack-CSharp 檔](https://github.com/neuecc/MessagePack-CSharp/tree/v1.8.80#pre-code-generationunityxamarin-supports)。 當您預先產生序列化程式之後，您可以使用傳遞至的設定委派來進行註冊 `AddMessagePackProtocol` ：
+.NET 用戶端和伺服器使用的[MessagePack-CSharp](https://github.com/neuecc/MessagePack-CSharp/tree/v1.8.80)程式庫會使用程式碼產生來優化序列化。 因此，在使用「預先」編譯 (（例如 Xamarin iOS 或 Unity) ）的環境中，預設並不支援。 在這些環境中，可以藉由「預先產生」序列化程式/還原序列化程式碼來使用 MessagePack。 如需詳細資訊，請參閱[MessagePack-CSharp 檔](https://github.com/neuecc/MessagePack-CSharp/tree/v1.8.80#pre-code-generationunityxamarin-supports)。 當您預先產生序列化程式之後，您可以使用傳遞至的設定委派來進行註冊 `AddMessagePackProtocol` ：
 
 ```csharp
 services.AddSignalR()
@@ -523,7 +525,7 @@ services.AddSignalR()
 
 ### <a name="type-checks-are-more-strict-in-messagepack"></a>MessagePack 中的類型檢查較嚴格
 
-JSON 中樞通訊協定會在還原序列化期間執行類型轉換。 例如，如果內送物件的屬性值是數位（ `{ foo: 42 }` ），但 .net 類別上的屬性類型為 `string` ，則會轉換此值。 不過，MessagePack 不會執行這項轉換，而且會擲回例外狀況，可在伺服器端記錄（和主控台）中看到：
+JSON 中樞通訊協定會在還原序列化期間執行類型轉換。 例如，如果內送物件的屬性值是 (的數位 `{ foo: 42 }`) 但 .net 類別上的屬性類型為 `string` ，則會轉換此值。 不過，MessagePack 不會執行這項轉換，而且將會擲回例外狀況，並可在伺服器端記錄中看到 (和主控台) ：
 
 ```
 InvalidDataException: Error binding arguments. Make sure that the types of the provided values match the types of the hub method being invoked.

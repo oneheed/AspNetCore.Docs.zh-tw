@@ -5,6 +5,8 @@ description: 了解如何開始使用 ASP.NET Core MVC。
 ms.author: riande
 ms.date: 10/16/2019
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -13,12 +15,12 @@ no-loc:
 - Razor
 - SignalR
 uid: tutorials/first-mvc-app/start-mvc
-ms.openlocfilehash: d4eb1744b1186704603430584b3da0793f90ee49
-ms.sourcegitcommit: 50e7c970f327dbe92d45eaf4c21caa001c9106d0
+ms.openlocfilehash: 3df00af8e6bca0dbf2d7871f383dd67b465aa5da
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 07/10/2020
-ms.locfileid: "86213079"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88021168"
 ---
 # <a name="get-started-with-aspnet-core-mvc"></a>ASP.NET Core MVC 使用者入門
 
@@ -84,14 +86,14 @@ Visual Studio 在您剛才建立的 MVC 專案中使用了預設範本。 您只
 
 * 開啟[整合式終端機](https://code.visualstudio.com/docs/editor/integrated-terminal)。
 * 將目錄 (`cd`) 變更為其中包含專案的資料夾。
-* 執行以下命令：
+* 執行下列命令：
 
    ```dotnetcli
    dotnet new mvc -o MvcMovie
    code -r MvcMovie
    ```
 
-  * 此時會出現一個對話方塊，其中包含**組建所需的資產，且 ' MvcMovie ' 中遺漏了 debug。要新增它們嗎？**  選取 [是]****。
+  * 此時會出現一個對話方塊，其中包含**組建所需的資產，且 ' MvcMovie ' 中遺漏了 debug。要新增它們嗎？**  選取 [是]
 
   * `dotnet new mvc -o MvcMovie`：在 *MvcMovie* 資料夾中建立新的 ASP.NET Core MVC 專案。
   * `code -r MvcMovie`：載入 Visual Studio Code 中的*MvcMovie*專案檔案。
@@ -111,7 +113,7 @@ Visual Studio 在您剛才建立的 MVC 專案中使用了預設範本。 您只
   * 確認 [**驗證**] 已設為 [**無驗證**]。
   * 如果提供選取**目標 Framework**的選項，請選取最新的3.x 版。
 
-  選取 [下一步]。
+  選取 [下一步]  。
 
 * 將專案命名為 **MvcMovie**，然後選取 [建立]****。
 
@@ -173,7 +175,7 @@ Visual Studio 在您剛才建立的 MVC 專案中使用了預設範本。 您只
 在本教學課程的下一個部分中，您會了解 MVC，並開始撰寫一些程式碼。
 
 > [!div class="step-by-step"]
-> [下一步](adding-controller.md)
+> [下一個](adding-controller.md)
 
 ::: moniker-end
 
@@ -237,14 +239,14 @@ Visual Studio 在您剛才建立的 MVC 專案中使用了預設範本。 您只
 
 * 開啟[整合式終端機](https://code.visualstudio.com/docs/editor/integrated-terminal)。
 * 將目錄 (`cd`) 變更為其中包含專案的資料夾。
-* 執行以下命令：
+* 執行下列命令：
 
    ```dotnetcli
    dotnet new mvc -o MvcMovie
    code -r MvcMovie
    ```
 
-  * 此時會出現一個對話方塊，其中包含**組建所需的資產，且 ' MvcMovie ' 中遺漏了 debug。要新增它們嗎？**  選取 [是]****。
+  * 此時會出現一個對話方塊，其中包含**組建所需的資產，且 ' MvcMovie ' 中遺漏了 debug。要新增它們嗎？**  選取 [是]
 
   * `dotnet new mvc -o MvcMovie`：在 *MvcMovie* 資料夾中建立新的 ASP.NET Core MVC 專案。
   * `code -r MvcMovie`：載入 Visual Studio Code 中的*MvcMovie*專案檔案。
@@ -262,7 +264,7 @@ Visual Studio 在您剛才建立的 MVC 專案中使用了預設範本。 您只
   * 確認 [**驗證**] 已設為 [**無驗證**]。
   * 如果提供選取**目標 Framework**的選項，請選取最新的2.x 版。
 
-  選取 [下一步]。
+  選取 [下一步]  。
 
 * 將專案命名為 **MvcMovie**，然後選取 [建立]****。
 
@@ -336,6 +338,6 @@ Visual Studio 在您剛才建立的 MVC 專案中使用了預設範本。 您只
 在本教學課程的下一個部分中，您會了解 MVC，並開始撰寫一些程式碼。
 
 > [!div class="step-by-step"]
-> [下一步](adding-controller.md)
+> [下一個](adding-controller.md)
 
 ::: moniker-end

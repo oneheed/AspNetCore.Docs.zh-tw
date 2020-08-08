@@ -6,6 +6,8 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 04/15/2020
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -14,12 +16,12 @@ no-loc:
 - Razor
 - SignalR
 uid: security/authorization/policies
-ms.openlocfilehash: 668c68bc328860ef17e1f2df09103fca07733ef7
-ms.sourcegitcommit: 1b89fc58114a251926abadfd5c69c120f1ba12d8
+ms.openlocfilehash: 03d6e7fdc4ab4b5e4925508952bfd6c835d90486
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 07/24/2020
-ms.locfileid: "87160160"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88021272"
 ---
 # <a name="policy-based-authorization-in-aspnet-core"></a>ASP.NET Core 中以原則為基礎的授權
 
@@ -68,7 +70,7 @@ public interface IAuthorizationHandler
  context.Succeed(requirement)
 ```
 
-下列程式碼顯示授權服務的簡化（並加上批註）預設的執行方式：
+下列程式碼顯示授權服務的預設執行) 的簡化 (和批註批註：
 
 ```csharp
 public async Task<AuthorizationResult> AuthorizeAsync(ClaimsPrincipal user, 
@@ -190,7 +192,7 @@ public void ConfigureServices(IServiceCollection services)
 
 * 若要保證失敗，即使其他需求處理常式成功，也請呼叫 `context.Fail` 。
 
-如果處理常式呼叫 `context.Succeed` 或 `context.Fail` ，仍然會呼叫所有其他處理常式。 這可讓需求產生副作用，例如記錄，即使另一個處理常式已成功驗證或失敗，也會發生這種情況。 當設定為時 `false` ， [InvokeHandlersAfterFailure](/dotnet/api/microsoft.aspnetcore.authorization.authorizationoptions.invokehandlersafterfailure#Microsoft_AspNetCore_Authorization_AuthorizationOptions_InvokeHandlersAfterFailure)屬性（可在 ASP.NET Core 1.1 和更新版本中使用）會在呼叫時，縮短執行處理常式的時間 `context.Fail` 。 `InvokeHandlersAfterFailure`預設為 `true` ，在此情況下會呼叫所有處理常式。
+如果處理常式呼叫 `context.Succeed` 或 `context.Fail` ，仍然會呼叫所有其他處理常式。 這可讓需求產生副作用，例如記錄，即使另一個處理常式已成功驗證或失敗，也會發生這種情況。 當設定為時 `false` ，ASP.NET Core 1.1 和更新版本中 (可用的[InvokeHandlersAfterFailure](/dotnet/api/microsoft.aspnetcore.authorization.authorizationoptions.invokehandlersafterfailure#Microsoft_AspNetCore_Authorization_AuthorizationOptions_InvokeHandlersAfterFailure)屬性) 會在呼叫時，將處理常式的執行次數縮短 `context.Fail` 。 `InvokeHandlersAfterFailure`預設為 `true` ，在此情況下會呼叫所有處理常式。
 
 > [!NOTE]
 > 即使驗證失敗，也會呼叫授權處理常式。
@@ -305,7 +307,7 @@ public interface IAuthorizationHandler
  context.Succeed(requirement)
 ```
 
-下列程式碼顯示授權服務的簡化（並加上批註）預設的執行方式：
+下列程式碼顯示授權服務的預設執行) 的簡化 (和批註批註：
 
 ```csharp
 public async Task<AuthorizationResult> AuthorizeAsync(ClaimsPrincipal user, 
@@ -424,7 +426,7 @@ public void ConfigureServices(IServiceCollection services)
 
 * 若要保證失敗，即使其他需求處理常式成功，也請呼叫 `context.Fail` 。
 
-如果處理常式呼叫 `context.Succeed` 或 `context.Fail` ，仍然會呼叫所有其他處理常式。 這可讓需求產生副作用，例如記錄，即使另一個處理常式已成功驗證或失敗，也會發生這種情況。 當設定為時 `false` ， [InvokeHandlersAfterFailure](/dotnet/api/microsoft.aspnetcore.authorization.authorizationoptions.invokehandlersafterfailure#Microsoft_AspNetCore_Authorization_AuthorizationOptions_InvokeHandlersAfterFailure)屬性（可在 ASP.NET Core 1.1 和更新版本中使用）會在呼叫時，縮短執行處理常式的時間 `context.Fail` 。 `InvokeHandlersAfterFailure`預設為 `true` ，在此情況下會呼叫所有處理常式。
+如果處理常式呼叫 `context.Succeed` 或 `context.Fail` ，仍然會呼叫所有其他處理常式。 這可讓需求產生副作用，例如記錄，即使另一個處理常式已成功驗證或失敗，也會發生這種情況。 當設定為時 `false` ，ASP.NET Core 1.1 和更新版本中 (可用的[InvokeHandlersAfterFailure](/dotnet/api/microsoft.aspnetcore.authorization.authorizationoptions.invokehandlersafterfailure#Microsoft_AspNetCore_Authorization_AuthorizationOptions_InvokeHandlersAfterFailure)屬性) 會在呼叫時，將處理常式的執行次數縮短 `context.Fail` 。 `InvokeHandlersAfterFailure`預設為 `true` ，在此情況下會呼叫所有處理常式。
 
 > [!NOTE]
 > 即使驗證失敗，也會呼叫授權處理常式。

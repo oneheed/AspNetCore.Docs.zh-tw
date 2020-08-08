@@ -7,6 +7,8 @@ ms.author: anurse
 ms.custom: mvc
 ms.date: 01/16/2020
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -15,14 +17,14 @@ no-loc:
 - Razor
 - SignalR
 uid: signalr/security
-ms.openlocfilehash: 4e125fd6c4ad2cd4989d692dd28a63638218ee57
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: e004899e334738f723cb98638cb31de8d314a830
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85400410"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88022468"
 ---
-# <a name="security-considerations-in-aspnet-core-signalr"></a>ASP.NET Core 中的安全性考慮SignalR
+# <a name="security-considerations-in-aspnet-core-no-locsignalr"></a>ASP.NET Core 中的安全性考慮SignalR
 
 [Andrew Stanton-護士](https://twitter.com/anurse)
 
@@ -30,23 +32,23 @@ ms.locfileid: "85400410"
 
 ## <a name="cross-origin-resource-sharing"></a>跨原始資源共用
 
-[跨原始來源資源分享（CORS）](https://www.w3.org/TR/cors/)可以用來允許瀏覽器中的跨原始來源 SignalR 連接。 如果 JavaScript 程式碼裝載于不同的網域，則 SignalR 必須啟用[CORS 中介軟體](xref:security/cors)，才能讓 JavaScript 連線到 SignalR 應用程式。 只允許來自您信任或控制之網域的跨原始來源要求。 例如：
+[跨原始來源資源分享 (CORS) ](https://www.w3.org/TR/cors/)可以用來允許 SignalR 瀏覽器中的跨原始來源連接。 如果 JavaScript 程式碼裝載于不同的網域，則 SignalR 必須啟用[CORS 中介軟體](xref:security/cors)，才能讓 JavaScript 連線到 SignalR 應用程式。 只允許來自您信任或控制之網域的跨原始來源要求。 例如：
 
 * 您的網站託管于`http://www.example.com`
 * 您的 SignalR 應用程式裝載于`http://signalr.example.com`
 
 應該在應用程式中設定 CORS，使其 SignalR 只允許來源 `www.example.com` 。
 
-如需設定 CORS 的詳細資訊，請參閱[啟用跨原始來源要求（CORS）](xref:security/cors)。 SignalR**需要**下列 CORS 原則：
+如需設定 CORS 的詳細資訊，請參閱[ (CORS) 啟用跨原始來源要求](xref:security/cors)。 SignalR**需要**下列 CORS 原則：
 
 * 允許特定的預期來源。 允許任何來源，**但不是安全或**建議的。
 * HTTP 方法 `GET` 和 `POST` 必須是允許的。
-* 必須允許認證，才能讓以 cookie 為基礎的適當會話正常運作。 即使未使用驗證，也必須啟用它們。
+* 必須允許認證，才能讓以為 cookie 基礎的粘滯會話正確運作。 即使未使用驗證，也必須啟用它們。
 
 ::: moniker range=">= aspnetcore-5.0"
 
 不過，在5.0 中，我們在 TypeScript 用戶端中提供了不使用認證的選項。
-當您知道100% 時，只有在您的應用程式中不需要 Cookie （例如，azure app service 會在使用多部伺服器來處理粘滯會話時使用 cookie）時，才應使用不使用認證的選項。
+只有當您知道100% 時，如果您的應用程式中不需要這類認證，azure app service 就會使用不使用認證的選項， Cookie cookie 因為在) 中使用多部伺服器時，這些認證會用於您的應用程式 (。
 
 ::: moniker-end
 
@@ -127,11 +129,11 @@ info: Microsoft.AspNetCore.Hosting.Internal.WebHost[1]
       Request starting HTTP/1.1 GET http://localhost:5000/chathub?access_token=1234
 ```
 
-如果您對於使用伺服器記錄檔記錄這項資料有疑慮，您可以將 `Microsoft.AspNetCore.Hosting` 記錄器設定為層級（或更新版本）來完全停用此記錄 `Warning` （這些訊息是在 `Info` 層級寫入）。 如需詳細資訊，請參閱[記錄檔篩選](xref:fundamentals/logging/index#log-filtering)。 如果您仍然想要記錄特定的要求資訊，可以[撰寫中介軟體](xref:fundamentals/middleware/write)來記錄所需的資料，並篩選出 `access_token` 查詢字串值（如果有的話）。
+如果您對於使用伺服器記錄檔記錄這項資料有疑慮，您可以將記錄器設定為層級（或以上）來完全停用此記錄 `Microsoft.AspNetCore.Hosting` `Warning` (這些訊息會在 `Info` 層級) 寫入。 如需詳細資訊，請參閱[記錄檔篩選](xref:fundamentals/logging/index#log-filtering)。 如果您仍然想要記錄特定的要求資訊，可以[撰寫中介軟體](xref:fundamentals/middleware/write)來記錄所需的資料，並篩選出 `access_token` 查詢字串值 (如果存在) 。
 
 ## <a name="exceptions"></a>例外狀況
 
-例外狀況訊息通常會被視為不應該向用戶端顯示的敏感性資料。 根據預設， SignalR 不會將中樞方法擲回之例外狀況的詳細資料傳送給用戶端。 相反地，用戶端會收到一般訊息，指出發生錯誤。 您可以使用[EnableDetailedErrors](xref:signalr/configuration#configure-server-options)覆寫傳遞給用戶端的例外狀況訊息（例如，在開發或測試中）。 例外狀況訊息不應在生產環境應用程式中公開給用戶端。
+例外狀況訊息通常會被視為不應該向用戶端顯示的敏感性資料。 根據預設， SignalR 不會將中樞方法擲回之例外狀況的詳細資料傳送給用戶端。 相反地，用戶端會收到一般訊息，指出發生錯誤。 可以覆寫用戶端的例外狀況訊息傳遞 (例如在使用[EnableDetailedErrors](xref:signalr/configuration#configure-server-options)的開發或測試) 中。 例外狀況訊息不應在生產環境應用程式中公開給用戶端。
 
 ## <a name="buffer-management"></a>緩衝區管理
 
@@ -148,6 +150,6 @@ SignalR會使用每個連接的緩衝區來管理傳入和傳出訊息。 根據
 傳入和傳出訊息有限制，這兩者都可以在中設定的[HttpConnectionDispatcherOptions](xref:signalr/configuration#configure-server-options)物件上進行設定 `MapHub` ：
 
 * `ApplicationMaxBufferSize`代表用戶端中伺服器緩衝區的最大位元組數目。 如果用戶端嘗試傳送大於此限制的訊息，連接可能會關閉。
-* `TransportMaxBufferSize`表示伺服器可以傳送的最大位元組數。 如果伺服器嘗試傳送大於此限制的訊息（包括來自中樞方法的傳回值），則會擲回例外狀況。
+* `TransportMaxBufferSize`表示伺服器可以傳送的最大位元組數。 如果伺服器嘗試傳送訊息 (包括中樞方法的傳回值) 大於此限制，就會擲回例外狀況。
 
 將限制設為會 `0` 停用限制。 移除此限制可讓用戶端傳送任何大小的訊息。 傳送大型訊息的惡意用戶端可能會導致配置過量的記憶體。 過多的記憶體使用量可能會大幅減少並行連接的數目。

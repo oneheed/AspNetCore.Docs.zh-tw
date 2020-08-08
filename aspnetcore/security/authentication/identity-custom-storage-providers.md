@@ -6,6 +6,8 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 07/23/2019
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -14,14 +16,14 @@ no-loc:
 - Razor
 - SignalR
 uid: security/authentication/identity-custom-storage-providers
-ms.openlocfilehash: 137b73529a6c3d2a1dece201ebd8a7a5a96da349
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: 27f6130742e25e07d4b908973e1ebf26288fdbfd
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85404739"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88021532"
 ---
-# <a name="custom-storage-providers-for-aspnet-core-identity"></a>ASP.NET Core 的自訂儲存體提供者Identity
+# <a name="custom-storage-providers-for-aspnet-core-no-locidentity"></a>ASP.NET Core 的自訂儲存體提供者Identity
 
 作者：[Steve Smith](https://ardalis.com/)
 
@@ -47,39 +49,39 @@ ASP.NET Core Identity 包含在具有 [個別使用者帳戶] 選項之 Visual S
 dotnet new mvc -au Individual
 ```
 
-## <a name="the-aspnet-core-identity-architecture"></a>ASP.NET Core Identity 架構
+## <a name="the-aspnet-core-no-locidentity-architecture"></a>ASP.NET Core Identity 架構
 
-ASP.NET Core Identity 是由稱為「經理」和「商店」的類別所組成。 *管理員*是應用程式開發人員用來執行作業的高層級類別，例如建立 Identity 使用者。 存放*區*是較低層級的類別，可指定實體（例如使用者和角色）的保存方式。 存放區會遵循存放庫模式，並與持續性機制緊密結合。 管理員會與存放區分離，這表示您可以取代持續性機制，而不需要變更應用程式代碼（設定除外）。
+ASP.NET Core Identity 是由稱為「經理」和「商店」的類別所組成。 *管理員*是應用程式開發人員用來執行作業的高層級類別，例如建立 Identity 使用者。 存放*區*是較低層級的類別，可指定實體（例如使用者和角色）的保存方式。 存放區會遵循存放庫模式，並與持續性機制緊密結合。 管理員會與存放區分離，這表示您可以取代持續性機制，而不需要變更應用程式程式碼 (除了設定) 。
 
 下圖顯示 web 應用程式如何與管理員互動，同時存放區會與資料存取層互動。
 
-![ASP.NET Core 應用程式可與管理員合作（例如，' UserManager '、' RoleManager '）。 管理員可與使用 Entity Framework Core 等程式庫來與資料來源進行通訊的存放區（例如 ' UserStore '）一起使用。](identity-custom-storage-providers/_static/identity-architecture-diagram.png)
+![ASP.NET Core 應用程式可與管理員 (，例如 ' UserManager '、' RoleManager ') 。 管理員會使用存放區 (例如 ' UserStore ') 使用程式庫（例如 Entity Framework Core）與資料來源進行通訊。](identity-custom-storage-providers/_static/identity-architecture-diagram.png)
 
-若要建立自訂存放裝置提供者，請建立資料來源、資料存取層，以及與此資料存取層互動的存放區類別（上圖中的綠色和灰色方塊）。 您不需要自訂與它們互動的管理員或應用程式程式碼（上面的藍色方塊）。
+若要建立自訂存放裝置提供者，請建立資料來源、資料存取層，以及與此資料存取層互動的存放區類別， (上圖中) 的綠色和灰色方塊。 您不需要自訂與它們互動的管理員或應用程式程式碼 () 以上的藍色方塊。
 
 建立的新實例時， `UserManager` 或 `RoleManager` 您提供 user 類別的類型，並傳遞 store 類別的實例做為引數。 這種方法可讓您將自訂類別插入 ASP.NET Core。 
 
 將[應用程式重新設定為使用新的存放裝置提供者](#reconfigure-app-to-use-a-new-storage-provider)說明如何具現化 `UserManager` 和 `RoleManager` 與自訂存放區。
 
-## <a name="aspnet-core-identity-stores-data-types"></a>ASP.NET Core Identity 儲存資料類型
+## <a name="aspnet-core-no-locidentity-stores-data-types"></a>ASP.NET Core Identity 儲存資料類型
 
 [ASP.NET Core Identity ](https://github.com/aspnet/identity)資料類型會在下列各節中詳細說明：
 
 ### <a name="users"></a>使用者
 
-網站的已註冊使用者。 [IdentityUser](/dotnet/api/microsoft.aspnet.identity.corecompat.identityuser)類型可以擴充或當做您自己自訂類型的範例使用。 您不需要從特定類型繼承，即可實作為您自己的自訂身分識別儲存體解決方案。
+網站的已註冊使用者。 [ Identity 使用者](/dotnet/api/microsoft.aspnet.identity.corecompat.identityuser)類型可以擴充，或當做您自己自訂類型的範例使用。 您不需要從特定類型繼承，即可實作為您自己的自訂身分識別儲存體解決方案。
 
 ### <a name="user-claims"></a>使用者宣告
 
-使用者的一組語句（或[宣告](/dotnet/api/system.security.claims.claim)），代表使用者的身分識別。 可以啟用使用者身分識別的更大運算式，而不是透過角色來達成。
+一組語句 (或[宣告](/dotnet/api/system.security.claims.claim)，) 有關代表使用者身分識別的使用者。 可以啟用使用者身分識別的更大運算式，而不是透過角色來達成。
 
 ### <a name="user-logins"></a>使用者登入
 
-要在使用者登入時使用的外部驗證提供者（例如 Facebook 或 Microsoft 帳戶）的相關資訊。 [範例](/dotnet/api/microsoft.aspnet.identity.corecompat.identityuserlogin)
+外部驗證提供者的相關資訊 (例如 Facebook 或 Microsoft 帳戶) 在使用者登入時使用。 [範例](/dotnet/api/microsoft.aspnet.identity.corecompat.identityuserlogin)
 
 ### <a name="roles"></a>角色
 
-網站的授權群組。 包含角色識別碼和角色名稱（例如 "Admin" 或 "Employee"）。 [範例](/dotnet/api/microsoft.aspnet.identity.corecompat.identityrole)
+網站的授權群組。 包含角色識別碼和角色名稱 (例如 "Admin" 或 "Employee" ) 。 [範例](/dotnet/api/microsoft.aspnet.identity.corecompat.identityrole)
 
 ## <a name="the-data-access-layer"></a>資料存取層
 
@@ -95,19 +97,19 @@ ASP.NET Core Identity 是由稱為「經理」和「商店」的類別所組成�
 
 ### <a name="user-storage"></a>使用者儲存體
 
-儲存並抓取使用者資訊（例如使用者名稱和密碼雜湊）。 [範例](/dotnet/api/microsoft.aspnet.identity.corecompat.userstore-1)
+儲存和抓取使用者資訊 (例如使用者名稱和密碼雜湊) 。 [範例](/dotnet/api/microsoft.aspnet.identity.corecompat.userstore-1)
 
 ### <a name="role-storage"></a>角色儲存體
 
-儲存並抓取角色資訊（例如角色名稱）。 [範例](/dotnet/api/microsoft.aspnetcore.identity.entityframeworkcore.rolestore-1)
+儲存和抓取角色資訊 (例如角色名稱) 。 [範例](/dotnet/api/microsoft.aspnetcore.identity.entityframeworkcore.rolestore-1)
 
 ### <a name="userclaims-storage"></a>UserClaims 儲存體
 
-儲存並抓取使用者宣告資訊（例如宣告類型和值）。 [範例](/dotnet/api/microsoft.aspnet.identity.corecompat.userstore-1)
+儲存和抓取使用者宣告資訊 (例如宣告類型和值) 。 [範例](/dotnet/api/microsoft.aspnet.identity.corecompat.userstore-1)
 
 ### <a name="userlogins-storage"></a>UserLogins 儲存體
 
-儲存並抓取使用者登入資訊（例如外部驗證提供者）。 [範例](/dotnet/api/microsoft.aspnet.identity.corecompat.userstore-1)
+儲存和抓取使用者登入資訊 (例如) 的外部驗證提供者。 [範例](/dotnet/api/microsoft.aspnet.identity.corecompat.userstore-1)
 
 ### <a name="userrole-storage"></a>使用者角色存放裝置
 
@@ -123,7 +125,7 @@ ASP.NET Core Identity 是由稱為「經理」和「商店」的類別所組成�
 
 ## <a name="customize-the-user-class"></a>自訂使用者類別
 
-在執行儲存區提供者時，建立相當於[IdentityUser 類別](/dotnet/api/microsoft.aspnet.identity.corecompat.identityuser)的使用者類別。
+在執行儲存區提供者時，建立相當於[ Identity 使用者類別](/dotnet/api/microsoft.aspnet.identity.corecompat.identityuser)的使用者類別。
 
 您的使用者類別至少必須包含 `Id` 和 `UserName` 屬性。
 
@@ -191,9 +193,9 @@ public class UserStore : IUserStore<IdentityUser>,
 }
 ```
 
-### <a name="identityuserclaim-identityuserlogin-and-identityuserrole"></a>IdentityUserClaim、IdentityUserLogin 和 IdentityUserRole
+### <a name="no-locidentityuserclaim-no-locidentityuserlogin-and-no-locidentityuserrole"></a>IdentityUserClaim、 Identity UserLogin 和 Identity UserRole
 
-`Microsoft.AspNet.Identity.EntityFramework`命名空間包含[IdentityUserClaim](/dotnet/api/microsoft.aspnetcore.identity.entityframeworkcore.identityuserclaim-1)、 [IdentityUserLogin](/dotnet/api/microsoft.aspnet.identity.corecompat.identityuserlogin)和[IdentityUserRole](/dotnet/api/microsoft.aspnetcore.identity.entityframeworkcore.identityuserrole-1)類別的實作為。 如果您使用這些功能，您可能會想要建立您自己的類別版本，並定義應用程式的屬性。 不過，有時候在執行基本作業（例如新增或移除使用者的宣告）時，不會將這些實體載入記憶體的效率較高。 相反地，後端存放區類別可以直接在資料來源上執行這些作業。 例如， `UserStore.GetClaimsAsync` 方法可以呼叫 `userClaimTable.FindByUserId(user.Id)` 方法，直接對該資料表執行查詢，並傳回宣告的清單。
+`Microsoft.AspNet.Identity.EntityFramework`命名空間包含[ Identity UserClaim](/dotnet/api/microsoft.aspnetcore.identity.entityframeworkcore.identityuserclaim-1)、 [ Identity UserLogin](/dotnet/api/microsoft.aspnet.identity.corecompat.identityuserlogin)和[ Identity UserRole](/dotnet/api/microsoft.aspnetcore.identity.entityframeworkcore.identityuserrole-1)類別的執行。 如果您使用這些功能，您可能會想要建立您自己的類別版本，並定義應用程式的屬性。 不過，有時候在執行基本作業 (例如新增或移除使用者的宣告) 時，不會將這些實體載入記憶體的效率較高。 相反地，後端存放區類別可以直接在資料來源上執行這些作業。 例如， `UserStore.GetClaimsAsync` 方法可以呼叫 `userClaimTable.FindByUserId(user.Id)` 方法，直接對該資料表執行查詢，並傳回宣告的清單。
 
 ## <a name="customize-the-role-class"></a>自訂角色類別
 
@@ -219,7 +221,7 @@ public class UserStore : IUserStore<IdentityUser>,
 1. 移除 `Microsoft.AspNetCore.EntityFramework.Identity` NuGet 套件。
 1. 如果存放裝置提供者位於不同的專案或封裝中，請新增其參考。
 1. 以 `Microsoft.AspNetCore.EntityFramework.Identity` 您的儲存提供者命名空間的 using 語句取代所有的參考。
-1. 在 `ConfigureServices` 方法中，將 `AddIdentity` 方法變更為使用您的自訂類型。 您可以針對此目的建立自己的擴充方法。 如需範例，請參閱[IdentityServiceCollectionExtensions](https://github.com/aspnet/Identity/blob/rel/1.1.0/src/Microsoft.AspNetCore.Identity/IdentityServiceCollectionExtensions.cs) 。
+1. 在 `ConfigureServices` 方法中，將 `AddIdentity` 方法變更為使用您的自訂類型。 您可以針對此目的建立自己的擴充方法。 如需範例，請參閱[ Identity ServiceCollectionExtensions](https://github.com/aspnet/Identity/blob/rel/1.1.0/src/Microsoft.AspNetCore.Identity/IdentityServiceCollectionExtensions.cs) 。
 1. 如果您使用的是角色，請更新 `RoleManager` 以使用您的 `RoleStore` 類別。
 1. 將連接字串和認證更新為您的應用程式設定。
 

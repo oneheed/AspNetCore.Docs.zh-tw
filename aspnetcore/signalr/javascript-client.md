@@ -7,6 +7,8 @@ ms.author: bradyg
 ms.custom: mvc
 ms.date: 04/08/2020
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -15,22 +17,22 @@ no-loc:
 - Razor
 - SignalR
 uid: signalr/javascript-client
-ms.openlocfilehash: 8c7acad42f3a49ccf1bc60f8ae5b4f68a602d97b
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: 04200ced41113eb9a68cefc2f485f2d3798476c6
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85406923"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88022338"
 ---
-# <a name="aspnet-core-signalr-javascript-client"></a>ASP.NET Core SignalR JavaScript 用戶端
+# <a name="aspnet-core-no-locsignalr-javascript-client"></a>ASP.NET Core SignalR JavaScript 用戶端
 
 作者：[Rachel Appel](https://twitter.com/rachelappel)
 
 ASP.NET Core 的 SignalR JavaScript 用戶端程式庫可讓開發人員呼叫伺服器端中樞程式碼。
 
-[查看或下載範例程式碼](https://github.com/dotnet/AspNetCore.Docs/tree/live/aspnetcore/signalr/javascript-client/sample)（[如何下載](xref:index#how-to-download-a-sample)）
+[查看或下載範例程式碼](https://github.com/dotnet/AspNetCore.Docs/tree/live/aspnetcore/signalr/javascript-client/sample) ([如何下載](xref:index#how-to-download-a-sample)) 
 
-## <a name="install-the-signalr-client-package"></a>安裝 SignalR 用戶端套件
+## <a name="install-the-no-locsignalr-client-package"></a>安裝 SignalR 用戶端套件
 
 SignalRJavaScript 用戶端程式庫會以[npm](https://www.npmjs.com/)封裝的形式提供。 下列各節概述安裝用戶端程式庫的不同方式。
 
@@ -66,7 +68,7 @@ npm 會在*node_modules \\ @aspnet\signalr\dist\browser *資料夾中安裝封�
 <script src="~/lib/signalr/signalr.js"></script>
 ```
 
-### <a name="use-a-content-delivery-network-cdn"></a>使用內容傳遞網路（CDN）
+### <a name="use-a-content-delivery-network-cdn"></a>使用內容傳遞網路 (CDN) 
 
 若要使用不含 npm 必要條件的用戶端程式庫，請參考 CDN 主控的用戶端程式庫複本。 例如：
 
@@ -122,9 +124,9 @@ JavaScript 用戶端會透過[HubConnection](/javascript/api/%40aspnet/signalr/h
 > [!NOTE]
 > 如果您是 SignalR 在*無伺服器模式*中使用 Azure 服務，則無法從用戶端呼叫中樞方法。 如需詳細資訊，請參閱[ SignalR 服務檔](/azure/azure-signalr/signalr-concept-serverless-development-config)。
 
-方法會傳回 `invoke` JavaScript[承諾](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Promise)。 `Promise`當伺服器上的方法傳回時，會使用傳回值（如果有的話）來解析。 如果伺服器上的方法擲回錯誤，則 `Promise` 會拒絕並顯示錯誤訊息。 `then` `catch` 在本身上使用和方法 `Promise` 來處理這些案例（或 `await` 語法）。
+方法會傳回 `invoke` JavaScript[承諾](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Promise)。 `Promise`當伺服器上的方法傳回時，如果有任何) ，則會使用傳回值解析 (。 如果伺服器上的方法擲回錯誤，則 `Promise` 會拒絕並顯示錯誤訊息。 `then` `catch` 在本身使用和方法 `Promise` 來處理這些案例 (或 `await` 語法) 。
 
-方法會傳回 `send` JavaScript `Promise` 。 `Promise`當訊息已傳送到伺服器時，就會解決。 如果傳送訊息時發生錯誤，則 `Promise` 會拒絕，並顯示錯誤訊息。 `then` `catch` 在本身上使用和方法 `Promise` 來處理這些案例（或 `await` 語法）。
+方法會傳回 `send` JavaScript `Promise` 。 `Promise`當訊息已傳送到伺服器時，就會解決。 如果傳送訊息時發生錯誤，則 `Promise` 會拒絕，並顯示錯誤訊息。 `then` `catch` 在本身使用和方法 `Promise` 來處理這些案例 (或 `await` 語法) 。
 
 > [!NOTE]
 > 使用 `send` 並不會等到伺服器收到訊息為止。 因此，不可能從伺服器傳回資料或錯誤。
@@ -302,7 +304,7 @@ const connection = new signalR.HubConnectionBuilder()
 
 下列程式碼示範一般手動重新連接方法：
 
-1. 建立函式（在此案例中為函式 `start` ）來啟動連接。
+1. 函式 (在此情況下， `start` 會建立函式) 來啟動連接。
 1. 呼叫 `start` 連接的事件處理常式中的函式 `onclose` 。
 
 [!code-javascript[Reconnect the JavaScript client](javascript-client/sample/wwwroot/js/chat.js?range=28-40)]
@@ -314,8 +316,8 @@ const connection = new signalR.HubConnectionBuilder()
 * [JavaScript API 參考](/javascript/api/?view=signalr-js-latest)
 * [JavaScript 教學課程](xref:tutorials/signalr)
 * [WebPack 和 TypeScript 教學課程](xref:tutorials/signalr-typescript-webpack)
-* [中樞](xref:signalr/hubs)
+* [集線器](xref:signalr/hubs)
 * [.NET 用戶端](xref:signalr/dotnet-client)
 * [發佈至 Azure](xref:signalr/publish-to-azure-web-app)
-* [跨原始來源要求（CORS）](xref:security/cors)
+* [ (CORS 的跨原始來源要求) ](xref:security/cors)
 * [Azure SignalR 服務無伺服器檔](/azure/azure-signalr/signalr-concept-serverless-development-config)

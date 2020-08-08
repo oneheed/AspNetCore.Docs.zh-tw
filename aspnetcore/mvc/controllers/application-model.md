@@ -5,6 +5,8 @@ description: 了解如何讀取及操作應用程式模型，來修改 ASP.NET C
 ms.author: riande
 ms.date: 12/05/2019
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -13,12 +15,12 @@ no-loc:
 - Razor
 - SignalR
 uid: mvc/controllers/application-model
-ms.openlocfilehash: 61503a1a87b5d5eea36586108b65304236cf799a
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: de831a8b5012a2fe61642887ad816466df7a1bcb
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85405636"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88019894"
 ---
 # <a name="work-with-the-application-model-in-aspnet-core"></a>在 ASP.NET Core 中使用應用程式模型
 
@@ -88,7 +90,7 @@ ASP.NET Core MVC 使用 [IApplicationModelProvider](/dotnet/api/microsoft.aspnet
 * [`IActionModelConvention`](/dotnet/api/microsoft.aspnetcore.mvc.applicationmodels.iactionmodelconvention)
 * [`IParameterModelConvention`](/dotnet/api/microsoft.aspnetcore.mvc.applicationmodels.iparametermodelconvention)
 
-藉由將慣例新增至 MVC 選項或執行 `Attribute` ，並將其套用至控制器、動作或動作參數（類似于）來套用 [`Filters`](xref:mvc/controllers/filters) 。 與篩選條件不同的是，只有在應用程式啟動時才會執行慣例，而不會在每個要求當中執行。
+藉由將慣例新增至 MVC 選項或執行， `Attribute` 並將其套用至控制器、動作或動作參數（ (類似于) ），即可進行套用 [`Filters`](xref:mvc/controllers/filters) 。 與篩選條件不同的是，只有在應用程式啟動時才會執行慣例，而不會在每個要求當中執行。
 
 ### <a name="sample-modifying-the-applicationmodel"></a>範例：修改 ApplicationModel
 

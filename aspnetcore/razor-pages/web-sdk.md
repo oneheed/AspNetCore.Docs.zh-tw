@@ -5,6 +5,8 @@ description: .NET 的總覽。
 ms.author: riande
 ms.date: 01/25/2020
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -13,12 +15,12 @@ no-loc:
 - Razor
 - SignalR
 uid: razor-pages/web-sdk
-ms.openlocfilehash: 2d154ebdbcb564ff5174940691b63ecce4154987
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: a717d9dc0e326e62ec920d2a838e8b18be3db013
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85403725"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88020687"
 ---
 # <a name="aspnet-core-web-sdk"></a>ASP.NET Core Web SDK
 
@@ -47,8 +49,8 @@ ms.locfileid: "85403725"
 
 ### <a name="properties"></a>屬性
 
-| 屬性 | 說明 |
+| 屬性 | 描述 |
 | -------- | ----------- |
 | `DisableImplicitFrameworkReferences` | 停用對共用架構的隱含參考 `Microsoft.AspNetCore.App` 。 |
 | `DisableImplicitAspNetCoreAnalyzers` | 停用 ASP.NET Core 分析器的隱含參考。 |
-| `DisableImplicitComponentsAnalyzers` | Razor建立 Blazor （伺服器）應用程式時，停用對元件分析器的隱含參考。 |
+| `DisableImplicitComponentsAnalyzers` | Razor建立 Blazor (伺服器) 應用程式時，停用元件分析器的隱含參考。 |

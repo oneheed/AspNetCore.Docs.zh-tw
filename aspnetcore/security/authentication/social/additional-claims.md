@@ -7,6 +7,8 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 10/15/2019
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -15,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: security/authentication/social/additional-claims
-ms.openlocfilehash: 291897b06d3d8294bc170996683f36532712ebe4
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: f7a440a13891cd51226cad12924cfc65684632ea
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85399006"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88020180"
 ---
 # <a name="persist-additional-claims-and-tokens-from-external-providers-in-aspnet-core"></a>在 ASP.NET Core 中保存外部提供者的其他宣告和權杖
 
@@ -28,11 +30,11 @@ ms.locfileid: "85399006"
 
 ASP.NET Core 應用程式可以從外部驗證提供者（例如 Facebook、Google、Microsoft 和 Twitter）建立額外的宣告和權杖。 每個提供者會在其平臺上顯示使用者的不同資訊，但接收和將使用者資料轉換成其他宣告的模式則相同。
 
-[查看或下載範例程式碼](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/security/authentication/social/additional-claims/samples)（[如何下載](xref:index#how-to-download-a-sample)）
+[查看或下載範例程式碼](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/security/authentication/social/additional-claims/samples) ([如何下載](xref:index#how-to-download-a-sample)) 
 
 ## <a name="prerequisites"></a>必要條件
 
-決定要在應用程式中支援的外部驗證提供者。 針對每個提供者，註冊應用程式，並取得用戶端識別碼和用戶端密碼。 如需詳細資訊，請參閱 <xref:security/authentication/social/index> 。 範例應用程式會使用[Google 驗證提供者](xref:security/authentication/google-logins)。
+決定要在應用程式中支援的外部驗證提供者。 針對每個提供者，註冊應用程式，並取得用戶端識別碼和用戶端密碼。 如需詳細資訊，請參閱<xref:security/authentication/social/index>。 範例應用程式會使用[Google 驗證提供者](xref:security/authentication/google-logins)。
 
 ## <a name="set-the-client-id-and-client-secret"></a>設定用戶端識別碼和用戶端秘密
 
@@ -70,17 +72,17 @@ options.Scope.Add("https://www.googleapis.com/auth/user.birthday.read");
 
 在提供者的選項中，針對 <xref:Microsoft.AspNetCore.Authentication.ClaimActionCollectionMapExtensions.MapJsonKey*> <xref:Microsoft.AspNetCore.Authentication.ClaimActionCollectionMapExtensions.MapJsonSubKey*> 外部提供者的 JSON 使用者資料中的每個索引鍵/子機碼指定或，以讓應用程式識別在登入時讀取。 如需宣告類型的詳細資訊，請參閱 <xref:System.Security.Claims.ClaimTypes> 。
 
-範例應用程式會 `urn:google:locale` `urn:google:picture` 從 `locale` `picture` Google 使用者資料中的和金鑰建立地區設定（）和圖片（）宣告：
+範例應用程式會 `urn:google:locale` `urn:google:picture` 從 `locale` `picture` Google 使用者資料中的和金鑰建立地區設定 () 和圖片 () 宣告：
 
 [!code-csharp[](additional-claims/samples/3.x/ClaimsSample/Startup.cs?name=snippet_AddGoogle&highlight=13-14)]
 
-在中 `Microsoft.AspNetCore.Identity.UI.Pages.Account.Internal.ExternalLoginModel.OnPostConfirmationAsync` ， <xref:Microsoft.AspNetCore.Identity.IdentityUser> `ApplicationUser` 會使用將（）登入應用程式 <xref:Microsoft.AspNetCore.Identity.SignInManager%601.SignInAsync*> 。 在登入程式期間， <xref:Microsoft.AspNetCore.Identity.UserManager%601> 可以儲存 `ApplicationUser` 可從取得之使用者資料的宣告 <xref:Microsoft.AspNetCore.Identity.ExternalLoginInfo.Principal*> 。
+在中 `Microsoft.AspNetCore.Identity.UI.Pages.Account.Internal.ExternalLoginModel.OnPostConfirmationAsync` ， <xref:Microsoft.AspNetCore.Identity.IdentityUser> (`ApplicationUser`) 使用登入應用程式 <xref:Microsoft.AspNetCore.Identity.SignInManager%601.SignInAsync*> 。 在登入程式期間， <xref:Microsoft.AspNetCore.Identity.UserManager%601> 可以儲存 `ApplicationUser` 可從取得之使用者資料的宣告 <xref:Microsoft.AspNetCore.Identity.ExternalLoginInfo.Principal*> 。
 
-在範例應用程式中 `OnPostConfirmationAsync` （*Account/ExternalLogin*）會建立已登入的地區設定（ `urn:google:locale` ）和圖片（ `urn:google:picture` ）宣告 `ApplicationUser` ，包括下列各項的聲明 <xref:System.Security.Claims.ClaimTypes.GivenName> ：
+在範例應用程式中， `OnPostConfirmationAsync` (*Account/ExternalLogin*) 會 `urn:google:locale` 針對已登入的) 和圖片 () 宣告，建立地區設定 (`urn:google:picture` `ApplicationUser` ，包括 <xref:System.Security.Claims.ClaimTypes.GivenName> 下列：
 
 [!code-csharp[](additional-claims/samples/3.x/ClaimsSample/Areas/Identity/Pages/Account/ExternalLogin.cshtml.cs?name=snippet_OnPostConfirmationAsync&highlight=35-51)]
 
-根據預設，使用者的宣告會儲存在驗證 cookie 中。 如果驗證 cookie 太大，可能會導致應用程式失敗，因為：
+根據預設，使用者的宣告會儲存在驗證中 cookie 。 如果驗證 cookie 太大，可能會導致應用程式失敗，因為：
 
 * 瀏覽器偵測到 cookie 標頭太長。
 * 要求的整體大小太大。
@@ -92,15 +94,15 @@ options.Scope.Add("https://www.googleapis.com/auth/user.birthday.read");
 
 ## <a name="save-the-access-token"></a>儲存存取權杖
 
-<xref:Microsoft.AspNetCore.Authentication.RemoteAuthenticationOptions.SaveTokens*>定義在成功授權之後，是否應將存取和重新整理權杖儲存在中 <xref:Microsoft.AspNetCore.Http.Authentication.AuthenticationProperties> 。 `SaveTokens`預設會設定為， `false` 以減少最終驗證 cookie 的大小。
+<xref:Microsoft.AspNetCore.Authentication.RemoteAuthenticationOptions.SaveTokens*>定義在成功授權之後，是否應將存取和重新整理權杖儲存在中 <xref:Microsoft.AspNetCore.Http.Authentication.AuthenticationProperties> 。 `SaveTokens`預設會設定為， `false` 以減少最終驗證的大小 cookie 。
 
 範例應用程式會將的值設定 `SaveTokens` 為 `true` 中的 <xref:Microsoft.AspNetCore.Authentication.Google.GoogleOptions> ：
 
 [!code-csharp[](additional-claims/samples/3.x/ClaimsSample/Startup.cs?name=snippet_AddGoogle&highlight=15)]
 
-`OnPostConfirmationAsync`執行時，從的外部提供者儲存存取權杖（[ExternalLoginInfo. AuthenticationTokens](xref:Microsoft.AspNetCore.Identity.ExternalLoginInfo.AuthenticationTokens*)） `ApplicationUser` `AuthenticationProperties` 。
+`OnPostConfirmationAsync`執行時，請從的外部提供者，將存取權杖儲存 ([ExternalLoginInfo. AuthenticationTokens](xref:Microsoft.AspNetCore.Identity.ExternalLoginInfo.AuthenticationTokens*)) 。 `ApplicationUser` `AuthenticationProperties`
 
-範例應用程式會在 Account/ExternalLogin 中，將存取權杖儲存在 `OnPostConfirmationAsync` （新的使用者註冊）和 `OnGetCallbackAsync` （先前註冊的使用者）中： *Account/ExternalLogin.cshtml.cs*
+範例應用程式會將存取權杖儲存在 `OnPostConfirmationAsync` (新的使用者註冊) ，並 `OnGetCallbackAsync` (先前在*Account/ExternalLogin*中註冊的使用者) ：
 
 [!code-csharp[](additional-claims/samples/3.x/ClaimsSample/Areas/Identity/Pages/Account/ExternalLogin.cshtml.cs?name=snippet_OnPostConfirmationAsync&highlight=54-56)]
 
@@ -116,11 +118,11 @@ options.Scope.Add("https://www.googleapis.com/auth/user.birthday.read");
 
 使用者可以自訂動作，方法是從衍生 <xref:Microsoft.AspNetCore.Authentication.OAuth.Claims.ClaimAction> 並執行抽象 <xref:Microsoft.AspNetCore.Authentication.OAuth.Claims.ClaimAction.Run*> 方法。
 
-如需詳細資訊，請參閱 <xref:Microsoft.AspNetCore.Authentication.OAuth.Claims> 。
+如需詳細資訊，請參閱<xref:Microsoft.AspNetCore.Authentication.OAuth.Claims>。
 
 ## <a name="removal-of-claim-actions-and-claims"></a>移除宣告動作和宣告
 
-[ClaimActionCollection （String）](xref:Microsoft.AspNetCore.Authentication.OAuth.Claims.ClaimActionCollection.Remove*)會從集合中移除指定的的所有宣告動作 <xref:Microsoft.AspNetCore.Authentication.OAuth.Claims.ClaimAction.ClaimType> 。 [ClaimActionCollectionMapExtensions. DeleteClaim （ClaimActionCollection，String）](xref:Microsoft.AspNetCore.Authentication.ClaimActionCollectionMapExtensions.DeleteClaim*)會從身分識別中刪除指定的宣告 <xref:Microsoft.AspNetCore.Authentication.OAuth.Claims.ClaimAction.ClaimType> 。 <xref:Microsoft.AspNetCore.Authentication.ClaimActionCollectionMapExtensions.DeleteClaim*>主要與[OpenID connect （OIDC）](/azure/active-directory/develop/v2-protocols-oidc)搭配使用，以移除通訊協定產生的宣告。
+[ClaimActionCollection 移除 (字串) ](xref:Microsoft.AspNetCore.Authentication.OAuth.Claims.ClaimActionCollection.Remove*)從集合中移除指定的所有宣告動作 <xref:Microsoft.AspNetCore.Authentication.OAuth.Claims.ClaimAction.ClaimType> 。 [ClaimActionCollectionMapExtensions. DeleteClaim (ClaimActionCollection，String) ](xref:Microsoft.AspNetCore.Authentication.ClaimActionCollectionMapExtensions.DeleteClaim*)會從身分識別中刪除指定的宣告 <xref:Microsoft.AspNetCore.Authentication.OAuth.Claims.ClaimAction.ClaimType> 。 <xref:Microsoft.AspNetCore.Authentication.ClaimActionCollectionMapExtensions.DeleteClaim*>主要用於[OpenID connect (OIDC) ](/azure/active-directory/develop/v2-protocols-oidc)移除通訊協定產生的宣告。
 
 ## <a name="sample-app-output"></a>範例應用程式輸出
 
@@ -168,11 +170,11 @@ Authentication Properties
 
 ASP.NET Core 應用程式可以從外部驗證提供者（例如 Facebook、Google、Microsoft 和 Twitter）建立額外的宣告和權杖。 每個提供者會在其平臺上顯示使用者的不同資訊，但接收和將使用者資料轉換成其他宣告的模式則相同。
 
-[查看或下載範例程式碼](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/security/authentication/social/additional-claims/samples)（[如何下載](xref:index#how-to-download-a-sample)）
+[查看或下載範例程式碼](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/security/authentication/social/additional-claims/samples) ([如何下載](xref:index#how-to-download-a-sample)) 
 
 ## <a name="prerequisites"></a>必要條件
 
-決定要在應用程式中支援的外部驗證提供者。 針對每個提供者，註冊應用程式，並取得用戶端識別碼和用戶端密碼。 如需詳細資訊，請參閱 <xref:security/authentication/social/index> 。 範例應用程式會使用[Google 驗證提供者](xref:security/authentication/google-logins)。
+決定要在應用程式中支援的外部驗證提供者。 針對每個提供者，註冊應用程式，並取得用戶端識別碼和用戶端密碼。 如需詳細資訊，請參閱<xref:security/authentication/social/index>。 範例應用程式會使用[Google 驗證提供者](xref:security/authentication/google-logins)。
 
 ## <a name="set-the-client-id-and-client-secret"></a>設定用戶端識別碼和用戶端秘密
 
@@ -210,17 +212,17 @@ options.Scope.Add("https://www.googleapis.com/auth/user.birthday.read");
 
 在提供者的選項中，針對 <xref:Microsoft.AspNetCore.Authentication.ClaimActionCollectionMapExtensions.MapJsonKey*> <xref:Microsoft.AspNetCore.Authentication.ClaimActionCollectionMapExtensions.MapJsonSubKey*> 外部提供者的 JSON 使用者資料中的每個索引鍵/子機碼指定或，以讓應用程式識別在登入時讀取。 如需宣告類型的詳細資訊，請參閱 <xref:System.Security.Claims.ClaimTypes> 。
 
-範例應用程式會 `urn:google:locale` `urn:google:picture` 從 `locale` `picture` Google 使用者資料中的和金鑰建立地區設定（）和圖片（）宣告：
+範例應用程式會 `urn:google:locale` `urn:google:picture` 從 `locale` `picture` Google 使用者資料中的和金鑰建立地區設定 () 和圖片 () 宣告：
 
 [!code-csharp[](additional-claims/samples/2.x/ClaimsSample/Startup.cs?name=snippet_AddGoogle&highlight=13-14)]
 
-在中 `Microsoft.AspNetCore.Identity.UI.Pages.Account.Internal.ExternalLoginModel.OnPostConfirmationAsync` ， <xref:Microsoft.AspNetCore.Identity.IdentityUser> `ApplicationUser` 會使用將（）登入應用程式 <xref:Microsoft.AspNetCore.Identity.SignInManager%601.SignInAsync*> 。 在登入程式期間， <xref:Microsoft.AspNetCore.Identity.UserManager%601> 可以儲存 `ApplicationUser` 可從取得之使用者資料的宣告 <xref:Microsoft.AspNetCore.Identity.ExternalLoginInfo.Principal*> 。
+在中 `Microsoft.AspNetCore.Identity.UI.Pages.Account.Internal.ExternalLoginModel.OnPostConfirmationAsync` ， <xref:Microsoft.AspNetCore.Identity.IdentityUser> (`ApplicationUser`) 使用登入應用程式 <xref:Microsoft.AspNetCore.Identity.SignInManager%601.SignInAsync*> 。 在登入程式期間， <xref:Microsoft.AspNetCore.Identity.UserManager%601> 可以儲存 `ApplicationUser` 可從取得之使用者資料的宣告 <xref:Microsoft.AspNetCore.Identity.ExternalLoginInfo.Principal*> 。
 
-在範例應用程式中 `OnPostConfirmationAsync` （*Account/ExternalLogin*）會建立已登入的地區設定（ `urn:google:locale` ）和圖片（ `urn:google:picture` ）宣告 `ApplicationUser` ，包括下列各項的聲明 <xref:System.Security.Claims.ClaimTypes.GivenName> ：
+在範例應用程式中， `OnPostConfirmationAsync` (*Account/ExternalLogin*) 會 `urn:google:locale` 針對已登入的) 和圖片 () 宣告，建立地區設定 (`urn:google:picture` `ApplicationUser` ，包括 <xref:System.Security.Claims.ClaimTypes.GivenName> 下列：
 
 [!code-csharp[](additional-claims/samples/2.x/ClaimsSample/Areas/Identity/Pages/Account/ExternalLogin.cshtml.cs?name=snippet_OnPostConfirmationAsync&highlight=35-51)]
 
-根據預設，使用者的宣告會儲存在驗證 cookie 中。 如果驗證 cookie 太大，可能會導致應用程式失敗，因為：
+根據預設，使用者的宣告會儲存在驗證中 cookie 。 如果驗證 cookie 太大，可能會導致應用程式失敗，因為：
 
 * 瀏覽器偵測到 cookie 標頭太長。
 * 要求的整體大小太大。
@@ -232,15 +234,15 @@ options.Scope.Add("https://www.googleapis.com/auth/user.birthday.read");
 
 ## <a name="save-the-access-token"></a>儲存存取權杖
 
-<xref:Microsoft.AspNetCore.Authentication.RemoteAuthenticationOptions.SaveTokens*>定義在成功授權之後，是否應將存取和重新整理權杖儲存在中 <xref:Microsoft.AspNetCore.Http.Authentication.AuthenticationProperties> 。 `SaveTokens`預設會設定為， `false` 以減少最終驗證 cookie 的大小。
+<xref:Microsoft.AspNetCore.Authentication.RemoteAuthenticationOptions.SaveTokens*>定義在成功授權之後，是否應將存取和重新整理權杖儲存在中 <xref:Microsoft.AspNetCore.Http.Authentication.AuthenticationProperties> 。 `SaveTokens`預設會設定為， `false` 以減少最終驗證的大小 cookie 。
 
 範例應用程式會將的值設定 `SaveTokens` 為 `true` 中的 <xref:Microsoft.AspNetCore.Authentication.Google.GoogleOptions> ：
 
 [!code-csharp[](additional-claims/samples/2.x/ClaimsSample/Startup.cs?name=snippet_AddGoogle&highlight=15)]
 
-`OnPostConfirmationAsync`執行時，從的外部提供者儲存存取權杖（[ExternalLoginInfo. AuthenticationTokens](xref:Microsoft.AspNetCore.Identity.ExternalLoginInfo.AuthenticationTokens*)） `ApplicationUser` `AuthenticationProperties` 。
+`OnPostConfirmationAsync`執行時，請從的外部提供者，將存取權杖儲存 ([ExternalLoginInfo. AuthenticationTokens](xref:Microsoft.AspNetCore.Identity.ExternalLoginInfo.AuthenticationTokens*)) 。 `ApplicationUser` `AuthenticationProperties`
 
-範例應用程式會在 Account/ExternalLogin 中，將存取權杖儲存在 `OnPostConfirmationAsync` （新的使用者註冊）和 `OnGetCallbackAsync` （先前註冊的使用者）中： *Account/ExternalLogin.cshtml.cs*
+範例應用程式會將存取權杖儲存在 `OnPostConfirmationAsync` (新的使用者註冊) ，並 `OnGetCallbackAsync` (先前在*Account/ExternalLogin*中註冊的使用者) ：
 
 [!code-csharp[](additional-claims/samples/2.x/ClaimsSample/Areas/Identity/Pages/Account/ExternalLogin.cshtml.cs?name=snippet_OnPostConfirmationAsync&highlight=54-56)]
 
@@ -256,11 +258,11 @@ options.Scope.Add("https://www.googleapis.com/auth/user.birthday.read");
 
 使用者可以自訂動作，方法是從衍生 <xref:Microsoft.AspNetCore.Authentication.OAuth.Claims.ClaimAction> 並執行抽象 <xref:Microsoft.AspNetCore.Authentication.OAuth.Claims.ClaimAction.Run*> 方法。
 
-如需詳細資訊，請參閱 <xref:Microsoft.AspNetCore.Authentication.OAuth.Claims> 。
+如需詳細資訊，請參閱<xref:Microsoft.AspNetCore.Authentication.OAuth.Claims>。
 
 ## <a name="removal-of-claim-actions-and-claims"></a>移除宣告動作和宣告
 
-[ClaimActionCollection （String）](xref:Microsoft.AspNetCore.Authentication.OAuth.Claims.ClaimActionCollection.Remove*)會從集合中移除指定的的所有宣告動作 <xref:Microsoft.AspNetCore.Authentication.OAuth.Claims.ClaimAction.ClaimType> 。 [ClaimActionCollectionMapExtensions. DeleteClaim （ClaimActionCollection，String）](xref:Microsoft.AspNetCore.Authentication.ClaimActionCollectionMapExtensions.DeleteClaim*)會從身分識別中刪除指定的宣告 <xref:Microsoft.AspNetCore.Authentication.OAuth.Claims.ClaimAction.ClaimType> 。 <xref:Microsoft.AspNetCore.Authentication.ClaimActionCollectionMapExtensions.DeleteClaim*>主要與[OpenID connect （OIDC）](/azure/active-directory/develop/v2-protocols-oidc)搭配使用，以移除通訊協定產生的宣告。
+[ClaimActionCollection 移除 (字串) ](xref:Microsoft.AspNetCore.Authentication.OAuth.Claims.ClaimActionCollection.Remove*)從集合中移除指定的所有宣告動作 <xref:Microsoft.AspNetCore.Authentication.OAuth.Claims.ClaimAction.ClaimType> 。 [ClaimActionCollectionMapExtensions. DeleteClaim (ClaimActionCollection，String) ](xref:Microsoft.AspNetCore.Authentication.ClaimActionCollectionMapExtensions.DeleteClaim*)會從身分識別中刪除指定的宣告 <xref:Microsoft.AspNetCore.Authentication.OAuth.Claims.ClaimAction.ClaimType> 。 <xref:Microsoft.AspNetCore.Authentication.ClaimActionCollectionMapExtensions.DeleteClaim*>主要用於[OpenID connect (OIDC) ](/azure/active-directory/develop/v2-protocols-oidc)移除通訊協定產生的宣告。
 
 ## <a name="sample-app-output"></a>範例應用程式輸出
 
@@ -306,4 +308,4 @@ Authentication Properties
 
 ## <a name="additional-resources"></a>其他資源
 
-* [dotnet/AspNetCore 工程 SocialSample 應用程式](https://github.com/dotnet/AspNetCore/tree/master/src/Security/Authentication/samples/SocialSample)：連結的範例應用程式位於[Dotnet/AspNetCore GitHub 存放庫的](https://github.com/dotnet/AspNetCore) `master` 工程分支。 `master`分支包含適用于下一個版本之 ASP.NET Core 的主動式開發程式碼。 若要查看 ASP.NET Core 發行版本的範例應用程式版本，請使用 [**分支**] 下拉式清單來選取發行分支（例如 `release/{X.Y}` ）。
+* [dotnet/AspNetCore 工程 SocialSample 應用程式](https://github.com/dotnet/AspNetCore/tree/master/src/Security/Authentication/samples/SocialSample)：連結的範例應用程式位於[Dotnet/AspNetCore GitHub 存放庫的](https://github.com/dotnet/AspNetCore) `master` 工程分支。 `master`分支包含適用于下一個版本之 ASP.NET Core 的主動式開發程式碼。 若要查看 ASP.NET Core 發行版本的範例應用程式版本，請使用 [**分支**] 下拉式清單來選取發行分支 (例如 `release/{X.Y}`) 。

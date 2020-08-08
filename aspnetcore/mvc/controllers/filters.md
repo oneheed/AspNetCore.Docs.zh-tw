@@ -6,6 +6,8 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 02/04/2020
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -14,12 +16,12 @@ no-loc:
 - Razor
 - SignalR
 uid: mvc/controllers/filters
-ms.openlocfilehash: 96d24940af6c591e3c02bfa26ed9d7d6ea60d27d
-ms.sourcegitcommit: d00a200bc8347af794b24184da14ad5c8b6bba9a
+ms.openlocfilehash: 11d0c514dd15e787224510991ffb81680c9fc479
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 07/21/2020
-ms.locfileid: "86869974"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88019338"
 ---
 # <a name="filters-in-aspnet-core"></a>ASP.NET Core 中的篩選條件
 
@@ -90,7 +92,7 @@ ASP.NET Core 中的「篩選條件」** 可讓程式碼在要求處理管線中�
 
 [!code-csharp[](./filters/3.1sample/FiltersSample/Filters/SampleAsyncActionFilter.cs?name=snippet)]
 
-在上述程式碼中， `SampleAsyncActionFilter` 具有 <xref:Microsoft.AspNetCore.Mvc.Filters.ActionExecutionDelegate> `next` 執行動作方法的（）。
+在上述程式碼中， `SampleAsyncActionFilter` 具有 <xref:Microsoft.AspNetCore.Mvc.Filters.ActionExecutionDelegate> `next` 執行動作方法的 () 。
 
 ### <a name="multiple-filter-stages"></a>多個篩選條件階段
 
@@ -209,7 +211,7 @@ ASP.NET Core 包含內建的屬性型篩選條件，可對其進行子類別化�
 
 `TestController`：
 
-* 將 `SampleActionFilterAttribute` （ `[SampleActionFilter]` ）套用至 `FilterTest2` 動作。
+* 將 `SampleActionFilterAttribute` (`[SampleActionFilter]`) 套用至 `FilterTest2` 動作。
 * 覆寫 `OnActionExecuting` 和 `OnActionExecuted`。
 
 [!code-csharp[](./filters/3.1sample/FiltersSample/Controllers/TestController.cs?name=snippet)]
@@ -746,7 +748,7 @@ ASP.NET Core 包含內建的屬性型篩選條件，可對其進行子類別化�
 * 方法篩選條件巢狀位於控制器篩選條件內。
 * 控制器篩選條件巢狀位於全域篩選條件內。
 
-### <a name="controller-and-razor-page-level-filters"></a>控制器和 Razor 頁面層級篩選
+### <a name="controller-and-no-locrazor-page-level-filters"></a>控制器和 Razor 頁面層級篩選
 
 繼承自 <xref:Microsoft.AspNetCore.Mvc.Controller> 基底類別的每個控制器都會包含 [Controller.OnActionExecuting](xref:Microsoft.AspNetCore.Mvc.Controller.OnActionExecuting*)、[Controller.OnActionExecutionAsync](xref:Microsoft.AspNetCore.Mvc.Controller.OnActionExecutionAsync*)，以及 [Controller.OnActionExecuted](xref:Microsoft.AspNetCore.Mvc.Controller.OnActionExecuted*)
 `OnActionExecuted` 方法。 這些方法會：
@@ -760,7 +762,7 @@ ASP.NET Core 包含內建的屬性型篩選條件，可對其進行子類別化�
 
 `TestController`：
 
-* 將 `SampleActionFilterAttribute` （ `[SampleActionFilter]` ）套用至 `FilterTest2` 動作。
+* 將 `SampleActionFilterAttribute` (`[SampleActionFilter]`) 套用至 `FilterTest2` 動作。
 * 覆寫 `OnActionExecuting` 和 `OnActionExecuted`。
 
 [!code-csharp[](./filters/sample/FiltersSample/Controllers/TestController.cs?name=snippet)]

@@ -7,6 +7,8 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 02/07/2020
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -15,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: performance/caching/distributed
-ms.openlocfilehash: 56c67178bd5c63f08a812357a4f8e672dd483994
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: 64a4b6f606a4f5f8e73ef08f53cbb6e4003245aa
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85405389"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88020674"
 ---
 # <a name="distributed-caching-in-aspnet-core"></a>ASP.NET Core 中的分散式快取
 
@@ -34,13 +36,13 @@ ms.locfileid: "85405389"
 
 散發快取的資料時，資料：
 
-* 跨多部*伺服器的要求之間具有一致*（一致）。
+* 是一致的 (跨多部*伺服器的要求*一致) 。
 * 不受伺服器重新開機和應用程式部署。
 * 不使用本機記憶體。
 
-分散式快取設定是特定的執行。 本文說明如何設定 SQL Server 和 Redis 分散式快取。 協力廠商實現也可以使用，例如[NCache](http://www.alachisoft.com/ncache/aspnet-core-idistributedcache-ncache.html) （[GitHub 上的 NCache](https://github.com/Alachisoft/NCache)）。 無論選取哪一個實作為，應用程式都會使用介面與快取互動 <xref:Microsoft.Extensions.Caching.Distributed.IDistributedCache> 。
+分散式快取設定是特定的執行。 本文說明如何設定 SQL Server 和 Redis 分散式快取。 協力廠商的執行也可供使用，例如[GitHub) 上的](https://github.com/Alachisoft/NCache) [NCache](http://www.alachisoft.com/ncache/aspnet-core-idistributedcache-ncache.html) (NCache。 無論選取哪一個實作為，應用程式都會使用介面與快取互動 <xref:Microsoft.Extensions.Caching.Distributed.IDistributedCache> 。
 
-[查看或下載範例程式碼](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/performance/caching/distributed/samples/)（[如何下載](xref:index#how-to-download-a-sample)）
+[查看或下載範例程式碼](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/performance/caching/distributed/samples/) ([如何下載](xref:index#how-to-download-a-sample)) 
 
 ## <a name="prerequisites"></a>必要條件
 
@@ -55,8 +57,8 @@ ms.locfileid: "85405389"
 <xref:Microsoft.Extensions.Caching.Distributed.IDistributedCache>介面提供下列方法來操作分散式快取實作為中的專案：
 
 * <xref:Microsoft.Extensions.Caching.Distributed.IDistributedCache.Get*>， <xref:Microsoft.Extensions.Caching.Distributed.IDistributedCache.GetAsync*> ：接受字串索引鍵，並在快取中找到快取的專案做為 `byte[]` 陣列。
-* <xref:Microsoft.Extensions.Caching.Distributed.IDistributedCache.Set*>， <xref:Microsoft.Extensions.Caching.Distributed.IDistributedCache.SetAsync*> ：使用字串索引鍵將專案（ `byte[]` 陣列）新增至快取。
-* <xref:Microsoft.Extensions.Caching.Distributed.IDistributedCache.Refresh*>，：根據索引鍵重新整理快取 <xref:Microsoft.Extensions.Caching.Distributed.IDistributedCache.RefreshAsync*> 中的專案，並重設其滑動到期時間（如果有的話）。
+* <xref:Microsoft.Extensions.Caching.Distributed.IDistributedCache.Set*>， <xref:Microsoft.Extensions.Caching.Distributed.IDistributedCache.SetAsync*> ：使用字串索引鍵將專案 (做為 `byte[]` 陣列) 加入至快取。
+* <xref:Microsoft.Extensions.Caching.Distributed.IDistributedCache.Refresh*>，：根據索引鍵重新整理快取 <xref:Microsoft.Extensions.Caching.Distributed.IDistributedCache.RefreshAsync*> 中的專案，如果有任何) ，則重設其滑動到期時間 (。
 * <xref:Microsoft.Extensions.Caching.Distributed.IDistributedCache.Remove*>， <xref:Microsoft.Extensions.Caching.Distributed.IDistributedCache.RemoveAsync*> ：根據其字串索引鍵移除快取專案。
 
 ## <a name="establish-distributed-caching-services"></a>建立分散式快取服務
@@ -70,7 +72,7 @@ ms.locfileid: "85405389"
 
 ### <a name="distributed-memory-cache"></a>分散式記憶體快取
 
-分散式記憶體快取（ <xref:Microsoft.Extensions.DependencyInjection.MemoryCacheServiceCollectionExtensions.AddDistributedMemoryCache*> ）是一種架構提供的執行 <xref:Microsoft.Extensions.Caching.Distributed.IDistributedCache> ，可將專案儲存于記憶體中。 分散式記憶體快取不是實際的分散式快取。 在應用程式執行所在的伺服器上，應用程式實例會儲存快取的專案。
+分散式記憶體快取 (<xref:Microsoft.Extensions.DependencyInjection.MemoryCacheServiceCollectionExtensions.AddDistributedMemoryCache*>) 是的架構提供的執行 <xref:Microsoft.Extensions.Caching.Distributed.IDistributedCache> ，可將專案儲存在記憶體中。 分散式記憶體快取不是實際的分散式快取。 在應用程式執行所在的伺服器上，應用程式實例會儲存快取的專案。
 
 分散式記憶體快取是一種實用的執行方式：
 
@@ -83,9 +85,9 @@ ms.locfileid: "85405389"
 
 ### <a name="distributed-sql-server-cache"></a>分散式 SQL Server 快取
 
-分散式 SQL Server 快取執行（ <xref:Microsoft.Extensions.DependencyInjection.SqlServerCachingServicesExtensions.AddDistributedSqlServerCache*> ）可讓分散式快取使用 SQL Server 資料庫作為其備份存放區。 若要在 SQL Server 實例中建立 SQL Server 快取的專案資料表，您可以使用 `sql-cache` 工具。 此工具會建立一個資料表，其中包含您指定的名稱和架構。
+分散式 SQL Server 快取實 <xref:Microsoft.Extensions.DependencyInjection.SqlServerCachingServicesExtensions.AddDistributedSqlServerCache*> 作為 () 可讓分散式快取使用 SQL Server 資料庫作為其備份存放區。 若要在 SQL Server 實例中建立 SQL Server 快取的專案資料表，您可以使用 `sql-cache` 工具。 此工具會建立一個資料表，其中包含您指定的名稱和架構。
 
-執行命令，在 SQL Server 中建立資料表 `sql-cache create` 。 提供 SQL Server 實例（ `Data Source` ）、資料庫（ `Initial Catalog` ）、架構（例如 `dbo` ）和資料表名稱（例如 `TestCache` ）：
+執行命令，在 SQL Server 中建立資料表 `sql-cache create` 。 提供 SQL Server 實例 (`Data Source`) 、資料庫 (`Initial Catalog`) 、架構 (例如 `dbo`) 和資料表名稱 (例如 `TestCache`) ：
 
 ```dotnetcli
 dotnet sql-cache create "Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=DistCache;Integrated Security=True;" dbo TestCache
@@ -109,13 +111,13 @@ Table and index were created successfully.
 [!code-csharp[](distributed/samples/3.x/DistCacheSample/Startup.cs?name=snippet_AddDistributedSqlServerCache)]
 
 > [!NOTE]
-> <xref:Microsoft.Extensions.Caching.SqlServer.SqlServerCacheOptions.ConnectionString*>（而且選擇性地， <xref:Microsoft.Extensions.Caching.SqlServer.SqlServerCacheOptions.SchemaName*> 和 <xref:Microsoft.Extensions.Caching.SqlServer.SqlServerCacheOptions.TableName*> ）通常會儲存在原始檔控制外部（例如，由[秘密管理員](xref:security/app-secrets)儲存，或 appsettings 中的*appsettings.js* / *。環境} json*檔案）。 連接字串可能包含應保留在原始檔控制系統中的認證。
+>  (，而且 <xref:Microsoft.Extensions.Caching.SqlServer.SqlServerCacheOptions.ConnectionString*> （選擇性） <xref:Microsoft.Extensions.Caching.SqlServer.SqlServerCacheOptions.SchemaName*> 和 <xref:Microsoft.Extensions.Caching.SqlServer.SqlServerCacheOptions.TableName*>) 通常會儲存在原始檔控制外部 (例如，由[秘密管理員](xref:security/app-secrets)儲存，或在 appsettings*上appsettings.js* / *。環境}. json*檔案) 。 連接字串可能包含應保留在原始檔控制系統中的認證。
 
 ### <a name="distributed-redis-cache"></a>分散式 Redis 快取
 
 [Redis](https://redis.io/)是一個開放原始碼記憶體內部資料存放區，通常用來做為分散式快取。 您可以在本機使用 Redis，而且您可以為 Azure 託管的 ASP.NET Core 應用程式設定[Azure Redis](https://azure.microsoft.com/services/cache/)快取。
 
-應用程式會在的 <xref:Microsoft.Extensions.Caching.StackExchangeRedis.RedisCache> 非開發環境中，使用實例（）來設定快取執行 <xref:Microsoft.Extensions.DependencyInjection.StackExchangeRedisCacheServiceCollectionExtensions.AddStackExchangeRedisCache*> `Startup.ConfigureServices` ：
+應用程式會在的 <xref:Microsoft.Extensions.Caching.StackExchangeRedis.RedisCache> 非開發環境中，使用 () 實例來設定快取執行 <xref:Microsoft.Extensions.DependencyInjection.StackExchangeRedisCacheServiceCollectionExtensions.AddStackExchangeRedisCache*> `Startup.ConfigureServices` ：
 
 [!code-csharp[](distributed/samples/3.x/DistCacheSample/Startup.cs?name=snippet_AddStackExchangeRedisCache)]
 
@@ -147,22 +149,22 @@ Table and index were created successfully.
 
 ## <a name="use-the-distributed-cache"></a>使用分散式快取
 
-若要使用 <xref:Microsoft.Extensions.Caching.Distributed.IDistributedCache> 介面，請 <xref:Microsoft.Extensions.Caching.Distributed.IDistributedCache> 從應用程式中的任何一個函式要求的實例。 實例是由相依性[插入（DI）](xref:fundamentals/dependency-injection)提供。
+若要使用 <xref:Microsoft.Extensions.Caching.Distributed.IDistributedCache> 介面，請 <xref:Microsoft.Extensions.Caching.Distributed.IDistributedCache> 從應用程式中的任何一個函式要求的實例。 實例是由[ (DI) ](xref:fundamentals/dependency-injection)的相依性插入所提供。
 
-當範例應用程式啟動時， <xref:Microsoft.Extensions.Caching.Distributed.IDistributedCache> 會插入 `Startup.Configure` 。 目前的時間是使用快取的 <xref:Microsoft.Extensions.Hosting.IHostApplicationLifetime> （如需詳細資訊，請參閱[泛型主機： IHostApplicationLifetime](xref:fundamentals/host/generic-host#ihostapplicationlifetime)）：
+當範例應用程式啟動時， <xref:Microsoft.Extensions.Caching.Distributed.IDistributedCache> 會插入 `Startup.Configure` 。 使用 (快取目前的時間 <xref:Microsoft.Extensions.Hosting.IHostApplicationLifetime> 以取得詳細資訊，請參閱[泛型主機： IHostApplicationLifetime](xref:fundamentals/host/generic-host#ihostapplicationlifetime)) ：
 
 [!code-csharp[](distributed/samples/3.x/DistCacheSample/Startup.cs?name=snippet_Configure&highlight=10)]
 
 範例應用程式會將插入， <xref:Microsoft.Extensions.Caching.Distributed.IDistributedCache> `IndexModel` 以供 [索引] 頁面使用。
 
-每次載入 [索引] 頁面時，都會檢查快取的快取時間 `OnGetAsync` 。 如果快取的時間尚未過期，則會顯示時間。 如果自上次存取快取時間之後已經過20秒（上次載入此頁面的時間），頁面就會顯示快取的*時間已過期*。
+每次載入 [索引] 頁面時，都會檢查快取的快取時間 `OnGetAsync` 。 如果快取的時間尚未過期，則會顯示時間。 如果自上次存取快取時間以來已過了20秒 (上次) 載入此頁面時，頁面會顯示快取的*時間已過期*。
 
 選取 [**重設**快取時間] 按鈕，立即將快取的時間更新為目前的時間。 按鈕會觸發 `OnPostResetCachedTime` 處理常式方法。
 
 [!code-csharp[](distributed/samples/3.x/DistCacheSample/Pages/Index.cshtml.cs?name=snippet_IndexModel&highlight=7,14-20,25-29)]
 
 > [!NOTE]
-> 實例不需要使用單一或範圍存留期 <xref:Microsoft.Extensions.Caching.Distributed.IDistributedCache> （至少適用于內建的實作為）。
+> 實例不需要使用單一或範圍的存留期， <xref:Microsoft.Extensions.Caching.Distributed.IDistributedCache> (至少適用于內建的) 。
 >
 > 您也可以建立 <xref:Microsoft.Extensions.Caching.Distributed.IDistributedCache> 實例，而不需要使用 DI，但在程式碼中建立實例可能會使您的程式碼更難測試，並違反[明確](/dotnet/standard/modern-web-apps-azure-architecture/architectural-principles#explicit-dependencies)的相依性準則。
 
@@ -185,7 +187,7 @@ Table and index were created successfully.
 
 * [Azure 上的 Redis 快取](/azure/azure-cache-for-redis/)
 * [Azure 上的 SQL Database](/azure/sql-database/)
-* [Web 伺服陣列中 NCache 的 ASP.NET Core IDistributedCache 提供者](http://www.alachisoft.com/ncache/aspnet-core-idistributedcache-ncache.html)（[GitHub 上的 NCache](https://github.com/Alachisoft/NCache)）
+* [GitHub 上](https://github.com/Alachisoft/NCache)[的 Web 伺服陣列中的 NCache ASP.NET Core IDistributedCache 提供者](http://www.alachisoft.com/ncache/aspnet-core-idistributedcache-ncache.html) (NCache) 
 * <xref:performance/caching/memory>
 * <xref:fundamentals/change-tokens>
 * <xref:performance/caching/response>
@@ -204,13 +206,13 @@ Table and index were created successfully.
 
 散發快取的資料時，資料：
 
-* 跨多部*伺服器的要求之間具有一致*（一致）。
+* 是一致的 (跨多部*伺服器的要求*一致) 。
 * 不受伺服器重新開機和應用程式部署。
 * 不使用本機記憶體。
 
-分散式快取設定是特定的執行。 本文說明如何設定 SQL Server 和 Redis 分散式快取。 協力廠商實現也可以使用，例如[NCache](http://www.alachisoft.com/ncache/aspnet-core-idistributedcache-ncache.html) （[GitHub 上的 NCache](https://github.com/Alachisoft/NCache)）。 無論選取哪一個實作為，應用程式都會使用介面與快取互動 <xref:Microsoft.Extensions.Caching.Distributed.IDistributedCache> 。
+分散式快取設定是特定的執行。 本文說明如何設定 SQL Server 和 Redis 分散式快取。 協力廠商的執行也可供使用，例如[GitHub) 上的](https://github.com/Alachisoft/NCache) [NCache](http://www.alachisoft.com/ncache/aspnet-core-idistributedcache-ncache.html) (NCache。 無論選取哪一個實作為，應用程式都會使用介面與快取互動 <xref:Microsoft.Extensions.Caching.Distributed.IDistributedCache> 。
 
-[查看或下載範例程式碼](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/performance/caching/distributed/samples/)（[如何下載](xref:index#how-to-download-a-sample)）
+[查看或下載範例程式碼](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/performance/caching/distributed/samples/) ([如何下載](xref:index#how-to-download-a-sample)) 
 
 ## <a name="prerequisites"></a>必要條件
 
@@ -225,8 +227,8 @@ Table and index were created successfully.
 <xref:Microsoft.Extensions.Caching.Distributed.IDistributedCache>介面提供下列方法來操作分散式快取實作為中的專案：
 
 * <xref:Microsoft.Extensions.Caching.Distributed.IDistributedCache.Get*>， <xref:Microsoft.Extensions.Caching.Distributed.IDistributedCache.GetAsync*> ：接受字串索引鍵，並在快取中找到快取的專案做為 `byte[]` 陣列。
-* <xref:Microsoft.Extensions.Caching.Distributed.IDistributedCache.Set*>， <xref:Microsoft.Extensions.Caching.Distributed.IDistributedCache.SetAsync*> ：使用字串索引鍵將專案（ `byte[]` 陣列）新增至快取。
-* <xref:Microsoft.Extensions.Caching.Distributed.IDistributedCache.Refresh*>，：根據索引鍵重新整理快取 <xref:Microsoft.Extensions.Caching.Distributed.IDistributedCache.RefreshAsync*> 中的專案，並重設其滑動到期時間（如果有的話）。
+* <xref:Microsoft.Extensions.Caching.Distributed.IDistributedCache.Set*>， <xref:Microsoft.Extensions.Caching.Distributed.IDistributedCache.SetAsync*> ：使用字串索引鍵將專案 (做為 `byte[]` 陣列) 加入至快取。
+* <xref:Microsoft.Extensions.Caching.Distributed.IDistributedCache.Refresh*>，：根據索引鍵重新整理快取 <xref:Microsoft.Extensions.Caching.Distributed.IDistributedCache.RefreshAsync*> 中的專案，如果有任何) ，則重設其滑動到期時間 (。
 * <xref:Microsoft.Extensions.Caching.Distributed.IDistributedCache.Remove*>， <xref:Microsoft.Extensions.Caching.Distributed.IDistributedCache.RemoveAsync*> ：根據其字串索引鍵移除快取專案。
 
 ## <a name="establish-distributed-caching-services"></a>建立分散式快取服務
@@ -240,7 +242,7 @@ Table and index were created successfully.
 
 ### <a name="distributed-memory-cache"></a>分散式記憶體快取
 
-分散式記憶體快取（ <xref:Microsoft.Extensions.DependencyInjection.MemoryCacheServiceCollectionExtensions.AddDistributedMemoryCache*> ）是一種架構提供的執行 <xref:Microsoft.Extensions.Caching.Distributed.IDistributedCache> ，可將專案儲存于記憶體中。 分散式記憶體快取不是實際的分散式快取。 在應用程式執行所在的伺服器上，應用程式實例會儲存快取的專案。
+分散式記憶體快取 (<xref:Microsoft.Extensions.DependencyInjection.MemoryCacheServiceCollectionExtensions.AddDistributedMemoryCache*>) 是的架構提供的執行 <xref:Microsoft.Extensions.Caching.Distributed.IDistributedCache> ，可將專案儲存在記憶體中。 分散式記憶體快取不是實際的分散式快取。 在應用程式執行所在的伺服器上，應用程式實例會儲存快取的專案。
 
 分散式記憶體快取是一種實用的執行方式：
 
@@ -253,9 +255,9 @@ Table and index were created successfully.
 
 ### <a name="distributed-sql-server-cache"></a>分散式 SQL Server 快取
 
-分散式 SQL Server 快取執行（ <xref:Microsoft.Extensions.DependencyInjection.SqlServerCachingServicesExtensions.AddDistributedSqlServerCache*> ）可讓分散式快取使用 SQL Server 資料庫作為其備份存放區。 若要在 SQL Server 實例中建立 SQL Server 快取的專案資料表，您可以使用 `sql-cache` 工具。 此工具會建立一個資料表，其中包含您指定的名稱和架構。
+分散式 SQL Server 快取實 <xref:Microsoft.Extensions.DependencyInjection.SqlServerCachingServicesExtensions.AddDistributedSqlServerCache*> 作為 () 可讓分散式快取使用 SQL Server 資料庫作為其備份存放區。 若要在 SQL Server 實例中建立 SQL Server 快取的專案資料表，您可以使用 `sql-cache` 工具。 此工具會建立一個資料表，其中包含您指定的名稱和架構。
 
-執行命令，在 SQL Server 中建立資料表 `sql-cache create` 。 提供 SQL Server 實例（ `Data Source` ）、資料庫（ `Initial Catalog` ）、架構（例如 `dbo` ）和資料表名稱（例如 `TestCache` ）：
+執行命令，在 SQL Server 中建立資料表 `sql-cache create` 。 提供 SQL Server 實例 (`Data Source`) 、資料庫 (`Initial Catalog`) 、架構 (例如 `dbo`) 和資料表名稱 (例如 `TestCache`) ：
 
 ```dotnetcli
 dotnet sql-cache create "Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=DistCache;Integrated Security=True;" dbo TestCache
@@ -279,13 +281,13 @@ Table and index were created successfully.
 [!code-csharp[](distributed/samples/2.x/DistCacheSample/Startup.cs?name=snippet_AddDistributedSqlServerCache)]
 
 > [!NOTE]
-> <xref:Microsoft.Extensions.Caching.SqlServer.SqlServerCacheOptions.ConnectionString*>（而且選擇性地， <xref:Microsoft.Extensions.Caching.SqlServer.SqlServerCacheOptions.SchemaName*> 和 <xref:Microsoft.Extensions.Caching.SqlServer.SqlServerCacheOptions.TableName*> ）通常會儲存在原始檔控制外部（例如，由[秘密管理員](xref:security/app-secrets)儲存，或 appsettings 中的*appsettings.js* / *。環境} json*檔案）。 連接字串可能包含應保留在原始檔控制系統中的認證。
+>  (，而且 <xref:Microsoft.Extensions.Caching.SqlServer.SqlServerCacheOptions.ConnectionString*> （選擇性） <xref:Microsoft.Extensions.Caching.SqlServer.SqlServerCacheOptions.SchemaName*> 和 <xref:Microsoft.Extensions.Caching.SqlServer.SqlServerCacheOptions.TableName*>) 通常會儲存在原始檔控制外部 (例如，由[秘密管理員](xref:security/app-secrets)儲存，或在 appsettings*上appsettings.js* / *。環境}. json*檔案) 。 連接字串可能包含應保留在原始檔控制系統中的認證。
 
 ### <a name="distributed-redis-cache"></a>分散式 Redis 快取
 
 [Redis](https://redis.io/)是一個開放原始碼記憶體內部資料存放區，通常用來做為分散式快取。 您可以在本機使用 Redis，而且您可以為 Azure 託管的 ASP.NET Core 應用程式設定[Azure Redis](https://azure.microsoft.com/services/cache/)快取。
 
-應用程式會在的 <xref:Microsoft.Extensions.Caching.StackExchangeRedis.RedisCache> 非開發環境中，使用實例（）來設定快取執行 <xref:Microsoft.Extensions.DependencyInjection.StackExchangeRedisCacheServiceCollectionExtensions.AddStackExchangeRedisCache*> `Startup.ConfigureServices` ：
+應用程式會在的 <xref:Microsoft.Extensions.Caching.StackExchangeRedis.RedisCache> 非開發環境中，使用 () 實例來設定快取執行 <xref:Microsoft.Extensions.DependencyInjection.StackExchangeRedisCacheServiceCollectionExtensions.AddStackExchangeRedisCache*> `Startup.ConfigureServices` ：
 
 [!code-csharp[](distributed/samples/2.x/DistCacheSample/Startup.cs?name=snippet_AddStackExchangeRedisCache)]
 
@@ -317,22 +319,22 @@ Table and index were created successfully.
 
 ## <a name="use-the-distributed-cache"></a>使用分散式快取
 
-若要使用 <xref:Microsoft.Extensions.Caching.Distributed.IDistributedCache> 介面，請 <xref:Microsoft.Extensions.Caching.Distributed.IDistributedCache> 從應用程式中的任何一個函式要求的實例。 實例是由相依性[插入（DI）](xref:fundamentals/dependency-injection)提供。
+若要使用 <xref:Microsoft.Extensions.Caching.Distributed.IDistributedCache> 介面，請 <xref:Microsoft.Extensions.Caching.Distributed.IDistributedCache> 從應用程式中的任何一個函式要求的實例。 實例是由[ (DI) ](xref:fundamentals/dependency-injection)的相依性插入所提供。
 
-當範例應用程式啟動時， <xref:Microsoft.Extensions.Caching.Distributed.IDistributedCache> 會插入 `Startup.Configure` 。 目前的時間是使用快取的 <xref:Microsoft.AspNetCore.Hosting.IApplicationLifetime> （如需詳細資訊，請參閱[Web 主機： IApplicationLifetime 介面](xref:fundamentals/host/web-host#iapplicationlifetime-interface)）：
+當範例應用程式啟動時， <xref:Microsoft.Extensions.Caching.Distributed.IDistributedCache> 會插入 `Startup.Configure` 。 使用 (快取目前的時間 <xref:Microsoft.AspNetCore.Hosting.IApplicationLifetime> 以取得詳細資訊，請參閱[Web 主機： IApplicationLifetime 介面](xref:fundamentals/host/web-host#iapplicationlifetime-interface)) ：
 
 [!code-csharp[](distributed/samples/2.x/DistCacheSample/Startup.cs?name=snippet_Configure&highlight=10)]
 
 範例應用程式會將插入， <xref:Microsoft.Extensions.Caching.Distributed.IDistributedCache> `IndexModel` 以供 [索引] 頁面使用。
 
-每次載入 [索引] 頁面時，都會檢查快取的快取時間 `OnGetAsync` 。 如果快取的時間尚未過期，則會顯示時間。 如果自上次存取快取時間之後已經過20秒（上次載入此頁面的時間），頁面就會顯示快取的*時間已過期*。
+每次載入 [索引] 頁面時，都會檢查快取的快取時間 `OnGetAsync` 。 如果快取的時間尚未過期，則會顯示時間。 如果自上次存取快取時間以來已過了20秒 (上次) 載入此頁面時，頁面會顯示快取的*時間已過期*。
 
 選取 [**重設**快取時間] 按鈕，立即將快取的時間更新為目前的時間。 按鈕會觸發 `OnPostResetCachedTime` 處理常式方法。
 
 [!code-csharp[](distributed/samples/2.x/DistCacheSample/Pages/Index.cshtml.cs?name=snippet_IndexModel&highlight=7,14-20,25-29)]
 
 > [!NOTE]
-> 實例不需要使用單一或範圍存留期 <xref:Microsoft.Extensions.Caching.Distributed.IDistributedCache> （至少適用于內建的實作為）。
+> 實例不需要使用單一或範圍的存留期， <xref:Microsoft.Extensions.Caching.Distributed.IDistributedCache> (至少適用于內建的) 。
 >
 > 您也可以建立 <xref:Microsoft.Extensions.Caching.Distributed.IDistributedCache> 實例，而不需要使用 DI，但在程式碼中建立實例可能會使您的程式碼更難測試，並違反[明確](/dotnet/standard/modern-web-apps-azure-architecture/architectural-principles#explicit-dependencies)的相依性準則。
 
@@ -355,7 +357,7 @@ Table and index were created successfully.
 
 * [Azure 上的 Redis 快取](/azure/azure-cache-for-redis/)
 * [Azure 上的 SQL Database](/azure/sql-database/)
-* [Web 伺服陣列中 NCache 的 ASP.NET Core IDistributedCache 提供者](http://www.alachisoft.com/ncache/aspnet-core-idistributedcache-ncache.html)（[GitHub 上的 NCache](https://github.com/Alachisoft/NCache)）
+* [GitHub 上](https://github.com/Alachisoft/NCache)[的 Web 伺服陣列中的 NCache ASP.NET Core IDistributedCache 提供者](http://www.alachisoft.com/ncache/aspnet-core-idistributedcache-ncache.html) (NCache) 
 * <xref:performance/caching/memory>
 * <xref:fundamentals/change-tokens>
 * <xref:performance/caching/response>
@@ -374,13 +376,13 @@ Table and index were created successfully.
 
 散發快取的資料時，資料：
 
-* 跨多部*伺服器的要求之間具有一致*（一致）。
+* 是一致的 (跨多部*伺服器的要求*一致) 。
 * 不受伺服器重新開機和應用程式部署。
 * 不使用本機記憶體。
 
-分散式快取設定是特定的執行。 本文說明如何設定 SQL Server 和 Redis 分散式快取。 協力廠商實現也可以使用，例如[NCache](http://www.alachisoft.com/ncache/aspnet-core-idistributedcache-ncache.html) （[GitHub 上的 NCache](https://github.com/Alachisoft/NCache)）。 無論選取哪一個實作為，應用程式都會使用介面與快取互動 <xref:Microsoft.Extensions.Caching.Distributed.IDistributedCache> 。
+分散式快取設定是特定的執行。 本文說明如何設定 SQL Server 和 Redis 分散式快取。 協力廠商的執行也可供使用，例如[GitHub) 上的](https://github.com/Alachisoft/NCache) [NCache](http://www.alachisoft.com/ncache/aspnet-core-idistributedcache-ncache.html) (NCache。 無論選取哪一個實作為，應用程式都會使用介面與快取互動 <xref:Microsoft.Extensions.Caching.Distributed.IDistributedCache> 。
 
-[查看或下載範例程式碼](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/performance/caching/distributed/samples/)（[如何下載](xref:index#how-to-download-a-sample)）
+[查看或下載範例程式碼](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/performance/caching/distributed/samples/) ([如何下載](xref:index#how-to-download-a-sample)) 
 
 ## <a name="prerequisites"></a>必要條件
 
@@ -395,8 +397,8 @@ Table and index were created successfully.
 <xref:Microsoft.Extensions.Caching.Distributed.IDistributedCache>介面提供下列方法來操作分散式快取實作為中的專案：
 
 * <xref:Microsoft.Extensions.Caching.Distributed.IDistributedCache.Get*>， <xref:Microsoft.Extensions.Caching.Distributed.IDistributedCache.GetAsync*> ：接受字串索引鍵，並在快取中找到快取的專案做為 `byte[]` 陣列。
-* <xref:Microsoft.Extensions.Caching.Distributed.IDistributedCache.Set*>， <xref:Microsoft.Extensions.Caching.Distributed.IDistributedCache.SetAsync*> ：使用字串索引鍵將專案（ `byte[]` 陣列）新增至快取。
-* <xref:Microsoft.Extensions.Caching.Distributed.IDistributedCache.Refresh*>，：根據索引鍵重新整理快取 <xref:Microsoft.Extensions.Caching.Distributed.IDistributedCache.RefreshAsync*> 中的專案，並重設其滑動到期時間（如果有的話）。
+* <xref:Microsoft.Extensions.Caching.Distributed.IDistributedCache.Set*>， <xref:Microsoft.Extensions.Caching.Distributed.IDistributedCache.SetAsync*> ：使用字串索引鍵將專案 (做為 `byte[]` 陣列) 加入至快取。
+* <xref:Microsoft.Extensions.Caching.Distributed.IDistributedCache.Refresh*>，：根據索引鍵重新整理快取 <xref:Microsoft.Extensions.Caching.Distributed.IDistributedCache.RefreshAsync*> 中的專案，如果有任何) ，則重設其滑動到期時間 (。
 * <xref:Microsoft.Extensions.Caching.Distributed.IDistributedCache.Remove*>， <xref:Microsoft.Extensions.Caching.Distributed.IDistributedCache.RemoveAsync*> ：根據其字串索引鍵移除快取專案。
 
 ## <a name="establish-distributed-caching-services"></a>建立分散式快取服務
@@ -410,7 +412,7 @@ Table and index were created successfully.
 
 ### <a name="distributed-memory-cache"></a>分散式記憶體快取
 
-分散式記憶體快取（ <xref:Microsoft.Extensions.DependencyInjection.MemoryCacheServiceCollectionExtensions.AddDistributedMemoryCache*> ）是一種架構提供的執行 <xref:Microsoft.Extensions.Caching.Distributed.IDistributedCache> ，可將專案儲存于記憶體中。 分散式記憶體快取不是實際的分散式快取。 在應用程式執行所在的伺服器上，應用程式實例會儲存快取的專案。
+分散式記憶體快取 (<xref:Microsoft.Extensions.DependencyInjection.MemoryCacheServiceCollectionExtensions.AddDistributedMemoryCache*>) 是的架構提供的執行 <xref:Microsoft.Extensions.Caching.Distributed.IDistributedCache> ，可將專案儲存在記憶體中。 分散式記憶體快取不是實際的分散式快取。 在應用程式執行所在的伺服器上，應用程式實例會儲存快取的專案。
 
 分散式記憶體快取是一種實用的執行方式：
 
@@ -423,9 +425,9 @@ Table and index were created successfully.
 
 ### <a name="distributed-sql-server-cache"></a>分散式 SQL Server 快取
 
-分散式 SQL Server 快取執行（ <xref:Microsoft.Extensions.DependencyInjection.SqlServerCachingServicesExtensions.AddDistributedSqlServerCache*> ）可讓分散式快取使用 SQL Server 資料庫作為其備份存放區。 若要在 SQL Server 實例中建立 SQL Server 快取的專案資料表，您可以使用 `sql-cache` 工具。 此工具會建立一個資料表，其中包含您指定的名稱和架構。
+分散式 SQL Server 快取實 <xref:Microsoft.Extensions.DependencyInjection.SqlServerCachingServicesExtensions.AddDistributedSqlServerCache*> 作為 () 可讓分散式快取使用 SQL Server 資料庫作為其備份存放區。 若要在 SQL Server 實例中建立 SQL Server 快取的專案資料表，您可以使用 `sql-cache` 工具。 此工具會建立一個資料表，其中包含您指定的名稱和架構。
 
-執行命令，在 SQL Server 中建立資料表 `sql-cache create` 。 提供 SQL Server 實例（ `Data Source` ）、資料庫（ `Initial Catalog` ）、架構（例如 `dbo` ）和資料表名稱（例如 `TestCache` ）：
+執行命令，在 SQL Server 中建立資料表 `sql-cache create` 。 提供 SQL Server 實例 (`Data Source`) 、資料庫 (`Initial Catalog`) 、架構 (例如 `dbo`) 和資料表名稱 (例如 `TestCache`) ：
 
 ```dotnetcli
 dotnet sql-cache create "Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=DistCache;Integrated Security=True;" dbo TestCache
@@ -449,13 +451,13 @@ Table and index were created successfully.
 [!code-csharp[](distributed/samples/2.x/DistCacheSample/Startup.cs?name=snippet_AddDistributedSqlServerCache)]
 
 > [!NOTE]
-> <xref:Microsoft.Extensions.Caching.SqlServer.SqlServerCacheOptions.ConnectionString*>（而且選擇性地， <xref:Microsoft.Extensions.Caching.SqlServer.SqlServerCacheOptions.SchemaName*> 和 <xref:Microsoft.Extensions.Caching.SqlServer.SqlServerCacheOptions.TableName*> ）通常會儲存在原始檔控制外部（例如，由[秘密管理員](xref:security/app-secrets)儲存，或 appsettings 中的*appsettings.js* / *。環境} json*檔案）。 連接字串可能包含應保留在原始檔控制系統中的認證。
+>  (，而且 <xref:Microsoft.Extensions.Caching.SqlServer.SqlServerCacheOptions.ConnectionString*> （選擇性） <xref:Microsoft.Extensions.Caching.SqlServer.SqlServerCacheOptions.SchemaName*> 和 <xref:Microsoft.Extensions.Caching.SqlServer.SqlServerCacheOptions.TableName*>) 通常會儲存在原始檔控制外部 (例如，由[秘密管理員](xref:security/app-secrets)儲存，或在 appsettings*上appsettings.js* / *。環境}. json*檔案) 。 連接字串可能包含應保留在原始檔控制系統中的認證。
 
 ### <a name="distributed-redis-cache"></a>分散式 Redis 快取
 
 [Redis](https://redis.io/)是一個開放原始碼記憶體內部資料存放區，通常用來做為分散式快取。 您可以在本機使用 Redis，而且您可以為 Azure 託管的 ASP.NET Core 應用程式設定[Azure Redis](https://azure.microsoft.com/services/cache/)快取。
 
-應用程式會使用實例（）來設定快取執行 <xref:Microsoft.Extensions.Caching.Redis.RedisCache> <xref:Microsoft.Extensions.DependencyInjection.RedisCacheServiceCollectionExtensions.AddDistributedRedisCache*> ：
+應用程式會使用 () 實例來設定快取執行 <xref:Microsoft.Extensions.Caching.Redis.RedisCache> <xref:Microsoft.Extensions.DependencyInjection.RedisCacheServiceCollectionExtensions.AddDistributedRedisCache*> ：
 
 ```csharp
 services.AddDistributedRedisCache(options =>
@@ -493,22 +495,22 @@ services.AddDistributedRedisCache(options =>
 
 ## <a name="use-the-distributed-cache"></a>使用分散式快取
 
-若要使用 <xref:Microsoft.Extensions.Caching.Distributed.IDistributedCache> 介面，請 <xref:Microsoft.Extensions.Caching.Distributed.IDistributedCache> 從應用程式中的任何一個函式要求的實例。 實例是由相依性[插入（DI）](xref:fundamentals/dependency-injection)提供。
+若要使用 <xref:Microsoft.Extensions.Caching.Distributed.IDistributedCache> 介面，請 <xref:Microsoft.Extensions.Caching.Distributed.IDistributedCache> 從應用程式中的任何一個函式要求的實例。 實例是由[ (DI) ](xref:fundamentals/dependency-injection)的相依性插入所提供。
 
-當範例應用程式啟動時， <xref:Microsoft.Extensions.Caching.Distributed.IDistributedCache> 會插入 `Startup.Configure` 。 目前的時間是使用快取的 <xref:Microsoft.AspNetCore.Hosting.IApplicationLifetime> （如需詳細資訊，請參閱[Web 主機： IApplicationLifetime 介面](xref:fundamentals/host/web-host#iapplicationlifetime-interface)）：
+當範例應用程式啟動時， <xref:Microsoft.Extensions.Caching.Distributed.IDistributedCache> 會插入 `Startup.Configure` 。 使用 (快取目前的時間 <xref:Microsoft.AspNetCore.Hosting.IApplicationLifetime> 以取得詳細資訊，請參閱[Web 主機： IApplicationLifetime 介面](xref:fundamentals/host/web-host#iapplicationlifetime-interface)) ：
 
 [!code-csharp[](distributed/samples/2.x/DistCacheSample/Startup.cs?name=snippet_Configure&highlight=10)]
 
 範例應用程式會將插入， <xref:Microsoft.Extensions.Caching.Distributed.IDistributedCache> `IndexModel` 以供 [索引] 頁面使用。
 
-每次載入 [索引] 頁面時，都會檢查快取的快取時間 `OnGetAsync` 。 如果快取的時間尚未過期，則會顯示時間。 如果自上次存取快取時間之後已經過20秒（上次載入此頁面的時間），頁面就會顯示快取的*時間已過期*。
+每次載入 [索引] 頁面時，都會檢查快取的快取時間 `OnGetAsync` 。 如果快取的時間尚未過期，則會顯示時間。 如果自上次存取快取時間以來已過了20秒 (上次) 載入此頁面時，頁面會顯示快取的*時間已過期*。
 
 選取 [**重設**快取時間] 按鈕，立即將快取的時間更新為目前的時間。 按鈕會觸發 `OnPostResetCachedTime` 處理常式方法。
 
 [!code-csharp[](distributed/samples/2.x/DistCacheSample/Pages/Index.cshtml.cs?name=snippet_IndexModel&highlight=7,14-20,25-29)]
 
 > [!NOTE]
-> 實例不需要使用單一或範圍存留期 <xref:Microsoft.Extensions.Caching.Distributed.IDistributedCache> （至少適用于內建的實作為）。
+> 實例不需要使用單一或範圍的存留期， <xref:Microsoft.Extensions.Caching.Distributed.IDistributedCache> (至少適用于內建的) 。
 >
 > 您也可以建立 <xref:Microsoft.Extensions.Caching.Distributed.IDistributedCache> 實例，而不需要使用 DI，但在程式碼中建立實例可能會使您的程式碼更難測試，並違反[明確](/dotnet/standard/modern-web-apps-azure-architecture/architectural-principles#explicit-dependencies)的相依性準則。
 
@@ -531,7 +533,7 @@ services.AddDistributedRedisCache(options =>
 
 * [Azure 上的 Redis 快取](/azure/azure-cache-for-redis/)
 * [Azure 上的 SQL Database](/azure/sql-database/)
-* [Web 伺服陣列中 NCache 的 ASP.NET Core IDistributedCache 提供者](http://www.alachisoft.com/ncache/aspnet-core-idistributedcache-ncache.html)（[GitHub 上的 NCache](https://github.com/Alachisoft/NCache)）
+* [GitHub 上](https://github.com/Alachisoft/NCache)[的 Web 伺服陣列中的 NCache ASP.NET Core IDistributedCache 提供者](http://www.alachisoft.com/ncache/aspnet-core-idistributedcache-ncache.html) (NCache) 
 * <xref:performance/caching/memory>
 * <xref:fundamentals/change-tokens>
 * <xref:performance/caching/response>

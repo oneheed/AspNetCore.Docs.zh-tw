@@ -1,12 +1,14 @@
 ---
 title: 疑難排解 Azure App Service 和 IIS 上的 ASP.NET Core
 author: rick-anderson
-description: 瞭解如何診斷 ASP.NET Core 應用程式的 Azure App Service 和 Internet Information Services （IIS）部署問題。
+description: 瞭解如何診斷 ASP.NET Core 應用程式 (IIS) 部署 Azure App Service 和 Internet Information Services 的問題。
 monikerRange: '>= aspnetcore-2.1'
 ms.author: riande
 ms.custom: mvc
 ms.date: 02/07/2020
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -15,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: test/troubleshoot-azure-iis
-ms.openlocfilehash: 17ada36c40997353528f922bece5acc34ce760d2
-ms.sourcegitcommit: 384833762c614851db653b841cc09fbc944da463
+ms.openlocfilehash: 7b82947c40d8e3fb46042ee5a3a32af9126623c9
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 07/17/2020
-ms.locfileid: "86445381"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88020024"
 ---
 # <a name="troubleshoot-aspnet-core-on-azure-app-service-and-iis"></a>疑難排解 Azure App Service 和 IIS 上的 ASP.NET Core
 
@@ -221,7 +223,7 @@ Failed to start application '/LM/W3SVC/6/ROOT/', ErrorCode '0x800700c1'.
 
 [!INCLUDE [Azure App Service Preview Notice](~/includes/azure-apps-preview-notice.md)]
 
-### <a name="application-event-log-azure-app-service"></a>應用程式事件記錄檔（Azure App Service）
+### <a name="application-event-log-azure-app-service"></a>應用程式事件記錄檔 (Azure App Service) 
 
 若要存取「應用程式事件記錄檔」，請使用 Azure 入口網站中的 [診斷並解決問題]**** 刀鋒視窗：
 
@@ -297,7 +299,7 @@ Failed to start application '/LM/W3SVC/6/ROOT/', ErrorCode '0x800700c1'.
 
 應用程式的主控台輸出 (顯示任何錯誤) 會以管道傳送至 Kudu 主控台。
 
-### <a name="aspnet-core-module-stdout-log-azure-app-service"></a>ASP.NET Core 模組 stdout 記錄檔（Azure App Service）
+### <a name="aspnet-core-module-stdout-log-azure-app-service"></a>ASP.NET Core 模組 stdout 記錄檔 (Azure App Service) 
 
 > [!WARNING]
 > 如果無法停用 stdout 記錄檔，可能會造成應用程式或伺服器發生失敗。 因為它並沒有記錄檔大小或數量上的限制。 請只在針對應用程式啟動問題進行疑難排解時，才使用 stdout 記錄。
@@ -316,9 +318,9 @@ ASP.NET Core 模組 stdout 記錄檔通常會記錄「應用程式事件記錄�
 
 當您透過設定完成疑難排解時，請停用 stdout 記錄 `stdoutLogEnabled="false"` 。
 
-如需詳細資訊，請參閱 <xref:host-and-deploy/aspnet-core-module#log-creation-and-redirection> 。
+如需詳細資訊，請參閱<xref:host-and-deploy/aspnet-core-module#log-creation-and-redirection>。
 
-### <a name="aspnet-core-module-debug-log-azure-app-service"></a>ASP.NET Core 模組的 debug 記錄檔（Azure App Service）
+### <a name="aspnet-core-module-debug-log-azure-app-service"></a>ASP.NET Core 模組 debug log (Azure App Service) 
 
 ASP.NET Core 模組偵錯記錄提供 ASP.NET Core 模組中其他且更深入的記錄。 啟用及檢視 stdout 記錄檔：
 
@@ -327,7 +329,7 @@ ASP.NET Core 模組偵錯記錄提供 ASP.NET Core 模組中其他且更深入�
    * 使用 Kudu 主控台，將[增強型診斷記錄](xref:host-and-deploy/aspnet-core-module#enhanced-diagnostic-logs)中所顯示的 `<handlerSettings>` 新增至即時應用程式的 *web.config* 檔案：
      1. 在 [開發工具]**** 區域中，開啟 [進階工具]****。 選取 [**移 &rarr; 至**] 按鈕。 Kudu 主控台會在新的瀏覽器索引標籤或視窗中開啟。
      1. 使用頁面頂端的導覽列，開啟 [偵錯主控台]****，然後選取 [CMD]****。
-     1. 開啟路徑**site**  >  **wwwroot**的資料夾。 選取鉛筆圖示來編輯 *web.config* 檔案。 新增 `<handlerSettings>` 區段，如[增強型診斷記錄](xref:host-and-deploy/aspnet-core-module#enhanced-diagnostic-logs)中所示。 選取 [儲存]**** 按鈕。
+     1. 開啟路徑**site**  >  **wwwroot**的資料夾。 選取鉛筆圖示來編輯 *web.config* 檔案。 新增 `<handlerSettings>` 區段，如[增強型診斷記錄](xref:host-and-deploy/aspnet-core-module#enhanced-diagnostic-logs)中所示。 選取 [儲存] 按鈕。
 1. 在 [開發工具]**** 區域中，開啟 [進階工具]****。 選取 [**移 &rarr; 至**] 按鈕。 Kudu 主控台會在新的瀏覽器索引標籤或視窗中開啟。
 1. 使用頁面頂端的導覽列，開啟 [偵錯主控台]****，然後選取 [CMD]****。
 1. 開啟路徑**site**  >  **wwwroot**的資料夾。 如果未提供 *aspnetcore-debug.log* 檔案的路徑，該檔案會顯示在清單中。 如果已提供路徑，請巡覽至記錄檔的位置。
@@ -340,14 +342,14 @@ ASP.NET Core 模組偵錯記錄提供 ASP.NET Core 模組中其他且更深入�
 * 從 *web.config* 檔案本機移除 `<handlerSettings>` 並重新部署應用程式。
 * 使用 Kudu 主控台來編輯 *web.config* 檔案並移除 `<handlerSettings>` 區段。 儲存檔案。
 
-如需詳細資訊，請參閱 <xref:host-and-deploy/aspnet-core-module#enhanced-diagnostic-logs> 。
+如需詳細資訊，請參閱<xref:host-and-deploy/aspnet-core-module#enhanced-diagnostic-logs>。
 
 > [!WARNING]
 > 無法停用偵錯記錄，可能會造成應用程式或伺服器發生失敗。 記錄檔大小沒有任何限制。 請只在針對應用程式啟動問題進行疑難排解時，才使用偵錯記錄。
 >
 > 針對 ASP.NET Core 應用程式啟動後的一般記錄，請使用會限制記錄檔大小並輪替記錄檔的記錄程式庫。 如需詳細資訊，請參閱[協力廠商記錄提供者](xref:fundamentals/logging/index#third-party-logging-providers)。
 
-### <a name="slow-or-hanging-app-azure-app-service"></a>緩慢或懸掛應用程式（Azure App Service）
+### <a name="slow-or-hanging-app-azure-app-service"></a>緩慢或懸掛應用程式 (Azure App Service) 
 
 當應用程式針對要求回應緩慢或無回應時，請參閱下列文章：
 
@@ -404,7 +406,7 @@ ASP.NET Core 模組偵錯記錄提供 ASP.NET Core 模組中其他且更深入�
 
 ## <a name="troubleshoot-on-iis"></a>針對 IIS 進行疑難排解
 
-### <a name="application-event-log-iis"></a>應用程式事件記錄檔（IIS）
+### <a name="application-event-log-iis"></a>應用程式事件記錄檔 (IIS) 
 
 存取「應用程式事件記錄檔」：
 
@@ -433,7 +435,7 @@ ASP.NET Core 模組偵錯記錄提供 ASP.NET Core 模組中其他且更深入�
 1. 來自應用程式的主控台輸出若有顯示任何錯誤，就會寫入至主控台視窗。
 1. 如果是在對應用程式發出要求時發生錯誤，請對 Kestrel 進行接聽的主機和連接埠發出要求。 如果使用預設主機和連接埠，請對 `http://localhost:5000/` 發出要求。 如果應用程式在 Kestrel 端點位址正常回應，則問題與主機組態有關的機率較大，而與應用程式本身有關的機率較小。
 
-### <a name="aspnet-core-module-stdout-log-iis"></a>ASP.NET Core 模組 stdout 記錄檔（IIS）
+### <a name="aspnet-core-module-stdout-log-iis"></a>ASP.NET Core 模組 stdout 記錄 (IIS) 
 
 啟用及檢視 stdout 記錄檔：
 
@@ -452,14 +454,14 @@ ASP.NET Core 模組偵錯記錄提供 ASP.NET Core 模組中其他且更深入�
 1. 將 **stdoutLogEnabled** 設定為 `false`。
 1. 儲存檔案。
 
-如需詳細資訊，請參閱 <xref:host-and-deploy/aspnet-core-module#log-creation-and-redirection> 。
+如需詳細資訊，請參閱<xref:host-and-deploy/aspnet-core-module#log-creation-and-redirection>。
 
 > [!WARNING]
 > 如果無法停用 stdout 記錄檔，可能會造成應用程式或伺服器發生失敗。 因為它並沒有記錄檔大小或數量上的限制。
 >
 > 針對 ASP.NET Core 應用程式中的例行性記錄，請使用會限制記錄檔大小並輪替記錄檔的記錄程式庫。 如需詳細資訊，請參閱[協力廠商記錄提供者](xref:fundamentals/logging/index#third-party-logging-providers)。
 
-### <a name="aspnet-core-module-debug-log-iis"></a>ASP.NET Core 模組的調試記錄檔（IIS）
+### <a name="aspnet-core-module-debug-log-iis"></a>ASP.NET Core 模組 (IIS) 的 debug 記錄檔
 
 將下列處理常式設定新增至應用程式的*web.config*檔案，以啟用 ASP.NET Core 模組的 debug 記錄檔：
 
@@ -474,7 +476,7 @@ ASP.NET Core 模組偵錯記錄提供 ASP.NET Core 模組中其他且更深入�
 
 確認為記錄指定的路徑存在，而且應用程式集區的身分識別具有該位置的寫入權限。
 
-如需詳細資訊，請參閱 <xref:host-and-deploy/aspnet-core-module#enhanced-diagnostic-logs> 。
+如需詳細資訊，請參閱<xref:host-and-deploy/aspnet-core-module#enhanced-diagnostic-logs>。
 
 ### <a name="enable-the-developer-exception-page"></a>啟用開發人員例外頁面
 
@@ -498,7 +500,7 @@ ASP.NET Core 模組偵錯記錄提供 ASP.NET Core 模組中其他且更深入�
 
 若應用程式能夠回應要求、請使用終端機內嵌中介軟體從應用程式取得要求、連線與額外資料。 如如需詳細資訊與範例程式碼，請參閱 <xref:test/troubleshoot#obtain-data-from-an-app>。
 
-### <a name="slow-or-hanging-app-iis"></a>緩慢或懸掛應用程式（IIS）
+### <a name="slow-or-hanging-app-iis"></a>應用程式 (IIS) 緩慢或懸掛
 
 損*毀*傾印是系統記憶體的快照集，有助於判斷應用程式損毀、啟動失敗或應用程式緩慢的原因。
 
@@ -541,7 +543,7 @@ ASP.NET Core 模組偵錯記錄提供 ASP.NET Core 模組中其他且更深入�
 
 #### <a name="app-hangs-fails-during-startup-or-runs-normally"></a>應用程式停止回應、在啟動期間失敗，或正常執行
 
-當*應用程式*當機（停止回應但未損毀）、啟動期間失敗，或正常執行時，請參閱使用者模式傾印檔案[：選擇最適合的工具](/windows-hardware/drivers/debugger/user-mode-dump-files#choosing-the-best-tool)來選取適當的工具以產生傾印。
+當*應用程式*當機 (停止回應，但未損毀) 、在啟動期間失敗，或正常執行時，請參閱使用者模式傾印檔案[：選擇最適合的工具](/windows-hardware/drivers/debugger/user-mode-dump-files#choosing-the-best-tool)來選取適當的工具以產生傾印。
 
 #### <a name="analyze-the-dump"></a>分析傾印
 
@@ -649,7 +651,7 @@ The Web server is configured to not list the contents of this directory.
 
 背景工作處理序失敗。 應用程式未啟動。
 
-[ASP.NET Core 模組](xref:host-and-deploy/aspnet-core-module)找不到 .NET Core CLR，而且找不到同進程要求處理常式（*aspnetcorev2_inprocess.dll*）。 請檢查︰
+[ASP.NET Core 模組](xref:host-and-deploy/aspnet-core-module)找不到 .NET Core CLR，而且找不到 (*aspnetcorev2_inprocess.dll*) 的同進程要求處理常式。 請檢查︰
 
 * 應用程式以 [Microsoft.AspNetCore.Server.IIS](https://www.nuget.org/packages/Microsoft.AspNetCore.Server.IIS) NuGet 套件或 [Microsoft.AspNetCore.App 中繼套件](xref:fundamentals/metapackage-app)為目標。
 * 應用程式設為目標的 ASP.NET Core 共用架構版本有安裝在目標機器上。
@@ -704,7 +706,7 @@ Failed to start application '/LM/W3SVC/6/ROOT/', ErrorCode '0x800700c1'.
 
 [!INCLUDE [Azure App Service Preview Notice](~/includes/azure-apps-preview-notice.md)]
 
-### <a name="application-event-log-azure-app-service"></a>應用程式事件記錄檔（Azure App Service）
+### <a name="application-event-log-azure-app-service"></a>應用程式事件記錄檔 (Azure App Service) 
 
 若要存取「應用程式事件記錄檔」，請使用 Azure 入口網站中的 [診斷並解決問題]**** 刀鋒視窗：
 
@@ -780,7 +782,7 @@ Failed to start application '/LM/W3SVC/6/ROOT/', ErrorCode '0x800700c1'.
 
 應用程式的主控台輸出 (顯示任何錯誤) 會以管道傳送至 Kudu 主控台。
 
-### <a name="aspnet-core-module-stdout-log-azure-app-service"></a>ASP.NET Core 模組 stdout 記錄檔（Azure App Service）
+### <a name="aspnet-core-module-stdout-log-azure-app-service"></a>ASP.NET Core 模組 stdout 記錄檔 (Azure App Service) 
 
 ASP.NET Core 模組 stdout 記錄檔通常會記錄「應用程式事件記錄檔」中所沒有的實用訊息。 啟用及檢視 stdout 記錄檔：
 
@@ -804,14 +806,14 @@ ASP.NET Core 模組 stdout 記錄檔通常會記錄「應用程式事件記錄�
 1. 將 **stdoutLogEnabled** 設定為 `false`。
 1. 選取 [儲存]**** 以儲存檔案。
 
-如需詳細資訊，請參閱 <xref:host-and-deploy/aspnet-core-module#log-creation-and-redirection> 。
+如需詳細資訊，請參閱<xref:host-and-deploy/aspnet-core-module#log-creation-and-redirection>。
 
 > [!WARNING]
 > 如果無法停用 stdout 記錄檔，可能會造成應用程式或伺服器發生失敗。 因為它並沒有記錄檔大小或數量上的限制。 請只在針對應用程式啟動問題進行疑難排解時，才使用 stdout 記錄。
 >
 > 針對 ASP.NET Core 應用程式啟動後的一般記錄，請使用會限制記錄檔大小並輪替記錄檔的記錄程式庫。 如需詳細資訊，請參閱[協力廠商記錄提供者](xref:fundamentals/logging/index#third-party-logging-providers)。
 
-### <a name="aspnet-core-module-debug-log-azure-app-service"></a>ASP.NET Core 模組的 debug 記錄檔（Azure App Service）
+### <a name="aspnet-core-module-debug-log-azure-app-service"></a>ASP.NET Core 模組 debug log (Azure App Service) 
 
 ASP.NET Core 模組偵錯記錄提供 ASP.NET Core 模組中其他且更深入的記錄。 啟用及檢視 stdout 記錄檔：
 
@@ -820,7 +822,7 @@ ASP.NET Core 模組偵錯記錄提供 ASP.NET Core 模組中其他且更深入�
    * 使用 Kudu 主控台，將[增強型診斷記錄](xref:host-and-deploy/aspnet-core-module#enhanced-diagnostic-logs)中所顯示的 `<handlerSettings>` 新增至即時應用程式的 *web.config* 檔案：
      1. 在 [開發工具]**** 區域中，開啟 [進階工具]****。 選取 [**移 &rarr; 至**] 按鈕。 Kudu 主控台會在新的瀏覽器索引標籤或視窗中開啟。
      1. 使用頁面頂端的導覽列，開啟 [偵錯主控台]****，然後選取 [CMD]****。
-     1. 開啟路徑**site**  >  **wwwroot**的資料夾。 選取鉛筆圖示來編輯 *web.config* 檔案。 新增 `<handlerSettings>` 區段，如[增強型診斷記錄](xref:host-and-deploy/aspnet-core-module#enhanced-diagnostic-logs)中所示。 選取 [儲存]**** 按鈕。
+     1. 開啟路徑**site**  >  **wwwroot**的資料夾。 選取鉛筆圖示來編輯 *web.config* 檔案。 新增 `<handlerSettings>` 區段，如[增強型診斷記錄](xref:host-and-deploy/aspnet-core-module#enhanced-diagnostic-logs)中所示。 選取 [儲存] 按鈕。
 1. 在 [開發工具]**** 區域中，開啟 [進階工具]****。 選取 [**移 &rarr; 至**] 按鈕。 Kudu 主控台會在新的瀏覽器索引標籤或視窗中開啟。
 1. 使用頁面頂端的導覽列，開啟 [偵錯主控台]****，然後選取 [CMD]****。
 1. 開啟路徑**site**  >  **wwwroot**的資料夾。 如果未提供 *aspnetcore-debug.log* 檔案的路徑，該檔案會顯示在清單中。 如果已提供路徑，請巡覽至記錄檔的位置。
@@ -833,14 +835,14 @@ ASP.NET Core 模組偵錯記錄提供 ASP.NET Core 模組中其他且更深入�
 * 從 *web.config* 檔案本機移除 `<handlerSettings>` 並重新部署應用程式。
 * 使用 Kudu 主控台來編輯 *web.config* 檔案並移除 `<handlerSettings>` 區段。 儲存檔案。
 
-如需詳細資訊，請參閱 <xref:host-and-deploy/aspnet-core-module#enhanced-diagnostic-logs> 。
+如需詳細資訊，請參閱<xref:host-and-deploy/aspnet-core-module#enhanced-diagnostic-logs>。
 
 > [!WARNING]
 > 無法停用偵錯記錄，可能會造成應用程式或伺服器發生失敗。 記錄檔大小沒有任何限制。 請只在針對應用程式啟動問題進行疑難排解時，才使用偵錯記錄。
 >
 > 針對 ASP.NET Core 應用程式啟動後的一般記錄，請使用會限制記錄檔大小並輪替記錄檔的記錄程式庫。 如需詳細資訊，請參閱[協力廠商記錄提供者](xref:fundamentals/logging/index#third-party-logging-providers)。
 
-### <a name="slow-or-hanging-app-azure-app-service"></a>緩慢或懸掛應用程式（Azure App Service）
+### <a name="slow-or-hanging-app-azure-app-service"></a>緩慢或懸掛應用程式 (Azure App Service) 
 
 當應用程式針對要求回應緩慢或無回應時，請參閱下列文章：
 
@@ -897,7 +899,7 @@ ASP.NET Core 模組偵錯記錄提供 ASP.NET Core 模組中其他且更深入�
 
 ## <a name="troubleshoot-on-iis"></a>針對 IIS 進行疑難排解
 
-### <a name="application-event-log-iis"></a>應用程式事件記錄檔（IIS）
+### <a name="application-event-log-iis"></a>應用程式事件記錄檔 (IIS) 
 
 存取「應用程式事件記錄檔」：
 
@@ -926,7 +928,7 @@ ASP.NET Core 模組偵錯記錄提供 ASP.NET Core 模組中其他且更深入�
 1. 來自應用程式的主控台輸出若有顯示任何錯誤，就會寫入至主控台視窗。
 1. 如果是在對應用程式發出要求時發生錯誤，請對 Kestrel 進行接聽的主機和連接埠發出要求。 如果使用預設主機和連接埠，請對 `http://localhost:5000/` 發出要求。 如果應用程式在 Kestrel 端點位址正常回應，則問題與主機組態有關的機率較大，而與應用程式本身有關的機率較小。
 
-### <a name="aspnet-core-module-stdout-log-iis"></a>ASP.NET Core 模組 stdout 記錄檔（IIS）
+### <a name="aspnet-core-module-stdout-log-iis"></a>ASP.NET Core 模組 stdout 記錄 (IIS) 
 
 啟用及檢視 stdout 記錄檔：
 
@@ -945,14 +947,14 @@ ASP.NET Core 模組偵錯記錄提供 ASP.NET Core 模組中其他且更深入�
 1. 將 **stdoutLogEnabled** 設定為 `false`。
 1. 儲存檔案。
 
-如需詳細資訊，請參閱 <xref:host-and-deploy/aspnet-core-module#log-creation-and-redirection> 。
+如需詳細資訊，請參閱<xref:host-and-deploy/aspnet-core-module#log-creation-and-redirection>。
 
 > [!WARNING]
 > 如果無法停用 stdout 記錄檔，可能會造成應用程式或伺服器發生失敗。 因為它並沒有記錄檔大小或數量上的限制。
 >
 > 針對 ASP.NET Core 應用程式中的例行性記錄，請使用會限制記錄檔大小並輪替記錄檔的記錄程式庫。 如需詳細資訊，請參閱[協力廠商記錄提供者](xref:fundamentals/logging/index#third-party-logging-providers)。
 
-### <a name="aspnet-core-module-debug-log-iis"></a>ASP.NET Core 模組的調試記錄檔（IIS）
+### <a name="aspnet-core-module-debug-log-iis"></a>ASP.NET Core 模組 (IIS) 的 debug 記錄檔
 
 將下列處理常式設定新增至應用程式的*web.config*檔案，以啟用 ASP.NET Core 模組的 debug 記錄檔：
 
@@ -967,7 +969,7 @@ ASP.NET Core 模組偵錯記錄提供 ASP.NET Core 模組中其他且更深入�
 
 確認為記錄指定的路徑存在，而且應用程式集區的身分識別具有該位置的寫入權限。
 
-如需詳細資訊，請參閱 <xref:host-and-deploy/aspnet-core-module#enhanced-diagnostic-logs> 。
+如需詳細資訊，請參閱<xref:host-and-deploy/aspnet-core-module#enhanced-diagnostic-logs>。
 
 ### <a name="enable-the-developer-exception-page"></a>啟用開發人員例外頁面
 
@@ -991,7 +993,7 @@ ASP.NET Core 模組偵錯記錄提供 ASP.NET Core 模組中其他且更深入�
 
 若應用程式能夠回應要求、請使用終端機內嵌中介軟體從應用程式取得要求、連線與額外資料。 如如需詳細資訊與範例程式碼，請參閱 <xref:test/troubleshoot#obtain-data-from-an-app>。
 
-### <a name="slow-or-hanging-app-iis"></a>緩慢或懸掛應用程式（IIS）
+### <a name="slow-or-hanging-app-iis"></a>應用程式 (IIS) 緩慢或懸掛
 
 損*毀*傾印是系統記憶體的快照集，有助於判斷應用程式損毀、啟動失敗或應用程式緩慢的原因。
 
@@ -1034,7 +1036,7 @@ ASP.NET Core 模組偵錯記錄提供 ASP.NET Core 模組中其他且更深入�
 
 #### <a name="app-hangs-fails-during-startup-or-runs-normally"></a>應用程式停止回應、在啟動期間失敗，或正常執行
 
-當*應用程式*當機（停止回應但未損毀）、啟動期間失敗，或正常執行時，請參閱使用者模式傾印檔案[：選擇最適合的工具](/windows-hardware/drivers/debugger/user-mode-dump-files#choosing-the-best-tool)來選取適當的工具以產生傾印。
+當*應用程式*當機 (停止回應，但未損毀) 、在啟動期間失敗，或正常執行時，請參閱使用者模式傾印檔案[：選擇最適合的工具](/windows-hardware/drivers/debugger/user-mode-dump-files#choosing-the-best-tool)來選取適當的工具以產生傾印。
 
 #### <a name="analyze-the-dump"></a>分析傾印
 
@@ -1182,7 +1184,7 @@ Failed to start application '/LM/W3SVC/6/ROOT/', ErrorCode '0x800700c1'.
 
 [!INCLUDE [Azure App Service Preview Notice](~/includes/azure-apps-preview-notice.md)]
 
-### <a name="application-event-log-azure-app-service"></a>應用程式事件記錄檔（Azure App Service）
+### <a name="application-event-log-azure-app-service"></a>應用程式事件記錄檔 (Azure App Service) 
 
 若要存取「應用程式事件記錄檔」，請使用 Azure 入口網站中的 [診斷並解決問題]**** 刀鋒視窗：
 
@@ -1258,7 +1260,7 @@ Failed to start application '/LM/W3SVC/6/ROOT/', ErrorCode '0x800700c1'.
 
 應用程式的主控台輸出 (顯示任何錯誤) 會以管道傳送至 Kudu 主控台。
 
-### <a name="aspnet-core-module-stdout-log-azure-app-service"></a>ASP.NET Core 模組 stdout 記錄檔（Azure App Service）
+### <a name="aspnet-core-module-stdout-log-azure-app-service"></a>ASP.NET Core 模組 stdout 記錄檔 (Azure App Service) 
 
 ASP.NET Core 模組 stdout 記錄檔通常會記錄「應用程式事件記錄檔」中所沒有的實用訊息。 啟用及檢視 stdout 記錄檔：
 
@@ -1282,14 +1284,14 @@ ASP.NET Core 模組 stdout 記錄檔通常會記錄「應用程式事件記錄�
 1. 將 **stdoutLogEnabled** 設定為 `false`。
 1. 選取 [儲存]**** 以儲存檔案。
 
-如需詳細資訊，請參閱 <xref:host-and-deploy/aspnet-core-module#log-creation-and-redirection> 。
+如需詳細資訊，請參閱<xref:host-and-deploy/aspnet-core-module#log-creation-and-redirection>。
 
 > [!WARNING]
 > 如果無法停用 stdout 記錄檔，可能會造成應用程式或伺服器發生失敗。 因為它並沒有記錄檔大小或數量上的限制。 請只在針對應用程式啟動問題進行疑難排解時，才使用 stdout 記錄。
 >
 > 針對 ASP.NET Core 應用程式啟動後的一般記錄，請使用會限制記錄檔大小並輪替記錄檔的記錄程式庫。 如需詳細資訊，請參閱[協力廠商記錄提供者](xref:fundamentals/logging/index#third-party-logging-providers)。
 
-### <a name="slow-or-hanging-app-azure-app-service"></a>緩慢或懸掛應用程式（Azure App Service）
+### <a name="slow-or-hanging-app-azure-app-service"></a>緩慢或懸掛應用程式 (Azure App Service) 
 
 當應用程式針對要求回應緩慢或無回應時，請參閱下列文章：
 
@@ -1346,7 +1348,7 @@ ASP.NET Core 模組 stdout 記錄檔通常會記錄「應用程式事件記錄�
 
 ## <a name="troubleshoot-on-iis"></a>針對 IIS 進行疑難排解
 
-### <a name="application-event-log-iis"></a>應用程式事件記錄檔（IIS）
+### <a name="application-event-log-iis"></a>應用程式事件記錄檔 (IIS) 
 
 存取「應用程式事件記錄檔」：
 
@@ -1375,7 +1377,7 @@ ASP.NET Core 模組 stdout 記錄檔通常會記錄「應用程式事件記錄�
 1. 來自應用程式的主控台輸出若有顯示任何錯誤，就會寫入至主控台視窗。
 1. 如果是在對應用程式發出要求時發生錯誤，請對 Kestrel 進行接聽的主機和連接埠發出要求。 如果使用預設主機和連接埠，請對 `http://localhost:5000/` 發出要求。 如果應用程式在 Kestrel 端點位址正常回應，則問題與主機組態有關的機率較大，而與應用程式本身有關的機率較小。
 
-### <a name="aspnet-core-module-stdout-log-iis"></a>ASP.NET Core 模組 stdout 記錄檔（IIS）
+### <a name="aspnet-core-module-stdout-log-iis"></a>ASP.NET Core 模組 stdout 記錄 (IIS) 
 
 啟用及檢視 stdout 記錄檔：
 
@@ -1394,7 +1396,7 @@ ASP.NET Core 模組 stdout 記錄檔通常會記錄「應用程式事件記錄�
 1. 將 **stdoutLogEnabled** 設定為 `false`。
 1. 儲存檔案。
 
-如需詳細資訊，請參閱 <xref:host-and-deploy/aspnet-core-module#log-creation-and-redirection> 。
+如需詳細資訊，請參閱<xref:host-and-deploy/aspnet-core-module#log-creation-and-redirection>。
 
 > [!WARNING]
 > 如果無法停用 stdout 記錄檔，可能會造成應用程式或伺服器發生失敗。 因為它並沒有記錄檔大小或數量上的限制。
@@ -1422,7 +1424,7 @@ ASP.NET Core 模組 stdout 記錄檔通常會記錄「應用程式事件記錄�
 
 若應用程式能夠回應要求、請使用終端機內嵌中介軟體從應用程式取得要求、連線與額外資料。 如如需詳細資訊與範例程式碼，請參閱 <xref:test/troubleshoot#obtain-data-from-an-app>。
 
-### <a name="slow-or-hanging-app-iis"></a>緩慢或懸掛應用程式（IIS）
+### <a name="slow-or-hanging-app-iis"></a>應用程式 (IIS) 緩慢或懸掛
 
 損*毀*傾印是系統記憶體的快照集，有助於判斷應用程式損毀、啟動失敗或應用程式緩慢的原因。
 
@@ -1465,7 +1467,7 @@ ASP.NET Core 模組 stdout 記錄檔通常會記錄「應用程式事件記錄�
 
 #### <a name="app-hangs-fails-during-startup-or-runs-normally"></a>應用程式停止回應、在啟動期間失敗，或正常執行
 
-當*應用程式*當機（停止回應但未損毀）、啟動期間失敗，或正常執行時，請參閱使用者模式傾印檔案[：選擇最適合的工具](/windows-hardware/drivers/debugger/user-mode-dump-files#choosing-the-best-tool)來選取適當的工具以產生傾印。
+當*應用程式*當機 (停止回應，但未損毀) 、在啟動期間失敗，或正常執行時，請參閱使用者模式傾印檔案[：選擇最適合的工具](/windows-hardware/drivers/debugger/user-mode-dump-files#choosing-the-best-tool)來選取適當的工具以產生傾印。
 
 #### <a name="analyze-the-dump"></a>分析傾印
 

@@ -5,6 +5,8 @@ description: 了解模型繫結如何讓控制器動作直接使用 ASP.NET Core
 ms.author: riande
 ms.date: 01/06/2020
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -13,12 +15,12 @@ no-loc:
 - Razor
 - SignalR
 uid: mvc/advanced/custom-model-binding
-ms.openlocfilehash: 54080191d76df674444019d43180a7f9d84b471c
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: 6e52d9c19a3d9c16f980021000db0bdecca5ed58
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85403634"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88018906"
 ---
 # <a name="custom-model-binding-in-aspnet-core"></a>ASP.NET Core 中的自訂模型繫結
 
@@ -28,7 +30,7 @@ ms.locfileid: "85403634"
 
 模型繫結可直接透過模型類型 (傳入作為方法引數) 來執行控制器動作，而不用透過 HTTP 要求。 內送要求資料與應用程式模型之間的對應是由模型繫結器來處理。 開發人員可以透過實作自訂模型繫結器，來擴充內建模型繫結功能 (不過一般而言，您並不需要撰寫自己的提供者)。
 
-[查看或下載範例程式碼](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/mvc/advanced/custom-model-binding/samples)（[如何下載](xref:index#how-to-download-a-sample)）
+[查看或下載範例程式碼](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/mvc/advanced/custom-model-binding/samples) ([如何下載](xref:index#how-to-download-a-sample)) 
 
 ## <a name="default-model-binder-limitations"></a>預設模型繫結器限制
 
@@ -152,7 +154,7 @@ public IModelBinder GetBinder(ModelBinderProviderContext context)
 
 模型繫結可直接透過模型類型 (傳入作為方法引數) 來執行控制器動作，而不用透過 HTTP 要求。 內送要求資料與應用程式模型之間的對應是由模型繫結器來處理。 開發人員可以透過實作自訂模型繫結器，來擴充內建模型繫結功能 (不過一般而言，您並不需要撰寫自己的提供者)。
 
-[查看或下載範例程式碼](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/mvc/advanced/custom-model-binding/samples)（[如何下載](xref:index#how-to-download-a-sample)）
+[查看或下載範例程式碼](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/mvc/advanced/custom-model-binding/samples) ([如何下載](xref:index#how-to-download-a-sample)) 
 
 ## <a name="default-model-binder-limitations"></a>預設模型繫結器限制
 

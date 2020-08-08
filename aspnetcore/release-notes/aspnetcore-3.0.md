@@ -6,6 +6,8 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 12/05/2019
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -14,12 +16,12 @@ no-loc:
 - Razor
 - SignalR
 uid: aspnetcore-3.0
-ms.openlocfilehash: cebfc88a8a8313bfd975001b50db6e41b6939aed
-ms.sourcegitcommit: 84150702757cf7a7b839485382420e8db8e92b9c
+ms.openlocfilehash: 10741cfc701bf261484b9e6c73a2347e2dd7083d
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 08/05/2020
-ms.locfileid: "87819136"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88019830"
 ---
 # <a name="whats-new-in-aspnet-core-30"></a>3.0 ASP.NET Core 的新功能
 
@@ -324,8 +326,8 @@ ASP.NET Core 3.0 現在會使用 <xref:System.Text.Json> JSON 序列化的預設
 
 下列清單包含新的指示詞 Razor ：
 
-* [`@attribute`](xref:mvc/views/razor#attribute)：指示詞會 `@attribute` 將指定的屬性套用至所產生頁面或視圖的類別。 例如： `@attribute [Authorize]` 。
-* [`@implements`](xref:mvc/views/razor#implements)：指示詞會 `@implements` 為所產生的類別實作為介面。 例如： `@implements IDisposable` 。
+* [`@attribute`](xref:mvc/views/razor#attribute)：指示詞會 `@attribute` 將指定的屬性套用至所產生頁面或視圖的類別。 例如，`@attribute [Authorize]`。
+* [`@implements`](xref:mvc/views/razor#implements)：指示詞會 `@implements` 為所產生的類別實作為介面。 例如，`@implements IDisposable`。
 
 ## <a name="no-locidentityserver4-supports-authentication-and-authorization-for-web-apis-and-spas"></a>Identity伺服器4支援 web Api 和 Spa 的驗證和授權
 
@@ -402,7 +404,7 @@ public void Configure(IApplicationBuilder app, IHostingEnvironment env)
 
 Web UI 範本 (Razor 頁面、具有控制器的 MVC 和 views) 已移除下列各項：
 
-* Cookie 同意 UI 已不再包含在內。 若要在 ASP.NET Core 3.0 範本產生的應用程式中啟用 cookie 同意功能，請參閱 <xref:security/gdpr> 。
+* cookie同意 UI 已不再包含。 若要 cookie 在 ASP.NET Core 3.0 範本產生的應用程式中啟用同意功能，請參閱 <xref:security/gdpr> 。
 * 腳本和相關的靜態資產現在會當做本機檔案來參考，而不是使用 Cdn。 如需詳細資訊，請參閱[腳本和相關靜態資產現在會當做本機檔案參考，而不是根據目前的環境使用 cdn， (aspnet/AspNetCore.Docs #14350) ](https://github.com/dotnet/AspNetCore.Docs/issues/14350)。
 
 「角度」範本已更新為使用「角度8」。

@@ -6,6 +6,8 @@ monikerRange: '>= aspnetcore-1.1'
 ms.author: riande
 ms.date: 04/11/2019
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -14,12 +16,12 @@ no-loc:
 - Razor
 - SignalR
 uid: performance/ObjectPool
-ms.openlocfilehash: 9df7f370eb550172493478bcd8d94a9541926fec
-ms.sourcegitcommit: 895e952aec11c91d703fbdd3640a979307b8cc67
+ms.openlocfilehash: 1f57bc4662296333b3d2c659c057230548541b91
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 07/01/2020
-ms.locfileid: "85793561"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88020401"
 ---
 # <a name="object-reuse-with-objectpool-in-aspnet-core"></a>在 ASP.NET Core 中使用 ObjectPool 的物件重複使用
 
@@ -60,7 +62,7 @@ ms.locfileid: "85793561"
 ObjectPool 可在應用程式中以多種方式使用：
 
 * 具現化集區。
-* 在相依性[插入](xref:fundamentals/dependency-injection)（DI）中註冊集區做為實例。
+* 在相依性[插入](xref:fundamentals/dependency-injection)中註冊集區 (DI) 做為實例。
 * `ObjectPoolProvider<>`在 DI 中註冊，並使用它做為 factory。
 
 ## <a name="how-to-use-objectpool"></a>如何使用 ObjectPool
@@ -84,7 +86,7 @@ ObjectPool 可在應用程式中以多種方式使用：
 
 下列程式碼：
 
-* 將加入至相依性 `ObjectPoolProvider` [插入](xref:fundamentals/dependency-injection)（DI）容器。
+* 新增 `ObjectPoolProvider` 至相依性[插入](xref:fundamentals/dependency-injection) (DI) 容器。
 * 將和設定 `ObjectPool<StringBuilder>` 為 DI 容器。
 * 加入 `BirthdayMiddleware` 。
 

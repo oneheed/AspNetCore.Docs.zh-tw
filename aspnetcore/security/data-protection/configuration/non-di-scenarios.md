@@ -5,6 +5,8 @@ description: 瞭解如何支援資料保護案例，您不能或不想使用相�
 ms.author: riande
 ms.date: 10/14/2016
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -13,18 +15,18 @@ no-loc:
 - Razor
 - SignalR
 uid: security/data-protection/configuration/non-di-scenarios
-ms.openlocfilehash: 9ae3d1ec039768b1008702a7a29f4d9a716cb99c
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: 633548eabe38508ff0cc76ae880220e1dac9b414
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85404843"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88020115"
 ---
 # <a name="non-di-aware-scenarios-for-data-protection-in-aspnet-core"></a>ASP.NET Core 資料保護的非 DI 感知案例
 
 作者：[Rick Anderson](https://twitter.com/RickAndMSFT)
 
-ASP.NET Core 的資料保護系統通常會[新增至服務容器](xref:security/data-protection/consumer-apis/overview)，並透過相依性插入（DI）供相依元件使用。 不過，在某些情況下，這種情況並不可行，特別是在將系統匯入現有的應用程式時。
+ASP.NET Core 的資料保護系統通常會[新增至服務容器](xref:security/data-protection/consumer-apis/overview)，並透過相依性插入 (DI) 來取用依存元件。 不過，在某些情況下，這種情況並不可行，特別是在將系統匯入現有的應用程式時。
 
 為了支援這些案例， [AspNetCore 的 DataProtection](https://www.nuget.org/packages/Microsoft.AspNetCore.DataProtection.Extensions/)套件提供了一種具象的類型[DataProtectionProvider](/dotnet/api/Microsoft.AspNetCore.DataProtection.DataProtectionProvider)，可提供簡單的方式來使用資料保護，而不需要依賴 DI。 `DataProtectionProvider`類型會執行[IDataProtectionProvider](/dotnet/api/microsoft.aspnetcore.dataprotection.idataprotectionprovider)。 `DataProtectionProvider`僅需要提供[DirectoryInfo](/dotnet/api/system.io.directoryinfo)實例來表示應儲存提供者之密碼編譯金鑰的位置，如下列程式碼範例所示：
 

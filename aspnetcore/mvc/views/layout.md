@@ -5,6 +5,8 @@ description: 了解如何先使用通用配置、共用指示詞，以及執行�
 ms.author: riande
 ms.date: 07/30/2019
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -13,12 +15,12 @@ no-loc:
 - Razor
 - SignalR
 uid: mvc/views/layout
-ms.openlocfilehash: 08e6284a6c5fc8e8926651f6fe873a71df449acb
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: 4d5032f02db28341d7781dd57d58d776636fd16d
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85406650"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88020440"
 ---
 # <a name="layout-in-aspnet-core"></a>ASP.NET Core 中的配置
 
@@ -41,7 +43,7 @@ ms.locfileid: "85406650"
 
 ![頁面配置範例](layout/_static/page-layout.png)
 
-應用程式內的許多頁面也經常使用指令碼和樣式表這類一般 HTML 結構。 所有這些共用項目可能都定義在 *layout* 檔案中，而之後應用程式內使用的任何檢視都可以參考該檔案。 配置可減少檢視中的重複程式碼。
+應用程式內的許多頁面經常會使用通用 HTML 結構，例如指令碼和樣式表。 所有這些共用的元素都可以定義在配置檔案中，應用程式內使用的任何視圖都可以參考此*設定檔案*。 版面配置會減少檢視中重複的程式碼。
 
 依照慣例，ASP.NET Core 應用程式的預設配置命名為 *_Layout.cshtml*。 使用範本建立的新 ASP.NET Core 專案配置檔案為：
 
@@ -53,7 +55,7 @@ ms.locfileid: "85406650"
 
   ![方案總管中的 Views 資料夾](layout/_static/mvc-web-project-views.png)
 
-此配置會定義應用程式中檢視的最上層範本。 應用程式不需要配置。 應用程式可以定義數個配置，即不同的檢視指定不同的配置。
+此配置會定義應用程式中檢視的最上層範本。 應用程式不需要版面配置。 應用程式可以定義多個配置，並以不同檢視指定不同的版面配置。
 
 下列程式碼顯示使用範本建立之專案 (包含控制器和檢視) 的配置檔案：
 

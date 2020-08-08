@@ -6,6 +6,8 @@ ms.assetid: 0be164aa-1d72-4192-bd6b-192c9c301164
 ms.author: riande
 ms.date: 12/18/2019
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -14,12 +16,12 @@ no-loc:
 - Razor
 - SignalR
 uid: mvc/models/model-binding
-ms.openlocfilehash: b3dcb3a80e8d5150d8513ef558531749d0884568
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: 6ec531a04a220f75f5793cb2c7b5232908dbd883
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85400150"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88019153"
 ---
 # <a name="model-binding-in-aspnet-core"></a>ASP.NET Core 中的資料繫結
 
@@ -94,7 +96,7 @@ http://contoso.com/api/pets/2?DogsOnly=true
 根據預設，模型繫結會從下列 HTTP 要求的來源中，取得索引鍵/值組形式的資料：
 
 1. 表單欄位
-1. 要求主體（針對[具有 [ApiController] 屬性的控制器](xref:web-api/index#binding-source-parameter-inference)）。
+1. [具有 [ApiController] 屬性的控制器](xref:web-api/index#binding-source-parameter-inference) (的要求主體。 ) 
 1. 路由傳送資料
 1. 查詢字串參數
 1. 已上傳的檔案
@@ -155,13 +157,13 @@ public class Pet
 
 ### <a name="additional-sources"></a>其他來源
 
-*值提供者*會將來源資料提供給模型系結系統。 您可以撰寫並註冊自訂值提供者，其從其他來源取得模型繫結資料。 例如，您可能想要來自 cookie 或會話狀態的資料。 若要從新的來源取得資料：
+*值提供者*會將來源資料提供給模型系結系統。 您可以撰寫並註冊自訂值提供者，其從其他來源取得模型繫結資料。 例如，您可能會想要來自 cookie 或會話狀態的資料。 若要從新的來源取得資料：
 
 * 建立會實作 `IValueProvider` 的類別。
 * 建立會實作 `IValueProviderFactory` 的類別。
 * 在 `Startup.ConfigureServices` 中註冊 Factory 類別。
 
-範例應用程式包含[值提供者](https://github.com/dotnet/AspNetCore.Docs/blob/master/aspnetcore/mvc/models/model-binding/samples/3.x/ModelBindingSample/CookieValueProvider.cs)和從 Cookie 取得值的 [actory](https://github.com/dotnet/AspNetCore.Docs/blob/master/aspnetcore/mvc/models/model-binding/samples/3.x/ModelBindingSample/CookieValueProviderFactory.cs) 範例。 以下是 `Startup.ConfigureServices` 中的註冊碼：
+範例應用程式包含[值提供者](https://github.com/dotnet/AspNetCore.Docs/blob/master/aspnetcore/mvc/models/model-binding/samples/3.x/ModelBindingSample/CookieValueProvider.cs)和[factory](https://github.com/dotnet/AspNetCore.Docs/blob/master/aspnetcore/mvc/models/model-binding/samples/3.x/ModelBindingSample/CookieValueProviderFactory.cs)範例，可從 s 取得值 cookie 。 以下是 `Startup.ConfigureServices` 中的註冊碼：
 
 [!code-csharp[](model-binding/samples/3.x/ModelBindingSample/Startup.cs?name=snippet_ValueProvider&highlight=4)]
 
@@ -200,7 +202,7 @@ public class Pet
 
 模型繫結器可將來源字串轉換成的簡單型別包括：
 
-* [True](xref:System.ComponentModel.BooleanConverter)
+* [布林值](xref:System.ComponentModel.BooleanConverter)
 * [Byte](xref:System.ComponentModel.ByteConverter)、[SByte](xref:System.ComponentModel.SByteConverter)
 * [Char](xref:System.ComponentModel.CharConverter)
 * [DateTime](xref:System.ComponentModel.DateTimeConverter)
@@ -282,13 +284,13 @@ public IActionResult OnPost(
 
 ### <a name="bindrequired-attribute"></a>[BindRequired] 屬性
 
-只能套用至模型屬性，不能套用到方法參數。 如果模型的屬性不能發生繫結，則會造成模型繫結新增模型狀態錯誤。 以下是範例：
+只能套用至模型屬性，不能套用到方法參數。 如果模型的屬性不能發生繫結，則會造成模型繫結新增模型狀態錯誤。 以下為範例：
 
 [!code-csharp[](model-binding/samples/3.x/ModelBindingSample/Models/InstructorWithCollection.cs?name=snippet_BindRequired&highlight=8-9)]
 
 ### <a name="bindnever-attribute"></a>[BindNever] 屬性
 
-只能套用至模型屬性，不能套用到方法參數。 避免模型繫結設定模型的屬性。 以下是範例：
+只能套用至模型屬性，不能套用到方法參數。 避免模型繫結設定模型的屬性。 以下為範例：
 
 [!code-csharp[](model-binding/samples/3.x/ModelBindingSample/Models/InstructorWithDictionary.cs?name=snippet_BindNever&highlight=3-4)]
 
@@ -355,7 +357,7 @@ public IActionResult OnPost([Bind("LastName,FirstMidName,HireDate")] Instructor 
   * selectedCourses [0] = 1050
   * selectedCourses [1] = 2000
 
-  使用注標編號的資料格式（.。。[0] .。。[1] ...）必須確定它們的編號順序是從零開始。 下標編號中如有任何間距，則會忽略間隔後的所有項目。 例如，如果下標是 0 和 2，而不是 0 和 1，則忽略第二個項目。
+  使用注標編號的資料格式 ( .。。[0] .。。[1] ... ) 必須確定其順序編號從零開始。 下標編號中如有任何間距，則會忽略間隔後的所有項目。 例如，如果下標是 0 和 2，而不是 0 和 1，則忽略第二個項目。
 
 ## <a name="dictionaries"></a>字典
 
@@ -488,7 +490,7 @@ ASP.NET Core 選取以 [Consumes](xref:Microsoft.AspNetCore.Mvc.ConsumesAttribut
 
 ## <a name="manual-model-binding"></a>手動模型系結 
 
-使用 <xref:Microsoft.AspNetCore.Mvc.ControllerBase.TryUpdateModelAsync*> 方法即可手動叫用模型繫結。 此方法已於 `ControllerBase` 和 `PageModel` 類別中定義。 方法多載可讓您指定要使用的前置詞和值提供者。 如果模型繫結失敗，此方法會傳回 `false`。 以下是範例：
+使用 <xref:Microsoft.AspNetCore.Mvc.ControllerBase.TryUpdateModelAsync*> 方法即可手動叫用模型繫結。 此方法已於 `ControllerBase` 和 `PageModel` 類別中定義。 方法多載可讓您指定要使用的前置詞和值提供者。 如果模型繫結失敗，此方法會傳回 `false`。 以下為範例：
 
 [!code-csharp[](model-binding/samples/3.x/ModelBindingSample/Pages/InstructorsWithCollection/Create.cshtml.cs?name=snippet_TryUpdate&highlight=1-4)]
 
@@ -580,7 +582,7 @@ http://contoso.com/api/pets/2?DogsOnly=true
 根據預設，模型繫結會從下列 HTTP 要求的來源中，取得索引鍵/值組形式的資料：
 
 1. 表單欄位
-1. 要求主體（針對[具有 [ApiController] 屬性的控制器](xref:web-api/index#binding-source-parameter-inference)）。
+1. [具有 [ApiController] 屬性的控制器](xref:web-api/index#binding-source-parameter-inference) (的要求主體。 ) 
 1. 路由傳送資料
 1. 查詢字串參數
 1. 已上傳的檔案
@@ -641,13 +643,13 @@ public class Pet
 
 ### <a name="additional-sources"></a>其他來源
 
-*值提供者*會將來源資料提供給模型系結系統。 您可以撰寫並註冊自訂值提供者，其從其他來源取得模型繫結資料。 例如，您可能想要來自 cookie 或會話狀態的資料。 若要從新的來源取得資料：
+*值提供者*會將來源資料提供給模型系結系統。 您可以撰寫並註冊自訂值提供者，其從其他來源取得模型繫結資料。 例如，您可能會想要來自 cookie 或會話狀態的資料。 若要從新的來源取得資料：
 
 * 建立會實作 `IValueProvider` 的類別。
 * 建立會實作 `IValueProviderFactory` 的類別。
 * 在 `Startup.ConfigureServices` 中註冊 Factory 類別。
 
-範例應用程式包含[值提供者](https://github.com/dotnet/AspNetCore.Docs/blob/master/aspnetcore/mvc/models/model-binding/samples/2.x/ModelBindingSample/CookieValueProvider.cs)和從 Cookie 取得值的 [actory](https://github.com/dotnet/AspNetCore.Docs/blob/master/aspnetcore/mvc/models/model-binding/samples/2.x/ModelBindingSample/CookieValueProviderFactory.cs) 範例。 以下是 `Startup.ConfigureServices` 中的註冊碼：
+範例應用程式包含[值提供者](https://github.com/dotnet/AspNetCore.Docs/blob/master/aspnetcore/mvc/models/model-binding/samples/2.x/ModelBindingSample/CookieValueProvider.cs)和[factory](https://github.com/dotnet/AspNetCore.Docs/blob/master/aspnetcore/mvc/models/model-binding/samples/2.x/ModelBindingSample/CookieValueProviderFactory.cs)範例，可從 s 取得值 cookie 。 以下是 `Startup.ConfigureServices` 中的註冊碼：
 
 [!code-csharp[](model-binding/samples/2.x/ModelBindingSample/Startup.cs?name=snippet_ValueProvider&highlight=3)]
 
@@ -686,7 +688,7 @@ public class Pet
 
 模型繫結器可將來源字串轉換成的簡單型別包括：
 
-* [True](xref:System.ComponentModel.BooleanConverter)
+* [布林值](xref:System.ComponentModel.BooleanConverter)
 * [Byte](xref:System.ComponentModel.ByteConverter)、[SByte](xref:System.ComponentModel.SByteConverter)
 * [Char](xref:System.ComponentModel.CharConverter)
 * [DateTime](xref:System.ComponentModel.DateTimeConverter)
@@ -768,13 +770,13 @@ public IActionResult OnPost(
 
 ### <a name="bindrequired-attribute"></a>[BindRequired] 屬性
 
-只能套用至模型屬性，不能套用到方法參數。 如果模型的屬性不能發生繫結，則會造成模型繫結新增模型狀態錯誤。 以下是範例：
+只能套用至模型屬性，不能套用到方法參數。 如果模型的屬性不能發生繫結，則會造成模型繫結新增模型狀態錯誤。 以下為範例：
 
 [!code-csharp[](model-binding/samples/2.x/ModelBindingSample/Models/InstructorWithCollection.cs?name=snippet_BindRequired&highlight=8-9)]
 
 ### <a name="bindnever-attribute"></a>[BindNever] 屬性
 
-只能套用至模型屬性，不能套用到方法參數。 避免模型繫結設定模型的屬性。 以下是範例：
+只能套用至模型屬性，不能套用到方法參數。 避免模型繫結設定模型的屬性。 以下為範例：
 
 [!code-csharp[](model-binding/samples/2.x/ModelBindingSample/Models/InstructorWithDictionary.cs?name=snippet_BindNever&highlight=3-4)]
 
@@ -841,7 +843,7 @@ public IActionResult OnPost([Bind("LastName,FirstMidName,HireDate")] Instructor 
   * selectedCourses [0] = 1050
   * selectedCourses [1] = 2000
 
-  使用注標編號的資料格式（.。。[0] .。。[1] ...）必須確定它們的編號順序是從零開始。 下標編號中如有任何間距，則會忽略間隔後的所有項目。 例如，如果下標是 0 和 2，而不是 0 和 1，則忽略第二個項目。
+  使用注標編號的資料格式 ( .。。[0] .。。[1] ... ) 必須確定其順序編號從零開始。 下標編號中如有任何間距，則會忽略間隔後的所有項目。 例如，如果下標是 0 和 2，而不是 0 和 1，則忽略第二個項目。
 
 ## <a name="dictionaries"></a>字典
 
@@ -956,7 +958,7 @@ ASP.NET Core 選取以 [Consumes](xref:Microsoft.AspNetCore.Mvc.ConsumesAttribut
 
 ## <a name="manual-model-binding"></a>手動模型系結
 
-使用 <xref:Microsoft.AspNetCore.Mvc.ControllerBase.TryUpdateModelAsync*> 方法即可手動叫用模型繫結。 此方法已於 `ControllerBase` 和 `PageModel` 類別中定義。 方法多載可讓您指定要使用的前置詞和值提供者。 如果模型繫結失敗，此方法會傳回 `false`。 以下是範例：
+使用 <xref:Microsoft.AspNetCore.Mvc.ControllerBase.TryUpdateModelAsync*> 方法即可手動叫用模型繫結。 此方法已於 `ControllerBase` 和 `PageModel` 類別中定義。 方法多載可讓您指定要使用的前置詞和值提供者。 如果模型繫結失敗，此方法會傳回 `false`。 以下為範例：
 
 [!code-csharp[](model-binding/samples/2.x/ModelBindingSample/Pages/InstructorsWithCollection/Create.cshtml.cs?name=snippet_TryUpdate&highlight=1-4)]
 

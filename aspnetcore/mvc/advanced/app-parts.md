@@ -5,6 +5,8 @@ description: Razor在 ASP.NET Core 中，與應用程式元件共用控制器、
 ms.author: riande
 ms.date: 11/11/2019
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -13,30 +15,30 @@ no-loc:
 - Razor
 - SignalR
 uid: mvc/extensibility/app-parts
-ms.openlocfilehash: cb1f8b045b8f2b143afc7895234733fbfb02cb07
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: 690ef0843f567dc2335f4d51436e428207fd6eb1
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85399747"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88019569"
 ---
-# <a name="share-controllers-views-razor-pages-and-more-with-application-parts"></a>與應用程式元件共用控制器、視圖、 Razor 頁面和更多
+# <a name="share-controllers-views-no-locrazor-pages-and-more-with-application-parts"></a>與應用程式元件共用控制器、視圖、 Razor 頁面和更多
 
 ::: moniker range=">= aspnetcore-3.0"
 
 作者：[Rick Anderson](https://twitter.com/RickAndMSFT)
 
-[查看或下載範例程式碼](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/mvc/advanced/app-parts)（[如何下載](xref:index#how-to-download-a-sample)）
+[查看或下載範例程式碼](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/mvc/advanced/app-parts) ([如何下載](xref:index#how-to-download-a-sample)) 
 
 *應用程式元件*是應用程式資源的抽象概念。 應用程式元件可讓 ASP.NET Core 探索控制器、視圖元件、標記協助程式、 Razor 頁面、razor 編譯來源等等。 <xref:Microsoft.AspNetCore.Mvc.ApplicationParts.AssemblyPart>是應用程式元件。 `AssemblyPart`封裝元件參考，並公開類型和編譯參考。
 
-[功能提供者](#fp)會使用應用程式元件來填入 ASP.NET Core 應用程式的功能。 應用程式元件的主要使用案例是將應用程式設定為從元件中探索（或避免載入） ASP.NET Core 功能。 例如，您可能會想要在多個應用程式之間共用一般功能。 使用應用程式元件時，您可以與多個應用程式共用包含控制器、視圖、 Razor 頁面、razor 編譯來源、標記協助程式等的元件（DLL）。 在多個專案中複製程式碼時，偏好共用元件。
+[功能提供者](#fp)會使用應用程式元件來填入 ASP.NET Core 應用程式的功能。 應用程式元件的主要使用案例是將應用程式設定為探索 (，或避免從元件載入) ASP.NET Core 功能。 例如，您可能會想要在多個應用程式之間共用一般功能。 使用應用程式元件時，您可以與多個應用程式共用元件 (DLL) 包含控制器、視圖、 Razor 頁面、razor 編譯來源、標記協助程式等。 在多個專案中複製程式碼時，偏好共用元件。
 
 ASP.NET Core 應用程式從載入功能 <xref:System.Web.WebPages.ApplicationPart> 。 <xref:Microsoft.AspNetCore.Mvc.ApplicationParts.AssemblyPart>類別代表元件所支援的應用程式元件。
 
 ## <a name="load-aspnet-core-features"></a>載入 ASP.NET Core 功能
 
-使用 <xref:Microsoft.AspNetCore.Mvc.ApplicationParts> 和 <xref:Microsoft.AspNetCore.Mvc.ApplicationParts.AssemblyPart> 類別來探索和載入 ASP.NET Core 功能（控制器、視圖元件等）。 會 <xref:Microsoft.AspNetCore.Mvc.ApplicationParts.ApplicationPartManager> 追蹤可用的應用程式元件和功能提供者。 `ApplicationPartManager`設定于 `Startup.ConfigureServices` ：
+使用 <xref:Microsoft.AspNetCore.Mvc.ApplicationParts> 和 <xref:Microsoft.AspNetCore.Mvc.ApplicationParts.AssemblyPart> 類別，即可探索和載入 ASP.NET Core 功能 (控制器、視圖元件等 ) 。 會 <xref:Microsoft.AspNetCore.Mvc.ApplicationParts.ApplicationPartManager> 追蹤可用的應用程式元件和功能提供者。 `ApplicationPartManager`設定于 `Startup.ConfigureServices` ：
 
 [!code-csharp[](./app-parts/3.0sample1/WebAppParts/Startup.cs?name=snippet)]
 
@@ -72,7 +74,7 @@ ASP.NET Core 應用程式從載入功能 <xref:System.Web.WebPages.ApplicationPa
 * <xref:Microsoft.AspNetCore.Mvc.Razor.TagHelpers.TagHelperFeatureProvider>
 * <xref:Microsoft.AspNetCore.Mvc.Razor.Compilation.MetadataReferenceFeatureProvider>
 * <xref:Microsoft.AspNetCore.Mvc.Razor.Compilation.ViewsFeatureProvider>
-* `internal class`[RazorCompiledItemFeatureProvider](https://github.com/dotnet/AspNetCore/blob/master/src/Mvc/Mvc.Razor/src/ApplicationParts/RazorCompiledItemFeatureProvider.cs#L14)
+* `internal class`[ Razor CompiledItemFeatureProvider](https://github.com/dotnet/AspNetCore/blob/master/src/Mvc/Mvc.Razor/src/ApplicationParts/RazorCompiledItemFeatureProvider.cs#L14)
 
 繼承自 <xref:Microsoft.AspNetCore.Mvc.ApplicationParts.IApplicationFeatureProvider`1> 的功能提供者，其中 `T` 是功能的類型。 功能提供者可以針對任何先前列出的功能類型來執行。 中的功能提供者順序 `ApplicationPartManager.FeatureProviders` 可能會影響執行時間行為。 稍後新增的提供者可以回應先前新增的提供者所採取的動作。
 
@@ -116,17 +118,17 @@ View Components:
 
 作者：[Rick Anderson](https://twitter.com/RickAndMSFT)
 
-[查看或下載範例程式碼](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/mvc/advanced/app-parts)（[如何下載](xref:index#how-to-download-a-sample)）
+[查看或下載範例程式碼](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/mvc/advanced/app-parts) ([如何下載](xref:index#how-to-download-a-sample)) 
 
 *應用程式元件*是應用程式資源的抽象概念。 應用程式元件可讓 ASP.NET Core 探索控制器、視圖元件、標記協助程式、 Razor 頁面、razor 編譯來源等等。 [AssemblyPart](/dotnet/api/microsoft.aspnetcore.mvc.applicationparts.assemblypart#Microsoft_AspNetCore_Mvc_ApplicationParts_AssemblyPart)是一個應用程式元件。 `AssemblyPart`封裝元件參考，並公開類型和編譯參考。
 
-*功能提供者*會使用應用程式元件來填入 ASP.NET Core 應用程式的功能。 應用程式元件的主要使用案例是將應用程式設定為從元件中探索（或避免載入） ASP.NET Core 功能。 例如，您可能會想要在多個應用程式之間共用一般功能。 使用應用程式元件時，您可以與多個應用程式共用包含控制器、視圖、 Razor 頁面、razor 編譯來源、標記協助程式等的元件（DLL）。 在多個專案中複製程式碼時，偏好共用元件。
+*功能提供者*會使用應用程式元件來填入 ASP.NET Core 應用程式的功能。 應用程式元件的主要使用案例是將應用程式設定為探索 (，或避免從元件載入) ASP.NET Core 功能。 例如，您可能會想要在多個應用程式之間共用一般功能。 使用應用程式元件時，您可以與多個應用程式共用元件 (DLL) 包含控制器、視圖、 Razor 頁面、razor 編譯來源、標記協助程式等。 在多個專案中複製程式碼時，偏好共用元件。
 
 ASP.NET Core 應用程式從載入功能 <xref:System.Web.WebPages.ApplicationPart> 。 <xref:Microsoft.AspNetCore.Mvc.ApplicationParts.AssemblyPart>類別代表元件所支援的應用程式元件。
 
 ## <a name="load-aspnet-core-features"></a>載入 ASP.NET Core 功能
 
-使用 `ApplicationPart` 和 `AssemblyPart` 類別來探索和載入 ASP.NET Core 功能（控制器、視圖元件等）。 會 <xref:Microsoft.AspNetCore.Mvc.ApplicationParts.ApplicationPartManager> 追蹤可用的應用程式元件和功能提供者。 `ApplicationPartManager`設定于 `Startup.ConfigureServices` ：
+使用 `ApplicationPart` 和 `AssemblyPart` 類別，即可探索和載入 ASP.NET Core 功能 (控制器、視圖元件等 ) 。 會 <xref:Microsoft.AspNetCore.Mvc.ApplicationParts.ApplicationPartManager> 追蹤可用的應用程式元件和功能提供者。 `ApplicationPartManager`設定于 `Startup.ConfigureServices` ：
 
 [!code-csharp[](./app-parts/sample1/WebAppParts/Startup.cs?name=snippet)]
 

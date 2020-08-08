@@ -1,12 +1,14 @@
 ---
 title: 在 ASP.NET Core 中使用 SMS 的雙因素驗證
 author: rick-anderson
-description: 瞭解如何使用 ASP.NET Core 應用程式來設定雙因素驗證（2FA）。
+description: 瞭解如何使用 ASP.NET Core 應用程式 (2FA) 設定雙因素驗證。
 monikerRange: < aspnetcore-2.0
 ms.author: riande
 ms.date: 09/22/2018
 ms.custom: mvc, seodec18
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -15,21 +17,21 @@ no-loc:
 - Razor
 - SignalR
 uid: security/authentication/2fa
-ms.openlocfilehash: 032650296cfdcc4fef632c6a6a9ce2b56db6a6df
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: 28aef65234eaf162ba6e18a2594feb575c93b02f
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85408574"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88019482"
 ---
 # <a name="two-factor-authentication-with-sms-in-aspnet-core"></a>在 ASP.NET Core 中使用 SMS 的雙因素驗證
 
 由[Rick Anderson](https://twitter.com/RickAndMSFT)和[瑞士開發人員](https://github.com/Swiss-Devs)
 
 >[!WARNING]
-> 使用以時間為基礎的一次性密碼演算法（TOTP）的雙因素驗證（2FA）驗證器應用程式是2FA 的業界建議方法。 2FA 使用 TOTP 是 SMS 2FA 的慣用選項。 如需詳細資訊，請參閱在 ASP.NET Core for ASP.NET Core 2.0 和更新版本[中啟用 TOTP 驗證器應用程式的 QR 代碼產生](xref:security/authentication/identity-enable-qrcodes)。
+> 使用以時間為基礎的一次性密碼演算法 (TOTP) ， (2FA) 驗證器應用程式的雙因素驗證，是2FA 的業界建議方法。 2FA 使用 TOTP 是 SMS 2FA 的慣用選項。 如需詳細資訊，請參閱在 ASP.NET Core for ASP.NET Core 2.0 和更新版本[中啟用 TOTP 驗證器應用程式的 QR 代碼產生](xref:security/authentication/identity-enable-qrcodes)。
 
-本教學課程說明如何使用 SMS 來設定雙因素驗證（2FA）。 系統會提供[twilio](https://www.twilio.com/)和[ASPSMS](https://www.aspsms.com/asp.net/identity/core/testcredits/)的指示，但是您可以使用任何其他 SMS 提供者。 我們建議您在開始本教學課程之前，先完成[帳戶確認和密碼](xref:security/authentication/accconfirm)復原。
+本教學課程說明如何使用 SMS (2FA) 設定雙因素驗證。 系統會提供[twilio](https://www.twilio.com/)和[ASPSMS](https://www.aspsms.com/asp.net/identity/core/testcredits/)的指示，但是您可以使用任何其他 SMS 提供者。 我們建議您在開始本教學課程之前，先完成[帳戶確認和密碼](xref:security/authentication/accconfirm)復原。
 
 [查看或下載範例程式碼](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/security/authentication/2fa/sample/Web2FA)。 [如何下載](xref:index#how-to-download-a-sample)。
 
@@ -39,7 +41,7 @@ ms.locfileid: "85408574"
 
 ### <a name="create-an-sms-account"></a>建立 SMS 帳戶
 
-建立 SMS 帳戶，例如，從[twilio](https://www.twilio.com/)或[ASPSMS](https://www.aspsms.com/asp.net/identity/core/testcredits/)。 記錄驗證認證（適用于 twilio： accountSid 和 authToken，適用于 ASPSMS： Userkey 和 Password）。
+建立 SMS 帳戶，例如，從[twilio](https://www.twilio.com/)或[ASPSMS](https://www.aspsms.com/asp.net/identity/core/testcredits/)。 記錄 twilio 的驗證認證 (： accountSid 和 authToken，適用于 ASPSMS： Userkey 和 Password) 。
 
 #### <a name="figuring-out-sms-provider-credentials"></a>找出 SMS 提供者認證
 
@@ -57,7 +59,7 @@ ms.locfileid: "85408574"
 
 **Twilio：** 在 [數位] 索引標籤中，複製您的 Twilio**電話號碼**。
 
-**ASPSMS：** 在 [解除鎖定擁有者] 功能表中，解除鎖定一或多個始發者，或選擇英數位元（並非所有網路都支援）。
+**ASPSMS：** 在 [解除鎖定擁有者] 功能表中，解除鎖定一或多個始發者，或選擇 [所有網路) 不支援的英數位元] (。
 
 我們稍後將使用金鑰中的「秘密管理員」工具來儲存此值 `SMSAccountFrom` 。
 
@@ -76,7 +78,7 @@ C:/Web2FA/src/WebApp1>dotnet user-secrets set SMSAccountIdentification 12345
 info: Successfully saved SMSAccountIdentification = 12345 to the secret store.
 ```
 
-* 新增 SMS 提供者的 NuGet 套件。 從 [套件管理員主控台] （PMC）執行：
+* 新增 SMS 提供者的 NuGet 套件。 從 [套件管理員主控台] (PMC) 執行：
 
 **Twilio**
 
@@ -102,7 +104,7 @@ info: Successfully saved SMSAccountIdentification = 12345 to the secret store.
 
 ### <a name="enable-two-factor-authentication"></a>啟用雙因素驗證
 
-開啟*Views/Manage/Index. cshtml* Razor 視圖檔案並移除批註字元（因此不會註解標記）。
+開啟*Views/Manage/Index. cshtml* Razor 視圖檔案，並移除批註字元 (，) 不會將標記批註化。
 
 ## <a name="log-in-with-two-factor-authentication"></a>使用雙因素驗證進行登入
 
@@ -150,7 +152,7 @@ info: Successfully saved SMSAccountIdentification = 12345 to the secret store.
 
 ## <a name="account-lockout-for-protecting-against-brute-force-attacks"></a>防止暴力密碼破解攻擊的帳戶鎖定
 
-建議使用2FA 來鎖定帳戶。 使用者透過本機帳戶或社交帳戶登入之後，就會在2FA 中儲存每個失敗的嘗試。 如果達到失敗的存取嘗試次數上限，則使用者會被鎖定（預設值：5分鐘的鎖定嘗試失敗存取次數）。 成功的驗證會重設失敗的存取嘗試計數，並重設時鐘。 失敗的存取嘗試和鎖定時間上限可以使用[MaxFailedAccessAttempts](/dotnet/api/microsoft.aspnetcore.identity.lockoutoptions.maxfailedaccessattempts)和[DefaultLockoutTimeSpan](/dotnet/api/microsoft.aspnetcore.identity.lockoutoptions.defaultlockouttimespan)來設定。 以下設定在10次失敗的存取嘗試之後10分鐘的帳戶鎖定：
+建議使用2FA 來鎖定帳戶。 使用者透過本機帳戶或社交帳戶登入之後，就會在2FA 中儲存每個失敗的嘗試。 如果達到失敗的存取嘗試次數上限，使用者會被鎖定 (預設值：5分鐘的鎖定失敗的存取嘗試次數) 。 成功的驗證會重設失敗的存取嘗試計數，並重設時鐘。 失敗的存取嘗試和鎖定時間上限可以使用[MaxFailedAccessAttempts](/dotnet/api/microsoft.aspnetcore.identity.lockoutoptions.maxfailedaccessattempts)和[DefaultLockoutTimeSpan](/dotnet/api/microsoft.aspnetcore.identity.lockoutoptions.defaultlockouttimespan)來設定。 以下設定在10次失敗的存取嘗試之後10分鐘的帳戶鎖定：
 
 [!code-csharp[](2fa/sample/Web2FA/Startup.cs?name=snippet2&highlight=13-17)]
 

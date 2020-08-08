@@ -7,6 +7,8 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 10/03/2019
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -15,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: tutorials/publish-to-iis
-ms.openlocfilehash: 837a66ef36f1394df87d56132e146ef23a5d5659
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: fc8573625328fe18970cd6bcd5627b71680d5ca7
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85407885"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88020232"
 ---
 # <a name="publish-an-aspnet-core-app-to-iis"></a>將 ASP.NET Core 應用程式發佈到 IIS
 
@@ -67,7 +69,7 @@ ms.locfileid: "85407885"
 
 1. 提供**網站名稱**，並將**實體路徑**設定為您建立的應用程式部署資料夾。 提供**繫結**組態，然後選取 [確定]**** 來建立網站。
 
-## <a name="create-an-aspnet-core-razor-pages-app"></a>建立 ASP.NET Core Razor 頁面應用程式
+## <a name="create-an-aspnet-core-no-locrazor-pages-app"></a>建立 ASP.NET Core Razor 頁面應用程式
 
 依照 <xref:getting-started> 教學課程來建立 Razor 頁面應用程式。
 

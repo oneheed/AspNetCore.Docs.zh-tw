@@ -6,6 +6,8 @@ ms.author: scaddie
 ms.custom: mvc
 ms.date: 10/13/2019
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -14,12 +16,12 @@ no-loc:
 - Razor
 - SignalR
 uid: mvc/views/tag-helpers/builtin-th/anchor-tag-helper
-ms.openlocfilehash: af0f07a0f50a79f25b6a14459402f9dd8b59dae2
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: 25f1716b5c80492edb72bc9555954c9c93c02a49
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85408249"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88018762"
 ---
 # <a name="anchor-tag-helper-in-aspnet-core"></a>ASP.NET Core 中的錨點標籤協助程式
 
@@ -29,7 +31,7 @@ ms.locfileid: "85408249"
 
 如需標籤協助程式的概觀，請參閱 <xref:mvc/views/tag-helpers/intro>。
 
-[查看或下載範例程式碼](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/mvc/views/tag-helpers/built-in/samples)（[如何下載](xref:index#how-to-download-a-sample)）
+[查看或下載範例程式碼](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/mvc/views/tag-helpers/built-in/samples) ([如何下載](xref:index#how-to-download-a-sample)) 
 
 這整份文件的範例皆使用 *SpeakerController*：
 
@@ -181,7 +183,7 @@ MVC 檢視會使用動作提供的模型，如下所示：
 
 [asp-area](xref:Microsoft.AspNetCore.Mvc.TagHelpers.AnchorTagHelper.Area*) 屬性設定區域名稱，用以設定合適的路由。 下列範例描述了 `asp-area` 屬性如何造成路由重新對應。
 
-#### <a name="usage-in-razor-pages"></a>頁面中的使用方式 Razor
+#### <a name="usage-in-no-locrazor-pages"></a>頁面中的使用方式 Razor
 
 RazorASP.NET Core 2.1 或更新版本中支援頁面區域。
 
@@ -211,7 +213,7 @@ RazorASP.NET Core 2.1 或更新版本中支援頁面區域。
 > 若要支援 Razor 頁面應用程式中的區域，請在中執行下列其中一項 `Startup.ConfigureServices` ：
 >
 > * 將[相容性版本](xref:mvc/compatibility-version) 設定為 2.1 或更新版本。
-> * 將 [RazorPagesOptions.AllowAreas](xref:Microsoft.AspNetCore.Mvc.RazorPages.RazorPagesOptions.AllowAreas*) 屬性設定為 `true`：
+> * 將[ Razor PagesOptions. AllowAreas](xref:Microsoft.AspNetCore.Mvc.RazorPages.RazorPagesOptions.AllowAreas*)屬性設定為 `true` ：
 >
 >   [!code-csharp[](samples/TagHelpersBuiltIn/Startup.cs?name=snippet_AllowAreas)]
 

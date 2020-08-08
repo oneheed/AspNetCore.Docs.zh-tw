@@ -6,6 +6,8 @@ monikerRange: '>= aspnetcore-2.1'
 ms.author: bradyg
 ms.date: 11/21/2019
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -14,18 +16,18 @@ no-loc:
 - Razor
 - SignalR
 uid: signalr/version-differences
-ms.openlocfilehash: b5b5686f87d6e511672f6a50db7be8e2613a8a9e
-ms.sourcegitcommit: fa89d6553378529ae86b388689ac2c6f38281bb9
+ms.openlocfilehash: f52bf6c82cd5125e0905d9bcbda5dd5499d6455e
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 07/07/2020
-ms.locfileid: "86060146"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88020037"
 ---
-# <a name="differences-between-aspnet-signalr-and-aspnet-core-signalr"></a>ASP.NET SignalR 和 ASP.NET Core 之間的差異SignalR
+# <a name="differences-between-aspnet-no-locsignalr-and-aspnet-core-no-locsignalr"></a>ASP.NET SignalR 和 ASP.NET Core 之間的差異SignalR
 
 ASP.NET Core SignalR 與用戶端或伺服器不相容，因此無法進行 ASP.NET SignalR 。 本文詳述已在 ASP.NET Core 中移除或變更的功能 SignalR 。
 
-## <a name="how-to-identify-the-signalr-version"></a>如何識別 SignalR 版本
+## <a name="how-to-identify-the-no-locsignalr-version"></a>如何識別 SignalR 版本
 
 ::: moniker range=">= aspnetcore-3.0"
 
@@ -34,8 +36,8 @@ ASP.NET Core SignalR 與用戶端或伺服器不相容，因此無法進行 ASP.
 | **伺服器 NuGet 封裝** | [Microsoft AspNet。SignalR](https://www.nuget.org/packages/Microsoft.AspNet.SignalR/) | 無。 包含在[AspNetCore](xref:fundamentals/metapackage-app)共用架構中。 |
 | **用戶端 NuGet 套件** | [Microsoft AspNet. SignalR 。台](https://www.nuget.org/packages/Microsoft.AspNet.SignalR.Client/)<br>[Microsoft AspNet. SignalR 。NODE.JS](https://www.nuget.org/packages/Microsoft.AspNet.SignalR.JS/) | [AspNetCore SignalR 。台](https://www.nuget.org/packages/Microsoft.AspNetCore.SignalR.Client/) |
 | **JavaScript 用戶端 npm 套件** | [signalr](https://www.npmjs.com/package/signalr) | [`@microsoft/signalr`](https://www.npmjs.com/package/@microsoft/signalr) |
-| **Java 用戶端** | [GitHub 存放庫](https://github.com/SignalR/java-client)（已淘汰）  | Maven package [com. signalr](https://search.maven.org/artifact/com.microsoft.signalr/signalr) |
-| **伺服器應用程式類型** | ASP.NET （System.web）或 OWIN 自我裝載 | ASP.NET Core |
+| **Java 用戶端** | [GitHub 存放庫](https://github.com/SignalR/java-client) (已淘汰)   | Maven package [com. signalr](https://search.maven.org/artifact/com.microsoft.signalr/signalr) |
+| **伺服器應用程式類型** | ASP.NET (System.web) 或 OWIN 自我裝載 | ASP.NET Core |
 | **支援的伺服器平臺** | .NET Framework 4.5 或更新版本 | .NET Core 3.0 或更新版本 |
 
 ::: moniker-end
@@ -44,11 +46,11 @@ ASP.NET Core SignalR 與用戶端或伺服器不相容，因此無法進行 ASP.
 
 |                      | ASP.NETSignalR | ASP.NET CoreSignalR |
 | -------------------- | --------------- | -------------------- |
-| **伺服器 NuGet 封裝** | [Microsoft AspNet。SignalR](https://www.nuget.org/packages/Microsoft.AspNet.SignalR/) | [AspNetCore 應用程式](https://www.nuget.org/packages/Microsoft.AspNetCore.App/)（.net Core）<br>[AspNetCore。SignalR](https://www.nuget.org/packages/Microsoft.AspNetCore.SignalR/) (.NET Framework) |
+| **伺服器 NuGet 封裝** | [Microsoft AspNet。SignalR](https://www.nuget.org/packages/Microsoft.AspNet.SignalR/) |  ( .NET Core) [的 AspNetCore 應用程式](https://www.nuget.org/packages/Microsoft.AspNetCore.App/)<br>[AspNetCore。SignalR](https://www.nuget.org/packages/Microsoft.AspNetCore.SignalR/) (.NET Framework) |
 | **用戶端 NuGet 套件** | [Microsoft AspNet. SignalR 。台](https://www.nuget.org/packages/Microsoft.AspNet.SignalR.Client/)<br>[Microsoft AspNet. SignalR 。NODE.JS](https://www.nuget.org/packages/Microsoft.AspNet.SignalR.JS/) | [AspNetCore SignalR 。台](https://www.nuget.org/packages/Microsoft.AspNetCore.SignalR.Client/) |
 | **JavaScript 用戶端 npm 套件** | [signalr](https://www.npmjs.com/package/signalr) | [`@aspnet/signalr`](https://www.npmjs.com/package/@aspnet/signalr) |
-| **Java 用戶端** | [GitHub 存放庫](https://github.com/SignalR/java-client)（已淘汰）  | Maven package [com. signalr](https://search.maven.org/artifact/com.microsoft.signalr/signalr) |
-| **伺服器應用程式類型** | ASP.NET （System.web）或 OWIN 自我裝載 | ASP.NET Core |
+| **Java 用戶端** | [GitHub 存放庫](https://github.com/SignalR/java-client) (已淘汰)   | Maven package [com. signalr](https://search.maven.org/artifact/com.microsoft.signalr/signalr) |
+| **伺服器應用程式類型** | ASP.NET (System.web) 或 OWIN 自我裝載 | ASP.NET Core |
 | **支援的伺服器平臺** | .NET Framework 4.5 或更新版本 | .NET Framework 4.6.1 或更新版本<br>.NET Core 2.1 或更新版本 |
 
 ::: moniker-end
@@ -143,13 +145,13 @@ ASP.NET 的向外延展模型 SignalR 可讓用戶端重新連線，並將訊息
 
 在 ASP.NET Core 中 SignalR ，已簡化連接模型。 直接連接到單一中樞，而不是使用單一連線來共用多個中樞的存取權。
 
-### <a name="streaming"></a>資料流
+### <a name="streaming"></a>串流
 
 ASP.NET Core SignalR 現在支援從中樞將[資料串流](xref:signalr/streaming)至用戶端。
 
-### <a name="state"></a>State
+### <a name="state"></a>州
 
-在用戶端與中樞之間傳遞任意狀態（通常稱為）的功能已 `HubState` 移除，並支援進度訊息。 目前沒有任何對應的中樞 proxy。
+在用戶端與中樞之間傳遞任意狀態的功能 (通常稱為 `HubState`) 已移除，並支援進度訊息。 目前沒有任何對應的中樞 proxy。
 
 ### <a name="persistentconnection-removal"></a>PersistentConnection 移除
 
@@ -157,7 +159,7 @@ ASP.NET Core SignalR 現在支援從中樞將[資料串流](xref:signalr/streami
 
 ### <a name="globalhost"></a>GlobalHost
 
-ASP.NET Core 在架構內建相依性插入（DI）。 服務可以使用 DI 來存取[HubCoNtext](xref:signalr/hubcontext)。 `GlobalHost`在 ASP.NET 中用 SignalR 來取得的物件 `HubContext` 不存在於 ASP.NET Core 中 SignalR 。
+ASP.NET Core 在架構內建 (DI) 的相依性插入。 服務可以使用 DI 來存取[HubCoNtext](xref:signalr/hubcontext)。 `GlobalHost`在 ASP.NET 中用 SignalR 來取得的物件 `HubContext` 不存在於 ASP.NET Core 中 SignalR 。
 
 ### <a name="hubpipeline"></a>HubPipeline
 
@@ -199,7 +201,7 @@ npm install @aspnet/signalr
 
 ### <a name="internet-explorer-support"></a>Internet Explorer 支援
 
-ASP.NET Core SignalR 需要 Microsoft Internet explorer 11 或更新版本（ASP.NET SignalR 支援 Microsoft internet explorer 8 和更新版本）。
+ASP.NET Core SignalR 需要 Microsoft Internet explorer 11 或更新版本， (ASP.NET SignalR 支援 Microsoft internet explorer 8 和更新版本) 。
 
 ### <a name="javascript-client-method-syntax"></a>JavaScript 用戶端方法語法
 
@@ -288,7 +290,7 @@ ASP.NET SignalR 支援 SQL Server 和 Redis。 ASP.NET Core SignalR 支援 Azure
 
 ## <a name="additional-resources"></a>其他資源
 
-* [中樞](xref:signalr/hubs)
+* [集線器](xref:signalr/hubs)
 * [JavaScript 用戶端](xref:signalr/javascript-client)
 * [.NET 用戶端](xref:signalr/dotnet-client)
 * [支援的平台](xref:signalr/supported-platforms)

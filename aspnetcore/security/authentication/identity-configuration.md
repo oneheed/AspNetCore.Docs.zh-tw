@@ -6,6 +6,8 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 02/11/2019
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -14,16 +16,16 @@ no-loc:
 - Razor
 - SignalR
 uid: security/authentication/identity-configuration
-ms.openlocfilehash: 5c999b426742cf75b1997f5b40223e2dda112901
-ms.sourcegitcommit: 1b89fc58114a251926abadfd5c69c120f1ba12d8
+ms.openlocfilehash: b7f6eaba1a0e819a077e3d63b4f997e75b8cd317
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 07/24/2020
-ms.locfileid: "87160296"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88020596"
 ---
 # <a name="configure-aspnet-core-no-locidentity"></a>設定 ASP.NET CoreIdentity
 
-ASP.NET Core 會 Identity 使用密碼原則、鎖定和 cookie 設定等設定的預設值。 這些設定可以在類別中覆寫 `Startup` 。
+ASP.NET Core 會 Identity 使用密碼原則、鎖定和設定等設定的預設值 cookie 。 這些設定可以在類別中覆寫 `Startup` 。
 
 ## <a name="no-locidentity-options"></a>Identity選項
 
@@ -90,7 +92,7 @@ ASP.NET Core 會 Identity 使用密碼原則、鎖定和 cookie 設定等設定�
 
 ### <a name="sign-in"></a>登入
 
-下列程式碼會設定 `SignIn` 設定（預設值）：
+下列程式碼會將 `SignIn` 設定 () 設定為預設值：
 
 [!code-csharp[](identity-configuration/sample/Startup.cs?name=snippet_si)]
 
@@ -105,7 +107,7 @@ ASP.NET Core 會 Identity 使用密碼原則、鎖定和 cookie 設定等設定�
 
 [ Identity 選項。權杖](/dotnet/api/microsoft.aspnetcore.identity.identityoptions.tokens)會使用資料表中顯示的屬性來指定[TokenOptions](/dotnet/api/microsoft.aspnetcore.identity.tokenoptions) 。
 
-| 屬性 | 說明 |
+| 屬性 | 描述 |
 | -------- | ----------- |
 | [AuthenticatorTokenProvider](/dotnet/api/microsoft.aspnetcore.identity.tokenoptions.authenticatortokenprovider) | 取得或設定，用 `AuthenticatorTokenProvider` 來驗證驗證器的雙因素登入。 |
 | [ChangeEmailTokenProvider](/dotnet/api/microsoft.aspnetcore.identity.tokenoptions.changeemailtokenprovider) | 取得或設定， `ChangeEmailTokenProvider` 用來產生電子郵件變更確認電子郵件中使用的權杖。 |
@@ -125,21 +127,21 @@ ASP.NET Core 會 Identity 使用密碼原則、鎖定和 cookie 設定等設定�
 | [AllowedUserNameCharacters](/dotnet/api/microsoft.aspnetcore.identity.useroptions.allowedusernamecharacters) | 使用者名稱中允許的字元。 | abcdefghijklmnopqrstuvwxyz<br>ABCDEFGHIJKLMNOPQRSTUVWXYZ<br>0123456789<br>-.\_@+ |
 | [RequireUniqueEmail](/dotnet/api/microsoft.aspnetcore.identity.useroptions.requireuniqueemail) | 要求每位使用者都有唯一的電子郵件。 | `false` |
 
-### <a name="cookie-settings"></a>Cookie 設定
+### <a name="no-loccookie-settings"></a>Cookie 設定
 
-在中設定應用程式的 cookie `Startup.ConfigureServices` 。 呼叫或**之後**，必須呼叫[ConfigureApplicationCookie](/dotnet/api/microsoft.extensions.dependencyinjection.identityservicecollectionextensions.configureapplicationcookie#Microsoft_Extensions_DependencyInjection_IdentityServiceCollectionExtensions_ConfigureApplicationCookie_Microsoft_Extensions_DependencyInjection_IServiceCollection_System_Action_Microsoft_AspNetCore_Authentication_Cookies_CookieAuthenticationOptions__) `AddIdentity` `AddDefaultIdentity` 。
+在中設定應用 cookie 程式 `Startup.ConfigureServices` 。 [ConfigureApplication Cookie ](/dotnet/api/microsoft.extensions.dependencyinjection.identityservicecollectionextensions.configureapplicationcookie#Microsoft_Extensions_DependencyInjection_IdentityServiceCollectionExtensions_ConfigureApplicationCookie_Microsoft_Extensions_DependencyInjection_IServiceCollection_System_Action_Microsoft_AspNetCore_Authentication_Cookies_CookieAuthenticationOptions__)呼叫或**之後**，必須 `AddIdentity` 呼叫 `AddDefaultIdentity` 。
 
 [!code-csharp[](identity-configuration/sample/Startup.cs?name=snippet_cookie)]
 
-如需詳細資訊，請參閱[cookieauthenticationoptions.authenticationtype](/dotnet/api/microsoft.aspnetcore.authentication.cookies.cookieauthenticationoptions)。
+如需詳細資訊，請參閱[ Cookie AuthenticationOptions](/dotnet/api/microsoft.aspnetcore.authentication.cookies.cookieauthenticationoptions)。
 
 ## <a name="password-hasher-options"></a>密碼 Hasher 選項
 
 <xref:Microsoft.AspNetCore.Identity.PasswordHasherOptions>取得和設定密碼雜湊的選項。
 
-| 選項 | 說明 |
+| 選項 | 描述 |
 | ------ | ----------- |
-| <xref:Microsoft.AspNetCore.Identity.PasswordHasherOptions.CompatibilityMode> | 雜湊新密碼時所使用的相容性模式。 預設為 <xref:Microsoft.AspNetCore.Identity.PasswordHasherCompatibilityMode.IdentityV3>。 雜湊密碼的第一個位元組（稱為*格式標記*）會指定用來雜湊密碼的雜湊演算法版本。 根據雜湊來驗證密碼時，方法會根據 <xref:Microsoft.AspNetCore.Identity.PasswordHasher`1.VerifyHashedPassword*> 第一個位元組來選取正確的演算法。 無論使用哪一個演算法版本來雜湊密碼，用戶端都可以進行驗證。 設定相容性模式會影響*新密碼*的雜湊。 |
+| <xref:Microsoft.AspNetCore.Identity.PasswordHasherOptions.CompatibilityMode> | 雜湊新密碼時所使用的相容性模式。 預設值為 <xref:Microsoft.AspNetCore.Identity.PasswordHasherCompatibilityMode.IdentityV3>。 雜湊密碼的第一個位元組（稱為*格式標記*）會指定用來雜湊密碼的雜湊演算法版本。 根據雜湊來驗證密碼時，方法會根據 <xref:Microsoft.AspNetCore.Identity.PasswordHasher`1.VerifyHashedPassword*> 第一個位元組來選取正確的演算法。 無論使用哪一個演算法版本來雜湊密碼，用戶端都可以進行驗證。 設定相容性模式會影響*新密碼*的雜湊。 |
 | <xref:Microsoft.AspNetCore.Identity.PasswordHasherOptions.IterationCount> | 使用 PBKDF2 來對密碼進行雜湊處理時所使用的反覆運算次數。 只有當設定為時，才會使用這個值 <xref:Microsoft.AspNetCore.Identity.PasswordHasherOptions.CompatibilityMode> <xref:Microsoft.AspNetCore.Identity.PasswordHasherCompatibilityMode.IdentityV3> 。 值必須是正整數，且預設值為 `10000` 。 |
 
 在下列範例中， <xref:Microsoft.AspNetCore.Identity.PasswordHasherOptions.IterationCount> 會設定為 `12000` 中的 `Startup.ConfigureServices` ：

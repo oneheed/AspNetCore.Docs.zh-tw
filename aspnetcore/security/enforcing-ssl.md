@@ -6,6 +6,8 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 12/06/2019
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -14,12 +16,12 @@ no-loc:
 - Razor
 - SignalR
 uid: security/enforcing-ssl
-ms.openlocfilehash: 8247d66900a0c15b3b386dca021c5c5922d26e71
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: 5dcdf50ff9f750e4966ed3bdf24a71b9f433240a
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85404558"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88018997"
 ---
 # <a name="enforce-https-in-aspnet-core"></a>在 ASP.NET Core 中強制使用 HTTPS
 
@@ -40,7 +42,7 @@ ms.locfileid: "85404558"
 > 請勿**在**接收機密資訊的 Web api 上使用[RequireHttpsAttribute](/dotnet/api/microsoft.aspnetcore.mvc.requirehttpsattribute) 。 `RequireHttpsAttribute`會使用 HTTP 狀態碼，將瀏覽器從 HTTP 重新導向至 HTTPS。 API 用戶端可能無法瞭解或遵循從 HTTP 到 HTTPS 的重新導向。 這類用戶端可能會透過 HTTP 傳送資訊。 Web Api 應為：
 >
 > * 不接聽 HTTP。
-> * 關閉具有狀態碼400（不正確的要求）的連接，而不提供要求。
+> * 關閉狀態碼400的連線 (不正確的要求) 而不提供要求。
 >
 > ## <a name="hsts-and-api-projects"></a>HSTS 和 API 專案
 >
@@ -56,7 +58,7 @@ ms.locfileid: "85404558"
 > 請勿**在**接收機密資訊的 Web api 上使用[RequireHttpsAttribute](/dotnet/api/microsoft.aspnetcore.mvc.requirehttpsattribute) 。 `RequireHttpsAttribute`會使用 HTTP 狀態碼，將瀏覽器從 HTTP 重新導向至 HTTPS。 API 用戶端可能無法瞭解或遵循從 HTTP 到 HTTPS 的重新導向。 這類用戶端可能會透過 HTTP 傳送資訊。 Web Api 應為：
 >
 > * 不接聽 HTTP。
-> * 關閉具有狀態碼400（不正確的要求）的連接，而不提供要求。
+> * 關閉狀態碼400的連線 (不正確的要求) 而不提供要求。
 
 ::: moniker-end
 
@@ -64,11 +66,11 @@ ms.locfileid: "85404558"
 
 我們建議生產 ASP.NET Core web 應用程式使用：
 
-* 用來將 HTTP 要求重新導向至 HTTPS 的 HTTPS 重新導向中介軟體（ <xref:Microsoft.AspNetCore.Builder.HttpsPolicyBuilderExtensions.UseHttpsRedirection*> ）。
-* HSTS 中介軟體（[UseHsts](#http-strict-transport-security-protocol-hsts)），以將 HTTP 嚴格傳輸安全性通訊協定（HSTS）標頭傳送給用戶端。
+* HTTPS 重新導向中介軟體 (<xref:Microsoft.AspNetCore.Builder.HttpsPolicyBuilderExtensions.UseHttpsRedirection*>) ，將 HTTP 要求重新導向至 HTTPS。
+* HSTS 中介軟體 ([UseHsts](#http-strict-transport-security-protocol-hsts)) ，將 HTTP 嚴格傳輸安全性通訊協定 (HSTS) 標頭傳送給用戶端。
 
 > [!NOTE]
-> 部署在反向 proxy 設定中的應用程式可讓 proxy 處理連線安全性（HTTPS）。 如果 proxy 也處理 HTTPS 重新導向，則不需要使用 HTTPS 重新導向中介軟體。 如果 proxy 伺服器也處理寫入 HSTS 標頭（例如， [IIS 10.0 （1709）或更新版本中的原生 HSTS 支援](/iis/get-started/whats-new-in-iis-10-version-1709/iis-10-version-1709-hsts#iis-100-version-1709-native-hsts-support)），應用程式就不需要 HSTS 中介軟體。 如需詳細資訊，請參閱[在專案建立時退出宣告 HTTPS/HSTS](#opt-out-of-httpshsts-on-project-creation)。
+> 部署在反向 proxy 設定中的應用程式，可讓 proxy 處理 (HTTPS) 的連線安全性。 如果 proxy 也處理 HTTPS 重新導向，則不需要使用 HTTPS 重新導向中介軟體。 如果 proxy 伺服器也會處理寫入 HSTS 標頭 (例如， [IIS 10.0 中的原生 HSTS 支援 (1709) 或更新版本](/iis/get-started/whats-new-in-iis-10-version-1709/iis-10-version-1709-hsts#iis-100-version-1709-native-hsts-support)) ，應用程式不需要 HSTS 中介軟體。 如需詳細資訊，請參閱[在專案建立時退出宣告 HTTPS/HSTS](#opt-out-of-httpshsts-on-project-creation)。
 
 ### <a name="usehttpsredirection"></a>UseHttpsRedirection
 
@@ -88,10 +90,10 @@ ms.locfileid: "85404558"
 
 上述反白顯示的程式碼：
 
-* 會使用預設的[HttpsRedirectionOptions RedirectStatusCode](/dotnet/api/microsoft.aspnetcore.httpspolicy.httpsredirectionoptions.redirectstatuscode) （[Status307TemporaryRedirect](/dotnet/api/microsoft.aspnetcore.http.statuscodes.status307temporaryredirect)）。
-* 除非由環境變數或 IServerAddressesFeature 覆寫，否則會使用預設的[HttpsRedirectionOptions HttpsPort](/dotnet/api/microsoft.aspnetcore.httpspolicy.httpsredirectionoptions.httpsport) （null） `ASPNETCORE_HTTPS_PORT` 。 [IServerAddressesFeature](/dotnet/api/microsoft.aspnetcore.hosting.server.features.iserveraddressesfeature)
+* 會使用預設的[HttpsRedirectionOptions. RedirectStatusCode](/dotnet/api/microsoft.aspnetcore.httpspolicy.httpsredirectionoptions.redirectstatuscode) ([Status307TemporaryRedirect](/dotnet/api/microsoft.aspnetcore.http.statuscodes.status307temporaryredirect)) 。
+* 除非由[HttpsRedirectionOptions.HttpsPort](/dotnet/api/microsoft.aspnetcore.httpspolicy.httpsredirectionoptions.httpsport) `ASPNETCORE_HTTPS_PORT` 環境變數或[IServerAddressesFeature](/dotnet/api/microsoft.aspnetcore.hosting.server.features.iserveraddressesfeature)覆寫，否則會使用預設的 HttpsRedirectionOptions HttpsPort (null) 。
 
-我們建議使用暫時重新導向，而不是永久重新導向。 連結快取在開發環境中可能會造成不穩定的行為。 如果您想要在應用程式處於非開發環境時傳送永久重新導向狀態碼，請參閱在[生產中設定永久重新導向](#configure-permanent-redirects-in-production)一節。 我們建議使用[HSTS](#http-strict-transport-security-protocol-hsts)來通知用戶端，只應將安全的資源要求傳送至應用程式（僅限生產環境）。
+我們建議使用暫時重新導向，而不是永久重新導向。 連結快取在開發環境中可能會造成不穩定的行為。 如果您想要在應用程式處於非開發環境時傳送永久重新導向狀態碼，請參閱在[生產中設定永久重新導向](#configure-permanent-redirects-in-production)一節。 我們建議使用[HSTS](#http-strict-transport-security-protocol-hsts)來通知用戶端，只應將安全的資源要求傳送至應用程式 (只在生產) 中。
 
 ### <a name="port-configuration"></a>連接埠組態
 
@@ -143,8 +145,8 @@ ms.locfileid: "85404558"
 
 當 Kestrel 或 HTTP.sys 做為公眾面向的邊緣伺服器時，Kestrel 或 HTTP.sys 必須設定為在兩者上進行接聽：
 
-* 重新導向用戶端的安全埠（通常是生產環境中的443和開發中的5001）。
-* 不安全的埠（通常是在生產環境中為80，開發中則為5000）。
+* 重新導向用戶端的安全埠 (通常是在生產環境中為443，而在開發) 則為5001。
+* 不安全的通訊埠 (通常是在生產環境中為80，而在開發) 則為5000。
 
 用戶端必須能夠存取不安全的埠，應用程式才能接收不安全的要求，並將用戶端重新導向至安全的埠。
 
@@ -158,7 +160,7 @@ ms.locfileid: "85404558"
 
 部署到 Azure App Service 時，請遵循教學課程[：將現有的自訂 SSL 憑證系結至 Azure Web Apps](/azure/app-service/app-service-web-tutorial-custom-ssl)中的指引。
 
-### <a name="options"></a>選項
+### <a name="options"></a>選項。
 
 下列反白顯示的程式碼會呼叫[AddHttpsRedirection](/dotnet/api/microsoft.aspnetcore.builder.httpsredirectionservicesextensions.addhttpsredirection)來設定中介軟體選項：
 
@@ -232,15 +234,15 @@ public void ConfigureServices(IServiceCollection services)
 
 ## <a name="https-redirection-middleware-alternative-approach"></a>HTTPS 重新導向中介軟體替代方法
 
-使用 HTTPS 重新導向中介軟體（）的替代方法 `UseHttpsRedirection` 是使用 URL 重寫中介軟體（ `AddRedirectToHttps` ）。 `AddRedirectToHttps`也可以在重新導向執行時設定狀態碼和埠。 如需詳細資訊，請參閱[URL 重寫中介軟體](xref:fundamentals/url-rewriting)。
+ () 使用 HTTPS 重新導向中介軟體的替代方式， `UseHttpsRedirection` 是使用 URL 重寫中介軟體 (`AddRedirectToHttps`) 。 `AddRedirectToHttps`也可以在重新導向執行時設定狀態碼和埠。 如需詳細資訊，請參閱[URL 重寫中介軟體](xref:fundamentals/url-rewriting)。
 
-重新導向至 HTTPS 時，若不需要額外的重新導向規則，建議使用 `UseHttpsRedirection` 本主題中所述的 HTTPs 重新導向中介軟體（）。
+重新導向至 HTTPS 時，若不需要額外的重新導向規則，建議使用 HTTPS 重新導向中介軟體 (`UseHttpsRedirection` 本主題中所述的) 。
 
 <a name="hsts"></a>
 
-## <a name="http-strict-transport-security-protocol-hsts"></a>HTTP 嚴格傳輸安全性通訊協定（HSTS）
+## <a name="http-strict-transport-security-protocol-hsts"></a>HTTP 嚴格傳輸安全性通訊協定 (HSTS) 
 
-根據[OWASP](https://www.owasp.org/index.php/About_The_Open_Web_Application_Security_Project)， [HTTP 嚴格傳輸安全性（HSTS）](https://cheatsheetseries.owasp.org/cheatsheets/HTTP_Strict_Transport_Security_Cheat_Sheet.html)是由 web 應用程式透過使用回應標頭所指定的加入宣告安全性增強功能。 當[支援 HSTS 的瀏覽器](https://cheatsheetseries.owasp.org/cheatsheets/Transport_Layer_Protection_Cheat_Sheet.html#browser-support)收到此標頭時：
+根據[OWASP](https://www.owasp.org/index.php/About_The_Open_Web_Application_Security_Project)， [HTTP 嚴格傳輸安全性 (HSTS) ](https://cheatsheetseries.owasp.org/cheatsheets/HTTP_Strict_Transport_Security_Cheat_Sheet.html)是由 web 應用程式透過使用回應標頭所指定的加入宣告安全性增強功能。 當[支援 HSTS 的瀏覽器](https://cheatsheetseries.owasp.org/cheatsheets/Transport_Layer_Protection_Cheat_Sheet.html#browser-support)收到此標頭時：
 
 * 瀏覽器會儲存網域的設定，以防止透過 HTTP 傳送任何通訊。 瀏覽器會強制所有透過 HTTPS 進行的通訊。
 * 瀏覽器會防止使用者使用不受信任或不正確憑證。 瀏覽器會停用允許使用者暫時信任這類憑證的提示。
@@ -321,7 +323,7 @@ ASP.NET Core 2.1 和更新版本會使用擴充方法來執行 HSTS `UseHsts` �
 
 # <a name="net-core-cli"></a>[.NET Core CLI](#tab/netcore-cli) 
 
-使用 `--no-https` 選項。 例如
+使用 `--no-https` 選項。 例如：
 
 ```dotnetcli
 dotnet new webapp --no-https
@@ -364,7 +366,7 @@ dotnet dev-certs https --help
 
 ## <a name="trust-https-certificate-from-windows-subsystem-for-linux"></a>從適用于 Linux 的 Windows 子系統信任 HTTPS 憑證
 
-適用于 Linux 的 Windows 子系統（WSL）會產生 HTTPS 自我簽署憑證。若要將 Windows 憑證存放區設定為信任 WSL 憑證：
+適用于 Linux 的 Windows 子系統 (WSL) 會產生 HTTPS 自我簽署憑證。若要將 Windows 憑證存放區設定為信任 WSL 憑證：
 
 * 執行下列命令以匯出 WSL 產生的憑證：
 
@@ -433,7 +435,7 @@ dotnet dev-certs https --trust
 
 關閉任何開啟的瀏覽器實例。 在應用程式中開啟新的瀏覽器視窗。
 
-請參閱[使用 IIS Express （dotnet/AspNetCore #16892）的 HTTPS 錯誤](https://github.com/dotnet/AspNetCore/issues/16892)，以疑難排解 Visual Studio 的憑證問題。
+請參閱[使用 IIS Express (dotnet/AspNetCore #16892) 的 HTTPS 錯誤](https://github.com/dotnet/AspNetCore/issues/16892)，以疑難排解 Visual Studio 的憑證問題。
 
 ### <a name="iis-express-ssl-certificate-used-with-visual-studio"></a>搭配 Visual Studio 使用的 IIS Express SSL 憑證
 

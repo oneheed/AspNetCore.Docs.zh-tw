@@ -6,6 +6,8 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 03/03/2020
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -14,12 +16,12 @@ no-loc:
 - Razor
 - SignalR
 uid: security/authentication/index
-ms.openlocfilehash: a230e1ae85a54ddf16900b2ee7ed4a18d45e4ea2
-ms.sourcegitcommit: 1b89fc58114a251926abadfd5c69c120f1ba12d8
+ms.openlocfilehash: b0258118e116b1686abbebf1c8d89135ae3cb1f6
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 07/24/2020
-ms.locfileid: "87160202"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88019312"
 ---
 # <a name="overview-of-aspnet-core-authentication"></a>ASP.NET Core 驗證的總覽
 
@@ -34,10 +36,10 @@ ms.locfileid: "87160202"
 
 驗證配置是藉由在中註冊驗證服務來指定 `Startup.ConfigureServices` ：
 
-* 在呼叫（例如或）之後呼叫配置特定的擴充方法 `services.AddAuthentication` `AddJwtBearer` `AddCookie` 。 這些擴充方法會使用[AuthenticationBuilder](xref:Microsoft.AspNetCore.Authentication.AuthenticationBuilder.AddScheme*)來註冊具有適當設定的配置。
+* 藉由在呼叫 (（例如或）後呼叫配置特定的擴充方法 `services.AddAuthentication` `AddJwtBearer` ，例如 `AddCookie`) 。 這些擴充方法會使用[AuthenticationBuilder](xref:Microsoft.AspNetCore.Authentication.AuthenticationBuilder.AddScheme*)來註冊具有適當設定的配置。
 * 較不常用，方法是直接呼叫[AuthenticationBuilder. AddScheme](xref:Microsoft.AspNetCore.Authentication.AuthenticationBuilder.AddScheme*) 。
 
-例如，下列程式碼會註冊 cookie 和 JWT 持有人驗證配置的驗證服務和處理常式：
+例如，下列程式碼會註冊適用于和 JWT 持有人驗證配置的驗證服務和處理常式 cookie ：
 
 ```csharp
 services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
@@ -47,7 +49,7 @@ services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
 
 `AddAuthentication`參數 `JwtBearerDefaults.AuthenticationScheme` 是未要求特定配置時，預設要使用的配置名稱。
 
-如果使用多個配置，授權原則（或授權屬性）可以[指定它們所依賴的驗證配置（或配置）](xref:security/authorization/limitingidentitybyscheme)來驗證使用者。 在上述範例中，您可以藉由指定名稱來使用 cookie 驗證配置（ `CookieAuthenticationDefaults.AuthenticationScheme` 根據預設，雖然呼叫時可能會提供不同的名稱 `AddCookie` ）。
+如果使用了多個配置，則授權原則 (或授權屬性) 可以[指定驗證配置 (或) ](xref:security/authorization/limitingidentitybyscheme)所依賴的架構，以驗證使用者。 在上述範例中，您可以藉 cookie 由指定預設名稱 (來使用驗證配置 `CookieAuthenticationDefaults.AuthenticationScheme` ，但在呼叫) 時，可能會提供不同的名稱 `AddCookie` 。
 
 在某些情況下，對的呼叫會 `AddAuthentication` 由其他擴充方法自動進行。 例如，使用[ASP.NET Core Identity ](xref:security/authentication/identity)時， `AddAuthentication` 會在內部呼叫。
 
@@ -65,7 +67,7 @@ services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
 * 驗證處理常式。
 * 用於設定該特定處理常式實例的選項。
 
-配置可做為一種機制，用來參考相關處理常式的驗證、挑戰和禁止行為。 例如，授權原則可以使用配置名稱來指定應該使用哪一種驗證配置（或配置）來驗證使用者。 設定驗證時，通常會指定預設的驗證配置。 除非資源要求特定的配置，否則會使用預設配置。 也可以：
+配置可做為一種機制，用來參考相關處理常式的驗證、挑戰和禁止行為。 例如，授權原則可以使用配置名稱來指定應該用來驗證使用者 (或配置) 。 設定驗證時，通常會指定預設的驗證配置。 除非資源要求特定的配置，否則會使用預設配置。 也可以：
 
 * 指定要用於驗證、挑戰和禁止動作的不同預設配置。
 * 使用[原則](xref:security/authentication/policyschemes)配置，將多個配置結合成一個。
@@ -83,29 +85,29 @@ services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
 * <xref:Microsoft.AspNetCore.Authentication.AuthenticationTicket>如果驗證成功，則代表使用者身分識別的結構物件。
 * 如果驗證失敗，則傳回「沒有結果」或「失敗」。
 * 在使用者嘗試存取資源時，有挑戰和禁止動作的方法：
-  * 他們未經授權存取（禁止）。
-  * 未經驗證時（挑戰）。
+  * 他們未獲授權，無法存取 (禁止) 。
+  * 未經驗證時 (挑戰) 。
 
 ### <a name="authenticate"></a>Authenticate
 
-驗證配置的驗證動作會負責根據要求內容來建立使用者的身分識別。 它會傳回 <xref:Microsoft.AspNetCore.Authentication.AuthenticateResult> ，指出驗證是否成功，以及使用者在驗證票證中的身分識別。 請參閱＜ <xref:Microsoft.AspNetCore.Authentication.AuthenticationHttpContextExtensions.AuthenticateAsync%2A> ＞。 驗證範例包括：
+驗證配置的驗證動作會負責根據要求內容來建立使用者的身分識別。 它會傳回 <xref:Microsoft.AspNetCore.Authentication.AuthenticateResult> ，指出驗證是否成功，以及使用者在驗證票證中的身分識別。 請參閱 <xref:Microsoft.AspNetCore.Authentication.AuthenticationHttpContextExtensions.AuthenticateAsync%2A>。 驗證範例包括：
 
-* Cookie 驗證配置會從 cookie 來建立使用者的身分識別。
+* 一種 cookie 驗證配置，會從中建立使用者的身分識別 cookie 。
 * JWT 持有人配置會還原序列化和驗證 JWT 持有人權杖，以建立使用者的身分識別。
 
 ### <a name="challenge"></a>挑戰
 
-當未驗證的使用者要求需要驗證的端點時，授權就會叫用驗證挑戰。 例如，當匿名使用者要求受限制的資源，或按一下登入連結時，就會發出驗證挑戰。 授權會使用指定的驗證配置，或預設值（如果未指定）來叫用挑戰。 請參閱＜ <xref:Microsoft.AspNetCore.Authentication.AuthenticationHttpContextExtensions.ChallengeAsync%2A> ＞。 驗證挑戰範例包括：
+當未驗證的使用者要求需要驗證的端點時，授權就會叫用驗證挑戰。 例如，當匿名使用者要求受限制的資源，或按一下登入連結時，就會發出驗證挑戰。 授權會使用指定的驗證配置 (s) ，或預設值（如果未指定）來叫用挑戰。 請參閱 <xref:Microsoft.AspNetCore.Authentication.AuthenticationHttpContextExtensions.ChallengeAsync%2A>。 驗證挑戰範例包括：
 
-* Cookie 驗證配置會將使用者重新導向至登入頁面。
+* 將 cookie 使用者重新導向至登入頁面的驗證配置。
 * JWT 持有人配置會傳回具有標頭的401結果 `www-authenticate: bearer` 。
 
 挑戰動作應讓使用者知道要使用哪種驗證機制來存取要求的資源。
 
 ### <a name="forbid"></a>禁止
 
-當已驗證的使用者嘗試存取不允許存取的資源時，授權會呼叫驗證配置的禁止動作。 請參閱＜ <xref:Microsoft.AspNetCore.Authentication.AuthenticationHttpContextExtensions.ForbidAsync%2A> ＞。 驗證禁止的範例包括：
-* Cookie 驗證配置會將使用者重新導向至表示禁止存取的頁面。
+當已驗證的使用者嘗試存取不允許存取的資源時，授權會呼叫驗證配置的禁止動作。 請參閱 <xref:Microsoft.AspNetCore.Authentication.AuthenticationHttpContextExtensions.ForbidAsync%2A>。 驗證禁止的範例包括：
+* 將 cookie 使用者重新導向至頁面的驗證配置，表示禁止存取。
 * JWT 持有人配置傳回403結果。
 * 自訂驗證配置會重新導向至頁面，讓使用者可以在其中要求資源的存取權。
 
@@ -127,7 +129,7 @@ ASP.NET Core framework 沒有內建解決方案可進行多租使用者驗證。
 Orchard 核心為：
 
 * 以 ASP.NET Core 建立的開放原始碼模組化和多租使用者應用程式架構。
-* 以該應用程式架構為基礎的內容管理系統（CMS）。
+* 內容管理系統 (CMS) 以該應用程式架構為基礎。
 
 如需每個租使用者的驗證提供者範例，請參閱[Orchard 核心](https://github.com/OrchardCMS/OrchardCore)來源。
 

@@ -6,6 +6,8 @@ ms.author: riande
 ms.custom: mvc, seodec18
 ms.date: 09/26/2019
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -14,14 +16,14 @@ no-loc:
 - Razor
 - SignalR
 uid: data/ef-rp/intro
-ms.openlocfilehash: 700370fd11a0df40a45c47e8c378d5bdd0c60009
-ms.sourcegitcommit: 50e7c970f327dbe92d45eaf4c21caa001c9106d0
+ms.openlocfilehash: cd6624d107fb19da92a7e58a747cc85e876a6ba4
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 07/10/2020
-ms.locfileid: "86212696"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88018633"
 ---
-# <a name="razor-pages-with-entity-framework-core-in-aspnet-core---tutorial-1-of-8"></a>Razor在 ASP.NET Core 中使用 Entity Framework Core 的頁面-教學課程1之8
+# <a name="no-locrazor-pages-with-entity-framework-core-in-aspnet-core---tutorial-1-of-8"></a>Razor在 ASP.NET Core 中使用 Entity Framework Core 的頁面-教學課程1之8
 
 作者：[Tom Dykstra](https://github.com/tdykstra) 和 [Rick Anderson](https://twitter.com/RickAndMSFT)
 
@@ -498,7 +500,7 @@ Contoso 大學範例 web 應用程式示範如何 Razor 使用 Entity Framework 
 
 此網站的 UI 樣式接近內建範本所產生的內容。 教學課程著重在 EF Core Razor 頁面，而不是 UI。
 
-## <a name="create-the-contosouniversity-razor-pages-web-app"></a>建立 ContosoUniversity Razor Pages web 應用程式
+## <a name="create-the-contosouniversity-no-locrazor-pages-web-app"></a>建立 ContosoUniversity Razor Pages web 應用程式
 
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
@@ -673,7 +675,7 @@ Scaffolding 工具會自動建立資料庫內容，並向相依性插入容器�
 
 ### <a name="test-the-app"></a>測試應用程式
 
-執行應用程式，並接受 Cookie 原則。 此應用程式不會保留個人資訊。 您可以在[歐盟一般資料保護規定 (GDPR) 支援](xref:security/gdpr)閱讀 Cookie 原則相關資訊。
+執行應用程式並接受 cookie 原則。 此應用程式不會保留個人資訊。 您可以閱讀有關 cookie 歐盟的原則[一般資料保護規定 (GDPR) 支援](xref:security/gdpr)。
 
 * 選取 [學生]**** 連結，然後選取 [新建]****。
 * 測試 [編輯]、[詳細資料] 和 [刪除] 連結。
@@ -776,6 +778,6 @@ Drop-Database
 * [本教學課程的 YouTube 版本](https://www.youtube.com/watch?v=P7iTtQnkrNs)
 
 > [!div class="step-by-step"]
-> [下一步](xref:data/ef-rp/crud)
+> [下一個](xref:data/ef-rp/crud)
 
 ::: moniker-end

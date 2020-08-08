@@ -5,6 +5,8 @@ description: 探索如何為使用 ASP.NET Core 雙因素驗證的 TOTP 驗證�
 ms.author: riande
 ms.date: 08/14/2018
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -13,12 +15,12 @@ no-loc:
 - Razor
 - SignalR
 uid: security/authentication/identity-enable-qrcodes
-ms.openlocfilehash: 4ed5a550b5d3ca00179ae0492bf61e7fe91e324c
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: 4ccfd83c273f7179ac26b075eb33f138e724b967
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85408769"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88019556"
 ---
 # <a name="enable-qr-code-generation-for-totp-authenticator-apps-in-aspnet-core"></a>在 ASP.NET Core 中為 TOTP 驗證器應用程式啟用 QR 代碼產生
 
@@ -30,7 +32,7 @@ QR 代碼需要 ASP.NET Core 2.0 或更新版本。
 
 ::: moniker range=">= aspnetcore-2.0"
 
-ASP.NET Core 提供驗證器應用程式進行個別驗證的支援。 使用以時間為基礎的一次性密碼演算法（TOTP）的雙因素驗證（2FA）驗證器應用程式是2FA 的業界建議方法。 2FA 使用 TOTP 是 SMS 2FA 的慣用選項。 驗證器應用程式提供6到8位數的代碼，使用者必須在確認其使用者名稱和密碼之後輸入。 驗證器應用程式通常會安裝在智慧型手機上。
+ASP.NET Core 提供驗證器應用程式進行個別驗證的支援。 使用以時間為基礎的一次性密碼演算法 (TOTP) ， (2FA) 驗證器應用程式的雙因素驗證，是2FA 的業界建議方法。 2FA 使用 TOTP 是 SMS 2FA 的慣用選項。 驗證器應用程式提供6到8位數的代碼，使用者必須在確認其使用者名稱和密碼之後輸入。 驗證器應用程式通常會安裝在智慧型手機上。
 
 ASP.NET Core web 應用程式範本支援驗證器，但不提供 QRCode 產生的支援。 QRCode 產生器會簡化2FA 的設定。 本檔將引導您在2FA 設定頁面中新增[QR 代碼](https://wikipedia.org/wiki/QR_code)產生。
 
@@ -53,7 +55,7 @@ ASP.NET Core web 應用程式範本支援驗證器，但不提供 QRCode 產生�
 
 ::: moniker range="= aspnetcore-2.0"
 
-* 在*pages/Account/manage/EnableAuthenticator. cshtml* （ Razor Pages）或*Views/manage/EnableAuthenticator* （MVC）中，找出 `Scripts` 檔案結尾的區段：
+* 在 [*頁面/帳戶/管理/EnableAuthenticator* ] (Razor 頁面) 或 [ *Views/manage/EnableAuthenticator* ] (MVC) 中，找出 `Scripts` 檔案結尾處的區段：
 
 ::: moniker-end
 
@@ -99,7 +101,7 @@ QR 代碼中的網站名稱是取自您最初建立專案時所選擇的專案�
 
 ::: moniker range="= aspnetcore-2.0"
 
-QR 代碼中的網站名稱是取自您最初建立專案時所選擇的專案名稱。 您可以藉由尋找 `GenerateQrCodeUri(string email, string unformattedKey)` *頁面/帳戶/管理/EnableAuthenticator*檔中的方法， Razor 或 controller */ManageController .cs* （MVC）檔案來變更它。
+QR 代碼中的網站名稱是取自您最初建立專案時所選擇的專案名稱。 您可以藉由尋找 `GenerateQrCodeUri(string email, string unformattedKey)` *頁面/帳戶/管理/ (EnableAuthenticator*中的方法 Razor) 檔案或 CONTROLLER */ManageController* (MVC) 檔案來變更它。
 
 ::: moniker-end
 
@@ -131,6 +133,6 @@ private string GenerateQrCodeUri(string email, string unformattedKey)
 
 ## <a name="totp-client-and-server-time-skew"></a>TOTP 用戶端與伺服器時間偏差
 
-TOTP （以時間為基礎的單次密碼）驗證取決於伺服器和驗證器裝置是否有精確的時間。 權杖只會在30秒後結束。 如果 TOTP 2FA 登入失敗，請檢查伺服器時間是否正確，並最好同步處理到精確的 NTP 服務。
+TOTP (以時間為基礎的一次性密碼) 驗證取決於伺服器和驗證器裝置是否有精確的時間。 權杖只會在30秒後結束。 如果 TOTP 2FA 登入失敗，請檢查伺服器時間是否正確，並最好同步處理到精確的 NTP 服務。
 
 ::: moniker-end

@@ -5,6 +5,8 @@ description: 瞭解 ASP.NET Core 資料保護子機碼衍生和已驗證加密�
 ms.author: riande
 ms.date: 10/14/2016
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -13,18 +15,18 @@ no-loc:
 - Razor
 - SignalR
 uid: security/data-protection/implementation/subkeyderivation
-ms.openlocfilehash: 619a848eb96faab6997f9ddbf4d62a1e04ee66b1
-ms.sourcegitcommit: fa89d6553378529ae86b388689ac2c6f38281bb9
+ms.openlocfilehash: ef9c100df69f9f7a1b51819ebb5721cb4f875ffd
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 07/07/2020
-ms.locfileid: "86060367"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88019686"
 ---
 # <a name="subkey-derivation-and-authenticated-encryption-in-aspnet-core"></a>ASP.NET Core 中的子機碼衍生和驗證的加密
 
 <a name="data-protection-implementation-subkey-derivation"></a>
 
-金鑰通道中的大部分金鑰都會包含某種形式的熵，而且會有一些演算法資訊，說明「CBC 模式加密 + HMAC 驗證」或「GCM 加密 + 驗證」。 在這些情況下，我們會將內嵌的熵稱為此金鑰的主要金鑰資料（或公里），而我們會執行金鑰衍生函式來衍生金鑰，以用於實際的密碼編譯作業。
+金鑰通道中的大部分金鑰都會包含某種形式的熵，而且會有一些演算法資訊，說明「CBC 模式加密 + HMAC 驗證」或「GCM 加密 + 驗證」。 在這些情況下，我們會將內嵌的熵稱為主要金鑰材料 (或此金鑰的公里) ，而我們會執行金鑰衍生函式來衍生金鑰，以用於實際的密碼編譯作業。
 
 > [!NOTE]
 > 金鑰是抽象的，自訂的執行可能不會如下所示。 如果索引鍵提供自己的實作為 `IAuthenticatedEncryptor` ，而不是使用其中一個內建工廠，本節中所述的機制將不再適用。
@@ -33,7 +35,7 @@ ms.locfileid: "86060367"
 
 ## <a name="additional-authenticated-data-and-subkey-derivation"></a>其他已驗證的資料和子機碼衍生
 
-`IAuthenticatedEncryptor`介面可作為所有已驗證之加密作業的核心介面。 其 `Encrypt` 方法採用兩個緩衝區：純文字和 additionalAuthenticatedData （AAD）。 純文字內容不會變更的呼叫 `IDataProtector.Protect` ，但是 AAD 是由系統產生，並由三個元件所組成：
+`IAuthenticatedEncryptor`介面可作為所有已驗證之加密作業的核心介面。 其 `Encrypt` 方法採用兩個緩衝區：純文字和 additionalAuthenticatedData (AAD) 。 純文字內容不會變更的呼叫 `IDataProtector.Protect` ，但是 AAD 是由系統產生，並由三個元件所組成：
 
 1. 32-bit 魔術 header 09 F0 C9 F0，可識別此版本的資料保護系統。
 
@@ -45,9 +47,9 @@ ms.locfileid: "86060367"
 
 `( K_E, K_H ) = SP800_108_CTR_HMACSHA512(K_M, AAD, contextHeader || keyModifier)`
 
-在這裡，我們會在計數器模式下呼叫 NIST SP800-108 KDF （請參閱[NIST SP800-108](https://nvlpubs.nist.gov/nistpubs/Legacy/SP/nistspecialpublication800-108.pdf)，Sec. 5.1），並提供下列參數：
+在這裡，我們會在 Counter 模式下呼叫 NIST SP800-108 KDF， (參閱[NIST SP800-108](https://nvlpubs.nist.gov/nistpubs/Legacy/SP/nistspecialpublication800-108.pdf)，Sec. 5.1) ，並具有下列參數：
 
-* 金鑰衍生金鑰（KDK） =`K_M`
+* 金鑰衍生金鑰 (KDK) =`K_M`
 
 * PRF = HMACSHA512
 
@@ -79,4 +81,4 @@ ms.locfileid: "86060367"
 `output := keyModifier || nonce || E_gcm (K_E,nonce,data) || authTag`
 
 > [!NOTE]
-> 雖然 GCM 原本就支援 AAD 的概念，但我們仍在將 AAD 只提供給原始 KDF，選擇將空字串傳遞至 GCM 以取得其 AAD 參數。 這種情況的原因是兩折迭。 首先，[為了支援靈活性](xref:security/data-protection/implementation/context-headers#data-protection-implementation-context-headers)，我們不想 `K_M` 直接使用做為加密金鑰。 此外，GCM 會對其輸入施加非常嚴格的唯一性需求。 在兩個或多個不同的輸入資料集上，使用相同（金鑰、nonce）配對來叫用 GCM 加密常式的機率，不得超過 2 ^ 32。 如果我們修正 `K_E` 了，我們在執行 2 ^-32 限制的 afoul 前，無法執行 2 ^ 32 個以上的加密作業。 這看起來可能像是非常大量的作業，但高流量的 web 伺服器可以只在這些金鑰的正常存留期間，在數天內經歷4000000000個要求。 為了保持符合 2 ^-32 機率限制，我們會繼續使用128位金鑰修飾詞和96位 nonce，以徹底擴充任何指定的可用作業計數 `K_M` 。 為了簡單起見，我們會在 CBC 與 GCM 作業之間共用 KDF 程式碼路徑，而且由於 AAD 已列入 KDF 中，因此不需要將它轉送到 GCM 常式。
+> 雖然 GCM 原本就支援 AAD 的概念，但我們仍在將 AAD 只提供給原始 KDF，選擇將空字串傳遞至 GCM 以取得其 AAD 參數。 這種情況的原因是兩折迭。 首先，[為了支援靈活性](xref:security/data-protection/implementation/context-headers#data-protection-implementation-context-headers)，我們不想 `K_M` 直接使用做為加密金鑰。 此外，GCM 會對其輸入施加非常嚴格的唯一性需求。 在兩個或多個不同的輸入資料集上，使用相同的 (金鑰來叫用 GCM 加密常式的機率，nonce) 配對不得超過 2 ^ 32。 如果我們修正 `K_E` 了，我們在執行 2 ^-32 限制的 afoul 前，無法執行 2 ^ 32 個以上的加密作業。 這看起來可能像是非常大量的作業，但高流量的 web 伺服器可以只在這些金鑰的正常存留期間，在數天內經歷4000000000個要求。 為了保持符合 2 ^-32 機率限制，我們會繼續使用128位金鑰修飾詞和96位 nonce，以徹底擴充任何指定的可用作業計數 `K_M` 。 為了簡單起見，我們會在 CBC 與 GCM 作業之間共用 KDF 程式碼路徑，而且由於 AAD 已列入 KDF 中，因此不需要將它轉送到 GCM 常式。

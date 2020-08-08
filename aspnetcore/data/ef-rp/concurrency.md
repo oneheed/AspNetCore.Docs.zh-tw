@@ -6,6 +6,8 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 07/22/2019
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -14,14 +16,14 @@ no-loc:
 - Razor
 - SignalR
 uid: data/ef-rp/concurrency
-ms.openlocfilehash: ff9e01df002ac0fc94ced6d5d093099d66a14f36
-ms.sourcegitcommit: 14c3d111f9d656c86af36ecb786037bf214f435c
+ms.openlocfilehash: bb29001e30578e0992e578c2f98cda82c5dcf185
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 07/09/2020
-ms.locfileid: "86176284"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88018659"
 ---
-# <a name="part-8-razor-pages-with-ef-core-in-aspnet-core---concurrency"></a>第8部分， Razor ASP.NET Core 並行 EF Core 的頁面
+# <a name="part-8-no-locrazor-pages-with-ef-core-in-aspnet-core---concurrency"></a>第8部分， Razor ASP.NET Core 並行 EF Core 的頁面
 
 作者：[Rick Anderson](https://twitter.com/RickAndMSFT)、[Tom Dykstra](https://github.com/tdykstra)，以及 [Jon P Smith](https://twitter.com/thereformedprog)
 
@@ -315,7 +317,7 @@ Scaffolding 工具會為 Index 頁面建立 `RowVersion` 資料行，但該欄�
 
 ![變更之後的 Department [編輯] 頁面 2](concurrency/_static/edit-after-change-230.png)
 
-按一下 [儲存]。 您會看到所有不符合資料庫值欄位的錯誤訊息：
+按一下 **[儲存]** 。 您會看到所有不符合資料庫值欄位的錯誤訊息：
 
 ![Department [編輯] 頁面錯誤訊息](concurrency/_static/edit-error30.png)
 
@@ -526,7 +528,7 @@ dotnet ef database update
 
 # <a name="visual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code)
 
- 執行以下命令：
+ 執行下列命令：
 
   ```dotnetcli
   dotnet aspnet-codegenerator razorpage -m Department -dc SchoolContext -udl -outDir Pages\Departments --referenceScriptLibraries
@@ -611,7 +613,7 @@ Scaffolding 引擎會在 [索引] 頁面中建立 `RowVersion` 資料行，但�
 
 ![變更之後的 Department [編輯] 頁面 2](concurrency/_static/edit-after-change-2.png)
 
-按一下 [儲存]。 您會看到所有不符合資料庫值之欄位的錯誤訊息：
+按一下 **[儲存]** 。 您會看到所有不符合資料庫值之欄位的錯誤訊息：
 
 ![Department [編輯] 頁面錯誤訊息](concurrency/_static/edit-error.png)
 

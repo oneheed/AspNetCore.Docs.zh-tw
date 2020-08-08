@@ -7,6 +7,8 @@ ms.author: anurse
 ms.custom: mvc
 ms.date: 11/12/2019
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -15,14 +17,14 @@ no-loc:
 - Razor
 - SignalR
 uid: signalr/api-design
-ms.openlocfilehash: 9ad8d30da552d3d3084534b8c7ca57386ad111ac
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: ef0285c611bd41d7fe686a4b370b6daae9be9174
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85407794"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88018984"
 ---
-# <a name="signalr-api-design-considerations"></a>SignalRAPI 設計考慮
+# <a name="no-locsignalr-api-design-considerations"></a>SignalRAPI 設計考慮
 
 [Andrew Stanton-護士](https://twitter.com/anurse)
 
@@ -30,7 +32,7 @@ ms.locfileid: "85407794"
 
 ## <a name="use-custom-object-parameters-to-ensure-backwards-compatibility"></a>使用自訂物件參數來確保回溯相容性
 
-將參數新增至 SignalR 中樞方法（在用戶端或伺服器上）是一項*重大變更*。 這表示較舊的用戶端/伺服器在嘗試叫用方法時，如果沒有適當數目的參數，就會收到錯誤。 不過，將屬性新增至自訂物件參數並**不**是一種中斷變更。 這可以用來設計可在用戶端或伺服器上復原變更的相容 Api。
+將參數新增至 SignalR 中樞方法 (在用戶端或伺服器上) 是一項*重大變更*。 這表示較舊的用戶端/伺服器在嘗試叫用方法時，如果沒有適當數目的參數，就會收到錯誤。 不過，將屬性新增至自訂物件參數並**不**是一種中斷變更。 這可以用來設計可在用戶端或伺服器上復原變更的相容 Api。
 
 例如，假設有一個伺服器端 API，如下所示：
 

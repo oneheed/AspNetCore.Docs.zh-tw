@@ -5,6 +5,8 @@ description: 了解 ASP.NET Core MVC 如何使用路由中介軟體來比對內�
 ms.author: riande
 ms.date: 3/25/2020
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -13,12 +15,12 @@ no-loc:
 - Razor
 - SignalR
 uid: mvc/controllers/routing
-ms.openlocfilehash: 962b42239b2101fc95e55fb38ce214481bf0ef01
-ms.sourcegitcommit: ca6a1f100c1a3f59999189aa962523442dd4ead1
+ms.openlocfilehash: 4d367a6b15fdcf9ef6be1bac749368fd48fa259e
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 07/30/2020
-ms.locfileid: "87444140"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88020362"
 ---
 # <a name="routing-to-controller-actions-in-aspnet-core"></a>ASP.NET Core 中的路由至控制器動作
 
@@ -403,7 +405,7 @@ REST Api 應使用屬性路由，將應用程式的功能模型建立為一組�
 
 在整個應用程式內路由名稱必須是唯一的。
 
-將上述程式碼與傳統預設路由相比較，其會將 `id` 參數定義為選擇性（ `{id?}` ）。 精確指定 Api 的功能有其優點，例如允許 `/products` 和 `/products/5` 分派至不同的動作。
+將上述程式碼與傳統預設路由相比較，將 `id` 參數定義為選擇性 (`{id?}`) 。 精確指定 Api 的功能有其優點，例如允許 `/products` 和 `/products/5` 分派至不同的動作。
 
 <a name="routing-combining-ref-label"></a>
 
@@ -430,7 +432,7 @@ REST Api 應使用屬性路由，將應用程式的功能模型建立為一組�
 | ----------------- | ------------ | --------- |
 | `[Route("")]` | 是 | `"Home"` |
 | `[Route("Index")]` | 是 | `"Home/Index"` |
-| `[Route("/")]` | **否** | `""` |
+| `[Route("/")]` | 否 | `""` |
 | `[Route("About")]` | 是 | `"Home/About"` |
 
 <a name="routing-ordering-ref-label"></a>
@@ -721,10 +723,10 @@ result: /UrlGeneration/Destination
 
 您可能預期會遇到此預設路由的問題 `{controller}/{action}/{id?}` 。 這個問題在實務上很罕見，因為 `Url.Action` 一律會明確指定 `controller` 和 `action` 值。
 
-Url 的數個多載[。動作](xref:Microsoft.AspNetCore.Mvc.IUrlHelper.Action*)會接受路由值物件，以提供和以外的路由參數值 `controller` `action` 。 「路由值」物件經常與搭配使用 `id` 。 例如： `Url.Action("Buy", "Products", new { id = 17 })` 。 路由值物件：
+Url 的數個多載[。動作](xref:Microsoft.AspNetCore.Mvc.IUrlHelper.Action*)會接受路由值物件，以提供和以外的路由參數值 `controller` `action` 。 「路由值」物件經常與搭配使用 `id` 。 例如，`Url.Action("Buy", "Products", new { id = 17 })`。 路由值物件：
 
 * 依照慣例，通常是匿名型別的物件。
-* 可以是 `IDictionary<>` 或[POCO](https://wikipedia.org/wiki/Plain_old_CLR_object)）。
+* 可以是 `IDictionary<>` 或[POCO](https://wikipedia.org/wiki/Plain_old_CLR_object)) 。
 
 不符合路由參數的任何額外路由值都會放在查詢字串中。
 
@@ -854,7 +856,7 @@ TagHelper 透過 `form` TagHelper 和 `<a>` TagHelper 產生 URL。 這兩者使
 ## <a name="sample-code"></a>範例程式碼
 
  * [MyDisplayRouteInfo](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/mvc/controllers/routing/samples/3.x/main/Extensions/ControllerContextExtensions.cs)方法包含在[範例下載](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/mvc/controllers/routing/samples/3.x)中，可用來顯示路由資訊。
-* [查看或下載範例程式碼](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/mvc/controllers/routing/samples/3.x)（[如何下載](xref:index#how-to-download-a-sample)）
+* [查看或下載範例程式碼](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/mvc/controllers/routing/samples/3.x) ([如何下載](xref:index#how-to-download-a-sample)) 
 
 [!INCLUDE[](~/includes/dbg-route.md)]
 
@@ -1226,7 +1228,7 @@ Razor頁面路由和 MVC 控制器路由會共用一個執行。 頁面主題中
 
 ## <a name="token-replacement-in-route-templates-controller-action-area"></a>路由範本中的語彙基元取代 ([controller]、[action]、[area])
 
-為了方便起見，屬性路由支援以方括弧（，）括住標記來*取代標記* `[` `]` 。 語彙基元 `[action]`、`[area]` 與 `[controller]` 會分別以定義路由之動作的動作名稱值、區域名稱值和控制器名稱值來取代。 在下列範例中，動作會符合註解中所述的 URL 路徑：
+為了方便起見，屬性路由支援*標記取代*，方法是以方括弧括住標記 (`[` ， `]`) 。 語彙基元 `[action]`、`[area]` 與 `[controller]` 會分別以定義路由之動作的動作名稱值、區域名稱值和控制器名稱值來取代。 在下列範例中，動作會符合註解中所述的 URL 路徑：
 
 [!code-csharp[](routing/samples/2.x/main/Controllers/ProductsController.cs?range=7-11,13-17,20-22)]
 

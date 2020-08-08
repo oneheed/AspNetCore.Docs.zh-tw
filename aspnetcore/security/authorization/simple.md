@@ -5,6 +5,8 @@ description: 瞭解如何使用授權屬性來限制 ASP.NET Core 控制器和�
 ms.author: riande
 ms.date: 10/14/2016
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -13,12 +15,12 @@ no-loc:
 - Razor
 - SignalR
 uid: security/authorization/simple
-ms.openlocfilehash: 09514032349d489b73d5bb785f11e44ca18b169c
-ms.sourcegitcommit: 1b89fc58114a251926abadfd5c69c120f1ba12d8
+ms.openlocfilehash: b503f5e79cbfbbd3e74e18356884c3223ede66a6
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 07/24/2020
-ms.locfileid: "87160242"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88019023"
 ---
 # <a name="simple-authorization-in-aspnet-core"></a>ASP.NET Core 中的簡單授權
 
@@ -80,7 +82,7 @@ public class AccountController : Controller
 這只允許已驗證的使用者 `AccountController` 存取，除了可 `Login` 供所有人使用的動作（不論其已驗證或未驗證/匿名狀態為何）。
 
 > [!WARNING]
-> `[AllowAnonymous]`略過所有授權語句。 如果您結合 `[AllowAnonymous]` 和 any `[Authorize]` 屬性，則 `[Authorize]` 會忽略屬性。 例如，如果您在 `[AllowAnonymous]` 控制器層級套用，則 `[Authorize]` 會忽略相同控制器（或其中任何動作）上的任何屬性。
+> `[AllowAnonymous]`略過所有授權語句。 如果您結合 `[AllowAnonymous]` 和 any `[Authorize]` 屬性，則 `[Authorize]` 會忽略屬性。 例如，如果您在 `[AllowAnonymous]` 控制器層級套用，則 `[Authorize]` 會忽略相同控制器上 (或其任何動作上的任何屬性) 。
 
 [!INCLUDE[](~/includes/requireAuth.md)]
 

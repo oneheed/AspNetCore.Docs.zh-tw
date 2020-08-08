@@ -7,6 +7,8 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 02/07/2020
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -15,14 +17,14 @@ no-loc:
 - Razor
 - SignalR
 uid: razor-pages/razor-pages-conventions
-ms.openlocfilehash: 3cb83d8cfd058c4d0a93ece9a4f19b6407dac384
-ms.sourcegitcommit: d9ae1f352d372a20534b57e23646c1a1d9171af1
+ms.openlocfilehash: 5fbb72d2195ca9fc1494f15ba0045cbb2707f72c
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 07/21/2020
-ms.locfileid: "86568856"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88019504"
 ---
-# <a name="razor-pages-route-and-app-conventions-in-aspnet-core"></a>RazorASP.NET Core 中的頁面路由和應用程式慣例
+# <a name="no-locrazor-pages-route-and-app-conventions-in-aspnet-core"></a>RazorASP.NET Core 中的頁面路由和應用程式慣例
 
 ::: moniker range=">= aspnetcore-3.0"
 
@@ -34,9 +36,9 @@ ms.locfileid: "86568856"
 
 有保留字無法做為路由區段或參數名稱使用。 如需詳細資訊，請參閱[路由：保留的路由名稱](xref:mvc/controllers/routing#reserved-routing-names)。
 
-[查看或下載範例程式碼](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/razor-pages/razor-pages-conventions/samples/)（[如何下載](xref:index#how-to-download-a-sample)）
+[查看或下載範例程式碼](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/razor-pages/razor-pages-conventions/samples/) ([如何下載](xref:index#how-to-download-a-sample)) 
 
-| 情節 | 範例會示範 ... |
+| 狀況 | 範例會示範 ... |
 | -------- | --------------------------- |
 | [模型慣例](#model-conventions)<br><br>Conventions.Add<ul><li>IPageRouteModelConvention</li><li>IPageApplicationModelConvention</li><li>IPageHandlerModelConvention</li></ul> | 將路由範本和標頭新增至應用程式的頁面。 |
 | [頁面路由動作慣例](#page-route-action-conventions)<ul><li>AddFolderRouteModelConvention</li><li>AddPageRouteModelConvention</li><li>AddPageRoute</li></ul> | 將路由範本新增至資料夾中的頁面，以及新增至單一頁面。 |
@@ -68,17 +70,17 @@ public void ConfigureServices(IServiceCollection services)
 
 ## <a name="route-order"></a>路由順序
 
-路由會指定 <xref:Microsoft.AspNetCore.Mvc.ApplicationModels.AttributeRouteModel.Order*> 進行處理（路由對應）。
+路由會指定 <xref:Microsoft.AspNetCore.Mvc.ApplicationModels.AttributeRouteModel.Order*> 處理 (路由符合) 。
 
 | 單            | 行為 |
 | :--------------: | -------- |
 | -1               | 在處理其他路由之前，會先處理路由。 |
-| 0                | 未指定順序（預設值）。 Not 指派 `Order` （ `Order = null` ）預設會將路由 `Order` 設為0（零）以進行處理。 |
+| 0                |  (預設值) ，未指定順序。 不指派 `Order` (`Order = null`) 會將路由預設為 `Order` 0 (零) 以進行處理。 |
 | 1、2、 &hellip; n | 指定路由處理順序。 |
 
 路由處理是依照慣例所建立：
 
-* 路由會依序處理（-1、0、1、2、 &hellip; n）。
+* 路由會依序處理 (-1、0、1、2、 &hellip; n) 。
 * 當路由具有相同的時 `Order` ，最特定的路由會先進行比對，後面接著較少的特定路由。
 * 當具有相同 `Order` 和相同數目之參數的路由符合要求 URL 時，路由會依其加入至的順序進行處理 <xref:Microsoft.AspNetCore.Mvc.ApplicationModels.PageConventionCollection> 。
 
@@ -100,9 +102,9 @@ Razor頁面路由和 MVC 控制器路由會共用一個執行。 如需有關 MV
 
 <xref:Microsoft.AspNetCore.Mvc.ApplicationModels.AttributeRouteModel> 的 <xref:Microsoft.AspNetCore.Mvc.ApplicationModels.AttributeRouteModel.Order*> 屬性設定為 `1`。 這可確保範例應用程式中的下列路由符合行為：
 
-* `TheContactPage/{text?}`稍後會在主題中新增的路由範本。 連絡人頁面路由的預設順序為 `null` （ `Order = 0` ），因此它會符合 `{globalTemplate?}` 路由範本。
+* `TheContactPage/{text?}`稍後會在主題中新增的路由範本。 連絡人頁面路由的預設順序是 `null` (`Order = 0`) ，因此它會符合 `{globalTemplate?}` 路由範本。
 * `{aboutTemplate?}`稍後會在主題中新增路由範本。 `{aboutTemplate?}` 範本會指定 `Order` 為 `2`。 在 `/About/RouteDataValue` 上要求 About 頁面時，由於設定 `Order` 屬性之故，因此 "RouteDataValue" 會載入至 `RouteData.Values["globalTemplate"]` (`Order = 1`)，而不是 `RouteData.Values["aboutTemplate"]` (`Order = 2`)。
-* `{otherPagesTemplate?}`稍後會在主題中新增路由範本。 `{otherPagesTemplate?}` 範本會指定 `Order` 為 `2`。 當使用路由參數要求*Pages/OtherPages*資料夾中的任何頁面時（例如， `/OtherPages/Page1/RouteDataValue` ），會將 "因此 routedatavalue" 載入至 `RouteData.Values["globalTemplate"]` （ `Order = 1` ），而不是 `RouteData.Values["otherPagesTemplate"]` （）， `Order = 2` 因為設定了 `Order` 屬性。
+* `{otherPagesTemplate?}`稍後會在主題中新增路由範本。 `{otherPagesTemplate?}` 範本會指定 `Order` 為 `2`。 當使用路由參數要求*Pages/OtherPages*資料夾中的任何頁面時 (例如， `/OtherPages/Page1/RouteDataValue`) ，"因此 routedatavalue" 會載入 `RouteData.Values["globalTemplate"]` (`Order = 1`) ，而不是 `RouteData.Values["otherPagesTemplate"]` (`Order = 2`) 因為設定 `Order` 屬性。
 
 盡可能不要設定 `Order` ，這會導致 `Order = 0` 。 依賴路由來選取正確的路由。
 
@@ -154,7 +156,7 @@ Razor<xref:Microsoft.AspNetCore.Mvc.RazorPages.RazorPagesOptions.Conventions>當
 
 [!code-csharp[](razor-pages-conventions/samples/3.x/SampleApp/Startup.cs?name=snippet3)]
 
-<xref:Microsoft.AspNetCore.Mvc.ApplicationModels.AttributeRouteModel> 的 <xref:Microsoft.AspNetCore.Mvc.ApplicationModels.AttributeRouteModel.Order*> 屬性設定為 `2`。 這可確保 `{globalTemplate?}` 當提供單一路由值時，的範本（在主題中稍早設定為 `1` ）會獲得第一個路由資料值位置的優先權。 如果使用路由參數值要求*Pages/OtherPages*資料夾中的頁面（例如 `/OtherPages/Page1/RouteDataValue` ），則會將 "因此 routedatavalue" 載入至 `RouteData.Values["globalTemplate"]` （ `Order = 1` ），而不是 `RouteData.Values["otherPagesTemplate"]` （）， `Order = 2` 因為設定了 `Order` 屬性。
+<xref:Microsoft.AspNetCore.Mvc.ApplicationModels.AttributeRouteModel> 的 <xref:Microsoft.AspNetCore.Mvc.ApplicationModels.AttributeRouteModel.Order*> 屬性設定為 `2`。 這可確保在 `{globalTemplate?}` `1` 提供單一路由值時，第一個路由資料值位置的優先順序會給予) 的主題中稍早設定的 (範本。 如果使用路由參數值要求*Pages/OtherPages*資料夾中的頁面 (例如， `/OtherPages/Page1/RouteDataValue`) ，"因此 routedatavalue" 會載入 `RouteData.Values["globalTemplate"]` () 中， `Order = 1` 而不是 `RouteData.Values["otherPagesTemplate"]` (`Order = 2`) 因為設定 `Order` 屬性。
 
 盡可能不要設定 `Order` ，這會導致 `Order = 0` 。 依賴路由來選取正確的路由。
 
@@ -170,7 +172,7 @@ Razor<xref:Microsoft.AspNetCore.Mvc.RazorPages.RazorPagesOptions.Conventions>當
 
 [!code-csharp[](razor-pages-conventions/samples/3.x/SampleApp/Startup.cs?name=snippet4)]
 
-<xref:Microsoft.AspNetCore.Mvc.ApplicationModels.AttributeRouteModel> 的 <xref:Microsoft.AspNetCore.Mvc.ApplicationModels.AttributeRouteModel.Order*> 屬性設定為 `2`。 這可確保 `{globalTemplate?}` 當提供單一路由值時，的範本（在主題中稍早設定為 `1` ）會獲得第一個路由資料值位置的優先權。 如果要求的是「關於」頁面，其中的路由參數值為 `/About/RouteDataValue` ，則 "因此 routedatavalue" 會載入至 `RouteData.Values["globalTemplate"]` （ `Order = 1` ），而不是 `RouteData.Values["aboutTemplate"]` （ `Order = 2` ），因為設定了 `Order` 屬性。
+<xref:Microsoft.AspNetCore.Mvc.ApplicationModels.AttributeRouteModel> 的 <xref:Microsoft.AspNetCore.Mvc.ApplicationModels.AttributeRouteModel.Order*> 屬性設定為 `2`。 這可確保在 `{globalTemplate?}` `1` 提供單一路由值時，第一個路由資料值位置的優先順序會給予) 的主題中稍早設定的 (範本。 如果要求 [關於] 頁面時使用路由參數值 `/About/RouteDataValue` ，則 "因此 routedatavalue" 會載入 `RouteData.Values["globalTemplate"]` () 中， `Order = 1` 而不會 `RouteData.Values["aboutTemplate"]` `Order = 2` 因為設定屬性而 () `Order` 。
 
 盡可能不要設定 `Order` ，這會導致 `Order = 0` 。 依賴路由來選取正確的路由。
 
@@ -296,7 +298,7 @@ Contact 頁面也可以透過其預設路由在 `/Contact` 上連線。
 
 頁面會忽略 MVC[動作篩選準則](xref:mvc/controllers/filters#action-filters) Razor ，因為 Razor 頁面會使用處理程式方法。 其他類型的 MVC 篩選條件可供您使用：[Authorization](xref:mvc/controllers/filters#authorization-filters)、[Exception](xref:mvc/controllers/filters#exception-filters)、[Resource](xref:mvc/controllers/filters#resource-filters) 和 [Result](xref:mvc/controllers/filters#result-filters)。 如需詳細資訊，請參閱[篩選條件](xref:mvc/controllers/filters)主題。
 
-頁面篩選準則（ <xref:Microsoft.AspNetCore.Mvc.Filters.IPageFilter> ）是適用于頁面的篩選 Razor 。 如需詳細資訊，請參閱[ Razor 頁面的篩選方法](xref:razor-pages/filter)。
+[頁面篩選] ([ <xref:Microsoft.AspNetCore.Mvc.Filters.IPageFilter>) ] 是適用于 Razor 頁面的篩選。 如需詳細資訊，請參閱[ Razor 頁面的篩選方法](xref:razor-pages/filter)。
 
 ## <a name="additional-resources"></a>其他資源
 
@@ -315,9 +317,9 @@ Contact 頁面也可以透過其預設路由在 `/Contact` 上連線。
 
 有保留字無法做為路由區段或參數名稱使用。 如需詳細資訊，請參閱[路由：保留的路由名稱](xref:fundamentals/routing#reserved-routing-names)。
 
-[查看或下載範例程式碼](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/razor-pages/razor-pages-conventions/samples/)（[如何下載](xref:index#how-to-download-a-sample)）
+[查看或下載範例程式碼](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/razor-pages/razor-pages-conventions/samples/) ([如何下載](xref:index#how-to-download-a-sample)) 
 
-| 情節 | 範例會示範 ... |
+| 狀況 | 範例會示範 ... |
 | -------- | --------------------------- |
 | [模型慣例](#model-conventions)<br><br>Conventions.Add<ul><li>IPageRouteModelConvention</li><li>IPageApplicationModelConvention</li><li>IPageHandlerModelConvention</li></ul> | 將路由範本和標頭新增至應用程式的頁面。 |
 | [頁面路由動作慣例](#page-route-action-conventions)<ul><li>AddFolderRouteModelConvention</li><li>AddPageRouteModelConvention</li><li>AddPageRoute</li></ul> | 將路由範本新增至資料夾中的頁面，以及新增至單一頁面。 |
@@ -350,17 +352,17 @@ public void ConfigureServices(IServiceCollection services)
 
 ## <a name="route-order"></a>路由順序
 
-路由會指定 <xref:Microsoft.AspNetCore.Mvc.ApplicationModels.AttributeRouteModel.Order*> 進行處理（路由對應）。
+路由會指定 <xref:Microsoft.AspNetCore.Mvc.ApplicationModels.AttributeRouteModel.Order*> 處理 (路由符合) 。
 
 | 單            | 行為 |
 | :--------------: | -------- |
 | -1               | 在處理其他路由之前，會先處理路由。 |
-| 0                | 未指定順序（預設值）。 Not 指派 `Order` （ `Order = null` ）預設會將路由 `Order` 設為0（零）以進行處理。 |
+| 0                |  (預設值) ，未指定順序。 不指派 `Order` (`Order = null`) 會將路由預設為 `Order` 0 (零) 以進行處理。 |
 | 1、2、 &hellip; n | 指定路由處理順序。 |
 
 路由處理是依照慣例所建立：
 
-* 路由會依序處理（-1、0、1、2、 &hellip; n）。
+* 路由會依序處理 (-1、0、1、2、 &hellip; n) 。
 * 當路由具有相同的時 `Order` ，最特定的路由會先進行比對，後面接著較少的特定路由。
 * 當具有相同 `Order` 和相同數目之參數的路由符合要求 URL 時，路由會依其加入至的順序進行處理 <xref:Microsoft.AspNetCore.Mvc.ApplicationModels.PageConventionCollection> 。
 
@@ -382,9 +384,9 @@ Razor頁面路由和 MVC 控制器路由會共用一個執行。 如需有關 MV
 
 <xref:Microsoft.AspNetCore.Mvc.ApplicationModels.AttributeRouteModel> 的 <xref:Microsoft.AspNetCore.Mvc.ApplicationModels.AttributeRouteModel.Order*> 屬性設定為 `1`。 這可確保範例應用程式中的下列路由符合行為：
 
-* `TheContactPage/{text?}`稍後會在主題中新增的路由範本。 連絡人頁面路由的預設順序為 `null` （ `Order = 0` ），因此它會符合 `{globalTemplate?}` 路由範本。
+* `TheContactPage/{text?}`稍後會在主題中新增的路由範本。 連絡人頁面路由的預設順序是 `null` (`Order = 0`) ，因此它會符合 `{globalTemplate?}` 路由範本。
 * `{aboutTemplate?}`稍後會在主題中新增路由範本。 `{aboutTemplate?}` 範本會指定 `Order` 為 `2`。 在 `/About/RouteDataValue` 上要求 About 頁面時，由於設定 `Order` 屬性之故，因此 "RouteDataValue" 會載入至 `RouteData.Values["globalTemplate"]` (`Order = 1`)，而不是 `RouteData.Values["aboutTemplate"]` (`Order = 2`)。
-* `{otherPagesTemplate?}`稍後會在主題中新增路由範本。 `{otherPagesTemplate?}` 範本會指定 `Order` 為 `2`。 當使用路由參數要求*Pages/OtherPages*資料夾中的任何頁面時（例如， `/OtherPages/Page1/RouteDataValue` ），會將 "因此 routedatavalue" 載入至 `RouteData.Values["globalTemplate"]` （ `Order = 1` ），而不是 `RouteData.Values["otherPagesTemplate"]` （）， `Order = 2` 因為設定了 `Order` 屬性。
+* `{otherPagesTemplate?}`稍後會在主題中新增路由範本。 `{otherPagesTemplate?}` 範本會指定 `Order` 為 `2`。 當使用路由參數要求*Pages/OtherPages*資料夾中的任何頁面時 (例如， `/OtherPages/Page1/RouteDataValue`) ，"因此 routedatavalue" 會載入 `RouteData.Values["globalTemplate"]` (`Order = 1`) ，而不是 `RouteData.Values["otherPagesTemplate"]` (`Order = 2`) 因為設定 `Order` 屬性。
 
 盡可能不要設定 `Order` ，這會導致 `Order = 0` 。 依賴路由來選取正確的路由。
 
@@ -436,7 +438,7 @@ Razor<xref:Microsoft.AspNetCore.Mvc.RazorPages.RazorPagesOptions.Conventions>當
 
 [!code-csharp[](razor-pages-conventions/samples/2.x/SampleApp/Startup.cs?name=snippet3)]
 
-<xref:Microsoft.AspNetCore.Mvc.ApplicationModels.AttributeRouteModel> 的 <xref:Microsoft.AspNetCore.Mvc.ApplicationModels.AttributeRouteModel.Order*> 屬性設定為 `2`。 這可確保 `{globalTemplate?}` 當提供單一路由值時，的範本（在主題中稍早設定為 `1` ）會獲得第一個路由資料值位置的優先權。 如果使用路由參數值要求*Pages/OtherPages*資料夾中的頁面（例如 `/OtherPages/Page1/RouteDataValue` ），則會將 "因此 routedatavalue" 載入至 `RouteData.Values["globalTemplate"]` （ `Order = 1` ），而不是 `RouteData.Values["otherPagesTemplate"]` （）， `Order = 2` 因為設定了 `Order` 屬性。
+<xref:Microsoft.AspNetCore.Mvc.ApplicationModels.AttributeRouteModel> 的 <xref:Microsoft.AspNetCore.Mvc.ApplicationModels.AttributeRouteModel.Order*> 屬性設定為 `2`。 這可確保在 `{globalTemplate?}` `1` 提供單一路由值時，第一個路由資料值位置的優先順序會給予) 的主題中稍早設定的 (範本。 如果使用路由參數值要求*Pages/OtherPages*資料夾中的頁面 (例如， `/OtherPages/Page1/RouteDataValue`) ，"因此 routedatavalue" 會載入 `RouteData.Values["globalTemplate"]` () 中， `Order = 1` 而不是 `RouteData.Values["otherPagesTemplate"]` (`Order = 2`) 因為設定 `Order` 屬性。
 
 盡可能不要設定 `Order` ，這會導致 `Order = 0` 。 依賴路由來選取正確的路由。
 
@@ -452,7 +454,7 @@ Razor<xref:Microsoft.AspNetCore.Mvc.RazorPages.RazorPagesOptions.Conventions>當
 
 [!code-csharp[](razor-pages-conventions/samples/2.x/SampleApp/Startup.cs?name=snippet4)]
 
-<xref:Microsoft.AspNetCore.Mvc.ApplicationModels.AttributeRouteModel> 的 <xref:Microsoft.AspNetCore.Mvc.ApplicationModels.AttributeRouteModel.Order*> 屬性設定為 `2`。 這可確保 `{globalTemplate?}` 當提供單一路由值時，的範本（在主題中稍早設定為 `1` ）會獲得第一個路由資料值位置的優先權。 如果要求的是「關於」頁面，其中的路由參數值為 `/About/RouteDataValue` ，則 "因此 routedatavalue" 會載入至 `RouteData.Values["globalTemplate"]` （ `Order = 1` ），而不是 `RouteData.Values["aboutTemplate"]` （ `Order = 2` ），因為設定了 `Order` 屬性。
+<xref:Microsoft.AspNetCore.Mvc.ApplicationModels.AttributeRouteModel> 的 <xref:Microsoft.AspNetCore.Mvc.ApplicationModels.AttributeRouteModel.Order*> 屬性設定為 `2`。 這可確保在 `{globalTemplate?}` `1` 提供單一路由值時，第一個路由資料值位置的優先順序會給予) 的主題中稍早設定的 (範本。 如果要求 [關於] 頁面時使用路由參數值 `/About/RouteDataValue` ，則 "因此 routedatavalue" 會載入 `RouteData.Values["globalTemplate"]` () 中， `Order = 1` 而不會 `RouteData.Values["aboutTemplate"]` `Order = 2` 因為設定屬性而 () `Order` 。
 
 盡可能不要設定 `Order` ，這會導致 `Order = 0` 。 依賴路由來選取正確的路由。
 
@@ -586,7 +588,7 @@ Contact 頁面也可以透過其預設路由在 `/Contact` 上連線。
 
 頁面會忽略 MVC[動作篩選準則](xref:mvc/controllers/filters#action-filters) Razor ，因為 Razor 頁面會使用處理程式方法。 其他類型的 MVC 篩選條件可供您使用：[Authorization](xref:mvc/controllers/filters#authorization-filters)、[Exception](xref:mvc/controllers/filters#exception-filters)、[Resource](xref:mvc/controllers/filters#resource-filters) 和 [Result](xref:mvc/controllers/filters#result-filters)。 如需詳細資訊，請參閱[篩選條件](xref:mvc/controllers/filters)主題。
 
-頁面篩選準則（ <xref:Microsoft.AspNetCore.Mvc.Filters.IPageFilter> ）是適用于頁面的篩選 Razor 。 如需詳細資訊，請參閱[ Razor 頁面的篩選方法](xref:razor-pages/filter)。
+[頁面篩選] ([ <xref:Microsoft.AspNetCore.Mvc.Filters.IPageFilter>) ] 是適用于 Razor 頁面的篩選。 如需詳細資訊，請參閱[ Razor 頁面的篩選方法](xref:razor-pages/filter)。
 
 ## <a name="additional-resources"></a>其他資源
 
@@ -605,9 +607,9 @@ Contact 頁面也可以透過其預設路由在 `/Contact` 上連線。
 
 有保留字無法做為路由區段或參數名稱使用。 如需詳細資訊，請參閱[路由：保留的路由名稱](xref:fundamentals/routing#reserved-routing-names)。
 
-[查看或下載範例程式碼](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/razor-pages/razor-pages-conventions/samples/)（[如何下載](xref:index#how-to-download-a-sample)）
+[查看或下載範例程式碼](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/razor-pages/razor-pages-conventions/samples/) ([如何下載](xref:index#how-to-download-a-sample)) 
 
-| 情節 | 範例會示範 ... |
+| 狀況 | 範例會示範 ... |
 | -------- | --------------------------- |
 | [模型慣例](#model-conventions)<br><br>Conventions.Add<ul><li>IPageRouteModelConvention</li><li>IPageApplicationModelConvention</li><li>IPageHandlerModelConvention</li></ul> | 將路由範本和標頭新增至應用程式的頁面。 |
 | [頁面路由動作慣例](#page-route-action-conventions)<ul><li>AddFolderRouteModelConvention</li><li>AddPageRouteModelConvention</li><li>AddPageRoute</li></ul> | 將路由範本新增至資料夾中的頁面，以及新增至單一頁面。 |
@@ -640,17 +642,17 @@ public void ConfigureServices(IServiceCollection services)
 
 ## <a name="route-order"></a>路由順序
 
-路由會指定 <xref:Microsoft.AspNetCore.Mvc.ApplicationModels.AttributeRouteModel.Order*> 進行處理（路由對應）。
+路由會指定 <xref:Microsoft.AspNetCore.Mvc.ApplicationModels.AttributeRouteModel.Order*> 處理 (路由符合) 。
 
 | 單            | 行為 |
 | :--------------: | -------- |
 | -1               | 在處理其他路由之前，會先處理路由。 |
-| 0                | 未指定順序（預設值）。 Not 指派 `Order` （ `Order = null` ）預設會將路由 `Order` 設為0（零）以進行處理。 |
+| 0                |  (預設值) ，未指定順序。 不指派 `Order` (`Order = null`) 會將路由預設為 `Order` 0 (零) 以進行處理。 |
 | 1、2、 &hellip; n | 指定路由處理順序。 |
 
 路由處理是依照慣例所建立：
 
-* 路由會依序處理（-1、0、1、2、 &hellip; n）。
+* 路由會依序處理 (-1、0、1、2、 &hellip; n) 。
 * 當路由具有相同的時 `Order` ，最特定的路由會先進行比對，後面接著較少的特定路由。
 * 當具有相同 `Order` 和相同數目之參數的路由符合要求 URL 時，路由會依其加入至的順序進行處理 <xref:Microsoft.AspNetCore.Mvc.ApplicationModels.PageConventionCollection> 。
 
@@ -672,9 +674,9 @@ Razor頁面路由和 MVC 控制器路由會共用一個執行。 如需有關 MV
 
 <xref:Microsoft.AspNetCore.Mvc.ApplicationModels.AttributeRouteModel> 的 <xref:Microsoft.AspNetCore.Mvc.ApplicationModels.AttributeRouteModel.Order*> 屬性設定為 `1`。 這可確保範例應用程式中的下列路由符合行為：
 
-* `TheContactPage/{text?}`稍後會在主題中新增的路由範本。 連絡人頁面路由的預設順序為 `null` （ `Order = 0` ），因此它會符合 `{globalTemplate?}` 路由範本。
+* `TheContactPage/{text?}`稍後會在主題中新增的路由範本。 連絡人頁面路由的預設順序是 `null` (`Order = 0`) ，因此它會符合 `{globalTemplate?}` 路由範本。
 * `{aboutTemplate?}`稍後會在主題中新增路由範本。 `{aboutTemplate?}` 範本會指定 `Order` 為 `2`。 在 `/About/RouteDataValue` 上要求 About 頁面時，由於設定 `Order` 屬性之故，因此 "RouteDataValue" 會載入至 `RouteData.Values["globalTemplate"]` (`Order = 1`)，而不是 `RouteData.Values["aboutTemplate"]` (`Order = 2`)。
-* `{otherPagesTemplate?}`稍後會在主題中新增路由範本。 `{otherPagesTemplate?}` 範本會指定 `Order` 為 `2`。 當使用路由參數要求*Pages/OtherPages*資料夾中的任何頁面時（例如， `/OtherPages/Page1/RouteDataValue` ），會將 "因此 routedatavalue" 載入至 `RouteData.Values["globalTemplate"]` （ `Order = 1` ），而不是 `RouteData.Values["otherPagesTemplate"]` （）， `Order = 2` 因為設定了 `Order` 屬性。
+* `{otherPagesTemplate?}`稍後會在主題中新增路由範本。 `{otherPagesTemplate?}` 範本會指定 `Order` 為 `2`。 當使用路由參數要求*Pages/OtherPages*資料夾中的任何頁面時 (例如， `/OtherPages/Page1/RouteDataValue`) ，"因此 routedatavalue" 會載入 `RouteData.Values["globalTemplate"]` (`Order = 1`) ，而不是 `RouteData.Values["otherPagesTemplate"]` (`Order = 2`) 因為設定 `Order` 屬性。
 
 盡可能不要設定 `Order` ，這會導致 `Order = 0` 。 依賴路由來選取正確的路由。
 
@@ -726,7 +728,7 @@ Razor<xref:Microsoft.AspNetCore.Mvc.RazorPages.RazorPagesOptions.Conventions>當
 
 [!code-csharp[](razor-pages-conventions/samples/2.x/SampleApp/Startup.cs?name=snippet3)]
 
-<xref:Microsoft.AspNetCore.Mvc.ApplicationModels.AttributeRouteModel> 的 <xref:Microsoft.AspNetCore.Mvc.ApplicationModels.AttributeRouteModel.Order*> 屬性設定為 `2`。 這可確保 `{globalTemplate?}` 當提供單一路由值時，的範本（在主題中稍早設定為 `1` ）會獲得第一個路由資料值位置的優先權。 如果使用路由參數值要求*Pages/OtherPages*資料夾中的頁面（例如 `/OtherPages/Page1/RouteDataValue` ），則會將 "因此 routedatavalue" 載入至 `RouteData.Values["globalTemplate"]` （ `Order = 1` ），而不是 `RouteData.Values["otherPagesTemplate"]` （）， `Order = 2` 因為設定了 `Order` 屬性。
+<xref:Microsoft.AspNetCore.Mvc.ApplicationModels.AttributeRouteModel> 的 <xref:Microsoft.AspNetCore.Mvc.ApplicationModels.AttributeRouteModel.Order*> 屬性設定為 `2`。 這可確保在 `{globalTemplate?}` `1` 提供單一路由值時，第一個路由資料值位置的優先順序會給予) 的主題中稍早設定的 (範本。 如果使用路由參數值要求*Pages/OtherPages*資料夾中的頁面 (例如， `/OtherPages/Page1/RouteDataValue`) ，"因此 routedatavalue" 會載入 `RouteData.Values["globalTemplate"]` () 中， `Order = 1` 而不是 `RouteData.Values["otherPagesTemplate"]` (`Order = 2`) 因為設定 `Order` 屬性。
 
 盡可能不要設定 `Order` ，這會導致 `Order = 0` 。 依賴路由來選取正確的路由。
 
@@ -742,7 +744,7 @@ Razor<xref:Microsoft.AspNetCore.Mvc.RazorPages.RazorPagesOptions.Conventions>當
 
 [!code-csharp[](razor-pages-conventions/samples/2.x/SampleApp/Startup.cs?name=snippet4)]
 
-<xref:Microsoft.AspNetCore.Mvc.ApplicationModels.AttributeRouteModel> 的 <xref:Microsoft.AspNetCore.Mvc.ApplicationModels.AttributeRouteModel.Order*> 屬性設定為 `2`。 這可確保 `{globalTemplate?}` 當提供單一路由值時，的範本（在主題中稍早設定為 `1` ）會獲得第一個路由資料值位置的優先權。 如果要求的是「關於」頁面，其中的路由參數值為 `/About/RouteDataValue` ，則 "因此 routedatavalue" 會載入至 `RouteData.Values["globalTemplate"]` （ `Order = 1` ），而不是 `RouteData.Values["aboutTemplate"]` （ `Order = 2` ），因為設定了 `Order` 屬性。
+<xref:Microsoft.AspNetCore.Mvc.ApplicationModels.AttributeRouteModel> 的 <xref:Microsoft.AspNetCore.Mvc.ApplicationModels.AttributeRouteModel.Order*> 屬性設定為 `2`。 這可確保在 `{globalTemplate?}` `1` 提供單一路由值時，第一個路由資料值位置的優先順序會給予) 的主題中稍早設定的 (範本。 如果要求 [關於] 頁面時使用路由參數值 `/About/RouteDataValue` ，則 "因此 routedatavalue" 會載入 `RouteData.Values["globalTemplate"]` () 中， `Order = 1` 而不會 `RouteData.Values["aboutTemplate"]` `Order = 2` 因為設定屬性而 () `Order` 。
 
 盡可能不要設定 `Order` ，這會導致 `Order = 0` 。 依賴路由來選取正確的路由。
 
@@ -842,7 +844,7 @@ Contact 頁面也可以透過其預設路由在 `/Contact` 上連線。
 
 頁面會忽略 MVC[動作篩選準則](xref:mvc/controllers/filters#action-filters) Razor ，因為 Razor 頁面會使用處理程式方法。 其他類型的 MVC 篩選條件可供您使用：[Authorization](xref:mvc/controllers/filters#authorization-filters)、[Exception](xref:mvc/controllers/filters#exception-filters)、[Resource](xref:mvc/controllers/filters#resource-filters) 和 [Result](xref:mvc/controllers/filters#result-filters)。 如需詳細資訊，請參閱[篩選條件](xref:mvc/controllers/filters)主題。
 
-頁面篩選準則（ <xref:Microsoft.AspNetCore.Mvc.Filters.IPageFilter> ）是適用于頁面的篩選 Razor 。 如需詳細資訊，請參閱[ Razor 頁面的篩選方法](xref:razor-pages/filter)。
+[頁面篩選] ([ <xref:Microsoft.AspNetCore.Mvc.Filters.IPageFilter>) ] 是適用于 Razor 頁面的篩選。 如需詳細資訊，請參閱[ Razor 頁面的篩選方法](xref:razor-pages/filter)。
 
 ## <a name="additional-resources"></a>其他資源
 

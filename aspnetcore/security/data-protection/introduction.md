@@ -6,6 +6,8 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 10/24/2018
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -14,12 +16,12 @@ no-loc:
 - Razor
 - SignalR
 uid: security/data-protection/introduction
-ms.openlocfilehash: bf41d5a756c988b239824c19ef7a9d177a93a4a1
-ms.sourcegitcommit: b0fa7ff0cb158277df61bcd08058a81222c3fe10
+ms.openlocfilehash: b29711e8e1ef1558731ba58ca2ff14000af19ca2
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 08/07/2020
-ms.locfileid: "87913827"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88019352"
 ---
 # <a name="aspnet-core-data-protection"></a>ASP.NET Core 資料保護
 
@@ -31,7 +33,7 @@ ASP.NET Core 資料保護堆疊的設計，是用來做為 &lt; ASP.NET 1.x-4.x 
 
 整體問題聲明可以在單一句子中簡潔地陳述：我需要保存信任的資訊以供日後抓取，但我不信任持續性機制。 在 web 詞彙中，這可能會撰寫為「我需要透過不受信任的用戶端來回存取受信任的狀態」。
 
-這是驗證 cookie 或持有人權杖的標準範例。 伺服器會產生「我的 Groot，並擁有 xyz 許可權」權杖，並將其交給用戶端。 在未來的某個日期，用戶端會將該權杖呈現給伺服器，但伺服器需要某種程度的保證，讓用戶端無法偽造權杖。 因此，第一項需求：真品 (也稱為 完整性、篡改) 。
+這是驗證或持有人權杖的標準範例 cookie 。 伺服器會產生「我的 Groot，並擁有 xyz 許可權」權杖，並將其交給用戶端。 在未來的某個日期，用戶端會將該權杖呈現給伺服器，但伺服器需要某種程度的保證，讓用戶端無法偽造權杖。 因此，第一項需求：真品 (也稱為 完整性、篡改) 。
 
 由於伺服器會信任保存的狀態，因此我們預期此狀態可能包含作業環境的特定資訊。 這可能是檔案路徑的形式、許可權、控制碼或其他間接參考，或是伺服器特定資料的其他部分。 這類資訊通常不會洩漏給不受信任的用戶端。 因此第二個需求：機密性。
 

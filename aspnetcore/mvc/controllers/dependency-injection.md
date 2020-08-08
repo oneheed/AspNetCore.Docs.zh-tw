@@ -5,6 +5,8 @@ description: 了解 ASP.NET Core MVC 控制器如何在 ASP.NET Core 中，透�
 ms.author: riande
 ms.date: 02/24/2019
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -13,12 +15,12 @@ no-loc:
 - Razor
 - SignalR
 uid: mvc/controllers/dependency-injection
-ms.openlocfilehash: bae31e38c3b4146ec5e4b7a398a2e0fa290fd34c
-ms.sourcegitcommit: 99c784a873b62fbd97a73c5c07f4fe7a7f5db638
+ms.openlocfilehash: aabb7f893fd9650e2e901dcfdfe845faba391435
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 06/27/2020
-ms.locfileid: "85503535"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88019167"
 ---
 # <a name="dependency-injection-into-controllers-in-aspnet-core"></a>ASP.NET Core 控制器的相依性插入
 
@@ -28,7 +30,7 @@ ms.locfileid: "85503535"
 
 ASP.NET Core MVC 控制器會透過建構函式明確地要求相依性。 ASP.NET Core 內建[相依性插入 (DI)](xref:fundamentals/dependency-injection) 支援。 DI 可讓您更輕鬆地測試和維護應用程式。
 
-[查看或下載範例程式碼](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/mvc/controllers/dependency-injection/sample)（[如何下載](xref:index#how-to-download-a-sample)）
+[查看或下載範例程式碼](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/mvc/controllers/dependency-injection/sample) ([如何下載](xref:index#how-to-download-a-sample)) 
 
 ## <a name="constructor-injection"></a>建構函式插入
 
@@ -92,7 +94,7 @@ ASP.NET Core MVC 控制器會透過建構函式明確地要求相依性。 ASP.N
 
 ASP.NET Core MVC 控制器會透過建構函式明確地要求相依性。 ASP.NET Core 內建[相依性插入 (DI)](xref:fundamentals/dependency-injection) 支援。 DI 可讓您更輕鬆地測試和維護應用程式。
 
-[查看或下載範例程式碼](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/mvc/controllers/dependency-injection/sample)（[如何下載](xref:index#how-to-download-a-sample)）
+[查看或下載範例程式碼](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/mvc/controllers/dependency-injection/sample) ([如何下載](xref:index#how-to-download-a-sample)) 
 
 ## <a name="constructor-injection"></a>建構函式插入
 

@@ -6,6 +6,8 @@ description: 探索 ASP.NET Core 連結標記協助程式屬性，以及每個�
 ms.custom: mvc
 ms.date: 09/24/2019
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -14,12 +16,12 @@ no-loc:
 - Razor
 - SignalR
 uid: mvc/views/tag-helpers/builtin-th/link-tag-helper
-ms.openlocfilehash: ac9f6449e2b7b135318ecf116e1dba7b33ddff83
-ms.sourcegitcommit: 50e7c970f327dbe92d45eaf4c21caa001c9106d0
+ms.openlocfilehash: 7487bc64f8e20f85ef95e5389409c0194ec31337
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 07/10/2020
-ms.locfileid: "86212398"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88018555"
 ---
 # <a name="link-tag-helper-in-aspnet-core"></a>ASP.NET Core 中的連結標記協助程式
 
@@ -55,15 +57,15 @@ ms.locfileid: "86212398"
 
 ### <a name="asp-fallback-test-class"></a>asp-fallback-測試類別
 
-在樣式表單中定義用於回溯測試的類別名稱。 如需詳細資訊，請參閱 <xref:Microsoft.AspNetCore.Mvc.TagHelpers.LinkTagHelper.FallbackTestClass> 。
+在樣式表單中定義用於回溯測試的類別名稱。 如需詳細資訊，請參閱<xref:Microsoft.AspNetCore.Mvc.TagHelpers.LinkTagHelper.FallbackTestClass>。
 
 ### <a name="asp-fallback-test-property"></a>asp-fallback-測試-屬性
 
-用於回退測試的 CSS 屬性名稱。 如需詳細資訊，請參閱 <xref:Microsoft.AspNetCore.Mvc.TagHelpers.LinkTagHelper.FallbackTestProperty> 。
+用於回退測試的 CSS 屬性名稱。 如需詳細資訊，請參閱<xref:Microsoft.AspNetCore.Mvc.TagHelpers.LinkTagHelper.FallbackTestProperty>。
 
 ### <a name="asp-fallback-test-value"></a>asp-fallback-測試-值
 
-要用於 fallback 測試的 CSS 屬性值。 如需詳細資訊，請參閱 <xref:Microsoft.AspNetCore.Mvc.TagHelpers.LinkTagHelper.FallbackTestValue> 。
+要用於 fallback 測試的 CSS 屬性值。 如需詳細資訊，請參閱<xref:Microsoft.AspNetCore.Mvc.TagHelpers.LinkTagHelper.FallbackTestValue>。
 
 ## <a name="additional-resources"></a>其他資源
 

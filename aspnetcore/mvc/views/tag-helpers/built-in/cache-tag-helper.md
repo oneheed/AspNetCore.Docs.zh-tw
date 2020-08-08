@@ -6,6 +6,8 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 10/10/2018
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -14,12 +16,12 @@ no-loc:
 - Razor
 - SignalR
 uid: mvc/views/tag-helpers/builtin-th/cache-tag-helper
-ms.openlocfilehash: 65d8bbcdaed76a308b924ba024219e8f520bb585
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: 7d2ff774b7654993e2cd9b126db252f81a3032d3
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85399279"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88018750"
 ---
 # <a name="cache-tag-helper-in-aspnet-core-mvc"></a>ASP.NET Core MVC 中的快取標籤協助程式
 
@@ -45,7 +47,7 @@ ms.locfileid: "85399279"
 | --------------- | --------------- | ------- |
 | Boolean         | `true`, `false` | `true`  |
 
-`enabled` 會決定是否快取以快取標籤協助程式括住的內容。 預設值為 `true`。 如果設定為 `false`，則轉譯輸出**不會**被快取。
+`enabled` 會決定是否快取以快取標籤協助程式括住的內容。 預設為 `true`。 如果設定為 `false`，則轉譯輸出**不會**被快取。
 
 範例：
 
@@ -73,7 +75,7 @@ ms.locfileid: "85399279"
 
 ### <a name="expires-after"></a>expires-after
 
-| 屬性類型 | 範例                      | 預設    |
+| 屬性類型 | 範例                      | 預設值    |
 | -------------- | ---------------------------- | ---------- |
 | `TimeSpan`     | `@TimeSpan.FromSeconds(120)` | 20 分鐘 |
 
@@ -163,15 +165,15 @@ routes.MapRoute(
 </cache>
 ```
 
-### <a name="vary-by-cookie"></a>vary-by-cookie
+### <a name="vary-by-no-loccookie"></a>依cookie
 
 | 屬性類型 | 範例                                                                         |
 | -------------- | -------------------------------------------------------------------------------- |
 | String         | `.AspNetCore.Identity.Application`, `.AspNetCore.Identity.Application,HairColor` |
 
-`vary-by-cookie` 接受 Cookie 名稱的逗點分隔清單，當 Cookie 值變更時，這些 Cookie 名稱會觸發快取重新整理。
+`vary-by-cookie`接受以逗號分隔的名稱清單 cookie ，這些名稱會在值變更時觸發快取重新整理 cookie 。
 
-下列範例會監視與 ASP.NET Core 相關聯的 cookie Identity 。 當使用者通過驗證時，cookie 中的變更會觸發快取重新整理 Identity ：
+下列範例會監視 cookie 與 ASP.NET Core 相關聯的 Identity 。 當使用者通過驗證時，中的變更會觸發快取重新整理 Identity cookie ：
 
 ```cshtml
 <cache vary-by-cookie=".AspNetCore.Identity.Application">
@@ -195,7 +197,7 @@ routes.MapRoute(
 </cache>
 ```
 
-使用此屬性可保留登入與登出週期中的快取內容。 當此值設定為 `true` 時，驗證週期將使已驗證之使用者的快取無效。 快取失效是由於使用者通過驗證時會產生新的唯一 Cookie 值所致。 如果沒有任何 Cookie 或 Cookie 已過期，則會以匿名狀態保留快取。 如果使用者**未**通過驗證，則會維護快取。
+使用此屬性可保留登入與登出週期中的快取內容。 當此值設定為 `true` 時，驗證週期將使已驗證之使用者的快取無效。 快取已失效，因為 cookie 當使用者通過驗證時，會產生新的唯一值。 當不 cookie 存在或已過期時，就會針對匿名狀態維護快取 cookie 。 如果使用者**未**通過驗證，則會維護快取。
 
 ### <a name="vary-by"></a>vary-by
 

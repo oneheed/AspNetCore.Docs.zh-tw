@@ -6,6 +6,8 @@ description: 探索 ASP.NET Core 腳本標記協助程式屬性，以及每個�
 ms.custom: mvc
 ms.date: 12/02/2019
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -14,18 +16,18 @@ no-loc:
 - Razor
 - SignalR
 uid: mvc/views/tag-helpers/builtin-th/script-tag-helper
-ms.openlocfilehash: b9b90c1c40fccbc7bb6b6c9050bd525b5fa8cd92
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: b2f10b8230c1292614927d61c1e6d997dcb5640c
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85407404"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88020219"
 ---
 # <a name="script-tag-helper-in-aspnet-core"></a>ASP.NET Core 中的腳本標記協助程式
 
 作者：[Rick Anderson](https://twitter.com/RickAndMSFT)
 
-[腳本標記](xref:Microsoft.AspNetCore.Mvc.TagHelpers.ScriptTagHelper)協助程式會產生主要或切換回腳本檔案的連結。 主要腳本檔案通常位於[內容傳遞網路](/office365/enterprise/content-delivery-networks#what-exactly-is-a-cdn)（CDN）上。
+[腳本標記](xref:Microsoft.AspNetCore.Mvc.TagHelpers.ScriptTagHelper)協助程式會產生主要或切換回腳本檔案的連結。 主要腳本檔案通常是在[內容傳遞網路](/office365/enterprise/content-delivery-networks#what-exactly-is-a-cdn) (CDN) 上。
 
 [!INCLUDE[](~/includes/cdn.md)]
 
@@ -50,11 +52,11 @@ ms.locfileid: "85407404"
 
 ### <a name="asp-fallback-test"></a>asp-回溯-測試
 
-要用於回溯測試之主要腳本中定義的腳本方法。 如需詳細資訊，請參閱 <xref:Microsoft.AspNetCore.Mvc.TagHelpers.ScriptTagHelper.FallbackTestExpression> 。
+要用於回溯測試之主要腳本中定義的腳本方法。 如需詳細資訊，請參閱<xref:Microsoft.AspNetCore.Mvc.TagHelpers.ScriptTagHelper.FallbackTestExpression>。
 
 ### <a name="asp-fallback-src"></a>asp-fallback-src
 
-當主要複本失敗時，要回復之腳本標記的 URL。 如需詳細資訊，請參閱 <xref:Microsoft.AspNetCore.Mvc.TagHelpers.ScriptTagHelper.FallbackSrc> 。
+當主要複本失敗時，要回復之腳本標記的 URL。 如需詳細資訊，請參閱<xref:Microsoft.AspNetCore.Mvc.TagHelpers.ScriptTagHelper.FallbackSrc>。
 
 ## <a name="additional-resources"></a>其他資源
 

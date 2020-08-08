@@ -5,6 +5,8 @@ description: 瞭解將 Razor 以伺服器為基礎的程式碼內嵌到網頁中
 ms.author: riande
 ms.date: 02/12/2020
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -13,24 +15,24 @@ no-loc:
 - Razor
 - SignalR
 uid: mvc/views/razor
-ms.openlocfilehash: ba778c45c9a6f608b50a17a9f8c6d50484dbf07c
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: 4b418c53535965eae6b41f3297b0c6336fb993d5
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85405896"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88020583"
 ---
-# <a name="razor-syntax-reference-for-aspnet-core"></a>RazorASP.NET Core 的語法參考
+# <a name="no-locrazor-syntax-reference-for-aspnet-core"></a>RazorASP.NET Core 的語法參考
 
 由[Rick Anderson](https://twitter.com/RickAndMSFT)、 [Taylor Mullen](https://twitter.com/ntaylormullen)和[Dan Vicarel](https://github.com/Rabadash8820)
 
-Razor是將伺服器程式碼內嵌到網頁中的標記語法。 Razor語法包含 Razor 標記、c # 和 HTML。 通常包含 Razor 的檔案副檔名為 *.* #。 Razor也可以在[ Razor 元件](xref:blazor/components/index)檔案（*razor*）中找到。
+Razor是將伺服器程式碼內嵌到網頁中的標記語法。 Razor語法包含 Razor 標記、c # 和 HTML。 通常包含 Razor 的檔案副檔名為 *.* #。 Razor也可以在 [ [ Razor 元件](xref:blazor/components/index)檔] (*. razor*) 中找到。
 
 ## <a name="rendering-html"></a>轉譯 HTML
 
 預設 Razor 語言為 HTML。 從標記呈現 HTML 與從 HTML 檔案轉譯 html Razor 並無不同。 伺服器會以不變的方式轉譯 *. cshtml*檔案中的 HTML 標籤 Razor 。
 
-## <a name="razor-syntax"></a>Razor 語法
+## <a name="no-locrazor-syntax"></a>Razor 語法
 
 Razor支援 c #，並使用 `@` 符號從 HTML 轉換成 c #。 Razor評估 c # 運算式，並在 HTML 輸出中呈現它們。
 
@@ -54,7 +56,7 @@ HTML 屬性及含有電子郵件地址的內容不會將 `@` 符號視為轉換�
 <a href="mailto:Support@contoso.com">Support@contoso.com</a>
 ```
 
-## <a name="implicit-razor-expressions"></a>隱含 Razor 運算式
+## <a name="implicit-no-locrazor-expressions"></a>隱含 Razor 運算式
 
 隱含 Razor 運算式的開頭為， `@` 後面接著 c # 程式碼：
 
@@ -82,7 +84,7 @@ HTML 屬性及含有電子郵件地址的內容不會將 `@` 符號視為轉換�
 
 泛型方法呼叫必須包裝在[明確 Razor 運算式](#explicit-razor-expressions)或程式[ Razor 代碼區塊](#razor-code-blocks)中。
 
-## <a name="explicit-razor-expressions"></a>明確 Razor 運算式
+## <a name="explicit-no-locrazor-expressions"></a>明確 Razor 運算式
 
 明確 Razor 運算式是由 `@` 具有對稱括弧的符號所組成。 若要呈現上周的時間，則 Razor 會使用下列標記：
 
@@ -155,7 +157,7 @@ HTML 屬性及含有電子郵件地址的內容不會將 `@` 符號視為轉換�
 <span>Hello World</span>
 ```
 
-## <a name="razor-code-blocks"></a>Razor程式碼區塊
+## <a name="no-locrazor-code-blocks"></a>Razor程式碼區塊
 
 Razor程式碼區塊會以開頭 `@` ，並以括住 `{}` 。 不同於運算式，程式碼區塊內的 C# 程式碼不會轉譯。 一個檢視中的程式碼區塊和運算式會共用相同的範圍並依序定義：
 
@@ -465,9 +467,9 @@ public class _Views_Something_cshtml : RazorPage<dynamic>
 
 ### `@code`
 
-*此案例僅適用于 Razor 元件（razor）。*
+*此案例僅適用于 Razor ( razor) 的元件。*
 
-`@code`區塊可讓[ Razor 元件](xref:blazor/components/index)將 c # 成員（欄位、屬性和方法）新增至元件：
+`@code`區塊可讓[ Razor 元件](xref:blazor/components/index)將 c # 成員新增 () 至元件的欄位、屬性和方法：
 
 ```razor
 @code {
@@ -607,15 +609,15 @@ public class _Views_Something_cshtml : RazorPage<dynamic>
 
 ### `@layout`
 
-*此案例僅適用于 Razor 元件（razor）。*
+*此案例僅適用于 Razor ( razor) 的元件。*
 
-指示詞會 `@layout` 指定元件的版面配置 Razor 。 版面配置元件可用來避免程式碼重複和不一致。 如需詳細資訊，請參閱 <xref:blazor/layouts> 。
+指示詞會 `@layout` 指定元件的版面配置 Razor 。 版面配置元件可用來避免程式碼重複和不一致。 如需詳細資訊，請參閱<xref:blazor/layouts>。
 
 ::: moniker-end
 
 ### `@model`
 
-*此案例僅適用于 MVC 視圖和 Razor 頁面（. cshtml）。*
+*此案例僅適用于 MVC 視圖和 Razor 頁面 (. cshtml) 。*
 
 `@model` 指示詞會指定傳遞至檢視或頁面的模型類型：
 
@@ -648,7 +650,7 @@ Razor公開 `Model` 屬性，以存取傳遞至視圖的模型：
 `@namespace` 指示詞：
 
 * 設定所產生 Razor 頁面、MVC 視圖或元件之類別的命名空間 Razor 。
-* 從目錄樹狀結構中最接近的匯入檔案，設定頁面、views 或 components 類別的根衍生命名空間， *_ViewImports. cshtml* （views 或 pages）或 *_Imports razor* （ Razor 元件）。
+* 從目錄樹狀結構中最接近的匯入檔案，設定頁面、views 或 components 類別的根衍生命名空間， *_ViewImports. cshtml* (views 或 pages) 或 *_Imports razor* (Razor 元件) 。
 
 ```cshtml
 @namespace Your.Namespace.Here
@@ -685,21 +687,21 @@ Razor公開 `Model` 屬性，以存取傳遞至視圖的模型：
 `@page` 指示詞會根據其出現的檔案類型而有不同的效果。 指示詞：
 
 * 在中， *cshtml*檔案表示檔案是 Razor 頁面。 如需詳細資訊，請參閱[自訂路由](xref:razor-pages/index#custom-routes)和 <xref:razor-pages/index> 。
-* 指定 Razor 元件應直接處理要求。 如需詳細資訊，請參閱 <xref:blazor/fundamentals/routing> 。
+* 指定 Razor 元件應直接處理要求。 如需詳細資訊，請參閱<xref:blazor/fundamentals/routing>。
 
 ::: moniker-end
 
 ::: moniker range="< aspnetcore-3.0"
 
-在 `@page` *cshtml*檔案第一行的指示詞表示檔案是 Razor 頁面。 如需詳細資訊，請參閱 <xref:razor-pages/index> 。
+在 `@page` *cshtml*檔案第一行的指示詞表示檔案是 Razor 頁面。 如需詳細資訊，請參閱<xref:razor-pages/index>。
 
 ::: moniker-end
 
 ### `@section`
 
-*此案例僅適用于 MVC 視圖和 Razor 頁面（. cshtml）。*
+*此案例僅適用于 MVC 視圖和 Razor 頁面 (. cshtml) 。*
 
-指示詞 `@section` 會與[MVC 和 Razor 頁面配置](xref:mvc/views/layout)搭配使用，讓視圖或頁面能夠在 HTML 網頁的不同部分呈現內容。 如需詳細資訊，請參閱 <xref:mvc/views/layout> 。
+指示詞 `@section` 會與[MVC 和 Razor 頁面配置](xref:mvc/views/layout)搭配使用，讓視圖或頁面能夠在 HTML 網頁的不同部分呈現內容。 如需詳細資訊，請參閱<xref:mvc/views/layout>。
 
 ### `@using`
 
@@ -721,21 +723,21 @@ Razor指示詞屬性會以隱含運算式表示，並在符號後面加上保留
 
 ### `@attributes`
 
-*此案例僅適用于 Razor 元件（razor）。*
+*此案例僅適用于 Razor ( razor) 的元件。*
 
-`@attributes` 允許元件轉譯非宣告的屬性。 如需詳細資訊，請參閱 <xref:blazor/components/index#attribute-splatting-and-arbitrary-parameters> 。
+`@attributes` 允許元件轉譯非宣告的屬性。 如需詳細資訊，請參閱<xref:blazor/components/index#attribute-splatting-and-arbitrary-parameters>。
 
 ### `@bind`
 
-*此案例僅適用于 Razor 元件（razor）。*
+*此案例僅適用于 Razor ( razor) 的元件。*
 
-元件中的資料繫結會使用 `@bind` 屬性來完成。 如需詳細資訊，請參閱 <xref:blazor/components/data-binding> 。
+元件中的資料繫結會使用 `@bind` 屬性來完成。 如需詳細資訊，請參閱<xref:blazor/components/data-binding>。
 
 ### `@on{EVENT}`
 
-*此案例僅適用于 Razor 元件（razor）。*
+*此案例僅適用于 Razor ( razor) 的元件。*
 
-Razor提供元件的事件處理功能。 如需詳細資訊，請參閱 <xref:blazor/components/event-handling> 。
+Razor提供元件的事件處理功能。 如需詳細資訊，請參閱<xref:blazor/components/event-handling>。
 
 ::: moniker-end
 
@@ -743,13 +745,13 @@ Razor提供元件的事件處理功能。 如需詳細資訊，請參閱 <xref:b
 
 ### `@on{EVENT}:preventDefault`
 
-*此案例僅適用于 Razor 元件（razor）。*
+*此案例僅適用于 Razor ( razor) 的元件。*
 
 防止事件的預設動作。
 
 ### `@on{EVENT}:stopPropagation`
 
-*此案例僅適用于 Razor 元件（razor）。*
+*此案例僅適用于 Razor ( razor) 的元件。*
 
 停止事件的事件傳播。
 
@@ -759,25 +761,25 @@ Razor提供元件的事件處理功能。 如需詳細資訊，請參閱 <xref:b
 
 ### `@key`
 
-*此案例僅適用于 Razor 元件（razor）。*
+*此案例僅適用于 Razor ( razor) 的元件。*
 
-`@key` 指示詞屬性導致元件差異比較演算法會根據索引鍵的值來保證元素或元件的保留。 如需詳細資訊，請參閱 <xref:blazor/components/index#use-key-to-control-the-preservation-of-elements-and-components> 。
+`@key` 指示詞屬性導致元件差異比較演算法會根據索引鍵的值來保證元素或元件的保留。 如需詳細資訊，請參閱<xref:blazor/components/index#use-key-to-control-the-preservation-of-elements-and-components>。
 
 ### `@ref`
 
-*此案例僅適用于 Razor 元件（razor）。*
+*此案例僅適用于 Razor ( razor) 的元件。*
 
-元件參考 (`@ref`) 提供一種方式來參考元件執行個體，讓您可以對該執行個體發出命令。 如需詳細資訊，請參閱 <xref:blazor/components/index#capture-references-to-components> 。
+元件參考 (`@ref`) 提供一種方式來參考元件執行個體，讓您可以對該執行個體發出命令。 如需詳細資訊，請參閱<xref:blazor/components/index#capture-references-to-components>。
 
 ### `@typeparam`
 
-*此案例僅適用于 Razor 元件（razor）。*
+*此案例僅適用于 Razor ( razor) 的元件。*
 
-指示詞會 `@typeparam` 為所產生的元件類別宣告泛型型別參數。 如需詳細資訊，請參閱 <xref:blazor/components/templated-components#generic-typed-components> 。
+指示詞會 `@typeparam` 為所產生的元件類別宣告泛型型別參數。 如需詳細資訊，請參閱<xref:blazor/components/templated-components#generic-typed-components>。
 
 ::: moniker-end
 
-## <a name="templated-razor-delegates"></a>樣板化 Razor 委派
+## <a name="templated-no-locrazor-delegates"></a>樣板化 Razor 委派
 
 Razor範本可讓您定義具有下列格式的 UI 程式碼片段：
 
@@ -878,7 +880,7 @@ public class Pet
 
 ## <a name="tag-helpers"></a>標籤協助程式
 
-*此案例僅適用于 MVC 視圖和 Razor 頁面（. cshtml）。*
+*此案例僅適用于 MVC 視圖和 Razor 頁面 (. cshtml) 。*
 
 [標籤協助程式](xref:mvc/views/tag-helpers/intro)有三個相關的指示詞。
 
@@ -888,21 +890,21 @@ public class Pet
 | [`@removeTagHelper`](xref:mvc/views/tag-helpers/intro#remove-razor-directives-label) | 移除先前從檢視新增的標籤協助程式。 |
 | [`@tagHelperPrefix`](xref:mvc/views/tag-helpers/intro#prefix-razor-directives-label) | 指定標籤前置字元，以啟用標籤協助程式支援，並將標籤協助程式使用方式設為明確。 |
 
-## <a name="razor-reserved-keywords"></a>Razor保留的關鍵字
+## <a name="no-locrazor-reserved-keywords"></a>Razor保留的關鍵字
 
-### <a name="razor-keywords"></a>Razor字
+### <a name="no-locrazor-keywords"></a>Razor字
 
-* `page`（需要 ASP.NET Core 2.1 或更新版本）
+* `page` (需要 ASP.NET Core 2.1 或更新版本) 
 * `namespace`
 * `functions`
 * `inherits`
 * `model`
 * `section`
-* `helper`（目前不支援 ASP.NET Core）
+* `helper`ASP.NET Core 目前不支援 () 
 
-Razor關鍵字會以進行轉義 `@(Razor Keyword)` （例如， `@(functions)` ）。
+Razor關鍵字會使用 `@(Razor Keyword)` (來進行轉義，例如， `@(functions)`) 。
 
-### <a name="c-razor-keywords"></a>C # Razor 關鍵字
+### <a name="c-no-locrazor-keywords"></a>C # Razor 關鍵字
 
 * `case`
 * `do`
@@ -919,13 +921,13 @@ Razor關鍵字會以進行轉義 `@(Razor Keyword)` （例如， `@(functions)` 
 * `using`
 * `while`
 
-C # Razor 關鍵字必須使用（例如）進行雙重轉義 `@(@C# Razor Keyword)` `@(@case)` 。 第一個會將剖析器進行 `@` 轉義 Razor 。 第二個 `@` 會將 C# 剖析器逸出。
+C # Razor 關鍵字必須使用 (進行雙重轉義 `@(@C# Razor Keyword)` ，例如， `@(@case)`) 。 第一個會將剖析器進行 `@` 轉義 Razor 。 第二個 `@` 會將 C# 剖析器逸出。
 
-### <a name="reserved-keywords-not-used-by-razor"></a>未使用的保留關鍵字Razor
+### <a name="reserved-keywords-not-used-by-no-locrazor"></a>未使用的保留關鍵字Razor
 
 * `class`
 
-## <a name="inspect-the-razor-c-class-generated-for-a-view"></a>檢查 Razor 為視圖產生的 c # 類別
+## <a name="inspect-the-no-locrazor-c-class-generated-for-a-view"></a>檢查 Razor 為視圖產生的 c # 類別
 
 ::: moniker range=">= aspnetcore-2.1"
 

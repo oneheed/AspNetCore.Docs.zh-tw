@@ -6,6 +6,8 @@ ms.author: scaddie
 ms.custom: mvc
 ms.date: 11/15/2018
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -14,12 +16,12 @@ no-loc:
 - Razor
 - SignalR
 uid: security/authorization/resourcebased
-ms.openlocfilehash: 35d8521227d82bb066cfbf2badf4a1e1f30bfd8e
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: ee9b3e9b0085d58778fdf0c0f9a5d352747d88ba
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85405623"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88020128"
 ---
 # <a name="resource-based-authorization-in-aspnet-core"></a>ASP.NET Core 中以資源為基礎的授權
 
@@ -112,7 +114,7 @@ Task<bool> AuthorizeAsync(ClaimsPrincipal user,
 
 ::: moniker-end
 
-在上述範例中，假設 `SameAuthorRequirement` 是更泛型類別的特殊案例 `SpecificAuthorRequirement` 。 `SpecificAuthorRequirement`類別（未顯示）包含 `Name` 代表作者名稱的屬性。 `Name`屬性可以設定為目前的使用者。
+在上述範例中，假設 `SameAuthorRequirement` 是更泛型類別的特殊案例 `SpecificAuthorRequirement` 。 `SpecificAuthorRequirement`類別 (不會顯示) 包含 `Name` 代表作者名稱的屬性。 `Name`屬性可以設定為目前的使用者。
 
 在中註冊需求和處理常式 `Startup.ConfigureServices` ：
 
@@ -130,7 +132,7 @@ Task<bool> AuthorizeAsync(ClaimsPrincipal user,
 
 ### <a name="operational-requirements"></a>操作需求
 
-如果您要根據 CRUD （建立、讀取、更新、刪除）作業的結果進行決策，請使用[OperationAuthorizationRequirement](/dotnet/api/microsoft.aspnetcore.authorization.infrastructure.operationauthorizationrequirement) helper 類別。 這個類別可讓您針對每個作業類型撰寫單一處理程式，而不是個別的類別。 若要使用它，請提供一些作業名稱：
+如果您要根據 CRUD 的結果進行決策 (建立、讀取、更新、刪除) 作業，請使用[OperationAuthorizationRequirement](/dotnet/api/microsoft.aspnetcore.authorization.infrastructure.operationauthorizationrequirement) helper 類別。 這個類別可讓您針對每個作業類型撰寫單一處理程式，而不是個別的類別。 若要使用它，請提供一些作業名稱：
 
 [!code-csharp[](resourcebased/samples/3_0/ResourceBasedAuthApp2/Services/DocumentAuthorizationCrudHandler.cs?name=snippet_OperationsClass)]
 

@@ -6,6 +6,8 @@ ms.author: riande
 ms.custom: H1Hack27Feb2017
 ms.date: 04/17/2020
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -14,12 +16,12 @@ no-loc:
 - Razor
 - SignalR
 uid: web-api/advanced/formatting
-ms.openlocfilehash: e6b78af3eeb858310eb772fdf0034510c10351c0
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: 8aa94bd1f33d1dd8ce8e7f50468ed60b4ccb2515
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85400358"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88019933"
 ---
 # <a name="format-response-data-in-aspnet-core-web-api"></a>在 ASP.NET Core Web API 中格式化回應資料
 
@@ -27,13 +29,13 @@ ms.locfileid: "85400358"
 
 ASP.NET Core MVC 支援格式化回應資料。 您可以使用特定格式或回應用戶端要求的格式來格式化回應資料。
 
-[查看或下載範例程式碼](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/web-api/advanced/formatting)（[如何下載](xref:index#how-to-download-a-sample)）
+[查看或下載範例程式碼](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/web-api/advanced/formatting) ([如何下載](xref:index#how-to-download-a-sample)) 
 
 ## <a name="format-specific-action-results"></a>特定格式的動作結果
 
 某些動作結果類型是特定格式所特有的，例如 <xref:Microsoft.AspNetCore.Mvc.JsonResult> 和 <xref:Microsoft.AspNetCore.Mvc.ContentResult>。 無論用戶端喜好設定為何，動作都可以傳回以特定格式格式化的結果。 例如，傳回會傳回 `JsonResult` JSON 格式的資料。 傳回 `ContentResult` 或字串會傳回純文字格式的字串資料。
 
-動作不需要傳回任何特定的類型。 ASP.NET Core 支援任何物件傳回值。  傳回不是型別物件之動作的結果， <xref:Microsoft.AspNetCore.Mvc.IActionResult> 會使用適當的 <xref:Microsoft.AspNetCore.Mvc.Formatters.IOutputFormatter> 實作為序列化。 如需詳細資訊，請參閱 <xref:web-api/action-return-types> 。
+動作不需要傳回任何特定的類型。 ASP.NET Core 支援任何物件傳回值。  傳回不是型別物件之動作的結果， <xref:Microsoft.AspNetCore.Mvc.IActionResult> 會使用適當的 <xref:Microsoft.AspNetCore.Mvc.Formatters.IOutputFormatter> 實作為序列化。 如需詳細資訊，請參閱<xref:web-api/action-return-types>。
 
 內建 helper 方法會傳回 <xref:Microsoft.AspNetCore.Mvc.ControllerBase.Ok*> JSON 格式的資料：[!code-csharp[](./formatting/sample/Controllers/AuthorsController.cs?name=snippet_get)]
 
@@ -67,7 +69,7 @@ ASP.NET Core MVC 支援格式化回應資料。 您可以使用特定格式或�
 
 根據預設，ASP.NET Core 支援 `application/json` 、 `text/json` 和 `text/plain` 媒體類型。 [Fiddler](https://www.telerik.com/fiddler)或[Postman](https://www.getpostman.com/tools)這類工具可以設定 `Accept` 要求標頭，以指定傳回格式。 當 `Accept` 標頭包含伺服器支援的類型時，就會傳回該類型。 下一節將說明如何新增其他格式器。
 
-控制器動作可以傳回 Poco （簡單的 CLR 物件）。 當 POCO 傳回時，執行時間會自動建立 `ObjectResult` 包裝物件的。 用戶端會取得已格式化的序列化物件。 如果傳回的物件是 `null` ，則 `204 No Content` 會傳迴響應。
+控制器動作可以傳回 Poco () 的簡單舊 CLR 物件。 當 POCO 傳回時，執行時間會自動建立 `ObjectResult` 包裝物件的。 用戶端會取得已格式化的序列化物件。 如果傳回的物件是 `null` ，則 `204 No Content` 會傳迴響應。
 
 傳回物件類型：
 
@@ -227,7 +229,7 @@ XML 格式需要[Microsoft.AspNetCore.Mvc.Formatters.Xml](https://www.nuget.org/
 
 ### <a name="special-case-formatters"></a>特殊案例格式器
 
-有些特殊案例是使用內建格式器所實作。 根據預設，傳回 `string` 類型的格式為*text/純文字*（如果透過標頭要求，則為*text/html* `Accept` ）。 您可以藉由移除來刪除這個行為 <xref:Microsoft.AspNetCore.Mvc.Formatters.StringOutputFormatter> 。 已移除方法中的格式器 `ConfigureServices` 。 傳回時，具有模型物件傳回類型的動作會返回 `204 No Content` `null` 。 您可以藉由移除來刪除這個行為 <xref:Microsoft.AspNetCore.Mvc.Formatters.HttpNoContentOutputFormatter> 。 下列程式碼會移除 `StringOutputFormatter` 和 `HttpNoContentOutputFormatter`。
+有些特殊案例是使用內建格式器所實作。 根據預設， `string` 如果透過標頭) 要求，傳回類型會格式化為*text/純* (*text/html* `Accept` 。 您可以藉由移除來刪除這個行為 <xref:Microsoft.AspNetCore.Mvc.Formatters.StringOutputFormatter> 。 已移除方法中的格式器 `ConfigureServices` 。 傳回時，具有模型物件傳回類型的動作會返回 `204 No Content` `null` 。 您可以藉由移除來刪除這個行為 <xref:Microsoft.AspNetCore.Mvc.Formatters.HttpNoContentOutputFormatter> 。 下列程式碼會移除 `StringOutputFormatter` 和 `HttpNoContentOutputFormatter`。
 
 ::: moniker range=">= aspnetcore-3.0"
 [!code-csharp[](./formatting/3.0sample/StartupStringOutputFormatter.cs?name=snippet)]

@@ -5,6 +5,8 @@ description: 頁面上教學課程系列的第3部分 Razor 。
 ms.author: riande
 ms.date: 08/17/2019
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -13,14 +15,14 @@ no-loc:
 - Razor
 - SignalR
 uid: tutorials/razor-pages/page
-ms.openlocfilehash: 898f3be045755a0ee14c738b6ffc104408ded7b6
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: f8942e52b3b438817e3d1041a2c6b568eb662469
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85407768"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88020388"
 ---
-# <a name="part-3-scaffolded-razor-pages-in-aspnet-core"></a>第3部分， Razor ASP.NET Core 中的 scaffold 頁面
+# <a name="part-3-scaffolded-no-locrazor-pages-in-aspnet-core"></a>第3部分， Razor ASP.NET Core 中的 scaffold 頁面
 
 ::: moniker range=">= aspnetcore-3.0"
 
@@ -72,7 +74,7 @@ Razor可以從 HTML 轉換成 c # 或 Razor 特定標記。 當 `@` 符號後面
 
 ### <a name="the-layout-page"></a>版面配置頁
 
-選取功能表連結 (**RazorPagesMovie**、**Home** 及 **Privacy**)。 每個頁面會顯示相同的功能表配置。 功能表配置會在 *Pages/Shared/_Layout.cshtml* 檔案中實作。 開啟 *Pages/Shared/_Layout.cshtml* 檔案。
+選取功能表連結 ([ ** Razor PagesMovie**]、[**首頁**] 和 [**隱私權**]) 。 每個頁面會顯示相同的功能表配置。 功能表配置會在 *Pages/Shared/_Layout.cshtml* 檔案中實作。 開啟 *Pages/Shared/_Layout.cshtml* 檔案。
 
 [版面配置](xref:mvc/views/layout)範本可讓 HTML 容器版面配置：
 
@@ -100,11 +102,11 @@ changing in in the next step.
 -->
 [!code-cshtml[](razor-pages-start/snapshot_sample/RazorPagesMovie/Pages/NU/_Layout.cshtml?highlight=6)]
 
-這一行 `@*Markup removed for brevity.*@` 是 Razor 批註。 不同于 HTML 批註（ `<!-- -->` ）， Razor 批註不會傳送至用戶端。
+這一行 `@*Markup removed for brevity.*@` 是 Razor 批註。 不同于 HTML 批註 (`<!-- -->`) ， Razor 批註不會傳送至用戶端。
 
 ### <a name="update-the-layout"></a>更新配置
 
-變更 *Pages/Shared/_Layout.cshtml* 檔案中的 `<title>` 項目，以顯示 **Movie** 而不是 **RazorPagesMovie**。
+將 `<title>` *Pages/Shared/_Layout. cshtml*檔案中的元素變更為顯示**電影**，而不是** Razor PagesMovie**。
 
 [!code-cshtml[](razor-pages-start/sample/RazorPagesMovie30/Pages/Shared/_Layout.cshtml?range=1-6&highlight=6)]
 
@@ -153,7 +155,7 @@ changing in in the next step.
 
 如果沒有任何模型錯誤，就會儲存資料，而瀏覽器則會重新導向至 Index 頁面。
 
-### <a name="the-create-razor-page"></a>[建立] Razor 頁面
+### <a name="the-create-no-locrazor-page"></a>[建立] Razor 頁面
 
 檢查*Pages/電影/Create. cshtml* Razor 頁面檔案：
 
@@ -195,15 +197,15 @@ Visual Studio 會以用於標籤協助程式的特殊粗體字型顯示下列標
 
 `<form method="post">` 項目是[表單標記協助程式](xref:mvc/views/working-with-forms#the-form-tag-helper)。 表單標記協助程式會自動包含 [antiforgery 語彙基元](xref:security/anti-request-forgery)。
 
-「範例」引擎會 Razor 針對模型中的每個欄位（識別碼除外）建立標記，如下所示：
+「範例」引擎會 Razor 針對模型中的每個欄位建立標記 (除了識別碼) 如下所示：
 
 [!code-cshtml[](~/tutorials/razor-pages/razor-pages-start/snapshot_sample3/RazorPagesMovie30/Pages/Movies/Create.cshtml?range=15-20)]
 
-[驗證](xref:mvc/views/working-with-forms#the-validation-tag-helpers)標籤協助程式（ `<div asp-validation-summary` 和）會 `<span asp-validation-for` 顯示驗證錯誤。 驗證將於本文稍後詳細討論到。
+[驗證](xref:mvc/views/working-with-forms#the-validation-tag-helpers)標籤協助程式 (`<div asp-validation-summary` ， `<span asp-validation-for`) 顯示驗證錯誤。 驗證將於本文稍後詳細討論到。
 
-[標籤標記](xref:mvc/views/working-with-forms#the-label-tag-helper)協助 `<label asp-for="Movie.Title" class="control-label"></label>` 程式（）會產生屬性的標籤標題和 `for` 屬性 `Title` 。
+[標籤標記](xref:mvc/views/working-with-forms#the-label-tag-helper)協助 `<label asp-for="Movie.Title" class="control-label"></label>` 程式 () 會產生屬性的標籤標題和 `for` 屬性 `Title` 。
 
-[輸入標記](xref:mvc/views/working-with-forms)協助程式（ `<input asp-for="Movie.Title" class="form-control">` ）會使用[DataAnnotations](/aspnet/mvc/overview/older-versions/mvc-music-store/mvc-music-store-part-6)屬性，並產生在用戶端上進行 JQUERY 驗證所需的 HTML 屬性。
+[輸入標記](xref:mvc/views/working-with-forms)協助程式 (`<input asp-for="Movie.Title" class="form-control">`) 會使用[DataAnnotations](/aspnet/mvc/overview/older-versions/mvc-music-store/mvc-music-store-part-6)屬性，並產生在用戶端上進行 JQUERY 驗證所需的 HTML 屬性。
 
 如需標籤協助程式 (例如 `<form method="post">`) 的詳細資訊，請參閱 [ASP.NET Core 中的標籤協助程式](xref:mvc/views/tag-helpers/intro)。
 
@@ -263,7 +265,7 @@ Razor可以從 HTML 轉換成 c # 或 Razor 特定標記。 當 `@` 符號後面
 
 ### <a name="the-layout-page"></a>版面配置頁
 
-選取功能表連結 (**RazorPagesMovie**、**Home** 及 **Privacy**)。 每個頁面會顯示相同的功能表配置。 功能表配置會在 *Pages/Shared/_Layout.cshtml* 檔案中實作。 開啟 *Pages/Shared/_Layout.cshtml* 檔案。
+選取功能表連結 ([ ** Razor PagesMovie**]、[**首頁**] 和 [**隱私權**]) 。 每個頁面會顯示相同的功能表配置。 功能表配置會在 *Pages/Shared/_Layout.cshtml* 檔案中實作。 開啟 *Pages/Shared/_Layout.cshtml* 檔案。
 
 [版面配置](xref:mvc/views/layout)範本可讓您在某個位置指定網站的 HTML 容器配置，然後將它套用到網站中的多個頁面。 找到 `@RenderBody()` 這行。 `RenderBody` 是一個「包裝」** 在版面配置頁中的預留位置，可供顯示您建立的所有頁面特定檢視。 例如，如果您選取 [Privacy]**** 連結，就會在 `RenderBody` 方法內呈現 **Pages/Privacy.cshtml** 檢視。
 
@@ -286,11 +288,11 @@ changing in in the next step.
 -->
 [!code-cshtml[](razor-pages-start/snapshot_sample/RazorPagesMovie/Pages/NU/_Layout.cshtml?highlight=6-99)]
 
-這一行 `@*Markup removed for brevity.*@` 是 Razor 不會出現在版面配置檔案中的批註。 不同于 HTML 批註（ `<!-- -->` ）， Razor 批註不會傳送至用戶端。
+這一行 `@*Markup removed for brevity.*@` 是 Razor 不會出現在版面配置檔案中的批註。 不同于 HTML 批註 (`<!-- -->`) ， Razor 批註不會傳送至用戶端。
 
 ### <a name="update-the-layout"></a>更新配置
 
-變更 *Pages/Shared/_Layout.cshtml* 檔案中的 `<title>` 項目，以顯示 **Movie** 而不是 **RazorPagesMovie**。
+將 `<title>` *Pages/Shared/_Layout. cshtml*檔案中的元素變更為顯示**電影**，而不是** Razor PagesMovie**。
 
 [!code-cshtml[](razor-pages-start/sample/RazorPagesMovie22/Pages/Shared/_Layout.cshtml?range=1-6&highlight=6)]
 
@@ -339,7 +341,7 @@ changing in in the next step.
 
 如果沒有任何模型錯誤，就會儲存資料，而瀏覽器則會重新導向至 Index 頁面。
 
-### <a name="the-create-razor-page"></a>[建立] Razor 頁面
+### <a name="the-create-no-locrazor-page"></a>[建立] Razor 頁面
 
 檢查*Pages/電影/Create. cshtml* Razor 頁面檔案：
 
@@ -363,15 +365,15 @@ Visual Studio for Mac 會以特別的粗體字型顯示 `<form method="post">` �
 
 `<form method="post">` 項目是[表單標記協助程式](xref:mvc/views/working-with-forms#the-form-tag-helper)。 表單標記協助程式會自動包含 [antiforgery 語彙基元](xref:security/anti-request-forgery)。
 
-「範例」引擎會 Razor 針對模型中的每個欄位（識別碼除外）建立標記，如下所示：
+「範例」引擎會 Razor 針對模型中的每個欄位建立標記 (除了識別碼) 如下所示：
 
 [!code-cshtml[](~/tutorials/razor-pages/razor-pages-start/snapshot_sample/RazorPagesMovie/Pages/Movies/Create.cshtml?range=15-20)]
 
-[驗證](xref:mvc/views/working-with-forms#the-validation-tag-helpers)標籤協助程式（ `<div asp-validation-summary` 和）會 `<span asp-validation-for` 顯示驗證錯誤。 驗證將於本文稍後詳細討論到。
+[驗證](xref:mvc/views/working-with-forms#the-validation-tag-helpers)標籤協助程式 (`<div asp-validation-summary` ， `<span asp-validation-for`) 顯示驗證錯誤。 驗證將於本文稍後詳細討論到。
 
-[標籤標記](xref:mvc/views/working-with-forms#the-label-tag-helper)協助 `<label asp-for="Movie.Title" class="control-label"></label>` 程式（）會產生屬性的標籤標題和 `for` 屬性 `Title` 。
+[標籤標記](xref:mvc/views/working-with-forms#the-label-tag-helper)協助 `<label asp-for="Movie.Title" class="control-label"></label>` 程式 () 會產生屬性的標籤標題和 `for` 屬性 `Title` 。
 
-[輸入標記](xref:mvc/views/working-with-forms)協助程式（ `<input asp-for="Movie.Title" class="form-control">` ）會使用[DataAnnotations](/aspnet/mvc/overview/older-versions/mvc-music-store/mvc-music-store-part-6)屬性，並產生在用戶端上進行 JQUERY 驗證所需的 HTML 屬性。
+[輸入標記](xref:mvc/views/working-with-forms)協助程式 (`<input asp-for="Movie.Title" class="form-control">`) 會使用[DataAnnotations](/aspnet/mvc/overview/older-versions/mvc-music-store/mvc-music-store-part-6)屬性，並產生在用戶端上進行 JQUERY 驗證所需的 HTML 屬性。
 
 ## <a name="additional-resources"></a>其他資源
 

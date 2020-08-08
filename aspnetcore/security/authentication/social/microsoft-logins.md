@@ -7,6 +7,8 @@ ms.custom: mvc
 ms.date: 03/19/2020
 monikerRange: '>= aspnetcore-3.0'
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -15,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: security/authentication/microsoft-logins
-ms.openlocfilehash: df3e738880902e3005221c6047b6be9e924f2929
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: ce0e56595611a8a34d0ad11680e67e2252da66c6
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85406130"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88020609"
 ---
 # <a name="microsoft-account-external-login-setup-with-aspnet-core"></a>使用 ASP.NET Core 的 Microsoft 帳戶外部登入設定
 
@@ -38,12 +40,12 @@ ms.locfileid: "85406130"
 * 選取 [**新增註冊**]
 * 輸入 [名稱]。
 * 選取**支援的帳戶類型**選項。  <!-- Accounts for any org work with MS domain accounts. Most folks probably want the last option, personal MS accounts. It took 24 hours after setting this up for the keys to work -->
-* 在 [重新**導向 URI**] 底下，輸入附加的開發 URL `/signin-microsoft` 。 例如： `https://localhost:5001/signin-microsoft` 。 稍後在此範例中設定的 Microsoft 驗證配置會自動處理 `/signin-microsoft` 路由上的要求，以執行 OAuth 流程。
+* 在 [重新**導向 URI**] 底下，輸入附加的開發 URL `/signin-microsoft` 。 例如，`https://localhost:5001/signin-microsoft`。 稍後在此範例中設定的 Microsoft 驗證配置會自動處理 `/signin-microsoft` 路由上的要求，以執行 OAuth 流程。
 * 選取 [註冊]
 
 ### <a name="create-client-secret"></a>建立用戶端密碼
 
-* 在左窗格中，選取 [**憑證 & 密碼**]。
+* 在左側窗格中，選取 [憑證及祕密]。
 * 在 [**用戶端密碼**] 底下，選取 [**新增用戶端密碼**]
 
   * 新增用戶端密碼的描述。
@@ -91,7 +93,7 @@ URI 區段 `/signin-microsoft` 會設定為 Microsoft 驗證提供者的預設�
 
 ## <a name="troubleshooting"></a>疑難排解
 
-* 如果 Microsoft 帳戶提供者將您重新導向至 [登入錯誤] 頁面，請注意 Uri 中（主題標籤）後面的 [錯誤標題] 和 [描述] 查詢字串參數 `#` 。
+* 如果 Microsoft 帳戶提供者將您重新導向至 [登入錯誤] 頁面，請注意 Uri 中的 (主題標籤) 後面的錯誤標題和描述查詢字串參數 `#` 。
 
   雖然錯誤訊息似乎表示 Microsoft 驗證有問題，但最常見的原因是您的應用程式 Uri 不符合為**Web**平臺指定的任何重新**導向 uri** 。
 * 如果 Identity 未透過 `services.AddIdentity` 在中呼叫 `ConfigureServices` 來設定，則嘗試驗證會導致*ArgumentException：必須提供 ' SignInScheme ' 選項*。 此範例中使用的專案範本可確保完成此作業。

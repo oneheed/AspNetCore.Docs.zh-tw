@@ -7,6 +7,8 @@ ms.author: scaddie
 ms.custom: mvc
 ms.date: 03/07/2019
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -15,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: spa/react
-ms.openlocfilehash: d5185a80895423bdd60309509ab4d1dad4dad12f
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: e9f3bbe2248d1c2fc9030745febb69177c301f7e
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85401723"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88013121"
 ---
 # <a name="use-the-react-project-template-with-aspnet-core"></a>React 專案範本與 ASP.NET Core 搭配使用
 
@@ -28,7 +30,7 @@ ms.locfileid: "85401723"
 
 這個範本相當於建立一個 ASP.NET Core 專案作為 API 後端，以及建立一個標準 CRA React 專案作為 UI，但是可以將這兩個專案裝載至單一應用程式專案中，這樣便可視為一個整體進行建置與發行。
 
-[回應] 專案範本不是用於伺服器端轉譯（SSR）。 針對具有反應和 Node.js 的 SSR，請考慮[Next.js](https://github.com/zeit/next.js/)或[Razzle](https://github.com/jaredpalmer/razzle)。
+[回應] 專案範本不是用於伺服器端轉譯 (SSR) 。 針對具有反應和 Node.js 的 SSR，請考慮[Next.js](https://github.com/zeit/next.js/)或[Razzle](https://github.com/jaredpalmer/razzle)。
 
 ## <a name="create-a-new-app"></a>建立新的應用程式
 
@@ -114,7 +116,7 @@ npm install --save <package_name>
 當您啟動 ASP.NET Core 應用程式，它並不會啟動 CRA 伺服器。 而是改為使用您手動啟動的執行個體。 這樣可以加快它的啟動和重新啟動速度。 不用每一次都要等候 React 應用程式來重新建置。
 
 > [!IMPORTANT]
-> 「伺服器端轉譯」不是此範本支援的功能。 此範本的目標是要符合與「建立-回應應用程式」的同位檢查。 因此，不支援「建立-回應應用程式」專案（例如 SSR）中未包含的案例和功能，而且會保留為使用者的練習。
+> 「伺服器端轉譯」不是此範本支援的功能。 此範本的目標是要符合與「建立-回應應用程式」的同位檢查。 因此，不支援「建立-回應應用程式」專案中所包含的案例和功能 (例如 SSR) ，並將其保留為使用者的練習。
 
 ## <a name="additional-resources"></a>其他資源
 

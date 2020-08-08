@@ -7,6 +7,8 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 02/18/2020
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -15,18 +17,18 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/advanced-scenarios
-ms.openlocfilehash: bdea9f2fe5c552b56414bb49588733c8dc2a34db
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: d6446447a51e22b7df1289e7ef20a4a6381c2b20
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85400215"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88012523"
 ---
-# <a name="aspnet-core-blazor-advanced-scenarios"></a>ASP.NET Core Blazor advanced 案例
+# <a name="aspnet-core-no-locblazor-advanced-scenarios"></a>ASP.NET Core Blazor advanced 案例
 
 By [Luke Latham](https://github.com/guardrex)和[Daniel Roth](https://github.com/danroth27)
 
-## <a name="blazor-server-circuit-handler"></a>Blazor Server線路處理常式
+## <a name="no-locblazor-server-circuit-handler"></a>Blazor Server線路處理常式
 
 Blazor Server允許程式碼定義*電路處理常式*，允許對使用者線路狀態的變更執行程式碼。 線路處理常式是透過衍生自 `CircuitHandler` 並在應用程式的服務容器中註冊類別來執行。 下列線路處理常式範例會追蹤開啟的 SignalR 連接：
 
@@ -79,7 +81,7 @@ public void ConfigureServices(IServiceCollection services)
 <xref:Microsoft.AspNetCore.Components.Rendering.RenderTreeBuilder>提供操作元件和專案的方法，包括在 c # 程式碼中手動建立元件。
 
 > [!NOTE]
-> 使用 <xref:Microsoft.AspNetCore.Components.Rendering.RenderTreeBuilder> 來建立元件是一個先進的案例。 格式不正確的元件（例如，未封閉的標記標記）可能會導致未定義的行為。
+> 使用 <xref:Microsoft.AspNetCore.Components.Rendering.RenderTreeBuilder> 來建立元件是一個先進的案例。 格式不正確的元件 (例如，未封閉的標記標記) 可能會導致未定義的行為。
 
 請考慮下列 `PetDetails` 元件，它可以手動內建在另一個元件中：
 
@@ -95,7 +97,7 @@ public void ConfigureServices(IServiceCollection services)
 }
 ```
 
-在下列範例中，方法中的迴圈會 `CreateComponent` 產生三個 `PetDetails` 元件。 呼叫 <xref:Microsoft.AspNetCore.Components.Rendering.RenderTreeBuilder> 方法來建立元件（ `OpenComponent` 和）時 `AddAttribute` ，序號是源程式碼號。 Blazor差異演算法依賴對應于不同程式程式碼的序號，而不是相異的呼叫調用。 使用方法建立元件時 <xref:Microsoft.AspNetCore.Components.Rendering.RenderTreeBuilder> ，硬式編碼序號的引數。 **使用計算或計數器來產生序號可能會導致效能不佳。** 如需詳細資訊，請參閱[序號與程式程式碼號，而不是執行順序](#sequence-numbers-relate-to-code-line-numbers-and-not-execution-order)一節。
+在下列範例中，方法中的迴圈會 `CreateComponent` 產生三個 `PetDetails` 元件。 呼叫 <xref:Microsoft.AspNetCore.Components.Rendering.RenderTreeBuilder> 方法來建立 (和) 的元件時 `OpenComponent` `AddAttribute` ，序號是源程式碼號。 Blazor差異演算法依賴對應于不同程式程式碼的序號，而不是相異的呼叫調用。 使用方法建立元件時 <xref:Microsoft.AspNetCore.Components.Rendering.RenderTreeBuilder> ，硬式編碼序號的引數。 **使用計算或計數器來產生序號可能會導致效能不佳。** 如需詳細資訊，請參閱[序號與程式程式碼號，而不是執行順序](#sequence-numbers-relate-to-code-line-numbers-and-not-execution-order)一節。
 
 `BuiltContent`成分
 
@@ -135,11 +137,11 @@ public void ConfigureServices(IServiceCollection services)
 
 ### <a name="sequence-numbers-relate-to-code-line-numbers-and-not-execution-order"></a>序號與程式程式碼號相關，而不是執行順序
 
-Razor元件檔案（ `.razor` ）一律會進行編譯。 編譯是在解讀程式碼方面的潛在優勢，因為編譯步驟可以用來插入資訊，以在執行時間改善應用程式效能。
+Razor元件檔案 (`.razor`) 一律會進行編譯。 編譯是在解讀程式碼方面的潛在優勢，因為編譯步驟可以用來插入資訊，以在執行時間改善應用程式效能。
 
 這些改良功能的重要範例包括*序號*。 序號會向運行時程表示輸出來自哪些不同和已排序的程式程式碼。 執行時間會使用這項資訊，以線性時間產生有效率的樹狀差異，這比一般樹狀結構的差異演算法通常還能快得多。
 
-請考慮下列 Razor 元件（ `.razor` ）檔案：
+請考慮下列 Razor 元件 (`.razor`) 檔案：
 
 ```razor
 @if (someFlag)
@@ -219,11 +221,11 @@ builder.AddContent(seq++, "Second");
 
 * 如果序號是動態產生的，應用程式效能會受到影響。
 * 架構無法在執行時間自動建立自己的序號，因為必要的資訊不存在，除非是在編譯時期加以捕捉。
-* 請勿撰寫長時間區塊的手動執行 <xref:Microsoft.AspNetCore.Components.Rendering.RenderTreeBuilder> 邏輯。 偏好使用檔案 `.razor` ，並允許編譯器處理序號。 如果您無法避免手動 <xref:Microsoft.AspNetCore.Components.Rendering.RenderTreeBuilder> 邏輯，請將長塊的程式碼分割成較小的片段，以 <xref:Microsoft.AspNetCore.Components.Rendering.RenderTreeBuilder.OpenRegion%2A> / <xref:Microsoft.AspNetCore.Components.Rendering.RenderTreeBuilder.CloseRegion%2A> 呼叫。 每個區域都有自己的序號個別空間，因此您可以在每個區域內從零（或任何其他任一數字）重新開機。
-* 如果序號已硬式編碼，則 diff 演算法只會要求序號增加值。 起始值和間距無關。 一個合法的選項是使用程式程式碼號做為序號，或從零開始，並以一個或數百個（或任何慣用的間隔）來增加。 
+* 請勿撰寫長時間區塊的手動執行 <xref:Microsoft.AspNetCore.Components.Rendering.RenderTreeBuilder> 邏輯。 偏好使用檔案 `.razor` ，並允許編譯器處理序號。 如果您無法避免手動 <xref:Microsoft.AspNetCore.Components.Rendering.RenderTreeBuilder> 邏輯，請將長塊的程式碼分割成較小的片段，以 <xref:Microsoft.AspNetCore.Components.Rendering.RenderTreeBuilder.OpenRegion%2A> / <xref:Microsoft.AspNetCore.Components.Rendering.RenderTreeBuilder.CloseRegion%2A> 呼叫。 每個區域都有自己的序號個別空間，因此您可以從零 (或每個區域內的任何其他任一數字) 重新開機。
+* 如果序號已硬式編碼，則 diff 演算法只會要求序號增加值。 起始值和間距無關。 一個合法的選項是使用程式程式碼號做為序號，或從零開始，並以一個或數百個 (或任何慣用的間隔) 來增加。 
 * Blazor會使用序號，而其他樹狀結構比較的 UI 架構則不會使用它們。 使用序號時，比較速度會更快，而且 Blazor 具有可自動處理序號以開發人員撰寫檔案之編譯步驟的優點 `.razor` 。
 
-## <a name="perform-large-data-transfers-in-blazor-server-apps"></a>在應用程式中執行大型資料傳輸 Blazor Server
+## <a name="perform-large-data-transfers-in-no-locblazor-server-apps"></a>在應用程式中執行大型資料傳輸 Blazor Server
 
 在某些情況下，必須在 JavaScript 和之間傳輸大量資料 Blazor 。 通常會在下列情況進行大型資料傳輸：
 
@@ -344,7 +346,7 @@ public class FileUploader : IDisposable
   * 要接收的區段數目會計算並儲存在中 `numberOfSegments` 。
   * 這些區段會在 `for` 透過 JS interop 與的迴圈中要求 `jsRuntime.InvokeAsync<string>('receiveSegment', i, selector)` 。 在解碼之前，所有區段（但最後一個）必須是8192個位元組。 系統會強制用戶端以有效率的方式傳送資料。
   * 針對每個收到的區段，會先執行檢查，然後再使用進行解碼 <xref:System.Convert.TryFromBase64String%2A> 。
-  * <xref:System.IO.Stream> `SegmentedStream` 當上傳完成之後，會以新的（）傳回資料的資料流程。
+  * <xref:System.IO.Stream> `SegmentedStream` 當上傳完成之後，會以新的 () 傳回包含資料的資料流程。
 
 分段資料流程類別會將區段清單公開為 readonly 不可搜尋 <xref:System.IO.Stream> ：
 

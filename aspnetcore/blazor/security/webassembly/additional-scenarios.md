@@ -7,6 +7,8 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 08/03/2020
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -15,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/security/webassembly/additional-scenarios
-ms.openlocfilehash: 81ab2bb139dfcbea712d4eb51acfc9d7f6767d46
-ms.sourcegitcommit: 84150702757cf7a7b839485382420e8db8e92b9c
+ms.openlocfilehash: 15531c39a66a9f6dfd0f5c20cf960e4db5a78074
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 08/05/2020
-ms.locfileid: "87818829"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88013797"
 ---
 # <a name="aspnet-core-no-locblazor-webassembly-additional-security-scenarios"></a>ASP.NET Core Blazor WebAssembly 其他安全性案例
 
@@ -444,7 +446,7 @@ requestMessage.SetBrowserRequestCredentials(BrowserRequestCredentials.Include);
 
 ## <a name="cross-origin-resource-sharing-cors"></a>跨原始資源分享 (CORS) 
 
-將認證傳送 (在 CORS 要求上) 授權 cookie/標頭時， `Authorization` cors 原則必須允許標頭。
+將認證傳送 (cookie 在 cors 要求上) 授權 s/標頭時， `Authorization` cors 原則必須允許標頭。
 
 下列原則包含的設定：
 
@@ -467,13 +469,13 @@ app.UseCors(policy =>
 
 ## <a name="handle-token-request-errors"></a>處理權杖要求錯誤
 
-當單一頁面應用程式 (SPA) 使用 OpenID Connect (OIDC) 來驗證使用者時，驗證狀態會在 SPA 和提供者中的本機維護 Identity (IP) 以設定為使用者提供其認證的結果的會話 cookie 形式。
+當單一頁面應用程式 (SPA) 使用 OpenID Connect (OIDC) 來驗證使用者時，驗證狀態會在 SPA 和提供者中的本機維護 Identity (IP) 以 cookie 使用者提供其認證所設定的會話形式來進行。
 
 IP 為使用者發出的權杖通常會在短時間內有效，大約一小時，因此用戶端應用程式必須定期提取新的權杖。 否則，在授與的權杖過期之後，使用者會被登出。 在大多數情況下，OIDC 用戶端可以布建新的權杖，而不需要使用者重新驗證，因為它會保留在 IP 內的驗證狀態或「會話」。
 
 在某些情況下，用戶端無法在沒有使用者互動的情況下取得權杖，例如，基於某些原因，使用者明確地登出了 IP。 如果使用者造訪和登出，就會發生這種情況 `https://login.microsoftonline.com` 。在這些情況下，應用程式不會立即得知使用者是否已登出。用戶端持有的任何權杖可能不再有效。 此外，用戶端無法在目前權杖過期之後，不需要使用者互動就布建新權杖。
 
-這些案例並不是以權杖為基礎的驗證所特有。 它們屬於 Spa 的本質。 如果移除驗證 cookie，使用 cookie 的 SPA 也無法呼叫伺服器 API。
+這些案例並不是以權杖為基礎的驗證所特有。 它們屬於 Spa 的本質。 如果移除驗證，使用的 SPA cookie 也無法呼叫伺服器 API cookie 。
 
 當應用程式對受保護的資源執行 API 呼叫時，您必須注意下列事項：
 

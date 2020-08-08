@@ -1,12 +1,14 @@
 ---
 title: 針對 ASP.NET Core 強制執行內容安全性原則Blazor
 author: guardrex
-description: 瞭解如何搭配 ASP.NET Core apps 使用內容安全性原則（CSP） Blazor ，協助防止跨網站腳本（XSS）攻擊。
+description: 瞭解如何使用內容安全性原則 (CSP) 搭配 ASP.NET Core Blazor apps，協助防止跨網站腳本 (XSS) 攻擊。
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
 ms.date: 05/19/2020
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -15,18 +17,18 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/security/content-security-policy
-ms.openlocfilehash: 5c53ac64d3ae1b365b40c519eb119f913d58cad1
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: bbe4bf1b0999d66471743c9efa1a9a9f121f2e05
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85402438"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88014032"
 ---
-# <a name="enforce-a-content-security-policy-for-aspnet-core-blazor"></a>針對 ASP.NET Core 強制執行內容安全性原則Blazor
+# <a name="enforce-a-content-security-policy-for-aspnet-core-no-locblazor"></a>針對 ASP.NET Core 強制執行內容安全性原則Blazor
 
 By [Javier Calvarro Nelson](https://github.com/javiercn)和[Luke Latham](https://github.com/guardrex)
 
-[跨網站腳本（XSS）](xref:security/cross-site-scripting)是一種安全性弱點，攻擊者會將一或多個惡意的用戶端腳本放入應用程式轉譯的內容中。 內容安全性原則（CSP）會通知瀏覽器有效，以協助防止 XSS 攻擊：
+[跨網站腳本 (XSS) ](xref:security/cross-site-scripting)是一種安全性弱點，攻擊者會將一或多個惡意的用戶端腳本放入應用程式轉譯的內容中。  (CSP) 的內容安全性原則，會通知瀏覽器有效，以協助防止 XSS 攻擊：
 
 * 載入內容的來源，包括腳本、樣式表單和影像。
 * 頁面所採取的動作，指定表單的允許 URL 目標。
@@ -63,7 +65,7 @@ By [Javier Calvarro Nelson](https://github.com/javiercn)和[Luke Latham](https:/
   * 指定啟動載入器樣式表單的 `https://stackpath.bootstrapcdn.com/` 主機來源。
   * 指定 `self` 以指出應用程式的來源（包括配置和埠號碼）是有效的來源。
   * 指定 `unsafe-inline` 允許使用內嵌樣式。 應用程式中的 UI 需要內嵌宣告，才能在 Blazor Server 初始要求之後重新連接用戶端和伺服器。 在未來的版本中，可能會移除內嵌樣式，因此不再 `unsafe-inline` 需要。
-* [升級-不安全-要求](https://developer.mozilla.org/docs/Web/HTTP/Headers/Content-Security-Policy/upgrade-insecure-requests)：表示來自不安全（HTTP）來源的內容 url 應透過 HTTPS 安全地取得。
+* [升級-不安全-要求](https://developer.mozilla.org/docs/Web/HTTP/Headers/Content-Security-Policy/upgrade-insecure-requests)：指出不安全 (HTTP) 來源的內容 url 應透過 HTTPS 安全地取得。
 
 所有瀏覽器都支援上述指示詞，但 Microsoft Internet Explorer 除外。
 
@@ -80,7 +82,7 @@ By [Javier Calvarro Nelson](https://github.com/javiercn)和[Luke Latham](https:/
 使用 `<meta>` 標記來套用原則：
 
 * 將屬性的值設定 `http-equiv` 為 `Content-Security-Policy` 。
-* 將指示詞放在 `content` 屬性值中。 以分號（）分隔指示詞 `;` 。
+* 將指示詞放在 `content` 屬性值中。 使用分號分隔指示詞 (`;`) 。
 * 請一律將 `meta` 標記放在 `<head>` 內容中。
 
 下列各節顯示和的範例 Blazor WebAssembly 原則 Blazor Server 。 這些範例會針對的每個版本，使用此文章進行版本設定 Blazor 。 若要使用適用于您版本的版本，請選取此網頁上具有 [**版本**] 下拉式選取器的檔版本。

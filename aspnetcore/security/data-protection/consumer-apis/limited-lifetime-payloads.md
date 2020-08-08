@@ -5,6 +5,8 @@ description: 瞭解如何使用 ASP.NET Core 的資料保護 Api 來限制受保
 ms.author: riande
 ms.date: 10/14/2016
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -13,12 +15,12 @@ no-loc:
 - Razor
 - SignalR
 uid: security/data-protection/consumer-apis/limited-lifetime-payloads
-ms.openlocfilehash: d8c83ca46b1993af1f5e7985571ff012d90b1e01
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: c7bc86cd42a725f21cf66187c033376a8c5a9e65
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85408366"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88014824"
 ---
 # <a name="limit-the-lifetime-of-protected-payloads-in-aspnet-core"></a>限制 ASP.NET Core 中受保護承載的存留期
 
@@ -32,29 +34,29 @@ ms.locfileid: "85408366"
 
 `ITimeLimitedDataProtector`會公開下列 API 介面和擴充方法：
 
-* CreateProtector （字串用途）： ITimeLimitedDataProtector-此 API 類似于現有的 `IDataProtectionProvider.CreateProtector` ，其可用來從根時間限制的保護裝置建立[目的鏈](xref:security/data-protection/consumer-apis/purpose-strings)。
+* CreateProtector (字串目的) ： ITimeLimitedDataProtector-此 API 類似于現有的 `IDataProtectionProvider.CreateProtector` ，其可用來從根時間限制的保護裝置建立[目的鏈](xref:security/data-protection/consumer-apis/purpose-strings)。
 
-* 保護（byte [] 純文字，DateTimeOffset 過期）： byte []
+* 保護 (byte [] 純文字，DateTimeOffset 到期) ： byte []
 
-* 保護（byte [] 純文字，TimeSpan 存留期）： byte []
+* 保護 (byte [] 純文字，TimeSpan 存留期) ： byte []
 
-* 保護（byte [] 純文字）： byte []
+* 保護 (byte [] 純文字) ： byte []
 
-* 保護（字串純文字、DateTimeOffset 過期）：字串
+* 保護 (字串純文字、DateTimeOffset 到期) ：字串
 
-* 保護（字串純文字，TimeSpan 存留期）：字串
+* 保護 (字串純文字、TimeSpan 存留期) ：字串
 
-* 保護（字串純文字）：字串
+* 保護 (字串純文字) ：字串
 
-除了 `Protect` 只採用純文字的核心方法之外，還有新的多載，可讓您指定承載的到期日。 到期日可指定為絕對日期（透過 `DateTimeOffset` ）或做為相對時間（從目前的系統時間，透過 `TimeSpan` ）。 如果呼叫不接受到期的多載，則會假設承載永不過期。
+除了 `Protect` 只採用純文字的核心方法之外，還有新的多載，可讓您指定承載的到期日。 您可以透過) ，將到期日指定為透過)  (的絕對日期 `DateTimeOffset` ，或當做目前系統時間 (的相對時間 `TimeSpan` 。 如果呼叫不接受到期的多載，則會假設承載永不過期。
 
-* 取消保護（byte [] protectedData，out DateTimeOffset 過期）： byte []
+* 取消保護 (byte [] protectedData，輸出 DateTimeOffset 到期) ： byte []
 
-* 取消保護（byte [] protectedData）： byte []
+* 取消保護 (byte [] protectedData) ： byte []
 
-* 取消保護（字串 protectedData，輸出 DateTimeOffset 到期）：字串
+* 取消保護 (字串 protectedData，輸出 DateTimeOffset 到期) ：字串
 
-* 取消保護（字串 protectedData）：字串
+* 取消保護 (字串 protectedData) ：字串
 
 方法會傳回 `Unprotect` 原始未受保護的資料。 如果裝載尚未過期，則會以選擇性的 out 參數以及原始未受保護的資料來傳回絕對到期。 如果承載已過期，則取消保護方法的所有多載都會擲回 System.security.cryptography.cryptographicexception。
 

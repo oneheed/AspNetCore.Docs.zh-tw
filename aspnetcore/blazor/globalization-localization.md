@@ -7,6 +7,8 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 06/04/2020
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -15,14 +17,14 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/globalization-localization
-ms.openlocfilehash: 1d24ebe900dfcdeb8b7bcc97f1d212deea9cecae
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: 59b6e4cb2f466594d8a105a239e175e9c7b37ad8
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85402724"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88014239"
 ---
-# <a name="aspnet-core-blazor-globalization-and-localization"></a>ASP.NET Core Blazor 全球化和當地語系化
+# <a name="aspnet-core-no-locblazor-globalization-and-localization"></a>ASP.NET Core Blazor 全球化和當地語系化
 
 By [Luke Latham](https://github.com/guardrex)和[Daniel Roth](https://github.com/danroth27)
 
@@ -36,7 +38,7 @@ Razor元件可以讓使用者以多種文化特性和語言來存取。 以下�
 * <xref:Microsoft.Extensions.Localization.IStringLocalizer><xref:Microsoft.Extensions.Localization.IStringLocalizer%601>應用程式*支援*和 Blazor 。
 * <xref:Microsoft.AspNetCore.Mvc.Localization.IHtmlLocalizer>、 <xref:Microsoft.AspNetCore.Mvc.Localization.IViewLocalizer> 和資料批註當地語系化 ASP.NET CORE MVC 案例中，而且應用程式**不支援** Blazor 。
 
-如需詳細資訊，請參閱 <xref:fundamentals/localization> 。
+如需詳細資訊，請參閱<xref:fundamentals/localization>。
 
 ## <a name="globalization"></a>全球化
 
@@ -44,7 +46,7 @@ Blazor的 [`@bind`](xref:mvc/views/razor#bind) 功能會執行格式，並根據
 
 您可以從屬性存取目前的文化 <xref:System.Globalization.CultureInfo.CurrentCulture?displayProperty=fullName> 特性。
 
-<xref:System.Globalization.CultureInfo.InvariantCulture?displayProperty=nameWithType>用於下欄欄位類型（ `<input type="{TYPE}" />` ）：
+<xref:System.Globalization.CultureInfo.InvariantCulture?displayProperty=nameWithType>用於下欄欄位類型 (`<input type="{TYPE}" />`) ：
 
 * `date`
 * `number`
@@ -81,20 +83,20 @@ Blazor Server應用程式是使用[當地語系化中介軟體](xref:fundamental
 
 您可以使用下列其中一種方法來設定文化特性：
 
-* [Cookie](#cookies)
+* [Cookie今日](#cookies)
 * [提供 UI 以選擇文化特性](#provide-ui-to-choose-the-culture)
 
 如需詳細資訊和範例，請參閱 <xref:fundamentals/localization>。
 
-#### <a name="cookies"></a>Cookie
+#### <a name="no-loccookies"></a>Cookie
 
-當地語系化文化特性 cookie 可以保存使用者的文化特性。 當地語系化中介軟體會在後續要求中讀取 cookie，以設定使用者的文化特性。 
+當地語系化文化特性 cookie 可以保存使用者的文化特性。 當地語系化中介軟體會讀取 cookie 後續要求的，以設定使用者的文化特性。 
 
-使用 cookie 可確保 WebSocket 連接可以正確地傳播文化特性。 如果當地語系化架構是以 URL 路徑或查詢字串為基礎，配置可能無法使用 Websocket，因而無法保存文化特性。 因此，建議的方法是使用當地語系化文化特性 cookie。
+使用 cookie 可確保 WebSocket 連接可以正確地傳播文化特性。 如果當地語系化架構是以 URL 路徑或查詢字串為基礎，配置可能無法使用 Websocket，因而無法保存文化特性。 因此，建議的方法是使用當地語系化文化特性 cookie 。
 
-如果文化特性保存在當地語系化 cookie 中，任何技術都可以用來指派文化特性。 如果應用程式已建立伺服器端 ASP.NET Core 的當地語系化配置，請繼續使用應用程式的現有當地語系化基礎結構，並在應用程式的配置內設定當地語系化文化特性 cookie。
+如果文化特性是以當地語系化的方式保存，則任何技術都可以用來指派文化特性 cookie 。 如果應用程式已建立伺服器端 ASP.NET Core 的當地語系化配置，請繼續使用應用程式的現有當地語系化基礎結構，並在 cookie 應用程式的配置內設定當地語系化文化特性。
 
-下列範例顯示如何在可由當地語系化中介軟體讀取的 cookie 中設定目前的文化特性。 在檔案 Razor `Pages/_Host.cshtml` 的開頭標記內立即建立運算式 `<body>` ：
+下列範例顯示如何在中設定 cookie 可由當地語系化中介軟體讀取的目前文化特性。 在檔案 Razor `Pages/_Host.cshtml` 的開頭標記內立即建立運算式 `<body>` ：
 
 ```cshtml
 @using System.Globalization
@@ -120,7 +122,7 @@ Blazor Server應用程式是使用[當地語系化中介軟體](xref:fundamental
 
 1. 瀏覽器會將初始 HTTP 要求傳送至應用程式。
 1. 文化特性是由當地語系化中介軟體所指派。
-1. Razor頁面（）中的運算式會在 `_Host` `_Host.cshtml` cookie 中保存文化特性，做為回應的一部分。
+1. Razor頁面中的運算式 `_Host` (`_Host.cshtml`) 會在中保存文化特性， cookie 做為回應的一部分。
 1. 瀏覽器會開啟 WebSocket 連線，以建立互動式 Blazor Server 會話。
 1. 當地語系化中介軟體會讀取 cookie 並指派文化特性。
 1. Blazor Server會話的開頭是正確的文化特性。
@@ -129,9 +131,9 @@ Blazor Server應用程式是使用[當地語系化中介軟體](xref:fundamental
 
 為了提供允許使用者選取文化特性的 UI，建議使用以重新*導向為基礎的方法*。 此程式類似于使用者嘗試存取安全資源時，在 web 應用程式中發生的情況。 使用者重新導向至登入頁面，然後重新導向回原始資源。 
 
-應用程式會透過重新導向至控制器的方式，來保存使用者選取的文化特性。 控制器會將使用者選取的文化特性設定為 cookie，並將使用者重新導向回到原始 URI。
+應用程式會透過重新導向至控制器的方式，來保存使用者選取的文化特性。 控制器會將使用者選取的文化特性設定為 cookie ，並將使用者重新導向回到原始 URI。
 
-在伺服器上建立 HTTP 端點，以在 cookie 中設定使用者選取的文化特性，並執行重新導向回到原始 URI：
+在伺服器上建立 HTTP 端點，以在中設定使用者選取的文化特性 cookie ，並執行重新導向回到原始 URI：
 
 ```csharp
 [Route("[controller]/[action]")]
@@ -153,7 +155,7 @@ public class CultureController : Controller
 ```
 
 > [!WARNING]
-> 使用 <xref:Microsoft.AspNetCore.Mvc.ControllerBase.LocalRedirect%2A> 動作結果來防止開啟重新導向攻擊。 如需詳細資訊，請參閱 <xref:security/preventing-open-redirects> 。
+> 使用 <xref:Microsoft.AspNetCore.Mvc.ControllerBase.LocalRedirect%2A> 動作結果來防止開啟重新導向攻擊。 如需詳細資訊，請參閱<xref:security/preventing-open-redirects>。
 
 如果應用程式未設定為處理控制器動作：
 

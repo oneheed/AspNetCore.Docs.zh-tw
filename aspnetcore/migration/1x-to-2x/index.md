@@ -6,6 +6,8 @@ ms.author: scaddie
 ms.custom: mvc
 ms.date: 12/05/2019
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -14,12 +16,12 @@ no-loc:
 - Razor
 - SignalR
 uid: migration/1x-to-2x/index
-ms.openlocfilehash: 97fe2f36aed4a2ac60a7ffc30ede5e682a838e5e
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: cad1cd868ef8c972d7e0fbfec79cd1d8b49c3b6e
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85408691"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88015331"
 ---
 # <a name="migrate-from-aspnet-core-1x-to-20"></a>從 ASP.NET Core 1.x 遷移至 2.0
 
@@ -164,7 +166,7 @@ Unable to create an object of type '<Context>'. Add an implementation of 'IDesig
 
 <a name="view-compilation"></a>
 
-## <a name="review-razor-view-compilation-setting"></a>審核 Razor 視圖編譯設定
+## <a name="review-no-locrazor-view-compilation-setting"></a>審核 Razor 視圖編譯設定
 
 更快速的應用程式啟動時間和較小的發行組合對您而言極為重要。 基於這些理由，預設會在 ASP.NET Core 2.0 中啟用[ Razor view 編譯](xref:mvc/views/view-compilation)。
 
@@ -198,7 +200,7 @@ Unable to create an object of type '<Context>'. Add an implementation of 'IDesig
 
 <a name="auth-and-identity"></a>
 
-## <a name="adopt-authenticationidentity-improvements"></a>採用驗證/改良 Identity 功能
+## <a name="adopt-authenticationno-locidentity-improvements"></a>採用驗證/改良 Identity 功能
 
 ASP.NET Core 2.0 具有新的驗證模型和一些 ASP.NET Core 的重大變更 Identity 。 如果您已在啟用個別使用者帳戶的情況下建立專案，或者您已手動新增驗證或 Identity ，請參閱[遷移驗證和 Identity ASP.NET Core 2.0](xref:migration/1x-to-2x/identity-2x)。
 

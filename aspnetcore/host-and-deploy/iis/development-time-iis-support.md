@@ -7,6 +7,8 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 02/07/2020
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -15,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: host-and-deploy/iis/development-time-iis-support
-ms.openlocfilehash: d922b2eb4d00a252b3e7da2f00de8b4571359b20
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: ba4d47e0500d7f3287e6a57d10036d774c4b19f4
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85406429"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88015661"
 ---
 # <a name="development-time-iis-support-in-visual-studio-for-aspnet-core"></a>Visual Studio for ASP.NET Core 中的開發階段 IIS 支援
 
@@ -40,7 +42,7 @@ ms.locfileid: "85406429"
 ## <a name="enable-iis"></a>啟用 IIS
 
 1. 在 Windows 中，瀏覽至 [控制台]**[程式]** > **[程式和功能]** > **[開啟或關閉 Windows 功能]** > **** (畫面左側)。
-1. 選取 [Internet Information Services]**** 核取方塊。 選取 [確定]****。
+1. 選取 [Internet Information Services]**** 核取方塊。 選取 [確定]。
 
 安裝 IIS 可能需要重新啟動系統。
 
@@ -68,7 +70,7 @@ IIS 的網站必須含有下列設定：
 
 針對需要 HTTPS 的新專案，請在 [建立新的 ASP.NET Core Web 應用程式]**** 視窗中，選取 [針對 HTTPS 進行設定]**** 核取方塊。 選取該核取方塊會在建立應用程式時，將 [HTTPS 重新導向和 HSTS 中介軟體](xref:security/enforcing-ssl)加入該應用程式。
 
-針對需要 HTTPS 的現有專案，請使用 `Startup.Configure`中的 HTTPS 重新導向和 HSTS 中介軟體。 如需詳細資訊，請參閱 <xref:security/enforcing-ssl> 。
+針對需要 HTTPS 的現有專案，請使用 `Startup.Configure`中的 HTTPS 重新導向和 HSTS 中介軟體。 如需詳細資訊，請參閱<xref:security/enforcing-ssl>。
 
 針對使用 HTTP 的專案，[HTTPS 重新導向和 HSTS 中介軟體](xref:security/enforcing-ssl)並不會被加入至應用程式。 您不需要進行任何應用程式設定。
 
@@ -155,7 +157,7 @@ IIS 的網站必須含有下列設定：
 ## <a name="enable-iis"></a>啟用 IIS
 
 1. 在 Windows 中，瀏覽至 [控制台]**[程式]** > **[程式和功能]** > **[開啟或關閉 Windows 功能]** > **** (畫面左側)。
-1. 選取 [Internet Information Services]**** 核取方塊。 選取 [確定]****。
+1. 選取 [Internet Information Services]**** 核取方塊。 選取 [確定]。
 
 安裝 IIS 可能需要重新啟動系統。
 
@@ -183,7 +185,7 @@ IIS 的網站必須含有下列設定：
 
 針對需要 HTTPS 的新專案，請在 [建立新的 ASP.NET Core Web 應用程式]**** 視窗中，選取 [針對 HTTPS 進行設定]**** 核取方塊。 選取該核取方塊會在建立應用程式時，將 [HTTPS 重新導向和 HSTS 中介軟體](xref:security/enforcing-ssl)加入該應用程式。
 
-針對需要 HTTPS 的現有專案，請使用 `Startup.Configure`中的 HTTPS 重新導向和 HSTS 中介軟體。 如需詳細資訊，請參閱 <xref:security/enforcing-ssl> 。
+針對需要 HTTPS 的現有專案，請使用 `Startup.Configure`中的 HTTPS 重新導向和 HSTS 中介軟體。 如需詳細資訊，請參閱<xref:security/enforcing-ssl>。
 
 針對使用 HTTP 的專案，[HTTPS 重新導向和 HSTS 中介軟體](xref:security/enforcing-ssl)並不會被加入至應用程式。 您不需要進行任何應用程式設定。
 

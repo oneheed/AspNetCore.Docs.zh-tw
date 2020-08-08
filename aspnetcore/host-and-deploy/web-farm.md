@@ -7,6 +7,8 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 01/13/2020
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -15,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: host-and-deploy/web-farm
-ms.openlocfilehash: 13c4a8e287e4b62a1429f67fbe83ff5b0dc65f52
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: 58409b5c47d71c96ece6f4ecfab6f18df47f798b
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85408275"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88015435"
 ---
 # <a name="host-aspnet-core-in-a-web-farm"></a>在 Web 伺服陣列上裝載 ASP.NET Core
 
@@ -60,7 +62,7 @@ ms.locfileid: "85408275"
 
 ### <a name="caching"></a>Caching
 
-在 Web 伺服陣列環境中，快取機制必須跨 Web 伺服陣列節點共用快取項目。 快取必須依賴於通用 Redis 快取、共用的 SQL Server 資料庫，或跨 Web 伺服陣列共用快取項目的自訂快取實作。 如需詳細資訊，請參閱 <xref:performance/caching/distributed> 。
+在 Web 伺服陣列環境中，快取機制必須跨 Web 伺服陣列節點共用快取項目。 快取必須依賴於通用 Redis 快取、共用的 SQL Server 資料庫，或跨 Web 伺服陣列共用快取項目的自訂快取實作。 如需詳細資訊，請參閱<xref:performance/caching/distributed>。
 
 ## <a name="dependent-components"></a>相依元件
 
@@ -69,10 +71,10 @@ ms.locfileid: "85408275"
 | 狀況 | 相依於 &hellip; |
 | -------- | ------------------- |
 | 驗證 | 資料保護 (請參閱 <xref:security/data-protection/configuration/overview>)。<br><br>如需詳細資訊，請參閱 <xref:security/authentication/cookie> 和 <xref:security/cookie-sharing>。 |
-| Identity | 驗證及資料庫設定。<br><br>如需詳細資訊，請參閱 <xref:security/authentication/identity> 。 |
-| 工作階段 | 資料保護 (加密的 cookie) (請參閱 <xref:security/data-protection/configuration/overview>) 和快取 (請參閱 <xref:performance/caching/distributed>)。<br><br>如需詳細資訊，請參閱[會話和狀態管理：會話狀態](xref:fundamentals/app-state#session-state)。 |
-| TempData | 資料保護（加密的 cookie）（請參閱 <xref:security/data-protection/configuration/overview> ）或會話（請參閱[會話和狀態管理：會話狀態](xref:fundamentals/app-state#session-state)）。<br><br>如需詳細資訊，請參閱[會話和狀態管理： TempData](xref:fundamentals/app-state#tempdata)。 |
-| 防偽 | 資料保護 (請參閱 <xref:security/data-protection/configuration/overview>)。<br><br>如需詳細資訊，請參閱 <xref:security/anti-request-forgery> 。 |
+| Identity | 驗證及資料庫設定。<br><br>如需詳細資訊，請參閱<xref:security/authentication/identity>。 |
+| 工作階段 |  (加密的資料保護 cookie)  (參閱 <xref:security/data-protection/configuration/overview>) 和快取 (查看 <xref:performance/caching/distributed>) 。<br><br>如需詳細資訊，請參閱[會話和狀態管理：會話狀態](xref:fundamentals/app-state#session-state)。 |
+| TempData |  (加密的資料保護 cookie)  (參閱 <xref:security/data-protection/configuration/overview>) 或會話 (請參閱[會話和狀態管理：會話狀態](xref:fundamentals/app-state#session-state)) 。<br><br>如需詳細資訊，請參閱[會話和狀態管理： TempData](xref:fundamentals/app-state#tempdata)。 |
+| 防偽 | 資料保護 (請參閱 <xref:security/data-protection/configuration/overview>)。<br><br>如需詳細資訊，請參閱<xref:security/anti-request-forgery>。 |
 
 ## <a name="troubleshoot"></a>疑難排解
 
@@ -80,11 +82,11 @@ ms.locfileid: "85408275"
 
 如果未為 Web 伺服陣列環境設定資料保護或快取，則在處理要求時，會發生間歇性的錯誤。 發生這種情況是因為節點不會共用相同的資源，且使用者的要求並不是一律路由傳送回相同的節點。
 
-假設使用者使用 cookie 驗證來登入應用程式。 使用者在某個 Web 伺服陣列節點上登入應用程式。 如果使用者的下一個要求抵達他們登入的相同節點，則應用程式將能夠解密驗證 cookie，並允許存取應用程式的資源。 如果使用者的下一個要求抵達不同的節點，則應用程式無法解密來自使用者登入節點的驗證 cookie，且針對所請求資源的授權會失敗。
+請考慮使用驗證來登入應用程式的使用者 cookie 。 使用者在某個 Web 伺服陣列節點上登入應用程式。 如果其下一個要求抵達其登入所在的相同節點，應用程式就可以將驗證解密， cookie 並允許存取應用程式的資源。 如果其下一個要求抵達不同的節點，應用程式就無法將驗證 cookie 從使用者登入的節點解密，而所要求資源的授權也會失敗。
 
 如果**間歇性**發生下列任何徵兆，則問題通常可追溯到 Web 伺服陣列環境的不正確資料保護或快取設定：
 
-* 驗證中斷：驗證 cookie 設定錯誤或無法解密。 OAuth (Facebook、Microsoft、Twitter) 或 OpenIdConnect 登入失敗並出現錯誤「相互關聯失敗」。
+* 驗證中斷：驗證設定 cookie 錯誤或無法解密。 OAuth (Facebook、Microsoft、Twitter) 或 OpenIdConnect 登入失敗並出現錯誤「相互關聯失敗」。
 * 授權中斷： Identity 遺失。
 * 工作階段狀態將會遺失資料。
 * 快取項目會消失。

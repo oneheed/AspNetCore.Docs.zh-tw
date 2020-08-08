@@ -6,6 +6,8 @@ ms.author: scaddie
 ms.custom: mvc
 ms.date: 05/26/2020
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -14,12 +16,12 @@ no-loc:
 - Razor
 - SignalR
 uid: migration/webapi
-ms.openlocfilehash: 530455c85c4c869f06ba795d9fb63dcfd1c8d5cf
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: 4888de6ad55037be540cb62b6e4f02878e2b57ab
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85407222"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88014811"
 ---
 # <a name="migrate-from-aspnet-web-api-to-aspnet-core"></a>從 ASP.NET Web API 遷移至 ASP.NET Core
 
@@ -27,7 +29,7 @@ ms.locfileid: "85407222"
 
 ASP.NET 4.x Web API 是一種 HTTP 服務，可觸及各種用戶端，包括瀏覽器和行動裝置。 ASP.NET Core 將 ASP.NET 4.x 的 MVC 和 Web API 應用程式模型結合成單一程式設計模型，稱為 ASP.NET Core MVC。 本文示範從 ASP.NET 4.x Web API 遷移至 ASP.NET Core MVC 所需的步驟。
 
-[查看或下載範例程式碼](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/migration/webapi/sample)（[如何下載](xref:index#how-to-download-a-sample)）
+[查看或下載範例程式碼](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/migration/webapi/sample) ([如何下載](xref:index#how-to-download-a-sample)) 
 
 ::: moniker range=">= aspnetcore-3.0"
 
@@ -61,7 +63,7 @@ ASP.NET 4.x Web API 是一種 HTTP 服務，可觸及各種用戶端，包括瀏
 
 1. 從 [檔案]**** 功能表選取 [新增]**[專案]** > ****。
 1. 選取 [**空白解決方案**] 範本，然後選取 **[下一步]**。
-1. 將方案命名為*WebAPIMigration*。 選取 [建立]****。
+1. 將方案命名為*WebAPIMigration*。 選取 [建立]。
 1. 將現有的*ProductsApp*專案新增至方案。
 
 新增要遷移至的新 API 專案：
@@ -82,7 +84,7 @@ ASP.NET Core 不會使用*App_Start*資料夾或*global.asax*檔案。 此外，
 * 取代*global.asax*。
 * 處理所有應用程式啟動工作。
 
-如需詳細資訊，請參閱 <xref:fundamentals/startup> 。
+如需詳細資訊，請參閱<xref:fundamentals/startup>。
 
 ## <a name="migrate-models-and-controllers"></a>遷移模型和控制器
 
@@ -177,7 +179,7 @@ ASP.NET Core *API*專案範本會在產生的程式碼中包含端點路由設�
 
 在 Visual Studio 中，完成下列步驟：
 
-* 移至 **[** 檔案] [  >  **新增**  >  **專案**] [  >  **其他專案類型**]  >  **Visual Studio 方案**]。 選取 [**空白方案**]，並將方案命名為*WebAPIMigration*。 按一下 [確定]**** 按鈕。
+* 移至 **[** 檔案] [  >  **新增**  >  **專案**] [  >  **其他專案類型**]  >  **Visual Studio 方案**]。 選取 [**空白方案**]，並將方案命名為*WebAPIMigration*。 按一下 [確定] 按鈕。
 * 將現有的*ProductsApp*專案新增至方案。
 * 將新的**ASP.NET Core Web 應用程式**專案加入至方案。 從下拉式選單選取 [ **.Net Core**目標 framework]，然後選取 [ **API** ] 專案範本。 將專案命名為*ProductsCore*，然後按一下 [**確定]** 按鈕。
 
@@ -195,7 +197,7 @@ ASP.NET Core 不會使用：
 * 取代*global.asax*。
 * 處理所有應用程式啟動工作。
 
-如需詳細資訊，請參閱 <xref:fundamentals/startup> 。
+如需詳細資訊，請參閱<xref:fundamentals/startup>。
 
 在 ASP.NET Core MVC 中，在中呼叫時，預設會包含屬性路由 <xref:Microsoft.AspNetCore.Builder.MvcApplicationBuilderExtensions.UseMvc*> `Startup.Configure` 。 下列 `UseMvc` 呼叫會取代*ProductsApp*專案的*App_Start/webapiconfig.cs*檔：
 
@@ -280,7 +282,7 @@ Web API 相容性填充碼是用來做為暫時的量值，以支援將大型 AS
     * `InvalidModelStateResult`
     * `NegotiatedContentResult`
     * `ResponseMessageResult`
-* 將的實例新增 `IContentNegotiator` 至應用程式的相依性插入（DI）容器，並提供來自[WebApi](https://www.nuget.org/packages/Microsoft.AspNet.WebApi.Client/)的內容協商相關類型。 這類類型的範例包括 `DefaultContentNegotiator` 和 `MediaTypeFormatter` 。
+* 將的實例加入 `IContentNegotiator` 至應用程式的相依性插入 (DI) 容器中，並讓[WebApi](https://www.nuget.org/packages/Microsoft.AspNet.WebApi.Client/)中與內容協商相關的類型可供使用。 這類類型的範例包括 `DefaultContentNegotiator` 和 `MediaTypeFormatter` 。
 
 若要使用相容性填充碼：
 

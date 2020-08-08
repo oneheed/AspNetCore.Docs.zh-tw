@@ -6,6 +6,8 @@ ms.author: scaddie
 ms.custom: mvc
 ms.date: 07/23/2020
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -14,12 +16,12 @@ no-loc:
 - Razor
 - SignalR
 uid: client-side/bundling-and-minification
-ms.openlocfilehash: 5db6ab3d790257c677c0a4ed7e605eb39c2982ed
-ms.sourcegitcommit: cc845634a490c49ff869c89b6e422b6d65d0e886
+ms.openlocfilehash: a29ee483a68211d779b167fe167deea917c26f70
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 07/24/2020
-ms.locfileid: "87159715"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88013407"
 ---
 # <a name="bundle-and-minify-static-assets-in-aspnet-core"></a>在 ASP.NET Core 中組合及縮小靜態資產
 
@@ -31,7 +33,7 @@ ms.locfileid: "87159715"
 
 捆綁和縮制是您可以在 web 應用程式中套用的兩個不同的效能優化。 搭配使用、結合和縮制可減少伺服器要求的數目，以及減少所要求靜態資產的大小，進而提升效能。
 
-組合和縮制主要會改善第一頁的要求載入時間。 一旦要求網頁之後，瀏覽器就會快取靜態資產（JavaScript、CSS 和影像）。 因此，在要求相同資產的相同網站上要求相同頁面（或頁面）時，配套和縮制並不會改善效能。 如果資產上的 expires 標頭未正確設定，且未使用配套和縮制，則瀏覽器的有效性啟發式會將幾天後的資產過時。 此外，瀏覽器需要每個資產的驗證要求。 在此情況下，即使在第一頁要求之後，配套和縮制也可提供效能改進。
+組合和縮制主要會改善第一頁的要求載入時間。 一旦要求網頁之後，瀏覽器就會快取 (JavaScript、CSS 和影像) 的靜態資產。 因此，在要求相同資產的相同網站上要求相同頁面（或頁面）時，配套和縮制並不會改善效能。 如果資產上的 expires 標頭未正確設定，且未使用配套和縮制，則瀏覽器的有效性啟發式會將幾天後的資產過時。 此外，瀏覽器需要每個資產的驗證要求。 在此情況下，即使在第一頁要求之後，配套和縮制也可提供效能改進。
 
 ### <a name="bundling"></a>統合
 
@@ -39,7 +41,7 @@ ms.locfileid: "87159715"
 
 ### <a name="minification"></a>縮製
 
-縮制會從程式碼移除不必要的字元，而不會改變功能。 結果會大幅減少要求的資產（例如 CSS、影像和 JavaScript 檔案）的大小。 縮制的常見副作用包括縮短變數名稱為一個字元，以及移除批註和不必要的空白字元。
+縮制會從程式碼移除不必要的字元，而不會改變功能。 結果會大幅減少要求的資產，例如 CSS、影像和 JavaScript 檔案)  (。 縮制的常見副作用包括縮短變數名稱為一個字元，以及移除批註和不必要的空白字元。
 
 請考慮下列 JavaScript 函數：
 
@@ -65,7 +67,7 @@ ms.locfileid: "87159715"
 --- | :---: | :---: | :---:
 檔案要求  | 7   | 18     | 157%
 已傳輸 KB | 156 | 264.68 | 70%
-載入時間（毫秒） | 885 | 2360   | 167%
+載入時間 (ms)  | 885 | 2360   | 167%
 
 瀏覽器對於 HTTP 要求標頭而言相當冗長。 [已傳送的位元組總數] 計量在進行捆綁時明顯降低。 載入時間顯示顯著的改進，但此範例會在本機執行。 搭配透過網路傳輸的資產使用配套和縮制時，就可以獲得更佳的效能提升。
 
@@ -89,7 +91,7 @@ MVC 和 Razor Pages 專案範本提供了一種解決方案，可供包含 JSON 
 
 [!code-json[](../client-side/bundling-and-minification/samples/BuildBundlerMinifierApp/bundleconfig.json)]
 
-檔案*上的bundleconfig.js*會定義每個配套的選項。 在上述範例中，會針對自訂 JavaScript （*wwwroot/js/site.js*）和樣式表單（*wwwroot/css/.css*）檔案定義單一組合設定。
+檔案*上的bundleconfig.js*會定義每個配套的選項。 在上述範例中，會針對自訂 JavaScript (*wwwroot/js/site.js*) 和樣式表單 (*wwwroot/css/.css*) 檔案定義單一套件組合。
 
 設定選項包括：
 
@@ -168,7 +170,7 @@ MVC 和 Razor Pages 專案範本提供了一種解決方案，可供包含 JSON 
 使用下列內容將*package.js*新增 `devDependencies` 至專案根目錄：
 
 > [!WARNING]
-> `gulp-uglify`模組不支援 ECMAScript （ES） 2015/ES6 和更新版本。 安裝[gulp-terser](https://www.npmjs.com/package/gulp-terser) ，而不是 `gulp-uglify` 使用 ES2015/ES6 或更新版本。
+> `gulp-uglify`模組不支援 ECMAScript (ES) 2015/ES6 和更新版本。 安裝[gulp-terser](https://www.npmjs.com/package/gulp-terser) ，而不是 `gulp-uglify` 使用 ES2015/ES6 或更新版本。
 
 [!code-json[](../client-side/bundling-and-minification/samples/BuildBundlerMinifierApp/package.json?range=5-13)]
 

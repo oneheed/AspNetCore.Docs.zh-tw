@@ -7,6 +7,8 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 05/02/2020
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -15,20 +17,20 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/security/server/index
-ms.openlocfilehash: 69a24fc955a0f2fb524ec817eb50372052f538a1
-ms.sourcegitcommit: 66fca14611eba141d455fe0bd2c37803062e439c
+ms.openlocfilehash: 4dc9040b9410304eb33e5df7c47db2f9a42152d3
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 07/03/2020
-ms.locfileid: "85944252"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88013992"
 ---
-# <a name="secure-aspnet-core-blazor-server-apps"></a>保護 ASP.NET Core Blazor Server 應用程式
+# <a name="secure-aspnet-core-no-locblazor-server-apps"></a>保護 ASP.NET Core Blazor Server 應用程式
 
 作者：[Luke Latham](https://github.com/guardrex)
 
 Blazor Server應用程式的安全性設定方式與 ASP.NET Core 應用程式相同。 如需詳細資訊，請參閱底下的文章 <xref:security/index> 。 此總覽下的主題特別適用于 Blazor Server 。 
 
-## <a name="blazor-server-project-template"></a>Blazor Server專案範本
+## <a name="no-locblazor-server-project-template"></a>Blazor Server專案範本
 
 Blazor Server專案範本可以設定為在建立專案時進行驗證。
 
@@ -57,9 +59,9 @@ dotnet new blazorserver -o {APP NAME} -au {AUTHENTICATION}
 
 下表顯示允許的驗證值 (`{AUTHENTICATION}`)。
 
-| 驗證機制 | Description |
+| 驗證機制 | 描述 |
 | ------------------------ | ----------- |
-| `None` (預設)         | 不需要驗證 |
+| `None` (預設值)         | 不需要驗證 |
 | `Individual`             | 使用 ASP.NET Core 儲存在應用程式中的使用者Identity |
 | `IndividualB2C`          | 儲存在[Azure AD B2C](xref:security/authentication/azure-ad-b2c)中的使用者 |
 | `SingleOrg`              | 單一租使用者的組織驗證 |
@@ -77,7 +79,7 @@ dotnet new blazorserver -o {APP NAME} -au {AUTHENTICATION}
 
 1. 遵循中的 Visual Studio for Mac 指導方針 <xref:blazor/tooling> 。
 
-1. 在 [**設定新的 Blazor Server 應用程式**] 步驟上，從 [**驗證**] 下拉式選單選取 [**個別驗證（應用程式內）** ]。
+1. 在 [**設定新的 Blazor Server 應用程式**] 步驟中，從 [**驗證**] 下拉式下選取 [**個別驗證] ([應用程式內) ** ]。
 
 1. 應用程式會針對以 ASP.NET Core 儲存在應用程式中的個別使用者而建立 Identity 。
 
@@ -91,9 +93,9 @@ dotnet new blazorserver -o {APP NAME} -au {AUTHENTICATION}
 
 下表顯示允許的驗證值 (`{AUTHENTICATION}`)。
 
-| 驗證機制 | Description |
+| 驗證機制 | 描述 |
 | ------------------------ | ----------- |
-| `None` (預設)         | 不需要驗證 |
+| `None` (預設值)         | 不需要驗證 |
 | `Individual`             | 使用 ASP.NET Core 儲存在應用程式中的使用者Identity |
 | `IndividualB2C`          | 儲存在[Azure AD B2C](xref:security/authentication/azure-ad-b2c)中的使用者 |
 | `SingleOrg`              | 單一租使用者的組織驗證 |
@@ -109,7 +111,7 @@ dotnet new blazorserver -o {APP NAME} -au {AUTHENTICATION}
 
 ---
 
-## <a name="scaffold-identity"></a>ScaffoldIdentity
+## <a name="scaffold-no-locidentity"></a>ScaffoldIdentity
 
 Scaffold Identity 至 Blazor Server 專案：
 

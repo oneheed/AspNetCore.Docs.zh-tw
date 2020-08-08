@@ -7,6 +7,8 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 07/10/2020
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -15,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/fundamentals/additional-scenarios
-ms.openlocfilehash: b32710e515d111b7dd6556f1db55082cd56a82b5
-ms.sourcegitcommit: 84150702757cf7a7b839485382420e8db8e92b9c
+ms.openlocfilehash: dbad91e46a95d9ab5ec62d66e0d9a18938ff4520
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 08/05/2020
-ms.locfileid: "87818998"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88014460"
 ---
 # <a name="aspnet-core-no-locblazor-hosting-model-configuration"></a>ASP.NET Core Blazor 裝載模型設定
 
@@ -32,7 +34,7 @@ By [Daniel Roth](https://github.com/danroth27)、 [Mackinnon Buck](https://githu
 
 *本節適用于 Blazor WebAssembly 。*
 
-若要設定 SignalR 的基礎用戶端來傳送認證，例如 cookie 或 HTTP 驗證標頭：
+若要設定 SignalR 的基礎用戶端來傳送認證，例如 cookie s 或 HTTP 驗證標頭：
 
 * 用 <xref:Microsoft.AspNetCore.Components.WebAssembly.Http.WebAssemblyHttpRequestMessageExtensions.SetBrowserRequestCredentials%2A> 來設定 <xref:Microsoft.AspNetCore.Components.WebAssembly.Http.BrowserRequestCredentials.Include> 跨原始來源 [`fetch`](https://developer.mozilla.org/docs/Web/API/Fetch_API/Using_Fetch) 要求：
 
@@ -231,11 +233,9 @@ Blazor.defaultReconnectionHandler._reconnectionDisplay =
 
 預留位置 `{ELEMENT ID}` 是要顯示之 HTML 專案的識別碼。
 
-::: moniker range=">= aspnetcore-5.0"
-
 ## <a name="influence-html-head-tag-elements"></a>影響 HTML `<head>` 標記元素
 
-*本節適用于 Blazor WebAssembly 和 Blazor Server 。*
+*本節適用于即將推出的 ASP.NET Core 5.0 版 Blazor WebAssembly 和 Blazor Server 。*
 
 轉譯時，、 `Title` `Link` 和元件會 `Meta` 在 HTML 標籤元素中新增或更新資料 `<head>` ：
 
@@ -263,8 +263,6 @@ Blazor.defaultReconnectionHandler._reconnectionDisplay =
 
 * 可由應用程式狀態修改。 應用程式狀態無法修改硬式編碼的 HTML 標籤。
 * 當父元件不再呈現時，會從 HTML 中移除 `<head>` 。
-
-::: moniker-end
 
 ## <a name="additional-resources"></a>其他資源
 

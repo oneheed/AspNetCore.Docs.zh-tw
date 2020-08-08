@@ -6,6 +6,8 @@ ms.author: scaddie
 ms.date: 10/24/2018
 ms.custom: mvc, seodec18
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -14,12 +16,12 @@ no-loc:
 - Razor
 - SignalR
 uid: azure/devops/cicd
-ms.openlocfilehash: 0edded18d766d6f2af08f6be5dbecbfd52a14a35
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: 780d233014c26e37886d6bc5bd8fcb23d857dff0
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85400553"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88012609"
 ---
 # <a name="continuous-integration-and-deployment"></a>持續整合及部署
 
@@ -68,9 +70,9 @@ ms.locfileid: "85400553"
 
 ## <a name="disconnect-local-git-deployment"></a>中斷本機 Git 部署的連線
 
-使用下列步驟移除本機 Git 部署。 Azure Pipelines （Azure DevOps 服務）會取代並增強該功能。
+使用下列步驟移除本機 Git 部署。 Azure Pipelines (Azure DevOps 服務) 會取代並增強該功能。
 
-1. 開啟[Azure 入口網站](https://portal.azure.com/)，然後流覽至預備環境 *（mywebapp \<unique_number\> /Staging）* Web 應用程式。 在入口網站的搜尋方塊中輸入*預備*，可以快速地找到 Web 應用程式：
+1. 開啟[Azure 入口網站](https://portal.azure.com/)，然後流覽至*預備 (mywebapp \<unique_number\> /Staging) * Web 應用程式。 在入口網站的搜尋方塊中輸入*預備*，可以快速地找到 Web 應用程式：
 
     ![預備 Web 應用程式搜尋詞彙](media/cicd/portal-search-box.png)
 
@@ -162,7 +164,7 @@ ms.locfileid: "85400553"
 
 1. 從 [**來源類型**] 區段中選取 [**組建**] 磚。 此類型允許將發行管線連結至組建定義。
 1. 從 [**專案**] 下拉式選單中選取 [ *myfirstproject 專案*]。
-1. 從 [**來源（組建定義）** ] 下拉式選單中，選取組建定義名稱*MYFIRSTPROJECT-ASP.NET Core-CI*。
+1. 從 [**來源] (組建定義**] 中，選取組建定義名稱 [ *MYFIRSTPROJECT-ASP.NET 核心-CI*]) 下拉式。
 1. 從 [**預設版本**] 下拉式選單中選取 [*最新*]。 此選項會建立最新執行組建定義所產生的構件。
 1. 將 [**來源別名**] 文字方塊中的文字取代為*Drop*。
 1. 按一下 [新增]  按鈕。 [**成品**] 區段會更新以顯示變更。
@@ -273,7 +275,7 @@ ms.locfileid: "85400553"
 
 ![顯示發行管線成品的螢幕擷取畫面](media/cicd/release-definition-artifacts.png)
 
-**來源（組建定義）** 值代表此發行管線所連結的組建定義。 成功執行組建定義所產生的 *.zip*檔案會提供給*生產*環境，以部署至 Azure。 按一下 [*生產*環境] 方塊中的 [ *1 階段，2*個工作] 連結，以查看發行管線工作：
+**來源 (組建定義) **值代表此發行管線所連結的組建定義。 成功執行組建定義所產生的 *.zip*檔案會提供給*生產*環境，以部署至 Azure。 按一下 [*生產*環境] 方塊中的 [ *1 階段，2*個工作] 連結，以查看發行管線工作：
 
 ![顯示發行管線工作的螢幕擷取畫面](media/cicd/release-definition-tasks.png)
 
@@ -289,7 +291,7 @@ Azure 訂用帳戶、服務類型、web 應用程式名稱、資源群組和部�
 
 提供訂用帳戶、資源群組、服務類型、web 應用程式名稱和部署位置詳細資料。 [**與生產交換**] 核取方塊已核取。 因此，部署至*預備*位置的 bits 會交換到生產環境中。
 
-## <a name="additional-reading"></a>其他閱讀資料
+## <a name="additional-reading"></a>延伸閱讀
 
 * [使用 Azure Pipelines 建立您的第一個管線](/azure/devops/pipelines/get-started-yaml)
 * [組建和 .NET Core 專案](/azure/devops/pipelines/languages/dotnet-core)

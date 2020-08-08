@@ -5,6 +5,8 @@ description: 在 ASP.NET Core 中使用 Grunt
 ms.author: riande
 ms.date: 12/05/2019
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -13,12 +15,12 @@ no-loc:
 - Razor
 - SignalR
 uid: client-side/using-grunt
-ms.openlocfilehash: fc871e22f9bd5a9c137008f1d87019542c45b5d2
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: 019f31c1a6fa3a33783f78f2fee71f710642ce6d
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85401762"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88013199"
 ---
 # <a name="use-grunt-in-aspnet-core"></a>在 ASP.NET Core 中使用 Grunt
 
@@ -58,7 +60,7 @@ Grunt 是一項 JavaScript 工作執行程式，可將腳本縮制、TypeScript 
 
     ![設定 TypeScript 檔案自動編譯的選項](using-grunt/_static/typescript-options.png)
 
-6. 在目錄上按一下滑鼠右鍵 `TypeScript` ，然後從內容功能表中選取 [**新增 > 新專案**]。 選取**JavaScript**檔案專案，並將檔案命名為*Tastes* （請注意 \* ts 副檔名）。 將以下的 TypeScript 程式程式碼複製到檔案中（當您儲存時，JavaScript 來源會出現新的*Tastes.js*檔案）。
+6. 在目錄上按一下滑鼠右鍵 `TypeScript` ，然後從內容功能表中選取 [**新增 > 新專案**]。 選取**JavaScript**檔案專案，並將檔案命名為*Tastes* (記下 \*) 的 ts 延伸模組。 將以下的 TypeScript 程式程式碼複製到檔案 (當您儲存時，JavaScript 來源) 會出現新的*Tastes.js*檔案。
 
     ```typescript
     enum Tastes { Sweet, Sour, Salty, Bitter }
@@ -97,12 +99,12 @@ Grunt 是一項 JavaScript 工作執行程式，可將腳本縮制、TypeScript 
 
 1. 在 [方案總管中，以滑鼠右鍵按一下專案，然後從內容功能表中選取 [**加入 > 新專案**]。 選取 [ **NPM 設定檔**] 專案，保留預設名稱*package.js*[]，然後按一下 [**新增**] 按鈕。
 
-2. 在 [ *package.json* ] 檔案的 [ `devDependencies` 物件括弧] 中，輸入 "grunt"。 `grunt`從 Intellisense 清單中選取，然後按 enter 鍵。 Visual Studio 會將 grunt 套件名稱加上引號，並新增一個冒號。 在冒號右邊，從 Intellisense 清單的頂端選取最新穩定版本的封裝（ `Ctrl-Space` 如果 intellisense 未出現，請按下）。
+2. 在 [ *package.json* ] 檔案的 [ `devDependencies` 物件括弧] 中，輸入 "grunt"。 `grunt`從 Intellisense 清單中選取，然後按 enter 鍵。 Visual Studio 會將 grunt 套件名稱加上引號，並新增一個冒號。 在冒號右邊，從 Intellisense 清單的頂端選取最新穩定版本的封裝， (按 [ `Ctrl-Space` 如果 intellisense 未出現) ]。
 
     ![grunt Intellisense](using-grunt/_static/devdependencies-grunt.png)
 
     > [!NOTE]
-    > NPM 會使用[語義版本](https://semver.org/)設定來組織相依性。 語義版本控制（也稱為 SemVer）會使用編號配置來識別 \<major> 封裝 \<minor> ... \<patch>Intellisense 只會顯示一些常用的選項，以簡化語義版本設定。 Intellisense 清單中的最上層專案（在上述範例中為0.4.5）會被視為套件的最新穩定版本。 插入號（^）符號符合最新的主要版本，而波狀符號（~）符合最新的次要版本。 如需 SemVer 所提供完整表現度的指南，請參閱[NPM semver version parser reference](https://www.npmjs.com/package/semver) 。
+    > NPM 會使用[語義版本](https://semver.org/)設定來組織相依性。 語義版本控制（也稱為 SemVer）會使用編號配置來識別 \<major> 封裝 \<minor> ... \<patch>Intellisense 只會顯示一些常用的選項，以簡化語義版本設定。 在上述範例中， (0.4.5 Intellisense 清單中最上方的專案) 會被視為封裝的最新穩定版本。 插入號 (^) 符號符合最新的主要版本，而波形符 (~) 符合最新的次要版本。 如需 SemVer 所提供完整表現度的指南，請參閱[NPM semver version parser reference](https://www.npmjs.com/package/semver) 。
 
 3. 新增更多相依性以載入 grunt-contrib- \* 適用于*clean*、 *jshint*、 *concat*、 *uglify*和*watch*的封裝，如下列範例所示。 版本不需要符合範例。
 
@@ -117,7 +119,7 @@ Grunt 是一項 JavaScript 工作執行程式，可將腳本縮制、TypeScript 
     }
     ```
 
-4. 儲存 package.json  檔案。
+4. 儲存 package.json 檔案。
 
 每個專案的套件 `devDependencies` 將會下載，以及每個套件所需的任何檔案。 您可以在**方案總管**中啟用 [**顯示所有**檔案] 按鈕，以在*node_modules*目錄中尋找封裝檔案。
 
@@ -246,9 +248,9 @@ Grunt 是使用名為*Gruntfile.js*的資訊清單來設定，其會定義、載
     > [!NOTE]
     > 如需每個套件選項的詳細資訊，請造訪 [https://www.npmjs.com/](https://www.npmjs.com/) 主頁面上 [搜尋] 方塊中的套件名稱並加以查閱。 例如，您可以查詢 grunt-contrib-clean 封裝，以取得說明其所有參數的檔連結。
 
-### <a name="all-together-now"></a>齊聚一堂
+### <a name="all-together-now"></a>摘要
 
-使用 Grunt `registerTask()` 方法，以特定循序執行一系列的工作。 例如，若要執行上述的範例步驟，請 > concat-> jshint-> uglify 中，將下列程式碼新增至模組。 在 initConfig 以外，程式碼應該加入與 loadNpmTasks （）呼叫相同的層級。
+使用 Grunt `registerTask()` 方法，以特定循序執行一系列的工作。 例如，若要執行上述的範例步驟，請 > concat-> jshint-> uglify 中，將下列程式碼新增至模組。 程式碼應該加入與 loadNpmTasks ( # A1 呼叫相同的層級，而不是在 initConfig 外部。
 
 ```javascript
 grunt.registerTask("all", ['clean', 'concat', 'jshint', 'uglify']);
@@ -289,6 +291,6 @@ grunt.loadNpmTasks('grunt-contrib-watch');
 
 卸載並重載專案。 當專案再次載入時，[監看式] 工作會自動開始執行。
 
-## <a name="summary"></a>摘要
+## <a name="summary"></a>總結
 
 Grunt 是功能強大的工作執行器，可以用來將大部分的用戶端組建作業自動化。 Grunt 會利用 NPM 來傳遞其套件，並使用與 Visual Studio 的功能工具整合。 Visual Studio 的工作執行器 Explorer 會偵測設定檔案的變更，並提供便利的介面來執行工作、查看執行中的工作，以及將工作系結至 Visual Studio 的事件。

@@ -6,6 +6,8 @@ ms.author: casoper
 ms.custom: mvc, seodec18
 ms.date: 10/24/2018
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -14,18 +16,18 @@ no-loc:
 - Razor
 - SignalR
 uid: azure/devops/next-steps
-ms.openlocfilehash: 6e7f46a0c78575e52a8182829f7b3d2bddec70f6
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: feff73b307791c0a7ad8968b5145c0388df1ca10
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85400332"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88012578"
 ---
 # <a name="next-steps"></a>後續步驟
 
 在本指南中，您已建立 ASP.NET Core 範例應用程式的 DevOps 管線。 恭喜！ 我們希望您喜歡學習如何發佈 ASP.NET Core web 應用程式來 Azure App Service，並將變更的持續整合自動化。
 
-除了 web 裝載和 DevOps 之外，Azure 還提供各式各樣的平臺即服務（PaaS）服務，適用于 ASP.NET Core 開發人員。 本節提供一些最常用服務的簡要概述。
+除了 web 裝載和 DevOps 之外，Azure 還提供各式各樣的平臺即服務 (PaaS) 服務，適用于 ASP.NET Core 開發人員。 本節提供一些最常用服務的簡要概述。
 
 ## <a name="storage-and-databases"></a>儲存體和資料庫
 
@@ -35,11 +37,11 @@ ms.locfileid: "85400332"
 
 [Azure SQL Database](/azure/sql-database/)使用 Microsoft SQL Server 引擎，提供熟悉的關係資料庫功能做為服務。
 
-[Cosmos DB](/azure/cosmos-db/)全域散發的多模型 NoSQL 資料庫服務。 有多個 Api 可供使用，包括 SQL API （先前稱為 DocumentDB）、Cassandra 和 MongoDB。
+[Cosmos DB](/azure/cosmos-db/)全域散發的多模型 NoSQL 資料庫服務。 有多個 Api 可供使用，包括 SQL API (先前稱為 DocumentDB) 、Cassandra 和 MongoDB。
 
 ## Identity
 
-[Azure Active Directory](/azure/active-directory/)和[Azure Active Directory B2C](/azure/active-directory-b2c/)都是身分識別服務。 Azure Active Directory 是針對企業案例而設計，可讓 Azure AD B2B （企業對企業）共同作業，而 Azure Active Directory B2C 則是預期的企業對客戶案例，包括社交網路登入。
+[Azure Active Directory](/azure/active-directory/)和[Azure Active Directory B2C](/azure/active-directory-b2c/)都是身分識別服務。 Azure Active Directory 是針對企業案例而設計，可讓 Azure AD B2B (企業對企業) 共同作業，而 Azure Active Directory B2C 則是預期的企業對客戶案例，包括社交網路登入。
 
 ## <a name="mobile"></a>行動
 

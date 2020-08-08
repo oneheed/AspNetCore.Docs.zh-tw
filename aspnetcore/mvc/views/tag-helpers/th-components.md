@@ -6,6 +6,8 @@ monikerRange: '>= aspnetcore-2.0'
 ms.author: scaddie
 ms.date: 06/12/2019
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -14,12 +16,12 @@ no-loc:
 - Razor
 - SignalR
 uid: mvc/views/tag-helpers/th-components
-ms.openlocfilehash: 58781880764b26a67d71e70c225ab4ed4e5da109
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: 736288b6e7d2e9be7f23f6df02183a813951eb56
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85406702"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88014720"
 ---
 # <a name="tag-helper-components-in-aspnet-core"></a>ASP.NET Core 中的標籤協助程式元件
 
@@ -29,7 +31,7 @@ ms.locfileid: "85406702"
 
 ASP.NET Core 包含兩個內建標籤協助程式元件：`head` 和 `body`。 它們位於 <xref:Microsoft.AspNetCore.Mvc.Razor.TagHelpers> 命名空間中，而且可以在 MVC 和頁面中使用 Razor 。 標籤協助程式元件不需要在 *_ViewImports.cshtml* 中註冊應用程式。
 
-[查看或下載範例程式碼](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/mvc/views/tag-helpers/th-components/samples)（[如何下載](xref:index#how-to-download-a-sample)）
+[查看或下載範例程式碼](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/mvc/views/tag-helpers/th-components/samples) ([如何下載](xref:index#how-to-download-a-sample)) 
 
 ## <a name="use-cases"></a>使用案例
 
@@ -80,7 +82,7 @@ ASP.NET Core 包含兩個內建標籤協助程式元件：`head` 和 `body`。 �
 
 [!code-csharp[](th-components/samples/RazorPagesSample/Startup.cs?name=snippet_ConfigureServices&highlight=12-15)]
 
-### <a name="registration-via-razor-file"></a>透過檔案註冊 Razor
+### <a name="registration-via-no-locrazor-file"></a>透過檔案註冊 Razor
 
 如果標籤協助程式元件未向 DI 註冊，則可以從 [ Razor 頁面] 頁面或 MVC 視圖進行註冊。 這項技術是用來控制檔案中插入的標記和元件執行順序 Razor 。
 

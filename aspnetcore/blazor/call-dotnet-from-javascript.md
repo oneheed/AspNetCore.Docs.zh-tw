@@ -7,6 +7,8 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 07/07/2020
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -15,22 +17,22 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/call-dotnet-from-javascript
-ms.openlocfilehash: 5dc1c5a4fbaaa756cfaf09c751e516147a04c899
-ms.sourcegitcommit: fa89d6553378529ae86b388689ac2c6f38281bb9
+ms.openlocfilehash: 5a0731b45424ffd8560bb3b0d9123c686ae9e247
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 07/07/2020
-ms.locfileid: "86060016"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88012562"
 ---
-# <a name="call-net-methods-from-javascript-functions-in-aspnet-core-blazor"></a>從 ASP.NET Core 中的 JavaScript 函數呼叫 .NET 方法Blazor
+# <a name="call-net-methods-from-javascript-functions-in-aspnet-core-no-locblazor"></a>從 ASP.NET Core 中的 JavaScript 函數呼叫 .NET 方法Blazor
 
 By [Javier Calvarro Nelson](https://github.com/javiercn)、 [Daniel Roth](https://github.com/danroth27)、 [Shashikant](http://wisne.co)Rudrawadi 和[Luke Latham](https://github.com/guardrex)
 
-Blazor應用程式可以從 javascript 函數的 .net 方法和 .net 方法叫用 javascript 函式。 這些案例稱為*JavaScript 互通性*（*JS interop*）。
+Blazor應用程式可以從 javascript 函數的 .net 方法和 .net 方法叫用 javascript 函式。 這些案例稱為*JavaScript 互通性* (*JS interop*) 。
 
 本文涵蓋從 JavaScript 叫用 .NET 方法。 如需如何從 .NET 呼叫 JavaScript 函式的詳細資訊，請參閱 <xref:blazor/call-javascript-from-dotnet> 。
 
-[查看或下載範例程式碼](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/blazor/common/samples/)（[如何下載](xref:index#how-to-download-a-sample)）
+[查看或下載範例程式碼](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/blazor/common/samples/) ([如何下載](xref:index#how-to-download-a-sample)) 
 
 ## <a name="static-net-method-call"></a>靜態 .NET 方法呼叫
 
@@ -69,7 +71,7 @@ Blazor應用程式可以從 javascript 函數的 .net 方法和 .net 方法叫�
 Array(4) [ 1, 2, 3, 4 ]
 ```
 
-第四個數組值會推送至所傳回的陣列（ `data.push(4);` ） `ReturnArrayAsync` 。
+第四個數組值會推送至陣列 (所 `data.push(4);` 傳回的) `ReturnArrayAsync` 。
 
 根據預設，方法識別碼是方法名稱，但您可以使用屬性（attribute）函式來指定不同的識別碼 [`[JSInvokable]`](xref:Microsoft.JSInterop.JSInvokableAttribute) ：
 
@@ -95,7 +97,7 @@ returnArrayAsyncJs: function () {
 }
 ```
 
-預留位置 `{APP ASSEMBLY}` 為應用程式的應用程式元件名稱（例如 `BlazorSample` ）。
+預留位置 `{APP ASSEMBLY}` 為應用程式的應用程式元件名稱 (例如， `BlazorSample`) 。
 
 ## <a name="instance-method-call"></a>實例方法呼叫
 
@@ -103,7 +105,7 @@ returnArrayAsyncJs: function () {
 
 * 以傳址方式將 .NET 實例傳遞至 JavaScript：
   * 對進行靜態呼叫 <xref:Microsoft.JSInterop.DotNetObjectReference.Create%2A?displayProperty=nameWithType> 。
-  * 將實例包裝在 <xref:Microsoft.JSInterop.DotNetObjectReference> 實例中，並 <xref:Microsoft.JSInterop.DotNetObjectReference.Create%2A> 在實例上呼叫 <xref:Microsoft.JSInterop.DotNetObjectReference> 。 處置 <xref:Microsoft.JSInterop.DotNetObjectReference> 物件（本章節稍後會顯示一個範例）。
+  * 將實例包裝在 <xref:Microsoft.JSInterop.DotNetObjectReference> 實例中，並 <xref:Microsoft.JSInterop.DotNetObjectReference.Create%2A> 在實例上呼叫 <xref:Microsoft.JSInterop.DotNetObjectReference> 。 物件的處置 <xref:Microsoft.JSInterop.DotNetObjectReference> (範例會在本節稍後的) 中出現。
 * 使用或函數，在實例上叫用 .NET 實例方法 `invokeMethod` `invokeMethodAsync` 。 從 JavaScript 叫用其他 .NET 方法時，也可以將 .NET 實例當做引數傳遞。
 
 > [!NOTE]
@@ -213,7 +215,7 @@ Hello, Blazor!
   }
   ```
   
-  預留位置 `{APP ASSEMBLY}` 為應用程式的應用程式元件名稱（例如 `BlazorSample` ）。
+  預留位置 `{APP ASSEMBLY}` 為應用程式的應用程式元件名稱 (例如， `BlazorSample`) 。
 
 * 當元件或類別未處置時 <xref:Microsoft.JSInterop.DotNetObjectReference> ，請呼叫來處置用戶端上的物件 `.dispose()` ：
 
@@ -239,7 +241,7 @@ function updateMessageCallerJS() {
 }
 ```
 
-預留位置 `{APP ASSEMBLY}` 為應用程式的應用程式元件名稱（例如 `BlazorSample` ）。
+預留位置 `{APP ASSEMBLY}` 為應用程式的應用程式元件名稱 (例如， `BlazorSample`) 。
 
 `Pages/JSInteropComponent.razor`:
 
@@ -277,7 +279,7 @@ function updateMessageCallerJS() {
 }
 ```
 
-有數個元件時，每個都有實例方法來呼叫，請使用 helper 類別來叫用每個元件的實例方法（as <xref:System.Action> ）。
+有數個元件時，每個都有實例方法來呼叫，請使用 helper 類別來叫用實例方法， (做為 <xref:System.Action> 每個元件的) 。
 
 在下例中︰
 
@@ -308,7 +310,7 @@ public class MessageUpdateInvokeHelper
 }
 ```
 
-預留位置 `{APP ASSEMBLY}` 為應用程式的應用程式元件名稱（例如 `BlazorSample` ）。
+預留位置 `{APP ASSEMBLY}` 為應用程式的應用程式元件名稱 (例如， `BlazorSample`) 。
 
 在用戶端 JavaScript 中：
 
@@ -380,11 +382,11 @@ window.updateMessageCallerJS = (dotnetHelper) => {
 
 如需詳細資訊，請參閱下列問題：
 
-* [不支援迴圈參考，接受兩個（dotnet/aspnetcore #20525）](https://github.com/dotnet/aspnetcore/issues/20525)
-* [提案：在序列化時加入用來處理迴圈參考的機制（dotnet/runtime #30820）](https://github.com/dotnet/runtime/issues/30820)
+* [不支援迴圈參考，請採用兩個 (dotnet/aspnetcore #20525) ](https://github.com/dotnet/aspnetcore/issues/20525)
+* [提案：在序列化 (dotnet/runtime #30820 時，加入處理迴圈參考的機制) ](https://github.com/dotnet/runtime/issues/30820)
 
 ## <a name="additional-resources"></a>其他資源
 
 * <xref:blazor/call-javascript-from-dotnet>
-* [`InteropComponent.razor`範例（dotnet/AspNetCore GitHub 存放庫，3.1 發行分支）](https://github.com/dotnet/AspNetCore/blob/release/3.1/src/Components/test/testassets/BasicTestApp/InteropComponent.razor)
+* [`InteropComponent.razor`範例 (dotnet/AspNetCore GitHub 存放庫，3.1 發行分支) ](https://github.com/dotnet/AspNetCore/blob/release/3.1/src/Components/test/testassets/BasicTestApp/InteropComponent.razor)
 * [在應用程式中執行大型資料傳輸 Blazor Server](xref:blazor/advanced-scenarios#perform-large-data-transfers-in-blazor-server-apps)

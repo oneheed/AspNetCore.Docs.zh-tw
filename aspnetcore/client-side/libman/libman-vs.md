@@ -6,6 +6,8 @@ ms.author: scaddie
 ms.custom: mvc
 ms.date: 08/20/2018
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -14,12 +16,12 @@ no-loc:
 - Razor
 - SignalR
 uid: client-side/libman/libman-vs
-ms.openlocfilehash: 504c34ccd8813273161b86504700704f8a932538
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: 2dc944ffd4307aa108a54b70d58f298c26959ce0
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85403166"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88013342"
 ---
 # <a name="use-libman-with-aspnet-core-in-visual-studio"></a>在 Visual Studio 中搭配 ASP.NET Core 使用 LibMan
 
@@ -32,7 +34,7 @@ Visual Studio 具有 ASP.NET Core 專案中[LibMan](xref:client-side/libman/inde
 * 搜尋對話方塊，用來尋找程式庫並將檔案新增至專案。
 * 編輯 LibMan 資訊清單檔*上libman.js*的支援 &mdash; 。
 
-[查看或下載範例程式碼](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/client-side/libman/samples/) [（如何下載）](xref:index#how-to-download-a-sample)
+[查看或下載範例程式碼](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/client-side/libman/samples/) [ (如何下載) ](xref:index#how-to-download-a-sample)
 
 ## <a name="prerequisites"></a>必要條件
 
@@ -72,8 +74,8 @@ Visual Studio 具有 ASP.NET Core 專案中[LibMan](xref:client-side/libman/inde
   
   |啟動位置                           |建議的資料夾      |
   |------------------------------------------|----------------------|
-  |專案根目錄（如果*wwwroot*存在）        |*wwwroot/lib/jquery/* |
-  |專案根目錄（如果*wwwroot*不存在） |*lib/jquery/*         |
+  |專案根目錄 (（如果*wwwroot*存在）)         |*wwwroot/lib/jquery/* |
+  |如果*wwwroot*不存在，則為專案根目錄 ()  |*lib/jquery/*         |
   |Project 中的*Pages*資料夾                 |*Pages/jquery/*       |
 
 * 按一下 [**安裝**] 按鈕，依據*libman.js*中的設定來下載檔案。
@@ -92,7 +94,7 @@ Visual Studio 具有 ASP.NET Core 專案中[LibMan](xref:client-side/libman/inde
 
 ### <a name="manually-configure-libman-manifest-file-entries"></a>手動設定 LibMan 資訊清單檔案專案
 
-Visual Studio 中的所有 LibMan 作業都是以專案根目錄的 LibMan 資訊清單（*libman.js上*的）內容為基礎。 您可以*在上*手動編輯libman.js，以設定專案的程式庫檔案。 Visual Studio*在儲存libman.js*之後還原所有的程式庫檔案。
+Visual Studio 中的所有 LibMan 作業都是以) *上libman.js*專案根目錄的 LibMan 指令 (清單內容為基礎。 您可以*在上*手動編輯libman.js，以設定專案的程式庫檔案。 Visual Studio*在儲存libman.js*之後還原所有的程式庫檔案。
 
 若要開啟*libman.js開啟*以供編輯，有下列選項：
 
@@ -167,7 +169,7 @@ LibMan 可以還原已定義的程式庫檔案，做為建立程式的一部分�
 
 當還原作業正在執行時：
 
-* Visual Studio 狀態列上的 [工作狀態中心（TSC）] 圖示會顯示為動畫，且會*開始讀取還原*作業。 按一下圖示即可開啟工具提示，其中列出已知的背景工作。
+* [Visual Studio] 狀態列上的 [工作狀態中心 (的 TSC) 圖示將會以動畫顯示，而且會*開始讀取還原*作業。 按一下圖示即可開啟工具提示，其中列出已知的背景工作。
 * 訊息將會傳送至 [**輸出**] 視窗的狀態列和 [連結**庫管理員**] 摘要。 例如：
 
   ```console
@@ -213,7 +215,7 @@ Clean libraries operation completed
 
   ![卸載程式庫內容功能表選項](_static/uninstall-menu-option.png)
 
-或者，您可以手動編輯並儲存 LibMan 資訊清單（*libman.js*）。 [還原](#restore-library-files)作業會在儲存檔案時執行。 已不再在*libman.js*中定義的程式庫檔案會從專案中移除。
+或者，您可以手動編輯 LibMan 資訊清單，並將其儲存 (*libman.js在) 上*。 [還原](#restore-library-files)作業會在儲存檔案時執行。 已不再在*libman.js*中定義的程式庫檔案會從專案中移除。
 
 ## <a name="update-library-version"></a>更新程式庫版本
 

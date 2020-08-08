@@ -7,6 +7,8 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 06/10/2020
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -15,14 +17,14 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/fundamentals/logging
-ms.openlocfilehash: 1f4b18bdea02016fb76b75dd01a8fcbeab9b2bc9
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: c2e8ee24c135b3c2f9b6be5b0e0efa54750c68b2
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85402828"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88014355"
 ---
-# <a name="aspnet-core-blazor-logging"></a>ASP.NET Core Blazor 記錄
+# <a name="aspnet-core-no-locblazor-logging"></a>ASP.NET Core Blazor 記錄
 
 ## Blazor WebAssembly
 
@@ -41,15 +43,15 @@ builder.Logging.AddProvider(new CustomLoggingProvider());
 
 `Logging`屬性的類型為 <xref:Microsoft.Extensions.Logging.ILoggingBuilder> ，因此中提供的所有擴充方法 <xref:Microsoft.Extensions.Logging.ILoggingBuilder> 也可在上取得 `Logging` 。
 
-記錄設定可以從應用程式佈建檔載入。 如需詳細資訊，請參閱 <xref:blazor/fundamentals/configuration#logging-configuration> 。
+記錄設定可以從應用程式佈建檔載入。 如需詳細資訊，請參閱<xref:blazor/fundamentals/configuration#logging-configuration>。
 
 ## Blazor Server
 
 如需一般 ASP.NET Core 記錄指引，請參閱 <xref:fundamentals/logging/index> 。
 
-## <a name="blazor-webassembly-signalr-net-client-logging"></a>Blazor WebAssemblySignalR.Net 用戶端記錄
+## <a name="no-locblazor-webassembly-no-locsignalr-net-client-logging"></a>Blazor WebAssemblySignalR.Net 用戶端記錄
 
-插入 <xref:Microsoft.Extensions.Logging.ILoggerProvider> ，將加入至 `WebAssemblyConsoleLogger` 傳遞至的記錄提供者 <xref:Microsoft.AspNetCore.SignalR.Client.HubConnectionBuilder> 。 不同于傳統 <xref:Microsoft.Extensions.Logging.Console.ConsoleLogger> ， `WebAssemblyConsoleLogger` 是瀏覽器專屬記錄 api 的包裝函式（例如， `console.log` ）。 在瀏覽器內容中使用時，可以 `WebAssemblyConsoleLogger` 在 Mono 內進行記錄。
+插入 <xref:Microsoft.Extensions.Logging.ILoggerProvider> ，將加入至 `WebAssemblyConsoleLogger` 傳遞至的記錄提供者 <xref:Microsoft.AspNetCore.SignalR.Client.HubConnectionBuilder> 。 不同于傳統 <xref:Microsoft.Extensions.Logging.Console.ConsoleLogger> ， `WebAssemblyConsoleLogger` 是瀏覽器特定記錄 api 的包裝函式， (例如 `console.log`) 。 在瀏覽器內容中使用時，可以 `WebAssemblyConsoleLogger` 在 Mono 內進行記錄。
 
 ```csharp
 @using Microsoft.Extensions.Logging
@@ -63,7 +65,7 @@ var connection = new HubConnectionBuilder()
     .Build();
 ```
 
-## <a name="log-in-razor-components"></a>登入 Razor 元件
+## <a name="log-in-no-locrazor-components"></a>登入 Razor 元件
 
 記錄器尊重應用程式啟動設定。
 

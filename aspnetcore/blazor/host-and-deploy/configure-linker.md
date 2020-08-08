@@ -1,12 +1,14 @@
 ---
 title: 設定 ASP.NET Core 的連結器Blazor
 author: guardrex
-description: 瞭解如何在建立應用程式時控制中繼語言（IL）連結器 Blazor 。
+description: 瞭解如何在建立應用程式時，控制 (IL) 連結器的中繼語言 Blazor 。
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
 ms.date: 05/19/2020
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -15,18 +17,18 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/host-and-deploy/configure-linker
-ms.openlocfilehash: 568efe9971aefc11841c42789ac7f2af3004003f
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: e76d25dbbf5c7a166e5f58a5ad1f9b5a2ecacf79
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85402698"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88014248"
 ---
-# <a name="configure-the-linker-for-aspnet-core-blazor"></a>設定 ASP.NET Core 的連結器Blazor
+# <a name="configure-the-linker-for-aspnet-core-no-locblazor"></a>設定 ASP.NET Core 的連結器Blazor
 
 作者：[Luke Latham](https://github.com/guardrex)
 
-Blazor WebAssembly在組建期間執行[中繼語言（IL）](/dotnet/standard/managed-code#intermediate-language--execution)連結，以從應用程式的輸出元件修剪不必要的 IL。 在 Debug 設定中建立時，會停用連結器。 應用程式必須在發行設定中建立，才能啟用連結器。 我們建議您在部署應用程式時建立發行 Blazor WebAssembly 。 
+Blazor WebAssembly在組建期間執行[中繼語言 (IL) ](/dotnet/standard/managed-code#intermediate-language--execution)連結，以從應用程式的輸出元件修剪不必要的 IL。 在 Debug 設定中建立時，會停用連結器。 應用程式必須在發行設定中建立，才能啟用連結器。 我們建議您在部署應用程式時建立發行 Blazor WebAssembly 。 
 
 連結應用程式會優化大小，但可能會有不利的影響。 使用反映或相關動態功能的應用程式可能會在修剪時中斷，因為連結器不知道此動態行為，而且無法判斷在執行時間的反映需要何種類型。 若要修剪這類應用程式，連結器必須通知程式碼中的反映所需的任何類型，以及應用程式所相依的封裝或架構。 
 
@@ -89,7 +91,7 @@ Blazor WebAssembly在組建期間執行[中繼語言（IL）](/dotnet/standard/m
 </linker>
 ```
 
-如需詳細資訊和範例，請參閱[資料格式（mono/連結器 GitHub 存放庫）](https://github.com/mono/linker/blob/master/docs/data-formats.md)。
+如需詳細資訊和範例，請參閱[資料格式 (mono/連結器 GitHub 存放庫) ](https://github.com/mono/linker/blob/master/docs/data-formats.md)。
 
 ## <a name="add-an-xml-linker-configuration-file-to-a-library"></a>將 XML 連結器設定檔加入至程式庫
 
@@ -122,14 +124,14 @@ Blazor WebAssembly在組建期間執行[中繼語言（IL）](/dotnet/standard/m
 | `all`            | 包含的所有元件 |
 | `cjk`            | `I18N.CJK.dll`          |
 | `mideast`        | `I18N.MidEast.dll`      |
-| `none` (預設) | None                    |
+| `none` (預設值) | None                    |
 | `other`          | `I18N.Other.dll`        |
 | `rare`           | `I18N.Rare.dll`         |
 | `west`           | `I18N.West.dll`         |
 
-使用逗號來分隔多個值（例如 `mideast,west` ）。
+使用逗號來分隔多個值 (例如， `mideast,west`) 。
 
-如需詳細資訊，請參閱[I18N： Pnetlib 國際化架構程式庫（mono/Mono GitHub 儲存機制）](https://github.com/mono/mono/tree/master/mcs/class/I18N)。
+如需詳細資訊，請參閱[I18N： Pnetlib 國際化架構程式庫 (mono/Mono GitHub 存放庫) ](https://github.com/mono/mono/tree/master/mcs/class/I18N)。
 
 ## <a name="additional-resources"></a>其他資源
 

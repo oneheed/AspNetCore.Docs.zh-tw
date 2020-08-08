@@ -1,12 +1,14 @@
 ---
 title: 使用 JavaScript 服務在 ASP.NET Core 中建立單一頁面應用程式
 author: scottaddie
-description: 瞭解使用 JavaScript 服務建立 ASP.NET Core 支援的單一頁面應用程式（SPA）的優點。
+description: 瞭解使用 JavaScript 服務建立單一頁面應用程式 (SPA) 支援 ASP.NET Core 的優點。
 monikerRange: '>= aspnetcore-2.1'
 ms.author: scaddie
 ms.custom: H1Hack27Feb2017
 ms.date: 09/06/2019
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -15,18 +17,18 @@ no-loc:
 - Razor
 - SignalR
 uid: client-side/spa-services
-ms.openlocfilehash: 05f76a7d341fc5c55b8234b6ff6d2be5aa61d6fd
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: 2c91fa13c6fcb92c5985cae21c175c0a2a2a313e
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85401827"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88013264"
 ---
 # <a name="use-javascript-services-to-create-single-page-applications-in-aspnet-core"></a>使用 JavaScript 服務在 ASP.NET Core 中建立單一頁面應用程式
 
 由[Scott Addie](https://github.com/scottaddie)和[Fiyaz Hasan](https://fiyazhasan.me/)
 
-單一頁面應用程式（SPA）是一種熱門的 web 應用程式，因為它固有的豐富使用者體驗。 將用戶端 SPA 架構或程式庫（例如「[角度](https://angular.io/)」或「[回應](https://facebook.github.io/react/)」）與伺服器端架構（例如 ASP.NET Core）整合可能會很棘手。 JavaScript 服務的開發目的是要減少整合程式中的摩擦。 它可讓您在不同的用戶端和伺服器技術堆疊之間順暢地運作。
+單一頁面應用程式 (SPA) 是受歡迎的 web 應用程式類型，因為它具有其固有的豐富使用者體驗。 將用戶端 SPA 架構或程式庫（例如「[角度](https://angular.io/)」或「[回應](https://facebook.github.io/react/)」）與伺服器端架構（例如 ASP.NET Core）整合可能會很棘手。 JavaScript 服務的開發目的是要減少整合程式中的摩擦。 它可讓您在不同的用戶端和伺服器技術堆疊之間順暢地運作。
 
 ::: moniker range=">= aspnetcore-3.0"
 
@@ -41,8 +43,8 @@ JavaScript 服務是 ASP.NET Core 的用戶端技術集合。 其目標是將 AS
 
 JavaScript 服務包含兩個不同的 NuGet 套件：
 
-* [AspNetCore. NodeServices](https://www.nuget.org/packages/Microsoft.AspNetCore.NodeServices/) （NodeServices）
-* [AspNetCore. SpaServices](https://www.nuget.org/packages/Microsoft.AspNetCore.SpaServices/) （SpaServices）
+* [AspNetCore. NodeServices](https://www.nuget.org/packages/Microsoft.AspNetCore.NodeServices/) (NodeServices) 
+* [AspNetCore. SpaServices](https://www.nuget.org/packages/Microsoft.AspNetCore.SpaServices/) (SpaServices) 
 
 這些套件在下列案例中很有用：
 
@@ -69,7 +71,7 @@ SpaServices 提供有用的基礎結構，例如：
 
 若要使用 SpaServices，請安裝下列各項：
 
-* 使用 npm [Node.js](https://nodejs.org/) （6版或更新版本）
+* [Node.js](https://nodejs.org/) (使用 npm 的第6版或更新版本) 
 
   * 若要確認已安裝這些元件，而且可以找到，請從命令列執行下列程式碼：
 
@@ -87,7 +89,7 @@ SpaServices 提供有用的基礎結構，例如：
 
 ## <a name="server-side-prerendering"></a>伺服器端預先呈現
 
-通用（也稱為 isomorphic）應用程式是可以在伺服器和用戶端上執行的 JavaScript 應用程式。 角度、反應和其他熱門架構提供此應用程式開發風格的通用平臺。 其概念是先透過 Node.js 將架構元件轉譯在伺服器上，然後再將進一步的執行委派給用戶端。
+通用 (也稱為 isomorphic) 應用程式是能夠在伺服器和用戶端上執行的 JavaScript 應用程式。 角度、反應和其他熱門架構提供此應用程式開發風格的通用平臺。 其概念是先透過 Node.js 將架構元件轉譯在伺服器上，然後再將進一步的執行委派給用戶端。
 
 SpaServices[提供的](xref:mvc/views/tag-helpers/intro)ASP.NET Core 標籤協助程式藉由叫用伺服器上的 JavaScript 函式，簡化伺服器端預先呈現的執行。
 
@@ -169,7 +171,7 @@ Webpack Dev 中介軟體會透過*Startup.cs*檔案之方法中的下列程式�
 
 ## <a name="hot-module-replacement"></a>熱模組更換
 
-將 Webpack 的[熱模組取代](https://webpack.js.org/concepts/hot-module-replacement/)（HMR）功能視為[Webpack Dev 中介軟體](#webpack-dev-middleware)的演進。 HMR 引進了所有相同的優點，但是它會在編譯變更之後自動更新頁面內容，藉此簡化開發工作流程。 請不要將它與瀏覽器的重新整理混淆，這會干擾 SPA 目前的記憶體內部狀態和偵測會話。 Webpack Dev 中介軟體服務與瀏覽器之間有一個即時連結，這表示變更會推送至瀏覽器。
+Webpack 的[熱模組取代](https://webpack.js.org/concepts/hot-module-replacement/) (HMR) 功能，做為[Webpack Dev 中介軟體](#webpack-dev-middleware)的演進。 HMR 引進了所有相同的優點，但是它會在編譯變更之後自動更新頁面內容，藉此簡化開發工作流程。 請不要將它與瀏覽器的重新整理混淆，這會干擾 SPA 目前的記憶體內部狀態和偵測會話。 Webpack Dev 中介軟體服務與瀏覽器之間有一個即時連結，這表示變更會推送至瀏覽器。
 
 ### <a name="hot-module-replacement-prerequisites"></a>熱模組更換必要條件
 
@@ -233,7 +235,7 @@ dotnet new --install Microsoft.AspNetCore.SpaTemplates::*
 
 隨即會顯示可用的 SPA 範本清單：
 
-| 範本                                 | 簡短名稱 | Language | 標籤        |
+| 範本                                 | 簡短名稱 | 語言 | 標記        |
 | ------------------------------------------| :--------: | :------: | :---------: |
 | 具有角度的 MVC ASP.NET Core             | angular    | [C#]     | Web/MVC/SPA |
 | 具有 React.js 的 MVC ASP.NET Core            | react      | [C#]     | Web/MVC/SPA |
@@ -286,7 +288,7 @@ SpaServices 範本已預先設定為使用[Karma](https://karma-runner.github.io
 
 [!code-typescript[](../client-side/spa-services/sample/SpaServicesSampleApp/ClientApp/app/components/counter/counter.component.spec.ts?range=15-28)]
 
-在*ClientApp*目錄中開啟命令提示字元。 執行以下命令：
+在*ClientApp*目錄中開啟命令提示字元。 執行下列命令：
 
 ```console
 npm test

@@ -7,6 +7,8 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 03/18/2020
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -15,14 +17,14 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/components/templated-components
-ms.openlocfilehash: eaa04b3f5a193b00619849d5525ea8d721ace71f
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: 408fc433dd6c81ac84f2198465b3191441ad0fc4
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85400947"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88014512"
 ---
-# <a name="aspnet-core-blazor-templated-components"></a>ASP.NET Core 樣板 Blazor 化元件
+# <a name="aspnet-core-no-locblazor-templated-components"></a>ASP.NET Core 樣板 Blazor 化元件
 
 By [Luke Latham](https://github.com/guardrex)和[Daniel Roth](https://github.com/danroth27)
 
@@ -39,7 +41,7 @@ By [Luke Latham](https://github.com/guardrex)和[Daniel Roth](https://github.com
 
 [!code-razor[](../common/samples/3.x/BlazorWebAssemblySample/Components/TableTemplate.razor)]
 
-使用樣板化元件時，可以使用符合參數名稱的子項目來指定範本參數（ `TableHeader` `RowTemplate` 在下列範例中為）：
+使用樣板化元件時，可以使用符合參數名稱 (`TableHeader` 和 `RowTemplate` 下列範例) 中的子項目來指定範本參數：
 
 ```razor
 <TableTemplate Items="pets">
@@ -55,11 +57,11 @@ By [Luke Latham](https://github.com/guardrex)和[Daniel Roth](https://github.com
 ```
 
 > [!NOTE]
-> 在未來的版本中將會支援泛型型別條件約束。 如需詳細資訊，請參閱[允許泛型型別條件約束（dotnet/aspnetcore #8433）](https://github.com/dotnet/aspnetcore/issues/8433)。
+> 在未來的版本中將會支援泛型型別條件約束。 如需詳細資訊，請參閱[允許泛型型別條件約束 (dotnet/aspnetcore #8433) ](https://github.com/dotnet/aspnetcore/issues/8433)。
 
 ## <a name="template-context-parameters"></a>範本內容參數
 
-當做元素傳遞之類型的元件引數 <xref:Microsoft.AspNetCore.Components.RenderFragment%601> 具有名為的隱含參數 `context` （例如，從上述程式碼範例中 `@context.PetId` ），但您可以使用 `Context` 子項目上的屬性來變更參數名稱。 在下列範例中， `RowTemplate` 元素的 `Context` 屬性會指定 `pet` 參數：
+當做元素傳遞之類型的元件引數 <xref:Microsoft.AspNetCore.Components.RenderFragment%601> 具有名為 `context` (的隱含參數，例如從前面的程式碼範例中， `@context.PetId`) ，但您可以使用子專案上的屬性來變更參數名稱 `Context` 。 在下列範例中， `RowTemplate` 元素的 `Context` 屬性會指定 `pet` 參數：
 
 ```razor
 <TableTemplate Items="pets">
@@ -74,7 +76,7 @@ By [Luke Latham](https://github.com/guardrex)和[Daniel Roth](https://github.com
 </TableTemplate>
 ```
 
-或者，您也可以在 `Context` component 元素上指定屬性。 指定的 `Context` 屬性會套用至所有指定的範本參數。 當您想要指定隱含子內容的內容參數名稱時（不含任何換行的子項目），這會很有用。 在下列範例中， `Context` 屬性會出現在元素上， `TableTemplate` 並套用至所有範本參數：
+或者，您也可以在 `Context` component 元素上指定屬性。 指定的 `Context` 屬性會套用至所有指定的範本參數。 當您想要指定隱含子內容的內容參數名稱時， (沒有任何包裝的子項目) ，這會很有用。 在下列範例中， `Context` 屬性會出現在元素上， `TableTemplate` 並套用至所有範本參數：
 
 ```razor
 <TableTemplate Items="pets" Context="pet">

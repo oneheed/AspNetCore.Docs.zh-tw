@@ -5,6 +5,8 @@ description: ''
 ms.author: riande
 ms.date: 12/07/2016
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -13,12 +15,12 @@ no-loc:
 - Razor
 - SignalR
 uid: migration/http-modules
-ms.openlocfilehash: 362dd16db358f7ceb6730bde908fff9854c73a84
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: 92672b2d05ee6bbdfcf0255ae14529a5c28c41b7
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85403647"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88014980"
 ---
 # <a name="migrate-http-handlers-and-modules-to-aspnet-core-middleware"></a>將 HTTP 處理常式和模組遷移至 ASP.NET Core 中介軟體
 
@@ -44,7 +46,7 @@ ms.locfileid: "85403647"
 
 * 針對每個要求叫用
 
-* 能夠短路（停止進一步處理要求）
+* 能夠縮短 (停止進一步處理要求) 
 
 * 能夠新增至 HTTP 回應，或自行建立
 
@@ -62,7 +64,7 @@ ms.locfileid: "85403647"
 
 **中介軟體比 HTTP 模組和處理常式簡單：**
 
-* 模組、處理常式、 *Global.asax.cs*、 *Web.config* （IIS 設定除外）和應用程式生命週期都已消失
+* 模組、處理常式*Global.asax.cs*、Global.asax.cs *Web.config* (，但 IIS 設定) 和應用程式生命週期都已消失
 
 * 中介軟體已接管模組和處理常式的角色
 
@@ -137,7 +139,7 @@ HTTP 模組通常會使用*Web.config*新增至要求管線：
 
 [!code-csharp[](../migration/http-modules/sample/Asp.Net.Core/Startup.cs?name=snippet_Configure&highlight=16)]
 
-管線中您插入新中介軟體的確切位置，取決於它在Web.config的模組清單中處理為模組的事件（ `BeginRequest` 、 `EndRequest` 等）及其順序。 *Web.config*
+您插入新中介軟體之管線中的確切位置，取決於它處理為模組的事件 (、等 `BeginRequest` `EndRequest` ) 及其在*Web.config*中的模組清單中的順序。
 
 如先前所述，ASP.NET Core 中沒有應用程式生命週期，中介軟體處理回應的順序與模組使用的順序不同。 這可能會讓您的訂購決策更具挑戰性。
 
@@ -199,7 +201,7 @@ HTTP 處理常式看起來像這樣：
 
 3. 將選項值與選項類別產生關聯
 
-    選項模式會使用 ASP.NET Core 的相依性插入架構，將選項類型（例如 `MyMiddlewareOptions` ）與 `MyMiddlewareOptions` 具有實際選項的物件產生關聯。
+    選項模式會使用 ASP.NET Core 的相依性插入架構，將選項類型 (例如 `MyMiddlewareOptions`) 與 `MyMiddlewareOptions` 具有實際選項的物件產生關聯。
 
     更新您的 `Startup` 類別：
 
@@ -237,11 +239,11 @@ HTTP 處理常式看起來像這樣：
 
    [!code-json[](http-modules/sample/Asp.Net.Core/appsettings.json?range=1,10-18&highlight=2-5)]
 
-2. 取出選項值，並將它們傳遞至中介軟體。 `Use...`擴充方法（會將中介軟體新增至管線）是傳遞選項值的邏輯位置： 
+2. 取出選項值，並將它們傳遞至中介軟體。 `Use...`擴充方法 (將中介軟體新增至管線) 是傳遞選項值的邏輯位置： 
 
    [!code-csharp[](http-modules/sample/Asp.Net.Core/Startup.cs?name=snippet_Configure&highlight=20-23)]
 
-3. 啟用中介軟體以接受選項參數。 提供擴充方法的多載 `Use...` （會採用 options 參數並將它傳遞給 `UseMiddleware` ）。 當 `UseMiddleware` 以參數呼叫時，它會在具現化中介軟體物件時，將參數傳遞至中介軟體的函式。
+3. 啟用中介軟體以接受選項參數。 提供擴充方法的多載， `Use...` (採用 options 參數，並將它傳遞給 `UseMiddleware`) 。 當 `UseMiddleware` 以參數呼叫時，它會在具現化中介軟體物件時，將參數傳遞至中介軟體的函式。
 
    [!code-csharp[](../migration/http-modules/sample/Asp.Net.Core/Middleware/MyMiddlewareWithParams.cs?name=snippet_Extensions&highlight=9-14)]
 
@@ -263,7 +265,7 @@ public async Task Invoke(HttpContext context)
 
 [!code-csharp[](http-modules/sample/Asp.Net.Core/Middleware/HttpContextDemoMiddleware.cs?name=snippet_Items)]
 
-**唯一要求識別碼（不含 System.web. HttpCoNtext 對應）**
+**唯一的要求識別碼 (不含任何 System.web. HttpCoNtext 對應的) **
 
 為每個要求提供唯一的識別碼。 在記錄中包含非常有用的。
 
@@ -291,7 +293,7 @@ public async Task Invoke(HttpContext context)
 
 [!code-csharp[](http-modules/sample/Asp.Net.Core/Middleware/HttpContextDemoMiddleware.cs?name=snippet_Host)]
 
-**HttpCoNtext**會轉譯為：
+**HttpCoNtext 要求。 Cookies**轉譯為：
 
 [!code-csharp[](http-modules/sample/Asp.Net.Core/Middleware/HttpContextDemoMiddleware.cs?name=snippet_Cookies)]
 
@@ -374,9 +376,9 @@ public async Task Invoke(HttpContext httpContext)
 
 [!code-csharp[](http-modules/sample/Asp.Net.Core/Middleware/HttpContextDemoMiddleware.cs?name=snippet_SetHeaders)]
 
-**HttpCoNtext. 回應 Cookie**
+**HttpCoNtext 回應。 Cookie今日**
 
-Cookie 會以*設定-Cookie*回應標頭傳送至瀏覽器。 因此，傳送 cookie 需要與用來傳送回應標頭相同的回呼：
+Cookie會在*集合- Cookie *回應標頭中前往瀏覽器。 因此，傳送需要與 cookie 用於傳送回應標頭相同的回呼：
 
 ```csharp
 public async Task Invoke(HttpContext httpContext)
@@ -393,6 +395,6 @@ public async Task Invoke(HttpContext httpContext)
 ## <a name="additional-resources"></a>其他資源
 
 * [HTTP 處理常式和 HTTP 模組總覽](/iis/configuration/system.webserver/)
-* [設定](xref:fundamentals/configuration/index)
+* [組態](xref:fundamentals/configuration/index)
 * [應用程式啟動](xref:fundamentals/startup)
 * [中介軟體](xref:fundamentals/middleware/index)

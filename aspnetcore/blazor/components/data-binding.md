@@ -7,6 +7,8 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 03/26/2020
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -15,14 +17,14 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/components/data-binding
-ms.openlocfilehash: 896eed0e55986678b6bb86638ca92b04a77b4fef
-ms.sourcegitcommit: d00a200bc8347af794b24184da14ad5c8b6bba9a
+ms.openlocfilehash: 6f5ad6b8f225834c92d6e33d8bcf608b56678e67
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 07/21/2020
-ms.locfileid: "86869935"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88014668"
 ---
-# <a name="aspnet-core-blazor-data-binding"></a>ASP.NET Core Blazor 資料系結
+# <a name="aspnet-core-no-locblazor-data-binding"></a>ASP.NET Core Blazor 資料系結
 
 By [Luke Latham](https://github.com/guardrex)和[Daniel Roth](https://github.com/danroth27)
 
@@ -42,7 +44,7 @@ Razor元件會透過 [`@bind`](xref:mvc/views/razor#bind) 以欄位、屬性或�
 
 只有在呈現元件時，才會更新 UI 中的文字方塊，而不會回應變更屬性的值。 由於元件會在事件處理常式程式碼執行之後自行呈現，因此在觸發事件處理常式之後，屬性更新*通常*會立即反映在 UI 中。
 
-使用 [`@bind`](xref:mvc/views/razor#bind) 與 `CurrentValue` 屬性（ `<input @bind="CurrentValue" />` ）基本上等同于下列內容：
+使用 [`@bind`](xref:mvc/views/razor#bind) 與 `CurrentValue` 屬性 (`<input @bind="CurrentValue" />`) 基本上等同于下列內容：
 
 ```razor
 <input value="@CurrentValue"
@@ -111,9 +113,9 @@ Razor元件會透過 [`@bind`](xref:mvc/views/razor#bind) 以欄位、屬性或�
 
 在上述案例中，元素的值會還原成 `123` 。 當以的 `123.45` 原始值拒絕值時 `123` ，使用者瞭解其值不被接受。
 
-根據預設，系結會套用至元素的 `onchange` 事件（ `@bind="{PROPERTY OR FIELD}"` ）。 用 `@bind="{PROPERTY OR FIELD}" @bind:event={EVENT}` 來在不同的事件上觸發系結。 對於 `oninput` 事件（ `@bind:event="oninput"` ），回復會在引入無法剖析值的任何擊鍵之後發生。 以系結型別為目標的 `oninput` 事件時 `int` ，使用者無法輸入 `.` 字元。 `.`系統會立即移除字元，讓使用者收到只允許整數的立即回應。 在某些情況下，在事件上還原值 `oninput` 不是理想的情況，例如，當使用者應允許清除無法解析的 `<input>` 值時。 替代方案包括：
+根據預設，系結會套用至元素的 `onchange` 事件 (`@bind="{PROPERTY OR FIELD}"`) 。 用 `@bind="{PROPERTY OR FIELD}" @bind:event={EVENT}` 來在不同的事件上觸發系結。 對於 `oninput` 事件 (`@bind:event="oninput"`) ，回復會在引進無法剖析值的任何擊鍵之後發生。 以系結型別為目標的 `oninput` 事件時 `int` ，使用者無法輸入 `.` 字元。 `.`系統會立即移除字元，讓使用者收到只允許整數的立即回應。 在某些情況下，在事件上還原值 `oninput` 不是理想的情況，例如，當使用者應允許清除無法解析的 `<input>` 值時。 替代方案包括：
 
-* 請勿使用 `oninput` 事件。 使用預設 `onchange` 事件（僅指定 `@bind="{PROPERTY OR FIELD}"` ），在元素失去焦點之前，不會還原不正確值。
+* 請勿使用 `oninput` 事件。 使用預設 `onchange` 事件 (僅指定 `@bind="{PROPERTY OR FIELD}"`) ，其中不正確值在元素失去焦點之前不會還原。
 * 系結至可為 null 的型別（例如 `int?` 或 `string` ），並提供自訂邏輯來處理不正確專案。
 * 使用[表單驗證元件](xref:blazor/forms-validation)，例如 <xref:Microsoft.AspNetCore.Components.Forms.InputNumber%601> 或 <xref:Microsoft.AspNetCore.Components.Forms.InputDate%601> 。 表單驗證元件有內建支援，可管理不正確輸入。 表單驗證元件：
   * 允許使用者在相關聯的上提供不正確輸入和接收驗證錯誤 <xref:Microsoft.AspNetCore.Components.Forms.EditContext> 。
@@ -132,7 +134,7 @@ Razor元件會透過 [`@bind`](xref:mvc/views/razor#bind) 以欄位、屬性或�
 }
 ```
 
-在上述程式碼中， `<input>` 元素的欄位類型（ `type` ）預設為 `text` 。 `@bind:format`支援系結下列 .NET 類型：
+在上述程式碼中， `<input>` 元素的欄位類型 (`type`) 預設為 `text` 。 `@bind:format`支援系結下列 .NET 類型：
 
 * <xref:System.DateTime?displayProperty=fullName>
 * <xref:System.DateTime?displayProperty=fullName>?
@@ -151,7 +153,7 @@ Razor元件會透過 [`@bind`](xref:mvc/views/razor#bind) 以欄位、屬性或�
 
 Binding 可辨識元件參數，其中 `@bind-{PROPERTY}` 可以將屬性值從父元件系結到子元件。 具有連鎖系結區段的[子系對父](#child-to-parent-binding-with-chained-bind)系結中涵蓋了從子系系結至父系的系結。
 
-下列子元件（ `ChildComponent` ）具有 `Year` 元件參數和 `YearChanged` 回呼：
+下列子元件 (`ChildComponent`) 具有 `Year` 元件參數和 `YearChanged` 回呼：
 
 ```razor
 <h2>Child Component</h2>
@@ -167,12 +169,12 @@ Binding 可辨識元件參數，其中 `@bind-{PROPERTY}` 可以將屬性值從�
 }
 ```
 
-<xref:Microsoft.AspNetCore.Components.EventCallback%601> `Changed` `{PARAMETER NAME}Changed` 前面的範例中，必須以元件參數名稱和後置詞（）命名 `YearChanged` 。 如需 <xref:Microsoft.AspNetCore.Components.EventCallback%601> 的詳細資訊，請參閱 <xref:blazor/components/event-handling#eventcallback>。
+<xref:Microsoft.AspNetCore.Components.EventCallback%601> `Changed` `{PARAMETER NAME}Changed` 在上述範例中，必須命名為元件參數名稱，後面接著尾碼 () `YearChanged` 。 如需 <xref:Microsoft.AspNetCore.Components.EventCallback%601> 的詳細資訊，請參閱 <xref:blazor/components/event-handling#eventcallback>。
 
 下列父元件會使用：
 
 * `ChildComponent`和會將 `ParentYear` 參數從父系系結至 `Year` 子元件上的參數。
-* `onclick`事件是用來觸發 `ChangeTheYear` 方法。 如需詳細資訊，請參閱 <xref:blazor/components/event-handling> 。
+* `onclick`事件是用來觸發 `ChangeTheYear` 方法。 如需詳細資訊，請參閱<xref:blazor/components/event-handling>。
 
 ```razor
 @page "/ParentComponent"
@@ -242,11 +244,11 @@ Binding 可辨識元件參數，其中 `@bind-{PROPERTY}` 可以將屬性值從�
 
 無法 [`@bind`](xref:mvc/views/razor#bind) 在頁面的元素中使用語法來執行連鎖系結。 事件處理常式和值必須分別指定。 不過，父系元件可以使用語法搭配 [`@bind`](xref:mvc/views/razor#bind) 元件的參數。
 
-下列 `PasswordField` 元件（ `PasswordField.razor` ）：
+下列 `PasswordField` 元件 (`PasswordField.razor`) ：
 
 * 將 `<input>` 元素的值設定為 `Password` 屬性。
 * 將屬性的變更公開 `Password` 至具有的父元件 [`EventCallback`](xref:blazor/components/event-handling#eventcallback) 。
-* 會使用 `onclick` 事件來觸發 `ToggleShowPassword` 方法。 如需詳細資訊，請參閱 <xref:blazor/components/event-handling> 。
+* 會使用 `onclick` 事件來觸發 `ToggleShowPassword` 方法。 如需詳細資訊，請參閱<xref:blazor/components/event-handling>。
 
 ```razor
 <h1>Child Component</h1>
@@ -301,7 +303,7 @@ Password:
 
 若要對上述範例中的密碼執行檢查或陷印錯誤：
 
-* 建立的支援欄位 `Password` （ `password` 在下列範例程式碼中）。
+* `Password` `password` 在下列範例程式碼) 中，建立 (的支援欄位。
 * 執行 setter 中的檢查或陷阱錯誤 `Password` 。
 
 如果密碼的值中使用了空格，下列範例會向使用者提供立即的意見反應：

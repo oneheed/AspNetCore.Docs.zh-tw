@@ -6,6 +6,8 @@ ms.author: casoper
 ms.custom: mvc, seodec18
 ms.date: 10/24/2018
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -14,12 +16,12 @@ no-loc:
 - Razor
 - SignalR
 uid: azure/devops/tools-and-downloads
-ms.openlocfilehash: ed8aee214ff9b9e941aeea01887882c3bdfc56a7
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: e224121692a0965c66bd3b95b3fbf691867d5548
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85400293"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88012536"
 ---
 # <a name="tools-and-downloads"></a>工具及下載
 
@@ -44,7 +46,7 @@ Azure 提供數個介面來布建和管理資源，例如[Azure 入口網站](ht
     dotnet --version
     ```
 
-## <a name="recommended-tools-windows-only"></a>建議的工具（僅限 Windows）
+## <a name="recommended-tools-windows-only"></a>建議的工具僅 (Windows) 
 
 * [Visual Studio](https://visualstudio.microsoft.com)的健全 Azure 工具提供 GUI，可用於本指南中所述的大部分功能。 任何版本的 Visual Studio 都可以使用，包括免費的 Visual Studio Community 版本。 這些教學課程的撰寫是為了示範開發、部署和 DevOps，以及是否 Visual Studio。
 

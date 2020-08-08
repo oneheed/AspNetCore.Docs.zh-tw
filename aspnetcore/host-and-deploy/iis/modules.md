@@ -7,6 +7,8 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 01/13/2020
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -15,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: host-and-deploy/iis/modules
-ms.openlocfilehash: 124f2a629ebd14210cb21351a720e007bba48f02
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: c526fc779d778cd0f99bcdaae283b6a5a0fe09ab
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85404011"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88015604"
 ---
 # <a name="iis-modules-with-aspnet-core"></a>與 ASP.NET Core 搭配運作的 IIS 模組
 
@@ -30,7 +32,7 @@ ms.locfileid: "85404011"
 
 下表指出可搭配 ASP.NET Core 應用程式和 ASP.NET Core 模組運作的原生 IIS 模組。
 
-| 模組 | 對 ASP.NET Core 應用程式有作用 | ASP.NET Core 選項 |
+| 課程模組 | 對 ASP.NET Core 應用程式有作用 | ASP.NET Core 選項 |
 | --- | :---: | --- |
 | **匿名驗證**<br>`AnonymousAuthenticationModule`                                  | 是 | |
 | **基本驗證**<br>`BasicAuthenticationModule`                                          | 是 | |
@@ -71,12 +73,12 @@ ms.locfileid: "85404011"
 
 當應用程式集區的 .NET CLR 版本已設定為 [沒有 Managed 程式碼]**** 時，受控模組對所裝載的 ASP.NET Core 應用程式「沒有」** 作用。 ASP.NET Core 在數種案例中都有提供中介軟體替代方案。
 
-| 模組                  | ASP.NET Core 選項 |
+| 課程模組                  | ASP.NET Core 選項 |
 | ----------------------- | ------------------- |
 | AnonymousIdentification | |
 | DefaultAuthentication   | |
 | FileAuthorization       | |
-| FormsAuthentication     | [Cookie 驗證中介軟體](xref:security/authentication/cookie) |
+| FormsAuthentication     | [Cookie驗證中介軟體](xref:security/authentication/cookie) |
 | OutputCache             | [回應快取中介軟體](xref:performance/caching/middleware) |
 | 設定檔                 | |
 | RoleManager             | |

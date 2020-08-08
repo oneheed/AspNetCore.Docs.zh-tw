@@ -7,6 +7,8 @@ ms.author: mimengis
 ms.custom: mvc
 ms.date: 11/12/2019
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -15,14 +17,14 @@ no-loc:
 - Razor
 - SignalR
 uid: signalr/java-client
-ms.openlocfilehash: 27ab8cc1b6e419b59aadb97a8a1fbdddc3579276
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: ec1d83853b1596824914328d546c6c68cce3bfe7
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85408795"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88012549"
 ---
-# <a name="aspnet-core-signalr-java-client"></a>ASP.NET Core SignalR JAVA 用戶端
+# <a name="aspnet-core-no-locsignalr-java-client"></a>ASP.NET Core SignalR JAVA 用戶端
 
 依[Mikael Mengistu](https://twitter.com/MikaelM_12)
 
@@ -30,9 +32,9 @@ JAVA 用戶端可讓您 SignalR 從 java 程式碼（包括 Android 應用程式
 
 本文中所參考的範例 JAVA 主控台應用程式會使用 SignalR JAVA 用戶端。
 
-[查看或下載範例程式碼](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/signalr/java-client/sample)（[如何下載](xref:index#how-to-download-a-sample)）
+[查看或下載範例程式碼](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/signalr/java-client/sample) ([如何下載](xref:index#how-to-download-a-sample)) 
 
-## <a name="install-the-signalr-java-client-package"></a>安裝 SignalR JAVA 用戶端套件
+## <a name="install-the-no-locsignalr-java-client-package"></a>安裝 SignalR JAVA 用戶端套件
 
 *Signalr-1.0.0* JAR 檔案可讓用戶端連線到 SignalR 中樞。 若要尋找最新的 JAR 檔案版本號碼，請參閱[Maven 搜尋結果](https://search.maven.org/search?q=g:com.microsoft.signalr%20AND%20a:signalr)。
 
@@ -90,7 +92,7 @@ SLF4J: See http://www.slf4j.org/codes.html#StaticLoggerBinder for further detail
 在 Android SDK 用戶端功能的相容性方面 SignalR ，指定目標 Android SDK 版本時，請考慮下列專案：
 
 * SignalRJAVA 用戶端會在 ANDROID API 層級16和更新版本上執行。
-* 透過 Azure 服務連線 SignalR 會需要 ANDROID API 層級20和更新版本，因為[Azure SignalR 服務](/azure/azure-signalr/signalr-overview)需要 TLS 1.2，而且不支援以 sha-1 為基礎的加密套件。 Android 已在 API 層級20中[新增對 SHA-256 （和更新版本）加密套件的支援](https://developer.android.com/reference/javax/net/ssl/SSLSocket)。
+* 透過 Azure 服務連線 SignalR 會需要 ANDROID API 層級20和更新版本，因為[Azure SignalR 服務](/azure/azure-signalr/signalr-overview)需要 TLS 1.2，而且不支援以 sha-1 為基礎的加密套件。 Android 已在 API 層級20中[新增對 SHA-256 (和更新版本) 加密套件的支援](https://developer.android.com/reference/javax/net/ssl/SSLSocket)。
 
 ## <a name="configure-bearer-token-authentication"></a>設定持有人權杖驗證
 
@@ -123,7 +125,7 @@ HubConnection hubConnection = HubConnectionBuilder.create("YOUR HUB URL HERE")
 
 ## <a name="additional-resources"></a>其他資源
 
-* [Java API 參考](/java/api/com.microsoft.signalr?view=aspnet-signalr-java)
+* [Java API 參照](/java/api/com.microsoft.signalr?view=aspnet-signalr-java)
 * <xref:signalr/hubs>
 * <xref:signalr/javascript-client>
 * <xref:signalr/publish-to-azure-web-app>

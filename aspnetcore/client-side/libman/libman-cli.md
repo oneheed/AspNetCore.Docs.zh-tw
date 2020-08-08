@@ -6,6 +6,8 @@ ms.author: scaddie
 ms.custom: mvc
 ms.date: 11/12/2019
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -14,12 +16,12 @@ no-loc:
 - Razor
 - SignalR
 uid: client-side/libman/libman-cli
-ms.openlocfilehash: ed5dffb83a2f1a40f3d6596d23135c0fa5b6791f
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: 6e1ab9c540e1714f2f8cd6e6f2603e4d589a7d2b
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85403179"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88013472"
 ---
 # <a name="use-the-libman-cli-with-aspnet-core"></a>搭配 ASP.NET Core 使用 LibMan CLI
 
@@ -109,7 +111,7 @@ libman init [-d|--default-destination] [-p|--default-provider] [--verbosity]
 libman init [-h|--help]
 ```
 
-### <a name="options"></a>選項
+### <a name="options"></a>選項。
 
 以下是使用 `libman init` 命令時可用的選項：
 
@@ -130,7 +132,7 @@ libman init [-h|--help]
 若要在 ASP.NET Core 專案中建立檔案的*libman.js* ：
 
 * 流覽至專案根目錄。
-* 執行以下命令：
+* 執行下列命令：
 
   ```console
   libman init
@@ -167,9 +169,9 @@ libman install [-h|--help]
 
 `LIBRARY`
 
-要安裝之程式庫的名稱。 此名稱可能包含版本號碼標記法（例如 `@1.2.0` ）。
+要安裝之程式庫的名稱。 此名稱可能包含版本號碼標記法 (例如 `@1.2.0`) 。
 
-### <a name="options"></a>選項
+### <a name="options"></a>選項。
 
 以下是使用 `libman install` 命令時可用的選項：
 
@@ -179,7 +181,7 @@ libman install [-h|--help]
 
 * `--files <FILE>`
 
-  指定要從程式庫安裝的檔案名。 如果未指定，則會安裝媒體櫃中的所有檔案。 `--files`針對要安裝的每個檔案提供一個選項。 也支援相對路徑。 例如： `--files dist/browser/signalr.js` 。
+  指定要從程式庫安裝的檔案名。 如果未指定，則會安裝媒體櫃中的所有檔案。 `--files`針對要安裝的每個檔案提供一個選項。 也支援相對路徑。 例如：`--files dist/browser/signalr.js`。
 
 * `-p|--provider <PROVIDER>`
 
@@ -282,7 +284,7 @@ libman restore [--verbosity]
 libman restore [-h|--help]
 ```
 
-### <a name="options"></a>選項
+### <a name="options"></a>選項。
 
 以下是使用 `libman restore` 命令時可用的選項：
 
@@ -307,7 +309,7 @@ libman clean [--verbosity]
 libman clean [-h|--help]
 ```
 
-### <a name="options"></a>選項
+### <a name="options"></a>選項。
 
 以下是使用 `libman clean` 命令時可用的選項：
 
@@ -346,9 +348,9 @@ libman uninstall [-h|--help]
 
 `LIBRARY`
 
-要卸載之程式庫的名稱。 此名稱可能包含版本號碼標記法（例如 `@1.2.0` ）。
+要卸載之程式庫的名稱。 此名稱可能包含版本號碼標記法 (例如 `@1.2.0`) 。
 
-### <a name="options"></a>選項
+### <a name="options"></a>選項。
 
 以下是使用 `libman uninstall` 命令時可用的選項：
 
@@ -400,7 +402,7 @@ libman update [-h|--help]
 
 要更新之程式庫的名稱。
 
-### <a name="options"></a>選項
+### <a name="options"></a>選項。
 
 以下是使用 `libman update` 命令時可用的選項：
 
@@ -454,7 +456,7 @@ libman cache [-h|--help]
 
 [!INCLUDE [LibMan provider names](../../includes/libman-cli/provider-names.md)]
 
-### <a name="options"></a>選項
+### <a name="options"></a>選項。
 
 以下是使用 `libman cache` 命令時可用的選項：
 

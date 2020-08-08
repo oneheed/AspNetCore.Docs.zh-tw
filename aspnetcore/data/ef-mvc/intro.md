@@ -7,6 +7,8 @@ ms.custom: mvc
 ms.date: 02/06/2019
 ms.topic: tutorial
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -15,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: data/ef-mvc/intro
-ms.openlocfilehash: 3a42ce1773bef74fab35884025765d147c534dd2
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: 36b0c913db3c2b6c2c834d33b0ea8665f3e25814
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85403218"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88012964"
 ---
 # <a name="tutorial-get-started-with-ef-core-in-an-aspnet-mvc-web-app"></a>教學課程：開始在 ASP.NET MVC web 應用程式中使用 EF Core
 
@@ -334,7 +336,7 @@ ASP.NET Core 相依性插入會負責傳遞 `SchoolContext` 的執行個體給�
 
 * 命名為 ID 或 classnameID 的實體屬性，會辨識為主索引鍵屬性。
 
-* 如果屬性名為，則會將其視為外鍵屬性 *\<navigation property name>\<primary key property name>* （例如， `StudentID` `Student` 因為 `Student` 實體的主鍵為 `ID` ）。 外鍵屬性也可以簡單命名 *\<primary key property name>* （例如， `EnrollmentID` 因為 `Enrollment` 實體的主鍵是 `EnrollmentID` ）。
+* 屬性會解讀為外鍵屬性（如果它名為 *\<navigation property name>\<primary key property name>* ） (例如， `StudentID` 針對 `Student` 導覽屬性，因為 `Student` 實體的主鍵是 `ID`) 的。 外鍵屬性也可以只命名 *\<primary key property name>* (例如， `EnrollmentID` 因為 `Enrollment` 實體的主鍵是 `EnrollmentID`) 的。
 
 慣例行為可以被覆寫。 例如，您可以明確指定資料表名稱，如稍早在本教學課程中您所見到的。 您可以設定資料行名稱以及將任何屬性設為主索引鍵或外部索引鍵，如同您在本系列[稍後的教學課程](complex-data-model.md)中所見。
 

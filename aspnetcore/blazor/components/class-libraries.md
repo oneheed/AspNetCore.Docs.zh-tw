@@ -7,6 +7,8 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 07/27/2020
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -15,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/components/class-libraries
-ms.openlocfilehash: 8293d61f88f53e55d94b114ca2143fdfb6fd8468
-ms.sourcegitcommit: 84150702757cf7a7b839485382420e8db8e92b9c
+ms.openlocfilehash: 0bace66e0aab41cf31e18fe9f86dbf9bbcf59447
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 08/05/2020
-ms.locfileid: "87819063"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88014694"
 ---
 # <a name="aspnet-core-no-locrazor-components-class-libraries"></a>ASP.NET Core Razor 元件類別庫
 
@@ -48,7 +50,7 @@ ms.locfileid: "87819063"
    1. 選取 RCL 的專案檔案 (`.csproj`) ]。
 1. 從應用程式新增參考 RCL：
    1. 以滑鼠右鍵按一下應用程式專案。 選取 [**新增**  >  **參考**]。
-   1. 選取 [RCL] 專案。 選取 [確定]  。
+   1. 選取 [RCL] 專案。 選取 [確定]。
 
 > [!NOTE]
 > 從範本產生 RCL 時，如果已選取 [**支援頁面和視圖**] 核取方塊，則也會 `_Imports.razor` 使用下列內容將檔案新增至所產生專案的根目錄，以啟用 Razor 元件撰寫：

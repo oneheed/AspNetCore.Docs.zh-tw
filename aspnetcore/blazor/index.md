@@ -7,6 +7,8 @@ ms.author: riande
 ms.custom: mvc, seoapril2019
 ms.date: 06/19/2020
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -15,14 +17,14 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/index
-ms.openlocfilehash: 30f11a137e711b1cf7a8b036af92fbb5fa2a1f05
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: ad543087243658f09a23e4f6d957d0c6aa77b361
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85402568"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88014174"
 ---
-# <a name="introduction-to-aspnet-core-blazor"></a>ASP.NET Core 簡介Blazor
+# <a name="introduction-to-aspnet-core-no-locblazor"></a>ASP.NET Core 簡介Blazor
 
 作者：[Daniel Roth](https://github.com/danroth27) 和 [Luke Latham](https://github.com/guardrex)
 
@@ -44,7 +46,7 @@ Blazor是使用 .NET 建立互動式用戶端 web UI 的架構：
 * 使用 Windows、Linux 和 macOS 版的 Visual Studio 保持生產力。
 * 以常用的語言、架構和工具建置，不僅穩定、功能豐富，而且容易使用。
 
-## <a name="components"></a>單元
+## <a name="components"></a>元件
 
 Blazor應用程式是以*元件*為基礎。 中的元件 Blazor 是 UI 的元素，例如頁面、對話方塊或資料輸入表單。
 
@@ -57,7 +59,7 @@ Blazor應用程式是以*元件*為基礎。 中的元件 Blazor 是 UI 的元�
 
 元件類別通常是以 [Razor](xref:mvc/views/razor) 具有副檔名的標記頁面形式撰寫 `.razor` 。 中的元件 Blazor 正式地稱為「 * Razor 元件*」。 Razor是結合 HTML 標籤與為開發人員生產力而設計之 c # 程式碼的語法。 Razor可讓您在具有[IntelliSense](/visualstudio/ide/using-intellisense)支援的同一個檔案中，于 HTML 標籤和 c # 之間切換。 Razor頁面和 MVC 也會使用 Razor 。 不同 Razor 于以要求/回應模型為基礎的頁面和 MVC，元件專門用於用戶端 UI 邏輯和組合。
 
-下列 Razor 標記示範元件（ `Dialog.razor` ），它可以嵌套在另一個元件中：
+下列 Razor 標記示範的元件 (`Dialog.razor`) ，可以嵌套在另一個元件中：
 
 ```razor
 <div>
@@ -102,7 +104,7 @@ Welcome to your new app.
 </Dialog>
 ```
 
-在瀏覽器中存取父系（）時，會轉譯對話方塊 `Pages/Index.razor` ：
+在瀏覽器中存取父系 () 時，會轉譯對話方塊 `Pages/Index.razor` ：
 
 ![瀏覽器中轉譯的對話方塊元件](index/_static/dialog.png)
 
@@ -114,11 +116,11 @@ Welcome to your new app.
 
 Blazor WebAssembly是使用 .NET 建立互動式用戶端 web 應用程式的單一頁面應用程式架構。 Blazor WebAssembly使用開放式 web 標準，而不需要外掛程式或程式碼轉譯，並可在所有新式網頁瀏覽器中運作，包括行動瀏覽器。
 
-在網頁瀏覽器中執行 .NET 程式碼是由[WebAssembly](https://webassembly.org) （縮寫）所組成 `wasm` 。 WebAssembly 是一種精簡的位元組程式碼格式，針對快速下載和最快執行速度而最佳化。 WebAssembly 是開放式的 Web 標準，在不含外掛程式的網頁瀏覽器中支援。
+在網頁瀏覽器中執行 .NET 程式碼是由[WebAssembly](https://webassembly.org) (縮寫的) 來實現 `wasm` 。 WebAssembly 是一種精簡的位元組程式碼格式，針對快速下載和最快執行速度而最佳化。 WebAssembly 是開放式的 Web 標準，在不含外掛程式的網頁瀏覽器中支援。
 
 WebAssembly 程式碼可以透過 JavaScript 存取瀏覽器的完整功能，稱為 「JavaScript 互通性」**(或 *JavaScript Interop*)。 在瀏覽器中透過 WebAssembly 執行的 .NET 程式碼會在瀏覽器的 JavaScript 沙箱執行，且受沙箱所提供對用戶端電腦之惡意動作的保護。
 
-![Blazor WebAssembly使用 WebAssembly 在瀏覽器中執行 .NET 程式碼。](index/_static/blazor-webassembly.png)
+![：：： no-loc (Blazor WebAssembly) ：：：在瀏覽器中使用 WebAssembly 執行 .NET 程式碼。](index/_static/blazor-webassembly.png)
 
 當 Blazor WebAssembly 應用程式在瀏覽器中建立並執行時：
 
@@ -140,7 +142,7 @@ Blazor將元件轉譯邏輯與 UI 更新的套用方式分離。 Blazor Server�
 
 用 Blazor Server 來與瀏覽器通訊的連接也會用來處理 JavaScript interop 呼叫。
 
-![Blazor Server在伺服器上執行 .NET 程式碼，並透過連接與用戶端上的檔物件模型互動 SignalR](index/_static/blazor-server.png)
+![：：：無-loc (Blazor 伺服器) ：：：在伺服器上執行 .NET 程式碼，並透過：：： no-loc (SignalR) ：：： connection 與用戶端上的檔物件模型進行互動](index/_static/blazor-server.png)
 
 ## <a name="javascript-interop"></a>JavaScript Interop
 

@@ -7,6 +7,8 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 07/06/2020
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -15,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/components/lifecycle
-ms.openlocfilehash: 92fd893963f049e014325d4f55affa789979647a
-ms.sourcegitcommit: 37f6f2e13ceb4eae268d20973d76e4b83acf6a24
+ms.openlocfilehash: 601bb218df989c15c631633be26501ae426fab52
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 08/03/2020
-ms.locfileid: "87526273"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88014564"
 ---
 # <a name="aspnet-core-no-locblazor-lifecycle"></a>ASP.NET Core Blazor 生命週期
 
@@ -169,19 +171,19 @@ protected override bool ShouldRender()
 
 即使 <xref:Microsoft.AspNetCore.Components.ComponentBase.ShouldRender%2A> 已覆寫，元件一律會一開始呈現。
 
-如需詳細資訊，請參閱 <xref:blazor/webassembly-performance-best-practices#avoid-unnecessary-component-renders> 。
+如需詳細資訊，請參閱<xref:blazor/webassembly-performance-best-practices#avoid-unnecessary-component-renders>。
 
 ## <a name="state-changes"></a>狀態變更
 
 <xref:Microsoft.AspNetCore.Components.ComponentBase.StateHasChanged%2A>通知元件其狀態已變更。 當適用時，呼叫 <xref:Microsoft.AspNetCore.Components.ComponentBase.StateHasChanged%2A> 會導致元件重新顯示。
 
-<xref:Microsoft.AspNetCore.Components.ComponentBase.StateHasChanged%2A>會針對方法自動呼叫 <xref:Microsoft.AspNetCore.Components.EventCallback> 。 如需詳細資訊，請參閱 <xref:blazor/components/event-handling#eventcallback> 。
+<xref:Microsoft.AspNetCore.Components.ComponentBase.StateHasChanged%2A>會針對方法自動呼叫 <xref:Microsoft.AspNetCore.Components.EventCallback> 。 如需詳細資訊，請參閱<xref:blazor/components/event-handling#eventcallback>。
 
 ## <a name="handle-incomplete-async-actions-at-render"></a>處理轉譯時的未完成非同步動作
 
-在呈現元件之前，在生命週期事件中執行的非同步動作可能尚未完成。 `null`當生命週期方法正在執行時，物件可能會或未完全填入資料。 提供轉譯邏輯，以確認物件已初始化。 當物件為時，呈現預留位置 UI 專案（例如，載入訊息） `null` 。
+在呈現元件之前，在生命週期事件中執行的非同步動作可能尚未完成。 `null`當生命週期方法正在執行時，物件可能會或未完全填入資料。 提供轉譯邏輯，以確認物件已初始化。 轉譯預留位置 UI 元素 (例如，當物件為時，載入訊息) `null` 。
 
-在 `FetchData` 範本的元件中 Blazor ， <xref:Microsoft.AspNetCore.Components.ComponentBase.OnInitializedAsync%2A> 會覆寫為 asychronously 接收預測資料（ `forecasts` ）。 當 `forecasts` 為時 `null` ，會向使用者顯示載入訊息。 在所 `Task` 傳回的 <xref:Microsoft.AspNetCore.Components.ComponentBase.OnInitializedAsync%2A> 完成之後，元件會以更新的狀態重新顯示。
+在 `FetchData` 範本的元件中 Blazor ， <xref:Microsoft.AspNetCore.Components.ComponentBase.OnInitializedAsync%2A> 會覆寫為 asychronously 接收預測資料 (`forecasts`) 。 當 `forecasts` 為時 `null` ，會向使用者顯示載入訊息。 在所 `Task` 傳回的 <xref:Microsoft.AspNetCore.Components.ComponentBase.OnInitializedAsync%2A> 完成之後，元件會以更新的狀態重新顯示。
 
 `Pages/FetchData.razor`在 Blazor Server 範本中：
 
@@ -288,7 +290,7 @@ public class WeatherForecastService
 
 ## <a name="cancelable-background-work"></a>可取消的背景工作
 
-元件通常會執行長時間執行的背景工作，例如進行網路呼叫（ <xref:System.Net.Http.HttpClient> ）並與資料庫互動。 在幾種情況下，最好停止背景工作以節省系統資源。 例如，當使用者離開元件時，背景非同步作業不會自動停止。
+元件通常會執行長時間執行的背景工作，例如進行網路呼叫 (<xref:System.Net.Http.HttpClient>) 並與資料庫互動。 在幾種情況下，最好停止背景工作以節省系統資源。 例如，當使用者離開元件時，背景非同步作業不會自動停止。
 
 背景工作專案可能需要取消的其他原因包括：
 

@@ -7,6 +7,8 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 07/06/2020
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -15,18 +17,18 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/components/cascading-values-and-parameters
-ms.openlocfilehash: c426be21b520520c6745ada95be35816f7365c21
-ms.sourcegitcommit: fa89d6553378529ae86b388689ac2c6f38281bb9
+ms.openlocfilehash: 1ee30a84e0869f6b9ee937648eb87bd41e8702e3
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 07/07/2020
-ms.locfileid: "86059925"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88014707"
 ---
-# <a name="aspnet-core-blazor-cascading-values-and-parameters"></a>ASP.NET Core Blazor 級聯的值和參數
+# <a name="aspnet-core-no-locblazor-cascading-values-and-parameters"></a>ASP.NET Core Blazor 級聯的值和參數
 
 By [Luke Latham](https://github.com/guardrex)和[Daniel Roth](https://github.com/danroth27)
 
-[查看或下載範例程式碼](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/blazor/common/samples/)（[如何下載](xref:index#how-to-download-a-sample)）
+[查看或下載範例程式碼](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/blazor/common/samples/) ([如何下載](xref:index#how-to-download-a-sample)) 
 
 在某些情況下，使用[元件參數](xref:blazor/components/index#component-parameters)將資料從上階元件傳送到子元件是不方便的，特別是在有數個元件層時。 串聯的值和參數可讓上階元件提供一個值給其所有子系元件，藉此解決這個問題。 級聯的值和參數也會提供一種方法來協調元件。
 
@@ -45,7 +47,7 @@ public class ThemeInfo
 
 祖系元件可以使用串聯值元件來提供串聯值。 此 <xref:Microsoft.AspNetCore.Components.CascadingValue%601> 元件會包裝元件階層的子樹，並提供單一值給該子樹內的所有元件。
 
-例如，範例應用程式 `ThemeInfo` 會在其中一個應用程式的配置中，將主題資訊（）指定為構成屬性版面配置主體之所有元件的串聯參數 `@Body` 。 `ButtonClass`在版面配置元件中，會指派的值 `btn-success` 。 任何子代元件都可以透過串聯物件使用此屬性 `ThemeInfo` 。
+例如，範例應用程式 `ThemeInfo` 會在其中一個應用程式的配置中指定主題資訊 () ，做為構成屬性配置主體之所有元件的串聯參數 `@Body` 。 `ButtonClass`在版面配置元件中，會指派的值 `btn-success` 。 任何子代元件都可以透過串聯物件使用此屬性 `ThemeInfo` 。
 
 `CascadingValuesParametersLayout`成分
 

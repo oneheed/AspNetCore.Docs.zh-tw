@@ -7,6 +7,8 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 07/14/2020
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -15,26 +17,26 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/components/index
-ms.openlocfilehash: 1312ae531b0acb0ce09137cc2bae6299ddda5c32
-ms.sourcegitcommit: e6b3dd344521ce320d5c2121bbc27c211df87e57
+ms.openlocfilehash: a145cfd551650445f9ff35259cbedf71ebb686f0
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 07/19/2020
-ms.locfileid: "86468843"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88014590"
 ---
-# <a name="create-and-use-aspnet-core-razor-components"></a>建立和使用 ASP.NET Core Razor 元件
+# <a name="create-and-use-aspnet-core-no-locrazor-components"></a>建立和使用 ASP.NET Core Razor 元件
 
 By [Luke Latham](https://github.com/guardrex)、 [Daniel Roth](https://github.com/danroth27)和[Tobias Bartsch](https://www.aveo-solutions.com/)
 
-[查看或下載範例程式碼](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/blazor/common/samples/)（[如何下載](xref:index#how-to-download-a-sample)）
+[查看或下載範例程式碼](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/blazor/common/samples/) ([如何下載](xref:index#how-to-download-a-sample)) 
 
-Blazor應用程式是使用*元件*所建立。 「元件」（component）是一種獨立的使用者介面（UI）區塊，例如頁面、對話方塊或表單。 元件包含 HTML 標籤，以及插入資料或回應 UI 事件所需的處理邏輯。 元件具有彈性且輕量。 它們可以在專案之間進行嵌套、重複使用及共用。
+Blazor應用程式是使用*元件*所建立。 元件是使用者介面的獨立區塊， (UI) ，例如頁面、對話方塊或表單。 元件包含 HTML 標籤，以及插入資料或回應 UI 事件所需的處理邏輯。 元件具有彈性且輕量。 它們可以在專案之間進行嵌套、重複使用及共用。
 
 ## <a name="component-classes"></a>元件類別
 
-元件會 [Razor](xref:mvc/views/razor) `.razor` 使用 c # 和 HTML 標籤的組合，在元件檔（）中執行。 中的元件 Blazor 正式地稱為「元件」（ * Razor component*）。
+元件會 [Razor](xref:mvc/views/razor) `.razor` 使用 c # 和 HTML 標籤的組合，在元件檔中實作為 () 。 中的元件 Blazor 正式地稱為「元件」（ * Razor component*）。
 
-### <a name="razor-syntax"></a>Razor 語法
+### <a name="no-locrazor-syntax"></a>Razor 語法
 
 Razor應用程式中的元件會 Blazor 廣泛使用 Razor 語法。 如果您不熟悉 Razor 標記語言，建議您先閱讀， <xref:mvc/views/razor> 再繼續進行。
 
@@ -49,7 +51,7 @@ Razor應用程式中的元件會 Blazor 廣泛使用 Razor 語法。 如果您�
 
 ### <a name="routing"></a>路由
 
-中的路由 Blazor 會藉由提供路由範本給應用程式中每個可存取的元件來達成。 當編譯具有指示詞的檔案時 Razor [`@page`][9] ，系統會指定路由範本給產生的類別 <xref:Microsoft.AspNetCore.Mvc.RouteAttribute> 。 在執行時間，路由器會尋找具有的元件類別 <xref:Microsoft.AspNetCore.Mvc.RouteAttribute> ，並轉譯哪個元件具有符合所要求 URL 的路由範本。 如需詳細資訊，請參閱 <xref:blazor/fundamentals/routing> 。
+中的路由 Blazor 會藉由提供路由範本給應用程式中每個可存取的元件來達成。 當編譯具有指示詞的檔案時 Razor [`@page`][9] ，系統會指定路由範本給產生的類別 <xref:Microsoft.AspNetCore.Mvc.RouteAttribute> 。 在執行時間，路由器會尋找具有的元件類別 <xref:Microsoft.AspNetCore.Mvc.RouteAttribute> ，並轉譯哪個元件具有符合所要求 URL 的路由範本。 如需詳細資訊，請參閱<xref:blazor/fundamentals/routing>。
 
 ```razor
 @page "/ParentComponent"
@@ -59,9 +61,9 @@ Razor應用程式中的元件會 Blazor 廣泛使用 Razor 語法。 如果您�
 
 ### <a name="markup"></a>標記
 
-元件的 UI 是使用 HTML 定義的。 動態轉譯邏輯（例如，迴圈、條件、運算式）是使用名為的內嵌 c # 語法加入 *Razor* 。 編譯應用程式時，會將 HTML 標籤和 c # 轉譯邏輯轉換成元件類別。 產生的類別名稱與檔案的名稱相符。
+元件的 UI 是使用 HTML 定義的。 動態轉譯邏輯 (例如，迴圈、條件、運算式) 會使用名為的內嵌 c # 語法加入 *Razor* 。 編譯應用程式時，會將 HTML 標籤和 c # 轉譯邏輯轉換成元件類別。 產生的類別名稱與檔案的名稱相符。
 
-元件類別的成員定義于 [`@code`][1] 區塊中。 在 [`@code`][1] 區塊中，會使用事件處理或定義其他元件邏輯的方法來指定元件狀態（屬性、欄位）。 允許一個以上的 [`@code`][1] 區塊。
+元件類別的成員定義于 [`@code`][1] 區塊中。 在 [`@code`][1] 區塊中，[元件狀態] ([屬性]、[欄位) 是以事件處理或定義其他元件邏輯的方法來指定。 允許一個以上的 [`@code`][1] 區塊。
 
 元件成員可以使用開頭為的 c # 運算式，做為元件轉譯邏輯的一部分 `@` 。 例如，c # 欄位是藉由在功能變數名稱前面加上的方式 `@` 來呈現。 下列範例會評估並呈現：
 
@@ -77,13 +79,13 @@ Razor應用程式中的元件會 Blazor 廣泛使用 Razor 語法。 如果您�
 }
 ```
 
-一開始呈現元件之後，元件會重新產生其轉譯樹狀結構，以回應事件。 Blazor然後比較新的轉譯樹狀結構與上一個，並將任何修改套用至瀏覽器的檔物件模型（DOM）。
+一開始呈現元件之後，元件會重新產生其轉譯樹狀結構，以回應事件。 Blazor然後比較新的轉譯樹狀結構與上一個，並套用對瀏覽器檔物件模型 (DOM) 的任何修改。
 
 元件是一般的 c # 類別，可以放在專案內的任何位置。 產生網頁的元件通常位於資料夾中 `Pages` 。 非頁面元件通常會放在資料夾中， `Shared` 或加入至專案的自訂資料夾中。
 
 ### <a name="namespaces"></a>命名空間
 
-一般而言，元件的命名空間是從應用程式的根命名空間和元件在應用程式內的位置（資料夾）衍生而來。 如果應用程式的根命名空間為 `BlazorSample` ，且 `Counter` 元件位於 `Pages` 資料夾中：
+一般而言，元件的命名空間衍生自應用程式的根命名空間和元件在應用程式中)  (資料夾的位置。 如果應用程式的根命名空間為 `BlazorSample` ，且 `Counter` 元件位於 `Pages` 資料夾中：
 
 * `Counter`元件的命名空間是 `BlazorSample.Pages` 。
 * 元件的完整類型名稱為 `BlazorSample.Pages.Counter` 。
@@ -100,20 +102,20 @@ Razor應用程式中的元件會 Blazor 廣泛使用 Razor 語法。 如果您�
 <BlazorSample.Components.MyComponent />
 ```
 
-以撰寫之元件的命名空間 Razor 是根據（依優先順序排列）：
+以撰寫之元件的命名空間 Razor 是以優先順序)  (為基礎：
 
-* [`@namespace`][8]檔案 Razor （）標記中的指定 `.razor` （） `@namespace BlazorSample.MyNamespace` 。
-* 專案 `RootNamespace` 在專案檔中的（ `<RootNamespace>BlazorSample</RootNamespace>` ）。
-* 從專案檔的檔案名（）取得的專案名稱 `.csproj` ，以及從專案根目錄到元件的路徑。 例如，架構會將 `{PROJECT ROOT}/Pages/Index.razor` （ `BlazorSample.csproj` ）解析為命名空間 `BlazorSample.Pages` 。 元件遵循 c # 名稱系結規則。 針對 `Index` 此範例中的元件，範圍內的元件都是元件：
+* [`@namespace`][8]檔案 (中的指定 Razor `.razor`) 標記 (`@namespace BlazorSample.MyNamespace`) 。
+* 專案檔中的專案 `RootNamespace` (`<RootNamespace>BlazorSample</RootNamespace>`) 。
+* 從專案檔的檔案名中取得的專案名稱 (`.csproj`) ，以及從專案根目錄到元件的路徑。 例如，架構會將 `{PROJECT ROOT}/Pages/Index.razor` (`BlazorSample.csproj`) 解析為命名空間 `BlazorSample.Pages` 。 元件遵循 c # 名稱系結規則。 針對 `Index` 此範例中的元件，範圍內的元件都是元件：
   * 在相同的資料夾中， `Pages` 。
   * 專案根目錄中未明確指定不同命名空間的元件。
 
 > [!NOTE]
 > `global::`不支援該限定性。
 >
-> 不支援使用具有別名的語句來匯入元件 [`using`](/dotnet/csharp/language-reference/keywords/using-statement) （例如 `@using Foo = Bar` ）。
+> 使用別名語句匯入元件 [`using`](/dotnet/csharp/language-reference/keywords/using-statement) (例如， `@using Foo = Bar`) 不受支援。
 >
-> 不支援部分限定的名稱。 例如， `@using BlazorSample` 不支援新增和參考 `NavMenu` 元件（ `NavMenu.razor` ） `<Shared.NavMenu></Shared.NavMenu>` 。
+> 不支援部分限定的名稱。 例如， `@using BlazorSample` 不支援新增和參考 `NavMenu` 元件 (`NavMenu.razor`) `<Shared.NavMenu></Shared.NavMenu>` 。
 
 ### <a name="partial-class-support"></a>部分類別支援
 
@@ -188,7 +190,7 @@ using Microsoft.AspNetCore.Components.Web;
 ```
 
 > [!IMPORTANT]
-> [`@using`][2]檔案中的指示詞 `_Imports.razor` 僅適用于檔案 Razor （ `.razor` ），而不會套用至 c # 檔案（ `.cs` ）。
+> [`@using`][2]檔案中的指示詞 `_Imports.razor` 僅適用于 () 的檔案，而不會套用至 Razor `.razor`) 的 c (# 檔案 `.cs` 。
 
 ### <a name="specify-a-base-class"></a>指定基類
 
@@ -246,7 +248,7 @@ namespace BlazorSample
 
 不支援選擇性參數，因此 [`@page`][9] 在上述範例中會套用兩個指示詞。 第一個則允許不使用參數導覽至元件。 第二個指示詞會 [`@page`][9] 接收 `{text}` 路由參數，並將值指派給 `Text` 屬性。
 
-元件（）中不支援*Catch-all*參數語法（ `*` / `**` ），它會跨多**not**個資料夾界限來捕捉路徑 Razor `.razor` 。
+*Catch-all*參數語法 (`*` / `**`) ，它會跨多個資料夾界限捕捉路徑，但**不**支援 Razor () 的元件 `.razor` 。
 
 ### <a name="component-parameters"></a>元件參數
 
@@ -311,7 +313,7 @@ namespace BlazorSample
 
 除了元件的宣告參數之外，元件還可以捕捉和轉譯其他屬性。 您可以在字典中捕捉其他屬性，然後在使用指示詞轉譯元件時， *splatted*至元素 [`@attributes`][3] Razor 。 當定義的元件會產生支援各種自訂的標記專案時，這個案例就很有用。 例如，針對支援許多參數的，分別定義屬性可能會很繁瑣 `<input>` 。
 
-在下列範例中，第一個 `<input>` 元素（ `id="useIndividualParams"` ）會使用個別的元件參數，而第二個 `<input>` 元素（ `id="useAttributesDict"` ）則使用屬性展開：
+在下列範例中， () 的第一個 `<input>` 元素會 `id="useIndividualParams"` 使用個別的元件參數，而第二個 `<input>` 元素 (`id="useAttributesDict"`) 使用屬性展開：
 
 ```razor
 <input id="useIndividualParams"
@@ -377,7 +379,7 @@ namespace BlazorSample
 
 <xref:Microsoft.AspNetCore.Components.ParameterAttribute.CaptureUnmatchedValues>上的屬性 [`[Parameter]`](xref:Microsoft.AspNetCore.Components.ParameterAttribute) 允許參數比對與任何其他參數不相符的所有屬性。 元件只能定義具有的單一參數 <xref:Microsoft.AspNetCore.Components.ParameterAttribute.CaptureUnmatchedValues> 。 搭配使用的屬性類型 <xref:Microsoft.AspNetCore.Components.ParameterAttribute.CaptureUnmatchedValues> 必須可從 `Dictionary<string, object>` 使用字串索引鍵來指派。 `IEnumerable<KeyValuePair<string, object>>`或 `IReadOnlyDictionary<string, object>` 也是此案例中的選項。
 
-[`@attributes`][3]相對於元素屬性位置的位置很重要。 當在專案 [`@attributes`][3] 上 splatted 時，會從右至左（最後一個）處理屬性。 請考慮使用元件的下列元件範例 `Child` ：
+[`@attributes`][3]相對於元素屬性位置的位置很重要。 當在專案 [`@attributes`][3] 上 splatted 時，會從右至左處理屬性， (最後一個) 。 請考慮使用元件的下列元件範例 `Child` ：
 
 `ParentComponent.razor`:
 
@@ -394,7 +396,7 @@ namespace BlazorSample
 public IDictionary<string, object> AdditionalAttributes { get; set; }
 ```
 
-`Child`元件的 `extra` 屬性會設定為的右邊 [`@attributes`][3] 。 `Parent` `<div>` `extra="5"` 當您透過其他屬性傳遞時，元件的會包含，因為屬性是由右至左（最後一個）來處理：
+`Child`元件的 `extra` 屬性會設定為的右邊 [`@attributes`][3] 。 `Parent` `<div>` `extra="5"` 當您透過其他屬性傳遞時，元件的會包含，因為屬性是由右至左 (最後一個) 來處理：
 
 ```html
 <div extra="5" />
@@ -463,7 +465,7 @@ public IDictionary<string, object> AdditionalAttributes { get; set; }
 > }
 > ```
 
-若要參考迴圈中的元件，請參閱[捕捉多個類似子元件的參考（dotnet/aspnetcore #13358）](https://github.com/dotnet/aspnetcore/issues/13358)。
+若要參考迴圈中的元件，請參閱[ (dotnet/aspnetcore #13358) 中，捕捉多個類似子元件的參考](https://github.com/dotnet/aspnetcore/issues/13358)。
 
 雖然捕捉元件參考使用類似的語法來[捕捉元素參考](xref:blazor/call-javascript-from-dotnet#capture-references-to-elements)，但它並不是 JavaScript interop 功能。 元件參考不會傳遞至 JavaScript 程式碼。 元件參考只在 .NET 程式碼中使用。
 
@@ -472,7 +474,7 @@ public IDictionary<string, object> AdditionalAttributes { get; set; }
 
 ## <a name="synchronization-context"></a>同步處理內容
 
-Blazor會使用同步處理內容（ <xref:System.Threading.SynchronizationContext> ）來強制執行單一邏輯執行緒。 元件的[生命週期方法](xref:blazor/components/lifecycle)和所引發的任何事件回呼 Blazor 都會在同步處理內容上執行。
+Blazor會使用同步處理內容 (<xref:System.Threading.SynchronizationContext>) 來強制執行單一邏輯執行緒。 元件的[生命週期方法](xref:blazor/components/lifecycle)和所引發的任何事件回呼 Blazor 都會在同步處理內容上執行。
 
 Blazor Server的同步處理內容會嘗試模擬單一執行緒環境，讓它與瀏覽器中的 WebAssembly 模型（單一執行緒）緊密相符。 在任何指定的時間點，只會在一個執行緒上執行工作，以提供單一邏輯執行緒的印象。 不會同時執行兩個作業。
 
@@ -603,7 +605,7 @@ public class NotifierService
 
 ### <a name="when-to-use-key"></a>使用金鑰的時機 \@
 
-一般而言， [`@key`][5] 只要轉譯清單（例如，在[foreach](/dotnet/csharp/language-reference/keywords/foreach-in)區塊中），而且有適合的值來定義時，就有合理的使用方式 [`@key`][5] 。
+一般來說，每當轉譯清單時（ [`@key`][5] 例如，在[foreach](/dotnet/csharp/language-reference/keywords/foreach-in)區塊) 中 (，以及可定義的適當值），都是合理的做法 [`@key`][5] 。
 
 當物件變更時，您也可以使用 [`@key`][5] 來防止 Blazor 保留元素或元件子樹：
 
@@ -625,8 +627,8 @@ public class NotifierService
 
 一般來說，提供下列其中一種類型的值是合理的 [`@key`][5] ：
 
-* 模型物件實例（例如， `Person` 如先前範例所示的實例）。 這可確保根據物件參考的相等性進行保留。
-* 唯一識別碼（例如，、或類型的主要索引 `int` 鍵值 `string` `Guid` ）。
+* 模型物件實例 (例如， `Person` 如先前範例所示的實例) 。 這可確保根據物件參考的相等性進行保留。
+* 唯一識別碼 (例如，、或) 類型的主鍵 `int` 值 `string` `Guid` 。
 
 請確定用於的值 [`@key`][5] 不會造成衝突。 如果在相同的父元素中偵測到衝突值，則會擲回例外狀況， Blazor 因為它無法以決定性的方式將舊專案或元件對應到新的專案或元件。 只使用不同的值，例如物件實例或主鍵值。
 
@@ -690,14 +692,14 @@ public class NotifierService
 </button>
 ```
 
-一開始， `Expander` 元件會在其屬性切換時獨立行為 `Expanded` 。 子元件會如預期般維護其狀態。 <xref:Microsoft.AspNetCore.Components.ComponentBase.StateHasChanged%2A>在父系中呼叫時， `Expanded` 第一個子元件的參數會重設回其初始值（ `true` ）。 第二個 `Expander` 元件的 `Expanded` 值不會重設，因為第二個元件中不會轉譯任何子內容。
+一開始， `Expander` 元件會在其屬性切換時獨立行為 `Expanded` 。 子元件會如預期般維護其狀態。 <xref:Microsoft.AspNetCore.Components.ComponentBase.StateHasChanged%2A>在父系中呼叫時， `Expanded` 第一個子元件的參數會重設回其初始值 (`true`) 。 第二個 `Expander` 元件的 `Expanded` 值不會重設，因為第二個元件中不會轉譯任何子內容。
 
 若要維護上述案例中的狀態，請使用元件中的*私用欄位* `Expander` 來維護其切換狀態。
 
 下列修訂的 `Expander` 元件：
 
 * 接受 `Expanded` 來自父系的元件參數值。
-* 將元件參數值指派給 OnInitialized 事件中的私用*欄位*（ `expanded` ）。 [OnInitialized event](xref:blazor/components/lifecycle#component-initialization-methods)
+* 將元件參數值指派給*private field* `expanded` [OnInitialized 事件](xref:blazor/components/lifecycle#component-initialization-methods)中 () 的私用欄位。
 * 會使用私用欄位來維護其內部切換狀態。
 
 ```razor
@@ -773,7 +775,7 @@ HTML 專案屬性會根據 .NET 值有條件地呈現。 如果值為 `false` �
 <input type="checkbox" />
 ```
 
-如需詳細資訊，請參閱 <xref:mvc/views/razor> 。
+如需詳細資訊，請參閱<xref:mvc/views/razor>。
 
 > [!WARNING]
 > 當 .NET 類型為時，某些 HTML 屬性（例如 [`aria-pressed`](https://developer.mozilla.org/docs/Web/Accessibility/ARIA/Roles/button_role#Toggle_buttons) ）無法正常運作 `bool` 。 在這些情況下，請使用型別， `string` 而不是 `bool` 。
@@ -796,7 +798,7 @@ HTML 專案屬性會根據 .NET 值有條件地呈現。 如果值為 `false` �
 }
 ```
 
-## <a name="razor-templates"></a>Razor範本
+## <a name="no-locrazor-templates"></a>Razor範本
 
 您可以使用範本語法來定義轉譯片段 Razor 。 Razor範本是定義 UI 程式碼片段並採用下列格式的方式：
 
@@ -834,29 +836,29 @@ HTML 專案屬性會根據 .NET 值有條件地呈現。 如果值為 `false` �
 
 Blazor遵循 ASP.NET Core 應用程式在專案[ `web root (wwwroot)` 資料夾](xref:fundamentals/index#web-root)下放置靜態資產的慣例。
 
-使用基底相對路徑（ `/` ）來參考靜態資產的 web 根目錄。 在下列範例中， `logo.png` 實際上位於 `{PROJECT ROOT}/wwwroot/images` 資料夾中：
+使用基底相對路徑 (`/`) 來參考靜態資產的 web 根目錄。 在下列範例中， `logo.png` 實際上位於 `{PROJECT ROOT}/wwwroot/images` 資料夾中：
 
 ```razor
 <img alt="Company logo" src="/images/logo.png" />
 ```
 
-Razor元件**不**支援波形符-斜線標記法（ `~/` ）。
+Razor元件**不**支援以波狀符號-斜線標記法 (`~/`) 。
 
 如需設定應用程式基底路徑的詳細資訊，請參閱 <xref:blazor/host-and-deploy/index#app-base-path> 。
 
 ## <a name="tag-helpers-arent-supported-in-components"></a>元件中不支援標記協助程式
 
-[`Tag Helpers`](xref:mvc/views/tag-helpers/intro)Razor元件（files）中不支援 `.razor` 。 若要在中提供標籤協助程式的功能 Blazor ，請建立元件，其功能與標記協助程式相同，並改用元件。
+[`Tag Helpers`](xref:mvc/views/tag-helpers/intro)Razor元件 (檔案) 不支援 `.razor` 。 若要在中提供標籤協助程式的功能 Blazor ，請建立元件，其功能與標記協助程式相同，並改用元件。
 
-## <a name="scalable-vector-graphics-svg-images"></a>可擴充向量圖形（SVG）影像
+## <a name="scalable-vector-graphics-svg-images"></a>可擴充的向量圖形 (SVG) 影像
 
-由於 Blazor 會轉譯 HTML，瀏覽器支援的影像（包括可擴充的向量圖形（SVG）影像（ `.svg` ））可透過標記來支援 `<img>` ：
+由於 Blazor 會轉譯 HTML、瀏覽器支援的影像（包括可擴充的向量圖形） (SVG) 影像 (`.svg`) ），可透過標記來支援 `<img>` ：
 
 ```html
 <img alt="Example image" src="some-image.svg" />
 ```
 
-同樣地，樣式表單檔案的 CSS 規則中也支援 SVG 影像（ `.css` ）：
+同樣地，在樣式表單檔案的 CSS 規則中支援 SVG 影像 (`.css`) ：
 
 ```css
 .my-element {
@@ -864,7 +866,7 @@ Razor元件**不**支援波形符-斜線標記法（ `~/` ）。
 }
 ```
 
-不過，在所有案例中不支援內嵌 SVG 標記。 如果您將 `<svg>` 標記直接放入元件檔案（ `.razor` ），則會支援基本映射轉譯，但尚不支援許多先進的案例。 例如， `<use>` 目前未遵守標記，而且 [`@bind`][10] 無法與某些 SVG 標記搭配使用。 如需詳細資訊，請參閱[中的 SVG 支援 Blazor （dotnet/aspnetcore #18271）](https://github.com/dotnet/aspnetcore/issues/18271)。
+不過，在所有案例中不支援內嵌 SVG 標記。 如果您將 `<svg>` 標記直接放入元件檔案 (`.razor`) ，則會支援基本映射轉譯，但尚不支援許多先進的案例。 例如， `<use>` 目前未遵守標記，而且 [`@bind`][10] 無法與某些 SVG 標記搭配使用。 如需詳細資訊，請參閱[ Blazor (dotnet/aspnetcore #18271) 中的 SVG 支援](https://github.com/dotnet/aspnetcore/issues/18271)。
 
 ## <a name="additional-resources"></a>其他資源
 

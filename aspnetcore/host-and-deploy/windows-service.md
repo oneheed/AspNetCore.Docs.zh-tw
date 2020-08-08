@@ -7,6 +7,8 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 02/07/2020
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -15,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: host-and-deploy/windows-service
-ms.openlocfilehash: 61280a82fc46116b3ecf057a00cf3f78f0af8951
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: 7740774cad33418489fc1d94240574167f84fae6
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85408457"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88015357"
 ---
 # <a name="host-aspnet-core-in-a-windows-service"></a>在 Windows 服務上裝載 ASP.NET Core
 
@@ -28,7 +30,7 @@ ms.locfileid: "85408457"
 
 ASP.NET Core 應用程式可以裝載在 Windows 上作為 [Windows 服務](/dotnet/framework/windows-services/introduction-to-windows-service-applications)，不需要使用 IIS。 當裝載為 Windows 服務時，應用程式將會在伺服器重新開機後自動啟動。
 
-[查看或下載範例程式碼](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/host-and-deploy/windows-service/samples)（[如何下載](xref:index#how-to-download-a-sample)）
+[查看或下載範例程式碼](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/host-and-deploy/windows-service/samples) ([如何下載](xref:index#how-to-download-a-sample)) 
 
 ## <a name="prerequisites"></a>必要條件
 
@@ -85,7 +87,7 @@ Host.CreateDefaultBuilder(args)
 <Project Sdk="Microsoft.NET.Sdk.Web">
 ```
 
-如果服務只執行背景工作（例如，[託管服務](xref:fundamentals/host/hosted-services)），請在專案檔中指定工作者 SDK：
+如果服務只執行背景工作 (例如，[託管服務](xref:fundamentals/host/hosted-services)) ，請在專案檔中指定工作者 SDK：
 
 ```xml
 <Project Sdk="Microsoft.NET.Sdk.Worker">
@@ -117,7 +119,7 @@ Windows [執行階段識別碼 (RID)](/dotnet/core/rid-catalog) 會納入包含�
 發行多個 RID：
 
 * 以分號分隔的清單提供 RID。
-* 使用屬性名稱 [\<RuntimeIdentifiers>](/dotnet/core/tools/csproj#runtimeidentifiers) （複數）。
+* 使用屬性名稱 [\<RuntimeIdentifiers>](/dotnet/core/tools/csproj#runtimeidentifiers) (複數) 。
 
 如需詳細資訊，請參閱 [.NET Core RID 目錄](/dotnet/core/rid-catalog)。
 
@@ -155,7 +157,7 @@ powershell -Command "New-LocalUser -Name {SERVICE NAME}"
 1. 選取 [新增使用者或群組]****。
 1. 使用下列其中一種方法提供物件名稱 (使用者帳戶)：
    1. 在物件名稱欄位中輸入使用者帳戶 (`{DOMAIN OR COMPUTER NAME\USER}`)，然後選取 [確定]**** 將使用者新增至原則。
-   1. 選取 [進階]  。 選取 [立即尋找]****。 從清單中選取使用者帳戶。 選取 [確定]****。 再次選取 [確定]**** 將使用者新增至原則。
+   1. 選取 [進階]  。 選取 [立即尋找]****。 從清單中選取使用者帳戶。 選取 [確定]。 再次選取 [確定]**** 將使用者新增至原則。
 1. 選取 [確定]**** 或 [套用]**** 以接受變更。
 
 ## <a name="create-and-manage-the-windows-service"></a>建立及管理 Windows 服務
@@ -174,12 +176,12 @@ $acl | Set-Acl "{EXE PATH}"
 New-Service -Name {SERVICE NAME} -BinaryPathName {EXE FILE PATH} -Credential {DOMAIN OR COMPUTER NAME\USER} -Description "{DESCRIPTION}" -DisplayName "{DISPLAY NAME}" -StartupType Automatic
 ```
 
-* `{EXE PATH}`：主機上的應用程式資料夾路徑（例如， `d:\myservice` ）。 請勿包含路徑中應用程式的可執行檔。 不需要結尾的斜線。
-* `{DOMAIN OR COMPUTER NAME\USER}`：服務使用者帳戶（例如 `Contoso\ServiceUser` ）。
-* `{SERVICE NAME}`：服務名稱（例如， `MyService` ）。
-* `{EXE FILE PATH}`：應用程式的可執行檔路徑（例如， `d:\myservice\myservice.exe` ）。 包含可執行檔的檔案名稱 (包含副檔名)。
-* `{DESCRIPTION}`：服務描述（例如， `My sample service` ）。
-* `{DISPLAY NAME}`：服務顯示名稱（例如， `My Service` ）。
+* `{EXE PATH}`：主機 (上應用程式資料夾的路徑，例如， `d:\myservice`) 。 請勿包含路徑中應用程式的可執行檔。 不需要結尾的斜線。
+* `{DOMAIN OR COMPUTER NAME\USER}`：服務使用者帳戶 (例如 `Contoso\ServiceUser`) 。
+* `{SERVICE NAME}`：服務名稱 (例如， `MyService`) 。
+* `{EXE FILE PATH}`：應用程式的可執行檔路徑 (例如， `d:\myservice\myservice.exe`) 。 包含可執行檔的檔案名稱 (包含副檔名)。
+* `{DESCRIPTION}`：服務描述 (例如， `My sample service`) 。
+* `{DISPLAY NAME}`：服務顯示名稱 (例如， `My Service`) 。
 
 ### <a name="start-a-service"></a>啟動服務
 
@@ -224,7 +226,7 @@ Remove-Service -Name {SERVICE NAME}
 
 ## <a name="proxy-server-and-load-balancer-scenarios"></a>Proxy 伺服器和負載平衡器案例
 
-服務如果會與來自網際網路或公司網路的要求進行互動，並且位於 Proxy 或負載平衡器後方，可能會需要額外的設定。 如需詳細資訊，請參閱 <xref:host-and-deploy/proxy-load-balancer> 。
+服務如果會與來自網際網路或公司網路的要求進行互動，並且位於 Proxy 或負載平衡器後方，可能會需要額外的設定。 如需詳細資訊，請參閱<xref:host-and-deploy/proxy-load-balancer>。
 
 ## <a name="configure-endpoints"></a>設定端點
 
@@ -270,13 +272,13 @@ ASP.NET Core 預設會繫結至 `http://localhost:5000`。 設定環境變數，
 
 * 舊版或發行前版本的 PowerShell 已在使用中。
 * 已註冊的服務不會使用來自[dotnet publish](/dotnet/core/tools/dotnet-publish)命令的應用程式**已發佈**輸出。 應用程式部署不支援[dotnet build](/dotnet/core/tools/dotnet-build)命令的輸出。 根據部署類型，可以在下列其中一個資料夾中找到已發佈的資產：
-  * *bin/Release/{TARGET FRAMEWORK}/publish* （FDD）
-  * *bin/Release/{TARGET FRAMEWORK}/{RUNTIME IDENTIFIER}/publish* （SCD）
+  * *bin/Release/{TARGET FRAMEWORK}/publish* (FDD) 
+  * *bin/Release/{TARGET FRAMEWORK}/{RUNTIME IDENTIFIER}/publish* (SCD) 
 * 服務不是處於執行中狀態。
-* 應用程式所使用資源的路徑（例如憑證）不正確。 Windows 服務的基底路徑是*c： \\ windows \\ System32*。
+* 應用程式使用的資源路徑 (例如，憑證) 不正確。 Windows 服務的基底路徑是*c： \\ windows \\ System32*。
 * 使用者不具有 [*以服務方式登*入] 許可權。
 * 執行 PowerShell 命令時，使用者的密碼已過期或傳遞錯誤 `New-Service` 。
-* 應用程式需要 ASP.NET Core 驗證，但未設定安全連線（HTTPS）。
+* 應用程式需要 ASP.NET Core 驗證，但未設定 (HTTPS) 的安全連線。
 * 要求 URL 埠不正確，或未在應用程式中正確設定。
 
 ### <a name="system-and-application-event-logs"></a>系統和應用程式事件記錄檔
@@ -333,7 +335,7 @@ ASP.NET Core 預設會繫結至 `http://localhost:5000`。 設定環境變數，
 
 #### <a name="app-hangs-fails-during-startup-or-runs-normally"></a>應用程式停止回應、在啟動期間失敗，或正常執行
 
-當*應用程式*當機（停止回應但未損毀）、啟動期間失敗，或正常執行時，請參閱使用者模式傾印檔案[：選擇最適合的工具](/windows-hardware/drivers/debugger/user-mode-dump-files#choosing-the-best-tool)來選取適當的工具以產生傾印。
+當*應用程式*當機 (停止回應，但未損毀) 、在啟動期間失敗，或正常執行時，請參閱使用者模式傾印檔案[：選擇最適合的工具](/windows-hardware/drivers/debugger/user-mode-dump-files#choosing-the-best-tool)來選取適當的工具以產生傾印。
 
 #### <a name="analyze-the-dump"></a>分析傾印
 
@@ -351,7 +353,7 @@ ASP.NET Core 預設會繫結至 `http://localhost:5000`。 設定環境變數，
 
 ASP.NET Core 應用程式可以裝載在 Windows 上作為 [Windows 服務](/dotnet/framework/windows-services/introduction-to-windows-service-applications)，不需要使用 IIS。 當裝載為 Windows 服務時，應用程式將會在伺服器重新開機後自動啟動。
 
-[查看或下載範例程式碼](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/host-and-deploy/windows-service/samples)（[如何下載](xref:index#how-to-download-a-sample)）
+[查看或下載範例程式碼](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/host-and-deploy/windows-service/samples) ([如何下載](xref:index#how-to-download-a-sample)) 
 
 ## <a name="prerequisites"></a>必要條件
 
@@ -387,7 +389,7 @@ ASP.NET Core 應用程式可以裝載在 Windows 上作為 [Windows 服務](/dot
 <Project Sdk="Microsoft.NET.Sdk.Web">
 ```
 
-如果服務只執行背景工作（例如，[託管服務](xref:fundamentals/host/hosted-services)），請在專案檔中指定工作者 SDK：
+如果服務只執行背景工作 (例如，[託管服務](xref:fundamentals/host/hosted-services)) ，請在專案檔中指定工作者 SDK：
 
 ```xml
 <Project Sdk="Microsoft.NET.Sdk.Worker">
@@ -397,7 +399,7 @@ ASP.NET Core 應用程式可以裝載在 Windows 上作為 [Windows 服務](/dot
 
 架構相依部署 (FDD) 仰賴存在於目標系統上的全系統共用 .NET Core 版本。 依照此文章中的指導方針採用 FDD 案例時，SDK 會產生可執行檔 (*.exe*)，稱為「架構相依可執行檔」**。
 
-Windows[執行時間識別碼（RID）](/dotnet/core/rid-catalog) （ [\<RuntimeIdentifier>](/dotnet/core/tools/csproj#runtimeidentifier) ）包含目標 framework。 在下列範例中，RID 已設定為 `win7-x64`。 `<SelfContained>` 屬性設定為 `false`。 這些屬性會指示 SDK，針對 Windows 和相依於共用 .NET Core framework 的應用程式產生可執行檔 (*.exe*)。
+Windows[執行時間識別碼 (RID) ](/dotnet/core/rid-catalog) ([\<RuntimeIdentifier>](/dotnet/core/tools/csproj#runtimeidentifier)) 包含目標 framework。 在下列範例中，RID 已設定為 `win7-x64`。 `<SelfContained>` 屬性設定為 `false`。 這些屬性會指示 SDK，針對 Windows 和相依於共用 .NET Core framework 的應用程式產生可執行檔 (*.exe*)。
 
 針對 Windows Services 應用程式，不需要 *web.config* 檔案 (發行 ASP.NET Core 應用程式時通常會產生此檔案)。 若要停用 *web.config* 檔案的建立，請新增 `<IsTransformWebConfigDisabled>` 屬性集到 `true`。
 
@@ -423,7 +425,7 @@ Windows [執行階段識別碼 (RID)](/dotnet/core/rid-catalog) 會納入包含�
 發行多個 RID：
 
 * 以分號分隔的清單提供 RID。
-* 使用屬性名稱 [\<RuntimeIdentifiers>](/dotnet/core/tools/csproj#runtimeidentifiers) （複數）。
+* 使用屬性名稱 [\<RuntimeIdentifiers>](/dotnet/core/tools/csproj#runtimeidentifiers) (複數) 。
 
 如需詳細資訊，請參閱 [.NET Core RID 目錄](/dotnet/core/rid-catalog)。
 
@@ -467,7 +469,7 @@ powershell -Command "New-LocalUser -Name {SERVICE NAME}"
 1. 選取 [新增使用者或群組]****。
 1. 使用下列其中一種方法提供物件名稱 (使用者帳戶)：
    1. 在物件名稱欄位中輸入使用者帳戶 (`{DOMAIN OR COMPUTER NAME\USER}`)，然後選取 [確定]**** 將使用者新增至原則。
-   1. 選取 [進階]  。 選取 [立即尋找]****。 從清單中選取使用者帳戶。 選取 [確定]****。 再次選取 [確定]**** 將使用者新增至原則。
+   1. 選取 [進階]  。 選取 [立即尋找]****。 從清單中選取使用者帳戶。 選取 [確定]。 再次選取 [確定]**** 將使用者新增至原則。
 1. 選取 [確定]**** 或 [套用]**** 以接受變更。
 
 ## <a name="create-and-manage-the-windows-service"></a>建立及管理 Windows 服務
@@ -486,12 +488,12 @@ $acl | Set-Acl "{EXE PATH}"
 New-Service -Name {SERVICE NAME} -BinaryPathName {EXE FILE PATH} -Credential {DOMAIN OR COMPUTER NAME\USER} -Description "{DESCRIPTION}" -DisplayName "{DISPLAY NAME}" -StartupType Automatic
 ```
 
-* `{EXE PATH}`：主機上的應用程式資料夾路徑（例如， `d:\myservice` ）。 請勿包含路徑中應用程式的可執行檔。 不需要結尾的斜線。
-* `{DOMAIN OR COMPUTER NAME\USER}`：服務使用者帳戶（例如 `Contoso\ServiceUser` ）。
-* `{SERVICE NAME}`：服務名稱（例如， `MyService` ）。
-* `{EXE FILE PATH}`：應用程式的可執行檔路徑（例如， `d:\myservice\myservice.exe` ）。 包含可執行檔的檔案名稱 (包含副檔名)。
-* `{DESCRIPTION}`：服務描述（例如， `My sample service` ）。
-* `{DISPLAY NAME}`：服務顯示名稱（例如， `My Service` ）。
+* `{EXE PATH}`：主機 (上應用程式資料夾的路徑，例如， `d:\myservice`) 。 請勿包含路徑中應用程式的可執行檔。 不需要結尾的斜線。
+* `{DOMAIN OR COMPUTER NAME\USER}`：服務使用者帳戶 (例如 `Contoso\ServiceUser`) 。
+* `{SERVICE NAME}`：服務名稱 (例如， `MyService`) 。
+* `{EXE FILE PATH}`：應用程式的可執行檔路徑 (例如， `d:\myservice\myservice.exe`) 。 包含可執行檔的檔案名稱 (包含副檔名)。
+* `{DESCRIPTION}`：服務描述 (例如， `My sample service`) 。
+* `{DISPLAY NAME}`：服務顯示名稱 (例如， `My Service`) 。
 
 ### <a name="start-a-service"></a>啟動服務
 
@@ -556,7 +558,7 @@ Remove-Service -Name {SERVICE NAME}
 
 ## <a name="proxy-server-and-load-balancer-scenarios"></a>Proxy 伺服器和負載平衡器案例
 
-服務如果會與來自網際網路或公司網路的要求進行互動，並且位於 Proxy 或負載平衡器後方，可能會需要額外的設定。 如需詳細資訊，請參閱 <xref:host-and-deploy/proxy-load-balancer> 。
+服務如果會與來自網際網路或公司網路的要求進行互動，並且位於 Proxy 或負載平衡器後方，可能會需要額外的設定。 如需詳細資訊，請參閱<xref:host-and-deploy/proxy-load-balancer>。
 
 ## <a name="configure-endpoints"></a>設定端點
 
@@ -604,13 +606,13 @@ CreateWebHostBuilder(args)
 
 * 舊版或發行前版本的 PowerShell 已在使用中。
 * 已註冊的服務不會使用來自[dotnet publish](/dotnet/core/tools/dotnet-publish)命令的應用程式**已發佈**輸出。 應用程式部署不支援[dotnet build](/dotnet/core/tools/dotnet-build)命令的輸出。 根據部署類型，可以在下列其中一個資料夾中找到已發佈的資產：
-  * *bin/Release/{TARGET FRAMEWORK}/publish* （FDD）
-  * *bin/Release/{TARGET FRAMEWORK}/{RUNTIME IDENTIFIER}/publish* （SCD）
+  * *bin/Release/{TARGET FRAMEWORK}/publish* (FDD) 
+  * *bin/Release/{TARGET FRAMEWORK}/{RUNTIME IDENTIFIER}/publish* (SCD) 
 * 服務不是處於執行中狀態。
-* 應用程式所使用資源的路徑（例如憑證）不正確。 Windows 服務的基底路徑是*c： \\ windows \\ System32*。
+* 應用程式使用的資源路徑 (例如，憑證) 不正確。 Windows 服務的基底路徑是*c： \\ windows \\ System32*。
 * 使用者不具有 [*以服務方式登*入] 許可權。
 * 執行 PowerShell 命令時，使用者的密碼已過期或傳遞錯誤 `New-Service` 。
-* 應用程式需要 ASP.NET Core 驗證，但未設定安全連線（HTTPS）。
+* 應用程式需要 ASP.NET Core 驗證，但未設定 (HTTPS) 的安全連線。
 * 要求 URL 埠不正確，或未在應用程式中正確設定。
 
 ### <a name="system-and-application-event-logs"></a>系統和應用程式事件記錄檔
@@ -667,7 +669,7 @@ CreateWebHostBuilder(args)
 
 #### <a name="app-hangs-fails-during-startup-or-runs-normally"></a>應用程式停止回應、在啟動期間失敗，或正常執行
 
-當*應用程式*當機（停止回應但未損毀）、啟動期間失敗，或正常執行時，請參閱使用者模式傾印檔案[：選擇最適合的工具](/windows-hardware/drivers/debugger/user-mode-dump-files#choosing-the-best-tool)來選取適當的工具以產生傾印。
+當*應用程式*當機 (停止回應，但未損毀) 、在啟動期間失敗，或正常執行時，請參閱使用者模式傾印檔案[：選擇最適合的工具](/windows-hardware/drivers/debugger/user-mode-dump-files#choosing-the-best-tool)來選取適當的工具以產生傾印。
 
 #### <a name="analyze-the-dump"></a>分析傾印
 
@@ -685,7 +687,7 @@ CreateWebHostBuilder(args)
 
 ASP.NET Core 應用程式可以裝載在 Windows 上作為 [Windows 服務](/dotnet/framework/windows-services/introduction-to-windows-service-applications)，不需要使用 IIS。 當裝載為 Windows 服務時，應用程式將會在伺服器重新開機後自動啟動。
 
-[查看或下載範例程式碼](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/host-and-deploy/windows-service/samples)（[如何下載](xref:index#how-to-download-a-sample)）
+[查看或下載範例程式碼](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/host-and-deploy/windows-service/samples) ([如何下載](xref:index#how-to-download-a-sample)) 
 
 ## <a name="prerequisites"></a>必要條件
 
@@ -721,7 +723,7 @@ ASP.NET Core 應用程式可以裝載在 Windows 上作為 [Windows 服務](/dot
 <Project Sdk="Microsoft.NET.Sdk.Web">
 ```
 
-如果服務只執行背景工作（例如，[託管服務](xref:fundamentals/host/hosted-services)），請在專案檔中指定工作者 SDK：
+如果服務只執行背景工作 (例如，[託管服務](xref:fundamentals/host/hosted-services)) ，請在專案檔中指定工作者 SDK：
 
 ```xml
 <Project Sdk="Microsoft.NET.Sdk.Worker">
@@ -731,7 +733,7 @@ ASP.NET Core 應用程式可以裝載在 Windows 上作為 [Windows 服務](/dot
 
 架構相依部署 (FDD) 仰賴存在於目標系統上的全系統共用 .NET Core 版本。 依照此文章中的指導方針採用 FDD 案例時，SDK 會產生可執行檔 (*.exe*)，稱為「架構相依可執行檔」**。
 
-Windows[執行時間識別碼（RID）](/dotnet/core/rid-catalog) （ [\<RuntimeIdentifier>](/dotnet/core/tools/csproj#runtimeidentifier) ）包含目標 framework。 在下列範例中，RID 已設定為 `win7-x64`。 `<SelfContained>` 屬性設定為 `false`。 這些屬性會指示 SDK，針對 Windows 和相依於共用 .NET Core framework 的應用程式產生可執行檔 (*.exe*)。
+Windows[執行時間識別碼 (RID) ](/dotnet/core/rid-catalog) ([\<RuntimeIdentifier>](/dotnet/core/tools/csproj#runtimeidentifier)) 包含目標 framework。 在下列範例中，RID 已設定為 `win7-x64`。 `<SelfContained>` 屬性設定為 `false`。 這些屬性會指示 SDK，針對 Windows 和相依於共用 .NET Core framework 的應用程式產生可執行檔 (*.exe*)。
 
 `<UseAppHost>` 屬性設定為 `true`。 此屬性為服務提供 FDD 的啟用路徑 (可執行檔 *.exe*)。
 
@@ -760,7 +762,7 @@ Windows [執行階段識別碼 (RID)](/dotnet/core/rid-catalog) 會納入包含�
 發行多個 RID：
 
 * 以分號分隔的清單提供 RID。
-* 使用屬性名稱 [\<RuntimeIdentifiers>](/dotnet/core/tools/csproj#runtimeidentifiers) （複數）。
+* 使用屬性名稱 [\<RuntimeIdentifiers>](/dotnet/core/tools/csproj#runtimeidentifiers) (複數) 。
 
 如需詳細資訊，請參閱 [.NET Core RID 目錄](/dotnet/core/rid-catalog)。
 
@@ -804,7 +806,7 @@ powershell -Command "New-LocalUser -Name {SERVICE NAME}"
 1. 選取 [新增使用者或群組]****。
 1. 使用下列其中一種方法提供物件名稱 (使用者帳戶)：
    1. 在物件名稱欄位中輸入使用者帳戶 (`{DOMAIN OR COMPUTER NAME\USER}`)，然後選取 [確定]**** 將使用者新增至原則。
-   1. 選取 [進階]  。 選取 [立即尋找]****。 從清單中選取使用者帳戶。 選取 [確定]****。 再次選取 [確定]**** 將使用者新增至原則。
+   1. 選取 [進階]  。 選取 [立即尋找]****。 從清單中選取使用者帳戶。 選取 [確定]。 再次選取 [確定]**** 將使用者新增至原則。
 1. 選取 [確定]**** 或 [套用]**** 以接受變更。
 
 ## <a name="create-and-manage-the-windows-service"></a>建立及管理 Windows 服務
@@ -823,12 +825,12 @@ $acl | Set-Acl "{EXE PATH}"
 New-Service -Name {SERVICE NAME} -BinaryPathName {EXE FILE PATH} -Credential {DOMAIN OR COMPUTER NAME\USER} -Description "{DESCRIPTION}" -DisplayName "{DISPLAY NAME}" -StartupType Automatic
 ```
 
-* `{EXE PATH}`：主機上的應用程式資料夾路徑（例如， `d:\myservice` ）。 請勿包含路徑中應用程式的可執行檔。 不需要結尾的斜線。
-* `{DOMAIN OR COMPUTER NAME\USER}`：服務使用者帳戶（例如 `Contoso\ServiceUser` ）。
-* `{SERVICE NAME}`：服務名稱（例如， `MyService` ）。
-* `{EXE FILE PATH}`：應用程式的可執行檔路徑（例如， `d:\myservice\myservice.exe` ）。 包含可執行檔的檔案名稱 (包含副檔名)。
-* `{DESCRIPTION}`：服務描述（例如， `My sample service` ）。
-* `{DISPLAY NAME}`：服務顯示名稱（例如， `My Service` ）。
+* `{EXE PATH}`：主機 (上應用程式資料夾的路徑，例如， `d:\myservice`) 。 請勿包含路徑中應用程式的可執行檔。 不需要結尾的斜線。
+* `{DOMAIN OR COMPUTER NAME\USER}`：服務使用者帳戶 (例如 `Contoso\ServiceUser`) 。
+* `{SERVICE NAME}`：服務名稱 (例如， `MyService`) 。
+* `{EXE FILE PATH}`：應用程式的可執行檔路徑 (例如， `d:\myservice\myservice.exe`) 。 包含可執行檔的檔案名稱 (包含副檔名)。
+* `{DESCRIPTION}`：服務描述 (例如， `My sample service`) 。
+* `{DISPLAY NAME}`：服務顯示名稱 (例如， `My Service`) 。
 
 ### <a name="start-a-service"></a>啟動服務
 
@@ -893,7 +895,7 @@ Remove-Service -Name {SERVICE NAME}
 
 ## <a name="proxy-server-and-load-balancer-scenarios"></a>Proxy 伺服器和負載平衡器案例
 
-服務如果會與來自網際網路或公司網路的要求進行互動，並且位於 Proxy 或負載平衡器後方，可能會需要額外的設定。 如需詳細資訊，請參閱 <xref:host-and-deploy/proxy-load-balancer> 。
+服務如果會與來自網際網路或公司網路的要求進行互動，並且位於 Proxy 或負載平衡器後方，可能會需要額外的設定。 如需詳細資訊，請參閱<xref:host-and-deploy/proxy-load-balancer>。
 
 ## <a name="configure-endpoints"></a>設定端點
 
@@ -941,13 +943,13 @@ CreateWebHostBuilder(args)
 
 * 舊版或發行前版本的 PowerShell 已在使用中。
 * 已註冊的服務不會使用來自[dotnet publish](/dotnet/core/tools/dotnet-publish)命令的應用程式**已發佈**輸出。 應用程式部署不支援[dotnet build](/dotnet/core/tools/dotnet-build)命令的輸出。 根據部署類型，可以在下列其中一個資料夾中找到已發佈的資產：
-  * *bin/Release/{TARGET FRAMEWORK}/publish* （FDD）
-  * *bin/Release/{TARGET FRAMEWORK}/{RUNTIME IDENTIFIER}/publish* （SCD）
+  * *bin/Release/{TARGET FRAMEWORK}/publish* (FDD) 
+  * *bin/Release/{TARGET FRAMEWORK}/{RUNTIME IDENTIFIER}/publish* (SCD) 
 * 服務不是處於執行中狀態。
-* 應用程式所使用資源的路徑（例如憑證）不正確。 Windows 服務的基底路徑是*c： \\ windows \\ System32*。
+* 應用程式使用的資源路徑 (例如，憑證) 不正確。 Windows 服務的基底路徑是*c： \\ windows \\ System32*。
 * 使用者不具有 [*以服務方式登*入] 許可權。
 * 執行 PowerShell 命令時，使用者的密碼已過期或傳遞錯誤 `New-Service` 。
-* 應用程式需要 ASP.NET Core 驗證，但未設定安全連線（HTTPS）。
+* 應用程式需要 ASP.NET Core 驗證，但未設定 (HTTPS) 的安全連線。
 * 要求 URL 埠不正確，或未在應用程式中正確設定。
 
 ### <a name="system-and-application-event-logs"></a>系統和應用程式事件記錄檔
@@ -1004,7 +1006,7 @@ CreateWebHostBuilder(args)
 
 #### <a name="app-hangs-fails-during-startup-or-runs-normally"></a>應用程式停止回應、在啟動期間失敗，或正常執行
 
-當*應用程式*當機（停止回應但未損毀）、啟動期間失敗，或正常執行時，請參閱使用者模式傾印檔案[：選擇最適合的工具](/windows-hardware/drivers/debugger/user-mode-dump-files#choosing-the-best-tool)來選取適當的工具以產生傾印。
+當*應用程式*當機 (停止回應，但未損毀) 、在啟動期間失敗，或正常執行時，請參閱使用者模式傾印檔案[：選擇最適合的工具](/windows-hardware/drivers/debugger/user-mode-dump-files#choosing-the-best-tool)來選取適當的工具以產生傾印。
 
 #### <a name="analyze-the-dump"></a>分析傾印
 

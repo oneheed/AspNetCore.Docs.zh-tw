@@ -1,12 +1,14 @@
 ---
 title: 從 ASP.NET Core 呼叫 Web APIBlazor WebAssembly
 author: guardrex
-description: 瞭解如何 Blazor WebAssembly 使用 JSON helper 從應用程式呼叫 Web API，包括建立跨原始來源資源分享（CORS）要求。
+description: 瞭解如何 Blazor WebAssembly 使用 JSON helper 從應用程式呼叫 Web API，包括使跨原始資源分享 (CORS) 要求。
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
 ms.date: 06/24/2020
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -15,14 +17,14 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/call-web-api
-ms.openlocfilehash: 1417056beac99a8dfee47131c2cb6ab7ec52ad1e
-ms.sourcegitcommit: 384833762c614851db653b841cc09fbc944da463
+ms.openlocfilehash: ef31d3d9b3914f3c86aa397ff214778fe295964b
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 07/17/2020
-ms.locfileid: "86445264"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88012577"
 ---
-# <a name="call-a-web-api-from-aspnet-core-blazor"></a>從 ASP.NET Core 呼叫 Web APIBlazor
+# <a name="call-a-web-api-from-aspnet-core-no-locblazor"></a>從 ASP.NET Core 呼叫 Web APIBlazor
 
 By [Luke Latham](https://github.com/guardrex)、 [Daniel Roth](https://github.com/danroth27)和[Juan De la Cruz](https://github.com/juandelacruz23)
 
@@ -31,12 +33,12 @@ By [Luke Latham](https://github.com/guardrex)、 [Daniel Roth](https://github.co
 
 [Blazor WebAssembly](xref:blazor/hosting-models#blazor-webassembly)應用程式會使用預先設定的服務來呼叫 web Api <xref:System.Net.Http.HttpClient> 。 撰寫要求，其中可以包含 JavaScript[提取 API](https://developer.mozilla.org/docs/Web/API/Fetch_API)選項、使用 Blazor JSON helper 或搭配 <xref:System.Net.Http.HttpRequestMessage> 。 <xref:System.Net.Http.HttpClient>應用程式中的服務著重于將 Blazor WebAssembly 要求傳回給來源伺服器。 本主題中的指導方針僅適用于 Blazor WebAssembly 應用程式。
 
-[View or 下載範例程式碼](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/blazor/common/samples/)（[如何下載](xref:index#how-to-download-a-sample)）：選取 `BlazorWebAssemblySample` 應用程式。
+[查看或下載範例程式碼](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/blazor/common/samples/) ([如何下載](xref:index#how-to-download-a-sample)) ：選取 `BlazorWebAssemblySample` 應用程式。
 
 請參閱範例應用程式中的下列元件 `BlazorWebAssemblySample` ：
 
-* 呼叫 Web API （ `Pages/CallWebAPI.razor` ）
-* HTTP 要求測試器（ `Components/HTTPRequestTester.razor` ）
+* 呼叫 Web API (`Pages/CallWebAPI.razor`) 
+* HTTP 要求測試器 (`Components/HTTPRequestTester.razor`) 
 
 ## <a name="packages"></a>套件
 
@@ -69,11 +71,11 @@ Blazor Server應用程式預設不會包含 <xref:System.Net.Http.HttpClient> �
 @inject HttpClient Http
 ```
 
-在下列範例中，Todo Web API 處理建立、讀取、更新和刪除（CRUD）作業。 這些範例是以 `TodoItem` 儲存的類別為基礎：
+在下列範例中，Todo Web API 會處理 (CRUD) 作業的建立、讀取、更新和刪除。 這些範例是以 `TodoItem` 儲存的類別為基礎：
 
-* ID （ `Id` ， `long` ）：專案的唯一識別碼。
-* 名稱（ `Name` ， `string` ）：專案的名稱。
-* Status （ `IsComplete` ， `bool` ）：表示待辦事項是否已完成。
+* 識別碼 (`Id` ， `long`) ：專案的唯一識別碼。
+* 名稱 (`Name` ， `string`) ：專案的名稱。
+* 狀態 (`IsComplete` ， `bool`) ： Todo 專案完成時的指示。
 
 ```csharp
 private class TodoItem
@@ -84,11 +86,11 @@ private class TodoItem
 }
 ```
 
-JSON helper 方法會將要求傳送至 URI （下列範例中的 Web API）並處理回應：
+JSON helper 方法會將要求傳送至 URI， (下列範例中的 Web API) 並處理回應：
 
 * <xref:System.Net.Http.Json.HttpClientJsonExtensions.GetFromJsonAsync%2A>：傳送 HTTP GET 要求，並剖析 JSON 回應主體以建立物件。
 
-  在下列程式碼中， `todoItems` 元件會顯示。 `GetTodoItems`當元件完成呈現（）時，就會觸發方法 [`OnInitializedAsync`](xref:blazor/components/lifecycle#component-initialization-methods) 。 如需完整範例，請參閱範例應用程式。
+  在下列程式碼中， `todoItems` 元件會顯示。 `GetTodoItems`當元件完成呈現 () 時，就會觸發方法 [`OnInitializedAsync`](xref:blazor/components/lifecycle#component-initialization-methods) 。 如需完整範例，請參閱範例應用程式。
 
   ```razor
   @using System.Net.Http
@@ -193,7 +195,7 @@ builder.Services.AddHttpClient("ServerAPI", client =>
     client.BaseAddress = new Uri(builder.HostEnvironment.BaseAddress));
 ```
 
-`FetchData`component （ `Pages/FetchData.razor` ）：
+`FetchData`元件 (`Pages/FetchData.razor`) ：
 
 ```razor
 @inject IHttpClientFactory ClientFactory
@@ -261,7 +263,7 @@ builder.Services.AddHttpClient<WeatherForecastClient>(client =>
 
 元件會插入具類型的 <xref:System.Net.Http.HttpClient> 以呼叫 Web API。
 
-`FetchData`component （ `Pages/FetchData.razor` ）：
+`FetchData`元件 (`Pages/FetchData.razor`) ：
 
 ```razor
 @inject WeatherForecastClient Client
@@ -282,7 +284,7 @@ builder.Services.AddHttpClient<WeatherForecastClient>(client =>
 
 與 Web API 互動時，如果發生錯誤，就可以由開發人員程式碼來處理。 例如， <xref:System.Net.Http.Json.HttpClientJsonExtensions.GetFromJsonAsync%2A> 預期來自伺服器 API 的 JSON 回應與 `Content-Type` 的 `application/json` 。 如果回應不是 JSON 格式，則內容驗證會擲回 <xref:System.NotSupportedException> 。
 
-在下列範例中，氣象預報資料要求的 URI 端點拼錯。 URI 應該是， `WeatherForecast` 但在呼叫中會顯示為 `WeatherForcast` （遺漏 "e"）。
+在下列範例中，氣象預報資料要求的 URI 端點拼錯。 URI 應該是， `WeatherForecast` 但在呼叫中會顯示為 `WeatherForcast` (遺漏 "e" ) 。
 
 <xref:System.Net.Http.Json.HttpClientJsonExtensions.GetFromJsonAsync%2A>呼叫預期會傳回 JSON，但是伺服器會針對具有之的伺服器上的未處理例外狀況傳回 HTML `Content-Type` `text/html` 。 未處理的例外狀況發生在伺服器上，因為找不到路徑，而且中介軟體無法提供要求的頁面或視圖。
 
@@ -306,13 +308,13 @@ protected override async Task OnInitializedAsync()
 > [!NOTE]
 > 上述範例是為了示範之用。 即使端點不存在或伺服器上發生未處理的例外狀況，Web API 伺服器應用程式也可以設定為傳回 JSON。
 
-如需詳細資訊，請參閱 <xref:blazor/fundamentals/handle-errors> 。
+如需詳細資訊，請參閱<xref:blazor/fundamentals/handle-errors>。
 
-## <a name="cross-origin-resource-sharing-cors"></a>跨原始來源資源分享（CORS）
+## <a name="cross-origin-resource-sharing-cors"></a>跨原始資源分享 (CORS) 
 
-瀏覽器安全性可防止網頁向不同于服務網頁的網域提出要求。 這種限制稱為「*相同來源原則*」。 相同來源的原則可防止惡意網站從另一個網站讀取敏感性資料。 若要將來自瀏覽器的要求傳送至具有不同來源的端點，*端點*必須啟用[跨原始來源資源分享（CORS）](https://www.w3.org/TR/cors/)。
+瀏覽器安全性可防止網頁向不同于服務網頁的網域提出要求。 這種限制稱為「*相同來源原則*」。 相同來源的原則可防止惡意網站從另一個網站讀取敏感性資料。 若要將來自瀏覽器的要求傳送至具有不同來源的端點，*端點*必須啟用[跨原始資源分享 (CORS) ](https://www.w3.org/TR/cors/)。
 
-[ Blazor WebAssembly 範例應用程式（ Blazor WebAssemblySample）](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/blazor/common/samples/)示範如何在呼叫 Web API 元件（）中使用 CORS `Pages/CallWebAPI.razor` 。
+[ Blazor WebAssembly 範例應用程式 (Blazor WebAssemblySample) ](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/blazor/common/samples/)示範如何在 () 的呼叫 Web API 元件中使用 CORS `Pages/CallWebAPI.razor` 。
 
 如需有關在應用程式中使用安全要求之 CORS 的詳細資訊 Blazor ，請參閱 <xref:blazor/security/webassembly/additional-scenarios#cross-origin-resource-sharing-cors> 。
 
@@ -324,4 +326,4 @@ protected override async Task OnInitializedAsync()
 * <xref:fundamentals/http-requests>
 * <xref:security/enforcing-ssl>
 * [Kestrel HTTPS 端點設定](xref:fundamentals/servers/kestrel#endpoint-configuration)
-* [位於 W3C 的跨原始來源資源分享（CORS）](https://www.w3.org/TR/cors/)
+* [跨原始來源資源分享 (在 W3C) 的 CORS](https://www.w3.org/TR/cors/)

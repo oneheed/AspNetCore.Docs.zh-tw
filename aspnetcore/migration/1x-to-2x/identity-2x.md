@@ -5,6 +5,8 @@ description: 本文概述遷移 ASP.NET Core 1.x 驗證和 ASP.NET Core 2.0 的�
 ms.author: scaddie
 ms.date: 06/21/2019
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -13,14 +15,14 @@ no-loc:
 - Razor
 - SignalR
 uid: migration/1x-to-2x/identity-2x
-ms.openlocfilehash: dacf6fa7191f51f36b9ba65a90746a26f958fc03
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: 46f10df25235b532f188eda2a079aef71070cd6d
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85408665"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88015286"
 ---
-# <a name="migrate-authentication-and-identity-to-aspnet-core-20"></a>將驗證遷移 Identity 到 ASP.NET Core 2。0
+# <a name="migrate-authentication-and-no-locidentity-to-aspnet-core-20"></a>將驗證遷移 Identity 到 ASP.NET Core 2。0
 
 由[Scott Addie](https://github.com/scottaddie)和[Hao Kung](https://github.com/HaoK)
 
@@ -86,19 +88,19 @@ public void Configure(IApplicationBuilder app, ILoggerFactory loggerfactory) {
 
 以下是每個主要驗證配置的2.0 遷移指示。
 
-### <a name="cookie-based-authentication"></a>以 Cookie 為基礎的驗證
+### <a name="no-loccookie-based-authentication"></a>Cookie以為基礎的驗證
 
 選取下列兩個選項的其中一個，並在*Startup.cs*中進行必要的變更：
 
-1. 使用 cookie 搭配Identity
+1. 搭配 cookie 使用Identity
     - `UseIdentity` `UseAuthentication` 在方法中，將取代為 `Configure` ：
 
         ```csharp
         app.UseAuthentication();
         ```
 
-    - 叫 `AddIdentity` 用方法中的方法 `ConfigureServices` ，以新增 cookie 驗證服務。
-    - （選擇性） `ConfigureApplicationCookie` `ConfigureExternalCookie` 在方法中叫用或方法， `ConfigureServices` 以調整 Identity cookie 設定。
+    - 叫 `AddIdentity` 用方法中的 `ConfigureServices` 方法，以加入 cookie 驗證服務。
+    - （選擇性） `ConfigureApplicationCookie` `ConfigureExternalCookie` 在方法中叫用或方法 `ConfigureServices` 來調整 Identity cookie 設定。
 
         ```csharp
         services.AddIdentity<ApplicationUser, IdentityRole>()
@@ -108,7 +110,7 @@ public void Configure(IApplicationBuilder app, ILoggerFactory loggerfactory) {
         services.ConfigureApplicationCookie(options => options.LoginPath = "/Account/LogIn");
         ```
 
-2. 不使用 cookieIdentity
+2. 使用 cookie 不含的Identity
     - `UseCookieAuthentication`將方法中的方法呼叫取代 `Configure` 為 `UseAuthentication` ：
 
         ```csharp
@@ -150,7 +152,7 @@ public void Configure(IApplicationBuilder app, ILoggerFactory loggerfactory) {
 
     此程式碼片段不會使用 Identity ，因此應該藉由傳遞至方法來設定預設配置 `JwtBearerDefaults.AuthenticationScheme` `AddAuthentication` 。
 
-### <a name="openid-connect-oidc-authentication"></a>OpenID Connect （OIDC）驗證
+### <a name="openid-connect-oidc-authentication"></a>OpenID Connect (OIDC) authentication
 
 在*Startup.cs*中進行下列變更：
 
@@ -277,7 +279,7 @@ public void Configure(IApplicationBuilder app, ILoggerFactory loggerfactory) {
 services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme);
 ```
 
-在上述程式碼片段中，預設配置會設定為 `CookieAuthenticationDefaults.AuthenticationScheme` （"cookie"）。
+在上述的程式碼片段中，預設配置設定為 `CookieAuthenticationDefaults.AuthenticationScheme` ( " Cookie s" ) 。
 
 或者，使用方法的多載版本 `AddAuthentication` 來設定一個以上的屬性。 在下列多載方法範例中，預設配置設定為 `CookieAuthenticationDefaults.AuthenticationScheme` 。 您也可以在個別 `[Authorize]` 屬性或授權原則內指定驗證配置。
 
@@ -293,7 +295,7 @@ services.AddAuthentication(options =>
 - 您想要讓使用者自動登入
 - 您可以使用 `[Authorize]` 屬性或授權原則，而不需要指定配置
 
-此規則的例外狀況是 `AddIdentity` 方法。 這個方法會為您新增 cookie，並將預設的驗證和挑戰配置設定為應用程式 cookie `IdentityConstants.ApplicationScheme` 。 此外，它會將預設登入配置設定為外部 cookie `IdentityConstants.ExternalScheme` 。
+此規則的例外狀況是 `AddIdentity` 方法。 這個方法 cookie 會為您加入，並將預設的驗證和挑戰配置設定為應用程式 cookie `IdentityConstants.ApplicationScheme` 。 此外，它也會將預設登入配置設定為外部 cookie `IdentityConstants.ExternalScheme` 。
 
 <a name="obsolete-interface"></a>
 
@@ -311,7 +313,7 @@ services.AddAuthentication(options =>
 
 <a name="windows-auth-changes"></a>
 
-## <a name="windows-authentication-httpsys--iisintegration"></a>Windows 驗證（HTTP.sys/IISIntegration）
+## <a name="windows-authentication-httpsys--iisintegration"></a>Windows 驗證 ( # A0/IISIntegration) 
 
 Windows 驗證有兩種變化：
 
@@ -334,17 +336,17 @@ Windows 驗證有兩種變化：
   services.AddAuthentication(HttpSysDefaults.AuthenticationScheme);
   ```
 
-  無法設定預設配置，會導致授權（挑戰）要求無法使用下列例外狀況：
+  無法設定預設配置，會導致授權 (挑戰) 要求無法使用下列例外狀況：
 
   > `System.InvalidOperationException`：未指定 authenticationScheme，而且找不到任何 DefaultChallengeScheme。
 
-如需詳細資訊，請參閱 <xref:security/authentication/windowsauth> 。
+如需詳細資訊，請參閱<xref:security/authentication/windowsauth>。
 
 <a name="identity-cookie-options"></a>
 
-## <a name="identitycookieoptions-instances"></a>IdentityCookieOptions 實例
+## <a name="no-locidentityno-loccookieoptions-instances"></a>IdentityCookie選項實例
 
-2.0 變更的副作用是，切換為使用已命名的選項，而不是 cookie 選項實例。 Identity已移除自訂 cookie 配置名稱的功能。
+2.0 變更的副作用是，切換為使用已命名的選項，而不是 cookie 選項實例。 自訂 Identity cookie 配置名稱的功能已移除。
 
 例如，1.x 專案會使用函式[插入](xref:mvc/controllers/dependency-injection#constructor-injection)將參數傳遞至 `IdentityCookieOptions` *AccountController.cs*和*ManageController.cs*。 外部 cookie 驗證配置會從提供的實例進行存取：
 
@@ -368,9 +370,9 @@ Windows 驗證有兩種變化：
 
 <a name="navigation-properties"></a>
 
-## <a name="add-identityuser-poco-navigation-properties"></a>新增 IdentityUser POCO 導覽屬性
+## <a name="add-no-locidentityuser-poco-navigation-properties"></a>新增 Identity 使用者 POCO 導覽屬性
 
-基底 `IdentityUser` POCO （簡單的 CLR 物件）的 Entity Framework （EF） Core 導覽屬性已經移除。 如果您的1.x 專案使用這些屬性，請手動將其新增回2.0 專案：
+基底 `IdentityUser` POCO (純舊 CLR 物件) 的 Entity Framework (EF) Core 導覽屬性已移除。 如果您的1.x 專案使用這些屬性，請手動將其新增回2.0 專案：
 
 ```csharp
 /// <summary>
@@ -389,7 +391,7 @@ public virtual ICollection<IdentityUserClaim<int>> Claims { get; } = new List<Id
 public virtual ICollection<IdentityUserLogin<int>> Logins { get; } = new List<IdentityUserLogin<int>>();
 ```
 
-若要在執行 EF Core 遷移時避免重複的外鍵，請將下列內容新增至 `IdentityDbContext` 類別的 `OnModelCreating` 方法（在 `base.OnModelCreating();` 呼叫之後）：
+若要在執行 EF Core 遷移時避免重複的外鍵，請在 `IdentityDbContext` 呼叫) 之後，將下列內容新增至類別的 `OnModelCreating` 方法 (`base.OnModelCreating();` ：
 
 ```csharp
 protected override void OnModelCreating(ModelBuilder builder)

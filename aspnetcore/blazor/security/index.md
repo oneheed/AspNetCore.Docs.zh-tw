@@ -7,6 +7,8 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 05/19/2020
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -15,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/security/index
-ms.openlocfilehash: 7b19ac9170fc99a3524fedda419bd03498aa999a
-ms.sourcegitcommit: b0fa7ff0cb158277df61bcd08058a81222c3fe10
+ms.openlocfilehash: d2ebb5d3c3a1c3629a5bf563aecfd6fc147715d6
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 08/07/2020
-ms.locfileid: "87913781"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88014018"
 ---
 # <a name="aspnet-core-no-locblazor-authentication-and-authorization"></a>ASP.NET Core Blazor 驗證和授權
 
@@ -59,7 +61,7 @@ Blazor會使用現有的 ASP.NET Core 驗證機制來建立使用者的身分識
 
 ### <a name="no-locblazor-server-authentication"></a>Blazor Server 驗證
 
-Blazor Server應用程式會透過使用建立的即時連線來運作 SignalR 。 建立連接時，會處理[以為 SignalR 基礎之應用程式中的驗證](xref:signalr/authn-and-authz)。 驗證可以是以 Cookie 或其他持有人權杖為基礎。
+Blazor Server應用程式會透過使用建立的即時連線來運作 SignalR 。 建立連接時，會處理[以為 SignalR 基礎之應用程式中的驗證](xref:signalr/authn-and-authz)。 驗證可以根據 cookie 或其他持有人權杖。
 
 應用程式的內建 <xref:Microsoft.AspNetCore.Components.Authorization.AuthenticationStateProvider> 服務會 Blazor Server 從 ASP.NET Core 的取得驗證狀態資料 `HttpContext.User` 。 這是驗證狀態與現有 ASP.NET Core 驗證機制整合的方式。
 

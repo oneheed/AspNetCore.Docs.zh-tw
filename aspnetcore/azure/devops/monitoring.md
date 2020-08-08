@@ -6,6 +6,8 @@ ms.author: casoper
 ms.custom: mvc, seodec18
 ms.date: 07/10/2019
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -14,12 +16,12 @@ no-loc:
 - Razor
 - SignalR
 uid: azure/devops/monitor
-ms.openlocfilehash: a94b1e0b5ce2a24cf22eb665c9bcd03c25ffa67f
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: 9e8b48df5a3ecf78e315c7f33b5ab75d6f329cc2
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85400371"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88012770"
 ---
 # <a name="monitor-and-debug"></a>監視和調試
 
@@ -77,7 +79,7 @@ App Service 的 web 應用程式會即時受到輕鬆監視。 Azure 入口網�
     ![Application Insights 設定](./media/monitoring/new-app-insights.png)
 
 1. 針對 [**執行時間/架構**]，選取 [ **ASP.NET Core**]。 接受預設設定。
-1. 選取 [確定]****。 如果系統提示您確認，請選取 [**繼續**]。
+1. 選取 [確定]。 如果系統提示您確認，請選取 [**繼續**]。
 1. 建立資源之後，請按一下 Application Insights 資源的名稱，直接流覽至 [Application Insights] 頁面。
 
     ![已準備好新的 Application Insights 資源](./media/monitoring/new-app-insights-done.png)
@@ -97,12 +99,12 @@ Application Insights 提供有用的伺服器端資訊，而不需進行其他�
 
     ![診斷記錄連結](./media/monitoring/logging.png)
 
-1. 開啟 **[應用程式記錄（檔案系統）**]。 若出現提示，請按一下方塊以安裝延伸模組，以在 web 應用程式中啟用應用程式記錄。
+1. 開啟** (Filesystem) 的應用程式記錄**。 若出現提示，請按一下方塊以安裝延伸模組，以在 web 應用程式中啟用應用程式記錄。
 1. 將 [ **Web 服務器記錄**] 設定為 [**檔案系統**]。
 1. 輸入**保留期限**（以天為單位）。 例如，30。
-1. 按一下 [檔案] ****。
+1. 按一下 **[儲存]** 。
 
-ASP.NET Core 和 web 伺服器（App Service）記錄會針對 web 應用程式產生。 您可以使用顯示的 FTP/FTPS 資訊來下載它們。 此密碼與本指南稍早建立的部署認證相同。 [您可以使用 PowerShell 或 Azure CLI，將記錄直接串流至您的本機電腦](/azure/app-service/web-sites-enable-diagnostic-log#download)。 您也可以[在 Application Insights 中查看](/azure/app-service/web-sites-enable-diagnostic-log#how-to-view-logs-in-application-insights)記錄。
+系統會為 web 應用程式產生 ASP.NET Core 和 web 伺服器 (App Service) 記錄。 您可以使用顯示的 FTP/FTPS 資訊來下載它們。 此密碼與本指南稍早建立的部署認證相同。 [您可以使用 PowerShell 或 Azure CLI，將記錄直接串流至您的本機電腦](/azure/app-service/web-sites-enable-diagnostic-log#download)。 您也可以[在 Application Insights 中查看](/azure/app-service/web-sites-enable-diagnostic-log#how-to-view-logs-in-application-insights)記錄。
 
 ## <a name="log-streaming"></a>記錄串流
 
@@ -119,11 +121,11 @@ ASP.NET Core 和 web 伺服器（App Service）記錄會針對 web 應用程式�
 
 Azure 監視器也會根據計量、系統管理事件和其他準則提供[即時警示](/azure/monitoring-and-diagnostics/insights-alerts-portal)。
 
-> *注意：目前只有在 [警示（傳統）] 服務中才會提供 web 應用程式計量的警示。*
+> *注意：目前只有 (傳統) 服務的警示才會提供 web 應用程式計量的警示。*
 
-您可以在 Azure 監視器或 App Service 設定的 [**監視**] 區段下找到 [[警示（傳統）] 服務](/azure/monitoring-and-diagnostics/monitor-quick-resource-metric-alert-portal)。
+您可以在 Azure 監視器或在 [App Service 設定] 的 [**監視**] 區段底下，找到[ (傳統) 服務的警示](/azure/monitoring-and-diagnostics/monitor-quick-resource-metric-alert-portal)。
 
-![警示（傳統）連結](./media/monitoring/alerts.png)
+![ (傳統) 連結的警示](./media/monitoring/alerts.png)
 
 ## <a name="live-debugging"></a>即時調試
 
@@ -141,7 +143,7 @@ Azure 監視器也會根據計量、系統管理事件和其他準則提供[即�
 * 瞭解設定警示的位置
 * 深入瞭解 Azure App Service web 應用程式的遠端偵錯程式。
 
-## <a name="additional-reading"></a>其他閱讀資料
+## <a name="additional-reading"></a>延伸閱讀
 
 * <xref:test/troubleshoot-azure-iis>
 * <xref:host-and-deploy/azure-iis-errors-reference>

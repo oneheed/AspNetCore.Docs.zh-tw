@@ -5,6 +5,8 @@ description: 瞭解如何開始將 ASP.NET MVC 專案遷移至 ASP.NET Core MVC�
 ms.author: wpickett
 ms.date: 06/18/2020
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -13,12 +15,12 @@ no-loc:
 - Razor
 - SignalR
 uid: migration/mvc
-ms.openlocfilehash: 6a645d0e5959b4301ee7d2bcfc692f7499574dc4
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: 17f2a2532c58c3796835328260231d63f8fb2e40
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85407319"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88015045"
 ---
 # <a name="migrate-from-aspnet-mvc-to-aspnet-core-mvc"></a>從 ASP.NET MVC 移轉至 ASP.NET Core MVC
 
@@ -44,8 +46,8 @@ ms.locfileid: "85407319"
 在 Visual Studio 中建立要遷移的範例 ASP.NET MVC 專案：
 
 1. 從 [檔案]**** 功能表選取 [新增]**[專案]** > ****。
-1. 選取 [ **ASP.NET Web 應用程式（.NET Framework）** ]，然後選取 **[下一步]**。
-1. 將專案命名為*WebApp1* ，使命名空間符合下一個步驟中建立的 ASP.NET Core 專案。 選取 [建立]****。
+1. ** ( .NET Framework) 選取 [ASP.NET Web 應用程式**]，然後選取 **[下一步]**。
+1. 將專案命名為*WebApp1* ，使命名空間符合下一個步驟中建立的 ASP.NET Core 專案。 選取 [建立]。
 1. 選取 [ **MVC**]，然後選取 [**建立**]。
 
 ## <a name="create-the-aspnet-core-project"></a>建立 ASP.NET Core 專案
@@ -56,8 +58,8 @@ ms.locfileid: "85407319"
 1. 從 [檔案]**** 功能表選取 [新增]**[專案]** > ****。
 1. 選取 [ **ASP.NET Web Core Web 應用程式**]，然後選取 **[下一步]**。
 1. 在 [**設定您的新專案**] 對話方塊中，將專案命名為*WebApp1*。
-1. 將 [位置] 設定為與前一個專案不同的目錄，以使用相同的專案名稱。 使用相同的命名空間，可讓您更輕鬆地在這兩個專案之間複製程式碼。 選取 [建立]****。
-1. 在 [**建立新的 ASP.NET Core Web 應用程式**] 對話方塊中，確認已選取 [ **.net Core** ] 和 [ **ASP.NET Core 3.1** ]。 選取 [ **Web 應用程式（模型-視圖控制器）** ] 專案範本，然後選取 [**建立**]。
+1. 將 [位置] 設定為與前一個專案不同的目錄，以使用相同的專案名稱。 使用相同的命名空間，可讓您更輕鬆地在這兩個專案之間複製程式碼。 選取 [建立]。
+1. 在 [**建立新的 ASP.NET Core Web 應用程式**] 對話方塊中，確認已選取 [ **.net Core** ] 和 [ **ASP.NET Core 3.1** ]。 選取 [ **Web 應用程式] ([模型-View-控制器) ** ] 專案範本，然後選取 [**建立**]。
 
 ## <a name="configure-the-aspnet-core-site-to-use-mvc"></a>將 ASP.NET Core 網站設定為使用 MVC
 
@@ -74,7 +76,7 @@ ms.locfileid: "85407319"
 * 取代*global.asax*。
 * 處理所有應用程式啟動工作。
 
-如需詳細資訊，請參閱 <xref:fundamentals/startup> 。
+如需詳細資訊，請參閱<xref:fundamentals/startup>。
 
 在 ASP.NET Core 專案中，開啟*Startup.cs*檔案：
 
@@ -83,8 +85,8 @@ ms.locfileid: "85407319"
 ASP.NET Core 應用程式必須使用中介軟體加入宣告架構功能。 先前範本產生的程式碼會新增下列服務和中介軟體：
 
 * <xref:Microsoft.Extensions.DependencyInjection.MvcServiceCollectionExtensions.AddControllersWithViews%2A>擴充方法會針對控制器、API 相關的功能和 views 註冊 MVC 服務支援。 如需 MVC 服務註冊選項的詳細資訊，請參閱[mvc 服務註冊](xref:migration/22-to-30#mvc-service-registration)
-* <xref:Microsoft.AspNetCore.Builder.StaticFileExtensions.UseStaticFiles%2A>擴充方法會加入靜態檔案處理常式 `Microsoft.AspNetCore.StaticFiles` 。 `UseStaticFiles`必須先呼叫擴充方法 `UseRouting` 。 如需詳細資訊，請參閱 <xref:fundamentals/static-files> 。
-* <xref:Microsoft.AspNetCore.Builder.EndpointRoutingApplicationBuilderExtensions.UseRouting%2A>擴充方法會新增路由。 如需詳細資訊，請參閱 <xref:fundamentals/routing> 。
+* <xref:Microsoft.AspNetCore.Builder.StaticFileExtensions.UseStaticFiles%2A>擴充方法會加入靜態檔案處理常式 `Microsoft.AspNetCore.StaticFiles` 。 `UseStaticFiles`必須先呼叫擴充方法 `UseRouting` 。 如需詳細資訊，請參閱<xref:fundamentals/static-files>。
+* <xref:Microsoft.AspNetCore.Builder.EndpointRoutingApplicationBuilderExtensions.UseRouting%2A>擴充方法會新增路由。 如需詳細資訊，請參閱<xref:fundamentals/routing>。
 
 此現有設定包含遷移範例 ASP.NET MVC 專案所需的功能。 如需 ASP.NET Core 中介軟體選項的詳細資訊，請參閱 <xref:fundamentals/startup> 。
 
@@ -106,7 +108,7 @@ ASP.NET Core *WebApp1*專案已包含與 ASP.NET MVC 專案相同名稱的最低
 您可以測試每個控制器端點，不過，檔稍後會涵蓋版面配置和樣式。
 
 1. 執行 ASP.NET Core 應用程式。
-1. 藉由以 ASP.NET Core 專案中使用的埠號碼取代目前的埠號碼，在執行中的 ASP.NET Core 應用程式上從瀏覽器叫用呈現的視圖。 例如： `https://localhost:44375/home/about` 。
+1. 藉由以 ASP.NET Core 專案中使用的埠號碼取代目前的埠號碼，在執行中的 ASP.NET Core 應用程式上從瀏覽器叫用呈現的視圖。 例如，`https://localhost:44375/home/about`。
 
 ## <a name="migrate-static-content"></a>遷移靜態內容
 
@@ -136,7 +138,7 @@ ASP.NET Core *WebApp1*專案已包含與 ASP.NET MVC 專案相同名稱的最低
 
 更新啟動載入 CSS 包含，以符合下列已完成的程式碼：
 
-1. 取代為 `@Styles.Render("~/Content/css")` `<link>` 要載入*啟動*程式的元素（請參閱下文）。
+1. 取代為 `@Styles.Render("~/Content/css")` `<link>` 要載入啟動程式的元素 *。 css* (參閱下面) 。
 1. 移除 `@Scripts.Render("~/bundles/modernizr")`。
 
 啟動載入 CSS 的已完成取代標記：
@@ -150,8 +152,8 @@ ASP.NET Core *WebApp1*專案已包含與 ASP.NET MVC 專案相同名稱的最低
 
 更新 jQuery 和啟動程式 JavaScript 包含，以符合下列已完成的程式碼：
 
-1. 取代為 `@Scripts.Render("~/bundles/jquery")` `<script>` 元素（請參閱下文）。
-1. 取代為 `@Scripts.Render("~/bundles/bootstrap")` `<script>` 元素（請參閱下文）。
+1. 取代 `@Scripts.Render("~/bundles/jquery")` 為 `<script>` 元素 (請參閱下列) 。
+1. 取代 `@Scripts.Render("~/bundles/bootstrap")` 為 `<script>` 元素 (請參閱下列) 。
 
 JQuery 和啟動程式 JavaScript 包含的已完成取代標記：
 
@@ -212,11 +214,11 @@ ASP.NET Core 會將未處理的例外狀況轉換成 HTTP 500 錯誤回應。 �
 
 ![[新增 Web 應用程式] 對話方塊：已在 [ASP.NET 範本] 面板中選取 MVC 專案範本](mvc/_static/new-project-select-mvc-template.png)
 
-*選擇性：* 將解決方案的名稱從*WebApp1*變更為*Mvc5*。 Visual Studio 會顯示新的方案名稱（*Mvc5*），讓您更輕鬆地從下一個專案告訴此專案。
+*選擇性：* 將解決方案的名稱從*WebApp1*變更為*Mvc5*。 Visual Studio 會顯示新的方案名稱 (*Mvc5*) ，讓您更輕鬆地從下一個專案告訴此專案。
 
 ## <a name="create-the-aspnet-core-project"></a>建立 ASP.NET Core 專案
 
-使用與前一個專案相同的名稱建立新的*空白*ASP.NET Core web 應用程式（*WebApp1*），讓這兩個專案中的命名空間相符。 擁有相同的命名空間可讓您更輕鬆地在這兩個專案之間複製程式碼。 在與前一個專案不同的目錄中建立此專案，以使用相同的名稱。
+使用與上一個專案相同的名稱建立新的*空白*ASP.NET Core web 應用程式 (*WebApp1*) ，讓這兩個專案中的命名空間相符。 擁有相同的命名空間可讓您更輕鬆地在這兩個專案之間複製程式碼。 在與前一個專案不同的目錄中建立此專案，以使用相同的名稱。
 
 ![[新增專案] 對話方塊](mvc/_static/new_core.png)
 
@@ -272,7 +274,7 @@ ASP.NET Core 會將未處理的例外狀況轉換成 HTTP 500 錯誤回應。 �
 
 下列功能需要從範例 ASP.NET MVC 專案遷移至 ASP.NET Core 專案：
 
-* 用戶端內容（CSS、字型和腳本）
+*  (CSS、字型和腳本的用戶端內容) 
 
 * controllers
 
@@ -284,7 +286,7 @@ ASP.NET Core 會將未處理的例外狀況轉換成 HTTP 500 錯誤回應。 �
 
 * filters
 
-* 登入/登出 Identity （這會在下一個教學課程中完成）。
+* 登入/登出， Identity (此動作會在下一個教學課程中完成。 ) 
 
 ## <a name="controllers-and-views"></a>控制器和視圖
 
@@ -296,7 +298,7 @@ ASP.NET Core 會將未處理的例外狀況轉換成 HTTP 500 錯誤回應。 �
 
 尚未遷移版面配置檔案和樣式，因此轉譯的視圖只會包含視圖檔案中的內容。 和 views 的設定檔案產生的連結 `About` `Contact` 尚無法使用。
 
-藉由以 ASP.NET core 專案中使用的埠號碼取代目前的埠號碼，從執行中 ASP.NET 核心應用程式上的瀏覽器叫用呈現的視圖。 例如： `https://localhost:44375/home/about` 。
+藉由以 ASP.NET core 專案中使用的埠號碼取代目前的埠號碼，從執行中 ASP.NET 核心應用程式上的瀏覽器叫用呈現的視圖。 例如：`https://localhost:44375/home/about`。
 
 ![連絡人頁面](mvc/_static/contact-page.png)
 
@@ -308,7 +310,7 @@ ASP.NET Core 會將未處理的例外狀況轉換成 HTTP 500 錯誤回應。 �
 
 * 將 ASP.NET MVC 專案中的*favicon*複製到 ASP.NET Core 專案中的*wwwroot*目錄。
 
-ASP.NET MVC 專案會使用[啟動](https://getbootstrap.com/)程式來進行其樣式設定，並將啟動載入器檔案儲存在*Content*和*Scripts*目錄中。 產生 ASP.NET MVC 專案的範本會參考版面配置檔案中的啟動程式（*Views/Shared/_Layout. cshtml*）。 *bootstrap.js*和*啟動程式 .css*檔案可以從 ASP.NET MVC 專案複製到新專案中的*wwwroot*目錄。 相反地，本檔會在下一節中，使用 Cdn 新增對啟動程式（和其他用戶端程式庫）的支援。
+ASP.NET MVC 專案會使用[啟動](https://getbootstrap.com/)程式來進行其樣式設定，並將啟動載入器檔案儲存在*Content*和*Scripts*目錄中。 產生 ASP.NET MVC 專案的範本會參考設定檔案中的啟動程式 (*Views/Shared/_Layout. cshtml*) 。 *bootstrap.js*和*啟動程式 .css*檔案可以從 ASP.NET MVC 專案複製到新專案中的*wwwroot*目錄。 相反地，本檔會在下一節中新增對啟動程式 (和其他用戶端程式庫的支援) 使用 Cdn。
 
 ## <a name="migrate-the-layout-file"></a>遷移版面配置檔案
 
@@ -320,17 +322,17 @@ ASP.NET MVC 專案會使用[啟動](https://getbootstrap.com/)程式來進行其
 
 * 將 ASP.NET MVC 專案的*views/shared*目錄中的 *_Layout. cshtml*檔案複製到 ASP.NET Core 專案的*views/shared*目錄。
 
-開啟 *_Layout 的 cshtml*檔案，並進行下列變更（完成的程式碼如下所示）：
+開啟 *_Layout. cshtml*檔案，並進行下列變更 (完成的程式碼如下) 所示：
 
-* 取代為 `@Styles.Render("~/Content/css")` `<link>` 要載入*啟動*程式的元素（請參閱下文）。
+* 取代為 `@Styles.Render("~/Content/css")` `<link>` 要載入啟動程式的元素 *。 css* (參閱下面) 。
 
 * 移除 `@Scripts.Render("~/bundles/modernizr")`。
 
-* 將行標記為批註 `@Html.Partial("_LoginPartial")` （以括住行 `@*...*@` ）。 如需詳細資訊，請參閱[遷移驗證和 Identity ASP.NET Core](xref:migration/identity)
+* 將行批註 `@Html.Partial("_LoginPartial")` (以) 括住行 `@*...*@` 。 如需詳細資訊，請參閱[遷移驗證和 Identity ASP.NET Core](xref:migration/identity)
 
-* 取代為 `@Scripts.Render("~/bundles/jquery")` `<script>` 元素（請參閱下文）。
+* 取代 `@Scripts.Render("~/bundles/jquery")` 為 `<script>` 元素 (請參閱下列) 。
 
-* 取代為 `@Scripts.Render("~/bundles/bootstrap")` `<script>` 元素（請參閱下文）。
+* 取代 `@Scripts.Render("~/bundles/bootstrap")` 為 `<script>` 元素 (請參閱下列) 。
 
 啟動載入 CSS 的取代標記包含：
 
@@ -398,11 +400,11 @@ ASP.NET Core 會將未處理的例外狀況轉換成 HTTP 500 錯誤回應。 �
 
 ![[新增 Web 應用程式] 對話方塊：已在 [ASP.NET 範本] 面板中選取 MVC 專案範本](mvc/_static/new-project-select-mvc-template.png)
 
-*選擇性：* 將解決方案的名稱從*WebApp1*變更為*Mvc5*。 Visual Studio 會顯示新的方案名稱（*Mvc5*），讓您更輕鬆地從下一個專案告訴此專案。
+*選擇性：* 將解決方案的名稱從*WebApp1*變更為*Mvc5*。 Visual Studio 會顯示新的方案名稱 (*Mvc5*) ，讓您更輕鬆地從下一個專案告訴此專案。
 
 ## <a name="create-the-aspnet-core-project"></a>建立 ASP.NET Core 專案
 
-使用與前一個專案相同的名稱建立新的*空白*ASP.NET Core web 應用程式（*WebApp1*），讓這兩個專案中的命名空間相符。 擁有相同的命名空間可讓您更輕鬆地在這兩個專案之間複製程式碼。 在與前一個專案不同的目錄中建立此專案，以使用相同的名稱。
+使用與上一個專案相同的名稱建立新的*空白*ASP.NET Core web 應用程式 (*WebApp1*) ，讓這兩個專案中的命名空間相符。 擁有相同的命名空間可讓您更輕鬆地在這兩個專案之間複製程式碼。 在與前一個專案不同的目錄中建立此專案，以使用相同的名稱。
 
 ![[新增專案] 對話方塊](mvc/_static/new_core.png)
 
@@ -458,7 +460,7 @@ ASP.NET Core 會將未處理的例外狀況轉換成 HTTP 500 錯誤回應。 �
 
 下列功能需要從範例 ASP.NET MVC 專案遷移至 ASP.NET Core 專案：
 
-* 用戶端內容（CSS、字型和腳本）
+*  (CSS、字型和腳本的用戶端內容) 
 
 * controllers
 
@@ -470,7 +472,7 @@ ASP.NET Core 會將未處理的例外狀況轉換成 HTTP 500 錯誤回應。 �
 
 * filters
 
-* 登入/登出 Identity （這會在下一個教學課程中完成）。
+* 登入/登出， Identity (此動作會在下一個教學課程中完成。 ) 
 
 ## <a name="controllers-and-views"></a>控制器和視圖
 
@@ -482,7 +484,7 @@ ASP.NET Core 會將未處理的例外狀況轉換成 HTTP 500 錯誤回應。 �
 
 尚未遷移版面配置檔案和樣式，因此轉譯的視圖只會包含視圖檔案中的內容。 和 views 的設定檔案產生的連結 `About` `Contact` 尚無法使用。
 
-* 藉由以 ASP.NET core 專案中使用的埠號碼取代目前的埠號碼，從執行中 ASP.NET 核心應用程式上的瀏覽器叫用呈現的視圖。 例如： `https://localhost:44375/home/about` 。
+* 藉由以 ASP.NET core 專案中使用的埠號碼取代目前的埠號碼，從執行中 ASP.NET 核心應用程式上的瀏覽器叫用呈現的視圖。 例如：`https://localhost:44375/home/about`。
 
 ![連絡人頁面](mvc/_static/contact-page.png)
 
@@ -494,7 +496,7 @@ ASP.NET Core 會將未處理的例外狀況轉換成 HTTP 500 錯誤回應。 �
 
 * 將 ASP.NET MVC 專案中的*favicon*複製到 ASP.NET Core 專案中的*wwwroot*目錄。
 
-ASP.NET MVC 專案會使用[啟動](https://getbootstrap.com/)程式來進行其樣式設定，並將啟動載入器檔案儲存在*Content*和*Scripts*目錄中。 產生 ASP.NET MVC 專案的範本會參考版面配置檔案中的啟動程式（*Views/Shared/_Layout. cshtml*）。 *bootstrap.js*和*啟動程式 .css*檔案可以從 ASP.NET MVC 專案複製到新專案中的*wwwroot*目錄。 相反地，本檔會在下一節中，使用 Cdn 新增對啟動程式（和其他用戶端程式庫）的支援。
+ASP.NET MVC 專案會使用[啟動](https://getbootstrap.com/)程式來進行其樣式設定，並將啟動載入器檔案儲存在*Content*和*Scripts*目錄中。 產生 ASP.NET MVC 專案的範本會參考設定檔案中的啟動程式 (*Views/Shared/_Layout. cshtml*) 。 *bootstrap.js*和*啟動程式 .css*檔案可以從 ASP.NET MVC 專案複製到新專案中的*wwwroot*目錄。 相反地，本檔會在下一節中新增對啟動程式 (和其他用戶端程式庫的支援) 使用 Cdn。
 
 ## <a name="migrate-the-layout-file"></a>遷移版面配置檔案
 
@@ -506,17 +508,17 @@ ASP.NET MVC 專案會使用[啟動](https://getbootstrap.com/)程式來進行其
 
 * 將 ASP.NET MVC 專案的*views/shared*目錄中的 *_Layout. cshtml*檔案複製到 ASP.NET Core 專案的*views/shared*目錄。
 
-開啟 *_Layout 的 cshtml*檔案，並進行下列變更（完成的程式碼如下所示）：
+開啟 *_Layout. cshtml*檔案，並進行下列變更 (完成的程式碼如下) 所示：
 
-* 取代為 `@Styles.Render("~/Content/css")` `<link>` 要載入*啟動*程式的元素（請參閱下文）。
+* 取代為 `@Styles.Render("~/Content/css")` `<link>` 要載入啟動程式的元素 *。 css* (參閱下面) 。
 
 * 移除 `@Scripts.Render("~/bundles/modernizr")`。
 
-* 將行標記為批註 `@Html.Partial("_LoginPartial")` （以括住行 `@*...*@` ）。 如需詳細資訊，請參閱[遷移驗證和 Identity ASP.NET Core](xref:migration/identity)
+* 將行批註 `@Html.Partial("_LoginPartial")` (以) 括住行 `@*...*@` 。 如需詳細資訊，請參閱[遷移驗證和 Identity ASP.NET Core](xref:migration/identity)
 
-* 取代為 `@Scripts.Render("~/bundles/jquery")` `<script>` 元素（請參閱下文）。
+* 取代 `@Scripts.Render("~/bundles/jquery")` 為 `<script>` 元素 (請參閱下列) 。
 
-* 取代為 `@Scripts.Render("~/bundles/bootstrap")` `<script>` 元素（請參閱下文）。
+* 取代 `@Scripts.Render("~/bundles/bootstrap")` 為 `<script>` 元素 (請參閱下列) 。
 
 啟動載入 CSS 的取代標記包含：
 

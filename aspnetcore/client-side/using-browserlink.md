@@ -6,6 +6,8 @@ ms.author: riande
 ms.custom: H1Hack27Feb2017
 ms.date: 01/09/2020
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -14,12 +16,12 @@ no-loc:
 - Razor
 - SignalR
 uid: client-side/using-browserlink
-ms.openlocfilehash: 95ddf379d7cab336356cbfd3853311cb0911552a
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: 737abc8b9abea45654a86a4dc20584948ece9fc5
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85401710"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88013173"
 ---
 # <a name="browser-link-in-aspnet-core"></a>ASP.NET Core 中的瀏覽器連結
 
@@ -31,7 +33,7 @@ By [Nicolò Carandini](https://github.com/ncarandini)、 [Mike Wasson](https://g
 
 ::: moniker range=">= aspnetcore-3.0"
 
-將[BrowserLink](https://www.nuget.org/packages/Microsoft.VisualStudio.Web.BrowserLink/)套件新增至您的專案。 針對 ASP.NET Core Razor 頁面或 MVC 專案，也請依照中的 Razor 說明，啟用（*cshtml*）檔案的執行時間編譯 <xref:mvc/views/view-compilation> 。 Razor只有在已啟用執行時間編譯時，才會套用語法變更。
+將[BrowserLink](https://www.nuget.org/packages/Microsoft.VisualStudio.Web.BrowserLink/)套件新增至您的專案。 針對 ASP.NET Core Razor 頁面或 MVC 專案，也請依照中的 Razor 說明，啟用 (*. cshtml*) 檔案的執行時間編譯 <xref:mvc/views/view-compilation> 。 Razor只有在已啟用執行時間編譯時，才會套用語法變更。
 
 ::: moniker-end
 
@@ -53,7 +55,7 @@ ASP.NET Core 1.x **Web 應用程式**專案範本具有 BrowserLink 套件的套
 
 ::: moniker-end
 
-### <a name="configuration"></a>設定
+### <a name="configuration"></a>組態
 
 呼叫 `Startup.Configure` 方法中的 `UseBrowserLink`：
 
@@ -71,7 +73,7 @@ if (env.IsDevelopment())
 }
 ```
 
-如需詳細資訊，請參閱 <xref:fundamentals/environments> 。
+如需詳細資訊，請參閱<xref:fundamentals/environments>。
 
 ## <a name="how-to-use-browser-link"></a>如何使用瀏覽器連結
 
@@ -136,7 +138,7 @@ if (env.IsDevelopment())
 
 ## <a name="how-it-works"></a>運作方式
 
-瀏覽器連結會使用 [SignalR](xref:signalr/introduction) 來建立 Visual Studio 與瀏覽器之間的通道。 啟用瀏覽器連結時，Visual Studio SignalR 會作為多個用戶端（瀏覽器）可以連接的伺服器。 瀏覽器連結也會在 ASP.NET Core 要求管線中註冊中介軟體元件。 此元件會 `<script>` 從伺服器插入每個頁面要求的特殊參考。 您可以在瀏覽器中選取 [ **View source** ]，並將它滾動到標記內容的結尾，以查看腳本參考 `<body>` ：
+瀏覽器連結會使用 [SignalR](xref:signalr/introduction) 來建立 Visual Studio 與瀏覽器之間的通道。 當瀏覽器連結已啟用時，Visual Studio SignalR 會作為伺服器，讓多個用戶端 (瀏覽器) 可以連接到。 瀏覽器連結也會在 ASP.NET Core 要求管線中註冊中介軟體元件。 此元件會 `<script>` 從伺服器插入每個頁面要求的特殊參考。 您可以在瀏覽器中選取 [ **View source** ]，並將它滾動到標記內容的結尾，以查看腳本參考 `<body>` ：
 
 ```html
     <!-- Visual Studio Browser Link -->

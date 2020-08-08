@@ -7,6 +7,8 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 07/29/2020
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -15,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/fundamentals/configuration
-ms.openlocfilehash: 9ae0dcc16b9debd47a61010953243b0abe499c4f
-ms.sourcegitcommit: ca6a1f100c1a3f59999189aa962523442dd4ead1
+ms.openlocfilehash: 437e7be6b805ad836df60e831f5e0dc0bda4f5a5
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 07/30/2020
-ms.locfileid: "87443964"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88014447"
 ---
 # <a name="aspnet-core-no-locblazor-configuration"></a>ASP.NET Core Blazor 設定
 
@@ -36,7 +38,7 @@ Blazor WebAssembly預設會從應用程式佈建檔案載入設定：
 
 並非所有提供者或提供者功能都適用于 Blazor WebAssembly 應用程式：
 
-* [Azure Key Vault 設定提供者](xref:security/key-vault-configuration)：提供者不支援使用用戶端秘密案例的受控識別和應用程式識別碼（用戶端識別碼）。 不建議將具有用戶端密碼的應用程式識別碼用於任何 ASP.NET Core 應用程式，特別是應用程式，因為用戶端 Blazor WebAssembly 密碼無法安全地存取服務。
+* [Azure Key Vault 設定提供者](xref:security/key-vault-configuration)：提供者不支援使用用戶端秘密案例的受控識別和應用程式識別碼 (用戶端識別碼) 。 不建議將具有用戶端密碼的應用程式識別碼用於任何 ASP.NET Core 應用程式，特別是應用程式，因為用戶端 Blazor WebAssembly 密碼無法安全地存取服務。
 * [Azure App 設定提供者](/azure/azure-app-configuration/quickstart-aspnet-core-app)：提供者不適合 Blazor WebAssembly 應用程式，因為 Blazor WebAssembly 應用程式不會在 Azure 中的伺服器上執行。
 
 > [!WARNING]
@@ -70,7 +72,7 @@ Blazor WebAssembly預設會從應用程式佈建檔案載入設定：
 
 中示範的 EF Core 自訂設定提供者可 <xref:fundamentals/configuration/index#custom-configuration-provider> 搭配 Blazor WebAssembly 應用程式使用。
 
-在（）中，使用下列程式碼新增範例的設定提供者 `Program.Main` `Program.cs` ：
+在 () 中，使用下列程式碼新增範例的設定提供者 `Program.Main` `Program.cs` ：
 
 ```csharp
 builder.Configuration.AddEFConfiguration(
@@ -239,7 +241,7 @@ var hostname = builder.Configuration["HostName"];
 
 ## <a name="cached-configuration"></a>快取設定
 
-系統會快取設定檔以供離線使用。 使用[漸進式 Web 應用程式（pwa）](xref:blazor/progressive-web-app)，您只能在建立新的部署時更新設定檔。 在部署之間編輯設定檔沒有任何作用，因為：
+系統會快取設定檔以供離線使用。 使用[漸進式 Web 應用程式 (pwa) ](xref:blazor/progressive-web-app)，您只能在建立新的部署時更新設定檔。 在部署之間編輯設定檔沒有任何作用，因為：
 
 * 使用者有檔案的快取版本，這些檔案會繼續使用。
 * 在 `service-worker.js` 編譯時，PWA 的和檔案 `service-worker-assets.js` 必須重建，在使用者下一次線上流覽應用程式時，請造訪應用程式已重新部署。

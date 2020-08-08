@@ -5,6 +5,8 @@ description: 瞭解如何將設定從 ASP.NET MVC 專案遷移至 ASP.NET Core M
 ms.author: riande
 ms.date: 10/14/2016
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -13,12 +15,12 @@ no-loc:
 - Razor
 - SignalR
 uid: migration/configuration
-ms.openlocfilehash: 9be321850b14847973877fb6a32217bd2dbb5171
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: 7c1f2feb40e115d71fb087201acdf52197a52c88
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85399812"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88015097"
 ---
 # <a name="migrate-configuration-to-aspnet-core"></a>將設定遷移至 ASP.NET Core
 
@@ -26,7 +28,7 @@ ms.locfileid: "85399812"
 
 在前一篇文章中，我們開始將[ASP.NET mvc 專案遷移至 ASP.NET CORE mvc](xref:migration/mvc)。 在本文中，我們會遷移設定。
 
-[查看或下載範例程式碼](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/migration/configuration/samples)（[如何下載](xref:index#how-to-download-a-sample)）
+[查看或下載範例程式碼](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/migration/configuration/samples) ([如何下載](xref:index#how-to-download-a-sample)) 
 
 ## <a name="setup-configuration"></a>設定組態
 
@@ -56,6 +58,6 @@ using Microsoft.Extensions.Configuration;
 
 在上面所述的反白顯示行中，將資料庫的名稱從 **_CHANGE_ME**變更為您的資料庫名稱。
 
-## <a name="summary"></a>摘要
+## <a name="summary"></a>總結
 
 ASP.NET Core 會將應用程式的所有啟動邏輯放在單一檔案中，您可以在其中定義和設定必要的服務和相依性。 它會以彈性的設定功能取代*web.config*檔案，可以利用各種不同的檔案格式，例如 JSON，以及環境變數。

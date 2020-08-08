@@ -6,6 +6,8 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 04/17/2020
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -14,12 +16,12 @@ no-loc:
 - Razor
 - SignalR
 uid: index
-ms.openlocfilehash: 2ad97dd7eb38b4cb69fa7af5ae1e1d1837a97443
-ms.sourcegitcommit: 66fca14611eba141d455fe0bd2c37803062e439c
+ms.openlocfilehash: 9cf721b381d3c4c737c15225edcf7918dd1fcf5b
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 07/03/2020
-ms.locfileid: "85944561"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88015344"
 ---
 # <a name="introduction-to-aspnet-core"></a>ASP.NET Core 簡介
 
@@ -29,7 +31,7 @@ ms.locfileid: "85944561"
 
 ASP.NET Core 是一種跨平臺、高效能、[開放原始](https://github.com/dotnet/aspnetcore)碼的架構，可用於建立現代化、具備雲端功能的網際網路連線應用程式。 利用 ASP.NET Core，您可以：
 
-* 建立 web 應用程式和服務、[物聯網（IoT）](https://www.microsoft.com/internet-of-things/)應用程式，以及行動後端。
+* 建立 web 應用程式和服務，[物聯網 (IoT) ](https://www.microsoft.com/internet-of-things/)應用程式和行動後端。
 * 在 Windows、macOS 和 Linux 上使用您最愛的開發工具。
 * 部署到雲端或在內部部署。
 * 在[.Net Core](/dotnet/core/introduction)上執行。
@@ -108,7 +110,7 @@ ASP.NET Core 3.x 和更新版本只能以 .NET Core 為目標。 一般來說，
 
 ASP.NET Core 是一種跨平臺、高效能、[開放原始](https://github.com/dotnet/aspnetcore)碼的架構，可用於建立現代化、具備雲端功能的網際網路連線應用程式。 利用 ASP.NET Core，您可以：
 
-* 建立 web 應用程式和服務、[物聯網（IoT）](https://www.microsoft.com/internet-of-things/)應用程式，以及行動後端。
+* 建立 web 應用程式和服務，[物聯網 (IoT) ](https://www.microsoft.com/internet-of-things/)應用程式和行動後端。
 * 在 Windows、macOS 和 Linux 上使用您最愛的開發工具。
 * 部署到雲端或在內部部署。
 * 在 [.NET Core 或 .NET Framework](/dotnet/articles/standard/choosing-core-framework-server) 上執行。
@@ -238,7 +240,7 @@ Host.CreateDefaultBuilder(args)
 [!code-csharp[](sample/SampleApp/Program.cs?name=snippet_WebHostDefaults)]
 ```
 
-您可以放心地忽略（或移除） `#region` `#endregion` 程式碼周圍的和指示詞。 如果您打算執行主題中所述的範例案例，請不要更改這些指示詞內的程式碼。 您可以在試驗其他案例時自由改變程式碼。
+您可以放心地忽略 (或移除 `#region` 程式碼中的和指示詞) `#endregion` 。 如果您打算執行主題中所述的範例案例，請不要更改這些指示詞內的程式碼。 您可以在試驗其他案例時自由改變程式碼。
 
 如需詳細資訊，請參閱 [Contribute to the ASP.NET documentation: Code snippets](https://github.com/dotnet/AspNetCore.Docs/blob/master/CONTRIBUTING.md#code-snippets) (參與 ASP.NET 文件：程式碼片段)。
 

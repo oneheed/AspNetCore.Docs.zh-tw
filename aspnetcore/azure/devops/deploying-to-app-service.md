@@ -6,6 +6,8 @@ ms.author: casoper
 ms.custom: mvc, seodec18
 ms.date: 10/24/2018
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -14,12 +16,12 @@ no-loc:
 - Razor
 - SignalR
 uid: azure/devops/deploy-to-app-service
-ms.openlocfilehash: 7cf6395b6f57413d85532ed15e5a875af10f905b
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: 4349e8a994cfa4007ce847b2952c53f4223f1b3d
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85400384"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88012354"
 ---
 # <a name="deploy-an-app-to-app-service"></a>將應用程式部署至 App Service
 
@@ -43,7 +45,7 @@ ms.locfileid: "85400384"
 
 從命令 shell 下載程式代碼、建立專案，然後如下所示執行。
 
-> *注意： Linux/macOS 使用者應該對路徑進行適當的變更，例如，使用正斜線（ `/` ），而不是反斜線（ `\` ）。*
+> *注意： Linux/macOS 使用者應該對路徑進行適當的變更，例如，使用正斜線 (`/`) ，而不是 () 的反斜線。 `\`*
 
 1. 將程式碼複製到本機電腦上的資料夾。
 
@@ -81,7 +83,7 @@ ms.locfileid: "85400384"
 
 若要部署應用程式，您必須建立 App Service [Web 應用程式](/azure/app-service/app-service-web-overview)。 建立 Web 應用程式之後，您會使用 Git 從本機電腦進行部署。
 
-1. 登入 [Azure Cloud Shell](https://shell.azure.com/bash)。 注意：當您第一次登入時，Cloud Shell 會提示您建立設定檔的儲存體帳戶。 接受預設值，或提供唯一的名稱。
+1. 登入[Azure Cloud Shell](https://shell.azure.com/bash)。 注意：當您第一次登入時，Cloud Shell 會提示您建立設定檔的儲存體帳戶。 接受預設值，或提供唯一的名稱。
 
 2. 請使用 Cloud Shell 來執行下列步驟。
 
@@ -129,7 +131,7 @@ ms.locfileid: "85400384"
     echo Web app URL: http://$webappname.azurewebsites.net
     ```
 
-3. 在您的本機電腦上使用命令 shell，流覽至 web 應用程式的專案資料夾（例如 `.\simple-feed-reader\SimpleFeedReader` ）。 執行下列命令來設定 Git 以推送至部署 URL：
+3. 在您的本機電腦上使用命令 shell，流覽至 web 應用程式的專案資料夾 (例如， `.\simple-feed-reader\SimpleFeedReader`) 。 執行下列命令來設定 Git 以推送至部署 URL：
 
     a. 將遠端 URL 新增至本機存放庫。
 
@@ -159,9 +161,9 @@ ms.locfileid: "85400384"
 4. 在方案總管中，以滑鼠右鍵按一下專案，然後按一下 [**發佈**]。
 
     ![顯示以滑鼠右鍵按一下、發佈的螢幕擷取畫面](./media/deploying-to-app-service/publish.png)
-5. Visual Studio 可以建立新的 App Service 資源，但此更新將會透過現有部署發行。 在 [**挑選發行目標**] 對話方塊中，從左側清單中選取 [ **App Service** ]，然後選取 [**選取現有**的]。 按一下 **[發行]**。
+5. Visual Studio 可以建立新的 App Service 資源，但此更新將會透過現有部署發行。 在 [**挑選發行目標**] 對話方塊中，從左側清單中選取 [ **App Service** ]，然後選取 [**選取現有**的]。 按一下 [發佈]。
 6. 在 [ **App Service** ] 對話方塊中，確認用來建立 Azure 訂用帳戶的 Microsoft 或組織帳戶會顯示在右上方。 如果不是，請按一下下拉式並新增它。
-7. 確認已選取正確的 Azure**訂**用帳戶。 針對 [ **View**]，選取 [**資源群組**]。 展開 [ **AzureTutorial** ] 資源群組，然後選取現有的 web 應用程式。 按一下 [確定]****。
+7. 確認已選取正確的 Azure**訂**用帳戶。 針對 [ **View**]，選取 [**資源群組**]。 展開 [ **AzureTutorial** ] 資源群組，然後選取現有的 web 應用程式。 按一下 [確定]  。
 
     ![顯示 [發行 App Service] 對話方塊的螢幕擷取畫面](./media/deploying-to-app-service/publish-dialog.png)
 
@@ -232,7 +234,7 @@ Visual Studio 建立應用程式並將其部署至 Azure。 流覽至 web 應用
 
     ![在交換之後比較瀏覽器視窗](./media/deploying-to-app-service/swapped.png)
 
-## <a name="summary"></a>摘要
+## <a name="summary"></a>總結
 
 在本節中，已完成下列工作：
 
@@ -246,9 +248,9 @@ Visual Studio 建立應用程式並將其部署至 Azure。 流覽至 web 應用
 
 在下一節中，您將瞭解如何使用 Azure Pipelines 建立 DevOps 管線。
 
-## <a name="additional-reading"></a>其他閱讀資料
+## <a name="additional-reading"></a>延伸閱讀
 
 * [Web 應用程式概觀](/azure/app-service/app-service-web-overview)
 * [在 Azure App Service 中建置 .NET Core 和 SQL Database Web 應用程式](/azure/app-service/app-service-web-tutorial-dotnetcore-sqldb)
 * [設定 Azure App Service 的部署認證](/azure/app-service/app-service-deployment-credentials)
-* [在 Azure App Service 中設定預備環境](/azure/app-service/web-sites-staged-publishing)
+* [在 Azure App Service 中設定預備環境](/azure/app-service/web-sites-staged-publishing) \(部分機器翻譯\)

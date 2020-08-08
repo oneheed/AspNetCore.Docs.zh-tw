@@ -7,6 +7,8 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 07/16/2020
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -15,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/security/webassembly/index
-ms.openlocfilehash: 8d75852c74b33fe538d05c5945829e0726a5030f
-ms.sourcegitcommit: 84150702757cf7a7b839485382420e8db8e92b9c
+ms.openlocfilehash: fef638d592cacfe2f4f67e522900979993905859
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 08/05/2020
-ms.locfileid: "87818816"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88013589"
 ---
 # <a name="secure-aspnet-core-no-locblazor-webassembly"></a>安全 ASP.NET CoreBlazor WebAssembly
 
@@ -34,11 +36,11 @@ Blazor WebAssembly支援透過程式庫使用 OIDC 來驗證和授權應用程�
 
 中的驗證支援 Blazor WebAssembly 是建置於程式庫之上 `oidc-client.js` ，用來處理基礎驗證通訊協定的詳細資料。
 
-驗證 Spa 的其他選項是否存在，例如使用 SameSite cookie。 不過，的工程設計 Blazor WebAssembly 是以 OAuth 和 OIDC 作為在應用程式中進行驗證的最佳選項來進行 Blazor WebAssembly 。 以 JSON Web 權杖為基礎的[權杖型驗證](xref:security/anti-request-forgery#token-based-authentication) [ (jwt) ](https://self-issued.info/docs/draft-ietf-oauth-json-web-token.html)由[cookie 型驗證](xref:security/anti-request-forgery#cookie-based-authentication)所選擇，以因應功能和安全性的理由：
+驗證 Spa 的其他選項是否存在，例如使用 SameSite cookie s。 不過，的工程設計 Blazor WebAssembly 是以 OAuth 和 OIDC 作為在應用程式中進行驗證的最佳選項來進行 Blazor WebAssembly 。 以 JSON Web 權杖為基礎的[權杖型驗證](xref:security/anti-request-forgery#token-based-authentication) [ (jwt) ](https://self-issued.info/docs/draft-ietf-oauth-json-web-token.html)是根據功能和安全性考慮而被選擇，而不是透過[ cookie 型驗證](xref:security/anti-request-forgery#cookie-based-authentication)：
 
 * 使用以權杖為基礎的通訊協定提供較小的受攻擊面，因為權杖不會在所有要求中傳送。
 * 伺服器端點不需要保護[跨網站偽造要求 (CSRF) ](xref:security/anti-request-forgery) ，因為權杖是以明確的形式傳送。 這可讓您將 Blazor WebAssembly 應用程式與 MVC 或 Razor pages 應用程式裝載在一起。
-* 權杖的許可權比 cookie 窄。 例如，除非明確地執行這類功能，否則權杖無法用來管理使用者帳戶或變更使用者的密碼。
+* 權杖的許可權比 cookie s 窄。 例如，除非明確地執行這類功能，否則權杖無法用來管理使用者帳戶或變更使用者的密碼。
 * 權杖的存留期很短，預設為一小時，這會限制攻擊時段。 權杖也可以隨時撤銷。
 * 獨立 Jwt 提供驗證程式的用戶端和伺服器保證。 例如，用戶端的方法是偵測並驗證它所收到的權杖是否合法，並在指定的驗證程式中發出。 如果協力廠商嘗試在驗證程式中途切換權杖，用戶端就可以偵測出切換的權杖，並避免使用它。
 * OAuth 和 OIDC 的權杖不依賴使用者代理程式正確運作，以確保應用程式的安全。

@@ -1,12 +1,14 @@
 ---
 title: 使用 ASP.NET Core 建立漸進式 Web 應用程式Blazor WebAssembly
 author: guardrex
-description: 瞭解如何建立以新的 Blazor 瀏覽器功能為基礎的漸進式 Web 應用程式（PWA），其行為類似于桌面應用程式。
+description: 瞭解如何建立以為 Blazor 基礎的漸進式 Web 應用程式 (PWA) ，其使用新式瀏覽器功能的行為就像桌面應用程式。
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
 ms.date: 06/10/2020
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -15,18 +17,18 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/progressive-web-app
-ms.openlocfilehash: 237a8fceb75ba724625f018cf94c8d5bc5acfdad
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: 1c33a3abd2ebee60a4025d4598495d276663dc9b
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85402581"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88014161"
 ---
-# <a name="build-progressive-web-applications-with-aspnet-core-blazor-webassembly"></a>使用 ASP.NET Core 建立漸進式 Web 應用程式Blazor WebAssembly
+# <a name="build-progressive-web-applications-with-aspnet-core-no-locblazor-webassembly"></a>使用 ASP.NET Core 建立漸進式 Web 應用程式Blazor WebAssembly
 
 作者：[Steve Sanderson](https://github.com/SteveSandersonMS)
 
-漸進式 Web 應用程式（PWA）通常是單一頁面應用程式（SPA），其使用新式瀏覽器 Api 和功能，其行為就像桌面應用程式。 Blazor WebAssembly是以標準為基礎的用戶端 web 應用程式平臺，因此可以使用任何瀏覽器 API，包括下列功能所需的 PWA Api：
+ (PWA) 的漸進式 Web 應用程式通常是單一頁面應用程式 (SPA) ，其使用新式瀏覽器 Api 和功能的行為，就像桌面應用程式一樣。 Blazor WebAssembly是以標準為基礎的用戶端 web 應用程式平臺，因此可以使用任何瀏覽器 API，包括下列功能所需的 PWA Api：
 
 * 離線工作並立即載入，獨立于網路速度。
 * 在自己的應用程式視窗中執行，而不只是瀏覽器視窗。
@@ -69,13 +71,13 @@ dotnet new blazorwasm -o MyNewProject --pwa
 
 造訪使用 PWA 範本建立的應用程式時，使用者可以選擇將應用程式安裝到其作業系統的 [開始] 功能表、[停駐] 或 [主畫面]。 此選項的呈現方式取決於使用者的瀏覽器。 使用以桌面 Chromium 為基礎的瀏覽器（例如 Edge 或 Chrome）時，URL 列中會出現 [**新增**] 按鈕。 在使用者選取 [**新增**] 按鈕之後，他們會收到確認對話方塊：
 
-![Google Chrome 中的確認 diaglog 會向使用者顯示「MyBlazorPwa」應用程式的 [安裝] 按鈕按鈕。](progressive-web-app/_static/image2.png)
+![Google Chrome 中的確認 diaglog 會向使用者顯示 [My：：： no-loc (Blazor) ：：:P wa] 應用程式的 [安裝] 按鈕按鈕。](progressive-web-app/_static/image2.png)
 
 在 iOS 上，訪客可以使用 Safari 的 [**共用**] 按鈕和其 [**新增至 Homescreen** ] 選項來安裝 PWA。 在適用于 Android 的 Chrome 上，使用者應該選取右上角的 [**功能表**] 按鈕，然後按一下 [**新增到主畫面**]。
 
 安裝之後，應用程式會出現在其本身的視窗中，而不會有位址列：
 
-![' MyBlazorPwa ' 應用程式會在沒有網址列的 Google Chrome 中執行。](progressive-web-app/_static/image3.png)
+![不含網址列的 [My：：： no-loc (Blazor) ：：:P wa] 應用程式會在 Google Chrome 中執行。](progressive-web-app/_static/image3.png)
 
 若要自訂視窗的標題、色彩配置、圖示或其他詳細資料，請參閱 `manifest.json` 專案目錄中的檔案 `wwwroot` 。 此檔案的架構是由 web 標準所定義。 如需詳細資訊，請參閱[MDN web 檔： Web 應用程式資訊清單](https://developer.mozilla.org/docs/Web/Manifest)。
 
@@ -91,7 +93,7 @@ dotnet new blazorwasm -o MyNewProject --pwa
 
 若要查看離線支援的運作方式：
 
-1. 發行應用程式。 如需詳細資訊，請參閱 <xref:blazor/host-and-deploy/index#publish-the-app> 。
+1. 發行應用程式。 如需詳細資訊，請參閱<xref:blazor/host-and-deploy/index#publish-the-app>。
 1. 將應用程式部署至支援 HTTPS 的伺服器，並在瀏覽器中以安全的 HTTPS 位址存取應用程式。
 1. 開啟瀏覽器的 [開發工具]，並確認已在 [**應用程式**] 索引標籤上註冊主機的*服務背景工作*：
 
@@ -133,7 +135,7 @@ Blazor的 PWA 範本會產生兩個服務工作者檔案：
   
   這就是為什麼瀏覽器的 `navigator.onLine` API 不可靠，且不應依賴的原因。
 
-* **它可確保正確性。** 建立離線資源的快取時，服務工作者會使用內容雜湊來確保它已在單一時刻取得完整且自我一致的資源快照集。 然後，此快取會當做不可部分完成的單位來使用。 由於只需要已快取的版本，因此不會要求網路提供較新的資源。 其他任何風險不一致和不相容（例如，嘗試使用未一起編譯的 .NET 元件版本）。
+* **它可確保正確性。** 建立離線資源的快取時，服務工作者會使用內容雜湊來確保它已在單一時刻取得完整且自我一致的資源快照集。 然後，此快取會當做不可部分完成的單位來使用。 由於只需要已快取的版本，因此不會要求網路提供較新的資源。 任何其他風險會造成不一致和不相容 (例如，嘗試使用無法一起編譯) 的 .NET 元件版本。
 
 ### <a name="background-updates"></a>背景更新
 
@@ -144,7 +146,7 @@ BlazorPWA 範本會產生應用程式，以便在使用者造訪並具有正常�
 * 在編譯期間，專案會產生*服務工作者資產資訊清單*。 根據預設，這會被呼叫 `service-worker-assets.js` 。 資訊清單會列出應用程式離線運作所需的所有靜態資源，例如 .NET 元件、JavaScript 檔案和 CSS，包括其內容雜湊。 資源清單是由服務工作者載入，讓它知道要快取的資源。
 * 每次使用者造訪應用程式時，瀏覽器會 `service-worker.js` 在背景重新要求和 `service-worker-assets.js` 。 這些檔案會與現有已安裝的服務背景工作角色進行逐位元組比較。 如果伺服器傳回上述任一檔案的變更內容，服務工作者會嘗試安裝新版的本身。
 * 安裝新版本的本身時，服務背景工作會為離線資源建立新的個別快取，並使用中列出的資源開始擴展快取 `service-worker-assets.js` 。 這個邏輯會在內的函式中實 `onInstall` 作用 `service-worker.published.js` 。
-* 載入所有資源時，如果沒有發生錯誤，且所有內容雜湊都相符，此程式就會順利完成。 如果成功，新的服務工作者會進入*等待啟用*狀態。 一旦使用者關閉應用程式（沒有剩餘的應用程式索引標籤或 windows），新的服務背景工作角色就*會變成作用中，並*用於後續的應用程式造訪。 系統會刪除舊的服務背景工作角色及其快取。
+* 載入所有資源時，如果沒有發生錯誤，且所有內容雜湊都相符，此程式就會順利完成。 如果成功，新的服務工作者會進入*等待啟用*狀態。 一旦使用者關閉應用程式 (不會有剩餘的應用程式索引標籤或 windows) ，新的服務背景工作角色就會變成作用*中，並*用於後續的應用程式造訪。 系統會刪除舊的服務背景工作角色及其快取。
 * 如果進程未順利完成，則會捨棄新的服務背景工作實例。 使用者下次造訪時，會再次嘗試更新程式，希望用戶端有更好的網路連線可以完成要求。
 
 編輯服務背景工作邏輯以自訂此程式。 上述行為都不是特有的， Blazor 但只是 PWA 範本選項所提供的預設體驗。 如需詳細資訊，請參閱[MDN web 檔：服務工作者 API](https://developer.mozilla.org/docs/Web/API/Service_Worker_API)。
@@ -194,7 +196,7 @@ const shouldServeIndexHtml = event.request.mode === 'navigate'
 * 任何 Blazor 管理的資源（例如 .net 元件和 .Net WebAssembly 執行時間檔案）都必須離線運作。
 * 所有用來發佈至應用程式目錄的資源 `wwwroot` ，例如影像、樣式表單和 JavaScript 檔案，包括外部專案和 NuGet 套件所提供的靜態 web 資產。
 
-您可以藉由編輯中的邏輯，來控制服務工作者要提取和快取哪些資源 `onInstall` `service-worker.published.js` 。 根據預設，服務工作者會提取並快取符合一般 web 副檔名的檔案 `.html` ，例如、 `.css` 、 `.js` 和 `.wasm` ，再加上 Blazor WebAssembly （ `.dll` ，）特有 `.pdb` 的檔案類型。
+您可以藉由編輯中的邏輯，來控制服務工作者要提取和快取哪些資源 `onInstall` `service-worker.published.js` 。 根據預設，服務工作者會提取並快取符合一般 web 副檔名的檔案，例如 `.html` 、 `.css` 、 `.js` 和 `.wasm` ，再加上 () 特有的檔案類型 Blazor WebAssembly `.dll` `.pdb` 。
 
 若要包含不存在於應用程式目錄中的其他資源 `wwwroot` ，請定義額外 `ItemGroup` 的 MSBuild 專案，如下列範例所示：
 
@@ -210,7 +212,7 @@ const shouldServeIndexHtml = event.request.mode === 'navigate'
 > [!IMPORTANT]
 > 新增 `ServiceWorkerAssetsManifestItem` 不會導致檔案在應用程式的目錄中發行 `wwwroot` 。 發行輸出必須分開控制。 `ServiceWorkerAssetsManifestItem`只會導致服務工作者資產資訊清單中出現額外的專案。
 
-## <a name="push-notifications"></a>推送通知
+## <a name="push-notifications"></a>推播通知
 
 就像任何其他 PWA 一樣， Blazor WebAssembly pwa 也可以從後端伺服器接收推播通知。 伺服器可以隨時傳送推播通知，即使使用者未主動使用應用程式也一樣。 例如，當其他使用者執行相關動作時，可以傳送推播通知。
 
@@ -293,7 +295,7 @@ PWA 範本可以與驗證搭配使用。 具有離線功能的 PWA 也可以在�
 
 * `OfflineAccountClaimsPrincipalFactory` (`Client/Data/OfflineAccountClaimsPrincipalFactory.cs`)
 * `LocalVehiclesStore` (`Client/Data/LocalVehiclesStore.cs`)
-* `LoginStatus`component （ `Client/Shared/LoginStatus.razor` ）
+* `LoginStatus`元件 (`Client/Shared/LoginStatus.razor`) 
 
 ## <a name="additional-resources"></a>其他資源
 

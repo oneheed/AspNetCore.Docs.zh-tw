@@ -5,6 +5,8 @@ description: 瞭解如何將驗證和身分識別從 ASP.NET MVC 專案遷移至
 ms.author: riande
 ms.date: 3/22/2020
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -13,22 +15,22 @@ no-loc:
 - Razor
 - SignalR
 uid: migration/identity
-ms.openlocfilehash: 995de894bc77c4db5e5683b36e691b0c5a3463d3
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: 8a6cc1e612dbf59dc2db2eca165dd1a03ab92f81
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85403751"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88014928"
 ---
-# <a name="migrate-authentication-and-identity-to-aspnet-core"></a>遷移驗證和 Identity ASP.NET Core
+# <a name="migrate-authentication-and-no-locidentity-to-aspnet-core"></a>遷移驗證和 Identity ASP.NET Core
 
 作者：[Steve Smith](https://ardalis.com/)
 
 在前一篇文章中，我們將設定[從 ASP.NET mvc 專案遷移至 ASP.NET CORE mvc](xref:migration/configuration)。 在本文中，我們會遷移註冊、登入和使用者管理功能。
 
-## <a name="configure-identity-and-membership"></a>設定 Identity 和成員資格
+## <a name="configure-no-locidentity-and-membership"></a>設定 Identity 和成員資格
 
-在 ASP.NET MVC 中，驗證和身分識別功能是使用 Identity *Startup.Auth.cs*和*IdentityConfig.cs*中的 ASP.NET （位於*App_Start*資料夾）來設定。 在 ASP.NET Core MVC 中，這些功能會在*Startup.cs*中設定。
+在 ASP.NET MVC 中，驗證和身分識別功能是使用 Identity *Startup.Auth.cs*和* Identity Config.cs*中的 ASP.NET （位於*App_Start*資料夾）來設定。 在 ASP.NET Core MVC 中，這些功能會在*Startup.cs*中設定。
 
 安裝下列 NuGet 套件：
 
@@ -53,7 +55,7 @@ public void ConfigureServices(IServiceCollection services)
 }
 ```
 
-此時，上述程式碼中已參考了兩種類型，我們尚未從 ASP.NET MVC 專案進行遷移： `ApplicationDbContext` 和 `ApplicationUser` 。 在 ASP.NET Core 專案中建立新的 [*模型*] 資料夾，並在其中加入對應至這些類型的兩個類別。 您會在 */Models/IdentityModels.cs*中找到這些類別的 ASP.NET MVC 版本，但在遷移的專案中，每個類別都會使用一個檔案，因為這更為清楚。
+此時，上述程式碼中已參考了兩種類型，我們尚未從 ASP.NET MVC 專案進行遷移： `ApplicationDbContext` 和 `ApplicationUser` 。 在 ASP.NET Core 專案中建立新的 [*模型*] 資料夾，並在其中加入對應至這些類型的兩個類別。 您會在 */Models/ Identity Models.cs*中找到這些類別的 ASP.NET MVC 版本，但在遷移的專案中，每個類別都會使用一個檔案，因為這更為清楚。
 
 *ApplicationUser.cs*：
 
@@ -125,7 +127,7 @@ Identity針對使用 Entity Framework 和 SQL Server 設定的應用程式和資
 
 現在，將名為 Razor *_LoginPartial*的新視圖加入*至 Views/Shared*資料夾：
 
-使用下列程式碼更新 *_LoginPartial. cshtml* （取代其所有內容）：
+使用下列程式碼更新 *_LoginPartial. cshtml* ， (取代其所有內容) ：
 
 ```cshtml
 @inject SignInManager<ApplicationUser> SignInManager
@@ -155,6 +157,6 @@ else
 
 此時，您應該能夠在瀏覽器中重新整理網站。
 
-## <a name="summary"></a>摘要
+## <a name="summary"></a>總結
 
 ASP.NET Core 引進 ASP.NET 功能的變更 Identity 。 在本文中，您已瞭解如何將 ASP.NET 的驗證和使用者管理功能遷移 Identity 至 ASP.NET Core。

@@ -337,14 +337,20 @@
                   href: blazor/forms-validation.md#built-in-forms-components
                 - name: InputTextArea
                   href: blazor/forms-validation.md#built-in-forms-components
+                - name: 連結
+                  href: blazor/fundamentals/additional-scenarios.md#influence-html-head-tag-elements
                 - name: MainLayout
                   href: blazor/layouts.md#mainlayout-component
+                - name: 中繼
+                  href: blazor/fundamentals/additional-scenarios.md#influence-html-head-tag-elements
                 - name: NavLink
                   href: blazor/fundamentals/routing.md#navlink-component
                 - name: NavMenu
                   href: blazor/fundamentals/routing.md#navlink-component
                 - name: 路由器
                   href: blazor/fundamentals/routing.md#route-templates
+                - name: Title
+                  href: blazor/fundamentals/additional-scenarios.md#influence-html-head-tag-elements
             - name: 串聯的值及參數
               uid: blazor/components/cascading-values-and-parameters
             - name: 資料繫結
@@ -411,6 +417,8 @@
           uid: blazor/state-management
         - name: 偵錯 WebAssembly
           uid: blazor/debug
+        - name: 含 WebAssembly 的延遲載入組件
+          uid: blazor/webassembly-lazy-load-assemblies
         - name: WebAssembly 效能
           uid: blazor/webassembly-performance-best-practices
         - name: 漸進式 Web 應用程式

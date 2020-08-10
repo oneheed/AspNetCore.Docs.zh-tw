@@ -125,7 +125,7 @@ HubConnection hubConnection = HubConnectionBuilder.create("YOUR HUB URL HERE")
 
 ## <a name="additional-resources"></a>其他資源
 
-* [Java API 參照](/java/api/com.microsoft.signalr?view=aspnet-signalr-java)
+* [Java API 參考](/java/api/com.microsoft.signalr?view=aspnet-signalr-java)
 * <xref:signalr/hubs>
 * <xref:signalr/javascript-client>
 * <xref:signalr/publish-to-azure-web-app>

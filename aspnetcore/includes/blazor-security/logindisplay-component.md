@@ -1,4 +1,4 @@
-`LoginDisplay`元件（ `Shared/LoginDisplay.razor` ）會在 `MainLayout` 元件（）中轉譯 `Shared/MainLayout.razor` ，並管理下列行為：
+`LoginDisplay`元件 (`Shared/LoginDisplay.razor`) 會在 `MainLayout` 元件 () 中呈現 `Shared/MainLayout.razor` ，並管理下列行為：
 
 * 針對已驗證的使用者：
   * 顯示目前的使用者名稱。

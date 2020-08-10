@@ -37,6 +37,6 @@ Cookie 和網站資料可以跨應用程式更新保存，並干擾測試和疑�
 * 使用**Debug**  >  功能表中的 [**開始調試**]。
 * 按 <kbd>F5</kbd>。
 
-### <a name="inspect-the-content-of-a-json-web-token-jwt"></a>檢查 JSON Web 權杖（JWT）的內容
+### <a name="inspect-the-content-of-a-json-web-token-jwt"></a>檢查 (JWT 的 JSON Web 權杖內容) 
 
-若要解碼 JSON Web Token （JWT），請使用 Microsoft 的[jwt.ms](https://jwt.ms/)工具。 UI 中的值永遠不會離開您的瀏覽器。
+若要將 JSON Web Token 解碼 (JWT) ，請使用 Microsoft 的[jwt.ms](https://jwt.ms/)工具。 UI 中的值永遠不會離開您的瀏覽器。

@@ -102,7 +102,7 @@ Application Insights 提供有用的伺服器端資訊，而不需進行其他�
 1. 開啟** (Filesystem) 的應用程式記錄**。 若出現提示，請按一下方塊以安裝延伸模組，以在 web 應用程式中啟用應用程式記錄。
 1. 將 [ **Web 服務器記錄**] 設定為 [**檔案系統**]。
 1. 輸入**保留期限**（以天為單位）。 例如，30。
-1. 按一下 **[儲存]** 。
+1. 按一下 [檔案] 。
 
 系統會為 web 應用程式產生 ASP.NET Core 和 web 伺服器 (App Service) 記錄。 您可以使用顯示的 FTP/FTPS 資訊來下載它們。 此密碼與本指南稍早建立的部署認證相同。 [您可以使用 PowerShell 或 Azure CLI，將記錄直接串流至您的本機電腦](/azure/app-service/web-sites-enable-diagnostic-log#download)。 您也可以[在 Application Insights 中查看](/azure/app-service/web-sites-enable-diagnostic-log#how-to-view-logs-in-application-insights)記錄。
 

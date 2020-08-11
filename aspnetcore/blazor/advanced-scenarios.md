@@ -17,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/advanced-scenarios
-ms.openlocfilehash: d6446447a51e22b7df1289e7ef20a4a6381c2b20
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: 4bd73acd821a8791d7f6cc93545edc2e39a6f2c7
+ms.sourcegitcommit: 68d03d1aee8906b53bda66f8f1e0747efc3007e6
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88012523"
+ms.lasthandoff: 08/10/2020
+ms.locfileid: "88051780"
 ---
 # <a name="aspnet-core-no-locblazor-advanced-scenarios"></a>ASP.NET Core Blazor advanced 案例
 
@@ -97,7 +97,7 @@ public void ConfigureServices(IServiceCollection services)
 }
 ```
 
-在下列範例中，方法中的迴圈會 `CreateComponent` 產生三個 `PetDetails` 元件。 呼叫 <xref:Microsoft.AspNetCore.Components.Rendering.RenderTreeBuilder> 方法來建立 (和) 的元件時 `OpenComponent` `AddAttribute` ，序號是源程式碼號。 Blazor差異演算法依賴對應于不同程式程式碼的序號，而不是相異的呼叫調用。 使用方法建立元件時 <xref:Microsoft.AspNetCore.Components.Rendering.RenderTreeBuilder> ，硬式編碼序號的引數。 **使用計算或計數器來產生序號可能會導致效能不佳。** 如需詳細資訊，請參閱[序號與程式程式碼號，而不是執行順序](#sequence-numbers-relate-to-code-line-numbers-and-not-execution-order)一節。
+在下列範例中，方法中的迴圈會 `CreateComponent` 產生三個 `PetDetails` 元件。 在 <xref:Microsoft.AspNetCore.Components.Rendering.RenderTreeBuilder> 具有序號的方法中，序號是源程式碼數。 Blazor差異演算法依賴對應于不同程式程式碼的序號，而不是相異的呼叫調用。 使用方法建立元件時 <xref:Microsoft.AspNetCore.Components.Rendering.RenderTreeBuilder> ，硬式編碼序號的引數。 **使用計算或計數器來產生序號可能會導致效能不佳。** 如需詳細資訊，請參閱[序號與程式程式碼號，而不是執行順序](#sequence-numbers-relate-to-code-line-numbers-and-not-execution-order)一節。
 
 `BuiltContent`成分
 

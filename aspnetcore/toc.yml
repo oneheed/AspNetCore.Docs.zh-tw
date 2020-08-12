@@ -163,9 +163,14 @@
         - name: Web API 應用程式 >>
           displayName: tutorial
           href: /learn/modules/build-web-api-net-core/
-        - name: 雲端原生微服務 >>
-          displayName: 'tutorial, kubernetes, aks, acr, docker'
-          href: /learn/modules/microservices-aspnet-core/
+        - name: 雲端原生微服務
+          items:
+            - name: 建立及部署 >>
+              displayName: 'tutorial, kubernetes, aks, acr, docker'
+              href: /learn/modules/microservices-aspnet-core/
+            - name: 實作復原功能 >>
+              displayName: 'tutorial, kubernetes, aks, acr, docker'
+              href: /learn/modules/microservices-resiliency-aspnet-core/
         - name: 資料存取 >>
           displayName: 'tutorial, ef, entity framework'
           href: /learn/modules/persist-data-ef-core/
@@ -1191,6 +1196,8 @@
       uid: performance/diagnostic-tools
     - name: 負載與壓力測試
       uid: test/loadtests
+    - name: 事件計數器
+      href: /dotnet/core/diagnostics/event-counter-perf
 - name: 全球化和當地語系化
   items:
     - name: 總覽

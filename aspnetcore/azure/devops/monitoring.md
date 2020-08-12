@@ -3,7 +3,7 @@ title: 使用 ASP.NET Core 和 Azure 進行監視和 DevOps
 author: CamSoper
 description: 使用 ASP.NET Core 和 Azure，以 DevOps 解決方案的一部分監視和偵錯工具代碼
 ms.author: casoper
-ms.custom: mvc, seodec18
+ms.custom: devx-track-csharp, mvc, seodec18
 ms.date: 07/10/2019
 no-loc:
 - cookie
@@ -16,12 +16,12 @@ no-loc:
 - Razor
 - SignalR
 uid: azure/devops/monitor
-ms.openlocfilehash: 9e8b48df5a3ecf78e315c7f33b5ab75d6f329cc2
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: 98d7c820b20f4f4c6b57f283ef718ce056dcdcae
+ms.sourcegitcommit: ba4872dd5a93780fe6cfacb2711ec1e69e0df92c
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88012770"
+ms.lasthandoff: 08/12/2020
+ms.locfileid: "88130492"
 ---
 # <a name="monitor-and-debug"></a>監視和調試
 

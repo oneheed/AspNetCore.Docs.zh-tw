@@ -4,7 +4,7 @@ author: guardrex
 description: 瞭解如何設定 Blazor WebAssembly ，以使用 Azure Active Directory 群組和角色。
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
-ms.custom: mvc
+ms.custom: devx-track-csharp, mvc
 ms.date: 07/28/2020
 no-loc:
 - cookie
@@ -17,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/security/webassembly/aad-groups-roles
-ms.openlocfilehash: 6fe96616abf423df600bfdd7198e63198358e7a3
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: bd0a7c5a905ae4888ea6ad326be5b16cbfaa10fc
+ms.sourcegitcommit: ba4872dd5a93780fe6cfacb2711ec1e69e0df92c
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88013784"
+ms.lasthandoff: 08/12/2020
+ms.locfileid: "88130401"
 ---
 # <a name="azure-ad-groups-administrative-roles-and-user-defined-roles"></a>Azure AD 群組、系統管理角色和使用者定義的角色
 
@@ -33,7 +33,7 @@ Azure Active Directory (AAD) 提供幾種可與 ASP.NET Core 結合的授權方�
 * 使用者定義的群組
   * 安全性
   * O365
-  * 發行版本
+  * 散發
 * 角色
   * 內建的系統管理角色
   * 使用者定義角色

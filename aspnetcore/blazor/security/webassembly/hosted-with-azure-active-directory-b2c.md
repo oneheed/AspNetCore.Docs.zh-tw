@@ -17,18 +17,18 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/security/webassembly/hosted-with-azure-active-directory-b2c
-ms.openlocfilehash: 4949964c3fd0139aa679cc6af28b7cf29e581f0f
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: 8b8cf77cde281b8ea6a09d8edaec6606383a4c04
+ms.sourcegitcommit: ba4872dd5a93780fe6cfacb2711ec1e69e0df92c
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88013940"
+ms.lasthandoff: 08/12/2020
+ms.locfileid: "88130453"
 ---
 # <a name="secure-an-aspnet-core-no-locblazor-webassembly-hosted-app-with-azure-active-directory-b2c"></a>Blazor WebAssembly使用 Azure Active Directory B2C 保護 ASP.NET Core 託管應用程式
 
 By [Javier Calvarro Nelson](https://github.com/javiercn)和[Luke Latham](https://github.com/guardrex)
 
-本文說明如何建立 Blazor WebAssembly 使用[AZURE ACTIVE DIRECTORY (AAD) B2C](/azure/active-directory-b2c/overview)進行驗證的獨立應用程式。
+本文說明如何建立[託管 Blazor WebAssembly 應用程式](xref:blazor/hosting-models#blazor-webassembly)，以使用[AZURE ACTIVE DIRECTORY (AAD) B2C](/azure/active-directory-b2c/overview)進行驗證。
 
 ## <a name="register-apps-in-aad-b2c-and-create-solution"></a>在 AAD B2C 中註冊應用程式並建立解決方案
 
@@ -56,7 +56,7 @@ By [Javier Calvarro Nelson](https://github.com/javiercn)和[Luke Latham](https:/
 
 在中**公開 API**：
 
-1. 選取 [新增範圍]。
+1. 選取 [新增範圍]  。
 1. 選取 [儲存並繼續]  。
 1. 提供 (的**範圍名稱**，例如 `API.Access`) 。
 1. 提供系統**管理員同意顯示名稱** (例如， `Access API`) 。

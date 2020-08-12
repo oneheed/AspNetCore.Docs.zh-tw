@@ -3,7 +3,7 @@ title: 工具和下載-使用 ASP.NET Core 和 Azure DevOps
 author: CamSoper
 description: 使用 ASP.NET Core 和 Azure 進行 DevOps 所需的工具和下載。
 ms.author: casoper
-ms.custom: mvc, seodec18
+ms.custom: devx-track-csharp, mvc, seodec18
 ms.date: 10/24/2018
 no-loc:
 - cookie
@@ -16,12 +16,12 @@ no-loc:
 - Razor
 - SignalR
 uid: azure/devops/tools-and-downloads
-ms.openlocfilehash: e224121692a0965c66bd3b95b3fbf691867d5548
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: 0820e9647d0171634e40d4e3aa31ffe65c5a9ec4
+ms.sourcegitcommit: ba4872dd5a93780fe6cfacb2711ec1e69e0df92c
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88012536"
+ms.lasthandoff: 08/12/2020
+ms.locfileid: "88130414"
 ---
 # <a name="tools-and-downloads"></a>工具及下載
 

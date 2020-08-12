@@ -5,7 +5,7 @@ description: 瞭解 Blazor WebAssembly 和 Blazor Server 裝載模型。
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 05/19/2020
+ms.date: 08/11/2020
 no-loc:
 - cookie
 - Cookie
@@ -17,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/hosting-models
-ms.openlocfilehash: 0d2ee7862c5737a1e16335a5d5987779884d5536
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: 14fa13bafa984c0ca7b9fd8cde538042cc0ec2cc
+ms.sourcegitcommit: ba4872dd5a93780fe6cfacb2711ec1e69e0df92c
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88014278"
+ms.lasthandoff: 08/12/2020
+ms.locfileid: "88130440"
 ---
 # <a name="aspnet-core-no-locblazor-hosting-models"></a>ASP.NET Core Blazor 裝載模型
 
@@ -32,13 +32,13 @@ Blazor是一種 web 架構，其設計目的是要在以[WebAssembly](https://we
 
 ## Blazor WebAssembly
 
-的主要裝載模型 Blazor 是在 WebAssembly 的瀏覽器中執行用戶端。 Blazor應用程式、其相依性和 .net 執行時間會下載至瀏覽器。 應用程式會直接在瀏覽器 UI 執行緒上執行。 UI 更新和事件處理會在同一個進程中進行。 應用程式的資產會以靜態檔案的形式部署至 web 伺服器或服務，以提供靜態內容給用戶端。
+的主要裝載模型 Blazor 是在 WebAssembly 的瀏覽器中執行用戶端。 Blazor應用程式、其相依性和 .net 執行時間會下載至瀏覽器。 應用程式會直接在瀏覽器 UI 執行緒上執行。 UI 更新和事件處理會在同一個進程中進行。 應用程式的資產會以靜態檔案的形式部署至 web 伺服器或服務，以提供靜態內容給用戶端。 因為應用程式是針對沒有後端 ASP.NET Core 應用程式的部署而建立，所以它稱為*獨立 Blazor WebAssembly 應用程式*。
 
 ![：：： no-loc (Blazor WebAssembly) ：：：： (Blazor) ：：：應用程式會在瀏覽器內的 UI 執行緒上執行。](hosting-models/_static/blazor-webassembly.png)
 
 若要 Blazor 使用用戶端裝載模型來建立應用程式，請使用** Blazor WebAssembly 應用程式**範本 [`dotnet new blazorwasm`](/dotnet/core/tools/dotnet-new) () 。
 
-選取** Blazor WebAssembly 應用程式**範本之後，您可以選擇將應用程式設定為使用 ASP.NET Core 後端，方法是選取 [ **ASP.NET Core**裝載] 核取方塊 ([`dotnet new blazorwasm --hosted`](/dotnet/core/tools/dotnet-new)) ]。 ASP.NET Core 應用程式會將 Blazor 應用程式提供給用戶端。 Blazor WebAssembly應用程式可以使用 Web API 呼叫或 () ，透過網路與伺服器 [SignalR](xref:signalr/introduction) 互動 <xref:tutorials/signalr-blazor-webassembly> 。
+選取** Blazor WebAssembly 應用程式**範本之後，您可以選擇將應用程式設定為使用 ASP.NET Core 後端，方法是選取 [ **ASP.NET Core**裝載] 核取方塊 ([`dotnet new blazorwasm --hosted`](/dotnet/core/tools/dotnet-new)) ]。 ASP.NET Core 應用程式會將 Blazor 應用程式提供給用戶端。 具有 ASP.NET Core 後端的應用程式稱為*託管 Blazor WebAssembly 應用程式*。 Blazor WebAssembly應用程式可以使用 Web API 呼叫或 () ，透過網路與伺服器 [SignalR](xref:signalr/introduction) 互動 <xref:tutorials/signalr-blazor-webassembly> 。
 
 這些範本包含 `blazor.webassembly.js` 處理的腳本：
 

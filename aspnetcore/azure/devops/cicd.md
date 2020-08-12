@@ -4,7 +4,7 @@ author: CamSoper
 description: 使用 ASP.NET Core 和 Azure 在 DevOps 中進行持續整合和部署
 ms.author: scaddie
 ms.date: 10/24/2018
-ms.custom: mvc, seodec18
+ms.custom: devx-track-csharp, mvc, seodec18
 no-loc:
 - cookie
 - Cookie
@@ -16,14 +16,14 @@ no-loc:
 - Razor
 - SignalR
 uid: azure/devops/cicd
-ms.openlocfilehash: 780d233014c26e37886d6bc5bd8fcb23d857dff0
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: 26ca6c416691c75c4bad73dca4c8383325af025d
+ms.sourcegitcommit: ba4872dd5a93780fe6cfacb2711ec1e69e0df92c
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88012609"
+ms.lasthandoff: 08/12/2020
+ms.locfileid: "88130467"
 ---
-# <a name="continuous-integration-and-deployment"></a>持續整合及部署
+# <a name="continuous-integration-and-deployment"></a>持續整合與部署
 
 在上一章中，您已建立簡單摘要讀取器應用程式的本機 Git 存放庫。 在本章中，您會將該程式碼發佈至 GitHub 存放庫，並使用 Azure Pipelines 來建立 Azure DevOps Services 管線。 管線會啟用應用程式的連續組建和部署。 任何對 GitHub 存放庫的認可都會觸發組建和部署至 Azure Web 應用程式的預備位置。
 

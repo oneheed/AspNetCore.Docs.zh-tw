@@ -17,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: fundamentals/middleware/write
-ms.openlocfilehash: dd6a26d07e20f9795bbe3fbe6da59027e757782e
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: 480120718959a364ce8008949c3b76c558c0e995
+ms.sourcegitcommit: ba4872dd5a93780fe6cfacb2711ec1e69e0df92c
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88016914"
+ms.lasthandoff: 08/12/2020
+ms.locfileid: "88130583"
 ---
 # <a name="write-custom-aspnet-core-middleware"></a>撰寫自訂的 ASP.NET Core 中介軟體
 
@@ -85,6 +85,8 @@ public class CustomMiddleware
 }
 ```
 
+[存留期和註冊選項](xref:fundamentals/dependency-injection#lifetime-and-registration-options)包含具有*範圍*存留期服務之中介軟體的完整範例。
+
 ## <a name="middleware-extension-method"></a>中介軟體擴充方法
 
 下列擴充方法透過 <xref:Microsoft.AspNetCore.Builder.IApplicationBuilder> 公開中介軟體：
@@ -97,6 +99,7 @@ public class CustomMiddleware
 
 ## <a name="additional-resources"></a>其他資源
 
+* [存留期和註冊選項](xref:fundamentals/dependency-injection#lifetime-and-registration-options)包含中介軟體的完整範例，內含*範圍*、*暫時性*和*單一*存留期服務。
 * <xref:fundamentals/middleware/index>
 * <xref:test/middleware>
 * <xref:migration/http-modules>

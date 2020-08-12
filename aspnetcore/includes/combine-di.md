@@ -1,0 +1,17 @@
+<a name="csc"></a>
+
+## <a name="combining-service-collection"></a><span data-ttu-id="b50f8-101">合併服務集合</span><span class="sxs-lookup"><span data-stu-id="b50f8-101">Combining service collection</span></span>
+
+<span data-ttu-id="b50f8-102">請考慮下列 `ConfigureServices` 包含數個服務集合的：</span><span class="sxs-lookup"><span data-stu-id="b50f8-102">Consider the following `ConfigureServices` that contains several service collections:</span></span>
+
+[!code-csharp[](~/fundamentals/configuration/index/samples/3.x/ConfigSample/Startup2.cs?name=snippet)]
+
+<span data-ttu-id="b50f8-103">可以將相關的註冊群組移至擴充方法，以註冊服務。</span><span class="sxs-lookup"><span data-stu-id="b50f8-103">Related groups of registrations can be moved to an extension method to register services.</span></span> <span data-ttu-id="b50f8-104">例如，設定服務會新增至下列類別：</span><span class="sxs-lookup"><span data-stu-id="b50f8-104">For example, the configuration services are added to the following class:</span></span>
+
+[!code-csharp[](~/fundamentals/configuration/index/samples/3.x/ConfigSample/Options/MyConfgServiceCollectionExtensions.cs)]
+
+<span data-ttu-id="b50f8-105">其餘服務會在類似的類別中註冊。</span><span class="sxs-lookup"><span data-stu-id="b50f8-105">The remaining services are registered in a similar class.</span></span> <span data-ttu-id="b50f8-106">下列 `ConfigureServices` 使用新的擴充方法來註冊服務：</span><span class="sxs-lookup"><span data-stu-id="b50f8-106">The following `ConfigureServices` uses the new extension methods to register the services:</span></span>
+
+[!code-csharp[](~/fundamentals/configuration/index/samples/3.x/ConfigSample/Startup4.cs?name=snippet)]
+
+<span data-ttu-id="b50f8-107">***注意：*** 每個 `services.Add{SERVICE_NAME}` 擴充方法都會新增並可能設定服務。</span><span class="sxs-lookup"><span data-stu-id="b50f8-107">***Note:*** Each `services.Add{SERVICE_NAME}` extension method adds and potentially configures services.</span></span> <span data-ttu-id="b50f8-108">例如，會 <xref:Microsoft.Extensions.DependencyInjection.MvcServiceCollectionExtensions.AddControllersWithViews%2A> 加入具有 views 所需的服務 MVC 控制器。</span><span class="sxs-lookup"><span data-stu-id="b50f8-108">For example, <xref:Microsoft.Extensions.DependencyInjection.MvcServiceCollectionExtensions.AddControllersWithViews%2A> adds the services MVC controllers with views require.</span></span> <span data-ttu-id="b50f8-109"><xref:Microsoft.Extensions.DependencyInjection.MvcServiceCollectionExtensions.AddRazorPages%2A>新增 Razor Pages 所需的服務。</span><span class="sxs-lookup"><span data-stu-id="b50f8-109"><xref:Microsoft.Extensions.DependencyInjection.MvcServiceCollectionExtensions.AddRazorPages%2A> adds the services Razor Pages require.</span></span> <span data-ttu-id="b50f8-110">我們建議應用程式遵循此命名慣例。</span><span class="sxs-lookup"><span data-stu-id="b50f8-110">We recommended that apps follow this naming convention.</span></span> <span data-ttu-id="b50f8-111">在 [Microsoft.Extensions.DependencyInjection](/dotnet/api/microsoft.extensions.dependencyinjection) 命名空間中放置擴充方法，以封裝服務註冊群組。</span><span class="sxs-lookup"><span data-stu-id="b50f8-111">Place extension methods in the [Microsoft.Extensions.DependencyInjection](/dotnet/api/microsoft.extensions.dependencyinjection) namespace to encapsulate groups of service registrations.</span></span>

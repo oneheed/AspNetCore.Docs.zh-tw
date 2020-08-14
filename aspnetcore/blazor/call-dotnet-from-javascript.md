@@ -1,11 +1,11 @@
 ---
-title: 從 ASP.NET Core 中的 JavaScript 函數呼叫 .NET 方法Blazor
+title: 從 ASP.NET Core 中的 JavaScript 函數呼叫 .NET 方法 Blazor
 author: guardrex
 description: 瞭解如何從應用程式中的 JavaScript 函式叫用 .NET 方法 Blazor 。
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 07/07/2020
+ms.date: 08/12/2020
 no-loc:
 - cookie
 - Cookie
@@ -17,18 +17,18 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/call-dotnet-from-javascript
-ms.openlocfilehash: 5a0731b45424ffd8560bb3b0d9123c686ae9e247
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: 65a339bc7b246ab1825ad9bad5a2b5523259b488
+ms.sourcegitcommit: ec41ab354952b75557240923756a8c2ac79b49f8
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88012562"
+ms.lasthandoff: 08/13/2020
+ms.locfileid: "88202735"
 ---
-# <a name="call-net-methods-from-javascript-functions-in-aspnet-core-no-locblazor"></a>從 ASP.NET Core 中的 JavaScript 函數呼叫 .NET 方法Blazor
+# <a name="call-net-methods-from-javascript-functions-in-aspnet-core-no-locblazor"></a>從 ASP.NET Core 中的 JavaScript 函數呼叫 .NET 方法 Blazor
 
-By [Javier Calvarro Nelson](https://github.com/javiercn)、 [Daniel Roth](https://github.com/danroth27)、 [Shashikant](http://wisne.co)Rudrawadi 和[Luke Latham](https://github.com/guardrex)
+By [Javier Calvarro Nelson](https://github.com/javiercn)、 [Daniel Roth](https://github.com/danroth27)、 [Shashikant](http://wisne.co)Rudrawadi 和 [Luke Latham](https://github.com/guardrex)
 
-Blazor應用程式可以從 javascript 函數的 .net 方法和 .net 方法叫用 javascript 函式。 這些案例稱為*JavaScript 互通性* (*JS interop*) 。
+Blazor應用程式可以從 javascript 函數的 .net 方法和 .net 方法叫用 javascript 函式。 這些案例稱為 *JavaScript 互通性* (*JS interop*) 。
 
 本文涵蓋從 JavaScript 叫用 .NET 方法。 如需如何從 .NET 呼叫 JavaScript 函式的詳細資訊，請參閱 <xref:blazor/call-javascript-from-dotnet> 。
 
@@ -233,11 +233,16 @@ Hello, Blazor!
 * 使用或函式 `invokeMethod` `invokeMethodAsync` ，對元件進行靜態方法呼叫。
 * 元件的靜態方法會將其實例方法的呼叫包裝為叫用的 <xref:System.Action> 。
 
+> [!NOTE]
+> 若是 Blazor Server 有數個使用者可能同時使用相同元件的應用程式，請使用 helper 類別來叫用實例方法。
+>
+> 如需詳細資訊，請參閱 [元件實例方法 helper 類別](#component-instance-method-helper-class) 一節。
+
 在用戶端 JavaScript 中：
 
 ```javascript
 function updateMessageCallerJS() {
-  DotNet.invokeMethod('{APP ASSEMBLY}', 'UpdateMessageCaller');
+  DotNet.invokeMethodAsync('{APP ASSEMBLY}', 'UpdateMessageCaller');
 }
 ```
 
@@ -279,7 +284,70 @@ function updateMessageCallerJS() {
 }
 ```
 
-有數個元件時，每個都有實例方法來呼叫，請使用 helper 類別來叫用實例方法， (做為 <xref:System.Action> 每個元件的) 。
+若要將引數傳遞給實例方法：
+
+* 將參數新增至 JS 方法調用。 在下列範例中，會將名稱傳遞給方法。 您可以視需要將其他參數新增至清單。
+
+  ```javascript
+  function updateMessageCallerJS(name) {
+    DotNet.invokeMethodAsync('{APP ASSEMBLY}', 'UpdateMessageCaller', name);
+  }
+  ```
+  
+  預留位置 `{APP ASSEMBLY}` 為應用程式的應用程式元件名稱 (例如， `BlazorSample`) 。
+
+* 為參數提供正確的類型 <xref:System.Action> 。 將參數清單提供給 c # 方法。 <xref:System.Action> `UpdateMessage` 使用 () 的參數叫用 () `action.Invoke(name)` 。
+
+  `Pages/JSInteropComponent.razor`:
+
+  ```razor
+  @page "/JSInteropComponent"
+
+  <p>
+      Message: @message
+  </p>
+
+  <p>
+      <button onclick="updateMessageCallerJS('Sarah Jane')">
+          Call JS Method
+      </button>
+  </p>
+
+  @code {
+      private static Action<string> action;
+      private string message = "Select the button.";
+
+      protected override void OnInitialized()
+      {
+          action = UpdateMessage;
+      }
+
+      private void UpdateMessage(string name)
+      {
+          message = $"{name}, UpdateMessage Called!";
+          StateHasChanged();
+      }
+
+      [JSInvokable]
+      public static void UpdateMessageCaller(string name)
+      {
+          action.Invoke(name);
+      }
+  }
+  ```
+
+  `message`選取 [**呼叫 JS 方法**] 按鈕時的輸出：
+
+  ```
+  Sarah Jane, UpdateMessage Called!
+  ```
+
+## <a name="component-instance-method-helper-class"></a>元件實例方法 helper 類別
+
+Helper 類別是用來叫用實例方法做為 <xref:System.Action> 。 Helper 類別在下列情況中很有用：
+
+* 相同類型的數個元件會呈現在相同的頁面上。
+* Blazor Server使用應用程式，其中有多個使用者可能同時使用元件。
 
 在下例中︰
 
@@ -388,5 +456,5 @@ window.updateMessageCallerJS = (dotnetHelper) => {
 ## <a name="additional-resources"></a>其他資源
 
 * <xref:blazor/call-javascript-from-dotnet>
-* [`InteropComponent.razor`範例 (dotnet/AspNetCore GitHub 存放庫，3.1 發行分支) ](https://github.com/dotnet/AspNetCore/blob/release/3.1/src/Components/test/testassets/BasicTestApp/InteropComponent.razor)
+* [`InteropComponent.razor` 範例 (dotnet/AspNetCore GitHub 存放庫，3.1 發行分支) ](https://github.com/dotnet/AspNetCore/blob/release/3.1/src/Components/test/testassets/BasicTestApp/InteropComponent.razor)
 * [在應用程式中執行大型資料傳輸 Blazor Server](xref:blazor/advanced-scenarios#perform-large-data-transfers-in-blazor-server-apps)

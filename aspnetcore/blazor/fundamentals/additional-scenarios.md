@@ -5,7 +5,7 @@ description: 深入瞭解 ASP.NET Core 裝載模型設定的其他案例 Blazor 
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 07/10/2020
+ms.date: 08/12/2020
 no-loc:
 - cookie
 - Cookie
@@ -17,20 +17,20 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/fundamentals/additional-scenarios
-ms.openlocfilehash: dbad91e46a95d9ab5ec62d66e0d9a18938ff4520
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: 618e451f5cb8a4e8eaf355d398fdeb80190cf559
+ms.sourcegitcommit: ec41ab354952b75557240923756a8c2ac79b49f8
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88014460"
+ms.lasthandoff: 08/13/2020
+ms.locfileid: "88202712"
 ---
 # <a name="aspnet-core-no-locblazor-hosting-model-configuration"></a>ASP.NET Core Blazor 裝載模型設定
 
-By [Daniel Roth](https://github.com/danroth27)、 [Mackinnon Buck](https://github.com/MackinnonBuck)和[Luke Latham](https://github.com/guardrex)
+By [Daniel Roth](https://github.com/danroth27)、 [Mackinnon Buck](https://github.com/MackinnonBuck)和 [Luke Latham](https://github.com/guardrex)
 
 本文涵蓋主控模型設定。
 
-### <a name="no-locsignalr-cross-origin-negotiation-for-authentication"></a>SignalR用於驗證的跨原始來源協調
+### <a name="no-locsignalr-cross-origin-negotiation-for-authentication"></a>SignalR 用於驗證的跨原始來源協調
 
 *本節適用于 Blazor WebAssembly 。*
 
@@ -102,7 +102,7 @@ By [Daniel Roth](https://github.com/danroth27)、 [Mackinnon Buck](https://githu
 
 *本節適用于 Blazor Server 。*
 
-Blazor Server在建立伺服器的用戶端連接之前，預設會將應用程式設定為在伺服器上預先呈現該 UI。 這會在頁面中設定 `_Host.cshtml` Razor ：
+Blazor Server 在建立伺服器的用戶端連接之前，預設會將應用程式設定為在伺服器上預先呈現該 UI。 這會在頁面中設定 `_Host.cshtml` Razor ：
 
 ```cshtml
 <body>
@@ -114,12 +114,12 @@ Blazor Server在建立伺服器的用戶端連接之前，預設會將應用程�
 </body>
 ```
 
-<xref:Microsoft.AspNetCore.Mvc.TagHelpers.ComponentTagHelper.RenderMode>設定元件是否：
+<xref:Microsoft.AspNetCore.Mvc.TagHelpers.ComponentTagHelper.RenderMode> 設定元件是否：
 
 * 會資源清單到頁面中。
 * 會在頁面上轉譯為靜態 HTML，或包含從使用者代理程式啟動應用程式所需的資訊 Blazor 。
 
-| 轉譯模式 | 描述 |
+| 轉譯模式 | Description |
 | --- | --- |
 | <xref:Microsoft.AspNetCore.Mvc.Rendering.RenderMode.ServerPrerendered> | 將元件轉譯為靜態 HTML，並包含 Blazor Server 應用程式的標記。 當使用者代理程式啟動時，會使用此標記來啟動 Blazor 應用程式。 |
 | <xref:Microsoft.AspNetCore.Mvc.Rendering.RenderMode.Server> | 呈現應用程式的標記 Blazor Server 。 不包含來自元件的輸出。 當使用者代理程式啟動時，會使用此標記來啟動 Blazor 應用程式。 |
@@ -253,7 +253,7 @@ Blazor.defaultReconnectionHandler._reconnectionDisplay =
 
 * 支援伺服器端預先呈現。
 * `Value`參數是元件唯一有效的參數 `Title` 。
-* 提供給和元件的 HTML 屬性 `Meta` `Link` 會在[其他屬性](xref:blazor/components/index#attribute-splatting-and-arbitrary-parameters)中捕捉，並傳遞至轉譯的 HTML 標籤。
+* 提供給和元件的 HTML 屬性 `Meta` `Link` 會在 [其他屬性](xref:blazor/components/index#attribute-splatting-and-arbitrary-parameters) 中捕捉，並傳遞至轉譯的 HTML 標籤。
 * 若為多個 `Title` 元件，頁面的標題會反映 `Value` 最後轉譯之 `Title` 元件的。
 * 如果 `Meta` 包含相同屬性的多個或 `Link` 元件，則每個或元件只會呈現一個 HTML 標籤 `Meta` `Link` 。 兩個 `Meta` 或 `Link` 元件不能參考相同的呈現 HTML 標籤。
 * 對現有或元件的參數所做的變更 `Meta` `Link` 會反映在其轉譯的 HTML 標籤中。
@@ -263,6 +263,46 @@ Blazor.defaultReconnectionHandler._reconnectionDisplay =
 
 * 可由應用程式狀態修改。 應用程式狀態無法修改硬式編碼的 HTML 標籤。
 * 當父元件不再呈現時，會從 HTML 中移除 `<head>` 。
+
+## <a name="static-files"></a>靜態檔案
+
+*本節適用于 Blazor Server 。*
+
+若要使用來建立其他檔案對應 <xref:Microsoft.AspNetCore.StaticFiles.FileExtensionContentTypeProvider> ，或設定其他檔案對應 <xref:Microsoft.AspNetCore.Builder.StaticFileOptions> ，請使用下列 **其中一** 種方法。 在下列範例中， `{EXTENSION}` 預留位置是副檔名，而 `{CONTENT TYPE}` 預留位置則是內容類型。
+
+* 使用下列方式，在 () 中透過相依性 [插入 (DI) ](xref:blazor/fundamentals/dependency-injection) 設定選項 `Startup.ConfigureServices` `Startup.cs` <xref:Microsoft.AspNetCore.Builder.StaticFileOptions> ：
+
+  ```csharp
+  using Microsoft.AspNetCore.StaticFiles;
+
+  ...
+
+  var provider = new FileExtensionContentTypeProvider();
+  provider.Mappings["{EXTENSION}"] = "{CONTENT TYPE}";
+
+  services.Configure<StaticFileOptions>(options =>
+  {
+      options.ContentTypeProvider = provider;
+  });
+  ```
+
+  因為此方法會設定用來服務的相同檔案提供者 `blazor.server.js` ，所以請確定您的自訂設定不會干擾服務 `blazor.server.js` 。 例如，請不要藉由使用設定提供者來移除 JavaScript 檔案的對應 `provider.Mappings.Remove(".js")` 。
+
+* <xref:Microsoft.AspNetCore.Builder.StaticFileExtensions.UseStaticFiles%2A>在 () 中使用兩個對的呼叫 `Startup.Configure` `Startup.cs` ：
+  * 使用在第一次呼叫中設定自訂檔案提供者 <xref:Microsoft.AspNetCore.Builder.StaticFileOptions> 。
+  * 第二個中間件的 `blazor.server.js` 用途是，它會使用架構所提供的預設靜態檔案設定 Blazor 。
+
+  ```csharp
+  using Microsoft.AspNetCore.StaticFiles;
+
+  ...
+
+  var provider = new FileExtensionContentTypeProvider();
+  provider.Mappings["{EXTENSION}"] = "{CONTENT TYPE}";
+
+  app.UseStaticFiles(new StaticFileOptions { ContentTypeProvider = provider });
+  app.UseStaticFiles();
+  ```
 
 ## <a name="additional-resources"></a>其他資源
 

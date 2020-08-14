@@ -17,51 +17,51 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/security/webassembly/hosted-with-azure-active-directory-b2c
-ms.openlocfilehash: 8b8cf77cde281b8ea6a09d8edaec6606383a4c04
-ms.sourcegitcommit: ba4872dd5a93780fe6cfacb2711ec1e69e0df92c
+ms.openlocfilehash: dd7b7881ac44f8e80d2b32617594bca259fe08bc
+ms.sourcegitcommit: ec41ab354952b75557240923756a8c2ac79b49f8
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 08/12/2020
-ms.locfileid: "88130453"
+ms.lasthandoff: 08/13/2020
+ms.locfileid: "88202782"
 ---
 # <a name="secure-an-aspnet-core-no-locblazor-webassembly-hosted-app-with-azure-active-directory-b2c"></a>Blazor WebAssembly使用 Azure Active Directory B2C 保護 ASP.NET Core 託管應用程式
 
-By [Javier Calvarro Nelson](https://github.com/javiercn)和[Luke Latham](https://github.com/guardrex)
+By [Javier Calvarro Nelson](https://github.com/javiercn) 和 [Luke Latham](https://github.com/guardrex)
 
-本文說明如何建立[託管 Blazor WebAssembly 應用程式](xref:blazor/hosting-models#blazor-webassembly)，以使用[AZURE ACTIVE DIRECTORY (AAD) B2C](/azure/active-directory-b2c/overview)進行驗證。
+本文說明如何建立 [託管 Blazor WebAssembly 應用程式](xref:blazor/hosting-models#blazor-webassembly) ，以使用 [AZURE ACTIVE DIRECTORY (AAD) B2C](/azure/active-directory-b2c/overview) 進行驗證。
 
 ## <a name="register-apps-in-aad-b2c-and-create-solution"></a>在 AAD B2C 中註冊應用程式並建立解決方案
 
 ### <a name="create-a-tenant"></a>建立租用戶
 
-依照[教學課程：建立 Azure Active Directory B2C 租](/azure/active-directory-b2c/tutorial-create-tenant)使用者中的指引來建立 AAD B2C 租使用者。
+依照 [教學課程：建立 Azure Active Directory B2C 租](/azure/active-directory-b2c/tutorial-create-tenant) 使用者中的指引來建立 AAD B2C 租使用者。
 
 記錄 AAD B2C 實例 (例如， `https://contoso.b2clogin.com/` ，其中包含尾端的斜線) 。 實例是 Azure B2C 應用程式註冊的配置和主機，您可以從 Azure 入口網站的 [**應用程式註冊**] 頁面中開啟 [**端點**] 視窗來找到此功能。
 
 ### <a name="register-a-server-api-app"></a>註冊伺服器 API 應用程式
 
-請遵循教學課程[：在 Azure Active Directory B2C 中註冊應用程式中](/azure/active-directory-b2c/tutorial-register-applications)的指導方針，為*伺服器 API 應用*程式註冊 AAD 應用程式，然後執行下列動作：
+請遵循教學課程 [：在 Azure Active Directory B2C 中註冊應用程式中](/azure/active-directory-b2c/tutorial-register-applications) 的指導方針，為 *伺服器 API 應用* 程式註冊 AAD 應用程式，然後執行下列動作：
 
 1. 在**Azure Active Directory**  >  **應用程式註冊**中，選取 [**新增註冊**]。
 1. 提供應用程式 (的**名稱**，例如** Blazor Server AAD B2C**) 。
-1. 針對**支援的帳戶類型**，請選取 [多租使用者] 選項： [**任何組織目錄中的帳戶] 或 [任何身分識別提供者]。用於驗證 Azure AD B2C 的使用者。**
-1. 在此案例中，*伺服器 API 應用程式*不需要重新**導向 uri** ，因此，請將下拉式關閉設定為 [ **Web** ]，而不要輸入 [重新導向 uri]。
+1. 針對 **支援的帳戶類型**，請選取 [多租使用者] 選項： [ **任何組織目錄中的帳戶] 或 [任何身分識別提供者]。用於驗證 Azure AD B2C 的使用者。**
+1. 在此案例中， *伺服器 API 應用程式* 不需要重新 **導向 uri** ，因此，請將下拉式關閉設定為 [ **Web** ]，而不要輸入 [重新導向 uri]。
 1. 確認**Permissions**  >  已啟用 [許可權]，授與系統**管理員同意 openid 和 offline_access 的許可權**。
 1. 選取 [註冊]。
 
 記錄下列資訊：
 
-* *伺服器 API 應用程式*應用程式 (用戶端) 識別碼 (例如 `41451fa7-82d9-4673-8fa5-69eff5a761fd`) 
+* *伺服器 API 應用程式* 應用程式 (用戶端) 識別碼 (例如 `41451fa7-82d9-4673-8fa5-69eff5a761fd`) 
 * AAD 主要/發行者/租使用者網域 (例如， `contoso.onmicrosoft.com`) ：在註冊的應用程式的 [Azure 入口網站**品牌**] 分頁中，此網域是以**發行者網域**的形式提供。
 
-在中**公開 API**：
+在中 **公開 API**：
 
 1. 選取 [新增範圍]  。
 1. 選取 [儲存並繼續]  。
-1. 提供 (的**範圍名稱**，例如 `API.Access`) 。
-1. 提供系統**管理員同意顯示名稱** (例如， `Access API`) 。
-1. 提供系統**管理員同意描述** (例如 `Allows the app to access server app API endpoints.`) 。
-1. 確認 [**狀態**] 設定為 [**已啟用**]。
+1. 提供 (的 **範圍名稱** ，例如 `API.Access`) 。
+1. 提供系統 **管理員同意顯示名稱** (例如， `Access API`) 。
+1. 提供系統 **管理員同意描述** (例如 `Allows the app to access server app API endpoints.`) 。
+1. 確認 [ **狀態** ] 設定為 [ **已啟用**]。
 1. 選取 [新增範圍]。
 
 記錄下列資訊：
@@ -69,16 +69,16 @@ By [Javier Calvarro Nelson](https://github.com/javiercn)和[Luke Latham](https:/
 * 應用程式識別碼 URI (例如， `https://contoso.onmicrosoft.com/41451fa7-82d9-4673-8fa5-69eff5a761fd` 、 `api://41451fa7-82d9-4673-8fa5-69eff5a761fd` 或您提供的自訂值) 
 * 預設範圍 (例如， `API.Access`) 
 
-應用程式識別碼 URI 可能需要用戶端應用程式中的特殊設定，如本主題稍後的[存取權杖範圍](#access-token-scopes)一節中所述。
+應用程式識別碼 URI 可能需要用戶端應用程式中的特殊設定，如本主題稍後的 [存取權杖範圍](#access-token-scopes) 一節中所述。
 
 ### <a name="register-a-client-app"></a>註冊用戶端應用程式
 
-請遵循教學課程[：再次在 Azure Active Directory B2C 中註冊應用程式中](/azure/active-directory-b2c/tutorial-register-applications)的指導方針，為*用戶端應用程式*註冊 AAD 應用程式，然後執行下列動作：
+請遵循教學課程 [：再次在 Azure Active Directory B2C 中註冊應用程式中](/azure/active-directory-b2c/tutorial-register-applications) 的指導方針，為 *用戶端應用程式* 註冊 AAD 應用程式，然後執行下列動作：
 
 1. 在**Azure Active Directory**  >  **應用程式註冊**中，選取 [**新增註冊**]。
 1. 提供應用程式 (的**名稱**，例如** Blazor 用戶端 AAD B2C**) 。
-1. 針對**支援的帳戶類型**，請選取 [多租使用者] 選項： [**任何組織目錄中的帳戶] 或 [任何身分識別提供者]。用於驗證 Azure AD B2C 的使用者。**
-1. 將 [重新**導向 uri** ] 下拉式設定保留為 [ **Web** ]，並提供下列重新導向 uri： `https://localhost:{PORT}/authentication/login-callback` 。 在 Kestrel 上執行之應用程式的預設埠是5001。 如果應用程式是在不同的 Kestrel 埠上執行，請使用應用程式的埠。 針對 IIS Express，在 [**調試**程式] 面板的伺服器應用程式屬性中，可以找到應用程式的隨機產生埠。 由於應用程式目前不存在，且 IIS Express 埠未知，請在建立應用程式之後返回此步驟，並更新重新導向 URI。 [[建立應用程式](#create-the-app)] 區段中會出現一個批註，提醒 IIS Express 使用者更新重新導向 URI。
+1. 針對 **支援的帳戶類型**，請選取 [多租使用者] 選項： [ **任何組織目錄中的帳戶] 或 [任何身分識別提供者]。用於驗證 Azure AD B2C 的使用者。**
+1. 將 [重新 **導向 uri** ] 下拉式設定保留為 [ **Web** ]，並提供下列重新導向 uri： `https://localhost:{PORT}/authentication/login-callback` 。 在 Kestrel 上執行之應用程式的預設埠是5001。 如果應用程式是在不同的 Kestrel 埠上執行，請使用應用程式的埠。 針對 IIS Express，在 [ **調試** 程式] 面板的伺服器應用程式屬性中，可以找到應用程式的隨機產生埠。 由於應用程式目前不存在，且 IIS Express 埠未知，請在建立應用程式之後返回此步驟，並更新重新導向 URI。 [ [建立應用程式](#create-the-app) ] 區段中會出現一個批註，提醒 IIS Express 使用者更新重新導向 URI。
 1. 確認**Permissions**  >  已啟用 [許可權]，授與系統**管理員同意 openid 和 offline_access 的許可權**。
 1. 選取 [註冊]。
 
@@ -86,19 +86,19 @@ By [Javier Calvarro Nelson](https://github.com/javiercn)和[Luke Latham](https:/
 
 在 [**驗證**  >  **平臺**設定]  >  **Web**：
 
-1. 確認的重新**導向 URI** `https://localhost:{PORT}/authentication/login-callback` 存在。
-1. 針對 **[隱含授**與]，選取 [**存取權杖**] 和 [**識別碼權杖**] 的核取方塊。
+1. 確認的重新 **導向 URI** `https://localhost:{PORT}/authentication/login-callback` 存在。
+1. 針對 **[隱含授**與]，選取 [ **存取權杖** ] 和 [ **識別碼權杖**] 的核取方塊。
 1. 此體驗可接受應用程式的其餘預設值。
 1. 選取 [儲存] 按鈕。
 
 在 [ **API 許可權**] 中：
 
-1. 選取 [**新增許可權**]，後面接著 [**我的 api**]。
+1. 選取 [ **新增許可權** ]，後面接著 [ **我的 api**]。
 1. 從 [**名稱**] 資料行中選取*伺服器 API 應用程式* (例如， ** Blazor Server AAD B2C**) 。
-1. 開啟 [ **API**清單]。
+1. 開啟 [ **API** 清單]。
 1. 啟用 API (的存取，例如， `API.Access`) 。
 1. 選取 [新增權限]。
-1. 選取 [為 **{租使用者名稱} 授與系統管理員同意**] 按鈕。 選取 [是] 以確認。
+1. 選取 [為 **{租使用者名稱} 授與系統管理員同意** ] 按鈕。 選取 [是] 以確認。
 
 在**Home**  >  **Azure AD B2C**  >  **使用者流程**：
 
@@ -130,7 +130,7 @@ dotnet new blazorwasm -au IndividualB2C --aad-b2c-instance "{AAD B2C INSTANCE}" 
 使用選項指定的輸出位置會 `-o|--output` 建立專案資料夾（如果不存在），並成為應用程式名稱的一部分。
 
 > [!NOTE]
-> 將應用程式識別碼 URI 傳遞給 `app-id-uri` 選項，但請注意，在用戶端應用程式中可能需要進行設定變更，如[存取權杖範圍](#access-token-scopes)一節中所述。
+> 將應用程式識別碼 URI 傳遞給 `app-id-uri` 選項，但請注意，在用戶端應用程式中可能需要進行設定變更，如 [存取權杖範圍](#access-token-scopes) 一節中所述。
 >
 > 此外，由裝載的範本所設定的範圍 Blazor 可能會重複應用程式識別碼 URI 主機。 確認 `DefaultAccessTokenScopes` 在 `Program.Main` `Program.cs` *用戶端應用程式*的 () 中為集合設定的範圍是正確的。
 
@@ -139,7 +139,7 @@ dotnet new blazorwasm -au IndividualB2C --aad-b2c-instance "{AAD B2C INSTANCE}" 
 >
 > 如果*用戶端應用程式*是在隨機 IIS Express 埠上執行，則可以在 [**調試**程式] 面板的*伺服器 API 應用程式*屬性中找到應用程式的埠。
 >
-> 如果未在*用戶端應用程式的*已知埠之前設定埠，請回到 Azure 入口網站中的*用戶端應用程式*註冊，並使用正確的埠更新重新導向 URI。
+> 如果未在 *用戶端應用程式的* 已知埠之前設定埠，請回到 Azure 入口網站中的 *用戶端應用程式* 註冊，並使用正確的埠更新重新導向 URI。
 
 ## <a name="server-app-configuration"></a>伺服器應用程式設定
 
@@ -163,7 +163,7 @@ services.AddAuthentication(AzureADB2CDefaults.BearerAuthenticationScheme)
     .AddAzureADB2CBearer(options => Configuration.Bind("AzureAdB2C", options));
 ```
 
-<xref:Microsoft.AspNetCore.Builder.AuthAppBuilderExtensions.UseAuthentication%2A>並 <xref:Microsoft.AspNetCore.Builder.AuthorizationAppBuilderExtensions.UseAuthorization%2A> 確定：
+<xref:Microsoft.AspNetCore.Builder.AuthAppBuilderExtensions.UseAuthentication%2A> 並 <xref:Microsoft.AspNetCore.Builder.AuthorizationAppBuilderExtensions.UseAuthorization%2A> 確定：
 
 * 應用程式會嘗試剖析並驗證傳入要求的權杖。
 * 嘗試存取受保護資源而沒有適當認證的任何要求都會失敗。
@@ -221,7 +221,7 @@ services.Configure<JwtBearerOptions>(
 
 ### <a name="weatherforecast-controller"></a>WeatherForecast 控制器
 
-WeatherForecast 控制器 (controller */WeatherForecastController*) 會公開受保護的 API，並將 [`[Authorize]`](xref:Microsoft.AspNetCore.Authorization.AuthorizeAttribute) 屬性套用至控制器。 請**務必**瞭解：
+WeatherForecast 控制器 (controller */WeatherForecastController*) 會公開受保護的 API，並將 [`[Authorize]`](xref:Microsoft.AspNetCore.Authorization.AuthorizeAttribute) 屬性套用至控制器。 請 **務必** 瞭解：
 
 * [`[Authorize]`](xref:Microsoft.AspNetCore.Authorization.AuthorizeAttribute)此 api 控制器中的屬性是保護此 api 免于未經授權存取的唯一做法。
 * [`[Authorize]`](xref:Microsoft.AspNetCore.Authorization.AuthorizeAttribute)應用程式中所使用的屬性 Blazor WebAssembly 只會作為應用程式的提示，使用者應該獲得授權，應用程式才能正確運作。
@@ -246,7 +246,7 @@ public class WeatherForecastController : ControllerBase
 
 ### <a name="authentication-package"></a>驗證套件
 
-當建立應用程式以使用個別 B2C 帳戶 () 時 `IndividualB2C` ，應用程式會自動收到[Microsoft 驗證程式庫](/azure/active-directory/develop/msal-overview) () 的套件參考 [`Microsoft.Authentication.WebAssembly.Msal`](https://www.nuget.org/packages/Microsoft.Authentication.WebAssembly.Msal/) 。 封裝提供一組基本類型，可協助應用程式驗證使用者，並取得權杖以呼叫受保護的 Api。
+當建立應用程式以使用個別 B2C 帳戶 () 時 `IndividualB2C` ，應用程式會自動收到 [Microsoft 驗證程式庫](/azure/active-directory/develop/msal-overview) () 的套件參考 [`Microsoft.Authentication.WebAssembly.Msal`](https://www.nuget.org/packages/Microsoft.Authentication.WebAssembly.Msal/) 。 封裝提供一組基本類型，可協助應用程式驗證使用者，並取得權杖以呼叫受保護的 Api。
 
 如果將驗證新增至應用程式，請手動將套件新增至應用程式的專案檔：
 
@@ -331,11 +331,18 @@ builder.Services.AddMsalAuthentication(options =>
 
 [!INCLUDE[](~/includes/blazor-security/azure-scope.md)]
 
-如需詳細資訊，請參閱*其他案例*文章的下列章節：
+如需詳細資訊，請參閱 *其他案例* 文章的下列章節：
 
 * [要求其他存取權杖](xref:blazor/security/webassembly/additional-scenarios#request-additional-access-tokens)
 * [將權杖附加到連出要求](xref:blazor/security/webassembly/additional-scenarios#attach-tokens-to-outgoing-requests)
 
+::: moniker range=">= aspnetcore-5.0"
+
+### <a name="login-mode"></a>登入模式
+
+[!INCLUDE[](~/includes/blazor-security/msal-login-mode.md)]
+
+::: moniker-end
 
 ### <a name="imports-file"></a>匯入檔案
 
@@ -369,8 +376,8 @@ builder.Services.AddMsalAuthentication(options =>
 
 從伺服器專案執行應用程式。 使用 Visual Studio 時，您可以：
 
-* 將工具列中的 [**啟始專案**] 下拉式清單設定為*伺服器 API 應用程式*，然後選取 [**執行**] 按鈕。
-* 在**方案總管**中選取伺服器專案，然後選取工具列中的 [**執行**] 按鈕，或從 [**調試**程式] 功能表啟動應用程式。
+* 將工具列中的 [ **啟始專案** ] 下拉式清單設定為 *伺服器 API 應用程式* ，然後選取 [ **執行** ] 按鈕。
+* 在 **方案總管** 中選取伺服器專案，然後選取工具列中的 [ **執行** ] 按鈕，或從 [ **調試** 程式] 功能表啟動應用程式。
 
 <!-- HOLD
 [!INCLUDE[](~/includes/blazor-security/usermanager-signinmanager.md)]

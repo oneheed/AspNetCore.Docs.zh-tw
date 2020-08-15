@@ -1,11 +1,11 @@
 ---
-title: 裝載和部署 ASP.NET CoreBlazor Server
+title: 裝載和部署 ASP.NET Core Blazor Server
 author: guardrex
 description: 瞭解如何使用 ASP.NET Core 裝載和部署 Blazor Server 應用程式。
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 06/04/2020
+ms.date: 08/14/2020
 no-loc:
 - cookie
 - Cookie
@@ -17,14 +17,14 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/host-and-deploy/server
-ms.openlocfilehash: e7c8627cd27fd30288b4bcfa1ac2ffe3e9b46e29
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: ce767e591bd87ccb293f4698308e0bdbd6817d1f
+ms.sourcegitcommit: 503b348e9046fcd969de85898394a1ea8274ec38
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88014213"
+ms.lasthandoff: 08/14/2020
+ms.locfileid: "88227614"
 ---
-# <a name="host-and-deploy-no-locblazor-server"></a>裝載和部署Blazor Server
+# <a name="host-and-deploy-no-locblazor-server"></a>裝載和部署 Blazor Server
 
 作者：[Luke Latham](https://github.com/guardrex)、[Rainer Stropek](https://www.timecockpit.com) 和 [Daniel Roth](https://github.com/danroth27)
 
@@ -54,19 +54,19 @@ ms.locfileid: "88014213"
 
 如需建立安全且可擴充之 Blazor 伺服器應用程式的指引，請參閱 <xref:blazor/security/server/threat-mitigation> 。
 
-每個線路都使用大約 250 KB 的記憶體來進行最小的*Hello World*樣式應用程式。 線路的大小取決於應用程式的程式碼，以及與每個元件相關聯的狀態維護需求。 我們建議您在開發應用程式和基礎結構期間測量資源需求，但下列基準可以是規劃部署目標的起點：如果您預期應用程式支援5000並行使用者，請考慮在應用程式 (中，將至少 1.3 GB 的伺服器記憶體預算，或每位使用者) ~ 273 KB。
+每個線路都使用大約 250 KB 的記憶體來進行最小的 *Hello World*樣式應用程式。 線路的大小取決於應用程式的程式碼，以及與每個元件相關聯的狀態維護需求。 我們建議您在開發應用程式和基礎結構期間測量資源需求，但下列基準可以是規劃部署目標的起點：如果您預期應用程式支援5000並行使用者，請考慮在應用程式 (中，將至少 1.3 GB 的伺服器記憶體預算，或每位使用者) ~ 273 KB。
 
-### <a name="no-locsignalr-configuration"></a>SignalR配置
+### <a name="no-locsignalr-configuration"></a>SignalR 配置
 
-Blazor Server應用程式會使用 ASP.NET Core SignalR 來與瀏覽器通訊。 [ SignalR 的裝載和調整規模條件](xref:signalr/publish-to-azure-web-app)適用于 Blazor Server 應用程式。
+Blazor Server 應用程式會使用 ASP.NET Core SignalR 來與瀏覽器通訊。 [ SignalR 的裝載和調整規模條件](xref:signalr/publish-to-azure-web-app)適用于 Blazor Server 應用程式。
 
 BlazorSignalR因為延遲、可靠性和[安全性](xref:signalr/security)較低，所以使用 websocket 做為傳輸時，效果最佳。 SignalR當 websocket 無法使用時，或當應用程式明確設定為使用長輪詢時，會使用長輪詢。 部署到 Azure App Service 時，請將應用程式設定為在服務的 Azure 入口網站設定中使用 Websocket。 如需設定應用程式以進行 Azure App Service 的詳細資訊，請參閱[ SignalR 發佈指導方針](xref:signalr/publish-to-azure-web-app)。
 
 #### <a name="azure-no-locsignalr-service"></a>Azure SignalR 服務
 
-我們建議使用適用于應用程式的[Azure SignalR 服務](/azure/azure-signalr) Blazor Server 。 此服務可將 Blazor Server 應用程式相應增加至大量的並行連線 SignalR 。 此外， SignalR 服務的全球範圍和高效能資料中心會大幅協助減少因地理位置而造成的延遲。 若要設定應用程式 (並選擇性地布建) Azure SignalR 服務：
+我們建議使用適用于應用程式的 [Azure SignalR 服務](/azure/azure-signalr) Blazor Server 。 此服務可將 Blazor Server 應用程式相應增加至大量的並行連線 SignalR 。 此外， SignalR 服務的全球範圍和高效能資料中心會大幅協助減少因地理位置而造成的延遲。 若要設定應用程式 (並選擇性地布建) Azure SignalR 服務：
 
-1. 啟用服務以支援「固定*會話*」，在此情況下，用戶端會在進行[回溯時重新導向至相同的伺服器](xref:blazor/hosting-models#connection-to-the-server)。 將 `ServerStickyMode` 選項或設定值設為 `Required` 。 一般而言，應用程式會使用下列**其中一**種方法來建立設定：
+1. 啟用服務以支援「固定 *會話*」，在此情況下，用戶端會在進行 [回溯時重新導向至相同的伺服器](xref:blazor/hosting-models#connection-to-the-server)。 將 `ServerStickyMode` 選項或設定值設為 `Required` 。 一般而言，應用程式會使用下列 **其中一** 種方法來建立設定：
 
    * `Startup.ConfigureServices`:
   
@@ -78,7 +78,7 @@ BlazorSignalR因為延遲、可靠性和[安全性](xref:signalr/security)較低
      });
      ```
 
-   * Configuration (使用下列**其中一**種方法) ：
+   * Configuration (使用下列 **其中一** 種方法) ：
   
      * `appsettings.json`:
 
@@ -89,7 +89,7 @@ BlazorSignalR因為延遲、可靠性和[安全性](xref:signalr/security)較低
      * **Configuration**  >  Azure 入口網站 (**名稱**：，值：) 中的 app service**設定應用程式設定** `Azure:SignalR:ServerStickyMode` **Value** `Required` 。
 
 1. 在 Visual Studio 中建立應用程式的 Azure 應用程式發佈設定檔 Blazor Server 。
-1. 將**Azure SignalR 服務**相依性新增至設定檔。 如果 Azure 訂用帳戶沒有 SignalR 要指派給應用程式的既有 azure 服務實例，請選取 [**建立新的 azure SignalR 服務實例**] 以布建新的服務實例。
+1. 將 **Azure SignalR 服務** 相依性新增至設定檔。 如果 Azure 訂用帳戶沒有 SignalR 要指派給應用程式的既有 azure 服務實例，請選取 [ **建立新的 azure SignalR 服務實例** ] 以布建新的服務實例。
 1. 將應用程式發佈至 Azure。
 
 #### <a name="iis"></a>IIS
@@ -101,7 +101,7 @@ BlazorSignalR因為延遲、可靠性和[安全性](xref:signalr/security)較低
 
 #### <a name="kubernetes"></a>Kubernetes
 
-使用下列[Kubernetes 注釋來建立輸入定義：適用于粘滯會話](https://kubernetes.github.io/ingress-nginx/examples/affinity/cookie/)。。
+使用下列 [Kubernetes 注釋來建立輸入定義：適用于粘滯會話](https://kubernetes.github.io/ingress-nginx/examples/affinity/cookie/)。。
 
 ```yaml
 apiVersion: extensions/v1beta1
@@ -120,7 +120,7 @@ metadata:
 SignalR若要讓 websocket 正常運作，請確認 proxy 的 `Upgrade` 和 `Connection` 標頭已設定為下列值，且 `$connection_upgrade` 對應至其中一個：
 
 * 升級標頭值預設為。
-* `close`當升級標頭遺失或空白時。
+* `close` 當升級標頭遺失或空白時。
 
 ```
 http {
@@ -185,7 +185,7 @@ a2enmod   proxy_wstunnel
 * 錯誤：無法使用任何可用的傳輸來連接到伺服器。 Websocket 失敗
 * 錯誤：如果連接不是處於「已連線」狀態，就無法傳送資料。
 
-如需詳細資訊，請參閱[Apache 檔](https://httpd.apache.org/docs/current/mod/mod_proxy.html)。
+如需詳細資訊，請參閱 [Apache 檔](https://httpd.apache.org/docs/current/mod/mod_proxy.html)。
 
 ### <a name="measure-network-latency"></a>測量網路延遲
 
@@ -203,16 +203,19 @@ else
     <span>@(latency.Value.TotalMilliseconds)ms</span>
 }
 
-@code
-{
+@code {
     private DateTime startTime;
     private TimeSpan? latency;
 
-    protected override async Task OnInitializedAsync()
+    protected override async Task OnAfterRenderAsync(bool firstRender)
     {
-        startTime = DateTime.UtcNow;
-        var _ = await JS.InvokeAsync<string>("toString");
-        latency = DateTime.UtcNow - startTime;
+        if (firstRender)
+        {
+            startTime = DateTime.UtcNow;
+            var _ = await JS.InvokeAsync<string>("toString");
+            latency = DateTime.UtcNow - startTime;
+            StateHasChanged();
+        }
     }
 }
 ```

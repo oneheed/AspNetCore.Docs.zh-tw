@@ -14,12 +14,12 @@ no-loc:
 - Razor
 - SignalR
 uid: fundamentals/static-files
-ms.openlocfilehash: b1f84a936ee1327498abce660cd64f8d7d0a2864
-ms.sourcegitcommit: ec41ab354952b75557240923756a8c2ac79b49f8
+ms.openlocfilehash: 3dbc233cef752bbf593e677728aee7b9e93c1621
+ms.sourcegitcommit: 4df445e7d49a99f81625430f728c28e5d6bf2107
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 08/13/2020
-ms.locfileid: "88202794"
+ms.lasthandoff: 08/15/2020
+ms.locfileid: "88253625"
 ---
 # <a name="static-files-in-aspnet-core"></a>ASP.NET Core 中的靜態檔案
 
@@ -103,6 +103,19 @@ ms.locfileid: "88202794"
 ## <a name="static-file-authorization"></a>靜態檔案授權
 
 靜態檔案中介軟體不提供授權檢查。 由 it 提供服務的任何檔案（包括下的檔案） `wwwroot` 都可公開存取。 若要依據授權來提供檔案：
+
+* 將它們儲存 `wwwroot` 在外，以及可供預設靜態檔案中介軟體存取的任何目錄。
+* `UseStaticFiles`在之後呼叫 `UseAuthorization` 並指定路徑：
+
+  [!code-csharp[](static-files/samples/3.x/StaticFileAuth/Startup.cs?name=snippet2)]
+  
+  前面的方法集會要求使用者進行驗證：
+
+  [!code-csharp[](static-files/samples/3.x/StaticFileAuth/Startup.cs?name=snippet1&highlight=20-99)]
+
+   [!INCLUDE[](~/includes/requireAuth.md)]
+
+根據授權提供檔案的替代方法：
 
 * 將它們儲存 `wwwroot` 在之外，以及可存取靜態檔案中介軟體的任何目錄。
 * 透過套用授權的動作方法來提供服務，並傳回 <xref:Microsoft.AspNetCore.Mvc.FileResult> 物件：

@@ -5,7 +5,7 @@ description: 瞭解如何調試 Blazor 程式。
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 07/30/2020
+ms.date: 08/14/2020
 no-loc:
 - cookie
 - Cookie
@@ -17,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/debug
-ms.openlocfilehash: 838ed1a10ab3312e449782a29c305a976265550c
-ms.sourcegitcommit: 503b348e9046fcd969de85898394a1ea8274ec38
+ms.openlocfilehash: 7b5dac5c634ae3eef180ef2c7c7287da94342169
+ms.sourcegitcommit: 4df445e7d49a99f81625430f728c28e5d6bf2107
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 08/14/2020
-ms.locfileid: "88227588"
+ms.lasthandoff: 08/15/2020
+ms.locfileid: "88253573"
 ---
 # <a name="debug-aspnet-core-no-locblazor-webassembly"></a>Debug ASP.NET Core Blazor WebAssembly
 
@@ -284,3 +284,13 @@ protected override async Task OnInitializedAsync()
     ...
 }
 ```
+
+### <a name="visual-studio-timeout"></a>Visual Studio 超時
+
+如果 Visual Studio 擲回偵錯工具無法啟動的例外狀況，指出已達到超時時間，您可以使用登錄設定來調整 timeout：
+
+```console
+VsRegEdit.exe set "<VSInstallFolder>" HKCU JSDebugger\Options\Debugging "BlazorTimeoutInMilliseconds" dword {TIMEOUT}
+```
+
+`{TIMEOUT}`上述命令中的預留位置以毫秒為單位。 例如，一分鐘會指派為 `60000` 。

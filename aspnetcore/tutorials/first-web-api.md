@@ -4,7 +4,7 @@ author: rick-anderson
 description: 了解如何使用 ASP.NET Core 建置 Web API。
 ms.author: riande
 ms.custom: mvc
-ms.date: 2/25/2020
+ms.date: 08/13/2020
 no-loc:
 - cookie
 - Cookie
@@ -16,16 +16,16 @@ no-loc:
 - Razor
 - SignalR
 uid: tutorials/first-web-api
-ms.openlocfilehash: ad6eac246e5bc7039158981bbe96036389512e4f
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: 15e5c838e6dae824a189f170b28730a63f8c3ea7
+ms.sourcegitcommit: 4df445e7d49a99f81625430f728c28e5d6bf2107
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88019231"
+ms.lasthandoff: 08/15/2020
+ms.locfileid: "88253638"
 ---
 # <a name="tutorial-create-a-web-api-with-aspnet-core"></a>教學課程：使用 ASP.NET Core 建立 Web API
 
-由[Rick Anderson](https://twitter.com/RickAndMSFT)、 [Kirk Larkin](https://twitter.com/serpent5)和[Mike Wasson](https://github.com/mikewasson)
+由 [Rick Anderson](https://twitter.com/RickAndMSFT)、 [Kirk Larkin](https://twitter.com/serpent5)和 [Mike Wasson](https://github.com/mikewasson)
 
 本教學課程將教導您使用 ASP.NET Core 建立 Web API 的基本概念。
 
@@ -48,17 +48,17 @@ ms.locfileid: "88019231"
 
 |API | 描述 | Request body | 回應本文 |
 |--- | ---- | ---- | ---- |
-|`GET /api/TodoItems` | 取得所有待辦事項 | None | 待辦事項的陣列|
-|`GET /api/TodoItems/{id}` | 依識別碼取得項目 | None | 待辦事項|
+|`GET /api/TodoItems` | 取得所有待辦事項 | 無 | 待辦事項的陣列|
+|`GET /api/TodoItems/{id}` | 依識別碼取得項目 | 無 | 待辦事項|
 |`POST /api/TodoItems` | 新增記錄 | 待辦事項 | 待辦事項 |
-|`PUT /api/TodoItems/{id}` | 更新現有的項目 &nbsp; | 待辦事項 | None |
-|`DELETE /api/TodoItems/{id}` &nbsp; &nbsp; | 刪除專案 &nbsp;&nbsp; | None | None|
+|`PUT /api/TodoItems/{id}` | 更新現有的項目 &nbsp; | 待辦事項 | 無 |
+|`DELETE /api/TodoItems/{id}` &nbsp; &nbsp; | 刪除專案 &nbsp;&nbsp; | 無 | 無|
 
 下圖顯示應用程式的設計。
 
 ![左側方塊代表用戶端。 它會送出要求並接收來自應用程式 (右側繪製的方塊) 的回應。 在應用程式方塊中，三個方塊代表控制器、模型以及資料存取層。 要求進入應用程式的控制器，而在控制器與資料存取層之間進行讀取/寫入作業。 模型會序列化並在回應中傳回至用戶端。](first-web-api/_static/architecture.png)
 
-## <a name="prerequisites"></a>必要條件
+## <a name="prerequisites"></a>先決條件
 
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
@@ -81,7 +81,7 @@ ms.locfileid: "88019231"
 * 從 [檔案]**** 功能表選取 [新增]**[專案]** > ****。
 * 選取 **ASP.NET Core Web 應用程式**範本，然後按一下 [下一步]****。
 * 將專案命名為 *TodoApi*，然後按一下 [建立]****。
-* 在 [**建立新的 ASP.NET Core Web 應用程式**] 對話方塊中，確認已選取 [ **.net Core** ] 和 [ **ASP.NET Core 3.1** ]。 選取 **API** 範本，然後按一下 [建立]****。
+* 在 [ **建立新的 ASP.NET Core Web 應用程式** ] 對話方塊中，確認已選取 [ **.net Core** ] 和 [ **ASP.NET Core 3.1** ]。 選取 **API** 範本，然後按一下 [建立]****。
 
 ![VS 新增專案對話方塊](first-web-api/_static/vs3.png)
 
@@ -112,11 +112,11 @@ ms.locfileid: "88019231"
 
   ![macOS 新增方案](first-web-api-mac/_static/sln.png)
 
-* 在8.6 版之前的 Visual Studio for Mac 中，選取 [ **.net Core**  >  **應用程式**  >  **API**  >  **] [下一步]**。 在8.6 或更新版本中，選取 [ **Web 和主控台**  >  **應用程式**  >  **API**  >  **] [下一步]** 。
+* 在8.6 版之前的 Visual Studio for Mac 中，選取 [ **.net Core**  >  **應用程式**  >  **API**  >  **] [下一步]**。 在8.6 或更新版本中，選取 [ **Web 和主控台**  >  **應用程式**  >  **API**  >  **] [下一步]**。
 
   ![macOS API 範本選取專案](first-web-api-mac/_static/api_template.png)
 
-* 在 [**設定您的新 ASP.NET Core WEB API** ] 對話方塊中，選取最新的 .net Core 3.X**目標 Framework**。 選取 [下一步]  。
+* 在 [ **設定新的 ASP.NET Core WEB API** ] 對話方塊中，選取最新的 .net Core 3.X **目標 Framework**。 選取 [下一步] 。
 
 * 針對 [專案名稱]**** 輸入 *TodoApi*，然後選取 [建立]****。
 
@@ -196,7 +196,7 @@ ms.locfileid: "88019231"
 
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
-* 在**方案總管**中，以滑鼠右鍵按一下專案。 選取 **[**  >  **新增資料夾**]。 將資料夾命名為 *Models*。
+* 在 **方案總管**中，以滑鼠右鍵按一下專案。 選取 **[**  >  **新增資料夾**]。 將資料夾命名為 *Models*。
 
 * 以滑鼠右鍵按一下 *Models* 資料夾，然後選取 [新增]**** > [類別]****。 將類別命名為 *TodoItem*，然後選取 [新增]****。
 
@@ -240,7 +240,7 @@ ms.locfileid: "88019231"
 * 選取 [瀏覽]**** 索引標籤，然後在搜尋方塊中輸入 **Microsoft.EntityFrameworkCore.SqlServer**。
 * 在左窗格中選取 [ **microsoft.entityframeworkcore** ]。
 * 選取右窗格中的 [專案]**** 核取方塊，然後選取 [安裝]****。
-* 使用上述指示來新增**Microsoft.entityframeworkcore** NuGet 套件。
+* 使用上述指示來新增 **Microsoft.entityframeworkcore** NuGet 套件。
 
 ![NuGet 套件管理員](first-web-api/_static/vs3NuGet.png)
 
@@ -283,7 +283,7 @@ ms.locfileid: "88019231"
 
   * 在**模型類別**中選取 [ **TodoItem] ([TodoApi]) ** 。
   * 選取**資料內容類別**中 **) 的 TodoCoNtext ([模型**]。
-  * 選取 [新增]。
+  * 選取 [新增]  。
 
 # <a name="visual-studio-code--visual-studio-for-mac"></a>[Visual Studio Code / Visual Studio for Mac](#tab/visual-studio-code+visual-studio-mac)
 
@@ -293,7 +293,8 @@ ms.locfileid: "88019231"
 dotnet add package Microsoft.VisualStudio.Web.CodeGeneration.Design
 dotnet add package Microsoft.EntityFrameworkCore.Design
 dotnet tool install --global dotnet-aspnet-codegenerator
-dotnet aspnet-codegenerator controller -name TodoItemsController -async -api -m TodoItem -dc TodoContext -outDir Controllers
+dotnet tool update -g Dotnet-aspnet-codegenerator
+dotnet-aspnet-codegenerator controller -name TodoItemsController -async -api -m TodoItem -dc TodoContext -outDir Controllers
 ```
 
 上述命令：
@@ -314,7 +315,7 @@ dotnet aspnet-codegenerator controller -name TodoItemsController -async -api -m 
 * 具有 views 的控制器會包含 `[action]` 在路由範本中。
 * API 控制器不會包含 `[action]` 在路由範本中。
 
-當 `[action]` 權杖不在路由範本中時，[動作](xref:mvc/controllers/routing#action)名稱會從路由中排除。 也就是說，不會在相符的路由中使用動作的相關聯方法名稱。
+當 `[action]` 權杖不在路由範本中時， [動作](xref:mvc/controllers/routing#action) 名稱會從路由中排除。 也就是說，不會在相符的路由中使用動作的相關聯方法名稱。
 
 ## <a name="examine-the-posttodoitem-create-method"></a>檢查 PostTodoItem 建立方法
 
@@ -324,17 +325,19 @@ dotnet aspnet-codegenerator controller -name TodoItemsController -async -api -m 
 
 上述程式碼是 HTTP POST 方法，如屬性所示 [`[HttpPost]`](xref:Microsoft.AspNetCore.Mvc.HttpPostAttribute) 。 該方法會從 HTTP 要求本文取得待辦事項的值。
 
+如需詳細資訊，請參閱[使用 Http[Verb] 屬性的屬性路由](xref:mvc/controllers/routing#attribute-routing-with-httpverb-attributes)。
+
 <xref:Microsoft.AspNetCore.Mvc.ControllerBase.CreatedAtAction*> 方法：
 
 * 成功時會傳回 HTTP 201 狀態碼。 對於可在伺服器上建立新資源的 HTTP POST 方法，其標準回應是 HTTP 201。
-* 將[Location](https://developer.mozilla.org/docs/Web/HTTP/Headers/Location)標頭新增至回應。 `Location`標頭會指定新建立之待辦事項專案的[URI](https://developer.mozilla.org/docs/Glossary/URI) 。 如需詳細資訊，請參閱 [10.2.2 201 Created](https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html) (已建立 10.2.2 201)。
+* 將 [Location](https://developer.mozilla.org/docs/Web/HTTP/Headers/Location) 標頭新增至回應。 `Location`標頭會指定新建立之待辦事項專案的[URI](https://developer.mozilla.org/docs/Glossary/URI) 。 如需詳細資訊，請參閱 [10.2.2 201 Created](https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html) (已建立 10.2.2 201)。
 * 參考 `GetTodoItem` 動作以建立 `Location` 標頭的 URI。 C# `nameof` 關鍵字是用來避免在 `CreatedAtAction` 呼叫中以硬式編碼方式寫入動作名稱。
 
 ### <a name="install-postman"></a>安裝 Postman
 
 本教學課程使用 Postman 來測試 Web API。
 
-* 安裝[Postman](https://www.getpostman.com/downloads/)
+* 安裝 [Postman](https://www.getpostman.com/downloads/)
 * 啟動 Web 應用程式。
 * 啟動 Postman。
 * 停用 [SSL certificate verification] \(SSL 憑證驗證\)****
@@ -348,6 +351,7 @@ dotnet aspnet-codegenerator controller -name TodoItemsController -async -api -m 
 
 * 建立新的要求。
 * 將 HTTP 方法設為 `POST`。
+* 將 URI 設定為 `https://localhost:<port>/api/TodoItem` 。 例如： `https://localhost:5001/api/TodoItem` 。
 * 選取 [Body]**** \(本文\) 索引標籤。
 * 選取 [原始]**** 選項按鈕。
 * 將類型設定為 **JSON (application/json)**。
@@ -364,15 +368,15 @@ dotnet aspnet-codegenerator controller -name TodoItemsController -async -api -m 
 
   ![Postman 與建立要求](first-web-api/_static/3/create.png)
 
-### <a name="test-the-location-header-uri"></a>測試位置標頭 URI
+### <a name="test-the-location-header-uri-with-postman"></a>使用 Postman 測試 location 標頭 URI
 
 * 在 [回應]**** 窗格中選取 [標頭]**** 索引標籤。
 * 複製 [位置]**** 標頭值：
 
   ![Postman 主控台的 [標頭] 索引標籤](first-web-api/_static/3/create.png)
 
-* 將方法設定為 GET。
-* 將 URI 貼入 (例如， `https://localhost:5001/api/TodoItems/1`) 。
+* 將 HTTP 方法設為 `GET`。
+* 將 URI 設定為 `https://localhost:<port>/api/TodoItems/1` 。 例如： `https://localhost:5001/api/TodoItems/1` 。
 * 選取 [傳送]。
 
 ## <a name="examine-the-get-methods"></a>檢查 GET 方法
@@ -403,7 +407,7 @@ dotnet aspnet-codegenerator controller -name TodoItemsController -async -api -m 
 
 * 建立新的要求。
 * 將 HTTP 方法設定為 **GET**。
-* 將要求 URL 設定為 `https://localhost:<port>/api/TodoItems`。 例如，`https://localhost:5001/api/TodoItems`。
+* 將要求 URI 設定為 `https://localhost:<port>/api/TodoItems` 。 例如： `https://localhost:5001/api/TodoItems` 。
 * 在 Postman 中，設定 [Two pane view] \(雙窗格檢視\)****。
 * 選取 [傳送]。
 
@@ -426,7 +430,7 @@ dotnet aspnet-codegenerator controller -name TodoItemsController -async -api -m 
 
 ## <a name="return-values"></a>傳回值
 
-和方法的傳回型 `GetTodoItems` 別 `GetTodoItem` 是[ActionResult \<T> 型](xref:web-api/action-return-types#actionresultt-type)別。 ASP.NET Core 會自動將物件序列化為 [JSON](https://www.json.org/)，並將 JSON 寫入至回應訊息的本文。 此傳回型別的回應碼為 200，假設沒有任何未處理的例外狀況。 未處理的例外狀況會轉譯成 5xx 錯誤。
+和方法的傳回型 `GetTodoItems` 別 `GetTodoItem` 是 [ActionResult \<T> 型](xref:web-api/action-return-types#actionresultt-type)別。 ASP.NET Core 會自動將物件序列化為 [JSON](https://www.json.org/)，並將 JSON 寫入至回應訊息的本文。 此傳回型別的回應碼為 200，假設沒有任何未處理的例外狀況。 未處理的例外狀況會轉譯成 5xx 錯誤。
 
 `ActionResult` 傳回型別可代表各種 HTTP 狀態碼。 例如，`GetTodoItem` 可傳回兩個不同的狀態值：
 
@@ -439,7 +443,7 @@ dotnet aspnet-codegenerator controller -name TodoItemsController -async -api -m 
 
 [!code-csharp[](first-web-api/samples/3.0/TodoApi/Controllers/TodoItemsController.cs?name=snippet_Update)]
 
-`PutTodoItem` 類似於 `PostTodoItem`，但是會使用 HTTP PUT。 回應為[204 (沒有內容) ](https://www.w3.org/Protocols/rfc2616/rfc2616-sec9.html)。 根據 HTTP 規格，PUT 要求需要用戶端傳送整個更新的實體，而不只是變更。 若要支援部分更新，請使用 [HTTP PATCH](xref:Microsoft.AspNetCore.Mvc.HttpPatchAttribute)。
+`PutTodoItem` 類似於 `PostTodoItem`，但是會使用 HTTP PUT。 回應為 [204 (沒有內容) ](https://www.w3.org/Protocols/rfc2616/rfc2616-sec9.html)。 根據 HTTP 規格，PUT 要求需要用戶端傳送整個更新的實體，而不只是變更。 若要支援部分更新，請使用 [HTTP PATCH](xref:Microsoft.AspNetCore.Mvc.HttpPatchAttribute)。
 
 如果在呼叫 `PutTodoItem` 時發生錯誤，請呼叫 `GET` 以確保資料庫中有項目。
 
@@ -508,7 +512,7 @@ DTO 可用來：
 
 ## <a name="call-the-web-api-with-javascript"></a>使用 JavaScript 呼叫 Web API
 
-請參閱[教學課程：使用 JavaScript 呼叫 ASP.NET Core Web API](xref:tutorials/web-api-javascript)。
+請參閱 [教學課程：使用 JavaScript 呼叫 ASP.NET Core Web API](xref:tutorials/web-api-javascript)。
 
 ::: moniker-end
 
@@ -534,17 +538,17 @@ DTO 可用來：
 
 |API | 描述 | Request body | 回應本文 |
 |--- | ---- | ---- | ---- |
-|GET /api/TodoItems | 取得所有待辦事項 | None | 待辦事項的陣列|
-|GET /api/TodoItems/{識別碼} | 依識別碼取得項目 | None | 待辦事項|
+|GET /api/TodoItems | 取得所有待辦事項 | 無 | 待辦事項的陣列|
+|GET /api/TodoItems/{識別碼} | 依識別碼取得項目 | 無 | 待辦事項|
 |POST /api/TodoItems | 新增記錄 | 待辦事項 | 待辦事項 |
-|PUT /api/TodoItems/{識別碼} | 更新現有的項目 &nbsp; | 待辦事項 | None |
-|刪除/api/TodoItems/{id} &nbsp;&nbsp; | 刪除專案 &nbsp;&nbsp; | None | None|
+|PUT /api/TodoItems/{識別碼} | 更新現有的項目 &nbsp; | 待辦事項 | 無 |
+|刪除/api/TodoItems/{id} &nbsp;&nbsp; | 刪除專案 &nbsp;&nbsp; | 無 | 無|
 
 下圖顯示應用程式的設計。
 
 ![左側方塊代表用戶端。 它會送出要求並接收來自應用程式 (右側繪製的方塊) 的回應。 在應用程式方塊中，三個方塊代表控制器、模型以及資料存取層。 要求進入應用程式的控制器，而在控制器與資料存取層之間進行讀取/寫入作業。 模型會序列化並在回應中傳回至用戶端。](first-web-api/_static/architecture.png)
 
-## <a name="prerequisites"></a>必要條件
+## <a name="prerequisites"></a>先決條件
 
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
@@ -594,7 +598,7 @@ DTO 可用來：
 
 * 在8.6 版之前的 Visual Studio for Mac 中，選取 [ **.net Core**  >  **應用程式**  >  **API**  >  **] [下一步]**。 在8.6 或更新版本中，選取 [ **Web 和主控台**  >  **應用程式**  >  **API**  >  **] [下一步]**。
   
-* 在 [**設定您的新 ASP.NET Core WEB API** ] 對話方塊中，選取最新的 .net Core 2.X**目標架構**。 選取 [下一步]  。
+* 在 [ **設定新的 ASP.NET Core WEB API** ] 對話方塊中，選取最新的 .net Core 2.X **目標架構**。 選取 [下一步] 。
 
 * 針對 [專案名稱]**** 輸入 *TodoApi*，然後選取 [建立]****。
 
@@ -634,7 +638,7 @@ DTO 可用來：
 
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
-* 在**方案總管**中，以滑鼠右鍵按一下專案。 選取 **[**  >  **新增資料夾**]。 將資料夾命名為 *Models*。
+* 在 **方案總管**中，以滑鼠右鍵按一下專案。 選取 **[**  >  **新增資料夾**]。 將資料夾命名為 *Models*。
 
 * 以滑鼠右鍵按一下 *Models* 資料夾，然後選取 [新增]**** > [類別]****。 將類別命名為 *TodoItem*，然後選取 [新增]****。
 
@@ -773,7 +777,7 @@ DTO 可用來：
 
 ## <a name="return-values"></a>傳回值
 
-和方法的傳回型 `GetTodoItems` 別 `GetTodoItem` 是[ActionResult \<T> 型](xref:web-api/action-return-types#actionresultt-type)別。 ASP.NET Core 會自動將物件序列化為 [JSON](https://www.json.org/)，並將 JSON 寫入至回應訊息的本文。 此傳回型別的回應碼為 200，假設沒有任何未處理的例外狀況。 未處理的例外狀況會轉譯成 5xx 錯誤。
+和方法的傳回型 `GetTodoItems` 別 `GetTodoItem` 是 [ActionResult \<T> 型](xref:web-api/action-return-types#actionresultt-type)別。 ASP.NET Core 會自動將物件序列化為 [JSON](https://www.json.org/)，並將 JSON 寫入至回應訊息的本文。 此傳回型別的回應碼為 200，假設沒有任何未處理的例外狀況。 未處理的例外狀況會轉譯成 5xx 錯誤。
 
 `ActionResult` 傳回型別可代表各種 HTTP 狀態碼。 例如，`GetTodoItem` 可傳回兩個不同的狀態值：
 
@@ -784,10 +788,10 @@ DTO 可用來：
 
 本教學課程使用 Postman 來測試 Web API。
 
-* 安裝[Postman](https://www.getpostman.com/downloads/)。
+* 安裝 [Postman](https://www.getpostman.com/downloads/)。
 * 啟動 Web 應用程式。
 * 啟動 Postman。
-* 停用**SSL 憑證驗證**。
+* 停用 **SSL 憑證驗證**。
 
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
@@ -804,7 +808,7 @@ DTO 可用來：
 
 * 建立新的要求。
   * 將 HTTP 方法設定為 **GET**。
-  * 將要求 URL 設定為 `https://localhost:<port>/api/todo`。 例如，`https://localhost:5001/api/todo`。
+  * 將要求 URI 設定為 `https://localhost:<port>/api/todo` 。 例如： `https://localhost:5001/api/todo` 。
 * 在 Postman 中，設定 [Two pane view] \(雙窗格檢視\)****。
 * 選取 [傳送]。
 
@@ -830,6 +834,7 @@ DTO 可用來：
 
 * 建置專案。
 * 在 Postman 中，將 HTTP 方法設定為 `POST`。
+* 將 URI 設定為 `https://localhost:<port>/api/TodoItem` 。 例如： `https://localhost:5001/api/TodoItem` 。
 * 選取 [Body]**** \(本文\) 索引標籤。
 * 選取 [原始]**** 選項按鈕。
 * 將類型設定為 **JSON (application/json)**。
@@ -856,7 +861,7 @@ DTO 可用來：
   ![Postman 主控台的 [標頭] 索引標籤](first-web-api/_static/pmc2.png)
 
 * 將方法設定為 GET。
-* 將 URI 貼入 (例如， `https://localhost:5001/api/Todo/2`) 。
+* 將 URI 設定為  `https://localhost:<port>/api/TodoItems/2` 。例如，  `https://localhost:5001/api/TodoItems/2` 。
 * 選取 [傳送]。
 
 ## <a name="add-a-puttodoitem-method"></a>新增 PutTodoItem 方法
@@ -865,7 +870,7 @@ DTO 可用來：
 
 [!code-csharp[](first-web-api/samples/2.2/TodoApi/Controllers/TodoController.cs?name=snippet_Update)]
 
-`PutTodoItem` 類似於 `PostTodoItem`，但是會使用 HTTP PUT。 回應為[204 (沒有內容) ](https://www.w3.org/Protocols/rfc2616/rfc2616-sec9.html)。 根據 HTTP 規格，PUT 要求需要用戶端傳送整個更新的實體，而不只是變更。 若要支援部分更新，請使用 [HTTP PATCH](xref:Microsoft.AspNetCore.Mvc.HttpPatchAttribute)。
+`PutTodoItem` 類似於 `PostTodoItem`，但是會使用 HTTP PUT。 回應為 [204 (沒有內容) ](https://www.w3.org/Protocols/rfc2616/rfc2616-sec9.html)。 根據 HTTP 規格，PUT 要求需要用戶端傳送整個更新的實體，而不只是變更。 若要支援部分更新，請使用 [HTTP PATCH](xref:Microsoft.AspNetCore.Mvc.HttpPatchAttribute)。
 
 如果在呼叫 `PutTodoItem` 時發生錯誤，請呼叫 `GET` 以確保資料庫中有項目。
 

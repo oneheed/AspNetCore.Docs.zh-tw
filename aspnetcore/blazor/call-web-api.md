@@ -1,7 +1,7 @@
 ---
-title: 從 ASP.NET Core 呼叫 Web APIBlazor WebAssembly
+title: 從 ASP.NET Core 呼叫 web API Blazor WebAssembly
 author: guardrex
-description: 瞭解如何 Blazor WebAssembly 使用 JSON helper 從應用程式呼叫 Web API，包括使跨原始資源分享 (CORS) 要求。
+description: 瞭解如何 Blazor WebAssembly 使用 JSON 協助程式從應用程式呼叫 WEB API，包括建立跨原始資源分享 (CORS) 要求。
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
@@ -17,32 +17,32 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/call-web-api
-ms.openlocfilehash: ef31d3d9b3914f3c86aa397ff214778fe295964b
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: f8c105624506d13f3ea8e963ceb49aeaf6d22a66
+ms.sourcegitcommit: dfea24471f4f3d7904faa92fe60c000853bddc3b
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88012577"
+ms.lasthandoff: 08/18/2020
+ms.locfileid: "88504563"
 ---
-# <a name="call-a-web-api-from-aspnet-core-no-locblazor"></a>從 ASP.NET Core 呼叫 Web APIBlazor
+# <a name="call-a-web-api-from-aspnet-core-no-locblazor"></a>從 ASP.NET Core 呼叫 web API Blazor
 
-By [Luke Latham](https://github.com/guardrex)、 [Daniel Roth](https://github.com/danroth27)和[Juan De la Cruz](https://github.com/juandelacruz23)
+[Luke Latham](https://github.com/guardrex)、 [Daniel Roth](https://github.com/danroth27)和[Juan De la cruz 一起探討](https://github.com/juandelacruz23)
 
 > [!NOTE]
-> 本主題適用于 Blazor WebAssembly 。 [Blazor Server](xref:blazor/hosting-models#blazor-server)應用程式會使用實例呼叫 web Api <xref:System.Net.Http.HttpClient> ，通常使用建立 <xref:System.Net.Http.IHttpClientFactory> 。 如需適用于的指引 Blazor Server ，請參閱 <xref:fundamentals/http-requests> 。
+> 本主題適用于 Blazor WebAssembly 。 [Blazor Server](xref:blazor/hosting-models#blazor-server) 應用程式會使用 <xref:System.Net.Http.HttpClient> 實例（通常是使用建立）來呼叫 Web api <xref:System.Net.Http.IHttpClientFactory> 。 如需適用于的指引 Blazor Server ，請參閱 <xref:fundamentals/http-requests> 。
 
-[Blazor WebAssembly](xref:blazor/hosting-models#blazor-webassembly)應用程式會使用預先設定的服務來呼叫 web Api <xref:System.Net.Http.HttpClient> 。 撰寫要求，其中可以包含 JavaScript[提取 API](https://developer.mozilla.org/docs/Web/API/Fetch_API)選項、使用 Blazor JSON helper 或搭配 <xref:System.Net.Http.HttpRequestMessage> 。 <xref:System.Net.Http.HttpClient>應用程式中的服務著重于將 Blazor WebAssembly 要求傳回給來源伺服器。 本主題中的指導方針僅適用于 Blazor WebAssembly 應用程式。
+[Blazor WebAssembly](xref:blazor/hosting-models#blazor-webassembly) 應用程式會使用預先設定的服務來呼叫 web Api <xref:System.Net.Http.HttpClient> 。 撰寫要求（可包含 JavaScript [提取 API](https://developer.mozilla.org/docs/Web/API/Fetch_API) 選項），使用 Blazor JSON 協助程式或搭配 <xref:System.Net.Http.HttpRequestMessage> 。 <xref:System.Net.Http.HttpClient>應用程式中的服務著重于將 Blazor WebAssembly 要求傳回給來源伺服器。 本主題中的指導方針僅適用于 Blazor WebAssembly 應用程式。
 
 [查看或下載範例程式碼](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/blazor/common/samples/) ([如何下載](xref:index#how-to-download-a-sample)) ：選取 `BlazorWebAssemblySample` 應用程式。
 
 請參閱範例應用程式中的下列元件 `BlazorWebAssemblySample` ：
 
-* 呼叫 Web API (`Pages/CallWebAPI.razor`) 
+*  () 呼叫 Web API `Pages/CallWebAPI.razor`
 * HTTP 要求測試器 (`Components/HTTPRequestTester.razor`) 
 
 ## <a name="packages"></a>套件
 
-參考 [`System.Net.Http.Json`](https://www.nuget.org/packages/System.Net.Http.Json/) 專案檔中的 NuGet 套件。
+參考 [`System.Net.Http.Json`](https://www.nuget.org/packages/System.Net.Http.Json) 專案檔中的 NuGet 套件。
 
 ## <a name="add-the-httpclient-service"></a>新增 HttpClient 服務
 
@@ -58,24 +58,24 @@ builder.Services.AddScoped(sp =>
 
 ## <a name="httpclient-and-json-helpers"></a>HttpClient 和 JSON 協助程式
 
-在 Blazor WebAssembly 應用程式中， [`HttpClient`](xref:fundamentals/http-requests) 會以預先設定的服務形式提供，讓要求回到源伺服器。
+在 Blazor WebAssembly 應用程式中，可做為預先設定的服務，以向 [`HttpClient`](xref:fundamentals/http-requests) 源伺服器提出要求。
 
-Blazor Server應用程式預設不會包含 <xref:System.Net.Http.HttpClient> 服務。 <xref:System.Net.Http.HttpClient>使用[ `HttpClient` factory 基礎結構](xref:fundamentals/http-requests)，將提供給應用程式。
+Blazor Server依預設，應用程式不會包含 <xref:System.Net.Http.HttpClient> 服務。 <xref:System.Net.Http.HttpClient>使用[ `HttpClient` 工廠基礎結構](xref:fundamentals/http-requests)，提供給應用程式。
 
-<xref:System.Net.Http.HttpClient>和 JSON 協助程式也用來呼叫協力廠商 Web API 端點。 <xref:System.Net.Http.HttpClient>會使用瀏覽器[提取 API](https://developer.mozilla.org/docs/Web/API/Fetch_API)來執行，並受限於其限制，包括強制執行相同的來源原則。
+<xref:System.Net.Http.HttpClient> 此外，也會使用 JSON 協助程式來呼叫協力廠商 web API 端點。 <xref:System.Net.Http.HttpClient> 是使用瀏覽器 [FETCH API](https://developer.mozilla.org/docs/Web/API/Fetch_API) 來執行，並且受限於其限制，包括強制執行相同的原始原則。
 
-用戶端的基底位址會設定為源伺服器的位址。 使用指示詞插入 <xref:System.Net.Http.HttpClient> 實例 [`@inject`](xref:mvc/views/razor#inject) ：
+用戶端的基底位址會設定為來源伺服器的位址。 使用指示詞插入 <xref:System.Net.Http.HttpClient> 實例 [`@inject`](xref:mvc/views/razor#inject) ：
 
 ```razor
 @using System.Net.Http
 @inject HttpClient Http
 ```
 
-在下列範例中，Todo Web API 會處理 (CRUD) 作業的建立、讀取、更新和刪除。 這些範例是以 `TodoItem` 儲存的類別為基礎：
+在下列範例中，Todo web API 會處理 (CRUD) 作業的建立、讀取、更新和刪除作業。 這些範例是以 `TodoItem` 儲存下列各類的類別為基礎：
 
-* 識別碼 (`Id` ， `long`) ：專案的唯一識別碼。
+* ID (`Id` ， `long`) ：專案的唯一識別碼。
 * 名稱 (`Name` ， `string`) ：專案的名稱。
-* 狀態 (`IsComplete` ， `bool`) ： Todo 專案完成時的指示。
+* 狀態 (`IsComplete` ， `bool`) ：是否已完成 Todo 專案的指示。
 
 ```csharp
 private class TodoItem
@@ -86,11 +86,11 @@ private class TodoItem
 }
 ```
 
-JSON helper 方法會將要求傳送至 URI， (下列範例中的 Web API) 並處理回應：
+JSON helper 方法會在下列範例中將要求傳送至 URI (web API) 並處理回應：
 
-* <xref:System.Net.Http.Json.HttpClientJsonExtensions.GetFromJsonAsync%2A>：傳送 HTTP GET 要求，並剖析 JSON 回應主體以建立物件。
+* <xref:System.Net.Http.Json.HttpClientJsonExtensions.GetFromJsonAsync%2A>：傳送 HTTP GET 要求，並剖析 JSON 回應主體來建立物件。
 
-  在下列程式碼中， `todoItems` 元件會顯示。 `GetTodoItems`當元件完成呈現 () 時，就會觸發方法 [`OnInitializedAsync`](xref:blazor/components/lifecycle#component-initialization-methods) 。 如需完整範例，請參閱範例應用程式。
+  在下列程式碼中， `todoItems` 元件會顯示。 `GetTodoItems`當元件 () 轉譯完成時，就會觸發方法 [`OnInitializedAsync`](xref:blazor/components/lifecycle#component-initialization-methods) 。 如需完整範例，請參閱範例應用程式。
 
   ```razor
   @using System.Net.Http
@@ -104,9 +104,9 @@ JSON helper 方法會將要求傳送至 URI， (下列範例中的 Web API) 並�
   }
   ```
 
-* <xref:System.Net.Http.Json.HttpClientJsonExtensions.PostAsJsonAsync%2A>：傳送 HTTP POST 要求，包括 JSON 編碼的內容，並剖析 JSON 回應主體以建立物件。
+* <xref:System.Net.Http.Json.HttpClientJsonExtensions.PostAsJsonAsync%2A>：傳送 HTTP POST 要求（包括 JSON 編碼的內容），並剖析 JSON 回應主體來建立物件。
 
-  在下列程式碼中， `newItemName` 是由元件的繫結項目所提供。 `AddItem`方法是藉由選取元素來觸發 `<button>` 。 如需完整範例，請參閱範例應用程式。
+  在下列程式碼中， `newItemName` 是由元件的繫結項目提供。 藉 `AddItem` 由選取元素來觸發方法 `<button>` 。 如需完整範例，請參閱範例應用程式。
 
   ```razor
   @using System.Net.Http
@@ -126,7 +126,7 @@ JSON helper 方法會將要求傳送至 URI， (下列範例中的 Web API) 並�
   }
   ```
   
-  呼叫會傳回 <xref:System.Net.Http.Json.HttpClientJsonExtensions.PostAsJsonAsync%2A> <xref:System.Net.Http.HttpResponseMessage> 。 若要從回應訊息還原序列化 JSON 內容，請使用 `ReadFromJsonAsync<T>` 擴充方法：
+  呼叫以傳回 <xref:System.Net.Http.Json.HttpClientJsonExtensions.PostAsJsonAsync%2A> <xref:System.Net.Http.HttpResponseMessage> 。 若要從回應訊息還原序列化 JSON 內容，請使用 `ReadFromJsonAsync<T>` 擴充方法：
   
   ```csharp
   var content = response.Content.ReadFromJsonAsync<WeatherForecast>();
@@ -134,7 +134,7 @@ JSON helper 方法會將要求傳送至 URI， (下列範例中的 Web API) 並�
 
 * <xref:System.Net.Http.Json.HttpClientJsonExtensions.PutAsJsonAsync%2A>：傳送 HTTP PUT 要求，包括 JSON 編碼的內容。
 
-  在下列程式碼中， `editItem` 和的值 `Name` `IsCompleted` 是由元件的繫結項目所提供。 `Id`當專案在 UI 的另一個部分中選取並呼叫時，會設定專案的 `EditItem` 。 `SaveItem`方法是藉由選取 Save 元素來觸發 `<button>` 。 如需完整範例，請參閱範例應用程式。
+  在下列程式碼中， `editItem` 和的值 `Name` `IsCompleted` 是由元件的繫結項目提供。 `Id`當專案在 UI 的另一個部分中選取並被呼叫時，會設定專案 `EditItem` 。 藉 `SaveItem` 由選取 [儲存] 元素來觸發方法 `<button>` 。 如需完整範例，請參閱範例應用程式。
 
   ```razor
   @using System.Net.Http
@@ -157,13 +157,13 @@ JSON helper 方法會將要求傳送至 URI， (下列範例中的 Web API) 並�
   }
   ```
   
-  呼叫會傳回 <xref:System.Net.Http.Json.HttpClientJsonExtensions.PutAsJsonAsync%2A> <xref:System.Net.Http.HttpResponseMessage> 。 若要從回應訊息還原序列化 JSON 內容，請使用 <xref:System.Net.Http.Json.HttpContentJsonExtensions.ReadFromJsonAsync%2A> 擴充方法：
+  呼叫以傳回 <xref:System.Net.Http.Json.HttpClientJsonExtensions.PutAsJsonAsync%2A> <xref:System.Net.Http.HttpResponseMessage> 。 若要從回應訊息還原序列化 JSON 內容，請使用 <xref:System.Net.Http.Json.HttpContentJsonExtensions.ReadFromJsonAsync%2A> 擴充方法：
   
   ```csharp
   var content = response.Content.ReadFromJsonAsync<WeatherForecast>();
   ```
 
-<xref:System.Net.Http>包含用來傳送 HTTP 要求和接收 HTTP 回應的其他擴充方法。 <xref:System.Net.Http.HttpClient.DeleteAsync%2A?displayProperty=nameWithType>是用來將 HTTP DELETE 要求傳送至 Web API。
+<xref:System.Net.Http> 包含用來傳送 HTTP 要求和接收 HTTP 回應的額外擴充方法。 <xref:System.Net.Http.HttpClient.DeleteAsync%2A?displayProperty=nameWithType> 用來將 HTTP DELETE 要求傳送至 web API。
 
 在下列程式碼中，Delete `<button>` 元素會呼叫 `DeleteItem` 方法。 綁定 `<input>` 項會提供 `id` 要刪除之專案的。 如需完整範例，請參閱範例應用程式。
 
@@ -182,11 +182,11 @@ JSON helper 方法會將要求傳送至 URI， (下列範例中的 Web API) 並�
 }
 ```
 
-## <a name="named-httpclient-with-ihttpclientfactory"></a>名為 HttpClient 與 IHttpClientFactory
+## <a name="named-httpclient-with-ihttpclientfactory"></a>使用 IHttpClientFactory 命名的 HttpClient
 
-<xref:System.Net.Http.IHttpClientFactory>支援服務和名為的設定 <xref:System.Net.Http.HttpClient> 。
+<xref:System.Net.Http.IHttpClientFactory> 支援服務以及命名的設定 <xref:System.Net.Http.HttpClient> 。
 
-參考 [`Microsoft.Extensions.Http`](https://www.nuget.org/packages/Microsoft.Extensions.Http/) 專案檔中的 NuGet 套件。
+參考 [`Microsoft.Extensions.Http`](https://www.nuget.org/packages/Microsoft.Extensions.Http) 專案檔中的 NuGet 套件。
 
 `Program.Main` (`Program.cs`):
 
@@ -195,7 +195,7 @@ builder.Services.AddHttpClient("ServerAPI", client =>
     client.BaseAddress = new Uri(builder.HostEnvironment.BaseAddress));
 ```
 
-`FetchData`元件 (`Pages/FetchData.razor`) ：
+`FetchData` 元件 (`Pages/FetchData.razor`) ：
 
 ```razor
 @inject IHttpClientFactory ClientFactory
@@ -217,7 +217,7 @@ builder.Services.AddHttpClient("ServerAPI", client =>
 
 ## <a name="typed-httpclient"></a>具類型的 HttpClient
 
-型別會 <xref:System.Net.Http.HttpClient> 使用一個或多個應用程式的 <xref:System.Net.Http.HttpClient> 實例（預設或名為），從一或多個 Web API 端點傳回資料。
+具型別會 <xref:System.Net.Http.HttpClient> 使用一或多個應用程式的 <xref:System.Net.Http.HttpClient> 實例（預設或命名）來傳回一或多個 web API 端點的資料。
 
 `WeatherForecastClient.cs`:
 
@@ -261,9 +261,9 @@ builder.Services.AddHttpClient<WeatherForecastClient>(client =>
     client.BaseAddress = new Uri(builder.HostEnvironment.BaseAddress));
 ```
 
-元件會插入具類型的 <xref:System.Net.Http.HttpClient> 以呼叫 Web API。
+元件會插入型別 <xref:System.Net.Http.HttpClient> 以呼叫 WEB API。
 
-`FetchData`元件 (`Pages/FetchData.razor`) ：
+`FetchData` 元件 (`Pages/FetchData.razor`) ：
 
 ```razor
 @inject WeatherForecastClient Client
@@ -282,13 +282,13 @@ builder.Services.AddHttpClient<WeatherForecastClient>(client =>
 
 ## <a name="handle-errors"></a>處理錯誤
 
-與 Web API 互動時，如果發生錯誤，就可以由開發人員程式碼來處理。 例如， <xref:System.Net.Http.Json.HttpClientJsonExtensions.GetFromJsonAsync%2A> 預期來自伺服器 API 的 JSON 回應與 `Content-Type` 的 `application/json` 。 如果回應不是 JSON 格式，則內容驗證會擲回 <xref:System.NotSupportedException> 。
+當與 web API 互動時發生錯誤，可由開發人員程式碼處理。 例如， <xref:System.Net.Http.Json.HttpClientJsonExtensions.GetFromJsonAsync%2A> 需要來自伺服器 API 的 JSON 回應，以及 `Content-Type` 的 `application/json` 。 如果回應不是 JSON 格式，則內容驗證會擲回 <xref:System.NotSupportedException> 。
 
-在下列範例中，氣象預報資料要求的 URI 端點拼錯。 URI 應該是， `WeatherForecast` 但在呼叫中會顯示為 `WeatherForcast` (遺漏 "e" ) 。
+在下列範例中，氣象預測資料要求的 URI 端點拼寫錯誤。 URI 應該會 `WeatherForecast` 在呼叫中顯示，但 `WeatherForcast` (遺漏 "e" ) 。
 
-<xref:System.Net.Http.Json.HttpClientJsonExtensions.GetFromJsonAsync%2A>呼叫預期會傳回 JSON，但是伺服器會針對具有之的伺服器上的未處理例外狀況傳回 HTML `Content-Type` `text/html` 。 未處理的例外狀況發生在伺服器上，因為找不到路徑，而且中介軟體無法提供要求的頁面或視圖。
+<xref:System.Net.Http.Json.HttpClientJsonExtensions.GetFromJsonAsync%2A>呼叫需要傳回 JSON，但是伺服器會傳回 HTML，以取得伺服器上未處理的例外狀況，以及 `Content-Type` 的 `text/html` 。 伺服器上發生未處理的例外狀況，因為找不到路徑，且中介軟體無法提供要求的頁面或觀點。
 
-在 <xref:Microsoft.AspNetCore.Components.ComponentBase.OnInitializedAsync%2A> 用戶端上， <xref:System.NotSupportedException> 當回應內容驗證為非 JSON 時，會擲回。 在區塊中攔截到例外狀況 `catch` ，其中自訂邏輯可以記錄錯誤，或向使用者呈現易記的錯誤訊息：
+在 <xref:Microsoft.AspNetCore.Components.ComponentBase.OnInitializedAsync%2A> 用戶端上， <xref:System.NotSupportedException> 會在回應內容驗證為非 JSON 時擲回。 例外狀況會在區塊中 `catch` 攔截，其中自訂邏輯可能會記錄錯誤，或向使用者呈現易記的錯誤訊息：
 
 ```csharp
 protected override async Task OnInitializedAsync()
@@ -306,24 +306,24 @@ protected override async Task OnInitializedAsync()
 ```
 
 > [!NOTE]
-> 上述範例是為了示範之用。 即使端點不存在或伺服器上發生未處理的例外狀況，Web API 伺服器應用程式也可以設定為傳回 JSON。
+> 上述範例僅供示範之用。 Web API 伺服器應用程式可以設定為傳回 JSON，即使端點不存在，或伺服器上發生未處理的例外狀況。
 
 如需詳細資訊，請參閱<xref:blazor/fundamentals/handle-errors>。
 
 ## <a name="cross-origin-resource-sharing-cors"></a>跨原始資源分享 (CORS) 
 
-瀏覽器安全性可防止網頁向不同于服務網頁的網域提出要求。 這種限制稱為「*相同來源原則*」。 相同來源的原則可防止惡意網站從另一個網站讀取敏感性資料。 若要將來自瀏覽器的要求傳送至具有不同來源的端點，*端點*必須啟用[跨原始資源分享 (CORS) ](https://www.w3.org/TR/cors/)。
+瀏覽器安全性可防止網頁向與提供網頁的不同網域提出要求。 這項限制稱為 *相同原始來源原則*。 相同來源原則可防止惡意網站從另一個網站讀取敏感性資料。 若要從瀏覽器向具有不同來源的端點提出要求， *端點* 必須啟用 [跨原始來源資源分享 (CORS) ](https://www.w3.org/TR/cors/)。
 
-[ Blazor WebAssembly 範例應用程式 (Blazor WebAssemblySample) ](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/blazor/common/samples/)示範如何在 () 的呼叫 Web API 元件中使用 CORS `Pages/CallWebAPI.razor` 。
+[ Blazor WebAssembly (Blazor WebAssemblySample) 範例應用程式](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/blazor/common/samples/)會示範如何在呼叫 Web API 元件中使用 CORS (`Pages/CallWebAPI.razor`) 。
 
-如需有關在應用程式中使用安全要求之 CORS 的詳細資訊 Blazor ，請參閱 <xref:blazor/security/webassembly/additional-scenarios#cross-origin-resource-sharing-cors> 。
+如需在應用程式中使用安全要求進行 CORS 的詳細資訊 Blazor ，請參閱 <xref:blazor/security/webassembly/additional-scenarios#cross-origin-resource-sharing-cors> 。
 
-如需有關 ASP.NET Core 應用程式之 CORS 的一般資訊，請參閱 <xref:security/cors> 。
+如需搭配 ASP.NET Core apps 之 CORS 的一般資訊，請參閱 <xref:security/cors> 。
 
 ## <a name="additional-resources"></a>其他資源
 
-* <xref:blazor/security/webassembly/additional-scenarios>：包含使用 <xref:System.Net.Http.HttpClient> 來提出安全 Web API 要求的涵蓋範圍。
+* <xref:blazor/security/webassembly/additional-scenarios>：包含使用的涵蓋範圍 <xref:System.Net.Http.HttpClient> ，以提出安全的 WEB API 要求。
 * <xref:fundamentals/http-requests>
 * <xref:security/enforcing-ssl>
 * [Kestrel HTTPS 端點設定](xref:fundamentals/servers/kestrel#endpoint-configuration)
-* [跨原始來源資源分享 (在 W3C) 的 CORS](https://www.w3.org/TR/cors/)
+* [在 W3C (CORS) 的跨原始資源分享](https://www.w3.org/TR/cors/)

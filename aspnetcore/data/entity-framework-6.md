@@ -1,7 +1,7 @@
 ---
 title: ASP.NET Core 和 Entity Framework 6
 author: rick-anderson
-description: Entity Framework 6.3 和更新版本適用于 ASP.NET Core 3.1 及更新版本。
+description: Entity Framework 6.3 和更新版本適用于 ASP.NET Core 3.1 和更新版本。
 ms.author: riande
 ms.custom: mvc
 ms.date: 7/14/2020
@@ -14,17 +14,21 @@ no-loc:
 - Razor
 - SignalR
 uid: data/entity-framework-6
-ms.openlocfilehash: c65a1ae7cc67ec7e15a2b732184bc05803eb40ce
-ms.sourcegitcommit: ec41ab354952b75557240923756a8c2ac79b49f8
+ms.openlocfilehash: 7e7a07a080d2feefb994396c689279545ce5432f
+ms.sourcegitcommit: dfea24471f4f3d7904faa92fe60c000853bddc3b
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 08/13/2020
-ms.locfileid: "88202760"
+ms.lasthandoff: 08/18/2020
+ms.locfileid: "88504693"
 ---
 # <a name="aspnet-core-and-entity-framework-6"></a>ASP.NET Core 和 Entity Framework 6
 ::: moniker range=">= aspnetcore-3.0"
 
-[Entity Framework](/ef/ef6/) 6.3 和更新版本適用于 ASP.NET Core 3.1 及更新版本。 如需詳細資訊，請參閱 [宣佈使用 .Net Core 支援的 Entity Framework 6.3](https://devblogs.microsoft.com/dotnet/announcing-entity-framework-6-3-preview-with-net-core-support/)的 blog 文章。
+依 [派翠克 Goode](https://github.com/attrib75)
+
+## <a name="using-entity-framework-6-with-aspnet-core"></a>搭配使用 Entity Framework 6 與 ASP.NET Core
+
+[Entity Framework Core](/ef/) 應該用於新的開發。 [下載範例](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/data/entity-framework-6/3.xsample)使用[ENTITY FRAMEWORK 6 (EF6) ](/ef/ef6)，可用來將現有的應用程式遷移至 ASP.NET Core。
 
 ## <a name="additional-resources"></a>其他資源
 
@@ -42,7 +46,7 @@ ms.locfileid: "88202760"
 
 若要使用 Entity Framework 6，您的專案必須針對 .NET Framework 進行編譯，因為 Entity Framework 6 不支援 .NET Core。 如果您需要跨平台功能，則必須升級至 [Entity Framework Core](/ef/)。  
 
-在 ASP.NET Core 應用程式中使用 Entity Framework 6 的建議方式是將 EF6 內容和模型類別放在以 .NET Framework 為目標的類別庫專案中。 從 ASP.NET Core 專案新增類別庫的參考。 請參閱[使用 EF6 和 ASP.NET Core 專案的 Visual Studio 方案](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/data/entity-framework-6/sample/)範例。  
+在 ASP.NET Core 應用程式中使用 Entity Framework 6 的建議方式，是將 EF6 內容和模型類別放在以 .NET Framework 為目標的類別庫專案中。 從 ASP.NET Core 專案新增類別庫的參考。 請參閱[使用 EF6 和 ASP.NET Core 專案的 Visual Studio 方案](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/data/entity-framework-6/sample/)範例。  
 
 您無法將 EF6 內容置於 ASP.NET Core 專案中，因為 .NET Core 專案不支援 EF6 命令 (例如 *Enable-Migrations*) 需要的所有功能。    
 
@@ -50,7 +54,7 @@ ms.locfileid: "88202760"
 
 ## <a name="reference-full-framework-and-ef6-in-the-aspnet-core-project"></a>在 ASP.NET Core 專案中參考完整 Framework 和 EF6 
 
-您的 ASP.NET Core 專案必須以 .NET Framework 為目標並參考 EF6。 例如，ASP.NET Core 專案的 *.csproj* 檔案看起來類似下列範例 (只顯示檔案的相關部分)。    
+您的 ASP.NET Core 專案必須以 .NET Framework 和參考 EF6 為目標。 例如，ASP.NET Core 專案的 *.csproj* 檔案看起來類似下列範例 (只顯示檔案的相關部分)。    
 
 [!code-xml[](entity-framework-6/sample/MVCCore/MVCCore.csproj?range=3-9&highlight=2)]   
 

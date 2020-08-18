@@ -426,6 +426,8 @@
           uid: blazor/webassembly-lazy-load-assemblies
         - name: WebAssembly 效能
           uid: blazor/webassembly-performance-best-practices
+        - name: 測試
+          uid: blazor/test
         - name: 漸進式 Web 應用程式
           uid: blazor/progressive-web-app
         - name: 裝載和部署
@@ -438,6 +440,8 @@
               uid: blazor/host-and-deploy/server
             - name: 設定連結器
               uid: blazor/host-and-deploy/configure-linker
+        - name: Blazor Server 和 EF Core
+          uid: blazor/blazor-server-ef-core
         - name: 進階案例
           uid: blazor/advanced-scenarios
     - name: 用戶端開發

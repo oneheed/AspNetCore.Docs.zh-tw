@@ -6,6 +6,7 @@ ms.author: scaddie
 ms.custom: mvc
 ms.date: 12/05/2019
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -16,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: migration/1x-to-2x/index
-ms.openlocfilehash: cad1cd868ef8c972d7e0fbfec79cd1d8b49c3b6e
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: 6160dfd117235065ba4b990b95bbc1f4abdf1626
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88015331"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88634341"
 ---
 # <a name="migrate-from-aspnet-core-1x-to-20"></a>從 ASP.NET Core 1.x 遷移至 2.0
 
@@ -33,7 +34,7 @@ ms.locfileid: "88015331"
 
 <a name="prerequisites"></a>
 
-## <a name="prerequisites"></a>必要條件
+## <a name="prerequisites"></a>Prerequisites
 
 請參閱 [ASP.NET Core 使用者入門](xref:getting-started)。
 
@@ -128,7 +129,7 @@ Unable to create an object of type '<Context>'. Add an implementation of 'IDesig
 
 [!code-csharp[](../1x-to-2x/samples/AspNetCoreDotNetCore1App/AspNetCoreDotNetCore1App/Startup.cs?name=snippet_1xStartup)]
 
-上述範例會 `Configuration` 從*appsettings.js的*和任何 appsettings 載入具有設定的成員* \<EnvironmentName\> 。* 符合屬性的 json 檔案 `IHostingEnvironment.EnvironmentName` 。 這些檔案的位置與 *Startup.cs* 的路徑相同。
+上述範例會 `Configuration` 從 *appsettings.js的* 設定，以及任何 appsettings，載入具有設定的成員 * \<EnvironmentName\> 。* 符合屬性的 json 檔案 `IHostingEnvironment.EnvironmentName` 。 這些檔案的位置與 *Startup.cs* 的路徑相同。
 
 在 2.0 專案中，1.x 專案固有的模板組態程式碼會在幕後執行。 例如，環境變數及應用程式設定會在啟動時載入。 對等的 *Startup.cs* 程式碼會縮減成為插入執行個體的 `IConfiguration` 初始化：
 
@@ -168,11 +169,11 @@ Unable to create an object of type '<Context>'. Add an implementation of 'IDesig
 
 ## <a name="review-no-locrazor-view-compilation-setting"></a>審核 Razor 視圖編譯設定
 
-更快速的應用程式啟動時間和較小的發行組合對您而言極為重要。 基於這些理由，預設會在 ASP.NET Core 2.0 中啟用[ Razor view 編譯](xref:mvc/views/view-compilation)。
+更快速的應用程式啟動時間和較小的發行組合對您而言極為重要。 基於這些理由，ASP.NET Core 2.0 中預設會啟用[ Razor view 編譯](xref:mvc/views/view-compilation)。
 
 已不再需要將 `MvcRazorCompileOnPublish` 屬性設定為 true。 除非您停用檢視編譯，否則屬性可能會從 *.csproj* 檔案中移除。
 
-以 .NET Framework 為目標時，您仍然需要明確參考[AspNetCore Razor 。Microsoft.aspnetcore.mvc.razor.viewcompilation](https://www.nuget.org/packages/Microsoft.AspNetCore.Mvc.Razor.ViewCompilation) *.csproj*檔案中的 NuGet 套件：
+以 .NET Framework 為目標時，您仍然需要明確參考 [AspNetCore Razor 。](https://www.nuget.org/packages/Microsoft.AspNetCore.Mvc.Razor.ViewCompilation) 在 *.csproj* 檔案中 >microsoft.aspnetcore.mvc.razor.viewcompilation NuGet 套件：
 
 [!code-xml[](../1x-to-2x/samples/AspNetCoreDotNetFx2.0App/AspNetCoreDotNetFx2.0App/AspNetCoreDotNetFx2.0App.csproj?range=15)]
 
@@ -200,9 +201,9 @@ Unable to create an object of type '<Context>'. Add an implementation of 'IDesig
 
 <a name="auth-and-identity"></a>
 
-## <a name="adopt-authenticationno-locidentity-improvements"></a>採用驗證/改良 Identity 功能
+## <a name="adopt-authenticationno-locidentity-improvements"></a>採用驗證/ Identity 改進
 
-ASP.NET Core 2.0 具有新的驗證模型和一些 ASP.NET Core 的重大變更 Identity 。 如果您已在啟用個別使用者帳戶的情況下建立專案，或者您已手動新增驗證或 Identity ，請參閱[遷移驗證和 Identity ASP.NET Core 2.0](xref:migration/1x-to-2x/identity-2x)。
+ASP.NET Core 2.0 有新的驗證模型和的許多重大變更 ASP.NET Core Identity 。 如果您已在啟用個別使用者帳戶的情況下建立您的專案，或您已手動新增驗證或 Identity ，請參閱 [遷移驗證以及 Identity ASP.NET Core 2.0](xref:migration/1x-to-2x/identity-2x)。
 
 ## <a name="additional-resources"></a>其他資源
 

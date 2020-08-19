@@ -7,6 +7,7 @@ ms.custom: mvc
 ms.date: 03/27/2019
 ms.topic: tutorial
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -17,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: data/ef-mvc/concurrency
-ms.openlocfilehash: f97d551348ca31cc35ab5b04493ea702311a069e
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: 629baeba545142e156e1a51107b470c932dae3cb
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88012952"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88629271"
 ---
 # <a name="tutorial-handle-concurrency---aspnet-mvc-with-ef-core"></a>教學課程：使用 EF Core 處理並行 ASP.NET MVC
 
@@ -47,7 +48,7 @@ ms.locfileid: "88012952"
 > * 更新 [刪除] 頁面
 > * 更新 [詳細資料] 及 [建立] 檢視
 
-## <a name="prerequisites"></a>必要條件
+## <a name="prerequisites"></a>Prerequisites
 
 * [更新相關資料](update-related-data.md)
 
@@ -81,15 +82,15 @@ Jana 先按了一下 [儲存]****，並且在瀏覽器返回 [索引] 頁面時�
 
 * 您可以追蹤使用者修改的屬性，然後僅在資料庫中更新相對應的資料行。
 
-     在範例案例中，將不會發生資料遺失，因為兩名使用者更新的屬性不同。 下一次當有人瀏覽英文部門時，他們便會同時看到 Jane 和 John 所作出的變更 -- 開始日期為 2013/9/1，預算為美金 0 元。 這個更新方法可減少可能導致資料遺失之衝突發生的次數，但卻無法在實體中的相同屬性遭到變更時避免資料遺失。 Entity Framework 是否會以這種方式處理並行衝突，取決於您實作更新程式碼的方式。 通常在 Web 應用程式中，這種方法並不實用，因為它需要您維持大量的狀態，以追蹤實體所有原始的屬性值和新的值。 維護大量的狀態可能會影響應用程式效能，因為它可能需要伺服器資源，或是必須包含在網頁本身 (例如，) 或中的隱藏欄位中 cookie 。
+     在範例案例中，將不會發生資料遺失，因為兩名使用者更新的屬性不同。 下一次當有人瀏覽英文部門時，他們便會同時看到 Jane 和 John 所作出的變更 -- 開始日期為 2013/9/1，預算為美金 0 元。 這個更新方法可減少可能導致資料遺失之衝突發生的次數，但卻無法在實體中的相同屬性遭到變更時避免資料遺失。 Entity Framework 是否會以這種方式處理並行衝突，取決於您實作更新程式碼的方式。 通常在 Web 應用程式中，這種方法並不實用，因為它需要您維持大量的狀態，以追蹤實體所有原始的屬性值和新的值。 維護大量的狀態可能會影響應用程式效能，因為它需要伺服器資源或必須包含在網頁本身 (例如，在隱藏的欄位) 或中 cookie 。
 
 * 您可以讓 John 的變更覆寫 Jane 的變更。
 
-     下一次當有人瀏覽英文部門時，他們便會看到開始日期為 2013/9/1，且預算的金額已還原到美金 $350,000.00 元。 這稱之為「用戶端獲勝 (Client Wins)」** 或「最後寫入為準 (Last in Wins)」** 案例。  (用戶端的所有值會優先于資料存放區中的內容。如本節簡介中所述 ) ，如果您未對並行處理進行任何編碼，則會自動發生。
+     下一次當有人瀏覽英文部門時，他們便會看到開始日期為 2013/9/1，且預算的金額已還原到美金 $350,000.00 元。 這稱之為「用戶端獲勝 (Client Wins)」** 或「最後寫入為準 (Last in Wins)」** 案例。  (用戶端的所有值都優先于資料存放區中的內容。 ) 如本節簡介所述，如果您沒有針對並行處理進行任何編碼，則會自動發生這種情況。
 
 * 您可以防止 John 的變更更新到資料庫中。
 
-     一般而言，您會顯示一個錯誤訊息，將資料目前的狀態顯示給他，然後允許他重新套用他所作出的變更 (若他還是要變更的話)。 這稱為「存放區獲勝 (Store Wins)」** 案例。  (資料存放區的值會優先于用戶端所提交的值。 ) 您將在本教學課程中執行存放區的 Wins 案例。 這個方法可確保沒有任何變更會在使用者收到警示，告知其發生的事情前遭到覆寫。
+     一般而言，您會顯示一個錯誤訊息，將資料目前的狀態顯示給他，然後允許他重新套用他所作出的變更 (若他還是要變更的話)。 這稱為「存放區獲勝 (Store Wins)」** 案例。  (資料存放區值的優先順序高於用戶端所提交的值。 ) 您將在本教學課程中實行 Store 獲勝案例。 這個方法可確保沒有任何變更會在使用者收到警示，告知其發生的事情前遭到覆寫。
 
 ### <a name="detecting-concurrency-conflicts"></a>偵測並行衝突
 
@@ -216,7 +217,7 @@ _context.Entry(departmentToUpdate).Property("RowVersion").OriginalValue = rowVer
 
 ![變更之後的 Department [編輯] 頁面 2](concurrency/_static/edit-after-change-2.png)
 
-按一下 **[儲存]** 。 您會看到一個錯誤訊息：
+按一下 [檔案] 。 您會看到一個錯誤訊息：
 
 ![Department [編輯] 頁面錯誤訊息](concurrency/_static/edit-error.png)
 
@@ -250,7 +251,7 @@ public async Task<IActionResult> DeleteConfirmed(int id)
 public async Task<IActionResult> Delete(Department department)
 ```
 
-您也將動作方法的名稱從 `DeleteConfirmed` 變更為 `Delete`。 Scaffold 程式碼使用了 `DeleteConfirmed` 的名稱來給予 HttpPost 方法一個唯一的簽章。  (CLR 需要多載的方法，以擁有不同的方法參數。 ) 簽章是唯一的，您可以使用 MVC 慣例，並針對 HttpPost 和 HttpGet delete 方法使用相同的名稱。
+您也將動作方法的名稱從 `DeleteConfirmed` 變更為 `Delete`。 Scaffold 程式碼使用了 `DeleteConfirmed` 的名稱來給予 HttpPost 方法一個唯一的簽章。  (CLR 要求多載方法必須有不同的方法參數。 ) 簽章是唯一的，您可以堅持使用 MVC 慣例，並針對 HttpPost 和 HttpGet delete 方法使用相同的名稱。
 
 若部門已遭刪除，`AnyAsync` 方法會傳回 false，應用程式便會直接返回 Index 方法。
 

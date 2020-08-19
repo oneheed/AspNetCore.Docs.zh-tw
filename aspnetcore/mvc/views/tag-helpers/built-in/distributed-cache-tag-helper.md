@@ -6,6 +6,7 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 01/24/2020
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -16,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: mvc/views/tag-helpers/builtin-th/distributed-cache-tag-helper
-ms.openlocfilehash: a7cc45e1bcc0d0d2bdd09c4ba1f0ec891e4accef
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: 67e5b7ef09525063da6e6b7dfce6fd084d279869
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88018672"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88633899"
 ---
 # <a name="distributed-cache-tag-helper-in-aspnet-core"></a>ASP.NET Core 中的分散式快取標籤協助程式
 
@@ -58,7 +59,7 @@ ms.locfileid: "88018672"
 | -------------- | ------------------------------------- |
 | String         | `my-distributed-cache-unique-key-101` |
 
-`name` 是必要的。 `name` 屬性會作為每個預存快取執行個體的索引鍵。 不同于快取標籤協助程式會根據頁面 Razor 名稱和分頁中的位置，將快取索引鍵指派給每個實例，分散式快取標籤協助程式只會以屬性的索引鍵為基礎 Razor `name` 。
+`name` 是必要的。 `name` 屬性會作為每個預存快取執行個體的索引鍵。 不同于快取標籤協助程式會根據頁面名稱和頁面上的位置，將快取索引鍵指派給每個實例，分散式快取標記協助程式只會以其索引鍵做為 Razor Razor 屬性 `name` 。
 
 範例：
 
@@ -70,7 +71,7 @@ ms.locfileid: "88018672"
 
 ## <a name="distributed-cache-tag-helper-idistributedcache-implementations"></a>分散式快取標記協助程式 IDistributedCache 實作
 
-ASP.NET Core 內建兩項 <xref:Microsoft.Extensions.Caching.Distributed.IDistributedCache> 實作。 其中一個是以 SQL Server 為基礎，另一項是以 Redis 為基礎。 協力廠商的執行也可供使用，例如[NCache](http://www.alachisoft.com/ncache/aspnet-core-idistributedcache-ncache.html)。 如需這些實作的詳細資料，請參閱<xref:performance/caching/distributed>。 這兩個實作都涉及在 `Startup` 的 `IDistributedCache` 中設定執行個體。
+ASP.NET Core 內建兩項 <xref:Microsoft.Extensions.Caching.Distributed.IDistributedCache> 實作。 其中一個是以 SQL Server 為基礎，另一項是以 Redis 為基礎。 此外也提供協力廠商的實作為 [NCache](http://www.alachisoft.com/ncache/aspnet-core-idistributedcache-ncache.html)。 如需這些實作的詳細資料，請參閱<xref:performance/caching/distributed>。 這兩個實作都涉及在 `Startup` 的 `IDistributedCache` 中設定執行個體。
 
 沒有特別與使用 `IDistributedCache` 的任何特定實作建立關聯的標籤屬性。
 

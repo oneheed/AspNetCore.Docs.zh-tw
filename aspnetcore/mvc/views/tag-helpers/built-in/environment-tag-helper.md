@@ -6,6 +6,7 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 10/10/2018
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -16,18 +17,18 @@ no-loc:
 - Razor
 - SignalR
 uid: mvc/views/tag-helpers/builtin-th/environment-tag-helper
-ms.openlocfilehash: 01fa5409136557dcbf53dbdd051bf35803e8b71f
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: de37bf704ac377a15ef600b96ba78056c51ea7be
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88018646"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88633860"
 ---
 # <a name="environment-tag-helper-in-aspnet-core"></a>ASP.NET Core 中的環境標籤協助程式
 
 作者：[Peter Kellner](https://peterkellner.net) 和 [Hisham Bin Ateya](https://twitter.com/hishambinateya)
 
-環境標籤協助程式會根據目前的[裝載環境](xref:fundamentals/environments)，有條件地呈現其包含的內容。 環境標籤協助程式的單一屬性 `names`，是以逗號分隔的環境名稱清單。 如果任何提供的環境名稱符合目前環境，則會轉譯含括的內容。
+環境標籤協助程式會根據目前的 [裝載環境](xref:fundamentals/environments)，有條件地呈現其所包含的內容。 環境標籤協助程式的單一屬性 `names`，是以逗號分隔的環境名稱清單。 如果任何提供的環境名稱符合目前環境，則會轉譯含括的內容。
 
 如需標籤協助程式的概觀，請參閱 <xref:mvc/views/tag-helpers/intro>。
 
@@ -51,7 +52,7 @@ ms.locfileid: "88018646"
 
 ## <a name="include-and-exclude-attributes"></a>include 和 exclude 屬性
 
-`include`& `exclude` 屬性會根據包含或排除的主控環境名稱，來控制項呈現包含的內容。
+`include`& `exclude` 屬性會根據包含或排除的主控環境名稱，來呈現已包含的內容。
 
 ### <a name="include"></a>include
 

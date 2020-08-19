@@ -1,10 +1,11 @@
 ---
-title: 第9部分，將驗證新增至 ASP.NET Core MVC 應用程式
+title: 第9部分：將驗證新增至 ASP.NET Core MVC 應用程式
 author: rick-anderson
-description: ASP.NET Core MVC 的教學課程系列第9部分。
+description: ASP.NET Core MVC 之教學課程系列的第9部分。
 ms.author: riande
 ms.date: 04/13/2017
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -15,14 +16,14 @@ no-loc:
 - Razor
 - SignalR
 uid: tutorials/first-mvc-app/validation
-ms.openlocfilehash: 43e8fbb46a3154cf2c4a50cc1683defeb5f898b6
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: c6904606cfe82a6c3a375667b2b2fcae0ab31d26
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88020778"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88628634"
 ---
-# <a name="part-9-add-validation-to-an-aspnet-core-mvc-app"></a>第9部分，將驗證新增至 ASP.NET Core MVC 應用程式
+# <a name="part-9-add-validation-to-an-aspnet-core-mvc-app"></a>第9部分：將驗證新增至 ASP.NET Core MVC 應用程式
 
 作者：[Rick Anderson](https://twitter.com/RickAndMSFT)
 

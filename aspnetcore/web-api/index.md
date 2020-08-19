@@ -7,6 +7,7 @@ ms.author: scaddie
 ms.custom: mvc
 ms.date: 07/20/2020
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -17,24 +18,24 @@ no-loc:
 - Razor
 - SignalR
 uid: web-api/index
-ms.openlocfilehash: 7c59867f6d6fbf0f4d8207eb5d2919967d825e8b
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: 594d3dcbf55ed0a3476bb580df8e122cedb1dcd3
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88021298"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88634367"
 ---
 # <a name="create-web-apis-with-aspnet-core"></a>使用 ASP.NET Core 建立 Web API
 
 作者：[Scott Addie](https://github.com/scottaddie) 與 [Tom Dykstra](https://github.com/tdykstra)
 
-ASP.NET Core 支援使用 C# 建立 RESTful 服務，也稱為 Web API。 若要處理要求，Web API 會使用控制器。 Web API 中的「控制器」** 都衍生自類別 `ControllerBase`。 本文說明如何使用控制器來處理 Web API 要求。
+ASP.NET Core 支援使用 C# 建立 RESTful 服務，也稱為 Web API。 若要處理要求，Web API 會使用控制器。 Web API 中的「控制器」** 都衍生自類別 `ControllerBase`。 本文說明如何使用控制器來處理 web API 要求。
 
 [查看或下載範例程式碼](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/web-api/index/samples)。 ([如何下載](xref:index#how-to-download-a-sample))。
 
 ## <a name="controllerbase-class"></a>ControllerBase 類別
 
-Web API 由一個或多個衍生自的控制器類別所組成 <xref:Microsoft.AspNetCore.Mvc.ControllerBase> 。 Web API 專案範本提供入門控制器：
+Web API 是由一或多個衍生自的控制器類別所組成 <xref:Microsoft.AspNetCore.Mvc.ControllerBase> 。 Web API 專案範本提供入門控制器：
 
 ::: moniker range=">= aspnetcore-3.0"
 
@@ -48,7 +49,7 @@ Web API 由一個或多個衍生自的控制器類別所組成 <xref:Microsoft.A
 
 ::: moniker-end
 
-請不要從 <xref:Microsoft.AspNetCore.Mvc.Controller> 類別衍生以建立 Web API 控制器。 `Controller` 衍生自 `ControllerBase` 並會新增檢視支援，以供處理網頁，而不是 Web API 要求。 此規則有例外狀況：如果您打算針對 views 和 web Api 使用相同的控制器，請從衍生 `Controller` 。
+請不要從 <xref:Microsoft.AspNetCore.Mvc.Controller> 類別衍生以建立 Web API 控制器。 `Controller` 衍生自 `ControllerBase` 並會新增檢視支援，以供處理網頁，而不是 Web API 要求。 這項規則有一個例外狀況：如果您打算針對 views 和 web Api 使用相同的控制器，請從衍生 `Controller` 。
 
 `ControllerBase` 類別提供許多處理 HTTP 要求的實用屬性和方法。 例如，`ControllerBase.CreatedAtAction` 會傳回 201 狀態碼：
 
@@ -56,7 +57,7 @@ Web API 由一個或多個衍生自的控制器類別所組成 <xref:Microsoft.A
 
 以下是 `ControllerBase` 提供的一些其他方法範例。
 
-|方法   |附註    |
+|方法   |注意    |
 |---------|---------|
 |<xref:Microsoft.AspNetCore.Mvc.ControllerBase.BadRequest%2A>| 傳回 400 狀態碼。|
 |<xref:Microsoft.AspNetCore.Mvc.ControllerBase.NotFound%2A>|傳回 404 狀態碼。|
@@ -68,13 +69,13 @@ Web API 由一個或多個衍生自的控制器類別所組成 <xref:Microsoft.A
 
 ## <a name="attributes"></a>屬性
 
-<xref:Microsoft.AspNetCore.Mvc> 命名空間提供的屬性，可用來設定 Web API 控制器和動作方法的行為。 下列範例會使用屬性來指定支援的 HTTP 動作動詞，以及任何可能傳回的已知 HTTP 狀態碼：
+<xref:Microsoft.AspNetCore.Mvc> 命名空間提供的屬性，可用來設定 Web API 控制器和動作方法的行為。 下列範例會使用屬性來指定支援的 HTTP 動作動詞以及任何可傳回的已知 HTTP 狀態碼：
 
 [!code-csharp[](index/samples/2.x/2.2/Controllers/PetsController.cs?name=snippet_400And201&highlight=1-3)]
 
 以下是一些其他可用的屬性範例。
 
-|屬性|附註|
+|屬性|注意|
 |---------|-----|
 |[`[Route]`](<xref:Microsoft.AspNetCore.Mvc.RouteAttribute>)      |指定控制器或動作的 URL 模式。|
 |[`[Bind]`](<xref:Microsoft.AspNetCore.Mvc.BindAttribute>)        |指定模型繫結要包含的前置詞和屬性。|
@@ -86,7 +87,7 @@ Web API 由一個或多個衍生自的控制器類別所組成 <xref:Microsoft.A
 
 ## <a name="apicontroller-attribute"></a>ApiController 屬性
 
-[`[ApiController]`](xref:Microsoft.AspNetCore.Mvc.ApiControllerAttribute)屬性可以套用至控制器類別，以啟用下列固定的 API 特定行為：
+[`[ApiController]`](xref:Microsoft.AspNetCore.Mvc.ApiControllerAttribute)屬性可以套用至控制器類別，以啟用下列固定 API 特有的行為：
 
 ::: moniker range=">= aspnetcore-2.2"
 
@@ -96,7 +97,7 @@ Web API 由一個或多個衍生自的控制器類別所組成 <xref:Microsoft.A
 * [多部分/表單資料要求推斷](#multipartform-data-request-inference)
 * [錯誤狀態碼的問題詳細資料](#problem-details-for-error-status-codes)
 
-*錯誤狀態碼功能的問題詳細資料*需要2.2 或更新版本的[相容性版本](xref:mvc/compatibility-version)。 其他功能需要2.1 或更新版本的相容性版本。
+*錯誤狀態碼功能的問題詳細資料*需要2.2 或更新[版本的相容性版本](xref:mvc/compatibility-version)。 其他功能需要2.1 或更新版本的相容性版本。
 
 ::: moniker-end
 
@@ -125,7 +126,7 @@ Web API 由一個或多個衍生自的控制器類別所組成 <xref:Microsoft.A
 
 ### <a name="attribute-on-multiple-controllers"></a>多個控制器上的屬性
 
-在多個控制站上使用同一屬性的方法之一，就是建立以 `[ApiController]` 屬性標註的自訂基底控制器類別。 下列範例顯示自訂基類，以及從它衍生的控制器：
+在多個控制站上使用同一屬性的方法之一，就是建立以 `[ApiController]` 屬性標註的自訂基底控制器類別。 下列範例顯示自訂基類，以及衍生自該類別的控制器：
 
 [!code-csharp[](index/samples/2.x/2.2/Controllers/MyControllerBase.cs?name=snippet_MyControllerBase)]
 
@@ -168,7 +169,7 @@ namespace WebApiSample
 
 [!code-csharp[](index/samples/3.x/Controllers/WeatherForecastController.cs?name=snippet_ControllerSignature&highlight=2)]
 
-在中，您可以透過、或所定義的慣例[路由](xref:mvc/controllers/routing#conventional-routing)來存取動作 `UseEndpoints` <xref:Microsoft.AspNetCore.Builder.MvcApplicationBuilderExtensions.UseMvc%2A> <xref:Microsoft.AspNetCore.Builder.MvcApplicationBuilderExtensions.UseMvcWithDefaultRoute%2A> `Startup.Configure` 。
+無法透過[conventional routes](xref:mvc/controllers/routing#conventional-routing) `UseEndpoints` 、 <xref:Microsoft.AspNetCore.Builder.MvcApplicationBuilderExtensions.UseMvc%2A> 或 <xref:Microsoft.AspNetCore.Builder.MvcApplicationBuilderExtensions.UseMvcWithDefaultRoute%2A> 在中定義的傳統路由來存取動作 `Startup.Configure` 。
 
 ::: moniker-end
 
@@ -195,7 +196,7 @@ ASP.NET Core MVC 會使用 <xref:Microsoft.AspNetCore.Mvc.Infrastructure.ModelSt
 
 ### <a name="default-badrequest-response"></a>預設 BadRequest 回應
 
-當相容性版本為2.1 時，HTTP 400 回應的預設回應類型為 <xref:Microsoft.AspNetCore.Mvc.SerializableError> 。 下列要求主體是序列化類型的範例：
+使用相容性版本2.1 時，HTTP 400 回應的預設回應類型為 <xref:Microsoft.AspNetCore.Mvc.SerializableError> 。 下列要求主體是序列化型別的範例：
 
 ```json
 {
@@ -207,7 +208,7 @@ ASP.NET Core MVC 會使用 <xref:Microsoft.AspNetCore.Mvc.Infrastructure.ModelSt
 
 ::: moniker range=">= aspnetcore-2.2"
 
-當相容性版本為2.2 或更新版本時，HTTP 400 回應的預設回應類型為 <xref:Microsoft.AspNetCore.Mvc.ValidationProblemDetails> 。 下列要求主體是序列化類型的範例：
+當相容性版本為2.2 或更新版本時，HTTP 400 回應的預設回應類型為 <xref:Microsoft.AspNetCore.Mvc.ValidationProblemDetails> 。 下列要求主體是序列化型別的範例：
 
 ```json
 {
@@ -225,16 +226,16 @@ ASP.NET Core MVC 會使用 <xref:Microsoft.AspNetCore.Mvc.Infrastructure.ModelSt
 
 `ValidationProblemDetails`類型：
 
-* 提供電腦可讀取的格式，以指定 Web API 回應中的錯誤。
-* 符合[RFC 7807 規格](https://tools.ietf.org/html/rfc7807)。
+* 提供機器可讀取的格式來指定 web API 回應中的錯誤。
+* 符合 [RFC 7807 規格](https://tools.ietf.org/html/rfc7807)。
 
 ::: moniker-end
 
-若要讓自動和自訂回應保持一致，請呼叫 <xref:Microsoft.AspNetCore.Mvc.ControllerBase.ValidationProblem%2A> 方法，而不是 <xref:System.Web.Http.ApiController.BadRequest%2A> 。 `ValidationProblem`傳回 <xref:Microsoft.AspNetCore.Mvc.ValidationProblemDetails> 物件以及自動回應。
+若要讓自動和自訂回應保持一致，請呼叫 <xref:Microsoft.AspNetCore.Mvc.ControllerBase.ValidationProblem%2A> 方法，而不是 <xref:System.Web.Http.ApiController.BadRequest%2A> 。 `ValidationProblem` 傳回 <xref:Microsoft.AspNetCore.Mvc.ValidationProblemDetails> 物件以及自動回應。
 
 ### <a name="log-automatic-400-responses"></a>記錄自動 400 回應
 
-請參閱[如何將模型驗證錯誤的自動400回應記錄 (dotnet/AspNetCore.Docs # 12157) ](https://github.com/dotnet/AspNetCore.Docs/issues/12157)。
+請參閱 [如何記錄模型驗證錯誤的自動400回應 (dotnet/AspNetCore.Docs # 12157) ](https://github.com/dotnet/AspNetCore.Docs/issues/12157)。
 
 ### <a name="disable-automatic-400-response"></a>停用自動400回應
 
@@ -347,7 +348,7 @@ ASP.NET Core MVC 會使用 <xref:Microsoft.AspNetCore.Mvc.Infrastructure.ModelSt
 
 `[ApiController]`當動作參數以屬性標注時，屬性會套用推斷規則 [`[FromForm]`](xref:Microsoft.AspNetCore.Mvc.FromFormAttribute) 。 `multipart/form-data`會推斷要求內容類型。
 
-若要停用預設行為，請將 <xref:Microsoft.AspNetCore.Mvc.ApiBehaviorOptions.SuppressConsumesConstraintForFormFileParameters> 屬性設定為 `true` 中的 `Startup.ConfigureServices` ：
+若要停用預設行為，請將 <xref:Microsoft.AspNetCore.Mvc.ApiBehaviorOptions.SuppressConsumesConstraintForFormFileParameters> 屬性設定為 `true` `Startup.ConfigureServices` ：
 
 ::: moniker range=">= aspnetcore-3.0"
 
@@ -390,7 +391,7 @@ ASP.NET Core MVC 會使用 <xref:Microsoft.AspNetCore.Mvc.Infrastructure.ModelSt
 
 ### <a name="disable-problemdetails-response"></a>停用 ProblemDetails 回應
 
-`ProblemDetails`當屬性設定為時，會停用的自動建立錯誤狀態碼 <xref:Microsoft.AspNetCore.Mvc.ApiBehaviorOptions.SuppressMapClientErrors%2A> `true` 。 將下列程式碼加入 `Startup.ConfigureServices`：
+`ProblemDetails`當屬性設定為時，會停用自動建立 for 錯誤狀態碼 <xref:Microsoft.AspNetCore.Mvc.ApiBehaviorOptions.SuppressMapClientErrors%2A> `true` 。 將下列程式碼加入 `Startup.ConfigureServices`：
 
 ::: moniker-end
 
@@ -410,9 +411,9 @@ ASP.NET Core MVC 會使用 <xref:Microsoft.AspNetCore.Mvc.Infrastructure.ModelSt
 
 ## <a name="define-supported-request-content-types-with-the-consumes-attribute"></a>使用 [使用] 屬性定義支援的要求內容類型
 
-根據預設，動作支援所有可用的要求內容類型。 例如，如果將應用程式設定為同時支援 JSON 和 XML[輸入](xref:mvc/models/model-binding#input-formatters)格式器，則動作支援多種內容類型，包括 `application/json` 和 `application/xml` 。
+依預設，動作支援所有可用的要求內容類型。 例如，如果將應用程式設定為支援 JSON 和 XML [輸入](xref:mvc/models/model-binding#input-formatters)格式器，則動作支援多種內容類型，包括 `application/json` 和 `application/xml` 。
 
-[[使用]](<xref:Microsoft.AspNetCore.Mvc.ConsumesAttribute>)屬性允許動作限制支援的要求內容類型。 將 `[Consumes]` 屬性套用至動作或控制器，並指定一或多個內容類型：
+[[取用]](<xref:Microsoft.AspNetCore.Mvc.ConsumesAttribute>)屬性允許動作限制支援的要求內容類型。 將 `[Consumes]` 屬性套用至動作或控制器，並指定一或多個內容類型：
 
 ```csharp
 [HttpPost]
@@ -420,15 +421,15 @@ ASP.NET Core MVC 會使用 <xref:Microsoft.AspNetCore.Mvc.Infrastructure.ModelSt
 public IActionResult CreateProduct(Product product)
 ```
 
-在上述程式碼中， `CreateProduct` 動作會指定內容類型 `application/xml` 。 路由至此動作的要求必須指定 `Content-Type` 標頭 `application/xml` 。 如果要求未指定 `Content-Type` 標頭， `application/xml` 則會產生[415 不支援的媒體類型](https://developer.mozilla.org/docs/Web/HTTP/Status/415)回應。
+在上述程式碼中， `CreateProduct` 動作會指定內容類型 `application/xml` 。 路由至此動作的要求必須指定的 `Content-Type` 標頭 `application/xml` 。 未指定 `Content-Type` 標頭的要求會 `application/xml` 在 [415 不支援的媒體類型](https://developer.mozilla.org/docs/Web/HTTP/Status/415) 回應中指定結果。
 
-`[Consumes]`屬性也允許動作根據傳入要求的內容類型（藉由套用類型條件約束）來影響其選取。 請考慮下列範例：
+`[Consumes]`屬性也可讓動作根據傳入要求的內容類型，藉由套用類型條件約束來影響其選取專案。 請考慮下列範例：
 
 [!code-csharp[](index/samples/3.x/Controllers/ConsumesController.cs?name=snippet_Class)]
 
-在上述程式碼中， `ConsumesController` 是設定來處理傳送至 URL 的要求 `https://localhost:5001/api/Consumes` 。 這兩個控制器的動作， `PostJson` 和都會 `PostForm` 處理具有相同 URL 的 POST 要求。 如果沒有套用 `[Consumes]` 類型條件約束的屬性，就會擲回不明確的 match 例外狀況。
+在上述程式碼中， `ConsumesController` 會設定來處理傳送至 URL 的要求 `https://localhost:5001/api/Consumes` 。 控制器的兩個動作和都 `PostJson` `PostForm` 處理具有相同 URL 的 POST 要求。 如果沒有套用 `[Consumes]` 類型條件約束的屬性，則會擲回不明確的 match 例外狀況。
 
-`[Consumes]`屬性會套用至這兩個動作。 `PostJson`動作會處理標頭所傳送 `Content-Type` 的要求 `application/json` 。 `PostForm`動作會處理標頭所傳送 `Content-Type` 的要求 `application/x-www-form-urlencoded` 。 
+`[Consumes]`屬性會套用至這兩個動作。 `PostJson`動作會處理與 `Content-Type` 標頭一起傳送的要求 `application/json` 。 `PostForm`動作會處理與 `Content-Type` 標頭一起傳送的要求 `application/x-www-form-urlencoded` 。 
 
 ## <a name="additional-resources"></a>其他資源
 

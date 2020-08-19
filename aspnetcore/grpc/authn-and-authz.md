@@ -1,11 +1,12 @@
 ---
-title: ASP.NET Core 的 gRPC 中的驗證和授權
+title: GRPC 中的驗證和授權 ASP.NET Core
 author: jamesnk
-description: 瞭解如何在 gRPC 中使用驗證和授權來 ASP.NET Core。
+description: 瞭解如何在 gRPC 中針對 ASP.NET Core 使用驗證和授權。
 monikerRange: '>= aspnetcore-3.0'
 ms.author: jamesnk
 ms.date: 05/26/2020
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -16,24 +17,24 @@ no-loc:
 - Razor
 - SignalR
 uid: grpc/authn-and-authz
-ms.openlocfilehash: edaf96fb9c7f0f175efe82f8b85d4d1a41da87a5
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: 01044c2b0656743ad608be9ca040880e82231919
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88016345"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88633821"
 ---
-# <a name="authentication-and-authorization-in-grpc-for-aspnet-core"></a>ASP.NET Core 的 gRPC 中的驗證和授權
+# <a name="authentication-and-authorization-in-grpc-for-aspnet-core"></a>GRPC 中的驗證和授權 ASP.NET Core
 
-依[James 牛頓-王](https://twitter.com/jamesnk)
+依 [James 牛頓](https://twitter.com/jamesnk)
 
 [查看或下載範例程式碼](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/grpc/authn-and-authz/sample/) [ (如何下載) ](xref:index#how-to-download-a-sample)
 
 ## <a name="authenticate-users-calling-a-grpc-service"></a>驗證呼叫 gRPC 服務的使用者
 
-gRPC 可與[ASP.NET Core 驗證](xref:security/authentication/identity)搭配使用，以將使用者與每個呼叫產生關聯。
+gRPC 可搭配 [ASP.NET Core authentication](xref:security/authentication/identity) 使用，以將使用者與每個呼叫產生關聯。
 
-以下是 `Startup.Configure` 使用 gRPC 和 ASP.NET Core 驗證的範例：
+以下是 `Startup.Configure` 使用 gRPC 和 ASP.NET Core authentication 的範例：
 
 ```csharp
 public void Configure(IApplicationBuilder app)
@@ -51,11 +52,11 @@ public void Configure(IApplicationBuilder app)
 ```
 
 > [!NOTE]
-> 您註冊 ASP.NET Core authentication 中介軟體的順序很重要。 一律在前後呼叫 `UseAuthentication` 和 `UseAuthorization` `UseRouting` `UseEndpoints` 。
+> 您註冊 ASP.NET Core authentication 中介軟體重要的順序。 一律 `UseAuthentication` 在前後 `UseAuthorization` 呼叫 `UseRouting` `UseEndpoints` 。
 
-需要設定您的應用程式在呼叫期間所使用的驗證機制。 會在中新增驗證設定 `Startup.ConfigureServices` ，而且會根據您的應用程式所使用的驗證機制而有所不同。 如需如何保護 ASP.NET Core 應用程式的範例，請參閱[驗證範例](xref:security/authentication/samples)。
+需要設定您的應用程式在呼叫期間使用的驗證機制。 會在中新增驗證設定 `Startup.ConfigureServices` ，並且會根據您的應用程式所使用的驗證機制而有所不同。 如需如何保護 ASP.NET Core 應用程式的範例，請參閱 [驗證範例](xref:security/authentication/samples)。
 
-一旦設定好驗證之後，就可以透過 gRPC 服務方法來存取使用者 `ServerCallContext` 。
+設定好驗證之後，即可透過 gRPC 服務方法存取使用者 `ServerCallContext` 。
 
 ```csharp
 public override Task<BuyTicketsResponse> BuyTickets(
@@ -70,11 +71,11 @@ public override Task<BuyTicketsResponse> BuyTickets(
 
 ### <a name="bearer-token-authentication"></a>持有人權杖驗證
 
-用戶端可以提供存取權杖以進行驗證。 伺服器會驗證權杖，並使用它來識別使用者。
+用戶端可以提供存取權杖來進行驗證。 伺服器會驗證權杖，並使用它來識別使用者。
 
-在伺服器上，持有人權杖驗證是使用[JWT 持有人中介軟體](/dotnet/api/microsoft.extensions.dependencyinjection.jwtbearerextensions.addjwtbearer)來設定。
+在伺服器上，會使用 [JWT 持有人中介軟體](/dotnet/api/microsoft.extensions.dependencyinjection.jwtbearerextensions.addjwtbearer)來設定持有人權杖驗證。
 
-在 .NET gRPC 用戶端中，可以使用標頭的呼叫來傳送權杖：
+在 .NET gRPC 用戶端中，您可以使用呼叫來傳送權杖作為標頭：
 
 ```csharp
 public bool DoAuthenticatedCall(
@@ -90,7 +91,7 @@ public bool DoAuthenticatedCall(
 }
 ```
 
-`ChannelCredentials`在通道上設定是使用 gRPC 呼叫將權杖傳送至服務的另一種方式。 每次進行 gRPC 呼叫時，就會執行此認證，這可避免需要在多個位置撰寫程式碼來自行傳遞權杖。
+`ChannelCredentials`在通道上設定是使用 gRPC 呼叫將權杖傳送給服務的另一種方式。 每次進行 gRPC 呼叫時，都會執行此認證，這樣可避免需要在多個位置撰寫程式碼來自行傳遞權杖。
 
 下列範例中的認證會設定通道，以使用每個 gRPC 呼叫來傳送權杖：
 
@@ -118,12 +119,12 @@ private static GrpcChannel CreateAuthenticatedChannel(string address)
 
 ### <a name="client-certificate-authentication"></a>用戶端憑證驗證
 
-用戶端也可以提供用於驗證的用戶端憑證。 [憑證驗證](https://tools.ietf.org/html/rfc5246#section-7.4.4)會在 TLS 層級進行，長時間才會到達 ASP.NET Core。 當要求進入 ASP.NET Core 時，[用戶端憑證驗證封裝](xref:security/authentication/certauth)可讓您將憑證解析成 `ClaimsPrincipal` 。
+用戶端也可以提供用戶端憑證來進行驗證。 [憑證驗證](https://tools.ietf.org/html/rfc5246#section-7.4.4) 會在 TLS 層級進行，但在達到 ASP.NET Core 之前也是如此。 當要求進入 ASP.NET Core 時， [用戶端憑證驗證封裝](xref:security/authentication/certauth) 可讓您將憑證解析為 `ClaimsPrincipal` 。
 
 > [!NOTE]
-> 將伺服器設定為接受用戶端憑證。 如需在 Kestrel、IIS 和 Azure 中接受用戶端憑證的詳細資訊，請參閱 <xref:security/authentication/certauth#configure-your-server-to-require-certificates> 。
+> 將伺服器設定為接受用戶端憑證。 如需在 Kestrel、IIS 和 Azure 中接受用戶端憑證的相關資訊，請參閱 <xref:security/authentication/certauth#configure-your-server-to-require-certificates> 。
 
-在 .NET gRPC 用戶端中，會將用戶端憑證新增至 `HttpClientHandler` ，然後用來建立 gRPC 用戶端：
+在 .NET gRPC 用戶端中，會將用戶端憑證新增至 `HttpClientHandler` 之後用來建立 gRPC 用戶端的憑證：
 
 ```csharp
 public Ticketer.TicketerClient CreateClientWithCert(
@@ -146,7 +147,7 @@ public Ticketer.TicketerClient CreateClientWithCert(
 
 ### <a name="other-authentication-mechanisms"></a>其他驗證機制
 
-許多 ASP.NET Core 支援的驗證機制可與 gRPC 搭配使用：
+許多 ASP.NET Core 支援的驗證機制可與 gRPC 搭配運作：
 
 * Azure Active Directory
 * 用戶端憑證
@@ -156,19 +157,19 @@ public Ticketer.TicketerClient CreateClientWithCert(
 * OpenID Connect
 * WS-同盟
 
-如需有關在伺服器上設定驗證的詳細資訊，請參閱[ASP.NET Core 驗證](xref:security/authentication/identity)。
+如需在伺服器上設定驗證的詳細資訊，請參閱 [ASP.NET Core authentication](xref:security/authentication/identity)。
 
-將 gRPC 用戶端設定為使用驗證，將取決於您所使用的驗證機制。 先前的持有人權杖和用戶端憑證範例顯示 gRPC 用戶端可設定為使用 gRPC 呼叫來傳送驗證中繼資料的幾種方式：
+將 gRPC 用戶端設定為使用驗證將取決於您所使用的驗證機制。 先前的持有人權杖和用戶端憑證範例顯示了幾種方法，可讓您使用 gRPC 呼叫來設定 gRPC 用戶端傳送驗證中繼資料：
 
-* 強型別 gRPC 用戶端會 `HttpClient` 在內部使用。 您可以在[HttpClientHandler](/dotnet/api/system.net.http.httpclienthandler)上設定驗證，或藉由將自訂[HttpMessageHandler](/dotnet/api/system.net.http.httpmessagehandler)實例新增至 `HttpClient` 。
+* 強型別 gRPC 用戶端會 `HttpClient` 在內部使用。 您可以在 [HttpClientHandler](/dotnet/api/system.net.http.httpclienthandler)上設定驗證，或將自訂 [HttpMessageHandler](/dotnet/api/system.net.http.httpmessagehandler) 實例加入至 `HttpClient` 。
 * 每個 gRPC 呼叫都有一個選擇性 `CallOptions` 引數。 您可以使用選項的標頭集合來傳送自訂標頭。
 
 > [!NOTE]
->  (NTLM/Kerberos/Negotiate) 的 Windows 驗證無法與 gRPC 搭配使用。 gRPC 需要 HTTP/2，而且 HTTP/2 不支援 Windows 驗證。
+> Windows 驗證 (NTLM/Kerberos/Negotiate) 無法與 gRPC 搭配使用。 gRPC 需要 HTTP/2，而 HTTP/2 不支援 Windows 驗證。
 
 ## <a name="authorize-users-to-access-services-and-service-methods"></a>授權使用者存取服務和服務方法
 
-根據預設，服務中的所有方法都可以由未經驗證的使用者呼叫。 若要要求驗證，請將 [`[Authorize]`](xref:Microsoft.AspNetCore.Authorization.AuthorizeAttribute) 屬性套用至服務：
+根據預設，服務中的所有方法都可由未經驗證的使用者呼叫。 若要要求驗證，請將 [`[Authorize]`](xref:Microsoft.AspNetCore.Authorization.AuthorizeAttribute) 屬性套用至服務：
 
 ```csharp
 [Authorize]
@@ -177,7 +178,7 @@ public class TicketerService : Ticketer.TicketerBase
 }
 ```
 
-您可以使用屬性的「函式引數」和「屬性」， `[Authorize]` 限制只有符合特定[授權原則](xref:security/authorization/policies)的使用者才能存取。 例如，如果您有稱為的自訂授權原則 `MyAuthorizationPolicy` ，請確定只有符合該原則的使用者可以使用下列程式碼來存取服務：
+您可以使用屬性的函式引數和屬性， `[Authorize]` 將存取限制為僅符合特定 [授權原則](xref:security/authorization/policies)的使用者。 例如，如果您有一個名為的自訂授權原則 `MyAuthorizationPolicy` ，請確定只有符合該原則的使用者可以使用下列程式碼來存取服務：
 
 ```csharp
 [Authorize("MyAuthorizationPolicy")]
@@ -186,7 +187,7 @@ public class TicketerService : Ticketer.TicketerBase
 }
 ```
 
-個別的服務方法也可以套用 `[Authorize]` 屬性。 如果目前使用者不符合**同時**套用至方法和類別的原則，則會將錯誤傳回給呼叫者：
+個別的服務方法也可以套用 `[Authorize]` 屬性。 如果目前使用者不符合 **同時** 套用至方法和類別的原則，則會將錯誤傳回給呼叫者：
 
 ```csharp
 [Authorize]

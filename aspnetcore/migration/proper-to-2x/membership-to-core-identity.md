@@ -1,11 +1,12 @@
 ---
-title: 從 ASP.NET 成員資格驗證遷移至 ASP.NET Core 2。0Identity
+title: 從 ASP.NET 成員資格驗證遷移至 ASP.NET Core 2。0 Identity
 author: isaac2004
 description: 瞭解如何使用成員資格驗證將現有的 ASP.NET 應用程式遷移至 ASP.NET Core 2.0 Identity 。
 ms.author: scaddie
 ms.custom: mvc
 ms.date: 01/10/2019
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -16,46 +17,46 @@ no-loc:
 - Razor
 - SignalR
 uid: migration/proper-to-2x/membership-to-core-identity
-ms.openlocfilehash: 97039ac1c7bcd6a1ff7b53e1579c623b26564d26
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: de9d1e5f6f595269595212fbab60d12dfd5a29e4
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88014889"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88633639"
 ---
-# <a name="migrate-from-aspnet-membership-authentication-to-aspnet-core-20-no-locidentity"></a>從 ASP.NET 成員資格驗證遷移至 ASP.NET Core 2。0Identity
+# <a name="migrate-from-aspnet-membership-authentication-to-aspnet-core-20-no-locidentity"></a>從 ASP.NET 成員資格驗證遷移至 ASP.NET Core 2。0 Identity
 
 作者：[Isaac Levin](https://isaaclevin.com)
 
-本文示範如何使用成員資格驗證，將 ASP.NET apps 的資料庫架構遷移至 ASP.NET Core 2.0 Identity 。
+本文示範如何使用成員資格驗證將 ASP.NET 應用程式的資料庫架構遷移至 ASP.NET Core 2.0 Identity 。
 
 > [!NOTE]
-> 本檔提供將 ASP.NET 成員資格型應用程式的資料庫架構，遷移至用於 ASP.NET Core 的資料庫架構所需的步驟 Identity 。 如需從 ASP.NET 成員資格型驗證遷移至 ASP.NET 的詳細資訊 Identity ，請參閱將[現有的應用程式從 SQL Identity 成員資格遷移至 ASP.NET ](/aspnet/identity/overview/migrations/migrating-an-existing-website-from-sql-membership-to-aspnet-identity)。 如需 ASP.NET Core 的詳細資訊 Identity ，請參閱[ Identity ASP.NET Core 簡介](xref:security/authentication/identity)。
+> 本檔提供將 ASP.NET 成員資格型應用程式的資料庫架構遷移到用於之資料庫架構所需的步驟 ASP.NET Core Identity 。 如需從 ASP.NET 成員資格式驗證遷移至 ASP.NET 的詳細資訊 Identity ，請參閱將[現有的應用程式從 SQL Identity 成員資格遷移至 ASP.NET ](/aspnet/identity/overview/migrations/migrating-an-existing-website-from-sql-membership-to-aspnet-identity)。 如需的詳細資訊 ASP.NET Core Identity ，請參閱 [ Identity ASP.NET Core 的簡介](xref:security/authentication/identity)。
 
-## <a name="review-of-membership-schema"></a>成員資格架構的審查
+## <a name="review-of-membership-schema"></a>成員資格架構的評論
 
-在 ASP.NET 2.0 之前，開發人員負責為其應用程式建立整個驗證和授權流程。 有了 ASP.NET 2.0，就引進了成員資格，以提供可在 ASP.NET apps 中處理安全性的重複使用解決方案。 開發人員現在可以使用[aspnet_regsql.exe](https://msdn.microsoft.com/library/ms229862.aspx)命令，將架構啟動至 SQL Server 資料庫。 執行此命令之後，會在資料庫中建立下列資料表。
+在 ASP.NET 2.0 之前，開發人員會負責為其應用程式建立整個驗證和授權程式。 使用 ASP.NET 2.0，引進了成員資格，提供在 ASP.NET apps 中處理安全性的未定案解決方案。 開發人員現在可以使用 [aspnet_regsql.exe](https://msdn.microsoft.com/library/ms229862.aspx) 命令，將架構啟動至 SQL Server 資料庫。 執行此命令之後，會在資料庫中建立下列資料表。
 
   ![成員資格資料表](identity/_static/membership-tables.png)
 
-若要將現有的應用程式遷移至 ASP.NET Core 2.0 Identity ，這些資料表中的資料必須遷移至新架構所使用的資料表 Identity 。
+若要將現有的應用程式遷移至 ASP.NET Core 2.0 Identity ，必須將這些資料表中的資料移轉到新架構所使用的資料表 Identity 。
 
-## <a name="aspnet-core-no-locidentity-20-schema"></a>ASP.NET Core Identity 2.0 架構
+## <a name="no-locaspnet-core-identity-20-schema"></a>ASP.NET Core Identity 2.0 架構
 
-ASP.NET Core 2.0 遵循 [Identity](/aspnet/identity/index) ASP.NET 4.5 中引進的原則。 雖然原則是共用的，但架構之間的執行不同，即使 ASP.NET Core 的版本 (查看[遷移驗證和 Identity ASP.NET Core 2.0](xref:migration/1x-to-2x/index)) 。
+ASP.NET Core 2.0 遵循 [Identity](/aspnet/identity/index) ASP.NET 4.5 中所引進的原則。 雖然這項原則是共用的，但架構之間的實施也不同，即使是 ASP.NET Core 版本 (請參閱 [遷移驗證和 Identity ASP.NET Core 2.0](xref:migration/1x-to-2x/index)) 。
 
-若要查看 ASP.NET Core 2.0 的架構，最快的方式 Identity 就是建立新的 ASP.NET Core 2.0 應用程式。 請遵循 Visual Studio 2017 中的下列步驟：
+若要查看 ASP.NET Core 2.0 的架構，最快的方式 Identity 是建立新的 ASP.NET Core 2.0 應用程式。 遵循 Visual Studio 2017 中的下列步驟：
 
 1. 選取 [File] \(檔案\) >  [New] \(新增\) >  [Project] \(專案\)。
 1. 建立名為*Core Identity Sample*的新**ASP.NET Core Web 應用程式**專案。
-1. 選取下拉式清單中的 [ **ASP.NET Core 2.0** ]，然後選取 [ **Web 應用程式**]。 此範本會產生[ Razor 頁面](xref:razor-pages/index)應用程式。 在按一下 **[確定]** 之前，請按一下 [**變更驗證**]。
-1. 選擇範本的**個別使用者帳戶** Identity 。 最後，依序按一下 **[確定]** 和 **[確定]**。 Visual Studio 會使用 ASP.NET Core 範本來建立專案 Identity 。
-1. 選取 [**工具**] [  >  **NuGet 套件管理員**]  >  [**套件管理員主控台**]， (PMC) ] 視窗中開啟 [**套件管理員主控台**]。
-1. 流覽至 PMC 中的專案根目錄，然後執行[Entity Framework (EF) Core](/ef/core) `Update-Database` 命令。
+1. 在下拉式清單中選取 **ASP.NET Core 2.0** ，然後選取 [ **Web 應用程式**]。 此範本會產生[ Razor 頁面](xref:razor-pages/index)應用程式。 按一下 **[確定]** 之前，請按一下 [ **變更驗證**]。
+1. 為範本選擇 **個別的使用者帳戶** Identity 。 最後，按一下 **[確定**]，然後按一下 **[確定]**。 Visual Studio 使用範本建立專案 ASP.NET Core Identity 。
+1. 選取 [**工具**  >  **NuGet 封裝管理員**  >  **封裝管理員主控台**]，以開啟**封裝管理員主控台** (PMC) ] 視窗。
+1. 流覽至 PMC 中的專案根目錄，然後執行 [ (EF) Core](/ef/core) `Update-Database` 命令 Entity Framework。
 
-    ASP.NET Core 2.0 Identity 使用 EF Core 來與儲存驗證資料的資料庫互動。 為了讓新建立的應用程式能夠正常執行，必須要有資料庫來儲存這項資料。 建立新的應用程式之後，在資料庫環境中檢查架構的最快方式就是使用[EF Core 遷移](/ef/core/managing-schemas/migrations/)來建立資料庫。 此程式會在本機或其他位置建立資料庫，以模仿該架構。 如需詳細資訊，請參閱上述檔。
+    ASP.NET Core 2.0 會 Identity 使用 EF Core 來與儲存驗證資料的資料庫互動。 為了讓新建立的應用程式能夠運作，需要有資料庫來儲存此資料。 建立新的應用程式之後，在資料庫環境中檢查架構最快的方法就是使用 [EF Core 遷移](/ef/core/managing-schemas/migrations/)來建立資料庫。 此程式會在本機或其他位置建立資料庫，以模擬該架構。 如需詳細資訊，請參閱上述檔。
 
-    EF Core 命令會針對在*appsettings.js*中指定的資料庫使用連接字串。 下列連接字串會以名為*asp-net-identity*的*localhost*上的資料庫為目標。 在此設定中，EF Core 設定為使用 `DefaultConnection` 連接字串。
+    EF Core 命令使用 *appsettings.js*中指定之資料庫的連接字串。 下列連接字串會以 *localhost* 上的資料庫為目標，名為 *asp-net-core 身分識別*。 在此設定中，EF Core 設定為使用 `DefaultConnection` 連接字串。
 
     ```json
     {
@@ -65,15 +66,15 @@ ASP.NET Core 2.0 遵循 [Identity](/aspnet/identity/index) ASP.NET 4.5 中引進
     }
     ```
 
-1. 選取 [ **View**  >  **SQL Server 物件總管**]。 展開對應至appsettings.js的屬性中指定之資料庫名稱的節點 `ConnectionStrings:DefaultConnection` 。 *appsettings.json*
+1. 選取 [ **View**  >  **SQL Server 物件總管**]。 展開對應至在appsettings.js的屬性中指定之資料庫名稱的節點 `ConnectionStrings:DefaultConnection` 。 *appsettings.json*
 
-    此 `Update-Database` 命令會建立以架構指定的資料庫，以及應用程式初始化所需的任何資料。 下圖描述使用上述步驟建立的資料表結構。
+    此 `Update-Database` 命令會建立以架構指定的資料庫，以及應用程式初始化所需的任何資料。 下圖描述使用上述步驟所建立的資料表結構。
 
-    ![：：：無-loc (Identity) ：：： Tables](identity/_static/identity-tables.png)
+    ![：：：非 loc (Identity) ：：： Tables](identity/_static/identity-tables.png)
 
 ## <a name="migrate-the-schema"></a>移轉結構描述
 
-資料表結構和欄位中的成員資格和 ASP.NET Core 有些許差異 Identity 。 此模式已大幅變更 ASP.NET 和 ASP.NET Core 應用程式的驗證/授權。 仍然使用的主要物件 Identity 是*使用者*和*角色*。 以下是*使用者*、*角色*和*UserRoles*的對應資料表。
+在資料表結構和欄位中，成員資格和的欄位都有細微的差異 ASP.NET Core Identity 。 此模式已大幅變更 ASP.NET 和 ASP.NET Core apps 的驗證/授權。 仍使用的主要物件 Identity 是 *使用者* 和 *角色*。 以下是 *使用者*、 *角色*和 *UserRoles*的對應資料表。
 
 ### <a name="users"></a>使用者
 
@@ -88,7 +89,7 @@ ASP.NET Core 2.0 遵循 [Identity](/aspnet/identity/index) ASP.NET 4.5 中引進
 | `LockoutEnabled`                | `bit`   | `aspnet_Membership.IsLockedOut`                            | `bit`    |
 
 > [!NOTE]
-> 並非所有欄位對應都與從成員資格到 ASP.NET Core 的一對一關聯性類似 Identity 。 上表會採用預設成員資格使用者架構，並將它對應至 ASP.NET Core Identity 架構。 任何其他用於成員資格的自訂欄位都必須手動對應。 在此對應中，沒有任何密碼對應，因為密碼條件和密碼 salts 都不會在兩者之間遷移。 **建議您將密碼保留為 null，並要求使用者重設其密碼。** 在 ASP.NET Core 中 Identity ， `LockoutEnd` 如果使用者遭到鎖定，則應該設定為未來的某個日期。這會顯示在遷移腳本中。
+> 並非所有欄位對應都像是成員資格的一對一關聯性 ASP.NET Core Identity 。 上表採用預設的成員資格使用者架構，並將其對應至 ASP.NET Core Identity 架構。 任何其他用於成員資格的自訂欄位都需要手動對應。 在此對應中，沒有任何對應的密碼，因為密碼準則和密碼 salts 不會在兩者之間遷移。 **建議您將密碼保留為 null，並要求使用者重設其密碼。** 在中 ASP.NET Core Identity ， `LockoutEnd` 如果使用者被鎖定，則應該設定為未來的某個日期。這會顯示在遷移腳本中。
 
 ### <a name="roles"></a>角色
 
@@ -105,7 +106,7 @@ ASP.NET Core 2.0 遵循 [Identity](/aspnet/identity/index) ASP.NET 4.5 中引進
 |`RoleId`                 |`string`  |`RoleId`      |`string`                   |
 |`UserId`                 |`string`  |`UserId`      |`string`                   |
 
-建立*使用者*和*角色*的遷移腳本時，請參考上述對應表。 下列範例假設您在資料庫伺服器上有兩個資料庫。 一個資料庫包含現有的 ASP.NET 成員資格架構和資料。 另一個*核心 Identity 範例*資料庫是使用稍早所述的步驟所建立。 批註包含內嵌，以提供更多詳細資料。
+建立 *使用者* 和 *角色*的遷移腳本時，請參考上述對應表。 下列範例假設您在資料庫伺服器上有兩個資料庫。 其中一個資料庫包含現有的 ASP.NET 成員資格架構和資料。 其他 *核心 Identity 範例* 資料庫是使用稍早所述的步驟所建立。 內嵌包含批註，以取得更多詳細資料。
 
 ```sql
 -- THIS SCRIPT NEEDS TO RUN FROM THE CONTEXT OF THE MEMBERSHIP DB
@@ -194,15 +195,15 @@ IF @@ERROR <> 0
 COMMIT TRANSACTION MigrateUsersAndRoles
 ```
 
-完成上述腳本之後，稍 Identity 早建立的 ASP.NET Core 應用程式會填入成員資格使用者。 使用者必須在登入之前變更其密碼。
+完成上述腳本之後，稍 ASP.NET Core Identity 早建立的應用程式會填入成員資格使用者。 使用者必須在登入之前變更其密碼。
 
 > [!NOTE]
-> 如果成員資格系統的使用者名稱不符合其電子郵件地址，則需要對稍早建立的應用程式進行變更以配合此位置。 預設範本預期 `UserName` 和 `Email` 都是相同的。 在不同的情況下，登入程式必須修改為使用， `UserName` 而不是 `Email` 。
+> 如果成員系統擁有的使用者名稱不符合其電子郵件地址，則必須對稍早建立的應用程式進行變更以容納此應用程式。 預設範本預期 `UserName` 和 `Email` 都是相同的。 在不同的情況下，必須修改登入程式以使用 `UserName` 而不是 `Email` 。
 
-在登入頁面的（ `PageModel` 位於*Pages\Account\Login.cshtml.cs*）中， `[EmailAddress]` 從 [*電子郵件*] 屬性移除屬性。 將它重新命名為*UserName*。 這需要 `EmailAddress` 在*View*和*PageModel*中提及的任何位置進行變更。 結果看起來如下：
+在登入頁面的 [ `PageModel` 位於 *Pages\Account\Login.cshtml.cs*] 中， `[EmailAddress]` 從 [ *電子郵件* ] 屬性中移除該屬性。 將其重新命名為 *UserName*。 這需要 `EmailAddress` 在 *View* 和 *PageModel*中提及的任何位置進行變更。 結果看起來如下：
 
  ![已修正登入](identity/_static/fixed-login.png)
 
 ## <a name="next-steps"></a>後續步驟
 
-在本教學課程中，您已瞭解如何將 SQL 成員資格的使用者移植到 ASP.NET Core 2.0 Identity 。 如需有關 ASP.NET Core 的詳細資訊 Identity ，請參閱[簡介 Identity ](xref:security/authentication/identity)。
+在本教學課程中，您已瞭解如何將 SQL 成員資格的使用者移植到 ASP.NET Core 2.0 Identity 。 如需有關的詳細資訊 ASP.NET Core Identity ，請參閱[簡介 Identity ](xref:security/authentication/identity)。

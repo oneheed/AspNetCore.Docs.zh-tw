@@ -1,5 +1,5 @@
 ---
-title: 教學課程：使用 EF Core 來執行 CRUD 功能-ASP.NET MVC
+title: 教學課程：實行 CRUD 功能-使用 EF Core ASP.NET MVC
 description: 在本教學課程中，您將檢閱並自訂 MVC Scaffolding 自動為您在控制器及檢視中建立的 CRUD (建立、讀取、更新、刪除) 程式碼。
 author: rick-anderson
 ms.author: riande
@@ -7,6 +7,7 @@ ms.custom: mvc
 ms.date: 02/04/2019
 ms.topic: tutorial
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -17,14 +18,14 @@ no-loc:
 - Razor
 - SignalR
 uid: data/ef-mvc/crud
-ms.openlocfilehash: 2c71ea0eaccf4daeb8937dd5839481a506864fbe
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: c17461f8d1d43335230a967a4b62943c055c06b9
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88012848"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88629206"
 ---
-# <a name="tutorial-implement-crud-functionality---aspnet-mvc-with-ef-core"></a>教學課程：使用 EF Core 來執行 CRUD 功能-ASP.NET MVC
+# <a name="tutorial-implement-crud-functionality---aspnet-mvc-with-ef-core"></a>教學課程：實行 CRUD 功能-使用 EF Core ASP.NET MVC
 
 在前一個教學課程中，您建立了一個使用 Entity Framework 及 SQL Server LocalDB 來儲存及顯示資料的 MVC 應用程式。 在本教學課程中，您將檢閱並自訂 MVC Scaffolding 自動為您在控制器及檢視中建立的 CRUD (建立、讀取、更新、刪除) 程式碼。
 
@@ -40,7 +41,7 @@ ms.locfileid: "88012848"
 > * 更新 [刪除] 頁面
 > * 關閉資料庫連線
 
-## <a name="prerequisites"></a>必要條件
+## <a name="prerequisites"></a>Prerequisites
 
 * [開始使用 EF Core 和 ASP.NET Core MVC](intro.md)
 
@@ -74,7 +75,7 @@ URL 最後的部分 ("?courseID=2021") 為查詢字串的值。 模型繫結器�
 http://localhost:1230/Instructor/Index?id=1&CourseID=2021
 ```
 
-在 [索引] 頁面中，超連結 Url 是由視圖中的標記協助程式語句所建立 Razor 。 在下列程式 Razor 代碼中， `id` 參數符合預設路由，因此 `id` 會加入至路由資料。
+在 [索引] 頁面中，超連結 Url 是由視圖中的標籤協助程式語句所建立 Razor 。 在下列 Razor 程式碼中， `id` 參數會符合預設路由，因此 `id` 會新增至路由資料。
 
 ```html
 <a asp-action="Edit" asp-route-id="@item.ID">Edit</a>
@@ -86,7 +87,7 @@ http://localhost:1230/Instructor/Index?id=1&CourseID=2021
 <a href="/Students/Edit/6">Edit</a>
 ```
 
-在下列程式 Razor 代碼中， `studentID` 不符合預設路由中的參數，因此會新增為查詢字串。
+在下列程式 Razor 代碼中，與 `studentID` 預設路由中的參數不相符，因此會將它新增為查詢字串。
 
 ```html
 <a asp-action="Edit" asp-route-studentID="@item.ID">Edit</a>
@@ -130,7 +131,7 @@ http://localhost:1230/Instructor/Index?id=1&CourseID=2021
 
 除了 `Bind` 屬性外，try-catch 區塊是您對 Scaffold 程式碼進行的唯一變更。 若在儲存變更時捕捉到衍生自 `DbUpdateException` 的例外狀況，則會顯示一般錯誤訊息。 `DbUpdateException` 例外狀況有時候是因為某些外部因素造成的，而非程式設計上的錯誤，因此系統會建議使用者再試一次。 雖然在此範例中並未實作，但生產環境品質的應用程式應記錄例外狀況。 如需詳細資訊，請參閱[監視及遙測 (使用 Azure 建置現實世界的雲端應用程式)](/aspnet/aspnet/overview/developing-apps-with-windows-azure/building-real-world-cloud-apps-with-windows-azure/monitoring-and-telemetry)中的**深入解析記錄檔**一節。
 
-`ValidateAntiForgeryToken` 屬性可協助防止跨網站偽造要求 (CSRF) 攻擊。 [FormTagHelper](xref:mvc/views/working-with-forms#the-form-tag-helper) 會自動將權杖插入檢視中，並在使用者提交表單時包含在內。 權杖會由 `ValidateAntiForgeryToken` 屬性進行驗證。 如需 CSRF 的詳細資訊，請參閱[防偽要求](../../security/anti-request-forgery.md)。
+`ValidateAntiForgeryToken` 屬性可協助防止跨網站偽造要求 (CSRF) 攻擊。 [FormTagHelper](xref:mvc/views/working-with-forms#the-form-tag-helper) 會自動將權杖插入檢視中，並在使用者提交表單時包含在內。 權杖會由 `ValidateAntiForgeryToken` 屬性進行驗證。 如需詳細資訊，請參閱<xref:security/anti-request-forgery>。
 
 <a id="overpost"></a>
 
@@ -161,11 +162,11 @@ public class Student
 
 ### <a name="test-the-create-page"></a>測試 [建立] 頁面
 
-*Views/student/Create. cshtml*中的程式碼 `label` 會 `input` `span` 針對每個欄位的驗證訊息使用、和 (，) 標記協助程式。
+*Views/student/Create. cshtml*中的程式碼會針對 `label` `input` 每個欄位) 標記協助程式，使用、和 `span` (來進行驗證訊息。
 
 執行應用程式，選取 [Students]**** 索引標籤，然後按一下 [新建]****。
 
-輸入名稱和日期。 嘗試輸入無效的日期 (若您的瀏覽器允許的話)。  (有些瀏覽器會強制您使用日期選擇器。 ) 然後按一下 [**建立**] 以查看錯誤訊息。
+輸入名稱和日期。 嘗試輸入無效的日期 (若您的瀏覽器允許的話)。  (部分瀏覽器會強制您使用日期選擇器。 ) 然後按一下 [ **建立** ] 以查看錯誤訊息。
 
 ![日期驗證錯誤](crud/_static/date-error.png)
 
@@ -189,7 +190,7 @@ public class Student
 
 新的程式碼會讀取現有的實體，呼叫 `TryUpdateModel` 來[根據使用者在 Post 表單資料中輸入的內容](xref:mvc/models/model-binding)來更新已擷取實體中的欄位。 Entity Framework 的自動變更追蹤會在表單輸入變更的欄位上設定 `Modified` 旗標。 當呼叫 `SaveChanges` 方法時，Entity Framework 會建立 SQL 陳述式來更新資料庫的資料列。 系統會忽略並行衝突，並且只有使用者更新的資料表資料行會在資料庫中獲得更新。 (之後的教學課程會顯示如何處理並行衝突。)
 
-若要避免防止大量指派，最佳作法是在參數中宣告您想要由 [**編輯**] 頁面更新的欄位 `TryUpdateModel` 。  (在參數清單中的欄位清單前面的空字串，是要用於表單欄位名稱的前置詞。 ) 目前沒有您要保護的額外欄位，但是列出您想要讓模型系結器系結的欄位，確保當您在未來將欄位加入至資料模型時，會自動保護它們，直到您明確地在此加入這些欄位為止。
+為了避免大量指派，最佳作法是在參數中宣告您要由 [ **編輯** ] 頁面更新的欄位 `TryUpdateModel` 。  (參數清單中欄位清單前面的空字串，是為了要搭配表單欄位名稱使用的前置詞。 ) 目前沒有您要保護的其他欄位，但請列出您想要讓模型系結器系結的欄位，以確保在您于未來將欄位加入至資料模型時，會自動保護它們，直到您在這裡明確地加入欄位為止。
 
 作為這些變更的結果，HttpPost `Edit` 方法的方法簽章會與 HttpGet `Edit` 方法的簽章一樣；因此，您已將方法重新命名為 `EditPost`。
 
@@ -299,7 +300,7 @@ Scaffold 程式碼會使用「建立及連結 」方法，但僅會捕捉到 `Db
 
 * 您想要連結到一個實體以更新它，但稍早之前您才為了不同的目的擷取過相同的實體。 由於實體已由資料庫內容進行追蹤，您無法連結到您想要變更的實體。 處理這種情況的一種方法，便是在稍早之前的查詢中呼叫 `AsNoTracking`。
 
-如需詳細資訊，請參閱[追蹤與不追蹤](/ef/core/querying/tracking)。
+如需詳細資訊，請參閱 [追蹤與不追蹤](/ef/core/querying/tracking)的比較。
 
 ## <a name="get-the-code"></a>取得程式碼
 

@@ -1156,7 +1156,7 @@
       uid: security/anti-request-forgery
     - name: 防止開啟重新導向攻擊
       uid: security/preventing-open-redirects
-    - name: 防止跨網站指令碼攻擊
+    - name: 防止跨網站指令碼處理 (XSS)
       uid: security/cross-site-scripting
     - name: 啟用跨原始來源要求 (CORS)
       uid: security/cors

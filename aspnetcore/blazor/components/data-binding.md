@@ -5,8 +5,9 @@ description: 瞭解應用程式中元件和 DOM 元素的資料系結功能 Blaz
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 03/26/2020
+ms.date: 08/19/2020
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -17,48 +18,56 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/components/data-binding
-ms.openlocfilehash: 6f5ad6b8f225834c92d6e33d8bcf608b56678e67
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: 3b41aedcbd0d2c22b20d8fa3a21b8af97d1fbb2c
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88014668"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88628556"
 ---
 # <a name="aspnet-core-no-locblazor-data-binding"></a>ASP.NET Core Blazor 資料系結
 
-By [Luke Latham](https://github.com/guardrex)和[Daniel Roth](https://github.com/danroth27)
+依 [Luke Latham](https://github.com/guardrex) 和 [Daniel Roth](https://github.com/danroth27)
 
-Razor元件會透過 [`@bind`](xref:mvc/views/razor#bind) 以欄位、屬性或運算式值命名的 HTML 元素屬性，提供資料系結功能 Razor 。
+Razor 元件會透過以 [`@bind`](xref:mvc/views/razor#bind) 欄位、屬性或運算式值命名的 HTML 元素屬性，提供資料系結功能 Razor 。
 
-下列範例會將屬性系結 `CurrentValue` 至文字方塊的值：
+下列範例會將專案系結 `<input>` 至 `currentValue` 欄位，並將元素系結 `<input>` 至 `CurrentValue` 屬性：
 
 ```razor
-<input @bind="CurrentValue" />
+<p>
+    <input @bind="currentValue" /> Current value: @currentValue
+</p>
+
+<p>
+    <input @bind="CurrentValue" /> Current value: @CurrentValue
+</p>
 
 @code {
+    private string currentValue;
+
     private string CurrentValue { get; set; }
 }
 ```
 
-當文字方塊失去焦點時，就會更新屬性的值。
+當其中一個元素失去焦點時，就會更新其系結欄位或屬性。
 
-只有在呈現元件時，才會更新 UI 中的文字方塊，而不會回應變更屬性的值。 由於元件會在事件處理常式程式碼執行之後自行呈現，因此在觸發事件處理常式之後，屬性更新*通常*會立即反映在 UI 中。
+只有在轉譯元件時，才會更新 UI 中的文字方塊，而不是回應變更欄位或屬性的值。 由於元件會在事件處理常式程式碼執行之後自行轉譯，因此在觸發事件處理常式之後，欄位和屬性更新 *通常* 會立即反映在 UI 中。
 
-使用 [`@bind`](xref:mvc/views/razor#bind) 與 `CurrentValue` 屬性 (`<input @bind="CurrentValue" />`) 基本上等同于下列內容：
+使用 [`@bind`](xref:mvc/views/razor#bind) 與 `CurrentValue` 屬性 (`<input @bind="CurrentValue" />`) 基本上等同于下列專案：
 
 ```razor
 <input value="@CurrentValue"
     @onchange="@((ChangeEventArgs __e) => CurrentValue = 
         __e.Value.ToString())" />
-        
+
 @code {
     private string CurrentValue { get; set; }
 }
 ```
 
-當元件呈現時，輸入專案的會 `value` 來自 `CurrentValue` 屬性。 當使用者在文字方塊中輸入並變更元素焦點時， `onchange` 就會引發事件，並將 `CurrentValue` 屬性設定為已變更的值。 實際上，程式碼產生更為複雜，因為會 [`@bind`](xref:mvc/views/razor#bind) 處理執行類型轉換的情況。 在原則上，會將 [`@bind`](xref:mvc/views/razor#bind) 運算式的目前值與屬性產生關聯， `value` 並使用已註冊的處理常式來處理變更。
+轉譯元件時， `value` 輸入元素的會來自 `CurrentValue` 屬性。 當使用者在文字方塊中輸入並變更元素焦點時， `onchange` 就會引發事件，並將 `CurrentValue` 屬性設定為變更的值。 事實上，程式碼產生比起的複雜，因為它會 [`@bind`](xref:mvc/views/razor#bind) 處理型別轉換的執行情況。 在主體中，會將 [`@bind`](xref:mvc/views/razor#bind) 運算式的目前值與屬性產生關聯 `value` ，並使用已註冊的處理常式來處理變更。
 
-藉由同時包含具有參數的屬性，系結其他事件上的屬性或欄位 `@bind:event` `event` 。 下列範例會系結 `CurrentValue` 事件上的屬性 `oninput` ：
+將屬性或欄位系結到其他事件，也可以包含 `@bind:event` 具有參數的屬性 `event` 。 下列範例會系結 `CurrentValue` 事件上的屬性 `oninput` ：
 
 ```razor
 <input @bind="CurrentValue" @bind:event="oninput" />
@@ -68,13 +77,17 @@ Razor元件會透過 [`@bind`](xref:mvc/views/razor#bind) 以欄位、屬性或�
 }
 ```
 
-不同于 `onchange` 當元素失去焦點時引發的，會 `oninput` 在文字方塊的值變更時引發。
+不同于 `onchange` 當專案失去焦點時引發的專案，會 `oninput` 在文字方塊的值變更時引發。
 
-使用 `@bind-{ATTRIBUTE}` with 語法來系結以外的 `@bind-{ATTRIBUTE}:event` 元素屬性 `value` 。 在下列範例中，當值變更時，會更新段落的樣式 `paragraphStyle` ：
+使用 `@bind-{ATTRIBUTE}` with 語法來系結以外的 `@bind-{ATTRIBUTE}:event` 元素屬性 `value` 。 在下例中︰
+
+* 當元件載入 () 時，段落的樣式為 **紅色** `style="color:red"` 。
+* 使用者變更文字方塊的值，以反映不同的 CSS 色彩樣式，並變更頁面的元素焦點。 例如，使用者將文字方塊值變更為 `color:blue` ，然後按下鍵盤上的 <kbd>Tab</kbd> 鍵。
+* 當元素焦點變更時：
+  * 的值 `paragraphStyle` 是從專案 `<input>` 的值指派。
+  * 段落樣式會更新，以反映中的新樣式 `paragraphStyle` 。 如果樣式更新為 `color:blue` ，則文字色彩會變更為 **藍色**。
 
 ```razor
-@page "/binding-example"
-
 <p>
     <input type="text" @bind="paragraphStyle" />
 </p>
@@ -90,170 +103,152 @@ Razor元件會透過 [`@bind`](xref:mvc/views/razor#bind) 以欄位、屬性或�
 
 屬性系結會區分大小寫：
 
-* `@bind`有效。
-* `@Bind`和 `@BIND` 無效。
+* `@bind` 有效。
+* `@Bind` 和 `@BIND` 無效。
 
 ## <a name="unparsable-values"></a>無法剖析的值
 
-當使用者將無法剖析的值提供給資料系結元素時，會在觸發系結事件時，自動將無法剖析的值還原成先前的值。
+當使用者提供無法剖析的值給資料系結專案時，會在觸發 bind 事件時，將無法剖析的值自動還原為先前的值。
 
 請考慮下列案例：
 
-* `<input>`元素會系結至 `int` 具有初始值的類型 `123` ：
+* 專案 `<input>` 會系結至 `int` 值為的類型 `123` ：
 
   ```razor
-  <input @bind="MyProperty" />
+  <input @bind="inputValue" />
 
   @code {
-      [Parameter]
-      public int MyProperty { get; set; } = 123;
+      private int inputValue = 123;
   }
   ```
-* 使用者會將專案的值更新為 `123.45` 頁面中的，並變更元素的焦點。
 
-在上述案例中，元素的值會還原成 `123` 。 當以的 `123.45` 原始值拒絕值時 `123` ，使用者瞭解其值不被接受。
+* 使用者會將專案的值更新為 `123.45` 頁面中的，並變更元素焦點。
 
-根據預設，系結會套用至元素的 `onchange` 事件 (`@bind="{PROPERTY OR FIELD}"`) 。 用 `@bind="{PROPERTY OR FIELD}" @bind:event={EVENT}` 來在不同的事件上觸發系結。 對於 `oninput` 事件 (`@bind:event="oninput"`) ，回復會在引進無法剖析值的任何擊鍵之後發生。 以系結型別為目標的 `oninput` 事件時 `int` ，使用者無法輸入 `.` 字元。 `.`系統會立即移除字元，讓使用者收到只允許整數的立即回應。 在某些情況下，在事件上還原值 `oninput` 不是理想的情況，例如，當使用者應允許清除無法解析的 `<input>` 值時。 替代方案包括：
+在上述案例中，元素的值會還原為 `123` 。 當值 `123.45` 被拒絕時，若要改用的原始值 `123` ，使用者瞭解其值不會被接受。
 
-* 請勿使用 `oninput` 事件。 使用預設 `onchange` 事件 (僅指定 `@bind="{PROPERTY OR FIELD}"`) ，其中不正確值在元素失去焦點之前不會還原。
-* 系結至可為 null 的型別（例如 `int?` 或 `string` ），並提供自訂邏輯來處理不正確專案。
-* 使用[表單驗證元件](xref:blazor/forms-validation)，例如 <xref:Microsoft.AspNetCore.Components.Forms.InputNumber%601> 或 <xref:Microsoft.AspNetCore.Components.Forms.InputDate%601> 。 表單驗證元件有內建支援，可管理不正確輸入。 表單驗證元件：
-  * 允許使用者在相關聯的上提供不正確輸入和接收驗證錯誤 <xref:Microsoft.AspNetCore.Components.Forms.EditContext> 。
-  * 在 UI 中顯示驗證錯誤，而不幹擾使用者輸入其他 webform 資料。
+根據預設，系結會套用至元素的 `onchange` 事件 (`@bind="{PROPERTY OR FIELD}"`) 。 用 `@bind="{PROPERTY OR FIELD}" @bind:event={EVENT}` 來觸發不同事件的系結。 針對 `oninput` () 的事件 `@bind:event="oninput"` ，回復會在引進未剖析值的任何按鍵之後進行。 以系結類型為目標的 `oninput` 事件時 `int` ，使用者無法輸入 `.` 字元。 `.`系統會立即移除字元，因此使用者會收到只允許整數的立即回應。 在某些情況下，還原事件的值 `oninput` 並不理想，例如，當使用者應該清除無法剖析的 `<input>` 值時。 替代方案包括：
+
+* 請勿使用 `oninput` 事件。 使用預設 `onchange` 事件 (只指定 `@bind="{PROPERTY OR FIELD}"`) ，其中不會還原無效值，直到元素失去焦點為止。
+* 系結至可為 null 的型別（例如或）， `int?` `string` 並提供自訂邏輯來處理不正確專案。
+* 使用 [表單驗證元件](xref:blazor/forms-validation)，例如 <xref:Microsoft.AspNetCore.Components.Forms.InputNumber%601> 或 <xref:Microsoft.AspNetCore.Components.Forms.InputDate%601> 。 表單驗證元件具有內建的支援，可管理不正確輸入。 如需詳細資訊，請參閱<xref:blazor/forms-validation>。 表單驗證元件：
+  * 允許使用者提供不正確輸入，並在相關聯的上接收驗證錯誤 <xref:Microsoft.AspNetCore.Components.Forms.EditContext> 。
+  * 在 UI 中顯示驗證錯誤，而不會干擾使用者輸入其他 webform 資料。
 
 ## <a name="format-strings"></a>格式字串
 
-資料系結會 <xref:System.DateTime> 使用來處理格式字串 `@bind:format` 。 目前無法使用其他格式運算式，例如貨幣或數位格式。
+資料系結 <xref:System.DateTime> 使用的格式字串 `@bind:format` 。 現在無法使用其他格式運算式，例如貨幣或數位格式。
 
 ```razor
-<input @bind="StartDate" @bind:format="yyyy-MM-dd" />
+<input @bind="startDate" @bind:format="yyyy-MM-dd" />
 
 @code {
-    [Parameter]
-    public DateTime StartDate { get; set; } = new DateTime(2020, 1, 1);
+    private DateTime startDate = new DateTime(2020, 1, 1);
 }
 ```
 
-在上述程式碼中， `<input>` 元素的欄位類型 (`type`) 預設為 `text` 。 `@bind:format`支援系結下列 .NET 類型：
+在上述程式碼中， `<input>` 元素的欄位類型 (`type`) 預設為 `text` 。 `@bind:format` 支援系結下列 .NET 類型：
 
 * <xref:System.DateTime?displayProperty=fullName>
 * <xref:System.DateTime?displayProperty=fullName>?
 * <xref:System.DateTimeOffset?displayProperty=fullName>
 * <xref:System.DateTimeOffset?displayProperty=fullName>?
 
-`@bind:format`屬性會指定要套用至元素之的日期格式 `value` `<input>` 。 當發生事件時，也會使用此格式來剖析值 `onchange` 。
+`@bind:format`屬性會指定要套用至元素之的日期格式 `value` `<input>` 。 當事件發生時，也會使用此格式來剖析該值 `onchange` 。
 
-`date`不建議指定欄位類型的格式，因為 Blazor 具有格式日期的內建支援。 在建議的情況下，只有在以欄位類型提供格式時，才使用「系結」的 `yyyy-MM-dd` 日期格式來正常運作 `date` ：
+`date`由於 Blazor 具有格式化日期的內建支援，因此不建議指定欄位類型的格式。 在建議的情況下， `yyyy-MM-dd` 如果格式是以欄位類型提供，只使用日期格式讓系結正常運作 `date` ：
 
 ```razor
-<input type="date" @bind="StartDate" @bind:format="yyyy-MM-dd">
+<input type="date" @bind="startDate" @bind:format="yyyy-MM-dd">
 ```
 
-## <a name="parent-to-child-binding-with-component-parameters"></a>具有元件參數的父系對子系結
+## <a name="parent-to-child-binding-with-component-parameters"></a>使用元件參數的父系對子系結
 
-Binding 可辨識元件參數，其中 `@bind-{PROPERTY}` 可以將屬性值從父元件系結到子元件。 具有連鎖系結區段的[子系對父](#child-to-parent-binding-with-chained-bind)系結中涵蓋了從子系系結至父系的系結。
+元件參數允許父元件的系結屬性和欄位具有 `@bind-{PROPERTY OR FIELD}` 語法。
 
-下列子元件 (`ChildComponent`) 具有 `Year` 元件參數和 `YearChanged` 回呼：
+下列 `Child` 元件 (`Child.razor`) 具有 `Year` 元件參數和 `YearChanged` 回呼：
 
 ```razor
-<h2>Child Component</h2>
-
-<p>Year: @Year</p>
+<div class="card bg-light mt-3" style="width:18rem ">
+    <div class="card-body">
+        <h3 class="card-title">Child Component</h3>
+        <p class="card-text">Child <code>Year</code>: @Year</p>
+        <p>
+            <button @onclick="UpdateYear">
+                Update Child <code>Year</code> and call 
+                <code>YearChanged.InvokeAsync(Year)</code>
+            </button>
+        </p>
+    </div>
+</div>
 
 @code {
+    private Random r = new Random();
+
     [Parameter]
     public int Year { get; set; }
 
     [Parameter]
     public EventCallback<int> YearChanged { get; set; }
-}
-```
 
-<xref:Microsoft.AspNetCore.Components.EventCallback%601> `Changed` `{PARAMETER NAME}Changed` 在上述範例中，必須命名為元件參數名稱，後面接著尾碼 () `YearChanged` 。 如需 <xref:Microsoft.AspNetCore.Components.EventCallback%601> 的詳細資訊，請參閱 <xref:blazor/components/event-handling#eventcallback>。
-
-下列父元件會使用：
-
-* `ChildComponent`和會將 `ParentYear` 參數從父系系結至 `Year` 子元件上的參數。
-* `onclick`事件是用來觸發 `ChangeTheYear` 方法。 如需詳細資訊，請參閱<xref:blazor/components/event-handling>。
-
-```razor
-@page "/ParentComponent"
-
-<h1>Parent Component</h1>
-
-<p>ParentYear: @ParentYear</p>
-
-<ChildComponent @bind-Year="ParentYear" />
-
-<button class="btn btn-primary" @onclick="ChangeTheYear">
-    Change Year to 1986
-</button>
-
-@code {
-    [Parameter]
-    public int ParentYear { get; set; } = 1978;
-
-    private void ChangeTheYear()
+    private Task UpdateYear()
     {
-        ParentYear = 1986;
+        Year = r.Next(10050, 12021);
+
+        return YearChanged.InvokeAsync(Year);
     }
 }
 ```
 
-載入會 `ParentComponent` 產生下列標記：
+回呼 (<xref:Microsoft.AspNetCore.Components.EventCallback%601>) 必須命名為元件參數名稱，後面接著 " `Changed` " 尾碼 (`{PARAMETER NAME}Changed`) 。 在上述範例中，回呼的名稱為 `YearChanged` 。 如需 <xref:Microsoft.AspNetCore.Components.EventCallback%601> 的詳細資訊，請參閱 <xref:blazor/components/event-handling#eventcallback>。
 
-```html
-<h1>Parent Component</h1>
-
-<p>ParentYear: 1978</p>
-
-<h2>Child Component</h2>
-
-<p>Year: 1978</p>
-```
-
-如果藉 `ParentYear` 由選取中的按鈕來變更屬性的值，則 `ParentComponent` `Year` `ChildComponent` 會更新的屬性。 `Year`當為重新顯示時，的新值會在 UI 中呈現 `ParentComponent` ：
-
-```html
-<h1>Parent Component</h1>
-
-<p>ParentYear: 1986</p>
-
-<h2>Child Component</h2>
-
-<p>Year: 1986</p>
-```
-
-參數是可系結的， `Year` 因為它有 `YearChanged` 符合參數類型的伴隨事件 `Year` 。
-
-依照慣例， `<ChildComponent @bind-Year="ParentYear" />` 基本上等同于撰寫：
+在下列 `Parent` 元件 (`Parent.razor`) 中，欄位會系結 `year` 至 `Year` 子元件的參數：
 
 ```razor
-<ChildComponent @bind-Year="ParentYear" @bind-Year:event="YearChanged" />
+@page "/Parent"
+
+<h1>Parent Component</h1>
+
+<p>Parent <code>year</code>: @year</p>
+
+<button @onclick="UpdateYear">Update Parent <code>year</code></button>
+
+<Child @bind-Year="year" />
+
+@code {
+    private Random r = new Random();
+    private int year = 1978;
+
+    private void UpdateYear()
+    {
+        year = r.Next(1950, 2021);
+    }
+}
 ```
 
-一般而言，屬性可以藉由包含屬性，系結至對應的事件處理常式 `@bind-{PROPRETY}:event` 。 例如，您 `MyProp` 可以 `MyEventHandler` 使用下列兩個屬性，將屬性系結至：
+`Year`參數是可系結的，因為它具有 `YearChanged` 符合參數類型的伴隨事件 `Year` 。
+
+依照慣例，屬性可以藉由包含指派給處理常式的屬性，系結至對應的事件處理常式 `@bind-{PROPERTY}:event` 。 `<Child @bind-Year="year" />` 相當於撰寫：
 
 ```razor
-<MyComponent @bind-MyProp="MyValue" @bind-MyProp:event="MyEventHandler" />
+<Child @bind-Year="year" @bind-Year:event="YearChanged" />
 ```
 
-## <a name="child-to-parent-binding-with-chained-bind"></a>具有連鎖系結的子系對父系系結
+## <a name="child-to-parent-binding-with-chained-bind"></a>具有連結系結的子系對父系系結
 
-常見的案例是將資料系結參數連結至元件輸出中的 page 元素。 此案例稱為*連鎖*系結，因為會同時發生多個層級的系結。
+常見的案例是將資料系結參數連結至元件輸出中的頁面元素。 此案例稱為 *連鎖* 系結，因為有多個層級的系結同時發生。
 
-無法 [`@bind`](xref:mvc/views/razor#bind) 在頁面的元素中使用語法來執行連鎖系結。 事件處理常式和值必須分別指定。 不過，父系元件可以使用語法搭配 [`@bind`](xref:mvc/views/razor#bind) 元件的參數。
+連結系結無法使用 [`@bind`](xref:mvc/views/razor#bind) 子元件中的語法來執行。 您必須分別指定事件處理常式和值。 不過，父元件可以搭配 [`@bind`](xref:mvc/views/razor#bind) 子元件的參數使用語法。
 
 下列 `PasswordField` 元件 (`PasswordField.razor`) ：
 
 * 將 `<input>` 元素的值設定為 `Password` 屬性。
-* 將屬性的變更公開 `Password` 至具有的父元件 [`EventCallback`](xref:blazor/components/event-handling#eventcallback) 。
-* 會使用 `onclick` 事件來觸發 `ToggleShowPassword` 方法。 如需詳細資訊，請參閱<xref:blazor/components/event-handling>。
+* `Password`使用來公開屬性對父元件的變更 [`EventCallback`](xref:blazor/components/event-handling#eventcallback) 。
+* 使用 `onclick` 事件來觸發 `ToggleShowPassword` 方法。 如需詳細資訊，請參閱<xref:blazor/components/event-handling>。
 
 ```razor
 <h1>Child Component</h1>
 
-Password: 
+Password:
 
 <input @oninput="OnPasswordChanged" 
        required 
@@ -287,10 +282,10 @@ Password:
 }
 ```
 
-`PasswordField`元件會在另一個元件中使用：
+`PasswordField`元件是在另一個元件中使用：
 
 ```razor
-@page "/ParentComponent"
+@page "/Parent"
 
 <h1>Parent Component</h1>
 
@@ -301,12 +296,12 @@ Password:
 }
 ```
 
-若要對上述範例中的密碼執行檢查或陷印錯誤：
+若要對上述範例中的密碼執行檢查或陷阱錯誤：
 
 * `Password` `password` 在下列範例程式碼) 中，建立 (的支援欄位。
-* 執行 setter 中的檢查或陷阱錯誤 `Password` 。
+* 在 setter 中執行檢查或陷阱錯誤 `Password` 。
 
-如果密碼的值中使用了空格，下列範例會向使用者提供立即的意見反應：
+下列範例會在密碼值中使用空格時，為使用者提供立即的意見反應：
 
 ```razor
 <h1>Child Component</h1>
@@ -370,4 +365,4 @@ Password:
 ## <a name="additional-resources"></a>其他資源
 
 * [系結至表單中的選項按鈕](xref:blazor/forms-validation#radio-buttons)
-* [`<select>`表單中 c # 物件值的繫結項目選項 `null`](xref:blazor/forms-validation#binding-select-element-options-to-c-object-null-values)
+* [將 `<select>` 元件選項系結至 `null` 表單中的 c # 物件值](xref:blazor/forms-validation#binding-select-element-options-to-c-object-null-values)

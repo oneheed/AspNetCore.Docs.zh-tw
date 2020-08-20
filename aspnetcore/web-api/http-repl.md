@@ -7,6 +7,7 @@ ms.author: scaddie
 ms.custom: mvc
 ms.date: 05/20/2020
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -17,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: web-api/http-repl
-ms.openlocfilehash: 0fb19aa19703e68812b83f0631f029dd66a3d64e
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: e6263f19cdb7f9957fa8360f9e782e622589ea18
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88021324"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88633314"
 ---
 # <a name="test-web-apis-with-the-http-repl"></a>使用 HTTP REPL 來測試 web API
 
@@ -40,13 +41,13 @@ HTTP「讀取、求值、輸出」迴圈 (REPL) 是：
 * [GET](#test-http-get-requests)
 * [HEAD](#test-http-head-requests)
 * [選項](#test-http-options-requests)
-* [跳](#test-http-patch-requests)
+* [補丁](#test-http-patch-requests)
 * [POST](#test-http-post-requests)
 * [PUT](#test-http-put-requests)
 
 若要跟著做，[請檢視或下載範例 ASP.NET Core web API](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/web-api/http-repl/samples) ([如何下載](xref:index#how-to-download-a-sample))。
 
-## <a name="prerequisites"></a>必要條件
+## <a name="prerequisites"></a>Prerequisites
 
 * [!INCLUDE [2.1-SDK](~/includes/2.1-SDK.md)]
 
@@ -60,7 +61,7 @@ dotnet tool install -g Microsoft.dotnet-httprepl
 
 會從 [Microsoft.dotnet-httprepl](https://www.nuget.org/packages/Microsoft.dotnet-httprepl) \(英文\) NuGet 套件安裝 [.NET Core 全域工具](/dotnet/core/tools/global-tools#install-a-global-tool)。
 
-## <a name="usage"></a>使用量
+## <a name="usage"></a>使用方式
 
 成功安裝工具後，請執行以下命令來啟動 HTTP REPL：
 
@@ -365,7 +366,7 @@ pref set editor.command.default "C:\Program Files\Microsoft VS Code\Code.exe"
 
 ---
 
-若要以特定 CLI 引數啟動預設文字編輯器，請設定 `editor.command.default.arguments` 機碼。 假設 Visual Studio Code 是預設文字編輯器，且您希望 HTTP REPL 在新的工作階段開啟 Visual Studio Code，但停用延伸模組。 執行下列命令：
+若要以特定 CLI 引數啟動預設文字編輯器，請設定 `editor.command.default.arguments` 機碼。 假設 Visual Studio Code 是預設文字編輯器，且您希望 HTTP REPL 在新的工作階段開啟 Visual Studio Code，但停用延伸模組。 執行以下命令：
 
 ```console
 pref set editor.command.default.arguments "--disable-extensions --new-window"
@@ -375,9 +376,9 @@ pref set editor.command.default.arguments "--disable-extensions --new-window"
 
 根據預設，HTTP REPL 有一組相對路徑，在執行 `connect` 命令時 (不使用 `--swagger` 選項)，HTTP REPL 會用來尋找 Swagger 文件。 這些相對路徑會與 `connect` 命令中指定的根路徑和基本路徑結合。 預設的相對路徑為：
 
-- *swagger.js于*
+- *swagger.js開啟*
 - *swagger/v1/swagger.js開啟*
-- */swagger.js于*
+- */swagger.js開啟*
 - */swagger/v1/swagger.json*
 
 若要在您的環境中使用一組不同的搜尋路徑，請設定 `swagger.searchPaths` 喜好設定。 此值必須是以管線分隔的相對路徑清單。 例如：
@@ -564,7 +565,7 @@ put <PARAMETER> [-c|--content] [-f|--file] [-h|--header] [--no-body] [-F|--no-fo
 
 若要發出 HTTP PUT 要求：
 
-1. *選擇性*：執行 `get` 命令以在修改資料之前先加以流覽：
+1. *選擇性*：執行 `get` 命令以在修改資料之前加以查看：
 
     ```console
     https://localhost:5001/fruits~ get
@@ -677,7 +678,7 @@ delete <PARAMETER> [-F|--no-formatting] [-h|--header] [--response] [--response:b
 
 若要發出 HTTP DELETE 要求：
 
-1. *選擇性*：執行 `get` 命令以在修改資料之前先加以流覽：
+1. *選擇性*：執行 `get` 命令以在修改資料之前加以查看：
 
     ```console
     https://localhost:5001/fruits~ get
@@ -822,13 +823,13 @@ options <PARAMETER> [-F|--no-formatting] [-h|--header] [--response] [--response:
     https://localhost:5001/people~ set header Content-Type
     ```
 
-## <a name="test-secured-endpoints"></a>測試受保護的端點
+## <a name="test-secured-endpoints"></a>測試安全的端點
 
-HTTP 複寫支援以兩種方式測試受保護的端點：透過已登入使用者的預設認證，或使用 HTTP 要求標頭。 
+HTTP 複寫支援以兩種方式測試安全的端點：透過登入使用者的預設認證，或使用 HTTP 要求標頭。 
 
 ### <a name="default-credentials"></a>預設認證
 
-假設您要測試的 Web API 裝載于 IIS 中，並使用 Windows 驗證進行保護。 您想要讓執行此工具之使用者的認證流經已測試的 HTTP 端點。 若要傳遞已登入使用者的預設認證：
+假設您要測試的 web API 裝載于 IIS 中，並受到 Windows 驗證保護。 您希望執行工具之使用者的認證流經所測試的 HTTP 端點。 若要傳遞已登入使用者的預設認證：
 
 1. 將喜好設定設 `httpClient.useDefaultCredentials` 為 `true` ：
 
@@ -836,17 +837,17 @@ HTTP 複寫支援以兩種方式測試受保護的端點：透過已登入使用
     pref set httpClient.useDefaultCredentials true
     ```
 
-1. 結束並重新啟動工具，再將另一個要求傳送至 Web API。
+1. 先結束並重新啟動工具，再將另一個要求傳送至 web API。
 
 ### <a name="http-request-headers"></a>HTTP 要求標頭
 
-支援的驗證和授權配置範例包括基本驗證、JWT 持有人權杖和摘要式驗證。 例如，您可以使用下列命令將持有人權杖傳送至端點：
+支援的驗證和授權配置範例包括基本驗證、JWT 持有人權杖和摘要式驗證。 例如，您可以使用下列命令，將持有人權杖傳送至端點：
 
 ```console
 set header Authorization "bearer <TOKEN VALUE>"
 ```
 
-若要存取 Azure 託管的端點或使用[azure REST API](/rest/api/azure/)，您需要持有人權杖。 使用下列步驟，透過[Azure CLI](/cli/azure/)取得 Azure 訂用帳戶的持有人權杖。 HTTP 複寫會設定 HTTP 要求標頭中的持有人權杖，並抓取 Azure App Service Web Apps 的清單。
+若要存取 Azure 託管端點或使用 [azure REST API](/rest/api/azure/)，您需要持有人權杖。 使用下列步驟，透過 [Azure CLI](/cli/azure/)為您的 Azure 訂用帳戶取得持有人權杖。 HTTP 複寫會在 HTTP 要求標頭中設定持有人權杖，並抓取 Azure App Service 的 Web Apps 清單。
 
 1. 登入 Azure：
 
@@ -872,7 +873,7 @@ set header Authorization "bearer <TOKEN VALUE>"
     az account get-access-token --query accessToken
     ```
 
-1. 透過 HTTP 複寫來連接到 Azure REST API：
+1. 透過 HTTP 複寫連接至 Azure REST API：
 
     ```console
     httprepl https://management.azure.com

@@ -7,6 +7,7 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 08/26/2019
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -17,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: fundamentals/logging/loggermessage
-ms.openlocfilehash: d5857ddf08bdefa74bb95cb26faa9f6dbf22b2e8
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: 9bd31682e9fb816110e814790a93ab53b1454cc9
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88017164"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88634016"
 ---
 # <a name="high-performance-logging-with-loggermessage-in-aspnet-core"></a>在 ASP.NET Core 中使用 LoggerMessage 進行高效能記錄
 
@@ -93,7 +94,7 @@ info: LoggerMessageSample.Pages.IndexModel[1]
 
 [!code-csharp[](loggermessage/samples/3.x/LoggerMessageSample/Internal/LoggerExtensions.cs?name=snippet10)]
 
-在索引頁面的頁面模型中 (*Pages/Index. cshtml .cs*) ， `QuoteAdded` 會呼叫來記錄訊息：
+在索引頁面的頁面模型中 (會呼叫 *Pages/Index. cshtml*) ， `QuoteAdded` 以記錄訊息：
 
 [!code-csharp[](loggermessage/samples/3.x/LoggerMessageSample/Pages/Index.cshtml.cs?name=snippet3&highlight=6)]
 
@@ -106,7 +107,7 @@ info: LoggerMessageSample.Pages.IndexModel[2]
           consequences of avoiding reality. - Ayn Rand')
 ```
 
-範例應用程式會執行用於刪除引號的[try-catch](/dotnet/csharp/language-reference/keywords/try-catch)模式。 成功的刪除作業會記錄告知性訊息。 如果擲回例外狀況，則會針對刪除作業記錄一則錯誤訊息。 失敗刪除作業的記錄訊息包含例外狀況堆疊追蹤 (*Internal/LoggerExtensions.cs*)：
+範例應用程式會針對報價刪除來實行 [try-catch](/dotnet/csharp/language-reference/keywords/try-catch) 模式。 成功的刪除作業會記錄告知性訊息。 如果擲回例外狀況，則會針對刪除作業記錄一則錯誤訊息。 失敗刪除作業的記錄訊息包含例外狀況堆疊追蹤 (*Internal/LoggerExtensions.cs*)：
 
 [!code-csharp[](loggermessage/samples/3.x/LoggerMessageSample/Internal/LoggerExtensions.cs?name=snippet3)]
 
@@ -116,7 +117,7 @@ info: LoggerMessageSample.Pages.IndexModel[2]
 
 [!code-csharp[](loggermessage/samples/3.x/LoggerMessageSample/Internal/LoggerExtensions.cs?name=snippet11)]
 
-在 Index 頁面的頁面模型中，成功的引述刪除會在記錄器上呼叫 `QuoteDeleted` 方法。 找不到要刪除的引述時，就會擲回 <xref:System.ArgumentNullException>。 Try-catch[語句會攔截此](/dotnet/csharp/language-reference/keywords/try-catch)例外狀況，並藉由在 `QuoteDeleteFailed` [catch](/dotnet/csharp/language-reference/keywords/try-catch)區塊中的記錄器上呼叫方法來進行記錄， (*Pages/Index. cshtml .cs*) ：
+在 Index 頁面的頁面模型中，成功的引述刪除會在記錄器上呼叫 `QuoteDeleted` 方法。 找不到要刪除的引述時，就會擲回 <xref:System.ArgumentNullException>。 [Try-catch 語句會](/dotnet/csharp/language-reference/keywords/try-catch)攔截例外狀況，並藉由在 `QuoteDeleteFailed` [catch](/dotnet/csharp/language-reference/keywords/try-catch)區塊中的記錄器上呼叫方法來記錄， (*Pages/Index. .cs*) ：
 
 [!code-csharp[](loggermessage/samples/3.x/LoggerMessageSample/Pages/Index.cshtml.cs?name=snippet5&highlight=9,13)]
 
@@ -259,7 +260,7 @@ info: LoggerMessageSample.Pages.IndexModel[1]
 
 [!code-csharp[](loggermessage/samples/2.x/LoggerMessageSample/Internal/LoggerExtensions.cs?name=snippet10)]
 
-在索引頁面的頁面模型中 (*Pages/Index. cshtml .cs*) ， `QuoteAdded` 會呼叫來記錄訊息：
+在索引頁面的頁面模型中 (會呼叫 *Pages/Index. cshtml*) ， `QuoteAdded` 以記錄訊息：
 
 [!code-csharp[](loggermessage/samples/2.x/LoggerMessageSample/Pages/Index.cshtml.cs?name=snippet3&highlight=6)]
 
@@ -272,7 +273,7 @@ info: LoggerMessageSample.Pages.IndexModel[2]
           consequences of avoiding reality. - Ayn Rand')
 ```
 
-範例應用程式會執行用於刪除引號的[try-catch](/dotnet/csharp/language-reference/keywords/try-catch)模式。 成功的刪除作業會記錄告知性訊息。 如果擲回例外狀況，則會針對刪除作業記錄一則錯誤訊息。 失敗刪除作業的記錄訊息包含例外狀況堆疊追蹤 (*Internal/LoggerExtensions.cs*)：
+範例應用程式會針對報價刪除來實行 [try-catch](/dotnet/csharp/language-reference/keywords/try-catch) 模式。 成功的刪除作業會記錄告知性訊息。 如果擲回例外狀況，則會針對刪除作業記錄一則錯誤訊息。 失敗刪除作業的記錄訊息包含例外狀況堆疊追蹤 (*Internal/LoggerExtensions.cs*)：
 
 [!code-csharp[](loggermessage/samples/2.x/LoggerMessageSample/Internal/LoggerExtensions.cs?name=snippet3)]
 
@@ -282,7 +283,7 @@ info: LoggerMessageSample.Pages.IndexModel[2]
 
 [!code-csharp[](loggermessage/samples/2.x/LoggerMessageSample/Internal/LoggerExtensions.cs?name=snippet11)]
 
-在 Index 頁面的頁面模型中，成功的引述刪除會在記錄器上呼叫 `QuoteDeleted` 方法。 找不到要刪除的引述時，就會擲回 <xref:System.ArgumentNullException>。 Try-catch[語句會攔截此](/dotnet/csharp/language-reference/keywords/try-catch)例外狀況，並藉由在 `QuoteDeleteFailed` [catch](/dotnet/csharp/language-reference/keywords/try-catch)區塊中的記錄器上呼叫方法來進行記錄， (*Pages/Index. cshtml .cs*) ：
+在 Index 頁面的頁面模型中，成功的引述刪除會在記錄器上呼叫 `QuoteDeleted` 方法。 找不到要刪除的引述時，就會擲回 <xref:System.ArgumentNullException>。 [Try-catch 語句會](/dotnet/csharp/language-reference/keywords/try-catch)攔截例外狀況，並藉由在 `QuoteDeleteFailed` [catch](/dotnet/csharp/language-reference/keywords/try-catch)區塊中的記錄器上呼叫方法來記錄， (*Pages/Index. .cs*) ：
 
 [!code-csharp[](loggermessage/samples/2.x/LoggerMessageSample/Pages/Index.cshtml.cs?name=snippet5&highlight=14,18)]
 

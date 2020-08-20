@@ -1,5 +1,5 @@
 ---
-title: 教學課程：開始在 ASP.NET MVC web 應用程式中使用 EF Core
+title: 教學課程：開始使用 ASP.NET MVC web 應用程式中的 EF Core
 description: 這是說明如何從零開始建立 Contoso 大學範例應用程式教學課程系列中的第一頁。
 author: rick-anderson
 ms.author: riande
@@ -7,6 +7,7 @@ ms.custom: mvc
 ms.date: 02/06/2019
 ms.topic: tutorial
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -17,18 +18,18 @@ no-loc:
 - Razor
 - SignalR
 uid: data/ef-mvc/intro
-ms.openlocfilehash: 36b0c913db3c2b6c2c834d33b0ea8665f3e25814
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: e081c13f9ffb33c1ff137cb0989e747d51571ea7
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88012964"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88629193"
 ---
-# <a name="tutorial-get-started-with-ef-core-in-an-aspnet-mvc-web-app"></a>教學課程：開始在 ASP.NET MVC web 應用程式中使用 EF Core
+# <a name="tutorial-get-started-with-ef-core-in-an-aspnet-mvc-web-app"></a>教學課程：開始使用 ASP.NET MVC web 應用程式中的 EF Core
 
-此教學課程**尚未**升級至 ASP.NET Core 3.0。 [ Razor 頁面版本](xref:data/ef-rp/intro)已更新。 本教學課程 ASP.NET Core 3.0 和更新版本的大部分程式碼變更：
+此教學課程**尚未**升級至 ASP.NET Core 3.0。 [ Razor 頁面版本](xref:data/ef-rp/intro)已更新。 本教學課程的 ASP.NET Core 3.0 和更新版本的大部分程式碼變更：
 
-* 位於*Startup.cs*和*Program.cs*檔案中。
+* 位於 *Startup.cs* 和 *Program.cs* 檔案中。
 * 可以在[ Razor 頁面版本](xref:data/ef-rp/intro)中找到。 
 
 如需何時可能更新此資訊的詳細資訊，請參閱[此 GitHub 問題](https://github.com/dotnet/AspNetCore.Docs/issues/13920) \(英文\)。
@@ -52,7 +53,7 @@ Contoso 大學範例 Web 應用程式示範如何使用 Entity Framework (EF) Co
 > * 建立控制器和檢視
 > * 檢視資料庫
 
-## <a name="prerequisites"></a>必要條件
+## <a name="prerequisites"></a>Prerequisites
 
 * [.NET Core SDK 2.2](https://dotnet.microsoft.com/download)
 * 包含下列工作負載的 [Visual Studio 2019](https://visualstudio.microsoft.com/downloads/?utm_medium=microsoft&utm_source=docs.microsoft.com&utm_campaign=inline+link&utm_content=download+vs2019)：
@@ -94,7 +95,7 @@ Contoso 大學範例 Web 應用程式示範如何使用 Entity Framework (EF) Co
 
 * 選取 [.NET Core]****、[ASP.NET Core 2.2]**** 和 [Web 應用程式 (Model-View-Controller)]**** 範本。
 
-* 請確定 [**驗證**] 設定為 [**無驗證**]。
+* 確定 [ **驗證** ] 設定為 [ **無驗證**]。
 
 * 選取 [確定]
 
@@ -264,7 +265,7 @@ Entity Framework 會為您建立空白資料庫。 在本節中，您會撰寫�
 
   * 選取 [使用 Entity Framework 執行檢視的 MVC 控制器]****。
 
-  * 按一下 [新增] 。 [新增使用 Entity Framework 執行檢視的 MVC 控制器]**** 對話方塊隨即出現。
+  * 按一下 [新增]  。 [新增使用 Entity Framework 執行檢視的 MVC 控制器]**** 對話方塊隨即出現。
 
     ![Scaffold Student](intro/_static/scaffold-student2.png)
 
@@ -274,7 +275,7 @@ Entity Framework 會為您建立空白資料庫。 在本節中，您會撰寫�
 
   * 接受預設的 **StudentsController** 作為名稱。
 
-  * 按一下 [新增] 。
+  * 按一下 [新增]  。
 
   當您按一下 [新增]**** 時，Visual Studio Scaffolding 引擎便會建立 *StudentsController.cs* 檔案及一組可以使用該控制器的檢視 (*.cshtml* 檔案)。
 
@@ -336,7 +337,7 @@ ASP.NET Core 相依性插入會負責傳遞 `SchoolContext` 的執行個體給�
 
 * 命名為 ID 或 classnameID 的實體屬性，會辨識為主索引鍵屬性。
 
-* 屬性會解讀為外鍵屬性（如果它名為 *\<navigation property name>\<primary key property name>* ） (例如， `StudentID` 針對 `Student` 導覽屬性，因為 `Student` 實體的主鍵是 `ID`) 的。 外鍵屬性也可以只命名 *\<primary key property name>* (例如， `EnrollmentID` 因為 `Enrollment` 實體的主鍵是 `EnrollmentID`) 的。
+* 如果屬性名為 (的外鍵屬性，則會將其視為外鍵屬性 *\<navigation property name>\<primary key property name>* ，例如， `StudentID` `Student` 因為 `Student` 實體的主鍵是 `ID`) 。 外鍵屬性也可以簡單命名 *\<primary key property name>* (例如， `EnrollmentID` 因為 `Enrollment` 實體的主鍵是 `EnrollmentID`) 。
 
 慣例行為可以被覆寫。 例如，您可以明確指定資料表名稱，如稍早在本教學課程中您所見到的。 您可以設定資料行名稱以及將任何屬性設為主索引鍵或外部索引鍵，如同您在本系列[稍後的教學課程](complex-data-model.md)中所見。
 

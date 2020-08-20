@@ -1,10 +1,11 @@
 ---
-title: 第2部分，將控制器新增至 ASP.NET Core MVC 應用程式
+title: 第2部分：將控制器新增至 ASP.NET Core MVC 應用程式
 author: rick-anderson
 description: ASP.NET Core MVC 之教學課程系列的第2部分。
 ms.author: riande
 ms.date: 08/05/2017
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -15,14 +16,14 @@ no-loc:
 - Razor
 - SignalR
 uid: tutorials/first-mvc-app/adding-controller
-ms.openlocfilehash: 46f8cbc5ef3d9fe00a5151160a9119f68a9fe572
-ms.sourcegitcommit: 68d03d1aee8906b53bda66f8f1e0747efc3007e6
+ms.openlocfilehash: b5ef99d5645e0bbd453d09809a446bf4af38a975
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 08/10/2020
-ms.locfileid: "88051806"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88634042"
 ---
-# <a name="part-2-add-a-controller-to-an-aspnet-core-mvc-app"></a>第2部分，將控制器新增至 ASP.NET Core MVC 應用程式
+# <a name="part-2-add-a-controller-to-an-aspnet-core-mvc-app"></a>第2部分：將控制器新增至 ASP.NET Core MVC 應用程式
 
 作者：[Rick Anderson](https://twitter.com/RickAndMSFT)
 
@@ -44,7 +45,7 @@ MVC 模式可協助您建立應用程式，用來隔離應用程的不同層面 
 
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
-* 在**方案總管**中，以滑鼠右鍵按一下 [**控制器] > 新增 > 控制器**] 內容 
+* 在**方案總管**中，以滑鼠右鍵按一下 [**控制器] > 新增 > 控制器**操作 
    ![ 功能表](adding-controller/_static/add_controller.png)
 
 * 在 [**新增 Scaffold** ] 對話方塊中，選取 [**控制器類別-空白**]
@@ -64,7 +65,7 @@ MVC 模式可協助您建立應用程式，用來隔離應用程的不同層面 
 在方案總管**** 中，以滑鼠右鍵按一下 [控制器] > [新增] > [新增檔案]****。
 ![操作功能表](~/tutorials/first-mvc-app-mac/adding-controller/_static/add_controller.png)
 
-選取**ASP.NET Core**和**控制器類別**。
+選取 **ASP.NET Core** 和 **控制器類別**。
 
 將控制器命名為 **HelloWorldController**。
 
@@ -116,11 +117,11 @@ MVC 會根據傳入 URL 叫用控制器類別 (和其中的動作方法)。 MVC 
 
    `https://localhost:{PORT}/HelloWorld/Welcome?name=Rick&numtimes=4`
 
- (將取代 `{PORT}` 為您的埠號碼。 ) 您可以 `name` `numtimes` 在 URL 中嘗試不同的和值。 MVC [模型繫結](xref:mvc/models/model-binding)系統會自動將網址列上查詢字串中的具名參數對應至方法中的參數。 如需詳細資訊，請參閱[模型繫結](xref:mvc/models/model-binding)。
+ (取代 `{PORT}` 為您的埠號碼。 ) 您可以 `name` `numtimes` 在 URL 中嘗試使用不同的值。 MVC [模型繫結](xref:mvc/models/model-binding)系統會自動將網址列上查詢字串中的具名參數對應至方法中的參數。 如需詳細資訊，請參閱[模型繫結](xref:mvc/models/model-binding)。
 
-![顯示應用程式回應 Hello Rick 的瀏覽器視窗，Numtimes is 是 \: 4](~/tutorials/first-mvc-app/adding-controller/_static/rick4.png)
+![顯示 Hello Rick 的應用程式回應的瀏覽器視窗，Numtimes is 是 \: 4](~/tutorials/first-mvc-app/adding-controller/_static/rick4.png)
 
-在上圖中，未使用 URL 區段 (`Parameters`) ， `name` `numTimes` 會在[查詢字串](https://wikipedia.org/wiki/Query_string)中傳遞和參數。 `?`上述 URL 中的 (問號) 是分隔符號，而查詢字串則如下所示。 `&`字元會分隔欄位-值組。
+在上圖中， `Parameters` 不會使用 () 的 URL 區段， `name` 而是 `numTimes` 在 [查詢字串](https://wikipedia.org/wiki/Query_string)中傳遞和參數。 `?`上述 URL 中的 (問號) 是分隔符號，而查詢字串如下所示。 `&`字元會分隔欄位-值配對。
 
 以下列程式碼取代 `Welcome` 方法：
 
@@ -132,7 +133,7 @@ MVC 會根據傳入 URL 叫用控制器類別 (和其中的動作方法)。 MVC 
 
 [!code-csharp[](~/tutorials/first-mvc-app/start-mvc/sample/MvcMovie3/Startup.cs?name=snippet_1&highlight=5)]
 
-在這些範例中，控制器已執行 MVC 的 "VC" 部分，也就是 **V**iew 和 **C**ontroller 工作。 控制器會直接傳回 HTML。 一般來說，您不希望控制器直接傳回 HTML，因為撰寫程式碼和維護會變得很麻煩。 相反地，您通常會使用個別的 Razor 視圖範本檔案來產生 HTML 回應。 您可在接下來的教學課程中這麼做。
+在這些範例中，控制器已執行 MVC 的 "VC" 部分，也就是 **V**iew 和 **C**ontroller 工作。 控制器會直接傳回 HTML。 一般來說，您不希望控制器直接傳回 HTML，因為撰寫程式碼和維護會變得很麻煩。 相反地，您通常會使用個別的 Razor view 範本檔案來產生 HTML 回應。 您可在接下來的教學課程中這麼做。
 
 > [!div class="step-by-step"]
 > [上一個](start-mvc.md) 
@@ -158,7 +159,7 @@ MVC 模式可協助您建立應用程式，用來隔離應用程的不同層面 
 
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
-* 在**方案總管**中，以滑鼠右鍵按一下 [**控制器] > 新增 > 控制器**] 內容 
+* 在**方案總管**中，以滑鼠右鍵按一下 [**控制器] > 新增 > 控制器**操作 
    ![ 功能表](adding-controller/_static/add_controller.png)
 
 * 在 [新增 Scaffold]**** 對話方塊中，選取 [MVC 控制器 - 空白]****
@@ -235,11 +236,11 @@ Remove link for simplified tutorial.
 
    `https://localhost:{PORT}/HelloWorld/Welcome?name=Rick&numtimes=4`
 
- (將取代 `{PORT}` 為您的埠號碼。 ) 您可以 `name` `numtimes` 在 URL 中嘗試不同的和值。 MVC [模型繫結](xref:mvc/models/model-binding)系統會自動將網址列上查詢字串中的具名參數對應至方法中的參數。 如需詳細資訊，請參閱[模型繫結](xref:mvc/models/model-binding)。
+ (取代 `{PORT}` 為您的埠號碼。 ) 您可以 `name` `numtimes` 在 URL 中嘗試使用不同的值。 MVC [模型繫結](xref:mvc/models/model-binding)系統會自動將網址列上查詢字串中的具名參數對應至方法中的參數。 如需詳細資訊，請參閱[模型繫結](xref:mvc/models/model-binding)。
 
-![顯示應用程式回應 Hello Rick 的瀏覽器視窗，Numtimes is 是 \: 4](~/tutorials/first-mvc-app/adding-controller/_static/rick4.png)
+![顯示 Hello Rick 的應用程式回應的瀏覽器視窗，Numtimes is 是 \: 4](~/tutorials/first-mvc-app/adding-controller/_static/rick4.png)
 
-在上圖中，未使用 URL 區段 (`Parameters`) ， `name` `numTimes` 會在[查詢字串](https://wikipedia.org/wiki/Query_string)中傳遞和參數。 `?`上述 URL 中的 (問號) 是分隔符號，而查詢字串則如下所示。 `&`字元會分隔欄位-值組。
+在上圖中， `Parameters` 不會使用 () 的 URL 區段， `name` 而是 `numTimes` 在 [查詢字串](https://wikipedia.org/wiki/Query_string)中傳遞和參數。 `?`上述 URL 中的 (問號) 是分隔符號，而查詢字串如下所示。 `&`字元會分隔欄位-值配對。
 
 以下列程式碼取代 `Welcome` 方法：
 
@@ -251,7 +252,7 @@ Remove link for simplified tutorial.
 
 [!code-csharp[](~/tutorials/first-mvc-app/start-mvc/sample/MvcMovie/Startup.cs?name=snippet_1&highlight=5)]
 
-在這些範例中，控制器已執行 MVC 的 "VC" 部分，也就是檢視和控制器工作。 控制器會直接傳回 HTML。 一般來說，您不希望控制器直接傳回 HTML，因為撰寫程式碼和維護會變得很麻煩。 相反地，您通常會使用個別的 Razor 視圖範本檔案來協助產生 HTML 回應。 您可在接下來的教學課程中這麼做。
+在這些範例中，控制器已執行 MVC 的 "VC" 部分，也就是檢視和控制器工作。 控制器會直接傳回 HTML。 一般來說，您不希望控制器直接傳回 HTML，因為撰寫程式碼和維護會變得很麻煩。 相反地，您通常會使用個別的 Razor view 範本檔案來協助產生 HTML 回應。 您可在接下來的教學課程中這麼做。
 
 > [!div class="step-by-step"]
 > [上一個](start-mvc.md) 

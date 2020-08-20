@@ -1,10 +1,11 @@
 ---
 title: ASP.NET Core 中的第6部分、控制器方法和觀點
 author: rick-anderson
-description: 第6部分，將模型新增至 ASP.NET Core MVC 應用程式
+description: 第6部分：將模型新增至 ASP.NET Core MVC 應用程式
 ms.author: riande
 ms.date: 12/13/2018
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -15,12 +16,12 @@ no-loc:
 - Razor
 - SignalR
 uid: tutorials/first-mvc-app/controller-methods-views
-ms.openlocfilehash: b5b54adb1d86e4ab982647dc8207839cc9afdac9
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: 07b67cd7c267c39b99277114b73642b5caa3e312
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88021064"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88632833"
 ---
 # <a name="part-6-controller-methods-and-views-in-aspnet-core"></a>ASP.NET Core 中的第6部分、控制器方法和觀點
 
@@ -46,7 +47,7 @@ ms.locfileid: "88021064"
 
 [!code-cshtml[](~/tutorials/first-mvc-app/start-mvc/sample/MvcMovie/Views/Movies/IndexOriginal.cshtml?highlight=1-3&range=46-50)]
 
-[標記](xref:mvc/views/tag-helpers/intro)協助程式可讓伺服器端程式碼參與建立和轉譯檔案中的 HTML 元素 Razor 。 在上述程式碼中，會 `AnchorTagHelper` `href` 從控制器動作方法和路由識別碼動態產生 HTML 屬性值。您可以從您慣用的瀏覽器使用**View Source** ，或使用開發人員工具來檢查產生的標記。 產生的 HTML 部分如下所示：
+[標記](xref:mvc/views/tag-helpers/intro) 協助程式可讓伺服器端程式碼參與建立和轉譯檔案中的 HTML 元素 Razor 。 在上述程式碼中，會以 `AnchorTagHelper` 動態 `href` 方式從控制器動作方法和路由識別碼產生 HTML 屬性值。您可以從您慣用的瀏覽器使用 **View Source** ，或使用開發人員工具來檢查產生的標記。 產生的 HTML 部分如下所示：
 
 ```html
  <td>
@@ -66,7 +67,7 @@ ASP.NET Core 會將 `https://localhost:5001/Movies/Edit/4` 轉譯成對 `Movies`
 
 <a name="get-post"></a>
 
-開啟 `Movies` 控制器，並檢查兩個 `Edit` 動作方法。 下列程式碼顯示 `HTTP GET Edit` 方法，它會提取電影，並填入*編輯的. cshtml*檔案所產生的編輯表單 Razor 。
+開啟 `Movies` 控制器，並檢查兩個 `Edit` 動作方法。 下列程式碼顯示 `HTTP GET Edit` 方法，它會提取電影並填入 *編輯 cshtml*檔案所產生的編輯表單 Razor 。
 
 ::: moniker range=">= aspnetcore-2.1"
 
@@ -110,7 +111,7 @@ ASP.NET Core 會將 `https://localhost:5001/Movies/Edit/4` 轉譯成對 `Movies`
 
 [!code-cshtml[](~/tutorials/first-mvc-app/start-mvc/sample/MvcMovie/Views/Movies/Edit.cshtml?range=9)]
 
-[表單標記協助程式](xref:mvc/views/working-with-forms)會產生隱藏的防偽語彙基元，其必須符合電影控制器的 `Edit` 方法中 `[ValidateAntiForgeryToken]` 產生的防偽語彙基元。 如需詳細資訊，請參閱[反要求偽造](xref:security/anti-request-forgery)。
+[表單標記協助程式](xref:mvc/views/working-with-forms)會產生隱藏的防偽語彙基元，其必須符合電影控制器的 `Edit` 方法中 `[ValidateAntiForgeryToken]` 產生的防偽語彙基元。 如需詳細資訊，請參閱<xref:security/anti-request-forgery>。
 
 `HttpGet Edit` 方法會採用電影 `ID` 參數，使用 Entity Framework `FindAsync` 方法查詢電影，並將選取的電影傳回 Edit 檢視。 如果找不到電影，會傳回 `NotFound` (HTTP 404)。
 
@@ -124,7 +125,7 @@ ASP.NET Core 會將 `https://localhost:5001/Movies/Edit/4` 轉譯成對 `Movies`
 
 包含 Scaffold 的程式碼會使用數個標記協助程式方法來簡化 HTML 標記。 [標籤標記](xref:mvc/views/working-with-forms)協助程式會顯示欄位的名稱 ( "Title"、"ReleaseDate"、"內容類型" 或 "Price" ) 。 [輸入標記協助程式](xref:mvc/views/working-with-forms)轉譯 HTML `<input>` 元素。 [驗證標記協助程式](xref:mvc/views/working-with-forms)則顯示與該屬性相關聯的任何驗證訊息。
 
-執行應用程式，並巡覽至 `/Movies` URL。 按一下 [**編輯**] 連結。 在瀏覽器中，檢視頁面的原始檔。 `<form>` 元素產生的 HTML 如下所示。
+執行應用程式，並巡覽至 `/Movies` URL。 按一下 [ **編輯** ] 連結。 在瀏覽器中，檢視頁面的原始檔。 `<form>` 元素產生的 HTML 如下所示。
 
 [!code-HTML[](~/tutorials/first-mvc-app/start-mvc/sample/MvcMovie/Views/Shared/edit_view_source.html?highlight=1,6,10,17,24,28)]
 
@@ -161,7 +162,7 @@ ASP.NET Core 會將 `https://localhost:5001/Movies/Edit/4` 轉譯成對 `Movies`
 * [全球化和當地語系化](xref:fundamentals/localization)
 * [標記協助程式簡介](xref:mvc/views/tag-helpers/intro)
 * [編寫標籤協助程式](xref:mvc/views/tag-helpers/authoring)
-* [防偽要求](xref:security/anti-request-forgery)
+* <xref:security/anti-request-forgery>
 * 保護控制器避免[過度發佈](/aspnet/mvc/overview/getting-started/getting-started-with-ef-using-mvc/implementing-basic-crud-functionality-with-the-entity-framework-in-asp-net-mvc-application)
 * [ViewModels](https://rachelappel.com/use-viewmodels-to-manage-data-amp-organize-code-in-asp-net-mvc-applications/)
 * [表單標記協助程式](xref:mvc/views/working-with-forms)

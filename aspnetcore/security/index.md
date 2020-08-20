@@ -6,6 +6,7 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 10/24/2018
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -16,20 +17,20 @@ no-loc:
 - Razor
 - SignalR
 uid: security/index
-ms.openlocfilehash: ead5863f0656e182d395fc1e0deaf63ff66034cb
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: 0378fd06b5cae5b8911e8a2f41937b28d5444538
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88021363"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88632859"
 ---
 # <a name="overview-of-aspnet-core-security"></a>ASP.NET Core 安全性概觀
 
-ASP.NET Core 可讓開發人員輕鬆設定應用程式的安全性並進行管理。 ASP.NET Core 包含針對驗證、授權、資料保護、強制使用 HTTPS、應用程式密碼、防偽要求保護與 CORS 的管理功能。 這些安全性功能可讓您打造強固又安全的 ASP.NET Core 應用程式。
+ASP.NET Core 可讓開發人員輕鬆設定應用程式的安全性並進行管理。 ASP.NET Core 包含管理驗證、授權、資料保護、HTTPS 強制、應用程式秘密、XSRF/CSRF 防護和 CORS 管理的功能。 這些安全性功能可讓您打造強固又安全的 ASP.NET Core 應用程式。
 
 ## <a name="aspnet-core-security-features"></a>ASP.NET Core 安全性功能
 
-ASP.NET Core 提供許多工具和程式庫來保護您的應用程式，包括內建身分識別提供者，但您可以使用 Facebook、Twitter 和 LinkedIn 等協力廠商身分識別服務。 使用 ASP.NET Core 時，您可以輕鬆管理應用程式密碼，以便使用機密資訊而不在程式碼中公開這些資訊。
+ASP.NET Core 提供許多工具和程式庫來保護您的應用程式（包括內建的身分識別提供者），但您可以使用協力廠商身分識別服務，例如 Facebook、Twitter 和 LinkedIn。 使用 ASP.NET Core 時，您可以輕鬆管理應用程式密碼，以便使用機密資訊而不在程式碼中公開這些資訊。
 
 ## <a name="authentication-vs-authorization"></a>驗證與授權
 
@@ -41,9 +42,9 @@ ASP.NET Core 提供許多工具和程式庫來保護您的應用程式，包括�
 
 ASP.NET Core 和 EF 包含的功能有助您保護應用程式的安全，並防範安全性缺口的發生。 下列連結清單可帶您前往如何避免 Web 應用程式中最常見資訊安全漏洞的技術詳細文件：
 
-* [Cross site scripting attacks](xref:security/cross-site-scripting) (跨網站指令碼攻擊)
+* [跨網站腳本 (XSS) 攻擊](xref:security/cross-site-scripting)
 * [SQL 插入式攻擊](/ef/core/querying/raw-sql)
-* [Cross-Site Request Forgery (CSRF)](xref:security/anti-request-forgery) (跨網站偽造要求 (CSRF))
+* [跨網站要求偽造 (XSRF/CSRF) 攻擊](xref:security/anti-request-forgery)
 * [Open redirect attacks](xref:security/preventing-open-redirects) (開啟重新導向攻擊)
 
-除此之外，還有許多弱點是您必須提防的。 如需詳細資訊，請參閱目錄的**安全性和 Identity **章節中的其他文章。
+除此之外，還有許多弱點是您必須提防的。 如需詳細資訊，請參閱目錄之**安全性和 Identity **章節中的其他文章。

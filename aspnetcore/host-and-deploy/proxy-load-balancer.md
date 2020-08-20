@@ -7,6 +7,7 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 02/07/2020
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -17,16 +18,16 @@ no-loc:
 - Razor
 - SignalR
 uid: host-and-deploy/proxy-load-balancer
-ms.openlocfilehash: 75bb92908525d18af57f408e8ebba53c6eec88b2
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: 737575667be0e6b776a4d9ec9fb75bc0d11309dc
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88015513"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88634172"
 ---
 # <a name="configure-aspnet-core-to-work-with-proxy-servers-and-load-balancers"></a>設定 ASP.NET Core 以與 Proxy 伺服器和負載平衡器搭配運作
 
-依[Chris Ross](https://github.com/Tratcher)
+由 [Chris Ross](https://github.com/Tratcher)
 
 ::: moniker range=">= aspnetcore-3.0"
 
@@ -52,8 +53,8 @@ ms.locfileid: "88015513"
 中介軟體會更新：
 
 * [Server.remoteipaddress](xref:Microsoft.AspNetCore.Http.ConnectionInfo.RemoteIpAddress)：使用 `X-Forwarded-For` 標頭值設定。 額外的設定會影響中介軟體設定 `RemoteIpAddress`的方式。 如需詳細資料，請參閱[轉送的標頭中介軟體選項](#forwarded-headers-middleware-options)。
-* [HttpCoNtext](xref:Microsoft.AspNetCore.Http.HttpRequest.Scheme)：使用 `X-Forwarded-Proto` 標頭值設定。
-* [HttpCoNtext](xref:Microsoft.AspNetCore.Http.HttpRequest.Host)：使用 `X-Forwarded-Host` 標頭值設定。
+* [HttpCoNtext. 配置](xref:Microsoft.AspNetCore.Http.HttpRequest.Scheme)：使用 `X-Forwarded-Proto` 標頭值設定。
+* [HttpcoNtext.current](xref:Microsoft.AspNetCore.Http.HttpRequest.Host)：使用 `X-Forwarded-Host` 標頭值設定。
 
 您可以設定「轉送的標頭中介軟體」的[預設設定](#forwarded-headers-middleware-options)。 預設設定值為：
 
@@ -75,9 +76,9 @@ ms.locfileid: "88015513"
 
 <a name="fhmo"></a>
 
-### <a name="forwarded-headers-middleware-order"></a>轉送的標頭中介軟體順序
+### <a name="forwarded-headers-middleware-order"></a>轉送標頭中介軟體順序
 
-轉送的標頭中介軟體應該在其他中介軟體之前執行。 這種排序可確保依賴轉送標頭資訊的中介軟體可以耗用用於處理的標頭值。 轉送的標頭中介軟體可以在診斷和錯誤處理之後執行，但必須在呼叫之前執行 `UseHsts` ：
+轉送的標頭中介軟體應該在其他中介軟體之前執行。 這種排序可確保依賴轉送標頭資訊的中介軟體可以耗用用於處理的標頭值。 轉送的標頭中介軟體可在診斷和錯誤處理之後執行，但必須在呼叫之前執行 `UseHsts` ：
 
 [!code-csharp[](~/host-and-deploy/proxy-load-balancer/3.1samples/Startup.cs?name=snippet&highlight=13-17,25,30)]
 
@@ -116,16 +117,16 @@ services.Configure<ForwardedHeadersOptions>(options =>
 | 選項 | 描述 |
 | ------ | ----------- |
 | <xref:Microsoft.AspNetCore.Builder.ForwardedHeadersOptions.AllowedHosts> | 依據 `X-Forwarded-Host` 標頭將主機限制成所提供的值。<ul><li>比較值時，會使用序數忽略大小寫的方式來比較。</li><li>必須排除連接埠號碼。</li><li>如果清單空白，即表示允許所有主機。</li><li>最上層的萬用字元 `*` 代表會允許所有非空白的主機。</li><li>允許使用子網域萬用字元，但不會比對出根網域。 例如，`*.contoso.com` 會比對出子網域 `foo.contoso.com`，但不會比對出根網域 `contoso.com`。</li><li>允許使用 Unicode 主機名稱，但會轉換成 [Punycode](https://tools.ietf.org/html/rfc3492) 來進行比對。</li><li>[IPv6 addresses](https://tools.ietf.org/html/rfc4291) 必須包含週框方括號，並採用[慣例格式](https://tools.ietf.org/html/rfc4291#section-2.2) (例如 `[ABCD:EF01:2345:6789:ABCD:EF01:2345:6789]`)。 IPv6 位址並未特別設計成會檢查不同格式間是否具有邏輯相等性，因此不會執行標準化。</li><li>如果無法限制可允許的主機，可能會讓攻擊者偽造服務所產生的連結。</li></ul>預設值是空的 `IList<string>`。 |
-| <xref:Microsoft.AspNetCore.Builder.ForwardedHeadersOptions.ForwardedForHeaderName> | 使用此屬性所指定的標頭，而不是 [ForwardedHeadersDefaults.XForwardedForHeaderName](xref:Microsoft.AspNetCore.HttpOverrides.ForwardedHeadersDefaults.XForwardedForHeaderName) 所指定的標頭。 當 Proxy/轉寄站未使用 `X-Forwarded-For` 標頭，而使用其他標頭轉送資訊時，會使用此選項。<br><br>預設為 `X-Forwarded-For`。 |
+| <xref:Microsoft.AspNetCore.Builder.ForwardedHeadersOptions.ForwardedForHeaderName> | 使用此屬性所指定的標頭，而不是 [ForwardedHeadersDefaults.XForwardedForHeaderName](xref:Microsoft.AspNetCore.HttpOverrides.ForwardedHeadersDefaults.XForwardedForHeaderName) 所指定的標頭。 當 Proxy/轉寄站未使用 `X-Forwarded-For` 標頭，而使用其他標頭轉送資訊時，會使用此選項。<br><br>預設值為 `X-Forwarded-For`。 |
 | <xref:Microsoft.AspNetCore.Builder.ForwardedHeadersOptions.ForwardedHeaders> | 識別應該處理哪個轉送子。 如需適用的欄位清單，請參閱 [ForwardedHeaders 列舉](xref:Microsoft.AspNetCore.HttpOverrides.ForwardedHeaders)。 指派給此屬性的一般值為 `ForwardedHeaders.XForwardedFor | ForwardedHeaders.XForwardedProto`。<br><br>預設值為 [ForwardedHeaders.None](xref:Microsoft.AspNetCore.HttpOverrides.ForwardedHeaders)。 |
-| <xref:Microsoft.AspNetCore.Builder.ForwardedHeadersOptions.ForwardedHostHeaderName> | 使用此屬性所指定的標頭，而不是 [ForwardedHeadersDefaults.XForwardedHostHeaderName](xref:Microsoft.AspNetCore.HttpOverrides.ForwardedHeadersDefaults.XForwardedHostHeaderName) 所指定的標頭。 當 Proxy/轉寄站未使用 `X-Forwarded-Host` 標頭，而使用其他標頭轉送資訊時，會使用此選項。<br><br>預設為 `X-Forwarded-Host`。 |
-| <xref:Microsoft.AspNetCore.Builder.ForwardedHeadersOptions.ForwardedProtoHeaderName> | 使用此屬性所指定的標頭，而不是 [ForwardedHeadersDefaults.XForwardedProtoHeaderName](xref:Microsoft.AspNetCore.HttpOverrides.ForwardedHeadersDefaults.XForwardedProtoHeaderName) 所指定的標頭。 當 Proxy/轉寄站未使用 `X-Forwarded-Proto` 標頭，而使用其他標頭轉送資訊時，會使用此選項。<br><br>預設為 `X-Forwarded-Proto`。 |
-| <xref:Microsoft.AspNetCore.Builder.ForwardedHeadersOptions.ForwardLimit> | 限制所處理標頭中的項目數。 設定為 `null` 可停用限制，但應該只有在已設定 `KnownProxies` 或 `KnownNetworks` 的情況下，才這樣做。 設置非 `null` 值是一種預防措施 (但不是保證)，以防止設定不正確的 Proxy 和來自網路上的旁路惡意要求。<br><br>「轉送的標頭中介軟體」會以相反順序 (從右至左) 處理標頭。 如果使用預設值 (`1`)，除非 `ForwardLimit` 的值增加，否則只會處理標頭中最右邊的值。<br><br>預設為 `1`。 |
+| <xref:Microsoft.AspNetCore.Builder.ForwardedHeadersOptions.ForwardedHostHeaderName> | 使用此屬性所指定的標頭，而不是 [ForwardedHeadersDefaults.XForwardedHostHeaderName](xref:Microsoft.AspNetCore.HttpOverrides.ForwardedHeadersDefaults.XForwardedHostHeaderName) 所指定的標頭。 當 Proxy/轉寄站未使用 `X-Forwarded-Host` 標頭，而使用其他標頭轉送資訊時，會使用此選項。<br><br>預設值為 `X-Forwarded-Host`。 |
+| <xref:Microsoft.AspNetCore.Builder.ForwardedHeadersOptions.ForwardedProtoHeaderName> | 使用此屬性所指定的標頭，而不是 [ForwardedHeadersDefaults.XForwardedProtoHeaderName](xref:Microsoft.AspNetCore.HttpOverrides.ForwardedHeadersDefaults.XForwardedProtoHeaderName) 所指定的標頭。 當 Proxy/轉寄站未使用 `X-Forwarded-Proto` 標頭，而使用其他標頭轉送資訊時，會使用此選項。<br><br>預設值為 `X-Forwarded-Proto`。 |
+| <xref:Microsoft.AspNetCore.Builder.ForwardedHeadersOptions.ForwardLimit> | 限制所處理標頭中的項目數。 設定為 `null` 可停用限制，但應該只有在已設定 `KnownProxies` 或 `KnownNetworks` 的情況下，才這樣做。 設置非 `null` 值是一種預防措施 (但不是保證)，以防止設定不正確的 Proxy 和來自網路上的旁路惡意要求。<br><br>「轉送的標頭中介軟體」會以相反順序 (從右至左) 處理標頭。 如果使用預設值 (`1`)，除非 `ForwardLimit` 的值增加，否則只會處理標頭中最右邊的值。<br><br>預設值為 `1`。 |
 | <xref:Microsoft.AspNetCore.Builder.ForwardedHeadersOptions.KnownNetworks> | 可從中接受轉送標頭的已知網路位址範圍。 請使用無類別網域間路由 (CIDR) 標記法來提供 IP 範圍。<br><br>若伺服器使用雙模式通訊端，會以 IPv6 格式 (例如，IPv4 中的 `10.0.0.1` 在 IPv6 中以 `::ffff:10.0.0.1` 表示) 提供 IPv4 位址。 請參閱 [IPAddress.MapToIPv6](xref:System.Net.IPAddress.MapToIPv6*)。 透過查看 [HttpContext.Connection.RemoteIpAddress](xref:Microsoft.AspNetCore.Http.ConnectionInfo.RemoteIpAddress*) 以判斷是否需要此格式。 如需詳細資訊，請參閱[以 IPv6 位址表示的 IPv4 位址設定](#configuration-for-an-ipv4-address-represented-as-an-ipv6-address)一節。<br><br>預設值為包含單一  項目的 `IList`\<<xref:Microsoft.AspNetCore.HttpOverrides.IPNetwork>`IPAddress.Loopback`>。 |
 | <xref:Microsoft.AspNetCore.Builder.ForwardedHeadersOptions.KnownProxies> | 可從中接受轉送標頭的已知 Proxy 位址。 請使用 `KnownProxies` 來指定確切的相符 IP 位址。<br><br>若伺服器使用雙模式通訊端，會以 IPv6 格式 (例如，IPv4 中的 `10.0.0.1` 在 IPv6 中以 `::ffff:10.0.0.1` 表示) 提供 IPv4 位址。 請參閱 [IPAddress.MapToIPv6](xref:System.Net.IPAddress.MapToIPv6*)。 透過查看 [HttpContext.Connection.RemoteIpAddress](xref:Microsoft.AspNetCore.Http.ConnectionInfo.RemoteIpAddress*) 以判斷是否需要此格式。 如需詳細資訊，請參閱[以 IPv6 位址表示的 IPv4 位址設定](#configuration-for-an-ipv4-address-represented-as-an-ipv6-address)一節。<br><br>預設值為包含單一  項目的 `IList`\<<xref:System.Net.IPAddress>`IPAddress.IPv6Loopback`>。 |
-| <xref:Microsoft.AspNetCore.Builder.ForwardedHeadersOptions.OriginalForHeaderName> | 使用此屬性所指定的標頭，而不是 [ForwardedHeadersDefaults.XOriginalForHeaderName](xref:Microsoft.AspNetCore.HttpOverrides.ForwardedHeadersDefaults.XOriginalForHeaderName) 所指定的標頭。<br><br>預設為 `X-Original-For`。 |
-| <xref:Microsoft.AspNetCore.Builder.ForwardedHeadersOptions.OriginalHostHeaderName> | 使用此屬性所指定的標頭，而不是 [ForwardedHeadersDefaults.XOriginalHostHeaderName](xref:Microsoft.AspNetCore.HttpOverrides.ForwardedHeadersDefaults.XOriginalHostHeaderName) 所指定的標頭。<br><br>預設為 `X-Original-Host`。 |
-| <xref:Microsoft.AspNetCore.Builder.ForwardedHeadersOptions.OriginalProtoHeaderName> | 使用此屬性所指定的標頭，而不是 [ForwardedHeadersDefaults.XOriginalProtoHeaderName](xref:Microsoft.AspNetCore.HttpOverrides.ForwardedHeadersDefaults.XOriginalProtoHeaderName) 所指定的標頭。<br><br>預設為 `X-Original-Proto`。 |
+| <xref:Microsoft.AspNetCore.Builder.ForwardedHeadersOptions.OriginalForHeaderName> | 使用此屬性所指定的標頭，而不是 [ForwardedHeadersDefaults.XOriginalForHeaderName](xref:Microsoft.AspNetCore.HttpOverrides.ForwardedHeadersDefaults.XOriginalForHeaderName) 所指定的標頭。<br><br>預設值為 `X-Original-For`。 |
+| <xref:Microsoft.AspNetCore.Builder.ForwardedHeadersOptions.OriginalHostHeaderName> | 使用此屬性所指定的標頭，而不是 [ForwardedHeadersDefaults.XOriginalHostHeaderName](xref:Microsoft.AspNetCore.HttpOverrides.ForwardedHeadersDefaults.XOriginalHostHeaderName) 所指定的標頭。<br><br>預設值為 `X-Original-Host`。 |
+| <xref:Microsoft.AspNetCore.Builder.ForwardedHeadersOptions.OriginalProtoHeaderName> | 使用此屬性所指定的標頭，而不是 [ForwardedHeadersDefaults.XOriginalProtoHeaderName](xref:Microsoft.AspNetCore.HttpOverrides.ForwardedHeadersDefaults.XOriginalProtoHeaderName) 所指定的標頭。<br><br>預設值為 `X-Original-Proto`。 |
 | <xref:Microsoft.AspNetCore.Builder.ForwardedHeadersOptions.RequireHeaderSymmetry> | 要求所處理 [ForwardedHeadersOptions.ForwardedHeaders](xref:Microsoft.AspNetCore.Builder.ForwardedHeadersOptions.ForwardedHeaders) 的標頭值數目必須同步。<br><br>ASP.NET Core 1.x 中的預設值為 `true`。 ASP.NET Core 2.0 或更新版本中的預設值為 `false`。 |
 
 ## <a name="scenarios-and-use-cases"></a>情節和使用案例
@@ -248,16 +249,16 @@ if (string.Equals(
 
 ### <a name="azure"></a>Azure
 
-若要設定憑證轉送的 Azure App Service，請參閱[設定 Azure App Service 的 TLS 相互驗證](/azure/app-service/app-service-web-configure-tls-mutual-auth)。 下列指導方針適用于設定 ASP.NET Core 應用程式。
+若要設定憑證轉送 Azure App Service，請參閱 [設定 Azure App Service 的 TLS 相互驗證](/azure/app-service/app-service-web-configure-tls-mutual-auth)。 下列指導方針適用于設定 ASP.NET Core 應用程式。
 
-在中 `Startup.Configure` ，于呼叫之前新增下列程式碼 `app.UseAuthentication();` ：
+在中 `Startup.Configure` ，在呼叫之前加入下列程式碼 `app.UseAuthentication();` ：
 
 ```csharp
 app.UseCertificateForwarding();
 ```
 
 
-設定憑證轉送中介軟體來指定 Azure 所使用的標頭名稱。 在中 `Startup.ConfigureServices` ，新增下列程式碼，以設定中介軟體用來建立憑證的標頭：
+設定憑證轉送中介軟體以指定 Azure 所使用的標頭名稱。 在中 `Startup.ConfigureServices` ，新增下列程式碼，以設定中介軟體用來建立憑證的標頭：
 
 ```csharp
 services.AddCertificateForwarding(options =>
@@ -266,20 +267,20 @@ services.AddCertificateForwarding(options =>
 
 ### <a name="other-web-proxies"></a>其他 web proxy
 
-如果使用的 proxy 不是 IIS 或 Azure App Service 的應用程式要求路由 (ARR) ，請將 proxy 設定為轉送其在 HTTP 標頭中收到的憑證。 在中 `Startup.Configure` ，于呼叫之前新增下列程式碼 `app.UseAuthentication();` ：
+如果使用不是 IIS 或 Azure App Service 的應用程式要求路由 (ARR) 的 proxy，請將 proxy 設定為轉寄它在 HTTP 標頭中收到的憑證。 在中 `Startup.Configure` ，在呼叫之前加入下列程式碼 `app.UseAuthentication();` ：
 
 ```csharp
 app.UseCertificateForwarding();
 ```
 
-設定憑證轉送中介軟體來指定標頭名稱。 在中 `Startup.ConfigureServices` ，新增下列程式碼，以設定中介軟體用來建立憑證的標頭：
+設定憑證轉送中介軟體以指定標頭名稱。 在中 `Startup.ConfigureServices` ，新增下列程式碼，以設定中介軟體用來建立憑證的標頭：
 
 ```csharp
 services.AddCertificateForwarding(options =>
     options.CertificateHeader = "YOUR_CERTIFICATE_HEADER_NAME");
 ```
 
-如果 proxy 不會以 base64 編碼憑證 (如同 Nginx) 的情況，請設定 `HeaderConverter` 選項。 請考慮 `Startup.ConfigureServices` 中的下列範例：
+如果 proxy 不是以 base64 編碼憑證 (與 Nginx) 的情況相同，請設定此 `HeaderConverter` 選項。 請考慮 `Startup.ConfigureServices` 中的下列範例：
 
 ```csharp
 services.AddCertificateForwarding(options =>
@@ -410,8 +411,8 @@ services.Configure<ForwardedHeadersOptions>(options =>
 中介軟體會更新：
 
 * [Server.remoteipaddress](xref:Microsoft.AspNetCore.Http.ConnectionInfo.RemoteIpAddress)：使用 `X-Forwarded-For` 標頭值設定。 額外的設定會影響中介軟體設定 `RemoteIpAddress`的方式。 如需詳細資料，請參閱[轉送的標頭中介軟體選項](#forwarded-headers-middleware-options)。
-* [HttpCoNtext](xref:Microsoft.AspNetCore.Http.HttpRequest.Scheme)：使用 `X-Forwarded-Proto` 標頭值設定。
-* [HttpCoNtext](xref:Microsoft.AspNetCore.Http.HttpRequest.Host)：使用 `X-Forwarded-Host` 標頭值設定。
+* [HttpCoNtext. 配置](xref:Microsoft.AspNetCore.Http.HttpRequest.Scheme)：使用 `X-Forwarded-Proto` 標頭值設定。
+* [HttpcoNtext.current](xref:Microsoft.AspNetCore.Http.HttpRequest.Host)：使用 `X-Forwarded-Host` 標頭值設定。
 
 您可以設定「轉送的標頭中介軟體」的[預設設定](#forwarded-headers-middleware-options)。 預設設定值為：
 
@@ -494,16 +495,16 @@ services.Configure<ForwardedHeadersOptions>(options =>
 | 選項 | 描述 |
 | ------ | ----------- |
 | <xref:Microsoft.AspNetCore.Builder.ForwardedHeadersOptions.AllowedHosts> | 依據 `X-Forwarded-Host` 標頭將主機限制成所提供的值。<ul><li>比較值時，會使用序數忽略大小寫的方式來比較。</li><li>必須排除連接埠號碼。</li><li>如果清單空白，即表示允許所有主機。</li><li>最上層的萬用字元 `*` 代表會允許所有非空白的主機。</li><li>允許使用子網域萬用字元，但不會比對出根網域。 例如，`*.contoso.com` 會比對出子網域 `foo.contoso.com`，但不會比對出根網域 `contoso.com`。</li><li>允許使用 Unicode 主機名稱，但會轉換成 [Punycode](https://tools.ietf.org/html/rfc3492) 來進行比對。</li><li>[IPv6 addresses](https://tools.ietf.org/html/rfc4291) 必須包含週框方括號，並採用[慣例格式](https://tools.ietf.org/html/rfc4291#section-2.2) (例如 `[ABCD:EF01:2345:6789:ABCD:EF01:2345:6789]`)。 IPv6 位址並未特別設計成會檢查不同格式間是否具有邏輯相等性，因此不會執行標準化。</li><li>如果無法限制可允許的主機，可能會讓攻擊者偽造服務所產生的連結。</li></ul>預設值是空的 `IList<string>`。 |
-| <xref:Microsoft.AspNetCore.Builder.ForwardedHeadersOptions.ForwardedForHeaderName> | 使用此屬性所指定的標頭，而不是 [ForwardedHeadersDefaults.XForwardedForHeaderName](xref:Microsoft.AspNetCore.HttpOverrides.ForwardedHeadersDefaults.XForwardedForHeaderName) 所指定的標頭。 當 Proxy/轉寄站未使用 `X-Forwarded-For` 標頭，而使用其他標頭轉送資訊時，會使用此選項。<br><br>預設為 `X-Forwarded-For`。 |
+| <xref:Microsoft.AspNetCore.Builder.ForwardedHeadersOptions.ForwardedForHeaderName> | 使用此屬性所指定的標頭，而不是 [ForwardedHeadersDefaults.XForwardedForHeaderName](xref:Microsoft.AspNetCore.HttpOverrides.ForwardedHeadersDefaults.XForwardedForHeaderName) 所指定的標頭。 當 Proxy/轉寄站未使用 `X-Forwarded-For` 標頭，而使用其他標頭轉送資訊時，會使用此選項。<br><br>預設值為 `X-Forwarded-For`。 |
 | <xref:Microsoft.AspNetCore.Builder.ForwardedHeadersOptions.ForwardedHeaders> | 識別應該處理哪個轉送子。 如需適用的欄位清單，請參閱 [ForwardedHeaders 列舉](xref:Microsoft.AspNetCore.HttpOverrides.ForwardedHeaders)。 指派給此屬性的一般值為 `ForwardedHeaders.XForwardedFor | ForwardedHeaders.XForwardedProto`。<br><br>預設值為 [ForwardedHeaders.None](xref:Microsoft.AspNetCore.HttpOverrides.ForwardedHeaders)。 |
-| <xref:Microsoft.AspNetCore.Builder.ForwardedHeadersOptions.ForwardedHostHeaderName> | 使用此屬性所指定的標頭，而不是 [ForwardedHeadersDefaults.XForwardedHostHeaderName](xref:Microsoft.AspNetCore.HttpOverrides.ForwardedHeadersDefaults.XForwardedHostHeaderName) 所指定的標頭。 當 Proxy/轉寄站未使用 `X-Forwarded-Host` 標頭，而使用其他標頭轉送資訊時，會使用此選項。<br><br>預設為 `X-Forwarded-Host`。 |
-| <xref:Microsoft.AspNetCore.Builder.ForwardedHeadersOptions.ForwardedProtoHeaderName> | 使用此屬性所指定的標頭，而不是 [ForwardedHeadersDefaults.XForwardedProtoHeaderName](xref:Microsoft.AspNetCore.HttpOverrides.ForwardedHeadersDefaults.XForwardedProtoHeaderName) 所指定的標頭。 當 Proxy/轉寄站未使用 `X-Forwarded-Proto` 標頭，而使用其他標頭轉送資訊時，會使用此選項。<br><br>預設為 `X-Forwarded-Proto`。 |
-| <xref:Microsoft.AspNetCore.Builder.ForwardedHeadersOptions.ForwardLimit> | 限制所處理標頭中的項目數。 設定為 `null` 可停用限制，但應該只有在已設定 `KnownProxies` 或 `KnownNetworks` 的情況下，才這樣做。 設置非 `null` 值是一種預防措施 (但不是保證)，以防止設定不正確的 Proxy 和來自網路上的旁路惡意要求。<br><br>「轉送的標頭中介軟體」會以相反順序 (從右至左) 處理標頭。 如果使用預設值 (`1`)，除非 `ForwardLimit` 的值增加，否則只會處理標頭中最右邊的值。<br><br>預設為 `1`。 |
+| <xref:Microsoft.AspNetCore.Builder.ForwardedHeadersOptions.ForwardedHostHeaderName> | 使用此屬性所指定的標頭，而不是 [ForwardedHeadersDefaults.XForwardedHostHeaderName](xref:Microsoft.AspNetCore.HttpOverrides.ForwardedHeadersDefaults.XForwardedHostHeaderName) 所指定的標頭。 當 Proxy/轉寄站未使用 `X-Forwarded-Host` 標頭，而使用其他標頭轉送資訊時，會使用此選項。<br><br>預設值為 `X-Forwarded-Host`。 |
+| <xref:Microsoft.AspNetCore.Builder.ForwardedHeadersOptions.ForwardedProtoHeaderName> | 使用此屬性所指定的標頭，而不是 [ForwardedHeadersDefaults.XForwardedProtoHeaderName](xref:Microsoft.AspNetCore.HttpOverrides.ForwardedHeadersDefaults.XForwardedProtoHeaderName) 所指定的標頭。 當 Proxy/轉寄站未使用 `X-Forwarded-Proto` 標頭，而使用其他標頭轉送資訊時，會使用此選項。<br><br>預設值為 `X-Forwarded-Proto`。 |
+| <xref:Microsoft.AspNetCore.Builder.ForwardedHeadersOptions.ForwardLimit> | 限制所處理標頭中的項目數。 設定為 `null` 可停用限制，但應該只有在已設定 `KnownProxies` 或 `KnownNetworks` 的情況下，才這樣做。 設置非 `null` 值是一種預防措施 (但不是保證)，以防止設定不正確的 Proxy 和來自網路上的旁路惡意要求。<br><br>「轉送的標頭中介軟體」會以相反順序 (從右至左) 處理標頭。 如果使用預設值 (`1`)，除非 `ForwardLimit` 的值增加，否則只會處理標頭中最右邊的值。<br><br>預設值為 `1`。 |
 | <xref:Microsoft.AspNetCore.Builder.ForwardedHeadersOptions.KnownNetworks> | 可從中接受轉送標頭的已知網路位址範圍。 請使用無類別網域間路由 (CIDR) 標記法來提供 IP 範圍。<br><br>若伺服器使用雙模式通訊端，會以 IPv6 格式 (例如，IPv4 中的 `10.0.0.1` 在 IPv6 中以 `::ffff:10.0.0.1` 表示) 提供 IPv4 位址。 請參閱 [IPAddress.MapToIPv6](xref:System.Net.IPAddress.MapToIPv6*)。 透過查看 [HttpContext.Connection.RemoteIpAddress](xref:Microsoft.AspNetCore.Http.ConnectionInfo.RemoteIpAddress*) 以判斷是否需要此格式。 如需詳細資訊，請參閱[以 IPv6 位址表示的 IPv4 位址設定](#configuration-for-an-ipv4-address-represented-as-an-ipv6-address)一節。<br><br>預設值為包含單一  項目的 `IList`\<<xref:Microsoft.AspNetCore.HttpOverrides.IPNetwork>`IPAddress.Loopback`>。 |
 | <xref:Microsoft.AspNetCore.Builder.ForwardedHeadersOptions.KnownProxies> | 可從中接受轉送標頭的已知 Proxy 位址。 請使用 `KnownProxies` 來指定確切的相符 IP 位址。<br><br>若伺服器使用雙模式通訊端，會以 IPv6 格式 (例如，IPv4 中的 `10.0.0.1` 在 IPv6 中以 `::ffff:10.0.0.1` 表示) 提供 IPv4 位址。 請參閱 [IPAddress.MapToIPv6](xref:System.Net.IPAddress.MapToIPv6*)。 透過查看 [HttpContext.Connection.RemoteIpAddress](xref:Microsoft.AspNetCore.Http.ConnectionInfo.RemoteIpAddress*) 以判斷是否需要此格式。 如需詳細資訊，請參閱[以 IPv6 位址表示的 IPv4 位址設定](#configuration-for-an-ipv4-address-represented-as-an-ipv6-address)一節。<br><br>預設值為包含單一  項目的 `IList`\<<xref:System.Net.IPAddress>`IPAddress.IPv6Loopback`>。 |
-| <xref:Microsoft.AspNetCore.Builder.ForwardedHeadersOptions.OriginalForHeaderName> | 使用此屬性所指定的標頭，而不是 [ForwardedHeadersDefaults.XOriginalForHeaderName](xref:Microsoft.AspNetCore.HttpOverrides.ForwardedHeadersDefaults.XOriginalForHeaderName) 所指定的標頭。<br><br>預設為 `X-Original-For`。 |
-| <xref:Microsoft.AspNetCore.Builder.ForwardedHeadersOptions.OriginalHostHeaderName> | 使用此屬性所指定的標頭，而不是 [ForwardedHeadersDefaults.XOriginalHostHeaderName](xref:Microsoft.AspNetCore.HttpOverrides.ForwardedHeadersDefaults.XOriginalHostHeaderName) 所指定的標頭。<br><br>預設為 `X-Original-Host`。 |
-| <xref:Microsoft.AspNetCore.Builder.ForwardedHeadersOptions.OriginalProtoHeaderName> | 使用此屬性所指定的標頭，而不是 [ForwardedHeadersDefaults.XOriginalProtoHeaderName](xref:Microsoft.AspNetCore.HttpOverrides.ForwardedHeadersDefaults.XOriginalProtoHeaderName) 所指定的標頭。<br><br>預設為 `X-Original-Proto`。 |
+| <xref:Microsoft.AspNetCore.Builder.ForwardedHeadersOptions.OriginalForHeaderName> | 使用此屬性所指定的標頭，而不是 [ForwardedHeadersDefaults.XOriginalForHeaderName](xref:Microsoft.AspNetCore.HttpOverrides.ForwardedHeadersDefaults.XOriginalForHeaderName) 所指定的標頭。<br><br>預設值為 `X-Original-For`。 |
+| <xref:Microsoft.AspNetCore.Builder.ForwardedHeadersOptions.OriginalHostHeaderName> | 使用此屬性所指定的標頭，而不是 [ForwardedHeadersDefaults.XOriginalHostHeaderName](xref:Microsoft.AspNetCore.HttpOverrides.ForwardedHeadersDefaults.XOriginalHostHeaderName) 所指定的標頭。<br><br>預設值為 `X-Original-Host`。 |
+| <xref:Microsoft.AspNetCore.Builder.ForwardedHeadersOptions.OriginalProtoHeaderName> | 使用此屬性所指定的標頭，而不是 [ForwardedHeadersDefaults.XOriginalProtoHeaderName](xref:Microsoft.AspNetCore.HttpOverrides.ForwardedHeadersDefaults.XOriginalProtoHeaderName) 所指定的標頭。<br><br>預設值為 `X-Original-Proto`。 |
 | <xref:Microsoft.AspNetCore.Builder.ForwardedHeadersOptions.RequireHeaderSymmetry> | 要求所處理 [ForwardedHeadersOptions.ForwardedHeaders](xref:Microsoft.AspNetCore.Builder.ForwardedHeadersOptions.ForwardedHeaders) 的標頭值數目必須同步。<br><br>ASP.NET Core 1.x 中的預設值為 `true`。 ASP.NET Core 2.0 或更新版本中的預設值為 `false`。 |
 
 ## <a name="scenarios-and-use-cases"></a>情節和使用案例

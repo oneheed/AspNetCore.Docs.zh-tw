@@ -1,10 +1,11 @@
 ---
-title: 第4部分，將模型新增至 ASP.NET Core MVC 應用程式
+title: 第4部分：將模型新增至 ASP.NET Core MVC 應用程式
 author: rick-anderson
 description: ASP.NET Core MVC 之教學課程系列的第4部分。
 ms.author: riande
 ms.date: 01/13/2020
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -15,14 +16,14 @@ no-loc:
 - Razor
 - SignalR
 uid: tutorials/first-mvc-app/adding-model
-ms.openlocfilehash: cc9c0447dc032ff0a88d379cd9d542e3406777bf
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: ddd517ef8fbf8cb4bb8765cb3caab4724c0205f0
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88021961"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88631962"
 ---
-# <a name="part-4-add-a-model-to-an-aspnet-core-mvc-app"></a>第4部分，將模型新增至 ASP.NET Core MVC 應用程式
+# <a name="part-4-add-a-model-to-an-aspnet-core-mvc-app"></a>第4部分：將模型新增至 ASP.NET Core MVC 應用程式
 
 作者：[Rick Anderson](https://twitter.com/RickAndMSFT) 與 [Ryan Nowak](https://github.com/tdykstra)
 
@@ -48,7 +49,7 @@ ms.locfileid: "88021961"
 
 # <a name="visual-studio-for-mac"></a>[Visual Studio for Mac](#tab/visual-studio-mac)
 
-以滑鼠右鍵按一下 [*模型*] 資料夾 **，>**  >  **新增類別**] [  >  **空白類別**]。 將檔案命名為 *Movie.cs*。
+以滑鼠右鍵按一下 [*模型*] 資料夾 **，>**  >  **新增類別**  >  **空白類別**]。 將檔案命名為 *Movie.cs*。
 
 ---
 
@@ -58,7 +59,7 @@ ms.locfileid: "88021961"
 
 `Movie` 類別包含 `Id` 欄位，該欄位是資料庫的必要欄位，將作為主索引鍵。
 
-<xref:System.ComponentModel.DataAnnotations.DataType>上的屬性會指定要) 的 `ReleaseDate` 資料 (類型 `Date` 。 使用此屬性：
+<xref:System.ComponentModel.DataAnnotations.DataType>上的屬性會 `ReleaseDate` 指定資料 (的類型 `Date`) 。 使用此屬性：
 
 * 使用者不需要在日期欄位中輸入時間資訊。
 * 只會顯示日期，不會顯示時間資訊。
@@ -87,17 +88,17 @@ Install-Package Microsoft.EntityFrameworkCore.SqlServer
 
 # <a name="visual-studio-for-mac"></a>[Visual Studio for Mac](#tab/visual-studio-mac)
 
-從 [**專案**] 功能表中，選取 [**管理 NuGet 套件**]。
+從 [ **專案** ] 功能表選取 [ **管理 NuGet 套件**]。
 
-在右上方的 [**搜尋**] 欄位中，輸入 `Microsoft.EntityFrameworkCore.SQLite` 並按下**Return**鍵進行搜尋。 選取相符的 NuGet 套件，然後按 [**新增套件**] 按鈕。
+在右上方的 **搜尋** 欄位中，輸入， `Microsoft.EntityFrameworkCore.SQLite` 然後按下 **Return** 鍵進行搜尋。 選取相符的 NuGet 套件，然後按 [ **新增套件** ] 按鈕。
 
 ![新增 Entity Framework Core NuGet 套件](~/tutorials/first-mvc-app-mac/adding-model/_static/add-nuget-packages.png)
 
-[**選取專案**] 對話方塊隨即顯示，並已 `MvcMovie` 選取專案。 按下 [**確定]** 按鈕。
+將會顯示 [ **選取專案** ] 對話方塊，並 `MvcMovie` 選取專案。 按下 [ **確定]** 按鈕。
 
-將會顯示 [**接受授權**] 對話方塊。 查看所需的授權，然後按一下 [**接受**] 按鈕。
+[ **接受授權** ] 對話方塊隨即顯示。 視需要檢查授權，然後按一下 [ **接受** ] 按鈕。
 
-重複上述步驟來安裝下列 NuGet 套件：
+重複上述步驟，以安裝下列 NuGet 套件：
 
 * `Microsoft.VisualStudio.Web.CodeGeneration.Design`
 * `Microsoft.EntityFrameworkCore.SqlServer`
@@ -123,7 +124,7 @@ Install-Package Microsoft.EntityFrameworkCore.SqlServer
 
 ## <a name="register-the-database-context"></a>登錄資料庫內容
 
-ASP.NET Core 內建[相依性插入 (DI)](xref:fundamentals/dependency-injection)。 服務 (例如 EF Core 資料庫內容) 必須在應用程式啟動期間向 DI 進行註冊。 需要這些服務的元件 (例如頁面) 會透過「函式 Razor 參數」提供這些服務。 取得資料庫內容執行個體的建構函式程式碼，本教學課程中稍後會示範。 在本節中，您會向 DI 容器註冊資料庫內容。
+ASP.NET Core 內建[相依性插入 (DI)](xref:fundamentals/dependency-injection)。 服務 (例如 EF Core 資料庫內容) 必須在應用程式啟動期間向 DI 進行註冊。 需要這些服務的元件 (例如 Razor 頁面) 是透過函式參數提供這些服務。 取得資料庫內容執行個體的建構函式程式碼，本教學課程中稍後會示範。 在本節中，您會向 DI 容器註冊資料庫內容。
 
 在 *Startup.cs* 最上方新增下列 `using` 陳述式：
 
@@ -150,7 +151,7 @@ using Microsoft.EntityFrameworkCore;
 
 ## <a name="add-a-database-connection-string"></a>新增資料庫連線字串
 
-將連接字串新增至檔案*中的appsettings.js* ：
+將連接字串新增至檔案 * 上的appsettings.js* ：
 
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
@@ -181,7 +182,7 @@ using Microsoft.EntityFrameworkCore;
 完成 [新增控制器]**** 對話方塊：
 
 * **模型類別:** *Movie (MvcMovie.Models)*
-* **資料內容類別：** *MvcmoviecoNtext.cs (MvcMovie 資料) *
+* **資料內容類別：** *mvcmoviecoNtext.cs (MvcMovie 的資料) *
 
 ![新增資料內容](adding-model/_static/dc3.png)
 
@@ -192,7 +193,7 @@ using Microsoft.EntityFrameworkCore;
 Visual Studio 會建立：
 
 * 電影控制器 (*Controllers/MoviesController.cs*)
-* Razor查看用於建立、刪除、詳細資料、編輯和索引頁面的檔案 (*Views/電影/ \* cshtml*) 
+* Razor 查看建立、刪除、詳細資料、編輯和索引頁面的檔案 (*Views/電影/ \* cshtml*) 
 
 自動建立這些檔案的流程稱為 *scaffolding*。
 
@@ -206,7 +207,7 @@ Visual Studio 會建立：
   export PATH=$HOME/.dotnet/tools:$PATH
   ```
 
-* 執行下列命令：
+* 執行以下命令：
 
   ```dotnetcli
   dotnet aspnet-codegenerator controller -name MoviesController -m Movie -dc MvcMovieContext --relativeFolderPath Controllers --useDefaultLayout --referenceScriptLibraries
@@ -218,7 +219,7 @@ Visual Studio 會建立：
 
 * 在專案目錄 (包含 *Program.cs*、*Startup.cs* 和 *.csproj* 檔案的目錄) 中開啟一個命令視窗。
 
-* 執行下列命令：
+* 執行以下命令：
 
   ```dotnetcli
   dotnet aspnet-codegenerator controller -name MoviesController -m Movie -dc MvcMovieContext --relativeFolderPath Controllers --useDefaultLayout --referenceScriptLibraries
@@ -230,7 +231,7 @@ Visual Studio 會建立：
 
 <!-- End of tabs                  -->
 
-您目前尚無法使用 scaffold 頁面，因為資料庫不存在。 如果您執行應用程式，並按一下 [**電影應用程式**] 連結，就會出現 [*無法開啟資料庫*] 或 [*沒有這類資料表：電影*錯誤訊息]。
+您目前尚無法使用 scaffold 頁面，因為資料庫不存在。 如果您執行應用程式，並按一下 [ **電影應用程式** ] 連結，則會出現 [ *無法開啟資料庫* ] 或 [ *沒有這類資料表：電影* 錯誤訊息]。
 
 <a name="migration"></a>
 
@@ -249,7 +250,7 @@ Add-Migration InitialCreate
 Update-Database
 ```
 
-* `Add-Migration InitialCreate`：產生*遷移/{timestamp} _InitialCreate .cs*遷移檔案。 `InitialCreate` 引數是移轉名稱。 您可以使用任何名稱，但依照慣例，會選取描述移轉的名稱。 因為這是第一次移轉，所產生類別會包含建立資料庫結構描述的程式碼。 資料庫結構描述是以 `MvcMovieContext` 類別為基礎。
+* `Add-Migration InitialCreate`：產生 *遷移/{timestamp} _InitialCreate .cs* 遷移檔。 `InitialCreate` 引數是移轉名稱。 您可以使用任何名稱，但依照慣例，會選取描述移轉的名稱。 因為這是第一次移轉，所產生類別會包含建立資料庫結構描述的程式碼。 資料庫結構描述是以 `MvcMovieContext` 類別為基礎。
 
 * `Update-Database`：將資料庫更新為先前命令所建立的最新遷移。 此命令會執行 *Migrations/{time-stamp}_InitialCreate.cs* 檔案中的 `Up` 方法，其會建立資料庫。
 
@@ -272,7 +273,7 @@ dotnet ef migrations add InitialCreate
 dotnet ef database update
 ```
 
-* `ef migrations add InitialCreate`：產生*遷移/{timestamp} _InitialCreate .cs*遷移檔案。 `InitialCreate` 引數是移轉名稱。 您可以使用任何名稱，但依照慣例，會選取描述移轉的名稱。 因為這是第一次移轉，所產生類別會包含建立資料庫結構描述的程式碼。 資料庫結構描述會以 `MvcMovieContext` 類別 (在 *Data/MvcMovieContext.cs* 檔案中) 中指定的模型為基礎。
+* `ef migrations add InitialCreate`：產生 *遷移/{timestamp} _InitialCreate .cs* 遷移檔。 `InitialCreate` 引數是移轉名稱。 您可以使用任何名稱，但依照慣例，會選取描述移轉的名稱。 因為這是第一次移轉，所產生類別會包含建立資料庫結構描述的程式碼。 資料庫結構描述會以 `MvcMovieContext` 類別 (在 *Data/MvcMovieContext.cs* 檔案中) 中指定的模型為基礎。
 
 * `ef database update`：將資料庫更新為先前命令所建立的最新遷移。 此命令會執行 *Migrations/{time-stamp}_InitialCreate.cs* 檔案中的 `Up` 方法，其會建立資料庫。
 
@@ -309,7 +310,7 @@ dotnet ef database update
 ---
   您可能遺漏了[移轉步驟](#migration)。
 
-* 測試 [**建立**] 頁面。 輸入並提交資料。
+* 測試 [ **建立** ] 頁面。 輸入並提交資料。
 
   > [!NOTE]
   > 您可能無法在 `Price` 欄位中輸入小數逗號。 若要對使用逗號 (",") 作為小數點的非英文地區設定和非英文日期格式支援 [jQuery 驗證](https://jqueryvalidation.org/)，則必須將應用程式全球化。 如需全球化指示，請參閱[此 GitHub 問題](https://github.com/dotnet/AspNetCore.Docs/issues/4076#issuecomment-326590420) \(英文\)。
@@ -334,9 +335,9 @@ dotnet ef database update
 
 建構函式會使用[相依性插入](xref:fundamentals/dependency-injection)將資料庫內容 (`MvcMovieContext`) 插入到控制器中。 控制器中的每一個 [CRUD](https://wikipedia.org/wiki/Create,_read,_update_and_delete) 方法都會使用資料庫內容。
 
-### <a name="use-sqlite-for-development-sql-server-for-production"></a>使用 SQLite 進行開發，SQL Server 用於生產環境
+### <a name="use-sqlite-for-development-sql-server-for-production"></a>使用 SQLite 進行開發，SQL Server 生產環境
 
-選取 SQLite 時，範本產生的程式碼就已準備好進行開發。 下列程式碼示範如何插入 <xref:Microsoft.AspNetCore.Hosting.IWebHostEnvironment> 啟動。 `IWebHostEnvironment`已插入，因此 `ConfigureServices` 可以在開發中使用 SQLite，並在生產環境中 SQL Server。
+選取 SQLite 時，範本產生的程式碼就可以開始開發。 下列程式碼示範如何插入 <xref:Microsoft.AspNetCore.Hosting.IWebHostEnvironment> 啟動。 `IWebHostEnvironment` 已插入，因此 `ConfigureServices` 可以在開發環境中使用 SQLite，並在生產環境中 SQL Server。
 
 [!code-csharp[](~/tutorials/first-mvc-app/start-mvc/sample/MvcMovie3/StartupDevProd.cs?name=snippet_StartupClass&highlight=5,10,16-28)]
 
@@ -366,7 +367,7 @@ MVC 也提供將強型別模型物件傳遞至檢視的能力。 這種強型別
 
 `https://localhost:5001/movies/details?id=1`
 
-`id`參數會定義為[可為 null 的類型](/dotnet/csharp/programming-guide/nullable-types/index) (`int?`) ，以防未提供識別碼值。
+`id`如果未提供識別碼值，參數會定義為[可為 null 的型](/dotnet/csharp/programming-guide/nullable-types/index)別 (`int?`) 。
 
 [Lambda 運算式](/dotnet/articles/csharp/programming-guide/statements-expressions-operators/lambda-expressions)會傳遞至 `FirstOrDefaultAsync`，以選取符合路由資料或查詢字串值的電影實體。
 
@@ -415,7 +416,7 @@ return View(movie);
 * [全球化和當地語系化](xref:fundamentals/localization)
 
 > [!div class="step-by-step"]
-> [先前加入視圖](adding-view.md) 
+> [先前新增視圖](adding-view.md) 
 > [下一步使用 SQL](working-with-sql.md)
 
 ::: moniker-end
@@ -470,7 +471,7 @@ Visual Studio 會建立：
 
 * Entity Framework Core [資料庫內容類別](xref:data/ef-mvc/intro#create-the-database-context) (*Data/MvcMovieContext.cs*)
 * 電影控制器 (*Controllers/MoviesController.cs*)
-* Razor查看用於建立、刪除、詳細資料、編輯和索引頁面的檔案 (*Views/電影/ \* cshtml*) 
+* Razor 查看建立、刪除、詳細資料、編輯和索引頁面的檔案 (*Views/電影/ \* cshtml*) 
 
 自動建立資料庫內容與 [CRUD](https://wikipedia.org/wiki/Create,_read,_update_and_delete) (建立、讀取、更新和刪除) 動作方法和檢視稱為 *Scaffolding*。
 
@@ -492,7 +493,7 @@ Visual Studio 會建立：
     export PATH=$HOME/.dotnet/tools:$PATH
   ```
 
-* 執行下列命令：
+* 執行以下命令：
 
   ```dotnetcli
    dotnet aspnet-codegenerator controller -name MoviesController -m Movie -dc MvcMovieContext --relativeFolderPath Controllers --useDefaultLayout --referenceScriptLibraries
@@ -511,7 +512,7 @@ Visual Studio 會建立：
    dotnet tool install --global dotnet-aspnet-codegenerator
    ```
 
-* 執行下列命令：
+* 執行以下命令：
 
   ```dotnetcli
    dotnet aspnet-codegenerator controller -name MoviesController -m Movie -dc MvcMovieContext --relativeFolderPath Controllers --useDefaultLayout --referenceScriptLibraries
@@ -589,7 +590,7 @@ Microsoft.Data.Sqlite.SqliteException.ThrowExceptionForRC(int rc, sqlite3 db)
 
 ## <a name="examine-the-context-registered-with-dependency-injection"></a>檢查使用相依性插入所註冊的內容
 
-ASP.NET Core 內建[相依性插入 (DI)](xref:fundamentals/dependency-injection)。 服務 (例如 EF Core DB 內容) 會在應用程式啟動期間使用 DI 來註冊。 需要這些服務的元件 (例如頁面) 會透過「函式 Razor 參數」提供這些服務。 取得資料庫內容執行個體的建構函式程式碼，本教學課程中稍後會示範。
+ASP.NET Core 內建[相依性插入 (DI)](xref:fundamentals/dependency-injection)。 服務 (例如 EF Core DB 內容) 會在應用程式啟動期間使用 DI 來註冊。 需要這些服務的元件 (例如 Razor 頁面) 是透過函式參數提供這些服務。 取得資料庫內容執行個體的建構函式程式碼，本教學課程中稍後會示範。
 
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
@@ -642,7 +643,7 @@ Login failed for user 'User-name'.
 上述醒目提示的程式碼會顯示要新增至[相依性插入](xref:fundamentals/dependency-injection)容器的電影資料庫內容：
 
 * `services.AddDbContext<MvcMovieContext>(options =>` 指定要使用的資料庫和連線字串。
-* `=>`是[Lambda 運算子](/dotnet/articles/csharp/language-reference/operators/lambda-operator)
+* `=>` 是 [Lambda 運算子](/dotnet/articles/csharp/language-reference/operators/lambda-operator)
 
 開啟 *Controllers/MoviesController.cs* 檔案，並檢查建構函式：
 
@@ -675,7 +676,7 @@ MVC 也提供將強型別模型物件傳遞至檢視的能力。 強型別方法
 
 `https://localhost:5001/movies/details?id=1`
 
-`id`參數會定義為[可為 null 的類型](/dotnet/csharp/programming-guide/nullable-types/index) (`int?`) ，以防未提供識別碼值。
+`id`如果未提供識別碼值，參數會定義為[可為 null 的型](/dotnet/csharp/programming-guide/nullable-types/index)別 (`int?`) 。
 
 [Lambda 運算式](/dotnet/articles/csharp/programming-guide/statements-expressions-operators/lambda-expressions)會傳遞至 `FirstOrDefaultAsync`，以選取符合路由資料或查詢字串值的電影實體。
 
@@ -724,7 +725,7 @@ return View(movie);
 * [全球化和當地語系化](xref:fundamentals/localization)
 
 > [!div class="step-by-step"]
-> [先前加入視圖](adding-view.md) 
+> [先前新增視圖](adding-view.md) 
 > [下一步使用資料庫](working-with-sql.md)
 
 ::: moniker-end

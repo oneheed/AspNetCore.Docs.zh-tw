@@ -1,10 +1,11 @@
 ---
-title: 開始使用 ASP.NET Core 中的資料保護 Api
+title: ASP.NET Core 中的資料保護 Api 入門
 author: rick-anderson
-description: 瞭解如何使用 ASP.NET Core 的資料保護 Api 來保護和解除保護應用程式中的資料。
+description: 瞭解如何使用 ASP.NET Core 資料保護 Api 來保護和取消保護應用程式中的資料。
 ms.author: riande
 ms.date: 11/12/2019
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -15,32 +16,32 @@ no-loc:
 - Razor
 - SignalR
 uid: security/data-protection/using-data-protection
-ms.openlocfilehash: 0d088e0e974742e51d9ca39a5cec5b84b46f5d21
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: bfe1dc800f65eaca00bb1dd145d6ecc4159b783f
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88022429"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88631676"
 ---
-# <a name="get-started-with-the-data-protection-apis-in-aspnet-core"></a>開始使用 ASP.NET Core 中的資料保護 Api
+# <a name="get-started-with-the-data-protection-apis-in-aspnet-core"></a>ASP.NET Core 中的資料保護 Api 入門
 
 <a name="security-data-protection-getting-started"></a>
 
-最簡單的是，保護資料是由下列步驟所組成：
+保護資料最簡單的方式是由下列步驟組成：
 
 1. 從資料保護提供者建立資料保護裝置。
 
-2. `Protect`使用您想要保護的資料呼叫方法。
+2. `Protect`使用您想要保護的資料來呼叫方法。
 
-3. `Unprotect`使用您想要轉換成純文字的資料來呼叫方法。
+3. `Unprotect`使用您想要轉換回純文字的資料來呼叫方法。
 
-大部分的架構和應用程式模型（例如 ASP.NET Core 或 SignalR ）已經設定資料保護系統，並將它新增至您透過相依性插入存取的服務容器。 下列範例示範如何設定服務容器以進行相依性插入和註冊資料保護堆疊、透過 DI 接收資料保護提供者、建立保護裝置，以及保護然後解除保護資料。
+大部分的架構和應用程式模型（例如 ASP.NET Core 或 SignalR ）已設定資料保護系統，並將它新增至您透過相依性插入存取的服務容器。 下列範例示範如何設定服務容器以進行相依性插入，以及註冊資料保護堆疊、透過 DI 接收資料保護提供者、建立保護裝置，以及保護取消保護資料。
 
 [!code-csharp[](../../security/data-protection/using-data-protection/samples/protectunprotect.cs?highlight=26,34,35,36,37,38,39,40)]
 
-當您建立保護裝置時，必須提供一或多個[目的字串](xref:security/data-protection/consumer-apis/purpose-strings)。 目的字串提供取用者之間的隔離。 例如，使用「綠色」目的字串所建立的保護裝置，將無法取消保護裝置提供的資料，目的為「紫色」。
+當您建立保護裝置時，您必須提供一或多個 [目的字串](xref:security/data-protection/consumer-apis/purpose-strings)。 目的字串可提供取用者之間的隔離。 例如，使用「綠色」目的字串所建立的保護裝置，將無法解除保護保護裝置所提供的資料，目的為「紫色」。
 
 >[!TIP]
-> 和的 `IDataProtectionProvider` 實例 `IDataProtector` 是多個呼叫端的安全線程。 這是因為一旦元件透過呼叫取得的參考 `IDataProtector` `CreateProtector` ，它就會使用該參考進行對和的多次呼叫 `Protect` `Unprotect` 。
+> 和的 `IDataProtectionProvider` 實例 `IDataProtector` 都是多個呼叫端的安全線程。 它的目的是只要元件透過呼叫取得的參考 `IDataProtector` `CreateProtector` ，它就會將該參考用於多個對和的呼叫 `Protect` `Unprotect` 。
 >
->`Unprotect`如果無法驗證或解密受保護的內容，則的呼叫將會擲回 system.security.cryptography.cryptographicexception。 某些元件可能會想要在取消保護作業期間忽略錯誤;讀取驗證的元件 cookie 可能會處理此錯誤，並將要求視為 cookie 完全不會使要求失敗。 需要此行為的元件應該特別捕捉 System.security.cryptography.cryptographicexception，而不是抑制所有例外狀況。
+>`Unprotect`如果無法驗證或解密受保護的承載，的呼叫將會擲回 system.security.cryptography.cryptographicexception。 某些元件可能會想要忽略取消保護作業期間的錯誤;讀取驗證的元件 cookie 可能會處理此錯誤，並將要求視為完全沒有， cookie 而不是直接讓要求失敗。 需要此行為的元件應該明確地捕捉 System.security.cryptography.cryptographicexception，而不是抑制所有例外狀況。

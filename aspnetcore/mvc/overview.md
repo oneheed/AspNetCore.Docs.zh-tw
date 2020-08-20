@@ -5,6 +5,7 @@ description: 了解 ASP.NET Core MVC 何以是建置使用模型檢視控制器�
 ms.author: riande
 ms.date: 02/12/2020
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -15,12 +16,12 @@ no-loc:
 - Razor
 - SignalR
 uid: mvc/overview
-ms.openlocfilehash: 64bee1966eff40e9057166adfafbf78d0cc5b6aa
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: 29701506d9f6c1ff90081a548d524bc0deb65cda
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88021441"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88633613"
 ---
 # <a name="overview-of-aspnet-core-mvc"></a>ASP.NET Core MVC 概觀
 
@@ -47,7 +48,7 @@ MVC 應用程式中的模型代表應用程式的狀態，以及應用程式應�
 
 ### <a name="view-responsibilities"></a>檢視職責
 
-檢視會負責透過使用者介面展示內容。 他們會使用[ Razor view engine](#razor-view-engine) ，在 HTML 標籤中內嵌 .net 程式碼。 檢視內應該有基本邏輯，而且其中的任何邏輯都應該與展示內容相關。 如果您需要在檢視檔案中執行大量邏輯以便顯示複雜模型中的資料，請考慮使用[檢視元件](views/view-components.md)、ViewModel 或檢視範本來簡化檢視。
+檢視會負責透過使用者介面展示內容。 他們使用[ Razor view engine](#razor-view-engine)將 .net 程式碼內嵌在 HTML 標籤中。 檢視內應該有基本邏輯，而且其中的任何邏輯都應該與展示內容相關。 如果您需要在檢視檔案中執行大量邏輯以便顯示複雜模型中的資料，請考慮使用[檢視元件](views/view-components.md)、ViewModel 或檢視範本來簡化檢視。
 
 ### <a name="controller-responsibilities"></a>控制器職責
 
@@ -77,7 +78,7 @@ ASP.NET Core MVC 包括下列各項：
 * [區域](#areas)
 * [Web API](#web-apis)
 * [可測試性](#testability)
-* [Razor視圖引擎](#razor-view-engine)
+* [Razor 查看引擎](#razor-view-engine)
 * [強型別視圖](#strongly-typed-views)
 * [標籤協助程式](#tag-helpers)
 * [視圖元件](#view-components)
@@ -182,7 +183,7 @@ public class AccountController : Controller
 
 ### <a name="areas"></a>區域
 
-[區域](controllers/areas.md)提供將大型 ASP.NET Core MVC Web 應用程式分割成較小功能群組的方式。 一個區域是應用程式內的一個 MVC 結構。 在 MVC 專案中，模型、控制器和檢視等邏輯元件會保留在不同的資料夾中，而且 MVC 會使用命名慣例來建立這些元件之間的關聯性。 針對大型應用程式，將應用程式分割成個別高功能層級區域可能較有利。 例如，具有多個業務單位的電子商務應用程式，例如結帳、計費和搜尋等。每個單位都有自己的邏輯元件視圖、控制器和模型。
+[區域](controllers/areas.md) 提供將大型 ASP.NET Core MVC Web 應用程式分割成較小功能群組的方式。 一個區域是應用程式內的一個 MVC 結構。 在 MVC 專案中，模型、控制器和檢視等邏輯元件會保留在不同的資料夾中，而且 MVC 會使用命名慣例來建立這些元件之間的關聯性。 針對大型應用程式，將應用程式分割成個別高功能層級區域可能較有利。 例如，電子商務應用程式具有多個業務單位，例如結帳、帳單和搜尋等等。上述每個單位都有自己的邏輯元件視圖、控制器和模型。
 
 ### <a name="web-apis"></a>Web API
 
@@ -196,9 +197,9 @@ ASP.NET Core MVC 除了是建立網站的理想平台之外，也對建置 Web A
 
 此架構使用介面和相依性插入，因此相當適用於單元測試，而此架構所包含的功能 (例如 Entity Framework 的 TestHost 和 InMemory 提供者) 也讓您可以輕鬆快速地進行[整合測試](xref:test/integration-tests)。 深入了解[如何測試控制器邏輯](controllers/testing.md)。
 
-### <a name="no-locrazor-view-engine"></a>Razor視圖引擎
+### <a name="no-locrazor-view-engine"></a>Razor 查看引擎
 
-[ASP.NET CORE MVC views](views/overview.md)會使用[ Razor view engine](views/razor.md)來呈現 views。 Razor是一種精簡、表達和流暢的範本標記語言，可使用內嵌的 c # 程式碼來定義視圖。 Razor是用來在伺服器上動態產生 web 內容。 您可以完全混合伺服端程式碼以及用戶端內容和程式碼。
+[ASP.NET CORE MVC 視圖](views/overview.md)器會使用[ Razor view engine](views/razor.md)來呈現視圖。 Razor 是一種精簡、易懂且流暢的範本標記語言，可使用內嵌 c # 程式碼來定義視圖。 Razor 用來在伺服器上動態產生 web 內容。 您可以完全混合伺服端程式碼以及用戶端內容和程式碼。
 
 ```cshtml
 <ul>
@@ -212,7 +213,7 @@ Razor您可以使用 view engine 來定義[版面](views/layout.md)配置、[部
 
 ### <a name="strongly-typed-views"></a>強型別檢視
 
-RazorMVC 中的 views 可以根據您的模型來進行強型別。 控制器可以將強型別模型傳遞至檢視，讓您的檢視具有類型檢查和 IntelliSense 支援。
+Razor MVC 中的 views 可以根據您的模型以強型別為基礎。 控制器可以將強型別模型傳遞至檢視，讓您的檢視具有類型檢查和 IntelliSense 支援。
 
 例如，下列檢視會呈現 `IEnumerable<Product>` 類型的模型：
 
@@ -228,7 +229,7 @@ RazorMVC 中的 views 可以根據您的模型來進行強型別。 控制器可
 
 ### <a name="tag-helpers"></a>標籤協助程式
 
-[標記](views/tag-helpers/intro.md)協助程式可讓伺服器端程式碼參與建立和轉譯檔案中的 HTML 元素 Razor 。 您可以使用標籤協助程式定義自訂標籤 (例如 `<environment>`)，或修改現有標籤 (例如 `<label>`) 的行為。 標籤協助程式會根據元素名稱及其屬性，繫結至特定元素。 其提供伺服器端轉譯優點，同時仍然保留 HTML 編輯體驗。
+[標記](views/tag-helpers/intro.md) 協助程式可讓伺服器端程式碼參與建立和轉譯檔案中的 HTML 元素 Razor 。 您可以使用標籤協助程式定義自訂標籤 (例如 `<environment>`)，或修改現有標籤 (例如 `<label>`) 的行為。 標籤協助程式會根據元素名稱及其屬性，繫結至特定元素。 其提供伺服器端轉譯優點，同時仍然保留 HTML 編輯體驗。
 
 有許多適用於一般工作 (例如建立表單和連結、載入資產等) 的內建標籤協助程式，還有更多位於公用 GitHub 存放庫及作為 NuGet 套件來提供。 標籤協助程式是以 C# 編寫，並根據項目名稱、屬性名稱或上層標籤來設定目標 HTML 項目。 例如，內建 LinkTagHelper 可用來建立 `AccountsController` 之 `Login` 動作的連結：
 
@@ -253,7 +254,7 @@ RazorMVC 中的 views 可以根據您的模型來進行強型別。 控制器可
 </environment>
 ```
 
-標籤協助程式提供 HTML 易懂的開發體驗，以及豐富的 IntelliSense 環境來建立 HTML 和 Razor 標記。 大部分的內建標籤協助程式都是以現有的 HTML 元素為目標，並提供元素的伺服器端屬性。
+標籤協助程式提供方便 HTML 的開發體驗，以及豐富的 IntelliSense 環境，可用於建立 HTML 和 Razor 標記。 大部分的內建標籤協助程式都是以現有的 HTML 元素為目標，並提供元素的伺服器端屬性。
 
 ### <a name="view-components"></a>檢視元件
 
@@ -267,5 +268,5 @@ RazorMVC 中的 views 可以根據您的模型來進行強型別。 控制器可
 
 ## <a name="additional-resources"></a>其他資源
 
-* 適用于 ASP.NET Core MVC：強型別單元測試連結[庫的 MyTested AspNetCore](https://github.com/ivaylokenov/MyTested.AspNetCore.Mvc)，提供流暢的介面來測試 mvc 和 Web API 應用程式。  (*不是由 Microsoft 維護或支援*) 
+* [MyTested. AspNetCore：適用于 ASP.NET CORE mvc](https://github.com/ivaylokenov/MyTested.AspNetCore.Mvc)：強型別單元測試程式庫的，提供流暢的介面來測試 mvc 和 web API 應用程式。  (*不會受到 Microsoft 的維護或支援*) 
 * <xref:blazor/components/integrate-components-into-razor-pages-and-mvc-apps>

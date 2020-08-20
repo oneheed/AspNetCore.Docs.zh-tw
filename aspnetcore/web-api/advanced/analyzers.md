@@ -1,12 +1,13 @@
 ---
 title: 使用 Web API 分析器
 author: pranavkm
-description: 瞭解 ASP.NET Core MVC Web API 分析器套件。
+description: 瞭解 ASP.NET Core MVC web API 分析器套件。
 monikerRange: '>= aspnetcore-2.2'
 ms.author: prkrishn
 ms.custom: mvc
 ms.date: 09/05/2019
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -17,29 +18,29 @@ no-loc:
 - Razor
 - SignalR
 uid: web-api/advanced/analyzers
-ms.openlocfilehash: 571046052dbe131e9cdcf981aaee0921ed8c2ea1
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: 1bc76f3965009dbdd66c58b197f4c12bd44faf18
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88021844"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88633028"
 ---
 # <a name="use-web-api-analyzers"></a>使用 Web API 分析器
 
-ASP.NET Core 2.2 和更新版本提供 MVC 分析器套件，適用于 Web API 專案。 分析器會處理以標注的控制器 <xref:Microsoft.AspNetCore.Mvc.ApiControllerAttribute> ，同時根據[Web API 慣例](xref:web-api/advanced/conventions)來建立。
+ASP.NET Core 2.2 和更新版本提供適用于 web API 專案的 MVC 分析器套件。 分析器會使用加上批註的控制器 <xref:Microsoft.AspNetCore.Mvc.ApiControllerAttribute> ，同時建立 [web API 慣例](xref:web-api/advanced/conventions)。
 
-分析器套件會通知您有任何控制器動作：
+分析器封裝會通知您下列任何控制器動作：
 
 * 傳回未宣告的狀態碼。
 * 傳回未宣告的成功結果。
-* 記錄不會傳回的狀態碼。
+* 記錄未傳回的狀態碼。
 * 包含明確的模型驗證檢查。
 
 ::: moniker range=">= aspnetcore-3.0"
 
 ## <a name="reference-the-analyzer-package"></a>參考分析器套件
 
-在 ASP.NET Core 3.0 或更新版本中，分析器會包含在 .NET Core SDK 中。 若要在專案中啟用分析器，請在 `IncludeOpenAPIAnalyzers` 專案檔中包含屬性：
+在 ASP.NET Core 3.0 或更新版本中，分析器會包含在 .NET Core SDK 中。 若要在專案中啟用分析器，請 `IncludeOpenAPIAnalyzers` 在專案檔中包含屬性：
 
 ```xml
 <PropertyGroup>
@@ -53,14 +54,14 @@ ASP.NET Core 2.2 和更新版本提供 MVC 分析器套件，適用于 Web API �
 
 ## <a name="package-installation"></a>套件安裝
 
-使用下列其中一種方法來安裝[AspNetCore](https://www.nuget.org/packages/Microsoft.AspNetCore.Mvc.Api.Analyzers) NuGet 套件：
+使用下列其中一種方法來安裝 [AspNetCore](https://www.nuget.org/packages/Microsoft.AspNetCore.Mvc.Api.Analyzers) NuGet 套件：
 
 ### <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
 從 [套件管理員主控台]**** 視窗中：
-  * 移至 [**查看** > **其他 Windows** > **套件管理員主控台**]。
+  * 移至 [ **查看** > **其他 Windows** > **封裝管理員主控台**]。
   * 巡覽至 *ApiConventions.csproj* 檔案所在的目錄。
-  * 執行下列命令：
+  * 執行以下命令：
 
     ```powershell
     Install-Package Microsoft.AspNetCore.Mvc.Api.Analyzers
@@ -68,8 +69,8 @@ ASP.NET Core 2.2 和更新版本提供 MVC 分析器套件，適用于 Web API �
 
 ### <a name="visual-studio-for-mac"></a>[Visual Studio for Mac](#tab/visual-studio-mac)
 
-* 以滑鼠右鍵按一下*Packages* **Solution Pad** > **新增套件 ...**] 中的 [套件] 資料夾。
-* 將 [**新增套件**] 視窗的 [**來源**] 下拉式下拉設定為 [nuget.org]。
+* 以滑鼠右鍵按一下*Packages* **Solution Pad** > **新增套件**] 中的 [封裝] 資料夾。
+* 將 [ **新增封裝** ] 視窗的 [ **來源** ] 下拉式清單設定為 [nuget.org]。
 * 在搜尋方塊中輸入 "Microsoft.AspNetCore.Mvc.Api.Analyzers"。
 * 從結果窗格中選取 "Microsoft.AspNetCore.Mvc.Api.Analyzers" 套件，然後按一下 [新增套件]****。
 
@@ -83,7 +84,7 @@ dotnet add ApiConventions.csproj package Microsoft.AspNetCore.Mvc.Api.Analyzers
 
 ### <a name="net-core-cli"></a>[.NET Core CLI](#tab/netcore-cli)
 
-執行下列命令：
+執行以下命令：
 
 ```dotnetcli
 dotnet add ApiConventions.csproj package Microsoft.AspNetCore.Mvc.Api.Analyzers
@@ -95,7 +96,7 @@ dotnet add ApiConventions.csproj package Microsoft.AspNetCore.Mvc.Api.Analyzers
 
 ## <a name="analyzers-for-web-api-conventions"></a>Web API 慣例的分析器
 
-OpenAPI 文件包含動作可能傳回的狀態碼及回應類型。 在 ASP.NET Core MVC 中，如 <xref:Microsoft.AspNetCore.Mvc.ProducesResponseTypeAttribute> 和 <xref:Microsoft.AspNetCore.Mvc.ProducesAttribute> 等屬性會用以記載動作。 <xref:tutorials/web-api-help-pages-using-swagger>詳細說明如何記錄您的 Web API。
+OpenAPI 文件包含動作可能傳回的狀態碼及回應類型。 在 ASP.NET Core MVC 中，如 <xref:Microsoft.AspNetCore.Mvc.ProducesResponseTypeAttribute> 和 <xref:Microsoft.AspNetCore.Mvc.ProducesAttribute> 等屬性會用以記載動作。 <xref:tutorials/web-api-help-pages-using-swagger> 深入探討記錄 web API 的詳細資料。
 
 套件中的其中一個分析器會檢查以 <xref:Microsoft.AspNetCore.Mvc.ApiControllerAttribute> 標註的控制器，並辨識未完全記載其回應的動作。 請考慮下列範例：
 

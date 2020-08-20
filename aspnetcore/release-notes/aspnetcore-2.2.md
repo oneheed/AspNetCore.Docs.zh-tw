@@ -6,6 +6,7 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 12/05/2019
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -16,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: aspnetcore-2.2
-ms.openlocfilehash: 354839abe295b4adcbf6becfd3bd926330f0823f
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: 1a8599e6d06724ec289ddd4bee94f89d3c78ef91
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88021142"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88632378"
 ---
 # <a name="whats-new-in-aspnet-core-22"></a>ASP.NET Core 2.2 的新功能
 
@@ -29,7 +30,7 @@ ms.locfileid: "88021142"
 
 ## <a name="openapi-analyzers--conventions"></a>OpenAPI 分析器與慣例
 
-OpenAPI (之前稱為 Swagger) 是用來描述 REST API 的語言無關規格。 OpenAPI 生態系統中已有工具，可讓您使用此規格來探索、測試和產生用戶端程式碼。 在 ASP.NET Core MVC 中產生和視覺化 OpenAPI 檔的支援是透過社區驅動專案（例如[NSwag](https://github.com/RicoSuter/NSwag)和[Swashbuckle](https://github.com/domaindrivendev/Swashbuckle.AspNetCore)）提供。 ASP.NET Core 2.2 提供改善的工具和執行階段體驗來建立 OpenAPI 文件。
+OpenAPI (之前稱為 Swagger) 是用來描述 REST API 的語言無關規格。 OpenAPI 生態系統中已有工具，可讓您使用此規格來探索、測試和產生用戶端程式碼。 在 ASP.NET Core MVC 中產生和視覺化 OpenAPI 檔的支援，是透過像是 [NSwag](https://github.com/RicoSuter/NSwag) 和 [Swashbuckle](https://github.com/domaindrivendev/Swashbuckle.AspNetCore)這類的社區驅動專案來提供。 ASP.NET Core 2.2 提供改善的工具和執行階段體驗來建立 OpenAPI 文件。
 
 如需詳細資訊，請參閱下列資源：
 
@@ -39,7 +40,7 @@ OpenAPI (之前稱為 Swagger) 是用來描述 REST API 的語言無關規格。
 
 ## <a name="problem-details-support"></a>問題詳細資料支援
 
-ASP.NET Core 2.1 引進 `ProblemDetails` 的是以[RFC 7807](https://tools.ietf.org/html/rfc7807)規格為基礎，其使用 HTTP 回應來攜帶錯誤的詳細資料。 在 2.2 中，`ProblemDetails` 是對具有 `ApiControllerAttribute` 屬性之控制器中用戶端錯誤碼的標準回應。 傳回用戶端錯誤狀態碼 (4xx) 的 `IActionResult` 現在會傳回 `ProblemDetails` 主體。 結果中也會包含相互關聯識別碼，可用來透過要求記錄檔與錯誤相互關聯。 對於用戶端錯誤，`ProducesResponseType` 預設會使用 `ProblemDetails` 作為回應類型。 這會記載於使用 NSwag 或 Swashbuckle.AspNetCore 產生的 OpenAPI/Swagger 輸出中。
+`ProblemDetails`根據[RFC 7807](https://tools.ietf.org/html/rfc7807)規格所引進的 ASP.NET Core 2.1，用於傳送 HTTP 回應錯誤的詳細資料。 在 2.2 中，`ProblemDetails` 是對具有 `ApiControllerAttribute` 屬性之控制器中用戶端錯誤碼的標準回應。 傳回用戶端錯誤狀態碼 (4xx) 的 `IActionResult` 現在會傳回 `ProblemDetails` 主體。 結果中也會包含相互關聯識別碼，可用來透過要求記錄檔與錯誤相互關聯。 對於用戶端錯誤，`ProducesResponseType` 預設會使用 `ProblemDetails` 作為回應類型。 這會記載於使用 NSwag 或 Swashbuckle.AspNetCore 產生的 OpenAPI/Swagger 輸出中。
 
 ## <a name="endpoint-routing"></a>端點路由
 
@@ -65,12 +66,12 @@ ASP.NET Core 2.2 使用新的「端點路由」** 系統來改善要求的分派
 
 ASP.NET Core 2.2 新增 HTTP/2 支援。
 
-HTTP/2 是 HTTP 通訊協定的主要版本。 值得注意的 HTTP/2 功能包括：
+HTTP/2 是 HTTP 通訊協定的主要版本。 HTTP/2 的值得注意的功能包括：
 
 * 支援標頭壓縮。
-* 透過單一連線的完整多工串流。
+* 透過單一連接的完整多工資料流程。
 
-雖然 HTTP/2 會保留 HTTP 的語義 (例如，HTTP 標頭和方法) ，但這是 HTTP/1.x 的重大變更，會說明資料在用戶端與伺服器之間的框架和傳送方式。
+雖然 HTTP/2 會保留 HTTP 的語義 (例如，HTTP 標頭和方法) ，但它是 HTTP/1.x 的重大變更，因為資料是在用戶端與伺服器之間進行框架和傳送的方式。
 
 這項框架處理變更導致伺服器和用戶端必須交涉所使用的通訊協定版本。 Application-Layer Protocol Negotiation (ALPN) 是 TLS 延伸模組，可讓伺服器和用戶端交涉在其 TLS 信號交換過程中所使用的通訊協定版本。 雖然您可能事先知道伺服器與用戶端之間的通訊協定，但所有主要瀏覽器都支援 ALPN 作為建立 HTTP/2 連線的唯一方式。
 
@@ -89,11 +90,11 @@ HTTP/2 是 HTTP 通訊協定的主要版本。 值得注意的 HTTP/2 功能包�
 
 如需詳細資訊，請參閱 [IIS 的同處理序裝載](xref:host-and-deploy/aspnet-core-module?view=aspnetcore-2.2#in-process-hosting-model)。
 
-## <a name="no-locsignalr-java-client"></a>SignalRJAVA 用戶端
+## <a name="no-locsignalr-java-client"></a>SignalR JAVA 用戶端
 
-ASP.NET Core 2.2 引進的 JAVA 用戶端 SignalR 。 此用戶端支援 SignalR 從 JAVA 程式碼連接到 ASP.NET Core 伺服器，包括 Android 應用程式。
+ASP.NET Core 2.2 引進的 JAVA 用戶端 SignalR 。 此用戶端支援 SignalR 從 JAVA 程式碼（包括 Android 應用程式）連接到 ASP.NET Core 的伺服器。
 
-如需詳細資訊，請參閱[ASP.NET Core SignalR JAVA 用戶端](https://docs.microsoft.com/aspnet/core/signalr/java-client?view=aspnetcore-2.2)。
+如需詳細資訊，請參閱 [ASP.NET Core SignalR JAVA 用戶端](https://docs.microsoft.com/aspnet/core/signalr/java-client?view=aspnetcore-2.2)。
 
 ## <a name="cors-improvements"></a>CORS 改善
 
@@ -115,7 +116,7 @@ ASP.NET Core Web 專案範本已更新為 [Bootstrap 4](https://getbootstrap.com
 
 ## <a name="validation-performance"></a>驗證效能
 
-MVC 的驗證系統設計成可延伸和彈性，可讓您根據每個要求判斷哪些驗證程式適用于指定的模型。 這有助於撰寫複雜的驗證提供者。 不過，在最常見的情況下，應用程式只會使用內建的驗證程式，而不需要這個額外的彈性。 內建驗證程式包括 DataAnnotations (例如 [Required] 和 [StringLength]) 以及 `IValidatableObject`。
+MVC 的驗證系統設計成可延伸和彈性，可讓您根據每個要求判斷哪些驗證程式會套用至指定的模型。 這有助於撰寫複雜的驗證提供者。 不過，在最常見的情況下，應用程式只會使用內建的驗證程式，而不需要這麼多的彈性。 內建驗證程式包括 DataAnnotations (例如 [Required] 和 [StringLength]) 以及 `IValidatableObject`。
 
 在 ASP.NET Core 2.2 中，若 MVC 判斷指定的模型圖形不需要驗證，則會跳過驗證。 當驗證無法驗證或沒有任何驗證程式的模型時，跳過驗證可大幅改善效能。 這包括諸如基本類型集合 (例如 `byte[]`、`string[]`、`Dictionary<string, string>`) 的物件，或沒有許多驗證程式的複雜物件圖形。
 

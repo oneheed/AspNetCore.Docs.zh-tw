@@ -6,6 +6,7 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 12/05/2019
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -16,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: aspnetcore-2.1
-ms.openlocfilehash: 3fb524748b9e2aa2c12b64f67a7960c4f0f911b0
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: d10fd89a3eac34e855ba92673033edc541aa6393
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88021155"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88632404"
 ---
 # <a name="whats-new-in-aspnet-core-21"></a>ASP.NET Core 2.1 的新功能
 
@@ -29,7 +30,7 @@ ms.locfileid: "88021155"
 
 ## SignalR
 
-SignalR已針對 ASP.NET Core 2.1 重寫。 ASP.NET Core SignalR 包含一些改良功能：
+SignalR 已重寫 ASP.NET Core 2.1。 ASP.NET Core SignalR 包含一些改良功能：
 
 * 簡化的向外延展模型。
 * 沒有 jQuery 相依性的新 JavaScript 用戶端。
@@ -40,26 +41,26 @@ SignalR已針對 ASP.NET Core 2.1 重寫。 ASP.NET Core SignalR 包含一些改
 
 如需詳細資訊，請參閱[ASP.NET Core SignalR ](xref:signalr/introduction)。
 
-## <a name="no-locrazor-class-libraries"></a>Razor類別庫
+## <a name="no-locrazor-class-libraries"></a>Razor 類別庫
 
-ASP.NET Core 2.1 可讓您更輕鬆地在程式庫中建立並包含以 Razor 為基礎的 UI，並在多個專案之間共用。 新的 SDK 可讓您將檔案 Razor 建立 Razor 至類別庫專案，以封裝至 NuGet 套件。 應用程式會自動探索並覆寫程式庫中的檢視和頁面。 藉由 Razor 將編譯整合到組建中：
+ASP.NET Core 2.1 可讓您更輕鬆地在程式庫中建立並包含以架構為 Razor 基礎的 UI，並在多個專案之間共用。 新的 Razor SDK 可讓您將檔案建立 Razor 至類別庫專案，以封裝至 NuGet 套件。 應用程式會自動探索並覆寫程式庫中的檢視和頁面。 藉由整合 Razor 編譯到組建中：
 
 * 大幅縮短應用程式的啟動時間。
-* Razor在執行時間快速更新視圖和頁面，仍可做為反復開發工作流程的一部分。
+* Razor在執行時間快速更新視圖和頁面，仍可作為反復開發工作流程的一部分。
 
-如需詳細資訊，請參閱[使用 Razor 類別庫專案建立可重複使用的 UI](xref:razor-pages/ui-class)。
+如需詳細資訊，請參閱 [使用 Razor 類別庫專案建立可重複](xref:razor-pages/ui-class)使用的 UI。
 
-## <a name="no-locidentity-ui-library--scaffolding"></a>IdentityUI 程式庫 & 的架構
+## <a name="no-locidentity-ui-library--scaffolding"></a>Identity UI 程式庫 & 的樣板
 
-ASP.NET Core 2.1 提供[ASP.NET Core Identity ](xref:security/authentication/identity)做為[ Razor 類別庫](xref:razor-pages/ui-class)。 包含的應用程式 Identity 可以套用新的 Identity scaffolder，以選擇性地新增包含在類別庫中的原始程式碼， Identity Razor (RCL) 。 建議您產生原始程式碼，以便能夠修改程式碼並變更行為。 例如，您可以指示 Scaffolder 產生註冊使用的程式碼。 產生的程式碼優先于 RCL 中的相同程式碼 Identity 。
+ASP.NET Core 2.1 [ASP.NET Core Identity](xref:security/authentication/identity) 以[ Razor 類別庫](xref:razor-pages/ui-class)的形式提供。 包含的應用程式 Identity 可以套用新的 Identity scaffolder，以選擇性地新增類別庫中包含的原始程式碼 Identity Razor (RCL) 。 建議您產生原始程式碼，以便能夠修改程式碼並變更行為。 例如，您可以指示 Scaffolder 產生註冊使用的程式碼。 產生的程式碼優先于 RCL 中的相同程式碼 Identity 。
 
-**不**包含驗證的應用程式可以套用 Identity SCAFFOLDER 來新增 RCL Identity 套件。 您可以選擇 Identity 要產生的程式碼。
+**未**包含驗證的應用程式可以套用 Identity SCAFFOLDER 來新增 RCL Identity 套件。 您可以選擇 Identity 要產生的程式碼。
 
-如需詳細資訊，請參閱[ Identity ASP.NET Core 專案中的 Scaffold](xref:security/authentication/scaffold-identity)。
+如需詳細資訊，請參閱 [ Identity ASP.NET Core 專案中的 Scaffold](xref:security/authentication/scaffold-identity)。
 
 ## <a name="https"></a>HTTPS
 
-隨著安全性與隱私權日益受到重視，為 Web 應用程式啟用 HTTPS 極其重要。 在網站上強制執行 HTTPS 變得日益嚴格。 不使用 HTTPS 的網站會被視為不安全。 瀏覽器 (Chromium、Mozilla) 開始強制執行必須從安全內容使用 Web 功能。 [GDPR](xref:security/gdpr) 需要使用 HTTPS 來保護使用者隱私。 雖然在生產環境中使用 HTTPS 非常重要，但在開發中使用 HTTPS 有助於避免發生部署問題 (例如不安全的連結)。 ASP.NET Core 2.1 包含多項改善，讓您更容易在開發中使用 HTTPS，以及在生產環境中設定 HTTPS。 如需詳細資訊，請參閱[強制使用 HTTPS](xref:security/enforcing-ssl)。
+隨著安全性與隱私權日益受到重視，為 Web 應用程式啟用 HTTPS 極其重要。 在網站上強制執行 HTTPS 變得日益嚴格。 未使用 HTTPS 的網站會被視為不安全。 瀏覽器 (Chromium、Mozilla) 開始強制執行必須從安全內容使用 Web 功能。 [GDPR](xref:security/gdpr) 需要使用 HTTPS 來保護使用者隱私。 雖然在生產環境中使用 HTTPS 非常重要，但在開發中使用 HTTPS 有助於避免發生部署問題 (例如不安全的連結)。 ASP.NET Core 2.1 包含多項改善，讓您更容易在開發中使用 HTTPS，以及在生產環境中設定 HTTPS。 如需詳細資訊，請參閱[強制使用 HTTPS](xref:security/enforcing-ssl)。
 
 ### <a name="on-by-default"></a>依預設開啟
 
@@ -91,7 +92,7 @@ ASP.NET Core 提供 API 和範本以利符合某些 [EU General Data Protection 
 
 引進新套件簡化測試的建立和執行。 [Microsoft.AspNetCore.Mvc.Testing](https://www.nuget.org/packages/Microsoft.AspNetCore.Mvc.Testing/) 套件處理下列工作：
 
-* 從測試的應用程式將相依性檔案 (* \* .deps.json*) 複製到測試專案的*bin*資料夾中。
+* 從已測試的應用程式將相依性檔案 (* \* d*) 複製到測試專案的*bin*資料夾中。
 * 將內容的根目錄設定為經過測試之應用程式的專案根目錄，以便在執行測試時找到靜態檔案和頁面/檢視。
 * 提供 [WebApplicationFactory](/dotnet/api/microsoft.aspnetcore.mvc.testing.webapplicationfactory-1) 類別來簡化以 [TestServer](/dotnet/api/microsoft.aspnetcore.testhost.testserver) 啟動載入經過測試的應用程式。
 
@@ -161,17 +162,17 @@ Angular 範本以 Angular CLI 為基礎，React 範本以 create-react-app 為�
 * <xref:spa/react>
 * <xref:spa/react-with-redux>
 
-## <a name="no-locrazor-pages-search-for-no-locrazor-assets"></a>Razor頁面搜尋 Razor 資產
+## <a name="no-locrazor-pages-search-for-no-locrazor-assets"></a>Razor 頁面搜尋 Razor 資產
 
-在2.1 中，頁面會依 Razor Razor 列出的順序在下列目錄中搜尋資產 (例如版面配置和部分) ：
+在2.1 中，頁面會依列出的順序，在 Razor Razor 下列目錄中搜尋資產 (例如版面配置和部分) ：
 
 1. 目前的 Pages 資料夾。
 1. */Pages/Shared/*
 1. */Views/Shared/*
 
-## <a name="no-locrazor-pages-in-an-area"></a>Razor區域中的頁面
+## <a name="no-locrazor-pages-in-an-area"></a>Razor 區域中的頁面
 
-Razor頁面現在支援[區域](xref:mvc/controllers/areas)。 若要查看區域的範例，請 Razor 使用個別使用者帳戶建立新的頁面 web 應用程式。 Razor具有個別使用者帳戶的頁面 web 應用程式包含 */Areas/ Identity /Pages*。
+Razor 頁面現在支援 [區域](xref:mvc/controllers/areas)。 若要查看區域範例，請 Razor 使用個別的使用者帳戶建立新的頁面 web 應用程式。 Razor具有個別使用者帳戶的頁面 web 應用程式包含 */Areas/ Identity /Pages*。
 
 ## <a name="mvc-compatibility-version"></a>MVC 相容性版本
 

@@ -1,10 +1,11 @@
 ---
-title: 第6部分，將搜尋新增至 ASP.NET Core Razor 頁面
+title: 第6部分：將搜尋新增至 ASP.NET Core Razor 頁面
 author: rick-anderson
 description: 頁面上教學課程系列的第6部分 Razor 。
 ms.author: riande
 ms.date: 12/05/2019
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -15,14 +16,14 @@ no-loc:
 - Razor
 - SignalR
 uid: tutorials/razor-pages/search
-ms.openlocfilehash: b28d228449549e1071df4100ee2d52626c50845b
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: 5e899929372697f7a381cd493655309fa3f70f79
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88021636"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88633847"
 ---
-# <a name="part-6-add-search-to-aspnet-core-no-locrazor-pages"></a>第6部分，將搜尋新增至 ASP.NET Core Razor 頁面
+# <a name="part-6-add-search-to-aspnet-core-no-locrazor-pages"></a>第6部分：將搜尋新增至 ASP.NET Core Razor 頁面
 
 作者：[Rick Anderson](https://twitter.com/RickAndMSFT)
 
@@ -36,7 +37,7 @@ ms.locfileid: "88021636"
 
 [!code-csharp[](razor-pages-start/sample/RazorPagesMovie30/Pages/Movies/Index.cshtml.cs?name=snippet_newProps&highlight=11-999)]
 
-* `SearchString`：包含使用者在搜尋文字方塊中輸入的文字。 `SearchString`具有 [`[BindProperty]`](/dotnet/api/microsoft.aspnetcore.mvc.bindpropertyattribute) 屬性。 `[BindProperty]` 使用與屬性相同的名稱來繫結表單值和查詢字串。 需要 `(SupportsGet = true)` 才能在 GET 要求上進行繫結。
+* `SearchString`：包含使用者在搜尋文字方塊中輸入的文字。 `SearchString` 具有 [`[BindProperty]`](/dotnet/api/microsoft.aspnetcore.mvc.bindpropertyattribute) 屬性。 `[BindProperty]` 使用與屬性相同的名稱來繫結表單值和查詢字串。 需要 `(SupportsGet = true)` 才能在 GET 要求上進行繫結。
 * `Genres`：包含內容類型清單。 `Genres` 可讓使用者從清單中選取內容類型。 `SelectList` 需要 `using Microsoft.AspNetCore.Mvc.Rendering;`
 * `MovieGenre`：包含使用者所選取的特定內容類型 (例如「西部片」)。
 * 稍後在本教學課程中將會使用 `Genres` 和 `MovieGenre`。
@@ -139,7 +140,7 @@ HTML `<form>` 標籤會使用下列[標籤協助程式](xref:mvc/views/tag-helpe
 
 [!code-csharp[](razor-pages-start/sample/RazorPagesMovie22/Pages/Movies/Index.cshtml.cs?name=snippet_newProps&highlight=11-999)]
 
-* `SearchString`：包含使用者在搜尋文字方塊中輸入的文字。 `SearchString`具有 [`[BindProperty]`](/dotnet/api/microsoft.aspnetcore.mvc.bindpropertyattribute) 屬性。 `[BindProperty]` 使用與屬性相同的名稱來繫結表單值和查詢字串。 需要 `(SupportsGet = true)` 才能在 GET 要求上進行繫結。
+* `SearchString`：包含使用者在搜尋文字方塊中輸入的文字。 `SearchString` 具有 [`[BindProperty]`](/dotnet/api/microsoft.aspnetcore.mvc.bindpropertyattribute) 屬性。 `[BindProperty]` 使用與屬性相同的名稱來繫結表單值和查詢字串。 需要 `(SupportsGet = true)` 才能在 GET 要求上進行繫結。
 * `Genres`：包含內容類型清單。 `Genres` 可讓使用者從清單中選取內容類型。 `SelectList` 需要 `using Microsoft.AspNetCore.Mvc.Rendering;`
 * `MovieGenre`：包含使用者所選取的特定內容類型 (例如「西部片」)。
 * 稍後在本教學課程中將會使用 `Genres` 和 `MovieGenre`。
@@ -220,7 +221,7 @@ HTML `<form>` 標籤會使用下列[標籤協助程式](xref:mvc/views/tag-helpe
 [!code-cshtml[](razor-pages-start/sample/RazorPagesMovie22/Pages/Movies/IndexFormGenreNoRating.cshtml?highlight=16-18&range=1-26)]
 
 依據內容類型、電影標題和這兩者進行搜尋，藉以測試應用程式。
-上述程式碼會使用[Select 標記](xref:mvc/views/working-with-forms#the-select-tag-helper)協助程式和選項標籤協助程式。
+上述程式碼使用 [選取標記](xref:mvc/views/working-with-forms#the-select-tag-helper) 協助程式和選項標記協助程式。
 
 ## <a name="additional-resources"></a>其他資源
 

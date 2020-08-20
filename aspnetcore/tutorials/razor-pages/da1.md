@@ -1,10 +1,11 @@
 ---
-title: 第5部分，更新 ASP.NET Core 應用程式中產生的頁面
+title: 第5部分：在 ASP.NET Core 應用程式中更新產生的頁面
 author: rick-anderson
 description: 頁面上教學課程系列的第5部分 Razor 。
 ms.author: riande
 ms.date: 12/20/2018
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -15,14 +16,14 @@ no-loc:
 - Razor
 - SignalR
 uid: tutorials/razor-pages/da1
-ms.openlocfilehash: d8f1a256bfa3491ff1cc7f38a23c61beb719bd49
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: 04479e5c3a0b1e9badbb4e58043cf059beefb4ab
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88022091"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88632794"
 ---
-# <a name="part-5-update-the-generated-pages-in-an-aspnet-core-app"></a>第5部分，更新 ASP.NET Core 應用程式中產生的頁面
+# <a name="part-5-update-the-generated-pages-in-an-aspnet-core-app"></a>第5部分：在 ASP.NET Core 應用程式中更新產生的頁面
 
 作者：[Rick Anderson](https://twitter.com/RickAndMSFT)
 
@@ -50,7 +51,7 @@ Scaffolded 電影應用程式是一個不錯的起點，但其呈現效果卻不
 
 [!code-cshtml[](~/tutorials/razor-pages/razor-pages-start/snapshot_sample/RazorPagesMovie/Pages/Movies/Index.cshtml?highlight=16-18&range=32-)]
 
-[標記](xref:mvc/views/tag-helpers/intro)協助程式可讓伺服器端程式碼參與建立和轉譯檔案中的 HTML 元素 Razor 。 在上述程式碼中， `AnchorTagHelper` `href` 會從頁面動態產生 HTML 屬性值 Razor ， (路由是相對) 、 `asp-page` 和路由識別碼 (`asp-route-id`) 。 如需詳細資訊，請參閱[頁面的 URL 產生](xref:razor-pages/index#url-generation-for-pages)。
+[標記](xref:mvc/views/tag-helpers/intro) 協助程式可讓伺服器端程式碼參與建立和轉譯檔案中的 HTML 元素 Razor 。 在上述程式碼中， `AnchorTagHelper` 會以動態方式 `href` 從頁面產生 HTML 屬性值 Razor (路由是相對) 、 `asp-page` 和路由識別碼 (`asp-route-id`) 。 如需詳細資訊，請參閱[頁面的 URL 產生](xref:razor-pages/index#url-generation-for-pages)。
 
 從您最愛的瀏覽器中使用 [檢視原始檔]**** 來檢查產生的標記。 產生的 HTML 部分如下所示：
 
@@ -66,7 +67,7 @@ Scaffolded 電影應用程式是一個不錯的起點，但其呈現效果卻不
 
 ### <a name="add-route-template"></a>新增路由範本
 
-更新 [編輯]、[詳細資料] 和 [刪除 Razor ] 頁面，以使用 "{id： int}" 路由範本。 將這些頁面每一頁的頁面指示詞從 `@page` 變更為 `@page "{id:int}"`。 執行應用程式，然後檢視原始檔。 產生的 HTML 將識別碼新增至 URL 的路徑部分：
+更新 [編輯]、[詳細資料] 和 [刪除] Razor 頁面，以使用 "{id： int}" 路由範本。 將這些頁面每一頁的頁面指示詞從 `@page` 變更為 `@page "{id:int}"`。 執行應用程式，然後檢視原始檔。 產生的 HTML 將識別碼新增至 URL 的路徑部分：
 
 ```html
 <td>
@@ -116,7 +117,7 @@ Scaffolded 電影應用程式是一個不錯的起點，但其呈現效果卻不
 對 Movies/Edit 頁面提出 HTTP GET 要求時 (例如，`http://localhost:5000/Movies/Edit/2`)：
 
 * `OnGetAsync` 方法會從資料庫擷取電影，並傳回 `Page` 方法。
-* `Page`方法會呈現*Pages/電影/編輯. cshtml* Razor 頁面。 *Pages/Movies/Edit.cshtml* 檔案包含模型指示詞 (`@model RazorPagesMovie.Pages.Movies.EditModel`)，這會讓電影模型可以在頁面上使用。
+* 方法會轉譯 `Page` *頁面/電影/編輯的 cshtml* Razor 頁面。 *Pages/Movies/Edit.cshtml* 檔案包含模型指示詞 (`@model RazorPagesMovie.Pages.Movies.EditModel`)，這會讓電影模型可以在頁面上使用。
 * Edit 表單會顯示來自電影的值。
 
 發佈 Movies/Edit 頁面時：
@@ -131,7 +132,7 @@ Scaffolded 電影應用程式是一個不錯的起點，但其呈現效果卻不
 * 如果模型狀態中有錯誤 (例如 `ReleaseDate` 無法轉換為日期)，則會以提交的值重新顯示表單。
 * 如果沒有任何模型錯誤，則會儲存電影。
 
-[索引]、[建立] 和 [刪除] 頁面中的 HTTP GET 方法會 Razor 遵循類似的模式。 [建立] 頁面中的 HTTP POST 方法，會 `OnPostAsync` Razor 遵循 `OnPostAsync` [編輯] 頁面中方法的類似模式 Razor 。
+[索引]、[建立] 和 [刪除] 頁面中的 HTTP GET 方法會 Razor 遵循類似的模式。 在 [建立] 頁面中的 HTTP POST 方法，會 `OnPostAsync` Razor 遵循 `OnPostAsync` [編輯] 頁面中方法的類似模式 Razor 。
 
 ## <a name="additional-resources"></a>其他資源
 
@@ -165,7 +166,7 @@ Scaffolded 電影應用程式是一個不錯的起點，但其呈現效果卻不
 
 [!code-cshtml[](~/tutorials/razor-pages/razor-pages-start/snapshot_sample/RazorPagesMovie/Pages/Movies/Index.cshtml?highlight=16-18&range=32-)]
 
-[標記](xref:mvc/views/tag-helpers/intro)協助程式可讓伺服器端程式碼參與建立和轉譯檔案中的 HTML 元素 Razor 。 在上述程式碼中， `AnchorTagHelper` `href` 會從頁面動態產生 HTML 屬性值 Razor ， (路由是相對) 、 `asp-page` 和路由識別碼 (`asp-route-id`) 。 如需詳細資訊，請參閱[頁面的 URL 產生](xref:razor-pages/index#url-generation-for-pages)。
+[標記](xref:mvc/views/tag-helpers/intro) 協助程式可讓伺服器端程式碼參與建立和轉譯檔案中的 HTML 元素 Razor 。 在上述程式碼中， `AnchorTagHelper` 會以動態方式 `href` 從頁面產生 HTML 屬性值 Razor (路由是相對) 、 `asp-page` 和路由識別碼 (`asp-route-id`) 。 如需詳細資訊，請參閱[頁面的 URL 產生](xref:razor-pages/index#url-generation-for-pages)。
 
 從您最愛的瀏覽器中使用 [檢視原始檔]**** 來檢查產生的標記。 產生的 HTML 部分如下所示：
 
@@ -179,7 +180,7 @@ Scaffolded 電影應用程式是一個不錯的起點，但其呈現效果卻不
 
 動態產生的連結會傳遞含有查詢字串的電影識別碼 (例如 `https://localhost:5001/Movies/Details?id=1` 中的 `?id=1`)。
 
-更新 [編輯]、[詳細資料] 和 [刪除 Razor ] 頁面，以使用 "{id： int}" 路由範本。 將這些頁面每一頁的頁面指示詞從 `@page` 變更為 `@page "{id:int}"`。 執行應用程式，然後檢視原始檔。 產生的 HTML 將識別碼新增至 URL 的路徑部分：
+更新 [編輯]、[詳細資料] 和 [刪除] Razor 頁面，以使用 "{id： int}" 路由範本。 將這些頁面每一頁的頁面指示詞從 `@page` 變更為 `@page "{id:int}"`。 執行應用程式，然後檢視原始檔。 產生的 HTML 將識別碼新增至 URL 的路徑部分：
 
 ```html
 <td>
@@ -229,7 +230,7 @@ Scaffolded 電影應用程式是一個不錯的起點，但其呈現效果卻不
 對 Movies/Edit 頁面提出 HTTP GET 要求時 (例如，`http://localhost:5000/Movies/Edit/2`)：
 
 * `OnGetAsync` 方法會從資料庫擷取電影，並傳回 `Page` 方法。 
-* `Page`方法會呈現*Pages/電影/編輯. cshtml* Razor 頁面。 *Pages/Movies/Edit.cshtml* 檔案包含模型指示詞 (`@model RazorPagesMovie.Pages.Movies.EditModel`)，這會讓電影模型可以在頁面上使用。
+* 方法會轉譯 `Page` *頁面/電影/編輯的 cshtml* Razor 頁面。 *Pages/Movies/Edit.cshtml* 檔案包含模型指示詞 (`@model RazorPagesMovie.Pages.Movies.EditModel`)，這會讓電影模型可以在頁面上使用。
 * Edit 表單會顯示來自電影的值。
 
 發佈 Movies/Edit 頁面時：
@@ -244,7 +245,7 @@ Scaffolded 電影應用程式是一個不錯的起點，但其呈現效果卻不
 * 如果模型狀態中有錯誤 (例如 `ReleaseDate` 無法轉換為日期)，則會以提交的值顯示表單。
 * 如果沒有任何模型錯誤，則會儲存電影。
 
-[索引]、[建立] 和 [刪除] 頁面中的 HTTP GET 方法會 Razor 遵循類似的模式。 [建立] 頁面中的 HTTP POST 方法，會 `OnPostAsync` Razor 遵循 `OnPostAsync` [編輯] 頁面中方法的類似模式 Razor 。
+[索引]、[建立] 和 [刪除] 頁面中的 HTTP GET 方法會 Razor 遵循類似的模式。 在 [建立] 頁面中的 HTTP POST 方法，會 `OnPostAsync` Razor 遵循 `OnPostAsync` [編輯] 頁面中方法的類似模式 Razor 。
 
 搜尋會在接下來的教學課程中新增。
 

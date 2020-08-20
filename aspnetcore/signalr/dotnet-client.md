@@ -7,6 +7,7 @@ ms.author: bradyg
 ms.custom: mvc
 ms.date: 01/14/2020
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -17,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: signalr/dotnet-client
-ms.openlocfilehash: e27748e8267a931390f831119a3fd1d45e87745a
-ms.sourcegitcommit: dfea24471f4f3d7904faa92fe60c000853bddc3b
+ms.openlocfilehash: f56beb634689b42aec3fe193c389e52de746c92a
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 08/18/2020
-ms.locfileid: "88504732"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88634003"
 ---
 # <a name="aspnet-core-no-locsignalr-net-client"></a>ASP.NET Core SignalR .Net 用戶端
 
@@ -266,7 +267,7 @@ connection.Closed += (error) => {
 
 ## <a name="additional-resources"></a>其他資源
 
-* [中樞](xref:signalr/hubs)
+* [集線器](xref:signalr/hubs)
 * [JavaScript 用戶端](xref:signalr/javascript-client)
 * [發佈至 Azure](xref:signalr/publish-to-azure-web-app)
 * [Azure SignalR 服務無伺服器檔](/azure/azure-signalr/signalr-concept-serverless-development-config)

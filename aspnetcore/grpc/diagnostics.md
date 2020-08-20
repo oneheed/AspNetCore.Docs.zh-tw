@@ -1,11 +1,12 @@
 ---
-title: .NET 上 gRPC 中的記錄和診斷
+title: 在 .NET 上 gRPC 中的記錄和診斷
 author: jamesnk
-description: 瞭解如何從 .NET 上的 gRPC 應用程式收集診斷。
+description: 瞭解如何從 .NET 上的 gRPC 應用程式收集診斷資訊。
 monikerRange: '>= aspnetcore-3.0'
 ms.author: jamesnk
 ms.date: 09/23/2019
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -16,49 +17,49 @@ no-loc:
 - Razor
 - SignalR
 uid: grpc/diagnostics
-ms.openlocfilehash: bf8068375da81288f2fbfa2c1bfafe97c03c70fc
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: 5c4c05e74a8223db3ade03b067bd66921439c99f
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88016176"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88633262"
 ---
-# <a name="logging-and-diagnostics-in-grpc-on-net"></a>.NET 上 gRPC 中的記錄和診斷
+# <a name="logging-and-diagnostics-in-grpc-on-net"></a>在 .NET 上 gRPC 中的記錄和診斷
 
-依[James 牛頓-王](https://twitter.com/jamesnk)
+依 [James 牛頓](https://twitter.com/jamesnk)
 
-本文提供從 gRPC 應用程式收集診斷，以協助疑難排解問題的指引。 涵蓋的主題包括：
+本文提供從 gRPC 應用程式收集診斷資訊，以協助疑難排解問題的指引。 涵蓋的主題包括：
 
-* **記錄**-寫入[.net Core 記錄](xref:fundamentals/logging/index)的結構化記錄。 <xref:Microsoft.Extensions.Logging.ILogger>應用程式架構會使用來寫入記錄，並由使用者在應用程式中進行自己的記錄。
-* **追蹤**-與使用和撰寫之作業相關的事件 `DiaganosticSource` `Activity` 。 診斷來源的追蹤通常用來根據程式庫（例如[Application Insights](https://docs.microsoft.com/azure/azure-monitor/app/asp-net-core)和[OpenTelemetry](https://github.com/open-telemetry/opentelemetry-dotnet)）收集應用程式遙測。
-* **計量**-依時間間隔表示的資料量值，例如每秒要求數。 計量是使用發出 `EventCounter` ，而且可以使用[dotnet-計數器](https://docs.microsoft.com/dotnet/core/diagnostics/dotnet-counters)命令列工具或[Application Insights](https://docs.microsoft.com/azure/azure-monitor/app/eventcounters)來觀察。
+* **記錄** -寫入 [.net Core 記錄](xref:fundamentals/logging/index)的結構化記錄。 <xref:Microsoft.Extensions.Logging.ILogger> 應用程式架構會使用它來寫入記錄，以及讓使用者在應用程式中進行自己的記錄。
+* **追蹤** -與使用和撰寫之作業相關的事件 `DiaganosticSource` `Activity` 。 診斷來源的追蹤通常用來依程式庫（例如 [Application Insights](https://docs.microsoft.com/azure/azure-monitor/app/asp-net-core) 和 [OpenTelemetry](https://github.com/open-telemetry/opentelemetry-dotnet)）收集應用程式遙測。
+* **計量** -依時間間隔表示的資料量值，例如每秒要求數。 計量是使用發出的 `EventCounter` ，可使用 [dotnet 計數器](https://docs.microsoft.com/dotnet/core/diagnostics/dotnet-counters) 命令列工具或 [Application Insights](https://docs.microsoft.com/azure/azure-monitor/app/eventcounters)來觀察。
 
 ## <a name="logging"></a>記錄
 
-gRPC services 和 gRPC 用戶端會使用[.Net Core 記錄](xref:fundamentals/logging/index)來寫入記錄。 當您需要在應用程式中偵測到非預期的行為時，記錄是很好的起點。
+gRPC services 和 gRPC 用戶端會使用 [.Net Core 記錄](xref:fundamentals/logging/index)來寫入記錄。 當您需要在應用程式中偵測非預期的行為時，記錄是很好的開始位置。
 
 ### <a name="grpc-services-logging"></a>gRPC services 記錄
 
 > [!WARNING]
-> 伺服器端記錄可能包含來自您應用程式的機密資訊。 **絕對不要**將未經處理的記錄從生產應用程式張貼到 GitHub 之類的公用論壇。
+> 伺服器端記錄檔可能包含來自您應用程式的機密資訊。 **切勿** 將未經處理的記錄從生產環境應用程式張貼到 GitHub 之類的公用論壇。
 
-因為 gRPC 服務是在 ASP.NET Core 上主控，所以它會使用 ASP.NET Core 記錄系統。 在預設設定中，gRPC 會記錄非常少的資訊，但這可加以設定。 如需設定 ASP.NET Core 記錄的詳細資訊，請參閱有關[ASP.NET Core 記錄](xref:fundamentals/logging/index#configuration)的檔。
+由於 gRPC 服務是裝載在 ASP.NET Core 上，因此會使用 ASP.NET Core 記錄系統。 在預設設定中，gRPC 會記錄極少的資訊，但這可以設定。 如需有關設定 ASP.NET Core 記錄的詳細資訊，請參閱 [ASP.NET Core 記錄](xref:fundamentals/logging/index#configuration) 檔。
 
-gRPC 會將記錄新增至 `Grpc` 類別之下。 若要啟用 gRPC 的詳細記錄，請 `Grpc` `Debug` 將下列專案新增至中*appsettings.json*的 `LogLevel` 子區段，以在檔案的appsettings.js中設定層級的首碼 `Logging` ：
+gRPC 會在類別下新增記錄 `Grpc` 。 若要啟用 gRPC 的詳細記錄，請 `Grpc` `Debug` 將下列專案新增至中的子區段，以將前置詞設定為檔案 *appsettings.js* 中的層級 `LogLevel` `Logging` ：
 
 [!code-json[](diagnostics/sample/logging-config.json?highlight=7)]
 
-您也可以在*Startup.cs*中使用來設定此項 `ConfigureLogging` ：
+您也可以在 *Startup.cs* 中使用下列方式進行設定 `ConfigureLogging` ：
 
 [!code-csharp[](diagnostics/sample/logging-config-code.cs?highlight=5)]
 
-如果您不是使用以 JSON 為基礎的設定，請在您的配置系統中設定下列設定值：
+如果您未使用以 JSON 為基礎的設定，請在設定系統中設定下列設定值：
 
 * `Logging:LogLevel:Grpc` = `Debug`
 
-請查看設定系統的檔，以判斷如何指定嵌套的設定值。 例如，使用環境變數時， `_` 會使用兩個字元，而不是 `:` (，例如 `Logging__LogLevel__Grpc`) 。
+請檢查設定系統的檔，以判斷如何指定嵌套設定值。 例如，使用環境變數時， `_` 會使用兩個字元，而不是 `:` (例如 `Logging__LogLevel__Grpc`) 。
 
-`Debug`針對您的應用程式收集更詳細的診斷資訊時，我們建議使用此層級。 `Trace`層級會產生非常低層級的診斷，而且很少需要診斷應用程式中的問題。
+`Debug`針對您的應用程式收集更詳細的診斷時，建議使用此層級。 `Trace`層級會產生非常低層級的診斷，而且很少需要診斷您應用程式中的問題。
 
 #### <a name="sample-logging-output"></a>範例記錄輸出
 
@@ -83,36 +84,36 @@ info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
 
 ### <a name="access-server-side-logs"></a>存取伺服器端記錄
 
-您存取伺服器端記錄的方式，取決於您執行的環境。
+您存取伺服器端記錄的方式取決於您執行的環境。
 
 #### <a name="as-a-console-app"></a>作為主控台應用程式
 
-如果您是在主控台應用程式中執行，預設應該啟用[主控台記錄器](xref:fundamentals/logging/index#console)。 gRPC 記錄將會出現在主控台中。
+如果您是在主控台應用程式中執行，則預設應啟用 [主控台記錄器](xref:fundamentals/logging/index#console) 。 gRPC 記錄將會出現在主控台中。
 
 #### <a name="other-environments"></a>其他環境
 
-如果應用程式部署到另一個環境 (例如 Docker、Kubernetes 或 Windows 服務) ，請參閱， <xref:fundamentals/logging/index> 以取得有關如何設定適用于環境之記錄提供者的詳細資訊。
+如果應用程式部署到另一個環境 (例如 Docker、Kubernetes 或 Windows 服務) ，請參閱， <xref:fundamentals/logging/index> 以取得如何設定適用于環境的記錄提供者的詳細資訊。
 
 ### <a name="grpc-client-logging"></a>gRPC 用戶端記錄
 
 > [!WARNING]
-> 用戶端記錄可能包含來自您應用程式的機密資訊。 **絕對不要**將未經處理的記錄從生產應用程式張貼到 GitHub 之類的公用論壇。
+> 用戶端記錄可能包含來自您應用程式的機密資訊。 **切勿** 將未經處理的記錄從生產環境應用程式張貼到 GitHub 之類的公用論壇。
 
-若要從 .NET 用戶端取得記錄，您可以在建立 `GrpcChannelOptions.LoggerFactory` 用戶端通道時設定屬性。 如果您是從 ASP.NET Core 應用程式呼叫 gRPC 服務，則可以從 (DI) 的相依性插入來解析記錄器 factory：
+若要從 .NET 用戶端取得記錄，您可以 `GrpcChannelOptions.LoggerFactory` 在建立用戶端通道時設定屬性。 如果您是從 ASP.NET Core 應用程式呼叫 gRPC 服務，則可以從 (DI) 的相依性插入來解析記錄器 factory：
 
 [!code-csharp[](diagnostics/sample/net-client-dependency-injection.cs?highlight=7,16)]
 
-啟用用戶端記錄的另一種方式是使用[gRPC 用戶端 factory](xref:grpc/clientfactory)來建立用戶端。 向用戶端 factory 註冊並從 DI 解析的 gRPC 用戶端，會自動使用應用程式設定的記錄。
+啟用用戶端記錄的替代方式是使用 [gRPC 用戶端 factory](xref:grpc/clientfactory) 來建立用戶端。 向用戶端處理站註冊並從 DI 解析的 gRPC 用戶端會自動使用應用程式設定的記錄。
 
-如果您的應用程式未使用 DI，則您可以使用 Server.loggerfactory 建立新的 `ILoggerFactory` 實例[LoggerFactory.Create](xref:Microsoft.Extensions.Logging.LoggerFactory.Create*)。 若要存取此方法，請在您的應用程式中新增[Microsoft Extensions. 記錄](https://www.nuget.org/packages/microsoft.extensions.logging/)套件。
+如果您的應用程式不使用 DI，則可以 `ILoggerFactory` 使用 [server.loggerfactory](xref:Microsoft.Extensions.Logging.LoggerFactory.Create*)建立新的實例。 若要存取此方法，請將 [Microsoft Extensions. 記錄](https://www.nuget.org/packages/microsoft.extensions.logging/) 套件新增至您的應用程式。
 
 [!code-csharp[](diagnostics/sample/net-client-loggerfactory-create.cs?highlight=1,8)]
 
 #### <a name="grpc-client-log-scopes"></a>gRPC 用戶端記錄範圍
 
-GRPC 用戶端會將[記錄範圍](https://docs.microsoft.com/aspnet/core/fundamentals/logging#log-scopes)新增至 gRPC 呼叫期間所進行的記錄。 範圍具有與 gRPC 呼叫相關的中繼資料：
+GRPC 用戶端會將 [記錄範圍](https://docs.microsoft.com/aspnet/core/fundamentals/logging#log-scopes) 新增至在 gRPC 呼叫期間進行的記錄。 此範圍具有與 gRPC 呼叫相關的中繼資料：
 
-* **GrpcMethodType** -gRPC 方法類型。 可能的值是來自 `Grpc.Core.MethodType` 列舉的名稱，例如一元
+* **GrpcMethodType** -gRPC 方法類型。 可能的值是列舉的名稱 `Grpc.Core.MethodType` ，例如一元
 * **GrpcUri** -gRPC 方法的相對 URI，例如/greet。Greeter/SayHellos
 
 #### <a name="sample-logging-output"></a>範例記錄輸出
@@ -132,77 +133,77 @@ dbug: Grpc.Net.Client.Internal.GrpcCall[4]
 
 ## <a name="tracing"></a>追蹤
 
-gRPC services 和 gRPC 用戶端會使用[DiagnosticSource](https://docs.microsoft.com/dotnet/api/system.diagnostics.diagnosticsource)和[Activity](https://docs.microsoft.com/dotnet/api/system.diagnostics.activity)提供 gRPC 呼叫的相關資訊。
+gRPC services 和 gRPC 用戶端會提供使用 [DiagnosticSource](https://docs.microsoft.com/dotnet/api/system.diagnostics.diagnosticsource) 和 [活動](https://docs.microsoft.com/dotnet/api/system.diagnostics.activity)進行 gRPC 呼叫的相關資訊。
 
-* .NET gRPC 會使用活動來代表 gRPC 呼叫。
+* .NET gRPC 會使用活動來代表 gRPC 的呼叫。
 * 追蹤事件會在 gRPC 呼叫活動開始和停止時寫入診斷來源。
-* 追蹤不會捕捉在 gRPC 串流呼叫的存留期間傳送訊息的相關資訊。
+* 追蹤不會在 gRPC 串流呼叫的存留期傳送訊息時，捕捉相關資訊。
 
 ### <a name="grpc-service-tracing"></a>gRPC 服務追蹤
 
-gRPC 服務裝載于 ASP.NET Core，其會報告傳入 HTTP 要求的相關事件。 gRPC 特定的中繼資料會新增至 ASP.NET Core 提供的現有 HTTP 要求診斷。
+gRPC 服務裝載于 ASP.NET Core，可報告傳入 HTTP 要求的相關事件。 gRPC 特定的中繼資料會新增至 ASP.NET Core 提供的現有 HTTP 要求診斷。
 
-* 診斷來源名稱是 `Microsoft.AspNetCore` 。
+* 診斷來源名稱為 `Microsoft.AspNetCore` 。
 * 活動名稱為 `Microsoft.AspNetCore.Hosting.HttpRequestIn` 。
-  * GRPC 呼叫所叫用之 gRPC 方法的名稱會新增為名稱為的標記 `grpc.method` 。
-  * GRPC 呼叫完成時的狀態碼會新增為名稱為的標記 `grpc.status_code` 。
+  * GRPC 呼叫所叫用之 gRPC 方法的名稱會加入為具有名稱的標記 `grpc.method` 。
+  * GRPC 呼叫完成時的狀態碼會新增為具有名稱的標記 `grpc.status_code` 。
 
 ### <a name="grpc-client-tracing"></a>gRPC 用戶端追蹤
 
-.NET gRPC 用戶端會使用 `HttpClient` 來進行 gRPC 呼叫。 雖然會 `HttpClient` 寫入診斷事件，但 .Net gRPC 用戶端會提供自訂診斷來源、活動和事件，以便收集有關 gRPC 呼叫的完整資訊。
+.NET gRPC 用戶端會使用 `HttpClient` 來進行 gRPC 呼叫。 雖然 `HttpClient` 會寫入診斷事件，但是 .Net gRPC 用戶端會提供自訂的診斷來源、活動和事件，以便收集 gRPC 呼叫的完整資訊。
 
-* 診斷來源名稱是 `Grpc.Net.Client` 。
+* 診斷來源名稱為 `Grpc.Net.Client` 。
 * 活動名稱為 `Grpc.Net.Client.GrpcOut` 。
-  * GRPC 呼叫所叫用之 gRPC 方法的名稱會新增為名稱為的標記 `grpc.method` 。
-  * GRPC 呼叫完成時的狀態碼會新增為名稱為的標記 `grpc.status_code` 。
+  * GRPC 呼叫所叫用之 gRPC 方法的名稱會加入為具有名稱的標記 `grpc.method` 。
+  * GRPC 呼叫完成時的狀態碼會新增為具有名稱的標記 `grpc.status_code` 。
 
 ### <a name="collecting-tracing"></a>收集追蹤
 
-最簡單的使用方式 `DiagnosticSource` 是在您的應用程式中設定遙測程式庫（例如[Application Insights](https://docs.microsoft.com/azure/azure-monitor/app/asp-net-core)或[OpenTelemetry](https://github.com/open-telemetry/opentelemetry-dotnet) ）。 程式庫會處理有關 gRPC 呼叫的資訊，以及其他應用程式遙測。
+最簡單的使用方式 `DiagnosticSource` 是在您的應用程式中設定遙測程式庫（例如 [Application Insights](https://docs.microsoft.com/azure/azure-monitor/app/asp-net-core) 或 [OpenTelemetry](https://github.com/open-telemetry/opentelemetry-dotnet) ）。 此程式庫會處理 gRPC 呼叫的相關資訊，以及其他應用程式遙測。
 
-追蹤可以在 Application Insights 之類的受控服務中查看，或者您也可以選擇執行自己的分散式追蹤系統。 OpenTelemetry 支援將追蹤資料匯出至[Jaeger](https://www.jaegertracing.io/)和[Zipkin](https://zipkin.io/)。
+您可以在受管理的服務（例如 Application Insights）中查看追蹤，也可以選擇執行您自己的分散式追蹤系統。 OpenTelemetry 支援將追蹤資料匯出至 [Jaeger](https://www.jaegertracing.io/) 和 [Zipkin](https://zipkin.io/)。
 
-`DiagnosticSource`可以使用程式碼中的追蹤事件 `DiagnosticListener` 。 如需以程式碼接聽診斷來源的相關資訊，請參閱[DiagnosticSource 使用者指南](https://github.com/dotnet/corefx/blob/d3942d4671919edb0cca6ddc1840190f524a809d/src/System.Diagnostics.DiagnosticSource/src/DiagnosticSourceUsersGuide.md#consuming-data-with-diagnosticlistener)。
+`DiagnosticSource` 可以使用程式碼中的追蹤事件 `DiagnosticListener` 。 如需有關使用程式碼接聽診斷來源的詳細資訊，請參閱 [DiagnosticSource 使用者手冊](https://github.com/dotnet/corefx/blob/d3942d4671919edb0cca6ddc1840190f524a809d/src/System.Diagnostics.DiagnosticSource/src/DiagnosticSourceUsersGuide.md#consuming-data-with-diagnosticlistener)。
 
 > [!NOTE]
-> 遙測程式庫目前不會捕捉 gRPC 特有 `Grpc.Net.Client.GrpcOut` 的遙測。 改善遙測程式庫的工作正在進行追蹤。
+> 遙測程式庫目前不會捕獲 gRPC 特定 `Grpc.Net.Client.GrpcOut` 的遙測。 改善遙測程式庫的工作正在進行中。
 
 ## <a name="metrics"></a>計量
 
-計量是以時間間隔表示的資料量值，例如每秒要求數。 計量資料可讓您觀察高階應用程式的狀態。 .NET gRPC 計量是使用發出的 `EventCounter` 。
+計量是在一段時間內的資料量值標記法，例如每秒要求數。 計量資料可讓您在高階層級觀察應用程式的狀態。 .NET gRPC 計量是使用發出的 `EventCounter` 。
 
 ### <a name="grpc-service-metrics"></a>gRPC 服務計量
 
-事件來源上會回報 gRPC 伺服器計量 `Grpc.AspNetCore.Server` 。
+系統會報告事件來源的 gRPC 伺服器度量 `Grpc.AspNetCore.Server` 。
 
 | 名稱                      | 描述                   |
 | --------------------------|-------------------------------|
 | `total-calls`             | 呼叫總數                   |
 | `current-calls`           | 目前的呼叫                 |
-| `calls-failed`            | 失敗的總呼叫數            |
-| `calls-deadline-exceeded` | 超過呼叫期限總計 |
+| `calls-failed`            | 呼叫總數失敗            |
+| `calls-deadline-exceeded` | 總呼叫期限超過 |
 | `messages-sent`           | 傳送的郵件總數           |
 | `messages-received`       | 已接收的訊息總數       |
-| `calls-unimplemented`     | 未實現的總呼叫數     |
+| `calls-unimplemented`     | 未實現的呼叫總數     |
 
-ASP.NET Core 也會在事件來源上提供自己的計量 `Microsoft.AspNetCore.Hosting` 。
+ASP.NET Core 也會提供自己的 `Microsoft.AspNetCore.Hosting` 事件來源計量。
 
 ### <a name="grpc-client-metrics"></a>gRPC 用戶端計量
 
-事件來源上會回報 gRPC 用戶端計量 `Grpc.Net.Client` 。
+系統會報告事件來源的 gRPC 用戶端計量 `Grpc.Net.Client` 。
 
 | 名稱                      | 描述                   |
 | --------------------------|-------------------------------|
 | `total-calls`             | 呼叫總數                   |
 | `current-calls`           | 目前的呼叫                 |
-| `calls-failed`            | 失敗的總呼叫數            |
-| `calls-deadline-exceeded` | 超過呼叫期限總計 |
+| `calls-failed`            | 呼叫總數失敗            |
+| `calls-deadline-exceeded` | 總呼叫期限超過 |
 | `messages-sent`           | 傳送的郵件總數           |
 | `messages-received`       | 已接收的訊息總數       |
 
 ### <a name="observe-metrics"></a>觀察計量
 
-[dotnet-計數器](https://docs.microsoft.com/dotnet/core/diagnostics/dotnet-counters)是一種效能監視工具，可用於臨機操作健全狀況監視和第一層效能調查。 使用 `Grpc.AspNetCore.Server` 或 `Grpc.Net.Client` 做為提供者名稱，監視 .net 應用程式。
+[dotnet-計數器](https://docs.microsoft.com/dotnet/core/diagnostics/dotnet-counters) 是一種效能監視工具，適用于臨機操作健全狀況監視和第一層效能調查。 使用 `Grpc.AspNetCore.Server` 或 `Grpc.Net.Client` 作為提供者名稱監視 .net 應用程式。
 
 ```console
 > dotnet-counters monitor --process-id 1902 Grpc.AspNetCore.Server
@@ -219,9 +220,9 @@ Press p to pause, r to resume, q to quit.
     Total Calls Unimplemented                   0
 ```
 
-另一個觀察 gRPC 度量的方式，是使用 Application Insights 的[EventCounterCollector 套件](https://docs.microsoft.com/azure/azure-monitor/app/eventcounters)來捕捉計數器資料。 一旦設定之後，Application Insights 會在執行時間收集一般的 .NET 計數器。 預設不會收集 gRPC 的計數器，但可以自訂 App Insights[以包含額外的計數器](https://docs.microsoft.com/azure/azure-monitor/app/eventcounters#customizing-counters-to-be-collected)。
+另一種觀察 gRPC 計量的方式，就是使用 Application Insights 的 [ApplicationInsights EventCounterCollector 套件](https://docs.microsoft.com/azure/azure-monitor/app/eventcounters)來捕捉計數器資料。 一旦安裝之後，Application Insights 會在執行時間收集常見的 .NET 計數器。 預設不會收集 gRPC 的計數器，但可以自訂 App Insights [以包含額外的計數器](https://docs.microsoft.com/azure/azure-monitor/app/eventcounters#customizing-counters-to-be-collected)。
 
-針對要在*Startup.cs*中收集的應用程式深入解析指定 gRPC 計數器：
+針對要在 *Startup.cs*中收集的應用程式見解指定 gRPC 計數器：
 
 ```csharp
     using Microsoft.ApplicationInsights.Extensibility.EventCounterCollector;

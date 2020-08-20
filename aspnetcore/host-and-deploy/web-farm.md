@@ -7,6 +7,7 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 01/13/2020
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -17,23 +18,23 @@ no-loc:
 - Razor
 - SignalR
 uid: host-and-deploy/web-farm
-ms.openlocfilehash: 58409b5c47d71c96ece6f4ecfab6f18df47f798b
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: 13f1ad5dcd4a230ec05b08c402f4ee9e455c3c29
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88015435"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88634133"
 ---
 # <a name="host-aspnet-core-in-a-web-farm"></a>在 Web 伺服陣列上裝載 ASP.NET Core
 
-依[Chris Ross](https://github.com/Tratcher)
+由 [Chris Ross](https://github.com/Tratcher)
 
 *Web 伺服陣列*是一組兩個或多個 Web 伺服器 (或稱為「節點」**)，用於裝載應用程式的多個執行個體。 當使用者的要求抵達 Web 伺服陣列時，「負載平衡器」** 會將要求分散到 Web 伺服陣列的節點。 Web 伺服陣列改善：
 
 * **可靠性/可用性**：當一或多個節點失敗時，負載平衡器可以將要求路由至其他正常運作的節點，以繼續處理要求。
 * **容量/效能**：多個節點可以處理比單一伺服器更多的要求。 負載平衡器可以將要求分散到節點，藉以平衡工作負載。
-* 擴充**性**：當需要更多或更少的容量時，可以增加或減少作用中節點的數目，以符合工作負載。 Web 伺服陣列的平台技術 (例如 [Azure App Service](https://azure.microsoft.com/services/app-service/)) 可以依系統管理員的要求自動新增或移除節點，也可以在沒有人為介入的情況下自動新增或移除節點。
-* 可**維護性**： web 伺服陣列的節點可以依賴一組共用服務，這會導致系統管理變得更容易。 例如，Web 伺服陣列的節點可以依賴單一資料庫伺服器和靜態資源的通用網路位置，例如影像和可下載檔案。
+* 擴充**性**：需要更多或更少的容量時，可以增加或減少作用中節點的數目以符合工作負載。 Web 伺服陣列的平台技術 (例如 [Azure App Service](https://azure.microsoft.com/services/app-service/)) 可以依系統管理員的要求自動新增或移除節點，也可以在沒有人為介入的情況下自動新增或移除節點。
+* 可**維護性**： web 伺服陣列的節點可以依賴一組共用服務，這會使得系統管理更容易。 例如，Web 伺服陣列的節點可以依賴單一資料庫伺服器和靜態資源的通用網路位置，例如影像和可下載檔案。
 
 本主題針對依賴共用資源的 Web 伺服陣列，說明其中所裝載 ASP.NET Core 應用程式的設定和相依性。
 
@@ -68,12 +69,12 @@ ms.locfileid: "88015435"
 
 下列案例不需要額外的設定，但它們取決於需要 Web 伺服陣列設定的技術。
 
-| 狀況 | 相依於 &hellip; |
+| 案例 | 相依於 &hellip; |
 | -------- | ------------------- |
 | 驗證 | 資料保護 (請參閱 <xref:security/data-protection/configuration/overview>)。<br><br>如需詳細資訊，請參閱 <xref:security/authentication/cookie> 和 <xref:security/cookie-sharing>。 |
 | Identity | 驗證及資料庫設定。<br><br>如需詳細資訊，請參閱<xref:security/authentication/identity>。 |
-| 工作階段 |  (加密的資料保護 cookie)  (參閱 <xref:security/data-protection/configuration/overview>) 和快取 (查看 <xref:performance/caching/distributed>) 。<br><br>如需詳細資訊，請參閱[會話和狀態管理：會話狀態](xref:fundamentals/app-state#session-state)。 |
-| TempData |  (加密的資料保護 cookie)  (參閱 <xref:security/data-protection/configuration/overview>) 或會話 (請參閱[會話和狀態管理：會話狀態](xref:fundamentals/app-state#session-state)) 。<br><br>如需詳細資訊，請參閱[會話和狀態管理： TempData](xref:fundamentals/app-state#tempdata)。 |
+| 工作階段 | 資料保護 (加密 cookie 的)  (查看 <xref:security/data-protection/configuration/overview>) 和快取 (請參閱 <xref:performance/caching/distributed>) 。<br><br>如需詳細資訊，請參閱 [會話和狀態管理：會話狀態](xref:fundamentals/app-state#session-state)。 |
+| TempData |  (加密的資料保護 cookie)  (查看 <xref:security/data-protection/configuration/overview>) 或會話 (查看 [會話和狀態管理：會話狀態](xref:fundamentals/app-state#session-state)) 。<br><br>如需詳細資訊，請參閱 [會話和狀態管理： TempData](xref:fundamentals/app-state#tempdata)。 |
 | 防偽 | 資料保護 (請參閱 <xref:security/data-protection/configuration/overview>)。<br><br>如需詳細資訊，請參閱<xref:security/anti-request-forgery>。 |
 
 ## <a name="troubleshoot"></a>疑難排解
@@ -82,16 +83,16 @@ ms.locfileid: "88015435"
 
 如果未為 Web 伺服陣列環境設定資料保護或快取，則在處理要求時，會發生間歇性的錯誤。 發生這種情況是因為節點不會共用相同的資源，且使用者的要求並不是一律路由傳送回相同的節點。
 
-請考慮使用驗證來登入應用程式的使用者 cookie 。 使用者在某個 Web 伺服陣列節點上登入應用程式。 如果其下一個要求抵達其登入所在的相同節點，應用程式就可以將驗證解密， cookie 並允許存取應用程式的資源。 如果其下一個要求抵達不同的節點，應用程式就無法將驗證 cookie 從使用者登入的節點解密，而所要求資源的授權也會失敗。
+請考慮使用驗證登入應用程式的使用者 cookie 。 使用者在某個 Web 伺服陣列節點上登入應用程式。 如果其下一個要求抵達其登入的相同節點，則應用程式可以將驗證解密 cookie ，並允許存取應用程式的資源。 如果其下一個要求抵達不同的節點，應用程式就無法 cookie 從使用者登入的節點解密驗證，且要求的資源的授權會失敗。
 
 如果**間歇性**發生下列任何徵兆，則問題通常可追溯到 Web 伺服陣列環境的不正確資料保護或快取設定：
 
-* 驗證中斷：驗證設定 cookie 錯誤或無法解密。 OAuth (Facebook、Microsoft、Twitter) 或 OpenIdConnect 登入失敗並出現錯誤「相互關聯失敗」。
-* 授權中斷： Identity 遺失。
+* 驗證中斷：驗證設定 cookie 不正確或無法解密。 OAuth (Facebook、Microsoft、Twitter) 或 OpenIdConnect 登入失敗並出現錯誤「相互關聯失敗」。
+* 授權中斷： Identity 會遺失。
 * 工作階段狀態將會遺失資料。
 * 快取項目會消失。
 * TempData 將會失敗。
-* 貼文失敗：防偽檢查失敗。
+* 文章失敗：防偽檢查失敗。
 
 如需有關 Web 伺服陣列部署的資料保護設定詳細資訊，請參閱 <xref:security/data-protection/configuration/overview>。 如需有關 Web 伺服陣列部署的快取設定詳細資訊，請參閱 <xref:performance/caching/distributed>。
 
@@ -101,6 +102,6 @@ ms.locfileid: "88015435"
 
 ## <a name="additional-resources"></a>其他資源
 
-* [適用于 Windows 的自訂腳本擴充](/azure/virtual-machines/extensions/custom-script-windows)功能：在 Azure 虛擬機器上下載並執行腳本，這對於部署後設定和軟體安裝很有用。
+* [適用于 Windows 的自訂腳本擴充](/azure/virtual-machines/extensions/custom-script-windows)功能：在 Azure 虛擬機器上下載並執行腳本，這些腳本適用于部署後設定和軟體安裝。
 * <xref:host-and-deploy/proxy-load-balancer>
  

@@ -6,6 +6,7 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 7/14/2020
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -14,12 +15,12 @@ no-loc:
 - Razor
 - SignalR
 uid: data/entity-framework-6
-ms.openlocfilehash: 7e7a07a080d2feefb994396c689279545ce5432f
-ms.sourcegitcommit: dfea24471f4f3d7904faa92fe60c000853bddc3b
+ms.openlocfilehash: d01c0a1bdf29dbb79c04504d747b319fff710d89
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 08/18/2020
-ms.locfileid: "88504693"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88633756"
 ---
 # <a name="aspnet-core-and-entity-framework-6"></a>ASP.NET Core 和 Entity Framework 6
 ::: moniker range=">= aspnetcore-3.0"

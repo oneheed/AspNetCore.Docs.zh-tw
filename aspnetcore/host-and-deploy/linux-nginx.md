@@ -7,6 +7,7 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 07/09/2020
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -17,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: host-and-deploy/linux-nginx
-ms.openlocfilehash: f6a777ab796da42402fae4f77ecc028efa2d6039
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: 63227f068926c4158ac8162fdc1ac11399fd65cb
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88015539"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88633782"
 ---
 # <a name="host-aspnet-core-on-linux-with-nginx"></a>在 Linux 上使用 Nginx 裝載 ASP.NET Core
 
@@ -42,17 +43,17 @@ ms.locfileid: "88015539"
 * 確保 Web 應用程式在啟動時以精靈的形式執行。
 * 設定程序管理工具以協助重新啟動 Web 應用程式。
 
-## <a name="prerequisites"></a>必要條件
+## <a name="prerequisites"></a>Prerequisites
 
 1. 以 sudo 權限使用標準使用者帳戶存取 Ubuntu 16.04 伺服器。
 1. 在伺服器上安裝 .NET Core 執行階段。
-   1. 請造訪[下載 .Net Core 頁面](https://dotnet.microsoft.com/download/dotnet-core)。
+   1. 流覽 [ [下載 .Net Core] 頁面](https://dotnet.microsoft.com/download/dotnet-core)。
    1. 選取最新的非預覽 .NET Core 版本。
-   1. 在 [**執行應用程式-運行**時間] 下的表格中，下載最新的非預覽執行時間。
-   1. 選取 [Linux**套件管理員指示**] 連結，並遵循 ubuntu 版本的 ubuntu 指示。
+   1. 在 [ **執行應用程式-運行**時間] 下的表格中下載最新的非預覽執行時間。
+   1. 選取 [Linux **套件管理員指示** ] 連結，然後依照您的 ubuntu 版本的 ubuntu 指示進行。
 1. 現有的 ASP.NET Core 應用程式。
 
-在未來升級共用架構之後的任何時間點，重新開機伺服器所裝載的 ASP.NET Core 應用程式。
+在升級共用架構之後的任何時間點，重新開機伺服器所裝載的 ASP.NET Core 應用程式。
 
 ## <a name="publish-and-copy-over-the-app"></a>跨應用程式發佈與複製
 
@@ -91,12 +92,12 @@ Kestrel 非常適用於從 ASP.NET Core 提供動態內容。 不過，Web 服�
 
 為達到本指南的目的，使用 Nginx 的單一執行個體。 它會在相同的伺服器上和 HTTP 伺服器一起執行。 您可以根據需求，選擇不同的設定。
 
-因為反向 proxy 會轉送要求，所以請使用[AspNetCore. 來自 microsoft.aspnetcore.HTTPoverrides](https://www.nuget.org/packages/Microsoft.AspNetCore.HttpOverrides/)套件中的[轉送標頭中介軟體](xref:host-and-deploy/proxy-load-balancer)。 此中介軟體會使用 `X-Forwarded-Proto` 標頭來更新 `Request.Scheme`，以便讓重新導向 URI 及其他安全性原則正確運作。
+因為反向 proxy 會轉送要求，所以請使用來自[AspNetCore. >microsoft.aspnetcore.HTTPoverrides](https://www.nuget.org/packages/Microsoft.AspNetCore.HttpOverrides/)封裝的[轉送標頭中介軟體](xref:host-and-deploy/proxy-load-balancer)。 此中介軟體會使用 `X-Forwarded-Proto` 標頭來更新 `Request.Scheme`，以便讓重新導向 URI 及其他安全性原則正確運作。
 
 
 [!INCLUDE[](~/includes/ForwardedHeaders.md)]
 
-<xref:Microsoft.AspNetCore.Builder.ForwardedHeadersExtensions.UseForwardedHeaders*> `Startup.Configure` 呼叫其他中介軟體之前，先叫用頂端的方法。 請設定中介軟體來轉送 `X-Forwarded-For` 和 `X-Forwarded-Proto` 標頭：
+<xref:Microsoft.AspNetCore.Builder.ForwardedHeadersExtensions.UseForwardedHeaders*>在 `Startup.Configure` 呼叫其他中介軟體之前，先在頂端叫用方法。 請設定中介軟體來轉送 `X-Forwarded-For` 和 `X-Forwarded-Proto` 標頭：
 
 ```csharp
 // using Microsoft.AspNetCore.HttpOverrides;
@@ -190,7 +191,7 @@ server {
 
 ## <a name="monitor-the-app"></a>監視應用程式
 
-伺服器已設定完成，可將對 `http://<serveraddress>:80` 發出的要求轉送給在位於 `http://127.0.0.1:5000` 的 Kestrel 上執行的 ASP.NET Core 應用程式。 不過，並未設定 Nginx 來管理 Kestrel 處理序。 您可以使用 *systemd* 來建立服務檔案，以啟動並監視基礎 Web 應用程式。 *systemd*是 init 系統，提供許多強大的功能來啟動、停止和管理進程。 
+伺服器已設定完成，可將對 `http://<serveraddress>:80` 發出的要求轉送給在位於 `http://127.0.0.1:5000` 的 Kestrel 上執行的 ASP.NET Core 應用程式。 不過，並未設定 Nginx 來管理 Kestrel 處理序。 您可以使用 *systemd* 來建立服務檔案，以啟動並監視基礎 Web 應用程式。 *systemd* 是一種 init 系統，提供許多強大的功能來啟動、停止及管理進程。 
 
 ### <a name="create-the-service-file"></a>建立服務檔
 
@@ -222,7 +223,7 @@ Environment=DOTNET_PRINT_TELEMETRY_MESSAGE=false
 WantedBy=multi-user.target
 ```
 
-在上述範例中，管理服務的使用者是由 `User` 選項指定。 使用者 (`www-data`) 必須存在，且具有應用程式檔案的適當擁有權。
+在上述範例中，管理服務的使用者是由選項所指定 `User` 。 使用者 (`www-data`) 必須存在，且擁有應用程式檔案的適當擁有權。
 
 使用 `TimeoutStopSec` 可設定應用程式收到初始中斷訊號之後等待關閉的時間。 如果應用程式在此期間後未關閉，則會發出 SIGKILL 來終止應用程式。 提供不具單位的秒值 (例如 `150`)、時間範圍值 (例如 `2min 30s`) 或 `infinity` (表示停用逾時)。 `TimeoutStopSec` 在管理員設定檔 (*systemd-system.conf*、*system.conf.d*、*systemd-user.conf*、*user.conf.d*) 的預設值為 `DefaultTimeoutStopSec`。 大多數發行版本的預設逾時為 90 秒。
 
@@ -301,13 +302,13 @@ sudo journalctl -fu kestrel-helloapp.service --since "2016-10-18" --until "2016-
 
 ## <a name="data-protection"></a>資料保護
 
-[ASP.NET Core 的資料保護堆疊](xref:security/data-protection/introduction)是由數個 ASP.NET Core[中介軟體](xref:fundamentals/middleware/index)所使用，包括驗證中介軟體 (例如 cookie 中介軟體) 和跨網站要求偽造 (CSRF) 防護。 即使資料保護 API 並非由使用者程式碼呼叫，仍應設定資料保護，以建立持續密碼編譯[金鑰存放區](xref:security/data-protection/implementation/key-management)。 如不設定資料保護，金鑰會保留在記憶體中，並於應用程式重新啟動時捨棄。
+[ASP.NET Core 的資料保護堆疊](xref:security/data-protection/introduction)是由數個 ASP.NET Core[中介軟體](xref:fundamentals/middleware/index)所使用，包括驗證中介軟體 (例如， cookie 中介軟體) 和跨網站偽造要求 (CSRF) 保護。 即使資料保護 API 並非由使用者程式碼呼叫，仍應設定資料保護，以建立持續密碼編譯[金鑰存放區](xref:security/data-protection/implementation/key-management)。 如不設定資料保護，金鑰會保留在記憶體中，並於應用程式重新啟動時捨棄。
 
 如果 Keyring 儲存在記憶體中，則當應用程式重新啟動時：
 
-* 所有架構 cookie 的驗證權杖都會失效。
+* 所有 cookie 的驗證權杖都會失效。
 * 當使用者提出下一個要求時，需要再次登入。
-* 所有以 Keyring 保護的資料都無法再解密。 這可能包括[CSRF](xref:security/anti-request-forgery#aspnet-core-antiforgery-configuration) token 和[ASP.NET Core MVC TempData cookie s](xref:fundamentals/app-state#tempdata)。
+* 所有以 Keyring 保護的資料都無法再解密。 這可能包括 [CSRF 權杖](xref:security/anti-request-forgery#aspnet-core-antiforgery-configuration) 和 [ASP.NET Core MVC TempData cookie s](xref:fundamentals/app-state#tempdata)。
 
 若要設定資料保護來保存及加密金鑰環，請參閱：
 
@@ -316,7 +317,7 @@ sudo journalctl -fu kestrel-helloapp.service --since "2016-10-18" --until "2016-
 
 ## <a name="long-request-header-fields"></a>要求標頭欄位太長
 
-Proxy 伺服器預設設定通常會將要求標頭欄位限制為 4 K 或 8 K （視平臺而定）。 應用程式可能需要比預設 (更長的欄位（例如，使用[Azure Active Directory](https://azure.microsoft.com/services/active-directory/)) 的應用程式）。 如果需要較長的欄位，proxy 伺服器的預設設定需要調整。 要套用的值取決於案例。 如需詳細資訊，請參閱您的伺服器文件。
+Proxy 伺服器預設設定通常會將要求標頭欄位限制為 4 K 或 8 K （視平臺而定）。 應用程式可能需要比預設 (更長的欄位，例如使用 [Azure Active Directory](https://azure.microsoft.com/services/active-directory/)) 的應用程式。 如果需要較長的欄位，proxy 伺服器的預設設定需要進行調整。 要套用的值取決於案例。 如需詳細資訊，請參閱您的伺服器文件。
 
 * [proxy_buffer_size](https://nginx.org/docs/http/ngx_http_proxy_module.html#proxy_buffer_size)
 * [proxy_buffers](https://nginx.org/docs/http/ngx_http_proxy_module.html#proxy_buffers)
@@ -334,7 +335,7 @@ Linux 安全性模組 (LSM) 是 Linux 2.6 之後 Linux 核心所包含的一個�
 
 ### <a name="configure-the-firewall"></a>設定防火牆
 
-關閉所有不在使用中的外部連接埠。 簡單的防火牆 (ufw) 提供用來設定防火牆的 CLI，以提供的前端 `iptables` 。
+關閉所有不在使用中的外部連接埠。 簡單的防火牆 (ufw) 提供可設定防火牆的 CLI 來提供前端 `iptables` 。
 
 > [!WARNING]
 > 如未正確設定，防火牆會禁止存取整個系統。 未指定正確的 SSH 連接埠，將會導致您無法存取系統 (若您使用 SSH 連線至該連接埠)。 預設連接埠為 22。 如需詳細資訊，請參閱 [ufw 簡介](https://help.ubuntu.com/community/UFW)與[手冊](https://manpages.ubuntu.com/manpages/bionic/man8/ufw.8.html)。
@@ -385,10 +386,10 @@ static char ngx_http_server_full_string[] = "Server: Web Server" CRLF;
 
 * 新增 `HTTP Strict-Transport-Security` (HSTS) 標頭可確保用戶端提出的所有後續要求都會透過 HTTPS。
 
-* 如果未來將會停用 HTTPS，請使用下列其中一種方法：
+* 如果未來將停用 HTTPS，請使用下列其中一種方法：
 
-  * 不要新增 HSTS 標頭。
-  * 選擇 short `max-age` 值。
+  * 請勿新增 HSTS 標頭。
+  * 選擇簡短 `max-age` 值。
 
 新增 */etc/nginx/Proxy.conf* 組態檔：
 
@@ -399,7 +400,7 @@ static char ngx_http_server_full_string[] = "Server: Web Server" CRLF;
 [!code-nginx[](linux-nginx/nginx.conf?highlight=2)]
 
 > [!NOTE]
-> Blazor WebAssembly應用程式需要較大的 `burst` 參數值，以容納應用程式所提出的大量要求。 如需詳細資訊，請參閱<xref:blazor/host-and-deploy/webassembly#nginx>。
+> Blazor WebAssembly 應用程式需要較大的 `burst` 參數值，以容納應用程式所提出的大量要求。 如需詳細資訊，請參閱<xref:blazor/host-and-deploy/webassembly#nginx>。
 
 #### <a name="secure-nginx-from-clickjacking"></a>保護 Nginx 免於點閱綁架
 
@@ -431,7 +432,7 @@ sudo nano /etc/nginx/nginx.conf
 
 ## <a name="additional-nginx-suggestions"></a>其他 Nginx 建議
 
-升級伺服器上的共用架構之後，請重新開機伺服器所主控的 ASP.NET Core 應用程式。
+在伺服器上升級共用架構之後，請重新開機伺服器所裝載的 ASP.NET Core 應用程式。
 
 ## <a name="additional-resources"></a>其他資源
 

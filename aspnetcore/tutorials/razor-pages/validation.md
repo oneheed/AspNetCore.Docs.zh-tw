@@ -1,11 +1,12 @@
 ---
-title: 第8部分，將驗證新增至 ASP.NET Core Razor 頁面
+title: 第8部分：將驗證新增至 ASP.NET Core Razor 頁面
 author: rick-anderson
 description: 頁面上的第8部分教學課程系列 Razor 。
 ms.author: riande
 ms.custom: mvc
 ms.date: 7/23/2019
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -16,14 +17,14 @@ no-loc:
 - Razor
 - SignalR
 uid: tutorials/razor-pages/validation
-ms.openlocfilehash: dad2e667cb6fa3ace7cb5e5dcb982511357ed49b
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: 86c523c69d3ee85f56bf1a51719a0bd93cbe97fc
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88021519"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88633548"
 ---
-# <a name="part-8-add-validation-to-an-aspnet-core-no-locrazor-page"></a>第8部分，將驗證新增至 ASP.NET Core Razor 頁面
+# <a name="part-8-add-validation-to-an-aspnet-core-no-locrazor-page"></a>第8部分：將驗證新增至 ASP.NET Core Razor 頁面
 
 作者：[Rick Anderson](https://twitter.com/RickAndMSFT)
 
@@ -31,12 +32,12 @@ ms.locfileid: "88021519"
 
 ## <a name="validation"></a>驗證
 
-軟體開發的核心原則稱為 [DRY](https://wikipedia.org/wiki/Don%27t_repeat_yourself)("**D**on't **R**epeat **Y**ourself", 不重複原則)。 Razor頁面會鼓勵已指定功能一次的開發，而且會反映在整個應用程式中。 DRY 有助於：
+軟體開發的核心原則稱為 [DRY](https://wikipedia.org/wiki/Don%27t_repeat_yourself)("**D**on't **R**epeat **Y**ourself", 不重複原則)。 Razor 頁面會鼓勵開發環境指定一次，而且會反映在整個應用程式中。 DRY 有助於：
 
 * 降低應用程式中的程式碼數量。
 * 使程式碼較少出現錯誤，而且更容易進行測試和維護。
 
-頁面和 Entity Framework 所提供的驗證支援 Razor 就是理想的試原則範例。 驗證規則是在單一位置 (在模型類別中) 以宣告方式指定，而規則可在應用程式的任何位置強制執行。
+頁面和 Entity Framework 所提供的驗證支援 Razor 是理想的策略範例。 驗證規則是在單一位置 (在模型類別中) 以宣告方式指定，而規則可在應用程式的任何位置強制執行。
 
 ## <a name="add-validation-rules-to-the-movie-model"></a>將驗證規則新增至電影模型
 
@@ -77,7 +78,7 @@ DataAnnotations 命名空間提供一組內建的驗證屬性 (attribute)，其�
 
 請注意表單在包含無效值的每個欄位中自動呈現驗證錯誤訊息的方式。 用戶端 (使用 JavaScript 和 jQuery) 與伺服器端 (當使用者已停用 JavaScript 時) 都會強制執行這些錯誤。
 
-明顯的好處是：**不**需要在 Create 或 Edit 頁面中進行程式碼變更。 一旦 DataAnnotations 套用至模型，就會啟用驗證 UI。 Razor在本教學課程中建立的頁面，會使用) 的模型類別屬性上的驗證屬性，自動挑選驗證規則 (`Movie` 。 使用 Edit 頁面測試驗證，會套用相同的驗證。
+明顯的好處是：**不**需要在 Create 或 Edit 頁面中進行程式碼變更。 一旦 DataAnnotations 套用至模型，就會啟用驗證 UI。 Razor本教學課程中建立的頁面會自動挑選驗證規則 (在模型類別的屬性) 上使用驗證屬性 `Movie` 。 使用 Edit 頁面測試驗證，會套用相同的驗證。
 
 要一直到沒有任何用戶端驗證錯誤之後，才會將表單資料發佈到伺服器。 請確認表單資料不會經由下列一或多種方式發佈：
 
@@ -103,7 +104,7 @@ DataAnnotations 命名空間提供一組內建的驗證屬性 (attribute)，其�
    }
   ```
   
-或者，您可以[停用伺服器上的用戶端驗證](xref:mvc/models/validation#disable-client-side-validation)。
+或者，您可以 [在伺服器上停用用戶端驗證](xref:mvc/models/validation#disable-client-side-validation)。
 
 下列程式碼顯示稍早在此教學課程中包含 Scaffold 的部分 *Create.cshtml* 頁面。 Create 和 Edit 頁面會使用它來顯示初始表單，以及在發生錯誤時重新顯示格式。
 
@@ -123,7 +124,7 @@ Create 和 Edit 頁面中沒有任何驗證規則。 只有在 `Movie` 類別中
 
 `DataType` 屬性只提供檢視引擎將資料格式化的提示 (以及提供一些屬性，例如用於 URL 的 `<a>` 和用於電子郵件的 `<a href="mailto:EmailAddress.com">`)。 使用 `RegularExpression` 屬性來驗證資料的格式。 `DataType` 屬性可用於指定比資料庫內建類型更特定的資料類型。 `DataType` 屬性不是驗證屬性。 在範例應用程式中，只會顯示日期，而不含時間。
 
-`DataType` 列舉可提供給許多資料類型，例如 Date、Time、PhoneNumber、Currency、EmailAddress 等等。 `DataType` 屬性也可讓應用程式自動提供類型的特定功能。 例如，可針對 `DataType.EmailAddress` 建立 `mailto:` 連結。 在支援 HTML5 的瀏覽器中，可以為 `DataType.Date` 提供日期選取器。 `DataType`屬性會發出 html 5 `data-` (發音的資料虛線) HTML 5 瀏覽器所使用的屬性。 `DataType` 屬性**不**會提供任何驗證。
+`DataType` 列舉可提供給許多資料類型，例如 Date、Time、PhoneNumber、Currency、EmailAddress 等等。 `DataType` 屬性也可讓應用程式自動提供類型的特定功能。 例如，可針對 `DataType.EmailAddress` 建立 `mailto:` 連結。 在支援 HTML5 的瀏覽器中，可以為 `DataType.Date` 提供日期選取器。 這些 `DataType` 屬性會發出 html 5 `data-` (發音資料虛線) html 5 瀏覽器所取用的屬性。 `DataType` 屬性**不**會提供任何驗證。
 
 `DataType.Date` 未指定顯示日期的格式。 根據預設，將依據以伺服器 `CultureInfo` 為基礎的預設格式顯示資料欄位。
 
@@ -142,7 +143,7 @@ public DateTime ReleaseDate { get; set; }
 
 * 瀏覽器可以啟用 HTML5 功能 (例如顯示日曆控制項、適合地區設定的貨幣符號、電子郵件連結等等)。
 * 根據預設，瀏覽器將根據您的地區設定，使用正確的格式呈現資料。
-* `DataType` 屬性可以啟用 ASP.NET Core 架構，來選擇用於呈現資料的正確欄位範本。 `DisplayFormat`如果單獨使用，則會使用字串範本。
+* `DataType` 屬性可以啟用 ASP.NET Core 架構，來選擇用於呈現資料的正確欄位範本。 `DisplayFormat`如果本身使用，則會使用字串範本。
 
 **注意：** jQuery 驗證不適用於 `Range` 屬性和 `DateTime` 。 例如，下列程式碼一律會顯示用戶端驗證錯誤，即使當日期位在指定範圍中也一樣：
 
@@ -156,7 +157,7 @@ public DateTime ReleaseDate { get; set; }
 
 [!code-csharp[](razor-pages-start/sample/RazorPagesMovie30/Models/MovieDateRatingDAmult.cs?name=snippet1)]
 
-[開始使用 Razor頁面和 EF Core](xref:data/ef-rp/intro)顯示頁面的先進 EF Core 作業 Razor 。
+[入門 Razor 頁面和 EF Core](xref:data/ef-rp/intro) 會顯示頁面的 advanced EF Core 作業 Razor 。
 
 ### <a name="apply-migrations"></a>套用移轉
 
@@ -219,9 +220,9 @@ SQLite 不需要移轉。
 
 ### <a name="publish-to-azure"></a>發佈至 Azure
 
-如需部署至 Azure 的詳細資訊，請參閱[教學課程：在 Azure 中使用 SQL Database 建立 ASP.NET Core 應用程式](/azure/app-service/app-service-web-tutorial-dotnetcore-sqldb)。
+如需部署至 Azure 的詳細資訊，請參閱 [教學課程：使用 SQL Database 在 azure 中建立 ASP.NET Core 應用程式](/azure/app-service/app-service-web-tutorial-dotnetcore-sqldb)。
 
-感謝您完成這篇 Razor 頁面簡介。 [開始使用 Razor頁面和 EF Core](xref:data/ef-rp/intro)是本教學課程的最佳追蹤。
+感謝您完成本頁面簡介 Razor 。 [入門 Razor 頁面和 EF Core](xref:data/ef-rp/intro) 是本教學課程的最佳追蹤。
 
 ## <a name="additional-resources"></a>其他資源
 

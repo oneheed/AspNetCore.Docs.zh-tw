@@ -1,11 +1,12 @@
 ---
 title: RazorASP.NET Core 中的頁面簡介
 author: Rick-Anderson
-description: 瞭解 Razor ASP.NET Core 中的頁面如何讓撰寫以頁面為焦點的案例更輕鬆且更具生產力，而不是使用 MVC。
+description: 瞭解 Razor ASP.NET Core 中的頁面如何讓撰寫以頁面為焦點的案例撰寫程式碼比使用 MVC 更簡單、更具生產力。
 monikerRange: '>= aspnetcore-2.0'
 ms.author: riande
 ms.date: 02/12/2020
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -16,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: razor-pages/index
-ms.openlocfilehash: 203d77a2caaba9156419a04754fe162dd57052c1
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: 8058cc3c3461d72c713c8be53c3667112adb2ae5
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88012705"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88634120"
 ---
 # <a name="introduction-to-no-locrazor-pages-in-aspnet-core"></a>RazorASP.NET Core 中的頁面簡介
 
@@ -29,13 +30,13 @@ ms.locfileid: "88012705"
 
 作者：[Rick Anderson](https://twitter.com/RickAndMSFT) 與 [Ryan Nowak](https://github.com/rynowak)
 
-Razor頁面可讓撰寫以頁面為焦點的案例更輕鬆且更具生產力，而不是使用控制器和視圖。
+Razor 頁面可讓撰寫以頁面為焦點的案常式序代碼比使用控制器和視圖更簡單且更具生產力。
 
 如果您在尋找使用模型檢視控制器方法的教學課程，請參閱[開始使用 ASP.NET Core MVC](xref:tutorials/first-mvc-app/start-mvc)。
 
-本檔提供 Razor 頁面簡介。 它不是逐步教學課程。 如果您發現某些區段太先進，請參閱[開始使用 Razor 頁面](xref:tutorials/razor-pages/razor-pages-start)。 如需 ASP.NET Core 的概觀，請參閱[ASP.NET Core 簡介](xref:index)。
+本檔提供 Razor 頁面簡介。 它不是逐步教學課程。 如果您發現某些區段太過先進，請參閱 [開始使用 Razor 頁面](xref:tutorials/razor-pages/razor-pages-start)。 如需 ASP.NET Core 的概觀，請參閱[ASP.NET Core 簡介](xref:index)。
 
-## <a name="prerequisites"></a>必要條件
+## <a name="prerequisites"></a>Prerequisites
 
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
@@ -57,7 +58,7 @@ Razor頁面可讓撰寫以頁面為焦點的案例更輕鬆且更具生產力，
 
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
-如需如何建立頁面專案的詳細指示，請參閱[開始使用 Razor 頁面](xref:tutorials/razor-pages/razor-pages-start) Razor 。
+如需如何建立頁面專案的詳細指示，請參閱 [開始使用 Razor 頁面](xref:tutorials/razor-pages/razor-pages-start) Razor 。
 
 # <a name="visual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code)
 
@@ -65,13 +66,13 @@ Razor頁面可讓撰寫以頁面為焦點的案例更輕鬆且更具生產力，
 
 # <a name="visual-studio-for-mac"></a>[Visual Studio for Mac](#tab/visual-studio-mac)
 
-如需如何建立頁面專案的詳細指示，請參閱[開始使用 Razor 頁面](xref:tutorials/razor-pages/razor-pages-start) Razor 。
+如需如何建立頁面專案的詳細指示，請參閱 [開始使用 Razor 頁面](xref:tutorials/razor-pages/razor-pages-start) Razor 。
 
 ---
 
-## <a name="no-locrazor-pages"></a>Razor頁面
+## <a name="no-locrazor-pages"></a>Razor 頁面
 
-Razor頁面已在*Startup.cs*中啟用：
+Razor 頁面已在 *Startup.cs*中啟用：
 
 [!code-csharp[](index/3.0sample/RazorPagesIntro/Startup.cs?name=snippet_Startup&highlight=12,36)]
 
@@ -79,7 +80,7 @@ Razor頁面已在*Startup.cs*中啟用：
 
 [!code-cshtml[](index/3.0sample/RazorPagesIntro/Pages/Index.cshtml?highlight=1)]
 
-上述程式碼看起來很像是在具有控制器和 views 的 ASP.NET Core 應用程式中使用的[ Razor 視圖](xref:tutorials/first-mvc-app/adding-view)檔案。 這會讓指示詞不同 [`@page`](xref:mvc/views/razor#page) 。 `@page` 會將檔案轉換成 MVC 動作，這表示它會直接處理要求，不用透過控制器。 `@page`必須是頁面上的第一個指示詞 Razor 。 `@page`會影響其他結構的行為 [Razor](xref:mvc/views/razor) 。 Razor分頁檔名的開頭為 *..* * 尾碼。
+上述程式碼看起來很像是在具有控制器和 views 的 ASP.NET Core 應用程式中使用的[ Razor 視圖](xref:tutorials/first-mvc-app/adding-view)檔案。 這會讓它不同的是指示詞 [`@page`](xref:mvc/views/razor#page) 。 `@page` 會將檔案轉換成 MVC 動作，這表示它會直接處理要求，不用透過控制器。 `@page` 必須是頁面上的第一個指示詞 Razor 。 `@page` 會影響其他結構的行為 [Razor](xref:mvc/views/razor) 。 Razor 分頁檔名的名稱必須是 *cshtml* 尾碼。
 
 使用`PageModel`類別的類似頁面，顯示於下列兩個檔案中。 *Pages/Index2.cshtml* 檔案：
 
@@ -89,7 +90,7 @@ Razor頁面已在*Startup.cs*中啟用：
 
 [!code-csharp[](index/3.0sample/RazorPagesIntro/Pages/Index2.cshtml.cs)]
 
-依照慣例， `PageModel` 類別檔案的名稱與分頁檔相同， Razor 附加 *.cs* 。 例如，前一 Razor 頁是*Pages/Index2*。 包含 `PageModel` 類別的檔案名為 *Pages/Index2.cshtml.cs*。
+依照慣例，類別檔案的名稱會與 `PageModel` Razor 附加 *.cs* 的分頁檔相同。 例如，前一 Razor 頁是*Pages/index2.cshtml.cs。* 包含 `PageModel` 類別的檔案名為 *Pages/Index2.cshtml.cs*。
 
 頁面的 URL 路徑關聯是由頁面在檔案系統中的位置決定。 下表顯示 Razor 頁面路徑和相符的 URL：
 
@@ -102,12 +103,12 @@ Razor頁面已在*Startup.cs*中啟用：
 
 注意：
 
-* 執行時間預設會 Razor 在*pages*資料夾中尋找分頁檔案。
+* 執行時間預設會 Razor 在 [ *pages* ] 資料夾中尋找分頁檔。
 * `Index` 是 URL 未包含頁面時的預設頁面。
 
 ## <a name="write-a-basic-form"></a>撰寫基本表單
 
-Razor頁面的設計目的是要在建立應用程式時，讓與網頁瀏覽器搭配使用的常見模式變得容易執行。 [模型](xref:mvc/models/model-binding)系結、[標記](xref:mvc/views/tag-helpers/intro)協助程式和 HTML 協助程式都*只*會使用頁面類別中定義的屬性 Razor 。 `Contact` 模型請考慮實作基本的「與我們連絡」格式頁面：
+Razor 頁面的設計目的是要讓搭配網頁瀏覽器使用的常見模式在建立應用程式時很容易執行。 [模型](xref:mvc/models/model-binding)系結 [、卷](xref:mvc/views/tag-helpers/intro)標協助程式和 HTML 協助程式全都 *是* 使用頁面類別中定義的屬性 Razor 。 `Contact` 模型請考慮實作基本的「與我們連絡」格式頁面：
 
 本文件中的範例，會在 [Startup.cs](https://github.com/dotnet/AspNetCore.Docs/blob/master/aspnetcore/razor-pages/index/3.0sample/RazorPagesContacts/Startup.cs#L23-L24) 檔案中初始化 `DbContext`。
 
@@ -135,20 +136,20 @@ DB 內容：
 
 `PageModel` 類別可以分離頁面邏輯與頁面展示。 此類別會定義頁面的處理常式，以處理傳送至頁面的要求與用於轉譯頁面的資料。 這種分隔允許：
 
-* 透過相依性[插入](xref:fundamentals/dependency-injection)來管理頁面相依性。
+* 透過相依性 [插入](xref:fundamentals/dependency-injection)來管理頁面相依性。
 * [單元測試](xref:test/razor-pages-tests)
 
 在 `POST` 要求上執行的頁面具有 「處理常式方法」`OnPostAsync` ** (當使用者張貼表單時)。 可以新增任何 HTTP 指令動詞的處理常式方法。 最常見的處理常式包括：
 
-* `OnGet`，初始化頁所需要的狀態。 在上述程式碼中， `OnGet` 方法會顯示*CreateModel* Razor 頁面。
+* `OnGet`，初始化頁所需要的狀態。 在上述程式碼中，此 `OnGet` 方法會顯示 *CreateModel 的 cshtml* Razor 頁面。
 * `OnPost`，處理表單提交作業。
 
-`Async` 命名尾碼是選擇性的，但依照慣例通常用於非同步函式。 上述程式碼通常用於 Razor 頁面。
+`Async` 命名尾碼是選擇性的，但依照慣例通常用於非同步函式。 上述程式碼一般適用于 Razor 頁面。
 
-如果您熟悉如何使用控制器和 views 來 ASP.NET 應用程式：
+如果您熟悉使用控制器和 views 的 ASP.NET apps：
 
 * `OnPostAsync`上述範例中的程式碼看起來類似一般的控制器程式碼。
-* 大部分的 MVC 基本類型（例如[模型](xref:mvc/models/model-binding)系結、[驗證](xref:mvc/models/validation)和動作結果）在控制器和頁面上的運作方式都相同 Razor 。 
+* 大部分的 MVC 基本專案，例如 [模型](xref:mvc/models/model-binding)系結、 [驗證](xref:mvc/models/validation)和動作結果，其運作方式與控制器和 Razor 頁面相同。 
 
 前一個 `OnPostAsync` 方法：
 
@@ -165,13 +166,13 @@ DB 內容：
 
 [!code-cshtml[](index/3.0sample/RazorPagesContacts/Pages/Customers/Create.cshtml)]
 
-從*Pages/Create. cshtml*轉譯的 HTML：
+從 *Pages/Create. cshtml*轉譯的 HTML：
 
 [!code-html[](index/3.0sample/RazorPagesContacts/Pages/Customers/Create4.html)]
 
 在先前的程式碼中，張貼表單：
 
-* 具有有效的資料：
+* 包含有效資料：
 
   * `OnPostAsync`處理常式方法會呼叫 <xref:Microsoft.AspNetCore.Mvc.RazorPages.PageModel.RedirectToPage*> helper 方法。 `RedirectToPage` 會傳回 <xref:Microsoft.AspNetCore.Mvc.RedirectToPageResult> 的執行個體。 `RedirectToPage`:
 
@@ -181,36 +182,36 @@ DB 內容：
 
 * 傳遞至伺服器的驗證錯誤：
 
-  * `OnPostAsync`處理常式方法會呼叫 <xref:Microsoft.AspNetCore.Mvc.RazorPages.PageBase.Page*> helper 方法。 `Page` 會傳回 <xref:Microsoft.AspNetCore.Mvc.RazorPages.PageResult> 的執行個體。 傳回 `Page` 類似於控制站中的動作傳回 `View`。 `PageResult`這是處理常式方法的預設傳回型別。 傳回 `void` 的處理常式方法會呈現頁面。
-  * 在上述範例中，張貼不含值的表單會導致[ModelState](xref:Microsoft.AspNetCore.Mvc.ModelBinding.ModelStateDictionary.IsValid)傳回 false。 在此範例中，用戶端上不會顯示任何驗證錯誤。 本檔稍後會涵蓋驗證錯誤處理。
+  * `OnPostAsync`處理常式方法會呼叫 <xref:Microsoft.AspNetCore.Mvc.RazorPages.PageBase.Page*> helper 方法。 `Page` 會傳回 <xref:Microsoft.AspNetCore.Mvc.RazorPages.PageResult> 的執行個體。 傳回 `Page` 類似於控制站中的動作傳回 `View`。 `PageResult` 這是處理常式方法的預設傳回型別。 傳回 `void` 的處理常式方法會呈現頁面。
+  * 在上述範例中，不使用任何值張貼表單會導致 [ModelState](xref:Microsoft.AspNetCore.Mvc.ModelBinding.ModelStateDictionary.IsValid) 傳回 false。 在此範例中，用戶端上不會顯示任何驗證錯誤。 本檔稍後會討論驗證錯誤處理。
 
   [!code-csharp[](index/3.0sample/RazorPagesContacts/Pages/Customers/Create.cshtml.cs?name=snippet_OnPostAsync&highlight=3-6)]
 
-* 用戶端驗證偵測到驗證錯誤：
+* 使用用戶端驗證偵測到驗證錯誤：
 
-  * 資料**未**張貼至伺服器。
+  * 資料 **不** 會張貼至伺服器。
   * 本檔稍後會說明用戶端驗證。
 
-`Customer`屬性會使用 [`[BindProperty]`](xref:Microsoft.AspNetCore.Mvc.BindPropertyAttribute) 屬性來加入宣告模型系結：
+`Customer`屬性使用 [`[BindProperty]`](xref:Microsoft.AspNetCore.Mvc.BindPropertyAttribute) 屬性來加入宣告模型系結：
 
 [!code-csharp[](index/3.0sample/RazorPagesContacts/Pages/Customers/Create.cshtml.cs?name=snippet_PageModel&highlight=15-16)]
 
-`[BindProperty]`**不**應該用於包含不應由用戶端變更之屬性的模型。 如需詳細資訊，請參閱[防止大量指派](xref:data/ef-rp/crud#overposting)。
+`[BindProperty]`**不**應該用於包含不應由用戶端變更之屬性的模型。 如需詳細資訊，請參閱 [大量指派](xref:data/ef-rp/crud#overposting)。
 
-Razor根據預設，頁面只會系結屬性與非 `GET` 動詞。 系結至屬性不需要撰寫程式碼來將 HTTP 資料轉換成模型型別。 透過使用相同的屬性呈現表單欄位 (`<input asp-for="Customer.Name">`) 並接受輸入，繫結可以減少程式碼。
+Razor 依預設，頁面只會系結具有非動詞命令的屬性 `GET` 。 系結至屬性不需要撰寫程式碼，就能將 HTTP 資料轉換成模型類型。 透過使用相同的屬性呈現表單欄位 (`<input asp-for="Customer.Name">`) 並接受輸入，繫結可以減少程式碼。
 
 [!INCLUDE[](~/includes/bind-get.md)]
 
-查看*Pages/Create. cshtml* view file：
+檢查 *Pages/Create. cshtml* view 檔案：
 
 [!code-cshtml[](index/3.0sample/RazorPagesContacts/Pages/Customers/Create.cshtml?highlight=3,9)]
 
-* 在上述程式碼中，[輸入標記](xref:mvc/views/working-with-forms#the-input-tag-helper)協助程式會將 HTML 專案系結 `<input asp-for="Customer.Name" />` `<input>` 至 `Customer.Name` 模型運算式。
-* [`@addTagHelper`](xref:mvc/views/tag-helpers/intro#addtaghelper-makes-tag-helpers-available)讓標籤協助程式可供使用。
+* 在上述程式碼中， [輸入標記](xref:mvc/views/working-with-forms#the-input-tag-helper)協助程式會將 `<input asp-for="Customer.Name" />` HTML 元素系結 `<input>` 至 `Customer.Name` 模型運算式。
+* [`@addTagHelper`](xref:mvc/views/tag-helpers/intro#addtaghelper-makes-tag-helpers-available) 讓標籤協助程式可供使用。
 
 ### <a name="the-home-page"></a>首頁
 
-*Index. cshtml*是首頁：
+*Index. cshtml* 是首頁：
 
 [!code-cshtml[](index/3.0sample/RazorPagesContacts/Pages/Customers/Index.cshtml)]
 
@@ -218,13 +219,13 @@ Razor根據預設，頁面只會系結屬性與非 `GET` 動詞。 系結至屬�
 
 [!code-csharp[](index/3.0sample/RazorPagesContacts/Pages/Customers/Index.cshtml.cs?name=snippet)]
 
-*Index. cshtml*檔案包含下列標記：
+此 *索引的 cshtml* 檔案包含下列標記：
 
 [!code-cshtml[](index/3.0sample/RazorPagesContacts/Pages/Customers/Index.cshtml?range=21)]
 
-`<a /a>`[錨點](xref:mvc/views/tag-helpers/builtin-th/anchor-tag-helper)標籤協助程式使用 `asp-route-{value}` 屬性來產生 [編輯] 頁面的連結。 該連結包含路由資料和連絡人識別碼。 例如，`https://localhost:5001/Edit/1`。 [標記](xref:mvc/views/tag-helpers/intro)協助程式可讓伺服器端程式碼參與建立和轉譯檔案中的 HTML 元素 Razor 。
+`<a /a>`[錨點](xref:mvc/views/tag-helpers/builtin-th/anchor-tag-helper)標籤協助程式使用 `asp-route-{value}` 屬性來產生編輯頁面的連結。 該連結包含路由資料和連絡人識別碼。 例如： `https://localhost:5001/Edit/1` 。 [標記](xref:mvc/views/tag-helpers/intro) 協助程式可讓伺服器端程式碼參與建立和轉譯檔案中的 HTML 元素 Razor 。
 
-*Index. cshtml*檔案包含標記，以建立每個客戶連絡人的刪除按鈕：
+此 *索引的 cshtml* 檔案包含標記，以建立每個客戶連絡人的 [刪除] 按鈕：
 
 [!code-cshtml[](index/3.0sample/RazorPagesContacts/Pages/Customers/Index.cshtml?range=22-23)]
 
@@ -234,7 +235,7 @@ Razor根據預設，頁面只會系結屬性與非 `GET` 動詞。 系結至屬�
 <button type="submit" formaction="/Customers?id=1&amp;handler=delete">delete</button>
 ```
 
-當 [刪除] 按鈕以 HTML 轉譯時，其[formaction](https://developer.mozilla.org/docs/Web/HTML/Element/button#attr-formaction)會包含的參數：
+在 HTML 中轉譯 [刪除] 按鈕時，其 [formaction](https://developer.mozilla.org/docs/Web/HTML/Element/button#attr-formaction) 包含下列參數：
 
 * 由屬性指定的客戶連絡人識別碼 `asp-route-id` 。
 * `handler`屬性所指定的 `asp-page-handler` 。
@@ -249,7 +250,7 @@ Razor根據預設，頁面只會系結屬性與非 `GET` 動詞。 系結至屬�
 
 * `id`從查詢字串取得。
 * 使用 `FindAsync` 在資料庫中查詢客戶連絡人。
-* 如果找到客戶連絡人，就會將其移除並更新資料庫。
+* 如果找到客戶連絡人，則會將它移除，並更新資料庫。
 * 呼叫 <xref:Microsoft.AspNetCore.Mvc.RazorPages.PageModel.RedirectToPage*> 以重新導向至根索引頁 (`/Index`)。
 
 ### <a name="the-editcshtml-file"></a>編輯 cshtml 檔案
@@ -270,45 +271,45 @@ Razor根據預設，頁面只會系結屬性與非 `GET` 動詞。 系結至屬�
 
 驗證規則：
 
-* 在模型類別中是以宣告方式指定。
+* 在模型類別中會以宣告方式指定。
 * 會在應用程式的任何位置強制執行。
 
-<xref:System.ComponentModel.DataAnnotations>命名空間提供一組內建的驗證屬性，會以宣告方式套用至類別或屬性。 DataAnnotations 也包含格式化屬性，像 [`[DataType]`](xref:System.ComponentModel.DataAnnotations.DataTypeAttribute) 是格式化的說明，而且不提供任何驗證。
+<xref:System.ComponentModel.DataAnnotations>命名空間會提供一組內建的驗證屬性，這些屬性會以宣告方式套用至類別或屬性。 DataAnnotations 也包含格式化屬性 [`[DataType]`](xref:System.ComponentModel.DataAnnotations.DataTypeAttribute) ，例如格式化的說明，而且不提供任何驗證。
 
-請考慮 `Customer` 下列模型：
+請考慮 `Customer` 模型：
 
 [!code-csharp[](index/3.0sample/RazorPagesContacts/Models/Customer.cs)]
 
-使用下列*建立. cshtml*視圖檔案：
+使用下列 *Create. cshtml* view 檔案：
 
 [!code-cshtml[](index/3.0sample/RazorPagesContacts/Pages/Customers/Create3.cshtml?highlight=3,8-9,15-99)]
 
 上述程式碼：
 
 * 包含 jQuery 和 jQuery 驗證腳本。
-* 會使用 `<div />` 和 `<span />` [標記](xref:mvc/views/tag-helpers/intro)協助程式來啟用：
+* 使用 `<div />` 和 `<span />` [標記](xref:mvc/views/tag-helpers/intro) 協助程式來啟用：
 
   * 用戶端驗證。
-  * 驗證錯誤呈現。
+  * 轉譯時發生驗證錯誤。
 
 * 產生下列 HTML：
 
   [!code-html[](index/3.0sample/RazorPagesContacts/Pages/Customers/Create5.html)]
 
-張貼不含名稱值的建立表單時，會顯示錯誤訊息「需要名稱欄位」。 在表單上。 如果在用戶端上啟用 JavaScript，瀏覽器會顯示錯誤，而不會張貼至伺服器。
+張貼沒有名稱值的建立表單時，會顯示錯誤訊息：「需要名稱欄位」。 在表單上。 如果在用戶端上啟用 JavaScript，則瀏覽器會顯示錯誤，而不會張貼至伺服器。
 
-`[StringLength(10)]`屬性會 `data-val-length-max="10"` 在呈現的 HTML 上產生。 `data-val-length-max`防止瀏覽器輸入超過指定的最大長度。 如果使用[Fiddler](https://www.telerik.com/fiddler)之類的工具來編輯和重新播放文章：
+`[StringLength(10)]`屬性會 `data-val-length-max="10"` 在呈現的 HTML 上產生。 `data-val-length-max` 防止瀏覽器輸入超過指定的最大長度。 如果使用 [Fiddler](https://www.telerik.com/fiddler) 之類的工具來編輯和重新播放 post：
 
-* ，其名稱超過10。
+* 名稱超過10。
 * 錯誤訊息「功能變數名稱必須是最大長度為10的字串」。 」錯誤訊息。
 
 請考慮下列 `Movie` 模型：
 
 [!code-csharp[](~/tutorials/razor-pages/razor-pages-start/sample/RazorPagesMovie30/Models/MovieDateRatingDA.cs?name=snippet1)]
 
-驗證屬性會指定要在其套用的模型屬性上強制執行的行為：
+驗證屬性會指定在其套用的模型屬性上強制執行的行為：
 
-* `Required`和 `MinimumLength` 屬性（attribute）表示屬性（property）必須有值，但不會防止使用者輸入空白字元來滿足這種驗證。
+* `Required`和 `MinimumLength` 屬性工作表示屬性必須有值，但不會防止使用者輸入空白字元來滿足這種驗證。
 * `RegularExpression` 屬性則用來限制可輸入的字元。 在上述程式碼中，"Genre"：
 
   * 必須指使用字母。
@@ -323,7 +324,7 @@ Razor根據預設，頁面只會系結屬性與非 `GET` 動詞。 系結至屬�
 * `StringLength`屬性會設定字串屬性的最大長度，並選擇性地設定其最小長度。
 * 實值型別 (如`decimal`、`int`、`float`、`DateTime`) 原本就是必要項目，而且不需要 `[Required]` 屬性。
 
-模型的 [建立] 頁面會 `Movie` 顯示具有無效值的錯誤：
+模型的 [建立] 頁面會顯示 `Movie` 具有無效值的錯誤：
 
 ![有多個 jQuery 用戶端驗證錯誤的電影檢視表單](~/tutorials/razor-pages/validation/_static/val.png)
 
@@ -334,25 +335,25 @@ Razor根據預設，頁面只會系結屬性與非 `GET` 動詞。 系結至屬�
 
 ## <a name="handle-head-requests-with-an-onget-handler-fallback"></a>使用 OnGet 處理常式後援來處理 HEAD 要求
 
-`HEAD`要求可讓您抓取特定資源的標頭。 不同於 `GET` 要求，`HEAD` 要求不會傳回回應主體。
+`HEAD` 要求可讓您取得特定資源的標頭。 不同於 `GET` 要求，`HEAD` 要求不會傳回回應主體。
 
 一般來說，會為 `HEAD` 要求建立及呼叫 `OnHead` 處理常式：
 
 [!code-csharp[](index/3.0sample/RazorPagesContacts/Pages/Privacy.cshtml.cs?name=snippet)]
 
-Razor`OnGet`如果未 `OnHead` 定義任何處理程式，則頁面會回復為呼叫處理常式。
+Razor`OnGet`如果未 `OnHead` 定義任何處理程式，則頁面會切換回呼叫處理常式。
 
 <a name="xsrf"></a>
 
 ## <a name="xsrfcsrf-and-no-locrazor-pages"></a>XSRF/CSRF 和 Razor Pages
 
-Razor頁面會受到[Antiforgery 驗證](xref:security/anti-request-forgery)的保護。 [FormTagHelper](xref:mvc/views/working-with-forms#the-form-tag-helper)會將 antiforgery TOKEN 插入 HTML 表單元素中。
+Razor 頁面會受到 [Antiforgery 驗證](xref:security/anti-request-forgery)的保護。 [FormTagHelper](xref:mvc/views/working-with-forms#the-form-tag-helper)會將 antiforgery token 插入至 HTML 表單元素。
 
 <a name="layout"></a>
 
-## <a name="using-layouts-partials-templates-and-tag-helpers-with-no-locrazor-pages"></a>搭配頁面使用版面配置、部分、範本和標籤協助程式 Razor
+## <a name="using-layouts-partials-templates-and-tag-helpers-with-no-locrazor-pages"></a>使用頁面的版面配置、部分、範本和標記協助程式 Razor
 
-頁面會與視圖引擎的所有功能搭配使用 Razor 。 版面配置、部分、範本、標記協助程式、 *_ViewStart*和 *_ViewImports。 cshtml*的工作方式與傳統 Razor 視圖相同。
+頁面會使用 view engine 的所有功能 Razor 。 配置、部分、範本、標籤協助程式、 *_ViewStart cshtml*和 *_ViewImports. cshtml*的運作方式與傳統視圖的運作方式相同。 Razor
 
 可利用這些功能的一部分來整理這個頁面。
 
@@ -364,21 +365,21 @@ Razor頁面會受到[Antiforgery 驗證](xref:security/anti-request-forgery)的�
 
 * 控制每個頁面的版面配置 (除非頁面退出版面配置)。
 * 匯入 HTML 結構，例如 JavaScript 和樣式表。
-* 頁面的內容 Razor 會在呼叫的位置呈現 `@RenderBody()` 。
+* 頁面的內容 Razor 會轉譯 `@RenderBody()` 為呼叫的位置。
 
-如需詳細資訊，請參閱[版面配置頁面](xref:mvc/views/layout)。
+如需詳細資訊，請參閱 [版面配置頁面](xref:mvc/views/layout)。
 
 [版面配置](xref:mvc/views/layout#specifying-a-layout)屬性是在 *Pages/_ViewStart.cshtml* 中設定：
 
 [!code-cshtml[](index/sample/RazorPagesContacts2/Pages/_ViewStart.cshtml)]
 
-版面配置位於 *Pages/Shared* 資料夾。 頁面會以階層方式尋找其他檢視 (版面配置、範本、部分)，從目前頁面的相同資料夾開始。 *Pages/Shared*資料夾中的版面配置可以從 Razor [ *pages* ] 資料夾下的任何頁面使用。
+版面配置位於 *Pages/Shared* 資料夾。 頁面會以階層方式尋找其他檢視 (版面配置、範本、部分)，從目前頁面的相同資料夾開始。 *頁面/共用*資料夾中的版面配置可以從 Razor [ *pages* ] 資料夾下的任何頁面使用。
 
 版面配置頁面應位於 *Pages/Shared* 資料夾中。
 
-我們**不**建議您將配置檔案放入 *Views/Shared* 資料夾。 *Views/Shared* 是 MVC 檢視模式。 Razor頁面的目的是要依賴資料夾階層，而不是路徑慣例。
+我們**不**建議您將配置檔案放入 *Views/Shared* 資料夾。 *Views/Shared* 是 MVC 檢視模式。 Razor 頁面的目的是要依賴資料夾階層，不是路徑慣例。
 
-從頁面中查看搜尋 Razor 包含*Pages*資料夾。 與 MVC 控制器和傳統視圖搭配使用的版面配置、範本和部分都 Razor *是可行*的。
+頁面上的視圖搜尋 Razor 包含 *Pages* 資料夾。 適用于 MVC 控制器和傳統視圖的版面配置、範本和 Razor 部分 *只會運作*。
 
 新增 *Pages/_ViewImports.cshtml* 檔案：
 
@@ -404,21 +405,21 @@ Razor頁面會受到[Antiforgery 驗證](xref:security/anti-request-forgery)的�
 
 [!code-cshtml[](index/sample/RazorPagesContacts2/Pages/_ViewImports.cshtml?highlight=1)]
 
-針對 [ *Pages/Customers/編輯. cshtml* ] 頁面產生的命名空間與 Razor 類別相同 `PageModel` 。
+針對 *Pages/Customers/Edit. cshtml*頁面產生的命名空間與 Razor `PageModel` 類別相同。
 
-`@namespace`*也適用于傳統的 Razor 視圖。*
+`@namespace`*也可搭配傳統 Razor 視圖使用。*
 
-請考慮*Pages/Create. cshtml* view file：
+請考慮 *Pages/Create. cshtml* view 檔案：
 
 [!code-cshtml[](index/3.0sample/RazorPagesContacts/Pages/Customers/Create3.cshtml?highlight=2-3)]
 
-已更新的*Pages/Create. cshtml*視圖檔案，包含 *_ViewImports. cshtml*和先前的配置檔案：
+更新的 *Pages/Create. cshtml* view 檔案，其中包含 *_ViewImports. cshtml* 和先前的版面配置檔案：
 
 [!code-cshtml[](index/3.0sample/RazorPagesContacts/Pages/Customers/Create4.cshtml?highlight=2)]
 
-在上述程式碼中， *_ViewImports. cshtml*已匯入命名空間和標籤協助程式。 設定檔案已匯入 JavaScript 檔案。
+在上述程式碼中， *_ViewImports 的 cshtml* 已匯入命名空間和標記協助程式。 設定檔案匯入 JavaScript 檔案。
 
-[ Razor Pages 入門專案](#rpvs17)包含*pages/_ValidationScriptsPartial. cshtml*，這會連結用戶端驗證。
+[ Razor Pages 入門專案](#rpvs17)包含*pages/_ValidationScriptsPartial. cshtml*，可連結用戶端驗證。
 
 如需部分檢視的詳細資訊，請參閱 <xref:mvc/views/partial>。
 
@@ -442,21 +443,21 @@ Razor頁面會受到[Antiforgery 驗證](xref:security/anti-request-forgery)的�
     * *Edit.cshtml*
     * *Index.cshtml*
 
-*Pages/customers/Create. cshtml*和*pages/customers/Edit. cshtml*頁面會在成功之後重新導向至*Pages/customers/Index. cshtml* 。 此字串 `./Index` 是用來存取前一頁的相對頁面名稱。 它可用來產生*Pages/Customers/Index. cshtml*頁面的 url。 例如：
+*Pages/customers/Create. cshtml*和*Pages/customers/Edit. cshtml*頁面會在成功之後重新導向至*Pages/customers/Index。 cshtml* 。 字串 `./Index` 是用來存取前一個頁面的相對頁面名稱。 它是用來產生 *Pages/Customers/Index. cshtml* 頁面的 url。 例如：
 
 * `Url.Page("./Index", ...)`
 * `<a asp-page="./Index">Customers Index Page</a>`
 * `RedirectToPage("./Index")`
 
-絕對頁面名稱 `/Index` 是用來產生*Pages/Index. cshtml*頁面的 url。 例如：
+絕對頁面名稱 `/Index` 是用來產生 *Pages/Index. cshtml* 頁面的 url。 例如：
 
 * `Url.Page("/Index", ...)`
 * `<a asp-page="/Index">Home Index Page</a>`
 * `RedirectToPage("/Index")`
 
-頁面名稱是從根 */Pages* 資料夾到該頁面的路徑 (包括前置的 `/`，例如 `/Index`)。 先前的 URL 產生範例提供了增強的選項和功能，透過硬式編碼 URL。 URL 產生使用[路由](xref:mvc/controllers/routing)，可以根據路由在目的地路徑中定義的方式，產生並且編碼參數。
+頁面名稱是從根 */Pages* 資料夾到該頁面的路徑 (包括前置的 `/`，例如 `/Index`)。 上述的 URL 產生範例提供增強的選項和功能功能，而不是硬式編碼 URL。 URL 產生使用[路由](xref:mvc/controllers/routing)，可以根據路由在目的地路徑中定義的方式，產生並且編碼參數。
 
-產生頁面 URL 支援相關的名稱。 下表顯示 `RedirectToPage` 在*Pages/Customers/Create. cshtml*中使用不同參數選取的索引頁。
+產生頁面 URL 支援相關的名稱。 下表顯示使用 `RedirectToPage` *Pages/Customers/Create. cshtml*中的不同參數所選取的索引頁面。
 
 | RedirectToPage(x)| 頁面 |
 | ----------------- | ------------ |
@@ -467,9 +468,9 @@ Razor頁面會受到[Antiforgery 驗證](xref:security/anti-request-forgery)的�
 
 <!-- Test via ~/razor-pages/index/3.0sample/RazorPagesContacts/Pages/Customers/Details.cshtml.cs -->
 
-`RedirectToPage("Index")`、 `RedirectToPage("./Index")` 和 `RedirectToPage("../Index")` 是*相對名稱*。 `RedirectToPage` 參數「結合」** 了目前頁面的路徑，以計算目的地頁面的名稱。
+`RedirectToPage("Index")`、 `RedirectToPage("./Index")` 和 `RedirectToPage("../Index")` 是 *相對名稱*。 `RedirectToPage` 參數「結合」** 了目前頁面的路徑，以計算目的地頁面的名稱。
 
-相對名稱連結在以複雜結構建置網站時很有用。 當使用相對名稱來連結資料夾中的頁面時：
+相對名稱連結在以複雜結構建置網站時很有用。 當使用相對名稱連結資料夾中的頁面時：
 
 * 重新命名資料夾並不會中斷相對連結。
 * 連結不會中斷，因為它們不包含資料夾名稱。
@@ -484,7 +485,7 @@ RedirectToPage("/Index", new { area = "Services" });
 
 ## <a name="viewdata-attribute"></a>ViewData 屬性
 
-您可以使用將資料傳遞至頁面 <xref:Microsoft.AspNetCore.Mvc.ViewDataAttribute> 。 具有屬性的屬性 `[ViewData]` 會將其值儲存並從載入 <xref:Microsoft.AspNetCore.Mvc.ViewFeatures.ViewDataDictionary> 。
+您可以使用將資料傳遞至頁面 <xref:Microsoft.AspNetCore.Mvc.ViewDataAttribute> 。 具有屬性的屬性（property） `[ViewData]` 會從儲存和載入其值 <xref:Microsoft.AspNetCore.Mvc.ViewFeatures.ViewDataDictionary> 。
 
 在下列範例中，會將 `AboutModel` `[ViewData]` 屬性套用至 `Title` 屬性：
 
@@ -518,7 +519,7 @@ public class AboutModel : PageModel
 
 ## <a name="tempdata"></a>TempData
 
-ASP.NET Core 會公開 <xref:Microsoft.AspNetCore.Mvc.Controller.TempData> 。 這個屬性會儲存資料，直到讀取為止。 <xref:Microsoft.AspNetCore.Mvc.ViewFeatures.TempDataDictionary.Keep*> 和 <xref:Microsoft.AspNetCore.Mvc.ViewFeatures.TempDataDictionary.Peek*> 方法可以用來檢查資料，不用刪除。 `TempData`當需要多個單一要求的資料時，對重新導向很有用。
+ASP.NET Core 會公開 <xref:Microsoft.AspNetCore.Mvc.Controller.TempData> 。 這個屬性會儲存資料，直到讀取為止。 <xref:Microsoft.AspNetCore.Mvc.ViewFeatures.TempDataDictionary.Keep*> 和 <xref:Microsoft.AspNetCore.Mvc.ViewFeatures.TempDataDictionary.Peek*> 方法可以用來檢查資料，不用刪除。 `TempData` 當需要多個單一要求的資料時，適用于重新導向。
 
 下列程式碼會設定使用 `TempData` 的 `Message` 值：
 
@@ -537,7 +538,7 @@ ASP.NET Core 會公開 <xref:Microsoft.AspNetCore.Mvc.Controller.TempData> 。 �
 public string Message { get; set; }
 ```
 
-如需詳細資訊，請參閱[TempData](xref:fundamentals/app-state#tempdata)。
+如需詳細資訊，請參閱 [TempData](xref:fundamentals/app-state#tempdata)。
 
 <a name="mhpp"></a>
 
@@ -569,7 +570,7 @@ public string Message { get; set; }
 
 支援在路徑開頭以波狀符號 (`~`) 指定根相對路徑。 例如，`@page "~/Some/Other/Path"` 與 `@page "/Some/Other/Path"` 相同。
 
-如果您不喜歡 URL 中的查詢字串 `?handler=JoinList` ，請變更路由，將處理常式名稱放在 url 的路徑部分。 藉由在指示詞後面加上雙引號括住的路由範本，可以自訂路由 `@page` 。
+如果您不喜歡 URL 中的查詢字串 `?handler=JoinList` ，請變更路由，將處理常式名稱放在 url 的路徑部分。 您可以藉由新增以雙引號括住的路由範本來自訂路由 `@page` 。
 
 [!code-cshtml[](index/sample/RazorPagesContacts2/Pages/Customers/CreateRoute.cshtml?highlight=1)]
 
@@ -577,33 +578,33 @@ public string Message { get; set; }
 
 跟在 `handler` 後面的 `?` 表示路由參數為選擇性。
 
-## <a name="advanced-configuration-and-settings"></a>先進的設定和設定
+## <a name="advanced-configuration-and-settings"></a>Advanced configuration and settings
 
-大部分的應用程式都不需要下列章節中的設定和設定。
+大部分的應用程式都不需要下列各節中的設定和設定。
 
 若要設定 advanced 選項，請使用設定的多載 <xref:Microsoft.Extensions.DependencyInjection.MvcServiceCollectionExtensions.AddRazorPages%2A> <xref:Microsoft.AspNetCore.Mvc.RazorPages.RazorPagesOptions> ：
 
 [!code-csharp[](index/3.0sample/RazorPagesContacts/StartupRPoptions.cs?name=snippet)]
 
-使用 <xref:Microsoft.AspNetCore.Mvc.RazorPages.RazorPagesOptions> 來設定頁面的根目錄，或加入頁面的應用程式模型慣例。 如需慣例的詳細資訊，請參閱[ Razor 頁面授權慣例](xref:security/authorization/razor-pages-authorization)。
+使用 <xref:Microsoft.AspNetCore.Mvc.RazorPages.RazorPagesOptions> 設定頁面的根目錄，或新增頁面的應用程式模型慣例。 如需慣例的詳細資訊，請參閱[ Razor 頁面授權慣例](xref:security/authorization/razor-pages-authorization)。
 
 若要先行編譯視圖，請參閱[ Razor view 編譯](xref:mvc/views/view-compilation)。
 
 ### <a name="specify-that-no-locrazor-pages-are-at-the-content-root"></a>指定 Razor 頁面位於內容根目錄
 
-根據預設， Razor 頁面會以根方式在 */Pages*目錄中。 新增 <xref:Microsoft.Extensions.DependencyInjection.MvcRazorPagesMvcBuilderExtensions.WithRazorPagesAtContentRoot*> 以指定您的 Razor 頁面位於應用程式的[內容根](xref:fundamentals/index#content-root) (<xref:Microsoft.AspNetCore.Hosting.IHostingEnvironment.ContentRootPath>) ：
+根據預設， Razor 頁面會根目錄在 */Pages* 目錄中。 加入 <xref:Microsoft.Extensions.DependencyInjection.MvcRazorPagesMvcBuilderExtensions.WithRazorPagesAtContentRoot*> ，以指定您的 Razor 頁面位於應用程式的 [內容根目錄](xref:fundamentals/index#content-root) (<xref:Microsoft.AspNetCore.Hosting.IHostingEnvironment.ContentRootPath>) ：
 
 [!code-csharp[](index/3.0sample/RazorPagesContacts/StartupWithRazorPagesAtContentRoot.cs?name=snippet)]
 
 ### <a name="specify-that-no-locrazor-pages-are-at-a-custom-root-directory"></a>指定 Razor 頁面位於自訂根目錄
 
-新增 <xref:Microsoft.Extensions.DependencyInjection.MvcRazorPagesMvcCoreBuilderExtensions.WithRazorPagesRoot*> 以指定 Razor 頁面位於應用程式中的自訂根目錄， (提供相對路徑) ：
+新增 <xref:Microsoft.Extensions.DependencyInjection.MvcRazorPagesMvcCoreBuilderExtensions.WithRazorPagesRoot*> 以指定 Razor 頁面位於應用程式的自訂根目錄， (提供相對路徑) ：
 
 [!code-csharp[](index/3.0sample/RazorPagesContacts/StartupWithRazorPagesRoot.cs?name=snippet)]
 
 ## <a name="additional-resources"></a>其他資源
 
-* 請參閱[開始使用 Razor 頁面](xref:tutorials/razor-pages/razor-pages-start)，這會在此簡介中建立。
+* 請參閱這篇簡介中的 [開始使用 Razor 頁面](xref:tutorials/razor-pages/razor-pages-start)。
 * [授權屬性和 Razor 頁面](xref:security/authorization/simple#aarp)
 * [下載或查看範例程式碼](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/razor-pages/index/3.0sample)
 * <xref:index>
@@ -622,13 +623,13 @@ public string Message { get; set; }
 
 作者：[Rick Anderson](https://twitter.com/RickAndMSFT) 與 [Ryan Nowak](https://github.com/rynowak)
 
-Razor頁面是 ASP.NET Core MVC 的新層面，可讓撰寫以頁面為焦點的案例更輕鬆且更具生產力。
+Razor 頁面是 ASP.NET Core MVC 的新層面，讓編碼頁面導向的案例更容易且更具生產力。
 
 如果您在尋找使用模型檢視控制器方法的教學課程，請參閱[開始使用 ASP.NET Core MVC](xref:tutorials/first-mvc-app/start-mvc)。
 
-本檔提供 Razor 頁面簡介。 它不是逐步教學課程。 如果您發現某些區段太先進，請參閱[開始使用 Razor 頁面](xref:tutorials/razor-pages/razor-pages-start)。 如需 ASP.NET Core 的概觀，請參閱[ASP.NET Core 簡介](xref:index)。
+本檔提供 Razor 頁面簡介。 它不是逐步教學課程。 如果您發現某些區段太過先進，請參閱 [開始使用 Razor 頁面](xref:tutorials/razor-pages/razor-pages-start)。 如需 ASP.NET Core 的概觀，請參閱[ASP.NET Core 簡介](xref:index)。
 
-## <a name="prerequisites"></a>必要條件
+## <a name="prerequisites"></a>Prerequisites
 
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
@@ -650,7 +651,7 @@ Razor頁面是 ASP.NET Core MVC 的新層面，可讓撰寫以頁面為焦點的
 
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
-如需如何建立頁面專案的詳細指示，請參閱[開始使用 Razor 頁面](xref:tutorials/razor-pages/razor-pages-start) Razor 。
+如需如何建立頁面專案的詳細指示，請參閱 [開始使用 Razor 頁面](xref:tutorials/razor-pages/razor-pages-start) Razor 。
 
 # <a name="visual-studio-for-mac"></a>[Visual Studio for Mac](#tab/visual-studio-mac)
 
@@ -664,9 +665,9 @@ Razor頁面是 ASP.NET Core MVC 的新層面，可讓撰寫以頁面為焦點的
 
 ---
 
-## <a name="no-locrazor-pages"></a>Razor頁面
+## <a name="no-locrazor-pages"></a>Razor 頁面
 
-Razor頁面已在*Startup.cs*中啟用：
+Razor 頁面已在 *Startup.cs*中啟用：
 
 [!code-csharp[](index/sample/RazorPagesIntro/Startup.cs?name=snippet_Startup)]
 
@@ -674,7 +675,7 @@ Razor頁面已在*Startup.cs*中啟用：
 
 [!code-cshtml[](index/sample/RazorPagesIntro/Pages/Index.cshtml)]
 
-上述程式碼看起來很像是在具有控制器和 views 的 ASP.NET Core 應用程式中使用的[ Razor 視圖](xref:tutorials/first-mvc-app/adding-view)檔案。 讓它不同的是 `@page` 指示詞。 `@page` 會將檔案轉換成 MVC 動作，這表示它會直接處理要求，不用透過控制器。 `@page`必須是頁面上的第一個指示詞 Razor 。 `@page`會影響其他結構的行為 Razor 。
+上述程式碼看起來很像是在具有控制器和 views 的 ASP.NET Core 應用程式中使用的[ Razor 視圖](xref:tutorials/first-mvc-app/adding-view)檔案。 讓它不同的是 `@page` 指示詞。 `@page` 會將檔案轉換成 MVC 動作，這表示它會直接處理要求，不用透過控制器。 `@page` 必須是頁面上的第一個指示詞 Razor 。 `@page` 會影響其他結構的行為 Razor 。
 
 使用`PageModel`類別的類似頁面，顯示於下列兩個檔案中。 *Pages/Index2.cshtml* 檔案：
 
@@ -684,7 +685,7 @@ Razor頁面已在*Startup.cs*中啟用：
 
 [!code-csharp[](index/sample/RazorPagesIntro/Pages/Index2.cshtml.cs)]
 
-依照慣例， `PageModel` 類別檔案的名稱與分頁檔相同， Razor 附加 *.cs* 。 例如，前一 Razor 頁是*Pages/Index2*。 包含 `PageModel` 類別的檔案名為 *Pages/Index2.cshtml.cs*。
+依照慣例，類別檔案的名稱會與 `PageModel` Razor 附加 *.cs* 的分頁檔相同。 例如，前一 Razor 頁是*Pages/index2.cshtml.cs。* 包含 `PageModel` 類別的檔案名為 *Pages/Index2.cshtml.cs*。
 
 頁面的 URL 路徑關聯是由頁面在檔案系統中的位置決定。 下表顯示 Razor 頁面路徑和相符的 URL：
 
@@ -697,12 +698,12 @@ Razor頁面已在*Startup.cs*中啟用：
 
 注意：
 
-* 執行時間預設會 Razor 在*pages*資料夾中尋找分頁檔案。
+* 執行時間預設會 Razor 在 [ *pages* ] 資料夾中尋找分頁檔。
 * `Index` 是 URL 未包含頁面時的預設頁面。
 
 ## <a name="write-a-basic-form"></a>撰寫基本表單
 
-Razor頁面的設計目的是要在建立應用程式時，讓與網頁瀏覽器搭配使用的常見模式變得容易執行。 [模型](xref:mvc/models/model-binding)系結、[標記](xref:mvc/views/tag-helpers/intro)協助程式和 HTML 協助程式都*只*會使用頁面類別中定義的屬性 Razor 。 `Contact` 模型請考慮實作基本的「與我們連絡」格式頁面：
+Razor 頁面的設計目的是要讓搭配網頁瀏覽器使用的常見模式在建立應用程式時很容易執行。 [模型](xref:mvc/models/model-binding)系結 [、卷](xref:mvc/views/tag-helpers/intro)標協助程式和 HTML 協助程式全都 *是* 使用頁面類別中定義的屬性 Razor 。 `Contact` 模型請考慮實作基本的「與我們連絡」格式頁面：
 
 本文件中的範例，會在 [Startup.cs](https://github.com/dotnet/AspNetCore.Docs/blob/master/aspnetcore/razor-pages/index/sample/RazorPagesContacts/Startup.cs#L15-L16) 檔案中初始化 `DbContext`。
 
@@ -728,20 +729,20 @@ DB 內容：
 
 `PageModel` 類別可以分離頁面邏輯與頁面展示。 此類別會定義頁面的處理常式，以處理傳送至頁面的要求與用於轉譯頁面的資料。 這種分隔允許：
 
-* 透過相依性[插入](xref:fundamentals/dependency-injection)來管理頁面相依性。
-* 對頁面進行[單元測試](xref:test/razor-pages-tests)。
+* 透過相依性 [插入](xref:fundamentals/dependency-injection)來管理頁面相依性。
+* [單元測試](xref:test/razor-pages-tests) 頁面。
 
 在 `POST` 要求上執行的頁面具有 「處理常式方法」`OnPostAsync` ** (當使用者張貼表單時)。 您可以新增任何 HTTP 指令動詞的處理常式方法。 最常見的處理常式包括：
 
 * `OnGet`，初始化頁所需要的狀態。 [OnGet](#OnGet) 範例。
 * `OnPost`，處理表單提交作業。
 
-`Async` 命名尾碼是選擇性的，但依照慣例通常用於非同步函式。 上述程式碼通常用於 Razor 頁面。
+`Async` 命名尾碼是選擇性的，但依照慣例通常用於非同步函式。 上述程式碼一般適用于 Razor 頁面。
 
-如果您熟悉如何使用控制器和 views 來 ASP.NET 應用程式：
+如果您熟悉使用控制器和 views 的 ASP.NET apps：
 
 * `OnPostAsync`上述範例中的程式碼看起來類似一般的控制器程式碼。
-* 大部分的 MVC 基本類型（例如[模型](xref:mvc/models/model-binding)系結、[驗證](xref:mvc/models/validation)、[驗證](xref:mvc/models/validation)和動作結果）都是共用的。
+* 大部分的 MVC 基本專案，例如 [模型](xref:mvc/models/model-binding)系結、 [驗證](xref:mvc/models/validation)、 [驗證](xref:mvc/models/validation)和動作結果都是共用的。
 
 前一個 `OnPostAsync` 方法：
 
@@ -756,13 +757,13 @@ DB 內容：
 
 成功輸入資料後，`OnPostAsync` 處理常式方法會呼叫 `RedirectToPage` 協助程式方法，傳回 `RedirectToPageResult` 的執行個體。 `RedirectToPage` 是新的動作結果，類似於 `RedirectToAction` 或 `RedirectToRoute`，但會針對頁面自訂。 在上述範例中，它會重新導向至根索引頁面 (`/Index`)。 [產生頁面 URL](#url_gen)一節會詳細說明 `RedirectToPage`。
 
-當提交的表單有驗證錯誤時 (傳遞至伺服器)，`OnPostAsync` 處理常式方法會呼叫 `Page` 協助程式方法。 `Page` 會傳回 `PageResult` 的執行個體。 傳回 `Page` 類似於控制站中的動作傳回 `View`。 `PageResult`這是處理常式方法的預設傳回型別。 傳回 `void` 的處理常式方法會呈現頁面。
+當提交的表單有驗證錯誤時 (傳遞至伺服器)，`OnPostAsync` 處理常式方法會呼叫 `Page` 協助程式方法。 `Page` 會傳回 `PageResult` 的執行個體。 傳回 `Page` 類似於控制站中的動作傳回 `View`。 `PageResult` 這是處理常式方法的預設傳回型別。 傳回 `void` 的處理常式方法會呈現頁面。
 
 `Customer` 屬性 (property) 使用 `[BindProperty]` 屬性 (attribute) 加入模型繫結。
 
 [!code-csharp[](index/sample/RazorPagesContacts/Pages/Create.cshtml.cs?name=snippet_PageModel&highlight=10-11)]
 
-Razor根據預設，頁面只會系結屬性與非 `GET` 動詞。 繫結至屬性可以減少您必須撰寫的程式碼數量。 透過使用相同的屬性呈現表單欄位 (`<input asp-for="Customer.Name">`) 並接受輸入，繫結可以減少程式碼。
+Razor 依預設，頁面只會系結具有非動詞命令的屬性 `GET` 。 繫結至屬性可以減少您必須撰寫的程式碼數量。 透過使用相同的屬性呈現表單欄位 (`<input asp-for="Customer.Name">`) 並接受輸入，繫結可以減少程式碼。
 
 [!INCLUDE[](~/includes/bind-get.md)]
 
@@ -778,7 +779,7 @@ Razor根據預設，頁面只會系結屬性與非 `GET` 動詞。 繫結至屬�
 
 [!code-cshtml[](index/sample/RazorPagesContacts/Pages/Index.cshtml?range=21)]
 
-`<a asp-page="./Edit" asp-route-id="@contact.Id">Edit</a>`[錨點](xref:mvc/views/tag-helpers/builtin-th/anchor-tag-helper)標籤協助程式使用 `asp-route-{value}` 屬性來產生 [編輯] 頁面的連結。 該連結包含路由資料和連絡人識別碼。 例如，`https://localhost:5001/Edit/1`。 [標記](xref:mvc/views/tag-helpers/intro)協助程式可讓伺服器端程式碼參與建立和轉譯檔案中的 HTML 元素 Razor 。 標記協助程式由 `@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers` 啟用
+`<a asp-page="./Edit" asp-route-id="@contact.Id">Edit</a>`[錨點](xref:mvc/views/tag-helpers/builtin-th/anchor-tag-helper)標籤協助程式使用 `asp-route-{value}` 屬性來產生編輯頁面的連結。 該連結包含路由資料和連絡人識別碼。 例如： `https://localhost:5001/Edit/1` 。 [標記](xref:mvc/views/tag-helpers/intro) 協助程式可讓伺服器端程式碼參與建立和轉譯檔案中的 HTML 元素 Razor 。 標記協助程式由 `@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers` 啟用
 
 *Pages/Edit.cshtml* 檔案：
 
@@ -811,20 +812,20 @@ Razor根據預設，頁面只會系結屬性與非 `GET` 動詞。 繫結至屬�
 
 選取按鈕時，表單 `POST` 要求會傳送至伺服器。 依照慣例，會依據配置 `OnPost[handler]Async`，按 `handler` 參數的值來選取處理常式方法。
 
-在此範例中，因為 `handler` 為 `delete`，所以會使用 `OnPostDeleteAsync` 處理常式方法來處理 `POST` 要求。 若 `asp-page-handler` 設為其他值 (例如 `remove`)，則會選取名為 `OnPostRemoveAsync` 的處理常式方法。 下列程式碼會顯示 `OnPostDeleteAsync` 處理常式：
+在此範例中，因為 `handler` 為 `delete`，所以會使用 `OnPostDeleteAsync` 處理常式方法來處理 `POST` 要求。 若 `asp-page-handler` 設為其他值 (例如 `remove`)，則會選取名為 `OnPostRemoveAsync` 的處理常式方法。 下列程式碼顯示 `OnPostDeleteAsync` 處理常式：
 
 [!code-csharp[](index/sample/RazorPagesContacts/Pages/Index.cshtml.cs?range=26-37)]
 
 `OnPostDeleteAsync` 方法：
 
-* 接受查詢字串的 `id`。 如果包含路由條件約束的*Index. cshtml*頁面指示詞 `"{id:int?}"` ，則 `id` 會來自路由資料。 的路由資料 `id` 是在 URI 中指定，例如 `https://localhost:5001/Customers/2` 。
+* 接受查詢字串的 `id`。 如果 *Index. cshtml* 頁面指示詞包含路由條件約束 `"{id:int?}"` ，則 `id` 會來自路由資料。 的路由資料 `id` 是在 URI 中指定，例如 `https://localhost:5001/Customers/2` 。
 * 使用 `FindAsync` 在資料庫中查詢客戶連絡人。
 * 若找到客戶連絡人，會從客戶連絡人清單中予以移除。 資料庫隨即更新。
 * 呼叫 `RedirectToPage` 以重新導向至根索引頁 (`/Index`)。
 
 ## <a name="mark-page-properties-as-required"></a>將頁面屬性標示為必要
 
-上的屬性 `PageModel` 可以標記為[必要](/dotnet/api/system.componentmodel.dataannotations.requiredattribute)的屬性：
+上的屬性 `PageModel` 可以使用 [必要](/dotnet/api/system.componentmodel.dataannotations.requiredattribute) 的屬性標記：
 
 [!code-csharp[](index/sample/Create.cshtml.cs?highlight=3,15-16)]
 
@@ -843,14 +844,14 @@ public void OnHead()
 }
 ```
 
-在 ASP.NET Core 2.1 或更新版本中， Razor `OnGet` 如果未定義任何處理程式，頁面就會回復為呼叫處理常式 `OnHead` 。 這個行為藉由在 `Startup.ConfigureServices` 中呼叫 [SetCompatibilityVersion](xref:mvc/compatibility-version) 來啟用：
+在 ASP.NET Core 2.1 或更新版本中， Razor `OnGet` 如果未定義任何處理程式，頁面就會切換回呼叫處理常式 `OnHead` 。 這個行為藉由在 `Startup.ConfigureServices` 中呼叫 [SetCompatibilityVersion](xref:mvc/compatibility-version) 來啟用：
 
 ```csharp
 services.AddMvc()
     .SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
 ```
 
-預設範本會在 ASP.NET Core 2.1 和 2.2 中產生 `SetCompatibilityVersion` 呼叫。 `SetCompatibilityVersion`將 Pages 選項有效地設定 Razor `AllowMappingHeadRequestsToGetHandler` 為 `true` 。
+預設範本會在 ASP.NET Core 2.1 和 2.2 中產生 `SetCompatibilityVersion` 呼叫。 `SetCompatibilityVersion` 有效地將 Razor Pages 選項設定 `AllowMappingHeadRequestsToGetHandler` 為 `true` 。
 
 您可以明確選擇「特定」** 行為，而不必透過 `SetCompatibilityVersion` 選擇所有行為。 下列程式碼會選擇讓 `HEAD` 要求對應到 `OnGet` 處理常式：
 
@@ -870,9 +871,9 @@ services.AddMvc()
 
 <a name="layout"></a>
 
-## <a name="using-layouts-partials-templates-and-tag-helpers-with-no-locrazor-pages"></a>搭配頁面使用版面配置、部分、範本和標籤協助程式 Razor
+## <a name="using-layouts-partials-templates-and-tag-helpers-with-no-locrazor-pages"></a>使用頁面的版面配置、部分、範本和標記協助程式 Razor
 
-頁面會與視圖引擎的所有功能搭配使用 Razor 。 版面配置、部分、範本、標記協助程式、 *_ViewStart* *_ViewImports cshtml*的工作方式，與傳統 Razor 視圖相同。
+頁面會使用 view engine 的所有功能 Razor 。 配置、部分、範本、標籤協助程式、 *_ViewStart cshtml*、 *_ViewImports. cshtml*的運作方式與傳統視圖的運作方式相同。 Razor
 
 可利用這些功能的一部分來整理這個頁面。
 
@@ -891,13 +892,13 @@ services.AddMvc()
 
 [!code-cshtml[](index/sample/RazorPagesContacts2/Pages/_ViewStart.cshtml)]
 
-版面配置位於 *Pages/Shared* 資料夾。 頁面會以階層方式尋找其他檢視 (版面配置、範本、部分)，從目前頁面的相同資料夾開始。 *Pages/Shared*資料夾中的版面配置可以從 Razor [ *pages* ] 資料夾下的任何頁面使用。
+版面配置位於 *Pages/Shared* 資料夾。 頁面會以階層方式尋找其他檢視 (版面配置、範本、部分)，從目前頁面的相同資料夾開始。 *頁面/共用*資料夾中的版面配置可以從 Razor [ *pages* ] 資料夾下的任何頁面使用。
 
 版面配置頁面應位於 *Pages/Shared* 資料夾中。
 
-我們**不**建議您將配置檔案放入 *Views/Shared* 資料夾。 *Views/Shared* 是 MVC 檢視模式。 Razor頁面的目的是要依賴資料夾階層，而不是路徑慣例。
+我們**不**建議您將配置檔案放入 *Views/Shared* 資料夾。 *Views/Shared* 是 MVC 檢視模式。 Razor 頁面的目的是要依賴資料夾階層，不是路徑慣例。
 
-從頁面中查看搜尋 Razor 包含*Pages*資料夾。 您在 MVC 控制器和傳統視圖中使用的配置、範本和部分 Razor 都*是可行*的。
+頁面上的視圖搜尋 Razor 包含 *Pages* 資料夾。 您使用 MVC 控制器和傳統視圖的版面配置、範本和部分， Razor *只是工作*。
 
 新增 *Pages/_ViewImports.cshtml* 檔案：
 
@@ -923,9 +924,9 @@ services.AddMvc()
 
 [!code-cshtml[](index/sample/RazorPagesContacts2/Pages/_ViewImports.cshtml?highlight=1)]
 
-針對 [ *Pages/Customers/編輯. cshtml* ] 頁面產生的命名空間與 Razor 類別相同 `PageModel` 。
+針對 *Pages/Customers/Edit. cshtml*頁面產生的命名空間與 Razor `PageModel` 類別相同。
 
-`@namespace`*也適用于傳統的 Razor 視圖。*
+`@namespace`*也可搭配傳統 Razor 視圖使用。*
 
 原始的 *Pages/Create.cshtml* 檢視檔案：
 
@@ -935,7 +936,7 @@ services.AddMvc()
 
 [!code-cshtml[](index/sample/RazorPagesContacts2/Pages/Customers/Create.cshtml?highlight=2)]
 
-[ Razor Pages 入門專案](#rpvs17)包含*pages/_ValidationScriptsPartial. cshtml*，這會連結用戶端驗證。
+[ Razor Pages 入門專案](#rpvs17)包含*pages/_ValidationScriptsPartial. cshtml*，可連結用戶端驗證。
 
 如需部分檢視的詳細資訊，請參閱 <xref:mvc/views/partial>。
 
@@ -989,9 +990,9 @@ RedirectToPage("/Index", new { area = "Services" });
 
 ## <a name="viewdata-attribute"></a>ViewData 屬性
 
-資料可以傳遞至具有 [ViewDataAttribute](/dotnet/api/microsoft.aspnetcore.mvc.viewdataattribute) 的頁面。 具有屬性的控制器或頁面模型上的屬性， Razor `[ViewData]` 其值會從[ViewDataDictionary](/dotnet/api/microsoft.aspnetcore.mvc.viewfeatures.viewdatadictionary)儲存並載入。
+資料可以傳遞至具有 [ViewDataAttribute](/dotnet/api/microsoft.aspnetcore.mvc.viewdataattribute) 的頁面。 Razor具有屬性之控制器或頁面模型上的屬性 `[ViewData]` 會從[>viewdatadictionary](/dotnet/api/microsoft.aspnetcore.mvc.viewfeatures.viewdatadictionary)儲存和載入其值。
 
-在下列範例中， `AboutModel` 包含以 `Title` 標記的屬性 `[ViewData]` 。 `Title` 屬性會設定為 [關於] 頁面的標題：
+在下列範例中， `AboutModel` 包含標示為的 `Title` 屬性 `[ViewData]` 。 `Title` 屬性會設定為 [關於] 頁面的標題：
 
 ```csharp
 public class AboutModel : PageModel
@@ -1076,7 +1077,7 @@ public string Message { get; set; }
 
 支援在路徑開頭以波狀符號 (`~`) 指定根相對路徑。 例如，`@page "~/Some/Other/Path"` 與 `@page "/Some/Other/Path"` 相同。
 
-如果您不喜歡 URL 中的查詢字串 `?handler=JoinList` ，請變更路由，將處理常式名稱放在 url 的路徑部分。 藉由在指示詞後面加上雙引號括住的路由範本，可以自訂路由 `@page` 。
+如果您不喜歡 URL 中的查詢字串 `?handler=JoinList` ，請變更路由，將處理常式名稱放在 url 的路徑部分。 您可以藉由新增以雙引號括住的路由範本來自訂路由 `@page` 。
 
 [!code-cshtml[](index/sample/RazorPagesContacts2/Pages/Customers/CreateRoute.cshtml?highlight=1)]
 
@@ -1096,11 +1097,11 @@ public string Message { get; set; }
 
 [下載或檢視範例程式碼](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/razor-pages/index/sample)。
 
-請參閱[開始使用 Razor 頁面](xref:tutorials/razor-pages/razor-pages-start)，這會在此簡介中建立。
+請參閱這篇簡介中的 [開始使用 Razor 頁面](xref:tutorials/razor-pages/razor-pages-start)。
 
 ### <a name="specify-that-no-locrazor-pages-are-at-the-content-root"></a>指定 Razor 頁面位於內容根目錄
 
-根據預設， Razor 頁面會以根方式在 */Pages*目錄中。 將[ Razor PagesAtContentRoot](/dotnet/api/microsoft.extensions.dependencyinjection.mvcrazorpagesmvcbuilderextensions.withrazorpagesatcontentroot)新增至[AddMvc](/dotnet/api/microsoft.extensions.dependencyinjection.mvcservicecollectionextensions.addmvc#Microsoft_Extensions_DependencyInjection_MvcServiceCollectionExtensions_AddMvc_Microsoft_Extensions_DependencyInjection_IServiceCollection_) ，以指定您的 Razor 頁面位於應用程式的[內容根目錄](xref:fundamentals/index#content-root) ([ContentRootPath](/dotnet/api/microsoft.aspnetcore.hosting.ihostingenvironment.contentrootpath)) ：
+根據預設， Razor 頁面會根目錄在 */Pages* 目錄中。 將 [ Razor PagesAtContentRoot](/dotnet/api/microsoft.extensions.dependencyinjection.mvcrazorpagesmvcbuilderextensions.withrazorpagesatcontentroot) 新增至 [>addmvc](/dotnet/api/microsoft.extensions.dependencyinjection.mvcservicecollectionextensions.addmvc#Microsoft_Extensions_DependencyInjection_MvcServiceCollectionExtensions_AddMvc_Microsoft_Extensions_DependencyInjection_IServiceCollection_) ，以指定您的 Razor 頁面位於應用程式的 [內容根目錄](xref:fundamentals/index#content-root) ([ContentRootPath](/dotnet/api/microsoft.aspnetcore.hosting.ihostingenvironment.contentrootpath)) ：
 
 ```csharp
 services.AddMvc()
@@ -1113,7 +1114,7 @@ services.AddMvc()
 
 ### <a name="specify-that-no-locrazor-pages-are-at-a-custom-root-directory"></a>指定 Razor 頁面位於自訂根目錄
 
-將[ Razor PagesRoot](/dotnet/api/microsoft.extensions.dependencyinjection.mvcrazorpagesmvccorebuilderextensions.withrazorpagesroot)新增至[AddMvc](/dotnet/api/microsoft.extensions.dependencyinjection.mvcservicecollectionextensions.addmvc#Microsoft_Extensions_DependencyInjection_MvcServiceCollectionExtensions_AddMvc_Microsoft_Extensions_DependencyInjection_IServiceCollection_) ，以指定您的 Razor 頁面位於應用程式中的自訂根目錄， (提供相對路徑) ：
+將 [ Razor PagesRoot](/dotnet/api/microsoft.extensions.dependencyinjection.mvcrazorpagesmvccorebuilderextensions.withrazorpagesroot) 新增至 [>addmvc](/dotnet/api/microsoft.extensions.dependencyinjection.mvcservicecollectionextensions.addmvc#Microsoft_Extensions_DependencyInjection_MvcServiceCollectionExtensions_AddMvc_Microsoft_Extensions_DependencyInjection_IServiceCollection_) ，以指定您 Razor 的頁面位於應用程式中的自訂根目錄， (提供相對路徑) ：
 
 ```csharp
 services.AddMvc()

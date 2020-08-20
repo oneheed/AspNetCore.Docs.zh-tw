@@ -1,11 +1,12 @@
 ---
 title: 測試 ASP.NET Core 中介軟體
 author: tratcher
-description: 瞭解如何使用 TestServer 來測試 ASP.NET Core 中介軟體。
+description: 瞭解如何使用 TestServer 測試 ASP.NET Core 中介軟體。
 ms.author: riande
 ms.custom: mvc
 ms.date: 5/12/2020
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -16,28 +17,28 @@ no-loc:
 - Razor
 - SignalR
 uid: test/middleware
-ms.openlocfilehash: 235010c95cdd0c7ce1368b4abd91e75d81ae094b
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: ed0925259bf3d4fee6c903ff55cdf1dae2355af7
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88021896"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88631897"
 ---
 # <a name="test-aspnet-core-middleware"></a>測試 ASP.NET Core 中介軟體
 
-依[Chris Ross](https://github.com/Tratcher)
+由 [Chris Ross](https://github.com/Tratcher)
 
-中介軟體可以與隔離地進行測試 <xref:Microsoft.AspNetCore.TestHost.TestServer> 。 它可讓您：
+您可以使用隔離中介軟體來測試中介軟體 <xref:Microsoft.AspNetCore.TestHost.TestServer> 。 它可讓您：
 
 * 具現化應用程式管線，其中只包含您需要測試的元件。
 * 傳送自訂要求以驗證中介軟體行為。
 
 優點：
 
-* 要求會在記憶體中傳送，而不是透過網路進行序列化。
+* 要求會以記憶體傳送，而不是透過網路進行序列化。
 * 這可避免其他問題，例如埠管理和 HTTPS 憑證。
-* 中介軟體中的例外狀況可以直接傳回到呼叫測試。
-* 您可以 <xref:Microsoft.AspNetCore.Http.HttpContext> 直接在測試中自訂伺服器資料結構，例如。
+* 中介軟體中的例外狀況可以直接流回呼叫的測試。
+* 您可以直接在測試中自訂伺服器資料結構（例如 <xref:Microsoft.AspNetCore.Http.HttpContext> ）。
 
 ## <a name="set-up-the-testserver"></a>設定 TestServer
 
@@ -45,7 +46,7 @@ ms.locfileid: "88021896"
 
 * 建立並啟動使用的主機 <xref:Microsoft.AspNetCore.TestHost.TestServer> 。
 * 新增中介軟體所使用的任何必要服務。
-* 將[TestHost](https://www.nuget.org/packages/Microsoft.AspNetCore.TestHost/) NuGet 套件新增至專案：
+* 將 [AspNetCore TestHost](https://www.nuget.org/packages/Microsoft.AspNetCore.TestHost/) NuGet 套件新增至專案：
   
   ```dotnetcli
   <ItemGroup>
@@ -53,7 +54,7 @@ ms.locfileid: "88021896"
   </ItemGroup>
   ```
 
-* 設定處理管線以使用中介軟體進行測試。
+* 將處理管線設定為使用中介軟體進行測試。
 
 [!code-csharp[](middleware/samples_snapshot/3.x/setup.cs?highlight=4-18)]
 
@@ -62,19 +63,19 @@ ms.locfileid: "88021896"
 
 [!code-csharp[](middleware/samples_snapshot/3.x/request.cs?highlight=20)]
 
-判斷提示結果。 首先，請將判斷提示設為與預期結果相反的判斷提示。 具有錯誤正面判斷提示的初始執行，會確認中介軟體正常執行時測試失敗。 執行測試並確認測試失敗。
+判斷提示結果。 首先，讓判斷提示的結果與您預期的結果相反。 具有 false 正數判斷提示的初始回合，可確認當中間件正常執行時，測試會失敗。 執行測試，並確認測試失敗。
 
-在下列範例中，當要求根端點時，中介軟體應該會傳回404狀態碼 (*找不*到) 。 使用執行第一次測試 `Assert.NotEqual( ... );` ，這應該會失敗：
+在下列範例中，中介軟體應該會傳回404狀態碼 (當要求根端點時， *找不到*) 。 執行第一個測試 `Assert.NotEqual( ... );` ，這應該會失敗：
 
 [!code-csharp[](middleware/samples_snapshot/3.x/false-failure-check.cs?highlight=22)]
 
-變更判斷提示，以在正常操作條件下測試中介軟體。 最後的測試會使用 `Assert.Equal( ... );` 。 再次執行測試，以確認它通過。
+變更判斷提示，以在正常操作條件下測試中介軟體。 最終的測試會使用 `Assert.Equal( ... );` 。 再次執行測試，以確認它通過。
 
 [!code-csharp[](middleware/samples_snapshot/3.x/final-test.cs?highlight=22)]
 
 ## <a name="send-requests-with-httpcontext"></a>使用 HttpCoNtext 傳送要求
 
-測試應用程式也可以使用[SendAsync (動作 \<HttpContext> CancellationToken) ](xref:Microsoft.AspNetCore.TestHost.TestServer.SendAsync%2A)來傳送要求。 在下列範例中，當中間件處理時，會進行幾項檢查 `https://example.com/A/Path/?and=query` ：
+測試應用程式也可以使用 [SendAsync (Action \<HttpContext> ，CancellationToken) ](xref:Microsoft.AspNetCore.TestHost.TestServer.SendAsync%2A)來傳送要求。 在下列範例中，中介軟體處理時，會進行幾項檢查 `https://example.com/A/Path/?and=query` ：
 
 ```csharp
 [Fact]
@@ -123,22 +124,22 @@ public async Task TestMiddleware_ExpectedResponse()
 }
 ```
 
-<xref:Microsoft.AspNetCore.TestHost.TestServer.SendAsync%2A>允許直接設定物件， <xref:Microsoft.AspNetCore.Http.HttpContext> 而不是使用 <xref:System.Net.Http.HttpClient> 抽象概念。 使用 <xref:Microsoft.AspNetCore.TestHost.TestServer.SendAsync%2A> 來操作只能在伺服器上使用的結構，例如[HttpcoNtext](xref:Microsoft.AspNetCore.Http.HttpContext.Items)或[HTTPcoNtext 功能](xref:Microsoft.AspNetCore.Http.HttpContext.Features)。
+<xref:Microsoft.AspNetCore.TestHost.TestServer.SendAsync%2A> 允許直接設定物件， <xref:Microsoft.AspNetCore.Http.HttpContext> 而不是使用 <xref:System.Net.Http.HttpClient> 抽象概念。 您 <xref:Microsoft.AspNetCore.TestHost.TestServer.SendAsync%2A> 可以使用來操作伺服器上僅提供的結構，例如 [HttpcoNtext. Items](xref:Microsoft.AspNetCore.Http.HttpContext.Items) 或 [HTTPcoNtext 功能](xref:Microsoft.AspNetCore.Http.HttpContext.Features)。
 
-如同先前測試過*404-找不*到回應的範例，請檢查 `Assert` 前述測試中每個語句的相反。 當中間件正常運作時，此檢查會確認測試是否正確。 當您確認錯誤正面測試正常運作之後，請 `Assert` 針對測試的預期條件和值設定最終語句。 再次執行，以確認測試通過。
+如同先前測試過 *404-找不* 到回應的範例，請檢查 `Assert` 先前測試中每個語句的相反。 這項檢查會確認當中間件正常運作時測試是否正確。 確認錯誤的正面測試正常運作之後，請 `Assert` 針對預期的條件和測試值設定最後的語句。 再執行一次，以確認測試通過。
 
 ## <a name="testserver-limitations"></a>TestServer 限制
 
 TestServer
 
-* 已建立來將伺服器行為複寫至測試中介軟體。
-* 不***會嘗試複寫***所有 <xref:System.Net.Http.HttpClient> 行為。
-* 會嘗試讓用戶端對伺服器的存取權限盡可能地控制，而且能夠更瞭解伺服器上的情況。 例如，它可能會擲回通常不會擲回的例外 `HttpClient` 狀況，以便直接溝通伺服器狀態。
-* 預設不會設定某些傳輸特定標頭，因為它們通常不會與中介軟體相關。 如需詳細資訊，請參閱下一節。
+* 是為了將伺服器行為複寫到測試中介軟體所建立。
+* 不 ***會嘗試複寫*** 所有 <xref:System.Net.Http.HttpClient> 行為。
+* 盡可能讓用戶端存取伺服器，盡可能充分掌控伺服器，以及盡可能瞭解伺服器上發生的狀況。 例如，它可能會擲回通常未擲回的例外 `HttpClient` 狀況，以便直接傳達伺服器狀態。
+* 預設不會設定某些傳輸特定標頭，因為這些標頭通常與中介軟體無關。 如需詳細資訊，請參閱下一節。
 
-### <a name="content-length-and-transfer-encoding-headers"></a>內容長度和傳輸-編碼標頭
+### <a name="content-length-and-transfer-encoding-headers"></a>內容長度和傳輸編碼標頭
 
-TestServer 不***會設定傳輸***相關的要求或回應標頭，例如[內容長度](https://developer.mozilla.org/docs/Web/HTTP/Headers/Content-Length)或[傳輸編碼](https://developer.mozilla.org/docs/Web/HTTP/Headers/Transfer-Encoding)。 應用程式應該根據這些標頭來避免，因為它們的使用方式會因用戶端、案例和通訊協定而異。 如果 `Content-Length` 和 `Transfer-Encoding` 是測試特定案例的必要項，則在撰寫或時，可以在測試中 <xref:System.Net.Http.HttpRequestMessage> 指定 <xref:Microsoft.AspNetCore.Http.HttpContext> 。 如需詳細資訊，請參閱下列 GitHub 問題：
+TestServer 不 ***會設定傳輸*** 相關要求或回應標頭，例如 [內容長度](https://developer.mozilla.org/docs/Web/HTTP/Headers/Content-Length) 或 [傳輸編碼](https://developer.mozilla.org/docs/Web/HTTP/Headers/Transfer-Encoding)。 應用程式應該避免根據這些標頭，因為其使用方式會因用戶端、案例和通訊協定而異。 如果 `Content-Length` 和 `Transfer-Encoding` 是測試特定案例的必要項，則可以在撰寫或時于測試中指定 <xref:System.Net.Http.HttpRequestMessage> 它們 <xref:Microsoft.AspNetCore.Http.HttpContext> 。 如需詳細資訊，請參閱下列 GitHub 問題：
 
 * [dotnet/aspnetcore # 21677](https://github.com/dotnet/aspnetcore/issues/21677)
 * [dotnet/aspnetcore # 18463](https://github.com/dotnet/aspnetcore/issues/18463)

@@ -1,10 +1,11 @@
 ---
 title: 防止 ASP.NET Core 中的開啟重新導向攻擊
 author: ardalis
-description: 示範如何防止對 ASP.NET Core 應用程式的開啟重新導向攻擊
+description: 示範如何防止針對 ASP.NET Core 應用程式的開啟重新導向攻擊
 ms.author: riande
 ms.date: 07/07/2017
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -15,47 +16,47 @@ no-loc:
 - Razor
 - SignalR
 uid: security/preventing-open-redirects
-ms.openlocfilehash: 3a58c25bbd54803ce0b8c42a2667222d6e14c050
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: 5226e301960a56145b94b6128d0034c40b86bffd
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88021012"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88633457"
 ---
 # <a name="prevent-open-redirect-attacks-in-aspnet-core"></a>防止 ASP.NET Core 中的開啟重新導向攻擊
 
-重新導向至透過要求（例如 querystring 或表單資料）所指定 URL 的 web 應用程式可能會遭到篡改，以將使用者重新導向至外部的惡意 URL。 這種篡改稱為開放式重新導向攻擊。
+重新導向至透過要求（例如 querystring 或表單資料）所指定之 URL 的 web 應用程式可能會遭篡改，以將使用者重新導向至外部的惡意 URL。 這種篡改稱為開放式重新導向攻擊。
 
-每當您的應用程式邏輯重新導向至指定的 URL 時，您都必須確認重新導向 URL 未遭到篡改。 ASP.NET Core 具有內建功能，可協助保護應用程式不受開啟重新導向 (又稱為「開啟重新導向」) 攻擊。
+每當您的應用程式邏輯重新導向至指定的 URL 時，您必須確認重新導向 URL 尚未遭到篡改。 ASP.NET Core 有內建的功能，可協助保護應用程式免于開啟重新導向 (也稱為開放式重新導向) 攻擊。
 
-## <a name="what-is-an-open-redirect-attack"></a>什麼是開啟的重新導向攻擊？
+## <a name="what-is-an-open-redirect-attack"></a>什麼是開放式重新導向攻擊？
 
-Web 應用程式通常會在使用者存取需要驗證的資源時，將他們重新導向至登入頁面。 重新導向通常會包含 `returnUrl` querystring 參數，讓使用者可以在成功登入之後，傳回給原始要求的 URL。 使用者驗證之後，系統會將他們重新導向至原先要求的 URL。
+Web 應用程式會在存取需要驗證的資源時，經常將使用者重新導向至登入頁面。 重新導向通常會包含 `returnUrl` querystring 參數，讓使用者可以在成功登入後，返回原始要求的 URL。 使用者通過驗證之後，系統會將他們重新導向至他們原先要求的 URL。
 
-因為在要求的 querystring 中指定了目的地 URL，所以惡意使用者可能會篡改 querystring。 遭篡改的 querystring 可能會允許網站將使用者重新導向至外部的惡意網站。 這項技術稱為開放式重新導向 (或重新導向) 攻擊。
+因為目的地 URL 是在要求的查詢字串中指定，惡意使用者可能會篡改查詢字串。 遭篡改的 querystring 可能會允許網站將使用者重新導向至外部的惡意網站。 這項技術稱為「開啟重新導向 (或重新導向) 攻擊。
 
-### <a name="an-example-attack"></a>範例攻擊
+### <a name="an-example-attack"></a>攻擊範例
 
-惡意使用者可能會開發攻擊，以允許惡意使用者存取使用者的認證或機密資訊。 若要開始攻擊，惡意使用者說服使用者按一下您網站登入頁面的連結，並將 `returnUrl` querystring 值新增至 URL。 例如，請考慮中的應用程式， `contoso.com` 其中包含的登入頁面 `http://contoso.com/Account/LogOn?returnUrl=/Home/About` 。 攻擊會遵循下列步驟：
+惡意使用者可能會開發出一種攻擊，目的是要讓惡意使用者存取使用者的認證或機密資訊。 若要開始攻擊，惡意使用者說服使用者按一下網站登入頁面的連結，並將 `returnUrl` querystring 值新增至 URL。 例如，假設有一個 `contoso.com` 包含登入頁面的應用程式 `http://contoso.com/Account/LogOn?returnUrl=/Home/About` 。 攻擊會遵循下列步驟：
 
-1. 使用者按一下惡意連結以 `http://contoso.com/Account/LogOn?returnUrl=http://contoso1.com/Account/LogOn` (第二個 URL 是 "contoso**1**.com"，而不是 "contoso.com" ) 。
-2. 使用者登入成功。
-3. 網站) 會將使用者重新導向 (，以 `http://contoso1.com/Account/LogOn` (與實際網站) 完全類似的惡意網站。
-4. 使用者再次登入 (提供惡意網站的認證) 並重新導向至實際網站。
+1. 使用者按一下惡意連結來 `http://contoso.com/Account/LogOn?returnUrl=http://contoso1.com/Account/LogOn` (第二個 URL 是 "contoso**1**.com"，而非 "contoso.com" ) 。
+2. 使用者成功登入。
+3. 網站) 將使用者重新導向 (，以 `http://contoso1.com/Account/LogOn` (看似真實網站) 的惡意網站。
+4. 使用者再次登入 (為惡意網站提供其認證) ，然後重新導向回到實際的網站。
 
-使用者可能認為第一次嘗試登入失敗，而第二次嘗試成功。 使用者很可能會不知道他們的認證會受到危害。
+使用者可能認為第一次嘗試登入失敗，而第二次嘗試成功。 使用者最可能仍不知道其認證已遭入侵。
 
-![開啟重新導向攻擊程式](preventing-open-redirects/_static/open-redirection-attack-process.png)
+![開啟重新導向攻擊進程](preventing-open-redirects/_static/open-redirection-attack-process.png)
 
-除了登入頁面以外，有些網站會提供重新導向頁面或端點。 假設您的應用程式有一個頁面，其中包含開啟的重新導向 `/Home/Redirect` 。 例如，攻擊者可能會建立電子郵件中的連結，以前往 `[yoursite]/Home/Redirect?url=http://phishingsite.com/Home/Login` 。 一般使用者會查看 URL，並從您的網站名稱開始查看。 信任它，他們會按一下連結。 然後，開啟的重新導向會將使用者傳送至網路釣魚網站，看起來與您的內容相同，而且使用者可能會登入他們認為您的網站。
+除了登入頁面之外，某些網站還提供重新導向頁面或端點。 想像您的應用程式具有開啟重新導向的頁面 `/Home/Redirect` 。 例如，攻擊者可能會建立電子郵件中的連結 `[yoursite]/Home/Redirect?url=http://phishingsite.com/Home/Login` 。 一般使用者會查看 URL，並以您的網站名稱開始查看。 信任這一點，他們會按一下該連結。 然後，開啟的重新導向會將使用者傳送到網路釣魚網站，看起來與您一樣，而且使用者可能會登入他們認為是您的網站。
 
 ## <a name="protecting-against-open-redirect-attacks"></a>防止開啟重新導向攻擊
 
-開發 web 應用程式時，將所有使用者提供的資料視為不受信任。 如果您的應用程式具有可根據 URL 內容重新導向使用者的功能，請確定這類重新導向只會在您的應用程式內本機完成， (或至已知的 URL，而不是查詢字串) 中可能提供的任何 URL。
+開發 web 應用程式時，會將所有使用者提供的資料視為無法信任。 如果您的應用程式有可根據 URL 內容重新導向使用者的功能，請確定這類重新導向只會在您的應用程式 (或已知的 URL （而不是查詢字串) 中提供的任何 URL）中本機完成。
 
 ### <a name="localredirect"></a>LocalRedirect
 
-使用 `LocalRedirect` 來自基類的 helper 方法 `Controller` ：
+`LocalRedirect`從基類使用 helper 方法 `Controller` ：
 
 ```csharp
 public IActionResult SomeAction(string redirectUrl)
@@ -64,11 +65,11 @@ public IActionResult SomeAction(string redirectUrl)
 }
 ```
 
-`LocalRedirect`如果指定非本機 URL，將會擲回例外狀況。 否則，它的行為就像 `Redirect` 方法一樣。
+`LocalRedirect` 如果指定了非本機 URL，將會擲回例外狀況。 否則，它的行為就像 `Redirect` 方法一樣。
 
 ### <a name="islocalurl"></a>IsLocalUrl
 
-重新導向之前，請使用[IsLocalUrl](/dotnet/api/Microsoft.AspNetCore.Mvc.IUrlHelper.islocalurl#Microsoft_AspNetCore_Mvc_IUrlHelper_IsLocalUrl_System_String_)方法來測試 url：
+重新導向之前，請先使用 [IsLocalUrl](/dotnet/api/Microsoft.AspNetCore.Mvc.IUrlHelper.islocalurl#Microsoft_AspNetCore_Mvc_IUrlHelper_IsLocalUrl_System_String_) 方法來測試 url：
 
 下列範例顯示如何在重新導向之前檢查 URL 是否為本機。
 
@@ -86,4 +87,4 @@ private IActionResult RedirectToLocal(string returnUrl)
 }
 ```
 
-`IsLocalUrl`方法可保護使用者不小心重新導向至惡意網站。 當您需要本機 URL 的情況下提供非本機 URL 時，您可以記錄所提供的 URL 詳細資料。 記錄重新導向 Url 可能有助於診斷重新導向攻擊。
+`IsLocalUrl`方法會防止使用者不慎重新導向至惡意網站。 您可以記錄在預期本機 URL 的情況下提供非本機 URL 時所提供的 URL 詳細資料。 記錄重新導向 Url 可能有助於診斷重新導向的攻擊。

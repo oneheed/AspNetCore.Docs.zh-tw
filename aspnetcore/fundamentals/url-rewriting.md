@@ -7,6 +7,7 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 08/16/2019
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -17,16 +18,16 @@ no-loc:
 - Razor
 - SignalR
 uid: fundamentals/url-rewriting
-ms.openlocfilehash: 9f7eb15271a0b7adb3964b4fe039497bda7fef08
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: a1d31428945adade6748185c17d42ef60a61b5dc
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88016540"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88631697"
 ---
 # <a name="url-rewriting-middleware-in-aspnet-core"></a>ASP.NET Core 的 URL 重寫中介軟體
 
-依[Mikael Mengistu](https://github.com/mikaelm12)
+依 [Mikael Mengistu](https://github.com/mikaelm12)
 
 ::: moniker range=">= aspnetcore-3.0"
 
@@ -196,7 +197,7 @@ public void Configure(IApplicationBuilder app)
 
 在先前的重新導向規則範例 `redirect-rule/(.*)` 中，Regex 的開頭沒有插入號 (`^`)。 因此，就算 `redirect-rule/` 前有任何字元也能成功比對。
 
-| Path                               | 比對 |
+| 路徑                               | 比對 |
 | ---------------------------------- | :---: |
 | `/redirect-rule/1234/5678`         | 是   |
 | `/my-cool-redirect-rule/1234/5678` | 是   |
@@ -204,7 +205,7 @@ public void Configure(IApplicationBuilder app)
 
 `^rewrite-rule/(\d+)/(\d+)` 重寫規則只會比對開頭為 `rewrite-rule/` 的路徑。 請注意下表中的比對差異。
 
-| Path                              | 比對 |
+| 路徑                              | 比對 |
 | --------------------------------- | :---: |
 | `/rewrite-rule/1234/5678`         | 是   |
 | `/my-cool-rewrite-rule/1234/5678` | 否    |
@@ -550,7 +551,7 @@ public void Configure(IApplicationBuilder app)
 
 在先前的重新導向規則範例 `redirect-rule/(.*)` 中，Regex 的開頭沒有插入號 (`^`)。 因此，就算 `redirect-rule/` 前有任何字元也能成功比對。
 
-| Path                               | 比對 |
+| 路徑                               | 比對 |
 | ---------------------------------- | :---: |
 | `/redirect-rule/1234/5678`         | 是   |
 | `/my-cool-redirect-rule/1234/5678` | 是   |
@@ -558,7 +559,7 @@ public void Configure(IApplicationBuilder app)
 
 `^rewrite-rule/(\d+)/(\d+)` 重寫規則只會比對開頭為 `rewrite-rule/` 的路徑。 請注意下表中的比對差異。
 
-| Path                              | 比對 |
+| 路徑                              | 比對 |
 | --------------------------------- | :---: |
 | `/rewrite-rule/1234/5678`         | 是   |
 | `/my-cool-rewrite-rule/1234/5678` | 否    |

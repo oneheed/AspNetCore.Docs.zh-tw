@@ -1,11 +1,12 @@
 ---
-title: 第7部分，將新欄位新增至 Razor 頁面中的 ASP.NET Core
+title: 第7部分： Razor 在頁面中新增欄位，ASP.NET Core
 author: rick-anderson
-description: 頁面上的教學課程系列第7部分 Razor 。
+description: 頁面上教學課程系列的第7部分 Razor 。
 ms.author: riande
 ms.custom: mvc
 ms.date: 7/23/2019
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -16,14 +17,14 @@ no-loc:
 - Razor
 - SignalR
 uid: tutorials/razor-pages/new-field
-ms.openlocfilehash: 07a28333f86bb9b3c9f07b3ddf964edf5bf8dc96
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: f5efb121b95d84876c9029cf06a96f827137e660
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88022039"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88631442"
 ---
-# <a name="part-7-add-a-new-field-to-a-no-locrazor-page-in-aspnet-core"></a>第7部分，將新欄位新增至 Razor 頁面中的 ASP.NET Core
+# <a name="part-7-add-a-new-field-to-a-no-locrazor-page-in-aspnet-core"></a>第7部分： Razor 在頁面中新增欄位，ASP.NET Core
 
 作者：[Rick Anderson](https://twitter.com/RickAndMSFT)
 
@@ -38,7 +39,7 @@ ms.locfileid: "88022039"
 
 使用 EF Code First 自動建立資料庫時，Code First 會：
 
-* 將 `__EFMigrationsHistory` 資料表新增至資料庫，以追蹤資料庫的架構是否與其產生的模型類別同步。
+* 將 `__EFMigrationsHistory` 資料表加入至資料庫，以追蹤資料庫的架構是否與其產生的模型類別同步。
 * 如果模型類別與資料庫不同步，EF 會擲回例外狀況。
 
 自動驗證結構描述/模型是否同步，讓您更容易發現不一致的資料庫/程式碼問題。
@@ -63,11 +64,11 @@ ms.locfileid: "88022039"
 * 使用 `Rating` 欄位更新 [Create.cshtml](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/tutorials/razor-pages/razor-pages-start/sample/RazorPagesMovie30/Pages/Movies/Create.cshtml)。
 * 將 `Rating` 欄位新增至 Edit 頁面。
 
-在更新資料庫以包含新欄位之前，應用程式無法運作。 在不更新資料庫的情況下執行應用程式會擲回 `SqlException` ：
+在更新資料庫以包含新欄位之前，應用程式無法運作。 在不更新資料庫的情況下執行應用程式，會擲回 `SqlException` ：
 
 `SqlException: Invalid column name 'Rating'.`
 
-此 `SqlException` 例外狀況是因為更新的電影模型類別與資料庫之電影資料表的架構不同。 (資料庫資料表中沒有任何 `Rating` 資料行)。
+`SqlException`例外狀況是因為更新的電影模型類別與資料庫之電影資料表的架構不同而造成。 (資料庫資料表中沒有任何 `Rating` 資料行)。
 
 有幾個方法可以解決這個錯誤：
 
@@ -108,7 +109,7 @@ Update-Database
 
 "Rating" 是用來命名移轉檔案的任意名稱。 建議您針對移轉檔案使用有意義的名稱，這更加實用。
 
-`Update-Database`命令會告訴架構將架構變更套用至資料庫，並保留現有的資料。
+此 `Update-Database` 命令會指示架構將架構變更套用至資料庫，並保留現有的資料。
 
 <a name="ssox"></a>
 
@@ -118,9 +119,9 @@ Update-Database
 
 * 在 SSOX 中選取資料庫。
 * 以滑鼠右鍵按一下資料庫，然後選取 [刪除]**。
-* 勾選 [**關閉現有的連接**]。
+* 勾選 [ **關閉現有的連接**]。
 * 選取 [確定]。
-* 在[PMC](xref:tutorials/razor-pages/new-field#pmc)中，更新資料庫：
+* 在 [PMC](xref:tutorials/razor-pages/new-field#pmc)中，更新資料庫：
 
   ```powershell
   Update-Database
@@ -243,9 +244,9 @@ Update-Database
 
 * 在 SSOX 中選取資料庫。
 * 以滑鼠右鍵按一下資料庫，然後選取 [刪除]**。
-* 勾選 [**關閉現有的連接**]。
+* 勾選 [ **關閉現有的連接**]。
 * 選取 [確定]。
-* 在[PMC](xref:tutorials/razor-pages/new-field#pmc)中，更新資料庫：
+* 在 [PMC](xref:tutorials/razor-pages/new-field#pmc)中，更新資料庫：
 
   ```powershell
   Update-Database

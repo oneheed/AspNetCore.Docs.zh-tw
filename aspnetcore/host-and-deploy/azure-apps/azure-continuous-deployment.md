@@ -6,6 +6,7 @@ ms.author: riande
 ms.custom: devx-track-csharp, mvc
 ms.date: 12/06/2018
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -16,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: host-and-deploy/azure-apps/azure-continuous-deployment
-ms.openlocfilehash: 0def05f73fd5264b1fb01e0a2ae4fd8d70588d9c
-ms.sourcegitcommit: ba4872dd5a93780fe6cfacb2711ec1e69e0df92c
+ms.openlocfilehash: 1f3fca62b39125d9f23042c5929de829ab243865
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 08/12/2020
-ms.locfileid: "88130557"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88633171"
 ---
 # <a name="continuous-deployment-to-azure-with-visual-studio-and-git-with-aspnet-core"></a>搭配 ASP.NET Core 使用 Visual Studio 與 Git 持續部署至 Azure
 
@@ -36,7 +37,7 @@ ms.locfileid: "88130557"
 > [!NOTE]
 > 若要完成本教學課程，您需要 Microsoft Azure 帳戶。 若要取得帳戶，請[啟動 MSDN 訂閱者權益](https://azure.microsoft.com/pricing/member-offers/credit-for-visual-studio-subscribers/?WT.mc_id=A261C142F)或[註冊免費試用](https://azure.microsoft.com/free/dotnet/?WT.mc_id=A261C142F)。
 
-## <a name="prerequisites"></a>必要條件
+## <a name="prerequisites"></a>Prerequisites
 
 本教學課程假設您已安裝下列軟體：
 
@@ -50,7 +51,7 @@ ms.locfileid: "88130557"
 
 1. 從 [檔案]**** 功能表選取 [新增]**** > [專案]****。
 
-1. 選取 [ASP.NET Core Web 應用程式]**** 專案範本。 它會出現在 [**已安裝**的  >  **範本**]  >  **Visual c #**  >  **.net Core**底下。 將專案命名為 `SampleWebAppDemo`。 選取 [建立新的 Git 存放庫]**** 選項，然後按一下 [確定]****。
+1. 選取 [ASP.NET Core Web 應用程式]**** 專案範本。 它會出現**Installed**在 [  >  **Templates**  >  **Visual c #**  >  **.net Core**已安裝的範本] 下。 將專案命名為 `SampleWebAppDemo`。 選取 [建立新的 Git 存放庫]**** 選項，然後按一下 [確定]****。
 
    ![[新增專案] 對話方塊](azure-continuous-deployment/_static/01-new-project.png)
 
@@ -63,7 +64,7 @@ ms.locfileid: "88130557"
 
 ### <a name="running-the-web-app-locally"></a>在本機執行 Web 應用程式
 
-1. 一旦 Visual Studio 完成建立應用程式，請選取 [**調試**程式] [  >  **開始調試**] 來執行應用程式。 或者，也可以按 **F5**。
+1. 一旦 Visual Studio 完成建立應用程式之後，請選取 [ **Debug**  >  **開始調試**程式] 來執行應用程式。 或者，也可以按 **F5**。
 
    系統可能需要一點時間來初始化 Visual Studio 和新的應用程式。 完成後，瀏覽器會顯示執行中的應用程式。
 
@@ -75,11 +76,11 @@ ms.locfileid: "88130557"
 
 下列步驟會在 Azure 入口網站中建立 Web 應用程式：
 
-1. 登入[Azure 入口網站](https://portal.azure.com)。
+1. 登入 [Azure 入口網站](https://portal.azure.com)。
 
 1. 選取入口網站介面左上角的 [新增]****。
 
-1. 選取 [ **web +** 行動] [  >  **web 應用程式**]。
+1. 選取 [ **web + Mobile**  >  **web 應用程式**]。
 
    ![Microsoft Azure 入口網站：新按鈕：Marketplace 下方的 [Web + 行動]：[精選 App] 下方的 [Web 應用程式] 按鈕](azure-continuous-deployment/_static/05-azure-newwebapp.png)
 
@@ -100,7 +101,7 @@ ms.locfileid: "88130557"
 
 Git 是一種分散式版本控制系統，可用來部署 Azure App Service Web 應用程式。 Web 應用程式程式碼會儲存在本機 Git 存放庫中，而系統會透過將該程式碼推送至遠端存放庫來將它部署至 Azure。
 
-1. 登入[Azure 入口網站](https://portal.azure.com)。
+1. 登入 [Azure 入口網站](https://portal.azure.com)。
 
 1. 選取 [應用程式服務]**** 以檢視與 Azure 訂用帳戶相關聯的應用程式服務清單。
 
@@ -114,7 +115,7 @@ Git 是一種分散式版本控制系統，可用來部署 Azure App Service Web
 
 1. 如果尚未設定發行 Web 應用程式或其他 App Service 應用程式所需的部署認證，請立即設定：
 
-   * 選取 [**設定**] [  >  **部署認證**]。 [設定部署認證]**** 刀鋒視窗隨即顯示。
+   * 選取 [**設定**  >  **部署認證**]。 [設定部署認證]**** 刀鋒視窗隨即顯示。
    * 建立使用者名稱和密碼。 儲存該密碼，以於日後設定 Git 時使用。
    * 選取 [儲存]。
 
@@ -153,7 +154,7 @@ Git 是一種分散式版本控制系統，可用來部署 Azure App Service Web
 
 1. 選取 [首頁]**** (首頁圖示) > [設定]**** > [全域設定]****。 確認名稱和電子郵件地址皆已設定。 必要時，請選取 [更新]****。
 
-1. 選取 [**首頁**  >  **變更**] 以返回 [**變更**] 視圖。
+1. 選取 [**首頁**  >  **變更**] 以返回**變更**視圖。
 
 1. 輸入認可訊息，例如 **Initial Push #1**，然後選取 [認可]****。 此動作會在本機建立一項*認可*作業。
 
@@ -166,7 +167,7 @@ Git 是一種分散式版本控制系統，可用來部署 Azure App Service Web
    >
    > `git commit -am "Initial Push #1"`
 
-1. 選取 [**首頁**  >  **同步**  >  **動作**] [  >  **開啟命令提示**字元]。 命令提示字元會開啟並切換至專案資料夾。
+1. 選取 [**主**  >  **同步**  >  **動作**  >  **開啟命令提示**字元]。 命令提示字元會開啟並切換至專案資料夾。
 
 1. 在命令視窗中輸入下列命令：
 
@@ -192,7 +193,7 @@ Git 是一種分散式版本控制系統，可用來部署 Azure App Service Web
 
 確認 Web 應用程式已成功從本機環境傳送至 Azure。
 
-在 [Azure 入口網站](https://portal.azure.com)中，選取該 Web 應用程式。 選取 [**部署**] [部署  >  **選項**]。
+在 [Azure 入口網站](https://portal.azure.com)中，選取該 Web 應用程式。 選取 [**部署**  >  **部署選項**]。
 
 ![Azure 入口網站：[設定] 刀鋒視窗：顯示成功部署的 [部署] 刀鋒視窗](azure-continuous-deployment/_static/13-verify-deployment.png)
 
@@ -219,13 +220,13 @@ Git 是一種分散式版本控制系統，可用來部署 Azure App Service Web
 
 1. 儲存對 *Startup.cs* 所做的變更。
 
-1. 在**方案總管**中，以滑鼠右鍵按一下 [**方案 ' SampleWebAppDemo '** ]，然後選取 [**認可**]。 **Team Explorer** 隨即顯示。
+1. 在 **方案總管**中，以滑鼠右鍵按一下 [ **方案 ' >samplewebappdemo '** ]，然後選取 [ **認可**]。 **Team Explorer** 隨即顯示。
 
 1. 輸入認可訊息，例如 `Update #2`。
 
 1. 按 [認可]**** 按鈕，認可專案中的變更。
 
-1. 選取 [**首頁**  >  **同步**  >  **動作**  >  **推**播]。
+1. 選取 [**主**  >  **同步**  >  **動作**  >  **推送**]。
 
 > [!NOTE]
 > 或者，透過開啟 [命令視窗]****，變更為專案目錄，然後輸入 git 命令，來從 [命令視窗]**** 推送變更。 範例：

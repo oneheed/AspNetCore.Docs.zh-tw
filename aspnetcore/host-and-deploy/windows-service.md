@@ -7,6 +7,7 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 02/07/2020
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -17,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: host-and-deploy/windows-service
-ms.openlocfilehash: 7740774cad33418489fc1d94240574167f84fae6
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: 11362f677da3e55df4267cf3d6ca8097c24c218f
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88015357"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88633938"
 ---
 # <a name="host-aspnet-core-in-a-windows-service"></a>在 Windows 服務上裝載 ASP.NET Core
 
@@ -32,7 +33,7 @@ ASP.NET Core 應用程式可以裝載在 Windows 上作為 [Windows 服務](/dot
 
 [查看或下載範例程式碼](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/host-and-deploy/windows-service/samples) ([如何下載](xref:index#how-to-download-a-sample)) 
 
-## <a name="prerequisites"></a>必要條件
+## <a name="prerequisites"></a>Prerequisites
 
 * [ASP.NET Core SDK 2.1 或更新版本](https://dotnet.microsoft.com/download)
 * [PowerShell 6.2 或更新版本](https://github.com/PowerShell/PowerShell)
@@ -48,16 +49,16 @@ ASP.NET Core 背景工作服務範本提供撰寫長期執行服務應用程式�
 
 ## <a name="app-configuration"></a>應用程式設定
 
-應用程式需要[WindowsServices](https://www.nuget.org/packages/Microsoft.Extensions.Hosting.WindowsServices)的套件參考。
+應用程式需要 [WindowsServices](https://www.nuget.org/packages/Microsoft.Extensions.Hosting.WindowsServices)的套件參考。
 
-`IHostBuilder.UseWindowsService`建立主機時，會呼叫。 如果應用程式以 Windows 服務形式執行，則方法會：
+`IHostBuilder.UseWindowsService` 在建立主機時呼叫。 如果應用程式以 Windows 服務形式執行，則方法會：
 
 * 將主機存留期設定為 `WindowsServiceLifetime`。
-* 將[內容根目錄](xref:fundamentals/index#content-root)設定為[AppCoNtext. BaseDirectory](xref:System.AppContext.BaseDirectory)。 如需詳細資訊，請參閱[目前目錄與內容根目錄](#current-directory-and-content-root)一節。
+* 將 [內容根目錄](xref:fundamentals/index#content-root) 設定為 [AppCoNtext. BaseDirectory](xref:System.AppContext.BaseDirectory)。 如需詳細資訊，請參閱[目前目錄與內容根目錄](#current-directory-and-content-root)一節。
 * 啟用記錄至事件記錄檔：
-  * 應用程式名稱會用來做為預設的來源名稱。
-  * 根據呼叫來建立主機的 ASP.NET Core 範本，應用程式的預設記錄層級為*警告*或更高 `CreateDefaultBuilder` 。
-  * 在 `Logging:EventLog:LogLevel:Default` appsettings*上的appsettings.js*中，以金鑰覆寫預設的記錄層級 / *。 {環境}. json*或其他設定提供者。
+  * 應用程式名稱會用來做為預設來源名稱。
+  * 根據呼叫來建立主機的 ASP.NET Core 範本，應用程式的預設記錄層級為 *警告* 或更高 `CreateDefaultBuilder` 。
+  * 在 `Logging:EventLog:LogLevel:Default` appsettings*上使用appsettings.js*中的金鑰覆寫預設記錄層級 / *。 {環境}. json*或其他設定提供者。
   * 只有系統管理員才能建立新的事件來源。 如果無法使用應用程式名稱建立事件來源，則會向「應用程式」** 來源記錄警告，並停用事件記錄檔。
 
 在 `CreateHostBuilder` *Program.cs*中：
@@ -70,8 +71,8 @@ Host.CreateDefaultBuilder(args)
 
 本主題隨附的下列範例應用程式：
 
-* 背景工作角色服務範例：非 web 應用程式範例，以使用[託管服務](xref:fundamentals/host/hosted-services)來執行背景[工作的工作者服務範本](#worker-service-template)為基礎。
-* Web App Service 範例： Razor 頁面 web 應用程式範例，會以 Windows 服務的形式執行，並具有適用于背景工作的[託管服務](xref:fundamentals/host/hosted-services)。
+* 背景工作角色服務範例：以背景工作使用[託管服務](xref:fundamentals/host/hosted-services)的背景工作[服務範本](#worker-service-template)為基礎的非 web 應用程式範例。
+* Web App Service 範例： Razor 頁面 web 應用程式範例，該範例會以 Windows 服務的形式執行，並具有適用于背景工作的 [託管服務](xref:fundamentals/host/hosted-services) 。
 
 如需 MVC 指引，請參閱和底下的文章 <xref:mvc/overview> <xref:migration/22-to-30> 。
 
@@ -81,13 +82,13 @@ Host.CreateDefaultBuilder(args)
 
 ### <a name="sdk"></a>SDK
 
-針對使用頁面或 MVC 架構的 web 應用程式服務 Razor ，請在專案檔中指定 WEB SDK：
+針對使用頁面或 MVC 架構的 web 應用程式型服務 Razor ，請在專案檔中指定 WEB SDK：
 
 ```xml
 <Project Sdk="Microsoft.NET.Sdk.Web">
 ```
 
-如果服務只執行背景工作 (例如，[託管服務](xref:fundamentals/host/hosted-services)) ，請在專案檔中指定工作者 SDK：
+如果服務只會執行背景工作 (例如， [託管服務](xref:fundamentals/host/hosted-services)) ，請在專案檔中指定背景工作 SDK：
 
 ```xml
 <Project Sdk="Microsoft.NET.Sdk.Worker">
@@ -97,7 +98,7 @@ Host.CreateDefaultBuilder(args)
 
 架構相依部署 (FDD) 仰賴存在於目標系統上的全系統共用 .NET Core 版本。 依照此文章中的指導方針採用 FDD 案例時，SDK 會產生可執行檔 (*.exe*)，稱為「架構相依可執行檔」**。
 
-如果使用[WEB SDK](#sdk)，Windows 服務應用程式不需要*web.config*檔案（通常是在發佈 ASP.NET Core 應用程式時所產生）。 若要停用 *web.config* 檔案的建立，請新增 `<IsTransformWebConfigDisabled>` 屬性集到 `true`。
+如果使用 [WEB SDK](#sdk)，則在發佈 ASP.NET Core 應用程式時通常會產生的 *web.config* 檔案，對 Windows 服務應用程式而言是不必要的。 若要停用 *web.config* 檔案的建立，請新增 `<IsTransformWebConfigDisabled>` 屬性集到 `true`。
 
 ```xml
 <PropertyGroup>
@@ -176,12 +177,12 @@ $acl | Set-Acl "{EXE PATH}"
 New-Service -Name {SERVICE NAME} -BinaryPathName {EXE FILE PATH} -Credential {DOMAIN OR COMPUTER NAME\USER} -Description "{DESCRIPTION}" -DisplayName "{DISPLAY NAME}" -StartupType Automatic
 ```
 
-* `{EXE PATH}`：主機 (上應用程式資料夾的路徑，例如， `d:\myservice`) 。 請勿包含路徑中應用程式的可執行檔。 不需要結尾的斜線。
+* `{EXE PATH}`：應用程式在主機上的資料夾路徑 (例如 `d:\myservice`) 。 請勿包含路徑中應用程式的可執行檔。 不需要結尾的斜線。
 * `{DOMAIN OR COMPUTER NAME\USER}`：服務使用者帳戶 (例如 `Contoso\ServiceUser`) 。
-* `{SERVICE NAME}`：服務名稱 (例如， `MyService`) 。
-* `{EXE FILE PATH}`：應用程式的可執行檔路徑 (例如， `d:\myservice\myservice.exe`) 。 包含可執行檔的檔案名稱 (包含副檔名)。
-* `{DESCRIPTION}`：服務描述 (例如， `My sample service`) 。
-* `{DISPLAY NAME}`：服務顯示名稱 (例如， `My Service`) 。
+* `{SERVICE NAME}`：服務名稱 (例如 `MyService`) 。
+* `{EXE FILE PATH}`：應用程式的可執行檔路徑 (例如 `d:\myservice\myservice.exe`) 。 包含可執行檔的檔案名稱 (包含副檔名)。
+* `{DESCRIPTION}`：服務描述 (例如 `My sample service`) 。
+* `{DISPLAY NAME}`：服務顯示名稱 (例如 `My Service`) 。
 
 ### <a name="start-a-service"></a>啟動服務
 
@@ -230,35 +231,35 @@ Remove-Service -Name {SERVICE NAME}
 
 ## <a name="configure-endpoints"></a>設定端點
 
-ASP.NET Core 預設會繫結至 `http://localhost:5000`。 設定環境變數，以設定 URL 和埠 `ASPNETCORE_URLS` 。
+ASP.NET Core 預設會繫結至 `http://localhost:5000`。 藉由設定環境變數來設定 URL 和埠 `ASPNETCORE_URLS` 。
 
 如需其他 URL 和埠設定方法，請參閱相關的伺服器文章：
 
 * <xref:fundamentals/servers/kestrel#endpoint-configuration>
 * <xref:fundamentals/servers/httpsys#configure-windows-server>
 
-前述指引涵蓋 HTTPS 端點的支援。 例如，當搭配 Windows 服務使用驗證時，請為 HTTPS 設定應用程式。
+上述指引涵蓋 HTTPS 端點的支援。 例如，在搭配 Windows 服務使用驗證時，請設定 HTTPS 的應用程式。
 
 > [!NOTE]
 > 不支援使用 ASP.NET Core HTTPS 開發憑證來保護服務端點。
 
 ## <a name="current-directory-and-content-root"></a>目前目錄和內容根目錄
 
-呼叫 Windows 服務所傳回的目前工作目錄 <xref:System.IO.Directory.GetCurrentDirectory*> 是*C： \\ Windows \\ system32*資料夾。 *System32* 資料夾不是儲存服務檔案 (例如，設定檔) 的合適位置。 使用下列其中一個方式來維護及存取服務的資產與設定檔。
+呼叫 Windows 服務所傳回的目前工作目錄 <xref:System.IO.Directory.GetCurrentDirectory*> 是 *C： \\ Windows \\ system32* 資料夾。 *System32* 資料夾不是儲存服務檔案 (例如，設定檔) 的合適位置。 使用下列其中一個方式來維護及存取服務的資產與設定檔。
 
 ### <a name="use-contentrootpath-or-contentrootfileprovider"></a>使用 ContentRootPath 或 ContentRootFileProvider
 
 使用 [IHostEnvironment.ContentRootPath](xref:Microsoft.Extensions.Hosting.IHostEnvironment.ContentRootPath) 或 <xref:Microsoft.Extensions.Hosting.IHostEnvironment.ContentRootFileProvider> 來找出應用程式的資源。
 
-當應用程式以服務方式執行時，會 <xref:Microsoft.Extensions.Hosting.WindowsServiceLifetimeHostBuilderExtensions.UseWindowsService*> 將設定 <xref:Microsoft.Extensions.Hosting.IHostEnvironment.ContentRootPath> 為[AppCoNtext. BaseDirectory](xref:System.AppContext.BaseDirectory)。
+當應用程式以服務的形式執行時，會 <xref:Microsoft.Extensions.Hosting.WindowsServiceLifetimeHostBuilderExtensions.UseWindowsService*> 將設定 <xref:Microsoft.Extensions.Hosting.IHostEnvironment.ContentRootPath> 為 [AppCoNtext. BaseDirectory](xref:System.AppContext.BaseDirectory)。
 
-應用程式的預設設定檔， *appsettings.js*和*appsettings。 {環境}. json*會在[主機結構期間呼叫 CreateDefaultBuilder](xref:fundamentals/host/generic-host#set-up-a-host)，從應用程式的內容根目錄載入。
+應用程式的預設設定檔， *appsettings.js開啟* 和 *appsettings。 {* 從應用程式的內容根目錄載入環境} json，方法是 [在主機結構期間呼叫 >createdefaultbuilder](xref:fundamentals/host/generic-host#set-up-a-host)。
 
-若為開發人員程式碼在中載入的其他設定檔案 <xref:Microsoft.Extensions.Hosting.HostBuilder.ConfigureAppConfiguration*> ，則不需要呼叫 <xref:Microsoft.Extensions.Configuration.FileConfigurationExtensions.SetBasePath*> 。 在下列範例中，檔案*上的custom_settings.js*存在於應用程式的內容根目錄中，並在未明確設定基底路徑的情況下載入：
+若為開發人員程式碼在中載入的其他設定檔案 <xref:Microsoft.Extensions.Hosting.HostBuilder.ConfigureAppConfiguration*> ，則不需要呼叫 <xref:Microsoft.Extensions.Configuration.FileConfigurationExtensions.SetBasePath*> 。 在下列範例中，檔案 * 上的custom_settings.js* 會存在於應用程式的內容根目錄中，並在未明確設定基底路徑的情況下載入：
 
 [!code-csharp[](windows-service/samples_snapshot/CustomSettingsExample.cs?highlight=13)]
 
-請不要嘗試使用 <xref:System.IO.Directory.GetCurrentDirectory*> 來取得資源路徑，因為 Windows 服務應用程式會傳回*C： \\ windows \\ system32*資料夾做為其目前目錄。
+請勿嘗試使用 <xref:System.IO.Directory.GetCurrentDirectory*> 來取得資源路徑，因為 Windows 服務應用程式會傳回 *C： \\ windows \\ system32* 資料夾做為其目前的目錄。
 
 ### <a name="store-a-services-files-in-a-suitable-location-on-disk"></a>將服務的檔案儲存在磁碟上的適當位置
 
@@ -266,56 +267,56 @@ ASP.NET Core 預設會繫結至 `http://localhost:5000`。 設定環境變數，
 
 ## <a name="troubleshoot"></a>疑難排解
 
-若要疑難排解 Windows 服務應用程式，請參閱 <xref:test/troubleshoot> 。
+若要針對 Windows 服務應用程式進行疑難排解，請參閱 <xref:test/troubleshoot> 。
 
 ### <a name="common-errors"></a>常見錯誤
 
-* 舊版或發行前版本的 PowerShell 已在使用中。
-* 已註冊的服務不會使用來自[dotnet publish](/dotnet/core/tools/dotnet-publish)命令的應用程式**已發佈**輸出。 應用程式部署不支援[dotnet build](/dotnet/core/tools/dotnet-build)命令的輸出。 根據部署類型，可以在下列其中一個資料夾中找到已發佈的資產：
-  * *bin/Release/{TARGET FRAMEWORK}/publish* (FDD) 
-  * *bin/Release/{TARGET FRAMEWORK}/{RUNTIME IDENTIFIER}/publish* (SCD) 
-* 服務不是處於執行中狀態。
-* 應用程式使用的資源路徑 (例如，憑證) 不正確。 Windows 服務的基底路徑是*c： \\ windows \\ System32*。
-* 使用者不具有 [*以服務方式登*入] 許可權。
-* 執行 PowerShell 命令時，使用者的密碼已過期或傳遞錯誤 `New-Service` 。
-* 應用程式需要 ASP.NET Core 驗證，但未設定 (HTTPS) 的安全連線。
-* 要求 URL 埠不正確，或未在應用程式中正確設定。
+* 舊版或發行前版本的 PowerShell 正在使用中。
+* 註冊的服務不會使用[dotnet publish](/dotnet/core/tools/dotnet-publish)命令中的應用程式**已發佈**輸出。 應用程式部署不支援 [dotnet 組建](/dotnet/core/tools/dotnet-build) 命令的輸出。 根據部署類型，您可以在下列其中一個資料夾中找到已發佈的資產：
+  * *bin/Release/{目標 FRAMEWORK}/publish* (FDD) 
+  * *bin/Release/{目標 FRAMEWORK}/{RUNTIME 識別碼}/publish* (SCD) 
+* 服務未處於執行中狀態。
+* 應用程式使用的資源路徑 (例如，憑證) 不正確。 Windows 服務的基底路徑是 *c： \\ windows \\ System32*。
+* 使用者沒有 [ *以服務方式登* 入] 許可權。
+* 執行 PowerShell 命令時，使用者的密碼已過期或不正確地傳遞 `New-Service` 。
+* 應用程式需要 ASP.NET Core authentication，但未設定 (HTTPS) 的安全連線。
+* 要求 URL 埠不正確，或在應用程式中未正確設定。
 
 ### <a name="system-and-application-event-logs"></a>系統和應用程式事件記錄檔
 
-存取系統和應用程式事件記錄檔：
+存取系統和應用程式事件記錄：
 
-1. 開啟 [開始] 功能表，搜尋 [*事件檢視器*]，然後選取 [**事件檢視器**] 應用程式。
+1. 開啟 [開始] 功能表、搜尋 *事件檢視器*，然後選取 **事件檢視器** 應用程式。
 1. 在 [事件檢視器]**** 中，開啟 [Windows 記錄]**** 節點。
-1. 選取 [**系統**] 以開啟 [系統] 事件記錄檔。 選取 [應用程式]**** 以開啟「應用程式事件記錄檔」。
+1. 選取 [ **系統** ] 以開啟 [系統事件記錄檔]。 選取 [應用程式]**** 以開啟「應用程式事件記錄檔」。
 1. 搜尋與失敗應用程式相關的錯誤。
 
 ### <a name="run-the-app-at-a-command-prompt"></a>在命令提示字元中執行應用程式
 
-許多啟動錯誤不會在事件記錄檔中產生有用的資訊。 您可以藉由在主控系統上的命令提示字元中執行應用程式，來找出一些錯誤的原因。 若要從應用程式記錄其他詳細資料，請降低[記錄層級](xref:fundamentals/logging/index#log-level)，或在[開發環境](xref:fundamentals/environments)中執行應用程式。
+許多啟動錯誤都不會在事件記錄檔中產生有用的資訊。 您可以藉由在主控系統上的命令提示字元中執行應用程式，來找出一些錯誤的原因。 若要從應用程式記錄額外的詳細資料，請降低 [記錄層級](xref:fundamentals/logging/index#log-level) ，或在 [開發環境](xref:fundamentals/environments)中執行應用程式。
 
 ### <a name="clear-package-caches"></a>清除套件快取
 
-升級開發電腦上的 .NET Core SDK 或變更應用程式內的套件版本之後，正常運作的應用程式可能會立即失敗。 在某些情況下，執行主要升級時，不一致的套件可能會中斷應用程式。 大多數這些問題都可依照下列指示來進行修正：
+在升級開發電腦上的 .NET Core SDK 或變更應用程式內的套件版本之後，正常運作的應用程式可能會立即失敗。 在某些情況下，執行主要升級時，不一致的套件可能會中斷應用程式。 大多數這些問題都可依照下列指示來進行修正：
 
 1. 刪除 [bin]** 和 [obj]** 資料夾。
-1. 從命令 shell 執行[dotnet nuget 區域變數 all--clear](/dotnet/core/tools/dotnet-nuget-locals) ，以清除套件快取。
+1. 從命令列介面執行 [dotnet nuget 區域變數](/dotnet/core/tools/dotnet-nuget-locals) ，以清除套件快取。
 
-   清除套件快取也可以使用[nuget.exe](https://www.nuget.org/downloads)工具來完成，並執行命令 `nuget locals all -clear` 。 *nuget.exe* 並未隨附在 Windows 桌面作業系統的安裝中，必須另外從 [NuGet 網站](https://www.nuget.org/downloads)取得。
+   清除套件快取也可以使用 [nuget.exe](https://www.nuget.org/downloads) 工具和執行命令來完成 `nuget locals all -clear` 。 *nuget.exe* 並未隨附在 Windows 桌面作業系統的安裝中，必須另外從 [NuGet 網站](https://www.nuget.org/downloads)取得。
 
 1. 還原並重建專案。
 1. 重新部署應用程式之前，請先刪除伺服器上 [部署] 資料夾中的所有檔案。
 
 ### <a name="slow-or-hanging-app"></a>回應緩慢或無回應的應用程式
 
-損*毀*傾印是系統記憶體的快照集，有助於判斷應用程式損毀、啟動失敗或應用程式緩慢的原因。
+損 *毀* 傾印是系統記憶體的快照，可協助判斷應用程式損毀、啟動失敗或應用程式緩慢的原因。
 
 #### <a name="app-crashes-or-encounters-an-exception"></a>應用程式損毀或發生例外狀況
 
 從 [Windows 錯誤報告 (WER)](/windows/desktop/wer/windows-error-reporting) 取得並分析傾印：
 
 1. 在 `c:\dumps` 中建立資料夾以保存損毀傾印檔案。
-1. 以應用程式可執行檔名稱執行[EnableDumps PowerShell 腳本](https://github.com/dotnet/AspNetCore.Docs/blob/master/aspnetcore/host-and-deploy/windows-service/samples/scripts/EnableDumps.ps1)：
+1. 使用應用程式可執行檔名稱來執行 [EnableDumps PowerShell 腳本](https://github.com/dotnet/AspNetCore.Docs/blob/master/aspnetcore/host-and-deploy/windows-service/samples/scripts/EnableDumps.ps1) ：
 
    ```powershell
    .\EnableDumps {APPLICATION EXE} c:\dumps
@@ -335,7 +336,7 @@ ASP.NET Core 預設會繫結至 `http://localhost:5000`。 設定環境變數，
 
 #### <a name="app-hangs-fails-during-startup-or-runs-normally"></a>應用程式停止回應、在啟動期間失敗，或正常執行
 
-當*應用程式*當機 (停止回應，但未損毀) 、在啟動期間失敗，或正常執行時，請參閱使用者模式傾印檔案[：選擇最適合的工具](/windows-hardware/drivers/debugger/user-mode-dump-files#choosing-the-best-tool)來選取適當的工具以產生傾印。
+當 *應用程式* 停止回應時 (停止回應，但不會當機) 、啟動期間失敗，或正常執行時，請參閱 [使用者模式](/windows-hardware/drivers/debugger/user-mode-dump-files#choosing-the-best-tool) 傾印檔案：選擇最適合的工具來選取適當的工具來產生傾印。
 
 #### <a name="analyze-the-dump"></a>分析傾印
 
@@ -355,7 +356,7 @@ ASP.NET Core 應用程式可以裝載在 Windows 上作為 [Windows 服務](/dot
 
 [查看或下載範例程式碼](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/host-and-deploy/windows-service/samples) ([如何下載](xref:index#how-to-download-a-sample)) 
 
-## <a name="prerequisites"></a>必要條件
+## <a name="prerequisites"></a>Prerequisites
 
 * [ASP.NET Core SDK 2.1 或更新版本](https://dotnet.microsoft.com/download)
 * [PowerShell 6.2 或更新版本](https://github.com/PowerShell/PowerShell)
@@ -383,13 +384,13 @@ ASP.NET Core 應用程式可以裝載在 Windows 上作為 [Windows 服務](/dot
 
 ### <a name="sdk"></a>SDK
 
-針對使用頁面或 MVC 架構的 web 應用程式服務 Razor ，請在專案檔中指定 WEB SDK：
+針對使用頁面或 MVC 架構的 web 應用程式型服務 Razor ，請在專案檔中指定 WEB SDK：
 
 ```xml
 <Project Sdk="Microsoft.NET.Sdk.Web">
 ```
 
-如果服務只執行背景工作 (例如，[託管服務](xref:fundamentals/host/hosted-services)) ，請在專案檔中指定工作者 SDK：
+如果服務只會執行背景工作 (例如， [託管服務](xref:fundamentals/host/hosted-services)) ，請在專案檔中指定背景工作 SDK：
 
 ```xml
 <Project Sdk="Microsoft.NET.Sdk.Worker">
@@ -399,7 +400,7 @@ ASP.NET Core 應用程式可以裝載在 Windows 上作為 [Windows 服務](/dot
 
 架構相依部署 (FDD) 仰賴存在於目標系統上的全系統共用 .NET Core 版本。 依照此文章中的指導方針採用 FDD 案例時，SDK 會產生可執行檔 (*.exe*)，稱為「架構相依可執行檔」**。
 
-Windows[執行時間識別碼 (RID) ](/dotnet/core/rid-catalog) ([\<RuntimeIdentifier>](/dotnet/core/tools/csproj#runtimeidentifier)) 包含目標 framework。 在下列範例中，RID 已設定為 `win7-x64`。 `<SelfContained>` 屬性設定為 `false`。 這些屬性會指示 SDK，針對 Windows 和相依於共用 .NET Core framework 的應用程式產生可執行檔 (*.exe*)。
+Windows [執行時間識別碼 (RID) ](/dotnet/core/rid-catalog) ([\<RuntimeIdentifier>](/dotnet/core/tools/csproj#runtimeidentifier)) 包含目標 framework。 在下列範例中，RID 已設定為 `win7-x64`。 `<SelfContained>` 屬性設定為 `false`。 這些屬性會指示 SDK，針對 Windows 和相依於共用 .NET Core framework 的應用程式產生可執行檔 (*.exe*)。
 
 針對 Windows Services 應用程式，不需要 *web.config* 檔案 (發行 ASP.NET Core 應用程式時通常會產生此檔案)。 若要停用 *web.config* 檔案的建立，請新增 `<IsTransformWebConfigDisabled>` 屬性集到 `true`。
 
@@ -488,12 +489,12 @@ $acl | Set-Acl "{EXE PATH}"
 New-Service -Name {SERVICE NAME} -BinaryPathName {EXE FILE PATH} -Credential {DOMAIN OR COMPUTER NAME\USER} -Description "{DESCRIPTION}" -DisplayName "{DISPLAY NAME}" -StartupType Automatic
 ```
 
-* `{EXE PATH}`：主機 (上應用程式資料夾的路徑，例如， `d:\myservice`) 。 請勿包含路徑中應用程式的可執行檔。 不需要結尾的斜線。
+* `{EXE PATH}`：應用程式在主機上的資料夾路徑 (例如 `d:\myservice`) 。 請勿包含路徑中應用程式的可執行檔。 不需要結尾的斜線。
 * `{DOMAIN OR COMPUTER NAME\USER}`：服務使用者帳戶 (例如 `Contoso\ServiceUser`) 。
-* `{SERVICE NAME}`：服務名稱 (例如， `MyService`) 。
-* `{EXE FILE PATH}`：應用程式的可執行檔路徑 (例如， `d:\myservice\myservice.exe`) 。 包含可執行檔的檔案名稱 (包含副檔名)。
-* `{DESCRIPTION}`：服務描述 (例如， `My sample service`) 。
-* `{DISPLAY NAME}`：服務顯示名稱 (例如， `My Service`) 。
+* `{SERVICE NAME}`：服務名稱 (例如 `MyService`) 。
+* `{EXE FILE PATH}`：應用程式的可執行檔路徑 (例如 `d:\myservice\myservice.exe`) 。 包含可執行檔的檔案名稱 (包含副檔名)。
+* `{DESCRIPTION}`：服務描述 (例如 `My sample service`) 。
+* `{DISPLAY NAME}`：服務顯示名稱 (例如 `My Service`) 。
 
 ### <a name="start-a-service"></a>啟動服務
 
@@ -562,25 +563,25 @@ Remove-Service -Name {SERVICE NAME}
 
 ## <a name="configure-endpoints"></a>設定端點
 
-ASP.NET Core 預設會繫結至 `http://localhost:5000`。 設定環境變數，以設定 URL 和埠 `ASPNETCORE_URLS` 。
+ASP.NET Core 預設會繫結至 `http://localhost:5000`。 藉由設定環境變數來設定 URL 和埠 `ASPNETCORE_URLS` 。
 
 如需其他 URL 和埠設定方法，請參閱相關的伺服器文章：
 
 * <xref:fundamentals/servers/kestrel#endpoint-configuration>
 * <xref:fundamentals/servers/httpsys#configure-windows-server>
 
-前述指引涵蓋 HTTPS 端點的支援。 例如，當搭配 Windows 服務使用驗證時，請為 HTTPS 設定應用程式。
+上述指引涵蓋 HTTPS 端點的支援。 例如，在搭配 Windows 服務使用驗證時，請設定 HTTPS 的應用程式。
 
 > [!NOTE]
 > 不支援使用 ASP.NET Core HTTPS 開發憑證來保護服務端點。
 
 ## <a name="current-directory-and-content-root"></a>目前目錄和內容根目錄
 
-呼叫 Windows 服務所傳回的目前工作目錄 <xref:System.IO.Directory.GetCurrentDirectory*> 是*C： \\ Windows \\ system32*資料夾。 *System32* 資料夾不是儲存服務檔案 (例如，設定檔) 的合適位置。 使用下列其中一個方式來維護及存取服務的資產與設定檔。
+呼叫 Windows 服務所傳回的目前工作目錄 <xref:System.IO.Directory.GetCurrentDirectory*> 是 *C： \\ Windows \\ system32* 資料夾。 *System32* 資料夾不是儲存服務檔案 (例如，設定檔) 的合適位置。 使用下列其中一個方式來維護及存取服務的資產與設定檔。
 
 ### <a name="set-the-content-root-path-to-the-apps-folder"></a>將內容根目錄路徑設定到應用程式的資料夾
 
-<xref:Microsoft.Extensions.Hosting.IHostingEnvironment.ContentRootPath*> 與建立服務時提供給 `binPath` 引數的路徑相同。 `GetCurrentDirectory`請 <xref:System.IO.Directory.SetCurrentDirectory*> 使用應用程式[內容根目錄](xref:fundamentals/index#content-root)的路徑呼叫，而不是呼叫來建立設定檔的路徑。
+<xref:Microsoft.Extensions.Hosting.IHostingEnvironment.ContentRootPath*> 與建立服務時提供給 `binPath` 引數的路徑相同。 `GetCurrentDirectory`請呼叫 <xref:System.IO.Directory.SetCurrentDirectory*> 應用程式[內容根目錄](xref:fundamentals/index#content-root)的路徑，而不是呼叫來建立設定檔的路徑。
 
 在 `Program.Main` 中，判斷服務可執行檔資料夾的路徑，然後使用該路徑來建立應用程式的內容根目錄：
 
@@ -600,56 +601,56 @@ CreateWebHostBuilder(args)
 
 ## <a name="troubleshoot"></a>疑難排解
 
-若要疑難排解 Windows 服務應用程式，請參閱 <xref:test/troubleshoot> 。
+若要針對 Windows 服務應用程式進行疑難排解，請參閱 <xref:test/troubleshoot> 。
 
 ### <a name="common-errors"></a>常見錯誤
 
-* 舊版或發行前版本的 PowerShell 已在使用中。
-* 已註冊的服務不會使用來自[dotnet publish](/dotnet/core/tools/dotnet-publish)命令的應用程式**已發佈**輸出。 應用程式部署不支援[dotnet build](/dotnet/core/tools/dotnet-build)命令的輸出。 根據部署類型，可以在下列其中一個資料夾中找到已發佈的資產：
-  * *bin/Release/{TARGET FRAMEWORK}/publish* (FDD) 
-  * *bin/Release/{TARGET FRAMEWORK}/{RUNTIME IDENTIFIER}/publish* (SCD) 
-* 服務不是處於執行中狀態。
-* 應用程式使用的資源路徑 (例如，憑證) 不正確。 Windows 服務的基底路徑是*c： \\ windows \\ System32*。
-* 使用者不具有 [*以服務方式登*入] 許可權。
-* 執行 PowerShell 命令時，使用者的密碼已過期或傳遞錯誤 `New-Service` 。
-* 應用程式需要 ASP.NET Core 驗證，但未設定 (HTTPS) 的安全連線。
-* 要求 URL 埠不正確，或未在應用程式中正確設定。
+* 舊版或發行前版本的 PowerShell 正在使用中。
+* 註冊的服務不會使用[dotnet publish](/dotnet/core/tools/dotnet-publish)命令中的應用程式**已發佈**輸出。 應用程式部署不支援 [dotnet 組建](/dotnet/core/tools/dotnet-build) 命令的輸出。 根據部署類型，您可以在下列其中一個資料夾中找到已發佈的資產：
+  * *bin/Release/{目標 FRAMEWORK}/publish* (FDD) 
+  * *bin/Release/{目標 FRAMEWORK}/{RUNTIME 識別碼}/publish* (SCD) 
+* 服務未處於執行中狀態。
+* 應用程式使用的資源路徑 (例如，憑證) 不正確。 Windows 服務的基底路徑是 *c： \\ windows \\ System32*。
+* 使用者沒有 [ *以服務方式登* 入] 許可權。
+* 執行 PowerShell 命令時，使用者的密碼已過期或不正確地傳遞 `New-Service` 。
+* 應用程式需要 ASP.NET Core authentication，但未設定 (HTTPS) 的安全連線。
+* 要求 URL 埠不正確，或在應用程式中未正確設定。
 
 ### <a name="system-and-application-event-logs"></a>系統和應用程式事件記錄檔
 
-存取系統和應用程式事件記錄檔：
+存取系統和應用程式事件記錄：
 
-1. 開啟 [開始] 功能表，搜尋 [*事件檢視器*]，然後選取 [**事件檢視器**] 應用程式。
+1. 開啟 [開始] 功能表、搜尋 *事件檢視器*，然後選取 **事件檢視器** 應用程式。
 1. 在 [事件檢視器]**** 中，開啟 [Windows 記錄]**** 節點。
-1. 選取 [**系統**] 以開啟 [系統] 事件記錄檔。 選取 [應用程式]**** 以開啟「應用程式事件記錄檔」。
+1. 選取 [ **系統** ] 以開啟 [系統事件記錄檔]。 選取 [應用程式]**** 以開啟「應用程式事件記錄檔」。
 1. 搜尋與失敗應用程式相關的錯誤。
 
 ### <a name="run-the-app-at-a-command-prompt"></a>在命令提示字元中執行應用程式
 
-許多啟動錯誤不會在事件記錄檔中產生有用的資訊。 您可以藉由在主控系統上的命令提示字元中執行應用程式，來找出一些錯誤的原因。 若要從應用程式記錄其他詳細資料，請降低[記錄層級](xref:fundamentals/logging/index#log-level)，或在[開發環境](xref:fundamentals/environments)中執行應用程式。
+許多啟動錯誤都不會在事件記錄檔中產生有用的資訊。 您可以藉由在主控系統上的命令提示字元中執行應用程式，來找出一些錯誤的原因。 若要從應用程式記錄額外的詳細資料，請降低 [記錄層級](xref:fundamentals/logging/index#log-level) ，或在 [開發環境](xref:fundamentals/environments)中執行應用程式。
 
 ### <a name="clear-package-caches"></a>清除套件快取
 
-升級開發電腦上的 .NET Core SDK 或變更應用程式內的套件版本之後，正常運作的應用程式可能會立即失敗。 在某些情況下，執行主要升級時，不一致的套件可能會中斷應用程式。 大多數這些問題都可依照下列指示來進行修正：
+在升級開發電腦上的 .NET Core SDK 或變更應用程式內的套件版本之後，正常運作的應用程式可能會立即失敗。 在某些情況下，執行主要升級時，不一致的套件可能會中斷應用程式。 大多數這些問題都可依照下列指示來進行修正：
 
 1. 刪除 [bin]** 和 [obj]** 資料夾。
-1. 從命令 shell 執行[dotnet nuget 區域變數 all--clear](/dotnet/core/tools/dotnet-nuget-locals) ，以清除套件快取。
+1. 從命令列介面執行 [dotnet nuget 區域變數](/dotnet/core/tools/dotnet-nuget-locals) ，以清除套件快取。
 
-   清除套件快取也可以使用[nuget.exe](https://www.nuget.org/downloads)工具來完成，並執行命令 `nuget locals all -clear` 。 *nuget.exe* 並未隨附在 Windows 桌面作業系統的安裝中，必須另外從 [NuGet 網站](https://www.nuget.org/downloads)取得。
+   清除套件快取也可以使用 [nuget.exe](https://www.nuget.org/downloads) 工具和執行命令來完成 `nuget locals all -clear` 。 *nuget.exe* 並未隨附在 Windows 桌面作業系統的安裝中，必須另外從 [NuGet 網站](https://www.nuget.org/downloads)取得。
 
 1. 還原並重建專案。
 1. 重新部署應用程式之前，請先刪除伺服器上 [部署] 資料夾中的所有檔案。
 
 ### <a name="slow-or-hanging-app"></a>回應緩慢或無回應的應用程式
 
-損*毀*傾印是系統記憶體的快照集，有助於判斷應用程式損毀、啟動失敗或應用程式緩慢的原因。
+損 *毀* 傾印是系統記憶體的快照，可協助判斷應用程式損毀、啟動失敗或應用程式緩慢的原因。
 
 #### <a name="app-crashes-or-encounters-an-exception"></a>應用程式損毀或發生例外狀況
 
 從 [Windows 錯誤報告 (WER)](/windows/desktop/wer/windows-error-reporting) 取得並分析傾印：
 
 1. 在 `c:\dumps` 中建立資料夾以保存損毀傾印檔案。
-1. 以應用程式可執行檔名稱執行[EnableDumps PowerShell 腳本](https://github.com/dotnet/AspNetCore.Docs/blob/master/aspnetcore/host-and-deploy/windows-service/scripts/EnableDumps.ps1)：
+1. 使用應用程式可執行檔名稱來執行 [EnableDumps PowerShell 腳本](https://github.com/dotnet/AspNetCore.Docs/blob/master/aspnetcore/host-and-deploy/windows-service/scripts/EnableDumps.ps1) ：
 
    ```console
    .\EnableDumps {APPLICATION EXE} c:\dumps
@@ -669,7 +670,7 @@ CreateWebHostBuilder(args)
 
 #### <a name="app-hangs-fails-during-startup-or-runs-normally"></a>應用程式停止回應、在啟動期間失敗，或正常執行
 
-當*應用程式*當機 (停止回應，但未損毀) 、在啟動期間失敗，或正常執行時，請參閱使用者模式傾印檔案[：選擇最適合的工具](/windows-hardware/drivers/debugger/user-mode-dump-files#choosing-the-best-tool)來選取適當的工具以產生傾印。
+當 *應用程式* 停止回應時 (停止回應，但不會當機) 、啟動期間失敗，或正常執行時，請參閱 [使用者模式](/windows-hardware/drivers/debugger/user-mode-dump-files#choosing-the-best-tool) 傾印檔案：選擇最適合的工具來選取適當的工具來產生傾印。
 
 #### <a name="analyze-the-dump"></a>分析傾印
 
@@ -689,7 +690,7 @@ ASP.NET Core 應用程式可以裝載在 Windows 上作為 [Windows 服務](/dot
 
 [查看或下載範例程式碼](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/host-and-deploy/windows-service/samples) ([如何下載](xref:index#how-to-download-a-sample)) 
 
-## <a name="prerequisites"></a>必要條件
+## <a name="prerequisites"></a>Prerequisites
 
 * [ASP.NET Core SDK 2.1 或更新版本](https://dotnet.microsoft.com/download)
 * [PowerShell 6.2 或更新版本](https://github.com/PowerShell/PowerShell)
@@ -717,13 +718,13 @@ ASP.NET Core 應用程式可以裝載在 Windows 上作為 [Windows 服務](/dot
 
 ### <a name="sdk"></a>SDK
 
-針對使用頁面或 MVC 架構的 web 應用程式服務 Razor ，請在專案檔中指定 WEB SDK：
+針對使用頁面或 MVC 架構的 web 應用程式型服務 Razor ，請在專案檔中指定 WEB SDK：
 
 ```xml
 <Project Sdk="Microsoft.NET.Sdk.Web">
 ```
 
-如果服務只執行背景工作 (例如，[託管服務](xref:fundamentals/host/hosted-services)) ，請在專案檔中指定工作者 SDK：
+如果服務只會執行背景工作 (例如， [託管服務](xref:fundamentals/host/hosted-services)) ，請在專案檔中指定背景工作 SDK：
 
 ```xml
 <Project Sdk="Microsoft.NET.Sdk.Worker">
@@ -733,7 +734,7 @@ ASP.NET Core 應用程式可以裝載在 Windows 上作為 [Windows 服務](/dot
 
 架構相依部署 (FDD) 仰賴存在於目標系統上的全系統共用 .NET Core 版本。 依照此文章中的指導方針採用 FDD 案例時，SDK 會產生可執行檔 (*.exe*)，稱為「架構相依可執行檔」**。
 
-Windows[執行時間識別碼 (RID) ](/dotnet/core/rid-catalog) ([\<RuntimeIdentifier>](/dotnet/core/tools/csproj#runtimeidentifier)) 包含目標 framework。 在下列範例中，RID 已設定為 `win7-x64`。 `<SelfContained>` 屬性設定為 `false`。 這些屬性會指示 SDK，針對 Windows 和相依於共用 .NET Core framework 的應用程式產生可執行檔 (*.exe*)。
+Windows [執行時間識別碼 (RID) ](/dotnet/core/rid-catalog) ([\<RuntimeIdentifier>](/dotnet/core/tools/csproj#runtimeidentifier)) 包含目標 framework。 在下列範例中，RID 已設定為 `win7-x64`。 `<SelfContained>` 屬性設定為 `false`。 這些屬性會指示 SDK，針對 Windows 和相依於共用 .NET Core framework 的應用程式產生可執行檔 (*.exe*)。
 
 `<UseAppHost>` 屬性設定為 `true`。 此屬性為服務提供 FDD 的啟用路徑 (可執行檔 *.exe*)。
 
@@ -825,12 +826,12 @@ $acl | Set-Acl "{EXE PATH}"
 New-Service -Name {SERVICE NAME} -BinaryPathName {EXE FILE PATH} -Credential {DOMAIN OR COMPUTER NAME\USER} -Description "{DESCRIPTION}" -DisplayName "{DISPLAY NAME}" -StartupType Automatic
 ```
 
-* `{EXE PATH}`：主機 (上應用程式資料夾的路徑，例如， `d:\myservice`) 。 請勿包含路徑中應用程式的可執行檔。 不需要結尾的斜線。
+* `{EXE PATH}`：應用程式在主機上的資料夾路徑 (例如 `d:\myservice`) 。 請勿包含路徑中應用程式的可執行檔。 不需要結尾的斜線。
 * `{DOMAIN OR COMPUTER NAME\USER}`：服務使用者帳戶 (例如 `Contoso\ServiceUser`) 。
-* `{SERVICE NAME}`：服務名稱 (例如， `MyService`) 。
-* `{EXE FILE PATH}`：應用程式的可執行檔路徑 (例如， `d:\myservice\myservice.exe`) 。 包含可執行檔的檔案名稱 (包含副檔名)。
-* `{DESCRIPTION}`：服務描述 (例如， `My sample service`) 。
-* `{DISPLAY NAME}`：服務顯示名稱 (例如， `My Service`) 。
+* `{SERVICE NAME}`：服務名稱 (例如 `MyService`) 。
+* `{EXE FILE PATH}`：應用程式的可執行檔路徑 (例如 `d:\myservice\myservice.exe`) 。 包含可執行檔的檔案名稱 (包含副檔名)。
+* `{DESCRIPTION}`：服務描述 (例如 `My sample service`) 。
+* `{DISPLAY NAME}`：服務顯示名稱 (例如 `My Service`) 。
 
 ### <a name="start-a-service"></a>啟動服務
 
@@ -899,25 +900,25 @@ Remove-Service -Name {SERVICE NAME}
 
 ## <a name="configure-endpoints"></a>設定端點
 
-ASP.NET Core 預設會繫結至 `http://localhost:5000`。 設定環境變數，以設定 URL 和埠 `ASPNETCORE_URLS` 。
+ASP.NET Core 預設會繫結至 `http://localhost:5000`。 藉由設定環境變數來設定 URL 和埠 `ASPNETCORE_URLS` 。
 
 如需其他 URL 和埠設定方法，請參閱相關的伺服器文章：
 
 * <xref:fundamentals/servers/kestrel#endpoint-configuration>
 * <xref:fundamentals/servers/httpsys#configure-windows-server>
 
-前述指引涵蓋 HTTPS 端點的支援。 例如，當搭配 Windows 服務使用驗證時，請為 HTTPS 設定應用程式。
+上述指引涵蓋 HTTPS 端點的支援。 例如，在搭配 Windows 服務使用驗證時，請設定 HTTPS 的應用程式。
 
 > [!NOTE]
 > 不支援使用 ASP.NET Core HTTPS 開發憑證來保護服務端點。
 
 ## <a name="current-directory-and-content-root"></a>目前目錄和內容根目錄
 
-呼叫 Windows 服務所傳回的目前工作目錄 <xref:System.IO.Directory.GetCurrentDirectory*> 是*C： \\ Windows \\ system32*資料夾。 *System32* 資料夾不是儲存服務檔案 (例如，設定檔) 的合適位置。 使用下列其中一個方式來維護及存取服務的資產與設定檔。
+呼叫 Windows 服務所傳回的目前工作目錄 <xref:System.IO.Directory.GetCurrentDirectory*> 是 *C： \\ Windows \\ system32* 資料夾。 *System32* 資料夾不是儲存服務檔案 (例如，設定檔) 的合適位置。 使用下列其中一個方式來維護及存取服務的資產與設定檔。
 
 ### <a name="set-the-content-root-path-to-the-apps-folder"></a>將內容根目錄路徑設定到應用程式的資料夾
 
-<xref:Microsoft.Extensions.Hosting.IHostingEnvironment.ContentRootPath*> 與建立服務時提供給 `binPath` 引數的路徑相同。 `GetCurrentDirectory`請 <xref:System.IO.Directory.SetCurrentDirectory*> 使用應用程式[內容根目錄](xref:fundamentals/index#content-root)的路徑呼叫，而不是呼叫來建立設定檔的路徑。
+<xref:Microsoft.Extensions.Hosting.IHostingEnvironment.ContentRootPath*> 與建立服務時提供給 `binPath` 引數的路徑相同。 `GetCurrentDirectory`請呼叫 <xref:System.IO.Directory.SetCurrentDirectory*> 應用程式[內容根目錄](xref:fundamentals/index#content-root)的路徑，而不是呼叫來建立設定檔的路徑。
 
 在 `Program.Main` 中，判斷服務可執行檔資料夾的路徑，然後使用該路徑來建立應用程式的內容根目錄：
 
@@ -937,56 +938,56 @@ CreateWebHostBuilder(args)
 
 ## <a name="troubleshoot"></a>疑難排解
 
-若要疑難排解 Windows 服務應用程式，請參閱 <xref:test/troubleshoot> 。
+若要針對 Windows 服務應用程式進行疑難排解，請參閱 <xref:test/troubleshoot> 。
 
 ### <a name="common-errors"></a>常見錯誤
 
-* 舊版或發行前版本的 PowerShell 已在使用中。
-* 已註冊的服務不會使用來自[dotnet publish](/dotnet/core/tools/dotnet-publish)命令的應用程式**已發佈**輸出。 應用程式部署不支援[dotnet build](/dotnet/core/tools/dotnet-build)命令的輸出。 根據部署類型，可以在下列其中一個資料夾中找到已發佈的資產：
-  * *bin/Release/{TARGET FRAMEWORK}/publish* (FDD) 
-  * *bin/Release/{TARGET FRAMEWORK}/{RUNTIME IDENTIFIER}/publish* (SCD) 
-* 服務不是處於執行中狀態。
-* 應用程式使用的資源路徑 (例如，憑證) 不正確。 Windows 服務的基底路徑是*c： \\ windows \\ System32*。
-* 使用者不具有 [*以服務方式登*入] 許可權。
-* 執行 PowerShell 命令時，使用者的密碼已過期或傳遞錯誤 `New-Service` 。
-* 應用程式需要 ASP.NET Core 驗證，但未設定 (HTTPS) 的安全連線。
-* 要求 URL 埠不正確，或未在應用程式中正確設定。
+* 舊版或發行前版本的 PowerShell 正在使用中。
+* 註冊的服務不會使用[dotnet publish](/dotnet/core/tools/dotnet-publish)命令中的應用程式**已發佈**輸出。 應用程式部署不支援 [dotnet 組建](/dotnet/core/tools/dotnet-build) 命令的輸出。 根據部署類型，您可以在下列其中一個資料夾中找到已發佈的資產：
+  * *bin/Release/{目標 FRAMEWORK}/publish* (FDD) 
+  * *bin/Release/{目標 FRAMEWORK}/{RUNTIME 識別碼}/publish* (SCD) 
+* 服務未處於執行中狀態。
+* 應用程式使用的資源路徑 (例如，憑證) 不正確。 Windows 服務的基底路徑是 *c： \\ windows \\ System32*。
+* 使用者沒有 [ *以服務方式登* 入] 許可權。
+* 執行 PowerShell 命令時，使用者的密碼已過期或不正確地傳遞 `New-Service` 。
+* 應用程式需要 ASP.NET Core authentication，但未設定 (HTTPS) 的安全連線。
+* 要求 URL 埠不正確，或在應用程式中未正確設定。
 
 ### <a name="system-and-application-event-logs"></a>系統和應用程式事件記錄檔
 
-存取系統和應用程式事件記錄檔：
+存取系統和應用程式事件記錄：
 
-1. 開啟 [開始] 功能表，搜尋 [*事件檢視器*]，然後選取 [**事件檢視器**] 應用程式。
+1. 開啟 [開始] 功能表、搜尋 *事件檢視器*，然後選取 **事件檢視器** 應用程式。
 1. 在 [事件檢視器]**** 中，開啟 [Windows 記錄]**** 節點。
-1. 選取 [**系統**] 以開啟 [系統] 事件記錄檔。 選取 [應用程式]**** 以開啟「應用程式事件記錄檔」。
+1. 選取 [ **系統** ] 以開啟 [系統事件記錄檔]。 選取 [應用程式]**** 以開啟「應用程式事件記錄檔」。
 1. 搜尋與失敗應用程式相關的錯誤。
 
 ### <a name="run-the-app-at-a-command-prompt"></a>在命令提示字元中執行應用程式
 
-許多啟動錯誤不會在事件記錄檔中產生有用的資訊。 您可以藉由在主控系統上的命令提示字元中執行應用程式，來找出一些錯誤的原因。 若要從應用程式記錄其他詳細資料，請降低[記錄層級](xref:fundamentals/logging/index#log-level)，或在[開發環境](xref:fundamentals/environments)中執行應用程式。
+許多啟動錯誤都不會在事件記錄檔中產生有用的資訊。 您可以藉由在主控系統上的命令提示字元中執行應用程式，來找出一些錯誤的原因。 若要從應用程式記錄額外的詳細資料，請降低 [記錄層級](xref:fundamentals/logging/index#log-level) ，或在 [開發環境](xref:fundamentals/environments)中執行應用程式。
 
 ### <a name="clear-package-caches"></a>清除套件快取
 
-升級開發電腦上的 .NET Core SDK 或變更應用程式內的套件版本之後，正常運作的應用程式可能會立即失敗。 在某些情況下，執行主要升級時，不一致的套件可能會中斷應用程式。 大多數這些問題都可依照下列指示來進行修正：
+在升級開發電腦上的 .NET Core SDK 或變更應用程式內的套件版本之後，正常運作的應用程式可能會立即失敗。 在某些情況下，執行主要升級時，不一致的套件可能會中斷應用程式。 大多數這些問題都可依照下列指示來進行修正：
 
 1. 刪除 [bin]** 和 [obj]** 資料夾。
-1. 從命令 shell 執行[dotnet nuget 區域變數 all--clear](/dotnet/core/tools/dotnet-nuget-locals) ，以清除套件快取。
+1. 從命令列介面執行 [dotnet nuget 區域變數](/dotnet/core/tools/dotnet-nuget-locals) ，以清除套件快取。
 
-   清除套件快取也可以使用[nuget.exe](https://www.nuget.org/downloads)工具來完成，並執行命令 `nuget locals all -clear` 。 *nuget.exe* 並未隨附在 Windows 桌面作業系統的安裝中，必須另外從 [NuGet 網站](https://www.nuget.org/downloads)取得。
+   清除套件快取也可以使用 [nuget.exe](https://www.nuget.org/downloads) 工具和執行命令來完成 `nuget locals all -clear` 。 *nuget.exe* 並未隨附在 Windows 桌面作業系統的安裝中，必須另外從 [NuGet 網站](https://www.nuget.org/downloads)取得。
 
 1. 還原並重建專案。
 1. 重新部署應用程式之前，請先刪除伺服器上 [部署] 資料夾中的所有檔案。
 
 ### <a name="slow-or-hanging-app"></a>回應緩慢或無回應的應用程式
 
-損*毀*傾印是系統記憶體的快照集，有助於判斷應用程式損毀、啟動失敗或應用程式緩慢的原因。
+損 *毀* 傾印是系統記憶體的快照，可協助判斷應用程式損毀、啟動失敗或應用程式緩慢的原因。
 
 #### <a name="app-crashes-or-encounters-an-exception"></a>應用程式損毀或發生例外狀況
 
 從 [Windows 錯誤報告 (WER)](/windows/desktop/wer/windows-error-reporting) 取得並分析傾印：
 
 1. 在 `c:\dumps` 中建立資料夾以保存損毀傾印檔案。
-1. 以應用程式可執行檔名稱執行[EnableDumps PowerShell 腳本](https://github.com/dotnet/AspNetCore.Docs/blob/master/aspnetcore/host-and-deploy/windows-service/scripts/EnableDumps.ps1)：
+1. 使用應用程式可執行檔名稱來執行 [EnableDumps PowerShell 腳本](https://github.com/dotnet/AspNetCore.Docs/blob/master/aspnetcore/host-and-deploy/windows-service/scripts/EnableDumps.ps1) ：
 
    ```console
    .\EnableDumps {APPLICATION EXE} c:\dumps
@@ -1006,7 +1007,7 @@ CreateWebHostBuilder(args)
 
 #### <a name="app-hangs-fails-during-startup-or-runs-normally"></a>應用程式停止回應、在啟動期間失敗，或正常執行
 
-當*應用程式*當機 (停止回應，但未損毀) 、在啟動期間失敗，或正常執行時，請參閱使用者模式傾印檔案[：選擇最適合的工具](/windows-hardware/drivers/debugger/user-mode-dump-files#choosing-the-best-tool)來選取適當的工具以產生傾印。
+當 *應用程式* 停止回應時 (停止回應，但不會當機) 、啟動期間失敗，或正常執行時，請參閱 [使用者模式](/windows-hardware/drivers/debugger/user-mode-dump-files#choosing-the-best-tool) 傾印檔案：選擇最適合的工具來選取適當的工具來產生傾印。
 
 #### <a name="analyze-the-dump"></a>分析傾印
 

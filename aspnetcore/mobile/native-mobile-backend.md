@@ -5,6 +5,7 @@ description: 了解如何使用 ASP.NET Core MVC 建立後端服務，以支援�
 ms.author: riande
 ms.date: 12/05/2019
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -15,12 +16,12 @@ no-loc:
 - Razor
 - SignalR
 uid: mobile/native-mobile-backend
-ms.openlocfilehash: 75943a15878634568830db74f895653571c54d0f
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: 00e0c93d200e7eec6fd6bdac1f1246fe0909fc54
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88019426"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88630532"
 ---
 # <a name="create-backend-services-for-native-mobile-apps-with-aspnet-core"></a>使用 ASP.NET Core 建立原生行動應用程式的後端服務
 
@@ -118,7 +119,7 @@ API 方法需要一些方式才能操作資料。 使用原始 Xamarin 範本使
 
 ### <a name="creating-items"></a>建立項目
 
-根據慣例，建立新的資料項目會對應到 HTTP POST 動詞命令。 `Create`方法已套用 `[HttpPost]` 屬性並接受 `ToDoItem` 實例。 因為自 `item` 變數會傳入 POST 的主體，所以這個參數會指定 `[FromBody]` 屬性。
+根據慣例，建立新的資料項目會對應到 HTTP POST 動詞命令。 `Create`方法已套用 `[HttpPost]` 屬性並接受 `ToDoItem` 實例。 由於自 `item` 變數是在 POST 的主體中傳遞，因此這個參數會指定 `[FromBody]` 屬性。
 
 在方法中，項目會經過有效性的檢查，以及是否先前存在過資料存放區中。若沒有發現任何問題，則該項目便會新增至存放庫中。 檢查 `ModelState.IsValid` 會執行 [模型驗證](../mvc/models/validation.md)，並且應該要在每個接受使用者輸入的 API 方法中執行。
 

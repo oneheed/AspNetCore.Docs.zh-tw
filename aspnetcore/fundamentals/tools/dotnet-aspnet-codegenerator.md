@@ -6,6 +6,7 @@ monikerRange: '>= aspnetcore-2.1'
 ms.author: riande
 ms.date: 07/04/2019
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -16,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: fundamentals/tools/dotnet-aspnet-codegenerator
-ms.openlocfilehash: 071f2269081e63ad1355547bccb449180c59c997
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: 12825c13e1c9de984251b5554833f7194edff8c3
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88016501"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88629934"
 ---
 # <a name="dotnet-aspnet-codegenerator"></a>dotnet aspnet-codegenerator
 
@@ -66,7 +67,7 @@ dotnet aspnet-codegenerator [-h|--help]
 | ---------- | -------------------------------------------------------------------- |
 | 區域       | [架起區域](xref:mvc/controllers/areas)                      |
 | controller | [架起控制器](xref:tutorials/first-mvc-app/adding-model)  |
-| 身分識別   | [ScaffoldIdentity](xref:security/authentication/scaffold-identity) |
+| 身分識別   | [支架 Identity](xref:security/authentication/scaffold-identity) |
 | razorpage  | [Scaffold Razor 頁面](xref:tutorials/razor-pages/model)            |
 | 檢視       | [架起檢視](xref:mvc/views/overview)                          |
 
@@ -82,7 +83,7 @@ dotnet aspnet-codegenerator [-h|--help]
 
 `-tfm|--target-framework`
 
-要使用的目標 [Framework](/dotnet/standard/frameworks)。 例如，`net46`。
+要使用的目標 [Framework](/dotnet/standard/frameworks)。 例如： `net46` 。
 
 `-b|--build-base-path`
 
@@ -114,7 +115,7 @@ dotnet aspnet-codegenerator [-h|--help]
 
 ### <a name="area-options"></a>區域選項
 
-此工具旨在用於搭配控制器與檢視使用 ASP.NET Core Web 專案。 並非適用于 Razor 頁面應用程式。
+此工具旨在用於搭配控制器與檢視使用 ASP.NET Core Web 專案。 不適用於 Razor 頁面應用程式。
 
 使用方式：`dotnet aspnet-codegenerator area AreaNameToGenerate`
 
@@ -131,7 +132,7 @@ dotnet aspnet-codegenerator [-h|--help]
 
 ### <a name="controller-options"></a>控制器選項
 
-下表列出和的選項 `aspnet-codegenerator` `controller` `razorpage` ：
+下表列出和的選項  `aspnet-codegenerator` `controller` `razorpage` ：
 
 [!INCLUDE [aspnet-codegenerator-args-md.md](~/includes/aspnet-codegenerator-args-md.md)]
 
@@ -157,7 +158,7 @@ dotnet aspnet-codegenerator controller -h
 
 <a name="rp"></a>
 
-Razor您可以藉由指定要使用的新頁面名稱和範本來個別 scaffold 頁面。 支援的範本為：
+Razor 您可以藉由指定新頁面的名稱和要使用的範本來個別 scaffold 頁面。 支援的範本為：
 
 * `Empty`
 * `Create`
@@ -180,7 +181,7 @@ dotnet aspnet-codegenerator razorpage MyEdit Edit -m Movie -dc RazorPagesMovieCo
 * `Details`
 * `List`
 
-下表列出和的選項 `aspnet-codegenerator` `razorpage` `controller` ：
+下表列出和的選項  `aspnet-codegenerator` `razorpage` `controller` ：
 
 [!INCLUDE [aspnet-codegenerator-args-md.md](~/includes/aspnet-codegenerator-args-md.md)]
 

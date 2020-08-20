@@ -1,11 +1,12 @@
 ---
-title: 教學課程：讀取相關資料-使用 EF Core ASP.NET MVC
+title: 教學課程：使用 EF Core 讀取相關資料-ASP.NET MVC
 description: 在此教學課程中，您將讀取並顯示相關資料-- 也就是 Entity Framework 載入到導覽屬性的資料。
 author: rick-anderson
 ms.author: riande
 ms.date: 09/28/2019
 ms.topic: tutorial
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -16,14 +17,14 @@ no-loc:
 - Razor
 - SignalR
 uid: data/ef-mvc/read-related-data
-ms.openlocfilehash: 9fa19fbdf401ac7bd98c78b4508a6742e245b1a2
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: f2b4fd9fb1e328882583536b704d516955343417
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88018113"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88629453"
 ---
-# <a name="tutorial-read-related-data---aspnet-mvc-with-ef-core"></a>教學課程：讀取相關資料-使用 EF Core ASP.NET MVC
+# <a name="tutorial-read-related-data---aspnet-mvc-with-ef-core"></a>教學課程：使用 EF Core 讀取相關資料-ASP.NET MVC
 
 在上一個教學課程中，您已完成 School 資料模型。 在此教學課程中，您將讀取並顯示相關資料-- 也就是 Entity Framework 載入到導覽屬性的資料。
 
@@ -41,7 +42,7 @@ ms.locfileid: "88018113"
 > * 建立 Instructors 頁面
 > * 了解明確載入
 
-## <a name="prerequisites"></a>必要條件
+## <a name="prerequisites"></a>Prerequisites
 
 * [建立複雜的資料模型](complex-data-model.md)
 
@@ -198,7 +199,7 @@ Instructors 頁面會顯示下列三個不同資料表的資料。 因此，您�
   }
   ```
 
-* 新增 [課程]**** 資料行，以顯示每位講師所教授的課程。 如需詳細資訊，請參閱語法文章的[明確行轉換](xref:mvc/views/razor#explicit-line-transition)一節 Razor 。
+* 新增 [課程]**** 資料行，以顯示每位講師所教授的課程。 如需詳細資訊，請參閱語法文章的 [明確行轉換](xref:mvc/views/razor#explicit-line-transition) 一節 Razor 。
 
 * 新增程式碼，將 `class="success"` 動態新增至所選取講師的 `tr` 項目。 這會使用啟動程序類別設定所選取資料列的背景色彩。
 
@@ -217,7 +218,7 @@ Instructors 頁面會顯示下列三個不同資料表的資料。 因此，您�
   <a asp-action="Index" asp-route-id="@item.ID">Select</a> |
   ```
 
-執行應用程式，然後選取 [**講師**] 索引標籤。當沒有相關的 OfficeAssignment 實體時，此頁面會顯示相關 OfficeAssignment 實體的 Location 屬性和空的資料表資料格。
+執行應用程式，然後選取 [ **講師** ] 索引標籤。當沒有相關的 OfficeAssignment 實體時，此頁面會顯示相關 OfficeAssignment 實體的 Location 屬性和空白資料表單元格。
 
 ![Instructors [索引] 頁面未選取任何項目](read-related-data/_static/instructors-index-no-selection.png)
 

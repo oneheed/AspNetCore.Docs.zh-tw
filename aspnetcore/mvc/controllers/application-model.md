@@ -5,6 +5,7 @@ description: 了解如何讀取及操作應用程式模型，來修改 ASP.NET C
 ms.author: riande
 ms.date: 12/05/2019
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -15,12 +16,12 @@ no-loc:
 - Razor
 - SignalR
 uid: mvc/controllers/application-model
-ms.openlocfilehash: de831a8b5012a2fe61642887ad816466df7a1bcb
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: f2e86a8607ddd00dc7f4bec36079660f0cd1eea3
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88019894"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88630285"
 ---
 # <a name="work-with-the-application-model-in-aspnet-core"></a>在 ASP.NET Core 中使用應用程式模型
 
@@ -73,7 +74,7 @@ ASP.NET Core MVC 使用 [IApplicationModelProvider](/dotnet/api/microsoft.aspnet
 * 將動作方法參數新增至內容
 * 套用路由和其他屬性
 
-某些內建行為由 `DefaultApplicationModelProvider` 實作。 這個提供者會負責建立 [`ControllerModel`](/dotnet/api/microsoft.aspnetcore.mvc.applicationmodels.controllermodel) ，而後者又會參考 [`ActionModel`](/dotnet/api/microsoft.aspnetcore.mvc.applicationmodels.actionmodel) 、 [`PropertyModel`](/dotnet/api/microsoft.aspnetcore.mvc.applicationmodels.propertymodel) 和 [`ParameterModel`](/dotnet/api/microsoft.aspnetcore.mvc.applicationmodels.parametermodel) 實例。 `DefaultApplicationModelProvider` 類別是內部架構實作詳細資料，未來將會變更。 
+某些內建行為由 `DefaultApplicationModelProvider` 實作。 此提供者負責建立，而 [`ControllerModel`](/dotnet/api/microsoft.aspnetcore.mvc.applicationmodels.controllermodel) 後者接著參考 [`ActionModel`](/dotnet/api/microsoft.aspnetcore.mvc.applicationmodels.actionmodel) 、 [`PropertyModel`](/dotnet/api/microsoft.aspnetcore.mvc.applicationmodels.propertymodel) 和 [`ParameterModel`](/dotnet/api/microsoft.aspnetcore.mvc.applicationmodels.parametermodel) 實例。 `DefaultApplicationModelProvider` 類別是內部架構實作詳細資料，未來將會變更。 
 
 `AuthorizationApplicationModelProvider` 負責套用與 `AuthorizeFilter` 和 `AllowAnonymousFilter` 屬性建立關聯的行為。 [進一步了解這些屬性](xref:security/authorization/simple)。
 
@@ -81,7 +82,7 @@ ASP.NET Core MVC 使用 [IApplicationModelProvider](/dotnet/api/microsoft.aspnet
 
 ## <a name="conventions"></a>慣例
 
-應用程式模型定義了慣例抽象化，提供比覆寫整個模型或提供者更簡單的方式，來自訂模型的行為。 這些抽象化是用來修改您應用程式行為的建議方式。 慣例會提供方式讓您撰寫程式碼，動態地套用自訂。 雖然[篩選準則](xref:mvc/controllers/filters)提供修改架構行為的方法，但自訂可讓您控制整個應用程式如何一起運作。
+應用程式模型定義了慣例抽象化，提供比覆寫整個模型或提供者更簡單的方式，來自訂模型的行為。 這些抽象化是用來修改您應用程式行為的建議方式。 慣例會提供方式讓您撰寫程式碼，動態地套用自訂。 雖然 [篩選準則](xref:mvc/controllers/filters) 會提供修改架構行為的方法，但自訂可讓您控制整個應用程式如何一起運作。
 
 可用的慣例如下：
 
@@ -90,7 +91,7 @@ ASP.NET Core MVC 使用 [IApplicationModelProvider](/dotnet/api/microsoft.aspnet
 * [`IActionModelConvention`](/dotnet/api/microsoft.aspnetcore.mvc.applicationmodels.iactionmodelconvention)
 * [`IParameterModelConvention`](/dotnet/api/microsoft.aspnetcore.mvc.applicationmodels.iparametermodelconvention)
 
-藉由將慣例新增至 MVC 選項或執行， `Attribute` 並將其套用至控制器、動作或動作參數（ (類似于) ），即可進行套用 [`Filters`](xref:mvc/controllers/filters) 。 與篩選條件不同的是，只有在應用程式啟動時才會執行慣例，而不會在每個要求當中執行。
+套用慣例的方式是將它們新增至 MVC 選項，或藉由執行 `Attribute` ，並將其套用至控制器、動作或動作參數 (類似 [`Filters`](xref:mvc/controllers/filters)) 。 與篩選條件不同的是，只有在應用程式啟動時才會執行慣例，而不會在每個要求當中執行。
 
 ### <a name="sample-modifying-the-applicationmodel"></a>範例：修改 ApplicationModel
 
@@ -206,11 +207,11 @@ services.AddMvc().AddWebApiConventions();
 
 `UseWebApiRoutesAttribute` 控制是否套用 `WebApiApplicationModelConvention` 控制器慣例。 啟用時，這個慣例會用來將[區域](xref:mvc/controllers/areas)的支援新增到路由。
 
-除了一組慣例之外，相容性套件還包括 `System.Web.Http.ApiController` 基底類別，以取代 Web API 提供的類別。 這可讓您針對 Web API 撰寫且繼承自其 `ApiController` 的控制器如同設計般地運作，同時在 ASP.NET Core MVC 上執行。 `UseWebApi*`先前列出的所有屬性都會套用至基底控制器類別。 `ApiController` 會公開屬性、方法和與 Web API 中之結果類型相容的結果類型。
+除了一組慣例之外，相容性套件還包括 `System.Web.Http.ApiController` 基底類別，以取代 Web API 提供的類別。 這可讓您針對 Web API 撰寫且繼承自其 `ApiController` 的控制器如同設計般地運作，同時在 ASP.NET Core MVC 上執行。 稍 `UseWebApi*` 早列出的所有屬性都會套用至基底控制器類別。 `ApiController` 會公開屬性、方法和與 Web API 中之結果類型相容的結果類型。
 
 ## <a name="using-apiexplorer-to-document-your-app"></a>使用 ApiExplorer 記載您的應用程式
 
-應用程式模型會公開 [`ApiExplorer`](/dotnet/api/microsoft.aspnetcore.mvc.applicationmodels.apiexplorermodel) 每個層級上的屬性，以用來流覽應用程式的結構。 這可以用來[使用 Swagger 等工具為您的 Web API 產生說明頁面](xref:tutorials/web-api-help-pages-using-swagger)。 `ApiExplorer` 屬性會公開 `IsVisible` 屬性，它可以設定來指定應該公開您應用程式模型中的哪些部分。 您可以使用慣例來設定這項設定：
+應用程式模型 [`ApiExplorer`](/dotnet/api/microsoft.aspnetcore.mvc.applicationmodels.apiexplorermodel) 會在每個層級公開可用於跨越應用程式結構的屬性。 這可以用來[使用 Swagger 等工具為您的 Web API 產生說明頁面](xref:tutorials/web-api-help-pages-using-swagger)。 `ApiExplorer` 屬性會公開 `IsVisible` 屬性，它可以設定來指定應該公開您應用程式模型中的哪些部分。 您可以使用慣例來設定這項設定：
 
 [!code-csharp[](./application-model/sample/src/AppModelSample/Conventions/EnableApiExplorerApplicationConvention.cs)]
 

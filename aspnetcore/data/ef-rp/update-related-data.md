@@ -1,10 +1,11 @@
 ---
-title: 第7部分， Razor ASP.NET Core 更新相關資料中包含 EF Core 的頁面
+title: 第7部分： Razor ASP.NET Core 更新相關資料中有 EF Core 的頁面
 author: rick-anderson
-description: 第7部分 Razor 頁面和 Entity Framework 教學課程系列。
+description: 第 7 Razor 頁和 Entity Framework 教學課程系列。
 ms.author: riande
 ms.date: 07/22/2019
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -15,16 +16,16 @@ no-loc:
 - Razor
 - SignalR
 uid: data/ef-rp/update-related-data
-ms.openlocfilehash: 3807c52bb843c4d6403e8236fde50c034a8d1e2b
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: 603c5e7c9f095c380461f8c6e4ead783ad35abe2
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88017736"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88630857"
 ---
-# <a name="part-7-no-locrazor-pages-with-ef-core-in-aspnet-core---update-related-data"></a>第7部分， Razor ASP.NET Core 更新相關資料中包含 EF Core 的頁面
+# <a name="part-7-no-locrazor-pages-with-ef-core-in-aspnet-core---update-related-data"></a>第7部分： Razor ASP.NET Core 更新相關資料中有 EF Core 的頁面
 
-由[Tom 作者: dykstra](https://github.com/tdykstra)和[Rick Anderson](https://twitter.com/RickAndMSFT)
+由 [Tom Dykstra](https://github.com/tdykstra)和 [Rick Anderson](https://twitter.com/RickAndMSFT)
 
 [!INCLUDE [about the series](../../includes/RP-EF/intro.md)]
 
@@ -65,9 +66,9 @@ Course 會指派給 Department。 Create 和 Edit 頁面的基底類別會提供
 
 * 衍生自 `DepartmentNamePageModel`。
 * 使用 `TryUpdateModelAsync` 來防止[大量指派](xref:data/ef-rp/crud#overposting) (overposting)。
-* 移除 `ViewData["DepartmentID"]`。 `DepartmentNameSL`從基類是強型別模型，而且會供 Razor 頁面使用。 強型別的模型優先於弱型別。 如需詳細資訊，請參閱[弱型別資料 (ViewData 和 ViewBag)](xref:mvc/views/overview#VD_VB)。
+* 移除 `ViewData["DepartmentID"]`。 `DepartmentNameSL` 基類是強型別模型，而且會由 Razor 頁面使用。 強型別的模型優先於弱型別。 如需詳細資訊，請參閱[弱型別資料 (ViewData 和 ViewBag)](xref:mvc/views/overview#VD_VB)。
 
-### <a name="update-the-course-create-no-locrazor-page"></a>更新課程 [建立] Razor 頁面
+### <a name="update-the-course-create-no-locrazor-page"></a>更新課程的 [建立] Razor 頁面
 
 使用下列程式碼更新 *Pages/Courses/Create.cshtml*：
 
@@ -80,7 +81,7 @@ Course 會指派給 Department。 Create 和 Edit 頁面的基底類別會提供
 * 新增 [選取部門] 選項。 此變更會在尚未選取任何部門時，在下拉式清單中轉譯「選取部門」而非第一個部門。
 * 未選取部門時，請新增驗證訊息。
 
-Razor頁面會使用[選取](xref:mvc/views/working-with-forms#the-select-tag-helper)標籤協助程式：
+此 Razor 頁面會使用 [選取標記](xref:mvc/views/working-with-forms#the-select-tag-helper)協助程式：
 
 [!code-cshtml[](intro/samples/cu/Pages/Courses/Create.cshtml?range=28-35&highlight=3-6)]
 
@@ -94,7 +95,7 @@ Razor頁面會使用[選取](xref:mvc/views/working-with-forms#the-select-tag-he
 
 這些變更類似於 *Create* 頁面模型中所做的變更。 在上述程式碼中，`PopulateDepartmentsDropDownList` 會傳遞部門識別碼，其在下拉式清單中選取部門。
 
-### <a name="update-the-course-edit-no-locrazor-page"></a>更新課程 [編輯] Razor 頁面
+### <a name="update-the-course-edit-no-locrazor-page"></a>更新課程的 [編輯] Razor 頁面
 
 使用下列程式碼更新 *Pages/Courses/Edit.cshtml*：
 
@@ -160,7 +161,7 @@ Razor頁面會使用[選取](xref:mvc/views/working-with-forms#the-select-tag-he
 
 `InstructorCoursesPageModel` 是您將用於 *Edit* 和 *Create* 頁面模型的基底類別。 `PopulateAssignedCourseData` 會讀取所有 `Course` 實體來擴展 `AssignedCourseDataList`。 對於每個課程，此程式碼設定 `CourseID`、標題以及是否將講師指派給課程。 [HashSet](/dotnet/api/system.collections.generic.hashset-1) 會用來進行有效率的查閱。
 
-由於 Razor 頁面沒有課程實體的集合，因此模型系結器無法自動更新 `CourseAssignments` 導覽屬性。 相較於使用模型繫結器更新 `CourseAssignments` 導覽屬性，您會在新的 `UpdateInstructorCourses` 方法中進行相同的操作。 因此您必須從模型繫結器中排除 `CourseAssignments` 屬性。 這不需要對呼叫的程式碼進行任何變更， `TryUpdateModel` 因為您是使用具有宣告屬性的多載，而且 `CourseAssignments` 不在包含清單中。
+因為 Razor 頁面沒有課程實體的集合，所以模型系結器無法自動更新 `CourseAssignments` 導覽屬性。 相較於使用模型繫結器更新 `CourseAssignments` 導覽屬性，您會在新的 `UpdateInstructorCourses` 方法中進行相同的操作。 因此您必須從模型繫結器中排除 `CourseAssignments` 屬性。 這並不需要對呼叫的程式碼進行任何變更， `TryUpdateModel` 因為您是使用具有宣告屬性的多載，而 `CourseAssignments` 不是在包含清單中。
 
 若沒有選取任何核取方塊，`UpdateInstructorCourses` 中的程式碼會使用空集合初始化 `CourseAssignments` 導覽屬性並傳回：
 
@@ -215,7 +216,7 @@ Razor頁面會使用[選取](xref:mvc/views/working-with-forms#the-select-tag-he
 
 ### <a name="update-the-instructor-create-page"></a>更新 Instructor Create 頁面
 
-使用類似于 [編輯] 頁面的程式碼，更新講師 [建立] 頁面模型和 Razor 頁面：
+使用與編輯頁面類似的程式碼，更新講師建立頁面模型和 Razor 頁面：
 
 [!code-csharp[](intro/samples/cu30/Pages/Instructors/Create.cshtml.cs)]
 
@@ -297,7 +298,7 @@ Razor頁面會使用[選取](xref:mvc/views/working-with-forms#the-select-tag-he
 * 新增 [選取部門] 選項。 這項變更會呈現 [選取部門] ，而不是第一個部門。
 * 未選取部門時，請新增驗證訊息。
 
-Razor頁面會使用[選取](xref:mvc/views/working-with-forms#the-select-tag-helper)標籤協助程式：
+此 Razor 頁面會使用 [選取標記](xref:mvc/views/working-with-forms#the-select-tag-helper)協助程式：
 
 [!code-cshtml[](intro/samples/cu/Pages/Courses/Create.cshtml?range=28-35&highlight=3-6)]
 
@@ -412,7 +413,7 @@ Razor頁面會使用[選取](xref:mvc/views/working-with-forms#the-select-tag-he
 
 上述程式碼會處理辦公室指派變更。
 
-更新講師 Razor View：
+更新講師 Razor 觀點：
 
 [!code-cshtml[](intro/samples/cu/Pages/Instructors/Edit.cshtml?highlight=34-59)]
 
@@ -436,7 +437,7 @@ Razor頁面會使用[選取](xref:mvc/views/working-with-forms#the-select-tag-he
 
 上述程式碼類似於 *Pages/Instructors/Edit.cshtml.cs* 程式碼。
 
-以下列標記更新講師 [建立] Razor 頁面：
+Razor以下列標記更新講師建立頁面：
 
 [!code-cshtml[](intro/samples/cu/Pages/Instructors/Create.cshtml?highlight=32-62)]
 

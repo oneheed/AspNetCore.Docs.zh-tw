@@ -6,6 +6,7 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 12/05/2019
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -16,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: mvc/views/tag-helpers/authoring
-ms.openlocfilehash: d40b37a4ca8acf57b662124597a8ebc3b90bffd2
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: c1891b8093c5a4c1599cd3c4ed4e5e60e2fd13e8
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88018161"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88628998"
 ---
 # <a name="author-tag-helpers-in-aspnet-core"></a>ASP.NET Core 中的編寫標籤協助程式
 
@@ -75,11 +76,11 @@ ms.locfileid: "88018161"
    public class Email : TagHelper
    ```
 
-1. 若要讓 `EmailTagHelper` 類別可供所有 Razor 的視圖使用，請將指示詞新增 `addTagHelper` 至*views/_ViewImports. cshtml*檔案：
+1. 若要讓 `EmailTagHelper` 類別可供所有的 Razor 視圖使用，請將指示詞新增 `addTagHelper` 至 *views/_ViewImports cshtml* 檔案：
 
    [!code-cshtml[](../../../mvc/views/tag-helpers/authoring/sample/AuthoringTagHelpers/src/AuthoringTagHelpers/Views/_ViewImportsCopyEmail.cshtml?highlight=2,3)]
 
-   上述程式碼使用萬用字元語法，指定將使用組件中的所有標籤協助程式。 `@addTagHelper` 後面的第一個字串指定要載入的標籤協助程式 (使用 "*" 表示所有標籤協助程式)，而第二個字串 "AuthoringTagHelpers" 指定標籤協助程式所在的組件。 另請注意，第二行會使用萬用字元語法來帶入 ASP.NET Core MVC 標記協助程式 (這些協助程式會在標籤協助程式[簡介](intro.md)中討論。 ) 它是讓標籤協助 `@addTagHelper` 程式可供視圖使用的指示詞。 Razor 或者，您可以提供標籤協助程式的完整名稱 (FQN)，如下所示：
+   上述程式碼使用萬用字元語法，指定將使用組件中的所有標籤協助程式。 `@addTagHelper` 後面的第一個字串指定要載入的標籤協助程式 (使用 "*" 表示所有標籤協助程式)，而第二個字串 "AuthoringTagHelpers" 指定標籤協助程式所在的組件。 另外也請注意，第二行則是使用萬用字元語法來 ASP.NET Core MVC 標記協助程式 (這些協助程式會在標籤協助程式的[簡介](intro.md)中討論。 ) 這是讓標籤協助 `@addTagHelper` 程式可供視圖使用的指示詞。 Razor 或者，您可以提供標籤協助程式的完整名稱 (FQN)，如下所示：
 
 ```csharp
 @using AuthoringTagHelpers
@@ -102,7 +103,7 @@ the following snippet uses TagHelpers3 and should use TagHelpers (not the 3)
 
 ## <a name="setattribute-and-setcontent"></a>SetAttribute 和 SetContent
 
-在本節中，我們將更新 `EmailTagHelper`，以建立電子郵件的有效錨點標籤。 我們會將它更新為以 Razor 屬性) 的形式從 view (的資訊 `mail-to` ，並使用它來產生錨點。
+在本節中，我們將更新 `EmailTagHelper`，以建立電子郵件的有效錨點標籤。 我們會將其更新為以屬性的 Razor 形式從 view (取得資訊 `mail-to`) 並使用它來產生錨點。
 
 使用下列程式碼更新 `EmailTagHelper` 類別：
 
@@ -127,7 +128,7 @@ the following snippet uses TagHelpers3 and should use TagHelpers (not the 3)
 <a name="self-closing"></a>
 
    > [!NOTE]
-   > 如果您要撰寫電子郵件標籤自我結尾 (`<email mail-to="Rick" />`)，則最終輸出也會是自我結尾。 若要啟用只以開頭標記 (寫入標記的功能 `<email mail-to="Rick">`) 您必須使用下列內容來標記類別：
+   > 如果您要撰寫電子郵件標籤自我結尾 (`<email mail-to="Rick" />`)，則最終輸出也會是自我結尾。 若要啟用只使用開始標記來寫入標記的功能 (`<email mail-to="Rick">`) 您必須使用下列標記來標記類別：
    >
    > [!code-csharp[](../../../mvc/views/tag-helpers/authoring/sample/AuthoringTagHelpers/src/AuthoringTagHelpers/TagHelpers/EmailTagHelperMailVoid.cs?highlight=1&range=6-10)]
 
@@ -203,7 +204,7 @@ the following snippet uses TagHelpers3 and should use TagHelpers (not the 3)
 
    [!code-csharp[](authoring/sample/AuthoringTagHelpers/src/AuthoringTagHelpers/TagHelpers/WebsiteInformationTagHelper.cs)]
 
-   * 如前所述，標籤協助程式會將標籤協助程式依照 Pascal 大小寫 C# 命名法大小寫慣例的類別名稱和屬性轉譯成[小寫 kebab](https://wiki.c2.com/?KebabCase)。 因此，若要使用 `WebsiteInformationTagHelper` 中的 Razor ，您將會撰寫 `<website-information />` 。
+   * 如前所述，標籤協助程式會將標籤協助程式依照 Pascal 大小寫 C# 命名法大小寫慣例的類別名稱和屬性轉譯成[小寫 kebab](https://wiki.c2.com/?KebabCase)。 因此，若要 `WebsiteInformationTagHelper` 在中使用 Razor ，您將會撰寫 `<website-information />` 。
 
    * 您未明確識別具有 `[HtmlTargetElement]` 屬性的目標項目，因此會將預設值 `website-information` 設為目標。 如果您已套用下列屬性 (請注意，它不是 Kebab 大小寫，但符合類別名稱)：
 
@@ -217,7 +218,7 @@ the following snippet uses TagHelpers3 and should use TagHelpers (not the 3)
    [HtmlTargetElement("Website-Information")]
    ```
 
-   * 自我結尾項目沒有內容。 在此範例中， Razor 標記會使用自我結束記號，但標籤協助程式將會建立[區段](https://www.w3.org/TR/html5/sections.html#the-section-element)元素 (不會自行關閉，而且您會在專案) 內寫入內容 `section` 。 因此，您需要將 `TagMode` 設定為 `StartTagAndEndTag`，才能撰寫輸出。 或者，您可以將設定 `TagMode` 的行設定為註解，並撰寫含結尾標籤 (tag) 的標籤 (markup)  (本教學課程稍後會提供範例標記)。
+   * 自我結尾項目沒有內容。 在此範例中， Razor 標記會使用自我結束記號，但標籤協助程式將會建立不會自行關閉的 [區段](https://www.w3.org/TR/html5/sections.html#the-section-element) 專案 (，且您要在專案) 內撰寫內容 `section` 。 因此，您需要將 `TagMode` 設定為 `StartTagAndEndTag`，才能撰寫輸出。 或者，您可以將設定 `TagMode` 的行設定為註解，並撰寫含結尾標籤 (tag) 的標籤 (markup)  (本教學課程稍後會提供範例標記)。
 
    * 下行中的 `$` (貨幣符號) 使用[插入字串](/dotnet/csharp/language-reference/keywords/interpolated-strings)：
 
@@ -234,7 +235,7 @@ the following snippet uses TagHelpers3 and should use TagHelpers (not the 3)
    >
    > [!code-html[](authoring/sample/AuthoringTagHelpers/src/AuthoringTagHelpers/Views/Home/About.cshtml?range=18-18)]
    >
-   > Razor知道 `info` 屬性是一個類別，而不是字串，而您想要撰寫 c # 程式碼。 應該撰寫任何無 `@` 字元的非字串標籤協助程式屬性。
+   > Razor 知道 `info` 屬性是類別，而不是字串，而您想要撰寫 c # 程式碼。 應該撰寫任何無 `@` 字元的非字串標籤協助程式屬性。
 
 1. 執行應用程式，並巡覽至 About 檢視來查看網站資訊。
 

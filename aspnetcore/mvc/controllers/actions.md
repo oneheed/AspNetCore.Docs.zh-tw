@@ -5,6 +5,7 @@ description: ''
 ms.author: riande
 ms.date: 12/05/2019
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -15,12 +16,12 @@ no-loc:
 - Razor
 - SignalR
 uid: mvc/controllers/actions
-ms.openlocfilehash: 05985acb559f63eb5f1d9854041be737291a3809
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: 9542a7c0fd16c00f46ee69c5873878a7c70ef626
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88019907"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88630324"
 ---
 # <a name="handle-requests-with-controllers-in-aspnet-core-mvc"></a>在 ASP.NET Core MVC 中處理控制器要求
 
@@ -34,13 +35,13 @@ ms.locfileid: "88019907"
 
 依照慣例，控制器類別：
 
-* 位於專案的根層級*控制器*資料夾中。
+* 位於專案的根層級 *控制器* 資料夾中。
 * 繼承自 `Microsoft.AspNetCore.Mvc.Controller`。
 
 控制器是至少下列其中一個條件為 true 的可具現化類別：
 
-* 類別名稱尾碼為 `Controller` 。
-* 類別繼承自名稱尾碼為的類別 `Controller` 。
+* 類別名稱的尾碼為 `Controller` 。
+* 類別繼承自的類別，其名稱尾碼為 `Controller` 。
 * `[Controller]`屬性會套用至類別。
 
 控制器類別不得具有相關聯的 `[NonController]` 屬性。
@@ -65,7 +66,7 @@ ms.locfileid: "88019907"
 
 控制器通常繼承自[控制器](/dotnet/api/microsoft.aspnetcore.mvc.controller)，但這不是必要的。 衍生自 `Controller` 提供對三種類別的協助程式方法的存取：
 
-#### <a name="1-methods-resulting-in-an-empty-response-body"></a>1. 產生空白回應主體的方法
+#### <a name="1-methods-resulting-in-an-empty-response-body"></a>1. 導致空白回應主體的方法
 
 因為回應本文缺少要描述的內容，所以未包括 `Content-Type` HTTP 回應標頭。
 
@@ -97,7 +98,7 @@ ms.locfileid: "88019907"
     
     此類型的其他通用方法包括 `File` 與 `PhysicalFile`。 例如，`return PhysicalFile(customerFilePath, "text/xml");` 會傳回 [PhysicalFileResult](/dotnet/api/microsoft.aspnetcore.mvc.physicalfileresult)。
 
-#### <a name="3-methods-resulting-in-a-non-empty-response-body-formatted-in-a-content-type-negotiated-with-the-client"></a>3. 在與用戶端協商的內容類型中格式化為非空白回應主體的方法
+#### <a name="3-methods-resulting-in-a-non-empty-response-body-formatted-in-a-content-type-negotiated-with-the-client"></a>3. 方法會產生非空白的回應主體，並以與用戶端協商的內容類型進行格式化
 
 此類別普遍稱為**內容交涉**。 只要動作傳回 [ObjectResult](/dotnet/api/microsoft.aspnetcore.mvc.objectresult) 類型或 [IActionResult](/dotnet/api/microsoft.aspnetcore.mvc.iactionresult) 實作以外的某個項目，就會套用[內容交涉](xref:web-api/advanced/formatting#content-negotiation)。 傳回非 `IActionResult` 實作的動作 (例如，`object`) 也會傳回「格式化回應」。
 

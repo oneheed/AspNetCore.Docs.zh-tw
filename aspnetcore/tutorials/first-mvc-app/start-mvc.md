@@ -5,6 +5,7 @@ description: 了解如何開始使用 ASP.NET Core MVC。
 ms.author: riande
 ms.date: 10/16/2019
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -15,12 +16,12 @@ no-loc:
 - Razor
 - SignalR
 uid: tutorials/first-mvc-app/start-mvc
-ms.openlocfilehash: 3df00af8e6bca0dbf2d7871f383dd67b465aa5da
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: 9d70b292a93a5d19cc25b2fc592ec88ce8262434
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88021168"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88629986"
 ---
 # <a name="get-started-with-aspnet-core-mvc"></a>ASP.NET Core MVC 使用者入門
 
@@ -44,7 +45,7 @@ ms.locfileid: "88021168"
 
 [!INCLUDE[](~/includes/mvc-intro/download.md)]
 
-## <a name="prerequisites"></a>必要條件
+## <a name="prerequisites"></a>Prerequisites
 
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
@@ -86,17 +87,17 @@ Visual Studio 在您剛才建立的 MVC 專案中使用了預設範本。 您只
 
 * 開啟[整合式終端機](https://code.visualstudio.com/docs/editor/integrated-terminal)。
 * 將目錄 (`cd`) 變更為其中包含專案的資料夾。
-* 執行下列命令：
+* 執行以下命令：
 
    ```dotnetcli
    dotnet new mvc -o MvcMovie
    code -r MvcMovie
    ```
 
-  * 此時會出現一個對話方塊，其中包含**組建所需的資產，且 ' MvcMovie ' 中遺漏了 debug。要新增它們嗎？**  選取 [是]
+  * 會出現一個對話方塊，其中包含 **建立和偵測所需的資產，但缺少 ' MvcMovie '。要新增它們嗎？**  選取 [是]
 
   * `dotnet new mvc -o MvcMovie`：在 *MvcMovie* 資料夾中建立新的 ASP.NET Core MVC 專案。
-  * `code -r MvcMovie`：載入 Visual Studio Code 中的*MvcMovie*專案檔案。
+  * `code -r MvcMovie`：載入 Visual Studio Code 中的 *MvcMovie .csproj* 專案檔。
 
 # <a name="visual-studio-for-mac"></a>[Visual Studio for Mac](#tab/visual-studio-mac)
 
@@ -104,20 +105,20 @@ Visual Studio 在您剛才建立的 MVC 專案中使用了預設範本。 您只
 
   ![macOS 新增方案](start-mvc/_static/new_project_vsmac.png)
 
-* 在8.6 版之前的 Visual Studio for Mac 中，選取 [ **.net Core**  >  **應用**  >  **程式 Web 應用程式] ([模型-視圖) 控制器**  >  **] [下一步]**。 在8.6 版或更新版本中，選取 [ **web 和主控台**  >  **應用**  >  **程式] [web 應用程式] ([模型-視圖控制器) **  >  **下一步]**
+* 在8.6 版之前的 Visual Studio for Mac 中，選取 [ **.net Core**  >  **應用**  >  **程式 Web 應用程式] (模型-視圖控制器) **  >  **下一步]**。 在8.6 版或更新版本中，選取 [ **web] 和 [主控台**  >  **應用**  >  **程式 web 應用程式] (模型-視圖控制器) **  >  **下一步]**。
 
   ![macOS web 應用程式範本選取專案](start-mvc/_static/web_app_template_vsmac.png)
 
-* 在 [**設定您的新 Web 應用程式**] 對話方塊中：
+* 在 [ **設定新的 Web 應用程式** ] 對話方塊中：
 
-  * 確認 [**驗證**] 已設為 [**無驗證**]。
-  * 如果提供選取**目標 Framework**的選項，請選取最新的3.x 版。
+  * 確認 [ **驗證** ] 設定為 [ **無驗證**]。
+  * 如果有選取 **目標 Framework**的選項，請選取最新的3.x 版。
 
   選取 [下一步]  。
 
 * 將專案命名為 **MvcMovie**，然後選取 [建立]****。
 
-  ![macOS 將專案命名為](start-mvc/_static/MvcMovie.png)
+  ![macOS 為專案命名](start-mvc/_static/MvcMovie.png)
 
 ---
 
@@ -157,7 +158,7 @@ Visual Studio 在您剛才建立的 MVC 專案中使用了預設範本。 您只
 
 # <a name="visual-studio-for-mac"></a>[Visual Studio for Mac](#tab/visual-studio-mac)
 
-選取 [**執行**]  >  [**啟動但不**進行偵測] 來啟動應用程式。 Visual Studio for Mac 會啟動 [Kestrel](xref:fundamentals/servers/index#kestrel) 伺服器、啟動瀏覽器，然後巡覽至 `http://localhost:port`，其中 *port* 是隨機選擇的連接埠號碼。
+選取 [**執行**  >  **啟動但不進行調試**程式] 以啟動應用程式。 Visual Studio for Mac 會啟動 [Kestrel](xref:fundamentals/servers/index#kestrel) 伺服器、啟動瀏覽器，然後巡覽至 `http://localhost:port`，其中 *port* 是隨機選擇的連接埠號碼。
 
 [!INCLUDE[](~/includes/trustCertMac.md)]
 
@@ -197,7 +198,7 @@ Visual Studio 在您剛才建立的 MVC 專案中使用了預設範本。 您只
 
 [!INCLUDE[](~/includes/mvc-intro/download.md)]
 
-## <a name="prerequisites"></a>必要條件
+## <a name="prerequisites"></a>Prerequisites
 
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
@@ -239,17 +240,17 @@ Visual Studio 在您剛才建立的 MVC 專案中使用了預設範本。 您只
 
 * 開啟[整合式終端機](https://code.visualstudio.com/docs/editor/integrated-terminal)。
 * 將目錄 (`cd`) 變更為其中包含專案的資料夾。
-* 執行下列命令：
+* 執行以下命令：
 
    ```dotnetcli
    dotnet new mvc -o MvcMovie
    code -r MvcMovie
    ```
 
-  * 此時會出現一個對話方塊，其中包含**組建所需的資產，且 ' MvcMovie ' 中遺漏了 debug。要新增它們嗎？**  選取 [是]
+  * 會出現一個對話方塊，其中包含 **建立和偵測所需的資產，但缺少 ' MvcMovie '。要新增它們嗎？**  選取 [是]
 
   * `dotnet new mvc -o MvcMovie`：在 *MvcMovie* 資料夾中建立新的 ASP.NET Core MVC 專案。
-  * `code -r MvcMovie`：載入 Visual Studio Code 中的*MvcMovie*專案檔案。
+  * `code -r MvcMovie`：載入 Visual Studio Code 中的 *MvcMovie .csproj* 專案檔。
 
 # <a name="visual-studio-for-mac"></a>[Visual Studio for Mac](#tab/visual-studio-mac)
 
@@ -257,12 +258,12 @@ Visual Studio 在您剛才建立的 MVC 專案中使用了預設範本。 您只
 
   ![macOS 新增方案](./start-mvc/_static/new_project_vsmac.png)
 
-* 在8.6 版之前的 Visual Studio for Mac 中，選取 [ **.net Core**  >  **應用**  >  **程式 Web 應用程式] ([模型-視圖) 控制器**  >  **] [下一步]**。 在8.6 版或更新版本中，選取 [ **web 和主控台**  >  **應用**  >  **程式] [web 應用程式] ([模型-視圖控制器) **  >  **下一步]**
+* 在8.6 版之前的 Visual Studio for Mac 中，選取 [ **.net Core**  >  **應用**  >  **程式 Web 應用程式] (模型-視圖控制器) **  >  **下一步]**。 在8.6 版或更新版本中，選取 [ **web] 和 [主控台**  >  **應用**  >  **程式 web 應用程式] (模型-視圖控制器) **  >  **下一步]**。
 
-* 在 [**設定您的新 Web 應用程式**] 對話方塊中：
+* 在 [ **設定新的 Web 應用程式** ] 對話方塊中：
 
-  * 確認 [**驗證**] 已設為 [**無驗證**]。
-  * 如果提供選取**目標 Framework**的選項，請選取最新的2.x 版。
+  * 確認 [ **驗證** ] 設定為 [ **無驗證**]。
+  * 如果有選取 **目標 Framework**的選項，請選取最新的2.x 版本。
 
   選取 [下一步]  。
 
@@ -316,7 +317,7 @@ Visual Studio 在您剛才建立的 MVC 專案中使用了預設範本。 您只
 
 # <a name="visual-studio-for-mac"></a>[Visual Studio for Mac](#tab/visual-studio-mac)
 
-選取 [**執行**]  >  [**啟動但不**進行偵測] 來啟動應用程式。 Visual Studio for Mac 會啟動 [Kestrel](xref:fundamentals/servers/index#kestrel) 伺服器、啟動瀏覽器，然後巡覽至 `http://localhost:port`，其中 *port* 是隨機選擇的連接埠號碼。
+選取 [**執行**  >  **啟動但不進行調試**程式] 以啟動應用程式。 Visual Studio for Mac 會啟動 [Kestrel](xref:fundamentals/servers/index#kestrel) 伺服器、啟動瀏覽器，然後巡覽至 `http://localhost:port`，其中 *port* 是隨機選擇的連接埠號碼。
 
 [!INCLUDE[](~/includes/trustCertMac.md)]
 

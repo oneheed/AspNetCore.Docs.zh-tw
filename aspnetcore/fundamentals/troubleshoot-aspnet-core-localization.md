@@ -5,6 +5,7 @@ description: 了解如何診斷 ASP.NET Core 應用程式的當地語系化問�
 ms.author: riande
 ms.date: 01/24/2019
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -15,12 +16,12 @@ no-loc:
 - Razor
 - SignalR
 uid: fundamentals/troubleshoot-aspnet-core-localization
-ms.openlocfilehash: 801ae3a708d23308cbf909ceeace160e3c0db1bd
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: 1cb7fb61063bf888819e940476f27c3adafa24de
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88016462"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88629921"
 ---
 # <a name="troubleshoot-aspnet-core-localization"></a>針對 ASP.NET Core 當地語系化進行疑難排解
 
@@ -60,7 +61,7 @@ ASP.NET Core 已為當地語系化資源檔命名預先定義了規則與方針�
 - 某些語言的 `resx` 中缺少這項資源，但其他語言則有。
 - 如果您仍持續發生問題，請查看當地語系化記錄訊息 (在 `Debug` 記錄層級)，以獲取所缺少資源的詳細資料。
 
-_**提示：** 使用時 `CookieRequestCultureProvider` ，請確認不會將單引號用於當地語系化值內的文化特性 cookie 。例如， `c='en-UK'|uic='en-US'` 是不正確 cookie 值，而 `c=en-UK|uic=en-US` 則是有效的。_
+_**提示：** 使用時 `CookieRequestCultureProvider` ，請確認單引號不會與當地語系化值內的文化特性一起使用 cookie 。例如， `c='en-UK'|uic='en-US'` 是不正確 cookie 值，而且 `c=en-UK|uic=en-US` 是有效的。_
 
 ## <a name="resources--class-libraries-issues"></a>資源與類別庫的問題
 
@@ -112,7 +113,7 @@ options.AddInitialRequestCultureProvider(new CustomRequestCultureProvider(async 
 當組件的根命名空間與組件名稱不同時，當地語系化根據預設無法運作。 若要避免此問題，請使用 [RootNamespace](/dotnet/api/microsoft.extensions.localization.rootnamespaceattribute?view=aspnetcore-2.1)，其詳細說明請參閱[這裡](xref:fundamentals/localization?view=aspnetcore-2.2#resource-file-naming)
 
 > [!WARNING]
-> 當專案的名稱不是有效的 .NET 識別碼時，就可能發生這種情況。 例如， `my-project-name.csproj` 會使用根命名空間 `my_project_name` ，以及 `my-project-name` 導致此錯誤的元件名稱。 
+> 當專案的名稱不是有效的 .NET 識別碼時，就會發生這種情況。 例如， `my-project-name.csproj` 會使用根命名空間 `my_project_name` 和 `my-project-name` 導致此錯誤的元件名稱。 
 
 ## <a name="resources--build-action"></a>資源與建置動作
 

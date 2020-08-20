@@ -5,6 +5,7 @@ description: 了解如何先使用通用配置、共用指示詞，以及執行�
 ms.author: riande
 ms.date: 07/30/2019
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -15,12 +16,12 @@ no-loc:
 - Razor
 - SignalR
 uid: mvc/views/layout
-ms.openlocfilehash: 4d5032f02db28341d7781dd57d58d776636fd16d
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: 308e567e0480f83972ab7a55c7b957af83a164fd
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88020440"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88630688"
 ---
 # <a name="layout-in-aspnet-core"></a>ASP.NET Core 中的配置
 
@@ -32,9 +33,9 @@ ms.locfileid: "88020440"
 * 共用指示詞。
 * 執行常見的程式碼，再轉譯頁面或檢視。
 
-本檔討論兩種不同方法的配置，以 ASP.NET Core MVC： Razor 具有 views 的頁面和控制器。 針對本主題，差異很小：
+本檔將討論兩種不同方法的版面配置，ASP.NET Core MVC： Razor 頁面和控制器與 views。 針對本主題，差異很小：
 
-* Razor頁面會在*pages*資料夾中。
+* Razor 頁面位於 [ *pages* ] 資料夾中。
 * 包含檢視的控制器，使用 *Views* 資料夾進行檢視。
 
 ## <a name="what-is-a-layout"></a>何謂配置
@@ -43,11 +44,11 @@ ms.locfileid: "88020440"
 
 ![頁面配置範例](layout/_static/page-layout.png)
 
-應用程式內的許多頁面經常會使用通用 HTML 結構，例如指令碼和樣式表。 所有這些共用的元素都可以定義在配置檔案中，應用程式內使用的任何視圖都可以參考此*設定檔案*。 版面配置會減少檢視中重複的程式碼。
+應用程式內的許多頁面經常會使用通用 HTML 結構，例如指令碼和樣式表。 所有這些 *共用的元素* 都可以定義在配置檔案中，然後由應用程式內使用的任何視圖參考。 版面配置會減少檢視中重複的程式碼。
 
 依照慣例，ASP.NET Core 應用程式的預設配置命名為 *_Layout.cshtml*。 使用範本建立的新 ASP.NET Core 專案配置檔案為：
 
-* Razor頁面： *pages/Shared/_Layout. cshtml*
+* Razor 頁面： *pages/Shared/_Layout. cshtml*
 
   ![方案總管中的 Pages 資料夾](layout/_static/rp-web-project-views.png)
 
@@ -63,11 +64,11 @@ ms.locfileid: "88020440"
 
 ## <a name="specifying-a-layout"></a>指定配置
 
-Razorviews 具有 `Layout` 屬性。 個別檢視透過設定此屬性來指定配置：
+Razor views 有 `Layout` 屬性。 個別檢視透過設定此屬性來指定配置：
 
 [!code-cshtml[](../../common/samples/WebApplication1/Views/_ViewStart.cshtml?highlight=2)]
 
-指定的配置可以使用完整路徑 (例如 */Pages/Shared/_Layout.cshtml* 或 */Views/Shared/_Layout.cshtml*) 或部分名稱 (例如：`_Layout`)。 提供部分名稱時， Razor view engine 會使用其標準探索程式來搜尋版面配置檔案。 首先搜尋處理常式方法 (或控制器) 所在的資料夾，接著搜尋 *Shared* 資料夾。 此探索程序相當於用來探索[部分檢視](xref:mvc/views/partial#partial-view-discovery)的程序。
+指定的配置可以使用完整路徑 (例如 */Pages/Shared/_Layout.cshtml* 或 */Views/Shared/_Layout.cshtml*) 或部分名稱 (例如：`_Layout`)。 當提供部分名稱時， Razor view engine 會使用其標準探索程式來搜尋版面配置檔案。 首先搜尋處理常式方法 (或控制器) 所在的資料夾，接著搜尋 *Shared* 資料夾。 此探索程序相當於用來探索[部分檢視](xref:mvc/views/partial#partial-view-discovery)的程序。
 
 根據預設，每個配置都必須呼叫 `RenderBody`。 不論在何處呼叫 `RenderBody`，都會轉譯檢視內容。
 
@@ -83,7 +84,7 @@ Razorviews 具有 `Layout` 屬性。 個別檢視透過設定此屬性來指定�
 @RenderSection("Scripts", required: false)
 ```
 
-如果找不到必要區段，將會擲回例外狀況。 個別視圖會使用語法來指定要在區段內轉譯的內容 `@section` Razor 。 如果頁面或檢視定義區段，則必須進行轉譯 (否則會發生錯誤)。
+如果找不到必要區段，將會擲回例外狀況。 個別的視圖會使用語法來指定要在區段內轉譯的內容 `@section` Razor 。 如果頁面或檢視定義區段，則必須進行轉譯 (否則會發生錯誤)。
 
 `@section`網頁檢視中的範例定義 Razor ：
 
@@ -109,17 +110,17 @@ Razorviews 具有 `Layout` 屬性。 個別檢視透過設定此屬性來指定�
 
 ### <a name="ignoring-sections"></a>忽略區段
 
-根據預設，內容頁面中的本文和所有區段都必須透過配置頁面進行轉譯。 RazorView engine 會藉由追蹤是否已轉譯本文和每個區段來強制執行。
+根據預設，內容頁面中的本文和所有區段都必須透過配置頁面進行轉譯。 Razor視圖引擎會藉由追蹤是否已轉譯本文和每個區段來強制執行此程式。
 
 若要指示檢視引擎略過本文或區段，請呼叫 `IgnoreBody` 和 `IgnoreSection` 方法。
 
-頁面中的本文和每個區段都 Razor 必須呈現或忽略。
+頁面中的本文和每個區段都 Razor 必須是轉譯或忽略的。
 
 <a name="viewimports"></a>
 
 ## <a name="importing-shared-directives"></a>匯入共用指示詞
 
-Views 和 pages 可以使用指示詞 Razor 來匯入命名空間，並使用相依性[插入](dependency-injection.md)。 許多檢視所共用的指示詞可能指定於通用 *_ViewImports.cshtml* 檔案中。 `_ViewImports` 檔案支援下列指示詞：
+Views 和 pages 可以使用指示詞 Razor 來匯入命名空間，並使用相依性 [插入](dependency-injection.md)。 許多檢視所共用的指示詞可能指定於通用 *_ViewImports.cshtml* 檔案中。 `_ViewImports` 檔案支援下列指示詞：
 
 * `@addTagHelper`
 * `@removeTagHelper`

@@ -1,5 +1,5 @@
 ---
-title: 教學課程：執行繼承-使用 EF Core 的 ASP.NET MVC
+title: 教學課程：執行繼承-使用 EF Core ASP.NET MVC
 description: 本教學課程將說明如何在 ASP.NET Core 應用程式中使用 Entity Framework Core，以實作資料模型中的繼承。
 author: rick-anderson
 ms.author: riande
@@ -7,6 +7,7 @@ ms.custom: mvc
 ms.date: 03/27/2019
 ms.topic: tutorial
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -17,14 +18,14 @@ no-loc:
 - Razor
 - SignalR
 uid: data/ef-mvc/inheritance
-ms.openlocfilehash: b57adeb2712eb58907b53809cbd938e8ec0c1f6f
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: 9a17a2ddbdac6b4fc6ba90804a31915d3b96d707
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88012835"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88629180"
 ---
-# <a name="tutorial-implement-inheritance---aspnet-mvc-with-ef-core"></a>教學課程：執行繼承-使用 EF Core 的 ASP.NET MVC
+# <a name="tutorial-implement-inheritance---aspnet-mvc-with-ef-core"></a>教學課程：執行繼承-使用 EF Core ASP.NET MVC
 
 在上一個教學課程中，您已處理並行存取例外狀況。 本教學課程將示範如何在資料模型中實作繼承。
 
@@ -40,7 +41,7 @@ ms.locfileid: "88012835"
 > * 建立及更新移轉
 > * 測試實作
 
-## <a name="prerequisites"></a>必要條件
+## <a name="prerequisites"></a>Prerequisites
 
 * [處理並行](concurrency.md)
 
@@ -109,7 +110,7 @@ dotnet ef migrations add Inheritance
 
 還不要執行 `database update` 命令。 該命令將導致資料遺失，因為它會卸除 Instructor 資料表，然後將 Student 資料表重新命名為 Person。 您必須提供自訂程式碼來保留現有的資料。
 
-開啟 [*遷移/ \<timestamp> _Inheritance .cs* ]，並 `Up` 以下列程式碼取代方法：
+開啟 [ *遷移/ \<timestamp> _Inheritance* ]，並 `Up` 以下列程式碼取代方法：
 
 [!code-csharp[](intro/samples/cu/Migrations/20170216215525_Inheritance.cs?name=snippet_Up)]
 

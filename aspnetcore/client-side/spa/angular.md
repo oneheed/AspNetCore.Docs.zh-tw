@@ -7,6 +7,7 @@ ms.author: stevesa
 ms.custom: mvc
 ms.date: 02/06/2020
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -17,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: spa/angular
-ms.openlocfilehash: ce29d891b0fba2581d352637c2ae50ac792b785e
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: c4afddca1d0c2428371c90013f5dbd5c1afb5108
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88013160"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88628777"
 ---
 # <a name="use-the-angular-project-template-with-aspnet-core"></a>搭配 ASP.NET Core 使用 Angular 專案範本
 
@@ -64,7 +65,7 @@ Now listening on: http://localhost:<port>
 在瀏覽器中開啟這個 URL。
 
 > [!WARNING]
-> 應用程式會在背景啟動 Angular CLI 伺服器的執行個體。 會記錄類似下列的訊息： *NG Live 程式開發伺服器接聽 localhost： &lt; otherport &gt; ，將瀏覽器開啟至 http://localhost:&lt ; otherport &gt; / *。 請忽略此訊息&mdash;這**不是** ASP.NET Core 與 Angular CLI 應用程式的合併 URL。
+> 應用程式會在背景啟動 Angular CLI 伺服器的執行個體。 記錄類似下面的訊息： *NG Live 程式開發伺服器正在接聽 localhost： &lt; otherport &gt; ，請開啟瀏覽器以 http://localhost:&lt otherport &gt; / *。 請忽略此訊息&mdash;這**不是** ASP.NET Core 與 Angular CLI 應用程式的合併 URL。
 
 ---
 
@@ -101,7 +102,7 @@ npm install --save <package_name>
 
 在開發時，應用程式會以方便開發人員操作的模式執行。 例如，JavaScript 組合會包含來源對應 (以便在偵錯時，您可以看到原始的 TypeScript 程式碼)。 應用程式會監看磁碟上的 TypeScript、HTML 和 CSS 檔案變更，並在發現檔案變更時，自動重新編譯並重新載入。
 
-在實際執行環境中，請提供具有最佳效能的應用程式版本。 這是設定為自動進行的。 當您發行時，組建組態會發出精簡、預先 (AoT) 編譯的用戶端程式碼組建。 不同于開發組建，除非您已啟用伺服器端轉譯 (SSR) # A3，否則生產組建不需要在伺服器上安裝 Node.js (。
+在實際執行環境中，請提供具有最佳效能的應用程式版本。 這是設定為自動進行的。 當您發行時，組建組態會發出精簡、預先 (AoT) 編譯的用戶端程式碼組建。 不同于開發組建，除非您已啟用伺服器端轉譯 (SSR) # A3，否則生產組建不需要在伺服器 (上安裝 Node.js。
 
 您可以使用標準 [ASP.NET Core 裝載和部署方法](xref:host-and-deploy/index)。
 
@@ -109,7 +110,7 @@ npm install --save <package_name>
 
 專案已設定為會在 ASP.NET Core 應用程式於開發模式中啟動時，在背景啟動屬於自己的 Angular CLI 伺服器執行個體。 這很方便，因為您不需要手動執行個別的伺服器。
 
-此預設設定有一個缺點。 每當您修改 C# 程式碼，且需要重新啟動 ASP.NET Core 應用程式時，Angular CLI 伺服器都會重新啟動。 開始備份需要大約 10 秒鐘的時間。 如果您經常編輯 C# 程式碼，但又不想要等候 Angular CLI 重新啟動，請獨立於 ASP.NET Core 處理序，於外部執行 Angular CLI 伺服器。 若要這樣做：
+此預設設定有一個缺點。 每當您修改 C# 程式碼，且需要重新啟動 ASP.NET Core 應用程式時，Angular CLI 伺服器都會重新啟動。 開始備份需要大約 10 秒鐘的時間。 如果您經常編輯 C# 程式碼，但又不想要等候 Angular CLI 重新啟動，請獨立於 ASP.NET Core 處理序，於外部執行 Angular CLI 伺服器。 操作方法：
 
 1. 在命令提示字元中，切換至 *ClientApp* 子目錄，然後啟動 Angular CLI 程式開發伺服器：
 
@@ -131,7 +132,7 @@ npm install --save <package_name>
 
 ### <a name="pass-data-from-net-code-into-typescript-code"></a>將資料從.NET 程式碼傳遞至 TypeScript 程式碼
 
-在 SSR 期間，您可能會想要將針對每個要求的資料從 ASP.NET Core 應用程式傳遞至 Angular 應用程式。 例如，您可以傳遞 cookie 資訊或從資料庫讀取的內容。 若要這樣做，請編輯您的 *Startup* 類別。 在 `UseSpaPrerendering` 的回呼中，請將 `options.SupplyData` 的值設定為下方所示的內容：
+在 SSR 期間，您可能會想要將針對每個要求的資料從 ASP.NET Core 應用程式傳遞至 Angular 應用程式。 例如，您可以傳遞 cookie 資訊或從資料庫讀取的某些資訊。 若要這樣做，請編輯您的 *Startup* 類別。 在 `UseSpaPrerendering` 的回呼中，請將 `options.SupplyData` 的值設定為下方所示的內容：
 
 ```csharp
 options.SupplyData = (context, data) =>

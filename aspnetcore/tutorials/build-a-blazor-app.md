@@ -7,6 +7,7 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 07/30/2020
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -17,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: tutorials/build-a-blazor-app
-ms.openlocfilehash: 42c4f94869586bfcd4e8b27e4bdf4ef226094072
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: 769b3bda591252c51bec3ffd72a43eaa5929349e
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88022494"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88630831"
 ---
 # <a name="build-a-no-locblazor-todo-list-app"></a>建立 Blazor 待辦事項清單應用程式
 
@@ -36,36 +37,36 @@ ms.locfileid: "88022494"
 > * 在元件中使用事件處理和資料系結
 > * 在應用程式中使用路由 Blazor
 
-在本教學課程結尾，您將會有一個可運作的待辦事項清單應用程式。
+在本教學課程結尾處，您將會有一個工作 todo 清單應用程式。
 
-## <a name="prerequisites"></a>必要條件
+## <a name="prerequisites"></a>Prerequisites
 
 [!INCLUDE[](~/includes/3.1-SDK.md)]
 
-## <a name="create-a-todo-list-no-locblazor-app"></a>建立待辦事項清單 Blazor 應用程式
+## <a name="create-a-todo-list-no-locblazor-app"></a>建立 todo 清單 Blazor 應用程式
 
-1. Blazor在命令 shell 中建立名為的新應用程式 `TodoList` ：
+1. Blazor在命令列介面中建立名為的新應用程式 `TodoList` ：
 
    ```dotnetcli
    dotnet new blazorserver -o TodoList
    ```
 
-   上述命令會建立名為的資料夾 `TodoList` 來保存應用程式。 使用下列命令將目錄變更至 `TodoList` 資料夾：
+   上述命令會建立名為的資料夾 `TodoList` 來保存應用程式。 使用下列命令，將目錄變更為 `TodoList` 資料夾：
 
    ```dotnetcli
    cd TodoList
    ```
 
-1. 使用下列命令，將新的 `Todo` Razor 元件新增至資料夾中的應用程式 `Pages` ：
+1. `Todo` Razor 使用下列命令，在資料夾中將新元件新增至應用程式 `Pages` ：
 
    ```dotnetcli
    dotnet new razorcomponent -n Todo -o Pages
    ```
 
    > [!IMPORTANT]
-   > Razor元件檔名稱需要大寫的第一個字母，因此請確認 `Todo` 元件檔案名的開頭為大寫字母 `T` 。
+   > Razor 元件檔案名需要大寫的第一個字母，因此請確認元件的檔案名 `Todo` 開頭為大寫字母 `T` 。
 
-1. 在中， `Pages/Todo.razor` 提供元件的初始標記：
+1. `Pages/Todo.razor`提供元件的初始標記：
 
    ```razor
    @page "/todo"
@@ -77,7 +78,7 @@ ms.locfileid: "88022494"
 
    `NavMenu`元件 (`Shared/NavMenu.razor`) 會用於應用程式的版面配置中。 版面配置是可讓您避免應用程式中內容重複的元件。
 
-   新增 `<NavLink>` 元件的專案， `Todo` 方法是在檔案中的現有清單專案下方新增下列清單專案標記 `Shared/NavMenu.razor` ：
+   在檔案 `<NavLink>` `Todo` 中的現有清單專案下方新增下列清單專案標記，以新增元件的元素 `Shared/NavMenu.razor` ：
 
    ```razor
    <li class="nav-item px-3">
@@ -89,7 +90,7 @@ ms.locfileid: "88022494"
 
 1. 重新建置並執行應用程式。 瀏覽新的 [待辦事項] 頁面，以確認 `Todo` 元件的連結可以運作。
 
-1. 將檔案新增 `TodoItem.cs` 至專案的根目錄，以保存代表待辦事項專案的類別。 請使用下列 `TodoItem` 類別的 C# 程式碼：
+1. 將檔案加入至 `TodoItem.cs` 專案的根目錄，以保存代表 todo 專案的類別。 請使用下列 `TodoItem` 類別的 C# 程式碼：
 
    [!code-csharp[](build-a-blazor-app/samples_snapshot/3.x/TodoItem.cs)]
 
@@ -104,7 +105,7 @@ ms.locfileid: "88022494"
 
    [!code-razor[](build-a-blazor-app/samples_snapshot/3.x/ToDo5.razor?highlight=12-13)]
 
-1. 重新建置並執行應用程式。 **`Add todo`** 選取按鈕時，不會發生任何事，因為事件處理常式未連接到按鈕。
+1. 重新建置並執行應用程式。 當 **`Add todo`** 選取按鈕時，不會發生任何事，因為事件處理常式不會連接到按鈕。
 
 1. 將 `AddTodo` 方法新增至 `Todo` 元件並註冊，以便使用 `@onclick` 屬性來進行按鈕選取。 當選取按鈕時，就會呼叫 `AddTodo` C# 方法：
 
@@ -134,7 +135,7 @@ ms.locfileid: "88022494"
    <h3>Todo (@todos.Count(todo => !todo.IsDone))</h3>
    ```
 
-1. 已完成的 `Todo` 元件 (`Pages/Todo.razor`) ：
+1. 完成的 `Todo` 元件 (`Pages/Todo.razor`) ：
 
    [!code-razor[](build-a-blazor-app/samples_snapshot/3.x/Todo.razor)]
 
@@ -150,7 +151,7 @@ ms.locfileid: "88022494"
 > * 在元件中使用事件處理和資料系結
 > * 在應用程式中使用路由 Blazor
 
-深入瞭解 ASP.NET Core 的工具 Blazor ：
+瞭解 ASP.NET Core 的工具 Blazor ：
 
 > [!div class="nextstepaction"]
 > <xref:blazor/tooling>

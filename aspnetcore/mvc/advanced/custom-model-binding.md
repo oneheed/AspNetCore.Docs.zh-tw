@@ -5,6 +5,7 @@ description: 了解模型繫結如何讓控制器動作直接使用 ASP.NET Core
 ms.author: riande
 ms.date: 01/06/2020
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -15,18 +16,18 @@ no-loc:
 - Razor
 - SignalR
 uid: mvc/advanced/custom-model-binding
-ms.openlocfilehash: 6e52d9c19a3d9c16f980021000db0bdecca5ed58
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: 4bef68fffbdfaff023f71964a27ead56863e4192
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88018906"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88630428"
 ---
 # <a name="custom-model-binding-in-aspnet-core"></a>ASP.NET Core 中的自訂模型繫結
 
 ::: moniker range=">= aspnetcore-3.0"
 
-作者： [Steve Smith](https://ardalis.com/)和[Kirk Larkin](https://twitter.com/serpent5)
+[Steve Smith](https://ardalis.com/)和[Kirk Larkin](https://twitter.com/serpent5)
 
 模型繫結可直接透過模型類型 (傳入作為方法引數) 來執行控制器動作，而不用透過 HTTP 要求。 內送要求資料與應用程式模型之間的對應是由模型繫結器來處理。 開發人員可以透過實作自訂模型繫結器，來擴充內建模型繫結功能 (不過一般而言，您並不需要撰寫自己的提供者)。
 
@@ -44,9 +45,9 @@ ms.locfileid: "88018906"
 
 ### <a name="working-with-the-bytearraymodelbinder"></a>使用 ByteArrayModelBinder
 
-Base64 編碼字串可用來代表二進位資料。 例如，影像可以編碼為字串。 範例會在[Base64String.txt](https://github.com/dotnet/AspNetCore.Docs/blob/master/aspnetcore/mvc/advanced/custom-model-binding/samples/3.x/CustomModelBindingSample/Base64String.txt)中將影像包含為 base64 編碼的字串。
+Base64 編碼字串可用來代表二進位資料。 例如，您可以將影像編碼為字串。 此範例會在 [Base64String.txt](https://github.com/dotnet/AspNetCore.Docs/blob/master/aspnetcore/mvc/advanced/custom-model-binding/samples/3.x/CustomModelBindingSample/Base64String.txt)中包含以 base64 編碼字串形式的影像。
 
-ASP.NET Core MVC 接受 Base64 編碼字串，並使用 `ByteArrayModelBinder` 將其轉換成位元組陣列。 會 <xref:Microsoft.AspNetCore.Mvc.ModelBinding.Binders.ByteArrayModelBinderProvider> 將 `byte[]` 引數對應至 `ByteArrayModelBinder` ：
+ASP.NET Core MVC 接受 Base64 編碼字串，並使用 `ByteArrayModelBinder` 將其轉換成位元組陣列。 將 <xref:Microsoft.AspNetCore.Mvc.ModelBinding.Binders.ByteArrayModelBinderProvider> `byte[]` 引數對應至 `ByteArrayModelBinder` ：
 
 ```csharp
 public IModelBinder GetBinder(ModelBinderProviderContext context)
@@ -66,7 +67,7 @@ public IModelBinder GetBinder(ModelBinderProviderContext context)
 }
 ```
 
-建立您自己的自訂模型系結器時，您可以執行自己 `IModelBinderProvider` 的型別，或使用 <xref:Microsoft.AspNetCore.Mvc.ModelBinderAttribute> 。
+建立您自己的自訂模型系結器時，您可以執行自己的 `IModelBinderProvider` 型別，或使用 <xref:Microsoft.AspNetCore.Mvc.ModelBinderAttribute> 。
 
 下列範例示範如何使用 `ByteArrayModelBinder`，將 Base64 編碼字串轉換成 `byte[]`，並將結果儲存至檔案：
 
@@ -75,7 +76,7 @@ public IModelBinder GetBinder(ModelBinderProviderContext context)
 
 您可以使用 [Postman](https://www.getpostman.com/) 等工具，將 Base64 編碼字串張貼至此 API 方法：
 
-![postman](custom-model-binding/images/postman.png "postman")
+![郵遞員](custom-model-binding/images/postman.png "郵遞員")
 
 只要繫結器可以將要求資料繫結至適當命名的屬性或引數，模型繫結就會成功。 下列範例示範如何使用具有檢視模型的 `ByteArrayModelBinder`：
 
@@ -110,7 +111,7 @@ public IModelBinder GetBinder(ModelBinderProviderContext context)
 
 [!code-csharp[](custom-model-binding/samples/3.x/CustomModelBindingSample/Controllers/BoundAuthorsController.cs?name=snippet_GetById&highlight=2)]
 
-在此範例中，由於引數名稱不是預設的 `authorId`，因此會使用 `ModelBinder` 屬性在參數上指定。 相較于在動作方法中查閱實體，控制器和動作方法都已簡化。 使用 Entity Framework Core 擷取作者的邏輯已移至模型繫結器。 當您有數個繫結至 `Author` 模型的方法時，這樣做會明顯簡化許多。
+在此範例中，由於引數名稱不是預設的 `authorId`，因此會使用 `ModelBinder` 屬性在參數上指定。 相較于在動作方法中查閱實體，控制器和動作方法都會簡化。 使用 Entity Framework Core 擷取作者的邏輯已移至模型繫結器。 當您有數個繫結至 `Author` 模型的方法時，這樣做會明顯簡化許多。
 
 您可以將 `ModelBinder` 屬性套用至個別模型屬性 (例如在 ViewModel 上) 或動作方法參數，只指定該類型或動作的特定模型繫結器或模型名稱。
 
@@ -130,12 +131,12 @@ public IModelBinder GetBinder(ModelBinderProviderContext context)
 
 ### <a name="polymorphic-model-binding"></a>多型模型系結
 
-系結至衍生類型的不同模型，稱為多型模型系結。 當要求值必須系結至特定衍生模型類型時，需要多型自訂模型系結。 多型模型系結：
+系結至不同的衍生型別模型稱為多型模型系結。 必須將要求值系結至特定的衍生模型類型時，才需要多型自訂模型系結。 多型模型系結：
 
-* 對於設計來與所有語言互通的 REST API 而言並不常見。
-* 使其難以瞭解系結模型的原因。
+* 對於設計來與所有語言交互操作的 REST API 並不常見。
+* 使得系結模型的相關原因變得很困難。
 
-不過，如果應用程式需要多型模型系結，則執行可能看起來像下列程式碼：
+但是，如果應用程式需要多型模型系結，則可能會如下列程式碼所示：
 
 [!code-csharp[](custom-model-binding/samples/3.x/PolymorphicModelBindingSample/ModelBinders/PolymorphicModelBinder.cs?name=snippet)]
 
@@ -168,9 +169,9 @@ public IModelBinder GetBinder(ModelBinderProviderContext context)
 
 ### <a name="working-with-the-bytearraymodelbinder"></a>使用 ByteArrayModelBinder
 
-Base64 編碼字串可用來代表二進位資料。 例如，影像可以編碼為字串。 範例會在[Base64String.txt](https://github.com/dotnet/AspNetCore.Docs/blob/master/aspnetcore/mvc/advanced/custom-model-binding/samples/2.x/CustomModelBindingSample/Base64String.txt)中將影像包含為 base64 編碼的字串。
+Base64 編碼字串可用來代表二進位資料。 例如，您可以將影像編碼為字串。 此範例會在 [Base64String.txt](https://github.com/dotnet/AspNetCore.Docs/blob/master/aspnetcore/mvc/advanced/custom-model-binding/samples/2.x/CustomModelBindingSample/Base64String.txt)中包含以 base64 編碼字串形式的影像。
 
-ASP.NET Core MVC 接受 Base64 編碼字串，並使用 `ByteArrayModelBinder` 將其轉換成位元組陣列。 會 <xref:Microsoft.AspNetCore.Mvc.ModelBinding.Binders.ByteArrayModelBinderProvider> 將 `byte[]` 引數對應至 `ByteArrayModelBinder` ：
+ASP.NET Core MVC 接受 Base64 編碼字串，並使用 `ByteArrayModelBinder` 將其轉換成位元組陣列。 將 <xref:Microsoft.AspNetCore.Mvc.ModelBinding.Binders.ByteArrayModelBinderProvider> `byte[]` 引數對應至 `ByteArrayModelBinder` ：
 
 ```csharp
 public IModelBinder GetBinder(ModelBinderProviderContext context)
@@ -189,7 +190,7 @@ public IModelBinder GetBinder(ModelBinderProviderContext context)
 }
 ```
 
-建立您自己的自訂模型系結器時，您可以執行自己 `IModelBinderProvider` 的型別，或使用 <xref:Microsoft.AspNetCore.Mvc.ModelBinderAttribute> 。
+建立您自己的自訂模型系結器時，您可以執行自己的 `IModelBinderProvider` 型別，或使用 <xref:Microsoft.AspNetCore.Mvc.ModelBinderAttribute> 。
 
 下列範例示範如何使用 `ByteArrayModelBinder`，將 Base64 編碼字串轉換成 `byte[]`，並將結果儲存至檔案：
 
@@ -197,7 +198,7 @@ public IModelBinder GetBinder(ModelBinderProviderContext context)
 
 您可以使用 [Postman](https://www.getpostman.com/) 等工具，將 Base64 編碼字串張貼至此 API 方法：
 
-![postman](custom-model-binding/images/postman.png "postman")
+![郵遞員](custom-model-binding/images/postman.png "郵遞員")
 
 只要繫結器可以將要求資料繫結至適當命名的屬性或引數，模型繫結就會成功。 下列範例示範如何使用具有檢視模型的 `ByteArrayModelBinder`：
 
@@ -232,7 +233,7 @@ public IModelBinder GetBinder(ModelBinderProviderContext context)
 
 [!code-csharp[](custom-model-binding/samples/2.x/CustomModelBindingSample/Controllers/BoundAuthorsController.cs?name=demo1&highlight=2)]
 
-在此範例中，由於引數名稱不是預設的 `authorId`，因此會使用 `ModelBinder` 屬性在參數上指定。 相較于在動作方法中查閱實體，控制器和動作方法都已簡化。 使用 Entity Framework Core 擷取作者的邏輯已移至模型繫結器。 當您有數個繫結至 `Author` 模型的方法時，這樣做會明顯簡化許多。
+在此範例中，由於引數名稱不是預設的 `authorId`，因此會使用 `ModelBinder` 屬性在參數上指定。 相較于在動作方法中查閱實體，控制器和動作方法都會簡化。 使用 Entity Framework Core 擷取作者的邏輯已移至模型繫結器。 當您有數個繫結至 `Author` 模型的方法時，這樣做會明顯簡化許多。
 
 您可以將 `ModelBinder` 屬性套用至個別模型屬性 (例如在 ViewModel 上) 或動作方法參數，只指定該類型或動作的特定模型繫結器或模型名稱。
 
@@ -252,12 +253,12 @@ public IModelBinder GetBinder(ModelBinderProviderContext context)
 
 ### <a name="polymorphic-model-binding"></a>多型模型系結
 
-系結至衍生類型的不同模型，稱為多型模型系結。 當要求值必須系結至特定衍生模型類型時，需要多型自訂模型系結。 多型模型系結：
+系結至不同的衍生型別模型稱為多型模型系結。 必須將要求值系結至特定的衍生模型類型時，才需要多型自訂模型系結。 多型模型系結：
 
-* 對於設計來與所有語言互通的 REST API 而言並不常見。
-* 使其難以瞭解系結模型的原因。
+* 對於設計來與所有語言交互操作的 REST API 並不常見。
+* 使得系結模型的相關原因變得很困難。
 
-不過，如果應用程式需要多型模型系結，則執行可能看起來像下列程式碼：
+但是，如果應用程式需要多型模型系結，則可能會如下列程式碼所示：
 
 [!code-csharp[](custom-model-binding/samples/3.x/PolymorphicModelBindingSample/ModelBinders/PolymorphicModelBinder.cs?name=snippet)]
 

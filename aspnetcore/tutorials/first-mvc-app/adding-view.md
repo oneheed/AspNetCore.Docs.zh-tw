@@ -1,10 +1,11 @@
 ---
-title: 第3部分，將視圖加入至 ASP.NET Core MVC 應用程式
+title: 第3部分：將視圖新增至 ASP.NET Core MVC 應用程式
 author: rick-anderson
 description: ASP.NET Core MVC 之教學課程系列的第3部分。
 ms.author: riande
 ms.date: 8/04/2019
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -15,22 +16,22 @@ no-loc:
 - Razor
 - SignalR
 uid: tutorials/first-mvc-app/adding-view
-ms.openlocfilehash: 45ae6059e039ccfb4d835c615b660abc39251530
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: 970cc1fe6e0a0e0204ddafec09c15db6fed9aa66
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88021987"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88629752"
 ---
-# <a name="part-3-add-a-view-to-an-aspnet-core-mvc-app"></a>第3部分，將視圖加入至 ASP.NET Core MVC 應用程式
+# <a name="part-3-add-a-view-to-an-aspnet-core-mvc-app"></a>第3部分：將視圖新增至 ASP.NET Core MVC 應用程式
 
 作者：[Rick Anderson](https://twitter.com/RickAndMSFT)
 
 ::: moniker range=">= aspnetcore-3.0"
 
-在本節中，您會將 `HelloWorldController` 類別修改為使用 [Razor](xref:mvc/views/razor) view files，將產生 HTML 回應的程式完全封裝至用戶端。
+在本節中，您會將 `HelloWorldController` 類別修改為使用 [Razor](xref:mvc/views/razor) view files，以將產生 HTML 回應的程式明確封裝到用戶端。
 
-您可以使用來建立視圖範本檔案 Razor 。 Razor以為基礎的視圖範本具有 *.* # 副檔名。 它們提供了一種使用 C# 建立 HTML 輸出的簡潔方式。
+您可以使用建立視圖範本檔案 Razor 。 Razor型視圖範本的副檔名為 *cshtml* 。 它們提供了一種使用 C# 建立 HTML 輸出的簡潔方式。
 
 `Index` 方法目前會傳回字串，內含在控制器類別中已直接書寫好的固定訊息。 在 `HelloWorldController` 類別中，以下列程式碼取代 `Index` 方法：
 
@@ -71,20 +72,20 @@ ms.locfileid: "88021987"
 * 依序以滑鼠右鍵按一下 *Views/HelloWorld* 資料夾、[新增] > [新增檔案]****。
 * 在 [新增檔案]**** 對話方塊中：
 
-  * 在左窗格中選取 [ **ASP .Net Core** ]。
-  * 選取中央窗格中的 [ **MVC 視圖] 頁面**。
-  * 在 [**名稱**] 方塊中輸入*Index* 。
+  * 選取左窗格中的 [ **ASP .Net Core** ]。
+  * 選取中央窗格中的 [ **MVC 視圖] 頁面** 。
+  * 在 [**名稱**] 方塊中輸入*索引*。
   * 選取 [新增]。
 
 ![[新增項目] 對話方塊](adding-view/_static/add_view_mac.png)
 
 ---
 
-以下列內容取代*Views/HelloWorld/Index. cshtml*視圖檔案的內容 Razor ：
+以下列內容取代 *Views/HelloWorld/Index. cshtml* view 檔案的內容 Razor ：
 
 [!code-cshtml[](~/tutorials/first-mvc-app/start-mvc/sample/MvcMovie22/Views/HelloWorld/Index1.cshtml?highlight=7)]
 
-瀏覽至 `https://localhost:{PORT}/HelloWorld`。 `HelloWorldController` 中的 `Index` 方法不會執行什麼作業；它會執行陳述式 `return View();`，其指定方法應使用檢視範本檔案來呈現瀏覽器的回應。 因為未指定檢視範本檔案名稱，因此 MVC 預設為使用預設檢視檔案。 預設視圖檔案的名稱與方法 (`Index`) 相同，因此會使用 */Views/HelloWorld/Index.cshtml*中的 view 範本。 下列影像顯示檢視中硬式編碼的字串 "Hello from our View Template!" 。
+瀏覽至 `https://localhost:{PORT}/HelloWorld`。 `HelloWorldController` 中的 `Index` 方法不會執行什麼作業；它會執行陳述式 `return View();`，其指定方法應使用檢視範本檔案來呈現瀏覽器的回應。 因為未指定檢視範本檔案名稱，因此 MVC 預設為使用預設檢視檔案。 預設視圖檔的名稱與 () 的方法相同 `Index` ，因此會使用 */Views/HelloWorld/Index.cshtml* 中的 view 範本。 下列影像顯示檢視中硬式編碼的字串 "Hello from our View Template!" 。
 
 ![瀏覽器視窗](~/tutorials/first-mvc-app/adding-view/_static/hell_template.png)
 
@@ -96,7 +97,7 @@ ms.locfileid: "88021987"
 
 ## <a name="change-the-title-footer-and-menu-link-in-the-layout-file"></a>變更配置檔案中的標題、頁尾及功能表連結
 
-以下列標記取代*Views/Shared/_Layout. cshtml*檔案的內容。 所做的變更已醒目提示：
+以下列標記取代 *Views/Shared/_Layout. cshtml* 檔案的內容。 所做的變更已醒目提示：
 
 [!code-cshtml[](~/tutorials/first-mvc-app/start-mvc/sample/MvcMovie3/Views/Shared/_Layout.cshtml?highlight=6,14,40)]
 
@@ -107,7 +108,7 @@ ms.locfileid: "88021987"
 
 在上述標記中，由於此應用程式未使用[區域](xref:mvc/controllers/areas)，因此省略了 `asp-area=""` [錨點標籤協助程式屬性](xref:mvc/views/tag-helpers/builtin-th/anchor-tag-helper)和屬性值。
 
-**注意**： `Movies` 控制器尚未執行。 此時，`Movie App` 連結無法運作。
+**注意**：尚未 `Movies` 執行控制器。 此時，`Movie App` 連結無法運作。
 
 儲存您的變更並選取 **Privacy** 連結。 請注意，瀏覽器索引標籤上的標題會顯示 **Privacy Policy - Movie App**，而不是 **Privacy Policy - Mvc Movie**：
 
@@ -137,7 +138,7 @@ ms.locfileid: "88021987"
 <title>@ViewData["Title"] - Movie App</title>
 ```
 
-儲存變更並巡覽至 `https://localhost:{PORT}/HelloWorld`。 請注意，瀏覽器標題、主要標題和次要標題已變更 (如果您在瀏覽器中沒有看到變更，可能檢視的是快取的內容。 在您的瀏覽器中按 Ctrl + F5，以強制載入伺服器的回應。 ) 瀏覽器標題是以 `ViewData["Title"]` 我們在*Index. cshtml*視圖範本中設定，並在版面配置檔案中新增的「-電影應用程式」所建立。
+儲存變更並巡覽至 `https://localhost:{PORT}/HelloWorld`。 請注意，瀏覽器標題、主要標題和次要標題已變更 (如果您在瀏覽器中沒有看到變更，可能檢視的是快取的內容。 在您的瀏覽器中按 Ctrl + F5，以強制載入來自伺服器的回應。 ) 瀏覽器標題是使用 `ViewData["Title"]` 我們在 *Index. cshtml* view 範本中設定的，以及在版面配置檔案中新增的其他 "-Movie App" 所建立。
 
 *Index.cshtml* 檢視範本中的內容已與 *Views/Shared/_Layout.cshtml* 檢視範本合併。 單一 HTML 回應會傳送到瀏覽器。 版面配置範本可讓您輕鬆進行變更，然後套用到應用程式中的所有頁面。 若要深入了解，請參閱[版面配置](xref:mvc/views/layout)。
 
@@ -185,9 +186,9 @@ ms.locfileid: "88021987"
 
 ::: moniker range="< aspnetcore-3.0"
 
-在本節中，您會將 `HelloWorldController` 類別修改為使用 [Razor](xref:mvc/views/razor) view files，將產生 HTML 回應的程式完全封裝至用戶端。
+在本節中，您會將 `HelloWorldController` 類別修改為使用 [Razor](xref:mvc/views/razor) view files，以將產生 HTML 回應的程式明確封裝到用戶端。
 
-您可以使用來建立視圖範本檔案 Razor 。 Razor以為基礎的視圖範本具有 *.* # 副檔名。 它們提供了一種使用 C# 建立 HTML 輸出的簡潔方式。
+您可以使用建立視圖範本檔案 Razor 。 Razor型視圖範本的副檔名為 *cshtml* 。 它們提供了一種使用 C# 建立 HTML 輸出的簡潔方式。
 
 `Index` 方法目前會傳回字串，內含在控制器類別中已直接書寫好的固定訊息。 在 `HelloWorldController` 類別中，以下列程式碼取代 `Index` 方法：
 
@@ -237,7 +238,7 @@ ms.locfileid: "88021987"
 
 ---
 
-以下列內容取代*Views/HelloWorld/Index. cshtml*視圖檔案的內容 Razor ：
+以下列內容取代 *Views/HelloWorld/Index. cshtml* view 檔案的內容 Razor ：
 
 [!code-cshtml[](~/tutorials/first-mvc-app/start-mvc/sample/MvcMovie22/Views/HelloWorld/Index1.cshtml?highlight=7)]
 
@@ -267,7 +268,7 @@ ms.locfileid: "88021987"
 > We haven't implemented the `Movies` controller yet, so if you click the `Movie App` link, you get a 404 (Not found) error.
 -->
 
-**注意**： `Movies` 控制器尚未執行。 此時，`Movie App` 連結無法運作。
+**注意**：尚未 `Movies` 執行控制器。 此時，`Movie App` 連結無法運作。
 
 儲存您的變更並選取 **Privacy** 連結。 請注意，瀏覽器索引標籤上的標題會顯示 **Privacy Policy - Movie App**，而不是 **Privacy Policy - Mvc Movie**：
 
@@ -297,9 +298,9 @@ ms.locfileid: "88021987"
 <title>@ViewData["Title"] - Movie App</title>
 ```
 
-儲存變更並巡覽至 `https://localhost:{PORT}/HelloWorld`。 請注意，瀏覽器標題、主要標題和次要標題已變更 (如果您在瀏覽器中沒有看到變更，可能檢視的是快取的內容。 在您的瀏覽器中按 Ctrl + F5，以強制載入伺服器的回應。 ) 瀏覽器標題是以 `ViewData["Title"]` 我們在*Index. cshtml*視圖範本中設定，並在版面配置檔案中新增的「-電影應用程式」所建立。
+儲存變更並巡覽至 `https://localhost:{PORT}/HelloWorld`。 請注意，瀏覽器標題、主要標題和次要標題已變更 (如果您在瀏覽器中沒有看到變更，可能檢視的是快取的內容。 在您的瀏覽器中按 Ctrl + F5，以強制載入來自伺服器的回應。 ) 瀏覽器標題是使用 `ViewData["Title"]` 我們在 *Index. cshtml* view 範本中設定的，以及在版面配置檔案中新增的其他 "-Movie App" 所建立。
 
-同時也請注意，*Index.cshtml* 檢視範本中的內容如何與 *Views/Shared/_Layout.cshtml* 檢視範本和已傳送至瀏覽器的單一 HTML 回應合併。 版面配置範本可讓您輕鬆進行會套用到應用程式之所有頁面的變更。 若要深入瞭解，請參閱[版面](xref:mvc/views/layout)配置。
+同時也請注意，*Index.cshtml* 檢視範本中的內容如何與 *Views/Shared/_Layout.cshtml* 檢視範本和已傳送至瀏覽器的單一 HTML 回應合併。 版面配置範本可讓您輕鬆進行會套用到應用程式之所有頁面的變更。 若要深入瞭解，請參閱 [版面](xref:mvc/views/layout)配置。
 
 ![電影清單檢視](~/tutorials/first-mvc-app/adding-view/_static/hell3.png)
 

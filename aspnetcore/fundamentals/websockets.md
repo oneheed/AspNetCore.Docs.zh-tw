@@ -7,6 +7,7 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 11/12/2019
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -17,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: fundamentals/websockets
-ms.openlocfilehash: d0116a50051c1e9ddc9783e0102a3b32fb20cdce
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: 685e694a3d974a8a51255bdbb83d33459137a3d9
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88016449"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88629011"
 ---
 # <a name="websockets-support-in-aspnet-core"></a>ASP.NET Core 中的 WebSockets 支援
 
@@ -36,9 +37,9 @@ ms.locfileid: "88016449"
 
 [ASP.NET Core SignalR ](xref:signalr/introduction)是可簡化將即時 web 功能新增至應用程式的程式庫。 它會盡可能使用 WebSockets。
 
-對於大部分的應用程式，我們建議您不要透過 SignalR 原始 websocket。 SignalR為無法使用 Websocket 的環境提供傳輸回溯。 它也提供簡單的遠端程序呼叫應用程式模型。 在大部分的情況下， SignalR 相較于使用原始 websocket，沒有明顯的效能缺點。
+針對大部分的應用程式，我們建議您不要透過 SignalR 原始 websocket。 SignalR 針對無法使用 Websocket 的環境提供傳輸回復。 它也提供簡單的遠端程序呼叫應用程式模型。 在大部分的情況下， SignalR 相較于使用原始 websocket，沒有顯著的效能缺點。
 
-## <a name="prerequisites"></a>必要條件
+## <a name="prerequisites"></a>Prerequisites
 
 * ASP.NET Core 1.1 或更新版本
 * 支援 ASP.NET Core 的任何作業系統：
@@ -192,13 +193,13 @@ CORS 所提供的保護不套用至 WebSocket。 瀏覽器**不**會：
 > [!NOTE]
 > 使用 IIS Express 時，不需要這些步驟
 
-1. 流覽至 [**控制台**] [程式]  >  **Programs**  >  [**程式和功能**]  >  [**開啟或關閉 Windows 功能**] (畫面的左側) 。
+1. 流覽至**主控台**  >  **程式**的 [  >  **程式和功能]，**  >  **開啟或關閉**畫面) 左側 (的 [Windows 功能]。
 1. 開啟下列節點： **Internet Information Services**  >  **World Wide Web 服務**  >  **應用程式開發功能**。
 1. 選取 [WebSocket 通訊協定]**** 功能。 選取 [確定]。
 
 ### <a name="disable-websocket-when-using-socketio-on-nodejs"></a>在 Node.js 上使用 socket.io 時停用 WebSocket
 
-如果在[Node.js](https://nodejs.org/)上使用[Socket.io](https://socket.io/)中的 WebSocket 支援，請使用 `webSocket` *web.config*或*applicationHost.config*中的專案，來停用預設的 IIS WebSocket 模組。如果未執行此步驟，IIS WebSocket 模組會嘗試處理 WebSocket 通訊，而不是 Node.js 和應用程式。
+如果在[Node.js](https://nodejs.org/)上使用[Socket.io](https://socket.io/)中的 WebSocket 支援，請使用 `webSocket` *web.config*或*applicationHost.config*中的元素，停用預設的 IIS WebSocket 模組。如果未執行此步驟，IIS WebSocket 模組會嘗試處理 WebSocket 通訊，而不是 Node.js 和應用程式。
 
 ```xml
 <system.webServer>

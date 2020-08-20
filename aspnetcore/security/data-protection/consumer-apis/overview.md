@@ -1,10 +1,11 @@
 ---
 title: ASP.NET Core 的取用者 Api 總覽
 author: rick-anderson
-description: 取得 ASP.NET Core 資料保護程式庫中可用的各種取用者 Api 的簡要總覽。
+description: 取得 ASP.NET Core 資料保護程式庫中可用的各種取用者 Api 的簡短總覽。
 ms.author: riande
 ms.date: 06/11/2019
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -15,51 +16,51 @@ no-loc:
 - Razor
 - SignalR
 uid: security/data-protection/consumer-apis/overview
-ms.openlocfilehash: 985c8cdc3518a51b9ec764407f4e2e3e5ff07e12
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: 0cdc5d8700357f33fcd3d361f10a5d66cccb067d
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88021129"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88629895"
 ---
 # <a name="consumer-apis-overview-for-aspnet-core"></a>ASP.NET Core 的取用者 Api 總覽
 
-`IDataProtectionProvider`和 `IDataProtector` 介面是取用者用來使用資料保護系統的基本介面。 它們位於[AspNetCore. DataProtection. 抽象](https://www.nuget.org/packages/Microsoft.AspNetCore.DataProtection.Abstractions/)封裝中。
+`IDataProtectionProvider`和 `IDataProtector` 介面是取用者使用資料保護系統的基本介面。 它們位於 [AspNetCore. DataProtection 抽象](https://www.nuget.org/packages/Microsoft.AspNetCore.DataProtection.Abstractions/) 封裝中。
 
 ## <a name="idataprotectionprovider"></a>IDataProtectionProvider
 
-提供者介面代表資料保護系統的根。 它不能直接用來保護或解除保護資料。 相反地，取用者必須藉由呼叫來取得的參考 `IDataProtector` `IDataProtectionProvider.CreateProtector(purpose)` ，其中目的是描述預定取用者使用案例的字串。 如需此參數之意圖的詳細資訊，以及如何選擇適當的值，請參閱[目的字串](xref:security/data-protection/consumer-apis/purpose-strings)。
+提供者介面代表資料保護系統的根。 它無法直接用來保護或解除保護資料。 相反地，取用者必須藉由呼叫來取得的參考 `IDataProtector` `IDataProtectionProvider.CreateProtector(purpose)` ，其中目的是描述預期取用者使用案例的字串。 如需此參數的意圖以及如何選擇適當值的詳細資訊，請參閱 [目的字串](xref:security/data-protection/consumer-apis/purpose-strings) 。
 
-## <a name="idataprotector"></a>Idataprotector 加密
+## <a name="idataprotector"></a>>idataprotector
 
-對的呼叫會傳回保護裝置介面 `CreateProtector` ，而這是取用者用來執行保護和取消保護作業的介面。
+的呼叫會傳回保護裝置介面，這是取用 `CreateProtector` 者可用來執行保護和取消保護作業的介面。
 
-若要保護資料片段，請將資料傳遞至 `Protect` 方法。 基本介面會定義轉換 byte []-> byte [] 的方法，但也會提供多載 (做為擴充方法) 以轉換字串 > 字串。 這兩種方法所提供的安全性完全相同;開發人員應選擇最方便其使用案例的任何多載。 不論選擇的多載，保護方法所傳回的值現在都會受到保護 (enciphered 和校訂) ，而應用程式可以將它傳送至不受信任的用戶端。
+若要保護資料片段，請將資料傳遞給 `Protect` 方法。 基本介面會定義轉換 byte []-> byte [] 的方法，但也有多載 (提供作為擴充方法，) 可轉換字串 > 字串。 這兩個方法所提供的安全性完全相同;開發人員應該選擇哪一種多載最方便使用。 不論選擇的多載，protected 方法所傳回的值現在都會受到保護， (enciphered 和校訂) ，而且應用程式可以將它傳送至不受信任的用戶端。
 
-若要將先前保護的資料片段解除保護，請將受保護的資料傳遞給 `Unprotect` 方法。  (有以位元組 [] 為基礎和以字串為基礎的多載，可供開發人員使用。 ) 如果受保護的承載是由先前的呼叫所產生 `Protect` `IDataProtector` ，則此 `Unprotect` 方法會傳回原始未受保護的裝載。 如果受保護的內容已遭修改，或是由不同的所產生 `IDataProtector` ，此 `Unprotect` 方法將會擲回 system.security.cryptography.cryptographicexception。
+若要取消保護先前保護的資料片段，請將受保護的資料傳遞給 `Unprotect` 方法。  (有以 byte [] 為基礎和以字串為基礎的多載，可供開發人員使用。 ) 如果受保護的裝載是由先前的呼叫所產生 `Protect` `IDataProtector` ，則 `Unprotect` 方法會傳回原始未受保護的裝載。 如果受保護的承載已遭篡改或由不同的產生 `IDataProtector` ，則 `Unprotect` 方法會擲回 system.security.cryptography.cryptographicexception。
 
-相同與不同之處的概念會 `IDataProtector` 轉回目的概念。 如果兩個 `IDataProtector` 實例是從相同的根目錄產生 `IDataProtectionProvider` ，但在對的呼叫中是透過不同的目的字串 `IDataProtectionProvider.CreateProtector` ，則會將它們視為不同的[保護](xref:security/data-protection/consumer-apis/purpose-strings)裝置，而且其中一個將無法取消保護另一個所產生的裝載。
+相同與不同的概念會與 `IDataProtector` 目的概念相同。 如果 `IDataProtector` 從相同的根產生兩個實例 `IDataProtectionProvider` ，但在呼叫中透過不同的目的字串來產生 `IDataProtectionProvider.CreateProtector` ，則會將它們視為 [不同的保護](xref:security/data-protection/consumer-apis/purpose-strings)裝置，而且無法取消保護另一個所產生的承載。
 
 ## <a name="consuming-these-interfaces"></a>使用這些介面
 
-針對 DI 感知元件，預期的用法是元件會 `IDataProtectionProvider` 在其程式中採用參數，而且 DI 系統會在元件具現化時，自動提供此服務。
+針對 DI 感知的元件，預期的用法是元件 `IDataProtectionProvider` 在其函式中採用參數，而 DI 系統會在元件具現化時，自動提供此服務。
 
 > [!NOTE]
-> 某些應用程式 (例如主控台應用程式或 ASP.NET 4.x 應用程式) 可能不是 DI 感知，因此無法使用此處所述的機制。 針對這些案例，請參閱[非 Di 感知案例](xref:security/data-protection/configuration/non-di-scenarios)檔，以取得取得 `IDataProtection` 提供者實例而不透過 DI 的詳細資訊。
+> 某些應用程式 (例如主控台應用程式或 ASP.NET 4.x 應用程式) 可能不是 DI 感知，所以無法使用此處所述的機制。 針對這些案例，請參閱 [非 Di 感知案例](xref:security/data-protection/configuration/non-di-scenarios) 檔，以取得取得提供者實例的詳細資訊， `IDataProtection` 而不需透過 DI。
 
 下列範例示範三個概念：
 
-1. [將資料保護系統新增](xref:security/data-protection/configuration/overview)至服務容器，
+1. [將資料保護系統新增](xref:security/data-protection/configuration/overview) 至服務容器，
 
-2. 使用 DI 來接收的實例 `IDataProtectionProvider` 、和
+2. 使用 DI 接收的實例 `IDataProtectionProvider` 、和
 
-3. 從建立 `IDataProtector` `IDataProtectionProvider` ，並使用它來保護和取消保護資料。
+3. 從建立 `IDataProtector` `IDataProtectionProvider` ，然後使用它來保護和解除保護資料。
 
 [!code-csharp[](../using-data-protection/samples/protectunprotect.cs?highlight=26,34,35,36,37,38,39,40)]
 
-AspNetCore. DataProtection 的封裝包含擴充方法 `IServiceProvider.GetDataProtector` ，以方便開發人員使用。 它會將封裝為單一作業 `IDataProtectionProvider` ，並從服務提供者抓取並呼叫 `IDataProtectionProvider.CreateProtector` 。 下列範例示範其使用方式。
+AspNetCore 的封裝包含擴充方法 `IServiceProvider.GetDataProtector` ，可做為開發人員的便利性。 它會封裝成單一作業 `IDataProtectionProvider` ，從服務提供者抓取，然後呼叫 `IDataProtectionProvider.CreateProtector` 。 下列範例會示範其使用方式。
 
 [!code-csharp[](./overview/samples/getdataprotector.cs?highlight=15)]
 
 >[!TIP]
-> 和的 `IDataProtectionProvider` 實例 `IDataProtector` 是多個呼叫端的安全線程。 這是因為一旦元件透過呼叫取得的參考 `IDataProtector` `CreateProtector` ，它就會使用該參考進行對和的多次呼叫 `Protect` `Unprotect` 。 `Unprotect`如果無法驗證或解密受保護的內容，則的呼叫將會擲回 system.security.cryptography.cryptographicexception。 某些元件可能會想要在取消保護作業期間忽略錯誤;讀取驗證的元件 cookie 可能會處理此錯誤，並將要求視為 cookie 完全不會使要求失敗。 需要此行為的元件應該特別捕捉 System.security.cryptography.cryptographicexception，而不是抑制所有例外狀況。
+> 和的 `IDataProtectionProvider` 實例 `IDataProtector` 都是多個呼叫端的安全線程。 它的目的是只要元件透過呼叫取得的參考 `IDataProtector` `CreateProtector` ，它就會將該參考用於多個對和的呼叫 `Protect` `Unprotect` 。 `Unprotect`如果無法驗證或解密受保護的承載，的呼叫將會擲回 system.security.cryptography.cryptographicexception。 某些元件可能會想要忽略取消保護作業期間的錯誤;讀取驗證的元件 cookie 可能會處理此錯誤，並將要求視為完全沒有， cookie 而不是直接讓要求失敗。 需要此行為的元件應該明確地捕捉 System.security.cryptography.cryptographicexception，而不是抑制所有例外狀況。

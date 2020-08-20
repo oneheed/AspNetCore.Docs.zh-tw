@@ -1,10 +1,11 @@
 ---
-title: 第10部分，檢查 ASP.NET Core 應用程式的詳細資料和刪除方法
+title: 第10部分：檢查 ASP.NET Core 應用程式的詳細資料和刪除方法
 author: rick-anderson
-description: ASP.NET Core MVC 的教學課程系列第10部分。
+description: ASP.NET Core MVC 之教學課程系列的第10部分。
 ms.author: riande
 ms.date: 12/13/2018
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -15,14 +16,14 @@ no-loc:
 - Razor
 - SignalR
 uid: tutorials/first-mvc-app/details
-ms.openlocfilehash: 2bde0e649af4928a03027b646436cc7b215b707c
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: b25113f8e2132c06e06d53a25e71ed2a42deb00f
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88021649"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88629700"
 ---
-# <a name="part-10-examine-the-details-and-delete-methods-of-an-aspnet-core-app"></a>第10部分，檢查 ASP.NET Core 應用程式的詳細資料和刪除方法
+# <a name="part-10-examine-the-details-and-delete-methods-of-an-aspnet-core-app"></a>第10部分：檢查 ASP.NET Core 應用程式的詳細資料和刪除方法
 
 作者：[Rick Anderson](https://twitter.com/RickAndMSFT)
 
@@ -66,4 +67,4 @@ public async Task<IActionResult> Delete(int id, bool notUsed)
 如需部署至 Azure 的資訊，請參閱[教學課程：在 Azure App Service 中建置 .NET Core 和 SQL Database Web 應用程式](/azure/app-service/app-service-web-tutorial-dotnetcore-sqldb)。
 
 > [!div class="step-by-step"]
-> [上一步](validation.md)
+> [[上一步]](validation.md)

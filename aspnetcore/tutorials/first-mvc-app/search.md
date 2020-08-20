@@ -1,10 +1,11 @@
 ---
-title: 第7部分，將搜尋新增至 ASP.NET Core MVC 應用程式
+title: 第7部分：將搜尋新增至 ASP.NET Core MVC 應用程式
 author: rick-anderson
 description: ASP.NET Core MVC 之教學課程系列的第7部分。
 ms.author: riande
 ms.date: 12/13/2018
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -15,14 +16,14 @@ no-loc:
 - Razor
 - SignalR
 uid: tutorials/first-mvc-app/search
-ms.openlocfilehash: 8df331ec6a6170255f357937adb8fbb6ccb59aaa
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: fcb96300c08d9f985cbfe4d3bf055036be7d2eb0
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88021311"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88629570"
 ---
-# <a name="part-7-add-search-to-an-aspnet-core-mvc-app"></a>第7部分，將搜尋新增至 ASP.NET Core MVC 應用程式
+# <a name="part-7-add-search-to-an-aspnet-core-mvc-app"></a>第7部分：將搜尋新增至 ASP.NET Core MVC 應用程式
 
 作者：[Rick Anderson](https://twitter.com/RickAndMSFT)
 

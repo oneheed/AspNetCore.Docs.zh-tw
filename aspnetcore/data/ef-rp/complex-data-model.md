@@ -1,11 +1,12 @@
 ---
-title: 第5部分， Razor ASP.NET Core 資料模型中具有 EF Core 的頁面
+title: 第5部分： Razor ASP.NET Core 資料模型中有 EF Core 的頁面
 author: rick-anderson
-description: 第5部分 Razor 頁面和 Entity Framework 教學課程系列。
+description: 第 5 Razor 頁和 Entity Framework 教學課程系列。
 ms.author: riande
 ms.custom: mvc
 ms.date: 07/22/2019
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -16,14 +17,14 @@ no-loc:
 - Razor
 - SignalR
 uid: data/ef-rp/complex-data-model
-ms.openlocfilehash: b3531f786b3101fcbea4b25d3950d1bce9a289dc
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: 3fab57df84e6902a8041940939c067da41f1674c
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88018048"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88629726"
 ---
-# <a name="part-5-no-locrazor-pages-with-ef-core-in-aspnet-core---data-model"></a>第5部分， Razor ASP.NET Core 資料模型中具有 EF Core 的頁面
+# <a name="part-5-no-locrazor-pages-with-ef-core-in-aspnet-core---data-model"></a>第5部分： Razor ASP.NET Core 資料模型中有 EF Core 的頁面
 
 作者：[Tom Dykstra](https://github.com/tdykstra) 和 [Rick Anderson](https://twitter.com/RickAndMSFT)
 
@@ -69,7 +70,7 @@ ms.locfileid: "88018048"
 
 針對學生註冊日期，所有頁面目前都會同時顯示日期和一天當中的時間，雖然只要日期才是重要項目。 透過使用資料註解屬性，您便可以只透過單一程式碼變更來修正每個顯示資料頁面中的顯示格式。 
 
-[DataType](/dotnet/api/system.componentmodel.dataannotations.datatypeattribute?view=netframework-4.7.1) 屬性會指定一個比資料庫內建類型更明確的資料類型。 在此情況下，該欄位應該只顯示日期，而不會同時顯示日期和時間。 [DataType 列舉](/dotnet/api/system.componentmodel.dataannotations.datatype?view=netframework-4.7.1)提供許多資料類型，例如 Date、Time、PhoneNumber、Currency、EmailAddress 等等。`DataType`屬性也可以讓應用程式自動提供類型特有的功能。 例如：
+[DataType](/dotnet/api/system.componentmodel.dataannotations.datatypeattribute?view=netframework-4.7.1) 屬性會指定一個比資料庫內建類型更明確的資料類型。 在此情況下，該欄位應該只顯示日期，而不會同時顯示日期和時間。 [DataType 列舉](/dotnet/api/system.componentmodel.dataannotations.datatype?view=netframework-4.7.1)可提供許多資料類型，例如 Date、Time、PhoneNumber、Currency、EmailAddress 等。`DataType`屬性也可以讓應用程式自動提供型別特有的功能。 例如：
 
 * `DataType.EmailAddress` 會自動建立 `mailto:` 連結。
 * `DataType.Date` 在大多數的瀏覽器中都會提供日期選取器。
@@ -91,7 +92,7 @@ ms.locfileid: "88018048"
 * 瀏覽器可以啟用 HTML5 功能。 例如，顯示日曆控制項、適合地區設定的貨幣符號、電子郵件連結和用戶端輸入驗證。
 * 根據預設，瀏覽器將根據地區設定，使用正確的格式呈現資料。
 
-如需詳細資訊，請參閱標記協助程式[ \<input> 檔](xref:mvc/views/working-with-forms#the-input-tag-helper)集。
+如需詳細資訊，請參閱[ \<input> Tag Helper 檔](xref:mvc/views/working-with-forms#the-input-tag-helper)。
 
 ### <a name="the-stringlength-attribute"></a>StringLength 屬性
 
@@ -400,7 +401,7 @@ public ICollection<Course> Courses { get; set; }
 
 根據慣例，EF Core 會為不可為 Null 的 FK 和多對多關聯性啟用串聯刪除。 此預設行為可能會導致循環串聯刪除規則。 循環串聯刪除規則會在新增移轉時造成例外狀況。
 
-例如，若 `Department.InstructorID` 屬性已定義成不可為 Null，EF Core 便會設定串聯刪除規則。 在這種情況下，若指派為部門管理員的講師遭到刪除，則會同時刪除部門。 在這種情況下，限制規則會更有意義。 下列[Fluent API](#fluent-api-alternative-to-attributes)會設定 [限制規則] 和 [停用串聯刪除]。
+例如，若 `Department.InstructorID` 屬性已定義成不可為 Null，EF Core 便會設定串聯刪除規則。 在這種情況下，若指派為部門管理員的講師遭到刪除，則會同時刪除部門。 在這種情況下，限制規則會更有意義。 下列 [流暢的 API](#fluent-api-alternative-to-attributes) 會設定限制規則，並停用串聯刪除。
 
   ```csharp
   modelBuilder.Entity<Department>()
@@ -589,7 +590,7 @@ For more information, see http://go.microsoft.com/fwlink/?LinkId=723262.
 現在您已經具有現有的資料庫，您需要思考如何將變更套用到該資料庫。 本教學課程示範兩種替代方法：
 
 * [卸除並重新建立資料庫](#drop)。 若您正在使用 SQLite，請選擇此節。
-* [將遷移套用到現有的資料庫](#applyexisting)。 本節中的說明僅適用於 SQL Server，不適用於 **SQLite**。 
+* [將遷移套用至現有的資料庫](#applyexisting)。 本節中的說明僅適用於 SQL Server，不適用於 **SQLite**。 
 
 這兩種選擇都適用於 SQL Server。 雖然套用移轉方法更複雜且耗時，但它是現實世界生產環境的慣用方法。 
 
@@ -620,7 +621,7 @@ For more information, see http://go.microsoft.com/fwlink/?LinkId=723262.
 
 * 開啟命令視窗並巡覽至專案資料夾。 專案資料夾包含 *ContosoUniversity.csproj* 檔案。
 
-* 執行下列命令：
+* 執行以下命令：
 
   ```dotnetcli
   dotnet ef database drop --force
@@ -759,7 +760,7 @@ https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/data/ef-rp/intr
 
 [!code-csharp[](intro/samples/cu21/Models/Student.cs?name=snippet_DataType&highlight=3,12-13)]
 
-[DataType](/dotnet/api/system.componentmodel.dataannotations.datatypeattribute?view=netframework-4.7.1) 屬性會指定一個比資料庫內建類型更明確的資料類型。 在此情況下，該欄位應該只顯示日期，而不會同時顯示日期和時間。 [DataType 列舉](/dotnet/api/system.componentmodel.dataannotations.datatype?view=netframework-4.7.1)提供許多資料類型，例如 Date、Time、PhoneNumber、Currency、EmailAddress 等等。`DataType`屬性也可以讓應用程式自動提供類型特有的功能。 例如：
+[DataType](/dotnet/api/system.componentmodel.dataannotations.datatypeattribute?view=netframework-4.7.1) 屬性會指定一個比資料庫內建類型更明確的資料類型。 在此情況下，該欄位應該只顯示日期，而不會同時顯示日期和時間。 [DataType 列舉](/dotnet/api/system.componentmodel.dataannotations.datatype?view=netframework-4.7.1)可提供許多資料類型，例如 Date、Time、PhoneNumber、Currency、EmailAddress 等。`DataType`屬性也可以讓應用程式自動提供型別特有的功能。 例如：
 
 * `DataType.EmailAddress` 會自動建立 `mailto:` 連結。
 * `DataType.Date` 在大多數的瀏覽器中都會提供日期選取器。
@@ -781,7 +782,7 @@ https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/data/ef-rp/intr
 * 瀏覽器可以啟用 HTML5 功能。 例如，顯示日曆控制項、適合地區設定的貨幣符號、電子郵件連結、用戶端輸入驗證等。
 * 根據預設，瀏覽器將根據地區設定，使用正確的格式呈現資料。
 
-如需詳細資訊，請參閱標記協助程式[ \<input> 檔](xref:mvc/views/working-with-forms#the-input-tag-helper)集。
+如需詳細資訊，請參閱[ \<input> Tag Helper 檔](xref:mvc/views/working-with-forms#the-input-tag-helper)。
 
 執行應用程式。 巡覽至 Students [索引] 頁面。 時間將不再顯示。 使用 `Student` 模型的每個檢視現在都只會顯示日期，而不會顯示時間。
 
@@ -1101,7 +1102,7 @@ public ICollection<Course> Courses { get; set; }
 
 * EF Core 會設定串聯刪除規則，以便在刪除講師時刪除部門。
 * 在刪除講師時刪除部門並非預期的行為。
-* 下列[Fluent API](#fluent-api-alternative-to-attributes)會設定限制規則，而不是 cascade。
+* 下列 [流暢的 API](#fluent-api-alternative-to-attributes) 會設定限制規則，而不是 cascade。
 
    ```csharp
    modelBuilder.Entity<Department>()
@@ -1287,8 +1288,8 @@ database "ContosoUniversity", table "dbo.Department", column 'DepartmentID'.
 
 現在您有了現有的資料庫，您需要思考如何對其套用未來變更。 本教學課程示範兩種方法：
 
-* [卸載並重新建立資料庫](#drop)
-* [將遷移套用到現有的資料庫](#applyexisting)。 雖然這個方法更複雜且耗時，卻是實際生產環境的慣用方法。 **請注意**：這是本教學課程的選擇性章節。 您可以執行卸除並重新建立步驟，然後略過本節。 如果您希望遵循本章節中的步驟，請不要執行卸除並重新建立的步驟。 
+* [捨棄並重新建立資料庫](#drop)
+* [將遷移套用至現有的資料庫](#applyexisting)。 雖然這個方法更複雜且耗時，卻是實際生產環境的慣用方法。 **請注意**：這是本教學課程的選擇性章節。 您可以執行卸除並重新建立步驟，然後略過本節。 如果您希望遵循本章節中的步驟，請不要執行卸除並重新建立的步驟。 
 
 <a name="drop"></a>
 

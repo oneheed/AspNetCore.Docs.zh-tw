@@ -7,6 +7,7 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 05/04/2020
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -17,89 +18,89 @@ no-loc:
 - Razor
 - SignalR
 uid: fundamentals/servers/kestrel
-ms.openlocfilehash: ad15a7e3bfdb8da79db091f0116bdd2f580ccb31
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: 5890e56f65712bcd781a3aad278a5aaa7914d0ea
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88016696"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88635017"
 ---
-# <a name="kestrel-web-server-implementation-in-aspnet-core"></a><span data-ttu-id="32db3-103">ASP.NET Core 中的 Kestrel 網頁伺服器實作</span><span class="sxs-lookup"><span data-stu-id="32db3-103">Kestrel web server implementation in ASP.NET Core</span></span>
+# <a name="kestrel-web-server-implementation-in-aspnet-core"></a><span data-ttu-id="65f64-103">ASP.NET Core 中的 Kestrel 網頁伺服器實作</span><span class="sxs-lookup"><span data-stu-id="65f64-103">Kestrel web server implementation in ASP.NET Core</span></span>
 
-<span data-ttu-id="32db3-104">作者：[Tom Dykstra](https://github.com/tdykstra)、[Chris Ross](https://github.com/Tratcher) 和 [Stephen Halter](https://twitter.com/halter73)</span><span class="sxs-lookup"><span data-stu-id="32db3-104">By [Tom Dykstra](https://github.com/tdykstra), [Chris Ross](https://github.com/Tratcher), and [Stephen Halter](https://twitter.com/halter73)</span></span>
+<span data-ttu-id="65f64-104">作者：[Tom Dykstra](https://github.com/tdykstra)、[Chris Ross](https://github.com/Tratcher) 和 [Stephen Halter](https://twitter.com/halter73)</span><span class="sxs-lookup"><span data-stu-id="65f64-104">By [Tom Dykstra](https://github.com/tdykstra), [Chris Ross](https://github.com/Tratcher), and [Stephen Halter](https://twitter.com/halter73)</span></span>
 
 ::: moniker range=">= aspnetcore-3.0"
 
-<span data-ttu-id="32db3-105">Kestrel 是 [ASP.NET Core 的跨平台網頁伺服器](xref:fundamentals/servers/index)。</span><span class="sxs-lookup"><span data-stu-id="32db3-105">Kestrel is a cross-platform [web server for ASP.NET Core](xref:fundamentals/servers/index).</span></span> <span data-ttu-id="32db3-106">Kestrel 是 ASP.NET Core 專案範本中預設隨附的網頁伺服器。</span><span class="sxs-lookup"><span data-stu-id="32db3-106">Kestrel is the web server that's included by default in ASP.NET Core project templates.</span></span>
+<span data-ttu-id="65f64-105">Kestrel 是 [ASP.NET Core 的跨平台網頁伺服器](xref:fundamentals/servers/index)。</span><span class="sxs-lookup"><span data-stu-id="65f64-105">Kestrel is a cross-platform [web server for ASP.NET Core](xref:fundamentals/servers/index).</span></span> <span data-ttu-id="65f64-106">Kestrel 是 ASP.NET Core 專案範本中預設隨附的網頁伺服器。</span><span class="sxs-lookup"><span data-stu-id="65f64-106">Kestrel is the web server that's included by default in ASP.NET Core project templates.</span></span>
 
-<span data-ttu-id="32db3-107">Kestrel 支援下列案例：</span><span class="sxs-lookup"><span data-stu-id="32db3-107">Kestrel supports the following scenarios:</span></span>
+<span data-ttu-id="65f64-107">Kestrel 支援下列案例：</span><span class="sxs-lookup"><span data-stu-id="65f64-107">Kestrel supports the following scenarios:</span></span>
 
-* <span data-ttu-id="32db3-108">HTTPS</span><span class="sxs-lookup"><span data-stu-id="32db3-108">HTTPS</span></span>
-* <span data-ttu-id="32db3-109">用來啟用 [WebSockets](https://github.com/aspnet/websockets) 的不透明升級</span><span class="sxs-lookup"><span data-stu-id="32db3-109">Opaque upgrade used to enable [WebSockets](https://github.com/aspnet/websockets)</span></span>
-* <span data-ttu-id="32db3-110">Nginx 背後的高效能 Unix 通訊端</span><span class="sxs-lookup"><span data-stu-id="32db3-110">Unix sockets for high performance behind Nginx</span></span>
-* <span data-ttu-id="32db3-111">HTTP/2 (macOS 上除外&dagger;)</span><span class="sxs-lookup"><span data-stu-id="32db3-111">HTTP/2 (except on macOS&dagger;)</span></span>
+* <span data-ttu-id="65f64-108">HTTPS</span><span class="sxs-lookup"><span data-stu-id="65f64-108">HTTPS</span></span>
+* <span data-ttu-id="65f64-109">用來啟用 [WebSockets](https://github.com/aspnet/websockets) 的不透明升級</span><span class="sxs-lookup"><span data-stu-id="65f64-109">Opaque upgrade used to enable [WebSockets](https://github.com/aspnet/websockets)</span></span>
+* <span data-ttu-id="65f64-110">Nginx 背後的高效能 Unix 通訊端</span><span class="sxs-lookup"><span data-stu-id="65f64-110">Unix sockets for high performance behind Nginx</span></span>
+* <span data-ttu-id="65f64-111">HTTP/2 (macOS 上除外&dagger;)</span><span class="sxs-lookup"><span data-stu-id="65f64-111">HTTP/2 (except on macOS&dagger;)</span></span>
 
-<span data-ttu-id="32db3-112">&dagger;未來版本的 macOS 上將會支援 HTTP/2。</span><span class="sxs-lookup"><span data-stu-id="32db3-112">&dagger;HTTP/2 will be supported on macOS in a future release.</span></span>
+<span data-ttu-id="65f64-112">&dagger;未來版本的 macOS 上將會支援 HTTP/2。</span><span class="sxs-lookup"><span data-stu-id="65f64-112">&dagger;HTTP/2 will be supported on macOS in a future release.</span></span>
 
-<span data-ttu-id="32db3-113">.NET Core 支援的所有平台和版本都支援 Kestrel。</span><span class="sxs-lookup"><span data-stu-id="32db3-113">Kestrel is supported on all platforms and versions that .NET Core supports.</span></span>
+<span data-ttu-id="65f64-113">.NET Core 支援的所有平台和版本都支援 Kestrel。</span><span class="sxs-lookup"><span data-stu-id="65f64-113">Kestrel is supported on all platforms and versions that .NET Core supports.</span></span>
 
-<span data-ttu-id="32db3-114">[查看或下載範例程式碼](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/servers/kestrel/samples) ([如何下載](xref:index#how-to-download-a-sample)) </span><span class="sxs-lookup"><span data-stu-id="32db3-114">[View or download sample code](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/servers/kestrel/samples) ([how to download](xref:index#how-to-download-a-sample))</span></span>
+<span data-ttu-id="65f64-114">[查看或下載範例程式碼](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/servers/kestrel/samples) ([如何下載](xref:index#how-to-download-a-sample)) </span><span class="sxs-lookup"><span data-stu-id="65f64-114">[View or download sample code](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/servers/kestrel/samples) ([how to download](xref:index#how-to-download-a-sample))</span></span>
 
-## <a name="http2-support"></a><span data-ttu-id="32db3-115">HTTP/2 支援</span><span class="sxs-lookup"><span data-stu-id="32db3-115">HTTP/2 support</span></span>
+## <a name="http2-support"></a><span data-ttu-id="65f64-115">HTTP/2 支援</span><span class="sxs-lookup"><span data-stu-id="65f64-115">HTTP/2 support</span></span>
 
-<span data-ttu-id="32db3-116">如果符合下列基本需求，則可以針對 ASP.NET Core 應用程式使用 [HTTP/2](https://httpwg.org/specs/rfc7540.html)：</span><span class="sxs-lookup"><span data-stu-id="32db3-116">[HTTP/2](https://httpwg.org/specs/rfc7540.html) is available for ASP.NET Core apps if the following base requirements are met:</span></span>
+<span data-ttu-id="65f64-116">如果符合下列基本需求，則可以針對 ASP.NET Core 應用程式使用 [HTTP/2](https://httpwg.org/specs/rfc7540.html)：</span><span class="sxs-lookup"><span data-stu-id="65f64-116">[HTTP/2](https://httpwg.org/specs/rfc7540.html) is available for ASP.NET Core apps if the following base requirements are met:</span></span>
 
-* <span data-ttu-id="32db3-117">作業系統&dagger;</span><span class="sxs-lookup"><span data-stu-id="32db3-117">Operating system&dagger;</span></span>
-  * <span data-ttu-id="32db3-118">Windows Server 2016/Windows 10 或更新版本&Dagger;</span><span class="sxs-lookup"><span data-stu-id="32db3-118">Windows Server 2016/Windows 10 or later&Dagger;</span></span>
-  * <span data-ttu-id="32db3-119">Linux 含 OpenSSL 1.0.2 或更新版本 (例如 Ubuntu 16.04 或更新版本)</span><span class="sxs-lookup"><span data-stu-id="32db3-119">Linux with OpenSSL 1.0.2 or later (for example, Ubuntu 16.04 or later)</span></span>
-* <span data-ttu-id="32db3-120">目標 Framework：.NET Core 2.2 或更新版本</span><span class="sxs-lookup"><span data-stu-id="32db3-120">Target framework: .NET Core 2.2 or later</span></span>
-* <span data-ttu-id="32db3-121">[Application-Layer Protocol Negotiation (ALPN)](https://tools.ietf.org/html/rfc7301#section-3) 連線</span><span class="sxs-lookup"><span data-stu-id="32db3-121">[Application-Layer Protocol Negotiation (ALPN)](https://tools.ietf.org/html/rfc7301#section-3) connection</span></span>
-* <span data-ttu-id="32db3-122">TLS 1.2 或更新版本連線</span><span class="sxs-lookup"><span data-stu-id="32db3-122">TLS 1.2 or later connection</span></span>
+* <span data-ttu-id="65f64-117">作業系統&dagger;</span><span class="sxs-lookup"><span data-stu-id="65f64-117">Operating system&dagger;</span></span>
+  * <span data-ttu-id="65f64-118">Windows Server 2016/Windows 10 或更新版本&Dagger;</span><span class="sxs-lookup"><span data-stu-id="65f64-118">Windows Server 2016/Windows 10 or later&Dagger;</span></span>
+  * <span data-ttu-id="65f64-119">Linux 含 OpenSSL 1.0.2 或更新版本 (例如 Ubuntu 16.04 或更新版本)</span><span class="sxs-lookup"><span data-stu-id="65f64-119">Linux with OpenSSL 1.0.2 or later (for example, Ubuntu 16.04 or later)</span></span>
+* <span data-ttu-id="65f64-120">目標 Framework：.NET Core 2.2 或更新版本</span><span class="sxs-lookup"><span data-stu-id="65f64-120">Target framework: .NET Core 2.2 or later</span></span>
+* <span data-ttu-id="65f64-121">[Application-Layer Protocol Negotiation (ALPN)](https://tools.ietf.org/html/rfc7301#section-3) 連線</span><span class="sxs-lookup"><span data-stu-id="65f64-121">[Application-Layer Protocol Negotiation (ALPN)](https://tools.ietf.org/html/rfc7301#section-3) connection</span></span>
+* <span data-ttu-id="65f64-122">TLS 1.2 或更新版本連線</span><span class="sxs-lookup"><span data-stu-id="65f64-122">TLS 1.2 or later connection</span></span>
 
-<span data-ttu-id="32db3-123">&dagger;未來版本的 macOS 上將會支援 HTTP/2。</span><span class="sxs-lookup"><span data-stu-id="32db3-123">&dagger;HTTP/2 will be supported on macOS in a future release.</span></span>
-<span data-ttu-id="32db3-124">&Dagger;Kestrel 在 Windows Server 2012 R2 與 Windows 8.1 對 HTTP/2 的支援有限。</span><span class="sxs-lookup"><span data-stu-id="32db3-124">&Dagger;Kestrel has limited support for HTTP/2 on Windows Server 2012 R2 and Windows 8.1.</span></span> <span data-ttu-id="32db3-125">支援有限的原因是這些作業系統上的支援 TLS 密碼編譯套件清單有限。</span><span class="sxs-lookup"><span data-stu-id="32db3-125">Support is limited because the list of supported TLS cipher suites available on these operating systems is limited.</span></span> <span data-ttu-id="32db3-126">可能需要使用橢圓曲線數位簽章演算法 (ECDSA) 產生的憑證來保護 TLS 連線。</span><span class="sxs-lookup"><span data-stu-id="32db3-126">A certificate generated using an Elliptic Curve Digital Signature Algorithm (ECDSA) may be required to secure TLS connections.</span></span>
+<span data-ttu-id="65f64-123">&dagger;未來版本的 macOS 上將會支援 HTTP/2。</span><span class="sxs-lookup"><span data-stu-id="65f64-123">&dagger;HTTP/2 will be supported on macOS in a future release.</span></span>
+<span data-ttu-id="65f64-124">&Dagger;Kestrel 在 Windows Server 2012 R2 與 Windows 8.1 對 HTTP/2 的支援有限。</span><span class="sxs-lookup"><span data-stu-id="65f64-124">&Dagger;Kestrel has limited support for HTTP/2 on Windows Server 2012 R2 and Windows 8.1.</span></span> <span data-ttu-id="65f64-125">支援有限的原因是這些作業系統上的支援 TLS 密碼編譯套件清單有限。</span><span class="sxs-lookup"><span data-stu-id="65f64-125">Support is limited because the list of supported TLS cipher suites available on these operating systems is limited.</span></span> <span data-ttu-id="65f64-126">可能需要使用橢圓曲線數位簽章演算法 (ECDSA) 產生的憑證來保護 TLS 連線。</span><span class="sxs-lookup"><span data-stu-id="65f64-126">A certificate generated using an Elliptic Curve Digital Signature Algorithm (ECDSA) may be required to secure TLS connections.</span></span>
 
-<span data-ttu-id="32db3-127">如果已建立 HTTP/2 連線，[HttpRequest.Protocol](xref:Microsoft.AspNetCore.Http.HttpRequest.Protocol*) 會報告 `HTTP/2`。</span><span class="sxs-lookup"><span data-stu-id="32db3-127">If an HTTP/2 connection is established, [HttpRequest.Protocol](xref:Microsoft.AspNetCore.Http.HttpRequest.Protocol*) reports `HTTP/2`.</span></span>
+<span data-ttu-id="65f64-127">如果已建立 HTTP/2 連線，[HttpRequest.Protocol](xref:Microsoft.AspNetCore.Http.HttpRequest.Protocol*) 會報告 `HTTP/2`。</span><span class="sxs-lookup"><span data-stu-id="65f64-127">If an HTTP/2 connection is established, [HttpRequest.Protocol](xref:Microsoft.AspNetCore.Http.HttpRequest.Protocol*) reports `HTTP/2`.</span></span>
 
-<span data-ttu-id="32db3-128">預設會停用 HTTP/2。</span><span class="sxs-lookup"><span data-stu-id="32db3-128">HTTP/2 is disabled by default.</span></span> <span data-ttu-id="32db3-129">如需組態的詳細資訊，請參閱 [Kestrel 選項](#kestrel-options)和 [ListenOptions. 通訊協定](#listenoptionsprotocols)一節。</span><span class="sxs-lookup"><span data-stu-id="32db3-129">For more information on configuration, see the [Kestrel options](#kestrel-options) and [ListenOptions.Protocols](#listenoptionsprotocols) sections.</span></span>
+<span data-ttu-id="65f64-128">預設會停用 HTTP/2。</span><span class="sxs-lookup"><span data-stu-id="65f64-128">HTTP/2 is disabled by default.</span></span> <span data-ttu-id="65f64-129">如需組態的詳細資訊，請參閱 [Kestrel 選項](#kestrel-options)和 [ListenOptions. 通訊協定](#listenoptionsprotocols)一節。</span><span class="sxs-lookup"><span data-stu-id="65f64-129">For more information on configuration, see the [Kestrel options](#kestrel-options) and [ListenOptions.Protocols](#listenoptionsprotocols) sections.</span></span>
 
-## <a name="when-to-use-kestrel-with-a-reverse-proxy"></a><span data-ttu-id="32db3-130">何時搭配使用 Kestrel 與反向 Proxy</span><span class="sxs-lookup"><span data-stu-id="32db3-130">When to use Kestrel with a reverse proxy</span></span>
+## <a name="when-to-use-kestrel-with-a-reverse-proxy"></a><span data-ttu-id="65f64-130">何時搭配使用 Kestrel 與反向 Proxy</span><span class="sxs-lookup"><span data-stu-id="65f64-130">When to use Kestrel with a reverse proxy</span></span>
 
-<span data-ttu-id="32db3-131">您可以單獨使用 Kestrel，或與 [Internet Information Services (IIS)](https://www.iis.net/)、[Nginx](https://nginx.org) 或 [Apache](https://httpd.apache.org/) 等「反向 Proxy 伺服器」\*\* 搭配使用。</span><span class="sxs-lookup"><span data-stu-id="32db3-131">Kestrel can be used by itself or with a *reverse proxy server*, such as [Internet Information Services (IIS)](https://www.iis.net/), [Nginx](https://nginx.org), or [Apache](https://httpd.apache.org/).</span></span> <span data-ttu-id="32db3-132">反向 Proxy 伺服器會從網路接收 HTTP 要求，然後轉送到 Kestrel。</span><span class="sxs-lookup"><span data-stu-id="32db3-132">A reverse proxy server receives HTTP requests from the network and forwards them to Kestrel.</span></span>
+<span data-ttu-id="65f64-131">您可以單獨使用 Kestrel，或與 [Internet Information Services (IIS)](https://www.iis.net/)、[Nginx](https://nginx.org) 或 [Apache](https://httpd.apache.org/) 等「反向 Proxy 伺服器」\*\* 搭配使用。</span><span class="sxs-lookup"><span data-stu-id="65f64-131">Kestrel can be used by itself or with a *reverse proxy server*, such as [Internet Information Services (IIS)](https://www.iis.net/), [Nginx](https://nginx.org), or [Apache](https://httpd.apache.org/).</span></span> <span data-ttu-id="65f64-132">反向 Proxy 伺服器會從網路接收 HTTP 要求，然後轉送到 Kestrel。</span><span class="sxs-lookup"><span data-stu-id="65f64-132">A reverse proxy server receives HTTP requests from the network and forwards them to Kestrel.</span></span>
 
-<span data-ttu-id="32db3-133">Kestrel 用作邊緣 (網際網路對應) 網頁伺服器：</span><span class="sxs-lookup"><span data-stu-id="32db3-133">Kestrel used as an edge (Internet-facing) web server:</span></span>
+<span data-ttu-id="65f64-133">Kestrel 用作邊緣 (網際網路對應) 網頁伺服器：</span><span class="sxs-lookup"><span data-stu-id="65f64-133">Kestrel used as an edge (Internet-facing) web server:</span></span>
 
 ![Kestrel 不使用反向 Proxy 伺服器直接與網際網路通訊](kestrel/_static/kestrel-to-internet2.png)
 
-<span data-ttu-id="32db3-135">Kestrel 用於反向 Proxy 組態中：</span><span class="sxs-lookup"><span data-stu-id="32db3-135">Kestrel used in a reverse proxy configuration:</span></span>
+<span data-ttu-id="65f64-135">Kestrel 用於反向 Proxy 組態中：</span><span class="sxs-lookup"><span data-stu-id="65f64-135">Kestrel used in a reverse proxy configuration:</span></span>
 
 ![Kestrel 透過 IIS、Nginx 或 Apache 等反向 Proxy 伺服器間接與網際網路通訊](kestrel/_static/kestrel-to-internet.png)
 
-<span data-ttu-id="32db3-137">無論是否使用反向 proxy 伺服器設定，都是支援的裝載設定。</span><span class="sxs-lookup"><span data-stu-id="32db3-137">Either configuration, with or without a reverse proxy server, is a supported hosting configuration.</span></span>
+<span data-ttu-id="65f64-137">不論是否有反向 proxy 伺服器，設定都是支援的裝載設定。</span><span class="sxs-lookup"><span data-stu-id="65f64-137">Either configuration, with or without a reverse proxy server, is a supported hosting configuration.</span></span>
 
-<span data-ttu-id="32db3-138">Kestrel 用作不需要反向 Proxy 伺服器的 Edge Server 時，不支援在多個處理序之間共用相同的 IP 和連接埠。</span><span class="sxs-lookup"><span data-stu-id="32db3-138">Kestrel used as an edge server without a reverse proxy server doesn't support sharing the same IP and port among multiple processes.</span></span> <span data-ttu-id="32db3-139">當 Kestrel 設定為接聽連接埠時，Kestrel 會處理該連接埠的所有流量，而不論要求的 `Host` 標頭為何。</span><span class="sxs-lookup"><span data-stu-id="32db3-139">When Kestrel is configured to listen on a port, Kestrel handles all of the traffic for that port regardless of requests' `Host` headers.</span></span> <span data-ttu-id="32db3-140">可以共用連接埠的反向 Proxy 能夠在唯一的 IP 和連接埠上轉送要求給 Kestrel。</span><span class="sxs-lookup"><span data-stu-id="32db3-140">A reverse proxy that can share ports has the ability to forward requests to Kestrel on a unique IP and port.</span></span>
+<span data-ttu-id="65f64-138">Kestrel 用作不需要反向 Proxy 伺服器的 Edge Server 時，不支援在多個處理序之間共用相同的 IP 和連接埠。</span><span class="sxs-lookup"><span data-stu-id="65f64-138">Kestrel used as an edge server without a reverse proxy server doesn't support sharing the same IP and port among multiple processes.</span></span> <span data-ttu-id="65f64-139">當 Kestrel 設定為接聽連接埠時，Kestrel 會處理該連接埠的所有流量，而不論要求的 `Host` 標頭為何。</span><span class="sxs-lookup"><span data-stu-id="65f64-139">When Kestrel is configured to listen on a port, Kestrel handles all of the traffic for that port regardless of requests' `Host` headers.</span></span> <span data-ttu-id="65f64-140">可以共用連接埠的反向 Proxy 能夠在唯一的 IP 和連接埠上轉送要求給 Kestrel。</span><span class="sxs-lookup"><span data-stu-id="65f64-140">A reverse proxy that can share ports has the ability to forward requests to Kestrel on a unique IP and port.</span></span>
 
-<span data-ttu-id="32db3-141">即使不需要反向 Proxy 伺服器，使用反向 Proxy 伺服器也是不錯的選擇。</span><span class="sxs-lookup"><span data-stu-id="32db3-141">Even if a reverse proxy server isn't required, using a reverse proxy server might be a good choice.</span></span>
+<span data-ttu-id="65f64-141">即使不需要反向 Proxy 伺服器，使用反向 Proxy 伺服器也是不錯的選擇。</span><span class="sxs-lookup"><span data-stu-id="65f64-141">Even if a reverse proxy server isn't required, using a reverse proxy server might be a good choice.</span></span>
 
-<span data-ttu-id="32db3-142">反向 Proxy：</span><span class="sxs-lookup"><span data-stu-id="32db3-142">A reverse proxy:</span></span>
+<span data-ttu-id="65f64-142">反向 Proxy：</span><span class="sxs-lookup"><span data-stu-id="65f64-142">A reverse proxy:</span></span>
 
-* <span data-ttu-id="32db3-143">可以限制它所主控之應用程式的公開介面區。</span><span class="sxs-lookup"><span data-stu-id="32db3-143">Can limit the exposed public surface area of the apps that it hosts.</span></span>
-* <span data-ttu-id="32db3-144">提供額外的組態和防禦層。</span><span class="sxs-lookup"><span data-stu-id="32db3-144">Provide an additional layer of configuration and defense.</span></span>
-* <span data-ttu-id="32db3-145">能夠與現有基礎結構更好地整合。</span><span class="sxs-lookup"><span data-stu-id="32db3-145">Might integrate better with existing infrastructure.</span></span>
-* <span data-ttu-id="32db3-146">簡化負載平衡和安全通訊 (HTTPS) 組態。</span><span class="sxs-lookup"><span data-stu-id="32db3-146">Simplify load balancing and secure communication (HTTPS) configuration.</span></span> <span data-ttu-id="32db3-147">只有反向 proxy 伺服器需要 x.509 憑證，而且該伺服器可以使用一般 HTTP 與內部網路上的應用程式伺服器進行通訊。</span><span class="sxs-lookup"><span data-stu-id="32db3-147">Only the reverse proxy server requires an X.509 certificate, and that server can communicate with the app's servers on the internal network using plain HTTP.</span></span>
+* <span data-ttu-id="65f64-143">可以限制它所主控之應用程式的公開介面區。</span><span class="sxs-lookup"><span data-stu-id="65f64-143">Can limit the exposed public surface area of the apps that it hosts.</span></span>
+* <span data-ttu-id="65f64-144">提供額外的組態和防禦層。</span><span class="sxs-lookup"><span data-stu-id="65f64-144">Provide an additional layer of configuration and defense.</span></span>
+* <span data-ttu-id="65f64-145">能夠與現有基礎結構更好地整合。</span><span class="sxs-lookup"><span data-stu-id="65f64-145">Might integrate better with existing infrastructure.</span></span>
+* <span data-ttu-id="65f64-146">簡化負載平衡和安全通訊 (HTTPS) 組態。</span><span class="sxs-lookup"><span data-stu-id="65f64-146">Simplify load balancing and secure communication (HTTPS) configuration.</span></span> <span data-ttu-id="65f64-147">只有反向 proxy 伺服器需要 x.509 憑證，而且該伺服器可以使用一般 HTTP 與內部網路上的應用程式伺服器進行通訊。</span><span class="sxs-lookup"><span data-stu-id="65f64-147">Only the reverse proxy server requires an X.509 certificate, and that server can communicate with the app's servers on the internal network using plain HTTP.</span></span>
 
 > [!WARNING]
-> <span data-ttu-id="32db3-148">裝載於反向 Proxy 組態需要[主機篩選](#host-filtering)。</span><span class="sxs-lookup"><span data-stu-id="32db3-148">Hosting in a reverse proxy configuration requires [host filtering](#host-filtering).</span></span>
+> <span data-ttu-id="65f64-148">裝載於反向 Proxy 組態需要[主機篩選](#host-filtering)。</span><span class="sxs-lookup"><span data-stu-id="65f64-148">Hosting in a reverse proxy configuration requires [host filtering](#host-filtering).</span></span>
 
-## <a name="kestrel-in-aspnet-core-apps"></a><span data-ttu-id="32db3-149">ASP.NET Core 應用程式中的 Kestrel</span><span class="sxs-lookup"><span data-stu-id="32db3-149">Kestrel in ASP.NET Core apps</span></span>
+## <a name="kestrel-in-aspnet-core-apps"></a><span data-ttu-id="65f64-149">ASP.NET Core apps 中的 Kestrel</span><span class="sxs-lookup"><span data-stu-id="65f64-149">Kestrel in ASP.NET Core apps</span></span>
 
-<span data-ttu-id="32db3-150">ASP.NET Core 專案範本預設會使用 Kestrel。</span><span class="sxs-lookup"><span data-stu-id="32db3-150">ASP.NET Core project templates use Kestrel by default.</span></span> <span data-ttu-id="32db3-151">在*Program.cs*中， <xref:Microsoft.Extensions.Hosting.GenericHostBuilderExtensions.ConfigureWebHostDefaults*> 方法會呼叫 <xref:Microsoft.AspNetCore.Hosting.WebHostBuilderKestrelExtensions.UseKestrel*> ：</span><span class="sxs-lookup"><span data-stu-id="32db3-151">In *Program.cs*, the <xref:Microsoft.Extensions.Hosting.GenericHostBuilderExtensions.ConfigureWebHostDefaults*> method calls <xref:Microsoft.AspNetCore.Hosting.WebHostBuilderKestrelExtensions.UseKestrel*>:</span></span>
+<span data-ttu-id="65f64-150">ASP.NET Core 專案範本預設會使用 Kestrel。</span><span class="sxs-lookup"><span data-stu-id="65f64-150">ASP.NET Core project templates use Kestrel by default.</span></span> <span data-ttu-id="65f64-151">在 *Program.cs*中，此 <xref:Microsoft.Extensions.Hosting.GenericHostBuilderExtensions.ConfigureWebHostDefaults*> 方法會呼叫 <xref:Microsoft.AspNetCore.Hosting.WebHostBuilderKestrelExtensions.UseKestrel*> ：</span><span class="sxs-lookup"><span data-stu-id="65f64-151">In *Program.cs*, the <xref:Microsoft.Extensions.Hosting.GenericHostBuilderExtensions.ConfigureWebHostDefaults*> method calls <xref:Microsoft.AspNetCore.Hosting.WebHostBuilderKestrelExtensions.UseKestrel*>:</span></span>
 
 [!code-csharp[](kestrel/samples/3.x/KestrelSample/Program.cs?name=snippet_DefaultBuilder&highlight=8)]
 
-<span data-ttu-id="32db3-152">如需建立主機的詳細資訊，請參閱的*設定主機*和預設產生器*設定*章節 <xref:fundamentals/host/generic-host#set-up-a-host> 。</span><span class="sxs-lookup"><span data-stu-id="32db3-152">For more information on building the host, see the *Set up a host* and *Default builder settings* sections of <xref:fundamentals/host/generic-host#set-up-a-host>.</span></span>
+<span data-ttu-id="65f64-152">如需建立主機的詳細資訊，請參閱的 *設定主* 控制項和 *預設* 建立器設定一節 <xref:fundamentals/host/generic-host#set-up-a-host> 。</span><span class="sxs-lookup"><span data-stu-id="65f64-152">For more information on building the host, see the *Set up a host* and *Default builder settings* sections of <xref:fundamentals/host/generic-host#set-up-a-host>.</span></span>
 
-<span data-ttu-id="32db3-153">若要在呼叫 `ConfigureWebHostDefaults` 之後提供額外的設定，請使用 `ConfigureKestrel`：</span><span class="sxs-lookup"><span data-stu-id="32db3-153">To provide additional configuration after calling `ConfigureWebHostDefaults`, use `ConfigureKestrel`:</span></span>
+<span data-ttu-id="65f64-153">若要在呼叫 `ConfigureWebHostDefaults` 之後提供額外的設定，請使用 `ConfigureKestrel`：</span><span class="sxs-lookup"><span data-stu-id="65f64-153">To provide additional configuration after calling `ConfigureWebHostDefaults`, use `ConfigureKestrel`:</span></span>
 
 ```csharp
 public static IHostBuilder CreateHostBuilder(string[] args) =>
@@ -114,19 +115,19 @@ public static IHostBuilder CreateHostBuilder(string[] args) =>
         });
 ```
 
-## <a name="kestrel-options"></a><span data-ttu-id="32db3-154">Kestrel 選項</span><span class="sxs-lookup"><span data-stu-id="32db3-154">Kestrel options</span></span>
+## <a name="kestrel-options"></a><span data-ttu-id="65f64-154">Kestrel 選項</span><span class="sxs-lookup"><span data-stu-id="65f64-154">Kestrel options</span></span>
 
-<span data-ttu-id="32db3-155">Kestrel 網頁伺服器所含的條件約束組態選項，在網際網路對應部署方面特別有用。</span><span class="sxs-lookup"><span data-stu-id="32db3-155">The Kestrel web server has constraint configuration options that are especially useful in Internet-facing deployments.</span></span>
+<span data-ttu-id="65f64-155">Kestrel 網頁伺服器所含的條件約束組態選項，在網際網路對應部署方面特別有用。</span><span class="sxs-lookup"><span data-stu-id="65f64-155">The Kestrel web server has constraint configuration options that are especially useful in Internet-facing deployments.</span></span>
 
-<span data-ttu-id="32db3-156">請在 <xref:Microsoft.AspNetCore.Server.Kestrel.Core.KestrelServerOptions> 類別的 <xref:Microsoft.AspNetCore.Server.Kestrel.Core.KestrelServerOptions.Limits> 屬性上設定條件約束。</span><span class="sxs-lookup"><span data-stu-id="32db3-156">Set constraints on the <xref:Microsoft.AspNetCore.Server.Kestrel.Core.KestrelServerOptions.Limits> property of the <xref:Microsoft.AspNetCore.Server.Kestrel.Core.KestrelServerOptions> class.</span></span> <span data-ttu-id="32db3-157">`Limits` 屬性會保存 <xref:Microsoft.AspNetCore.Server.Kestrel.Core.KestrelServerLimits> 類別的執行個體。</span><span class="sxs-lookup"><span data-stu-id="32db3-157">The `Limits` property holds an instance of the <xref:Microsoft.AspNetCore.Server.Kestrel.Core.KestrelServerLimits> class.</span></span>
+<span data-ttu-id="65f64-156">請在 <xref:Microsoft.AspNetCore.Server.Kestrel.Core.KestrelServerOptions> 類別的 <xref:Microsoft.AspNetCore.Server.Kestrel.Core.KestrelServerOptions.Limits> 屬性上設定條件約束。</span><span class="sxs-lookup"><span data-stu-id="65f64-156">Set constraints on the <xref:Microsoft.AspNetCore.Server.Kestrel.Core.KestrelServerOptions.Limits> property of the <xref:Microsoft.AspNetCore.Server.Kestrel.Core.KestrelServerOptions> class.</span></span> <span data-ttu-id="65f64-157">`Limits` 屬性會保存 <xref:Microsoft.AspNetCore.Server.Kestrel.Core.KestrelServerLimits> 類別的執行個體。</span><span class="sxs-lookup"><span data-stu-id="65f64-157">The `Limits` property holds an instance of the <xref:Microsoft.AspNetCore.Server.Kestrel.Core.KestrelServerLimits> class.</span></span>
 
-<span data-ttu-id="32db3-158">下列範例會使用 <xref:Microsoft.AspNetCore.Server.Kestrel.Core> 命名空間；</span><span class="sxs-lookup"><span data-stu-id="32db3-158">The following examples use the <xref:Microsoft.AspNetCore.Server.Kestrel.Core> namespace:</span></span>
+<span data-ttu-id="65f64-158">下列範例會使用 <xref:Microsoft.AspNetCore.Server.Kestrel.Core> 命名空間；</span><span class="sxs-lookup"><span data-stu-id="65f64-158">The following examples use the <xref:Microsoft.AspNetCore.Server.Kestrel.Core> namespace:</span></span>
 
 ```csharp
 using Microsoft.AspNetCore.Server.Kestrel.Core;
 ```
 
-<span data-ttu-id="32db3-159">在本文稍後所示的範例中，Kestrel 選項是在 c # 程式碼中設定。</span><span class="sxs-lookup"><span data-stu-id="32db3-159">In examples shown later in this article, Kestrel options are configured in C# code.</span></span> <span data-ttu-id="32db3-160">您也可以使用設定[提供者](xref:fundamentals/configuration/index)來設定 Kestrel 選項。</span><span class="sxs-lookup"><span data-stu-id="32db3-160">Kestrel options can also be set using a [configuration provider](xref:fundamentals/configuration/index).</span></span> <span data-ttu-id="32db3-161">例如，檔案設定[提供者](xref:fundamentals/configuration/index#file-configuration-provider)可以從或 appsettings 的*appsettings.js*載入 Kestrel 設定 *。 {環境}. json*檔案：</span><span class="sxs-lookup"><span data-stu-id="32db3-161">For example, the [File Configuration Provider](xref:fundamentals/configuration/index#file-configuration-provider) can load Kestrel configuration from an *appsettings.json* or *appsettings.{Environment}.json* file:</span></span>
+<span data-ttu-id="65f64-159">在本文稍後所示的範例中，會在 c # 程式碼中設定 Kestrel 選項。</span><span class="sxs-lookup"><span data-stu-id="65f64-159">In examples shown later in this article, Kestrel options are configured in C# code.</span></span> <span data-ttu-id="65f64-160">您也可以使用設定 [提供者](xref:fundamentals/configuration/index)來設定 Kestrel 選項。</span><span class="sxs-lookup"><span data-stu-id="65f64-160">Kestrel options can also be set using a [configuration provider](xref:fundamentals/configuration/index).</span></span> <span data-ttu-id="65f64-161">例如，檔案設定 [提供者](xref:fundamentals/configuration/index#file-configuration-provider) 可以從 *appsettings.json* 或 appsettings 載入 Kestrel 設定 *。 {環境}. json* 檔案：</span><span class="sxs-lookup"><span data-stu-id="65f64-161">For example, the [File Configuration Provider](xref:fundamentals/configuration/index#file-configuration-provider) can load Kestrel configuration from an *appsettings.json* or *appsettings.{Environment}.json* file:</span></span>
 
 ```json
 {
@@ -141,14 +142,14 @@ using Microsoft.AspNetCore.Server.Kestrel.Core;
 ```
 
 > [!NOTE]
-> <span data-ttu-id="32db3-162"><xref:Microsoft.AspNetCore.Server.Kestrel.Core.KestrelServerOptions>和[端點](#endpoint-configuration)設定可從設定提供者進行設定。</span><span class="sxs-lookup"><span data-stu-id="32db3-162"><xref:Microsoft.AspNetCore.Server.Kestrel.Core.KestrelServerOptions> and [endpoint configuration](#endpoint-configuration) are configurable from configuration providers.</span></span> <span data-ttu-id="32db3-163">其餘的 Kestrel 設定必須以 c # 程式碼進行設定。</span><span class="sxs-lookup"><span data-stu-id="32db3-163">Remaining Kestrel configuration must be configured in C# code.</span></span>
+> <span data-ttu-id="65f64-162"><xref:Microsoft.AspNetCore.Server.Kestrel.Core.KestrelServerOptions> 和 [端點](#endpoint-configuration) 設定可從設定提供者進行設定。</span><span class="sxs-lookup"><span data-stu-id="65f64-162"><xref:Microsoft.AspNetCore.Server.Kestrel.Core.KestrelServerOptions> and [endpoint configuration](#endpoint-configuration) are configurable from configuration providers.</span></span> <span data-ttu-id="65f64-163">其餘的 Kestrel 設定必須在 c # 程式碼中設定。</span><span class="sxs-lookup"><span data-stu-id="65f64-163">Remaining Kestrel configuration must be configured in C# code.</span></span>
 
-<span data-ttu-id="32db3-164">請使用下列**其中一**種方法：</span><span class="sxs-lookup"><span data-stu-id="32db3-164">Use **one** of the following approaches:</span></span>
+<span data-ttu-id="65f64-164">使用下列 **其中一** 種方法：</span><span class="sxs-lookup"><span data-stu-id="65f64-164">Use **one** of the following approaches:</span></span>
 
-* <span data-ttu-id="32db3-165">在中設定 Kestrel `Startup.ConfigureServices` ：</span><span class="sxs-lookup"><span data-stu-id="32db3-165">Configure Kestrel in `Startup.ConfigureServices`:</span></span>
+* <span data-ttu-id="65f64-165">設定 Kestrel in `Startup.ConfigureServices` ：</span><span class="sxs-lookup"><span data-stu-id="65f64-165">Configure Kestrel in `Startup.ConfigureServices`:</span></span>
 
-  1. <span data-ttu-id="32db3-166">將的實例插入 `IConfiguration` 至 `Startup` 類別。</span><span class="sxs-lookup"><span data-stu-id="32db3-166">Inject an instance of `IConfiguration` into the `Startup` class.</span></span> <span data-ttu-id="32db3-167">下列範例假設插入的設定已指派給 `Configuration` 屬性。</span><span class="sxs-lookup"><span data-stu-id="32db3-167">The following example assumes that the injected configuration is assigned to the `Configuration` property.</span></span>
-  2. <span data-ttu-id="32db3-168">在中 `Startup.ConfigureServices` ，將設定的 `Kestrel` 區段載入 Kestrel 的設定中：</span><span class="sxs-lookup"><span data-stu-id="32db3-168">In `Startup.ConfigureServices`, load the `Kestrel` section of configuration into Kestrel's configuration:</span></span>
+  1. <span data-ttu-id="65f64-166">將的實例插入 `IConfiguration` 至 `Startup` 類別。</span><span class="sxs-lookup"><span data-stu-id="65f64-166">Inject an instance of `IConfiguration` into the `Startup` class.</span></span> <span data-ttu-id="65f64-167">下列範例假設將插入的設定指派給 `Configuration` 屬性。</span><span class="sxs-lookup"><span data-stu-id="65f64-167">The following example assumes that the injected configuration is assigned to the `Configuration` property.</span></span>
+  2. <span data-ttu-id="65f64-168">在中 `Startup.ConfigureServices` ，將 `Kestrel` configuration 區段載入 Kestrel 的設定：</span><span class="sxs-lookup"><span data-stu-id="65f64-168">In `Startup.ConfigureServices`, load the `Kestrel` section of configuration into Kestrel's configuration:</span></span>
 
      ```csharp
      using Microsoft.Extensions.Configuration
@@ -175,9 +176,9 @@ using Microsoft.AspNetCore.Server.Kestrel.Core;
      }
      ```
 
-* <span data-ttu-id="32db3-169">建立主機時設定 Kestrel：</span><span class="sxs-lookup"><span data-stu-id="32db3-169">Configure Kestrel when building the host:</span></span>
+* <span data-ttu-id="65f64-169">設定 Kestrel 建立主機時：</span><span class="sxs-lookup"><span data-stu-id="65f64-169">Configure Kestrel when building the host:</span></span>
 
-  <span data-ttu-id="32db3-170">在*Program.cs*中，將設定的 `Kestrel` 區段載入 Kestrel 的設定中：</span><span class="sxs-lookup"><span data-stu-id="32db3-170">In *Program.cs*, load the `Kestrel` section of configuration into Kestrel's configuration:</span></span>
+  <span data-ttu-id="65f64-170">在 *Program.cs*中，將 `Kestrel` Configuration 區段載入 Kestrel 的設定中：</span><span class="sxs-lookup"><span data-stu-id="65f64-170">In *Program.cs*, load the `Kestrel` section of configuration into Kestrel's configuration:</span></span>
 
   ```csharp
   // using Microsoft.Extensions.DependencyInjection;
@@ -195,90 +196,90 @@ using Microsoft.AspNetCore.Server.Kestrel.Core;
           });
   ```
 
-<span data-ttu-id="32db3-171">上述兩種方法都適用于任何設定[提供者](xref:fundamentals/configuration/index)。</span><span class="sxs-lookup"><span data-stu-id="32db3-171">Both of the preceding approaches work with any [configuration provider](xref:fundamentals/configuration/index).</span></span>
+<span data-ttu-id="65f64-171">上述兩種方法都可搭配任何設定 [提供者](xref:fundamentals/configuration/index)使用。</span><span class="sxs-lookup"><span data-stu-id="65f64-171">Both of the preceding approaches work with any [configuration provider](xref:fundamentals/configuration/index).</span></span>
 
-### <a name="keep-alive-timeout"></a><span data-ttu-id="32db3-172">Keep-alive 逾時</span><span class="sxs-lookup"><span data-stu-id="32db3-172">Keep-alive timeout</span></span>
+### <a name="keep-alive-timeout"></a><span data-ttu-id="65f64-172">Keep-alive 逾時</span><span class="sxs-lookup"><span data-stu-id="65f64-172">Keep-alive timeout</span></span>
 
 <xref:Microsoft.AspNetCore.Server.Kestrel.Core.KestrelServerLimits.KeepAliveTimeout>
 
-<span data-ttu-id="32db3-173">取得或設定 [Keep-alive 逾時](https://tools.ietf.org/html/rfc7230#section-6.5) \(英文\)。</span><span class="sxs-lookup"><span data-stu-id="32db3-173">Gets or sets the [keep-alive timeout](https://tools.ietf.org/html/rfc7230#section-6.5).</span></span> <span data-ttu-id="32db3-174">預設為 2 分鐘。</span><span class="sxs-lookup"><span data-stu-id="32db3-174">Defaults to 2 minutes.</span></span>
+<span data-ttu-id="65f64-173">取得或設定 [Keep-alive 逾時](https://tools.ietf.org/html/rfc7230#section-6.5) \(英文\)。</span><span class="sxs-lookup"><span data-stu-id="65f64-173">Gets or sets the [keep-alive timeout](https://tools.ietf.org/html/rfc7230#section-6.5).</span></span> <span data-ttu-id="65f64-174">預設為 2 分鐘。</span><span class="sxs-lookup"><span data-stu-id="65f64-174">Defaults to 2 minutes.</span></span>
 
 [!code-csharp[](kestrel/samples/3.x/KestrelSample/Program.cs?name=snippet_Limits&highlight=19-20)]
 
-### <a name="maximum-client-connections"></a><span data-ttu-id="32db3-175">用戶端連線數目上限</span><span class="sxs-lookup"><span data-stu-id="32db3-175">Maximum client connections</span></span>
+### <a name="maximum-client-connections"></a><span data-ttu-id="65f64-175">用戶端連線數目上限</span><span class="sxs-lookup"><span data-stu-id="65f64-175">Maximum client connections</span></span>
 
 <xref:Microsoft.AspNetCore.Server.Kestrel.Core.KestrelServerLimits.MaxConcurrentConnections>
 <xref:Microsoft.AspNetCore.Server.Kestrel.Core.KestrelServerLimits.MaxConcurrentUpgradedConnections>
 
-<span data-ttu-id="32db3-176">可以使用下列程式碼，針對整個應用程式設定同時開啟的 TCP 連線數目上限：</span><span class="sxs-lookup"><span data-stu-id="32db3-176">The maximum number of concurrent open TCP connections can be set for the entire app with the following code:</span></span>
+<span data-ttu-id="65f64-176">可以使用下列程式碼，針對整個應用程式設定同時開啟的 TCP 連線數目上限：</span><span class="sxs-lookup"><span data-stu-id="65f64-176">The maximum number of concurrent open TCP connections can be set for the entire app with the following code:</span></span>
 
 [!code-csharp[](kestrel/samples/3.x/KestrelSample/Program.cs?name=snippet_Limits&highlight=3)]
 
-<span data-ttu-id="32db3-177">已經從 HTTP 或 HTTPS 升級為另一個通訊協定 (例如，在 WebSocket 要求中) 的連線，有其個別限制。</span><span class="sxs-lookup"><span data-stu-id="32db3-177">There's a separate limit for connections that have been upgraded from HTTP or HTTPS to another protocol (for example, on a WebSockets request).</span></span> <span data-ttu-id="32db3-178">升級連線之後，它不會納入 `MaxConcurrentConnections` 限制。</span><span class="sxs-lookup"><span data-stu-id="32db3-178">After a connection is upgraded, it isn't counted against the `MaxConcurrentConnections` limit.</span></span>
+<span data-ttu-id="65f64-177">已經從 HTTP 或 HTTPS 升級為另一個通訊協定 (例如，在 WebSocket 要求中) 的連線，有其個別限制。</span><span class="sxs-lookup"><span data-stu-id="65f64-177">There's a separate limit for connections that have been upgraded from HTTP or HTTPS to another protocol (for example, on a WebSockets request).</span></span> <span data-ttu-id="65f64-178">升級連線之後，它不會納入 `MaxConcurrentConnections` 限制。</span><span class="sxs-lookup"><span data-stu-id="65f64-178">After a connection is upgraded, it isn't counted against the `MaxConcurrentConnections` limit.</span></span>
 
 [!code-csharp[](kestrel/samples/3.x/KestrelSample/Program.cs?name=snippet_Limits&highlight=4)]
 
-<span data-ttu-id="32db3-179">連線數目上限預設為無限制 (null)。</span><span class="sxs-lookup"><span data-stu-id="32db3-179">The maximum number of connections is unlimited (null) by default.</span></span>
+<span data-ttu-id="65f64-179">連線數目上限預設為無限制 (null)。</span><span class="sxs-lookup"><span data-stu-id="65f64-179">The maximum number of connections is unlimited (null) by default.</span></span>
 
-### <a name="maximum-request-body-size"></a><span data-ttu-id="32db3-180">要求主體大小上限</span><span class="sxs-lookup"><span data-stu-id="32db3-180">Maximum request body size</span></span>
+### <a name="maximum-request-body-size"></a><span data-ttu-id="65f64-180">要求主體大小上限</span><span class="sxs-lookup"><span data-stu-id="65f64-180">Maximum request body size</span></span>
 
 <xref:Microsoft.AspNetCore.Server.Kestrel.Core.KestrelServerLimits.MaxRequestBodySize>
 
-<span data-ttu-id="32db3-181">預設的要求主體大小上限是 30,000,000 個位元組，大約 28.6 MB。</span><span class="sxs-lookup"><span data-stu-id="32db3-181">The default maximum request body size is 30,000,000 bytes, which is approximately 28.6 MB.</span></span>
+<span data-ttu-id="65f64-181">預設的要求主體大小上限是 30,000,000 個位元組，大約 28.6 MB。</span><span class="sxs-lookup"><span data-stu-id="65f64-181">The default maximum request body size is 30,000,000 bytes, which is approximately 28.6 MB.</span></span>
 
-<span data-ttu-id="32db3-182">若要覆寫 ASP.NET Core MVC 應用程式中的限制，建議的方式是在動作方法上使用 <xref:Microsoft.AspNetCore.Mvc.RequestSizeLimitAttribute>屬性：</span><span class="sxs-lookup"><span data-stu-id="32db3-182">The recommended approach to override the limit in an ASP.NET Core MVC app is to use the <xref:Microsoft.AspNetCore.Mvc.RequestSizeLimitAttribute> attribute on an action method:</span></span>
+<span data-ttu-id="65f64-182">若要覆寫 ASP.NET Core MVC 應用程式中的限制，建議的方式是在動作方法上使用 <xref:Microsoft.AspNetCore.Mvc.RequestSizeLimitAttribute>屬性：</span><span class="sxs-lookup"><span data-stu-id="65f64-182">The recommended approach to override the limit in an ASP.NET Core MVC app is to use the <xref:Microsoft.AspNetCore.Mvc.RequestSizeLimitAttribute> attribute on an action method:</span></span>
 
 ```csharp
 [RequestSizeLimit(100000000)]
 public IActionResult MyActionMethod()
 ```
 
-<span data-ttu-id="32db3-183">以下範例會示範如何設定應用程式、每個要求的條件約束：</span><span class="sxs-lookup"><span data-stu-id="32db3-183">Here's an example that shows how to configure the constraint for the app on every request:</span></span>
+<span data-ttu-id="65f64-183">以下範例會示範如何設定應用程式、每個要求的條件約束：</span><span class="sxs-lookup"><span data-stu-id="65f64-183">Here's an example that shows how to configure the constraint for the app on every request:</span></span>
 
 [!code-csharp[](kestrel/samples/3.x/KestrelSample/Program.cs?name=snippet_Limits&highlight=5)]
 
-<span data-ttu-id="32db3-184">覆寫中介軟體中特定要求的設定：</span><span class="sxs-lookup"><span data-stu-id="32db3-184">Override the setting on a specific request in middleware:</span></span>
+<span data-ttu-id="65f64-184">覆寫中介軟體中特定要求的設定：</span><span class="sxs-lookup"><span data-stu-id="65f64-184">Override the setting on a specific request in middleware:</span></span>
 
 [!code-csharp[](kestrel/samples/3.x/KestrelSample/Startup.cs?name=snippet_Limits&highlight=3-4)]
 
-<span data-ttu-id="32db3-185">如果應用程式在開始讀取要求之後，設定要求的限制，就會擲回例外狀況（exception）。</span><span class="sxs-lookup"><span data-stu-id="32db3-185">An exception is thrown if the app configures the limit on a request after the app has started to read the request.</span></span> <span data-ttu-id="32db3-186">有一個 `IsReadOnly` 屬性會指出 `MaxRequestBodySize` 屬性處於唯讀狀態，這表示要設定限制已經太遲。</span><span class="sxs-lookup"><span data-stu-id="32db3-186">There's an `IsReadOnly` property that indicates if the `MaxRequestBodySize` property is in read-only state, meaning it's too late to configure the limit.</span></span>
+<span data-ttu-id="65f64-185">如果應用程式在應用程式開始讀取要求之後設定要求的限制，則會擲回例外狀況。</span><span class="sxs-lookup"><span data-stu-id="65f64-185">An exception is thrown if the app configures the limit on a request after the app has started to read the request.</span></span> <span data-ttu-id="65f64-186">有一個 `IsReadOnly` 屬性會指出 `MaxRequestBodySize` 屬性處於唯讀狀態，這表示要設定限制已經太遲。</span><span class="sxs-lookup"><span data-stu-id="65f64-186">There's an `IsReadOnly` property that indicates if the `MaxRequestBodySize` property is in read-only state, meaning it's too late to configure the limit.</span></span>
 
-<span data-ttu-id="32db3-187">當應用程式是在 [ASP.NET Core 模組](xref:host-and-deploy/aspnet-core-module)後方於[處理序外](xref:host-and-deploy/iis/index#out-of-process-hosting-model)執行時，Kestrel 的要求本文大小限制將會被停用，因為 IIS 已經設定限制。</span><span class="sxs-lookup"><span data-stu-id="32db3-187">When an app is run [out-of-process](xref:host-and-deploy/iis/index#out-of-process-hosting-model) behind the [ASP.NET Core Module](xref:host-and-deploy/aspnet-core-module), Kestrel's request body size limit is disabled because IIS already sets the limit.</span></span>
+<span data-ttu-id="65f64-187">當應用程式是在 [ASP.NET Core 模組](xref:host-and-deploy/aspnet-core-module)後方於[處理序外](xref:host-and-deploy/iis/index#out-of-process-hosting-model)執行時，Kestrel 的要求本文大小限制將會被停用，因為 IIS 已經設定限制。</span><span class="sxs-lookup"><span data-stu-id="65f64-187">When an app is run [out-of-process](xref:host-and-deploy/iis/index#out-of-process-hosting-model) behind the [ASP.NET Core Module](xref:host-and-deploy/aspnet-core-module), Kestrel's request body size limit is disabled because IIS already sets the limit.</span></span>
 
-### <a name="minimum-request-body-data-rate"></a><span data-ttu-id="32db3-188">要求主體資料速率下限</span><span class="sxs-lookup"><span data-stu-id="32db3-188">Minimum request body data rate</span></span>
+### <a name="minimum-request-body-data-rate"></a><span data-ttu-id="65f64-188">要求主體資料速率下限</span><span class="sxs-lookup"><span data-stu-id="65f64-188">Minimum request body data rate</span></span>
 
 <xref:Microsoft.AspNetCore.Server.Kestrel.Core.KestrelServerLimits.MinRequestBodyDataRate>
 <xref:Microsoft.AspNetCore.Server.Kestrel.Core.KestrelServerLimits.MinResponseDataRate>
 
-<span data-ttu-id="32db3-189">如果資料是以指定的速率 (位元組/秒) 傳入，Kestrel 會每秒檢查一次。</span><span class="sxs-lookup"><span data-stu-id="32db3-189">Kestrel checks every second if data is arriving at the specified rate in bytes/second.</span></span> <span data-ttu-id="32db3-190">如果速率低於最小值，則連接會超時。寬限期是指 Kestrel 提供用戶端將其傳送速率增加到最小值的時間量。在這段時間內不會檢查速率。</span><span class="sxs-lookup"><span data-stu-id="32db3-190">If the rate drops below the minimum, the connection is timed out. The grace period is the amount of time that Kestrel gives the client to increase its send rate up to the minimum; the rate isn't checked during that time.</span></span> <span data-ttu-id="32db3-191">寬限期可協助避免中斷連線，這是由於 TCP 緩慢啟動而一開始以低速傳送資料所造成。</span><span class="sxs-lookup"><span data-stu-id="32db3-191">The grace period helps avoid dropping connections that are initially sending data at a slow rate due to TCP slow-start.</span></span>
+<span data-ttu-id="65f64-189">如果資料是以指定的速率 (位元組/秒) 傳入，Kestrel 會每秒檢查一次。</span><span class="sxs-lookup"><span data-stu-id="65f64-189">Kestrel checks every second if data is arriving at the specified rate in bytes/second.</span></span> <span data-ttu-id="65f64-190">如果速率降到低於最小值，則連接會超時。寬限期是 Kestrel 讓用戶端提高其傳送速率的時間量（最小值）;在這段時間內不會檢查速率。</span><span class="sxs-lookup"><span data-stu-id="65f64-190">If the rate drops below the minimum, the connection is timed out. The grace period is the amount of time that Kestrel gives the client to increase its send rate up to the minimum; the rate isn't checked during that time.</span></span> <span data-ttu-id="65f64-191">寬限期可協助避免中斷連線，這是由於 TCP 緩慢啟動而一開始以低速傳送資料所造成。</span><span class="sxs-lookup"><span data-stu-id="65f64-191">The grace period helps avoid dropping connections that are initially sending data at a slow rate due to TCP slow-start.</span></span>
 
-<span data-ttu-id="32db3-192">預設速率下限為 240 個位元組/秒，寬限期為 5 秒。</span><span class="sxs-lookup"><span data-stu-id="32db3-192">The default minimum rate is 240 bytes/second with a 5 second grace period.</span></span>
+<span data-ttu-id="65f64-192">預設速率下限為 240 個位元組/秒，寬限期為 5 秒。</span><span class="sxs-lookup"><span data-stu-id="65f64-192">The default minimum rate is 240 bytes/second with a 5 second grace period.</span></span>
 
-<span data-ttu-id="32db3-193">速率下限也適用於回應。</span><span class="sxs-lookup"><span data-stu-id="32db3-193">A minimum rate also applies to the response.</span></span> <span data-ttu-id="32db3-194">除了屬性中具有 `RequestBody` 或 `Response` 以及介面名稱之外，用來設定要求限制和回應限制的程式碼都相同。</span><span class="sxs-lookup"><span data-stu-id="32db3-194">The code to set the request limit and the response limit is the same except for having `RequestBody` or `Response` in the property and interface names.</span></span>
+<span data-ttu-id="65f64-193">速率下限也適用於回應。</span><span class="sxs-lookup"><span data-stu-id="65f64-193">A minimum rate also applies to the response.</span></span> <span data-ttu-id="65f64-194">除了屬性中具有 `RequestBody` 或 `Response` 以及介面名稱之外，用來設定要求限制和回應限制的程式碼都相同。</span><span class="sxs-lookup"><span data-stu-id="65f64-194">The code to set the request limit and the response limit is the same except for having `RequestBody` or `Response` in the property and interface names.</span></span>
 
-<span data-ttu-id="32db3-195">以下範例示範如何在 *Program.cs* 中設定資料速率下限：</span><span class="sxs-lookup"><span data-stu-id="32db3-195">Here's an example that shows how to configure the minimum data rates in *Program.cs*:</span></span>
+<span data-ttu-id="65f64-195">以下範例示範如何在 *Program.cs* 中設定資料速率下限：</span><span class="sxs-lookup"><span data-stu-id="65f64-195">Here's an example that shows how to configure the minimum data rates in *Program.cs*:</span></span>
 
 [!code-csharp[](kestrel/samples/3.x/KestrelSample/Program.cs?name=snippet_Limits&highlight=6-11)]
 
-<span data-ttu-id="32db3-196">覆寫中介軟體中每個要求的最小速率限制：</span><span class="sxs-lookup"><span data-stu-id="32db3-196">Override the minimum rate limits per request in middleware:</span></span>
+<span data-ttu-id="65f64-196">覆寫中介軟體中每個要求的最小速率限制：</span><span class="sxs-lookup"><span data-stu-id="65f64-196">Override the minimum rate limits per request in middleware:</span></span>
 
 [!code-csharp[](kestrel/samples/3.x/KestrelSample/Startup.cs?name=snippet_Limits&highlight=6-21)]
 
-<span data-ttu-id="32db3-197">因為通訊協定對要求多工的支援，所以 HTTP/2 一般不支援以每一要求基礎修改速率限制，進而使先前範例中所參考的 <xref:Microsoft.AspNetCore.Server.Kestrel.Core.Features.IHttpMinResponseDataRateFeature> 不會出現在 HTTP/2 要求的 `HttpContext.Features` 中。</span><span class="sxs-lookup"><span data-stu-id="32db3-197">The <xref:Microsoft.AspNetCore.Server.Kestrel.Core.Features.IHttpMinResponseDataRateFeature> referenced in the prior sample is not present in `HttpContext.Features` for HTTP/2 requests because modifying rate limits on a per-request basis is generally not supported for HTTP/2 due to the protocol's support for request multiplexing.</span></span> <span data-ttu-id="32db3-198">不過，<xref:Microsoft.AspNetCore.Server.Kestrel.Core.Features.IHttpMinRequestBodyDataRateFeature> 仍存在 HTTP/2 要求的 `HttpContext.Features`您仍能透過將 `IHttpMinRequestBodyDataRateFeature.MinDataRate` 設定為 `null` (即使是針對 HTTP/2 要求)，以個別要求基礎來「完全停用」\*\* 讀取素率限制。</span><span class="sxs-lookup"><span data-stu-id="32db3-198">However, the <xref:Microsoft.AspNetCore.Server.Kestrel.Core.Features.IHttpMinRequestBodyDataRateFeature> is still present `HttpContext.Features` for HTTP/2 requests, because the read rate limit can still be *disabled entirely* on a per-request basis by setting `IHttpMinRequestBodyDataRateFeature.MinDataRate` to `null` even for an HTTP/2 request.</span></span> <span data-ttu-id="32db3-199">嘗試讀取 `IHttpMinRequestBodyDataRateFeature.MinDataRate` 或嘗試將它設定為 `null` 以外的值將會導致擲回 `NotSupportedException` (假設要求是 HTTP/2 要求)。</span><span class="sxs-lookup"><span data-stu-id="32db3-199">Attempting to read `IHttpMinRequestBodyDataRateFeature.MinDataRate` or attempting to set it to a value other than `null` will result in a `NotSupportedException` being thrown given an HTTP/2 request.</span></span>
+<span data-ttu-id="65f64-197">因為通訊協定對要求多工的支援，所以 HTTP/2 一般不支援以每一要求基礎修改速率限制，進而使先前範例中所參考的 <xref:Microsoft.AspNetCore.Server.Kestrel.Core.Features.IHttpMinResponseDataRateFeature> 不會出現在 HTTP/2 要求的 `HttpContext.Features` 中。</span><span class="sxs-lookup"><span data-stu-id="65f64-197">The <xref:Microsoft.AspNetCore.Server.Kestrel.Core.Features.IHttpMinResponseDataRateFeature> referenced in the prior sample is not present in `HttpContext.Features` for HTTP/2 requests because modifying rate limits on a per-request basis is generally not supported for HTTP/2 due to the protocol's support for request multiplexing.</span></span> <span data-ttu-id="65f64-198">不過，<xref:Microsoft.AspNetCore.Server.Kestrel.Core.Features.IHttpMinRequestBodyDataRateFeature> 仍存在 HTTP/2 要求的 `HttpContext.Features`您仍能透過將 `IHttpMinRequestBodyDataRateFeature.MinDataRate` 設定為 `null` (即使是針對 HTTP/2 要求)，以個別要求基礎來「完全停用」\*\* 讀取素率限制。</span><span class="sxs-lookup"><span data-stu-id="65f64-198">However, the <xref:Microsoft.AspNetCore.Server.Kestrel.Core.Features.IHttpMinRequestBodyDataRateFeature> is still present `HttpContext.Features` for HTTP/2 requests, because the read rate limit can still be *disabled entirely* on a per-request basis by setting `IHttpMinRequestBodyDataRateFeature.MinDataRate` to `null` even for an HTTP/2 request.</span></span> <span data-ttu-id="65f64-199">嘗試讀取 `IHttpMinRequestBodyDataRateFeature.MinDataRate` 或嘗試將它設定為 `null` 以外的值將會導致擲回 `NotSupportedException` (假設要求是 HTTP/2 要求)。</span><span class="sxs-lookup"><span data-stu-id="65f64-199">Attempting to read `IHttpMinRequestBodyDataRateFeature.MinDataRate` or attempting to set it to a value other than `null` will result in a `NotSupportedException` being thrown given an HTTP/2 request.</span></span>
 
-<span data-ttu-id="32db3-200">透過 `KestrelServerOptions.Limits` 設定的全伺服器速率限制皆仍套用至 HTTP/1.x 及 HTTP/2 連線。</span><span class="sxs-lookup"><span data-stu-id="32db3-200">Server-wide rate limits configured via `KestrelServerOptions.Limits` still apply to both HTTP/1.x and HTTP/2 connections.</span></span>
+<span data-ttu-id="65f64-200">透過 `KestrelServerOptions.Limits` 設定的全伺服器速率限制皆仍套用至 HTTP/1.x 及 HTTP/2 連線。</span><span class="sxs-lookup"><span data-stu-id="65f64-200">Server-wide rate limits configured via `KestrelServerOptions.Limits` still apply to both HTTP/1.x and HTTP/2 connections.</span></span>
 
-### <a name="request-headers-timeout"></a><span data-ttu-id="32db3-201">要求標頭逾時</span><span class="sxs-lookup"><span data-stu-id="32db3-201">Request headers timeout</span></span>
+### <a name="request-headers-timeout"></a><span data-ttu-id="65f64-201">要求標頭逾時</span><span class="sxs-lookup"><span data-stu-id="65f64-201">Request headers timeout</span></span>
 
 <xref:Microsoft.AspNetCore.Server.Kestrel.Core.KestrelServerLimits.RequestHeadersTimeout>
 
-<span data-ttu-id="32db3-202">取得或設定伺服器花費在接收要求標頭的時間上限。</span><span class="sxs-lookup"><span data-stu-id="32db3-202">Gets or sets the maximum amount of time the server spends receiving request headers.</span></span> <span data-ttu-id="32db3-203">預設為 30 秒。</span><span class="sxs-lookup"><span data-stu-id="32db3-203">Defaults to 30 seconds.</span></span>
+<span data-ttu-id="65f64-202">取得或設定伺服器花費在接收要求標頭的時間上限。</span><span class="sxs-lookup"><span data-stu-id="65f64-202">Gets or sets the maximum amount of time the server spends receiving request headers.</span></span> <span data-ttu-id="65f64-203">預設為 30 秒。</span><span class="sxs-lookup"><span data-stu-id="65f64-203">Defaults to 30 seconds.</span></span>
 
 [!code-csharp[](kestrel/samples/3.x/KestrelSample/Program.cs?name=snippet_Limits&highlight=21-22)]
 
-### <a name="maximum-streams-per-connection"></a><span data-ttu-id="32db3-204">每個連線的資料流數目上限</span><span class="sxs-lookup"><span data-stu-id="32db3-204">Maximum streams per connection</span></span>
+### <a name="maximum-streams-per-connection"></a><span data-ttu-id="65f64-204">每個連線的資料流數目上限</span><span class="sxs-lookup"><span data-stu-id="65f64-204">Maximum streams per connection</span></span>
 
-<span data-ttu-id="32db3-205">`Http2.MaxStreamsPerConnection` 會限制每個 HTTP/2 連線的同時要求資料流數目。</span><span class="sxs-lookup"><span data-stu-id="32db3-205">`Http2.MaxStreamsPerConnection` limits the number of concurrent request streams per HTTP/2 connection.</span></span> <span data-ttu-id="32db3-206">超出的資料流會被拒絕。</span><span class="sxs-lookup"><span data-stu-id="32db3-206">Excess streams are refused.</span></span>
+<span data-ttu-id="65f64-205">`Http2.MaxStreamsPerConnection` 會限制每個 HTTP/2 連線的同時要求資料流數目。</span><span class="sxs-lookup"><span data-stu-id="65f64-205">`Http2.MaxStreamsPerConnection` limits the number of concurrent request streams per HTTP/2 connection.</span></span> <span data-ttu-id="65f64-206">超出的資料流會被拒絕。</span><span class="sxs-lookup"><span data-stu-id="65f64-206">Excess streams are refused.</span></span>
 
 ```csharp
 webBuilder.ConfigureKestrel(serverOptions =>
@@ -287,11 +288,11 @@ webBuilder.ConfigureKestrel(serverOptions =>
 });
 ```
 
-<span data-ttu-id="32db3-207">預設值是 100。</span><span class="sxs-lookup"><span data-stu-id="32db3-207">The default value is 100.</span></span>
+<span data-ttu-id="65f64-207">預設值是 100。</span><span class="sxs-lookup"><span data-stu-id="65f64-207">The default value is 100.</span></span>
 
-### <a name="header-table-size"></a><span data-ttu-id="32db3-208">標頭表格大小</span><span class="sxs-lookup"><span data-stu-id="32db3-208">Header table size</span></span>
+### <a name="header-table-size"></a><span data-ttu-id="65f64-208">標頭表格大小</span><span class="sxs-lookup"><span data-stu-id="65f64-208">Header table size</span></span>
 
-<span data-ttu-id="32db3-209">HPACK 解碼器可解壓縮 HTTP/2 連線的 HTTP 標頭。</span><span class="sxs-lookup"><span data-stu-id="32db3-209">The HPACK decoder decompresses HTTP headers for HTTP/2 connections.</span></span> <span data-ttu-id="32db3-210">`Http2.HeaderTableSize` 會限制 HPACK 解碼器所使用的標頭壓縮表格大小。</span><span class="sxs-lookup"><span data-stu-id="32db3-210">`Http2.HeaderTableSize` limits the size of the header compression table that the HPACK decoder uses.</span></span> <span data-ttu-id="32db3-211">這個值是以八位元提供，而且必須大於零 (0)。</span><span class="sxs-lookup"><span data-stu-id="32db3-211">The value is provided in octets and must be greater than zero (0).</span></span>
+<span data-ttu-id="65f64-209">HPACK 解碼器可解壓縮 HTTP/2 連線的 HTTP 標頭。</span><span class="sxs-lookup"><span data-stu-id="65f64-209">The HPACK decoder decompresses HTTP headers for HTTP/2 connections.</span></span> <span data-ttu-id="65f64-210">`Http2.HeaderTableSize` 會限制 HPACK 解碼器所使用的標頭壓縮表格大小。</span><span class="sxs-lookup"><span data-stu-id="65f64-210">`Http2.HeaderTableSize` limits the size of the header compression table that the HPACK decoder uses.</span></span> <span data-ttu-id="65f64-211">這個值是以八位元提供，而且必須大於零 (0)。</span><span class="sxs-lookup"><span data-stu-id="65f64-211">The value is provided in octets and must be greater than zero (0).</span></span>
 
 ```csharp
 webBuilder.ConfigureKestrel(serverOptions =>
@@ -300,11 +301,11 @@ webBuilder.ConfigureKestrel(serverOptions =>
 });
 ```
 
-<span data-ttu-id="32db3-212">預設值為 4096。</span><span class="sxs-lookup"><span data-stu-id="32db3-212">The default value is 4096.</span></span>
+<span data-ttu-id="65f64-212">預設值為 4096。</span><span class="sxs-lookup"><span data-stu-id="65f64-212">The default value is 4096.</span></span>
 
-### <a name="maximum-frame-size"></a><span data-ttu-id="32db3-213">框架大小上限</span><span class="sxs-lookup"><span data-stu-id="32db3-213">Maximum frame size</span></span>
+### <a name="maximum-frame-size"></a><span data-ttu-id="65f64-213">框架大小上限</span><span class="sxs-lookup"><span data-stu-id="65f64-213">Maximum frame size</span></span>
 
-<span data-ttu-id="32db3-214">`Http2.MaxFrameSize`指出伺服器所接收或傳送之 HTTP/2 連接框架承載的允許大小上限。</span><span class="sxs-lookup"><span data-stu-id="32db3-214">`Http2.MaxFrameSize` indicates the maximum allowed size of an HTTP/2 connection frame payload received or sent by the server.</span></span> <span data-ttu-id="32db3-215">這個值是以八位元提供，而且必須介於 2^14 (16,384) 到 2^24-1 (16,777,215) 之間。</span><span class="sxs-lookup"><span data-stu-id="32db3-215">The value is provided in octets and must be between 2^14 (16,384) and 2^24-1 (16,777,215).</span></span>
+<span data-ttu-id="65f64-214">`Http2.MaxFrameSize` 指出伺服器接收或傳送之 HTTP/2 連接框架承載的允許大小上限。</span><span class="sxs-lookup"><span data-stu-id="65f64-214">`Http2.MaxFrameSize` indicates the maximum allowed size of an HTTP/2 connection frame payload received or sent by the server.</span></span> <span data-ttu-id="65f64-215">這個值是以八位元提供，而且必須介於 2^14 (16,384) 到 2^24-1 (16,777,215) 之間。</span><span class="sxs-lookup"><span data-stu-id="65f64-215">The value is provided in octets and must be between 2^14 (16,384) and 2^24-1 (16,777,215).</span></span>
 
 ```csharp
 webBuilder.ConfigureKestrel(serverOptions =>
@@ -313,11 +314,11 @@ webBuilder.ConfigureKestrel(serverOptions =>
 });
 ```
 
-<span data-ttu-id="32db3-216">預設值為 2^14 (16,384)。</span><span class="sxs-lookup"><span data-stu-id="32db3-216">The default value is 2^14 (16,384).</span></span>
+<span data-ttu-id="65f64-216">預設值為 2^14 (16,384)。</span><span class="sxs-lookup"><span data-stu-id="65f64-216">The default value is 2^14 (16,384).</span></span>
 
-### <a name="maximum-request-header-size"></a><span data-ttu-id="32db3-217">要求標頭大小上限</span><span class="sxs-lookup"><span data-stu-id="32db3-217">Maximum request header size</span></span>
+### <a name="maximum-request-header-size"></a><span data-ttu-id="65f64-217">要求標頭大小上限</span><span class="sxs-lookup"><span data-stu-id="65f64-217">Maximum request header size</span></span>
 
-<span data-ttu-id="32db3-218">`Http2.MaxRequestHeaderFieldSize` 以八位元表示要求標頭值的允許大小上限。</span><span class="sxs-lookup"><span data-stu-id="32db3-218">`Http2.MaxRequestHeaderFieldSize` indicates the maximum allowed size in octets of request header values.</span></span> <span data-ttu-id="32db3-219">這項限制適用于其壓縮和未壓縮標記法中的名稱和值。</span><span class="sxs-lookup"><span data-stu-id="32db3-219">This limit applies to both name and value in their compressed and uncompressed representations.</span></span> <span data-ttu-id="32db3-220">此值必須大於零 (0)。</span><span class="sxs-lookup"><span data-stu-id="32db3-220">The value must be greater than zero (0).</span></span>
+<span data-ttu-id="65f64-218">`Http2.MaxRequestHeaderFieldSize` 以八位元表示要求標頭值的允許大小上限。</span><span class="sxs-lookup"><span data-stu-id="65f64-218">`Http2.MaxRequestHeaderFieldSize` indicates the maximum allowed size in octets of request header values.</span></span> <span data-ttu-id="65f64-219">這項限制適用于其壓縮和未壓縮標記法中的名稱和值。</span><span class="sxs-lookup"><span data-stu-id="65f64-219">This limit applies to both name and value in their compressed and uncompressed representations.</span></span> <span data-ttu-id="65f64-220">此值必須大於零 (0)。</span><span class="sxs-lookup"><span data-stu-id="65f64-220">The value must be greater than zero (0).</span></span>
 
 ```csharp
 webBuilder.ConfigureKestrel(serverOptions =>
@@ -326,11 +327,11 @@ webBuilder.ConfigureKestrel(serverOptions =>
 });
 ```
 
-<span data-ttu-id="32db3-221">預設值為 8,192。</span><span class="sxs-lookup"><span data-stu-id="32db3-221">The default value is 8,192.</span></span>
+<span data-ttu-id="65f64-221">預設值為 8,192。</span><span class="sxs-lookup"><span data-stu-id="65f64-221">The default value is 8,192.</span></span>
 
-### <a name="initial-connection-window-size"></a><span data-ttu-id="32db3-222">初始連線視窗大小</span><span class="sxs-lookup"><span data-stu-id="32db3-222">Initial connection window size</span></span>
+### <a name="initial-connection-window-size"></a><span data-ttu-id="65f64-222">初始連線視窗大小</span><span class="sxs-lookup"><span data-stu-id="65f64-222">Initial connection window size</span></span>
 
-<span data-ttu-id="32db3-223">`Http2.InitialConnectionWindowSize` 會以位元組表示伺服器緩衝每個連線之所有要求 (資料流) 單次彙總的要求內容資料上限。</span><span class="sxs-lookup"><span data-stu-id="32db3-223">`Http2.InitialConnectionWindowSize` indicates the maximum request body data in bytes the server buffers at one time aggregated across all requests (streams) per connection.</span></span> <span data-ttu-id="32db3-224">要求也皆受 `Http2.InitialStreamWindowSize` 所限制。</span><span class="sxs-lookup"><span data-stu-id="32db3-224">Requests are also limited by `Http2.InitialStreamWindowSize`.</span></span> <span data-ttu-id="32db3-225">此值必須大於或等於 65,535，且小於 2^31 (2,147,483,648)。</span><span class="sxs-lookup"><span data-stu-id="32db3-225">The value must be greater than or equal to 65,535 and less than 2^31 (2,147,483,648).</span></span>
+<span data-ttu-id="65f64-223">`Http2.InitialConnectionWindowSize` 會以位元組表示伺服器緩衝每個連線之所有要求 (資料流) 單次彙總的要求內容資料上限。</span><span class="sxs-lookup"><span data-stu-id="65f64-223">`Http2.InitialConnectionWindowSize` indicates the maximum request body data in bytes the server buffers at one time aggregated across all requests (streams) per connection.</span></span> <span data-ttu-id="65f64-224">要求也皆受 `Http2.InitialStreamWindowSize` 所限制。</span><span class="sxs-lookup"><span data-stu-id="65f64-224">Requests are also limited by `Http2.InitialStreamWindowSize`.</span></span> <span data-ttu-id="65f64-225">此值必須大於或等於 65,535，且小於 2^31 (2,147,483,648)。</span><span class="sxs-lookup"><span data-stu-id="65f64-225">The value must be greater than or equal to 65,535 and less than 2^31 (2,147,483,648).</span></span>
 
 ```csharp
 webBuilder.ConfigureKestrel(serverOptions =>
@@ -339,11 +340,11 @@ webBuilder.ConfigureKestrel(serverOptions =>
 });
 ```
 
-<span data-ttu-id="32db3-226">預設值為 128 KB (131,072)。</span><span class="sxs-lookup"><span data-stu-id="32db3-226">The default value is 128 KB (131,072).</span></span>
+<span data-ttu-id="65f64-226">預設值為 128 KB (131,072)。</span><span class="sxs-lookup"><span data-stu-id="65f64-226">The default value is 128 KB (131,072).</span></span>
 
-### <a name="initial-stream-window-size"></a><span data-ttu-id="32db3-227">初始資料流視窗大小</span><span class="sxs-lookup"><span data-stu-id="32db3-227">Initial stream window size</span></span>
+### <a name="initial-stream-window-size"></a><span data-ttu-id="65f64-227">初始資料流視窗大小</span><span class="sxs-lookup"><span data-stu-id="65f64-227">Initial stream window size</span></span>
 
-<span data-ttu-id="32db3-228">`Http2.InitialStreamWindowSize` 會以位元組表示每個要求 (資料流) 單次伺服器緩衝的要求內容資料上限。</span><span class="sxs-lookup"><span data-stu-id="32db3-228">`Http2.InitialStreamWindowSize` indicates the maximum request body data in bytes the server buffers at one time per request (stream).</span></span> <span data-ttu-id="32db3-229">要求也皆受 `Http2.InitialConnectionWindowSize` 所限制。</span><span class="sxs-lookup"><span data-stu-id="32db3-229">Requests are also limited by `Http2.InitialConnectionWindowSize`.</span></span> <span data-ttu-id="32db3-230">此值必須大於或等於 65,535，且小於 2^31 (2,147,483,648)。</span><span class="sxs-lookup"><span data-stu-id="32db3-230">The value must be greater than or equal to 65,535 and less than 2^31 (2,147,483,648).</span></span>
+<span data-ttu-id="65f64-228">`Http2.InitialStreamWindowSize` 會以位元組表示每個要求 (資料流) 單次伺服器緩衝的要求內容資料上限。</span><span class="sxs-lookup"><span data-stu-id="65f64-228">`Http2.InitialStreamWindowSize` indicates the maximum request body data in bytes the server buffers at one time per request (stream).</span></span> <span data-ttu-id="65f64-229">要求也皆受 `Http2.InitialConnectionWindowSize` 所限制。</span><span class="sxs-lookup"><span data-stu-id="65f64-229">Requests are also limited by `Http2.InitialConnectionWindowSize`.</span></span> <span data-ttu-id="65f64-230">此值必須大於或等於 65,535，且小於 2^31 (2,147,483,648)。</span><span class="sxs-lookup"><span data-stu-id="65f64-230">The value must be greater than or equal to 65,535 and less than 2^31 (2,147,483,648).</span></span>
 
 ```csharp
 webBuilder.ConfigureKestrel(serverOptions =>
@@ -352,61 +353,61 @@ webBuilder.ConfigureKestrel(serverOptions =>
 });
 ```
 
-<span data-ttu-id="32db3-231">預設值為 96 KB (98,304)。</span><span class="sxs-lookup"><span data-stu-id="32db3-231">The default value is 96 KB (98,304).</span></span>
+<span data-ttu-id="65f64-231">預設值為 96 KB (98,304)。</span><span class="sxs-lookup"><span data-stu-id="65f64-231">The default value is 96 KB (98,304).</span></span>
 
-### <a name="synchronous-io"></a><span data-ttu-id="32db3-232">同步 I/O</span><span class="sxs-lookup"><span data-stu-id="32db3-232">Synchronous I/O</span></span>
+### <a name="synchronous-io"></a><span data-ttu-id="65f64-232">同步 I/O</span><span class="sxs-lookup"><span data-stu-id="65f64-232">Synchronous I/O</span></span>
 
-<span data-ttu-id="32db3-233"><xref:Microsoft.AspNetCore.Server.Kestrel.Core.KestrelServerOptions.AllowSynchronousIO>控制要求和回應是否允許同步的 i/o。</span><span class="sxs-lookup"><span data-stu-id="32db3-233"><xref:Microsoft.AspNetCore.Server.Kestrel.Core.KestrelServerOptions.AllowSynchronousIO> controls whether synchronous I/O is allowed for the request and response.</span></span> <span data-ttu-id="32db3-234">預設值是 `false`。</span><span class="sxs-lookup"><span data-stu-id="32db3-234">The default value is `false`.</span></span>
+<span data-ttu-id="65f64-233"><xref:Microsoft.AspNetCore.Server.Kestrel.Core.KestrelServerOptions.AllowSynchronousIO> 控制要求和回應是否允許同步 i/o。</span><span class="sxs-lookup"><span data-stu-id="65f64-233"><xref:Microsoft.AspNetCore.Server.Kestrel.Core.KestrelServerOptions.AllowSynchronousIO> controls whether synchronous I/O is allowed for the request and response.</span></span> <span data-ttu-id="65f64-234">預設值是 `false`。</span><span class="sxs-lookup"><span data-stu-id="65f64-234">The default value is `false`.</span></span>
 
 > [!WARNING]
-> <span data-ttu-id="32db3-235">大量封鎖同步 i/o 作業可能會導致執行緒集區耗盡，讓應用程式無回應。</span><span class="sxs-lookup"><span data-stu-id="32db3-235">A large number of blocking synchronous I/O operations can lead to thread pool starvation, which makes the app unresponsive.</span></span> <span data-ttu-id="32db3-236">只有 `AllowSynchronousIO` 在使用不支援非同步 i/o 的程式庫時才啟用。</span><span class="sxs-lookup"><span data-stu-id="32db3-236">Only enable `AllowSynchronousIO` when using a library that doesn't support asynchronous I/O.</span></span>
+> <span data-ttu-id="65f64-235">大量封鎖同步 i/o 作業可能會導致執行緒集區耗盡，而使應用程式無回應。</span><span class="sxs-lookup"><span data-stu-id="65f64-235">A large number of blocking synchronous I/O operations can lead to thread pool starvation, which makes the app unresponsive.</span></span> <span data-ttu-id="65f64-236">只有 `AllowSynchronousIO` 在使用不支援非同步 i/o 的程式庫時才啟用。</span><span class="sxs-lookup"><span data-stu-id="65f64-236">Only enable `AllowSynchronousIO` when using a library that doesn't support asynchronous I/O.</span></span>
 
-<span data-ttu-id="32db3-237">下列範例會啟用同步 i/o：</span><span class="sxs-lookup"><span data-stu-id="32db3-237">The following example enables synchronous I/O:</span></span>
+<span data-ttu-id="65f64-237">下列範例會啟用同步 i/o：</span><span class="sxs-lookup"><span data-stu-id="65f64-237">The following example enables synchronous I/O:</span></span>
 
 [!code-csharp[](kestrel/samples/3.x/KestrelSample/Program.cs?name=snippet_SyncIO)]
 
-<span data-ttu-id="32db3-238">如需其他 Kestrel 選項和限制的資訊，請參閱：</span><span class="sxs-lookup"><span data-stu-id="32db3-238">For information about other Kestrel options and limits, see:</span></span>
+<span data-ttu-id="65f64-238">如需其他 Kestrel 選項和限制的資訊，請參閱：</span><span class="sxs-lookup"><span data-stu-id="65f64-238">For information about other Kestrel options and limits, see:</span></span>
 
 * <xref:Microsoft.AspNetCore.Server.Kestrel.Core.KestrelServerOptions>
 * <xref:Microsoft.AspNetCore.Server.Kestrel.Core.KestrelServerLimits>
 * <xref:Microsoft.AspNetCore.Server.Kestrel.Core.ListenOptions>
 
-## <a name="endpoint-configuration"></a><span data-ttu-id="32db3-239">端點組態</span><span class="sxs-lookup"><span data-stu-id="32db3-239">Endpoint configuration</span></span>
+## <a name="endpoint-configuration"></a><span data-ttu-id="65f64-239">端點組態</span><span class="sxs-lookup"><span data-stu-id="65f64-239">Endpoint configuration</span></span>
 
-<span data-ttu-id="32db3-240">ASP.NET Core 預設會繫結至：</span><span class="sxs-lookup"><span data-stu-id="32db3-240">By default, ASP.NET Core binds to:</span></span>
+<span data-ttu-id="65f64-240">ASP.NET Core 預設會繫結至：</span><span class="sxs-lookup"><span data-stu-id="65f64-240">By default, ASP.NET Core binds to:</span></span>
 
 * `http://localhost:5000`
-* <span data-ttu-id="32db3-241">`https://localhost:5001` (當有本機開發憑證存在時)</span><span class="sxs-lookup"><span data-stu-id="32db3-241">`https://localhost:5001` (when a local development certificate is present)</span></span>
+* <span data-ttu-id="65f64-241">`https://localhost:5001` (當有本機開發憑證存在時)</span><span class="sxs-lookup"><span data-stu-id="65f64-241">`https://localhost:5001` (when a local development certificate is present)</span></span>
 
-<span data-ttu-id="32db3-242">使用以下各項指定 URL：</span><span class="sxs-lookup"><span data-stu-id="32db3-242">Specify URLs using the:</span></span>
+<span data-ttu-id="65f64-242">使用以下各項指定 URL：</span><span class="sxs-lookup"><span data-stu-id="65f64-242">Specify URLs using the:</span></span>
 
-* <span data-ttu-id="32db3-243">`ASPNETCORE_URLS` 環境變數。</span><span class="sxs-lookup"><span data-stu-id="32db3-243">`ASPNETCORE_URLS` environment variable.</span></span>
-* <span data-ttu-id="32db3-244">`--urls` 命令列引數。</span><span class="sxs-lookup"><span data-stu-id="32db3-244">`--urls` command-line argument.</span></span>
-* <span data-ttu-id="32db3-245">`urls` 主機組態索引鍵。</span><span class="sxs-lookup"><span data-stu-id="32db3-245">`urls` host configuration key.</span></span>
-* <span data-ttu-id="32db3-246">`UseUrls` 擴充方法。</span><span class="sxs-lookup"><span data-stu-id="32db3-246">`UseUrls` extension method.</span></span>
+* <span data-ttu-id="65f64-243">`ASPNETCORE_URLS` 環境變數。</span><span class="sxs-lookup"><span data-stu-id="65f64-243">`ASPNETCORE_URLS` environment variable.</span></span>
+* <span data-ttu-id="65f64-244">`--urls` 命令列引數。</span><span class="sxs-lookup"><span data-stu-id="65f64-244">`--urls` command-line argument.</span></span>
+* <span data-ttu-id="65f64-245">`urls` 主機組態索引鍵。</span><span class="sxs-lookup"><span data-stu-id="65f64-245">`urls` host configuration key.</span></span>
+* <span data-ttu-id="65f64-246">`UseUrls` 擴充方法。</span><span class="sxs-lookup"><span data-stu-id="65f64-246">`UseUrls` extension method.</span></span>
 
-<span data-ttu-id="32db3-247">使用這些方法提供的值可以是一或多個 HTTP 和 HTTPS 端點 (如果有預設憑證可用則為 HTTPS)。</span><span class="sxs-lookup"><span data-stu-id="32db3-247">The value provided using these approaches can be one or more HTTP and HTTPS endpoints (HTTPS if a default cert is available).</span></span> <span data-ttu-id="32db3-248">將值設定為以分號分隔的清單 (例如，`"Urls": "http://localhost:8000;http://localhost:8001"`)。</span><span class="sxs-lookup"><span data-stu-id="32db3-248">Configure the value as a semicolon-separated list (for example, `"Urls": "http://localhost:8000;http://localhost:8001"`).</span></span>
+<span data-ttu-id="65f64-247">使用這些方法提供的值可以是一或多個 HTTP 和 HTTPS 端點 (如果有預設憑證可用則為 HTTPS)。</span><span class="sxs-lookup"><span data-stu-id="65f64-247">The value provided using these approaches can be one or more HTTP and HTTPS endpoints (HTTPS if a default cert is available).</span></span> <span data-ttu-id="65f64-248">將值設定為以分號分隔的清單 (例如，`"Urls": "http://localhost:8000;http://localhost:8001"`)。</span><span class="sxs-lookup"><span data-stu-id="65f64-248">Configure the value as a semicolon-separated list (for example, `"Urls": "http://localhost:8000;http://localhost:8001"`).</span></span>
 
-<span data-ttu-id="32db3-249">如需有關這些方法的詳細資訊，請參閱[伺服器 URL](xref:fundamentals/host/web-host#server-urls) 和[覆寫設定](xref:fundamentals/host/web-host#override-configuration)。</span><span class="sxs-lookup"><span data-stu-id="32db3-249">For more information on these approaches, see [Server URLs](xref:fundamentals/host/web-host#server-urls) and [Override configuration](xref:fundamentals/host/web-host#override-configuration).</span></span>
+<span data-ttu-id="65f64-249">如需有關這些方法的詳細資訊，請參閱[伺服器 URL](xref:fundamentals/host/web-host#server-urls) 和[覆寫設定](xref:fundamentals/host/web-host#override-configuration)。</span><span class="sxs-lookup"><span data-stu-id="65f64-249">For more information on these approaches, see [Server URLs](xref:fundamentals/host/web-host#server-urls) and [Override configuration](xref:fundamentals/host/web-host#override-configuration).</span></span>
 
-<span data-ttu-id="32db3-250">開發憑證會建立於：</span><span class="sxs-lookup"><span data-stu-id="32db3-250">A development certificate is created:</span></span>
+<span data-ttu-id="65f64-250">開發憑證會建立於：</span><span class="sxs-lookup"><span data-stu-id="65f64-250">A development certificate is created:</span></span>
 
-* <span data-ttu-id="32db3-251">已安裝 [.NET Core SDK](/dotnet/core/sdk) 時。</span><span class="sxs-lookup"><span data-stu-id="32db3-251">When the [.NET Core SDK](/dotnet/core/sdk) is installed.</span></span>
-* <span data-ttu-id="32db3-252">[dev-certs 工具](xref:aspnetcore-2.1#https)用來建立憑證。</span><span class="sxs-lookup"><span data-stu-id="32db3-252">The [dev-certs tool](xref:aspnetcore-2.1#https) is used to create a certificate.</span></span>
+* <span data-ttu-id="65f64-251">已安裝 [.NET Core SDK](/dotnet/core/sdk) 時。</span><span class="sxs-lookup"><span data-stu-id="65f64-251">When the [.NET Core SDK](/dotnet/core/sdk) is installed.</span></span>
+* <span data-ttu-id="65f64-252">[dev-certs 工具](xref:aspnetcore-2.1#https)用來建立憑證。</span><span class="sxs-lookup"><span data-stu-id="65f64-252">The [dev-certs tool](xref:aspnetcore-2.1#https) is used to create a certificate.</span></span>
 
-<span data-ttu-id="32db3-253">有些瀏覽器需要授與明確的許可權，才能信任本機開發憑證。</span><span class="sxs-lookup"><span data-stu-id="32db3-253">Some browsers require granting explicit permission to trust the local development certificate.</span></span>
+<span data-ttu-id="65f64-253">某些瀏覽器需要授與明確的許可權，以信任本機開發憑證。</span><span class="sxs-lookup"><span data-stu-id="65f64-253">Some browsers require granting explicit permission to trust the local development certificate.</span></span>
 
-<span data-ttu-id="32db3-254">專案範本預設會將應用程式設定為在 HTTPS 上執行，並包含 HTTPS 重新導向[和 HSTS 支援](xref:security/enforcing-ssl)。</span><span class="sxs-lookup"><span data-stu-id="32db3-254">Project templates configure apps to run on HTTPS by default and include [HTTPS redirection and HSTS support](xref:security/enforcing-ssl).</span></span>
+<span data-ttu-id="65f64-254">專案範本預設會將應用程式設定為在 HTTPS 上執行，並包含 Https 重新導向 [和 HSTS 支援](xref:security/enforcing-ssl)。</span><span class="sxs-lookup"><span data-stu-id="65f64-254">Project templates configure apps to run on HTTPS by default and include [HTTPS redirection and HSTS support](xref:security/enforcing-ssl).</span></span>
 
-<span data-ttu-id="32db3-255">請在 <xref:Microsoft.AspNetCore.Server.Kestrel.Core.KestrelServerOptions> 上呼叫 <xref:Microsoft.AspNetCore.Server.Kestrel.Core.KestrelServerOptions.Listen*> 或 <xref:Microsoft.AspNetCore.Server.Kestrel.Core.KestrelServerOptions.ListenUnixSocket*> 方法，來為 Kestrel 設定 URL 首碼和連接埠。</span><span class="sxs-lookup"><span data-stu-id="32db3-255">Call <xref:Microsoft.AspNetCore.Server.Kestrel.Core.KestrelServerOptions.Listen*> or <xref:Microsoft.AspNetCore.Server.Kestrel.Core.KestrelServerOptions.ListenUnixSocket*> methods on <xref:Microsoft.AspNetCore.Server.Kestrel.Core.KestrelServerOptions> to configure URL prefixes and ports for Kestrel.</span></span>
+<span data-ttu-id="65f64-255">請在 <xref:Microsoft.AspNetCore.Server.Kestrel.Core.KestrelServerOptions> 上呼叫 <xref:Microsoft.AspNetCore.Server.Kestrel.Core.KestrelServerOptions.Listen*> 或 <xref:Microsoft.AspNetCore.Server.Kestrel.Core.KestrelServerOptions.ListenUnixSocket*> 方法，來為 Kestrel 設定 URL 首碼和連接埠。</span><span class="sxs-lookup"><span data-stu-id="65f64-255">Call <xref:Microsoft.AspNetCore.Server.Kestrel.Core.KestrelServerOptions.Listen*> or <xref:Microsoft.AspNetCore.Server.Kestrel.Core.KestrelServerOptions.ListenUnixSocket*> methods on <xref:Microsoft.AspNetCore.Server.Kestrel.Core.KestrelServerOptions> to configure URL prefixes and ports for Kestrel.</span></span>
 
-<span data-ttu-id="32db3-256">`UseUrls`、`--urls` 命令列引數、`urls` 主機組態索引鍵和 `ASPNETCORE_URLS` 環境變數同樣有效，但卻有本節稍後註明的限制 (針對 HTTPS 端點組態必須有預設憑證可用)。</span><span class="sxs-lookup"><span data-stu-id="32db3-256">`UseUrls`, the `--urls` command-line argument, `urls` host configuration key, and the `ASPNETCORE_URLS` environment variable also work but have the limitations noted later in this section (a default certificate must be available for HTTPS endpoint configuration).</span></span>
+<span data-ttu-id="65f64-256">`UseUrls`、`--urls` 命令列引數、`urls` 主機組態索引鍵和 `ASPNETCORE_URLS` 環境變數同樣有效，但卻有本節稍後註明的限制 (針對 HTTPS 端點組態必須有預設憑證可用)。</span><span class="sxs-lookup"><span data-stu-id="65f64-256">`UseUrls`, the `--urls` command-line argument, `urls` host configuration key, and the `ASPNETCORE_URLS` environment variable also work but have the limitations noted later in this section (a default certificate must be available for HTTPS endpoint configuration).</span></span>
 
-<span data-ttu-id="32db3-257">`KestrelServerOptions`配置</span><span class="sxs-lookup"><span data-stu-id="32db3-257">`KestrelServerOptions` configuration:</span></span>
+<span data-ttu-id="65f64-257">`KestrelServerOptions` 配置：</span><span class="sxs-lookup"><span data-stu-id="65f64-257">`KestrelServerOptions` configuration:</span></span>
 
-### <a name="configureendpointdefaultsactionlistenoptions"></a><span data-ttu-id="32db3-258">ConfigureEndpointDefaults (動作 \<ListenOptions>) </span><span class="sxs-lookup"><span data-stu-id="32db3-258">ConfigureEndpointDefaults(Action\<ListenOptions>)</span></span>
+### <a name="configureendpointdefaultsactionlistenoptions"></a><span data-ttu-id="65f64-258">ConfigureEndpointDefaults (動作 \<ListenOptions>) </span><span class="sxs-lookup"><span data-stu-id="65f64-258">ConfigureEndpointDefaults(Action\<ListenOptions>)</span></span>
 
-<span data-ttu-id="32db3-259">指定組態 `Action` 以針對每個指定端點執行。</span><span class="sxs-lookup"><span data-stu-id="32db3-259">Specifies a configuration `Action` to run for each specified endpoint.</span></span> <span data-ttu-id="32db3-260">呼叫 `ConfigureEndpointDefaults` 多次會以最後一個指定的 `Action` 取代之前的 `Action`。</span><span class="sxs-lookup"><span data-stu-id="32db3-260">Calling `ConfigureEndpointDefaults` multiple times replaces prior `Action`s with the last `Action` specified.</span></span>
+<span data-ttu-id="65f64-259">指定組態 `Action` 以針對每個指定端點執行。</span><span class="sxs-lookup"><span data-stu-id="65f64-259">Specifies a configuration `Action` to run for each specified endpoint.</span></span> <span data-ttu-id="65f64-260">呼叫 `ConfigureEndpointDefaults` 多次會以最後一個指定的 `Action` 取代之前的 `Action`。</span><span class="sxs-lookup"><span data-stu-id="65f64-260">Calling `ConfigureEndpointDefaults` multiple times replaces prior `Action`s with the last `Action` specified.</span></span>
 
 ```csharp
 webBuilder.ConfigureKestrel(serverOptions =>
@@ -419,11 +420,11 @@ webBuilder.ConfigureKestrel(serverOptions =>
 ```
 
 > [!NOTE]
-> <span data-ttu-id="32db3-261"><xref:Microsoft.AspNetCore.Server.Kestrel.Core.KestrelServerOptions.Listen*>**在呼叫之前**呼叫所建立 <xref:Microsoft.AspNetCore.Server.Kestrel.Core.KestrelServerOptions.ConfigureEndpointDefaults*> 的端點，將不會套用預設值。</span><span class="sxs-lookup"><span data-stu-id="32db3-261">Endpoints created by calling <xref:Microsoft.AspNetCore.Server.Kestrel.Core.KestrelServerOptions.Listen*> **before** calling <xref:Microsoft.AspNetCore.Server.Kestrel.Core.KestrelServerOptions.ConfigureEndpointDefaults*> won't have the defaults applied.</span></span>
+> <span data-ttu-id="65f64-261">在呼叫之前呼叫所建立的端點 <xref:Microsoft.AspNetCore.Server.Kestrel.Core.KestrelServerOptions.Listen*> **before** <xref:Microsoft.AspNetCore.Server.Kestrel.Core.KestrelServerOptions.ConfigureEndpointDefaults*> ，將不會套用預設值。</span><span class="sxs-lookup"><span data-stu-id="65f64-261">Endpoints created by calling <xref:Microsoft.AspNetCore.Server.Kestrel.Core.KestrelServerOptions.Listen*> **before** calling <xref:Microsoft.AspNetCore.Server.Kestrel.Core.KestrelServerOptions.ConfigureEndpointDefaults*> won't have the defaults applied.</span></span>
 
-### <a name="configurehttpsdefaultsactionhttpsconnectionadapteroptions"></a><span data-ttu-id="32db3-262">ConfigureHttpsDefaults (動作 \<HttpsConnectionAdapterOptions>) </span><span class="sxs-lookup"><span data-stu-id="32db3-262">ConfigureHttpsDefaults(Action\<HttpsConnectionAdapterOptions>)</span></span>
+### <a name="configurehttpsdefaultsactionhttpsconnectionadapteroptions"></a><span data-ttu-id="65f64-262">ConfigureHttpsDefaults (動作 \<HttpsConnectionAdapterOptions>) </span><span class="sxs-lookup"><span data-stu-id="65f64-262">ConfigureHttpsDefaults(Action\<HttpsConnectionAdapterOptions>)</span></span>
 
-<span data-ttu-id="32db3-263">指定組態 `Action` 以針對每個 HTTPS 端點執行。</span><span class="sxs-lookup"><span data-stu-id="32db3-263">Specifies a configuration `Action` to run for each HTTPS endpoint.</span></span> <span data-ttu-id="32db3-264">呼叫 `ConfigureHttpsDefaults` 多次會以最後一個指定的 `Action` 取代之前的 `Action`。</span><span class="sxs-lookup"><span data-stu-id="32db3-264">Calling `ConfigureHttpsDefaults` multiple times replaces prior `Action`s with the last `Action` specified.</span></span>
+<span data-ttu-id="65f64-263">指定組態 `Action` 以針對每個 HTTPS 端點執行。</span><span class="sxs-lookup"><span data-stu-id="65f64-263">Specifies a configuration `Action` to run for each HTTPS endpoint.</span></span> <span data-ttu-id="65f64-264">呼叫 `ConfigureHttpsDefaults` 多次會以最後一個指定的 `Action` 取代之前的 `Action`。</span><span class="sxs-lookup"><span data-stu-id="65f64-264">Calling `ConfigureHttpsDefaults` multiple times replaces prior `Action`s with the last `Action` specified.</span></span>
 
 ```csharp
 webBuilder.ConfigureKestrel(serverOptions =>
@@ -437,19 +438,19 @@ webBuilder.ConfigureKestrel(serverOptions =>
 ```
 
 > [!NOTE]
-> <span data-ttu-id="32db3-265"><xref:Microsoft.AspNetCore.Server.Kestrel.Core.KestrelServerOptions.Listen*>**在呼叫之前**呼叫所建立 <xref:Microsoft.AspNetCore.Server.Kestrel.Core.KestrelServerOptions.ConfigureHttpsDefaults*> 的端點，將不會套用預設值。</span><span class="sxs-lookup"><span data-stu-id="32db3-265">Endpoints created by calling <xref:Microsoft.AspNetCore.Server.Kestrel.Core.KestrelServerOptions.Listen*> **before** calling <xref:Microsoft.AspNetCore.Server.Kestrel.Core.KestrelServerOptions.ConfigureHttpsDefaults*> won't have the defaults applied.</span></span>
+> <span data-ttu-id="65f64-265">在呼叫之前呼叫所建立的端點 <xref:Microsoft.AspNetCore.Server.Kestrel.Core.KestrelServerOptions.Listen*> **before** <xref:Microsoft.AspNetCore.Server.Kestrel.Core.KestrelServerOptions.ConfigureHttpsDefaults*> ，將不會套用預設值。</span><span class="sxs-lookup"><span data-stu-id="65f64-265">Endpoints created by calling <xref:Microsoft.AspNetCore.Server.Kestrel.Core.KestrelServerOptions.Listen*> **before** calling <xref:Microsoft.AspNetCore.Server.Kestrel.Core.KestrelServerOptions.ConfigureHttpsDefaults*> won't have the defaults applied.</span></span>
 
-### <a name="configureiconfiguration"></a><span data-ttu-id="32db3-266">Configure(IConfiguration)</span><span class="sxs-lookup"><span data-stu-id="32db3-266">Configure(IConfiguration)</span></span>
+### <a name="configureiconfiguration"></a><span data-ttu-id="65f64-266">Configure(IConfiguration)</span><span class="sxs-lookup"><span data-stu-id="65f64-266">Configure(IConfiguration)</span></span>
 
-<span data-ttu-id="32db3-267">建立設定載入器來設定以 <xref:Microsoft.Extensions.Configuration.IConfiguration> 作為輸入的 Kestrel。</span><span class="sxs-lookup"><span data-stu-id="32db3-267">Creates a configuration loader for setting up Kestrel that takes an <xref:Microsoft.Extensions.Configuration.IConfiguration> as input.</span></span> <span data-ttu-id="32db3-268">組態的範圍必須限於 Kestrel 的組態區段。</span><span class="sxs-lookup"><span data-stu-id="32db3-268">The configuration must be scoped to the configuration section for Kestrel.</span></span>
+<span data-ttu-id="65f64-267">建立設定載入器來設定以 <xref:Microsoft.Extensions.Configuration.IConfiguration> 作為輸入的 Kestrel。</span><span class="sxs-lookup"><span data-stu-id="65f64-267">Creates a configuration loader for setting up Kestrel that takes an <xref:Microsoft.Extensions.Configuration.IConfiguration> as input.</span></span> <span data-ttu-id="65f64-268">組態的範圍必須限於 Kestrel 的組態區段。</span><span class="sxs-lookup"><span data-stu-id="65f64-268">The configuration must be scoped to the configuration section for Kestrel.</span></span>
 
-### <a name="listenoptionsusehttps"></a><span data-ttu-id="32db3-269">ListenOptions.UseHttps</span><span class="sxs-lookup"><span data-stu-id="32db3-269">ListenOptions.UseHttps</span></span>
+### <a name="listenoptionsusehttps"></a><span data-ttu-id="65f64-269">ListenOptions.UseHttps</span><span class="sxs-lookup"><span data-stu-id="65f64-269">ListenOptions.UseHttps</span></span>
 
-<span data-ttu-id="32db3-270">設定 Kestrel 使用 HTTPS。</span><span class="sxs-lookup"><span data-stu-id="32db3-270">Configure Kestrel to use HTTPS.</span></span>
+<span data-ttu-id="65f64-270">設定 Kestrel 使用 HTTPS。</span><span class="sxs-lookup"><span data-stu-id="65f64-270">Configure Kestrel to use HTTPS.</span></span>
 
-<span data-ttu-id="32db3-271">`ListenOptions.UseHttps` 延伸模組：</span><span class="sxs-lookup"><span data-stu-id="32db3-271">`ListenOptions.UseHttps` extensions:</span></span>
+<span data-ttu-id="65f64-271">`ListenOptions.UseHttps` 延伸模組：</span><span class="sxs-lookup"><span data-stu-id="65f64-271">`ListenOptions.UseHttps` extensions:</span></span>
 
-* <span data-ttu-id="32db3-272">`UseHttps`：將 Kestrel 設定為使用 HTTPS 搭配預設憑證。</span><span class="sxs-lookup"><span data-stu-id="32db3-272">`UseHttps`: Configure Kestrel to use HTTPS with the default certificate.</span></span> <span data-ttu-id="32db3-273">如果未設定預設憑證，會擲回例外狀況。</span><span class="sxs-lookup"><span data-stu-id="32db3-273">Throws an exception if no default certificate is configured.</span></span>
+* <span data-ttu-id="65f64-272">`UseHttps`：設定 Kestrel 以搭配預設憑證使用 HTTPS。</span><span class="sxs-lookup"><span data-stu-id="65f64-272">`UseHttps`: Configure Kestrel to use HTTPS with the default certificate.</span></span> <span data-ttu-id="65f64-273">如果未設定預設憑證，會擲回例外狀況。</span><span class="sxs-lookup"><span data-stu-id="65f64-273">Throws an exception if no default certificate is configured.</span></span>
 * `UseHttps(string fileName)`
 * `UseHttps(string fileName, string password)`
 * `UseHttps(string fileName, string password, Action<HttpsConnectionAdapterOptions> configureOptions)`
@@ -461,39 +462,39 @@ webBuilder.ConfigureKestrel(serverOptions =>
 * `UseHttps(X509Certificate2 serverCertificate, Action<HttpsConnectionAdapterOptions> configureOptions)`
 * `UseHttps(Action<HttpsConnectionAdapterOptions> configureOptions)`
 
-<span data-ttu-id="32db3-274">`ListenOptions.UseHttps` 參數：</span><span class="sxs-lookup"><span data-stu-id="32db3-274">`ListenOptions.UseHttps` parameters:</span></span>
+<span data-ttu-id="65f64-274">`ListenOptions.UseHttps` 參數：</span><span class="sxs-lookup"><span data-stu-id="65f64-274">`ListenOptions.UseHttps` parameters:</span></span>
 
-* <span data-ttu-id="32db3-275">`filename` 是憑證檔案的路徑和檔案名稱，它相對於包含應用程式內容檔案的目錄。</span><span class="sxs-lookup"><span data-stu-id="32db3-275">`filename` is the path and file name of a certificate file, relative to the directory that contains the app's content files.</span></span>
-* <span data-ttu-id="32db3-276">`password` 是存取 X.509 憑證資料所需的密碼。</span><span class="sxs-lookup"><span data-stu-id="32db3-276">`password` is the password required to access the X.509 certificate data.</span></span>
-* <span data-ttu-id="32db3-277">`configureOptions` 是設定 `HttpsConnectionAdapterOptions` 的 `Action`。</span><span class="sxs-lookup"><span data-stu-id="32db3-277">`configureOptions` is an `Action` to configure the `HttpsConnectionAdapterOptions`.</span></span> <span data-ttu-id="32db3-278">傳回 `ListenOptions`。</span><span class="sxs-lookup"><span data-stu-id="32db3-278">Returns the `ListenOptions`.</span></span>
-* <span data-ttu-id="32db3-279">`storeName` 是要從中載入憑證的憑證存放區。</span><span class="sxs-lookup"><span data-stu-id="32db3-279">`storeName` is the certificate store from which to load the certificate.</span></span>
-* <span data-ttu-id="32db3-280">`subject` 是憑證的主體名稱。</span><span class="sxs-lookup"><span data-stu-id="32db3-280">`subject` is the subject name for the certificate.</span></span>
-* <span data-ttu-id="32db3-281">`allowInvalid` 表示是否應該考慮無效的憑證，例如自我簽署憑證。</span><span class="sxs-lookup"><span data-stu-id="32db3-281">`allowInvalid` indicates if invalid certificates should be considered, such as self-signed certificates.</span></span>
-* <span data-ttu-id="32db3-282">`location` 是要從中載入憑證的存放區位置。</span><span class="sxs-lookup"><span data-stu-id="32db3-282">`location` is the store location to load the certificate from.</span></span>
-* <span data-ttu-id="32db3-283">`serverCertificate` 是 X.509 憑證。</span><span class="sxs-lookup"><span data-stu-id="32db3-283">`serverCertificate` is the X.509 certificate.</span></span>
+* <span data-ttu-id="65f64-275">`filename` 是憑證檔案的路徑和檔案名稱，它相對於包含應用程式內容檔案的目錄。</span><span class="sxs-lookup"><span data-stu-id="65f64-275">`filename` is the path and file name of a certificate file, relative to the directory that contains the app's content files.</span></span>
+* <span data-ttu-id="65f64-276">`password` 是存取 X.509 憑證資料所需的密碼。</span><span class="sxs-lookup"><span data-stu-id="65f64-276">`password` is the password required to access the X.509 certificate data.</span></span>
+* <span data-ttu-id="65f64-277">`configureOptions` 是設定 `HttpsConnectionAdapterOptions` 的 `Action`。</span><span class="sxs-lookup"><span data-stu-id="65f64-277">`configureOptions` is an `Action` to configure the `HttpsConnectionAdapterOptions`.</span></span> <span data-ttu-id="65f64-278">傳回 `ListenOptions`。</span><span class="sxs-lookup"><span data-stu-id="65f64-278">Returns the `ListenOptions`.</span></span>
+* <span data-ttu-id="65f64-279">`storeName` 是要從中載入憑證的憑證存放區。</span><span class="sxs-lookup"><span data-stu-id="65f64-279">`storeName` is the certificate store from which to load the certificate.</span></span>
+* <span data-ttu-id="65f64-280">`subject` 是憑證的主體名稱。</span><span class="sxs-lookup"><span data-stu-id="65f64-280">`subject` is the subject name for the certificate.</span></span>
+* <span data-ttu-id="65f64-281">`allowInvalid` 表示是否應該考慮無效的憑證，例如自我簽署憑證。</span><span class="sxs-lookup"><span data-stu-id="65f64-281">`allowInvalid` indicates if invalid certificates should be considered, such as self-signed certificates.</span></span>
+* <span data-ttu-id="65f64-282">`location` 是要從中載入憑證的存放區位置。</span><span class="sxs-lookup"><span data-stu-id="65f64-282">`location` is the store location to load the certificate from.</span></span>
+* <span data-ttu-id="65f64-283">`serverCertificate` 是 X.509 憑證。</span><span class="sxs-lookup"><span data-stu-id="65f64-283">`serverCertificate` is the X.509 certificate.</span></span>
 
-<span data-ttu-id="32db3-284">在生產環境中，必須明確設定 HTTPS。</span><span class="sxs-lookup"><span data-stu-id="32db3-284">In production, HTTPS must be explicitly configured.</span></span> <span data-ttu-id="32db3-285">至少必須提供預設憑證。</span><span class="sxs-lookup"><span data-stu-id="32db3-285">At a minimum, a default certificate must be provided.</span></span>
+<span data-ttu-id="65f64-284">在生產環境中，必須明確設定 HTTPS。</span><span class="sxs-lookup"><span data-stu-id="65f64-284">In production, HTTPS must be explicitly configured.</span></span> <span data-ttu-id="65f64-285">至少必須提供預設憑證。</span><span class="sxs-lookup"><span data-stu-id="65f64-285">At a minimum, a default certificate must be provided.</span></span>
 
-<span data-ttu-id="32db3-286">支援的組態描述如下：</span><span class="sxs-lookup"><span data-stu-id="32db3-286">Supported configurations described next:</span></span>
+<span data-ttu-id="65f64-286">支援的組態描述如下：</span><span class="sxs-lookup"><span data-stu-id="65f64-286">Supported configurations described next:</span></span>
 
-* <span data-ttu-id="32db3-287">無組態</span><span class="sxs-lookup"><span data-stu-id="32db3-287">No configuration</span></span>
-* <span data-ttu-id="32db3-288">從組態取代預設憑證</span><span class="sxs-lookup"><span data-stu-id="32db3-288">Replace the default certificate from configuration</span></span>
-* <span data-ttu-id="32db3-289">變更程式碼中的預設值</span><span class="sxs-lookup"><span data-stu-id="32db3-289">Change the defaults in code</span></span>
+* <span data-ttu-id="65f64-287">無組態</span><span class="sxs-lookup"><span data-stu-id="65f64-287">No configuration</span></span>
+* <span data-ttu-id="65f64-288">從組態取代預設憑證</span><span class="sxs-lookup"><span data-stu-id="65f64-288">Replace the default certificate from configuration</span></span>
+* <span data-ttu-id="65f64-289">變更程式碼中的預設值</span><span class="sxs-lookup"><span data-stu-id="65f64-289">Change the defaults in code</span></span>
 
-<span data-ttu-id="32db3-290">*無組態*</span><span class="sxs-lookup"><span data-stu-id="32db3-290">*No configuration*</span></span>
+<span data-ttu-id="65f64-290">*無組態*</span><span class="sxs-lookup"><span data-stu-id="65f64-290">*No configuration*</span></span>
 
-<span data-ttu-id="32db3-291">Kestrel 會接聽 `http://localhost:5000` 和 `https://localhost:5001` (如果預設憑證可用的話)。</span><span class="sxs-lookup"><span data-stu-id="32db3-291">Kestrel listens on `http://localhost:5000` and `https://localhost:5001` (if a default cert is available).</span></span>
+<span data-ttu-id="65f64-291">Kestrel 會接聽 `http://localhost:5000` 和 `https://localhost:5001` (如果預設憑證可用的話)。</span><span class="sxs-lookup"><span data-stu-id="65f64-291">Kestrel listens on `http://localhost:5000` and `https://localhost:5001` (if a default cert is available).</span></span>
 
 <a name="configuration"></a>
 
-<span data-ttu-id="32db3-292">*從組態取代預設憑證*</span><span class="sxs-lookup"><span data-stu-id="32db3-292">*Replace the default certificate from configuration*</span></span>
+<span data-ttu-id="65f64-292">*從組態取代預設憑證*</span><span class="sxs-lookup"><span data-stu-id="65f64-292">*Replace the default certificate from configuration*</span></span>
 
-<span data-ttu-id="32db3-293">`CreateDefaultBuilder` 預設會呼叫 `Configure(context.Configuration.GetSection("Kestrel"))` 以載入 Kestrel 設定。</span><span class="sxs-lookup"><span data-stu-id="32db3-293">`CreateDefaultBuilder` calls `Configure(context.Configuration.GetSection("Kestrel"))` by default to load Kestrel configuration.</span></span> <span data-ttu-id="32db3-294">Kestrel 可以使用預設的 HTTPS 應用程式設定組態結構描述。</span><span class="sxs-lookup"><span data-stu-id="32db3-294">A default HTTPS app settings configuration schema is available for Kestrel.</span></span> <span data-ttu-id="32db3-295">設定多個端點，包括 URL 和要使用的憑證－從磁碟上的檔案，或是從憑證存放區。</span><span class="sxs-lookup"><span data-stu-id="32db3-295">Configure multiple endpoints, including the URLs and the certificates to use, either from a file on disk or from a certificate store.</span></span>
+<span data-ttu-id="65f64-293">`CreateDefaultBuilder` 預設會呼叫 `Configure(context.Configuration.GetSection("Kestrel"))` 以載入 Kestrel 設定。</span><span class="sxs-lookup"><span data-stu-id="65f64-293">`CreateDefaultBuilder` calls `Configure(context.Configuration.GetSection("Kestrel"))` by default to load Kestrel configuration.</span></span> <span data-ttu-id="65f64-294">Kestrel 可以使用預設的 HTTPS 應用程式設定組態結構描述。</span><span class="sxs-lookup"><span data-stu-id="65f64-294">A default HTTPS app settings configuration schema is available for Kestrel.</span></span> <span data-ttu-id="65f64-295">設定多個端點，包括 URL 和要使用的憑證－從磁碟上的檔案，或是從憑證存放區。</span><span class="sxs-lookup"><span data-stu-id="65f64-295">Configure multiple endpoints, including the URLs and the certificates to use, either from a file on disk or from a certificate store.</span></span>
 
-<span data-ttu-id="32db3-296">在下列 *appsettings.json* 範例中：</span><span class="sxs-lookup"><span data-stu-id="32db3-296">In the following *appsettings.json* example:</span></span>
+<span data-ttu-id="65f64-296">在下列 *appsettings.json* 範例中：</span><span class="sxs-lookup"><span data-stu-id="65f64-296">In the following *appsettings.json* example:</span></span>
 
-* <span data-ttu-id="32db3-297">將 **AllowInvalid** 設定為 `true`，允許使用無效的憑證 (例如，自我簽署憑證)。</span><span class="sxs-lookup"><span data-stu-id="32db3-297">Set **AllowInvalid** to `true` to permit the use of invalid certificates (for example, self-signed certificates).</span></span>
-* <span data-ttu-id="32db3-298">任何未指定憑證 (接下來範例中的 **HttpsDefaultCert**) 的 HTTPS 端點會回復為 [憑證]**[預設]** > \*\*\*\* 下定義的憑證或開發憑證。</span><span class="sxs-lookup"><span data-stu-id="32db3-298">Any HTTPS endpoint that doesn't specify a certificate (**HttpsDefaultCert** in the example that follows) falls back to the cert defined under **Certificates** > **Default** or the development certificate.</span></span>
+* <span data-ttu-id="65f64-297">將 **AllowInvalid** 設定為 `true`，允許使用無效的憑證 (例如，自我簽署憑證)。</span><span class="sxs-lookup"><span data-stu-id="65f64-297">Set **AllowInvalid** to `true` to permit the use of invalid certificates (for example, self-signed certificates).</span></span>
+* <span data-ttu-id="65f64-298">任何未指定憑證 (接下來範例中的 **HttpsDefaultCert**) 的 HTTPS 端點會回復為 [憑證]**[預設]** > \*\*\*\* 下定義的憑證或開發憑證。</span><span class="sxs-lookup"><span data-stu-id="65f64-298">Any HTTPS endpoint that doesn't specify a certificate (**HttpsDefaultCert** in the example that follows) falls back to the cert defined under **Certificates** > **Default** or the development certificate.</span></span>
 
 ```json
 {
@@ -539,7 +540,7 @@ webBuilder.ConfigureKestrel(serverOptions =>
 }
 ```
 
-<span data-ttu-id="32db3-299">除了針對任何憑證節點使用 [路徑]\*\*\*\* 和 [密碼]\*\*\*\*，還可以使用憑證存放區欄位指定憑證。</span><span class="sxs-lookup"><span data-stu-id="32db3-299">An alternative to using **Path** and **Password** for any certificate node is to specify the certificate using certificate store fields.</span></span> <span data-ttu-id="32db3-300">例如，**憑證**  >  **預設**憑證可以指定為：</span><span class="sxs-lookup"><span data-stu-id="32db3-300">For example, the **Certificates** > **Default** certificate can be specified as:</span></span>
+<span data-ttu-id="65f64-299">除了針對任何憑證節點使用 [路徑]\*\*\*\* 和 [密碼]\*\*\*\*，還可以使用憑證存放區欄位指定憑證。</span><span class="sxs-lookup"><span data-stu-id="65f64-299">An alternative to using **Path** and **Password** for any certificate node is to specify the certificate using certificate store fields.</span></span> <span data-ttu-id="65f64-300">例如，您可以將**憑證**  >  **預設**憑證指定為：</span><span class="sxs-lookup"><span data-stu-id="65f64-300">For example, the **Certificates** > **Default** certificate can be specified as:</span></span>
 
 ```json
 "Default": {
@@ -550,15 +551,15 @@ webBuilder.ConfigureKestrel(serverOptions =>
 }
 ```
 
-<span data-ttu-id="32db3-301">結構描述附註：</span><span class="sxs-lookup"><span data-stu-id="32db3-301">Schema notes:</span></span>
+<span data-ttu-id="65f64-301">結構描述附註：</span><span class="sxs-lookup"><span data-stu-id="65f64-301">Schema notes:</span></span>
 
-* <span data-ttu-id="32db3-302">端點名稱不區分大小寫。</span><span class="sxs-lookup"><span data-stu-id="32db3-302">Endpoints names are case-insensitive.</span></span> <span data-ttu-id="32db3-303">例如，`HTTPS` 和 `Https` 都有效。</span><span class="sxs-lookup"><span data-stu-id="32db3-303">For example, `HTTPS` and `Https` are valid.</span></span>
-* <span data-ttu-id="32db3-304">`Url` 參數對每個端點而言都是必要的。</span><span class="sxs-lookup"><span data-stu-id="32db3-304">The `Url` parameter is required for each endpoint.</span></span> <span data-ttu-id="32db3-305">此參數的格式等同於最上層 `Urls` 組態參數，但是它限制為單一值。</span><span class="sxs-lookup"><span data-stu-id="32db3-305">The format for this parameter is the same as the top-level `Urls` configuration parameter except that it's limited to a single value.</span></span>
-* <span data-ttu-id="32db3-306">這些端點會取代最上層 `Urls` 組態中定義的端點，而不是新增至其中。</span><span class="sxs-lookup"><span data-stu-id="32db3-306">These endpoints replace those defined in the top-level `Urls` configuration rather than adding to them.</span></span> <span data-ttu-id="32db3-307">透過 `Listen` 在程式碼中定義的端點，會與組態區段中定義的端點累計。</span><span class="sxs-lookup"><span data-stu-id="32db3-307">Endpoints defined in code via `Listen` are cumulative with the endpoints defined in the configuration section.</span></span>
-* <span data-ttu-id="32db3-308">`Certificate` 區段是選擇性的。</span><span class="sxs-lookup"><span data-stu-id="32db3-308">The `Certificate` section is optional.</span></span> <span data-ttu-id="32db3-309">如果未指定 `Certificate` 區段，則會使用先前案例中所定義的預設值。</span><span class="sxs-lookup"><span data-stu-id="32db3-309">If the `Certificate` section isn't specified, the defaults defined in earlier scenarios are used.</span></span> <span data-ttu-id="32db3-310">如果沒有預設值可供使用，伺服器就會擲回例外狀況，且無法啟動。</span><span class="sxs-lookup"><span data-stu-id="32db3-310">If no defaults are available, the server throws an exception and fails to start.</span></span>
-* <span data-ttu-id="32db3-311">`Certificate`一節同時支援**路徑** &ndash; **密碼**和**主體** &ndash; **存放區**憑證。</span><span class="sxs-lookup"><span data-stu-id="32db3-311">The `Certificate` section supports both **Path**&ndash;**Password** and **Subject**&ndash;**Store** certificates.</span></span>
-* <span data-ttu-id="32db3-312">可以用這種方式定義任何數目的端點，只要它們不會導致連接埠衝突即可。</span><span class="sxs-lookup"><span data-stu-id="32db3-312">Any number of endpoints may be defined in this way so long as they don't cause port conflicts.</span></span>
-* <span data-ttu-id="32db3-313">`options.Configure(context.Configuration.GetSection("{SECTION}"))` 會傳回 `KestrelConfigurationLoader` 與 `.Endpoint(string name, listenOptions => { })` 方法，此方法可用來補充已設定的端點設定：</span><span class="sxs-lookup"><span data-stu-id="32db3-313">`options.Configure(context.Configuration.GetSection("{SECTION}"))` returns a `KestrelConfigurationLoader` with an `.Endpoint(string name, listenOptions => { })` method that can be used to supplement a configured endpoint's settings:</span></span>
+* <span data-ttu-id="65f64-302">端點名稱不區分大小寫。</span><span class="sxs-lookup"><span data-stu-id="65f64-302">Endpoints names are case-insensitive.</span></span> <span data-ttu-id="65f64-303">例如，`HTTPS` 和 `Https` 都有效。</span><span class="sxs-lookup"><span data-stu-id="65f64-303">For example, `HTTPS` and `Https` are valid.</span></span>
+* <span data-ttu-id="65f64-304">`Url` 參數對每個端點而言都是必要的。</span><span class="sxs-lookup"><span data-stu-id="65f64-304">The `Url` parameter is required for each endpoint.</span></span> <span data-ttu-id="65f64-305">此參數的格式等同於最上層 `Urls` 組態參數，但是它限制為單一值。</span><span class="sxs-lookup"><span data-stu-id="65f64-305">The format for this parameter is the same as the top-level `Urls` configuration parameter except that it's limited to a single value.</span></span>
+* <span data-ttu-id="65f64-306">這些端點會取代最上層 `Urls` 組態中定義的端點，而不是新增至其中。</span><span class="sxs-lookup"><span data-stu-id="65f64-306">These endpoints replace those defined in the top-level `Urls` configuration rather than adding to them.</span></span> <span data-ttu-id="65f64-307">透過 `Listen` 在程式碼中定義的端點，會與組態區段中定義的端點累計。</span><span class="sxs-lookup"><span data-stu-id="65f64-307">Endpoints defined in code via `Listen` are cumulative with the endpoints defined in the configuration section.</span></span>
+* <span data-ttu-id="65f64-308">`Certificate` 區段是選擇性的。</span><span class="sxs-lookup"><span data-stu-id="65f64-308">The `Certificate` section is optional.</span></span> <span data-ttu-id="65f64-309">如果未指定 `Certificate` 區段，則會使用先前案例中所定義的預設值。</span><span class="sxs-lookup"><span data-stu-id="65f64-309">If the `Certificate` section isn't specified, the defaults defined in earlier scenarios are used.</span></span> <span data-ttu-id="65f64-310">如果沒有預設值可供使用，伺服器就會擲回例外狀況，且無法啟動。</span><span class="sxs-lookup"><span data-stu-id="65f64-310">If no defaults are available, the server throws an exception and fails to start.</span></span>
+* <span data-ttu-id="65f64-311">`Certificate`區段同時支援**路徑** &ndash; **密碼**和**主體** &ndash; **存放區**憑證。</span><span class="sxs-lookup"><span data-stu-id="65f64-311">The `Certificate` section supports both **Path**&ndash;**Password** and **Subject**&ndash;**Store** certificates.</span></span>
+* <span data-ttu-id="65f64-312">可以用這種方式定義任何數目的端點，只要它們不會導致連接埠衝突即可。</span><span class="sxs-lookup"><span data-stu-id="65f64-312">Any number of endpoints may be defined in this way so long as they don't cause port conflicts.</span></span>
+* <span data-ttu-id="65f64-313">`options.Configure(context.Configuration.GetSection("{SECTION}"))` 會傳回 `KestrelConfigurationLoader` 與 `.Endpoint(string name, listenOptions => { })` 方法，此方法可用來補充已設定的端點設定：</span><span class="sxs-lookup"><span data-stu-id="65f64-313">`options.Configure(context.Configuration.GetSection("{SECTION}"))` returns a `KestrelConfigurationLoader` with an `.Endpoint(string name, listenOptions => { })` method that can be used to supplement a configured endpoint's settings:</span></span>
 
 ```csharp
 webBuilder.UseKestrel((context, serverOptions) =>
@@ -571,15 +572,15 @@ webBuilder.UseKestrel((context, serverOptions) =>
 });
 ```
 
-<span data-ttu-id="32db3-314">`KestrelServerOptions.ConfigurationLoader`可以直接存取，以繼續逐一查看現有的載入器，例如所提供的載入器 <xref:Microsoft.AspNetCore.WebHost.CreateDefaultBuilder*> 。</span><span class="sxs-lookup"><span data-stu-id="32db3-314">`KestrelServerOptions.ConfigurationLoader` can be directly accessed to continue iterating on the existing loader, such as the one provided by <xref:Microsoft.AspNetCore.WebHost.CreateDefaultBuilder*>.</span></span>
+<span data-ttu-id="65f64-314">`KestrelServerOptions.ConfigurationLoader` 可以直接存取，以繼續逐一查看現有的載入器，例如所提供的載入器 <xref:Microsoft.AspNetCore.WebHost.CreateDefaultBuilder*> 。</span><span class="sxs-lookup"><span data-stu-id="65f64-314">`KestrelServerOptions.ConfigurationLoader` can be directly accessed to continue iterating on the existing loader, such as the one provided by <xref:Microsoft.AspNetCore.WebHost.CreateDefaultBuilder*>.</span></span>
 
-* <span data-ttu-id="32db3-315">您可以在方法的選項中取得每個端點的設定區段， `Endpoint` 以便讀取自訂設定。</span><span class="sxs-lookup"><span data-stu-id="32db3-315">The configuration section for each endpoint is available on the options in the `Endpoint` method so that custom settings may be read.</span></span>
-* <span data-ttu-id="32db3-316">可以藉由使用另一個區段再次呼叫 `options.Configure(context.Configuration.GetSection("{SECTION}"))` 而載入多個組態。</span><span class="sxs-lookup"><span data-stu-id="32db3-316">Multiple configurations may be loaded by calling `options.Configure(context.Configuration.GetSection("{SECTION}"))` again with another section.</span></span> <span data-ttu-id="32db3-317">只會使用最後一個組態，除非在先前的執行個體上已明確呼叫 `Load`。</span><span class="sxs-lookup"><span data-stu-id="32db3-317">Only the last configuration is used, unless `Load` is explicitly called on prior instances.</span></span> <span data-ttu-id="32db3-318">中繼套件不會呼叫 `Load`，如此可能會取代其預設組態區段。</span><span class="sxs-lookup"><span data-stu-id="32db3-318">The metapackage doesn't call `Load` so that its default configuration section may be replaced.</span></span>
-* <span data-ttu-id="32db3-319">`KestrelConfigurationLoader` 會將來自 `KestrelServerOptions` 的 API 的 `Listen` 系列鏡像為 `Endpoint` 多載，所以可在相同的位置設定程式碼和設定端點。</span><span class="sxs-lookup"><span data-stu-id="32db3-319">`KestrelConfigurationLoader` mirrors the `Listen` family of APIs from `KestrelServerOptions` as `Endpoint` overloads, so code and config endpoints may be configured in the same place.</span></span> <span data-ttu-id="32db3-320">這些多載不使用名稱，並且只使用來自組態的預設組態。</span><span class="sxs-lookup"><span data-stu-id="32db3-320">These overloads don't use names and only consume default settings from configuration.</span></span>
+* <span data-ttu-id="65f64-315">您可以在方法的選項中使用每個端點的設定區段， `Endpoint` 以便讀取自訂設定。</span><span class="sxs-lookup"><span data-stu-id="65f64-315">The configuration section for each endpoint is available on the options in the `Endpoint` method so that custom settings may be read.</span></span>
+* <span data-ttu-id="65f64-316">可以藉由使用另一個區段再次呼叫 `options.Configure(context.Configuration.GetSection("{SECTION}"))` 而載入多個組態。</span><span class="sxs-lookup"><span data-stu-id="65f64-316">Multiple configurations may be loaded by calling `options.Configure(context.Configuration.GetSection("{SECTION}"))` again with another section.</span></span> <span data-ttu-id="65f64-317">只會使用最後一個組態，除非在先前的執行個體上已明確呼叫 `Load`。</span><span class="sxs-lookup"><span data-stu-id="65f64-317">Only the last configuration is used, unless `Load` is explicitly called on prior instances.</span></span> <span data-ttu-id="65f64-318">中繼套件不會呼叫 `Load`，如此可能會取代其預設組態區段。</span><span class="sxs-lookup"><span data-stu-id="65f64-318">The metapackage doesn't call `Load` so that its default configuration section may be replaced.</span></span>
+* <span data-ttu-id="65f64-319">`KestrelConfigurationLoader` 會將來自 `KestrelServerOptions` 的 API 的 `Listen` 系列鏡像為 `Endpoint` 多載，所以可在相同的位置設定程式碼和設定端點。</span><span class="sxs-lookup"><span data-stu-id="65f64-319">`KestrelConfigurationLoader` mirrors the `Listen` family of APIs from `KestrelServerOptions` as `Endpoint` overloads, so code and config endpoints may be configured in the same place.</span></span> <span data-ttu-id="65f64-320">這些多載不使用名稱，並且只使用來自組態的預設組態。</span><span class="sxs-lookup"><span data-stu-id="65f64-320">These overloads don't use names and only consume default settings from configuration.</span></span>
 
-<span data-ttu-id="32db3-321">*變更程式碼中的預設值*</span><span class="sxs-lookup"><span data-stu-id="32db3-321">*Change the defaults in code*</span></span>
+<span data-ttu-id="65f64-321">*變更程式碼中的預設值*</span><span class="sxs-lookup"><span data-stu-id="65f64-321">*Change the defaults in code*</span></span>
 
-<span data-ttu-id="32db3-322">`ConfigureEndpointDefaults` 和 `ConfigureHttpsDefaults` 可以用來變更 `ListenOptions` 和 `HttpsConnectionAdapterOptions` 的預設設定，包括覆寫先前案例中指定的預設憑證。</span><span class="sxs-lookup"><span data-stu-id="32db3-322">`ConfigureEndpointDefaults` and `ConfigureHttpsDefaults` can be used to change default settings for `ListenOptions` and `HttpsConnectionAdapterOptions`, including overriding the default certificate specified in the prior scenario.</span></span> <span data-ttu-id="32db3-323">`ConfigureEndpointDefaults` 和 `ConfigureHttpsDefaults` 應該在設定任何端點之前呼叫。</span><span class="sxs-lookup"><span data-stu-id="32db3-323">`ConfigureEndpointDefaults` and `ConfigureHttpsDefaults` should be called before any endpoints are configured.</span></span>
+<span data-ttu-id="65f64-322">`ConfigureEndpointDefaults` 和 `ConfigureHttpsDefaults` 可以用來變更 `ListenOptions` 和 `HttpsConnectionAdapterOptions` 的預設設定，包括覆寫先前案例中指定的預設憑證。</span><span class="sxs-lookup"><span data-stu-id="65f64-322">`ConfigureEndpointDefaults` and `ConfigureHttpsDefaults` can be used to change default settings for `ListenOptions` and `HttpsConnectionAdapterOptions`, including overriding the default certificate specified in the prior scenario.</span></span> <span data-ttu-id="65f64-323">`ConfigureEndpointDefaults` 和 `ConfigureHttpsDefaults` 應該在設定任何端點之前呼叫。</span><span class="sxs-lookup"><span data-stu-id="65f64-323">`ConfigureEndpointDefaults` and `ConfigureHttpsDefaults` should be called before any endpoints are configured.</span></span>
 
 ```csharp
 webBuilder.ConfigureKestrel(serverOptions =>
@@ -596,16 +597,16 @@ webBuilder.ConfigureKestrel(serverOptions =>
 });
 ```
 
-<span data-ttu-id="32db3-324">*SNI 的 Kestrel 支援*</span><span class="sxs-lookup"><span data-stu-id="32db3-324">*Kestrel support for SNI*</span></span>
+<span data-ttu-id="65f64-324">*SNI 的 Kestrel 支援*</span><span class="sxs-lookup"><span data-stu-id="65f64-324">*Kestrel support for SNI*</span></span>
 
-<span data-ttu-id="32db3-325">[伺服器名稱指示 (SNI)](https://tools.ietf.org/html/rfc6066#section-3) 可以用於在相同的 IP 位址和連接埠上裝載多個網域。</span><span class="sxs-lookup"><span data-stu-id="32db3-325">[Server Name Indication (SNI)](https://tools.ietf.org/html/rfc6066#section-3) can be used to host multiple domains on the same IP address and port.</span></span> <span data-ttu-id="32db3-326">SNI 若要運作，用戶端會在 TLS 信號交換期間傳送安全工作階段的主機名稱給伺服器，讓伺服器可以提供正確的憑證。</span><span class="sxs-lookup"><span data-stu-id="32db3-326">For SNI to function, the client sends the host name for the secure session to the server during the TLS handshake so that the server can provide the correct certificate.</span></span> <span data-ttu-id="32db3-327">用戶端在 TLS 信號交換之後的安全工作階段期間，會使用所提供的憑證與伺服器進行加密通訊。</span><span class="sxs-lookup"><span data-stu-id="32db3-327">The client uses the furnished certificate for encrypted communication with the server during the secure session that follows the TLS handshake.</span></span>
+<span data-ttu-id="65f64-325">[伺服器名稱指示 (SNI)](https://tools.ietf.org/html/rfc6066#section-3) 可以用於在相同的 IP 位址和連接埠上裝載多個網域。</span><span class="sxs-lookup"><span data-stu-id="65f64-325">[Server Name Indication (SNI)](https://tools.ietf.org/html/rfc6066#section-3) can be used to host multiple domains on the same IP address and port.</span></span> <span data-ttu-id="65f64-326">SNI 若要運作，用戶端會在 TLS 信號交換期間傳送安全工作階段的主機名稱給伺服器，讓伺服器可以提供正確的憑證。</span><span class="sxs-lookup"><span data-stu-id="65f64-326">For SNI to function, the client sends the host name for the secure session to the server during the TLS handshake so that the server can provide the correct certificate.</span></span> <span data-ttu-id="65f64-327">用戶端在 TLS 信號交換之後的安全工作階段期間，會使用所提供的憑證與伺服器進行加密通訊。</span><span class="sxs-lookup"><span data-stu-id="65f64-327">The client uses the furnished certificate for encrypted communication with the server during the secure session that follows the TLS handshake.</span></span>
 
-<span data-ttu-id="32db3-328">Kestrel 透過 `ServerCertificateSelector` 回呼來支援 SNI。</span><span class="sxs-lookup"><span data-stu-id="32db3-328">Kestrel supports SNI via the `ServerCertificateSelector` callback.</span></span> <span data-ttu-id="32db3-329">回呼會針對每個連線叫用一次，允許應用程式檢查主機名稱並選取適當的憑證。</span><span class="sxs-lookup"><span data-stu-id="32db3-329">The callback is invoked once per connection to allow the app to inspect the host name and select the appropriate certificate.</span></span>
+<span data-ttu-id="65f64-328">Kestrel 透過 `ServerCertificateSelector` 回呼來支援 SNI。</span><span class="sxs-lookup"><span data-stu-id="65f64-328">Kestrel supports SNI via the `ServerCertificateSelector` callback.</span></span> <span data-ttu-id="65f64-329">回呼會針對每個連線叫用一次，允許應用程式檢查主機名稱並選取適當的憑證。</span><span class="sxs-lookup"><span data-stu-id="65f64-329">The callback is invoked once per connection to allow the app to inspect the host name and select the appropriate certificate.</span></span>
 
-<span data-ttu-id="32db3-330">SNI 支援需要：</span><span class="sxs-lookup"><span data-stu-id="32db3-330">SNI support requires:</span></span>
+<span data-ttu-id="65f64-330">SNI 支援需要：</span><span class="sxs-lookup"><span data-stu-id="65f64-330">SNI support requires:</span></span>
 
-* <span data-ttu-id="32db3-331">在目標 framework `netcoreapp2.1` 或更新版本上執行。</span><span class="sxs-lookup"><span data-stu-id="32db3-331">Running on target framework `netcoreapp2.1` or later.</span></span> <span data-ttu-id="32db3-332">在 `net461` 或更新版本上，會叫用回呼，但 `name` 一律為 `null` 。</span><span class="sxs-lookup"><span data-stu-id="32db3-332">On `net461` or later, the callback is invoked but the `name` is always `null`.</span></span> <span data-ttu-id="32db3-333">如果用戶端不在 TLS 信號交換中提供主機名稱參數，則 `name` 也是 `null`。</span><span class="sxs-lookup"><span data-stu-id="32db3-333">The `name` is also `null` if the client doesn't provide the host name parameter in the TLS handshake.</span></span>
-* <span data-ttu-id="32db3-334">所有網站都在相同的 Kestrel 執行個體上執行。</span><span class="sxs-lookup"><span data-stu-id="32db3-334">All websites run on the same Kestrel instance.</span></span> <span data-ttu-id="32db3-335">在不使用反向 Proxy 的情況下，Kestrel 不支援跨多個執行個體共用 IP 位址和連接埠。</span><span class="sxs-lookup"><span data-stu-id="32db3-335">Kestrel doesn't support sharing an IP address and port across multiple instances without a reverse proxy.</span></span>
+* <span data-ttu-id="65f64-331">在目標 framework `netcoreapp2.1` 或更新版本上執行。</span><span class="sxs-lookup"><span data-stu-id="65f64-331">Running on target framework `netcoreapp2.1` or later.</span></span> <span data-ttu-id="65f64-332">在 `net461` 或更新版本中，會叫用回呼，但 `name` 一律為 `null` 。</span><span class="sxs-lookup"><span data-stu-id="65f64-332">On `net461` or later, the callback is invoked but the `name` is always `null`.</span></span> <span data-ttu-id="65f64-333">如果用戶端不在 TLS 信號交換中提供主機名稱參數，則 `name` 也是 `null`。</span><span class="sxs-lookup"><span data-stu-id="65f64-333">The `name` is also `null` if the client doesn't provide the host name parameter in the TLS handshake.</span></span>
+* <span data-ttu-id="65f64-334">所有網站都在相同的 Kestrel 執行個體上執行。</span><span class="sxs-lookup"><span data-stu-id="65f64-334">All websites run on the same Kestrel instance.</span></span> <span data-ttu-id="65f64-335">在不使用反向 Proxy 的情況下，Kestrel 不支援跨多個執行個體共用 IP 位址和連接埠。</span><span class="sxs-lookup"><span data-stu-id="65f64-335">Kestrel doesn't support sharing an IP address and port across multiple instances without a reverse proxy.</span></span>
 
 ```csharp
 webBuilder.ConfigureKestrel(serverOptions =>
@@ -643,9 +644,9 @@ webBuilder.ConfigureKestrel(serverOptions =>
 });
 ```
 
-### <a name="connection-logging"></a><span data-ttu-id="32db3-336">連接記錄</span><span class="sxs-lookup"><span data-stu-id="32db3-336">Connection logging</span></span>
+### <a name="connection-logging"></a><span data-ttu-id="65f64-336">連接記錄</span><span class="sxs-lookup"><span data-stu-id="65f64-336">Connection logging</span></span>
 
-<span data-ttu-id="32db3-337">呼叫 <xref:Microsoft.AspNetCore.Hosting.ListenOptionsConnectionLoggingExtensions.UseConnectionLogging*> ，以針對連接上的位元組層級通訊發出調試層級記錄。</span><span class="sxs-lookup"><span data-stu-id="32db3-337">Call <xref:Microsoft.AspNetCore.Hosting.ListenOptionsConnectionLoggingExtensions.UseConnectionLogging*> to emit Debug level logs for byte-level communication on a connection.</span></span> <span data-ttu-id="32db3-338">連線記錄有助於疑難排解低層級通訊中的問題，例如在 TLS 加密期間和 proxy 後方。</span><span class="sxs-lookup"><span data-stu-id="32db3-338">Connection logging is helpful for troubleshooting problems in low-level communication, such as during TLS encryption and behind proxies.</span></span> <span data-ttu-id="32db3-339">如果 `UseConnectionLogging` 放在之前 `UseHttps` ，則會記錄加密的流量。</span><span class="sxs-lookup"><span data-stu-id="32db3-339">If `UseConnectionLogging` is placed before `UseHttps`, encrypted traffic is logged.</span></span> <span data-ttu-id="32db3-340">如果 `UseConnectionLogging` 放在之後 `UseHttps` ，則會記錄解密的流量。</span><span class="sxs-lookup"><span data-stu-id="32db3-340">If `UseConnectionLogging` is placed after `UseHttps`, decrypted traffic is logged.</span></span>
+<span data-ttu-id="65f64-337">呼叫 <xref:Microsoft.AspNetCore.Hosting.ListenOptionsConnectionLoggingExtensions.UseConnectionLogging*> 以發出連接上位元組層級通訊的 Debug 層級記錄。</span><span class="sxs-lookup"><span data-stu-id="65f64-337">Call <xref:Microsoft.AspNetCore.Hosting.ListenOptionsConnectionLoggingExtensions.UseConnectionLogging*> to emit Debug level logs for byte-level communication on a connection.</span></span> <span data-ttu-id="65f64-338">連線記錄有助於疑難排解低層級通訊中的問題，例如在 TLS 加密期間和 proxy 後方。</span><span class="sxs-lookup"><span data-stu-id="65f64-338">Connection logging is helpful for troubleshooting problems in low-level communication, such as during TLS encryption and behind proxies.</span></span> <span data-ttu-id="65f64-339">如果 `UseConnectionLogging` 之前放置 `UseHttps` ，則會記錄加密的流量。</span><span class="sxs-lookup"><span data-stu-id="65f64-339">If `UseConnectionLogging` is placed before `UseHttps`, encrypted traffic is logged.</span></span> <span data-ttu-id="65f64-340">如果 `UseConnectionLogging` 放置在之後 `UseHttps` ，則會記錄解密的流量。</span><span class="sxs-lookup"><span data-stu-id="65f64-340">If `UseConnectionLogging` is placed after `UseHttps`, decrypted traffic is logged.</span></span>
 
 ```csharp
 webBuilder.ConfigureKestrel(serverOptions =>
@@ -657,80 +658,80 @@ webBuilder.ConfigureKestrel(serverOptions =>
 });
 ```
 
-### <a name="bind-to-a-tcp-socket"></a><span data-ttu-id="32db3-341">繫結至 TCP 通訊端</span><span class="sxs-lookup"><span data-stu-id="32db3-341">Bind to a TCP socket</span></span>
+### <a name="bind-to-a-tcp-socket"></a><span data-ttu-id="65f64-341">繫結至 TCP 通訊端</span><span class="sxs-lookup"><span data-stu-id="65f64-341">Bind to a TCP socket</span></span>
 
-<span data-ttu-id="32db3-342"><xref:Microsoft.AspNetCore.Server.Kestrel.Core.KestrelServerOptions.Listen*> 方法會繫結至 TCP 通訊端，而選項 Lambda 則會允許 X.509 憑證設定：</span><span class="sxs-lookup"><span data-stu-id="32db3-342">The <xref:Microsoft.AspNetCore.Server.Kestrel.Core.KestrelServerOptions.Listen*> method binds to a TCP socket, and an options lambda permits X.509 certificate configuration:</span></span>
+<span data-ttu-id="65f64-342"><xref:Microsoft.AspNetCore.Server.Kestrel.Core.KestrelServerOptions.Listen*> 方法會繫結至 TCP 通訊端，而選項 Lambda 則會允許 X.509 憑證設定：</span><span class="sxs-lookup"><span data-stu-id="65f64-342">The <xref:Microsoft.AspNetCore.Server.Kestrel.Core.KestrelServerOptions.Listen*> method binds to a TCP socket, and an options lambda permits X.509 certificate configuration:</span></span>
 
 [!code-csharp[](kestrel/samples/3.x/KestrelSample/Program.cs?name=snippet_TCPSocket&highlight=12-18)]
 
-<span data-ttu-id="32db3-343">此範例使用 <xref:Microsoft.AspNetCore.Server.Kestrel.Core.ListenOptions>來為端點設定 HTTPS。</span><span class="sxs-lookup"><span data-stu-id="32db3-343">The example configures HTTPS for an endpoint with <xref:Microsoft.AspNetCore.Server.Kestrel.Core.ListenOptions>.</span></span> <span data-ttu-id="32db3-344">若要設定特定端點的其他 Kestrel 設定，請使用相同的 API。</span><span class="sxs-lookup"><span data-stu-id="32db3-344">Use the same API to configure other Kestrel settings for specific endpoints.</span></span>
+<span data-ttu-id="65f64-343">此範例使用 <xref:Microsoft.AspNetCore.Server.Kestrel.Core.ListenOptions>來為端點設定 HTTPS。</span><span class="sxs-lookup"><span data-stu-id="65f64-343">The example configures HTTPS for an endpoint with <xref:Microsoft.AspNetCore.Server.Kestrel.Core.ListenOptions>.</span></span> <span data-ttu-id="65f64-344">若要設定特定端點的其他 Kestrel 設定，請使用相同的 API。</span><span class="sxs-lookup"><span data-stu-id="65f64-344">Use the same API to configure other Kestrel settings for specific endpoints.</span></span>
 
 [!INCLUDE [How to make an X.509 cert](~/includes/make-x509-cert.md)]
 
-### <a name="bind-to-a-unix-socket"></a><span data-ttu-id="32db3-345">繫結至 Unix 通訊端</span><span class="sxs-lookup"><span data-stu-id="32db3-345">Bind to a Unix socket</span></span>
+### <a name="bind-to-a-unix-socket"></a><span data-ttu-id="65f64-345">繫結至 Unix 通訊端</span><span class="sxs-lookup"><span data-stu-id="65f64-345">Bind to a Unix socket</span></span>
 
-<span data-ttu-id="32db3-346">請使用 <xref:Microsoft.AspNetCore.Server.Kestrel.Core.KestrelServerOptions.ListenUnixSocket*> 在 Unix 通訊端上進行接聽以改善 Nginx 的效能，如此範例所示：</span><span class="sxs-lookup"><span data-stu-id="32db3-346">Listen on a Unix socket with <xref:Microsoft.AspNetCore.Server.Kestrel.Core.KestrelServerOptions.ListenUnixSocket*> for improved performance with Nginx, as shown in this example:</span></span>
+<span data-ttu-id="65f64-346">請使用 <xref:Microsoft.AspNetCore.Server.Kestrel.Core.KestrelServerOptions.ListenUnixSocket*> 在 Unix 通訊端上進行接聽以改善 Nginx 的效能，如此範例所示：</span><span class="sxs-lookup"><span data-stu-id="65f64-346">Listen on a Unix socket with <xref:Microsoft.AspNetCore.Server.Kestrel.Core.KestrelServerOptions.ListenUnixSocket*> for improved performance with Nginx, as shown in this example:</span></span>
 
 [!code-csharp[](kestrel/samples/3.x/KestrelSample/Program.cs?name=snippet_UnixSocket)]
 
-* <span data-ttu-id="32db3-347">在 Nginx 設定檔中，將 `server`  >  `location`  >  `proxy_pass` 專案設定為 `http://unix:/tmp/{KESTREL SOCKET}:/;` 。</span><span class="sxs-lookup"><span data-stu-id="32db3-347">In the Nginx configuration file, set the `server` > `location` > `proxy_pass` entry to `http://unix:/tmp/{KESTREL SOCKET}:/;`.</span></span> <span data-ttu-id="32db3-348">`{KESTREL SOCKET}`這是提供給 (的通訊端名稱 <xref:Microsoft.AspNetCore.Server.Kestrel.Core.KestrelServerOptions.ListenUnixSocket*> ，例如， `kestrel-test.sock` 在上述範例中) 。</span><span class="sxs-lookup"><span data-stu-id="32db3-348">`{KESTREL SOCKET}` is the name of the socket provided to <xref:Microsoft.AspNetCore.Server.Kestrel.Core.KestrelServerOptions.ListenUnixSocket*> (for example, `kestrel-test.sock` in the preceding example).</span></span>
-* <span data-ttu-id="32db3-349">請確定 Nginx (可寫入通訊端，例如 `chmod go+w /tmp/kestrel-test.sock`) 。</span><span class="sxs-lookup"><span data-stu-id="32db3-349">Ensure that the socket is writeable by Nginx (for example, `chmod go+w /tmp/kestrel-test.sock`).</span></span>
+* <span data-ttu-id="65f64-347">在 Nginx 設定檔中，將 `server`  >  `location`  >  `proxy_pass` 專案設定為 `http://unix:/tmp/{KESTREL SOCKET}:/;` 。</span><span class="sxs-lookup"><span data-stu-id="65f64-347">In the Nginx configuration file, set the `server` > `location` > `proxy_pass` entry to `http://unix:/tmp/{KESTREL SOCKET}:/;`.</span></span> <span data-ttu-id="65f64-348">`{KESTREL SOCKET}` 這是提供給 (的通訊端名稱 <xref:Microsoft.AspNetCore.Server.Kestrel.Core.KestrelServerOptions.ListenUnixSocket*> ，例如 `kestrel-test.sock` 上述範例) 。</span><span class="sxs-lookup"><span data-stu-id="65f64-348">`{KESTREL SOCKET}` is the name of the socket provided to <xref:Microsoft.AspNetCore.Server.Kestrel.Core.KestrelServerOptions.ListenUnixSocket*> (for example, `kestrel-test.sock` in the preceding example).</span></span>
+* <span data-ttu-id="65f64-349">確定 Nginx (可寫入通訊端，例如 `chmod go+w /tmp/kestrel-test.sock`) 。</span><span class="sxs-lookup"><span data-stu-id="65f64-349">Ensure that the socket is writeable by Nginx (for example, `chmod go+w /tmp/kestrel-test.sock`).</span></span>
 
-### <a name="port-0"></a><span data-ttu-id="32db3-350">連接埠 0</span><span class="sxs-lookup"><span data-stu-id="32db3-350">Port 0</span></span>
+### <a name="port-0"></a><span data-ttu-id="65f64-350">連接埠 0</span><span class="sxs-lookup"><span data-stu-id="65f64-350">Port 0</span></span>
 
-<span data-ttu-id="32db3-351">指定連接埠號碼 `0` 時，Kestrel 會動態繫結至可用的連接埠。</span><span class="sxs-lookup"><span data-stu-id="32db3-351">When the port number `0` is specified, Kestrel dynamically binds to an available port.</span></span> <span data-ttu-id="32db3-352">下列範例示範如何判斷 Kestrel 在執行階段實際上繫結至哪一個連接埠：</span><span class="sxs-lookup"><span data-stu-id="32db3-352">The following example shows how to determine which port Kestrel actually bound at runtime:</span></span>
+<span data-ttu-id="65f64-351">指定連接埠號碼 `0` 時，Kestrel 會動態繫結至可用的連接埠。</span><span class="sxs-lookup"><span data-stu-id="65f64-351">When the port number `0` is specified, Kestrel dynamically binds to an available port.</span></span> <span data-ttu-id="65f64-352">下列範例示範如何判斷 Kestrel 在執行階段實際上繫結至哪一個連接埠：</span><span class="sxs-lookup"><span data-stu-id="65f64-352">The following example shows how to determine which port Kestrel actually bound at runtime:</span></span>
 
 [!code-csharp[](kestrel/samples/3.x/KestrelSample/Startup.cs?name=snippet_Configure&highlight=3-4,15-21)]
 
-<span data-ttu-id="32db3-353">當應用程式執行時，主控台視窗輸出會指出可以連線到應用程式的動態連接埠：</span><span class="sxs-lookup"><span data-stu-id="32db3-353">When the app is run, the console window output indicates the dynamic port where the app can be reached:</span></span>
+<span data-ttu-id="65f64-353">當應用程式執行時，主控台視窗輸出會指出可以連線到應用程式的動態連接埠：</span><span class="sxs-lookup"><span data-stu-id="65f64-353">When the app is run, the console window output indicates the dynamic port where the app can be reached:</span></span>
 
 ```console
 Listening on the following addresses: http://127.0.0.1:48508
 ```
 
-### <a name="limitations"></a><span data-ttu-id="32db3-354">限制</span><span class="sxs-lookup"><span data-stu-id="32db3-354">Limitations</span></span>
+### <a name="limitations"></a><span data-ttu-id="65f64-354">限制</span><span class="sxs-lookup"><span data-stu-id="65f64-354">Limitations</span></span>
 
-<span data-ttu-id="32db3-355">使用下列方法來設定端點：</span><span class="sxs-lookup"><span data-stu-id="32db3-355">Configure endpoints with the following approaches:</span></span>
+<span data-ttu-id="65f64-355">使用下列方法來設定端點：</span><span class="sxs-lookup"><span data-stu-id="65f64-355">Configure endpoints with the following approaches:</span></span>
 
 * <xref:Microsoft.AspNetCore.Hosting.HostingAbstractionsWebHostBuilderExtensions.UseUrls*>
-* <span data-ttu-id="32db3-356">`--urls` 命令列引數</span><span class="sxs-lookup"><span data-stu-id="32db3-356">`--urls` command-line argument</span></span>
-* <span data-ttu-id="32db3-357">`urls` 主機組態索引鍵</span><span class="sxs-lookup"><span data-stu-id="32db3-357">`urls` host configuration key</span></span>
-* <span data-ttu-id="32db3-358">`ASPNETCORE_URLS` 環境變數</span><span class="sxs-lookup"><span data-stu-id="32db3-358">`ASPNETCORE_URLS` environment variable</span></span>
+* <span data-ttu-id="65f64-356">`--urls` 命令列引數</span><span class="sxs-lookup"><span data-stu-id="65f64-356">`--urls` command-line argument</span></span>
+* <span data-ttu-id="65f64-357">`urls` 主機組態索引鍵</span><span class="sxs-lookup"><span data-stu-id="65f64-357">`urls` host configuration key</span></span>
+* <span data-ttu-id="65f64-358">`ASPNETCORE_URLS` 環境變數</span><span class="sxs-lookup"><span data-stu-id="65f64-358">`ASPNETCORE_URLS` environment variable</span></span>
 
-<span data-ttu-id="32db3-359">要讓程式碼使用 Kestrel 以外的伺服器，這些方法會很有用。</span><span class="sxs-lookup"><span data-stu-id="32db3-359">These methods are useful for making code work with servers other than Kestrel.</span></span> <span data-ttu-id="32db3-360">不過，請注意下列限制：</span><span class="sxs-lookup"><span data-stu-id="32db3-360">However, be aware of the following limitations:</span></span>
+<span data-ttu-id="65f64-359">要讓程式碼使用 Kestrel 以外的伺服器，這些方法會很有用。</span><span class="sxs-lookup"><span data-stu-id="65f64-359">These methods are useful for making code work with servers other than Kestrel.</span></span> <span data-ttu-id="65f64-360">不過，請注意下列限制：</span><span class="sxs-lookup"><span data-stu-id="65f64-360">However, be aware of the following limitations:</span></span>
 
-* <span data-ttu-id="32db3-361">HTTPS 無法與這些方法搭配使用，除非在 HTTPS 端點設定中提供預設憑證 (例如，使用 `KestrelServerOptions` 設定或設定檔，如本主題稍早所示)。</span><span class="sxs-lookup"><span data-stu-id="32db3-361">HTTPS can't be used with these approaches unless a default certificate is provided in the HTTPS endpoint configuration (for example, using `KestrelServerOptions` configuration or a configuration file as shown earlier in this topic).</span></span>
-* <span data-ttu-id="32db3-362">當同時使用 `Listen` 和 `UseUrls` 方法時，`Listen` 端點會覆寫 `UseUrls` 端點。</span><span class="sxs-lookup"><span data-stu-id="32db3-362">When both the `Listen` and `UseUrls` approaches are used simultaneously, the `Listen` endpoints override the `UseUrls` endpoints.</span></span>
+* <span data-ttu-id="65f64-361">HTTPS 無法與這些方法搭配使用，除非在 HTTPS 端點設定中提供預設憑證 (例如，使用 `KestrelServerOptions` 設定或設定檔，如本主題稍早所示)。</span><span class="sxs-lookup"><span data-stu-id="65f64-361">HTTPS can't be used with these approaches unless a default certificate is provided in the HTTPS endpoint configuration (for example, using `KestrelServerOptions` configuration or a configuration file as shown earlier in this topic).</span></span>
+* <span data-ttu-id="65f64-362">當同時使用 `Listen` 和 `UseUrls` 方法時，`Listen` 端點會覆寫 `UseUrls` 端點。</span><span class="sxs-lookup"><span data-stu-id="65f64-362">When both the `Listen` and `UseUrls` approaches are used simultaneously, the `Listen` endpoints override the `UseUrls` endpoints.</span></span>
 
-### <a name="iis-endpoint-configuration"></a><span data-ttu-id="32db3-363">IIS 端點設定</span><span class="sxs-lookup"><span data-stu-id="32db3-363">IIS endpoint configuration</span></span>
+### <a name="iis-endpoint-configuration"></a><span data-ttu-id="65f64-363">IIS 端點設定</span><span class="sxs-lookup"><span data-stu-id="65f64-363">IIS endpoint configuration</span></span>
 
-<span data-ttu-id="32db3-364">使用 IIS 時，IIS 覆寫繫結的 URL 繫結是由 `Listen` 或 `UseUrls` 設定。</span><span class="sxs-lookup"><span data-stu-id="32db3-364">When using IIS, the URL bindings for IIS override bindings are set by either `Listen` or `UseUrls`.</span></span> <span data-ttu-id="32db3-365">如需詳細資訊，請參閱 [ASP.NET Core 模組](xref:host-and-deploy/aspnet-core-module)主題。</span><span class="sxs-lookup"><span data-stu-id="32db3-365">For more information, see the [ASP.NET Core Module](xref:host-and-deploy/aspnet-core-module) topic.</span></span>
+<span data-ttu-id="65f64-364">使用 IIS 時，IIS 覆寫繫結的 URL 繫結是由 `Listen` 或 `UseUrls` 設定。</span><span class="sxs-lookup"><span data-stu-id="65f64-364">When using IIS, the URL bindings for IIS override bindings are set by either `Listen` or `UseUrls`.</span></span> <span data-ttu-id="65f64-365">如需詳細資訊，請參閱 [ASP.NET Core 模組](xref:host-and-deploy/aspnet-core-module)主題。</span><span class="sxs-lookup"><span data-stu-id="65f64-365">For more information, see the [ASP.NET Core Module](xref:host-and-deploy/aspnet-core-module) topic.</span></span>
 
-### <a name="listenoptionsprotocols"></a><span data-ttu-id="32db3-366">ListenOptions.Protocols</span><span class="sxs-lookup"><span data-stu-id="32db3-366">ListenOptions.Protocols</span></span>
+### <a name="listenoptionsprotocols"></a><span data-ttu-id="65f64-366">ListenOptions.Protocols</span><span class="sxs-lookup"><span data-stu-id="65f64-366">ListenOptions.Protocols</span></span>
 
-<span data-ttu-id="32db3-367">`Protocols` 屬性會建立在連線端點上或針對伺服器啟用的 HTTP 通訊協定 (`HttpProtocols`)。</span><span class="sxs-lookup"><span data-stu-id="32db3-367">The `Protocols` property establishes the HTTP protocols (`HttpProtocols`) enabled on a connection endpoint or for the server.</span></span> <span data-ttu-id="32db3-368">從 `HttpProtocols` 列舉中指派一個值給 `Protocols` 屬性。</span><span class="sxs-lookup"><span data-stu-id="32db3-368">Assign a value to the `Protocols` property from the `HttpProtocols` enum.</span></span>
+<span data-ttu-id="65f64-367">`Protocols` 屬性會建立在連線端點上或針對伺服器啟用的 HTTP 通訊協定 (`HttpProtocols`)。</span><span class="sxs-lookup"><span data-stu-id="65f64-367">The `Protocols` property establishes the HTTP protocols (`HttpProtocols`) enabled on a connection endpoint or for the server.</span></span> <span data-ttu-id="65f64-368">從 `HttpProtocols` 列舉中指派一個值給 `Protocols` 屬性。</span><span class="sxs-lookup"><span data-stu-id="65f64-368">Assign a value to the `Protocols` property from the `HttpProtocols` enum.</span></span>
 
-| <span data-ttu-id="32db3-369">`HttpProtocols` 列舉值</span><span class="sxs-lookup"><span data-stu-id="32db3-369">`HttpProtocols` enum value</span></span> | <span data-ttu-id="32db3-370">允許的連線通訊協定</span><span class="sxs-lookup"><span data-stu-id="32db3-370">Connection protocol permitted</span></span> |
+| <span data-ttu-id="65f64-369">`HttpProtocols` 列舉值</span><span class="sxs-lookup"><span data-stu-id="65f64-369">`HttpProtocols` enum value</span></span> | <span data-ttu-id="65f64-370">允許的連線通訊協定</span><span class="sxs-lookup"><span data-stu-id="65f64-370">Connection protocol permitted</span></span> |
 | -------------------------- | ----------------------------- |
-| `Http1`                    | <span data-ttu-id="32db3-371">僅限 HTTP/1.1。</span><span class="sxs-lookup"><span data-stu-id="32db3-371">HTTP/1.1 only.</span></span> <span data-ttu-id="32db3-372">可在具有或沒有 TLS 的情況下使用。</span><span class="sxs-lookup"><span data-stu-id="32db3-372">Can be used with or without TLS.</span></span> |
-| `Http2`                    | <span data-ttu-id="32db3-373">僅限 HTTP/2。</span><span class="sxs-lookup"><span data-stu-id="32db3-373">HTTP/2 only.</span></span> <span data-ttu-id="32db3-374">只有在用戶端支援[先備知識模式](https://tools.ietf.org/html/rfc7540#section-3.4)時，才可以在沒有 TLS 的情況下使用。</span><span class="sxs-lookup"><span data-stu-id="32db3-374">May be used without TLS only if the client supports a [Prior Knowledge mode](https://tools.ietf.org/html/rfc7540#section-3.4).</span></span> |
-| `Http1AndHttp2`            | <span data-ttu-id="32db3-375">HTTP/1.1 和 HTTP/2。</span><span class="sxs-lookup"><span data-stu-id="32db3-375">HTTP/1.1 and HTTP/2.</span></span> <span data-ttu-id="32db3-376">HTTP/2 要求用戶端在 TLS[應用層通訊協定協商](https://tools.ietf.org/html/rfc7301#section-3)中選取 HTTP/2 (ALPN) 交握;否則，連接預設為 HTTP/1.1。</span><span class="sxs-lookup"><span data-stu-id="32db3-376">HTTP/2 requires the client to select HTTP/2 in the TLS [Application-Layer Protocol Negotiation (ALPN)](https://tools.ietf.org/html/rfc7301#section-3) handshake; otherwise, the connection defaults to HTTP/1.1.</span></span> |
+| `Http1`                    | <span data-ttu-id="65f64-371">僅限 HTTP/1.1。</span><span class="sxs-lookup"><span data-stu-id="65f64-371">HTTP/1.1 only.</span></span> <span data-ttu-id="65f64-372">可在具有或沒有 TLS 的情況下使用。</span><span class="sxs-lookup"><span data-stu-id="65f64-372">Can be used with or without TLS.</span></span> |
+| `Http2`                    | <span data-ttu-id="65f64-373">僅限 HTTP/2。</span><span class="sxs-lookup"><span data-stu-id="65f64-373">HTTP/2 only.</span></span> <span data-ttu-id="65f64-374">只有在用戶端支援[先備知識模式](https://tools.ietf.org/html/rfc7540#section-3.4)時，才可以在沒有 TLS 的情況下使用。</span><span class="sxs-lookup"><span data-stu-id="65f64-374">May be used without TLS only if the client supports a [Prior Knowledge mode](https://tools.ietf.org/html/rfc7540#section-3.4).</span></span> |
+| `Http1AndHttp2`            | <span data-ttu-id="65f64-375">HTTP/1.1 和 HTTP/2。</span><span class="sxs-lookup"><span data-stu-id="65f64-375">HTTP/1.1 and HTTP/2.</span></span> <span data-ttu-id="65f64-376">HTTP/2 要求用戶端在 TLS [應用層通訊協定協商 ](https://tools.ietf.org/html/rfc7301#section-3) 中選取 HTTP/2， (ALPN) 交握;否則，連接預設為 HTTP/1.1。</span><span class="sxs-lookup"><span data-stu-id="65f64-376">HTTP/2 requires the client to select HTTP/2 in the TLS [Application-Layer Protocol Negotiation (ALPN)](https://tools.ietf.org/html/rfc7301#section-3) handshake; otherwise, the connection defaults to HTTP/1.1.</span></span> |
 
-<span data-ttu-id="32db3-377">`ListenOptions.Protocols`任何端點的預設值為 `HttpProtocols.Http1AndHttp2` 。</span><span class="sxs-lookup"><span data-stu-id="32db3-377">The default `ListenOptions.Protocols` value for any endpoint is `HttpProtocols.Http1AndHttp2`.</span></span>
+<span data-ttu-id="65f64-377">`ListenOptions.Protocols`任何端點的預設值為 `HttpProtocols.Http1AndHttp2` 。</span><span class="sxs-lookup"><span data-stu-id="65f64-377">The default `ListenOptions.Protocols` value for any endpoint is `HttpProtocols.Http1AndHttp2`.</span></span>
 
-<span data-ttu-id="32db3-378">HTTP/2 的 TLS 限制：</span><span class="sxs-lookup"><span data-stu-id="32db3-378">TLS restrictions for HTTP/2:</span></span>
+<span data-ttu-id="65f64-378">HTTP/2 的 TLS 限制：</span><span class="sxs-lookup"><span data-stu-id="65f64-378">TLS restrictions for HTTP/2:</span></span>
 
-* <span data-ttu-id="32db3-379">TLS 1.2 版或更新版本</span><span class="sxs-lookup"><span data-stu-id="32db3-379">TLS version 1.2 or later</span></span>
-* <span data-ttu-id="32db3-380">已停用重新交涉</span><span class="sxs-lookup"><span data-stu-id="32db3-380">Renegotiation disabled</span></span>
-* <span data-ttu-id="32db3-381">已停用壓縮</span><span class="sxs-lookup"><span data-stu-id="32db3-381">Compression disabled</span></span>
-* <span data-ttu-id="32db3-382">暫時金鑰交換大小下限：</span><span class="sxs-lookup"><span data-stu-id="32db3-382">Minimum ephemeral key exchange sizes:</span></span>
-  * <span data-ttu-id="32db3-383">橢圓曲線 Diffie-hellman (ECDHE) &lbrack; [RFC4492](https://www.ietf.org/rfc/rfc4492.txt) &rbrack; ：224位最小值</span><span class="sxs-lookup"><span data-stu-id="32db3-383">Elliptic curve Diffie-Hellman (ECDHE) &lbrack;[RFC4492](https://www.ietf.org/rfc/rfc4492.txt)&rbrack;: 224 bits minimum</span></span>
-  * <span data-ttu-id="32db3-384">有限欄位 diffie-hellman (DHE) &lbrack; `TLS12` &rbrack; ：2048位最小值</span><span class="sxs-lookup"><span data-stu-id="32db3-384">Finite field Diffie-Hellman (DHE) &lbrack;`TLS12`&rbrack;: 2048 bits minimum</span></span>
-* <span data-ttu-id="32db3-385">不禁止加密套件。</span><span class="sxs-lookup"><span data-stu-id="32db3-385">Cipher suite not prohibited.</span></span> 
+* <span data-ttu-id="65f64-379">TLS 1.2 版或更新版本</span><span class="sxs-lookup"><span data-stu-id="65f64-379">TLS version 1.2 or later</span></span>
+* <span data-ttu-id="65f64-380">已停用重新交涉</span><span class="sxs-lookup"><span data-stu-id="65f64-380">Renegotiation disabled</span></span>
+* <span data-ttu-id="65f64-381">已停用壓縮</span><span class="sxs-lookup"><span data-stu-id="65f64-381">Compression disabled</span></span>
+* <span data-ttu-id="65f64-382">暫時金鑰交換大小下限：</span><span class="sxs-lookup"><span data-stu-id="65f64-382">Minimum ephemeral key exchange sizes:</span></span>
+  * <span data-ttu-id="65f64-383">橢圓曲線 Diffie-hellman (>ECDHE) &lbrack; [RFC4492](https://www.ietf.org/rfc/rfc4492.txt) &rbrack; ：224位最小值</span><span class="sxs-lookup"><span data-stu-id="65f64-383">Elliptic curve Diffie-Hellman (ECDHE) &lbrack;[RFC4492](https://www.ietf.org/rfc/rfc4492.txt)&rbrack;: 224 bits minimum</span></span>
+  * <span data-ttu-id="65f64-384">有限欄位 diffie-hellman (DHE) &lbrack; `TLS12` &rbrack; ：2048位最小值</span><span class="sxs-lookup"><span data-stu-id="65f64-384">Finite field Diffie-Hellman (DHE) &lbrack;`TLS12`&rbrack;: 2048 bits minimum</span></span>
+* <span data-ttu-id="65f64-385">不禁止加密套件。</span><span class="sxs-lookup"><span data-stu-id="65f64-385">Cipher suite not prohibited.</span></span> 
 
-<span data-ttu-id="32db3-386">`TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256`&lbrack;`TLS-ECDHE`&rbrack;根據預設，支援 P-256 橢圓曲線 &lbrack; `FIPS186` &rbrack; 。</span><span class="sxs-lookup"><span data-stu-id="32db3-386">`TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256` &lbrack;`TLS-ECDHE`&rbrack; with the P-256 elliptic curve &lbrack;`FIPS186`&rbrack; is supported by default.</span></span>
+<span data-ttu-id="65f64-386">`TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256`&lbrack;`TLS-ECDHE`&rbrack;預設支援使用 P-256 橢圓曲線 &lbrack; `FIPS186` &rbrack; 。</span><span class="sxs-lookup"><span data-stu-id="65f64-386">`TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256` &lbrack;`TLS-ECDHE`&rbrack; with the P-256 elliptic curve &lbrack;`FIPS186`&rbrack; is supported by default.</span></span>
 
-<span data-ttu-id="32db3-387">下列範例會允許連接埠 8000 上的 HTTP/1.1 和 HTTP/2 連線。</span><span class="sxs-lookup"><span data-stu-id="32db3-387">The following example permits HTTP/1.1 and HTTP/2 connections on port 8000.</span></span> <span data-ttu-id="32db3-388">這些連線使用提供的憑證受到 TLS 保護：</span><span class="sxs-lookup"><span data-stu-id="32db3-388">Connections are secured by TLS with a supplied certificate:</span></span>
+<span data-ttu-id="65f64-387">下列範例會允許連接埠 8000 上的 HTTP/1.1 和 HTTP/2 連線。</span><span class="sxs-lookup"><span data-stu-id="65f64-387">The following example permits HTTP/1.1 and HTTP/2 connections on port 8000.</span></span> <span data-ttu-id="65f64-388">這些連線使用提供的憑證受到 TLS 保護：</span><span class="sxs-lookup"><span data-stu-id="65f64-388">Connections are secured by TLS with a supplied certificate:</span></span>
 
 ```csharp
 webBuilder.ConfigureKestrel(serverOptions =>
@@ -742,11 +743,11 @@ webBuilder.ConfigureKestrel(serverOptions =>
 });
 ```
 
-<span data-ttu-id="32db3-389">如有需要，請使用連線中介軟體，針對特定的加密依據每個連線來篩選 TLS 交握。</span><span class="sxs-lookup"><span data-stu-id="32db3-389">Use Connection Middleware to filter TLS handshakes on a per-connection basis for specific ciphers if required.</span></span>
+<span data-ttu-id="65f64-389">若有需要，請使用連線中介軟體針對特定加密篩選每個連接的 TLS 交握。</span><span class="sxs-lookup"><span data-stu-id="65f64-389">Use Connection Middleware to filter TLS handshakes on a per-connection basis for specific ciphers if required.</span></span>
 
-<span data-ttu-id="32db3-390">下列範例 <xref:System.NotSupportedException> 會針對應用程式不支援的任何加密演算法擲回。</span><span class="sxs-lookup"><span data-stu-id="32db3-390">The following example throws <xref:System.NotSupportedException> for any cipher algorithm that the app doesn't support.</span></span> <span data-ttu-id="32db3-391">或者，定義 ITlsHandshakeFeature，並將[CipherAlgorithm](xref:Microsoft.AspNetCore.Connections.Features.ITlsHandshakeFeature.CipherAlgorithm)與可接受的加密套件清單進行比較。</span><span class="sxs-lookup"><span data-stu-id="32db3-391">Alternatively, define and compare [ITlsHandshakeFeature.CipherAlgorithm](xref:Microsoft.AspNetCore.Connections.Features.ITlsHandshakeFeature.CipherAlgorithm) to a list of acceptable cipher suites.</span></span>
+<span data-ttu-id="65f64-390">下列範例 <xref:System.NotSupportedException> 會針對應用程式不支援的任何加密演算法擲回。</span><span class="sxs-lookup"><span data-stu-id="65f64-390">The following example throws <xref:System.NotSupportedException> for any cipher algorithm that the app doesn't support.</span></span> <span data-ttu-id="65f64-391">或者，將 [ITlsHandshakeFeature](xref:Microsoft.AspNetCore.Connections.Features.ITlsHandshakeFeature.CipherAlgorithm) 定義和比較成可接受的加密套件清單。</span><span class="sxs-lookup"><span data-stu-id="65f64-391">Alternatively, define and compare [ITlsHandshakeFeature.CipherAlgorithm](xref:Microsoft.AspNetCore.Connections.Features.ITlsHandshakeFeature.CipherAlgorithm) to a list of acceptable cipher suites.</span></span>
 
-<span data-ttu-id="32db3-392">不會使用加密來搭配[CipherAlgorithmType。 Null](xref:System.Security.Authentication.CipherAlgorithmType) cipher 演算法。</span><span class="sxs-lookup"><span data-stu-id="32db3-392">No encryption is used with a [CipherAlgorithmType.Null](xref:System.Security.Authentication.CipherAlgorithmType) cipher algorithm.</span></span>
+<span data-ttu-id="65f64-392">CipherAlgorithmType 不會使用加密 [。 Null](xref:System.Security.Authentication.CipherAlgorithmType) 加密演算法。</span><span class="sxs-lookup"><span data-stu-id="65f64-392">No encryption is used with a [CipherAlgorithmType.Null](xref:System.Security.Authentication.CipherAlgorithmType) cipher algorithm.</span></span>
 
 ```csharp
 // using System.Net;
@@ -791,7 +792,7 @@ namespace Microsoft.AspNetCore.Connections
 }
 ```
 
-<span data-ttu-id="32db3-393">連接篩選也可以透過 <xref:Microsoft.AspNetCore.Connections.IConnectionBuilder> lambda 設定：</span><span class="sxs-lookup"><span data-stu-id="32db3-393">Connection filtering can also be configured via an <xref:Microsoft.AspNetCore.Connections.IConnectionBuilder> lambda:</span></span>
+<span data-ttu-id="65f64-393">您也可以透過 lambda 設定連接篩選 <xref:Microsoft.AspNetCore.Connections.IConnectionBuilder> ：</span><span class="sxs-lookup"><span data-stu-id="65f64-393">Connection filtering can also be configured via an <xref:Microsoft.AspNetCore.Connections.IConnectionBuilder> lambda:</span></span>
 
 ```csharp
 // using System;
@@ -821,7 +822,7 @@ webBuilder.ConfigureKestrel(serverOptions =>
 });
 ```
 
-<span data-ttu-id="32db3-394">在 Linux 上， <xref:System.Net.Security.CipherSuitesPolicy> 可以用來篩選每個連線的 TLS 交握：</span><span class="sxs-lookup"><span data-stu-id="32db3-394">On Linux, <xref:System.Net.Security.CipherSuitesPolicy> can be used to filter TLS handshakes on a per-connection basis:</span></span>
+<span data-ttu-id="65f64-394">在 Linux 上， <xref:System.Net.Security.CipherSuitesPolicy> 可用來篩選每個連接的 TLS 交握：</span><span class="sxs-lookup"><span data-stu-id="65f64-394">On Linux, <xref:System.Net.Security.CipherSuitesPolicy> can be used to filter TLS handshakes on a per-connection basis:</span></span>
 
 ```csharp
 // using System.Net.Security;
@@ -848,11 +849,11 @@ webBuilder.ConfigureKestrel(serverOptions =>
 });
 ```
 
-<span data-ttu-id="32db3-395">從設定進行通訊協定設定\*\*</span><span class="sxs-lookup"><span data-stu-id="32db3-395">*Set the protocol from configuration*</span></span>
+<span data-ttu-id="65f64-395">從設定進行通訊協定設定\*\*</span><span class="sxs-lookup"><span data-stu-id="65f64-395">*Set the protocol from configuration*</span></span>
 
-<span data-ttu-id="32db3-396">`CreateDefaultBuilder` 預設會呼叫 `serverOptions.Configure(context.Configuration.GetSection("Kestrel"))` 以載入 Kestrel 設定。</span><span class="sxs-lookup"><span data-stu-id="32db3-396">`CreateDefaultBuilder` calls `serverOptions.Configure(context.Configuration.GetSection("Kestrel"))` by default to load Kestrel configuration.</span></span>
+<span data-ttu-id="65f64-396">`CreateDefaultBuilder` 預設會呼叫 `serverOptions.Configure(context.Configuration.GetSection("Kestrel"))` 以載入 Kestrel 設定。</span><span class="sxs-lookup"><span data-stu-id="65f64-396">`CreateDefaultBuilder` calls `serverOptions.Configure(context.Configuration.GetSection("Kestrel"))` by default to load Kestrel configuration.</span></span>
 
-<span data-ttu-id="32db3-397">下列*appsettings.js*範例會將 HTTP/1.1 建立為所有端點的預設連接通訊協定：</span><span class="sxs-lookup"><span data-stu-id="32db3-397">The following *appsettings.json* example establishes HTTP/1.1 as the default connection protocol for all endpoints:</span></span>
+<span data-ttu-id="65f64-397">下列 *appsettings.js* 範例會建立 HTTP/1.1 作為所有端點的預設連接通訊協定：</span><span class="sxs-lookup"><span data-stu-id="65f64-397">The following *appsettings.json* example establishes HTTP/1.1 as the default connection protocol for all endpoints:</span></span>
 
 ```json
 {
@@ -864,7 +865,7 @@ webBuilder.ConfigureKestrel(serverOptions =>
 }
 ```
 
-<span data-ttu-id="32db3-398">下列*appsettings.js*範例會建立特定端點的 HTTP/1.1 連接通訊協定：</span><span class="sxs-lookup"><span data-stu-id="32db3-398">The following *appsettings.json* example establishes the HTTP/1.1 connection protocol for a specific endpoint:</span></span>
+<span data-ttu-id="65f64-398">下列 *appsettings.js* 範例會建立特定端點的 HTTP/1.1 連接通訊協定：</span><span class="sxs-lookup"><span data-stu-id="65f64-398">The following *appsettings.json* example establishes the HTTP/1.1 connection protocol for a specific endpoint:</span></span>
 
 ```json
 {
@@ -879,20 +880,20 @@ webBuilder.ConfigureKestrel(serverOptions =>
 }
 ```
 
-<span data-ttu-id="32db3-399">程式碼中指定的通訊協定會覆寫設定所設定的值。</span><span class="sxs-lookup"><span data-stu-id="32db3-399">Protocols specified in code override values set by configuration.</span></span>
+<span data-ttu-id="65f64-399">程式碼中指定的通訊協定會覆寫設定所設定的值。</span><span class="sxs-lookup"><span data-stu-id="65f64-399">Protocols specified in code override values set by configuration.</span></span>
 
-## <a name="transport-configuration"></a><span data-ttu-id="32db3-400">傳輸組態</span><span class="sxs-lookup"><span data-stu-id="32db3-400">Transport configuration</span></span>
+## <a name="transport-configuration"></a><span data-ttu-id="65f64-400">傳輸組態</span><span class="sxs-lookup"><span data-stu-id="65f64-400">Transport configuration</span></span>
 
-<span data-ttu-id="32db3-401">針對需要使用 Libuv () 的專案 <xref:Microsoft.AspNetCore.Hosting.WebHostBuilderLibuvExtensions.UseLibuv*> ：</span><span class="sxs-lookup"><span data-stu-id="32db3-401">For projects that require the use of Libuv (<xref:Microsoft.AspNetCore.Hosting.WebHostBuilderLibuvExtensions.UseLibuv*>):</span></span>
+<span data-ttu-id="65f64-401">對於需要使用 Libuv () 的專案 <xref:Microsoft.AspNetCore.Hosting.WebHostBuilderLibuvExtensions.UseLibuv*> ：</span><span class="sxs-lookup"><span data-stu-id="65f64-401">For projects that require the use of Libuv (<xref:Microsoft.AspNetCore.Hosting.WebHostBuilderLibuvExtensions.UseLibuv*>):</span></span>
 
-* <span data-ttu-id="32db3-402">將 [Microsoft.AspNetCore.Server.Kestrel.Transport.Libuv](https://www.nuget.org/packages/Microsoft.AspNetCore.Server.Kestrel.Transport.Libuv/) 套件的相依性新增至應用程式的專案檔中：</span><span class="sxs-lookup"><span data-stu-id="32db3-402">Add a dependency for the [Microsoft.AspNetCore.Server.Kestrel.Transport.Libuv](https://www.nuget.org/packages/Microsoft.AspNetCore.Server.Kestrel.Transport.Libuv/) package to the app's project file:</span></span>
+* <span data-ttu-id="65f64-402">將 [Microsoft.AspNetCore.Server.Kestrel.Transport.Libuv](https://www.nuget.org/packages/Microsoft.AspNetCore.Server.Kestrel.Transport.Libuv/) 套件的相依性新增至應用程式的專案檔中：</span><span class="sxs-lookup"><span data-stu-id="65f64-402">Add a dependency for the [Microsoft.AspNetCore.Server.Kestrel.Transport.Libuv](https://www.nuget.org/packages/Microsoft.AspNetCore.Server.Kestrel.Transport.Libuv/) package to the app's project file:</span></span>
 
    ```xml
    <PackageReference Include="Microsoft.AspNetCore.Server.Kestrel.Transport.Libuv"
                      Version="{VERSION}" />
    ```
 
-* <span data-ttu-id="32db3-403"><xref:Microsoft.AspNetCore.Hosting.WebHostBuilderLibuvExtensions.UseLibuv*>在上呼叫 `IWebHostBuilder` ：</span><span class="sxs-lookup"><span data-stu-id="32db3-403">Call <xref:Microsoft.AspNetCore.Hosting.WebHostBuilderLibuvExtensions.UseLibuv*> on the `IWebHostBuilder`:</span></span>
+* <span data-ttu-id="65f64-403"><xref:Microsoft.AspNetCore.Hosting.WebHostBuilderLibuvExtensions.UseLibuv*>在上呼叫 `IWebHostBuilder` ：</span><span class="sxs-lookup"><span data-stu-id="65f64-403">Call <xref:Microsoft.AspNetCore.Hosting.WebHostBuilderLibuvExtensions.UseLibuv*> on the `IWebHostBuilder`:</span></span>
 
    ```csharp
    public class Program
@@ -912,41 +913,41 @@ webBuilder.ConfigureKestrel(serverOptions =>
    }
    ```
 
-### <a name="url-prefixes"></a><span data-ttu-id="32db3-404">URL 前置詞</span><span class="sxs-lookup"><span data-stu-id="32db3-404">URL prefixes</span></span>
+### <a name="url-prefixes"></a><span data-ttu-id="65f64-404">URL 前置詞</span><span class="sxs-lookup"><span data-stu-id="65f64-404">URL prefixes</span></span>
 
-<span data-ttu-id="32db3-405">使用 `UseUrls`、`--urls` 命令列引數、`urls` 主機組態索引鍵或 `ASPNETCORE_URLS` 環境變數時，URL 前置詞可以採用下列任一格式。</span><span class="sxs-lookup"><span data-stu-id="32db3-405">When using `UseUrls`, `--urls` command-line argument, `urls` host configuration key, or `ASPNETCORE_URLS` environment variable, the URL prefixes can be in any of the following formats.</span></span>
+<span data-ttu-id="65f64-405">使用 `UseUrls`、`--urls` 命令列引數、`urls` 主機組態索引鍵或 `ASPNETCORE_URLS` 環境變數時，URL 前置詞可以採用下列任一格式。</span><span class="sxs-lookup"><span data-stu-id="65f64-405">When using `UseUrls`, `--urls` command-line argument, `urls` host configuration key, or `ASPNETCORE_URLS` environment variable, the URL prefixes can be in any of the following formats.</span></span>
 
-<span data-ttu-id="32db3-406">只有 HTTP URL 前置詞有效。</span><span class="sxs-lookup"><span data-stu-id="32db3-406">Only HTTP URL prefixes are valid.</span></span> <span data-ttu-id="32db3-407">使用 `UseUrls` 來設定 URL 繫結時，Kestrel 不支援 HTTPS。</span><span class="sxs-lookup"><span data-stu-id="32db3-407">Kestrel doesn't support HTTPS when configuring URL bindings using `UseUrls`.</span></span>
+<span data-ttu-id="65f64-406">只有 HTTP URL 前置詞有效。</span><span class="sxs-lookup"><span data-stu-id="65f64-406">Only HTTP URL prefixes are valid.</span></span> <span data-ttu-id="65f64-407">使用 `UseUrls` 來設定 URL 繫結時，Kestrel 不支援 HTTPS。</span><span class="sxs-lookup"><span data-stu-id="65f64-407">Kestrel doesn't support HTTPS when configuring URL bindings using `UseUrls`.</span></span>
 
-* <span data-ttu-id="32db3-408">IPv4 位址與連接埠號碼</span><span class="sxs-lookup"><span data-stu-id="32db3-408">IPv4 address with port number</span></span>
+* <span data-ttu-id="65f64-408">IPv4 位址與連接埠號碼</span><span class="sxs-lookup"><span data-stu-id="65f64-408">IPv4 address with port number</span></span>
 
   ```
   http://65.55.39.10:80/
   ```
 
-  <span data-ttu-id="32db3-409">`0.0.0.0` 是繫結至所有 IPv4 位址的特殊情況。</span><span class="sxs-lookup"><span data-stu-id="32db3-409">`0.0.0.0` is a special case that binds to all IPv4 addresses.</span></span>
+  <span data-ttu-id="65f64-409">`0.0.0.0` 是繫結至所有 IPv4 位址的特殊情況。</span><span class="sxs-lookup"><span data-stu-id="65f64-409">`0.0.0.0` is a special case that binds to all IPv4 addresses.</span></span>
 
-* <span data-ttu-id="32db3-410">IPv6 位址與連接埠號碼</span><span class="sxs-lookup"><span data-stu-id="32db3-410">IPv6 address with port number</span></span>
+* <span data-ttu-id="65f64-410">IPv6 位址與連接埠號碼</span><span class="sxs-lookup"><span data-stu-id="65f64-410">IPv6 address with port number</span></span>
 
   ```
   http://[0:0:0:0:0:ffff:4137:270a]:80/
   ```
 
-  <span data-ttu-id="32db3-411">`[::]` 是相當於 IPv4 `0.0.0.0` 的 IPv6 對等項目。</span><span class="sxs-lookup"><span data-stu-id="32db3-411">`[::]` is the IPv6 equivalent of IPv4 `0.0.0.0`.</span></span>
+  <span data-ttu-id="65f64-411">`[::]` 是相當於 IPv4 `0.0.0.0` 的 IPv6 對等項目。</span><span class="sxs-lookup"><span data-stu-id="65f64-411">`[::]` is the IPv6 equivalent of IPv4 `0.0.0.0`.</span></span>
 
-* <span data-ttu-id="32db3-412">主機名稱與連接埠號碼</span><span class="sxs-lookup"><span data-stu-id="32db3-412">Host name with port number</span></span>
+* <span data-ttu-id="65f64-412">主機名稱與連接埠號碼</span><span class="sxs-lookup"><span data-stu-id="65f64-412">Host name with port number</span></span>
 
   ```
   http://contoso.com:80/
   http://*:80/
   ```
 
-  <span data-ttu-id="32db3-413">主機名稱 `*` 和 `+` 並不特殊。</span><span class="sxs-lookup"><span data-stu-id="32db3-413">Host names, `*`, and `+`, aren't special.</span></span> <span data-ttu-id="32db3-414">無法辨識為有效 IP 位址或 `localhost` 的任何項目，都會繫結至所有 IPv4 和 IPv6 IP。</span><span class="sxs-lookup"><span data-stu-id="32db3-414">Anything not recognized as a valid IP address or `localhost` binds to all IPv4 and IPv6 IPs.</span></span> <span data-ttu-id="32db3-415">若要在相同連接埠上將不同的主機名稱繫結至不同的 ASP.NET Core 應用程式，請使用 [HTTP.sys](xref:fundamentals/servers/httpsys) 或反向 Proxy 伺服器 (例如 IIS、Nginx 或 Apache)。</span><span class="sxs-lookup"><span data-stu-id="32db3-415">To bind different host names to different ASP.NET Core apps on the same port, use [HTTP.sys](xref:fundamentals/servers/httpsys) or a reverse proxy server, such as IIS, Nginx, or Apache.</span></span>
+  <span data-ttu-id="65f64-413">主機名稱 `*` 和 `+` 並不特殊。</span><span class="sxs-lookup"><span data-stu-id="65f64-413">Host names, `*`, and `+`, aren't special.</span></span> <span data-ttu-id="65f64-414">無法辨識為有效 IP 位址或 `localhost` 的任何項目，都會繫結至所有 IPv4 和 IPv6 IP。</span><span class="sxs-lookup"><span data-stu-id="65f64-414">Anything not recognized as a valid IP address or `localhost` binds to all IPv4 and IPv6 IPs.</span></span> <span data-ttu-id="65f64-415">若要在相同連接埠上將不同的主機名稱繫結至不同的 ASP.NET Core 應用程式，請使用 [HTTP.sys](xref:fundamentals/servers/httpsys) 或反向 Proxy 伺服器 (例如 IIS、Nginx 或 Apache)。</span><span class="sxs-lookup"><span data-stu-id="65f64-415">To bind different host names to different ASP.NET Core apps on the same port, use [HTTP.sys](xref:fundamentals/servers/httpsys) or a reverse proxy server, such as IIS, Nginx, or Apache.</span></span>
 
   > [!WARNING]
-  > <span data-ttu-id="32db3-416">裝載於反向 Proxy 組態需要[主機篩選](#host-filtering)。</span><span class="sxs-lookup"><span data-stu-id="32db3-416">Hosting in a reverse proxy configuration requires [host filtering](#host-filtering).</span></span>
+  > <span data-ttu-id="65f64-416">裝載於反向 Proxy 組態需要[主機篩選](#host-filtering)。</span><span class="sxs-lookup"><span data-stu-id="65f64-416">Hosting in a reverse proxy configuration requires [host filtering](#host-filtering).</span></span>
 
-* <span data-ttu-id="32db3-417">主機 `localhost` 名稱與連接埠號碼，或回送 IP 與連接埠號碼</span><span class="sxs-lookup"><span data-stu-id="32db3-417">Host `localhost` name with port number or loopback IP with port number</span></span>
+* <span data-ttu-id="65f64-417">主機 `localhost` 名稱與連接埠號碼，或回送 IP 與連接埠號碼</span><span class="sxs-lookup"><span data-stu-id="65f64-417">Host `localhost` name with port number or loopback IP with port number</span></span>
 
   ```
   http://localhost:5000/
@@ -954,19 +955,19 @@ webBuilder.ConfigureKestrel(serverOptions =>
   http://[::1]:5000/
   ```
 
-  <span data-ttu-id="32db3-418">如果指定 `localhost`，Kestrel 會嘗試同時繫結至 IPv4 和 IPv6 回送介面。</span><span class="sxs-lookup"><span data-stu-id="32db3-418">When `localhost` is specified, Kestrel attempts to bind to both IPv4 and IPv6 loopback interfaces.</span></span> <span data-ttu-id="32db3-419">如果所要求的連接埠在任一個回送介面上由另一個服務使用，則 Kestrel 無法啟動。</span><span class="sxs-lookup"><span data-stu-id="32db3-419">If the requested port is in use by another service on either loopback interface, Kestrel fails to start.</span></span> <span data-ttu-id="32db3-420">如果任一回送介面由於任何其他原因 (最常見的原因是不支援 IPv6) 無法使用，Kestrel 就會記錄警告。</span><span class="sxs-lookup"><span data-stu-id="32db3-420">If either loopback interface is unavailable for any other reason (most commonly because IPv6 isn't supported), Kestrel logs a warning.</span></span>
+  <span data-ttu-id="65f64-418">如果指定 `localhost`，Kestrel 會嘗試同時繫結至 IPv4 和 IPv6 回送介面。</span><span class="sxs-lookup"><span data-stu-id="65f64-418">When `localhost` is specified, Kestrel attempts to bind to both IPv4 and IPv6 loopback interfaces.</span></span> <span data-ttu-id="65f64-419">如果所要求的連接埠在任一個回送介面上由另一個服務使用，則 Kestrel 無法啟動。</span><span class="sxs-lookup"><span data-stu-id="65f64-419">If the requested port is in use by another service on either loopback interface, Kestrel fails to start.</span></span> <span data-ttu-id="65f64-420">如果任一回送介面由於任何其他原因 (最常見的原因是不支援 IPv6) 無法使用，Kestrel 就會記錄警告。</span><span class="sxs-lookup"><span data-stu-id="65f64-420">If either loopback interface is unavailable for any other reason (most commonly because IPv6 isn't supported), Kestrel logs a warning.</span></span>
 
-## <a name="host-filtering"></a><span data-ttu-id="32db3-421">主機篩選</span><span class="sxs-lookup"><span data-stu-id="32db3-421">Host filtering</span></span>
+## <a name="host-filtering"></a><span data-ttu-id="65f64-421">主機篩選</span><span class="sxs-lookup"><span data-stu-id="65f64-421">Host filtering</span></span>
 
-<span data-ttu-id="32db3-422">雖然 Kestrel 根據前置詞來支援組態，例如 `http://example.com:5000`，Kestrel 大多會忽略主機名稱。</span><span class="sxs-lookup"><span data-stu-id="32db3-422">While Kestrel supports configuration based on prefixes such as `http://example.com:5000`, Kestrel largely ignores the host name.</span></span> <span data-ttu-id="32db3-423">主機 `localhost` 是特殊情況，用來繫結到回送位址。</span><span class="sxs-lookup"><span data-stu-id="32db3-423">Host `localhost` is a special case used for binding to loopback addresses.</span></span> <span data-ttu-id="32db3-424">任何非明確 IP 位址的主機，會繫結至所有公用 IP 位址。</span><span class="sxs-lookup"><span data-stu-id="32db3-424">Any host other than an explicit IP address binds to all public IP addresses.</span></span> <span data-ttu-id="32db3-425">`Host` 標頭未驗證。</span><span class="sxs-lookup"><span data-stu-id="32db3-425">`Host` headers aren't validated.</span></span>
+<span data-ttu-id="65f64-422">雖然 Kestrel 根據前置詞來支援組態，例如 `http://example.com:5000`，Kestrel 大多會忽略主機名稱。</span><span class="sxs-lookup"><span data-stu-id="65f64-422">While Kestrel supports configuration based on prefixes such as `http://example.com:5000`, Kestrel largely ignores the host name.</span></span> <span data-ttu-id="65f64-423">主機 `localhost` 是特殊情況，用來繫結到回送位址。</span><span class="sxs-lookup"><span data-stu-id="65f64-423">Host `localhost` is a special case used for binding to loopback addresses.</span></span> <span data-ttu-id="65f64-424">任何非明確 IP 位址的主機，會繫結至所有公用 IP 位址。</span><span class="sxs-lookup"><span data-stu-id="65f64-424">Any host other than an explicit IP address binds to all public IP addresses.</span></span> <span data-ttu-id="65f64-425">`Host` 標頭未驗證。</span><span class="sxs-lookup"><span data-stu-id="65f64-425">`Host` headers aren't validated.</span></span>
 
-<span data-ttu-id="32db3-426">因應措施是使用主機篩選中介軟體。</span><span class="sxs-lookup"><span data-stu-id="32db3-426">As a workaround, use Host Filtering Middleware.</span></span> <span data-ttu-id="32db3-427">主機篩選中介軟體是由[AspNetCore. HostFiltering](https://www.nuget.org/packages/Microsoft.AspNetCore.HostFiltering)套件提供，這是針對 ASP.NET Core 應用程式而隱含提供的。</span><span class="sxs-lookup"><span data-stu-id="32db3-427">Host Filtering Middleware is provided by the [Microsoft.AspNetCore.HostFiltering](https://www.nuget.org/packages/Microsoft.AspNetCore.HostFiltering) package, which is implicitly provided for ASP.NET Core apps.</span></span> <span data-ttu-id="32db3-428">中介軟體是由 <xref:Microsoft.AspNetCore.WebHost.CreateDefaultBuilder*> 所新增，它會呼叫 <xref:Microsoft.AspNetCore.Builder.HostFilteringServicesExtensions.AddHostFiltering*>：</span><span class="sxs-lookup"><span data-stu-id="32db3-428">The middleware is added by <xref:Microsoft.AspNetCore.WebHost.CreateDefaultBuilder*>, which calls <xref:Microsoft.AspNetCore.Builder.HostFilteringServicesExtensions.AddHostFiltering*>:</span></span>
+<span data-ttu-id="65f64-426">因應措施是使用主機篩選中介軟體。</span><span class="sxs-lookup"><span data-stu-id="65f64-426">As a workaround, use Host Filtering Middleware.</span></span> <span data-ttu-id="65f64-427">主機篩選中介軟體是由 [AspNetCore HostFiltering](https://www.nuget.org/packages/Microsoft.AspNetCore.HostFiltering) 套件所提供，該套件是針對 ASP.NET Core 應用程式隱含提供的。</span><span class="sxs-lookup"><span data-stu-id="65f64-427">Host Filtering Middleware is provided by the [Microsoft.AspNetCore.HostFiltering](https://www.nuget.org/packages/Microsoft.AspNetCore.HostFiltering) package, which is implicitly provided for ASP.NET Core apps.</span></span> <span data-ttu-id="65f64-428">中介軟體是由 <xref:Microsoft.AspNetCore.WebHost.CreateDefaultBuilder*> 所新增，它會呼叫 <xref:Microsoft.AspNetCore.Builder.HostFilteringServicesExtensions.AddHostFiltering*>：</span><span class="sxs-lookup"><span data-stu-id="65f64-428">The middleware is added by <xref:Microsoft.AspNetCore.WebHost.CreateDefaultBuilder*>, which calls <xref:Microsoft.AspNetCore.Builder.HostFilteringServicesExtensions.AddHostFiltering*>:</span></span>
 
 [!code-csharp[](kestrel/samples-snapshot/2.x/KestrelSample/Program.cs?name=snippet_Program&highlight=9)]
 
-<span data-ttu-id="32db3-429">預設停用主機篩選中介軟體。</span><span class="sxs-lookup"><span data-stu-id="32db3-429">Host Filtering Middleware is disabled by default.</span></span> <span data-ttu-id="32db3-430">若要啟用中介軟體，請 `AllowedHosts` 在 appsettings*上的appsettings.js*中定義索引鍵 / \* \<EnvironmentName> 。json\*。</span><span class="sxs-lookup"><span data-stu-id="32db3-430">To enable the middleware, define an `AllowedHosts` key in *appsettings.json*/*appsettings.\<EnvironmentName>.json*.</span></span> <span data-ttu-id="32db3-431">此值是以分號分隔的主機名稱清單，不含連接埠號碼：</span><span class="sxs-lookup"><span data-stu-id="32db3-431">The value is a semicolon-delimited list of host names without port numbers:</span></span>
+<span data-ttu-id="65f64-429">預設停用主機篩選中介軟體。</span><span class="sxs-lookup"><span data-stu-id="65f64-429">Host Filtering Middleware is disabled by default.</span></span> <span data-ttu-id="65f64-430">若要啟用中介軟體，請 `AllowedHosts` 在 appsettings*上的appsettings.js*中定義金鑰 / \* \<EnvironmentName> 。json\*。</span><span class="sxs-lookup"><span data-stu-id="65f64-430">To enable the middleware, define an `AllowedHosts` key in *appsettings.json*/*appsettings.\<EnvironmentName>.json*.</span></span> <span data-ttu-id="65f64-431">此值是以分號分隔的主機名稱清單，不含連接埠號碼：</span><span class="sxs-lookup"><span data-stu-id="65f64-431">The value is a semicolon-delimited list of host names without port numbers:</span></span>
 
-<span data-ttu-id="32db3-432">*appsettings.js*：</span><span class="sxs-lookup"><span data-stu-id="32db3-432">*appsettings.json*:</span></span>
+<span data-ttu-id="65f64-432">*appsettings.js*：</span><span class="sxs-lookup"><span data-stu-id="65f64-432">*appsettings.json*:</span></span>
 
 ```json
 {
@@ -975,86 +976,86 @@ webBuilder.ConfigureKestrel(serverOptions =>
 ```
 
 > [!NOTE]
-> <span data-ttu-id="32db3-433">[轉送的標頭中介軟體](xref:host-and-deploy/proxy-load-balancer)也有 <xref:Microsoft.AspNetCore.Builder.ForwardedHeadersOptions.AllowedHosts> 選項。</span><span class="sxs-lookup"><span data-stu-id="32db3-433">[Forwarded Headers Middleware](xref:host-and-deploy/proxy-load-balancer) also has an <xref:Microsoft.AspNetCore.Builder.ForwardedHeadersOptions.AllowedHosts> option.</span></span> <span data-ttu-id="32db3-434">在不同的案例中，轉送標頭中介軟體和主機篩選中介軟體有類似的功能。</span><span class="sxs-lookup"><span data-stu-id="32db3-434">Forwarded Headers Middleware and Host Filtering Middleware have similar functionality for different scenarios.</span></span> <span data-ttu-id="32db3-435">當不保留 `Host` 標頭，卻使用反向 Proxy 伺服器或負載平衡器轉送要求時，可使用轉送標頭中介軟體設定 `AllowedHosts`。</span><span class="sxs-lookup"><span data-stu-id="32db3-435">Setting `AllowedHosts` with Forwarded Headers Middleware is appropriate when the `Host` header isn't preserved while forwarding requests with a reverse proxy server or load balancer.</span></span> <span data-ttu-id="32db3-436">當使用 Kestrel 作為公眾對應 Edge Server，或直接轉送 `Host` 標頭時，可使用主機篩選中介軟體設定 `AllowedHosts`。</span><span class="sxs-lookup"><span data-stu-id="32db3-436">Setting `AllowedHosts` with Host Filtering Middleware is appropriate when Kestrel is used as a public-facing edge server or when the `Host` header is directly forwarded.</span></span>
+> <span data-ttu-id="65f64-433">[轉送的標頭中介軟體](xref:host-and-deploy/proxy-load-balancer)也有 <xref:Microsoft.AspNetCore.Builder.ForwardedHeadersOptions.AllowedHosts> 選項。</span><span class="sxs-lookup"><span data-stu-id="65f64-433">[Forwarded Headers Middleware](xref:host-and-deploy/proxy-load-balancer) also has an <xref:Microsoft.AspNetCore.Builder.ForwardedHeadersOptions.AllowedHosts> option.</span></span> <span data-ttu-id="65f64-434">在不同的案例中，轉送標頭中介軟體和主機篩選中介軟體有類似的功能。</span><span class="sxs-lookup"><span data-stu-id="65f64-434">Forwarded Headers Middleware and Host Filtering Middleware have similar functionality for different scenarios.</span></span> <span data-ttu-id="65f64-435">當不保留 `Host` 標頭，卻使用反向 Proxy 伺服器或負載平衡器轉送要求時，可使用轉送標頭中介軟體設定 `AllowedHosts`。</span><span class="sxs-lookup"><span data-stu-id="65f64-435">Setting `AllowedHosts` with Forwarded Headers Middleware is appropriate when the `Host` header isn't preserved while forwarding requests with a reverse proxy server or load balancer.</span></span> <span data-ttu-id="65f64-436">當使用 Kestrel 作為公眾對應 Edge Server，或直接轉送 `Host` 標頭時，可使用主機篩選中介軟體設定 `AllowedHosts`。</span><span class="sxs-lookup"><span data-stu-id="65f64-436">Setting `AllowedHosts` with Host Filtering Middleware is appropriate when Kestrel is used as a public-facing edge server or when the `Host` header is directly forwarded.</span></span>
 >
-> <span data-ttu-id="32db3-437">如需轉送標頭中介軟體的詳細資訊，請參閱<xref:host-and-deploy/proxy-load-balancer>。</span><span class="sxs-lookup"><span data-stu-id="32db3-437">For more information on Forwarded Headers Middleware, see <xref:host-and-deploy/proxy-load-balancer>.</span></span>
+> <span data-ttu-id="65f64-437">如需轉送標頭中介軟體的詳細資訊，請參閱<xref:host-and-deploy/proxy-load-balancer>。</span><span class="sxs-lookup"><span data-stu-id="65f64-437">For more information on Forwarded Headers Middleware, see <xref:host-and-deploy/proxy-load-balancer>.</span></span>
 
 ::: moniker-end
 
 ::: moniker range="= aspnetcore-2.2"
 
-<span data-ttu-id="32db3-438">Kestrel 是 [ASP.NET Core 的跨平台網頁伺服器](xref:fundamentals/servers/index)。</span><span class="sxs-lookup"><span data-stu-id="32db3-438">Kestrel is a cross-platform [web server for ASP.NET Core](xref:fundamentals/servers/index).</span></span> <span data-ttu-id="32db3-439">Kestrel 是 ASP.NET Core 專案範本中預設隨附的網頁伺服器。</span><span class="sxs-lookup"><span data-stu-id="32db3-439">Kestrel is the web server that's included by default in ASP.NET Core project templates.</span></span>
+<span data-ttu-id="65f64-438">Kestrel 是 [ASP.NET Core 的跨平台網頁伺服器](xref:fundamentals/servers/index)。</span><span class="sxs-lookup"><span data-stu-id="65f64-438">Kestrel is a cross-platform [web server for ASP.NET Core](xref:fundamentals/servers/index).</span></span> <span data-ttu-id="65f64-439">Kestrel 是 ASP.NET Core 專案範本中預設隨附的網頁伺服器。</span><span class="sxs-lookup"><span data-stu-id="65f64-439">Kestrel is the web server that's included by default in ASP.NET Core project templates.</span></span>
 
-<span data-ttu-id="32db3-440">Kestrel 支援下列案例：</span><span class="sxs-lookup"><span data-stu-id="32db3-440">Kestrel supports the following scenarios:</span></span>
+<span data-ttu-id="65f64-440">Kestrel 支援下列案例：</span><span class="sxs-lookup"><span data-stu-id="65f64-440">Kestrel supports the following scenarios:</span></span>
 
-* <span data-ttu-id="32db3-441">HTTPS</span><span class="sxs-lookup"><span data-stu-id="32db3-441">HTTPS</span></span>
-* <span data-ttu-id="32db3-442">用來啟用 [WebSockets](https://github.com/aspnet/websockets) 的不透明升級</span><span class="sxs-lookup"><span data-stu-id="32db3-442">Opaque upgrade used to enable [WebSockets](https://github.com/aspnet/websockets)</span></span>
-* <span data-ttu-id="32db3-443">Nginx 背後的高效能 Unix 通訊端</span><span class="sxs-lookup"><span data-stu-id="32db3-443">Unix sockets for high performance behind Nginx</span></span>
-* <span data-ttu-id="32db3-444">HTTP/2 (macOS 上除外&dagger;)</span><span class="sxs-lookup"><span data-stu-id="32db3-444">HTTP/2 (except on macOS&dagger;)</span></span>
+* <span data-ttu-id="65f64-441">HTTPS</span><span class="sxs-lookup"><span data-stu-id="65f64-441">HTTPS</span></span>
+* <span data-ttu-id="65f64-442">用來啟用 [WebSockets](https://github.com/aspnet/websockets) 的不透明升級</span><span class="sxs-lookup"><span data-stu-id="65f64-442">Opaque upgrade used to enable [WebSockets](https://github.com/aspnet/websockets)</span></span>
+* <span data-ttu-id="65f64-443">Nginx 背後的高效能 Unix 通訊端</span><span class="sxs-lookup"><span data-stu-id="65f64-443">Unix sockets for high performance behind Nginx</span></span>
+* <span data-ttu-id="65f64-444">HTTP/2 (macOS 上除外&dagger;)</span><span class="sxs-lookup"><span data-stu-id="65f64-444">HTTP/2 (except on macOS&dagger;)</span></span>
 
-<span data-ttu-id="32db3-445">&dagger;未來版本的 macOS 上將會支援 HTTP/2。</span><span class="sxs-lookup"><span data-stu-id="32db3-445">&dagger;HTTP/2 will be supported on macOS in a future release.</span></span>
+<span data-ttu-id="65f64-445">&dagger;未來版本的 macOS 上將會支援 HTTP/2。</span><span class="sxs-lookup"><span data-stu-id="65f64-445">&dagger;HTTP/2 will be supported on macOS in a future release.</span></span>
 
-<span data-ttu-id="32db3-446">.NET Core 支援的所有平台和版本都支援 Kestrel。</span><span class="sxs-lookup"><span data-stu-id="32db3-446">Kestrel is supported on all platforms and versions that .NET Core supports.</span></span>
+<span data-ttu-id="65f64-446">.NET Core 支援的所有平台和版本都支援 Kestrel。</span><span class="sxs-lookup"><span data-stu-id="65f64-446">Kestrel is supported on all platforms and versions that .NET Core supports.</span></span>
 
-<span data-ttu-id="32db3-447">[查看或下載範例程式碼](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/servers/kestrel/samples) ([如何下載](xref:index#how-to-download-a-sample)) </span><span class="sxs-lookup"><span data-stu-id="32db3-447">[View or download sample code](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/servers/kestrel/samples) ([how to download](xref:index#how-to-download-a-sample))</span></span>
+<span data-ttu-id="65f64-447">[查看或下載範例程式碼](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/servers/kestrel/samples) ([如何下載](xref:index#how-to-download-a-sample)) </span><span class="sxs-lookup"><span data-stu-id="65f64-447">[View or download sample code](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/servers/kestrel/samples) ([how to download](xref:index#how-to-download-a-sample))</span></span>
 
-## <a name="http2-support"></a><span data-ttu-id="32db3-448">HTTP/2 支援</span><span class="sxs-lookup"><span data-stu-id="32db3-448">HTTP/2 support</span></span>
+## <a name="http2-support"></a><span data-ttu-id="65f64-448">HTTP/2 支援</span><span class="sxs-lookup"><span data-stu-id="65f64-448">HTTP/2 support</span></span>
 
-<span data-ttu-id="32db3-449">如果符合下列基本需求，則可以針對 ASP.NET Core 應用程式使用 [HTTP/2](https://httpwg.org/specs/rfc7540.html)：</span><span class="sxs-lookup"><span data-stu-id="32db3-449">[HTTP/2](https://httpwg.org/specs/rfc7540.html) is available for ASP.NET Core apps if the following base requirements are met:</span></span>
+<span data-ttu-id="65f64-449">如果符合下列基本需求，則可以針對 ASP.NET Core 應用程式使用 [HTTP/2](https://httpwg.org/specs/rfc7540.html)：</span><span class="sxs-lookup"><span data-stu-id="65f64-449">[HTTP/2](https://httpwg.org/specs/rfc7540.html) is available for ASP.NET Core apps if the following base requirements are met:</span></span>
 
-* <span data-ttu-id="32db3-450">作業系統&dagger;</span><span class="sxs-lookup"><span data-stu-id="32db3-450">Operating system&dagger;</span></span>
-  * <span data-ttu-id="32db3-451">Windows Server 2016/Windows 10 或更新版本&Dagger;</span><span class="sxs-lookup"><span data-stu-id="32db3-451">Windows Server 2016/Windows 10 or later&Dagger;</span></span>
-  * <span data-ttu-id="32db3-452">Linux 含 OpenSSL 1.0.2 或更新版本 (例如 Ubuntu 16.04 或更新版本)</span><span class="sxs-lookup"><span data-stu-id="32db3-452">Linux with OpenSSL 1.0.2 or later (for example, Ubuntu 16.04 or later)</span></span>
-* <span data-ttu-id="32db3-453">目標 Framework：.NET Core 2.2 或更新版本</span><span class="sxs-lookup"><span data-stu-id="32db3-453">Target framework: .NET Core 2.2 or later</span></span>
-* <span data-ttu-id="32db3-454">[Application-Layer Protocol Negotiation (ALPN)](https://tools.ietf.org/html/rfc7301#section-3) 連線</span><span class="sxs-lookup"><span data-stu-id="32db3-454">[Application-Layer Protocol Negotiation (ALPN)](https://tools.ietf.org/html/rfc7301#section-3) connection</span></span>
-* <span data-ttu-id="32db3-455">TLS 1.2 或更新版本連線</span><span class="sxs-lookup"><span data-stu-id="32db3-455">TLS 1.2 or later connection</span></span>
+* <span data-ttu-id="65f64-450">作業系統&dagger;</span><span class="sxs-lookup"><span data-stu-id="65f64-450">Operating system&dagger;</span></span>
+  * <span data-ttu-id="65f64-451">Windows Server 2016/Windows 10 或更新版本&Dagger;</span><span class="sxs-lookup"><span data-stu-id="65f64-451">Windows Server 2016/Windows 10 or later&Dagger;</span></span>
+  * <span data-ttu-id="65f64-452">Linux 含 OpenSSL 1.0.2 或更新版本 (例如 Ubuntu 16.04 或更新版本)</span><span class="sxs-lookup"><span data-stu-id="65f64-452">Linux with OpenSSL 1.0.2 or later (for example, Ubuntu 16.04 or later)</span></span>
+* <span data-ttu-id="65f64-453">目標 Framework：.NET Core 2.2 或更新版本</span><span class="sxs-lookup"><span data-stu-id="65f64-453">Target framework: .NET Core 2.2 or later</span></span>
+* <span data-ttu-id="65f64-454">[Application-Layer Protocol Negotiation (ALPN)](https://tools.ietf.org/html/rfc7301#section-3) 連線</span><span class="sxs-lookup"><span data-stu-id="65f64-454">[Application-Layer Protocol Negotiation (ALPN)](https://tools.ietf.org/html/rfc7301#section-3) connection</span></span>
+* <span data-ttu-id="65f64-455">TLS 1.2 或更新版本連線</span><span class="sxs-lookup"><span data-stu-id="65f64-455">TLS 1.2 or later connection</span></span>
 
-<span data-ttu-id="32db3-456">&dagger;未來版本的 macOS 上將會支援 HTTP/2。</span><span class="sxs-lookup"><span data-stu-id="32db3-456">&dagger;HTTP/2 will be supported on macOS in a future release.</span></span>
-<span data-ttu-id="32db3-457">&Dagger;Kestrel 在 Windows Server 2012 R2 與 Windows 8.1 對 HTTP/2 的支援有限。</span><span class="sxs-lookup"><span data-stu-id="32db3-457">&Dagger;Kestrel has limited support for HTTP/2 on Windows Server 2012 R2 and Windows 8.1.</span></span> <span data-ttu-id="32db3-458">支援有限的原因是這些作業系統上的支援 TLS 密碼編譯套件清單有限。</span><span class="sxs-lookup"><span data-stu-id="32db3-458">Support is limited because the list of supported TLS cipher suites available on these operating systems is limited.</span></span> <span data-ttu-id="32db3-459">可能需要使用橢圓曲線數位簽章演算法 (ECDSA) 產生的憑證來保護 TLS 連線。</span><span class="sxs-lookup"><span data-stu-id="32db3-459">A certificate generated using an Elliptic Curve Digital Signature Algorithm (ECDSA) may be required to secure TLS connections.</span></span>
+<span data-ttu-id="65f64-456">&dagger;未來版本的 macOS 上將會支援 HTTP/2。</span><span class="sxs-lookup"><span data-stu-id="65f64-456">&dagger;HTTP/2 will be supported on macOS in a future release.</span></span>
+<span data-ttu-id="65f64-457">&Dagger;Kestrel 在 Windows Server 2012 R2 與 Windows 8.1 對 HTTP/2 的支援有限。</span><span class="sxs-lookup"><span data-stu-id="65f64-457">&Dagger;Kestrel has limited support for HTTP/2 on Windows Server 2012 R2 and Windows 8.1.</span></span> <span data-ttu-id="65f64-458">支援有限的原因是這些作業系統上的支援 TLS 密碼編譯套件清單有限。</span><span class="sxs-lookup"><span data-stu-id="65f64-458">Support is limited because the list of supported TLS cipher suites available on these operating systems is limited.</span></span> <span data-ttu-id="65f64-459">可能需要使用橢圓曲線數位簽章演算法 (ECDSA) 產生的憑證來保護 TLS 連線。</span><span class="sxs-lookup"><span data-stu-id="65f64-459">A certificate generated using an Elliptic Curve Digital Signature Algorithm (ECDSA) may be required to secure TLS connections.</span></span>
 
-<span data-ttu-id="32db3-460">如果已建立 HTTP/2 連線，[HttpRequest.Protocol](xref:Microsoft.AspNetCore.Http.HttpRequest.Protocol*) 會報告 `HTTP/2`。</span><span class="sxs-lookup"><span data-stu-id="32db3-460">If an HTTP/2 connection is established, [HttpRequest.Protocol](xref:Microsoft.AspNetCore.Http.HttpRequest.Protocol*) reports `HTTP/2`.</span></span>
+<span data-ttu-id="65f64-460">如果已建立 HTTP/2 連線，[HttpRequest.Protocol](xref:Microsoft.AspNetCore.Http.HttpRequest.Protocol*) 會報告 `HTTP/2`。</span><span class="sxs-lookup"><span data-stu-id="65f64-460">If an HTTP/2 connection is established, [HttpRequest.Protocol](xref:Microsoft.AspNetCore.Http.HttpRequest.Protocol*) reports `HTTP/2`.</span></span>
 
-<span data-ttu-id="32db3-461">預設會停用 HTTP/2。</span><span class="sxs-lookup"><span data-stu-id="32db3-461">HTTP/2 is disabled by default.</span></span> <span data-ttu-id="32db3-462">如需組態的詳細資訊，請參閱 [Kestrel 選項](#kestrel-options)和 [ListenOptions. 通訊協定](#listenoptionsprotocols)一節。</span><span class="sxs-lookup"><span data-stu-id="32db3-462">For more information on configuration, see the [Kestrel options](#kestrel-options) and [ListenOptions.Protocols](#listenoptionsprotocols) sections.</span></span>
+<span data-ttu-id="65f64-461">預設會停用 HTTP/2。</span><span class="sxs-lookup"><span data-stu-id="65f64-461">HTTP/2 is disabled by default.</span></span> <span data-ttu-id="65f64-462">如需組態的詳細資訊，請參閱 [Kestrel 選項](#kestrel-options)和 [ListenOptions. 通訊協定](#listenoptionsprotocols)一節。</span><span class="sxs-lookup"><span data-stu-id="65f64-462">For more information on configuration, see the [Kestrel options](#kestrel-options) and [ListenOptions.Protocols](#listenoptionsprotocols) sections.</span></span>
 
-## <a name="when-to-use-kestrel-with-a-reverse-proxy"></a><span data-ttu-id="32db3-463">何時搭配使用 Kestrel 與反向 Proxy</span><span class="sxs-lookup"><span data-stu-id="32db3-463">When to use Kestrel with a reverse proxy</span></span>
+## <a name="when-to-use-kestrel-with-a-reverse-proxy"></a><span data-ttu-id="65f64-463">何時搭配使用 Kestrel 與反向 Proxy</span><span class="sxs-lookup"><span data-stu-id="65f64-463">When to use Kestrel with a reverse proxy</span></span>
 
-<span data-ttu-id="32db3-464">您可以單獨使用 Kestrel，或與 [Internet Information Services (IIS)](https://www.iis.net/)、[Nginx](https://nginx.org) 或 [Apache](https://httpd.apache.org/) 等「反向 Proxy 伺服器」\*\* 搭配使用。</span><span class="sxs-lookup"><span data-stu-id="32db3-464">Kestrel can be used by itself or with a *reverse proxy server*, such as [Internet Information Services (IIS)](https://www.iis.net/), [Nginx](https://nginx.org), or [Apache](https://httpd.apache.org/).</span></span> <span data-ttu-id="32db3-465">反向 Proxy 伺服器會從網路接收 HTTP 要求，然後轉送到 Kestrel。</span><span class="sxs-lookup"><span data-stu-id="32db3-465">A reverse proxy server receives HTTP requests from the network and forwards them to Kestrel.</span></span>
+<span data-ttu-id="65f64-464">您可以單獨使用 Kestrel，或與 [Internet Information Services (IIS)](https://www.iis.net/)、[Nginx](https://nginx.org) 或 [Apache](https://httpd.apache.org/) 等「反向 Proxy 伺服器」\*\* 搭配使用。</span><span class="sxs-lookup"><span data-stu-id="65f64-464">Kestrel can be used by itself or with a *reverse proxy server*, such as [Internet Information Services (IIS)](https://www.iis.net/), [Nginx](https://nginx.org), or [Apache](https://httpd.apache.org/).</span></span> <span data-ttu-id="65f64-465">反向 Proxy 伺服器會從網路接收 HTTP 要求，然後轉送到 Kestrel。</span><span class="sxs-lookup"><span data-stu-id="65f64-465">A reverse proxy server receives HTTP requests from the network and forwards them to Kestrel.</span></span>
 
-<span data-ttu-id="32db3-466">Kestrel 用作邊緣 (網際網路對應) 網頁伺服器：</span><span class="sxs-lookup"><span data-stu-id="32db3-466">Kestrel used as an edge (Internet-facing) web server:</span></span>
+<span data-ttu-id="65f64-466">Kestrel 用作邊緣 (網際網路對應) 網頁伺服器：</span><span class="sxs-lookup"><span data-stu-id="65f64-466">Kestrel used as an edge (Internet-facing) web server:</span></span>
 
 ![Kestrel 不使用反向 Proxy 伺服器直接與網際網路通訊](kestrel/_static/kestrel-to-internet2.png)
 
-<span data-ttu-id="32db3-468">Kestrel 用於反向 Proxy 組態中：</span><span class="sxs-lookup"><span data-stu-id="32db3-468">Kestrel used in a reverse proxy configuration:</span></span>
+<span data-ttu-id="65f64-468">Kestrel 用於反向 Proxy 組態中：</span><span class="sxs-lookup"><span data-stu-id="65f64-468">Kestrel used in a reverse proxy configuration:</span></span>
 
 ![Kestrel 透過 IIS、Nginx 或 Apache 等反向 Proxy 伺服器間接與網際網路通訊](kestrel/_static/kestrel-to-internet.png)
 
-<span data-ttu-id="32db3-470">無論是否使用反向 proxy 伺服器設定，都是支援的裝載設定。</span><span class="sxs-lookup"><span data-stu-id="32db3-470">Either configuration, with or without a reverse proxy server, is a supported hosting configuration.</span></span>
+<span data-ttu-id="65f64-470">不論是否有反向 proxy 伺服器，設定都是支援的裝載設定。</span><span class="sxs-lookup"><span data-stu-id="65f64-470">Either configuration, with or without a reverse proxy server, is a supported hosting configuration.</span></span>
 
-<span data-ttu-id="32db3-471">Kestrel 用作不需要反向 Proxy 伺服器的 Edge Server 時，不支援在多個處理序之間共用相同的 IP 和連接埠。</span><span class="sxs-lookup"><span data-stu-id="32db3-471">Kestrel used as an edge server without a reverse proxy server doesn't support sharing the same IP and port among multiple processes.</span></span> <span data-ttu-id="32db3-472">當 Kestrel 設定為接聽連接埠時，Kestrel 會處理該連接埠的所有流量，而不論要求的 `Host` 標頭為何。</span><span class="sxs-lookup"><span data-stu-id="32db3-472">When Kestrel is configured to listen on a port, Kestrel handles all of the traffic for that port regardless of requests' `Host` headers.</span></span> <span data-ttu-id="32db3-473">可以共用連接埠的反向 Proxy 能夠在唯一的 IP 和連接埠上轉送要求給 Kestrel。</span><span class="sxs-lookup"><span data-stu-id="32db3-473">A reverse proxy that can share ports has the ability to forward requests to Kestrel on a unique IP and port.</span></span>
+<span data-ttu-id="65f64-471">Kestrel 用作不需要反向 Proxy 伺服器的 Edge Server 時，不支援在多個處理序之間共用相同的 IP 和連接埠。</span><span class="sxs-lookup"><span data-stu-id="65f64-471">Kestrel used as an edge server without a reverse proxy server doesn't support sharing the same IP and port among multiple processes.</span></span> <span data-ttu-id="65f64-472">當 Kestrel 設定為接聽連接埠時，Kestrel 會處理該連接埠的所有流量，而不論要求的 `Host` 標頭為何。</span><span class="sxs-lookup"><span data-stu-id="65f64-472">When Kestrel is configured to listen on a port, Kestrel handles all of the traffic for that port regardless of requests' `Host` headers.</span></span> <span data-ttu-id="65f64-473">可以共用連接埠的反向 Proxy 能夠在唯一的 IP 和連接埠上轉送要求給 Kestrel。</span><span class="sxs-lookup"><span data-stu-id="65f64-473">A reverse proxy that can share ports has the ability to forward requests to Kestrel on a unique IP and port.</span></span>
 
-<span data-ttu-id="32db3-474">即使不需要反向 Proxy 伺服器，使用反向 Proxy 伺服器也是不錯的選擇。</span><span class="sxs-lookup"><span data-stu-id="32db3-474">Even if a reverse proxy server isn't required, using a reverse proxy server might be a good choice.</span></span>
+<span data-ttu-id="65f64-474">即使不需要反向 Proxy 伺服器，使用反向 Proxy 伺服器也是不錯的選擇。</span><span class="sxs-lookup"><span data-stu-id="65f64-474">Even if a reverse proxy server isn't required, using a reverse proxy server might be a good choice.</span></span>
 
-<span data-ttu-id="32db3-475">反向 Proxy：</span><span class="sxs-lookup"><span data-stu-id="32db3-475">A reverse proxy:</span></span>
+<span data-ttu-id="65f64-475">反向 Proxy：</span><span class="sxs-lookup"><span data-stu-id="65f64-475">A reverse proxy:</span></span>
 
-* <span data-ttu-id="32db3-476">可以限制它所主控之應用程式的公開介面區。</span><span class="sxs-lookup"><span data-stu-id="32db3-476">Can limit the exposed public surface area of the apps that it hosts.</span></span>
-* <span data-ttu-id="32db3-477">提供額外的組態和防禦層。</span><span class="sxs-lookup"><span data-stu-id="32db3-477">Provide an additional layer of configuration and defense.</span></span>
-* <span data-ttu-id="32db3-478">能夠與現有基礎結構更好地整合。</span><span class="sxs-lookup"><span data-stu-id="32db3-478">Might integrate better with existing infrastructure.</span></span>
-* <span data-ttu-id="32db3-479">簡化負載平衡和安全通訊 (HTTPS) 組態。</span><span class="sxs-lookup"><span data-stu-id="32db3-479">Simplify load balancing and secure communication (HTTPS) configuration.</span></span> <span data-ttu-id="32db3-480">只有反向 proxy 伺服器需要 x.509 憑證，而且該伺服器可以使用一般 HTTP 與內部網路上的應用程式伺服器進行通訊。</span><span class="sxs-lookup"><span data-stu-id="32db3-480">Only the reverse proxy server requires an X.509 certificate, and that server can communicate with the app's servers on the internal network using plain HTTP.</span></span>
+* <span data-ttu-id="65f64-476">可以限制它所主控之應用程式的公開介面區。</span><span class="sxs-lookup"><span data-stu-id="65f64-476">Can limit the exposed public surface area of the apps that it hosts.</span></span>
+* <span data-ttu-id="65f64-477">提供額外的組態和防禦層。</span><span class="sxs-lookup"><span data-stu-id="65f64-477">Provide an additional layer of configuration and defense.</span></span>
+* <span data-ttu-id="65f64-478">能夠與現有基礎結構更好地整合。</span><span class="sxs-lookup"><span data-stu-id="65f64-478">Might integrate better with existing infrastructure.</span></span>
+* <span data-ttu-id="65f64-479">簡化負載平衡和安全通訊 (HTTPS) 組態。</span><span class="sxs-lookup"><span data-stu-id="65f64-479">Simplify load balancing and secure communication (HTTPS) configuration.</span></span> <span data-ttu-id="65f64-480">只有反向 proxy 伺服器需要 x.509 憑證，而且該伺服器可以使用一般 HTTP 與內部網路上的應用程式伺服器進行通訊。</span><span class="sxs-lookup"><span data-stu-id="65f64-480">Only the reverse proxy server requires an X.509 certificate, and that server can communicate with the app's servers on the internal network using plain HTTP.</span></span>
 
 > [!WARNING]
-> <span data-ttu-id="32db3-481">裝載於反向 Proxy 組態需要[主機篩選](#host-filtering)。</span><span class="sxs-lookup"><span data-stu-id="32db3-481">Hosting in a reverse proxy configuration requires [host filtering](#host-filtering).</span></span>
+> <span data-ttu-id="65f64-481">裝載於反向 Proxy 組態需要[主機篩選](#host-filtering)。</span><span class="sxs-lookup"><span data-stu-id="65f64-481">Hosting in a reverse proxy configuration requires [host filtering](#host-filtering).</span></span>
 
-## <a name="how-to-use-kestrel-in-aspnet-core-apps"></a><span data-ttu-id="32db3-482">如何在 ASP.NET Core 應用程式中使用 Kestrel</span><span class="sxs-lookup"><span data-stu-id="32db3-482">How to use Kestrel in ASP.NET Core apps</span></span>
+## <a name="how-to-use-kestrel-in-aspnet-core-apps"></a><span data-ttu-id="65f64-482">如何在 ASP.NET Core 應用程式中使用 Kestrel</span><span class="sxs-lookup"><span data-stu-id="65f64-482">How to use Kestrel in ASP.NET Core apps</span></span>
 
-<span data-ttu-id="32db3-483">[Kestrel](https://www.nuget.org/packages/Microsoft.AspNetCore.Server.Kestrel/)套件包含在 AspNetCore 中。[應用程式中繼套件](xref:fundamentals/metapackage-app)中。</span><span class="sxs-lookup"><span data-stu-id="32db3-483">The [Microsoft.AspNetCore.Server.Kestrel](https://www.nuget.org/packages/Microsoft.AspNetCore.Server.Kestrel/) package is included in the [Microsoft.AspNetCore.App metapackage](xref:fundamentals/metapackage-app).</span></span>
+<span data-ttu-id="65f64-483">AspNetCore 會包含在[AspNetCore.. 中繼套件](xref:fundamentals/metapackage-app). [Kestrel](https://www.nuget.org/packages/Microsoft.AspNetCore.Server.Kestrel/)套件中。</span><span class="sxs-lookup"><span data-stu-id="65f64-483">The [Microsoft.AspNetCore.Server.Kestrel](https://www.nuget.org/packages/Microsoft.AspNetCore.Server.Kestrel/) package is included in the [Microsoft.AspNetCore.App metapackage](xref:fundamentals/metapackage-app).</span></span>
 
-<span data-ttu-id="32db3-484">ASP.NET Core 專案範本預設會使用 Kestrel。</span><span class="sxs-lookup"><span data-stu-id="32db3-484">ASP.NET Core project templates use Kestrel by default.</span></span> <span data-ttu-id="32db3-485">在 *Program.cs* 中，範本程式碼會呼叫 <xref:Microsoft.AspNetCore.WebHost.CreateDefaultBuilder*>，而後者會在幕後呼叫 <xref:Microsoft.AspNetCore.Hosting.WebHostBuilderKestrelExtensions.UseKestrel*>。</span><span class="sxs-lookup"><span data-stu-id="32db3-485">In *Program.cs*, the template code calls <xref:Microsoft.AspNetCore.WebHost.CreateDefaultBuilder*>, which calls <xref:Microsoft.AspNetCore.Hosting.WebHostBuilderKestrelExtensions.UseKestrel*> behind the scenes.</span></span>
+<span data-ttu-id="65f64-484">ASP.NET Core 專案範本預設會使用 Kestrel。</span><span class="sxs-lookup"><span data-stu-id="65f64-484">ASP.NET Core project templates use Kestrel by default.</span></span> <span data-ttu-id="65f64-485">在 *Program.cs* 中，範本程式碼會呼叫 <xref:Microsoft.AspNetCore.WebHost.CreateDefaultBuilder*>，而後者會在幕後呼叫 <xref:Microsoft.AspNetCore.Hosting.WebHostBuilderKestrelExtensions.UseKestrel*>。</span><span class="sxs-lookup"><span data-stu-id="65f64-485">In *Program.cs*, the template code calls <xref:Microsoft.AspNetCore.WebHost.CreateDefaultBuilder*>, which calls <xref:Microsoft.AspNetCore.Hosting.WebHostBuilderKestrelExtensions.UseKestrel*> behind the scenes.</span></span>
 
 [!code-csharp[](kestrel/samples/2.x/KestrelSample/Program.cs?name=snippet_DefaultBuilder&highlight=7)]
 
-<span data-ttu-id="32db3-486">如需有關 `CreateDefaultBuilder` 和建立主機的詳細資訊，請參閱的*設定主機*一節 <xref:fundamentals/host/web-host#set-up-a-host> 。</span><span class="sxs-lookup"><span data-stu-id="32db3-486">For more information on `CreateDefaultBuilder` and building the host, see the *Set up a host* section of <xref:fundamentals/host/web-host#set-up-a-host>.</span></span>
+<span data-ttu-id="65f64-486">如需 `CreateDefaultBuilder` 和建立主機的詳細資訊，請參閱的 *設定主機* 一節 <xref:fundamentals/host/web-host#set-up-a-host> 。</span><span class="sxs-lookup"><span data-stu-id="65f64-486">For more information on `CreateDefaultBuilder` and building the host, see the *Set up a host* section of <xref:fundamentals/host/web-host#set-up-a-host>.</span></span>
 
-<span data-ttu-id="32db3-487">若要在呼叫 `CreateDefaultBuilder` 之後提供額外的設定，請使用 `ConfigureKestrel`：</span><span class="sxs-lookup"><span data-stu-id="32db3-487">To provide additional configuration after calling `CreateDefaultBuilder`, use `ConfigureKestrel`:</span></span>
+<span data-ttu-id="65f64-487">若要在呼叫 `CreateDefaultBuilder` 之後提供額外的設定，請使用 `ConfigureKestrel`：</span><span class="sxs-lookup"><span data-stu-id="65f64-487">To provide additional configuration after calling `CreateDefaultBuilder`, use `ConfigureKestrel`:</span></span>
 
 ```csharp
 public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
@@ -1066,7 +1067,7 @@ public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
         });
 ```
 
-<span data-ttu-id="32db3-488">如果應用程式未呼叫 `CreateDefaultBuilder` 來設定主機，請在呼叫 `ConfigureKestrel` **之前**，先呼叫 <xref:Microsoft.AspNetCore.Hosting.WebHostBuilderKestrelExtensions.UseKestrel*>：</span><span class="sxs-lookup"><span data-stu-id="32db3-488">If the app doesn't call `CreateDefaultBuilder` to set up the host, call <xref:Microsoft.AspNetCore.Hosting.WebHostBuilderKestrelExtensions.UseKestrel*> **before** calling `ConfigureKestrel`:</span></span>
+<span data-ttu-id="65f64-488">如果應用程式未呼叫 `CreateDefaultBuilder` 來設定主機，請在呼叫 `ConfigureKestrel` **之前**，先呼叫 <xref:Microsoft.AspNetCore.Hosting.WebHostBuilderKestrelExtensions.UseKestrel*>：</span><span class="sxs-lookup"><span data-stu-id="65f64-488">If the app doesn't call `CreateDefaultBuilder` to set up the host, call <xref:Microsoft.AspNetCore.Hosting.WebHostBuilderKestrelExtensions.UseKestrel*> **before** calling `ConfigureKestrel`:</span></span>
 
 ```csharp
 public static void Main(string[] args)
@@ -1086,19 +1087,19 @@ public static void Main(string[] args)
 }
 ```
 
-## <a name="kestrel-options"></a><span data-ttu-id="32db3-489">Kestrel 選項</span><span class="sxs-lookup"><span data-stu-id="32db3-489">Kestrel options</span></span>
+## <a name="kestrel-options"></a><span data-ttu-id="65f64-489">Kestrel 選項</span><span class="sxs-lookup"><span data-stu-id="65f64-489">Kestrel options</span></span>
 
-<span data-ttu-id="32db3-490">Kestrel 網頁伺服器所含的條件約束組態選項，在網際網路對應部署方面特別有用。</span><span class="sxs-lookup"><span data-stu-id="32db3-490">The Kestrel web server has constraint configuration options that are especially useful in Internet-facing deployments.</span></span>
+<span data-ttu-id="65f64-490">Kestrel 網頁伺服器所含的條件約束組態選項，在網際網路對應部署方面特別有用。</span><span class="sxs-lookup"><span data-stu-id="65f64-490">The Kestrel web server has constraint configuration options that are especially useful in Internet-facing deployments.</span></span>
 
-<span data-ttu-id="32db3-491">請在 <xref:Microsoft.AspNetCore.Server.Kestrel.Core.KestrelServerOptions> 類別的 <xref:Microsoft.AspNetCore.Server.Kestrel.Core.KestrelServerOptions.Limits> 屬性上設定條件約束。</span><span class="sxs-lookup"><span data-stu-id="32db3-491">Set constraints on the <xref:Microsoft.AspNetCore.Server.Kestrel.Core.KestrelServerOptions.Limits> property of the <xref:Microsoft.AspNetCore.Server.Kestrel.Core.KestrelServerOptions> class.</span></span> <span data-ttu-id="32db3-492">`Limits` 屬性會保存 <xref:Microsoft.AspNetCore.Server.Kestrel.Core.KestrelServerLimits> 類別的執行個體。</span><span class="sxs-lookup"><span data-stu-id="32db3-492">The `Limits` property holds an instance of the <xref:Microsoft.AspNetCore.Server.Kestrel.Core.KestrelServerLimits> class.</span></span>
+<span data-ttu-id="65f64-491">請在 <xref:Microsoft.AspNetCore.Server.Kestrel.Core.KestrelServerOptions> 類別的 <xref:Microsoft.AspNetCore.Server.Kestrel.Core.KestrelServerOptions.Limits> 屬性上設定條件約束。</span><span class="sxs-lookup"><span data-stu-id="65f64-491">Set constraints on the <xref:Microsoft.AspNetCore.Server.Kestrel.Core.KestrelServerOptions.Limits> property of the <xref:Microsoft.AspNetCore.Server.Kestrel.Core.KestrelServerOptions> class.</span></span> <span data-ttu-id="65f64-492">`Limits` 屬性會保存 <xref:Microsoft.AspNetCore.Server.Kestrel.Core.KestrelServerLimits> 類別的執行個體。</span><span class="sxs-lookup"><span data-stu-id="65f64-492">The `Limits` property holds an instance of the <xref:Microsoft.AspNetCore.Server.Kestrel.Core.KestrelServerLimits> class.</span></span>
 
-<span data-ttu-id="32db3-493">下列範例會使用 <xref:Microsoft.AspNetCore.Server.Kestrel.Core> 命名空間；</span><span class="sxs-lookup"><span data-stu-id="32db3-493">The following examples use the <xref:Microsoft.AspNetCore.Server.Kestrel.Core> namespace:</span></span>
+<span data-ttu-id="65f64-493">下列範例會使用 <xref:Microsoft.AspNetCore.Server.Kestrel.Core> 命名空間；</span><span class="sxs-lookup"><span data-stu-id="65f64-493">The following examples use the <xref:Microsoft.AspNetCore.Server.Kestrel.Core> namespace:</span></span>
 
 ```csharp
 using Microsoft.AspNetCore.Server.Kestrel.Core;
 ```
 
-<span data-ttu-id="32db3-494">在下列範例中，以 c # 程式碼設定的 Kestrel 選項也可以使用設定[提供者](xref:fundamentals/configuration/index)來設定。</span><span class="sxs-lookup"><span data-stu-id="32db3-494">Kestrel options, which are configured in C# code in the following examples, can also be set using a [configuration provider](xref:fundamentals/configuration/index).</span></span> <span data-ttu-id="32db3-495">例如，檔案設定提供者可以從或 appsettings 的*appsettings.js*載入 Kestrel 設定 *。 {環境}. json*檔案：</span><span class="sxs-lookup"><span data-stu-id="32db3-495">For example, the File Configuration Provider can load Kestrel configuration from an *appsettings.json* or *appsettings.{Environment}.json* file:</span></span>
+<span data-ttu-id="65f64-494">您也可以使用設定 [提供者](xref:fundamentals/configuration/index)來設定 Kestrel 選項（在下列範例中以 c # 程式碼設定）。</span><span class="sxs-lookup"><span data-stu-id="65f64-494">Kestrel options, which are configured in C# code in the following examples, can also be set using a [configuration provider](xref:fundamentals/configuration/index).</span></span> <span data-ttu-id="65f64-495">例如，檔案設定提供者可以從 *appsettings.json* 或 Appsettings 載入 Kestrel 設定 *。 {環境}. json* 檔案：</span><span class="sxs-lookup"><span data-stu-id="65f64-495">For example, the File Configuration Provider can load Kestrel configuration from an *appsettings.json* or *appsettings.{Environment}.json* file:</span></span>
 
 ```json
 {
@@ -1111,12 +1112,12 @@ using Microsoft.AspNetCore.Server.Kestrel.Core;
 }
 ```
 
-<span data-ttu-id="32db3-496">請使用下列**其中一**種方法：</span><span class="sxs-lookup"><span data-stu-id="32db3-496">Use **one** of the following approaches:</span></span>
+<span data-ttu-id="65f64-496">使用下列 **其中一** 種方法：</span><span class="sxs-lookup"><span data-stu-id="65f64-496">Use **one** of the following approaches:</span></span>
 
-* <span data-ttu-id="32db3-497">在中設定 Kestrel `Startup.ConfigureServices` ：</span><span class="sxs-lookup"><span data-stu-id="32db3-497">Configure Kestrel in `Startup.ConfigureServices`:</span></span>
+* <span data-ttu-id="65f64-497">設定 Kestrel in `Startup.ConfigureServices` ：</span><span class="sxs-lookup"><span data-stu-id="65f64-497">Configure Kestrel in `Startup.ConfigureServices`:</span></span>
 
-  1. <span data-ttu-id="32db3-498">將的實例插入 `IConfiguration` 至 `Startup` 類別。</span><span class="sxs-lookup"><span data-stu-id="32db3-498">Inject an instance of `IConfiguration` into the `Startup` class.</span></span> <span data-ttu-id="32db3-499">下列範例假設插入的設定已指派給 `Configuration` 屬性。</span><span class="sxs-lookup"><span data-stu-id="32db3-499">The following example assumes that the injected configuration is assigned to the `Configuration` property.</span></span>
-  2. <span data-ttu-id="32db3-500">在中 `Startup.ConfigureServices` ，將設定的 `Kestrel` 區段載入 Kestrel 的設定中：</span><span class="sxs-lookup"><span data-stu-id="32db3-500">In `Startup.ConfigureServices`, load the `Kestrel` section of configuration into Kestrel's configuration:</span></span>
+  1. <span data-ttu-id="65f64-498">將的實例插入 `IConfiguration` 至 `Startup` 類別。</span><span class="sxs-lookup"><span data-stu-id="65f64-498">Inject an instance of `IConfiguration` into the `Startup` class.</span></span> <span data-ttu-id="65f64-499">下列範例假設將插入的設定指派給 `Configuration` 屬性。</span><span class="sxs-lookup"><span data-stu-id="65f64-499">The following example assumes that the injected configuration is assigned to the `Configuration` property.</span></span>
+  2. <span data-ttu-id="65f64-500">在中 `Startup.ConfigureServices` ，將 `Kestrel` configuration 區段載入 Kestrel 的設定：</span><span class="sxs-lookup"><span data-stu-id="65f64-500">In `Startup.ConfigureServices`, load the `Kestrel` section of configuration into Kestrel's configuration:</span></span>
 
      ```csharp
      using Microsoft.Extensions.Configuration
@@ -1143,9 +1144,9 @@ using Microsoft.AspNetCore.Server.Kestrel.Core;
      }
      ```
 
-* <span data-ttu-id="32db3-501">建立主機時設定 Kestrel：</span><span class="sxs-lookup"><span data-stu-id="32db3-501">Configure Kestrel when building the host:</span></span>
+* <span data-ttu-id="65f64-501">設定 Kestrel 建立主機時：</span><span class="sxs-lookup"><span data-stu-id="65f64-501">Configure Kestrel when building the host:</span></span>
 
-  <span data-ttu-id="32db3-502">在*Program.cs*中，將設定的 `Kestrel` 區段載入 Kestrel 的設定中：</span><span class="sxs-lookup"><span data-stu-id="32db3-502">In *Program.cs*, load the `Kestrel` section of configuration into Kestrel's configuration:</span></span>
+  <span data-ttu-id="65f64-502">在 *Program.cs*中，將 `Kestrel` Configuration 區段載入 Kestrel 的設定中：</span><span class="sxs-lookup"><span data-stu-id="65f64-502">In *Program.cs*, load the `Kestrel` section of configuration into Kestrel's configuration:</span></span>
 
   ```csharp
   // using Microsoft.Extensions.DependencyInjection;
@@ -1160,88 +1161,88 @@ using Microsoft.AspNetCore.Server.Kestrel.Core;
           .UseStartup<Startup>();
   ```
 
-<span data-ttu-id="32db3-503">上述兩種方法都適用于任何設定[提供者](xref:fundamentals/configuration/index)。</span><span class="sxs-lookup"><span data-stu-id="32db3-503">Both of the preceding approaches work with any [configuration provider](xref:fundamentals/configuration/index).</span></span>
+<span data-ttu-id="65f64-503">上述兩種方法都可搭配任何設定 [提供者](xref:fundamentals/configuration/index)使用。</span><span class="sxs-lookup"><span data-stu-id="65f64-503">Both of the preceding approaches work with any [configuration provider](xref:fundamentals/configuration/index).</span></span>
 
-### <a name="keep-alive-timeout"></a><span data-ttu-id="32db3-504">Keep-alive 逾時</span><span class="sxs-lookup"><span data-stu-id="32db3-504">Keep-alive timeout</span></span>
+### <a name="keep-alive-timeout"></a><span data-ttu-id="65f64-504">Keep-alive 逾時</span><span class="sxs-lookup"><span data-stu-id="65f64-504">Keep-alive timeout</span></span>
 
 <xref:Microsoft.AspNetCore.Server.Kestrel.Core.KestrelServerLimits.KeepAliveTimeout>
 
-<span data-ttu-id="32db3-505">取得或設定 [Keep-alive 逾時](https://tools.ietf.org/html/rfc7230#section-6.5) \(英文\)。</span><span class="sxs-lookup"><span data-stu-id="32db3-505">Gets or sets the [keep-alive timeout](https://tools.ietf.org/html/rfc7230#section-6.5).</span></span> <span data-ttu-id="32db3-506">預設為 2 分鐘。</span><span class="sxs-lookup"><span data-stu-id="32db3-506">Defaults to 2 minutes.</span></span>
+<span data-ttu-id="65f64-505">取得或設定 [Keep-alive 逾時](https://tools.ietf.org/html/rfc7230#section-6.5) \(英文\)。</span><span class="sxs-lookup"><span data-stu-id="65f64-505">Gets or sets the [keep-alive timeout](https://tools.ietf.org/html/rfc7230#section-6.5).</span></span> <span data-ttu-id="65f64-506">預設為 2 分鐘。</span><span class="sxs-lookup"><span data-stu-id="65f64-506">Defaults to 2 minutes.</span></span>
 
 [!code-csharp[](kestrel/samples/2.x/KestrelSample/Program.cs?name=snippet_Limits&highlight=15)]
 
-### <a name="maximum-client-connections"></a><span data-ttu-id="32db3-507">用戶端連線數目上限</span><span class="sxs-lookup"><span data-stu-id="32db3-507">Maximum client connections</span></span>
+### <a name="maximum-client-connections"></a><span data-ttu-id="65f64-507">用戶端連線數目上限</span><span class="sxs-lookup"><span data-stu-id="65f64-507">Maximum client connections</span></span>
 
 <xref:Microsoft.AspNetCore.Server.Kestrel.Core.KestrelServerLimits.MaxConcurrentConnections>
 <xref:Microsoft.AspNetCore.Server.Kestrel.Core.KestrelServerLimits.MaxConcurrentUpgradedConnections>
 
-<span data-ttu-id="32db3-508">可以使用下列程式碼，針對整個應用程式設定同時開啟的 TCP 連線數目上限：</span><span class="sxs-lookup"><span data-stu-id="32db3-508">The maximum number of concurrent open TCP connections can be set for the entire app with the following code:</span></span>
+<span data-ttu-id="65f64-508">可以使用下列程式碼，針對整個應用程式設定同時開啟的 TCP 連線數目上限：</span><span class="sxs-lookup"><span data-stu-id="65f64-508">The maximum number of concurrent open TCP connections can be set for the entire app with the following code:</span></span>
 
 [!code-csharp[](kestrel/samples/2.x/KestrelSample/Program.cs?name=snippet_Limits&highlight=3)]
 
-<span data-ttu-id="32db3-509">已經從 HTTP 或 HTTPS 升級為另一個通訊協定 (例如，在 WebSocket 要求中) 的連線，有其個別限制。</span><span class="sxs-lookup"><span data-stu-id="32db3-509">There's a separate limit for connections that have been upgraded from HTTP or HTTPS to another protocol (for example, on a WebSockets request).</span></span> <span data-ttu-id="32db3-510">升級連線之後，它不會納入 `MaxConcurrentConnections` 限制。</span><span class="sxs-lookup"><span data-stu-id="32db3-510">After a connection is upgraded, it isn't counted against the `MaxConcurrentConnections` limit.</span></span>
+<span data-ttu-id="65f64-509">已經從 HTTP 或 HTTPS 升級為另一個通訊協定 (例如，在 WebSocket 要求中) 的連線，有其個別限制。</span><span class="sxs-lookup"><span data-stu-id="65f64-509">There's a separate limit for connections that have been upgraded from HTTP or HTTPS to another protocol (for example, on a WebSockets request).</span></span> <span data-ttu-id="65f64-510">升級連線之後，它不會納入 `MaxConcurrentConnections` 限制。</span><span class="sxs-lookup"><span data-stu-id="65f64-510">After a connection is upgraded, it isn't counted against the `MaxConcurrentConnections` limit.</span></span>
 
 [!code-csharp[](kestrel/samples/2.x/KestrelSample/Program.cs?name=snippet_Limits&highlight=4)]
 
-<span data-ttu-id="32db3-511">連線數目上限預設為無限制 (null)。</span><span class="sxs-lookup"><span data-stu-id="32db3-511">The maximum number of connections is unlimited (null) by default.</span></span>
+<span data-ttu-id="65f64-511">連線數目上限預設為無限制 (null)。</span><span class="sxs-lookup"><span data-stu-id="65f64-511">The maximum number of connections is unlimited (null) by default.</span></span>
 
-### <a name="maximum-request-body-size"></a><span data-ttu-id="32db3-512">要求主體大小上限</span><span class="sxs-lookup"><span data-stu-id="32db3-512">Maximum request body size</span></span>
+### <a name="maximum-request-body-size"></a><span data-ttu-id="65f64-512">要求主體大小上限</span><span class="sxs-lookup"><span data-stu-id="65f64-512">Maximum request body size</span></span>
 
 <xref:Microsoft.AspNetCore.Server.Kestrel.Core.KestrelServerLimits.MaxRequestBodySize>
 
-<span data-ttu-id="32db3-513">預設的要求主體大小上限是 30,000,000 個位元組，大約 28.6 MB。</span><span class="sxs-lookup"><span data-stu-id="32db3-513">The default maximum request body size is 30,000,000 bytes, which is approximately 28.6 MB.</span></span>
+<span data-ttu-id="65f64-513">預設的要求主體大小上限是 30,000,000 個位元組，大約 28.6 MB。</span><span class="sxs-lookup"><span data-stu-id="65f64-513">The default maximum request body size is 30,000,000 bytes, which is approximately 28.6 MB.</span></span>
 
-<span data-ttu-id="32db3-514">若要覆寫 ASP.NET Core MVC 應用程式中的限制，建議的方式是在動作方法上使用 <xref:Microsoft.AspNetCore.Mvc.RequestSizeLimitAttribute>屬性：</span><span class="sxs-lookup"><span data-stu-id="32db3-514">The recommended approach to override the limit in an ASP.NET Core MVC app is to use the <xref:Microsoft.AspNetCore.Mvc.RequestSizeLimitAttribute> attribute on an action method:</span></span>
+<span data-ttu-id="65f64-514">若要覆寫 ASP.NET Core MVC 應用程式中的限制，建議的方式是在動作方法上使用 <xref:Microsoft.AspNetCore.Mvc.RequestSizeLimitAttribute>屬性：</span><span class="sxs-lookup"><span data-stu-id="65f64-514">The recommended approach to override the limit in an ASP.NET Core MVC app is to use the <xref:Microsoft.AspNetCore.Mvc.RequestSizeLimitAttribute> attribute on an action method:</span></span>
 
 ```csharp
 [RequestSizeLimit(100000000)]
 public IActionResult MyActionMethod()
 ```
 
-<span data-ttu-id="32db3-515">以下範例會示範如何設定應用程式、每個要求的條件約束：</span><span class="sxs-lookup"><span data-stu-id="32db3-515">Here's an example that shows how to configure the constraint for the app on every request:</span></span>
+<span data-ttu-id="65f64-515">以下範例會示範如何設定應用程式、每個要求的條件約束：</span><span class="sxs-lookup"><span data-stu-id="65f64-515">Here's an example that shows how to configure the constraint for the app on every request:</span></span>
 
 [!code-csharp[](kestrel/samples/2.x/KestrelSample/Program.cs?name=snippet_Limits&highlight=5)]
 
-<span data-ttu-id="32db3-516">覆寫中介軟體中特定要求的設定：</span><span class="sxs-lookup"><span data-stu-id="32db3-516">Override the setting on a specific request in middleware:</span></span>
+<span data-ttu-id="65f64-516">覆寫中介軟體中特定要求的設定：</span><span class="sxs-lookup"><span data-stu-id="65f64-516">Override the setting on a specific request in middleware:</span></span>
 
 [!code-csharp[](kestrel/samples/2.x/KestrelSample/Startup.cs?name=snippet_Limits&highlight=3-4)]
 
-<span data-ttu-id="32db3-517">如果應用程式在開始讀取要求之後，設定要求的限制，就會擲回例外狀況（exception）。</span><span class="sxs-lookup"><span data-stu-id="32db3-517">An exception is thrown if the app configures the limit on a request after the app has started to read the request.</span></span> <span data-ttu-id="32db3-518">有一個 `IsReadOnly` 屬性會指出 `MaxRequestBodySize` 屬性處於唯讀狀態，這表示要設定限制已經太遲。</span><span class="sxs-lookup"><span data-stu-id="32db3-518">There's an `IsReadOnly` property that indicates if the `MaxRequestBodySize` property is in read-only state, meaning it's too late to configure the limit.</span></span>
+<span data-ttu-id="65f64-517">如果應用程式在應用程式開始讀取要求之後設定要求的限制，則會擲回例外狀況。</span><span class="sxs-lookup"><span data-stu-id="65f64-517">An exception is thrown if the app configures the limit on a request after the app has started to read the request.</span></span> <span data-ttu-id="65f64-518">有一個 `IsReadOnly` 屬性會指出 `MaxRequestBodySize` 屬性處於唯讀狀態，這表示要設定限制已經太遲。</span><span class="sxs-lookup"><span data-stu-id="65f64-518">There's an `IsReadOnly` property that indicates if the `MaxRequestBodySize` property is in read-only state, meaning it's too late to configure the limit.</span></span>
 
-<span data-ttu-id="32db3-519">當應用程式是在 [ASP.NET Core 模組](xref:host-and-deploy/aspnet-core-module)後方於[處理序外](xref:host-and-deploy/iis/index#out-of-process-hosting-model)執行時，Kestrel 的要求本文大小限制將會被停用，因為 IIS 已經設定限制。</span><span class="sxs-lookup"><span data-stu-id="32db3-519">When an app is run [out-of-process](xref:host-and-deploy/iis/index#out-of-process-hosting-model) behind the [ASP.NET Core Module](xref:host-and-deploy/aspnet-core-module), Kestrel's request body size limit is disabled because IIS already sets the limit.</span></span>
+<span data-ttu-id="65f64-519">當應用程式是在 [ASP.NET Core 模組](xref:host-and-deploy/aspnet-core-module)後方於[處理序外](xref:host-and-deploy/iis/index#out-of-process-hosting-model)執行時，Kestrel 的要求本文大小限制將會被停用，因為 IIS 已經設定限制。</span><span class="sxs-lookup"><span data-stu-id="65f64-519">When an app is run [out-of-process](xref:host-and-deploy/iis/index#out-of-process-hosting-model) behind the [ASP.NET Core Module](xref:host-and-deploy/aspnet-core-module), Kestrel's request body size limit is disabled because IIS already sets the limit.</span></span>
 
-### <a name="minimum-request-body-data-rate"></a><span data-ttu-id="32db3-520">要求主體資料速率下限</span><span class="sxs-lookup"><span data-stu-id="32db3-520">Minimum request body data rate</span></span>
+### <a name="minimum-request-body-data-rate"></a><span data-ttu-id="65f64-520">要求主體資料速率下限</span><span class="sxs-lookup"><span data-stu-id="65f64-520">Minimum request body data rate</span></span>
 
 <xref:Microsoft.AspNetCore.Server.Kestrel.Core.KestrelServerLimits.MinRequestBodyDataRate>
 <xref:Microsoft.AspNetCore.Server.Kestrel.Core.KestrelServerLimits.MinResponseDataRate>
 
-<span data-ttu-id="32db3-521">如果資料是以指定的速率 (位元組/秒) 傳入，Kestrel 會每秒檢查一次。</span><span class="sxs-lookup"><span data-stu-id="32db3-521">Kestrel checks every second if data is arriving at the specified rate in bytes/second.</span></span> <span data-ttu-id="32db3-522">如果速率低於最小值，則連接會超時。寬限期是指 Kestrel 提供用戶端將其傳送速率增加到最小值的時間量。在這段時間內不會檢查速率。</span><span class="sxs-lookup"><span data-stu-id="32db3-522">If the rate drops below the minimum, the connection is timed out. The grace period is the amount of time that Kestrel gives the client to increase its send rate up to the minimum; the rate isn't checked during that time.</span></span> <span data-ttu-id="32db3-523">寬限期可協助避免中斷連線，這是由於 TCP 緩慢啟動而一開始以低速傳送資料所造成。</span><span class="sxs-lookup"><span data-stu-id="32db3-523">The grace period helps avoid dropping connections that are initially sending data at a slow rate due to TCP slow-start.</span></span>
+<span data-ttu-id="65f64-521">如果資料是以指定的速率 (位元組/秒) 傳入，Kestrel 會每秒檢查一次。</span><span class="sxs-lookup"><span data-stu-id="65f64-521">Kestrel checks every second if data is arriving at the specified rate in bytes/second.</span></span> <span data-ttu-id="65f64-522">如果速率降到低於最小值，則連接會超時。寬限期是 Kestrel 讓用戶端提高其傳送速率的時間量（最小值）;在這段時間內不會檢查速率。</span><span class="sxs-lookup"><span data-stu-id="65f64-522">If the rate drops below the minimum, the connection is timed out. The grace period is the amount of time that Kestrel gives the client to increase its send rate up to the minimum; the rate isn't checked during that time.</span></span> <span data-ttu-id="65f64-523">寬限期可協助避免中斷連線，這是由於 TCP 緩慢啟動而一開始以低速傳送資料所造成。</span><span class="sxs-lookup"><span data-stu-id="65f64-523">The grace period helps avoid dropping connections that are initially sending data at a slow rate due to TCP slow-start.</span></span>
 
-<span data-ttu-id="32db3-524">預設速率下限為 240 個位元組/秒，寬限期為 5 秒。</span><span class="sxs-lookup"><span data-stu-id="32db3-524">The default minimum rate is 240 bytes/second with a 5 second grace period.</span></span>
+<span data-ttu-id="65f64-524">預設速率下限為 240 個位元組/秒，寬限期為 5 秒。</span><span class="sxs-lookup"><span data-stu-id="65f64-524">The default minimum rate is 240 bytes/second with a 5 second grace period.</span></span>
 
-<span data-ttu-id="32db3-525">速率下限也適用於回應。</span><span class="sxs-lookup"><span data-stu-id="32db3-525">A minimum rate also applies to the response.</span></span> <span data-ttu-id="32db3-526">除了屬性中具有 `RequestBody` 或 `Response` 以及介面名稱之外，用來設定要求限制和回應限制的程式碼都相同。</span><span class="sxs-lookup"><span data-stu-id="32db3-526">The code to set the request limit and the response limit is the same except for having `RequestBody` or `Response` in the property and interface names.</span></span>
+<span data-ttu-id="65f64-525">速率下限也適用於回應。</span><span class="sxs-lookup"><span data-stu-id="65f64-525">A minimum rate also applies to the response.</span></span> <span data-ttu-id="65f64-526">除了屬性中具有 `RequestBody` 或 `Response` 以及介面名稱之外，用來設定要求限制和回應限制的程式碼都相同。</span><span class="sxs-lookup"><span data-stu-id="65f64-526">The code to set the request limit and the response limit is the same except for having `RequestBody` or `Response` in the property and interface names.</span></span>
 
-<span data-ttu-id="32db3-527">以下範例示範如何在 *Program.cs* 中設定資料速率下限：</span><span class="sxs-lookup"><span data-stu-id="32db3-527">Here's an example that shows how to configure the minimum data rates in *Program.cs*:</span></span>
+<span data-ttu-id="65f64-527">以下範例示範如何在 *Program.cs* 中設定資料速率下限：</span><span class="sxs-lookup"><span data-stu-id="65f64-527">Here's an example that shows how to configure the minimum data rates in *Program.cs*:</span></span>
 
 [!code-csharp[](kestrel/samples/2.x/KestrelSample/Program.cs?name=snippet_Limits&highlight=6-9)]
 
-<span data-ttu-id="32db3-528">覆寫中介軟體中每個要求的最小速率限制：</span><span class="sxs-lookup"><span data-stu-id="32db3-528">Override the minimum rate limits per request in middleware:</span></span>
+<span data-ttu-id="65f64-528">覆寫中介軟體中每個要求的最小速率限制：</span><span class="sxs-lookup"><span data-stu-id="65f64-528">Override the minimum rate limits per request in middleware:</span></span>
 
 [!code-csharp[](kestrel/samples/2.x/KestrelSample/Startup.cs?name=snippet_Limits&highlight=6-21)]
 
-<span data-ttu-id="32db3-529">因為通訊協定對要求多工的支援，所以 HTTP/2 不支援以每一要求基礎修改速率限制，進而使先前範例中所參考的所有速率功能都不會出現在 HTTP/2 要求的 `HttpContext.Features` 中。</span><span class="sxs-lookup"><span data-stu-id="32db3-529">Neither rate feature referenced in the prior sample are present in `HttpContext.Features` for HTTP/2 requests because modifying rate limits on a per-request basis isn't supported for HTTP/2 due to the protocol's support for request multiplexing.</span></span> <span data-ttu-id="32db3-530">透過 `KestrelServerOptions.Limits` 設定的全伺服器速率限制皆仍套用至 HTTP/1.x 及 HTTP/2 連線。</span><span class="sxs-lookup"><span data-stu-id="32db3-530">Server-wide rate limits configured via `KestrelServerOptions.Limits` still apply to both HTTP/1.x and HTTP/2 connections.</span></span>
+<span data-ttu-id="65f64-529">因為通訊協定對要求多工的支援，所以 HTTP/2 不支援以每一要求基礎修改速率限制，進而使先前範例中所參考的所有速率功能都不會出現在 HTTP/2 要求的 `HttpContext.Features` 中。</span><span class="sxs-lookup"><span data-stu-id="65f64-529">Neither rate feature referenced in the prior sample are present in `HttpContext.Features` for HTTP/2 requests because modifying rate limits on a per-request basis isn't supported for HTTP/2 due to the protocol's support for request multiplexing.</span></span> <span data-ttu-id="65f64-530">透過 `KestrelServerOptions.Limits` 設定的全伺服器速率限制皆仍套用至 HTTP/1.x 及 HTTP/2 連線。</span><span class="sxs-lookup"><span data-stu-id="65f64-530">Server-wide rate limits configured via `KestrelServerOptions.Limits` still apply to both HTTP/1.x and HTTP/2 connections.</span></span>
 
-### <a name="request-headers-timeout"></a><span data-ttu-id="32db3-531">要求標頭逾時</span><span class="sxs-lookup"><span data-stu-id="32db3-531">Request headers timeout</span></span>
+### <a name="request-headers-timeout"></a><span data-ttu-id="65f64-531">要求標頭逾時</span><span class="sxs-lookup"><span data-stu-id="65f64-531">Request headers timeout</span></span>
 
 <xref:Microsoft.AspNetCore.Server.Kestrel.Core.KestrelServerLimits.RequestHeadersTimeout>
 
-<span data-ttu-id="32db3-532">取得或設定伺服器花費在接收要求標頭的時間上限。</span><span class="sxs-lookup"><span data-stu-id="32db3-532">Gets or sets the maximum amount of time the server spends receiving request headers.</span></span> <span data-ttu-id="32db3-533">預設為 30 秒。</span><span class="sxs-lookup"><span data-stu-id="32db3-533">Defaults to 30 seconds.</span></span>
+<span data-ttu-id="65f64-532">取得或設定伺服器花費在接收要求標頭的時間上限。</span><span class="sxs-lookup"><span data-stu-id="65f64-532">Gets or sets the maximum amount of time the server spends receiving request headers.</span></span> <span data-ttu-id="65f64-533">預設為 30 秒。</span><span class="sxs-lookup"><span data-stu-id="65f64-533">Defaults to 30 seconds.</span></span>
 
 [!code-csharp[](kestrel/samples/2.x/KestrelSample/Program.cs?name=snippet_Limits&highlight=16)]
 
-### <a name="maximum-streams-per-connection"></a><span data-ttu-id="32db3-534">每個連線的資料流數目上限</span><span class="sxs-lookup"><span data-stu-id="32db3-534">Maximum streams per connection</span></span>
+### <a name="maximum-streams-per-connection"></a><span data-ttu-id="65f64-534">每個連線的資料流數目上限</span><span class="sxs-lookup"><span data-stu-id="65f64-534">Maximum streams per connection</span></span>
 
-<span data-ttu-id="32db3-535">`Http2.MaxStreamsPerConnection` 會限制每個 HTTP/2 連線的同時要求資料流數目。</span><span class="sxs-lookup"><span data-stu-id="32db3-535">`Http2.MaxStreamsPerConnection` limits the number of concurrent request streams per HTTP/2 connection.</span></span> <span data-ttu-id="32db3-536">超出的資料流會被拒絕。</span><span class="sxs-lookup"><span data-stu-id="32db3-536">Excess streams are refused.</span></span>
+<span data-ttu-id="65f64-535">`Http2.MaxStreamsPerConnection` 會限制每個 HTTP/2 連線的同時要求資料流數目。</span><span class="sxs-lookup"><span data-stu-id="65f64-535">`Http2.MaxStreamsPerConnection` limits the number of concurrent request streams per HTTP/2 connection.</span></span> <span data-ttu-id="65f64-536">超出的資料流會被拒絕。</span><span class="sxs-lookup"><span data-stu-id="65f64-536">Excess streams are refused.</span></span>
 
 ```csharp
 public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
@@ -1253,11 +1254,11 @@ public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
         });
 ```
 
-<span data-ttu-id="32db3-537">預設值是 100。</span><span class="sxs-lookup"><span data-stu-id="32db3-537">The default value is 100.</span></span>
+<span data-ttu-id="65f64-537">預設值是 100。</span><span class="sxs-lookup"><span data-stu-id="65f64-537">The default value is 100.</span></span>
 
-### <a name="header-table-size"></a><span data-ttu-id="32db3-538">標頭表格大小</span><span class="sxs-lookup"><span data-stu-id="32db3-538">Header table size</span></span>
+### <a name="header-table-size"></a><span data-ttu-id="65f64-538">標頭表格大小</span><span class="sxs-lookup"><span data-stu-id="65f64-538">Header table size</span></span>
 
-<span data-ttu-id="32db3-539">HPACK 解碼器可解壓縮 HTTP/2 連線的 HTTP 標頭。</span><span class="sxs-lookup"><span data-stu-id="32db3-539">The HPACK decoder decompresses HTTP headers for HTTP/2 connections.</span></span> <span data-ttu-id="32db3-540">`Http2.HeaderTableSize` 會限制 HPACK 解碼器所使用的標頭壓縮表格大小。</span><span class="sxs-lookup"><span data-stu-id="32db3-540">`Http2.HeaderTableSize` limits the size of the header compression table that the HPACK decoder uses.</span></span> <span data-ttu-id="32db3-541">這個值是以八位元提供，而且必須大於零 (0)。</span><span class="sxs-lookup"><span data-stu-id="32db3-541">The value is provided in octets and must be greater than zero (0).</span></span>
+<span data-ttu-id="65f64-539">HPACK 解碼器可解壓縮 HTTP/2 連線的 HTTP 標頭。</span><span class="sxs-lookup"><span data-stu-id="65f64-539">The HPACK decoder decompresses HTTP headers for HTTP/2 connections.</span></span> <span data-ttu-id="65f64-540">`Http2.HeaderTableSize` 會限制 HPACK 解碼器所使用的標頭壓縮表格大小。</span><span class="sxs-lookup"><span data-stu-id="65f64-540">`Http2.HeaderTableSize` limits the size of the header compression table that the HPACK decoder uses.</span></span> <span data-ttu-id="65f64-541">這個值是以八位元提供，而且必須大於零 (0)。</span><span class="sxs-lookup"><span data-stu-id="65f64-541">The value is provided in octets and must be greater than zero (0).</span></span>
 
 ```csharp
 public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
@@ -1269,11 +1270,11 @@ public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
         });
 ```
 
-<span data-ttu-id="32db3-542">預設值為 4096。</span><span class="sxs-lookup"><span data-stu-id="32db3-542">The default value is 4096.</span></span>
+<span data-ttu-id="65f64-542">預設值為 4096。</span><span class="sxs-lookup"><span data-stu-id="65f64-542">The default value is 4096.</span></span>
 
-### <a name="maximum-frame-size"></a><span data-ttu-id="32db3-543">框架大小上限</span><span class="sxs-lookup"><span data-stu-id="32db3-543">Maximum frame size</span></span>
+### <a name="maximum-frame-size"></a><span data-ttu-id="65f64-543">框架大小上限</span><span class="sxs-lookup"><span data-stu-id="65f64-543">Maximum frame size</span></span>
 
-<span data-ttu-id="32db3-544">`Http2.MaxFrameSize` 表示要接收的 HTTP/2 連線框架承載大小上限。</span><span class="sxs-lookup"><span data-stu-id="32db3-544">`Http2.MaxFrameSize` indicates the maximum size of the HTTP/2 connection frame payload to receive.</span></span> <span data-ttu-id="32db3-545">這個值是以八位元提供，而且必須介於 2^14 (16,384) 到 2^24-1 (16,777,215) 之間。</span><span class="sxs-lookup"><span data-stu-id="32db3-545">The value is provided in octets and must be between 2^14 (16,384) and 2^24-1 (16,777,215).</span></span>
+<span data-ttu-id="65f64-544">`Http2.MaxFrameSize` 表示要接收的 HTTP/2 連線框架承載大小上限。</span><span class="sxs-lookup"><span data-stu-id="65f64-544">`Http2.MaxFrameSize` indicates the maximum size of the HTTP/2 connection frame payload to receive.</span></span> <span data-ttu-id="65f64-545">這個值是以八位元提供，而且必須介於 2^14 (16,384) 到 2^24-1 (16,777,215) 之間。</span><span class="sxs-lookup"><span data-stu-id="65f64-545">The value is provided in octets and must be between 2^14 (16,384) and 2^24-1 (16,777,215).</span></span>
 
 ```csharp
 public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
@@ -1285,11 +1286,11 @@ public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
         });
 ```
 
-<span data-ttu-id="32db3-546">預設值為 2^14 (16,384)。</span><span class="sxs-lookup"><span data-stu-id="32db3-546">The default value is 2^14 (16,384).</span></span>
+<span data-ttu-id="65f64-546">預設值為 2^14 (16,384)。</span><span class="sxs-lookup"><span data-stu-id="65f64-546">The default value is 2^14 (16,384).</span></span>
 
-### <a name="maximum-request-header-size"></a><span data-ttu-id="32db3-547">要求標頭大小上限</span><span class="sxs-lookup"><span data-stu-id="32db3-547">Maximum request header size</span></span>
+### <a name="maximum-request-header-size"></a><span data-ttu-id="65f64-547">要求標頭大小上限</span><span class="sxs-lookup"><span data-stu-id="65f64-547">Maximum request header size</span></span>
 
-<span data-ttu-id="32db3-548">`Http2.MaxRequestHeaderFieldSize` 以八位元表示要求標頭值的允許大小上限。</span><span class="sxs-lookup"><span data-stu-id="32db3-548">`Http2.MaxRequestHeaderFieldSize` indicates the maximum allowed size in octets of request header values.</span></span> <span data-ttu-id="32db3-549">此限制皆共同套用至已壓縮及未壓縮代表中的名稱與值。</span><span class="sxs-lookup"><span data-stu-id="32db3-549">This limit applies to both name and value together in their compressed and uncompressed representations.</span></span> <span data-ttu-id="32db3-550">此值必須大於零 (0)。</span><span class="sxs-lookup"><span data-stu-id="32db3-550">The value must be greater than zero (0).</span></span>
+<span data-ttu-id="65f64-548">`Http2.MaxRequestHeaderFieldSize` 以八位元表示要求標頭值的允許大小上限。</span><span class="sxs-lookup"><span data-stu-id="65f64-548">`Http2.MaxRequestHeaderFieldSize` indicates the maximum allowed size in octets of request header values.</span></span> <span data-ttu-id="65f64-549">此限制皆共同套用至已壓縮及未壓縮代表中的名稱與值。</span><span class="sxs-lookup"><span data-stu-id="65f64-549">This limit applies to both name and value together in their compressed and uncompressed representations.</span></span> <span data-ttu-id="65f64-550">此值必須大於零 (0)。</span><span class="sxs-lookup"><span data-stu-id="65f64-550">The value must be greater than zero (0).</span></span>
 
 ```csharp
 public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
@@ -1301,11 +1302,11 @@ public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
         });
 ```
 
-<span data-ttu-id="32db3-551">預設值為 8,192。</span><span class="sxs-lookup"><span data-stu-id="32db3-551">The default value is 8,192.</span></span>
+<span data-ttu-id="65f64-551">預設值為 8,192。</span><span class="sxs-lookup"><span data-stu-id="65f64-551">The default value is 8,192.</span></span>
 
-### <a name="initial-connection-window-size"></a><span data-ttu-id="32db3-552">初始連線視窗大小</span><span class="sxs-lookup"><span data-stu-id="32db3-552">Initial connection window size</span></span>
+### <a name="initial-connection-window-size"></a><span data-ttu-id="65f64-552">初始連線視窗大小</span><span class="sxs-lookup"><span data-stu-id="65f64-552">Initial connection window size</span></span>
 
-<span data-ttu-id="32db3-553">`Http2.InitialConnectionWindowSize` 會以位元組表示伺服器緩衝每個連線之所有要求 (資料流) 單次彙總的要求內容資料上限。</span><span class="sxs-lookup"><span data-stu-id="32db3-553">`Http2.InitialConnectionWindowSize` indicates the maximum request body data in bytes the server buffers at one time aggregated across all requests (streams) per connection.</span></span> <span data-ttu-id="32db3-554">要求也皆受 `Http2.InitialStreamWindowSize` 所限制。</span><span class="sxs-lookup"><span data-stu-id="32db3-554">Requests are also limited by `Http2.InitialStreamWindowSize`.</span></span> <span data-ttu-id="32db3-555">此值必須大於或等於 65,535，且小於 2^31 (2,147,483,648)。</span><span class="sxs-lookup"><span data-stu-id="32db3-555">The value must be greater than or equal to 65,535 and less than 2^31 (2,147,483,648).</span></span>
+<span data-ttu-id="65f64-553">`Http2.InitialConnectionWindowSize` 會以位元組表示伺服器緩衝每個連線之所有要求 (資料流) 單次彙總的要求內容資料上限。</span><span class="sxs-lookup"><span data-stu-id="65f64-553">`Http2.InitialConnectionWindowSize` indicates the maximum request body data in bytes the server buffers at one time aggregated across all requests (streams) per connection.</span></span> <span data-ttu-id="65f64-554">要求也皆受 `Http2.InitialStreamWindowSize` 所限制。</span><span class="sxs-lookup"><span data-stu-id="65f64-554">Requests are also limited by `Http2.InitialStreamWindowSize`.</span></span> <span data-ttu-id="65f64-555">此值必須大於或等於 65,535，且小於 2^31 (2,147,483,648)。</span><span class="sxs-lookup"><span data-stu-id="65f64-555">The value must be greater than or equal to 65,535 and less than 2^31 (2,147,483,648).</span></span>
 
 ```csharp
 public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
@@ -1317,11 +1318,11 @@ public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
         });
 ```
 
-<span data-ttu-id="32db3-556">預設值為 128 KB (131,072)。</span><span class="sxs-lookup"><span data-stu-id="32db3-556">The default value is 128 KB (131,072).</span></span>
+<span data-ttu-id="65f64-556">預設值為 128 KB (131,072)。</span><span class="sxs-lookup"><span data-stu-id="65f64-556">The default value is 128 KB (131,072).</span></span>
 
-### <a name="initial-stream-window-size"></a><span data-ttu-id="32db3-557">初始資料流視窗大小</span><span class="sxs-lookup"><span data-stu-id="32db3-557">Initial stream window size</span></span>
+### <a name="initial-stream-window-size"></a><span data-ttu-id="65f64-557">初始資料流視窗大小</span><span class="sxs-lookup"><span data-stu-id="65f64-557">Initial stream window size</span></span>
 
-<span data-ttu-id="32db3-558">`Http2.InitialStreamWindowSize` 會以位元組表示每個要求 (資料流) 單次伺服器緩衝的要求內容資料上限。</span><span class="sxs-lookup"><span data-stu-id="32db3-558">`Http2.InitialStreamWindowSize` indicates the maximum request body data in bytes the server buffers at one time per request (stream).</span></span> <span data-ttu-id="32db3-559">要求也皆受 `Http2.InitialStreamWindowSize` 所限制。</span><span class="sxs-lookup"><span data-stu-id="32db3-559">Requests are also limited by `Http2.InitialStreamWindowSize`.</span></span> <span data-ttu-id="32db3-560">此值必須大於或等於 65,535，且小於 2^31 (2,147,483,648)。</span><span class="sxs-lookup"><span data-stu-id="32db3-560">The value must be greater than or equal to 65,535 and less than 2^31 (2,147,483,648).</span></span>
+<span data-ttu-id="65f64-558">`Http2.InitialStreamWindowSize` 會以位元組表示每個要求 (資料流) 單次伺服器緩衝的要求內容資料上限。</span><span class="sxs-lookup"><span data-stu-id="65f64-558">`Http2.InitialStreamWindowSize` indicates the maximum request body data in bytes the server buffers at one time per request (stream).</span></span> <span data-ttu-id="65f64-559">要求也皆受 `Http2.InitialStreamWindowSize` 所限制。</span><span class="sxs-lookup"><span data-stu-id="65f64-559">Requests are also limited by `Http2.InitialStreamWindowSize`.</span></span> <span data-ttu-id="65f64-560">此值必須大於或等於 65,535，且小於 2^31 (2,147,483,648)。</span><span class="sxs-lookup"><span data-stu-id="65f64-560">The value must be greater than or equal to 65,535 and less than 2^31 (2,147,483,648).</span></span>
 
 ```csharp
 public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
@@ -1333,61 +1334,61 @@ public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
         });
 ```
 
-<span data-ttu-id="32db3-561">預設值為 96 KB (98,304)。</span><span class="sxs-lookup"><span data-stu-id="32db3-561">The default value is 96 KB (98,304).</span></span>
+<span data-ttu-id="65f64-561">預設值為 96 KB (98,304)。</span><span class="sxs-lookup"><span data-stu-id="65f64-561">The default value is 96 KB (98,304).</span></span>
 
-### <a name="synchronous-io"></a><span data-ttu-id="32db3-562">同步 I/O</span><span class="sxs-lookup"><span data-stu-id="32db3-562">Synchronous I/O</span></span>
+### <a name="synchronous-io"></a><span data-ttu-id="65f64-562">同步 I/O</span><span class="sxs-lookup"><span data-stu-id="65f64-562">Synchronous I/O</span></span>
 
-<span data-ttu-id="32db3-563"><xref:Microsoft.AspNetCore.Server.Kestrel.Core.KestrelServerOptions.AllowSynchronousIO>控制要求和回應是否允許同步的 i/o。</span><span class="sxs-lookup"><span data-stu-id="32db3-563"><xref:Microsoft.AspNetCore.Server.Kestrel.Core.KestrelServerOptions.AllowSynchronousIO> controls whether synchronous I/O is allowed for the request and response.</span></span> <span data-ttu-id="32db3-564">預設值為 `true`。</span><span class="sxs-lookup"><span data-stu-id="32db3-564">The  default value is `true`.</span></span>
+<span data-ttu-id="65f64-563"><xref:Microsoft.AspNetCore.Server.Kestrel.Core.KestrelServerOptions.AllowSynchronousIO> 控制要求和回應是否允許同步 i/o。</span><span class="sxs-lookup"><span data-stu-id="65f64-563"><xref:Microsoft.AspNetCore.Server.Kestrel.Core.KestrelServerOptions.AllowSynchronousIO> controls whether synchronous I/O is allowed for the request and response.</span></span> <span data-ttu-id="65f64-564">預設值為 `true`。</span><span class="sxs-lookup"><span data-stu-id="65f64-564">The  default value is `true`.</span></span>
 
 > [!WARNING]
-> <span data-ttu-id="32db3-565">大量封鎖同步 i/o 作業可能會導致執行緒集區耗盡，讓應用程式無回應。</span><span class="sxs-lookup"><span data-stu-id="32db3-565">A large number of blocking synchronous I/O operations can lead to thread pool starvation, which makes the app unresponsive.</span></span> <span data-ttu-id="32db3-566">只有 `AllowSynchronousIO` 在使用不支援非同步 i/o 的程式庫時才啟用。</span><span class="sxs-lookup"><span data-stu-id="32db3-566">Only enable `AllowSynchronousIO` when using a library that doesn't support asynchronous I/O.</span></span>
+> <span data-ttu-id="65f64-565">大量封鎖同步 i/o 作業可能會導致執行緒集區耗盡，而使應用程式無回應。</span><span class="sxs-lookup"><span data-stu-id="65f64-565">A large number of blocking synchronous I/O operations can lead to thread pool starvation, which makes the app unresponsive.</span></span> <span data-ttu-id="65f64-566">只有 `AllowSynchronousIO` 在使用不支援非同步 i/o 的程式庫時才啟用。</span><span class="sxs-lookup"><span data-stu-id="65f64-566">Only enable `AllowSynchronousIO` when using a library that doesn't support asynchronous I/O.</span></span>
 
-<span data-ttu-id="32db3-567">下列範例會啟用同步 i/o：</span><span class="sxs-lookup"><span data-stu-id="32db3-567">The following example enables synchronous I/O:</span></span>
+<span data-ttu-id="65f64-567">下列範例會啟用同步 i/o：</span><span class="sxs-lookup"><span data-stu-id="65f64-567">The following example enables synchronous I/O:</span></span>
 
 [!code-csharp[](kestrel/samples/2.x/KestrelSample/Program.cs?name=snippet_SyncIO)]
 
-<span data-ttu-id="32db3-568">如需其他 Kestrel 選項和限制的資訊，請參閱：</span><span class="sxs-lookup"><span data-stu-id="32db3-568">For information about other Kestrel options and limits, see:</span></span>
+<span data-ttu-id="65f64-568">如需其他 Kestrel 選項和限制的資訊，請參閱：</span><span class="sxs-lookup"><span data-stu-id="65f64-568">For information about other Kestrel options and limits, see:</span></span>
 
 * <xref:Microsoft.AspNetCore.Server.Kestrel.Core.KestrelServerOptions>
 * <xref:Microsoft.AspNetCore.Server.Kestrel.Core.KestrelServerLimits>
 * <xref:Microsoft.AspNetCore.Server.Kestrel.Core.ListenOptions>
 
-## <a name="endpoint-configuration"></a><span data-ttu-id="32db3-569">端點組態</span><span class="sxs-lookup"><span data-stu-id="32db3-569">Endpoint configuration</span></span>
+## <a name="endpoint-configuration"></a><span data-ttu-id="65f64-569">端點組態</span><span class="sxs-lookup"><span data-stu-id="65f64-569">Endpoint configuration</span></span>
 
-<span data-ttu-id="32db3-570">ASP.NET Core 預設會繫結至：</span><span class="sxs-lookup"><span data-stu-id="32db3-570">By default, ASP.NET Core binds to:</span></span>
+<span data-ttu-id="65f64-570">ASP.NET Core 預設會繫結至：</span><span class="sxs-lookup"><span data-stu-id="65f64-570">By default, ASP.NET Core binds to:</span></span>
 
 * `http://localhost:5000`
-* <span data-ttu-id="32db3-571">`https://localhost:5001` (當有本機開發憑證存在時)</span><span class="sxs-lookup"><span data-stu-id="32db3-571">`https://localhost:5001` (when a local development certificate is present)</span></span>
+* <span data-ttu-id="65f64-571">`https://localhost:5001` (當有本機開發憑證存在時)</span><span class="sxs-lookup"><span data-stu-id="65f64-571">`https://localhost:5001` (when a local development certificate is present)</span></span>
 
-<span data-ttu-id="32db3-572">使用以下各項指定 URL：</span><span class="sxs-lookup"><span data-stu-id="32db3-572">Specify URLs using the:</span></span>
+<span data-ttu-id="65f64-572">使用以下各項指定 URL：</span><span class="sxs-lookup"><span data-stu-id="65f64-572">Specify URLs using the:</span></span>
 
-* <span data-ttu-id="32db3-573">`ASPNETCORE_URLS` 環境變數。</span><span class="sxs-lookup"><span data-stu-id="32db3-573">`ASPNETCORE_URLS` environment variable.</span></span>
-* <span data-ttu-id="32db3-574">`--urls` 命令列引數。</span><span class="sxs-lookup"><span data-stu-id="32db3-574">`--urls` command-line argument.</span></span>
-* <span data-ttu-id="32db3-575">`urls` 主機組態索引鍵。</span><span class="sxs-lookup"><span data-stu-id="32db3-575">`urls` host configuration key.</span></span>
-* <span data-ttu-id="32db3-576">`UseUrls` 擴充方法。</span><span class="sxs-lookup"><span data-stu-id="32db3-576">`UseUrls` extension method.</span></span>
+* <span data-ttu-id="65f64-573">`ASPNETCORE_URLS` 環境變數。</span><span class="sxs-lookup"><span data-stu-id="65f64-573">`ASPNETCORE_URLS` environment variable.</span></span>
+* <span data-ttu-id="65f64-574">`--urls` 命令列引數。</span><span class="sxs-lookup"><span data-stu-id="65f64-574">`--urls` command-line argument.</span></span>
+* <span data-ttu-id="65f64-575">`urls` 主機組態索引鍵。</span><span class="sxs-lookup"><span data-stu-id="65f64-575">`urls` host configuration key.</span></span>
+* <span data-ttu-id="65f64-576">`UseUrls` 擴充方法。</span><span class="sxs-lookup"><span data-stu-id="65f64-576">`UseUrls` extension method.</span></span>
 
-<span data-ttu-id="32db3-577">使用這些方法提供的值可以是一或多個 HTTP 和 HTTPS 端點 (如果有預設憑證可用則為 HTTPS)。</span><span class="sxs-lookup"><span data-stu-id="32db3-577">The value provided using these approaches can be one or more HTTP and HTTPS endpoints (HTTPS if a default cert is available).</span></span> <span data-ttu-id="32db3-578">將值設定為以分號分隔的清單 (例如，`"Urls": "http://localhost:8000;http://localhost:8001"`)。</span><span class="sxs-lookup"><span data-stu-id="32db3-578">Configure the value as a semicolon-separated list (for example, `"Urls": "http://localhost:8000;http://localhost:8001"`).</span></span>
+<span data-ttu-id="65f64-577">使用這些方法提供的值可以是一或多個 HTTP 和 HTTPS 端點 (如果有預設憑證可用則為 HTTPS)。</span><span class="sxs-lookup"><span data-stu-id="65f64-577">The value provided using these approaches can be one or more HTTP and HTTPS endpoints (HTTPS if a default cert is available).</span></span> <span data-ttu-id="65f64-578">將值設定為以分號分隔的清單 (例如，`"Urls": "http://localhost:8000;http://localhost:8001"`)。</span><span class="sxs-lookup"><span data-stu-id="65f64-578">Configure the value as a semicolon-separated list (for example, `"Urls": "http://localhost:8000;http://localhost:8001"`).</span></span>
 
-<span data-ttu-id="32db3-579">如需有關這些方法的詳細資訊，請參閱[伺服器 URL](xref:fundamentals/host/web-host#server-urls) 和[覆寫設定](xref:fundamentals/host/web-host#override-configuration)。</span><span class="sxs-lookup"><span data-stu-id="32db3-579">For more information on these approaches, see [Server URLs](xref:fundamentals/host/web-host#server-urls) and [Override configuration](xref:fundamentals/host/web-host#override-configuration).</span></span>
+<span data-ttu-id="65f64-579">如需有關這些方法的詳細資訊，請參閱[伺服器 URL](xref:fundamentals/host/web-host#server-urls) 和[覆寫設定](xref:fundamentals/host/web-host#override-configuration)。</span><span class="sxs-lookup"><span data-stu-id="65f64-579">For more information on these approaches, see [Server URLs](xref:fundamentals/host/web-host#server-urls) and [Override configuration](xref:fundamentals/host/web-host#override-configuration).</span></span>
 
-<span data-ttu-id="32db3-580">開發憑證會建立於：</span><span class="sxs-lookup"><span data-stu-id="32db3-580">A development certificate is created:</span></span>
+<span data-ttu-id="65f64-580">開發憑證會建立於：</span><span class="sxs-lookup"><span data-stu-id="65f64-580">A development certificate is created:</span></span>
 
-* <span data-ttu-id="32db3-581">已安裝 [.NET Core SDK](/dotnet/core/sdk) 時。</span><span class="sxs-lookup"><span data-stu-id="32db3-581">When the [.NET Core SDK](/dotnet/core/sdk) is installed.</span></span>
-* <span data-ttu-id="32db3-582">[dev-certs 工具](xref:aspnetcore-2.1#https)用來建立憑證。</span><span class="sxs-lookup"><span data-stu-id="32db3-582">The [dev-certs tool](xref:aspnetcore-2.1#https) is used to create a certificate.</span></span>
+* <span data-ttu-id="65f64-581">已安裝 [.NET Core SDK](/dotnet/core/sdk) 時。</span><span class="sxs-lookup"><span data-stu-id="65f64-581">When the [.NET Core SDK](/dotnet/core/sdk) is installed.</span></span>
+* <span data-ttu-id="65f64-582">[dev-certs 工具](xref:aspnetcore-2.1#https)用來建立憑證。</span><span class="sxs-lookup"><span data-stu-id="65f64-582">The [dev-certs tool](xref:aspnetcore-2.1#https) is used to create a certificate.</span></span>
 
-<span data-ttu-id="32db3-583">有些瀏覽器需要授與明確的許可權，才能信任本機開發憑證。</span><span class="sxs-lookup"><span data-stu-id="32db3-583">Some browsers require granting explicit permission to trust the local development certificate.</span></span>
+<span data-ttu-id="65f64-583">某些瀏覽器需要授與明確的許可權，以信任本機開發憑證。</span><span class="sxs-lookup"><span data-stu-id="65f64-583">Some browsers require granting explicit permission to trust the local development certificate.</span></span>
 
-<span data-ttu-id="32db3-584">專案範本預設會將應用程式設定為在 HTTPS 上執行，並包含 HTTPS 重新導向[和 HSTS 支援](xref:security/enforcing-ssl)。</span><span class="sxs-lookup"><span data-stu-id="32db3-584">Project templates configure apps to run on HTTPS by default and include [HTTPS redirection and HSTS support](xref:security/enforcing-ssl).</span></span>
+<span data-ttu-id="65f64-584">專案範本預設會將應用程式設定為在 HTTPS 上執行，並包含 Https 重新導向 [和 HSTS 支援](xref:security/enforcing-ssl)。</span><span class="sxs-lookup"><span data-stu-id="65f64-584">Project templates configure apps to run on HTTPS by default and include [HTTPS redirection and HSTS support](xref:security/enforcing-ssl).</span></span>
 
-<span data-ttu-id="32db3-585">請在 <xref:Microsoft.AspNetCore.Server.Kestrel.Core.KestrelServerOptions> 上呼叫 <xref:Microsoft.AspNetCore.Server.Kestrel.Core.KestrelServerOptions.Listen*> 或 <xref:Microsoft.AspNetCore.Server.Kestrel.Core.KestrelServerOptions.ListenUnixSocket*> 方法，來為 Kestrel 設定 URL 首碼和連接埠。</span><span class="sxs-lookup"><span data-stu-id="32db3-585">Call <xref:Microsoft.AspNetCore.Server.Kestrel.Core.KestrelServerOptions.Listen*> or <xref:Microsoft.AspNetCore.Server.Kestrel.Core.KestrelServerOptions.ListenUnixSocket*> methods on <xref:Microsoft.AspNetCore.Server.Kestrel.Core.KestrelServerOptions> to configure URL prefixes and ports for Kestrel.</span></span>
+<span data-ttu-id="65f64-585">請在 <xref:Microsoft.AspNetCore.Server.Kestrel.Core.KestrelServerOptions> 上呼叫 <xref:Microsoft.AspNetCore.Server.Kestrel.Core.KestrelServerOptions.Listen*> 或 <xref:Microsoft.AspNetCore.Server.Kestrel.Core.KestrelServerOptions.ListenUnixSocket*> 方法，來為 Kestrel 設定 URL 首碼和連接埠。</span><span class="sxs-lookup"><span data-stu-id="65f64-585">Call <xref:Microsoft.AspNetCore.Server.Kestrel.Core.KestrelServerOptions.Listen*> or <xref:Microsoft.AspNetCore.Server.Kestrel.Core.KestrelServerOptions.ListenUnixSocket*> methods on <xref:Microsoft.AspNetCore.Server.Kestrel.Core.KestrelServerOptions> to configure URL prefixes and ports for Kestrel.</span></span>
 
-<span data-ttu-id="32db3-586">`UseUrls`、`--urls` 命令列引數、`urls` 主機組態索引鍵和 `ASPNETCORE_URLS` 環境變數同樣有效，但卻有本節稍後註明的限制 (針對 HTTPS 端點組態必須有預設憑證可用)。</span><span class="sxs-lookup"><span data-stu-id="32db3-586">`UseUrls`, the `--urls` command-line argument, `urls` host configuration key, and the `ASPNETCORE_URLS` environment variable also work but have the limitations noted later in this section (a default certificate must be available for HTTPS endpoint configuration).</span></span>
+<span data-ttu-id="65f64-586">`UseUrls`、`--urls` 命令列引數、`urls` 主機組態索引鍵和 `ASPNETCORE_URLS` 環境變數同樣有效，但卻有本節稍後註明的限制 (針對 HTTPS 端點組態必須有預設憑證可用)。</span><span class="sxs-lookup"><span data-stu-id="65f64-586">`UseUrls`, the `--urls` command-line argument, `urls` host configuration key, and the `ASPNETCORE_URLS` environment variable also work but have the limitations noted later in this section (a default certificate must be available for HTTPS endpoint configuration).</span></span>
 
-<span data-ttu-id="32db3-587">`KestrelServerOptions`配置</span><span class="sxs-lookup"><span data-stu-id="32db3-587">`KestrelServerOptions` configuration:</span></span>
+<span data-ttu-id="65f64-587">`KestrelServerOptions` 配置：</span><span class="sxs-lookup"><span data-stu-id="65f64-587">`KestrelServerOptions` configuration:</span></span>
 
-### <a name="configureendpointdefaultsactionlistenoptions"></a><span data-ttu-id="32db3-588">ConfigureEndpointDefaults (動作 \<ListenOptions>) </span><span class="sxs-lookup"><span data-stu-id="32db3-588">ConfigureEndpointDefaults(Action\<ListenOptions>)</span></span>
+### <a name="configureendpointdefaultsactionlistenoptions"></a><span data-ttu-id="65f64-588">ConfigureEndpointDefaults (動作 \<ListenOptions>) </span><span class="sxs-lookup"><span data-stu-id="65f64-588">ConfigureEndpointDefaults(Action\<ListenOptions>)</span></span>
 
-<span data-ttu-id="32db3-589">指定組態 `Action` 以針對每個指定端點執行。</span><span class="sxs-lookup"><span data-stu-id="32db3-589">Specifies a configuration `Action` to run for each specified endpoint.</span></span> <span data-ttu-id="32db3-590">呼叫 `ConfigureEndpointDefaults` 多次會以最後一個指定的 `Action` 取代之前的 `Action`。</span><span class="sxs-lookup"><span data-stu-id="32db3-590">Calling `ConfigureEndpointDefaults` multiple times replaces prior `Action`s with the last `Action` specified.</span></span>
+<span data-ttu-id="65f64-589">指定組態 `Action` 以針對每個指定端點執行。</span><span class="sxs-lookup"><span data-stu-id="65f64-589">Specifies a configuration `Action` to run for each specified endpoint.</span></span> <span data-ttu-id="65f64-590">呼叫 `ConfigureEndpointDefaults` 多次會以最後一個指定的 `Action` 取代之前的 `Action`。</span><span class="sxs-lookup"><span data-stu-id="65f64-590">Calling `ConfigureEndpointDefaults` multiple times replaces prior `Action`s with the last `Action` specified.</span></span>
 
 ```csharp
 public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
@@ -1403,11 +1404,11 @@ public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
 ```
 
 > [!NOTE]
-> <span data-ttu-id="32db3-591"><xref:Microsoft.AspNetCore.Server.Kestrel.Core.KestrelServerOptions.Listen*>**在呼叫之前**呼叫所建立 <xref:Microsoft.AspNetCore.Server.Kestrel.Core.KestrelServerOptions.ConfigureEndpointDefaults*> 的端點，將不會套用預設值。</span><span class="sxs-lookup"><span data-stu-id="32db3-591">Endpoints created by calling <xref:Microsoft.AspNetCore.Server.Kestrel.Core.KestrelServerOptions.Listen*> **before** calling <xref:Microsoft.AspNetCore.Server.Kestrel.Core.KestrelServerOptions.ConfigureEndpointDefaults*> won't have the defaults applied.</span></span>
+> <span data-ttu-id="65f64-591">在呼叫之前呼叫所建立的端點 <xref:Microsoft.AspNetCore.Server.Kestrel.Core.KestrelServerOptions.Listen*> **before** <xref:Microsoft.AspNetCore.Server.Kestrel.Core.KestrelServerOptions.ConfigureEndpointDefaults*> ，將不會套用預設值。</span><span class="sxs-lookup"><span data-stu-id="65f64-591">Endpoints created by calling <xref:Microsoft.AspNetCore.Server.Kestrel.Core.KestrelServerOptions.Listen*> **before** calling <xref:Microsoft.AspNetCore.Server.Kestrel.Core.KestrelServerOptions.ConfigureEndpointDefaults*> won't have the defaults applied.</span></span>
 
-### <a name="configurehttpsdefaultsactionhttpsconnectionadapteroptions"></a><span data-ttu-id="32db3-592">ConfigureHttpsDefaults (動作 \<HttpsConnectionAdapterOptions>) </span><span class="sxs-lookup"><span data-stu-id="32db3-592">ConfigureHttpsDefaults(Action\<HttpsConnectionAdapterOptions>)</span></span>
+### <a name="configurehttpsdefaultsactionhttpsconnectionadapteroptions"></a><span data-ttu-id="65f64-592">ConfigureHttpsDefaults (動作 \<HttpsConnectionAdapterOptions>) </span><span class="sxs-lookup"><span data-stu-id="65f64-592">ConfigureHttpsDefaults(Action\<HttpsConnectionAdapterOptions>)</span></span>
 
-<span data-ttu-id="32db3-593">指定組態 `Action` 以針對每個 HTTPS 端點執行。</span><span class="sxs-lookup"><span data-stu-id="32db3-593">Specifies a configuration `Action` to run for each HTTPS endpoint.</span></span> <span data-ttu-id="32db3-594">呼叫 `ConfigureHttpsDefaults` 多次會以最後一個指定的 `Action` 取代之前的 `Action`。</span><span class="sxs-lookup"><span data-stu-id="32db3-594">Calling `ConfigureHttpsDefaults` multiple times replaces prior `Action`s with the last `Action` specified.</span></span>
+<span data-ttu-id="65f64-593">指定組態 `Action` 以針對每個 HTTPS 端點執行。</span><span class="sxs-lookup"><span data-stu-id="65f64-593">Specifies a configuration `Action` to run for each HTTPS endpoint.</span></span> <span data-ttu-id="65f64-594">呼叫 `ConfigureHttpsDefaults` 多次會以最後一個指定的 `Action` 取代之前的 `Action`。</span><span class="sxs-lookup"><span data-stu-id="65f64-594">Calling `ConfigureHttpsDefaults` multiple times replaces prior `Action`s with the last `Action` specified.</span></span>
 
 ```csharp
 public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
@@ -1424,20 +1425,20 @@ public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
 ```
 
 > [!NOTE]
-> <span data-ttu-id="32db3-595"><xref:Microsoft.AspNetCore.Server.Kestrel.Core.KestrelServerOptions.Listen*>**在呼叫之前**呼叫所建立 <xref:Microsoft.AspNetCore.Server.Kestrel.Core.KestrelServerOptions.ConfigureHttpsDefaults*> 的端點，將不會套用預設值。</span><span class="sxs-lookup"><span data-stu-id="32db3-595">Endpoints created by calling <xref:Microsoft.AspNetCore.Server.Kestrel.Core.KestrelServerOptions.Listen*> **before** calling <xref:Microsoft.AspNetCore.Server.Kestrel.Core.KestrelServerOptions.ConfigureHttpsDefaults*> won't have the defaults applied.</span></span>
+> <span data-ttu-id="65f64-595">在呼叫之前呼叫所建立的端點 <xref:Microsoft.AspNetCore.Server.Kestrel.Core.KestrelServerOptions.Listen*> **before** <xref:Microsoft.AspNetCore.Server.Kestrel.Core.KestrelServerOptions.ConfigureHttpsDefaults*> ，將不會套用預設值。</span><span class="sxs-lookup"><span data-stu-id="65f64-595">Endpoints created by calling <xref:Microsoft.AspNetCore.Server.Kestrel.Core.KestrelServerOptions.Listen*> **before** calling <xref:Microsoft.AspNetCore.Server.Kestrel.Core.KestrelServerOptions.ConfigureHttpsDefaults*> won't have the defaults applied.</span></span>
 
 
-### <a name="configureiconfiguration"></a><span data-ttu-id="32db3-596">Configure(IConfiguration)</span><span class="sxs-lookup"><span data-stu-id="32db3-596">Configure(IConfiguration)</span></span>
+### <a name="configureiconfiguration"></a><span data-ttu-id="65f64-596">Configure(IConfiguration)</span><span class="sxs-lookup"><span data-stu-id="65f64-596">Configure(IConfiguration)</span></span>
 
-<span data-ttu-id="32db3-597">建立設定載入器來設定以 <xref:Microsoft.Extensions.Configuration.IConfiguration> 作為輸入的 Kestrel。</span><span class="sxs-lookup"><span data-stu-id="32db3-597">Creates a configuration loader for setting up Kestrel that takes an <xref:Microsoft.Extensions.Configuration.IConfiguration> as input.</span></span> <span data-ttu-id="32db3-598">組態的範圍必須限於 Kestrel 的組態區段。</span><span class="sxs-lookup"><span data-stu-id="32db3-598">The configuration must be scoped to the configuration section for Kestrel.</span></span>
+<span data-ttu-id="65f64-597">建立設定載入器來設定以 <xref:Microsoft.Extensions.Configuration.IConfiguration> 作為輸入的 Kestrel。</span><span class="sxs-lookup"><span data-stu-id="65f64-597">Creates a configuration loader for setting up Kestrel that takes an <xref:Microsoft.Extensions.Configuration.IConfiguration> as input.</span></span> <span data-ttu-id="65f64-598">組態的範圍必須限於 Kestrel 的組態區段。</span><span class="sxs-lookup"><span data-stu-id="65f64-598">The configuration must be scoped to the configuration section for Kestrel.</span></span>
 
-### <a name="listenoptionsusehttps"></a><span data-ttu-id="32db3-599">ListenOptions.UseHttps</span><span class="sxs-lookup"><span data-stu-id="32db3-599">ListenOptions.UseHttps</span></span>
+### <a name="listenoptionsusehttps"></a><span data-ttu-id="65f64-599">ListenOptions.UseHttps</span><span class="sxs-lookup"><span data-stu-id="65f64-599">ListenOptions.UseHttps</span></span>
 
-<span data-ttu-id="32db3-600">設定 Kestrel 使用 HTTPS。</span><span class="sxs-lookup"><span data-stu-id="32db3-600">Configure Kestrel to use HTTPS.</span></span>
+<span data-ttu-id="65f64-600">設定 Kestrel 使用 HTTPS。</span><span class="sxs-lookup"><span data-stu-id="65f64-600">Configure Kestrel to use HTTPS.</span></span>
 
-<span data-ttu-id="32db3-601">`ListenOptions.UseHttps` 延伸模組：</span><span class="sxs-lookup"><span data-stu-id="32db3-601">`ListenOptions.UseHttps` extensions:</span></span>
+<span data-ttu-id="65f64-601">`ListenOptions.UseHttps` 延伸模組：</span><span class="sxs-lookup"><span data-stu-id="65f64-601">`ListenOptions.UseHttps` extensions:</span></span>
 
-* <span data-ttu-id="32db3-602">`UseHttps`：將 Kestrel 設定為使用 HTTPS 搭配預設憑證。</span><span class="sxs-lookup"><span data-stu-id="32db3-602">`UseHttps`: Configure Kestrel to use HTTPS with the default certificate.</span></span> <span data-ttu-id="32db3-603">如果未設定預設憑證，會擲回例外狀況。</span><span class="sxs-lookup"><span data-stu-id="32db3-603">Throws an exception if no default certificate is configured.</span></span>
+* <span data-ttu-id="65f64-602">`UseHttps`：設定 Kestrel 以搭配預設憑證使用 HTTPS。</span><span class="sxs-lookup"><span data-stu-id="65f64-602">`UseHttps`: Configure Kestrel to use HTTPS with the default certificate.</span></span> <span data-ttu-id="65f64-603">如果未設定預設憑證，會擲回例外狀況。</span><span class="sxs-lookup"><span data-stu-id="65f64-603">Throws an exception if no default certificate is configured.</span></span>
 * `UseHttps(string fileName)`
 * `UseHttps(string fileName, string password)`
 * `UseHttps(string fileName, string password, Action<HttpsConnectionAdapterOptions> configureOptions)`
@@ -1449,39 +1450,39 @@ public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
 * `UseHttps(X509Certificate2 serverCertificate, Action<HttpsConnectionAdapterOptions> configureOptions)`
 * `UseHttps(Action<HttpsConnectionAdapterOptions> configureOptions)`
 
-<span data-ttu-id="32db3-604">`ListenOptions.UseHttps` 參數：</span><span class="sxs-lookup"><span data-stu-id="32db3-604">`ListenOptions.UseHttps` parameters:</span></span>
+<span data-ttu-id="65f64-604">`ListenOptions.UseHttps` 參數：</span><span class="sxs-lookup"><span data-stu-id="65f64-604">`ListenOptions.UseHttps` parameters:</span></span>
 
-* <span data-ttu-id="32db3-605">`filename` 是憑證檔案的路徑和檔案名稱，它相對於包含應用程式內容檔案的目錄。</span><span class="sxs-lookup"><span data-stu-id="32db3-605">`filename` is the path and file name of a certificate file, relative to the directory that contains the app's content files.</span></span>
-* <span data-ttu-id="32db3-606">`password` 是存取 X.509 憑證資料所需的密碼。</span><span class="sxs-lookup"><span data-stu-id="32db3-606">`password` is the password required to access the X.509 certificate data.</span></span>
-* <span data-ttu-id="32db3-607">`configureOptions` 是設定 `HttpsConnectionAdapterOptions` 的 `Action`。</span><span class="sxs-lookup"><span data-stu-id="32db3-607">`configureOptions` is an `Action` to configure the `HttpsConnectionAdapterOptions`.</span></span> <span data-ttu-id="32db3-608">傳回 `ListenOptions`。</span><span class="sxs-lookup"><span data-stu-id="32db3-608">Returns the `ListenOptions`.</span></span>
-* <span data-ttu-id="32db3-609">`storeName` 是要從中載入憑證的憑證存放區。</span><span class="sxs-lookup"><span data-stu-id="32db3-609">`storeName` is the certificate store from which to load the certificate.</span></span>
-* <span data-ttu-id="32db3-610">`subject` 是憑證的主體名稱。</span><span class="sxs-lookup"><span data-stu-id="32db3-610">`subject` is the subject name for the certificate.</span></span>
-* <span data-ttu-id="32db3-611">`allowInvalid` 表示是否應該考慮無效的憑證，例如自我簽署憑證。</span><span class="sxs-lookup"><span data-stu-id="32db3-611">`allowInvalid` indicates if invalid certificates should be considered, such as self-signed certificates.</span></span>
-* <span data-ttu-id="32db3-612">`location` 是要從中載入憑證的存放區位置。</span><span class="sxs-lookup"><span data-stu-id="32db3-612">`location` is the store location to load the certificate from.</span></span>
-* <span data-ttu-id="32db3-613">`serverCertificate` 是 X.509 憑證。</span><span class="sxs-lookup"><span data-stu-id="32db3-613">`serverCertificate` is the X.509 certificate.</span></span>
+* <span data-ttu-id="65f64-605">`filename` 是憑證檔案的路徑和檔案名稱，它相對於包含應用程式內容檔案的目錄。</span><span class="sxs-lookup"><span data-stu-id="65f64-605">`filename` is the path and file name of a certificate file, relative to the directory that contains the app's content files.</span></span>
+* <span data-ttu-id="65f64-606">`password` 是存取 X.509 憑證資料所需的密碼。</span><span class="sxs-lookup"><span data-stu-id="65f64-606">`password` is the password required to access the X.509 certificate data.</span></span>
+* <span data-ttu-id="65f64-607">`configureOptions` 是設定 `HttpsConnectionAdapterOptions` 的 `Action`。</span><span class="sxs-lookup"><span data-stu-id="65f64-607">`configureOptions` is an `Action` to configure the `HttpsConnectionAdapterOptions`.</span></span> <span data-ttu-id="65f64-608">傳回 `ListenOptions`。</span><span class="sxs-lookup"><span data-stu-id="65f64-608">Returns the `ListenOptions`.</span></span>
+* <span data-ttu-id="65f64-609">`storeName` 是要從中載入憑證的憑證存放區。</span><span class="sxs-lookup"><span data-stu-id="65f64-609">`storeName` is the certificate store from which to load the certificate.</span></span>
+* <span data-ttu-id="65f64-610">`subject` 是憑證的主體名稱。</span><span class="sxs-lookup"><span data-stu-id="65f64-610">`subject` is the subject name for the certificate.</span></span>
+* <span data-ttu-id="65f64-611">`allowInvalid` 表示是否應該考慮無效的憑證，例如自我簽署憑證。</span><span class="sxs-lookup"><span data-stu-id="65f64-611">`allowInvalid` indicates if invalid certificates should be considered, such as self-signed certificates.</span></span>
+* <span data-ttu-id="65f64-612">`location` 是要從中載入憑證的存放區位置。</span><span class="sxs-lookup"><span data-stu-id="65f64-612">`location` is the store location to load the certificate from.</span></span>
+* <span data-ttu-id="65f64-613">`serverCertificate` 是 X.509 憑證。</span><span class="sxs-lookup"><span data-stu-id="65f64-613">`serverCertificate` is the X.509 certificate.</span></span>
 
-<span data-ttu-id="32db3-614">在生產環境中，必須明確設定 HTTPS。</span><span class="sxs-lookup"><span data-stu-id="32db3-614">In production, HTTPS must be explicitly configured.</span></span> <span data-ttu-id="32db3-615">至少必須提供預設憑證。</span><span class="sxs-lookup"><span data-stu-id="32db3-615">At a minimum, a default certificate must be provided.</span></span>
+<span data-ttu-id="65f64-614">在生產環境中，必須明確設定 HTTPS。</span><span class="sxs-lookup"><span data-stu-id="65f64-614">In production, HTTPS must be explicitly configured.</span></span> <span data-ttu-id="65f64-615">至少必須提供預設憑證。</span><span class="sxs-lookup"><span data-stu-id="65f64-615">At a minimum, a default certificate must be provided.</span></span>
 
-<span data-ttu-id="32db3-616">支援的組態描述如下：</span><span class="sxs-lookup"><span data-stu-id="32db3-616">Supported configurations described next:</span></span>
+<span data-ttu-id="65f64-616">支援的組態描述如下：</span><span class="sxs-lookup"><span data-stu-id="65f64-616">Supported configurations described next:</span></span>
 
-* <span data-ttu-id="32db3-617">無組態</span><span class="sxs-lookup"><span data-stu-id="32db3-617">No configuration</span></span>
-* <span data-ttu-id="32db3-618">從組態取代預設憑證</span><span class="sxs-lookup"><span data-stu-id="32db3-618">Replace the default certificate from configuration</span></span>
-* <span data-ttu-id="32db3-619">變更程式碼中的預設值</span><span class="sxs-lookup"><span data-stu-id="32db3-619">Change the defaults in code</span></span>
+* <span data-ttu-id="65f64-617">無組態</span><span class="sxs-lookup"><span data-stu-id="65f64-617">No configuration</span></span>
+* <span data-ttu-id="65f64-618">從組態取代預設憑證</span><span class="sxs-lookup"><span data-stu-id="65f64-618">Replace the default certificate from configuration</span></span>
+* <span data-ttu-id="65f64-619">變更程式碼中的預設值</span><span class="sxs-lookup"><span data-stu-id="65f64-619">Change the defaults in code</span></span>
 
-<span data-ttu-id="32db3-620">*無組態*</span><span class="sxs-lookup"><span data-stu-id="32db3-620">*No configuration*</span></span>
+<span data-ttu-id="65f64-620">*無組態*</span><span class="sxs-lookup"><span data-stu-id="65f64-620">*No configuration*</span></span>
 
-<span data-ttu-id="32db3-621">Kestrel 會接聽 `http://localhost:5000` 和 `https://localhost:5001` (如果預設憑證可用的話)。</span><span class="sxs-lookup"><span data-stu-id="32db3-621">Kestrel listens on `http://localhost:5000` and `https://localhost:5001` (if a default cert is available).</span></span>
+<span data-ttu-id="65f64-621">Kestrel 會接聽 `http://localhost:5000` 和 `https://localhost:5001` (如果預設憑證可用的話)。</span><span class="sxs-lookup"><span data-stu-id="65f64-621">Kestrel listens on `http://localhost:5000` and `https://localhost:5001` (if a default cert is available).</span></span>
 
 <a name="configuration"></a>
 
-<span data-ttu-id="32db3-622">*從組態取代預設憑證*</span><span class="sxs-lookup"><span data-stu-id="32db3-622">*Replace the default certificate from configuration*</span></span>
+<span data-ttu-id="65f64-622">*從組態取代預設憑證*</span><span class="sxs-lookup"><span data-stu-id="65f64-622">*Replace the default certificate from configuration*</span></span>
 
-<span data-ttu-id="32db3-623">`CreateDefaultBuilder` 預設會呼叫 `Configure(context.Configuration.GetSection("Kestrel"))` 以載入 Kestrel 設定。</span><span class="sxs-lookup"><span data-stu-id="32db3-623">`CreateDefaultBuilder` calls `Configure(context.Configuration.GetSection("Kestrel"))` by default to load Kestrel configuration.</span></span> <span data-ttu-id="32db3-624">Kestrel 可以使用預設的 HTTPS 應用程式設定組態結構描述。</span><span class="sxs-lookup"><span data-stu-id="32db3-624">A default HTTPS app settings configuration schema is available for Kestrel.</span></span> <span data-ttu-id="32db3-625">設定多個端點，包括 URL 和要使用的憑證－從磁碟上的檔案，或是從憑證存放區。</span><span class="sxs-lookup"><span data-stu-id="32db3-625">Configure multiple endpoints, including the URLs and the certificates to use, either from a file on disk or from a certificate store.</span></span>
+<span data-ttu-id="65f64-623">`CreateDefaultBuilder` 預設會呼叫 `Configure(context.Configuration.GetSection("Kestrel"))` 以載入 Kestrel 設定。</span><span class="sxs-lookup"><span data-stu-id="65f64-623">`CreateDefaultBuilder` calls `Configure(context.Configuration.GetSection("Kestrel"))` by default to load Kestrel configuration.</span></span> <span data-ttu-id="65f64-624">Kestrel 可以使用預設的 HTTPS 應用程式設定組態結構描述。</span><span class="sxs-lookup"><span data-stu-id="65f64-624">A default HTTPS app settings configuration schema is available for Kestrel.</span></span> <span data-ttu-id="65f64-625">設定多個端點，包括 URL 和要使用的憑證－從磁碟上的檔案，或是從憑證存放區。</span><span class="sxs-lookup"><span data-stu-id="65f64-625">Configure multiple endpoints, including the URLs and the certificates to use, either from a file on disk or from a certificate store.</span></span>
 
-<span data-ttu-id="32db3-626">在下列 *appsettings.json* 範例中：</span><span class="sxs-lookup"><span data-stu-id="32db3-626">In the following *appsettings.json* example:</span></span>
+<span data-ttu-id="65f64-626">在下列 *appsettings.json* 範例中：</span><span class="sxs-lookup"><span data-stu-id="65f64-626">In the following *appsettings.json* example:</span></span>
 
-* <span data-ttu-id="32db3-627">將 **AllowInvalid** 設定為 `true`，允許使用無效的憑證 (例如，自我簽署憑證)。</span><span class="sxs-lookup"><span data-stu-id="32db3-627">Set **AllowInvalid** to `true` to permit the use of invalid certificates (for example, self-signed certificates).</span></span>
-* <span data-ttu-id="32db3-628">任何未指定憑證 (接下來範例中的 **HttpsDefaultCert**) 的 HTTPS 端點會回復為 [憑證]**[預設]** > \*\*\*\* 下定義的憑證或開發憑證。</span><span class="sxs-lookup"><span data-stu-id="32db3-628">Any HTTPS endpoint that doesn't specify a certificate (**HttpsDefaultCert** in the example that follows) falls back to the cert defined under **Certificates** > **Default** or the development certificate.</span></span>
+* <span data-ttu-id="65f64-627">將 **AllowInvalid** 設定為 `true`，允許使用無效的憑證 (例如，自我簽署憑證)。</span><span class="sxs-lookup"><span data-stu-id="65f64-627">Set **AllowInvalid** to `true` to permit the use of invalid certificates (for example, self-signed certificates).</span></span>
+* <span data-ttu-id="65f64-628">任何未指定憑證 (接下來範例中的 **HttpsDefaultCert**) 的 HTTPS 端點會回復為 [憑證]**[預設]** > \*\*\*\* 下定義的憑證或開發憑證。</span><span class="sxs-lookup"><span data-stu-id="65f64-628">Any HTTPS endpoint that doesn't specify a certificate (**HttpsDefaultCert** in the example that follows) falls back to the cert defined under **Certificates** > **Default** or the development certificate.</span></span>
 
 ```json
 {
@@ -1531,7 +1532,7 @@ public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
 }
 ```
 
-<span data-ttu-id="32db3-629">除了針對任何憑證節點使用 [路徑]\*\*\*\* 和 [密碼]\*\*\*\*，還可以使用憑證存放區欄位指定憑證。</span><span class="sxs-lookup"><span data-stu-id="32db3-629">An alternative to using **Path** and **Password** for any certificate node is to specify the certificate using certificate store fields.</span></span> <span data-ttu-id="32db3-630">例如，**憑證**  >  **預設**憑證可以指定為：</span><span class="sxs-lookup"><span data-stu-id="32db3-630">For example, the **Certificates** > **Default** certificate can be specified as:</span></span>
+<span data-ttu-id="65f64-629">除了針對任何憑證節點使用 [路徑]\*\*\*\* 和 [密碼]\*\*\*\*，還可以使用憑證存放區欄位指定憑證。</span><span class="sxs-lookup"><span data-stu-id="65f64-629">An alternative to using **Path** and **Password** for any certificate node is to specify the certificate using certificate store fields.</span></span> <span data-ttu-id="65f64-630">例如，您可以將**憑證**  >  **預設**憑證指定為：</span><span class="sxs-lookup"><span data-stu-id="65f64-630">For example, the **Certificates** > **Default** certificate can be specified as:</span></span>
 
 ```json
 "Default": {
@@ -1542,15 +1543,15 @@ public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
 }
 ```
 
-<span data-ttu-id="32db3-631">結構描述附註：</span><span class="sxs-lookup"><span data-stu-id="32db3-631">Schema notes:</span></span>
+<span data-ttu-id="65f64-631">結構描述附註：</span><span class="sxs-lookup"><span data-stu-id="65f64-631">Schema notes:</span></span>
 
-* <span data-ttu-id="32db3-632">端點名稱不區分大小寫。</span><span class="sxs-lookup"><span data-stu-id="32db3-632">Endpoints names are case-insensitive.</span></span> <span data-ttu-id="32db3-633">例如，`HTTPS` 和 `Https` 都有效。</span><span class="sxs-lookup"><span data-stu-id="32db3-633">For example, `HTTPS` and `Https` are valid.</span></span>
-* <span data-ttu-id="32db3-634">`Url` 參數對每個端點而言都是必要的。</span><span class="sxs-lookup"><span data-stu-id="32db3-634">The `Url` parameter is required for each endpoint.</span></span> <span data-ttu-id="32db3-635">此參數的格式等同於最上層 `Urls` 組態參數，但是它限制為單一值。</span><span class="sxs-lookup"><span data-stu-id="32db3-635">The format for this parameter is the same as the top-level `Urls` configuration parameter except that it's limited to a single value.</span></span>
-* <span data-ttu-id="32db3-636">這些端點會取代最上層 `Urls` 組態中定義的端點，而不是新增至其中。</span><span class="sxs-lookup"><span data-stu-id="32db3-636">These endpoints replace those defined in the top-level `Urls` configuration rather than adding to them.</span></span> <span data-ttu-id="32db3-637">透過 `Listen` 在程式碼中定義的端點，會與組態區段中定義的端點累計。</span><span class="sxs-lookup"><span data-stu-id="32db3-637">Endpoints defined in code via `Listen` are cumulative with the endpoints defined in the configuration section.</span></span>
-* <span data-ttu-id="32db3-638">`Certificate` 區段是選擇性的。</span><span class="sxs-lookup"><span data-stu-id="32db3-638">The `Certificate` section is optional.</span></span> <span data-ttu-id="32db3-639">如果未指定 `Certificate` 區段，則會使用先前案例中所定義的預設值。</span><span class="sxs-lookup"><span data-stu-id="32db3-639">If the `Certificate` section isn't specified, the defaults defined in earlier scenarios are used.</span></span> <span data-ttu-id="32db3-640">如果沒有預設值可供使用，伺服器就會擲回例外狀況，且無法啟動。</span><span class="sxs-lookup"><span data-stu-id="32db3-640">If no defaults are available, the server throws an exception and fails to start.</span></span>
-* <span data-ttu-id="32db3-641">`Certificate`一節同時支援**路徑** &ndash; **密碼**和**主體** &ndash; **存放區**憑證。</span><span class="sxs-lookup"><span data-stu-id="32db3-641">The `Certificate` section supports both **Path**&ndash;**Password** and **Subject**&ndash;**Store** certificates.</span></span>
-* <span data-ttu-id="32db3-642">可以用這種方式定義任何數目的端點，只要它們不會導致連接埠衝突即可。</span><span class="sxs-lookup"><span data-stu-id="32db3-642">Any number of endpoints may be defined in this way so long as they don't cause port conflicts.</span></span>
-* <span data-ttu-id="32db3-643">`options.Configure(context.Configuration.GetSection("{SECTION}"))` 會傳回 `KestrelConfigurationLoader` 與 `.Endpoint(string name, listenOptions => { })` 方法，此方法可用來補充已設定的端點設定：</span><span class="sxs-lookup"><span data-stu-id="32db3-643">`options.Configure(context.Configuration.GetSection("{SECTION}"))` returns a `KestrelConfigurationLoader` with an `.Endpoint(string name, listenOptions => { })` method that can be used to supplement a configured endpoint's settings:</span></span>
+* <span data-ttu-id="65f64-632">端點名稱不區分大小寫。</span><span class="sxs-lookup"><span data-stu-id="65f64-632">Endpoints names are case-insensitive.</span></span> <span data-ttu-id="65f64-633">例如，`HTTPS` 和 `Https` 都有效。</span><span class="sxs-lookup"><span data-stu-id="65f64-633">For example, `HTTPS` and `Https` are valid.</span></span>
+* <span data-ttu-id="65f64-634">`Url` 參數對每個端點而言都是必要的。</span><span class="sxs-lookup"><span data-stu-id="65f64-634">The `Url` parameter is required for each endpoint.</span></span> <span data-ttu-id="65f64-635">此參數的格式等同於最上層 `Urls` 組態參數，但是它限制為單一值。</span><span class="sxs-lookup"><span data-stu-id="65f64-635">The format for this parameter is the same as the top-level `Urls` configuration parameter except that it's limited to a single value.</span></span>
+* <span data-ttu-id="65f64-636">這些端點會取代最上層 `Urls` 組態中定義的端點，而不是新增至其中。</span><span class="sxs-lookup"><span data-stu-id="65f64-636">These endpoints replace those defined in the top-level `Urls` configuration rather than adding to them.</span></span> <span data-ttu-id="65f64-637">透過 `Listen` 在程式碼中定義的端點，會與組態區段中定義的端點累計。</span><span class="sxs-lookup"><span data-stu-id="65f64-637">Endpoints defined in code via `Listen` are cumulative with the endpoints defined in the configuration section.</span></span>
+* <span data-ttu-id="65f64-638">`Certificate` 區段是選擇性的。</span><span class="sxs-lookup"><span data-stu-id="65f64-638">The `Certificate` section is optional.</span></span> <span data-ttu-id="65f64-639">如果未指定 `Certificate` 區段，則會使用先前案例中所定義的預設值。</span><span class="sxs-lookup"><span data-stu-id="65f64-639">If the `Certificate` section isn't specified, the defaults defined in earlier scenarios are used.</span></span> <span data-ttu-id="65f64-640">如果沒有預設值可供使用，伺服器就會擲回例外狀況，且無法啟動。</span><span class="sxs-lookup"><span data-stu-id="65f64-640">If no defaults are available, the server throws an exception and fails to start.</span></span>
+* <span data-ttu-id="65f64-641">`Certificate`區段同時支援**路徑** &ndash; **密碼**和**主體** &ndash; **存放區**憑證。</span><span class="sxs-lookup"><span data-stu-id="65f64-641">The `Certificate` section supports both **Path**&ndash;**Password** and **Subject**&ndash;**Store** certificates.</span></span>
+* <span data-ttu-id="65f64-642">可以用這種方式定義任何數目的端點，只要它們不會導致連接埠衝突即可。</span><span class="sxs-lookup"><span data-stu-id="65f64-642">Any number of endpoints may be defined in this way so long as they don't cause port conflicts.</span></span>
+* <span data-ttu-id="65f64-643">`options.Configure(context.Configuration.GetSection("{SECTION}"))` 會傳回 `KestrelConfigurationLoader` 與 `.Endpoint(string name, listenOptions => { })` 方法，此方法可用來補充已設定的端點設定：</span><span class="sxs-lookup"><span data-stu-id="65f64-643">`options.Configure(context.Configuration.GetSection("{SECTION}"))` returns a `KestrelConfigurationLoader` with an `.Endpoint(string name, listenOptions => { })` method that can be used to supplement a configured endpoint's settings:</span></span>
 
 ```csharp
 public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
@@ -1566,15 +1567,15 @@ public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
         });
 ```
 
-<span data-ttu-id="32db3-644">`KestrelServerOptions.ConfigurationLoader`可以直接存取，以繼續逐一查看現有的載入器，例如所提供的載入器 <xref:Microsoft.AspNetCore.WebHost.CreateDefaultBuilder*> 。</span><span class="sxs-lookup"><span data-stu-id="32db3-644">`KestrelServerOptions.ConfigurationLoader` can be directly accessed to continue iterating on the existing loader, such as the one provided by <xref:Microsoft.AspNetCore.WebHost.CreateDefaultBuilder*>.</span></span>
+<span data-ttu-id="65f64-644">`KestrelServerOptions.ConfigurationLoader` 可以直接存取，以繼續逐一查看現有的載入器，例如所提供的載入器 <xref:Microsoft.AspNetCore.WebHost.CreateDefaultBuilder*> 。</span><span class="sxs-lookup"><span data-stu-id="65f64-644">`KestrelServerOptions.ConfigurationLoader` can be directly accessed to continue iterating on the existing loader, such as the one provided by <xref:Microsoft.AspNetCore.WebHost.CreateDefaultBuilder*>.</span></span>
 
-* <span data-ttu-id="32db3-645">您可以在方法的選項中取得每個端點的設定區段， `Endpoint` 以便讀取自訂設定。</span><span class="sxs-lookup"><span data-stu-id="32db3-645">The configuration section for each endpoint is available on the options in the `Endpoint` method so that custom settings may be read.</span></span>
-* <span data-ttu-id="32db3-646">可以藉由使用另一個區段再次呼叫 `options.Configure(context.Configuration.GetSection("{SECTION}"))` 而載入多個組態。</span><span class="sxs-lookup"><span data-stu-id="32db3-646">Multiple configurations may be loaded by calling `options.Configure(context.Configuration.GetSection("{SECTION}"))` again with another section.</span></span> <span data-ttu-id="32db3-647">只會使用最後一個組態，除非在先前的執行個體上已明確呼叫 `Load`。</span><span class="sxs-lookup"><span data-stu-id="32db3-647">Only the last configuration is used, unless `Load` is explicitly called on prior instances.</span></span> <span data-ttu-id="32db3-648">中繼套件不會呼叫 `Load`，如此可能會取代其預設組態區段。</span><span class="sxs-lookup"><span data-stu-id="32db3-648">The metapackage doesn't call `Load` so that its default configuration section may be replaced.</span></span>
-* <span data-ttu-id="32db3-649">`KestrelConfigurationLoader` 會將來自 `KestrelServerOptions` 的 API 的 `Listen` 系列鏡像為 `Endpoint` 多載，所以可在相同的位置設定程式碼和設定端點。</span><span class="sxs-lookup"><span data-stu-id="32db3-649">`KestrelConfigurationLoader` mirrors the `Listen` family of APIs from `KestrelServerOptions` as `Endpoint` overloads, so code and config endpoints may be configured in the same place.</span></span> <span data-ttu-id="32db3-650">這些多載不使用名稱，並且只使用來自組態的預設組態。</span><span class="sxs-lookup"><span data-stu-id="32db3-650">These overloads don't use names and only consume default settings from configuration.</span></span>
+* <span data-ttu-id="65f64-645">您可以在方法的選項中使用每個端點的設定區段， `Endpoint` 以便讀取自訂設定。</span><span class="sxs-lookup"><span data-stu-id="65f64-645">The configuration section for each endpoint is available on the options in the `Endpoint` method so that custom settings may be read.</span></span>
+* <span data-ttu-id="65f64-646">可以藉由使用另一個區段再次呼叫 `options.Configure(context.Configuration.GetSection("{SECTION}"))` 而載入多個組態。</span><span class="sxs-lookup"><span data-stu-id="65f64-646">Multiple configurations may be loaded by calling `options.Configure(context.Configuration.GetSection("{SECTION}"))` again with another section.</span></span> <span data-ttu-id="65f64-647">只會使用最後一個組態，除非在先前的執行個體上已明確呼叫 `Load`。</span><span class="sxs-lookup"><span data-stu-id="65f64-647">Only the last configuration is used, unless `Load` is explicitly called on prior instances.</span></span> <span data-ttu-id="65f64-648">中繼套件不會呼叫 `Load`，如此可能會取代其預設組態區段。</span><span class="sxs-lookup"><span data-stu-id="65f64-648">The metapackage doesn't call `Load` so that its default configuration section may be replaced.</span></span>
+* <span data-ttu-id="65f64-649">`KestrelConfigurationLoader` 會將來自 `KestrelServerOptions` 的 API 的 `Listen` 系列鏡像為 `Endpoint` 多載，所以可在相同的位置設定程式碼和設定端點。</span><span class="sxs-lookup"><span data-stu-id="65f64-649">`KestrelConfigurationLoader` mirrors the `Listen` family of APIs from `KestrelServerOptions` as `Endpoint` overloads, so code and config endpoints may be configured in the same place.</span></span> <span data-ttu-id="65f64-650">這些多載不使用名稱，並且只使用來自組態的預設組態。</span><span class="sxs-lookup"><span data-stu-id="65f64-650">These overloads don't use names and only consume default settings from configuration.</span></span>
 
-<span data-ttu-id="32db3-651">*變更程式碼中的預設值*</span><span class="sxs-lookup"><span data-stu-id="32db3-651">*Change the defaults in code*</span></span>
+<span data-ttu-id="65f64-651">*變更程式碼中的預設值*</span><span class="sxs-lookup"><span data-stu-id="65f64-651">*Change the defaults in code*</span></span>
 
-<span data-ttu-id="32db3-652">`ConfigureEndpointDefaults` 和 `ConfigureHttpsDefaults` 可以用來變更 `ListenOptions` 和 `HttpsConnectionAdapterOptions` 的預設設定，包括覆寫先前案例中指定的預設憑證。</span><span class="sxs-lookup"><span data-stu-id="32db3-652">`ConfigureEndpointDefaults` and `ConfigureHttpsDefaults` can be used to change default settings for `ListenOptions` and `HttpsConnectionAdapterOptions`, including overriding the default certificate specified in the prior scenario.</span></span> <span data-ttu-id="32db3-653">`ConfigureEndpointDefaults` 和 `ConfigureHttpsDefaults` 應該在設定任何端點之前呼叫。</span><span class="sxs-lookup"><span data-stu-id="32db3-653">`ConfigureEndpointDefaults` and `ConfigureHttpsDefaults` should be called before any endpoints are configured.</span></span>
+<span data-ttu-id="65f64-652">`ConfigureEndpointDefaults` 和 `ConfigureHttpsDefaults` 可以用來變更 `ListenOptions` 和 `HttpsConnectionAdapterOptions` 的預設設定，包括覆寫先前案例中指定的預設憑證。</span><span class="sxs-lookup"><span data-stu-id="65f64-652">`ConfigureEndpointDefaults` and `ConfigureHttpsDefaults` can be used to change default settings for `ListenOptions` and `HttpsConnectionAdapterOptions`, including overriding the default certificate specified in the prior scenario.</span></span> <span data-ttu-id="65f64-653">`ConfigureEndpointDefaults` 和 `ConfigureHttpsDefaults` 應該在設定任何端點之前呼叫。</span><span class="sxs-lookup"><span data-stu-id="65f64-653">`ConfigureEndpointDefaults` and `ConfigureHttpsDefaults` should be called before any endpoints are configured.</span></span>
 
 ```csharp
 public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
@@ -1594,16 +1595,16 @@ public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
         });
 ```
 
-<span data-ttu-id="32db3-654">*SNI 的 Kestrel 支援*</span><span class="sxs-lookup"><span data-stu-id="32db3-654">*Kestrel support for SNI*</span></span>
+<span data-ttu-id="65f64-654">*SNI 的 Kestrel 支援*</span><span class="sxs-lookup"><span data-stu-id="65f64-654">*Kestrel support for SNI*</span></span>
 
-<span data-ttu-id="32db3-655">[伺服器名稱指示 (SNI)](https://tools.ietf.org/html/rfc6066#section-3) 可以用於在相同的 IP 位址和連接埠上裝載多個網域。</span><span class="sxs-lookup"><span data-stu-id="32db3-655">[Server Name Indication (SNI)](https://tools.ietf.org/html/rfc6066#section-3) can be used to host multiple domains on the same IP address and port.</span></span> <span data-ttu-id="32db3-656">SNI 若要運作，用戶端會在 TLS 信號交換期間傳送安全工作階段的主機名稱給伺服器，讓伺服器可以提供正確的憑證。</span><span class="sxs-lookup"><span data-stu-id="32db3-656">For SNI to function, the client sends the host name for the secure session to the server during the TLS handshake so that the server can provide the correct certificate.</span></span> <span data-ttu-id="32db3-657">用戶端在 TLS 信號交換之後的安全工作階段期間，會使用所提供的憑證與伺服器進行加密通訊。</span><span class="sxs-lookup"><span data-stu-id="32db3-657">The client uses the furnished certificate for encrypted communication with the server during the secure session that follows the TLS handshake.</span></span>
+<span data-ttu-id="65f64-655">[伺服器名稱指示 (SNI)](https://tools.ietf.org/html/rfc6066#section-3) 可以用於在相同的 IP 位址和連接埠上裝載多個網域。</span><span class="sxs-lookup"><span data-stu-id="65f64-655">[Server Name Indication (SNI)](https://tools.ietf.org/html/rfc6066#section-3) can be used to host multiple domains on the same IP address and port.</span></span> <span data-ttu-id="65f64-656">SNI 若要運作，用戶端會在 TLS 信號交換期間傳送安全工作階段的主機名稱給伺服器，讓伺服器可以提供正確的憑證。</span><span class="sxs-lookup"><span data-stu-id="65f64-656">For SNI to function, the client sends the host name for the secure session to the server during the TLS handshake so that the server can provide the correct certificate.</span></span> <span data-ttu-id="65f64-657">用戶端在 TLS 信號交換之後的安全工作階段期間，會使用所提供的憑證與伺服器進行加密通訊。</span><span class="sxs-lookup"><span data-stu-id="65f64-657">The client uses the furnished certificate for encrypted communication with the server during the secure session that follows the TLS handshake.</span></span>
 
-<span data-ttu-id="32db3-658">Kestrel 透過 `ServerCertificateSelector` 回呼來支援 SNI。</span><span class="sxs-lookup"><span data-stu-id="32db3-658">Kestrel supports SNI via the `ServerCertificateSelector` callback.</span></span> <span data-ttu-id="32db3-659">回呼會針對每個連線叫用一次，允許應用程式檢查主機名稱並選取適當的憑證。</span><span class="sxs-lookup"><span data-stu-id="32db3-659">The callback is invoked once per connection to allow the app to inspect the host name and select the appropriate certificate.</span></span>
+<span data-ttu-id="65f64-658">Kestrel 透過 `ServerCertificateSelector` 回呼來支援 SNI。</span><span class="sxs-lookup"><span data-stu-id="65f64-658">Kestrel supports SNI via the `ServerCertificateSelector` callback.</span></span> <span data-ttu-id="65f64-659">回呼會針對每個連線叫用一次，允許應用程式檢查主機名稱並選取適當的憑證。</span><span class="sxs-lookup"><span data-stu-id="65f64-659">The callback is invoked once per connection to allow the app to inspect the host name and select the appropriate certificate.</span></span>
 
-<span data-ttu-id="32db3-660">SNI 支援需要：</span><span class="sxs-lookup"><span data-stu-id="32db3-660">SNI support requires:</span></span>
+<span data-ttu-id="65f64-660">SNI 支援需要：</span><span class="sxs-lookup"><span data-stu-id="65f64-660">SNI support requires:</span></span>
 
-* <span data-ttu-id="32db3-661">在目標 framework `netcoreapp2.1` 或更新版本上執行。</span><span class="sxs-lookup"><span data-stu-id="32db3-661">Running on target framework `netcoreapp2.1` or later.</span></span> <span data-ttu-id="32db3-662">在 `net461` 或更新版本上，會叫用回呼，但 `name` 一律為 `null` 。</span><span class="sxs-lookup"><span data-stu-id="32db3-662">On `net461` or later, the callback is invoked but the `name` is always `null`.</span></span> <span data-ttu-id="32db3-663">如果用戶端不在 TLS 信號交換中提供主機名稱參數，則 `name` 也是 `null`。</span><span class="sxs-lookup"><span data-stu-id="32db3-663">The `name` is also `null` if the client doesn't provide the host name parameter in the TLS handshake.</span></span>
-* <span data-ttu-id="32db3-664">所有網站都在相同的 Kestrel 執行個體上執行。</span><span class="sxs-lookup"><span data-stu-id="32db3-664">All websites run on the same Kestrel instance.</span></span> <span data-ttu-id="32db3-665">在不使用反向 Proxy 的情況下，Kestrel 不支援跨多個執行個體共用 IP 位址和連接埠。</span><span class="sxs-lookup"><span data-stu-id="32db3-665">Kestrel doesn't support sharing an IP address and port across multiple instances without a reverse proxy.</span></span>
+* <span data-ttu-id="65f64-661">在目標 framework `netcoreapp2.1` 或更新版本上執行。</span><span class="sxs-lookup"><span data-stu-id="65f64-661">Running on target framework `netcoreapp2.1` or later.</span></span> <span data-ttu-id="65f64-662">在 `net461` 或更新版本中，會叫用回呼，但 `name` 一律為 `null` 。</span><span class="sxs-lookup"><span data-stu-id="65f64-662">On `net461` or later, the callback is invoked but the `name` is always `null`.</span></span> <span data-ttu-id="65f64-663">如果用戶端不在 TLS 信號交換中提供主機名稱參數，則 `name` 也是 `null`。</span><span class="sxs-lookup"><span data-stu-id="65f64-663">The `name` is also `null` if the client doesn't provide the host name parameter in the TLS handshake.</span></span>
+* <span data-ttu-id="65f64-664">所有網站都在相同的 Kestrel 執行個體上執行。</span><span class="sxs-lookup"><span data-stu-id="65f64-664">All websites run on the same Kestrel instance.</span></span> <span data-ttu-id="65f64-665">在不使用反向 Proxy 的情況下，Kestrel 不支援跨多個執行個體共用 IP 位址和連接埠。</span><span class="sxs-lookup"><span data-stu-id="65f64-665">Kestrel doesn't support sharing an IP address and port across multiple instances without a reverse proxy.</span></span>
 
 ```csharp
 public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
@@ -1644,9 +1645,9 @@ public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
         });
 ```
 
-### <a name="connection-logging"></a><span data-ttu-id="32db3-666">連接記錄</span><span class="sxs-lookup"><span data-stu-id="32db3-666">Connection logging</span></span>
+### <a name="connection-logging"></a><span data-ttu-id="65f64-666">連接記錄</span><span class="sxs-lookup"><span data-stu-id="65f64-666">Connection logging</span></span>
 
-<span data-ttu-id="32db3-667">呼叫 <xref:Microsoft.AspNetCore.Hosting.ListenOptionsConnectionLoggingExtensions.UseConnectionLogging*> ，以針對連接上的位元組層級通訊發出調試層級記錄。</span><span class="sxs-lookup"><span data-stu-id="32db3-667">Call <xref:Microsoft.AspNetCore.Hosting.ListenOptionsConnectionLoggingExtensions.UseConnectionLogging*> to emit Debug level logs for byte-level communication on a connection.</span></span> <span data-ttu-id="32db3-668">連線記錄有助於疑難排解低層級通訊中的問題，例如在 TLS 加密期間和 proxy 後方。</span><span class="sxs-lookup"><span data-stu-id="32db3-668">Connection logging is helpful for troubleshooting problems in low-level communication, such as during TLS encryption and behind proxies.</span></span> <span data-ttu-id="32db3-669">如果 `UseConnectionLogging` 放在之前 `UseHttps` ，則會記錄加密的流量。</span><span class="sxs-lookup"><span data-stu-id="32db3-669">If `UseConnectionLogging` is placed before `UseHttps`, encrypted traffic is logged.</span></span> <span data-ttu-id="32db3-670">如果 `UseConnectionLogging` 放在之後 `UseHttps` ，則會記錄解密的流量。</span><span class="sxs-lookup"><span data-stu-id="32db3-670">If `UseConnectionLogging` is placed after `UseHttps`, decrypted traffic is logged.</span></span>
+<span data-ttu-id="65f64-667">呼叫 <xref:Microsoft.AspNetCore.Hosting.ListenOptionsConnectionLoggingExtensions.UseConnectionLogging*> 以發出連接上位元組層級通訊的 Debug 層級記錄。</span><span class="sxs-lookup"><span data-stu-id="65f64-667">Call <xref:Microsoft.AspNetCore.Hosting.ListenOptionsConnectionLoggingExtensions.UseConnectionLogging*> to emit Debug level logs for byte-level communication on a connection.</span></span> <span data-ttu-id="65f64-668">連線記錄有助於疑難排解低層級通訊中的問題，例如在 TLS 加密期間和 proxy 後方。</span><span class="sxs-lookup"><span data-stu-id="65f64-668">Connection logging is helpful for troubleshooting problems in low-level communication, such as during TLS encryption and behind proxies.</span></span> <span data-ttu-id="65f64-669">如果 `UseConnectionLogging` 之前放置 `UseHttps` ，則會記錄加密的流量。</span><span class="sxs-lookup"><span data-stu-id="65f64-669">If `UseConnectionLogging` is placed before `UseHttps`, encrypted traffic is logged.</span></span> <span data-ttu-id="65f64-670">如果 `UseConnectionLogging` 放置在之後 `UseHttps` ，則會記錄解密的流量。</span><span class="sxs-lookup"><span data-stu-id="65f64-670">If `UseConnectionLogging` is placed after `UseHttps`, decrypted traffic is logged.</span></span>
 
 ```csharp
 webBuilder.ConfigureKestrel(serverOptions =>
@@ -1658,80 +1659,80 @@ webBuilder.ConfigureKestrel(serverOptions =>
 });
 ```
 
-### <a name="bind-to-a-tcp-socket"></a><span data-ttu-id="32db3-671">繫結至 TCP 通訊端</span><span class="sxs-lookup"><span data-stu-id="32db3-671">Bind to a TCP socket</span></span>
+### <a name="bind-to-a-tcp-socket"></a><span data-ttu-id="65f64-671">繫結至 TCP 通訊端</span><span class="sxs-lookup"><span data-stu-id="65f64-671">Bind to a TCP socket</span></span>
 
-<span data-ttu-id="32db3-672"><xref:Microsoft.AspNetCore.Server.Kestrel.Core.KestrelServerOptions.Listen*> 方法會繫結至 TCP 通訊端，而選項 Lambda 則會允許 X.509 憑證設定：</span><span class="sxs-lookup"><span data-stu-id="32db3-672">The <xref:Microsoft.AspNetCore.Server.Kestrel.Core.KestrelServerOptions.Listen*> method binds to a TCP socket, and an options lambda permits X.509 certificate configuration:</span></span>
+<span data-ttu-id="65f64-672"><xref:Microsoft.AspNetCore.Server.Kestrel.Core.KestrelServerOptions.Listen*> 方法會繫結至 TCP 通訊端，而選項 Lambda 則會允許 X.509 憑證設定：</span><span class="sxs-lookup"><span data-stu-id="65f64-672">The <xref:Microsoft.AspNetCore.Server.Kestrel.Core.KestrelServerOptions.Listen*> method binds to a TCP socket, and an options lambda permits X.509 certificate configuration:</span></span>
 
 [!code-csharp[](kestrel/samples/2.x/KestrelSample/Program.cs?name=snippet_TCPSocket&highlight=9-16)]
 
-<span data-ttu-id="32db3-673">此範例使用 <xref:Microsoft.AspNetCore.Server.Kestrel.Core.ListenOptions>來為端點設定 HTTPS。</span><span class="sxs-lookup"><span data-stu-id="32db3-673">The example configures HTTPS for an endpoint with <xref:Microsoft.AspNetCore.Server.Kestrel.Core.ListenOptions>.</span></span> <span data-ttu-id="32db3-674">若要設定特定端點的其他 Kestrel 設定，請使用相同的 API。</span><span class="sxs-lookup"><span data-stu-id="32db3-674">Use the same API to configure other Kestrel settings for specific endpoints.</span></span>
+<span data-ttu-id="65f64-673">此範例使用 <xref:Microsoft.AspNetCore.Server.Kestrel.Core.ListenOptions>來為端點設定 HTTPS。</span><span class="sxs-lookup"><span data-stu-id="65f64-673">The example configures HTTPS for an endpoint with <xref:Microsoft.AspNetCore.Server.Kestrel.Core.ListenOptions>.</span></span> <span data-ttu-id="65f64-674">若要設定特定端點的其他 Kestrel 設定，請使用相同的 API。</span><span class="sxs-lookup"><span data-stu-id="65f64-674">Use the same API to configure other Kestrel settings for specific endpoints.</span></span>
 
 [!INCLUDE [How to make an X.509 cert](~/includes/make-x509-cert.md)]
 
-### <a name="bind-to-a-unix-socket"></a><span data-ttu-id="32db3-675">繫結至 Unix 通訊端</span><span class="sxs-lookup"><span data-stu-id="32db3-675">Bind to a Unix socket</span></span>
+### <a name="bind-to-a-unix-socket"></a><span data-ttu-id="65f64-675">繫結至 Unix 通訊端</span><span class="sxs-lookup"><span data-stu-id="65f64-675">Bind to a Unix socket</span></span>
 
-<span data-ttu-id="32db3-676">請使用 <xref:Microsoft.AspNetCore.Server.Kestrel.Core.KestrelServerOptions.ListenUnixSocket*> 在 Unix 通訊端上進行接聽以改善 Nginx 的效能，如此範例所示：</span><span class="sxs-lookup"><span data-stu-id="32db3-676">Listen on a Unix socket with <xref:Microsoft.AspNetCore.Server.Kestrel.Core.KestrelServerOptions.ListenUnixSocket*> for improved performance with Nginx, as shown in this example:</span></span>
+<span data-ttu-id="65f64-676">請使用 <xref:Microsoft.AspNetCore.Server.Kestrel.Core.KestrelServerOptions.ListenUnixSocket*> 在 Unix 通訊端上進行接聽以改善 Nginx 的效能，如此範例所示：</span><span class="sxs-lookup"><span data-stu-id="65f64-676">Listen on a Unix socket with <xref:Microsoft.AspNetCore.Server.Kestrel.Core.KestrelServerOptions.ListenUnixSocket*> for improved performance with Nginx, as shown in this example:</span></span>
 
 [!code-csharp[](kestrel/samples/2.x/KestrelSample/Program.cs?name=snippet_UnixSocket)]
 
-* <span data-ttu-id="32db3-677">在 Nginx confiuguration 檔中，將 `server`  >  `location`  >  `proxy_pass` 專案設定為 `http://unix:/tmp/{KESTREL SOCKET}:/;` 。</span><span class="sxs-lookup"><span data-stu-id="32db3-677">In the Nginx confiuguration file, set the `server` > `location` > `proxy_pass` entry to `http://unix:/tmp/{KESTREL SOCKET}:/;`.</span></span> <span data-ttu-id="32db3-678">`{KESTREL SOCKET}`這是提供給 (的通訊端名稱 <xref:Microsoft.AspNetCore.Server.Kestrel.Core.KestrelServerOptions.ListenUnixSocket*> ，例如， `kestrel-test.sock` 在上述範例中) 。</span><span class="sxs-lookup"><span data-stu-id="32db3-678">`{KESTREL SOCKET}` is the name of the socket provided to <xref:Microsoft.AspNetCore.Server.Kestrel.Core.KestrelServerOptions.ListenUnixSocket*> (for example, `kestrel-test.sock` in the preceding example).</span></span>
-* <span data-ttu-id="32db3-679">請確定 Nginx (可寫入通訊端，例如 `chmod go+w /tmp/kestrel-test.sock`) 。</span><span class="sxs-lookup"><span data-stu-id="32db3-679">Ensure that the socket is writeable by Nginx (for example, `chmod go+w /tmp/kestrel-test.sock`).</span></span> 
+* <span data-ttu-id="65f64-677">在 Nginx confiuguration 檔案中，將 `server`  >  `location`  >  `proxy_pass` 專案設定為 `http://unix:/tmp/{KESTREL SOCKET}:/;` 。</span><span class="sxs-lookup"><span data-stu-id="65f64-677">In the Nginx confiuguration file, set the `server` > `location` > `proxy_pass` entry to `http://unix:/tmp/{KESTREL SOCKET}:/;`.</span></span> <span data-ttu-id="65f64-678">`{KESTREL SOCKET}` 這是提供給 (的通訊端名稱 <xref:Microsoft.AspNetCore.Server.Kestrel.Core.KestrelServerOptions.ListenUnixSocket*> ，例如 `kestrel-test.sock` 上述範例) 。</span><span class="sxs-lookup"><span data-stu-id="65f64-678">`{KESTREL SOCKET}` is the name of the socket provided to <xref:Microsoft.AspNetCore.Server.Kestrel.Core.KestrelServerOptions.ListenUnixSocket*> (for example, `kestrel-test.sock` in the preceding example).</span></span>
+* <span data-ttu-id="65f64-679">確定 Nginx (可寫入通訊端，例如 `chmod go+w /tmp/kestrel-test.sock`) 。</span><span class="sxs-lookup"><span data-stu-id="65f64-679">Ensure that the socket is writeable by Nginx (for example, `chmod go+w /tmp/kestrel-test.sock`).</span></span> 
 
-### <a name="port-0"></a><span data-ttu-id="32db3-680">連接埠 0</span><span class="sxs-lookup"><span data-stu-id="32db3-680">Port 0</span></span>
+### <a name="port-0"></a><span data-ttu-id="65f64-680">連接埠 0</span><span class="sxs-lookup"><span data-stu-id="65f64-680">Port 0</span></span>
 
-<span data-ttu-id="32db3-681">指定連接埠號碼 `0` 時，Kestrel 會動態繫結至可用的連接埠。</span><span class="sxs-lookup"><span data-stu-id="32db3-681">When the port number `0` is specified, Kestrel dynamically binds to an available port.</span></span> <span data-ttu-id="32db3-682">下列範例示範如何判斷 Kestrel 在執行階段實際上繫結至哪一個連接埠：</span><span class="sxs-lookup"><span data-stu-id="32db3-682">The following example shows how to determine which port Kestrel actually bound at runtime:</span></span>
+<span data-ttu-id="65f64-681">指定連接埠號碼 `0` 時，Kestrel 會動態繫結至可用的連接埠。</span><span class="sxs-lookup"><span data-stu-id="65f64-681">When the port number `0` is specified, Kestrel dynamically binds to an available port.</span></span> <span data-ttu-id="65f64-682">下列範例示範如何判斷 Kestrel 在執行階段實際上繫結至哪一個連接埠：</span><span class="sxs-lookup"><span data-stu-id="65f64-682">The following example shows how to determine which port Kestrel actually bound at runtime:</span></span>
 
 [!code-csharp[](kestrel/samples/2.x/KestrelSample/Startup.cs?name=snippet_Configure&highlight=3-4,15-21)]
 
-<span data-ttu-id="32db3-683">當應用程式執行時，主控台視窗輸出會指出可以連線到應用程式的動態連接埠：</span><span class="sxs-lookup"><span data-stu-id="32db3-683">When the app is run, the console window output indicates the dynamic port where the app can be reached:</span></span>
+<span data-ttu-id="65f64-683">當應用程式執行時，主控台視窗輸出會指出可以連線到應用程式的動態連接埠：</span><span class="sxs-lookup"><span data-stu-id="65f64-683">When the app is run, the console window output indicates the dynamic port where the app can be reached:</span></span>
 
 ```console
 Listening on the following addresses: http://127.0.0.1:48508
 ```
 
-### <a name="limitations"></a><span data-ttu-id="32db3-684">限制</span><span class="sxs-lookup"><span data-stu-id="32db3-684">Limitations</span></span>
+### <a name="limitations"></a><span data-ttu-id="65f64-684">限制</span><span class="sxs-lookup"><span data-stu-id="65f64-684">Limitations</span></span>
 
-<span data-ttu-id="32db3-685">使用下列方法來設定端點：</span><span class="sxs-lookup"><span data-stu-id="32db3-685">Configure endpoints with the following approaches:</span></span>
+<span data-ttu-id="65f64-685">使用下列方法來設定端點：</span><span class="sxs-lookup"><span data-stu-id="65f64-685">Configure endpoints with the following approaches:</span></span>
 
 * <xref:Microsoft.AspNetCore.Hosting.HostingAbstractionsWebHostBuilderExtensions.UseUrls*>
-* <span data-ttu-id="32db3-686">`--urls` 命令列引數</span><span class="sxs-lookup"><span data-stu-id="32db3-686">`--urls` command-line argument</span></span>
-* <span data-ttu-id="32db3-687">`urls` 主機組態索引鍵</span><span class="sxs-lookup"><span data-stu-id="32db3-687">`urls` host configuration key</span></span>
-* <span data-ttu-id="32db3-688">`ASPNETCORE_URLS` 環境變數</span><span class="sxs-lookup"><span data-stu-id="32db3-688">`ASPNETCORE_URLS` environment variable</span></span>
+* <span data-ttu-id="65f64-686">`--urls` 命令列引數</span><span class="sxs-lookup"><span data-stu-id="65f64-686">`--urls` command-line argument</span></span>
+* <span data-ttu-id="65f64-687">`urls` 主機組態索引鍵</span><span class="sxs-lookup"><span data-stu-id="65f64-687">`urls` host configuration key</span></span>
+* <span data-ttu-id="65f64-688">`ASPNETCORE_URLS` 環境變數</span><span class="sxs-lookup"><span data-stu-id="65f64-688">`ASPNETCORE_URLS` environment variable</span></span>
 
-<span data-ttu-id="32db3-689">要讓程式碼使用 Kestrel 以外的伺服器，這些方法會很有用。</span><span class="sxs-lookup"><span data-stu-id="32db3-689">These methods are useful for making code work with servers other than Kestrel.</span></span> <span data-ttu-id="32db3-690">不過，請注意下列限制：</span><span class="sxs-lookup"><span data-stu-id="32db3-690">However, be aware of the following limitations:</span></span>
+<span data-ttu-id="65f64-689">要讓程式碼使用 Kestrel 以外的伺服器，這些方法會很有用。</span><span class="sxs-lookup"><span data-stu-id="65f64-689">These methods are useful for making code work with servers other than Kestrel.</span></span> <span data-ttu-id="65f64-690">不過，請注意下列限制：</span><span class="sxs-lookup"><span data-stu-id="65f64-690">However, be aware of the following limitations:</span></span>
 
-* <span data-ttu-id="32db3-691">HTTPS 無法與這些方法搭配使用，除非在 HTTPS 端點設定中提供預設憑證 (例如，使用 `KestrelServerOptions` 設定或設定檔，如本主題稍早所示)。</span><span class="sxs-lookup"><span data-stu-id="32db3-691">HTTPS can't be used with these approaches unless a default certificate is provided in the HTTPS endpoint configuration (for example, using `KestrelServerOptions` configuration or a configuration file as shown earlier in this topic).</span></span>
-* <span data-ttu-id="32db3-692">當同時使用 `Listen` 和 `UseUrls` 方法時，`Listen` 端點會覆寫 `UseUrls` 端點。</span><span class="sxs-lookup"><span data-stu-id="32db3-692">When both the `Listen` and `UseUrls` approaches are used simultaneously, the `Listen` endpoints override the `UseUrls` endpoints.</span></span>
+* <span data-ttu-id="65f64-691">HTTPS 無法與這些方法搭配使用，除非在 HTTPS 端點設定中提供預設憑證 (例如，使用 `KestrelServerOptions` 設定或設定檔，如本主題稍早所示)。</span><span class="sxs-lookup"><span data-stu-id="65f64-691">HTTPS can't be used with these approaches unless a default certificate is provided in the HTTPS endpoint configuration (for example, using `KestrelServerOptions` configuration or a configuration file as shown earlier in this topic).</span></span>
+* <span data-ttu-id="65f64-692">當同時使用 `Listen` 和 `UseUrls` 方法時，`Listen` 端點會覆寫 `UseUrls` 端點。</span><span class="sxs-lookup"><span data-stu-id="65f64-692">When both the `Listen` and `UseUrls` approaches are used simultaneously, the `Listen` endpoints override the `UseUrls` endpoints.</span></span>
 
-### <a name="iis-endpoint-configuration"></a><span data-ttu-id="32db3-693">IIS 端點設定</span><span class="sxs-lookup"><span data-stu-id="32db3-693">IIS endpoint configuration</span></span>
+### <a name="iis-endpoint-configuration"></a><span data-ttu-id="65f64-693">IIS 端點設定</span><span class="sxs-lookup"><span data-stu-id="65f64-693">IIS endpoint configuration</span></span>
 
-<span data-ttu-id="32db3-694">使用 IIS 時，IIS 覆寫繫結的 URL 繫結是由 `Listen` 或 `UseUrls` 設定。</span><span class="sxs-lookup"><span data-stu-id="32db3-694">When using IIS, the URL bindings for IIS override bindings are set by either `Listen` or `UseUrls`.</span></span> <span data-ttu-id="32db3-695">如需詳細資訊，請參閱 [ASP.NET Core 模組](xref:host-and-deploy/aspnet-core-module)主題。</span><span class="sxs-lookup"><span data-stu-id="32db3-695">For more information, see the [ASP.NET Core Module](xref:host-and-deploy/aspnet-core-module) topic.</span></span>
+<span data-ttu-id="65f64-694">使用 IIS 時，IIS 覆寫繫結的 URL 繫結是由 `Listen` 或 `UseUrls` 設定。</span><span class="sxs-lookup"><span data-stu-id="65f64-694">When using IIS, the URL bindings for IIS override bindings are set by either `Listen` or `UseUrls`.</span></span> <span data-ttu-id="65f64-695">如需詳細資訊，請參閱 [ASP.NET Core 模組](xref:host-and-deploy/aspnet-core-module)主題。</span><span class="sxs-lookup"><span data-stu-id="65f64-695">For more information, see the [ASP.NET Core Module](xref:host-and-deploy/aspnet-core-module) topic.</span></span>
 
-### <a name="listenoptionsprotocols"></a><span data-ttu-id="32db3-696">ListenOptions.Protocols</span><span class="sxs-lookup"><span data-stu-id="32db3-696">ListenOptions.Protocols</span></span>
+### <a name="listenoptionsprotocols"></a><span data-ttu-id="65f64-696">ListenOptions.Protocols</span><span class="sxs-lookup"><span data-stu-id="65f64-696">ListenOptions.Protocols</span></span>
 
-<span data-ttu-id="32db3-697">`Protocols` 屬性會建立在連線端點上或針對伺服器啟用的 HTTP 通訊協定 (`HttpProtocols`)。</span><span class="sxs-lookup"><span data-stu-id="32db3-697">The `Protocols` property establishes the HTTP protocols (`HttpProtocols`) enabled on a connection endpoint or for the server.</span></span> <span data-ttu-id="32db3-698">從 `HttpProtocols` 列舉中指派一個值給 `Protocols` 屬性。</span><span class="sxs-lookup"><span data-stu-id="32db3-698">Assign a value to the `Protocols` property from the `HttpProtocols` enum.</span></span>
+<span data-ttu-id="65f64-697">`Protocols` 屬性會建立在連線端點上或針對伺服器啟用的 HTTP 通訊協定 (`HttpProtocols`)。</span><span class="sxs-lookup"><span data-stu-id="65f64-697">The `Protocols` property establishes the HTTP protocols (`HttpProtocols`) enabled on a connection endpoint or for the server.</span></span> <span data-ttu-id="65f64-698">從 `HttpProtocols` 列舉中指派一個值給 `Protocols` 屬性。</span><span class="sxs-lookup"><span data-stu-id="65f64-698">Assign a value to the `Protocols` property from the `HttpProtocols` enum.</span></span>
 
-| <span data-ttu-id="32db3-699">`HttpProtocols` 列舉值</span><span class="sxs-lookup"><span data-stu-id="32db3-699">`HttpProtocols` enum value</span></span> | <span data-ttu-id="32db3-700">允許的連線通訊協定</span><span class="sxs-lookup"><span data-stu-id="32db3-700">Connection protocol permitted</span></span> |
+| <span data-ttu-id="65f64-699">`HttpProtocols` 列舉值</span><span class="sxs-lookup"><span data-stu-id="65f64-699">`HttpProtocols` enum value</span></span> | <span data-ttu-id="65f64-700">允許的連線通訊協定</span><span class="sxs-lookup"><span data-stu-id="65f64-700">Connection protocol permitted</span></span> |
 | -------------------------- | ----------------------------- |
-| `Http1`                    | <span data-ttu-id="32db3-701">僅限 HTTP/1.1。</span><span class="sxs-lookup"><span data-stu-id="32db3-701">HTTP/1.1 only.</span></span> <span data-ttu-id="32db3-702">可在具有或沒有 TLS 的情況下使用。</span><span class="sxs-lookup"><span data-stu-id="32db3-702">Can be used with or without TLS.</span></span> |
-| `Http2`                    | <span data-ttu-id="32db3-703">僅限 HTTP/2。</span><span class="sxs-lookup"><span data-stu-id="32db3-703">HTTP/2 only.</span></span> <span data-ttu-id="32db3-704">只有在用戶端支援[先備知識模式](https://tools.ietf.org/html/rfc7540#section-3.4)時，才可以在沒有 TLS 的情況下使用。</span><span class="sxs-lookup"><span data-stu-id="32db3-704">May be used without TLS only if the client supports a [Prior Knowledge mode](https://tools.ietf.org/html/rfc7540#section-3.4).</span></span> |
-| `Http1AndHttp2`            | <span data-ttu-id="32db3-705">HTTP/1.1 和 HTTP/2。</span><span class="sxs-lookup"><span data-stu-id="32db3-705">HTTP/1.1 and HTTP/2.</span></span> <span data-ttu-id="32db3-706">HTTP/2 需要 TLS 和[應用層通訊協定協商， (ALPN) ](https://tools.ietf.org/html/rfc7301#section-3)連接;否則，連接預設為 HTTP/1.1。</span><span class="sxs-lookup"><span data-stu-id="32db3-706">HTTP/2 requires a TLS and [Application-Layer Protocol Negotiation (ALPN)](https://tools.ietf.org/html/rfc7301#section-3) connection; otherwise, the connection defaults to HTTP/1.1.</span></span> |
+| `Http1`                    | <span data-ttu-id="65f64-701">僅限 HTTP/1.1。</span><span class="sxs-lookup"><span data-stu-id="65f64-701">HTTP/1.1 only.</span></span> <span data-ttu-id="65f64-702">可在具有或沒有 TLS 的情況下使用。</span><span class="sxs-lookup"><span data-stu-id="65f64-702">Can be used with or without TLS.</span></span> |
+| `Http2`                    | <span data-ttu-id="65f64-703">僅限 HTTP/2。</span><span class="sxs-lookup"><span data-stu-id="65f64-703">HTTP/2 only.</span></span> <span data-ttu-id="65f64-704">只有在用戶端支援[先備知識模式](https://tools.ietf.org/html/rfc7540#section-3.4)時，才可以在沒有 TLS 的情況下使用。</span><span class="sxs-lookup"><span data-stu-id="65f64-704">May be used without TLS only if the client supports a [Prior Knowledge mode](https://tools.ietf.org/html/rfc7540#section-3.4).</span></span> |
+| `Http1AndHttp2`            | <span data-ttu-id="65f64-705">HTTP/1.1 和 HTTP/2。</span><span class="sxs-lookup"><span data-stu-id="65f64-705">HTTP/1.1 and HTTP/2.</span></span> <span data-ttu-id="65f64-706">HTTP/2 需要 TLS 和 [應用層通訊協定協商 (ALPN) ](https://tools.ietf.org/html/rfc7301#section-3) 連接;否則，連接預設為 HTTP/1.1。</span><span class="sxs-lookup"><span data-stu-id="65f64-706">HTTP/2 requires a TLS and [Application-Layer Protocol Negotiation (ALPN)](https://tools.ietf.org/html/rfc7301#section-3) connection; otherwise, the connection defaults to HTTP/1.1.</span></span> |
 
-<span data-ttu-id="32db3-707">預設通訊協定為 HTTP/1.1。</span><span class="sxs-lookup"><span data-stu-id="32db3-707">The default protocol is HTTP/1.1.</span></span>
+<span data-ttu-id="65f64-707">預設通訊協定為 HTTP/1.1。</span><span class="sxs-lookup"><span data-stu-id="65f64-707">The default protocol is HTTP/1.1.</span></span>
 
-<span data-ttu-id="32db3-708">HTTP/2 的 TLS 限制：</span><span class="sxs-lookup"><span data-stu-id="32db3-708">TLS restrictions for HTTP/2:</span></span>
+<span data-ttu-id="65f64-708">HTTP/2 的 TLS 限制：</span><span class="sxs-lookup"><span data-stu-id="65f64-708">TLS restrictions for HTTP/2:</span></span>
 
-* <span data-ttu-id="32db3-709">TLS 1.2 版或更新版本</span><span class="sxs-lookup"><span data-stu-id="32db3-709">TLS version 1.2 or later</span></span>
-* <span data-ttu-id="32db3-710">已停用重新交涉</span><span class="sxs-lookup"><span data-stu-id="32db3-710">Renegotiation disabled</span></span>
-* <span data-ttu-id="32db3-711">已停用壓縮</span><span class="sxs-lookup"><span data-stu-id="32db3-711">Compression disabled</span></span>
-* <span data-ttu-id="32db3-712">暫時金鑰交換大小下限：</span><span class="sxs-lookup"><span data-stu-id="32db3-712">Minimum ephemeral key exchange sizes:</span></span>
-  * <span data-ttu-id="32db3-713">橢圓曲線 Diffie-hellman (ECDHE) &lbrack; [RFC4492](https://www.ietf.org/rfc/rfc4492.txt) &rbrack; ：224位最小值</span><span class="sxs-lookup"><span data-stu-id="32db3-713">Elliptic curve Diffie-Hellman (ECDHE) &lbrack;[RFC4492](https://www.ietf.org/rfc/rfc4492.txt)&rbrack;: 224 bits minimum</span></span>
-  * <span data-ttu-id="32db3-714">有限欄位 diffie-hellman (DHE) &lbrack; `TLS12` &rbrack; ：2048位最小值</span><span class="sxs-lookup"><span data-stu-id="32db3-714">Finite field Diffie-Hellman (DHE) &lbrack;`TLS12`&rbrack;: 2048 bits minimum</span></span>
-* <span data-ttu-id="32db3-715">未封鎖加密套件</span><span class="sxs-lookup"><span data-stu-id="32db3-715">Cipher suite not blocked</span></span>
+* <span data-ttu-id="65f64-709">TLS 1.2 版或更新版本</span><span class="sxs-lookup"><span data-stu-id="65f64-709">TLS version 1.2 or later</span></span>
+* <span data-ttu-id="65f64-710">已停用重新交涉</span><span class="sxs-lookup"><span data-stu-id="65f64-710">Renegotiation disabled</span></span>
+* <span data-ttu-id="65f64-711">已停用壓縮</span><span class="sxs-lookup"><span data-stu-id="65f64-711">Compression disabled</span></span>
+* <span data-ttu-id="65f64-712">暫時金鑰交換大小下限：</span><span class="sxs-lookup"><span data-stu-id="65f64-712">Minimum ephemeral key exchange sizes:</span></span>
+  * <span data-ttu-id="65f64-713">橢圓曲線 Diffie-hellman (>ECDHE) &lbrack; [RFC4492](https://www.ietf.org/rfc/rfc4492.txt) &rbrack; ：224位最小值</span><span class="sxs-lookup"><span data-stu-id="65f64-713">Elliptic curve Diffie-Hellman (ECDHE) &lbrack;[RFC4492](https://www.ietf.org/rfc/rfc4492.txt)&rbrack;: 224 bits minimum</span></span>
+  * <span data-ttu-id="65f64-714">有限欄位 diffie-hellman (DHE) &lbrack; `TLS12` &rbrack; ：2048位最小值</span><span class="sxs-lookup"><span data-stu-id="65f64-714">Finite field Diffie-Hellman (DHE) &lbrack;`TLS12`&rbrack;: 2048 bits minimum</span></span>
+* <span data-ttu-id="65f64-715">未封鎖加密套件</span><span class="sxs-lookup"><span data-stu-id="65f64-715">Cipher suite not blocked</span></span>
 
-<span data-ttu-id="32db3-716">`TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256`&lbrack;`TLS-ECDHE`&rbrack;根據預設，支援 P-256 橢圓曲線 &lbrack; `FIPS186` &rbrack; 。</span><span class="sxs-lookup"><span data-stu-id="32db3-716">`TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256` &lbrack;`TLS-ECDHE`&rbrack; with the P-256 elliptic curve &lbrack;`FIPS186`&rbrack; is supported by default.</span></span>
+<span data-ttu-id="65f64-716">`TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256`&lbrack;`TLS-ECDHE`&rbrack;預設支援使用 P-256 橢圓曲線 &lbrack; `FIPS186` &rbrack; 。</span><span class="sxs-lookup"><span data-stu-id="65f64-716">`TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256` &lbrack;`TLS-ECDHE`&rbrack; with the P-256 elliptic curve &lbrack;`FIPS186`&rbrack; is supported by default.</span></span>
 
-<span data-ttu-id="32db3-717">下列範例會允許連接埠 8000 上的 HTTP/1.1 和 HTTP/2 連線。</span><span class="sxs-lookup"><span data-stu-id="32db3-717">The following example permits HTTP/1.1 and HTTP/2 connections on port 8000.</span></span> <span data-ttu-id="32db3-718">這些連線使用提供的憑證受到 TLS 保護：</span><span class="sxs-lookup"><span data-stu-id="32db3-718">Connections are secured by TLS with a supplied certificate:</span></span>
+<span data-ttu-id="65f64-717">下列範例會允許連接埠 8000 上的 HTTP/1.1 和 HTTP/2 連線。</span><span class="sxs-lookup"><span data-stu-id="65f64-717">The following example permits HTTP/1.1 and HTTP/2 connections on port 8000.</span></span> <span data-ttu-id="65f64-718">這些連線使用提供的憑證受到 TLS 保護：</span><span class="sxs-lookup"><span data-stu-id="65f64-718">Connections are secured by TLS with a supplied certificate:</span></span>
 
 ```csharp
 .ConfigureKestrel((context, serverOptions) =>
@@ -1744,7 +1745,7 @@ Listening on the following addresses: http://127.0.0.1:48508
 });
 ```
 
-<span data-ttu-id="32db3-719">選擇性地建立 `IConnectionAdapter` 實作，針對每個連線來篩選特定加密的 TLS 交握：</span><span class="sxs-lookup"><span data-stu-id="32db3-719">Optionally create an `IConnectionAdapter` implementation to filter TLS handshakes on a per-connection basis for specific ciphers:</span></span>
+<span data-ttu-id="65f64-719">選擇性地建立 `IConnectionAdapter` 實作，針對每個連線來篩選特定加密的 TLS 交握：</span><span class="sxs-lookup"><span data-stu-id="65f64-719">Optionally create an `IConnectionAdapter` implementation to filter TLS handshakes on a per-connection basis for specific ciphers:</span></span>
 
 ```csharp
 .ConfigureKestrel((context, serverOptions) =>
@@ -1797,11 +1798,11 @@ private class TlsFilterAdapter : IConnectionAdapter
 }
 ```
 
-<span data-ttu-id="32db3-720">從設定進行通訊協定設定\*\*</span><span class="sxs-lookup"><span data-stu-id="32db3-720">*Set the protocol from configuration*</span></span>
+<span data-ttu-id="65f64-720">從設定進行通訊協定設定\*\*</span><span class="sxs-lookup"><span data-stu-id="65f64-720">*Set the protocol from configuration*</span></span>
 
-<span data-ttu-id="32db3-721"><xref:Microsoft.AspNetCore.WebHost.CreateDefaultBuilder*> 預設會呼叫 `serverOptions.Configure(context.Configuration.GetSection("Kestrel"))` 以載入 Kestrel 設定。</span><span class="sxs-lookup"><span data-stu-id="32db3-721"><xref:Microsoft.AspNetCore.WebHost.CreateDefaultBuilder*> calls `serverOptions.Configure(context.Configuration.GetSection("Kestrel"))` by default to load Kestrel configuration.</span></span>
+<span data-ttu-id="65f64-721"><xref:Microsoft.AspNetCore.WebHost.CreateDefaultBuilder*> 預設會呼叫 `serverOptions.Configure(context.Configuration.GetSection("Kestrel"))` 以載入 Kestrel 設定。</span><span class="sxs-lookup"><span data-stu-id="65f64-721"><xref:Microsoft.AspNetCore.WebHost.CreateDefaultBuilder*> calls `serverOptions.Configure(context.Configuration.GetSection("Kestrel"))` by default to load Kestrel configuration.</span></span>
 
-<span data-ttu-id="32db3-722">在下列 *appsettings.json* 範例中，會為 Kestrel 的所有端點建立預設連線通訊協定 (HTTP/1.1 和 HTTP/2)：</span><span class="sxs-lookup"><span data-stu-id="32db3-722">In the following *appsettings.json* example, a default connection protocol (HTTP/1.1 and HTTP/2) is established for all of Kestrel's endpoints:</span></span>
+<span data-ttu-id="65f64-722">在下列 *appsettings.json* 範例中，會為 Kestrel 的所有端點建立預設連線通訊協定 (HTTP/1.1 和 HTTP/2)：</span><span class="sxs-lookup"><span data-stu-id="65f64-722">In the following *appsettings.json* example, a default connection protocol (HTTP/1.1 and HTTP/2) is established for all of Kestrel's endpoints:</span></span>
 
 ```json
 {
@@ -1813,7 +1814,7 @@ private class TlsFilterAdapter : IConnectionAdapter
 }
 ```
 
-<span data-ttu-id="32db3-723">下列設定檔範例會為特定端點建立連線通訊協定：</span><span class="sxs-lookup"><span data-stu-id="32db3-723">The following configuration file example establishes a connection protocol for a specific endpoint:</span></span>
+<span data-ttu-id="65f64-723">下列設定檔範例會為特定端點建立連線通訊協定：</span><span class="sxs-lookup"><span data-stu-id="65f64-723">The following configuration file example establishes a connection protocol for a specific endpoint:</span></span>
 
 ```json
 {
@@ -1828,25 +1829,25 @@ private class TlsFilterAdapter : IConnectionAdapter
 }
 ```
 
-<span data-ttu-id="32db3-724">程式碼中指定的通訊協定會覆寫設定所設定的值。</span><span class="sxs-lookup"><span data-stu-id="32db3-724">Protocols specified in code override values set by configuration.</span></span>
+<span data-ttu-id="65f64-724">程式碼中指定的通訊協定會覆寫設定所設定的值。</span><span class="sxs-lookup"><span data-stu-id="65f64-724">Protocols specified in code override values set by configuration.</span></span>
 
-## <a name="transport-configuration"></a><span data-ttu-id="32db3-725">傳輸組態</span><span class="sxs-lookup"><span data-stu-id="32db3-725">Transport configuration</span></span>
+## <a name="transport-configuration"></a><span data-ttu-id="65f64-725">傳輸組態</span><span class="sxs-lookup"><span data-stu-id="65f64-725">Transport configuration</span></span>
 
-<span data-ttu-id="32db3-726">隨著 ASP.NET Core 2.1 的發行，Kestrel 的預設傳輸不再根據 Libuv，而是改為根據受控通訊端。</span><span class="sxs-lookup"><span data-stu-id="32db3-726">With the release of ASP.NET Core 2.1, Kestrel's default transport is no longer based on Libuv but instead based on managed sockets.</span></span> <span data-ttu-id="32db3-727">對於升級到 2.1 且會呼叫 <xref:Microsoft.AspNetCore.Hosting.WebHostBuilderLibuvExtensions.UseLibuv*> 並相依於下列任一套件的 ASP.NET Core 2.0 應用程式來說，這是一項中斷性變更：</span><span class="sxs-lookup"><span data-stu-id="32db3-727">This is a breaking change for ASP.NET Core 2.0 apps upgrading to 2.1 that call <xref:Microsoft.AspNetCore.Hosting.WebHostBuilderLibuvExtensions.UseLibuv*> and depend on either of the following packages:</span></span>
+<span data-ttu-id="65f64-726">隨著 ASP.NET Core 2.1 的發行，Kestrel 的預設傳輸不再根據 Libuv，而是改為根據受控通訊端。</span><span class="sxs-lookup"><span data-stu-id="65f64-726">With the release of ASP.NET Core 2.1, Kestrel's default transport is no longer based on Libuv but instead based on managed sockets.</span></span> <span data-ttu-id="65f64-727">對於升級到 2.1 且會呼叫 <xref:Microsoft.AspNetCore.Hosting.WebHostBuilderLibuvExtensions.UseLibuv*> 並相依於下列任一套件的 ASP.NET Core 2.0 應用程式來說，這是一項中斷性變更：</span><span class="sxs-lookup"><span data-stu-id="65f64-727">This is a breaking change for ASP.NET Core 2.0 apps upgrading to 2.1 that call <xref:Microsoft.AspNetCore.Hosting.WebHostBuilderLibuvExtensions.UseLibuv*> and depend on either of the following packages:</span></span>
 
-* <span data-ttu-id="32db3-728">[Microsoft.AspNetCore.Server.Kestrel](https://www.nuget.org/packages/Microsoft.AspNetCore.Server.Kestrel/) (直接套件參考)</span><span class="sxs-lookup"><span data-stu-id="32db3-728">[Microsoft.AspNetCore.Server.Kestrel](https://www.nuget.org/packages/Microsoft.AspNetCore.Server.Kestrel/) (direct package reference)</span></span>
-* [<span data-ttu-id="32db3-729">Microsoft.AspNetCore.App</span><span class="sxs-lookup"><span data-stu-id="32db3-729">Microsoft.AspNetCore.App</span></span>](https://www.nuget.org/packages/Microsoft.AspNetCore.App/)
+* <span data-ttu-id="65f64-728">[Microsoft.AspNetCore.Server.Kestrel](https://www.nuget.org/packages/Microsoft.AspNetCore.Server.Kestrel/) (直接套件參考)</span><span class="sxs-lookup"><span data-stu-id="65f64-728">[Microsoft.AspNetCore.Server.Kestrel](https://www.nuget.org/packages/Microsoft.AspNetCore.Server.Kestrel/) (direct package reference)</span></span>
+* [<span data-ttu-id="65f64-729">Microsoft.AspNetCore.App</span><span class="sxs-lookup"><span data-stu-id="65f64-729">Microsoft.AspNetCore.App</span></span>](https://www.nuget.org/packages/Microsoft.AspNetCore.App/)
 
-<span data-ttu-id="32db3-730">針對需要使用 Libuv 的專案：</span><span class="sxs-lookup"><span data-stu-id="32db3-730">For projects that require the use of Libuv:</span></span>
+<span data-ttu-id="65f64-730">針對需要使用 Libuv 的專案：</span><span class="sxs-lookup"><span data-stu-id="65f64-730">For projects that require the use of Libuv:</span></span>
 
-* <span data-ttu-id="32db3-731">將 [Microsoft.AspNetCore.Server.Kestrel.Transport.Libuv](https://www.nuget.org/packages/Microsoft.AspNetCore.Server.Kestrel.Transport.Libuv/) 套件的相依性新增至應用程式的專案檔中：</span><span class="sxs-lookup"><span data-stu-id="32db3-731">Add a dependency for the [Microsoft.AspNetCore.Server.Kestrel.Transport.Libuv](https://www.nuget.org/packages/Microsoft.AspNetCore.Server.Kestrel.Transport.Libuv/) package to the app's project file:</span></span>
+* <span data-ttu-id="65f64-731">將 [Microsoft.AspNetCore.Server.Kestrel.Transport.Libuv](https://www.nuget.org/packages/Microsoft.AspNetCore.Server.Kestrel.Transport.Libuv/) 套件的相依性新增至應用程式的專案檔中：</span><span class="sxs-lookup"><span data-stu-id="65f64-731">Add a dependency for the [Microsoft.AspNetCore.Server.Kestrel.Transport.Libuv](https://www.nuget.org/packages/Microsoft.AspNetCore.Server.Kestrel.Transport.Libuv/) package to the app's project file:</span></span>
 
   ```xml
   <PackageReference Include="Microsoft.AspNetCore.Server.Kestrel.Transport.Libuv"
                     Version="{VERSION}" />
   ```
 
-* <span data-ttu-id="32db3-732">呼叫 <xref:Microsoft.AspNetCore.Hosting.WebHostBuilderLibuvExtensions.UseLibuv*>：</span><span class="sxs-lookup"><span data-stu-id="32db3-732">Call <xref:Microsoft.AspNetCore.Hosting.WebHostBuilderLibuvExtensions.UseLibuv*>:</span></span>
+* <span data-ttu-id="65f64-732">呼叫 <xref:Microsoft.AspNetCore.Hosting.WebHostBuilderLibuvExtensions.UseLibuv*>：</span><span class="sxs-lookup"><span data-stu-id="65f64-732">Call <xref:Microsoft.AspNetCore.Hosting.WebHostBuilderLibuvExtensions.UseLibuv*>:</span></span>
 
   ```csharp
   public class Program
@@ -1863,41 +1864,41 @@ private class TlsFilterAdapter : IConnectionAdapter
   }
   ```
 
-### <a name="url-prefixes"></a><span data-ttu-id="32db3-733">URL 前置詞</span><span class="sxs-lookup"><span data-stu-id="32db3-733">URL prefixes</span></span>
+### <a name="url-prefixes"></a><span data-ttu-id="65f64-733">URL 前置詞</span><span class="sxs-lookup"><span data-stu-id="65f64-733">URL prefixes</span></span>
 
-<span data-ttu-id="32db3-734">使用 `UseUrls`、`--urls` 命令列引數、`urls` 主機組態索引鍵或 `ASPNETCORE_URLS` 環境變數時，URL 前置詞可以採用下列任一格式。</span><span class="sxs-lookup"><span data-stu-id="32db3-734">When using `UseUrls`, `--urls` command-line argument, `urls` host configuration key, or `ASPNETCORE_URLS` environment variable, the URL prefixes can be in any of the following formats.</span></span>
+<span data-ttu-id="65f64-734">使用 `UseUrls`、`--urls` 命令列引數、`urls` 主機組態索引鍵或 `ASPNETCORE_URLS` 環境變數時，URL 前置詞可以採用下列任一格式。</span><span class="sxs-lookup"><span data-stu-id="65f64-734">When using `UseUrls`, `--urls` command-line argument, `urls` host configuration key, or `ASPNETCORE_URLS` environment variable, the URL prefixes can be in any of the following formats.</span></span>
 
-<span data-ttu-id="32db3-735">只有 HTTP URL 前置詞有效。</span><span class="sxs-lookup"><span data-stu-id="32db3-735">Only HTTP URL prefixes are valid.</span></span> <span data-ttu-id="32db3-736">使用 `UseUrls` 來設定 URL 繫結時，Kestrel 不支援 HTTPS。</span><span class="sxs-lookup"><span data-stu-id="32db3-736">Kestrel doesn't support HTTPS when configuring URL bindings using `UseUrls`.</span></span>
+<span data-ttu-id="65f64-735">只有 HTTP URL 前置詞有效。</span><span class="sxs-lookup"><span data-stu-id="65f64-735">Only HTTP URL prefixes are valid.</span></span> <span data-ttu-id="65f64-736">使用 `UseUrls` 來設定 URL 繫結時，Kestrel 不支援 HTTPS。</span><span class="sxs-lookup"><span data-stu-id="65f64-736">Kestrel doesn't support HTTPS when configuring URL bindings using `UseUrls`.</span></span>
 
-* <span data-ttu-id="32db3-737">IPv4 位址與連接埠號碼</span><span class="sxs-lookup"><span data-stu-id="32db3-737">IPv4 address with port number</span></span>
+* <span data-ttu-id="65f64-737">IPv4 位址與連接埠號碼</span><span class="sxs-lookup"><span data-stu-id="65f64-737">IPv4 address with port number</span></span>
 
   ```
   http://65.55.39.10:80/
   ```
 
-  <span data-ttu-id="32db3-738">`0.0.0.0` 是繫結至所有 IPv4 位址的特殊情況。</span><span class="sxs-lookup"><span data-stu-id="32db3-738">`0.0.0.0` is a special case that binds to all IPv4 addresses.</span></span>
+  <span data-ttu-id="65f64-738">`0.0.0.0` 是繫結至所有 IPv4 位址的特殊情況。</span><span class="sxs-lookup"><span data-stu-id="65f64-738">`0.0.0.0` is a special case that binds to all IPv4 addresses.</span></span>
 
-* <span data-ttu-id="32db3-739">IPv6 位址與連接埠號碼</span><span class="sxs-lookup"><span data-stu-id="32db3-739">IPv6 address with port number</span></span>
+* <span data-ttu-id="65f64-739">IPv6 位址與連接埠號碼</span><span class="sxs-lookup"><span data-stu-id="65f64-739">IPv6 address with port number</span></span>
 
   ```
   http://[0:0:0:0:0:ffff:4137:270a]:80/
   ```
 
-  <span data-ttu-id="32db3-740">`[::]` 是相當於 IPv4 `0.0.0.0` 的 IPv6 對等項目。</span><span class="sxs-lookup"><span data-stu-id="32db3-740">`[::]` is the IPv6 equivalent of IPv4 `0.0.0.0`.</span></span>
+  <span data-ttu-id="65f64-740">`[::]` 是相當於 IPv4 `0.0.0.0` 的 IPv6 對等項目。</span><span class="sxs-lookup"><span data-stu-id="65f64-740">`[::]` is the IPv6 equivalent of IPv4 `0.0.0.0`.</span></span>
 
-* <span data-ttu-id="32db3-741">主機名稱與連接埠號碼</span><span class="sxs-lookup"><span data-stu-id="32db3-741">Host name with port number</span></span>
+* <span data-ttu-id="65f64-741">主機名稱與連接埠號碼</span><span class="sxs-lookup"><span data-stu-id="65f64-741">Host name with port number</span></span>
 
   ```
   http://contoso.com:80/
   http://*:80/
   ```
 
-  <span data-ttu-id="32db3-742">主機名稱 `*` 和 `+` 並不特殊。</span><span class="sxs-lookup"><span data-stu-id="32db3-742">Host names, `*`, and `+`, aren't special.</span></span> <span data-ttu-id="32db3-743">無法辨識為有效 IP 位址或 `localhost` 的任何項目，都會繫結至所有 IPv4 和 IPv6 IP。</span><span class="sxs-lookup"><span data-stu-id="32db3-743">Anything not recognized as a valid IP address or `localhost` binds to all IPv4 and IPv6 IPs.</span></span> <span data-ttu-id="32db3-744">若要在相同連接埠上將不同的主機名稱繫結至不同的 ASP.NET Core 應用程式，請使用 [HTTP.sys](xref:fundamentals/servers/httpsys) 或反向 Proxy 伺服器 (例如 IIS、Nginx 或 Apache)。</span><span class="sxs-lookup"><span data-stu-id="32db3-744">To bind different host names to different ASP.NET Core apps on the same port, use [HTTP.sys](xref:fundamentals/servers/httpsys) or a reverse proxy server, such as IIS, Nginx, or Apache.</span></span>
+  <span data-ttu-id="65f64-742">主機名稱 `*` 和 `+` 並不特殊。</span><span class="sxs-lookup"><span data-stu-id="65f64-742">Host names, `*`, and `+`, aren't special.</span></span> <span data-ttu-id="65f64-743">無法辨識為有效 IP 位址或 `localhost` 的任何項目，都會繫結至所有 IPv4 和 IPv6 IP。</span><span class="sxs-lookup"><span data-stu-id="65f64-743">Anything not recognized as a valid IP address or `localhost` binds to all IPv4 and IPv6 IPs.</span></span> <span data-ttu-id="65f64-744">若要在相同連接埠上將不同的主機名稱繫結至不同的 ASP.NET Core 應用程式，請使用 [HTTP.sys](xref:fundamentals/servers/httpsys) 或反向 Proxy 伺服器 (例如 IIS、Nginx 或 Apache)。</span><span class="sxs-lookup"><span data-stu-id="65f64-744">To bind different host names to different ASP.NET Core apps on the same port, use [HTTP.sys](xref:fundamentals/servers/httpsys) or a reverse proxy server, such as IIS, Nginx, or Apache.</span></span>
 
   > [!WARNING]
-  > <span data-ttu-id="32db3-745">裝載於反向 Proxy 組態需要[主機篩選](#host-filtering)。</span><span class="sxs-lookup"><span data-stu-id="32db3-745">Hosting in a reverse proxy configuration requires [host filtering](#host-filtering).</span></span>
+  > <span data-ttu-id="65f64-745">裝載於反向 Proxy 組態需要[主機篩選](#host-filtering)。</span><span class="sxs-lookup"><span data-stu-id="65f64-745">Hosting in a reverse proxy configuration requires [host filtering](#host-filtering).</span></span>
 
-* <span data-ttu-id="32db3-746">主機 `localhost` 名稱與連接埠號碼，或回送 IP 與連接埠號碼</span><span class="sxs-lookup"><span data-stu-id="32db3-746">Host `localhost` name with port number or loopback IP with port number</span></span>
+* <span data-ttu-id="65f64-746">主機 `localhost` 名稱與連接埠號碼，或回送 IP 與連接埠號碼</span><span class="sxs-lookup"><span data-stu-id="65f64-746">Host `localhost` name with port number or loopback IP with port number</span></span>
 
   ```
   http://localhost:5000/
@@ -1905,19 +1906,19 @@ private class TlsFilterAdapter : IConnectionAdapter
   http://[::1]:5000/
   ```
 
-  <span data-ttu-id="32db3-747">如果指定 `localhost`，Kestrel 會嘗試同時繫結至 IPv4 和 IPv6 回送介面。</span><span class="sxs-lookup"><span data-stu-id="32db3-747">When `localhost` is specified, Kestrel attempts to bind to both IPv4 and IPv6 loopback interfaces.</span></span> <span data-ttu-id="32db3-748">如果所要求的連接埠在任一個回送介面上由另一個服務使用，則 Kestrel 無法啟動。</span><span class="sxs-lookup"><span data-stu-id="32db3-748">If the requested port is in use by another service on either loopback interface, Kestrel fails to start.</span></span> <span data-ttu-id="32db3-749">如果任一回送介面由於任何其他原因 (最常見的原因是不支援 IPv6) 無法使用，Kestrel 就會記錄警告。</span><span class="sxs-lookup"><span data-stu-id="32db3-749">If either loopback interface is unavailable for any other reason (most commonly because IPv6 isn't supported), Kestrel logs a warning.</span></span>
+  <span data-ttu-id="65f64-747">如果指定 `localhost`，Kestrel 會嘗試同時繫結至 IPv4 和 IPv6 回送介面。</span><span class="sxs-lookup"><span data-stu-id="65f64-747">When `localhost` is specified, Kestrel attempts to bind to both IPv4 and IPv6 loopback interfaces.</span></span> <span data-ttu-id="65f64-748">如果所要求的連接埠在任一個回送介面上由另一個服務使用，則 Kestrel 無法啟動。</span><span class="sxs-lookup"><span data-stu-id="65f64-748">If the requested port is in use by another service on either loopback interface, Kestrel fails to start.</span></span> <span data-ttu-id="65f64-749">如果任一回送介面由於任何其他原因 (最常見的原因是不支援 IPv6) 無法使用，Kestrel 就會記錄警告。</span><span class="sxs-lookup"><span data-stu-id="65f64-749">If either loopback interface is unavailable for any other reason (most commonly because IPv6 isn't supported), Kestrel logs a warning.</span></span>
 
-## <a name="host-filtering"></a><span data-ttu-id="32db3-750">主機篩選</span><span class="sxs-lookup"><span data-stu-id="32db3-750">Host filtering</span></span>
+## <a name="host-filtering"></a><span data-ttu-id="65f64-750">主機篩選</span><span class="sxs-lookup"><span data-stu-id="65f64-750">Host filtering</span></span>
 
-<span data-ttu-id="32db3-751">雖然 Kestrel 根據前置詞來支援組態，例如 `http://example.com:5000`，Kestrel 大多會忽略主機名稱。</span><span class="sxs-lookup"><span data-stu-id="32db3-751">While Kestrel supports configuration based on prefixes such as `http://example.com:5000`, Kestrel largely ignores the host name.</span></span> <span data-ttu-id="32db3-752">主機 `localhost` 是特殊情況，用來繫結到回送位址。</span><span class="sxs-lookup"><span data-stu-id="32db3-752">Host `localhost` is a special case used for binding to loopback addresses.</span></span> <span data-ttu-id="32db3-753">任何非明確 IP 位址的主機，會繫結至所有公用 IP 位址。</span><span class="sxs-lookup"><span data-stu-id="32db3-753">Any host other than an explicit IP address binds to all public IP addresses.</span></span> <span data-ttu-id="32db3-754">`Host` 標頭未驗證。</span><span class="sxs-lookup"><span data-stu-id="32db3-754">`Host` headers aren't validated.</span></span>
+<span data-ttu-id="65f64-751">雖然 Kestrel 根據前置詞來支援組態，例如 `http://example.com:5000`，Kestrel 大多會忽略主機名稱。</span><span class="sxs-lookup"><span data-stu-id="65f64-751">While Kestrel supports configuration based on prefixes such as `http://example.com:5000`, Kestrel largely ignores the host name.</span></span> <span data-ttu-id="65f64-752">主機 `localhost` 是特殊情況，用來繫結到回送位址。</span><span class="sxs-lookup"><span data-stu-id="65f64-752">Host `localhost` is a special case used for binding to loopback addresses.</span></span> <span data-ttu-id="65f64-753">任何非明確 IP 位址的主機，會繫結至所有公用 IP 位址。</span><span class="sxs-lookup"><span data-stu-id="65f64-753">Any host other than an explicit IP address binds to all public IP addresses.</span></span> <span data-ttu-id="65f64-754">`Host` 標頭未驗證。</span><span class="sxs-lookup"><span data-stu-id="65f64-754">`Host` headers aren't validated.</span></span>
 
-<span data-ttu-id="32db3-755">因應措施是使用主機篩選中介軟體。</span><span class="sxs-lookup"><span data-stu-id="32db3-755">As a workaround, use Host Filtering Middleware.</span></span> <span data-ttu-id="32db3-756">主機篩選中介軟體是由[AspNetCore. HostFiltering](https://www.nuget.org/packages/Microsoft.AspNetCore.HostFiltering)套件所提供，它包含在[AspNetCore 中繼套件](xref:fundamentals/metapackage-app) (ASP.NET Core 2.1 或 2.2) 中。</span><span class="sxs-lookup"><span data-stu-id="32db3-756">Host Filtering Middleware is provided by the [Microsoft.AspNetCore.HostFiltering](https://www.nuget.org/packages/Microsoft.AspNetCore.HostFiltering) package, which is included in the [Microsoft.AspNetCore.App metapackage](xref:fundamentals/metapackage-app) (ASP.NET Core 2.1 or 2.2).</span></span> <span data-ttu-id="32db3-757">中介軟體是由 <xref:Microsoft.AspNetCore.WebHost.CreateDefaultBuilder*> 所新增，它會呼叫 <xref:Microsoft.AspNetCore.Builder.HostFilteringServicesExtensions.AddHostFiltering*>：</span><span class="sxs-lookup"><span data-stu-id="32db3-757">The middleware is added by <xref:Microsoft.AspNetCore.WebHost.CreateDefaultBuilder*>, which calls <xref:Microsoft.AspNetCore.Builder.HostFilteringServicesExtensions.AddHostFiltering*>:</span></span>
+<span data-ttu-id="65f64-755">因應措施是使用主機篩選中介軟體。</span><span class="sxs-lookup"><span data-stu-id="65f64-755">As a workaround, use Host Filtering Middleware.</span></span> <span data-ttu-id="65f64-756">主機篩選中介軟體是由 [AspNetCore HostFiltering](https://www.nuget.org/packages/Microsoft.AspNetCore.HostFiltering) 套件所提供，此套件隨附于 [AspNetCore 中繼套件](xref:fundamentals/metapackage-app) (ASP.NET Core 2.1 或 2.2) 。</span><span class="sxs-lookup"><span data-stu-id="65f64-756">Host Filtering Middleware is provided by the [Microsoft.AspNetCore.HostFiltering](https://www.nuget.org/packages/Microsoft.AspNetCore.HostFiltering) package, which is included in the [Microsoft.AspNetCore.App metapackage](xref:fundamentals/metapackage-app) (ASP.NET Core 2.1 or 2.2).</span></span> <span data-ttu-id="65f64-757">中介軟體是由 <xref:Microsoft.AspNetCore.WebHost.CreateDefaultBuilder*> 所新增，它會呼叫 <xref:Microsoft.AspNetCore.Builder.HostFilteringServicesExtensions.AddHostFiltering*>：</span><span class="sxs-lookup"><span data-stu-id="65f64-757">The middleware is added by <xref:Microsoft.AspNetCore.WebHost.CreateDefaultBuilder*>, which calls <xref:Microsoft.AspNetCore.Builder.HostFilteringServicesExtensions.AddHostFiltering*>:</span></span>
 
 [!code-csharp[](kestrel/samples-snapshot/2.x/KestrelSample/Program.cs?name=snippet_Program&highlight=9)]
 
-<span data-ttu-id="32db3-758">預設停用主機篩選中介軟體。</span><span class="sxs-lookup"><span data-stu-id="32db3-758">Host Filtering Middleware is disabled by default.</span></span> <span data-ttu-id="32db3-759">若要啟用中介軟體，請 `AllowedHosts` 在 appsettings*上的appsettings.js*中定義索引鍵 / \* \<EnvironmentName> 。json\*。</span><span class="sxs-lookup"><span data-stu-id="32db3-759">To enable the middleware, define an `AllowedHosts` key in *appsettings.json*/*appsettings.\<EnvironmentName>.json*.</span></span> <span data-ttu-id="32db3-760">此值是以分號分隔的主機名稱清單，不含連接埠號碼：</span><span class="sxs-lookup"><span data-stu-id="32db3-760">The value is a semicolon-delimited list of host names without port numbers:</span></span>
+<span data-ttu-id="65f64-758">預設停用主機篩選中介軟體。</span><span class="sxs-lookup"><span data-stu-id="65f64-758">Host Filtering Middleware is disabled by default.</span></span> <span data-ttu-id="65f64-759">若要啟用中介軟體，請 `AllowedHosts` 在 appsettings*上的appsettings.js*中定義金鑰 / \* \<EnvironmentName> 。json\*。</span><span class="sxs-lookup"><span data-stu-id="65f64-759">To enable the middleware, define an `AllowedHosts` key in *appsettings.json*/*appsettings.\<EnvironmentName>.json*.</span></span> <span data-ttu-id="65f64-760">此值是以分號分隔的主機名稱清單，不含連接埠號碼：</span><span class="sxs-lookup"><span data-stu-id="65f64-760">The value is a semicolon-delimited list of host names without port numbers:</span></span>
 
-<span data-ttu-id="32db3-761">*appsettings.js*：</span><span class="sxs-lookup"><span data-stu-id="32db3-761">*appsettings.json*:</span></span>
+<span data-ttu-id="65f64-761">*appsettings.js*：</span><span class="sxs-lookup"><span data-stu-id="65f64-761">*appsettings.json*:</span></span>
 
 ```json
 {
@@ -1926,61 +1927,61 @@ private class TlsFilterAdapter : IConnectionAdapter
 ```
 
 > [!NOTE]
-> <span data-ttu-id="32db3-762">[轉送的標頭中介軟體](xref:host-and-deploy/proxy-load-balancer)也有 <xref:Microsoft.AspNetCore.Builder.ForwardedHeadersOptions.AllowedHosts> 選項。</span><span class="sxs-lookup"><span data-stu-id="32db3-762">[Forwarded Headers Middleware](xref:host-and-deploy/proxy-load-balancer) also has an <xref:Microsoft.AspNetCore.Builder.ForwardedHeadersOptions.AllowedHosts> option.</span></span> <span data-ttu-id="32db3-763">在不同的案例中，轉送標頭中介軟體和主機篩選中介軟體有類似的功能。</span><span class="sxs-lookup"><span data-stu-id="32db3-763">Forwarded Headers Middleware and Host Filtering Middleware have similar functionality for different scenarios.</span></span> <span data-ttu-id="32db3-764">當不保留 `Host` 標頭，卻使用反向 Proxy 伺服器或負載平衡器轉送要求時，可使用轉送標頭中介軟體設定 `AllowedHosts`。</span><span class="sxs-lookup"><span data-stu-id="32db3-764">Setting `AllowedHosts` with Forwarded Headers Middleware is appropriate when the `Host` header isn't preserved while forwarding requests with a reverse proxy server or load balancer.</span></span> <span data-ttu-id="32db3-765">當使用 Kestrel 作為公眾對應 Edge Server，或直接轉送 `Host` 標頭時，可使用主機篩選中介軟體設定 `AllowedHosts`。</span><span class="sxs-lookup"><span data-stu-id="32db3-765">Setting `AllowedHosts` with Host Filtering Middleware is appropriate when Kestrel is used as a public-facing edge server or when the `Host` header is directly forwarded.</span></span>
+> <span data-ttu-id="65f64-762">[轉送的標頭中介軟體](xref:host-and-deploy/proxy-load-balancer)也有 <xref:Microsoft.AspNetCore.Builder.ForwardedHeadersOptions.AllowedHosts> 選項。</span><span class="sxs-lookup"><span data-stu-id="65f64-762">[Forwarded Headers Middleware](xref:host-and-deploy/proxy-load-balancer) also has an <xref:Microsoft.AspNetCore.Builder.ForwardedHeadersOptions.AllowedHosts> option.</span></span> <span data-ttu-id="65f64-763">在不同的案例中，轉送標頭中介軟體和主機篩選中介軟體有類似的功能。</span><span class="sxs-lookup"><span data-stu-id="65f64-763">Forwarded Headers Middleware and Host Filtering Middleware have similar functionality for different scenarios.</span></span> <span data-ttu-id="65f64-764">當不保留 `Host` 標頭，卻使用反向 Proxy 伺服器或負載平衡器轉送要求時，可使用轉送標頭中介軟體設定 `AllowedHosts`。</span><span class="sxs-lookup"><span data-stu-id="65f64-764">Setting `AllowedHosts` with Forwarded Headers Middleware is appropriate when the `Host` header isn't preserved while forwarding requests with a reverse proxy server or load balancer.</span></span> <span data-ttu-id="65f64-765">當使用 Kestrel 作為公眾對應 Edge Server，或直接轉送 `Host` 標頭時，可使用主機篩選中介軟體設定 `AllowedHosts`。</span><span class="sxs-lookup"><span data-stu-id="65f64-765">Setting `AllowedHosts` with Host Filtering Middleware is appropriate when Kestrel is used as a public-facing edge server or when the `Host` header is directly forwarded.</span></span>
 >
-> <span data-ttu-id="32db3-766">如需轉送標頭中介軟體的詳細資訊，請參閱<xref:host-and-deploy/proxy-load-balancer>。</span><span class="sxs-lookup"><span data-stu-id="32db3-766">For more information on Forwarded Headers Middleware, see <xref:host-and-deploy/proxy-load-balancer>.</span></span>
+> <span data-ttu-id="65f64-766">如需轉送標頭中介軟體的詳細資訊，請參閱<xref:host-and-deploy/proxy-load-balancer>。</span><span class="sxs-lookup"><span data-stu-id="65f64-766">For more information on Forwarded Headers Middleware, see <xref:host-and-deploy/proxy-load-balancer>.</span></span>
 
 ::: moniker-end
 
 ::: moniker range="= aspnetcore-2.1"
 
-<span data-ttu-id="32db3-767">Kestrel 是 [ASP.NET Core 的跨平台網頁伺服器](xref:fundamentals/servers/index)。</span><span class="sxs-lookup"><span data-stu-id="32db3-767">Kestrel is a cross-platform [web server for ASP.NET Core](xref:fundamentals/servers/index).</span></span> <span data-ttu-id="32db3-768">Kestrel 是 ASP.NET Core 專案範本中預設隨附的網頁伺服器。</span><span class="sxs-lookup"><span data-stu-id="32db3-768">Kestrel is the web server that's included by default in ASP.NET Core project templates.</span></span>
+<span data-ttu-id="65f64-767">Kestrel 是 [ASP.NET Core 的跨平台網頁伺服器](xref:fundamentals/servers/index)。</span><span class="sxs-lookup"><span data-stu-id="65f64-767">Kestrel is a cross-platform [web server for ASP.NET Core](xref:fundamentals/servers/index).</span></span> <span data-ttu-id="65f64-768">Kestrel 是 ASP.NET Core 專案範本中預設隨附的網頁伺服器。</span><span class="sxs-lookup"><span data-stu-id="65f64-768">Kestrel is the web server that's included by default in ASP.NET Core project templates.</span></span>
 
-<span data-ttu-id="32db3-769">Kestrel 支援下列案例：</span><span class="sxs-lookup"><span data-stu-id="32db3-769">Kestrel supports the following scenarios:</span></span>
+<span data-ttu-id="65f64-769">Kestrel 支援下列案例：</span><span class="sxs-lookup"><span data-stu-id="65f64-769">Kestrel supports the following scenarios:</span></span>
 
-* <span data-ttu-id="32db3-770">HTTPS</span><span class="sxs-lookup"><span data-stu-id="32db3-770">HTTPS</span></span>
-* <span data-ttu-id="32db3-771">用來啟用 [WebSockets](https://github.com/aspnet/websockets) 的不透明升級</span><span class="sxs-lookup"><span data-stu-id="32db3-771">Opaque upgrade used to enable [WebSockets](https://github.com/aspnet/websockets)</span></span>
-* <span data-ttu-id="32db3-772">Nginx 背後的高效能 Unix 通訊端</span><span class="sxs-lookup"><span data-stu-id="32db3-772">Unix sockets for high performance behind Nginx</span></span>
+* <span data-ttu-id="65f64-770">HTTPS</span><span class="sxs-lookup"><span data-stu-id="65f64-770">HTTPS</span></span>
+* <span data-ttu-id="65f64-771">用來啟用 [WebSockets](https://github.com/aspnet/websockets) 的不透明升級</span><span class="sxs-lookup"><span data-stu-id="65f64-771">Opaque upgrade used to enable [WebSockets](https://github.com/aspnet/websockets)</span></span>
+* <span data-ttu-id="65f64-772">Nginx 背後的高效能 Unix 通訊端</span><span class="sxs-lookup"><span data-stu-id="65f64-772">Unix sockets for high performance behind Nginx</span></span>
 
-<span data-ttu-id="32db3-773">.NET Core 支援的所有平台和版本都支援 Kestrel。</span><span class="sxs-lookup"><span data-stu-id="32db3-773">Kestrel is supported on all platforms and versions that .NET Core supports.</span></span>
+<span data-ttu-id="65f64-773">.NET Core 支援的所有平台和版本都支援 Kestrel。</span><span class="sxs-lookup"><span data-stu-id="65f64-773">Kestrel is supported on all platforms and versions that .NET Core supports.</span></span>
 
-<span data-ttu-id="32db3-774">[查看或下載範例程式碼](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/servers/kestrel/samples) ([如何下載](xref:index#how-to-download-a-sample)) </span><span class="sxs-lookup"><span data-stu-id="32db3-774">[View or download sample code](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/servers/kestrel/samples) ([how to download](xref:index#how-to-download-a-sample))</span></span>
+<span data-ttu-id="65f64-774">[查看或下載範例程式碼](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/servers/kestrel/samples) ([如何下載](xref:index#how-to-download-a-sample)) </span><span class="sxs-lookup"><span data-stu-id="65f64-774">[View or download sample code](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/servers/kestrel/samples) ([how to download](xref:index#how-to-download-a-sample))</span></span>
 
-## <a name="when-to-use-kestrel-with-a-reverse-proxy"></a><span data-ttu-id="32db3-775">何時搭配使用 Kestrel 與反向 Proxy</span><span class="sxs-lookup"><span data-stu-id="32db3-775">When to use Kestrel with a reverse proxy</span></span>
+## <a name="when-to-use-kestrel-with-a-reverse-proxy"></a><span data-ttu-id="65f64-775">何時搭配使用 Kestrel 與反向 Proxy</span><span class="sxs-lookup"><span data-stu-id="65f64-775">When to use Kestrel with a reverse proxy</span></span>
 
-<span data-ttu-id="32db3-776">您可以單獨使用 Kestrel，或與 [Internet Information Services (IIS)](https://www.iis.net/)、[Nginx](https://nginx.org) 或 [Apache](https://httpd.apache.org/) 等「反向 Proxy 伺服器」\*\* 搭配使用。</span><span class="sxs-lookup"><span data-stu-id="32db3-776">Kestrel can be used by itself or with a *reverse proxy server*, such as [Internet Information Services (IIS)](https://www.iis.net/), [Nginx](https://nginx.org), or [Apache](https://httpd.apache.org/).</span></span> <span data-ttu-id="32db3-777">反向 Proxy 伺服器會從網路接收 HTTP 要求，然後轉送到 Kestrel。</span><span class="sxs-lookup"><span data-stu-id="32db3-777">A reverse proxy server receives HTTP requests from the network and forwards them to Kestrel.</span></span>
+<span data-ttu-id="65f64-776">您可以單獨使用 Kestrel，或與 [Internet Information Services (IIS)](https://www.iis.net/)、[Nginx](https://nginx.org) 或 [Apache](https://httpd.apache.org/) 等「反向 Proxy 伺服器」\*\* 搭配使用。</span><span class="sxs-lookup"><span data-stu-id="65f64-776">Kestrel can be used by itself or with a *reverse proxy server*, such as [Internet Information Services (IIS)](https://www.iis.net/), [Nginx](https://nginx.org), or [Apache](https://httpd.apache.org/).</span></span> <span data-ttu-id="65f64-777">反向 Proxy 伺服器會從網路接收 HTTP 要求，然後轉送到 Kestrel。</span><span class="sxs-lookup"><span data-stu-id="65f64-777">A reverse proxy server receives HTTP requests from the network and forwards them to Kestrel.</span></span>
 
-<span data-ttu-id="32db3-778">Kestrel 用作邊緣 (網際網路對應) 網頁伺服器：</span><span class="sxs-lookup"><span data-stu-id="32db3-778">Kestrel used as an edge (Internet-facing) web server:</span></span>
+<span data-ttu-id="65f64-778">Kestrel 用作邊緣 (網際網路對應) 網頁伺服器：</span><span class="sxs-lookup"><span data-stu-id="65f64-778">Kestrel used as an edge (Internet-facing) web server:</span></span>
 
 ![Kestrel 不使用反向 Proxy 伺服器直接與網際網路通訊](kestrel/_static/kestrel-to-internet2.png)
 
-<span data-ttu-id="32db3-780">Kestrel 用於反向 Proxy 組態中：</span><span class="sxs-lookup"><span data-stu-id="32db3-780">Kestrel used in a reverse proxy configuration:</span></span>
+<span data-ttu-id="65f64-780">Kestrel 用於反向 Proxy 組態中：</span><span class="sxs-lookup"><span data-stu-id="65f64-780">Kestrel used in a reverse proxy configuration:</span></span>
 
 ![Kestrel 透過 IIS、Nginx 或 Apache 等反向 Proxy 伺服器間接與網際網路通訊](kestrel/_static/kestrel-to-internet.png)
 
-<span data-ttu-id="32db3-782">無論是否使用反向 proxy 伺服器設定，都是支援的裝載設定。</span><span class="sxs-lookup"><span data-stu-id="32db3-782">Either configuration, with or without a reverse proxy server, is a supported hosting configuration.</span></span>
+<span data-ttu-id="65f64-782">不論是否有反向 proxy 伺服器，設定都是支援的裝載設定。</span><span class="sxs-lookup"><span data-stu-id="65f64-782">Either configuration, with or without a reverse proxy server, is a supported hosting configuration.</span></span>
 
-<span data-ttu-id="32db3-783">Kestrel 用作不需要反向 Proxy 伺服器的 Edge Server 時，不支援在多個處理序之間共用相同的 IP 和連接埠。</span><span class="sxs-lookup"><span data-stu-id="32db3-783">Kestrel used as an edge server without a reverse proxy server doesn't support sharing the same IP and port among multiple processes.</span></span> <span data-ttu-id="32db3-784">當 Kestrel 設定為接聽連接埠時，Kestrel 會處理該連接埠的所有流量，而不論要求的 `Host` 標頭為何。</span><span class="sxs-lookup"><span data-stu-id="32db3-784">When Kestrel is configured to listen on a port, Kestrel handles all of the traffic for that port regardless of requests' `Host` headers.</span></span> <span data-ttu-id="32db3-785">可以共用連接埠的反向 Proxy 能夠在唯一的 IP 和連接埠上轉送要求給 Kestrel。</span><span class="sxs-lookup"><span data-stu-id="32db3-785">A reverse proxy that can share ports has the ability to forward requests to Kestrel on a unique IP and port.</span></span>
+<span data-ttu-id="65f64-783">Kestrel 用作不需要反向 Proxy 伺服器的 Edge Server 時，不支援在多個處理序之間共用相同的 IP 和連接埠。</span><span class="sxs-lookup"><span data-stu-id="65f64-783">Kestrel used as an edge server without a reverse proxy server doesn't support sharing the same IP and port among multiple processes.</span></span> <span data-ttu-id="65f64-784">當 Kestrel 設定為接聽連接埠時，Kestrel 會處理該連接埠的所有流量，而不論要求的 `Host` 標頭為何。</span><span class="sxs-lookup"><span data-stu-id="65f64-784">When Kestrel is configured to listen on a port, Kestrel handles all of the traffic for that port regardless of requests' `Host` headers.</span></span> <span data-ttu-id="65f64-785">可以共用連接埠的反向 Proxy 能夠在唯一的 IP 和連接埠上轉送要求給 Kestrel。</span><span class="sxs-lookup"><span data-stu-id="65f64-785">A reverse proxy that can share ports has the ability to forward requests to Kestrel on a unique IP and port.</span></span>
 
-<span data-ttu-id="32db3-786">即使不需要反向 Proxy 伺服器，使用反向 Proxy 伺服器也是不錯的選擇。</span><span class="sxs-lookup"><span data-stu-id="32db3-786">Even if a reverse proxy server isn't required, using a reverse proxy server might be a good choice.</span></span>
+<span data-ttu-id="65f64-786">即使不需要反向 Proxy 伺服器，使用反向 Proxy 伺服器也是不錯的選擇。</span><span class="sxs-lookup"><span data-stu-id="65f64-786">Even if a reverse proxy server isn't required, using a reverse proxy server might be a good choice.</span></span>
 
-<span data-ttu-id="32db3-787">反向 Proxy：</span><span class="sxs-lookup"><span data-stu-id="32db3-787">A reverse proxy:</span></span>
+<span data-ttu-id="65f64-787">反向 Proxy：</span><span class="sxs-lookup"><span data-stu-id="65f64-787">A reverse proxy:</span></span>
 
-* <span data-ttu-id="32db3-788">可以限制它所主控之應用程式的公開介面區。</span><span class="sxs-lookup"><span data-stu-id="32db3-788">Can limit the exposed public surface area of the apps that it hosts.</span></span>
-* <span data-ttu-id="32db3-789">提供額外的組態和防禦層。</span><span class="sxs-lookup"><span data-stu-id="32db3-789">Provide an additional layer of configuration and defense.</span></span>
-* <span data-ttu-id="32db3-790">能夠與現有基礎結構更好地整合。</span><span class="sxs-lookup"><span data-stu-id="32db3-790">Might integrate better with existing infrastructure.</span></span>
-* <span data-ttu-id="32db3-791">簡化負載平衡和安全通訊 (HTTPS) 組態。</span><span class="sxs-lookup"><span data-stu-id="32db3-791">Simplify load balancing and secure communication (HTTPS) configuration.</span></span> <span data-ttu-id="32db3-792">只有反向 proxy 伺服器需要 x.509 憑證，而且該伺服器可以使用一般 HTTP 與內部網路上的應用程式伺服器進行通訊。</span><span class="sxs-lookup"><span data-stu-id="32db3-792">Only the reverse proxy server requires an X.509 certificate, and that server can communicate with the app's servers on the internal network using plain HTTP.</span></span>
+* <span data-ttu-id="65f64-788">可以限制它所主控之應用程式的公開介面區。</span><span class="sxs-lookup"><span data-stu-id="65f64-788">Can limit the exposed public surface area of the apps that it hosts.</span></span>
+* <span data-ttu-id="65f64-789">提供額外的組態和防禦層。</span><span class="sxs-lookup"><span data-stu-id="65f64-789">Provide an additional layer of configuration and defense.</span></span>
+* <span data-ttu-id="65f64-790">能夠與現有基礎結構更好地整合。</span><span class="sxs-lookup"><span data-stu-id="65f64-790">Might integrate better with existing infrastructure.</span></span>
+* <span data-ttu-id="65f64-791">簡化負載平衡和安全通訊 (HTTPS) 組態。</span><span class="sxs-lookup"><span data-stu-id="65f64-791">Simplify load balancing and secure communication (HTTPS) configuration.</span></span> <span data-ttu-id="65f64-792">只有反向 proxy 伺服器需要 x.509 憑證，而且該伺服器可以使用一般 HTTP 與內部網路上的應用程式伺服器進行通訊。</span><span class="sxs-lookup"><span data-stu-id="65f64-792">Only the reverse proxy server requires an X.509 certificate, and that server can communicate with the app's servers on the internal network using plain HTTP.</span></span>
 
 > [!WARNING]
-> <span data-ttu-id="32db3-793">裝載於反向 Proxy 組態需要[主機篩選](#host-filtering)。</span><span class="sxs-lookup"><span data-stu-id="32db3-793">Hosting in a reverse proxy configuration requires [host filtering](#host-filtering).</span></span>
+> <span data-ttu-id="65f64-793">裝載於反向 Proxy 組態需要[主機篩選](#host-filtering)。</span><span class="sxs-lookup"><span data-stu-id="65f64-793">Hosting in a reverse proxy configuration requires [host filtering](#host-filtering).</span></span>
 
-## <a name="how-to-use-kestrel-in-aspnet-core-apps"></a><span data-ttu-id="32db3-794">如何在 ASP.NET Core 應用程式中使用 Kestrel</span><span class="sxs-lookup"><span data-stu-id="32db3-794">How to use Kestrel in ASP.NET Core apps</span></span>
+## <a name="how-to-use-kestrel-in-aspnet-core-apps"></a><span data-ttu-id="65f64-794">如何在 ASP.NET Core 應用程式中使用 Kestrel</span><span class="sxs-lookup"><span data-stu-id="65f64-794">How to use Kestrel in ASP.NET Core apps</span></span>
 
-<span data-ttu-id="32db3-795">[Kestrel](https://www.nuget.org/packages/Microsoft.AspNetCore.Server.Kestrel/)套件包含在 AspNetCore 中。[應用程式中繼套件](xref:fundamentals/metapackage-app)中。</span><span class="sxs-lookup"><span data-stu-id="32db3-795">The [Microsoft.AspNetCore.Server.Kestrel](https://www.nuget.org/packages/Microsoft.AspNetCore.Server.Kestrel/) package is included in the [Microsoft.AspNetCore.App metapackage](xref:fundamentals/metapackage-app).</span></span>
+<span data-ttu-id="65f64-795">AspNetCore 會包含在[AspNetCore.. 中繼套件](xref:fundamentals/metapackage-app). [Kestrel](https://www.nuget.org/packages/Microsoft.AspNetCore.Server.Kestrel/)套件中。</span><span class="sxs-lookup"><span data-stu-id="65f64-795">The [Microsoft.AspNetCore.Server.Kestrel](https://www.nuget.org/packages/Microsoft.AspNetCore.Server.Kestrel/) package is included in the [Microsoft.AspNetCore.App metapackage](xref:fundamentals/metapackage-app).</span></span>
 
-<span data-ttu-id="32db3-796">ASP.NET Core 專案範本預設會使用 Kestrel。</span><span class="sxs-lookup"><span data-stu-id="32db3-796">ASP.NET Core project templates use Kestrel by default.</span></span> <span data-ttu-id="32db3-797">在 *Program.cs* 中，範本程式碼會呼叫 <xref:Microsoft.AspNetCore.WebHost.CreateDefaultBuilder*>，而後者會在幕後呼叫 <xref:Microsoft.AspNetCore.Hosting.WebHostBuilderKestrelExtensions.UseKestrel*>。</span><span class="sxs-lookup"><span data-stu-id="32db3-797">In *Program.cs*, the template code calls <xref:Microsoft.AspNetCore.WebHost.CreateDefaultBuilder*>, which calls <xref:Microsoft.AspNetCore.Hosting.WebHostBuilderKestrelExtensions.UseKestrel*> behind the scenes.</span></span>
+<span data-ttu-id="65f64-796">ASP.NET Core 專案範本預設會使用 Kestrel。</span><span class="sxs-lookup"><span data-stu-id="65f64-796">ASP.NET Core project templates use Kestrel by default.</span></span> <span data-ttu-id="65f64-797">在 *Program.cs* 中，範本程式碼會呼叫 <xref:Microsoft.AspNetCore.WebHost.CreateDefaultBuilder*>，而後者會在幕後呼叫 <xref:Microsoft.AspNetCore.Hosting.WebHostBuilderKestrelExtensions.UseKestrel*>。</span><span class="sxs-lookup"><span data-stu-id="65f64-797">In *Program.cs*, the template code calls <xref:Microsoft.AspNetCore.WebHost.CreateDefaultBuilder*>, which calls <xref:Microsoft.AspNetCore.Hosting.WebHostBuilderKestrelExtensions.UseKestrel*> behind the scenes.</span></span>
 
-<span data-ttu-id="32db3-798">若要在呼叫 `CreateDefaultBuilder` 之後提供額外的設定，請呼叫 <xref:Microsoft.AspNetCore.Hosting.WebHostBuilderKestrelExtensions.UseKestrel*>：</span><span class="sxs-lookup"><span data-stu-id="32db3-798">To provide additional configuration after calling `CreateDefaultBuilder`, call <xref:Microsoft.AspNetCore.Hosting.WebHostBuilderKestrelExtensions.UseKestrel*>:</span></span>
+<span data-ttu-id="65f64-798">若要在呼叫 `CreateDefaultBuilder` 之後提供額外的設定，請呼叫 <xref:Microsoft.AspNetCore.Hosting.WebHostBuilderKestrelExtensions.UseKestrel*>：</span><span class="sxs-lookup"><span data-stu-id="65f64-798">To provide additional configuration after calling `CreateDefaultBuilder`, call <xref:Microsoft.AspNetCore.Hosting.WebHostBuilderKestrelExtensions.UseKestrel*>:</span></span>
 
 ```csharp
 public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
@@ -1992,21 +1993,21 @@ public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
         });
 ```
 
-<span data-ttu-id="32db3-799">如需有關 `CreateDefaultBuilder` 和建立主機的詳細資訊，請參閱的*設定主機*一節 <xref:fundamentals/host/web-host#set-up-a-host> 。</span><span class="sxs-lookup"><span data-stu-id="32db3-799">For more information on `CreateDefaultBuilder` and building the host, see the *Set up a host* section of <xref:fundamentals/host/web-host#set-up-a-host>.</span></span>
+<span data-ttu-id="65f64-799">如需 `CreateDefaultBuilder` 和建立主機的詳細資訊，請參閱的 *設定主機* 一節 <xref:fundamentals/host/web-host#set-up-a-host> 。</span><span class="sxs-lookup"><span data-stu-id="65f64-799">For more information on `CreateDefaultBuilder` and building the host, see the *Set up a host* section of <xref:fundamentals/host/web-host#set-up-a-host>.</span></span>
 
-## <a name="kestrel-options"></a><span data-ttu-id="32db3-800">Kestrel 選項</span><span class="sxs-lookup"><span data-stu-id="32db3-800">Kestrel options</span></span>
+## <a name="kestrel-options"></a><span data-ttu-id="65f64-800">Kestrel 選項</span><span class="sxs-lookup"><span data-stu-id="65f64-800">Kestrel options</span></span>
 
-<span data-ttu-id="32db3-801">Kestrel 網頁伺服器所含的條件約束組態選項，在網際網路對應部署方面特別有用。</span><span class="sxs-lookup"><span data-stu-id="32db3-801">The Kestrel web server has constraint configuration options that are especially useful in Internet-facing deployments.</span></span>
+<span data-ttu-id="65f64-801">Kestrel 網頁伺服器所含的條件約束組態選項，在網際網路對應部署方面特別有用。</span><span class="sxs-lookup"><span data-stu-id="65f64-801">The Kestrel web server has constraint configuration options that are especially useful in Internet-facing deployments.</span></span>
 
-<span data-ttu-id="32db3-802">請在 <xref:Microsoft.AspNetCore.Server.Kestrel.Core.KestrelServerOptions> 類別的 <xref:Microsoft.AspNetCore.Server.Kestrel.Core.KestrelServerOptions.Limits> 屬性上設定條件約束。</span><span class="sxs-lookup"><span data-stu-id="32db3-802">Set constraints on the <xref:Microsoft.AspNetCore.Server.Kestrel.Core.KestrelServerOptions.Limits> property of the <xref:Microsoft.AspNetCore.Server.Kestrel.Core.KestrelServerOptions> class.</span></span> <span data-ttu-id="32db3-803">`Limits` 屬性會保存 <xref:Microsoft.AspNetCore.Server.Kestrel.Core.KestrelServerLimits> 類別的執行個體。</span><span class="sxs-lookup"><span data-stu-id="32db3-803">The `Limits` property holds an instance of the <xref:Microsoft.AspNetCore.Server.Kestrel.Core.KestrelServerLimits> class.</span></span>
+<span data-ttu-id="65f64-802">請在 <xref:Microsoft.AspNetCore.Server.Kestrel.Core.KestrelServerOptions> 類別的 <xref:Microsoft.AspNetCore.Server.Kestrel.Core.KestrelServerOptions.Limits> 屬性上設定條件約束。</span><span class="sxs-lookup"><span data-stu-id="65f64-802">Set constraints on the <xref:Microsoft.AspNetCore.Server.Kestrel.Core.KestrelServerOptions.Limits> property of the <xref:Microsoft.AspNetCore.Server.Kestrel.Core.KestrelServerOptions> class.</span></span> <span data-ttu-id="65f64-803">`Limits` 屬性會保存 <xref:Microsoft.AspNetCore.Server.Kestrel.Core.KestrelServerLimits> 類別的執行個體。</span><span class="sxs-lookup"><span data-stu-id="65f64-803">The `Limits` property holds an instance of the <xref:Microsoft.AspNetCore.Server.Kestrel.Core.KestrelServerLimits> class.</span></span>
 
-<span data-ttu-id="32db3-804">下列範例會使用 <xref:Microsoft.AspNetCore.Server.Kestrel.Core> 命名空間；</span><span class="sxs-lookup"><span data-stu-id="32db3-804">The following examples use the <xref:Microsoft.AspNetCore.Server.Kestrel.Core> namespace:</span></span>
+<span data-ttu-id="65f64-804">下列範例會使用 <xref:Microsoft.AspNetCore.Server.Kestrel.Core> 命名空間；</span><span class="sxs-lookup"><span data-stu-id="65f64-804">The following examples use the <xref:Microsoft.AspNetCore.Server.Kestrel.Core> namespace:</span></span>
 
 ```csharp
 using Microsoft.AspNetCore.Server.Kestrel.Core;
 ```
 
-<span data-ttu-id="32db3-805">在下列範例中，以 c # 程式碼設定的 Kestrel 選項也可以使用設定[提供者](xref:fundamentals/configuration/index)來設定。</span><span class="sxs-lookup"><span data-stu-id="32db3-805">Kestrel options, which are configured in C# code in the following examples, can also be set using a [configuration provider](xref:fundamentals/configuration/index).</span></span> <span data-ttu-id="32db3-806">例如，檔案設定提供者可以從或 appsettings 的*appsettings.js*載入 Kestrel 設定 *。 {環境}. json*檔案：</span><span class="sxs-lookup"><span data-stu-id="32db3-806">For example, the File Configuration Provider can load Kestrel configuration from an *appsettings.json* or *appsettings.{Environment}.json* file:</span></span>
+<span data-ttu-id="65f64-805">您也可以使用設定 [提供者](xref:fundamentals/configuration/index)來設定 Kestrel 選項（在下列範例中以 c # 程式碼設定）。</span><span class="sxs-lookup"><span data-stu-id="65f64-805">Kestrel options, which are configured in C# code in the following examples, can also be set using a [configuration provider](xref:fundamentals/configuration/index).</span></span> <span data-ttu-id="65f64-806">例如，檔案設定提供者可以從 *appsettings.json* 或 Appsettings 載入 Kestrel 設定 *。 {環境}. json* 檔案：</span><span class="sxs-lookup"><span data-stu-id="65f64-806">For example, the File Configuration Provider can load Kestrel configuration from an *appsettings.json* or *appsettings.{Environment}.json* file:</span></span>
 
 ```json
 {
@@ -2019,12 +2020,12 @@ using Microsoft.AspNetCore.Server.Kestrel.Core;
 }
 ```
 
-<span data-ttu-id="32db3-807">請使用下列**其中一**種方法：</span><span class="sxs-lookup"><span data-stu-id="32db3-807">Use **one** of the following approaches:</span></span>
+<span data-ttu-id="65f64-807">使用下列 **其中一** 種方法：</span><span class="sxs-lookup"><span data-stu-id="65f64-807">Use **one** of the following approaches:</span></span>
 
-* <span data-ttu-id="32db3-808">在中設定 Kestrel `Startup.ConfigureServices` ：</span><span class="sxs-lookup"><span data-stu-id="32db3-808">Configure Kestrel in `Startup.ConfigureServices`:</span></span>
+* <span data-ttu-id="65f64-808">設定 Kestrel in `Startup.ConfigureServices` ：</span><span class="sxs-lookup"><span data-stu-id="65f64-808">Configure Kestrel in `Startup.ConfigureServices`:</span></span>
 
-  1. <span data-ttu-id="32db3-809">將的實例插入 `IConfiguration` 至 `Startup` 類別。</span><span class="sxs-lookup"><span data-stu-id="32db3-809">Inject an instance of `IConfiguration` into the `Startup` class.</span></span> <span data-ttu-id="32db3-810">下列範例假設插入的設定已指派給 `Configuration` 屬性。</span><span class="sxs-lookup"><span data-stu-id="32db3-810">The following example assumes that the injected configuration is assigned to the `Configuration` property.</span></span>
-  2. <span data-ttu-id="32db3-811">在中 `Startup.ConfigureServices` ，將設定的 `Kestrel` 區段載入 Kestrel 的設定中：</span><span class="sxs-lookup"><span data-stu-id="32db3-811">In `Startup.ConfigureServices`, load the `Kestrel` section of configuration into Kestrel's configuration:</span></span>
+  1. <span data-ttu-id="65f64-809">將的實例插入 `IConfiguration` 至 `Startup` 類別。</span><span class="sxs-lookup"><span data-stu-id="65f64-809">Inject an instance of `IConfiguration` into the `Startup` class.</span></span> <span data-ttu-id="65f64-810">下列範例假設將插入的設定指派給 `Configuration` 屬性。</span><span class="sxs-lookup"><span data-stu-id="65f64-810">The following example assumes that the injected configuration is assigned to the `Configuration` property.</span></span>
+  2. <span data-ttu-id="65f64-811">在中 `Startup.ConfigureServices` ，將 `Kestrel` configuration 區段載入 Kestrel 的設定：</span><span class="sxs-lookup"><span data-stu-id="65f64-811">In `Startup.ConfigureServices`, load the `Kestrel` section of configuration into Kestrel's configuration:</span></span>
 
      ```csharp
      using Microsoft.Extensions.Configuration
@@ -2051,9 +2052,9 @@ using Microsoft.AspNetCore.Server.Kestrel.Core;
      }
      ```
 
-* <span data-ttu-id="32db3-812">建立主機時設定 Kestrel：</span><span class="sxs-lookup"><span data-stu-id="32db3-812">Configure Kestrel when building the host:</span></span>
+* <span data-ttu-id="65f64-812">設定 Kestrel 建立主機時：</span><span class="sxs-lookup"><span data-stu-id="65f64-812">Configure Kestrel when building the host:</span></span>
 
-  <span data-ttu-id="32db3-813">在*Program.cs*中，將設定的 `Kestrel` 區段載入 Kestrel 的設定中：</span><span class="sxs-lookup"><span data-stu-id="32db3-813">In *Program.cs*, load the `Kestrel` section of configuration into Kestrel's configuration:</span></span>
+  <span data-ttu-id="65f64-813">在 *Program.cs*中，將 `Kestrel` Configuration 區段載入 Kestrel 的設定中：</span><span class="sxs-lookup"><span data-stu-id="65f64-813">In *Program.cs*, load the `Kestrel` section of configuration into Kestrel's configuration:</span></span>
 
   ```csharp
   // using Microsoft.Extensions.DependencyInjection;
@@ -2068,13 +2069,13 @@ using Microsoft.AspNetCore.Server.Kestrel.Core;
           .UseStartup<Startup>();
   ```
 
-<span data-ttu-id="32db3-814">上述兩種方法都適用于任何設定[提供者](xref:fundamentals/configuration/index)。</span><span class="sxs-lookup"><span data-stu-id="32db3-814">Both of the preceding approaches work with any [configuration provider](xref:fundamentals/configuration/index).</span></span>
+<span data-ttu-id="65f64-814">上述兩種方法都可搭配任何設定 [提供者](xref:fundamentals/configuration/index)使用。</span><span class="sxs-lookup"><span data-stu-id="65f64-814">Both of the preceding approaches work with any [configuration provider](xref:fundamentals/configuration/index).</span></span>
 
-### <a name="keep-alive-timeout"></a><span data-ttu-id="32db3-815">Keep-alive 逾時</span><span class="sxs-lookup"><span data-stu-id="32db3-815">Keep-alive timeout</span></span>
+### <a name="keep-alive-timeout"></a><span data-ttu-id="65f64-815">Keep-alive 逾時</span><span class="sxs-lookup"><span data-stu-id="65f64-815">Keep-alive timeout</span></span>
 
 <xref:Microsoft.AspNetCore.Server.Kestrel.Core.KestrelServerLimits.KeepAliveTimeout>
 
-<span data-ttu-id="32db3-816">取得或設定 [Keep-alive 逾時](https://tools.ietf.org/html/rfc7230#section-6.5) \(英文\)。</span><span class="sxs-lookup"><span data-stu-id="32db3-816">Gets or sets the [keep-alive timeout](https://tools.ietf.org/html/rfc7230#section-6.5).</span></span> <span data-ttu-id="32db3-817">預設為 2 分鐘。</span><span class="sxs-lookup"><span data-stu-id="32db3-817">Defaults to 2 minutes.</span></span>
+<span data-ttu-id="65f64-816">取得或設定 [Keep-alive 逾時](https://tools.ietf.org/html/rfc7230#section-6.5) \(英文\)。</span><span class="sxs-lookup"><span data-stu-id="65f64-816">Gets or sets the [keep-alive timeout](https://tools.ietf.org/html/rfc7230#section-6.5).</span></span> <span data-ttu-id="65f64-817">預設為 2 分鐘。</span><span class="sxs-lookup"><span data-stu-id="65f64-817">Defaults to 2 minutes.</span></span>
 
 ```csharp
 public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
@@ -2086,12 +2087,12 @@ public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
         });
 ```
 
-### <a name="maximum-client-connections"></a><span data-ttu-id="32db3-818">用戶端連線數目上限</span><span class="sxs-lookup"><span data-stu-id="32db3-818">Maximum client connections</span></span>
+### <a name="maximum-client-connections"></a><span data-ttu-id="65f64-818">用戶端連線數目上限</span><span class="sxs-lookup"><span data-stu-id="65f64-818">Maximum client connections</span></span>
 
 <xref:Microsoft.AspNetCore.Server.Kestrel.Core.KestrelServerLimits.MaxConcurrentConnections>
 <xref:Microsoft.AspNetCore.Server.Kestrel.Core.KestrelServerLimits.MaxConcurrentUpgradedConnections>
 
-<span data-ttu-id="32db3-819">可以使用下列程式碼，針對整個應用程式設定同時開啟的 TCP 連線數目上限：</span><span class="sxs-lookup"><span data-stu-id="32db3-819">The maximum number of concurrent open TCP connections can be set for the entire app with the following code:</span></span>
+<span data-ttu-id="65f64-819">可以使用下列程式碼，針對整個應用程式設定同時開啟的 TCP 連線數目上限：</span><span class="sxs-lookup"><span data-stu-id="65f64-819">The maximum number of concurrent open TCP connections can be set for the entire app with the following code:</span></span>
 
 ```csharp
 public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
@@ -2103,7 +2104,7 @@ public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
         });
 ```
 
-<span data-ttu-id="32db3-820">已經從 HTTP 或 HTTPS 升級為另一個通訊協定 (例如，在 WebSocket 要求中) 的連線，有其個別限制。</span><span class="sxs-lookup"><span data-stu-id="32db3-820">There's a separate limit for connections that have been upgraded from HTTP or HTTPS to another protocol (for example, on a WebSockets request).</span></span> <span data-ttu-id="32db3-821">升級連線之後，它不會納入 `MaxConcurrentConnections` 限制。</span><span class="sxs-lookup"><span data-stu-id="32db3-821">After a connection is upgraded, it isn't counted against the `MaxConcurrentConnections` limit.</span></span>
+<span data-ttu-id="65f64-820">已經從 HTTP 或 HTTPS 升級為另一個通訊協定 (例如，在 WebSocket 要求中) 的連線，有其個別限制。</span><span class="sxs-lookup"><span data-stu-id="65f64-820">There's a separate limit for connections that have been upgraded from HTTP or HTTPS to another protocol (for example, on a WebSockets request).</span></span> <span data-ttu-id="65f64-821">升級連線之後，它不會納入 `MaxConcurrentConnections` 限制。</span><span class="sxs-lookup"><span data-stu-id="65f64-821">After a connection is upgraded, it isn't counted against the `MaxConcurrentConnections` limit.</span></span>
 
 ```csharp
 public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
@@ -2115,22 +2116,22 @@ public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
         });
 ```
 
-<span data-ttu-id="32db3-822">連線數目上限預設為無限制 (null)。</span><span class="sxs-lookup"><span data-stu-id="32db3-822">The maximum number of connections is unlimited (null) by default.</span></span>
+<span data-ttu-id="65f64-822">連線數目上限預設為無限制 (null)。</span><span class="sxs-lookup"><span data-stu-id="65f64-822">The maximum number of connections is unlimited (null) by default.</span></span>
 
-### <a name="maximum-request-body-size"></a><span data-ttu-id="32db3-823">要求主體大小上限</span><span class="sxs-lookup"><span data-stu-id="32db3-823">Maximum request body size</span></span>
+### <a name="maximum-request-body-size"></a><span data-ttu-id="65f64-823">要求主體大小上限</span><span class="sxs-lookup"><span data-stu-id="65f64-823">Maximum request body size</span></span>
 
 <xref:Microsoft.AspNetCore.Server.Kestrel.Core.KestrelServerLimits.MaxRequestBodySize>
 
-<span data-ttu-id="32db3-824">預設的要求主體大小上限是 30,000,000 個位元組，大約 28.6 MB。</span><span class="sxs-lookup"><span data-stu-id="32db3-824">The default maximum request body size is 30,000,000 bytes, which is approximately 28.6 MB.</span></span>
+<span data-ttu-id="65f64-824">預設的要求主體大小上限是 30,000,000 個位元組，大約 28.6 MB。</span><span class="sxs-lookup"><span data-stu-id="65f64-824">The default maximum request body size is 30,000,000 bytes, which is approximately 28.6 MB.</span></span>
 
-<span data-ttu-id="32db3-825">若要覆寫 ASP.NET Core MVC 應用程式中的限制，建議的方式是在動作方法上使用 <xref:Microsoft.AspNetCore.Mvc.RequestSizeLimitAttribute>屬性：</span><span class="sxs-lookup"><span data-stu-id="32db3-825">The recommended approach to override the limit in an ASP.NET Core MVC app is to use the <xref:Microsoft.AspNetCore.Mvc.RequestSizeLimitAttribute> attribute on an action method:</span></span>
+<span data-ttu-id="65f64-825">若要覆寫 ASP.NET Core MVC 應用程式中的限制，建議的方式是在動作方法上使用 <xref:Microsoft.AspNetCore.Mvc.RequestSizeLimitAttribute>屬性：</span><span class="sxs-lookup"><span data-stu-id="65f64-825">The recommended approach to override the limit in an ASP.NET Core MVC app is to use the <xref:Microsoft.AspNetCore.Mvc.RequestSizeLimitAttribute> attribute on an action method:</span></span>
 
 ```csharp
 [RequestSizeLimit(100000000)]
 public IActionResult MyActionMethod()
 ```
 
-<span data-ttu-id="32db3-826">以下範例會示範如何設定應用程式、每個要求的條件約束：</span><span class="sxs-lookup"><span data-stu-id="32db3-826">Here's an example that shows how to configure the constraint for the app on every request:</span></span>
+<span data-ttu-id="65f64-826">以下範例會示範如何設定應用程式、每個要求的條件約束：</span><span class="sxs-lookup"><span data-stu-id="65f64-826">Here's an example that shows how to configure the constraint for the app on every request:</span></span>
 
 ```csharp
 public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
@@ -2142,26 +2143,26 @@ public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
         });
 ```
 
-<span data-ttu-id="32db3-827">覆寫中介軟體中特定要求的設定：</span><span class="sxs-lookup"><span data-stu-id="32db3-827">Override the setting on a specific request in middleware:</span></span>
+<span data-ttu-id="65f64-827">覆寫中介軟體中特定要求的設定：</span><span class="sxs-lookup"><span data-stu-id="65f64-827">Override the setting on a specific request in middleware:</span></span>
 
 [!code-csharp[](kestrel/samples/2.x/KestrelSample/Startup.cs?name=snippet_Limits&highlight=3-4)]
 
-<span data-ttu-id="32db3-828">如果應用程式在開始讀取要求之後，設定要求的限制，就會擲回例外狀況（exception）。</span><span class="sxs-lookup"><span data-stu-id="32db3-828">An exception is thrown if the app configures the limit on a request after the app has started to read the request.</span></span> <span data-ttu-id="32db3-829">有一個 `IsReadOnly` 屬性會指出 `MaxRequestBodySize` 屬性處於唯讀狀態，這表示要設定限制已經太遲。</span><span class="sxs-lookup"><span data-stu-id="32db3-829">There's an `IsReadOnly` property that indicates if the `MaxRequestBodySize` property is in read-only state, meaning it's too late to configure the limit.</span></span>
+<span data-ttu-id="65f64-828">如果應用程式在應用程式開始讀取要求之後設定要求的限制，則會擲回例外狀況。</span><span class="sxs-lookup"><span data-stu-id="65f64-828">An exception is thrown if the app configures the limit on a request after the app has started to read the request.</span></span> <span data-ttu-id="65f64-829">有一個 `IsReadOnly` 屬性會指出 `MaxRequestBodySize` 屬性處於唯讀狀態，這表示要設定限制已經太遲。</span><span class="sxs-lookup"><span data-stu-id="65f64-829">There's an `IsReadOnly` property that indicates if the `MaxRequestBodySize` property is in read-only state, meaning it's too late to configure the limit.</span></span>
 
-<span data-ttu-id="32db3-830">當應用程式是在 [ASP.NET Core 模組](xref:host-and-deploy/aspnet-core-module)後方於[處理序外](xref:host-and-deploy/iis/index#out-of-process-hosting-model)執行時，Kestrel 的要求本文大小限制將會被停用，因為 IIS 已經設定限制。</span><span class="sxs-lookup"><span data-stu-id="32db3-830">When an app is run [out-of-process](xref:host-and-deploy/iis/index#out-of-process-hosting-model) behind the [ASP.NET Core Module](xref:host-and-deploy/aspnet-core-module), Kestrel's request body size limit is disabled because IIS already sets the limit.</span></span>
+<span data-ttu-id="65f64-830">當應用程式是在 [ASP.NET Core 模組](xref:host-and-deploy/aspnet-core-module)後方於[處理序外](xref:host-and-deploy/iis/index#out-of-process-hosting-model)執行時，Kestrel 的要求本文大小限制將會被停用，因為 IIS 已經設定限制。</span><span class="sxs-lookup"><span data-stu-id="65f64-830">When an app is run [out-of-process](xref:host-and-deploy/iis/index#out-of-process-hosting-model) behind the [ASP.NET Core Module](xref:host-and-deploy/aspnet-core-module), Kestrel's request body size limit is disabled because IIS already sets the limit.</span></span>
 
-### <a name="minimum-request-body-data-rate"></a><span data-ttu-id="32db3-831">要求主體資料速率下限</span><span class="sxs-lookup"><span data-stu-id="32db3-831">Minimum request body data rate</span></span>
+### <a name="minimum-request-body-data-rate"></a><span data-ttu-id="65f64-831">要求主體資料速率下限</span><span class="sxs-lookup"><span data-stu-id="65f64-831">Minimum request body data rate</span></span>
 
 <xref:Microsoft.AspNetCore.Server.Kestrel.Core.KestrelServerLimits.MinRequestBodyDataRate>
 <xref:Microsoft.AspNetCore.Server.Kestrel.Core.KestrelServerLimits.MinResponseDataRate>
 
-<span data-ttu-id="32db3-832">如果資料是以指定的速率 (位元組/秒) 傳入，Kestrel 會每秒檢查一次。</span><span class="sxs-lookup"><span data-stu-id="32db3-832">Kestrel checks every second if data is arriving at the specified rate in bytes/second.</span></span> <span data-ttu-id="32db3-833">如果速率低於最小值，則連接會超時。寬限期是指 Kestrel 提供用戶端將其傳送速率增加到最小值的時間量。在這段時間內不會檢查速率。</span><span class="sxs-lookup"><span data-stu-id="32db3-833">If the rate drops below the minimum, the connection is timed out. The grace period is the amount of time that Kestrel gives the client to increase its send rate up to the minimum; the rate isn't checked during that time.</span></span> <span data-ttu-id="32db3-834">寬限期可協助避免中斷連線，這是由於 TCP 緩慢啟動而一開始以低速傳送資料所造成。</span><span class="sxs-lookup"><span data-stu-id="32db3-834">The grace period helps avoid dropping connections that are initially sending data at a slow rate due to TCP slow-start.</span></span>
+<span data-ttu-id="65f64-832">如果資料是以指定的速率 (位元組/秒) 傳入，Kestrel 會每秒檢查一次。</span><span class="sxs-lookup"><span data-stu-id="65f64-832">Kestrel checks every second if data is arriving at the specified rate in bytes/second.</span></span> <span data-ttu-id="65f64-833">如果速率降到低於最小值，則連接會超時。寬限期是 Kestrel 讓用戶端提高其傳送速率的時間量（最小值）;在這段時間內不會檢查速率。</span><span class="sxs-lookup"><span data-stu-id="65f64-833">If the rate drops below the minimum, the connection is timed out. The grace period is the amount of time that Kestrel gives the client to increase its send rate up to the minimum; the rate isn't checked during that time.</span></span> <span data-ttu-id="65f64-834">寬限期可協助避免中斷連線，這是由於 TCP 緩慢啟動而一開始以低速傳送資料所造成。</span><span class="sxs-lookup"><span data-stu-id="65f64-834">The grace period helps avoid dropping connections that are initially sending data at a slow rate due to TCP slow-start.</span></span>
 
-<span data-ttu-id="32db3-835">預設速率下限為 240 個位元組/秒，寬限期為 5 秒。</span><span class="sxs-lookup"><span data-stu-id="32db3-835">The default minimum rate is 240 bytes/second with a 5 second grace period.</span></span>
+<span data-ttu-id="65f64-835">預設速率下限為 240 個位元組/秒，寬限期為 5 秒。</span><span class="sxs-lookup"><span data-stu-id="65f64-835">The default minimum rate is 240 bytes/second with a 5 second grace period.</span></span>
 
-<span data-ttu-id="32db3-836">速率下限也適用於回應。</span><span class="sxs-lookup"><span data-stu-id="32db3-836">A minimum rate also applies to the response.</span></span> <span data-ttu-id="32db3-837">除了屬性中具有 `RequestBody` 或 `Response` 以及介面名稱之外，用來設定要求限制和回應限制的程式碼都相同。</span><span class="sxs-lookup"><span data-stu-id="32db3-837">The code to set the request limit and the response limit is the same except for having `RequestBody` or `Response` in the property and interface names.</span></span>
+<span data-ttu-id="65f64-836">速率下限也適用於回應。</span><span class="sxs-lookup"><span data-stu-id="65f64-836">A minimum rate also applies to the response.</span></span> <span data-ttu-id="65f64-837">除了屬性中具有 `RequestBody` 或 `Response` 以及介面名稱之外，用來設定要求限制和回應限制的程式碼都相同。</span><span class="sxs-lookup"><span data-stu-id="65f64-837">The code to set the request limit and the response limit is the same except for having `RequestBody` or `Response` in the property and interface names.</span></span>
 
-<span data-ttu-id="32db3-838">以下範例示範如何在 *Program.cs* 中設定資料速率下限：</span><span class="sxs-lookup"><span data-stu-id="32db3-838">Here's an example that shows how to configure the minimum data rates in *Program.cs*:</span></span>
+<span data-ttu-id="65f64-838">以下範例示範如何在 *Program.cs* 中設定資料速率下限：</span><span class="sxs-lookup"><span data-stu-id="65f64-838">Here's an example that shows how to configure the minimum data rates in *Program.cs*:</span></span>
 
 ```csharp
 public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
@@ -2176,11 +2177,11 @@ public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
         });
 ```
 
-### <a name="request-headers-timeout"></a><span data-ttu-id="32db3-839">要求標頭逾時</span><span class="sxs-lookup"><span data-stu-id="32db3-839">Request headers timeout</span></span>
+### <a name="request-headers-timeout"></a><span data-ttu-id="65f64-839">要求標頭逾時</span><span class="sxs-lookup"><span data-stu-id="65f64-839">Request headers timeout</span></span>
 
 <xref:Microsoft.AspNetCore.Server.Kestrel.Core.KestrelServerLimits.RequestHeadersTimeout>
 
-<span data-ttu-id="32db3-840">取得或設定伺服器花費在接收要求標頭的時間上限。</span><span class="sxs-lookup"><span data-stu-id="32db3-840">Gets or sets the maximum amount of time the server spends receiving request headers.</span></span> <span data-ttu-id="32db3-841">預設為 30 秒。</span><span class="sxs-lookup"><span data-stu-id="32db3-841">Defaults to 30 seconds.</span></span>
+<span data-ttu-id="65f64-840">取得或設定伺服器花費在接收要求標頭的時間上限。</span><span class="sxs-lookup"><span data-stu-id="65f64-840">Gets or sets the maximum amount of time the server spends receiving request headers.</span></span> <span data-ttu-id="65f64-841">預設為 30 秒。</span><span class="sxs-lookup"><span data-stu-id="65f64-841">Defaults to 30 seconds.</span></span>
 
 ```csharp
 public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
@@ -2192,14 +2193,14 @@ public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
         });
 ```
 
-### <a name="synchronous-io"></a><span data-ttu-id="32db3-842">同步 I/O</span><span class="sxs-lookup"><span data-stu-id="32db3-842">Synchronous I/O</span></span>
+### <a name="synchronous-io"></a><span data-ttu-id="65f64-842">同步 I/O</span><span class="sxs-lookup"><span data-stu-id="65f64-842">Synchronous I/O</span></span>
 
-<span data-ttu-id="32db3-843"><xref:Microsoft.AspNetCore.Server.Kestrel.Core.KestrelServerOptions.AllowSynchronousIO>控制要求和回應是否允許同步的 i/o。</span><span class="sxs-lookup"><span data-stu-id="32db3-843"><xref:Microsoft.AspNetCore.Server.Kestrel.Core.KestrelServerOptions.AllowSynchronousIO> controls whether synchronous I/O is allowed for the request and response.</span></span> <span data-ttu-id="32db3-844">預設值為 `true`。</span><span class="sxs-lookup"><span data-stu-id="32db3-844">The  default value is `true`.</span></span>
+<span data-ttu-id="65f64-843"><xref:Microsoft.AspNetCore.Server.Kestrel.Core.KestrelServerOptions.AllowSynchronousIO> 控制要求和回應是否允許同步 i/o。</span><span class="sxs-lookup"><span data-stu-id="65f64-843"><xref:Microsoft.AspNetCore.Server.Kestrel.Core.KestrelServerOptions.AllowSynchronousIO> controls whether synchronous I/O is allowed for the request and response.</span></span> <span data-ttu-id="65f64-844">預設值為 `true`。</span><span class="sxs-lookup"><span data-stu-id="65f64-844">The  default value is `true`.</span></span>
 
 > [!WARNING]
-> <span data-ttu-id="32db3-845">大量封鎖同步 i/o 作業可能會導致執行緒集區耗盡，讓應用程式無回應。</span><span class="sxs-lookup"><span data-stu-id="32db3-845">A large number of blocking synchronous I/O operations can lead to thread pool starvation, which makes the app unresponsive.</span></span> <span data-ttu-id="32db3-846">只有 `AllowSynchronousIO` 在使用不支援非同步 i/o 的程式庫時才啟用。</span><span class="sxs-lookup"><span data-stu-id="32db3-846">Only enable `AllowSynchronousIO` when using a library that doesn't support asynchronous I/O.</span></span>
+> <span data-ttu-id="65f64-845">大量封鎖同步 i/o 作業可能會導致執行緒集區耗盡，而使應用程式無回應。</span><span class="sxs-lookup"><span data-stu-id="65f64-845">A large number of blocking synchronous I/O operations can lead to thread pool starvation, which makes the app unresponsive.</span></span> <span data-ttu-id="65f64-846">只有 `AllowSynchronousIO` 在使用不支援非同步 i/o 的程式庫時才啟用。</span><span class="sxs-lookup"><span data-stu-id="65f64-846">Only enable `AllowSynchronousIO` when using a library that doesn't support asynchronous I/O.</span></span>
 
-<span data-ttu-id="32db3-847">下列範例會停用同步 i/o：</span><span class="sxs-lookup"><span data-stu-id="32db3-847">The following example disables synchronous I/O:</span></span>
+<span data-ttu-id="65f64-847">下列範例會停用同步 i/o：</span><span class="sxs-lookup"><span data-stu-id="65f64-847">The following example disables synchronous I/O:</span></span>
 
 ```csharp
 public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
@@ -2211,48 +2212,48 @@ public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
         });
 ```
 
-<span data-ttu-id="32db3-848">如需其他 Kestrel 選項和限制的資訊，請參閱：</span><span class="sxs-lookup"><span data-stu-id="32db3-848">For information about other Kestrel options and limits, see:</span></span>
+<span data-ttu-id="65f64-848">如需其他 Kestrel 選項和限制的資訊，請參閱：</span><span class="sxs-lookup"><span data-stu-id="65f64-848">For information about other Kestrel options and limits, see:</span></span>
 
 * <xref:Microsoft.AspNetCore.Server.Kestrel.Core.KestrelServerOptions>
 * <xref:Microsoft.AspNetCore.Server.Kestrel.Core.KestrelServerLimits>
 * <xref:Microsoft.AspNetCore.Server.Kestrel.Core.ListenOptions>
 
-## <a name="endpoint-configuration"></a><span data-ttu-id="32db3-849">端點組態</span><span class="sxs-lookup"><span data-stu-id="32db3-849">Endpoint configuration</span></span>
+## <a name="endpoint-configuration"></a><span data-ttu-id="65f64-849">端點組態</span><span class="sxs-lookup"><span data-stu-id="65f64-849">Endpoint configuration</span></span>
 
-<span data-ttu-id="32db3-850">ASP.NET Core 預設會繫結至：</span><span class="sxs-lookup"><span data-stu-id="32db3-850">By default, ASP.NET Core binds to:</span></span>
+<span data-ttu-id="65f64-850">ASP.NET Core 預設會繫結至：</span><span class="sxs-lookup"><span data-stu-id="65f64-850">By default, ASP.NET Core binds to:</span></span>
 
 * `http://localhost:5000`
-* <span data-ttu-id="32db3-851">`https://localhost:5001` (當有本機開發憑證存在時)</span><span class="sxs-lookup"><span data-stu-id="32db3-851">`https://localhost:5001` (when a local development certificate is present)</span></span>
+* <span data-ttu-id="65f64-851">`https://localhost:5001` (當有本機開發憑證存在時)</span><span class="sxs-lookup"><span data-stu-id="65f64-851">`https://localhost:5001` (when a local development certificate is present)</span></span>
 
-<span data-ttu-id="32db3-852">使用以下各項指定 URL：</span><span class="sxs-lookup"><span data-stu-id="32db3-852">Specify URLs using the:</span></span>
+<span data-ttu-id="65f64-852">使用以下各項指定 URL：</span><span class="sxs-lookup"><span data-stu-id="65f64-852">Specify URLs using the:</span></span>
 
-* <span data-ttu-id="32db3-853">`ASPNETCORE_URLS` 環境變數。</span><span class="sxs-lookup"><span data-stu-id="32db3-853">`ASPNETCORE_URLS` environment variable.</span></span>
-* <span data-ttu-id="32db3-854">`--urls` 命令列引數。</span><span class="sxs-lookup"><span data-stu-id="32db3-854">`--urls` command-line argument.</span></span>
-* <span data-ttu-id="32db3-855">`urls` 主機組態索引鍵。</span><span class="sxs-lookup"><span data-stu-id="32db3-855">`urls` host configuration key.</span></span>
-* <span data-ttu-id="32db3-856">`UseUrls` 擴充方法。</span><span class="sxs-lookup"><span data-stu-id="32db3-856">`UseUrls` extension method.</span></span>
+* <span data-ttu-id="65f64-853">`ASPNETCORE_URLS` 環境變數。</span><span class="sxs-lookup"><span data-stu-id="65f64-853">`ASPNETCORE_URLS` environment variable.</span></span>
+* <span data-ttu-id="65f64-854">`--urls` 命令列引數。</span><span class="sxs-lookup"><span data-stu-id="65f64-854">`--urls` command-line argument.</span></span>
+* <span data-ttu-id="65f64-855">`urls` 主機組態索引鍵。</span><span class="sxs-lookup"><span data-stu-id="65f64-855">`urls` host configuration key.</span></span>
+* <span data-ttu-id="65f64-856">`UseUrls` 擴充方法。</span><span class="sxs-lookup"><span data-stu-id="65f64-856">`UseUrls` extension method.</span></span>
 
-<span data-ttu-id="32db3-857">使用這些方法提供的值可以是一或多個 HTTP 和 HTTPS 端點 (如果有預設憑證可用則為 HTTPS)。</span><span class="sxs-lookup"><span data-stu-id="32db3-857">The value provided using these approaches can be one or more HTTP and HTTPS endpoints (HTTPS if a default cert is available).</span></span> <span data-ttu-id="32db3-858">將值設定為以分號分隔的清單 (例如，`"Urls": "http://localhost:8000;http://localhost:8001"`)。</span><span class="sxs-lookup"><span data-stu-id="32db3-858">Configure the value as a semicolon-separated list (for example, `"Urls": "http://localhost:8000;http://localhost:8001"`).</span></span>
+<span data-ttu-id="65f64-857">使用這些方法提供的值可以是一或多個 HTTP 和 HTTPS 端點 (如果有預設憑證可用則為 HTTPS)。</span><span class="sxs-lookup"><span data-stu-id="65f64-857">The value provided using these approaches can be one or more HTTP and HTTPS endpoints (HTTPS if a default cert is available).</span></span> <span data-ttu-id="65f64-858">將值設定為以分號分隔的清單 (例如，`"Urls": "http://localhost:8000;http://localhost:8001"`)。</span><span class="sxs-lookup"><span data-stu-id="65f64-858">Configure the value as a semicolon-separated list (for example, `"Urls": "http://localhost:8000;http://localhost:8001"`).</span></span>
 
-<span data-ttu-id="32db3-859">如需有關這些方法的詳細資訊，請參閱[伺服器 URL](xref:fundamentals/host/web-host#server-urls) 和[覆寫設定](xref:fundamentals/host/web-host#override-configuration)。</span><span class="sxs-lookup"><span data-stu-id="32db3-859">For more information on these approaches, see [Server URLs](xref:fundamentals/host/web-host#server-urls) and [Override configuration](xref:fundamentals/host/web-host#override-configuration).</span></span>
+<span data-ttu-id="65f64-859">如需有關這些方法的詳細資訊，請參閱[伺服器 URL](xref:fundamentals/host/web-host#server-urls) 和[覆寫設定](xref:fundamentals/host/web-host#override-configuration)。</span><span class="sxs-lookup"><span data-stu-id="65f64-859">For more information on these approaches, see [Server URLs](xref:fundamentals/host/web-host#server-urls) and [Override configuration](xref:fundamentals/host/web-host#override-configuration).</span></span>
 
-<span data-ttu-id="32db3-860">開發憑證會建立於：</span><span class="sxs-lookup"><span data-stu-id="32db3-860">A development certificate is created:</span></span>
+<span data-ttu-id="65f64-860">開發憑證會建立於：</span><span class="sxs-lookup"><span data-stu-id="65f64-860">A development certificate is created:</span></span>
 
-* <span data-ttu-id="32db3-861">已安裝 [.NET Core SDK](/dotnet/core/sdk) 時。</span><span class="sxs-lookup"><span data-stu-id="32db3-861">When the [.NET Core SDK](/dotnet/core/sdk) is installed.</span></span>
-* <span data-ttu-id="32db3-862">[dev-certs 工具](xref:aspnetcore-2.1#https)用來建立憑證。</span><span class="sxs-lookup"><span data-stu-id="32db3-862">The [dev-certs tool](xref:aspnetcore-2.1#https) is used to create a certificate.</span></span>
+* <span data-ttu-id="65f64-861">已安裝 [.NET Core SDK](/dotnet/core/sdk) 時。</span><span class="sxs-lookup"><span data-stu-id="65f64-861">When the [.NET Core SDK](/dotnet/core/sdk) is installed.</span></span>
+* <span data-ttu-id="65f64-862">[dev-certs 工具](xref:aspnetcore-2.1#https)用來建立憑證。</span><span class="sxs-lookup"><span data-stu-id="65f64-862">The [dev-certs tool](xref:aspnetcore-2.1#https) is used to create a certificate.</span></span>
 
-<span data-ttu-id="32db3-863">有些瀏覽器需要授與明確的許可權，才能信任本機開發憑證。</span><span class="sxs-lookup"><span data-stu-id="32db3-863">Some browsers require granting explicit permission to trust the local development certificate.</span></span>
+<span data-ttu-id="65f64-863">某些瀏覽器需要授與明確的許可權，以信任本機開發憑證。</span><span class="sxs-lookup"><span data-stu-id="65f64-863">Some browsers require granting explicit permission to trust the local development certificate.</span></span>
 
-<span data-ttu-id="32db3-864">專案範本預設會將應用程式設定為在 HTTPS 上執行，並包含 HTTPS 重新導向[和 HSTS 支援](xref:security/enforcing-ssl)。</span><span class="sxs-lookup"><span data-stu-id="32db3-864">Project templates configure apps to run on HTTPS by default and include [HTTPS redirection and HSTS support](xref:security/enforcing-ssl).</span></span>
+<span data-ttu-id="65f64-864">專案範本預設會將應用程式設定為在 HTTPS 上執行，並包含 Https 重新導向 [和 HSTS 支援](xref:security/enforcing-ssl)。</span><span class="sxs-lookup"><span data-stu-id="65f64-864">Project templates configure apps to run on HTTPS by default and include [HTTPS redirection and HSTS support](xref:security/enforcing-ssl).</span></span>
 
-<span data-ttu-id="32db3-865">請在 <xref:Microsoft.AspNetCore.Server.Kestrel.Core.KestrelServerOptions> 上呼叫 <xref:Microsoft.AspNetCore.Server.Kestrel.Core.KestrelServerOptions.Listen*> 或 <xref:Microsoft.AspNetCore.Server.Kestrel.Core.KestrelServerOptions.ListenUnixSocket*> 方法，來為 Kestrel 設定 URL 首碼和連接埠。</span><span class="sxs-lookup"><span data-stu-id="32db3-865">Call <xref:Microsoft.AspNetCore.Server.Kestrel.Core.KestrelServerOptions.Listen*> or <xref:Microsoft.AspNetCore.Server.Kestrel.Core.KestrelServerOptions.ListenUnixSocket*> methods on <xref:Microsoft.AspNetCore.Server.Kestrel.Core.KestrelServerOptions> to configure URL prefixes and ports for Kestrel.</span></span>
+<span data-ttu-id="65f64-865">請在 <xref:Microsoft.AspNetCore.Server.Kestrel.Core.KestrelServerOptions> 上呼叫 <xref:Microsoft.AspNetCore.Server.Kestrel.Core.KestrelServerOptions.Listen*> 或 <xref:Microsoft.AspNetCore.Server.Kestrel.Core.KestrelServerOptions.ListenUnixSocket*> 方法，來為 Kestrel 設定 URL 首碼和連接埠。</span><span class="sxs-lookup"><span data-stu-id="65f64-865">Call <xref:Microsoft.AspNetCore.Server.Kestrel.Core.KestrelServerOptions.Listen*> or <xref:Microsoft.AspNetCore.Server.Kestrel.Core.KestrelServerOptions.ListenUnixSocket*> methods on <xref:Microsoft.AspNetCore.Server.Kestrel.Core.KestrelServerOptions> to configure URL prefixes and ports for Kestrel.</span></span>
 
-<span data-ttu-id="32db3-866">`UseUrls`、`--urls` 命令列引數、`urls` 主機組態索引鍵和 `ASPNETCORE_URLS` 環境變數同樣有效，但卻有本節稍後註明的限制 (針對 HTTPS 端點組態必須有預設憑證可用)。</span><span class="sxs-lookup"><span data-stu-id="32db3-866">`UseUrls`, the `--urls` command-line argument, `urls` host configuration key, and the `ASPNETCORE_URLS` environment variable also work but have the limitations noted later in this section (a default certificate must be available for HTTPS endpoint configuration).</span></span>
+<span data-ttu-id="65f64-866">`UseUrls`、`--urls` 命令列引數、`urls` 主機組態索引鍵和 `ASPNETCORE_URLS` 環境變數同樣有效，但卻有本節稍後註明的限制 (針對 HTTPS 端點組態必須有預設憑證可用)。</span><span class="sxs-lookup"><span data-stu-id="65f64-866">`UseUrls`, the `--urls` command-line argument, `urls` host configuration key, and the `ASPNETCORE_URLS` environment variable also work but have the limitations noted later in this section (a default certificate must be available for HTTPS endpoint configuration).</span></span>
 
-<span data-ttu-id="32db3-867">`KestrelServerOptions`配置</span><span class="sxs-lookup"><span data-stu-id="32db3-867">`KestrelServerOptions` configuration:</span></span>
+<span data-ttu-id="65f64-867">`KestrelServerOptions` 配置：</span><span class="sxs-lookup"><span data-stu-id="65f64-867">`KestrelServerOptions` configuration:</span></span>
 
-### <a name="configureendpointdefaultsactionlistenoptions"></a><span data-ttu-id="32db3-868">ConfigureEndpointDefaults (動作 \<ListenOptions>) </span><span class="sxs-lookup"><span data-stu-id="32db3-868">ConfigureEndpointDefaults(Action\<ListenOptions>)</span></span>
+### <a name="configureendpointdefaultsactionlistenoptions"></a><span data-ttu-id="65f64-868">ConfigureEndpointDefaults (動作 \<ListenOptions>) </span><span class="sxs-lookup"><span data-stu-id="65f64-868">ConfigureEndpointDefaults(Action\<ListenOptions>)</span></span>
 
-<span data-ttu-id="32db3-869">指定組態 `Action` 以針對每個指定端點執行。</span><span class="sxs-lookup"><span data-stu-id="32db3-869">Specifies a configuration `Action` to run for each specified endpoint.</span></span> <span data-ttu-id="32db3-870">呼叫 `ConfigureEndpointDefaults` 多次會以最後一個指定的 `Action` 取代之前的 `Action`。</span><span class="sxs-lookup"><span data-stu-id="32db3-870">Calling `ConfigureEndpointDefaults` multiple times replaces prior `Action`s with the last `Action` specified.</span></span>
+<span data-ttu-id="65f64-869">指定組態 `Action` 以針對每個指定端點執行。</span><span class="sxs-lookup"><span data-stu-id="65f64-869">Specifies a configuration `Action` to run for each specified endpoint.</span></span> <span data-ttu-id="65f64-870">呼叫 `ConfigureEndpointDefaults` 多次會以最後一個指定的 `Action` 取代之前的 `Action`。</span><span class="sxs-lookup"><span data-stu-id="65f64-870">Calling `ConfigureEndpointDefaults` multiple times replaces prior `Action`s with the last `Action` specified.</span></span>
 
 ```csharp
 public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
@@ -2268,11 +2269,11 @@ public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
 ```
 
 > [!NOTE]
-> <span data-ttu-id="32db3-871"><xref:Microsoft.AspNetCore.Server.Kestrel.Core.KestrelServerOptions.Listen*>**在呼叫之前**呼叫所建立 <xref:Microsoft.AspNetCore.Server.Kestrel.Core.KestrelServerOptions.ConfigureEndpointDefaults*> 的端點，將不會套用預設值。</span><span class="sxs-lookup"><span data-stu-id="32db3-871">Endpoints created by calling <xref:Microsoft.AspNetCore.Server.Kestrel.Core.KestrelServerOptions.Listen*> **before** calling <xref:Microsoft.AspNetCore.Server.Kestrel.Core.KestrelServerOptions.ConfigureEndpointDefaults*> won't have the defaults applied.</span></span>
+> <span data-ttu-id="65f64-871">在呼叫之前呼叫所建立的端點 <xref:Microsoft.AspNetCore.Server.Kestrel.Core.KestrelServerOptions.Listen*> **before** <xref:Microsoft.AspNetCore.Server.Kestrel.Core.KestrelServerOptions.ConfigureEndpointDefaults*> ，將不會套用預設值。</span><span class="sxs-lookup"><span data-stu-id="65f64-871">Endpoints created by calling <xref:Microsoft.AspNetCore.Server.Kestrel.Core.KestrelServerOptions.Listen*> **before** calling <xref:Microsoft.AspNetCore.Server.Kestrel.Core.KestrelServerOptions.ConfigureEndpointDefaults*> won't have the defaults applied.</span></span>
 
-### <a name="configurehttpsdefaultsactionhttpsconnectionadapteroptions"></a><span data-ttu-id="32db3-872">ConfigureHttpsDefaults (動作 \<HttpsConnectionAdapterOptions>) </span><span class="sxs-lookup"><span data-stu-id="32db3-872">ConfigureHttpsDefaults(Action\<HttpsConnectionAdapterOptions>)</span></span>
+### <a name="configurehttpsdefaultsactionhttpsconnectionadapteroptions"></a><span data-ttu-id="65f64-872">ConfigureHttpsDefaults (動作 \<HttpsConnectionAdapterOptions>) </span><span class="sxs-lookup"><span data-stu-id="65f64-872">ConfigureHttpsDefaults(Action\<HttpsConnectionAdapterOptions>)</span></span>
 
-<span data-ttu-id="32db3-873">指定組態 `Action` 以針對每個 HTTPS 端點執行。</span><span class="sxs-lookup"><span data-stu-id="32db3-873">Specifies a configuration `Action` to run for each HTTPS endpoint.</span></span> <span data-ttu-id="32db3-874">呼叫 `ConfigureHttpsDefaults` 多次會以最後一個指定的 `Action` 取代之前的 `Action`。</span><span class="sxs-lookup"><span data-stu-id="32db3-874">Calling `ConfigureHttpsDefaults` multiple times replaces prior `Action`s with the last `Action` specified.</span></span>
+<span data-ttu-id="65f64-873">指定組態 `Action` 以針對每個 HTTPS 端點執行。</span><span class="sxs-lookup"><span data-stu-id="65f64-873">Specifies a configuration `Action` to run for each HTTPS endpoint.</span></span> <span data-ttu-id="65f64-874">呼叫 `ConfigureHttpsDefaults` 多次會以最後一個指定的 `Action` 取代之前的 `Action`。</span><span class="sxs-lookup"><span data-stu-id="65f64-874">Calling `ConfigureHttpsDefaults` multiple times replaces prior `Action`s with the last `Action` specified.</span></span>
 
 ```csharp
 public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
@@ -2289,19 +2290,19 @@ public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
 ```
 
 > [!NOTE]
-> <span data-ttu-id="32db3-875"><xref:Microsoft.AspNetCore.Server.Kestrel.Core.KestrelServerOptions.Listen*>**在呼叫之前**呼叫所建立 <xref:Microsoft.AspNetCore.Server.Kestrel.Core.KestrelServerOptions.ConfigureHttpsDefaults*> 的端點，將不會套用預設值。</span><span class="sxs-lookup"><span data-stu-id="32db3-875">Endpoints created by calling <xref:Microsoft.AspNetCore.Server.Kestrel.Core.KestrelServerOptions.Listen*> **before** calling <xref:Microsoft.AspNetCore.Server.Kestrel.Core.KestrelServerOptions.ConfigureHttpsDefaults*> won't have the defaults applied.</span></span>
+> <span data-ttu-id="65f64-875">在呼叫之前呼叫所建立的端點 <xref:Microsoft.AspNetCore.Server.Kestrel.Core.KestrelServerOptions.Listen*> **before** <xref:Microsoft.AspNetCore.Server.Kestrel.Core.KestrelServerOptions.ConfigureHttpsDefaults*> ，將不會套用預設值。</span><span class="sxs-lookup"><span data-stu-id="65f64-875">Endpoints created by calling <xref:Microsoft.AspNetCore.Server.Kestrel.Core.KestrelServerOptions.Listen*> **before** calling <xref:Microsoft.AspNetCore.Server.Kestrel.Core.KestrelServerOptions.ConfigureHttpsDefaults*> won't have the defaults applied.</span></span>
 
-### <a name="configureiconfiguration"></a><span data-ttu-id="32db3-876">Configure(IConfiguration)</span><span class="sxs-lookup"><span data-stu-id="32db3-876">Configure(IConfiguration)</span></span>
+### <a name="configureiconfiguration"></a><span data-ttu-id="65f64-876">Configure(IConfiguration)</span><span class="sxs-lookup"><span data-stu-id="65f64-876">Configure(IConfiguration)</span></span>
 
-<span data-ttu-id="32db3-877">建立設定載入器來設定以 <xref:Microsoft.Extensions.Configuration.IConfiguration> 作為輸入的 Kestrel。</span><span class="sxs-lookup"><span data-stu-id="32db3-877">Creates a configuration loader for setting up Kestrel that takes an <xref:Microsoft.Extensions.Configuration.IConfiguration> as input.</span></span> <span data-ttu-id="32db3-878">組態的範圍必須限於 Kestrel 的組態區段。</span><span class="sxs-lookup"><span data-stu-id="32db3-878">The configuration must be scoped to the configuration section for Kestrel.</span></span>
+<span data-ttu-id="65f64-877">建立設定載入器來設定以 <xref:Microsoft.Extensions.Configuration.IConfiguration> 作為輸入的 Kestrel。</span><span class="sxs-lookup"><span data-stu-id="65f64-877">Creates a configuration loader for setting up Kestrel that takes an <xref:Microsoft.Extensions.Configuration.IConfiguration> as input.</span></span> <span data-ttu-id="65f64-878">組態的範圍必須限於 Kestrel 的組態區段。</span><span class="sxs-lookup"><span data-stu-id="65f64-878">The configuration must be scoped to the configuration section for Kestrel.</span></span>
 
-### <a name="listenoptionsusehttps"></a><span data-ttu-id="32db3-879">ListenOptions.UseHttps</span><span class="sxs-lookup"><span data-stu-id="32db3-879">ListenOptions.UseHttps</span></span>
+### <a name="listenoptionsusehttps"></a><span data-ttu-id="65f64-879">ListenOptions.UseHttps</span><span class="sxs-lookup"><span data-stu-id="65f64-879">ListenOptions.UseHttps</span></span>
 
-<span data-ttu-id="32db3-880">設定 Kestrel 使用 HTTPS。</span><span class="sxs-lookup"><span data-stu-id="32db3-880">Configure Kestrel to use HTTPS.</span></span>
+<span data-ttu-id="65f64-880">設定 Kestrel 使用 HTTPS。</span><span class="sxs-lookup"><span data-stu-id="65f64-880">Configure Kestrel to use HTTPS.</span></span>
 
-<span data-ttu-id="32db3-881">`ListenOptions.UseHttps` 延伸模組：</span><span class="sxs-lookup"><span data-stu-id="32db3-881">`ListenOptions.UseHttps` extensions:</span></span>
+<span data-ttu-id="65f64-881">`ListenOptions.UseHttps` 延伸模組：</span><span class="sxs-lookup"><span data-stu-id="65f64-881">`ListenOptions.UseHttps` extensions:</span></span>
 
-* <span data-ttu-id="32db3-882">`UseHttps`：將 Kestrel 設定為使用 HTTPS 搭配預設憑證。</span><span class="sxs-lookup"><span data-stu-id="32db3-882">`UseHttps`: Configure Kestrel to use HTTPS with the default certificate.</span></span> <span data-ttu-id="32db3-883">如果未設定預設憑證，會擲回例外狀況。</span><span class="sxs-lookup"><span data-stu-id="32db3-883">Throws an exception if no default certificate is configured.</span></span>
+* <span data-ttu-id="65f64-882">`UseHttps`：設定 Kestrel 以搭配預設憑證使用 HTTPS。</span><span class="sxs-lookup"><span data-stu-id="65f64-882">`UseHttps`: Configure Kestrel to use HTTPS with the default certificate.</span></span> <span data-ttu-id="65f64-883">如果未設定預設憑證，會擲回例外狀況。</span><span class="sxs-lookup"><span data-stu-id="65f64-883">Throws an exception if no default certificate is configured.</span></span>
 * `UseHttps(string fileName)`
 * `UseHttps(string fileName, string password)`
 * `UseHttps(string fileName, string password, Action<HttpsConnectionAdapterOptions> configureOptions)`
@@ -2313,39 +2314,39 @@ public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
 * `UseHttps(X509Certificate2 serverCertificate, Action<HttpsConnectionAdapterOptions> configureOptions)`
 * `UseHttps(Action<HttpsConnectionAdapterOptions> configureOptions)`
 
-<span data-ttu-id="32db3-884">`ListenOptions.UseHttps` 參數：</span><span class="sxs-lookup"><span data-stu-id="32db3-884">`ListenOptions.UseHttps` parameters:</span></span>
+<span data-ttu-id="65f64-884">`ListenOptions.UseHttps` 參數：</span><span class="sxs-lookup"><span data-stu-id="65f64-884">`ListenOptions.UseHttps` parameters:</span></span>
 
-* <span data-ttu-id="32db3-885">`filename` 是憑證檔案的路徑和檔案名稱，它相對於包含應用程式內容檔案的目錄。</span><span class="sxs-lookup"><span data-stu-id="32db3-885">`filename` is the path and file name of a certificate file, relative to the directory that contains the app's content files.</span></span>
-* <span data-ttu-id="32db3-886">`password` 是存取 X.509 憑證資料所需的密碼。</span><span class="sxs-lookup"><span data-stu-id="32db3-886">`password` is the password required to access the X.509 certificate data.</span></span>
-* <span data-ttu-id="32db3-887">`configureOptions` 是設定 `HttpsConnectionAdapterOptions` 的 `Action`。</span><span class="sxs-lookup"><span data-stu-id="32db3-887">`configureOptions` is an `Action` to configure the `HttpsConnectionAdapterOptions`.</span></span> <span data-ttu-id="32db3-888">傳回 `ListenOptions`。</span><span class="sxs-lookup"><span data-stu-id="32db3-888">Returns the `ListenOptions`.</span></span>
-* <span data-ttu-id="32db3-889">`storeName` 是要從中載入憑證的憑證存放區。</span><span class="sxs-lookup"><span data-stu-id="32db3-889">`storeName` is the certificate store from which to load the certificate.</span></span>
-* <span data-ttu-id="32db3-890">`subject` 是憑證的主體名稱。</span><span class="sxs-lookup"><span data-stu-id="32db3-890">`subject` is the subject name for the certificate.</span></span>
-* <span data-ttu-id="32db3-891">`allowInvalid` 表示是否應該考慮無效的憑證，例如自我簽署憑證。</span><span class="sxs-lookup"><span data-stu-id="32db3-891">`allowInvalid` indicates if invalid certificates should be considered, such as self-signed certificates.</span></span>
-* <span data-ttu-id="32db3-892">`location` 是要從中載入憑證的存放區位置。</span><span class="sxs-lookup"><span data-stu-id="32db3-892">`location` is the store location to load the certificate from.</span></span>
-* <span data-ttu-id="32db3-893">`serverCertificate` 是 X.509 憑證。</span><span class="sxs-lookup"><span data-stu-id="32db3-893">`serverCertificate` is the X.509 certificate.</span></span>
+* <span data-ttu-id="65f64-885">`filename` 是憑證檔案的路徑和檔案名稱，它相對於包含應用程式內容檔案的目錄。</span><span class="sxs-lookup"><span data-stu-id="65f64-885">`filename` is the path and file name of a certificate file, relative to the directory that contains the app's content files.</span></span>
+* <span data-ttu-id="65f64-886">`password` 是存取 X.509 憑證資料所需的密碼。</span><span class="sxs-lookup"><span data-stu-id="65f64-886">`password` is the password required to access the X.509 certificate data.</span></span>
+* <span data-ttu-id="65f64-887">`configureOptions` 是設定 `HttpsConnectionAdapterOptions` 的 `Action`。</span><span class="sxs-lookup"><span data-stu-id="65f64-887">`configureOptions` is an `Action` to configure the `HttpsConnectionAdapterOptions`.</span></span> <span data-ttu-id="65f64-888">傳回 `ListenOptions`。</span><span class="sxs-lookup"><span data-stu-id="65f64-888">Returns the `ListenOptions`.</span></span>
+* <span data-ttu-id="65f64-889">`storeName` 是要從中載入憑證的憑證存放區。</span><span class="sxs-lookup"><span data-stu-id="65f64-889">`storeName` is the certificate store from which to load the certificate.</span></span>
+* <span data-ttu-id="65f64-890">`subject` 是憑證的主體名稱。</span><span class="sxs-lookup"><span data-stu-id="65f64-890">`subject` is the subject name for the certificate.</span></span>
+* <span data-ttu-id="65f64-891">`allowInvalid` 表示是否應該考慮無效的憑證，例如自我簽署憑證。</span><span class="sxs-lookup"><span data-stu-id="65f64-891">`allowInvalid` indicates if invalid certificates should be considered, such as self-signed certificates.</span></span>
+* <span data-ttu-id="65f64-892">`location` 是要從中載入憑證的存放區位置。</span><span class="sxs-lookup"><span data-stu-id="65f64-892">`location` is the store location to load the certificate from.</span></span>
+* <span data-ttu-id="65f64-893">`serverCertificate` 是 X.509 憑證。</span><span class="sxs-lookup"><span data-stu-id="65f64-893">`serverCertificate` is the X.509 certificate.</span></span>
 
-<span data-ttu-id="32db3-894">在生產環境中，必須明確設定 HTTPS。</span><span class="sxs-lookup"><span data-stu-id="32db3-894">In production, HTTPS must be explicitly configured.</span></span> <span data-ttu-id="32db3-895">至少必須提供預設憑證。</span><span class="sxs-lookup"><span data-stu-id="32db3-895">At a minimum, a default certificate must be provided.</span></span>
+<span data-ttu-id="65f64-894">在生產環境中，必須明確設定 HTTPS。</span><span class="sxs-lookup"><span data-stu-id="65f64-894">In production, HTTPS must be explicitly configured.</span></span> <span data-ttu-id="65f64-895">至少必須提供預設憑證。</span><span class="sxs-lookup"><span data-stu-id="65f64-895">At a minimum, a default certificate must be provided.</span></span>
 
-<span data-ttu-id="32db3-896">支援的組態描述如下：</span><span class="sxs-lookup"><span data-stu-id="32db3-896">Supported configurations described next:</span></span>
+<span data-ttu-id="65f64-896">支援的組態描述如下：</span><span class="sxs-lookup"><span data-stu-id="65f64-896">Supported configurations described next:</span></span>
 
-* <span data-ttu-id="32db3-897">無組態</span><span class="sxs-lookup"><span data-stu-id="32db3-897">No configuration</span></span>
-* <span data-ttu-id="32db3-898">從組態取代預設憑證</span><span class="sxs-lookup"><span data-stu-id="32db3-898">Replace the default certificate from configuration</span></span>
-* <span data-ttu-id="32db3-899">變更程式碼中的預設值</span><span class="sxs-lookup"><span data-stu-id="32db3-899">Change the defaults in code</span></span>
+* <span data-ttu-id="65f64-897">無組態</span><span class="sxs-lookup"><span data-stu-id="65f64-897">No configuration</span></span>
+* <span data-ttu-id="65f64-898">從組態取代預設憑證</span><span class="sxs-lookup"><span data-stu-id="65f64-898">Replace the default certificate from configuration</span></span>
+* <span data-ttu-id="65f64-899">變更程式碼中的預設值</span><span class="sxs-lookup"><span data-stu-id="65f64-899">Change the defaults in code</span></span>
 
-<span data-ttu-id="32db3-900">*無組態*</span><span class="sxs-lookup"><span data-stu-id="32db3-900">*No configuration*</span></span>
+<span data-ttu-id="65f64-900">*無組態*</span><span class="sxs-lookup"><span data-stu-id="65f64-900">*No configuration*</span></span>
 
-<span data-ttu-id="32db3-901">Kestrel 會接聽 `http://localhost:5000` 和 `https://localhost:5001` (如果預設憑證可用的話)。</span><span class="sxs-lookup"><span data-stu-id="32db3-901">Kestrel listens on `http://localhost:5000` and `https://localhost:5001` (if a default cert is available).</span></span>
+<span data-ttu-id="65f64-901">Kestrel 會接聽 `http://localhost:5000` 和 `https://localhost:5001` (如果預設憑證可用的話)。</span><span class="sxs-lookup"><span data-stu-id="65f64-901">Kestrel listens on `http://localhost:5000` and `https://localhost:5001` (if a default cert is available).</span></span>
 
 <a name="configuration"></a>
 
-<span data-ttu-id="32db3-902">*從組態取代預設憑證*</span><span class="sxs-lookup"><span data-stu-id="32db3-902">*Replace the default certificate from configuration*</span></span>
+<span data-ttu-id="65f64-902">*從組態取代預設憑證*</span><span class="sxs-lookup"><span data-stu-id="65f64-902">*Replace the default certificate from configuration*</span></span>
 
-<span data-ttu-id="32db3-903">`CreateDefaultBuilder` 預設會呼叫 `Configure(context.Configuration.GetSection("Kestrel"))` 以載入 Kestrel 設定。</span><span class="sxs-lookup"><span data-stu-id="32db3-903">`CreateDefaultBuilder` calls `Configure(context.Configuration.GetSection("Kestrel"))` by default to load Kestrel configuration.</span></span> <span data-ttu-id="32db3-904">Kestrel 可以使用預設的 HTTPS 應用程式設定組態結構描述。</span><span class="sxs-lookup"><span data-stu-id="32db3-904">A default HTTPS app settings configuration schema is available for Kestrel.</span></span> <span data-ttu-id="32db3-905">設定多個端點，包括 URL 和要使用的憑證－從磁碟上的檔案，或是從憑證存放區。</span><span class="sxs-lookup"><span data-stu-id="32db3-905">Configure multiple endpoints, including the URLs and the certificates to use, either from a file on disk or from a certificate store.</span></span>
+<span data-ttu-id="65f64-903">`CreateDefaultBuilder` 預設會呼叫 `Configure(context.Configuration.GetSection("Kestrel"))` 以載入 Kestrel 設定。</span><span class="sxs-lookup"><span data-stu-id="65f64-903">`CreateDefaultBuilder` calls `Configure(context.Configuration.GetSection("Kestrel"))` by default to load Kestrel configuration.</span></span> <span data-ttu-id="65f64-904">Kestrel 可以使用預設的 HTTPS 應用程式設定組態結構描述。</span><span class="sxs-lookup"><span data-stu-id="65f64-904">A default HTTPS app settings configuration schema is available for Kestrel.</span></span> <span data-ttu-id="65f64-905">設定多個端點，包括 URL 和要使用的憑證－從磁碟上的檔案，或是從憑證存放區。</span><span class="sxs-lookup"><span data-stu-id="65f64-905">Configure multiple endpoints, including the URLs and the certificates to use, either from a file on disk or from a certificate store.</span></span>
 
-<span data-ttu-id="32db3-906">在下列 *appsettings.json* 範例中：</span><span class="sxs-lookup"><span data-stu-id="32db3-906">In the following *appsettings.json* example:</span></span>
+<span data-ttu-id="65f64-906">在下列 *appsettings.json* 範例中：</span><span class="sxs-lookup"><span data-stu-id="65f64-906">In the following *appsettings.json* example:</span></span>
 
-* <span data-ttu-id="32db3-907">將 **AllowInvalid** 設定為 `true`，允許使用無效的憑證 (例如，自我簽署憑證)。</span><span class="sxs-lookup"><span data-stu-id="32db3-907">Set **AllowInvalid** to `true` to permit the use of invalid certificates (for example, self-signed certificates).</span></span>
-* <span data-ttu-id="32db3-908">任何未指定憑證 (接下來範例中的 **HttpsDefaultCert**) 的 HTTPS 端點會回復為 [憑證]**[預設]** > \*\*\*\* 下定義的憑證或開發憑證。</span><span class="sxs-lookup"><span data-stu-id="32db3-908">Any HTTPS endpoint that doesn't specify a certificate (**HttpsDefaultCert** in the example that follows) falls back to the cert defined under **Certificates** > **Default** or the development certificate.</span></span>
+* <span data-ttu-id="65f64-907">將 **AllowInvalid** 設定為 `true`，允許使用無效的憑證 (例如，自我簽署憑證)。</span><span class="sxs-lookup"><span data-stu-id="65f64-907">Set **AllowInvalid** to `true` to permit the use of invalid certificates (for example, self-signed certificates).</span></span>
+* <span data-ttu-id="65f64-908">任何未指定憑證 (接下來範例中的 **HttpsDefaultCert**) 的 HTTPS 端點會回復為 [憑證]**[預設]** > \*\*\*\* 下定義的憑證或開發憑證。</span><span class="sxs-lookup"><span data-stu-id="65f64-908">Any HTTPS endpoint that doesn't specify a certificate (**HttpsDefaultCert** in the example that follows) falls back to the cert defined under **Certificates** > **Default** or the development certificate.</span></span>
 
 ```json
 {
@@ -2395,7 +2396,7 @@ public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
 }
 ```
 
-<span data-ttu-id="32db3-909">除了針對任何憑證節點使用 [路徑]\*\*\*\* 和 [密碼]\*\*\*\*，還可以使用憑證存放區欄位指定憑證。</span><span class="sxs-lookup"><span data-stu-id="32db3-909">An alternative to using **Path** and **Password** for any certificate node is to specify the certificate using certificate store fields.</span></span> <span data-ttu-id="32db3-910">例如，**憑證**  >  **預設**憑證可以指定為：</span><span class="sxs-lookup"><span data-stu-id="32db3-910">For example, the **Certificates** > **Default** certificate can be specified as:</span></span>
+<span data-ttu-id="65f64-909">除了針對任何憑證節點使用 [路徑]\*\*\*\* 和 [密碼]\*\*\*\*，還可以使用憑證存放區欄位指定憑證。</span><span class="sxs-lookup"><span data-stu-id="65f64-909">An alternative to using **Path** and **Password** for any certificate node is to specify the certificate using certificate store fields.</span></span> <span data-ttu-id="65f64-910">例如，您可以將**憑證**  >  **預設**憑證指定為：</span><span class="sxs-lookup"><span data-stu-id="65f64-910">For example, the **Certificates** > **Default** certificate can be specified as:</span></span>
 
 ```json
 "Default": {
@@ -2406,15 +2407,15 @@ public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
 }
 ```
 
-<span data-ttu-id="32db3-911">結構描述附註：</span><span class="sxs-lookup"><span data-stu-id="32db3-911">Schema notes:</span></span>
+<span data-ttu-id="65f64-911">結構描述附註：</span><span class="sxs-lookup"><span data-stu-id="65f64-911">Schema notes:</span></span>
 
-* <span data-ttu-id="32db3-912">端點名稱不區分大小寫。</span><span class="sxs-lookup"><span data-stu-id="32db3-912">Endpoints names are case-insensitive.</span></span> <span data-ttu-id="32db3-913">例如，`HTTPS` 和 `Https` 都有效。</span><span class="sxs-lookup"><span data-stu-id="32db3-913">For example, `HTTPS` and `Https` are valid.</span></span>
-* <span data-ttu-id="32db3-914">`Url` 參數對每個端點而言都是必要的。</span><span class="sxs-lookup"><span data-stu-id="32db3-914">The `Url` parameter is required for each endpoint.</span></span> <span data-ttu-id="32db3-915">此參數的格式等同於最上層 `Urls` 組態參數，但是它限制為單一值。</span><span class="sxs-lookup"><span data-stu-id="32db3-915">The format for this parameter is the same as the top-level `Urls` configuration parameter except that it's limited to a single value.</span></span>
-* <span data-ttu-id="32db3-916">這些端點會取代最上層 `Urls` 組態中定義的端點，而不是新增至其中。</span><span class="sxs-lookup"><span data-stu-id="32db3-916">These endpoints replace those defined in the top-level `Urls` configuration rather than adding to them.</span></span> <span data-ttu-id="32db3-917">透過 `Listen` 在程式碼中定義的端點，會與組態區段中定義的端點累計。</span><span class="sxs-lookup"><span data-stu-id="32db3-917">Endpoints defined in code via `Listen` are cumulative with the endpoints defined in the configuration section.</span></span>
-* <span data-ttu-id="32db3-918">`Certificate` 區段是選擇性的。</span><span class="sxs-lookup"><span data-stu-id="32db3-918">The `Certificate` section is optional.</span></span> <span data-ttu-id="32db3-919">如果未指定 `Certificate` 區段，則會使用先前案例中所定義的預設值。</span><span class="sxs-lookup"><span data-stu-id="32db3-919">If the `Certificate` section isn't specified, the defaults defined in earlier scenarios are used.</span></span> <span data-ttu-id="32db3-920">如果沒有預設值可供使用，伺服器就會擲回例外狀況，且無法啟動。</span><span class="sxs-lookup"><span data-stu-id="32db3-920">If no defaults are available, the server throws an exception and fails to start.</span></span>
-* <span data-ttu-id="32db3-921">`Certificate`一節同時支援**路徑** &ndash; **密碼**和**主體** &ndash; **存放區**憑證。</span><span class="sxs-lookup"><span data-stu-id="32db3-921">The `Certificate` section supports both **Path**&ndash;**Password** and **Subject**&ndash;**Store** certificates.</span></span>
-* <span data-ttu-id="32db3-922">可以用這種方式定義任何數目的端點，只要它們不會導致連接埠衝突即可。</span><span class="sxs-lookup"><span data-stu-id="32db3-922">Any number of endpoints may be defined in this way so long as they don't cause port conflicts.</span></span>
-* <span data-ttu-id="32db3-923">`options.Configure(context.Configuration.GetSection("{SECTION}"))` 會傳回 `KestrelConfigurationLoader` 與 `.Endpoint(string name, listenOptions => { })` 方法，此方法可用來補充已設定的端點設定：</span><span class="sxs-lookup"><span data-stu-id="32db3-923">`options.Configure(context.Configuration.GetSection("{SECTION}"))` returns a `KestrelConfigurationLoader` with an `.Endpoint(string name, listenOptions => { })` method that can be used to supplement a configured endpoint's settings:</span></span>
+* <span data-ttu-id="65f64-912">端點名稱不區分大小寫。</span><span class="sxs-lookup"><span data-stu-id="65f64-912">Endpoints names are case-insensitive.</span></span> <span data-ttu-id="65f64-913">例如，`HTTPS` 和 `Https` 都有效。</span><span class="sxs-lookup"><span data-stu-id="65f64-913">For example, `HTTPS` and `Https` are valid.</span></span>
+* <span data-ttu-id="65f64-914">`Url` 參數對每個端點而言都是必要的。</span><span class="sxs-lookup"><span data-stu-id="65f64-914">The `Url` parameter is required for each endpoint.</span></span> <span data-ttu-id="65f64-915">此參數的格式等同於最上層 `Urls` 組態參數，但是它限制為單一值。</span><span class="sxs-lookup"><span data-stu-id="65f64-915">The format for this parameter is the same as the top-level `Urls` configuration parameter except that it's limited to a single value.</span></span>
+* <span data-ttu-id="65f64-916">這些端點會取代最上層 `Urls` 組態中定義的端點，而不是新增至其中。</span><span class="sxs-lookup"><span data-stu-id="65f64-916">These endpoints replace those defined in the top-level `Urls` configuration rather than adding to them.</span></span> <span data-ttu-id="65f64-917">透過 `Listen` 在程式碼中定義的端點，會與組態區段中定義的端點累計。</span><span class="sxs-lookup"><span data-stu-id="65f64-917">Endpoints defined in code via `Listen` are cumulative with the endpoints defined in the configuration section.</span></span>
+* <span data-ttu-id="65f64-918">`Certificate` 區段是選擇性的。</span><span class="sxs-lookup"><span data-stu-id="65f64-918">The `Certificate` section is optional.</span></span> <span data-ttu-id="65f64-919">如果未指定 `Certificate` 區段，則會使用先前案例中所定義的預設值。</span><span class="sxs-lookup"><span data-stu-id="65f64-919">If the `Certificate` section isn't specified, the defaults defined in earlier scenarios are used.</span></span> <span data-ttu-id="65f64-920">如果沒有預設值可供使用，伺服器就會擲回例外狀況，且無法啟動。</span><span class="sxs-lookup"><span data-stu-id="65f64-920">If no defaults are available, the server throws an exception and fails to start.</span></span>
+* <span data-ttu-id="65f64-921">`Certificate`區段同時支援**路徑** &ndash; **密碼**和**主體** &ndash; **存放區**憑證。</span><span class="sxs-lookup"><span data-stu-id="65f64-921">The `Certificate` section supports both **Path**&ndash;**Password** and **Subject**&ndash;**Store** certificates.</span></span>
+* <span data-ttu-id="65f64-922">可以用這種方式定義任何數目的端點，只要它們不會導致連接埠衝突即可。</span><span class="sxs-lookup"><span data-stu-id="65f64-922">Any number of endpoints may be defined in this way so long as they don't cause port conflicts.</span></span>
+* <span data-ttu-id="65f64-923">`options.Configure(context.Configuration.GetSection("{SECTION}"))` 會傳回 `KestrelConfigurationLoader` 與 `.Endpoint(string name, listenOptions => { })` 方法，此方法可用來補充已設定的端點設定：</span><span class="sxs-lookup"><span data-stu-id="65f64-923">`options.Configure(context.Configuration.GetSection("{SECTION}"))` returns a `KestrelConfigurationLoader` with an `.Endpoint(string name, listenOptions => { })` method that can be used to supplement a configured endpoint's settings:</span></span>
 
 ```csharp
 public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
@@ -2430,15 +2431,15 @@ public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
         });
 ```
 
-<span data-ttu-id="32db3-924">`KestrelServerOptions.ConfigurationLoader`可以直接存取，以繼續逐一查看現有的載入器，例如所提供的載入器 <xref:Microsoft.AspNetCore.WebHost.CreateDefaultBuilder*> 。</span><span class="sxs-lookup"><span data-stu-id="32db3-924">`KestrelServerOptions.ConfigurationLoader` can be directly accessed to continue iterating on the existing loader, such as the one provided by <xref:Microsoft.AspNetCore.WebHost.CreateDefaultBuilder*>.</span></span>
+<span data-ttu-id="65f64-924">`KestrelServerOptions.ConfigurationLoader` 可以直接存取，以繼續逐一查看現有的載入器，例如所提供的載入器 <xref:Microsoft.AspNetCore.WebHost.CreateDefaultBuilder*> 。</span><span class="sxs-lookup"><span data-stu-id="65f64-924">`KestrelServerOptions.ConfigurationLoader` can be directly accessed to continue iterating on the existing loader, such as the one provided by <xref:Microsoft.AspNetCore.WebHost.CreateDefaultBuilder*>.</span></span>
 
-* <span data-ttu-id="32db3-925">您可以在方法的選項中取得每個端點的設定區段， `Endpoint` 以便讀取自訂設定。</span><span class="sxs-lookup"><span data-stu-id="32db3-925">The configuration section for each endpoint is available on the options in the `Endpoint` method so that custom settings may be read.</span></span>
-* <span data-ttu-id="32db3-926">可以藉由使用另一個區段再次呼叫 `options.Configure(context.Configuration.GetSection("{SECTION}"))` 而載入多個組態。</span><span class="sxs-lookup"><span data-stu-id="32db3-926">Multiple configurations may be loaded by calling `options.Configure(context.Configuration.GetSection("{SECTION}"))` again with another section.</span></span> <span data-ttu-id="32db3-927">只會使用最後一個組態，除非在先前的執行個體上已明確呼叫 `Load`。</span><span class="sxs-lookup"><span data-stu-id="32db3-927">Only the last configuration is used, unless `Load` is explicitly called on prior instances.</span></span> <span data-ttu-id="32db3-928">中繼套件不會呼叫 `Load`，如此可能會取代其預設組態區段。</span><span class="sxs-lookup"><span data-stu-id="32db3-928">The metapackage doesn't call `Load` so that its default configuration section may be replaced.</span></span>
-* <span data-ttu-id="32db3-929">`KestrelConfigurationLoader` 會將來自 `KestrelServerOptions` 的 API 的 `Listen` 系列鏡像為 `Endpoint` 多載，所以可在相同的位置設定程式碼和設定端點。</span><span class="sxs-lookup"><span data-stu-id="32db3-929">`KestrelConfigurationLoader` mirrors the `Listen` family of APIs from `KestrelServerOptions` as `Endpoint` overloads, so code and config endpoints may be configured in the same place.</span></span> <span data-ttu-id="32db3-930">這些多載不使用名稱，並且只使用來自組態的預設組態。</span><span class="sxs-lookup"><span data-stu-id="32db3-930">These overloads don't use names and only consume default settings from configuration.</span></span>
+* <span data-ttu-id="65f64-925">您可以在方法的選項中使用每個端點的設定區段， `Endpoint` 以便讀取自訂設定。</span><span class="sxs-lookup"><span data-stu-id="65f64-925">The configuration section for each endpoint is available on the options in the `Endpoint` method so that custom settings may be read.</span></span>
+* <span data-ttu-id="65f64-926">可以藉由使用另一個區段再次呼叫 `options.Configure(context.Configuration.GetSection("{SECTION}"))` 而載入多個組態。</span><span class="sxs-lookup"><span data-stu-id="65f64-926">Multiple configurations may be loaded by calling `options.Configure(context.Configuration.GetSection("{SECTION}"))` again with another section.</span></span> <span data-ttu-id="65f64-927">只會使用最後一個組態，除非在先前的執行個體上已明確呼叫 `Load`。</span><span class="sxs-lookup"><span data-stu-id="65f64-927">Only the last configuration is used, unless `Load` is explicitly called on prior instances.</span></span> <span data-ttu-id="65f64-928">中繼套件不會呼叫 `Load`，如此可能會取代其預設組態區段。</span><span class="sxs-lookup"><span data-stu-id="65f64-928">The metapackage doesn't call `Load` so that its default configuration section may be replaced.</span></span>
+* <span data-ttu-id="65f64-929">`KestrelConfigurationLoader` 會將來自 `KestrelServerOptions` 的 API 的 `Listen` 系列鏡像為 `Endpoint` 多載，所以可在相同的位置設定程式碼和設定端點。</span><span class="sxs-lookup"><span data-stu-id="65f64-929">`KestrelConfigurationLoader` mirrors the `Listen` family of APIs from `KestrelServerOptions` as `Endpoint` overloads, so code and config endpoints may be configured in the same place.</span></span> <span data-ttu-id="65f64-930">這些多載不使用名稱，並且只使用來自組態的預設組態。</span><span class="sxs-lookup"><span data-stu-id="65f64-930">These overloads don't use names and only consume default settings from configuration.</span></span>
 
-<span data-ttu-id="32db3-931">*變更程式碼中的預設值*</span><span class="sxs-lookup"><span data-stu-id="32db3-931">*Change the defaults in code*</span></span>
+<span data-ttu-id="65f64-931">*變更程式碼中的預設值*</span><span class="sxs-lookup"><span data-stu-id="65f64-931">*Change the defaults in code*</span></span>
 
-<span data-ttu-id="32db3-932">`ConfigureEndpointDefaults` 和 `ConfigureHttpsDefaults` 可以用來變更 `ListenOptions` 和 `HttpsConnectionAdapterOptions` 的預設設定，包括覆寫先前案例中指定的預設憑證。</span><span class="sxs-lookup"><span data-stu-id="32db3-932">`ConfigureEndpointDefaults` and `ConfigureHttpsDefaults` can be used to change default settings for `ListenOptions` and `HttpsConnectionAdapterOptions`, including overriding the default certificate specified in the prior scenario.</span></span> <span data-ttu-id="32db3-933">`ConfigureEndpointDefaults` 和 `ConfigureHttpsDefaults` 應該在設定任何端點之前呼叫。</span><span class="sxs-lookup"><span data-stu-id="32db3-933">`ConfigureEndpointDefaults` and `ConfigureHttpsDefaults` should be called before any endpoints are configured.</span></span>
+<span data-ttu-id="65f64-932">`ConfigureEndpointDefaults` 和 `ConfigureHttpsDefaults` 可以用來變更 `ListenOptions` 和 `HttpsConnectionAdapterOptions` 的預設設定，包括覆寫先前案例中指定的預設憑證。</span><span class="sxs-lookup"><span data-stu-id="65f64-932">`ConfigureEndpointDefaults` and `ConfigureHttpsDefaults` can be used to change default settings for `ListenOptions` and `HttpsConnectionAdapterOptions`, including overriding the default certificate specified in the prior scenario.</span></span> <span data-ttu-id="65f64-933">`ConfigureEndpointDefaults` 和 `ConfigureHttpsDefaults` 應該在設定任何端點之前呼叫。</span><span class="sxs-lookup"><span data-stu-id="65f64-933">`ConfigureEndpointDefaults` and `ConfigureHttpsDefaults` should be called before any endpoints are configured.</span></span>
 
 ```csharp
 public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
@@ -2458,16 +2459,16 @@ public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
         });
 ```
 
-<span data-ttu-id="32db3-934">*SNI 的 Kestrel 支援*</span><span class="sxs-lookup"><span data-stu-id="32db3-934">*Kestrel support for SNI*</span></span>
+<span data-ttu-id="65f64-934">*SNI 的 Kestrel 支援*</span><span class="sxs-lookup"><span data-stu-id="65f64-934">*Kestrel support for SNI*</span></span>
 
-<span data-ttu-id="32db3-935">[伺服器名稱指示 (SNI)](https://tools.ietf.org/html/rfc6066#section-3) 可以用於在相同的 IP 位址和連接埠上裝載多個網域。</span><span class="sxs-lookup"><span data-stu-id="32db3-935">[Server Name Indication (SNI)](https://tools.ietf.org/html/rfc6066#section-3) can be used to host multiple domains on the same IP address and port.</span></span> <span data-ttu-id="32db3-936">SNI 若要運作，用戶端會在 TLS 信號交換期間傳送安全工作階段的主機名稱給伺服器，讓伺服器可以提供正確的憑證。</span><span class="sxs-lookup"><span data-stu-id="32db3-936">For SNI to function, the client sends the host name for the secure session to the server during the TLS handshake so that the server can provide the correct certificate.</span></span> <span data-ttu-id="32db3-937">用戶端在 TLS 信號交換之後的安全工作階段期間，會使用所提供的憑證與伺服器進行加密通訊。</span><span class="sxs-lookup"><span data-stu-id="32db3-937">The client uses the furnished certificate for encrypted communication with the server during the secure session that follows the TLS handshake.</span></span>
+<span data-ttu-id="65f64-935">[伺服器名稱指示 (SNI)](https://tools.ietf.org/html/rfc6066#section-3) 可以用於在相同的 IP 位址和連接埠上裝載多個網域。</span><span class="sxs-lookup"><span data-stu-id="65f64-935">[Server Name Indication (SNI)](https://tools.ietf.org/html/rfc6066#section-3) can be used to host multiple domains on the same IP address and port.</span></span> <span data-ttu-id="65f64-936">SNI 若要運作，用戶端會在 TLS 信號交換期間傳送安全工作階段的主機名稱給伺服器，讓伺服器可以提供正確的憑證。</span><span class="sxs-lookup"><span data-stu-id="65f64-936">For SNI to function, the client sends the host name for the secure session to the server during the TLS handshake so that the server can provide the correct certificate.</span></span> <span data-ttu-id="65f64-937">用戶端在 TLS 信號交換之後的安全工作階段期間，會使用所提供的憑證與伺服器進行加密通訊。</span><span class="sxs-lookup"><span data-stu-id="65f64-937">The client uses the furnished certificate for encrypted communication with the server during the secure session that follows the TLS handshake.</span></span>
 
-<span data-ttu-id="32db3-938">Kestrel 透過 `ServerCertificateSelector` 回呼來支援 SNI。</span><span class="sxs-lookup"><span data-stu-id="32db3-938">Kestrel supports SNI via the `ServerCertificateSelector` callback.</span></span> <span data-ttu-id="32db3-939">回呼會針對每個連線叫用一次，允許應用程式檢查主機名稱並選取適當的憑證。</span><span class="sxs-lookup"><span data-stu-id="32db3-939">The callback is invoked once per connection to allow the app to inspect the host name and select the appropriate certificate.</span></span>
+<span data-ttu-id="65f64-938">Kestrel 透過 `ServerCertificateSelector` 回呼來支援 SNI。</span><span class="sxs-lookup"><span data-stu-id="65f64-938">Kestrel supports SNI via the `ServerCertificateSelector` callback.</span></span> <span data-ttu-id="65f64-939">回呼會針對每個連線叫用一次，允許應用程式檢查主機名稱並選取適當的憑證。</span><span class="sxs-lookup"><span data-stu-id="65f64-939">The callback is invoked once per connection to allow the app to inspect the host name and select the appropriate certificate.</span></span>
 
-<span data-ttu-id="32db3-940">SNI 支援需要：</span><span class="sxs-lookup"><span data-stu-id="32db3-940">SNI support requires:</span></span>
+<span data-ttu-id="65f64-940">SNI 支援需要：</span><span class="sxs-lookup"><span data-stu-id="65f64-940">SNI support requires:</span></span>
 
-* <span data-ttu-id="32db3-941">在目標 framework `netcoreapp2.1` 或更新版本上執行。</span><span class="sxs-lookup"><span data-stu-id="32db3-941">Running on target framework `netcoreapp2.1` or later.</span></span> <span data-ttu-id="32db3-942">在 `net461` 或更新版本上，會叫用回呼，但 `name` 一律為 `null` 。</span><span class="sxs-lookup"><span data-stu-id="32db3-942">On `net461` or later, the callback is invoked but the `name` is always `null`.</span></span> <span data-ttu-id="32db3-943">如果用戶端不在 TLS 信號交換中提供主機名稱參數，則 `name` 也是 `null`。</span><span class="sxs-lookup"><span data-stu-id="32db3-943">The `name` is also `null` if the client doesn't provide the host name parameter in the TLS handshake.</span></span>
-* <span data-ttu-id="32db3-944">所有網站都在相同的 Kestrel 執行個體上執行。</span><span class="sxs-lookup"><span data-stu-id="32db3-944">All websites run on the same Kestrel instance.</span></span> <span data-ttu-id="32db3-945">在不使用反向 Proxy 的情況下，Kestrel 不支援跨多個執行個體共用 IP 位址和連接埠。</span><span class="sxs-lookup"><span data-stu-id="32db3-945">Kestrel doesn't support sharing an IP address and port across multiple instances without a reverse proxy.</span></span>
+* <span data-ttu-id="65f64-941">在目標 framework `netcoreapp2.1` 或更新版本上執行。</span><span class="sxs-lookup"><span data-stu-id="65f64-941">Running on target framework `netcoreapp2.1` or later.</span></span> <span data-ttu-id="65f64-942">在 `net461` 或更新版本中，會叫用回呼，但 `name` 一律為 `null` 。</span><span class="sxs-lookup"><span data-stu-id="65f64-942">On `net461` or later, the callback is invoked but the `name` is always `null`.</span></span> <span data-ttu-id="65f64-943">如果用戶端不在 TLS 信號交換中提供主機名稱參數，則 `name` 也是 `null`。</span><span class="sxs-lookup"><span data-stu-id="65f64-943">The `name` is also `null` if the client doesn't provide the host name parameter in the TLS handshake.</span></span>
+* <span data-ttu-id="65f64-944">所有網站都在相同的 Kestrel 執行個體上執行。</span><span class="sxs-lookup"><span data-stu-id="65f64-944">All websites run on the same Kestrel instance.</span></span> <span data-ttu-id="65f64-945">在不使用反向 Proxy 的情況下，Kestrel 不支援跨多個執行個體共用 IP 位址和連接埠。</span><span class="sxs-lookup"><span data-stu-id="65f64-945">Kestrel doesn't support sharing an IP address and port across multiple instances without a reverse proxy.</span></span>
 
 ```csharp
 public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
@@ -2509,9 +2510,9 @@ public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
         .Build();
 ```
 
-### <a name="connection-logging"></a><span data-ttu-id="32db3-946">連接記錄</span><span class="sxs-lookup"><span data-stu-id="32db3-946">Connection logging</span></span>
+### <a name="connection-logging"></a><span data-ttu-id="65f64-946">連接記錄</span><span class="sxs-lookup"><span data-stu-id="65f64-946">Connection logging</span></span>
 
-<span data-ttu-id="32db3-947">呼叫 <xref:Microsoft.AspNetCore.Hosting.ListenOptionsConnectionLoggingExtensions.UseConnectionLogging*> ，以針對連接上的位元組層級通訊發出調試層級記錄。</span><span class="sxs-lookup"><span data-stu-id="32db3-947">Call <xref:Microsoft.AspNetCore.Hosting.ListenOptionsConnectionLoggingExtensions.UseConnectionLogging*> to emit Debug level logs for byte-level communication on a connection.</span></span> <span data-ttu-id="32db3-948">連線記錄有助於疑難排解低層級通訊中的問題，例如在 TLS 加密期間和 proxy 後方。</span><span class="sxs-lookup"><span data-stu-id="32db3-948">Connection logging is helpful for troubleshooting problems in low-level communication, such as during TLS encryption and behind proxies.</span></span> <span data-ttu-id="32db3-949">如果 `UseConnectionLogging` 放在之前 `UseHttps` ，則會記錄加密的流量。</span><span class="sxs-lookup"><span data-stu-id="32db3-949">If `UseConnectionLogging` is placed before `UseHttps`, encrypted traffic is logged.</span></span> <span data-ttu-id="32db3-950">如果 `UseConnectionLogging` 放在之後 `UseHttps` ，則會記錄解密的流量。</span><span class="sxs-lookup"><span data-stu-id="32db3-950">If `UseConnectionLogging` is placed after `UseHttps`, decrypted traffic is logged.</span></span>
+<span data-ttu-id="65f64-947">呼叫 <xref:Microsoft.AspNetCore.Hosting.ListenOptionsConnectionLoggingExtensions.UseConnectionLogging*> 以發出連接上位元組層級通訊的 Debug 層級記錄。</span><span class="sxs-lookup"><span data-stu-id="65f64-947">Call <xref:Microsoft.AspNetCore.Hosting.ListenOptionsConnectionLoggingExtensions.UseConnectionLogging*> to emit Debug level logs for byte-level communication on a connection.</span></span> <span data-ttu-id="65f64-948">連線記錄有助於疑難排解低層級通訊中的問題，例如在 TLS 加密期間和 proxy 後方。</span><span class="sxs-lookup"><span data-stu-id="65f64-948">Connection logging is helpful for troubleshooting problems in low-level communication, such as during TLS encryption and behind proxies.</span></span> <span data-ttu-id="65f64-949">如果 `UseConnectionLogging` 之前放置 `UseHttps` ，則會記錄加密的流量。</span><span class="sxs-lookup"><span data-stu-id="65f64-949">If `UseConnectionLogging` is placed before `UseHttps`, encrypted traffic is logged.</span></span> <span data-ttu-id="65f64-950">如果 `UseConnectionLogging` 放置在之後 `UseHttps` ，則會記錄解密的流量。</span><span class="sxs-lookup"><span data-stu-id="65f64-950">If `UseConnectionLogging` is placed after `UseHttps`, decrypted traffic is logged.</span></span>
 
 ```csharp
 webBuilder.ConfigureKestrel(serverOptions =>
@@ -2523,28 +2524,9 @@ webBuilder.ConfigureKestrel(serverOptions =>
 });
 ```
 
-### <a name="bind-to-a-tcp-socket"></a><span data-ttu-id="32db3-951">繫結至 TCP 通訊端</span><span class="sxs-lookup"><span data-stu-id="32db3-951">Bind to a TCP socket</span></span>
+### <a name="bind-to-a-tcp-socket"></a><span data-ttu-id="65f64-951">繫結至 TCP 通訊端</span><span class="sxs-lookup"><span data-stu-id="65f64-951">Bind to a TCP socket</span></span>
 
-<span data-ttu-id="32db3-952"><xref:Microsoft.AspNetCore.Server.Kestrel.Core.KestrelServerOptions.Listen*> 方法會繫結至 TCP 通訊端，而選項 Lambda 則會允許 X.509 憑證設定：</span><span class="sxs-lookup"><span data-stu-id="32db3-952">The <xref:Microsoft.AspNetCore.Server.Kestrel.Core.KestrelServerOptions.Listen*> method binds to a TCP socket, and an options lambda permits X.509 certificate configuration:</span></span>
-
-```csharp
-public static void Main(string[] args)
-{
-    CreateWebHostBuilder(args).Build().Run();
-}
-
-public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
-    WebHost.CreateDefaultBuilder(args)
-        .UseStartup<Startup>()
-        .UseKestrel(serverOptions =>
-        {
-            serverOptions.Listen(IPAddress.Loopback, 5000);
-            serverOptions.Listen(IPAddress.Loopback, 5001, listenOptions =>
-            {
-                listenOptions.UseHttps("testCert.pfx", "testPassword");
-            });
-        });
-```
+<span data-ttu-id="65f64-952"><xref:Microsoft.AspNetCore.Server.Kestrel.Core.KestrelServerOptions.Listen*> 方法會繫結至 TCP 通訊端，而選項 Lambda 則會允許 X.509 憑證設定：</span><span class="sxs-lookup"><span data-stu-id="65f64-952">The <xref:Microsoft.AspNetCore.Server.Kestrel.Core.KestrelServerOptions.Listen*> method binds to a TCP socket, and an options lambda permits X.509 certificate configuration:</span></span>
 
 ```csharp
 public static void Main(string[] args)
@@ -2565,13 +2547,32 @@ public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
         });
 ```
 
-<span data-ttu-id="32db3-953">此範例使用 <xref:Microsoft.AspNetCore.Server.Kestrel.Core.ListenOptions>來為端點設定 HTTPS。</span><span class="sxs-lookup"><span data-stu-id="32db3-953">The example configures HTTPS for an endpoint with <xref:Microsoft.AspNetCore.Server.Kestrel.Core.ListenOptions>.</span></span> <span data-ttu-id="32db3-954">若要設定特定端點的其他 Kestrel 設定，請使用相同的 API。</span><span class="sxs-lookup"><span data-stu-id="32db3-954">Use the same API to configure other Kestrel settings for specific endpoints.</span></span>
+```csharp
+public static void Main(string[] args)
+{
+    CreateWebHostBuilder(args).Build().Run();
+}
+
+public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
+    WebHost.CreateDefaultBuilder(args)
+        .UseStartup<Startup>()
+        .UseKestrel(serverOptions =>
+        {
+            serverOptions.Listen(IPAddress.Loopback, 5000);
+            serverOptions.Listen(IPAddress.Loopback, 5001, listenOptions =>
+            {
+                listenOptions.UseHttps("testCert.pfx", "testPassword");
+            });
+        });
+```
+
+<span data-ttu-id="65f64-953">此範例使用 <xref:Microsoft.AspNetCore.Server.Kestrel.Core.ListenOptions>來為端點設定 HTTPS。</span><span class="sxs-lookup"><span data-stu-id="65f64-953">The example configures HTTPS for an endpoint with <xref:Microsoft.AspNetCore.Server.Kestrel.Core.ListenOptions>.</span></span> <span data-ttu-id="65f64-954">若要設定特定端點的其他 Kestrel 設定，請使用相同的 API。</span><span class="sxs-lookup"><span data-stu-id="65f64-954">Use the same API to configure other Kestrel settings for specific endpoints.</span></span>
 
 [!INCLUDE [How to make an X.509 cert](~/includes/make-x509-cert.md)]
 
-### <a name="bind-to-a-unix-socket"></a><span data-ttu-id="32db3-955">繫結至 Unix 通訊端</span><span class="sxs-lookup"><span data-stu-id="32db3-955">Bind to a Unix socket</span></span>
+### <a name="bind-to-a-unix-socket"></a><span data-ttu-id="65f64-955">繫結至 Unix 通訊端</span><span class="sxs-lookup"><span data-stu-id="65f64-955">Bind to a Unix socket</span></span>
 
-<span data-ttu-id="32db3-956">請使用 <xref:Microsoft.AspNetCore.Server.Kestrel.Core.KestrelServerOptions.ListenUnixSocket*> 在 Unix 通訊端上進行接聽以改善 Nginx 的效能，如此範例所示：</span><span class="sxs-lookup"><span data-stu-id="32db3-956">Listen on a Unix socket with <xref:Microsoft.AspNetCore.Server.Kestrel.Core.KestrelServerOptions.ListenUnixSocket*> for improved performance with Nginx, as shown in this example:</span></span>
+<span data-ttu-id="65f64-956">請使用 <xref:Microsoft.AspNetCore.Server.Kestrel.Core.KestrelServerOptions.ListenUnixSocket*> 在 Unix 通訊端上進行接聽以改善 Nginx 的效能，如此範例所示：</span><span class="sxs-lookup"><span data-stu-id="65f64-956">Listen on a Unix socket with <xref:Microsoft.AspNetCore.Server.Kestrel.Core.KestrelServerOptions.ListenUnixSocket*> for improved performance with Nginx, as shown in this example:</span></span>
 
 ```csharp
 public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
@@ -2587,56 +2588,56 @@ public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
         });
 ```
 
-* <span data-ttu-id="32db3-957">在 Nginx confiuguration 檔中，將 `server`  >  `location`  >  `proxy_pass` 專案設定為 `http://unix:/tmp/{KESTREL SOCKET}:/;` 。</span><span class="sxs-lookup"><span data-stu-id="32db3-957">In the Nginx confiuguration file, set the `server` > `location` > `proxy_pass` entry to `http://unix:/tmp/{KESTREL SOCKET}:/;`.</span></span> <span data-ttu-id="32db3-958">`{KESTREL SOCKET}`這是提供給 (的通訊端名稱 <xref:Microsoft.AspNetCore.Server.Kestrel.Core.KestrelServerOptions.ListenUnixSocket*> ，例如， `kestrel-test.sock` 在上述範例中) 。</span><span class="sxs-lookup"><span data-stu-id="32db3-958">`{KESTREL SOCKET}` is the name of the socket provided to <xref:Microsoft.AspNetCore.Server.Kestrel.Core.KestrelServerOptions.ListenUnixSocket*> (for example, `kestrel-test.sock` in the preceding example).</span></span>
-* <span data-ttu-id="32db3-959">請確定 Nginx (可寫入通訊端，例如 `chmod go+w /tmp/kestrel-test.sock`) 。</span><span class="sxs-lookup"><span data-stu-id="32db3-959">Ensure that the socket is writeable by Nginx (for example, `chmod go+w /tmp/kestrel-test.sock`).</span></span> 
+* <span data-ttu-id="65f64-957">在 Nginx confiuguration 檔案中，將 `server`  >  `location`  >  `proxy_pass` 專案設定為 `http://unix:/tmp/{KESTREL SOCKET}:/;` 。</span><span class="sxs-lookup"><span data-stu-id="65f64-957">In the Nginx confiuguration file, set the `server` > `location` > `proxy_pass` entry to `http://unix:/tmp/{KESTREL SOCKET}:/;`.</span></span> <span data-ttu-id="65f64-958">`{KESTREL SOCKET}` 這是提供給 (的通訊端名稱 <xref:Microsoft.AspNetCore.Server.Kestrel.Core.KestrelServerOptions.ListenUnixSocket*> ，例如 `kestrel-test.sock` 上述範例) 。</span><span class="sxs-lookup"><span data-stu-id="65f64-958">`{KESTREL SOCKET}` is the name of the socket provided to <xref:Microsoft.AspNetCore.Server.Kestrel.Core.KestrelServerOptions.ListenUnixSocket*> (for example, `kestrel-test.sock` in the preceding example).</span></span>
+* <span data-ttu-id="65f64-959">確定 Nginx (可寫入通訊端，例如 `chmod go+w /tmp/kestrel-test.sock`) 。</span><span class="sxs-lookup"><span data-stu-id="65f64-959">Ensure that the socket is writeable by Nginx (for example, `chmod go+w /tmp/kestrel-test.sock`).</span></span> 
 
-### <a name="port-0"></a><span data-ttu-id="32db3-960">連接埠 0</span><span class="sxs-lookup"><span data-stu-id="32db3-960">Port 0</span></span>
+### <a name="port-0"></a><span data-ttu-id="65f64-960">連接埠 0</span><span class="sxs-lookup"><span data-stu-id="65f64-960">Port 0</span></span>
 
-<span data-ttu-id="32db3-961">指定連接埠號碼 `0` 時，Kestrel 會動態繫結至可用的連接埠。</span><span class="sxs-lookup"><span data-stu-id="32db3-961">When the port number `0` is specified, Kestrel dynamically binds to an available port.</span></span> <span data-ttu-id="32db3-962">下列範例示範如何判斷 Kestrel 在執行階段實際上繫結至哪一個連接埠：</span><span class="sxs-lookup"><span data-stu-id="32db3-962">The following example shows how to determine which port Kestrel actually bound at runtime:</span></span>
+<span data-ttu-id="65f64-961">指定連接埠號碼 `0` 時，Kestrel 會動態繫結至可用的連接埠。</span><span class="sxs-lookup"><span data-stu-id="65f64-961">When the port number `0` is specified, Kestrel dynamically binds to an available port.</span></span> <span data-ttu-id="65f64-962">下列範例示範如何判斷 Kestrel 在執行階段實際上繫結至哪一個連接埠：</span><span class="sxs-lookup"><span data-stu-id="65f64-962">The following example shows how to determine which port Kestrel actually bound at runtime:</span></span>
 
 [!code-csharp[](kestrel/samples/2.x/KestrelSample/Startup.cs?name=snippet_Configure&highlight=3-4,15-21)]
 
-<span data-ttu-id="32db3-963">當應用程式執行時，主控台視窗輸出會指出可以連線到應用程式的動態連接埠：</span><span class="sxs-lookup"><span data-stu-id="32db3-963">When the app is run, the console window output indicates the dynamic port where the app can be reached:</span></span>
+<span data-ttu-id="65f64-963">當應用程式執行時，主控台視窗輸出會指出可以連線到應用程式的動態連接埠：</span><span class="sxs-lookup"><span data-stu-id="65f64-963">When the app is run, the console window output indicates the dynamic port where the app can be reached:</span></span>
 
 ```console
 Listening on the following addresses: http://127.0.0.1:48508
 ```
 
-### <a name="limitations"></a><span data-ttu-id="32db3-964">限制</span><span class="sxs-lookup"><span data-stu-id="32db3-964">Limitations</span></span>
+### <a name="limitations"></a><span data-ttu-id="65f64-964">限制</span><span class="sxs-lookup"><span data-stu-id="65f64-964">Limitations</span></span>
 
-<span data-ttu-id="32db3-965">使用下列方法來設定端點：</span><span class="sxs-lookup"><span data-stu-id="32db3-965">Configure endpoints with the following approaches:</span></span>
+<span data-ttu-id="65f64-965">使用下列方法來設定端點：</span><span class="sxs-lookup"><span data-stu-id="65f64-965">Configure endpoints with the following approaches:</span></span>
 
 * <xref:Microsoft.AspNetCore.Hosting.HostingAbstractionsWebHostBuilderExtensions.UseUrls*>
-* <span data-ttu-id="32db3-966">`--urls` 命令列引數</span><span class="sxs-lookup"><span data-stu-id="32db3-966">`--urls` command-line argument</span></span>
-* <span data-ttu-id="32db3-967">`urls` 主機組態索引鍵</span><span class="sxs-lookup"><span data-stu-id="32db3-967">`urls` host configuration key</span></span>
-* <span data-ttu-id="32db3-968">`ASPNETCORE_URLS` 環境變數</span><span class="sxs-lookup"><span data-stu-id="32db3-968">`ASPNETCORE_URLS` environment variable</span></span>
+* <span data-ttu-id="65f64-966">`--urls` 命令列引數</span><span class="sxs-lookup"><span data-stu-id="65f64-966">`--urls` command-line argument</span></span>
+* <span data-ttu-id="65f64-967">`urls` 主機組態索引鍵</span><span class="sxs-lookup"><span data-stu-id="65f64-967">`urls` host configuration key</span></span>
+* <span data-ttu-id="65f64-968">`ASPNETCORE_URLS` 環境變數</span><span class="sxs-lookup"><span data-stu-id="65f64-968">`ASPNETCORE_URLS` environment variable</span></span>
 
-<span data-ttu-id="32db3-969">要讓程式碼使用 Kestrel 以外的伺服器，這些方法會很有用。</span><span class="sxs-lookup"><span data-stu-id="32db3-969">These methods are useful for making code work with servers other than Kestrel.</span></span> <span data-ttu-id="32db3-970">不過，請注意下列限制：</span><span class="sxs-lookup"><span data-stu-id="32db3-970">However, be aware of the following limitations:</span></span>
+<span data-ttu-id="65f64-969">要讓程式碼使用 Kestrel 以外的伺服器，這些方法會很有用。</span><span class="sxs-lookup"><span data-stu-id="65f64-969">These methods are useful for making code work with servers other than Kestrel.</span></span> <span data-ttu-id="65f64-970">不過，請注意下列限制：</span><span class="sxs-lookup"><span data-stu-id="65f64-970">However, be aware of the following limitations:</span></span>
 
-* <span data-ttu-id="32db3-971">HTTPS 無法與這些方法搭配使用，除非在 HTTPS 端點設定中提供預設憑證 (例如，使用 `KestrelServerOptions` 設定或設定檔，如本主題稍早所示)。</span><span class="sxs-lookup"><span data-stu-id="32db3-971">HTTPS can't be used with these approaches unless a default certificate is provided in the HTTPS endpoint configuration (for example, using `KestrelServerOptions` configuration or a configuration file as shown earlier in this topic).</span></span>
-* <span data-ttu-id="32db3-972">當同時使用 `Listen` 和 `UseUrls` 方法時，`Listen` 端點會覆寫 `UseUrls` 端點。</span><span class="sxs-lookup"><span data-stu-id="32db3-972">When both the `Listen` and `UseUrls` approaches are used simultaneously, the `Listen` endpoints override the `UseUrls` endpoints.</span></span>
+* <span data-ttu-id="65f64-971">HTTPS 無法與這些方法搭配使用，除非在 HTTPS 端點設定中提供預設憑證 (例如，使用 `KestrelServerOptions` 設定或設定檔，如本主題稍早所示)。</span><span class="sxs-lookup"><span data-stu-id="65f64-971">HTTPS can't be used with these approaches unless a default certificate is provided in the HTTPS endpoint configuration (for example, using `KestrelServerOptions` configuration or a configuration file as shown earlier in this topic).</span></span>
+* <span data-ttu-id="65f64-972">當同時使用 `Listen` 和 `UseUrls` 方法時，`Listen` 端點會覆寫 `UseUrls` 端點。</span><span class="sxs-lookup"><span data-stu-id="65f64-972">When both the `Listen` and `UseUrls` approaches are used simultaneously, the `Listen` endpoints override the `UseUrls` endpoints.</span></span>
 
-### <a name="iis-endpoint-configuration"></a><span data-ttu-id="32db3-973">IIS 端點設定</span><span class="sxs-lookup"><span data-stu-id="32db3-973">IIS endpoint configuration</span></span>
+### <a name="iis-endpoint-configuration"></a><span data-ttu-id="65f64-973">IIS 端點設定</span><span class="sxs-lookup"><span data-stu-id="65f64-973">IIS endpoint configuration</span></span>
 
-<span data-ttu-id="32db3-974">使用 IIS 時，IIS 覆寫繫結的 URL 繫結是由 `Listen` 或 `UseUrls` 設定。</span><span class="sxs-lookup"><span data-stu-id="32db3-974">When using IIS, the URL bindings for IIS override bindings are set by either `Listen` or `UseUrls`.</span></span> <span data-ttu-id="32db3-975">如需詳細資訊，請參閱 [ASP.NET Core 模組](xref:host-and-deploy/aspnet-core-module)主題。</span><span class="sxs-lookup"><span data-stu-id="32db3-975">For more information, see the [ASP.NET Core Module](xref:host-and-deploy/aspnet-core-module) topic.</span></span>
+<span data-ttu-id="65f64-974">使用 IIS 時，IIS 覆寫繫結的 URL 繫結是由 `Listen` 或 `UseUrls` 設定。</span><span class="sxs-lookup"><span data-stu-id="65f64-974">When using IIS, the URL bindings for IIS override bindings are set by either `Listen` or `UseUrls`.</span></span> <span data-ttu-id="65f64-975">如需詳細資訊，請參閱 [ASP.NET Core 模組](xref:host-and-deploy/aspnet-core-module)主題。</span><span class="sxs-lookup"><span data-stu-id="65f64-975">For more information, see the [ASP.NET Core Module](xref:host-and-deploy/aspnet-core-module) topic.</span></span>
 
-## <a name="transport-configuration"></a><span data-ttu-id="32db3-976">傳輸組態</span><span class="sxs-lookup"><span data-stu-id="32db3-976">Transport configuration</span></span>
+## <a name="transport-configuration"></a><span data-ttu-id="65f64-976">傳輸組態</span><span class="sxs-lookup"><span data-stu-id="65f64-976">Transport configuration</span></span>
 
-<span data-ttu-id="32db3-977">隨著 ASP.NET Core 2.1 的發行，Kestrel 的預設傳輸不再根據 Libuv，而是改為根據受控通訊端。</span><span class="sxs-lookup"><span data-stu-id="32db3-977">With the release of ASP.NET Core 2.1, Kestrel's default transport is no longer based on Libuv but instead based on managed sockets.</span></span> <span data-ttu-id="32db3-978">對於升級到 2.1 且會呼叫 <xref:Microsoft.AspNetCore.Hosting.WebHostBuilderLibuvExtensions.UseLibuv*> 並相依於下列任一套件的 ASP.NET Core 2.0 應用程式來說，這是一項中斷性變更：</span><span class="sxs-lookup"><span data-stu-id="32db3-978">This is a breaking change for ASP.NET Core 2.0 apps upgrading to 2.1 that call <xref:Microsoft.AspNetCore.Hosting.WebHostBuilderLibuvExtensions.UseLibuv*> and depend on either of the following packages:</span></span>
+<span data-ttu-id="65f64-977">隨著 ASP.NET Core 2.1 的發行，Kestrel 的預設傳輸不再根據 Libuv，而是改為根據受控通訊端。</span><span class="sxs-lookup"><span data-stu-id="65f64-977">With the release of ASP.NET Core 2.1, Kestrel's default transport is no longer based on Libuv but instead based on managed sockets.</span></span> <span data-ttu-id="65f64-978">對於升級到 2.1 且會呼叫 <xref:Microsoft.AspNetCore.Hosting.WebHostBuilderLibuvExtensions.UseLibuv*> 並相依於下列任一套件的 ASP.NET Core 2.0 應用程式來說，這是一項中斷性變更：</span><span class="sxs-lookup"><span data-stu-id="65f64-978">This is a breaking change for ASP.NET Core 2.0 apps upgrading to 2.1 that call <xref:Microsoft.AspNetCore.Hosting.WebHostBuilderLibuvExtensions.UseLibuv*> and depend on either of the following packages:</span></span>
 
-* <span data-ttu-id="32db3-979">[Microsoft.AspNetCore.Server.Kestrel](https://www.nuget.org/packages/Microsoft.AspNetCore.Server.Kestrel/) (直接套件參考)</span><span class="sxs-lookup"><span data-stu-id="32db3-979">[Microsoft.AspNetCore.Server.Kestrel](https://www.nuget.org/packages/Microsoft.AspNetCore.Server.Kestrel/) (direct package reference)</span></span>
-* [<span data-ttu-id="32db3-980">Microsoft.AspNetCore.App</span><span class="sxs-lookup"><span data-stu-id="32db3-980">Microsoft.AspNetCore.App</span></span>](https://www.nuget.org/packages/Microsoft.AspNetCore.App/)
+* <span data-ttu-id="65f64-979">[Microsoft.AspNetCore.Server.Kestrel](https://www.nuget.org/packages/Microsoft.AspNetCore.Server.Kestrel/) (直接套件參考)</span><span class="sxs-lookup"><span data-stu-id="65f64-979">[Microsoft.AspNetCore.Server.Kestrel](https://www.nuget.org/packages/Microsoft.AspNetCore.Server.Kestrel/) (direct package reference)</span></span>
+* [<span data-ttu-id="65f64-980">Microsoft.AspNetCore.App</span><span class="sxs-lookup"><span data-stu-id="65f64-980">Microsoft.AspNetCore.App</span></span>](https://www.nuget.org/packages/Microsoft.AspNetCore.App/)
 
-<span data-ttu-id="32db3-981">針對需要使用 Libuv 的專案：</span><span class="sxs-lookup"><span data-stu-id="32db3-981">For projects that require the use of Libuv:</span></span>
+<span data-ttu-id="65f64-981">針對需要使用 Libuv 的專案：</span><span class="sxs-lookup"><span data-stu-id="65f64-981">For projects that require the use of Libuv:</span></span>
 
-* <span data-ttu-id="32db3-982">將 [Microsoft.AspNetCore.Server.Kestrel.Transport.Libuv](https://www.nuget.org/packages/Microsoft.AspNetCore.Server.Kestrel.Transport.Libuv/) 套件的相依性新增至應用程式的專案檔中：</span><span class="sxs-lookup"><span data-stu-id="32db3-982">Add a dependency for the [Microsoft.AspNetCore.Server.Kestrel.Transport.Libuv](https://www.nuget.org/packages/Microsoft.AspNetCore.Server.Kestrel.Transport.Libuv/) package to the app's project file:</span></span>
+* <span data-ttu-id="65f64-982">將 [Microsoft.AspNetCore.Server.Kestrel.Transport.Libuv](https://www.nuget.org/packages/Microsoft.AspNetCore.Server.Kestrel.Transport.Libuv/) 套件的相依性新增至應用程式的專案檔中：</span><span class="sxs-lookup"><span data-stu-id="65f64-982">Add a dependency for the [Microsoft.AspNetCore.Server.Kestrel.Transport.Libuv](https://www.nuget.org/packages/Microsoft.AspNetCore.Server.Kestrel.Transport.Libuv/) package to the app's project file:</span></span>
 
   ```xml
   <PackageReference Include="Microsoft.AspNetCore.Server.Kestrel.Transport.Libuv"
                     Version="{VERSION}" />
   ```
 
-* <span data-ttu-id="32db3-983">呼叫 <xref:Microsoft.AspNetCore.Hosting.WebHostBuilderLibuvExtensions.UseLibuv*>：</span><span class="sxs-lookup"><span data-stu-id="32db3-983">Call <xref:Microsoft.AspNetCore.Hosting.WebHostBuilderLibuvExtensions.UseLibuv*>:</span></span>
+* <span data-ttu-id="65f64-983">呼叫 <xref:Microsoft.AspNetCore.Hosting.WebHostBuilderLibuvExtensions.UseLibuv*>：</span><span class="sxs-lookup"><span data-stu-id="65f64-983">Call <xref:Microsoft.AspNetCore.Hosting.WebHostBuilderLibuvExtensions.UseLibuv*>:</span></span>
 
   ```csharp
   public class Program
@@ -2653,41 +2654,41 @@ Listening on the following addresses: http://127.0.0.1:48508
   }
   ```
 
-### <a name="url-prefixes"></a><span data-ttu-id="32db3-984">URL 前置詞</span><span class="sxs-lookup"><span data-stu-id="32db3-984">URL prefixes</span></span>
+### <a name="url-prefixes"></a><span data-ttu-id="65f64-984">URL 前置詞</span><span class="sxs-lookup"><span data-stu-id="65f64-984">URL prefixes</span></span>
 
-<span data-ttu-id="32db3-985">使用 `UseUrls`、`--urls` 命令列引數、`urls` 主機組態索引鍵或 `ASPNETCORE_URLS` 環境變數時，URL 前置詞可以採用下列任一格式。</span><span class="sxs-lookup"><span data-stu-id="32db3-985">When using `UseUrls`, `--urls` command-line argument, `urls` host configuration key, or `ASPNETCORE_URLS` environment variable, the URL prefixes can be in any of the following formats.</span></span>
+<span data-ttu-id="65f64-985">使用 `UseUrls`、`--urls` 命令列引數、`urls` 主機組態索引鍵或 `ASPNETCORE_URLS` 環境變數時，URL 前置詞可以採用下列任一格式。</span><span class="sxs-lookup"><span data-stu-id="65f64-985">When using `UseUrls`, `--urls` command-line argument, `urls` host configuration key, or `ASPNETCORE_URLS` environment variable, the URL prefixes can be in any of the following formats.</span></span>
 
-<span data-ttu-id="32db3-986">只有 HTTP URL 前置詞有效。</span><span class="sxs-lookup"><span data-stu-id="32db3-986">Only HTTP URL prefixes are valid.</span></span> <span data-ttu-id="32db3-987">使用 `UseUrls` 來設定 URL 繫結時，Kestrel 不支援 HTTPS。</span><span class="sxs-lookup"><span data-stu-id="32db3-987">Kestrel doesn't support HTTPS when configuring URL bindings using `UseUrls`.</span></span>
+<span data-ttu-id="65f64-986">只有 HTTP URL 前置詞有效。</span><span class="sxs-lookup"><span data-stu-id="65f64-986">Only HTTP URL prefixes are valid.</span></span> <span data-ttu-id="65f64-987">使用 `UseUrls` 來設定 URL 繫結時，Kestrel 不支援 HTTPS。</span><span class="sxs-lookup"><span data-stu-id="65f64-987">Kestrel doesn't support HTTPS when configuring URL bindings using `UseUrls`.</span></span>
 
-* <span data-ttu-id="32db3-988">IPv4 位址與連接埠號碼</span><span class="sxs-lookup"><span data-stu-id="32db3-988">IPv4 address with port number</span></span>
+* <span data-ttu-id="65f64-988">IPv4 位址與連接埠號碼</span><span class="sxs-lookup"><span data-stu-id="65f64-988">IPv4 address with port number</span></span>
 
   ```
   http://65.55.39.10:80/
   ```
 
-  <span data-ttu-id="32db3-989">`0.0.0.0` 是繫結至所有 IPv4 位址的特殊情況。</span><span class="sxs-lookup"><span data-stu-id="32db3-989">`0.0.0.0` is a special case that binds to all IPv4 addresses.</span></span>
+  <span data-ttu-id="65f64-989">`0.0.0.0` 是繫結至所有 IPv4 位址的特殊情況。</span><span class="sxs-lookup"><span data-stu-id="65f64-989">`0.0.0.0` is a special case that binds to all IPv4 addresses.</span></span>
 
-* <span data-ttu-id="32db3-990">IPv6 位址與連接埠號碼</span><span class="sxs-lookup"><span data-stu-id="32db3-990">IPv6 address with port number</span></span>
+* <span data-ttu-id="65f64-990">IPv6 位址與連接埠號碼</span><span class="sxs-lookup"><span data-stu-id="65f64-990">IPv6 address with port number</span></span>
 
   ```
   http://[0:0:0:0:0:ffff:4137:270a]:80/
   ```
 
-  <span data-ttu-id="32db3-991">`[::]` 是相當於 IPv4 `0.0.0.0` 的 IPv6 對等項目。</span><span class="sxs-lookup"><span data-stu-id="32db3-991">`[::]` is the IPv6 equivalent of IPv4 `0.0.0.0`.</span></span>
+  <span data-ttu-id="65f64-991">`[::]` 是相當於 IPv4 `0.0.0.0` 的 IPv6 對等項目。</span><span class="sxs-lookup"><span data-stu-id="65f64-991">`[::]` is the IPv6 equivalent of IPv4 `0.0.0.0`.</span></span>
 
-* <span data-ttu-id="32db3-992">主機名稱與連接埠號碼</span><span class="sxs-lookup"><span data-stu-id="32db3-992">Host name with port number</span></span>
+* <span data-ttu-id="65f64-992">主機名稱與連接埠號碼</span><span class="sxs-lookup"><span data-stu-id="65f64-992">Host name with port number</span></span>
 
   ```
   http://contoso.com:80/
   http://*:80/
   ```
 
-  <span data-ttu-id="32db3-993">主機名稱 `*` 和 `+` 並不特殊。</span><span class="sxs-lookup"><span data-stu-id="32db3-993">Host names, `*`, and `+`, aren't special.</span></span> <span data-ttu-id="32db3-994">無法辨識為有效 IP 位址或 `localhost` 的任何項目，都會繫結至所有 IPv4 和 IPv6 IP。</span><span class="sxs-lookup"><span data-stu-id="32db3-994">Anything not recognized as a valid IP address or `localhost` binds to all IPv4 and IPv6 IPs.</span></span> <span data-ttu-id="32db3-995">若要在相同連接埠上將不同的主機名稱繫結至不同的 ASP.NET Core 應用程式，請使用 [HTTP.sys](xref:fundamentals/servers/httpsys) 或反向 Proxy 伺服器 (例如 IIS、Nginx 或 Apache)。</span><span class="sxs-lookup"><span data-stu-id="32db3-995">To bind different host names to different ASP.NET Core apps on the same port, use [HTTP.sys](xref:fundamentals/servers/httpsys) or a reverse proxy server, such as IIS, Nginx, or Apache.</span></span>
+  <span data-ttu-id="65f64-993">主機名稱 `*` 和 `+` 並不特殊。</span><span class="sxs-lookup"><span data-stu-id="65f64-993">Host names, `*`, and `+`, aren't special.</span></span> <span data-ttu-id="65f64-994">無法辨識為有效 IP 位址或 `localhost` 的任何項目，都會繫結至所有 IPv4 和 IPv6 IP。</span><span class="sxs-lookup"><span data-stu-id="65f64-994">Anything not recognized as a valid IP address or `localhost` binds to all IPv4 and IPv6 IPs.</span></span> <span data-ttu-id="65f64-995">若要在相同連接埠上將不同的主機名稱繫結至不同的 ASP.NET Core 應用程式，請使用 [HTTP.sys](xref:fundamentals/servers/httpsys) 或反向 Proxy 伺服器 (例如 IIS、Nginx 或 Apache)。</span><span class="sxs-lookup"><span data-stu-id="65f64-995">To bind different host names to different ASP.NET Core apps on the same port, use [HTTP.sys](xref:fundamentals/servers/httpsys) or a reverse proxy server, such as IIS, Nginx, or Apache.</span></span>
 
   > [!WARNING]
-  > <span data-ttu-id="32db3-996">裝載於反向 Proxy 組態需要[主機篩選](#host-filtering)。</span><span class="sxs-lookup"><span data-stu-id="32db3-996">Hosting in a reverse proxy configuration requires [host filtering](#host-filtering).</span></span>
+  > <span data-ttu-id="65f64-996">裝載於反向 Proxy 組態需要[主機篩選](#host-filtering)。</span><span class="sxs-lookup"><span data-stu-id="65f64-996">Hosting in a reverse proxy configuration requires [host filtering](#host-filtering).</span></span>
 
-* <span data-ttu-id="32db3-997">主機 `localhost` 名稱與連接埠號碼，或回送 IP 與連接埠號碼</span><span class="sxs-lookup"><span data-stu-id="32db3-997">Host `localhost` name with port number or loopback IP with port number</span></span>
+* <span data-ttu-id="65f64-997">主機 `localhost` 名稱與連接埠號碼，或回送 IP 與連接埠號碼</span><span class="sxs-lookup"><span data-stu-id="65f64-997">Host `localhost` name with port number or loopback IP with port number</span></span>
 
   ```
   http://localhost:5000/
@@ -2695,19 +2696,19 @@ Listening on the following addresses: http://127.0.0.1:48508
   http://[::1]:5000/
   ```
 
-  <span data-ttu-id="32db3-998">如果指定 `localhost`，Kestrel 會嘗試同時繫結至 IPv4 和 IPv6 回送介面。</span><span class="sxs-lookup"><span data-stu-id="32db3-998">When `localhost` is specified, Kestrel attempts to bind to both IPv4 and IPv6 loopback interfaces.</span></span> <span data-ttu-id="32db3-999">如果所要求的連接埠在任一個回送介面上由另一個服務使用，則 Kestrel 無法啟動。</span><span class="sxs-lookup"><span data-stu-id="32db3-999">If the requested port is in use by another service on either loopback interface, Kestrel fails to start.</span></span> <span data-ttu-id="32db3-1000">如果任一回送介面由於任何其他原因 (最常見的原因是不支援 IPv6) 無法使用，Kestrel 就會記錄警告。</span><span class="sxs-lookup"><span data-stu-id="32db3-1000">If either loopback interface is unavailable for any other reason (most commonly because IPv6 isn't supported), Kestrel logs a warning.</span></span>
+  <span data-ttu-id="65f64-998">如果指定 `localhost`，Kestrel 會嘗試同時繫結至 IPv4 和 IPv6 回送介面。</span><span class="sxs-lookup"><span data-stu-id="65f64-998">When `localhost` is specified, Kestrel attempts to bind to both IPv4 and IPv6 loopback interfaces.</span></span> <span data-ttu-id="65f64-999">如果所要求的連接埠在任一個回送介面上由另一個服務使用，則 Kestrel 無法啟動。</span><span class="sxs-lookup"><span data-stu-id="65f64-999">If the requested port is in use by another service on either loopback interface, Kestrel fails to start.</span></span> <span data-ttu-id="65f64-1000">如果任一回送介面由於任何其他原因 (最常見的原因是不支援 IPv6) 無法使用，Kestrel 就會記錄警告。</span><span class="sxs-lookup"><span data-stu-id="65f64-1000">If either loopback interface is unavailable for any other reason (most commonly because IPv6 isn't supported), Kestrel logs a warning.</span></span>
 
-## <a name="host-filtering"></a><span data-ttu-id="32db3-1001">主機篩選</span><span class="sxs-lookup"><span data-stu-id="32db3-1001">Host filtering</span></span>
+## <a name="host-filtering"></a><span data-ttu-id="65f64-1001">主機篩選</span><span class="sxs-lookup"><span data-stu-id="65f64-1001">Host filtering</span></span>
 
-<span data-ttu-id="32db3-1002">雖然 Kestrel 根據前置詞來支援組態，例如 `http://example.com:5000`，Kestrel 大多會忽略主機名稱。</span><span class="sxs-lookup"><span data-stu-id="32db3-1002">While Kestrel supports configuration based on prefixes such as `http://example.com:5000`, Kestrel largely ignores the host name.</span></span> <span data-ttu-id="32db3-1003">主機 `localhost` 是特殊情況，用來繫結到回送位址。</span><span class="sxs-lookup"><span data-stu-id="32db3-1003">Host `localhost` is a special case used for binding to loopback addresses.</span></span> <span data-ttu-id="32db3-1004">任何非明確 IP 位址的主機，會繫結至所有公用 IP 位址。</span><span class="sxs-lookup"><span data-stu-id="32db3-1004">Any host other than an explicit IP address binds to all public IP addresses.</span></span> <span data-ttu-id="32db3-1005">`Host` 標頭未驗證。</span><span class="sxs-lookup"><span data-stu-id="32db3-1005">`Host` headers aren't validated.</span></span>
+<span data-ttu-id="65f64-1002">雖然 Kestrel 根據前置詞來支援組態，例如 `http://example.com:5000`，Kestrel 大多會忽略主機名稱。</span><span class="sxs-lookup"><span data-stu-id="65f64-1002">While Kestrel supports configuration based on prefixes such as `http://example.com:5000`, Kestrel largely ignores the host name.</span></span> <span data-ttu-id="65f64-1003">主機 `localhost` 是特殊情況，用來繫結到回送位址。</span><span class="sxs-lookup"><span data-stu-id="65f64-1003">Host `localhost` is a special case used for binding to loopback addresses.</span></span> <span data-ttu-id="65f64-1004">任何非明確 IP 位址的主機，會繫結至所有公用 IP 位址。</span><span class="sxs-lookup"><span data-stu-id="65f64-1004">Any host other than an explicit IP address binds to all public IP addresses.</span></span> <span data-ttu-id="65f64-1005">`Host` 標頭未驗證。</span><span class="sxs-lookup"><span data-stu-id="65f64-1005">`Host` headers aren't validated.</span></span>
 
-<span data-ttu-id="32db3-1006">因應措施是使用主機篩選中介軟體。</span><span class="sxs-lookup"><span data-stu-id="32db3-1006">As a workaround, use Host Filtering Middleware.</span></span> <span data-ttu-id="32db3-1007">主機篩選中介軟體是由[AspNetCore. HostFiltering](https://www.nuget.org/packages/Microsoft.AspNetCore.HostFiltering)套件所提供，它包含在[AspNetCore 中繼套件](xref:fundamentals/metapackage-app) (ASP.NET Core 2.1 或 2.2) 中。</span><span class="sxs-lookup"><span data-stu-id="32db3-1007">Host Filtering Middleware is provided by the [Microsoft.AspNetCore.HostFiltering](https://www.nuget.org/packages/Microsoft.AspNetCore.HostFiltering) package, which is included in the [Microsoft.AspNetCore.App metapackage](xref:fundamentals/metapackage-app) (ASP.NET Core 2.1 or 2.2).</span></span> <span data-ttu-id="32db3-1008">中介軟體是由 <xref:Microsoft.AspNetCore.WebHost.CreateDefaultBuilder*> 所新增，它會呼叫 <xref:Microsoft.AspNetCore.Builder.HostFilteringServicesExtensions.AddHostFiltering*>：</span><span class="sxs-lookup"><span data-stu-id="32db3-1008">The middleware is added by <xref:Microsoft.AspNetCore.WebHost.CreateDefaultBuilder*>, which calls <xref:Microsoft.AspNetCore.Builder.HostFilteringServicesExtensions.AddHostFiltering*>:</span></span>
+<span data-ttu-id="65f64-1006">因應措施是使用主機篩選中介軟體。</span><span class="sxs-lookup"><span data-stu-id="65f64-1006">As a workaround, use Host Filtering Middleware.</span></span> <span data-ttu-id="65f64-1007">主機篩選中介軟體是由 [AspNetCore HostFiltering](https://www.nuget.org/packages/Microsoft.AspNetCore.HostFiltering) 套件所提供，此套件隨附于 [AspNetCore 中繼套件](xref:fundamentals/metapackage-app) (ASP.NET Core 2.1 或 2.2) 。</span><span class="sxs-lookup"><span data-stu-id="65f64-1007">Host Filtering Middleware is provided by the [Microsoft.AspNetCore.HostFiltering](https://www.nuget.org/packages/Microsoft.AspNetCore.HostFiltering) package, which is included in the [Microsoft.AspNetCore.App metapackage](xref:fundamentals/metapackage-app) (ASP.NET Core 2.1 or 2.2).</span></span> <span data-ttu-id="65f64-1008">中介軟體是由 <xref:Microsoft.AspNetCore.WebHost.CreateDefaultBuilder*> 所新增，它會呼叫 <xref:Microsoft.AspNetCore.Builder.HostFilteringServicesExtensions.AddHostFiltering*>：</span><span class="sxs-lookup"><span data-stu-id="65f64-1008">The middleware is added by <xref:Microsoft.AspNetCore.WebHost.CreateDefaultBuilder*>, which calls <xref:Microsoft.AspNetCore.Builder.HostFilteringServicesExtensions.AddHostFiltering*>:</span></span>
 
 [!code-csharp[](kestrel/samples-snapshot/2.x/KestrelSample/Program.cs?name=snippet_Program&highlight=9)]
 
-<span data-ttu-id="32db3-1009">預設停用主機篩選中介軟體。</span><span class="sxs-lookup"><span data-stu-id="32db3-1009">Host Filtering Middleware is disabled by default.</span></span> <span data-ttu-id="32db3-1010">若要啟用中介軟體，請 `AllowedHosts` 在 appsettings*上的appsettings.js*中定義索引鍵 / \* \<EnvironmentName> 。json\*。</span><span class="sxs-lookup"><span data-stu-id="32db3-1010">To enable the middleware, define an `AllowedHosts` key in *appsettings.json*/*appsettings.\<EnvironmentName>.json*.</span></span> <span data-ttu-id="32db3-1011">此值是以分號分隔的主機名稱清單，不含連接埠號碼：</span><span class="sxs-lookup"><span data-stu-id="32db3-1011">The value is a semicolon-delimited list of host names without port numbers:</span></span>
+<span data-ttu-id="65f64-1009">預設停用主機篩選中介軟體。</span><span class="sxs-lookup"><span data-stu-id="65f64-1009">Host Filtering Middleware is disabled by default.</span></span> <span data-ttu-id="65f64-1010">若要啟用中介軟體，請 `AllowedHosts` 在 appsettings*上的appsettings.js*中定義金鑰 / \* \<EnvironmentName> 。json\*。</span><span class="sxs-lookup"><span data-stu-id="65f64-1010">To enable the middleware, define an `AllowedHosts` key in *appsettings.json*/*appsettings.\<EnvironmentName>.json*.</span></span> <span data-ttu-id="65f64-1011">此值是以分號分隔的主機名稱清單，不含連接埠號碼：</span><span class="sxs-lookup"><span data-stu-id="65f64-1011">The value is a semicolon-delimited list of host names without port numbers:</span></span>
 
-<span data-ttu-id="32db3-1012">*appsettings.js*：</span><span class="sxs-lookup"><span data-stu-id="32db3-1012">*appsettings.json*:</span></span>
+<span data-ttu-id="65f64-1012">*appsettings.js*：</span><span class="sxs-lookup"><span data-stu-id="65f64-1012">*appsettings.json*:</span></span>
 
 ```json
 {
@@ -2716,46 +2717,46 @@ Listening on the following addresses: http://127.0.0.1:48508
 ```
 
 > [!NOTE]
-> <span data-ttu-id="32db3-1013">[轉送的標頭中介軟體](xref:host-and-deploy/proxy-load-balancer)也有 <xref:Microsoft.AspNetCore.Builder.ForwardedHeadersOptions.AllowedHosts> 選項。</span><span class="sxs-lookup"><span data-stu-id="32db3-1013">[Forwarded Headers Middleware](xref:host-and-deploy/proxy-load-balancer) also has an <xref:Microsoft.AspNetCore.Builder.ForwardedHeadersOptions.AllowedHosts> option.</span></span> <span data-ttu-id="32db3-1014">在不同的案例中，轉送標頭中介軟體和主機篩選中介軟體有類似的功能。</span><span class="sxs-lookup"><span data-stu-id="32db3-1014">Forwarded Headers Middleware and Host Filtering Middleware have similar functionality for different scenarios.</span></span> <span data-ttu-id="32db3-1015">當不保留 `Host` 標頭，卻使用反向 Proxy 伺服器或負載平衡器轉送要求時，可使用轉送標頭中介軟體設定 `AllowedHosts`。</span><span class="sxs-lookup"><span data-stu-id="32db3-1015">Setting `AllowedHosts` with Forwarded Headers Middleware is appropriate when the `Host` header isn't preserved while forwarding requests with a reverse proxy server or load balancer.</span></span> <span data-ttu-id="32db3-1016">當使用 Kestrel 作為公眾對應 Edge Server，或直接轉送 `Host` 標頭時，可使用主機篩選中介軟體設定 `AllowedHosts`。</span><span class="sxs-lookup"><span data-stu-id="32db3-1016">Setting `AllowedHosts` with Host Filtering Middleware is appropriate when Kestrel is used as a public-facing edge server or when the `Host` header is directly forwarded.</span></span>
+> <span data-ttu-id="65f64-1013">[轉送的標頭中介軟體](xref:host-and-deploy/proxy-load-balancer)也有 <xref:Microsoft.AspNetCore.Builder.ForwardedHeadersOptions.AllowedHosts> 選項。</span><span class="sxs-lookup"><span data-stu-id="65f64-1013">[Forwarded Headers Middleware](xref:host-and-deploy/proxy-load-balancer) also has an <xref:Microsoft.AspNetCore.Builder.ForwardedHeadersOptions.AllowedHosts> option.</span></span> <span data-ttu-id="65f64-1014">在不同的案例中，轉送標頭中介軟體和主機篩選中介軟體有類似的功能。</span><span class="sxs-lookup"><span data-stu-id="65f64-1014">Forwarded Headers Middleware and Host Filtering Middleware have similar functionality for different scenarios.</span></span> <span data-ttu-id="65f64-1015">當不保留 `Host` 標頭，卻使用反向 Proxy 伺服器或負載平衡器轉送要求時，可使用轉送標頭中介軟體設定 `AllowedHosts`。</span><span class="sxs-lookup"><span data-stu-id="65f64-1015">Setting `AllowedHosts` with Forwarded Headers Middleware is appropriate when the `Host` header isn't preserved while forwarding requests with a reverse proxy server or load balancer.</span></span> <span data-ttu-id="65f64-1016">當使用 Kestrel 作為公眾對應 Edge Server，或直接轉送 `Host` 標頭時，可使用主機篩選中介軟體設定 `AllowedHosts`。</span><span class="sxs-lookup"><span data-stu-id="65f64-1016">Setting `AllowedHosts` with Host Filtering Middleware is appropriate when Kestrel is used as a public-facing edge server or when the `Host` header is directly forwarded.</span></span>
 >
-> <span data-ttu-id="32db3-1017">如需轉送標頭中介軟體的詳細資訊，請參閱<xref:host-and-deploy/proxy-load-balancer>。</span><span class="sxs-lookup"><span data-stu-id="32db3-1017">For more information on Forwarded Headers Middleware, see <xref:host-and-deploy/proxy-load-balancer>.</span></span>
+> <span data-ttu-id="65f64-1017">如需轉送標頭中介軟體的詳細資訊，請參閱<xref:host-and-deploy/proxy-load-balancer>。</span><span class="sxs-lookup"><span data-stu-id="65f64-1017">For more information on Forwarded Headers Middleware, see <xref:host-and-deploy/proxy-load-balancer>.</span></span>
 
 ::: moniker-end
 
-## <a name="http11-request-draining"></a><span data-ttu-id="32db3-1018">HTTP/1.1 要求清空</span><span class="sxs-lookup"><span data-stu-id="32db3-1018">HTTP/1.1 request draining</span></span>
+## <a name="http11-request-draining"></a><span data-ttu-id="65f64-1018">HTTP/1.1 要求清空</span><span class="sxs-lookup"><span data-stu-id="65f64-1018">HTTP/1.1 request draining</span></span>
 
-<span data-ttu-id="32db3-1019">開啟 HTTP 連接非常耗時。</span><span class="sxs-lookup"><span data-stu-id="32db3-1019">Opening HTTP connections is time consuming.</span></span> <span data-ttu-id="32db3-1020">針對 HTTPS，這也是耗用大量資源。</span><span class="sxs-lookup"><span data-stu-id="32db3-1020">For HTTPS, it's also resource intensive.</span></span> <span data-ttu-id="32db3-1021">因此，Kestrel 會嘗試每個 HTTP/1.1 通訊協定重複使用連接。</span><span class="sxs-lookup"><span data-stu-id="32db3-1021">Therefore, Kestrel tries to reuse connections per the HTTP/1.1 protocol.</span></span> <span data-ttu-id="32db3-1022">要求主體必須完全取用，才能重複使用連接。</span><span class="sxs-lookup"><span data-stu-id="32db3-1022">A request body must be fully consumed to allow the connection to be reused.</span></span> <span data-ttu-id="32db3-1023">應用程式不一定會使用要求主體，例如伺服器傳回重新 `POST` 導向或404回應的要求。</span><span class="sxs-lookup"><span data-stu-id="32db3-1023">The app doesn't always consume the request body, such as a `POST` requests where the server returns a redirect or 404 response.</span></span> <span data-ttu-id="32db3-1024">在 `POST` -重新導向案例中：</span><span class="sxs-lookup"><span data-stu-id="32db3-1024">In the `POST`-redirect case:</span></span>
+<span data-ttu-id="65f64-1019">開啟 HTTP 連接相當耗時。</span><span class="sxs-lookup"><span data-stu-id="65f64-1019">Opening HTTP connections is time consuming.</span></span> <span data-ttu-id="65f64-1020">若是 HTTPS，也需要大量資源。</span><span class="sxs-lookup"><span data-stu-id="65f64-1020">For HTTPS, it's also resource intensive.</span></span> <span data-ttu-id="65f64-1021">因此，Kestrel 會嘗試針對每個 HTTP/1.1 通訊協定重複使用連接。</span><span class="sxs-lookup"><span data-stu-id="65f64-1021">Therefore, Kestrel tries to reuse connections per the HTTP/1.1 protocol.</span></span> <span data-ttu-id="65f64-1022">要求主體必須完全取用，才能重複使用連線。</span><span class="sxs-lookup"><span data-stu-id="65f64-1022">A request body must be fully consumed to allow the connection to be reused.</span></span> <span data-ttu-id="65f64-1023">應用程式不一定會取用要求主體，例如伺服器傳回重新 `POST` 導向或404回應的要求。</span><span class="sxs-lookup"><span data-stu-id="65f64-1023">The app doesn't always consume the request body, such as a `POST` requests where the server returns a redirect or 404 response.</span></span> <span data-ttu-id="65f64-1024">在 `POST` -重新導向案例中：</span><span class="sxs-lookup"><span data-stu-id="65f64-1024">In the `POST`-redirect case:</span></span>
 
-* <span data-ttu-id="32db3-1025">用戶端可能已經傳送部分 `POST` 資料。</span><span class="sxs-lookup"><span data-stu-id="32db3-1025">The client may already have sent part of the `POST` data.</span></span>
-* <span data-ttu-id="32db3-1026">伺服器會寫入301回應。</span><span class="sxs-lookup"><span data-stu-id="32db3-1026">The server writes the 301 response.</span></span>
-* <span data-ttu-id="32db3-1027">連接無法用於新的要求，直到 `POST` 先前要求主體的資料完全讀取為止。</span><span class="sxs-lookup"><span data-stu-id="32db3-1027">The connection can't be used for a new request until the `POST` data from the previous request body has been fully read.</span></span>
-* <span data-ttu-id="32db3-1028">Kestrel 嘗試清空要求主體。</span><span class="sxs-lookup"><span data-stu-id="32db3-1028">Kestrel tries to drain the request body.</span></span> <span data-ttu-id="32db3-1029">清空要求本文表示讀取和捨棄資料，而不進行處理。</span><span class="sxs-lookup"><span data-stu-id="32db3-1029">Draining the request body means reading and discarding the data without processing it.</span></span>
+* <span data-ttu-id="65f64-1025">用戶端可能已經傳送部分 `POST` 資料。</span><span class="sxs-lookup"><span data-stu-id="65f64-1025">The client may already have sent part of the `POST` data.</span></span>
+* <span data-ttu-id="65f64-1026">伺服器會寫入301回應。</span><span class="sxs-lookup"><span data-stu-id="65f64-1026">The server writes the 301 response.</span></span>
+* <span data-ttu-id="65f64-1027">連線無法用於新的要求，直到 `POST` 前一個要求主體的資料已完全讀取為止。</span><span class="sxs-lookup"><span data-stu-id="65f64-1027">The connection can't be used for a new request until the `POST` data from the previous request body has been fully read.</span></span>
+* <span data-ttu-id="65f64-1028">Kestrel 會嘗試清空要求主體。</span><span class="sxs-lookup"><span data-stu-id="65f64-1028">Kestrel tries to drain the request body.</span></span> <span data-ttu-id="65f64-1029">清空要求主體表示在不處理資料的情況下讀取和捨棄資料。</span><span class="sxs-lookup"><span data-stu-id="65f64-1029">Draining the request body means reading and discarding the data without processing it.</span></span>
 
-<span data-ttu-id="32db3-1030">清空程式可讓您在允許重複使用連線時，以及釋放任何剩餘資料所需的時間之間進行 tradoff：</span><span class="sxs-lookup"><span data-stu-id="32db3-1030">The draining process makes a tradoff between allowing the connection to be reused and the time it takes to drain any remaining data:</span></span>
+<span data-ttu-id="65f64-1030">清空程式可讓您在允許連線重複使用時，以及清空任何剩餘資料所需的時間之間進行 tradoff：</span><span class="sxs-lookup"><span data-stu-id="65f64-1030">The draining process makes a tradoff between allowing the connection to be reused and the time it takes to drain any remaining data:</span></span>
 
-* <span data-ttu-id="32db3-1031">清空的超時時間為5秒，無法設定。</span><span class="sxs-lookup"><span data-stu-id="32db3-1031">Draining has a timeout of five seconds, which isn't configurable.</span></span>
-* <span data-ttu-id="32db3-1032">如果或標頭所指定的所有資料都 `Content-Length` `Transfer-Encoding` 未在超時之前讀取，連接就會關閉。</span><span class="sxs-lookup"><span data-stu-id="32db3-1032">If all of the data specified by the `Content-Length` or `Transfer-Encoding` header hasn't been read before the timeout, the connection is closed.</span></span>
+* <span data-ttu-id="65f64-1031">清空有五秒的時間，無法設定。</span><span class="sxs-lookup"><span data-stu-id="65f64-1031">Draining has a timeout of five seconds, which isn't configurable.</span></span>
+* <span data-ttu-id="65f64-1032">如果或標頭所指定的所有資料在 `Content-Length` `Transfer-Encoding` 此時間之前未被讀取，則連接會關閉。</span><span class="sxs-lookup"><span data-stu-id="65f64-1032">If all of the data specified by the `Content-Length` or `Transfer-Encoding` header hasn't been read before the timeout, the connection is closed.</span></span>
 
-<span data-ttu-id="32db3-1033">有時候，您可能會想要在寫入回應之前或之後立即終止要求。</span><span class="sxs-lookup"><span data-stu-id="32db3-1033">Sometimes you may want to terminate the request immediately, before or after writing the response.</span></span> <span data-ttu-id="32db3-1034">例如，用戶端可能會有限制的資料上限，因此限制上傳的資料可能是優先順序。</span><span class="sxs-lookup"><span data-stu-id="32db3-1034">For example, clients may have restrictive data caps, so limiting uploaded data might be a priority.</span></span> <span data-ttu-id="32db3-1035">在這種情況下，若要終止要求，請從控制器、頁面或中介軟體中呼叫[HttpCoNtext. Abort。](xref:Microsoft.AspNetCore.Http.HttpContext.Abort%2A) Razor</span><span class="sxs-lookup"><span data-stu-id="32db3-1035">In such cases to terminate a request, call [HttpContext.Abort](xref:Microsoft.AspNetCore.Http.HttpContext.Abort%2A) from a controller, Razor Page, or middleware.</span></span>
+<span data-ttu-id="65f64-1033">有時您可能會想要在寫入回應之前或之後立即終止要求。</span><span class="sxs-lookup"><span data-stu-id="65f64-1033">Sometimes you may want to terminate the request immediately, before or after writing the response.</span></span> <span data-ttu-id="65f64-1034">例如，用戶端可能會有限制性的資料上限，因此限制上傳的資料可能是優先考慮。</span><span class="sxs-lookup"><span data-stu-id="65f64-1034">For example, clients may have restrictive data caps, so limiting uploaded data might be a priority.</span></span> <span data-ttu-id="65f64-1035">在這種情況下，若要終止要求，請從控制器、頁面或中介軟體呼叫[HttpCoNtext. Abort](xref:Microsoft.AspNetCore.Http.HttpContext.Abort%2A) 。 Razor</span><span class="sxs-lookup"><span data-stu-id="65f64-1035">In such cases to terminate a request, call [HttpContext.Abort](xref:Microsoft.AspNetCore.Http.HttpContext.Abort%2A) from a controller, Razor Page, or middleware.</span></span>
 
-<span data-ttu-id="32db3-1036">呼叫有幾點注意事項 `Abort` ：</span><span class="sxs-lookup"><span data-stu-id="32db3-1036">There are caveats to calling `Abort`:</span></span>
+<span data-ttu-id="65f64-1036">呼叫時有一些注意事項 `Abort` ：</span><span class="sxs-lookup"><span data-stu-id="65f64-1036">There are caveats to calling `Abort`:</span></span>
 
-* <span data-ttu-id="32db3-1037">建立新的連接可能會變慢且昂貴。</span><span class="sxs-lookup"><span data-stu-id="32db3-1037">Creating new connections can be slow and expensive.</span></span>
-* <span data-ttu-id="32db3-1038">不保證用戶端在連接關閉之前已讀取回應。</span><span class="sxs-lookup"><span data-stu-id="32db3-1038">There's no guarantee that the client has read the response before the connection closes.</span></span>
-* <span data-ttu-id="32db3-1039">呼叫 `Abort` 應該很罕見，並保留給嚴重的錯誤案例，而不是常見的錯誤。</span><span class="sxs-lookup"><span data-stu-id="32db3-1039">Calling `Abort` should be rare and reserved for severe error cases, not common errors.</span></span>
-  * <span data-ttu-id="32db3-1040">只有 `Abort` 在需要解決特定問題時，才呼叫。</span><span class="sxs-lookup"><span data-stu-id="32db3-1040">Only call `Abort` when a specific problem needs to be solved.</span></span> <span data-ttu-id="32db3-1041">例如， `Abort` 如果惡意用戶端正在嘗試資料， `POST` 或當用戶端程式代碼中發生錯誤而導致大型或多個要求時，請呼叫。</span><span class="sxs-lookup"><span data-stu-id="32db3-1041">For example, call `Abort` if malicious clients are trying to `POST` data or when there's a bug in client code that causes large or numerous requests.</span></span>
-  * <span data-ttu-id="32db3-1042">請勿呼叫 `Abort` 常見的錯誤狀況，例如 HTTP 404 (找不到) 。</span><span class="sxs-lookup"><span data-stu-id="32db3-1042">Don't call `Abort` for common error situations, such as HTTP 404 (Not Found).</span></span>
+* <span data-ttu-id="65f64-1037">建立新的連接可能很慢且昂貴。</span><span class="sxs-lookup"><span data-stu-id="65f64-1037">Creating new connections can be slow and expensive.</span></span>
+* <span data-ttu-id="65f64-1038">在連接關閉之前，不保證用戶端已讀取回應。</span><span class="sxs-lookup"><span data-stu-id="65f64-1038">There's no guarantee that the client has read the response before the connection closes.</span></span>
+* <span data-ttu-id="65f64-1039">呼叫 `Abort` 應該很罕見，而且會保留給嚴重的錯誤案例，而不是常見的錯誤。</span><span class="sxs-lookup"><span data-stu-id="65f64-1039">Calling `Abort` should be rare and reserved for severe error cases, not common errors.</span></span>
+  * <span data-ttu-id="65f64-1040">只有 `Abort` 在需要解決特定問題時才呼叫。</span><span class="sxs-lookup"><span data-stu-id="65f64-1040">Only call `Abort` when a specific problem needs to be solved.</span></span> <span data-ttu-id="65f64-1041">例如， `Abort` 如果惡意用戶端嘗試 `POST` 資料或用戶端程式代碼中有錯誤，而導致大量或許多要求，請呼叫。</span><span class="sxs-lookup"><span data-stu-id="65f64-1041">For example, call `Abort` if malicious clients are trying to `POST` data or when there's a bug in client code that causes large or numerous requests.</span></span>
+  * <span data-ttu-id="65f64-1042">請勿呼叫 `Abort` 常見的錯誤狀況，例如 HTTP 404 (找不到) 。</span><span class="sxs-lookup"><span data-stu-id="65f64-1042">Don't call `Abort` for common error situations, such as HTTP 404 (Not Found).</span></span>
 
-<span data-ttu-id="32db3-1043">呼叫[HttpResponse](xref:Microsoft.AspNetCore.Http.HttpResponse.CompleteAsync%2A)之前，請先呼叫 CompleteAsync `Abort` ，以確保伺服器已完成寫入回應。</span><span class="sxs-lookup"><span data-stu-id="32db3-1043">Calling [HttpResponse.CompleteAsync](xref:Microsoft.AspNetCore.Http.HttpResponse.CompleteAsync%2A) before calling `Abort` ensures that the server has completed writing the response.</span></span> <span data-ttu-id="32db3-1044">不過，用戶端行為無法預測，而且在中斷連線之前，它們可能不會讀取回應。</span><span class="sxs-lookup"><span data-stu-id="32db3-1044">However, client behavior isn't predictable and they may not read the response before the connection is aborted.</span></span>
+<span data-ttu-id="65f64-1043">在呼叫之前呼叫 [HttpResponse](xref:Microsoft.AspNetCore.Http.HttpResponse.CompleteAsync%2A) ， `Abort` 可確保伺服器已完成寫入回應。</span><span class="sxs-lookup"><span data-stu-id="65f64-1043">Calling [HttpResponse.CompleteAsync](xref:Microsoft.AspNetCore.Http.HttpResponse.CompleteAsync%2A) before calling `Abort` ensures that the server has completed writing the response.</span></span> <span data-ttu-id="65f64-1044">不過，用戶端行為不是可預測的，而且在中斷連接之前，可能不會讀取回應。</span><span class="sxs-lookup"><span data-stu-id="65f64-1044">However, client behavior isn't predictable and they may not read the response before the connection is aborted.</span></span>
 
-<span data-ttu-id="32db3-1045">此程式與 HTTP/2 不同，因為通訊協定支援在不關閉連線的情況下中止個別要求資料流程。</span><span class="sxs-lookup"><span data-stu-id="32db3-1045">This process is different for HTTP/2 because the protocol supports aborting individual request streams without closing the connection.</span></span> <span data-ttu-id="32db3-1046">五秒的清空超時不適用。</span><span class="sxs-lookup"><span data-stu-id="32db3-1046">The five second drain timeout doesn't apply.</span></span> <span data-ttu-id="32db3-1047">如果在完成回應之後有任何未讀取的要求本文資料，伺服器就會傳送 HTTP/2 RST 框架。</span><span class="sxs-lookup"><span data-stu-id="32db3-1047">If there's any unread request body data after completing a response, then the server sends an HTTP/2 RST frame.</span></span> <span data-ttu-id="32db3-1048">系統會忽略其他要求主體資料框架。</span><span class="sxs-lookup"><span data-stu-id="32db3-1048">Additional request body data frames are ignored.</span></span>
+<span data-ttu-id="65f64-1045">HTTP/2 的這個程式不同，因為通訊協定支援中止個別要求資料流程，而不需要關閉連接。</span><span class="sxs-lookup"><span data-stu-id="65f64-1045">This process is different for HTTP/2 because the protocol supports aborting individual request streams without closing the connection.</span></span> <span data-ttu-id="65f64-1046">五秒的清空超時時間不適用。</span><span class="sxs-lookup"><span data-stu-id="65f64-1046">The five second drain timeout doesn't apply.</span></span> <span data-ttu-id="65f64-1047">如果在完成回應之後有任何未讀取的要求主體資料，則伺服器會傳送 HTTP/2 RST 框架。</span><span class="sxs-lookup"><span data-stu-id="65f64-1047">If there's any unread request body data after completing a response, then the server sends an HTTP/2 RST frame.</span></span> <span data-ttu-id="65f64-1048">系統會忽略其他要求主體資料框架。</span><span class="sxs-lookup"><span data-stu-id="65f64-1048">Additional request body data frames are ignored.</span></span>
 
-<span data-ttu-id="32db3-1049">可能的話，用戶端最好先利用[預期的： 100-continue](https://developer.mozilla.org/docs/Web/HTTP/Status/100)要求標頭，等待伺服器回應，然後再開始傳送要求本文。</span><span class="sxs-lookup"><span data-stu-id="32db3-1049">If possible, it's better for clients to utilize the [Expect: 100-continue](https://developer.mozilla.org/docs/Web/HTTP/Status/100) request header and wait for the server to respond before starting to send the request body.</span></span> <span data-ttu-id="32db3-1050">這讓用戶端有機會在傳送不需要的資料之前，先檢查回應並中止。</span><span class="sxs-lookup"><span data-stu-id="32db3-1050">That gives the client an opportunity to examine the response and abort before sending unneeded data.</span></span>
+<span data-ttu-id="65f64-1049">可能的話，最好是讓用戶端利用預期的 [： 100-continue](https://developer.mozilla.org/docs/Web/HTTP/Status/100) 要求標頭，並等待伺服器回應，然後再開始傳送要求本文。</span><span class="sxs-lookup"><span data-stu-id="65f64-1049">If possible, it's better for clients to utilize the [Expect: 100-continue](https://developer.mozilla.org/docs/Web/HTTP/Status/100) request header and wait for the server to respond before starting to send the request body.</span></span> <span data-ttu-id="65f64-1050">這可讓用戶端有機會檢查回應，並在傳送不需要的資料之前中止。</span><span class="sxs-lookup"><span data-stu-id="65f64-1050">That gives the client an opportunity to examine the response and abort before sending unneeded data.</span></span>
 
-## <a name="additional-resources"></a><span data-ttu-id="32db3-1051">其他資源</span><span class="sxs-lookup"><span data-stu-id="32db3-1051">Additional resources</span></span>
+## <a name="additional-resources"></a><span data-ttu-id="65f64-1051">其他資源</span><span class="sxs-lookup"><span data-stu-id="65f64-1051">Additional resources</span></span>
 
-* <span data-ttu-id="32db3-1052">在 Linux 上使用 UNIX 通訊端時，通訊端不會在應用程式關閉時自動刪除。</span><span class="sxs-lookup"><span data-stu-id="32db3-1052">When using UNIX sockets on Linux, the socket is not automatically deleted on app shut down.</span></span> <span data-ttu-id="32db3-1053">如需詳細資訊，請參閱[此 GitHub 問題](https://github.com/dotnet/aspnetcore/issues/14134)。</span><span class="sxs-lookup"><span data-stu-id="32db3-1053">For more information, see [this GitHub issue](https://github.com/dotnet/aspnetcore/issues/14134).</span></span>
+* <span data-ttu-id="65f64-1052">在 Linux 上使用 UNIX 通訊端時，通訊端不會在應用程式關閉時自動刪除。</span><span class="sxs-lookup"><span data-stu-id="65f64-1052">When using UNIX sockets on Linux, the socket is not automatically deleted on app shut down.</span></span> <span data-ttu-id="65f64-1053">如需詳細資訊，請參閱 [此 GitHub 問題](https://github.com/dotnet/aspnetcore/issues/14134)。</span><span class="sxs-lookup"><span data-stu-id="65f64-1053">For more information, see [this GitHub issue](https://github.com/dotnet/aspnetcore/issues/14134).</span></span>
 * <xref:test/troubleshoot>
 * <xref:security/enforcing-ssl>
 * <xref:host-and-deploy/proxy-load-balancer>
-* [<span data-ttu-id="32db3-1054">RFC 7230：訊息語法和路由 (第 5.4 節：主機)</span><span class="sxs-lookup"><span data-stu-id="32db3-1054">RFC 7230: Message Syntax and Routing (Section 5.4: Host)</span></span>](https://tools.ietf.org/html/rfc7230#section-5.4)
+* [<span data-ttu-id="65f64-1054">RFC 7230：訊息語法和路由 (第 5.4 節：主機)</span><span class="sxs-lookup"><span data-stu-id="65f64-1054">RFC 7230: Message Syntax and Routing (Section 5.4: Host)</span></span>](https://tools.ietf.org/html/rfc7230#section-5.4)

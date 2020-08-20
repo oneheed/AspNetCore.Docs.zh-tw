@@ -7,6 +7,7 @@ ms.custom: mvc
 ms.date: 03/27/2019
 ms.topic: tutorial
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -17,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: data/ef-mvc/complex-data-model
-ms.openlocfilehash: 7774716905ade1b2b32a513a09899b563d48679b
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: 07f5e910236f78105c039e462ab51d6e62b09439
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88012991"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88626931"
 ---
 # <a name="tutorial-create-a-complex-data-model---aspnet-mvc-with-ef-core"></a>教學課程：建立複雜的資料模型-使用 EF Core ASP.NET MVC
 
@@ -48,7 +49,7 @@ ms.locfileid: "88012991"
 > * 變更連接字串
 > * 更新資料庫
 
-## <a name="prerequisites"></a>必要條件
+## <a name="prerequisites"></a>Prerequisites
 
 * [使用 EF Core 移轉](migrations.md)
 
@@ -82,7 +83,7 @@ ms.locfileid: "88012991"
 
 * 根據預設，瀏覽器將根據您的地區設定，使用正確的格式呈現資料。
 
-如需詳細資訊，請參閱標記協助程式[ \<input> 檔](../../mvc/views/working-with-forms.md#the-input-tag-helper)集。
+如需詳細資訊，請參閱[ \<input> tag helper 檔](../../mvc/views/working-with-forms.md#the-input-tag-helper)。
 
 執行應用程式，移至 Students [索引] 頁面，您會注意到註冊日期欄位中不再顯示時間。 任何使用 Student 模型的檢視都會有相同的結果。
 

@@ -1,5 +1,5 @@
 ---
-title: 教學課程：更新相關的資料-使用 EF Core ASP.NET MVC
+title: 教學課程：使用 EF Core 更新相關資料-ASP.NET MVC
 description: 在本教學課程中，您會藉由更新外部索引鍵欄位和導覽屬性來更新相關資料。
 author: rick-anderson
 ms.author: riande
@@ -7,6 +7,7 @@ ms.custom: mvc
 ms.date: 03/27/2019
 ms.topic: tutorial
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -17,14 +18,14 @@ no-loc:
 - Razor
 - SignalR
 uid: data/ef-mvc/update-related-data
-ms.openlocfilehash: 215cf04e882c438eac3fb74ee7cd582e96ddaeb7
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: 356536a22f11ca5db6cfa9cda79598ec8aa03e18
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88018022"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88625267"
 ---
-# <a name="tutorial-update-related-data---aspnet-mvc-with-ef-core"></a>教學課程：更新相關的資料-使用 EF Core ASP.NET MVC
+# <a name="tutorial-update-related-data---aspnet-mvc-with-ef-core"></a>教學課程：使用 EF Core 更新相關資料-ASP.NET MVC
 
 在先前的教學課程中，您顯示了相關資料。在本教學課程中，您會藉由更新外部索引鍵欄位和導覽屬性來更新相關資料。
 
@@ -43,7 +44,7 @@ ms.locfileid: "88018022"
 > * 更新 [刪除] 頁面
 > * 將辦公室位置和課程新增至 [建立] 頁面
 
-## <a name="prerequisites"></a>必要條件
+## <a name="prerequisites"></a>Prerequisites
 
 * [讀取相關資料](read-related-data.md)
 
@@ -145,7 +146,7 @@ HttpGet `Edit` 方法會根據已指派給正在編輯之課程的部門識別�
 
 * 針對 `OfficeAssignment` 導覽屬性使用積極式載入從資料庫中取得目前的 Instructor 實體。 這與您在 HttpGet `Edit` 方法中所做的事情一樣。
 
-* 使用從模型繫結器取得的值更新擷取的 Instructor 實體。 多載 `TryUpdateModel` 可讓您宣告想要包含的屬性。 這可防止大量指派，如同在[第二個教學課程](crud.md)中所解釋的。
+* 使用從模型繫結器取得的值更新擷取的 Instructor 實體。 多載可 `TryUpdateModel` 讓您宣告要包含的屬性。 這可防止大量指派，如同在[第二個教學課程](crud.md)中所解釋的。
 
     <!-- Snippets don't play well with <ul> [!code-csharp[](intro/samples/cu/Controllers/InstructorsController.cs?range=241-244)] -->
 
@@ -213,7 +214,7 @@ Course 與 Instructor 實體的關係為多對多。 若要新增和移除關聯
 
 方法簽章現在已和 HttpGet `Edit` 方法不同，因此方法名稱會從 `EditPost` 變回 `Edit`。
 
-由於檢視沒有 Course 實體的集合，模型繫結器無法自動更新 `CourseAssignments` 導覽屬性。 相較於使用模型繫結器更新 `CourseAssignments` 導覽屬性，您會在新的 `UpdateInstructorCourses` 方法中進行相同的操作。 因此，您必須 `CourseAssignments` 從模型系結中排除屬性。 這不需要對呼叫的程式碼進行任何變更， `TryUpdateModel` 因為您正在使用需要明確核准且 `CourseAssignments` 不在包含清單中的多載。
+由於檢視沒有 Course 實體的集合，模型繫結器無法自動更新 `CourseAssignments` 導覽屬性。 相較於使用模型繫結器更新 `CourseAssignments` 導覽屬性，您會在新的 `UpdateInstructorCourses` 方法中進行相同的操作。 因此，您需要 `CourseAssignments` 從模型系結中排除屬性。 這並不需要對呼叫的程式碼進行任何變更， `TryUpdateModel` 因為您使用的多載需要明確核准，而且 `CourseAssignments` 不在包含清單中。
 
 若沒有選取任何核取方塊，`UpdateInstructorCourses` 中的程式碼會使用空集合初始化 `CourseAssignments` 導覽屬性並傳回：
 

@@ -1,12 +1,13 @@
 ---
-title: ASP.NET Core Blazor Server 其他安全性案例
+title: ASP.NET Core Blazor Server 額外的安全性案例
 author: guardrex
-description: 瞭解如何設定 Blazor Server 其他安全性案例。
+description: 瞭解如何設定 Blazor Server 額外的安全性案例。
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
 ms.date: 06/04/2020
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -17,22 +18,22 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/security/server/additional-scenarios
-ms.openlocfilehash: 16896577c56c638cae6824c58f4d3a6ce1489458
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: 62cf16e3e495e3e9a015a3be4e7fffd6a3ce08bc
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88014005"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88626463"
 ---
-# <a name="aspnet-core-no-locblazor-server-additional-security-scenarios"></a>ASP.NET Core Blazor Server 其他安全性案例
+# <a name="aspnet-core-no-locblazor-server-additional-security-scenarios"></a>ASP.NET Core Blazor Server 額外的安全性案例
 
-By [Javier Calvarro Nelson](https://github.com/javiercn)
+[Javier Calvarro Nelson](https://github.com/javiercn)
 
-## <a name="pass-tokens-to-a-no-locblazor-server-app"></a>將權杖傳遞給 Blazor Server 應用程式
+## <a name="pass-tokens-to-a-no-locblazor-server-app"></a>將權杖傳遞至 Blazor Server 應用程式
 
-您 Razor Blazor Server 可以使用本節所述的方法，將應用程式中元件外部可用的權杖傳遞給元件。 如需範例程式碼，包括完整的 `Startup.ConfigureServices` 範例，請參閱將[權杖傳遞給伺服器端 Blazor 應用程式](https://github.com/javiercn/blazor-server-aad-sample)。
+您 Razor Blazor Server 可以使用本節所述的方法，將應用程式中元件之外可用的權杖傳遞給元件。 如需範例程式碼，包括完整的 `Startup.ConfigureServices` 範例，請參閱將 [權杖傳遞至伺服器端 Blazor 應用程式](https://github.com/javiercn/blazor-server-aad-sample)。
 
-Blazor Server以一般 Razor 頁面或 MVC 應用程式的方式驗證應用程式。 布建權杖並將其儲存至驗證 cookie 。 例如：
+Blazor Server使用一般 Razor 頁面或 MVC 應用程式來驗證應用程式。 布建權杖並將其儲存至驗證 cookie 。 例如：
 
 ```csharp
 using Microsoft.AspNetCore.Authentication.OpenIdConnect;
@@ -50,7 +51,7 @@ services.Configure<OpenIdConnectOptions>(AzureADDefaults.OpenIdScheme, options =
 });
 ```
 
-定義一個類別，以使用存取和重新整理權杖來傳入初始應用程式狀態：
+使用存取和重新整理權杖來定義要在初始應用程式狀態中傳遞的類別：
 
 ```csharp
 public class InitialApplicationState
@@ -60,7 +61,7 @@ public class InitialApplicationState
 }
 ```
 
-定義可在應用程式內使用的**範圍**權杖提供者服務， Blazor 以從[ (DI) ](xref:blazor/fundamentals/dependency-injection)的相依性插入解析權杖：
+定義 **範圍** 的權杖提供者服務，該服務可在 Blazor 應用程式內用來從相依性 [插入 (DI) ](xref:blazor/fundamentals/dependency-injection)解析權杖：
 
 ```csharp
 public class TokenProvider
@@ -70,7 +71,7 @@ public class TokenProvider
 }
 ```
 
-在中 `Startup.ConfigureServices` ，為新增服務：
+在中 `Startup.ConfigureServices` ，新增下列服務：
 
 * `IHttpClientFactory`
 * `TokenProvider`
@@ -80,7 +81,7 @@ services.AddHttpClient();
 services.AddScoped<TokenProvider>();
 ```
 
-在檔案中 `_Host.cshtml` ，建立和實例， `InitialApplicationState` 並將它當做參數傳遞給應用程式：
+在檔案中 `_Host.cshtml` ，建立和的實例， `InitialApplicationState` 並將它當作參數傳遞至應用程式：
 
 ```cshtml
 @using Microsoft.AspNetCore.Authentication
@@ -101,7 +102,7 @@ services.AddScoped<TokenProvider>();
 </app>
 ```
 
-在 `App` 元件 (`App.razor`) 中，解析服務，並使用參數中的資料將它初始化：
+在 `App` 元件 (`App.razor`) 中，解析服務並使用參數中的資料將它初始化：
 
 ```razor
 @inject TokenProvider TokenProvider
@@ -122,7 +123,7 @@ services.AddScoped<TokenProvider>();
 }
 ```
 
-在提出安全 API 要求的服務中，插入權杖提供者，並取出權杖以呼叫 API：
+在提出安全 API 要求的服務中，插入權杖提供者並取得權杖以呼叫 API：
 
 ```csharp
 public class WeatherForecastService
@@ -154,7 +155,7 @@ public class WeatherForecastService
 
 ## <a name="set-the-authentication-scheme"></a>設定驗證配置
 
-對於使用多個驗證中介軟體，因而有多個驗證配置的應用程式，使用的配置 Blazor 可以在的端點設定中明確設定 `Startup.Configure` 。 下列範例會設定 Azure Active Directory 配置：
+如果應用程式使用一個以上的驗證中介軟體，因此有一個以上的驗證配置，則使用的 Blazor 配置可以在的端點設定中明確設定 `Startup.Configure` 。 下列範例會設定 Azure Active Directory 配置：
 
 ```csharp
 endpoints.MapBlazorHub().RequireAuthorization(
@@ -166,7 +167,7 @@ endpoints.MapBlazorHub().RequireAuthorization(
 
 ## <a name="use-openid-connect-oidc-v20-endpoints"></a>使用 OpenID Connect (OIDC) v2.0 端點
 
-驗證程式庫和 Blazor 範本會使用 OpenID connect (OIDC) v1.0 端點。 若要使用 v2.0 端點，請 <xref:Microsoft.AspNetCore.Builder.OpenIdConnectOptions.Authority?displayProperty=nameWithType> 在中設定選項 <xref:Microsoft.AspNetCore.Builder.OpenIdConnectOptions> ：
+驗證程式庫和 Blazor 範本使用 OpenID Connect (OIDC) v1.0 端點。 若要使用 v2.0 端點，請 <xref:Microsoft.AspNetCore.Builder.OpenIdConnectOptions.Authority?displayProperty=nameWithType> 在中設定選項 <xref:Microsoft.AspNetCore.Builder.OpenIdConnectOptions> ：
 
 ```csharp
 services.Configure<OpenIdConnectOptions>(AzureADDefaults.OpenIdScheme, 
@@ -176,7 +177,7 @@ services.Configure<OpenIdConnectOptions>(AzureADDefaults.OpenIdScheme,
     }
 ```
 
-或者，您也可以在應用程式設定 () 檔案中進行設定 `appsettings.json` ：
+或者，您可以在應用程式設定 () 檔中進行設定 `appsettings.json` ：
 
 ```json
 {
@@ -187,12 +188,12 @@ services.Configure<OpenIdConnectOptions>(AzureADDefaults.OpenIdScheme,
 }
 ```
 
-如果在區段上對授權單位的追蹤不適合應用程式的 OIDC 提供者（例如使用非 AAD 提供者），請 <xref:Microsoft.AspNetCore.Builder.OpenIdConnectOptions.Authority> 直接設定屬性。 請在 <xref:Microsoft.AspNetCore.Builder.OpenIdConnectOptions> 應用程式佈建檔中，以金鑰設定或的屬性 <xref:Microsoft.AspNetCore.Builder.OpenIdConnectOptions.Authority> 。
+如果追蹤于區段上的授權不適合應用程式的 OIDC 提供者（例如，使用非 AAD 提供者），請 <xref:Microsoft.AspNetCore.Builder.OpenIdConnectOptions.Authority> 直接設定屬性。 請在 <xref:Microsoft.AspNetCore.Builder.OpenIdConnectOptions> 應用程式佈建檔中使用金鑰設定或的屬性 <xref:Microsoft.AspNetCore.Builder.OpenIdConnectOptions.Authority> 。
 
 ### <a name="code-changes"></a>程式碼變更
 
-* 針對 v2.0 端點，識別碼權杖中的宣告清單會變更。 如需詳細資訊，請參閱[為何要將 Microsoft 身分識別平臺更新 (v2.0) ？](/azure/active-directory/azuread-dev/azure-ad-endpoint-comparison) 在 Azure 檔中。
-* 因為在 v2.0 端點的範圍 Uri 中指定了資源，所以請移除 <xref:Microsoft.AspNetCore.Builder.OpenIdConnectOptions.Resource?displayProperty=nameWithType> 中的屬性設定 <xref:Microsoft.AspNetCore.Builder.OpenIdConnectOptions> ：
+* V2.0 端點的識別碼權杖中宣告的清單會變更。 如需詳細資訊，請參閱 [為何要更新至 Microsoft 身分識別平臺 (v2.0) ？](/azure/active-directory/azuread-dev/azure-ad-endpoint-comparison) 在 Azure 檔中。
+* 由於已在 v2.0 端點的範圍 Uri 中指定資源，因此請移除 <xref:Microsoft.AspNetCore.Builder.OpenIdConnectOptions.Resource?displayProperty=nameWithType> 中的屬性設定 <xref:Microsoft.AspNetCore.Builder.OpenIdConnectOptions> ：
 
   ```csharp
   services.Configure<OpenIdConnectOptions>(AzureADDefaults.OpenIdScheme, options => 

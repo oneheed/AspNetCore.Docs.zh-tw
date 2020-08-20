@@ -7,6 +7,7 @@ ms.author: scaddie
 ms.custom: mvc
 ms.date: 12/05/2019
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -17,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: web-api/advanced/conventions
-ms.openlocfilehash: e18a2096c3b9fa788ba2a9713d0f25c1e76af2db
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: 425f1aaf1fa86f10d857c34e621c302f2db258e5
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88019959"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88626788"
 ---
 # <a name="use-web-api-conventions"></a>使用 Web API 慣例
 
@@ -45,7 +46,7 @@ ASP.NET Core MVC 2.2 和更新版本在 <xref:Microsoft.AspNetCore.Mvc.DefaultAp
 
 慣例不會進行撰寫；各個動作可能僅會與一個慣例建立關聯。 相較於較不特定的慣例，更特定的慣例擁有較高的優先順序。 當兩個以上相同屬性的慣例套用至動作時，慣例就具有不確定性。 下列選項的作用為將慣例套用至動作，其順序為從最特定到最不特定：
 
-1. `Microsoft.AspNetCore.Mvc.ApiConventionMethodAttribute`&mdash;適用于個別動作，並指定套用的慣例類型和慣例方法。
+1. `Microsoft.AspNetCore.Mvc.ApiConventionMethodAttribute`&mdash;適用于個別動作，並指定慣例類型和套用的慣例方法。
 
     在下列範例中，預設慣例類型的 `Microsoft.AspNetCore.Mvc.DefaultApiConventions.Put` 慣例方法會套用至 `Update` 動作：
 
@@ -62,7 +63,7 @@ ASP.NET Core MVC 2.2 和更新版本在 <xref:Microsoft.AspNetCore.Mvc.DefaultAp
 
     如需有關 `[ProducesDefaultResponseType]`,的詳細資訊，請參閱[預設回應](https://swagger.io/docs/specification/describing-responses/#default) \(英文\)。
 
-1. 套用到控制器的 `Microsoft.AspNetCore.Mvc.ApiConventionTypeAttribute`&mdash; 會將指定的慣例類型套用至控制器上的所有動作。 慣例方法會以決定要套用慣例方法之動作的提示來標示。 如需提示的詳細資訊，請參閱[建立 Web API 慣例](#create-web-api-conventions)。
+1. 套用到控制器的 `Microsoft.AspNetCore.Mvc.ApiConventionTypeAttribute`&mdash; 會將指定的慣例類型套用至控制器上的所有動作。 慣例方法會標示提示，以決定要套用慣例方法的動作。 如需提示的詳細資訊，請參閱[建立 Web API 慣例](#create-web-api-conventions)。
 
     在下列範例中，會將一組預設的慣例套用至 *ContactsConventionController* 中的所有動作：
 

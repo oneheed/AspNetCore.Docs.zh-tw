@@ -5,6 +5,7 @@ description: 在 ASP.NET Core 中使用 Grunt
 ms.author: riande
 ms.date: 12/05/2019
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -15,58 +16,58 @@ no-loc:
 - Razor
 - SignalR
 uid: client-side/using-grunt
-ms.openlocfilehash: 019f31c1a6fa3a33783f78f2fee71f710642ce6d
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: e8e4459f7fe496135d6cfd7f4ff52511a5e1c064
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88013199"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88628023"
 ---
 # <a name="use-grunt-in-aspnet-core"></a>在 ASP.NET Core 中使用 Grunt
 
-Grunt 是一項 JavaScript 工作執行程式，可將腳本縮制、TypeScript 編譯、程式碼品質「不起毛」的工具、CSS 前置處理器，以及任何需要執行以支援用戶端開發的重複性工作自動化。 Visual Studio 中完全支援 Grunt。
+Grunt 是一種 JavaScript 工作執行器，可將腳本縮制、TypeScript 編譯、程式碼品質「不起毛」工具、CSS 前置處理器，以及任何需要執行以支援用戶端開發的重複性工作自動化。 Visual Studio 完全支援 Grunt。
 
-這個範例會使用空的 ASP.NET Core 專案做為其起點，以示範如何從頭開始自動執行用戶端組建程式。
+此範例會使用空的 ASP.NET Core 專案作為其起點，以示範如何從頭開始自動執行用戶端組建程式。
 
-完成後的範例會清除目標部署目錄、結合 JavaScript 檔案、檢查程式碼品質、總是 JavaScript 檔案內容，並部署至 web 應用程式的根目錄。 我們將使用下列套件：
+完成的範例會清除目標部署目錄、結合 JavaScript 檔案、檢查程式碼品質、總是 JavaScript 檔案內容，並將其部署至 web 應用程式的根目錄。 我們將使用下列套件：
 
 * **grunt**： grunt 工作執行器套件。
 
 * **grunt-contrib-clean**：移除檔案或目錄的外掛程式。
 
-* **grunt-contrib-jshint**：用來審查 JavaScript 程式碼品質的外掛程式。
+* **grunt-contrib-jshint**：可檢查 JavaScript 程式碼品質的外掛程式。
 
 * **grunt-contrib-concat**：將檔案加入單一檔案的外掛程式。
 
-* **grunt-contrib-uglify**：縮短 JavaScript 以減少大小的外掛程式。
+* **grunt-contrib-uglify**：縮短 JavaScript 以縮減大小的外掛程式。
 
 * **grunt-contrib-watch：監看**檔案活動的外掛程式。
 
 ## <a name="preparing-the-application"></a>準備應用程式
 
-若要開始，請設定新的空白 web 應用程式，並新增 TypeScript 範例檔案。 TypeScript 檔案會使用預設的 Visual Studio 設定自動編譯成 JavaScript，而我們將會使用 Grunt 來處理我們的原始內容。
+若要開始，請設定新的空白 web 應用程式，並新增 TypeScript 範例檔案。 TypeScript 檔案會使用預設 Visual Studio 設定自動編譯成 JavaScript，而且將會是使用 Grunt 處理的原始資料。
 
 1. 在 Visual Studio 中，建立新的 `ASP.NET Web Application` 。
 
-2. 在 [**新增 ASP.NET 專案**] 對話方塊中，選取 ASP.NET Core**空白**範本，然後按一下 [確定] 按鈕。
+2. 在 [ **新增 ASP.NET 專案** ] 對話方塊中，選取 ASP.NET Core **空白** 範本，然後按一下 [確定] 按鈕。
 
-3. 在 [方案總管中，檢查項目結構。 此 `\src` 資料夾包含空的 `wwwroot` 和 `Dependencies` 節點。
+3. 在 [方案總管中，檢查項目結構。 此 `\src` 資料夾包含空白 `wwwroot` 和 `Dependencies` 節點。
 
-    ![空白 web 解決方案](using-grunt/_static/grunt-solution-explorer.png)
+    ![空白的 web 方案](using-grunt/_static/grunt-solution-explorer.png)
 
 4. 將名為的新資料夾新增 `TypeScript` 至您的專案目錄。
 
-5. 在新增任何檔案之前，請確定 Visual Studio 已核取 [在儲存時編譯] 選項。 流覽至 [**工具**] [選項] [  >  **Options**  >  **文字編輯器**] [  >  **Typescript**  >  **專案**]：
+5. 新增任何檔案之前，請 Visual Studio 確定已核取 [在儲存時編譯] 選項。 流覽至**工具**  >  **選項**  >  **文字編輯器**  >  **Typescript**  >  **專案**：
 
-    ![設定 TypeScript 檔案自動編譯的選項](using-grunt/_static/typescript-options.png)
+    ![設定自動編譯 TypeScript 檔案的選項](using-grunt/_static/typescript-options.png)
 
-6. 在目錄上按一下滑鼠右鍵 `TypeScript` ，然後從內容功能表中選取 [**新增 > 新專案**]。 選取**JavaScript**檔案專案，並將檔案命名為*Tastes* (記下 \*) 的 ts 延伸模組。 將以下的 TypeScript 程式程式碼複製到檔案 (當您儲存時，JavaScript 來源) 會出現新的*Tastes.js*檔案。
+6. 以滑鼠右鍵按一下 `TypeScript` 目錄，然後從操作功能表中選取 [ **加入 > 新專案** ]。 選取 **JavaScript** 檔案專案並將檔案命名為 *Tastes* ， (記下 \*) 的 ts 延伸模組。 將下方的 TypeScript 程式程式碼複製到檔案 (當您儲存時，JavaScript 來源) 會出現新的 *Tastes.js* 檔案。
 
     ```typescript
     enum Tastes { Sweet, Sour, Salty, Bitter }
     ```
 
-7. 將第二個檔案新增至**TypeScript**目錄，並將它命名為 `Food.ts` 。 將下列程式碼複製到檔案中。
+7. 將第二個檔案新增至 **TypeScript** 目錄，並為其命名 `Food.ts` 。 將下列程式碼複製到檔案中。
 
     ```typescript
     class Food {
@@ -97,16 +98,16 @@ Grunt 是一項 JavaScript 工作執行程式，可將腳本縮制、TypeScript 
 
 接下來，設定 NPM 以下載 grunt 和 grunt 工作。
 
-1. 在 [方案總管中，以滑鼠右鍵按一下專案，然後從內容功能表中選取 [**加入 > 新專案**]。 選取 [ **NPM 設定檔**] 專案，保留預設名稱*package.js*[]，然後按一下 [**新增**] 按鈕。
+1. 在方案總管中，以滑鼠右鍵按一下專案，然後從內容功能表中選取 [ **加入 > 新專案** ]。 選取 [ **NPM] 設定檔** 專案，保留預設名稱， *package.js*]，然後按一下 [ **新增** ] 按鈕。
 
-2. 在 [ *package.json* ] 檔案的 [ `devDependencies` 物件括弧] 中，輸入 "grunt"。 `grunt`從 Intellisense 清單中選取，然後按 enter 鍵。 Visual Studio 會將 grunt 套件名稱加上引號，並新增一個冒號。 在冒號右邊，從 Intellisense 清單的頂端選取最新穩定版本的封裝， (按 [ `Ctrl-Space` 如果 intellisense 未出現) ]。
+2. 在 *package.json* 檔案的 `devDependencies` 物件括弧內，輸入 "grunt"。 `grunt`從 Intellisense 清單中選取，然後按下 enter 鍵。 Visual Studio 會將 grunt 套件名稱加上引號，並新增冒號。 在冒號右邊，從 Intellisense 清單頂端選取封裝的最新穩定版本， (按下 [ `Ctrl-Space` intellisense 未) 出現]。
 
     ![grunt Intellisense](using-grunt/_static/devdependencies-grunt.png)
 
     > [!NOTE]
-    > NPM 會使用[語義版本](https://semver.org/)設定來組織相依性。 語義版本控制（也稱為 SemVer）會使用編號配置來識別 \<major> 封裝 \<minor> ... \<patch>Intellisense 只會顯示一些常用的選項，以簡化語義版本設定。 在上述範例中， (0.4.5 Intellisense 清單中最上方的專案) 會被視為封裝的最新穩定版本。 插入號 (^) 符號符合最新的主要版本，而波形符 (~) 符合最新的次要版本。 如需 SemVer 所提供完整表現度的指南，請參閱[NPM semver version parser reference](https://www.npmjs.com/package/semver) 。
+    > NPM 使用 [語義版本](https://semver.org/) 設定來組織相依性。 語義版本設定（也稱為 SemVer）會識別具有 \<major> 編號配置的封裝 \<minor> ... \<patch>Intellisense 只會顯示一些常見的選項，以簡化語義版本控制。 Intellisense 清單中的最上層專案 (上述範例中的0.4.5，) 被視為套件的最新穩定版本。 插入號 (^) 符號符合最新的主要版本，而波狀符號 (~) 符合最新的次要版本。 如需 SemVer 所提供完整講求表現度的指南，請參閱 [NPM semver 版本](https://www.npmjs.com/package/semver) 剖析器參考。
 
-3. 新增更多相依性以載入 grunt-contrib- \* 適用于*clean*、 *jshint*、 *concat*、 *uglify*和*watch*的封裝，如下列範例所示。 版本不需要符合範例。
+3. 新增更多相依性以載入 grunt-contrib- \* 適用于 *clean*、 *jshint*、 *concat*、 *uglify*和 *watch* 的套件，如下列範例所示。 版本不需要符合範例。
 
     ```json
     "devDependencies": {
@@ -121,22 +122,22 @@ Grunt 是一項 JavaScript 工作執行程式，可將腳本縮制、TypeScript 
 
 4. 儲存 package.json 檔案。
 
-每個專案的套件 `devDependencies` 將會下載，以及每個套件所需的任何檔案。 您可以在**方案總管**中啟用 [**顯示所有**檔案] 按鈕，以在*node_modules*目錄中尋找封裝檔案。
+每個專案的封裝 `devDependencies` 將會下載，以及每個封裝所需的任何檔案。 您可以啟用**方案總管**中的 [**顯示所有**檔案] 按鈕，在*node_modules*目錄中找到封裝檔案。
 
 ![grunt node_modules](using-grunt/_static/node-modules.png)
 
 > [!NOTE]
-> 如有需要，您可以在**方案總管**中手動還原相依性，方法是以滑鼠右鍵按一下 `Dependencies\NPM` ，然後選取 [**還原封裝**] 功能表選項。
+> 如有需要，您可以在 **方案總管** 中，以滑鼠右鍵按一下 `Dependencies\NPM` 並選取 [ **還原套件** ] 功能表選項，以手動還原相依性。
 
 ![還原套件](using-grunt/_static/restore-packages.png)
 
 ## <a name="configuring-grunt"></a>設定 Grunt
 
-Grunt 是使用名為*Gruntfile.js*的資訊清單來設定，其會定義、載入及註冊可以手動執行或設定為根據 Visual Studio 中的事件自動執行的工作。
+Grunt 會使用名為 *Gruntfile.js* 的資訊清單進行設定，此指令程式會定義、載入和註冊可以手動執行或設定為根據 Visual Studio 中事件自動執行的工作。
 
-1. 以滑鼠右鍵按一下專案，然後選取 [**加入**  >  **新專案**]。 選取 [ **JavaScript**檔案專案] 範本，將名稱變更為*Gruntfile.js*，然後按一下 [**新增**] 按鈕。
+1. 以滑鼠右鍵按一下專案，然後選取 [**加入**  >  **新專案**]。 選取 **JavaScript** 檔案專案範本，將名稱變更為 *Gruntfile.js*，然後按一下 [ **加入** ] 按鈕。
 
-1. 將下列程式碼新增至*Gruntfile.js*。 函式會 `initConfig` 設定每個封裝的選項，而模組的其餘部分則會載入和註冊工作。
+1. 將下列程式碼新增至 *Gruntfile.js*。 此函式會 `initConfig` 設定每個封裝的選項，而模組的其餘部分則會載入和註冊工作。
 
    ```javascript
    module.exports = function (grunt) {
@@ -145,7 +146,7 @@ Grunt 是使用名為*Gruntfile.js*的資訊清單來設定，其會定義、載
    };
    ```
 
-1. 在函式內 `initConfig` ，新增工作的選項， `clean` 如下列範例所示*Gruntfile.js* 。 此工作會 `clean` 接受目錄字串陣列。 此工作會從*wwwroot/lib*中移除檔案，並移除整個 */temp*目錄。
+1. 在函式中 `initConfig` ，新增工作的選項， `clean` 如下列範例 *Gruntfile.js* 所示。 此工作會 `clean` 接受目錄字串的陣列。 此工作會從 *wwwroot/lib* 移除檔案，並移除整個 */temp* 目錄。
 
     ```javascript
     module.exports = function (grunt) {
@@ -155,34 +156,34 @@ Grunt 是使用名為*Gruntfile.js*的資訊清單來設定，其會定義、載
     };
     ```
 
-1. 在函式底下 `initConfig` ，新增對的呼叫 `grunt.loadNpmTasks` 。 這會讓工作從 Visual Studio 執行。
+1. 在函式下方 `initConfig` ，加入的呼叫 `grunt.loadNpmTasks` 。 這會讓工作從 Visual Studio 中執行。
 
     ```javascript
     grunt.loadNpmTasks("grunt-contrib-clean");
     ```
 
-1. 儲存*Gruntfile.js*。 檔案看起來應該類似下面的螢幕擷取畫面。
+1. 儲存 *Gruntfile.js*。 檔案看起來應該像下面的螢幕擷取畫面。
 
     ![初始 gruntfile.js](using-grunt/_static/gruntfile-js-initial.png)
 
-1. 以滑鼠右鍵按一下*Gruntfile.js* ，然後從內容功能表中選取 [工作執行**器 Explorer** ]。 [工作執行**器 Explorer** ] 視窗隨即開啟。
+1. 以滑鼠右鍵按一下 *Gruntfile.js* ，然後從內容功能表中選取 [工作執行 **器瀏覽器** ]。 [工作執行 **器瀏覽器** ] 視窗隨即開啟。
 
-    ![工作執行器 explorer 功能表](using-grunt/_static/task-runner-explorer-menu.png)
+    ![工作執行器功能表](using-grunt/_static/task-runner-explorer-menu.png)
 
-1. 確認 `clean` 顯示在工作**Tasks**執行**器 Explorer**的 [工作] 底下。
+1. 確認 `clean` 在 [工作**Tasks**執行**器瀏覽器**] 中的 [工作] 底下顯示。
 
-    ![工作執行器 explorer 工作清單](using-grunt/_static/task-runner-explorer-tasks.png)
+    ![工作執行器瀏覽器工作清單](using-grunt/_static/task-runner-explorer-tasks.png)
 
-1. 以滑鼠右鍵按一下清除工作，然後從內容功能表中選取 [**執行**]。 命令視窗會顯示工作的進度。
+1. 以滑鼠右鍵按一下清除工作，然後從內容功能表中選取 [ **執行** ]。 命令視窗會顯示工作的進度。
 
-    ![工作執行器 explorer 執行清除工作](using-grunt/_static/task-runner-explorer-run-clean.png)
+    ![工作執行器瀏覽器執行清除工作](using-grunt/_static/task-runner-explorer-run-clean.png)
 
     > [!NOTE]
-    > 尚無任何要清除的檔案或目錄。 如果您想要的話，可以在方案總管中手動建立它們，然後以測試的形式執行清理工作。
+    > 尚未清除任何檔案或目錄。 如果您想要的話，可以在方案總管中手動建立它們，然後以測試的形式執行清除工作。
 
-1. 在函 `initConfig` 式中，使用下列程式碼新增的專案 `concat` 。
+1. 在函 `initConfig` 式中，加入 `concat` 使用下列程式碼的專案。
 
-    `src`屬性陣列會列出要合併的檔案，以其應合併的順序排列。 `dest`屬性會指派所產生之合併檔案的路徑。
+    `src`屬性陣列會依應結合的順序，列出要合併的檔案。 `dest`屬性會將路徑指派給所產生的合併檔案。
 
     ```javascript
     concat: {
@@ -194,11 +195,11 @@ Grunt 是使用名為*Gruntfile.js*的資訊清單來設定，其會定義、載
     ```
 
     > [!NOTE]
-    > `all`上述程式碼中的屬性是目標的名稱。 目標會在某些 Grunt 工作中用來允許多個組建環境。 您可以使用 IntelliSense 來查看內建目標，或指派自己的目標。
+    > `all`上述程式碼中的屬性是目標的名稱。 目標用於某些 Grunt 工作，以允許多個組建環境。 您可以使用 IntelliSense 來查看內建目標，或指派自己的目標。
 
-1. `jshint`使用下列程式碼新增工作。
+1. `jshint`使用下列程式碼來新增工作。
 
-    Jshint `code-quality` 公用程式會針對在*暫存*目錄中找到的每個 JavaScript 檔案執行。
+    Jshint `code-quality` 公用程式會針對在 *temp* 目錄中找到的每個 JavaScript 檔案執行。
 
     ```javascript
     jshint: {
@@ -210,11 +211,11 @@ Grunt 是使用名為*Gruntfile.js*的資訊清單來設定，其會定義、載
     ```
 
     > [!NOTE]
-    > 當 JavaScript 使用括弧語法來指派屬性而非點標記法（例如，而不是）時，選項 "-W069" 是 jshint 所產生的錯誤。 `Tastes["Sweet"]` `Tastes.Sweet` 選項會關閉警告，讓程式的其餘部分繼續進行。
+    > 當 JavaScript 使用括弧語法來指派屬性，而不是以點標記法（例如，而不是）時，W069 是由 jshint 所產生的錯誤。 `Tastes["Sweet"]` `Tastes.Sweet` 選項會關閉警告，以允許其餘的進程繼續執行。
 
-1. `uglify`使用下列程式碼新增工作。
+1. `uglify`使用下列程式碼來新增工作。
 
-    此工作會縮短在臨時目錄中找到的*combined.js*檔案，並遵循標準命名慣例* \<file name\>.min.js*在 wwwroot/lib 中建立結果檔案。
+    此工作會縮短在 temp 目錄中找到的*combined.js*檔案，並在* \<file name\>.min.js*標準命名慣例之後，在 wwwroot/lib 中建立結果檔。
 
     ```javascript
     uglify: {
@@ -225,7 +226,7 @@ Grunt 是使用名為*Gruntfile.js*的資訊清單來設定，其會定義、載
     },
     ```
 
-1. 在該負載的呼叫 `grunt.loadNpmTasks` `grunt-contrib-clean` 底下，請使用下列程式碼，針對 jshint、concat 和 uglify 加入相同的呼叫。
+1. 在對該載入的呼叫下 `grunt.loadNpmTasks` `grunt-contrib-clean` ，使用下列程式碼，包含對 jshint、concat 和 uglify 的相同呼叫。
 
     ```javascript
     grunt.loadNpmTasks('grunt-contrib-jshint');
@@ -233,36 +234,36 @@ Grunt 是使用名為*Gruntfile.js*的資訊清單來設定，其會定義、載
     grunt.loadNpmTasks('grunt-contrib-uglify');
     ```
 
-1. 儲存*Gruntfile.js*。 檔案看起來應該類似下列範例。
+1. 儲存 *Gruntfile.js*。 檔案看起來應該會像下面的範例。
 
     ![完整的 grunt 檔案範例](using-grunt/_static/gruntfile-js-complete.png)
 
-1. 請注意，[工作執行**器**] 的 [工作清單] 會包含 `clean` 、 `concat` 和工作 `jshint` `uglify` 。 依序執行每個工作，並觀察**方案總管**中的結果。 每項工作都應該執行，而不會發生錯誤。
+1. 請注意，[工作執行 **器** ] 的 [工作] 清單包括 `clean` 、 `concat` 和工作 `jshint` `uglify` 。 依序執行每項工作，並觀察 **方案總管**的結果。 每項工作都應該執行而不會發生錯誤。
 
-    ![工作執行器 explorer 執行每項工作](using-grunt/_static/task-runner-explorer-run-each-task.png)
+    ![工作執行器瀏覽器執行每項工作](using-grunt/_static/task-runner-explorer-run-each-task.png)
 
-    Concat 工作會建立新的*combined.js*檔案，並將它放入 temp 目錄中。 此工作 `jshint` 只會執行，而且不會產生輸出。 此工作 `uglify` 會建立新的*combined.min.js*檔案，並將其放入*wwwroot/lib*中。 完成時，解決方案看起來應該像下面的螢幕擷取畫面：
+    Concat 工作會建立新的 *combined.js* 檔，並將它放入 temp 目錄中。 此工作 `jshint` 只會執行，而不會產生輸出。 此工作 `uglify` 會建立新的 *combined.min.js* 檔，並將它放入 *wwwroot/lib*中。 完成時，解決方案看起來應該像下面的螢幕擷取畫面：
 
-    ![所有工作之後的方案瀏覽器](using-grunt/_static/solution-explorer-after-all-tasks.png)
+    ![所有工作之後的方案 explorer](using-grunt/_static/solution-explorer-after-all-tasks.png)
 
     > [!NOTE]
-    > 如需每個套件選項的詳細資訊，請造訪 [https://www.npmjs.com/](https://www.npmjs.com/) 主頁面上 [搜尋] 方塊中的套件名稱並加以查閱。 例如，您可以查詢 grunt-contrib-clean 封裝，以取得說明其所有參數的檔連結。
+    > 如需每個封裝之選項的詳細資訊，請 [https://www.npmjs.com/](https://www.npmjs.com/) 在主頁面上的 [搜尋] 方塊中，流覽並查閱封裝名稱。 例如，您可以查詢 grunt-contrib-clean 封裝，以取得說明其所有參數的檔連結。
 
 ### <a name="all-together-now"></a>摘要
 
-使用 Grunt `registerTask()` 方法，以特定循序執行一系列的工作。 例如，若要執行上述的範例步驟，請 > concat-> jshint-> uglify 中，將下列程式碼新增至模組。 程式碼應該加入與 loadNpmTasks ( # A1 呼叫相同的層級，而不是在 initConfig 外部。
+使用 Grunt `registerTask()` 方法，以特定循序執行一系列的工作。 例如，若要執行上述 order clean > concat-> jshint-> uglify 中的範例步驟，請將下列程式碼新增至模組。 程式碼應該加入至與 loadNpmTasks ( # A1 呼叫相同的層級，而不是 initConfig 外部。
 
 ```javascript
 grunt.registerTask("all", ['clean', 'concat', 'jshint', 'uglify']);
 ```
 
-新工作會顯示在 [工作執行器] 中的 [別名工作] 底下。 您可以用滑鼠右鍵按一下並執行，就如同其他工作一樣。 工作 `all` 會依 `clean` 序執行 `concat` 、 `jshint` 和 `uglify` 。
+新的工作會顯示在 [工作執行器] 的 [別名工作] 下。 您可以用滑鼠右鍵按一下並執行它，就像是其他工作一樣。 此工作 `all` 將依 `clean` 序執行、 `concat` `jshint` 和 `uglify` 。
 
 ![別名 grunt 工作](using-grunt/_static/alias-tasks.png)
 
 ## <a name="watching-for-changes"></a>監看變更
 
-工作 `watch` 可讓您留意檔案和目錄。 [監看式] 會在偵測到變更時自動觸發工作。 將下列程式碼新增至 initConfig，以監看 \* TypeScript 目錄中的 .js 檔案是否有變更。 如果 JavaScript 檔案已變更， `watch` 將會執行工作 `all` 。
+工作會 `watch` 持續留意檔案和目錄。 如果偵測到變更，監看會自動觸發工作。 將下列程式碼新增至 initConfig，以監看 \* TypeScript 目錄中的 .js 檔案是否有變更。 如果 JavaScript 檔案已變更， `watch` 將會執行工作 `all` 。
 
 ```javascript
 watch: {
@@ -271,26 +272,26 @@ watch: {
 }
 ```
 
-新增對的呼叫 `loadNpmTasks()` ，以在 [工作執行 `watch` 器] Explorer 中顯示工作。
+加入的呼叫 `loadNpmTasks()` ，以顯示工作執行 `watch` 器瀏覽器中的工作。
 
 ```javascript
 grunt.loadNpmTasks('grunt-contrib-watch');
 ```
 
-以滑鼠右鍵按一下工作執行器 Explorer 中的 [監看式] 工作，然後從內容功能表中選取 [執行]。 顯示執行中監看工作的命令視窗會顯示「正在等候 ...」消息。 開啟其中一個 TypeScript 檔案，加入一個空格，然後儲存檔案。 這會觸發監看式工作，並觸發其他工作依序執行。 下列螢幕擷取畫面顯示範例執行。
+以滑鼠右鍵按一下 [工作執行器瀏覽器] 中的監看式工作，然後從操作功能表選取 [執行]。 顯示正在執行之監看式工作的命令視窗將會顯示「正在等候 ...」消息。 開啟其中一個 TypeScript 檔案，新增空格，然後儲存檔案。 這會觸發 watch 工作，並觸發其他工作以依序執行。 下列螢幕擷取畫面顯示範例執行。
 
-![執行工作輸出](using-grunt/_static/watch-running.png)
+![正在執行工作輸出](using-grunt/_static/watch-running.png)
 
 ## <a name="binding-to-visual-studio-events"></a>系結至 Visual Studio 事件
 
-除非您想要在每次使用 Visual Studio 時手動啟動工作，否則請**在組建、****清除**和**專案開啟**事件**之後**，將工作系結至。
+除非您想要在每次於 Visual Studio 中工作時手動啟動工作，否則請**在組建、****清除**和**專案開啟**事件**之後**，將工作系結至。
 
-[系結]， `watch` 讓它在每次開啟時執行 Visual Studio。 在 [工作執行器] 中，以滑鼠右鍵按一下 [ **Bindings**監看式] 工作，然後  >  從內容功能表中選取 [系**結專案**]。
+系結， `watch` 以便在每次 Visual Studio 開啟時執行。 在工作執行器瀏覽器中，以滑鼠右鍵按一下 [監看式] 工作，然後從內容功能表**選取 [** 系  >  **結專案開啟**]。
 
-![將工作系結至專案開啟](using-grunt/_static/bindings-project-open.png)
+![將工作系結至開啟的專案](using-grunt/_static/bindings-project-open.png)
 
 卸載並重載專案。 當專案再次載入時，[監看式] 工作會自動開始執行。
 
-## <a name="summary"></a>總結
+## <a name="summary"></a>摘要
 
-Grunt 是功能強大的工作執行器，可以用來將大部分的用戶端組建作業自動化。 Grunt 會利用 NPM 來傳遞其套件，並使用與 Visual Studio 的功能工具整合。 Visual Studio 的工作執行器 Explorer 會偵測設定檔案的變更，並提供便利的介面來執行工作、查看執行中的工作，以及將工作系結至 Visual Studio 的事件。
+Grunt 是功能強大的工作執行器，可用來將大部分的用戶端組建工作自動化。 Grunt 利用 NPM 來提供其套件，並將功能工具與 Visual Studio 整合。 Visual Studio 的工作執行器 Explorer 會偵測設定檔的變更，並提供便利的介面來執行工作、查看執行中的工作，以及將工作系結至 Visual Studio 事件。

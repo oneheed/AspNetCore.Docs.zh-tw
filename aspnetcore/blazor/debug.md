@@ -7,6 +7,7 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 08/17/2020
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -17,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/debug
-ms.openlocfilehash: ac649b80a6cb1106de8acbb4764b53017afaa238
-ms.sourcegitcommit: dfea24471f4f3d7904faa92fe60c000853bddc3b
+ms.openlocfilehash: 5aeb333dc36ebc4c3a324b397793343e0335b1e1
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 08/18/2020
-ms.locfileid: "88504589"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88628361"
 ---
 # <a name="debug-aspnet-core-no-locblazor-webassembly"></a>Debug ASP.NET Core Blazor WebAssembly
 
@@ -46,7 +47,7 @@ Blazor WebAssembly 您可以使用以 Chromium 為基礎的瀏覽器中的瀏覽
 
 我們將繼續改進即將推出的版本中的調試過程。
 
-## <a name="prerequisites"></a>先決條件
+## <a name="prerequisites"></a>Prerequisites
 
 偵錯工具需要下列其中一個瀏覽器：
 

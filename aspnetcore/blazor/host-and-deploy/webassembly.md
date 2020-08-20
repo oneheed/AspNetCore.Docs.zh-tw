@@ -7,6 +7,7 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 08/03/2020
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -17,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/host-and-deploy/webassembly
-ms.openlocfilehash: e66a470bf5bd23950bdb0ccf61c6743916ed9349
-ms.sourcegitcommit: dfea24471f4f3d7904faa92fe60c000853bddc3b
+ms.openlocfilehash: 9e3933d8800c00eb135c041bb1c65fbf01d4ef83
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 08/18/2020
-ms.locfileid: "88504550"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88628036"
 ---
 # <a name="host-and-deploy-aspnet-core-no-locblazor-webassembly"></a>裝載和部署 ASP.NET Core Blazor WebAssembly
 
@@ -620,7 +621,7 @@ COPY nginx.conf /etc/nginx/nginx.conf
 
 1. 重新開機 Apache 服務。
 
-如需詳細資訊，請參閱 [`mod_mime`](https://httpd.apache.org/docs/2.4/mod/mod_mime.html) 和 [`mod_deflate`](https://httpd.apache.org/docs/current/mod/mod_deflate.html) 。
+如需詳細資訊，請參閱 [`mod_mime`](https://httpd.apache.org/docs/2.4/mod/mod_mime.html) 和 [`mod_deflate`](https://httpd.apache.org/docs/current/mod/mod_deflate.html)。
 
 ### <a name="github-pages"></a>GitHub 頁面
 

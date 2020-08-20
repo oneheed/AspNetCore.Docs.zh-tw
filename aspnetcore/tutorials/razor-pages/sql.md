@@ -1,10 +1,11 @@
 ---
-title: 第4部分，含有資料庫和 ASP.NET Core
+title: 第4部分：資料庫和 ASP.NET Core
 author: rick-anderson
 description: 頁面上教學課程系列的第4部分 Razor 。
 ms.author: riande
 ms.date: 7/22/2019
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -15,14 +16,14 @@ no-loc:
 - Razor
 - SignalR
 uid: tutorials/razor-pages/sql
-ms.openlocfilehash: 6d1a93a9cab49d33181e88b7fdc0f203a1e2546c
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: d2e18782411b1801c74fa33ba1b31bad9662f3b2
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88022416"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88627113"
 ---
-# <a name="part-4-with-a-database-and-aspnet-core"></a>第4部分，含有資料庫和 ASP.NET Core
+# <a name="part-4-with-a-database-and-aspnet-core"></a>第4部分：資料庫和 ASP.NET Core
 
 作者：[Rick Anderson](https://twitter.com/RickAndMSFT) 與 [Joe Audette](https://twitter.com/joeaudette)
 
@@ -42,7 +43,7 @@ ms.locfileid: "88022416"
 
 ---
 
-ASP.NET Core [組態](xref:fundamentals/configuration/index)系統會讀取 `ConnectionString`。 對於本機開發，它會從檔案中的*appsettings.js*取得連接字串。
+ASP.NET Core [組態](xref:fundamentals/configuration/index)系統會讀取 `ConnectionString`。 針對本機開發，它會從檔案中的 *appsettings.js* 取得連接字串。
 
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
@@ -117,7 +118,7 @@ if (context.Movie.Any())
 
 [!code-csharp[](razor-pages-start/sample/RazorPagesMovie30/Program.cs)]
 
-當尚未執行時，會發生下列例外狀況 `Update-Database` ：
+未執行時，會發生下列例外狀況 `Update-Database` ：
 
 > `SqlException: Cannot open database "RazorPagesMovieContext-" requested by the login. The login failed.`
 > `Login failed for user 'user name'.`
@@ -129,7 +130,7 @@ if (context.Movie.Any())
 * 刪除資料庫中的所有記錄。 您可以使用瀏覽器或 [SSOX](xref:tutorials/razor-pages/new-field#ssox) 的刪除連結來執行這項操作
 * 強制應用程式初始化 (呼叫 `Startup` 類別中的方法)，以執行植入方法。 若要強制初始化，IIS Express 必須停止並重新啟動。 您可以使用下列其中一個方法來執行此工作：
 
-  * 以滑鼠右鍵按一下通知區域中的 [IIS Express 系統匣] 圖示，然後**按 [結束] 或 [** **停止網站**]：
+  * 以滑鼠右鍵按一下通知區域中的 [IIS Express 系統匣] 圖示，然後 **按一下 [結束] 或 [** **停止網站**]：
 
     ![IIS Express 系統匣圖示](../first-mvc-app/working-with-sql/_static/iisExIcon.png)
 
@@ -151,7 +152,7 @@ if (context.Movie.Any())
 ## <a name="additional-resources"></a>其他資源
 
 > [!div class="step-by-step"]
-> [上一步： scaffold Razor頁面](xref:tutorials/razor-pages/page) 
+> [上一個： scaffold Razor頁面](xref:tutorials/razor-pages/page) 
 >  [下一步：更新頁面](xref:tutorials/razor-pages/da1)
 
 ::: moniker-end
@@ -177,7 +178,7 @@ if (context.Movie.Any())
 * 適用於 `CookiePolicyOptions` 的 [ASP.NET Core 中的 EU 一般資料保護規定 (GDPR) 支援](xref:security/gdpr)。
 * [SetCompatibilityVersion](xref:mvc/compatibility-version)
 
-ASP.NET Core [組態](xref:fundamentals/configuration/index)系統會讀取 `ConnectionString`。 對於本機開發，它會從檔案中的*appsettings.js*取得連接字串。
+ASP.NET Core [組態](xref:fundamentals/configuration/index)系統會讀取 `ConnectionString`。 針對本機開發，它會從檔案中的 *appsettings.js* 取得連接字串。
 
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
@@ -307,7 +308,7 @@ SqlException：無法開啟 Razor 登入所要求的資料庫 "PagesMovieCoNtext
 * [本教學課程的 YouTube 版本](https://youtu.be/A_5ff11sDHY)
 
 > [!div class="step-by-step"]
-> [上一步： scaffold Razor頁面](xref:tutorials/razor-pages/page) 
+> [上一個： scaffold Razor頁面](xref:tutorials/razor-pages/page) 
 >  [下一步：更新頁面](xref:tutorials/razor-pages/da1)
 
 ::: moniker-end

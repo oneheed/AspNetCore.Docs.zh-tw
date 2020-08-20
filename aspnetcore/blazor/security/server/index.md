@@ -1,12 +1,13 @@
 ---
-title: 保護 ASP.NET Core Blazor Server 應用程式
+title: 保護 ASP.NET Core Blazor Server 應用程式的安全
 author: guardrex
-description: 瞭解如何以 Blazor Server ASP.NET Core 的應用程式來保護應用程式。
+description: 瞭解如何 Blazor Server ASP.NET Core 應用程式保護應用程式。
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
 ms.date: 05/02/2020
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -17,41 +18,41 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/security/server/index
-ms.openlocfilehash: 4dc9040b9410304eb33e5df7c47db2f9a42152d3
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: ba9fe3c0149679fa5760c0c9214cd426f1804c31
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88013992"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88626450"
 ---
-# <a name="secure-aspnet-core-no-locblazor-server-apps"></a>保護 ASP.NET Core Blazor Server 應用程式
+# <a name="secure-aspnet-core-no-locblazor-server-apps"></a>保護 ASP.NET Core Blazor Server 應用程式的安全
 
 作者：[Luke Latham](https://github.com/guardrex)
 
-Blazor Server應用程式的安全性設定方式與 ASP.NET Core 應用程式相同。 如需詳細資訊，請參閱底下的文章 <xref:security/index> 。 此總覽下的主題特別適用于 Blazor Server 。 
+Blazor Server 應用程式會以與 ASP.NET Core 應用程式相同的方式來設定安全性。 如需詳細資訊，請參閱底下的文章 <xref:security/index> 。 本總覽下的主題特別適用于 Blazor Server 。 
 
-## <a name="no-locblazor-server-project-template"></a>Blazor Server專案範本
+## <a name="no-locblazor-server-project-template"></a>Blazor Server 專案範本
 
-Blazor Server專案範本可以設定為在建立專案時進行驗證。
+專案 Blazor Server 範本可設定為在建立專案時進行驗證。
 
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
-遵循中的 Visual Studio 指導方針 <xref:blazor/tooling> ，使用驗證機制來建立新的 Blazor Server 專案。
+遵循中的 Visual Studio 指導方針 <xref:blazor/tooling> ，建立 Blazor Server 具有驗證機制的新專案。
 
-選擇 [**建立新的 ASP.NET Core Web 應用程式**] 對話方塊中的** Blazor Server 應用程式**範本之後，請選取 [**驗證**] 底下的 [**變更**]。
+在 [**建立新的 ASP.NET Core Web 應用程式**] 對話方塊中選擇** Blazor Server 應用程式**範本之後，請選取 [**驗證**] 下的 [**變更**]。
 
 對話方塊隨即開啟，並提供可供其他 ASP.NET Core 專案使用的相同驗證機制集合：
 
 * **無驗證**
-* **個別使用者帳戶**：可以儲存使用者帳戶：
-  * 在應用程式中使用 ASP.NET Core 的 [Identity](xref:security/authentication/identity) 系統。
+* **個別使用者帳戶**：可儲存使用者帳戶：
+  * 在使用 ASP.NET Core 系統的應用程式內 [Identity](xref:security/authentication/identity) 。
   * 使用 [Azure AD B2C](xref:security/authentication/azure-ad-b2c) 儲存。
-* **工作或學校帳戶**
+* **公司或學校帳戶**
 * **Windows 驗證**
 
 # <a name="visual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code)
 
-遵循中的 Visual Studio Code 指導方針， <xref:blazor/tooling> 使用驗證機制來建立新的 Blazor Server 專案：
+遵循中的 Visual Studio Code 指導方針 <xref:blazor/tooling> ，建立 Blazor Server 具有驗證機制的新專案：
 
 ```dotnetcli
 dotnet new blazorserver -o {APP NAME} -au {AUTHENTICATION}
@@ -62,13 +63,13 @@ dotnet new blazorserver -o {APP NAME} -au {AUTHENTICATION}
 | 驗證機制 | 描述 |
 | ------------------------ | ----------- |
 | `None` (預設值)         | 不需要驗證 |
-| `Individual`             | 使用 ASP.NET Core 儲存在應用程式中的使用者Identity |
+| `Individual`             | 儲存在應用程式中的使用者 ASP.NET Core Identity |
 | `IndividualB2C`          | 儲存在[Azure AD B2C](xref:security/authentication/azure-ad-b2c)中的使用者 |
 | `SingleOrg`              | 單一租使用者的組織驗證 |
 | `MultiOrg`               | 多個租使用者的組織驗證 |
 | `Windows`                | Windows 驗證 |
 
-使用 `-o|--output` 選項時，此命令會使用提供給預留位置的值 `{APP NAME}` 來執行下列動作：
+使用 `-o|--output` 選項時，此命令會使用為預留位置提供的值 `{APP NAME}` 來：
 
 * 建立專案的資料夾。
 * 命名專案。
@@ -79,13 +80,13 @@ dotnet new blazorserver -o {APP NAME} -au {AUTHENTICATION}
 
 1. 遵循中的 Visual Studio for Mac 指導方針 <xref:blazor/tooling> 。
 
-1. 在 [**設定新的 Blazor Server 應用程式**] 步驟中，從 [**驗證**] 下拉式下選取 [**個別驗證] ([應用程式內) ** ]。
+1. 在 [**設定新的 Blazor Server 應用程式**] 步驟中，從 [**驗證**] 下拉式清單中選取 [**應用程式內) 的個別驗證 (** 。
 
-1. 應用程式會針對以 ASP.NET Core 儲存在應用程式中的個別使用者而建立 Identity 。
+1. 應用程式會針對儲存在應用程式中的個別使用者建立 ASP.NET Core Identity 。
 
 # <a name="net-core-cli"></a>[.NET Core CLI](#tab/netcore-cli/)
 
-Blazor Server在命令 shell 中使用下列命令，以驗證機制建立新的專案：
+Blazor Server在命令 shell 中使用下列命令，建立具有驗證機制的新專案：
 
 ```dotnetcli
 dotnet new blazorserver -o {APP NAME} -au {AUTHENTICATION}
@@ -96,13 +97,13 @@ dotnet new blazorserver -o {APP NAME} -au {AUTHENTICATION}
 | 驗證機制 | 描述 |
 | ------------------------ | ----------- |
 | `None` (預設值)         | 不需要驗證 |
-| `Individual`             | 使用 ASP.NET Core 儲存在應用程式中的使用者Identity |
+| `Individual`             | 儲存在應用程式中的使用者 ASP.NET Core Identity |
 | `IndividualB2C`          | 儲存在[Azure AD B2C](xref:security/authentication/azure-ad-b2c)中的使用者 |
 | `SingleOrg`              | 單一租使用者的組織驗證 |
 | `MultiOrg`               | 多個租使用者的組織驗證 |
 | `Windows`                | Windows 驗證 |
 
-使用 `-o|--output` 選項時，此命令會使用提供給預留位置的值 `{APP NAME}` 來執行下列動作：
+使用 `-o|--output` 選項時，此命令會使用為預留位置提供的值 `{APP NAME}` 來：
 
 * 建立專案的資料夾。
 * 命名專案。
@@ -111,7 +112,7 @@ dotnet new blazorserver -o {APP NAME} -au {AUTHENTICATION}
 
 ---
 
-## <a name="scaffold-no-locidentity"></a>ScaffoldIdentity
+## <a name="scaffold-no-locidentity"></a>支架 Identity
 
 Scaffold Identity 至 Blazor Server 專案：
 

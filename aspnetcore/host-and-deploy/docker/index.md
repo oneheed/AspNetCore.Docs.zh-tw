@@ -6,6 +6,7 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 01/08/2018
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -16,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: host-and-deploy/docker/index
-ms.openlocfilehash: 35837eb2bd1ed2321663e1ae334eb20b18e5587a
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: bcb09300ccfd0fa1595bff325da1049d4d185b64
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88015773"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88627347"
 ---
 # <a name="host-aspnet-core-in-docker-containers"></a>在 Docker 容器中裝載 ASP.NET Core
 
@@ -50,4 +51,4 @@ ms.locfileid: "88015773"
 [設定 ASP.NET Core 以處理 Proxy 伺服器和負載平衡器](xref:host-and-deploy/proxy-load-balancer)  
 Proxy 伺服器和負載平衡器後方託管的應用程式可能需要其他設定。 透過 Proxy 傳遞要求通常會遮住原始要求的相關資訊，例如配置和用戶端 IP。 可能必須以手動方式將一些關於要求的資訊轉送至應用程式。
 
-[使用 Docker 和小型容器的 GC](xref:performance/memory#sc)討論具有小型容器的 GC 選取範圍。
+[使用 Docker 和小型容器的 GC](xref:performance/memory#sc) 討論使用小型容器的 GC 選取專案。

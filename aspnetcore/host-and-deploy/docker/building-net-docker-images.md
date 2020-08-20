@@ -6,6 +6,7 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 05/12/2020
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -16,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: host-and-deploy/docker/building-net-docker-images
-ms.openlocfilehash: 428186b1a0ee0c1527eedcd91d3a061053f814fc
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: dfb807d5e8d8b949feb0ea87f7f6bcecd04817e8
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88015799"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88627321"
 ---
 # <a name="docker-images-for-aspnet-core"></a>ASP.NET Core 的 Docker 映像
 
@@ -50,7 +51,7 @@ ms.locfileid: "88015799"
 
    範例會使用此映像來執行應用程式。 此映像包含 ASP.NET Core 執行階段和程式庫，並會進行最佳化，以在生產環境中執行應用程式。 專為部署和應用程式啟動速度而設計的映像相對較小，因此，已將從 Docker 登錄到 Docker 主機的網路效能最佳化。 只會將執行應用程式所需的程式庫和內容複製到容器中。 內容已準備好執行，可用最短的時間從 `Docker run` 到應用程式啟動。 在 Docker 模型中，不需要動態程式碼編譯。
 
-## <a name="prerequisites"></a>必要條件
+## <a name="prerequisites"></a>Prerequisites
 ::: moniker range="< aspnetcore-3.0"
 
 * [.NET Core 2.2 SDK](https://dotnet.microsoft.com/download/dotnet-core)
@@ -197,7 +198,7 @@ ENTRYPOINT ["dotnet", "aspnetapp.dll"]
 
 ### <a name="the-dockerfile"></a>Dockerfile
 
-以下是您稍早執行的命令所使用的*Dockerfile* `docker build` 。  它會以您在本節所做的相同方式，使用 `dotnet publish` 進行建置及部署。  
+以下是您稍早執行的命令所使用的 *Dockerfile* `docker build` 。  它會以您在本節所做的相同方式，使用 `dotnet publish` 進行建置及部署。  
 
 ```dockerfile
 FROM mcr.microsoft.com/dotnet/core/sdk:2.2 AS build
@@ -232,7 +233,7 @@ ENTRYPOINT ["dotnet", "aspnetapp.dll"]
 
 ### <a name="the-dockerfile"></a>Dockerfile
 
-以下是您稍早執行的命令所使用的*Dockerfile* `docker build` 。  它會以您在本節所做的相同方式，使用 `dotnet publish` 進行建置及部署。  
+以下是您稍早執行的命令所使用的 *Dockerfile* `docker build` 。  它會以您在本節所做的相同方式，使用 `dotnet publish` 進行建置及部署。  
 
 ```dockerfile
 FROM mcr.microsoft.com/dotnet/core/sdk:3.0 AS build
@@ -254,7 +255,7 @@ COPY --from=build /app/aspnetapp/out ./
 ENTRYPOINT ["dotnet", "aspnetapp.dll"]
 ```
 
-如先前的 Dockerfile 所述，檔案 `*.csproj` 會複製並還原為不同的*層*級。 當 `docker build` 命令建立映射時，它會使用內建快取。 如果 `*.csproj` 自從上次執行命令之後檔案尚未變更 `docker build` ，則 `dotnet restore` 不需要再次執行命令。 相反地， `dotnet restore` 會重複使用對應圖層的內建快取。 如需詳細資訊，請參閱[撰寫 dockerfile 的最佳做法](https://docs.docker.com/develop/develop-images/dockerfile_best-practices/#leverage-build-cache)。
+如上述 Dockerfile 所述，檔案 `*.csproj` 會複製並還原為不同的 *層*級。 當 `docker build` 命令建立映射時，它會使用內建的快取。 如果 `*.csproj` 自 `docker build` 命令上次執行之後，檔案尚未變更，則 `dotnet restore` 不需要再次執行命令。 相反地，會重複使用對應層的內建快取 `dotnet restore` 。 如需詳細資訊，請參閱 [撰寫 dockerfile 的最佳做法](https://docs.docker.com/develop/develop-images/dockerfile_best-practices/#leverage-build-cache)。
 
 ::: moniker-end
 

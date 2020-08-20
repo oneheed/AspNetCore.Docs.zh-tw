@@ -7,6 +7,7 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 06/24/2020
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -17,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/call-web-api
-ms.openlocfilehash: f8c105624506d13f3ea8e963ceb49aeaf6d22a66
-ms.sourcegitcommit: dfea24471f4f3d7904faa92fe60c000853bddc3b
+ms.openlocfilehash: cffd9e33636f98d50300de851d696ae753c10a0d
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 08/18/2020
-ms.locfileid: "88504563"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88625332"
 ---
 # <a name="call-a-web-api-from-aspnet-core-no-locblazor"></a>從 ASP.NET Core 呼叫 web API Blazor
 
@@ -40,7 +41,7 @@ ms.locfileid: "88504563"
 *  () 呼叫 Web API `Pages/CallWebAPI.razor`
 * HTTP 要求測試器 (`Components/HTTPRequestTester.razor`) 
 
-## <a name="packages"></a>套件
+## <a name="packages"></a>Packages
 
 參考 [`System.Net.Http.Json`](https://www.nuget.org/packages/System.Net.Http.Json) 專案檔中的 NuGet 套件。
 

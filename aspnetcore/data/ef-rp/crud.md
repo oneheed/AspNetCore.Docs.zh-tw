@@ -1,10 +1,11 @@
 ---
-title: 第2部分， Razor ASP.NET Core 中有 EF Core 的頁面-CRUD
+title: 第2部分： Razor ASP.NET Core 中有 EF Core 的頁面-CRUD
 author: rick-anderson
 description: 頁面第2部分 Razor 和 Entity Framework 教學課程系列。
 ms.author: riande
 ms.date: 07/22/2019
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -15,14 +16,14 @@ no-loc:
 - Razor
 - SignalR
 uid: data/ef-rp/crud
-ms.openlocfilehash: f205e7741c8e901e9219bec2028c7bee98129161
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: a6a99d736a60a55b81eb7e852413dc52b733d2fb
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88018360"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88627529"
 ---
-# <a name="part-2-no-locrazor-pages-with-ef-core-in-aspnet-core---crud"></a>第2部分， Razor ASP.NET Core 中有 EF Core 的頁面-CRUD
+# <a name="part-2-no-locrazor-pages-with-ef-core-in-aspnet-core---crud"></a>第2部分： Razor ASP.NET Core 中有 EF Core 的頁面-CRUD
 
 作者：[Tom Dykstra](https://github.com/tdykstra)、[Jon P Smith](https://twitter.com/thereformedprog)、[Rick Anderson](https://twitter.com/RickAndMSFT)
 
@@ -34,7 +35,7 @@ ms.locfileid: "88018360"
 
 ## <a name="no-repository"></a>沒有任何存放庫
 
-有些開發人員會使用服務層或儲存機制模式，在 UI (Razor 頁面) 和資料存取層之間建立抽象層。 本教學課程不會這麼做。 為降低複雜性並將教學課程聚焦於 EF Core，EF Core 程式碼會直接新增至頁面模型類別中。 
+某些開發人員會使用服務層或儲存機制模式，在 UI (Razor 頁面) 和資料存取層之間建立抽象層。 本教學課程不會這麼做。 為降低複雜性並將教學課程聚焦於 EF Core，EF Core 程式碼會直接新增至頁面模型類別中。 
 
 ## <a name="update-the-details-page"></a>更新 [詳細資料] 頁面
 
@@ -89,7 +90,7 @@ Students 頁面的 Scaffold 程式碼不包含註冊資料。 在本節中，您
 
 * 使用 [PageModel](/dotnet/api/microsoft.aspnetcore.mvc.razorpages.pagemodel) 中 [PageCoNtext](/dotnet/api/microsoft.aspnetcore.mvc.razorpages.pagemodel.pagecontext#Microsoft_AspNetCore_Mvc_RazorPages_PageModel_PageContext) 屬性的張貼表單值。
 * 僅更新列出的屬性 (`s => s.FirstMidName, s => s.LastName, s => s.EnrollmentDate`)。
-* 尋找具有 "student" 前置詞的表單欄位。 例如，`Student.FirstMidName`。 不區分大小寫。
+* 尋找具有 "student" 前置詞的表單欄位。 例如： `Student.FirstMidName` 。 不區分大小寫。
 * 使用[模型繫結](xref:mvc/models/model-binding)系統，將字串中表單值轉換成 `Student` 模型中的型別。 例如，`EnrollmentDate` 必須轉換成 DateTime。
 
 執行應用程式，並建立 Student 實體來測試 [建立] 頁面。
@@ -100,7 +101,7 @@ Students 頁面的 Scaffold 程式碼不包含註冊資料。 在本節中，您
 
 [!code-csharp[Main](intro/samples/cu30snapshots/2-crud/Models/StudentZsecret.cs?name=snippet_Intro&highlight=7)]
 
-即使應用程式在 `Secret` [建立或更新] 頁面上沒有欄位 Razor ，駭客還是可以藉 `Secret` 由防止大量指派來設定該值。 駭客仍可能使用 Fiddler 等工具，或是撰寫 JavaScript，來張貼 `Secret` 表單值。 原始程式碼並不會限制模型繫結器在建立 Student 執行個體時所使用的欄位。
+即使應用程式在 `Secret` [建立或更新] 頁面上沒有欄位 Razor ，駭客也可以藉 `Secret` 由大量指派來設定值。 駭客仍可能使用 Fiddler 等工具，或是撰寫 JavaScript，來張貼 `Secret` 表單值。 原始程式碼並不會限制模型繫結器在建立 Student 執行個體時所使用的欄位。
 
 無論駭客在 `Secret` 表單欄位中指定了什麼值，該值都會更新到資料庫中。 下列影響顯示了 Fiddler 工具將 `Secret` 欄位 (其值為 "OverPost") 新增到表單的值中。
 
@@ -114,7 +115,7 @@ Students 頁面的 Scaffold 程式碼不包含註冊資料。 在本節中，您
 
 應用程式模型通常稱為網域模型。 網域模型通常會包含資料庫中對應實體所需要的所有屬性。 檢視模型只包含 UI 所需要的屬性 (例如 [建立] 頁面)。
 
-除了視圖模型之外，某些應用程式會使用系結模型或輸入模型，在 Razor 頁面頁面模型類別與瀏覽器之間傳遞資料。 
+除了 view 模型之外，有些應用程式會使用系結模型或輸入模型，在 Razor 頁面頁面模型類別和瀏覽器之間傳遞資料。 
 
 請看看下列 `Student` 檢視模型：
 
@@ -156,7 +157,7 @@ Students 頁面的 Scaffold 程式碼不包含註冊資料。 在本節中，您
 
 * `Deleted`：實體已遭標示刪除。 `SaveChanges` 方法會發出 DELETE 陳述式。
 
-* `Detached`：實體未由資料庫內容追蹤。
+* `Detached`：實體未被資料庫內容追蹤。
 
 在桌面應用程式中，狀態變更通常會自動進行設定。 實體已讀取、已進行變更，且實體狀態會自動變更為 `Modified`。 呼叫 `SaveChanges` 會產生 SQL UPDATE 陳述式，此陳述式只會更新變更過的屬性。
 
@@ -177,7 +178,7 @@ Students 頁面的 Scaffold 程式碼不包含註冊資料。 在本節中，您
 * 攔截到資料庫例外狀況。
 * [刪除] 頁面的 `OnGetAsync` 方法會以 `saveChangesError=true` 呼叫。
 
-將錯誤訊息新增至 [刪除] Razor 頁面， (*Pages/Student/delete. cshtml*) ：
+將錯誤訊息加入至 [刪除] Razor 頁面， (*Pages/Student/Delete. cshtml*) ：
 
 [!code-cshtml[Main](intro/samples/cu30/Pages/Students/Delete.cshtml?highlight=10)]
 
@@ -195,9 +196,9 @@ Students 頁面的 Scaffold 程式碼不包含註冊資料。 在本節中，您
 
 在本教學課程中，將會檢閱並自訂 Scaffold CRUD (建立、讀取、更新、刪除)。
 
-為降低複雜性並將教學課程聚焦於 EF Core，EF Core 程式碼會使用於頁面模型中。 有些開發人員會使用中的服務層級或儲存機制模式，在 UI (Razor 頁面) 和資料存取層之間建立抽象層。
+為降低複雜性並將教學課程聚焦於 EF Core，EF Core 程式碼會使用於頁面模型中。 某些開發人員會使用中的服務層或儲存機制模式，在 UI (Razor 頁面) 和資料存取層之間建立抽象層。
 
-在本教學課程中， Razor 會檢查*學生*資料夾中的 [建立]、[編輯]、[刪除] 和 [詳細資料] 頁面。
+在本教學課程中， Razor 會檢查 [ *學生* ] 資料夾中的 [建立]、[編輯]、[刪除] 和 [詳細資料] 頁面
 
 Scaffold 程式碼會為 [建立]、[編輯]、[刪除] 頁面使用下列模式：
 
@@ -206,7 +207,7 @@ Scaffold 程式碼會為 [建立]、[編輯]、[刪除] 頁面使用下列模式
 
 [索引] 頁面和 [詳細資料] 頁面以 HTTP GET 方法 `OnGetAsync` 取得並顯示所要求的資料
 
-## <a name="singleordefaultasync-vs-firstordefaultasync"></a>SingleOrDefaultAsync 與 FirstOrDefaultAsync 的比較
+## <a name="singleordefaultasync-vs-firstordefaultasync"></a>SingleOrDefaultAsync 與 Singleordefaultasync 的比較
 
 產生的程式碼會使用 [FirstOrDefaultAsync](/dotnet/api/microsoft.entityframeworkcore.entityframeworkqueryableextensions.firstordefaultasync#Microsoft_EntityFrameworkCore_EntityFrameworkQueryableExtensions_FirstOrDefaultAsync__1_System_Linq_IQueryable___0__System_Threading_CancellationToken_)，一般會偏好它而非 [SingleOrDefaultAsync](/dotnet/api/microsoft.entityframeworkcore.entityframeworkqueryableextensions.singleordefaultasync#Microsoft_EntityFrameworkCore_EntityFrameworkQueryableExtensions_SingleOrDefaultAsync__1_System_Linq_IQueryable___0__System_Linq_Expressions_Expression_System_Func___0_System_Boolean___System_Threading_CancellationToken_)。
 
@@ -308,7 +309,7 @@ Students [索引] 頁面的 Scaffold 程式碼不包含 `Enrollments` 屬性。 
 
 [!code-csharp[](intro/samples/cu21/Models/StudentZsecret.cs?name=snippet_Intro&highlight=7)]
 
-即使應用程式在 `Secret` [建立/更新] 頁面上沒有欄位 Razor ，駭客還是可以藉 `Secret` 由防止大量指派來設定該值。 駭客仍可能使用 Fiddler 等工具，或是撰寫 JavaScript，來張貼 `Secret` 表單值。 原始程式碼並不會限制模型繫結器在建立 Student 執行個體時所使用的欄位。
+即使應用程式在 `Secret` [建立/更新] 頁面上沒有欄位 Razor ，駭客也可以藉 `Secret` 由大量指派來設定值。 駭客仍可能使用 Fiddler 等工具，或是撰寫 JavaScript，來張貼 `Secret` 表單值。 原始程式碼並不會限制模型繫結器在建立 Student 執行個體時所使用的欄位。
 
 無論駭客在 `Secret` 表單欄位中指定了什麼值，該值都會更新到資料庫中。 下列影響顯示了 Fiddler 工具將 `Secret` 欄位 (其值為 "OverPost") 新增到表單的值中。
 
@@ -320,7 +321,7 @@ Students [索引] 頁面的 Scaffold 程式碼不包含 `Enrollments` 屬性。 
 
 ### <a name="view-model"></a>檢視模型
 
-檢視模型通常包含屬性中的子集，這些屬性包含在應用程式使用的模型中。 應用程式模型通常稱為網域模型。 網域模型通常會包含資料庫中對應實體所需要的所有屬性。 檢視模型只包含 UI 層所需要的屬性 (例如 [建立] 頁面)。 除了視圖模型之外，某些應用程式會使用系結模型或輸入模型，在 Razor 頁面頁面模型類別與瀏覽器之間傳遞資料。 請看看下列 `Student` 檢視模型：
+檢視模型通常包含屬性中的子集，這些屬性包含在應用程式使用的模型中。 應用程式模型通常稱為網域模型。 網域模型通常會包含資料庫中對應實體所需要的所有屬性。 檢視模型只包含 UI 層所需要的屬性 (例如 [建立] 頁面)。 除了 view 模型之外，有些應用程式會使用系結模型或輸入模型，在 Razor 頁面頁面模型類別和瀏覽器之間傳遞資料。 請看看下列 `Student` 檢視模型：
 
 [!code-csharp[](intro/samples/cu21/Models/StudentVM.cs)]
 
@@ -409,7 +410,7 @@ Students [索引] 頁面的 Scaffold 程式碼不包含 `Enrollments` 屬性。 
 
 Students/Index 或其他連結運作失常：
 
-確認 Razor 頁面包含正確的指示詞 `@page` 。 例如，[學生/索引] Razor 頁面**不**應包含路由範本：
+確認 Razor 頁面包含正確的指示詞 `@page` 。 例如，[學生/索引] Razor 頁面 **不** 應包含路由範本：
 
 ```cshtml
 @page "{id:int}"

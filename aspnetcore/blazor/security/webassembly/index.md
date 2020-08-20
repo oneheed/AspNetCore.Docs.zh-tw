@@ -7,6 +7,7 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 07/16/2020
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -17,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/security/webassembly/index
-ms.openlocfilehash: fe9bd270ce509e8389dd3d4f3f6f3a6dda03d425
-ms.sourcegitcommit: dfea24471f4f3d7904faa92fe60c000853bddc3b
+ms.openlocfilehash: 391a38e9af42b162fc74bac803e6aa3cf687e7d5
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 08/18/2020
-ms.locfileid: "88504537"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88626060"
 ---
 # <a name="secure-aspnet-core-no-locblazor-webassembly"></a>安全 ASP.NET Core Blazor WebAssembly
 
@@ -32,7 +33,7 @@ Blazor WebAssembly 應用程式的保護方式與單一頁面應用程式 (Spa) 
 
 ## <a name="authentication-library"></a>驗證程式庫
 
-Blazor WebAssembly 支援透過程式庫使用 OIDC 來驗證和授權應用程式 [`Microsoft.AspNetCore.Components.WebAssembly.Authentication`](https://www.nuget.org/packages/Microsoft.AspNetCore.Components.WebAssembly.Authentication) 。 此程式庫提供一組基本類型，可針對 ASP.NET Core 後端進行順暢的驗證。 此程式庫會將 ASP.NET Core Identity 與以[ Identity 伺服器](https://identityserver.io/)為基礎的 API 授權支援整合。 此程式庫可以針對支援 OIDC 的任何協力廠商 Identity 提供者進行驗證 (IP) ，這稱為 OpenID 提供者 (OP) 。
+Blazor WebAssembly 支援透過程式庫使用 OIDC 來驗證和授權應用程式 [`Microsoft.AspNetCore.Components.WebAssembly.Authentication`](https://www.nuget.org/packages/Microsoft.AspNetCore.Components.WebAssembly.Authentication) 。 此程式庫提供一組基本類型，可針對 ASP.NET Core 後端進行順暢的驗證。 此程式庫會 ASP.NET Core Identity 與以[ Identity 伺服器](https://identityserver.io/)為基礎的 API 授權支援整合。 此程式庫可以針對支援 OIDC 的任何協力廠商 Identity 提供者進行驗證 (IP) ，這稱為 OpenID 提供者 (OP) 。
 
 中的驗證支援 Blazor WebAssembly 是建立在程式庫的上層 `oidc-client.js` ，用來處理基礎驗證通訊協定的詳細資料。
 

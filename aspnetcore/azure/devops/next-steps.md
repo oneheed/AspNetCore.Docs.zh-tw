@@ -1,11 +1,12 @@
 ---
 title: 後續步驟-使用 ASP.NET Core 和 Azure DevOps
 author: CamSoper
-description: 使用 ASP.NET Core 和 Azure 進行 DevOps 的其他學習路徑。
+description: 使用 ASP.NET Core 和 Azure 的其他 DevOps 學習路徑。
 ms.author: casoper
 ms.custom: devx-track-csharp, mvc, seodec18
 ms.date: 10/24/2018
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -16,41 +17,41 @@ no-loc:
 - Razor
 - SignalR
 uid: azure/devops/next-steps
-ms.openlocfilehash: a9a6b0a588b7813f9d6e2b215630a1b9100be890
-ms.sourcegitcommit: ba4872dd5a93780fe6cfacb2711ec1e69e0df92c
+ms.openlocfilehash: 59c6bba7e5d05bbb6ef7db65bbedf70c4524b092
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 08/12/2020
-ms.locfileid: "88130427"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88625345"
 ---
 # <a name="next-steps"></a>後續步驟
 
-在本指南中，您已建立 ASP.NET Core 範例應用程式的 DevOps 管線。 恭喜！ 我們希望您喜歡學習如何發佈 ASP.NET Core web 應用程式來 Azure App Service，並將變更的持續整合自動化。
+在本指南中，您已為 ASP.NET Core 範例應用程式建立 DevOps 管線。 恭喜！ 我們希望您喜歡學習將 ASP.NET Core web 應用程式發佈至 Azure App Service，並自動化變更的持續整合。
 
-除了 web 裝載和 DevOps 之外，Azure 還提供各式各樣的平臺即服務 (PaaS) 服務，適用于 ASP.NET Core 開發人員。 本節提供一些最常用服務的簡要概述。
+除了 web 裝載和 DevOps 之外，Azure 也有各式各樣的平臺即服務 (PaaS) 服務，對 ASP.NET Core 開發人員非常有用。 本節簡要說明一些最常使用的服務。
 
 ## <a name="storage-and-databases"></a>儲存體和資料庫
 
-[Redis Cache](/azure/redis-cache/)是以服務形式提供的高輸送量、低延遲的資料快取。 它可以用來快取頁面輸出、減少資料庫要求，以及在多個應用程式實例之間提供 ASP.NET Core 會話狀態。
+[Redis](/azure/redis-cache/) 快取是以服務形式提供的高輸送量、低延遲資料快取。 它可用於快取頁面輸出、減少資料庫要求，以及在應用程式的多個實例之間提供 ASP.NET Core 的會話狀態。
 
-[Azure 儲存體](/azure/storage/)是 Azure 可大規模調整的雲端儲存體。 開發人員可以利用[佇列儲存體](/azure/storage/queues/storage-queues-introduction)來提供可靠的訊息佇列，而[表格儲存體](/azure/storage/tables/table-storage-overview)則是 NoSQL 索引鍵值存放區，其設計目的是要使用大量的半結構化資料集進行快速開發。
+[Azure 儲存體](/azure/storage/) 是 Azure 可大規模調整的雲端儲存體。 開發人員可以利用 [佇列儲存體](/azure/storage/queues/storage-queues-introduction) 進行可靠的訊息佇列，而 [資料表儲存體](/azure/storage/tables/table-storage-overview) 是 NoSQL 索引鍵/值存放區，專為使用大量、半結構化資料集的快速開發所設計。
 
-[Azure SQL Database](/azure/sql-database/)使用 Microsoft SQL Server 引擎，提供熟悉的關係資料庫功能做為服務。
+[Azure SQL Database](/azure/sql-database/) 使用 Microsoft SQL Server 引擎提供熟悉的關係資料庫功能做為服務。
 
-[Cosmos DB](/azure/cosmos-db/)全域散發的多模型 NoSQL 資料庫服務。 有多個 Api 可供使用，包括 SQL API (先前稱為 DocumentDB) 、Cassandra 和 MongoDB。
+[Cosmos DB](/azure/cosmos-db/) 全域散發、多模型的 NoSQL 資料庫服務。 有多個 Api 可供使用，包括先前稱為 DocumentDB) 、Cassandra 和 MongoDB 的 SQL API (。
 
 ## Identity
 
-[Azure Active Directory](/azure/active-directory/)和[Azure Active Directory B2C](/azure/active-directory-b2c/)都是身分識別服務。 Azure Active Directory 是針對企業案例而設計，可讓 Azure AD B2B (企業對企業) 共同作業，而 Azure Active Directory B2C 則是預期的企業對客戶案例，包括社交網路登入。
+[Azure Active Directory](/azure/active-directory/) 和 [Azure Active Directory B2C](/azure/active-directory-b2c/) 都是身分識別服務。 Azure Active Directory 是專為企業案例而設計，可讓 Azure AD B2B (企業對企業) 共同作業，同時 Azure Active Directory B2C 是預期的企業對客戶案例，包括社交網路登入。
 
 ## <a name="mobile"></a>行動
 
-[通知中樞](/azure/notification-hubs/)是多平臺、可擴充的推播通知引擎，可快速地將數百萬個訊息傳送到在各種類型的裝置上執行的應用程式。
+[通知中樞](/azure/notification-hubs/) 是多平臺、可調整的推播通知引擎，可快速地將數百萬則訊息傳送到在各種類型的裝置上執行的應用程式。
 
 ## <a name="web-infrastructure"></a>Web 基礎結構
 
-[Azure Container Service](/azure/aks/)會管理您託管的 Kubernetes 環境，讓您快速且輕鬆地部署和管理容器化應用程式，而不需要容器協調流程專業知識。
+[Azure Container Service](/azure/aks/) 管理您的託管 Kubernetes 環境，讓您快速且輕鬆地部署和管理容器化應用程式，而不需要容器協調流程專業知識。
 
-[Azure 搜尋服務](/azure/search/)是用來透過私人的非公開內容來建立企業搜尋解決方案。
+[Azure 搜尋](/azure/search/) 服務是用來建立超過私人、非廣泛內容的企業搜尋解決方案。
 
-[Service Fabric](/azure/service-fabric/)是分散式系統平臺，可讓您輕鬆封裝、部署及管理可調整和可靠的微服務和容器。
+[Service Fabric](/azure/service-fabric/) 是一種分散式系統平臺，可讓您輕鬆封裝、部署及管理可調整和可信賴的微服務與容器。

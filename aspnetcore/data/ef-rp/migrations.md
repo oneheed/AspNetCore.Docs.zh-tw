@@ -1,10 +1,11 @@
 ---
-title: 第4部分， Razor ASP.NET Core-遷移中包含 EF Core 的頁面
+title: 第4部分： Razor ASP.NET Core-遷移中有 EF Core 的頁面
 author: rick-anderson
-description: 頁面的第4部分 Razor 和 Entity Framework 教學課程系列。
+description: 頁面的第4部分 Razor 和 Entity Framework 的教學課程系列。
 ms.author: riande
 ms.date: 07/22/2019
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -15,14 +16,14 @@ no-loc:
 - Razor
 - SignalR
 uid: data/ef-rp/migrations
-ms.openlocfilehash: ebdcf5605e8b4067c52841b138184e51668f9c25
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: d922e3a4ad3660bdd1c70dc262acc2f87bdd4214
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88019647"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88626996"
 ---
-# <a name="part-4-no-locrazor-pages-with-ef-core-migrations-in-aspnet-core"></a>第4部分， Razor ASP.NET Core 中 EF Core 遷移的頁面
+# <a name="part-4-no-locrazor-pages-with-ef-core-migrations-in-aspnet-core"></a>第4部分： Razor ASP.NET Core 中有 EF Core 遷移的頁面
 
 作者：[Tom Dykstra](https://github.com/tdykstra)、[Jon P Smith](https://twitter.com/thereformedprog)、[Rick Anderson](https://twitter.com/RickAndMSFT)
 
@@ -92,7 +93,7 @@ dotnet ef database update
 
 ## <a name="up-and-down-methods"></a>Up 和 Down 方法
 
-EF Core `migrations add` 命令已產生用來建立資料庫的程式碼。 此遷移程式碼位於*遷移 \<timestamp> _InitialCreate .cs*檔案中。 `InitialCreate` 類別的 `Up` 方法會建立對應至資料模型實體集的資料庫資料表。 `Down` 方法則會刪除它們，如下列範例所示：
+EF Core `migrations add` 命令已產生用來建立資料庫的程式碼。 此遷移程式碼位於 *遷移 \<timestamp> _InitialCreate .cs* 檔案中。 `InitialCreate` 類別的 `Up` 方法會建立對應至資料模型實體集的資料庫資料表。 `Down` 方法則會刪除它們，如下列範例所示：
 
 [!code-csharp[](intro/samples/cu30/Migrations/20190731193522_InitialCreate.cs)]
 
@@ -114,7 +115,7 @@ EF Core `migrations add` 命令已產生用來建立資料庫的程式碼。 此
 
 移轉會在 *Migrations/SchoolContextModelSnapshot.cs* 中建立目前資料模型的「快照集」**。 當您新增移轉時，EF 會比較目前資料模型與快照集檔案，以判斷變更的內容。
 
-由於快照集檔案會追蹤資料模型的狀態，您無法藉由刪除 `<timestamp>_<migrationname>.cs` 檔案來刪除移轉。 若要退出最新的移轉，您必須使用 `migrations remove` 命令。 該命令會刪除移轉，並確保能正確地重設快照集。 如需詳細資訊，請參閱[dotnet ef 遷移移除](/ef/core/miscellaneous/cli/dotnet#dotnet-ef-migrations-remove)。
+由於快照集檔案會追蹤資料模型的狀態，您無法藉由刪除 `<timestamp>_<migrationname>.cs` 檔案來刪除移轉。 若要退出最新的移轉，您必須使用 `migrations remove` 命令。 該命令會刪除移轉，並確保能正確地重設快照集。 如需詳細資訊，請參閱 [dotnet ef 遷移移除](/ef/core/miscellaneous/cli/dotnet#dotnet-ef-migrations-remove)。
 
 ## <a name="remove-ensurecreated"></a>移除 EnsureCreated
 
@@ -230,7 +231,7 @@ dotnet ef database update
 
 ### <a name="examine-the-up-and-down-methods"></a>檢查 Up 和 Down 方法
 
-EF Core 命令 `migrations add` 已產生用來建立資料庫的程式碼。 此遷移程式碼位於*遷移 \<timestamp> _InitialCreate .cs*檔案中。 `InitialCreate` 類別的 `Up` 方法會建立對應至資料模型實體集的資料庫資料表。 `Down` 方法則會刪除它們，如下列範例所示：
+EF Core 命令 `migrations add` 已產生用來建立資料庫的程式碼。 此遷移程式碼位於 *遷移 \<timestamp> _InitialCreate .cs* 檔案中。 `InitialCreate` 類別的 `Up` 方法會建立對應至資料模型實體集的資料庫資料表。 `Down` 方法則會刪除它們，如下列範例所示：
 
 [!code-csharp[](intro/samples/cu21/Migrations/20180626224812_InitialCreate.cs?range=7-24,77-88)]
 
@@ -263,7 +264,7 @@ Migrations 會呼叫 `Up` 方法，以實作移轉所需的資料模型變更。
 dotnet ef migrations remove
 ```
 
-如需詳細資訊，請參閱[dotnet ef 遷移移除](/ef/core/miscellaneous/cli/dotnet#dotnet-ef-migrations-remove)。
+如需詳細資訊，請參閱 [dotnet ef 遷移移除](/ef/core/miscellaneous/cli/dotnet#dotnet-ef-migrations-remove)。
 
 ---
 

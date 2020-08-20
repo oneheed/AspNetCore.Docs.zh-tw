@@ -7,6 +7,7 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 07/09/2020
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -17,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/security/webassembly/hosted-with-identity-server
-ms.openlocfilehash: 33a82885dee5e13a97c76e6ecef96731a0336fad
-ms.sourcegitcommit: dfea24471f4f3d7904faa92fe60c000853bddc3b
+ms.openlocfilehash: ef5e9e1becb511ef383b22fc96441b0f61537354
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 08/18/2020
-ms.locfileid: "88504680"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88626216"
 ---
 # <a name="secure-an-aspnet-core-no-locblazor-webassembly-hosted-app-with-no-locidentity-server"></a>Blazor WebAssembly使用伺服器保護 ASP.NET Core 託管應用 Identity 程式
 
@@ -81,7 +82,7 @@ dotnet new blazorwasm -au Individual -ho -o {APP NAME}
 
 * 在 `Startup.ConfigureServices` 中：
 
-  * ASP.NET Core Identity ：
+  * ASP.NET Core Identity:
 
     ```csharp
     services.AddDbContext<ApplicationDbContext>(options =>
@@ -233,7 +234,7 @@ builder.Services.AddApiAuthorization();
 
 * 針對已驗證的使用者：
   * 顯示目前的使用者名稱。
-  * 提供 ASP.NET Core 中 [使用者設定檔] 頁面的連結 Identity 。
+  * 提供中 [使用者設定檔] 頁面的連結 ASP.NET Core Identity 。
   * 提供用來登出應用程式的按鈕。
 * 匿名使用者：
   * 提供註冊的選項。

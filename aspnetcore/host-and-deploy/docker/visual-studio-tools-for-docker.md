@@ -6,6 +6,7 @@ ms.author: scaddie
 ms.custom: mvc
 ms.date: 09/12/2018
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -16,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: host-and-deploy/docker/visual-studio-tools-for-docker
-ms.openlocfilehash: 2bdbbcfe4a94e5333ae11c4ab486ee0676d24b31
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: 68ecc4961401211f1304ac4a26fff1b31e4ad7eb
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88015721"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88627334"
 ---
 # <a name="visual-studio-container-tools-with-aspnet-core"></a>Visual Studio 容器工具搭配 ASP.NET Core
 
@@ -29,7 +30,7 @@ Visual Studio 2017 及更新版本支援建置、偵錯和執行以 .NET Core �
 
 [查看或下載範例程式碼](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/host-and-deploy/docker/visual-studio-tools-for-docker/samples) ([如何下載](xref:index#how-to-download-a-sample)) 
 
-## <a name="prerequisites"></a>必要條件
+## <a name="prerequisites"></a>Prerequisites
 
 * [Docker for Windows](https://docs.docker.com/docker-for-windows/install/)
 * 已安裝 **.NET Core 跨平台開發**工作負載的 [Visual Studio 2019](https://visualstudio.microsoft.com/downloads/?utm_medium=microsoft&utm_source=docs.microsoft.com&utm_campaign=inline+link&utm_content=download+vs2019)
@@ -38,7 +39,7 @@ Visual Studio 2017 及更新版本支援建置、偵錯和執行以 .NET Core �
 
 若要進行 Docker 安裝，請先檢閱 [Docker for Windows: What to know before you install](https://docs.docker.com/docker-for-windows/install/#what-to-know-before-you-install) 中的資訊。 接下來，安裝 [適用於 Windows 的 Docker](https://docs.docker.com/docker-for-windows/install/)。
 
-Docker for Windows 中的 **[Shared Drives](https://docs.docker.com/docker-for-windows/#shared-drives)** (共用磁碟機) 必須設定為支援磁碟區對應和偵錯。 以滑鼠右鍵按一下系統匣的 Docker 圖示，選取 [**設定**]，然後選取 [**共用磁片磁碟機**]。 選取 Docker 儲存檔案的磁碟機。 按一下 [套用]。
+Docker for Windows 中的 **[Shared Drives](https://docs.docker.com/docker-for-windows/#shared-drives)** (共用磁碟機) 必須設定為支援磁碟區對應和偵錯。 以滑鼠右鍵按一下系統匣的 Docker 圖示，並選取 [ **設定**]，然後選取 [ **共用磁片磁碟機**]。 選取 Docker 儲存檔案的磁碟機。 按一下 [套用]。
 
 ![為容器選取共用本機 C 磁碟機的對話方塊](visual-studio-tools-for-docker/_static/settings-shared-drives-win.png)
 
@@ -70,7 +71,7 @@ Visual Studio 容器工具不支援將 Docker 新增至以 .NET Framework 為目
 
 ## <a name="dockerfile-overview"></a>Dockerfile 概觀
 
-*Dockerfile*，是用於建立最終 Docker 映像的配方，會新增至專案根目錄。 請參閱[Dockerfile 參考](https://docs.docker.com/engine/reference/builder/)以瞭解其內的命令。 此特定 *Dockerfile* 使用[多階段建置](https://docs.docker.com/engine/userguide/eng-image/multistage-build/)，包含四個不同的具名建置階段：
+*Dockerfile*，是用於建立最終 Docker 映像的配方，會新增至專案根目錄。 請參閱 [Dockerfile 參考](https://docs.docker.com/engine/reference/builder/) ，以瞭解其內的命令。 此特定 *Dockerfile* 使用[多階段建置](https://docs.docker.com/engine/userguide/eng-image/multistage-build/)，包含四個不同的具名建置階段：
 
 ::: moniker range=">= aspnetcore-2.1"
 
@@ -92,22 +93,22 @@ Visual Studio 容器工具不支援將 Docker 新增至以 .NET Framework 為目
 
 ## <a name="add-container-orchestrator-support-to-an-app"></a>為應用程式新增容器協調器支援
 
-Visual Studio 2017 版本 15.7 或更早的版本支援將 [Docker Compose](https://docs.docker.com/compose/overview/) 作為唯一的容器協調流程解決方案。 Docker Compose 成品是**透過新增**  >  **Docker 支援**來新增。
+Visual Studio 2017 版本 15.7 或更早的版本支援將 [Docker Compose](https://docs.docker.com/compose/overview/) 作為唯一的容器協調流程解決方案。 Docker Compose 成品是透過**新增**  >  **Docker 支援**新增的。
 
 Visual Studio 2017 版本 15.8 或更新版本只有在指示進行時，才會新增協調流程解決方案。 以滑鼠右鍵按一下**方案總管**中的專案，然後選取 [新增]**** > [容器協調器支援]****。 可用的選項如下： 
 
 * [Docker Compose](#docker-compose)
 * [Service Fabric](#service-fabric)
-* [Kubernetes/Helm](https://helm.sh/)
+* [Kubernetes/Helm ](https://helm.sh/)
 
 ### <a name="docker-compose"></a>Docker Compose
 
 Visual Studio 容器工具會將 *docker-compose* 專案新增至包含下列檔案的解決方案：
 
 * *docker-compose.dcproj*：代表專案的檔案。 包含 `<DockerTargetOS>` 項目，指定要使用的 OS。
-* *. .dockerignore*：列出產生組建內容時要排除的檔案和目錄模式。
-* *docker-compose.dev.debug.yml. yml*：基底[Docker Compose](https://docs.docker.com/compose/overview/)檔案，用來定義以和分別建立和執行的映射集合 `docker-compose build` `docker-compose run` 。
-* *docker-compose.dev.debug.yml. yml*：選擇性的檔案，由 Docker Compose 讀取，並具有服務的設定覆寫。 Visual Studio 會執行 `docker-compose -f "docker-compose.yml" -f "docker-compose.override.yml"` 來合併這些檔案。
+* *>.dockerignore*：列出產生組建內容時要排除的檔案和目錄模式。
+* *>docker-compose.yml. yml*：基底 [Docker Compose](https://docs.docker.com/compose/overview/) 檔案，用來定義與和一起建立和執行的映射集合 `docker-compose build` `docker-compose run` 。
+* *>docker-compose.yml。 yml*：選擇性的檔案，Docker Compose 讀取，以及服務的設定覆寫。 Visual Studio 會執行 `docker-compose -f "docker-compose.yml" -f "docker-compose.override.yml"` 來合併這些檔案。
 
 *docker-compose.yml* 檔案會參考執行專案時所建立映像的名稱：
 
@@ -188,7 +189,7 @@ microsoft/aspnetcore  2.0  c69d39472da9  13 days ago    347MB
 ::: moniker-end
 
 > [!NOTE]
-> 因為**偵錯**組態會使用磁碟區掛接來提供重複的體驗，所以 *dev* 映像不會有應用程式內容。 若要推送映射，請使用**發行**設定。
+> 因為**偵錯**組態會使用磁碟區掛接來提供重複的體驗，所以 *dev* 映像不會有應用程式內容。 若要推送映射，請使用 **發行** 設定。
 
 在 PMC 中執行 `docker ps` 命令。 請注意是使用容器來執行應用程式：
 
@@ -199,7 +200,7 @@ baf9a678c88d        hellodockertools:dev   "C:\\remote_debugge..."   21 seconds 
 
 ## <a name="edit-and-continue"></a>編輯後繼續
 
-靜態檔案和視圖的變更會 Razor 自動更新，而不需要編譯步驟。 進行變更並儲存，然後重新整理瀏覽器來檢視更新。
+靜態檔案和 Razor views 的變更會自動更新，而不需要編譯步驟。 進行變更並儲存，然後重新整理瀏覽器來檢視更新。
 
 程式碼檔案的修改需要編譯以及重新啟動容器內的 Kestrel。 完成變更之後，請使用 `CTRL+F5` 來執行程序，並啟動容器內的應用程式。 Docker 容器不會進行重建或停止。 在 PMC 中執行 `docker ps` 命令。 請注意，原始容器在 10 分鐘前仍在執行：
 
@@ -241,7 +242,7 @@ microsoft/aspnetcore        2.0     c69d39472da9  13 days ago     347MB
 ::: moniker-end
 
 > [!NOTE]
-> 此 `docker images` 命令會傳回具有存放庫名稱和標記的中繼映射，而這些儲存機制識別為 *\<none>*) 以上未列出的 (。 這些未命名映像是由[多階段建置](https://docs.docker.com/engine/userguide/eng-image/multistage-build/) *Dockerfile* 所產生。 它們可以改善最終映像的建置效率 &mdash; 發生變更時只會重建必要層。 當不再需要中繼映像時，請使用 [docker rmi](https://docs.docker.com/engine/reference/commandline/rmi/) \(英文\) 命令予以刪除。
+> 此 `docker images` 命令會傳回具有存放庫名稱和標記的中繼映射（ *\<none>* (未列于上述) ）。 這些未命名映像是由[多階段建置](https://docs.docker.com/engine/userguide/eng-image/multistage-build/) *Dockerfile* 所產生。 它們可以改善最終映像的建置效率 &mdash; 發生變更時只會重建必要層。 當不再需要中繼映像時，請使用 [docker rmi](https://docs.docker.com/engine/reference/commandline/rmi/) \(英文\) 命令予以刪除。
 
 相較於 *dev* 映像，生產或發行映像的大小可能需要更小。 基於磁碟區對應，偵錯工具和應用程式是從本機電腦執行，而不是在容器內執行。 「最新」** 映像已封裝在主機上執行應用程式所需的應用程式碼。 因此，差異是應用程式碼的大小。
 

@@ -7,6 +7,7 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 05/19/2020
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -17,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/fundamentals/dependency-injection
-ms.openlocfilehash: 40c47213021bf82150be2b41201b6af3228e4485
-ms.sourcegitcommit: 4df445e7d49a99f81625430f728c28e5d6bf2107
+ms.openlocfilehash: 3dc15f5efcc8f48a809bf9132588fb38732a7b35
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 08/15/2020
-ms.locfileid: "88253560"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88628283"
 ---
 # <a name="aspnet-core-no-locblazor-dependency-injection"></a>ASP.NET Core 相依性 Blazor 插入
 

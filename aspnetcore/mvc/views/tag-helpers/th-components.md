@@ -6,6 +6,7 @@ monikerRange: '>= aspnetcore-2.0'
 ms.author: scaddie
 ms.date: 06/12/2019
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -16,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: mvc/views/tag-helpers/th-components
-ms.openlocfilehash: 736288b6e7d2e9be7f23f6df02183a813951eb56
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: d3bae9cd5b4a5c7315c795229c7eafbf1e44e22d
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88014720"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88627581"
 ---
 # <a name="tag-helper-components-in-aspnet-core"></a>ASP.NET Core 中的標籤協助程式元件
 
@@ -29,7 +30,7 @@ ms.locfileid: "88014720"
 
 標籤協助程式元件是一種標籤協助程式，允許您從伺服器端程式碼有條件地修改或新增 HTML 項目。 ASP.NET Core 2.0 或更新版本提供此功能。
 
-ASP.NET Core 包含兩個內建標籤協助程式元件：`head` 和 `body`。 它們位於 <xref:Microsoft.AspNetCore.Mvc.Razor.TagHelpers> 命名空間中，而且可以在 MVC 和頁面中使用 Razor 。 標籤協助程式元件不需要在 *_ViewImports.cshtml* 中註冊應用程式。
+ASP.NET Core 包含兩個內建標籤協助程式元件：`head` 和 `body`。 它們位於 <xref:Microsoft.AspNetCore.Mvc.Razor.TagHelpers> 命名空間中，而且可以同時用於 MVC 和頁面中 Razor 。 標籤協助程式元件不需要在 *_ViewImports.cshtml* 中註冊應用程式。
 
 [查看或下載範例程式碼](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/mvc/views/tag-helpers/th-components/samples) ([如何下載](xref:index#how-to-download-a-sample)) 
 
@@ -84,7 +85,7 @@ ASP.NET Core 包含兩個內建標籤協助程式元件：`head` 和 `body`。 �
 
 ### <a name="registration-via-no-locrazor-file"></a>透過檔案註冊 Razor
 
-如果標籤協助程式元件未向 DI 註冊，則可以從 [ Razor 頁面] 頁面或 MVC 視圖進行註冊。 這項技術是用來控制檔案中插入的標記和元件執行順序 Razor 。
+如果標籤協助程式元件未以 DI 註冊，就可以從 Razor 頁面頁面或 MVC 視圖註冊。 這項技術是用來從檔案控制插入的標記和元件執行順序 Razor 。
 
 `ITagHelperComponentManager` 用於新增標籤協助程式元件，或從應用程式移除。 下列程式碼使用 `AddressTagHelperComponent` 示範這項技術：
 
@@ -92,7 +93,7 @@ ASP.NET Core 包含兩個內建標籤協助程式元件：`head` 和 `body`。 �
 
 在上述程式碼中：
 
-* `@inject` 指示詞會提供 `ITagHelperComponentManager` 的執行個體。 實例會指派給名為的變數，以 `manager` 存取檔案中的下游 Razor 。
+* `@inject` 指示詞會提供 `ITagHelperComponentManager` 的執行個體。 實例會指派給名 `manager` 為的變數，以便存取檔案中的下游 Razor 。
 * `AddressTagHelperComponent` 的執行個體會新增至應用程式標籤協助程式元件集合中。
 
 `AddressTagHelperComponent` 已修改，以容納接受 `markup` 和 `order` 參數的建構函式：
@@ -105,9 +106,9 @@ ASP.NET Core 包含兩個內建標籤協助程式元件：`head` 和 `body`。 �
 
 ### <a name="registration-via-page-model-or-controller"></a>透過頁面模型或控制器註冊
 
-如果標籤協助程式元件未向 DI 註冊，則可以從 Razor 頁面頁面模型或 MVC 控制器進行註冊。 這項技術適用于將 c # 邏輯與檔案分開 Razor 。
+如果標籤協助程式元件未向 DI 註冊，就可以從 Razor 頁面頁面模型或 MVC 控制器註冊。 這項技術適用于分隔 c # 邏輯和檔案 Razor 。
 
-建構函式插入可用於存取 `ITagHelperComponentManager` 的執行個體。 標籤協助程式元件會新增至執行個體的標籤協助程式元件集合。 下列 Razor 頁面模型使用來示範這項技術 `AddressTagHelperComponent` ：
+建構函式插入可用於存取 `ITagHelperComponentManager` 的執行個體。 標籤協助程式元件會新增至執行個體的標籤協助程式元件集合。 下列 Razor 頁面模型使用下列方法來示範這項技術 `AddressTagHelperComponent` ：
 
 [!code-csharp[](th-components/samples/RazorPagesSample/Pages/Index.cshtml.cs?name=snippet_IndexModelClass)]
 

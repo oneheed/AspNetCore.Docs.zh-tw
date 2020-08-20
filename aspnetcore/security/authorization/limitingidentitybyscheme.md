@@ -1,11 +1,12 @@
 ---
-title: 在 ASP.NET Core 中使用特定配置進行授權
+title: 使用 ASP.NET Core 中的特定配置進行授權
 author: rick-anderson
 description: 本文說明如何在使用多個驗證方法時，將身分識別限制為特定的配置。
 monikerRange: '>= aspnetcore-2.1'
 ms.author: riande
 ms.date: 11/08/2019
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -16,18 +17,18 @@ no-loc:
 - Razor
 - SignalR
 uid: security/authorization/limitingidentitybyscheme
-ms.openlocfilehash: 66b307a3629e18e49b5bb6e65a156054c0002ba8
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: f52f6ec9c557add2c66105397eb2733a0dcb9e87
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88022104"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88635186"
 ---
-# <a name="authorize-with-a-specific-scheme-in-aspnet-core"></a>在 ASP.NET Core 中使用特定配置進行授權
+# <a name="authorize-with-a-specific-scheme-in-aspnet-core"></a>使用 ASP.NET Core 中的特定配置進行授權
 
-在某些情況下，例如單一頁面應用程式 (Spa) ，通常會使用多個驗證方法。 例如，應用程式可能會使用 cookie 以為基礎的驗證來登入，並針對 JavaScript 要求進行 JWT 持有人驗證。 在某些情況下，應用程式可能會有多個驗證處理常式實例。 例如，兩個 cookie 處理常式，其中一個包含基本身分識別，而另一個則是在多因素驗證 (MFA) 已觸發時建立。 因為使用者要求的作業需要額外的安全性，所以可能會觸發 MFA。 如需在使用者要求需要 MFA 的資源時強制執行 MFA 的詳細資訊，請參閱 GitHub 問題[保護區段與 mfa](https://github.com/dotnet/AspNetCore.Docs/issues/15791#issuecomment-580464195)。
+在某些案例中，例如 (Spa) 的單一頁面應用程式，通常會使用多個驗證方法。 例如，應用程式可能會使用 cookie 驗證來登入，並針對 JavaScript 要求進行 JWT 持有人驗證。 在某些情況下，應用程式可能會有多個驗證處理常式的實例。 例如，有兩個 cookie 處理常式，其中一個包含基本身分識別，而另一個處理常式在已觸發多重要素驗證 (MFA) 時建立。 可能會觸發 MFA，因為使用者要求的作業需要額外的安全性。 如需在使用者要求需要 MFA 的資源時強制執行 MFA 的詳細資訊，請參閱 GitHub 問題 [保護區段與 mfa](https://github.com/dotnet/AspNetCore.Docs/issues/15791#issuecomment-580464195)。
 
-驗證架構會在驗證期間設定驗證服務時命名。 例如：
+驗證方案是在驗證期間設定驗證服務時所命名。 例如：
 
 ```csharp
 public void ConfigureServices(IServiceCollection services)
@@ -48,11 +49,11 @@ public void ConfigureServices(IServiceCollection services)
 在上述程式碼中，已加入兩個驗證處理常式：一個用於 cookie s，另一個用於持有人。
 
 >[!NOTE]
->指定預設配置 `HttpContext.User` 會導致屬性設定為該身分識別。 如果不想要該行為，請叫用的無參數形式來停用它 `AddAuthentication` 。
+>指定預設配置 `HttpContext.User` 會導致屬性設定為該身分識別。 如果不想要該行為，請叫用無參數形式的來停用該行為 `AddAuthentication` 。
 
-## <a name="selecting-the-scheme-with-the-authorize-attribute"></a>選取具有 [授權] 屬性的配置
+## <a name="selecting-the-scheme-with-the-authorize-attribute"></a>選取具有授權屬性的配置
 
-在授權的時候，應用程式會指出要使用的處理常式。 藉由將以逗號分隔的驗證架構清單傳遞至，以選取應用程式將授權的處理常式 `[Authorize]` 。 `[Authorize]`不論是否已設定預設值，屬性都會指定要使用的驗證配置或配置。 例如：
+在授權的時候，應用程式會指出要使用的處理常式。 藉由將驗證配置的逗號分隔清單傳遞給，以選取應用程式將授權的處理常式 `[Authorize]` 。 `[Authorize]`屬性會指定要使用的驗證配置或配置，而不論是否已設定預設值。 例如：
 
 ```csharp
 [Authorize(AuthenticationSchemes = AuthSchemes)]
@@ -65,7 +66,7 @@ public class MixedController : Controller
         JwtBearerDefaults.AuthenticationScheme;
 ```
 
-在上述範例中， cookie 和持有人處理常式都會執行，而且有機會建立和附加目前使用者的身分識別。 藉由僅指定單一配置，會執行對應的處理常式。
+在上述範例中， cookie 和持有人處理常式都會執行，而且有機會建立和附加目前使用者的身分識別。 只要指定單一配置，就會執行對應的處理常式。
 
 ```csharp
 [Authorize(AuthenticationSchemes = 
@@ -73,11 +74,11 @@ public class MixedController : Controller
 public class MixedController : Controller
 ```
 
-在上述程式碼中，只有具有「持有人」配置的處理常式才會執行。 cookie系統會忽略任何以為基礎的身分識別。
+在上述程式碼中，只會執行具有「持有人」配置的處理常式。 系統會忽略任何以任何身分識別為基礎的身分識別 cookie 。
 
 ## <a name="selecting-the-scheme-with-policies"></a>選取具有原則的配置
 
-如果您想要在[原則](xref:security/authorization/policies)中指定所需的配置，您可以在 `AuthenticationSchemes` 新增原則時設定集合：
+如果您想要在 [原則](xref:security/authorization/policies)中指定所需的配置，您可以在 `AuthenticationSchemes` 新增原則時設定集合：
 
 ```csharp
 services.AddAuthorization(options =>
@@ -91,7 +92,7 @@ services.AddAuthorization(options =>
 });
 ```
 
-在上述範例中，"Over18" 原則只會針對「持有人」處理常式所建立的身分識別來執行。 藉由設定 `[Authorize]` 屬性的屬性來使用原則 `Policy` ：
+在上述範例中，"Over18" 原則只會針對「持有人」處理常式所建立的身分識別執行。 藉由設定 `[Authorize]` 屬性的屬性來使用原則 `Policy` ：
 
 ```csharp
 [Authorize(Policy = "Over18")]
@@ -102,9 +103,9 @@ public class RegistrationController : Controller
 
 ## <a name="use-multiple-authentication-schemes"></a>使用多個驗證配置
 
-某些應用程式可能需要支援多種類型的驗證。 例如，您的應用程式可能會從 Azure Active Directory 和使用者資料庫驗證使用者。 另一個範例是從 Active Directory 同盟服務和 Azure Active Directory B2C 驗證使用者的應用程式。 在此情況下，應用程式應該接受來自數個簽發者的 JWT 持有人權杖。
+有些應用程式可能需要支援多種類型的驗證。 例如，您的應用程式可能會從 Azure Active Directory 和使用者資料庫驗證使用者。 另一個範例是從 Active Directory 同盟服務和 Azure Active Directory B2C 驗證使用者的應用程式。 在此情況下，應用程式應該接受來自數個簽發者的 JWT 持有人權杖。
 
-新增您想要接受的所有驗證配置。 例如，中的下列程式碼會 `Startup.ConfigureServices` 新增具有不同簽發者的兩個 JWT 持有人驗證配置：
+新增您想要接受的所有驗證方案。 例如，下列程式碼會 `Startup.ConfigureServices` 新增具有不同簽發者的兩個 JWT 持有人驗證配置：
 
 ```csharp
 public void ConfigureServices(IServiceCollection services)
@@ -126,9 +127,9 @@ public void ConfigureServices(IServiceCollection services)
 ```
 
 > [!NOTE]
-> 只有一個 JWT 持有人驗證會向預設驗證配置註冊 `JwtBearerDefaults.AuthenticationScheme` 。 額外的驗證必須使用唯一的驗證配置進行註冊。
+> 只有一個 JWT 持有人驗證會使用預設的驗證配置來註冊 `JwtBearerDefaults.AuthenticationScheme` 。 您必須使用唯一的驗證配置來註冊額外的驗證。
 
-下一個步驟是更新預設授權原則，以接受這兩種驗證配置。 例如：
+下一步是更新預設授權原則，以接受這兩種驗證配置。 例如：
 
 ```csharp
 public void ConfigureServices(IServiceCollection services)
@@ -147,6 +148,6 @@ public void ConfigureServices(IServiceCollection services)
 }
 ```
 
-當預設的授權原則遭到覆寫時，可以 `[Authorize]` 在控制器中使用屬性。 然後，控制器會接受第一個或第二個簽發者所發出的 JWT 要求。
+由於預設授權原則遭到覆寫，因此可以 `[Authorize]` 在控制器中使用屬性。 然後，控制器會接受第一個或第二個簽發者所發出的 JWT 要求。
 
 ::: moniker-end

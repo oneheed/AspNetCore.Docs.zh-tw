@@ -1,11 +1,12 @@
 ---
 title: 從 ASP.NET 遷移至 ASP.NET Core 2.0
 author: isaac2004
-description: 接收將現有的 ASP.NET MVC 或 Web API 應用程式遷移至 ASP.NET Core 2.0 的指引。
+description: 取得將現有的 ASP.NET MVC 或 Web API 應用程式遷移至 ASP.NET Core 2.0 的指引。
 ms.author: scaddie
 ms.custom: mvc
 ms.date: 10/24/2018
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -16,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: migration/mvc2
-ms.openlocfilehash: afbc5196eaaaa402ddbf50f6330a683ee88984eb
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: bd2c33d35a3433532b48f6615a81adac8d03b9ee
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88014863"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88634536"
 ---
 # <a name="migrate-from-aspnet-to-aspnet-core-20"></a>從 ASP.NET 遷移至 ASP.NET Core 2.0
 
@@ -29,9 +30,9 @@ ms.locfileid: "88014863"
 
 這篇文章可作為 ASP.NET 應用程式移轉至 ASP.NET Core 2.0 的參考指南。
 
-## <a name="prerequisites"></a>必要條件
+## <a name="prerequisites"></a>Prerequisites
 
-從 .Net 下載安裝下列**其中一**項[： Windows](https://dotnet.microsoft.com/download)：
+從 .Net 下載安裝下列 **其中一** 項 [： Windows](https://dotnet.microsoft.com/download)：
 
 * .NET Core SDK
 * 適用於 Windows 的 Visual Studio
@@ -92,7 +93,7 @@ ASP.NET Core 使用類似的方法，但不依賴 OWIN 處理項目。 相反地
 
 主機與應用程式已分離，這讓您未來可以彈性移至不同的平台。
 
-如需 ASP.NET Core 啟動和中介軟體的更深入參考，請參閱 <xref:fundamentals/startup> 。
+如需 ASP.NET Core 啟動和中介軟體的深入參考，請參閱 <xref:fundamentals/startup> 。
 
 ## <a name="storing-configurations"></a>正在儲存組態
 
@@ -123,15 +124,15 @@ ASP.NET Core 可將應用程式的組態資料儲存在任何檔案中，將它�
 services.Configure<AppConfiguration>(Configuration.GetSection("AppConfiguration"));
 ```
 
-**注意：** 如需 ASP.NET Core 設定的更深入參考，請參閱 <xref:fundamentals/configuration/index> 。
+**注意：** 如需更深入的 ASP.NET Core 設定參考，請參閱 <xref:fundamentals/configuration/index> 。
 
 ## <a name="native-dependency-injection"></a>原生相依性插入
 
-建置可延展的大型應用程式時，鬆散的元件和服務結合程度就是重要的目標。 相依性[插入](xref:fundamentals/dependency-injection)是達到此目標的常用技巧，而它是 ASP.NET Core 的原生元件。
+建置可延展的大型應用程式時，鬆散的元件和服務結合程度就是重要的目標。 相依性[插入](xref:fundamentals/dependency-injection)是達成此目的的熱門技術，而且是 ASP.NET Core 的原生元件。
 
-在 ASP.NET 應用程式中，開發人員依賴協力廠商程式庫來執行相依性插入。 Microsoft 模式和實務提供的 [Unity](https://github.com/unitycontainer/unity) 就是這樣的程式庫。
+在 ASP.NET 應用程式中，開發人員會依賴協力廠商程式庫來執行相依性插入。 Microsoft 模式和實務提供的 [Unity](https://github.com/unitycontainer/unity) 就是這樣的程式庫。
 
-使用 Unity 設定相依性插入的範例，就是執行 `IDependencyResolver` 包裝 a 的 `UnityContainer` ：
+使用 Unity 設定相依性插入的範例是實作為 `IDependencyResolver` 包裝 `UnityContainer` ：
 
 [!code-csharp[](samples/sample8.cs)]
 
@@ -143,7 +144,7 @@ services.Configure<AppConfiguration>(Configuration.GetSection("AppConfiguration"
 
 [!code-csharp[](samples/sample5.cs)]
 
-由於相依性插入是 ASP.NET Core 的一部分，因此您可以在中新增服務 `Startup.ConfigureServices` ：
+由於相依性插入是 ASP.NET Core 的一部分，因此您可以在中新增您的服務 `Startup.ConfigureServices` ：
 
 [!code-csharp[](samples/configure-services.cs)]
 
@@ -157,7 +158,7 @@ services.Configure<AppConfiguration>(Configuration.GetSection("AppConfiguration"
 
 在 ASP.NET 中，靜態檔案會儲存在不同目錄中，於檢視中提供參考。
 
-在 ASP.NET Core 中，除非另有設定，否則靜態檔案會儲存在「web 根目錄」 (* &lt; 內容根 &gt; /wwwroot*) 。 從 `Startup.Configure` 叫用 `UseStaticFiles` 擴充方法，將檔案載入至要求管線：
+在 ASP.NET Core 中，除非另有設定，否則靜態檔案會儲存在 [web 根目錄] (* &lt; 內容根目錄 &gt; /wwwroot*) 。 從 `Startup.Configure` 叫用 `UseStaticFiles` 擴充方法，將檔案載入至要求管線：
 
 [!code-csharp[](../../fundamentals/static-files/samples/1.x/StaticFilesSample/StartupStaticFiles.cs?highlight=3&name=snippet_ConfigureMethod)]
 

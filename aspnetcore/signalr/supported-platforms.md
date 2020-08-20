@@ -7,6 +7,7 @@ ms.author: bradyg
 ms.custom: mvc
 ms.date: 01/16/2020
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -17,18 +18,18 @@ no-loc:
 - Razor
 - SignalR
 uid: signalr/supported-platforms
-ms.openlocfilehash: e6989f431d0d72241a6e1b94759585c02ef7398f
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: 91fd2553803d855b338b1d1b46d55e1d1e4cc21e
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88021545"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88635147"
 ---
 # <a name="aspnet-core-no-locsignalr-supported-platforms"></a>ASP.NET Core SignalR 支援的平臺
 
 ## <a name="server-system-requirements"></a>伺服器系統需求
 
-SignalR針對 ASP.NET Core 支援 ASP.NET Core 支援的任何伺服器平臺。
+SignalR 針對 ASP.NET Core 支援 ASP.NET Core 支援的任何伺服器平臺。
 
 ## <a name="javascript-client"></a>JavaScript 用戶端
 
@@ -36,19 +37,19 @@ SignalR針對 ASP.NET Core 支援 ASP.NET Core 支援的任何伺服器平臺。
 
 | 瀏覽器                         | 版本         |
 | ------------------------------- | --------------- |
-| Microsoft Edge                  | 目前&dagger; |
-| Mozilla Firefox                 | 目前&dagger; |
-| Google Chrome;包含 Android | 目前&dagger; |
-| 免費包含 iOS            | 目前&dagger; |
+| Microsoft Edge                  | 當前&dagger; |
+| Mozilla Firefox                 | 當前&dagger; |
+| Google Chrome;包含 Android | 當前&dagger; |
+| 免費包含 iOS            | 當前&dagger; |
 | Microsoft Internet Explorer     | 11              |
 
-&dagger;*Current*指的是最新版本的瀏覽器。
+&dagger;*Current* 指的是最新版的瀏覽器。
 
 ## <a name="net-client"></a>.NET 用戶端
 
-[.Net 用戶端](xref:signalr/dotnet-client)會在 ASP.NET Core 支援的任何平臺上執行。 例如， [xamarin 開發人員可以使用 SignalR ](https://github.com/aspnet/Announcements/issues/305)來建立使用 xamarin 的 android 應用程式8.4.0.1 和更新版本，以及使用11.14.0.4 和更新版本的 ios 應用程式。
+[.Net 用戶端](xref:signalr/dotnet-client)會在 ASP.NET Core 所支援的任何平臺上執行。 例如， [xamarin 開發人員可 SignalR ](https://github.com/aspnet/Announcements/issues/305)使用 xamarin. android 8.4.0.1 和更新版本，以及使用11.14.0.4 和更新版本的 ios 應用程式來建立 android 應用程式。
 
-如果伺服器執行 IIS，Websocket 傳輸需要 Windows Server 2012 或更新版本上的 IIS 8.0 或更新版本。 所有平臺都支援其他傳輸。
+如果伺服器執行 IIS，則 Websocket 傳輸需要 Windows Server 2012 或更新版本上的 IIS 8.0 或更新版本。 所有平臺都支援其他傳輸。
 
 ## <a name="java-client"></a>Java 用戶端
 
@@ -56,7 +57,7 @@ SignalR針對 ASP.NET Core 支援 ASP.NET Core 支援的任何伺服器平臺。
 
 ## <a name="unsupported-clients"></a>不支援的用戶端
 
-下列用戶端可以使用，但為實驗性或非官方。 它們目前不受支援，而且可能永遠不會。
+下列用戶端可供使用，但是實驗性或非官方的。 它們目前不受支援，而且可能永遠不會存在。
 
 * [C + + 用戶端](https://github.com/aspnet/SignalR-Client-Cpp)
 

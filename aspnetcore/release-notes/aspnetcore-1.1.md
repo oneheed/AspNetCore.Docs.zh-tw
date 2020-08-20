@@ -5,6 +5,7 @@ description: 了解 ASP.NET Core 1.1 的新功能。
 ms.author: riande
 ms.date: 12/18/2018
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -15,12 +16,12 @@ no-loc:
 - Razor
 - SignalR
 uid: aspnetcore-1.1
-ms.openlocfilehash: 9b3e0a368fdcd9e1044cfe6bf6a13ca11d3039cc
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: 1068307dc792ffb8def4f0652de497f666d4318d
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88020661"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88634783"
 ---
 # <a name="whats-new-in-aspnet-core-11"></a>ASP.NET Core 1.1 的新功能
 
@@ -30,7 +31,7 @@ ASP.NET Core 1.1 包含下列新功能：
 - [回應快取中介軟體](xref:performance/caching/middleware)
 - [檢視元件作為標記協助程式](xref:mvc/views/view-components#invoking-a-view-component-as-a-tag-helper)
 - [中介軟體作為 MVC 篩選條件](xref:mvc/controllers/filters#using-middleware-in-the-filter-pipeline)
-- [Cookie以為基礎的 TempData 提供者](xref:fundamentals/app-state#tempdata)
+- [Cookie以 TempData 提供者為基礎](xref:fundamentals/app-state#tempdata)
 - [Azure App Service 記錄提供者](xref:fundamentals/logging/index#azure-app-service-provider)
 - [Azure Key Vault 設定提供者](xref:security/key-vault-configuration)
 - [Azure 與 Redis 儲存體資料保護金鑰存放庫](xref:security/data-protection/implementation/key-storage-providers)
@@ -39,7 +40,7 @@ ASP.NET Core 1.1 包含下列新功能：
 
 ## <a name="choosing-between-versions-10-and-11-of-aspnet-core"></a>在 1.0 版和 1.1 版的 ASP.NET Core 之間進行選擇
 
-ASP.NET Core 1.1 具有比 ASP.NET Core 1.0 更多的功能。 一般情況下，建議您使用最新的版本。
+ASP.NET Core 1.1 的功能比 ASP.NET Core 1.0 更多。 一般情況下，建議您使用最新的版本。
 
 ## <a name="additional-information"></a>其他資訊
 

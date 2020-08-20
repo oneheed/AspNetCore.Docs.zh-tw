@@ -7,6 +7,7 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 02/07/2020
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -17,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: host-and-deploy/iis/development-time-iis-support
-ms.openlocfilehash: ba4d47e0500d7f3287e6a57d10036d774c4b19f4
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: 5636abef928ed8a8122ec907ef025d55baa65127
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88015661"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88635355"
 ---
 # <a name="development-time-iis-support-in-visual-studio-for-aspnet-core"></a>Visual Studio for ASP.NET Core 中的開發階段 IIS 支援
 
@@ -32,7 +33,7 @@ ms.locfileid: "88015661"
 
 本文說明針對在 Windows Server 上搭配 IIS 執行的 ASP.NET Core 應用程式所提供的 [Visual Studio](https://visualstudio.microsoft.com) 偵錯支援。 本主題會逐步解說如何啟用此案例及設定專案。
 
-## <a name="prerequisites"></a>必要條件
+## <a name="prerequisites"></a>Prerequisites
 
 * [適用于 Windows 的 Visual Studio](https://visualstudio.microsoft.com/downloads/)
 * **ASP.NET 與網頁程式開發**工作負載
@@ -50,7 +51,7 @@ ms.locfileid: "88015661"
 
 IIS 的網站必須含有下列設定：
 
-* **主機名稱**：通常，**預設的網站**會與**主機名稱**搭配使用 `localhost` 。 不過，任何具有唯一主機名稱的有效 IIS 網站皆適用。
+* **主機名稱**：通常會使用 **預設的網站** 與的 **主機名稱** `localhost` 。 不過，任何具有唯一主機名稱的有效 IIS 網站皆適用。
 * **網站繫結**
   * 針對需要 HTTPS 的應用程式，請搭配憑證針對連接埠 443 建立繫結。 通常會使用 [IIS Express 開發憑證]****，但可使用任何有效的憑證。
   * 針對使用 HTTP 的應用程式，請確認已存在針對連接埠 80 的繫結，或是為新網站建立針對連接埠 80 的繫結。
@@ -78,7 +79,7 @@ IIS 的網站必須含有下列設定：
 
 建立新的啟動設定檔，以新增開發階段 IIS 支援：
 
-1. 以滑鼠右鍵按一下 [方案總管]**** 中的專案。 選取 [屬性] 。 開啟 [**調試**] 索引標籤。
+1. 以滑鼠右鍵按一下 [方案總管]**** 中的專案。 選取 [屬性] 。 開啟 [ **調試** ] 索引標籤。
 1. 針對 [設定檔]****，選取 [新增]**** 按鈕。 在快顯示窗中，將設定檔命名為 "IIS"。 選取 [確定]**** 以建立設定檔。
 1. 針對 [啟動]**** 設定，從清單中選取 [IIS]****。
 1. 選取 [啟動瀏覽器]**** 的核取方塊並提供端點 URL。
@@ -127,7 +128,7 @@ IIS 的網站必須含有下列設定：
 以系統管理員身分執行 Visual Studio：
 
 * 確認建置設定下拉式清單已設定為 [偵錯]****。
-* 將 [[開始調試](/visualstudio/debugger/debugger-feature-tour)程式] 按鈕設定為**IIS**設定檔，然後選取 [] 按鈕來啟動應用程式。
+* 將 [ [開始調試](/visualstudio/debugger/debugger-feature-tour) 程式] 按鈕設定為 **IIS** 設定檔，然後選取按鈕以啟動應用程式。
 
 如果不是以系統管理員身分執行，Visual Studio 可能會提示您重新啟動。 若收到提示，請重新啟動 Visual Studio。
 
@@ -147,7 +148,7 @@ IIS 的網站必須含有下列設定：
 
 本文說明針對在 Windows Server 上搭配 IIS 執行的 ASP.NET Core 應用程式所提供的 [Visual Studio](https://visualstudio.microsoft.com) 偵錯支援。 本主題會逐步解說如何啟用此案例及設定專案。
 
-## <a name="prerequisites"></a>必要條件
+## <a name="prerequisites"></a>Prerequisites
 
 * [適用于 Windows 的 Visual Studio](https://visualstudio.microsoft.com/downloads/)
 * **ASP.NET 與網頁程式開發**工作負載
@@ -165,7 +166,7 @@ IIS 的網站必須含有下列設定：
 
 IIS 的網站必須含有下列設定：
 
-* **主機名稱**：通常，**預設的網站**會與**主機名稱**搭配使用 `localhost` 。 不過，任何具有唯一主機名稱的有效 IIS 網站皆適用。
+* **主機名稱**：通常會使用 **預設的網站** 與的 **主機名稱** `localhost` 。 不過，任何具有唯一主機名稱的有效 IIS 網站皆適用。
 * **網站繫結**
   * 針對需要 HTTPS 的應用程式，請搭配憑證針對連接埠 443 建立繫結。 通常會使用 [IIS Express 開發憑證]****，但可使用任何有效的憑證。
   * 針對使用 HTTP 的應用程式，請確認已存在針對連接埠 80 的繫結，或是為新網站建立針對連接埠 80 的繫結。
@@ -193,7 +194,7 @@ IIS 的網站必須含有下列設定：
 
 建立新的啟動設定檔，以新增開發階段 IIS 支援：
 
-1. 以滑鼠右鍵按一下 [方案總管]**** 中的專案。 選取 [屬性] 。 開啟 [**調試**] 索引標籤。
+1. 以滑鼠右鍵按一下 [方案總管]**** 中的專案。 選取 [屬性] 。 開啟 [ **調試** ] 索引標籤。
 1. 針對 [設定檔]****，選取 [新增]**** 按鈕。 在快顯示窗中，將設定檔命名為 "IIS"。 選取 [確定]**** 以建立設定檔。
 1. 針對 [啟動]**** 設定，從清單中選取 [IIS]****。
 1. 選取 [啟動瀏覽器]**** 的核取方塊並提供端點 URL。
@@ -242,7 +243,7 @@ IIS 的網站必須含有下列設定：
 以系統管理員身分執行 Visual Studio：
 
 * 確認建置設定下拉式清單已設定為 [偵錯]****。
-* 將 [[開始調試](/visualstudio/debugger/debugger-feature-tour)程式] 按鈕設定為**IIS**設定檔，然後選取 [] 按鈕來啟動應用程式。
+* 將 [ [開始調試](/visualstudio/debugger/debugger-feature-tour) 程式] 按鈕設定為 **IIS** 設定檔，然後選取按鈕以啟動應用程式。
 
 如果不是以系統管理員身分執行，Visual Studio 可能會提示您重新啟動。 若收到提示，請重新啟動 Visual Studio。
 

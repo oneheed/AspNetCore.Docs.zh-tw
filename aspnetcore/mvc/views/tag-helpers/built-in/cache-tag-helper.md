@@ -6,6 +6,7 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 10/10/2018
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -16,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: mvc/views/tag-helpers/builtin-th/cache-tag-helper
-ms.openlocfilehash: 7d2ff774b7654993e2cd9b126db252f81a3032d3
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: b1cab7ab8b491529ee4208d92fb30082be795eda
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88018750"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88635056"
 ---
 # <a name="cache-tag-helper-in-aspnet-core-mvc"></a>ASP.NET Core MVC 中的快取標籤協助程式
 
@@ -47,7 +48,7 @@ ms.locfileid: "88018750"
 | --------------- | --------------- | ------- |
 | Boolean         | `true`, `false` | `true`  |
 
-`enabled` 會決定是否快取以快取標籤協助程式括住的內容。 預設為 `true`。 如果設定為 `false`，則轉譯輸出**不會**被快取。
+`enabled` 會決定是否快取以快取標籤協助程式括住的內容。 預設值為 `true`。 如果設定為 `false`，則轉譯輸出**不會**被快取。
 
 範例：
 
@@ -75,7 +76,7 @@ ms.locfileid: "88018750"
 
 ### <a name="expires-after"></a>expires-after
 
-| 屬性類型 | 範例                      | 預設值    |
+| 屬性類型 | 範例                      | 預設    |
 | -------------- | ---------------------------- | ---------- |
 | `TimeSpan`     | `@TimeSpan.FromSeconds(120)` | 20 分鐘 |
 
@@ -89,7 +90,7 @@ ms.locfileid: "88018750"
 </cache>
 ```
 
-RazorView 引擎會將預設 `expires-after` 值設定為20分鐘。
+Razor視圖引擎會將預設 `expires-after` 值設定為20分鐘。
 
 ### <a name="expires-sliding"></a>expires-sliding
 
@@ -171,9 +172,9 @@ routes.MapRoute(
 | -------------- | -------------------------------------------------------------------------------- |
 | String         | `.AspNetCore.Identity.Application`, `.AspNetCore.Identity.Application,HairColor` |
 
-`vary-by-cookie`接受以逗號分隔的名稱清單 cookie ，這些名稱會在值變更時觸發快取重新整理 cookie 。
+`vary-by-cookie` 接受以逗號分隔的名稱清單 cookie ，這些名稱會在值變更時觸發快取重新整理 cookie 。
 
-下列範例會監視 cookie 與 ASP.NET Core 相關聯的 Identity 。 當使用者通過驗證時，中的變更會觸發快取重新整理 Identity cookie ：
+下列範例會監視 cookie 與相關聯的 ASP.NET Core Identity 。 當使用者經過驗證時，中的變更會觸發快取重新整理 Identity cookie ：
 
 ```cshtml
 <cache vary-by-cookie=".AspNetCore.Identity.Application">
@@ -187,7 +188,7 @@ routes.MapRoute(
 | --------------- | --------------- | ------- |
 | Boolean         | `true`, `false` | `true`  |
 
-`vary-by-user` 可指定當登入的使用者 (或內容主體) 變更時，是否重設快取。 目前的使用者也稱為要求內容主體，而且可以藉 Razor 由參考在視圖中查看 `@User.Identity.Name` 。
+`vary-by-user` 可指定當登入的使用者 (或內容主體) 變更時，是否重設快取。 目前的使用者也稱為「要求內容主體」，您可以 Razor 參考來在視圖中查看 `@User.Identity.Name` 。
 
 下列範例會監視目前登入的使用者，以觸發快取重新整理：
 
@@ -197,7 +198,7 @@ routes.MapRoute(
 </cache>
 ```
 
-使用此屬性可保留登入與登出週期中的快取內容。 當此值設定為 `true` 時，驗證週期將使已驗證之使用者的快取無效。 快取已失效，因為 cookie 當使用者通過驗證時，會產生新的唯一值。 當不 cookie 存在或已過期時，就會針對匿名狀態維護快取 cookie 。 如果使用者**未**通過驗證，則會維護快取。
+使用此屬性可保留登入與登出週期中的快取內容。 當此值設定為 `true` 時，驗證週期將使已驗證之使用者的快取無效。 快取無效，因為 cookie 當使用者經過驗證時，會產生新的唯一值。 如果不 cookie 存在或已過期，則會為匿名狀態維護快取 cookie 。 如果使用者**未**通過驗證，則會維護快取。
 
 ### <a name="vary-by"></a>vary-by
 

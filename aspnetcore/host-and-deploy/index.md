@@ -7,6 +7,7 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 02/07/2020
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -17,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: host-and-deploy/index
-ms.openlocfilehash: 1084cdb9120b1b40acd21fa2de45c7f280337da3
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: 0111b7944bc95932937f0fd74524e3960c5fb681
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88015591"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88634614"
 ---
 # <a name="host-and-deploy-aspnet-core"></a>裝載及部署 ASP.NET Core
 
@@ -83,7 +84,7 @@ Proxy 伺服器和負載平衡器後方託管的應用程式可能需要其他�
 
 ## <a name="internet-information-services-iis"></a>網際網路資訊服務 (IIS)
 
-若要使用*web.config*檔案所提供的設定來 INTERNET INFORMATION SERVICES (IIS) 的部署，請參閱底下的文章 <xref:host-and-deploy/iis/index> 。
+若要使用 *web.config* 檔案所提供的設定來 INTERNET INFORMATION SERVICES (IIS) 的部署，請參閱底下的文章 <xref:host-and-deploy/iis/index> 。
 
 ## <a name="host-in-a-web-farm"></a>裝載於 Web 伺服陣列
 
@@ -161,7 +162,7 @@ Proxy 伺服器和負載平衡器後方託管的應用程式可能需要其他�
 
 ## <a name="internet-information-services-iis"></a>網際網路資訊服務 (IIS)
 
-若要使用*web.config*檔案所提供的設定來 INTERNET INFORMATION SERVICES (IIS) 的部署，請參閱底下的文章 <xref:host-and-deploy/iis/index> 。
+若要使用 *web.config* 檔案所提供的設定來 INTERNET INFORMATION SERVICES (IIS) 的部署，請參閱底下的文章 <xref:host-and-deploy/iis/index> 。
 
 ## <a name="host-in-a-web-farm"></a>裝載於 Web 伺服陣列
 

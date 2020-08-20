@@ -7,6 +7,7 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 01/13/2020
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -17,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: host-and-deploy/iis/modules
-ms.openlocfilehash: c526fc779d778cd0f99bcdaae283b6a5a0fe09ab
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: 7ddc1b0f80625fbc39ac49f305f745b005cbce46
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88015604"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88634666"
 ---
 # <a name="iis-modules-with-aspnet-core"></a>與 ASP.NET Core 搭配運作的 IIS 模組
 
@@ -32,7 +33,7 @@ ms.locfileid: "88015604"
 
 下表指出可搭配 ASP.NET Core 應用程式和 ASP.NET Core 模組運作的原生 IIS 模組。
 
-| 課程模組 | 對 ASP.NET Core 應用程式有作用 | ASP.NET Core 選項 |
+| 模組 | 對 ASP.NET Core 應用程式有作用 | ASP.NET Core 選項 |
 | --- | :---: | --- |
 | **匿名驗證**<br>`AnonymousAuthenticationModule`                                  | 是 | |
 | **基本驗證**<br>`BasicAuthenticationModule`                                          | 是 | |
@@ -56,7 +57,7 @@ ms.locfileid: "88015604"
 | **ISAPI 篩選器**<br>`IsapiFilterModule`                                                         | 是 | [中介軟體](xref:fundamentals/middleware/index) |
 | **ISAPI**<br>`IsapiModule`                                                                       | 是 | [中介軟體](xref:fundamentals/middleware/index) |
 | **通訊協定支援**<br>`ProtocolSupportModule`                                                  | 是 | |
-| **要求篩選**<br>`RequestFilteringModule`                                                | 是 | [URL 重寫中介軟體`IRule`](xref:fundamentals/url-rewriting#irule-based-rule) |
+| **要求篩選**<br>`RequestFilteringModule`                                                | 是 | [URL 重寫中介軟體 `IRule`](xref:fundamentals/url-rewriting#irule-based-rule) |
 | **要求監視器**<br>`RequestMonitorModule`                                                    | 是 | |
 | **URL 重新寫入**&#8224;<br>`RewriteModule`                                                      | 是 | [URL 重寫中介軟體](xref:fundamentals/url-rewriting) |
 | **伺服器端包含**<br>`ServerSideIncludeModule`                                            | 否  | |
@@ -64,7 +65,7 @@ ms.locfileid: "88015604"
 | **靜態內容**<br>`StaticFileModule`                                                         | 否  | [靜態檔案中介軟體](xref:fundamentals/static-files) |
 | **權杖快取**<br>`TokenCacheModule`                                                          | 是 | |
 | **URI 快取**<br>`UriCacheModule`                                                              | 是 | |
-| **URL 授權**<br>`UrlAuthorizationModule`                                                | 是 | [ASP.NET CoreIdentity](xref:security/authentication/identity) |
+| **URL 授權**<br>`UrlAuthorizationModule`                                                | 是 | [ASP.NET Core Identity](xref:security/authentication/identity) |
 | **Windows 驗證**<br>`WindowsAuthenticationModule`                                      | 是 | |
 
 &#8224;由於[目錄結構](xref:host-and-deploy/directory-structure)變更的緣故，因此「URL 重寫模組」的 `isFile` 和 `isDirectory` 比對類型對 ASP.NET Core 應用程式沒有作用。
@@ -73,12 +74,12 @@ ms.locfileid: "88015604"
 
 當應用程式集區的 .NET CLR 版本已設定為 [沒有 Managed 程式碼]**** 時，受控模組對所裝載的 ASP.NET Core 應用程式「沒有」** 作用。 ASP.NET Core 在數種案例中都有提供中介軟體替代方案。
 
-| 課程模組                  | ASP.NET Core 選項 |
+| 模組                  | ASP.NET Core 選項 |
 | ----------------------- | ------------------- |
 | AnonymousIdentification | |
 | DefaultAuthentication   | |
 | FileAuthorization       | |
-| FormsAuthentication     | [Cookie驗證中介軟體](xref:security/authentication/cookie) |
+| FormsAuthentication     | [Cookie 驗證中介軟體](xref:security/authentication/cookie) |
 | OutputCache             | [回應快取中介軟體](xref:performance/caching/middleware) |
 | 設定檔                 | |
 | RoleManager             | |
@@ -86,7 +87,7 @@ ms.locfileid: "88015604"
 | 工作階段                 | [工作階段中介軟體](xref:fundamentals/app-state) |
 | UrlAuthorization        | |
 | UrlMappingsModule       | [URL 重寫中介軟體](xref:fundamentals/url-rewriting) |
-| UrlRoutingModule-4.0    | [ASP.NET CoreIdentity](xref:security/authentication/identity) |
+| UrlRoutingModule-4.0    | [ASP.NET Core Identity](xref:security/authentication/identity) |
 | WindowsAuthentication   | |
 
 ## <a name="iis-manager-application-changes"></a>IIS 管理員應用程式變更
@@ -109,7 +110,7 @@ ms.locfileid: "88015604"
 </configuration>
 ```
 
-如需使用配置設定停用模組的詳細資訊，請遵循[ \<system.webServer> IIS](/iis/configuration/system.webServer/)的 [*子項目*] 區段中的連結。
+如需停用具有設定設定之模組的詳細資訊，請遵循[ \<system.webServer> IIS](/iis/configuration/system.webServer/)之*子項目*區段中的連結。
 
 ### <a name="module-removal"></a>模組移除
 
@@ -117,9 +118,9 @@ ms.locfileid: "88015604"
 
 1. 將伺服器層級的模組解除鎖定。 選取「IIS 管理員」[連線]**** 資訊看板中的 IIS 伺服器。 開啟 [IIS]**** 區域中的 [模組]****。 選取清單中的模組。 在右邊的 [動作]**** 資訊看板上，選取 [解除鎖定]****。 若模組的動作項目顯示為**鎖定**，就代表該模組已經解除鎖定，且不需要任何動作。 將您打算稍後從 *web.config* 移除的模組都解除鎖定。
 
-2. 在web.config中部署應用程式，而不使用 `<modules>` 區段。 *web.config*如果應用程式是以包含區段的*web.config*來部署 `<modules>` ，但未先在 IIS 管理員中解除鎖定區段，則在嘗試解除鎖定區段時，Configuration Manager 會擲回例外狀況。 因此，請在沒有 `<modules>` 區段的情況下部署應用程式。
+2. 部署應用程式，而不使用 `<modules>` *web.config*中的區段。如果以包含區段的 *web.config* 部署應用程式 `<modules>` ，但未在 IIS 管理員中先解除鎖定區段，則在嘗試解除鎖定區段時，Configuration Manager 會擲回例外狀況。 因此，請在沒有 `<modules>` 區段的情況下部署應用程式。
 
-3. 解除鎖定 `<modules>` *web.config*的區段。在 [**連接**] 提要欄位中，選取 [**網站**] 中的網站。 在 [管理]**** 區域中，開啟 [設定編輯器]****。 使用導覽控制項來選取 `system.webServer/modules` 區段。 在右邊的 [動作]**** 資訊看板上，選取將區段 [解除鎖定]****。 若模組區段的動作項目顯示為**鎖定區段**，就代表該模組區段已經解除鎖定，且不需要任何動作。
+3. 解除鎖定 `<modules>` *web.config*的區段。 **在 [連線] 提要欄位** 中，選取 [ **網站**] 中的網站。 在 [管理]**** 區域中，開啟 [設定編輯器]****。 使用導覽控制項來選取 `system.webServer/modules` 區段。 在右邊的 [動作]**** 資訊看板上，選取將區段 [解除鎖定]****。 若模組區段的動作項目顯示為**鎖定區段**，就代表該模組區段已經解除鎖定，且不需要任何動作。
 
 4. 將 `<modules>` 區段新增至具有 `<remove>` 元素的應用程式本機 *web.config* 檔案，以從應用程式移除該模組。 新增多個 `<remove>` 元素以移除多個模組。 如果已在伺服器上進行 *web.config* 變更，請立即在本機對專案的 *web.config* 檔案進行相同的變更。 使用此方法移除模組不會影響模組與伺服器上其他應用程式的搭配使用。
 
@@ -178,4 +179,4 @@ Appcmd.exe delete module MODULE_NAME /app.name:APPLICATION_NAME
 * [IIS 架構簡介：IIS 中的模組](/iis/get-started/introduction-to-iis/introduction-to-iis-architecture#modules-in-iis)
 * [IIS 模組概觀](/iis/get-started/introduction-to-iis/iis-modules-overview)
 * [自訂 IIS 7.0 角色和模組](https://technet.microsoft.com/library/cc627313.aspx)
-* [IIS\<system.webServer>](/iis/configuration/system.webServer/)
+* [Iis \<system.webServer>](/iis/configuration/system.webServer/)

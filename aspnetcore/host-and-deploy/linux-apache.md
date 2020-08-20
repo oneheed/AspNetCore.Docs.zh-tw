@@ -7,6 +7,7 @@ ms.author: shboyer
 ms.custom: mvc
 ms.date: 04/10/2020
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -17,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: host-and-deploy/linux-apache
-ms.openlocfilehash: 2bf5633461996bfecaaa6b730adc9a19bb2769c4
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: ac23f3f53bd7e200b843c10cd246ff16d4a12811
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88015552"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88634653"
 ---
 # <a name="host-aspnet-core-on-linux-with-apache"></a>在 Linux 上使用 Apache 裝載 ASP.NET Core
 
@@ -30,17 +31,17 @@ ms.locfileid: "88015552"
 
 使用本指南來了解如何在 [CentOS 7](https://www.centos.org/) 上將 [Apache](https://httpd.apache.org/) 設定為反向 Proxy 伺服器，以將 HTTP 流量重新導向至在 [Kestrel](xref:fundamentals/servers/kestrel) 伺服器上執行的 ASP.NET Core Web 應用程式。 [mod_proxy 延伸模組](https://httpd.apache.org/docs/2.4/mod/mod_proxy.html)和相關的模組會建立伺服器的反向 Proxy。
 
-## <a name="prerequisites"></a>必要條件
+## <a name="prerequisites"></a>Prerequisites
 
 * 執行 CentOS 7 的伺服器搭配具有 sudo 權限的標準使用者帳戶。
 * 在伺服器上安裝 .NET Core 執行階段。
-   1. 請造訪[下載 .Net Core 頁面](https://dotnet.microsoft.com/download/dotnet-core)。
+   1. 流覽 [ [下載 .Net Core] 頁面](https://dotnet.microsoft.com/download/dotnet-core)。
    1. 選取最新的非預覽 .NET Core 版本。
-   1. 在 [**執行應用程式-運行**時間] 下的表格中，下載最新的非預覽執行時間。
-   1. 選取 [Linux**套件管理員指示**] 連結，並遵循 CentOS 指示。
+   1. 在 [ **執行應用程式-運行**時間] 下的表格中下載最新的非預覽執行時間。
+   1. 選取 [Linux **套件管理員指示** ] 連結，並遵循 CentOS 指示。
 * 現有的 ASP.NET Core 應用程式。
 
-在未來升級共用架構之後的任何時間點，重新開機伺服器所裝載的 ASP.NET Core 應用程式。
+在升級共用架構之後的任何時間點，重新開機伺服器所裝載的 ASP.NET Core 應用程式。
 
 ## <a name="publish-and-copy-over-the-app"></a>跨應用程式發佈與複製
 
@@ -70,13 +71,13 @@ dotnet publish --configuration Release
 
 Proxy 伺服器則是會將用戶端要求轉送至另一部伺服器，而不是自己完成這些要求。 反向 Proxy 會轉送至固定目的地，通常代表任意的用戶端。 在本指南中，是將 Apache 設定成反向 Proxy，且執行所在的伺服器與 Kestrel 為 ASP.NET Core 應用程式提供服務的伺服器相同。
 
-因為反向 proxy 會轉送要求，所以請使用[AspNetCore. 來自 microsoft.aspnetcore.HTTPoverrides](https://www.nuget.org/packages/Microsoft.AspNetCore.HttpOverrides/)套件中的[轉送標頭中介軟體](xref:host-and-deploy/proxy-load-balancer)。 此中介軟體會使用 `X-Forwarded-Proto` 標頭來更新 `Request.Scheme`，以便讓重新導向 URI 及其他安全性原則正確運作。
+因為反向 proxy 會轉送要求，所以請使用來自[AspNetCore. >microsoft.aspnetcore.HTTPoverrides](https://www.nuget.org/packages/Microsoft.AspNetCore.HttpOverrides/)封裝的[轉送標頭中介軟體](xref:host-and-deploy/proxy-load-balancer)。 此中介軟體會使用 `X-Forwarded-Proto` 標頭來更新 `Request.Scheme`，以便讓重新導向 URI 及其他安全性原則正確運作。
 
 任何依賴配置的元件，例如驗證、連結產生、重新導向和地理位置，都必須在叫用轉送的標頭中介軟體後放置。
 
 [!INCLUDE[](~/includes/ForwardedHeaders.md)]
 
-<xref:Microsoft.AspNetCore.Builder.ForwardedHeadersExtensions.UseForwardedHeaders*> `Startup.Configure` 呼叫其他中介軟體之前，先叫用頂端的方法。 請設定中介軟體來轉送 `X-Forwarded-For` 和 `X-Forwarded-Proto` 標頭：
+<xref:Microsoft.AspNetCore.Builder.ForwardedHeadersExtensions.UseForwardedHeaders*>在 `Startup.Configure` 呼叫其他中介軟體之前，先在頂端叫用方法。 請設定中介軟體來轉送 `X-Forwarded-For` 和 `X-Forwarded-Proto` 標頭：
 
 ```csharp
 // using Microsoft.AspNetCore.HttpOverrides;
@@ -183,7 +184,7 @@ sudo systemctl enable httpd
 
 ## <a name="monitor-the-app"></a>監視應用程式
 
-Apache 現在已設定完成，可將對 `http://localhost:80` 發出的要求轉送給在位於 `http://127.0.0.1:5000` 的 Kestrel 上執行的 ASP.NET Core 應用程式。 不過，並未設定 Apache 來管理 Kestrel 處理序。 請使用 *systemd* 並建立服務檔案，以啟動並監視基礎 Web 應用程式。 *systemd*是 init 系統，提供許多強大的功能來啟動、停止和管理進程。
+Apache 現在已設定完成，可將對 `http://localhost:80` 發出的要求轉送給在位於 `http://127.0.0.1:5000` 的 Kestrel 上執行的 ASP.NET Core 應用程式。 不過，並未設定 Apache 來管理 Kestrel 處理序。 請使用 *systemd* 並建立服務檔案，以啟動並監視基礎 Web 應用程式。 *systemd* 是一種 init 系統，提供許多強大的功能來啟動、停止及管理進程。
 
 ### <a name="create-the-service-file"></a>建立服務檔
 
@@ -214,7 +215,7 @@ Environment=ASPNETCORE_ENVIRONMENT=Production
 WantedBy=multi-user.target
 ```
 
-在上述範例中，管理服務的使用者是由 `User` 選項指定。 使用者 (`apache`) 必須存在，且具有應用程式檔案的適當擁有權。
+在上述範例中，管理服務的使用者是由選項所指定 `User` 。 使用者 (`apache`) 必須存在，且擁有應用程式檔案的適當擁有權。
 
 使用 `TimeoutStopSec` 可設定應用程式收到初始中斷訊號之後等待關閉的時間。 如果應用程式在此期間後未關閉，則會發出 SIGKILL 來終止應用程式。 提供不具單位的秒值 (例如 `150`)、時間範圍值 (例如 `2min 30s`) 或 `infinity` (表示停用逾時)。 `TimeoutStopSec` 在管理員設定檔 (*systemd-system.conf*、*system.conf.d*、*systemd-user.conf*、*user.conf.d*) 的預設值為 `DefaultTimeoutStopSec`。 大多數發行版本的預設逾時為 90 秒。
 
@@ -291,13 +292,13 @@ sudo journalctl -fu kestrel-helloapp.service --since "2016-10-18" --until "2016-
 
 ## <a name="data-protection"></a>資料保護
 
-[ASP.NET Core 的資料保護堆疊](xref:security/data-protection/introduction)是由數個 ASP.NET Core[中介軟體](xref:fundamentals/middleware/index)所使用，包括驗證中介軟體 (例如 cookie 中介軟體) 和跨網站要求偽造 (CSRF) 防護。 即使資料保護 API 並非由使用者程式碼呼叫，仍應設定資料保護，以建立持續密碼編譯[金鑰存放區](xref:security/data-protection/implementation/key-management)。 如不設定資料保護，金鑰會保留在記憶體中，並於應用程式重新啟動時捨棄。
+[ASP.NET Core 的資料保護堆疊](xref:security/data-protection/introduction)是由數個 ASP.NET Core[中介軟體](xref:fundamentals/middleware/index)所使用，包括驗證中介軟體 (例如， cookie 中介軟體) 和跨網站偽造要求 (CSRF) 保護。 即使資料保護 API 並非由使用者程式碼呼叫，仍應設定資料保護，以建立持續密碼編譯[金鑰存放區](xref:security/data-protection/implementation/key-management)。 如不設定資料保護，金鑰會保留在記憶體中，並於應用程式重新啟動時捨棄。
 
 如果 Keyring 儲存在記憶體中，則當應用程式重新啟動時：
 
-* 所有架構 cookie 的驗證權杖都會失效。
+* 所有 cookie 的驗證權杖都會失效。
 * 當使用者提出下一個要求時，需要再次登入。
-* 所有以 Keyring 保護的資料都無法再解密。 這可能包括[CSRF](xref:security/anti-request-forgery#aspnet-core-antiforgery-configuration) token 和[ASP.NET Core MVC TempData cookie s](xref:fundamentals/app-state#tempdata)。
+* 所有以 Keyring 保護的資料都無法再解密。 這可能包括 [CSRF 權杖](xref:security/anti-request-forgery#aspnet-core-antiforgery-configuration) 和 [ASP.NET Core MVC TempData cookie s](xref:fundamentals/app-state#tempdata)。
 
 若要設定資料保護來保存及加密金鑰環，請參閱：
 
@@ -411,7 +412,7 @@ sudo systemctl restart httpd
 
 ### <a name="restart-apps-with-shared-framework-updates"></a>使用共用架構更新重新開機應用程式
 
-升級伺服器上的共用架構之後，請重新開機伺服器所主控的 ASP.NET Core 應用程式。
+在伺服器上升級共用架構之後，請重新開機伺服器所裝載的 ASP.NET Core 應用程式。
 
 ### <a name="additional-headers"></a>其他標頭
 
@@ -516,7 +517,7 @@ sudo nano /etc/httpd/conf.d/ratelimit.conf
 
 ### <a name="long-request-header-fields"></a>要求標頭欄位太長
 
-Proxy 伺服器預設設定通常會將要求標頭欄位限制為8190個位元組。 應用程式可能需要比預設 (更長的欄位（例如，使用[Azure Active Directory](https://azure.microsoft.com/services/active-directory/)) 的應用程式）。 如果需要較長的欄位，proxy 伺服器的[LimitRequestFieldSize](https://httpd.apache.org/docs/2.4/mod/core.html#LimitRequestFieldSize)指示詞需要調整。 要套用的值取決於案例。 如需詳細資訊，請參閱您的伺服器文件。
+Proxy 伺服器預設設定通常會將要求標頭欄位限制為8190個位元組。 應用程式可能需要比預設 (更長的欄位，例如使用 [Azure Active Directory](https://azure.microsoft.com/services/active-directory/)) 的應用程式。 如果需要較長的欄位，proxy 伺服器的 [LimitRequestFieldSize](https://httpd.apache.org/docs/2.4/mod/core.html#LimitRequestFieldSize) 指示詞需要調整。 要套用的值取決於案例。 如需詳細資訊，請參閱您的伺服器文件。
 
 > [!WARNING]
 > 除非必要，否則請勿增加 `LimitRequestFieldSize` 的預設值。 增加此值會提高緩衝區溢位及惡意使用者發動拒絕服務 (DoS) 攻擊的風險。

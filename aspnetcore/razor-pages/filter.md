@@ -1,11 +1,12 @@
 ---
 title: RazorASP.NET Core 中頁面的篩選方法
 author: Rick-Anderson
-description: 瞭解如何在 ASP.NET Core 中建立頁面的篩選準則方法 Razor 。
+description: 瞭解如何 Razor 在 ASP.NET Core 中建立頁面的篩選方法。
 monikerRange: '>= aspnetcore-2.1'
 ms.author: riande
 ms.date: 2/18/2020
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -16,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: razor-pages/filter
-ms.openlocfilehash: b8942020e98d0f985e5445bb1816c540bcb7829b
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: b6d6585c0cbd52715c4192d4ab3bee756dbb41b3
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88021402"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88635043"
 ---
 # <a name="filter-methods-for-no-locrazor-pages-in-aspnet-core"></a>RazorASP.NET Core 中頁面的篩選方法
 
@@ -29,22 +30,22 @@ ms.locfileid: "88021402"
 
 作者：[Rick Anderson](https://twitter.com/RickAndMSFT)
 
-Razor頁面篩選[IPageFilter](/dotnet/api/microsoft.aspnetcore.mvc.filters.ipagefilter?view=aspnetcore-2.0)和[IAsyncPageFilter](/dotnet/api/microsoft.aspnetcore.mvc.filters.iasyncpagefilter?view=aspnetcore-2.0)允許頁面在 Razor Razor 頁面處理常式執行之前和之後執行程式碼。 Razor頁面篩選與[ASP.NET CORE MVC 動作篩選器](xref:mvc/controllers/filters#action-filters)相似，不同之處在于它們不能套用至個別的頁面處理常式方法。
+Razor 頁面篩選 [>ipagefilter](/dotnet/api/microsoft.aspnetcore.mvc.filters.ipagefilter?view=aspnetcore-2.0) 和 [>iasyncpagefilter](/dotnet/api/microsoft.aspnetcore.mvc.filters.iasyncpagefilter?view=aspnetcore-2.0) 允許頁面在 Razor Razor 頁面處理常式執行之前和之後執行程式碼。 Razor 頁面篩選與 ASP.NET Core 的 [MVC 動作篩選器](xref:mvc/controllers/filters#action-filters)類似，但它們無法套用至個別的頁面處理常式方法。
 
-Razor頁面篩選：
+Razor 頁面篩選：
 
 * 在選取處理常式方法之後，但在進行模型繫結之前執行程式碼。
 * 在執行處理常式方法之前，並在完成模型繫結之後執行程式碼。
 * 在執行處理常式方法之後執行程式碼。
 * 可以在某個頁面或全域實作。
 * 無法套用至特定頁面處理常式方法。
-* 可以 (DI) ，將相依性[插入](xref:fundamentals/dependency-injection)所填入的函式相依性。 如需詳細資訊，請參閱[ServiceFilterAttribute](/aspnet/core/mvc/controllers/filters#servicefilterattribute)和[TypeFilterAttribute](/aspnet/core/mvc/controllers/filters#typefilterattribute)。
+* 可以有以相依性 [插入](xref:fundamentals/dependency-injection) (DI) 填入的函式相依性。 如需詳細資訊，請參閱 [ServiceFilterAttribute](/aspnet/core/mvc/controllers/filters#servicefilterattribute) 和 [TypeFilterAttribute](/aspnet/core/mvc/controllers/filters#typefilterattribute)。
 
-雖然頁面的程式碼和中介軟體能夠在處理常式方法執行之前執行自訂程式碼，但只有 Razor 頁面篩選可以存取 <xref:Microsoft.AspNetCore.Mvc.RazorPages.PageModel.HttpContext> 和頁面。 中介軟體具有的存取權 `HttpContext` ，而不是「頁面內容」。 篩選具有 <xref:Microsoft.AspNetCore.Mvc.Filters.FilterContext> 衍生的參數，可提供對的存取 `HttpContext` 。 以下是頁面篩選的範例：[執行篩選屬性](#ifa)，將標頭新增至回應，這項功能無法使用函式或中介軟體來完成。 只有在執行篩選、處理常式或頁面主體時，才能存取頁面內容，其中包括頁面實例和模型的存取權 Razor 。
+雖然頁面自訂程式和中介軟體可讓您在處理常式方法執行之前執行自訂程式碼，但是只有 Razor 頁面篩選可以存取 <xref:Microsoft.AspNetCore.Mvc.RazorPages.PageModel.HttpContext> 和頁面。 中介軟體可存取 `HttpContext` ，但不能存取「頁面內容」。 篩選具有可 <xref:Microsoft.AspNetCore.Mvc.Filters.FilterContext> 提供存取的衍生參數 `HttpContext` 。 以下是頁面篩選的範例： [執行篩選屬性](#ifa) ，將標頭新增至回應，這是無法使用函式或中介軟體完成的動作。 只有在執行篩選、處理常式或頁面的主體時，才可存取頁面內容（包括存取頁面的實例和其模型） Razor 。
 
 [查看或下載範例程式碼](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/razor-pages/filter/3.1sample) ([如何下載](xref:index#how-to-download-a-sample)) 
 
-Razor頁面篩選提供下列方法，可在全域套用或在頁面層級套用：
+Razor 頁面篩選器提供下列方法，可在全域或在頁面層級套用：
 
 * 同步方法：
 
@@ -57,7 +58,7 @@ Razor頁面篩選提供下列方法，可在全域套用或在頁面層級套用
   * [OnPageHandlerSelectionAsync](/dotnet/api/microsoft.aspnetcore.mvc.filters.iasyncpagefilter.onpagehandlerselectionasync?view=aspnetcore-2.0)：在選取處理常式方法之後，但在進行模型繫結之前以非同步方式呼叫。
   * [OnPageHandlerExecutionAsync](/dotnet/api/microsoft.aspnetcore.mvc.filters.iasyncpagefilter.onpagehandlerexecutionasync?view=aspnetcore-2.0)：在叫用處理常式方法之前，並在完成模型繫結之後以非同步方式呼叫。
 
-請實作同步**或**非同步版本的篩選條件介面，而**不要**同時實作這兩者。 架構會先檢查以查看篩選條件是否實作非同步介面，如果是的話，便呼叫該介面。 如果沒有，它會呼叫同步介面的方法。 如果同時實作為這兩個介面，則只會呼叫非同步方法。 相同的規則會套用至頁面中的覆寫，實作覆寫的同步或非同步版本，但不能同時實作。
+請實作同步**或**非同步版本的篩選條件介面，而**不要**同時實作這兩者。 架構會先檢查以查看篩選條件是否實作非同步介面，如果是的話，便呼叫該介面。 如果沒有，它會呼叫同步介面的方法。 如果這兩個介面都已執行，則只會呼叫非同步方法。 相同的規則會套用至頁面中的覆寫，實作覆寫的同步或非同步版本，但不能同時實作。
 
 ## <a name="implement-no-locrazor-page-filters-globally"></a>Razor全域執行頁面篩選
 
@@ -71,7 +72,7 @@ Razor頁面篩選提供下列方法，可在全域套用或在頁面層級套用
 
 [!code-csharp[Main](filter/3.1sample/PageFilter/Startup.cs?name=snippet2)]
 
-下列程式碼會呼叫 <xref:Microsoft.AspNetCore.Mvc.ApplicationModels.PageConventionCollection.AddFolderApplicationModelConvention*> ，以將 `SampleAsyncPageFilter` 只套用至 */Movies*中的頁面：
+下列程式碼會呼叫，將套用 <xref:Microsoft.AspNetCore.Mvc.ApplicationModels.PageConventionCollection.AddFolderApplicationModelConvention*> `SampleAsyncPageFilter` 至 */Movies*中的頁面：
 
 [!code-csharp[Main](filter/3.1sample/PageFilter/Startup2.cs?name=snippet2)]
 
@@ -93,7 +94,7 @@ Razor頁面篩選提供下列方法，可在全域套用或在頁面層級套用
 
 ## <a name="implement-a-filter-attribute"></a>實作篩選條件屬性
 
-內建以屬性為基礎的篩選 <xref:Microsoft.AspNetCore.Mvc.Filters.IAsyncResultFilter.OnResultExecutionAsync*> 篩選器可以子類別化。 下列篩選條件會將標頭新增至回應：
+內建的屬性型篩選 <xref:Microsoft.AspNetCore.Mvc.Filters.IAsyncResultFilter.OnResultExecutionAsync*> 篩選器可以子類別化。 下列篩選條件會將標頭新增至回應：
 
 [!code-csharp[Main](filter/3.1sample/PageFilter/Filters/AddHeaderAttribute.cs)]
 
@@ -101,7 +102,7 @@ Razor頁面篩選提供下列方法，可在全域套用或在頁面層級套用
 
 [!code-csharp[Main](filter/3.1sample/PageFilter/Pages/Movies/Test.cshtml.cs)]
 
-使用瀏覽器開發人員工具之類的工具來檢查標頭。 在 [**回應標頭**] 底下， `author: Rick` 會顯示。
+使用瀏覽器開發人員工具之類的工具來檢查標頭。 在 [ **回應標頭**] 底下 `author: Rick` 顯示。
 
 如需覆寫順序的指示，請參閱[覆寫預設順序](xref:mvc/controllers/filters#overriding-the-default-order)。
 
@@ -121,9 +122,9 @@ Razor頁面篩選提供下列方法，可在全域套用或在頁面層級套用
 
 作者：[Rick Anderson](https://twitter.com/RickAndMSFT)
 
-Razor頁面篩選[IPageFilter](/dotnet/api/microsoft.aspnetcore.mvc.filters.ipagefilter?view=aspnetcore-2.0)和[IAsyncPageFilter](/dotnet/api/microsoft.aspnetcore.mvc.filters.iasyncpagefilter?view=aspnetcore-2.0)允許頁面在 Razor Razor 頁面處理常式執行之前和之後執行程式碼。 Razor頁面篩選與[ASP.NET CORE MVC 動作篩選器](xref:mvc/controllers/filters#action-filters)相似，不同之處在于它們不能套用至個別的頁面處理常式方法。
+Razor 頁面篩選 [>ipagefilter](/dotnet/api/microsoft.aspnetcore.mvc.filters.ipagefilter?view=aspnetcore-2.0) 和 [>iasyncpagefilter](/dotnet/api/microsoft.aspnetcore.mvc.filters.iasyncpagefilter?view=aspnetcore-2.0) 允許頁面在 Razor Razor 頁面處理常式執行之前和之後執行程式碼。 Razor 頁面篩選與 ASP.NET Core 的 [MVC 動作篩選器](xref:mvc/controllers/filters#action-filters)類似，但它們無法套用至個別的頁面處理常式方法。
 
-Razor頁面篩選：
+Razor 頁面篩選：
 
 * 在選取處理常式方法之後，但在進行模型繫結之前執行程式碼。
 * 在執行處理常式方法之前，並在完成模型繫結之後執行程式碼。
@@ -131,11 +132,11 @@ Razor頁面篩選：
 * 可以在某個頁面或全域實作。
 * 無法套用至特定頁面處理常式方法。
 
-您可以在處理常式方法執行之前，使用頁面的函式或中介軟體，但只有 Razor 頁面篩選器才能夠存取[HttpCoNtext](/dotnet/api/microsoft.aspnetcore.mvc.razorpages.pagemodel.httpcontext?view=aspnetcore-2.0#Microsoft_AspNetCore_Mvc_RazorPages_PageModel_HttpContext)。 篩選條件具有 [FilterContext](/dotnet/api/microsoft.aspnetcore.mvc.filters.filtercontext?view=aspnetcore-2.0) 衍生參數，可提供對 `HttpContext` 的存取。 例如，[實作篩選條件屬性](#ifa)範例會將標頭新增至回應，這是無法使用建構函式或中介軟體完成的作業。
+程式碼可以在處理常式方法使用頁面的函式或中介軟體執行之前執行，但只有 Razor 頁面篩選可以存取 [HttpCoNtext](/dotnet/api/microsoft.aspnetcore.mvc.razorpages.pagemodel.httpcontext?view=aspnetcore-2.0#Microsoft_AspNetCore_Mvc_RazorPages_PageModel_HttpContext)。 篩選條件具有 [FilterContext](/dotnet/api/microsoft.aspnetcore.mvc.filters.filtercontext?view=aspnetcore-2.0) 衍生參數，可提供對 `HttpContext` 的存取。 例如，[實作篩選條件屬性](#ifa)範例會將標頭新增至回應，這是無法使用建構函式或中介軟體完成的作業。
 
 [查看或下載範例程式碼](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/razor-pages/filter/sample/PageFilter) ([如何下載](xref:index#how-to-download-a-sample)) 
 
-Razor頁面篩選提供下列方法，可在全域套用或在頁面層級套用：
+Razor 頁面篩選器提供下列方法，可在全域或在頁面層級套用：
 
 * 同步方法：
 
@@ -149,7 +150,7 @@ Razor頁面篩選提供下列方法，可在全域套用或在頁面層級套用
   * [OnPageHandlerExecutionAsync](/dotnet/api/microsoft.aspnetcore.mvc.filters.iasyncpagefilter.onpagehandlerexecutionasync?view=aspnetcore-2.0)：在叫用處理常式方法之前，並在完成模型繫結之後以非同步方式呼叫。
 
 > [!NOTE]
-> 請實作同步**或**非同步版本的篩選條件介面，而不要同時實作這兩者。 架構會先檢查以查看篩選條件是否實作非同步介面，如果是的話，便呼叫該介面。 如果沒有，它會呼叫同步介面的方法。 如果同時實作為這兩個介面，則只會呼叫非同步方法。 相同的規則會套用至頁面中的覆寫，實作覆寫的同步或非同步版本，但不能同時實作。
+> 請實作同步**或**非同步版本的篩選條件介面，而不要同時實作這兩者。 架構會先檢查以查看篩選條件是否實作非同步介面，如果是的話，便呼叫該介面。 如果沒有，它會呼叫同步介面的方法。 如果這兩個介面都已執行，則只會呼叫非同步方法。 相同的規則會套用至頁面中的覆寫，實作覆寫的同步或非同步版本，但不能同時實作。
 
 ## <a name="implement-no-locrazor-page-filters-globally"></a>Razor全域執行頁面篩選
 

@@ -7,6 +7,7 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 11/07/2019
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -17,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: fundamentals/servers/index
-ms.openlocfilehash: fb9ba7cd4fe7ce805374dd802cc7ba4258d52527
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: 8dde2d663f4eac94173038eaf7df6b95d67ba62e
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88016748"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88635030"
 ---
 # <a name="web-server-implementations-in-aspnet-core"></a>ASP.NET Core 中的網頁伺服器實作
 
@@ -44,7 +45,7 @@ Kestrel 是 ASP.NET Core 專案範本所指定的預設 web 伺服器。
 
   ![Kestrel 透過 IIS、Nginx 或 Apache 等反向 Proxy 伺服器間接與網際網路通訊](kestrel/_static/kestrel-to-internet.png)
 
-&mdash;不支援具有或不使用反向 proxy 伺服器的裝載設定 &mdash; 。
+支援裝載設定 &mdash; ，不論是否使用反向 proxy 伺服器 &mdash; 。
 
 如需 Kestrel 設定指南及資訊，以了解在反向 Proxy 設定中使用 Kestrel 的時機，請參閱 <xref:fundamentals/servers/kestrel>。
 
@@ -60,7 +61,7 @@ ASP.NET Core 隨附下列項目：
 
 使用 [IIS](/iis/get-started/introduction-to-iis/introduction-to-iis-architecture) 或 [IIS Express](/iis/extensions/introduction-to-iis-express/iis-express-overview) 時，應用程式可能會執行於：
 
-* 與 IIS 背景工作進程相同的程式中 (與 IIS HTTP 伺服器) 的同[進程裝載模型](#hosting-models)。 「同處理序」** 是建議的設定。
+* 在與 IIS 背景工作進程相同的程式中 (同 [進程裝載模型](#hosting-models)) 與 Iis HTTP 伺服器一起使用。 「同處理序」** 是建議的設定。
 * 從 IIS 背景工作處理序中分離出的處理序 ([跨處理序裝載模型](#hosting-models))，並搭配 [Kestrel 伺服器](#kestrel)。
 
 [ASP.NET Core 模組](xref:host-and-deploy/aspnet-core-module)是一種原生 IIS 模組，可處理 IIS 與同處理序 IIS HTTP 伺服器或 Kestrel 之間的原生 IIS 要求。 如需詳細資訊，請參閱<xref:host-and-deploy/aspnet-core-module>。
@@ -107,7 +108,7 @@ ASP.NET Core 隨附下列項目：
 
 要求會從 Web 到達核心模式的 HTTP.sys 驅動程式。 驅動程式會在網站設定的通訊埠上將要求路由至 IIS，此通訊埠通常是 80 (HTTP) 或 443 (HTTPS)。 此模組會在應用程式的隨機通訊埠上將要求轉送至 Kestrel，而且不會是通訊埠 80 或 443。
 
-此模組會在啟動時透過環境變數指定埠，而[IIS 整合中介軟體](xref:host-and-deploy/iis/index#enable-the-iisintegration-components)會設定伺服器來接聽 `http://localhost:{port}` 。 將會執行額外檢查，不是源自模組的要求都會遭到拒絕。 此模組不支援 HTTPS 轉送，因此即使由 IIS 透過 HTTPS 接收，要求還是會透過 HTTP 轉送。
+模組會在啟動時透過環境變數指定埠，而 [IIS 整合中介軟體](xref:host-and-deploy/iis/index#enable-the-iisintegration-components) 會設定要接聽的伺服器 `http://localhost:{port}` 。 將會執行額外檢查，不是源自模組的要求都會遭到拒絕。 此模組不支援 HTTPS 轉送，因此即使由 IIS 透過 HTTPS 接收，要求還是會透過 HTTP 轉送。
 
 Kestrel 收取來自模組的要求之後，要求會被推送至 ASP.NET Core 中介軟體管線。 中介軟體管線會處理要求，並將其作為 `HttpContext` 執行個體傳遞至應用程式的邏輯。 IIS Integration 新增的中介軟體會更新配置、遠端 IP 和帳戶路徑基底，以將要求轉送至 Kestrel。 應用程式的回應會傳回 IIS，而 IIS 會將其推送回起始要求的 HTTP 用戶端。
 
@@ -162,13 +163,13 @@ HTTP.sys 也可用於只公開到內部網路的應用程式。
 
 伺服器會在整合式開發環境 (IDE) 或編輯器啟動應用程式時啟動：
 
-* [Visual Studio](https://visualstudio.microsoft.com)：啟動設定檔可用來啟動具有[IIS Express](/iis/extensions/introduction-to-iis-express/iis-express-overview) / [ASP.NET Core 模組](xref:host-and-deploy/aspnet-core-module)或主控台的應用程式和伺服器。
-* [Visual Studio Code](https://code.visualstudio.com/)：應用程式和伺服器會由[Omnisharp](https://github.com/OmniSharp/omnisharp-vscode)啟動，這會啟用 CoreCLR 偵錯工具。
-* [Visual Studio for Mac](https://visualstudio.microsoft.com/vs/mac/)：應用程式和伺服器會由[Mono 軟模式偵錯工具](https://www.mono-project.com/docs/advanced/runtime/docs/soft-debugger/)啟動。
+* [Visual Studio](https://visualstudio.microsoft.com)：啟動設定檔可用來透過[IIS Express](/iis/extensions/introduction-to-iis-express/iis-express-overview) / [ASP.NET Core 模組](xref:host-and-deploy/aspnet-core-module)或主控台來啟動應用程式和伺服器。
+* [Visual Studio Code](https://code.visualstudio.com/)：應用程式和伺服器是由 [Omnisharp](https://github.com/OmniSharp/omnisharp-vscode)啟動，這會啟用 CoreCLR 偵錯工具。
+* [Visual Studio for Mac](https://visualstudio.microsoft.com/vs/mac/)：應用程式和伺服器是由 [Mono 軟模式調試](https://www.mono-project.com/docs/advanced/runtime/docs/soft-debugger/)程式啟動。
 
 當您在專案資料夾中使用命令提示字元啟動應用程式時，[dotnet run](/dotnet/core/tools/dotnet-run) 會啟動應用程式和伺服器 (僅限 Kestrel 和 HTTP.sys)。 組態是由 `-c|--configuration` 選項指定，會設為 `Debug` (預設值) 或 `Release`。
 
-檔案*上的launchSettings.js*會在使用 `dotnet run` 或內建在工具中的偵錯工具（例如 Visual Studio）時，提供設定。 如果*launchSettings.js的*檔案中有啟動設定檔，請使用 `--launch-profile {PROFILE NAME}` 選項搭配命令， `dotnet run` 或選取 Visual Studio 中的設定檔。 如需詳細資訊，請參閱 [dotnet run](/dotnet/core/tools/dotnet-run) 和 [.NET Core 發佈封裝](/dotnet/core/build/distribution-packaging)。
+當使用或工具內建的偵錯工具（例如 Visual Studio）來啟動應用程式時，檔案 * 上的launchSettings.js* 會提供設定 `dotnet run` 。 如果啟動設定檔存在於檔案的 *launchSettings.js* 中，請使用 `--launch-profile {PROFILE NAME}` 選項搭配 `dotnet run` 命令或選取 Visual Studio 中的設定檔。 如需詳細資訊，請參閱 [dotnet run](/dotnet/core/tools/dotnet-run) 和 [.NET Core 發佈封裝](/dotnet/core/build/distribution-packaging)。
 
 ## <a name="http2-support"></a>HTTP/2 支援
 

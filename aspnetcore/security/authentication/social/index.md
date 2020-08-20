@@ -6,6 +6,7 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 01/23/2020
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -16,20 +17,20 @@ no-loc:
 - Razor
 - SignalR
 uid: security/authentication/social/index
-ms.openlocfilehash: 7dacbb00b40d2741fcbfc78ec7cdf2a67482a8da
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: da025cb8dced8ac8a6ecf559d4de7795c9797f71
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88020466"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88634276"
 ---
 # <a name="facebook-google-and-external-provider-authentication-in-aspnet-core"></a>ASP.NET Core 中的 Facebook、Google 及外部提供者驗證
 
 作者：[Valeriy Novytskyy](https://github.com/01binary) 和 [Rick Anderson](https://twitter.com/RickAndMSFT)
 
-本教學課程示範如何建立 ASP.NET Core 3.0 應用程式，讓使用者能夠使用 OAuth 2.0 搭配外部驗證提供者的認證來登入。
+本教學課程示範如何建立 ASP.NET Core 3.0 應用程式，讓使用者能夠使用 OAuth 2.0 搭配外部驗證提供者的認證進行登入。
 
-下列各節涵蓋[Facebook](xref:security/authentication/facebook-logins)、 [Twitter](xref:security/authentication/twitter-logins)、 [Google](xref:security/authentication/google-logins)和[Microsoft](xref:security/authentication/microsoft-logins)提供者，並使用本文中建立的入門專案。 您可透過 [AspNet.Security.OAuth.Providers](https://github.com/aspnet-contrib/AspNet.Security.OAuth.Providers) 和 [AspNet.Security.OpenId.Providers](https://github.com/aspnet-contrib/AspNet.Security.OpenId.Providers) 這類協力廠商套件，取得其他提供者。
+[Facebook](xref:security/authentication/facebook-logins)、 [Twitter](xref:security/authentication/twitter-logins)、 [Google](xref:security/authentication/google-logins)和 [Microsoft](xref:security/authentication/microsoft-logins) 提供者會在下列各節中討論，並使用本文中建立的入門專案。 您可透過 [AspNet.Security.OAuth.Providers](https://github.com/aspnet-contrib/AspNet.Security.OAuth.Providers) 和 [AspNet.Security.OpenId.Providers](https://github.com/aspnet-contrib/AspNet.Security.OpenId.Providers) 這類協力廠商套件，取得其他提供者。
 
 讓使用者透過現有認證登入：
 
@@ -51,7 +52,7 @@ ms.locfileid: "88020466"
 
 # <a name="visual-studio-code--visual-studio-for-mac"></a>[Visual Studio Code / Visual Studio for Mac](#tab/visual-studio-code+visual-studio-mac)
 
-* 開啟終端機。  對於 Visual Studio Code，您可以開啟[整合式終端](https://code.visualstudio.com/docs/editor/integrated-terminal)機。
+* 開啟終端機。  針對 Visual Studio Code 您可以開啟 [整合式終端](https://code.visualstudio.com/docs/editor/integrated-terminal)機。
 
 * 將目錄 (`cd`) 變更為其中包含專案的資料夾。
 
@@ -67,9 +68,9 @@ ms.locfileid: "88020466"
   dotnet new webapp -o WebApp1 -au Individual
   ```
 
-  * `dotnet new`命令會 Razor 在*WebApp1*資料夾中建立新的頁面專案。
+  * 此 `dotnet new` 命令會 Razor 在 *WebApp1* 資料夾中建立新的頁面專案。
   * `-au Individual` 會建立程式碼以進行個別驗證。
-  * `-uld`使用 LocalDB，這是 Windows SQL Server Express 的輕量版本。 省略 `-uld` 以使用 SQLite。
+  * `-uld` 使用 LocalDB，此為適用于 Windows 的 SQL Server Express 輕量版本。 省略 `-uld` 以使用 SQLite。
   * `code` 命令會在新的 Visual Studio Code 執行個體中開啟 [WebApp1]** 資料夾。
 
 ---
@@ -113,7 +114,7 @@ ms.locfileid: "88020466"
 
 ![Web 應用程式的 [管理] 檢視](index/_static/pass1a.png)
 
-* 選取 [建立]
+* 選取 [建立] 
 
 ![[設定密碼] 頁面](index/_static/pass2a.png)
 
@@ -121,7 +122,7 @@ ms.locfileid: "88020466"
 
 ## <a name="next-steps"></a>後續步驟
 
-* 如需如何自訂登入按鈕的相關資訊，請參閱[此 GitHub 問題](https://github.com/dotnet/AspNetCore.Docs/issues/10563)。
+* 如需如何自訂登入按鈕的詳細資訊，請參閱 [此 GitHub 問題](https://github.com/dotnet/AspNetCore.Docs/issues/10563) 。
 * 本文介紹了外部驗證，並說明將外部登入新增至 ASP.NET Core 應用程式所需的必要條件。
 * 請參考提供者的特定頁面，以設定應用程式所需的提供者登入項目。
 * 您想要保存有關使用者與其存取和重新整理權杖的額外資料。 如需詳細資訊，請參閱<xref:security/authentication/social/additional-claims>。

@@ -5,6 +5,7 @@ description: Razor使用 Visual Studio、ASP.NET Core 和 EF Core，在 Windows 
 ms.author: riande
 ms.date: 08/09/2019
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -15,12 +16,12 @@ no-loc:
 - Razor
 - SignalR
 uid: tutorials/razor-pages/index
-ms.openlocfilehash: ae6bffccd04617f2c2fdfbb8a4e1315c210a66de
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: aa9747e5f74f0f2d4764f9ebbb5c6d19191451ff
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88021506"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88634718"
 ---
 # <a name="tutorial-create-a-no-locrazor-pages-web-app-with-aspnet-core"></a>教學課程： Razor 使用 ASP.NET Core 建立頁面 web 應用程式
 
@@ -32,7 +33,7 @@ ms.locfileid: "88021506"
 
 1. [建立 Razor 頁面 web 應用程式](xref:tutorials/razor-pages/razor-pages-start)
 1. [將模型新增至 Razor 頁面應用程式](xref:tutorials/razor-pages/model)
-1. [Scaffold (產生) Razor 頁](xref:tutorials/razor-pages/page)
+1. [Scaffold (產生) Razor 頁面](xref:tutorials/razor-pages/page)
 1. [使用資料庫](xref:tutorials/razor-pages/sql)
 1. [更新 Razor 頁面](xref:tutorials/razor-pages/da1)
 1. [新增搜尋](xref:tutorials/razor-pages/search)

@@ -5,6 +5,7 @@ description: 本文介紹可攜式物件檔案，並概述在具有 Orchard Core
 ms.author: scaddie
 ms.date: 09/26/2017
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -15,12 +16,12 @@ no-loc:
 - Razor
 - SignalR
 uid: fundamentals/portable-object-localization
-ms.openlocfilehash: 1c60f98ce08c5282986f688487339d378f28aaf7
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: 3919909067593a93384661b37d67bf2d90cd7df8
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88016800"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88634523"
 ---
 # <a name="configure-portable-object-localization-in-aspnet-core"></a>使用 ASP.NET Core 設定可攜式物件當地語系化
 
@@ -93,7 +94,7 @@ msgstr[1] "Les adresses email sont \"{0}\""
 
 [!code-csharp[](localization/sample/2.x/POLocalization/Startup.cs?name=snippet_Configure&highlight=15)]
 
-將下列程式碼新增至您 Razor 選擇的視圖。 此範例中使用 *About.cshtml*。
+將下列程式碼新增至您 Razor 選擇的觀點。 此範例中使用 *About.cshtml*。
 
 [!code-cshtml[](localization/sample/2.x/POLocalization/Views/Home/About.cshtml)]
 
@@ -101,7 +102,7 @@ msgstr[1] "Les adresses email sont \"{0}\""
 
 ### <a name="creating-a-po-file"></a>建立 PO 檔案
 
-在您的應用程式根資料夾中，建立名為* \<culture code> po*的檔案。 在此範例中，檔案名稱是 *fr.po*，因為使用法文語言：
+在您的應用程式根資料夾中，建立名為 po 的檔案* \<culture code> 。* 在此範例中，檔案名稱是 *fr.po*，因為使用法文語言：
 
 [!code-text[](localization/sample/2.x/POLocalization/fr.po)]
 
@@ -197,11 +198,11 @@ Existuje 5 položek.
 
 ### <a name="contextualizing-strings"></a>內容化字串
 
-應用程式通常包含要在數個位置中翻譯的字串。 相同的字串在應用程式內的特定位置可能會有不同的轉譯 (Razor views 或 class 檔案) 。 PO 檔案支援檔案內容的概念，可用來對所表示的字串進行分類。 使用檔案內容，字串可以根據檔案內容 (或缺乏檔案內容) 翻譯成不同的內容。
+應用程式通常包含要在數個位置中翻譯的字串。 相同的字串在應用程式內的特定位置可能會有不同的轉譯 (Razor) 的視圖或類別檔案。 PO 檔案支援檔案內容的概念，可用來對所表示的字串進行分類。 使用檔案內容，字串可以根據檔案內容 (或缺乏檔案內容) 翻譯成不同的內容。
 
 PO 當地語系化服務會使用翻譯字串時所使用的完整類別或檢視的名稱。 這是透過在 `msgctxt` 項目上設定值來完成的。
 
-考慮對先前的 *fr.po* 範例進行微幅新增。 您 Razor 可以藉由設定保留專案的值，將位於*Views/Home/About. cshtml*的視圖定義為檔案內容 `msgctxt` ：
+考慮對先前的 *fr.po* 範例進行微幅新增。 您 Razor 可以藉由設定保留專案的值，將位於 *Views/Home/About. cshtml* 的視圖定義為檔案內容 `msgctxt` ：
 
 ```text
 msgctxt "Views.Home.About"

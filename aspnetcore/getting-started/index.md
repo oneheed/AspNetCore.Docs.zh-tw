@@ -6,6 +6,7 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 01/07/2020
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -16,16 +17,16 @@ no-loc:
 - Razor
 - SignalR
 uid: getting-started
-ms.openlocfilehash: 74df2ade64e0821dcbb28252e8a637f81d15e375
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: afded8890afe3b8f7b1d0b5634fc7764906bc9d7
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88016475"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88635004"
 ---
 # <a name="tutorial-get-started-with-aspnet-core"></a>教學課程：ASP.NET Core 使用者入門
 
-本教學課程說明如何使用 .NET Core CLI 建立和執行 ASP.NET Core web 應用程式。
+本教學課程說明如何使用 .NET Core CLI 來建立和執行 ASP.NET Core web 應用程式。
 
 您將學習如何：
 
@@ -39,7 +40,7 @@ ms.locfileid: "88016475"
 
 ![Web 應用程式首頁](_static/home-page.png)
 
-## <a name="prerequisites"></a>必要條件
+## <a name="prerequisites"></a>Prerequisites
 
 [!INCLUDE[](~/includes/3.1-SDK.md)]
 
@@ -54,7 +55,7 @@ dotnet new webapp -o aspnetcoreapp
 上述命令︰
 
 * 建立新的 web 應用程式。  
-* `-o aspnetcoreapp`參數會建立名為*aspnetcoreapp*的目錄，其中包含應用程式的來源檔案。
+* `-o aspnetcoreapp`參數會建立名為*aspnetcoreapp*的目錄，其中包含應用程式的原始程式檔。
 
 ### <a name="trust-the-development-certificate"></a>信任開發憑證
 
@@ -80,7 +81,7 @@ dotnet dev-certs https --trust
 
 上述命令會顯示以下訊息：
 
-*已要求信任 HTTPS 開發憑證。如果憑證尚未受到信任，我們會執行下列命令：*`'sudo security add-trusted-cert -d -r trustRoot -k /Library/Keychains/System.keychain <<certificate>>'`
+*已要求信任 HTTPS 開發憑證。若憑證尚未受到信任，我們會執行下列命令：*`'sudo security add-trusted-cert -d -r trustRoot -k /Library/Keychains/System.keychain <<certificate>>'`
 
 此命令可能會提示您提供密碼，以在系統金鑰鏈上安裝憑證。 若您同意信任開發憑證，請輸入您的密碼。
 
@@ -105,7 +106,7 @@ dotnet watch run
 
 ## <a name="edit-a-no-locrazor-page"></a>編輯 Razor 頁面
 
-開啟*Pages/Index. cshtml* ，並以下列反白顯示的標記修改並儲存頁面：
+開啟 *Pages/Index* ，然後使用下列反白顯示的標記來修改並儲存頁面：
 
 [!code-cshtml[](sample/index.cshtml?highlight=9)]
 

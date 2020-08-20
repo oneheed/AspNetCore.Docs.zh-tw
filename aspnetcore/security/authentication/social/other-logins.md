@@ -1,11 +1,12 @@
 ---
 title: 外部 OAuth 驗證提供者
 author: rick-anderson
-description: 探索可與 ASP.NET Core 應用程式搭配使用的外部 OAuth 驗證提供者。
+description: 探索可搭配 ASP.NET Core apps 使用的外部 OAuth 驗證提供者。
 ms.author: riande
 ms.custom: mvc
 ms.date: 11/11/2018
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -16,18 +17,18 @@ no-loc:
 - Razor
 - SignalR
 uid: security/authentication/otherlogins
-ms.openlocfilehash: 3de76b303c469341ba022fa3d33d3cd2a17581db
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: f410f9ade34c3ffb19dc9f6e5409f44d0a6e5d32
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88014902"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88634237"
 ---
 # <a name="external-oauth-authentication-providers"></a>外部 OAuth 驗證提供者
 
-由[Rick Anderson](https://twitter.com/RickAndMSFT)、 [Pranav 請參閱 rastogi](https://github.com/rustd)和[Valeriy Novytskyy](https://github.com/01binary)
+由 [Rick Anderson](https://twitter.com/RickAndMSFT)、 [Pranav 請參閱 rastogi](https://github.com/rustd)和 [Valeriy Novytskyy](https://github.com/01binary)
 
-下列清單包含與 ASP.NET Core 應用程式搭配使用的一般外部 OAuth 驗證提供者。 協力廠商 NuGet 套件（例如由[aspnet contrib](https://www.nuget.org/packages?q=owners%3Aaspnet-contrib+title%3AOAuth)維護）可以用來補充 ASP.NET Core 小組所實行的驗證提供者。
+下列清單包含可搭配 ASP.NET Core apps 使用的常見外部 OAuth 驗證提供者。 協力廠商 NuGet 套件（例如由 [aspnet contrib](https://www.nuget.org/packages?q=owners%3Aaspnet-contrib+title%3AOAuth)維護的套件）可用來補充 ASP.NET Core 小組所實行的驗證提供者。
 
 * [LinkedIn](https://www.linkedin.com/developer/apps) ([指示](https://developer.linkedin.com/docs/oauth2)) 
 

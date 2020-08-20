@@ -7,6 +7,7 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 7/22/2020
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -17,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: mvc/controllers/testing
-ms.openlocfilehash: 311f1ce9eb2b0e358ddc01a1982dc39379f53b8f
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: d6c70d828d6c2f62f9e7b849a299df3077f2da32
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88020908"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88635225"
 ---
 # <a name="unit-test-controller-logic-in-aspnet-core"></a>ASP.NET Core 中的單元測試控制器邏輯
 
@@ -137,7 +138,7 @@ ms.locfileid: "88020908"
 
 ## <a name="test-actionresultt"></a>測試 ActionResult\<T>
 
-在 ASP.NET Core 2.1 或更新版本中， [ActionResult \<T> ](xref:web-api/action-return-types#actionresultt-type) (<xref:Microsoft.AspNetCore.Mvc.ActionResult%601>) 可讓您傳回衍生自 `ActionResult` 或傳回特定類型的類型。
+在 ASP.NET Core 2.1 或更新版本中， [ActionResult \<T> ](xref:web-api/action-return-types#actionresultt-type) () 可讓您傳回衍生自的型別， <xref:Microsoft.AspNetCore.Mvc.ActionResult%601> 或傳回 `ActionResult` 特定型別。
 
 範例應用程式包含為指定工作階段 `id` 傳回 `List<IdeaDTO>` 的方法。 如果工作階段 `id` 不存在，則控制器會傳回 <xref:Microsoft.AspNetCore.Mvc.ControllerBase.NotFound*>：
 
@@ -155,7 +156,7 @@ ms.locfileid: "88020908"
 針對有效的工作階段 `id`，第二項測試會確認此方法傳回：
 
 * 具有 `ActionResult` 類型的 `List<IdeaDTO>`。
-* [ActionResult \<T> 。值](xref:Microsoft.AspNetCore.Mvc.ActionResult%601.Value*)為 `List<IdeaDTO>` 類型。
+* [ActionResult \<T> 。值](xref:Microsoft.AspNetCore.Mvc.ActionResult%601.Value*)是一 `List<IdeaDTO>` 種類型。
 * 清單中的第一個項目，是與儲存在模擬工作階段中構想相符的有效構想 (透過呼叫 `GetTestSession` 來取得)。
 
 [!code-csharp[](testing/samples/3.x/TestingControllersSample/tests/TestingControllersSample.Tests/UnitTests/ApiIdeasControllerTests.cs?name=snippet_ForSessionActionResult_ReturnsIdeasForSession&highlight=7-8,15-18)]
@@ -181,8 +182,8 @@ ms.locfileid: "88020908"
 針對有效的工作階段 `id`，最終測試會確認：
 
 * 此方法會以 `BrainstormSession` 類型傳回 `ActionResult`。
-* [ActionResult \<T> 。結果](xref:Microsoft.AspNetCore.Mvc.ActionResult%601.Result*)為 <xref:Microsoft.AspNetCore.Mvc.CreatedAtActionResult> 。 `CreatedAtActionResult` 類似於具有 `Location` 標頭尸的「201 已建立」** 回應。
-* [ActionResult \<T> 。值](xref:Microsoft.AspNetCore.Mvc.ActionResult%601.Value*)為 `BrainstormSession` 類型。
+* [ActionResult \<T> 。結果](xref:Microsoft.AspNetCore.Mvc.ActionResult%601.Result*)是 <xref:Microsoft.AspNetCore.Mvc.CreatedAtActionResult> 。 `CreatedAtActionResult` 類似於具有 `Location` 標頭尸的「201 已建立」** 回應。
+* [ActionResult \<T> 。值](xref:Microsoft.AspNetCore.Mvc.ActionResult%601.Value*)是一 `BrainstormSession` 種類型。
 * 已叫用更新工作階段 (`UpdateAsync(testSession)`) 的模擬呼叫。 `Verifiable` 方法呼叫會透過在判斷提示中執行 `mockRepo.Verify()` 來檢查。
 * 會為工作階段傳回兩個 `Idea` 物件。
 * 最後一個項目 (模擬呼叫 `UpdateAsync` 新增的 `Idea`) 會與在測試中新增至工作階段的 `newIdea` 相符。
@@ -300,7 +301,7 @@ ms.locfileid: "88020908"
 
 ## <a name="test-actionresultt"></a>測試 ActionResult\<T>
 
-在 ASP.NET Core 2.1 或更新版本中， [ActionResult \<T> ](xref:web-api/action-return-types#actionresultt-type) (<xref:Microsoft.AspNetCore.Mvc.ActionResult%601>) 可讓您傳回衍生自 `ActionResult` 或傳回特定類型的類型。
+在 ASP.NET Core 2.1 或更新版本中， [ActionResult \<T> ](xref:web-api/action-return-types#actionresultt-type) () 可讓您傳回衍生自的型別， <xref:Microsoft.AspNetCore.Mvc.ActionResult%601> 或傳回 `ActionResult` 特定型別。
 
 範例應用程式包含為指定工作階段 `id` 傳回 `List<IdeaDTO>` 的方法。 如果工作階段 `id` 不存在，則控制器會傳回 <xref:Microsoft.AspNetCore.Mvc.ControllerBase.NotFound*>：
 
@@ -318,7 +319,7 @@ ms.locfileid: "88020908"
 針對有效的工作階段 `id`，第二項測試會確認此方法傳回：
 
 * 具有 `ActionResult` 類型的 `List<IdeaDTO>`。
-* [ActionResult \<T> 。值](xref:Microsoft.AspNetCore.Mvc.ActionResult%601.Value*)為 `List<IdeaDTO>` 類型。
+* [ActionResult \<T> 。值](xref:Microsoft.AspNetCore.Mvc.ActionResult%601.Value*)是一 `List<IdeaDTO>` 種類型。
 * 清單中的第一個項目，是與儲存在模擬工作階段中構想相符的有效構想 (透過呼叫 `GetTestSession` 來取得)。
 
 [!code-csharp[](testing/samples/2.x/TestingControllersSample/tests/TestingControllersSample.Tests/UnitTests/ApiIdeasControllerTests.cs?name=snippet_ForSessionActionResult_ReturnsIdeasForSession&highlight=7-8,15-18)]
@@ -344,8 +345,8 @@ ms.locfileid: "88020908"
 針對有效的工作階段 `id`，最終測試會確認：
 
 * 此方法會以 `BrainstormSession` 類型傳回 `ActionResult`。
-* [ActionResult \<T> 。結果](xref:Microsoft.AspNetCore.Mvc.ActionResult%601.Result*)為 <xref:Microsoft.AspNetCore.Mvc.CreatedAtActionResult> 。 `CreatedAtActionResult` 類似於具有 `Location` 標頭尸的「201 已建立」** 回應。
-* [ActionResult \<T> 。值](xref:Microsoft.AspNetCore.Mvc.ActionResult%601.Value*)為 `BrainstormSession` 類型。
+* [ActionResult \<T> 。結果](xref:Microsoft.AspNetCore.Mvc.ActionResult%601.Result*)是 <xref:Microsoft.AspNetCore.Mvc.CreatedAtActionResult> 。 `CreatedAtActionResult` 類似於具有 `Location` 標頭尸的「201 已建立」** 回應。
+* [ActionResult \<T> 。值](xref:Microsoft.AspNetCore.Mvc.ActionResult%601.Value*)是一 `BrainstormSession` 種類型。
 * 已叫用更新工作階段 (`UpdateAsync(testSession)`) 的模擬呼叫。 `Verifiable` 方法呼叫會透過在判斷提示中執行 `mockRepo.Verify()` 來檢查。
 * 會為工作階段傳回兩個 `Idea` 物件。
 * 最後一個項目 (模擬呼叫 `UpdateAsync` 新增的 `Idea`) 會與在測試中新增至工作階段的 `newIdea` 相符。
@@ -357,7 +358,7 @@ ms.locfileid: "88020908"
 ## <a name="additional-resources"></a>其他資源
 
 * <xref:test/integration-tests>
-* [使用 Visual Studio 建立及執行單元測試](/visualstudio/test/unit-test-your-code)
-* 適用于 ASP.NET Core MVC：強型別單元測試連結[庫的 MyTested AspNetCore](https://github.com/ivaylokenov/MyTested.AspNetCore.Mvc)，提供流暢的介面來測試 mvc 和 Web API 應用程式。  (*不是由 Microsoft 維護或支援*) 
-* [JustMockLite](https://github.com/telerik/JustMockLite)：適用于 .net 開發人員的模擬架構。  (*不是由 Microsoft 維護或支援*) 
+* [使用 Visual Studio 建立和執行單元測試](/visualstudio/test/unit-test-your-code)
+* [MyTested. AspNetCore：適用于 ASP.NET CORE mvc](https://github.com/ivaylokenov/MyTested.AspNetCore.Mvc)：強型別單元測試程式庫的，提供流暢的介面來測試 mvc 和 web API 應用程式。  (*不會受到 Microsoft 的維護或支援*) 
+* [JustMockLite](https://github.com/telerik/JustMockLite)：適用于 .net 開發人員的模擬架構。  (*不會受到 Microsoft 的維護或支援*) 
 

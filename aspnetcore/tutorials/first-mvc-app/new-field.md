@@ -1,11 +1,12 @@
 ---
-title: 第8部分，將新欄位新增至 ASP.NET Core MVC 應用程式
+title: 第8部分：將新欄位新增至 ASP.NET Core MVC 應用程式
 author: rick-anderson
-description: ASP.NET Core MVC 的教學課程系列第8部分。
+description: ASP.NET Core MVC 之教學課程系列的第8部分。
 ms.author: riande
 ms.custom: mvc
 ms.date: 12/13/2018
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -16,14 +17,14 @@ no-loc:
 - Razor
 - SignalR
 uid: tutorials/first-mvc-app/new-field
-ms.openlocfilehash: c1548f5c3607883a32186e82624cddb71f756003
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: 40e615d0698a0ed1d3ef40a222e064d72184f0c8
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88021753"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88635290"
 ---
-# <a name="part-8-add-a-new-field-to-an-aspnet-core-mvc-app"></a>第8部分，將新欄位新增至 ASP.NET Core MVC 應用程式
+# <a name="part-8-add-a-new-field-to-an-aspnet-core-mvc-app"></a>第8部分：將新欄位新增至 ASP.NET Core MVC 應用程式
 
 作者：[Rick Anderson](https://twitter.com/RickAndMSFT)
 
@@ -141,7 +142,7 @@ dotnet ef database update
 ---
 <!-- End of VS tabs -->
 
-執行應用程式，並確認您可以使用欄位來建立、編輯和顯示電影 `Rating` 。
+執行應用程式，並確認您可以使用欄位建立、編輯及顯示電影 `Rating` 。
 
 > [!div class="step-by-step"]
 > [上一個](search.md) 

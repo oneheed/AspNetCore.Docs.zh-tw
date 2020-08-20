@@ -7,6 +7,7 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 01/13/2020
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -17,16 +18,16 @@ no-loc:
 - Razor
 - SignalR
 uid: host-and-deploy/iis/transform-webconfig
-ms.openlocfilehash: 3d0bbfceb6dfedd7234112d33fd99e91a34f5793
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: a2f26f32d2a282189b391aa9bb8c4637723dc60a
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88015578"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88634627"
 ---
 # <a name="transform-webconfig"></a>轉換 web.config
 
-依[Vijay Ramakrishnan](https://github.com/vijayrkn)
+依 [Vijay Ramakrishnan](https://github.com/vijayrkn)
 
 對 *web.config* 檔案的轉換可在發佈應用程式時，根據下列條件進行套用：
 
@@ -38,7 +39,7 @@ ms.locfileid: "88015578"
 這些轉換會針對下列任一 *web.config* 產生案例進行：
 
 * 由 `Microsoft.NET.Sdk.Web` SDK 自動產生。
-* 由開發人員在應用程式的[內容根目錄](xref:fundamentals/index#content-root)中提供。
+* 由開發人員在應用程式的 [內容根目錄](xref:fundamentals/index#content-root) 中提供。
 
 ## <a name="build-configuration"></a>建置組態
 

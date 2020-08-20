@@ -7,6 +7,7 @@ ms.author: bradyg
 ms.custom: mvc
 ms.date: 12/16/2019
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -17,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: host-and-deploy/azure-apps/index
-ms.openlocfilehash: 11de6b04f6813161e5eaee294f3e67e223ae0db3
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: 739ef9bd17e6a3f030243e88488f0c19134d0151
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88015916"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88634484"
 ---
 # <a name="deploy-aspnet-core-apps-to-azure-app-service"></a>將 ASP.NET Core 應用程式部署至 Azure App Service
 
@@ -38,9 +39,9 @@ ms.locfileid: "88015916"
 [在 Linux 上的 App Service 中建立 ASP.NET Core 應用程式](/azure/app-service/containers/quickstart-dotnetcore)  
 在 Linux 上使用命令列建立 ASP.NET Core Web 應用程式並將其部署到 Azure App Service。
 
-如需 Azure App 服務上可用的 ASP.NET Core 版本，請參閱[App Service 儀表板上的 ASP.NET Core](https://aspnetcoreon.azurewebsites.net/) 。
+請參閱 [App Service 儀表板上的 ASP.NET Core](https://aspnetcoreon.azurewebsites.net/) ，以取得 Azure App 服務提供的 ASP.NET Core 版本。
 
-訂閱[App Service 公告](https://github.com/Azure/app-service-announcements/)存放庫並監視問題。 App Service 小組會定期張貼傳入 App Service 的公告和案例。
+訂閱 App Service 的 [公告](https://github.com/Azure/app-service-announcements/) 儲存機制，並監視問題。 App Service 團隊會定期張貼傳入 App Service 的公告和案例。
 
 若要閱讀下列文章，請參閱 ASP.NET Core 文件：
 
@@ -63,7 +64,7 @@ ms.locfileid: "88015916"
 
 ### <a name="platform"></a>平台
 
-在 Azure 入口網站的應用程式設定中，應用程式服務應用程式的平臺架構 (x86/x64) 會針對裝載于 A 系列計算 (基本) 或更高主機層的應用程式設定。 確認應用程式的發佈設定 (例如，在 Visual Studio[發行設定檔 (. .pubxml) ](xref:host-and-deploy/visual-studio-publish-profiles)) 符合應用程式在 Azure 入口網站中的服務設定。
+應用程式服務應用程式的平臺架構 (x86/x64) ，是在 Azure 入口網站中的應用程式設定中設定，適用于裝載于 A 系列計算 (基本) 或更高裝載層的應用程式。 確認應用程式的發佈設定 (例如，在 Visual Studio [發佈設定檔 (. .pubxml) ](xref:host-and-deploy/visual-studio-publish-profiles)) 符合 Azure 入口網站中應用程式服務設定的設定。
 
 ::: moniker range=">= aspnetcore-2.2"
 
@@ -77,13 +78,13 @@ Azure App Service 具有 64 位元 (x64) 及 32 位元 (x86) 應用程式的執�
 
 ::: moniker-end
 
-如需 .NET Core framework 元件和散發方法的詳細資訊，例如 .NET Core 執行時間和 .NET Core SDK 的相關資訊，請參閱[關於 .Net core：組合](/dotnet/core/about#composition)。
+如需 .net Core framework 元件和散發方法（例如 .NET Core 執行時間和 .NET Core SDK 的相關資訊）的詳細資訊，請參閱 [關於 .Net core：組合](/dotnet/core/about#composition)。
 
-### <a name="packages"></a>套件
+### <a name="packages"></a>Packages
 
 包含下列 NuGet 套件，為部署至 Azure App Service 的應用程式提供自動記錄功能：
 
-* [AspNetCore. microsoft.extensions.logging.azureappservices. HostingStartup](https://www.nuget.org/packages/Microsoft.AspNetCore.AzureAppServices.HostingStartup/)使用[IHostingStartup](xref:fundamentals/configuration/platform-specific-configuration)來提供與 Azure App Service ASP.NET Core 的整合。 新增的記錄功能由 `Microsoft.AspNetCore.AzureAppServicesIntegration` 套件提供。
+* [AspNetCore. microsoft.extensions.logging.azureappservices. HostingStartup](https://www.nuget.org/packages/Microsoft.AspNetCore.AzureAppServices.HostingStartup/) 使用 [IHostingStartup](xref:fundamentals/configuration/platform-specific-configuration) 來提供與 Azure App Service ASP.NET Core 的。 新增的記錄功能由 `Microsoft.AspNetCore.AzureAppServicesIntegration` 套件提供。
 * [Microsoft.AspNetCore.AzureAppServicesIntegration](https://www.nuget.org/packages/Microsoft.AspNetCore.AzureAppServicesIntegration/) 執行 [AddAzureWebAppDiagnostics](/dotnet/api/microsoft.extensions.logging.azureappservicesloggerfactoryextensions.addazurewebappdiagnostics)，以在 `Microsoft.Extensions.Logging.AzureAppServices` 套件中新增 Azure App Service 診斷記錄提供者。
 * [Microsoft.Extensions.Logging.AzureAppServices](https://www.nuget.org/packages/Microsoft.Extensions.Logging.AzureAppServices/) 提供記錄器實作以支援 Azure App Service 診斷記錄和記錄串流功能。
 
@@ -97,7 +98,7 @@ Azure 入口網站中的應用程式設定允許您為應用程式設定環境�
 
 在 Azure 入口網站中建立或修改應用程式設定並選取 [儲存]**** 按鈕後，即會重新啟動 Azure 應用程式。 當服務重新啟動之後，環境變數便可供應用程式使用。
 
-當應用程式使用[泛型主機](xref:fundamentals/host/generic-host)時， <xref:Microsoft.Extensions.Hosting.Host.CreateDefaultBuilder*> 會在呼叫以建立主機時，將環境變數載入應用程式的設定中。 如需詳細資訊，請參閱 <xref:fundamentals/host/generic-host> 與[環境變數設定提供者](xref:fundamentals/configuration/index#environment-variables)。
+當應用程式使用 [泛型主機](xref:fundamentals/host/generic-host)時，環境變數會在 <xref:Microsoft.Extensions.Hosting.Host.CreateDefaultBuilder*> 呼叫以建立主機時載入至應用程式的設定。 如需詳細資訊，請參閱 <xref:fundamentals/host/generic-host> 與[環境變數設定提供者](xref:fundamentals/configuration/index#environment-variables)。
 
 ::: moniker-end
 ::: moniker range="< aspnetcore-3.0"
@@ -106,7 +107,7 @@ Azure 入口網站中的應用程式設定允許您為應用程式設定環境�
 
 在 Azure 入口網站中建立或修改應用程式設定並選取 [儲存]**** 按鈕後，即會重新啟動 Azure 應用程式。 當服務重新啟動之後，環境變數便可供應用程式使用。
 
-當應用程式使用[Web 主機](xref:fundamentals/host/web-host)時， <xref:Microsoft.AspNetCore.WebHost.CreateDefaultBuilder*> 會在呼叫以建立主機時，將環境變數載入應用程式的設定中。 如需詳細資訊，請參閱 <xref:fundamentals/host/web-host> 與[環境變數設定提供者](xref:fundamentals/configuration/index#environment-variables-configuration-provider)。
+當應用程式使用 [Web 主機](xref:fundamentals/host/web-host)時，環境變數會在 <xref:Microsoft.AspNetCore.WebHost.CreateDefaultBuilder*> 呼叫以建立主機時載入至應用程式的設定。 如需詳細資訊，請參閱 <xref:fundamentals/host/web-host> 與[環境變數設定提供者](xref:fundamentals/configuration/index#environment-variables-configuration-provider)。
 
 ::: moniker-end
 
@@ -149,7 +150,7 @@ Azure 入口網站中的應用程式設定允許您為應用程式設定環境�
 
 [資料保護金鑰](xref:security/data-protection/implementation/key-management#data-protection-implementation-key-management)保存至 *%HOME%\ASP.NET\DataProtection-Keys* 資料夾。 此資料夾使用網路儲存體進行保存，並會在裝載應用程式的所有電腦上同步。 金鑰待用時不受保護。 此資料夾對單一部署位置中應用程式的所有執行個體皆提供金鑰環。 各部署位置，例如預備和生產位置，不會共用金鑰環。
 
-當在部署位置間交換時，使用資料保護的任何系統都將無法使用前一位置內的金鑰環，來解密儲存的資料。 ASP.NET Cookie 中介軟體會使用資料保護來保護其 cookie 。 這會導致使用者登出使用標準 ASP.NET 中介軟體的應用程式 Cookie 。 至於非相依於位置的金鑰環解決方案，請使用外部金鑰環提供者，例如：
+當在部署位置間交換時，使用資料保護的任何系統都將無法使用前一位置內的金鑰環，來解密儲存的資料。 ASP.NET Cookie 中介軟體會使用資料保護來保護它的 cookie 。 這會導致使用者登出使用標準 ASP.NET 中介軟體的應用程式 Cookie 。 至於非相依於位置的金鑰環解決方案，請使用外部金鑰環提供者，例如：
 
 * Azure Blob 儲存體
 * Azure 金鑰保存庫
@@ -159,7 +160,7 @@ Azure 入口網站中的應用程式設定允許您為應用程式設定環境�
 如需詳細資訊，請參閱<xref:security/data-protection/implementation/key-storage-providers>。
 <a name="deploy-aspnet-core-preview-release-to-azure-app-service"></a>
 
-## <a name="deploy-an-aspnet-core-app-that-uses-a-net-core-preview"></a>部署使用 .NET Core 預覽的 ASP.NET Core 應用程式
+## <a name="deploy-an-aspnet-core-app-that-uses-a-net-core-preview"></a>部署使用 .NET Core preview 的 ASP.NET Core 應用程式
 
 若要部署使用 .NET Core 預覽版本的應用程式，請參閱下列資源。 當執行時間可用但 SDK 尚未安裝在 Azure App Service 上時，也會使用這些方法。
 
@@ -168,23 +169,23 @@ Azure 入口網站中的應用程式設定允許您為應用程式設定環境�
 * [將包含 Web 應用程式的 Docker 用於容器](#use-docker-with-web-apps-for-containers)
 * [安裝預覽網站延伸模組](#install-the-preview-site-extension)
 
-如需 Azure App 服務上可用的 ASP.NET Core 版本，請參閱[App Service 儀表板上的 ASP.NET Core](https://aspnetcoreon.azurewebsites.net/) 。
+請參閱 [App Service 儀表板上的 ASP.NET Core](https://aspnetcoreon.azurewebsites.net/) ，以取得 Azure App 服務提供的 ASP.NET Core 版本。
 
 ### <a name="specify-the-net-core-sdk-version-using-azure-pipelines"></a>使用 Azure Pipelines 指定 .NET Core SDK 版本
 
-使用[AZURE APP SERVICE CI/CD 案例](/azure/app-service/deploy-continuous-deployment)來設定具有 Azure DevOps 的持續整合組建。 建立 Azure DevOps 組建之後，選擇性地將組建設定為使用特定的 SDK 版本。 
+使用 [AZURE APP SERVICE CI/CD 案例](/azure/app-service/deploy-continuous-deployment) ，以 Azure DevOps 設定持續整合組建。 建立 Azure DevOps 組建之後，選擇性地將組建設定為使用特定的 SDK 版本。 
 
 #### <a name="specify-the-net-core-sdk-version"></a>指定 .NET Core SDK 版本
 
-使用 App Service 部署中心建立 Azure DevOps 組建時，預設的組建管線會包含 `Restore` 、、和的步驟 `Build` `Test` `Publish` 。 若要指定 SDK 版本，請選取 [代理程式作業] 清單中的 [**新增 (+) ** ] 按鈕，以新增新的步驟。 在搜尋列中搜尋 **.NET Core SDK** 。 
+使用 App Service deployment center 建立 Azure DevOps 組建時，預設組建管線會包含、、和的步驟 `Restore` `Build` `Test` `Publish` 。 若要指定 SDK 版本，請選取 [代理程式作業] 清單中的 [ **新增 (+) ** ] 按鈕，以新增步驟。 在搜尋列中搜尋 **.NET Core SDK** 。 
 
 ![新增 .NET Core SDK 步驟](index/add-sdk-step.png)
 
-將步驟移至組建中的第一個位置，使其後面的步驟使用指定的 .NET Core SDK 版本。 指定 .NET Core SDK 的版本。 在此範例中，SDK 設定為 `3.0.100` 。
+將步驟移至組建中的第一個位置，使其後面的步驟使用指定版本的 .NET Core SDK。 指定 .NET Core SDK 的版本。 在此範例中，SDK 設定為 `3.0.100` 。
 
 ![完成的 SDK 步驟](index/sdk-step-first-place.png)
 
-若要發佈[獨立部署 (SCD) ](/dotnet/core/deploying/#self-contained-deployments-scd)，請在步驟中設定 SCD， `Publish` 並提供[ (RID) 的執行時間識別碼](/dotnet/core/rid-catalog)。
+若要發佈 [獨立部署 (SCD) ](/dotnet/core/deploying/#self-contained-deployments-scd)，請在步驟中設定 SCD， `Publish` 並 [ (RID) 提供執行時間識別碼 ](/dotnet/core/rid-catalog)。
 
 ![獨立發行](index/self-contained.png)
 
@@ -205,12 +206,12 @@ Azure 入口網站中的應用程式設定允許您為應用程式設定環境�
 
 ### <a name="install-the-preview-site-extension"></a>安裝預覽網站延伸模組
 
-如果使用預覽網站延伸模組發生問題，請開啟[dotnet/AspNetCore 問題](https://github.com/dotnet/AspNetCore/issues)。
+如果使用預覽網站延伸模組時發生問題，請開啟 [dotnet/AspNetCore 問題](https://github.com/dotnet/AspNetCore/issues)。
 
 1. 從 Azure 入口網站瀏覽至 App Service。
 1. 選取 Web 應用程式。
 1. 在搜尋方塊中鍵入 "ex" 來篩選 "Extensions"，也可往下捲動管理工具的清單。
-1. 選取 [擴充功能]  。
+1. 選取 [擴充功能]。
 1. 選取 [新增]。
 1. 從清單選取 [ASP.NET Core {X.Y} ({x64|x86}) 執行階段]**** 延伸模組，其中 `{X.Y}` 是 ASP.NET Core 預覽版本，而 `{x64|x86}` 則指定平台。
 1. 選取 [確定]**** 以接受法律條款。
@@ -220,7 +221,7 @@ Azure 入口網站中的應用程式設定允許您為應用程式設定環境�
 
 1. 選取 [進階工具]****。
 1. 在 [進階工具]**** 中選取 [移至]****。
-1. 選取 [**調試主控台**] [  >  **PowerShell** ] 功能表項目。
+1. 選取 [ **Debug console**  >  **PowerShell** ] 功能表項目。
 1. 在 PowerShell 提示執行下列命令。 在命令中使用 ASP.NET Core 執行階段版本取代 `{X.Y}`，並以平台取代 `{PLATFORM}`：
 
    ```powershell
@@ -230,9 +231,9 @@ Azure 入口網站中的應用程式設定允許您為應用程式設定環境�
    當已安裝 x64 預覽執行階段時，此命令會傳回 `True`。
 
 > [!NOTE]
-> 在 Azure 入口網站的應用程式設定中，應用程式服務應用程式的平臺架構 (x86/x64) 會針對裝載于 A 系列計算 (基本) 或更高主機層的應用程式設定。 確認應用程式的發佈設定 (例如，在 Visual Studio[發行設定檔 (. .pubxml) ](xref:host-and-deploy/visual-studio-publish-profiles)) 符合 Azure 入口網站中應用程式的服務設定中的設定。
+> 應用程式服務應用程式的平臺架構 (x86/x64) ，是在 Azure 入口網站中的應用程式設定中設定，適用于裝載于 A 系列計算 (基本) 或更高裝載層的應用程式。 確認應用程式的發佈設定 (例如，在 Visual Studio [發佈設定檔 (. .pubxml) ](xref:host-and-deploy/visual-studio-publish-profiles)) 符合 Azure 入口網站中應用程式服務設定的設定。
 >
-> 如果在同處理序模式中執行應用程式，且平台架構設定為適用於 64 位元 (x64)，ASP.NET Core 模組會使用 64 位元預覽執行階段 (如果有)。 使用 Azure 入口網站，安裝**ASP.NET Core {X. Y} (x64) 運行**時間擴充功能。
+> 如果在同處理序模式中執行應用程式，且平台架構設定為適用於 64 位元 (x64)，ASP.NET Core 模組會使用 64 位元預覽執行階段 (如果有)。 使用 Azure 入口網站安裝 **ASP.NET Core {X. Y} (x64) 運行** 時間擴充功能。
 >
 > 安裝 x64 preview 執行時間之後，請在 Azure Kudu PowerShell 命令視窗中執行下列命令，以確認安裝。 在下列命令中，以的 ASP.NET Core 執行階段版本取代 `{X.Y}` ：
 >
@@ -266,7 +267,7 @@ Azure 入口網站中的應用程式設定允許您為應用程式設定環境�
 
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
-1. 從 [Visual Studio] 工具列選取 [**組建**] [  >  **發佈 {應用程式名稱}** ]，或在**方案總管**中以滑鼠右鍵按一下專案，然後選取 [**發佈**]
+1. **Build**  >  從 Visual Studio 的工具列中選取 [組建**發佈 {應用程式名稱}** ]，或以滑鼠右鍵按一下**方案總管**中的專案，然後選取 [**發行**]。
 1. 在 [挑選發佈目標]**** 對話方塊中，確認已選取 [App Service]****。
 1. 選取 [進階]  。 [發佈]**** 對話方塊隨即開啟。
 1. 在 [發行]**** 對話方塊中：
@@ -293,17 +294,17 @@ Azure 入口網站中的應用程式設定允許您為應用程式設定環境�
 
 ### <a name="deploy-the-app-self-contained"></a>部署獨立式應用程式
 
-使用 Visual Studio 或[獨立部署 (SCD) ](/dotnet/core/deploying/#self-contained-deployments-scd)的 .NET Core CLI。
+使用 Visual Studio 或 .NET Core CLI 適用于 [獨立部署 (SCD) ](/dotnet/core/deploying/#self-contained-deployments-scd)。
 
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
-1. 從 [Visual Studio] 工具列選取 [**組建**] [  >  **發佈 {應用程式名稱}** ]，或在**方案總管**中以滑鼠右鍵按一下專案，然後選取 [**發佈**]
+1. **Build**  >  從 Visual Studio 的工具列中選取 [組建**發佈 {應用程式名稱}** ]，或以滑鼠右鍵按一下**方案總管**中的專案，然後選取 [**發行**]。
 1. 在 [挑選發佈目標]**** 對話方塊中，確認已選取 [App Service]****。
 1. 選取 [進階]  。 [發佈]**** 對話方塊隨即開啟。
 1. 在 [發行]**** 對話方塊中：
    * 確認已選取 [發行]**** 設定。
    * 開啟 [部署模式]**** 下拉式清單，然後選取 [獨立式]****。
-   * 從 [目標執行階段]**** 下拉式清單中選取目標執行階段。 預設為 `win-x86`。
+   * 從 [目標執行階段]**** 下拉式清單中選取目標執行階段。 預設值為 `win-x86`。
    * 如果您需要在部署時移除其他檔案，請開啟 [檔案發佈選項]**** 並選取核取方塊，以移除目的地的其他檔案。
    * 選取 [儲存]。
 1. 遵循 [發佈精靈] 的其餘提示來建立新網站，或更新現有網站。
@@ -331,7 +332,7 @@ Azure 入口網站中的應用程式設定允許您為應用程式設定環境�
 
 ## <a name="protocol-settings-https"></a>通訊協定設定 (HTTPS)
 
-安全通訊協定繫結可讓您指定透過 HTTPS 回應要求時要使用的憑證。 繫結需要針對特定主機名稱簽發的有效私密憑證 (*.pfx*)。 如需詳細資訊，請參閱[教學課程：將現有的自訂 SSL 憑證系結至 Azure App Service](/azure/app-service/app-service-web-tutorial-custom-ssl)。
+安全通訊協定繫結可讓您指定透過 HTTPS 回應要求時要使用的憑證。 繫結需要針對特定主機名稱簽發的有效私密憑證 (*.pfx*)。 如需詳細資訊，請參閱 [教學課程：將現有的自訂 SSL 憑證系結至 Azure App Service](/azure/app-service/app-service-web-tutorial-custom-ssl)。
 
 ## <a name="transform-webconfig"></a>轉換 web.config
 

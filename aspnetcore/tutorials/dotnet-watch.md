@@ -5,6 +5,7 @@ description: 本教學課程會示範如何在 ASP.NET Core 應用程式中安�
 ms.author: riande
 ms.date: 05/31/2018
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -15,12 +16,12 @@ no-loc:
 - Razor
 - SignalR
 uid: tutorials/dotnet-watch
-ms.openlocfilehash: f4987e7eef496f3ba4b8f9bb084816be3b17ada7
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: cc152c2ca553b00619ddbf829f6044867c53bb98
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88022442"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88635134"
 ---
 # <a name="develop-aspnet-core-apps-using-a-file-watcher"></a>使用檔案監看員開發 ASP.NET Core 應用程式
 
@@ -30,9 +31,9 @@ ms.locfileid: "88022442"
 
 本教學課程使用現有的 Web API 與兩個端點：一個傳回加總，另一個傳回產品。 本教學課程已修正產品方法的 Bug。
 
-下載[範例應用程式](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/tutorials/dotnet-watch/sample)。 它包含兩個專案：*WebApp* (ASP.NET Core Web API) 和 *WebAppTests* (Web API 的單元測試)。
+下載 [範例應用程式](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/tutorials/dotnet-watch/sample)。 它包含兩個專案：*WebApp* (ASP.NET Core Web API) 和 *WebAppTests* (Web API 的單元測試)。
 
-在命令殼層中，巡覽至 *WebApp* 資料夾。 執行下列命令：
+在命令殼層中，巡覽至 *WebApp* 資料夾。 執行以下命令：
 
 ```dotnetcli
 dotnet run
@@ -164,7 +165,7 @@ public static int Product(int a, int b)
 
 `dotnet-watch` 不限制為 C# 專案。 您可以建立自訂的監看式專案來處理不同的案例。 請考慮下列專案配置：
 
-* **測驗**
+* **測試**
   * *UnitTests/UnitTests.csproj*
   * *IntegrationTests/IntegrationTests.csproj*
 
@@ -185,7 +186,7 @@ public static int Product(int a, int b)
 </Project>
 ```
 
-若要開始監看兩個專案的檔案，請變更至 *test* 資料夾。 執行下列命令：
+若要開始監看兩個專案的檔案，請變更至 *test* 資料夾。 執行以下命令：
 
 ```dotnetcli
 dotnet watch msbuild /t:Test
@@ -195,4 +196,4 @@ dotnet watch msbuild /t:Test
 
 ## <a name="dotnet-watch-in-github"></a>GitHub 中的 `dotnet-watch`
 
-`dotnet-watch`是 GitHub [dotnet/AspNetCore 存放庫](https://github.com/dotnet/AspNetCore/tree/master/src/Tools/dotnet-watch)的一部分。
+`dotnet-watch` 是 GitHub [dotnet/AspNetCore 存放庫](https://github.com/dotnet/AspNetCore/tree/master/src/Tools/dotnet-watch)的一部分。

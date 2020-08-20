@@ -1,10 +1,11 @@
 ---
 title: Identity ASP.NET Core 中的模型自訂
 author: ajcvickers
-description: 本文描述如何自訂 ASP.NET Core 的基礎 Entity Framework Core 資料模型 Identity 。
+description: 本文描述如何自訂的基礎 Entity Framework Core 資料模型 ASP.NET Core Identity 。
 ms.author: avickers
 ms.date: 07/01/2019
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -15,18 +16,18 @@ no-loc:
 - Razor
 - SignalR
 uid: security/authentication/customize_identity_model
-ms.openlocfilehash: 7c325bbc96ad4a8c5e4686073266d730eb924c10
-ms.sourcegitcommit: dfea24471f4f3d7904faa92fe60c000853bddc3b
+ms.openlocfilehash: 71f532aa00c2afeeb0d6b93c01cb6a1fbd0a686c
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 08/18/2020
-ms.locfileid: "88504667"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88634302"
 ---
 # <a name="no-locidentity-model-customization-in-aspnet-core"></a>Identity ASP.NET Core 中的模型自訂
 
 依 [Arthur Vickers](https://github.com/ajcvickers)
 
-ASP.NET Core Identity 提供在 ASP.NET Core 應用程式中管理和儲存使用者帳戶的架構。 Identity 當選取 **個別使用者帳戶** 做為驗證機制時，會加入至您的專案。 根據預設， Identity 會使用 Entity Framework (EF) 核心資料模型。 本文說明如何自訂 Identity 模型。
+ASP.NET Core Identity 提供在 ASP.NET Core apps 中管理和儲存使用者帳戶的架構。 Identity 當選取 **個別使用者帳戶** 做為驗證機制時，會加入至您的專案。 根據預設， Identity 會使用 Entity Framework (EF) 核心資料模型。 本文說明如何自訂 Identity 模型。
 
 ## <a name="no-locidentity-and-ef-core-migrations"></a>Identity 和 EF Core 遷移
 

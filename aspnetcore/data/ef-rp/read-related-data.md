@@ -1,11 +1,12 @@
 ---
-title: 第6部分， Razor ASP.NET Core 讀取相關資料中有 EF Core 的頁面
+title: 第6部分： Razor ASP.NET Core 讀取相關資料的 EF Core 頁面
 author: rick-anderson
-description: 頁面的第6部分 Razor 和 Entity Framework 教學課程系列。
+description: 第 6 Razor 頁和 Entity Framework 教學課程系列。
 ms.author: riande
 ms.custom: mvc
 ms.date: 09/28/2019
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -16,14 +17,14 @@ no-loc:
 - Razor
 - SignalR
 uid: data/ef-rp/read-related-data
-ms.openlocfilehash: d2594dd05ee6d7e8e0dbd3c279ecd8783d182b62
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: 41b2ce35a6910df7587af7ebabe8a4984cda6ae5
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88017827"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88634965"
 ---
-# <a name="part-6-no-locrazor-pages-with-ef-core-in-aspnet-core---read-related-data"></a>第6部分， Razor ASP.NET Core 讀取相關資料中有 EF Core 的頁面
+# <a name="part-6-no-locrazor-pages-with-ef-core-in-aspnet-core---read-related-data"></a>第6部分： Razor ASP.NET Core 讀取相關資料的 EF Core 頁面
 
 作者：[Tom Dykstra](https://github.com/tdykstra)、[Jon P Smith](https://twitter.com/thereformedprog)、[Rick Anderson](https://twitter.com/RickAndMSFT)
 
@@ -62,7 +63,7 @@ EF Core 有幾種方式可以將相關資料載入到實體的導覽屬性：
 
   ![明確式載入範例](read-related-data/_static/explicit-loading.png)
 
-* 消極式[載入](/ef/core/querying/related-data#lazy-loading)。 [EF Core 已在 2.1 版中新增消極式載入](/ef/core/querying/related-data#lazy-loading)。 第一次讀取實體時，不會擷取相關資料。 第一次存取導覽屬性時，將會自動擷取該導覽屬性所需的資料。 每當第一次存取導覽屬性時，查詢會傳送至資料庫。
+* [延遲載入](/ef/core/querying/related-data#lazy-loading)。 [EF Core 已在 2.1 版中新增消極式載入](/ef/core/querying/related-data#lazy-loading)。 第一次讀取實體時，不會擷取相關資料。 第一次存取導覽屬性時，將會自動擷取該導覽屬性所需的資料。 每當第一次存取導覽屬性時，查詢會傳送至資料庫。
 
 ## <a name="create-course-pages"></a>建立 Course 頁面
 
@@ -147,7 +148,7 @@ EF Core 有幾種方式可以將相關資料載入到實體的導覽屬性：
 
 [!code-csharp[](intro/samples/cu30snapshots/6-related/Pages/Courses/IndexSelect.cshtml.cs?name=snippet_RevisedIndexMethod&highlight=6)]
 
-上述程式碼不會傳回任何實體類型，因此不會進行任何追蹤。 如需 EF 追蹤的詳細資訊，請參閱[追蹤與不追蹤查詢](/ef/core/querying/tracking)。
+上述程式碼不會傳回任何實體類型，因此不會進行追蹤。 如需 EF 追蹤的詳細資訊，請參閱 [追蹤與無追蹤查詢](/ef/core/querying/tracking)的比較。
 
 `CourseViewModel`：
 
@@ -208,7 +209,7 @@ EF Core 有幾種方式可以將相關資料載入到實體的導覽屬性：
 
 若要在更新之前查看 Scaffold 頁面的外觀，請執行應用程式並巡覽至 Instructors 頁面。
 
-使用下列程式碼更新*Pages/講師/Index. cshtml. .cs* ：
+使用下列程式碼更新 *Pages/講師/Index. .cs* ：
 
 [!code-csharp[](intro/samples/cu30snapshots/6-related/Pages/Instructors/Index1.cshtml.cs?name=snippet_all&highlight=2,19-53)]
 
@@ -235,7 +236,7 @@ EF Core 有幾種方式可以將相關資料載入到實體的導覽屬性：
 
 選取的講師會從檢視模型的講師清單中擷取。 檢視模型的 `Courses` 屬性則使用 `Course` 實體從該講師的 `CourseAssignments` 導覽屬性載入。
 
-`Where` 方法會傳回集合。 但是在此情況下，篩選會選取單一實體，因此 `Single` 會呼叫方法，將集合轉換成單一 `Instructor` 實體。 `Instructor` 實體提供對 `CourseAssignments` 屬性的存取。 `CourseAssignments` 提供對相關 `Course` 實體的存取。
+`Where` 方法會傳回集合。 但是在這種情況下，篩選器會選取單一實體，因此 `Single` 會呼叫方法將集合轉換成單一 `Instructor` 實體。 `Instructor` 實體提供對 `CourseAssignments` 屬性的存取。 `CourseAssignments` 提供對相關 `Course` 實體的存取。
 
 ![講師-課程 m:M](complex-data-model/_static/courseassignment.png)
 
@@ -270,7 +271,7 @@ EF Core 有幾種方式可以將相關資料載入到實體的導覽屬性：
   }
   ```
 
-* 新增 [課程]**** 資料行，以顯示每位講師所教授的課程。 如需此 razor 語法的詳細資訊，請參閱[明確行轉換](xref:mvc/views/razor#explicit-line-transition)。
+* 新增 [課程]**** 資料行，以顯示每位講師所教授的課程。 如需此 razor 語法的詳細資訊，請參閱 [明確的行轉換](xref:mvc/views/razor#explicit-line-transition) 。
 
 * 新增程式碼，將 `class="success"` 動態新增至所選講師和課程的 `tr` 項目。 這會使用啟動程序類別設定所選取資料列的背景色彩。
 
@@ -293,7 +294,7 @@ EF Core 有幾種方式可以將相關資料載入到實體的導覽屬性：
 
 * 新增所選課程的學生註冊資料表。
 
-執行應用程式，然後選取 [**講師**] 索引標籤。此頁面會顯示 `Location` 來自相關實體的 (office) `OfficeAssignment` 。 如果 `OfficeAssignment` 為 Null，則會顯示空的資料表資料格。
+執行應用程式，然後選取 [ **講師** ] 索引標籤。此頁面會顯示 `Location` 來自相關實體的 (office) `OfficeAssignment` 。 如果 `OfficeAssignment` 為 Null，則會顯示空的資料表資料格。
 
 按一下講師的 [選取]**** 連結。 資料列樣式會變更，並會顯示指派給該講師的課程。
 
@@ -375,7 +376,7 @@ EF Core 有幾種方式可以將相關資料載入到實體的導覽屬性：
 
   ![明確式載入範例](read-related-data/_static/explicit-loading.png)
 
-* 消極式[載入](/ef/core/querying/related-data#lazy-loading)。 [EF Core 已在 2.1 版中新增消極式載入](/ef/core/querying/related-data#lazy-loading)。 第一次讀取實體時，不會擷取相關資料。 第一次存取導覽屬性時，將會自動擷取該導覽屬性所需的資料。 每當第一次存取導覽屬性時，查詢會傳送至資料庫。
+* [延遲載入](/ef/core/querying/related-data#lazy-loading)。 [EF Core 已在 2.1 版中新增消極式載入](/ef/core/querying/related-data#lazy-loading)。 第一次讀取實體時，不會擷取相關資料。 第一次存取導覽屬性時，將會自動擷取該導覽屬性所需的資料。 每當第一次存取導覽屬性時，查詢會傳送至資料庫。
 
 * `Select` 運算子只會載入所需的相關資料。
 
@@ -400,7 +401,7 @@ Course 實體包含導覽屬性，其中包含 `Department` 實體。 `Departmen
 
 # <a name="visual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code)
 
- 執行下列命令：
+ 執行以下命令：
 
   ```dotnetcli
   dotnet aspnet-codegenerator razorpage -m Course -dc SchoolContext -udl -outDir Pages\Courses --referenceScriptLibraries
@@ -487,7 +488,7 @@ Course 實體包含導覽屬性，其中包含 `Department` 實體。 `Departmen
 
 # <a name="visual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code)
 
- 執行下列命令：
+ 執行以下命令：
 
   ```dotnetcli
   dotnet aspnet-codegenerator razorpage -m Instructor -dc SchoolContext -udl -outDir Pages\Instructors --referenceScriptLibraries
@@ -539,7 +540,7 @@ Course 實體包含導覽屬性，其中包含 `Department` 實體。 `Departmen
   }
   ```
 
-* 新增 [課程]**** 資料行，以顯示每位講師所教授的課程。 如需此 razor 語法的詳細資訊，請參閱[明確行轉換](xref:mvc/views/razor#explicit-line-transition)。
+* 新增 [課程]**** 資料行，以顯示每位講師所教授的課程。 如需此 razor 語法的詳細資訊，請參閱 [明確的行轉換](xref:mvc/views/razor#explicit-line-transition) 。
 
 * 新增程式碼，將 `class="success"` 動態新增至所選取講師的 `tr` 項目。 這會使用啟動程序類別設定所選取資料列的背景色彩。
 
@@ -558,7 +559,7 @@ Course 實體包含導覽屬性，其中包含 `Department` 實體。 `Departmen
   <a asp-action="Index" asp-route-id="@item.ID">Select</a> |
   ```
 
-執行應用程式，然後選取 [**講師**] 索引標籤。此頁面會顯示 `Location` 來自相關實體的 (office) `OfficeAssignment` 。 如果 OfficeAssignment 是 Null，就會顯示空的資料表資料格。
+執行應用程式，然後選取 [ **講師** ] 索引標籤。此頁面會顯示 `Location` 來自相關實體的 (office) `OfficeAssignment` 。 如果 OfficeAssignment 是 Null，就會顯示空的資料表資料格。
 
 按一下**選取**連結。 資料列樣式變更。
 
@@ -595,7 +596,7 @@ Course 實體包含導覽屬性，其中包含 `Department` 實體。 `Departmen
 
 [!code-csharp[](intro/samples/cu/Pages/Instructors/Index2.cshtml.cs?name=snippet_courseID)]
 
-將下列標記新增至*Pages/講師/Index. cshtml* Razor 頁面的結尾：
+將下列標記新增至 *Pages/講師/Index. cshtml* Razor 頁面的結尾：
 
 [!code-cshtml[](intro/samples/cu/Pages/Instructors/IndexRRD.cshtml?range=60-102&highlight=7-999)]
 

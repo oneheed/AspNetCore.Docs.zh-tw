@@ -5,6 +5,7 @@ description: 了解有關 HTTP 要求和回應的網頁伺服器實作詳細資�
 ms.author: riande
 ms.date: 10/14/2016
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -15,12 +16,12 @@ no-loc:
 - Razor
 - SignalR
 uid: fundamentals/request-features
-ms.openlocfilehash: 4b6b34724bc848578293e586da12ead63c96cfbd
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: 3b5c929519407de5dc582c10a86745efddc8a38a
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88016787"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88634510"
 ---
 # <a name="request-features-in-aspnet-core"></a>ASP.NET Core 中的要求功能
 
@@ -73,7 +74,7 @@ ASP.NET Core 可定義 `Microsoft.AspNetCore.Http.Features` 中伺服器用來�
 
 藉由結合自訂伺服器實作和特定中介軟體增強功能，可建構應用程式所需的一組精確功能。 這允許新增遺漏的功能而不需要變更伺服器，並確保只公開少量的功能，以減少受攻擊面區域並改善效能。
 
-## <a name="summary"></a>總結
+## <a name="summary"></a>摘要
 
 功能介面定義給定的要求可能支援的特定 HTTP 功能。 伺服器定義功能的集合，以及一組該伺服器所支援，但中介軟體可用來增強這些功能的初始功能。
 

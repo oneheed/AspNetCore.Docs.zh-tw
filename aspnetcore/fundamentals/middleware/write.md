@@ -7,6 +7,7 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 5/18/2020
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -17,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: fundamentals/middleware/write
-ms.openlocfilehash: 480120718959a364ce8008949c3b76c558c0e995
-ms.sourcegitcommit: ba4872dd5a93780fe6cfacb2711ec1e69e0df92c
+ms.openlocfilehash: 52985917c34ebf007c0d205625956c772456ee2b
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 08/12/2020
-ms.locfileid: "88130583"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88635251"
 ---
 # <a name="write-custom-aspnet-core-middleware"></a>撰寫自訂的 ASP.NET Core 中介軟體
 
@@ -31,7 +32,7 @@ ms.locfileid: "88130583"
 中介軟體為組成應用程式管線的軟體，用以處理要求與回應。 ASP.NET Core 提供一組豐富的內建中介軟體元件，但在某些情況下，您可能想要撰寫自訂的中介軟體。
 
 > [!NOTE]
-> 本主題說明如何撰寫以*慣例為基礎的*中介軟體。 如需使用強式類型和每個要求啟用的方法，請參閱 <xref:fundamentals/middleware/extensibility> 。
+> 本主題說明如何撰寫以 *慣例為基礎的* 中介軟體。 如需使用強式輸入和依要求啟用的方法，請參閱 <xref:fundamentals/middleware/extensibility> 。
 
 ## <a name="middleware-class"></a>中介軟體類別
 
@@ -85,7 +86,7 @@ public class CustomMiddleware
 }
 ```
 
-[存留期和註冊選項](xref:fundamentals/dependency-injection#lifetime-and-registration-options)包含具有*範圍*存留期服務之中介軟體的完整範例。
+[存留期和註冊選項](xref:fundamentals/dependency-injection#lifetime-and-registration-options) 包含具有 *範圍* 存留期服務之中介軟體的完整範例。
 
 ## <a name="middleware-extension-method"></a>中介軟體擴充方法
 
@@ -99,7 +100,7 @@ public class CustomMiddleware
 
 ## <a name="additional-resources"></a>其他資源
 
-* [存留期和註冊選項](xref:fundamentals/dependency-injection#lifetime-and-registration-options)包含中介軟體的完整範例，內含*範圍*、*暫時性*和*單一*存留期服務。
+* [存留期和註冊選項](xref:fundamentals/dependency-injection#lifetime-and-registration-options) 包含具有 *範圍*、 *暫時性*和 *單一* 存留期服務之中介軟體的完整範例。
 * <xref:fundamentals/middleware/index>
 * <xref:test/middleware>
 * <xref:migration/http-modules>

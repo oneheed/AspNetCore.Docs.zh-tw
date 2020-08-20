@@ -5,6 +5,7 @@ description: 取得將現有 ASP.NET MVC 或 Web API 應用程式，移轉至 AS
 ms.author: scaddie
 ms.date: 10/18/2019
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -15,12 +16,12 @@ no-loc:
 - Razor
 - SignalR
 uid: migration/proper-to-2x/index
-ms.openlocfilehash: defdb190acf915eaa7c4aa8469ee47888f771526
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: 7f5d2835d93631ac73b3da0c3dc26d87ef64c57d
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88014915"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88634757"
 ---
 # <a name="migrate-from-aspnet-to-aspnet-core"></a>從 ASP.NET 移轉至 ASP.NET Core
 
@@ -28,7 +29,7 @@ ms.locfileid: "88014915"
 
 這篇文章可作為將 ASP.NET 應用程式移轉至 ASP.NET Core 的參考指南。
 
-## <a name="prerequisites"></a>必要條件
+## <a name="prerequisites"></a>Prerequisites
 
 [.NET Core SDK 2.2 或更新版本](https://dotnet.microsoft.com/download)
 
@@ -153,7 +154,7 @@ services.Configure<AppConfiguration>(Configuration.GetSection("AppConfiguration"
 
 在 ASP.NET 中，靜態檔案會儲存在不同目錄中，於檢視中提供參考。
 
-在 ASP.NET Core 中，除非另有設定，否則靜態檔案會儲存在「web 根目錄」 (* &lt; 內容根 &gt; /wwwroot*) 。 從 `Startup.Configure` 叫用 `UseStaticFiles` 擴充方法，將檔案載入至要求管線：
+在 ASP.NET Core 中，除非另有設定，否則靜態檔案會儲存在 [web 根目錄] (* &lt; 內容根目錄 &gt; /wwwroot*) 。 從 `Startup.Configure` 叫用 `UseStaticFiles` 擴充方法，將檔案載入至要求管線：
 
 [!code-csharp[](../../fundamentals/static-files/samples/1.x/StaticFilesSample/StartupStaticFiles.cs?highlight=3&name=snippet_ConfigureMethod)]
 
@@ -167,11 +168,11 @@ services.Configure<AppConfiguration>(Configuration.GetSection("AppConfiguration"
 
 ## <a name="multi-value-no-loccookies"></a>多重值 cookie s
 
-ASP.NET Core 中不支援[多重值 cookie s](xref:System.Web.HttpCookie.Values) 。 為 cookie 每個值建立一個。
+ASP.NET Core 中不支援[多值 cookie s](xref:System.Web.HttpCookie.Values) 。 cookie每個值建立一個。
 
 ## <a name="partial-app-migration"></a>部分應用程式遷移
 
-部分應用程式遷移的其中一個方法是建立 IIS 子應用程式，並只將特定路由從 ASP.NET 4.x 移至 ASP.NET Core，同時保留該應用程式的 URL 結構。 例如，請考慮來自*applicationHost.config*檔案的應用程式 URL 結構：
+部分應用程式遷移的其中一種方法是建立 IIS 子應用程式，並只將特定路由從 ASP.NET 4.x 移至 ASP.NET Core，同時保留應用程式的 URL 結構。 例如，請考慮來自 *applicationHost.config* 檔案的應用程式 URL 結構：
 
 ```xml
 <sites>

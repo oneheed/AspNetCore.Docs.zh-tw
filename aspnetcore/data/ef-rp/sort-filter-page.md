@@ -1,11 +1,12 @@
 ---
-title: 第3部分， Razor ASP.NET Core 排序、篩選、分頁中有 EF Core 的頁面
+title: 第3部分： Razor 有 EF Core 在 ASP.NET Core 排序、篩選、分頁中的頁面
 author: rick-anderson
-description: 頁面的第3部分 Razor 和 Entity Framework 教學課程系列。
+description: 頁面第3部分 Razor 和 Entity Framework 教學課程系列。
 ms.author: riande
 ms.custom: mvc
 ms.date: 07/22/2019
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -16,14 +17,14 @@ no-loc:
 - Razor
 - SignalR
 uid: data/ef-rp/sort-filter-page
-ms.openlocfilehash: 5bfea63cc1ff85adbe5ce572858b78a8e86b2280
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: 5e073845acbecdf0db4c30c4725f12033cfc42ac
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88017723"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88634679"
 ---
-# <a name="part-3-no-locrazor-pages-with-ef-core-in-aspnet-core---sort-filter-paging"></a>第3部分， Razor ASP.NET Core 排序、篩選、分頁中有 EF Core 的頁面
+# <a name="part-3-no-locrazor-pages-with-ef-core-in-aspnet-core---sort-filter-paging"></a>第3部分： Razor 有 EF Core 在 ASP.NET Core 排序、篩選、分頁中的頁面
 
 作者：[Tom Dykstra](https://github.com/tdykstra)、[Rick Anderson](https://twitter.com/RickAndMSFT)、[Jon P Smith](https://twitter.com/thereformedprog)
 
@@ -55,7 +56,7 @@ ms.locfileid: "88017723"
 
 從 **Students** 連結要求 [索引] 頁面時，將不會有查詢字串。 學生會以遞增姓氏順序顯示。 在 `switch` 陳述式中，預設會依姓氏遞增排序 (fall-through 大小寫)。 使用者按一下資料行標題連結時，適當的 `sortOrder` 值將會在查詢字串值中提供。
 
-`NameSort``DateSort`頁面會使用和， Razor 以適當的查詢字串值來設定資料行標題超連結：
+`NameSort``DateSort`頁面會使用和 Razor 來設定具有適當查詢字串值的資料行標題超連結：
 
 [!code-csharp[Main](intro/samples/cu30snapshots/3-sorting/Pages/Students/Index1.cshtml.cs?name=snippet_Ternary)]
 
@@ -102,7 +103,7 @@ ms.locfileid: "88017723"
 
 將篩選新增至 Students [索引] 頁面：
 
-* 文字方塊和 [提交] 按鈕會加入至 Razor 頁面。 文字方塊提供名字或姓氏的搜尋字串。
+* 文字方塊和提交按鈕就會加入至 Razor 頁面。 文字方塊提供名字或姓氏的搜尋字串。
 * 頁面模型會更新為使用文字方塊的值。
 
 ### <a name="update-the-ongetasync-method"></a>更新 OnGetAsync 方法
@@ -197,7 +198,7 @@ https://localhost:<port>/Students?SearchString=an
 
 按一下分頁連結時，頁面索引變數即包含要顯示的頁面數。
 
-`CurrentSort`屬性會提供 Razor 具有目前排序次序的頁面。 目前的排序次序必須包含在分頁連結中，以保留分頁時的排序次序。
+屬性會為 `CurrentSort` Razor 頁面提供目前的排序次序。 目前的排序次序必須包含在分頁連結中，以保留分頁時的排序次序。
 
 `CurrentFilter`屬性會提供 Razor 具有目前篩選字串的頁面。 `CurrentFilter` 值：
 
@@ -215,7 +216,7 @@ https://localhost:<port>/Students?SearchString=an
 
 ### <a name="add-paging-links-to-the-no-locrazor-page"></a>將分頁連結新增至 Razor 頁面
 
-使用下列程式碼取代 student */Index. cshtml*中的程式碼。 所做的變更已醒目提示：
+以下列程式碼取代 student */Index. cshtml* 中的程式碼。 所做的變更已醒目提示：
 
 [!code-cshtml[Main](intro/samples/cu30/Pages/Students/Index.cshtml?highlight=29-32,38-41,69-87)]
 
@@ -238,7 +239,7 @@ https://localhost:<port>/Students?SearchString=an
 
 本節將建立 [關於] 頁面，其中會顯示每個註冊日期的已註冊學生人數。 此更新會使用群組，並包含下列步驟：
 
-* 建立 [**關於**] 頁面所使用資料的視圖模型。
+* 針對 [ **About （關於** ）] 頁面所使用的資料建立視圖模型。
 * 更新 About 頁面以使用檢視模型。
 
 ### <a name="create-the-view-model"></a>建立檢視模型
@@ -297,14 +298,14 @@ LINQ 陳述式會依註冊日期將學生實體組成群組、計算每個群組
 
 [!code-csharp[](intro/samples/cu21/Pages/Students/Index.cshtml.cs?name=snippet_SortOnly)]
 
-上述程式碼會從 URL 中的查詢字串接收 `sortOrder` 參數。  (包含查詢字串) 的 URL 是由[錨點](xref:mvc/views/tag-helpers/builtin-th/anchor-tag-helper
-)標籤協助程式所產生。
+上述程式碼會從 URL 中的查詢字串接收 `sortOrder` 參數。 [錨點](xref:mvc/views/tag-helpers/builtin-th/anchor-tag-helper
+)標籤協助程式會產生包含查詢字串的 URL () 
 
 `sortOrder`參數為 "Name" 或 "Date"。 `sortOrder` 參數後面可以選擇接著 "_desc" 來指定遞減順序。 預設排序順序為遞增。
 
 從 **Students** 連結要求 [索引] 頁面時，將不會有查詢字串。 學生會以遞增姓氏順序顯示。 在 `switch` 陳述式中，預設會依姓氏遞增排序 (fall-through 大小寫)。 使用者按一下資料行標題連結時，適當的 `sortOrder` 值將會在查詢字串值中提供。
 
-`NameSort``DateSort`頁面會使用和， Razor 以適當的查詢字串值來設定資料行標題超連結：
+`NameSort``DateSort`頁面會使用和 Razor 來設定具有適當查詢字串值的資料行標題超連結：
 
 [!code-csharp[](intro/samples/cu21/Pages/Students/Index.cshtml.cs?name=snippet_SortOnly&highlight=3-4)]
 
@@ -364,7 +365,7 @@ LINQ 陳述式會依註冊日期將學生實體組成群組、計算每個群組
 
 將篩選新增至 Students [索引] 頁面：
 
-* 文字方塊和 [提交] 按鈕會加入至 Razor 頁面。 文字方塊提供名字或姓氏的搜尋字串。
+* 文字方塊和提交按鈕就會加入至 Razor 頁面。 文字方塊提供名字或姓氏的搜尋字串。
 * 頁面模型會更新為使用文字方塊的值。
 
 ### <a name="add-filtering-functionality-to-the-index-method"></a>將篩選功能新增至 Index 方法
@@ -449,9 +450,9 @@ http://localhost:5000/Students?SearchString=an
 
 按一下分頁連結時，頁面索引變數即包含要顯示的頁面數。
 
-`CurrentSort`提供 Razor 目前排序次序的頁面。 目前的排序次序必須包含在分頁連結中，以保留分頁時的排序次序。
+`CurrentSort` 為 Razor 頁面提供目前的排序次序。 目前的排序次序必須包含在分頁連結中，以保留分頁時的排序次序。
 
-`CurrentFilter`提供 Razor 具有目前篩選字串的頁面。 `CurrentFilter` 值：
+`CurrentFilter` 提供 Razor 具有目前篩選字串的頁面。 `CurrentFilter` 值：
 
 * 必須包含在分頁連結中，以保留分頁時的篩選設定。
 * 頁面重新顯示時，必須還原到文字方塊中。
@@ -515,7 +516,7 @@ http://localhost:5000/Students?SearchString=an
 
 ### <a name="update-the-about-page-model"></a>更新 About 頁面模型
 
-ASP.NET Core 2.2 中的 Web 範本不包括 [關於] 頁面。 如果您使用 ASP.NET Core 2.2，請建立 [關於] Razor 頁面。
+ASP.NET Core 2.2 中的 Web 範本不包括 [關於] 頁面。 如果您使用 ASP.NET Core 2.2，請建立 [About （關於）] Razor 頁面。
 
 以下列程式碼更新 *Pages/About.cshtml.cs* 檔案：
 
@@ -523,7 +524,7 @@ ASP.NET Core 2.2 中的 Web 範本不包括 [關於] 頁面。 如果您使用 A
 
 LINQ 陳述式會依註冊日期將學生實體組成群組、計算每個群組中的實體數目、將結果儲存在 `EnrollmentDateGroup` 檢視模型物件的集合中。
 
-### <a name="modify-the-about-no-locrazor-page"></a>修改 [關於] Razor 頁面
+### <a name="modify-the-about-no-locrazor-page"></a>修改 [About （關於）] Razor 頁面
 
 以下列程式碼取代 *Pages/About.cshtml* 檔案中的程式碼：
 

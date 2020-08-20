@@ -7,6 +7,7 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 10/25/2018
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -17,18 +18,18 @@ no-loc:
 - Razor
 - SignalR
 uid: fundamentals/metapackage
-ms.openlocfilehash: 58201aed604fa53c703176e11af5d749f2b3274e
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: 133eee71fcd85a95ac53684c3c6e475a54592967
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88017023"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88634562"
 ---
 # <a name="microsoftaspnetcoreall-metapackage-for-aspnet-core-20"></a>ASP.NET Core 2.0 的 Microsoft.AspNetCore.All 中繼套件
 
 ::: moniker range=">= aspnetcore-3.0"
 
-`Microsoft.AspNetCore.All`中繼套件不包含在 ASP.NET Core 3.0 和更新版本中。 如需詳細資訊，請參閱[此 GitHub 問題](https://github.com/aspnet/Announcements/issues/314)。
+`Microsoft.AspNetCore.All`中繼套件不包含在 ASP.NET Core 3.0 和更新版本中。 如需詳細資訊，請參閱 [此 GitHub 問題](https://github.com/aspnet/Announcements/issues/314)。
 
 ::: moniker-end
 
@@ -65,7 +66,7 @@ ms.locfileid: "88017023"
 
 在專案檔中，專案的 SDK 必須設定為 `Microsoft.NET.Sdk.Web`，才能使用 `Microsoft.AspNetCore.All` 的隱含版本。 當指定 `Microsoft.NET.Sdk` SDK 時 (專案檔頂端的 `<Project Sdk="Microsoft.NET.Sdk">`)，就會產生以下警告：
 
-*警告 NU1604：專案相依性 AspNetCore。全部不包含內含下限。請在相依性版本中包含下限，以確保一致的還原結果。*
+*警告 NU1604：專案相依性 AspNetCore。全部不含下限下限。在相依性版本中包含較低的系結，以確保一致的還原結果。*
 
 這是.NET Core 2.1 SDK 的已知的問題，並將於 .NET Core 2.2 SDK 中修正。
 

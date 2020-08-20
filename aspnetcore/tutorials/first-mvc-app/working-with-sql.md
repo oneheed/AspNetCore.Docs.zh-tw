@@ -1,10 +1,11 @@
 ---
-title: 第5部分，使用 ASP.NET Core MVC 應用程式中的資料庫
+title: 第5部分：使用 ASP.NET Core MVC 應用程式中的資料庫
 author: rick-anderson
-description: 第5部分，將模型新增至 ASP.NET Core MVC 應用程式
+description: 第5部分：將模型新增至 ASP.NET Core MVC 應用程式
 ms.author: riande
 ms.date: 8/16/2019
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -15,14 +16,14 @@ no-loc:
 - Razor
 - SignalR
 uid: tutorials/first-mvc-app/working-with-sql
-ms.openlocfilehash: 88af3e724032f8324155a0a1e6c30c8558f97f72
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: 23ecee4e3482b3ee82ae597671a8c45515eb4589
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88021259"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88634926"
 ---
-# <a name="part-5-work-with-a-database-in-an-aspnet-core-mvc-app"></a>第5部分，使用 ASP.NET Core MVC 應用程式中的資料庫
+# <a name="part-5-work-with-a-database-in-an-aspnet-core-mvc-app"></a>第5部分：使用 ASP.NET Core MVC 應用程式中的資料庫
 
 ::: moniker range=">= aspnetcore-3.0"
 
@@ -54,7 +55,7 @@ ASP.NET Core [組態](xref:fundamentals/configuration/index)系統會讀取 `Con
 
 ## <a name="sql-server-express-localdb"></a>SQL Server Express LocalDB
 
-LocalDB 為輕量版的 SQL Server Express Database Engine，鎖定程式開發為其目標。 LocalDB 會依需求啟動，並以使用者模式執行，因此沒有複雜的組態。 根據預設，LocalDB 資料庫會在*C：/Users/{user}* 目錄中建立 *.mdf*檔案。
+LocalDB 為輕量版的 SQL Server Express Database Engine，鎖定程式開發為其目標。 LocalDB 會依需求啟動，並以使用者模式執行，因此沒有複雜的組態。 根據預設，LocalDB 資料庫會在*C：/Users/{user}* 目錄中建立 *.mdf 檔案。*
 
 * 從 [檢視]**** 功能表中，開啟 [SQL Server 物件總管]**** (SSOX)。
 
@@ -101,7 +102,7 @@ if (context.Movie.Any())
 
 ### <a name="add-the-seed-initializer"></a>新增種子初始設定式
 
-將*Program.cs*的內容取代為下列程式碼：
+以下列程式碼取代 *Program.cs* 的內容：
 
 [!code-csharp[](~/tutorials/first-mvc-app/start-mvc/sample/MvcMovie3/Program.cs)]
 
@@ -166,7 +167,7 @@ ASP.NET Core [組態](xref:fundamentals/configuration/index)系統會讀取 `Con
 
 ## <a name="sql-server-express-localdb"></a>SQL Server Express LocalDB
 
-LocalDB 為輕量版的 SQL Server Express Database Engine，鎖定程式開發為其目標。 LocalDB 會依需求啟動，並以使用者模式執行，因此沒有複雜的組態。 根據預設，LocalDB 資料庫會在*C：/Users/{user}* 目錄中建立 *.mdf*檔案。
+LocalDB 為輕量版的 SQL Server Express Database Engine，鎖定程式開發為其目標。 LocalDB 會依需求啟動，並以使用者模式執行，因此沒有複雜的組態。 根據預設，LocalDB 資料庫會在*C：/Users/{user}* 目錄中建立 *.mdf 檔案。*
 
 * 從 [檢視]**** 功能表中，開啟 [SQL Server 物件總管]**** (SSOX)。
 
@@ -213,7 +214,7 @@ if (context.Movie.Any())
 
 ### <a name="add-the-seed-initializer"></a>新增種子初始設定式
 
-將*Program.cs*的內容取代為下列程式碼：
+以下列程式碼取代 *Program.cs* 的內容：
 
 [!code-csharp[](~/tutorials/first-mvc-app/start-mvc/sample/MvcMovie22/Program.cs)]
 

@@ -16,12 +16,12 @@ no-loc:
 - Razor
 - SignalR
 uid: migration/proper-to-2x/index
-ms.openlocfilehash: 7f5d2835d93631ac73b3da0c3dc26d87ef64c57d
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: f1a5af60f8dce83d9622ed9d2c6bcb4b8fc22b73
+ms.sourcegitcommit: 9a90b956af8d8584d597f1e5c1dbfb0ea9bb8454
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88634757"
+ms.lasthandoff: 08/21/2020
+ms.locfileid: "88712489"
 ---
 # <a name="migrate-from-aspnet-to-aspnet-core"></a>從 ASP.NET 移轉至 ASP.NET Core
 
@@ -29,7 +29,7 @@ ms.locfileid: "88634757"
 
 這篇文章可作為將 ASP.NET 應用程式移轉至 ASP.NET Core 的參考指南。
 
-## <a name="prerequisites"></a>Prerequisites
+## <a name="prerequisites"></a>先決條件
 
 [.NET Core SDK 2.2 或更新版本](https://dotnet.microsoft.com/download)
 
@@ -203,6 +203,12 @@ ASP.NET Core 中不支援[多值 cookie s](xref:System.Web.HttpCookie.Values) �
     ├── ...
     └── web.config
 ```
+
+## <a name="bind-and-input-formatters"></a>[BIND] 和輸入格式器
+
+[舊版 ASP.NET](/aspnet/mvc/overview/getting-started/introduction/examining-the-edit-methods-and-edit-view) 使用 `[Bind]` 屬性來防範大量指派攻擊。 [輸入](xref:mvc/models/model-binding#input-formatters) 格式器在 ASP.NET Core 中的運作方式不同。 當搭配輸入格式器 `[Bind]` 使用來剖析 JSON 或 XML 時，不再設計屬性來防止大量指派。 當資料來源是以內容類型張貼的表單資料時，這些屬性會影響模型系結 `x-www-form-urlencoded` 。
+
+針對將 JSON 資訊張貼至控制器並使用 JSON 輸入格式器剖析資料的應用程式，建議您以 `[Bind]` 符合屬性所定義之屬性的視圖模型取代屬性 `[Bind]` 。
 
 ## <a name="additional-resources"></a>其他資源
 

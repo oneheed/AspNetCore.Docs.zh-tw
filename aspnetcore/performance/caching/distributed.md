@@ -18,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: performance/caching/distributed
-ms.openlocfilehash: a25cbaf9a4e7dc5f1bd3706d01f409208a39aaa3
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: 0d27206412a098f4ea749ec10189bf24d2322de1
+ms.sourcegitcommit: 9a90b956af8d8584d597f1e5c1dbfb0ea9bb8454
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88626723"
+ms.lasthandoff: 08/21/2020
+ms.locfileid: "88712476"
 ---
 # <a name="distributed-caching-in-aspnet-core"></a>ASP.NET Core 中的分散式快取
 
@@ -45,7 +45,7 @@ ms.locfileid: "88626723"
 
 [查看或下載範例程式碼](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/performance/caching/distributed/samples/) ([如何下載](xref:index#how-to-download-a-sample)) 
 
-## <a name="prerequisites"></a>Prerequisites
+## <a name="prerequisites"></a>先決條件
 
 若要使用 SQL Server 的分散式快取，請將封裝參考新增至[node.js 套件。](https://www.nuget.org/packages/Microsoft.Extensions.Caching.SqlServer)
 
@@ -116,16 +116,13 @@ Table and index were created successfully.
 
 ### <a name="distributed-redis-cache"></a>分散式 Redis 快取
 
-[Redis](https://redis.io/) 是一種開放原始碼的記憶體內部資料存放區，通常用來做為分散式快取。 您可以在本機使用 Redis，也可以為 Azure 託管的 ASP.NET Core 應用程式設定 [Azure Redis](https://azure.microsoft.com/services/cache/) 快取。
+[Redis](https://redis.io/) 是一種開放原始碼的記憶體內部資料存放區，通常用來做為分散式快取。  您可以為 Azure 託管的 ASP.NET Core 應用程式設定 [Azure Redis](https://azure.microsoft.com/services/cache/) 快取，並使用 azure Redis 快取來進行本機開發。
 
-應用程式會在 <xref:Microsoft.Extensions.Caching.StackExchangeRedis.RedisCache> 下列情況中，使用 <xref:Microsoft.Extensions.DependencyInjection.StackExchangeRedisCacheServiceCollectionExtensions.AddStackExchangeRedisCache*> 非開發環境中的實例 () 來設定快取執行 `Startup.ConfigureServices` ：
+應用程式會使用實例 () 來設定快取執行 <xref:Microsoft.Extensions.Caching.StackExchangeRedis.RedisCache> <xref:Microsoft.Extensions.DependencyInjection.StackExchangeRedisCacheServiceCollectionExtensions.AddStackExchangeRedisCache*> 。
 
-[!code-csharp[](distributed/samples/3.x/DistCacheSample/Startup.cs?name=snippet_AddStackExchangeRedisCache)]
+如需詳細資訊，請參閱 [Azure Cache for Redis](/azure/azure-cache-for-redis/cache-overview)。
 
-若要在本機電腦上安裝 Redis：
-
-1. 安裝 [Chocolatey Redis 套件](https://chocolatey.org/packages/redis-64/)。
-1. `redis-server`從命令提示字元執行。
+如需本機 Redis 快取替代方法的討論，請參閱 [此 GitHub 問題](https://github.com/dotnet/AspNetCore.Docs/issues/19542) 。
 
 ### <a name="distributed-ncache-cache"></a>分散式 NCache 快取
 
@@ -175,7 +172,7 @@ Table and index were created successfully.
 
 * 現有的基礎結構
 * 效能需求
-* Cost
+* 成本
 * 小組經驗
 
 快取解決方案通常依賴記憶體內部儲存體，以快速抓取快取的資料，但記憶體是有限的資源，擴充的成本很高。 只將常用的資料儲存在快取中。
@@ -215,7 +212,7 @@ Table and index were created successfully.
 
 [查看或下載範例程式碼](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/performance/caching/distributed/samples/) ([如何下載](xref:index#how-to-download-a-sample)) 
 
-## <a name="prerequisites"></a>Prerequisites
+## <a name="prerequisites"></a>先決條件
 
 若要使用 SQL Server 分散式快取，請參考[AspNetCore 中繼套件](xref:fundamentals/metapackage-app)，或將封裝參考加入至[。](https://www.nuget.org/packages/Microsoft.Extensions.Caching.SqlServer)
 
@@ -345,7 +342,7 @@ Table and index were created successfully.
 
 * 現有的基礎結構
 * 效能需求
-* Cost
+* 成本
 * 小組經驗
 
 快取解決方案通常依賴記憶體內部儲存體，以快速抓取快取的資料，但記憶體是有限的資源，擴充的成本很高。 只將常用的資料儲存在快取中。
@@ -385,7 +382,7 @@ Table and index were created successfully.
 
 [查看或下載範例程式碼](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/performance/caching/distributed/samples/) ([如何下載](xref:index#how-to-download-a-sample)) 
 
-## <a name="prerequisites"></a>Prerequisites
+## <a name="prerequisites"></a>先決條件
 
 若要使用 SQL Server 分散式快取，請參考[AspNetCore 中繼套件](xref:fundamentals/metapackage-app)，或將封裝參考加入至[。](https://www.nuget.org/packages/Microsoft.Extensions.Caching.SqlServer)
 
@@ -521,7 +518,7 @@ services.AddDistributedRedisCache(options =>
 
 * 現有的基礎結構
 * 效能需求
-* Cost
+* 成本
 * 小組經驗
 
 快取解決方案通常依賴記憶體內部儲存體，以快速抓取快取的資料，但記憶體是有限的資源，擴充的成本很高。 只將常用的資料儲存在快取中。
@@ -544,4 +541,3 @@ services.AddDistributedRedisCache(options =>
 * <xref:host-and-deploy/web-farm>
 
 ::: moniker-end
- 

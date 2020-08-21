@@ -1,7 +1,7 @@
 ---
 title: 使用伺服器保護託管的 ASP.NET Core Blazor WebAssembly 應用程式 Identity
 author: guardrex
-description: 若要 Blazor 在使用[ Identity 伺服器](https://identityserver.io/)後端的 Visual Studio 內建立具有驗證的新託管方案
+description: 瞭解如何使用伺服器保護託管的 ASP.NET Core Blazor WebAssembly 應用程式 Identity 。
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
@@ -18,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/security/webassembly/hosted-with-identity-server
-ms.openlocfilehash: ef5e9e1becb511ef383b22fc96441b0f61537354
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: 58c21f4dbe831e99570ca8b0d7bc78616c1e5bfb
+ms.sourcegitcommit: 9a90b956af8d8584d597f1e5c1dbfb0ea9bb8454
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88626216"
+ms.lasthandoff: 08/21/2020
+ms.locfileid: "88712372"
 ---
 # <a name="secure-an-aspnet-core-no-locblazor-webassembly-hosted-app-with-no-locidentity-server"></a>Blazor WebAssembly使用伺服器保護 ASP.NET Core 託管應用 Identity 程式
 

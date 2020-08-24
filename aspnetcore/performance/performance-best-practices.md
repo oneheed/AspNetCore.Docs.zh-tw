@@ -17,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: performance/performance-best-practices
-ms.openlocfilehash: 94ae9e52ed99c3fe8e7044f474cdf5b702dc5adf
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: 587872b269d897d7c86eb77c110a4b6432218ed3
+ms.sourcegitcommit: dd0e87abf2bb50ee992d9185bb256ed79d48f545
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88634458"
+ms.lasthandoff: 08/21/2020
+ms.locfileid: "88746555"
 ---
 # <a name="aspnet-core-performance-best-practices"></a>ASP.NET Core 效能最佳做法
 
@@ -57,6 +57,12 @@ ASP.NET Core 應用程式中常見的效能問題是封鎖可能為非同步呼�
 * 將控制器/ Razor 頁面動作設為非同步。 整個呼叫堆疊都是非同步，以便從 [async/await](/dotnet/csharp/programming-guide/concepts/async/) 模式中獲益。
 
 您可以流量分析工具（例如 [PerfView](https://github.com/Microsoft/perfview)）來尋找經常新增到 [執行緒集](/windows/desktop/procthread/thread-pools)區的執行緒。 此 `Microsoft-Windows-DotNETRuntime/ThreadPoolWorkerThread/Start` 事件表示新增至執行緒集區的執行緒。 <!--  For more information, see [async guidance docs](TBD-Link_To_Davifowl_Doc)  -->
+
+## <a name="return-ienumerablet-or-iasyncenumerablet"></a>傳回 IEnumerable \<T> 或 IAsyncEnumerable\<T>
+
+`IEnumerable<T>`從動作傳回會導致序列化程式進行同步的集合反復專案。 結果是封鎖呼叫，以及執行緒集區耗盡的可能性。 若要避免同步列舉，請在傳回可列舉 `ToListAsync` 的之前使用。
+
+從 ASP.NET Core 3.0 開始， `IAsyncEnumerable<T>` 可以用來做為 `IEnumerable<T>` 非同步列舉的替代方案。 如需詳細資訊，請參閱 [控制器動作傳回類型](xref:web-api/action-return-types#return-ienumerablet-or-iasyncenumerablet)。
 
 ## <a name="minimize-large-object-allocations"></a>最小化大型物件分配
 
@@ -111,7 +117,7 @@ ASP.NET Core 應用程式中常見的效能問題是封鎖可能為非同步呼�
 
 ## <a name="keep-common-code-paths-fast"></a>快速保持通用程式碼路徑
 
-您希望所有的程式碼都能快速進行。 經常呼叫的程式碼路徑是最重要的，可進行優化。 其中包含：
+您希望所有的程式碼都能快速進行。 經常呼叫的程式碼路徑是最重要的，可進行優化。 它們包括：
 
 * 應用程式要求處理管線中的中介軟體元件，特別是在管線早期執行的中介軟體。 這些元件對效能會有很大的影響。
 * 針對每個要求執行的程式碼，或針對每個要求多次執行的程式碼。 例如，自訂記錄、授權處理常式或暫時性服務的初始化。
@@ -357,3 +363,11 @@ ASP.NET Core 不會緩衝 HTTP 回應主體。 第一次寫入回應時：
 ## <a name="do-not-call-next-if-you-have-already-started-writing-to-the-response-body"></a>如果您已開始寫入至回應主體，請不要呼叫下一個 ( # A1
 
 只有當元件可以處理和操作回應時，才會被呼叫。
+
+## <a name="use-in-process-hosting-with-iis"></a>使用同進程裝載與 IIS
+
+使用同處理序裝載，ASP.NET Core 應用程式會在與其 IIS 工作者處理序相同的處理序中執行。 內含式裝載可提供跨進程裝載的改善效能，因為要求不會透過回送介面卡進行 proxy 處理。 回送介面卡是一種網路介面，可將連出的網路流量傳回相同的電腦。 IIS 透過 [Windows 處理序啟用服務 (WAS)](/iis/manage/provisioning-and-managing-iis/features-of-the-windows-process-activation-service-was) 來執行處理程序管理。
+
+專案預設為 ASP.NET Core 3.0 和更新版本中的同進程裝載模型。
+
+如需詳細資訊，請參閱 [使用 IIS 在 Windows 上裝載 ASP.NET Core](xref:host-and-deploy/iis/index)

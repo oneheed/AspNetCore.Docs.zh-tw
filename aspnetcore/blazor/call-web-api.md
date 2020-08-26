@@ -18,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/call-web-api
-ms.openlocfilehash: cffd9e33636f98d50300de851d696ae753c10a0d
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: aa769554f54d6f480815d65de18e3dba5729d07d
+ms.sourcegitcommit: 4df148cbbfae9ec8d377283ee71394944a284051
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88625332"
+ms.lasthandoff: 08/26/2020
+ms.locfileid: "88876733"
 ---
 # <a name="call-a-web-api-from-aspnet-core-no-locblazor"></a>從 ASP.NET Core 呼叫 web API Blazor
 
@@ -41,7 +41,7 @@ ms.locfileid: "88625332"
 *  () 呼叫 Web API `Pages/CallWebAPI.razor`
 * HTTP 要求測試器 (`Components/HTTPRequestTester.razor`) 
 
-## <a name="packages"></a>Packages
+## <a name="packages"></a>套件
 
 參考 [`System.Net.Http.Json`](https://www.nuget.org/packages/System.Net.Http.Json) 專案檔中的 NuGet 套件。
 
@@ -280,6 +280,93 @@ builder.Services.AddHttpClient<WeatherForecastClient>(client =>
     }
 }
 ```
+
+## <a name="httpclient-and-httprequestmessage-with-fetch-api-request-options"></a>`HttpClient` 以及 `HttpRequestMessage` 使用 FETCH API 要求選項
+
+在應用程式的 WebAssembly 上執行時 Blazor WebAssembly ， [`HttpClient`](xref:fundamentals/http-requests) ([API 檔](xref:System.Net.Http.HttpClient)) 並 <xref:System.Net.Http.HttpRequestMessage> 可用於自訂要求。 例如，您可以指定 HTTP 方法和要求標頭。 下列元件會 `POST` 要求伺服器上的待辦事項清單 API 端點，並顯示回應主體：
+
+```razor
+@page "/todorequest"
+@using System.Net.Http
+@using System.Net.Http.Headers
+@using System.Net.Http.Json
+@using Microsoft.AspNetCore.Components.WebAssembly.Authentication
+@inject HttpClient Http
+@inject IAccessTokenProvider TokenProvider
+
+<h1>ToDo Request</h1>
+
+<button @onclick="PostRequest">Submit POST request</button>
+
+<p>Response body returned by the server:</p>
+
+<p>@responseBody</p>
+
+@code {
+    private string responseBody;
+
+    private async Task PostRequest()
+    {
+        var requestMessage = new HttpRequestMessage()
+        {
+            Method = new HttpMethod("POST"),
+            RequestUri = new Uri("https://localhost:10000/api/TodoItems"),
+            Content =
+                JsonContent.Create(new TodoItem
+                {
+                    Name = "My New Todo Item",
+                    IsComplete = false
+                })
+        };
+
+        var tokenResult = await TokenProvider.RequestAccessToken();
+
+        if (tokenResult.TryGetToken(out var token))
+        {
+            requestMessage.Headers.Authorization =
+                new AuthenticationHeaderValue("Bearer", token.Value);
+
+            requestMessage.Content.Headers.TryAddWithoutValidation(
+                "x-custom-header", "value");
+
+            var response = await Http.SendAsync(requestMessage);
+            var responseStatusCode = response.StatusCode;
+
+            responseBody = await response.Content.ReadAsStringAsync();
+        }
+    }
+
+    public class TodoItem
+    {
+        public long Id { get; set; }
+        public string Name { get; set; }
+        public bool IsComplete { get; set; }
+    }
+}
+```
+
+.NET WebAssembly 的執行會 <xref:System.Net.Http.HttpClient> 使用 [WindowOrWorkerGlobalScope ( # B1 ](https://developer.mozilla.org/docs/Web/API/WindowOrWorkerGlobalScope/fetch)。 Fetch 可讓您設定數個 [要求特定的選項](https://developer.mozilla.org/docs/Web/API/WindowOrWorkerGlobalScope/fetch#Parameters)。 
+
+您可以使用 <xref:System.Net.Http.HttpRequestMessage> 下表所示的擴充方法來設定 HTTP 提取要求選項。
+
+| 擴充方法 | Fetch 要求屬性 |
+| --- | --- |
+| <xref:Microsoft.AspNetCore.Components.WebAssembly.Http.WebAssemblyHttpRequestMessageExtensions.SetBrowserRequestCredentials%2A> | [`credentials`](https://developer.mozilla.org/docs/Web/API/Request/credentials) |
+| <xref:Microsoft.AspNetCore.Components.WebAssembly.Http.WebAssemblyHttpRequestMessageExtensions.SetBrowserRequestCache%2A> | [`cache`](https://developer.mozilla.org/docs/Web/API/Request/cache) |
+| <xref:Microsoft.AspNetCore.Components.WebAssembly.Http.WebAssemblyHttpRequestMessageExtensions.SetBrowserRequestMode%2A> | [`mode`](https://developer.mozilla.org/docs/Web/API/Request/mode) |
+| <xref:Microsoft.AspNetCore.Components.WebAssembly.Http.WebAssemblyHttpRequestMessageExtensions.SetBrowserRequestIntegrity%2A> | [`integrity`](https://developer.mozilla.org/docs/Web/API/Request/integrity) |
+
+您可以使用更通用的擴充方法來設定其他選項 <xref:Microsoft.AspNetCore.Components.WebAssembly.Http.WebAssemblyHttpRequestMessageExtensions.SetBrowserRequestOption%2A> 。
+ 
+HTTP 回應通常會在 Blazor WebAssembly 應用程式中進行緩衝處理，以啟用對回應內容進行同步讀取的支援。 若要啟用對回應串流的支援，請 <xref:Microsoft.AspNetCore.Components.WebAssembly.Http.WebAssemblyHttpRequestMessageExtensions.SetBrowserResponseStreamingEnabled%2A> 對要求使用擴充方法。
+
+若要在跨原始來源要求中包含認證，請使用 <xref:Microsoft.AspNetCore.Components.WebAssembly.Http.WebAssemblyHttpRequestMessageExtensions.SetBrowserRequestCredentials%2A> 擴充方法：
+
+```csharp
+requestMessage.SetBrowserRequestCredentials(BrowserRequestCredentials.Include);
+```
+
+如需有關 Fetch API 選項的詳細資訊，請參閱 [MDN web 檔： WindowOrWorkerGlobalScope。提取 ( # A1：參數](https://developer.mozilla.org/docs/Web/API/WindowOrWorkerGlobalScope/fetch#Parameters)。
 
 ## <a name="handle-errors"></a>處理錯誤
 

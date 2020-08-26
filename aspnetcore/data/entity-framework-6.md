@@ -15,12 +15,12 @@ no-loc:
 - Razor
 - SignalR
 uid: data/entity-framework-6
-ms.openlocfilehash: d01c0a1bdf29dbb79c04504d747b319fff710d89
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: 64d420d7076f1da453ee423cc4a3732eeb47b221
+ms.sourcegitcommit: 4df148cbbfae9ec8d377283ee71394944a284051
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88633756"
+ms.lasthandoff: 08/26/2020
+ms.locfileid: "88876694"
 ---
 # <a name="aspnet-core-and-entity-framework-6"></a>ASP.NET Core 和 Entity Framework 6
 ::: moniker range=">= aspnetcore-3.0"
@@ -51,7 +51,7 @@ ms.locfileid: "88633756"
 
 您無法將 EF6 內容置於 ASP.NET Core 專案中，因為 .NET Core 專案不支援 EF6 命令 (例如 *Enable-Migrations*) 需要的所有功能。    
 
-不論您放置 EF6 內容的專案類型為何，只有 EF6 命令列工具才適用於 EF6 內容。 例如，`Scaffold-DbContext` 僅可用於 Entity Framework Core。 如果您需要執行資料庫到 EF6 模型的還原工程，請參閱[Code First to an Existing Database](https://msdn.microsoft.com/jj200620) (現有資料庫的 Code First)。  
+不論您放置 EF6 內容的專案類型為何，只有 EF6 命令列工具才適用於 EF6 內容。 例如，`Scaffold-DbContext` 僅可用於 Entity Framework Core。 如果您需要對資料庫進行反向工程以 EF6 模型，請參閱 <https://docs.microsoft.com/ef/ef6/modeling/code-first/workflows/existing-database> 。    
 
 ## <a name="reference-full-framework-and-ef6-in-the-aspnet-core-project"></a>在 ASP.NET Core 專案中參考完整 Framework 和 EF6 
 
@@ -67,7 +67,7 @@ ms.locfileid: "88633756"
 
 [!code-csharp[](entity-framework-6/sample/EF6/SchoolContext.cs?name=snippet_Constructor)]   
 
-因為 EF6 內容沒有無參數建構函式，您的 EF6 專案必須提供 [IDbContextFactory](https://msdn.microsoft.com/library/hh506876) 的實作。 EF6 命令列工具將尋找並使用該實作，因此它們可以具現化內容。 以下為範例。    
+由於您的 EF6 內容沒有無參數的函式，因此您的 EF6 專案必須提供的實作為 <https://docs.microsoft.com/dotnet/api/system.data.entity.infrastructure.idbcontextfactory-1?view=entity-framework-6.2.0> 。 EF6 命令列工具將尋找並使用該實作，因此它們可以具現化內容。 以下為範例。   
 
 [!code-csharp[](entity-framework-6/sample/EF6/SchoolContextFactory.cs?name=snippet_IDbContextFactory)]  
 

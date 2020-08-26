@@ -17,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: tutorials/first-web-api
-ms.openlocfilehash: ce0dfdf1ce88b55790d33918a2d20bc19a09b288
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: 3d83141b8b638a369b08b0fadafccd96c0b48214
+ms.sourcegitcommit: 4df148cbbfae9ec8d377283ee71394944a284051
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88626892"
+ms.lasthandoff: 08/26/2020
+ms.locfileid: "88876785"
 ---
 # <a name="tutorial-create-a-web-api-with-aspnet-core"></a>教學課程：使用 ASP.NET Core 建立 web API
 
@@ -59,7 +59,7 @@ ms.locfileid: "88626892"
 
 ![左側方塊代表用戶端。 它會送出要求並接收來自應用程式 (右側繪製的方塊) 的回應。 在應用程式方塊中，三個方塊代表控制器、模型以及資料存取層。 要求進入應用程式的控制器，而在控制器與資料存取層之間進行讀取/寫入作業。 模型會序列化並在回應中傳回至用戶端。](first-web-api/_static/architecture.png)
 
-## <a name="prerequisites"></a>Prerequisites
+## <a name="prerequisites"></a>先決條件
 
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
@@ -295,7 +295,7 @@ dotnet add package Microsoft.VisualStudio.Web.CodeGeneration.Design
 dotnet add package Microsoft.EntityFrameworkCore.Design
 dotnet tool install --global dotnet-aspnet-codegenerator
 dotnet tool update -g Dotnet-aspnet-codegenerator
-dotnet-aspnet-codegenerator controller -name TodoItemsController -async -api -m TodoItem -dc TodoContext -outDir Controllers
+dotnet aspnet-codegenerator controller -name TodoItemsController -async -api -m TodoItem -dc TodoContext -outDir Controllers
 ```
 
 上述命令：
@@ -352,7 +352,7 @@ dotnet-aspnet-codegenerator controller -name TodoItemsController -async -api -m 
 
 * 建立新的要求。
 * 將 HTTP 方法設為 `POST`。
-* 將 URI 設定為 `https://localhost:<port>/api/TodoItems` 。 例如： `https://localhost:5001/api/TodoItems` 。
+* 將 URI 設定為 `https://localhost:<port>/api/TodoItems` 。 例如 `https://localhost:5001/api/TodoItems`。
 * 選取 [Body]**** \(本文\) 索引標籤。
 * 選取 [原始]**** 選項按鈕。
 * 將類型設定為 **JSON (application/json)**。
@@ -377,7 +377,7 @@ dotnet-aspnet-codegenerator controller -name TodoItemsController -async -api -m 
   ![Postman 主控台的 [標頭] 索引標籤](first-web-api/_static/3/create.png)
 
 * 將 HTTP 方法設為 `GET`。
-* 將 URI 設定為 `https://localhost:<port>/api/TodoItems/1` 。 例如： `https://localhost:5001/api/TodoItems/1` 。
+* 將 URI 設定為 `https://localhost:<port>/api/TodoItems/1` 。 例如 `https://localhost:5001/api/TodoItems/1`。
 * 選取 [傳送]。
 
 ## <a name="examine-the-get-methods"></a>檢查 GET 方法
@@ -408,7 +408,7 @@ dotnet-aspnet-codegenerator controller -name TodoItemsController -async -api -m 
 
 * 建立新的要求。
 * 將 HTTP 方法設定為 **GET**。
-* 將要求 URI 設定為 `https://localhost:<port>/api/TodoItems` 。 例如： `https://localhost:5001/api/TodoItems` 。
+* 將要求 URI 設定為 `https://localhost:<port>/api/TodoItems` 。 例如 `https://localhost:5001/api/TodoItems`。
 * 在 Postman 中，設定 [Two pane view] \(雙窗格檢視\)****。
 * 選取 [傳送]。
 
@@ -549,7 +549,7 @@ DTO 可以用來：
 
 ![左側方塊代表用戶端。 它會送出要求並接收來自應用程式 (右側繪製的方塊) 的回應。 在應用程式方塊中，三個方塊代表控制器、模型以及資料存取層。 要求進入應用程式的控制器，而在控制器與資料存取層之間進行讀取/寫入作業。 模型會序列化並在回應中傳回至用戶端。](first-web-api/_static/architecture.png)
 
-## <a name="prerequisites"></a>Prerequisites
+## <a name="prerequisites"></a>先決條件
 
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
@@ -809,7 +809,7 @@ DTO 可以用來：
 
 * 建立新的要求。
   * 將 HTTP 方法設定為 **GET**。
-  * 將要求 URI 設定為 `https://localhost:<port>/api/todo` 。 例如： `https://localhost:5001/api/todo` 。
+  * 將要求 URI 設定為 `https://localhost:<port>/api/todo` 。 例如 `https://localhost:5001/api/todo`。
 * 在 Postman 中，設定 [Two pane view] \(雙窗格檢視\)****。
 * 選取 [傳送]。
 
@@ -835,7 +835,7 @@ DTO 可以用來：
 
 * 建置專案。
 * 在 Postman 中，將 HTTP 方法設定為 `POST`。
-* 將 URI 設定為 `https://localhost:<port>/api/TodoItem` 。 例如： `https://localhost:5001/api/TodoItem` 。
+* 將 URI 設定為 `https://localhost:<port>/api/TodoItem` 。 例如 `https://localhost:5001/api/TodoItem`。
 * 選取 [Body]**** \(本文\) 索引標籤。
 * 選取 [原始]**** 選項按鈕。
 * 將類型設定為 **JSON (application/json)**。

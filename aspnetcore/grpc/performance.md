@@ -1,5 +1,5 @@
 ---
-title: 效能最佳做法
+title: ASP.NET Core 的 gRPC 效能最佳做法
 author: jamesnk
 description: 瞭解建立高效能 gRPC 服務的最佳做法。
 monikerRange: '>= aspnetcore-3.0'
@@ -17,14 +17,14 @@ no-loc:
 - Razor
 - SignalR
 uid: grpc/performance
-ms.openlocfilehash: c6f6a9e5c9aa2f01209c8457a848dc6ec1f5ed88
-ms.sourcegitcommit: f09407d128634d200c893bfb1c163e87fa47a161
+ms.openlocfilehash: f9cefa89ec6e533920b33223b34333f6ebe38428
+ms.sourcegitcommit: 4df148cbbfae9ec8d377283ee71394944a284051
 ms.translationtype: MT
 ms.contentlocale: zh-TW
 ms.lasthandoff: 08/26/2020
-ms.locfileid: "88866184"
+ms.locfileid: "88876720"
 ---
-# <a name="performance-best-practices"></a>效能最佳做法
+# <a name="performance-best-practices-in-grpc-for-aspnet-core"></a>ASP.NET Core 的 gRPC 效能最佳做法
 
 依 [James 牛頓](https://twitter.com/jamesnk)
 

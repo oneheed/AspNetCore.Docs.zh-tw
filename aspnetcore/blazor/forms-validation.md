@@ -18,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/forms-validation
-ms.openlocfilehash: 4690c279c24ef23806a6e72aece5f7cd821752bc
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: 6fde5800a6a791c4a5923c13964c34977a59c017
+ms.sourcegitcommit: f09407d128634d200c893bfb1c163e87fa47a161
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88628322"
+ms.lasthandoff: 08/26/2020
+ms.locfileid: "88865298"
 ---
 # <a name="aspnet-core-no-locblazor-forms-and-validation"></a>ASP.NET Core Blazor 表單和驗證
 
@@ -47,7 +47,7 @@ public class ExampleModel
 表單是使用元件所定義的 <xref:Microsoft.AspNetCore.Components.Forms.EditForm> 。 下列表單會示範一般元素、元件和程式 Razor 代碼：
 
 ```razor
-<EditForm Model="@exampleModel" OnValidSubmit="HandleValidSubmit">
+<EditForm Model="@exampleModel" OnValidSubmit="@HandleValidSubmit">
     <DataAnnotationsValidator />
     <ValidationSummary />
 
@@ -78,20 +78,39 @@ public class ExampleModel
 
 ## <a name="built-in-forms-components"></a>內建表單元件
 
-有一組內建的輸入元件可用來接收及驗證使用者輸入。 當輸入變更和提交表單時，會驗證輸入。 下表顯示可用的輸入元件。
+有一組內建元件可用來接收及驗證使用者輸入。 當輸入變更和提交表單時，會驗證輸入。 下表顯示可用的輸入元件。
+
+::: moniker range=">= aspnetcore-5.0"
 
 | 輸入元件 | 呈現為&hellip; |
 | --------------- | ------------------- |
-| <xref:Microsoft.AspNetCore.Components.Forms.InputText> | `<input>` |
-| <xref:Microsoft.AspNetCore.Components.Forms.InputTextArea> | `<textarea>` |
-| <xref:Microsoft.AspNetCore.Components.Forms.InputSelect%601> | `<select>` |
-| <xref:Microsoft.AspNetCore.Components.Forms.InputNumber%601> | `<input type="number">` |
 | <xref:Microsoft.AspNetCore.Components.Forms.InputCheckbox> | `<input type="checkbox">` |
 | <xref:Microsoft.AspNetCore.Components.Forms.InputDate%601> | `<input type="date">` |
+| <xref:Microsoft.AspNetCore.Components.Forms.InputNumber%601> | `<input type="number">` |
+| [`InputRadio`](#radio-buttons) | `<input type="radio">` |
+| [`InputRadioGroup`](#radio-buttons) | `<input type="radio">` |
+| <xref:Microsoft.AspNetCore.Components.Forms.InputSelect%601> | `<select>` |
+| <xref:Microsoft.AspNetCore.Components.Forms.InputText> | `<input>` |
+| <xref:Microsoft.AspNetCore.Components.Forms.InputTextArea> | `<textarea>` |
+
+::: moniker-end
+
+::: moniker range="< aspnetcore-5.0"
+
+| 輸入元件 | 呈現為&hellip; |
+| --------------- | ------------------- |
+| <xref:Microsoft.AspNetCore.Components.Forms.InputCheckbox> | `<input type="checkbox">` |
+| <xref:Microsoft.AspNetCore.Components.Forms.InputDate%601> | `<input type="date">` |
+| <xref:Microsoft.AspNetCore.Components.Forms.InputNumber%601> | `<input type="number">` |
+| <xref:Microsoft.AspNetCore.Components.Forms.InputSelect%601> | `<select>` |
+| <xref:Microsoft.AspNetCore.Components.Forms.InputText> | `<input>` |
+| <xref:Microsoft.AspNetCore.Components.Forms.InputTextArea> | `<textarea>` |
+
+::: moniker-end
 
 所有輸入元件（包括）都 <xref:Microsoft.AspNetCore.Components.Forms.EditForm> 支援任意屬性。 任何不符合元件參數的屬性都會加入至轉譯的 HTML 元素。
 
-輸入元件提供預設行為，以便在編輯和變更其 CSS 類別時進行驗證，以反映欄位狀態。 某些元件包含有用的剖析邏輯。 例如，藉 <xref:Microsoft.AspNetCore.Components.Forms.InputDate%601> 由將剖析 <xref:Microsoft.AspNetCore.Components.Forms.InputNumber%601> 值註冊為驗證錯誤，以正常方式處理這些值。 可以接受 null 值的類型也支援目標欄位的可 null 性 (例如， `int?`) 。
+輸入元件提供在欄位變更時驗證的預設行為，包括更新欄位 CSS 類別以反映欄位狀態。 某些元件包含有用的剖析邏輯。 例如，藉 <xref:Microsoft.AspNetCore.Components.Forms.InputDate%601> 由將無法 <xref:Microsoft.AspNetCore.Components.Forms.InputNumber%601> 分析的值註冊為驗證錯誤，以正常方式處理無法剖析的值。 可以接受 null 值的類型也支援目標欄位的可 null 性 (例如， `int?`) 。
 
 下列 `Starship` 類型使用較早的屬性和資料批註集來定義驗證邏輯 `ExampleModel` ：
 
@@ -134,7 +153,7 @@ public class Starship
 
 <h2>New Ship Entry Form</h2>
 
-<EditForm Model="@starship" OnValidSubmit="HandleValidSubmit">
+<EditForm Model="@starship" OnValidSubmit="@HandleValidSubmit">
     <DataAnnotationsValidator />
     <ValidationSummary />
 
@@ -252,6 +271,39 @@ public class Starship
 > [!NOTE]
 > Framework API 不存在，無法從直接清除驗證訊息 <xref:Microsoft.AspNetCore.Components.Forms.EditContext> 。 因此，我們通常不建議您將驗證訊息新增至 <xref:Microsoft.AspNetCore.Components.Forms.ValidationMessageStore> 表單中的新。 若要管理驗證訊息，請使用 [驗證程式元件](#validator-components) 搭配您的 [商務邏輯驗證程式代碼](#business-logic-validation)，如本文中所述。
 
+::: moniker range=">= aspnetcore-5.0"
+
+## <a name="display-name-support"></a>顯示名稱支援
+
+*本節適用于 .NET 5 候選版 1 (RC1) 或更新版本，將于九月內發行。*
+
+下列內建元件支援使用參數顯示名稱 `DisplayName` ：
+
+* <xref:Microsoft.AspNetCore.Components.Forms.InputDate%601>
+* <xref:Microsoft.AspNetCore.Components.Forms.InputNumber%601>
+* <xref:Microsoft.AspNetCore.Components.Forms.InputSelect%601>
+
+在下列 `InputDate` 元件範例中：
+
+*  () 的顯示名稱 `DisplayName` 設為 `birthday` 。
+* 元件會系結至 `BirthDate` 屬性作為型別 `DateTime` 。
+
+```razor
+<InputDate @bind-Value="@BirthDate" DisplayName="birthday" />
+
+@code {
+    public DateTime BirthDate { get; set; }
+}
+```
+
+如果使用者未提供日期值，驗證錯誤會顯示為：
+
+```
+The birthday must be a date.
+```
+
+::: moniker-end
+
 ## <a name="validator-components"></a>驗證程式元件
 
 驗證程式元件會藉由管理表單的來支援表單驗證 <xref:Microsoft.AspNetCore.Components.Forms.ValidationMessageStore> <xref:Microsoft.AspNetCore.Components.Forms.EditContext> 。
@@ -345,7 +397,7 @@ namespace BlazorSample.Client
 
 <h2>New Ship Entry Form</h2>
 
-<EditForm Model="@starship" OnValidSubmit="HandleValidSubmit">
+<EditForm Model="@starship" OnValidSubmit="@HandleValidSubmit">
     <DataAnnotationsValidator />
     <CustomValidator @ref="customValidator" />
     <ValidationSummary />
@@ -545,7 +597,7 @@ services.AddControllersWithViews()
 
 <h2>New Ship Entry Form</h2>
 
-<EditForm Model="@starship" OnValidSubmit="HandleValidSubmit">
+<EditForm Model="@starship" OnValidSubmit="@HandleValidSubmit">
     <DataAnnotationsValidator />
     <CustomValidator @ref="customValidator" />
     <ValidationSummary />
@@ -694,10 +746,10 @@ services.AddControllersWithViews()
 `Pages/TestForm.razor`:
 
 ```razor
-@page  "/testform"
+@page "/testform"
 @using System.ComponentModel.DataAnnotations;
 
-<EditForm Model="@exampleModel" OnValidSubmit="HandleValidSubmit">
+<EditForm Model="@exampleModel" OnValidSubmit="@HandleValidSubmit">
     <DataAnnotationsValidator />
     <ValidationSummary />
 
@@ -728,6 +780,77 @@ services.AddControllersWithViews()
 ```
 
 ## <a name="radio-buttons"></a>選項按鈕
+
+::: moniker range=">= aspnetcore-5.0"
+
+使用元件搭配 `InputRadio` `InputRadioGroup` 元件來建立選項按鈕群組。 在下列範例中，屬性會加入至 `Starship` 內 [建表單元件](#built-in-forms-components) 區段中所述的模型：
+
+```csharp
+[Required]
+[Range(typeof(Manufacturer), nameof(Manufacturer.SpaceX), 
+    nameof(Manufacturer.VirginGalactic), ErrorMessage = "Pick a manufacturer.")]
+public Manufacturer Manufacturer { get; set; } = Manufacturer.Unknown;
+
+[Required, EnumDataType(typeof(Color))]
+public Color? Color { get; set; } = null;
+
+[Required, EnumDataType(typeof(Engine))]
+public Engine? Engine { get; set; } = null;
+```
+
+將下列 `enums` 程式新增至應用程式。 建立新的檔案以保存， `enums` 或將新增 `enums` 至檔案 `Starship.cs` 。 讓 `enums` `Starship` 模型和 *Starfleet Starship 資料庫* 形式可存取：
+
+```csharp
+public enum Manufacturer { SpaceX, NASA, ULA, Virgin, Unknown }
+public enum Color { ImperialRed, SpacecruiserGreen, StarshipBlue, VoyagerOrange }
+public enum Engine { Ion, Plasma, Fusion, Warp }
+```
+
+更新內[建表單元件](#built-in-forms-components)一節中所述的*Starfleet Starship 資料庫*表單。 新增要產生的元件：
+
+* 出貨製造商的選項按鈕群組。
+* 出貨色彩和引擎的嵌套選項按鈕群組。
+
+```razor
+<p>
+    <InputRadioGroup @bind-Value="starship.Manufacturer">
+        Manufacturer:
+        <br>
+        @foreach (var manufacturer in (Manufacturer[])Enum
+            .GetValues(typeof(Manufacturer)))
+        {
+            <InputRadio Value="manufacturer" />
+            @manufacturer
+            <br>
+        }
+    </InputRadioGroup>
+</p>
+
+<p>
+    Pick one color and one engine:
+    <InputRadioGroup Name="engine" @bind-Value="starship.Engine">
+        <InputRadioGroup Name="color" @bind-Value="starship.Color">
+            <InputRadio Name="color" Value="Color.ImperialRed" />Imperial Red<br>
+            <InputRadio Name="engine" Value="Engine.Ion" />Ion<br>
+            <InputRadio Name="color" Value="Color.SpacecruiserGreen" />
+                Spacecruiser Green<br>
+            <InputRadio Name="engine" Value="Engine.Plasma" />Plasma<br>
+            <InputRadio Name="color" Value="Color.StarshipBlue" />Starship Blue<br>
+            <InputRadio Name="engine" Value="Engine.Fusion" />Fusion<br>
+            <InputRadio Name="color" Value="Color.VoyagerOrange" />
+                Voyager Orange<br>
+            <InputRadio Name="engine" Value="Engine.Warp" />Warp<br>
+        </InputRadioGroup>
+    </InputRadioGroup>
+</p>
+```
+
+> [!NOTE]
+> 如果 `Name` 省略，則 `InputRadio` 會依最新的上階來群組元件。
+
+::: moniker-end
+
+::: moniker range="< aspnetcore-5.0"
 
 當您在表單中使用選項按鈕時，資料系結的處理方式會與其他元素不同，因為選項按鈕會評估為群組。 每個選項按鈕的值都是固定的，但選項按鈕群組的值是選取之選項按鈕的值。 下列範例示範如何執行：
 
@@ -782,7 +905,7 @@ services.AddControllersWithViews()
 
 <h1>Radio Button Group Test</h1>
 
-<EditForm Model="model" OnValidSubmit="HandleValidSubmit">
+<EditForm Model="@model" OnValidSubmit="@HandleValidSubmit">
     <DataAnnotationsValidator />
     <ValidationSummary />
 
@@ -814,6 +937,8 @@ services.AddControllersWithViews()
     }
 }
 ```
+
+::: moniker-end
 
 ## <a name="binding-select-element-options-to-c-object-null-values"></a>`<select>`C # 物件值的繫結項目選項 `null`
 
@@ -920,7 +1045,7 @@ Blazor 提供使用資料批註搭配內建來驗證表單輸入的支援 <xref:
 若要驗證系結模型的整個物件圖形（包括集合型別和複雜型別屬性），請使用 `ObjectGraphDataAnnotationsValidator` *實驗*性封裝所提供的 [`Microsoft.AspNetCore.Components.DataAnnotations.Validation`](https://www.nuget.org/packages/Microsoft.AspNetCore.Components.DataAnnotations.Validation) ：
 
 ```razor
-<EditForm Model="@model" OnValidSubmit="HandleValidSubmit">
+<EditForm Model="@model" OnValidSubmit="@HandleValidSubmit">
     <ObjectGraphDataAnnotationsValidator />
     ...
 </EditForm>
@@ -1021,7 +1146,7 @@ public class ShipDescription
 * <xref:Microsoft.AspNetCore.Components.Forms.ValidationSummary>選取 [提交] 按鈕時，讓元件顯示 (例如，在 `HandleValidSubmit`) 方法中。
 
 ```razor
-<EditForm EditContext="@editContext" OnValidSubmit="HandleValidSubmit">
+<EditForm EditContext="@editContext" OnValidSubmit="@HandleValidSubmit">
     <DataAnnotationsValidator />
     <ValidationSummary style="@displaySummary" />
 

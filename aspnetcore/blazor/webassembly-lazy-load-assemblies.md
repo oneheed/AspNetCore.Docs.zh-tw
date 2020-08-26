@@ -5,7 +5,7 @@ description: 探索如何在 ASP.NET Core 應用程式中延遲載入元件 Blaz
 monikerRange: '>= aspnetcore-5.0'
 ms.author: riande
 ms.custom: mvc
-ms.date: 07/16/2020
+ms.date: 08/25/2020
 no-loc:
 - ASP.NET Core Identity
 - cookie
@@ -18,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/webassembly-lazy-load-assemblies
-ms.openlocfilehash: 31e6c9638d3262d3cb0a5e0fbcf34d24e2d1e91c
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: 46f98080ad40f614f9cb1af2190f263d205c1016
+ms.sourcegitcommit: f09407d128634d200c893bfb1c163e87fa47a161
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88625800"
+ms.lasthandoff: 08/26/2020
+ms.locfileid: "88865164"
 ---
 # <a name="lazy-load-assemblies-in-aspnet-core-no-locblazor-webassembly"></a>ASP.NET Core 中的延遲載入元件 Blazor WebAssembly
 
@@ -47,6 +47,15 @@ Blazor的消極式載入功能可讓您將應用程式元件標記為消極式�
 ```
 
 只有應用程式使用的元件可以延遲載入。 連結器會從已發佈的輸出中去除未使用的元件。
+
+> [!NOTE]
+> 在 .NET 5 候選版 1 (RC1) 或更新版本（將于九月推出），元件名稱將需要 `.dll` 副檔名：
+>
+> ```xml
+> <ItemGroup>
+>  <BlazorWebAssemblyLazyLoad Include="GrantImaharaRobotControls.dll" />
+> </ItemGroup>
+> ```
 
 ## <a name="router-component"></a>`Router` 元件
 
@@ -170,6 +179,15 @@ Blazor的 `Router` 元件會指定哪些元件會 Blazor 搜尋可路由傳送�
 
 > [!NOTE]
 > 如果取消中的解除標記 `NavigationContext` 可能會導致非預期的行為，例如從先前的導覽呈現元件，則不會擲回。
+
+### <a name="onnavigateasync-events-and-renamed-assembly-files"></a>`OnNavigateAsync` 事件和重新命名的元件檔案
+
+資源載入器會依賴檔案中定義的元件名稱 `blazor.boot.json` 。 如果重新 [命名元件](xref:blazor/host-and-deploy/webassembly#change-the-filename-extension-of-dll-files)，則方法中使用的元件名稱 `OnNavigateAsync` 和檔案中的元件名稱 `blazor.boot.json` 將不會同步。
+
+若要修正此情況：
+
+* 檢查應用程式是否正在生產環境中執行，以判斷要使用的元件名稱。
+* 將重新命名的元件名稱儲存在另一個檔案中，並從該檔案讀取，以判斷要在和方法中使用的元件名稱 `LazyLoadAssemblyService` `OnNavigateAsync` 。
 
 ### <a name="complete-example"></a>完整範例
 

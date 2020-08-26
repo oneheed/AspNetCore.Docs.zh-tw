@@ -18,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/progressive-web-app
-ms.openlocfilehash: 230b2a801a76e2d719fba8e2b97fddb0b32a9634
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: 4f184a1264614b16ce98ba5474aacd60f175bd8a
+ms.sourcegitcommit: f09407d128634d200c893bfb1c163e87fa47a161
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88627958"
+ms.lasthandoff: 08/26/2020
+ms.locfileid: "88865215"
 ---
 # <a name="build-progressive-web-applications-with-aspnet-core-no-locblazor-webassembly"></a>使用 ASP.NET Core 建立漸進式 Web 應用程式 Blazor WebAssembly
 
@@ -72,7 +72,7 @@ dotnet new blazorwasm -o MyNewProject --pwa
 
 造訪使用 PWA 範本建立的應用程式時，使用者可以選擇將應用程式安裝到其作業系統的 [開始] 功能表、[停駐] 或 [主畫面] 中。 此選項的呈現方式取決於使用者的瀏覽器。 使用以桌面 Chromium 為基礎的瀏覽器（例如 Edge 或 Chrome）時，[ **新增** ] 按鈕會出現在 URL 列內。 當使用者選取 [ **新增** ] 按鈕之後，他們會收到確認對話方塊：
 
-![Google Chrome 中的 [確認] diaglog 會向使用者顯示 [My：：：非 loc (Blazor) ：：:P wa] 應用程式的 [安裝] 按鈕按鈕。](progressive-web-app/_static/image2.png)
+![Google Chrome 中的確認對話方塊會向使用者顯示 [My：：： no- (Blazor) ：：:P wa] 應用程式的 [安裝] 按鈕。](progressive-web-app/_static/image2.png)
 
 在 iOS 上，訪客可以使用 Safari 的 [ **共用** ] 按鈕和 [ **新增至 Homescreen** ] 選項來安裝 PWA。 在適用于 Android 的 Chrome 上，使用者應選取右上角的 **功能表** 按鈕，然後選取 [ **新增至主畫面**]。
 

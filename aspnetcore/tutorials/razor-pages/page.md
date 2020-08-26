@@ -16,12 +16,12 @@ no-loc:
 - Razor
 - SignalR
 uid: tutorials/razor-pages/page
-ms.openlocfilehash: 9fc44d228a31b8ae6c78dc12988392806dd95823
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: 03febbd71df19cd3524d26e229a8bd8798a874b5
+ms.sourcegitcommit: f09407d128634d200c893bfb1c163e87fa47a161
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88633431"
+ms.lasthandoff: 08/26/2020
+ms.locfileid: "88865117"
 ---
 # <a name="part-3-scaffolded-no-locrazor-pages-in-aspnet-core"></a>第3部分： Razor ASP.NET Core 中的 scaffold 頁面
 
@@ -98,9 +98,8 @@ Razor 可以從 HTML 轉換成 c # 或 Razor 特定標記。 當 `@` 符號後�
 
 *Pages/Shared/_Layout.cshtml* 檔案中使用 `"Title"` 屬性。 下列標記會顯示 *_Layout.cshtml* 檔案的前幾行。
 
-<!-- we need a snapshot copy of layout because we are
-changing in in the next step.
--->
+<!-- We need a snapshot copy of layout because we are changing in the next step. -->
+
 [!code-cshtml[](razor-pages-start/snapshot_sample/RazorPagesMovie/Pages/NU/_Layout.cshtml?highlight=6)]
 
 這一行 `@*Markup removed for brevity.*@` 是 Razor 批註。 不同于 HTML 批註 (`<!-- -->`) ， Razor 批註不會傳送至用戶端。
@@ -284,9 +283,8 @@ Razor 可以從 HTML 轉換成 c # 或 Razor 特定標記。 當 `@` 符號後�
 
 "Title" 屬性是用於 *Pages/Shared/_Layout.cshtml* 檔案。 下列標記會顯示 *_Layout.cshtml* 檔案的前幾行。
 
-<!-- we need a snapshot copy of layout because we are
-changing in in the next step.
--->
+<!-- We need a snapshot copy of layout because we are changing in the next step. -->
+
 [!code-cshtml[](razor-pages-start/snapshot_sample/RazorPagesMovie/Pages/NU/_Layout.cshtml?highlight=6-99)]
 
 這一行 `@*Markup removed for brevity.*@` 是 Razor 批註，不會出現在您的版面配置檔案中。 不同于 HTML 批註 (`<!-- -->`) ， Razor 批註不會傳送至用戶端。

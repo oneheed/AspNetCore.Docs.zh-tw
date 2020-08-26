@@ -16,12 +16,12 @@ no-loc:
 - Razor
 - SignalR
 uid: fundamentals/localization
-ms.openlocfilehash: 254cae2b66773d7bb71aa6313fd08b6f739b7682
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: d5be01c67f455a2706a654574ef9f5e273551e70
+ms.sourcegitcommit: f09407d128634d200c893bfb1c163e87fa47a161
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88634640"
+ms.lasthandoff: 08/26/2020
+ms.locfileid: "88865438"
 ---
 # <a name="globalization-and-localization-in-aspnet-core"></a>ASP.NET Core 全球化和當地語系化
 
@@ -250,7 +250,7 @@ using Microsoft.Extensions.Localization;
 
 ### <a name="querystringrequestcultureprovider"></a>QueryStringRequestCultureProvider
 
-有些應用程式會使用查詢字串來設定[文化特性和 UI 文化特性](https://msdn.microsoft.com/library/system.globalization.cultureinfo.aspx)。 針對使用 cookie 或接受語言標頭方法的應用程式，將查詢字串新增至 URL 可用於偵錯工具代碼和測試程式碼。 系統預設會將 `QueryStringRequestCultureProvider` 登錄為 `RequestCultureProvider` 清單中的第一個當地語系化提供者。 您應傳遞查詢字串參數 `culture` 和 `ui-culture`。 下列範例會設定西班牙文/墨西哥的特定文化特性 (語言和地區)：
+有些應用程式會使用查詢字串來設定 <https://docs.microsoft.com/dotnet/api/system.globalization.cultureinfo?view=netcore-3.1> 。 針對使用 cookie 或接受語言標頭方法的應用程式，將查詢字串新增至 URL 可用於偵錯工具代碼和測試程式碼。 系統預設會將 `QueryStringRequestCultureProvider` 登錄為 `RequestCultureProvider` 清單中的第一個當地語系化提供者。 您應傳遞查詢字串參數 `culture` 和 `ui-culture`。 下列範例會設定西班牙文/墨西哥的特定文化特性 (語言和地區)：
 
    `http://localhost:5000/?culture=es-MX&ui-culture=es-MX`
 
@@ -349,7 +349,7 @@ services.Configure<RequestLocalizationOptions>(options =>
 
 [可當地語系化](/dotnet/standard/globalization-localization/localizability-review)是確認全球化應用程式已準備好進行當地語系化的中繼程序。
 
-文化特性名稱的 [RFC 4646](https://www.ietf.org/rfc/rfc4646.txt) 格式是 `<languagecode2>-<country/regioncode2>`，其中 `<languagecode2>` 是語言代碼，而 `<country/regioncode2>` 是子文化特性代碼。 例如，`es-CL` 是指西班牙文 (智利)，`en-US` 是指英文 (美國)，而 `en-AU` 是指英文 (澳大利亞)。 [RFC 4646](https://www.ietf.org/rfc/rfc4646.txt) 是 ISO 639 (兩個小寫字母，為與某個語言建立關聯的文化特性代碼) 及 ISO 3166 (兩個大寫字母，為與某個國家或地區建立關聯的子文化特性代碼) 的組合。 請參閱 [Language Culture Name](https://msdn.microsoft.com/library/ee825488(v=cs.20).aspx) (語言的文化特性名稱)。
+文化特性名稱的 [RFC 4646](https://www.ietf.org/rfc/rfc4646.txt) 格式是 `<languagecode2>-<country/regioncode2>`，其中 `<languagecode2>` 是語言代碼，而 `<country/regioncode2>` 是子文化特性代碼。 例如，`es-CL` 是指西班牙文 (智利)，`en-US` 是指英文 (美國)，而 `en-AU` 是指英文 (澳大利亞)。 [RFC 4646](https://www.ietf.org/rfc/rfc4646.txt) 是 ISO 639 (兩個小寫字母，為與某個語言建立關聯的文化特性代碼) 及 ISO 3166 (兩個大寫字母，為與某個國家或地區建立關聯的子文化特性代碼) 的組合。 請參閱 <https://docs.microsoft.com/previous-versions/commerce-server/ee825488(v=cs.20)>。
 
 國際化通常縮寫為 "I18N"。 這個縮寫是採用該詞彙的第一個和最後一個字母，以及這兩個字母間的字母數組成，因此 18 代表第一個字母 "I" 及最後 "N" 中間的字母數。 同樣的原則也適用於全球化 (G11N) 與當地語系化 (L10N) 的縮寫。
 
@@ -604,7 +604,7 @@ using Microsoft.Extensions.Localization;
 
 ### <a name="querystringrequestcultureprovider"></a>QueryStringRequestCultureProvider
 
-有些應用程式會使用查詢字串來設定[文化特性和 UI 文化特性](https://msdn.microsoft.com/library/system.globalization.cultureinfo.aspx)。 針對使用 cookie 或接受語言標頭方法的應用程式，將查詢字串新增至 URL 可用於偵錯工具代碼和測試程式碼。 系統預設會將 `QueryStringRequestCultureProvider` 登錄為 `RequestCultureProvider` 清單中的第一個當地語系化提供者。 您應傳遞查詢字串參數 `culture` 和 `ui-culture`。 下列範例會設定西班牙文/墨西哥的特定文化特性 (語言和地區)：
+有些應用程式會使用查詢字串來設定 <https://docs.microsoft.com/dotnet/api/system.globalization.cultureinfo?view=netcore-3.1> 。 針對使用 cookie 或接受語言標頭方法的應用程式，將查詢字串新增至 URL 可用於偵錯工具代碼和測試程式碼。 系統預設會將 `QueryStringRequestCultureProvider` 登錄為 `RequestCultureProvider` 清單中的第一個當地語系化提供者。 您應傳遞查詢字串參數 `culture` 和 `ui-culture`。 下列範例會設定西班牙文/墨西哥的特定文化特性 (語言和地區)：
 
 ```
 http://localhost:5000/?culture=es-MX&ui-culture=es-MX
@@ -705,7 +705,7 @@ services.Configure<RequestLocalizationOptions>(options =>
 
 [可當地語系化](/dotnet/standard/globalization-localization/localizability-review)是確認全球化應用程式已準備好進行當地語系化的中繼程序。
 
-文化特性名稱的 [RFC 4646](https://www.ietf.org/rfc/rfc4646.txt) 格式是 `<languagecode2>-<country/regioncode2>`，其中 `<languagecode2>` 是語言代碼，而 `<country/regioncode2>` 是子文化特性代碼。 例如，`es-CL` 是指西班牙文 (智利)，`en-US` 是指英文 (美國)，而 `en-AU` 是指英文 (澳大利亞)。 [RFC 4646](https://www.ietf.org/rfc/rfc4646.txt) 是 ISO 639 (兩個小寫字母，為與某個語言建立關聯的文化特性代碼) 及 ISO 3166 (兩個大寫字母，為與某個國家或地區建立關聯的子文化特性代碼) 的組合。 請參閱 [Language Culture Name](https://msdn.microsoft.com/library/ee825488(v=cs.20).aspx) (語言的文化特性名稱)。
+文化特性名稱的 [RFC 4646](https://www.ietf.org/rfc/rfc4646.txt) 格式是 `<languagecode2>-<country/regioncode2>`，其中 `<languagecode2>` 是語言代碼，而 `<country/regioncode2>` 是子文化特性代碼。 例如，`es-CL` 是指西班牙文 (智利)，`en-US` 是指英文 (美國)，而 `en-AU` 是指英文 (澳大利亞)。 [RFC 4646](https://www.ietf.org/rfc/rfc4646.txt) 是 ISO 639 (兩個小寫字母，為與某個語言建立關聯的文化特性代碼) 及 ISO 3166 (兩個大寫字母，為與某個國家或地區建立關聯的子文化特性代碼) 的組合。 請參閱 <https://docs.microsoft.com/previous-versions/commerce-server/ee825488(v=cs.20)>。
 
 國際化通常縮寫為 "I18N"。 這個縮寫是採用該詞彙的第一個和最後一個字母，以及這兩個字母間的字母數組成，因此 18 代表第一個字母 "I" 及最後 "N" 中間的字母數。 同樣的原則也適用於全球化 (G11N) 與當地語系化 (L10N) 的縮寫。
 
@@ -959,7 +959,7 @@ using Microsoft.Extensions.Localization;
 
 ### <a name="querystringrequestcultureprovider"></a>QueryStringRequestCultureProvider
 
-有些應用程式會使用查詢字串來設定[文化特性和 UI 文化特性](https://msdn.microsoft.com/library/system.globalization.cultureinfo.aspx)。 針對使用 cookie 或接受語言標頭方法的應用程式，將查詢字串新增至 URL 可用於偵錯工具代碼和測試程式碼。 系統預設會將 `QueryStringRequestCultureProvider` 登錄為 `RequestCultureProvider` 清單中的第一個當地語系化提供者。 您應傳遞查詢字串參數 `culture` 和 `ui-culture`。 下列範例會設定西班牙文/墨西哥的特定文化特性 (語言和地區)：
+有些應用程式會使用查詢字串來設定 <https://docs.microsoft.com/dotnet/api/system.globalization.cultureinfo?view=netcore-3.1> 。 針對使用 cookie 或接受語言標頭方法的應用程式，將查詢字串新增至 URL 可用於偵錯工具代碼和測試程式碼。 系統預設會將 `QueryStringRequestCultureProvider` 登錄為 `RequestCultureProvider` 清單中的第一個當地語系化提供者。 您應傳遞查詢字串參數 `culture` 和 `ui-culture`。 下列範例會設定西班牙文/墨西哥的特定文化特性 (語言和地區)：
 
 ```
 http://localhost:5000/?culture=es-MX&ui-culture=es-MX
@@ -1007,7 +1007,7 @@ c=en-UK|uic=en-US
 
 ### <a name="the-content-language-http-header"></a>Content-type HTTP 標頭
 
-[Content Language](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Language) entity 標頭：
+[Content Language](https://developer.mozilla.org/docs/Web/HTTP/Headers/Content-Language) entity 標頭：
 
 * 用來描述) 適用于物件的語言 (。
 * 可讓使用者根據使用者的慣用語言來區分。
@@ -1083,7 +1083,7 @@ services.Configure<RequestLocalizationOptions>(options =>
 
 [可當地語系化](/dotnet/standard/globalization-localization/localizability-review)是確認全球化應用程式已準備好進行當地語系化的中繼程序。
 
-文化特性名稱的 [RFC 4646](https://www.ietf.org/rfc/rfc4646.txt) 格式是 `<languagecode2>-<country/regioncode2>`，其中 `<languagecode2>` 是語言代碼，而 `<country/regioncode2>` 是子文化特性代碼。 例如，`es-CL` 是指西班牙文 (智利)，`en-US` 是指英文 (美國)，而 `en-AU` 是指英文 (澳大利亞)。 [RFC 4646](https://www.ietf.org/rfc/rfc4646.txt) 是 ISO 639 (兩個小寫字母，為與某個語言建立關聯的文化特性代碼) 及 ISO 3166 (兩個大寫字母，為與某個國家或地區建立關聯的子文化特性代碼) 的組合。 請參閱 [Language Culture Name](https://msdn.microsoft.com/library/ee825488(v=cs.20).aspx) (語言的文化特性名稱)。
+文化特性名稱的 [RFC 4646](https://www.ietf.org/rfc/rfc4646.txt) 格式是 `<languagecode2>-<country/regioncode2>`，其中 `<languagecode2>` 是語言代碼，而 `<country/regioncode2>` 是子文化特性代碼。 例如，`es-CL` 是指西班牙文 (智利)，`en-US` 是指英文 (美國)，而 `en-AU` 是指英文 (澳大利亞)。 [RFC 4646](https://www.ietf.org/rfc/rfc4646.txt) 是 ISO 639 (兩個小寫字母，為與某個語言建立關聯的文化特性代碼) 及 ISO 3166 (兩個大寫字母，為與某個國家或地區建立關聯的子文化特性代碼) 的組合。 請參閱 <https://docs.microsoft.com/previous-versions/commerce-server/ee825488(v=cs.20)>。
 
 國際化通常縮寫為 "I18N"。 這個縮寫是採用該詞彙的第一個和最後一個字母，以及這兩個字母間的字母數組成，因此 18 代表第一個字母 "I" 及最後 "N" 中間的字母數。 同樣的原則也適用於全球化 (G11N) 與當地語系化 (L10N) 的縮寫。
 

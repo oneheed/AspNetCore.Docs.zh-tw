@@ -16,12 +16,12 @@ no-loc:
 - Razor
 - SignalR
 uid: migration/http-modules
-ms.openlocfilehash: 8be09171991964540cd41a1324fb87503591151f
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: 213807634a2a6990e9025de7871295cf97a81faf
+ms.sourcegitcommit: f09407d128634d200c893bfb1c163e87fa47a161
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88632170"
+ms.lasthandoff: 08/26/2020
+ms.locfileid: "88865582"
 ---
 # <a name="migrate-http-handlers-and-modules-to-aspnet-core-middleware"></a>將 HTTP 處理常式和模組遷移至 ASP.NET Core 中介軟體
 
@@ -55,7 +55,7 @@ ms.locfileid: "88632170"
 
 **模組處理傳入要求的順序取決於：**
 
-1. [應用程式生命週期](https://msdn.microsoft.com/library/ms227673.aspx)，這是 ASP.NET： [BeginRequest](/dotnet/api/system.web.httpapplication.beginrequest)、 [AuthenticateRequest](/dotnet/api/system.web.httpapplication.authenticaterequest)等所引發的一連串事件。每個模組都可以建立一個或多個事件的處理常式。
+1. <https://docs.microsoft.com/previous-versions/ms227673(v=vs.140)>，這是 ASP.NET： [BeginRequest](/dotnet/api/system.web.httpapplication.beginrequest)、 [AuthenticateRequest](/dotnet/api/system.web.httpapplication.authenticaterequest)等所引發的一連串事件。每個模組都可以建立一個或多個事件的處理常式。
 
 2. 針對相同事件， *Web.config*中設定它們的順序。
 
@@ -92,7 +92,7 @@ ms.locfileid: "88632170"
 
 **中介軟體和模組會以不同的連續處理：**
 
-* 中介軟體的順序是根據它們插入要求管線的順序，而模組的順序主要是根據 [應用程式生命週期](https://msdn.microsoft.com/library/ms227673.aspx) 事件
+* 中介軟體的順序是根據它們插入要求管線的順序，而模組的順序主要是以事件為基礎 <https://docs.microsoft.com/previous-versions/ms227673(v=vs.140)>
 
 * 回應的中介軟體順序與要求的順序相反，因為要求和回應的模組順序相同
 

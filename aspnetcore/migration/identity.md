@@ -16,12 +16,12 @@ no-loc:
 - Razor
 - SignalR
 uid: migration/identity
-ms.openlocfilehash: 85674d7ed02f189f78da92bffdf927a3ca21357d
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: c8e6a1a8bf9ef06d98db0e7e0a6a0e5ff393e322
+ms.sourcegitcommit: f09407d128634d200c893bfb1c163e87fa47a161
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88629505"
+ms.lasthandoff: 08/26/2020
+ms.locfileid: "88865529"
 ---
 # <a name="migrate-authentication-and-no-locidentity-to-aspnet-core"></a>遷移驗證和 Identity ASP.NET Core
 
@@ -33,7 +33,7 @@ ms.locfileid: "88629505"
 
 在 ASP.NET MVC 中，會使用 Identity *Startup.Auth.cs*和* Identity Config.cs*中的 ASP.NET （位於*App_Start*資料夾）來設定驗證和身分識別功能。 在 ASP.NET Core MVC 中，這些功能是在 *Startup.cs*中設定。
 
-安裝下列 NuGet 套件：
+安裝下列 NuGet 封裝：
 
 * `Microsoft.AspNetCore.Identity.EntityFrameworkCore`
 * `Microsoft.AspNetCore.Authentication.Cookies`

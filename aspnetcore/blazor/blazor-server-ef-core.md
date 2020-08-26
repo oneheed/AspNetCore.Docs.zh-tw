@@ -18,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/blazor-server-ef-core
-ms.openlocfilehash: db817827cc0132c15b82f4cda74e35a7d7807c48
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: b71b742c8a60b4b563649baa181b8c332ff02501
+ms.sourcegitcommit: f09407d128634d200c893bfb1c163e87fa47a161
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88625410"
+ms.lasthandoff: 08/26/2020
+ms.locfileid: "88865199"
 ---
 # <a name="aspnet-core-no-locblazor-server-with-entity-framework-core-efcore"></a>ASP.NET Core Blazor Server 與 Entity Framework Core (EFCore) 
 
@@ -106,6 +106,8 @@ EF Core 依賴 <xref:Microsoft.EntityFrameworkCore.DbContext> 作為 [設定資�
 Factory 會插入元件，並用來建立新的實例。 例如，在 `Pages/Index.razor` 中：
 
 [!code-csharp[](./common/samples/5.x/BlazorServerEFCoreSample/BlazorServerDbContextExample/Pages/Index.razor?name=snippet1)]
+
+> ![注意] `Wrapper` 是元件的 [元件參考](xref:blazor/components/index#capture-references-to-components) `GridWrapper` 。 請參閱 `Index` `Pages/Index.razor` [範例應用程式](https://github.com/dotnet/AspNetCore.Docs/blob/master/aspnetcore/blazor/common/samples/5.x/BlazorServerEFCoreSample/BlazorServerDbContextExample/Pages/Index.razor)中的 () 元件。
 
 ### <a name="scope-to-the-component-lifetime"></a>將範圍設為元件存留期
 
@@ -210,6 +212,8 @@ EF Core 依賴 <xref:Microsoft.EntityFrameworkCore.DbContext> 作為 [設定資�
 Factory 會插入元件，並用來建立新的實例。 例如，在 `Pages/Index.razor` 中：
 
 [!code-csharp[](./common/samples/3.x/BlazorServerEFCoreSample/BlazorServerDbContextExample/Pages/Index.razor?name=snippet1)]
+
+> ![注意] `Wrapper` 是元件的 [元件參考](xref:blazor/components/index#capture-references-to-components) `GridWrapper` 。 請參閱 `Index` `Pages/Index.razor` [範例應用程式](https://github.com/dotnet/AspNetCore.Docs/blob/master/aspnetcore/blazor/common/samples/3.x/BlazorServerEFCoreSample/BlazorServerDbContextExample/Pages/Index.razor)中的 () 元件。
 
 ### <a name="scope-to-the-component-lifetime"></a>將範圍設為元件存留期
 

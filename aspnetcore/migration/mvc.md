@@ -16,12 +16,12 @@ no-loc:
 - Razor
 - SignalR
 uid: migration/mvc
-ms.openlocfilehash: cd1a7ff57d911f96f0adfe4b548fa80ec844886d
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: d615f67fc5cb23499ee7e14b747390a7a1b5a693
+ms.sourcegitcommit: f09407d128634d200c893bfb1c163e87fa47a161
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88632235"
+ms.lasthandoff: 08/26/2020
+ms.locfileid: "88865126"
 ---
 # <a name="migrate-from-aspnet-mvc-to-aspnet-core-mvc"></a>從 ASP.NET MVC 移轉至 ASP.NET Core MVC
 
@@ -38,7 +38,7 @@ ms.locfileid: "88632235"
 
 如需遷移設定和程式 Identity 代碼，請參閱 [將設定遷移至 ASP.NET Core](xref:migration/configuration) 以及 [將驗證遷移至 Identity ASP.NET Core](xref:migration/identity)。
 
-## <a name="prerequisites"></a>Prerequisites
+## <a name="prerequisites"></a>先決條件
 
 [!INCLUDE [prerequisites](../includes/net-core-prereqs-vs-3.1.md)]
 
@@ -48,7 +48,7 @@ ms.locfileid: "88632235"
 
 1. 從 [檔案]**** 功能表選取 [新增]**[專案]** > ****。
 1. 選取 [ **ASP.NET Web 應用程式 (] .NET Framework) ** 然後選取 **[下一步]**。
-1. 將專案命名為 *WebApp1* ，讓命名空間符合下一個步驟中所建立的 ASP.NET Core 專案。 選取 [建立]。
+1. 將專案命名為 *WebApp1* ，讓命名空間符合下一個步驟中所建立的 ASP.NET Core 專案。 選取 [建立]  。
 1. 選取 [ **MVC**]，然後選取 [ **建立**]。
 
 ## <a name="create-the-aspnet-core-project"></a>建立 ASP.NET Core 專案
@@ -59,7 +59,7 @@ ms.locfileid: "88632235"
 1. 從 [檔案]**** 功能表選取 [新增]**[專案]** > ****。
 1. 選取 [ **ASP.NET Web Core Web 應用程式** ]，然後選取 **[下一步]**。
 1. 在 [ **設定您的新專案** ] 對話方塊中，將專案命名為 *WebApp1*。
-1. 將位置設定為與上一個專案不同的目錄，以使用相同的專案名稱。 使用相同的命名空間，可讓您更輕鬆地在兩個專案之間複製程式碼。 選取 [建立]。
+1. 將位置設定為與上一個專案不同的目錄，以使用相同的專案名稱。 使用相同的命名空間，可讓您更輕鬆地在兩個專案之間複製程式碼。 選取 [建立]  。
 1. 在 [ **建立新的 ASP.NET Core Web 應用程式** ] 對話方塊中，確認已選取 [ **.net Core** ] 和 [ **ASP.NET Core 3.1** ]。 選取 **Web 應用程式 (模型-視圖控制器) ** 專案範本，然後選取 [ **建立**]。
 
 ## <a name="configure-the-aspnet-core-site-to-use-mvc"></a>將 ASP.NET Core 網站設定為使用 MVC
@@ -97,7 +97,7 @@ ASP.NET Core apps 必須選擇使用中介軟體的架構功能。 先前範本�
 
 ASP.NET Core 的 *WebApp1* 專案已經包含最基本的範例控制器，並以與 ASP.NET MVC 專案相同的名稱來查看。 因此，這些專案將作為 ASP.NET MVC 控制器的預留位置，以及要從 ASP.NET MVC *WebApp1* 專案中遷移的視圖。
 
-1. 從 ASP.NET MVC 複製方法 `HomeController` ，以取代新的 ASP.NET Core `HomeController` 方法。 不需要變更動作方法的傳回型別。 ASP.NET MVC 內建範本的控制器動作方法傳回類型為 [ActionResult](https://msdn.microsoft.com/library/system.web.mvc.actionresult(v=vs.118).aspx);在 ASP.NET Core MVC 中，動作方法會 `IActionResult` 改為傳回。 `ActionResult` 會實作 `IActionResult`。
+1. 從 ASP.NET MVC 複製方法 `HomeController` ，以取代新的 ASP.NET Core `HomeController` 方法。 不需要變更動作方法的傳回型別。 ASP.NET MVC 內建範本的控制器動作方法傳回型別為 <https://docs.microsoft.com/dotnet/api/system.web.mvc.actionresult?view=aspnet-mvc-5.2> ; 在 ASP.NET CORE mvc 中，動作方法會改為傳回 `IActionResult` 。 `ActionResult` 會實作 `IActionResult`。
 1. 在 ASP.NET Core 專案中，以滑鼠右鍵按一下 *Views/Home* 目錄，然後選取 [ **加入** > **現有專案**]。
 1. 在 [ **加入現有專案** ] 對話方塊中，流覽至 ASP.NET MVC *WebApp1* 專案的 *Views/Home* 目錄。
 1. 選取 [ *About*]、[ *Contact*] 和 [ *Index* ] Razor view 檔案，然後選取 [ **加入**]，取代現有的檔案。
@@ -291,7 +291,7 @@ ASP.NET Core 將未處理的例外狀況轉換成 HTTP 500 錯誤回應。 一�
 
 ## <a name="controllers-and-views"></a>控制器與視圖
 
-* 將 ASP.NET MVC 中的每個方法複製 `HomeController` 到新的 `HomeController` 。 在 ASP.NET MVC 中，內建範本的控制器動作方法傳回型別為 [ActionResult](https://msdn.microsoft.com/library/system.web.mvc.actionresult(v=vs.118).aspx);在 ASP.NET Core MVC 中，動作方法會 `IActionResult` 改為傳回。 `ActionResult` implements `IActionResult` ，因此不需要變更動作方法的傳回型別。
+* 將 ASP.NET MVC 中的每個方法複製 `HomeController` 到新的 `HomeController` 。 在 ASP.NET MVC 中，內建範本的控制器動作方法傳回型別為 <https://docs.microsoft.com/dotnet/api/system.web.mvc.actionresult?view=aspnet-mvc-5.2> ; 在 ASP.NET CORE mvc 中，動作方法會 `IActionResult` 改為傳回。 `ActionResult` implements `IActionResult` ，因此不需要變更動作方法的傳回型別。
 
 * 將 ASP.NET MVC 專案中的 *About*、 *Contact*和 *Index.* cshtml view 檔案複製 Razor 到 ASP.NET Core 專案。
 
@@ -477,7 +477,7 @@ ASP.NET Core 將未處理的例外狀況轉換成 HTTP 500 錯誤回應。 一�
 
 ## <a name="controllers-and-views"></a>控制器與視圖
 
-* 將 ASP.NET MVC 中的每個方法複製 `HomeController` 到新的 `HomeController` 。 在 ASP.NET MVC 中，內建範本的控制器動作方法傳回型別為 [ActionResult](https://msdn.microsoft.com/library/system.web.mvc.actionresult(v=vs.118).aspx);在 ASP.NET Core MVC 中，動作方法會 `IActionResult` 改為傳回。 `ActionResult` implements `IActionResult` ，因此不需要變更動作方法的傳回型別。
+* 將 ASP.NET MVC 中的每個方法複製 `HomeController` 到新的 `HomeController` 。 在 ASP.NET MVC 中，內建範本的控制器動作方法傳回型別為 <https://docs.microsoft.com/dotnet/api/system.web.mvc.actionresult?view=aspnet-mvc-5.2> ; 在 ASP.NET CORE mvc 中，動作方法會 `IActionResult` 改為傳回。 `ActionResult` implements `IActionResult` ，因此不需要變更動作方法的傳回型別。
 
 * 將 ASP.NET MVC 專案中的 *About*、 *Contact*和 *Index.* cshtml view 檔案複製 Razor 到 ASP.NET Core 專案。
 

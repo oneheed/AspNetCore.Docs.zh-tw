@@ -17,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: migration/proper-to-2x/membership-to-core-identity
-ms.openlocfilehash: de9d1e5f6f595269595212fbab60d12dfd5a29e4
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: a9ec02381b156a6599042d8e504a476036246302
+ms.sourcegitcommit: f09407d128634d200c893bfb1c163e87fa47a161
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88633639"
+ms.lasthandoff: 08/26/2020
+ms.locfileid: "88865563"
 ---
 # <a name="migrate-from-aspnet-membership-authentication-to-aspnet-core-20-no-locidentity"></a>從 ASP.NET 成員資格驗證遷移至 ASP.NET Core 2。0 Identity
 
@@ -35,7 +35,7 @@ ms.locfileid: "88633639"
 
 ## <a name="review-of-membership-schema"></a>成員資格架構的評論
 
-在 ASP.NET 2.0 之前，開發人員會負責為其應用程式建立整個驗證和授權程式。 使用 ASP.NET 2.0，引進了成員資格，提供在 ASP.NET apps 中處理安全性的未定案解決方案。 開發人員現在可以使用 [aspnet_regsql.exe](https://msdn.microsoft.com/library/ms229862.aspx) 命令，將架構啟動至 SQL Server 資料庫。 執行此命令之後，會在資料庫中建立下列資料表。
+在 ASP.NET 2.0 之前，開發人員會負責為其應用程式建立整個驗證和授權程式。 使用 ASP.NET 2.0，引進了成員資格，提供在 ASP.NET apps 中處理安全性的未定案解決方案。 開發人員現在可以使用命令，在 SQL Server 資料庫中啟動架構 <https://docs.microsoft.com/previous-versions/ms229862(v=vs.140)> 。 執行此命令之後，會在資料庫中建立下列資料表。
 
   ![成員資格資料表](identity/_static/membership-tables.png)
 

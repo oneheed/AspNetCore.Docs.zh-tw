@@ -5,7 +5,7 @@ description: 瞭解如何 Blazor 使用 ASP.NET Core、內容傳遞網路 (CDN) 
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 08/03/2020
+ms.date: 08/25/2020
 no-loc:
 - ASP.NET Core Identity
 - cookie
@@ -18,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/host-and-deploy/webassembly
-ms.openlocfilehash: 9e3933d8800c00eb135c041bb1c65fbf01d4ef83
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: 6b4c3d55d77af104c969cac0fcbf642f35c7dd7f
+ms.sourcegitcommit: f09407d128634d200c893bfb1c163e87fa47a161
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88628036"
+ms.lasthandoff: 08/26/2020
+ms.locfileid: "88865260"
 ---
 # <a name="host-and-deploy-aspnet-core-no-locblazor-webassembly"></a>裝載和部署 ASP.NET Core Blazor WebAssembly
 
@@ -52,7 +52,7 @@ Blazor 依賴主機提供適當的壓縮檔案。 使用 ASP.NET Core 裝載的�
 * 裝載在不支援靜態壓縮的檔案內容協商的靜態裝載方案（例如 GitHub 頁面）時，請考慮將應用程式設定為提取和解碼 Brotli 壓縮檔案：
 
   * 從 [google/Brotli GitHub 存放庫](https://github.com/google/brotli)取得 JavaScript Brotli 解碼器。 從2020年7月起， `decode.min.js` 系統會在存放庫的[ `js` 資料夾](https://github.com/google/brotli/tree/master/js)中命名並重命名的解碼器檔案。
-  * 更新應用程式以使用此解碼器。 將中結束記號內的標記變更 `<body>` `wwwroot/index.html` 為下列內容：
+  * 更新應用程式以使用此解碼器。 將結束記號內的標記變更 `<body>` `wwwroot/index.html` 為下列內容：
   
     ```html
     <script src="decode.min.js"></script>
@@ -848,5 +848,8 @@ Remove-Item $filepath\bin\Release\$tfm\wwwroot\_framework\blazor.boot.json.gz
   <Exec Command="powershell.exe -command &quot;&amp; { .\ChangeDLLExtensions.ps1 '$(SolutionDir)' '$(TargetFramework)'}&quot;" />
 </Target>
 ```
+
+> [!NOTE]
+> 重新命名和消極式載入相同的元件時，請參閱中的指導方針 <xref:blazor/webassembly-lazy-load-assemblies#onnavigateasync-events-and-renamed-assembly-files> 。
 
 若要提供意見反應，請造訪 [aspnetcore/問題 #5477](https://github.com/dotnet/aspnetcore/issues/5477)。

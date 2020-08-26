@@ -18,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/components/index
-ms.openlocfilehash: 6ee767ee76b622e15a1dc5a7fe2f3e05f03dabd0
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: 26e8239634c3edb99c7606ab2e250c69af4e746f
+ms.sourcegitcommit: f09407d128634d200c893bfb1c163e87fa47a161
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88628491"
+ms.lasthandoff: 08/26/2020
+ms.locfileid: "88865290"
 ---
 # <a name="create-and-use-aspnet-core-no-locrazor-components"></a>建立和使用 ASP.NET Core Razor 元件
 
@@ -249,7 +249,7 @@ namespace BlazorSample
 
 不支援選擇性參數，因此 [`@page`][9] 在上述範例中會套用兩個指示詞。 第一個可讓您在不使用參數的情況下流覽至元件。 第二個指示詞會 [`@page`][9] 接收 `{text}` route 參數，並將值指派給 `Text` 屬性。
 
-*Catch-all*參數語法 (`*` / `**`) ，它會跨多個資料夾界限來捕捉路徑， () 的元件則**不**支援 Razor `.razor` 。
+如需捕捉所有路由參數的詳細資訊 (`{*pageRoute}`) ，以在多個資料夾界限之間取得路徑，請參閱 <xref:blazor/fundamentals/routing#catch-all-route-parameters> 。
 
 ### <a name="component-parameters"></a>元件參數
 

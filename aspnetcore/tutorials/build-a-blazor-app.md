@@ -5,7 +5,7 @@ description: 逐步建立 Blazor 應用程式。
 monikerRange: '>= aspnetcore-3.0'
 ms.author: riande
 ms.custom: mvc
-ms.date: 07/30/2020
+ms.date: 08/22/2020
 no-loc:
 - ASP.NET Core Identity
 - cookie
@@ -18,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: tutorials/build-a-blazor-app
-ms.openlocfilehash: 769b3bda591252c51bec3ffd72a43eaa5929349e
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: 7335b68ad06b9d2b8d7e056cfc1a6d8214119b21
+ms.sourcegitcommit: f09407d128634d200c893bfb1c163e87fa47a161
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88630831"
+ms.lasthandoff: 08/26/2020
+ms.locfileid: "88865418"
 ---
 # <a name="build-a-no-locblazor-todo-list-app"></a>建立 Blazor 待辦事項清單應用程式
 
@@ -39,7 +39,7 @@ ms.locfileid: "88630831"
 
 在本教學課程結尾處，您將會有一個工作 todo 清單應用程式。
 
-## <a name="prerequisites"></a>Prerequisites
+## <a name="prerequisites"></a>先決條件
 
 [!INCLUDE[](~/includes/3.1-SDK.md)]
 
@@ -51,7 +51,7 @@ ms.locfileid: "88630831"
    dotnet new blazorserver -o TodoList
    ```
 
-   上述命令會建立名為的資料夾 `TodoList` 來保存應用程式。 使用下列命令，將目錄變更為 `TodoList` 資料夾：
+   上述命令會建立名為的資料夾 `TodoList` 來保存應用程式。 `TodoList`資料夾是專案的*根資料夾*。 使用下列命令，將目錄變更為 `TodoList` 資料夾：
 
    ```dotnetcli
    cd TodoList
@@ -64,7 +64,7 @@ ms.locfileid: "88630831"
    ```
 
    > [!IMPORTANT]
-   > Razor 元件檔案名需要大寫的第一個字母，因此請確認元件的檔案名 `Todo` 開頭為大寫字母 `T` 。
+   > Razor 元件檔案名需要大寫的第一個字母。 開啟 `Pages` 資料夾，並確認 `Todo` 元件檔案名以大寫字母開頭 `T` 。 檔案名應該是 `Todo.razor` 。
 
 1. `Pages/Todo.razor`提供元件的初始標記：
 
@@ -88,9 +88,9 @@ ms.locfileid: "88630831"
    </li>
    ```
 
-1. 重新建置並執行應用程式。 瀏覽新的 [待辦事項] 頁面，以確認 `Todo` 元件的連結可以運作。
+1. `dotnet run`從資料夾的命令 shell 中執行命令，以建立並執行應用程式 `TodoList` 。 瀏覽新的 [待辦事項] 頁面，以確認 `Todo` 元件的連結可以運作。
 
-1. 將檔案加入至 `TodoItem.cs` 專案的根目錄，以保存代表 todo 專案的類別。 請使用下列 `TodoItem` 類別的 C# 程式碼：
+1. 將檔案加入 `TodoItem.cs` 至專案的根目錄， (`TodoList` 資料夾) 來保存代表 todo 專案的類別。 請使用下列 `TodoItem` 類別的 C# 程式碼：
 
    [!code-csharp[](build-a-blazor-app/samples_snapshot/3.x/TodoItem.cs)]
 
@@ -105,7 +105,7 @@ ms.locfileid: "88630831"
 
    [!code-razor[](build-a-blazor-app/samples_snapshot/3.x/ToDo5.razor?highlight=12-13)]
 
-1. 重新建置並執行應用程式。 當 **`Add todo`** 選取按鈕時，不會發生任何事，因為事件處理常式不會連接到按鈕。
+1. 在命令 shell 中停止執行中的應用程式。 許多命令 shell 都接受鍵盤命令<kbd>Ctrl</kbd> + <kbd>c</kbd>以停止應用程式。 使用命令重建並執行應用程式 `dotnet run` 。 當 **`Add todo`** 選取按鈕時，不會發生任何事，因為事件處理常式不會連接到按鈕。
 
 1. 將 `AddTodo` 方法新增至 `Todo` 元件並註冊，以便使用 `@onclick` 屬性來進行按鈕選取。 當選取按鈕時，就會呼叫 `AddTodo` C# 方法：
 
@@ -123,7 +123,7 @@ ms.locfileid: "88630831"
 
    [!code-razor[](build-a-blazor-app/samples_snapshot/3.x/ToDo8.razor?highlight=19-26)]
 
-1. 重新建置並執行應用程式。 請將一些待辦事項新增至待辦事項清單，以測試新程式碼。
+1. 在命令 shell 中停止執行中的應用程式。 使用命令重建並執行應用程式 `dotnet run` 。 請將一些待辦事項新增至待辦事項清單，以測試新程式碼。
 
 1. 每個待辦事項的標題文字都可設定為可編輯，而核取方塊則可協助使用者記錄已完成的項目。 請為每個待辦事項新增核取方塊輸入，然後將其值繫結至 `IsDone` 屬性。 將 `@todo.Title` 變更為繫結至 `@todo.Title` 的 `<input>` 元素：
 
@@ -139,7 +139,7 @@ ms.locfileid: "88630831"
 
    [!code-razor[](build-a-blazor-app/samples_snapshot/3.x/Todo.razor)]
 
-1. 重新建置並執行應用程式。 請新增待辦事項，以測試新程式碼。
+1. 在命令 shell 中停止執行中的應用程式。 使用命令重建並執行應用程式 `dotnet run` 。 請新增待辦事項，以測試新程式碼。
 
 ## <a name="next-steps"></a>後續步驟
 

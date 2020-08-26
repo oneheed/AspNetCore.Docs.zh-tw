@@ -16,12 +16,12 @@ no-loc:
 - Razor
 - SignalR
 uid: mvc/advanced/custom-model-binding
-ms.openlocfilehash: 4bef68fffbdfaff023f71964a27ead56863e4192
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: 7e1151b04f39f637f889e690bccc97eb6f0c91ea
+ms.sourcegitcommit: f09407d128634d200c893bfb1c163e87fa47a161
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88630428"
+ms.lasthandoff: 08/26/2020
+ms.locfileid: "88865576"
 ---
 # <a name="custom-model-binding-in-aspnet-core"></a>ASP.NET Core 中的自訂模型繫結
 
@@ -127,7 +127,7 @@ public IModelBinder GetBinder(ModelBinderProviderContext context)
 
 [!code-csharp[](custom-model-binding/samples/3.x/CustomModelBindingSample/Startup.cs?name=snippet_ConfigureServices&highlight=5-8)]
 
-評估模型繫結器時，會依序查看提供者集合， 並使用第一個傳回繫結器的提供者。 將您的提供者新增集合結尾可能會導致在有機會呼叫自訂繫結器之前，即呼叫內建模型繫結器。 在此範例中，會將自訂提供者新增集合開頭，以確保其用於 `Author` 動作引數。
+評估模型繫結器時，會依序查看提供者集合， 使用的第一個提供者會傳回符合輸入模型的系結器。 將您的提供者加入至集合結尾可能會導致在您的自訂系結器有機會之前呼叫內建模型系結器。 在此範例中，自訂提供者會新增至集合的開頭，以確保一律用於 `Author` 動作引數。
 
 ### <a name="polymorphic-model-binding"></a>多型模型系結
 

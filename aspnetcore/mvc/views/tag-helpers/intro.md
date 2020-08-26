@@ -17,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: mvc/views/tag-helpers/intro
-ms.openlocfilehash: 42a7231b529dd9f8ecbce4f8116111e1c96c830d
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: 345d20494111b808dac9678637de060169730a53
+ms.sourcegitcommit: f09407d128634d200c893bfb1c163e87fa47a161
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88633093"
+ms.lasthandoff: 08/26/2020
+ms.locfileid: "88865348"
 ---
 # <a name="tag-helpers-in-aspnet-core"></a>ASP.NET Core 中的標籤協助程式
 
@@ -254,9 +254,9 @@ Visual Studio 編輯器可協助您撰寫註冊表單之標籤 (tag) 協助程�
 
 ## <a name="tag-helpers-compared-to-web-server-controls"></a>標籤協助程式與網頁伺服器控制項的比較
 
-* 標籤協助程式未擁有與其建立關聯的項目；它們只會參與轉譯項目和內容。 ASP.NET [Web 伺服器控制項](https://msdn.microsoft.com/library/7698y1f0.aspx)是在頁面上宣告和叫用。
+* 標籤協助程式未擁有與其建立關聯的項目；它們只會參與轉譯項目和內容。 ASP.NET <https://docs.microsoft.com/previous-versions/dotnet/netframework-3.0/7698y1f0(v=vs.85)> 是在頁面上宣告和叫用。
 
-* [網頁伺服器控制項](https://msdn.microsoft.com/library/zsyt68f1.aspx)的非一般生命週期讓開發和偵錯更為困難。
+* <https://docs.microsoft.com/previous-versions/zsyt68f1(v=vs.140)> 具有非一般的生命週期，可讓開發和錯錯變得困難。
 
 * 網頁伺服器控制項可讓您使用用戶端控制項，來新增用戶端文件物件模型 (DOM) 項目的功能。 標籤協助程式沒有 DOM。
 

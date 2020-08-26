@@ -5,7 +5,7 @@ description: 探索如何在 ASP.NET Core 應用程式中延遲載入元件 Blaz
 monikerRange: '>= aspnetcore-5.0'
 ms.author: riande
 ms.custom: mvc
-ms.date: 07/16/2020
+ms.date: 08/25/2020
 no-loc:
 - ASP.NET Core Identity
 - cookie
@@ -18,27 +18,27 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/webassembly-lazy-load-assemblies
-ms.openlocfilehash: 31e6c9638d3262d3cb0a5e0fbcf34d24e2d1e91c
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: 46f98080ad40f614f9cb1af2190f263d205c1016
+ms.sourcegitcommit: f09407d128634d200c893bfb1c163e87fa47a161
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88625800"
+ms.lasthandoff: 08/26/2020
+ms.locfileid: "88865164"
 ---
-# <a name="lazy-load-assemblies-in-aspnet-core-no-locblazor-webassembly"></a><span data-ttu-id="f0f78-103">ASP.NET Core 中的延遲載入元件 Blazor WebAssembly</span><span class="sxs-lookup"><span data-stu-id="f0f78-103">Lazy load assemblies in ASP.NET Core Blazor WebAssembly</span></span>
+# <a name="lazy-load-assemblies-in-aspnet-core-no-locblazor-webassembly"></a><span data-ttu-id="1047e-103">ASP.NET Core 中的延遲載入元件 Blazor WebAssembly</span><span class="sxs-lookup"><span data-stu-id="1047e-103">Lazy load assemblies in ASP.NET Core Blazor WebAssembly</span></span>
 
-<span data-ttu-id="f0f78-104">依 [Safia Abdalla](https://safia.rocks) 和 [Luke Latham](https://github.com/guardrex)</span><span class="sxs-lookup"><span data-stu-id="f0f78-104">By [Safia Abdalla](https://safia.rocks) and [Luke Latham](https://github.com/guardrex)</span></span>
+<span data-ttu-id="1047e-104">依 [Safia Abdalla](https://safia.rocks) 和 [Luke Latham](https://github.com/guardrex)</span><span class="sxs-lookup"><span data-stu-id="1047e-104">By [Safia Abdalla](https://safia.rocks) and [Luke Latham](https://github.com/guardrex)</span></span>
 
-<span data-ttu-id="f0f78-105">Blazor WebAssembly 應用程式啟動效能可透過延後載入部分應用程式元件來改善，直到需要它們為止，這稱為「消極式 *載入*」。</span><span class="sxs-lookup"><span data-stu-id="f0f78-105">Blazor WebAssembly app startup performance can be improved by deferring the loading of some application assemblies until they are required, which is called *lazy loading*.</span></span> <span data-ttu-id="f0f78-106">例如，只有在使用者流覽至該元件時，才可以設定僅用來呈現單一元件的元件。</span><span class="sxs-lookup"><span data-stu-id="f0f78-106">For example, assemblies that are only used to render a single component can be set up to load only if the user navigates to that component.</span></span> <span data-ttu-id="f0f78-107">載入之後，元件會快取用戶端，並可供所有未來的導覽使用。</span><span class="sxs-lookup"><span data-stu-id="f0f78-107">After loading, the assemblies are cached client-side and are available for all future navigations.</span></span>
+<span data-ttu-id="1047e-105">Blazor WebAssembly 應用程式啟動效能可透過延後載入部分應用程式元件來改善，直到需要它們為止，這稱為「消極式 *載入*」。</span><span class="sxs-lookup"><span data-stu-id="1047e-105">Blazor WebAssembly app startup performance can be improved by deferring the loading of some application assemblies until they are required, which is called *lazy loading*.</span></span> <span data-ttu-id="1047e-106">例如，只有在使用者流覽至該元件時，才可以設定僅用來呈現單一元件的元件。</span><span class="sxs-lookup"><span data-stu-id="1047e-106">For example, assemblies that are only used to render a single component can be set up to load only if the user navigates to that component.</span></span> <span data-ttu-id="1047e-107">載入之後，元件會快取用戶端，並可供所有未來的導覽使用。</span><span class="sxs-lookup"><span data-stu-id="1047e-107">After loading, the assemblies are cached client-side and are available for all future navigations.</span></span>
 
-<span data-ttu-id="f0f78-108">Blazor的消極式載入功能可讓您將應用程式元件標記為消極式載入，這會在使用者流覽至特定路由時，于執行時間載入元件。</span><span class="sxs-lookup"><span data-stu-id="f0f78-108">Blazor's lazy loading feature allows you to mark app assemblies for lazy loading, which loads the assemblies during runtime when the user navigates to a particular route.</span></span> <span data-ttu-id="f0f78-109">此功能包含對專案檔的變更，以及對應用程式路由器的變更。</span><span class="sxs-lookup"><span data-stu-id="f0f78-109">The feature consists of changes to the project file and changes to the application's router.</span></span>
+<span data-ttu-id="1047e-108">Blazor的消極式載入功能可讓您將應用程式元件標記為消極式載入，這會在使用者流覽至特定路由時，于執行時間載入元件。</span><span class="sxs-lookup"><span data-stu-id="1047e-108">Blazor's lazy loading feature allows you to mark app assemblies for lazy loading, which loads the assemblies during runtime when the user navigates to a particular route.</span></span> <span data-ttu-id="1047e-109">此功能包含對專案檔的變更，以及對應用程式路由器的變更。</span><span class="sxs-lookup"><span data-stu-id="1047e-109">The feature consists of changes to the project file and changes to the application's router.</span></span>
 
 > [!NOTE]
-> <span data-ttu-id="f0f78-110">元件消極式載入不會讓應用程式受益， Blazor Server 因為元件不會下載到應用程式中的用戶端 Blazor Server 。</span><span class="sxs-lookup"><span data-stu-id="f0f78-110">Assembly lazy loading doesn't benefit Blazor Server apps because assemblies aren't downloaded to the client in a Blazor Server app.</span></span>
+> <span data-ttu-id="1047e-110">元件消極式載入不會讓應用程式受益， Blazor Server 因為元件不會下載到應用程式中的用戶端 Blazor Server 。</span><span class="sxs-lookup"><span data-stu-id="1047e-110">Assembly lazy loading doesn't benefit Blazor Server apps because assemblies aren't downloaded to the client in a Blazor Server app.</span></span>
 
-## <a name="project-file"></a><span data-ttu-id="f0f78-111">專案檔</span><span class="sxs-lookup"><span data-stu-id="f0f78-111">Project file</span></span>
+## <a name="project-file"></a><span data-ttu-id="1047e-111">專案檔</span><span class="sxs-lookup"><span data-stu-id="1047e-111">Project file</span></span>
 
-<span data-ttu-id="f0f78-112">使用專案將應用程式專案檔中的消極式載入的元件標記 (`.csproj`) `BlazorWebAssemblyLazyLoad` 。</span><span class="sxs-lookup"><span data-stu-id="f0f78-112">Mark assemblies for lazy loading in the app's project file (`.csproj`) using the `BlazorWebAssemblyLazyLoad` item.</span></span> <span data-ttu-id="f0f78-113">使用沒有副檔名的元件名稱 `.dll` 。</span><span class="sxs-lookup"><span data-stu-id="f0f78-113">Use the assembly name without the `.dll` extension.</span></span> <span data-ttu-id="f0f78-114">Blazor架構會防止此專案群組所指定的元件在應用程式啟動時載入。</span><span class="sxs-lookup"><span data-stu-id="f0f78-114">The Blazor framework prevents the assemblies specified by this item group from loading at app launch.</span></span> <span data-ttu-id="f0f78-115">下列範例會將大型自訂群組件標示 `GrantImaharaRobotControls.dll` 為延遲載入 () 。</span><span class="sxs-lookup"><span data-stu-id="f0f78-115">The following example marks a large custom assembly (`GrantImaharaRobotControls.dll`) for lazy loading.</span></span> <span data-ttu-id="f0f78-116">如果標示為消極式載入的元件有相依性，則也必須在專案檔中將它們標示為消極式載入。</span><span class="sxs-lookup"><span data-stu-id="f0f78-116">If an assembly that's marked for lazy loading has dependencies, they must also be marked for lazy loading in the project file.</span></span>
+<span data-ttu-id="1047e-112">使用專案將應用程式專案檔中的消極式載入的元件標記 (`.csproj`) `BlazorWebAssemblyLazyLoad` 。</span><span class="sxs-lookup"><span data-stu-id="1047e-112">Mark assemblies for lazy loading in the app's project file (`.csproj`) using the `BlazorWebAssemblyLazyLoad` item.</span></span> <span data-ttu-id="1047e-113">使用沒有副檔名的元件名稱 `.dll` 。</span><span class="sxs-lookup"><span data-stu-id="1047e-113">Use the assembly name without the `.dll` extension.</span></span> <span data-ttu-id="1047e-114">Blazor架構會防止此專案群組所指定的元件在應用程式啟動時載入。</span><span class="sxs-lookup"><span data-stu-id="1047e-114">The Blazor framework prevents the assemblies specified by this item group from loading at app launch.</span></span> <span data-ttu-id="1047e-115">下列範例會將大型自訂群組件標示 `GrantImaharaRobotControls.dll` 為延遲載入 () 。</span><span class="sxs-lookup"><span data-stu-id="1047e-115">The following example marks a large custom assembly (`GrantImaharaRobotControls.dll`) for lazy loading.</span></span> <span data-ttu-id="1047e-116">如果標示為消極式載入的元件有相依性，則也必須在專案檔中將它們標示為消極式載入。</span><span class="sxs-lookup"><span data-stu-id="1047e-116">If an assembly that's marked for lazy loading has dependencies, they must also be marked for lazy loading in the project file.</span></span>
 
 ```xml
 <ItemGroup>
@@ -46,18 +46,27 @@ ms.locfileid: "88625800"
 </ItemGroup>
 ```
 
-<span data-ttu-id="f0f78-117">只有應用程式使用的元件可以延遲載入。</span><span class="sxs-lookup"><span data-stu-id="f0f78-117">Only assemblies that are used by the app can be lazily loaded.</span></span> <span data-ttu-id="f0f78-118">連結器會從已發佈的輸出中去除未使用的元件。</span><span class="sxs-lookup"><span data-stu-id="f0f78-118">The linker strips unused assemblies from published output.</span></span>
+<span data-ttu-id="1047e-117">只有應用程式使用的元件可以延遲載入。</span><span class="sxs-lookup"><span data-stu-id="1047e-117">Only assemblies that are used by the app can be lazily loaded.</span></span> <span data-ttu-id="1047e-118">連結器會從已發佈的輸出中去除未使用的元件。</span><span class="sxs-lookup"><span data-stu-id="1047e-118">The linker strips unused assemblies from published output.</span></span>
 
-## <a name="router-component"></a><span data-ttu-id="f0f78-119">`Router` 元件</span><span class="sxs-lookup"><span data-stu-id="f0f78-119">`Router` component</span></span>
+> [!NOTE]
+> <span data-ttu-id="1047e-119">在 .NET 5 候選版 1 (RC1) 或更新版本（將于九月推出），元件名稱將需要 `.dll` 副檔名：</span><span class="sxs-lookup"><span data-stu-id="1047e-119">In .NET 5 Release Candidate 1 (RC1) or later, which will be released in mid-September, the assembly name will require the `.dll` extension:</span></span>
+>
+> ```xml
+> <ItemGroup>
+>  <BlazorWebAssemblyLazyLoad Include="GrantImaharaRobotControls.dll" />
+> </ItemGroup>
+> ```
 
-<span data-ttu-id="f0f78-120">Blazor的 `Router` 元件會指定哪些元件會 Blazor 搜尋可路由傳送的元件。</span><span class="sxs-lookup"><span data-stu-id="f0f78-120">Blazor's `Router` component designates which assemblies Blazor searches for routable components.</span></span> <span data-ttu-id="f0f78-121">`Router`元件也負責轉譯使用者導覽之路由的元件。</span><span class="sxs-lookup"><span data-stu-id="f0f78-121">The `Router` component is also responsible for rendering the component for the route where the user navigates.</span></span> <span data-ttu-id="f0f78-122">`Router`元件支援 `OnNavigateAsync` 可與消極式載入搭配使用的功能。</span><span class="sxs-lookup"><span data-stu-id="f0f78-122">The `Router` component supports an `OnNavigateAsync` feature that can be used in conjunction with lazy loading.</span></span>
+## <a name="router-component"></a><span data-ttu-id="1047e-120">`Router` 元件</span><span class="sxs-lookup"><span data-stu-id="1047e-120">`Router` component</span></span>
 
-<span data-ttu-id="f0f78-123">在應用程式的 `Router` 元件中 (`App.razor`) ：</span><span class="sxs-lookup"><span data-stu-id="f0f78-123">In the app's `Router` component (`App.razor`):</span></span>
+<span data-ttu-id="1047e-121">Blazor的 `Router` 元件會指定哪些元件會 Blazor 搜尋可路由傳送的元件。</span><span class="sxs-lookup"><span data-stu-id="1047e-121">Blazor's `Router` component designates which assemblies Blazor searches for routable components.</span></span> <span data-ttu-id="1047e-122">`Router`元件也負責轉譯使用者導覽之路由的元件。</span><span class="sxs-lookup"><span data-stu-id="1047e-122">The `Router` component is also responsible for rendering the component for the route where the user navigates.</span></span> <span data-ttu-id="1047e-123">`Router`元件支援 `OnNavigateAsync` 可與消極式載入搭配使用的功能。</span><span class="sxs-lookup"><span data-stu-id="1047e-123">The `Router` component supports an `OnNavigateAsync` feature that can be used in conjunction with lazy loading.</span></span>
 
-* <span data-ttu-id="f0f78-124">新增 `OnNavigateAsync` 回呼。</span><span class="sxs-lookup"><span data-stu-id="f0f78-124">Add an `OnNavigateAsync` callback.</span></span> <span data-ttu-id="f0f78-125">`OnNavigateAsync`當使用者執行下列動作時，就會叫用處理程式：</span><span class="sxs-lookup"><span data-stu-id="f0f78-125">The `OnNavigateAsync` handler is invoked when the user:</span></span>
-  * <span data-ttu-id="f0f78-126">第一次造訪路由，方法是直接從瀏覽器流覽至。</span><span class="sxs-lookup"><span data-stu-id="f0f78-126">Visits a route for the first time by navigating to it directly from their browser.</span></span>
-  * <span data-ttu-id="f0f78-127">使用連結或調用來流覽至新的路由 <xref:Microsoft.AspNetCore.Components.NavigationManager.NavigateTo%2A?displayProperty=nameWithType> 。</span><span class="sxs-lookup"><span data-stu-id="f0f78-127">Navigates to a new route using a link or a <xref:Microsoft.AspNetCore.Components.NavigationManager.NavigateTo%2A?displayProperty=nameWithType> invocation.</span></span>
-* <span data-ttu-id="f0f78-128">如果延遲載入的元件包含可路由傳送的元件，請將[清單](xref:System.Collections.Generic.List%601) \<<xref:System.Reflection.Assembly>> (例如，將) 命名為 `lazyLoadedAssemblies` 元件。</span><span class="sxs-lookup"><span data-stu-id="f0f78-128">If lazy-loaded assemblies contain routable components, add a [List](xref:System.Collections.Generic.List%601)\<<xref:System.Reflection.Assembly>> (for example, named `lazyLoadedAssemblies`) to the component.</span></span> <span data-ttu-id="f0f78-129">如果元件包含可路由傳送的元件，這些元件就會傳回 <xref:Microsoft.AspNetCore.Components.Routing.Router.AdditionalAssemblies> 集合。</span><span class="sxs-lookup"><span data-stu-id="f0f78-129">The assemblies are passed back to the <xref:Microsoft.AspNetCore.Components.Routing.Router.AdditionalAssemblies> collection in case the assemblies contain routable components.</span></span> <span data-ttu-id="f0f78-130">架構會在元件中搜尋路由，並在找到任何新的路由時更新路由集合。</span><span class="sxs-lookup"><span data-stu-id="f0f78-130">The framework searches the assemblies for routes and updates the route collection if any new routes are found.</span></span>
+<span data-ttu-id="1047e-124">在應用程式的 `Router` 元件中 (`App.razor`) ：</span><span class="sxs-lookup"><span data-stu-id="1047e-124">In the app's `Router` component (`App.razor`):</span></span>
+
+* <span data-ttu-id="1047e-125">新增 `OnNavigateAsync` 回呼。</span><span class="sxs-lookup"><span data-stu-id="1047e-125">Add an `OnNavigateAsync` callback.</span></span> <span data-ttu-id="1047e-126">`OnNavigateAsync`當使用者執行下列動作時，就會叫用處理程式：</span><span class="sxs-lookup"><span data-stu-id="1047e-126">The `OnNavigateAsync` handler is invoked when the user:</span></span>
+  * <span data-ttu-id="1047e-127">第一次造訪路由，方法是直接從瀏覽器流覽至。</span><span class="sxs-lookup"><span data-stu-id="1047e-127">Visits a route for the first time by navigating to it directly from their browser.</span></span>
+  * <span data-ttu-id="1047e-128">使用連結或調用來流覽至新的路由 <xref:Microsoft.AspNetCore.Components.NavigationManager.NavigateTo%2A?displayProperty=nameWithType> 。</span><span class="sxs-lookup"><span data-stu-id="1047e-128">Navigates to a new route using a link or a <xref:Microsoft.AspNetCore.Components.NavigationManager.NavigateTo%2A?displayProperty=nameWithType> invocation.</span></span>
+* <span data-ttu-id="1047e-129">如果延遲載入的元件包含可路由傳送的元件，請將[清單](xref:System.Collections.Generic.List%601) \<<xref:System.Reflection.Assembly>> (例如，將) 命名為 `lazyLoadedAssemblies` 元件。</span><span class="sxs-lookup"><span data-stu-id="1047e-129">If lazy-loaded assemblies contain routable components, add a [List](xref:System.Collections.Generic.List%601)\<<xref:System.Reflection.Assembly>> (for example, named `lazyLoadedAssemblies`) to the component.</span></span> <span data-ttu-id="1047e-130">如果元件包含可路由傳送的元件，這些元件就會傳回 <xref:Microsoft.AspNetCore.Components.Routing.Router.AdditionalAssemblies> 集合。</span><span class="sxs-lookup"><span data-stu-id="1047e-130">The assemblies are passed back to the <xref:Microsoft.AspNetCore.Components.Routing.Router.AdditionalAssemblies> collection in case the assemblies contain routable components.</span></span> <span data-ttu-id="1047e-131">架構會在元件中搜尋路由，並在找到任何新的路由時更新路由集合。</span><span class="sxs-lookup"><span data-stu-id="1047e-131">The framework searches the assemblies for routes and updates the route collection if any new routes are found.</span></span>
 
 ```razor
 @using System.Reflection
@@ -76,21 +85,21 @@ ms.locfileid: "88625800"
 }
 ```
 
-<span data-ttu-id="f0f78-131">如果 `OnNavigateAsync` 回呼擲回未處理的例外狀況，則會叫用[ Blazor 錯誤 UI](xref:blazor/fundamentals/handle-errors#detailed-errors-during-development) 。</span><span class="sxs-lookup"><span data-stu-id="f0f78-131">If the `OnNavigateAsync` callback throws an unhandled exception, the [Blazor error UI](xref:blazor/fundamentals/handle-errors#detailed-errors-during-development) is invoked.</span></span>
+<span data-ttu-id="1047e-132">如果 `OnNavigateAsync` 回呼擲回未處理的例外狀況，則會叫用[ Blazor 錯誤 UI](xref:blazor/fundamentals/handle-errors#detailed-errors-during-development) 。</span><span class="sxs-lookup"><span data-stu-id="1047e-132">If the `OnNavigateAsync` callback throws an unhandled exception, the [Blazor error UI](xref:blazor/fundamentals/handle-errors#detailed-errors-during-development) is invoked.</span></span>
 
-### <a name="assembly-load-logic-in-onnavigateasync"></a><span data-ttu-id="f0f78-132">中的元件載入邏輯 `OnNavigateAsync`</span><span class="sxs-lookup"><span data-stu-id="f0f78-132">Assembly load logic in `OnNavigateAsync`</span></span>
+### <a name="assembly-load-logic-in-onnavigateasync"></a><span data-ttu-id="1047e-133">中的元件載入邏輯 `OnNavigateAsync`</span><span class="sxs-lookup"><span data-stu-id="1047e-133">Assembly load logic in `OnNavigateAsync`</span></span>
 
-<span data-ttu-id="f0f78-133">`OnNavigateAsync` 具有 `NavigationContext` 提供目前非同步導覽事件相關資訊的參數，包括目標路徑 (`Path`) ，以及 () 的解除標記 `CancellationToken` ：</span><span class="sxs-lookup"><span data-stu-id="f0f78-133">`OnNavigateAsync` has a `NavigationContext` parameter that provides information about the current asynchronous navigation event, including the target path (`Path`) and the cancellation token (`CancellationToken`):</span></span>
+<span data-ttu-id="1047e-134">`OnNavigateAsync` 具有 `NavigationContext` 提供目前非同步導覽事件相關資訊的參數，包括目標路徑 (`Path`) ，以及 () 的解除標記 `CancellationToken` ：</span><span class="sxs-lookup"><span data-stu-id="1047e-134">`OnNavigateAsync` has a `NavigationContext` parameter that provides information about the current asynchronous navigation event, including the target path (`Path`) and the cancellation token (`CancellationToken`):</span></span>
 
-* <span data-ttu-id="f0f78-134">`Path`屬性是相對於應用程式基底路徑的使用者目的地路徑，例如 `/robot` 。</span><span class="sxs-lookup"><span data-stu-id="f0f78-134">The `Path` property is the user's destination path relative to the app's base path, such as `/robot`.</span></span>
-* <span data-ttu-id="f0f78-135">`CancellationToken`可以用來觀察非同步工作的取消。</span><span class="sxs-lookup"><span data-stu-id="f0f78-135">The `CancellationToken` can be used to observe the cancellation of the asynchronous task.</span></span> <span data-ttu-id="f0f78-136">`OnNavigateAsync` 當使用者流覽至另一個頁面時，會自動取消目前正在執行的流覽工作。</span><span class="sxs-lookup"><span data-stu-id="f0f78-136">`OnNavigateAsync` automatically cancels the currently running navigation task when the user navigates to a different page.</span></span>
+* <span data-ttu-id="1047e-135">`Path`屬性是相對於應用程式基底路徑的使用者目的地路徑，例如 `/robot` 。</span><span class="sxs-lookup"><span data-stu-id="1047e-135">The `Path` property is the user's destination path relative to the app's base path, such as `/robot`.</span></span>
+* <span data-ttu-id="1047e-136">`CancellationToken`可以用來觀察非同步工作的取消。</span><span class="sxs-lookup"><span data-stu-id="1047e-136">The `CancellationToken` can be used to observe the cancellation of the asynchronous task.</span></span> <span data-ttu-id="1047e-137">`OnNavigateAsync` 當使用者流覽至另一個頁面時，會自動取消目前正在執行的流覽工作。</span><span class="sxs-lookup"><span data-stu-id="1047e-137">`OnNavigateAsync` automatically cancels the currently running navigation task when the user navigates to a different page.</span></span>
 
-<span data-ttu-id="f0f78-137">在內部 `OnNavigateAsync` ，會執行邏輯來判斷要載入的元件。</span><span class="sxs-lookup"><span data-stu-id="f0f78-137">Inside `OnNavigateAsync`, implement logic to determine the assemblies to load.</span></span> <span data-ttu-id="f0f78-138">這些選項包括：</span><span class="sxs-lookup"><span data-stu-id="f0f78-138">Options include:</span></span>
+<span data-ttu-id="1047e-138">在內部 `OnNavigateAsync` ，會執行邏輯來判斷要載入的元件。</span><span class="sxs-lookup"><span data-stu-id="1047e-138">Inside `OnNavigateAsync`, implement logic to determine the assemblies to load.</span></span> <span data-ttu-id="1047e-139">這些選項包括：</span><span class="sxs-lookup"><span data-stu-id="1047e-139">Options include:</span></span>
 
-* <span data-ttu-id="f0f78-139">方法內的條件式檢查 `OnNavigateAsync` 。</span><span class="sxs-lookup"><span data-stu-id="f0f78-139">Conditional checks inside the `OnNavigateAsync` method.</span></span>
-* <span data-ttu-id="f0f78-140">對應至元件名稱之路由的查閱資料表，可插入元件或在區塊內執行 [`@code`](xref:mvc/views/razor#code) 。</span><span class="sxs-lookup"><span data-stu-id="f0f78-140">A lookup table that maps routes to assembly names, either injected into the component or implemented within the [`@code`](xref:mvc/views/razor#code) block.</span></span>
+* <span data-ttu-id="1047e-140">方法內的條件式檢查 `OnNavigateAsync` 。</span><span class="sxs-lookup"><span data-stu-id="1047e-140">Conditional checks inside the `OnNavigateAsync` method.</span></span>
+* <span data-ttu-id="1047e-141">對應至元件名稱之路由的查閱資料表，可插入元件或在區塊內執行 [`@code`](xref:mvc/views/razor#code) 。</span><span class="sxs-lookup"><span data-stu-id="1047e-141">A lookup table that maps routes to assembly names, either injected into the component or implemented within the [`@code`](xref:mvc/views/razor#code) block.</span></span>
 
-<span data-ttu-id="f0f78-141">`LazyAssemblyLoader` 是用於載入元件的架構提供的單一服務。</span><span class="sxs-lookup"><span data-stu-id="f0f78-141">`LazyAssemblyLoader` is a framework-provided singleton service for loading assemblies.</span></span> <span data-ttu-id="f0f78-142">插入 `LazyAssemblyLoader` `Router` 元件：</span><span class="sxs-lookup"><span data-stu-id="f0f78-142">Inject `LazyAssemblyLoader` into the `Router` component:</span></span>
+<span data-ttu-id="1047e-142">`LazyAssemblyLoader` 是用於載入元件的架構提供的單一服務。</span><span class="sxs-lookup"><span data-stu-id="1047e-142">`LazyAssemblyLoader` is a framework-provided singleton service for loading assemblies.</span></span> <span data-ttu-id="1047e-143">插入 `LazyAssemblyLoader` `Router` 元件：</span><span class="sxs-lookup"><span data-stu-id="1047e-143">Inject `LazyAssemblyLoader` into the `Router` component:</span></span>
 
 ```razor
 ...
@@ -100,20 +109,20 @@ ms.locfileid: "88625800"
 ...
 ```
 
-<span data-ttu-id="f0f78-143">`LazyAssemblyLoader`提供 `LoadAssembliesAsync` 方法：</span><span class="sxs-lookup"><span data-stu-id="f0f78-143">The `LazyAssemblyLoader` provides the `LoadAssembliesAsync` method that:</span></span>
+<span data-ttu-id="1047e-144">`LazyAssemblyLoader`提供 `LoadAssembliesAsync` 方法：</span><span class="sxs-lookup"><span data-stu-id="1047e-144">The `LazyAssemblyLoader` provides the `LoadAssembliesAsync` method that:</span></span>
 
-* <span data-ttu-id="f0f78-144">使用 JS interop 透過網路呼叫來提取元件。</span><span class="sxs-lookup"><span data-stu-id="f0f78-144">Uses JS interop to fetch assemblies via a network call.</span></span>
-* <span data-ttu-id="f0f78-145">將元件載入至在瀏覽器中于 WebAssembly 上執行的執行時間。</span><span class="sxs-lookup"><span data-stu-id="f0f78-145">Loads assemblies into the runtime executing on WebAssembly in the browser.</span></span>
+* <span data-ttu-id="1047e-145">使用 JS interop 透過網路呼叫來提取元件。</span><span class="sxs-lookup"><span data-stu-id="1047e-145">Uses JS interop to fetch assemblies via a network call.</span></span>
+* <span data-ttu-id="1047e-146">將元件載入至在瀏覽器中于 WebAssembly 上執行的執行時間。</span><span class="sxs-lookup"><span data-stu-id="1047e-146">Loads assemblies into the runtime executing on WebAssembly in the browser.</span></span>
 
 > [!NOTE]
-> <span data-ttu-id="f0f78-146">架構的消極式載入執行支援在伺服器上進行可呈現。</span><span class="sxs-lookup"><span data-stu-id="f0f78-146">The framework's lazy loading implementation supports prerendering on the server.</span></span> <span data-ttu-id="f0f78-147">在預進行期間，會假設載入所有元件，包括標示為消極式載入的元件。</span><span class="sxs-lookup"><span data-stu-id="f0f78-147">During prerendering, all assemblies, including those marked for lazy loading, are assumed to be loaded.</span></span>
+> <span data-ttu-id="1047e-147">架構的消極式載入執行支援在伺服器上進行可呈現。</span><span class="sxs-lookup"><span data-stu-id="1047e-147">The framework's lazy loading implementation supports prerendering on the server.</span></span> <span data-ttu-id="1047e-148">在預進行期間，會假設載入所有元件，包括標示為消極式載入的元件。</span><span class="sxs-lookup"><span data-stu-id="1047e-148">During prerendering, all assemblies, including those marked for lazy loading, are assumed to be loaded.</span></span>
 
-### <a name="user-interaction-with-navigating-content"></a><span data-ttu-id="f0f78-148">使用者與內容的互動 `<Navigating>`</span><span class="sxs-lookup"><span data-stu-id="f0f78-148">User interaction with `<Navigating>` content</span></span>
+### <a name="user-interaction-with-navigating-content"></a><span data-ttu-id="1047e-149">使用者與內容的互動 `<Navigating>`</span><span class="sxs-lookup"><span data-stu-id="1047e-149">User interaction with `<Navigating>` content</span></span>
 
-<span data-ttu-id="f0f78-149">載入元件（可能需要幾秒鐘的時間）時， `Router` 元件可能會向使用者表示頁面轉換發生：</span><span class="sxs-lookup"><span data-stu-id="f0f78-149">While loading assemblies, which can take several seconds, the `Router` component can indicate to the user that a page transition is occurring:</span></span>
+<span data-ttu-id="1047e-150">載入元件（可能需要幾秒鐘的時間）時， `Router` 元件可能會向使用者表示頁面轉換發生：</span><span class="sxs-lookup"><span data-stu-id="1047e-150">While loading assemblies, which can take several seconds, the `Router` component can indicate to the user that a page transition is occurring:</span></span>
 
-* <span data-ttu-id="f0f78-150">新增命名空間的指示詞 [`@using`](xref:mvc/views/razor#using) <xref:Microsoft.AspNetCore.Components.Routing?displayProperty=fullName> 。</span><span class="sxs-lookup"><span data-stu-id="f0f78-150">Add an [`@using`](xref:mvc/views/razor#using) directive for the <xref:Microsoft.AspNetCore.Components.Routing?displayProperty=fullName> namespace.</span></span>
-* <span data-ttu-id="f0f78-151">將 `<Navigating>` 標記新增至元件，並在頁面轉換事件期間顯示標記。</span><span class="sxs-lookup"><span data-stu-id="f0f78-151">Add a `<Navigating>` tag to the component with markup to display during page transition events.</span></span>
+* <span data-ttu-id="1047e-151">新增命名空間的指示詞 [`@using`](xref:mvc/views/razor#using) <xref:Microsoft.AspNetCore.Components.Routing?displayProperty=fullName> 。</span><span class="sxs-lookup"><span data-stu-id="1047e-151">Add an [`@using`](xref:mvc/views/razor#using) directive for the <xref:Microsoft.AspNetCore.Components.Routing?displayProperty=fullName> namespace.</span></span>
+* <span data-ttu-id="1047e-152">將 `<Navigating>` 標記新增至元件，並在頁面轉換事件期間顯示標記。</span><span class="sxs-lookup"><span data-stu-id="1047e-152">Add a `<Navigating>` tag to the component with markup to display during page transition events.</span></span>
 
 ```razor
 ...
@@ -131,11 +140,11 @@ ms.locfileid: "88625800"
 ...
 ```
 
-### <a name="handle-cancellations-in-onnavigateasync"></a><span data-ttu-id="f0f78-152">處理取消 `OnNavigateAsync`</span><span class="sxs-lookup"><span data-stu-id="f0f78-152">Handle cancellations in `OnNavigateAsync`</span></span>
+### <a name="handle-cancellations-in-onnavigateasync"></a><span data-ttu-id="1047e-153">處理取消 `OnNavigateAsync`</span><span class="sxs-lookup"><span data-stu-id="1047e-153">Handle cancellations in `OnNavigateAsync`</span></span>
 
-<span data-ttu-id="f0f78-153">`NavigationContext`傳遞至回呼的物件 `OnNavigateAsync` 包含新的 `CancellationToken` 流覽事件發生時所設定的。</span><span class="sxs-lookup"><span data-stu-id="f0f78-153">The `NavigationContext` object passed to the `OnNavigateAsync` callback contains a `CancellationToken` that's set when a new navigation event occurs.</span></span> <span data-ttu-id="f0f78-154">`OnNavigateAsync`回呼必須在設定此解除標記時擲回，以避免 `OnNavigateAsync` 在過期的導覽上繼續執行回呼。</span><span class="sxs-lookup"><span data-stu-id="f0f78-154">The `OnNavigateAsync` callback must throw when this cancellation token is set to avoid continuing to run the `OnNavigateAsync` callback on a outdated navigation.</span></span>
+<span data-ttu-id="1047e-154">`NavigationContext`傳遞至回呼的物件 `OnNavigateAsync` 包含新的 `CancellationToken` 流覽事件發生時所設定的。</span><span class="sxs-lookup"><span data-stu-id="1047e-154">The `NavigationContext` object passed to the `OnNavigateAsync` callback contains a `CancellationToken` that's set when a new navigation event occurs.</span></span> <span data-ttu-id="1047e-155">`OnNavigateAsync`回呼必須在設定此解除標記時擲回，以避免 `OnNavigateAsync` 在過期的導覽上繼續執行回呼。</span><span class="sxs-lookup"><span data-stu-id="1047e-155">The `OnNavigateAsync` callback must throw when this cancellation token is set to avoid continuing to run the `OnNavigateAsync` callback on a outdated navigation.</span></span>
 
-<span data-ttu-id="f0f78-155">如果使用者流覽至路由 A，然後立即路由 B，則應用程式不應該繼續執行 `OnNavigateAsync` 路由 a 的回呼：</span><span class="sxs-lookup"><span data-stu-id="f0f78-155">If a user navigates to Route A and then immediately to Route B, the app shouldn't continue running the `OnNavigateAsync` callback for Route A:</span></span>
+<span data-ttu-id="1047e-156">如果使用者流覽至路由 A，然後立即路由 B，則應用程式不應該繼續執行 `OnNavigateAsync` 路由 a 的回呼：</span><span class="sxs-lookup"><span data-stu-id="1047e-156">If a user navigates to Route A and then immediately to Route B, the app shouldn't continue running the `OnNavigateAsync` callback for Route A:</span></span>
 
 ```razor
 @inject HttpClient Http
@@ -169,11 +178,20 @@ ms.locfileid: "88625800"
 ```
 
 > [!NOTE]
-> <span data-ttu-id="f0f78-156">如果取消中的解除標記 `NavigationContext` 可能會導致非預期的行為，例如從先前的導覽呈現元件，則不會擲回。</span><span class="sxs-lookup"><span data-stu-id="f0f78-156">Not throwing if the cancellation token in `NavigationContext` is canceled can result in unintended behavior, such as rendering a component from a previous navigation.</span></span>
+> <span data-ttu-id="1047e-157">如果取消中的解除標記 `NavigationContext` 可能會導致非預期的行為，例如從先前的導覽呈現元件，則不會擲回。</span><span class="sxs-lookup"><span data-stu-id="1047e-157">Not throwing if the cancellation token in `NavigationContext` is canceled can result in unintended behavior, such as rendering a component from a previous navigation.</span></span>
 
-### <a name="complete-example"></a><span data-ttu-id="f0f78-157">完整範例</span><span class="sxs-lookup"><span data-stu-id="f0f78-157">Complete example</span></span>
+### <a name="onnavigateasync-events-and-renamed-assembly-files"></a><span data-ttu-id="1047e-158">`OnNavigateAsync` 事件和重新命名的元件檔案</span><span class="sxs-lookup"><span data-stu-id="1047e-158">`OnNavigateAsync` events and renamed assembly files</span></span>
 
-<span data-ttu-id="f0f78-158">下列完整 `Router` 元件示範在 `GrantImaharaRobotControls.dll` 使用者流覽至時載入元件 `/robot` 。</span><span class="sxs-lookup"><span data-stu-id="f0f78-158">The following complete `Router` component demonstrates loading the `GrantImaharaRobotControls.dll` assembly when the user navigates to `/robot`.</span></span> <span data-ttu-id="f0f78-159">在頁面轉換期間，會向使用者顯示樣式的訊息。</span><span class="sxs-lookup"><span data-stu-id="f0f78-159">During page transitions, a styled message is displayed to the user.</span></span>
+<span data-ttu-id="1047e-159">資源載入器會依賴檔案中定義的元件名稱 `blazor.boot.json` 。</span><span class="sxs-lookup"><span data-stu-id="1047e-159">The resource loader relies on the assembly names that are defined in the `blazor.boot.json` file.</span></span> <span data-ttu-id="1047e-160">如果重新 [命名元件](xref:blazor/host-and-deploy/webassembly#change-the-filename-extension-of-dll-files)，則方法中使用的元件名稱 `OnNavigateAsync` 和檔案中的元件名稱 `blazor.boot.json` 將不會同步。</span><span class="sxs-lookup"><span data-stu-id="1047e-160">If [assemblies are renamed](xref:blazor/host-and-deploy/webassembly#change-the-filename-extension-of-dll-files), the assembly names used in `OnNavigateAsync` methods and the assembly names in the `blazor.boot.json` file are out of sync.</span></span>
+
+<span data-ttu-id="1047e-161">若要修正此情況：</span><span class="sxs-lookup"><span data-stu-id="1047e-161">To rectify this:</span></span>
+
+* <span data-ttu-id="1047e-162">檢查應用程式是否正在生產環境中執行，以判斷要使用的元件名稱。</span><span class="sxs-lookup"><span data-stu-id="1047e-162">Check to see if the app is running in the Production environment when determining which assembly names to use.</span></span>
+* <span data-ttu-id="1047e-163">將重新命名的元件名稱儲存在另一個檔案中，並從該檔案讀取，以判斷要在和方法中使用的元件名稱 `LazyLoadAssemblyService` `OnNavigateAsync` 。</span><span class="sxs-lookup"><span data-stu-id="1047e-163">Store the renamed assembly names in a separate file and read from that file to determine what assembly name to use in the `LazyLoadAssemblyService` and `OnNavigateAsync` methods.</span></span>
+
+### <a name="complete-example"></a><span data-ttu-id="1047e-164">完整範例</span><span class="sxs-lookup"><span data-stu-id="1047e-164">Complete example</span></span>
+
+<span data-ttu-id="1047e-165">下列完整 `Router` 元件示範在 `GrantImaharaRobotControls.dll` 使用者流覽至時載入元件 `/robot` 。</span><span class="sxs-lookup"><span data-stu-id="1047e-165">The following complete `Router` component demonstrates loading the `GrantImaharaRobotControls.dll` assembly when the user navigates to `/robot`.</span></span> <span data-ttu-id="1047e-166">在頁面轉換期間，會向使用者顯示樣式的訊息。</span><span class="sxs-lookup"><span data-stu-id="1047e-166">During page transitions, a styled message is displayed to the user.</span></span>
 
 ```razor
 @using System.Reflection
@@ -220,11 +238,11 @@ ms.locfileid: "88625800"
 }
 ```
 
-## <a name="troubleshoot"></a><span data-ttu-id="f0f78-160">疑難排解</span><span class="sxs-lookup"><span data-stu-id="f0f78-160">Troubleshoot</span></span>
+## <a name="troubleshoot"></a><span data-ttu-id="1047e-167">疑難排解</span><span class="sxs-lookup"><span data-stu-id="1047e-167">Troubleshoot</span></span>
 
-* <span data-ttu-id="f0f78-161">如果發生非預期的轉譯 (例如，先前導覽中的元件會轉譯) ，確認程式碼會在已設定解除標記時擲回。</span><span class="sxs-lookup"><span data-stu-id="f0f78-161">If unexpected rendering occurs (for example, a component from a previous navigation is rendered), confirm that the code throws if the cancellation token is set.</span></span>
-* <span data-ttu-id="f0f78-162">如果元件仍在應用程式啟動時載入，請確認元件在專案檔中已標示為延遲載入。</span><span class="sxs-lookup"><span data-stu-id="f0f78-162">If assemblies are still loaded at application start, check that the assembly is marked as lazy loaded in the project file.</span></span>
+* <span data-ttu-id="1047e-168">如果發生非預期的轉譯 (例如，先前導覽中的元件會轉譯) ，確認程式碼會在已設定解除標記時擲回。</span><span class="sxs-lookup"><span data-stu-id="1047e-168">If unexpected rendering occurs (for example, a component from a previous navigation is rendered), confirm that the code throws if the cancellation token is set.</span></span>
+* <span data-ttu-id="1047e-169">如果元件仍在應用程式啟動時載入，請確認元件在專案檔中已標示為延遲載入。</span><span class="sxs-lookup"><span data-stu-id="1047e-169">If assemblies are still loaded at application start, check that the assembly is marked as lazy loaded in the project file.</span></span>
 
-## <a name="additional-resources"></a><span data-ttu-id="f0f78-163">其他資源</span><span class="sxs-lookup"><span data-stu-id="f0f78-163">Additional resources</span></span>
+## <a name="additional-resources"></a><span data-ttu-id="1047e-170">其他資源</span><span class="sxs-lookup"><span data-stu-id="1047e-170">Additional resources</span></span>
 
 * <xref:blazor/webassembly-performance-best-practices>

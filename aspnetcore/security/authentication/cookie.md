@@ -17,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: security/authentication/cookie
-ms.openlocfilehash: 04d2f0d289e2c9ec13aeb880df47240bec19d3ec
-ms.sourcegitcommit: 4df148cbbfae9ec8d377283ee71394944a284051
+ms.openlocfilehash: 24ba49828db08fdd67723c81ac0c8d9981ab3404
+ms.sourcegitcommit: 47c9a59ff8a359baa6bca2637d3af87ddca1245b
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 08/26/2020
-ms.locfileid: "88876759"
+ms.lasthandoff: 08/27/2020
+ms.locfileid: "88945411"
 ---
 # <a name="use-no-loccookie-authentication-without-no-locaspnet-core-identity"></a>使用 cookie 驗證但不使用 ASP.NET Core Identity
 
@@ -117,7 +117,7 @@ ASP.NET Core 的 [資料保護](xref:security/data-protection/using-data-protect
 
 如果 `CookieAuthenticationDefaults.AuthenticationScheme` 未使用 (或 " Cookie s" ) 作為配置 (例如 "Contoso Cookie " ) ，請提供設定驗證提供者時所使用的配置。 否則，會使用預設配置。
 
-伺服器沒有用戶端瀏覽器的控制權。 如果使用者關閉瀏覽器或索引標籤，伺服器就無法登出使用者。 若要在瀏覽器關閉時執行登出使用者，您必須使用 JavaScript 偵測到此情況。 搜尋「如何偵測瀏覽器視窗索引標籤關閉事件？」。
+當瀏覽器關閉時，它會自動刪除以會話為基礎 cookie 的 (非持續性的 cookie s) ，但在關閉個別索引標籤時，不 cookie 會清除任何。 伺服器不會收到索引標籤或瀏覽器關閉事件的通知。
 
 ## <a name="react-to-back-end-changes"></a>回應後端變更
 

@@ -17,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: grpc/versioning
-ms.openlocfilehash: 079cca8a7d47897827c314b82136e9eb10b7a516
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: 0d8c5d953c9d703788a1686bbc800248c46efa48
+ms.sourcegitcommit: 47c9a59ff8a359baa6bca2637d3af87ddca1245b
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88633951"
+ms.lasthandoff: 08/27/2020
+ms.locfileid: "88945398"
 ---
 # <a name="versioning-grpc-services"></a>Versioning gRPC 服務
 
@@ -117,3 +117,7 @@ app.UseEndpoints(endpoints =>
 [!code-csharp[](versioning/sample/GreeterServiceV1.cs?highlight=10,19)]
 
 使用不同封裝名稱產生的服務和訊息是 **不同的 .net 類型**。 將商務邏輯移至中央位置需要將訊息對應至一般類型。
+
+## <a name="additional-resources"></a>其他資源
+
+* <xref:grpc/protobuf>

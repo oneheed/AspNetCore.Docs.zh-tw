@@ -16,12 +16,12 @@ no-loc:
 - Razor
 - SignalR
 uid: security/authentication/accconfirm
-ms.openlocfilehash: 57607390e7d5e58df9f27437faecd57504ad64df
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: d6ea37ceb83ffbaa94187e0c541c79428594e4b4
+ms.sourcegitcommit: 2039e60eb7b482da8298f82dcd5eda27cf747f32
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88635368"
+ms.lasthandoff: 08/26/2020
+ms.locfileid: "88906445"
 ---
 # <a name="account-confirmation-and-password-recovery-in-aspnet-core"></a>ASP.NET Core 中的帳戶確認和密碼復原
 
@@ -37,7 +37,7 @@ ms.locfileid: "88635368"
 
 ::: moniker range=">= aspnetcore-3.0"
 
-## <a name="prerequisites"></a>Prerequisites
+## <a name="prerequisites"></a>必要條件
 
 [.NET Core 3.0 SDK 或更新版本](https://dotnet.microsoft.com/download/dotnet-core/3.0)
 
@@ -160,7 +160,13 @@ https://github.com/dotnet/aspnetcore/blob/master/src/Identity/UI/src/Areas/Ident
 * 輸入您用來註冊帳戶的電子郵件。
 * 系統會傳送具有重設密碼連結的電子郵件。 檢查您的電子郵件，然後按一下連結來重設您的密碼。 成功重設您的密碼之後，您可以使用您的電子郵件和新密碼登入。
 
-## <a name="change-email-and-activity-timeout"></a>變更電子郵件和活動超時
+<a name="resend"></a>
+
+## <a name="resend-email-confirmation"></a>重新傳送電子郵件確認
+
+在 ASP.NET Core 5.0 和更新版本中，選取 [**登**入] 頁面上的 [**重新傳送電子郵件確認**] 連結。
+
+### <a name="change-email-and-activity-timeout"></a>變更電子郵件和活動超時
 
 預設的非活動超時時間為14天。 下列程式碼會將閒置時間設定為5天：
 
@@ -185,10 +191,6 @@ https://github.com/dotnet/aspnetcore/blob/master/src/Identity/UI/src/Areas/Ident
 將自訂提供者新增至服務容器：
 
 [!code-csharp[](accconfirm/sample/WebPWrecover30/StartupEmail.cs?name=snippet1&highlight=10-16)]
-
-### <a name="resend-email-confirmation"></a>重新傳送電子郵件確認
-
-請參閱[這個 GitHub 問題](https://github.com/dotnet/AspNetCore/issues/5410)。
 
 <a name="debug"></a>
 
@@ -234,7 +236,7 @@ https://github.com/dotnet/aspnetcore/blob/master/src/Identity/UI/src/Areas/Ident
 
 ::: moniker range="< aspnetcore-3.0"
 
-## <a name="prerequisites"></a>Prerequisites
+## <a name="prerequisites"></a>必要條件
 
 [.NET Core 2.2 SDK 或更新版本](https://dotnet.microsoft.com/download/dotnet-core)
 

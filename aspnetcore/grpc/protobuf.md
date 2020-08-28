@@ -17,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: grpc/protobuf
-ms.openlocfilehash: b8149b79c1e7b204e52cc8595d1193b623bb0008
-ms.sourcegitcommit: 47c9a59ff8a359baa6bca2637d3af87ddca1245b
+ms.openlocfilehash: f898907e5bae7c67cfca72c70dc8497f36de2622
+ms.sourcegitcommit: 111b4e451da2e275fb074cde5d8a84b26a81937d
 ms.translationtype: MT
 ms.contentlocale: zh-TW
 ms.lasthandoff: 08/27/2020
-ms.locfileid: "88945668"
+ms.locfileid: "89040849"
 ---
 # <a name="create-protobuf-messages-for-net-apps"></a>建立 .NET 應用程式的 Protobuf 訊息
 
@@ -338,7 +338,7 @@ message ResponseMessage {
 使用時 `oneof` ，產生的 c # 程式碼會包含列舉，以指定已設定的欄位。 您可以測試列舉，以找出已設定的欄位。 未設定的欄位會傳回 `null` 或預設值，而不是擲回例外狀況。
 
 ```csharp
-var response = client.GetPersonAsync(new RequestMessage());
+var response = await client.GetPersonAsync(new RequestMessage());
 
 switch (response.ResultCase)
 {

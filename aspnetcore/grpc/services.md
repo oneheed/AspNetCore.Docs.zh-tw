@@ -17,14 +17,16 @@ no-loc:
 - Razor
 - SignalR
 uid: grpc/services
-ms.openlocfilehash: fde589b2de9d908db26a2557c5f57c715625aadc
-ms.sourcegitcommit: 47c9a59ff8a359baa6bca2637d3af87ddca1245b
+ms.openlocfilehash: 878792120d69bea9ca6f620a87a7e04da2ec1815
+ms.sourcegitcommit: 111b4e451da2e275fb074cde5d8a84b26a81937d
 ms.translationtype: MT
 ms.contentlocale: zh-TW
 ms.lasthandoff: 08/27/2020
-ms.locfileid: "88945662"
+ms.locfileid: "89040836"
 ---
 # <a name="create-grpc-services-and-methods"></a>建立 gRPC 服務和方法
+
+依 [James 牛頓](https://twitter.com/jamesnk)
 
 本檔說明如何以 c # 建立 gRPC 服務和方法。 主題包括：
 

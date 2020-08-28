@@ -1,5 +1,5 @@
 ---
-title: ASP.NET Core 的 gRPC 效能最佳做法
+title: 使用 gRPC 的效能最佳作法
 author: jamesnk
 description: 瞭解建立高效能 gRPC 服務的最佳做法。
 monikerRange: '>= aspnetcore-3.0'
@@ -17,24 +17,24 @@ no-loc:
 - Razor
 - SignalR
 uid: grpc/performance
-ms.openlocfilehash: f9cefa89ec6e533920b33223b34333f6ebe38428
-ms.sourcegitcommit: 4df148cbbfae9ec8d377283ee71394944a284051
+ms.openlocfilehash: 7d4d5732e6edb0d0a156fdcec5f59cc09a69d7de
+ms.sourcegitcommit: 111b4e451da2e275fb074cde5d8a84b26a81937d
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 08/26/2020
-ms.locfileid: "88876720"
+ms.lasthandoff: 08/27/2020
+ms.locfileid: "89040875"
 ---
-# <a name="performance-best-practices-in-grpc-for-aspnet-core"></a>ASP.NET Core 的 gRPC 效能最佳做法
+# <a name="performance-best-practices-with-grpc"></a>使用 gRPC 的效能最佳作法
 
 依 [James 牛頓](https://twitter.com/jamesnk)
 
 gRPC 是專為高效能服務所設計。 本檔說明如何從 gRPC 獲得最佳效能。
 
-## <a name="reuse-channel"></a>重複使用頻道
+## <a name="reuse-grpc-channels"></a>重複使用 gRPC 通道
 
 進行 gRPC 呼叫時，應重複使用 gRPC 通道。 重複使用通道可讓您透過現有的 HTTP/2 連接來對呼叫進行多工處理。
 
-如果為每個 gRPC 呼叫建立新的通道，則完成所需的時間可能會大幅增加。 每次呼叫都需要用戶端與伺服器之間的多個網路來回行程，才能建立 HTTP/2 連線：
+如果為每個 gRPC 呼叫建立新的通道，則完成所需的時間可能會大幅增加。 每次呼叫都需要用戶端與伺服器之間的多個網路往返，才能建立新的 HTTP/2 連線：
 
 1. 開啟通訊端
 2. 正在建立 TCP 連接
@@ -86,7 +86,45 @@ var channel = GrpcChannel.ForAddress("https://localhost", new GrpcChannelOptions
 > * 嘗試寫入連接的資料流程之間的執行緒爭用。
 > * 連接封包遺失會導致 TCP 層封鎖所有呼叫。
 
+## <a name="load-balancing"></a>負載平衡
+
+某些負載平衡器不會有效地與 gRPC 搭配運作。 L4 (傳輸) 負載平衡器會在連接層級運作，方法是將 TCP 連線分散到各個端點。 這種方法很適合用來載入使用 HTTP/1.1 進行的平衡 API 呼叫。 使用 HTTP/1.1 進行的並行呼叫會在不同的連線上傳送，讓呼叫能夠跨端點進行負載平衡。
+
+因為 L4 負載平衡器會在連接層級運作，所以它們無法與 gRPC 搭配運作。 gRPC 使用 HTTP/2，它會在單一 TCP 連接上將分離信號多個呼叫。 所有透過該連接的 gRPC 呼叫都會移至一個端點。
+
+有兩個選項可有效 gRPC 負載平衡：
+
+1. 用戶端負載平衡
+2. L7 (應用程式) proxy 負載平衡
+
+> [!NOTE]
+> 只有 gRPC 呼叫可以在端點之間進行負載平衡。 一旦建立串流 gRPC 呼叫，透過資料流程傳送的所有訊息都會移至一個端點。
+
+### <a name="client-side-load-balancing"></a>用戶端負載平衡
+
+使用用戶端負載平衡時，用戶端會知道端點。 針對每個 gRPC 呼叫，它會選取不同的端點來傳送呼叫。 當延遲很重要時，用戶端負載平衡是不錯的選擇。 用戶端與服務之間沒有 proxy，所以會直接將呼叫傳送至服務。 用戶端負載平衡的缺點在於，每個用戶端都必須追蹤應使用的可用端點。
+
+對應用戶端負載平衡是一種技術，可將負載平衡狀態儲存在中央位置。 用戶端會定期查詢中央位置，以取得負載平衡決策時要使用的資訊。
+
+`Grpc.Net.Client` 目前不支援用戶端負載平衡。 如果 .NET 需要用戶端負載平衡，則 Grpc 是不錯的選擇[。](https://www.nuget.org/packages/Grpc.Core)
+
+### <a name="proxy-load-balancing"></a>Proxy 負載平衡
+
+L7 (應用程式) proxy 的運作層級高於 L4 (傳輸) proxy。 L7 proxy 瞭解 HTTP/2，而且能夠將 gRPC 的呼叫分散至多個端點的一個 HTTP/2 連接上的 proxy。 使用 proxy 比用戶端負載平衡更為簡單，但可能會增加額外的延遲給 gRPC 呼叫。
+
+有許多 L7 proxy 可用。 部分選項如下：
+
+1. [Envoy](https://www.envoyproxy.io/) proxy-常用的開放原始碼 proxy。
+2. 適用于 Kubernetes 的[Linkerd](https://linkerd.io/)服務網格。
+2. [YARP：反向 Proxy](https://microsoft.github.io/reverse-proxy/) -以 .Net 撰寫的預覽開放原始碼 Proxy。
+
 ::: moniker range=">= aspnetcore-5.0"
+
+## <a name="inter-process-communication"></a>處理序間通訊
+
+用戶端與服務之間的 gRPC 呼叫通常會透過 TCP 通訊端來傳送。 TCP 很適合用來在網路上進行通訊，但是當用戶端與服務位於相同電腦上時， [ (IPC) 的處理序間通訊 ](https://wikipedia.org/wiki/Inter-process_communication) 會更有效率。
+
+請考慮使用類似 Unix 網域通訊端或具名管道的傳輸，在同一部電腦上的進程之間進行 gRPC 呼叫。 如需詳細資訊，請參閱<xref:grpc/interprocess>。
 
 ## <a name="keep-alive-pings"></a>保持作用中的 ping
 

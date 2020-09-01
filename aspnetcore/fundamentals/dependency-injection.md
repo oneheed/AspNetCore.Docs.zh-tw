@@ -16,12 +16,12 @@ no-loc:
 - Razor
 - SignalR
 uid: fundamentals/dependency-injection
-ms.openlocfilehash: 98c43eda002abc96fe3c2f031c429ccaa70cee3e
-ms.sourcegitcommit: 7258e94cf60c16e5b6883138e5e68516751ead0f
+ms.openlocfilehash: 2d002e075f9d57654589b540e522307c363d9660
+ms.sourcegitcommit: 4cce99cbd44372fd4575e8da8c0f4345949f4d9a
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 08/29/2020
-ms.locfileid: "89102779"
+ms.lasthandoff: 08/31/2020
+ms.locfileid: "89153541"
 ---
 # <a name="dependency-injection-in-aspnet-core"></a>.NET Core 中的相依性插入
 
@@ -517,7 +517,7 @@ Service1.Dispose
   [!code-csharp[](dependency-injection/samples/3.x/AntiPattern3/Startup.cs?name=snippet)]
 
 * 容器會捕獲可處置的暫時性服務以供處置。 如果從最上層容器解析，這可能會導致記憶體流失。
-* 啟用範圍驗證，以確定應用程式沒有可取得 singleton 的範圍服務。 如需詳細資訊，請參閱[範圍驗證](#scope-validation)。
+* 啟用範圍驗證，以確定應用程式沒有可捕獲範圍服務的 singleton。 如需詳細資訊，請參閱[範圍驗證](#scope-validation)。
 
 就像所有的建議集，您可能會遇到需要忽略建議的情況。 例外狀況很罕見，大多是架構本身內的特殊案例。
 

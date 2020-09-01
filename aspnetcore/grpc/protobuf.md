@@ -17,18 +17,18 @@ no-loc:
 - Razor
 - SignalR
 uid: grpc/protobuf
-ms.openlocfilehash: f898907e5bae7c67cfca72c70dc8497f36de2622
-ms.sourcegitcommit: 111b4e451da2e275fb074cde5d8a84b26a81937d
+ms.openlocfilehash: 60af1add9ae2f8b2b94bc19b65667d7af91fb122
+ms.sourcegitcommit: 7258e94cf60c16e5b6883138e5e68516751ead0f
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 08/27/2020
-ms.locfileid: "89040849"
+ms.lasthandoff: 08/29/2020
+ms.locfileid: "89102662"
 ---
 # <a name="create-protobuf-messages-for-net-apps"></a>建立 .NET 應用程式的 Protobuf 訊息
 
 依 [James 牛頓](https://twitter.com/jamesnk) 和 [Mark Rendle](https://twitter.com/markrendle)
 
-gRPC 會使用 [Protobuf](https://developers.google.com/protocol-buffers) 作為其介面定義語言 (IDL) 。 Protobuf IDL 是一種語言中性格式，用於指定 gRPC 服務所傳送和接收的訊息。 Protobuf 訊息是在 *proto* 檔案中定義。 本檔說明 Protobuf 概念如何對應至 .NET。
+gRPC 會使用 [Protobuf](https://developers.google.com/protocol-buffers) 作為其介面定義語言 (IDL) 。 Protobuf IDL 是一種語言中性格式，用於指定 gRPC 服務所傳送和接收的訊息。 Protobuf 訊息是在檔案中定義 `.proto` 。 本檔說明 Protobuf 概念如何對應至 .NET。
 
 ## <a name="protobuf-messages"></a>Protobuf 訊息
 
@@ -50,7 +50,7 @@ message Person {
 
 除了名稱之外，訊息定義中的每個欄位都有唯一的數位。 當訊息序列化為 Protobuf 時，會使用欄位號碼來識別欄位。 將小數位序列化比序列化整個功能變數名稱更快。 因為欄位編號可識別欄位，所以變更時請務必小心。 如需變更 Protobuf 訊息的詳細資訊，請參閱 <xref:grpc/versioning> 。
 
-建立應用程式時，Protobuf 工具會從 *proto* 檔案產生 .net 類型。 此 `Person` 訊息會產生 .net 類別：
+建立應用程式時，Protobuf 工具會從檔案產生 .NET 類型 `.proto` 。 此 `Person` 訊息會產生 .net 類別：
 
 ```csharp
 public class Person
@@ -87,15 +87,15 @@ Protobuf 支援一系列原生純量實數值型別。 下表列出它們都具�
 
 ### <a name="dates-and-times"></a>日期和時間
 
-原生純量類型不提供日期和時間值，相當於。NET 的 <xref:System.DateTimeOffset> 、 <xref:System.DateTime> 和 <xref:System.TimeSpan> 。 您可以使用一些 Protobuf 的「已知類型」延伸模組來指定這些類型。 這些擴充功能可在支援的平臺上，為複雜的欄位類型提供程式碼產生與執行時間支援。
+原生純量類型不提供日期和時間值，相當於。NET 的 <xref:System.DateTimeOffset> 、 <xref:System.DateTime> 和 <xref:System.TimeSpan> 。 您可以使用一些 Protobuf 的 *已知類型* 延伸來指定這些類型。 這些擴充功能可在支援的平臺上，為複雜的欄位類型提供程式碼產生與執行時間支援。
 
 下表顯示日期和時間類型：
 
-| .NET 類型 | Protobuf 知名型別 |
-| ------- | ------------------------ |
+| .NET 類型        | Protobuf 知名型別    |
+| ---------------- | --------------------------- |
 | `DateTimeOffset` | `google.protobuf.Timestamp` |
-| `DateTime` | `google.protobuf.Timestamp` |
-| `TimeSpan` | `google.protobuf.Duration` |
+| `DateTime`       | `google.protobuf.Timestamp` |
+| `TimeSpan`       | `google.protobuf.Duration`  |
 
 ```protobuf  
 syntax = "proto3"
@@ -132,7 +132,7 @@ var duration = meeting.Duration?.ToTimeSpan();
 
 C # 的 Protobuf 程式碼產生會使用原生類型，例如 `int` for `int32` 。 因此，一律會包含這些值，而且不能是 `null` 。
 
-對於需要明確的值（ `null` 例如 `int?` 在 c # 程式碼中使用），Protobuf 的「已知型別」會包含編譯成可為 Null 的 c # 型別的包裝函式。 若要使用這些檔案，請將其匯入 `wrappers.proto` 您 `.proto` 的檔案，如下列程式碼所示：
+對於需要明確的值（ `null` 例如 `int?` 在 c # 程式碼中使用），Protobuf 的已知型別包含編譯成可為 Null 的 c # 型別的包裝函式。 若要使用這些檔案，請將其匯入 `wrappers.proto` 您 `.proto` 的檔案，如下列程式碼所示：
 
 ```protobuf  
 syntax = "proto3"
@@ -284,11 +284,17 @@ person.Attributes.Add(attributes);
 
 ## <a name="unstructured-and-conditional-messages"></a>非結構化和條件式訊息
 
-Protobuf 是合約優先的訊息格式，而且必須在建立應用程式時，于 *proto* 檔案中指定應用程式訊息。 針對先進的案例，Protobuf 提供語言功能和知名的型別，以支援條件式和未知的訊息。
+Protobuf 是合約優先的訊息格式。 建立應用程式時，必須在檔案中指定應用程式的訊息，包括其欄位和類型 `.proto` 。 Protobuf 的合約優先設計很適合用來強制訊息內容，但可以限制不需要嚴格合約的案例：
+
+* 具有未知承載的訊息。 例如，具有可包含任何訊息之欄位的訊息。
+* 條件式訊息。 例如，從 gRPC 服務傳回的訊息可能是成功結果或錯誤結果。
+* 動態值。 例如，包含包含非結構化值之欄位的訊息，類似于 JSON。
+
+Protobuf 提供語言功能和類型來支援這些案例。
 
 ### <a name="any"></a>任意
 
-`Any`型別可讓您使用訊息做為內嵌類型，而不需要其*proto*定義。 若要使用 `Any` 類型，請匯入 `any.proto` 。
+`Any`型別可讓您使用訊息做為內嵌類型，而不需要其 `.proto` 定義。 若要使用 `Any` 類型，請匯入 `any.proto` 。
 
 ```protobuf
 import "google/protobuf/any.proto";
@@ -355,7 +361,7 @@ switch (response.ResultCase)
 
 ### <a name="value"></a>值
 
-`Value`型別代表動態類型的值。 它可以是 `null` 、數位、字串、布林值、值的字典 (`Struct`) ，或 () 的值清單 `ValueList` 。 `Value` 是使用先前所討論之功能的知名型別 `oneof` 。 若要使用 `Value` 類型，請匯入 `struct.proto` 。
+`Value`型別代表動態類型的值。 它可以是 `null` 、數位、字串、布林值、值的字典 (`Struct`) ，或 () 的值清單 `ValueList` 。 `Value` 是使用先前所討論之功能的 Protobuf 知名型別 `oneof` 。 若要使用 `Value` 類型，請匯入 `struct.proto` 。
 
 ```protobuf
 import "google/protobuf/struct.proto";

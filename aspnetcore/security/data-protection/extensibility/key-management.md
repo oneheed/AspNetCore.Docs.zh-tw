@@ -17,20 +17,18 @@ no-loc:
 - Razor
 - SignalR
 uid: security/data-protection/extensibility/key-management
-ms.openlocfilehash: 797df457a5584233043210e9ba2657b7fd7f3893
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: db718b8d4c305b75ad52054efde6b2d03f6825ed
+ms.sourcegitcommit: 4cce99cbd44372fd4575e8da8c0f4345949f4d9a
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88631000"
+ms.lasthandoff: 08/31/2020
+ms.locfileid: "89153528"
 ---
 # <a name="key-management-extensibility-in-aspnet-core"></a>ASP.NET Core 中的金鑰管理擴充性
 
-> [!TIP]
-> 閱讀本節之前，請閱讀 [金鑰管理](xref:security/data-protection/implementation/key-management#data-protection-implementation-key-management) 區段，其說明這些 api 背後的一些基本概念。
+閱讀本節之前，請閱讀 [金鑰管理](xref:security/data-protection/implementation/key-management#data-protection-implementation-key-management) 區段，其說明這些 api 背後的一些基本概念。
 
-> [!WARNING]
-> 實作為下列任何介面的型別，都應該是多個呼叫端的安全線程。
+**警告**：實作為下列任何介面的型別應該是多個呼叫端的安全線程。
 
 ## <a name="key"></a>Key
 

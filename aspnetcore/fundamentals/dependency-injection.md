@@ -16,12 +16,12 @@ no-loc:
 - Razor
 - SignalR
 uid: fundamentals/dependency-injection
-ms.openlocfilehash: 0a51647463362d6cfac335688d42d4be013f8b9c
-ms.sourcegitcommit: 9a90b956af8d8584d597f1e5c1dbfb0ea9bb8454
+ms.openlocfilehash: 98c43eda002abc96fe3c2f031c429ccaa70cee3e
+ms.sourcegitcommit: 7258e94cf60c16e5b6883138e5e68516751ead0f
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 08/21/2020
-ms.locfileid: "88712505"
+ms.lasthandoff: 08/29/2020
+ms.locfileid: "89102779"
 ---
 # <a name="dependency-injection-in-aspnet-core"></a>.NET Core 中的相依性插入
 
@@ -345,7 +345,6 @@ An `OperationService` is registered that depends on each of the other `Operation
 
 * 範圍服務無法從根服務提供者解析。
 * 範圍服務不會插入 singleton 中。
-* 暫時性服務未插入至 singleton 或範圍服務。
 
 根服務提供者會在呼叫 <xref:Microsoft.Extensions.DependencyInjection.ServiceCollectionContainerBuilderExtensions.BuildServiceProvider%2A> 時建立。 當提供者啟動應用程式時，根服務提供者的存留期會對應到應用程式的存留期，並在應用程式關閉時處置。
 

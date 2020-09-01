@@ -5,7 +5,7 @@ description: 瞭解如何使用 ASP.NET Core 來裝載和部署 Blazor Server �
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 08/14/2020
+ms.date: 08/26/2020
 no-loc:
 - ASP.NET Core Identity
 - cookie
@@ -18,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/host-and-deploy/server
-ms.openlocfilehash: 72a22fc2dd50bbcda230bb1824bb4fe176bf2189
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: afbaad2f27359a4a1cac5c5fe1da16d3e80d038f
+ms.sourcegitcommit: 7258e94cf60c16e5b6883138e5e68516751ead0f
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88628049"
+ms.lasthandoff: 08/29/2020
+ms.locfileid: "89102649"
 ---
 # <a name="host-and-deploy-no-locblazor-server"></a>裝載和部署 Blazor Server
 
@@ -65,7 +65,19 @@ Blazor 使用 Websocket 作為傳輸的最佳方式 SignalR ，是因為延遲�
 
 #### <a name="azure-no-locsignalr-service"></a>Azure SignalR 服務
 
-我們建議使用 [Azure SignalR Service](/azure/azure-signalr) for Blazor Server apps。 服務可讓您將 Blazor Server 應用程式相應增加為大量的並行 SignalR 連接。 此外， SignalR 服務的全球接觸和高效能資料中心大幅有助於降低因地理位置而造成的延遲。 若要設定應用程式 (並選擇性地布建 Azure SignalR 服務) ：
+我們建議使用 [Azure SignalR Service](xref:signalr/scale#azure-signalr-service) for Blazor Server apps。 服務可讓您將 Blazor Server 應用程式相應增加為大量的並行 SignalR 連接。 此外， SignalR 服務的全球接觸和高效能資料中心大幅有助於降低因地理位置而造成的延遲。
+
+> [!IMPORTANT]
+> 當 [websocket](https://wikipedia.org/wiki/WebSocket) 停用時，Azure App Service 會使用 HTTP 長時間輪詢來模擬即時連接。 HTTP 長時間輪詢的速度明顯低於啟用 Websocket 的執行，而不會使用輪詢來模擬用戶端-伺服器連接。
+>
+> 建議您針對 Blazor Server 部署至 Azure App Service 的應用程式使用 websocket。 [Azure SignalR 服務](xref:signalr/scale#azure-signalr-service)預設會使用 websocket。 如果應用程式不使用 Azure SignalR 服務，請參閱 <xref:signalr/publish-to-azure-web-app#configure-the-app-in-azure-app-service> 。
+>
+> 如需詳細資訊，請參閱
+>
+> * [什麼是 Azure SignalR 服務？](/azure/azure-signalr/signalr-overview)
+> * [Azure 服務的效能指南 SignalR](/azure-signalr/signalr-concept-performance#performance-factors)
+
+若要設定應用程式 (並選擇性地布建 Azure SignalR 服務) ：
 
 1. 啟用服務以支援「 *粘滯話*」，其中用戶端會在進行預導 [時重新導向回相同的伺服器](xref:blazor/hosting-models#connection-to-the-server)。 將 `ServerStickyMode` 選項或設定值設定為 `Required` 。 一般而言，應用程式會使用下列 **其中一** 種方法來建立設定：
 

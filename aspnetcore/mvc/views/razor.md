@@ -16,12 +16,12 @@ no-loc:
 - Razor
 - SignalR
 uid: mvc/views/razor
-ms.openlocfilehash: e42ee7a80475e784ea4791395d9b0665aca94a03
-ms.sourcegitcommit: f09407d128634d200c893bfb1c163e87fa47a161
+ms.openlocfilehash: 9c2bbd2d463af8a2ea7db716d01bf1436338ea77
+ms.sourcegitcommit: cd861463faf44956855e3c4b3669483bbc4a7463
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 08/26/2020
-ms.locfileid: "88865176"
+ms.lasthandoff: 08/29/2020
+ms.locfileid: "89101357"
 ---
 # <a name="no-locrazor-syntax-reference-for-aspnet-core"></a>Razor ASP.NET Core 的語法參考
 
@@ -131,17 +131,15 @@ HTML 屬性及含有電子郵件地址的內容不會將 `@` 符號視為轉換�
 @("<span>Hello World</span>")
 ```
 
-程式碼會轉譯下列 HTML：
+上述程式碼會呈現下列 HTML：
 
 ```html
 &lt;span&gt;Hello World&lt;/span&gt;
 ```
 
-此 HTML 在瀏覽器中會顯示為：
+HTML 會以純文字的形式顯示在瀏覽器中：
 
-```html
-<span>Hello World</span>
-```
+&lt;&gt;/span 範圍 Hello World &lt;&gt;
 
 `HtmlHelper.Raw` 輸出不會經過編碼，而是轉譯為 HTML 標記。
 

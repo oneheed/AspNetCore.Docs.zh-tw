@@ -17,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: fundamentals/owin
-ms.openlocfilehash: d766ba3387edbfb9298b6f3cf8a485738b7d7139
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: 817eb652f4feedf19dd60873b480917c320272a3
+ms.sourcegitcommit: 7258e94cf60c16e5b6883138e5e68516751ead0f
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88628595"
+ms.lasthandoff: 08/29/2020
+ms.locfileid: "89102753"
 ---
 # <a name="open-web-interface-for-net-owin-with-aspnet-core"></a>具有 ASP.NET Core 的 Open Web Interface for .NET (OWIN)
 
@@ -104,80 +104,6 @@ app.UseOwin(pipeline =>
 
 <a name="hosting-on-owin"></a>
 
-## <a name="using-aspnet-core-hosting-on-an-owin-based-server"></a>使用以 OWIN 為基礎的伺服器上所裝載的 ASP.NET Core
-
-以 OWIN 為基礎的伺服器可以裝載 ASP.NET Core 應用程式。 其中一個這類伺服器是 [Nowin](https://github.com/Bobris/Nowin)，其為 .NET OWIN 網頁伺服器。 在本文的範例中，包含了參考 Nowin 並使用它來建立 `IServer` 能夠自我裝載之 ASP.NET Core 的專案。
-
-[!code-csharp[](owin/sample/src/NowinSample/Program.cs?highlight=15)]
-
-`IServer` 是需要 `Features` 屬性和 `Start` 方法的介面。
-
-`Start` 負責設定和啟動伺服器，在此情況下，這會透過一系列 Fluent API 呼叫來完成，而這些呼叫設定從 IServerAddressesFeature 剖析的位址。 請注意，`_builder` 變數的 Fluent 組態會指定要求將由稍早在方法中定義的 `appFunc` 處理。 每個要求都會呼叫這個 `Func` 來處理傳入的要求。
-
-我們也將新增 `IWebHostBuilder` 延伸模組，以便能夠輕鬆地新增和設定 Nowin 伺服器。
-
-```csharp
-using System;
-using Microsoft.AspNetCore.Hosting.Server;
-using Microsoft.Extensions.DependencyInjection;
-using Nowin;
-using NowinSample;
-
-namespace Microsoft.AspNetCore.Hosting
-{
-    public static class NowinWebHostBuilderExtensions
-    {
-        public static IWebHostBuilder UseNowin(this IWebHostBuilder builder)
-        {
-            return builder.ConfigureServices(services =>
-            {
-                services.AddSingleton<IServer, NowinServer>();
-            });
-        }
-
-        public static IWebHostBuilder UseNowin(this IWebHostBuilder builder, Action<ServerBuilder> configure)
-        {
-            builder.ConfigureServices(services =>
-            {
-                services.Configure(configure);
-            });
-            return builder.UseNowin();
-        }
-    }
-}
-```
-
-完成上述作業後，請叫用 *Program.cs* 中的延伸模組，以使用這個自訂伺服器來執行 ASP.NET Core 應用程式：
-
-```csharp
-using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Hosting;
-
-namespace NowinSample
-{
-    public class Program
-    {
-        public static void Main(string[] args)
-        {
-            var host = new WebHostBuilder()
-                .UseNowin()
-                .UseContentRoot(Directory.GetCurrentDirectory())
-                .UseIISIntegration()
-                .UseStartup<Startup>()
-                .Build();
-
-            host.Run();
-        }
-    }
-}
-```
-
-深入了解 [ASP.NET Core 伺服器](xref:fundamentals/servers/index)。
-
 ## <a name="run-aspnet-core-on-an-owin-based-server-and-use-its-websockets-support"></a>在以 OWIN 為基礎的伺服器上執行 ASP.NET Core 並使用其 WebSocket 支援
 
 ASP.NET Core 如何利用以 OWIN 為基礎之伺服器功能的另一個範例是存取 WebSocket 等功能。 在上述範例中使用的 .NET OWIN 網頁伺服器支援內建的 Web 通訊端，供 ASP.NET Core 應用程式加以利用。 下列範例顯示的簡單 Web 應用程式支援 Web 通訊端，並透過 Websocket 回應傳送至伺服器的所有項目。
@@ -228,10 +154,6 @@ public class Startup
 }
 ```
 
-此[範例](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/owin/sample)使用與上述相同的 `NowinServer` 進行設定 - 唯一的差異是在其 `Configure` 方法中設定應用程式的方式。 使用[簡單 Websocket 用戶端](https://chrome.google.com/webstore/detail/simple-websocket-client/pfdhoblngboilpfeibdedpjgfnlcodoo?hl=en)的測試示範此應用程式：
-
-![Web 通訊端測試用戶端](owin/_static/websocket-test.png)
-
 ## <a name="owin-environment"></a>OWIN 環境
 
 您可以使用 `HttpContext` 建構 OWIN 環境。
@@ -248,7 +170,7 @@ OWIN 仰賴 `IDictionary<string,object>` 物件在 HTTP 要求/回應交換中�
 
 ### <a name="request-data-owin-v100"></a>要求資料 (OWIN 1.0.0 版)
 
-| Key               | 值 (類型) | 描述 |
+| 答案               | 值 (類型) | 描述 |
 | ----------------- | ------------ | ----------- |
 | owin.RequestScheme | `String` |  |
 | owin.RequestMethod  | `String` | |    
@@ -261,13 +183,13 @@ OWIN 仰賴 `IDictionary<string,object>` 物件在 HTTP 要求/回應交換中�
 
 ### <a name="request-data-owin-v110"></a>要求資料 (OWIN 1.1.0 版)
 
-| Key               | 值 (類型) | 描述 |
+| 答案               | 值 (類型) | 描述 |
 | ----------------- | ------------ | ----------- |
 | owin.RequestId | `String` | 選擇性 |
 
 ### <a name="response-data-owin-v100"></a>回應資料 (OWIN 1.0.0 版)
 
-| Key               | 值 (類型) | 描述 |
+| 答案               | 值 (類型) | 描述 |
 | ----------------- | ------------ | ----------- |
 | owin.ResponseStatusCode | `int` | 選擇性 |
 | owin.ResponseReasonPhrase | `String` | 選擇性 |
@@ -276,14 +198,14 @@ OWIN 仰賴 `IDictionary<string,object>` 物件在 HTTP 要求/回應交換中�
 
 ### <a name="other-data-owin-v100"></a>其他資料 (OWIN 1.0.0 版)
 
-| Key               | 值 (類型) | 描述 |
+| 答案               | 值 (類型) | 描述 |
 | ----------------- | ------------ | ----------- |
 | owin.CallCancelled | `CancellationToken` |  |
 | owin.Version  | `String` | |   
 
 ### <a name="common-keys"></a>共同索引鍵
 
-| Key               | 值 (類型) | 描述 |
+| 答案               | 值 (類型) | 描述 |
 | ----------------- | ------------ | ----------- |
 | ssl.ClientCertificate | `X509Certificate` |  |
 | ssl.LoadClientCertAsync  | `Func<Task>` | |    
@@ -296,13 +218,13 @@ OWIN 仰賴 `IDictionary<string,object>` 物件在 HTTP 要求/回應交換中�
 
 ### <a name="sendfiles-v030"></a>SendFiles 0.3.0 版
 
-| Key               | 值 (類型) | 描述 |
+| 答案               | 值 (類型) | 描述 |
 | ----------------- | ------------ | ----------- |
 | sendfile.SendAsync | 請參閱[委派簽章](https://owin.org/spec/extensions/owin-SendFile-Extension-v0.3.0.htm) | 每個要求 |
 
 ### <a name="opaque-v030"></a>Opaque 0.3.0 版
 
-| Key               | 值 (類型) | 描述 |
+| 答案               | 值 (類型) | 描述 |
 | ----------------- | ------------ | ----------- |
 | opaque.Version | `String` |  |
 | opaque.Upgrade | `OpaqueUpgrade` | 請參閱[委派簽章](https://owin.org/spec/extensions/owin-SendFile-Extension-v0.3.0.htm) |
@@ -311,7 +233,7 @@ OWIN 仰賴 `IDictionary<string,object>` 物件在 HTTP 要求/回應交換中�
 
 ### <a name="websocket-v030"></a>WebSocket 0.3.0 版
 
-| Key               | 值 (類型) | 描述 |
+| 答案               | 值 (類型) | 描述 |
 | ----------------- | ------------ | ----------- |
 | websocket.Version | `String` |  |
 | websocket.Accept | `WebSocketAccept` | 請參閱[委派簽章](https://owin.org/spec/extensions/owin-SendFile-Extension-v0.3.0.htm) |

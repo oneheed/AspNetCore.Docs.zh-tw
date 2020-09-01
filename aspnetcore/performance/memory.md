@@ -17,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: performance/memory
-ms.openlocfilehash: c409eaaf07109d363581ee7d61dc76521d6818d0
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: 9bb055670b73c9a1ae04083bc326200a42151708
+ms.sourcegitcommit: 7258e94cf60c16e5b6883138e5e68516751ead0f
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88630662"
+ms.lasthandoff: 08/29/2020
+ms.locfileid: "89102792"
 ---
 # <a name="memory-management-and-garbage-collection-gc-in-aspnet-core"></a>ASP.NET Core 中的記憶體管理和垃圾收集 (GC) 
 
@@ -235,7 +235,7 @@ public void GetFileProvider()
 
 ### <a name="large-objects-heap"></a>大型物件堆積
 
-頻繁的記憶體配置/可用迴圈可將記憶體片段化，尤其是在配置大型記憶體區塊時。 物件會配置在連續的記憶體區塊中。 若要減少片段，當 GC 釋出記憶體時，它會嘗試重組。 此進程稱為「 **壓縮**」。 壓縮牽涉到移動物件。 移動大型物件會對效能造成負面影響。 基於這個理由，GC 會為 _大型_ 物件建立特殊的記憶體區域，稱為 [大型物件堆積](/dotnet/standard/garbage-collection/large-object-heap) (LOH) 。 大於85000個位元組的物件 (大約 83 KB) 為：
+頻繁的記憶體配置/可用迴圈可將記憶體片段化，尤其是在配置大型記憶體區塊時。 物件會配置在連續的記憶體區塊中。 若要減少片段，當 GC 釋出記憶體時，它會嘗試將它重組。 此進程稱為「 **壓縮**」。 壓縮牽涉到移動物件。 移動大型物件會對效能造成負面影響。 基於這個理由，GC 會為 _大型_ 物件建立特殊的記憶體區域，稱為 [大型物件堆積](/dotnet/standard/garbage-collection/large-object-heap) (LOH) 。 大於85000個位元組的物件 (大約 83 KB) 為：
 
 * 放在 LOH 上。
 * 未壓縮。

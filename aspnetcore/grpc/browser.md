@@ -17,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: grpc/browser
-ms.openlocfilehash: 8d1f761731ab3840d009eba1ff5316808bafec40
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: fd4cae386b8c9654192cd0c66e095500290c4aa0
+ms.sourcegitcommit: 7258e94cf60c16e5b6883138e5e68516751ead0f
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88634406"
+ms.lasthandoff: 08/29/2020
+ms.locfileid: "89102688"
 ---
 # <a name="use-grpc-in-browser-apps"></a>在瀏覽器應用程式中使用 gRPC
 
@@ -136,3 +136,4 @@ ASP.NET Core 中裝載的 gRPC 服務可以設定為支援 gRPC Web 和 HTTP/2 g
 
 * [適用于 Web 用戶端 GitHub 專案的 gRPC](https://github.com/grpc/grpc-web)
 * <xref:security/cors>
+* <xref:grpc/httpapi>

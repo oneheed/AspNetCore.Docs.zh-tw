@@ -18,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/components/data-binding
-ms.openlocfilehash: 3b41aedcbd0d2c22b20d8fa3a21b8af97d1fbb2c
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: d88cad10314872271250cd43212a64698f485381
+ms.sourcegitcommit: 8ed9a413bdc2d665ad11add8828898d726ccb106
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88628556"
+ms.lasthandoff: 09/01/2020
+ms.locfileid: "89280396"
 ---
 # <a name="aspnet-core-no-locblazor-data-binding"></a>ASP.NET Core Blazor 資料系結
 
@@ -79,27 +79,7 @@ Razor 元件會透過以 [`@bind`](xref:mvc/views/razor#bind) 欄位、屬性或
 
 不同于 `onchange` 當專案失去焦點時引發的專案，會 `oninput` 在文字方塊的值變更時引發。
 
-使用 `@bind-{ATTRIBUTE}` with 語法來系結以外的 `@bind-{ATTRIBUTE}:event` 元素屬性 `value` 。 在下例中︰
-
-* 當元件載入 () 時，段落的樣式為 **紅色** `style="color:red"` 。
-* 使用者變更文字方塊的值，以反映不同的 CSS 色彩樣式，並變更頁面的元素焦點。 例如，使用者將文字方塊值變更為 `color:blue` ，然後按下鍵盤上的 <kbd>Tab</kbd> 鍵。
-* 當元素焦點變更時：
-  * 的值 `paragraphStyle` 是從專案 `<input>` 的值指派。
-  * 段落樣式會更新，以反映中的新樣式 `paragraphStyle` 。 如果樣式更新為 `color:blue` ，則文字色彩會變更為 **藍色**。
-
-```razor
-<p>
-    <input type="text" @bind="paragraphStyle" />
-</p>
-
-<p @bind-style="paragraphStyle" @bind-style:event="onchange">
-    Blazorify the app!
-</p>
-
-@code {
-    private string paragraphStyle = "color:red";
-}
-```
+<!-- Hold location for resolution of https://github.com/dotnet/AspNetCore.Docs/issues/19721 -->
 
 屬性系結會區分大小寫：
 

@@ -18,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/hosting-models
-ms.openlocfilehash: 53293ae9780129530ce5a41639e19284f47aa245
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: a8d2ceaffb670723d7662234f3dc964c864e6763
+ms.sourcegitcommit: 8ed9a413bdc2d665ad11add8828898d726ccb106
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88628075"
+ms.lasthandoff: 09/01/2020
+ms.locfileid: "89280422"
 ---
 # <a name="aspnet-core-no-locblazor-hosting-models"></a>ASP.NET Core Blazor 裝載模型
 
@@ -84,6 +84,9 @@ Blazor Server裝載模型提供幾項優點：
 * 伺服器上的 .NET Core 可用來執行應用程式，因此現有的 .NET 工具（例如偵錯工具）會如預期般運作。
 * 支援瘦用戶端。 例如， Blazor Server 應用程式會使用不支援 WebAssembly 和資源受限裝置的瀏覽器。
 * 應用程式的 .NET/c # 程式碼基底（包括應用程式的元件程式碼）不會提供給用戶端。
+
+> [!IMPORTANT]
+> Blazor Server應用程式會 prerenders 以回應第一個用戶端要求，這會在伺服器上設定 UI 狀態。 當用戶端嘗試建立連接時 SignalR ， **用戶端必須重新連接到相同的伺服器**。 Blazor Server 使用多部後端伺服器的應用程式應該執行連線的「 *粘滯話」會話* SignalR 。 如需詳細資訊，請參閱 [伺服器的連接](#connection-to-the-server) 一節。
 
 有缺點可以 Blazor Server 裝載：
 

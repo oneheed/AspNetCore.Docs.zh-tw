@@ -17,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: grpc/browser
-ms.openlocfilehash: fd4cae386b8c9654192cd0c66e095500290c4aa0
-ms.sourcegitcommit: 7258e94cf60c16e5b6883138e5e68516751ead0f
+ms.openlocfilehash: 5c9501b3e7cbdcbb02e3d78d67185a0a75ccba7c
+ms.sourcegitcommit: c9b03d8a6a4dcc59e4aacb30a691f349235a74c8
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 08/29/2020
-ms.locfileid: "89102688"
+ms.lasthandoff: 09/02/2020
+ms.locfileid: "89379402"
 ---
 # <a name="use-grpc-in-browser-apps"></a>在瀏覽器應用程式中使用 gRPC
 
@@ -131,6 +131,30 @@ ASP.NET Core 中裝載的 gRPC 服務可以設定為支援 gRPC Web 和 HTTP/2 g
 
 > [!IMPORTANT]
 > 產生的 gRPC 用戶端具有可呼叫一元方法的同步和非同步方法。 例如， `SayHello` 為 sync 且 `SayHelloAsync` 為 async。 在應用程式中呼叫同步方法 Blazor WebAssembly 會導致應用程式沒有回應。 非同步方法必須一律用於中 Blazor WebAssembly 。
+
+### <a name="use-grpc-client-factory-with-grpc-web"></a>使用 gRPC client factory 搭配 gRPC-Web
+
+您可以使用 gRPC 與 [HttpClientFactory](xref:System.Net.Http.IHttpClientFactory)的整合來建立 gRPC Web 相容的 .net 用戶端。
+
+若要使用 gRPC-Web 搭配用戶端 factory：
+
+* 將套件參考新增至下列封裝的專案檔：
+  * [Grpc .Net](https://www.nuget.org/packages/Grpc.Net.Client.Web)
+  * [Grpc .Net. ClientFactory](https://www.nuget.org/packages/Grpc.Net.ClientFactory)
+* 使用泛型擴充方法 (DI) 註冊相依性插入的 gRPC 用戶端 `AddGrpcClient` 。 在 Blazor WebAssembly 應用程式中，服務是在中向 DI 註冊的 `Program.cs` 。
+* `GrpcWebHandler`使用 <xref:Microsoft.Extensions.DependencyInjection.HttpClientBuilderExtensions.ConfigurePrimaryHttpMessageHandler%2A> 擴充方法進行設定。
+
+```csharp
+builder.Services
+    .AddGrpcClient<Greet.GreeterClient>((services, options) =>
+    {
+        options.Address = new Uri("https://localhost:5001");
+    })
+    .ConfigurePrimaryHttpMessageHandler(
+        () => new GrpcWebHandler(GrpcWebMode.GrpcWebText, new HttpClientHandler()));
+```
+
+如需詳細資訊，請參閱<xref:grpc/clientfactory>。
 
 ## <a name="additional-resources"></a>其他資源
 

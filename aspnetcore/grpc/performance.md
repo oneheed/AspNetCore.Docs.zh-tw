@@ -17,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: grpc/performance
-ms.openlocfilehash: 7d4d5732e6edb0d0a156fdcec5f59cc09a69d7de
-ms.sourcegitcommit: 111b4e451da2e275fb074cde5d8a84b26a81937d
+ms.openlocfilehash: a0a1a6901e07fb0074ca403870378f267d3d4403
+ms.sourcegitcommit: c9b03d8a6a4dcc59e4aacb30a691f349235a74c8
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 08/27/2020
-ms.locfileid: "89040875"
+ms.lasthandoff: 09/02/2020
+ms.locfileid: "89379441"
 ---
 # <a name="performance-best-practices-with-grpc"></a>使用 gRPC 的效能最佳作法
 
@@ -48,6 +48,8 @@ gRPC 是專為高效能服務所設計。 本檔說明如何從 gRPC 獲得最�
 * 您可以從通道建立多個 gRPC 用戶端，包括不同類型的用戶端。
 * 通道和從通道建立的用戶端可以安全地由多個執行緒使用。
 * 從通道建立的用戶端可能會進行多個同時呼叫。
+
+gRPC 用戶端 factory 提供集中的方式來設定通道。 它會自動重複使用基礎通道。 如需詳細資訊，請參閱<xref:grpc/clientfactory>。
 
 ## <a name="connection-concurrency"></a>並行連接
 
@@ -94,8 +96,8 @@ var channel = GrpcChannel.ForAddress("https://localhost", new GrpcChannelOptions
 
 有兩個選項可有效 gRPC 負載平衡：
 
-1. 用戶端負載平衡
-2. L7 (應用程式) proxy 負載平衡
+* 用戶端負載平衡
+* L7 (應用程式) proxy 負載平衡
 
 > [!NOTE]
 > 只有 gRPC 呼叫可以在端點之間進行負載平衡。 一旦建立串流 gRPC 呼叫，透過資料流程傳送的所有訊息都會移至一個端點。
@@ -114,17 +116,11 @@ L7 (應用程式) proxy 的運作層級高於 L4 (傳輸) proxy。 L7 proxy 瞭�
 
 有許多 L7 proxy 可用。 部分選項如下：
 
-1. [Envoy](https://www.envoyproxy.io/) proxy-常用的開放原始碼 proxy。
-2. 適用于 Kubernetes 的[Linkerd](https://linkerd.io/)服務網格。
-2. [YARP：反向 Proxy](https://microsoft.github.io/reverse-proxy/) -以 .Net 撰寫的預覽開放原始碼 Proxy。
+* [Envoy](https://www.envoyproxy.io/) -常用的開放原始碼 proxy。
+* 適用于 Kubernetes 的[Linkerd](https://linkerd.io/)服務網格。
+* [YARP：反向 Proxy](https://microsoft.github.io/reverse-proxy/) -以 .Net 撰寫的預覽開放原始碼 Proxy。
 
 ::: moniker range=">= aspnetcore-5.0"
-
-## <a name="inter-process-communication"></a>處理序間通訊
-
-用戶端與服務之間的 gRPC 呼叫通常會透過 TCP 通訊端來傳送。 TCP 很適合用來在網路上進行通訊，但是當用戶端與服務位於相同電腦上時， [ (IPC) 的處理序間通訊 ](https://wikipedia.org/wiki/Inter-process_communication) 會更有效率。
-
-請考慮使用類似 Unix 網域通訊端或具名管道的傳輸，在同一部電腦上的進程之間進行 gRPC 呼叫。 如需詳細資訊，請參閱<xref:grpc/interprocess>。
 
 ## <a name="keep-alive-pings"></a>保持作用中的 ping
 
@@ -151,7 +147,7 @@ var channel = GrpcChannel.ForAddress("https://localhost:5001", new GrpcChannelOp
 
 ::: moniker-end
 
-## <a name="streaming"></a>串流
+## <a name="streaming"></a>資料流
 
 gRPC 雙向串流可以用來取代高效能案例中的一元 gRPC 呼叫。 一旦啟動雙向串流之後，來回串流訊息的速度會比傳送具有多個一元 gRPC 呼叫的訊息更快。 經過資料流程處理的訊息會以現有 HTTP/2 要求的資料形式傳送，並消除為每個一元呼叫建立新 HTTP/2 要求的額外負荷。
 

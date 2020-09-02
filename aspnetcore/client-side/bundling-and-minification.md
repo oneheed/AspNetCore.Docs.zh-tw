@@ -4,7 +4,7 @@ author: scottaddie
 description: 瞭解如何藉由套用配套和縮制技術，將 ASP.NET Core web 應用程式中的靜態資源優化。
 ms.author: scaddie
 ms.custom: mvc
-ms.date: 07/23/2020
+ms.date: 09/02/2020
 no-loc:
 - ASP.NET Core Identity
 - cookie
@@ -17,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: client-side/bundling-and-minification
-ms.openlocfilehash: 84123464e8f01f8a3caa65035b3174cc04aea7cf
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: f696df0b421e5aab6f50cfaec3ca8edac894cea9
+ms.sourcegitcommit: c9b03d8a6a4dcc59e4aacb30a691f349235a74c8
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88625852"
+ms.lasthandoff: 09/02/2020
+ms.locfileid: "89379389"
 ---
 # <a name="bundle-and-minify-static-assets-in-aspnet-core"></a>在 ASP.NET Core 中組合和縮短靜態資產
 
@@ -77,6 +77,9 @@ ms.locfileid: "88625852"
 MVC 和 Razor Pages 專案範本提供了由 JSON 設定檔群組成的組合和縮制解決方案。 協力廠商工具（例如 [Grunt](xref:client-side/using-grunt) 工作執行器）會稍微複雜一點，才能完成相同的工作。 當您的開發工作流程需要除了組合和縮制 &mdash; （例如 linting 和影像優化）之外的處理時，協力廠商工具相當適合。 藉由使用設計階段組合和縮制，縮減檔會在應用程式部署之前建立。 在部署之前進行包裝和縮小，可提供降低伺服器負載的優點。 不過，請務必瞭解設計階段組合和縮制會增加組建複雜性，而且只適用于靜態檔案。
 
 ## <a name="configure-bundling-and-minification"></a>設定捆綁和縮制
+
+> [!NOTE]
+> [BuildBundlerMinifier](https://www.nuget.org/packages/BuildBundlerMinifier) NuGet 套件必須新增至您的專案，才能運作。
 
 ::: moniker range="<= aspnetcore-2.0"
 

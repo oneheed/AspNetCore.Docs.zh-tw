@@ -16,12 +16,12 @@ no-loc:
 - Razor
 - SignalR
 uid: tutorials/first-mvc-app/details
-ms.openlocfilehash: b25113f8e2132c06e06d53a25e71ed2a42deb00f
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: 4683f106b3372a2f14f289b39c8a0b8b6c8b5aa1
+ms.sourcegitcommit: c9b03d8a6a4dcc59e4aacb30a691f349235a74c8
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88629700"
+ms.lasthandoff: 09/02/2020
+ms.locfileid: "89379363"
 ---
 # <a name="part-10-examine-the-details-and-delete-methods-of-an-aspnet-core-app"></a>第10部分：檢查 ASP.NET Core 應用程式的詳細資料和刪除方法
 
@@ -64,7 +64,7 @@ public async Task<IActionResult> Delete(int id, bool notUsed)
 
 ### <a name="publish-to-azure"></a>發佈至 Azure
 
-如需部署至 Azure 的資訊，請參閱[教學課程：在 Azure App Service 中建置 .NET Core 和 SQL Database Web 應用程式](/azure/app-service/app-service-web-tutorial-dotnetcore-sqldb)。
+如需部署至 Azure 的詳細資訊，請參閱 [教學課程：在 Azure App Service 中建立 ASP.NET Core 和 SQL Database 應用程式](/azure/app-service/tutorial-dotnetcore-sqldb-app)。
 
 > [!div class="step-by-step"]
 > [[上一步]](validation.md)

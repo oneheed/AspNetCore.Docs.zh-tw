@@ -5,7 +5,7 @@ description: 瞭解如何在應用程式和 NavLink 元件之間路由傳送要�
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 07/14/2020
+ms.date: 09/02/2020
 no-loc:
 - ASP.NET Core Identity
 - cookie
@@ -18,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/fundamentals/routing
-ms.openlocfilehash: eb9e3cbddd2eaca8fef9a6782c28bbce4c029f58
-ms.sourcegitcommit: f09407d128634d200c893bfb1c163e87fa47a161
+ms.openlocfilehash: fe67ebfefb463ab698e5ff1bb7d9b527a28a596e
+ms.sourcegitcommit: 8fcb08312a59c37e3542e7a67dad25faf5bb8e76
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 08/26/2020
-ms.locfileid: "88865323"
+ms.lasthandoff: 09/11/2020
+ms.locfileid: "90009579"
 ---
 # <a name="aspnet-core-no-locblazor-routing"></a>ASP.NET Core Blazor 路由
 
@@ -147,30 +147,49 @@ Blazor Server 已整合至 [ASP.NET Core 端點路由](xref:fundamentals/routing
 
 | 條件約束 | 範例           | 範例相符項目                                                                  | 非變異值<br>culture<br>比對 |
 | ---------- | ----------------- | -------------------------------------------------------------------------------- | :------------------------------: |
-| `bool`     | `{active:bool}`   | `true`, `FALSE`                                                                  | 否                               |
-| `datetime` | `{dob:datetime}`  | `2016-12-31`, `2016-12-31 7:32pm`                                                | 是                              |
-| `decimal`  | `{price:decimal}` | `49.99`, `-1,000.01`                                                             | 是                              |
-| `double`   | `{weight:double}` | `1.234`, `-1,001.01e8`                                                           | 是                              |
-| `float`    | `{weight:float}`  | `1.234`, `-1,001.01e8`                                                           | 是                              |
-| `guid`     | `{id:guid}`       | `CD2C1638-1638-72D5-1638-DEADBEEF1638`, `{CD2C1638-1638-72D5-1638-DEADBEEF1638}` | 否                               |
-| `int`      | `{id:int}`        | `123456789`, `-123456789`                                                        | 是                              |
-| `long`     | `{ticks:long}`    | `123456789`, `-123456789`                                                        | 是                              |
+| `bool`     | `{active:bool}`   | `true`, `FALSE`                                                                  | No                               |
+| `datetime` | `{dob:datetime}`  | `2016-12-31`, `2016-12-31 7:32pm`                                                | Yes                              |
+| `decimal`  | `{price:decimal}` | `49.99`, `-1,000.01`                                                             | Yes                              |
+| `double`   | `{weight:double}` | `1.234`, `-1,001.01e8`                                                           | Yes                              |
+| `float`    | `{weight:float}`  | `1.234`, `-1,001.01e8`                                                           | Yes                              |
+| `guid`     | `{id:guid}`       | `CD2C1638-1638-72D5-1638-DEADBEEF1638`, `{CD2C1638-1638-72D5-1638-DEADBEEF1638}` | No                               |
+| `int`      | `{id:int}`        | `123456789`, `-123456789`                                                        | Yes                              |
+| `long`     | `{ticks:long}`    | `123456789`, `-123456789`                                                        | Yes                              |
 
 > [!WARNING]
 > 確認 URL 可以轉換成 CLR 類型的路由條件約束 (例如 `int` 或 <xref:System.DateTime>) 一律使用不因國別而異的文化特性。 這些條件約束假設 URL 不可當地語系化。
 
 ### <a name="routing-with-urls-that-contain-dots"></a>使用包含點的 Url 路由傳送
 
-在 Blazor Server 應用程式中，中的預設路由 `_Host.cshtml` 是 `/` (`@page "/"`) 。 包含點 () 的要求 URL `.` 不會與預設路由相符，因為 URL 似乎要求檔案。 如果 Blazor 靜態檔案不存在，則應用程式會傳回 *404-找不* 到的回應。 若要使用包含點的路由，請 `_Host.cshtml` 使用下列路由範本進行設定：
+若是託管 Blazor WebAssembly 和 Blazor Server 應用程式，伺服器端預設路由範本會假設要求 URL 的最後一個區段包含點 (`.`)  (例如 `https://localhost.com:5001/example/some.thing`) 。 如果沒有額外的設定，應用程式如果要路由傳送至元件，則會傳回 *404-找不* 到的回應。 若要使用具有一個或多個包含點之參數的路由，應用程式必須使用自訂範本來設定路由。
 
-```cshtml
-@page "/{**path}"
+請考慮下列 `Example` 可從 URL 最後一個區段接收路由參數的元件：
+
+```razor
+@page "/example"
+@page "/example/{param}"
+
+<p>
+    Param: @Param
+</p>
+
+@code {
+    [Parameter]
+    public string Param { get; set; }
+}
 ```
 
-`"/{**path}"`範本包含：
+若要允許裝載解決方案的 *伺服器* 應用程式 Blazor WebAssembly 使用參數中的點來路由傳送要求 `param` ，請在 () 中新增具有選擇性參數的回溯檔案路由範本 `Startup.Configure` `Startup.cs` ：
 
-* 雙星號 *catch-all* 語法 (`**`) 來捕捉跨多個資料夾界限的路徑，而不將正斜線解碼 (`/`) 。
-* `path` 路由參數名稱。
+```csharp
+endpoints.MapFallbackToFile("/example/{param?}", "index.html");
+```
+
+若要設定 Blazor Server 應用程式以在參數中將要求路由傳送至某個點 `param` ，請在 () 中新增具有選擇性參數的 fallback 頁面路由範本 `Startup.Configure` `Startup.cs` ：
+
+```csharp
+endpoints.MapFallbackToPage("/example/{param?}", "/_Host");
+```
 
 如需詳細資訊，請參閱<xref:fundamentals/routing>。
 

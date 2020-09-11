@@ -18,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/components/index
-ms.openlocfilehash: 26e8239634c3edb99c7606ab2e250c69af4e746f
-ms.sourcegitcommit: f09407d128634d200c893bfb1c163e87fa47a161
+ms.openlocfilehash: be1584e72fc1504ac9f8ca10a6b084c95a579b5b
+ms.sourcegitcommit: 8fcb08312a59c37e3542e7a67dad25faf5bb8e76
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 08/26/2020
-ms.locfileid: "88865290"
+ms.lasthandoff: 09/11/2020
+ms.locfileid: "90009618"
 ---
 # <a name="create-and-use-aspnet-core-no-locrazor-components"></a>建立和使用 ASP.NET Core Razor 元件
 
@@ -266,7 +266,7 @@ namespace BlazorSample
 [!code-razor[](index/samples_snapshot/ParentComponent.razor?highlight=5-6)]
 
 > [!WARNING]
-> 當元件的內容是以轉譯時，請勿建立寫入自身 *元件參數* 的元件 <xref:Microsoft.AspNetCore.Components.RenderFragment> ，而是改用私用欄位。 如需詳細資訊，請參閱已[覆 `RenderFragment` 寫的參數和](#overwritten-parameters-with-renderfragment)區段。
+> 請勿建立會寫入其本身 *元件參數*的元件，而是改用私用欄位。 如需詳細資訊，請參閱 [覆寫的參數](#overwritten-parameters) 一節。
 
 ## <a name="child-content"></a>子內容
 
@@ -625,14 +625,9 @@ public class NotifierService
 
 確定用於的值 [`@key`][5] 不會衝突。 如果在相同的父元素內偵測到衝突值，則會擲回例外狀況， Blazor 因為它無法將舊的元素或元件以決定性的方式對應至新的元素或元件。 只使用相異的值，例如物件實例或主鍵值。
 
-## <a name="overwritten-parameters-with-renderfragment"></a>使用覆寫的參數 `RenderFragment`
+## <a name="overwritten-parameters"></a>覆寫的參數
 
-在下列情況下，會覆寫參數：
-
-* 子元件的內容會以呈現 <xref:Microsoft.AspNetCore.Components.RenderFragment> 。
-* <xref:Microsoft.AspNetCore.Components.ComponentBase.StateHasChanged%2A> 在父元件中呼叫。
-
-因為呼叫時父元件轉譯中 <xref:Microsoft.AspNetCore.Components.ComponentBase.StateHasChanged%2A> ，並將新的參數值提供給子元件，所以會重設參數。
+當父元件轉譯中時，會提供新的參數值（通常會覆寫現有的參數值）。
 
 請考慮下列 `Expander` 元件：
 

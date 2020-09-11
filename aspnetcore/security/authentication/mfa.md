@@ -3,7 +3,7 @@ title: ASP.NET Core 中的多重要素驗證
 author: damienbod
 description: 瞭解如何在 ASP.NET Core 應用程式中設定 (MFA) 的多重要素驗證。
 monikerRange: '>= aspnetcore-3.1'
-ms.author: rick-anderson
+ms.author: riande
 ms.custom: mvc
 ms.date: 03/17/2020
 no-loc:
@@ -18,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: security/authentication/mfa
-ms.openlocfilehash: 048d88a121d0a4a7ab3d3adee9b426b95fd68a80
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: e224f947335ea8ea6ed8887dfadb52202bfd7866
+ms.sourcegitcommit: 8fcb08312a59c37e3542e7a67dad25faf5bb8e76
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88629583"
+ms.lasthandoff: 09/11/2020
+ms.locfileid: "90009501"
 ---
 # <a name="multi-factor-authentication-in-aspnet-core"></a>ASP.NET Core 中的多重要素驗證
 

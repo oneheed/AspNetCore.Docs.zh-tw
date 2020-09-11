@@ -18,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/components/data-binding
-ms.openlocfilehash: d88cad10314872271250cd43212a64698f485381
-ms.sourcegitcommit: 8ed9a413bdc2d665ad11add8828898d726ccb106
+ms.openlocfilehash: eef08d8236241d2930a1a1a45ca0181669f2432c
+ms.sourcegitcommit: 8fcb08312a59c37e3542e7a67dad25faf5bb8e76
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 09/01/2020
-ms.locfileid: "89280396"
+ms.lasthandoff: 09/11/2020
+ms.locfileid: "90009644"
 ---
 # <a name="aspnet-core-no-locblazor-data-binding"></a>ASP.NET Core Blazor 資料系結
 
@@ -145,37 +145,22 @@ Razor 元件會透過以 [`@bind`](xref:mvc/views/razor#bind) 欄位、屬性或
 
 元件參數允許父元件的系結屬性和欄位具有 `@bind-{PROPERTY OR FIELD}` 語法。
 
-下列 `Child` 元件 (`Child.razor`) 具有 `Year` 元件參數和 `YearChanged` 回呼：
+下列 `Child` 元件 (`Shared/Child.razor`) 具有 `Year` 元件參數和 `YearChanged` 回呼：
 
 ```razor
 <div class="card bg-light mt-3" style="width:18rem ">
     <div class="card-body">
         <h3 class="card-title">Child Component</h3>
         <p class="card-text">Child <code>Year</code>: @Year</p>
-        <p>
-            <button @onclick="UpdateYear">
-                Update Child <code>Year</code> and call 
-                <code>YearChanged.InvokeAsync(Year)</code>
-            </button>
-        </p>
     </div>
 </div>
 
 @code {
-    private Random r = new Random();
-
     [Parameter]
     public int Year { get; set; }
 
     [Parameter]
     public EventCallback<int> YearChanged { get; set; }
-
-    private Task UpdateYear()
-    {
-        Year = r.Next(10050, 12021);
-
-        return YearChanged.InvokeAsync(Year);
-    }
 }
 ```
 
@@ -196,7 +181,7 @@ Razor 元件會透過以 [`@bind`](xref:mvc/views/razor#bind) 欄位、屬性或
 
 @code {
     private Random r = new Random();
-    private int year = 1978;
+    private int year = 1979;
 
     private void UpdateYear()
     {
@@ -221,19 +206,19 @@ Razor 元件會透過以 [`@bind`](xref:mvc/views/razor#bind) 欄位、屬性或
 
 下列 `PasswordField` 元件 (`PasswordField.razor`) ：
 
-* 將 `<input>` 元素的值設定為 `Password` 屬性。
-* `Password`使用來公開屬性對父元件的變更 [`EventCallback`](xref:blazor/components/event-handling#eventcallback) 。
+* 將 `<input>` 元素的值設定為 `password` 欄位。
+* 將屬性的變更公開 `Password` 至父代元件 [`EventCallback`](xref:blazor/components/event-handling#eventcallback) ，該元件會傳入子系欄位的目前值 `password` 做為其引數。
 * 使用 `onclick` 事件來觸發 `ToggleShowPassword` 方法。 如需詳細資訊，請參閱<xref:blazor/components/event-handling>。
 
 ```razor
-<h1>Child Component</h1>
+<h1>Provide your password</h1>
 
 Password:
 
 <input @oninput="OnPasswordChanged" 
        required 
        type="@(showPassword ? "text" : "password")" 
-       value="@Password" />
+       value="@password" />
 
 <button class="btn btn-primary" @onclick="ToggleShowPassword">
     Show password
@@ -241,6 +226,7 @@ Password:
 
 @code {
     private bool showPassword;
+    private string password;
 
     [Parameter]
     public string Password { get; set; }
@@ -250,9 +236,9 @@ Password:
 
     private Task OnPasswordChanged(ChangeEventArgs e)
     {
-        Password = e.Value.ToString();
+        password = e.Value.ToString();
 
-        return PasswordChanged.InvokeAsync(Password);
+        return PasswordChanged.InvokeAsync(password);
     }
 
     private void ToggleShowPassword()
@@ -276,12 +262,7 @@ Password:
 }
 ```
 
-若要對上述範例中的密碼執行檢查或陷阱錯誤：
-
-* `Password` `password` 在下列範例程式碼) 中，建立 (的支援欄位。
-* 在 setter 中執行檢查或陷阱錯誤 `Password` 。
-
-下列範例會在密碼值中使用空格時，為使用者提供立即的意見反應：
+在叫用系結委派的方法中執行檢查或陷阱錯誤。 下列範例會在密碼值中使用空格時，為使用者提供立即的意見反應：
 
 ```razor
 <h1>Child Component</h1>
@@ -291,7 +272,7 @@ Password:
 <input @oninput="OnPasswordChanged" 
        required 
        type="@(showPassword ? "text" : "password")" 
-       value="@Password" />
+       value="@password" />
 
 <button class="btn btn-primary" @onclick="ToggleShowPassword">
     Show password
@@ -305,34 +286,25 @@ Password:
     private string validationMessage;
 
     [Parameter]
-    public string Password
-    {
-        get { return password ?? string.Empty; }
-        set
-        {
-            if (password != value)
-            {
-                if (value.Contains(' '))
-                {
-                    validationMessage = "Spaces not allowed!";
-                }
-                else
-                {
-                    password = value;
-                    validationMessage = string.Empty;
-                }
-            }
-        }
-    }
+    public string Password { get; set; }
 
     [Parameter]
     public EventCallback<string> PasswordChanged { get; set; }
 
     private Task OnPasswordChanged(ChangeEventArgs e)
     {
-        Password = e.Value.ToString();
+        if (password.Contains(' '))
+        {
+            validationMessage = "Spaces not allowed!";
 
-        return PasswordChanged.InvokeAsync(Password);
+            return Task.CompletedTask;
+        }
+        else
+        {
+            validationMessage = string.Empty;
+
+            return PasswordChanged.InvokeAsync(password);
+        }
     }
 
     private void ToggleShowPassword()

@@ -18,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: signalr/scale
-ms.openlocfilehash: fc257015a9ee972da90b0f206a60b07bd6cc1f97
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: bba965e14058663c3ed9c0f15afc6a8d78997aea
+ms.sourcegitcommit: 8fcb08312a59c37e3542e7a67dad25faf5bb8e76
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88631104"
+ms.lasthandoff: 09/11/2020
+ms.locfileid: "90009748"
 ---
 # <a name="aspnet-core-no-locsignalr-hosting-and-scaling"></a>ASP.NET Core SignalR 裝載和調整
 
@@ -82,7 +82,7 @@ Azure SignalR 服務是 proxy，而不是背板。 每次用戶端啟動伺服�
 這種向外延展的方法有幾個優點，而不是 Redis 背板的替代方案：
 
 * 由於用戶端連線時，會立即將用戶端重新導向至 Azure 服務，因此不需要像是 [用戶端親和性](/iis/extensions/configuring-application-request-routing-arr/http-load-balancing-using-application-request-routing#step-3---configure-client-affinity)的「粘滯話」 SignalR 。
-* SignalR應用程式可以根據傳送的訊息數目來向外延展，而 Azure SignalR 服務會自動調整以處理任何數量的連接。 例如，可能有數千個用戶端，但如果每秒只傳送幾個訊息，則 SignalR 應用程式不需要向外延展至多部伺服器，只要處理連線本身即可。
+* SignalR應用程式可以根據傳送的訊息數目進行擴充，而 Azure 服務則會 SignalR 調整以處理任何數量的連線。 例如，可能有數千個用戶端，但如果每秒只傳送幾個訊息，則 SignalR 應用程式不需要向外延展至多部伺服器，只要處理連線本身即可。
 * SignalR應用程式不會使用與 web 應用程式明顯更多的連接資源 SignalR 。
 
 基於這些理由，我們建議 azure SignalR 服務裝載 SignalR 于 azure 上的所有 ASP.NET Core 應用程式，包括 App Service、vm 和容器。

@@ -18,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/fundamentals/additional-scenarios
-ms.openlocfilehash: 6f092f3f9a18883c31b217b59d0b0abe802aff01
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: 870509a3cbbcbea9b1c4804185c49a831af22630
+ms.sourcegitcommit: 8fcb08312a59c37e3542e7a67dad25faf5bb8e76
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88628296"
+ms.lasthandoff: 09/11/2020
+ms.locfileid: "90009631"
 ---
 # <a name="aspnet-core-no-locblazor-hosting-model-configuration"></a>ASP.NET Core Blazor 裝載模型設定
 
@@ -128,20 +128,62 @@ Blazor Server 根據預設，應用程式會在伺服器上建立用戶端連接
 
 不支援從靜態 HTML 網頁轉譯伺服器元件。
 
-## <a name="configure-the-no-locsignalr-client-for-no-locblazor-server-apps"></a>設定 SignalR 應用程式的用戶端 Blazor Server
+## <a name="initialize-the-no-locblazor-circuit"></a>初始化 Blazor 線路
 
 *本節適用于 Blazor Server 。*
 
-在檔案 SignalR 中設定應用程式所使用的用戶端 Blazor Server `Pages/_Host.cshtml` 。 將在 `Blazor.start` `_framework/blazor.server.js` 腳本之後以及在標記內呼叫的腳本放在一起 `</body>` 。
-
-### <a name="logging"></a>記錄
-
-若要設定 SignalR 用戶端記錄：
+Blazor Server在檔案中設定應用程式[ SignalR 線路](xref:blazor/hosting-models#circuits)的手動啟動 `Pages/_Host.cshtml` ：
 
 * 將 `autostart="false"` 屬性新增至 `<script>` 腳本的標記 `blazor.server.js` 。
-* 傳入設定物件 (在 `configureSignalR` 用戶端產生器 `configureLogging` 上使用記錄層級呼叫的) 。
+* 將在腳本標記之後呼叫的腳本放在 `Blazor.start` `blazor.server.js` 結尾 `</body>` 標記內。
+
+`autostart`停用時，不相依于電路的應用程式任何層面都能正常運作。 例如，用戶端路由可運作。 不過，與電路相依的任何層面在 `Blazor.start` 呼叫之前都不會運作。 沒有已建立的線路，應用程式行為無法預期。 例如，當線路中斷連線時，元件方法無法執行。
+
+### <a name="initialize-no-locblazor-when-the-document-is-ready"></a>在 Blazor 檔就緒時初始化
+
+Blazor當檔準備就緒時，將應用程式初始化：
 
 ```cshtml
+<body>
+
+    ...
+
+    <script autostart="false" src="_framework/blazor.server.js"></script>
+    <script>
+      document.addEventListener("DOMContentLoaded", function() {
+        Blazor.start();
+      });
+    </script>
+</body>
+```
+
+### <a name="chain-to-the-promise-that-results-from-a-manual-start"></a>`Promise`從手動開始到該結果的鏈
+
+若要執行其他工作（例如 JS interop 初始化），請使用 `then` 來連結至 `Promise` 手動 Blazor 應用程式啟動的結果：
+
+```cshtml
+<body>
+
+    ...
+
+    <script autostart="false" src="_framework/blazor.server.js"></script>
+    <script>
+      Blazor.start().then(function () {
+        ...
+      });
+    </script>
+</body>
+```
+
+### <a name="configure-the-no-locsignalr-client"></a>設定 SignalR 用戶端
+
+#### <a name="logging"></a>記錄
+
+若要設定 SignalR 用戶端記錄，請 `configureSignalR` `configureLogging` 使用用戶端產生器上的記錄層級 () 傳入設定物件：
+
+```cshtml
+<body>
+
     ...
 
     <script autostart="false" src="_framework/blazor.server.js"></script>
@@ -164,12 +206,16 @@ Blazor Server 根據預設，應用程式會在伺服器上建立用戶端連接
 * 以在中斷連接時通知使用者。
 * 若要從用戶端執行記錄 (線上路連線時) 。
 
-若要修改連接事件：
+若要修改連接事件，請註冊下列連線變更的回呼：
 
-* 將 `autostart="false"` 屬性新增至 `<script>` 腳本的標記 `blazor.server.js` 。
-* 針對已中斷連線的連接變更註冊回呼， (`onConnectionDown`) ，並 () 建立/重新建立的連接 `onConnectionUp` 。 **兩者** `onConnectionDown``onConnectionUp`必須指定和。
+* 中斷的連接使用 `onConnectionDown` 。
+* 已建立/重新建立的連接使用 `onConnectionUp` 。
+
+**兩者** `onConnectionDown``onConnectionUp`必須指定和：
 
 ```cshtml
+<body>
+
     ...
 
     <script autostart="false" src="_framework/blazor.server.js"></script>
@@ -186,12 +232,11 @@ Blazor Server 根據預設，應用程式會在伺服器上建立用戶端連接
 
 ### <a name="adjust-the-reconnection-retry-count-and-interval"></a>調整重新連接重試計數和間隔
 
-若要調整重新連接重試計數和間隔：
-
-* 將 `autostart="false"` 屬性新增至 `<script>` 腳本的標記 `blazor.server.js` 。
-* 設定 `maxRetries` 每次重試嘗試 () 時，所允許的重試次數 () 和期間（以毫秒為單位） `retryIntervalMilliseconds` 。
+若要調整重新連接重試計數和間隔，請設定重試次數 (`maxRetries`) 和每次重試嘗試所允許的期間（以毫秒為單位） (`retryIntervalMilliseconds`) ：
 
 ```cshtml
+<body>
+
     ...
 
     <script autostart="false" src="_framework/blazor.server.js"></script>
@@ -206,14 +251,13 @@ Blazor Server 根據預設，應用程式會在伺服器上建立用戶端連接
 </body>
 ```
 
-### <a name="hide-or-replace-the-reconnection-display"></a>隱藏或取代重新連接顯示
+## <a name="hide-or-replace-the-reconnection-display"></a>隱藏或取代重新連接顯示
 
-若要隱藏重新連接顯示：
-
-* 將 `autostart="false"` 屬性新增至 `<script>` 腳本的標記 `blazor.server.js` 。
-*  (或) ，將重新連接處理常式設定 `_reconnectionDisplay` 為空的物件 `{}` `new Object()` 。
+若要隱藏重新連接顯示，請將重新連接處理常式設定 `_reconnectionDisplay` 為空白物件 (`{}` 或 `new Object()`) ：
 
 ```cshtml
+<body>
+
     ...
 
     <script autostart="false" src="_framework/blazor.server.js"></script>
@@ -221,6 +265,8 @@ Blazor Server 根據預設，應用程式會在伺服器上建立用戶端連接
       window.addEventListener('beforeunload', function () {
         Blazor.defaultReconnectionHandler._reconnectionDisplay = {};
       });
+
+      Blazor.start();
     </script>
 </body>
 ```
@@ -233,6 +279,18 @@ Blazor.defaultReconnectionHandler._reconnectionDisplay =
 ```
 
 預留位置 `{ELEMENT ID}` 是要顯示之 HTML 元素的識別碼。
+
+::: moniker range=">= aspnetcore-5.0"
+
+藉由在 `transition-delay` 應用程式的 CSS 中設定屬性（property），藉由在應用程式的)  (CSS 中設定屬性（property），藉以自訂延遲顯示之前 `wwwroot/css/site.css` 下列範例會將500毫秒 (預設) 的轉換延遲設定為1000毫秒 (1 秒) ：
+
+```css
+#components-reconnect-modal {
+    transition: visibility 0s linear 1000ms;
+}
+```
+
+::: moniker-end
 
 ## <a name="influence-html-head-tag-elements"></a>影響 HTML `<head>` 標記元素
 

@@ -18,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/hosting-models
-ms.openlocfilehash: a8d2ceaffb670723d7662234f3dc964c864e6763
-ms.sourcegitcommit: 8ed9a413bdc2d665ad11add8828898d726ccb106
+ms.openlocfilehash: 0830214029d59d0820ed3c5806267c766314c74f
+ms.sourcegitcommit: 8fcb08312a59c37e3542e7a67dad25faf5bb8e76
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 09/01/2020
-ms.locfileid: "89280422"
+ms.lasthandoff: 09/11/2020
+ms.locfileid: "90009670"
 ---
 # <a name="aspnet-core-no-locblazor-hosting-models"></a>ASP.NET Core Blazor 裝載模型
 
@@ -41,7 +41,7 @@ Blazor 是設計用來在瀏覽器中以 [WebAssembly](https://webassembly.org/)
 
 選取** Blazor WebAssembly 應用程式**範本之後，您可以選擇將應用程式設定為使用 ASP.NET Core 後端，方法是選取**ASP.NET Core**裝載] 核取方塊 ([`dotnet new blazorwasm --hosted`](/dotnet/core/tools/dotnet-new)) 。 ASP.NET Core 應用程式會將 Blazor 應用程式提供給用戶端。 具有 ASP.NET Core 後端的應用程式稱為 *託管 Blazor WebAssembly 應用程式*。 Blazor WebAssembly應用程式可以使用 WEB API 呼叫或 () ，透過網路與伺服器 [SignalR](xref:signalr/introduction) 互動 <xref:tutorials/signalr-blazor-webassembly> 。
 
-這些範本包括 `blazor.webassembly.js` 處理的腳本：
+`blazor.webassembly.js`腳本是由架構所提供，並處理：
 
 * 下載 .NET 執行時間、應用程式和應用程式的相依性。
 * 要執行應用程式的執行時間初始化。
@@ -75,7 +75,7 @@ ASP.NET Core 應用程式會參考要新增的應用程式 `Startup` 類別：
 * 伺服器端服務。
 * 要求處理管線的應用程式。
 
-`blazor.server.js`腳本會建立用戶端連接。 應用程式必須負責保存和還原應用程式狀態（如有需要） (例如，當網路連線中斷時) 。 `blazor.server.js`腳本是從 ASP.NET Core 共用架構中的內嵌資源提供。
+在用戶端上， `blazor.server.js` 腳本會建立 SignalR 與伺服器之間的連接。 從 ASP.NET Core 共用架構中的內嵌資源，將腳本提供給用戶端應用程式。 用戶端應用程式會視需要負責保存和還原應用程式狀態。 
 
 Blazor Server裝載模型提供幾項優點：
 

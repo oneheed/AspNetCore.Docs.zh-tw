@@ -5,7 +5,7 @@ description: 探索如何在 ASP.NET Core 應用程式中延遲載入元件 Blaz
 monikerRange: '>= aspnetcore-5.0'
 ms.author: riande
 ms.custom: mvc
-ms.date: 08/25/2020
+ms.date: 09/09/2020
 no-loc:
 - ASP.NET Core Identity
 - cookie
@@ -18,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/webassembly-lazy-load-assemblies
-ms.openlocfilehash: 46f98080ad40f614f9cb1af2190f263d205c1016
-ms.sourcegitcommit: f09407d128634d200c893bfb1c163e87fa47a161
+ms.openlocfilehash: f9b6766c2f46274e06cab18fd35b5e417e9bfa97
+ms.sourcegitcommit: 8fcb08312a59c37e3542e7a67dad25faf5bb8e76
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 08/26/2020
-ms.locfileid: "88865164"
+ms.lasthandoff: 09/11/2020
+ms.locfileid: "90009605"
 ---
 # <a name="lazy-load-assemblies-in-aspnet-core-no-locblazor-webassembly"></a>ASP.NET Core 中的延遲載入元件 Blazor WebAssembly
 
@@ -94,7 +94,7 @@ Blazor的 `Router` 元件會指定哪些元件會 Blazor 搜尋可路由傳送�
 * `Path`屬性是相對於應用程式基底路徑的使用者目的地路徑，例如 `/robot` 。
 * `CancellationToken`可以用來觀察非同步工作的取消。 `OnNavigateAsync` 當使用者流覽至另一個頁面時，會自動取消目前正在執行的流覽工作。
 
-在內部 `OnNavigateAsync` ，會執行邏輯來判斷要載入的元件。 這些選項包括：
+在內部 `OnNavigateAsync` ，會執行邏輯來判斷要載入的元件。 選項包括：
 
 * 方法內的條件式檢查 `OnNavigateAsync` 。
 * 對應至元件名稱之路由的查閱資料表，可插入元件或在區塊內執行 [`@code`](xref:mvc/views/razor#code) 。
@@ -114,8 +114,11 @@ Blazor的 `Router` 元件會指定哪些元件會 Blazor 搜尋可路由傳送�
 * 使用 JS interop 透過網路呼叫來提取元件。
 * 將元件載入至在瀏覽器中于 WebAssembly 上執行的執行時間。
 
-> [!NOTE]
-> 架構的消極式載入執行支援在伺服器上進行可呈現。 在預進行期間，會假設載入所有元件，包括標示為消極式載入的元件。
+架構的消極式載入實行支援在裝載的解決方案中，使用可進行的延遲式載入 Blazor 。 在預進行期間，會假設載入所有元件，包括標示為消極式載入的元件。 以手動 `LazyAssemblyLoader` 方式在 *伺服器* 專案的 `Startup.ConfigureServices` 方法 (`Startup.cs`) 中註冊：
+
+```csharp
+services.AddSingleton<LazyAssemblyLoader>();
+```
 
 ### <a name="user-interaction-with-navigating-content"></a>使用者與內容的互動 `<Navigating>`
 

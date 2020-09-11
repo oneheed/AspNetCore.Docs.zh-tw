@@ -18,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/blazor-server-ef-core
-ms.openlocfilehash: 7627d6981fbee66ba19a7065cefb197e50a5fd25
-ms.sourcegitcommit: 4cce99cbd44372fd4575e8da8c0f4345949f4d9a
+ms.openlocfilehash: a1b295b2ce42bc5ee06b8b9579ea2c70d480580a
+ms.sourcegitcommit: 8fcb08312a59c37e3542e7a67dad25faf5bb8e76
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 08/31/2020
-ms.locfileid: "89153515"
+ms.lasthandoff: 09/11/2020
+ms.locfileid: "90009657"
 ---
 # <a name="aspnet-core-no-locblazor-server-with-entity-framework-core-efcore"></a>ASP.NET Core Blazor Server 與 Entity Framework Core (EFCore) 
 
@@ -120,7 +120,7 @@ Factory 會插入元件，並用來建立新的實例。 例如，在 `Pages/Ind
 @inject IDbContextFactory<ContactContext> DbFactory
 ```
 
-範例應用程式可確保在處置元件時處置 contact：
+範例應用程式可確保在元件處置時處置內容：
 
 [!code-csharp[](./common/samples/5.x/BlazorServerEFCoreSample/BlazorServerDbContextExample/Pages/EditContact.razor?name=snippet1)]
 
@@ -227,7 +227,7 @@ Factory 會插入元件，並用來建立新的實例。 例如，在 `Pages/Ind
 @inject IDbContextFactory<ContactContext> DbFactory
 ```
 
-範例應用程式可確保在處置元件時處置 contact：
+範例應用程式可確保在元件處置時處置內容：
 
 [!code-csharp[](./common/samples/3.x/BlazorServerEFCoreSample/BlazorServerDbContextExample/Pages/EditContact.razor?name=snippet1)]
 

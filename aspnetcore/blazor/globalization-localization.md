@@ -18,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/globalization-localization
-ms.openlocfilehash: deb68b50f408532af22d20ba9b06a9ee3eccb335
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: 2b8820acba564bdfb85f8338ed5482573960fbb4
+ms.sourcegitcommit: 600666440398788db5db25dc0496b9ca8fe50915
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88628218"
+ms.lasthandoff: 09/14/2020
+ms.locfileid: "90080273"
 ---
 # <a name="aspnet-core-no-locblazor-globalization-and-localization"></a>ASP.NET Core Blazor 全球化和當地語系化
 
@@ -74,7 +74,23 @@ Blazor WebAssembly 應用程式會使用使用者的 [語言喜好](https://deve
 
 若要明確設定文化特性， <xref:System.Globalization.CultureInfo.DefaultThreadCurrentCulture?displayProperty=nameWithType> 請 <xref:System.Globalization.CultureInfo.DefaultThreadCurrentUICulture?displayProperty=nameWithType> 在中設定和 `Program.Main` 。
 
-根據預設， Blazor 應用程式的連結器設定會 Blazor WebAssembly 去除國際化資訊（明確要求的地區設定除外）。 如需控制連結器行為的詳細資訊和指引，請參閱 <xref:blazor/host-and-deploy/configure-linker#configure-the-linker-for-internationalization> 。
+::: moniker range=">= aspnetcore-5.0"
+
+依預設，會 Blazor WebAssembly 在使用者的文化特性中攜帶顯示值所需的全球化資源，例如日期和貨幣。 如果應用程式不需要當地語系化，您可以設定應用程式以支援以文化特性為基礎的非變異文化特性 `en-US` ：
+
+```xml
+<PropertyGroup>
+  <InvariantGlobalization>true</InvariantGlobalization>
+</PropertyGroup>
+```
+
+::: moniker-end
+
+::: moniker range="< aspnetcore-5.0"
+
+根據預設，應用程式的中繼語言 (IL) 連結器 Blazor WebAssembly 設定會去除國際化資訊（明確要求的地區設定除外）。 如需詳細資訊，請參閱<xref:blazor/host-and-deploy/configure-linker#configure-the-linker-for-internationalization>。
+
+::: moniker-end
 
 雖然預設選取的文化特性 Blazor 對大部分的使用者而言就已足夠，但請考慮提供方法讓使用者指定其慣用的地區設定。 如需 Blazor WebAssembly 使用文化特性選擇器的範例應用程式，請參閱 [`LocSample`](https://github.com/pranavkm/LocSample) 當地語系化範例應用程式。
 

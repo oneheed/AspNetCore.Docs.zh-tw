@@ -16,13 +16,14 @@ no-loc:
 - Let's Encrypt
 - Razor
 - SignalR
+- Models
 uid: tutorials/first-web-api
-ms.openlocfilehash: 3d83141b8b638a369b08b0fadafccd96c0b48214
-ms.sourcegitcommit: 4df148cbbfae9ec8d377283ee71394944a284051
+ms.openlocfilehash: ebce9f2f4992d83c6b28edb5c771cdfc8a7a0b6a
+ms.sourcegitcommit: 600666440398788db5db25dc0496b9ca8fe50915
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 08/26/2020
-ms.locfileid: "88876785"
+ms.lasthandoff: 09/14/2020
+ms.locfileid: "90080377"
 ---
 # <a name="tutorial-create-a-web-api-with-aspnet-core"></a>教學課程：使用 ASP.NET Core 建立 web API
 
@@ -59,7 +60,7 @@ ms.locfileid: "88876785"
 
 ![左側方塊代表用戶端。 它會送出要求並接收來自應用程式 (右側繪製的方塊) 的回應。 在應用程式方塊中，三個方塊代表控制器、模型以及資料存取層。 要求進入應用程式的控制器，而在控制器與資料存取層之間進行讀取/寫入作業。 模型會序列化並在回應中傳回至用戶端。](first-web-api/_static/architecture.png)
 
-## <a name="prerequisites"></a>先決條件
+## <a name="prerequisites"></a>必要條件
 
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
@@ -117,7 +118,7 @@ ms.locfileid: "88876785"
 
   ![macOS API 範本選取專案](first-web-api-mac/_static/api_template.png)
 
-* 在 [ **設定新的 ASP.NET Core WEB API** ] 對話方塊中，選取最新的 .net Core 3.X **目標 Framework**。 選取 [下一步]  。
+* 在 [ **設定新的 ASP.NET Core WEB API** ] 對話方塊中，選取最新的 .net Core 3.X **目標 Framework**。 選取 [下一步]。
 
 * 針對 [專案名稱]**** 輸入 *TodoApi*，然後選取 [建立]****。
 
@@ -197,25 +198,25 @@ ms.locfileid: "88876785"
 
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
-* 在 **方案總管**中，以滑鼠右鍵按一下專案。 選取 **[**  >  **新增資料夾**]。 將資料夾命名為 *Models*。
+* 在 **方案總管**中，以滑鼠右鍵按一下專案。 選取 **[**  >  **新增資料夾**]。 為資料夾命名 *Models* 。
 
-* 以滑鼠右鍵按一下 *Models* 資料夾，然後選取 [新增]**** > [類別]****。 將類別命名為 *TodoItem*，然後選取 [新增]****。
+* 以滑鼠右鍵按一下 *Models* 資料夾，然後選取 [**加入**  >  **類別**]。 將類別命名為 *TodoItem*，然後選取 [新增]****。
 
 * 使用下列程式碼取代範本程式碼：
 
 # <a name="visual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code)
 
-* 新增名為 *Models* 的資料夾。
+* 新增名為的資料夾 *Models* 。
 
-* 將 `TodoItem` 類別新增至具有下列程式碼的 *Models* 資料夾：
+* `TodoItem`使用下列程式碼，將類別新增至 *Models* 資料夾：
 
 # <a name="visual-studio-for-mac"></a>[Visual Studio for Mac](#tab/visual-studio-mac)
 
-* 以滑鼠右鍵按一下專案。 選取 **[**  >  **新增資料夾**]。 將資料夾命名為 *Models*。
+* 以滑鼠右鍵按一下專案。 選取 **[**  >  **新增資料夾**]。 為資料夾命名 *Models* 。
 
   ![新增資料夾](first-web-api-mac/_static/folder.png)
 
-* 以滑鼠右鍵按一下 *Models* 資料夾，然後選取 [新增]**[新增檔案]** > **[一般]** > **[空類別]** > ****。
+* 以滑鼠右鍵按一下 *Models* 資料夾，然後選取**Add** > [**新增**檔案 > **一般**] > **空白類別**。
 
 * 將類別命名為 *TodoItem*，然後按一下 [新增]****。
 
@@ -227,7 +228,7 @@ ms.locfileid: "88876785"
 
 `Id` 屬性的功能相當於關聯式資料庫中的唯一索引鍵。
 
-模型類別可位於專案中的任何位置，但依照慣例會使用 *Models* 資料夾。
+模型類別可移至專案中的任何位置，但依照慣例，會 *Models* 使用資料夾。
 
 ## <a name="add-a-database-context"></a>新增資料庫內容
 
@@ -247,7 +248,7 @@ ms.locfileid: "88876785"
 
 ## <a name="add-the-todocontext-database-context"></a>新增 TodoCoNtext 資料庫內容
 
-* 以滑鼠右鍵按一下 *Models* 資料夾，然後選取 [新增]**** > [類別]****。 將類別命名為 *TodoContext*，然後按一下 [新增]****。
+* 以滑鼠右鍵按一下 *Models* 資料夾，然後選取 [**加入**  >  **類別**]。 將類別命名為 *TodoContext*，然後按一下 [新增]****。
 
 # <a name="visual-studio-code--visual-studio-for-mac"></a>[Visual Studio Code / Visual Studio for Mac](#tab/visual-studio-code+visual-studio-mac)
 
@@ -282,8 +283,8 @@ ms.locfileid: "88876785"
 * 選取 [使用 Entity Framework 執行動作的 API 控制器]****，然後選取 [新增]****。
 * 在 [使用 Entity Framework 執行動作的 API 控制器]**** 對話方塊中：
 
-  * 選取**模型類別**中的 [ **TodoItem (TodoApi]) ** 。
-  * 選取**資料內容類別**中 **) 的 TodoCoNtext (TodoApi** 。
+  * 選取**模型類別**中的 [ **TodoItem (TodoApi] Models) 。**
+  * 選取**資料內容類別**中的**TodoCoNtext (TodoApi Models) 。**
   * 選取 [新增]。
 
 # <a name="visual-studio-code--visual-studio-for-mac"></a>[Visual Studio Code / Visual Studio for Mac](#tab/visual-studio-code+visual-studio-mac)
@@ -352,7 +353,7 @@ dotnet aspnet-codegenerator controller -name TodoItemsController -async -api -m 
 
 * 建立新的要求。
 * 將 HTTP 方法設為 `POST`。
-* 將 URI 設定為 `https://localhost:<port>/api/TodoItems` 。 例如 `https://localhost:5001/api/TodoItems`。
+* 將 URI 設定為 `https://localhost:<port>/api/TodoItems` 。 例如： `https://localhost:5001/api/TodoItems` 。
 * 選取 [Body]**** \(本文\) 索引標籤。
 * 選取 [原始]**** 選項按鈕。
 * 將類型設定為 **JSON (application/json)**。
@@ -377,7 +378,7 @@ dotnet aspnet-codegenerator controller -name TodoItemsController -async -api -m 
   ![Postman 主控台的 [標頭] 索引標籤](first-web-api/_static/3/create.png)
 
 * 將 HTTP 方法設為 `GET`。
-* 將 URI 設定為 `https://localhost:<port>/api/TodoItems/1` 。 例如 `https://localhost:5001/api/TodoItems/1`。
+* 將 URI 設定為 `https://localhost:<port>/api/TodoItems/1` 。 例如： `https://localhost:5001/api/TodoItems/1` 。
 * 選取 [傳送]。
 
 ## <a name="examine-the-get-methods"></a>檢查 GET 方法
@@ -408,7 +409,7 @@ dotnet aspnet-codegenerator controller -name TodoItemsController -async -api -m 
 
 * 建立新的要求。
 * 將 HTTP 方法設定為 **GET**。
-* 將要求 URI 設定為 `https://localhost:<port>/api/TodoItems` 。 例如 `https://localhost:5001/api/TodoItems`。
+* 將要求 URI 設定為 `https://localhost:<port>/api/TodoItems` 。 例如： `https://localhost:5001/api/TodoItems` 。
 * 在 Postman 中，設定 [Two pane view] \(雙窗格檢視\)****。
 * 選取 [傳送]。
 
@@ -549,7 +550,7 @@ DTO 可以用來：
 
 ![左側方塊代表用戶端。 它會送出要求並接收來自應用程式 (右側繪製的方塊) 的回應。 在應用程式方塊中，三個方塊代表控制器、模型以及資料存取層。 要求進入應用程式的控制器，而在控制器與資料存取層之間進行讀取/寫入作業。 模型會序列化並在回應中傳回至用戶端。](first-web-api/_static/architecture.png)
 
-## <a name="prerequisites"></a>先決條件
+## <a name="prerequisites"></a>必要條件
 
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
@@ -599,7 +600,7 @@ DTO 可以用來：
 
 * 在8.6 版之前的 Visual Studio for Mac 中，選取 [ **.net Core**  >  **應用程式**  >  **API**  >  **]**。 在8.6 版或更新版本中，選取 [ **Web] 和 [主控台**  >  **應用程式**  >  **API**  >  **]**。
   
-* 在 [ **設定新的 ASP.NET Core WEB API** ] 對話方塊中，選取最新的 .net Core 2.X **目標 Framework**。 選取 [下一步]  。
+* 在 [ **設定新的 ASP.NET Core WEB API** ] 對話方塊中，選取最新的 .net Core 2.X **目標 Framework**。 選取 [下一步]。
 
 * 針對 [專案名稱]**** 輸入 *TodoApi*，然後選取 [建立]****。
 
@@ -639,25 +640,25 @@ DTO 可以用來：
 
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
-* 在 **方案總管**中，以滑鼠右鍵按一下專案。 選取 **[**  >  **新增資料夾**]。 將資料夾命名為 *Models*。
+* 在 **方案總管**中，以滑鼠右鍵按一下專案。 選取 **[**  >  **新增資料夾**]。 為資料夾命名 *Models* 。
 
-* 以滑鼠右鍵按一下 *Models* 資料夾，然後選取 [新增]**** > [類別]****。 將類別命名為 *TodoItem*，然後選取 [新增]****。
+* 以滑鼠右鍵按一下 *Models* 資料夾，然後選取 [**加入**  >  **類別**]。 將類別命名為 *TodoItem*，然後選取 [新增]****。
 
 * 使用下列程式碼取代範本程式碼：
 
 # <a name="visual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code)
 
-* 新增名為 *Models* 的資料夾。
+* 新增名為的資料夾 *Models* 。
 
-* 將 `TodoItem` 類別新增至具有下列程式碼的 *Models* 資料夾：
+* `TodoItem`使用下列程式碼，將類別新增至 *Models* 資料夾：
 
 # <a name="visual-studio-for-mac"></a>[Visual Studio for Mac](#tab/visual-studio-mac)
 
-* 以滑鼠右鍵按一下專案。 選取 **[**  >  **新增資料夾**]。 將資料夾命名為 *Models*。
+* 以滑鼠右鍵按一下專案。 選取 **[**  >  **新增資料夾**]。 為資料夾命名 *Models* 。
 
   ![新增資料夾](first-web-api-mac/_static/folder.png)
 
-* 以滑鼠右鍵按一下 *Models* 資料夾，然後選取 [新增]**[新增檔案]** > **[一般]** > **[空類別]** > ****。
+* 以滑鼠右鍵按一下 *Models* 資料夾，然後選取**Add** > [**新增**檔案 > **一般**] > **空白類別**。
 
 * 將類別命名為 *TodoItem*，然後按一下 [新增]****。
 
@@ -669,7 +670,7 @@ DTO 可以用來：
 
 `Id` 屬性的功能相當於關聯式資料庫中的唯一索引鍵。
 
-模型類別可位於專案中的任何位置，但依照慣例會使用 *Models* 資料夾。
+模型類別可移至專案中的任何位置，但依照慣例，會 *Models* 使用資料夾。
 
 ## <a name="add-a-database-context"></a>新增資料庫內容
 
@@ -677,7 +678,7 @@ DTO 可以用來：
 
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
-* 以滑鼠右鍵按一下 *Models* 資料夾，然後選取 [新增]**** > [類別]****。 將類別命名為 *TodoContext*，然後按一下 [新增]****。
+* 以滑鼠右鍵按一下 *Models* 資料夾，然後選取 [**加入**  >  **類別**]。 將類別命名為 *TodoContext*，然後按一下 [新增]****。
 
 # <a name="visual-studio-code--visual-studio-for-mac"></a>[Visual Studio Code / Visual Studio for Mac](#tab/visual-studio-code+visual-studio-mac)
 
@@ -809,7 +810,7 @@ DTO 可以用來：
 
 * 建立新的要求。
   * 將 HTTP 方法設定為 **GET**。
-  * 將要求 URI 設定為 `https://localhost:<port>/api/todo` 。 例如 `https://localhost:5001/api/todo`。
+  * 將要求 URI 設定為 `https://localhost:<port>/api/todo` 。 例如： `https://localhost:5001/api/todo` 。
 * 在 Postman 中，設定 [Two pane view] \(雙窗格檢視\)****。
 * 選取 [傳送]。
 
@@ -835,7 +836,7 @@ DTO 可以用來：
 
 * 建置專案。
 * 在 Postman 中，將 HTTP 方法設定為 `POST`。
-* 將 URI 設定為 `https://localhost:<port>/api/TodoItem` 。 例如 `https://localhost:5001/api/TodoItem`。
+* 將 URI 設定為 `https://localhost:<port>/api/TodoItem` 。 例如： `https://localhost:5001/api/TodoItem` 。
 * 選取 [Body]**** \(本文\) 索引標籤。
 * 選取 [原始]**** 選項按鈕。
 * 將類型設定為 **JSON (application/json)**。

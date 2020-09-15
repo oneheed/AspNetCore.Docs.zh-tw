@@ -18,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/webassembly-performance-best-practices
-ms.openlocfilehash: 91d0eb7b4910d1cf19b179372546afa63cd3f9c1
-ms.sourcegitcommit: 8fcb08312a59c37e3542e7a67dad25faf5bb8e76
+ms.openlocfilehash: 5d3cd1480dd37f437b2d6d5a89af0a842286be95
+ms.sourcegitcommit: 600666440398788db5db25dc0496b9ca8fe50915
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 09/11/2020
-ms.locfileid: "90009592"
+ms.lasthandoff: 09/14/2020
+ms.locfileid: "90080260"
 ---
 # <a name="aspnet-core-no-locblazor-webassembly-performance-best-practices"></a>ASP.NET Core Blazor WebAssembly 效能最佳做法
 
@@ -141,9 +141,21 @@ Blazor WebAssembly<xref:Microsoft.JSInterop.IJSRuntime>針對應用程式可用�
 
 ## <a name="reduce-app-size"></a>減少應用程式大小
 
+::: moniker range=">= aspnetcore-5.0"
+
+### <a name="intermediate-language-il-trimming"></a>中繼語言 (IL) 修剪
+
+[從 Blazor WebAssembly 應用程式修剪未使用的元件](xref:blazor/host-and-deploy/configure-trimmer) ，會移除應用程式二進位檔中未使用的程式碼，以減少應用程式的大小。 預設會在發行應用程式時執行修剪器。 若要從修剪中獲益，請使用 [`dotnet publish`](/dotnet/core/tools/dotnet-publish) 命令並將 [-c |--configuration](/dotnet/core/tools/dotnet-publish#options) 選項設為，以發佈應用程式進行部署 `Release` ：
+
+::: moniker-end
+
+::: moniker range="< aspnetcore-5.0"
+
 ### <a name="intermediate-language-il-linking"></a> (IL) 連結的中繼語言
 
-[連結 Blazor WebAssembly 應用程式](xref:blazor/host-and-deploy/configure-linker) 會藉由在應用程式的二進位檔中修剪未使用的程式碼，來減少應用程式的大小。 根據預設，連結器只會在建立設定時啟用 `Release` 。 若要從中獲益，請使用 [`dotnet publish`](/dotnet/core/tools/dotnet-publish) 命令並將 [-c |--configuration](/dotnet/core/tools/dotnet-publish#options) 選項設為，以發行應用程式進行部署 `Release` ：
+[連結 Blazor WebAssembly 應用程式](xref:blazor/host-and-deploy/configure-linker) 會藉由在應用程式的二進位檔中修剪未使用的程式碼，來減少應用程式的大小。 依預設，只有在設定中建立時，才會啟用中繼語言 (IL) 連結器 `Release` 。 若要從中獲益，請使用 [`dotnet publish`](/dotnet/core/tools/dotnet-publish) 命令並將 [-c |--configuration](/dotnet/core/tools/dotnet-publish#options) 選項設為，以發行應用程式進行部署 `Release` ：
+
+::: moniker-end
 
 ```dotnetcli
 dotnet publish -c Release
@@ -173,13 +185,14 @@ Blazor WebAssembly的執行時間包含下列 .NET 功能，如果應用程式�
 
 ::: moniker range=">= aspnetcore-5.0"
 
-* 依預設，會 Blazor WebAssembly 在使用者的文化特性中攜帶顯示值所需的全球化資源，例如日期和貨幣。 如果應用程式不需要當地語系化，您可以設定應用程式以支援以文化特性為基礎的非變異文化特性 `en-US` ：
+* 依預設，會 Blazor WebAssembly 在使用者的文化特性中攜帶顯示值所需的全球化資源，例如日期和貨幣。 如果應用程式不需要當地語系化，您可以 [設定應用程式以支援以](xref:blazor/globalization-localization)文化特性為基礎的非變異文化特性 `en-US` ：
 
   ```xml
   <PropertyGroup>
     <InvariantGlobalization>true</InvariantGlobalization>
   </PropertyGroup>
   ```
+
 ::: moniker-end
 
 ::: moniker range="< aspnetcore-5.0"

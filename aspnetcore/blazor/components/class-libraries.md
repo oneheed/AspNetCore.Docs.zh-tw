@@ -18,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/components/class-libraries
-ms.openlocfilehash: d933a677a063d50fbe708264106e3ce19400a270
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: 82969bf92965bfdeb1d1474ab47ca74ecbe6dd97
+ms.sourcegitcommit: 600666440398788db5db25dc0496b9ca8fe50915
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88628569"
+ms.lasthandoff: 09/14/2020
+ms.locfileid: "90080299"
 ---
 # <a name="aspnet-core-no-locrazor-components-class-libraries"></a>ASP.NET Core Razor 元件類別庫
 
@@ -42,7 +42,7 @@ ms.locfileid: "88628569"
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
 1. 建立新專案。
-1. 選取 [ ** Razor 類別庫**]。 選取 [下一步]  。
+1. 選取 [ ** Razor 類別庫**]。 選取 [下一步]。
 1. 在 [ **建立新的 Razor 類別庫** ] 對話方塊中，選取 [ **建立**]。
 1. 在 [專案名稱]**** 欄位中提供專案名稱，或接受預設專案名稱。 本主題中的範例會使用專案名稱 `ComponentLibrary` 。 選取 [建立]。
 1. 將 RCL 新增至方案：
@@ -183,5 +183,16 @@ dotnet pack
 
 ## <a name="additional-resources"></a>其他資源
 
+::: moniker range=">= aspnetcore-5.0"
+
 * <xref:razor-pages/ui-class>
-* [將 XML 連結器設定檔新增至程式庫](xref:blazor/host-and-deploy/configure-linker#add-an-xml-linker-configuration-file-to-a-library)
+* [將 XML 中繼語言 (IL) 修剪器設定檔新增至程式庫](xref:blazor/host-and-deploy/configure-trimmer)
+
+::: moniker-end
+
+::: moniker range="< aspnetcore-5.0"
+
+* <xref:razor-pages/ui-class>
+* [將 XML 中繼語言 (IL) 連結器設定檔新增至程式庫](xref:blazor/host-and-deploy/configure-linker#add-an-xml-linker-configuration-file-to-a-library)
+
+::: moniker-end

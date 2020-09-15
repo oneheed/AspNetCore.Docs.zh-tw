@@ -2,7 +2,7 @@
 title: 設定 ASP.NET Core 的連結器 Blazor
 author: guardrex
 description: 瞭解如何在建立應用程式時，控制 (IL) 連結器的中繼語言 Blazor 。
-monikerRange: '>= aspnetcore-3.1'
+monikerRange: '>= aspnetcore-3.1 <= aspnetcore-5.0'
 ms.author: riande
 ms.custom: mvc
 ms.date: 05/19/2020
@@ -18,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/host-and-deploy/configure-linker
-ms.openlocfilehash: 27a7edf0de1acc107d324afe07db63624615e550
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: f6b0412540f33aac7b0b35c7fc64ab110e68a340
+ms.sourcegitcommit: 600666440398788db5db25dc0496b9ca8fe50915
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88628127"
+ms.lasthandoff: 09/14/2020
+ms.locfileid: "90080286"
 ---
 # <a name="configure-the-linker-for-aspnet-core-no-locblazor"></a>設定 ASP.NET Core 的連結器 Blazor
 
@@ -31,7 +31,7 @@ ms.locfileid: "88628127"
 
 Blazor WebAssembly 在組建期間執行 [中繼語言 (IL) ](/dotnet/standard/managed-code#intermediate-language--execution) 連結，以從應用程式的輸出元件中修剪不必要的 IL。 在偵錯工具中建立時，連結器會停用。 應用程式必須在發行設定中建立，才能啟用連結器。 我們建議您在部署應用程式時，建立版本 Blazor WebAssembly 。 
 
-連結應用程式可針對大小進行優化，但可能會產生不利的影響。 使用反映或相關動態功能的應用程式可能會在修剪時中斷，因為連結器不知道這個動態行為，而且無法判斷在執行時間的反映需要哪些類型。 若要修剪這類應用程式，您必須在程式碼中和應用程式相依的封裝或架構中，針對反映所需的任何類型通知連結器。 
+連結應用程式可針對大小進行優化，但可能會產生不利的影響。 使用反映或相關動態功能的應用程式可能會在修剪時中斷，因為連結器不知道這個動態行為，而且無法判斷在執行時間的反映需要哪些類型。 若要修剪這類應用程式，您必須在程式碼中和應用程式相依的封裝或架構中，針對反映所需的任何類型通知連結器。
 
 若要確保已修剪的應用程式在部署後可以正常運作，請務必在開發期間經常測試應用程式的發行組建。
 
@@ -125,7 +125,7 @@ Blazor WebAssembly 在組建期間執行 [中繼語言 (IL) ](/dotnet/standard/m
 | `all`            | 包含的所有元件 |
 | `cjk`            | `I18N.CJK.dll`          |
 | `mideast`        | `I18N.MidEast.dll`      |
-| `none` (預設值) | 無                    |
+| `none` (預設) | 無                    |
 | `other`          | `I18N.Other.dll`        |
 | `rare`           | `I18N.Rare.dll`         |
 | `west`           | `I18N.West.dll`         |

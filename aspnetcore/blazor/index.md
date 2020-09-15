@@ -18,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/index
-ms.openlocfilehash: abebd5fde514975b1dcb642a3d378e33c3836fa9
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: ace2285e3265e7bb2ec50c8afce2eb9c296fd524
+ms.sourcegitcommit: 600666440398788db5db25dc0496b9ca8fe50915
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88628062"
+ms.lasthandoff: 09/14/2020
+ms.locfileid: "90080338"
 ---
 # <a name="introduction-to-aspnet-core-no-locblazor"></a>ASP.NET Core 簡介 Blazor
 
@@ -47,7 +47,7 @@ Blazor 是使用 .NET 建立互動式用戶端 web UI 的架構：
 * 使用 Windows、Linux 和 macOS 版的 Visual Studio 保持生產力。
 * 以常用的語言、架構和工具建置，不僅穩定、功能豐富，而且容易使用。
 
-## <a name="components"></a>元件
+## <a name="components"></a>單元
 
 Blazor 應用程式是以 *元件*為基礎。 中的元件 Blazor 是 UI 的元素，例如頁面、對話方塊或資料輸入表單。
 
@@ -131,9 +131,21 @@ WebAssembly 程式碼可以透過 JavaScript 存取瀏覽器的完整功能，�
 
 發佈的應用程式大小 (它的「承載大小」**) 是應用程式使用性的重要效能因素。 大型應用程式需要相對較長的時間才能下載至瀏覽器，這點會對使用者體驗造成傷害。 Blazor WebAssembly 優化承載大小以縮短下載時間：
 
+::: moniker range=">= aspnetcore-5.0"
+
+* 當應用程式由 [中繼語言 (IL) 修剪器](xref:blazor/host-and-deploy/configure-trimmer)發行時，未使用的程式碼會從應用程式中移除。
+* HTTP 回應會進行壓縮。
+* .NET 執行階段與組件會在瀏覽器中進行快取。
+
+::: moniker-end
+
+::: moniker range="< aspnetcore-5.0"
+
 * 若應用程式是透過[中繼語言 (IL) 連接器](xref:blazor/host-and-deploy/configure-linker)所發佈的，則會移除未使用的程式碼。
 * HTTP 回應會進行壓縮。
 * .NET 執行階段與組件會在瀏覽器中進行快取。
+
+::: moniker-end
 
 ## Blazor Server
 
@@ -163,7 +175,7 @@ Blazor 會執行 [.NET Standard 2.1](/dotnet/standard/net-standard)，讓 Blazor
 * [WebAssembly](https://webassembly.org/)
 * <xref:blazor/hosting-models>
 * <xref:tutorials/signalr-blazor-webassembly>
-* [C # 指南](/dotnet/csharp/)
+* [C# 指南](/dotnet/csharp/)
 * <xref:mvc/views/razor>
 * [HTML](https://www.w3.org/html/)
 * [很 Blazor 棒](https://github.com/AdrienTorris/awesome-blazor)社區連結

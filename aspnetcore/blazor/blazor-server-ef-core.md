@@ -18,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/blazor-server-ef-core
-ms.openlocfilehash: a1b295b2ce42bc5ee06b8b9579ea2c70d480580a
-ms.sourcegitcommit: 8fcb08312a59c37e3542e7a67dad25faf5bb8e76
+ms.openlocfilehash: e548465b3d79279802fbfacd66c69724d864d14d
+ms.sourcegitcommit: 600666440398788db5db25dc0496b9ca8fe50915
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 09/11/2020
-ms.locfileid: "90009657"
+ms.lasthandoff: 09/14/2020
+ms.locfileid: "90080325"
 ---
 # <a name="aspnet-core-no-locblazor-server-with-entity-framework-core-efcore"></a>ASP.NET Core Blazor Server 與 Entity Framework Core (EFCore) 
 
@@ -36,7 +36,7 @@ Blazor Server 是具狀態的應用程式架構。 應用程式會維持與伺�
 > [!NOTE]
 > 本文說明應用程式中的 EF Core Blazor Server 。 Blazor WebAssembly 應用程式會在 WebAssembly 沙箱中執行，以防止大部分的直接資料庫連接。 在中執行 EF Core Blazor WebAssembly 已超出本文的範圍。
 
-## <a name="sample-app"></a>範例應用程式
+<h2 id="sample-app-5x">範例應用程式</h2>
 
 範例應用程式已建立為 Blazor Server 使用 EF Core 之應用程式的參考。 範例應用程式包含具有排序和篩選、刪除、新增和更新作業的方格。 此範例示範如何使用 EF Core 來處理開放式平行存取。
 
@@ -51,7 +51,7 @@ Grid、add 和 view 元件會使用「每一作業的內容」模式，其中會
 > [!NOTE]
 > 本主題中的部分程式碼範例需要未顯示的命名空間和服務。 若要檢查完整運作的程式碼，包括範例的必要和指示詞 [`@using`](xref:mvc/views/razor#using) [`@inject`](xref:mvc/views/razor#inject) Razor ，請參閱 [範例應用程式](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/blazor/common/samples/5.x/BlazorServerEFCoreSample)。
 
-## <a name="database-access"></a>資料庫存取
+<h2 id="database-access-5x">資料庫存取</h2>
 
 EF Core 依賴 <xref:Microsoft.EntityFrameworkCore.DbContext> 作為 [設定資料庫存取](/ef/core/miscellaneous/configuring-dbcontext) 的方法，並作為 [*工作單位*](https://martinfowler.com/eaaCatalog/unitOfWork.html)。 EF Core 提供 <xref:Microsoft.Extensions.DependencyInjection.EntityFrameworkServiceCollectionExtensions.AddDbContext%2A> ASP.NET Core 應用程式的擴充功能，這些應用程式預設會將內容註冊為 *範圍* 服務。 在 Blazor Server 應用程式中，已設定範圍的服務註冊可能會有問題，因為該實例會在使用者的線路內跨元件共用。 <xref:Microsoft.EntityFrameworkCore.DbContext> 不是安全線程，而且不是為了並行使用而設計。 現有的存留期不適當，原因如下：
 
@@ -91,9 +91,9 @@ EF Core 依賴 <xref:Microsoft.EntityFrameworkCore.DbContext> 作為 [設定資�
 
   將作業放 `Loading = true;` 在區塊中的行後面 `try` 。
 
-* 對於利用 EF Core [變更追蹤](/ef/core/querying/tracking) 或 [並行控制](/ef/core/saving/concurrency)的較長時間的作業，請將 [內容約制設為元件的存留期](#scope-to-the-component-lifetime)。
+* 對於利用 EF Core [變更追蹤](/ef/core/querying/tracking) 或 [並行控制](/ef/core/saving/concurrency)的較長時間的作業，請將 [內容約制設為元件的存留期](#scope-to-the-component-lifetime-5x)。
 
-### <a name="new-dbcontext-instances"></a>新的 DbCoNtext 實例
+<h3 id="new-dbcontext-instances-5x">新的 DbCoNtext 實例</h3>
 
 建立新實例的最快速方式 <xref:Microsoft.EntityFrameworkCore.DbContext> 是使用 `new` 建立新的實例。 不過，有幾個案例可能需要解析其他相依性。 例如，您可能想要使用 [`DbContextOptions`](/ef/core/miscellaneous/configuring-dbcontext#configuring-dbcontextoptions) 設定內容。
 
@@ -110,7 +110,7 @@ Factory 會插入元件，並用來建立新的實例。 例如，在 `Pages/Ind
 > [!NOTE]
 > `Wrapper` 是元件的 [元件參考](xref:blazor/components/index#capture-references-to-components) `GridWrapper` 。 請參閱 `Index` `Pages/Index.razor` [範例應用程式](https://github.com/dotnet/AspNetCore.Docs/blob/master/aspnetcore/blazor/common/samples/5.x/BlazorServerEFCoreSample/BlazorServerDbContextExample/Pages/Index.razor)中的 () 元件。
 
-### <a name="scope-to-the-component-lifetime"></a>將範圍設為元件存留期
+<h3 id="scope-to-the-component-lifetime-5x">將範圍設為元件存留期</h3>
 
 您可能會想要建立在 <xref:Microsoft.EntityFrameworkCore.DbContext> 元件存留期存在的。 這可讓您將它當作 [工作單位](https://martinfowler.com/eaaCatalog/unitOfWork.html) 使用，並利用內建的功能，例如變更追蹤和並行解析。
 您可以使用 factory 來建立內容，並在元件的存留期追蹤它。 首先，請依照 <xref:System.IDisposable> 下列方式，執行並插入 `Pages/EditContact.razor` factory：
@@ -137,7 +137,7 @@ Blazor Server 是具狀態的應用程式架構。 應用程式會維持與伺�
 > [!NOTE]
 > 本文說明應用程式中的 EF Core Blazor Server 。 Blazor WebAssembly 應用程式會在 WebAssembly 沙箱中執行，以防止大部分的直接資料庫連接。 在中執行 EF Core Blazor WebAssembly 已超出本文的範圍。
 
-## <a name="sample-app"></a>範例應用程式
+<h2 id="sample-app-3x">範例應用程式</h2>
 
 範例應用程式已建立為 Blazor Server 使用 EF Core 之應用程式的參考。 範例應用程式包含具有排序和篩選、刪除、新增和更新作業的方格。 此範例示範如何使用 EF Core 來處理開放式平行存取。
 
@@ -152,15 +152,13 @@ Grid、add 和 view 元件會使用「每一作業的內容」模式，其中會
 > [!NOTE]
 > 本主題中的部分程式碼範例需要未顯示的命名空間和服務。 若要檢查完整運作的程式碼，包括範例的必要和指示詞 [`@using`](xref:mvc/views/razor#using) [`@inject`](xref:mvc/views/razor#inject) Razor ，請參閱 [範例應用程式](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/blazor/common/samples/3.x/BlazorServerEFCoreSample)。
 
-## <a name="database-access"></a>資料庫存取
+<h2 id="database-access-3x">資料庫存取</h2>
 
 EF Core 依賴 <xref:Microsoft.EntityFrameworkCore.DbContext> 作為 [設定資料庫存取](/ef/core/miscellaneous/configuring-dbcontext) 的方法，並作為 [*工作單位*](https://martinfowler.com/eaaCatalog/unitOfWork.html)。 EF Core 提供 <xref:Microsoft.Extensions.DependencyInjection.EntityFrameworkServiceCollectionExtensions.AddDbContext%2A> ASP.NET Core 應用程式的擴充功能，這些應用程式預設會將內容註冊為 *範圍* 服務。 在 Blazor Server 應用程式中，這可能會造成問題，因為該實例會在使用者的線路內跨元件共用。 <xref:Microsoft.EntityFrameworkCore.DbContext> 不是安全線程，而且不是為了並行使用而設計。 現有的存留期不適當，原因如下：
 
 * 在應用程式的所有使用者之間**單獨**共用狀態，並導致不當的並行使用。
 * 限**域** (預設) 在相同使用者的元件之間提出類似的問題。
 * **暫時性** 會在每個要求中產生新的實例;但由於元件的存留期可能很長，因此可能會產生比預期更長的內容。
-
-## <a name="database-access"></a>資料庫存取
 
 下列建議旨在提供在應用程式中使用 EF Core 的一致方法 Blazor Server 。
 
@@ -194,9 +192,9 @@ EF Core 依賴 <xref:Microsoft.EntityFrameworkCore.DbContext> 作為 [設定資�
 
   將作業放 `Loading = true;` 在區塊中的行後面 `try` 。
 
-* 對於利用 EF Core [變更追蹤](/ef/core/querying/tracking) 或 [並行控制](/ef/core/saving/concurrency)的較長時間的作業，請將 [內容約制設為元件的存留期](#scope-to-the-component-lifetime)。
+* 對於利用 EF Core [變更追蹤](/ef/core/querying/tracking) 或 [並行控制](/ef/core/saving/concurrency)的較長時間的作業，請將 [內容約制設為元件的存留期](#scope-to-the-component-lifetime-3x)。
 
-### <a name="create-new-dbcontext-instances"></a>建立新的 DbCoNtext 實例
+<h3 id="new-dbcontext-instances-3x">新的 DbCoNtext 實例</h3>
 
 建立新實例的最快速方式 <xref:Microsoft.EntityFrameworkCore.DbContext> 是使用 `new` 建立新的實例。 不過，有幾個案例可能需要解析其他相依性。 例如，您可能想要使用 [`DbContextOptions`](/ef/core/miscellaneous/configuring-dbcontext#configuring-dbcontextoptions) 設定內容。
 
@@ -217,7 +215,7 @@ Factory 會插入元件，並用來建立新的實例。 例如，在 `Pages/Ind
 > [!NOTE]
 > `Wrapper` 是元件的 [元件參考](xref:blazor/components/index#capture-references-to-components) `GridWrapper` 。 請參閱 `Index` `Pages/Index.razor` [範例應用程式](https://github.com/dotnet/AspNetCore.Docs/blob/master/aspnetcore/blazor/common/samples/3.x/BlazorServerEFCoreSample/BlazorServerDbContextExample/Pages/Index.razor)中的 () 元件。
 
-### <a name="scope-to-the-component-lifetime"></a>將範圍設為元件存留期
+<h3 id="scope-to-the-component-lifetime-3x">將範圍設為元件存留期</h3>
 
 您可能會想要建立在 <xref:Microsoft.EntityFrameworkCore.DbContext> 元件存留期存在的。 這可讓您將它當作 [工作單位](https://martinfowler.com/eaaCatalog/unitOfWork.html) 使用，並利用內建的功能，例如變更追蹤和並行解析。
 您可以使用 factory 來建立內容，並在元件的存留期追蹤它。 首先，請依照 <xref:System.IDisposable> 下列方式，執行並插入 `Pages/EditContact.razor` factory：

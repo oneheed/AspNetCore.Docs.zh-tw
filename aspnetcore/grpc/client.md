@@ -17,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: grpc/client
-ms.openlocfilehash: 28e4f372e301a673644bfa97763ebc930f2d0ad5
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: 9406c2a34126f3e5cd1406a55c3585e7a28f3dd9
+ms.sourcegitcommit: a07f83b00db11f32313045b3492e5d1ff83c4437
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88634328"
+ms.lasthandoff: 09/15/2020
+ms.locfileid: "90593043"
 ---
 # <a name="call-grpc-services-with-the-net-client"></a>利用 .NET 用戶端呼叫 gRPC 服務
 
@@ -85,7 +85,7 @@ GRPC 用戶端必須使用與所呼叫服務相同的連接層級安全性。 �
 
 gRPC 具有不同類型的方法。 用戶端如何用來進行 gRPC 呼叫，取決於呼叫的方法類型。 GRPC 方法類型為：
 
-* 一元 (Unary)
+* 一元
 * 伺服器串流
 * 用戶端串流
 * 雙向串流
@@ -260,7 +260,18 @@ catch (RpcException ex)
 }
 ```
 
+## <a name="configure-deadline"></a>設定期限
+
+建議您設定 gRPC 呼叫期限，因為它會提供呼叫可執行檔時間上限。 它會停止不正常的服務，使其無法執行永久和耗盡的伺服器資源。 期限是建立可靠應用程式的有用工具。
+
+`CallOptions.Deadline`設定以設定 gRPC 呼叫的期限：
+
+[!code-csharp[](~/grpc/deadlines-cancellation/deadline-client.cs?highlight=7,12)]
+
+如需詳細資訊，請參閱<xref:grpc/deadlines-cancellation#deadlines>。
+
 ## <a name="additional-resources"></a>其他資源
 
 * <xref:grpc/clientfactory>
+* <xref:grpc/deadlines-cancellation>
 * <xref:grpc/basics>

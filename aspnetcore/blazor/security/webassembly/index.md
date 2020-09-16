@@ -18,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/security/webassembly/index
-ms.openlocfilehash: 391a38e9af42b162fc74bac803e6aa3cf687e7d5
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: e1af8f1de61edd934505a44e75ea07e0f09a67b5
+ms.sourcegitcommit: a07f83b00db11f32313045b3492e5d1ff83c4437
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88626060"
+ms.lasthandoff: 09/15/2020
+ms.locfileid: "90592952"
 ---
 # <a name="secure-aspnet-core-no-locblazor-webassembly"></a>安全 ASP.NET Core Blazor WebAssembly
 
@@ -98,6 +98,13 @@ Blazor WebAssembly 支援透過程式庫使用 OIDC 來驗證和授權應用程�
 重新整理權杖無法在應用程式中保護用戶端 Blazor WebAssembly 。 因此，不應將重新整理權杖傳送至應用程式以供直接使用。
 
 重新整理權杖可由裝載解決方案中的伺服器端應用程式維護及使用， Blazor WebAssembly 以存取協力廠商 api。 如需詳細資訊，請參閱<xref:blazor/security/webassembly/additional-scenarios#authenticate-users-with-a-third-party-provider-and-call-protected-apis-on-the-host-server-and-the-third-party>。
+
+## <a name="establish-claims-for-users"></a>為使用者建立宣告
+
+應用程式通常需要以伺服器的 web API 呼叫為基礎的使用者宣告。 例如，宣告經常用來在應用程式中 [建立授權](xref:blazor/security/index#authorization) 。 在這些情況下，應用程式會要求存取權杖以存取服務，並使用權杖來取得宣告的使用者資料。 如需範例，請參閱下列資源：
+
+* [其他案例：自訂使用者](xref:blazor/security/webassembly/additional-scenarios#customize-the-user)
+* <xref:blazor/security/webassembly/aad-groups-roles>
 
 ## <a name="implementation-guidance"></a>實作指引
 

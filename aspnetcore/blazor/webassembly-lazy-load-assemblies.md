@@ -18,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/webassembly-lazy-load-assemblies
-ms.openlocfilehash: f9b6766c2f46274e06cab18fd35b5e417e9bfa97
-ms.sourcegitcommit: 8fcb08312a59c37e3542e7a67dad25faf5bb8e76
+ms.openlocfilehash: eb4aaa2f3d412cdf650ed2daf7c12166991d92a1
+ms.sourcegitcommit: a07f83b00db11f32313045b3492e5d1ff83c4437
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 09/11/2020
-ms.locfileid: "90009605"
+ms.lasthandoff: 09/15/2020
+ms.locfileid: "90592900"
 ---
 # <a name="lazy-load-assemblies-in-aspnet-core-no-locblazor-webassembly"></a>ASP.NET Core 中的延遲載入元件 Blazor WebAssembly
 
@@ -42,20 +42,9 @@ Blazor的消極式載入功能可讓您將應用程式元件標記為消極式�
 
 ```xml
 <ItemGroup>
-  <BlazorWebAssemblyLazyLoad Include="GrantImaharaRobotControls" />
+  <BlazorWebAssemblyLazyLoad Include="GrantImaharaRobotControls.dll" />
 </ItemGroup>
 ```
-
-只有應用程式使用的元件可以延遲載入。 連結器會從已發佈的輸出中去除未使用的元件。
-
-> [!NOTE]
-> 在 .NET 5 候選版 1 (RC1) 或更新版本（將于九月推出），元件名稱將需要 `.dll` 副檔名：
->
-> ```xml
-> <ItemGroup>
->  <BlazorWebAssemblyLazyLoad Include="GrantImaharaRobotControls.dll" />
-> </ItemGroup>
-> ```
 
 ## <a name="router-component"></a>`Router` 元件
 
@@ -94,7 +83,7 @@ Blazor的 `Router` 元件會指定哪些元件會 Blazor 搜尋可路由傳送�
 * `Path`屬性是相對於應用程式基底路徑的使用者目的地路徑，例如 `/robot` 。
 * `CancellationToken`可以用來觀察非同步工作的取消。 `OnNavigateAsync` 當使用者流覽至另一個頁面時，會自動取消目前正在執行的流覽工作。
 
-在內部 `OnNavigateAsync` ，會執行邏輯來判斷要載入的元件。 選項包括：
+在內部 `OnNavigateAsync` ，會執行邏輯來判斷要載入的元件。 這些選項包括：
 
 * 方法內的條件式檢查 `OnNavigateAsync` 。
 * 對應至元件名稱之路由的查閱資料表，可插入元件或在區塊內執行 [`@code`](xref:mvc/views/razor#code) 。

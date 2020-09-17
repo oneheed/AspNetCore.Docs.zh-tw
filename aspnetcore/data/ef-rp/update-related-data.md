@@ -16,12 +16,12 @@ no-loc:
 - Razor
 - SignalR
 uid: data/ef-rp/update-related-data
-ms.openlocfilehash: 603c5e7c9f095c380461f8c6e4ead783ad35abe2
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: 17b200f0ba90035c417c96689798263af16551de
+ms.sourcegitcommit: 24106b7ffffc9fff410a679863e28aeb2bbe5b7e
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88630857"
+ms.lasthandoff: 09/17/2020
+ms.locfileid: "90722815"
 ---
 # <a name="part-7-no-locrazor-pages-with-ef-core-in-aspnet-core---update-related-data"></a>第7部分： Razor ASP.NET Core 更新相關資料中有 EF Core 的頁面
 
@@ -46,7 +46,7 @@ Course Create 和 Edit 頁面的 scaffold 程式碼包含一個 Department 下�
 
 [!code-csharp[](intro/samples/cu30/Pages/Courses/DepartmentNamePageModel.cs)]
 
-上述程式碼會建立 [SelectList](/dotnet/api/microsoft.aspnetcore.mvc.rendering.selectlist?view=aspnetcore-2.0) 以包含部門名稱的清單。 如果指定了 `selectedDepartment`，就會在 `SelectList` 中選取該部門。
+上述程式碼會建立 [SelectList](/dotnet/api/microsoft.aspnetcore.mvc.rendering.selectlist) 以包含部門名稱的清單。 如果指定了 `selectedDepartment`，就會在 `SelectList` 中選取該部門。
 
 *Create* 和 *Edit* 頁面模型類別將衍生自 `DepartmentNamePageModel`。
 
@@ -111,7 +111,7 @@ Course 會指派給 Department。 Create 和 Edit 頁面的基底類別會提供
 
 ## <a name="update-the-course-details-and-delete-pages"></a>更新 Course Detail 和 Delete 頁面
 
-不需要追蹤時，[AsNoTracking](/dotnet/api/microsoft.entityframeworkcore.entityframeworkqueryableextensions.asnotracking?view=efcore-2.0#Microsoft_EntityFrameworkCore_EntityFrameworkQueryableExtensions_AsNoTracking__1_System_Linq_IQueryable___0__) 可以改善效能。
+不需要追蹤時，[AsNoTracking](/dotnet/api/microsoft.entityframeworkcore.entityframeworkqueryableextensions.asnotracking#Microsoft_EntityFrameworkCore_EntityFrameworkQueryableExtensions_AsNoTracking__1_System_Linq_IQueryable___0__) 可以改善效能。
 
 ### <a name="update-the-course-page-models"></a>更新 Course 頁面模型
 
@@ -263,7 +263,7 @@ Course 會指派給 Department。 Create 和 Edit 頁面的基底類別會提供
 
 [!code-csharp[](intro/samples/cu/Pages/Courses/DepartmentNamePageModel.cshtml.cs?highlight=9,11,20-21)]
 
-上述程式碼會建立 [SelectList](/dotnet/api/microsoft.aspnetcore.mvc.rendering.selectlist?view=aspnetcore-2.0) 以包含部門名稱的清單。 如果指定了 `selectedDepartment`，就會在 `SelectList` 中選取該部門。
+上述程式碼會建立 [SelectList](/dotnet/api/microsoft.aspnetcore.mvc.rendering.selectlist) 以包含部門名稱的清單。 如果指定了 `selectedDepartment`，就會在 `SelectList` 中選取該部門。
 
 *Create* 和 *Edit* 頁面模型類別將衍生自 `DepartmentNamePageModel`。
 
@@ -328,7 +328,7 @@ Course 會指派給 Department。 Create 和 Edit 頁面的基底類別會提供
 
 ## <a name="add-asnotracking-to-the-details-and-delete-page-models"></a>將 AsNoTracking 新增至 *Details* 和 *Delete* 頁面模型
 
-不需要追蹤時，[AsNoTracking](/dotnet/api/microsoft.entityframeworkcore.entityframeworkqueryableextensions.asnotracking?view=efcore-2.0#Microsoft_EntityFrameworkCore_EntityFrameworkQueryableExtensions_AsNoTracking__1_System_Linq_IQueryable___0__) 可以改善效能。 將 `AsNoTracking` 新增至 *Delete* 和 *Details* 頁面模型。 下列程式碼顯示已更新的 *Delete* 頁面模型：
+不需要追蹤時，[AsNoTracking](/dotnet/api/microsoft.entityframeworkcore.entityframeworkqueryableextensions.asnotracking#Microsoft_EntityFrameworkCore_EntityFrameworkQueryableExtensions_AsNoTracking__1_System_Linq_IQueryable___0__) 可以改善效能。 將 `AsNoTracking` 新增至 *Delete* 和 *Details* 頁面模型。 下列程式碼顯示已更新的 *Delete* 頁面模型：
 
 [!code-csharp[](intro/samples/cu/Pages/Courses/Delete.cshtml.cs?name=snippet&highlight=21,23,40,41)]
 

@@ -17,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: aspnetcore-2.2
-ms.openlocfilehash: 1a8599e6d06724ec289ddd4bee94f89d3c78ef91
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: 085a26d508af5bdce506ab923a3256046b3894ab
+ms.sourcegitcommit: 24106b7ffffc9fff410a679863e28aeb2bbe5b7e
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88632378"
+ms.lasthandoff: 09/17/2020
+ms.locfileid: "90722484"
 ---
 # <a name="whats-new-in-aspnet-core-22"></a>ASP.NET Core 2.2 的新功能
 
@@ -94,7 +94,7 @@ HTTP/2 是 HTTP 通訊協定的主要版本。 HTTP/2 的值得注意的功能�
 
 ASP.NET Core 2.2 引進的 JAVA 用戶端 SignalR 。 此用戶端支援 SignalR 從 JAVA 程式碼（包括 Android 應用程式）連接到 ASP.NET Core 的伺服器。
 
-如需詳細資訊，請參閱 [ASP.NET Core SignalR JAVA 用戶端](https://docs.microsoft.com/aspnet/core/signalr/java-client?view=aspnetcore-2.2)。
+如需詳細資訊，請參閱 [ASP.NET Core SignalR JAVA 用戶端](../signalr/java-client.md?view=aspnetcore-2.2)。
 
 ## <a name="cors-improvements"></a>CORS 改善
 

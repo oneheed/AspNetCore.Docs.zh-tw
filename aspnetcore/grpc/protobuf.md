@@ -17,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: grpc/protobuf
-ms.openlocfilehash: 60af1add9ae2f8b2b94bc19b65667d7af91fb122
-ms.sourcegitcommit: 7258e94cf60c16e5b6883138e5e68516751ead0f
+ms.openlocfilehash: ea46e04bc4aa6269efbf8917d5f32194402a66ef
+ms.sourcegitcommit: 24106b7ffffc9fff410a679863e28aeb2bbe5b7e
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 08/29/2020
-ms.locfileid: "89102662"
+ms.lasthandoff: 09/17/2020
+ms.locfileid: "90722692"
 ---
 # <a name="create-protobuf-messages-for-net-apps"></a>建立 .NET 應用程式的 Protobuf 訊息
 
@@ -85,6 +85,10 @@ Protobuf 支援一系列原生純量實數值型別。 下表列出它們都具�
 | `string`      | `string`     |
 | `bytes`       | `ByteString` |
 
+純量值一律會有預設值，而且不能設定為 `null` 。 此條件約束包含 `string` 和 `ByteString` c # 類別。 `string` 預設值為空字串值， `ByteString` 預設為空的位元組值。 嘗試將其設定為擲回 `null` 錯誤。
+
+可為 null 的包裝函式[類型](#nullable-types)可用來支援 null 值。
+
 ### <a name="dates-and-times"></a>日期和時間
 
 原生純量類型不提供日期和時間值，相當於。NET 的 <xref:System.DateTimeOffset> 、 <xref:System.DateTime> 和 <xref:System.TimeSpan> 。 您可以使用一些 Protobuf 的 *已知類型* 延伸來指定這些類型。 這些擴充功能可在支援的平臺上，為複雜的欄位類型提供程式碼產生與執行時間支援。
@@ -145,19 +149,42 @@ message Person {
 }
 ```
 
-Protobuf 使用 .NET 可為 null 的型別，例如， `int?` 針對產生的訊息屬性。
+`wrappers.proto` 類型不會在產生的屬性中公開。 Protobuf 會自動將它們對應至 c # 訊息中適當的 .NET 可為 null 類型。 例如，欄位會 `google.protobuf.Int32Value` 產生 `int?` 屬性。 參考型別屬性（例如 `string` 和 `ByteString` ）不會變更，但 `null` 可以指派給它們，而不會發生錯誤。
 
 下表顯示包裝函式類型的完整清單及其對等的 c # 類型：
 
-| C# 類型   | 知名的型別包裝函式       |
-| --------- | ----------------------------- |
-| `bool?`   | `google.protobuf.BoolValue`   |
-| `double?` | `google.protobuf.DoubleValue` |
-| `float?`  | `google.protobuf.FloatValue`  |
-| `int?`    | `google.protobuf.Int32Value`  |
-| `long?`   | `google.protobuf.Int64Value`  |
-| `uint?`   | `google.protobuf.UInt32Value` |
-| `ulong?`  | `google.protobuf.UInt64Value` |
+| C# 類型      | 知名的型別包裝函式       |
+| ------------ | ----------------------------- |
+| `bool?`      | `google.protobuf.BoolValue`   |
+| `double?`    | `google.protobuf.DoubleValue` |
+| `float?`     | `google.protobuf.FloatValue`  |
+| `int?`       | `google.protobuf.Int32Value`  |
+| `long?`      | `google.protobuf.Int64Value`  |
+| `uint?`      | `google.protobuf.UInt32Value` |
+| `ulong?`     | `google.protobuf.UInt64Value` |
+| `string`     | `google.protobuf.StringValue` |
+| `ByteString` | `google.protobuf.BytesValue`  |
+
+### <a name="bytes"></a>位元組
+
+Protobuf 具有純量數值型別的支援二進位承載 `bytes` 。 C # 中產生的屬性會使用 `ByteString` 做為屬性類型。
+
+使用 `ByteString.CopyFrom(byte[] data)` 從位元組陣列建立新的實例：
+
+```csharp
+var data = await File.ReadAllBytesAsync(path);
+
+var payload = new PayloadResponse();
+payload.Data = ByteString.CopyFrom(data);
+```
+
+`ByteString` 您可以使用或直接存取資料 `ByteString.Span` `ByteString.Memory` 。 或呼叫將 `ByteString.ToByteArray()` 實例轉換回位元組陣列：
+
+```csharp
+var payload = await client.GetPayload(new PayloadRequest());
+
+await File.WriteAllBytesAsync(path, payload.Data.ToByteArray());
+```
 
 ### <a name="decimals"></a>小數位數
 

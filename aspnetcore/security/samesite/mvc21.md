@@ -18,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: security/samesite/mvc21
-ms.openlocfilehash: 0a719ae48199f7854ded534446045eb304d4d9f0
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: 38e5f0d1a2ecf5b46f73bf8574f73934a070880f
+ms.sourcegitcommit: 24106b7ffffc9fff410a679863e28aeb2bbe5b7e
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88632352"
+ms.lasthandoff: 09/17/2020
+ms.locfileid: "90722601"
 ---
 # <a name="aspnet-core-21-mvc-samesite-no-loccookie-sample"></a>ASP.NET Core 2.1 MVC SameSite cookie 範例
 
@@ -57,7 +57,7 @@ Response.Cookies.Append(CookieName, "cookieValue", cookieOptions);
 
 ## <a name="setting-no-loccookie-authentication-and-session-state-no-loccookies"></a>設定 Cookie 驗證和會話狀態 cookie s
 
-Cookie 驗證、會話狀態和 [各種其他元件](https://docs.microsoft.com/aspnet/core/security/samesite?view=aspnetcore-2.1) 會透過選項設定其 sameSite 選項 Cookie ，例如
+Cookie 驗證、會話狀態和 [各種其他元件](../samesite.md?view=aspnetcore-2.1) 會透過選項設定其 sameSite 選項 Cookie ，例如
 
 ```c#
 services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
@@ -172,5 +172,5 @@ ASP.NET Core 和 System. Web (ASP.NET 傳統) 具有獨立的 SameSite 執行。
 ### <a name="more-information"></a>相關資訊
  
 [Chrome 更新](https://www.chromium.org/updates/same-site) 
-[ASP.NET Core SameSite 檔](https://docs.microsoft.com/aspnet/core/security/samesite?view=aspnetcore-2.1) 
+[ASP.NET Core SameSite 檔](../samesite.md?view=aspnetcore-2.1) 
 [ASP.NET Core 2.1 SameSite 變更公告](https://github.com/dotnet/aspnetcore/issues/8212)

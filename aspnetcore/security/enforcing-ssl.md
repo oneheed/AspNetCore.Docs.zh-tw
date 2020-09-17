@@ -17,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: security/enforcing-ssl
-ms.openlocfilehash: 1cb2c2d18b717dc99c6ef4dac9954fef149c6deb
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: b5260084c2fdd296168e918f06d8b54faf1865d5
+ms.sourcegitcommit: 24106b7ffffc9fff410a679863e28aeb2bbe5b7e
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88631559"
+ms.lasthandoff: 09/17/2020
+ms.locfileid: "90722653"
 ---
 # <a name="enforce-https-in-aspnet-core"></a>在 ASP.NET Core 中強制使用 HTTPS
 
@@ -109,7 +109,7 @@ ms.locfileid: "88631559"
 
 ::: moniker range=">= aspnetcore-3.0"
 
-* 設定 `https_port` [主機設定](/aspnet/core/fundamentals/host/generic-host?view=aspnetcore-3.0#https_port)：
+* 設定 `https_port` [主機設定](../fundamentals/host/generic-host.md?view=aspnetcore-3.0#https_port)：
 
   * 在 [主機設定] 中。
   * 藉由設定 `ASPNETCORE_HTTPS_PORT` 環境變數。
@@ -117,7 +117,7 @@ ms.locfileid: "88631559"
 
     [!code-json[](enforcing-ssl/sample-snapshot/3.x/appsettings.json?highlight=2)]
 
-* 使用 [ASPNETCORE_URLS 環境變數](/aspnet/core/fundamentals/host/generic-host?view=aspnetcore-3.0#urls)來表示具有安全配置的埠。 環境變數會設定伺服器。 中介軟體會透過，間接探索 HTTPS 埠 <xref:Microsoft.AspNetCore.Hosting.Server.Features.IServerAddressesFeature> 。 這種方法不適用於反向 proxy 部署。
+* 使用 [ASPNETCORE_URLS 環境變數](../fundamentals/host/generic-host.md?view=aspnetcore-3.0#urls)來表示具有安全配置的埠。 環境變數會設定伺服器。 中介軟體會透過，間接探索 HTTPS 埠 <xref:Microsoft.AspNetCore.Hosting.Server.Features.IServerAddressesFeature> 。 這種方法不適用於反向 proxy 部署。
 
 ::: moniker-end
 
@@ -161,7 +161,7 @@ ms.locfileid: "88631559"
 
 部署至 Azure App Service 時，請遵循教學課程 [：將現有的自訂 SSL 憑證系結至 Azure Web Apps](/azure/app-service/app-service-web-tutorial-custom-ssl)中的指導方針。
 
-### <a name="options"></a>選項。
+### <a name="options"></a>選項
 
 下列反白顯示的程式碼會呼叫 [AddHttpsRedirection](/dotnet/api/microsoft.aspnetcore.builder.httpsredirectionservicesextensions.addhttpsredirection) 來設定中介軟體選項：
 
@@ -288,7 +288,7 @@ ASP.NET Core 2.1 和更新版本會使用擴充方法來執行 HSTS `UseHsts` �
 ::: moniker-end
 
 
-* 設定標頭的預先載入參數 `Strict-Transport-Security` 。 預先載入不是 [RFC HSTS 規格](https://tools.ietf.org/html/rfc6797)的一部分，但是網頁瀏覽器支援在全新安裝時預先載入 HSTS 網站。 如需詳細資訊，請參閱 [https://hstspreload.org/](https://hstspreload.org/) \(英文\)。
+* 設定標頭的預先載入參數 `Strict-Transport-Security` 。 預先載入不是 [RFC HSTS 規格](https://tools.ietf.org/html/rfc6797)的一部分，但是網頁瀏覽器支援在全新安裝時預先載入 HSTS 網站。 如需詳細資訊，請參閱 [https://hstspreload.org/](https://hstspreload.org/)。
 * 啟用 [includeSubDomain](https://tools.ietf.org/html/rfc6797#section-6.1.2)，這會將 HSTS 原則套用至主機子域。
 * 將 `max-age` 標頭的參數明確設定 `Strict-Transport-Security` 為60天。 如果未設定，則預設為30天。 如需詳細資訊，請參閱 [最大壽命](https://tools.ietf.org/html/rfc6797#section-6.1.1)指示詞。
 * 新增 `example.com` 至要排除的主機清單。
@@ -324,7 +324,7 @@ ASP.NET Core 2.1 和更新版本會使用擴充方法來執行 HSTS `UseHsts` �
 
 # <a name="net-core-cli"></a>[.NET Core CLI](#tab/netcore-cli) 
 
-使用 `--no-https` 選項。 例如：
+使用 `--no-https` 選項。 例如
 
 ```dotnetcli
 dotnet new webapp --no-https

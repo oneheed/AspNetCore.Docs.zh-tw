@@ -18,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/host-and-deploy/configure-trimmer
-ms.openlocfilehash: 2923f76c586465e4e6044763f18527a7d36ad57c
-ms.sourcegitcommit: 600666440398788db5db25dc0496b9ca8fe50915
+ms.openlocfilehash: 57d8f069c79b558020253968d736f350bc8a6f03
+ms.sourcegitcommit: 24106b7ffffc9fff410a679863e28aeb2bbe5b7e
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 09/14/2020
-ms.locfileid: "90080861"
+ms.lasthandoff: 09/17/2020
+ms.locfileid: "90721732"
 ---
 # <a name="configure-the-trimmer-for-aspnet-core-no-locblazor"></a>設定 ASP.NET Core 的修剪器 Blazor
 
@@ -42,6 +42,7 @@ Blazor WebAssembly 執行 [ (IL) 修剪的中繼語言 ](/dotnet/standard/manage
   <PublishTrimmed>false</PublishTrimmed>
 </PropertyGroup>
 ```
+您可以在 [修剪選項](/dotnet/core/deploying/trimming-options)中找到設定修剪器的其他選項。
 
 ## <a name="additional-resources"></a>其他資源
 

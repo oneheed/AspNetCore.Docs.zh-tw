@@ -17,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: grpc/diagnostics
-ms.openlocfilehash: 5c4c05e74a8223db3ade03b067bd66921439c99f
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: 7d2da20d04b93ebcd16fb58a4b74b5b67d37bd72
+ms.sourcegitcommit: 24106b7ffffc9fff410a679863e28aeb2bbe5b7e
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88633262"
+ms.lasthandoff: 09/17/2020
+ms.locfileid: "90722919"
 ---
 # <a name="logging-and-diagnostics-in-grpc-on-net"></a>在 .NET 上 gRPC 中的記錄和診斷
 
@@ -31,8 +31,8 @@ ms.locfileid: "88633262"
 本文提供從 gRPC 應用程式收集診斷資訊，以協助疑難排解問題的指引。 涵蓋的主題包括：
 
 * **記錄** -寫入 [.net Core 記錄](xref:fundamentals/logging/index)的結構化記錄。 <xref:Microsoft.Extensions.Logging.ILogger> 應用程式架構會使用它來寫入記錄，以及讓使用者在應用程式中進行自己的記錄。
-* **追蹤** -與使用和撰寫之作業相關的事件 `DiaganosticSource` `Activity` 。 診斷來源的追蹤通常用來依程式庫（例如 [Application Insights](https://docs.microsoft.com/azure/azure-monitor/app/asp-net-core) 和 [OpenTelemetry](https://github.com/open-telemetry/opentelemetry-dotnet)）收集應用程式遙測。
-* **計量** -依時間間隔表示的資料量值，例如每秒要求數。 計量是使用發出的 `EventCounter` ，可使用 [dotnet 計數器](https://docs.microsoft.com/dotnet/core/diagnostics/dotnet-counters) 命令列工具或 [Application Insights](https://docs.microsoft.com/azure/azure-monitor/app/eventcounters)來觀察。
+* **追蹤** -與使用和撰寫之作業相關的事件 `DiaganosticSource` `Activity` 。 診斷來源的追蹤通常用來依程式庫（例如 [Application Insights](/azure/azure-monitor/app/asp-net-core) 和 [OpenTelemetry](https://github.com/open-telemetry/opentelemetry-dotnet)）收集應用程式遙測。
+* **計量** -依時間間隔表示的資料量值，例如每秒要求數。 計量是使用發出的 `EventCounter` ，可使用 [dotnet 計數器](/dotnet/core/diagnostics/dotnet-counters) 命令列工具或 [Application Insights](/azure/azure-monitor/app/eventcounters)來觀察。
 
 ## <a name="logging"></a>記錄
 
@@ -111,7 +111,7 @@ info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
 
 #### <a name="grpc-client-log-scopes"></a>gRPC 用戶端記錄範圍
 
-GRPC 用戶端會將 [記錄範圍](https://docs.microsoft.com/aspnet/core/fundamentals/logging#log-scopes) 新增至在 gRPC 呼叫期間進行的記錄。 此範圍具有與 gRPC 呼叫相關的中繼資料：
+GRPC 用戶端會將 [記錄範圍](../fundamentals/logging/index.md#log-scopes) 新增至在 gRPC 呼叫期間進行的記錄。 此範圍具有與 gRPC 呼叫相關的中繼資料：
 
 * **GrpcMethodType** -gRPC 方法類型。 可能的值是列舉的名稱 `Grpc.Core.MethodType` ，例如一元
 * **GrpcUri** -gRPC 方法的相對 URI，例如/greet。Greeter/SayHellos
@@ -133,7 +133,7 @@ dbug: Grpc.Net.Client.Internal.GrpcCall[4]
 
 ## <a name="tracing"></a>追蹤
 
-gRPC services 和 gRPC 用戶端會提供使用 [DiagnosticSource](https://docs.microsoft.com/dotnet/api/system.diagnostics.diagnosticsource) 和 [活動](https://docs.microsoft.com/dotnet/api/system.diagnostics.activity)進行 gRPC 呼叫的相關資訊。
+gRPC services 和 gRPC 用戶端會提供使用 [DiagnosticSource](/dotnet/api/system.diagnostics.diagnosticsource) 和 [活動](/dotnet/api/system.diagnostics.activity)進行 gRPC 呼叫的相關資訊。
 
 * .NET gRPC 會使用活動來代表 gRPC 的呼叫。
 * 追蹤事件會在 gRPC 呼叫活動開始和停止時寫入診斷來源。
@@ -159,7 +159,7 @@ gRPC 服務裝載于 ASP.NET Core，可報告傳入 HTTP 要求的相關事件�
 
 ### <a name="collecting-tracing"></a>收集追蹤
 
-最簡單的使用方式 `DiagnosticSource` 是在您的應用程式中設定遙測程式庫（例如 [Application Insights](https://docs.microsoft.com/azure/azure-monitor/app/asp-net-core) 或 [OpenTelemetry](https://github.com/open-telemetry/opentelemetry-dotnet) ）。 此程式庫會處理 gRPC 呼叫的相關資訊，以及其他應用程式遙測。
+最簡單的使用方式 `DiagnosticSource` 是在您的應用程式中設定遙測程式庫（例如 [Application Insights](/azure/azure-monitor/app/asp-net-core) 或 [OpenTelemetry](https://github.com/open-telemetry/opentelemetry-dotnet) ）。 此程式庫會處理 gRPC 呼叫的相關資訊，以及其他應用程式遙測。
 
 您可以在受管理的服務（例如 Application Insights）中查看追蹤，也可以選擇執行您自己的分散式追蹤系統。 OpenTelemetry 支援將追蹤資料匯出至 [Jaeger](https://www.jaegertracing.io/) 和 [Zipkin](https://zipkin.io/)。
 
@@ -203,7 +203,7 @@ ASP.NET Core 也會提供自己的 `Microsoft.AspNetCore.Hosting` 事件來源�
 
 ### <a name="observe-metrics"></a>觀察計量
 
-[dotnet-計數器](https://docs.microsoft.com/dotnet/core/diagnostics/dotnet-counters) 是一種效能監視工具，適用于臨機操作健全狀況監視和第一層效能調查。 使用 `Grpc.AspNetCore.Server` 或 `Grpc.Net.Client` 作為提供者名稱監視 .net 應用程式。
+[dotnet-計數器](/dotnet/core/diagnostics/dotnet-counters) 是一種效能監視工具，適用于臨機操作健全狀況監視和第一層效能調查。 使用 `Grpc.AspNetCore.Server` 或 `Grpc.Net.Client` 作為提供者名稱監視 .net 應用程式。
 
 ```console
 > dotnet-counters monitor --process-id 1902 Grpc.AspNetCore.Server
@@ -220,7 +220,7 @@ Press p to pause, r to resume, q to quit.
     Total Calls Unimplemented                   0
 ```
 
-另一種觀察 gRPC 計量的方式，就是使用 Application Insights 的 [ApplicationInsights EventCounterCollector 套件](https://docs.microsoft.com/azure/azure-monitor/app/eventcounters)來捕捉計數器資料。 一旦安裝之後，Application Insights 會在執行時間收集常見的 .NET 計數器。 預設不會收集 gRPC 的計數器，但可以自訂 App Insights [以包含額外的計數器](https://docs.microsoft.com/azure/azure-monitor/app/eventcounters#customizing-counters-to-be-collected)。
+另一種觀察 gRPC 計量的方式，就是使用 Application Insights 的 [ApplicationInsights EventCounterCollector 套件](/azure/azure-monitor/app/eventcounters)來捕捉計數器資料。 一旦安裝之後，Application Insights 會在執行時間收集常見的 .NET 計數器。 預設不會收集 gRPC 的計數器，但可以自訂 App Insights [以包含額外的計數器](/azure/azure-monitor/app/eventcounters#customizing-counters-to-be-collected)。
 
 針對要在 *Startup.cs*中收集的應用程式見解指定 gRPC 計數器：
 

@@ -18,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: test/integration-tests
-ms.openlocfilehash: b06c06fb5e525a0bdc3df1de50236fa8f76daca9
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: 9b36a77730a43c7515fcd2c56621412453784c9d
+ms.sourcegitcommit: 24106b7ffffc9fff410a679863e28aeb2bbe5b7e
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88635108"
+ms.lasthandoff: 09/17/2020
+ms.locfileid: "90722536"
 ---
 # <a name="integration-tests-in-aspnet-core"></a>ASP.NET Core 中的整合測試
 
@@ -388,7 +388,7 @@ SUT 是 Razor 具有下列特性的頁面訊息系統：
 
 &#8224;EF 主題、 [使用 InMemory 進行測試](/ef/core/miscellaneous/testing/in-memory)，說明如何使用記憶體內部資料庫來搭配 MSTest 進行測試。 本主題使用 [xUnit](https://xunit.github.io/) 測試架構。 跨不同測試架構的測試概念和測試的執行方式類似，但不完全相同。
 
-雖然應用程式不會使用存放庫模式，而不是 [工作單元)  (](https://martinfowler.com/eaaCatalog/unitOfWork.html)的有效範例，但 Razor 頁面支援這些開發模式。 如需詳細資訊，請參閱 [設計基礎結構持續性層](/dotnet/standard/microservices-architecture/microservice-ddd-cqrs-patterns/infrastructure-persistence-layer-design) 和 [測試控制器邏輯](/aspnet/core/mvc/controllers/testing) (範例會) 執行儲存機制模式。
+雖然應用程式不會使用存放庫模式，而不是 [工作單元)  (](https://martinfowler.com/eaaCatalog/unitOfWork.html)的有效範例，但 Razor 頁面支援這些開發模式。 如需詳細資訊，請參閱 [設計基礎結構持續性層](/dotnet/standard/microservices-architecture/microservice-ddd-cqrs-patterns/infrastructure-persistence-layer-design) 和 [測試控制器邏輯](../mvc/controllers/testing.md) (範例會) 執行儲存機制模式。
 
 ### <a name="test-app-organization"></a>測試應用程式組織
 
@@ -779,7 +779,7 @@ SUT 是 Razor 具有下列特性的頁面訊息系統：
 
 &#8224;EF 主題、 [使用 InMemory 進行測試](/ef/core/miscellaneous/testing/in-memory)，說明如何使用記憶體內部資料庫來搭配 MSTest 進行測試。 本主題使用 [xUnit](https://xunit.github.io/) 測試架構。 跨不同測試架構的測試概念和測試的執行方式類似，但不完全相同。
 
-雖然應用程式不會使用存放庫模式，而不是 [工作單元)  (](https://martinfowler.com/eaaCatalog/unitOfWork.html)的有效範例，但 Razor 頁面支援這些開發模式。 如需詳細資訊，請參閱 [設計基礎結構持續性層](/dotnet/standard/microservices-architecture/microservice-ddd-cqrs-patterns/infrastructure-persistence-layer-design) 和 [測試控制器邏輯](/aspnet/core/mvc/controllers/testing) (範例會) 執行儲存機制模式。
+雖然應用程式不會使用存放庫模式，而不是 [工作單元)  (](https://martinfowler.com/eaaCatalog/unitOfWork.html)的有效範例，但 Razor 頁面支援這些開發模式。 如需詳細資訊，請參閱 [設計基礎結構持續性層](/dotnet/standard/microservices-architecture/microservice-ddd-cqrs-patterns/infrastructure-persistence-layer-design) 和 [測試控制器邏輯](../mvc/controllers/testing.md) (範例會) 執行儲存機制模式。
 
 ### <a name="test-app-organization"></a>測試應用程式組織
 

@@ -17,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: grpc/client
-ms.openlocfilehash: 9406c2a34126f3e5cd1406a55c3585e7a28f3dd9
-ms.sourcegitcommit: a07f83b00db11f32313045b3492e5d1ff83c4437
+ms.openlocfilehash: 6515e87845cc5aa101532c18711d175a73581bee
+ms.sourcegitcommit: 24106b7ffffc9fff410a679863e28aeb2bbe5b7e
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 09/15/2020
-ms.locfileid: "90593043"
+ms.lasthandoff: 09/17/2020
+ms.locfileid: "90722705"
 ---
 # <a name="call-grpc-services-with-the-net-client"></a>利用 .NET 用戶端呼叫 gRPC 服務
 
@@ -33,7 +33,7 @@ ms.locfileid: "90593043"
 
 ## <a name="configure-grpc-client"></a>設定 gRPC 用戶端
 
-gRPC 用戶端是[從* \* proto*檔案產生](xref:grpc/basics#generated-c-assets)的具體用戶端類型。 具體 gRPC 用戶端的方法會轉譯為* \* proto*檔案中的 gRPC 服務。
+gRPC 用戶端是[從* \* proto*檔案產生](xref:grpc/basics#generated-c-assets)的具體用戶端類型。 具體 gRPC 用戶端的方法會轉譯為* \* proto*檔案中的 gRPC 服務。 例如，名為的服務會 `Greeter` 產生 `GreeterClient` 具有方法的型別來呼叫服務。
 
 GRPC 用戶端是從通道建立。 首先，使用 `GrpcChannel.ForAddress` 建立通道，然後使用通道來建立 gRPC 用戶端：
 
@@ -57,7 +57,7 @@ var counterClient = new Count.CounterClient(channel);
 
 GRPC 用戶端必須使用與所呼叫服務相同的連接層級安全性。 建立 gRPC 通道時，會設定 (TLS) 的 gRPC 用戶端傳輸層安全性。 GRPC 用戶端在呼叫服務且通道與服務的連接層級安全性不相符時，會擲回錯誤。
 
-若要將 gRPC 通道設定為使用 TLS，請確定伺服器位址的開頭為 `https` 。 例如，會 `GrpcChannel.ForAddress("https://localhost:5001")` 使用 HTTPS 通訊協定。 GRPC 通道會自動 negotates 由 TLS 保護的連線，並使用安全連線來進行 gRPC 呼叫。
+若要將 gRPC 通道設定為使用 TLS，請確定伺服器位址的開頭為 `https` 。 例如，會 `GrpcChannel.ForAddress("https://localhost:5001")` 使用 HTTPS 通訊協定。 GRPC 通道會自動協調受 TLS 保護的連線，並使用安全連線來進行 gRPC 呼叫。
 
 > [!TIP]
 > gRPC 支援透過 TLS 的用戶端憑證驗證。 如需使用 gRPC 通道設定用戶端憑證的詳細資訊，請參閱 <xref:grpc/authn-and-authz#client-certificate-authentication> 。

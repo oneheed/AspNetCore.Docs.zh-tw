@@ -18,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: performance/caching/middleware
-ms.openlocfilehash: 43b0ef1dcbf6d0137b14be9e58eb056f06ae093d
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: 7fe9629e1c60a6156c69e546736049653a4229b7
+ms.sourcegitcommit: 24106b7ffffc9fff410a679863e28aeb2bbe5b7e
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88633444"
+ms.lasthandoff: 09/17/2020
+ms.locfileid: "90722640"
 ---
 # <a name="response-caching-middleware-in-aspnet-core"></a>ASP.NET Core 中的回應快取中介軟體
 
@@ -35,7 +35,7 @@ ms.locfileid: "88633444"
 
 [查看或下載範例程式碼](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/performance/caching/middleware/samples) ([如何下載](xref:index#how-to-download-a-sample)) 
 
-## <a name="configuration"></a>組態
+## <a name="configuration"></a>設定
 
 回應快取中介軟體可透過共用架構隱含地提供 ASP.NET Core 的應用程式使用。
 
@@ -59,14 +59,14 @@ ms.locfileid: "88633444"
 
 上述的標頭不會寫入至回應，並會在控制器、動作或頁面上覆寫 Razor ：
 
-* 具有 [[ResponseCache]](xref:Microsoft.AspNetCore.Mvc.ResponseCacheAttribute) 屬性。 即使未設定屬性也適用。 例如，省略 [VaryByHeader](/aspnet/core/performance/caching/response#vary) 屬性將會從回應中移除對應的標頭。
+* 具有 [[ResponseCache]](xref:Microsoft.AspNetCore.Mvc.ResponseCacheAttribute) 屬性。 即使未設定屬性也適用。 例如，省略 [VaryByHeader](./response.md#vary) 屬性將會從回應中移除對應的標頭。
 
 回應快取中介軟體只會快取導致 200 (確定) 狀態碼的伺服器回應。 中介軟體會忽略任何其他回應（包括 [錯誤頁面](xref:fundamentals/error-handling)）。
 
 > [!WARNING]
 > 包含已驗證之用戶端內容的回應必須標示為無法快取，以防止中介軟體儲存和提供這些回應。 如需有關中介軟體如何判斷回應是否可快取的詳細資訊，請參閱快取的 [條件](#conditions-for-caching) 。
 
-## <a name="options"></a>選項。
+## <a name="options"></a>選項
 
 回應快取選項如下表所示。
 
@@ -182,7 +182,7 @@ if (responseCachingFeature != null)
 
 [查看或下載範例程式碼](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/performance/caching/middleware/samples) ([如何下載](xref:index#how-to-download-a-sample)) 
 
-## <a name="configuration"></a>組態
+## <a name="configuration"></a>設定
 
 使用 [AspNetCore 中繼套件](xref:fundamentals/metapackage-app) ，或將套件參考新增至 [AspNetCore. ResponseCaching](https://www.nuget.org/packages/Microsoft.AspNetCore.ResponseCaching/) 套件。
 
@@ -203,14 +203,14 @@ if (responseCachingFeature != null)
 
 上述的標頭不會寫入至回應，並會在控制器、動作或頁面上覆寫 Razor ：
 
-* 具有 [[ResponseCache]](xref:Microsoft.AspNetCore.Mvc.ResponseCacheAttribute) 屬性。 即使未設定屬性也適用。 例如，省略 [VaryByHeader](/aspnet/core/performance/caching/response#vary) 屬性將會從回應中移除對應的標頭。
+* 具有 [[ResponseCache]](xref:Microsoft.AspNetCore.Mvc.ResponseCacheAttribute) 屬性。 即使未設定屬性也適用。 例如，省略 [VaryByHeader](./response.md#vary) 屬性將會從回應中移除對應的標頭。
 
 回應快取中介軟體只會快取導致 200 (確定) 狀態碼的伺服器回應。 中介軟體會忽略任何其他回應（包括 [錯誤頁面](xref:fundamentals/error-handling)）。
 
 > [!WARNING]
 > 包含已驗證之用戶端內容的回應必須標示為無法快取，以防止中介軟體儲存和提供這些回應。 如需有關中介軟體如何判斷回應是否可快取的詳細資訊，請參閱快取的 [條件](#conditions-for-caching) 。
 
-## <a name="options"></a>選項。
+## <a name="options"></a>選項
 
 回應快取選項如下表所示。
 

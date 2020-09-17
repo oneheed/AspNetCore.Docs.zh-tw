@@ -17,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: signalr/version-differences
-ms.openlocfilehash: a8336a6c13c502f5a0fad150785cd9d484064618
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: 965fbb3d8007cb64aaf51d82d87ed7a3a5298e9b
+ms.sourcegitcommit: 24106b7ffffc9fff410a679863e28aeb2bbe5b7e
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88633002"
+ms.lasthandoff: 09/17/2020
+ms.locfileid: "90721784"
 ---
 # <a name="differences-between-aspnet-no-locsignalr-and-aspnet-core-no-locsignalr"></a>ASP.NET SignalR 與 ASP.NET Core 之間的差異 SignalR
 
@@ -146,17 +146,17 @@ app.UseSignalR(routes =>
 
 在 ASP.NET Core 中 SignalR ，連接模型已經過簡化。 連接會直接建立至單一中樞，而不是用來共用多個中樞存取權的單一連接。
 
-### <a name="streaming"></a>資料流
+### <a name="streaming"></a>串流
 
 ASP.NET Core SignalR 現在支援從中樞將 [資料串流](xref:signalr/streaming) 至用戶端。
 
-### <a name="state"></a>狀態
+### <a name="state"></a>州
 
 在用戶端與中樞 (之間傳遞任意狀態的能力通常稱為 `HubState`) 已移除，以及支援進度訊息。 目前沒有任何對應的中樞 proxy。
 
 ### <a name="persistentconnection-removal"></a>PersistentConnection 移除
 
-在 ASP.NET Core 中 SignalR ，已移除 [PersistentConnection](https://docs.microsoft.com/previous-versions/aspnet/jj919047(v%3dvs.118)) 類別。
+在 ASP.NET Core 中 SignalR ，已移除 [PersistentConnection](/previous-versions/aspnet/jj919047(v=vs.118)) 類別。
 
 ### <a name="globalhost"></a>GlobalHost
 
@@ -291,7 +291,7 @@ ASP.NET SignalR 支援 SQL Server 和 Redis。 ASP.NET Core SignalR 支援 Azure
 
 ## <a name="additional-resources"></a>其他資源
 
-* [集線器](xref:signalr/hubs)
+* [中樞](xref:signalr/hubs)
 * [JavaScript 用戶端](xref:signalr/javascript-client)
 * [.NET 用戶端](xref:signalr/dotnet-client)
 * [支援的平台](xref:signalr/supported-platforms)

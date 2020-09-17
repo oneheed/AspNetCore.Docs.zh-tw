@@ -17,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: performance/performance-best-practices
-ms.openlocfilehash: 587872b269d897d7c86eb77c110a4b6432218ed3
-ms.sourcegitcommit: dd0e87abf2bb50ee992d9185bb256ed79d48f545
+ms.openlocfilehash: 01575ec87d2d346da7367523ca5e257d53de4983
+ms.sourcegitcommit: 24106b7ffffc9fff410a679863e28aeb2bbe5b7e
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 08/21/2020
-ms.locfileid: "88746555"
+ms.lasthandoff: 09/17/2020
+ms.locfileid: "90722614"
 ---
 # <a name="aspnet-core-performance-best-practices"></a>ASP.NET Core 效能最佳做法
 
@@ -42,7 +42,7 @@ ms.locfileid: "88746555"
 
 ASP.NET Core 應用程式應設計為同時處理許多要求。 非同步 Api 可讓小型的執行緒集區，藉由不等待封鎖呼叫來處理上千個並行要求。 執行緒可能會在另一個要求上運作，而不是等待長時間執行的同步工作完成。
 
-ASP.NET Core 應用程式中常見的效能問題是封鎖可能為非同步呼叫。 許多同步封鎖呼叫會導致 [執行緒集](https://blogs.msdn.microsoft.com/vancem/2018/10/16/diagnosing-net-core-threadpool-starvation-with-perfview-why-my-service-is-not-saturating-all-cores-or-seems-to-stall/) 區耗盡和降級的回應時間。
+ASP.NET Core 應用程式中常見的效能問題是封鎖可能為非同步呼叫。 許多同步封鎖呼叫會導致 [執行緒集](/archive/blogs/vancem/diagnosing-net-core-threadpool-starvation-with-perfview-why-my-service-is-not-saturating-all-cores-or-seems-to-stall) 區耗盡和降級的回應時間。
 
 **請勿**：
 

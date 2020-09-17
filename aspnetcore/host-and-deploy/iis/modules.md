@@ -18,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: host-and-deploy/iis/modules
-ms.openlocfilehash: 7ddc1b0f80625fbc39ac49f305f745b005cbce46
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: 6936071339786262fa8eeb669a59225a695d7488
+ms.sourcegitcommit: 24106b7ffffc9fff410a679863e28aeb2bbe5b7e
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88634666"
+ms.lasthandoff: 09/17/2020
+ms.locfileid: "90722802"
 ---
 # <a name="iis-modules-with-aspnet-core"></a>與 ASP.NET Core 搭配運作的 IIS 模組
 
@@ -178,5 +178,5 @@ Appcmd.exe delete module MODULE_NAME /app.name:APPLICATION_NAME
 
 * [IIS 架構簡介：IIS 中的模組](/iis/get-started/introduction-to-iis/introduction-to-iis-architecture#modules-in-iis)
 * [IIS 模組概觀](/iis/get-started/introduction-to-iis/iis-modules-overview)
-* [自訂 IIS 7.0 角色和模組](https://technet.microsoft.com/library/cc627313.aspx)
+* [自訂 IIS 7.0 角色和模組](/previous-versions/tn-archive/cc627313(v=technet.10))
 * [Iis \<system.webServer>](/iis/configuration/system.webServer/)

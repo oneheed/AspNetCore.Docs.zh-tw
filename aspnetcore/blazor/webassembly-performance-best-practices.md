@@ -18,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/webassembly-performance-best-practices
-ms.openlocfilehash: 5d3cd1480dd37f437b2d6d5a89af0a842286be95
-ms.sourcegitcommit: 600666440398788db5db25dc0496b9ca8fe50915
+ms.openlocfilehash: d1ad646f82e5c9ba611a60fc9be8378bedef8dee
+ms.sourcegitcommit: 24106b7ffffc9fff410a679863e28aeb2bbe5b7e
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 09/14/2020
-ms.locfileid: "90080260"
+ms.lasthandoff: 09/17/2020
+ms.locfileid: "90721719"
 ---
 # <a name="aspnet-core-no-locblazor-webassembly-performance-best-practices"></a>ASP.NET Core Blazor WebAssembly 效能最佳做法
 
@@ -81,10 +81,7 @@ Blazor的比較演算法可避免在演算法察覺元件未變更時轉譯資�
 
 元件提供便利的方法來產生重複使用的程式碼和標記片段。 一般而言，我們建議您撰寫與應用程式需求最一致的個別元件。 有一點要注意的是，每個額外的子元件都有提供轉譯父元件所花費的總時間。 大部分的應用程式都可以忽略額外的額外負荷。 產生大量元件的應用程式應該考慮使用策略來降低處理的額外負荷，例如限制轉譯的元件數目。
 
-例如，呈現數百個包含元件之資料列的方格或清單，需要處理器密集的轉譯。 請考慮將方格或清單版面配置虛擬化，如此一來，就只會在任何指定時間轉譯元件的子集。 如需元件子集轉譯的範例，請參閱[ `Virtualization` (aspnet/samples GitHub 存放庫) 範例應用程式](https://github.com/aspnet/samples/tree/master/samples/aspnetcore/blazor/Virtualization)中的下列元件：
-
-* `Virtualize` 元件 ([`Shared/Virtualize.razor`](https://github.com/aspnet/samples/blob/master/samples/aspnetcore/blazor/Virtualization/Shared/Virtualize.cs)) ：以 c # 撰寫的元件，它會 <xref:Microsoft.AspNetCore.Components.ComponentBase> 根據使用者的滾動方式來呈現一組氣象資料列。
-* `FetchData` 元件 ([`Pages/FetchData.razor`](https://github.com/aspnet/samples/blob/master/samples/aspnetcore/blazor/Virtualization/Pages/FetchData.razor)) ：使用 `Virtualize` 元件一次顯示25個數據列的氣象資料。
+如需詳細資訊，請參閱<xref:blazor/components/virtualization>。
 
 ## <a name="avoid-javascript-interop-to-marshal-data"></a>避免 JavaScript interop 將資料封送處理
 

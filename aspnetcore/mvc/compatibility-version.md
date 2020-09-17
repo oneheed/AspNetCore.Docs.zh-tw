@@ -18,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: mvc/compatibility-version
-ms.openlocfilehash: fb24ca0b3a67ceca03a2666d5a4eb8782e05ba17
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: b7d14aa0371fcc01d568cf1e7b9908c4a8d984df
+ms.sourcegitcommit: 24106b7ffffc9fff410a679863e28aeb2bbe5b7e
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88630350"
+ms.lasthandoff: 09/17/2020
+ms.locfileid: "90722828"
 ---
 # <a name="compatibility-version-for-aspnet-core-mvc"></a>ASP.NET Core MVC 的相容性版本
 
@@ -37,7 +37,7 @@ ms.locfileid: "88630350"
 * `CompatibilityVersion` 值 `Version_2_0` `Version_2_2` 會標示為 `[Obsolete(...)]` 。
 * 請參閱 [Antiforgery、CORS、診斷、Mvc 和路由中的重大 API 變更](https://github.com/aspnet/Announcements/issues/387)。 這份清單包含相容性參數的重大變更。
 
-若要查看 `SetCompatibilityVersion` ASP.NET Core 2.x 應用程式如何運作，請選取 [此文章的 ASP.NET Core 2.2 版本](https://docs.microsoft.com/aspnet/core/mvc/compatibility-version?view=aspnetcore-2.2)。
+若要查看 `SetCompatibilityVersion` ASP.NET Core 2.x 應用程式如何運作，請選取 [此文章的 ASP.NET Core 2.2 版本](?view=aspnetcore-2.2)。
 
 ::: moniker-end
 

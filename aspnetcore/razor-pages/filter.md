@@ -17,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: razor-pages/filter
-ms.openlocfilehash: b6d6585c0cbd52715c4192d4ab3bee756dbb41b3
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: 436d640130b378e2c770322186020c6e252872ef
+ms.sourcegitcommit: 24106b7ffffc9fff410a679863e28aeb2bbe5b7e
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88635043"
+ms.lasthandoff: 09/17/2020
+ms.locfileid: "90722510"
 ---
 # <a name="filter-methods-for-no-locrazor-pages-in-aspnet-core"></a>RazorASP.NET Core 中頁面的篩選方法
 
@@ -39,7 +39,7 @@ Razor 頁面篩選：
 * 在執行處理常式方法之後執行程式碼。
 * 可以在某個頁面或全域實作。
 * 無法套用至特定頁面處理常式方法。
-* 可以有以相依性 [插入](xref:fundamentals/dependency-injection) (DI) 填入的函式相依性。 如需詳細資訊，請參閱 [ServiceFilterAttribute](/aspnet/core/mvc/controllers/filters#servicefilterattribute) 和 [TypeFilterAttribute](/aspnet/core/mvc/controllers/filters#typefilterattribute)。
+* 可以有以相依性 [插入](xref:fundamentals/dependency-injection) (DI) 填入的函式相依性。 如需詳細資訊，請參閱 [ServiceFilterAttribute](../mvc/controllers/filters.md#servicefilterattribute) 和 [TypeFilterAttribute](../mvc/controllers/filters.md#typefilterattribute)。
 
 雖然頁面自訂程式和中介軟體可讓您在處理常式方法執行之前執行自訂程式碼，但是只有 Razor 頁面篩選可以存取 <xref:Microsoft.AspNetCore.Mvc.RazorPages.PageModel.HttpContext> 和頁面。 中介軟體可存取 `HttpContext` ，但不能存取「頁面內容」。 篩選具有可 <xref:Microsoft.AspNetCore.Mvc.Filters.FilterContext> 提供存取的衍生參數 `HttpContext` 。 以下是頁面篩選的範例： [執行篩選屬性](#ifa) ，將標頭新增至回應，這是無法使用函式或中介軟體完成的動作。 只有在執行篩選、處理常式或頁面的主體時，才可存取頁面內容（包括存取頁面的實例和其模型） Razor 。
 

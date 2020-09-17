@@ -16,12 +16,12 @@ no-loc:
 - Razor
 - SignalR
 uid: fundamentals/localization
-ms.openlocfilehash: d5be01c67f455a2706a654574ef9f5e273551e70
-ms.sourcegitcommit: f09407d128634d200c893bfb1c163e87fa47a161
+ms.openlocfilehash: 478e9e58f265a8c372dd048f9ba8593424050e01
+ms.sourcegitcommit: 24106b7ffffc9fff410a679863e28aeb2bbe5b7e
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 08/26/2020
-ms.locfileid: "88865438"
+ms.lasthandoff: 09/17/2020
+ms.locfileid: "90722666"
 ---
 # <a name="globalization-and-localization-in-aspnet-core"></a>ASP.NET Core 全球化和當地語系化
 
@@ -66,7 +66,7 @@ ms.locfileid: "88865438"
 
 您可以依據控制器或區域來分割當地語系化的字串，也可以只用一個容器。 在範例應用程式中，會針對共用資源使用名為 `SharedResource` 的虛擬類別。
 
-[!code-csharp[](localization/sample/3.x/Localization/Resources/SharedResource.cs)]
+[!code-csharp[](localization/sample/3.x/Localization/SharedResource.cs)]
 
 有些開發人員會使用 `Startup` 類別來包含全域或共用字串。 下列範例會使用 `InfoController` 和 `SharedResource` 當地語系化工具：
 
@@ -420,7 +420,7 @@ services.Configure<RequestLocalizationOptions>(options =>
 
 您可以依據控制器或區域來分割當地語系化的字串，也可以只用一個容器。 在範例應用程式中，會針對共用資源使用名為 `SharedResource` 的虛擬類別。
 
-[!code-csharp[](localization/sample/3.x/Localization/Resources/SharedResource.cs)]
+[!code-csharp[](localization/sample/3.x/Localization/SharedResource.cs)]
 
 有些開發人員會使用 `Startup` 類別來包含全域或共用字串。 下列範例會使用 `InfoController` 和 `SharedResource` 當地語系化工具：
 
@@ -775,7 +775,7 @@ services.Configure<RequestLocalizationOptions>(options =>
 
 您可以依據控制器或區域來分割當地語系化的字串，也可以只用一個容器。 在範例應用程式中，會針對共用資源使用名為 `SharedResource` 的虛擬類別。
 
-[!code-csharp[](localization/sample/3.x/Localization/Resources/SharedResource.cs)]
+[!code-csharp[](localization/sample/3.x/Localization/SharedResource.cs)]
 
 有些開發人員會使用 `Startup` 類別來包含全域或共用字串。 下列範例會使用 `InfoController` 和 `SharedResource` 當地語系化工具：
 

@@ -16,18 +16,18 @@ no-loc:
 - Razor
 - SignalR
 uid: razor-pages/web-sdk
-ms.openlocfilehash: 163bc2679deda449f97cb4e50da1093e6b1edda4
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: fdc2991060050c813efb6dc895cf73ff876bae29
+ms.sourcegitcommit: 24106b7ffffc9fff410a679863e28aeb2bbe5b7e
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88634809"
+ms.lasthandoff: 09/17/2020
+ms.locfileid: "90722497"
 ---
 # <a name="aspnet-core-web-sdk"></a>ASP.NET Core Web SDK
 
 ### <a name="overview"></a>概觀
 
-`Microsoft.NET.Sdk.Web` 是用來建立 ASP.NET Core 應用程式的 [MSBuild 專案 SDK](https://docs.microsoft.com/visualstudio/msbuild/how-to-use-project-sdk) 。 您可以建立不含此 SDK 的 ASP.NET Core 應用程式，不過，Web SDK 是：
+`Microsoft.NET.Sdk.Web` 是用來建立 ASP.NET Core 應用程式的 [MSBuild 專案 SDK](/visualstudio/msbuild/how-to-use-project-sdk) 。 您可以建立不含此 SDK 的 ASP.NET Core 應用程式，不過，Web SDK 是：
 
 * 專為提供最先進的體驗量身打造。
 * 大部分使用者的建議目標。

@@ -17,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: tutorials/publish-to-azure-webapp-using-vs
-ms.openlocfilehash: 380e18d1826159fa0780909aba58fe8334ede8bb
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: ebfe89d68725d597d6975015bbf84414ff818829
+ms.sourcegitcommit: 24106b7ffffc9fff410a679863e28aeb2bbe5b7e
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88631936"
+ms.lasthandoff: 09/17/2020
+ms.locfileid: "90722906"
 ---
 # <a name="publish-an-aspnet-core-app-to-azure-with-visual-studio"></a>使用 Visual Studio 將 ASP.NET Core 應用程式發行到 Azure
 
@@ -34,7 +34,7 @@ ms.locfileid: "88631936"
 ::: moniker-end
 
 
-如果您正在處理 macOS，請參閱 [使用 Visual Studio for Mac 將 Web 應用程式發佈至 Azure App Service](https://docs.microsoft.com/visualstudio/mac/publish-app-svc?view=vsmac-2019) 。
+如果您正在處理 macOS，請參閱 [使用 Visual Studio for Mac 將 Web 應用程式發佈至 Azure App Service](/visualstudio/mac/publish-app-svc?view=vsmac-2019) 。
 
 若要針對 App Service 部署問題進行疑難排解，請參閱 <xref:test/troubleshoot-azure-iis>。
 
@@ -51,7 +51,7 @@ ms.locfileid: "88631936"
 完成 [新增專案]**** 對話方塊：
 
 * 選取 **ASP.NET Core Web 應用程式**。
-* 選取 [下一步]  。
+* 選取 [下一步] 。
 
 ![[新增專案] 對話方塊](publish-to-azure-webapp-using-vs/_static/new_prj.png)
 
@@ -100,14 +100,14 @@ Visual Studio 會建立解決方案。
 在 [發行]**** 對話方塊中：
 
 * 選取 [ **Azure**]。
-* 選取 [下一步]  。
+* 選取 [下一步] 。
 
 ![發佈對話方塊](publish-to-azure-webapp-using-vs/_static/maas1.png)
 
 在 [發行]**** 對話方塊中：
 
 * 選取 **Azure App Service (Linux) **。
-* 選取 [下一步]  。
+* 選取 [下一步] 。
 
 ![發佈對話方塊：選取 Azure 服務](publish-to-azure-webapp-using-vs/_static/maas2.png)
 
@@ -118,7 +118,7 @@ Visual Studio 會建立解決方案。
 [ **建立 App Service** ] 對話方塊隨即出現：
 
 * 會填入 [應用程式名稱]****、[資源群組]**** 和 [App Service 方案]**** 輸入欄位。 您可以保留這些名稱，或變更它們。
-* 選取 [建立]。
+* 選取 [建立]  。
 
 ![建立 App Service 對話方塊](publish-to-azure-webapp-using-vs/_static/newrg1.png)
 
@@ -136,7 +136,7 @@ Visual Studio 會建立解決方案。
 [ **設定** 相依性] 對話方塊隨即出現：
 
 * 選取 **Azure SQL Database**。
-* 選取 [下一步]  。
+* 選取 [下一步] 。
 
 ![設定 SQL Server 相依性對話方塊](publish-to-azure-webapp-using-vs/_static/sql1.png)
 
@@ -148,14 +148,14 @@ Visual Studio 會建立解決方案。
 
 * 填入 **資料庫名稱**、 **資源群組**、 **資料庫伺服器** 和 **App Service 計畫** 專案欄位。 您可以保留這些值或變更它們。
 * 輸入所選**資料庫伺服器**的**資料庫系統管理員使用者名稱**和**資料庫管理員密碼** (請注意，您使用的帳戶必須具有建立新 Azure SQL 資料庫的必要許可權) 
-* 選取 [建立]。
+* 選取 [建立]  。
 
 ![新增 Azure SQL Database 對話方塊](publish-to-azure-webapp-using-vs/_static/sql_create.png)
 
 建立完成之後，對話方塊會自動關閉，且 [ **設定 Azure SQL Database** ] 對話方塊會再次取得焦點：
 
 * 系統會自動選取剛建立的新實例。
-* 選取 [下一步]  。
+* 選取 [下一步] 。
 
 ![設定 Azure SQL Database 對話方塊](publish-to-azure-webapp-using-vs/_static/sql_select.png)
 

@@ -18,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: fundamentals/servers/httpsys
-ms.openlocfilehash: 29af28f512764b9efec682b44c8de1d2ae03ee04
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: e5346c1e58127747d777b5040fe7bc7d99b9a489
+ms.sourcegitcommit: 24106b7ffffc9fff410a679863e28aeb2bbe5b7e
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88631130"
+ms.lasthandoff: 09/17/2020
+ms.locfileid: "90722867"
 ---
 # <a name="httpsys-web-server-implementation-in-aspnet-core"></a>ASP.NET Core 中的 HTTP.sys 網頁伺服器實作
 
@@ -255,7 +255,7 @@ public IActionResult MyActionMethod()
 
    以下是 *netsh.exe* 的參考文件：
 
-   * [超文字傳輸通訊協定 (HTTP) 的 netsh 命令](https://technet.microsoft.com/library/cc725882.aspx)
+   * [超文字傳輸通訊協定 (HTTP) 的 netsh 命令](/previous-versions/windows/it-pro/windows-server-2008-R2-and-2008/cc725882(v=ws.10))
    * [UrlPrefix 字串](/windows/win32/http/urlprefix-strings)
 
 1. 執行應用程式。
@@ -506,7 +506,7 @@ public IActionResult MyActionMethod()
 
    以下是 *netsh.exe* 的參考文件：
 
-   * [超文字傳輸通訊協定 (HTTP) 的 netsh 命令](https://technet.microsoft.com/library/cc725882.aspx)
+   * [超文字傳輸通訊協定 (HTTP) 的 netsh 命令](/previous-versions/windows/it-pro/windows-server-2008-R2-and-2008/cc725882(v=ws.10))
    * [UrlPrefix 字串](/windows/win32/http/urlprefix-strings)
 
 1. 執行應用程式。
@@ -759,7 +759,7 @@ public IActionResult MyActionMethod()
 
    以下是 *netsh.exe* 的參考文件：
 
-   * [超文字傳輸通訊協定 (HTTP) 的 netsh 命令](https://technet.microsoft.com/library/cc725882.aspx)
+   * [超文字傳輸通訊協定 (HTTP) 的 netsh 命令](/previous-versions/windows/it-pro/windows-server-2008-R2-and-2008/cc725882(v=ws.10))
    * [UrlPrefix 字串](/windows/win32/http/urlprefix-strings)
 
 1. 執行應用程式。
@@ -1012,7 +1012,7 @@ public IActionResult MyActionMethod()
 
    以下是 *netsh.exe* 的參考文件：
 
-   * [超文字傳輸通訊協定 (HTTP) 的 netsh 命令](https://technet.microsoft.com/library/cc725882.aspx)
+   * [超文字傳輸通訊協定 (HTTP) 的 netsh 命令](/previous-versions/windows/it-pro/windows-server-2008-R2-and-2008/cc725882(v=ws.10))
    * [UrlPrefix 字串](/windows/win32/http/urlprefix-strings)
 
 1. 執行應用程式。

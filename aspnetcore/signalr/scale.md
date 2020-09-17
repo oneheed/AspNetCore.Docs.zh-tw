@@ -18,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: signalr/scale
-ms.openlocfilehash: bba965e14058663c3ed9c0f15afc6a8d78997aea
-ms.sourcegitcommit: 8fcb08312a59c37e3542e7a67dad25faf5bb8e76
+ms.openlocfilehash: 2bfe05748e6740043be7f1ccc6dbe22ad4b0ca44
+ms.sourcegitcommit: 24106b7ffffc9fff410a679863e28aeb2bbe5b7e
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 09/11/2020
-ms.locfileid: "90009748"
+ms.lasthandoff: 09/17/2020
+ms.locfileid: "90722562"
 ---
 # <a name="aspnet-core-no-locsignalr-hosting-and-scaling"></a>ASP.NET Core SignalR 裝載和調整
 
@@ -33,7 +33,7 @@ ms.locfileid: "90009748"
 
 ## <a name="sticky-sessions"></a>粘滯話
 
-SignalR 要求特定連接的所有 HTTP 要求都必須由相同的伺服器進程處理。 當 SignalR (多部) 伺服器的伺服器陣列上執行時，必須使用「粘滯話」。 某些負載平衡器也會將「粘滯話」稱為會話親和性。 Azure App Service 使用 [應用程式要求路由](https://docs.microsoft.com/iis/extensions/planning-for-arr/application-request-routing-version-2-overview) (ARR) 來路由傳送要求。 啟用 Azure App Service 中的 [ARR 親和性] 設定，將會啟用「粘滯話」。 不需要執行任何粘滯會話的唯一情況是：
+SignalR 要求特定連接的所有 HTTP 要求都必須由相同的伺服器進程處理。 當 SignalR (多部) 伺服器的伺服器陣列上執行時，必須使用「粘滯話」。 某些負載平衡器也會將「粘滯話」稱為會話親和性。 Azure App Service 使用 [應用程式要求路由](/iis/extensions/planning-for-arr/application-request-routing-version-2-overview) (ARR) 來路由傳送要求。 啟用 Azure App Service 中的 [ARR 親和性] 設定，將會啟用「粘滯話」。 不需要執行任何粘滯會話的唯一情況是：
 
 1. 在單一伺服器上裝載時，在單一進程中。
 1. 使用 Azure 服務時 SignalR 。

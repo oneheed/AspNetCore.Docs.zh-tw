@@ -17,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: grpc/comparison
-ms.openlocfilehash: d20740950f7ac56a3a3b2951b474151aaf9c6f5a
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: 3f0e44bb374214328f589c6ca3952c6d7aab88d8
+ms.sourcegitcommit: 9c031530d2e652fe422e786bd43392bc500d622f
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88631221"
+ms.lasthandoff: 09/18/2020
+ms.locfileid: "90770125"
 ---
 # <a name="compare-grpc-services-with-http-apis"></a>比較 gRPC 服務與 HTTP API
 
@@ -95,6 +95,7 @@ gRPC 適用于下列案例：
 * **點對點即時通訊**： gRPC 有絕佳的雙向串流支援。 gRPC services 可以即時推播訊息，而不會進行輪詢。
 * **多語言環境**： gRPC 工具支援所有熱門的開發語言，讓 gRPC 成為多國語言環境的理想選擇。
 * **網路受限的環境**： gRPC 訊息會以 Protobuf （輕量訊息格式）進行序列化。 GRPC 訊息一律小於相等的 JSON 訊息。
+* **處理序間通訊 (ipc) **：如 Unix 網域通訊端和具名管道等 ipc 傳輸，可與 gRPC 搭配使用，以在同一部電腦上的應用程式之間進行通訊。 如需詳細資訊，請參閱<xref:grpc/interprocess>。
 
 ## <a name="grpc-weaknesses"></a>gRPC 弱點
 
@@ -102,12 +103,15 @@ gRPC 適用于下列案例：
 
 目前無法直接從瀏覽器呼叫 gRPC 服務。 gRPC 會大量使用 HTTP/2 功能，而且沒有任何瀏覽器會提供 web 要求所需的控制層級來支援 gRPC 用戶端。 例如，瀏覽器不允許呼叫者要求使用 HTTP/2，或提供基礎 HTTP/2 框架的存取權。
 
-[gRPC-Web](https://grpc.io/docs/tutorials/basic/web.html) 是 gRPC 小組提供的額外技術，可在瀏覽器中提供有限的 gRPC 支援。 gRPC Web 是由兩個部分所組成：支援所有新式瀏覽器的 JavaScript 用戶端，以及伺服器上的 gRPC Web proxy。 GRPC Web 用戶端會呼叫 proxy，而 proxy 會將 gRPC 要求轉寄至 gRPC 伺服器。
+有兩種常見的方法可將 gRPC 帶入瀏覽器應用程式：
 
-並非所有 gRPC 的功能都受 gRPC Web 支援。 用戶端和雙向串流不受支援，而且伺服器串流的支援有限。
+* [gRPC-Web](https://grpc.io/docs/tutorials/basic/web.html) 是 gRPC 小組提供的額外技術，可在瀏覽器中提供 gRPC 支援。 gRPC Web 可讓瀏覽器應用程式受益于 gRPC 的高效能和低網路使用。 並非所有 gRPC 的功能都受 gRPC Web 支援。 用戶端和雙向串流不受支援，而且伺服器串流的支援有限。
 
-> [!TIP]
-> .NET Core 支援 gRPC Web。 如需詳細資訊，請造訪 <xref:grpc/browser> 。
+  .NET Core 支援 gRPC Web。 如需詳細資訊，請參閱<xref:grpc/browser>。
+
+* RESTful JSON Web Api 可以從 gRPC 服務自動建立，方法是使用[HTTP 中繼資料](https://cloud.google.com/service-infrastructure/docs/service-management/reference/rpc/google.api#google.api.HttpRule)來標注該*proto*檔。 這可讓應用程式同時支援 gRPC 和 JSON web Api，而不需要為兩者重複建立個別服務的工作。
+
+  .NET Core 具有從 gRPC 服務建立 JSON web Api 的實驗性支援。 如需詳細資訊，請參閱<xref:grpc/httpapi>。
 
 ### <a name="not-human-readable"></a>不是人類看得懂的
 
@@ -123,7 +127,6 @@ gRPC 訊息預設會以 Protobuf 編碼。 雖然 Protobuf 的傳送和接收效
 
 * **瀏覽器可存取的 api**： gRPC 在瀏覽器中未受到完整支援。 gRPC-Web 可以提供瀏覽器支援，但它有一些限制，並引進伺服器 proxy。
 * **廣播即時通訊**： gRPC 透過串流支援即時通訊，但廣播訊息到已註冊連接的概念不存在。 例如，在應該將新的聊天訊息傳送到聊天室中所有用戶端的聊天室案例中，每個 gRPC 呼叫都需要個別將新的聊天訊息串流至用戶端。 [SignalR](xref:signalr/introduction) 是適用于此案例的實用架構。 SignalR 具有持續性連接的概念，以及廣播訊息的內建支援。
-* **處理序間通訊**：進程必須裝載 HTTP/2 伺服器，才能接受傳入的 gRPC 呼叫。 針對 Windows，處理序間通訊 [管道](/dotnet/standard/io/pipe-operations) 是快速、輕量的通訊方法。
 
 ## <a name="additional-resources"></a>其他資源
 

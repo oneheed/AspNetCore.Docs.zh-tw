@@ -2,14 +2,14 @@
 
 ## <a name="visual-studio-help"></a>Visual Studio 說明
 
-* [瞭解如何使用視覺化工作室除錯 C# 程式碼](https://docs.microsoft.com/visualstudio/debugger/getting-started-with-the-debugger?view=vs-2017)
-* [Visual Studio IDE 簡介](https://docs.microsoft.com/visualstudio/ide/visual-studio-ide?view=vs-2017)
+* [瞭解如何使用 Visual Studio 來對 c # 程式碼進行偵錯工具](/visualstudio/debugger/getting-started-with-the-debugger?view=vs-2017)
+* [Visual Studio IDE 簡介](/visualstudio/ide/visual-studio-ide?view=vs-2017)
 
 # <a name="visual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code)
 
 ## <a name="visual-studio-code-help"></a>Visual Studio Code 說明
 
-* [開始](https://code.visualstudio.com/docs)
+* [快速入門](https://code.visualstudio.com/docs)
 * [偵錯](https://code.visualstudio.com/docs/editor/debugging)
 * [整合式終端](https://code.visualstudio.com/docs/editor/integrated-terminal)
 * [鍵盤快速鍵](https://code.visualstudio.com/docs/getstarted/keybindings#_keyboard-shortcuts-reference)
@@ -22,7 +22,7 @@
 
 ## <a name="visual-studio-for-mac-help"></a>Visual Studio for Mac 說明
 
-* [Visual Studio for Mac 教學課程](https://docs.microsoft.com/visualstudio/mac/ide-tour)
-* [Visual Studio for Mac 簡介](https://docs.microsoft.com/visualstudio/mac/)
+* [Visual Studio for Mac 教學課程](/visualstudio/mac/ide-tour)
+* [Visual Studio for Mac 簡介](/visualstudio/mac/)
 
 ---

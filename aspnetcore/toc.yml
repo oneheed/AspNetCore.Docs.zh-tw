@@ -722,8 +722,8 @@
       uid: grpc/clientfactory
     - name: 在瀏覽器應用程式中使用 gRPC
       uid: grpc/browser
-    - name: 從 gRPC 建立 JSON Web API
-      uid: grpc/httpapi
+    - name: 期限及取消
+      uid: grpc/deadlines-cancellation
     - name: 設定
       uid: grpc/configuration
     - name: 驗證與授權
@@ -738,12 +738,16 @@
       uid: grpc/versioning
     - name: 使用 dotnet-grpc 管理 Protobuf 參考
       uid: grpc/dotnet-grpc
+    - name: 使用 gRPC 工具測試服務
+      uid: grpc/test-tools
     - name: 從 C-core 移轉 gRPC 服務
       uid: grpc/migration
     - name: 為何將 WCF 遷移至 ASP.NET Core gRPC
       uid: grpc/wcf
     - name: 比較 gRPC 服務與 HTTP API
       uid: grpc/comparison
+    - name: 從 gRPC 建立 JSON Web API
+      uid: grpc/httpapi
     - name: 範例
       href: 'https://github.com/grpc/grpc-dotnet/tree/master/examples'
     - name: 疑難排解

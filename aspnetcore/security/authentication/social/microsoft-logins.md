@@ -18,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: security/authentication/microsoft-logins
-ms.openlocfilehash: 3430d842b6a4f7da30370977f72e6f132e28bb7f
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: 36341a0e439be57d7da4f787aa6103b92c624e96
+ms.sourcegitcommit: 62cc131969b2379f7a45c286a751e22d961dfbdb
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88634250"
+ms.lasthandoff: 09/22/2020
+ms.locfileid: "90847581"
 ---
 # <a name="microsoft-account-external-login-setup-with-aspnet-core"></a>使用 ASP.NET Core 的 Microsoft 帳戶外部登入設定
 
@@ -41,6 +41,8 @@ ms.locfileid: "88634250"
 * 選取 **新的註冊**
 * 輸入 [名稱]。
 * 選取 **支援的帳戶類型**的選項。  <!-- Accounts for any org work with MS domain accounts. Most folks probably want the last option, personal MS accounts. It took 24 hours after setting this up for the keys to work -->
+  * `MicrosoftAccount`依預設，此套件支援使用「任何組織目錄中的帳戶」或「任何組織目錄中的帳戶和 Microsoft 帳戶」選項所建立的應用程式註冊。
+  * 若要使用其他選項，請在 [ `AuthorizationEndpoint` `TokenEndpoint` `MicrosoftAccountOptions` **總覽**]) 頁面上按一下 [端點]，將用來將 Microsoft 帳戶驗證初始化至應用程式註冊的 [**端點**] 頁面上所顯示之 url 的 [設定] 和 [成員]， (可供使用。
 * 在 [重新 **導向 URI**] 下，輸入您附加的開發 URL `/signin-microsoft` 。 例如： `https://localhost:5001/signin-microsoft` 。 本範例稍後設定的 Microsoft 驗證配置會自動處理在 `/signin-microsoft` 路由執行的要求，以實行 OAuth 流程。
 * 選取 [註冊]
 

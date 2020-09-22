@@ -3,7 +3,7 @@ title: 使用 ASP.NET Core 和 Azure 將應用程式部署至 App Service-DevOps
 author: CamSoper
 description: 將 ASP.NET Core 應用程式部署到 Azure App Service，這是使用 ASP.NET Core 和 Azure DevOps 的第一個步驟。
 ms.author: casoper
-ms.custom: devx-track-csharp, mvc, seodec18
+ms.custom: devx-track-csharp, mvc, seodec18, devx-track-azurecli
 ms.date: 10/24/2018
 no-loc:
 - ASP.NET Core Identity
@@ -17,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: azure/devops/deploy-to-app-service
-ms.openlocfilehash: 31cd1f6ac8e1243b25569ae34ea252185bbf6467
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: e6d8b4bcbbbe909fde971a8c706287654fcc98ba
+ms.sourcegitcommit: 62cc131969b2379f7a45c286a751e22d961dfbdb
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88625475"
+ms.lasthandoff: 09/22/2020
+ms.locfileid: "90847620"
 ---
 # <a name="deploy-an-app-to-app-service"></a>將應用程式部署至 App Service
 
@@ -164,7 +164,7 @@ ms.locfileid: "88625475"
     ![顯示以滑鼠右鍵按一下、發佈的螢幕擷取畫面](./media/deploying-to-app-service/publish.png)
 5. Visual Studio 可以建立新的 App Service 資源，但此更新將會透過現有的部署發行。 在 [ **挑選發行目標** ] 對話方塊中，從左側清單中選取 **App Service** ，然後選取 [ **選取現有**的]。 按一下 [發佈] 。
 6. 在 [ **App Service** ] 對話方塊中，確認用來建立 Azure 訂用帳戶的 Microsoft 或組織帳戶顯示在右上角。 如果不是，請按一下下拉式清單並加以新增。
-7. 確認已選取正確的 Azure **訂** 用帳戶。 若要 **查看**，請選取 **資源群組**。 展開 **AzureTutorial** 資源群組，然後選取現有的 web 應用程式。 按一下 [確定]  。
+7. 確認已選取正確的 Azure **訂** 用帳戶。 若要 **查看**，請選取 **資源群組**。 展開 **AzureTutorial** 資源群組，然後選取現有的 web 應用程式。 按一下 [確定]。
 
     ![顯示 [發佈 App Service] 對話方塊的螢幕擷取畫面](./media/deploying-to-app-service/publish-dialog.png)
 

@@ -18,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: data/ef-mvc/inheritance
-ms.openlocfilehash: 9a17a2ddbdac6b4fc6ba90804a31915d3b96d707
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: 34c4ea28103b9eb12601b383a46091084391f120
+ms.sourcegitcommit: 62cc131969b2379f7a45c286a751e22d961dfbdb
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88629180"
+ms.lasthandoff: 09/22/2020
+ms.locfileid: "90847594"
 ---
 # <a name="tutorial-implement-inheritance---aspnet-mvc-with-ef-core"></a>教學課程：執行繼承-使用 EF Core ASP.NET MVC
 
@@ -62,6 +62,9 @@ School 資料模型中的 `Instructor` 和 `Student` 類別有數個完全相同
 從單一資料庫資料表產生實體繼承結構的這種模式稱為單表 (TPH) 繼承。
 
 替代方法是讓資料庫看起來更像繼承結構。 比方說，您可以只在 Person 資料表中包含名稱欄位，而在個別的 Instructor 和 Student 資料表中包含日期欄位。
+
+> [!WARNING]
+> EF Core 3.x 不支援 (TPT) 的每個類型資料表，但已在 [EF Core 5.0](https://docs.microsoft.com/ef/core/what-is-new/ef-core-5.0/plan)中執行。
 
 ![一類一表 (Table-Per-Type) 繼承](inheritance/_static/tpt.png)
 

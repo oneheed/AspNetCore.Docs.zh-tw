@@ -18,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/host-and-deploy/webassembly
-ms.openlocfilehash: dadf6076e7f07c07381856aa225667a6eb38046a
-ms.sourcegitcommit: 600666440398788db5db25dc0496b9ca8fe50915
+ms.openlocfilehash: 3436620123618ab32daa44c4a37057aaadb89563
+ms.sourcegitcommit: 74f4a4ddbe3c2f11e2e09d05d2a979784d89d3f5
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 09/14/2020
-ms.locfileid: "90080312"
+ms.lasthandoff: 09/27/2020
+ms.locfileid: "91393687"
 ---
 # <a name="host-and-deploy-aspnet-core-no-locblazor-webassembly"></a>裝載和部署 ASP.NET Core Blazor WebAssembly
 
@@ -51,11 +51,15 @@ Blazor 依賴主機提供適當的壓縮檔案。 使用 ASP.NET Core 裝載的�
 * 如需 IIS `web.config` 壓縮設定，請參閱 [Iis： Brotli 和 Gzip 壓縮](#brotli-and-gzip-compression) 一節。 
 * 裝載在不支援靜態壓縮的檔案內容協商的靜態裝載方案（例如 GitHub 頁面）時，請考慮將應用程式設定為提取和解碼 Brotli 壓縮檔案：
 
-  * 從 [google/Brotli GitHub 存放庫](https://github.com/google/brotli)取得 JavaScript Brotli 解碼器。 從2020年7月起， `decode.min.js` 系統會在存放庫的[ `js` 資料夾](https://github.com/google/brotli/tree/master/js)中命名並重命名的解碼器檔案。
+  * 從 [google/Brotli GitHub 存放庫](https://github.com/google/brotli)取得 JavaScript Brotli 解碼器。 從2020年9月起， `decode.js` 系統會在存放庫的[ `js` 資料夾](https://github.com/google/brotli/tree/master/js)中命名並重命名的解碼器檔案。
+  
+    > [!NOTE]
+    > 縮減版本的 `decode.js` 腳本 (`decode.min.js`) [Google/brotli GitHub 存放庫](https://github.com/google/brotli)中有回歸。 您可以自行縮短腳本，或使用 [npm 套件](https://www.npmjs.com/package/brotli) ，直到問題時段為止 [。 BrotliDecode 未設定于 decode.min.js (google/brotli #844) ](https://github.com/google/brotli/issues/844) 已解決。 本節中的範例程式碼會使用腳本的 **unminified** 版本。
+
   * 更新應用程式以使用此解碼器。 將結束記號內的標記變更 `<body>` `wwwroot/index.html` 為下列內容：
   
     ```html
-    <script src="decode.min.js"></script>
+    <script src="decode.js"></script>
     <script src="_framework/blazor.webassembly.js" autostart="false"></script>
     <script>
       Blazor.start({
@@ -863,5 +867,3 @@ Remove-Item $filepath\bin\Release\$tfm\wwwroot\_framework\blazor.boot.json.gz
 
 > [!NOTE]
 > 重新命名和消極式載入相同的元件時，請參閱中的指導方針 <xref:blazor/webassembly-lazy-load-assemblies#onnavigateasync-events-and-renamed-assembly-files> 。
-
-若要提供意見反應，請造訪 [aspnetcore/問題 #5477](https://github.com/dotnet/aspnetcore/issues/5477)。

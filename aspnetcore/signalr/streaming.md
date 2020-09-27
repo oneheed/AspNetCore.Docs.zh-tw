@@ -18,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: signalr/streaming
-ms.openlocfilehash: 29748ebe24fea03415b5a01b21300433e3fbc0f0
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: 5a172818f8910a637b731dc1b1315965f448b2ba
+ms.sourcegitcommit: 74f4a4ddbe3c2f11e2e09d05d2a979784d89d3f5
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88634211"
+ms.lasthandoff: 09/27/2020
+ms.locfileid: "91393570"
 ---
 # <a name="use-streaming-in-aspnet-core-no-locsignalr"></a>在 ASP.NET Core 中使用串流 SignalR
 
@@ -74,7 +74,7 @@ ASP.NET Core SignalR 支援伺服器方法的資料流程傳回值。 這適用�
 > [!NOTE]
 > `ChannelWriter<T>`在背景執行緒上寫入，並 `ChannelReader` 儘快傳回。 除非傳回，否則會封鎖其他中樞調用 `ChannelReader` 。
 >
-> 將邏輯包裝在中 `try ... catch` 。 `Channel`在 `catch` 和外部完成， `catch` 以確定中樞方法調用已正確完成。
+> 將邏輯包裝在[ `try ... catch` 語句](/dotnet/csharp/language-reference/keywords/try-catch)中。 `Channel`在[ `finally` 區塊](/dotnet/csharp/language-reference/keywords/try-catch-finally)中完成。 如果您想要傳送錯誤，請在區塊內部捕捉， `catch` 然後將它寫入 `finally` 區塊中。
 
 ::: moniker range=">= aspnetcore-3.0"
 
@@ -324,7 +324,7 @@ hubConnection.stream(String.class, "ExampleStreamingHubMethod", "Arg1")
 
 ## <a name="additional-resources"></a>其他資源
 
-* [集線器](xref:signalr/hubs)
+* [中樞](xref:signalr/hubs)
 * [.NET 用戶端](xref:signalr/dotnet-client)
 * [JavaScript 用戶端](xref:signalr/javascript-client)
 * [發佈至 Azure](xref:signalr/publish-to-azure-web-app)

@@ -5,7 +5,7 @@ description: 瞭解如何在 ASP.NET Core 應用程式中使用元件虛擬化 B
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 09/21/2020
+ms.date: 09/22/2020
 no-loc:
 - ASP.NET Core Identity
 - cookie
@@ -18,34 +18,31 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/components/virtualization
-ms.openlocfilehash: 911eeeb445741aa1519e1464dd4a75e26f6f12ab
-ms.sourcegitcommit: 62cc131969b2379f7a45c286a751e22d961dfbdb
+ms.openlocfilehash: 9c3e53bee7535b36bba3474ff50a881568bbd690
+ms.sourcegitcommit: 74f4a4ddbe3c2f11e2e09d05d2a979784d89d3f5
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 09/22/2020
-ms.locfileid: "90847568"
+ms.lasthandoff: 09/27/2020
+ms.locfileid: "91393804"
 ---
 # <a name="aspnet-core-no-locblazor-component-virtualization"></a>ASP.NET Core Blazor 元件虛擬化
 
 依 [Daniel Roth](https://github.com/danroth27)
 
-使用 Blazor 架構內建的虛擬化支援，改善元件轉譯的認知效能。 虛擬化是一項技術，可將 UI 轉譯限制為只顯示目前可見的部分。 例如，當應用程式必須轉譯長清單或具有許多資料列的資料表，而且在任何指定的時間都只需要顯示專案的子集時，虛擬化就很有説明。 Blazor 提供 `Virtualize` 可用於將虛擬化新增至應用程式元件的元件。
+使用 Blazor 架構內建的虛擬化支援，改善元件轉譯的認知效能。 虛擬化是一項技術，可將 UI 轉譯限制為只顯示目前可見的部分。 例如，當應用程式必須轉譯長清單的專案，而且在任何指定的時間都只需要顯示專案的子集時，虛擬化就很有説明。 Blazor 提供 `Virtualize` 可用於將虛擬化新增至應用程式元件的元件。
 
 ::: moniker range=">= aspnetcore-5.0"
 
-如果沒有虛擬化，一般清單或資料表元件可能會使用 c # [`foreach`](/dotnet/csharp/language-reference/keywords/foreach-in) 迴圈來轉譯清單中的每個專案，或資料表中的每個資料列：
+如果沒有虛擬化，一般清單可能會使用 c # [`foreach`](/dotnet/csharp/language-reference/keywords/foreach-in) 迴圈來轉譯清單中的每個專案：
 
 ```razor
-<table>
-    @foreach (var employee in employees)
-    {
-        <tr>
-            <td>@employee.FirstName</td>
-            <td>@employee.LastName</td>
-            <td>@employee.JobTitle</td>
-        </tr>
-    }
-</table>
+@foreach (var employee in employees)
+{
+    <p>
+        @employee.FirstName @employee.LastName has the 
+        job title of @employee.JobTitle.
+    </p>
+}
 ```
 
 如果清單包含上千個專案，則轉譯清單可能需要很長的時間。 使用者可能會遇到明顯的 UI 延遲。
@@ -53,47 +50,44 @@ ms.locfileid: "90847568"
 請將迴圈取代為 [`foreach`](/dotnet/csharp/language-reference/keywords/foreach-in) `Virtualize` 元件，並使用指定固定專案來源，而不是一次轉譯清單中的每個專案 `Items` 。 只有目前可見的專案會呈現：
 
 ```razor
-<table>
-    <Virtualize Context="employee" Items="@employees">
-        <tr>
-            <td>@employee.FirstName</td>
-            <td>@employee.LastName</td>
-            <td>@employee.JobTitle</td>
-        </tr>
-    </Virtualize>
-</table>
+<Virtualize Context="employee" Items="@employees">
+    <p>
+        @employee.FirstName @employee.LastName has the 
+        job title of @employee.JobTitle.
+    </p>
+</Virtualize>
 ```
 
 如果未使用來指定元件的 `Context` 內容，請使用 `context` `@context.{PROPERTY}` 專案內容範本中 () 值：
 
 ```razor
-<table>
-    <Virtualize Items="@employees">
-        <tr>
-            <td>@context.FirstName</td>
-            <td>@context.LastName</td>
-            <td>@context.JobTitle</td>
-        </tr>
-    </Virtualize>
-</table>
+<Virtualize Items="@employees">
+    <p>
+        @context.FirstName @context.LastName has the 
+        job title of @context.JobTitle.
+    </p>
+</Virtualize>
 ```
 
 `Virtualize`元件會根據容器的高度和轉譯專案的大小，計算要轉譯的專案數目。
+
+元件的專案內容 `Virtualize` 可以包括：
+
+* Razor如同上述範例所示的純 HTML 和程式碼。
+* 一或多個 Razor 元件。
+* HTML/ Razor 和元件的混合 Razor 。
 
 ## <a name="item-provider-delegate"></a>專案提供者委派
 
 如果您不想要將所有專案載入記憶體中，可以將專案提供者委派方法指定給元件的 `ItemsProvider` 參數，以根據需求非同步地抓取要求的專案：
 
 ```razor
-<table>
-    <Virtualize Context="employee" ItemsProvider="@LoadEmployees">
-         <tr>
-            <td>@employee.FirstName</td>
-            <td>@employee.LastName</td>
-            <td>@employee.JobTitle</td>
-        </tr>
-    </Virtualize>
-</table>
+<Virtualize Context="employee" ItemsProvider="@LoadEmployees">
+    <p>
+        @employee.FirstName @employee.LastName has the 
+        job title of @employee.JobTitle.
+    </p>
+</Virtualize>
 ```
 
 專案提供者會接收 `ItemsProviderRequest` ，以指定從特定開始索引開始所需的專案數目。 然後，專案提供者會從資料庫或其他服務中抓取要求的專案，並將它們 `ItemsProviderResult<TItem>` 連同總專案數一起傳回。 專案提供者可以選擇使用每個要求抓取專案，或將它們快取，以便立即可用。 請勿嘗試使用專案提供者，並將集合指派給 `Items` 相同的 `Virtualize` 元件。
@@ -117,22 +111,19 @@ private async ValueTask<ItemsProviderResult<Employee>> LoadEmployees(
 由於要求來自遠端資料源的專案可能需要一些時間，因此您可以選擇 () 呈現預留位置， `<Placeholder>...</Placeholder>` 直到專案資料可用為止：
 
 ```razor
-<table>
-    <Virtualize Context="employee" ItemsProvider="@LoadEmployees">
-        <ItemContent>
-            <tr>
-                <td>@employee.FirstName</td>
-                <td>@employee.LastName</td>
-                <td>@employee.JobTitle</td>
-            </tr>
-        </ItemContent>
-        <Placeholder>
-            <tr>
-                <td>Loading...</td>
-            </tr>
-        </Placeholder>
-    </Virtualize>
-</table>
+<Virtualize Context="employee" ItemsProvider="@LoadEmployees">
+    <ItemContent>
+        <p>
+            @employee.FirstName @employee.LastName has the 
+            job title of @employee.JobTitle.
+        </p>
+    </ItemContent>
+    <Placeholder>
+        <p>
+            Loading&hellip;
+        </p>
+    </Placeholder>
+</Virtualize>
 ```
 
 ## <a name="item-size"></a>項目大小
@@ -140,11 +131,9 @@ private async ValueTask<ItemsProviderResult<Employee>> LoadEmployees(
 您可以使用 (預設值來設定每個專案的大小（以圖元為單位）： `ItemSize` 50px) ：
 
 ```razor
-<table>
-    <Virtualize Context="employee" Items="@employees" ItemSize="25">
-        ...
-    </Virtualize>
-</table>
+<Virtualize Context="employee" Items="@employees" ItemSize="25">
+    ...
+</Virtualize>
 ```
 
 ## <a name="overscan-count"></a>Overscan 計數
@@ -152,11 +141,9 @@ private async ValueTask<ItemsProviderResult<Employee>> LoadEmployees(
 `OverscanCount` 決定在可見區域之前和之後轉譯的額外專案數目。 這項設定有助於減少滾動期間轉譯的頻率。 不過，較高的值會導致在頁面中轉譯的元素越多 (預設值： 3) ：
 
 ```razor
-<table>
-    <Virtualize Context="employee" Items="@employees" OverscanCount="4">
-        ...
-    </Virtualize>
-</table>
+<Virtualize Context="employee" Items="@employees" OverscanCount="4">
+    ...
+</Virtualize>
 ```
 
 ::: moniker-end

@@ -18,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: security/docker-compose-https
-ms.openlocfilehash: 71ead7dcce32dab090a9b0b3573aa855d00fa7f1
-ms.sourcegitcommit: 24106b7ffffc9fff410a679863e28aeb2bbe5b7e
+ms.openlocfilehash: cd46fdcbe10dc0b7829fbe7eaef821889f395df4
+ms.sourcegitcommit: 74f4a4ddbe3c2f11e2e09d05d2a979784d89d3f5
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 09/17/2020
-ms.locfileid: "90722757"
+ms.lasthandoff: 09/27/2020
+ms.locfileid: "91393700"
 ---
 # <a name="hosting-aspnet-core-images-with-docker-compose-over-https"></a>使用 Docker Compose 透過 HTTPS 裝載 ASP.NET Core 映射
 
@@ -36,7 +36,7 @@ ASP.NET Core 預設會使用 [HTTPS](./enforcing-ssl.md)。 [HTTPS](https://en.w
 
 此範例需要 docker [17.06](https://docs.docker.com/release-notes/docker-ce) 或更新版本的 [docker 用戶端](https://www.docker.com/products/docker)。
 
-## <a name="prerequisites"></a>Prerequisites
+## <a name="prerequisites"></a>必要條件
 
 本檔中的部分指示需要 [.Net Core 2.2 SDK](https://dotnet.microsoft.com/download) 或更新版本。
 
@@ -74,7 +74,7 @@ dotnet dev-certs https --trust
 
 建立具有下列內容的 _>docker-compose.yml yml_ 檔案：
 
-```json
+```yaml
 version: '3.4'
 
 services:
@@ -114,7 +114,7 @@ dotnet dev-certs https --trust
 
 建立具有下列內容的 _>docker-compose.yml yml_ 檔案：
 
-```json
+```yaml
 version: '3.4'
 
 services:
@@ -152,7 +152,7 @@ dotnet dev-certs https --trust
 
 建立具有下列內容的 _>docker-compose.yml yml_ 檔案：
 
-```json
+```yaml
 version: '3.4'
 
 services:

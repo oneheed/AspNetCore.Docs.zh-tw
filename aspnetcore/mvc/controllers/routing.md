@@ -16,12 +16,12 @@ no-loc:
 - Razor
 - SignalR
 uid: mvc/controllers/routing
-ms.openlocfilehash: 08cd6396cca78488827dfa7c2cca62a35c500dbd
-ms.sourcegitcommit: 8fcb08312a59c37e3542e7a67dad25faf5bb8e76
+ms.openlocfilehash: e451d511ab7791a05024d88635d8005132ad4edd
+ms.sourcegitcommit: 74f4a4ddbe3c2f11e2e09d05d2a979784d89d3f5
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 09/11/2020
-ms.locfileid: "90009696"
+ms.lasthandoff: 09/27/2020
+ms.locfileid: "91393921"
 ---
 # <a name="routing-to-controller-actions-in-aspnet-core"></a>ASP.NET Core 中的路由至控制器動作
 
@@ -353,7 +353,7 @@ ASP.NET Core 具有下列路由範本：
 在上述程式碼中：
 
 * 每個動作都包含 `[HttpGet]` 屬性，此屬性只會限制與 HTTP GET 要求的相符。
-* 此 `GetProduct` 動作包含 `"{id}"` 範本，因此 `id` 會附加至 `"api/[controller]"` 控制器上的範本。 方法樣板為 `"api/[controller]/"{id}""` 。 因此，這個動作只會比對格式為、、等的 GET 要求 `/api/test2/xyz` `/api/test2/123` `/api/test2/{any string}` 。
+* 此 `GetProduct` 動作包含 `"{id}"` 範本，因此 `id` 會附加至 `"api/[controller]"` 控制器上的範本。 方法樣板為 `"api/[controller]/"{id}""` 。 因此，這個動作只會比對表單、、等的 GET 要求 `/api/test2/xyz` `/api/test2/123` `/api/test2/{any string}` 。
   [!code-csharp[](routing/samples/3.x/main/Controllers/Test2Controller.cs?name=snippet2)]
 * 此 `GetIntProduct` 動作包含 `"int/{id:int}")` 範本。 `:int`範本的部分 `id` 會將路由值限制為可轉換成整數的字串。 GET 要求 `/api/test2/int/abc` ：
   * 不符合此動作。
@@ -434,7 +434,7 @@ REST Api 應該使用屬性路由，將應用程式的功能模型為一組資�
 | `[Route("")]` | 是 | `"Home"` |
 | `[Route("Index")]` | 是 | `"Home/Index"` |
 | `[Route("/")]` | **否** | `""` |
-| `[Route("About")]` | Yes | `"Home/About"` |
+| `[Route("About")]` | 是 | `"Home/About"` |
 
 <a name="routing-ordering-ref-label"></a>
 <a name="oar"></a>

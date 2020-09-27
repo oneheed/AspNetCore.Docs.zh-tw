@@ -17,18 +17,18 @@ no-loc:
 - Razor
 - SignalR
 uid: mvc/views/partial
-ms.openlocfilehash: 7a370042520adfe5b06784b76acf41a81eb2c72d
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: bb75d8b7d78c82c9c32605ac645b8895fdfb78e3
+ms.sourcegitcommit: 74f4a4ddbe3c2f11e2e09d05d2a979784d89d3f5
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88630623"
+ms.lasthandoff: 09/27/2020
+ms.locfileid: "91393648"
 ---
 # <a name="partial-views-in-aspnet-core"></a>ASP.NET Core 中的部分檢視
 
 作者：[Steve Smith](https://ardalis.com/)、[Maher JENDOUBI](https://twitter.com/maherjend)、[Rick Anderson](https://twitter.com/RickAndMSFT) 和 [Scott Sauber](https://twitter.com/scottsauber)
 
-部分視圖是 [Razor](xref:mvc/views/razor))  (的標記檔案 *.cshtml* ，會在另一個標記檔案的轉譯輸出*中*呈現 HTML 輸出。
+部分視圖是標記檔案 [Razor](xref:mvc/views/razor) (的) *.cshtml*沒有 [`@page`](xref:mvc/views/razor#page) 指示詞，可在另一個標記檔案的轉譯輸出*中*呈現 HTML 輸出。
 
 ::: moniker range=">= aspnetcore-2.1"
 
@@ -57,7 +57,7 @@ ms.locfileid: "88630623"
 
 ::: moniker range=">= aspnetcore-2.0"
 
-部分視圖是在 [ *Views* ] 資料夾中維護的*cshtml*標記檔案， (MVC) 或*頁面*資料夾， (Razor 頁面) 。
+部分視圖是一種不含指示詞的 *. cshtml* 標記檔案 [`@page`](xref:mvc/views/razor#page) ，在 [ *Views* ] 資料夾內 (MVC) 或 *pages* 資料夾 (Razor 頁面) 。
 
 在 ASP.NET Core MVC 中，控制器的 <xref:Microsoft.AspNetCore.Mvc.ViewResult> 能夠傳回檢視或部分檢視。 在 Razor 頁面中， <xref:Microsoft.AspNetCore.Mvc.RazorPages.PageModel> 可以傳回以物件表示的部分視圖 <xref:Microsoft.AspNetCore.Mvc.PartialViewResult> 。 [參考部分檢視](#reference-a-partial-view)一節介紹參考和轉譯部分檢視。
 

@@ -17,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: mvc/models/model-binding
-ms.openlocfilehash: ec36ff6d646e0554550a4372389aed89aa267b1f
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: ca2f071ccb84fdb2eb06f533fc4d088ad1b1c785
+ms.sourcegitcommit: 74f4a4ddbe3c2f11e2e09d05d2a979784d89d3f5
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88633977"
+ms.lasthandoff: 09/27/2020
+ms.locfileid: "91393882"
 ---
 # <a name="model-binding-in-aspnet-core"></a>ASP.NET Core 中的資料繫結
 
@@ -210,7 +210,7 @@ public class Pet
 * [DateTimeOffset](xref:System.ComponentModel.DateTimeOffsetConverter)
 * [十進位](xref:System.ComponentModel.DecimalConverter)
 * [Double](xref:System.ComponentModel.DoubleConverter)
-* [枚舉](xref:System.ComponentModel.EnumConverter)
+* [列舉](xref:System.ComponentModel.EnumConverter)
 * [Guid](xref:System.ComponentModel.GuidConverter)
 * [Int16](xref:System.ComponentModel.Int16Converter)、[Int32](xref:System.ComponentModel.Int32Converter)、[Int64](xref:System.ComponentModel.Int64Converter)
 * [Single](xref:System.ComponentModel.SingleConverter)
@@ -303,7 +303,7 @@ public IActionResult OnPost([Bind("LastName,FirstMidName,HireDate")] Instructor 
 
 ### <a name="bindrequired-attribute"></a>[BindRequired] 屬性
 
-只能套用至模型屬性，不能套用到方法參數。 如果模型的屬性不能發生繫結，則會造成模型繫結新增模型狀態錯誤。 以下為範例：
+只能套用至模型屬性，不能套用到方法參數。 如果模型的屬性不能發生繫結，則會造成模型繫結新增模型狀態錯誤。 以下是範例：
 
 [!code-csharp[](model-binding/samples/3.x/ModelBindingSample/Models/InstructorWithCollection.cs?name=snippet_BindRequired&highlight=8-9)]
 
@@ -311,7 +311,7 @@ public IActionResult OnPost([Bind("LastName,FirstMidName,HireDate")] Instructor 
 
 ### <a name="bindnever-attribute"></a>[BindNever] 屬性
 
-只能套用至模型屬性，不能套用到方法參數。 避免模型繫結設定模型的屬性。 以下為範例：
+只能套用至模型屬性，不能套用到方法參數。 避免模型繫結設定模型的屬性。 以下是範例：
 
 [!code-csharp[](model-binding/samples/3.x/ModelBindingSample/Models/InstructorWithDictionary.cs?name=snippet_BindNever&highlight=3-4)]
 
@@ -393,6 +393,47 @@ public IActionResult OnPost([Bind("LastName,FirstMidName,HireDate")] Instructor 
 
   * selectedCourses["1050"]="Chemistry"
   * selectedCourses ["2000"] = "經濟效益"
+  
+::: moniker-end
+
+::: moniker range=">= aspnetcore-5.0"
+
+## <a name="constructor-binding-and-record-types"></a>函數系結和記錄類型
+
+模型系結需要複雜類型具有無參數的函式。 和型輸入格式子都支援還原序列化 `System.Text.Json` `Newtonsoft.Json` 沒有無參數函式的類別。 
+
+C # 9 引進了一種記錄類型，這是在網路上簡潔表示資料的絕佳方式。 ASP.NET Core 使用單一的函式加入模型系結和驗證記錄類型的支援：
+
+```csharp
+public record Person([Required] string Name, [Range(0, 150)] int Age);
+
+public class PersonController
+{
+   public IActionResult Index() => View();
+
+   [HttpPost]
+   public IActionResult Index(Person person)
+   {
+       ...
+   }
+}
+```
+
+`Person/Index.cshtml`:
+
+```cshtml
+@model Person
+
+Name: <input asp-for="Name" />
+...
+Age: <input asp-for="Age" />
+```
+
+驗證記錄類型時，執行時間會特別在參數上搜尋驗證中繼資料，而不是在屬性上搜尋。
+
+::: moniker-end
+
+::: moniker range=">= aspnetcore-3.0"
 
 <a name="glob"></a>
 
@@ -491,7 +532,7 @@ ASP.NET Core 選取以 [Consumes](xref:Microsoft.AspNetCore.Mvc.ConsumesAttribut
 
 ## <a name="manual-model-binding"></a>手動模型系結 
 
-使用 <xref:Microsoft.AspNetCore.Mvc.ControllerBase.TryUpdateModelAsync*> 方法即可手動叫用模型繫結。 此方法已於 `ControllerBase` 和 `PageModel` 類別中定義。 方法多載可讓您指定要使用的前置詞和值提供者。 如果模型繫結失敗，此方法會傳回 `false`。 以下為範例：
+使用 <xref:Microsoft.AspNetCore.Mvc.ControllerBase.TryUpdateModelAsync*> 方法即可手動叫用模型繫結。 此方法已於 `ControllerBase` 和 `PageModel` 類別中定義。 方法多載可讓您指定要使用的前置詞和值提供者。 如果模型繫結失敗，此方法會傳回 `false`。 以下是範例：
 
 [!code-csharp[](model-binding/samples/3.x/ModelBindingSample/Pages/InstructorsWithCollection/Create.cshtml.cs?name=snippet_TryUpdate&highlight=1-4)]
 
@@ -512,6 +553,7 @@ ASP.NET Core 選取以 [Consumes](xref:Microsoft.AspNetCore.Mvc.ConsumesAttribut
 * <xref:mvc/advanced/custom-model-binding>
 
 ::: moniker-end
+
 ::: moniker range="< aspnetcore-3.0"
 
 本文會說明何謂模型繫結、其運作方式，以及如何自訂其行為。
@@ -696,7 +738,7 @@ public class Pet
 * [DateTimeOffset](xref:System.ComponentModel.DateTimeOffsetConverter)
 * [十進位](xref:System.ComponentModel.DecimalConverter)
 * [Double](xref:System.ComponentModel.DoubleConverter)
-* [枚舉](xref:System.ComponentModel.EnumConverter)
+* [列舉](xref:System.ComponentModel.EnumConverter)
 * [Guid](xref:System.ComponentModel.GuidConverter)
 * [Int16](xref:System.ComponentModel.Int16Converter)、[Int32](xref:System.ComponentModel.Int32Converter)、[Int64](xref:System.ComponentModel.Int64Converter)
 * [Single](xref:System.ComponentModel.SingleConverter)
@@ -771,13 +813,13 @@ public IActionResult OnPost(
 
 ### <a name="bindrequired-attribute"></a>[BindRequired] 屬性
 
-只能套用至模型屬性，不能套用到方法參數。 如果模型的屬性不能發生繫結，則會造成模型繫結新增模型狀態錯誤。 以下為範例：
+只能套用至模型屬性，不能套用到方法參數。 如果模型的屬性不能發生繫結，則會造成模型繫結新增模型狀態錯誤。 以下是範例：
 
 [!code-csharp[](model-binding/samples/2.x/ModelBindingSample/Models/InstructorWithCollection.cs?name=snippet_BindRequired&highlight=8-9)]
 
 ### <a name="bindnever-attribute"></a>[BindNever] 屬性
 
-只能套用至模型屬性，不能套用到方法參數。 避免模型繫結設定模型的屬性。 以下為範例：
+只能套用至模型屬性，不能套用到方法參數。 避免模型繫結設定模型的屬性。 以下是範例：
 
 [!code-csharp[](model-binding/samples/2.x/ModelBindingSample/Models/InstructorWithDictionary.cs?name=snippet_BindNever&highlight=3-4)]
 
@@ -959,7 +1001,7 @@ ASP.NET Core 選取以 [Consumes](xref:Microsoft.AspNetCore.Mvc.ConsumesAttribut
 
 ## <a name="manual-model-binding"></a>手動模型系結
 
-使用 <xref:Microsoft.AspNetCore.Mvc.ControllerBase.TryUpdateModelAsync*> 方法即可手動叫用模型繫結。 此方法已於 `ControllerBase` 和 `PageModel` 類別中定義。 方法多載可讓您指定要使用的前置詞和值提供者。 如果模型繫結失敗，此方法會傳回 `false`。 以下為範例：
+使用 <xref:Microsoft.AspNetCore.Mvc.ControllerBase.TryUpdateModelAsync*> 方法即可手動叫用模型繫結。 此方法已於 `ControllerBase` 和 `PageModel` 類別中定義。 方法多載可讓您指定要使用的前置詞和值提供者。 如果模型繫結失敗，此方法會傳回 `false`。 以下是範例：
 
 [!code-csharp[](model-binding/samples/2.x/ModelBindingSample/Pages/InstructorsWithCollection/Create.cshtml.cs?name=snippet_TryUpdate&highlight=1-4)]
 

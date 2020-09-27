@@ -18,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: signalr/configuration
-ms.openlocfilehash: fc0e6398884bb5c3b806a587a8a361d7f279461f
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: 579491cfe60a26593ca038a1691f9b52f0fb1d06
+ms.sourcegitcommit: 74f4a4ddbe3c2f11e2e09d05d2a979784d89d3f5
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88625553"
+ms.lasthandoff: 09/27/2020
+ms.locfileid: "91393869"
 ---
 # <a name="aspnet-core-no-locsignalr-configuration"></a>ASP.NET Core SignalR 設定
 
@@ -85,6 +85,7 @@ var connection = new HubConnectionBuilder()
 | `EnableDetailedErrors` | `false` | 如果為 `true` ，則在中樞方法中擲回例外狀況時，會將詳細的例外狀況訊息傳回給用戶端。 預設值為 `false` ，因為這些例外狀況訊息可能包含機密資訊。 |
 | `StreamBufferCapacity` | `10` | 可以針對用戶端上傳資料流程進行緩衝處理的最大專案數。 如果達到此限制，就會封鎖調用的處理，直到伺服器處理資料流程專案為止。|
 | `MaximumReceiveMessageSize` | 32 KB | 單一傳入中樞訊息的大小上限。 |
+| `MaximumParallelInvocationsPerClient` | 1 | 每個用戶端在進行佇列之前可以平行呼叫的中樞方法數目上限。 |
 
 您可以為所有中樞設定選項，方法是提供選項委派給 `AddSignalR` 中的呼叫 `Startup.ConfigureServices` 。
 
@@ -201,8 +202,8 @@ let connection = new signalR.HubConnectionBuilder()
 | --------------------------- | ---------------------- |
 | `trace`                     | `LogLevel.Trace`       |
 | `debug`                     | `LogLevel.Debug`       |
-| `info`**或**`information` | `LogLevel.Information` |
-| `warn`**或**`warning`     | `LogLevel.Warning`     |
+| `info` **或** `information` | `LogLevel.Information` |
+| `warn` **或** `warning`     | `LogLevel.Warning`     |
 | `error`                     | `LogLevel.Error`       |
 | `critical`                  | `LogLevel.Critical`    |
 | `none`                      | `LogLevel.None`        |
@@ -342,11 +343,11 @@ HubConnection hubConnection = HubConnectionBuilder.create("https://example.com/c
 | ----------- | -------------- | ----------- |
 | `AccessTokenProvider` | `null` | 傳回字串的函式，在 HTTP 要求中以持有人驗證權杖的形式提供。 |
 | `SkipNegotiation` | `false` | 將此設定為， `true` 以略過協商步驟。 **只有當 websocket 傳輸是唯一啟用的傳輸時才支援**。 使用 Azure 服務時，無法啟用此設定 SignalR 。 |
-| `ClientCertificates` | 空白 | 要傳送以驗證要求的 TLS 憑證集合。 |
-| `Cookies` | 空白 | cookie要與每個 HTTP 要求一起傳送的 HTTP 集合。 |
-| `Credentials` | 空白 | 每個 HTTP 要求所要傳送的認證。 |
+| `ClientCertificates` | Empty | 要傳送以驗證要求的 TLS 憑證集合。 |
+| `Cookies` | Empty | cookie要與每個 HTTP 要求一起傳送的 HTTP 集合。 |
+| `Credentials` | Empty | 每個 HTTP 要求所要傳送的認證。 |
 | `CloseTimeout` | 5 秒 | 僅限 Websocket。 用戶端在關閉以確認關閉要求後等待的最大時間量。 如果伺服器未在這段時間內確認關閉，用戶端就會中斷連線。 |
-| `Headers` | 空白 | 要與每個 HTTP 要求一起傳送的其他 HTTP 標頭對應。 |
+| `Headers` | Empty | 要與每個 HTTP 要求一起傳送的其他 HTTP 標頭對應。 |
 | `HttpMessageHandlerFactory` | `null` | 可以用來設定或取代 `HttpMessageHandler` 用來傳送 HTTP 要求的委派。 不用於 WebSocket 連接。 此委派必須傳回非 null 值，且會接收預設值做為參數。 請修改該預設值的設定並傳回，或傳回新的 `HttpMessageHandler` 實例。 **取代處理常式時，請務必從提供的處理常式複製您想要保留的設定，否則設定的選項 (例如 Cookie s 和標頭) 不會套用至新的處理常式。** |
 | `Proxy` | `null` | 傳送 HTTP 要求時要使用的 HTTP proxy。 |
 | `UseDefaultCredentials` | `false` | 設定此布林值，以傳送 HTTP 和 Websocket 要求的預設認證。 這樣就可以使用 Windows 驗證。 |
@@ -368,7 +369,7 @@ HubConnection hubConnection = HubConnectionBuilder.create("https://example.com/c
 | ----------- | ------------- | ----------- |
 | `withAccessTokenProvider` | `null` | 傳回字串的函式，在 HTTP 要求中以持有人驗證權杖的形式提供。 |
 | `shouldSkipNegotiate` | `false` | 將此設定為， `true` 以略過協商步驟。 **只有當 websocket 傳輸是唯一啟用的傳輸時才支援**。 使用 Azure 服務時，無法啟用此設定 SignalR 。 |
-| `withHeader` `withHeaders` | 空白 | 要與每個 HTTP 要求一起傳送的其他 HTTP 標頭對應。 |
+| `withHeader` `withHeaders` | Empty | 要與每個 HTTP 要求一起傳送的其他 HTTP 標頭對應。 |
 
 ---
 
@@ -589,8 +590,8 @@ let connection = new signalR.HubConnectionBuilder()
 | --------------------------- | ---------------------- |
 | `trace`                     | `LogLevel.Trace`       |
 | `debug`                     | `LogLevel.Debug`       |
-| `info`**或**`information` | `LogLevel.Information` |
-| `warn`**或**`warning`     | `LogLevel.Warning`     |
+| `info` **或** `information` | `LogLevel.Information` |
+| `warn` **或** `warning`     | `LogLevel.Warning`     |
 | `error`                     | `LogLevel.Error`       |
 | `critical`                  | `LogLevel.Critical`    |
 | `none`                      | `LogLevel.None`        |
@@ -730,11 +731,11 @@ HubConnection hubConnection = HubConnectionBuilder.create("https://example.com/c
 | ----------- | -------------- | ----------- |
 | `AccessTokenProvider` | `null` | 傳回字串的函式，在 HTTP 要求中以持有人驗證權杖的形式提供。 |
 | `SkipNegotiation` | `false` | 將此設定為， `true` 以略過協商步驟。 **只有當 websocket 傳輸是唯一啟用的傳輸時才支援**。 使用 Azure 服務時，無法啟用此設定 SignalR 。 |
-| `ClientCertificates` | 空白 | 要傳送以驗證要求的 TLS 憑證集合。 |
-| `Cookies` | 空白 | cookie要與每個 HTTP 要求一起傳送的 HTTP 集合。 |
-| `Credentials` | 空白 | 每個 HTTP 要求所要傳送的認證。 |
+| `ClientCertificates` | Empty | 要傳送以驗證要求的 TLS 憑證集合。 |
+| `Cookies` | Empty | cookie要與每個 HTTP 要求一起傳送的 HTTP 集合。 |
+| `Credentials` | Empty | 每個 HTTP 要求所要傳送的認證。 |
 | `CloseTimeout` | 5 秒 | 僅限 Websocket。 用戶端在關閉以確認關閉要求後等待的最大時間量。 如果伺服器未在這段時間內確認關閉，用戶端就會中斷連線。 |
-| `Headers` | 空白 | 要與每個 HTTP 要求一起傳送的其他 HTTP 標頭對應。 |
+| `Headers` | Empty | 要與每個 HTTP 要求一起傳送的其他 HTTP 標頭對應。 |
 | `HttpMessageHandlerFactory` | `null` | 可以用來設定或取代 `HttpMessageHandler` 用來傳送 HTTP 要求的委派。 不用於 WebSocket 連接。 此委派必須傳回非 null 值，且會接收預設值做為參數。 請修改該預設值的設定並傳回，或傳回新的 `HttpMessageHandler` 實例。 **取代處理常式時，請務必從提供的處理常式複製您想要保留的設定，否則設定的選項 (例如 Cookie s 和標頭) 不會套用至新的處理常式。** |
 | `Proxy` | `null` | 傳送 HTTP 要求時要使用的 HTTP proxy。 |
 | `UseDefaultCredentials` | `false` | 設定此布林值，以傳送 HTTP 和 Websocket 要求的預設認證。 這樣就可以使用 Windows 驗證。 |
@@ -754,7 +755,7 @@ HubConnection hubConnection = HubConnectionBuilder.create("https://example.com/c
 | ----------- | ------------- | ----------- |
 | `withAccessTokenProvider` | `null` | 傳回字串的函式，在 HTTP 要求中以持有人驗證權杖的形式提供。 |
 | `shouldSkipNegotiate` | `false` | 將此設定為， `true` 以略過協商步驟。 **只有當 websocket 傳輸是唯一啟用的傳輸時才支援**。 使用 Azure 服務時，無法啟用此設定 SignalR 。 |
-| `withHeader` `withHeaders` | 空白 | 要與每個 HTTP 要求一起傳送的其他 HTTP 標頭對應。 |
+| `withHeader` `withHeaders` | Empty | 要與每個 HTTP 要求一起傳送的其他 HTTP 標頭對應。 |
 
 ---
 
@@ -974,8 +975,8 @@ let connection = new signalR.HubConnectionBuilder()
 | --------------------------- | ---------------------- |
 | `trace`                     | `LogLevel.Trace`       |
 | `debug`                     | `LogLevel.Debug`       |
-| `info`**或**`information` | `LogLevel.Information` |
-| `warn`**或**`warning`     | `LogLevel.Warning`     |
+| `info` **或** `information` | `LogLevel.Information` |
+| `warn` **或** `warning`     | `LogLevel.Warning`     |
 | `error`                     | `LogLevel.Error`       |
 | `critical`                  | `LogLevel.Critical`    |
 | `none`                      | `LogLevel.None`        |
@@ -1115,11 +1116,11 @@ HubConnection hubConnection = HubConnectionBuilder.create("https://example.com/c
 | ----------- | -------------- | ----------- |
 | `AccessTokenProvider` | `null` | 傳回字串的函式，在 HTTP 要求中以持有人驗證權杖的形式提供。 |
 | `SkipNegotiation` | `false` | 將此設定為， `true` 以略過協商步驟。 **只有當 websocket 傳輸是唯一啟用的傳輸時才支援**。 使用 Azure 服務時，無法啟用此設定 SignalR 。 |
-| `ClientCertificates` | 空白 | 要傳送以驗證要求的 TLS 憑證集合。 |
-| `Cookies` | 空白 | cookie要與每個 HTTP 要求一起傳送的 HTTP 集合。 |
-| `Credentials` | 空白 | 每個 HTTP 要求所要傳送的認證。 |
+| `ClientCertificates` | Empty | 要傳送以驗證要求的 TLS 憑證集合。 |
+| `Cookies` | Empty | cookie要與每個 HTTP 要求一起傳送的 HTTP 集合。 |
+| `Credentials` | Empty | 每個 HTTP 要求所要傳送的認證。 |
 | `CloseTimeout` | 5 秒 | 僅限 Websocket。 用戶端在關閉以確認關閉要求後等待的最大時間量。 如果伺服器未在這段時間內確認關閉，用戶端就會中斷連線。 |
-| `Headers` | 空白 | 要與每個 HTTP 要求一起傳送的其他 HTTP 標頭對應。 |
+| `Headers` | Empty | 要與每個 HTTP 要求一起傳送的其他 HTTP 標頭對應。 |
 | `HttpMessageHandlerFactory` | `null` | 可以用來設定或取代 `HttpMessageHandler` 用來傳送 HTTP 要求的委派。 不用於 WebSocket 連接。 此委派必須傳回非 null 值，且會接收預設值做為參數。 請修改該預設值的設定並傳回，或傳回新的 `HttpMessageHandler` 實例。 **取代處理常式時，請務必從提供的處理常式複製您想要保留的設定，否則設定的選項 (例如 Cookie s 和標頭) 不會套用至新的處理常式。** |
 | `Proxy` | `null` | 傳送 HTTP 要求時要使用的 HTTP proxy。 |
 | `UseDefaultCredentials` | `false` | 設定此布林值，以傳送 HTTP 和 Websocket 要求的預設認證。 這樣就可以使用 Windows 驗證。 |
@@ -1139,7 +1140,7 @@ HubConnection hubConnection = HubConnectionBuilder.create("https://example.com/c
 | ----------- | ------------- | ----------- |
 | `withAccessTokenProvider` | `null` | 傳回字串的函式，在 HTTP 要求中以持有人驗證權杖的形式提供。 |
 | `shouldSkipNegotiate` | `false` | 將此設定為， `true` 以略過協商步驟。 **只有當 websocket 傳輸是唯一啟用的傳輸時才支援**。 使用 Azure 服務時，無法啟用此設定 SignalR 。 |
-| `withHeader` `withHeaders` | 空白 | 要與每個 HTTP 要求一起傳送的其他 HTTP 標頭對應。 |
+| `withHeader` `withHeaders` | Empty | 要與每個 HTTP 要求一起傳送的其他 HTTP 標頭對應。 |
 
 ---
 
@@ -1464,11 +1465,11 @@ HubConnection hubConnection = HubConnectionBuilder.create("https://example.com/c
 | ----------- | -------------- | ----------- |
 | `AccessTokenProvider` | `null` | 傳回字串的函式，在 HTTP 要求中以持有人驗證權杖的形式提供。 |
 | `SkipNegotiation` | `false` | 將此設定為， `true` 以略過協商步驟。 **只有當 websocket 傳輸是唯一啟用的傳輸時才支援**。 使用 Azure 服務時，無法啟用此設定 SignalR 。 |
-| `ClientCertificates` | 空白 | 要傳送以驗證要求的 TLS 憑證集合。 |
-| `Cookies` | 空白 | cookie要與每個 HTTP 要求一起傳送的 HTTP 集合。 |
-| `Credentials` | 空白 | 每個 HTTP 要求所要傳送的認證。 |
+| `ClientCertificates` | Empty | 要傳送以驗證要求的 TLS 憑證集合。 |
+| `Cookies` | Empty | cookie要與每個 HTTP 要求一起傳送的 HTTP 集合。 |
+| `Credentials` | Empty | 每個 HTTP 要求所要傳送的認證。 |
 | `CloseTimeout` | 5 秒 | 僅限 Websocket。 用戶端在關閉以確認關閉要求後等待的最大時間量。 如果伺服器未在這段時間內確認關閉，用戶端就會中斷連線。 |
-| `Headers` | 空白 | 要與每個 HTTP 要求一起傳送的其他 HTTP 標頭對應。 |
+| `Headers` | Empty | 要與每個 HTTP 要求一起傳送的其他 HTTP 標頭對應。 |
 | `HttpMessageHandlerFactory` | `null` | 可以用來設定或取代 `HttpMessageHandler` 用來傳送 HTTP 要求的委派。 不用於 WebSocket 連接。 此委派必須傳回非 null 值，且會接收預設值做為參數。 請修改該預設值的設定並傳回，或傳回新的 `HttpMessageHandler` 實例。 **取代處理常式時，請務必從提供的處理常式複製您想要保留的設定，否則設定的選項 (例如 Cookie s 和標頭) 不會套用至新的處理常式。** |
 | `Proxy` | `null` | 傳送 HTTP 要求時要使用的 HTTP proxy。 |
 | `UseDefaultCredentials` | `false` | 設定此布林值，以傳送 HTTP 和 Websocket 要求的預設認證。 這樣就可以使用 Windows 驗證。 |
@@ -1488,7 +1489,7 @@ HubConnection hubConnection = HubConnectionBuilder.create("https://example.com/c
 | ----------- | ------------- | ----------- |
 | `withAccessTokenProvider` | `null` | 傳回字串的函式，在 HTTP 要求中以持有人驗證權杖的形式提供。 |
 | `shouldSkipNegotiate` | `false` | 將此設定為， `true` 以略過協商步驟。 **只有當 websocket 傳輸是唯一啟用的傳輸時才支援**。 使用 Azure 服務時，無法啟用此設定 SignalR 。 |
-| `withHeader` `withHeaders` | 空白 | 要與每個 HTTP 要求一起傳送的其他 HTTP 標頭對應。 |
+| `withHeader` `withHeaders` | Empty | 要與每個 HTTP 要求一起傳送的其他 HTTP 標頭對應。 |
 
 ---
 
@@ -1807,11 +1808,11 @@ HubConnection hubConnection = HubConnectionBuilder.create("https://example.com/c
 | ----------- | -------------- | ----------- |
 | `AccessTokenProvider` | `null` | 傳回字串的函式，在 HTTP 要求中以持有人驗證權杖的形式提供。 |
 | `SkipNegotiation` | `false` | 將此設定為， `true` 以略過協商步驟。 **只有當 websocket 傳輸是唯一啟用的傳輸時才支援**。 使用 Azure 服務時，無法啟用此設定 SignalR 。 |
-| `ClientCertificates` | 空白 | 要傳送以驗證要求的 TLS 憑證集合。 |
-| `Cookies` | 空白 | cookie要與每個 HTTP 要求一起傳送的 HTTP 集合。 |
-| `Credentials` | 空白 | 每個 HTTP 要求所要傳送的認證。 |
+| `ClientCertificates` | Empty | 要傳送以驗證要求的 TLS 憑證集合。 |
+| `Cookies` | Empty | cookie要與每個 HTTP 要求一起傳送的 HTTP 集合。 |
+| `Credentials` | Empty | 每個 HTTP 要求所要傳送的認證。 |
 | `CloseTimeout` | 5 秒 | 僅限 Websocket。 用戶端在關閉以確認關閉要求後等待的最大時間量。 如果伺服器未在這段時間內確認關閉，用戶端就會中斷連線。 |
-| `Headers` | 空白 | 要與每個 HTTP 要求一起傳送的其他 HTTP 標頭對應。 |
+| `Headers` | Empty | 要與每個 HTTP 要求一起傳送的其他 HTTP 標頭對應。 |
 | `HttpMessageHandlerFactory` | `null` | 可以用來設定或取代 `HttpMessageHandler` 用來傳送 HTTP 要求的委派。 不用於 WebSocket 連接。 此委派必須傳回非 null 值，且會接收預設值做為參數。 請修改該預設值的設定並傳回，或傳回新的 `HttpMessageHandler` 實例。 **取代處理常式時，請務必從提供的處理常式複製您想要保留的設定，否則設定的選項 (例如 Cookie s 和標頭) 不會套用至新的處理常式。** |
 | `Proxy` | `null` | 傳送 HTTP 要求時要使用的 HTTP proxy。 |
 | `UseDefaultCredentials` | `false` | 設定此布林值，以傳送 HTTP 和 Websocket 要求的預設認證。 這樣就可以使用 Windows 驗證。 |
@@ -1831,7 +1832,7 @@ HubConnection hubConnection = HubConnectionBuilder.create("https://example.com/c
 | ----------- | ------------- | ----------- |
 | `withAccessTokenProvider` | `null` | 傳回字串的函式，在 HTTP 要求中以持有人驗證權杖的形式提供。 |
 | `shouldSkipNegotiate` | `false` | 將此設定為， `true` 以略過協商步驟。 **只有當 websocket 傳輸是唯一啟用的傳輸時才支援**。 使用 Azure 服務時，無法啟用此設定 SignalR 。 |
-| `withHeader` `withHeaders` | 空白 | 要與每個 HTTP 要求一起傳送的其他 HTTP 標頭對應。 |
+| `withHeader` `withHeaders` | Empty | 要與每個 HTTP 要求一起傳送的其他 HTTP 標頭對應。 |
 
 ---
 

@@ -18,12 +18,12 @@ no-loc:
 - SignalR
 - Models
 uid: tutorials/first-web-api
-ms.openlocfilehash: 7f684d96ee9fd640abdc750503bed1b2a836a459
-ms.sourcegitcommit: 62cc131969b2379f7a45c286a751e22d961dfbdb
+ms.openlocfilehash: 212d8a80bdc466479c34bc5fbd9c3261ca9d54c4
+ms.sourcegitcommit: 74f4a4ddbe3c2f11e2e09d05d2a979784d89d3f5
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 09/22/2020
-ms.locfileid: "90847730"
+ms.lasthandoff: 09/27/2020
+ms.locfileid: "91393908"
 ---
 # <a name="tutorial-create-a-web-api-with-aspnet-core"></a>教學課程：使用 ASP.NET Core 建立 web API
 
@@ -50,17 +50,17 @@ ms.locfileid: "90847730"
 
 |API | 描述 | Request body | 回應本文 |
 |--- | ---- | ---- | ---- |
-|`GET /api/TodoItems` | 取得所有待辦事項 | None | 待辦事項的陣列|
-|`GET /api/TodoItems/{id}` | 依識別碼取得項目 | None | 待辦事項|
+|`GET /api/TodoItems` | 取得所有待辦事項 | 無 | 待辦事項的陣列|
+|`GET /api/TodoItems/{id}` | 依識別碼取得項目 | 無 | 待辦事項|
 |`POST /api/TodoItems` | 新增記錄 | 待辦事項 | 待辦事項 |
-|`PUT /api/TodoItems/{id}` | 更新現有的項目 &nbsp; | 待辦事項 | None |
-|`DELETE /api/TodoItems/{id}` &nbsp; &nbsp; | 刪除專案 &nbsp;&nbsp; | None | None|
+|`PUT /api/TodoItems/{id}` | 更新現有的項目 &nbsp; | 待辦事項 | 無 |
+|`DELETE /api/TodoItems/{id}` &nbsp; &nbsp; | 刪除專案 &nbsp;&nbsp; | 無 | 無|
 
 下圖顯示應用程式的設計。
 
 ![左側方塊代表用戶端。 它會送出要求並接收來自應用程式 (右側繪製的方塊) 的回應。 在應用程式方塊中，三個方塊代表控制器、模型以及資料存取層。 要求進入應用程式的控制器，而在控制器與資料存取層之間進行讀取/寫入作業。 模型會序列化並在回應中傳回至用戶端。](first-web-api/_static/architecture.png)
 
-## <a name="prerequisites"></a>Prerequisites
+## <a name="prerequisites"></a>必要條件
 
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
@@ -80,7 +80,7 @@ ms.locfileid: "90847730"
 
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
-* 從 [檔案]**** 功能表選取 [新增]**[專案]** > ****。
+* 從 [ **檔案** ] 功能表選取 [ **新增** > **專案**]。
 * 選取 **ASP.NET Core Web 應用程式**範本，然後按一下 [下一步]****。
 * 將專案命名為 *TodoApi*，然後按一下 [建立]****。
 * 在 [ **建立新的 ASP.NET Core Web 應用程式** ] 對話方塊中，確認已選取 [ **.net Core** ] 和 [ **ASP.NET Core 5.0** ]。 選取 **API** 範本，然後按一下 [建立]****。
@@ -576,17 +576,17 @@ DTO 可以用來：
 
 |API | 描述 | Request body | 回應本文 |
 |--- | ---- | ---- | ---- |
-|`GET /api/TodoItems` | 取得所有待辦事項 | None | 待辦事項的陣列|
-|`GET /api/TodoItems/{id}` | 依識別碼取得項目 | None | 待辦事項|
+|`GET /api/TodoItems` | 取得所有待辦事項 | 無 | 待辦事項的陣列|
+|`GET /api/TodoItems/{id}` | 依識別碼取得項目 | 無 | 待辦事項|
 |`POST /api/TodoItems` | 新增記錄 | 待辦事項 | 待辦事項 |
-|`PUT /api/TodoItems/{id}` | 更新現有的項目 &nbsp; | 待辦事項 | None |
-|`DELETE /api/TodoItems/{id}` &nbsp; &nbsp; | 刪除專案 &nbsp;&nbsp; | None | None|
+|`PUT /api/TodoItems/{id}` | 更新現有的項目 &nbsp; | 待辦事項 | 無 |
+|`DELETE /api/TodoItems/{id}` &nbsp; &nbsp; | 刪除專案 &nbsp;&nbsp; | 無 | 無|
 
 下圖顯示應用程式的設計。
 
 ![左側方塊代表用戶端。 它會送出要求並接收來自應用程式 (右側繪製的方塊) 的回應。 在應用程式方塊中，三個方塊代表控制器、模型以及資料存取層。 要求進入應用程式的控制器，而在控制器與資料存取層之間進行讀取/寫入作業。 模型會序列化並在回應中傳回至用戶端。](first-web-api/_static/architecture.png)
 
-## <a name="prerequisites"></a>Prerequisites
+## <a name="prerequisites"></a>必要條件
 
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
@@ -606,7 +606,7 @@ DTO 可以用來：
 
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
-* 從 [檔案]**** 功能表選取 [新增]**[專案]** > ****。
+* 從 [ **檔案** ] 功能表選取 [ **新增** > **專案**]。
 * 選取 **ASP.NET Core Web 應用程式**範本，然後按一下 [下一步]****。
 * 將專案命名為 *TodoApi*，然後按一下 [建立]****。
 * 在 [ **建立新的 ASP.NET Core Web 應用程式** ] 對話方塊中，確認已選取 [ **.net Core** ] 和 [ **ASP.NET Core 3.1** ]。 選取 **API** 範本，然後按一下 [建立]****。
@@ -983,7 +983,7 @@ dotnet aspnet-codegenerator controller -name TodoItemsController -async -api -m 
 
 ```json
   {
-    "Id":1,
+    "id":1,
     "name":"feed fish",
     "isComplete":true
   }
@@ -1066,11 +1066,11 @@ DTO 可以用來：
 
 |API | 描述 | Request body | 回應本文 |
 |--- | ---- | ---- | ---- |
-|GET /api/TodoItems | 取得所有待辦事項 | None | 待辦事項的陣列|
-|GET /api/TodoItems/{識別碼} | 依識別碼取得項目 | None | 待辦事項|
+|GET /api/TodoItems | 取得所有待辦事項 | 無 | 待辦事項的陣列|
+|GET /api/TodoItems/{識別碼} | 依識別碼取得項目 | 無 | 待辦事項|
 |POST /api/TodoItems | 新增記錄 | 待辦事項 | 待辦事項 |
-|PUT /api/TodoItems/{識別碼} | 更新現有的項目 &nbsp; | 待辦事項 | None |
-|刪除/Api/todoitems/{識別碼} &nbsp;&nbsp; | 刪除專案 &nbsp;&nbsp; | None | None|
+|PUT /api/TodoItems/{識別碼} | 更新現有的項目 &nbsp; | 待辦事項 | 無 |
+|刪除/Api/todoitems/{識別碼} &nbsp;&nbsp; | 刪除專案 &nbsp;&nbsp; | 無 | 無|
 
 下圖顯示應用程式的設計。
 
@@ -1096,7 +1096,7 @@ DTO 可以用來：
 
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
-* 從 [檔案]**** 功能表選取 [新增]**[專案]** > ****。
+* 從 [ **檔案** ] 功能表選取 [ **新增** > **專案**]。
 * 選取 **ASP.NET Core Web 應用程式**範本，然後按一下 [下一步]****。
 * 將專案命名為 *TodoApi*，然後按一下 [建立]****。
 * 在 [建立新的 ASP.NET Core Web 應用程式]**** 對話方塊中，確認選取 [.NET Core]**** 和 [ASP.NET Core 2.2]****。 選取 **API** 範本，然後按一下 [建立]****。 請**勿**選取 [Enable Docker Support] \(啟用 Docker 支援\)****。
@@ -1235,7 +1235,7 @@ DTO 可以用來：
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
 * 以滑鼠右鍵按一下 *Controllers* 資料夾。
-* 選取 [新增]**[新項目]** > ****。
+* 選取 [ **加入** > **新專案**]。
 * 在 [新增項目]**** 對話方塊中，選取 [API 控制器類別]**** 範本。
 * 將類別命名為 *TodoController*，然後選取 [新增]****。
 
@@ -1410,7 +1410,7 @@ DTO 可以用來：
 
 ```json
   {
-    "Id":1,
+    "id":1,
     "name":"feed fish",
     "isComplete":true
   }

@@ -15,12 +15,12 @@ no-loc:
 - Razor
 - SignalR
 uid: fundamentals/static-files
-ms.openlocfilehash: 24fda96dbe48945d172eb36e8a91af31f168ff7f
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: 36eeb3532ed5ea6f5f75c20cbe14331ed840a788
+ms.sourcegitcommit: 74f4a4ddbe3c2f11e2e09d05d2a979784d89d3f5
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88627659"
+ms.lasthandoff: 09/27/2020
+ms.locfileid: "91393934"
 ---
 # <a name="static-files-in-aspnet-core"></a>ASP.NET Core 中的靜態檔案
 
@@ -127,7 +127,7 @@ ms.locfileid: "88627659"
 
 瀏覽目錄允許在指定的目錄中列出目錄。
 
-基於安全性考慮，預設會停用瀏覽目錄功能。 如需詳細資訊，請參閱 [考慮](#sc)。
+基於安全性考慮，預設會停用瀏覽目錄功能。 如需詳細資訊，請參閱 [考慮](#considerations)。
 
 啟用瀏覽目錄：
 
@@ -363,7 +363,7 @@ HTML、CSS、影像和 JavaScript 這類靜態檔案都是 ASP.NET Core 應用�
 
 ## <a name="enable-directory-browsing"></a>啟用目錄瀏覽
 
-您的 Web 應用程式使用者可藉由目錄瀏覽功能，查看目錄清單及指定目錄內的檔案。 基於安全性考量，預設為停用目錄瀏覽功能 (請參閱[考量](#sc))。 藉由叫用中的方法來啟用瀏覽目錄 <xref:Microsoft.AspNetCore.Builder.DirectoryBrowserExtensions.UseDirectoryBrowser%2A> `Startup.Configure` ：
+您的 Web 應用程式使用者可藉由目錄瀏覽功能，查看目錄清單及指定目錄內的檔案。 基於安全性考量，預設為停用目錄瀏覽功能 (請參閱[考量](#considerations))。 藉由叫用中的方法來啟用瀏覽目錄 <xref:Microsoft.AspNetCore.Builder.DirectoryBrowserExtensions.UseDirectoryBrowser%2A> `Startup.Configure` ：
 
 [!code-csharp[](static-files/samples/1.x/StaticFilesSample/StartupBrowse.cs?name=snippet_ConfigureMethod&highlight=12-17)]
 

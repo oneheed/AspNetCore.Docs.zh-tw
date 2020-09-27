@@ -18,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/debug
-ms.openlocfilehash: 7681deb70610a8fbc27ccda7317b73921646794a
-ms.sourcegitcommit: 4df148cbbfae9ec8d377283ee71394944a284051
+ms.openlocfilehash: e12b0e6d1bf9eab751f6605b9a156f637f2b0c0f
+ms.sourcegitcommit: 74f4a4ddbe3c2f11e2e09d05d2a979784d89d3f5
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 08/26/2020
-ms.locfileid: "88876772"
+ms.lasthandoff: 09/27/2020
+ms.locfileid: "91393830"
 ---
 # <a name="debug-aspnet-core-no-locblazor-webassembly"></a>Debug ASP.NET Core Blazor WebAssembly
 
@@ -49,7 +49,7 @@ Blazor WebAssembly 您可以使用以 Chromium 為基礎的瀏覽器中的瀏覽
 * 中斷未處理的例外狀況。
 * 在應用程式啟動期間，在執行 debug proxy 之前叫用中斷點。 這包括 () 中的中斷點 `Program.Main` `Program.cs` ，以及應用程式所要求的第一個頁面所載入之元件[ `OnInitialized{Async}` 方法](xref:blazor/components/lifecycle#component-initialization-methods)中的中斷點。
 
-## <a name="prerequisites"></a>先決條件
+## <a name="prerequisites"></a>必要條件
 
 偵錯工具需要下列其中一個瀏覽器：
 
@@ -109,11 +109,55 @@ Visual Studio for Mac 需要8.8 版 (組建 1532) 或更新版本：
 > [!NOTE]
 > 在執行 debug proxy 之前， **不** 會在應用程式啟動期間叫用中斷點。 這包括 () 中的中斷點 `Program.Main` `Program.cs` ，以及應用程式所要求的第一個頁面所載入之元件[ `OnInitialized{Async}` 方法](xref:blazor/components/lifecycle#component-initialization-methods)中的中斷點。
 
+如果應用程式裝載于不同的 [應用程式基底路徑](xref:blazor/host-and-deploy/index#app-base-path) `/` ，請更新中的下列屬性， `Properties/launchSettings.json` 以反映應用程式的基底路徑：
+
+* `applicationUrl`:
+
+  ```json
+  "iisSettings": {
+    ...
+    "iisExpress": {
+      "applicationUrl": "http://localhost:{INSECURE PORT}/{APP BASE PATH}/",
+      "sslPort": {SECURE PORT}
+    }
+  },
+  ```
+
+* `inspectUri` 每個設定檔：
+
+  ```json
+  "profiles": {
+    ...
+    "{PROFILE 1, 2, ... N}": {
+      ...
+      "inspectUri": "{wsProtocol}://{url.hostname}:{url.port}/{APP BASE PATH}/_framework/debug/ws-proxy?browser={browserInspectUri}",
+      ...
+    }
+  }
+  ```
+
+上述設定中的預留位置：
+
+* `{INSECURE PORT}`：不安全的埠。 預設會提供隨機值，但允許自訂埠。
+* `{APP BASE PATH}`：應用程式的基底路徑。
+* `{SECURE PORT}`：安全埠。 預設會提供隨機值，但允許自訂埠。
+* `{PROFILE 1, 2, ... N}`：啟動設定設定檔。 通常，應用程式預設會指定多個設定檔 (例如，IIS Express 的設定檔以及 Kestrel 伺服器) 所使用的專案設定檔。
+
+在下列範例中，應用程式是 `/OAT` 使用中設定的應用程式基底路徑 `wwwroot/index.html` 來託管 `<base href="/OAT/">` ：
+
+```json
+"applicationUrl": "http://localhost:{INSECURE PORT}/OAT/",
+```
+
+```json
+"inspectUri": "{wsProtocol}://{url.hostname}:{url.port}/OAT/_framework/debug/ws-proxy?browser={browserInspectUri}",
+```
+
+如需使用應用程式的自訂應用程式基底路徑的詳細資訊 Blazor WebAssembly ，請參閱 <xref:blazor/host-and-deploy/index#app-base-path> 。
+
 # <a name="visual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code)
 
-<a id="vscode"></a>
-
-## <a name="debug-standalone-no-locblazor-webassembly"></a>獨立調試 Blazor WebAssembly
+<h2 id="vscode">獨立調試 Blazor WebAssembly</h2>
 
 1. Blazor WebAssembly在 VS Code 中開啟獨立應用程式。
 
@@ -147,7 +191,7 @@ Visual Studio for Mac 需要8.8 版 (組建 1532) 或更新版本：
 
 1. Blazor WebAssembly在 VS Code 中開啟託管應用程式的方案資料夾。
 
-1. 如果未設定專案的啟動設定，則會出現下列通知。 選取 [是]。
+1. 如果未設定專案的啟動設定，則會出現下列通知。 選取 [是]  。
 
    > ' {APPLICATION NAME} ' 中缺少建立和偵測所需的資產。 新增它們嗎？
 
@@ -177,8 +221,8 @@ Visual Studio for Mac 需要8.8 版 (組建 1532) 或更新版本：
 | 選項    | 描述 |
 | --------- | ----------- |
 | `request` | 用 `launch` 來啟動偵錯工具，並將其附加至 Blazor WebAssembly 應用程式，或將偵測 `attach` 會話附加至已在執行中的應用程式。 |
-| `url`     | 在瀏覽器中要在瀏覽器中開啟的 URL。 預設為 `https://localhost:5001`。 |
-| `browser` | 要啟動偵錯工具的瀏覽器。 設為 `edge` 或 `chrome`。 預設為 `chrome`。 |
+| `url`     | 在瀏覽器中要在瀏覽器中開啟的 URL。 預設值為 `https://localhost:5001`。 |
+| `browser` | 要啟動偵錯工具的瀏覽器。 設為 `edge` 或 `chrome`。 預設值為 `chrome`。 |
 | `trace`   | 用來從 JS 偵錯工具產生記錄。 設定為 `true` 以產生記錄。 |
 | `hosted`  | `true`如果啟動和偵測託管應用程式，則必須設定為 Blazor WebAssembly 。 |
 | `webRoot` | 指定 web 伺服器的絕對路徑。 如果從子路由提供應用程式，則應該設定。 |
@@ -257,7 +301,7 @@ Visual Studio for Mac 需要8.8 版 (組建 1532) 或更新版本：
 > [!NOTE]
 > 在執行 debug proxy 之前， **不** 會在應用程式啟動期間叫用中斷點。 這包括 () 中的中斷點 `Program.Main` `Program.cs` ，以及應用程式所要求的第一個頁面所載入之元件[ `OnInitialized{Async}` 方法](xref:blazor/components/lifecycle#component-initialization-methods)中的中斷點。
 
-如需詳細資訊，請參閱 [使用 Visual Studio for Mac 的調試](/visualstudio/mac/debugging?view=vsmac-2019)程式。
+如需詳細資訊，請參閱 [使用 Visual Studio for Mac 的調試](/visualstudio/mac/debugging)程式。
 
 ---
 

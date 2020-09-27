@@ -5,7 +5,7 @@ description: 將 MessagePack 中樞通訊協定新增至 ASP.NET Core SignalR �
 monikerRange: '>= aspnetcore-2.1'
 ms.author: bradyg
 ms.custom: mvc
-ms.date: 04/13/2020
+ms.date: 09/24/2020
 no-loc:
 - ASP.NET Core Identity
 - cookie
@@ -18,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: signalr/messagepackhubprotocol
-ms.openlocfilehash: ab9bd11e37182f5b24db5595d5d050f4cc0e32da
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: 15ae8911e2ffba43c7bb885efd153d8b6803bc2a
+ms.sourcegitcommit: 74f4a4ddbe3c2f11e2e09d05d2a979784d89d3f5
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88626645"
+ms.lasthandoff: 09/27/2020
+ms.locfileid: "91393674"
 ---
 # <a name="use-messagepack-hub-protocol-in-no-locsignalr-for-aspnet-core"></a>使用中的 MessagePack Hub 通訊協定 SignalR 進行 ASP.NET Core
 
@@ -72,6 +72,9 @@ services.AddSignalR()
 若要在 .NET 用戶端中啟用 MessagePack，請安裝 `Microsoft.AspNetCore.SignalR.Protocols.MessagePack` 封裝並 `AddMessagePackProtocol` 在上呼叫 `HubConnectionBuilder` 。
 
 ```csharp
+using Microsoft.AspNetCore.SignalR.Client;
+using Microsoft.Extensions.DependencyInjection;
+
 var hubConnection = new HubConnectionBuilder()
                         .WithUrl("/chathub")
                         .AddMessagePackProtocol()
@@ -226,9 +229,11 @@ services.AddSignalR()
 ```
 
 > [!WARNING]
-> 強烈建議您檢查 [CVE-2020-5234](https://github.com/neuecc/MessagePack-CSharp/security/advisories/GHSA-7q36-4xx7-xcxf) 並套用建議的修補程式。 例如，將 `MessagePackSecurity.Active` 靜態屬性設定為 `MessagePackSecurity.UntrustedData` 。 設定 `MessagePackSecurity.Active` 需要手動安裝 MessagePack 的 [1.9. x 版](https://www.nuget.org/packages/MessagePack/1.9.3)。 安裝 `MessagePack` 1.9. x 版升級時 SignalR 使用。 當未 `MessagePackSecurity.Active` 設定為時 `MessagePackSecurity.UntrustedData` ，惡意用戶端可能會造成阻絕服務。 `MessagePackSecurity.Active`在中設定 `Program.Main` ，如下列程式碼所示：
+> 強烈建議您檢查 [CVE-2020-5234](https://github.com/neuecc/MessagePack-CSharp/security/advisories/GHSA-7q36-4xx7-xcxf) 並套用建議的修補程式。 例如，將 `MessagePackSecurity.Active` 靜態屬性設定為 `MessagePackSecurity.UntrustedData` 。 設定 `MessagePackSecurity.Active` 需要手動安裝 MessagePack 的 [1.9. x 版](https://www.nuget.org/packages/MessagePack/1.9.3)。 安裝 `MessagePack` 1.9. x 版升級時 SignalR 使用。 `MessagePack` 2.x 版引進了重大變更，與 SignalR 3.1 版及更早版本不相容。 當 `MessagePackSecurity.Active` 未設定為時 `MessagePackSecurity.UntrustedData` ，惡意用戶端可能會造成拒絕服務。 `MessagePackSecurity.Active`在中設定 `Program.Main` ，如下列程式碼所示：
 
 ```csharp
+using MessagePack;
+
 public static void Main(string[] args)
 {
   MessagePackSecurity.Active = MessagePackSecurity.UntrustedData;
@@ -247,6 +252,9 @@ public static void Main(string[] args)
 若要在 .NET 用戶端中啟用 MessagePack，請安裝 `Microsoft.AspNetCore.SignalR.Protocols.MessagePack` 封裝並 `AddMessagePackProtocol` 在上呼叫 `HubConnectionBuilder` 。
 
 ```csharp
+using Microsoft.AspNetCore.SignalR.Client;
+using Microsoft.Extensions.DependencyInjection;
+
 var hubConnection = new HubConnectionBuilder()
                         .WithUrl("/chathub")
                         .AddMessagePackProtocol()
@@ -404,6 +412,8 @@ services.AddSignalR()
 > 強烈建議您檢查 [CVE-2020-5234](https://github.com/neuecc/MessagePack-CSharp/security/advisories/GHSA-7q36-4xx7-xcxf) 並套用建議的修補程式。 例如，將 `MessagePackSecurity.Active` 靜態屬性設定為 `MessagePackSecurity.UntrustedData` 。 設定 `MessagePackSecurity.Active` 需要手動安裝 MessagePack 的 [1.9. x 版](https://www.nuget.org/packages/MessagePack/1.9.3)。 安裝 `MessagePack` 1.9. x 版升級時 SignalR 使用。 當未 `MessagePackSecurity.Active` 設定為時 `MessagePackSecurity.UntrustedData` ，惡意用戶端可能會造成阻絕服務。 `MessagePackSecurity.Active`在中設定 `Program.Main` ，如下列程式碼所示：
 
 ```csharp
+using MessagePack;
+
 public static void Main(string[] args)
 {
   MessagePackSecurity.Active = MessagePackSecurity.UntrustedData;
@@ -422,6 +432,9 @@ public static void Main(string[] args)
 若要在 .NET 用戶端中啟用 MessagePack，請安裝 `Microsoft.AspNetCore.SignalR.Protocols.MessagePack` 封裝並 `AddMessagePackProtocol` 在上呼叫 `HubConnectionBuilder` 。
 
 ```csharp
+using Microsoft.AspNetCore.SignalR.Client;
+using Microsoft.Extensions.DependencyInjection;
+
 var hubConnection = new HubConnectionBuilder()
                         .WithUrl("/chathub")
                         .AddMessagePackProtocol()

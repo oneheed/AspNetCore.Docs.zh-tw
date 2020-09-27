@@ -18,44 +18,48 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/host-and-deploy/webassembly
-ms.openlocfilehash: dadf6076e7f07c07381856aa225667a6eb38046a
-ms.sourcegitcommit: 600666440398788db5db25dc0496b9ca8fe50915
+ms.openlocfilehash: 3436620123618ab32daa44c4a37057aaadb89563
+ms.sourcegitcommit: 74f4a4ddbe3c2f11e2e09d05d2a979784d89d3f5
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 09/14/2020
-ms.locfileid: "90080312"
+ms.lasthandoff: 09/27/2020
+ms.locfileid: "91393687"
 ---
-# <a name="host-and-deploy-aspnet-core-no-locblazor-webassembly"></a><span data-ttu-id="fd621-103">裝載和部署 ASP.NET Core Blazor WebAssembly</span><span class="sxs-lookup"><span data-stu-id="fd621-103">Host and deploy ASP.NET Core Blazor WebAssembly</span></span>
+# <a name="host-and-deploy-aspnet-core-no-locblazor-webassembly"></a><span data-ttu-id="fc6e9-103">裝載和部署 ASP.NET Core Blazor WebAssembly</span><span class="sxs-lookup"><span data-stu-id="fc6e9-103">Host and deploy ASP.NET Core Blazor WebAssembly</span></span>
 
-<span data-ttu-id="fd621-104">[Luke Latham](https://github.com/guardrex)、 [Rainer Stropek](https://www.timecockpit.com)、 [Daniel Roth](https://github.com/danroth27)、 [Ben Adams](https://twitter.com/ben_a_adams)及[Safia Abdalla](https://safia.rocks)</span><span class="sxs-lookup"><span data-stu-id="fd621-104">By [Luke Latham](https://github.com/guardrex), [Rainer Stropek](https://www.timecockpit.com), [Daniel Roth](https://github.com/danroth27), [Ben Adams](https://twitter.com/ben_a_adams), and [Safia Abdalla](https://safia.rocks)</span></span>
+<span data-ttu-id="fc6e9-104">[Luke Latham](https://github.com/guardrex)、 [Rainer Stropek](https://www.timecockpit.com)、 [Daniel Roth](https://github.com/danroth27)、 [Ben Adams](https://twitter.com/ben_a_adams)及[Safia Abdalla](https://safia.rocks)</span><span class="sxs-lookup"><span data-stu-id="fc6e9-104">By [Luke Latham](https://github.com/guardrex), [Rainer Stropek](https://www.timecockpit.com), [Daniel Roth](https://github.com/danroth27), [Ben Adams](https://twitter.com/ben_a_adams), and [Safia Abdalla](https://safia.rocks)</span></span>
 
-<span data-ttu-id="fd621-105">使用[ Blazor WebAssembly 裝載模型](xref:blazor/hosting-models#blazor-webassembly)：</span><span class="sxs-lookup"><span data-stu-id="fd621-105">With the [Blazor WebAssembly hosting model](xref:blazor/hosting-models#blazor-webassembly):</span></span>
+<span data-ttu-id="fc6e9-105">使用[ Blazor WebAssembly 裝載模型](xref:blazor/hosting-models#blazor-webassembly)：</span><span class="sxs-lookup"><span data-stu-id="fc6e9-105">With the [Blazor WebAssembly hosting model](xref:blazor/hosting-models#blazor-webassembly):</span></span>
 
-* <span data-ttu-id="fd621-106">Blazor應用程式、其相依性和 .net 執行時間會以平行方式下載至瀏覽器。</span><span class="sxs-lookup"><span data-stu-id="fd621-106">The Blazor app, its dependencies, and the .NET runtime are downloaded to the browser in parallel.</span></span>
-* <span data-ttu-id="fd621-107">應用程式會直接在瀏覽器 UI 執行緒上執行。</span><span class="sxs-lookup"><span data-stu-id="fd621-107">The app is executed directly on the browser UI thread.</span></span>
+* <span data-ttu-id="fc6e9-106">Blazor應用程式、其相依性和 .net 執行時間會以平行方式下載至瀏覽器。</span><span class="sxs-lookup"><span data-stu-id="fc6e9-106">The Blazor app, its dependencies, and the .NET runtime are downloaded to the browser in parallel.</span></span>
+* <span data-ttu-id="fc6e9-107">應用程式會直接在瀏覽器 UI 執行緒上執行。</span><span class="sxs-lookup"><span data-stu-id="fc6e9-107">The app is executed directly on the browser UI thread.</span></span>
 
-<span data-ttu-id="fd621-108">以下是支援的部署策略：</span><span class="sxs-lookup"><span data-stu-id="fd621-108">The following deployment strategies are supported:</span></span>
+<span data-ttu-id="fc6e9-108">以下是支援的部署策略：</span><span class="sxs-lookup"><span data-stu-id="fc6e9-108">The following deployment strategies are supported:</span></span>
 
-* <span data-ttu-id="fd621-109">Blazor應用程式是由 ASP.NET Core 應用程式提供服務。</span><span class="sxs-lookup"><span data-stu-id="fd621-109">The Blazor app is served by an ASP.NET Core app.</span></span> <span data-ttu-id="fd621-110">此策略已於[搭配 ASP.NET Core 的已裝載部署](#hosted-deployment-with-aspnet-core)一節中涵蓋。</span><span class="sxs-lookup"><span data-stu-id="fd621-110">This strategy is covered in the [Hosted deployment with ASP.NET Core](#hosted-deployment-with-aspnet-core) section.</span></span>
-* <span data-ttu-id="fd621-111">Blazor應用程式會放置在靜態裝載 web 伺服器或服務上，而不會使用 .net 來提供 Blazor 應用程式。</span><span class="sxs-lookup"><span data-stu-id="fd621-111">The Blazor app is placed on a static hosting web server or service, where .NET isn't used to serve the Blazor app.</span></span> <span data-ttu-id="fd621-112">此策略包含在 [獨立部署](#standalone-deployment) 區段中，其中包含將 Blazor WebAssembly 應用程式裝載為 IIS 子應用程式的相關資訊。</span><span class="sxs-lookup"><span data-stu-id="fd621-112">This strategy is covered in the [Standalone deployment](#standalone-deployment) section, which includes information on hosting a Blazor WebAssembly app as an IIS sub-app.</span></span>
+* <span data-ttu-id="fc6e9-109">Blazor應用程式是由 ASP.NET Core 應用程式提供服務。</span><span class="sxs-lookup"><span data-stu-id="fc6e9-109">The Blazor app is served by an ASP.NET Core app.</span></span> <span data-ttu-id="fc6e9-110">此策略已於[搭配 ASP.NET Core 的已裝載部署](#hosted-deployment-with-aspnet-core)一節中涵蓋。</span><span class="sxs-lookup"><span data-stu-id="fc6e9-110">This strategy is covered in the [Hosted deployment with ASP.NET Core](#hosted-deployment-with-aspnet-core) section.</span></span>
+* <span data-ttu-id="fc6e9-111">Blazor應用程式會放置在靜態裝載 web 伺服器或服務上，而不會使用 .net 來提供 Blazor 應用程式。</span><span class="sxs-lookup"><span data-stu-id="fc6e9-111">The Blazor app is placed on a static hosting web server or service, where .NET isn't used to serve the Blazor app.</span></span> <span data-ttu-id="fc6e9-112">此策略包含在 [獨立部署](#standalone-deployment) 區段中，其中包含將 Blazor WebAssembly 應用程式裝載為 IIS 子應用程式的相關資訊。</span><span class="sxs-lookup"><span data-stu-id="fc6e9-112">This strategy is covered in the [Standalone deployment](#standalone-deployment) section, which includes information on hosting a Blazor WebAssembly app as an IIS sub-app.</span></span>
 
-## <a name="compression"></a><span data-ttu-id="fd621-113">壓縮</span><span class="sxs-lookup"><span data-stu-id="fd621-113">Compression</span></span>
+## <a name="compression"></a><span data-ttu-id="fc6e9-113">壓縮</span><span class="sxs-lookup"><span data-stu-id="fc6e9-113">Compression</span></span>
 
-<span data-ttu-id="fd621-114">Blazor WebAssembly發佈應用程式時，會在發行期間以靜態方式壓縮輸出，以減少應用程式的大小，並移除執行時間壓縮的額外負荷。</span><span class="sxs-lookup"><span data-stu-id="fd621-114">When a Blazor WebAssembly app is published, the output is statically compressed during publish to reduce the app's size and remove the overhead for runtime compression.</span></span> <span data-ttu-id="fd621-115">使用的壓縮演算法如下：</span><span class="sxs-lookup"><span data-stu-id="fd621-115">The following compression algorithms are used:</span></span>
+<span data-ttu-id="fc6e9-114">Blazor WebAssembly發佈應用程式時，會在發行期間以靜態方式壓縮輸出，以減少應用程式的大小，並移除執行時間壓縮的額外負荷。</span><span class="sxs-lookup"><span data-stu-id="fc6e9-114">When a Blazor WebAssembly app is published, the output is statically compressed during publish to reduce the app's size and remove the overhead for runtime compression.</span></span> <span data-ttu-id="fc6e9-115">使用的壓縮演算法如下：</span><span class="sxs-lookup"><span data-stu-id="fc6e9-115">The following compression algorithms are used:</span></span>
 
-* <span data-ttu-id="fd621-116">[Brotli](https://tools.ietf.org/html/rfc7932) (最高層級) </span><span class="sxs-lookup"><span data-stu-id="fd621-116">[Brotli](https://tools.ietf.org/html/rfc7932) (highest level)</span></span>
-* [<span data-ttu-id="fd621-117">Gzip</span><span class="sxs-lookup"><span data-stu-id="fd621-117">Gzip</span></span>](https://tools.ietf.org/html/rfc1952)
+* <span data-ttu-id="fc6e9-116">[Brotli](https://tools.ietf.org/html/rfc7932) (最高層級) </span><span class="sxs-lookup"><span data-stu-id="fc6e9-116">[Brotli](https://tools.ietf.org/html/rfc7932) (highest level)</span></span>
+* [<span data-ttu-id="fc6e9-117">Gzip</span><span class="sxs-lookup"><span data-stu-id="fc6e9-117">Gzip</span></span>](https://tools.ietf.org/html/rfc1952)
 
-<span data-ttu-id="fd621-118">Blazor 依賴主機提供適當的壓縮檔案。</span><span class="sxs-lookup"><span data-stu-id="fd621-118">Blazor relies on the host to the serve the appropriate compressed files.</span></span> <span data-ttu-id="fd621-119">使用 ASP.NET Core 裝載的專案時，主專案可以執行內容協商以及提供靜態壓縮檔案。</span><span class="sxs-lookup"><span data-stu-id="fd621-119">When using an ASP.NET Core hosted project, the host project is capable of performing content negotiation and serving the statically-compressed files.</span></span> <span data-ttu-id="fd621-120">裝載 Blazor WebAssembly 獨立應用程式時，可能需要額外的工作，以確保提供靜態壓縮檔案：</span><span class="sxs-lookup"><span data-stu-id="fd621-120">When hosting a Blazor WebAssembly standalone app, additional work might be required to ensure that statically-compressed files are served:</span></span>
+<span data-ttu-id="fc6e9-118">Blazor 依賴主機提供適當的壓縮檔案。</span><span class="sxs-lookup"><span data-stu-id="fc6e9-118">Blazor relies on the host to the serve the appropriate compressed files.</span></span> <span data-ttu-id="fc6e9-119">使用 ASP.NET Core 裝載的專案時，主專案可以執行內容協商以及提供靜態壓縮檔案。</span><span class="sxs-lookup"><span data-stu-id="fc6e9-119">When using an ASP.NET Core hosted project, the host project is capable of performing content negotiation and serving the statically-compressed files.</span></span> <span data-ttu-id="fc6e9-120">裝載 Blazor WebAssembly 獨立應用程式時，可能需要額外的工作，以確保提供靜態壓縮檔案：</span><span class="sxs-lookup"><span data-stu-id="fc6e9-120">When hosting a Blazor WebAssembly standalone app, additional work might be required to ensure that statically-compressed files are served:</span></span>
 
-* <span data-ttu-id="fd621-121">如需 IIS `web.config` 壓縮設定，請參閱 [Iis： Brotli 和 Gzip 壓縮](#brotli-and-gzip-compression) 一節。</span><span class="sxs-lookup"><span data-stu-id="fd621-121">For IIS `web.config` compression configuration, see the [IIS: Brotli and Gzip compression](#brotli-and-gzip-compression) section.</span></span> 
-* <span data-ttu-id="fd621-122">裝載在不支援靜態壓縮的檔案內容協商的靜態裝載方案（例如 GitHub 頁面）時，請考慮將應用程式設定為提取和解碼 Brotli 壓縮檔案：</span><span class="sxs-lookup"><span data-stu-id="fd621-122">When hosting on static hosting solutions that don't support statically-compressed file content negotiation, such as GitHub Pages, consider configuring the app to fetch and decode Brotli compressed files:</span></span>
+* <span data-ttu-id="fc6e9-121">如需 IIS `web.config` 壓縮設定，請參閱 [Iis： Brotli 和 Gzip 壓縮](#brotli-and-gzip-compression) 一節。</span><span class="sxs-lookup"><span data-stu-id="fc6e9-121">For IIS `web.config` compression configuration, see the [IIS: Brotli and Gzip compression](#brotli-and-gzip-compression) section.</span></span> 
+* <span data-ttu-id="fc6e9-122">裝載在不支援靜態壓縮的檔案內容協商的靜態裝載方案（例如 GitHub 頁面）時，請考慮將應用程式設定為提取和解碼 Brotli 壓縮檔案：</span><span class="sxs-lookup"><span data-stu-id="fc6e9-122">When hosting on static hosting solutions that don't support statically-compressed file content negotiation, such as GitHub Pages, consider configuring the app to fetch and decode Brotli compressed files:</span></span>
 
-  * <span data-ttu-id="fd621-123">從 [google/Brotli GitHub 存放庫](https://github.com/google/brotli)取得 JavaScript Brotli 解碼器。</span><span class="sxs-lookup"><span data-stu-id="fd621-123">Obtain the JavaScript Brotli decoder from the [google/brotli GitHub repository](https://github.com/google/brotli).</span></span> <span data-ttu-id="fd621-124">從2020年7月起， `decode.min.js` 系統會在存放庫的[ `js` 資料夾](https://github.com/google/brotli/tree/master/js)中命名並重命名的解碼器檔案。</span><span class="sxs-lookup"><span data-stu-id="fd621-124">As of July 2020, the decoder file is named `decode.min.js` and found in the repository's [`js` folder](https://github.com/google/brotli/tree/master/js).</span></span>
-  * <span data-ttu-id="fd621-125">更新應用程式以使用此解碼器。</span><span class="sxs-lookup"><span data-stu-id="fd621-125">Update the app to use the decoder.</span></span> <span data-ttu-id="fd621-126">將結束記號內的標記變更 `<body>` `wwwroot/index.html` 為下列內容：</span><span class="sxs-lookup"><span data-stu-id="fd621-126">Change the markup inside the closing `<body>` tag in `wwwroot/index.html` to the following:</span></span>
+  * <span data-ttu-id="fc6e9-123">從 [google/Brotli GitHub 存放庫](https://github.com/google/brotli)取得 JavaScript Brotli 解碼器。</span><span class="sxs-lookup"><span data-stu-id="fc6e9-123">Obtain the JavaScript Brotli decoder from the [google/brotli GitHub repository](https://github.com/google/brotli).</span></span> <span data-ttu-id="fc6e9-124">從2020年9月起， `decode.js` 系統會在存放庫的[ `js` 資料夾](https://github.com/google/brotli/tree/master/js)中命名並重命名的解碼器檔案。</span><span class="sxs-lookup"><span data-stu-id="fc6e9-124">As of September 2020, the decoder file is named `decode.js` and found in the repository's [`js` folder](https://github.com/google/brotli/tree/master/js).</span></span>
+  
+    > [!NOTE]
+    > <span data-ttu-id="fc6e9-125">縮減版本的 `decode.js` 腳本 (`decode.min.js`) [Google/brotli GitHub 存放庫](https://github.com/google/brotli)中有回歸。</span><span class="sxs-lookup"><span data-stu-id="fc6e9-125">A regression is present in the minified version of the `decode.js` script (`decode.min.js`) in the [google/brotli GitHub repository](https://github.com/google/brotli).</span></span> <span data-ttu-id="fc6e9-126">您可以自行縮短腳本，或使用 [npm 套件](https://www.npmjs.com/package/brotli) ，直到問題時段為止 [。 BrotliDecode 未設定于 decode.min.js (google/brotli #844) ](https://github.com/google/brotli/issues/844) 已解決。</span><span class="sxs-lookup"><span data-stu-id="fc6e9-126">Either minify the script on your own or use the [npm package](https://www.npmjs.com/package/brotli) until the issue [Window.BrotliDecode is not set in decode.min.js (google/brotli #844)](https://github.com/google/brotli/issues/844) is resolved.</span></span> <span data-ttu-id="fc6e9-127">本節中的範例程式碼會使用腳本的 **unminified** 版本。</span><span class="sxs-lookup"><span data-stu-id="fc6e9-127">The example code in this section uses the **unminified** version of the script.</span></span>
+
+  * <span data-ttu-id="fc6e9-128">更新應用程式以使用此解碼器。</span><span class="sxs-lookup"><span data-stu-id="fc6e9-128">Update the app to use the decoder.</span></span> <span data-ttu-id="fc6e9-129">將結束記號內的標記變更 `<body>` `wwwroot/index.html` 為下列內容：</span><span class="sxs-lookup"><span data-stu-id="fc6e9-129">Change the markup inside the closing `<body>` tag in `wwwroot/index.html` to the following:</span></span>
   
     ```html
-    <script src="decode.min.js"></script>
+    <script src="decode.js"></script>
     <script src="_framework/blazor.webassembly.js" autostart="false"></script>
     <script>
       Blazor.start({
@@ -80,7 +84,7 @@ ms.locfileid: "90080312"
     </script>
     ```
  
-<span data-ttu-id="fd621-127">若要停用壓縮，請在 `BlazorEnableCompression` 應用程式的專案檔中新增 MSBuild 屬性，並將值設定為 `false` ：</span><span class="sxs-lookup"><span data-stu-id="fd621-127">To disable compression, add the `BlazorEnableCompression` MSBuild property to the app's project file and set the value to `false`:</span></span>
+<span data-ttu-id="fc6e9-130">若要停用壓縮，請在 `BlazorEnableCompression` 應用程式的專案檔中新增 MSBuild 屬性，並將值設定為 `false` ：</span><span class="sxs-lookup"><span data-stu-id="fc6e9-130">To disable compression, add the `BlazorEnableCompression` MSBuild property to the app's project file and set the value to `false`:</span></span>
 
 ```xml
 <PropertyGroup>
@@ -88,53 +92,53 @@ ms.locfileid: "90080312"
 </PropertyGroup>
 ```
 
-<span data-ttu-id="fd621-128">您 `BlazorEnableCompression` 可以 [`dotnet publish`](/dotnet/core/tools/dotnet-publish) 在命令 shell 中使用下列語法，將屬性傳遞至命令：</span><span class="sxs-lookup"><span data-stu-id="fd621-128">The `BlazorEnableCompression` property can be passed to the [`dotnet publish`](/dotnet/core/tools/dotnet-publish) command with the following syntax in a command shell:</span></span>
+<span data-ttu-id="fc6e9-131">您 `BlazorEnableCompression` 可以 [`dotnet publish`](/dotnet/core/tools/dotnet-publish) 在命令 shell 中使用下列語法，將屬性傳遞至命令：</span><span class="sxs-lookup"><span data-stu-id="fc6e9-131">The `BlazorEnableCompression` property can be passed to the [`dotnet publish`](/dotnet/core/tools/dotnet-publish) command with the following syntax in a command shell:</span></span>
 
 ```dotnetcli
 dotnet publish -p:BlazorEnableCompression=false
 ```
 
-## <a name="rewrite-urls-for-correct-routing"></a><span data-ttu-id="fd621-129">重寫 URL 以便正確地路由</span><span class="sxs-lookup"><span data-stu-id="fd621-129">Rewrite URLs for correct routing</span></span>
+## <a name="rewrite-urls-for-correct-routing"></a><span data-ttu-id="fc6e9-132">重寫 URL 以便正確地路由</span><span class="sxs-lookup"><span data-stu-id="fc6e9-132">Rewrite URLs for correct routing</span></span>
 
-<span data-ttu-id="fd621-130">應用程式中頁面元件的路由要求 Blazor WebAssembly ，與裝載應用程式中的路由要求一樣簡單 Blazor Server 。</span><span class="sxs-lookup"><span data-stu-id="fd621-130">Routing requests for page components in a Blazor WebAssembly app isn't as straightforward as routing requests in a Blazor Server, hosted app.</span></span> <span data-ttu-id="fd621-131">請考慮 Blazor WebAssembly 具有兩個元件的應用程式：</span><span class="sxs-lookup"><span data-stu-id="fd621-131">Consider a Blazor WebAssembly app with two components:</span></span>
+<span data-ttu-id="fc6e9-133">應用程式中頁面元件的路由要求 Blazor WebAssembly ，與裝載應用程式中的路由要求一樣簡單 Blazor Server 。</span><span class="sxs-lookup"><span data-stu-id="fc6e9-133">Routing requests for page components in a Blazor WebAssembly app isn't as straightforward as routing requests in a Blazor Server, hosted app.</span></span> <span data-ttu-id="fc6e9-134">請考慮 Blazor WebAssembly 具有兩個元件的應用程式：</span><span class="sxs-lookup"><span data-stu-id="fc6e9-134">Consider a Blazor WebAssembly app with two components:</span></span>
 
-* <span data-ttu-id="fd621-132">`Main.razor`：在應用程式的根目錄載入，並且包含 `About` 元件 () 的連結 `href="About"` 。</span><span class="sxs-lookup"><span data-stu-id="fd621-132">`Main.razor`: Loads at the root of the app and contains a link to the `About` component (`href="About"`).</span></span>
-* <span data-ttu-id="fd621-133">`About.razor`： `About` component。</span><span class="sxs-lookup"><span data-stu-id="fd621-133">`About.razor`: `About` component.</span></span>
+* <span data-ttu-id="fc6e9-135">`Main.razor`：在應用程式的根目錄載入，並且包含 `About` 元件 () 的連結 `href="About"` 。</span><span class="sxs-lookup"><span data-stu-id="fc6e9-135">`Main.razor`: Loads at the root of the app and contains a link to the `About` component (`href="About"`).</span></span>
+* <span data-ttu-id="fc6e9-136">`About.razor`： `About` component。</span><span class="sxs-lookup"><span data-stu-id="fc6e9-136">`About.razor`: `About` component.</span></span>
 
-<span data-ttu-id="fd621-134">使用瀏覽器的網址列要求應用程式預設文件時 (例如 `https://www.contoso.com/`)：</span><span class="sxs-lookup"><span data-stu-id="fd621-134">When the app's default document is requested using the browser's address bar (for example, `https://www.contoso.com/`):</span></span>
+<span data-ttu-id="fc6e9-137">使用瀏覽器的網址列要求應用程式預設文件時 (例如 `https://www.contoso.com/`)：</span><span class="sxs-lookup"><span data-stu-id="fc6e9-137">When the app's default document is requested using the browser's address bar (for example, `https://www.contoso.com/`):</span></span>
 
-1. <span data-ttu-id="fd621-135">瀏覽器提出要求。</span><span class="sxs-lookup"><span data-stu-id="fd621-135">The browser makes a request.</span></span>
-1. <span data-ttu-id="fd621-136">預設頁面會傳回，通常是 `index.html` 。</span><span class="sxs-lookup"><span data-stu-id="fd621-136">The default page is returned, which is usually `index.html`.</span></span>
-1. <span data-ttu-id="fd621-137">`index.html` 啟動應用程式。</span><span class="sxs-lookup"><span data-stu-id="fd621-137">`index.html` bootstraps the app.</span></span>
-1. <span data-ttu-id="fd621-138">Blazor的路由器會載入，而 Razor `Main` 元件則會呈現。</span><span class="sxs-lookup"><span data-stu-id="fd621-138">Blazor's router loads, and the Razor `Main` component is rendered.</span></span>
+1. <span data-ttu-id="fc6e9-138">瀏覽器提出要求。</span><span class="sxs-lookup"><span data-stu-id="fc6e9-138">The browser makes a request.</span></span>
+1. <span data-ttu-id="fc6e9-139">預設頁面會傳回，通常是 `index.html` 。</span><span class="sxs-lookup"><span data-stu-id="fc6e9-139">The default page is returned, which is usually `index.html`.</span></span>
+1. <span data-ttu-id="fc6e9-140">`index.html` 啟動應用程式。</span><span class="sxs-lookup"><span data-stu-id="fc6e9-140">`index.html` bootstraps the app.</span></span>
+1. <span data-ttu-id="fc6e9-141">Blazor的路由器會載入，而 Razor `Main` 元件則會呈現。</span><span class="sxs-lookup"><span data-stu-id="fc6e9-141">Blazor's router loads, and the Razor `Main` component is rendered.</span></span>
 
-<span data-ttu-id="fd621-139">在主頁面中，選取元件的連結可 `About` 在用戶端上運作，因為 Blazor 路由器會停止瀏覽器在網際網路上提出要求， `www.contoso.com` 並提供轉譯 `About` 的 `About` 元件本身。</span><span class="sxs-lookup"><span data-stu-id="fd621-139">In the Main page, selecting the link to the `About` component works on the client because the Blazor router stops the browser from making a request on the Internet to `www.contoso.com` for `About` and serves the rendered `About` component itself.</span></span> <span data-ttu-id="fd621-140">\* Blazor WebAssembly 應用程式內\*內部端點的所有要求運作方式相同：要求不會對網際網路上伺服器裝載的資源觸發以瀏覽器為基礎的要求。</span><span class="sxs-lookup"><span data-stu-id="fd621-140">All of the requests for internal endpoints *within the Blazor WebAssembly app* work the same way: Requests don't trigger browser-based requests to server-hosted resources on the Internet.</span></span> <span data-ttu-id="fd621-141">路由器會在內部處理要求。</span><span class="sxs-lookup"><span data-stu-id="fd621-141">The router handles the requests internally.</span></span>
+<span data-ttu-id="fc6e9-142">在主頁面中，選取元件的連結可 `About` 在用戶端上運作，因為 Blazor 路由器會停止瀏覽器在網際網路上提出要求， `www.contoso.com` 並提供轉譯 `About` 的 `About` 元件本身。</span><span class="sxs-lookup"><span data-stu-id="fc6e9-142">In the Main page, selecting the link to the `About` component works on the client because the Blazor router stops the browser from making a request on the Internet to `www.contoso.com` for `About` and serves the rendered `About` component itself.</span></span> <span data-ttu-id="fc6e9-143">\* Blazor WebAssembly 應用程式內\*內部端點的所有要求運作方式相同：要求不會對網際網路上伺服器裝載的資源觸發以瀏覽器為基礎的要求。</span><span class="sxs-lookup"><span data-stu-id="fc6e9-143">All of the requests for internal endpoints *within the Blazor WebAssembly app* work the same way: Requests don't trigger browser-based requests to server-hosted resources on the Internet.</span></span> <span data-ttu-id="fc6e9-144">路由器會在內部處理要求。</span><span class="sxs-lookup"><span data-stu-id="fc6e9-144">The router handles the requests internally.</span></span>
 
-<span data-ttu-id="fd621-142">如果使用瀏覽器之網址列提出對 `www.contoso.com/About` 的要求，則要求會失敗。</span><span class="sxs-lookup"><span data-stu-id="fd621-142">If a request is made using the browser's address bar for `www.contoso.com/About`, the request fails.</span></span> <span data-ttu-id="fd621-143">在應用程式的網際網路主機上沒有這類資源存在，因此會傳回「404 - 找不到」\*\* 的回應。</span><span class="sxs-lookup"><span data-stu-id="fd621-143">No such resource exists on the app's Internet host, so a *404 - Not Found* response is returned.</span></span>
+<span data-ttu-id="fc6e9-145">如果使用瀏覽器之網址列提出對 `www.contoso.com/About` 的要求，則要求會失敗。</span><span class="sxs-lookup"><span data-stu-id="fc6e9-145">If a request is made using the browser's address bar for `www.contoso.com/About`, the request fails.</span></span> <span data-ttu-id="fc6e9-146">在應用程式的網際網路主機上沒有這類資源存在，因此會傳回「404 - 找不到」\*\* 的回應。</span><span class="sxs-lookup"><span data-stu-id="fc6e9-146">No such resource exists on the app's Internet host, so a *404 - Not Found* response is returned.</span></span>
 
-<span data-ttu-id="fd621-144">因為瀏覽器會對以網際網路為基礎的主機發出要求，以提供用戶端頁面，所以 web 伺服器和主機服務必須將所有不在伺服器上的資源要求重寫為 `index.html` 頁面。</span><span class="sxs-lookup"><span data-stu-id="fd621-144">Because browsers make requests to Internet-based hosts for client-side pages, web servers and hosting services must rewrite all requests for resources not physically on the server to the `index.html` page.</span></span> <span data-ttu-id="fd621-145">當 `index.html` 傳回時，應用程式的 Blazor 路由器會接管並回應正確的資源。</span><span class="sxs-lookup"><span data-stu-id="fd621-145">When `index.html` is returned, the app's Blazor router takes over and responds with the correct resource.</span></span>
+<span data-ttu-id="fc6e9-147">因為瀏覽器會對以網際網路為基礎的主機發出要求，以提供用戶端頁面，所以 web 伺服器和主機服務必須將所有不在伺服器上的資源要求重寫為 `index.html` 頁面。</span><span class="sxs-lookup"><span data-stu-id="fc6e9-147">Because browsers make requests to Internet-based hosts for client-side pages, web servers and hosting services must rewrite all requests for resources not physically on the server to the `index.html` page.</span></span> <span data-ttu-id="fc6e9-148">當 `index.html` 傳回時，應用程式的 Blazor 路由器會接管並回應正確的資源。</span><span class="sxs-lookup"><span data-stu-id="fc6e9-148">When `index.html` is returned, the app's Blazor router takes over and responds with the correct resource.</span></span>
 
-<span data-ttu-id="fd621-146">部署至 IIS 伺服器時，您可以使用 URL 重寫模組與應用程式的已發佈檔案 `web.config` 。</span><span class="sxs-lookup"><span data-stu-id="fd621-146">When deploying to an IIS server, you can use the URL Rewrite Module with the app's published `web.config` file.</span></span> <span data-ttu-id="fd621-147">如需詳細資訊，請參閱 [IIS](#iis) 一節。</span><span class="sxs-lookup"><span data-stu-id="fd621-147">For more information, see the [IIS](#iis) section.</span></span>
+<span data-ttu-id="fc6e9-149">部署至 IIS 伺服器時，您可以使用 URL 重寫模組與應用程式的已發佈檔案 `web.config` 。</span><span class="sxs-lookup"><span data-stu-id="fc6e9-149">When deploying to an IIS server, you can use the URL Rewrite Module with the app's published `web.config` file.</span></span> <span data-ttu-id="fc6e9-150">如需詳細資訊，請參閱 [IIS](#iis) 一節。</span><span class="sxs-lookup"><span data-stu-id="fc6e9-150">For more information, see the [IIS](#iis) section.</span></span>
 
-## <a name="hosted-deployment-with-aspnet-core"></a><span data-ttu-id="fd621-148">搭配 ASP.NET Core 的已裝載部署</span><span class="sxs-lookup"><span data-stu-id="fd621-148">Hosted deployment with ASP.NET Core</span></span>
+## <a name="hosted-deployment-with-aspnet-core"></a><span data-ttu-id="fc6e9-151">搭配 ASP.NET Core 的已裝載部署</span><span class="sxs-lookup"><span data-stu-id="fc6e9-151">Hosted deployment with ASP.NET Core</span></span>
 
-<span data-ttu-id="fd621-149">*託管部署* Blazor WebAssembly 可從 web 伺服器上執行的[ASP.NET Core 應用程式](xref:index)，將應用程式提供給瀏覽器。</span><span class="sxs-lookup"><span data-stu-id="fd621-149">A *hosted deployment* serves the Blazor WebAssembly app to browsers from an [ASP.NET Core app](xref:index) that runs on a web server.</span></span>
+<span data-ttu-id="fc6e9-152">*託管部署* Blazor WebAssembly 可從 web 伺服器上執行的[ASP.NET Core 應用程式](xref:index)，將應用程式提供給瀏覽器。</span><span class="sxs-lookup"><span data-stu-id="fc6e9-152">A *hosted deployment* serves the Blazor WebAssembly app to browsers from an [ASP.NET Core app](xref:index) that runs on a web server.</span></span>
 
-<span data-ttu-id="fd621-150">用戶端 Blazor WebAssembly 應用程式會 `/bin/Release/{TARGET FRAMEWORK}/publish/wwwroot` 與伺服器應用程式的任何其他靜態 web 資產一起發行至伺服器應用程式的資料夾中。</span><span class="sxs-lookup"><span data-stu-id="fd621-150">The client Blazor WebAssembly app is published into the `/bin/Release/{TARGET FRAMEWORK}/publish/wwwroot` folder of the server app, along with any other static web assets of the server app.</span></span> <span data-ttu-id="fd621-151">這兩個應用程式會一起部署。</span><span class="sxs-lookup"><span data-stu-id="fd621-151">The two apps are deployed together.</span></span> <span data-ttu-id="fd621-152">需要有能夠裝載 ASP.NET Core 應用程式的網頁伺服器。</span><span class="sxs-lookup"><span data-stu-id="fd621-152">A web server that is capable of hosting an ASP.NET Core app is required.</span></span> <span data-ttu-id="fd621-153">針對裝載的部署，當使用命令) 時，Visual Studio 包含\*\* Blazor WebAssembly 應用程式\*\*專案範本 (`blazorwasm` 範本， [`dotnet new`](/dotnet/core/tools/dotnet-new) **`Hosted`** (`-ho|--hosted` 使用命令) 時所選取的選項 `dotnet new` 。</span><span class="sxs-lookup"><span data-stu-id="fd621-153">For a hosted deployment, Visual Studio includes the **Blazor WebAssembly App** project template (`blazorwasm` template when using the [`dotnet new`](/dotnet/core/tools/dotnet-new) command) with the **`Hosted`** option selected (`-ho|--hosted` when using the `dotnet new` command).</span></span>
+<span data-ttu-id="fc6e9-153">用戶端 Blazor WebAssembly 應用程式會 `/bin/Release/{TARGET FRAMEWORK}/publish/wwwroot` 與伺服器應用程式的任何其他靜態 web 資產一起發行至伺服器應用程式的資料夾中。</span><span class="sxs-lookup"><span data-stu-id="fc6e9-153">The client Blazor WebAssembly app is published into the `/bin/Release/{TARGET FRAMEWORK}/publish/wwwroot` folder of the server app, along with any other static web assets of the server app.</span></span> <span data-ttu-id="fc6e9-154">這兩個應用程式會一起部署。</span><span class="sxs-lookup"><span data-stu-id="fc6e9-154">The two apps are deployed together.</span></span> <span data-ttu-id="fc6e9-155">需要有能夠裝載 ASP.NET Core 應用程式的網頁伺服器。</span><span class="sxs-lookup"><span data-stu-id="fc6e9-155">A web server that is capable of hosting an ASP.NET Core app is required.</span></span> <span data-ttu-id="fc6e9-156">針對裝載的部署，當使用命令) 時，Visual Studio 包含\*\* Blazor WebAssembly 應用程式\*\*專案範本 (`blazorwasm` 範本， [`dotnet new`](/dotnet/core/tools/dotnet-new) **`Hosted`** (`-ho|--hosted` 使用命令) 時所選取的選項 `dotnet new` 。</span><span class="sxs-lookup"><span data-stu-id="fc6e9-156">For a hosted deployment, Visual Studio includes the **Blazor WebAssembly App** project template (`blazorwasm` template when using the [`dotnet new`](/dotnet/core/tools/dotnet-new) command) with the **`Hosted`** option selected (`-ho|--hosted` when using the `dotnet new` command).</span></span>
 
-<span data-ttu-id="fd621-154">如需 ASP.NET Core 應用程式裝載和部署的詳細資訊，請參閱 <xref:host-and-deploy/index>。</span><span class="sxs-lookup"><span data-stu-id="fd621-154">For more information on ASP.NET Core app hosting and deployment, see <xref:host-and-deploy/index>.</span></span>
+<span data-ttu-id="fc6e9-157">如需 ASP.NET Core 應用程式裝載和部署的詳細資訊，請參閱 <xref:host-and-deploy/index>。</span><span class="sxs-lookup"><span data-stu-id="fc6e9-157">For more information on ASP.NET Core app hosting and deployment, see <xref:host-and-deploy/index>.</span></span>
 
-<span data-ttu-id="fd621-155">如需部署至 Azure App Service 的相關資訊，請參閱 <xref:tutorials/publish-to-azure-webapp-using-vs>。</span><span class="sxs-lookup"><span data-stu-id="fd621-155">For information on deploying to Azure App Service, see <xref:tutorials/publish-to-azure-webapp-using-vs>.</span></span>
+<span data-ttu-id="fc6e9-158">如需部署至 Azure App Service 的相關資訊，請參閱 <xref:tutorials/publish-to-azure-webapp-using-vs>。</span><span class="sxs-lookup"><span data-stu-id="fc6e9-158">For information on deploying to Azure App Service, see <xref:tutorials/publish-to-azure-webapp-using-vs>.</span></span>
 
-## <a name="hosted-deployment-with-multiple-no-locblazor-webassembly-apps"></a><span data-ttu-id="fd621-156">具有多個應用程式的託管部署 Blazor WebAssembly</span><span class="sxs-lookup"><span data-stu-id="fd621-156">Hosted deployment with multiple Blazor WebAssembly apps</span></span>
+## <a name="hosted-deployment-with-multiple-no-locblazor-webassembly-apps"></a><span data-ttu-id="fc6e9-159">具有多個應用程式的託管部署 Blazor WebAssembly</span><span class="sxs-lookup"><span data-stu-id="fc6e9-159">Hosted deployment with multiple Blazor WebAssembly apps</span></span>
 
-### <a name="app-configuration"></a><span data-ttu-id="fd621-157">應用程式設定</span><span class="sxs-lookup"><span data-stu-id="fd621-157">App configuration</span></span>
+### <a name="app-configuration"></a><span data-ttu-id="fc6e9-160">應用程式設定</span><span class="sxs-lookup"><span data-stu-id="fc6e9-160">App configuration</span></span>
 
-<span data-ttu-id="fd621-158">若要設定託管 Blazor 解決方案來提供多個 Blazor WebAssembly 應用程式服務：</span><span class="sxs-lookup"><span data-stu-id="fd621-158">To configure a hosted Blazor solution to serve multiple Blazor WebAssembly apps:</span></span>
+<span data-ttu-id="fc6e9-161">若要設定託管 Blazor 解決方案來提供多個 Blazor WebAssembly 應用程式服務：</span><span class="sxs-lookup"><span data-stu-id="fc6e9-161">To configure a hosted Blazor solution to serve multiple Blazor WebAssembly apps:</span></span>
 
-* <span data-ttu-id="fd621-159">使用現有的主控 Blazor 方案，或從裝載的專案範本建立新的方案 Blazor 。</span><span class="sxs-lookup"><span data-stu-id="fd621-159">Use an existing hosted Blazor solution or create a new solution from the Blazor Hosted project template.</span></span>
+* <span data-ttu-id="fc6e9-162">使用現有的主控 Blazor 方案，或從裝載的專案範本建立新的方案 Blazor 。</span><span class="sxs-lookup"><span data-stu-id="fc6e9-162">Use an existing hosted Blazor solution or create a new solution from the Blazor Hosted project template.</span></span>
 
-* <span data-ttu-id="fd621-160">在用戶端應用程式的專案檔中，將屬性新增至，並以的 `<StaticWebAssetBasePath>` `<PropertyGroup>` 值 `FirstApp` 設定專案靜態資產的基底路徑：</span><span class="sxs-lookup"><span data-stu-id="fd621-160">In the client app's project file, add a `<StaticWebAssetBasePath>` property to the `<PropertyGroup>` with a value of `FirstApp` to set the base path for the project's static assets:</span></span>
+* <span data-ttu-id="fc6e9-163">在用戶端應用程式的專案檔中，將屬性新增至，並以的 `<StaticWebAssetBasePath>` `<PropertyGroup>` 值 `FirstApp` 設定專案靜態資產的基底路徑：</span><span class="sxs-lookup"><span data-stu-id="fc6e9-163">In the client app's project file, add a `<StaticWebAssetBasePath>` property to the `<PropertyGroup>` with a value of `FirstApp` to set the base path for the project's static assets:</span></span>
 
   ```xml
   <PropertyGroup>
@@ -143,13 +147,13 @@ dotnet publish -p:BlazorEnableCompression=false
   </PropertyGroup>
   ```
 
-* <span data-ttu-id="fd621-161">將第二個用戶端應用程式新增至解決方案：</span><span class="sxs-lookup"><span data-stu-id="fd621-161">Add a second client app to the solution:</span></span>
+* <span data-ttu-id="fc6e9-164">將第二個用戶端應用程式新增至解決方案：</span><span class="sxs-lookup"><span data-stu-id="fc6e9-164">Add a second client app to the solution:</span></span>
 
-  * <span data-ttu-id="fd621-162">將名為的資料夾加入 `SecondClient` 方案的資料夾中。</span><span class="sxs-lookup"><span data-stu-id="fd621-162">Add a folder named `SecondClient` to the solution's folder.</span></span>
-  * <span data-ttu-id="fd621-163">在 Blazor WebAssembly `SecondBlazorApp.Client` 專案範本的資料夾中，建立名為的應用程式 `SecondClient` Blazor WebAssembly 。</span><span class="sxs-lookup"><span data-stu-id="fd621-163">Create a Blazor WebAssembly app named `SecondBlazorApp.Client` in the `SecondClient` folder from the Blazor WebAssembly project template.</span></span>
-  * <span data-ttu-id="fd621-164">在應用程式的專案檔中：</span><span class="sxs-lookup"><span data-stu-id="fd621-164">In the app's project file:</span></span>
+  * <span data-ttu-id="fc6e9-165">將名為的資料夾加入 `SecondClient` 方案的資料夾中。</span><span class="sxs-lookup"><span data-stu-id="fc6e9-165">Add a folder named `SecondClient` to the solution's folder.</span></span>
+  * <span data-ttu-id="fc6e9-166">在 Blazor WebAssembly `SecondBlazorApp.Client` 專案範本的資料夾中，建立名為的應用程式 `SecondClient` Blazor WebAssembly 。</span><span class="sxs-lookup"><span data-stu-id="fc6e9-166">Create a Blazor WebAssembly app named `SecondBlazorApp.Client` in the `SecondClient` folder from the Blazor WebAssembly project template.</span></span>
+  * <span data-ttu-id="fc6e9-167">在應用程式的專案檔中：</span><span class="sxs-lookup"><span data-stu-id="fc6e9-167">In the app's project file:</span></span>
 
-    * <span data-ttu-id="fd621-165">將屬性新增至，其 `<StaticWebAssetBasePath>` 值為 `<PropertyGroup>` `SecondApp` ：</span><span class="sxs-lookup"><span data-stu-id="fd621-165">Add a `<StaticWebAssetBasePath>` property to the `<PropertyGroup>` with a value of `SecondApp`:</span></span>
+    * <span data-ttu-id="fc6e9-168">將屬性新增至，其 `<StaticWebAssetBasePath>` 值為 `<PropertyGroup>` `SecondApp` ：</span><span class="sxs-lookup"><span data-stu-id="fc6e9-168">Add a `<StaticWebAssetBasePath>` property to the `<PropertyGroup>` with a value of `SecondApp`:</span></span>
 
       ```xml
       <PropertyGroup>
@@ -158,7 +162,7 @@ dotnet publish -p:BlazorEnableCompression=false
       </PropertyGroup>
       ```
 
-    * <span data-ttu-id="fd621-166">將專案參考新增至 `Shared` 專案：</span><span class="sxs-lookup"><span data-stu-id="fd621-166">Add a project reference to the `Shared` project:</span></span>
+    * <span data-ttu-id="fc6e9-169">將專案參考新增至 `Shared` 專案：</span><span class="sxs-lookup"><span data-stu-id="fc6e9-169">Add a project reference to the `Shared` project:</span></span>
 
       ```xml
       <ItemGroup>
@@ -166,9 +170,9 @@ dotnet publish -p:BlazorEnableCompression=false
       </ItemGroup>
       ```
 
-      <span data-ttu-id="fd621-167">預留位置 `{SOLUTION NAME}` 是解決方案的名稱。</span><span class="sxs-lookup"><span data-stu-id="fd621-167">The placeholder `{SOLUTION NAME}` is the solution's name.</span></span>
+      <span data-ttu-id="fc6e9-170">預留位置 `{SOLUTION NAME}` 是解決方案的名稱。</span><span class="sxs-lookup"><span data-stu-id="fc6e9-170">The placeholder `{SOLUTION NAME}` is the solution's name.</span></span>
 
-* <span data-ttu-id="fd621-168">在伺服器應用程式的專案檔中，為新增的用戶端應用程式建立專案參考：</span><span class="sxs-lookup"><span data-stu-id="fd621-168">In the server app's project file, create a project reference for the added client app:</span></span>
+* <span data-ttu-id="fc6e9-171">在伺服器應用程式的專案檔中，為新增的用戶端應用程式建立專案參考：</span><span class="sxs-lookup"><span data-stu-id="fc6e9-171">In the server app's project file, create a project reference for the added client app:</span></span>
 
   ```xml
   <ItemGroup>
@@ -177,13 +181,13 @@ dotnet publish -p:BlazorEnableCompression=false
   </ItemGroup>
   ```
 
-* <span data-ttu-id="fd621-169">在伺服器應用程式的 `Properties/launchSettings.json` 檔案中，設定 `applicationUrl` Kestrel 設定檔 () 的， `{SOLUTION NAME}.Server` 以存取埠5001和5002上的用戶端應用程式：</span><span class="sxs-lookup"><span data-stu-id="fd621-169">In the server app's `Properties/launchSettings.json` file, configure the `applicationUrl` of the Kestrel profile (`{SOLUTION NAME}.Server`) to access the client apps at ports 5001 and 5002:</span></span>
+* <span data-ttu-id="fc6e9-172">在伺服器應用程式的 `Properties/launchSettings.json` 檔案中，設定 `applicationUrl` Kestrel 設定檔 () 的， `{SOLUTION NAME}.Server` 以存取埠5001和5002上的用戶端應用程式：</span><span class="sxs-lookup"><span data-stu-id="fc6e9-172">In the server app's `Properties/launchSettings.json` file, configure the `applicationUrl` of the Kestrel profile (`{SOLUTION NAME}.Server`) to access the client apps at ports 5001 and 5002:</span></span>
 
   ```json
   "applicationUrl": "https://localhost:5001;https://localhost:5002",
   ```
 
-* <span data-ttu-id="fd621-170">在伺服器應用程式的 `Startup.Configure` 方法 (`Startup.cs`) 中，移除下列幾行，這些行會在呼叫之後出現 <xref:Microsoft.AspNetCore.Builder.HttpsPolicyBuilderExtensions.UseHttpsRedirection%2A> ：</span><span class="sxs-lookup"><span data-stu-id="fd621-170">In the server app's `Startup.Configure` method (`Startup.cs`), remove the following lines, which appear after the call to <xref:Microsoft.AspNetCore.Builder.HttpsPolicyBuilderExtensions.UseHttpsRedirection%2A>:</span></span>
+* <span data-ttu-id="fc6e9-173">在伺服器應用程式的 `Startup.Configure` 方法 (`Startup.cs`) 中，移除下列幾行，這些行會在呼叫之後出現 <xref:Microsoft.AspNetCore.Builder.HttpsPolicyBuilderExtensions.UseHttpsRedirection%2A> ：</span><span class="sxs-lookup"><span data-stu-id="fc6e9-173">In the server app's `Startup.Configure` method (`Startup.cs`), remove the following lines, which appear after the call to <xref:Microsoft.AspNetCore.Builder.HttpsPolicyBuilderExtensions.UseHttpsRedirection%2A>:</span></span>
 
   ```csharp
   app.UseBlazorFrameworkFiles();
@@ -199,20 +203,20 @@ dotnet publish -p:BlazorEnableCompression=false
   });
   ```
 
-  <span data-ttu-id="fd621-171">新增將要求對應至用戶端應用程式的中介軟體。</span><span class="sxs-lookup"><span data-stu-id="fd621-171">Add middleware that maps requests to the client apps.</span></span> <span data-ttu-id="fd621-172">下列範例會將中介軟體設定為在下列情況下執行：</span><span class="sxs-lookup"><span data-stu-id="fd621-172">The following example configures the middleware to run when:</span></span>
+  <span data-ttu-id="fc6e9-174">新增將要求對應至用戶端應用程式的中介軟體。</span><span class="sxs-lookup"><span data-stu-id="fc6e9-174">Add middleware that maps requests to the client apps.</span></span> <span data-ttu-id="fc6e9-175">下列範例會將中介軟體設定為在下列情況下執行：</span><span class="sxs-lookup"><span data-stu-id="fc6e9-175">The following example configures the middleware to run when:</span></span>
 
-  * <span data-ttu-id="fd621-173">針對已新增的用戶端應用程式，要求埠可能是5001（適用于原始用戶端應用程式）或5002。</span><span class="sxs-lookup"><span data-stu-id="fd621-173">The request port is either 5001 for the original client app or 5002 for the added client app.</span></span>
-  * <span data-ttu-id="fd621-174">要求主機 `firstapp.com` 適用于原始用戶端應用程式或 `secondapp.com` 新增的用戶端應用程式。</span><span class="sxs-lookup"><span data-stu-id="fd621-174">The request host is either `firstapp.com` for the original client app or `secondapp.com` for the added client app.</span></span>
+  * <span data-ttu-id="fc6e9-176">針對已新增的用戶端應用程式，要求埠可能是5001（適用于原始用戶端應用程式）或5002。</span><span class="sxs-lookup"><span data-stu-id="fc6e9-176">The request port is either 5001 for the original client app or 5002 for the added client app.</span></span>
+  * <span data-ttu-id="fc6e9-177">要求主機 `firstapp.com` 適用于原始用戶端應用程式或 `secondapp.com` 新增的用戶端應用程式。</span><span class="sxs-lookup"><span data-stu-id="fc6e9-177">The request host is either `firstapp.com` for the original client app or `secondapp.com` for the added client app.</span></span>
 
     > [!NOTE]
-    > <span data-ttu-id="fd621-175">本節所示的範例需要下列各項的額外設定：</span><span class="sxs-lookup"><span data-stu-id="fd621-175">The example shown in this section requires additional configuration for:</span></span>
+    > <span data-ttu-id="fc6e9-178">本節所示的範例需要下列各項的額外設定：</span><span class="sxs-lookup"><span data-stu-id="fc6e9-178">The example shown in this section requires additional configuration for:</span></span>
     >
-    > * <span data-ttu-id="fd621-176">存取範例主機網域、和上的應用 `firstapp.com` 程式 `secondapp.com` 。</span><span class="sxs-lookup"><span data-stu-id="fd621-176">Accessing the apps at the example host domains, `firstapp.com` and `secondapp.com`.</span></span>
-    > * <span data-ttu-id="fd621-177">用戶端應用程式用來啟用 TLS 安全性的憑證 (HTTPS) 。</span><span class="sxs-lookup"><span data-stu-id="fd621-177">Certificates for the client apps to enable TLS security (HTTPS).</span></span>
+    > * <span data-ttu-id="fc6e9-179">存取範例主機網域、和上的應用 `firstapp.com` 程式 `secondapp.com` 。</span><span class="sxs-lookup"><span data-stu-id="fc6e9-179">Accessing the apps at the example host domains, `firstapp.com` and `secondapp.com`.</span></span>
+    > * <span data-ttu-id="fc6e9-180">用戶端應用程式用來啟用 TLS 安全性的憑證 (HTTPS) 。</span><span class="sxs-lookup"><span data-stu-id="fc6e9-180">Certificates for the client apps to enable TLS security (HTTPS).</span></span>
     >
-    > <span data-ttu-id="fd621-178">必要的設定已超出本文的範圍，並取決於裝載解決方案的方式。</span><span class="sxs-lookup"><span data-stu-id="fd621-178">The required configuration is beyond the scope of this article and depends on how the solution is hosted.</span></span> <span data-ttu-id="fd621-179">如需詳細資訊，請參閱 [主機和部署文章](xref:host-and-deploy/index)。</span><span class="sxs-lookup"><span data-stu-id="fd621-179">For more information see the [Host and deploy articles](xref:host-and-deploy/index).</span></span>
+    > <span data-ttu-id="fc6e9-181">必要的設定已超出本文的範圍，並取決於裝載解決方案的方式。</span><span class="sxs-lookup"><span data-stu-id="fc6e9-181">The required configuration is beyond the scope of this article and depends on how the solution is hosted.</span></span> <span data-ttu-id="fc6e9-182">如需詳細資訊，請參閱 [主機和部署文章](xref:host-and-deploy/index)。</span><span class="sxs-lookup"><span data-stu-id="fc6e9-182">For more information see the [Host and deploy articles](xref:host-and-deploy/index).</span></span>
 
-  <span data-ttu-id="fd621-180">將下列程式碼放在先前移除的行：</span><span class="sxs-lookup"><span data-stu-id="fd621-180">Place the following code where the lines were removed earlier:</span></span>
+  <span data-ttu-id="fc6e9-183">將下列程式碼放在先前移除的行：</span><span class="sxs-lookup"><span data-stu-id="fc6e9-183">Place the following code where the lines were removed earlier:</span></span>
 
   ```csharp
   app.MapWhen(ctx => ctx.Request.Host.Port == 5001 || 
@@ -260,26 +264,26 @@ dotnet publish -p:BlazorEnableCompression=false
   });
   ```
 
-* <span data-ttu-id="fd621-181">在伺服器應用程式的氣象預報控制器 (`Controllers/WeatherForecastController.cs`) 中，將現有的路由 (`[Route("[controller]")]`) 取代為 `WeatherForecastController` 下列路由：</span><span class="sxs-lookup"><span data-stu-id="fd621-181">In the server app's weather forecast controller (`Controllers/WeatherForecastController.cs`), replace the existing route (`[Route("[controller]")]`) to `WeatherForecastController` with the following routes:</span></span>
+* <span data-ttu-id="fc6e9-184">在伺服器應用程式的氣象預報控制器 (`Controllers/WeatherForecastController.cs`) 中，將現有的路由 (`[Route("[controller]")]`) 取代為 `WeatherForecastController` 下列路由：</span><span class="sxs-lookup"><span data-stu-id="fc6e9-184">In the server app's weather forecast controller (`Controllers/WeatherForecastController.cs`), replace the existing route (`[Route("[controller]")]`) to `WeatherForecastController` with the following routes:</span></span>
 
   ```csharp
   [Route("FirstApp/[controller]")]
   [Route("SecondApp/[controller]")]
   ```
 
-  <span data-ttu-id="fd621-182">先前新增至伺服器應用程式方法的中介軟體會 `Startup.Configure` `/WeatherForecast` `/FirstApp/WeatherForecast` `/SecondApp/WeatherForecast` 根據埠 (5001/5002) 或網域 (`firstapp.com` / `secondapp.com`) ，將連入要求修改至或。</span><span class="sxs-lookup"><span data-stu-id="fd621-182">The middleware added to the server app's `Startup.Configure` method earlier modifies incoming requests to `/WeatherForecast` to either `/FirstApp/WeatherForecast` or `/SecondApp/WeatherForecast` depending on the port (5001/5002) or domain (`firstapp.com`/`secondapp.com`).</span></span> <span data-ttu-id="fd621-183">需要上述的控制器路由，才能將天氣資料從伺服器應用程式傳回給用戶端應用程式。</span><span class="sxs-lookup"><span data-stu-id="fd621-183">The preceding controller routes are required in order to return weather data from the server app to the client apps.</span></span>
+  <span data-ttu-id="fc6e9-185">先前新增至伺服器應用程式方法的中介軟體會 `Startup.Configure` `/WeatherForecast` `/FirstApp/WeatherForecast` `/SecondApp/WeatherForecast` 根據埠 (5001/5002) 或網域 (`firstapp.com` / `secondapp.com`) ，將連入要求修改至或。</span><span class="sxs-lookup"><span data-stu-id="fc6e9-185">The middleware added to the server app's `Startup.Configure` method earlier modifies incoming requests to `/WeatherForecast` to either `/FirstApp/WeatherForecast` or `/SecondApp/WeatherForecast` depending on the port (5001/5002) or domain (`firstapp.com`/`secondapp.com`).</span></span> <span data-ttu-id="fc6e9-186">需要上述的控制器路由，才能將天氣資料從伺服器應用程式傳回給用戶端應用程式。</span><span class="sxs-lookup"><span data-stu-id="fc6e9-186">The preceding controller routes are required in order to return weather data from the server app to the client apps.</span></span>
 
-### <a name="static-assets-and-class-libraries"></a><span data-ttu-id="fd621-184">靜態資產和類別庫</span><span class="sxs-lookup"><span data-stu-id="fd621-184">Static assets and class libraries</span></span>
+### <a name="static-assets-and-class-libraries"></a><span data-ttu-id="fc6e9-187">靜態資產和類別庫</span><span class="sxs-lookup"><span data-stu-id="fc6e9-187">Static assets and class libraries</span></span>
 
-<span data-ttu-id="fd621-185">針對靜態資產，請使用下列方法：</span><span class="sxs-lookup"><span data-stu-id="fd621-185">Use the following approaches for static assets:</span></span>
+<span data-ttu-id="fc6e9-188">針對靜態資產，請使用下列方法：</span><span class="sxs-lookup"><span data-stu-id="fc6e9-188">Use the following approaches for static assets:</span></span>
 
-* <span data-ttu-id="fd621-186">當資產位於用戶端應用程式的 `wwwroot` 資料夾時，請正常提供其路徑：</span><span class="sxs-lookup"><span data-stu-id="fd621-186">When the asset is in the client app's `wwwroot` folder, provide their paths normally:</span></span>
+* <span data-ttu-id="fc6e9-189">當資產位於用戶端應用程式的 `wwwroot` 資料夾時，請正常提供其路徑：</span><span class="sxs-lookup"><span data-stu-id="fc6e9-189">When the asset is in the client app's `wwwroot` folder, provide their paths normally:</span></span>
 
   ```razor
   <img alt="..." src="/{ASSET FILE NAME}" />
   ```
 
-* <span data-ttu-id="fd621-187">當資產位於 `wwwroot` 類別庫的資料夾中時[ Razor (RCL) ](xref:blazor/components/class-libraries)，請依[RCL 文章](xref:razor-pages/ui-class#consume-content-from-a-referenced-rcl)中的指導方針參考用戶端應用程式中的靜態資產：</span><span class="sxs-lookup"><span data-stu-id="fd621-187">When the asset is in the `wwwroot` folder of a [Razor Class Library (RCL)](xref:blazor/components/class-libraries), reference the static asset in the client app per the guidance in the [RCL article](xref:razor-pages/ui-class#consume-content-from-a-referenced-rcl):</span></span>
+* <span data-ttu-id="fc6e9-190">當資產位於 `wwwroot` 類別庫的資料夾中時[ Razor (RCL) ](xref:blazor/components/class-libraries)，請依[RCL 文章](xref:razor-pages/ui-class#consume-content-from-a-referenced-rcl)中的指導方針參考用戶端應用程式中的靜態資產：</span><span class="sxs-lookup"><span data-stu-id="fc6e9-190">When the asset is in the `wwwroot` folder of a [Razor Class Library (RCL)](xref:blazor/components/class-libraries), reference the static asset in the client app per the guidance in the [RCL article](xref:razor-pages/ui-class#consume-content-from-a-referenced-rcl):</span></span>
 
   ```razor
   <img alt="..." src="_content/{LIBRARY NAME}/{ASSET FILE NAME}" />
@@ -287,26 +291,26 @@ dotnet publish -p:BlazorEnableCompression=false
 
 ::: moniker range=">= aspnetcore-5.0"
 
-<span data-ttu-id="fd621-188">類別庫提供給用戶端應用程式的元件會正常地參考。</span><span class="sxs-lookup"><span data-stu-id="fd621-188">Components provided to a client app by a class library are referenced normally.</span></span> <span data-ttu-id="fd621-189">如果有任何元件需要樣式表單或 JavaScript 檔案，請使用下列其中一種方法來取得靜態資產：</span><span class="sxs-lookup"><span data-stu-id="fd621-189">If any components require stylesheets or JavaScript files, use either of the following approaches to obtain the static assets:</span></span>
+<span data-ttu-id="fc6e9-191">類別庫提供給用戶端應用程式的元件會正常地參考。</span><span class="sxs-lookup"><span data-stu-id="fc6e9-191">Components provided to a client app by a class library are referenced normally.</span></span> <span data-ttu-id="fc6e9-192">如果有任何元件需要樣式表單或 JavaScript 檔案，請使用下列其中一種方法來取得靜態資產：</span><span class="sxs-lookup"><span data-stu-id="fc6e9-192">If any components require stylesheets or JavaScript files, use either of the following approaches to obtain the static assets:</span></span>
 
-* <span data-ttu-id="fd621-190">用戶端應用程式的檔案 `wwwroot/index.html` 可以將 (`<link>`) 連結到靜態資產。</span><span class="sxs-lookup"><span data-stu-id="fd621-190">The client app's `wwwroot/index.html` file can link (`<link>`) to the static assets.</span></span>
-* <span data-ttu-id="fd621-191">元件可以使用架構的[ `Link` 元件](xref:blazor/fundamentals/additional-scenarios#influence-html-head-tag-elements)來取得靜態資產。</span><span class="sxs-lookup"><span data-stu-id="fd621-191">The component can use the framework's [`Link` component](xref:blazor/fundamentals/additional-scenarios#influence-html-head-tag-elements) to obtain the static assets.</span></span>
+* <span data-ttu-id="fc6e9-193">用戶端應用程式的檔案 `wwwroot/index.html` 可以將 (`<link>`) 連結到靜態資產。</span><span class="sxs-lookup"><span data-stu-id="fc6e9-193">The client app's `wwwroot/index.html` file can link (`<link>`) to the static assets.</span></span>
+* <span data-ttu-id="fc6e9-194">元件可以使用架構的[ `Link` 元件](xref:blazor/fundamentals/additional-scenarios#influence-html-head-tag-elements)來取得靜態資產。</span><span class="sxs-lookup"><span data-stu-id="fc6e9-194">The component can use the framework's [`Link` component](xref:blazor/fundamentals/additional-scenarios#influence-html-head-tag-elements) to obtain the static assets.</span></span>
 
-<span data-ttu-id="fd621-192">上述的方法會在下列範例中示範。</span><span class="sxs-lookup"><span data-stu-id="fd621-192">The preceding approaches are demonstrated in the following examples.</span></span>
+<span data-ttu-id="fc6e9-195">上述的方法會在下列範例中示範。</span><span class="sxs-lookup"><span data-stu-id="fc6e9-195">The preceding approaches are demonstrated in the following examples.</span></span>
 
 ::: moniker-end
 
 ::: moniker range="< aspnetcore-5.0"
 
-<span data-ttu-id="fd621-193">類別庫提供給用戶端應用程式的元件會正常地參考。</span><span class="sxs-lookup"><span data-stu-id="fd621-193">Components provided to a client app by a class library are referenced normally.</span></span> <span data-ttu-id="fd621-194">如果有任何元件需要樣式表單或 JavaScript 檔案，用戶端應用程式的檔案 `wwwroot/index.html` 必須包含正確的靜態資產連結。</span><span class="sxs-lookup"><span data-stu-id="fd621-194">If any components require stylesheets or JavaScript files, the client app's `wwwroot/index.html` file must include the correct static asset links.</span></span> <span data-ttu-id="fd621-195">下列範例會示範這些方法。</span><span class="sxs-lookup"><span data-stu-id="fd621-195">These approaches are demonstrated in the following examples.</span></span>
+<span data-ttu-id="fc6e9-196">類別庫提供給用戶端應用程式的元件會正常地參考。</span><span class="sxs-lookup"><span data-stu-id="fc6e9-196">Components provided to a client app by a class library are referenced normally.</span></span> <span data-ttu-id="fc6e9-197">如果有任何元件需要樣式表單或 JavaScript 檔案，用戶端應用程式的檔案 `wwwroot/index.html` 必須包含正確的靜態資產連結。</span><span class="sxs-lookup"><span data-stu-id="fc6e9-197">If any components require stylesheets or JavaScript files, the client app's `wwwroot/index.html` file must include the correct static asset links.</span></span> <span data-ttu-id="fc6e9-198">下列範例會示範這些方法。</span><span class="sxs-lookup"><span data-stu-id="fc6e9-198">These approaches are demonstrated in the following examples.</span></span>
 
 ::: moniker-end
 
-<span data-ttu-id="fd621-196">將下列 `Jeep` 元件新增至其中一個用戶端應用程式。</span><span class="sxs-lookup"><span data-stu-id="fd621-196">Add the following `Jeep` component to one of the client apps.</span></span> <span data-ttu-id="fd621-197">`Jeep`元件使用：</span><span class="sxs-lookup"><span data-stu-id="fd621-197">The `Jeep` component uses:</span></span>
+<span data-ttu-id="fc6e9-199">將下列 `Jeep` 元件新增至其中一個用戶端應用程式。</span><span class="sxs-lookup"><span data-stu-id="fc6e9-199">Add the following `Jeep` component to one of the client apps.</span></span> <span data-ttu-id="fc6e9-200">`Jeep`元件使用：</span><span class="sxs-lookup"><span data-stu-id="fc6e9-200">The `Jeep` component uses:</span></span>
 
-* <span data-ttu-id="fd621-198">從用戶端應用程式的 `wwwroot` 資料夾 () 的映射 `jeep-cj.png` 。</span><span class="sxs-lookup"><span data-stu-id="fd621-198">An image from the client app's `wwwroot` folder (`jeep-cj.png`).</span></span>
-* <span data-ttu-id="fd621-199">新增的元件連結 [ Razor 庫](xref:blazor/components/class-libraries) 中的映射 (`JeepImage`) `wwwroot` 資料夾 (`jeep-yj.png`) 。</span><span class="sxs-lookup"><span data-stu-id="fd621-199">An image from an [added Razor component library](xref:blazor/components/class-libraries) (`JeepImage`) `wwwroot` folder (`jeep-yj.png`).</span></span>
-* <span data-ttu-id="fd621-200">`Component1`當連結 `JeepImage` 庫加入至方案時，RCL 專案範本會自動建立範例元件 () 。</span><span class="sxs-lookup"><span data-stu-id="fd621-200">The example component (`Component1`) is created automatically by the RCL project template when the `JeepImage` library is added to the solution.</span></span>
+* <span data-ttu-id="fc6e9-201">從用戶端應用程式的 `wwwroot` 資料夾 () 的映射 `jeep-cj.png` 。</span><span class="sxs-lookup"><span data-stu-id="fc6e9-201">An image from the client app's `wwwroot` folder (`jeep-cj.png`).</span></span>
+* <span data-ttu-id="fc6e9-202">新增的元件連結 [ Razor 庫](xref:blazor/components/class-libraries) 中的映射 (`JeepImage`) `wwwroot` 資料夾 (`jeep-yj.png`) 。</span><span class="sxs-lookup"><span data-stu-id="fc6e9-202">An image from an [added Razor component library](xref:blazor/components/class-libraries) (`JeepImage`) `wwwroot` folder (`jeep-yj.png`).</span></span>
+* <span data-ttu-id="fc6e9-203">`Component1`當連結 `JeepImage` 庫加入至方案時，RCL 專案範本會自動建立範例元件 () 。</span><span class="sxs-lookup"><span data-stu-id="fc6e9-203">The example component (`Component1`) is created automatically by the RCL project template when the `JeepImage` library is added to the solution.</span></span>
 
 ```razor
 @page "/Jeep"
@@ -332,11 +336,11 @@ dotnet publish -p:BlazorEnableCompression=false
 ```
 
 > [!WARNING]
-> <span data-ttu-id="fd621-201">除非您擁有映射， **否則請勿公開發布車輛** 的影像。</span><span class="sxs-lookup"><span data-stu-id="fd621-201">Do **not** publish images of vehicles publicly unless you own the images.</span></span> <span data-ttu-id="fd621-202">否則，您會面臨著作權侵權的風險。</span><span class="sxs-lookup"><span data-stu-id="fd621-202">Otherwise, you risk copyright infringement.</span></span>
+> <span data-ttu-id="fc6e9-204">除非您擁有映射， **否則請勿公開發布車輛** 的影像。</span><span class="sxs-lookup"><span data-stu-id="fc6e9-204">Do **not** publish images of vehicles publicly unless you own the images.</span></span> <span data-ttu-id="fc6e9-205">否則，您會面臨著作權侵權的風險。</span><span class="sxs-lookup"><span data-stu-id="fc6e9-205">Otherwise, you risk copyright infringement.</span></span>
 
 ::: moniker range=">= aspnetcore-5.0"
 
-<span data-ttu-id="fd621-203">程式庫的 `jeep-yj.png` 影像也可以新增至程式庫的 `Component1` 元件 (`Component1.razor`) 。</span><span class="sxs-lookup"><span data-stu-id="fd621-203">The library's `jeep-yj.png` image can also be added to the library's `Component1` component (`Component1.razor`).</span></span> <span data-ttu-id="fd621-204">若要將 `my-component` CSS 類別提供給用戶端應用程式的頁面，請使用架構的[ `Link` 元件](xref:blazor/fundamentals/additional-scenarios#influence-html-head-tag-elements)連結至程式庫的樣式表單：</span><span class="sxs-lookup"><span data-stu-id="fd621-204">To provide the `my-component` CSS class to the client app's page, link to the library's stylesheet using the framework's [`Link` component](xref:blazor/fundamentals/additional-scenarios#influence-html-head-tag-elements):</span></span>
+<span data-ttu-id="fc6e9-206">程式庫的 `jeep-yj.png` 影像也可以新增至程式庫的 `Component1` 元件 (`Component1.razor`) 。</span><span class="sxs-lookup"><span data-stu-id="fc6e9-206">The library's `jeep-yj.png` image can also be added to the library's `Component1` component (`Component1.razor`).</span></span> <span data-ttu-id="fc6e9-207">若要將 `my-component` CSS 類別提供給用戶端應用程式的頁面，請使用架構的[ `Link` 元件](xref:blazor/fundamentals/additional-scenarios#influence-html-head-tag-elements)連結至程式庫的樣式表單：</span><span class="sxs-lookup"><span data-stu-id="fc6e9-207">To provide the `my-component` CSS class to the client app's page, link to the library's stylesheet using the framework's [`Link` component](xref:blazor/fundamentals/additional-scenarios#influence-html-head-tag-elements):</span></span>
 
 ```razor
 <div class="my-component">
@@ -354,7 +358,7 @@ dotnet publish -p:BlazorEnableCompression=false
 </div>
 ```
 
-<span data-ttu-id="fd621-205">使用[ `Link` 元件](xref:blazor/fundamentals/additional-scenarios#influence-html-head-tag-elements)的另一種方式是從用戶端應用程式的檔案載入樣式表單 `wwwroot/index.html` 。</span><span class="sxs-lookup"><span data-stu-id="fd621-205">An alternative to using the [`Link` component](xref:blazor/fundamentals/additional-scenarios#influence-html-head-tag-elements) is to load the stylesheet from the client app's `wwwroot/index.html` file.</span></span> <span data-ttu-id="fd621-206">這種方法可讓用戶端應用程式中的所有元件使用樣式表單：</span><span class="sxs-lookup"><span data-stu-id="fd621-206">This approach makes the stylesheet available to all of the components in the client app:</span></span>
+<span data-ttu-id="fc6e9-208">使用[ `Link` 元件](xref:blazor/fundamentals/additional-scenarios#influence-html-head-tag-elements)的另一種方式是從用戶端應用程式的檔案載入樣式表單 `wwwroot/index.html` 。</span><span class="sxs-lookup"><span data-stu-id="fc6e9-208">An alternative to using the [`Link` component](xref:blazor/fundamentals/additional-scenarios#influence-html-head-tag-elements) is to load the stylesheet from the client app's `wwwroot/index.html` file.</span></span> <span data-ttu-id="fc6e9-209">這種方法可讓用戶端應用程式中的所有元件使用樣式表單：</span><span class="sxs-lookup"><span data-stu-id="fc6e9-209">This approach makes the stylesheet available to all of the components in the client app:</span></span>
 
 ```html
 <head>
@@ -367,7 +371,7 @@ dotnet publish -p:BlazorEnableCompression=false
 
 ::: moniker range="< aspnetcore-5.0"
 
-<span data-ttu-id="fd621-207">程式庫的 `jeep-yj.png` 映射也可以新增至程式庫的 `Component1` 元件 (`Component1.razor`) ：</span><span class="sxs-lookup"><span data-stu-id="fd621-207">The library's `jeep-yj.png` image can also be added to the library's `Component1` component (`Component1.razor`):</span></span>
+<span data-ttu-id="fc6e9-210">程式庫的 `jeep-yj.png` 映射也可以新增至程式庫的 `Component1` 元件 (`Component1.razor`) ：</span><span class="sxs-lookup"><span data-stu-id="fc6e9-210">The library's `jeep-yj.png` image can also be added to the library's `Component1` component (`Component1.razor`):</span></span>
 
 ```razor
 <div class="my-component">
@@ -383,7 +387,7 @@ dotnet publish -p:BlazorEnableCompression=false
 </div>
 ```
 
-<span data-ttu-id="fd621-208">用戶端應用程式的檔案會 `wwwroot/index.html` 以下列新增的標記要求程式庫的樣式表單 `<link>` ：</span><span class="sxs-lookup"><span data-stu-id="fd621-208">The client app's `wwwroot/index.html` file requests the library's stylesheet with the following added `<link>` tag:</span></span>
+<span data-ttu-id="fc6e9-211">用戶端應用程式的檔案會 `wwwroot/index.html` 以下列新增的標記要求程式庫的樣式表單 `<link>` ：</span><span class="sxs-lookup"><span data-stu-id="fc6e9-211">The client app's `wwwroot/index.html` file requests the library's stylesheet with the following added `<link>` tag:</span></span>
 
 ```html
 <head>
@@ -394,7 +398,7 @@ dotnet publish -p:BlazorEnableCompression=false
 
 ::: moniker-end
 
-<span data-ttu-id="fd621-209">將流覽新增至 `Jeep` 用戶端應用程式元件中的元件 `NavMenu` (`Shared/NavMenu.razor`) ：</span><span class="sxs-lookup"><span data-stu-id="fd621-209">Add navigation to the `Jeep` component in the client app's `NavMenu` component (`Shared/NavMenu.razor`):</span></span>
+<span data-ttu-id="fc6e9-212">將流覽新增至 `Jeep` 用戶端應用程式元件中的元件 `NavMenu` (`Shared/NavMenu.razor`) ：</span><span class="sxs-lookup"><span data-stu-id="fc6e9-212">Add navigation to the `Jeep` component in the client app's `NavMenu` component (`Shared/NavMenu.razor`):</span></span>
 
 ```razor
 <li class="nav-item px-3">
@@ -404,71 +408,71 @@ dotnet publish -p:BlazorEnableCompression=false
 </li>
 ```
 
-<span data-ttu-id="fd621-210">如需 RCLs 的詳細資訊，請參閱：</span><span class="sxs-lookup"><span data-stu-id="fd621-210">For more information on RCLs, see:</span></span>
+<span data-ttu-id="fc6e9-213">如需 RCLs 的詳細資訊，請參閱：</span><span class="sxs-lookup"><span data-stu-id="fc6e9-213">For more information on RCLs, see:</span></span>
 
 * <xref:blazor/components/class-libraries>
 * <xref:razor-pages/ui-class>
 
-## <a name="standalone-deployment"></a><span data-ttu-id="fd621-211">獨立部署</span><span class="sxs-lookup"><span data-stu-id="fd621-211">Standalone deployment</span></span>
+## <a name="standalone-deployment"></a><span data-ttu-id="fc6e9-214">獨立部署</span><span class="sxs-lookup"><span data-stu-id="fc6e9-214">Standalone deployment</span></span>
 
-<span data-ttu-id="fd621-212">*獨立部署* Blazor WebAssembly 會以一組直接由用戶端要求的靜態檔案來提供應用程式。</span><span class="sxs-lookup"><span data-stu-id="fd621-212">A *standalone deployment* serves the Blazor WebAssembly app as a set of static files that are requested directly by clients.</span></span> <span data-ttu-id="fd621-213">任何靜態檔案伺服器都能提供 Blazor 應用程式。</span><span class="sxs-lookup"><span data-stu-id="fd621-213">Any static file server is able to serve the Blazor app.</span></span>
+<span data-ttu-id="fc6e9-215">*獨立部署* Blazor WebAssembly 會以一組直接由用戶端要求的靜態檔案來提供應用程式。</span><span class="sxs-lookup"><span data-stu-id="fc6e9-215">A *standalone deployment* serves the Blazor WebAssembly app as a set of static files that are requested directly by clients.</span></span> <span data-ttu-id="fc6e9-216">任何靜態檔案伺服器都能提供 Blazor 應用程式。</span><span class="sxs-lookup"><span data-stu-id="fc6e9-216">Any static file server is able to serve the Blazor app.</span></span>
 
-<span data-ttu-id="fd621-214">獨立部署資產會發佈到 `/bin/Release/{TARGET FRAMEWORK}/publish/wwwroot` 資料夾。</span><span class="sxs-lookup"><span data-stu-id="fd621-214">Standalone deployment assets are published into the `/bin/Release/{TARGET FRAMEWORK}/publish/wwwroot` folder.</span></span>
+<span data-ttu-id="fc6e9-217">獨立部署資產會發佈到 `/bin/Release/{TARGET FRAMEWORK}/publish/wwwroot` 資料夾。</span><span class="sxs-lookup"><span data-stu-id="fc6e9-217">Standalone deployment assets are published into the `/bin/Release/{TARGET FRAMEWORK}/publish/wwwroot` folder.</span></span>
 
-### <a name="azure-app-service"></a><span data-ttu-id="fd621-215">Azure App Service</span><span class="sxs-lookup"><span data-stu-id="fd621-215">Azure App Service</span></span>
+### <a name="azure-app-service"></a><span data-ttu-id="fc6e9-218">Azure App Service</span><span class="sxs-lookup"><span data-stu-id="fc6e9-218">Azure App Service</span></span>
 
-<span data-ttu-id="fd621-216">Blazor WebAssembly 您可以將應用程式部署至 Windows 上的 Azure App 服務，這會在 [IIS](#iis)上裝載應用程式。</span><span class="sxs-lookup"><span data-stu-id="fd621-216">Blazor WebAssembly apps can be deployed to Azure App Services on Windows, which hosts the app on [IIS](#iis).</span></span>
+<span data-ttu-id="fc6e9-219">Blazor WebAssembly 您可以將應用程式部署至 Windows 上的 Azure App 服務，這會在 [IIS](#iis)上裝載應用程式。</span><span class="sxs-lookup"><span data-stu-id="fc6e9-219">Blazor WebAssembly apps can be deployed to Azure App Services on Windows, which hosts the app on [IIS](#iis).</span></span>
 
-<span data-ttu-id="fd621-217">Blazor WebAssembly目前不支援將獨立應用程式部署至適用于 Linux 的 Azure App Service。</span><span class="sxs-lookup"><span data-stu-id="fd621-217">Deploying a standalone Blazor WebAssembly app to Azure App Service for Linux isn't currently supported.</span></span> <span data-ttu-id="fd621-218">目前無法使用 Linux 伺服器映射來裝載應用程式。</span><span class="sxs-lookup"><span data-stu-id="fd621-218">A Linux server image to host the app isn't available at this time.</span></span> <span data-ttu-id="fd621-219">正在進行工作，以啟用此案例。</span><span class="sxs-lookup"><span data-stu-id="fd621-219">Work is in progress to enable this scenario.</span></span>
+<span data-ttu-id="fc6e9-220">Blazor WebAssembly目前不支援將獨立應用程式部署至適用于 Linux 的 Azure App Service。</span><span class="sxs-lookup"><span data-stu-id="fc6e9-220">Deploying a standalone Blazor WebAssembly app to Azure App Service for Linux isn't currently supported.</span></span> <span data-ttu-id="fc6e9-221">目前無法使用 Linux 伺服器映射來裝載應用程式。</span><span class="sxs-lookup"><span data-stu-id="fc6e9-221">A Linux server image to host the app isn't available at this time.</span></span> <span data-ttu-id="fc6e9-222">正在進行工作，以啟用此案例。</span><span class="sxs-lookup"><span data-stu-id="fc6e9-222">Work is in progress to enable this scenario.</span></span>
 
-### <a name="iis"></a><span data-ttu-id="fd621-220">IIS</span><span class="sxs-lookup"><span data-stu-id="fd621-220">IIS</span></span>
+### <a name="iis"></a><span data-ttu-id="fc6e9-223">IIS</span><span class="sxs-lookup"><span data-stu-id="fc6e9-223">IIS</span></span>
 
-<span data-ttu-id="fd621-221">IIS 是適用于應用程式的可用靜態檔案伺服器 Blazor 。</span><span class="sxs-lookup"><span data-stu-id="fd621-221">IIS is a capable static file server for Blazor apps.</span></span> <span data-ttu-id="fd621-222">若要設定 IIS 以裝載 Blazor ，請參閱 [在 Iis 上建立靜態網站](/iis/manage/creating-websites/scenario-build-a-static-website-on-iis)。</span><span class="sxs-lookup"><span data-stu-id="fd621-222">To configure IIS to host Blazor, see [Build a Static Website on IIS](/iis/manage/creating-websites/scenario-build-a-static-website-on-iis).</span></span>
+<span data-ttu-id="fc6e9-224">IIS 是適用于應用程式的可用靜態檔案伺服器 Blazor 。</span><span class="sxs-lookup"><span data-stu-id="fc6e9-224">IIS is a capable static file server for Blazor apps.</span></span> <span data-ttu-id="fc6e9-225">若要設定 IIS 以裝載 Blazor ，請參閱 [在 Iis 上建立靜態網站](/iis/manage/creating-websites/scenario-build-a-static-website-on-iis)。</span><span class="sxs-lookup"><span data-stu-id="fc6e9-225">To configure IIS to host Blazor, see [Build a Static Website on IIS](/iis/manage/creating-websites/scenario-build-a-static-website-on-iis).</span></span>
 
-<span data-ttu-id="fd621-223">已發佈的資產會在 `/bin/Release/{TARGET FRAMEWORK}/publish` 資料夾中建立。</span><span class="sxs-lookup"><span data-stu-id="fd621-223">Published assets are created in the `/bin/Release/{TARGET FRAMEWORK}/publish` folder.</span></span> <span data-ttu-id="fd621-224">在 `publish` web 伺服器或主機服務上裝載資料夾的內容。</span><span class="sxs-lookup"><span data-stu-id="fd621-224">Host the contents of the `publish` folder on the web server or hosting service.</span></span>
+<span data-ttu-id="fc6e9-226">已發佈的資產會在 `/bin/Release/{TARGET FRAMEWORK}/publish` 資料夾中建立。</span><span class="sxs-lookup"><span data-stu-id="fc6e9-226">Published assets are created in the `/bin/Release/{TARGET FRAMEWORK}/publish` folder.</span></span> <span data-ttu-id="fc6e9-227">在 `publish` web 伺服器或主機服務上裝載資料夾的內容。</span><span class="sxs-lookup"><span data-stu-id="fc6e9-227">Host the contents of the `publish` folder on the web server or hosting service.</span></span>
 
-#### <a name="webconfig"></a><span data-ttu-id="fd621-225">web.config</span><span class="sxs-lookup"><span data-stu-id="fd621-225">web.config</span></span>
+#### <a name="webconfig"></a><span data-ttu-id="fc6e9-228">web.config</span><span class="sxs-lookup"><span data-stu-id="fc6e9-228">web.config</span></span>
 
-<span data-ttu-id="fd621-226">Blazor發行專案時， `web.config` 會使用下列 IIS 設定來建立檔案：</span><span class="sxs-lookup"><span data-stu-id="fd621-226">When a Blazor project is published, a `web.config` file is created with the following IIS configuration:</span></span>
+<span data-ttu-id="fc6e9-229">Blazor發行專案時， `web.config` 會使用下列 IIS 設定來建立檔案：</span><span class="sxs-lookup"><span data-stu-id="fc6e9-229">When a Blazor project is published, a `web.config` file is created with the following IIS configuration:</span></span>
 
-* <span data-ttu-id="fd621-227">針對下列副檔名設定 MIME 類型：</span><span class="sxs-lookup"><span data-stu-id="fd621-227">MIME types are set for the following file extensions:</span></span>
-  * <span data-ttu-id="fd621-228">`.dll`: `application/octet-stream`</span><span class="sxs-lookup"><span data-stu-id="fd621-228">`.dll`: `application/octet-stream`</span></span>
-  * <span data-ttu-id="fd621-229">`.json`: `application/json`</span><span class="sxs-lookup"><span data-stu-id="fd621-229">`.json`: `application/json`</span></span>
-  * <span data-ttu-id="fd621-230">`.wasm`: `application/wasm`</span><span class="sxs-lookup"><span data-stu-id="fd621-230">`.wasm`: `application/wasm`</span></span>
-  * <span data-ttu-id="fd621-231">`.woff`: `application/font-woff`</span><span class="sxs-lookup"><span data-stu-id="fd621-231">`.woff`: `application/font-woff`</span></span>
-  * <span data-ttu-id="fd621-232">`.woff2`: `application/font-woff`</span><span class="sxs-lookup"><span data-stu-id="fd621-232">`.woff2`: `application/font-woff`</span></span>
-* <span data-ttu-id="fd621-233">針對下列 MIME 類型會啟用 HTTP 壓縮：</span><span class="sxs-lookup"><span data-stu-id="fd621-233">HTTP compression is enabled for the following MIME types:</span></span>
+* <span data-ttu-id="fc6e9-230">針對下列副檔名設定 MIME 類型：</span><span class="sxs-lookup"><span data-stu-id="fc6e9-230">MIME types are set for the following file extensions:</span></span>
+  * <span data-ttu-id="fc6e9-231">`.dll`: `application/octet-stream`</span><span class="sxs-lookup"><span data-stu-id="fc6e9-231">`.dll`: `application/octet-stream`</span></span>
+  * <span data-ttu-id="fc6e9-232">`.json`: `application/json`</span><span class="sxs-lookup"><span data-stu-id="fc6e9-232">`.json`: `application/json`</span></span>
+  * <span data-ttu-id="fc6e9-233">`.wasm`: `application/wasm`</span><span class="sxs-lookup"><span data-stu-id="fc6e9-233">`.wasm`: `application/wasm`</span></span>
+  * <span data-ttu-id="fc6e9-234">`.woff`: `application/font-woff`</span><span class="sxs-lookup"><span data-stu-id="fc6e9-234">`.woff`: `application/font-woff`</span></span>
+  * <span data-ttu-id="fc6e9-235">`.woff2`: `application/font-woff`</span><span class="sxs-lookup"><span data-stu-id="fc6e9-235">`.woff2`: `application/font-woff`</span></span>
+* <span data-ttu-id="fc6e9-236">針對下列 MIME 類型會啟用 HTTP 壓縮：</span><span class="sxs-lookup"><span data-stu-id="fc6e9-236">HTTP compression is enabled for the following MIME types:</span></span>
   * `application/octet-stream`
   * `application/wasm`
-* <span data-ttu-id="fd621-234">建立 URL Rewrite Module 規則：</span><span class="sxs-lookup"><span data-stu-id="fd621-234">URL Rewrite Module rules are established:</span></span>
-  * <span data-ttu-id="fd621-235">提供應用程式的靜態資產位於 () 的子目錄 `wwwroot/{PATH REQUESTED}` 。</span><span class="sxs-lookup"><span data-stu-id="fd621-235">Serve the sub-directory where the app's static assets reside (`wwwroot/{PATH REQUESTED}`).</span></span>
-  * <span data-ttu-id="fd621-236">建立 SPA 回路由，讓非檔案資產的要求重新導向至其靜態資產資料夾中的應用程式預設檔 (`wwwroot/index.html`) 。</span><span class="sxs-lookup"><span data-stu-id="fd621-236">Create SPA fallback routing so that requests for non-file assets are redirected to the app's default document in its static assets folder (`wwwroot/index.html`).</span></span>
+* <span data-ttu-id="fc6e9-237">建立 URL Rewrite Module 規則：</span><span class="sxs-lookup"><span data-stu-id="fc6e9-237">URL Rewrite Module rules are established:</span></span>
+  * <span data-ttu-id="fc6e9-238">提供應用程式的靜態資產位於 () 的子目錄 `wwwroot/{PATH REQUESTED}` 。</span><span class="sxs-lookup"><span data-stu-id="fc6e9-238">Serve the sub-directory where the app's static assets reside (`wwwroot/{PATH REQUESTED}`).</span></span>
+  * <span data-ttu-id="fc6e9-239">建立 SPA 回路由，讓非檔案資產的要求重新導向至其靜態資產資料夾中的應用程式預設檔 (`wwwroot/index.html`) 。</span><span class="sxs-lookup"><span data-stu-id="fc6e9-239">Create SPA fallback routing so that requests for non-file assets are redirected to the app's default document in its static assets folder (`wwwroot/index.html`).</span></span>
   
-#### <a name="use-a-custom-webconfig"></a><span data-ttu-id="fd621-237">使用自訂 web.config</span><span class="sxs-lookup"><span data-stu-id="fd621-237">Use a custom web.config</span></span>
+#### <a name="use-a-custom-webconfig"></a><span data-ttu-id="fc6e9-240">使用自訂 web.config</span><span class="sxs-lookup"><span data-stu-id="fc6e9-240">Use a custom web.config</span></span>
 
-<span data-ttu-id="fd621-238">若要使用自訂檔案 `web.config` ，請將自訂檔案放 `web.config` 在專案資料夾的根目錄，然後發佈專案。</span><span class="sxs-lookup"><span data-stu-id="fd621-238">To use a custom `web.config` file, place the custom `web.config` file at the root of the project folder and publish the project.</span></span>
+<span data-ttu-id="fc6e9-241">若要使用自訂檔案 `web.config` ，請將自訂檔案放 `web.config` 在專案資料夾的根目錄，然後發佈專案。</span><span class="sxs-lookup"><span data-stu-id="fc6e9-241">To use a custom `web.config` file, place the custom `web.config` file at the root of the project folder and publish the project.</span></span>
 
-#### <a name="install-the-url-rewrite-module"></a><span data-ttu-id="fd621-239">安裝 URL Rewrite 模組</span><span class="sxs-lookup"><span data-stu-id="fd621-239">Install the URL Rewrite Module</span></span>
+#### <a name="install-the-url-rewrite-module"></a><span data-ttu-id="fc6e9-242">安裝 URL Rewrite 模組</span><span class="sxs-lookup"><span data-stu-id="fc6e9-242">Install the URL Rewrite Module</span></span>
 
-<span data-ttu-id="fd621-240">需要 [URL Rewrite Module](https://www.iis.net/downloads/microsoft/url-rewrite)，才可重寫 URL。</span><span class="sxs-lookup"><span data-stu-id="fd621-240">The [URL Rewrite Module](https://www.iis.net/downloads/microsoft/url-rewrite) is required to rewrite URLs.</span></span> <span data-ttu-id="fd621-241">預設不會安裝此模組，且其無法用來安裝為網頁伺服器 (IIS) 角色服務功能。</span><span class="sxs-lookup"><span data-stu-id="fd621-241">The module isn't installed by default, and it isn't available for install as a Web Server (IIS) role service feature.</span></span> <span data-ttu-id="fd621-242">必須從 IIS 網站下載模組。</span><span class="sxs-lookup"><span data-stu-id="fd621-242">The module must be downloaded from the IIS website.</span></span> <span data-ttu-id="fd621-243">請使用 Web Platform Installer 安裝模組：</span><span class="sxs-lookup"><span data-stu-id="fd621-243">Use the Web Platform Installer to install the module:</span></span>
+<span data-ttu-id="fc6e9-243">需要 [URL Rewrite Module](https://www.iis.net/downloads/microsoft/url-rewrite)，才可重寫 URL。</span><span class="sxs-lookup"><span data-stu-id="fc6e9-243">The [URL Rewrite Module](https://www.iis.net/downloads/microsoft/url-rewrite) is required to rewrite URLs.</span></span> <span data-ttu-id="fc6e9-244">預設不會安裝此模組，且其無法用來安裝為網頁伺服器 (IIS) 角色服務功能。</span><span class="sxs-lookup"><span data-stu-id="fc6e9-244">The module isn't installed by default, and it isn't available for install as a Web Server (IIS) role service feature.</span></span> <span data-ttu-id="fc6e9-245">必須從 IIS 網站下載模組。</span><span class="sxs-lookup"><span data-stu-id="fc6e9-245">The module must be downloaded from the IIS website.</span></span> <span data-ttu-id="fc6e9-246">請使用 Web Platform Installer 安裝模組：</span><span class="sxs-lookup"><span data-stu-id="fc6e9-246">Use the Web Platform Installer to install the module:</span></span>
 
-1. <span data-ttu-id="fd621-244">在本機上，巡覽至 [URL Rewrite Module 下載頁面](https://www.iis.net/downloads/microsoft/url-rewrite#additionalDownloads)。</span><span class="sxs-lookup"><span data-stu-id="fd621-244">Locally, navigate to the [URL Rewrite Module downloads page](https://www.iis.net/downloads/microsoft/url-rewrite#additionalDownloads).</span></span> <span data-ttu-id="fd621-245">如需英文版，請選取 [WebPI]\*\*\*\* 下載 WebPI 安裝程式。</span><span class="sxs-lookup"><span data-stu-id="fd621-245">For the English version, select **WebPI** to download the WebPI installer.</span></span> <span data-ttu-id="fd621-246">如需其他語言，請選取適當的伺服器架構 (x86 x64) 來下載安裝程式。</span><span class="sxs-lookup"><span data-stu-id="fd621-246">For other languages, select the appropriate architecture for the server (x86/x64) to download the installer.</span></span>
-1. <span data-ttu-id="fd621-247">將安裝程式複製到伺服器。</span><span class="sxs-lookup"><span data-stu-id="fd621-247">Copy the installer to the server.</span></span> <span data-ttu-id="fd621-248">執行安裝程式。</span><span class="sxs-lookup"><span data-stu-id="fd621-248">Run the installer.</span></span> <span data-ttu-id="fd621-249">選取 [安裝]\*\*\*\* 按鈕，並接受授權條款。</span><span class="sxs-lookup"><span data-stu-id="fd621-249">Select the **Install** button and accept the license terms.</span></span> <span data-ttu-id="fd621-250">安裝完成之後，不需要重新啟動伺服器。</span><span class="sxs-lookup"><span data-stu-id="fd621-250">A server restart isn't required after the install completes.</span></span>
+1. <span data-ttu-id="fc6e9-247">在本機上，巡覽至 [URL Rewrite Module 下載頁面](https://www.iis.net/downloads/microsoft/url-rewrite#additionalDownloads)。</span><span class="sxs-lookup"><span data-stu-id="fc6e9-247">Locally, navigate to the [URL Rewrite Module downloads page](https://www.iis.net/downloads/microsoft/url-rewrite#additionalDownloads).</span></span> <span data-ttu-id="fc6e9-248">如需英文版，請選取 [WebPI]\*\*\*\* 下載 WebPI 安裝程式。</span><span class="sxs-lookup"><span data-stu-id="fc6e9-248">For the English version, select **WebPI** to download the WebPI installer.</span></span> <span data-ttu-id="fc6e9-249">如需其他語言，請選取適當的伺服器架構 (x86 x64) 來下載安裝程式。</span><span class="sxs-lookup"><span data-stu-id="fc6e9-249">For other languages, select the appropriate architecture for the server (x86/x64) to download the installer.</span></span>
+1. <span data-ttu-id="fc6e9-250">將安裝程式複製到伺服器。</span><span class="sxs-lookup"><span data-stu-id="fc6e9-250">Copy the installer to the server.</span></span> <span data-ttu-id="fc6e9-251">執行安裝程式。</span><span class="sxs-lookup"><span data-stu-id="fc6e9-251">Run the installer.</span></span> <span data-ttu-id="fc6e9-252">選取 [安裝]\*\*\*\* 按鈕，並接受授權條款。</span><span class="sxs-lookup"><span data-stu-id="fc6e9-252">Select the **Install** button and accept the license terms.</span></span> <span data-ttu-id="fc6e9-253">安裝完成之後，不需要重新啟動伺服器。</span><span class="sxs-lookup"><span data-stu-id="fc6e9-253">A server restart isn't required after the install completes.</span></span>
 
-#### <a name="configure-the-website"></a><span data-ttu-id="fd621-251">設定網站</span><span class="sxs-lookup"><span data-stu-id="fd621-251">Configure the website</span></span>
+#### <a name="configure-the-website"></a><span data-ttu-id="fc6e9-254">設定網站</span><span class="sxs-lookup"><span data-stu-id="fc6e9-254">Configure the website</span></span>
 
-<span data-ttu-id="fd621-252">將網站的 [實體路徑]\*\*\*\* 設為應用程式的資料夾。</span><span class="sxs-lookup"><span data-stu-id="fd621-252">Set the website's **Physical path** to the app's folder.</span></span> <span data-ttu-id="fd621-253">此資料夾包含：</span><span class="sxs-lookup"><span data-stu-id="fd621-253">The folder contains:</span></span>
+<span data-ttu-id="fc6e9-255">將網站的 [實體路徑]\*\*\*\* 設為應用程式的資料夾。</span><span class="sxs-lookup"><span data-stu-id="fc6e9-255">Set the website's **Physical path** to the app's folder.</span></span> <span data-ttu-id="fc6e9-256">此資料夾包含：</span><span class="sxs-lookup"><span data-stu-id="fc6e9-256">The folder contains:</span></span>
 
-* <span data-ttu-id="fd621-254">`web.config`IIS 用來設定網站的檔案，包括必要的重新導向規則和檔案內容類型。</span><span class="sxs-lookup"><span data-stu-id="fd621-254">The `web.config` file that IIS uses to configure the website, including the required redirect rules and file content types.</span></span>
-* <span data-ttu-id="fd621-255">應用程式的靜態資產資料夾。</span><span class="sxs-lookup"><span data-stu-id="fd621-255">The app's static asset folder.</span></span>
+* <span data-ttu-id="fc6e9-257">`web.config`IIS 用來設定網站的檔案，包括必要的重新導向規則和檔案內容類型。</span><span class="sxs-lookup"><span data-stu-id="fc6e9-257">The `web.config` file that IIS uses to configure the website, including the required redirect rules and file content types.</span></span>
+* <span data-ttu-id="fc6e9-258">應用程式的靜態資產資料夾。</span><span class="sxs-lookup"><span data-stu-id="fc6e9-258">The app's static asset folder.</span></span>
 
-#### <a name="host-as-an-iis-sub-app"></a><span data-ttu-id="fd621-256">作為 IIS 子應用程式的主機</span><span class="sxs-lookup"><span data-stu-id="fd621-256">Host as an IIS sub-app</span></span>
+#### <a name="host-as-an-iis-sub-app"></a><span data-ttu-id="fc6e9-259">作為 IIS 子應用程式的主機</span><span class="sxs-lookup"><span data-stu-id="fc6e9-259">Host as an IIS sub-app</span></span>
 
-<span data-ttu-id="fd621-257">如果獨立應用程式裝載為 IIS 子應用程式，請執行下列其中一項：</span><span class="sxs-lookup"><span data-stu-id="fd621-257">If a standalone app is hosted as an IIS sub-app, perform either of the following:</span></span>
+<span data-ttu-id="fc6e9-260">如果獨立應用程式裝載為 IIS 子應用程式，請執行下列其中一項：</span><span class="sxs-lookup"><span data-stu-id="fc6e9-260">If a standalone app is hosted as an IIS sub-app, perform either of the following:</span></span>
 
-* <span data-ttu-id="fd621-258">停用繼承的 ASP.NET Core 模組處理常式。</span><span class="sxs-lookup"><span data-stu-id="fd621-258">Disable the inherited ASP.NET Core Module handler.</span></span>
+* <span data-ttu-id="fc6e9-261">停用繼承的 ASP.NET Core 模組處理常式。</span><span class="sxs-lookup"><span data-stu-id="fc6e9-261">Disable the inherited ASP.NET Core Module handler.</span></span>
 
-  <span data-ttu-id="fd621-259">Blazor `web.config` 將區段新增至檔案，以移除應用程式已發佈檔案中的處理常式 `<handlers>` ：</span><span class="sxs-lookup"><span data-stu-id="fd621-259">Remove the handler in the Blazor app's published `web.config` file by adding a `<handlers>` section to the file:</span></span>
+  <span data-ttu-id="fc6e9-262">Blazor `web.config` 將區段新增至檔案，以移除應用程式已發佈檔案中的處理常式 `<handlers>` ：</span><span class="sxs-lookup"><span data-stu-id="fc6e9-262">Remove the handler in the Blazor app's published `web.config` file by adding a `<handlers>` section to the file:</span></span>
 
   ```xml
   <handlers>
@@ -476,7 +480,7 @@ dotnet publish -p:BlazorEnableCompression=false
   </handlers>
   ```
 
-* <span data-ttu-id="fd621-260">`<system.webServer>`使用 `<location>` `inheritInChildApplications` 設定為下列專案的元素，停用根 (父) 應用程式區段的繼承 `false` ：</span><span class="sxs-lookup"><span data-stu-id="fd621-260">Disable inheritance of the root (parent) app's `<system.webServer>` section using a `<location>` element with `inheritInChildApplications` set to `false`:</span></span>
+* <span data-ttu-id="fc6e9-263">`<system.webServer>`使用 `<location>` `inheritInChildApplications` 設定為下列專案的元素，停用根 (父) 應用程式區段的繼承 `false` ：</span><span class="sxs-lookup"><span data-stu-id="fc6e9-263">Disable inheritance of the root (parent) app's `<system.webServer>` section using a `<location>` element with `inheritInChildApplications` set to `false`:</span></span>
 
   ```xml
   <?xml version="1.0" encoding="utf-8"?>
@@ -492,42 +496,42 @@ dotnet publish -p:BlazorEnableCompression=false
   </configuration>
   ```
 
-<span data-ttu-id="fd621-261">除了設定 [應用程式的基底路徑](xref:blazor/host-and-deploy/index#app-base-path)之外，還會執行移除處理常式或停用繼承。</span><span class="sxs-lookup"><span data-stu-id="fd621-261">Removing the handler or disabling inheritance is performed in addition to [configuring the app's base path](xref:blazor/host-and-deploy/index#app-base-path).</span></span> <span data-ttu-id="fd621-262">將應用程式檔案中的應用程式基底路徑設定 `index.html` 為在 iis 中設定子應用程式時所使用的 iis 別名。</span><span class="sxs-lookup"><span data-stu-id="fd621-262">Set the app base path in the app's `index.html` file to the IIS alias used when configuring the sub-app in IIS.</span></span>
+<span data-ttu-id="fc6e9-264">除了設定 [應用程式的基底路徑](xref:blazor/host-and-deploy/index#app-base-path)之外，還會執行移除處理常式或停用繼承。</span><span class="sxs-lookup"><span data-stu-id="fc6e9-264">Removing the handler or disabling inheritance is performed in addition to [configuring the app's base path](xref:blazor/host-and-deploy/index#app-base-path).</span></span> <span data-ttu-id="fc6e9-265">將應用程式檔案中的應用程式基底路徑設定 `index.html` 為在 iis 中設定子應用程式時所使用的 iis 別名。</span><span class="sxs-lookup"><span data-stu-id="fc6e9-265">Set the app base path in the app's `index.html` file to the IIS alias used when configuring the sub-app in IIS.</span></span>
 
-#### <a name="brotli-and-gzip-compression"></a><span data-ttu-id="fd621-263">Brotli 和 Gzip 壓縮</span><span class="sxs-lookup"><span data-stu-id="fd621-263">Brotli and Gzip compression</span></span>
+#### <a name="brotli-and-gzip-compression"></a><span data-ttu-id="fc6e9-266">Brotli 和 Gzip 壓縮</span><span class="sxs-lookup"><span data-stu-id="fc6e9-266">Brotli and Gzip compression</span></span>
 
-<span data-ttu-id="fd621-264">您可以透過設定 IIS `web.config` ，以提供 Brotli 或 Gzip 壓縮 Blazor 的資產。</span><span class="sxs-lookup"><span data-stu-id="fd621-264">IIS can be configured via `web.config` to serve Brotli or Gzip compressed Blazor assets.</span></span> <span data-ttu-id="fd621-265">如需範例設定，請參閱 [`web.config`](https://github.com/dotnet/AspNetCore.Docs/blob/master/aspnetcore/blazor/host-and-deploy/webassembly/_samples/web.config?raw=true) 。</span><span class="sxs-lookup"><span data-stu-id="fd621-265">For an example configuration, see [`web.config`](https://github.com/dotnet/AspNetCore.Docs/blob/master/aspnetcore/blazor/host-and-deploy/webassembly/_samples/web.config?raw=true).</span></span>
+<span data-ttu-id="fc6e9-267">您可以透過設定 IIS `web.config` ，以提供 Brotli 或 Gzip 壓縮 Blazor 的資產。</span><span class="sxs-lookup"><span data-stu-id="fc6e9-267">IIS can be configured via `web.config` to serve Brotli or Gzip compressed Blazor assets.</span></span> <span data-ttu-id="fc6e9-268">如需範例設定，請參閱 [`web.config`](https://github.com/dotnet/AspNetCore.Docs/blob/master/aspnetcore/blazor/host-and-deploy/webassembly/_samples/web.config?raw=true) 。</span><span class="sxs-lookup"><span data-stu-id="fc6e9-268">For an example configuration, see [`web.config`](https://github.com/dotnet/AspNetCore.Docs/blob/master/aspnetcore/blazor/host-and-deploy/webassembly/_samples/web.config?raw=true).</span></span>
 
-#### <a name="troubleshooting"></a><span data-ttu-id="fd621-266">疑難排解</span><span class="sxs-lookup"><span data-stu-id="fd621-266">Troubleshooting</span></span>
+#### <a name="troubleshooting"></a><span data-ttu-id="fc6e9-269">疑難排解</span><span class="sxs-lookup"><span data-stu-id="fc6e9-269">Troubleshooting</span></span>
 
-<span data-ttu-id="fd621-267">如果收到「500 - 內部伺服器錯誤」\*\*，且 IIS 管理員在嘗試存取網站設定時擲回錯誤，請確認是否已安裝 URL Rewrite 模組。</span><span class="sxs-lookup"><span data-stu-id="fd621-267">If a *500 - Internal Server Error* is received and IIS Manager throws errors when attempting to access the website's configuration, confirm that the URL Rewrite Module is installed.</span></span> <span data-ttu-id="fd621-268">未安裝模組時，IIS 無法剖析該檔案 `web.config` 。</span><span class="sxs-lookup"><span data-stu-id="fd621-268">When the module isn't installed, the `web.config` file can't be parsed by IIS.</span></span> <span data-ttu-id="fd621-269">這可防止 IIS 管理員從服務的靜態檔案載入網站的設定和網站 Blazor 。</span><span class="sxs-lookup"><span data-stu-id="fd621-269">This prevents the IIS Manager from loading the website's configuration and the website from serving Blazor's static files.</span></span>
+<span data-ttu-id="fc6e9-270">如果收到「500 - 內部伺服器錯誤」\*\*，且 IIS 管理員在嘗試存取網站設定時擲回錯誤，請確認是否已安裝 URL Rewrite 模組。</span><span class="sxs-lookup"><span data-stu-id="fc6e9-270">If a *500 - Internal Server Error* is received and IIS Manager throws errors when attempting to access the website's configuration, confirm that the URL Rewrite Module is installed.</span></span> <span data-ttu-id="fc6e9-271">未安裝模組時，IIS 無法剖析該檔案 `web.config` 。</span><span class="sxs-lookup"><span data-stu-id="fc6e9-271">When the module isn't installed, the `web.config` file can't be parsed by IIS.</span></span> <span data-ttu-id="fc6e9-272">這可防止 IIS 管理員從服務的靜態檔案載入網站的設定和網站 Blazor 。</span><span class="sxs-lookup"><span data-stu-id="fc6e9-272">This prevents the IIS Manager from loading the website's configuration and the website from serving Blazor's static files.</span></span>
 
-<span data-ttu-id="fd621-270">如需針對部署至 IIS 進行疑難排解的詳細資訊，請參閱 <xref:test/troubleshoot-azure-iis>。</span><span class="sxs-lookup"><span data-stu-id="fd621-270">For more information on troubleshooting deployments to IIS, see <xref:test/troubleshoot-azure-iis>.</span></span>
+<span data-ttu-id="fc6e9-273">如需針對部署至 IIS 進行疑難排解的詳細資訊，請參閱 <xref:test/troubleshoot-azure-iis>。</span><span class="sxs-lookup"><span data-stu-id="fc6e9-273">For more information on troubleshooting deployments to IIS, see <xref:test/troubleshoot-azure-iis>.</span></span>
 
-### <a name="azure-storage"></a><span data-ttu-id="fd621-271">Azure 儲存體</span><span class="sxs-lookup"><span data-stu-id="fd621-271">Azure Storage</span></span>
+### <a name="azure-storage"></a><span data-ttu-id="fc6e9-274">Azure 儲存體</span><span class="sxs-lookup"><span data-stu-id="fc6e9-274">Azure Storage</span></span>
 
-<span data-ttu-id="fd621-272">[Azure 儲存體](/azure/storage/) 的靜態檔案裝載允許無伺服器 Blazor 應用程式裝載。</span><span class="sxs-lookup"><span data-stu-id="fd621-272">[Azure Storage](/azure/storage/) static file hosting allows serverless Blazor app hosting.</span></span> <span data-ttu-id="fd621-273">支援自訂網域名稱、Azure 內容傳遞網路 (CDN) 及 HTTPS。</span><span class="sxs-lookup"><span data-stu-id="fd621-273">Custom domain names, the Azure Content Delivery Network (CDN), and HTTPS are supported.</span></span>
+<span data-ttu-id="fc6e9-275">[Azure 儲存體](/azure/storage/) 的靜態檔案裝載允許無伺服器 Blazor 應用程式裝載。</span><span class="sxs-lookup"><span data-stu-id="fc6e9-275">[Azure Storage](/azure/storage/) static file hosting allows serverless Blazor app hosting.</span></span> <span data-ttu-id="fc6e9-276">支援自訂網域名稱、Azure 內容傳遞網路 (CDN) 及 HTTPS。</span><span class="sxs-lookup"><span data-stu-id="fc6e9-276">Custom domain names, the Azure Content Delivery Network (CDN), and HTTPS are supported.</span></span>
 
-<span data-ttu-id="fd621-274">當 Blob 服務針對儲存體帳戶上的靜態網站裝載啟用時：</span><span class="sxs-lookup"><span data-stu-id="fd621-274">When the blob service is enabled for static website hosting on a storage account:</span></span>
+<span data-ttu-id="fc6e9-277">當 Blob 服務針對儲存體帳戶上的靜態網站裝載啟用時：</span><span class="sxs-lookup"><span data-stu-id="fc6e9-277">When the blob service is enabled for static website hosting on a storage account:</span></span>
 
-* <span data-ttu-id="fd621-275">將 [索引文件名稱]\*\*\*\* 設定為 `index.html`。</span><span class="sxs-lookup"><span data-stu-id="fd621-275">Set the **Index document name** to `index.html`.</span></span>
-* <span data-ttu-id="fd621-276">將 [錯誤文件路徑]\*\*\*\* 設定為 `index.html`。</span><span class="sxs-lookup"><span data-stu-id="fd621-276">Set the **Error document path** to `index.html`.</span></span> <span data-ttu-id="fd621-277">Razor 元件和其他非檔案端點不會位於 blob 服務所儲存之靜態內容中的實體路徑。</span><span class="sxs-lookup"><span data-stu-id="fd621-277">Razor components and other non-file endpoints don't reside at physical paths in the static content stored by the blob service.</span></span> <span data-ttu-id="fd621-278">當收到路由器應處理之其中一個資源的要求時 Blazor ，blob 服務所產生的 *404-找不* 到錯誤會將要求路由傳送至 **錯誤檔路徑**。</span><span class="sxs-lookup"><span data-stu-id="fd621-278">When a request for one of these resources is received that the Blazor router should handle, the *404 - Not Found* error generated by the blob service routes the request to the **Error document path**.</span></span> <span data-ttu-id="fd621-279">`index.html`會傳回 blob，而且路由器會 Blazor 載入並處理路徑。</span><span class="sxs-lookup"><span data-stu-id="fd621-279">The `index.html` blob is returned, and the Blazor router loads and processes the path.</span></span>
+* <span data-ttu-id="fc6e9-278">將 [索引文件名稱]\*\*\*\* 設定為 `index.html`。</span><span class="sxs-lookup"><span data-stu-id="fc6e9-278">Set the **Index document name** to `index.html`.</span></span>
+* <span data-ttu-id="fc6e9-279">將 [錯誤文件路徑]\*\*\*\* 設定為 `index.html`。</span><span class="sxs-lookup"><span data-stu-id="fc6e9-279">Set the **Error document path** to `index.html`.</span></span> <span data-ttu-id="fc6e9-280">Razor 元件和其他非檔案端點不會位於 blob 服務所儲存之靜態內容中的實體路徑。</span><span class="sxs-lookup"><span data-stu-id="fc6e9-280">Razor components and other non-file endpoints don't reside at physical paths in the static content stored by the blob service.</span></span> <span data-ttu-id="fc6e9-281">當收到路由器應處理之其中一個資源的要求時 Blazor ，blob 服務所產生的 *404-找不* 到錯誤會將要求路由傳送至 **錯誤檔路徑**。</span><span class="sxs-lookup"><span data-stu-id="fc6e9-281">When a request for one of these resources is received that the Blazor router should handle, the *404 - Not Found* error generated by the blob service routes the request to the **Error document path**.</span></span> <span data-ttu-id="fc6e9-282">`index.html`會傳回 blob，而且路由器會 Blazor 載入並處理路徑。</span><span class="sxs-lookup"><span data-stu-id="fc6e9-282">The `index.html` blob is returned, and the Blazor router loads and processes the path.</span></span>
 
-<span data-ttu-id="fd621-280">如果檔案的標頭中有不適當的 MIME 類型，則不會在執行時間載入檔案 `Content-Type` ，請採取下列其中一項動作：</span><span class="sxs-lookup"><span data-stu-id="fd621-280">If files aren't loaded at runtime due to inappropriate MIME types in the files' `Content-Type` headers, take either of the following actions:</span></span>
+<span data-ttu-id="fc6e9-283">如果檔案的標頭中有不適當的 MIME 類型，則不會在執行時間載入檔案 `Content-Type` ，請採取下列其中一項動作：</span><span class="sxs-lookup"><span data-stu-id="fc6e9-283">If files aren't loaded at runtime due to inappropriate MIME types in the files' `Content-Type` headers, take either of the following actions:</span></span>
 
-* <span data-ttu-id="fd621-281">設定您的工具，在部署檔案時) 設定正確的 MIME 類型 (`Content-Type` 標頭。</span><span class="sxs-lookup"><span data-stu-id="fd621-281">Configure your tooling to set the correct MIME types (`Content-Type` headers) when the files are deployed.</span></span>
-* <span data-ttu-id="fd621-282">在部署應用程式之後，變更檔案的 MIME 類型 (`Content-Type` 標頭) 。</span><span class="sxs-lookup"><span data-stu-id="fd621-282">Change the MIME types (`Content-Type` headers) for the files after the app is deployed.</span></span>
+* <span data-ttu-id="fc6e9-284">設定您的工具，在部署檔案時) 設定正確的 MIME 類型 (`Content-Type` 標頭。</span><span class="sxs-lookup"><span data-stu-id="fc6e9-284">Configure your tooling to set the correct MIME types (`Content-Type` headers) when the files are deployed.</span></span>
+* <span data-ttu-id="fc6e9-285">在部署應用程式之後，變更檔案的 MIME 類型 (`Content-Type` 標頭) 。</span><span class="sxs-lookup"><span data-stu-id="fc6e9-285">Change the MIME types (`Content-Type` headers) for the files after the app is deployed.</span></span>
 
-  <span data-ttu-id="fd621-283">在儲存體總管 (Azure 入口網站每個檔案的) ：</span><span class="sxs-lookup"><span data-stu-id="fd621-283">In Storage Explorer (Azure portal) for each file:</span></span>
+  <span data-ttu-id="fc6e9-286">在儲存體總管 (Azure 入口網站每個檔案的) ：</span><span class="sxs-lookup"><span data-stu-id="fc6e9-286">In Storage Explorer (Azure portal) for each file:</span></span>
   
-  1. <span data-ttu-id="fd621-284">以滑鼠右鍵按一下檔案，然後選取 [ **屬性**]。</span><span class="sxs-lookup"><span data-stu-id="fd621-284">Right-click the file and select **Properties**.</span></span>
-  1. <span data-ttu-id="fd621-285">設定 **ContentType** ，然後選取 [ **儲存** ] 按鈕。</span><span class="sxs-lookup"><span data-stu-id="fd621-285">Set the **ContentType** and select the **Save** button.</span></span>
+  1. <span data-ttu-id="fc6e9-287">以滑鼠右鍵按一下檔案，然後選取 [ **屬性**]。</span><span class="sxs-lookup"><span data-stu-id="fc6e9-287">Right-click the file and select **Properties**.</span></span>
+  1. <span data-ttu-id="fc6e9-288">設定 **ContentType** ，然後選取 [ **儲存** ] 按鈕。</span><span class="sxs-lookup"><span data-stu-id="fc6e9-288">Set the **ContentType** and select the **Save** button.</span></span>
 
-<span data-ttu-id="fd621-286">如需詳細資訊，請參閱 [Azure 儲存體中的靜態網站裝載](/azure/storage/blobs/storage-blob-static-website)。</span><span class="sxs-lookup"><span data-stu-id="fd621-286">For more information, see [Static website hosting in Azure Storage](/azure/storage/blobs/storage-blob-static-website).</span></span>
+<span data-ttu-id="fc6e9-289">如需詳細資訊，請參閱 [Azure 儲存體中的靜態網站裝載](/azure/storage/blobs/storage-blob-static-website)。</span><span class="sxs-lookup"><span data-stu-id="fc6e9-289">For more information, see [Static website hosting in Azure Storage](/azure/storage/blobs/storage-blob-static-website).</span></span>
 
-### <a name="nginx"></a><span data-ttu-id="fd621-287">Nginx</span><span class="sxs-lookup"><span data-stu-id="fd621-287">Nginx</span></span>
+### <a name="nginx"></a><span data-ttu-id="fc6e9-290">Nginx</span><span class="sxs-lookup"><span data-stu-id="fc6e9-290">Nginx</span></span>
 
-<span data-ttu-id="fd621-288">下列檔案 `nginx.conf` 已簡化，示範如何設定 Nginx，以便在 `index.html` 每次找不到磁片上的對應檔案時傳送檔案。</span><span class="sxs-lookup"><span data-stu-id="fd621-288">The following `nginx.conf` file is simplified to show how to configure Nginx to send the `index.html` file whenever it can't find a corresponding file on disk.</span></span>
+<span data-ttu-id="fc6e9-291">下列檔案 `nginx.conf` 已簡化，示範如何設定 Nginx，以便在 `index.html` 每次找不到磁片上的對應檔案時傳送檔案。</span><span class="sxs-lookup"><span data-stu-id="fc6e9-291">The following `nginx.conf` file is simplified to show how to configure Nginx to send the `index.html` file whenever it can't find a corresponding file on disk.</span></span>
 
 ```
 events { }
@@ -543,7 +547,7 @@ http {
 }
 ```
 
-<span data-ttu-id="fd621-289">使用設定 NGINX 高載 [速率限制](https://www.nginx.com/blog/rate-limiting-nginx/#bursts) 時 [`limit_req`](https://nginx.org/docs/http/ngx_http_limit_req_module.html#limit_req) ， Blazor WebAssembly 應用程式可能需要大型的 `burst` 參數值，以容納應用程式所提出的相對大量要求。</span><span class="sxs-lookup"><span data-stu-id="fd621-289">When setting the [NGINX burst rate limit](https://www.nginx.com/blog/rate-limiting-nginx/#bursts) with [`limit_req`](https://nginx.org/docs/http/ngx_http_limit_req_module.html#limit_req), Blazor WebAssembly apps may require a large `burst` parameter value to accommodate the relatively large number of requests made by an app.</span></span> <span data-ttu-id="fd621-290">一開始，請將值設定為至少60：</span><span class="sxs-lookup"><span data-stu-id="fd621-290">Initially, set the value to at least 60:</span></span>
+<span data-ttu-id="fc6e9-292">使用設定 NGINX 高載 [速率限制](https://www.nginx.com/blog/rate-limiting-nginx/#bursts) 時 [`limit_req`](https://nginx.org/docs/http/ngx_http_limit_req_module.html#limit_req) ， Blazor WebAssembly 應用程式可能需要大型的 `burst` 參數值，以容納應用程式所提出的相對大量要求。</span><span class="sxs-lookup"><span data-stu-id="fc6e9-292">When setting the [NGINX burst rate limit](https://www.nginx.com/blog/rate-limiting-nginx/#bursts) with [`limit_req`](https://nginx.org/docs/http/ngx_http_limit_req_module.html#limit_req), Blazor WebAssembly apps may require a large `burst` parameter value to accommodate the relatively large number of requests made by an app.</span></span> <span data-ttu-id="fc6e9-293">一開始，請將值設定為至少60：</span><span class="sxs-lookup"><span data-stu-id="fc6e9-293">Initially, set the value to at least 60:</span></span>
 
 ```
 http {
@@ -559,15 +563,15 @@ http {
 }
 ```
 
-<span data-ttu-id="fd621-291">如果瀏覽器開發人員工具或網路流量工具表示要求收到 *503-服務無法使用* 的狀態碼，請增加值。</span><span class="sxs-lookup"><span data-stu-id="fd621-291">Increase the value if browser developer tools or a network traffic tool indicates that requests are receiving a *503 - Service Unavailable* status code.</span></span>
+<span data-ttu-id="fc6e9-294">如果瀏覽器開發人員工具或網路流量工具表示要求收到 *503-服務無法使用* 的狀態碼，請增加值。</span><span class="sxs-lookup"><span data-stu-id="fc6e9-294">Increase the value if browser developer tools or a network traffic tool indicates that requests are receiving a *503 - Service Unavailable* status code.</span></span>
 
-<span data-ttu-id="fd621-292">如需生產環境 Nginx 網頁伺服器組態的詳細資訊，請參閱[建立 NGINX Plus 和 NGINX 組態檔](https://docs.nginx.com/nginx/admin-guide/basic-functionality/managing-configuration-files/)。</span><span class="sxs-lookup"><span data-stu-id="fd621-292">For more information on production Nginx web server configuration, see [Creating NGINX Plus and NGINX Configuration Files](https://docs.nginx.com/nginx/admin-guide/basic-functionality/managing-configuration-files/).</span></span>
+<span data-ttu-id="fc6e9-295">如需生產環境 Nginx 網頁伺服器組態的詳細資訊，請參閱[建立 NGINX Plus 和 NGINX 組態檔](https://docs.nginx.com/nginx/admin-guide/basic-functionality/managing-configuration-files/)。</span><span class="sxs-lookup"><span data-stu-id="fc6e9-295">For more information on production Nginx web server configuration, see [Creating NGINX Plus and NGINX Configuration Files](https://docs.nginx.com/nginx/admin-guide/basic-functionality/managing-configuration-files/).</span></span>
 
-### <a name="nginx-in-docker"></a><span data-ttu-id="fd621-293">Docker 中的 Nginx</span><span class="sxs-lookup"><span data-stu-id="fd621-293">Nginx in Docker</span></span>
+### <a name="nginx-in-docker"></a><span data-ttu-id="fc6e9-296">Docker 中的 Nginx</span><span class="sxs-lookup"><span data-stu-id="fc6e9-296">Nginx in Docker</span></span>
 
-<span data-ttu-id="fd621-294">若要 Blazor 使用 Nginx 在 Docker 中裝載，請設定 Dockerfile 以使用以 Alpine 為基礎的 Nginx 映射。</span><span class="sxs-lookup"><span data-stu-id="fd621-294">To host Blazor in Docker using Nginx, setup the Dockerfile to use the Alpine-based Nginx image.</span></span> <span data-ttu-id="fd621-295">更新 Dockerfile，以將檔案複製 `nginx.config` 到容器中。</span><span class="sxs-lookup"><span data-stu-id="fd621-295">Update the Dockerfile to copy the `nginx.config` file into the container.</span></span>
+<span data-ttu-id="fc6e9-297">若要 Blazor 使用 Nginx 在 Docker 中裝載，請設定 Dockerfile 以使用以 Alpine 為基礎的 Nginx 映射。</span><span class="sxs-lookup"><span data-stu-id="fc6e9-297">To host Blazor in Docker using Nginx, setup the Dockerfile to use the Alpine-based Nginx image.</span></span> <span data-ttu-id="fc6e9-298">更新 Dockerfile，以將檔案複製 `nginx.config` 到容器中。</span><span class="sxs-lookup"><span data-stu-id="fc6e9-298">Update the Dockerfile to copy the `nginx.config` file into the container.</span></span>
 
-<span data-ttu-id="fd621-296">如下列範例所示，新增一行至 Dockerfile：</span><span class="sxs-lookup"><span data-stu-id="fd621-296">Add one line to the Dockerfile, as shown in the following example:</span></span>
+<span data-ttu-id="fc6e9-299">如下列範例所示，新增一行至 Dockerfile：</span><span class="sxs-lookup"><span data-stu-id="fc6e9-299">Add one line to the Dockerfile, as shown in the following example:</span></span>
 
 ```dockerfile
 FROM nginx:alpine
@@ -575,11 +579,11 @@ COPY ./bin/Release/netstandard2.0/publish /usr/share/nginx/html/
 COPY nginx.conf /etc/nginx/nginx.conf
 ```
 
-### <a name="apache"></a><span data-ttu-id="fd621-297">Apache</span><span class="sxs-lookup"><span data-stu-id="fd621-297">Apache</span></span>
+### <a name="apache"></a><span data-ttu-id="fc6e9-300">Apache</span><span class="sxs-lookup"><span data-stu-id="fc6e9-300">Apache</span></span>
 
-<span data-ttu-id="fd621-298">若要將 Blazor WebAssembly 應用程式部署至 CentOS 7 或更新版本：</span><span class="sxs-lookup"><span data-stu-id="fd621-298">To deploy a Blazor WebAssembly app to CentOS 7 or later:</span></span>
+<span data-ttu-id="fc6e9-301">若要將 Blazor WebAssembly 應用程式部署至 CentOS 7 或更新版本：</span><span class="sxs-lookup"><span data-stu-id="fc6e9-301">To deploy a Blazor WebAssembly app to CentOS 7 or later:</span></span>
 
-1. <span data-ttu-id="fd621-299">建立 Apache 設定檔案。</span><span class="sxs-lookup"><span data-stu-id="fd621-299">Create the Apache configuration file.</span></span> <span data-ttu-id="fd621-300">下列範例是簡化的設定檔 (`blazorapp.config`) ：</span><span class="sxs-lookup"><span data-stu-id="fd621-300">The following example is a simplified configuration file (`blazorapp.config`):</span></span>
+1. <span data-ttu-id="fc6e9-302">建立 Apache 設定檔案。</span><span class="sxs-lookup"><span data-stu-id="fc6e9-302">Create the Apache configuration file.</span></span> <span data-ttu-id="fc6e9-303">下列範例是簡化的設定檔 (`blazorapp.config`) ：</span><span class="sxs-lookup"><span data-stu-id="fc6e9-303">The following example is a simplified configuration file (`blazorapp.config`):</span></span>
 
    ```
    <VirtualHost *:80>
@@ -615,94 +619,94 @@ COPY nginx.conf /etc/nginx/nginx.conf
    </VirtualHost>
    ```
 
-1. <span data-ttu-id="fd621-301">將 Apache 設定檔放入 `/etc/httpd/conf.d/` 目錄中，這是 CentOS 7 中的預設 Apache 設定目錄。</span><span class="sxs-lookup"><span data-stu-id="fd621-301">Place the Apache configuration file into the `/etc/httpd/conf.d/` directory, which is the default Apache configuration directory in CentOS 7.</span></span>
+1. <span data-ttu-id="fc6e9-304">將 Apache 設定檔放入 `/etc/httpd/conf.d/` 目錄中，這是 CentOS 7 中的預設 Apache 設定目錄。</span><span class="sxs-lookup"><span data-stu-id="fc6e9-304">Place the Apache configuration file into the `/etc/httpd/conf.d/` directory, which is the default Apache configuration directory in CentOS 7.</span></span>
 
-1. <span data-ttu-id="fd621-302">將應用程式的檔案放入 `/var/www/blazorapp` 目錄中， (`DocumentRoot` 設定檔) 中指定的位置。</span><span class="sxs-lookup"><span data-stu-id="fd621-302">Place the app's files into the `/var/www/blazorapp` directory (the location specified to `DocumentRoot` in the configuration file).</span></span>
+1. <span data-ttu-id="fc6e9-305">將應用程式的檔案放入 `/var/www/blazorapp` 目錄中， (`DocumentRoot` 設定檔) 中指定的位置。</span><span class="sxs-lookup"><span data-stu-id="fc6e9-305">Place the app's files into the `/var/www/blazorapp` directory (the location specified to `DocumentRoot` in the configuration file).</span></span>
 
-1. <span data-ttu-id="fd621-303">重新開機 Apache 服務。</span><span class="sxs-lookup"><span data-stu-id="fd621-303">Restart the Apache service.</span></span>
+1. <span data-ttu-id="fc6e9-306">重新開機 Apache 服務。</span><span class="sxs-lookup"><span data-stu-id="fc6e9-306">Restart the Apache service.</span></span>
 
-<span data-ttu-id="fd621-304">如需詳細資訊，請參閱 [`mod_mime`](https://httpd.apache.org/docs/2.4/mod/mod_mime.html) 和 [`mod_deflate`](https://httpd.apache.org/docs/current/mod/mod_deflate.html)。</span><span class="sxs-lookup"><span data-stu-id="fd621-304">For more information, see [`mod_mime`](https://httpd.apache.org/docs/2.4/mod/mod_mime.html) and [`mod_deflate`](https://httpd.apache.org/docs/current/mod/mod_deflate.html).</span></span>
+<span data-ttu-id="fc6e9-307">如需詳細資訊，請參閱 [`mod_mime`](https://httpd.apache.org/docs/2.4/mod/mod_mime.html) 和 [`mod_deflate`](https://httpd.apache.org/docs/current/mod/mod_deflate.html)。</span><span class="sxs-lookup"><span data-stu-id="fc6e9-307">For more information, see [`mod_mime`](https://httpd.apache.org/docs/2.4/mod/mod_mime.html) and [`mod_deflate`](https://httpd.apache.org/docs/current/mod/mod_deflate.html).</span></span>
 
-### <a name="github-pages"></a><span data-ttu-id="fd621-305">GitHub 頁面</span><span class="sxs-lookup"><span data-stu-id="fd621-305">GitHub Pages</span></span>
+### <a name="github-pages"></a><span data-ttu-id="fc6e9-308">GitHub 頁面</span><span class="sxs-lookup"><span data-stu-id="fc6e9-308">GitHub Pages</span></span>
 
-<span data-ttu-id="fd621-306">若要處理 URL 重寫，請新增具有腳本的檔案，以處理將要求重新導向 `wwwroot/404.html` 至頁面的腳本 `index.html` 。</span><span class="sxs-lookup"><span data-stu-id="fd621-306">To handle URL rewrites, add a `wwwroot/404.html` file with a script that handles redirecting the request to the `index.html` page.</span></span> <span data-ttu-id="fd621-307">如需範例，請參閱 [SteveSandersonMS/ Blazor OnGitHubPages GitHub 存放庫](https://github.com/SteveSandersonMS/BlazorOnGitHubPages)：</span><span class="sxs-lookup"><span data-stu-id="fd621-307">For an example, see the [SteveSandersonMS/BlazorOnGitHubPages GitHub repository](https://github.com/SteveSandersonMS/BlazorOnGitHubPages):</span></span>
+<span data-ttu-id="fc6e9-309">若要處理 URL 重寫，請新增具有腳本的檔案，以處理將要求重新導向 `wwwroot/404.html` 至頁面的腳本 `index.html` 。</span><span class="sxs-lookup"><span data-stu-id="fc6e9-309">To handle URL rewrites, add a `wwwroot/404.html` file with a script that handles redirecting the request to the `index.html` page.</span></span> <span data-ttu-id="fc6e9-310">如需範例，請參閱 [SteveSandersonMS/ Blazor OnGitHubPages GitHub 存放庫](https://github.com/SteveSandersonMS/BlazorOnGitHubPages)：</span><span class="sxs-lookup"><span data-stu-id="fc6e9-310">For an example, see the [SteveSandersonMS/BlazorOnGitHubPages GitHub repository](https://github.com/SteveSandersonMS/BlazorOnGitHubPages):</span></span>
 
 * [`wwwroot/404.html`](https://github.com/SteveSandersonMS/BlazorOnGitHubPages/blob/master/wwwroot/404.html)
-* <span data-ttu-id="fd621-308">[即時網站](https://stevesandersonms.github.io/BlazorOnGitHubPages/)) </span><span class="sxs-lookup"><span data-stu-id="fd621-308">[Live site](https://stevesandersonms.github.io/BlazorOnGitHubPages/))</span></span>
+* <span data-ttu-id="fc6e9-311">[即時網站](https://stevesandersonms.github.io/BlazorOnGitHubPages/)) </span><span class="sxs-lookup"><span data-stu-id="fc6e9-311">[Live site](https://stevesandersonms.github.io/BlazorOnGitHubPages/))</span></span>
 
-<span data-ttu-id="fd621-309">使用專案網站而非組織網站時，請 `<base>` 在中更新標記 `wwwroot/index.html` 。</span><span class="sxs-lookup"><span data-stu-id="fd621-309">When using a project site instead of an organization site, update the `<base>` tag in `wwwroot/index.html`.</span></span> <span data-ttu-id="fd621-310">`href`使用尾端斜線將屬性值設定為 GitHub 存放庫名稱 (例如 `/my-repository/`) 。</span><span class="sxs-lookup"><span data-stu-id="fd621-310">Set the `href` attribute value to the GitHub repository name with a trailing slash (for example, `/my-repository/`).</span></span> <span data-ttu-id="fd621-311">在[SteveSandersonMS/ Blazor OnGitHubPages GitHub 存放庫](https://github.com/SteveSandersonMS/BlazorOnGitHubPages)中， `href` [ `.github/workflows/main.yml` 設定檔](https://github.com/SteveSandersonMS/BlazorOnGitHubPages/blob/master/.github/workflows/main.yml)會在發佈時更新基底。</span><span class="sxs-lookup"><span data-stu-id="fd621-311">In the [SteveSandersonMS/BlazorOnGitHubPages GitHub repository](https://github.com/SteveSandersonMS/BlazorOnGitHubPages), the base `href` is updated at publish by the [`.github/workflows/main.yml` configuration file](https://github.com/SteveSandersonMS/BlazorOnGitHubPages/blob/master/.github/workflows/main.yml).</span></span>
+<span data-ttu-id="fc6e9-312">使用專案網站而非組織網站時，請 `<base>` 在中更新標記 `wwwroot/index.html` 。</span><span class="sxs-lookup"><span data-stu-id="fc6e9-312">When using a project site instead of an organization site, update the `<base>` tag in `wwwroot/index.html`.</span></span> <span data-ttu-id="fc6e9-313">`href`使用尾端斜線將屬性值設定為 GitHub 存放庫名稱 (例如 `/my-repository/`) 。</span><span class="sxs-lookup"><span data-stu-id="fc6e9-313">Set the `href` attribute value to the GitHub repository name with a trailing slash (for example, `/my-repository/`).</span></span> <span data-ttu-id="fc6e9-314">在[SteveSandersonMS/ Blazor OnGitHubPages GitHub 存放庫](https://github.com/SteveSandersonMS/BlazorOnGitHubPages)中， `href` [ `.github/workflows/main.yml` 設定檔](https://github.com/SteveSandersonMS/BlazorOnGitHubPages/blob/master/.github/workflows/main.yml)會在發佈時更新基底。</span><span class="sxs-lookup"><span data-stu-id="fc6e9-314">In the [SteveSandersonMS/BlazorOnGitHubPages GitHub repository](https://github.com/SteveSandersonMS/BlazorOnGitHubPages), the base `href` is updated at publish by the [`.github/workflows/main.yml` configuration file](https://github.com/SteveSandersonMS/BlazorOnGitHubPages/blob/master/.github/workflows/main.yml).</span></span>
 
 > [!NOTE]
-> <span data-ttu-id="fd621-312">[SteveSandersonMS/ Blazor OnGitHubPages GitHub 存放庫](https://github.com/SteveSandersonMS/BlazorOnGitHubPages)並非由 .Net Foundation 或 Microsoft 所擁有、維護或支援。</span><span class="sxs-lookup"><span data-stu-id="fd621-312">The [SteveSandersonMS/BlazorOnGitHubPages GitHub repository](https://github.com/SteveSandersonMS/BlazorOnGitHubPages) isn't owned, maintained, or supported by the .NET Foundation or Microsoft.</span></span>
+> <span data-ttu-id="fc6e9-315">[SteveSandersonMS/ Blazor OnGitHubPages GitHub 存放庫](https://github.com/SteveSandersonMS/BlazorOnGitHubPages)並非由 .Net Foundation 或 Microsoft 所擁有、維護或支援。</span><span class="sxs-lookup"><span data-stu-id="fc6e9-315">The [SteveSandersonMS/BlazorOnGitHubPages GitHub repository](https://github.com/SteveSandersonMS/BlazorOnGitHubPages) isn't owned, maintained, or supported by the .NET Foundation or Microsoft.</span></span>
 
-## <a name="host-configuration-values"></a><span data-ttu-id="fd621-313">主機組態值</span><span class="sxs-lookup"><span data-stu-id="fd621-313">Host configuration values</span></span>
+## <a name="host-configuration-values"></a><span data-ttu-id="fc6e9-316">主機組態值</span><span class="sxs-lookup"><span data-stu-id="fc6e9-316">Host configuration values</span></span>
 
-<span data-ttu-id="fd621-314">在開發環境中， [ Blazor WebAssembly 應用程式](xref:blazor/hosting-models#blazor-webassembly)可以在執行時間接受下列主機配置值作為命令列引數。</span><span class="sxs-lookup"><span data-stu-id="fd621-314">[Blazor WebAssembly apps](xref:blazor/hosting-models#blazor-webassembly) can accept the following host configuration values as command-line arguments at runtime in the development environment.</span></span>
+<span data-ttu-id="fc6e9-317">在開發環境中， [ Blazor WebAssembly 應用程式](xref:blazor/hosting-models#blazor-webassembly)可以在執行時間接受下列主機配置值作為命令列引數。</span><span class="sxs-lookup"><span data-stu-id="fc6e9-317">[Blazor WebAssembly apps](xref:blazor/hosting-models#blazor-webassembly) can accept the following host configuration values as command-line arguments at runtime in the development environment.</span></span>
 
-### <a name="content-root"></a><span data-ttu-id="fd621-315">內容根目錄</span><span class="sxs-lookup"><span data-stu-id="fd621-315">Content root</span></span>
+### <a name="content-root"></a><span data-ttu-id="fc6e9-318">內容根目錄</span><span class="sxs-lookup"><span data-stu-id="fc6e9-318">Content root</span></span>
 
-<span data-ttu-id="fd621-316">`--contentroot`引數會將包含應用程式內容檔案的目錄絕對路徑設定 ([內容根目錄](xref:fundamentals/index#content-root)) 。</span><span class="sxs-lookup"><span data-stu-id="fd621-316">The `--contentroot` argument sets the absolute path to the directory that contains the app's content files ([content root](xref:fundamentals/index#content-root)).</span></span> <span data-ttu-id="fd621-317">在下列範例中，`/content-root-path` 是應用程式的內容根路徑。</span><span class="sxs-lookup"><span data-stu-id="fd621-317">In the following examples, `/content-root-path` is the app's content root path.</span></span>
+<span data-ttu-id="fc6e9-319">`--contentroot`引數會將包含應用程式內容檔案的目錄絕對路徑設定 ([內容根目錄](xref:fundamentals/index#content-root)) 。</span><span class="sxs-lookup"><span data-stu-id="fc6e9-319">The `--contentroot` argument sets the absolute path to the directory that contains the app's content files ([content root](xref:fundamentals/index#content-root)).</span></span> <span data-ttu-id="fc6e9-320">在下列範例中，`/content-root-path` 是應用程式的內容根路徑。</span><span class="sxs-lookup"><span data-stu-id="fc6e9-320">In the following examples, `/content-root-path` is the app's content root path.</span></span>
 
-* <span data-ttu-id="fd621-318">在命令提示字元，於本機執行應用程式時傳遞引數。</span><span class="sxs-lookup"><span data-stu-id="fd621-318">Pass the argument when running the app locally at a command prompt.</span></span> <span data-ttu-id="fd621-319">從應用程式目錄，執行：</span><span class="sxs-lookup"><span data-stu-id="fd621-319">From the app's directory, execute:</span></span>
+* <span data-ttu-id="fc6e9-321">在命令提示字元，於本機執行應用程式時傳遞引數。</span><span class="sxs-lookup"><span data-stu-id="fc6e9-321">Pass the argument when running the app locally at a command prompt.</span></span> <span data-ttu-id="fc6e9-322">從應用程式目錄，執行：</span><span class="sxs-lookup"><span data-stu-id="fc6e9-322">From the app's directory, execute:</span></span>
 
   ```dotnetcli
   dotnet run --contentroot=/content-root-path
   ```
 
-* <span data-ttu-id="fd621-320">`launchSettings.json`在**IIS Express**設定檔中，將專案新增至應用程式的檔案。</span><span class="sxs-lookup"><span data-stu-id="fd621-320">Add an entry to the app's `launchSettings.json` file in the **IIS Express** profile.</span></span> <span data-ttu-id="fd621-321">此設定的使用時機為當應用程式是搭配 Visual Studio 偵錯工具並以 `dotnet run` 從命令提示字元執行的情況。</span><span class="sxs-lookup"><span data-stu-id="fd621-321">This setting is used when the app is run with the Visual Studio Debugger and from a command prompt with `dotnet run`.</span></span>
+* <span data-ttu-id="fc6e9-323">`launchSettings.json`在**IIS Express**設定檔中，將專案新增至應用程式的檔案。</span><span class="sxs-lookup"><span data-stu-id="fc6e9-323">Add an entry to the app's `launchSettings.json` file in the **IIS Express** profile.</span></span> <span data-ttu-id="fc6e9-324">此設定的使用時機為當應用程式是搭配 Visual Studio 偵錯工具並以 `dotnet run` 從命令提示字元執行的情況。</span><span class="sxs-lookup"><span data-stu-id="fc6e9-324">This setting is used when the app is run with the Visual Studio Debugger and from a command prompt with `dotnet run`.</span></span>
 
   ```json
   "commandLineArgs": "--contentroot=/content-root-path"
   ```
 
-* <span data-ttu-id="fd621-322">在 Visual Studio 中，于 [**屬性**]  >  **調試**  >  **程式引數**中指定引數。</span><span class="sxs-lookup"><span data-stu-id="fd621-322">In Visual Studio, specify the argument in **Properties** > **Debug** > **Application arguments**.</span></span> <span data-ttu-id="fd621-323">在 [Visual Studio] 屬性頁中設定引數，會將引數新增至檔案 `launchSettings.json` 。</span><span class="sxs-lookup"><span data-stu-id="fd621-323">Setting the argument in the Visual Studio property page adds the argument to the `launchSettings.json` file.</span></span>
+* <span data-ttu-id="fc6e9-325">在 Visual Studio 中，于 [**屬性**]  >  **調試**  >  **程式引數**中指定引數。</span><span class="sxs-lookup"><span data-stu-id="fc6e9-325">In Visual Studio, specify the argument in **Properties** > **Debug** > **Application arguments**.</span></span> <span data-ttu-id="fc6e9-326">在 [Visual Studio] 屬性頁中設定引數，會將引數新增至檔案 `launchSettings.json` 。</span><span class="sxs-lookup"><span data-stu-id="fc6e9-326">Setting the argument in the Visual Studio property page adds the argument to the `launchSettings.json` file.</span></span>
 
   ```console
   --contentroot=/content-root-path
   ```
 
-### <a name="path-base"></a><span data-ttu-id="fd621-324">路徑基底</span><span class="sxs-lookup"><span data-stu-id="fd621-324">Path base</span></span>
+### <a name="path-base"></a><span data-ttu-id="fc6e9-327">路徑基底</span><span class="sxs-lookup"><span data-stu-id="fc6e9-327">Path base</span></span>
 
-<span data-ttu-id="fd621-325">`--pathbase`引數會將應用程式的應用程式基底路徑設定為使用非根相對 URL 路徑在本機執行 (將 `<base>` `href` 標籤設定為 `/` 暫存和生產) 以外的路徑。</span><span class="sxs-lookup"><span data-stu-id="fd621-325">The `--pathbase` argument sets the app base path for an app run locally with a non-root relative URL path (the `<base>` tag `href` is set to a path other than `/` for staging and production).</span></span> <span data-ttu-id="fd621-326">在下列範例中，`/relative-URL-path` 是應用程式的路徑基底。</span><span class="sxs-lookup"><span data-stu-id="fd621-326">In the following examples, `/relative-URL-path` is the app's path base.</span></span> <span data-ttu-id="fd621-327">如需詳細資訊，請參閱 [應用程式基底路徑](xref:blazor/host-and-deploy/index#app-base-path)。</span><span class="sxs-lookup"><span data-stu-id="fd621-327">For more information, see [App base path](xref:blazor/host-and-deploy/index#app-base-path).</span></span>
+<span data-ttu-id="fc6e9-328">`--pathbase`引數會將應用程式的應用程式基底路徑設定為使用非根相對 URL 路徑在本機執行 (將 `<base>` `href` 標籤設定為 `/` 暫存和生產) 以外的路徑。</span><span class="sxs-lookup"><span data-stu-id="fc6e9-328">The `--pathbase` argument sets the app base path for an app run locally with a non-root relative URL path (the `<base>` tag `href` is set to a path other than `/` for staging and production).</span></span> <span data-ttu-id="fc6e9-329">在下列範例中，`/relative-URL-path` 是應用程式的路徑基底。</span><span class="sxs-lookup"><span data-stu-id="fc6e9-329">In the following examples, `/relative-URL-path` is the app's path base.</span></span> <span data-ttu-id="fc6e9-330">如需詳細資訊，請參閱 [應用程式基底路徑](xref:blazor/host-and-deploy/index#app-base-path)。</span><span class="sxs-lookup"><span data-stu-id="fc6e9-330">For more information, see [App base path](xref:blazor/host-and-deploy/index#app-base-path).</span></span>
 
 > [!IMPORTANT]
-> <span data-ttu-id="fd621-328">不同於提供給 `<base>` 標籤 `href` 的路徑，在傳遞 `--pathbase` 引數值時請勿包含尾端的斜線 (`/`)。</span><span class="sxs-lookup"><span data-stu-id="fd621-328">Unlike the path provided to `href` of the `<base>` tag, don't include a trailing slash (`/`) when passing the `--pathbase` argument value.</span></span> <span data-ttu-id="fd621-329">如果應用程式基底路徑提供於 `<base>` 標籤作為 `<base href="/CoolApp/">` (包括尾端的斜線)，請將命令列引數值傳遞為 `--pathbase=/CoolApp` (不含尾端的斜線)。</span><span class="sxs-lookup"><span data-stu-id="fd621-329">If the app base path is provided in the `<base>` tag as `<base href="/CoolApp/">` (includes a trailing slash), pass the command-line argument value as `--pathbase=/CoolApp` (no trailing slash).</span></span>
+> <span data-ttu-id="fc6e9-331">不同於提供給 `<base>` 標籤 `href` 的路徑，在傳遞 `--pathbase` 引數值時請勿包含尾端的斜線 (`/`)。</span><span class="sxs-lookup"><span data-stu-id="fc6e9-331">Unlike the path provided to `href` of the `<base>` tag, don't include a trailing slash (`/`) when passing the `--pathbase` argument value.</span></span> <span data-ttu-id="fc6e9-332">如果應用程式基底路徑提供於 `<base>` 標籤作為 `<base href="/CoolApp/">` (包括尾端的斜線)，請將命令列引數值傳遞為 `--pathbase=/CoolApp` (不含尾端的斜線)。</span><span class="sxs-lookup"><span data-stu-id="fc6e9-332">If the app base path is provided in the `<base>` tag as `<base href="/CoolApp/">` (includes a trailing slash), pass the command-line argument value as `--pathbase=/CoolApp` (no trailing slash).</span></span>
 
-* <span data-ttu-id="fd621-330">在命令提示字元，於本機執行應用程式時傳遞引數。</span><span class="sxs-lookup"><span data-stu-id="fd621-330">Pass the argument when running the app locally at a command prompt.</span></span> <span data-ttu-id="fd621-331">從應用程式目錄，執行：</span><span class="sxs-lookup"><span data-stu-id="fd621-331">From the app's directory, execute:</span></span>
+* <span data-ttu-id="fc6e9-333">在命令提示字元，於本機執行應用程式時傳遞引數。</span><span class="sxs-lookup"><span data-stu-id="fc6e9-333">Pass the argument when running the app locally at a command prompt.</span></span> <span data-ttu-id="fc6e9-334">從應用程式目錄，執行：</span><span class="sxs-lookup"><span data-stu-id="fc6e9-334">From the app's directory, execute:</span></span>
 
   ```dotnetcli
   dotnet run --pathbase=/relative-URL-path
   ```
 
-* <span data-ttu-id="fd621-332">`launchSettings.json`在**IIS Express**設定檔中，將專案新增至應用程式的檔案。</span><span class="sxs-lookup"><span data-stu-id="fd621-332">Add an entry to the app's `launchSettings.json` file in the **IIS Express** profile.</span></span> <span data-ttu-id="fd621-333">此設定的使用時機為當應用程式是搭配 Visual Studio 偵錯工具並以 `dotnet run` 從命令提示字元執行的情況。</span><span class="sxs-lookup"><span data-stu-id="fd621-333">This setting is used when running the app with the Visual Studio Debugger and from a command prompt with `dotnet run`.</span></span>
+* <span data-ttu-id="fc6e9-335">`launchSettings.json`在**IIS Express**設定檔中，將專案新增至應用程式的檔案。</span><span class="sxs-lookup"><span data-stu-id="fc6e9-335">Add an entry to the app's `launchSettings.json` file in the **IIS Express** profile.</span></span> <span data-ttu-id="fc6e9-336">此設定的使用時機為當應用程式是搭配 Visual Studio 偵錯工具並以 `dotnet run` 從命令提示字元執行的情況。</span><span class="sxs-lookup"><span data-stu-id="fc6e9-336">This setting is used when running the app with the Visual Studio Debugger and from a command prompt with `dotnet run`.</span></span>
 
   ```json
   "commandLineArgs": "--pathbase=/relative-URL-path"
   ```
 
-* <span data-ttu-id="fd621-334">在 Visual Studio 中，于 [**屬性**]  >  **調試**  >  **程式引數**中指定引數。</span><span class="sxs-lookup"><span data-stu-id="fd621-334">In Visual Studio, specify the argument in **Properties** > **Debug** > **Application arguments**.</span></span> <span data-ttu-id="fd621-335">在 [Visual Studio] 屬性頁中設定引數，會將引數新增至檔案 `launchSettings.json` 。</span><span class="sxs-lookup"><span data-stu-id="fd621-335">Setting the argument in the Visual Studio property page adds the argument to the `launchSettings.json` file.</span></span>
+* <span data-ttu-id="fc6e9-337">在 Visual Studio 中，于 [**屬性**]  >  **調試**  >  **程式引數**中指定引數。</span><span class="sxs-lookup"><span data-stu-id="fc6e9-337">In Visual Studio, specify the argument in **Properties** > **Debug** > **Application arguments**.</span></span> <span data-ttu-id="fc6e9-338">在 [Visual Studio] 屬性頁中設定引數，會將引數新增至檔案 `launchSettings.json` 。</span><span class="sxs-lookup"><span data-stu-id="fc6e9-338">Setting the argument in the Visual Studio property page adds the argument to the `launchSettings.json` file.</span></span>
 
   ```console
   --pathbase=/relative-URL-path
   ```
 
-### <a name="urls"></a><span data-ttu-id="fd621-336">URL</span><span class="sxs-lookup"><span data-stu-id="fd621-336">URLs</span></span>
+### <a name="urls"></a><span data-ttu-id="fc6e9-339">URL</span><span class="sxs-lookup"><span data-stu-id="fc6e9-339">URLs</span></span>
 
-<span data-ttu-id="fd621-337">`--urls` 引數會搭配要用來接聽要求的連接埠和通訊協定，設定 IP 位址或主機位址。</span><span class="sxs-lookup"><span data-stu-id="fd621-337">The `--urls` argument sets the IP addresses or host addresses with ports and protocols to listen on for requests.</span></span>
+<span data-ttu-id="fc6e9-340">`--urls` 引數會搭配要用來接聽要求的連接埠和通訊協定，設定 IP 位址或主機位址。</span><span class="sxs-lookup"><span data-stu-id="fc6e9-340">The `--urls` argument sets the IP addresses or host addresses with ports and protocols to listen on for requests.</span></span>
 
-* <span data-ttu-id="fd621-338">在命令提示字元，於本機執行應用程式時傳遞引數。</span><span class="sxs-lookup"><span data-stu-id="fd621-338">Pass the argument when running the app locally at a command prompt.</span></span> <span data-ttu-id="fd621-339">從應用程式目錄，執行：</span><span class="sxs-lookup"><span data-stu-id="fd621-339">From the app's directory, execute:</span></span>
+* <span data-ttu-id="fc6e9-341">在命令提示字元，於本機執行應用程式時傳遞引數。</span><span class="sxs-lookup"><span data-stu-id="fc6e9-341">Pass the argument when running the app locally at a command prompt.</span></span> <span data-ttu-id="fc6e9-342">從應用程式目錄，執行：</span><span class="sxs-lookup"><span data-stu-id="fc6e9-342">From the app's directory, execute:</span></span>
 
   ```dotnetcli
   dotnet run --urls=http://127.0.0.1:0
   ```
 
-* <span data-ttu-id="fd621-340">`launchSettings.json`在**IIS Express**設定檔中，將專案新增至應用程式的檔案。</span><span class="sxs-lookup"><span data-stu-id="fd621-340">Add an entry to the app's `launchSettings.json` file in the **IIS Express** profile.</span></span> <span data-ttu-id="fd621-341">此設定的使用時機為當應用程式是搭配 Visual Studio 偵錯工具並以 `dotnet run` 從命令提示字元執行的情況。</span><span class="sxs-lookup"><span data-stu-id="fd621-341">This setting is used when running the app with the Visual Studio Debugger and from a command prompt with `dotnet run`.</span></span>
+* <span data-ttu-id="fc6e9-343">`launchSettings.json`在**IIS Express**設定檔中，將專案新增至應用程式的檔案。</span><span class="sxs-lookup"><span data-stu-id="fc6e9-343">Add an entry to the app's `launchSettings.json` file in the **IIS Express** profile.</span></span> <span data-ttu-id="fc6e9-344">此設定的使用時機為當應用程式是搭配 Visual Studio 偵錯工具並以 `dotnet run` 從命令提示字元執行的情況。</span><span class="sxs-lookup"><span data-stu-id="fc6e9-344">This setting is used when running the app with the Visual Studio Debugger and from a command prompt with `dotnet run`.</span></span>
 
   ```json
   "commandLineArgs": "--urls=http://127.0.0.1:0"
   ```
 
-* <span data-ttu-id="fd621-342">在 Visual Studio 中，于 [**屬性**]  >  **調試**  >  **程式引數**中指定引數。</span><span class="sxs-lookup"><span data-stu-id="fd621-342">In Visual Studio, specify the argument in **Properties** > **Debug** > **Application arguments**.</span></span> <span data-ttu-id="fd621-343">在 [Visual Studio] 屬性頁中設定引數，會將引數新增至檔案 `launchSettings.json` 。</span><span class="sxs-lookup"><span data-stu-id="fd621-343">Setting the argument in the Visual Studio property page adds the argument to the `launchSettings.json` file.</span></span>
+* <span data-ttu-id="fc6e9-345">在 Visual Studio 中，于 [**屬性**]  >  **調試**  >  **程式引數**中指定引數。</span><span class="sxs-lookup"><span data-stu-id="fc6e9-345">In Visual Studio, specify the argument in **Properties** > **Debug** > **Application arguments**.</span></span> <span data-ttu-id="fc6e9-346">在 [Visual Studio] 屬性頁中設定引數，會將引數新增至檔案 `launchSettings.json` 。</span><span class="sxs-lookup"><span data-stu-id="fc6e9-346">Setting the argument in the Visual Studio property page adds the argument to the `launchSettings.json` file.</span></span>
 
   ```console
   --urls=http://127.0.0.1:0
@@ -710,44 +714,44 @@ COPY nginx.conf /etc/nginx/nginx.conf
 
 ::: moniker range=">= aspnetcore-5.0"
 
-## <a name="configure-the-trimmer"></a><span data-ttu-id="fd621-344">設定修剪器</span><span class="sxs-lookup"><span data-stu-id="fd621-344">Configure the Trimmer</span></span>
+## <a name="configure-the-trimmer"></a><span data-ttu-id="fc6e9-347">設定修剪器</span><span class="sxs-lookup"><span data-stu-id="fc6e9-347">Configure the Trimmer</span></span>
 
-<span data-ttu-id="fd621-345">Blazor 在每個發行組建上執行中繼語言 (IL) 修剪，以從輸出元件中移除不必要的 IL。</span><span class="sxs-lookup"><span data-stu-id="fd621-345">Blazor performs Intermediate Language (IL) trimming on each Release build to remove unnecessary IL from the output assemblies.</span></span> <span data-ttu-id="fd621-346">如需詳細資訊，請參閱<xref:blazor/host-and-deploy/configure-trimmer>。</span><span class="sxs-lookup"><span data-stu-id="fd621-346">For more information, see <xref:blazor/host-and-deploy/configure-trimmer>.</span></span>
+<span data-ttu-id="fc6e9-348">Blazor 在每個發行組建上執行中繼語言 (IL) 修剪，以從輸出元件中移除不必要的 IL。</span><span class="sxs-lookup"><span data-stu-id="fc6e9-348">Blazor performs Intermediate Language (IL) trimming on each Release build to remove unnecessary IL from the output assemblies.</span></span> <span data-ttu-id="fc6e9-349">如需詳細資訊，請參閱<xref:blazor/host-and-deploy/configure-trimmer>。</span><span class="sxs-lookup"><span data-stu-id="fc6e9-349">For more information, see <xref:blazor/host-and-deploy/configure-trimmer>.</span></span>
 
 ::: moniker-end
 
 ::: moniker range="< aspnetcore-5.0"
 
-## <a name="configure-the-linker"></a><span data-ttu-id="fd621-347">設定連結器</span><span class="sxs-lookup"><span data-stu-id="fd621-347">Configure the Linker</span></span>
+## <a name="configure-the-linker"></a><span data-ttu-id="fc6e9-350">設定連結器</span><span class="sxs-lookup"><span data-stu-id="fc6e9-350">Configure the Linker</span></span>
 
-<span data-ttu-id="fd621-348">Blazor 在每個發行組建上執行中繼語言 (IL) 連結，以從輸出元件中移除不必要的 IL。</span><span class="sxs-lookup"><span data-stu-id="fd621-348">Blazor performs Intermediate Language (IL) linking on each Release build to remove unnecessary IL from the output assemblies.</span></span> <span data-ttu-id="fd621-349">如需詳細資訊，請參閱<xref:blazor/host-and-deploy/configure-linker>。</span><span class="sxs-lookup"><span data-stu-id="fd621-349">For more information, see <xref:blazor/host-and-deploy/configure-linker>.</span></span>
+<span data-ttu-id="fc6e9-351">Blazor 在每個發行組建上執行中繼語言 (IL) 連結，以從輸出元件中移除不必要的 IL。</span><span class="sxs-lookup"><span data-stu-id="fc6e9-351">Blazor performs Intermediate Language (IL) linking on each Release build to remove unnecessary IL from the output assemblies.</span></span> <span data-ttu-id="fc6e9-352">如需詳細資訊，請參閱<xref:blazor/host-and-deploy/configure-linker>。</span><span class="sxs-lookup"><span data-stu-id="fc6e9-352">For more information, see <xref:blazor/host-and-deploy/configure-linker>.</span></span>
 
 ::: moniker-end
 
-## <a name="custom-boot-resource-loading"></a><span data-ttu-id="fd621-350">自訂開機資源載入</span><span class="sxs-lookup"><span data-stu-id="fd621-350">Custom boot resource loading</span></span>
+## <a name="custom-boot-resource-loading"></a><span data-ttu-id="fc6e9-353">自訂開機資源載入</span><span class="sxs-lookup"><span data-stu-id="fc6e9-353">Custom boot resource loading</span></span>
 
-<span data-ttu-id="fd621-351">您 Blazor WebAssembly 可以使用函式來初始化應用程式 `loadBootResource` ，以覆寫內建的開機資源載入機制。</span><span class="sxs-lookup"><span data-stu-id="fd621-351">A Blazor WebAssembly app can be initialized with the `loadBootResource` function to override the built-in boot resource loading mechanism.</span></span> <span data-ttu-id="fd621-352">用於 `loadBootResource` 下列案例：</span><span class="sxs-lookup"><span data-stu-id="fd621-352">Use `loadBootResource` for the following scenarios:</span></span>
+<span data-ttu-id="fc6e9-354">您 Blazor WebAssembly 可以使用函式來初始化應用程式 `loadBootResource` ，以覆寫內建的開機資源載入機制。</span><span class="sxs-lookup"><span data-stu-id="fc6e9-354">A Blazor WebAssembly app can be initialized with the `loadBootResource` function to override the built-in boot resource loading mechanism.</span></span> <span data-ttu-id="fc6e9-355">用於 `loadBootResource` 下列案例：</span><span class="sxs-lookup"><span data-stu-id="fc6e9-355">Use `loadBootResource` for the following scenarios:</span></span>
 
-* <span data-ttu-id="fd621-353">允許使用者載入靜態資源，例如時區資料或 `dotnet.wasm` CDN。</span><span class="sxs-lookup"><span data-stu-id="fd621-353">Allow users to load static resources, such as timezone data or `dotnet.wasm` from a CDN.</span></span>
-* <span data-ttu-id="fd621-354">使用 HTTP 要求載入壓縮的元件，並在不支援從伺服器提取壓縮內容的主機用戶端上解壓縮這些元件。</span><span class="sxs-lookup"><span data-stu-id="fd621-354">Load compressed assemblies using an HTTP request and decompress them on the client for hosts that don't support fetching compressed contents from the server.</span></span>
-* <span data-ttu-id="fd621-355">將每個要求重新導向至新名稱，將別名資源重新導向至不同的名稱 `fetch` 。</span><span class="sxs-lookup"><span data-stu-id="fd621-355">Alias resources to a different name by redirecting each `fetch` request to a new name.</span></span>
+* <span data-ttu-id="fc6e9-356">允許使用者載入靜態資源，例如時區資料或 `dotnet.wasm` CDN。</span><span class="sxs-lookup"><span data-stu-id="fc6e9-356">Allow users to load static resources, such as timezone data or `dotnet.wasm` from a CDN.</span></span>
+* <span data-ttu-id="fc6e9-357">使用 HTTP 要求載入壓縮的元件，並在不支援從伺服器提取壓縮內容的主機用戶端上解壓縮這些元件。</span><span class="sxs-lookup"><span data-stu-id="fc6e9-357">Load compressed assemblies using an HTTP request and decompress them on the client for hosts that don't support fetching compressed contents from the server.</span></span>
+* <span data-ttu-id="fc6e9-358">將每個要求重新導向至新名稱，將別名資源重新導向至不同的名稱 `fetch` 。</span><span class="sxs-lookup"><span data-stu-id="fc6e9-358">Alias resources to a different name by redirecting each `fetch` request to a new name.</span></span>
 
-<span data-ttu-id="fd621-356">`loadBootResource` 參數會出現在下表中。</span><span class="sxs-lookup"><span data-stu-id="fd621-356">`loadBootResource` parameters appear in the following table.</span></span>
+<span data-ttu-id="fc6e9-359">`loadBootResource` 參數會出現在下表中。</span><span class="sxs-lookup"><span data-stu-id="fc6e9-359">`loadBootResource` parameters appear in the following table.</span></span>
 
-| <span data-ttu-id="fd621-357">參數</span><span class="sxs-lookup"><span data-stu-id="fd621-357">Parameter</span></span>    | <span data-ttu-id="fd621-358">描述</span><span class="sxs-lookup"><span data-stu-id="fd621-358">Description</span></span> |
+| <span data-ttu-id="fc6e9-360">參數</span><span class="sxs-lookup"><span data-stu-id="fc6e9-360">Parameter</span></span>    | <span data-ttu-id="fc6e9-361">描述</span><span class="sxs-lookup"><span data-stu-id="fc6e9-361">Description</span></span> |
 | ------------ | ----------- |
-| `type`       | <span data-ttu-id="fd621-359">資源類型。</span><span class="sxs-lookup"><span data-stu-id="fd621-359">The type of the resource.</span></span> <span data-ttu-id="fd621-360">運算子類型： `assembly` 、 `pdb` 、 `dotnetjs` 、 `dotnetwasm` 、 `timezonedata`</span><span class="sxs-lookup"><span data-stu-id="fd621-360">Permissable types: `assembly`, `pdb`, `dotnetjs`, `dotnetwasm`, `timezonedata`</span></span> |
-| `name`       | <span data-ttu-id="fd621-361">資源名稱。</span><span class="sxs-lookup"><span data-stu-id="fd621-361">The name of the resource.</span></span> |
-| `defaultUri` | <span data-ttu-id="fd621-362">資源的相對或絕對 URI。</span><span class="sxs-lookup"><span data-stu-id="fd621-362">The relative or absolute URI of the resource.</span></span> |
-| `integrity`  | <span data-ttu-id="fd621-363">代表回應中預期內容的完整性字串。</span><span class="sxs-lookup"><span data-stu-id="fd621-363">The integrity string representing the expected content in the response.</span></span> |
+| `type`       | <span data-ttu-id="fc6e9-362">資源類型。</span><span class="sxs-lookup"><span data-stu-id="fc6e9-362">The type of the resource.</span></span> <span data-ttu-id="fc6e9-363">運算子類型： `assembly` 、 `pdb` 、 `dotnetjs` 、 `dotnetwasm` 、 `timezonedata`</span><span class="sxs-lookup"><span data-stu-id="fc6e9-363">Permissable types: `assembly`, `pdb`, `dotnetjs`, `dotnetwasm`, `timezonedata`</span></span> |
+| `name`       | <span data-ttu-id="fc6e9-364">資源名稱。</span><span class="sxs-lookup"><span data-stu-id="fc6e9-364">The name of the resource.</span></span> |
+| `defaultUri` | <span data-ttu-id="fc6e9-365">資源的相對或絕對 URI。</span><span class="sxs-lookup"><span data-stu-id="fc6e9-365">The relative or absolute URI of the resource.</span></span> |
+| `integrity`  | <span data-ttu-id="fc6e9-366">代表回應中預期內容的完整性字串。</span><span class="sxs-lookup"><span data-stu-id="fc6e9-366">The integrity string representing the expected content in the response.</span></span> |
 
-<span data-ttu-id="fd621-364">`loadBootResource` 傳回下列任一項以覆寫載入進程：</span><span class="sxs-lookup"><span data-stu-id="fd621-364">`loadBootResource` returns any of the following to override the loading process:</span></span>
+<span data-ttu-id="fc6e9-367">`loadBootResource` 傳回下列任一項以覆寫載入進程：</span><span class="sxs-lookup"><span data-stu-id="fc6e9-367">`loadBootResource` returns any of the following to override the loading process:</span></span>
 
-* <span data-ttu-id="fd621-365">URI 字串。</span><span class="sxs-lookup"><span data-stu-id="fd621-365">URI string.</span></span> <span data-ttu-id="fd621-366">在下列範例 (`wwwroot/index.html`) 中，從 CDN 提供下列檔案 `https://my-awesome-cdn.com/` ：</span><span class="sxs-lookup"><span data-stu-id="fd621-366">In the following example (`wwwroot/index.html`), the following files are served from a CDN at `https://my-awesome-cdn.com/`:</span></span>
+* <span data-ttu-id="fc6e9-368">URI 字串。</span><span class="sxs-lookup"><span data-stu-id="fc6e9-368">URI string.</span></span> <span data-ttu-id="fc6e9-369">在下列範例 (`wwwroot/index.html`) 中，從 CDN 提供下列檔案 `https://my-awesome-cdn.com/` ：</span><span class="sxs-lookup"><span data-stu-id="fc6e9-369">In the following example (`wwwroot/index.html`), the following files are served from a CDN at `https://my-awesome-cdn.com/`:</span></span>
 
   * `dotnet.*.js`
   * `dotnet.wasm`
-  * <span data-ttu-id="fd621-367">時區資料</span><span class="sxs-lookup"><span data-stu-id="fd621-367">Timezone data</span></span>
+  * <span data-ttu-id="fc6e9-370">時區資料</span><span class="sxs-lookup"><span data-stu-id="fc6e9-370">Timezone data</span></span>
 
   ```html
   ...
@@ -768,9 +772,9 @@ COPY nginx.conf /etc/nginx/nginx.conf
   </script>
   ```
 
-* <span data-ttu-id="fd621-368">`Promise<Response>`.</span><span class="sxs-lookup"><span data-stu-id="fd621-368">`Promise<Response>`.</span></span> <span data-ttu-id="fd621-369">`integrity`在標頭中傳遞參數，以保留預設的完整性檢查行為。</span><span class="sxs-lookup"><span data-stu-id="fd621-369">Pass the `integrity` parameter in a header to retain the default integrity-checking behavior.</span></span>
+* <span data-ttu-id="fc6e9-371">`Promise<Response>`.</span><span class="sxs-lookup"><span data-stu-id="fc6e9-371">`Promise<Response>`.</span></span> <span data-ttu-id="fc6e9-372">`integrity`在標頭中傳遞參數，以保留預設的完整性檢查行為。</span><span class="sxs-lookup"><span data-stu-id="fc6e9-372">Pass the `integrity` parameter in a header to retain the default integrity-checking behavior.</span></span>
 
-  <span data-ttu-id="fd621-370">下列範例 (`wwwroot/index.html`) 將自訂 HTTP 標頭新增至輸出要求，並將 `integrity` 參數傳遞至 `fetch` 呼叫：</span><span class="sxs-lookup"><span data-stu-id="fd621-370">The following example (`wwwroot/index.html`) adds a custom HTTP header to the outbound requests and passes the `integrity` parameter through to the `fetch` call:</span></span>
+  <span data-ttu-id="fc6e9-373">下列範例 (`wwwroot/index.html`) 將自訂 HTTP 標頭新增至輸出要求，並將 `integrity` 參數傳遞至 `fetch` 呼叫：</span><span class="sxs-lookup"><span data-stu-id="fc6e9-373">The following example (`wwwroot/index.html`) adds a custom HTTP header to the outbound requests and passes the `integrity` parameter through to the `fetch` call:</span></span>
   
   ```html
   <script src="_framework/blazor.webassembly.js" autostart="false"></script>
@@ -787,58 +791,58 @@ COPY nginx.conf /etc/nginx/nginx.conf
   </script>
   ```
 
-* <span data-ttu-id="fd621-371">`null`/`undefined`，這會導致預設的載入行為。</span><span class="sxs-lookup"><span data-stu-id="fd621-371">`null`/`undefined`, which results in the default loading behavior.</span></span>
+* <span data-ttu-id="fc6e9-374">`null`/`undefined`，這會導致預設的載入行為。</span><span class="sxs-lookup"><span data-stu-id="fc6e9-374">`null`/`undefined`, which results in the default loading behavior.</span></span>
 
-<span data-ttu-id="fd621-372">外部來源必須傳回瀏覽器所需的 CORS 標頭，以允許跨原始來源資源載入。</span><span class="sxs-lookup"><span data-stu-id="fd621-372">External sources must return the required CORS headers for browsers to allow the cross-origin resource loading.</span></span> <span data-ttu-id="fd621-373">依預設，Cdn 通常會提供必要的標頭。</span><span class="sxs-lookup"><span data-stu-id="fd621-373">CDNs usually provide the required headers by default.</span></span>
+<span data-ttu-id="fc6e9-375">外部來源必須傳回瀏覽器所需的 CORS 標頭，以允許跨原始來源資源載入。</span><span class="sxs-lookup"><span data-stu-id="fc6e9-375">External sources must return the required CORS headers for browsers to allow the cross-origin resource loading.</span></span> <span data-ttu-id="fc6e9-376">依預設，Cdn 通常會提供必要的標頭。</span><span class="sxs-lookup"><span data-stu-id="fc6e9-376">CDNs usually provide the required headers by default.</span></span>
 
-<span data-ttu-id="fd621-374">您只需要指定自訂行為的類型。</span><span class="sxs-lookup"><span data-stu-id="fd621-374">You only need to specify types for custom behaviors.</span></span> <span data-ttu-id="fd621-375">未指定的類型 `loadBootResource` 會根據其預設載入行為載入架構。</span><span class="sxs-lookup"><span data-stu-id="fd621-375">Types not specified to `loadBootResource` are loaded by the framework per their default loading behaviors.</span></span>
+<span data-ttu-id="fc6e9-377">您只需要指定自訂行為的類型。</span><span class="sxs-lookup"><span data-stu-id="fc6e9-377">You only need to specify types for custom behaviors.</span></span> <span data-ttu-id="fc6e9-378">未指定的類型 `loadBootResource` 會根據其預設載入行為載入架構。</span><span class="sxs-lookup"><span data-stu-id="fc6e9-378">Types not specified to `loadBootResource` are loaded by the framework per their default loading behaviors.</span></span>
 
-## <a name="change-the-filename-extension-of-dll-files"></a><span data-ttu-id="fd621-376">變更 DLL 檔案的副檔名</span><span class="sxs-lookup"><span data-stu-id="fd621-376">Change the filename extension of DLL files</span></span>
+## <a name="change-the-filename-extension-of-dll-files"></a><span data-ttu-id="fc6e9-379">變更 DLL 檔案的副檔名</span><span class="sxs-lookup"><span data-stu-id="fc6e9-379">Change the filename extension of DLL files</span></span>
 
-<span data-ttu-id="fd621-377">如果您需要變更應用程式已發佈檔案的副檔名 `.dll` ，請遵循本節中的指導方針。</span><span class="sxs-lookup"><span data-stu-id="fd621-377">In case you have a need to change the filename extensions of the app's published `.dll` files, follow the guidance in this section.</span></span>
+<span data-ttu-id="fc6e9-380">如果您需要變更應用程式已發佈檔案的副檔名 `.dll` ，請遵循本節中的指導方針。</span><span class="sxs-lookup"><span data-stu-id="fc6e9-380">In case you have a need to change the filename extensions of the app's published `.dll` files, follow the guidance in this section.</span></span>
 
-<span data-ttu-id="fd621-378">發佈應用程式之後，請使用 shell 腳本或 DevOps 組建管線，將檔案重新命名 `.dll` 以使用不同的副檔名。</span><span class="sxs-lookup"><span data-stu-id="fd621-378">After publishing the app, use a shell script or DevOps build pipeline to rename `.dll` files to use a different file extension.</span></span> <span data-ttu-id="fd621-379">以 `.dll` `wwwroot` 應用程式發佈輸出的目錄中的檔案為目標 (例如 `{CONTENT ROOT}/bin/Release/netstandard2.1/publish/wwwroot`) 。</span><span class="sxs-lookup"><span data-stu-id="fd621-379">Target the `.dll` files in the `wwwroot` directory of the app's published output (for example, `{CONTENT ROOT}/bin/Release/netstandard2.1/publish/wwwroot`).</span></span>
+<span data-ttu-id="fc6e9-381">發佈應用程式之後，請使用 shell 腳本或 DevOps 組建管線，將檔案重新命名 `.dll` 以使用不同的副檔名。</span><span class="sxs-lookup"><span data-stu-id="fc6e9-381">After publishing the app, use a shell script or DevOps build pipeline to rename `.dll` files to use a different file extension.</span></span> <span data-ttu-id="fc6e9-382">以 `.dll` `wwwroot` 應用程式發佈輸出的目錄中的檔案為目標 (例如 `{CONTENT ROOT}/bin/Release/netstandard2.1/publish/wwwroot`) 。</span><span class="sxs-lookup"><span data-stu-id="fc6e9-382">Target the `.dll` files in the `wwwroot` directory of the app's published output (for example, `{CONTENT ROOT}/bin/Release/netstandard2.1/publish/wwwroot`).</span></span>
 
-<span data-ttu-id="fd621-380">在下列範例中， `.dll` 會將檔案重新命名為使用 `.bin` 副檔名。</span><span class="sxs-lookup"><span data-stu-id="fd621-380">In the following examples, `.dll` files are renamed to use the `.bin` file extension.</span></span>
+<span data-ttu-id="fc6e9-383">在下列範例中， `.dll` 會將檔案重新命名為使用 `.bin` 副檔名。</span><span class="sxs-lookup"><span data-stu-id="fc6e9-383">In the following examples, `.dll` files are renamed to use the `.bin` file extension.</span></span>
 
-<span data-ttu-id="fd621-381">在 Windows 上：</span><span class="sxs-lookup"><span data-stu-id="fd621-381">On Windows:</span></span>
+<span data-ttu-id="fc6e9-384">在 Windows 上：</span><span class="sxs-lookup"><span data-stu-id="fc6e9-384">On Windows:</span></span>
 
 ```powershell
 dir .\_framework\_bin | rename-item -NewName { $_.name -replace ".dll\b",".bin" }
 ((Get-Content .\_framework\blazor.boot.json -Raw) -replace '.dll"','.bin"') | Set-Content .\_framework\blazor.boot.json
 ```
 
-<span data-ttu-id="fd621-382">如果服務工作者資產也在使用中，請新增下列命令：</span><span class="sxs-lookup"><span data-stu-id="fd621-382">If service worker assets are also in use, add the following command:</span></span>
+<span data-ttu-id="fc6e9-385">如果服務工作者資產也在使用中，請新增下列命令：</span><span class="sxs-lookup"><span data-stu-id="fc6e9-385">If service worker assets are also in use, add the following command:</span></span>
 
 ```powershell
 ((Get-Content .\service-worker-assets.js -Raw) -replace '.dll"','.bin"') | Set-Content .\service-worker-assets.js
 ```
 
-<span data-ttu-id="fd621-383">在 Linux 或 macOS 上：</span><span class="sxs-lookup"><span data-stu-id="fd621-383">On Linux or macOS:</span></span>
+<span data-ttu-id="fc6e9-386">在 Linux 或 macOS 上：</span><span class="sxs-lookup"><span data-stu-id="fc6e9-386">On Linux or macOS:</span></span>
 
 ```console
 for f in _framework/_bin/*; do mv "$f" "`echo $f | sed -e 's/\.dll\b/.bin/g'`"; done
 sed -i 's/\.dll"/.bin"/g' _framework/blazor.boot.json
 ```
 
-<span data-ttu-id="fd621-384">如果服務工作者資產也在使用中，請新增下列命令：</span><span class="sxs-lookup"><span data-stu-id="fd621-384">If service worker assets are also in use, add the following command:</span></span>
+<span data-ttu-id="fc6e9-387">如果服務工作者資產也在使用中，請新增下列命令：</span><span class="sxs-lookup"><span data-stu-id="fc6e9-387">If service worker assets are also in use, add the following command:</span></span>
 
 ```console
 sed -i 's/\.dll"/.bin"/g' service-worker-assets.js
 ```
    
-<span data-ttu-id="fd621-385">若要使用不同的副檔名 `.bin` ，請 `.bin` 在上述命令中取代。</span><span class="sxs-lookup"><span data-stu-id="fd621-385">To use a different file extension than `.bin`, replace `.bin` in the preceding commands.</span></span>
+<span data-ttu-id="fc6e9-388">若要使用不同的副檔名 `.bin` ，請 `.bin` 在上述命令中取代。</span><span class="sxs-lookup"><span data-stu-id="fc6e9-388">To use a different file extension than `.bin`, replace `.bin` in the preceding commands.</span></span>
 
-<span data-ttu-id="fd621-386">若要處理壓縮 `blazor.boot.json.gz` 和檔案 `blazor.boot.json.br` ，請採用下列其中一種方法：</span><span class="sxs-lookup"><span data-stu-id="fd621-386">To address the compressed `blazor.boot.json.gz` and `blazor.boot.json.br` files, adopt either of the following approaches:</span></span>
+<span data-ttu-id="fc6e9-389">若要處理壓縮 `blazor.boot.json.gz` 和檔案 `blazor.boot.json.br` ，請採用下列其中一種方法：</span><span class="sxs-lookup"><span data-stu-id="fc6e9-389">To address the compressed `blazor.boot.json.gz` and `blazor.boot.json.br` files, adopt either of the following approaches:</span></span>
 
-* <span data-ttu-id="fd621-387">移除壓縮的 `blazor.boot.json.gz` 和檔案 `blazor.boot.json.br` 。</span><span class="sxs-lookup"><span data-stu-id="fd621-387">Remove the compressed `blazor.boot.json.gz` and `blazor.boot.json.br` files.</span></span> <span data-ttu-id="fd621-388">這種方法會停用壓縮。</span><span class="sxs-lookup"><span data-stu-id="fd621-388">Compression is disabled with this approach.</span></span>
-* <span data-ttu-id="fd621-389">重新壓縮更新後的檔案 `blazor.boot.json` 。</span><span class="sxs-lookup"><span data-stu-id="fd621-389">Recompress the updated `blazor.boot.json` file.</span></span>
+* <span data-ttu-id="fc6e9-390">移除壓縮的 `blazor.boot.json.gz` 和檔案 `blazor.boot.json.br` 。</span><span class="sxs-lookup"><span data-stu-id="fc6e9-390">Remove the compressed `blazor.boot.json.gz` and `blazor.boot.json.br` files.</span></span> <span data-ttu-id="fc6e9-391">這種方法會停用壓縮。</span><span class="sxs-lookup"><span data-stu-id="fc6e9-391">Compression is disabled with this approach.</span></span>
+* <span data-ttu-id="fc6e9-392">重新壓縮更新後的檔案 `blazor.boot.json` 。</span><span class="sxs-lookup"><span data-stu-id="fc6e9-392">Recompress the updated `blazor.boot.json` file.</span></span>
 
-<span data-ttu-id="fd621-390">先前的指導方針也適用于服務工作者資產正在使用中。</span><span class="sxs-lookup"><span data-stu-id="fd621-390">The preceding guidance also applies when service worker assets are in use.</span></span> <span data-ttu-id="fd621-391">移除或重新壓縮 `wwwroot/service-worker-assets.js.br` 和 `wwwroot/service-worker-assets.js.gz` 。</span><span class="sxs-lookup"><span data-stu-id="fd621-391">Remove or recompress `wwwroot/service-worker-assets.js.br` and `wwwroot/service-worker-assets.js.gz`.</span></span> <span data-ttu-id="fd621-392">否則，瀏覽器中的檔案完整性檢查會失敗。</span><span class="sxs-lookup"><span data-stu-id="fd621-392">Otherwise, file integrity checks fail in the browser.</span></span>
+<span data-ttu-id="fc6e9-393">先前的指導方針也適用于服務工作者資產正在使用中。</span><span class="sxs-lookup"><span data-stu-id="fc6e9-393">The preceding guidance also applies when service worker assets are in use.</span></span> <span data-ttu-id="fc6e9-394">移除或重新壓縮 `wwwroot/service-worker-assets.js.br` 和 `wwwroot/service-worker-assets.js.gz` 。</span><span class="sxs-lookup"><span data-stu-id="fc6e9-394">Remove or recompress `wwwroot/service-worker-assets.js.br` and `wwwroot/service-worker-assets.js.gz`.</span></span> <span data-ttu-id="fc6e9-395">否則，瀏覽器中的檔案完整性檢查會失敗。</span><span class="sxs-lookup"><span data-stu-id="fc6e9-395">Otherwise, file integrity checks fail in the browser.</span></span>
 
-<span data-ttu-id="fd621-393">下列 Windows 範例使用放置於專案根目錄的 PowerShell 腳本。</span><span class="sxs-lookup"><span data-stu-id="fd621-393">The following Windows example uses a PowerShell script placed at the root of the project.</span></span>
+<span data-ttu-id="fc6e9-396">下列 Windows 範例使用放置於專案根目錄的 PowerShell 腳本。</span><span class="sxs-lookup"><span data-stu-id="fc6e9-396">The following Windows example uses a PowerShell script placed at the root of the project.</span></span>
 
-<span data-ttu-id="fd621-394">`ChangeDLLExtensions.ps1:`:</span><span class="sxs-lookup"><span data-stu-id="fd621-394">`ChangeDLLExtensions.ps1:`:</span></span>
+<span data-ttu-id="fc6e9-397">`ChangeDLLExtensions.ps1:`:</span><span class="sxs-lookup"><span data-stu-id="fc6e9-397">`ChangeDLLExtensions.ps1:`:</span></span>
 
 ```powershell
 param([string]$filepath,[string]$tfm)
@@ -847,13 +851,13 @@ dir $filepath\bin\Release\$tfm\wwwroot\_framework\_bin | rename-item -NewName { 
 Remove-Item $filepath\bin\Release\$tfm\wwwroot\_framework\blazor.boot.json.gz
 ```
 
-<span data-ttu-id="fd621-395">如果服務工作者資產也在使用中，請新增下列命令：</span><span class="sxs-lookup"><span data-stu-id="fd621-395">If service worker assets are also in use, add the following command:</span></span>
+<span data-ttu-id="fc6e9-398">如果服務工作者資產也在使用中，請新增下列命令：</span><span class="sxs-lookup"><span data-stu-id="fc6e9-398">If service worker assets are also in use, add the following command:</span></span>
 
 ```powershell
 ((Get-Content $filepath\bin\Release\$tfm\wwwroot\service-worker-assets.js -Raw) -replace '.dll"','.bin"') | Set-Content $filepath\bin\Release\$tfm\wwwroot\service-worker-assets.js
 ```
 
-<span data-ttu-id="fd621-396">在專案檔中，腳本會在發佈應用程式之後執行：</span><span class="sxs-lookup"><span data-stu-id="fd621-396">In the project file, the script is run after publishing the app:</span></span>
+<span data-ttu-id="fc6e9-399">在專案檔中，腳本會在發佈應用程式之後執行：</span><span class="sxs-lookup"><span data-stu-id="fc6e9-399">In the project file, the script is run after publishing the app:</span></span>
 
 ```xml
 <Target Name="ChangeDLLFileExtensions" AfterTargets="Publish" Condition="'$(Configuration)'=='Release'">
@@ -862,6 +866,4 @@ Remove-Item $filepath\bin\Release\$tfm\wwwroot\_framework\blazor.boot.json.gz
 ```
 
 > [!NOTE]
-> <span data-ttu-id="fd621-397">重新命名和消極式載入相同的元件時，請參閱中的指導方針 <xref:blazor/webassembly-lazy-load-assemblies#onnavigateasync-events-and-renamed-assembly-files> 。</span><span class="sxs-lookup"><span data-stu-id="fd621-397">When renaming and lazy loading the same assemblies, see the guidance in <xref:blazor/webassembly-lazy-load-assemblies#onnavigateasync-events-and-renamed-assembly-files>.</span></span>
-
-<span data-ttu-id="fd621-398">若要提供意見反應，請造訪 [aspnetcore/問題 #5477](https://github.com/dotnet/aspnetcore/issues/5477)。</span><span class="sxs-lookup"><span data-stu-id="fd621-398">To provide feedback, visit [aspnetcore/issues #5477](https://github.com/dotnet/aspnetcore/issues/5477).</span></span>
+> <span data-ttu-id="fc6e9-400">重新命名和消極式載入相同的元件時，請參閱中的指導方針 <xref:blazor/webassembly-lazy-load-assemblies#onnavigateasync-events-and-renamed-assembly-files> 。</span><span class="sxs-lookup"><span data-stu-id="fc6e9-400">When renaming and lazy loading the same assemblies, see the guidance in <xref:blazor/webassembly-lazy-load-assemblies#onnavigateasync-events-and-renamed-assembly-files>.</span></span>

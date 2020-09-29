@@ -18,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/webassembly-lazy-load-assemblies
-ms.openlocfilehash: 92287c7205e67d7f2000b53506ec18475517325b
-ms.sourcegitcommit: 6c82d78662332cd40d614019b9ed17c46e25be28
+ms.openlocfilehash: e874ec6f24d8b03fc6c7133013147498cbbc293a
+ms.sourcegitcommit: 4febe4efaf6e1a7be65d772b500c00fca0af216a
 ms.translationtype: MT
 ms.contentlocale: zh-TW
 ms.lasthandoff: 09/29/2020
-ms.locfileid: "91424083"
+ms.locfileid: "91451171"
 ---
 # <a name="lazy-load-assemblies-in-aspnet-core-no-locblazor-webassembly"></a>ASP.NET Core 中的延遲載入元件 Blazor WebAssembly
 
@@ -38,7 +38,7 @@ Blazor的消極式載入功能可讓您將應用程式元件標記為消極式�
 
 ## <a name="project-file"></a>專案檔
 
-使用專案將應用程式專案檔中的消極式載入的元件標記 (`.csproj`) `BlazorWebAssemblyLazyLoad` 。 使用沒有副檔名的元件名稱 `.dll` 。 Blazor架構會防止此專案群組所指定的元件在應用程式啟動時載入。 下列範例會將大型自訂群組件標示 `GrantImaharaRobotControls.dll` 為延遲載入 () 。 如果標示為消極式載入的元件有相依性，則也必須在專案檔中將它們標示為消極式載入。
+使用專案將應用程式專案檔中的消極式載入的元件標記 (`.csproj`) `BlazorWebAssemblyLazyLoad` 。 使用具有副檔名的元件名稱 `.dll` 。 Blazor架構會防止此專案群組所指定的元件在應用程式啟動時載入。 下列範例會將大型自訂群組件標示 `GrantImaharaRobotControls.dll` 為延遲載入 () 。 如果標示為消極式載入的元件有相依性，則也必須在專案檔中將它們標示為消極式載入。
 
 ```xml
 <ItemGroup>

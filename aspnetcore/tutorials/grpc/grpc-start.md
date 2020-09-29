@@ -16,12 +16,12 @@ no-loc:
 - Razor
 - SignalR
 uid: tutorials/grpc/grpc-start
-ms.openlocfilehash: 5f4d9a105ad6d0ab53b23d8c1e9f645d69d25888
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: 13eb57bbe671dcc70a1678222a98590f4edc6e6f
+ms.sourcegitcommit: 6c82d78662332cd40d614019b9ed17c46e25be28
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88630272"
+ms.lasthandoff: 09/29/2020
+ms.locfileid: "91424252"
 ---
 # <a name="tutorial-create-a-grpc-client-and-server-in-aspnet-core"></a>教學課程：在 ASP.NET Core 中建立 gRPC 用戶端和伺服器
 
@@ -73,7 +73,7 @@ ms.locfileid: "88630272"
 
 # <a name="visual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code)
 
-* 開啟[整合式終端機](https://code.visualstudio.com/docs/editor/integrated-terminal)。
+* 開啟 [整合式終端](https://code.visualstudio.com/docs/editor/integrated-terminal)機。
 * 將目錄 (`cd`) 變更為其中包含專案的資料夾。
 * 執行下列命令：
 
@@ -86,7 +86,7 @@ ms.locfileid: "88630272"
   * `code` 命令會在新的 Visual Studio Code 執行個體中開啟 [GrpcGreeter]** 資料夾。
 
   會出現一個對話方塊，其中包含 **建立和偵測所需的資產，但缺少 ' GrpcGreeter '。要新增它們嗎？**
-* 選取 [是]。
+* 選取 [是]  。
 
 # <a name="visual-studio-for-mac"></a>[Visual Studio for Mac](#tab/visual-studio-mac)
 
@@ -145,7 +145,7 @@ info: Microsoft.Hosting.Lifetime[0]
 
 # <a name="visual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code)
 
-* 開啟[整合式終端機](https://code.visualstudio.com/docs/editor/integrated-terminal)。
+* 開啟 [整合式終端](https://code.visualstudio.com/docs/editor/integrated-terminal)機。
 * 將目錄 (`cd`) 變更為其中包含專案的資料夾。
 * 執行下列命令：
 
@@ -215,6 +215,12 @@ dotnet add GrpcGreeterClient.csproj package Grpc.Tools
 
 * 在 gRPC 用戶端專案中建立 [Protos]** 資料夾。
 * 將 *Protos\greet.proto* 檔案從 gRPC Greeter 服務複製到 gRPC 用戶端專案。
+* 將檔案內的命名空間更新 `greet.proto` 為專案的命名空間：
+
+  ```
+  option csharp_namespace = "GrpcGreeterClient";
+  ```
+
 * 編輯 *GrpcGreeterClient.csproj* 專案檔：
 
   # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)

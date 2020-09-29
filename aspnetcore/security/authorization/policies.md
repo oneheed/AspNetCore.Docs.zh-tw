@@ -17,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: security/authorization/policies
-ms.openlocfilehash: 82ed4cc2ce47d3bd85ca9c2ba2bbeb075eaefcef
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: af282ec1f82b2ac31fd0b46b2406110e24e9211b
+ms.sourcegitcommit: 6c82d78662332cd40d614019b9ed17c46e25be28
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88635329"
+ms.lasthandoff: 09/29/2020
+ms.locfileid: "91424239"
 ---
 # <a name="policy-based-authorization-in-aspnet-core"></a>ASP.NET Core 中以原則為基礎的授權
 
@@ -136,7 +136,7 @@ Razor使用具有原則名稱的屬性，將原則套用至頁面 `[Authorize]` 
 
 您可以 Razor 使用 [授權慣例](xref:security/authorization/razor-pages-authorization)，將原則套用至頁面。
 
-## <a name="requirements"></a>需求
+## <a name="requirements"></a>規格需求
 
 授權需求是一組資料參數的集合，原則可用來評估目前的使用者主體。 在我們的「AtLeast21」原則中，要求是 &mdash; 最短存留期的單一參數。 需求會實 [IAuthorizationRequirement](/dotnet/api/microsoft.aspnetcore.authorization.iauthorizationrequirement)，這是空的標記介面。 參數化的最小存留期需求可能會以下列方式執行：
 
@@ -193,7 +193,7 @@ Razor使用具有原則名稱的屬性，將原則套用至頁面 `[Authorize]` 
 
 * 為了保證失敗，即使其他需求處理常式成功，也請呼叫 `context.Fail` 。
 
-如果處理常式呼叫 `context.Succeed` 或 `context.Fail` ，則仍會呼叫所有其他處理常式。 這可讓要求產生副作用（例如記錄），即使另一個處理常式已成功通過驗證或要求失敗，也會發生這種情況。 當設定為時 `false` ， [InvokeHandlersAfterFailure](/dotnet/api/microsoft.aspnetcore.authorization.authorizationoptions.invokehandlersafterfailure#Microsoft_AspNetCore_Authorization_AuthorizationOptions_InvokeHandlersAfterFailure) 屬性 (可在 ASP.NET Core 1.1 和更新版本中使用，) 會在呼叫時將處理常式的執行 `context.Fail` 過程縮短。 `InvokeHandlersAfterFailure` 預設為 `true` ，在此情況下會呼叫所有處理常式。
+如果處理常式呼叫 `context.Succeed` 或 `context.Fail` ，則仍會呼叫所有其他處理常式。 這可讓要求產生副作用（例如記錄），即使另一個處理常式已成功通過驗證或要求失敗，也會發生這種情況。 當設定為時 `false` ， [InvokeHandlersAfterFailure](/dotnet/api/microsoft.aspnetcore.authorization.authorizationoptions.invokehandlersafterfailure#Microsoft_AspNetCore_Authorization_AuthorizationOptions_InvokeHandlersAfterFailure) 屬性會在呼叫時，將處理常式的執行 `context.Fail` 過程縮短。 `InvokeHandlersAfterFailure` 預設為 `true` ，在此情況下會呼叫所有處理常式。
 
 > [!NOTE]
 > 即使驗證失敗，也會呼叫授權處理常式。
@@ -370,7 +370,7 @@ Razor使用具有原則名稱的屬性，將原則套用至頁面 `[Authorize]` 
 
 您也可以 Razor 使用 [授權慣例](xref:security/authorization/razor-pages-authorization)，將原則套用至頁面。
 
-## <a name="requirements"></a>需求
+## <a name="requirements"></a>規格需求
 
 授權需求是一組資料參數的集合，原則可用來評估目前的使用者主體。 在我們的「AtLeast21」原則中，要求是 &mdash; 最短存留期的單一參數。 需求會實 [IAuthorizationRequirement](/dotnet/api/microsoft.aspnetcore.authorization.iauthorizationrequirement)，這是空的標記介面。 參數化的最小存留期需求可能會以下列方式執行：
 
@@ -427,7 +427,7 @@ Razor使用具有原則名稱的屬性，將原則套用至頁面 `[Authorize]` 
 
 * 為了保證失敗，即使其他需求處理常式成功，也請呼叫 `context.Fail` 。
 
-如果處理常式呼叫 `context.Succeed` 或 `context.Fail` ，則仍會呼叫所有其他處理常式。 這可讓要求產生副作用（例如記錄），即使另一個處理常式已成功通過驗證或要求失敗，也會發生這種情況。 當設定為時 `false` ， [InvokeHandlersAfterFailure](/dotnet/api/microsoft.aspnetcore.authorization.authorizationoptions.invokehandlersafterfailure#Microsoft_AspNetCore_Authorization_AuthorizationOptions_InvokeHandlersAfterFailure) 屬性 (可在 ASP.NET Core 1.1 和更新版本中使用，) 會在呼叫時將處理常式的執行 `context.Fail` 過程縮短。 `InvokeHandlersAfterFailure` 預設為 `true` ，在此情況下會呼叫所有處理常式。
+如果處理常式呼叫 `context.Succeed` 或 `context.Fail` ，則仍會呼叫所有其他處理常式。 這可讓要求產生副作用（例如記錄），即使另一個處理常式已成功通過驗證或要求失敗，也會發生這種情況。 當設定為時 `false` ， [InvokeHandlersAfterFailure](/dotnet/api/microsoft.aspnetcore.authorization.authorizationoptions.invokehandlersafterfailure#Microsoft_AspNetCore_Authorization_AuthorizationOptions_InvokeHandlersAfterFailure) 屬性會在呼叫時，將處理常式的執行 `context.Fail` 過程縮短。 `InvokeHandlersAfterFailure` 預設為 `true` ，在此情況下會呼叫所有處理常式。
 
 > [!NOTE]
 > 即使驗證失敗，也會呼叫授權處理常式。

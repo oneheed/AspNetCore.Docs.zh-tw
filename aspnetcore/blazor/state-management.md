@@ -19,12 +19,12 @@ no-loc:
 - SignalR
 uid: blazor/state-management
 zone_pivot_groups: blazor-hosting-models
-ms.openlocfilehash: 43794fad36efe44cad6fbb2f1a1cae293a2ddad1
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: a74f056447839c4cf057948f26a9ece9b5799656
+ms.sourcegitcommit: d1a897ebd89daa05170ac448e4831d327f6b21a8
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88625956"
+ms.lasthandoff: 10/01/2020
+ms.locfileid: "91606718"
 ---
 # <a name="aspnet-core-no-locblazor-state-management"></a>ASP.NET Core Blazor 狀態管理
 
@@ -58,20 +58,21 @@ ms.locfileid: "88625956"
 
 ## <a name="where-to-persist-state"></a>保存狀態的位置
 
-保存狀態有三個常見的位置：
+存在於保存狀態的常見位置：
 
 * [伺服器端儲存空間](#server-side-storage)
 * [URL](#url)
 * [瀏覽器儲存體](#browser-storage)
+* [記憶體內部狀態容器服務](#in-memory-state-container-service)
 
 ### <a name="server-side-storage"></a>伺服器端儲存空間
 
-針對跨越多個使用者和裝置的永久資料持續性，應用程式可以使用透過 web API 存取的獨立伺服器端儲存體。 這些選項包括：
+針對跨越多個使用者和裝置的永久資料持續性，應用程式可以使用透過 web API 存取的獨立伺服器端儲存體。 選項包括：
 
 * Blob 儲存體
 * 機碼值儲存體
 * 關聯式資料庫
-* 資料表儲存體
+* 表格儲存體
 
 儲存資料之後，會保留使用者的狀態，並可在任何新的瀏覽器會話中使用。
 
@@ -119,6 +120,10 @@ ms.locfileid: "88625956"
 > [!WARNING]
 > 使用者可能會看到或篡改儲存在和中的資料 `localStorage` `sessionStorage` 。
 
+## <a name="in-memory-state-container-service"></a>記憶體內部狀態容器服務
+
+[!INCLUDE[](~/includes/blazor-state-management/state-container.md)]
+
 ## <a name="additional-resources"></a>其他資源
 
 * [在驗證操作之前儲存應用程式狀態](xref:blazor/security/webassembly/additional-scenarios#save-app-state-before-an-authentication-operation)
@@ -162,20 +167,21 @@ Blazor Server 是具狀態的應用程式架構。 大部分的情況下，應�
 
 ## <a name="where-to-persist-state"></a>保存狀態的位置
 
-保存狀態有三個常見的位置：
+存在於保存狀態的常見位置：
 
 * [伺服器端儲存空間](#server-side-storage)
 * [URL](#url)
 * [瀏覽器儲存體](#browser-storage)
+* [記憶體內部狀態容器服務](#in-memory-state-container-service)
 
 ### <a name="server-side-storage"></a>伺服器端儲存空間
 
-針對跨越多個使用者和裝置的永久資料持續性，應用程式可以使用伺服器端儲存體。 這些選項包括：
+針對跨越多個使用者和裝置的永久資料持續性，應用程式可以使用伺服器端儲存體。 選項包括：
 
 * Blob 儲存體
 * 機碼值儲存體
 * 關聯式資料庫
-* 資料表儲存體
+* 表格儲存體
 
 儲存資料之後，會保留使用者的狀態，並可在任何新的線路中使用。
 
@@ -701,5 +707,9 @@ else
 若要保存許多不同的狀態物件，並在不同位置取用不同的物件子集，最好避免全域保存狀態。
 
 ::: moniker-end
+
+## <a name="in-memory-state-container-service"></a>記憶體內部狀態容器服務
+
+[!INCLUDE[](~/includes/blazor-state-management/state-container.md)]
 
 ::: zone-end

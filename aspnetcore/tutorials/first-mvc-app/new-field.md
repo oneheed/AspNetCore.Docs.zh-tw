@@ -17,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: tutorials/first-mvc-app/new-field
-ms.openlocfilehash: 40e615d0698a0ed1d3ef40a222e064d72184f0c8
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: a0c53755bd56b6c169437ca9f0ea915e46ad79ec
+ms.sourcegitcommit: d1a897ebd89daa05170ac448e4831d327f6b21a8
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88635290"
+ms.lasthandoff: 10/01/2020
+ms.locfileid: "91606747"
 ---
 # <a name="part-8-add-a-new-field-to-an-aspnet-core-mvc-app"></a>第8部分：將新欄位新增至 ASP.NET Core MVC 應用程式
 
@@ -62,7 +62,7 @@ Command ⌘ + B
 
 ------
 
-因為您已將欄位新增至 `Movie` 類別，所以需要更新繫結允許清單，以便包含這個新屬性。 在 *MoviesController.cs* 中，更新 `Create` 和 `Edit` 這兩個動作方法的 `[Bind]` 屬性 (attribute)，以包括 `Rating` 屬性 (property)：
+因為您已將新欄位新增至 `Movie` 類別，所以您需要更新屬性系結清單，以便包含這個新屬性。 在 *MoviesController.cs* 中，更新 `Create` 和 `Edit` 這兩個動作方法的 `[Bind]` 屬性 (attribute)，以包括 `Rating` 屬性 (property)：
 
 ```csharp
 [Bind("Id,Title,ReleaseDate,Genre,Price,Rating")]
@@ -133,7 +133,7 @@ Update-Database
 
 [!INCLUDE[](~/includes/RP-mvc-shared/sqlite-warn.md)]
 
-刪除資料庫並使用移轉重新建立資料庫。 若要刪除資料庫，請刪除資料庫檔案 (*MvcMovie.db*)。 然後執行 `ef database update` 命令：
+刪除資料庫並使用移轉重新建立資料庫。 若要刪除資料庫，請刪除 *MvcMovie* 資料庫檔案。 然後執行 `ef database update` 命令：
 
 ```dotnetcli
 dotnet ef database update

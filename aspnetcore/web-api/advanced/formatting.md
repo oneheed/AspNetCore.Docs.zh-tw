@@ -17,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: web-api/advanced/formatting
-ms.openlocfilehash: 618bb60ea382437b2787adb814f319b1f0cea4ca
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: b89be93fc33d1eba5c2ad9508adf93fa54014ff8
+ms.sourcegitcommit: d1a897ebd89daa05170ac448e4831d327f6b21a8
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88626528"
+ms.lasthandoff: 10/01/2020
+ms.locfileid: "91606781"
 ---
 # <a name="format-response-data-in-aspnet-core-web-api"></a>在 ASP.NET Core Web API 中格式化回應資料
 
@@ -163,6 +163,14 @@ public IActionResult Get()
 在 ASP.NET Core 3.0 之前，預設使用的 JSON 格式器會使用 `Newtonsoft.Json` 封裝來執行。 在 ASP.NET Core 3.0 或更新版本中，預設 JSON 格式器是以 `System.Text.Json` 為基礎。 您 `Newtonsoft.Json` 可以安裝 [`Microsoft.AspNetCore.Mvc.NewtonsoftJson`](https://www.nuget.org/packages/Microsoft.AspNetCore.Mvc.NewtonsoftJson/) NuGet 套件並在中進行設定，以支援根據格式的格式器和功能 `Startup.ConfigureServices` 。
 
 [!code-csharp[](./formatting/3.0sample/StartupNewtonsoftJson.cs?name=snippet)]
+
+在上述程式碼中，呼叫來設定 `AddNewtonsoftJson` 下列 WEB API、MVC 和 Razor 頁面功能以供使用 `Newtonsoft.Json` ：
+
+* 讀取和寫入 JSON 的輸入和輸出格式器
+* <xref:Microsoft.AspNetCore.Mvc.JsonResult>
+* [JSON Patch](xref:web-api/jsonpatch)
+* <xref:Microsoft.AspNetCore.Mvc.Rendering.IJsonHelper>
+* [TempData](xref:fundamentals/app-state#tempdata)
 
 某些功能可能無法搭配使用格式的格式器使用 `System.Text.Json` ，且需要參考參考格式的格式器 `Newtonsoft.Json` 。 `Newtonsoft.Json`如果應用程式有下列情況，請繼續使用以格式的格式器：
 

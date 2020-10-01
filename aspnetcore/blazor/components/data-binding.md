@@ -18,16 +18,16 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/components/data-binding
-ms.openlocfilehash: 493aa7f9cfbf2b47ffcb7d6f8e40de7b62ecfce3
-ms.sourcegitcommit: 74f4a4ddbe3c2f11e2e09d05d2a979784d89d3f5
+ms.openlocfilehash: 3f823ca9cf96b7ff439ade59f946db222b7f7e60
+ms.sourcegitcommit: d1a897ebd89daa05170ac448e4831d327f6b21a8
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 09/27/2020
-ms.locfileid: "91393817"
+ms.lasthandoff: 10/01/2020
+ms.locfileid: "91606690"
 ---
 # <a name="aspnet-core-no-locblazor-data-binding"></a>ASP.NET Core Blazor 資料系結
 
-依 [Luke Latham](https://github.com/guardrex) 和 [Daniel Roth](https://github.com/danroth27)
+[Luke Latham](https://github.com/guardrex)、 [Daniel Roth](https://github.com/danroth27)和[Steve Sanderson](https://github.com/SteveSandersonMS)
 
 Razor 元件會透過以 [`@bind`](xref:mvc/views/razor#bind) 欄位、屬性或運算式值命名的 HTML 元素屬性，提供資料系結功能 Razor 。
 
@@ -313,6 +313,104 @@ Password:
     }
 }
 ```
+
+## <a name="bind-across-more-than-two-components"></a>跨兩個以上的元件進行系結
+
+您可以透過任意數目的嵌套元件進行系結，但您必須遵守單向的資料流程：
+
+* 變更通知會在階層中 *往上流動*。
+* 新的參數值會在階層中 *往下流動*。
+
+常見和建議的方法是只將基礎資料儲存在父元件中，以避免任何必須更新狀態的混淆。
+
+下列元件示範上述概念：
+
+`ParentComponent.razor`:
+
+```razor
+<h1>Parent Component</h1>
+
+<p>Parent Property: <b>@parentValue</b></p>
+
+<p>
+    <button @onclick="ChangeValue">Change from Parent</button>
+</p>
+
+<ChildComponent @bind-Property="parentValue" />
+
+@code {
+    private string parentValue = "Initial value set in Parent";
+
+    private void ChangeValue()
+    {
+        parentValue = $"Set in Parent {DateTime.Now}";
+    }
+}
+```
+
+`ChildComponent.razor`:
+
+```razor
+<div class="border rounded m-1 p-1">
+    <h2>Child Component</h2>
+
+    <p>Child Property: <b>@Property</b></p>
+
+    <p>
+        <button @onclick="ChangeValue">Change from Child</button>
+    </p>
+
+    <GrandchildComponent @bind-Property="BoundValue" />
+</div>
+
+@code {
+    [Parameter]
+    public string Property { get; set; }
+
+    [Parameter]
+    public EventCallback<string> PropertyChanged { get; set; }
+
+    private string BoundValue
+    {
+        get => Property;
+        set => PropertyChanged.InvokeAsync(value);
+    }
+
+    private Task ChangeValue()
+    {
+        return PropertyChanged.InvokeAsync($"Set in Child {DateTime.Now}");
+    }
+}
+```
+
+`GrandchildComponent.razor`:
+
+```razor
+<div class="border rounded m-1 p-1">
+    <h3>Grandchild Component</h3>
+
+    <p>Grandchild Property: <b>@Property</b></p>
+
+    <p>
+        <button @onclick="ChangeValue">Change from Grandchild</button>
+    </p>
+</div>
+
+@code {
+    [Parameter]
+    public string Property { get; set; }
+
+    [Parameter]
+    public EventCallback<string> PropertyChanged { get; set; }
+
+    private Task ChangeValue()
+    {
+        return PropertyChanged.InvokeAsync($"Set in Grandchild {DateTime.Now}");
+    }
+}
+```
+
+如需更適合在不需要嵌套的元件之間共用記憶體資料的替代方法，請參閱 <xref:blazor/state-management#in-memory-state-container-service> 。
 
 ## <a name="additional-resources"></a>其他資源
 

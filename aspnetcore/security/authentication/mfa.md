@@ -18,16 +18,18 @@ no-loc:
 - Razor
 - SignalR
 uid: security/authentication/mfa
-ms.openlocfilehash: e224f947335ea8ea6ed8887dfadb52202bfd7866
-ms.sourcegitcommit: 8fcb08312a59c37e3542e7a67dad25faf5bb8e76
+ms.openlocfilehash: 76a11aa7b89b3ce60ed11bd7553a7e5898f661f4
+ms.sourcegitcommit: d1a897ebd89daa05170ac448e4831d327f6b21a8
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 09/11/2020
-ms.locfileid: "90009501"
+ms.lasthandoff: 10/01/2020
+ms.locfileid: "91606805"
 ---
 # <a name="multi-factor-authentication-in-aspnet-core"></a>ASP.NET Core 中的多重要素驗證
 
 依 [Damien Bowden](https://github.com/damienbod)
+
+[查看或下載 (damienbod/AspNetCoreHybridFlowWithApi GitHub 存放庫) 的範例程式碼 ](https://github.com/damienbod/AspNetCoreHybridFlowWithApi)
 
 多重要素驗證 (MFA) 是在登入事件期間要求使用者以進行其他形式的識別的進程。 此提示可能是從行動電話輸入代碼、使用 FIDO2 金鑰，或提供指紋掃描。 當您需要第二種形式的驗證時，會增強安全性。 攻擊者無法輕易取得或複製其他因素。
 

@@ -18,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: fundamentals/routing
-ms.openlocfilehash: 1b8ccb510927fbc8a40f7424ae1ca4a131799095
-ms.sourcegitcommit: 24106b7ffffc9fff410a679863e28aeb2bbe5b7e
+ms.openlocfilehash: 46a9fc7776022a29bedf1c88e8230e1fd52d1607
+ms.sourcegitcommit: d1a897ebd89daa05170ac448e4831d327f6b21a8
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 09/17/2020
-ms.locfileid: "90722880"
+ms.lasthandoff: 10/01/2020
+ms.locfileid: "91606767"
 ---
 # <a name="routing-in-aspnet-core"></a>ASP.NET Core 中的路由
 
@@ -394,7 +394,7 @@ URL 產生：
 
 <xref:Microsoft.AspNetCore.Routing.LinkGenerator> 提供的方法支援適用於任何位址類型的標準連結產生功能。 使用連結產生器最方便的方式，是透過執行特定網址類別型作業的擴充方法：
 
-| 擴充方法 | 描述 |
+| 擴充方法 | 說明 |
 | ---------------- | ----------- |
 | <xref:Microsoft.AspNetCore.Routing.LinkGenerator.GetPathByAddress*> | 根據提供的值產生具有絕對路徑的 URI。 |
 | <xref:Microsoft.AspNetCore.Routing.LinkGenerator.GetUriByAddress*> | 根據提供的值產生絕對 URI。             |
@@ -505,7 +505,7 @@ URL 模式嘗試擷取具有選擇性副檔名的檔案名稱時，具有其他�
 
 下表示范範例路由條件約束及其預期行為：
 
-| constraint (條件約束) | 範例 | 範例相符項目 | 備註 |
+| constraint (條件約束) | 範例 | 範例相符項目 | 注意 |
 | ---------- | ------- | --------------- | ----- |
 | `int` | `{id:int}` | `123456789`, `-123456789` | 符合任何整數 |
 | `bool` | `{active:bool}` | `true`, `FALSE` | 符合 `true` 或 `false` 。 不區分大小寫 |
@@ -568,7 +568,7 @@ ASP.NET Core 架構將 `RegexOptions.IgnoreCase | RegexOptions.Compiled | RegexO
 
 路由中使用的正則運算式通常以 `^` 字元開頭，並符合字串的開始位置。 運算式的結尾通常是 `$` 字元，並符合字串的結尾。 `^`和 `$` 字元可確保正則運算式符合整個路由參數值。 如果沒有 `^` 和 `$` 字元，正則運算式會比對字串內的任何子字串，這通常是不必要的。 下表提供範例，並說明它們符合或無法符合的原因：
 
-| 運算是   | String    | 相符項目 | 註解               |
+| 運算是   | String    | 相符項目 | 留言               |
 | ------------ | --------- | :---: |  -------------------- |
 | `[a-z]{2}`   | hello     | 是   | 子字串相符項目     |
 | `[a-z]{2}`   | 123abc456 | 是   | 子字串相符項目     |
@@ -1113,7 +1113,7 @@ URL 產生是路由可用來依據一組路由值建立 URL 路徑的處理序�
 
 <xref:Microsoft.AspNetCore.Routing.LinkGenerator> 提供的方法支援適用於任何位址類型的標準連結產生功能。 使用連結產生器的最便利方式是透過執行特定位址類型作業的擴充方法。
 
-| 擴充方法   | 描述                                                         |
+| 擴充方法   | 說明                                                         |
 | ------------------ | ------------------------------------------------------------------- |
 | <xref:Microsoft.AspNetCore.Routing.LinkGenerator.GetPathByAddress*> | 根據提供的值產生具有絕對路徑的 URI。 |
 | <xref:Microsoft.AspNetCore.Routing.LinkGenerator.GetUriByAddress*> | 根據提供的值產生絕對 URI。             |
@@ -1439,7 +1439,7 @@ URL 模式嘗試擷取具有選擇性副檔名的檔案名稱時，具有其他�
 
 下表示範範例路由條件約束及其預期行為。
 
-| 條件約束 | 範例 | 範例相符項目 | 備註 |
+| 條件約束 | 範例 | 範例相符項目 | 注意 |
 |------------|---------|-----------------|-------|
 | `int` | `{id:int}` | `123456789`, `-123456789` | 符合任何整數。|
 | `bool` | `{active:bool}` | `true`, `FALSE` | 符合 `true` 或 `false` 。 不區分大小寫。|
@@ -1489,7 +1489,7 @@ ASP.NET Core 架構將 `RegexOptions.IgnoreCase | RegexOptions.Compiled | RegexO
 
 路由中使用的正則運算式通常會以插入 `^` 號字元開頭，並符合字串的開始位置。 運算式通常以貨幣符號 `$` 字元結尾，且字串的結尾相符。 `^` 和 `$` 字元可確保規則運算式符合整個路由參數值。 若不使用 `^` 與 `$` 字元，規則運算式會比對字串內的所有部分字串，這通常不是您想要的結果。 下表提供範例，並說明它們符合或無法符合的原因。
 
-| 運算是   | String    | 相符項目 | 註解               |
+| 運算是   | String    | 相符項目 | 留言               |
 | ------------ | --------- | :---: |  -------------------- |
 | `[a-z]{2}`   | hello     | 是   | 子字串相符項目     |
 | `[a-z]{2}`   | 123abc456 | 是   | 子字串相符項目     |
@@ -1592,7 +1592,7 @@ routes.MapRoute("blog_route", "blog/{*slug}",
 
 ## <a name="complex-segments"></a>複雜區段
 
-複雜區段 (例如，`[Route("/x{token}y")]`) 會透過以非窮盡的方式，由右至左比對常值來處理。 請參閱[此程式碼](https://github.com/dotnet/AspNetCore/blob/release/2.2/src/Http/Routing/src/Patterns/RoutePatternMatcher.cs#L293)以了解如何比對複雜區段的詳細解釋。 [程式法範例](https://github.com/dotnet/AspNetCore/blob/release/2.2/src/Http/Routing/src/Patterns/RoutePatternMatcher.cs#L293)不是由 ASP.NET Core 使用，但它提供一個好的複雜區段解釋。
+複雜區段 (例如，`[Route("/x{token}y")]`) 會透過以非窮盡的方式，由右至左比對常值來處理。 請參閱[此程式碼](https://github.com/dotnet/aspnetcore/blob/v2.2.13/src/Http/Routing/src/Patterns/RoutePatternMatcher.cs#L293)以了解如何比對複雜區段的詳細解釋。 [程式法範例](https://github.com/dotnet/aspnetcore/blob/v2.2.13/src/Http/Routing/src/Patterns/RoutePatternMatcher.cs#L293)不是由 ASP.NET Core 使用，但它提供一個好的複雜區段解釋。
 <!-- While that code is no longer used by ASP.NET Core for complex segment matching, it provides a good match to the current algorithm. The [current code](https://github.com/dotnet/AspNetCore/blob/91514c9af7e0f4c44029b51f05a01c6fe4c96e4c/src/Http/Routing/src/Matching/DfaMatcherBuilder.cs#L227-L244) is too abstracted from matching to be useful for understanding complex segment matching.
 -->
 
@@ -1889,7 +1889,7 @@ URL 模式嘗試擷取具有選擇性副檔名的檔案名稱時，具有其他�
 
 下表示範範例路由條件約束及其預期行為。
 
-| constraint (條件約束) | 範例 | 範例相符項目 | 備註 |
+| constraint (條件約束) | 範例 | 範例相符項目 | 注意 |
 | ---------- | ------- | --------------- | ----- |
 | `int` | `{id:int}` | `123456789`, `-123456789` | 符合任何整數 |
 | `bool` | `{active:bool}` | `true`, `FALSE` | 符合 `true` 或 `false` (不區分大小寫) |
@@ -1933,7 +1933,7 @@ ASP.NET Core 架構將 `RegexOptions.IgnoreCase | RegexOptions.Compiled | RegexO
 
 路由中所使用的規則運算式通常以插入號 (`^`) 字元開頭，並符合字串的開始位置。 運算式通常以貨幣符號 (`$`) 字元結尾，並符合字串的結尾。 `^` 和 `$` 字元可確保規則運算式符合整個路由參數值。 若不使用 `^` 與 `$` 字元，規則運算式會比對字串內的所有部分字串，這通常不是您想要的結果。 下表提供範例，並說明它們符合或無法符合的原因。
 
-| 運算是   | String    | 相符項目 | 註解               |
+| 運算是   | String    | 相符項目 | 留言               |
 | ------------ | --------- | :---: |  -------------------- |
 | `[a-z]{2}`   | hello     | 是   | 子字串相符項目     |
 | `[a-z]{2}`   | 123abc456 | 是   | 子字串相符項目     |
@@ -1998,6 +1998,6 @@ routes.MapRoute("blog_route", "blog/{*slug}",
 
 ## <a name="complex-segments"></a>複雜區段
 
-複雜區段 (例如，`[Route("/x{token}y")]`) 會透過以非窮盡的方式，由右至左比對常值來處理。 請參閱[此程式碼](https://github.com/aspnet/AspNetCore/blob/release/2.2/src/Http/Routing/src/Patterns/RoutePatternMatcher.cs#L293)以了解如何比對複雜區段的詳細解釋。 [程式法範例](https://github.com/aspnet/AspNetCore/blob/release/2.2/src/Http/Routing/src/Patterns/RoutePatternMatcher.cs#L293)不是由 ASP.NET Core 使用，但它提供一個好的複雜區段解釋。
+複雜區段 (例如，`[Route("/x{token}y")]`) 會透過以非窮盡的方式，由右至左比對常值來處理。 請參閱[此程式碼](https://github.com/dotnet/aspnetcore/blob/v2.2.13/src/Http/Routing/src/Patterns/RoutePatternMatcher.cs#L293)以了解如何比對複雜區段的詳細解釋。 [程式法範例](https://github.com/dotnet/aspnetcore/blob/v2.2.13/src/Http/Routing/src/Patterns/RoutePatternMatcher.cs#L293)不是由 ASP.NET Core 使用，但它提供一個好的複雜區段解釋。
 
 ::: moniker-end

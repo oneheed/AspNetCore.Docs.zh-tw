@@ -16,12 +16,12 @@ no-loc:
 - Razor
 - SignalR
 uid: fundamentals/localization
-ms.openlocfilehash: 478e9e58f265a8c372dd048f9ba8593424050e01
-ms.sourcegitcommit: 24106b7ffffc9fff410a679863e28aeb2bbe5b7e
+ms.openlocfilehash: fcf69bdaaed5cf0283ae27440c28061857d2cbcb
+ms.sourcegitcommit: d1a897ebd89daa05170ac448e4831d327f6b21a8
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 09/17/2020
-ms.locfileid: "90722666"
+ms.lasthandoff: 10/01/2020
+ms.locfileid: "91606768"
 ---
 # <a name="globalization-and-localization-in-aspnet-core"></a>ASP.NET Core 全球化和當地語系化
 
@@ -959,7 +959,7 @@ using Microsoft.Extensions.Localization;
 
 ### <a name="querystringrequestcultureprovider"></a>QueryStringRequestCultureProvider
 
-有些應用程式會使用查詢字串來設定 <https://docs.microsoft.com/dotnet/api/system.globalization.cultureinfo?view=netcore-3.1> 。 針對使用 cookie 或接受語言標頭方法的應用程式，將查詢字串新增至 URL 可用於偵錯工具代碼和測試程式碼。 系統預設會將 `QueryStringRequestCultureProvider` 登錄為 `RequestCultureProvider` 清單中的第一個當地語系化提供者。 您應傳遞查詢字串參數 `culture` 和 `ui-culture`。 下列範例會設定西班牙文/墨西哥的特定文化特性 (語言和地區)：
+有些應用程式會使用查詢字串來設定 <xref:System.Globalization.CultureInfo> 。 針對使用 cookie 或接受語言標頭方法的應用程式，將查詢字串新增至 URL 可用於偵錯工具代碼和測試程式碼。 系統預設會將 `QueryStringRequestCultureProvider` 登錄為 `RequestCultureProvider` 清單中的第一個當地語系化提供者。 您應傳遞查詢字串參數 `culture` 和 `ui-culture`。 下列範例會設定西班牙文/墨西哥的特定文化特性 (語言和地區)：
 
 ```
 http://localhost:5000/?culture=es-MX&ui-culture=es-MX

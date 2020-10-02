@@ -17,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: security/authorization/policies
-ms.openlocfilehash: af282ec1f82b2ac31fd0b46b2406110e24e9211b
-ms.sourcegitcommit: 6c82d78662332cd40d614019b9ed17c46e25be28
+ms.openlocfilehash: 140969c80191c9549bc19507b9c4818b88fed0d1
+ms.sourcegitcommit: c026bf76a0e14a5ee68983519a63574c674e9ff7
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 09/29/2020
-ms.locfileid: "91424239"
+ms.lasthandoff: 10/01/2020
+ms.locfileid: "91636799"
 ---
 # <a name="policy-based-authorization-in-aspnet-core"></a>ASP.NET Core 中以原則為基礎的授權
 
@@ -36,7 +36,7 @@ ms.locfileid: "91424239"
 
 在上述範例中，會建立 "AtLeast21" 原則。 這項要求的 &mdash; 最小存留期為要求的參數所提供的單一需求。
 
-## <a name="iauthorizationservice"></a>IAuthorizationService 
+## <a name="iauthorizationservice"></a>IAuthorizationService
 
 判斷授權是否成功的主要服務是 <xref:Microsoft.AspNetCore.Authorization.IAuthorizationService> ：
 
@@ -136,7 +136,7 @@ Razor使用具有原則名稱的屬性，將原則套用至頁面 `[Authorize]` 
 
 您可以 Razor 使用 [授權慣例](xref:security/authorization/razor-pages-authorization)，將原則套用至頁面。
 
-## <a name="requirements"></a>規格需求
+## <a name="requirements"></a>需求
 
 授權需求是一組資料參數的集合，原則可用來評估目前的使用者主體。 在我們的「AtLeast21」原則中，要求是 &mdash; 最短存留期的單一參數。 需求會實 [IAuthorizationRequirement](/dotnet/api/microsoft.aspnetcore.authorization.iauthorizationrequirement)，這是空的標記介面。 參數化的最小存留期需求可能會以下列方式執行：
 
@@ -370,7 +370,7 @@ Razor使用具有原則名稱的屬性，將原則套用至頁面 `[Authorize]` 
 
 您也可以 Razor 使用 [授權慣例](xref:security/authorization/razor-pages-authorization)，將原則套用至頁面。
 
-## <a name="requirements"></a>規格需求
+## <a name="requirements"></a>需求
 
 授權需求是一組資料參數的集合，原則可用來評估目前的使用者主體。 在我們的「AtLeast21」原則中，要求是 &mdash; 最短存留期的單一參數。 需求會實 [IAuthorizationRequirement](/dotnet/api/microsoft.aspnetcore.authorization.iauthorizationrequirement)，這是空的標記介面。 參數化的最小存留期需求可能會以下列方式執行：
 

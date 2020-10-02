@@ -17,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: data/ef-rp/sort-filter-page
-ms.openlocfilehash: 5e073845acbecdf0db4c30c4725f12033cfc42ac
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: e01704cb10c88f3e9442e74034f5e5d39787f300
+ms.sourcegitcommit: e519d95d17443abafba8f712ac168347b15c8b57
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88634679"
+ms.lasthandoff: 10/02/2020
+ms.locfileid: "91653889"
 ---
 # <a name="part-3-no-locrazor-pages-with-ef-core-in-aspnet-core---sort-filter-paging"></a>第3部分： Razor 有 EF Core 在 ASP.NET Core 排序、篩選、分頁中的頁面
 
@@ -42,25 +42,26 @@ ms.locfileid: "88634679"
 
 使用下列程式碼取代 *Pages/Students/Index.cshtml.cs* 中的程式碼來新增排序。
 
-[!code-csharp[Main](intro/samples/cu30snapshots/3-sorting/Pages/Students/Index1.cshtml.cs?name=snippet_All&highlight=21-24,26,28-52)]
+[!code-csharp[Main](intro/samples/cu30snapshots/3-sorting/Pages/Students/Index1.cshtml.cs?name=snippet_All)]
 
 上述程式碼：
 
+* 需要加入 `using System;` 。
 * 新增屬性來包含排序參數。
 * 將 `Student` 屬性的名稱變更為 `Students`。
 * 取代 `OnGetAsync` 方法中的程式碼。
 
-`OnGetAsync` 方法會從 URL 中的查詢字串接收 `sortOrder` 參數。 URL (包括查詢字串) 是由[錨點標記協助程式](xref:mvc/views/tag-helpers/builtin-th/anchor-tag-helper)所產生。
+`OnGetAsync` 方法會從 URL 中的查詢字串接收 `sortOrder` 參數。 URL 和查詢字串是由 [錨點標記](xref:mvc/views/tag-helpers/builtin-th/anchor-tag-helper)協助程式所產生。
 
-`sortOrder`參數為 "Name" 或 "Date"。 `sortOrder` 參數後面可以選擇接著 "_desc" 來指定遞減順序。 預設排序順序為遞增。
+`sortOrder`參數可以是 `Name` 或 `Date` 。 `sortOrder`參數可選擇性地接著 `_desc` 指定遞減順序。 預設排序順序為遞增。
 
-從 **Students** 連結要求 [索引] 頁面時，將不會有查詢字串。 學生會以遞增姓氏順序顯示。 在 `switch` 陳述式中，預設會依姓氏遞增排序 (fall-through 大小寫)。 使用者按一下資料行標題連結時，適當的 `sortOrder` 值將會在查詢字串值中提供。
+從 **Students** 連結要求 [索引] 頁面時，將不會有查詢字串。 學生會以遞增姓氏順序顯示。 依姓氏遞增的順序是 `default` 語句中的 `switch` 。 使用者按一下資料行標題連結時，適當的 `sortOrder` 值將會在查詢字串值中提供。
 
 `NameSort``DateSort`頁面會使用和 Razor 來設定具有適當查詢字串值的資料行標題超連結：
 
 [!code-csharp[Main](intro/samples/cu30snapshots/3-sorting/Pages/Students/Index1.cshtml.cs?name=snippet_Ternary)]
 
-程式碼會使用 C# 條件運算子 [?:](/dotnet/csharp/language-reference/operators/conditional-operator)。 `?:` 運算子是一種三元運算子 (會採用三個運算元)。 第一行指定當 `sortOrder` 為 null 或空白時，將 `NameSort` 設為 "name_desc"。 如果 `sortOrder`**不是** null 或空白，則 `NameSort` 設為空字串。
+程式碼會使用 c # [條件運算子？：](/dotnet/csharp/language-reference/operators/conditional-operator)。 `?:`運算子是三元運算子，它會採用三個運算元。 第一行指定當 `sortOrder` 是 null 或空白時， `NameSort` 會設定為 `name_desc` 。 如果 `sortOrder`***不是*** null 或空白，則 `NameSort` 設為空字串。
 
 這兩個陳述式讓頁面能夠設定資料行標題超連結，如下所示：
 
@@ -75,7 +76,7 @@ ms.locfileid: "88634679"
 
 [!code-csharp[Main](intro/samples/cu30snapshots/3-sorting/Pages/Students/Index1.cshtml.cs?name=snippet_IQueryable)]
 
-建立或修改 `IQueryable` 時，不會有任何查詢傳送至資料庫。 直到 `IQueryable` 物件轉換成集合前，將不會執行查詢。 `IQueryable` 會藉由呼叫像是 `ToListAsync` 的方法，轉換成集合。 因此，`IQueryable` 程式碼會成為一個單一查詢且不會執行，直到下列陳述式產生：
+當 `IQueryable` 建立或修改時，不會將查詢傳送至資料庫。 直到 `IQueryable` 物件轉換成集合前，將不會執行查詢。 `IQueryable` 會藉由呼叫像是 `ToListAsync` 的方法，轉換成集合。 因此，`IQueryable` 程式碼會成為一個單一查詢且不會執行，直到下列陳述式產生：
 
 [!code-csharp[Main](intro/samples/cu30snapshots/3-sorting/Pages/Students/Index1.cshtml.cs?name=snippet_SortOnlyRtn)]
 
@@ -110,7 +111,7 @@ ms.locfileid: "88634679"
 
 使用下列程式碼取代 *Students/Index.cshtml.cs* 中的程式碼來新增篩選：
 
-[!code-csharp[Main](intro/samples/cu30snapshots/3-sorting/Pages/Students/Index2.cshtml.cs?name=snippet_All&highlight=28,33,37-41)]
+[!code-csharp[Main](intro/samples/cu30snapshots/3-sorting/Pages/Students/Index2.cshtml.cs?name=snippet_All&highlight=17,22,26-30)]
 
 上述程式碼：
 
@@ -119,7 +120,7 @@ ms.locfileid: "88634679"
 
 ### <a name="iqueryable-vs-ienumerable"></a>IQueryable 與 IEnumerable 的比較
 
-程式碼會呼叫 `IQueryable` 物件上的 `Where` 方法，且會在伺服器上處理篩選。 在某些情況下，應用程式可能會呼叫 `Where` 方法在記憶體內部集合上作為擴充方法。 例如，假設 `_context.Students` 從 EF Core `DbSet` 變為傳回 `IEnumerable` 集合的儲存機制方法。 結果通常都是一樣的，但在某些情況下可能會不同。
+程式碼會呼叫 `IQueryable` 物件上的 <xref:System.Linq.Queryable.Where%2A> 方法，且會在伺服器上處理篩選。 在某些情況下，應用程式可能會呼叫 `Where` 方法在記憶體內部集合上作為擴充方法。 例如，假設 `_context.Students` 從 EF Core `DbSet` 變為傳回 `IEnumerable` 集合的儲存機制方法。 結果通常都是一樣的，但在某些情況下可能會不同。
 
 例如，.NET Framework 的 `Contains` 實作，預設會執行區分大小寫的比較。 在 SQL Server，`Contains` 區分大小寫取決於 SQL Server 執行個體的定序設定。 SQL Server 預設為不區分大小寫。 SQLite 預設為區分大小寫。 可以使用 `ToUpper` 使測試明確不區分大小寫：
 
@@ -139,7 +140,7 @@ Where(s => s.LastName.ToUpper().Contains(searchString.ToUpper())`
 
 ### <a name="update-the-no-locrazor-page"></a>更新 Razor 頁面
 
-取代 *Pages/Students/Index.cshtml* 中的程式碼以建立 [搜尋]**** 按鈕和各種色彩。
+取代 *Pages/student/Index. cshtml* 中的程式碼，以加入 [ **搜尋** ] 按鈕。
 
 [!code-cshtml[Main](intro/samples/cu30snapshots/3-sorting/Pages/Students/Index2.cshtml?highlight=14-23)]
 
@@ -153,8 +154,8 @@ Where(s => s.LastName.ToUpper().Contains(searchString.ToUpper())`
 
 請注意，URL 中包含了搜尋字串。 例如：
 
-```
-https://localhost:<port>/Students?SearchString=an
+```browser-address-bar
+https://localhost:5001/Students?SearchString=an
 ```
 
 如果頁面已加上書籤，那麼書籤會包含該頁面的 URL 和 `SearchString` 查詢字串。 `form` 中的 `method="get"` 導致查詢字串的產生。
@@ -181,15 +182,16 @@ https://localhost:<port>/Students?SearchString=an
 
 取代 *Students/Index.cshtml.cs* 中的程式碼以新增分頁。
 
-[!code-csharp[Main](intro/samples/cu30/Pages/Students/Index.cshtml.cs?name=snippet_All&highlight=26,28-29,31,34-41,68-70)]
+[!code-csharp[Main](intro/samples/cu30/Pages/Students/Index.cshtml.cs?name=snippet_All&highlight=15-20,23-30,57-59)]
 
 上述程式碼：
 
 * 將 `Students` 屬性的型別從 `IList<Student>` 變更為 `PaginatedList<Student>`。
 * 將頁面索引、目前的 `sortOrder` 和 `currentFilter` 新增至 `OnGetAsync` 方法簽章。
-* 將排序次序儲存在 CurrentSort 屬性中。
+* 將排序次序儲存在 `CurrentSort` 屬性中。
 * 當有新的搜尋字串時，將頁面索引重設為 1。
 * 會使用 `PaginatedList` 類別來取得 Students 實體。
+* 設定 `pageSize` 為3。 實際的應用程式會使用 [設定來設定](xref:fundamentals/configuration/index) 頁面大小值。
 
 遇下列情況時，`OnGetAsync` 接收的所有參數都會成為 Null：
 
@@ -212,7 +214,7 @@ https://localhost:<port>/Students?SearchString=an
 
   `PaginatedList.CreateAsync` 方法會以支援分頁的集合類型，將學生查詢轉換成學生單一頁面。 這一頁的學生會傳遞至 Razor 頁面。
 
-  在 `PaginatedList.CreateAsync` 呼叫中，`pageIndex` 之後的兩個問號代表 [Null 聯合運算子](/dotnet/csharp/language-reference/operators/null-conditional-operator)。 Null 聯合運算子會針對可為 Null 的型別定義一個預設值。 運算式 `(pageIndex ?? 1)` 表示，如果 `pageIndex` 有一個值就將該值傳回。 如果 `pageIndex` 沒有值，則傳回 1。
+  在 `PaginatedList.CreateAsync` 呼叫中，`pageIndex` 之後的兩個問號代表 [Null 聯合運算子](/dotnet/csharp/language-reference/operators/null-conditional-operator)。 Null 聯合運算子會針對可為 Null 的型別定義一個預設值。 如果運算式 `pageIndex ?? 1` 具有值，則運算式會傳回的值 `pageIndex` ，否則會傳回1。
 
 ### <a name="add-paging-links-to-the-no-locrazor-page"></a>將分頁連結新增至 Razor 頁面
 
@@ -258,7 +260,7 @@ https://localhost:<port>/Students?SearchString=an
 
 ### <a name="create-the-page-model"></a>建立頁面模型
 
-使用下列程式碼建立 *Pages/About.cshtml.cs* 檔案：
+以下列程式碼更新 *Pages/About.cshtml.cs* 檔案：
 
 [!code-csharp[Main](intro/samples/cu30/Pages/About.cshtml.cs)]
 

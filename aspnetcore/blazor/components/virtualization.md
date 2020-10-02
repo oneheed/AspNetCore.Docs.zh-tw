@@ -5,7 +5,7 @@ description: 瞭解如何在 ASP.NET Core 應用程式中使用元件虛擬化 B
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 09/22/2020
+ms.date: 10/02/2020
 no-loc:
 - ASP.NET Core Identity
 - cookie
@@ -18,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/components/virtualization
-ms.openlocfilehash: 9c3e53bee7535b36bba3474ff50a881568bbd690
-ms.sourcegitcommit: 74f4a4ddbe3c2f11e2e09d05d2a979784d89d3f5
+ms.openlocfilehash: 2ba698eaba23fd67617375e5186d40d45d9772fd
+ms.sourcegitcommit: e519d95d17443abafba8f712ac168347b15c8b57
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 09/27/2020
-ms.locfileid: "91393804"
+ms.lasthandoff: 10/02/2020
+ms.locfileid: "91653876"
 ---
 # <a name="aspnet-core-no-locblazor-component-virtualization"></a>ASP.NET Core Blazor 元件虛擬化
 
@@ -150,10 +150,213 @@ private async ValueTask<ItemsProviderResult<Employee>> LoadEmployees(
 
 ::: moniker range="< aspnetcore-5.0"
 
-例如，呈現數百個包含元件之資料列的方格或清單，需要處理器密集的轉譯。 請考慮將方格或清單版面配置虛擬化，如此一來，就只會在任何指定時間轉譯元件的子集。 如需元件子集轉譯的範例，請參閱[ `Virtualization` (aspnet/samples GitHub 存放庫) 範例應用程式](https://github.com/aspnet/samples/tree/master/samples/aspnetcore/blazor/Virtualization)中的下列元件：
+例如，呈現數百個包含元件之資料列的方格或清單，需要處理器密集的轉譯。 請考慮將方格或清單版面配置虛擬化，如此一來，就只會在任何指定時間轉譯元件的子集。
 
-* `Virtualize` 元件 ([`Shared/Virtualize.razor`](https://github.com/aspnet/samples/blob/master/samples/aspnetcore/blazor/Virtualization/Shared/Virtualize.cs)) ：以 c # 撰寫的元件，它會 <xref:Microsoft.AspNetCore.Components.ComponentBase> 根據使用者的滾動方式來呈現一組氣象資料列。
-* `FetchData` 元件 ([`Pages/FetchData.razor`](https://github.com/aspnet/samples/blob/master/samples/aspnetcore/blazor/Virtualization/Pages/FetchData.razor)) ：使用 `Virtualize` 元件一次顯示25個數據列的氣象資料。
+下列 `Virtualize` 元件 (`Virtualize.cs`) 會 <xref:Microsoft.AspNetCore.Components.ComponentBase> 根據使用者的滾動來呈現子內容：
+
+```csharp
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+using Microsoft.AspNetCore.Components;
+using Microsoft.AspNetCore.Components.Rendering;
+using Microsoft.JSInterop;
+
+public class Virtualize<TItem> : ComponentBase
+{
+    [Parameter]
+    public string TagName { get; set; } = "div";
+
+    [Parameter]
+    public RenderFragment<TItem> ChildContent { get; set; }
+
+    [Parameter]
+    public ICollection<TItem> Items { get; set; }
+
+    [Parameter]
+    public double ItemHeight { get; set; }
+
+    [Parameter(CaptureUnmatchedValues = true)] 
+    public Dictionary<string, object> Attributes { get; set; }
+
+    [Inject]
+    IJSRuntime JS { get; set; }
+
+    ElementReference contentElement;
+    int numItemsToSkipBefore;
+    int numItemsToShow;
+
+    protected override void BuildRenderTree(RenderTreeBuilder builder)
+    {
+        // Render actual content
+        builder.OpenElement(0, TagName);
+        builder.AddMultipleAttributes(1, Attributes);
+
+        var translateY = numItemsToSkipBefore * ItemHeight;
+        builder.AddAttribute(2, "style", $"transform: translateY({ translateY }px);");
+        builder.AddAttribute(2, "data-translateY", translateY);
+        builder.AddElementReferenceCapture(3, @ref => { contentElement = @ref; });
+
+        // As an important optimization, *don't* use builder.AddContent(seq, ChildContent, item)
+        // because that implicitly wraps a new region around each item, which in turn means that 
+        // @key does nothing (because keys are scoped to regions). Instead, create a single 
+        // container region and then invoke the fragments directly.
+
+        builder.OpenRegion(4);
+
+        foreach (var item in Items.Skip(numItemsToSkipBefore).Take(numItemsToShow))
+        {
+            ChildContent(item)(builder);
+        }
+
+        builder.CloseRegion();
+
+        builder.CloseElement();
+
+        // Also emit a spacer that causes the total vertical height to add up to 
+        // Items.Count()*numItems
+
+        builder.OpenElement(5, "div");
+        var numHiddenItems = Items.Count - numItemsToShow;
+        builder.AddAttribute(6, "style", 
+            $"width: 1px; height: { numHiddenItems * ItemHeight }px;");
+        builder.CloseElement();
+    }
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+        {
+            var objectRef = DotNetObjectReference.Create(this);
+            var initResult = await JS.InvokeAsync<ScrollEventArgs>(
+                "VirtualizedComponent._initialize", objectRef, contentElement);
+            OnScroll(initResult);
+        }
+    }
+
+    [JSInvokable]
+    public void OnScroll(ScrollEventArgs args)
+    {
+        var relativeTop = args.ContainerRect.Top - args.ContentRect.Top;
+        numItemsToSkipBefore = Math.Max(0, (int)(relativeTop / ItemHeight));
+
+        var visibleHeight = args.ContainerRect.Bottom - 
+            (args.ContentRect.Top + numItemsToSkipBefore * ItemHeight);
+        numItemsToShow = (int)Math.Ceiling(visibleHeight / ItemHeight) + 3;
+
+        StateHasChanged();
+    }
+
+    public class ScrollEventArgs
+    {
+        public DOMRect ContainerRect { get; set; }
+        public DOMRect ContentRect { get; set; }
+    }
+
+    public class DOMRect
+    {
+        public double Top { get; set; }
+        public double Bottom { get; set; }
+        public double Left { get; set; } 
+        public double Right { get; set; }
+        public double Width { get; set; }
+        public double Height { get; set; }
+    }
+}
+```
+
+下列 `FetchData` 元件 (`FetchData.razor`) 會使用上述 `Virtualize` 元件一次顯示25個數據列的氣象資料：
+
+```razor
+@page "/"
+@page "/fetchdata"
+@inject HttpClient Http
+
+<h1>Weather forecast</h1>
+
+<p>This component demonstrates fetching data from a service.</p>
+
+@if (forecasts == null)
+{
+    <p><em>Loading...</em></p>
+}
+else
+{
+    <h2>Using <code>table-layout: fixed</code></h2>
+    <div style="height:300px; overflow-y: auto;">
+        <Virtualize ItemHeight="25" Items="@forecasts">
+            <tr @key="@context.GetHashCode()" 
+                    style="display: table; table-layout: fixed; width: 100%;">
+                <td>@context.Date.ToShortDateString()</td>
+                <td>@context.TemperatureC</td>
+                <td>@context.TemperatureF</td>
+                <td>@context.Summary</td>
+            </tr>
+        </Virtualize>
+    </div>
+
+    <h2>Using <code>position: sticky</code></h2>
+    <div style="height: 300px; overflow-y: auto; position: relative;">
+        <table>
+            <thead class="sticky">
+                <tr>
+                    <th>Date</th>
+                    <th>Temperature (C)</th>
+                    <th>Temperature (F)</th>
+                    <th>Summary</th>
+                </tr>
+            </thead>
+
+            <Virtualize TagName="tbody" ItemHeight="25" Items="@forecasts">
+                <tr @key="@context.GetHashCode()">
+                    <td>@context.Date.ToShortDateString()</td>
+                    <td>@context.TemperatureC</td>
+                    <td>@context.TemperatureF</td>
+                    <td>@context.Summary</td>
+                </tr>
+            </Virtualize>
+        </table>
+    </div>
+
+    <style type="text/css">
+        thead.sticky th {
+            position: sticky;
+            top: 0;
+        }
+        tr td {
+            height: 25px;
+        }
+    </style>
+}
+
+@code {
+    private WeatherForecast[] forecasts;
+
+    protected override async Task OnInitializedAsync()
+    {
+        forecasts = await Http.GetFromJsonAsync<WeatherForecast[]>(
+            "sample-data/weather.json");
+    }
+
+    public class WeatherForecast
+    {
+        public DateTime Date { get; set; }
+
+        public int TemperatureC { get; set; }
+
+        public string Summary { get; set; }
+
+        public int TemperatureF => 32 + (int)(TemperatureC / 0.5556);
+    }
+}
+```
+
+在上述範例中，方法是避免每個個別專案的絕對位置。 絕對位置會有一些優點 (我們可以確保專案會佔用指定的 Y 空間量) 但會造成您遺失正常寬度的不良缺點，而且當根據內容調整大小時，無法讓資料表資料行對齊資料列/標頭。
+
+元件設計背後的概念 `Virtualize` 是元件不會變更在 DOM 內設定項目的方式。 除了您指定的包裝函式專案以外，沒有任何額外的包裝函式元素 `TagName` 。
+
+最好的方法是避免甚至是包裝函式 `TagName` 元素。 讓 `Virtualize` 元件不會發出自己的任何元素。 所有的元件都是轉譯的，不過有許多範本實例都需要填滿最接近的可滾動上階中任何剩餘的可見空間，加上下列的分隔元素，讓可滾動的上階具有右滾動範圍。 至於版面配置，就如同在 DOM 中實際的子系完全範圍一樣。 不過，您必須指定正確的 `ItemHeight` 。 如果您遇到錯誤 (例如，因為您感到混淆，並認為它是有效的，以便 `style.height` 在) 上指定 `<tr>` ，則此元件最後會轉譯錯誤的範本實例數目，而不是填滿 UI 或太多的轉譯。 此外，父系的捲軸範圍也不正確。
 
 ::: moniker-end
 

@@ -478,7 +478,7 @@
               uid: client-side/spa-services
         - name: LibMan
           items:
-            - name: 總覽
+            - name: 概觀
               uid: client-side/libman/index
             - name: CLI
               uid: client-side/libman/libman-cli
@@ -933,6 +933,9 @@
         - name: 轉換 web.config
           displayName: 'deploy, publish'
           uid: host-and-deploy/iis/transform-webconfig
+        - name: HTTP/2
+          displayName: 'deploy, publish'
+          uid: host-and-deploy/iis/protocols
     - name: Kestrel
       uid: fundamentals/servers/kestrel
       displayName: 'deploy, publish, server'

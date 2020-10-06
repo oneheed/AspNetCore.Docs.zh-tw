@@ -18,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/security/webassembly/hosted-with-identity-server
-ms.openlocfilehash: 0d63ddbc730d3feef0682f6e49dd1b1b4d5e0301
-ms.sourcegitcommit: c026bf76a0e14a5ee68983519a63574c674e9ff7
+ms.openlocfilehash: 91cc7ffc46f5f1f68efd7e481479b19938476cb0
+ms.sourcegitcommit: d7991068bc6b04063f4bd836fc5b9591d614d448
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 10/01/2020
-ms.locfileid: "91636812"
+ms.lasthandoff: 10/06/2020
+ms.locfileid: "91762239"
 ---
 # <a name="secure-an-aspnet-core-no-locblazor-webassembly-hosted-app-with-no-locidentity-server"></a>Blazor WebAssembly使用伺服器保護 ASP.NET Core 託管應用 Identity 程式
 
@@ -316,7 +316,7 @@ public class CustomUserFactory
         if (user.Identity.IsAuthenticated)
         {
             var identity = (ClaimsIdentity)user.Identity;
-            var roleClaims = identity.FindAll(identity.RoleClaimType);
+            var roleClaims = identity.FindAll(identity.RoleClaimType).ToArray();
 
             if (roleClaims != null && roleClaims.Any())
             {

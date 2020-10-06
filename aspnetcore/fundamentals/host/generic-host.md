@@ -1,7 +1,7 @@
 ---
-title: .NET 泛型主機
+title: ASP.NET Core 中的 .NET 泛型主機
 author: rick-anderson
-description: 了解 .NET Core 的泛型主機，其負責啟動應用程式及管理存留期。
+description: 在 ASP.NET Core apps 中使用 .NET Core 泛型主機。  一般主機負責應用程式啟動和存留期管理。
 monikerRange: '>= aspnetcore-2.1'
 ms.author: riande
 ms.custom: mvc
@@ -18,18 +18,20 @@ no-loc:
 - Razor
 - SignalR
 uid: fundamentals/host/generic-host
-ms.openlocfilehash: 59cfae9ff619f8de894686c4b773d66e5cbe10ad
-ms.sourcegitcommit: d60bfd52bfb559e805abd654b87a2a0c7eb69cf8
+ms.openlocfilehash: d3de81ce7248372279b423da865513ee5db73c79
+ms.sourcegitcommit: d7991068bc6b04063f4bd836fc5b9591d614d448
 ms.translationtype: MT
 ms.contentlocale: zh-TW
 ms.lasthandoff: 10/06/2020
-ms.locfileid: "91754732"
+ms.locfileid: "91762317"
 ---
-# <a name="net-generic-host"></a>.NET 泛型主機
+# <a name="net-generic-host-in-aspnet-core"></a>ASP.NET Core 中的 .NET 泛型主機
 
 ::: moniker range=">= aspnetcore-5.0"
 
 ASP.NET Core 範本會建立 .NET Core 泛型主機 (<xref:Microsoft.Extensions.Hosting.HostBuilder>) 。
+
+本主題提供在 ASP.NET Core 中使用 .NET 泛型主機的相關資訊。 如需在主控台應用程式中使用 .NET 泛型主機的詳細資訊，請參閱 [.Net 泛型主機](/dotnet/core/extensions/generic-host)。
 
 ## <a name="host-definition"></a>主機定義
 
@@ -529,6 +531,8 @@ public class Program
 ::: moniker range=">= aspnetcore-3.0 < aspnetcore-5.0"
 
 ASP.NET Core 範本會建立 .NET Core 泛型主機 (<xref:Microsoft.Extensions.Hosting.HostBuilder>) 。
+
+本主題提供在 ASP.NET Core 中使用 .NET 泛型主機的相關資訊。 如需在主控台應用程式中使用 .NET 泛型主機的詳細資訊，請參閱 [.Net 泛型主機](/dotnet/core/extensions/generic-host)。
 
 ## <a name="host-definition"></a>主機定義
 
@@ -1045,7 +1049,7 @@ ASP.NET Core 應用程式會設定並啟動主機。 主機負責應用程式啟
 
 [!code-csharp[](generic-host/samples-snapshot/2.x/GenericHostSample/Program.cs?name=snippet_HostBuilder)]
 
-## <a name="options"></a>選項
+## <a name="options"></a>選項。
 
 <xref:Microsoft.Extensions.Hosting.IHost> 的 <xref:Microsoft.Extensions.Hosting.HostOptions> 設定選項。
 

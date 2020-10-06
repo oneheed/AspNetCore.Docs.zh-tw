@@ -5,7 +5,7 @@ description: 瞭解可用來建立 Blazor 應用程式的工具。
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 07/07/2020
+ms.date: 09/28/2020
 no-loc:
 - ASP.NET Core Identity
 - cookie
@@ -19,12 +19,12 @@ no-loc:
 - SignalR
 uid: blazor/tooling
 zone_pivot_groups: operating-systems
-ms.openlocfilehash: d7e3743d12c235c20cc27f6a3263e2994a9e160a
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: d1626fe753782d524bf75c398c11235c3110633a
+ms.sourcegitcommit: d7991068bc6b04063f4bd836fc5b9591d614d448
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88625826"
+ms.lasthandoff: 10/06/2020
+ms.locfileid: "91762148"
 ---
 # <a name="tooling-for-aspnet-core-no-locblazor"></a>ASP.NET Core 的工具 Blazor
 
@@ -52,13 +52,13 @@ ms.locfileid: "88625826"
 
 ::: zone pivot="linux"
 
-1. 安裝最新版本的 [.Net Core 3.1 SDK](https://dotnet.microsoft.com/download/dotnet-core/3.1)。 如果您先前已安裝 SDK，您可以在命令 shell 中執行下列命令來判斷已安裝的版本：
+1. 安裝最新版本的 [.NET Core SDK](https://dotnet.microsoft.com/download)。 如果您先前已安裝 SDK，您可以在命令 shell 中執行下列命令來判斷已安裝的版本：
 
    ```dotnetcli
    dotnet --version
    ```
 
-1. 安裝最新版本的 [Visual Studio Code](https://code.visualstudio.com/)。
+1. 安裝最新版本的 [Visual Studio Code](https://code.visualstudio.com)。
 
 1. 安裝 Visual Studio Code 擴充功能的最新 [c #](https://marketplace.visualstudio.com/items?itemName=ms-dotnettools.csharp)。
 
@@ -78,7 +78,7 @@ ms.locfileid: "88625826"
 
 1. 在 Visual Studio Code 中開啟 `WebApplication1` 資料夾。
 
-1. IDE 要求您新增資產來建立和偵測專案。 選取 [是]。
+1. IDE 要求您新增資產來建立和偵測專案。 選取 [是]  。
 
 1. 按下<kbd>Ctrl</kbd> + <kbd>F5</kbd>以執行應用程式。
 
@@ -90,7 +90,7 @@ ms.locfileid: "88625826"
 * 信任的所有自我簽署憑證 `localhost` 。
 * 將憑證新增至瀏覽器中受信任的憑證清單。
 
-如需詳細資訊，請參閱瀏覽器和 Linux 發行版本所提供的指引。
+如需詳細資訊，請參閱瀏覽器製造商和 Linux 發行版本所提供的指引。
 
 ::: zone-end
 

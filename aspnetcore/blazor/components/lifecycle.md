@@ -5,7 +5,7 @@ description: 瞭解如何 Razor 在 ASP.NET Core apps 中使用元件生命週�
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 07/06/2020
+ms.date: 10/06/2020
 no-loc:
 - ASP.NET Core Identity
 - cookie
@@ -18,18 +18,48 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/components/lifecycle
-ms.openlocfilehash: 00573f87b65e53a7bfd9cc2aed1d2ed7772b9a4a
-ms.sourcegitcommit: 62cc131969b2379f7a45c286a751e22d961dfbdb
+ms.openlocfilehash: a43268acdb53bf811148fe795ef0434662ddb32f
+ms.sourcegitcommit: d7991068bc6b04063f4bd836fc5b9591d614d448
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 09/22/2020
-ms.locfileid: "90847607"
+ms.lasthandoff: 10/06/2020
+ms.locfileid: "91762193"
 ---
 # <a name="aspnet-core-no-locblazor-lifecycle"></a>ASP.NET Core Blazor 生命週期
 
 依 [Luke Latham](https://github.com/guardrex) 和 [Daniel Roth](https://github.com/danroth27)
 
 此 Blazor 架構包含同步和非同步生命週期方法。 覆寫生命週期方法，以在元件初始化和轉譯期間對元件執行額外的作業。
+
+下圖說明 Blazor 生命週期。 生命週期方法是使用本文的下列各節中的範例所定義。
+
+元件生命週期事件：
+
+1. 如果第一次在要求時轉譯元件：
+   * 建立元件的實例。
+   * 執行屬性插入。 執行 [`SetParametersAsync`](#before-parameters-are-set) 。
+   * 呼叫 [`OnInitialized{Async}`](#component-initialization-methods) 。 如果 <xref:System.Threading.Tasks.Task> 傳回，則 <xref:System.Threading.Tasks.Task> 會等待，然後轉譯元件。 如果 <xref:System.Threading.Tasks.Task> 未傳回，則會轉譯元件。
+1. 呼叫 [`OnParametersSet{Async}`](#after-parameters-are-set) 。 如果 <xref:System.Threading.Tasks.Task> 傳回，則 <xref:System.Threading.Tasks.Task> 會等待，然後轉譯元件。 如果 <xref:System.Threading.Tasks.Task> 未傳回，則會轉譯元件。
+
+![：：： No loc (Razor) ：：： component in：：： no-loc (Blazor) ：：：的元件生命週期事件](lifecycle/_static/lifecycle1.png)
+
+檔物件模型 (DOM) 事件處理：
+
+1. 執行事件處理常式。
+1. 如果 <xref:System.Threading.Tasks.Task> 傳回，則 <xref:System.Threading.Tasks.Task> 會等待，然後轉譯元件。 如果 <xref:System.Threading.Tasks.Task> 未傳回，則會轉譯元件。
+
+![檔物件模型 (DOM) 事件處理](lifecycle/_static/lifecycle2.png)
+
+`Render`生命週期：
+
+1. 如果這不是元件的第一次轉譯或 [`ShouldRender`](#suppress-ui-refreshing) 評估為 `false` ，請勿在元件上執行進一步的作業。
+1. 建立轉譯樹狀結構差異 (差異) 並呈現元件。
+1. 等待 DOM 進行更新。
+1. 呼叫 [`OnAfterRender{Async}`](#after-component-render) 。
+
+![轉譯生命週期](lifecycle/_static/lifecycle3.png)
+
+開發人員呼叫以 [`StateHasChanged`](#state-changes) 產生轉譯。
 
 ## <a name="lifecycle-methods"></a>生命週期方法
 
@@ -191,7 +221,7 @@ protected override bool ShouldRender()
 
 `Pages/FetchData.razor` 在 Blazor Server 範本中：
 
-[!code-razor[](lifecycle/samples_snapshot/3.x/FetchData.razor?highlight=9,21,25)]
+[!code-razor[](lifecycle/samples_snapshot/FetchData.razor?highlight=9,21,25)]
 
 ## <a name="handle-errors"></a>處理錯誤
 
@@ -286,11 +316,11 @@ public class WeatherForecastService
 
 * 私用欄位和 lambda 方法
 
-  [!code-razor[](lifecycle/samples_snapshot/3.x/event-handler-disposal-1.razor?highlight=23,28)]
+  [!code-razor[](lifecycle/samples_snapshot/event-handler-disposal-1.razor?highlight=23,28)]
 
 * 私用方法方法
 
-  [!code-razor[](lifecycle/samples_snapshot/3.x/event-handler-disposal-2.razor?highlight=16,26)]
+  [!code-razor[](lifecycle/samples_snapshot/event-handler-disposal-2.razor?highlight=16,26)]
 
 ## <a name="cancelable-background-work"></a>可取消的背景工作
 

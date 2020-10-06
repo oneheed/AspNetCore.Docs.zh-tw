@@ -18,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/call-javascript-from-dotnet
-ms.openlocfilehash: fb74fef2f87f150a9c7db9746a359fbf0a9900ad
-ms.sourcegitcommit: d60bfd52bfb559e805abd654b87a2a0c7eb69cf8
+ms.openlocfilehash: d36140067ba6e75f2d00cb86ea488e40d28bd86f
+ms.sourcegitcommit: d7991068bc6b04063f4bd836fc5b9591d614d448
 ms.translationtype: MT
 ms.contentlocale: zh-TW
 ms.lasthandoff: 10/06/2020
-ms.locfileid: "91754485"
+ms.locfileid: "91762161"
 ---
 # <a name="call-javascript-functions-from-net-methods-in-aspnet-core-no-locblazor"></a>從 ASP.NET Core 中的 .NET 方法呼叫 JavaScript 函式 Blazor
 
@@ -515,19 +515,41 @@ export function showPrompt(message) {
 將上述 JavaScript 模組新增至 .NET 程式庫作為靜態 web 資產 (`wwwroot/exampleJsInterop.js`) 然後使用服務將模組匯入至 .net 程式碼 <xref:Microsoft.JSInterop.IJSRuntime> 。 服務會插入為 `jsRuntime` 下列範例中未顯示的 () ：
 
 ```csharp
-var module = await jsRuntime.InvokeAsync<JSObjectReference>(
+var module = await jsRuntime.InvokeAsync<IJSObjectReference>(
     "import", "./_content/MyComponents/exampleJsInterop.js");
 ```
 
 `import`上述範例中的識別碼是專門用來匯入 JavaScript 模組的特殊識別碼。 使用其穩定靜態 web 資產路徑來指定模組： `_content/{LIBRARY NAME}/{PATH UNDER WWWROOT}` 。 預留位置 `{LIBRARY NAME}` 是程式庫名稱。 預留位置 `{PATH UNDER WWWROOT}` 是下腳本的路徑 `wwwroot` 。
 
-<xref:Microsoft.JSInterop.IJSRuntime> 將模組匯入為 `JSObjectReference` ，表示從 .net 程式碼到 JavaScript 物件的參考。 使用來叫用 `JSObjectReference` 模組中匯出的 JavaScript 函式：
+<xref:Microsoft.JSInterop.IJSRuntime> 將模組匯入為 `IJSObjectReference` ，表示從 .net 程式碼到 JavaScript 物件的參考。 使用來叫用 `IJSObjectReference` 模組中匯出的 JavaScript 函式：
 
 ```csharp
 public async ValueTask<string> Prompt(string message)
 {
     return await module.InvokeAsync<string>("showPrompt", message);
 }
+```
+
+`IJSInProcessObjectReference` 表示 JavaScript 物件的參考，該物件的函式可以同步叫用。
+
+`IJSUnmarshalledObjectReference` 代表 JavaScript 物件的參考，該物件的函式可以叫用，而不會有序列化 .NET 資料的額外負荷。 Blazor WebAssembly當效能很重要時，即可使用此功能：
+
+```javascript
+window.unmarshalledInstance = {
+  helloWorld: function (personNamePointer) {
+    const personName = Blazor.platform.readStringField(value, 0);
+    return `Hello ${personName}`;
+  }
+};
+```
+
+```csharp
+var unmarshalledRuntime = (IJSUnmarshalledRuntime)jsRuntime;
+var jsUnmarshalledReference = unmarshalledRuntime
+    .InvokeUnmarshalled<IJSUnmarshalledObjectReference>("unmarshalledInstance");
+
+string helloWorldString = jsUnmarshalledReference.InvokeUnmarshalled<string, string>(
+    "helloWorld");
 ```
 
 ## <a name="use-of-javascript-libraries-that-render-ui-dom-elements"></a>使用可轉譯 UI (DOM 元素的 JavaScript 程式庫) 

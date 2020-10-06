@@ -18,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/components/lifecycle
-ms.openlocfilehash: a43268acdb53bf811148fe795ef0434662ddb32f
-ms.sourcegitcommit: d7991068bc6b04063f4bd836fc5b9591d614d448
+ms.openlocfilehash: 100007a5757c1a54333c57adf573bcb8cc4fdd85
+ms.sourcegitcommit: 652aefa1e0d570df42e8bca15ca43b2d250009f3
 ms.translationtype: MT
 ms.contentlocale: zh-TW
 ms.lasthandoff: 10/06/2020
-ms.locfileid: "91762193"
+ms.locfileid: "91764064"
 ---
 # <a name="aspnet-core-no-locblazor-lifecycle"></a>ASP.NET Core Blazor 生命週期
 
@@ -41,14 +41,14 @@ ms.locfileid: "91762193"
    * 呼叫 [`OnInitialized{Async}`](#component-initialization-methods) 。 如果 <xref:System.Threading.Tasks.Task> 傳回，則 <xref:System.Threading.Tasks.Task> 會等待，然後轉譯元件。 如果 <xref:System.Threading.Tasks.Task> 未傳回，則會轉譯元件。
 1. 呼叫 [`OnParametersSet{Async}`](#after-parameters-are-set) 。 如果 <xref:System.Threading.Tasks.Task> 傳回，則 <xref:System.Threading.Tasks.Task> 會等待，然後轉譯元件。 如果 <xref:System.Threading.Tasks.Task> 未傳回，則會轉譯元件。
 
-![：：： No loc (Razor) ：：： component in：：： no-loc (Blazor) ：：：的元件生命週期事件](lifecycle/_static/lifecycle1.png)
+<img src="lifecycle/_static/lifecycle1.png" alt="Component lifecycle events of a Razor component in Blazor" data-linktype="relative-path" style="max-width:50%;display:block;margin:0 auto">
 
 檔物件模型 (DOM) 事件處理：
 
 1. 執行事件處理常式。
 1. 如果 <xref:System.Threading.Tasks.Task> 傳回，則 <xref:System.Threading.Tasks.Task> 會等待，然後轉譯元件。 如果 <xref:System.Threading.Tasks.Task> 未傳回，則會轉譯元件。
 
-![檔物件模型 (DOM) 事件處理](lifecycle/_static/lifecycle2.png)
+<img src="lifecycle/_static/lifecycle2.png" alt="Document Object Model (DOM) event processing" data-linktype="relative-path" style="max-width:50%;display:block;margin:0 auto">
 
 `Render`生命週期：
 
@@ -57,7 +57,7 @@ ms.locfileid: "91762193"
 1. 等待 DOM 進行更新。
 1. 呼叫 [`OnAfterRender{Async}`](#after-component-render) 。
 
-![轉譯生命週期](lifecycle/_static/lifecycle3.png)
+<img src="lifecycle/_static/lifecycle3.png" alt="Render lifecycle" data-linktype="relative-path" style="max-width:50%;display:block;margin:0 auto">
 
 開發人員呼叫以 [`StateHasChanged`](#state-changes) 產生轉譯。
 

@@ -1,8 +1,6 @@
----
----
-當 Blazor 伺服器應用程式進行預先處理時，某些動作（例如呼叫 JavaScript）並不可能，因為尚未建立與瀏覽器的連接。 元件可能需要在資源清單時以不同的方式呈現。
+雖然 Blazor 伺服器應用程式是預先處理的，但無法執行某些動作（例如呼叫 JavaScript），因為尚未建立與瀏覽器的連接。 元件在資源清單時可能需要以不同的方式呈現。
 
-若要延遲 JavaScript interop 呼叫，直到建立與瀏覽器的連線之後，您可以使用[OnAfterRenderAsync 元件生命週期事件](xref:blazor/components/lifecycle#after-component-render)。 只有在完整呈現應用程式並建立用戶端連線之後，才會呼叫此事件。
+您可以使用 [OnAfterRenderAsync 元件生命週期事件](xref:blazor/components/lifecycle#after-component-render)，來延遲 JavaScript interop 呼叫，直到建立與瀏覽器的連線為止。 只有在完全轉譯應用程式並建立用戶端連接之後，才會呼叫此事件。
 
 ```cshtml
 @using Microsoft.JSInterop
@@ -24,7 +22,7 @@
 }
 ```
 
-針對上述範例程式碼，請在 `setElementText` `<head>` `wwwroot/index.html` （Blazor WebAssembly）或 `Pages/_Host.cshtml` （Blazor Server）的元素內提供 JavaScript 函式。 呼叫函式時 <xref:Microsoft.JSInterop.JSRuntimeExtensions.InvokeVoidAsync%2A?displayProperty=nameWithType> ，不會傳回值：
+針對上述的範例程式碼，請在 `setElementText` `<head>` `wwwroot/index.html` (Blazor WebAssembly) 或 `Pages/_Host.cshtml` (Blazor Server) 的元素內提供 JavaScript 函式。 呼叫函式時，會傳回 <xref:Microsoft.JSInterop.JSRuntimeExtensions.InvokeVoidAsync%2A?displayProperty=nameWithType> ，而且不會傳回值：
 
 ```html
 <script>
@@ -33,13 +31,13 @@
 ```
 
 > [!WARNING]
-> 上述範例只會修改檔物件模型（DOM），僅供示範之用。 在大部分的情況下，不建議直接修改具有 JavaScript 的 DOM，因為 JavaScript 可能會干擾 Blazor 的變更追蹤。
+> 上述範例僅針對示範目的，直接修改檔物件模型 (DOM) 。 在大部分的情況下，不建議直接修改具有 JavaScript 的 DOM，因為 JavaScript 可能會干擾 Blazor 的變更追蹤。
 
-下列元件示範如何使用 JavaScript interop 做為元件初始化邏輯的一部分，使其與可處理性相容。 此元件顯示可以從內部觸發轉譯更新 <xref:Microsoft.AspNetCore.Components.ComponentBase.OnAfterRenderAsync%2A> 。 開發人員必須避免在此案例中建立無限迴圈。
+下列元件示範如何使用 JavaScript interop 做為元件初始化邏輯的一部分，而這種方式與可呈現的方式相容。 元件顯示可以從內部觸發轉譯更新 <xref:Microsoft.AspNetCore.Components.ComponentBase.OnAfterRenderAsync%2A> 。 開發人員必須避免在此案例中建立無限迴圈。
 
-在呼叫的位置中 <xref:Microsoft.JSInterop.JSRuntime.InvokeAsync%2A?displayProperty=nameWithType> ， `ElementRef` 只會用於 <xref:Microsoft.AspNetCore.Components.ComponentBase.OnAfterRenderAsync%2A> ，而不是在任何較早的生命週期方法中使用，因為在呈現元件之前，沒有 JavaScript 元素。
+在 <xref:Microsoft.JSInterop.JSRuntime.InvokeAsync%2A?displayProperty=nameWithType> 中呼叫的位置， `ElementRef` 只會用於中， <xref:Microsoft.AspNetCore.Components.ComponentBase.OnAfterRenderAsync%2A> 而不會用於任何較早的生命週期方法，因為在轉譯元件之後，才會有 JavaScript 元素。
 
-呼叫[StateHasChanged](xref:blazor/components/lifecycle#state-changes)以 rerender 具有從 JavaScript interop 呼叫取得之新狀態的元件。 程式碼不會建立無限迴圈，因為 `StateHasChanged` 只有在是時才會呼叫 `infoFromJs` `null` 。
+呼叫[StateHasChanged](xref:blazor/components/lifecycle#state-changes)時，會使用從 JavaScript interop 呼叫取得的新狀態來 rerender 元件。 程式碼不會建立無限迴圈，因為 `StateHasChanged` 只有在是時才會呼叫 `infoFromJs` `null` 。
 
 ```cshtml
 @page "/prerendered-interop"
@@ -72,7 +70,7 @@ Set value via JS interop call:
 }
 ```
 
-針對上述範例程式碼，請在 `setElementText` `<head>` `wwwroot/index.html` （Blazor WebAssembly）或 `Pages/_Host.cshtml` （Blazor Server）的元素內提供 JavaScript 函式。 使用呼叫函式 <xref:Microsoft.JSInterop.IJSRuntime.InvokeAsync%2A?displayProperty=nameWithType> ，並傳回值：
+針對上述的範例程式碼，請在 `setElementText` `<head>` `wwwroot/index.html` (Blazor WebAssembly) 或 `Pages/_Host.cshtml` (Blazor Server) 的元素內提供 JavaScript 函式。 呼叫函式時，會傳回 <xref:Microsoft.JSInterop.IJSRuntime.InvokeAsync%2A?displayProperty=nameWithType> 值：
 
 ```html
 <script>
@@ -84,4 +82,4 @@ Set value via JS interop call:
 ```
 
 > [!WARNING]
-> 上述範例只會修改檔物件模型（DOM），僅供示範之用。 在大部分的情況下，不建議直接修改具有 JavaScript 的 DOM，因為 JavaScript 可能會干擾 Blazor 的變更追蹤。
+> 上述範例僅針對示範目的，直接修改檔物件模型 (DOM) 。 在大部分的情況下，不建議直接修改具有 JavaScript 的 DOM，因為 JavaScript 可能會干擾 Blazor 的變更追蹤。

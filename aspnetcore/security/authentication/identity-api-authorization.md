@@ -18,16 +18,16 @@ no-loc:
 - Razor
 - SignalR
 uid: security/authentication/identity/spa
-ms.openlocfilehash: 913f8f1e43586ce71353c080e72be3b80f4c0573
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: 1e50fb2f2f5e3621b189f756c53e80a2dd64c8a6
+ms.sourcegitcommit: d60bfd52bfb559e805abd654b87a2a0c7eb69cf8
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88634263"
+ms.lasthandoff: 10/06/2020
+ms.locfileid: "91754524"
 ---
 # <a name="authentication-and-authorization-for-spas"></a>Spa 的驗證和授權
 
-ASP.NET Core 3.0 或更新版本會在單一頁面應用程式中提供驗證， (使用 API 授權支援的 Spa) 。 ASP.NET Core Identity針對驗證和儲存使用者，會結合[ Identity 伺服器](https://identityserver.io/)來執行 OpenID Connect。
+ASP.NET Core 3.1 和更新版本的範本會在單一頁面應用程式中提供驗證， (使用 API 授權支援的 Spa) 。 ASP.NET Core Identity針對驗證和儲存使用者，會結合[ Identity 伺服器](https://identityserver.io/)來執行 OpenID Connect。
 
 驗證參數已新增至「 **角度** 」和「 **回應** 」專案範本，類似于 Web 應用程式中的驗證參數 ** (模型-視圖控制器) ** (MVC) 和 **web 應用程式** (Razor 頁面) 專案範本。 允許的參數值為 [ **無** ] 和 [ **個人**]。 **React.js 和 Redux**專案範本目前不支援驗證參數。
 

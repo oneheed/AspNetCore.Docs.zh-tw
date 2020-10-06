@@ -18,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: host-and-deploy/visual-studio-publish-profiles
-ms.openlocfilehash: a7bbc3f3a0a0d5a320bd290d325f0c01390828b4
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: e86a648e2707e808452e3bc92d991058c8fde480
+ms.sourcegitcommit: d60bfd52bfb559e805abd654b87a2a0c7eb69cf8
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88634159"
+ms.lasthandoff: 10/06/2020
+ms.locfileid: "91754641"
 ---
 # <a name="visual-studio-publish-profiles-pubxml-for-aspnet-core-app-deployment"></a>Visual Studio 發佈設定檔 (. .pubxml) 以進行 ASP.NET Core 應用程式部署
 
@@ -119,7 +119,7 @@ dotnet publish -c Release -o C:\MyWebs\test
 
 您可以使用下列兩種格式其中之一來傳遞 MSBuild 屬性：
 
-* `p:<NAME>=<VALUE>`
+* `-p:<NAME>=<VALUE>`
 * `/p:<NAME>=<VALUE>`
 
 例如，下列命令會將 `Release` 組建發佈到網路共用。 網路共用以正斜線 (*//r8/*) 指定，適用於所有 .NET Core 支援的平台。

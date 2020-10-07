@@ -478,7 +478,7 @@
               uid: client-side/spa-services
         - name: LibMan
           items:
-            - name: 概觀
+            - name: 總覽
               uid: client-side/libman/index
             - name: CLI
               uid: client-side/libman/libman-cli
@@ -918,18 +918,36 @@
         - name: ASP.NET Core 模組
           displayName: 'deploy, publish'
           uid: host-and-deploy/aspnet-core-module
+        - name: 同處理序裝載
+          displayName: 'deploy, publish'
+          uid: host-and-deploy/iis/in-process-hosting
+        - name: 跨處理序裝載
+          displayName: 'deploy, publish'
+          uid: host-and-deploy/iis/out-of-process-hosting
+        - name: 裝載套件組合
+          displayName: 'deploy, publish'
+          uid: host-and-deploy/iis/hosting-bundle
+        - name: web.config 檔案
+          displayName: 'deploy, publish'
+          uid: host-and-deploy/iis/web-config
         - name: Visual Studio 中的 IIS 支援
           displayName: 'deploy, publish'
           uid: host-and-deploy/iis/development-time-iis-support
         - name: IIS 模組
           displayName: 'deploy, publish'
           uid: host-and-deploy/iis/modules
+        - name: 記錄和診斷
+          displayName: 'deploy, publish'
+          uid: host-and-deploy/iis/logging-and-diagnostics
         - name: 疑難排解
           displayName: 'deploy, publish'
           uid: test/troubleshoot-azure-iis
         - name: 錯誤參考
           displayName: 'deploy, publish'
           uid: host-and-deploy/azure-iis-errors-reference
+        - name: 進階
+          displayName: 'deploy, publish'
+          uid: host-and-deploy/iis/advanced
         - name: 轉換 web.config
           displayName: 'deploy, publish'
           uid: host-and-deploy/iis/transform-webconfig

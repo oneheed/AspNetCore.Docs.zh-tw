@@ -18,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/debug
-ms.openlocfilehash: e12b0e6d1bf9eab751f6605b9a156f637f2b0c0f
-ms.sourcegitcommit: 74f4a4ddbe3c2f11e2e09d05d2a979784d89d3f5
+ms.openlocfilehash: d4fd0d501ff14e37bb55b78bb6493ad43f9e5a87
+ms.sourcegitcommit: 139c998d37e9f3e3d0e3d72e10dbce8b75957d89
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 09/27/2020
-ms.locfileid: "91393830"
+ms.lasthandoff: 10/07/2020
+ms.locfileid: "91805566"
 ---
 # <a name="debug-aspnet-core-no-locblazor-webassembly"></a>Debug ASP.NET Core Blazor WebAssembly
 
@@ -191,7 +191,7 @@ Visual Studio for Mac 需要8.8 版 (組建 1532) 或更新版本：
 
 1. Blazor WebAssembly在 VS Code 中開啟託管應用程式的方案資料夾。
 
-1. 如果未設定專案的啟動設定，則會出現下列通知。 選取 [是]  。
+1. 如果未設定專案的啟動設定，則會出現下列通知。 選取 [是]。
 
    > ' {APPLICATION NAME} ' 中缺少建立和偵測所需的資產。 新增它們嗎？
 
@@ -343,8 +343,11 @@ Blazor 提供可執行 [Chrome DevTools 通訊協定](https://chromedevtools.git
 如果您遇到錯誤，下列秘訣可能會有説明：
 
 * 在 [ **偵錯工具** ] 索引標籤中，開啟瀏覽器中的開發人員工具。 在主控台中，執行 `localStorage.clear()` 以移除任何中斷點。
-* 確認您已安裝並信任 ASP.NET Core HTTPS 開發憑證。 如需詳細資訊，請參閱<xref:security/enforcing-ssl#troubleshoot-certificate-problems>。
+* 確認您已安裝並信任 ASP.NET Core HTTPS 開發憑證。 如需詳細資訊，請參閱 <xref:security/enforcing-ssl#troubleshoot-certificate-problems> 。
 * Visual Studio 需要在 [**工具**選項] 的 [一般] 選項中 **，啟用 ASP.NET (Chrome、Edge 和 IE) 選項的 JavaScript 偵錯工具**  >  **Options**  >  **Debugging**  >  ** **。 這是 Visual Studio 的預設設定。 如果偵錯工具無法運作，請確認已選取該選項。
+* 如果您的環境使用 HTTP proxy，請確定 `localhost` 已包含在 proxy 略過設定中。 您可以 `NO_PROXY` 在下列其中一項設定環境變數來完成此動作：
+  * 專案的檔案 `launchSettings.json` 。
+  * 將其套用至所有應用程式的使用者或系統內容變數層級。 使用環境變數時，請重新開機 Visual Studio，變更才會生效。
 
 ### <a name="breakpoints-in-oninitializedasync-not-hit"></a>`OnInitialized{Async}`未命中的中斷點
 

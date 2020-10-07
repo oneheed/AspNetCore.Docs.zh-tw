@@ -5,7 +5,7 @@ description: 瞭解如何設定 Blazor Server 額外的安全性案例。
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 06/04/2020
+ms.date: 10/06/2020
 no-loc:
 - ASP.NET Core Identity
 - cookie
@@ -18,37 +18,190 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/security/server/additional-scenarios
-ms.openlocfilehash: 9b3698489300e45cf77c3d51611ff44e2f4e16a5
-ms.sourcegitcommit: 74f4a4ddbe3c2f11e2e09d05d2a979784d89d3f5
+ms.openlocfilehash: 89288f3fce2dbb6f2647693ba8aaf29500b5bb2b
+ms.sourcegitcommit: 139c998d37e9f3e3d0e3d72e10dbce8b75957d89
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 09/27/2020
-ms.locfileid: "91393661"
+ms.lasthandoff: 10/07/2020
+ms.locfileid: "91805488"
 ---
 # <a name="aspnet-core-no-locblazor-server-additional-security-scenarios"></a>ASP.NET Core Blazor Server 額外的安全性案例
 
 [Javier Calvarro Nelson](https://github.com/javiercn)
 
-## <a name="pass-tokens-to-a-no-locblazor-server-app"></a>將權杖傳遞至 Blazor Server 應用程式
+::: moniker range=">= aspnetcore-5.0"
 
-您 Razor Blazor Server 可以使用本節所述的方法，將應用程式中元件之外可用的權杖傳遞給元件。 如需範例程式碼，包括完整的 `Startup.ConfigureServices` 範例，請參閱將 [權杖傳遞至伺服器端 Blazor 應用程式](https://github.com/javiercn/blazor-server-aad-sample)。
+<h2 id="pass-tokens-to-a-blazor-server-app">將權杖傳遞至 Blazor Server 應用程式</h2>
+
+您 Razor Blazor Server 可以使用本節所述的方法，將應用程式中元件之外可用的權杖傳遞給元件。
 
 Blazor Server使用一般 Razor 頁面或 MVC 應用程式來驗證應用程式。 布建權杖並將其儲存至驗證 cookie 。 例如：
 
 ```csharp
 using Microsoft.AspNetCore.Authentication.OpenIdConnect;
+using Microsoft.IdentityModel.Protocols.OpenIdConnect;
 
 ...
 
 services.Configure<OpenIdConnectOptions>(AzureADDefaults.OpenIdScheme, options =>
 {
-    options.ResponseType = "code";
+    options.ResponseType = OpenIdConnectResponseType.Code;
     options.SaveTokens = true;
 
     options.Scope.Add("offline_access");
-    options.Scope.Add("{SCOPE}");
-    options.Resource = "{RESOURCE}";
 });
+```
+
+（選擇性）加入其他範圍 `options.Scope.Add("{SCOPE}");` ，其中預留位置 `{SCOPE}` 是要加入的其他範圍。
+
+定義 **範圍** 的權杖提供者服務，該服務可在 Blazor 應用程式內用來從相依性 [插入 (DI) ](xref:blazor/fundamentals/dependency-injection)解析權杖：
+
+```csharp
+public class TokenProvider
+{
+    public string AccessToken { get; set; }
+    public string RefreshToken { get; set; }
+}
+```
+
+在中 `Startup.ConfigureServices` ，新增下列服務：
+
+* `IHttpClientFactory`
+* `TokenProvider`
+
+```csharp
+services.AddHttpClient();
+services.AddScoped<TokenProvider>();
+```
+
+使用存取和重新整理權杖來定義要在初始應用程式狀態中傳遞的類別：
+
+```csharp
+public class InitialApplicationState
+{
+    public string AccessToken { get; set; }
+    public string RefreshToken { get; set; }
+}
+```
+
+在檔案中 `_Host.cshtml` ，建立和的實例， `InitialApplicationState` 並將它當作參數傳遞至應用程式：
+
+```cshtml
+@using Microsoft.AspNetCore.Authentication
+
+...
+
+@{
+    var tokens = new InitialApplicationState
+    {
+        AccessToken = await HttpContext.GetTokenAsync("access_token"),
+        RefreshToken = await HttpContext.GetTokenAsync("refresh_token")
+    };
+}
+
+<component type="typeof(App)" param-InitialState="tokens" 
+    render-mode="ServerPrerendered" />
+```
+
+在 `App` 元件 (`App.razor`) 中，解析服務並使用參數中的資料將它初始化：
+
+```razor
+@inject TokenProvider TokenProvider
+
+...
+
+@code {
+    [Parameter]
+    public InitialApplicationState InitialState { get; set; }
+
+    protected override Task OnInitializedAsync()
+    {
+        TokenProvider.AccessToken = InitialState.AccessToken;
+        TokenProvider.RefreshToken = InitialState.RefreshToken;
+
+        return base.OnInitializedAsync();
+    }
+}
+```
+
+將套件參考新增至 NuGet 套件的應用程式 [`Microsoft.AspNet.WebApi.Client`](https://www.nuget.org/packages/Microsoft.AspNet.WebApi.Client) 。
+
+在提出安全 API 要求的服務中，插入權杖提供者，並取得 API 要求的權杖：
+
+```csharp
+using System;
+using System.Net.Http;
+using System.Threading.Tasks;
+
+public class WeatherForecastService
+{
+    private readonly HttpClient client;
+    private readonly TokenProvider tokenProvider;
+
+    public WeatherForecastService(IHttpClientFactory clientFactory, 
+        TokenProvider tokenProvider)
+    {
+        client = clientFactory.CreateClient();
+        this.tokenProvider = tokenProvider;
+    }
+
+    public async Task<WeatherForecast[]> GetForecastAsync()
+    {
+        var token = tokenProvider.AccessToken;
+        var request = new HttpRequestMessage(HttpMethod.Get, 
+            "https://localhost:5003/WeatherForecast");
+        request.Headers.Add("Authorization", $"Bearer {token}");
+        var response = await client.SendAsync(request);
+        response.EnsureSuccessStatusCode();
+
+        return await response.Content.ReadAsAsync<WeatherForecast[]>();
+    }
+}
+```
+
+<h2 id="set-the-authentication-scheme">設定驗證配置</h2>
+
+如果應用程式使用一個以上的驗證中介軟體，因此有一個以上的驗證配置，則使用的 Blazor 配置可以在的端點設定中明確設定 `Startup.Configure` 。 下列範例會設定 Azure Active Directory 配置：
+
+```csharp
+endpoints.MapBlazorHub().RequireAuthorization(
+    new AuthorizeAttribute 
+    {
+        AuthenticationSchemes = AzureADDefaults.AuthenticationScheme
+    });
+```
+
+::: moniker-end
+
+::: moniker range="< aspnetcore-5.0"
+
+<h2 id="pass-tokens-to-a-blazor-server-app">將權杖傳遞至 Blazor Server 應用程式</h2>
+
+您 Razor Blazor Server 可以使用本節所述的方法，將應用程式中元件之外可用的權杖傳遞給元件。
+
+Blazor Server使用一般 Razor 頁面或 MVC 應用程式來驗證應用程式。 布建權杖並將其儲存至驗證 cookie 。 例如：
+
+```csharp
+using Microsoft.AspNetCore.Authentication.OpenIdConnect;
+using Microsoft.IdentityModel.Protocols.OpenIdConnect;
+
+...
+
+services.Configure<OpenIdConnectOptions>(AzureADDefaults.OpenIdScheme, options =>
+{
+    options.ResponseType = OpenIdConnectResponseType.Code;
+    options.SaveTokens = true;
+
+    options.Scope.Add("offline_access");
+});
+```
+
+（選擇性）加入其他範圍 `options.Scope.Add("{SCOPE}");` ，其中預留位置 `{SCOPE}` 是要加入的其他範圍。
+
+（選擇性）使用指定的資源 `options.Resource = "{RESOURCE}";` ，其中預留位置 `{RESOURCE}` 為資源。 例如：
+
+```csharp
+options.Resource = "https://graph.microsoft.com";
 ```
 
 使用存取和重新整理權杖來定義要在初始應用程式狀態中傳遞的類別：
@@ -123,9 +276,9 @@ services.AddScoped<TokenProvider>();
 }
 ```
 
-將套件參考新增至 [WebApi](https://www.nuget.org/packages/Microsoft.AspNet.WebApi.Client) 的應用程式 NuGet 封裝。
+將套件參考新增至 NuGet 套件的應用程式 [`Microsoft.AspNet.WebApi.Client`](https://www.nuget.org/packages/Microsoft.AspNet.WebApi.Client) 。
 
-在提出安全 API 要求的服務中，插入權杖提供者並取得權杖以呼叫 API：
+在提出安全 API 要求的服務中，插入權杖提供者，並取得 API 要求的權杖：
 
 ```csharp
 using System;
@@ -134,24 +287,23 @@ using System.Threading.Tasks;
 
 public class WeatherForecastService
 {
-    private readonly TokenProvider store;
+    private readonly HttpClient client;
+    private readonly TokenProvider tokenProvider;
 
     public WeatherForecastService(IHttpClientFactory clientFactory, 
         TokenProvider tokenProvider)
     {
-        Client = clientFactory.CreateClient();
-        store = tokenProvider;
+        client = clientFactory.CreateClient();
+        this.tokenProvider = tokenProvider;
     }
 
-    public HttpClient Client { get; }
-
-    public async Task<WeatherForecast[]> GetForecastAsync(DateTime startDate)
+    public async Task<WeatherForecast[]> GetForecastAsync()
     {
-        var token = store.AccessToken;
+        var token = tokenProvider.AccessToken;
         var request = new HttpRequestMessage(HttpMethod.Get, 
             "https://localhost:5003/WeatherForecast");
         request.Headers.Add("Authorization", $"Bearer {token}");
-        var response = await Client.SendAsync(request);
+        var response = await client.SendAsync(request);
         response.EnsureSuccessStatusCode();
 
         return await response.Content.ReadAsAsync<WeatherForecast[]>();
@@ -159,7 +311,7 @@ public class WeatherForecastService
 }
 ```
 
-## <a name="set-the-authentication-scheme"></a>設定驗證配置
+<h2 id="set-the-authentication-scheme">設定驗證配置</h2>
 
 如果應用程式使用一個以上的驗證中介軟體，因此有一個以上的驗證配置，則使用的 Blazor 配置可以在的端點設定中明確設定 `Startup.Configure` 。 下列範例會設定 Azure Active Directory 配置：
 
@@ -173,7 +325,7 @@ endpoints.MapBlazorHub().RequireAuthorization(
 
 ## <a name="use-openid-connect-oidc-v20-endpoints"></a>使用 OpenID Connect (OIDC) v2.0 端點
 
-驗證程式庫和 Blazor 範本使用 OpenID Connect (OIDC) v1.0 端點。 若要使用 v2.0 端點，請 <xref:Microsoft.AspNetCore.Builder.OpenIdConnectOptions.Authority?displayProperty=nameWithType> 在中設定選項 <xref:Microsoft.AspNetCore.Builder.OpenIdConnectOptions> ：
+在5.0 之前的 ASP.NET Core 版本中，驗證程式庫和 Blazor 範本會使用 OpenID Connect (OIDC) v1.0 端點。 若要在5.0 之前使用 ASP.NET Core 版的 v2.0 端點，請 <xref:Microsoft.AspNetCore.Builder.OpenIdConnectOptions.Authority?displayProperty=nameWithType> 在中設定 <xref:Microsoft.AspNetCore.Builder.OpenIdConnectOptions> 下列選項：
 
 ```csharp
 services.Configure<OpenIdConnectOptions>(AzureADDefaults.OpenIdScheme, 
@@ -231,3 +383,5 @@ services.Configure<OpenIdConnectOptions>(AzureADDefaults.OpenIdScheme,
 ```
 
 您可以在 OIDC 提供者應用程式註冊描述中找到要使用的應用程式識別碼 URI。
+
+::: moniker-end

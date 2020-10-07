@@ -18,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/components/lifecycle
-ms.openlocfilehash: 100007a5757c1a54333c57adf573bcb8cc4fdd85
-ms.sourcegitcommit: 652aefa1e0d570df42e8bca15ca43b2d250009f3
+ms.openlocfilehash: 0acf757c21d444136e7a6d81d5958be5bc72c2fc
+ms.sourcegitcommit: 139c998d37e9f3e3d0e3d72e10dbce8b75957d89
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 10/06/2020
-ms.locfileid: "91764064"
+ms.lasthandoff: 10/07/2020
+ms.locfileid: "91805540"
 ---
 # <a name="aspnet-core-no-locblazor-lifecycle"></a>ASP.NET Core Blazor 生命週期
 
@@ -41,14 +41,14 @@ ms.locfileid: "91764064"
    * 呼叫 [`OnInitialized{Async}`](#component-initialization-methods) 。 如果 <xref:System.Threading.Tasks.Task> 傳回，則 <xref:System.Threading.Tasks.Task> 會等待，然後轉譯元件。 如果 <xref:System.Threading.Tasks.Task> 未傳回，則會轉譯元件。
 1. 呼叫 [`OnParametersSet{Async}`](#after-parameters-are-set) 。 如果 <xref:System.Threading.Tasks.Task> 傳回，則 <xref:System.Threading.Tasks.Task> 會等待，然後轉譯元件。 如果 <xref:System.Threading.Tasks.Task> 未傳回，則會轉譯元件。
 
-<img src="lifecycle/_static/lifecycle1.png" alt="Component lifecycle events of a Razor component in Blazor" data-linktype="relative-path" style="max-width:50%;display:block;margin:0 auto">
+<img src="lifecycle/_static/lifecycle1.png" alt="Component lifecycle events of a Razor component in Blazor" data-linktype="relative-path" style="max-width:350px;display:block;margin:0 auto">
 
 檔物件模型 (DOM) 事件處理：
 
 1. 執行事件處理常式。
 1. 如果 <xref:System.Threading.Tasks.Task> 傳回，則 <xref:System.Threading.Tasks.Task> 會等待，然後轉譯元件。 如果 <xref:System.Threading.Tasks.Task> 未傳回，則會轉譯元件。
 
-<img src="lifecycle/_static/lifecycle2.png" alt="Document Object Model (DOM) event processing" data-linktype="relative-path" style="max-width:50%;display:block;margin:0 auto">
+<img src="lifecycle/_static/lifecycle2.png" alt="Document Object Model (DOM) event processing" data-linktype="relative-path" style="max-width:350px;display:block;margin:0 auto">
 
 `Render`生命週期：
 
@@ -57,7 +57,7 @@ ms.locfileid: "91764064"
 1. 等待 DOM 進行更新。
 1. 呼叫 [`OnAfterRender{Async}`](#after-component-render) 。
 
-<img src="lifecycle/_static/lifecycle3.png" alt="Render lifecycle" data-linktype="relative-path" style="max-width:50%;display:block;margin:0 auto">
+<img src="lifecycle/_static/lifecycle3.png" alt="Render lifecycle" data-linktype="relative-path" style="max-width:350px;display:block;margin:0 auto">
 
 開發人員呼叫以 [`StateHasChanged`](#state-changes) 產生轉譯。
 
@@ -205,13 +205,13 @@ protected override bool ShouldRender()
 
 即使覆 <xref:Microsoft.AspNetCore.Components.ComponentBase.ShouldRender%2A> 寫，仍一律會呈現元件。
 
-如需詳細資訊，請參閱<xref:blazor/webassembly-performance-best-practices#avoid-unnecessary-component-renders>。
+如需詳細資訊，請參閱 <xref:blazor/webassembly-performance-best-practices#avoid-unnecessary-component-renders> 。
 
 ## <a name="state-changes"></a>狀態變更
 
 <xref:Microsoft.AspNetCore.Components.ComponentBase.StateHasChanged%2A> 通知元件其狀態已變更。 當適用時，呼叫 <xref:Microsoft.AspNetCore.Components.ComponentBase.StateHasChanged%2A> 會導致元件保存。
 
-<xref:Microsoft.AspNetCore.Components.ComponentBase.StateHasChanged%2A> 會自動針對 <xref:Microsoft.AspNetCore.Components.EventCallback> 方法呼叫。 如需詳細資訊，請參閱<xref:blazor/components/event-handling#eventcallback>。
+<xref:Microsoft.AspNetCore.Components.ComponentBase.StateHasChanged%2A> 會自動針對 <xref:Microsoft.AspNetCore.Components.EventCallback> 方法呼叫。 如需詳細資訊，請參閱 <xref:blazor/components/event-handling#eventcallback> 。
 
 ## <a name="handle-incomplete-async-actions-at-render"></a>在轉譯時處理未完成的非同步動作
 

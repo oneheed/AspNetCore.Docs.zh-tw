@@ -5,7 +5,7 @@ description: 瞭解如何 Blazor Server ASP.NET Core 應用程式保護應用程
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 05/02/2020
+ms.date: 10/06/2020
 no-loc:
 - ASP.NET Core Identity
 - cookie
@@ -18,18 +18,18 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/security/server/index
-ms.openlocfilehash: ba9fe3c0149679fa5760c0c9214cd426f1804c31
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: d6d0f6f859dbaef98c6c8a9c53fe9858705cdc0a
+ms.sourcegitcommit: 139c998d37e9f3e3d0e3d72e10dbce8b75957d89
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88626450"
+ms.lasthandoff: 10/07/2020
+ms.locfileid: "91805501"
 ---
 # <a name="secure-aspnet-core-no-locblazor-server-apps"></a>保護 ASP.NET Core Blazor Server 應用程式的安全
 
 作者：[Luke Latham](https://github.com/guardrex)
 
-Blazor Server 應用程式會以與 ASP.NET Core 應用程式相同的方式來設定安全性。 如需詳細資訊，請參閱底下的文章 <xref:security/index> 。 本總覽下的主題特別適用于 Blazor Server 。 
+Blazor Server 應用程式會以與 ASP.NET Core 應用程式相同的方式來設定安全性。 如需詳細資訊，請參閱底下的文章 <xref:security/index> 。 本總覽下的主題特別適用于 Blazor Server 。
 
 ## <a name="no-locblazor-server-project-template"></a>Blazor Server 專案範本
 
@@ -62,7 +62,7 @@ dotnet new blazorserver -o {APP NAME} -au {AUTHENTICATION}
 
 | 驗證機制 | 描述 |
 | ------------------------ | ----------- |
-| `None` (預設值)         | 不需要驗證 |
+| `None` (預設)         | 不需要驗證 |
 | `Individual`             | 儲存在應用程式中的使用者 ASP.NET Core Identity |
 | `IndividualB2C`          | 儲存在[Azure AD B2C](xref:security/authentication/azure-ad-b2c)中的使用者 |
 | `SingleOrg`              | 單一租使用者的組織驗證 |
@@ -96,7 +96,7 @@ dotnet new blazorserver -o {APP NAME} -au {AUTHENTICATION}
 
 | 驗證機制 | 描述 |
 | ------------------------ | ----------- |
-| `None` (預設值)         | 不需要驗證 |
+| `None` (預設)         | 不需要驗證 |
 | `Individual`             | 儲存在應用程式中的使用者 ASP.NET Core Identity |
 | `IndividualB2C`          | 儲存在[Azure AD B2C](xref:security/authentication/azure-ad-b2c)中的使用者 |
 | `SingleOrg`              | 單一租使用者的組織驗證 |
@@ -108,7 +108,14 @@ dotnet new blazorserver -o {APP NAME} -au {AUTHENTICATION}
 * 建立專案的資料夾。
 * 命名專案。
 
-如需詳細資訊，請參閱 [`dotnet new`](/dotnet/core/tools/dotnet-new) .Net Core 指南中的命令。
+其他資訊：
+
+* 請參閱 [`dotnet new`](/dotnet/core/tools/dotnet-new) .Net Core 指南中的命令。
+* Blazor Server在命令 shell 中執行範本 () 的 [說明] 命令 `blazorserver` ：
+
+  ```dotnetcli
+  dotnet new blazorserver --help
+  ```
 
 ---
 
@@ -118,3 +125,8 @@ Scaffold Identity 至 Blazor Server 專案：
 
 * [沒有現有的授權](xref:security/authentication/scaffold-identity#scaffold-identity-into-a-blazor-server-project-without-existing-authorization)。
 * [具有授權](xref:security/authentication/scaffold-identity#scaffold-identity-into-a-blazor-server-project-with-authorization)。
+
+## <a name="additional-resources"></a>其他資源
+
+* [快速入門：將「使用 Microsoft 登入」新增至 ASP.NET Core Web 應用程式](/azure/active-directory/develop/quickstart-v2-aspnet-core-webapp)
+* [快速入門：以 Microsoft 身分識別平台保護 ASP.NET Core Web API](/azure/active-directory/develop/quickstart-v2-aspnet-core-web-api)

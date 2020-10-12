@@ -18,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/security/webassembly/hosted-with-identity-server
-ms.openlocfilehash: 91cc7ffc46f5f1f68efd7e481479b19938476cb0
-ms.sourcegitcommit: d7991068bc6b04063f4bd836fc5b9591d614d448
+ms.openlocfilehash: 6ae8c55fcfc85dc725a7dd20a7dbecba063a13e9
+ms.sourcegitcommit: daa9ccf580df531254da9dce8593441ac963c674
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 10/06/2020
-ms.locfileid: "91762239"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "91900777"
 ---
 # <a name="secure-an-aspnet-core-no-locblazor-webassembly-hosted-app-with-no-locidentity-server"></a>Blazor WebAssembly使用伺服器保護 ASP.NET Core 託管應用 Identity 程式
 
@@ -72,7 +72,7 @@ dotnet new blazorwasm -au Individual -ho -o {APP NAME}
 
 ---
 
-## <a name="server-app-configuration"></a>伺服器應用程式設定
+## <a name="server-app-configuration"></a>*`Server`* 應用程式設定
 
 下列各節說明在包含驗證支援時，專案的新增專案。
 
@@ -170,7 +170,7 @@ dotnet new blazorwasm -au Individual -ho -o {APP NAME}
 
 預留位置 `{APP ASSEMBLY}` 是應用程式的元件名稱 (例如 `BlazorSample.Client`) 。
 
-## <a name="client-app-configuration"></a>用戶端應用程式設定
+## <a name="client-app-configuration"></a>*`Client`* 應用程式設定
 
 ### <a name="authentication-package"></a>驗證套件
 
@@ -287,7 +287,7 @@ builder.Services.AddApiAuthorization();
 
 ### <a name="custom-user-factory"></a>自訂使用者 factory
 
-在用戶端應用程式中，建立自訂的使用者 factory。 Identity 伺服器會在單一宣告中以 JSON 陣列的形式傳送多個角色 `role` 。 單一角色會以字串值的形式傳送到宣告中。 Factory 會 `role` 為每個使用者的角色建立個別宣告。
+在 *`Client`* 應用程式中，建立自訂的使用者 factory。 Identity 伺服器會在單一宣告中以 JSON 陣列的形式傳送多個角色 `role` 。 單一角色會以字串值的形式傳送到宣告中。 Factory 會 `role` 為每個使用者的角色建立個別宣告。
 
 `CustomUserFactory.cs`:
 
@@ -349,14 +349,14 @@ public class CustomUserFactory
 }
 ```
 
-在用戶端應用程式中，在 () 中註冊 factory `Program.Main` `Program.cs` ：
+在 *`Client`* 應用程式中，在 () 中註冊 factory `Program.Main` `Program.cs` ：
 
 ```csharp
 builder.Services.AddApiAuthorization()
     .AddAccountClaimsPrincipalFactory<CustomUserFactory>();
 ```
 
-在伺服器應用程式中，在產生器 <xref:Microsoft.AspNetCore.Identity.IdentityBuilder.AddRoles*> 上呼叫 Identity ，這會新增角色相關服務：
+在應用程式中，在產生器 *`Server`* <xref:Microsoft.AspNetCore.Identity.IdentityBuilder.AddRoles*> 上呼叫 Identity ，以新增角色相關服務：
 
 ```csharp
 using Microsoft.AspNetCore.Identity;
@@ -378,7 +378,7 @@ services.AddDefaultIdentity<ApplicationUser>(options =>
 
 #### <a name="api-authorization-options"></a>API 授權選項
 
-在伺服器應用程式中：
+在 *`Server`* 應用程式中：
 
 * 設定 Identity 伺服器將 `name` 和宣告放 `role` 入識別碼權杖和存取權杖中。
 * 防止 JWT 權杖處理常式中的角色預設對應。
@@ -402,7 +402,7 @@ JwtSecurityTokenHandler.DefaultInboundClaimTypeMap.Remove("role");
 
 #### <a name="profile-service"></a>設定檔服務
 
-在伺服器應用程式中，建立一個 `ProfileService` 執行。
+在 *`Server`* 應用程式中，建立一個 `ProfileService` 執行。
 
 `ProfileService.cs`:
 
@@ -436,7 +436,7 @@ public class ProfileService : IProfileService
 }
 ```
 
-在伺服器應用程式中，在中註冊設定檔服務 `Startup.ConfigureServices` ：
+在 *`Server`* 應用程式中，在中註冊設定檔服務 `Startup.ConfigureServices` ：
 
 ```csharp
 using IdentityServer4.Services;
@@ -448,7 +448,7 @@ services.AddTransient<IProfileService, ProfileService>();
 
 ### <a name="use-authorization-mechanisms"></a>使用授權機制
 
-在用戶端應用程式中，元件授權方法此時可正常運作。 元件中的任何授權機制都可以使用角色來授權使用者：
+在 *`Client`* 應用程式中，元件授權方法此時可正常運作。 元件中的任何授權機制都可以使用角色來授權使用者：
 
 * [ `AuthorizeView` 元件](xref:blazor/security/index#authorizeview-component) (範例： `<AuthorizeView Roles="admin">`) 
 * [ `[Authorize]` 屬性](xref:blazor/security/index#authorize-attribute)指示詞 (<xref:Microsoft.AspNetCore.Authorization.AuthorizeAttribute>)  (範例： `@attribute [Authorize(Roles = "admin")]`) 
@@ -463,7 +463,7 @@ services.AddTransient<IProfileService, ProfileService>();
   }
   ```
 
-`User.Identity.Name` 會在用戶端應用程式中填入使用者的使用者名稱，通常是他們的登入電子郵件地址。
+`User.Identity.Name` 會在 *`Client`* 應用程式中填入使用者的使用者名稱，通常是他們的登入電子郵件地址。
 
 [!INCLUDE[](~/includes/blazor-security/usermanager-signinmanager.md)]
 
@@ -494,7 +494,7 @@ services.AddTransient<IProfileService, ProfileService>();
 
    * [Azure 金鑰保存庫](/azure/key-vault/certificates/quick-create-portal#add-a-certificate-to-key-vault)
    * [Windows 上的 MakeCert](/windows/desktop/seccrypto/makecert)
-   * [OpenSSL](https://www.openssl.org)
+   * [Openssl](https://www.openssl.org)
 
    記下密碼，稍後用來將憑證匯入 Azure Key Vault。
 
@@ -517,7 +517,7 @@ services.AddTransient<IProfileService, ProfileService>();
    * 具有**主機**的**TXT 記錄** `asuid` ，以及由 Azure 產生並由 Azure 入口網站提供的驗證識別碼值。
 
    請確定您已正確地在網域註冊機構的網站上儲存變更。 某些註冊機構網站需要兩個步驟的程式來儲存網域記錄：一或多筆記錄會個別儲存，然後以個別的按鈕更新網域的註冊。
-1. 返回 Azure 入口網站中的 [ **自訂網域** ] 分頁。 選取 [新增自訂網域]。 選取 [ **記錄** ] 選項。 提供網域，然後選取 [ **驗證**]。 如果網域記錄正確並傳播到網際網路，入口網站可讓您選取 [ **新增自訂網域** ] 按鈕。
+1. 返回 Azure 入口網站中的 [ **自訂網域** ] 分頁。 選取 [新增自訂網域]  。 選取 [ **記錄** ] 選項。 提供網域，然後選取 [ **驗證**]。 如果網域記錄正確並傳播到網際網路，入口網站可讓您選取 [ **新增自訂網域** ] 按鈕。
 
    網域註冊變更可能需要幾天的時間，才能在您的網域註冊機構處理 (DNS) 的網際網路功能變數名稱伺服器。 如果未在三個工作天內更新網域記錄，請確認已使用網域註冊機構正確設定記錄，並與客戶支援人員聯繫。
 1. 在 [ **自訂網域** ] 分頁中，會標示網域的 **SSL 狀態** `Not Secure` 。 選取 [ **新增** 系結] 連結。 從自訂網域系結的金鑰保存庫中，選取網站 HTTPS 憑證。
@@ -537,7 +537,7 @@ services.AddTransient<IProfileService, ProfileService>();
    },
    ```
 
-1. 在 Visual Studio 中，建立*伺服器*專案的 Azure App Service[發行設定檔](xref:host-and-deploy/visual-studio-publish-profiles#publish-profiles)。 從功能表列中，選取： **Build**  >  **發佈**  >  **新**的  >  **Azure**  >  **Azure App Service** (Windows 或 Linux) 。 當 Visual Studio 連接至 Azure 訂用帳戶時，您可以依**資源類型**設定 azure 資源的**觀點**。 在 **Web 應用程式** 清單中流覽，以找出應用程式的 App Service，然後選取它。 選取 [完成]  。
+1. 在 Visual Studio 中，建立*伺服器*專案的 Azure App Service[發行設定檔](xref:host-and-deploy/visual-studio-publish-profiles#publish-profiles)。 從功能表列中，選取： **Build**  >  **發佈**  >  **新**的  >  **Azure**  >  **Azure App Service** (Windows 或 Linux) 。 當 Visual Studio 連接至 Azure 訂用帳戶時，您可以依**資源類型**設定 azure 資源的**觀點**。 在 **Web 應用程式** 清單中流覽，以找出應用程式的 App Service，然後選取它。 選取 [完成]。
 1. 當 Visual Studio 返回 [ **發佈** ] 視窗時，系統會自動偵測金鑰保存庫和 SQL Server 資料庫服務相依性。
 
    Key vault 服務不需要對預設設定進行任何設定變更。

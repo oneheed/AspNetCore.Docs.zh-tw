@@ -18,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/debug
-ms.openlocfilehash: d4fd0d501ff14e37bb55b78bb6493ad43f9e5a87
-ms.sourcegitcommit: 139c998d37e9f3e3d0e3d72e10dbce8b75957d89
+ms.openlocfilehash: b8dd272d673e84b45a39272531385ebfd1d06175
+ms.sourcegitcommit: daa9ccf580df531254da9dce8593441ac963c674
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 10/07/2020
-ms.locfileid: "91805566"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "91900982"
 ---
 # <a name="debug-aspnet-core-no-locblazor-webassembly"></a>Debug ASP.NET Core Blazor WebAssembly
 
@@ -93,7 +93,7 @@ Visual Studio for Mac 需要8.8 版 (組建 1532) 或更新版本：
    > [!NOTE]
    > 不支援 (<kbd>Ctrl</kbd>F5) **啟動而不進行調試** + <kbd>F5</kbd> 。 當應用程式在偵錯工具設定中執行時，偵錯工具的額外負荷一律會降低效能。
 
-1. 在 *用戶端* 應用程式中的行上，設定中斷點 `currentCount++;` `Pages/Counter.razor` 。
+1. 在 `*Client*` 應用程式中的行上設定中斷點 `currentCount++;` `Pages/Counter.razor` 。
 1. 在瀏覽器中，流覽至 `Counter` 頁面，然後選取 [按 **我** ] 按鈕以點擊中斷點。
 1. 在 [Visual Studio] 中，檢查 [ `currentCount` **區域變數** ] 視窗中的域值。
 1. 按 <kbd>F5</kbd> 繼續執行。
@@ -155,7 +155,7 @@ Visual Studio for Mac 需要8.8 版 (組建 1532) 或更新版本：
 
 如需使用應用程式的自訂應用程式基底路徑的詳細資訊 Blazor WebAssembly ，請參閱 <xref:blazor/host-and-deploy/index#app-base-path> 。
 
-# <a name="visual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code)
+# <a name="visual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code) \(英文\)
 
 <h2 id="vscode">獨立調試 Blazor WebAssembly</h2>
 
@@ -180,7 +180,7 @@ Visual Studio for Mac 需要8.8 版 (組建 1532) 或更新版本：
 
 1. 獨立應用程式會啟動，並開啟偵錯工具瀏覽器。
 
-1. 在 *用戶端* 應用程式中的行上，設定中斷點 `currentCount++;` `Pages/Counter.razor` 。
+1. 在 `*Client*` 應用程式中的行上設定中斷點 `currentCount++;` `Pages/Counter.razor` 。
 
 1. 在瀏覽器中，流覽至 `Counter` 頁面，然後選取 [按 **我** ] 按鈕以點擊中斷點。
 
@@ -285,7 +285,7 @@ Visual Studio for Mac 需要8.8 版 (組建 1532) 或更新版本：
    > [!IMPORTANT]
    > Google Chrome 或 Microsoft Edge 必須是所選的瀏覽器，才能進行偵錯工具會話。
 
-1. 在 *用戶端* 應用程式中的行上，設定中斷點 `currentCount++;` `Pages/Counter.razor` 。
+1. 在 `*Client*` 應用程式中的行上設定中斷點 `currentCount++;` `Pages/Counter.razor` 。
 1. 在瀏覽器中，流覽至 `Counter` 頁面，然後選取 [按 **我** ] 按鈕以點擊中斷點：
 1. 在 [Visual Studio] 中，檢查 [ `currentCount` **區域變數** ] 視窗中的域值。
 1. 按<kbd>&#8984;</kbd> + <kbd>&#8617;</kbd>以繼續執行。
@@ -343,7 +343,7 @@ Blazor 提供可執行 [Chrome DevTools 通訊協定](https://chromedevtools.git
 如果您遇到錯誤，下列秘訣可能會有説明：
 
 * 在 [ **偵錯工具** ] 索引標籤中，開啟瀏覽器中的開發人員工具。 在主控台中，執行 `localStorage.clear()` 以移除任何中斷點。
-* 確認您已安裝並信任 ASP.NET Core HTTPS 開發憑證。 如需詳細資訊，請參閱 <xref:security/enforcing-ssl#troubleshoot-certificate-problems> 。
+* 確認您已安裝並信任 ASP.NET Core HTTPS 開發憑證。 如需詳細資訊，請參閱<xref:security/enforcing-ssl#troubleshoot-certificate-problems>。
 * Visual Studio 需要在 [**工具**選項] 的 [一般] 選項中 **，啟用 ASP.NET (Chrome、Edge 和 IE) 選項的 JavaScript 偵錯工具**  >  **Options**  >  **Debugging**  >  ** **。 這是 Visual Studio 的預設設定。 如果偵錯工具無法運作，請確認已選取該選項。
 * 如果您的環境使用 HTTP proxy，請確定 `localhost` 已包含在 proxy 略過設定中。 您可以 `NO_PROXY` 在下列其中一項設定環境變數來完成此動作：
   * 專案的檔案 `launchSettings.json` 。

@@ -1,3 +1,13 @@
-<xref:Microsoft.AspNetCore.Components.Authorization?displayProperty=fullName>命名空間可透過檔案在整個應用程式中使用 `_Imports.razor` ：
+您可以透過下列檔案，在 <xref:Microsoft.AspNetCore.Components.Authorization?displayProperty=fullName> 整個應用程式中取得命名空間 `_Imports.razor` ：
 
-[!code-razor[](imports-standalone.razor?highlight=3)]
+::: moniker range=">= aspnetcore-5.0"
+
+[!code-razor[](imports-standalone-5x.razor?highlight=3)]
+
+::: moniker-end
+
+::: moniker range="< aspnetcore-5.0"
+
+[!code-razor[](imports-standalone-3x.razor?highlight=3)]
+
+::: moniker-end

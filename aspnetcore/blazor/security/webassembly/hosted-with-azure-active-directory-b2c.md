@@ -5,7 +5,7 @@ description: 瞭解如何使用 Azure Active Directory B2C 保護 ASP.NET Core B
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 07/08/2020
+ms.date: 10/08/2020
 no-loc:
 - ASP.NET Core Identity
 - cookie
@@ -18,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/security/webassembly/hosted-with-azure-active-directory-b2c
-ms.openlocfilehash: adc45293a6dfd324c12482d2dfffdeaa25eee4a3
-ms.sourcegitcommit: 9a90b956af8d8584d597f1e5c1dbfb0ea9bb8454
+ms.openlocfilehash: aa6c865f5fd51d1634bde3ac96e1fddc7216a801
+ms.sourcegitcommit: daa9ccf580df531254da9dce8593441ac963c674
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 08/21/2020
-ms.locfileid: "88712437"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "91900943"
 ---
 # <a name="secure-an-aspnet-core-no-locblazor-webassembly-hosted-app-with-azure-active-directory-b2c"></a>Blazor WebAssembly使用 Azure Active Directory B2C 保護 ASP.NET Core 託管應用程式
 
@@ -47,7 +47,7 @@ ms.locfileid: "88712437"
 1. 提供應用程式的**名稱** (例如** Blazor Server AAD B2C**) 。
 1. 針對 **支援的帳戶類型**，請選取 [多租使用者] 選項： **任何組織目錄中的帳戶或任何身分識別提供者。用於驗證具有 Azure AD B2C 的使用者。**
 1. 在此案例中， *伺服器 API 應用程式* 不需要重新 **導向 uri** ，因此請將下拉式清單保持設定為 [ **Web** ]，而不要輸入重新導向 uri。
-1. 確認**Permissions**  >  已啟用許可權將**管理員同意授與 openid 和 offline_access 許可權**。
+1. 確認**Permissions**  >  已選取 [將系統**管理員同意授與 openid] 和 [offline_access] 許可權**。
 1. 選取 [註冊]。
 
 記錄下列資訊：
@@ -67,30 +67,52 @@ ms.locfileid: "88712437"
 
 記錄下列資訊：
 
-* 應用程式識別碼 URI (例如， `https://contoso.onmicrosoft.com/41451fa7-82d9-4673-8fa5-69eff5a761fd` 、 `api://41451fa7-82d9-4673-8fa5-69eff5a761fd` 或您提供的自訂值) 
+* 應用程式識別碼 URI (例如， `api://41451fa7-82d9-4673-8fa5-69eff5a761fd` 、 `https://contoso.onmicrosoft.com/41451fa7-82d9-4673-8fa5-69eff5a761fd` 或您提供的自訂值) 
 * 範圍名稱 (例如， `API.Access`) 
-
-應用程式識別碼 URI 可能需要用戶端應用程式中的特殊設定，如本主題稍後的 [存取權杖範圍](#access-token-scopes) 一節中所述。
 
 ### <a name="register-a-client-app"></a>註冊用戶端應用程式
 
-遵循教學課程中的指導方針 [：在 Azure Active Directory B2C 中註冊應用程式](/azure/active-directory-b2c/tutorial-register-applications) ，以註冊 *用戶端應用* 程式的 AAD 應用程式，然後執行下列動作：
+遵循教學課程中的指導方針 [：再次在 Azure Active Directory B2C 中註冊應用程式](/azure/active-directory-b2c/tutorial-register-applications) ，為應用程式註冊 AAD 應用程式 *`Client`* ，然後執行下列動作：
 
-1. 在**Azure Active Directory**  >  **應用程式註冊**中，選取 [**新增註冊**]。
+::: moniker range=">= aspnetcore-5.0"
+
+1. 在 **Azure Active Directory** > **應用程式註冊**中，選取 [ **新增註冊**]。
 1. 提供應用程式的**名稱** (例如， ** Blazor 用戶端 AAD B2C**) 。
 1. 針對 **支援的帳戶類型**，請選取 [多租使用者] 選項： **任何組織目錄中的帳戶或任何身分識別提供者。用於驗證具有 Azure AD B2C 的使用者。**
-1. 將 [重新 **導向 URI** ] 下拉式清單保持設定為 [ **Web** ]，並提供下列重新導向 uri： `https://localhost:{PORT}/authentication/login-callback` 。 在 Kestrel 上執行之應用程式的預設埠是5001。 如果應用程式是在不同的 Kestrel 埠上執行，請使用應用程式的埠。 針對 IIS Express，可在 [ **調試** 程式] 面板的伺服器應用程式屬性中找到應用程式隨機產生的埠。 由於應用程式目前不存在，且 IIS Express 埠未知，因此在建立應用程式之後，請返回此步驟，並更新重新導向 URI。 批註會出現在 [ [建立應用程式](#create-the-app) ] 區段中，以提醒 IIS Express 使用者更新重新導向 URI。
-1. 確認**Permissions**  >  已啟用許可權將**管理員同意授與 openid 和 offline_access 許可權**。
+1. 將 [重新 **導向 uri** ] 下拉式清單設定為 **單一頁面應用程式 (SPA) ** 並提供下列重新導向 uri： `https://localhost:{PORT}/authentication/login-callback` 。 在 Kestrel 上執行之應用程式的預設埠是5001。 如果應用程式是在不同的 Kestrel 埠上執行，請使用應用程式的埠。 針對 IIS Express，可在 [ *`Server`* **調試** 程式] 面板的應用程式屬性中找到應用程式隨機產生的埠。 由於應用程式目前不存在，且 IIS Express 埠未知，因此在建立應用程式之後，請返回此步驟，並更新重新導向 URI。 批註會出現在 [ [建立應用程式](#create-the-app) ] 區段中，以提醒 IIS Express 使用者更新重新導向 URI。
+1. 確認**Permissions** > 已選取 [將系統**管理員同意授與 openid] 和 [offline_access] 許可權**。
+1. 選取 [註冊]。
+
+1. 記錄應用程式 (用戶端) 識別碼 (例如 `4369008b-21fa-427c-abaa-9b53bf58e538`) 。
+
+在「**驗證**平臺設定」的 > **Platform configurations** > **單一頁面應用程式中， (SPA) **：
+
+1. 確認的重新 **導向 URI** `https://localhost:{PORT}/authentication/login-callback` 存在。
+1. 針對**隱含授**與，請確定**未**選取**存取權杖**和**識別碼權杖**的核取方塊。
+1. 此體驗可接受應用程式的其餘預設值。
+1. 選取 [儲存] 按鈕。
+
+::: moniker-end
+
+::: moniker range="< aspnetcore-5.0"
+
+1. 在 **Azure Active Directory** > **應用程式註冊**中，選取 [ **新增註冊**]。
+1. 提供應用程式的**名稱** (例如， ** Blazor 用戶端 AAD B2C**) 。
+1. 針對 **支援的帳戶類型**，請選取 [多租使用者] 選項： **任何組織目錄中的帳戶或任何身分識別提供者。用於驗證具有 Azure AD B2C 的使用者。**
+1. 將 [重新 **導向 URI** ] 下拉式清單保持設定為 [ **Web** ]，並提供下列重新導向 uri： `https://localhost:{PORT}/authentication/login-callback` 。 在 Kestrel 上執行之應用程式的預設埠是5001。 如果應用程式是在不同的 Kestrel 埠上執行，請使用應用程式的埠。 針對 IIS Express，可在 [ *`Server`* **調試** 程式] 面板的應用程式屬性中找到應用程式隨機產生的埠。 由於應用程式目前不存在，且 IIS Express 埠未知，因此在建立應用程式之後，請返回此步驟，並更新重新導向 URI。 批註會出現在 [ [建立應用程式](#create-the-app) ] 區段中，以提醒 IIS Express 使用者更新重新導向 URI。
+1. 確認**Permissions** > 已選取 [將系統**管理員同意授與 openid] 和 [offline_access] 許可權**。
 1. 選取 [註冊]。
 
 記錄應用程式 (用戶端) 識別碼 (例如 `4369008b-21fa-427c-abaa-9b53bf58e538`) 。
 
-在 [**驗證**  >  **平臺**設定]  >  **Web**：
+在 [ **驗證** > **平臺**設定] > **Web**：
 
 1. 確認的重新 **導向 URI** `https://localhost:{PORT}/authentication/login-callback` 存在。
 1. 針對 **[隱含授**與]，選取 **存取權杖** 和 **識別碼權杖**的核取方塊。
 1. 此體驗可接受應用程式的其餘預設值。
 1. 選取 [儲存] 按鈕。
+
+::: moniker-end
 
 在 **API 許可權**中：
 
@@ -99,7 +121,7 @@ ms.locfileid: "88712437"
 1. 開啟 **API** 清單。
 1. 啟用對 API 的存取 (例如 `API.Access`) 。
 1. 選取 [新增權限]。
-1. 選取 [ **授與系統管理員同意 {租使用者名稱}** ] 按鈕。 選取 [是] 以確認。
+1. 選取 [ **授與系統管理員同意 {租使用者名稱}** ] 按鈕。 選取 [是]  確認。
 
 在**Home**  >  **Azure AD B2C**  >  **使用者流程**：
 
@@ -117,32 +139,30 @@ ms.locfileid: "88712437"
 dotnet new blazorwasm -au IndividualB2C --aad-b2c-instance "{AAD B2C INSTANCE}" --api-client-id "{SERVER API APP CLIENT ID}" --app-id-uri "{SERVER API APP ID URI}" --client-id "{CLIENT APP CLIENT ID}" --default-scope "{DEFAULT SCOPE}" --domain "{TENANT DOMAIN}" -ho -o {APP NAME} -ssp "{SIGN UP OR SIGN IN POLICY}"
 ```
 
-| 預留位置                   | Azure 入口網站名稱                                     | 範例                                |
-| ----------------------------- | ----------------------------------------------------- | -------------------------------------- |
-| `{AAD B2C INSTANCE}`          | 執行個體                                              | `https://contoso.b2clogin.com/`        |
-| `{APP NAME}`                  | &mdash;                                               | `BlazorSample`                         |
-| `{CLIENT APP CLIENT ID}`      | *用戶端*應用程式 (用戶端) 識別碼的應用程式          | `4369008b-21fa-427c-abaa-9b53bf58e538` |
-| `{DEFAULT SCOPE}`             | 領域名稱                                            | `API.Access`                           |
-| `{SERVER API APP CLIENT ID}`  | *伺服器 API 應用*程式 (用戶端) 識別碼      | `41451fa7-82d9-4673-8fa5-69eff5a761fd` |
-| `{SERVER API APP ID URI}`     | 應用程式識別碼 URI ([請參閱附注](#access-token-scopes))  | `41451fa7-82d9-4673-8fa5-69eff5a761fd` |
-| `{SIGN UP OR SIGN IN POLICY}` | 註冊/登入使用者流程                             | `B2C_1_signupsignin1`                  |
-| `{TENANT DOMAIN}`             | 主要/發行者/租使用者網域                       | `contoso.onmicrosoft.com`              |
+| 預留位置                   | Azure 入口網站名稱                                     | 範例                                      |
+| ----------------------------- | ----------------------------------------------------- | -------------------------------------------- |
+| `{AAD B2C INSTANCE}`          | 執行個體                                              | `https://contoso.b2clogin.com/`              |
+| `{APP NAME}`                  | &mdash;                                               | `BlazorSample`                               |
+| `{CLIENT APP CLIENT ID}`      | 應用程式 (用戶端) 的應用程式識別碼 *`Client`*        | `4369008b-21fa-427c-abaa-9b53bf58e538`       |
+| `{DEFAULT SCOPE}`             | 範圍名稱                                            | `API.Access`                                 |
+| `{SERVER API APP CLIENT ID}`  | *伺服器 API 應用*程式 (用戶端) 識別碼      | `41451fa7-82d9-4673-8fa5-69eff5a761fd`       |
+| `{SERVER API APP ID URI}`     | 應用程式識別碼 URI                                    | `api://41451fa7-82d9-4673-8fa5-69eff5a761fd` |
+| `{SIGN UP OR SIGN IN POLICY}` | 註冊/登入使用者流程                             | `B2C_1_signupsignin1`                        |
+| `{TENANT DOMAIN}`             | 主要/發行者/租使用者網域                       | `contoso.onmicrosoft.com`                    |
 
 使用選項指定的輸出位置會 `-o|--output` 建立專案資料夾（如果不存在），而且會成為應用程式名稱的一部分。
 
 > [!NOTE]
-> 將應用程式識別碼 URI 傳遞給 `app-id-uri` 選項，但請注意，用戶端應用程式中可能需要進行設定變更，如 [存取權杖範圍](#access-token-scopes) 一節中所述。
->
-> 此外，裝載範本所設定的範圍 Blazor 可能會有重複的應用程式識別碼 URI 主機。 確認 `DefaultAccessTokenScopes` `Program.Main` `Program.cs` *用戶端應用程式* () 中為集合設定的範圍正確。
+> 裝載範本所設定的範圍 Blazor 可能會有重複的應用程式識別碼 URI 主機。 確認 `DefaultAccessTokenScopes` 在 `Program.Main` 應用程式的 () 中為集合設定的範圍正確 `Program.cs` *`Client`* 。
 
 > [!NOTE]
-> 在 Azure 入口網站中，*用戶端應用程式的***驗證**  >  **平臺**  >  設定**Web**重新  >  **導向 URI**是針對使用預設設定在 Kestrel 伺服器上執行的應用程式所設定的埠5001。
+> 在 Azure 入口網站中， *`Client`* 會針對使用預設設定在 Kestrel 伺服器上執行的應用程式，將應用程式的平臺設定重新 **導向 URI** 設定為使用埠5001。
 >
-> 如果*用戶端應用程式*是在隨機的 IIS Express 埠上執行，則可以在 [**調試**程式] 面板中的*伺服器 API 應用程式*屬性中找到應用程式的埠。
+> 如果 *`Client`* 應用程式是在隨機的 IIS Express 埠上執行，則可以在 [**調試**程式] 面板中的*伺服器 API 應用程式*屬性中找到應用程式的埠。
 >
-> 如果先前未使用 *用戶端應用程式的* 已知埠設定埠，請返回 Azure 入口網站中的 *用戶端應用程式* 註冊，然後以正確的埠更新重新導向 URI。
+> 如果先前未使用 *`Client`* 應用程式的已知埠設定埠，請返回 *`Client`* Azure 入口網站中的應用程式註冊，然後以正確的埠更新重新導向 URI。
 
-## <a name="server-app-configuration"></a>伺服器應用程式設定
+## <a name="server-app-configuration"></a>*`Server`* 應用程式設定
 
 *本節適用于解決方案的 **`Server`** 應用程式。*
 
@@ -243,7 +263,7 @@ public class WeatherForecastController : ControllerBase
 }
 ```
 
-## <a name="client-app-configuration"></a>用戶端應用程式設定
+## <a name="client-app-configuration"></a>*`Client`* 應用程式設定
 
 *本節適用于解決方案的 **`Client`** 應用程式。*
 
@@ -334,7 +354,11 @@ builder.Services.AddMsalAuthentication(options =>
 });
 ```
 
-[!INCLUDE[](~/includes/blazor-security/azure-scope.md)]
+使用下列內容指定其他範圍 `AdditionalScopesToConsent` ：
+
+```csharp
+options.ProviderOptions.AdditionalScopesToConsent.Add("{ADDITIONAL SCOPE URI}");
+```
 
 如需詳細資訊，請參閱下列 *其他案例* 文章的各節：
 

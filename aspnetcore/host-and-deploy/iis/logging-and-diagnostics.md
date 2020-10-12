@@ -18,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: host-and-deploy/iis/logging-and-diagnostics
-ms.openlocfilehash: 9af2311dd1f42cce3547c8215af22d2613453510
-ms.sourcegitcommit: d60bfd52bfb559e805abd654b87a2a0c7eb69cf8
+ms.openlocfilehash: 523eec53d7d21723dcf136c4e5ce299533a78cc6
+ms.sourcegitcommit: daa9ccf580df531254da9dce8593441ac963c674
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 10/06/2020
-ms.locfileid: "91755252"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "91901021"
 ---
 # <a name="log-creation-and-redirection"></a>記錄檔建立和重新導向
 
@@ -98,4 +98,4 @@ ASP.NET Core 模組是可設定的，以提供增強型診斷記錄。 將專案
 > [!WARNING]
 > 在部署中保持啟用偵錯記錄的時間，**不要**超過針對問題進行排解疑難所需的時間。 記錄的大小不受限制。 保持啟用偵錯記錄可能會耗盡可用磁碟空間，並讓伺服器或應用程式服務當機。
 
-請參閱的設定，以取得檔案中元素的範例。 [ `web.config` ](xref:host-and-deploy/iis/web-config#configuration-with-webconfig) `aspNetCore` `web.config`
+如需檔案中元素的範例，請參閱[ASP.NET Core 模組 `web.config` ](xref:host-and-deploy/iis/web-config#configuration-of-aspnet-core-module-with-webconfig)的設定 `aspNetCore` `web.config` 。

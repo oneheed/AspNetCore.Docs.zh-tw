@@ -18,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/security/webassembly/additional-scenarios
-ms.openlocfilehash: 2881b5d01f3b2e41659e3166a4e77b64a450f017
-ms.sourcegitcommit: a07f83b00db11f32313045b3492e5d1ff83c4437
+ms.openlocfilehash: 50d455b37c51fdd6d3b52b10b3e819eb45526de4
+ms.sourcegitcommit: daa9ccf580df531254da9dce8593441ac963c674
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 09/15/2020
-ms.locfileid: "90592914"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "91900956"
 ---
 # <a name="aspnet-core-no-locblazor-webassembly-additional-security-scenarios"></a>ASP.NET Core Blazor WebAssembly 額外的安全性案例
 
@@ -177,7 +177,7 @@ builder.Services.AddScoped(sp => new HttpClient(
 
 ### <a name="graph-api-example"></a>圖形 API 範例
 
-在下列範例中，名 <xref:System.Net.Http.HttpClient> 為的圖形 API 是用來取得使用者的行動電話號碼來處理通話。 在 `User.Read` Azure 入口網站的 AAD 區域中新增 MICROSOFT GRAPH API 許可權之後，會針對裝載解決方案的獨立應用程式或用戶端應用程式中的已命名用戶端設定範圍 Blazor 。
+在下列範例中，名 <xref:System.Net.Http.HttpClient> 為的圖形 API 是用來取得使用者的行動電話號碼來處理通話。 在 `User.Read` Azure 入口網站的 AAD 區域中新增 MICROSOFT GRAPH API 許可權之後，會針對裝載解決方案的獨立應用程式或應用程式中的已命名用戶端設定範圍 *`Client`* Blazor 。
 
 > [!NOTE]
 > 本章節中的範例會取得使用者在 *元件程式碼*中圖形 API 資料。 若要從圖形 API 建立使用者宣告，請參閱下列資源：
@@ -1070,7 +1070,7 @@ builder.Services.AddMsalAuthentication<RemoteAuthenticationState,
 * 不需要授權的 Prerenders 路徑。
 * 不需要授權的呈現路徑。
 
-在用戶端應用程式的 `Program` 類別 (`Program.cs`) 中，將常見的服務註冊納入不同的方法 (例如 `ConfigureCommonServices`) ：
+在 *`Client`* 應用程式的 `Program` 類別 (`Program.cs`) 中，將常見的服務註冊納入不同的方法 (例如 `ConfigureCommonServices`) ：
 
 ```csharp
 public class Program
@@ -1130,7 +1130,7 @@ app.UseEndpoints(endpoints =>
 });
 ```
 
-在伺服器應用程式中， `Pages` 如果資料夾不存在，請加以建立。 在 `_Host.cshtml` 伺服器應用程式的資料夾內建立頁面 `Pages` 。 將用戶端應用程式檔案中的內容貼到檔案中 `wwwroot/index.html` `Pages/_Host.cshtml` 。 更新檔案的內容：
+在伺服器應用程式中， `Pages` 如果資料夾不存在，請加以建立。 在 `_Host.cshtml` 伺服器應用程式的資料夾內建立頁面 `Pages` 。 將應用程式檔案中的內容貼到檔案中 *`Client`* `wwwroot/index.html` `Pages/_Host.cshtml` 。 更新檔案的內容：
 
 * 將 `@page "_Host"` 新增到檔案的頂端。
 * `<app>Loading...</app>`以下列內容取代標記：

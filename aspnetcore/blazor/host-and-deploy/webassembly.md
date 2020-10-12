@@ -5,7 +5,7 @@ description: 瞭解如何 Blazor 使用 ASP.NET Core、內容傳遞網路 (CDN) 
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 08/25/2020
+ms.date: 10/09/2020
 no-loc:
 - ASP.NET Core Identity
 - cookie
@@ -18,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/host-and-deploy/webassembly
-ms.openlocfilehash: 3436620123618ab32daa44c4a37057aaadb89563
-ms.sourcegitcommit: 74f4a4ddbe3c2f11e2e09d05d2a979784d89d3f5
+ms.openlocfilehash: 63954bd2fbb8fdb2e347d552a10adc52263c3ad6
+ms.sourcegitcommit: daa9ccf580df531254da9dce8593441ac963c674
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 09/27/2020
-ms.locfileid: "91393687"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "91900709"
 ---
 # <a name="host-and-deploy-aspnet-core-no-locblazor-webassembly"></a>裝載和部署 ASP.NET Core Blazor WebAssembly
 
@@ -867,3 +867,76 @@ Remove-Item $filepath\bin\Release\$tfm\wwwroot\_framework\blazor.boot.json.gz
 
 > [!NOTE]
 > 重新命名和消極式載入相同的元件時，請參閱中的指導方針 <xref:blazor/webassembly-lazy-load-assemblies#onnavigateasync-events-and-renamed-assembly-files> 。
+
+## <a name="resolve-integrity-check-failures"></a>解決完整性檢查失敗
+
+當 Blazor WebAssembly 下載應用程式的啟動檔案時，它會指示瀏覽器對回應執行完整性檢查。 它會使用檔案中的資訊 `blazor.boot.json` `.dll` ，為、和其他檔案指定預期的 256 sha-1 雜湊值 `.wasm` 。 這項功能很有用，原因如下：
+
+* 它可確保您不會在載入不一致的檔案集時產生風險，例如，當使用者在下載應用程式檔的過程中，將新的部署套用至您的 web 伺服器。 不一致的檔案可能會導致未定義的行為。
+* 它可確保使用者的瀏覽器永遠不會快取不一致或不正確回應，這可能會讓他們無法啟動應用程式，即使它們手動重新整理頁面也是如此。
+* 這可讓您安全地快取回應，甚至不檢查伺服器端的變更，直到預期的 256 SHA-1 雜湊本身變更為止，因此後續頁面載入牽涉到較少的要求，並更快完成。
+
+如果您的 web 伺服器傳回的回應不符合預期的 256 SHA-1 雜湊，您將會在瀏覽器的開發人員主控台中看到類似下面的錯誤：
+
+```
+Failed to find a valid digest in the 'integrity' attribute for resource 'https://myapp.example.com/_framework/MyBlazorApp.dll' with computed SHA-256 integrity 'IIa70iwvmEg5WiDV17OpQ5eCztNYqL186J56852RpJY='. The resource has been blocked.
+```
+
+在大部分的情況下，這 *不* 是完整性檢查本身的問題。 相反地，這表示有其他問題，而完整性檢查則會警告您有關該其他問題。
+
+### <a name="diagnosing-integrity-problems"></a>診斷完整性問題
+
+建立應用程式時，產生的 `blazor.boot.json` 資訊清單會描述您開機資源的 256 sha-1 雜湊 (例如，、 `.dll` 以及 `.wasm` 產生組建輸出時) 的其他檔案。 只要 SHA-256 雜湊 `blazor.boot.json` 符合傳遞給瀏覽器的檔案，完整性檢查就會通過。
+
+這種失敗的常見原因如下：
+
+ * Web 服務器的回應是錯誤 (例如， *找不到 404* 或 *500-Internal server 錯誤*) ，而不是瀏覽器要求的檔案。 瀏覽器會將此報告為完整性檢查失敗，而不是回應失敗。
+ * 在檔案的組建和傳遞之間，檔案的內容已變更至瀏覽器。 這可能會發生：
+   * 如果您或組建工具手動修改組建輸出。
+   * 如果部署程式的某些層面修改了檔案。 例如，如果您使用以 Git 為基礎的部署機制，請記住，如果您在 Windows 上認可檔案並在 Linux 上查看檔案，則 Git 會以透明的方式將 Windows 樣式的行尾結束符號轉換為 Unix 樣式的行尾結束符號。 變更檔案行尾結束符號會變更 256 SHA-1 雜湊。 若要避免這個問題，請考慮 [使用 `.gitattributes` 將組建構件 `binary` 視為](https://git-scm.com/book/en/v2/Customizing-Git-Git-Attributes)檔案。
+   * Web 服務器會在提供檔案內容的過程中修改檔案內容。 例如，某些內容散發網路 (Cdn) 會自動嘗試 [縮短](xref:client-side/bundling-and-minification#minification) HTML，進而修改它。 您可能需要停用這類功能。
+
+若要診斷下列哪一個適用于您的案例：
+
+ 1. 注意哪個檔案會藉由讀取錯誤訊息來觸發錯誤。
+ 1. 開啟瀏覽器的開發人員工具，並查看 [ *網路* ] 索引標籤。如有必要，請重載頁面以查看要求和回應的清單。 尋找在該清單中觸發錯誤的檔案。
+ 1. 檢查回應中的 HTTP 狀態碼。 如果伺服器傳回 *200-OK* (或另一個2xx 狀態碼) 以外的任何一個，則表示您有伺服器端的問題要進行診斷。 例如，狀態碼403表示有授權問題，而狀態碼500表示伺服器以未指定的方式失敗。 請參閱伺服器端記錄來診斷並修正應用程式。
+ 1. 如果資源的狀態碼是 *200-確定* ，請查看瀏覽器開發人員工具中的回應內容，並檢查內容是否 matchs 預期的資料。 例如，常見的問題是 jeffv 路由，讓要求即使是其他檔案也會傳回您的 `index.html` 資料。 請確定要求的回應 `.wasm` 是 WebAssembly 二進位檔，而要求的回應 `.dll` 是 .net 元件二進位檔。 如果沒有，您就有伺服器端路由問題需要進行診斷。
+
+如果您確認伺服器傳回義正辭嚴正確的資料，就必須在檔案的組建和傳遞之間修改內容。 若要調查這一點：
+
+ * 檢查組建工具鏈和部署機制，以防在建立檔案之後修改檔案。 例如，如先前所述，Git 會轉換檔案行尾結束符號。
+ * 檢查 web 伺服器或 CDN 設定，以防它們設定為動態修改回應 (例如，嘗試縮短 HTML) 。 Web 服務器可正常執行 HTTP 壓縮 (例如，傳回 `content-encoding: br` 或 `content-encoding: gzip`) ，因為這不會影響解壓縮之後的結果。 不過，網頁伺服器 *不* 能修改未壓縮的資料。
+
+### <a name="disable-integrity-checking-for-non-pwa-apps"></a>停用非 PWA 應用程式的完整性檢查
+
+在大多數情況下，請勿停用完整性檢查。 停用完整性檢查並無法解決造成非預期回應的根本問題，因而導致遺失先前所列的權益。
+
+在某些情況下，無法依賴網頁伺服器傳回一致的回應，而且您沒有任何選擇，而是停用完整性檢查。 若要停用完整性檢查，請將下列內容新增至專案檔中的屬性群組 Blazor WebAssembly `.csproj` ：
+
+```xml
+<BlazorCacheBootResources>false</BlazorCacheBootResources>
+```
+
+`BlazorCacheBootResources` 也會 Blazor `.dll` 根據其 256 sha-1 雜湊停用快取、和其他檔案的預設行為， `.wasm` 因為屬性指出無法依賴 sha-256 雜湊來取得正確性。 即使使用此設定，瀏覽器的一般 HTTP 快取仍可能會快取這些檔案，但這是否發生，取決於您的 web 伺服器設定和它所提供的 `cache-control` 標頭。
+
+> [!NOTE]
+> `BlazorCacheBootResources`屬性不會停用[漸進式 Web 應用程式的完整性檢查 (pwa) ](xref:blazor/progressive-web-app)。 如需 Pwa 的相關指引，請參閱 [停用 pwa 的完整性檢查](#disable-integrity-checking-for-pwas) 一節。
+
+### <a name="disable-integrity-checking-for-pwas"></a>停用 Pwa 的完整性檢查
+
+Blazor的漸進式 Web 應用程式 (PWA) 範本包含建議的檔案 `service-worker.published.js` ，該檔案負責提取和儲存應用程式檔，以供離線使用。 這是與一般應用程式啟動機制不同的程式，且具有自己的個別完整性檢查邏輯。
+
+在檔案中 `service-worker.published.js` ，下列程式程式碼存在：
+
+```javascript
+.map(asset => new Request(asset.url, { integrity: asset.hash }));
+```
+
+若要停用完整性檢查，請將這 `integrity` 一行變更為下列程式碼來移除參數：
+
+```javascript
+.map(asset => new Request(asset.url));
+```
+
+同樣地，停用完整性檢查即表示您遺失完整性檢查所提供的安全性保證。 例如，如果使用者的瀏覽器在您部署新版本的確切時刻快取了應用程式，則可能會有一個風險，它可以從舊的部署快取一些檔案，而有些則會從新的部署中快取。 如果發生這種情況，應用程式就會變成處於中斷狀態，直到您部署進一步的更新。

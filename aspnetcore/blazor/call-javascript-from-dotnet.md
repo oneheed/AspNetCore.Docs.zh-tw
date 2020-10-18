@@ -18,114 +18,114 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/call-javascript-from-dotnet
-ms.openlocfilehash: d36140067ba6e75f2d00cb86ea488e40d28bd86f
-ms.sourcegitcommit: d7991068bc6b04063f4bd836fc5b9591d614d448
+ms.openlocfilehash: a7ba41501b856482c8fcf7efa8e1d78857020bf5
+ms.sourcegitcommit: ecae2aa432628b9181d1fa11037c231c7dd56c9e
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 10/06/2020
-ms.locfileid: "91762161"
+ms.lasthandoff: 10/16/2020
+ms.locfileid: "92113760"
 ---
-# <a name="call-javascript-functions-from-net-methods-in-aspnet-core-no-locblazor"></a><span data-ttu-id="eeb75-103">從 ASP.NET Core 中的 .NET 方法呼叫 JavaScript 函式 Blazor</span><span class="sxs-lookup"><span data-stu-id="eeb75-103">Call JavaScript functions from .NET methods in ASP.NET Core Blazor</span></span>
+# <a name="call-javascript-functions-from-net-methods-in-aspnet-core-no-locblazor"></a><span data-ttu-id="485e2-103">從 ASP.NET Core 中的 .NET 方法呼叫 JavaScript 函式 Blazor</span><span class="sxs-lookup"><span data-stu-id="485e2-103">Call JavaScript functions from .NET methods in ASP.NET Core Blazor</span></span>
 
-<span data-ttu-id="eeb75-104">[Javier Calvarro Nelson](https://github.com/javiercn)、 [Daniel Roth](https://github.com/danroth27)和[Luke Latham](https://github.com/guardrex)</span><span class="sxs-lookup"><span data-stu-id="eeb75-104">By [Javier Calvarro Nelson](https://github.com/javiercn), [Daniel Roth](https://github.com/danroth27), and [Luke Latham](https://github.com/guardrex)</span></span>
+<span data-ttu-id="485e2-104">[Javier Calvarro Nelson](https://github.com/javiercn)、 [Daniel Roth](https://github.com/danroth27)和[Luke Latham](https://github.com/guardrex)</span><span class="sxs-lookup"><span data-stu-id="485e2-104">By [Javier Calvarro Nelson](https://github.com/javiercn), [Daniel Roth](https://github.com/danroth27), and [Luke Latham](https://github.com/guardrex)</span></span>
 
-<span data-ttu-id="eeb75-105">Blazor應用程式可以從 javascript 函式的 .net 方法和 .net 方法中叫用 javascript 函式。</span><span class="sxs-lookup"><span data-stu-id="eeb75-105">A Blazor app can invoke JavaScript functions from .NET methods and .NET methods from JavaScript functions.</span></span> <span data-ttu-id="eeb75-106">這些案例稱為 *JavaScript 互通性* (*JS interop*) 。</span><span class="sxs-lookup"><span data-stu-id="eeb75-106">These scenarios are called *JavaScript interoperability* (*JS interop*).</span></span>
+<span data-ttu-id="485e2-105">Blazor應用程式可以從 javascript 函式的 .net 方法和 .net 方法中叫用 javascript 函式。</span><span class="sxs-lookup"><span data-stu-id="485e2-105">A Blazor app can invoke JavaScript functions from .NET methods and .NET methods from JavaScript functions.</span></span> <span data-ttu-id="485e2-106">這些案例稱為 *JavaScript 互通性* (*JS interop*) 。</span><span class="sxs-lookup"><span data-stu-id="485e2-106">These scenarios are called *JavaScript interoperability* (*JS interop*).</span></span>
 
-<span data-ttu-id="eeb75-107">本文涵蓋從 .NET 叫用 JavaScript 函式的功能。</span><span class="sxs-lookup"><span data-stu-id="eeb75-107">This article covers invoking JavaScript functions from .NET.</span></span> <span data-ttu-id="eeb75-108">如需如何從 JavaScript 呼叫 .NET 方法的詳細資訊，請參閱 <xref:blazor/call-dotnet-from-javascript> 。</span><span class="sxs-lookup"><span data-stu-id="eeb75-108">For information on how to call .NET methods from JavaScript, see <xref:blazor/call-dotnet-from-javascript>.</span></span>
+<span data-ttu-id="485e2-107">本文涵蓋從 .NET 叫用 JavaScript 函式的功能。</span><span class="sxs-lookup"><span data-stu-id="485e2-107">This article covers invoking JavaScript functions from .NET.</span></span> <span data-ttu-id="485e2-108">如需如何從 JavaScript 呼叫 .NET 方法的詳細資訊，請參閱 <xref:blazor/call-dotnet-from-javascript> 。</span><span class="sxs-lookup"><span data-stu-id="485e2-108">For information on how to call .NET methods from JavaScript, see <xref:blazor/call-dotnet-from-javascript>.</span></span>
 
-<span data-ttu-id="eeb75-109">[查看或下載範例程式碼](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/blazor/common/samples/) ([如何下載](xref:index#how-to-download-a-sample)) </span><span class="sxs-lookup"><span data-stu-id="eeb75-109">[View or download sample code](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/blazor/common/samples/) ([how to download](xref:index#how-to-download-a-sample))</span></span>
+<span data-ttu-id="485e2-109">[查看或下載範例程式碼](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/blazor/common/samples/) ([如何下載](xref:index#how-to-download-a-sample)) </span><span class="sxs-lookup"><span data-stu-id="485e2-109">[View or download sample code](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/blazor/common/samples/) ([how to download](xref:index#how-to-download-a-sample))</span></span>
 
-<span data-ttu-id="eeb75-110">若要從 .NET 呼叫 JavaScript，請使用 <xref:Microsoft.JSInterop.IJSRuntime> 抽象概念。</span><span class="sxs-lookup"><span data-stu-id="eeb75-110">To call into JavaScript from .NET, use the <xref:Microsoft.JSInterop.IJSRuntime> abstraction.</span></span> <span data-ttu-id="eeb75-111">若要發出 JS interop 呼叫，請 <xref:Microsoft.JSInterop.IJSRuntime> 在您的元件中插入抽象概念。</span><span class="sxs-lookup"><span data-stu-id="eeb75-111">To issue JS interop calls, inject the <xref:Microsoft.JSInterop.IJSRuntime> abstraction in your component.</span></span> <span data-ttu-id="eeb75-112"><xref:Microsoft.JSInterop.IJSRuntime.InvokeAsync%2A> 取得您想要叫用之 JavaScript 函式的識別碼，以及任何數目的 JSON 可序列化引數。</span><span class="sxs-lookup"><span data-stu-id="eeb75-112"><xref:Microsoft.JSInterop.IJSRuntime.InvokeAsync%2A> takes an identifier for the JavaScript function that you wish to invoke along with any number of JSON-serializable arguments.</span></span> <span data-ttu-id="eeb75-113">函數識別碼是相對於全域範圍 (`window`) 。</span><span class="sxs-lookup"><span data-stu-id="eeb75-113">The function identifier is relative to the global scope (`window`).</span></span> <span data-ttu-id="eeb75-114">如果您想要呼叫 `window.someScope.someFunction` ，則識別碼為 `someScope.someFunction` 。</span><span class="sxs-lookup"><span data-stu-id="eeb75-114">If you wish to call `window.someScope.someFunction`, the identifier is `someScope.someFunction`.</span></span> <span data-ttu-id="eeb75-115">在呼叫函式之前，不需要先註冊函式。</span><span class="sxs-lookup"><span data-stu-id="eeb75-115">There's no need to register the function before it's called.</span></span> <span data-ttu-id="eeb75-116">傳回型別 `T` 也必須是 JSON 可序列化。</span><span class="sxs-lookup"><span data-stu-id="eeb75-116">The return type `T` must also be JSON serializable.</span></span> <span data-ttu-id="eeb75-117">`T` 應符合最適合對應至所傳回 JSON 型別的 .NET 型別。</span><span class="sxs-lookup"><span data-stu-id="eeb75-117">`T` should match the .NET type that best maps to the JSON type returned.</span></span>
+<span data-ttu-id="485e2-110">若要從 .NET 呼叫 JavaScript，請使用 <xref:Microsoft.JSInterop.IJSRuntime> 抽象概念。</span><span class="sxs-lookup"><span data-stu-id="485e2-110">To call into JavaScript from .NET, use the <xref:Microsoft.JSInterop.IJSRuntime> abstraction.</span></span> <span data-ttu-id="485e2-111">若要發出 JS interop 呼叫，請 <xref:Microsoft.JSInterop.IJSRuntime> 在您的元件中插入抽象概念。</span><span class="sxs-lookup"><span data-stu-id="485e2-111">To issue JS interop calls, inject the <xref:Microsoft.JSInterop.IJSRuntime> abstraction in your component.</span></span> <span data-ttu-id="485e2-112"><xref:Microsoft.JSInterop.IJSRuntime.InvokeAsync%2A> 取得您想要叫用之 JavaScript 函式的識別碼，以及任何數目的 JSON 可序列化引數。</span><span class="sxs-lookup"><span data-stu-id="485e2-112"><xref:Microsoft.JSInterop.IJSRuntime.InvokeAsync%2A> takes an identifier for the JavaScript function that you wish to invoke along with any number of JSON-serializable arguments.</span></span> <span data-ttu-id="485e2-113">函數識別碼是相對於全域範圍 (`window`) 。</span><span class="sxs-lookup"><span data-stu-id="485e2-113">The function identifier is relative to the global scope (`window`).</span></span> <span data-ttu-id="485e2-114">如果您想要呼叫 `window.someScope.someFunction` ，則識別碼為 `someScope.someFunction` 。</span><span class="sxs-lookup"><span data-stu-id="485e2-114">If you wish to call `window.someScope.someFunction`, the identifier is `someScope.someFunction`.</span></span> <span data-ttu-id="485e2-115">在呼叫函式之前，不需要先註冊函式。</span><span class="sxs-lookup"><span data-stu-id="485e2-115">There's no need to register the function before it's called.</span></span> <span data-ttu-id="485e2-116">傳回型別 `T` 也必須是 JSON 可序列化。</span><span class="sxs-lookup"><span data-stu-id="485e2-116">The return type `T` must also be JSON serializable.</span></span> <span data-ttu-id="485e2-117">`T` 應符合最適合對應至所傳回 JSON 型別的 .NET 型別。</span><span class="sxs-lookup"><span data-stu-id="485e2-117">`T` should match the .NET type that best maps to the JSON type returned.</span></span>
 
-<span data-ttu-id="eeb75-118">傳回 [承諾](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Promise) 的 JavaScript 函式是使用來呼叫 <xref:Microsoft.JSInterop.IJSRuntime.InvokeAsync%2A> 。</span><span class="sxs-lookup"><span data-stu-id="eeb75-118">JavaScript functions that return a [Promise](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Promise) are called with <xref:Microsoft.JSInterop.IJSRuntime.InvokeAsync%2A>.</span></span> <span data-ttu-id="eeb75-119">`InvokeAsync` 解除包裝承諾，並傳回承諾所等待的值。</span><span class="sxs-lookup"><span data-stu-id="eeb75-119">`InvokeAsync` unwraps the Promise and returns the value awaited by the Promise.</span></span>
+<span data-ttu-id="485e2-118">傳回 [承諾](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Promise) 的 JavaScript 函式是使用來呼叫 <xref:Microsoft.JSInterop.IJSRuntime.InvokeAsync%2A> 。</span><span class="sxs-lookup"><span data-stu-id="485e2-118">JavaScript functions that return a [Promise](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Promise) are called with <xref:Microsoft.JSInterop.IJSRuntime.InvokeAsync%2A>.</span></span> <span data-ttu-id="485e2-119">`InvokeAsync` 解除包裝承諾，並傳回承諾所等待的值。</span><span class="sxs-lookup"><span data-stu-id="485e2-119">`InvokeAsync` unwraps the Promise and returns the value awaited by the Promise.</span></span>
 
-<span data-ttu-id="eeb75-120">針對 Blazor Server 已啟用可執行處理的應用程式，在初始未處理期間無法呼叫 JavaScript。</span><span class="sxs-lookup"><span data-stu-id="eeb75-120">For Blazor Server apps with prerendering enabled, calling into JavaScript isn't possible during the initial prerendering.</span></span> <span data-ttu-id="eeb75-121">必須先延遲 JavaScript interop 呼叫，才能建立與瀏覽器的連接。</span><span class="sxs-lookup"><span data-stu-id="eeb75-121">JavaScript interop calls must be deferred until after the connection with the browser is established.</span></span> <span data-ttu-id="eeb75-122">如需詳細資訊，請參閱「偵測 [ Blazor Server 應用程式何時進行](#detect-when-a-blazor-server-app-is-prerendering) 偵測」一節。</span><span class="sxs-lookup"><span data-stu-id="eeb75-122">For more information, see the [Detect when a Blazor Server app is prerendering](#detect-when-a-blazor-server-app-is-prerendering) section.</span></span>
+<span data-ttu-id="485e2-120">針對 Blazor Server 已啟用可執行處理的應用程式，在初始未處理期間無法呼叫 JavaScript。</span><span class="sxs-lookup"><span data-stu-id="485e2-120">For Blazor Server apps with prerendering enabled, calling into JavaScript isn't possible during the initial prerendering.</span></span> <span data-ttu-id="485e2-121">必須先延遲 JavaScript interop 呼叫，才能建立與瀏覽器的連接。</span><span class="sxs-lookup"><span data-stu-id="485e2-121">JavaScript interop calls must be deferred until after the connection with the browser is established.</span></span> <span data-ttu-id="485e2-122">如需詳細資訊，請參閱「偵測 [ Blazor Server 應用程式何時進行](#detect-when-a-blazor-server-app-is-prerendering) 偵測」一節。</span><span class="sxs-lookup"><span data-stu-id="485e2-122">For more information, see the [Detect when a Blazor Server app is prerendering](#detect-when-a-blazor-server-app-is-prerendering) section.</span></span>
 
-<span data-ttu-id="eeb75-123">下列範例是 [`TextDecoder`](https://developer.mozilla.org/docs/Web/API/TextDecoder) 以 JavaScript 為基礎的解碼器為基礎。</span><span class="sxs-lookup"><span data-stu-id="eeb75-123">The following example is based on [`TextDecoder`](https://developer.mozilla.org/docs/Web/API/TextDecoder), a JavaScript-based decoder.</span></span> <span data-ttu-id="eeb75-124">此範例示範如何從 c # 方法叫用 JavaScript 函式，該方法會從開發人員程式碼將要求卸載至現有的 JavaScript API。</span><span class="sxs-lookup"><span data-stu-id="eeb75-124">The example demonstrates how to invoke a JavaScript function from a C# method that offloads a requirement from developer code to an existing JavaScript API.</span></span> <span data-ttu-id="eeb75-125">JavaScript 函式會從 c # 方法接受位元組陣列、將陣列解碼，然後將文字傳回至元件以供顯示。</span><span class="sxs-lookup"><span data-stu-id="eeb75-125">The JavaScript function accepts a byte array from a C# method, decodes the array, and returns the text to the component for display.</span></span>
+<span data-ttu-id="485e2-123">下列範例是 [`TextDecoder`](https://developer.mozilla.org/docs/Web/API/TextDecoder) 以 JavaScript 為基礎的解碼器為基礎。</span><span class="sxs-lookup"><span data-stu-id="485e2-123">The following example is based on [`TextDecoder`](https://developer.mozilla.org/docs/Web/API/TextDecoder), a JavaScript-based decoder.</span></span> <span data-ttu-id="485e2-124">此範例示範如何從 c # 方法叫用 JavaScript 函式，該方法會從開發人員程式碼將要求卸載至現有的 JavaScript API。</span><span class="sxs-lookup"><span data-stu-id="485e2-124">The example demonstrates how to invoke a JavaScript function from a C# method that offloads a requirement from developer code to an existing JavaScript API.</span></span> <span data-ttu-id="485e2-125">JavaScript 函式會從 c # 方法接受位元組陣列、將陣列解碼，然後將文字傳回至元件以供顯示。</span><span class="sxs-lookup"><span data-stu-id="485e2-125">The JavaScript function accepts a byte array from a C# method, decodes the array, and returns the text to the component for display.</span></span>
 
-<span data-ttu-id="eeb75-126">在 `<head>` `wwwroot/index.html` (Blazor WebAssembly) 或 () 的元素內 `Pages/_Host.cshtml` ，提供 JavaScript 函式， Blazor Server 用 `TextDecoder` 來解碼傳遞的陣列並傳回已解碼的值：</span><span class="sxs-lookup"><span data-stu-id="eeb75-126">Inside the `<head>` element of `wwwroot/index.html` (Blazor WebAssembly) or `Pages/_Host.cshtml` (Blazor Server), provide a JavaScript function that uses `TextDecoder` to decode a passed array and return the decoded value:</span></span>
+<span data-ttu-id="485e2-126">在 `<head>` `wwwroot/index.html` (Blazor WebAssembly) 或 () 的元素內 `Pages/_Host.cshtml` ，提供 JavaScript 函式， Blazor Server 用 `TextDecoder` 來解碼傳遞的陣列並傳回已解碼的值：</span><span class="sxs-lookup"><span data-stu-id="485e2-126">Inside the `<head>` element of `wwwroot/index.html` (Blazor WebAssembly) or `Pages/_Host.cshtml` (Blazor Server), provide a JavaScript function that uses `TextDecoder` to decode a passed array and return the decoded value:</span></span>
 
 [!code-html[](call-javascript-from-dotnet/samples_snapshot/index-script-convertarray.html)]
 
-<span data-ttu-id="eeb75-127">JavaScript 程式碼（例如上述範例中所示的程式碼）也可以從 JavaScript 檔案載入， (`.js`) 並參考腳本檔案：</span><span class="sxs-lookup"><span data-stu-id="eeb75-127">JavaScript code, such as the code shown in the preceding example, can also be loaded from a JavaScript file (`.js`) with a reference to the script file:</span></span>
+<span data-ttu-id="485e2-127">JavaScript 程式碼（例如上述範例中所示的程式碼）也可以從 JavaScript 檔案載入， (`.js`) 並參考腳本檔案：</span><span class="sxs-lookup"><span data-stu-id="485e2-127">JavaScript code, such as the code shown in the preceding example, can also be loaded from a JavaScript file (`.js`) with a reference to the script file:</span></span>
 
 ```html
 <script src="exampleJsInterop.js"></script>
 ```
 
-<span data-ttu-id="eeb75-128">下列元件：</span><span class="sxs-lookup"><span data-stu-id="eeb75-128">The following component:</span></span>
+<span data-ttu-id="485e2-128">下列元件：</span><span class="sxs-lookup"><span data-stu-id="485e2-128">The following component:</span></span>
 
-* <span data-ttu-id="eeb75-129">`convertArray` `JSRuntime` 當選取元件按鈕 () 時，會叫用 JavaScript 函數 **`Convert Array`** 。</span><span class="sxs-lookup"><span data-stu-id="eeb75-129">Invokes the `convertArray` JavaScript function using `JSRuntime` when a component button (**`Convert Array`**) is selected.</span></span>
-* <span data-ttu-id="eeb75-130">呼叫 JavaScript 函數之後，傳遞的陣列就會轉換成字串。</span><span class="sxs-lookup"><span data-stu-id="eeb75-130">After the JavaScript function is called, the passed array is converted into a string.</span></span> <span data-ttu-id="eeb75-131">字串會傳回給元件以供顯示。</span><span class="sxs-lookup"><span data-stu-id="eeb75-131">The string is returned to the component for display.</span></span>
+* <span data-ttu-id="485e2-129">`convertArray` `JSRuntime` 當選取元件按鈕 () 時，會叫用 JavaScript 函數 **`Convert Array`** 。</span><span class="sxs-lookup"><span data-stu-id="485e2-129">Invokes the `convertArray` JavaScript function using `JSRuntime` when a component button (**`Convert Array`**) is selected.</span></span>
+* <span data-ttu-id="485e2-130">呼叫 JavaScript 函數之後，傳遞的陣列就會轉換成字串。</span><span class="sxs-lookup"><span data-stu-id="485e2-130">After the JavaScript function is called, the passed array is converted into a string.</span></span> <span data-ttu-id="485e2-131">字串會傳回給元件以供顯示。</span><span class="sxs-lookup"><span data-stu-id="485e2-131">The string is returned to the component for display.</span></span>
 
 [!code-razor[](call-javascript-from-dotnet/samples_snapshot/call-js-example.razor?highlight=2,34-35)]
 
-## <a name="ijsruntime"></a><span data-ttu-id="eeb75-132">IJSRuntime</span><span class="sxs-lookup"><span data-stu-id="eeb75-132">IJSRuntime</span></span>
+## <a name="ijsruntime"></a><span data-ttu-id="485e2-132">IJSRuntime</span><span class="sxs-lookup"><span data-stu-id="485e2-132">IJSRuntime</span></span>
 
-<span data-ttu-id="eeb75-133">若要使用 <xref:Microsoft.JSInterop.IJSRuntime> 抽象概念，請採用下列其中一種方法：</span><span class="sxs-lookup"><span data-stu-id="eeb75-133">To use the <xref:Microsoft.JSInterop.IJSRuntime> abstraction, adopt any of the following approaches:</span></span>
+<span data-ttu-id="485e2-133">若要使用 <xref:Microsoft.JSInterop.IJSRuntime> 抽象概念，請採用下列其中一種方法：</span><span class="sxs-lookup"><span data-stu-id="485e2-133">To use the <xref:Microsoft.JSInterop.IJSRuntime> abstraction, adopt any of the following approaches:</span></span>
 
-* <span data-ttu-id="eeb75-134">將 <xref:Microsoft.JSInterop.IJSRuntime> 抽象概念插入 Razor 元件 (`.razor`) ：</span><span class="sxs-lookup"><span data-stu-id="eeb75-134">Inject the <xref:Microsoft.JSInterop.IJSRuntime> abstraction into the Razor component (`.razor`):</span></span>
+* <span data-ttu-id="485e2-134">將 <xref:Microsoft.JSInterop.IJSRuntime> 抽象概念插入 Razor 元件 (`.razor`) ：</span><span class="sxs-lookup"><span data-stu-id="485e2-134">Inject the <xref:Microsoft.JSInterop.IJSRuntime> abstraction into the Razor component (`.razor`):</span></span>
 
   [!code-razor[](call-javascript-from-dotnet/samples_snapshot/inject-abstraction.razor?highlight=1)]
 
-  <span data-ttu-id="eeb75-135">在 `<head>` `wwwroot/index.html` (Blazor WebAssembly) 或 () 的元素內 `Pages/_Host.cshtml` Blazor Server ，提供 `handleTickerChanged` JavaScript 函數。</span><span class="sxs-lookup"><span data-stu-id="eeb75-135">Inside the `<head>` element of `wwwroot/index.html` (Blazor WebAssembly) or `Pages/_Host.cshtml` (Blazor Server), provide a `handleTickerChanged` JavaScript function.</span></span> <span data-ttu-id="eeb75-136">呼叫函式時，會傳回 <xref:Microsoft.JSInterop.JSRuntimeExtensions.InvokeVoidAsync%2A?displayProperty=nameWithType> ，而且不會傳回值：</span><span class="sxs-lookup"><span data-stu-id="eeb75-136">The function is called with <xref:Microsoft.JSInterop.JSRuntimeExtensions.InvokeVoidAsync%2A?displayProperty=nameWithType> and doesn't return a value:</span></span>
+  <span data-ttu-id="485e2-135">在 `<head>` `wwwroot/index.html` (Blazor WebAssembly) 或 () 的元素內 `Pages/_Host.cshtml` Blazor Server ，提供 `handleTickerChanged` JavaScript 函數。</span><span class="sxs-lookup"><span data-stu-id="485e2-135">Inside the `<head>` element of `wwwroot/index.html` (Blazor WebAssembly) or `Pages/_Host.cshtml` (Blazor Server), provide a `handleTickerChanged` JavaScript function.</span></span> <span data-ttu-id="485e2-136">呼叫函式時，會傳回 <xref:Microsoft.JSInterop.JSRuntimeExtensions.InvokeVoidAsync%2A?displayProperty=nameWithType> ，而且不會傳回值：</span><span class="sxs-lookup"><span data-stu-id="485e2-136">The function is called with <xref:Microsoft.JSInterop.JSRuntimeExtensions.InvokeVoidAsync%2A?displayProperty=nameWithType> and doesn't return a value:</span></span>
 
   [!code-html[](call-javascript-from-dotnet/samples_snapshot/index-script-handleTickerChanged1.html)]
 
-* <span data-ttu-id="eeb75-137">將 <xref:Microsoft.JSInterop.IJSRuntime> 抽象概念插入類別 (`.cs`) ：</span><span class="sxs-lookup"><span data-stu-id="eeb75-137">Inject the <xref:Microsoft.JSInterop.IJSRuntime> abstraction into a class (`.cs`):</span></span>
+* <span data-ttu-id="485e2-137">將 <xref:Microsoft.JSInterop.IJSRuntime> 抽象概念插入類別 (`.cs`) ：</span><span class="sxs-lookup"><span data-stu-id="485e2-137">Inject the <xref:Microsoft.JSInterop.IJSRuntime> abstraction into a class (`.cs`):</span></span>
 
   [!code-csharp[](call-javascript-from-dotnet/samples_snapshot/inject-abstraction-class.cs?highlight=5)]
 
-  <span data-ttu-id="eeb75-138">在 `<head>` `wwwroot/index.html` (Blazor WebAssembly) 或 () 的元素內 `Pages/_Host.cshtml` Blazor Server ，提供 `handleTickerChanged` JavaScript 函數。</span><span class="sxs-lookup"><span data-stu-id="eeb75-138">Inside the `<head>` element of `wwwroot/index.html` (Blazor WebAssembly) or `Pages/_Host.cshtml` (Blazor Server), provide a `handleTickerChanged` JavaScript function.</span></span> <span data-ttu-id="eeb75-139">呼叫函式時，會傳回 `JSRuntime.InvokeAsync` 值：</span><span class="sxs-lookup"><span data-stu-id="eeb75-139">The function is called with `JSRuntime.InvokeAsync` and returns a value:</span></span>
+  <span data-ttu-id="485e2-138">在 `<head>` `wwwroot/index.html` (Blazor WebAssembly) 或 () 的元素內 `Pages/_Host.cshtml` Blazor Server ，提供 `handleTickerChanged` JavaScript 函數。</span><span class="sxs-lookup"><span data-stu-id="485e2-138">Inside the `<head>` element of `wwwroot/index.html` (Blazor WebAssembly) or `Pages/_Host.cshtml` (Blazor Server), provide a `handleTickerChanged` JavaScript function.</span></span> <span data-ttu-id="485e2-139">呼叫函式時，會傳回 `JSRuntime.InvokeAsync` 值：</span><span class="sxs-lookup"><span data-stu-id="485e2-139">The function is called with `JSRuntime.InvokeAsync` and returns a value:</span></span>
 
   [!code-html[](call-javascript-from-dotnet/samples_snapshot/index-script-handleTickerChanged2.html)]
 
-* <span data-ttu-id="eeb75-140">針對使用 [BuildRenderTree](xref:blazor/advanced-scenarios#manual-rendertreebuilder-logic)的動態內容產生，請使用 `[Inject]` 屬性：</span><span class="sxs-lookup"><span data-stu-id="eeb75-140">For dynamic content generation with [BuildRenderTree](xref:blazor/advanced-scenarios#manual-rendertreebuilder-logic), use the `[Inject]` attribute:</span></span>
+* <span data-ttu-id="485e2-140">針對使用 [BuildRenderTree](xref:blazor/advanced-scenarios#manual-rendertreebuilder-logic)的動態內容產生，請使用 `[Inject]` 屬性：</span><span class="sxs-lookup"><span data-stu-id="485e2-140">For dynamic content generation with [BuildRenderTree](xref:blazor/advanced-scenarios#manual-rendertreebuilder-logic), use the `[Inject]` attribute:</span></span>
 
   ```razor
   [Inject]
   IJSRuntime JSRuntime { get; set; }
   ```
 
-<span data-ttu-id="eeb75-141">在本主題隨附的用戶端範例應用程式中，應用程式可以使用兩個 JavaScript 函式來與 DOM 互動，以接收使用者輸入並顯示歡迎訊息：</span><span class="sxs-lookup"><span data-stu-id="eeb75-141">In the client-side sample app that accompanies this topic, two JavaScript functions are available to the app that interact with the DOM to receive user input and display a welcome message:</span></span>
+<span data-ttu-id="485e2-141">在本主題隨附的用戶端範例應用程式中，應用程式可以使用兩個 JavaScript 函式來與 DOM 互動，以接收使用者輸入並顯示歡迎訊息：</span><span class="sxs-lookup"><span data-stu-id="485e2-141">In the client-side sample app that accompanies this topic, two JavaScript functions are available to the app that interact with the DOM to receive user input and display a welcome message:</span></span>
 
-* <span data-ttu-id="eeb75-142">`showPrompt`：產生提示以接受使用者輸入 (使用者的名稱) 並將名稱傳回給呼叫者。</span><span class="sxs-lookup"><span data-stu-id="eeb75-142">`showPrompt`: Produces a prompt to accept user input (the user's name) and returns the name to the caller.</span></span>
-* <span data-ttu-id="eeb75-143">`displayWelcome`：將歡迎訊息從呼叫端指派給具有 of 的 DOM 物件 `id` `welcome` 。</span><span class="sxs-lookup"><span data-stu-id="eeb75-143">`displayWelcome`: Assigns a welcome message from the caller to a DOM object with an `id` of `welcome`.</span></span>
+* <span data-ttu-id="485e2-142">`showPrompt`：產生提示以接受使用者輸入 (使用者的名稱) 並將名稱傳回給呼叫者。</span><span class="sxs-lookup"><span data-stu-id="485e2-142">`showPrompt`: Produces a prompt to accept user input (the user's name) and returns the name to the caller.</span></span>
+* <span data-ttu-id="485e2-143">`displayWelcome`：將歡迎訊息從呼叫端指派給具有 of 的 DOM 物件 `id` `welcome` 。</span><span class="sxs-lookup"><span data-stu-id="485e2-143">`displayWelcome`: Assigns a welcome message from the caller to a DOM object with an `id` of `welcome`.</span></span>
 
-<span data-ttu-id="eeb75-144">`wwwroot/exampleJsInterop.js`:</span><span class="sxs-lookup"><span data-stu-id="eeb75-144">`wwwroot/exampleJsInterop.js`:</span></span>
+<span data-ttu-id="485e2-144">`wwwroot/exampleJsInterop.js`:</span><span class="sxs-lookup"><span data-stu-id="485e2-144">`wwwroot/exampleJsInterop.js`:</span></span>
 
 [!code-javascript[](./common/samples/3.x/BlazorWebAssemblySample/wwwroot/exampleJsInterop.js?highlight=2-7)]
 
-<span data-ttu-id="eeb75-145">將 `<script>` 參考 JavaScript 檔案的標記放置在檔案 `wwwroot/index.html` (Blazor WebAssembly) 或檔案 `Pages/_Host.cshtml` (Blazor Server) 。</span><span class="sxs-lookup"><span data-stu-id="eeb75-145">Place the `<script>` tag that references the JavaScript file in the `wwwroot/index.html` file (Blazor WebAssembly) or `Pages/_Host.cshtml` file (Blazor Server).</span></span>
+<span data-ttu-id="485e2-145">將 `<script>` 參考 JavaScript 檔案的標記放置在檔案 `wwwroot/index.html` (Blazor WebAssembly) 或檔案 `Pages/_Host.cshtml` (Blazor Server) 。</span><span class="sxs-lookup"><span data-stu-id="485e2-145">Place the `<script>` tag that references the JavaScript file in the `wwwroot/index.html` file (Blazor WebAssembly) or `Pages/_Host.cshtml` file (Blazor Server).</span></span>
 
-<span data-ttu-id="eeb75-146">`wwwroot/index.html` (Blazor WebAssembly):</span><span class="sxs-lookup"><span data-stu-id="eeb75-146">`wwwroot/index.html` (Blazor WebAssembly):</span></span>
+<span data-ttu-id="485e2-146">`wwwroot/index.html` (Blazor WebAssembly):</span><span class="sxs-lookup"><span data-stu-id="485e2-146">`wwwroot/index.html` (Blazor WebAssembly):</span></span>
 
 [!code-html[](./common/samples/3.x/BlazorWebAssemblySample/wwwroot/index.html?highlight=22)]
 
-<span data-ttu-id="eeb75-147">`Pages/_Host.cshtml` (Blazor Server):</span><span class="sxs-lookup"><span data-stu-id="eeb75-147">`Pages/_Host.cshtml` (Blazor Server):</span></span>
+<span data-ttu-id="485e2-147">`Pages/_Host.cshtml` (Blazor Server):</span><span class="sxs-lookup"><span data-stu-id="485e2-147">`Pages/_Host.cshtml` (Blazor Server):</span></span>
 
 [!code-cshtml[](./common/samples/3.x/BlazorServerSample/Pages/_Host.cshtml?highlight=35)]
 
-<span data-ttu-id="eeb75-148">請勿將 `<script>` 標記放在元件檔中，因為 `<script>` 無法動態更新標記。</span><span class="sxs-lookup"><span data-stu-id="eeb75-148">Don't place a `<script>` tag in a component file because the `<script>` tag can't be updated dynamically.</span></span>
+<span data-ttu-id="485e2-148">請勿將 `<script>` 標記放在元件檔中，因為 `<script>` 無法動態更新標記。</span><span class="sxs-lookup"><span data-stu-id="485e2-148">Don't place a `<script>` tag in a component file because the `<script>` tag can't be updated dynamically.</span></span>
 
-<span data-ttu-id="eeb75-149">.NET 方法會藉由呼叫，與檔案中的 JavaScript 函式進行 interop `exampleJsInterop.js` <xref:Microsoft.JSInterop.IJSRuntime.InvokeAsync%2A?displayProperty=nameWithType> 。</span><span class="sxs-lookup"><span data-stu-id="eeb75-149">.NET methods interop with the JavaScript functions in the `exampleJsInterop.js` file by calling <xref:Microsoft.JSInterop.IJSRuntime.InvokeAsync%2A?displayProperty=nameWithType>.</span></span>
+<span data-ttu-id="485e2-149">.NET 方法會藉由呼叫，與檔案中的 JavaScript 函式進行 interop `exampleJsInterop.js` <xref:Microsoft.JSInterop.IJSRuntime.InvokeAsync%2A?displayProperty=nameWithType> 。</span><span class="sxs-lookup"><span data-stu-id="485e2-149">.NET methods interop with the JavaScript functions in the `exampleJsInterop.js` file by calling <xref:Microsoft.JSInterop.IJSRuntime.InvokeAsync%2A?displayProperty=nameWithType>.</span></span>
 
-<span data-ttu-id="eeb75-150"><xref:Microsoft.JSInterop.IJSRuntime>抽象概念是非同步，以允許 Blazor Server 案例。</span><span class="sxs-lookup"><span data-stu-id="eeb75-150">The <xref:Microsoft.JSInterop.IJSRuntime> abstraction is asynchronous to allow for Blazor Server scenarios.</span></span> <span data-ttu-id="eeb75-151">如果應用程式是應用程式， Blazor WebAssembly 而您想要以同步方式叫用 JavaScript 函式，則改為向下轉換 <xref:Microsoft.JSInterop.IJSInProcessRuntime> 並呼叫 <xref:Microsoft.JSInterop.IJSInProcessRuntime.Invoke%2A> 。</span><span class="sxs-lookup"><span data-stu-id="eeb75-151">If the app is a Blazor WebAssembly app and you want to invoke a JavaScript function synchronously, downcast to <xref:Microsoft.JSInterop.IJSInProcessRuntime> and call <xref:Microsoft.JSInterop.IJSInProcessRuntime.Invoke%2A> instead.</span></span> <span data-ttu-id="eeb75-152">我們建議大多數的 JS interop 程式庫都使用非同步 Api，以確保所有案例中都有可用的程式庫。</span><span class="sxs-lookup"><span data-stu-id="eeb75-152">We recommend that most JS interop libraries use the async APIs to ensure that the libraries are available in all scenarios.</span></span>
+<span data-ttu-id="485e2-150"><xref:Microsoft.JSInterop.IJSRuntime>抽象概念是非同步，以允許 Blazor Server 案例。</span><span class="sxs-lookup"><span data-stu-id="485e2-150">The <xref:Microsoft.JSInterop.IJSRuntime> abstraction is asynchronous to allow for Blazor Server scenarios.</span></span> <span data-ttu-id="485e2-151">如果應用程式是應用程式， Blazor WebAssembly 而您想要以同步方式叫用 JavaScript 函式，則改為向下轉換 <xref:Microsoft.JSInterop.IJSInProcessRuntime> 並呼叫 <xref:Microsoft.JSInterop.IJSInProcessRuntime.Invoke%2A> 。</span><span class="sxs-lookup"><span data-stu-id="485e2-151">If the app is a Blazor WebAssembly app and you want to invoke a JavaScript function synchronously, downcast to <xref:Microsoft.JSInterop.IJSInProcessRuntime> and call <xref:Microsoft.JSInterop.IJSInProcessRuntime.Invoke%2A> instead.</span></span> <span data-ttu-id="485e2-152">我們建議大多數的 JS interop 程式庫都使用非同步 Api，以確保所有案例中都有可用的程式庫。</span><span class="sxs-lookup"><span data-stu-id="485e2-152">We recommend that most JS interop libraries use the async APIs to ensure that the libraries are available in all scenarios.</span></span>
 
 ::: moniker range=">= aspnetcore-5.0"
 
 > [!NOTE]
-> <span data-ttu-id="eeb75-153">若要在標準[javascript 模組](https://developer.mozilla.org/docs/Web/JavaScript/Guide/Modules)中啟用 JavaScript 隔離，請參閱[ Blazor javascript 隔離和物件參考](#blazor-javascript-isolation-and-object-references)一節。</span><span class="sxs-lookup"><span data-stu-id="eeb75-153">To enable JavaScript isolation in standard [JavaScript modules](https://developer.mozilla.org/docs/Web/JavaScript/Guide/Modules), see the [Blazor JavaScript isolation and object references](#blazor-javascript-isolation-and-object-references) section.</span></span>
+> <span data-ttu-id="485e2-153">若要在標準[javascript 模組](https://developer.mozilla.org/docs/Web/JavaScript/Guide/Modules)中啟用 JavaScript 隔離，請參閱[ Blazor javascript 隔離和物件參考](#blazor-javascript-isolation-and-object-references)一節。</span><span class="sxs-lookup"><span data-stu-id="485e2-153">To enable JavaScript isolation in standard [JavaScript modules](https://developer.mozilla.org/docs/Web/JavaScript/Guide/Modules), see the [Blazor JavaScript isolation and object references](#blazor-javascript-isolation-and-object-references) section.</span></span>
 
 ::: moniker-end
 
-<span data-ttu-id="eeb75-154">範例應用程式包含一個可示範 JS interop 的元件。</span><span class="sxs-lookup"><span data-stu-id="eeb75-154">The sample app includes a component to demonstrate JS interop.</span></span> <span data-ttu-id="eeb75-155">元件：</span><span class="sxs-lookup"><span data-stu-id="eeb75-155">The component:</span></span>
+<span data-ttu-id="485e2-154">範例應用程式包含一個可示範 JS interop 的元件。</span><span class="sxs-lookup"><span data-stu-id="485e2-154">The sample app includes a component to demonstrate JS interop.</span></span> <span data-ttu-id="485e2-155">元件：</span><span class="sxs-lookup"><span data-stu-id="485e2-155">The component:</span></span>
 
-* <span data-ttu-id="eeb75-156">透過 JavaScript 提示字元接收使用者輸入。</span><span class="sxs-lookup"><span data-stu-id="eeb75-156">Receives user input via a JavaScript prompt.</span></span>
-* <span data-ttu-id="eeb75-157">將文字傳回至元件以進行處理。</span><span class="sxs-lookup"><span data-stu-id="eeb75-157">Returns the text to the component for processing.</span></span>
-* <span data-ttu-id="eeb75-158">呼叫第二個 JavaScript 函式，此函式會與 DOM 互動以顯示歡迎訊息。</span><span class="sxs-lookup"><span data-stu-id="eeb75-158">Calls a second JavaScript function that interacts with the DOM to display a welcome message.</span></span>
+* <span data-ttu-id="485e2-156">透過 JavaScript 提示字元接收使用者輸入。</span><span class="sxs-lookup"><span data-stu-id="485e2-156">Receives user input via a JavaScript prompt.</span></span>
+* <span data-ttu-id="485e2-157">將文字傳回至元件以進行處理。</span><span class="sxs-lookup"><span data-stu-id="485e2-157">Returns the text to the component for processing.</span></span>
+* <span data-ttu-id="485e2-158">呼叫第二個 JavaScript 函式，此函式會與 DOM 互動以顯示歡迎訊息。</span><span class="sxs-lookup"><span data-stu-id="485e2-158">Calls a second JavaScript function that interacts with the DOM to display a welcome message.</span></span>
 
-<span data-ttu-id="eeb75-159">`Pages/JsInterop.razor`:</span><span class="sxs-lookup"><span data-stu-id="eeb75-159">`Pages/JsInterop.razor`:</span></span>
+<span data-ttu-id="485e2-159">`Pages/JsInterop.razor`:</span><span class="sxs-lookup"><span data-stu-id="485e2-159">`Pages/JsInterop.razor`:</span></span>
 
 ```razor
 @page "/JSInterop"
@@ -156,30 +156,33 @@ ms.locfileid: "91762161"
 }
 ```
 
-<span data-ttu-id="eeb75-160">預留位置 `{APP ASSEMBLY}` 是應用程式的應用程式元件名稱 (例如 `BlazorSample`) 。</span><span class="sxs-lookup"><span data-stu-id="eeb75-160">The placeholder `{APP ASSEMBLY}` is the app's app assembly name (for example, `BlazorSample`).</span></span>
+<span data-ttu-id="485e2-160">預留位置 `{APP ASSEMBLY}` 是應用程式的應用程式元件名稱 (例如 `BlazorSample`) 。</span><span class="sxs-lookup"><span data-stu-id="485e2-160">The placeholder `{APP ASSEMBLY}` is the app's app assembly name (for example, `BlazorSample`).</span></span>
 
-1. <span data-ttu-id="eeb75-161">當您 `TriggerJsPrompt` 選取元件的按鈕來執行時 **`Trigger JavaScript Prompt`** ， `showPrompt` 會呼叫檔案中提供的 JavaScript 函式 `wwwroot/exampleJsInterop.js` 。</span><span class="sxs-lookup"><span data-stu-id="eeb75-161">When `TriggerJsPrompt` is executed by selecting the component's **`Trigger JavaScript Prompt`** button, the JavaScript `showPrompt` function provided in the `wwwroot/exampleJsInterop.js` file is called.</span></span>
-1. <span data-ttu-id="eeb75-162">此函式 `showPrompt` 會接受使用者輸入 (使用者的名稱) ，其以 HTML 編碼並傳回至元件。</span><span class="sxs-lookup"><span data-stu-id="eeb75-162">The `showPrompt` function accepts user input (the user's name), which is HTML-encoded and returned to the component.</span></span> <span data-ttu-id="eeb75-163">元件會將使用者名稱儲存在本機變數中 `name` 。</span><span class="sxs-lookup"><span data-stu-id="eeb75-163">The component stores the user's name in a local variable, `name`.</span></span>
-1. <span data-ttu-id="eeb75-164">中儲存的字串 `name` 會併入歡迎訊息中，該訊息會傳遞至 JavaScript 函式， `displayWelcome` 這會將歡迎訊息轉譯成標題標記。</span><span class="sxs-lookup"><span data-stu-id="eeb75-164">The string stored in `name` is incorporated into a welcome message, which is passed to a JavaScript function, `displayWelcome`, which renders the welcome message into a heading tag.</span></span>
+1. <span data-ttu-id="485e2-161">當您 `TriggerJsPrompt` 選取元件的按鈕來執行時 **`Trigger JavaScript Prompt`** ， `showPrompt` 會呼叫檔案中提供的 JavaScript 函式 `wwwroot/exampleJsInterop.js` 。</span><span class="sxs-lookup"><span data-stu-id="485e2-161">When `TriggerJsPrompt` is executed by selecting the component's **`Trigger JavaScript Prompt`** button, the JavaScript `showPrompt` function provided in the `wwwroot/exampleJsInterop.js` file is called.</span></span>
+1. <span data-ttu-id="485e2-162">此函式 `showPrompt` 會接受使用者輸入 (使用者的名稱) ，其以 HTML 編碼並傳回至元件。</span><span class="sxs-lookup"><span data-stu-id="485e2-162">The `showPrompt` function accepts user input (the user's name), which is HTML-encoded and returned to the component.</span></span> <span data-ttu-id="485e2-163">元件會將使用者名稱儲存在本機變數中 `name` 。</span><span class="sxs-lookup"><span data-stu-id="485e2-163">The component stores the user's name in a local variable, `name`.</span></span>
+1. <span data-ttu-id="485e2-164">中儲存的字串 `name` 會併入歡迎訊息中，該訊息會傳遞至 JavaScript 函式， `displayWelcome` 這會將歡迎訊息轉譯成標題標記。</span><span class="sxs-lookup"><span data-stu-id="485e2-164">The string stored in `name` is incorporated into a welcome message, which is passed to a JavaScript function, `displayWelcome`, which renders the welcome message into a heading tag.</span></span>
 
-## <a name="call-a-void-javascript-function"></a><span data-ttu-id="eeb75-165">呼叫 void JavaScript 函數</span><span class="sxs-lookup"><span data-stu-id="eeb75-165">Call a void JavaScript function</span></span>
+## <a name="call-a-void-javascript-function"></a><span data-ttu-id="485e2-165">呼叫 void JavaScript 函數</span><span class="sxs-lookup"><span data-stu-id="485e2-165">Call a void JavaScript function</span></span>
 
-<span data-ttu-id="eeb75-166">傳回 [void (0) /void 0](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Operators/void) 或 [未定義](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/undefined) 的 JavaScript 函數會使用來呼叫 <xref:Microsoft.JSInterop.JSRuntimeExtensions.InvokeVoidAsync%2A?displayProperty=nameWithType> 。</span><span class="sxs-lookup"><span data-stu-id="eeb75-166">JavaScript functions that return [void(0)/void 0](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Operators/void) or [undefined](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/undefined) are called with <xref:Microsoft.JSInterop.JSRuntimeExtensions.InvokeVoidAsync%2A?displayProperty=nameWithType>.</span></span>
+<span data-ttu-id="485e2-166">使用 <xref:Microsoft.JSInterop.JSRuntimeExtensions.InvokeVoidAsync%2A?displayProperty=nameWithType> 于下列各項：</span><span class="sxs-lookup"><span data-stu-id="485e2-166">Use <xref:Microsoft.JSInterop.JSRuntimeExtensions.InvokeVoidAsync%2A?displayProperty=nameWithType> for the following:</span></span>
 
-## <a name="detect-when-a-no-locblazor-server-app-is-prerendering"></a><span data-ttu-id="eeb75-167">偵測 Blazor Server 應用程式何時進行呈現</span><span class="sxs-lookup"><span data-stu-id="eeb75-167">Detect when a Blazor Server app is prerendering</span></span>
+* <span data-ttu-id="485e2-167">傳回 [void (0) /void 0](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Operators/void) 或 [未定義](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/undefined)的 JavaScript 函數。</span><span class="sxs-lookup"><span data-stu-id="485e2-167">JavaScript functions that return [void(0)/void 0](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Operators/void) or [undefined](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/undefined).</span></span>
+* <span data-ttu-id="485e2-168">如果不需要 .NET 就能讀取 JavaScript 呼叫的結果。</span><span class="sxs-lookup"><span data-stu-id="485e2-168">If .NET isn't required to read the result of a JavaScript call.</span></span>
+
+## <a name="detect-when-a-no-locblazor-server-app-is-prerendering"></a><span data-ttu-id="485e2-169">偵測 Blazor Server 應用程式何時進行呈現</span><span class="sxs-lookup"><span data-stu-id="485e2-169">Detect when a Blazor Server app is prerendering</span></span>
  
 [!INCLUDE[](~/includes/blazor-prerendering.md)]
 
-## <a name="capture-references-to-elements"></a><span data-ttu-id="eeb75-168">捕捉元素的參考</span><span class="sxs-lookup"><span data-stu-id="eeb75-168">Capture references to elements</span></span>
+## <a name="capture-references-to-elements"></a><span data-ttu-id="485e2-170">捕捉元素的參考</span><span class="sxs-lookup"><span data-stu-id="485e2-170">Capture references to elements</span></span>
 
-<span data-ttu-id="eeb75-169">某些 JS interop 案例需要 HTML 元素的參考。</span><span class="sxs-lookup"><span data-stu-id="eeb75-169">Some JS interop scenarios require references to HTML elements.</span></span> <span data-ttu-id="eeb75-170">例如，UI 程式庫可能需要初始化專案參考，或者您可能需要在元素上呼叫類似命令的 Api，例如 `focus` 或 `play` 。</span><span class="sxs-lookup"><span data-stu-id="eeb75-170">For example, a UI library may require an element reference for initialization, or you might need to call command-like APIs on an element, such as `focus` or `play`.</span></span>
+<span data-ttu-id="485e2-171">某些 JS interop 案例需要 HTML 元素的參考。</span><span class="sxs-lookup"><span data-stu-id="485e2-171">Some JS interop scenarios require references to HTML elements.</span></span> <span data-ttu-id="485e2-172">例如，UI 程式庫可能需要初始化專案參考，或者您可能需要在元素上呼叫類似命令的 Api，例如 `focus` 或 `play` 。</span><span class="sxs-lookup"><span data-stu-id="485e2-172">For example, a UI library may require an element reference for initialization, or you might need to call command-like APIs on an element, such as `focus` or `play`.</span></span>
 
-<span data-ttu-id="eeb75-171">使用下列方法來捕捉元件中的 HTML 元素參考：</span><span class="sxs-lookup"><span data-stu-id="eeb75-171">Capture references to HTML elements in a component using the following approach:</span></span>
+<span data-ttu-id="485e2-173">使用下列方法來捕捉元件中的 HTML 元素參考：</span><span class="sxs-lookup"><span data-stu-id="485e2-173">Capture references to HTML elements in a component using the following approach:</span></span>
 
-* <span data-ttu-id="eeb75-172">將 `@ref` 屬性新增至 HTML 元素。</span><span class="sxs-lookup"><span data-stu-id="eeb75-172">Add an `@ref` attribute to the HTML element.</span></span>
-* <span data-ttu-id="eeb75-173">定義類型的欄位， <xref:Microsoft.AspNetCore.Components.ElementReference> 其名稱符合屬性的值 `@ref` 。</span><span class="sxs-lookup"><span data-stu-id="eeb75-173">Define a field of type <xref:Microsoft.AspNetCore.Components.ElementReference> whose name matches the value of the `@ref` attribute.</span></span>
+* <span data-ttu-id="485e2-174">將 `@ref` 屬性新增至 HTML 元素。</span><span class="sxs-lookup"><span data-stu-id="485e2-174">Add an `@ref` attribute to the HTML element.</span></span>
+* <span data-ttu-id="485e2-175">定義類型的欄位， <xref:Microsoft.AspNetCore.Components.ElementReference> 其名稱符合屬性的值 `@ref` 。</span><span class="sxs-lookup"><span data-stu-id="485e2-175">Define a field of type <xref:Microsoft.AspNetCore.Components.ElementReference> whose name matches the value of the `@ref` attribute.</span></span>
 
-<span data-ttu-id="eeb75-174">下列範例將示範如何捕獲元素的參考 `username` `<input>` ：</span><span class="sxs-lookup"><span data-stu-id="eeb75-174">The following example shows capturing a reference to the `username` `<input>` element:</span></span>
+<span data-ttu-id="485e2-176">下列範例將示範如何捕獲元素的參考 `username` `<input>` ：</span><span class="sxs-lookup"><span data-stu-id="485e2-176">The following example shows capturing a reference to the `username` `<input>` element:</span></span>
 
 ```razor
 <input @ref="username" ... />
@@ -190,9 +193,9 @@ ms.locfileid: "91762161"
 ```
 
 > [!WARNING]
-> <span data-ttu-id="eeb75-175">只使用專案參考來改變不與互動之空白元素的內容 Blazor 。</span><span class="sxs-lookup"><span data-stu-id="eeb75-175">Only use an element reference to mutate the contents of an empty element that doesn't interact with Blazor.</span></span> <span data-ttu-id="eeb75-176">當協力廠商 API 將內容提供給元素時，此案例很有用。</span><span class="sxs-lookup"><span data-stu-id="eeb75-176">This scenario is useful when a third-party API supplies content to the element.</span></span> <span data-ttu-id="eeb75-177">因為 Blazor 不會與專案互動，所以在專案和 DOM 的表示之間沒有任何可能發生衝突 Blazor 。</span><span class="sxs-lookup"><span data-stu-id="eeb75-177">Because Blazor doesn't interact with the element, there's no possibility of a conflict between Blazor's representation of the element and the DOM.</span></span>
+> <span data-ttu-id="485e2-177">只使用專案參考來改變不與互動之空白元素的內容 Blazor 。</span><span class="sxs-lookup"><span data-stu-id="485e2-177">Only use an element reference to mutate the contents of an empty element that doesn't interact with Blazor.</span></span> <span data-ttu-id="485e2-178">當協力廠商 API 將內容提供給元素時，此案例很有用。</span><span class="sxs-lookup"><span data-stu-id="485e2-178">This scenario is useful when a third-party API supplies content to the element.</span></span> <span data-ttu-id="485e2-179">因為 Blazor 不會與專案互動，所以在專案和 DOM 的表示之間沒有任何可能發生衝突 Blazor 。</span><span class="sxs-lookup"><span data-stu-id="485e2-179">Because Blazor doesn't interact with the element, there's no possibility of a conflict between Blazor's representation of the element and the DOM.</span></span>
 >
-> <span data-ttu-id="eeb75-178">在下列範例中，將未排序清單的內容 () 是很 *危險* 的， `ul` 因為會 Blazor 與 DOM 互動以將此專案的清單專案填入 (`<li>`) ：</span><span class="sxs-lookup"><span data-stu-id="eeb75-178">In the following example, it's *dangerous* to mutate the contents of the unordered list (`ul`) because Blazor interacts with the DOM to populate this element's list items (`<li>`):</span></span>
+> <span data-ttu-id="485e2-180">在下列範例中，將未排序清單的內容 () 是很 *危險* 的， `ul` 因為會 Blazor 與 DOM 互動以將此專案的清單專案填入 (`<li>`) ：</span><span class="sxs-lookup"><span data-stu-id="485e2-180">In the following example, it's *dangerous* to mutate the contents of the unordered list (`ul`) because Blazor interacts with the DOM to populate this element's list items (`<li>`):</span></span>
 >
 > ```razor
 > <ul ref="MyList">
@@ -203,13 +206,13 @@ ms.locfileid: "91762161"
 > </ul>
 > ```
 >
-> <span data-ttu-id="eeb75-179">如果 JS interop 變動元素的內容， `MyList` 並 Blazor 嘗試將差異套用至專案，則差異不會與 DOM 相符。</span><span class="sxs-lookup"><span data-stu-id="eeb75-179">If JS interop mutates the contents of element `MyList` and Blazor attempts to apply diffs to the element, the diffs won't match the DOM.</span></span>
+> <span data-ttu-id="485e2-181">如果 JS interop 變動元素的內容， `MyList` 並 Blazor 嘗試將差異套用至專案，則差異不會與 DOM 相符。</span><span class="sxs-lookup"><span data-stu-id="485e2-181">If JS interop mutates the contents of element `MyList` and Blazor attempts to apply diffs to the element, the diffs won't match the DOM.</span></span>
 
-<span data-ttu-id="eeb75-180">至於 .NET 程式碼， <xref:Microsoft.AspNetCore.Components.ElementReference> 則是不透明的控制碼。</span><span class="sxs-lookup"><span data-stu-id="eeb75-180">As far as .NET code is concerned, an <xref:Microsoft.AspNetCore.Components.ElementReference> is an opaque handle.</span></span> <span data-ttu-id="eeb75-181">您 *唯一* 可以做的事 <xref:Microsoft.AspNetCore.Components.ElementReference> ，是透過 JS interop 將其傳遞至 JavaScript 程式碼。</span><span class="sxs-lookup"><span data-stu-id="eeb75-181">The *only* thing you can do with <xref:Microsoft.AspNetCore.Components.ElementReference> is pass it through to JavaScript code via JS interop.</span></span> <span data-ttu-id="eeb75-182">當您這樣做時，JavaScript 端程式碼會收到 `HTMLElement` 可搭配一般 DOM api 使用的實例。</span><span class="sxs-lookup"><span data-stu-id="eeb75-182">When you do so, the JavaScript-side code receives an `HTMLElement` instance, which it can use with normal DOM APIs.</span></span>
+<span data-ttu-id="485e2-182">至於 .NET 程式碼， <xref:Microsoft.AspNetCore.Components.ElementReference> 則是不透明的控制碼。</span><span class="sxs-lookup"><span data-stu-id="485e2-182">As far as .NET code is concerned, an <xref:Microsoft.AspNetCore.Components.ElementReference> is an opaque handle.</span></span> <span data-ttu-id="485e2-183">您 *唯一* 可以做的事 <xref:Microsoft.AspNetCore.Components.ElementReference> ，是透過 JS interop 將其傳遞至 JavaScript 程式碼。</span><span class="sxs-lookup"><span data-stu-id="485e2-183">The *only* thing you can do with <xref:Microsoft.AspNetCore.Components.ElementReference> is pass it through to JavaScript code via JS interop.</span></span> <span data-ttu-id="485e2-184">當您這樣做時，JavaScript 端程式碼會收到 `HTMLElement` 可搭配一般 DOM api 使用的實例。</span><span class="sxs-lookup"><span data-stu-id="485e2-184">When you do so, the JavaScript-side code receives an `HTMLElement` instance, which it can use with normal DOM APIs.</span></span>
 
-<span data-ttu-id="eeb75-183">例如，下列程式碼會定義可讓您在元素上設定焦點的 .NET 擴充方法：</span><span class="sxs-lookup"><span data-stu-id="eeb75-183">For example, the following code defines a .NET extension method that enables setting the focus on an element:</span></span>
+<span data-ttu-id="485e2-185">例如，下列程式碼會定義可讓您在元素上設定焦點的 .NET 擴充方法：</span><span class="sxs-lookup"><span data-stu-id="485e2-185">For example, the following code defines a .NET extension method that enables setting the focus on an element:</span></span>
 
-<span data-ttu-id="eeb75-184">`exampleJsInterop.js`:</span><span class="sxs-lookup"><span data-stu-id="eeb75-184">`exampleJsInterop.js`:</span></span>
+<span data-ttu-id="485e2-186">`exampleJsInterop.js`:</span><span class="sxs-lookup"><span data-stu-id="485e2-186">`exampleJsInterop.js`:</span></span>
 
 ```javascript
 window.exampleJsFunctions = {
@@ -219,11 +222,11 @@ window.exampleJsFunctions = {
 }
 ```
 
-<span data-ttu-id="eeb75-185">若要呼叫不會傳回值的 JavaScript 函式，請使用 <xref:Microsoft.JSInterop.JSRuntimeExtensions.InvokeVoidAsync%2A?displayProperty=nameWithType> 。</span><span class="sxs-lookup"><span data-stu-id="eeb75-185">To call a JavaScript function that doesn't return a value, use <xref:Microsoft.JSInterop.JSRuntimeExtensions.InvokeVoidAsync%2A?displayProperty=nameWithType>.</span></span> <span data-ttu-id="eeb75-186">下列程式碼會藉由使用已捕捉的來呼叫上述 JavaScript 函式，將焦點放在使用者名稱輸入上 <xref:Microsoft.AspNetCore.Components.ElementReference> ：</span><span class="sxs-lookup"><span data-stu-id="eeb75-186">The following code sets the focus on the username input by calling the preceding JavaScript function with the captured <xref:Microsoft.AspNetCore.Components.ElementReference>:</span></span>
+<span data-ttu-id="485e2-187">若要呼叫不會傳回值的 JavaScript 函式，請使用 <xref:Microsoft.JSInterop.JSRuntimeExtensions.InvokeVoidAsync%2A?displayProperty=nameWithType> 。</span><span class="sxs-lookup"><span data-stu-id="485e2-187">To call a JavaScript function that doesn't return a value, use <xref:Microsoft.JSInterop.JSRuntimeExtensions.InvokeVoidAsync%2A?displayProperty=nameWithType>.</span></span> <span data-ttu-id="485e2-188">下列程式碼會藉由使用已捕捉的來呼叫上述 JavaScript 函式，將焦點放在使用者名稱輸入上 <xref:Microsoft.AspNetCore.Components.ElementReference> ：</span><span class="sxs-lookup"><span data-stu-id="485e2-188">The following code sets the focus on the username input by calling the preceding JavaScript function with the captured <xref:Microsoft.AspNetCore.Components.ElementReference>:</span></span>
 
 [!code-razor[](call-javascript-from-dotnet/samples_snapshot/component1.razor?highlight=1,3,11-12)]
 
-<span data-ttu-id="eeb75-187">若要使用擴充方法，請建立可接收實例的靜態擴充方法 <xref:Microsoft.JSInterop.IJSRuntime> ：</span><span class="sxs-lookup"><span data-stu-id="eeb75-187">To use an extension method, create a static extension method that receives the <xref:Microsoft.JSInterop.IJSRuntime> instance:</span></span>
+<span data-ttu-id="485e2-189">若要使用擴充方法，請建立可接收實例的靜態擴充方法 <xref:Microsoft.JSInterop.IJSRuntime> ：</span><span class="sxs-lookup"><span data-stu-id="485e2-189">To use an extension method, create a static extension method that receives the <xref:Microsoft.JSInterop.IJSRuntime> instance:</span></span>
 
 ```csharp
 public static async Task Focus(this ElementReference elementRef, IJSRuntime jsRuntime)
@@ -233,14 +236,14 @@ public static async Task Focus(this ElementReference elementRef, IJSRuntime jsRu
 }
 ```
 
-<span data-ttu-id="eeb75-188">`Focus`方法會直接在物件上呼叫。</span><span class="sxs-lookup"><span data-stu-id="eeb75-188">The `Focus` method is called directly on the object.</span></span> <span data-ttu-id="eeb75-189">下列範例假設 `Focus` 方法可從 `JsInteropClasses` 命名空間中取得：</span><span class="sxs-lookup"><span data-stu-id="eeb75-189">The following example assumes that the `Focus` method is available from the `JsInteropClasses` namespace:</span></span>
+<span data-ttu-id="485e2-190">`Focus`方法會直接在物件上呼叫。</span><span class="sxs-lookup"><span data-stu-id="485e2-190">The `Focus` method is called directly on the object.</span></span> <span data-ttu-id="485e2-191">下列範例假設 `Focus` 方法可從 `JsInteropClasses` 命名空間中取得：</span><span class="sxs-lookup"><span data-stu-id="485e2-191">The following example assumes that the `Focus` method is available from the `JsInteropClasses` namespace:</span></span>
 
 [!code-razor[](call-javascript-from-dotnet/samples_snapshot/component2.razor?highlight=1-4,12)]
 
 > [!IMPORTANT]
-> <span data-ttu-id="eeb75-190">`username`變數只會在呈現元件之後填入。</span><span class="sxs-lookup"><span data-stu-id="eeb75-190">The `username` variable is only populated after the component is rendered.</span></span> <span data-ttu-id="eeb75-191">如果將擴展 <xref:Microsoft.AspNetCore.Components.ElementReference> 傳遞至 javascript 程式碼，javascript 程式碼會收到的值 `null` 。</span><span class="sxs-lookup"><span data-stu-id="eeb75-191">If an unpopulated <xref:Microsoft.AspNetCore.Components.ElementReference> is passed to JavaScript code, the JavaScript code receives a value of `null`.</span></span> <span data-ttu-id="eeb75-192">若要在元件完成轉譯之後操作專案參考 (設定元素的初始焦點) 使用[ `OnAfterRenderAsync` 或 `OnAfterRender` 元件生命週期方法](xref:blazor/components/lifecycle#after-component-render)。</span><span class="sxs-lookup"><span data-stu-id="eeb75-192">To manipulate element references after the component has finished rendering (to set the initial focus on an element) use the [`OnAfterRenderAsync` or `OnAfterRender` component lifecycle methods](xref:blazor/components/lifecycle#after-component-render).</span></span>
+> <span data-ttu-id="485e2-192">`username`變數只會在呈現元件之後填入。</span><span class="sxs-lookup"><span data-stu-id="485e2-192">The `username` variable is only populated after the component is rendered.</span></span> <span data-ttu-id="485e2-193">如果將擴展 <xref:Microsoft.AspNetCore.Components.ElementReference> 傳遞至 javascript 程式碼，javascript 程式碼會收到的值 `null` 。</span><span class="sxs-lookup"><span data-stu-id="485e2-193">If an unpopulated <xref:Microsoft.AspNetCore.Components.ElementReference> is passed to JavaScript code, the JavaScript code receives a value of `null`.</span></span> <span data-ttu-id="485e2-194">若要在元件完成轉譯之後操作專案參考 (設定元素的初始焦點) 使用[ `OnAfterRenderAsync` 或 `OnAfterRender` 元件生命週期方法](xref:blazor/components/lifecycle#after-component-render)。</span><span class="sxs-lookup"><span data-stu-id="485e2-194">To manipulate element references after the component has finished rendering (to set the initial focus on an element) use the [`OnAfterRenderAsync` or `OnAfterRender` component lifecycle methods](xref:blazor/components/lifecycle#after-component-render).</span></span>
 
-<span data-ttu-id="eeb75-193">使用泛型型別並傳回值時，請使用 <xref:System.Threading.Tasks.ValueTask%601> ：</span><span class="sxs-lookup"><span data-stu-id="eeb75-193">When working with generic types and returning a value, use <xref:System.Threading.Tasks.ValueTask%601>:</span></span>
+<span data-ttu-id="485e2-195">使用泛型型別並傳回值時，請使用 <xref:System.Threading.Tasks.ValueTask%601> ：</span><span class="sxs-lookup"><span data-stu-id="485e2-195">When working with generic types and returning a value, use <xref:System.Threading.Tasks.ValueTask%601>:</span></span>
 
 ```csharp
 public static ValueTask<T> GenericMethod<T>(this ElementReference elementRef, 
@@ -251,22 +254,22 @@ public static ValueTask<T> GenericMethod<T>(this ElementReference elementRef,
 }
 ```
 
-<span data-ttu-id="eeb75-194">`GenericMethod` 會直接在具有類型的物件上呼叫。</span><span class="sxs-lookup"><span data-stu-id="eeb75-194">`GenericMethod` is called directly on the object with a type.</span></span> <span data-ttu-id="eeb75-195">下列範例假設 `GenericMethod` 可從 `JsInteropClasses` 命名空間取得：</span><span class="sxs-lookup"><span data-stu-id="eeb75-195">The following example assumes that the `GenericMethod` is available from the `JsInteropClasses` namespace:</span></span>
+<span data-ttu-id="485e2-196">`GenericMethod` 會直接在具有類型的物件上呼叫。</span><span class="sxs-lookup"><span data-stu-id="485e2-196">`GenericMethod` is called directly on the object with a type.</span></span> <span data-ttu-id="485e2-197">下列範例假設 `GenericMethod` 可從 `JsInteropClasses` 命名空間取得：</span><span class="sxs-lookup"><span data-stu-id="485e2-197">The following example assumes that the `GenericMethod` is available from the `JsInteropClasses` namespace:</span></span>
 
 [!code-razor[](call-javascript-from-dotnet/samples_snapshot/component3.razor?highlight=17)]
 
-## <a name="reference-elements-across-components"></a><span data-ttu-id="eeb75-196">跨元件參考元素</span><span class="sxs-lookup"><span data-stu-id="eeb75-196">Reference elements across components</span></span>
+## <a name="reference-elements-across-components"></a><span data-ttu-id="485e2-198">跨元件參考元素</span><span class="sxs-lookup"><span data-stu-id="485e2-198">Reference elements across components</span></span>
 
-<span data-ttu-id="eeb75-197"><xref:Microsoft.AspNetCore.Components.ElementReference>只有在元件的 (方法中才保證有效， <xref:Microsoft.AspNetCore.Components.ComponentBase.OnAfterRender%2A> 而專案參考是 `struct`) ，因此無法在元件之間傳遞元素參考。</span><span class="sxs-lookup"><span data-stu-id="eeb75-197">An <xref:Microsoft.AspNetCore.Components.ElementReference> is only guaranteed valid in a component's <xref:Microsoft.AspNetCore.Components.ComponentBase.OnAfterRender%2A> method (and an element reference is a `struct`), so an element reference can't be passed between components.</span></span>
+<span data-ttu-id="485e2-199"><xref:Microsoft.AspNetCore.Components.ElementReference>只有在元件的 (方法中才保證有效， <xref:Microsoft.AspNetCore.Components.ComponentBase.OnAfterRender%2A> 而專案參考是 `struct`) ，因此無法在元件之間傳遞元素參考。</span><span class="sxs-lookup"><span data-stu-id="485e2-199">An <xref:Microsoft.AspNetCore.Components.ElementReference> is only guaranteed valid in a component's <xref:Microsoft.AspNetCore.Components.ComponentBase.OnAfterRender%2A> method (and an element reference is a `struct`), so an element reference can't be passed between components.</span></span>
 
-<span data-ttu-id="eeb75-198">若要讓父元件能讓元素參考可供其他元件使用，父元件可以：</span><span class="sxs-lookup"><span data-stu-id="eeb75-198">For a parent component to make an element reference available to other components, the parent component can:</span></span>
+<span data-ttu-id="485e2-200">若要讓父元件能讓元素參考可供其他元件使用，父元件可以：</span><span class="sxs-lookup"><span data-stu-id="485e2-200">For a parent component to make an element reference available to other components, the parent component can:</span></span>
 
-* <span data-ttu-id="eeb75-199">允許子元件註冊回呼。</span><span class="sxs-lookup"><span data-stu-id="eeb75-199">Allow child components to register callbacks.</span></span>
-* <span data-ttu-id="eeb75-200">使用傳遞的元素參考，在事件期間叫用已註冊的回呼 <xref:Microsoft.AspNetCore.Components.ComponentBase.OnAfterRender%2A> 。</span><span class="sxs-lookup"><span data-stu-id="eeb75-200">Invoke the registered callbacks during the <xref:Microsoft.AspNetCore.Components.ComponentBase.OnAfterRender%2A> event with the passed element reference.</span></span> <span data-ttu-id="eeb75-201">這種方法間接可讓子元件與父系的元素參考互動。</span><span class="sxs-lookup"><span data-stu-id="eeb75-201">Indirectly, this approach allows child components to interact with the parent's element reference.</span></span>
+* <span data-ttu-id="485e2-201">允許子元件註冊回呼。</span><span class="sxs-lookup"><span data-stu-id="485e2-201">Allow child components to register callbacks.</span></span>
+* <span data-ttu-id="485e2-202">使用傳遞的元素參考，在事件期間叫用已註冊的回呼 <xref:Microsoft.AspNetCore.Components.ComponentBase.OnAfterRender%2A> 。</span><span class="sxs-lookup"><span data-stu-id="485e2-202">Invoke the registered callbacks during the <xref:Microsoft.AspNetCore.Components.ComponentBase.OnAfterRender%2A> event with the passed element reference.</span></span> <span data-ttu-id="485e2-203">這種方法間接可讓子元件與父系的元素參考互動。</span><span class="sxs-lookup"><span data-stu-id="485e2-203">Indirectly, this approach allows child components to interact with the parent's element reference.</span></span>
 
-<span data-ttu-id="eeb75-202">下列 Blazor WebAssembly 範例說明此方法。</span><span class="sxs-lookup"><span data-stu-id="eeb75-202">The following Blazor WebAssembly example illustrates the approach.</span></span>
+<span data-ttu-id="485e2-204">下列 Blazor WebAssembly 範例說明此方法。</span><span class="sxs-lookup"><span data-stu-id="485e2-204">The following Blazor WebAssembly example illustrates the approach.</span></span>
 
-<span data-ttu-id="eeb75-203">在 `<head>` 的 `wwwroot/index.html` ：</span><span class="sxs-lookup"><span data-stu-id="eeb75-203">In the `<head>` of `wwwroot/index.html`:</span></span>
+<span data-ttu-id="485e2-205">在 `<head>` 的 `wwwroot/index.html` ：</span><span class="sxs-lookup"><span data-stu-id="485e2-205">In the `<head>` of `wwwroot/index.html`:</span></span>
 
 ```html
 <style>
@@ -274,7 +277,7 @@ public static ValueTask<T> GenericMethod<T>(this ElementReference elementRef,
 </style>
 ```
 
-<span data-ttu-id="eeb75-204">在 `<body>` 的 `wwwroot/index.html` ：</span><span class="sxs-lookup"><span data-stu-id="eeb75-204">In the `<body>` of `wwwroot/index.html`:</span></span>
+<span data-ttu-id="485e2-206">在 `<body>` 的 `wwwroot/index.html` ：</span><span class="sxs-lookup"><span data-stu-id="485e2-206">In the `<body>` of `wwwroot/index.html`:</span></span>
 
 ```html
 <script>
@@ -286,7 +289,7 @@ public static ValueTask<T> GenericMethod<T>(this ElementReference elementRef,
 </script>
 ```
 
-<span data-ttu-id="eeb75-205">`Pages/Index.razor` (父元件) ：</span><span class="sxs-lookup"><span data-stu-id="eeb75-205">`Pages/Index.razor` (parent component):</span></span>
+<span data-ttu-id="485e2-207">`Pages/Index.razor` (父元件) ：</span><span class="sxs-lookup"><span data-stu-id="485e2-207">`Pages/Index.razor` (parent component):</span></span>
 
 ```razor
 @page "/"
@@ -298,7 +301,7 @@ Welcome to your new app.
 <SurveyPrompt Parent="this" Title="How is Blazor working for you?" />
 ```
 
-<span data-ttu-id="eeb75-206">`Pages/Index.razor.cs`:</span><span class="sxs-lookup"><span data-stu-id="eeb75-206">`Pages/Index.razor.cs`:</span></span>
+<span data-ttu-id="485e2-208">`Pages/Index.razor.cs`:</span><span class="sxs-lookup"><span data-stu-id="485e2-208">`Pages/Index.razor.cs`:</span></span>
 
 ```csharp
 using System;
@@ -382,9 +385,9 @@ namespace {APP ASSEMBLY}.Pages
 }
 ```
 
-<span data-ttu-id="eeb75-207">預留位置 `{APP ASSEMBLY}` 是應用程式的應用程式元件名稱 (例如 `BlazorSample`) 。</span><span class="sxs-lookup"><span data-stu-id="eeb75-207">The placeholder `{APP ASSEMBLY}` is the app's app assembly name (for example, `BlazorSample`).</span></span>
+<span data-ttu-id="485e2-209">預留位置 `{APP ASSEMBLY}` 是應用程式的應用程式元件名稱 (例如 `BlazorSample`) 。</span><span class="sxs-lookup"><span data-stu-id="485e2-209">The placeholder `{APP ASSEMBLY}` is the app's app assembly name (for example, `BlazorSample`).</span></span>
 
-<span data-ttu-id="eeb75-208">`Shared/SurveyPrompt.razor` (子元件) ：</span><span class="sxs-lookup"><span data-stu-id="eeb75-208">`Shared/SurveyPrompt.razor` (child component):</span></span>
+<span data-ttu-id="485e2-210">`Shared/SurveyPrompt.razor` (子元件) ：</span><span class="sxs-lookup"><span data-stu-id="485e2-210">`Shared/SurveyPrompt.razor` (child component):</span></span>
 
 ```razor
 @inject IJSRuntime JS
@@ -407,7 +410,7 @@ namespace {APP ASSEMBLY}.Pages
 }
 ```
 
-<span data-ttu-id="eeb75-209">`Shared/SurveyPrompt.razor.cs`:</span><span class="sxs-lookup"><span data-stu-id="eeb75-209">`Shared/SurveyPrompt.razor.cs`:</span></span>
+<span data-ttu-id="485e2-211">`Shared/SurveyPrompt.razor.cs`:</span><span class="sxs-lookup"><span data-stu-id="485e2-211">`Shared/SurveyPrompt.razor.cs`:</span></span>
 
 ```csharp
 using System;
@@ -459,52 +462,52 @@ namespace {APP ASSEMBLY}.Shared
 }
 ```
 
-<span data-ttu-id="eeb75-210">預留位置 `{APP ASSEMBLY}` 是應用程式的應用程式元件名稱 (例如 `BlazorSample`) 。</span><span class="sxs-lookup"><span data-stu-id="eeb75-210">The placeholder `{APP ASSEMBLY}` is the app's app assembly name (for example, `BlazorSample`).</span></span>
+<span data-ttu-id="485e2-212">預留位置 `{APP ASSEMBLY}` 是應用程式的應用程式元件名稱 (例如 `BlazorSample`) 。</span><span class="sxs-lookup"><span data-stu-id="485e2-212">The placeholder `{APP ASSEMBLY}` is the app's app assembly name (for example, `BlazorSample`).</span></span>
 
-## <a name="harden-js-interop-calls"></a><span data-ttu-id="eeb75-211">強化 JS interop 呼叫</span><span class="sxs-lookup"><span data-stu-id="eeb75-211">Harden JS interop calls</span></span>
+## <a name="harden-js-interop-calls"></a><span data-ttu-id="485e2-213">強化 JS interop 呼叫</span><span class="sxs-lookup"><span data-stu-id="485e2-213">Harden JS interop calls</span></span>
 
-<span data-ttu-id="eeb75-212">JS interop 可能因為網路錯誤而失敗，應該視為不可靠。</span><span class="sxs-lookup"><span data-stu-id="eeb75-212">JS interop may fail due to networking errors and should be treated as unreliable.</span></span> <span data-ttu-id="eeb75-213">根據預設， Blazor Server 應用程式會在一分鐘後，在伺服器上使用 JS interop 呼叫。</span><span class="sxs-lookup"><span data-stu-id="eeb75-213">By default, a Blazor Server app times out JS interop calls on the server after one minute.</span></span> <span data-ttu-id="eeb75-214">如果應用程式可容忍更積極的超時，請使用下列其中一種方法來設定 timeout：</span><span class="sxs-lookup"><span data-stu-id="eeb75-214">If an app can tolerate a more aggressive timeout, set the timeout using one of the following approaches:</span></span>
+<span data-ttu-id="485e2-214">JS interop 可能因為網路錯誤而失敗，應該視為不可靠。</span><span class="sxs-lookup"><span data-stu-id="485e2-214">JS interop may fail due to networking errors and should be treated as unreliable.</span></span> <span data-ttu-id="485e2-215">根據預設， Blazor Server 應用程式會在一分鐘後，在伺服器上使用 JS interop 呼叫。</span><span class="sxs-lookup"><span data-stu-id="485e2-215">By default, a Blazor Server app times out JS interop calls on the server after one minute.</span></span> <span data-ttu-id="485e2-216">如果應用程式可容忍更積極的超時，請使用下列其中一種方法來設定 timeout：</span><span class="sxs-lookup"><span data-stu-id="485e2-216">If an app can tolerate a more aggressive timeout, set the timeout using one of the following approaches:</span></span>
 
-* <span data-ttu-id="eeb75-215">在中 `Startup.ConfigureServices` ，指定 timeout：</span><span class="sxs-lookup"><span data-stu-id="eeb75-215">Globally in `Startup.ConfigureServices`, specify the timeout:</span></span>
+* <span data-ttu-id="485e2-217">在中 `Startup.ConfigureServices` ，指定 timeout：</span><span class="sxs-lookup"><span data-stu-id="485e2-217">Globally in `Startup.ConfigureServices`, specify the timeout:</span></span>
 
   ```csharp
   services.AddServerSideBlazor(
       options => options.JSInteropDefaultCallTimeout = TimeSpan.FromSeconds({SECONDS}));
   ```
 
-* <span data-ttu-id="eeb75-216">元件程式碼中的每個調用，單一呼叫可以指定 timeout：</span><span class="sxs-lookup"><span data-stu-id="eeb75-216">Per-invocation in component code, a single call can specify the timeout:</span></span>
+* <span data-ttu-id="485e2-218">元件程式碼中的每個調用，單一呼叫可以指定 timeout：</span><span class="sxs-lookup"><span data-stu-id="485e2-218">Per-invocation in component code, a single call can specify the timeout:</span></span>
 
   ```csharp
   var result = await JSRuntime.InvokeAsync<string>("MyJSOperation", 
       TimeSpan.FromSeconds({SECONDS}), new[] { "Arg1" });
   ```
 
-<span data-ttu-id="eeb75-217">如需資源耗盡的詳細資訊，請參閱 <xref:blazor/security/server/threat-mitigation> 。</span><span class="sxs-lookup"><span data-stu-id="eeb75-217">For more information on resource exhaustion, see <xref:blazor/security/server/threat-mitigation>.</span></span>
+<span data-ttu-id="485e2-219">如需資源耗盡的詳細資訊，請參閱 <xref:blazor/security/server/threat-mitigation> 。</span><span class="sxs-lookup"><span data-stu-id="485e2-219">For more information on resource exhaustion, see <xref:blazor/security/server/threat-mitigation>.</span></span>
 
 [!INCLUDE[](~/includes/blazor-share-interop-code.md)]
 
-## <a name="avoid-circular-object-references"></a><span data-ttu-id="eeb75-218">避免迴圈物件參考</span><span class="sxs-lookup"><span data-stu-id="eeb75-218">Avoid circular object references</span></span>
+## <a name="avoid-circular-object-references"></a><span data-ttu-id="485e2-220">避免迴圈物件參考</span><span class="sxs-lookup"><span data-stu-id="485e2-220">Avoid circular object references</span></span>
 
-<span data-ttu-id="eeb75-219">包含迴圈參考的物件無法在用戶端上針對下列任一項進行序列化：</span><span class="sxs-lookup"><span data-stu-id="eeb75-219">Objects that contain circular references can't be serialized on the client for either:</span></span>
+<span data-ttu-id="485e2-221">包含迴圈參考的物件無法在用戶端上針對下列任一項進行序列化：</span><span class="sxs-lookup"><span data-stu-id="485e2-221">Objects that contain circular references can't be serialized on the client for either:</span></span>
 
-* <span data-ttu-id="eeb75-220">.NET 方法呼叫。</span><span class="sxs-lookup"><span data-stu-id="eeb75-220">.NET method calls.</span></span>
-* <span data-ttu-id="eeb75-221">當傳回型別有迴圈參考時，來自 c # 的 JavaScript 方法呼叫。</span><span class="sxs-lookup"><span data-stu-id="eeb75-221">JavaScript method calls from C# when the return type has circular references.</span></span>
+* <span data-ttu-id="485e2-222">.NET 方法呼叫。</span><span class="sxs-lookup"><span data-stu-id="485e2-222">.NET method calls.</span></span>
+* <span data-ttu-id="485e2-223">當傳回型別有迴圈參考時，來自 c # 的 JavaScript 方法呼叫。</span><span class="sxs-lookup"><span data-stu-id="485e2-223">JavaScript method calls from C# when the return type has circular references.</span></span>
 
-<span data-ttu-id="eeb75-222">如需詳細資訊，請參閱下列問題：</span><span class="sxs-lookup"><span data-stu-id="eeb75-222">For more information, see the following issues:</span></span>
+<span data-ttu-id="485e2-224">如需詳細資訊，請參閱下列問題：</span><span class="sxs-lookup"><span data-stu-id="485e2-224">For more information, see the following issues:</span></span>
 
-* [<span data-ttu-id="eeb75-223">不支援迴圈參考，請採用兩個 (dotnet/aspnetcore #20525) </span><span class="sxs-lookup"><span data-stu-id="eeb75-223">Circular references are not supported, take two (dotnet/aspnetcore #20525)</span></span>](https://github.com/dotnet/aspnetcore/issues/20525)
-* [<span data-ttu-id="eeb75-224">提案：在將 (dotnet/執行時間 #30820 序列化時，新增處理迴圈參考的機制) </span><span class="sxs-lookup"><span data-stu-id="eeb75-224">Proposal: Add mechanism to handle circular references when serializing (dotnet/runtime #30820)</span></span>](https://github.com/dotnet/runtime/issues/30820)
+* [<span data-ttu-id="485e2-225">不支援迴圈參考，請採用兩個 (dotnet/aspnetcore #20525) </span><span class="sxs-lookup"><span data-stu-id="485e2-225">Circular references are not supported, take two (dotnet/aspnetcore #20525)</span></span>](https://github.com/dotnet/aspnetcore/issues/20525)
+* [<span data-ttu-id="485e2-226">提案：在將 (dotnet/執行時間 #30820 序列化時，新增處理迴圈參考的機制) </span><span class="sxs-lookup"><span data-stu-id="485e2-226">Proposal: Add mechanism to handle circular references when serializing (dotnet/runtime #30820)</span></span>](https://github.com/dotnet/runtime/issues/30820)
 
 ::: moniker range=">= aspnetcore-5.0"
 
-## <a name="no-locblazor-javascript-isolation-and-object-references"></a><span data-ttu-id="eeb75-225">Blazor JavaScript 隔離和物件參考</span><span class="sxs-lookup"><span data-stu-id="eeb75-225">Blazor JavaScript isolation and object references</span></span>
+## <a name="no-locblazor-javascript-isolation-and-object-references"></a><span data-ttu-id="485e2-227">Blazor JavaScript 隔離和物件參考</span><span class="sxs-lookup"><span data-stu-id="485e2-227">Blazor JavaScript isolation and object references</span></span>
 
-<span data-ttu-id="eeb75-226">Blazor 啟用標準 [javascript 模組](https://developer.mozilla.org/docs/Web/JavaScript/Guide/Modules)中的 JavaScript 隔離。</span><span class="sxs-lookup"><span data-stu-id="eeb75-226">Blazor enables JavaScript isolation in standard [JavaScript modules](https://developer.mozilla.org/docs/Web/JavaScript/Guide/Modules).</span></span> <span data-ttu-id="eeb75-227">JavaScript 隔離提供下列優點：</span><span class="sxs-lookup"><span data-stu-id="eeb75-227">JavaScript isolation provides the following benefits:</span></span>
+<span data-ttu-id="485e2-228">Blazor 啟用標準 [javascript 模組](https://developer.mozilla.org/docs/Web/JavaScript/Guide/Modules)中的 JavaScript 隔離。</span><span class="sxs-lookup"><span data-stu-id="485e2-228">Blazor enables JavaScript isolation in standard [JavaScript modules](https://developer.mozilla.org/docs/Web/JavaScript/Guide/Modules).</span></span> <span data-ttu-id="485e2-229">JavaScript 隔離提供下列優點：</span><span class="sxs-lookup"><span data-stu-id="485e2-229">JavaScript isolation provides the following benefits:</span></span>
 
-* <span data-ttu-id="eeb75-228">匯入的 JavaScript 不再干擾全域命名空間。</span><span class="sxs-lookup"><span data-stu-id="eeb75-228">Imported JavaScript no longer pollutes the global namespace.</span></span>
-* <span data-ttu-id="eeb75-229">程式庫和元件的取用者不需要匯入相關的 JavaScript。</span><span class="sxs-lookup"><span data-stu-id="eeb75-229">Consumers of a library and components aren't required to import the related JavaScript.</span></span>
+* <span data-ttu-id="485e2-230">匯入的 JavaScript 不再干擾全域命名空間。</span><span class="sxs-lookup"><span data-stu-id="485e2-230">Imported JavaScript no longer pollutes the global namespace.</span></span>
+* <span data-ttu-id="485e2-231">程式庫和元件的取用者不需要匯入相關的 JavaScript。</span><span class="sxs-lookup"><span data-stu-id="485e2-231">Consumers of a library and components aren't required to import the related JavaScript.</span></span>
 
-<span data-ttu-id="eeb75-230">例如，下列 JavaScript 模組會匯出 JavaScript 函式，以顯示瀏覽器提示：</span><span class="sxs-lookup"><span data-stu-id="eeb75-230">For example, the following JavaScript module exports a JavaScript function for showing a browser prompt:</span></span>
+<span data-ttu-id="485e2-232">例如，下列 JavaScript 模組會匯出 JavaScript 函式，以顯示瀏覽器提示：</span><span class="sxs-lookup"><span data-stu-id="485e2-232">For example, the following JavaScript module exports a JavaScript function for showing a browser prompt:</span></span>
 
 ```javascript
 export function showPrompt(message) {
@@ -512,16 +515,16 @@ export function showPrompt(message) {
 }
 ```
 
-<span data-ttu-id="eeb75-231">將上述 JavaScript 模組新增至 .NET 程式庫作為靜態 web 資產 (`wwwroot/exampleJsInterop.js`) 然後使用服務將模組匯入至 .net 程式碼 <xref:Microsoft.JSInterop.IJSRuntime> 。</span><span class="sxs-lookup"><span data-stu-id="eeb75-231">Add the preceding JavaScript module to a .NET library as a static web asset (`wwwroot/exampleJsInterop.js`) and then import the module into the .NET code using the <xref:Microsoft.JSInterop.IJSRuntime> service.</span></span> <span data-ttu-id="eeb75-232">服務會插入為 `jsRuntime` 下列範例中未顯示的 () ：</span><span class="sxs-lookup"><span data-stu-id="eeb75-232">The service is injected as `jsRuntime` (not shown) for the following example:</span></span>
+<span data-ttu-id="485e2-233">將上述 JavaScript 模組新增至 .NET 程式庫作為靜態 web 資產 (`wwwroot/exampleJsInterop.js`) 然後使用服務將模組匯入至 .net 程式碼 <xref:Microsoft.JSInterop.IJSRuntime> 。</span><span class="sxs-lookup"><span data-stu-id="485e2-233">Add the preceding JavaScript module to a .NET library as a static web asset (`wwwroot/exampleJsInterop.js`) and then import the module into the .NET code using the <xref:Microsoft.JSInterop.IJSRuntime> service.</span></span> <span data-ttu-id="485e2-234">服務會插入為 `jsRuntime` 下列範例中未顯示的 () ：</span><span class="sxs-lookup"><span data-stu-id="485e2-234">The service is injected as `jsRuntime` (not shown) for the following example:</span></span>
 
 ```csharp
 var module = await jsRuntime.InvokeAsync<IJSObjectReference>(
     "import", "./_content/MyComponents/exampleJsInterop.js");
 ```
 
-<span data-ttu-id="eeb75-233">`import`上述範例中的識別碼是專門用來匯入 JavaScript 模組的特殊識別碼。</span><span class="sxs-lookup"><span data-stu-id="eeb75-233">The `import` identifier in the preceding example is a special identifier used specifically for importing a JavaScript module.</span></span> <span data-ttu-id="eeb75-234">使用其穩定靜態 web 資產路徑來指定模組： `_content/{LIBRARY NAME}/{PATH UNDER WWWROOT}` 。</span><span class="sxs-lookup"><span data-stu-id="eeb75-234">Specify the module using its stable static web asset path: `_content/{LIBRARY NAME}/{PATH UNDER WWWROOT}`.</span></span> <span data-ttu-id="eeb75-235">預留位置 `{LIBRARY NAME}` 是程式庫名稱。</span><span class="sxs-lookup"><span data-stu-id="eeb75-235">The placeholder `{LIBRARY NAME}` is the library name.</span></span> <span data-ttu-id="eeb75-236">預留位置 `{PATH UNDER WWWROOT}` 是下腳本的路徑 `wwwroot` 。</span><span class="sxs-lookup"><span data-stu-id="eeb75-236">The placeholder `{PATH UNDER WWWROOT}` is the path to the script under `wwwroot`.</span></span>
+<span data-ttu-id="485e2-235">`import`上述範例中的識別碼是專門用來匯入 JavaScript 模組的特殊識別碼。</span><span class="sxs-lookup"><span data-stu-id="485e2-235">The `import` identifier in the preceding example is a special identifier used specifically for importing a JavaScript module.</span></span> <span data-ttu-id="485e2-236">使用其穩定靜態 web 資產路徑來指定模組： `_content/{LIBRARY NAME}/{PATH UNDER WWWROOT}` 。</span><span class="sxs-lookup"><span data-stu-id="485e2-236">Specify the module using its stable static web asset path: `_content/{LIBRARY NAME}/{PATH UNDER WWWROOT}`.</span></span> <span data-ttu-id="485e2-237">預留位置 `{LIBRARY NAME}` 是程式庫名稱。</span><span class="sxs-lookup"><span data-stu-id="485e2-237">The placeholder `{LIBRARY NAME}` is the library name.</span></span> <span data-ttu-id="485e2-238">預留位置 `{PATH UNDER WWWROOT}` 是下腳本的路徑 `wwwroot` 。</span><span class="sxs-lookup"><span data-stu-id="485e2-238">The placeholder `{PATH UNDER WWWROOT}` is the path to the script under `wwwroot`.</span></span>
 
-<span data-ttu-id="eeb75-237"><xref:Microsoft.JSInterop.IJSRuntime> 將模組匯入為 `IJSObjectReference` ，表示從 .net 程式碼到 JavaScript 物件的參考。</span><span class="sxs-lookup"><span data-stu-id="eeb75-237"><xref:Microsoft.JSInterop.IJSRuntime> imports the module as a `IJSObjectReference`, which represents a reference to a JavaScript object from .NET code.</span></span> <span data-ttu-id="eeb75-238">使用來叫用 `IJSObjectReference` 模組中匯出的 JavaScript 函式：</span><span class="sxs-lookup"><span data-stu-id="eeb75-238">Use the `IJSObjectReference` to invoke exported JavaScript functions from the module:</span></span>
+<span data-ttu-id="485e2-239"><xref:Microsoft.JSInterop.IJSRuntime> 將模組匯入為 `IJSObjectReference` ，表示從 .net 程式碼到 JavaScript 物件的參考。</span><span class="sxs-lookup"><span data-stu-id="485e2-239"><xref:Microsoft.JSInterop.IJSRuntime> imports the module as a `IJSObjectReference`, which represents a reference to a JavaScript object from .NET code.</span></span> <span data-ttu-id="485e2-240">使用來叫用 `IJSObjectReference` 模組中匯出的 JavaScript 函式：</span><span class="sxs-lookup"><span data-stu-id="485e2-240">Use the `IJSObjectReference` to invoke exported JavaScript functions from the module:</span></span>
 
 ```csharp
 public async ValueTask<string> Prompt(string message)
@@ -530,9 +533,9 @@ public async ValueTask<string> Prompt(string message)
 }
 ```
 
-<span data-ttu-id="eeb75-239">`IJSInProcessObjectReference` 表示 JavaScript 物件的參考，該物件的函式可以同步叫用。</span><span class="sxs-lookup"><span data-stu-id="eeb75-239">`IJSInProcessObjectReference` represents a reference to a JavaScript object whose functions can be invoked synchronously.</span></span>
+<span data-ttu-id="485e2-241">`IJSInProcessObjectReference` 表示 JavaScript 物件的參考，該物件的函式可以同步叫用。</span><span class="sxs-lookup"><span data-stu-id="485e2-241">`IJSInProcessObjectReference` represents a reference to a JavaScript object whose functions can be invoked synchronously.</span></span>
 
-<span data-ttu-id="eeb75-240">`IJSUnmarshalledObjectReference` 代表 JavaScript 物件的參考，該物件的函式可以叫用，而不會有序列化 .NET 資料的額外負荷。</span><span class="sxs-lookup"><span data-stu-id="eeb75-240">`IJSUnmarshalledObjectReference` represents a reference to an JavaScript object whose functions can be invoked without the overhead of serializing .NET data.</span></span> <span data-ttu-id="eeb75-241">Blazor WebAssembly當效能很重要時，即可使用此功能：</span><span class="sxs-lookup"><span data-stu-id="eeb75-241">This can be used in Blazor WebAssembly when performance is crucial:</span></span>
+<span data-ttu-id="485e2-242">`IJSUnmarshalledObjectReference` 代表 JavaScript 物件的參考，該物件的函式可以叫用，而不會有序列化 .NET 資料的額外負荷。</span><span class="sxs-lookup"><span data-stu-id="485e2-242">`IJSUnmarshalledObjectReference` represents a reference to an JavaScript object whose functions can be invoked without the overhead of serializing .NET data.</span></span> <span data-ttu-id="485e2-243">Blazor WebAssembly當效能很重要時，即可使用此功能：</span><span class="sxs-lookup"><span data-stu-id="485e2-243">This can be used in Blazor WebAssembly when performance is crucial:</span></span>
 
 ```javascript
 window.unmarshalledInstance = {
@@ -552,13 +555,13 @@ string helloWorldString = jsUnmarshalledReference.InvokeUnmarshalled<string, str
     "helloWorld");
 ```
 
-## <a name="use-of-javascript-libraries-that-render-ui-dom-elements"></a><span data-ttu-id="eeb75-242">使用可轉譯 UI (DOM 元素的 JavaScript 程式庫) </span><span class="sxs-lookup"><span data-stu-id="eeb75-242">Use of JavaScript libraries that render UI (DOM elements)</span></span>
+## <a name="use-of-javascript-libraries-that-render-ui-dom-elements"></a><span data-ttu-id="485e2-244">使用可轉譯 UI (DOM 元素的 JavaScript 程式庫) </span><span class="sxs-lookup"><span data-stu-id="485e2-244">Use of JavaScript libraries that render UI (DOM elements)</span></span>
 
-<span data-ttu-id="eeb75-243">有時您可能會想要使用 JavaScript 程式庫，在瀏覽器 DOM 內產生可見的使用者介面元素。</span><span class="sxs-lookup"><span data-stu-id="eeb75-243">Sometimes you may wish to use JavaScript libraries that produce visible user interface elements within the browser DOM.</span></span> <span data-ttu-id="eeb75-244">乍看之下，這似乎很難，因為比較 Blazor 系統需要控制 dom 元素的樹狀結構，而且如果某些外部程式碼變動 dom 樹狀結構，並使其套用差異的機制失效，就會發生錯誤。</span><span class="sxs-lookup"><span data-stu-id="eeb75-244">At first glance, this might seem difficult because Blazor's diffing system relies on having control over the tree of DOM elements and runs into errors if some external code mutates the DOM tree and invalidates its mechanism for applying diffs.</span></span> <span data-ttu-id="eeb75-245">這並不是 Blazor 特定的限制。</span><span class="sxs-lookup"><span data-stu-id="eeb75-245">This isn't a Blazor-specific limitation.</span></span> <span data-ttu-id="eeb75-246">任何差異型 UI 架構都會發生相同的挑戰。</span><span class="sxs-lookup"><span data-stu-id="eeb75-246">The same challenge occurs with any diff-based UI framework.</span></span>
+<span data-ttu-id="485e2-245">有時您可能會想要使用 JavaScript 程式庫，在瀏覽器 DOM 內產生可見的使用者介面元素。</span><span class="sxs-lookup"><span data-stu-id="485e2-245">Sometimes you may wish to use JavaScript libraries that produce visible user interface elements within the browser DOM.</span></span> <span data-ttu-id="485e2-246">乍看之下，這似乎很難，因為比較 Blazor 系統需要控制 dom 元素的樹狀結構，而且如果某些外部程式碼變動 dom 樹狀結構，並使其套用差異的機制失效，就會發生錯誤。</span><span class="sxs-lookup"><span data-stu-id="485e2-246">At first glance, this might seem difficult because Blazor's diffing system relies on having control over the tree of DOM elements and runs into errors if some external code mutates the DOM tree and invalidates its mechanism for applying diffs.</span></span> <span data-ttu-id="485e2-247">這並不是 Blazor 特定的限制。</span><span class="sxs-lookup"><span data-stu-id="485e2-247">This isn't a Blazor-specific limitation.</span></span> <span data-ttu-id="485e2-248">任何差異型 UI 架構都會發生相同的挑戰。</span><span class="sxs-lookup"><span data-stu-id="485e2-248">The same challenge occurs with any diff-based UI framework.</span></span>
 
-<span data-ttu-id="eeb75-247">幸運的是，將外部產生的 UI 可靠地內嵌在 Blazor 元件 UI 中相當簡單。</span><span class="sxs-lookup"><span data-stu-id="eeb75-247">Fortunately, it's straightforward to embed externally-generated UI within a Blazor component UI reliably.</span></span> <span data-ttu-id="eeb75-248">建議的技巧是讓元件的程式碼 (檔案 `.razor`) 產生空的元素。</span><span class="sxs-lookup"><span data-stu-id="eeb75-248">The recommended technique is to have the component's code (`.razor` file) produce an empty element.</span></span> <span data-ttu-id="eeb75-249">在比較 Blazor 系統的考慮下，元素一律是空的，因此轉譯器不會遞迴到專案中，而是只保留其內容。</span><span class="sxs-lookup"><span data-stu-id="eeb75-249">As far as Blazor's diffing system is concerned, the element is always empty, so the renderer does not recurse into the element and instead leaves its contents alone.</span></span> <span data-ttu-id="eeb75-250">這可讓您安全地在專案中填入任意外部管理的內容。</span><span class="sxs-lookup"><span data-stu-id="eeb75-250">This makes it safe to populate the element with arbitrary externally-managed content.</span></span>
+<span data-ttu-id="485e2-249">幸運的是，將外部產生的 UI 可靠地內嵌在 Blazor 元件 UI 中相當簡單。</span><span class="sxs-lookup"><span data-stu-id="485e2-249">Fortunately, it's straightforward to embed externally-generated UI within a Blazor component UI reliably.</span></span> <span data-ttu-id="485e2-250">建議的技巧是讓元件的程式碼 (檔案 `.razor`) 產生空的元素。</span><span class="sxs-lookup"><span data-stu-id="485e2-250">The recommended technique is to have the component's code (`.razor` file) produce an empty element.</span></span> <span data-ttu-id="485e2-251">在比較 Blazor 系統的考慮下，元素一律是空的，因此轉譯器不會遞迴到專案中，而是只保留其內容。</span><span class="sxs-lookup"><span data-stu-id="485e2-251">As far as Blazor's diffing system is concerned, the element is always empty, so the renderer does not recurse into the element and instead leaves its contents alone.</span></span> <span data-ttu-id="485e2-252">這可讓您安全地在專案中填入任意外部管理的內容。</span><span class="sxs-lookup"><span data-stu-id="485e2-252">This makes it safe to populate the element with arbitrary externally-managed content.</span></span>
 
-<span data-ttu-id="eeb75-251">下列範例示範概念。</span><span class="sxs-lookup"><span data-stu-id="eeb75-251">The following example demonstrates the concept.</span></span> <span data-ttu-id="eeb75-252">在語句中的 `if` 時 `firstRender` `true` ，請使用來做一些動作 `myElement` 。</span><span class="sxs-lookup"><span data-stu-id="eeb75-252">Within the `if` statement when `firstRender` is `true`, do something with `myElement`.</span></span> <span data-ttu-id="eeb75-253">例如，呼叫外部 JavaScript 程式庫來填入它。</span><span class="sxs-lookup"><span data-stu-id="eeb75-253">For example, call an external JavaScript library to populate it.</span></span> <span data-ttu-id="eeb75-254">Blazor 只保留專案的內容，直到移除此元件本身為止。</span><span class="sxs-lookup"><span data-stu-id="eeb75-254">Blazor leaves the element's contents alone until this component itself is removed.</span></span> <span data-ttu-id="eeb75-255">移除元件時，也會移除元件的整個 DOM 子樹。</span><span class="sxs-lookup"><span data-stu-id="eeb75-255">When the component is removed, the component's entire DOM subtree is also removed.</span></span>
+<span data-ttu-id="485e2-253">下列範例示範概念。</span><span class="sxs-lookup"><span data-stu-id="485e2-253">The following example demonstrates the concept.</span></span> <span data-ttu-id="485e2-254">在語句中的 `if` 時 `firstRender` `true` ，請使用來做一些動作 `myElement` 。</span><span class="sxs-lookup"><span data-stu-id="485e2-254">Within the `if` statement when `firstRender` is `true`, do something with `myElement`.</span></span> <span data-ttu-id="485e2-255">例如，呼叫外部 JavaScript 程式庫來填入它。</span><span class="sxs-lookup"><span data-stu-id="485e2-255">For example, call an external JavaScript library to populate it.</span></span> <span data-ttu-id="485e2-256">Blazor 只保留專案的內容，直到移除此元件本身為止。</span><span class="sxs-lookup"><span data-stu-id="485e2-256">Blazor leaves the element's contents alone until this component itself is removed.</span></span> <span data-ttu-id="485e2-257">移除元件時，也會移除元件的整個 DOM 子樹。</span><span class="sxs-lookup"><span data-stu-id="485e2-257">When the component is removed, the component's entire DOM subtree is also removed.</span></span>
 
 ```razor
 <h1>Hello! This is a Blazor component rendered at @DateTime.Now</h1>
@@ -578,7 +581,7 @@ string helloWorldString = jsUnmarshalledReference.InvokeUnmarshalled<string, str
 }
 ```
 
-<span data-ttu-id="eeb75-256">如需更詳細的範例，請考慮使用 [開放原始碼 Mapbox api](https://www.mapbox.com/)呈現互動式地圖的下列元件：</span><span class="sxs-lookup"><span data-stu-id="eeb75-256">As a more detailed example, consider the following component that renders an interactive map using the [open-source Mapbox APIs](https://www.mapbox.com/):</span></span>
+<span data-ttu-id="485e2-258">如需更詳細的範例，請考慮使用 [開放原始碼 Mapbox api](https://www.mapbox.com/)呈現互動式地圖的下列元件：</span><span class="sxs-lookup"><span data-stu-id="485e2-258">As a more detailed example, consider the following component that renders an interactive map using the [open-source Mapbox APIs](https://www.mapbox.com/):</span></span>
 
 ```razor
 @inject IJSRuntime JS
@@ -618,7 +621,7 @@ string helloWorldString = jsUnmarshalledReference.InvokeUnmarshalled<string, str
 }
 ```
 
-<span data-ttu-id="eeb75-257">對應的 JavaScript 模組（應放置於 `wwwroot/mapComponent.js` ）如下所示：</span><span class="sxs-lookup"><span data-stu-id="eeb75-257">The corresponding JavaScript module, which should be placed at `wwwroot/mapComponent.js`, is as follows:</span></span>
+<span data-ttu-id="485e2-259">對應的 JavaScript 模組（應放置於 `wwwroot/mapComponent.js` ）如下所示：</span><span class="sxs-lookup"><span data-stu-id="485e2-259">The corresponding JavaScript module, which should be placed at `wwwroot/mapComponent.js`, is as follows:</span></span>
 
 ```javascript
 import 'https://api.mapbox.com/mapbox-gl-js/v1.12.0/mapbox-gl.js';
@@ -641,32 +644,57 @@ export function setMapCenter(map, latitude, longitude) {
 }
 ```
 
-<span data-ttu-id="eeb75-258">在上述範例中，請將字串取代為 `{ACCESS TOKEN}` 可從中取得的有效存取權杖 https://account.mapbox.com 。</span><span class="sxs-lookup"><span data-stu-id="eeb75-258">In the preceding example, replace the string `{ACCESS TOKEN}` with a valid access token that you can get from https://account.mapbox.com.</span></span>
+<span data-ttu-id="485e2-260">在上述範例中，請將字串取代為 `{ACCESS TOKEN}` 可從中取得的有效存取權杖 https://account.mapbox.com 。</span><span class="sxs-lookup"><span data-stu-id="485e2-260">In the preceding example, replace the string `{ACCESS TOKEN}` with a valid access token that you can get from https://account.mapbox.com.</span></span>
 
-<span data-ttu-id="eeb75-259">若要產生正確的樣式，請將下列樣式表單標記新增至主控制項 HTML 網頁 (`index.html` 或 `_Host.cshtml`) ：</span><span class="sxs-lookup"><span data-stu-id="eeb75-259">To produce correct styling, add the following stylesheet tag to the host HTML page (`index.html` or `_Host.cshtml`):</span></span>
+<span data-ttu-id="485e2-261">若要產生正確的樣式，請將下列樣式表單標記新增至主控制項 HTML 網頁 (`index.html` 或 `_Host.cshtml`) ：</span><span class="sxs-lookup"><span data-stu-id="485e2-261">To produce correct styling, add the following stylesheet tag to the host HTML page (`index.html` or `_Host.cshtml`):</span></span>
 
 ```html
 <link rel="stylesheet" href="https://api.mapbox.com/mapbox-gl-js/v1.12.0/mapbox-gl.css" />
 ```
 
-<span data-ttu-id="eeb75-260">上述範例會產生互動式地圖 UI，使用者在其中：</span><span class="sxs-lookup"><span data-stu-id="eeb75-260">The preceding example produces an interactive map UI, in which the user:</span></span>
+<span data-ttu-id="485e2-262">上述範例會產生互動式地圖 UI，使用者在其中：</span><span class="sxs-lookup"><span data-stu-id="485e2-262">The preceding example produces an interactive map UI, in which the user:</span></span>
 
-* <span data-ttu-id="eeb75-261">可以拖曳到滾動或縮放。</span><span class="sxs-lookup"><span data-stu-id="eeb75-261">Can drag to scroll or zoom.</span></span>
-* <span data-ttu-id="eeb75-262">按一下按鈕以跳到預先定義的位置。</span><span class="sxs-lookup"><span data-stu-id="eeb75-262">Click buttons to jump to predefined locations.</span></span>
+* <span data-ttu-id="485e2-263">可以拖曳到滾動或縮放。</span><span class="sxs-lookup"><span data-stu-id="485e2-263">Can drag to scroll or zoom.</span></span>
+* <span data-ttu-id="485e2-264">按一下按鈕以跳到預先定義的位置。</span><span class="sxs-lookup"><span data-stu-id="485e2-264">Click buttons to jump to predefined locations.</span></span>
 
 ![東京、日本和 Mapbox 的街道地圖，可選擇 Bristol、英國和東京、日本](https://user-images.githubusercontent.com/1101362/94939821-92ef6700-04ca-11eb-858e-fff6df0053ae.png)
 
-<span data-ttu-id="eeb75-264">要瞭解的重點是：</span><span class="sxs-lookup"><span data-stu-id="eeb75-264">The key points to understand are:</span></span>
+<span data-ttu-id="485e2-266">要瞭解的重點是：</span><span class="sxs-lookup"><span data-stu-id="485e2-266">The key points to understand are:</span></span>
 
- * <span data-ttu-id="eeb75-265">在 `<div>` 考慮時，with `@ref="mapElement"` 會保持空白 Blazor 。</span><span class="sxs-lookup"><span data-stu-id="eeb75-265">The `<div>` with `@ref="mapElement"` is left empty as far as Blazor is concerned.</span></span> <span data-ttu-id="eeb75-266">因此，在一段 `mapbox-gl.js` 時間內填入並修改其內容是安全的。</span><span class="sxs-lookup"><span data-stu-id="eeb75-266">It's therefore safe for `mapbox-gl.js` to populate it and modify its contents over time.</span></span> <span data-ttu-id="eeb75-267">您可以使用這項技術搭配任何轉譯 UI 的 JavaScript 程式庫。</span><span class="sxs-lookup"><span data-stu-id="eeb75-267">You can use this technique with any JavaScript library that renders UI.</span></span> <span data-ttu-id="eeb75-268">您甚至可以將協力廠商 JavaScript SPA 架構中的元件內嵌在 Blazor 元件中，只要它們不會嘗試連接並修改頁面的其他部分即可。</span><span class="sxs-lookup"><span data-stu-id="eeb75-268">You could even embed components from a third-party JavaScript SPA framework inside Blazor components, as long as they don't try to reach out and modify other parts of the page.</span></span> <span data-ttu-id="eeb75-269">外部 JavaScript 程式碼修改不是空的元素並 *不* 安全 Blazor 。</span><span class="sxs-lookup"><span data-stu-id="eeb75-269">It is *not* safe for external JavaScript code to modify elements that Blazor does not regard as empty.</span></span>
- * <span data-ttu-id="eeb75-270">使用這種方法時，請記住有關如何 Blazor 保留或終結 DOM 元素的規則。</span><span class="sxs-lookup"><span data-stu-id="eeb75-270">When using this approach, bear in mind the rules about how Blazor retains or destroys DOM elements.</span></span> <span data-ttu-id="eeb75-271">在上述範例中，元件會安全地處理按鈕的 click 事件，並更新現有的對應實例，因為預設會保留 DOM 元素。</span><span class="sxs-lookup"><span data-stu-id="eeb75-271">In the preceding example, the component safely handles button click events and updates the existing map instance because DOM elements are retained where possible by default.</span></span> <span data-ttu-id="eeb75-272">如果您要從迴圈內轉譯地圖元素清單 `@foreach` ，您想要使用 `@key` 確保元件實例的保留。</span><span class="sxs-lookup"><span data-stu-id="eeb75-272">If you were rendering a list of map elements from inside a `@foreach` loop, you want to use `@key` to ensure the preservation of component instances.</span></span> <span data-ttu-id="eeb75-273">否則，清單資料中的變更可能會導致元件實例以不當的方式保留先前實例的狀態。</span><span class="sxs-lookup"><span data-stu-id="eeb75-273">Otherwise, changes in the list data could cause component instances to retain the state of previous instances in an undesirable manner.</span></span> <span data-ttu-id="eeb75-274">如需詳細資訊，請參閱 [使用 @key 來保留元素和元件](xref:blazor/components/index#use-key-to-control-the-preservation-of-elements-and-components)。</span><span class="sxs-lookup"><span data-stu-id="eeb75-274">For more information, see [using @key to preserve elements and components](xref:blazor/components/index#use-key-to-control-the-preservation-of-elements-and-components).</span></span>
+ * <span data-ttu-id="485e2-267">在 `<div>` 考慮時，with `@ref="mapElement"` 會保持空白 Blazor 。</span><span class="sxs-lookup"><span data-stu-id="485e2-267">The `<div>` with `@ref="mapElement"` is left empty as far as Blazor is concerned.</span></span> <span data-ttu-id="485e2-268">因此，在一段 `mapbox-gl.js` 時間內填入並修改其內容是安全的。</span><span class="sxs-lookup"><span data-stu-id="485e2-268">It's therefore safe for `mapbox-gl.js` to populate it and modify its contents over time.</span></span> <span data-ttu-id="485e2-269">您可以使用這項技術搭配任何轉譯 UI 的 JavaScript 程式庫。</span><span class="sxs-lookup"><span data-stu-id="485e2-269">You can use this technique with any JavaScript library that renders UI.</span></span> <span data-ttu-id="485e2-270">您甚至可以將協力廠商 JavaScript SPA 架構中的元件內嵌在 Blazor 元件中，只要它們不會嘗試連接並修改頁面的其他部分即可。</span><span class="sxs-lookup"><span data-stu-id="485e2-270">You could even embed components from a third-party JavaScript SPA framework inside Blazor components, as long as they don't try to reach out and modify other parts of the page.</span></span> <span data-ttu-id="485e2-271">外部 JavaScript 程式碼修改不是空的元素並 *不* 安全 Blazor 。</span><span class="sxs-lookup"><span data-stu-id="485e2-271">It is *not* safe for external JavaScript code to modify elements that Blazor does not regard as empty.</span></span>
+ * <span data-ttu-id="485e2-272">使用這種方法時，請記住有關如何 Blazor 保留或終結 DOM 元素的規則。</span><span class="sxs-lookup"><span data-stu-id="485e2-272">When using this approach, bear in mind the rules about how Blazor retains or destroys DOM elements.</span></span> <span data-ttu-id="485e2-273">在上述範例中，元件會安全地處理按鈕的 click 事件，並更新現有的對應實例，因為預設會保留 DOM 元素。</span><span class="sxs-lookup"><span data-stu-id="485e2-273">In the preceding example, the component safely handles button click events and updates the existing map instance because DOM elements are retained where possible by default.</span></span> <span data-ttu-id="485e2-274">如果您要從迴圈內轉譯地圖元素清單 `@foreach` ，您想要使用 `@key` 確保元件實例的保留。</span><span class="sxs-lookup"><span data-stu-id="485e2-274">If you were rendering a list of map elements from inside a `@foreach` loop, you want to use `@key` to ensure the preservation of component instances.</span></span> <span data-ttu-id="485e2-275">否則，清單資料中的變更可能會導致元件實例以不當的方式保留先前實例的狀態。</span><span class="sxs-lookup"><span data-stu-id="485e2-275">Otherwise, changes in the list data could cause component instances to retain the state of previous instances in an undesirable manner.</span></span> <span data-ttu-id="485e2-276">如需詳細資訊，請參閱 [使用 @key 來保留元素和元件](xref:blazor/components/index#use-key-to-control-the-preservation-of-elements-and-components)。</span><span class="sxs-lookup"><span data-stu-id="485e2-276">For more information, see [using @key to preserve elements and components](xref:blazor/components/index#use-key-to-control-the-preservation-of-elements-and-components).</span></span>
 
-<span data-ttu-id="eeb75-275">此外，上述範例示範如何將 JavaScript 邏輯和相依性封裝在 ES6 模組內，並使用識別碼動態載入它 `import` 。</span><span class="sxs-lookup"><span data-stu-id="eeb75-275">Additionally, the preceding example shows how it's possible to encapsulate JavaScript logic and dependencies within an ES6 module and load it dynamically using the `import` identifier.</span></span> <span data-ttu-id="eeb75-276">如需詳細資訊，請參閱 [JavaScript 隔離和物件參考](#blazor-javascript-isolation-and-object-references)。</span><span class="sxs-lookup"><span data-stu-id="eeb75-276">For more information, see [JavaScript isolation and object references](#blazor-javascript-isolation-and-object-references).</span></span>
+<span data-ttu-id="485e2-277">此外，上述範例示範如何將 JavaScript 邏輯和相依性封裝在 ES6 模組內，並使用識別碼動態載入它 `import` 。</span><span class="sxs-lookup"><span data-stu-id="485e2-277">Additionally, the preceding example shows how it's possible to encapsulate JavaScript logic and dependencies within an ES6 module and load it dynamically using the `import` identifier.</span></span> <span data-ttu-id="485e2-278">如需詳細資訊，請參閱 [JavaScript 隔離和物件參考](#blazor-javascript-isolation-and-object-references)。</span><span class="sxs-lookup"><span data-stu-id="485e2-278">For more information, see [JavaScript isolation and object references](#blazor-javascript-isolation-and-object-references).</span></span>
 
 ::: moniker-end
 
-## <a name="additional-resources"></a><span data-ttu-id="eeb75-277">其他資源</span><span class="sxs-lookup"><span data-stu-id="eeb75-277">Additional resources</span></span>
+## <a name="size-limits-on-js-interop-calls"></a><span data-ttu-id="485e2-279">JS interop 呼叫的大小限制</span><span class="sxs-lookup"><span data-stu-id="485e2-279">Size limits on JS interop calls</span></span>
+
+<span data-ttu-id="485e2-280">在中 Blazor WebAssembly ，架構不會限制 JS interop 呼叫的輸入和輸出大小。</span><span class="sxs-lookup"><span data-stu-id="485e2-280">In Blazor WebAssembly, the framework doesn't impose limits on the size of inputs and outputs of JS interop calls.</span></span>
+
+<span data-ttu-id="485e2-281">在中 Blazor Server ，JS interop 呼叫的結果受限於 () 所強制執行的承載大小 SignalR 上限 <xref:Microsoft.AspNetCore.SignalR.HubOptions.MaximumReceiveMessageSize> ，預設為 32 KB。</span><span class="sxs-lookup"><span data-stu-id="485e2-281">In Blazor Server, the result of a JS interop call is limited by the maximum payload size enforced by SignalR (<xref:Microsoft.AspNetCore.SignalR.HubOptions.MaximumReceiveMessageSize>), which defaults to 32 KB.</span></span> <span data-ttu-id="485e2-282">嘗試回應 JS interop 呼叫的應用程式，其承載大於或等於 <xref:Microsoft.AspNetCore.SignalR.HubOptions.MaximumReceiveMessageSize> 擲回錯誤。</span><span class="sxs-lookup"><span data-stu-id="485e2-282">Applications that attempt to respond to a JS interop call with a payload larger than <xref:Microsoft.AspNetCore.SignalR.HubOptions.MaximumReceiveMessageSize> throw an error.</span></span> <span data-ttu-id="485e2-283">您可以藉由修改來設定較大的限制 <xref:Microsoft.AspNetCore.SignalR.HubOptions.MaximumReceiveMessageSize> 。</span><span class="sxs-lookup"><span data-stu-id="485e2-283">A larger limit can be configured by modifying <xref:Microsoft.AspNetCore.SignalR.HubOptions.MaximumReceiveMessageSize>.</span></span> <span data-ttu-id="485e2-284">下列範例會將接收訊息大小上限設定為 64 KB (64 \* 1024 \* 1024) ：</span><span class="sxs-lookup"><span data-stu-id="485e2-284">The following example sets the maximum receive message size to 64 KB (64 \* 1024 \* 1024):</span></span>
+
+```csharp
+services.AddServerSideBlazor()
+   .AddHubOptions(options => options.MaximumReceiveMessageSize = 64 * 1024 * 1024);
+```
+
+<span data-ttu-id="485e2-285">增加 SignalR 限制的代價是需要使用更多的伺服器資源，而且會公開伺服器以增加惡意使用者的風險。</span><span class="sxs-lookup"><span data-stu-id="485e2-285">Increasing the SignalR limit comes at the cost of requiring the use of more server resources, and it exposes the server to increased risks from a malicious user.</span></span> <span data-ttu-id="485e2-286">此外，以字串或位元組陣列的形式將大量內容讀取到記憶體中，也會導致與垃圾收集行程效能不佳的配置，進而造成額外的效能降低。</span><span class="sxs-lookup"><span data-stu-id="485e2-286">Additionally, reading a large amount of content in to memory as strings or byte arrays can also result in allocations that work poorly with the garbage collector, resulting in additional performance penalties.</span></span> <span data-ttu-id="485e2-287">讀取大型承載的其中一個選項是考慮以較小的區區塊轉送內容，並以的形式處理承載 <xref:System.IO.Stream> 。</span><span class="sxs-lookup"><span data-stu-id="485e2-287">One option for reading large payloads is to consider sending the content in smaller chunks and processing the payload as a <xref:System.IO.Stream>.</span></span> <span data-ttu-id="485e2-288">這可以在讀取大型 JSON 承載時使用，或在 JavaScript 中以原始位元組的形式提供資料。</span><span class="sxs-lookup"><span data-stu-id="485e2-288">This can be used when reading large JSON payloads or if data is available in JavaScript as raw bytes.</span></span> <span data-ttu-id="485e2-289">如需示範如何使用類似于元件的技術，在中傳送大型二進位裝載 Blazor Server 的範例 `InputFile` ，請參閱 [二進位提交範例應用程式](https://github.com/aspnet/samples/tree/master/samples/aspnetcore/blazor/BinarySubmit)。</span><span class="sxs-lookup"><span data-stu-id="485e2-289">For an example that demonstrates sending large binary payloads in Blazor Server that uses techniques similar to the `InputFile` component, see the [Binary Submit sample app](https://github.com/aspnet/samples/tree/master/samples/aspnetcore/blazor/BinarySubmit).</span></span>
+
+<span data-ttu-id="485e2-290">開發在 JavaScript 與之間傳輸大量資料的程式碼時，請考慮下列指導方針 Blazor ：</span><span class="sxs-lookup"><span data-stu-id="485e2-290">Consider the following guidance when developing code that transfers a large amount of data between JavaScript and Blazor:</span></span>
+
+* <span data-ttu-id="485e2-291">將資料分割成較小的片段，並依序傳送資料區段，直到伺服器收到所有資料為止。</span><span class="sxs-lookup"><span data-stu-id="485e2-291">Slice the data into smaller pieces, and send the data segments sequentially until all of the data is received by the server.</span></span>
+* <span data-ttu-id="485e2-292">請勿在 JavaScript 和 c # 程式碼中配置大型物件。</span><span class="sxs-lookup"><span data-stu-id="485e2-292">Don't allocate large objects in JavaScript and C# code.</span></span>
+* <span data-ttu-id="485e2-293">傳送或接收資料時，請勿封鎖主要 UI 執行緒長時間。</span><span class="sxs-lookup"><span data-stu-id="485e2-293">Don't block the main UI thread for long periods when sending or receiving data.</span></span>
+* <span data-ttu-id="485e2-294">釋放處理常式完成或取消時所耗用的記憶體。</span><span class="sxs-lookup"><span data-stu-id="485e2-294">Free any memory consumed when the process is completed or cancelled.</span></span>
+* <span data-ttu-id="485e2-295">基於安全性考慮，強制執行下列其他需求：</span><span class="sxs-lookup"><span data-stu-id="485e2-295">Enforce the following additional requirements for security purposes:</span></span>
+  * <span data-ttu-id="485e2-296">宣告可傳遞的檔案或資料大小上限。</span><span class="sxs-lookup"><span data-stu-id="485e2-296">Declare the maximum file or data size that can be passed.</span></span>
+  * <span data-ttu-id="485e2-297">宣告從用戶端到伺服器的最小上傳速率。</span><span class="sxs-lookup"><span data-stu-id="485e2-297">Declare the minimum upload rate from the client to the server.</span></span>
+* <span data-ttu-id="485e2-298">當伺服器收到資料之後，資料可以是：</span><span class="sxs-lookup"><span data-stu-id="485e2-298">After the data is received by the server, the data can be:</span></span>
+  * <span data-ttu-id="485e2-299">暫時儲存在記憶體緩衝區中，直到收集所有區段為止。</span><span class="sxs-lookup"><span data-stu-id="485e2-299">Temporarily stored in a memory buffer until all of the segments are collected.</span></span>
+  * <span data-ttu-id="485e2-300">立即使用。</span><span class="sxs-lookup"><span data-stu-id="485e2-300">Consumed immediately.</span></span> <span data-ttu-id="485e2-301">例如，資料可以立即儲存在資料庫中，或在收到每個區段時寫入磁片。</span><span class="sxs-lookup"><span data-stu-id="485e2-301">For example, the data can be stored immediately in a database or written to disk as each segment is received.</span></span>
+
+## <a name="additional-resources"></a><span data-ttu-id="485e2-302">其他資源</span><span class="sxs-lookup"><span data-stu-id="485e2-302">Additional resources</span></span>
 
 * <xref:blazor/call-dotnet-from-javascript>
-* [<span data-ttu-id="eeb75-278">InteropComponent razor 範例 (dotnet/AspNetCore GitHub 存放庫，3.1 版本分支) </span><span class="sxs-lookup"><span data-stu-id="eeb75-278">InteropComponent.razor example (dotnet/AspNetCore GitHub repository, 3.1 release branch)</span></span>](https://github.com/dotnet/AspNetCore/blob/release/3.1/src/Components/test/testassets/BasicTestApp/InteropComponent.razor)
-* [<span data-ttu-id="eeb75-279">在應用程式中執行大量資料傳輸 Blazor Server</span><span class="sxs-lookup"><span data-stu-id="eeb75-279">Perform large data transfers in Blazor Server apps</span></span>](xref:blazor/advanced-scenarios#perform-large-data-transfers-in-blazor-server-apps)
+* [<span data-ttu-id="485e2-303">InteropComponent razor 範例 (dotnet/AspNetCore GitHub 存放庫，3.1 版本分支) </span><span class="sxs-lookup"><span data-stu-id="485e2-303">InteropComponent.razor example (dotnet/AspNetCore GitHub repository, 3.1 release branch)</span></span>](https://github.com/dotnet/AspNetCore/blob/release/3.1/src/Components/test/testassets/BasicTestApp/InteropComponent.razor)

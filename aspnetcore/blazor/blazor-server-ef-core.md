@@ -18,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/blazor-server-ef-core
-ms.openlocfilehash: fc902cb5a82fda9fdbed09c40d66a846d9360f6a
-ms.sourcegitcommit: daa9ccf580df531254da9dce8593441ac963c674
+ms.openlocfilehash: ac84b9d2fac4fe3df48d356eea3ea48fd23bfda4
+ms.sourcegitcommit: ecae2aa432628b9181d1fa11037c231c7dd56c9e
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 10/09/2020
-ms.locfileid: "91900735"
+ms.lasthandoff: 10/16/2020
+ms.locfileid: "92113630"
 ---
 # <a name="aspnet-core-no-locblazor-server-with-entity-framework-core-efcore"></a>ASP.NET Core Blazor Server 與 Entity Framework Core (EFCore) 
 
@@ -110,6 +110,19 @@ Factory 會插入元件，並用來建立新的實例。 例如，在 `Pages/Ind
 > [!NOTE]
 > `Wrapper` 是元件的 [元件參考](xref:blazor/components/index#capture-references-to-components) `GridWrapper` 。 請參閱 `Index` `Pages/Index.razor` [範例應用程式](https://github.com/dotnet/AspNetCore.Docs/blob/master/aspnetcore/blazor/common/samples/5.x/BlazorServerEFCoreSample/BlazorServerDbContextExample/Pages/Index.razor)中的 () 元件。
 
+您 <xref:Microsoft.EntityFrameworkCore.DbContext> 可以使用處理站建立新的實例，以讓您設定每個連接字串 `DbContext` ，例如當您使用 [ASP.NET Core 的 Identity 模型] 時 ) # B1 x：安全性/驗證/customize_identity_model) ：
+
+```csharp
+services.AddDbContextFactory<ApplicationDbContext>(options =>
+{
+    options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"));
+});
+
+services.AddScoped<ApplicationDbContext>(p => 
+    p.GetRequiredService<IDbContextFactory<ApplicationDbContext>>()
+    .CreateDbContext());
+```
+
 <h3 id="scope-to-the-component-lifetime-5x">將範圍設為元件存留期</h3>
 
 您可能會想要建立在 <xref:Microsoft.EntityFrameworkCore.DbContext> 元件存留期存在的。 這可讓您將它當作 [工作單位](https://martinfowler.com/eaaCatalog/unitOfWork.html) 使用，並利用內建的功能，例如變更追蹤和並行解析。
@@ -127,6 +140,23 @@ Factory 會插入元件，並用來建立新的實例。 例如，在 `Pages/Ind
 最後， [`OnInitializedAsync`](xref:blazor/components/lifecycle) 會覆寫以建立新的內容。 在範例應用程式中， [`OnInitializedAsync`](xref:blazor/components/lifecycle) 以相同的方法載入連絡人：
 
 [!code-csharp[](./common/samples/5.x/BlazorServerEFCoreSample/BlazorServerDbContextExample/Pages/EditContact.razor?name=snippet2)]
+
+<h3 id="enable-sensitive-data-logging">啟用敏感資料記錄</h3>
+
+<xref:Microsoft.EntityFrameworkCore.DbContextOptionsBuilder.EnableSensitiveDataLogging%2A> 包含例外狀況訊息和架構記錄中的應用程式資料。 記錄的資料可以包含指派給實體實例屬性的值，以及傳送至資料庫之命令的參數值。 記錄資料的 <xref:Microsoft.EntityFrameworkCore.DbContextOptionsBuilder.EnableSensitiveDataLogging%2A> **安全性風險**，因為它可能會在記錄針對資料庫執行的 SQL 語句時， (PII) 公開密碼和其他個人識別資訊。
+
+建議您只 <xref:Microsoft.EntityFrameworkCore.DbContextOptionsBuilder.EnableSensitiveDataLogging%2A> 針對開發和測試啟用：
+
+```csharp
+#if DEBUG
+    services.AddDbContextFactory<ContactContext>(opt =>
+        opt.UseSqlite($"Data Source={nameof(ContactContext.ContactsDb)}.db")
+        .EnableSensitiveDataLogging());
+#else
+    services.AddDbContextFactory<ContactContext>(opt =>
+        opt.UseSqlite($"Data Source={nameof(ContactContext.ContactsDb)}.db"));
+#endif
+```
 
 :::moniker-end
 
@@ -218,6 +248,19 @@ Factory 會插入元件，並用來建立新的實例。 例如，在 `Pages/Ind
 > [!NOTE]
 > `Wrapper` 是元件的 [元件參考](xref:blazor/components/index#capture-references-to-components) `GridWrapper` 。 請參閱 `Index` `Pages/Index.razor` [範例應用程式](https://github.com/dotnet/AspNetCore.Docs/blob/master/aspnetcore/blazor/common/samples/3.x/BlazorServerEFCoreSample/BlazorServerDbContextExample/Pages/Index.razor)中的 () 元件。
 
+您 <xref:Microsoft.EntityFrameworkCore.DbContext> 可以使用處理站建立新的實例，以讓您設定每個連接字串 `DbContext` ，例如當您使用 [ASP.NET Core 的 Identity 模型] 時 ) # B1 x：安全性/驗證/customize_identity_model) ：
+
+```csharp
+services.AddDbContextFactory<ApplicationDbContext>(options =>
+{
+    options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"));
+});
+
+services.AddScoped<ApplicationDbContext>(p => 
+    p.GetRequiredService<IDbContextFactory<ApplicationDbContext>>()
+    .CreateDbContext());
+```
+
 <h3 id="scope-to-the-component-lifetime-3x">將範圍設為元件存留期</h3>
 
 您可能會想要建立在 <xref:Microsoft.EntityFrameworkCore.DbContext> 元件存留期存在的。 這可讓您將它當作 [工作單位](https://martinfowler.com/eaaCatalog/unitOfWork.html) 使用，並利用內建的功能，例如變更追蹤和並行解析。
@@ -240,6 +283,23 @@ Factory 會插入元件，並用來建立新的實例。 例如，在 `Pages/Ind
 
 * 當 `Busy` 設定為時 `true` ，非同步作業可能會開始。 當 `Busy` 設回時 `false` ，非同步作業應完成。
 * 將其他錯誤處理邏輯放在 `catch` 區塊中。
+
+<h3 id="enable-sensitive-data-logging">啟用敏感資料記錄</h3>
+
+<xref:Microsoft.EntityFrameworkCore.DbContextOptionsBuilder.EnableSensitiveDataLogging%2A> 包含例外狀況訊息和架構記錄中的應用程式資料。 記錄的資料可以包含指派給實體實例屬性的值，以及傳送至資料庫之命令的參數值。 記錄資料的 <xref:Microsoft.EntityFrameworkCore.DbContextOptionsBuilder.EnableSensitiveDataLogging%2A> **安全性風險**，因為它可能會在記錄針對資料庫執行的 SQL 語句時， (PII) 公開密碼和其他個人識別資訊。
+
+建議您只 <xref:Microsoft.EntityFrameworkCore.DbContextOptionsBuilder.EnableSensitiveDataLogging%2A> 針對開發和測試啟用：
+
+```csharp
+#if DEBUG
+    services.AddDbContextFactory<ContactContext>(opt =>
+        opt.UseSqlite($"Data Source={nameof(ContactContext.ContactsDb)}.db")
+        .EnableSensitiveDataLogging());
+#else
+    services.AddDbContextFactory<ContactContext>(opt =>
+        opt.UseSqlite($"Data Source={nameof(ContactContext.ContactsDb)}.db"));
+#endif
+```
 
 :::moniker-end
 

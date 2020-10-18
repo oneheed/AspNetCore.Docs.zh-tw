@@ -17,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: tutorials/first-mvc-app/new-field
-ms.openlocfilehash: a0c53755bd56b6c169437ca9f0ea915e46ad79ec
-ms.sourcegitcommit: d1a897ebd89daa05170ac448e4831d327f6b21a8
+ms.openlocfilehash: 2a80a9c4848703802b15348a30f2564f9580a24b
+ms.sourcegitcommit: ecae2aa432628b9181d1fa11037c231c7dd56c9e
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 10/01/2020
-ms.locfileid: "91606747"
+ms.lasthandoff: 10/16/2020
+ms.locfileid: "92113877"
 ---
 # <a name="part-8-add-a-new-field-to-an-aspnet-core-mvc-app"></a>第8部分：將新欄位新增至 ASP.NET Core MVC 應用程式
 
@@ -133,11 +133,16 @@ Update-Database
 
 [!INCLUDE[](~/includes/RP-mvc-shared/sqlite-warn.md)]
 
-刪除資料庫並使用移轉重新建立資料庫。 若要刪除資料庫，請刪除 *MvcMovie* 資料庫檔案。 然後執行 `ef database update` 命令：
+刪除資料庫和先前的遷移，並使用遷移來重新建立資料庫：
 
 ```dotnetcli
+dotnet ef migrations remove
+dotnet ef database drop
+dotnet ef migrations add InitialCreate
 dotnet ef database update
 ```
+
+`dotnet ef migrations remove` 移除最後的遷移。 如果有一個以上的遷移，請刪除 [遷移] 資料夾。
 
 ---
 <!-- End of VS tabs -->

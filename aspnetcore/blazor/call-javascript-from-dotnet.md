@@ -18,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/call-javascript-from-dotnet
-ms.openlocfilehash: d36140067ba6e75f2d00cb86ea488e40d28bd86f
-ms.sourcegitcommit: d7991068bc6b04063f4bd836fc5b9591d614d448
+ms.openlocfilehash: a7ba41501b856482c8fcf7efa8e1d78857020bf5
+ms.sourcegitcommit: ecae2aa432628b9181d1fa11037c231c7dd56c9e
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 10/06/2020
-ms.locfileid: "91762161"
+ms.lasthandoff: 10/16/2020
+ms.locfileid: "92113760"
 ---
 # <a name="call-javascript-functions-from-net-methods-in-aspnet-core-no-locblazor"></a>從 ASP.NET Core 中的 .NET 方法呼叫 JavaScript 函式 Blazor
 
@@ -164,7 +164,10 @@ JavaScript 程式碼（例如上述範例中所示的程式碼）也可以從 Ja
 
 ## <a name="call-a-void-javascript-function"></a>呼叫 void JavaScript 函數
 
-傳回 [void (0) /void 0](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Operators/void) 或 [未定義](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/undefined) 的 JavaScript 函數會使用來呼叫 <xref:Microsoft.JSInterop.JSRuntimeExtensions.InvokeVoidAsync%2A?displayProperty=nameWithType> 。
+使用 <xref:Microsoft.JSInterop.JSRuntimeExtensions.InvokeVoidAsync%2A?displayProperty=nameWithType> 于下列各項：
+
+* 傳回 [void (0) /void 0](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Operators/void) 或 [未定義](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/undefined)的 JavaScript 函數。
+* 如果不需要 .NET 就能讀取 JavaScript 呼叫的結果。
 
 ## <a name="detect-when-a-no-locblazor-server-app-is-prerendering"></a>偵測 Blazor Server 應用程式何時進行呈現
  
@@ -665,8 +668,33 @@ export function setMapCenter(map, latitude, longitude) {
 
 ::: moniker-end
 
+## <a name="size-limits-on-js-interop-calls"></a>JS interop 呼叫的大小限制
+
+在中 Blazor WebAssembly ，架構不會限制 JS interop 呼叫的輸入和輸出大小。
+
+在中 Blazor Server ，JS interop 呼叫的結果受限於 () 所強制執行的承載大小 SignalR 上限 <xref:Microsoft.AspNetCore.SignalR.HubOptions.MaximumReceiveMessageSize> ，預設為 32 KB。 嘗試回應 JS interop 呼叫的應用程式，其承載大於或等於 <xref:Microsoft.AspNetCore.SignalR.HubOptions.MaximumReceiveMessageSize> 擲回錯誤。 您可以藉由修改來設定較大的限制 <xref:Microsoft.AspNetCore.SignalR.HubOptions.MaximumReceiveMessageSize> 。 下列範例會將接收訊息大小上限設定為 64 KB (64 * 1024 * 1024) ：
+
+```csharp
+services.AddServerSideBlazor()
+   .AddHubOptions(options => options.MaximumReceiveMessageSize = 64 * 1024 * 1024);
+```
+
+增加 SignalR 限制的代價是需要使用更多的伺服器資源，而且會公開伺服器以增加惡意使用者的風險。 此外，以字串或位元組陣列的形式將大量內容讀取到記憶體中，也會導致與垃圾收集行程效能不佳的配置，進而造成額外的效能降低。 讀取大型承載的其中一個選項是考慮以較小的區區塊轉送內容，並以的形式處理承載 <xref:System.IO.Stream> 。 這可以在讀取大型 JSON 承載時使用，或在 JavaScript 中以原始位元組的形式提供資料。 如需示範如何使用類似于元件的技術，在中傳送大型二進位裝載 Blazor Server 的範例 `InputFile` ，請參閱 [二進位提交範例應用程式](https://github.com/aspnet/samples/tree/master/samples/aspnetcore/blazor/BinarySubmit)。
+
+開發在 JavaScript 與之間傳輸大量資料的程式碼時，請考慮下列指導方針 Blazor ：
+
+* 將資料分割成較小的片段，並依序傳送資料區段，直到伺服器收到所有資料為止。
+* 請勿在 JavaScript 和 c # 程式碼中配置大型物件。
+* 傳送或接收資料時，請勿封鎖主要 UI 執行緒長時間。
+* 釋放處理常式完成或取消時所耗用的記憶體。
+* 基於安全性考慮，強制執行下列其他需求：
+  * 宣告可傳遞的檔案或資料大小上限。
+  * 宣告從用戶端到伺服器的最小上傳速率。
+* 當伺服器收到資料之後，資料可以是：
+  * 暫時儲存在記憶體緩衝區中，直到收集所有區段為止。
+  * 立即使用。 例如，資料可以立即儲存在資料庫中，或在收到每個區段時寫入磁片。
+
 ## <a name="additional-resources"></a>其他資源
 
 * <xref:blazor/call-dotnet-from-javascript>
 * [InteropComponent razor 範例 (dotnet/AspNetCore GitHub 存放庫，3.1 版本分支) ](https://github.com/dotnet/AspNetCore/blob/release/3.1/src/Components/test/testassets/BasicTestApp/InteropComponent.razor)
-* [在應用程式中執行大量資料傳輸 Blazor Server](xref:blazor/advanced-scenarios#perform-large-data-transfers-in-blazor-server-apps)

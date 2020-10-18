@@ -16,12 +16,12 @@ no-loc:
 - Razor
 - SignalR
 uid: tutorials/first-mvc-app/start-mvc
-ms.openlocfilehash: 9d70b292a93a5d19cc25b2fc592ec88ce8262434
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: 177112106d143a6826c1f927aac807da0aa9f2b4
+ms.sourcegitcommit: ecae2aa432628b9181d1fa11037c231c7dd56c9e
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88629986"
+ms.lasthandoff: 10/16/2020
+ms.locfileid: "92113825"
 ---
 # <a name="get-started-with-aspnet-core-mvc"></a>ASP.NET Core MVC 使用者入門
 
@@ -45,7 +45,7 @@ ms.locfileid: "88629986"
 
 [!INCLUDE[](~/includes/mvc-intro/download.md)]
 
-## <a name="prerequisites"></a>Prerequisites
+## <a name="prerequisites"></a>必要條件
 
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
@@ -67,7 +67,7 @@ ms.locfileid: "88629986"
 
 * 從 Visual Studio 中，選取 [建立新專案]****。
 
-* 依序選取 [ASP.NET Core Web 應用程式]**** 和 [下一步]****。
+* 選取**ASP.NET Core Web Application** > **[下一步]** ASP.NET Core Web 應用程式。
 
 ![新增 ASP.NET Core Web 應用程式](start-mvc/_static/np_2.1.png)
 
@@ -75,7 +75,7 @@ ms.locfileid: "88629986"
 
   ![新增 ASP.NET Core Web 應用程式](start-mvc/_static/config.png)
 
-* 選取 [Web 應用程式 (Model-View-Controller)]****，然後選取 [建立]****。
+* 選取 **Web 應用程式 (模型-視圖控制器) **。 從下拉式方塊中，選取 [ **.Net Core** ] 和 [ **ASP.NET Core 3.1**]，然後選取 [ **建立**]。
 
 ![[新增專案] 對話方塊、左窗格中的 [.Net Core]、ASP.NET Core Web ](start-mvc/_static/new_project30.png)
 
@@ -85,9 +85,9 @@ Visual Studio 在您剛才建立的 MVC 專案中使用了預設範本。 您只
 
 本教學課程假設您熟悉 VS Code。 如需詳細資訊，請參閱 [VS Code 使用者入門](https://code.visualstudio.com/docs)和 [Visual Studio Code 說明](#visual-studio-code-help)。
 
-* 開啟[整合式終端機](https://code.visualstudio.com/docs/editor/integrated-terminal)。
+* 開啟 [整合式終端](https://code.visualstudio.com/docs/editor/integrated-terminal)機。
 * 將目錄 (`cd`) 變更為其中包含專案的資料夾。
-* 執行以下命令：
+* 執行下列命令：
 
    ```dotnetcli
    dotnet new mvc -o MvcMovie
@@ -114,7 +114,7 @@ Visual Studio 在您剛才建立的 MVC 專案中使用了預設範本。 您只
   * 確認 [ **驗證** ] 設定為 [ **無驗證**]。
   * 如果有選取 **目標 Framework**的選項，請選取最新的3.x 版。
 
-  選取 [下一步]  。
+  選取 [下一步] 。
 
 * 將專案命名為 **MvcMovie**，然後選取 [建立]****。
 
@@ -176,7 +176,7 @@ Visual Studio 在您剛才建立的 MVC 專案中使用了預設範本。 您只
 在本教學課程的下一個部分中，您會了解 MVC，並開始撰寫一些程式碼。
 
 > [!div class="step-by-step"]
-> [下一個](adding-controller.md)
+> [下一步](adding-controller.md)
 
 ::: moniker-end
 
@@ -198,7 +198,7 @@ Visual Studio 在您剛才建立的 MVC 專案中使用了預設範本。 您只
 
 [!INCLUDE[](~/includes/mvc-intro/download.md)]
 
-## <a name="prerequisites"></a>Prerequisites
+## <a name="prerequisites"></a>必要條件
 
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
@@ -238,9 +238,9 @@ Visual Studio 在您剛才建立的 MVC 專案中使用了預設範本。 您只
 
 本教學課程假設您熟悉 VS Code。 如需詳細資訊，請參閱 [VS Code 使用者入門](https://code.visualstudio.com/docs)和 [Visual Studio Code 說明](#visual-studio-code-help)。
 
-* 開啟[整合式終端機](https://code.visualstudio.com/docs/editor/integrated-terminal)。
+* 開啟 [整合式終端](https://code.visualstudio.com/docs/editor/integrated-terminal)機。
 * 將目錄 (`cd`) 變更為其中包含專案的資料夾。
-* 執行以下命令：
+* 執行下列命令：
 
    ```dotnetcli
    dotnet new mvc -o MvcMovie
@@ -265,7 +265,7 @@ Visual Studio 在您剛才建立的 MVC 專案中使用了預設範本。 您只
   * 確認 [ **驗證** ] 設定為 [ **無驗證**]。
   * 如果有選取 **目標 Framework**的選項，請選取最新的2.x 版本。
 
-  選取 [下一步]  。
+  選取 [下一步] 。
 
 * 將專案命名為 **MvcMovie**，然後選取 [建立]****。
 
@@ -339,6 +339,6 @@ Visual Studio 在您剛才建立的 MVC 專案中使用了預設範本。 您只
 在本教學課程的下一個部分中，您會了解 MVC，並開始撰寫一些程式碼。
 
 > [!div class="step-by-step"]
-> [下一個](adding-controller.md)
+> [下一步](adding-controller.md)
 
 ::: moniker-end

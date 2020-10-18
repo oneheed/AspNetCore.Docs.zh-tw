@@ -17,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: grpc/services
-ms.openlocfilehash: 878792120d69bea9ca6f620a87a7e04da2ec1815
-ms.sourcegitcommit: 111b4e451da2e275fb074cde5d8a84b26a81937d
+ms.openlocfilehash: c4d37556a3345d275f45c537a40908c5966fe015
+ms.sourcegitcommit: ecae2aa432628b9181d1fa11037c231c7dd56c9e
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 08/27/2020
-ms.locfileid: "89040836"
+ms.lasthandoff: 10/16/2020
+ms.locfileid: "92113617"
 ---
 # <a name="create-grpc-services-and-methods"></a>建立 gRPC 服務和方法
 
@@ -87,7 +87,7 @@ public class HelloReply
 ```csharp
 public class GreeterService : GreeterBase
 {
-    public override Task<HelloReply> UnaryCall(HelloRequest request, ServerCallContext context)
+    public override Task<HelloReply> SayHello(HelloRequest request, ServerCallContext context)
     {
         return Task.FromResult(new HelloRequest { Message = $"Hello {request.Name}" });
     }
@@ -109,7 +109,7 @@ app.UseEndpoints(endpoints =>
 
 GRPC 服務可以有不同類型的方法。 服務傳送和接收訊息的方式取決於定義的方法類型。 GRPC 方法類型為：
 
-* 一元 (Unary)
+* 一元
 * 伺服器串流
 * 用戶端串流
 * 雙向串流

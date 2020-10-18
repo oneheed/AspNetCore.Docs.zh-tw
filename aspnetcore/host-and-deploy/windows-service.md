@@ -18,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: host-and-deploy/windows-service
-ms.openlocfilehash: 11362f677da3e55df4267cf3d6ca8097c24c218f
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: d4df10f9450ca956d7b1a4297caa63cdd0caf23e
+ms.sourcegitcommit: ecae2aa432628b9181d1fa11037c231c7dd56c9e
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88633938"
+ms.lasthandoff: 10/16/2020
+ms.locfileid: "92113747"
 ---
 # <a name="host-aspnet-core-in-a-windows-service"></a>在 Windows 服務上裝載 ASP.NET Core
 
@@ -33,7 +33,7 @@ ASP.NET Core 應用程式可以裝載在 Windows 上作為 [Windows 服務](/dot
 
 [查看或下載範例程式碼](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/host-and-deploy/windows-service/samples) ([如何下載](xref:index#how-to-download-a-sample)) 
 
-## <a name="prerequisites"></a>Prerequisites
+## <a name="prerequisites"></a>必要條件
 
 * [ASP.NET Core SDK 2.1 或更新版本](https://dotnet.microsoft.com/download)
 * [PowerShell 6.2 或更新版本](https://github.com/PowerShell/PowerShell)
@@ -158,7 +158,7 @@ powershell -Command "New-LocalUser -Name {SERVICE NAME}"
 1. 選取 [新增使用者或群組]****。
 1. 使用下列其中一種方法提供物件名稱 (使用者帳戶)：
    1. 在物件名稱欄位中輸入使用者帳戶 (`{DOMAIN OR COMPUTER NAME\USER}`)，然後選取 [確定]**** 將使用者新增至原則。
-   1. 選取 [進階]  。 選取 [立即尋找]****。 從清單中選取使用者帳戶。 選取 [確定]。 再次選取 [確定]**** 將使用者新增至原則。
+   1. 選取 [進階]  。 選取 [立即尋找]****。 從清單中選取使用者帳戶。 選取 [確定]  。 再次選取 [確定]**** 將使用者新增至原則。
 1. 選取 [確定]**** 或 [套用]**** 以接受變更。
 
 ## <a name="create-and-manage-the-windows-service"></a>建立及管理 Windows 服務
@@ -169,12 +169,12 @@ powershell -Command "New-LocalUser -Name {SERVICE NAME}"
 
 ```powershell
 $acl = Get-Acl "{EXE PATH}"
-$aclRuleArgs = {DOMAIN OR COMPUTER NAME\USER}, "Read,Write,ReadAndExecute", "ContainerInherit,ObjectInherit", "None", "Allow"
+$aclRuleArgs = "{DOMAIN OR COMPUTER NAME\USER}", "Read,Write,ReadAndExecute", "ContainerInherit,ObjectInherit", "None", "Allow"
 $accessRule = New-Object System.Security.AccessControl.FileSystemAccessRule($aclRuleArgs)
 $acl.SetAccessRule($accessRule)
 $acl | Set-Acl "{EXE PATH}"
 
-New-Service -Name {SERVICE NAME} -BinaryPathName {EXE FILE PATH} -Credential {DOMAIN OR COMPUTER NAME\USER} -Description "{DESCRIPTION}" -DisplayName "{DISPLAY NAME}" -StartupType Automatic
+New-Service -Name {SERVICE NAME} -BinaryPathName "{EXE FILE PATH}" -Credential "{DOMAIN OR COMPUTER NAME\USER}" -Description "{DESCRIPTION}" -DisplayName "{DISPLAY NAME}" -StartupType Automatic
 ```
 
 * `{EXE PATH}`：應用程式在主機上的資料夾路徑 (例如 `d:\myservice`) 。 請勿包含路徑中應用程式的可執行檔。 不需要結尾的斜線。
@@ -356,7 +356,7 @@ ASP.NET Core 應用程式可以裝載在 Windows 上作為 [Windows 服務](/dot
 
 [查看或下載範例程式碼](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/host-and-deploy/windows-service/samples) ([如何下載](xref:index#how-to-download-a-sample)) 
 
-## <a name="prerequisites"></a>Prerequisites
+## <a name="prerequisites"></a>必要條件
 
 * [ASP.NET Core SDK 2.1 或更新版本](https://dotnet.microsoft.com/download)
 * [PowerShell 6.2 或更新版本](https://github.com/PowerShell/PowerShell)
@@ -400,7 +400,7 @@ ASP.NET Core 應用程式可以裝載在 Windows 上作為 [Windows 服務](/dot
 
 架構相依部署 (FDD) 仰賴存在於目標系統上的全系統共用 .NET Core 版本。 依照此文章中的指導方針採用 FDD 案例時，SDK 會產生可執行檔 (*.exe*)，稱為「架構相依可執行檔」**。
 
-Windows [執行時間識別碼 (RID) ](/dotnet/core/rid-catalog) ([\<RuntimeIdentifier>](/dotnet/core/tools/csproj#runtimeidentifier)) 包含目標 framework。 在下列範例中，RID 已設定為 `win7-x64`。 `<SelfContained>` 屬性設定為 `false`。 這些屬性會指示 SDK，針對 Windows 和相依於共用 .NET Core framework 的應用程式產生可執行檔 (*.exe*)。
+Windows [執行時間識別碼 (RID) ](/dotnet/core/rid-catalog) ([\<RuntimeIdentifier>](/dotnet/core/tools/csproj#runtimeidentifier)) 包含目標 framework。 在下列範例中，RID 已設定為 `win7-x64`。 `<SelfContained>` 屬性會設定為 `false`。 這些屬性會指示 SDK，針對 Windows 和相依於共用 .NET Core framework 的應用程式產生可執行檔 (*.exe*)。
 
 針對 Windows Services 應用程式，不需要 *web.config* 檔案 (發行 ASP.NET Core 應用程式時通常會產生此檔案)。 若要停用 *web.config* 檔案的建立，請新增 `<IsTransformWebConfigDisabled>` 屬性集到 `true`。
 
@@ -470,7 +470,7 @@ powershell -Command "New-LocalUser -Name {SERVICE NAME}"
 1. 選取 [新增使用者或群組]****。
 1. 使用下列其中一種方法提供物件名稱 (使用者帳戶)：
    1. 在物件名稱欄位中輸入使用者帳戶 (`{DOMAIN OR COMPUTER NAME\USER}`)，然後選取 [確定]**** 將使用者新增至原則。
-   1. 選取 [進階]  。 選取 [立即尋找]****。 從清單中選取使用者帳戶。 選取 [確定]。 再次選取 [確定]**** 將使用者新增至原則。
+   1. 選取 [進階]  。 選取 [立即尋找]****。 從清單中選取使用者帳戶。 選取 [確定]  。 再次選取 [確定]**** 將使用者新增至原則。
 1. 選取 [確定]**** 或 [套用]**** 以接受變更。
 
 ## <a name="create-and-manage-the-windows-service"></a>建立及管理 Windows 服務
@@ -690,7 +690,7 @@ ASP.NET Core 應用程式可以裝載在 Windows 上作為 [Windows 服務](/dot
 
 [查看或下載範例程式碼](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/host-and-deploy/windows-service/samples) ([如何下載](xref:index#how-to-download-a-sample)) 
 
-## <a name="prerequisites"></a>Prerequisites
+## <a name="prerequisites"></a>必要條件
 
 * [ASP.NET Core SDK 2.1 或更新版本](https://dotnet.microsoft.com/download)
 * [PowerShell 6.2 或更新版本](https://github.com/PowerShell/PowerShell)
@@ -734,9 +734,9 @@ ASP.NET Core 應用程式可以裝載在 Windows 上作為 [Windows 服務](/dot
 
 架構相依部署 (FDD) 仰賴存在於目標系統上的全系統共用 .NET Core 版本。 依照此文章中的指導方針採用 FDD 案例時，SDK 會產生可執行檔 (*.exe*)，稱為「架構相依可執行檔」**。
 
-Windows [執行時間識別碼 (RID) ](/dotnet/core/rid-catalog) ([\<RuntimeIdentifier>](/dotnet/core/tools/csproj#runtimeidentifier)) 包含目標 framework。 在下列範例中，RID 已設定為 `win7-x64`。 `<SelfContained>` 屬性設定為 `false`。 這些屬性會指示 SDK，針對 Windows 和相依於共用 .NET Core framework 的應用程式產生可執行檔 (*.exe*)。
+Windows [執行時間識別碼 (RID) ](/dotnet/core/rid-catalog) ([\<RuntimeIdentifier>](/dotnet/core/tools/csproj#runtimeidentifier)) 包含目標 framework。 在下列範例中，RID 已設定為 `win7-x64`。 `<SelfContained>` 屬性會設定為 `false`。 這些屬性會指示 SDK，針對 Windows 和相依於共用 .NET Core framework 的應用程式產生可執行檔 (*.exe*)。
 
-`<UseAppHost>` 屬性設定為 `true`。 此屬性為服務提供 FDD 的啟用路徑 (可執行檔 *.exe*)。
+`<UseAppHost>` 屬性會設定為 `true`。 此屬性為服務提供 FDD 的啟用路徑 (可執行檔 *.exe*)。
 
 針對 Windows Services 應用程式，不需要 *web.config* 檔案 (發行 ASP.NET Core 應用程式時通常會產生此檔案)。 若要停用 *web.config* 檔案的建立，請新增 `<IsTransformWebConfigDisabled>` 屬性集到 `true`。
 
@@ -807,7 +807,7 @@ powershell -Command "New-LocalUser -Name {SERVICE NAME}"
 1. 選取 [新增使用者或群組]****。
 1. 使用下列其中一種方法提供物件名稱 (使用者帳戶)：
    1. 在物件名稱欄位中輸入使用者帳戶 (`{DOMAIN OR COMPUTER NAME\USER}`)，然後選取 [確定]**** 將使用者新增至原則。
-   1. 選取 [進階]  。 選取 [立即尋找]****。 從清單中選取使用者帳戶。 選取 [確定]。 再次選取 [確定]**** 將使用者新增至原則。
+   1. 選取 [進階]  。 選取 [立即尋找]****。 從清單中選取使用者帳戶。 選取 [確定]  。 再次選取 [確定]**** 將使用者新增至原則。
 1. 選取 [確定]**** 或 [套用]**** 以接受變更。
 
 ## <a name="create-and-manage-the-windows-service"></a>建立及管理 Windows 服務

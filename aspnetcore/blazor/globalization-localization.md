@@ -18,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/globalization-localization
-ms.openlocfilehash: 2b8820acba564bdfb85f8338ed5482573960fbb4
-ms.sourcegitcommit: 600666440398788db5db25dc0496b9ca8fe50915
+ms.openlocfilehash: be73b0c1e33a2cd15c9ff0dc51044f9bd48c43fe
+ms.sourcegitcommit: ecae2aa432628b9181d1fa11037c231c7dd56c9e
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 09/14/2020
-ms.locfileid: "90080273"
+ms.lasthandoff: 10/16/2020
+ms.locfileid: "92113812"
 ---
 # <a name="aspnet-core-no-locblazor-globalization-and-localization"></a>ASP.NET Core Blazor 全球化和當地語系化
 
@@ -76,7 +76,15 @@ Blazor WebAssembly 應用程式會使用使用者的 [語言喜好](https://deve
 
 ::: moniker range=">= aspnetcore-5.0"
 
-依預設，會 Blazor WebAssembly 在使用者的文化特性中攜帶顯示值所需的全球化資源，例如日期和貨幣。 如果應用程式不需要當地語系化，您可以設定應用程式以支援以文化特性為基礎的非變異文化特性 `en-US` ：
+根據預設，會 Blazor WebAssembly 攜帶在使用者的文化特性中顯示值所需的最基本全球化資源，例如日期和貨幣。 必須在專案檔中設定支援動態變更文化特性的應用程式 `BlazorWebAssemblyLoadAllGlobalizationData` ：
+
+```xml
+<PropertyGroup>
+  <BlazorWebAssemblyLoadAllGlobalizationData>true</BlazorWebAssemblyLoadAllGlobalizationData>
+</PropertyGroup>
+```
+
+如果應用程式不需要當地語系化，您可以設定應用程式以支援以文化特性為基礎的非變異文化特性 `en-US` ：
 
 ```xml
 <PropertyGroup>
@@ -100,7 +108,7 @@ Blazor Server 應用程式會使用 [當地語系化中介軟體](xref:fundament
 
 您可以使用下列其中一種方法來設定文化特性：
 
-* [Cookie！](#cookies)
+* [Cookies](#cookies)
 * [提供 UI 以選擇文化特性](#provide-ui-to-choose-the-culture)
 
 如需詳細資訊和範例，請參閱 <xref:fundamentals/localization>。

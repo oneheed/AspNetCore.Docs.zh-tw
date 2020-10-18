@@ -18,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: grpc/troubleshoot
-ms.openlocfilehash: 2f2a41af544bc040bd20e15b057ad8fc7fb16cfe
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: 0c897c8c640f8713fc7d3b6cad0e6c571131d7a5
+ms.sourcegitcommit: ecae2aa432628b9181d1fa11037c231c7dd56c9e
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88633964"
+ms.lasthandoff: 10/16/2020
+ms.locfileid: "92113838"
 ---
 # <a name="troubleshoot-grpc-on-net-core"></a>針對 .NET Core 上的 gRPC 進行疑難排解
 
@@ -86,7 +86,7 @@ var client = new Greet.GreeterClient(channel);
 
 ## <a name="call-insecure-grpc-services-with-net-core-client"></a>使用 .NET Core 用戶端呼叫不安全的 gRPC 服務
 
-需要進行其他設定，才能使用 .NET Core 用戶端呼叫不安全的 gRPC 服務。 GRPC 用戶端必須將 `System.Net.Http.SocketsHttpHandler.Http2UnencryptedSupport` 參數設定為 `true` ，並 `http` 在伺服器位址中使用：
+當應用程式使用 .NET Core 3.x 時，需要進行其他設定，才能使用 .NET Core 用戶端呼叫不安全的 gRPC 服務。 GRPC 用戶端必須將 `System.Net.Http.SocketsHttpHandler.Http2UnencryptedSupport` 參數設定為 `true` ，並 `http` 在伺服器位址中使用：
 
 ```csharp
 // This switch must be set before creating the GrpcChannel/HttpClient.
@@ -97,6 +97,8 @@ AppContext.SetSwitch(
 var channel = GrpcChannel.ForAddress("http://localhost:5000");
 var client = new Greet.GreeterClient(channel);
 ```
+
+.NET 5 應用程式不需要額外的設定，但若要呼叫不安全的 gRPC 服務，則必須使用 `Grpc.Net.Client` 版本2.32.0 或更新版本。
 
 ## <a name="unable-to-start-aspnet-core-grpc-app-on-macos"></a>無法在 macOS 上啟動 ASP.NET Core gRPC 應用程式
 

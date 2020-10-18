@@ -18,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/components/lifecycle
-ms.openlocfilehash: 957c78873d67d3ab0ac5ff035f2247ceb6d3fd29
-ms.sourcegitcommit: ecae2aa432628b9181d1fa11037c231c7dd56c9e
+ms.openlocfilehash: 035de12d17b676aac6af42e706f3741937d90fb3
+ms.sourcegitcommit: b3ec60f7682e43211c2b40c60eab3d4e45a48ab1
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 10/16/2020
-ms.locfileid: "92113864"
+ms.lasthandoff: 10/17/2020
+ms.locfileid: "92153579"
 ---
 # <a name="aspnet-core-no-locblazor-lifecycle"></a>ASP.NET Core Blazor 生命週期
 
@@ -41,14 +41,14 @@ ms.locfileid: "92113864"
    * 呼叫 [`OnInitialized{Async}`](#component-initialization-methods) 。 如果 <xref:System.Threading.Tasks.Task> 傳回，則 <xref:System.Threading.Tasks.Task> 會等待，然後轉譯元件。 如果 <xref:System.Threading.Tasks.Task> 未傳回，則會轉譯元件。
 1. 呼叫 [`OnParametersSet{Async}`](#after-parameters-are-set) 。 如果 <xref:System.Threading.Tasks.Task> 傳回，則 <xref:System.Threading.Tasks.Task> 會等待，然後轉譯元件。 如果 <xref:System.Threading.Tasks.Task> 未傳回，則會轉譯元件。
 
-<img src="lifecycle/_static/lifecycle1.png" alt="Component lifecycle events of a Razor component in Blazor" style="max-width:350px;display:block;margin:0 auto">
+![：：： No loc (Razor) ：：： component in：：： no-loc (Blazor) ：：：的元件生命週期事件](lifecycle/_static/lifecycle1.png)
 
 檔物件模型 (DOM) 事件處理：
 
 1. 執行事件處理常式。
 1. 如果 <xref:System.Threading.Tasks.Task> 傳回，則 <xref:System.Threading.Tasks.Task> 會等待，然後轉譯元件。 如果 <xref:System.Threading.Tasks.Task> 未傳回，則會轉譯元件。
 
-<img src="lifecycle/_static/lifecycle2.png" alt="Document Object Model (DOM) event processing" style="max-width:350px;display:block;margin:0 auto">
+![檔物件模型 (DOM) 事件處理](lifecycle/_static/lifecycle2.png)
 
 `Render`生命週期：
 
@@ -57,7 +57,7 @@ ms.locfileid: "92113864"
 1. 等待 DOM 進行更新。
 1. 呼叫 [`OnAfterRender{Async}`](#after-component-render) 。
 
-<img src="lifecycle/_static/lifecycle3.png" alt="Render lifecycle" style="max-width:350px;display:block;margin:0 auto">
+![轉譯生命週期](lifecycle/_static/lifecycle3.png)
 
 開發人員呼叫以 [`StateHasChanged`](#state-changes) 產生轉譯。
 

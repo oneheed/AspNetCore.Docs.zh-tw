@@ -177,6 +177,9 @@
             - name: 使用 GitHub Actions 進行部署 >>
               display: 'tutorial, kubernetes, aks, acr, docker, devops'
               href: /learn/modules/microservices-devops-aspnet-core/
+            - name: 紀錄及監視 >>
+              display: 'tutorial, kubernetes, aks, acr, docker, serilog'
+              href: /learn/modules/microservices-logging-aspnet-core/
         - name: 資料存取 >>
           displayName: 'tutorial, ef, entity framework'
           href: /learn/modules/persist-data-ef-core/
@@ -1118,6 +1121,8 @@
           uid: security/authorization/policies
         - name: 授權原則提供者
           uid: security/authorization/iauthorizationpolicyprovider
+        - name: 自訂 AuthorizationMiddleware 的行為
+          uid: security/authorization/authorizationmiddlewareresulthandler
         - name: 要求處理常式中的相依性插入
           uid: security/authorization/dependencyinjection
         - name: 資源型授權

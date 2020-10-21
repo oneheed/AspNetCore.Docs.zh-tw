@@ -17,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: host-and-deploy/docker/building-net-docker-images
-ms.openlocfilehash: 791cc14feac30ad8a571d155624ab821dfd77981
-ms.sourcegitcommit: 24106b7ffffc9fff410a679863e28aeb2bbe5b7e
+ms.openlocfilehash: 6f94323873937d1428d6cfa1b0ef15e44611fd47
+ms.sourcegitcommit: b3ec60f7682e43211c2b40c60eab3d4e45a48ab1
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 09/17/2020
-ms.locfileid: "90722854"
+ms.lasthandoff: 10/17/2020
+ms.locfileid: "92153647"
 ---
 # <a name="docker-images-for-aspnet-core"></a>ASP.NET Core 的 Docker 映像
 
@@ -51,7 +51,7 @@ ms.locfileid: "90722854"
 
    範例會使用此映像來執行應用程式。 此映像包含 ASP.NET Core 執行階段和程式庫，並會進行最佳化，以在生產環境中執行應用程式。 專為部署和應用程式啟動速度而設計的映像相對較小，因此，已將從 Docker 登錄到 Docker 主機的網路效能最佳化。 只會將執行應用程式所需的程式庫和內容複製到容器中。 內容已準備好執行，可用最短的時間從 `Docker run` 到應用程式啟動。 在 Docker 模型中，不需要動態程式碼編譯。
 
-## <a name="prerequisites"></a>Prerequisites
+## <a name="prerequisites"></a>必要條件
 ::: moniker range="< aspnetcore-3.0"
 
 * [.NET Core 2.2 SDK](https://dotnet.microsoft.com/download/dotnet-core)
@@ -99,7 +99,7 @@ ms.locfileid: "90722854"
 
 ## <a name="run-in-a-linux-container"></a>在 Linux 容器中執行
 
-* 在 Docker 用戶端中，切換至 Linux 容器。
+* 在 Docker 用戶端中， [切換至 Linux 容器](https://docs.docker.com/docker-for-windows/#switch-between-windows-and-linux-containers)。
 
 * 瀏覽至 *dotnet-docker/samples/aspnetapp* 中的 Dockerfile 資料夾。
 
@@ -125,7 +125,7 @@ ms.locfileid: "90722854"
 
 ## <a name="run-in-a-windows-container"></a>在 Windows 容器中執行
 
-* 在 Docker 用戶端中，切換至 Windows 容器。
+* 在 Docker 用戶端中， [切換至 Windows 容器](https://docs.docker.com/docker-for-windows/#switch-between-windows-and-linux-containers)。
 
 瀏覽至 `dotnet-docker/samples/aspnetapp` 中的 docker 檔案資料夾。
 

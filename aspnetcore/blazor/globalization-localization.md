@@ -18,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/globalization-localization
-ms.openlocfilehash: be73b0c1e33a2cd15c9ff0dc51044f9bd48c43fe
-ms.sourcegitcommit: ecae2aa432628b9181d1fa11037c231c7dd56c9e
+ms.openlocfilehash: 4345dd8525c2e72aaddc8e45a4fd4d9bfdd63040
+ms.sourcegitcommit: b5ebaf42422205d212e3dade93fcefcf7f16db39
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 10/16/2020
-ms.locfileid: "92113812"
+ms.lasthandoff: 10/21/2020
+ms.locfileid: "92326522"
 ---
 # <a name="aspnet-core-no-locblazor-globalization-and-localization"></a>ASP.NET Core Blazor 全球化和當地語系化
 
@@ -84,6 +84,19 @@ Blazor WebAssembly 應用程式會使用使用者的 [語言喜好](https://deve
 </PropertyGroup>
 ```
 
+Blazor WebAssembly 也可以使用傳遞至的選項，設定為使用特定應用程式文化特性啟動 `Blazor.start` 。 例如，以下範例顯示已設定為使用文化特性啟動的應用程式 `en-GB` ：
+
+```html
+<script src="_framework/blazor.webassembly.js" autostart="false"></script>
+<script>
+  Blazor.start({
+    applicationCulture: 'en-GB'
+  });
+</script>
+```
+
+的值 `applicationCulture` 應該符合 [BCP-47 語言標記格式](https://tools.ietf.org/html/bcp47)。
+
 如果應用程式不需要當地語系化，您可以設定應用程式以支援以文化特性為基礎的非變異文化特性 `en-US` ：
 
 ```xml
@@ -108,7 +121,7 @@ Blazor Server 應用程式會使用 [當地語系化中介軟體](xref:fundament
 
 您可以使用下列其中一種方法來設定文化特性：
 
-* [Cookies](#cookies)
+* [Cookie！](#cookies)
 * [提供 UI 以選擇文化特性](#provide-ui-to-choose-the-culture)
 
 如需詳細資訊和範例，請參閱 <xref:fundamentals/localization>。

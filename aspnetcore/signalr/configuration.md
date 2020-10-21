@@ -18,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: signalr/configuration
-ms.openlocfilehash: 579491cfe60a26593ca038a1691f9b52f0fb1d06
-ms.sourcegitcommit: 74f4a4ddbe3c2f11e2e09d05d2a979784d89d3f5
+ms.openlocfilehash: 8851246dbaa076af1fdbc4e5e4f1ada0e4e3988a
+ms.sourcegitcommit: b5ebaf42422205d212e3dade93fcefcf7f16db39
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 09/27/2020
-ms.locfileid: "91393869"
+ms.lasthandoff: 10/21/2020
+ms.locfileid: "92326586"
 ---
 # <a name="aspnet-core-no-locsignalr-configuration"></a>ASP.NET Core SignalR 設定
 
@@ -202,8 +202,8 @@ let connection = new signalR.HubConnectionBuilder()
 | --------------------------- | ---------------------- |
 | `trace`                     | `LogLevel.Trace`       |
 | `debug`                     | `LogLevel.Debug`       |
-| `info` **或** `information` | `LogLevel.Information` |
-| `warn` **或** `warning`     | `LogLevel.Warning`     |
+| `info`**或**`information` | `LogLevel.Information` |
+| `warn`**或**`warning`     | `LogLevel.Warning`     |
 | `error`                     | `LogLevel.Error`       |
 | `critical`                  | `LogLevel.Critical`    |
 | `none`                      | `LogLevel.None`        |
@@ -233,7 +233,7 @@ SLF4J: See http://www.slf4j.org/codes.html#StaticLoggerBinder for further detail
 
 使用的傳輸 SignalR 可在 `WithUrl` JavaScript) 的呼叫 (中設定 `withUrl` 。 值的位 OR `HttpTransportType` 可以用來限制用戶端只能使用指定的傳輸。 預設會啟用所有傳輸。
 
-例如，若要停用伺服器傳送的事件傳輸，但允許 Websocket 和長時間輪詢連接：
+例如，若要停用 Server-Sent 事件傳輸，但允許 Websocket 和長時間輪詢連接：
 
 ```csharp
 var connection = new HubConnectionBuilder()
@@ -264,7 +264,7 @@ HubConnection hubConnection = HubConnectionBuilder.create("https://example.com/c
 
 ### <a name="configure-bearer-authentication"></a>設定持有人驗證
 
-若要提供驗證資料和 SignalR 要求，請使用 `AccessTokenProvider` JavaScript) 的選項 (， `accessTokenFactory` 以指定傳回所需存取權杖的函式。 在 .NET 用戶端中，此存取權杖會以 HTTP 「持有人驗證」權杖的形式傳入， (使用 `Authorization`) 類型的標頭 `Bearer` 。 在 JavaScript 用戶端中，存取權杖是用來作為持有人權杖， **但** 在某些情況下，瀏覽器 api 會限制在伺服器傳送的事件和 websocket 要求中) 套用標頭 (的能力。 在這些情況下，存取權杖會以查詢字串值的形式提供 `access_token` 。
+若要提供驗證資料和 SignalR 要求，請使用 `AccessTokenProvider` JavaScript) 的選項 (， `accessTokenFactory` 以指定傳回所需存取權杖的函式。 在 .NET 用戶端中，此存取權杖會以 HTTP 「持有人驗證」權杖的形式傳入， (使用 `Authorization`) 類型的標頭 `Bearer` 。 在 JavaScript 用戶端中，存取權杖會用來作為持有人權杖， **但** 在某些情況下，瀏覽器 api 會限制在) 中 Server-Sent 事件和 websocket 要求中套用標頭 (的能力。 在這些情況下，存取權杖會以查詢字串值的形式提供 `access_token` 。
 
 在 .NET 用戶端中，您 `AccessTokenProvider` 可以使用中的 options 委派來指定選項 `WithUrl` ：
 
@@ -358,6 +358,7 @@ HubConnection hubConnection = HubConnectionBuilder.create("https://example.com/c
 | JavaScript 選項 | 預設值 | 描述 |
 | ----------------- | ------------- | ----------- |
 | `accessTokenFactory` | `null` | 傳回字串的函式，在 HTTP 要求中以持有人驗證權杖的形式提供。 |
+| `transport` | `null` | <xref:Microsoft.AspNetCore.Http.Connections.HttpTransportType>值，指定要用於連接的傳輸。 |
 | `headers` | `null` | 每個 HTTP 要求傳送的標頭字典。 在瀏覽器中傳送標頭不適用於 Websocket 或 <xref:Microsoft.AspNetCore.Http.Connections.HttpTransportType.ServerSentEvents> 串流。 |
 | `logMessageContent` | `null` | 設定為， `true` 以記錄用戶端所傳送和接收之訊息的位元組/字元。 |
 | `skipNegotiation` | `false` | 將此設定為， `true` 以略過協商步驟。 **只有當 websocket 傳輸是唯一啟用的傳輸時才支援**。 使用 Azure 服務時，無法啟用此設定 SignalR 。 |
@@ -379,6 +380,8 @@ HubConnection hubConnection = HubConnectionBuilder.create("https://example.com/c
 var connection = new HubConnectionBuilder()
     .WithUrl("https://example.com/chathub", options => {
         options.Headers["Foo"] = "Bar";
+        options.SkipNegotiation = true;
+        options.Transports = HttpTransportType.WebSockets;
         options.Cookies.Add(new Cookie(/* ... */);
         options.ClientCertificates.Add(/* ... */);
     })
@@ -390,8 +393,9 @@ var connection = new HubConnectionBuilder()
 ```javascript
 let connection = new signalR.HubConnectionBuilder()
     .withUrl("/chathub", {
-        skipNegotiation: true,
-        transport: signalR.HttpTransportType.WebSockets
+        // "Foo: Bar" will not be sent with WebSockets or Server-Sent Events requests
+        headers: { "Foo": "Bar" },
+        transport: signalR.HttpTransportType.LongPolling 
     })
     .build();
 ```
@@ -590,8 +594,8 @@ let connection = new signalR.HubConnectionBuilder()
 | --------------------------- | ---------------------- |
 | `trace`                     | `LogLevel.Trace`       |
 | `debug`                     | `LogLevel.Debug`       |
-| `info` **或** `information` | `LogLevel.Information` |
-| `warn` **或** `warning`     | `LogLevel.Warning`     |
+| `info`**或**`information` | `LogLevel.Information` |
+| `warn`**或**`warning`     | `LogLevel.Warning`     |
 | `error`                     | `LogLevel.Error`       |
 | `critical`                  | `LogLevel.Critical`    |
 | `none`                      | `LogLevel.None`        |
@@ -621,7 +625,7 @@ SLF4J: See http://www.slf4j.org/codes.html#StaticLoggerBinder for further detail
 
 使用的傳輸 SignalR 可在 `WithUrl` JavaScript) 的呼叫 (中設定 `withUrl` 。 值的位 OR `HttpTransportType` 可以用來限制用戶端只能使用指定的傳輸。 預設會啟用所有傳輸。
 
-例如，若要停用伺服器傳送的事件傳輸，但允許 Websocket 和長時間輪詢連接：
+例如，若要停用 Server-Sent 事件傳輸，但允許 Websocket 和長時間輪詢連接：
 
 ```csharp
 var connection = new HubConnectionBuilder()
@@ -652,7 +656,7 @@ HubConnection hubConnection = HubConnectionBuilder.create("https://example.com/c
 
 ### <a name="configure-bearer-authentication"></a>設定持有人驗證
 
-若要提供驗證資料和 SignalR 要求，請使用 `AccessTokenProvider` JavaScript) 的選項 (， `accessTokenFactory` 以指定傳回所需存取權杖的函式。 在 .NET 用戶端中，此存取權杖會以 HTTP 「持有人驗證」權杖的形式傳入， (使用 `Authorization`) 類型的標頭 `Bearer` 。 在 JavaScript 用戶端中，存取權杖是用來作為持有人權杖， **但** 在某些情況下，瀏覽器 api 會限制在伺服器傳送的事件和 websocket 要求中) 套用標頭 (的能力。 在這些情況下，存取權杖會以查詢字串值的形式提供 `access_token` 。
+若要提供驗證資料和 SignalR 要求，請使用 `AccessTokenProvider` JavaScript) 的選項 (， `accessTokenFactory` 以指定傳回所需存取權杖的函式。 在 .NET 用戶端中，此存取權杖會以 HTTP 「持有人驗證」權杖的形式傳入， (使用 `Authorization`) 類型的標頭 `Bearer` 。 在 JavaScript 用戶端中，存取權杖會用來作為持有人權杖， **但** 在某些情況下，瀏覽器 api 會限制在) 中 Server-Sent 事件和 websocket 要求中套用標頭 (的能力。 在這些情況下，存取權杖會以查詢字串值的形式提供 `access_token` 。
 
 在 .NET 用戶端中，您 `AccessTokenProvider` 可以使用中的 options 委派來指定選項 `WithUrl` ：
 
@@ -746,6 +750,7 @@ HubConnection hubConnection = HubConnectionBuilder.create("https://example.com/c
 | JavaScript 選項 | 預設值 | 描述 |
 | ----------------- | ------------- | ----------- |
 | `accessTokenFactory` | `null` | 傳回字串的函式，在 HTTP 要求中以持有人驗證權杖的形式提供。 |
+| `transport` | `null` | <xref:Microsoft.AspNetCore.Http.Connections.HttpTransportType>值，指定要用於連接的傳輸。 |
 | `logMessageContent` | `null` | 設定為， `true` 以記錄用戶端所傳送和接收之訊息的位元組/字元。 |
 | `skipNegotiation` | `false` | 將此設定為， `true` 以略過協商步驟。 **只有當 websocket 傳輸是唯一啟用的傳輸時才支援**。 使用 Azure 服務時，無法啟用此設定 SignalR 。 |
 
@@ -975,8 +980,8 @@ let connection = new signalR.HubConnectionBuilder()
 | --------------------------- | ---------------------- |
 | `trace`                     | `LogLevel.Trace`       |
 | `debug`                     | `LogLevel.Debug`       |
-| `info` **或** `information` | `LogLevel.Information` |
-| `warn` **或** `warning`     | `LogLevel.Warning`     |
+| `info`**或**`information` | `LogLevel.Information` |
+| `warn`**或**`warning`     | `LogLevel.Warning`     |
 | `error`                     | `LogLevel.Error`       |
 | `critical`                  | `LogLevel.Critical`    |
 | `none`                      | `LogLevel.None`        |
@@ -1006,7 +1011,7 @@ SLF4J: See http://www.slf4j.org/codes.html#StaticLoggerBinder for further detail
 
 使用的傳輸 SignalR 可在 `WithUrl` JavaScript) 的呼叫 (中設定 `withUrl` 。 值的位 OR `HttpTransportType` 可以用來限制用戶端只能使用指定的傳輸。 預設會啟用所有傳輸。
 
-例如，若要停用伺服器傳送的事件傳輸，但允許 Websocket 和長時間輪詢連接：
+例如，若要停用 Server-Sent 事件傳輸，但允許 Websocket 和長時間輪詢連接：
 
 ```csharp
 var connection = new HubConnectionBuilder()
@@ -1037,7 +1042,7 @@ HubConnection hubConnection = HubConnectionBuilder.create("https://example.com/c
 
 ### <a name="configure-bearer-authentication"></a>設定持有人驗證
 
-若要提供驗證資料和 SignalR 要求，請使用 `AccessTokenProvider` JavaScript) 的選項 (， `accessTokenFactory` 以指定傳回所需存取權杖的函式。 在 .NET 用戶端中，此存取權杖會以 HTTP 「持有人驗證」權杖的形式傳入， (使用 `Authorization`) 類型的標頭 `Bearer` 。 在 JavaScript 用戶端中，存取權杖是用來作為持有人權杖， **但** 在某些情況下，瀏覽器 api 會限制在伺服器傳送的事件和 websocket 要求中) 套用標頭 (的能力。 在這些情況下，存取權杖會以查詢字串值的形式提供 `access_token` 。
+若要提供驗證資料和 SignalR 要求，請使用 `AccessTokenProvider` JavaScript) 的選項 (， `accessTokenFactory` 以指定傳回所需存取權杖的函式。 在 .NET 用戶端中，此存取權杖會以 HTTP 「持有人驗證」權杖的形式傳入， (使用 `Authorization`) 類型的標頭 `Bearer` 。 在 JavaScript 用戶端中，存取權杖會用來作為持有人權杖， **但** 在某些情況下，瀏覽器 api 會限制在) 中 Server-Sent 事件和 websocket 要求中套用標頭 (的能力。 在這些情況下，存取權杖會以查詢字串值的形式提供 `access_token` 。
 
 在 .NET 用戶端中，您 `AccessTokenProvider` 可以使用中的 options 委派來指定選項 `WithUrl` ：
 
@@ -1131,6 +1136,7 @@ HubConnection hubConnection = HubConnectionBuilder.create("https://example.com/c
 | JavaScript 選項 | 預設值 | 描述 |
 | ----------------- | ------------- | ----------- |
 | `accessTokenFactory` | `null` | 傳回字串的函式，在 HTTP 要求中以持有人驗證權杖的形式提供。 |
+| `transport` | `null` | <xref:Microsoft.AspNetCore.Http.Connections.HttpTransportType>值，指定要用於連接的傳輸。 |
 | `logMessageContent` | `null` | 設定為， `true` 以記錄用戶端所傳送和接收之訊息的位元組/字元。 |
 | `skipNegotiation` | `false` | 將此設定為， `true` 以略過協商步驟。 **只有當 websocket 傳輸是唯一啟用的傳輸時才支援**。 使用 Azure 服務時，無法啟用此設定 SignalR 。 |
 
@@ -1366,7 +1372,7 @@ SLF4J: See http://www.slf4j.org/codes.html#StaticLoggerBinder for further detail
 
 使用的傳輸 SignalR 可在 `WithUrl` JavaScript) 的呼叫 (中設定 `withUrl` 。 值的位 OR `HttpTransportType` 可以用來限制用戶端只能使用指定的傳輸。 預設會啟用所有傳輸。
 
-例如，若要停用伺服器傳送的事件傳輸，但允許 Websocket 和長時間輪詢連接：
+例如，若要停用 Server-Sent 事件傳輸，但允許 Websocket 和長時間輪詢連接：
 
 ```csharp
 var connection = new HubConnectionBuilder()
@@ -1386,7 +1392,7 @@ let connection = new signalR.HubConnectionBuilder()
 
 ### <a name="configure-bearer-authentication"></a>設定持有人驗證
 
-若要提供驗證資料和 SignalR 要求，請使用 `AccessTokenProvider` JavaScript) 的選項 (， `accessTokenFactory` 以指定傳回所需存取權杖的函式。 在 .NET 用戶端中，此存取權杖會以 HTTP 「持有人驗證」權杖的形式傳入， (使用 `Authorization`) 類型的標頭 `Bearer` 。 在 JavaScript 用戶端中，存取權杖是用來作為持有人權杖， **但** 在某些情況下，瀏覽器 api 會限制在伺服器傳送的事件和 websocket 要求中) 套用標頭 (的能力。 在這些情況下，存取權杖會以查詢字串值的形式提供 `access_token` 。
+若要提供驗證資料和 SignalR 要求，請使用 `AccessTokenProvider` JavaScript) 的選項 (， `accessTokenFactory` 以指定傳回所需存取權杖的函式。 在 .NET 用戶端中，此存取權杖會以 HTTP 「持有人驗證」權杖的形式傳入， (使用 `Authorization`) 類型的標頭 `Bearer` 。 在 JavaScript 用戶端中，存取權杖會用來作為持有人權杖， **但** 在某些情況下，瀏覽器 api 會限制在) 中 Server-Sent 事件和 websocket 要求中套用標頭 (的能力。 在這些情況下，存取權杖會以查詢字串值的形式提供 `access_token` 。
 
 在 .NET 用戶端中，您 `AccessTokenProvider` 可以使用中的 options 委派來指定選項 `WithUrl` ：
 
@@ -1480,6 +1486,7 @@ HubConnection hubConnection = HubConnectionBuilder.create("https://example.com/c
 | JavaScript 選項 | 預設值 | 描述 |
 | ----------------- | ------------- | ----------- |
 | `accessTokenFactory` | `null` | 傳回字串的函式，在 HTTP 要求中以持有人驗證權杖的形式提供。 |
+| `transport` | `null` | <xref:Microsoft.AspNetCore.Http.Connections.HttpTransportType>值，指定要用於連接的傳輸。 |
 | `logMessageContent` | `null` | 設定為， `true` 以記錄用戶端所傳送和接收之訊息的位元組/字元。 |
 | `skipNegotiation` | `false` | 將此設定為， `true` 以略過協商步驟。 **只有當 websocket 傳輸是唯一啟用的傳輸時才支援**。 使用 Azure 服務時，無法啟用此設定 SignalR 。 |
 
@@ -1714,7 +1721,7 @@ SLF4J: See http://www.slf4j.org/codes.html#StaticLoggerBinder for further detail
 
 使用的傳輸 SignalR 可在 `WithUrl` JavaScript) 的呼叫 (中設定 `withUrl` 。 值的位 OR `HttpTransportType` 可以用來限制用戶端只能使用指定的傳輸。 預設會啟用所有傳輸。
 
-例如，若要停用伺服器傳送的事件傳輸，但允許 Websocket 和長時間輪詢連接：
+例如，若要停用 Server-Sent 事件傳輸，但允許 Websocket 和長時間輪詢連接：
 
 ```csharp
 var connection = new HubConnectionBuilder()
@@ -1732,7 +1739,7 @@ let connection = new signalR.HubConnectionBuilder()
 
 ### <a name="configure-bearer-authentication"></a>設定持有人驗證
 
-若要提供驗證資料和 SignalR 要求，請使用 `AccessTokenProvider` JavaScript) 的選項 (， `accessTokenFactory` 以指定傳回所需存取權杖的函式。 在 .NET 用戶端中，此存取權杖會以 HTTP 「持有人驗證」權杖的形式傳入， (使用 `Authorization`) 類型的標頭 `Bearer` 。 在 JavaScript 用戶端中，存取權杖是用來作為持有人權杖， **但** 在某些情況下，瀏覽器 api 會限制在伺服器傳送的事件和 websocket 要求中) 套用標頭 (的能力。 在這些情況下，存取權杖會以查詢字串值的形式提供 `access_token` 。
+若要提供驗證資料和 SignalR 要求，請使用 `AccessTokenProvider` JavaScript) 的選項 (， `accessTokenFactory` 以指定傳回所需存取權杖的函式。 在 .NET 用戶端中，此存取權杖會以 HTTP 「持有人驗證」權杖的形式傳入， (使用 `Authorization`) 類型的標頭 `Bearer` 。 在 JavaScript 用戶端中，存取權杖會用來作為持有人權杖， **但** 在某些情況下，瀏覽器 api 會限制在) 中 Server-Sent 事件和 websocket 要求中套用標頭 (的能力。 在這些情況下，存取權杖會以查詢字串值的形式提供 `access_token` 。
 
 在 .NET 用戶端中，您 `AccessTokenProvider` 可以使用中的 options 委派來指定選項 `WithUrl` ：
 
@@ -1823,6 +1830,7 @@ HubConnection hubConnection = HubConnectionBuilder.create("https://example.com/c
 | JavaScript 選項 | 預設值 | 描述 |
 | ----------------- | ------------- | ----------- |
 | `accessTokenFactory` | `null` | 傳回字串的函式，在 HTTP 要求中以持有人驗證權杖的形式提供。 |
+| `transport` | `null` | <xref:Microsoft.AspNetCore.Http.Connections.HttpTransportType>值，指定要用於連接的傳輸。 |
 | `logMessageContent` | `null` | 設定為， `true` 以記錄用戶端所傳送和接收之訊息的位元組/字元。 |
 | `skipNegotiation` | `false` | 將此設定為， `true` 以略過協商步驟。 **只有當 websocket 傳輸是唯一啟用的傳輸時才支援**。 使用 Azure 服務時，無法啟用此設定 SignalR 。 |
 

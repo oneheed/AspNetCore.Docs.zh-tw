@@ -18,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/host-and-deploy/webassembly
-ms.openlocfilehash: 63954bd2fbb8fdb2e347d552a10adc52263c3ad6
-ms.sourcegitcommit: daa9ccf580df531254da9dce8593441ac963c674
+ms.openlocfilehash: c3f537ff3b55f295db478cb097bc99023cc71a87
+ms.sourcegitcommit: b5ebaf42422205d212e3dade93fcefcf7f16db39
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 10/09/2020
-ms.locfileid: "91900709"
+ms.lasthandoff: 10/21/2020
+ms.locfileid: "92326518"
 ---
 # <a name="host-and-deploy-aspnet-core-no-locblazor-webassembly"></a>裝載和部署 ASP.NET Core Blazor WebAssembly
 
@@ -450,7 +450,13 @@ Blazor發行專案時， `web.config` 會使用下列 IIS 設定來建立檔案�
   
 #### <a name="use-a-custom-webconfig"></a>使用自訂 web.config
 
-若要使用自訂檔案 `web.config` ，請將自訂檔案放 `web.config` 在專案資料夾的根目錄，然後發佈專案。
+若要使用自訂檔案 `web.config` ，請將自訂檔案放 `web.config` 在專案資料夾的根目錄。 使用在應用程式的專案檔中，將專案設定為發佈 IIS 特定的資產 `PublishIISAssets` ，併發布專案：
+
+```xml
+<PropertyGroup>
+  <PublishIISAssets>true</PublishIISAssets>
+</PropertyGroup>
+```
 
 #### <a name="install-the-url-rewrite-module"></a>安裝 URL Rewrite 模組
 

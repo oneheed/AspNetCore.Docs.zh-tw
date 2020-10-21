@@ -3,7 +3,8 @@ title: ASP.NET Core 中的要求功能
 author: ardalis
 description: 了解有關 HTTP 要求和回應的網頁伺服器實作詳細資料，其定義於 ASP.NET Core 的介面中。
 ms.author: riande
-ms.date: 10/14/2016
+ms.custom: mvc
+ms.date: 10/20/2020
 no-loc:
 - ASP.NET Core Identity
 - cookie
@@ -16,70 +17,140 @@ no-loc:
 - Razor
 - SignalR
 uid: fundamentals/request-features
-ms.openlocfilehash: 3b5c929519407de5dc582c10a86745efddc8a38a
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: 879b775ba2998ee803708ebf231b5fcd363b811c
+ms.sourcegitcommit: b5ebaf42422205d212e3dade93fcefcf7f16db39
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88634510"
+ms.lasthandoff: 10/21/2020
+ms.locfileid: "92326433"
 ---
 # <a name="request-features-in-aspnet-core"></a>ASP.NET Core 中的要求功能
 
 作者：[Steve Smith](https://ardalis.com/)
 
-有關 HTTP 要求和回應的網頁伺服器實作詳細資料，定義於介面中。 伺服器實作與中介軟體會使用這些介面，建立及修改應用程式的裝載管線。
-
-## <a name="feature-interfaces"></a>功能介面
-
-ASP.NET Core 可定義 `Microsoft.AspNetCore.Http.Features` 中伺服器用來識別其支援功能的 HTTP 功能介面的數目。 下列功能介面會處理要求並傳回回應：
-
-`IHttpRequestFeature` 定義 HTTP 要求的結構，包括通訊協定、路徑、查詢字串、標頭和主體。
-
-`IHttpResponseFeature` 定義 HTTP 回應的結構，包括狀態碼、標頭和回應主體。
-
-`IHttpAuthenticationFeature` 定義根據 `ClaimsPrincipal` 識別使用者和指定驗證處理常式的支援。
-
-`IHttpUpgradeFeature` 定義 [HTTP 升級](https://tools.ietf.org/html/rfc2616.html#section-14.42)的支援，這可讓用戶端指定它在伺服器想要切換通訊協定時要使用哪些其他通訊協定。
-
-`IHttpBufferingFeature` 定義停用要求和/或回應之緩衝處理的方法。
-
-`IHttpConnectionFeature` 定義本機和遠端位址與連接埠的屬性。
-
-`IHttpRequestLifetimeFeature`　定義中止連線或偵測要求是否已提前終止 (例如由用戶端中斷連線) 的支援。
-
-`IHttpSendFileFeature` 定義以非同步方式傳送檔案的方法。
-
-`IHttpWebSocketFeature` 定義支援 Web 通訊端的 API。
-
-`IHttpRequestIdentifierFeature` 新增您可以實作的屬性來唯一識別要求。
-
-`ISessionFeature` 定義支援使用者工作階段的 `ISessionFactory` 和 `ISession` 抽象概念。
-
-`ITlsConnectionFeature` 定義擷取用戶端憑證的 API。
-
-`ITlsTokenBindingFeature` 定義使用 TLS 權杖繫結參數的方法。
-
-> [!NOTE]
-> `ISessionFeature` 不是伺服器功能，但卻由 `SessionMiddleware` 實作 (請參閱[管理應用程式狀態](app-state.md))。
+`HttpContext`應用程式和中介軟體用來處理要求的 API 有一個抽象層 undernieth 它稱為*功能介面*。 每個功能介面都會提供所公開之功能的詳細子集 `HttpContext` 。 這些介面可以加入、修改、包裝、取代，或甚至由伺服器或中介軟體移除，因為要求會經過處理，而不需要重新執行整個 `HttpContext` 。 它們也可以用來模擬測試時的功能。
 
 ## <a name="feature-collections"></a>功能集合
 
-`HttpContext` 的 `Features` 屬性提供一個介面來取得和設定目前要求的可用 HTTP 功能。 由於功能集合即使在要求內容中都是可變動的，因此可以使用中介軟體來修改該集合，並新增其他功能的支援。
+的 <xref:Microsoft.AspNetCore.Http.HttpContext.Features> 屬性 `HttpContext` 提供目前要求之功能介面集合的存取權。 由於功能集合即使在要求內容中都是可變動的，因此可以使用中介軟體來修改該集合，並新增其他功能的支援。 某些 advanced 功能只能透過功能集合存取相關聯的介面來使用。
 
-## <a name="middleware-and-request-features"></a>中介軟體和要求功能
+## <a name="feature-interfaces"></a>功能介面
 
-雖然伺服器負責建立功能集合，但中介軟體可以同時新增至此集合和取用集合中的功能。 例如，`StaticFileMiddleware` 可存取 `IHttpSendFileFeature` 功能。 如果有該功能，它用來從其實體路徑傳送要求的靜態檔案。 否則，會使用較慢的替代方法來傳送檔案。 可用時，`IHttpSendFileFeature` 允許作業系統開啟檔案，並執行直接核心模式複製到網路卡。
+ASP.NET Core 定義中的一些常見 HTTP 功能介面 <xref:Microsoft.AspNetCore.Http.Features?displayProperty=fullName> ，這些介面會由各種伺服器和中介軟體共用，以識別它們所支援的功能。 伺服器和中介軟體也可以提供自己的介面，以提供額外的功能。
 
-此外，中介軟體還可以新增至伺服器所建立的功能集合。 現有的功能甚至可以取代為中介軟體，讓中介軟體來增強伺服器的功能。 新增至集合的功能稍後在要求管線中，可立即用於其他中介軟體或基礎應用程式本身。
+大部分的功能介面都會提供選擇性的亮顯功能，而其相關聯 `HttpContext` 的 api 會在功能不存在時提供預設值。 下列內容會視需要指定一些介面，因為它們會提供核心要求和回應功能，而且必須執行才能處理要求。
 
-藉由結合自訂伺服器實作和特定中介軟體增強功能，可建構應用程式所需的一組精確功能。 這允許新增遺漏的功能而不需要變更伺服器，並確保只公開少量的功能，以減少受攻擊面區域並改善效能。
+下列功能介面來自 <xref:Microsoft.AspNetCore.Http.Features?displayProperty=fullName> ：
 
-## <a name="summary"></a>摘要
+<xref:Microsoft.AspNetCore.Http.Features.IHttpRequestFeature>：定義 HTTP 要求的結構，包括通訊協定、路徑、查詢字串、標頭和主體。 需要此功能才能處理要求。
 
-功能介面定義給定的要求可能支援的特定 HTTP 功能。 伺服器定義功能的集合，以及一組該伺服器所支援，但中介軟體可用來增強這些功能的初始功能。
+<xref:Microsoft.AspNetCore.Http.Features.IHttpResponseFeature>：定義 HTTP 回應的結構，包括狀態碼、標頭和回應主體。 需要此功能才能處理要求。
+
+::: moniker range=">= aspnetcore-3.0"
+
+<xref:Microsoft.AspNetCore.Http.Features.IHttpResponseBodyFeature>：定義使用、或檔案寫出回應主體的不同方式 `Stream` `PipeWriter` 。 需要此功能才能處理要求。 這會取代 `IHttpResponseFeature.Body` 和 `IHttpSendFileFeature` 。
+
+::: moniker-end
+
+<xref:Microsoft.AspNetCore.Http.Features.Authentication.IHttpAuthenticationFeature>：保留 <xref:System.Security.Claims.ClaimsPrincipal> 目前與要求相關聯的。
+
+<xref:Microsoft.AspNetCore.Http.Features.IFormFeature>：用來剖析和快取傳入的 HTTP 和多部分表單提交。
+
+::: moniker range=">= aspnetcore-2.0"
+
+<xref:Microsoft.AspNetCore.Http.Features.IHttpBodyControlFeature>：用來控制要求或回應主體是否允許同步 IO 作業。
+
+::: moniker-end
+   
+::: moniker range="< aspnetcore-3.0"
+
+<xref:Microsoft.AspNetCore.Http.Features.IHttpBufferingFeature>：定義停用要求和/或回應之緩衝的方法。
+
+::: moniker-end
+
+<xref:Microsoft.AspNetCore.Http.Features.IHttpConnectionFeature>：定義連接識別碼和本機和遠端位址和埠的屬性。
+
+::: moniker range=">= aspnetcore-2.0"
+
+<xref:Microsoft.AspNetCore.Http.Features.IHttpMaxRequestBodySizeFeature>：控制目前要求所允許的要求主體大小上限。
+
+::: moniker-end
+
+::: moniker range=">= aspnetcore-5.0"
+
+`IHttpRequestBodyDetectionFeature`：指出要求是否可以有主體。
+
+::: moniker-end
+
+<xref:Microsoft.AspNetCore.Http.Features.IHttpRequestIdentifierFeature>：加入可實作為唯一識別要求的屬性。
+
+<xref:Microsoft.AspNetCore.Http.Features.IHttpRequestLifetimeFeature>：定義中止連接或偵測要求是否已提前終止的支援，例如用戶端中斷連線。
+
+::: moniker range=">= aspnetcore-3.0"
+
+<xref:Microsoft.AspNetCore.Http.Features.IHttpRequestTrailersFeature>：提供要求尾端標頭（如果有）的存取權。
+
+<xref:Microsoft.AspNetCore.Http.Features.IHttpResetFeature>：用來傳送重設訊息給支援它們的通訊協定，例如 HTTP/2 或 HTTP/3。
+
+::: moniker-end
+
+::: moniker range=">= aspnetcore-2.2"
+
+<xref:Microsoft.AspNetCore.Http.Features.IHttpResponseTrailersFeature>：可讓應用程式在支援時提供回應尾端標頭。
+
+::: moniker-end
+
+::: moniker range="< aspnetcore-3.0"
+
+<xref:Microsoft.AspNetCore.Http.Features.IHttpSendFileFeature>：定義以非同步方式傳送檔案的方法。
+
+::: moniker-end
+
+<xref:Microsoft.AspNetCore.Http.Features.IHttpUpgradeFeature>：定義 [HTTP 升級](https://tools.ietf.org/html/rfc2616.html#section-14.42)的支援，可讓用戶端指定要在伺服器希望切換通訊協定時使用的其他通訊協定。
+
+<xref:Microsoft.AspNetCore.Http.Features.IHttpWebSocketFeature>：定義支援 web 通訊端的 API。
+
+::: moniker range=">= aspnetcore-3.0"
+
+<xref:Microsoft.AspNetCore.Http.Features.IHttpsCompressionFeature>：控制是否應透過 HTTPS 連接使用回應壓縮。
+
+::: moniker-end
+
+<xref:Microsoft.AspNetCore.Http.Features.IItemsFeature>：儲存 <xref:Microsoft.AspNetCore.Http.Features.IItemsFeature.Items> 每個要求應用程式狀態的集合。
+
+<xref:Microsoft.AspNetCore.Http.Features.IQueryFeature>：剖析和快取查詢字串。
+   
+::: moniker range=">= aspnetcore-3.0"
+
+<xref:Microsoft.AspNetCore.Http.Features.IRequestBodyPipeFeature>：以形式表示要求主體 <xref:System.IO.Pipelines.PipeReader> 。
+ 
+::: moniker-end
+
+<xref:Microsoft.AspNetCore.Http.Features.IRequestCookiesFeature>：剖析和快取要求 `Cookie` 標頭值。
+
+<xref:Microsoft.AspNetCore.Http.Features.IResponseCookiesFeature>：控制如何將回應套用 cookie 至 `Set-Cookie` 標頭。
+
+::: moniker range=">= aspnetcore-2.2"
+
+<xref:Microsoft.AspNetCore.Http.Features.IServerVariablesFeature>：這項功能可讓您存取要求伺服器變數，例如 IIS 所提供的變數。
+
+::: moniker-end
+   
+<xref:Microsoft.AspNetCore.Http.Features.IServiceProvidersFeature>：提供 <xref:System.IServiceProvider> 具有範圍要求服務的存取權。
+
+<xref:Microsoft.AspNetCore.Http.Features.ISessionFeature>：定義 `ISessionFactory` <xref:Microsoft.AspNetCore.Http.ISession> 支援使用者會話的和抽象概念。 `ISessionFeature` 是由 (所執行， <xref:Microsoft.AspNetCore.Session.SessionMiddleware> 請參閱 <xref:fundamentals/app-state>) 。
+
+<xref:Microsoft.AspNetCore.Http.Features.ITlsConnectionFeature>：定義用於抓取用戶端憑證的 API。
+
+<xref:Microsoft.AspNetCore.Http.Features.ITlsTokenBindingFeature>：定義使用 TLS 權杖系結參數的方法。
+   
+::: moniker range=">= aspnetcore-2.2"
+   
+<xref:Microsoft.AspNetCore.Http.Features.ITrackingConsentFeature>：用來查詢、授與及撤銷使用者關於與網站活動和功能相關之使用者資訊儲存的同意。
+   
+::: moniker-end
 
 ## <a name="additional-resources"></a>其他資源
 
-* [伺服器](xref:fundamentals/servers/index)
-* [中介軟體](xref:fundamentals/middleware/index)
-* [Open Web Interface for .NET (OWIN)](xref:fundamentals/owin)
+* <xref:fundamentals/servers/index>
+* <xref:fundamentals/middleware/index>

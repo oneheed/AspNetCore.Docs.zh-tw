@@ -18,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/fundamentals/additional-scenarios
-ms.openlocfilehash: 236d95e54b772ea522911421084ec0d9022c45ff
-ms.sourcegitcommit: 6c82d78662332cd40d614019b9ed17c46e25be28
+ms.openlocfilehash: 075bcc68fd2dff0ebf2cfceacec24fde8c818603
+ms.sourcegitcommit: b5ebaf42422205d212e3dade93fcefcf7f16db39
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 09/29/2020
-ms.locfileid: "91424135"
+ms.lasthandoff: 10/21/2020
+ms.locfileid: "92326532"
 ---
 # <a name="aspnet-core-no-locblazor-hosting-model-configuration"></a>ASP.NET Core Blazor 裝載模型設定
 
@@ -371,6 +371,14 @@ window.addEventListener('pagehide', () => {
 
   app.UseStaticFiles(new StaticFileOptions { ContentTypeProvider = provider });
   app.UseStaticFiles();
+  ```
+
+* 您可以 `_framework/blazor.server.js` 使用 <xref:Microsoft.AspNetCore.Builder.MapWhenExtensions.MapWhen%2A> 來執行自訂靜態檔案中介軟體，以避免干擾服務：
+
+  ```csharp
+  app.MapWhen(ctx => !ctx.Request.Path
+      .StartsWithSegments("_framework/blazor.server.js", 
+          subApp => subApp.UseStaticFiles(new StaticFileOptions(){ ... })));
   ```
 
 ## <a name="additional-resources"></a>其他資源

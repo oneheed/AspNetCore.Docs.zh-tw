@@ -16,12 +16,12 @@ no-loc:
 - Razor
 - SignalR
 uid: migration/mvc
-ms.openlocfilehash: d615f67fc5cb23499ee7e14b747390a7a1b5a693
-ms.sourcegitcommit: f09407d128634d200c893bfb1c163e87fa47a161
+ms.openlocfilehash: 51228e59284b5edf0554e9929b16deafe08ea31e
+ms.sourcegitcommit: b5ebaf42422205d212e3dade93fcefcf7f16db39
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 08/26/2020
-ms.locfileid: "88865126"
+ms.lasthandoff: 10/21/2020
+ms.locfileid: "92326632"
 ---
 # <a name="migrate-from-aspnet-mvc-to-aspnet-core-mvc"></a>從 ASP.NET MVC 移轉至 ASP.NET Core MVC
 
@@ -38,7 +38,7 @@ ms.locfileid: "88865126"
 
 如需遷移設定和程式 Identity 代碼，請參閱 [將設定遷移至 ASP.NET Core](xref:migration/configuration) 以及 [將驗證遷移至 Identity ASP.NET Core](xref:migration/identity)。
 
-## <a name="prerequisites"></a>先決條件
+## <a name="prerequisites"></a>Prerequisites
 
 [!INCLUDE [prerequisites](../includes/net-core-prereqs-vs-3.1.md)]
 
@@ -46,9 +46,9 @@ ms.locfileid: "88865126"
 
 在 Visual Studio 中建立 MVC 專案的範例以進行遷移：
 
-1. 從 [檔案]**** 功能表選取 [新增]**[專案]** > ****。
+1. 從 [ **檔案** ] 功能表選取 [ **新增** > **專案**]。
 1. 選取 [ **ASP.NET Web 應用程式 (] .NET Framework) ** 然後選取 **[下一步]**。
-1. 將專案命名為 *WebApp1* ，讓命名空間符合下一個步驟中所建立的 ASP.NET Core 專案。 選取 [建立]  。
+1. 將專案命名為 *WebApp1* ，讓命名空間符合下一個步驟中所建立的 ASP.NET Core 專案。 選取 [建立]。
 1. 選取 [ **MVC**]，然後選取 [ **建立**]。
 
 ## <a name="create-the-aspnet-core-project"></a>建立 ASP.NET Core 專案
@@ -56,10 +56,10 @@ ms.locfileid: "88865126"
 使用新的 ASP.NET Core 專案來建立新的方案，以遷移至：
 
 1. 啟動 Visual Studio 的第二個實例。
-1. 從 [檔案]**** 功能表選取 [新增]**[專案]** > ****。
-1. 選取 [ **ASP.NET Web Core Web 應用程式** ]，然後選取 **[下一步]**。
+1. 從 [ **檔案** ] 功能表選取 [ **新增** > **專案**]。
+1. 依序選取 [ASP.NET Core Web 應用程式]**** 和 [下一步]****。
 1. 在 [ **設定您的新專案** ] 對話方塊中，將專案命名為 *WebApp1*。
-1. 將位置設定為與上一個專案不同的目錄，以使用相同的專案名稱。 使用相同的命名空間，可讓您更輕鬆地在兩個專案之間複製程式碼。 選取 [建立]  。
+1. 將位置設定為與上一個專案不同的目錄，以使用相同的專案名稱。 使用相同的命名空間，可讓您更輕鬆地在兩個專案之間複製程式碼。 選取 [建立]。
 1. 在 [ **建立新的 ASP.NET Core Web 應用程式** ] 對話方塊中，確認已選取 [ **.net Core** ] 和 [ **ASP.NET Core 3.1** ]。 選取 **Web 應用程式 (模型-視圖控制器) ** 專案範本，然後選取 [ **建立**]。
 
 ## <a name="configure-the-aspnet-core-site-to-use-mvc"></a>將 ASP.NET Core 網站設定為使用 MVC

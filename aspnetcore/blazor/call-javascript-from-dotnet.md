@@ -18,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/call-javascript-from-dotnet
-ms.openlocfilehash: a7ba41501b856482c8fcf7efa8e1d78857020bf5
-ms.sourcegitcommit: ecae2aa432628b9181d1fa11037c231c7dd56c9e
+ms.openlocfilehash: 3bd881b124e00b91ab0aa9d3eb7531f10ef895f2
+ms.sourcegitcommit: b5ebaf42422205d212e3dade93fcefcf7f16db39
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 10/16/2020
-ms.locfileid: "92113760"
+ms.lasthandoff: 10/21/2020
+ms.locfileid: "92326501"
 ---
 # <a name="call-javascript-functions-from-net-methods-in-aspnet-core-no-locblazor"></a>從 ASP.NET Core 中的 .NET 方法呼叫 JavaScript 函式 Blazor
 
@@ -260,9 +260,7 @@ public static ValueTask<T> GenericMethod<T>(this ElementReference elementRef,
 
 ## <a name="reference-elements-across-components"></a>跨元件參考元素
 
-<xref:Microsoft.AspNetCore.Components.ElementReference>只有在元件的 (方法中才保證有效， <xref:Microsoft.AspNetCore.Components.ComponentBase.OnAfterRender%2A> 而專案參考是 `struct`) ，因此無法在元件之間傳遞元素參考。
-
-若要讓父元件能讓元素參考可供其他元件使用，父元件可以：
+<xref:Microsoft.AspNetCore.Components.ElementReference>實例只保證在元件的方法中有效 <xref:Microsoft.AspNetCore.Components.ComponentBase.OnAfterRender%2A> (而且專案參考是 `struct`) ，因此無法在元件之間傳遞元素參考。 若要讓父元件能讓元素參考可供其他元件使用，父元件可以：
 
 * 允許子元件註冊回呼。
 * 使用傳遞的元素參考，在事件期間叫用已註冊的回呼 <xref:Microsoft.AspNetCore.Components.ComponentBase.OnAfterRender%2A> 。 這種方法間接可讓子元件與父系的元素參考互動。

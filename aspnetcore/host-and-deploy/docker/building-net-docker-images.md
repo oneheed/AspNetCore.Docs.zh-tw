@@ -17,129 +17,129 @@ no-loc:
 - Razor
 - SignalR
 uid: host-and-deploy/docker/building-net-docker-images
-ms.openlocfilehash: 791cc14feac30ad8a571d155624ab821dfd77981
-ms.sourcegitcommit: 24106b7ffffc9fff410a679863e28aeb2bbe5b7e
+ms.openlocfilehash: 6f94323873937d1428d6cfa1b0ef15e44611fd47
+ms.sourcegitcommit: b3ec60f7682e43211c2b40c60eab3d4e45a48ab1
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 09/17/2020
-ms.locfileid: "90722854"
+ms.lasthandoff: 10/17/2020
+ms.locfileid: "92153647"
 ---
-# <a name="docker-images-for-aspnet-core"></a><span data-ttu-id="3c1de-104">ASP.NET Core 的 Docker 映像</span><span class="sxs-lookup"><span data-stu-id="3c1de-104">Docker images for ASP.NET Core</span></span>
+# <a name="docker-images-for-aspnet-core"></a><span data-ttu-id="d5a83-104">ASP.NET Core 的 Docker 映像</span><span class="sxs-lookup"><span data-stu-id="d5a83-104">Docker images for ASP.NET Core</span></span>
 
-<span data-ttu-id="3c1de-105">本教學課程示範如何在 Docker 容器中執行 ASP.NET Core 應用程式。</span><span class="sxs-lookup"><span data-stu-id="3c1de-105">This tutorial shows how to run an ASP.NET Core app in Docker containers.</span></span>
+<span data-ttu-id="d5a83-105">本教學課程示範如何在 Docker 容器中執行 ASP.NET Core 應用程式。</span><span class="sxs-lookup"><span data-stu-id="d5a83-105">This tutorial shows how to run an ASP.NET Core app in Docker containers.</span></span>
 
-<span data-ttu-id="3c1de-106">在本教學課程中，您：</span><span class="sxs-lookup"><span data-stu-id="3c1de-106">In this tutorial, you:</span></span>
+<span data-ttu-id="d5a83-106">在本教學課程中，您：</span><span class="sxs-lookup"><span data-stu-id="d5a83-106">In this tutorial, you:</span></span>
 > [!div class="checklist"]
-> * <span data-ttu-id="3c1de-107">了解 Microsoft.NET Core Docker 映像</span><span class="sxs-lookup"><span data-stu-id="3c1de-107">Learn about Microsoft .NET Core Docker images</span></span>
-> * <span data-ttu-id="3c1de-108">下載 ASP.NET Core 範例應用程式</span><span class="sxs-lookup"><span data-stu-id="3c1de-108">Download an ASP.NET Core sample app</span></span>
-> * <span data-ttu-id="3c1de-109">在本機執行範例應用程式</span><span class="sxs-lookup"><span data-stu-id="3c1de-109">Run the sample app locally</span></span>
-> * <span data-ttu-id="3c1de-110">在 Linux 容器中執行範例應用程式</span><span class="sxs-lookup"><span data-stu-id="3c1de-110">Run the sample app in Linux containers</span></span>
-> * <span data-ttu-id="3c1de-111">在 Windows 容器中執行範例應用程式</span><span class="sxs-lookup"><span data-stu-id="3c1de-111">Run the sample app in Windows containers</span></span>
-> * <span data-ttu-id="3c1de-112">手動建置並部署</span><span class="sxs-lookup"><span data-stu-id="3c1de-112">Build and deploy manually</span></span>
+> * <span data-ttu-id="d5a83-107">了解 Microsoft.NET Core Docker 映像</span><span class="sxs-lookup"><span data-stu-id="d5a83-107">Learn about Microsoft .NET Core Docker images</span></span>
+> * <span data-ttu-id="d5a83-108">下載 ASP.NET Core 範例應用程式</span><span class="sxs-lookup"><span data-stu-id="d5a83-108">Download an ASP.NET Core sample app</span></span>
+> * <span data-ttu-id="d5a83-109">在本機執行範例應用程式</span><span class="sxs-lookup"><span data-stu-id="d5a83-109">Run the sample app locally</span></span>
+> * <span data-ttu-id="d5a83-110">在 Linux 容器中執行範例應用程式</span><span class="sxs-lookup"><span data-stu-id="d5a83-110">Run the sample app in Linux containers</span></span>
+> * <span data-ttu-id="d5a83-111">在 Windows 容器中執行範例應用程式</span><span class="sxs-lookup"><span data-stu-id="d5a83-111">Run the sample app in Windows containers</span></span>
+> * <span data-ttu-id="d5a83-112">手動建置並部署</span><span class="sxs-lookup"><span data-stu-id="d5a83-112">Build and deploy manually</span></span>
 
-## <a name="aspnet-core-docker-images"></a><span data-ttu-id="3c1de-113">ASP.NET Core Docker 映像</span><span class="sxs-lookup"><span data-stu-id="3c1de-113">ASP.NET Core Docker images</span></span>
+## <a name="aspnet-core-docker-images"></a><span data-ttu-id="d5a83-113">ASP.NET Core Docker 映像</span><span class="sxs-lookup"><span data-stu-id="d5a83-113">ASP.NET Core Docker images</span></span>
 
-<span data-ttu-id="3c1de-114">針對本教學課程，您可以下載 ASP.NET Core 範例應用程式，並在 Docker 容器中執行它。</span><span class="sxs-lookup"><span data-stu-id="3c1de-114">For this tutorial, you download an ASP.NET Core sample app and run it in Docker containers.</span></span> <span data-ttu-id="3c1de-115">該範例可與 Linux 或 Windows 容器搭配使用。</span><span class="sxs-lookup"><span data-stu-id="3c1de-115">The sample works with both Linux and Windows containers.</span></span>
+<span data-ttu-id="d5a83-114">針對本教學課程，您可以下載 ASP.NET Core 範例應用程式，並在 Docker 容器中執行它。</span><span class="sxs-lookup"><span data-stu-id="d5a83-114">For this tutorial, you download an ASP.NET Core sample app and run it in Docker containers.</span></span> <span data-ttu-id="d5a83-115">該範例可與 Linux 或 Windows 容器搭配使用。</span><span class="sxs-lookup"><span data-stu-id="d5a83-115">The sample works with both Linux and Windows containers.</span></span>
 
-<span data-ttu-id="3c1de-116">範例 Dockerfile 會使用 [Docker 多階段建置功能](https://docs.docker.com/engine/userguide/eng-image/multistage-build/) \(英文\)，在不同容器中建置並執行。</span><span class="sxs-lookup"><span data-stu-id="3c1de-116">The sample Dockerfile uses the [Docker multi-stage build feature](https://docs.docker.com/engine/userguide/eng-image/multistage-build/) to build and run in different containers.</span></span> <span data-ttu-id="3c1de-117">建置和執行容器會從 Docker Hub 中 Microsoft 所提供的映像來建置：</span><span class="sxs-lookup"><span data-stu-id="3c1de-117">The build and run containers are created from images that are provided in Docker Hub by Microsoft:</span></span>
+<span data-ttu-id="d5a83-116">範例 Dockerfile 會使用 [Docker 多階段建置功能](https://docs.docker.com/engine/userguide/eng-image/multistage-build/) \(英文\)，在不同容器中建置並執行。</span><span class="sxs-lookup"><span data-stu-id="d5a83-116">The sample Dockerfile uses the [Docker multi-stage build feature](https://docs.docker.com/engine/userguide/eng-image/multistage-build/) to build and run in different containers.</span></span> <span data-ttu-id="d5a83-117">建置和執行容器會從 Docker Hub 中 Microsoft 所提供的映像來建置：</span><span class="sxs-lookup"><span data-stu-id="d5a83-117">The build and run containers are created from images that are provided in Docker Hub by Microsoft:</span></span>
 
 * `dotnet/core/sdk`
 
-  <span data-ttu-id="3c1de-118">範例會使用此映像來建置應用程式。</span><span class="sxs-lookup"><span data-stu-id="3c1de-118">The sample uses this image for building the app.</span></span> <span data-ttu-id="3c1de-119">此映像包含隨附命令列工具 (CLI) 的 .NET Core SDK。</span><span class="sxs-lookup"><span data-stu-id="3c1de-119">The image contains the .NET Core SDK, which includes the Command Line Tools (CLI).</span></span> <span data-ttu-id="3c1de-120">此映像會最佳化來進行本機開發、偵錯和單元測試。</span><span class="sxs-lookup"><span data-stu-id="3c1de-120">The image is optimized for local development, debugging, and unit testing.</span></span> <span data-ttu-id="3c1de-121">基於開發和編譯而安裝的工具可使此映像成為相對較大的映像。</span><span class="sxs-lookup"><span data-stu-id="3c1de-121">The tools installed for development and compilation make this a relatively large image.</span></span> 
+  <span data-ttu-id="d5a83-118">範例會使用此映像來建置應用程式。</span><span class="sxs-lookup"><span data-stu-id="d5a83-118">The sample uses this image for building the app.</span></span> <span data-ttu-id="d5a83-119">此映像包含隨附命令列工具 (CLI) 的 .NET Core SDK。</span><span class="sxs-lookup"><span data-stu-id="d5a83-119">The image contains the .NET Core SDK, which includes the Command Line Tools (CLI).</span></span> <span data-ttu-id="d5a83-120">此映像會最佳化來進行本機開發、偵錯和單元測試。</span><span class="sxs-lookup"><span data-stu-id="d5a83-120">The image is optimized for local development, debugging, and unit testing.</span></span> <span data-ttu-id="d5a83-121">基於開發和編譯而安裝的工具可使此映像成為相對較大的映像。</span><span class="sxs-lookup"><span data-stu-id="d5a83-121">The tools installed for development and compilation make this a relatively large image.</span></span> 
 
 * `dotnet/core/aspnet`
 
-   <span data-ttu-id="3c1de-122">範例會使用此映像來執行應用程式。</span><span class="sxs-lookup"><span data-stu-id="3c1de-122">The sample uses this image for running the app.</span></span> <span data-ttu-id="3c1de-123">此映像包含 ASP.NET Core 執行階段和程式庫，並會進行最佳化，以在生產環境中執行應用程式。</span><span class="sxs-lookup"><span data-stu-id="3c1de-123">The image contains the ASP.NET Core runtime and libraries and is optimized for running apps in production.</span></span> <span data-ttu-id="3c1de-124">專為部署和應用程式啟動速度而設計的映像相對較小，因此，已將從 Docker 登錄到 Docker 主機的網路效能最佳化。</span><span class="sxs-lookup"><span data-stu-id="3c1de-124">Designed for speed of deployment and app startup, the image is relatively small, so network performance from Docker Registry to Docker host is optimized.</span></span> <span data-ttu-id="3c1de-125">只會將執行應用程式所需的程式庫和內容複製到容器中。</span><span class="sxs-lookup"><span data-stu-id="3c1de-125">Only the binaries and content needed to run an app are copied to the container.</span></span> <span data-ttu-id="3c1de-126">內容已準備好執行，可用最短的時間從 `Docker run` 到應用程式啟動。</span><span class="sxs-lookup"><span data-stu-id="3c1de-126">The contents are ready to run, enabling the fastest time from `Docker run` to app startup.</span></span> <span data-ttu-id="3c1de-127">在 Docker 模型中，不需要動態程式碼編譯。</span><span class="sxs-lookup"><span data-stu-id="3c1de-127">Dynamic code compilation isn't needed in the Docker model.</span></span>
+   <span data-ttu-id="d5a83-122">範例會使用此映像來執行應用程式。</span><span class="sxs-lookup"><span data-stu-id="d5a83-122">The sample uses this image for running the app.</span></span> <span data-ttu-id="d5a83-123">此映像包含 ASP.NET Core 執行階段和程式庫，並會進行最佳化，以在生產環境中執行應用程式。</span><span class="sxs-lookup"><span data-stu-id="d5a83-123">The image contains the ASP.NET Core runtime and libraries and is optimized for running apps in production.</span></span> <span data-ttu-id="d5a83-124">專為部署和應用程式啟動速度而設計的映像相對較小，因此，已將從 Docker 登錄到 Docker 主機的網路效能最佳化。</span><span class="sxs-lookup"><span data-stu-id="d5a83-124">Designed for speed of deployment and app startup, the image is relatively small, so network performance from Docker Registry to Docker host is optimized.</span></span> <span data-ttu-id="d5a83-125">只會將執行應用程式所需的程式庫和內容複製到容器中。</span><span class="sxs-lookup"><span data-stu-id="d5a83-125">Only the binaries and content needed to run an app are copied to the container.</span></span> <span data-ttu-id="d5a83-126">內容已準備好執行，可用最短的時間從 `Docker run` 到應用程式啟動。</span><span class="sxs-lookup"><span data-stu-id="d5a83-126">The contents are ready to run, enabling the fastest time from `Docker run` to app startup.</span></span> <span data-ttu-id="d5a83-127">在 Docker 模型中，不需要動態程式碼編譯。</span><span class="sxs-lookup"><span data-stu-id="d5a83-127">Dynamic code compilation isn't needed in the Docker model.</span></span>
 
-## <a name="prerequisites"></a><span data-ttu-id="3c1de-128">Prerequisites</span><span class="sxs-lookup"><span data-stu-id="3c1de-128">Prerequisites</span></span>
+## <a name="prerequisites"></a><span data-ttu-id="d5a83-128">必要條件</span><span class="sxs-lookup"><span data-stu-id="d5a83-128">Prerequisites</span></span>
 ::: moniker range="< aspnetcore-3.0"
 
-* [<span data-ttu-id="3c1de-129">.NET Core 2.2 SDK</span><span class="sxs-lookup"><span data-stu-id="3c1de-129">.NET Core 2.2 SDK</span></span>](https://dotnet.microsoft.com/download/dotnet-core)
+* [<span data-ttu-id="d5a83-129">.NET Core 2.2 SDK</span><span class="sxs-lookup"><span data-stu-id="d5a83-129">.NET Core 2.2 SDK</span></span>](https://dotnet.microsoft.com/download/dotnet-core)
 ::: moniker-end
 
 ::: moniker range=">= aspnetcore-3.0"
 
-* <span data-ttu-id="3c1de-130">[.NET Core SDK 3.0](https://dotnet.microsoft.com/download) \(英文\)</span><span class="sxs-lookup"><span data-stu-id="3c1de-130">[.NET Core SDK 3.0](https://dotnet.microsoft.com/download)</span></span>
+* <span data-ttu-id="d5a83-130">[.NET Core SDK 3.0](https://dotnet.microsoft.com/download) \(英文\)</span><span class="sxs-lookup"><span data-stu-id="d5a83-130">[.NET Core SDK 3.0](https://dotnet.microsoft.com/download)</span></span>
 
 ::: moniker-end
 
-* <span data-ttu-id="3c1de-131">Docker 用戶端 18.03 或更新版本</span><span class="sxs-lookup"><span data-stu-id="3c1de-131">Docker client 18.03 or later</span></span>
+* <span data-ttu-id="d5a83-131">Docker 用戶端 18.03 或更新版本</span><span class="sxs-lookup"><span data-stu-id="d5a83-131">Docker client 18.03 or later</span></span>
 
-  * <span data-ttu-id="3c1de-132">Linux 散發套件</span><span class="sxs-lookup"><span data-stu-id="3c1de-132">Linux distributions</span></span>
-    * [<span data-ttu-id="3c1de-133">CentOS</span><span class="sxs-lookup"><span data-stu-id="3c1de-133">CentOS</span></span>](https://docs.docker.com/install/linux/docker-ce/centos/)
-    * [<span data-ttu-id="3c1de-134">Debian</span><span class="sxs-lookup"><span data-stu-id="3c1de-134">Debian</span></span>](https://docs.docker.com/install/linux/docker-ce/debian/)
-    * [<span data-ttu-id="3c1de-135">Fedora</span><span class="sxs-lookup"><span data-stu-id="3c1de-135">Fedora</span></span>](https://docs.docker.com/install/linux/docker-ce/fedora/)
-    * [<span data-ttu-id="3c1de-136">Ubuntu</span><span class="sxs-lookup"><span data-stu-id="3c1de-136">Ubuntu</span></span>](https://docs.docker.com/install/linux/docker-ce/ubuntu/)
-  * [<span data-ttu-id="3c1de-137">macOS</span><span class="sxs-lookup"><span data-stu-id="3c1de-137">macOS</span></span>](https://docs.docker.com/docker-for-mac/install/)
-  * [<span data-ttu-id="3c1de-138">Windows</span><span class="sxs-lookup"><span data-stu-id="3c1de-138">Windows</span></span>](https://docs.docker.com/docker-for-windows/install/)
+  * <span data-ttu-id="d5a83-132">Linux 散發套件</span><span class="sxs-lookup"><span data-stu-id="d5a83-132">Linux distributions</span></span>
+    * [<span data-ttu-id="d5a83-133">CentOS</span><span class="sxs-lookup"><span data-stu-id="d5a83-133">CentOS</span></span>](https://docs.docker.com/install/linux/docker-ce/centos/)
+    * [<span data-ttu-id="d5a83-134">Debian</span><span class="sxs-lookup"><span data-stu-id="d5a83-134">Debian</span></span>](https://docs.docker.com/install/linux/docker-ce/debian/)
+    * [<span data-ttu-id="d5a83-135">Fedora</span><span class="sxs-lookup"><span data-stu-id="d5a83-135">Fedora</span></span>](https://docs.docker.com/install/linux/docker-ce/fedora/)
+    * [<span data-ttu-id="d5a83-136">Ubuntu</span><span class="sxs-lookup"><span data-stu-id="d5a83-136">Ubuntu</span></span>](https://docs.docker.com/install/linux/docker-ce/ubuntu/)
+  * [<span data-ttu-id="d5a83-137">macOS</span><span class="sxs-lookup"><span data-stu-id="d5a83-137">macOS</span></span>](https://docs.docker.com/docker-for-mac/install/)
+  * [<span data-ttu-id="d5a83-138">Windows</span><span class="sxs-lookup"><span data-stu-id="d5a83-138">Windows</span></span>](https://docs.docker.com/docker-for-windows/install/)
 
-* [<span data-ttu-id="3c1de-139">Git</span><span class="sxs-lookup"><span data-stu-id="3c1de-139">Git</span></span>](https://git-scm.com/download)
+* [<span data-ttu-id="d5a83-139">Git</span><span class="sxs-lookup"><span data-stu-id="d5a83-139">Git</span></span>](https://git-scm.com/download)
 
-## <a name="download-the-sample-app"></a><span data-ttu-id="3c1de-140">下載範例應用程式</span><span class="sxs-lookup"><span data-stu-id="3c1de-140">Download the sample app</span></span>
+## <a name="download-the-sample-app"></a><span data-ttu-id="d5a83-140">下載範例應用程式</span><span class="sxs-lookup"><span data-stu-id="d5a83-140">Download the sample app</span></span>
 
-* <span data-ttu-id="3c1de-141">藉由複製 [.NET Core Docker 存放庫](https://github.com/dotnet/dotnet-docker) \(英文\) 來下載範例：</span><span class="sxs-lookup"><span data-stu-id="3c1de-141">Download the sample by cloning the [.NET Core Docker repository](https://github.com/dotnet/dotnet-docker):</span></span> 
+* <span data-ttu-id="d5a83-141">藉由複製 [.NET Core Docker 存放庫](https://github.com/dotnet/dotnet-docker) \(英文\) 來下載範例：</span><span class="sxs-lookup"><span data-stu-id="d5a83-141">Download the sample by cloning the [.NET Core Docker repository](https://github.com/dotnet/dotnet-docker):</span></span> 
 
   ```console
   git clone https://github.com/dotnet/dotnet-docker
   ```
 
-## <a name="run-the-app-locally"></a><span data-ttu-id="3c1de-142">在本機執行應用程式</span><span class="sxs-lookup"><span data-stu-id="3c1de-142">Run the app locally</span></span>
+## <a name="run-the-app-locally"></a><span data-ttu-id="d5a83-142">在本機執行應用程式</span><span class="sxs-lookup"><span data-stu-id="d5a83-142">Run the app locally</span></span>
 
-* <span data-ttu-id="3c1de-143">瀏覽至 *dotnet-docker/samples/aspnetapp/aspnetapp* 中的專案資料夾。</span><span class="sxs-lookup"><span data-stu-id="3c1de-143">Navigate to the project folder at *dotnet-docker/samples/aspnetapp/aspnetapp*.</span></span>
+* <span data-ttu-id="d5a83-143">瀏覽至 *dotnet-docker/samples/aspnetapp/aspnetapp* 中的專案資料夾。</span><span class="sxs-lookup"><span data-stu-id="d5a83-143">Navigate to the project folder at *dotnet-docker/samples/aspnetapp/aspnetapp*.</span></span>
 
-* <span data-ttu-id="3c1de-144">執行下列命令，在本機建置並執行應用程式：</span><span class="sxs-lookup"><span data-stu-id="3c1de-144">Run the following command to build and run the app locally:</span></span>
+* <span data-ttu-id="d5a83-144">執行下列命令，在本機建置並執行應用程式：</span><span class="sxs-lookup"><span data-stu-id="d5a83-144">Run the following command to build and run the app locally:</span></span>
 
   ```dotnetcli
   dotnet run
   ```
 
-* <span data-ttu-id="3c1de-145">在瀏覽器中移至 `http://localhost:5000` 以測試應用程式。</span><span class="sxs-lookup"><span data-stu-id="3c1de-145">Go to `http://localhost:5000` in a browser to test the app.</span></span>
+* <span data-ttu-id="d5a83-145">在瀏覽器中移至 `http://localhost:5000` 以測試應用程式。</span><span class="sxs-lookup"><span data-stu-id="d5a83-145">Go to `http://localhost:5000` in a browser to test the app.</span></span>
 
-* <span data-ttu-id="3c1de-146">在命令提示字元中按 Ctrl + C 以停止應用程式。</span><span class="sxs-lookup"><span data-stu-id="3c1de-146">Press Ctrl+C at the command prompt to stop the app.</span></span>
+* <span data-ttu-id="d5a83-146">在命令提示字元中按 Ctrl + C 以停止應用程式。</span><span class="sxs-lookup"><span data-stu-id="d5a83-146">Press Ctrl+C at the command prompt to stop the app.</span></span>
 
-## <a name="run-in-a-linux-container"></a><span data-ttu-id="3c1de-147">在 Linux 容器中執行</span><span class="sxs-lookup"><span data-stu-id="3c1de-147">Run in a Linux container</span></span>
+## <a name="run-in-a-linux-container"></a><span data-ttu-id="d5a83-147">在 Linux 容器中執行</span><span class="sxs-lookup"><span data-stu-id="d5a83-147">Run in a Linux container</span></span>
 
-* <span data-ttu-id="3c1de-148">在 Docker 用戶端中，切換至 Linux 容器。</span><span class="sxs-lookup"><span data-stu-id="3c1de-148">In the Docker client, switch to Linux containers.</span></span>
+* <span data-ttu-id="d5a83-148">在 Docker 用戶端中， [切換至 Linux 容器](https://docs.docker.com/docker-for-windows/#switch-between-windows-and-linux-containers)。</span><span class="sxs-lookup"><span data-stu-id="d5a83-148">In the Docker client, [switch to Linux containers](https://docs.docker.com/docker-for-windows/#switch-between-windows-and-linux-containers).</span></span>
 
-* <span data-ttu-id="3c1de-149">瀏覽至 *dotnet-docker/samples/aspnetapp* 中的 Dockerfile 資料夾。</span><span class="sxs-lookup"><span data-stu-id="3c1de-149">Navigate to the Dockerfile folder at *dotnet-docker/samples/aspnetapp*.</span></span>
+* <span data-ttu-id="d5a83-149">瀏覽至 *dotnet-docker/samples/aspnetapp* 中的 Dockerfile 資料夾。</span><span class="sxs-lookup"><span data-stu-id="d5a83-149">Navigate to the Dockerfile folder at *dotnet-docker/samples/aspnetapp*.</span></span>
 
-* <span data-ttu-id="3c1de-150">執行下列命令，在 Docker 中建置並執行範例：</span><span class="sxs-lookup"><span data-stu-id="3c1de-150">Run the following commands to build and run the sample in Docker:</span></span>
+* <span data-ttu-id="d5a83-150">執行下列命令，在 Docker 中建置並執行範例：</span><span class="sxs-lookup"><span data-stu-id="d5a83-150">Run the following commands to build and run the sample in Docker:</span></span>
 
   ```console
   docker build -t aspnetapp .
   docker run -it --rm -p 5000:80 --name aspnetcore_sample aspnetapp
   ```
 
-  <span data-ttu-id="3c1de-151">`build` 命令引數：</span><span class="sxs-lookup"><span data-stu-id="3c1de-151">The `build` command arguments:</span></span>
-  * <span data-ttu-id="3c1de-152">將映像命名為 aspnetapp。</span><span class="sxs-lookup"><span data-stu-id="3c1de-152">Name the image aspnetapp.</span></span>
-  * <span data-ttu-id="3c1de-153">在目前的資料夾 (結束期間) 中尋找 Dockerfile。</span><span class="sxs-lookup"><span data-stu-id="3c1de-153">Look for the Dockerfile in the current folder (the period at the end).</span></span>
+  <span data-ttu-id="d5a83-151">`build` 命令引數：</span><span class="sxs-lookup"><span data-stu-id="d5a83-151">The `build` command arguments:</span></span>
+  * <span data-ttu-id="d5a83-152">將映像命名為 aspnetapp。</span><span class="sxs-lookup"><span data-stu-id="d5a83-152">Name the image aspnetapp.</span></span>
+  * <span data-ttu-id="d5a83-153">在目前的資料夾 (結束期間) 中尋找 Dockerfile。</span><span class="sxs-lookup"><span data-stu-id="d5a83-153">Look for the Dockerfile in the current folder (the period at the end).</span></span>
 
-  <span data-ttu-id="3c1de-154">run 命令引數：</span><span class="sxs-lookup"><span data-stu-id="3c1de-154">The run command arguments:</span></span>
-  * <span data-ttu-id="3c1de-155">配置虛擬 TTY，即使未連接，還是要使其保持開啟</span><span class="sxs-lookup"><span data-stu-id="3c1de-155">Allocate a pseudo-TTY and keep it open even if not attached.</span></span> <span data-ttu-id="3c1de-156">(與 `--interactive --tty` 的效果相同)。</span><span class="sxs-lookup"><span data-stu-id="3c1de-156">(Same effect as `--interactive --tty`.)</span></span>
-  * <span data-ttu-id="3c1de-157">結束時自動移除容器。</span><span class="sxs-lookup"><span data-stu-id="3c1de-157">Automatically remove the container when it exits.</span></span>
-  * <span data-ttu-id="3c1de-158">將本機電腦上的連接埠 5000 對應至容器中的連接埠 80。</span><span class="sxs-lookup"><span data-stu-id="3c1de-158">Map port 5000 on the local machine to port 80 in the container.</span></span>
-  * <span data-ttu-id="3c1de-159">將容器命名為 aspnetcore_sample。</span><span class="sxs-lookup"><span data-stu-id="3c1de-159">Name the container aspnetcore_sample.</span></span>
-  * <span data-ttu-id="3c1de-160">指定 aspnetapp 映像。</span><span class="sxs-lookup"><span data-stu-id="3c1de-160">Specify the aspnetapp image.</span></span>
+  <span data-ttu-id="d5a83-154">run 命令引數：</span><span class="sxs-lookup"><span data-stu-id="d5a83-154">The run command arguments:</span></span>
+  * <span data-ttu-id="d5a83-155">配置虛擬 TTY，即使未連接，還是要使其保持開啟</span><span class="sxs-lookup"><span data-stu-id="d5a83-155">Allocate a pseudo-TTY and keep it open even if not attached.</span></span> <span data-ttu-id="d5a83-156">(與 `--interactive --tty` 的效果相同)。</span><span class="sxs-lookup"><span data-stu-id="d5a83-156">(Same effect as `--interactive --tty`.)</span></span>
+  * <span data-ttu-id="d5a83-157">結束時自動移除容器。</span><span class="sxs-lookup"><span data-stu-id="d5a83-157">Automatically remove the container when it exits.</span></span>
+  * <span data-ttu-id="d5a83-158">將本機電腦上的連接埠 5000 對應至容器中的連接埠 80。</span><span class="sxs-lookup"><span data-stu-id="d5a83-158">Map port 5000 on the local machine to port 80 in the container.</span></span>
+  * <span data-ttu-id="d5a83-159">將容器命名為 aspnetcore_sample。</span><span class="sxs-lookup"><span data-stu-id="d5a83-159">Name the container aspnetcore_sample.</span></span>
+  * <span data-ttu-id="d5a83-160">指定 aspnetapp 映像。</span><span class="sxs-lookup"><span data-stu-id="d5a83-160">Specify the aspnetapp image.</span></span>
 
-* <span data-ttu-id="3c1de-161">在瀏覽器中移至 `http://localhost:5000` 以測試應用程式。</span><span class="sxs-lookup"><span data-stu-id="3c1de-161">Go to `http://localhost:5000` in a browser to test the app.</span></span>
+* <span data-ttu-id="d5a83-161">在瀏覽器中移至 `http://localhost:5000` 以測試應用程式。</span><span class="sxs-lookup"><span data-stu-id="d5a83-161">Go to `http://localhost:5000` in a browser to test the app.</span></span>
 
-## <a name="run-in-a-windows-container"></a><span data-ttu-id="3c1de-162">在 Windows 容器中執行</span><span class="sxs-lookup"><span data-stu-id="3c1de-162">Run in a Windows container</span></span>
+## <a name="run-in-a-windows-container"></a><span data-ttu-id="d5a83-162">在 Windows 容器中執行</span><span class="sxs-lookup"><span data-stu-id="d5a83-162">Run in a Windows container</span></span>
 
-* <span data-ttu-id="3c1de-163">在 Docker 用戶端中，切換至 Windows 容器。</span><span class="sxs-lookup"><span data-stu-id="3c1de-163">In the Docker client, switch to Windows containers.</span></span>
+* <span data-ttu-id="d5a83-163">在 Docker 用戶端中， [切換至 Windows 容器](https://docs.docker.com/docker-for-windows/#switch-between-windows-and-linux-containers)。</span><span class="sxs-lookup"><span data-stu-id="d5a83-163">In the Docker client, [switch to Windows containers](https://docs.docker.com/docker-for-windows/#switch-between-windows-and-linux-containers).</span></span>
 
-<span data-ttu-id="3c1de-164">瀏覽至 `dotnet-docker/samples/aspnetapp` 中的 docker 檔案資料夾。</span><span class="sxs-lookup"><span data-stu-id="3c1de-164">Navigate to the docker file folder at `dotnet-docker/samples/aspnetapp`.</span></span>
+<span data-ttu-id="d5a83-164">瀏覽至 `dotnet-docker/samples/aspnetapp` 中的 docker 檔案資料夾。</span><span class="sxs-lookup"><span data-stu-id="d5a83-164">Navigate to the docker file folder at `dotnet-docker/samples/aspnetapp`.</span></span>
 
-* <span data-ttu-id="3c1de-165">執行下列命令，在 Docker 中建置並執行範例：</span><span class="sxs-lookup"><span data-stu-id="3c1de-165">Run the following commands to build and run the sample in Docker:</span></span>
+* <span data-ttu-id="d5a83-165">執行下列命令，在 Docker 中建置並執行範例：</span><span class="sxs-lookup"><span data-stu-id="d5a83-165">Run the following commands to build and run the sample in Docker:</span></span>
 
   ```console
   docker build -t aspnetapp .
   docker run -it --rm --name aspnetcore_sample aspnetapp
   ```
 
-* <span data-ttu-id="3c1de-166">針對 Windows 容器，您需要容器的 IP 位址 (瀏覽至 `http://localhost:5000` 將無法運作)：</span><span class="sxs-lookup"><span data-stu-id="3c1de-166">For Windows containers, you need the IP address of the container (browsing to `http://localhost:5000` won't work):</span></span>
-  * <span data-ttu-id="3c1de-167">開啟另一個命令提示字元。</span><span class="sxs-lookup"><span data-stu-id="3c1de-167">Open up another command prompt.</span></span>
-  * <span data-ttu-id="3c1de-168">執行 `docker ps` 以查看執行中的容器。</span><span class="sxs-lookup"><span data-stu-id="3c1de-168">Run `docker ps` to see the running containers.</span></span> <span data-ttu-id="3c1de-169">確認其中有 "aspnetcore_sample" 容器。</span><span class="sxs-lookup"><span data-stu-id="3c1de-169">Verify that the "aspnetcore_sample" container is there.</span></span>
-  * <span data-ttu-id="3c1de-170">執行 `docker exec aspnetcore_sample ipconfig` 來顯示容器的 IP 位址。</span><span class="sxs-lookup"><span data-stu-id="3c1de-170">Run `docker exec aspnetcore_sample ipconfig` to display the IP address of the container.</span></span> <span data-ttu-id="3c1de-171">此命令的輸出看起來就像下列範例：</span><span class="sxs-lookup"><span data-stu-id="3c1de-171">The output from the command looks like this example:</span></span>
+* <span data-ttu-id="d5a83-166">針對 Windows 容器，您需要容器的 IP 位址 (瀏覽至 `http://localhost:5000` 將無法運作)：</span><span class="sxs-lookup"><span data-stu-id="d5a83-166">For Windows containers, you need the IP address of the container (browsing to `http://localhost:5000` won't work):</span></span>
+  * <span data-ttu-id="d5a83-167">開啟另一個命令提示字元。</span><span class="sxs-lookup"><span data-stu-id="d5a83-167">Open up another command prompt.</span></span>
+  * <span data-ttu-id="d5a83-168">執行 `docker ps` 以查看執行中的容器。</span><span class="sxs-lookup"><span data-stu-id="d5a83-168">Run `docker ps` to see the running containers.</span></span> <span data-ttu-id="d5a83-169">確認其中有 "aspnetcore_sample" 容器。</span><span class="sxs-lookup"><span data-stu-id="d5a83-169">Verify that the "aspnetcore_sample" container is there.</span></span>
+  * <span data-ttu-id="d5a83-170">執行 `docker exec aspnetcore_sample ipconfig` 來顯示容器的 IP 位址。</span><span class="sxs-lookup"><span data-stu-id="d5a83-170">Run `docker exec aspnetcore_sample ipconfig` to display the IP address of the container.</span></span> <span data-ttu-id="d5a83-171">此命令的輸出看起來就像下列範例：</span><span class="sxs-lookup"><span data-stu-id="d5a83-171">The output from the command looks like this example:</span></span>
 
     ```console
     Ethernet adapter Ethernet:
@@ -151,41 +151,41 @@ ms.locfileid: "90722854"
        Default Gateway . . . . . . . . . : 172.29.240.1
     ```
 
-* <span data-ttu-id="3c1de-172">複製容器 IPv4 位址 (例如 172.29.245.43) 並貼入瀏覽器網址列，以測試應用程式。</span><span class="sxs-lookup"><span data-stu-id="3c1de-172">Copy the container IPv4 address (for example, 172.29.245.43) and paste into the browser address bar to test the app.</span></span>
+* <span data-ttu-id="d5a83-172">複製容器 IPv4 位址 (例如 172.29.245.43) 並貼入瀏覽器網址列，以測試應用程式。</span><span class="sxs-lookup"><span data-stu-id="d5a83-172">Copy the container IPv4 address (for example, 172.29.245.43) and paste into the browser address bar to test the app.</span></span>
 
-## <a name="build-and-deploy-manually"></a><span data-ttu-id="3c1de-173">手動建置並部署</span><span class="sxs-lookup"><span data-stu-id="3c1de-173">Build and deploy manually</span></span>
+## <a name="build-and-deploy-manually"></a><span data-ttu-id="d5a83-173">手動建置並部署</span><span class="sxs-lookup"><span data-stu-id="d5a83-173">Build and deploy manually</span></span>
 
-<span data-ttu-id="3c1de-174">在某些情況下，您可能想要藉由將其複製到執行階段所需的應用程式檔案，來將應用程式部署到容器。</span><span class="sxs-lookup"><span data-stu-id="3c1de-174">In some scenarios, you might want to deploy an app to a container by copying to it the application files that are needed at run time.</span></span> <span data-ttu-id="3c1de-175">本節示範如何手動部署。</span><span class="sxs-lookup"><span data-stu-id="3c1de-175">This section shows how to deploy manually.</span></span>
+<span data-ttu-id="d5a83-174">在某些情況下，您可能想要藉由將其複製到執行階段所需的應用程式檔案，來將應用程式部署到容器。</span><span class="sxs-lookup"><span data-stu-id="d5a83-174">In some scenarios, you might want to deploy an app to a container by copying to it the application files that are needed at run time.</span></span> <span data-ttu-id="d5a83-175">本節示範如何手動部署。</span><span class="sxs-lookup"><span data-stu-id="d5a83-175">This section shows how to deploy manually.</span></span>
 
-* <span data-ttu-id="3c1de-176">瀏覽至 *dotnet-docker/samples/aspnetapp/aspnetapp* 中的專案資料夾。</span><span class="sxs-lookup"><span data-stu-id="3c1de-176">Navigate to the project folder at *dotnet-docker/samples/aspnetapp/aspnetapp*.</span></span>
+* <span data-ttu-id="d5a83-176">瀏覽至 *dotnet-docker/samples/aspnetapp/aspnetapp* 中的專案資料夾。</span><span class="sxs-lookup"><span data-stu-id="d5a83-176">Navigate to the project folder at *dotnet-docker/samples/aspnetapp/aspnetapp*.</span></span>
 
-* <span data-ttu-id="3c1de-177">執行 [dotnet publish](/dotnet/core/tools/dotnet-publish) 命令：</span><span class="sxs-lookup"><span data-stu-id="3c1de-177">Run the [dotnet publish](/dotnet/core/tools/dotnet-publish) command:</span></span>
+* <span data-ttu-id="d5a83-177">執行 [dotnet publish](/dotnet/core/tools/dotnet-publish) 命令：</span><span class="sxs-lookup"><span data-stu-id="d5a83-177">Run the [dotnet publish](/dotnet/core/tools/dotnet-publish) command:</span></span>
 
   ```dotnetcli
   dotnet publish -c Release -o published
   ```
 
-  <span data-ttu-id="3c1de-178">命令引數：</span><span class="sxs-lookup"><span data-stu-id="3c1de-178">The command arguments:</span></span>
-  * <span data-ttu-id="3c1de-179">以發行模式建置應用程式 (預設值是偵錯模式)。</span><span class="sxs-lookup"><span data-stu-id="3c1de-179">Build the application in release mode (the default is debug mode).</span></span>
-  * <span data-ttu-id="3c1de-180">在 *published* 資料夾中建立檔案。</span><span class="sxs-lookup"><span data-stu-id="3c1de-180">Create the files in the *published* folder.</span></span>
+  <span data-ttu-id="d5a83-178">命令引數：</span><span class="sxs-lookup"><span data-stu-id="d5a83-178">The command arguments:</span></span>
+  * <span data-ttu-id="d5a83-179">以發行模式建置應用程式 (預設值是偵錯模式)。</span><span class="sxs-lookup"><span data-stu-id="d5a83-179">Build the application in release mode (the default is debug mode).</span></span>
+  * <span data-ttu-id="d5a83-180">在 *published* 資料夾中建立檔案。</span><span class="sxs-lookup"><span data-stu-id="d5a83-180">Create the files in the *published* folder.</span></span>
 
-* <span data-ttu-id="3c1de-181">執行應用程式。</span><span class="sxs-lookup"><span data-stu-id="3c1de-181">Run the application.</span></span>
+* <span data-ttu-id="d5a83-181">執行應用程式。</span><span class="sxs-lookup"><span data-stu-id="d5a83-181">Run the application.</span></span>
 
-  * <span data-ttu-id="3c1de-182">Windows：</span><span class="sxs-lookup"><span data-stu-id="3c1de-182">Windows:</span></span>
+  * <span data-ttu-id="d5a83-182">Windows：</span><span class="sxs-lookup"><span data-stu-id="d5a83-182">Windows:</span></span>
 
     ```dotnetcli
     dotnet published\aspnetapp.dll
     ```
 
-  * <span data-ttu-id="3c1de-183">Linux：</span><span class="sxs-lookup"><span data-stu-id="3c1de-183">Linux:</span></span>
+  * <span data-ttu-id="d5a83-183">Linux：</span><span class="sxs-lookup"><span data-stu-id="d5a83-183">Linux:</span></span>
 
     ```dotnetcli
     dotnet published/aspnetapp.dll
     ```
 
-* <span data-ttu-id="3c1de-184">瀏覽至 `http://localhost:5000` 以查看首頁。</span><span class="sxs-lookup"><span data-stu-id="3c1de-184">Browse to `http://localhost:5000` to see the home page.</span></span>
+* <span data-ttu-id="d5a83-184">瀏覽至 `http://localhost:5000` 以查看首頁。</span><span class="sxs-lookup"><span data-stu-id="d5a83-184">Browse to `http://localhost:5000` to see the home page.</span></span>
 
-<span data-ttu-id="3c1de-185">若要在 Docker 容器內使用手動發行的應用程式，請建立新的 Dockerfile 並使用 `docker build .` 命令來建置容器。</span><span class="sxs-lookup"><span data-stu-id="3c1de-185">To use the manually published application within a Docker container, create a new Dockerfile and use the `docker build .` command to build the container.</span></span>
+<span data-ttu-id="d5a83-185">若要在 Docker 容器內使用手動發行的應用程式，請建立新的 Dockerfile 並使用 `docker build .` 命令來建置容器。</span><span class="sxs-lookup"><span data-stu-id="d5a83-185">To use the manually published application within a Docker container, create a new Dockerfile and use the `docker build .` command to build the container.</span></span>
 
 ::: moniker range="< aspnetcore-3.0"
 
@@ -196,9 +196,9 @@ COPY published/aspnetapp.dll ./
 ENTRYPOINT ["dotnet", "aspnetapp.dll"]
 ```
 
-### <a name="the-dockerfile"></a><span data-ttu-id="3c1de-186">Dockerfile</span><span class="sxs-lookup"><span data-stu-id="3c1de-186">The Dockerfile</span></span>
+### <a name="the-dockerfile"></a><span data-ttu-id="d5a83-186">Dockerfile</span><span class="sxs-lookup"><span data-stu-id="d5a83-186">The Dockerfile</span></span>
 
-<span data-ttu-id="3c1de-187">以下是您稍早執行的命令所使用的 *Dockerfile* `docker build` 。</span><span class="sxs-lookup"><span data-stu-id="3c1de-187">Here's the *Dockerfile* used by the `docker build` command you ran earlier.</span></span>  <span data-ttu-id="3c1de-188">它會以您在本節所做的相同方式，使用 `dotnet publish` 進行建置及部署。</span><span class="sxs-lookup"><span data-stu-id="3c1de-188">It uses `dotnet publish` the same way you did in this section to build and deploy.</span></span>  
+<span data-ttu-id="d5a83-187">以下是您稍早執行的命令所使用的 *Dockerfile* `docker build` 。</span><span class="sxs-lookup"><span data-stu-id="d5a83-187">Here's the *Dockerfile* used by the `docker build` command you ran earlier.</span></span>  <span data-ttu-id="d5a83-188">它會以您在本節所做的相同方式，使用 `dotnet publish` 進行建置及部署。</span><span class="sxs-lookup"><span data-stu-id="d5a83-188">It uses `dotnet publish` the same way you did in this section to build and deploy.</span></span>  
 
 ```dockerfile
 FROM mcr.microsoft.com/dotnet/core/sdk:2.2 AS build
@@ -231,9 +231,9 @@ COPY published/aspnetapp.dll ./
 ENTRYPOINT ["dotnet", "aspnetapp.dll"]
 ```
 
-### <a name="the-dockerfile"></a><span data-ttu-id="3c1de-189">Dockerfile</span><span class="sxs-lookup"><span data-stu-id="3c1de-189">The Dockerfile</span></span>
+### <a name="the-dockerfile"></a><span data-ttu-id="d5a83-189">Dockerfile</span><span class="sxs-lookup"><span data-stu-id="d5a83-189">The Dockerfile</span></span>
 
-<span data-ttu-id="3c1de-190">以下是您稍早執行的命令所使用的 *Dockerfile* `docker build` 。</span><span class="sxs-lookup"><span data-stu-id="3c1de-190">Here's the *Dockerfile* used by the `docker build` command you ran earlier.</span></span>  <span data-ttu-id="3c1de-191">它會以您在本節所做的相同方式，使用 `dotnet publish` 進行建置及部署。</span><span class="sxs-lookup"><span data-stu-id="3c1de-191">It uses `dotnet publish` the same way you did in this section to build and deploy.</span></span>  
+<span data-ttu-id="d5a83-190">以下是您稍早執行的命令所使用的 *Dockerfile* `docker build` 。</span><span class="sxs-lookup"><span data-stu-id="d5a83-190">Here's the *Dockerfile* used by the `docker build` command you ran earlier.</span></span>  <span data-ttu-id="d5a83-191">它會以您在本節所做的相同方式，使用 `dotnet publish` 進行建置及部署。</span><span class="sxs-lookup"><span data-stu-id="d5a83-191">It uses `dotnet publish` the same way you did in this section to build and deploy.</span></span>  
 
 ```dockerfile
 FROM mcr.microsoft.com/dotnet/core/sdk:3.0 AS build
@@ -255,23 +255,23 @@ COPY --from=build /app/aspnetapp/out ./
 ENTRYPOINT ["dotnet", "aspnetapp.dll"]
 ```
 
-<span data-ttu-id="3c1de-192">如上述 Dockerfile 所述，檔案 `*.csproj` 會複製並還原為不同的 *層*級。</span><span class="sxs-lookup"><span data-stu-id="3c1de-192">As noted in the preceding Dockerfile, the `*.csproj` files are copied and restored as distinct *layers*.</span></span> <span data-ttu-id="3c1de-193">當 `docker build` 命令建立映射時，它會使用內建的快取。</span><span class="sxs-lookup"><span data-stu-id="3c1de-193">When the `docker build` command builds an image, it uses a built-in cache.</span></span> <span data-ttu-id="3c1de-194">如果 `*.csproj` 自 `docker build` 命令上次執行之後，檔案尚未變更，則 `dotnet restore` 不需要再次執行命令。</span><span class="sxs-lookup"><span data-stu-id="3c1de-194">If the `*.csproj` files haven't changed since the `docker build` command last ran, the `dotnet restore` command doesn't need to run again.</span></span> <span data-ttu-id="3c1de-195">相反地，會重複使用對應層的內建快取 `dotnet restore` 。</span><span class="sxs-lookup"><span data-stu-id="3c1de-195">Instead, the built-in cache for the corresponding `dotnet restore` layer is reused.</span></span> <span data-ttu-id="3c1de-196">如需詳細資訊，請參閱 [撰寫 dockerfile 的最佳做法](https://docs.docker.com/develop/develop-images/dockerfile_best-practices/#leverage-build-cache)。</span><span class="sxs-lookup"><span data-stu-id="3c1de-196">For more information, see [Best practices for writing Dockerfiles](https://docs.docker.com/develop/develop-images/dockerfile_best-practices/#leverage-build-cache).</span></span>
+<span data-ttu-id="d5a83-192">如上述 Dockerfile 所述，檔案 `*.csproj` 會複製並還原為不同的 *層*級。</span><span class="sxs-lookup"><span data-stu-id="d5a83-192">As noted in the preceding Dockerfile, the `*.csproj` files are copied and restored as distinct *layers*.</span></span> <span data-ttu-id="d5a83-193">當 `docker build` 命令建立映射時，它會使用內建的快取。</span><span class="sxs-lookup"><span data-stu-id="d5a83-193">When the `docker build` command builds an image, it uses a built-in cache.</span></span> <span data-ttu-id="d5a83-194">如果 `*.csproj` 自 `docker build` 命令上次執行之後，檔案尚未變更，則 `dotnet restore` 不需要再次執行命令。</span><span class="sxs-lookup"><span data-stu-id="d5a83-194">If the `*.csproj` files haven't changed since the `docker build` command last ran, the `dotnet restore` command doesn't need to run again.</span></span> <span data-ttu-id="d5a83-195">相反地，會重複使用對應層的內建快取 `dotnet restore` 。</span><span class="sxs-lookup"><span data-stu-id="d5a83-195">Instead, the built-in cache for the corresponding `dotnet restore` layer is reused.</span></span> <span data-ttu-id="d5a83-196">如需詳細資訊，請參閱 [撰寫 dockerfile 的最佳做法](https://docs.docker.com/develop/develop-images/dockerfile_best-practices/#leverage-build-cache)。</span><span class="sxs-lookup"><span data-stu-id="d5a83-196">For more information, see [Best practices for writing Dockerfiles](https://docs.docker.com/develop/develop-images/dockerfile_best-practices/#leverage-build-cache).</span></span>
 
 ::: moniker-end
 
-## <a name="additional-resources"></a><span data-ttu-id="3c1de-197">其他資源</span><span class="sxs-lookup"><span data-stu-id="3c1de-197">Additional resources</span></span>
+## <a name="additional-resources"></a><span data-ttu-id="d5a83-197">其他資源</span><span class="sxs-lookup"><span data-stu-id="d5a83-197">Additional resources</span></span>
 
-* <span data-ttu-id="3c1de-198">[Docker build 命令列](https://docs.docker.com/engine/reference/commandline/build) \(英文\)</span><span class="sxs-lookup"><span data-stu-id="3c1de-198">[Docker build command](https://docs.docker.com/engine/reference/commandline/build)</span></span>
-* <span data-ttu-id="3c1de-199">[Docker run 命令列](https://docs.docker.com/engine/reference/commandline/run) \(英文\)</span><span class="sxs-lookup"><span data-stu-id="3c1de-199">[Docker run command](https://docs.docker.com/engine/reference/commandline/run)</span></span>
-* <span data-ttu-id="3c1de-200">[ASP.NET Core Docker 範例](https://github.com/dotnet/dotnet-docker) \(英文\) (本教學課程中所使用的範例。)</span><span class="sxs-lookup"><span data-stu-id="3c1de-200">[ASP.NET Core Docker sample](https://github.com/dotnet/dotnet-docker) (The one used in this tutorial.)</span></span>
-* [<span data-ttu-id="3c1de-201">設定 ASP.NET Core 以處理 Proxy 伺服器和負載平衡器</span><span class="sxs-lookup"><span data-stu-id="3c1de-201">Configure ASP.NET Core to work with proxy servers and load balancers</span></span>](../proxy-load-balancer.md)
-* [<span data-ttu-id="3c1de-202">使用 Visual Studio Docker 工具</span><span class="sxs-lookup"><span data-stu-id="3c1de-202">Working with Visual Studio Docker Tools</span></span>](./visual-studio-tools-for-docker.md)
-* [<span data-ttu-id="3c1de-203">使用 Visual Studio Code 偵錯</span><span class="sxs-lookup"><span data-stu-id="3c1de-203">Debugging with Visual Studio Code</span></span>](https://code.visualstudio.com/docs/nodejs/debugging-recipes#_debug-nodejs-in-docker-containers)
-* [<span data-ttu-id="3c1de-204">使用 Docker 和小型容器的 GC</span><span class="sxs-lookup"><span data-stu-id="3c1de-204">GC using Docker and small containers</span></span>](xref:performance/memory#sc)
+* <span data-ttu-id="d5a83-198">[Docker build 命令列](https://docs.docker.com/engine/reference/commandline/build) \(英文\)</span><span class="sxs-lookup"><span data-stu-id="d5a83-198">[Docker build command](https://docs.docker.com/engine/reference/commandline/build)</span></span>
+* <span data-ttu-id="d5a83-199">[Docker run 命令列](https://docs.docker.com/engine/reference/commandline/run) \(英文\)</span><span class="sxs-lookup"><span data-stu-id="d5a83-199">[Docker run command](https://docs.docker.com/engine/reference/commandline/run)</span></span>
+* <span data-ttu-id="d5a83-200">[ASP.NET Core Docker 範例](https://github.com/dotnet/dotnet-docker) \(英文\) (本教學課程中所使用的範例。)</span><span class="sxs-lookup"><span data-stu-id="d5a83-200">[ASP.NET Core Docker sample](https://github.com/dotnet/dotnet-docker) (The one used in this tutorial.)</span></span>
+* [<span data-ttu-id="d5a83-201">設定 ASP.NET Core 以處理 Proxy 伺服器和負載平衡器</span><span class="sxs-lookup"><span data-stu-id="d5a83-201">Configure ASP.NET Core to work with proxy servers and load balancers</span></span>](../proxy-load-balancer.md)
+* [<span data-ttu-id="d5a83-202">使用 Visual Studio Docker 工具</span><span class="sxs-lookup"><span data-stu-id="d5a83-202">Working with Visual Studio Docker Tools</span></span>](./visual-studio-tools-for-docker.md)
+* [<span data-ttu-id="d5a83-203">使用 Visual Studio Code 偵錯</span><span class="sxs-lookup"><span data-stu-id="d5a83-203">Debugging with Visual Studio Code</span></span>](https://code.visualstudio.com/docs/nodejs/debugging-recipes#_debug-nodejs-in-docker-containers)
+* [<span data-ttu-id="d5a83-204">使用 Docker 和小型容器的 GC</span><span class="sxs-lookup"><span data-stu-id="d5a83-204">GC using Docker and small containers</span></span>](xref:performance/memory#sc)
 
-## <a name="next-steps"></a><span data-ttu-id="3c1de-205">後續步驟</span><span class="sxs-lookup"><span data-stu-id="3c1de-205">Next steps</span></span>
+## <a name="next-steps"></a><span data-ttu-id="d5a83-205">後續步驟</span><span class="sxs-lookup"><span data-stu-id="d5a83-205">Next steps</span></span>
 
-<span data-ttu-id="3c1de-206">包含範例應用程式的 Git 存放庫也會包含文件。</span><span class="sxs-lookup"><span data-stu-id="3c1de-206">The Git repository that contains the sample app also includes documentation.</span></span> <span data-ttu-id="3c1de-207">如需存放庫中可用資源的概觀，請參閱[讀我檔案](https://github.com/dotnet/dotnet-docker/blob/master/samples/aspnetapp/README.md) \(英文\)。</span><span class="sxs-lookup"><span data-stu-id="3c1de-207">For an overview of the resources available in the repository, see [the README file](https://github.com/dotnet/dotnet-docker/blob/master/samples/aspnetapp/README.md).</span></span> <span data-ttu-id="3c1de-208">特別是了解如何實作 HTTPS：</span><span class="sxs-lookup"><span data-stu-id="3c1de-208">In particular, learn how to implement HTTPS:</span></span>
+<span data-ttu-id="d5a83-206">包含範例應用程式的 Git 存放庫也會包含文件。</span><span class="sxs-lookup"><span data-stu-id="d5a83-206">The Git repository that contains the sample app also includes documentation.</span></span> <span data-ttu-id="d5a83-207">如需存放庫中可用資源的概觀，請參閱[讀我檔案](https://github.com/dotnet/dotnet-docker/blob/master/samples/aspnetapp/README.md) \(英文\)。</span><span class="sxs-lookup"><span data-stu-id="d5a83-207">For an overview of the resources available in the repository, see [the README file](https://github.com/dotnet/dotnet-docker/blob/master/samples/aspnetapp/README.md).</span></span> <span data-ttu-id="d5a83-208">特別是了解如何實作 HTTPS：</span><span class="sxs-lookup"><span data-stu-id="d5a83-208">In particular, learn how to implement HTTPS:</span></span>
 
 > [!div class="nextstepaction"]
-> [<span data-ttu-id="3c1de-209">透過 HTTPS 使用 Docker 開發 ASP.NET Core 應用程式</span><span class="sxs-lookup"><span data-stu-id="3c1de-209">Developing ASP.NET Core Applications with Docker over HTTPS</span></span>](https://github.com/dotnet/dotnet-docker/blob/master/samples/run-aspnetcore-https-development.md)
+> [<span data-ttu-id="d5a83-209">透過 HTTPS 使用 Docker 開發 ASP.NET Core 應用程式</span><span class="sxs-lookup"><span data-stu-id="d5a83-209">Developing ASP.NET Core Applications with Docker over HTTPS</span></span>](https://github.com/dotnet/dotnet-docker/blob/master/samples/run-aspnetcore-https-development.md)

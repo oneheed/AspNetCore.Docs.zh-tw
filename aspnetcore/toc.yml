@@ -705,6 +705,9 @@
     - name: 記錄和診斷
       displayName: signalr
       uid: signalr/diagnostics
+    - name: 疑難排解
+      displayName: signalr
+      uid: signalr/troubleshoot
     - name: 規格
       displayName: 'signalr, specs'
       items:

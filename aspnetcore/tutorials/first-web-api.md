@@ -18,12 +18,12 @@ no-loc:
 - SignalR
 - Models
 uid: tutorials/first-web-api
-ms.openlocfilehash: 212d8a80bdc466479c34bc5fbd9c3261ca9d54c4
-ms.sourcegitcommit: 74f4a4ddbe3c2f11e2e09d05d2a979784d89d3f5
+ms.openlocfilehash: 9f67f8104eb5c21f244449ca3a4aaa96c750836d
+ms.sourcegitcommit: fad0cd264c9d07a48a8c6ba1690807e0f8728898
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 09/27/2020
-ms.locfileid: "91393908"
+ms.lasthandoff: 10/22/2020
+ms.locfileid: "92379472"
 ---
 # <a name="tutorial-create-a-web-api-with-aspnet-core"></a>教學課程：使用 ASP.NET Core 建立 web API
 
@@ -118,7 +118,7 @@ ms.locfileid: "91393908"
 
   ![macOS API 範本選取專案](first-web-api-mac/_static/api_template.png)
 
-* 在 [ **設定新的 ASP.NET Core WEB API** ] 對話方塊中，選取最新的 .net Core 3.X **目標 Framework**。 選取 [下一步]  。
+* 在 [ **設定新的 ASP.NET Core WEB API** ] 對話方塊中，選取最新的 .net Core 3.X **目標 Framework**。 選取 [下一步] 。
 
 * 針對 [專案名稱]**** 輸入 *TodoApi*，然後選取 [建立]****。
 
@@ -320,7 +320,7 @@ Swagger 可用來產生 web Api 的實用檔和說明頁面。 本教學課程�
 
   * 選取**模型類別**中的 [ **TodoItem (TodoApi] Models) 。**
   * 選取**資料內容類別**中的**TodoCoNtext (TodoApi Models) 。**
-  * 選取 [新增]。
+  * 選取 [新增]  。
 
 # <a name="visual-studio-code--visual-studio-for-mac"></a>[Visual Studio Code / Visual Studio for Mac](#tab/visual-studio-code+visual-studio-mac)
 
@@ -520,7 +520,7 @@ dotnet aspnet-codegenerator controller -name TodoItemsController -async -api -m 
 * 設定要刪除之物件的 URI (例如 `https://localhost:5001/api/TodoItems/1`) 。
 * 選取 [傳送]。
 
-<a name="over-post"></a>
+<a name="over-post-v5"></a>
 
 ## <a name="prevent-over-posting"></a>防止過度張貼
 
@@ -644,7 +644,7 @@ DTO 可以用來：
 
   ![macOS API 範本選取專案](first-web-api-mac/_static/api_template.png)
 
-* 在 [ **設定新的 ASP.NET Core WEB API** ] 對話方塊中，選取最新的 .net Core 3.X **目標 Framework**。 選取 [下一步]  。
+* 在 [ **設定新的 ASP.NET Core WEB API** ] 對話方塊中，選取最新的 .net Core 3.X **目標 Framework**。 選取 [下一步] 。
 
 * 針對 [專案名稱]**** 輸入 *TodoApi*，然後選取 [建立]****。
 
@@ -811,7 +811,7 @@ DTO 可以用來：
 
   * 選取**模型類別**中的 [ **TodoItem (TodoApi] Models) 。**
   * 選取**資料內容類別**中的**TodoCoNtext (TodoApi Models) 。**
-  * 選取 [新增]。
+  * 選取 [新增]  。
 
 # <a name="visual-studio-code--visual-studio-for-mac"></a>[Visual Studio Code / Visual Studio for Mac](#tab/visual-studio-code+visual-studio-mac)
 
@@ -1008,6 +1008,7 @@ dotnet aspnet-codegenerator controller -name TodoItemsController -async -api -m 
 * 選取 [傳送]。
 
 <a name="over-post"></a>
+<a name="over-post-v3"></a>
 
 ## <a name="prevent-over-posting"></a>防止過度張貼
 
@@ -1126,7 +1127,7 @@ DTO 可以用來：
 
 * 在8.6 版之前的 Visual Studio for Mac 中，選取 [ **.net Core**  >  **應用程式**  >  **API**  >  **]**。 在8.6 版或更新版本中，選取 [ **Web] 和 [主控台**  >  **應用程式**  >  **API**  >  **]**。
   
-* 在 [ **設定新的 ASP.NET Core WEB API** ] 對話方塊中，選取最新的 .net Core 2.X **目標 Framework**。 選取 [下一步]  。
+* 在 [ **設定新的 ASP.NET Core WEB API** ] 對話方塊中，選取最新的 .net Core 2.X **目標 Framework**。 選取 [下一步] 。
 
 * 針對 [專案名稱]**** 輸入 *TodoApi*，然後選取 [建立]****。
 
@@ -1389,7 +1390,7 @@ DTO 可以用來：
   ![Postman 主控台的 [標頭] 索引標籤](first-web-api/_static/pmc2.png)
 
 * 將方法設定為 GET。
-* 將 URI 設定為  `https://localhost:<port>/api/TodoItems/2` 。例如，  `https://localhost:5001/api/TodoItems/2` 。
+* 將 URI 設定為 `https://localhost:<port>/api/TodoItems/2` 。 例如： `https://localhost:5001/api/TodoItems/2` 。
 * 選取 [傳送]。
 
 ## <a name="add-a-puttodoitem-method-21"></a>新增 PutTodoItem 方法2。1

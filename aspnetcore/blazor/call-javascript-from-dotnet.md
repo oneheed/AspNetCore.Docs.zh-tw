@@ -5,7 +5,7 @@ description: 瞭解如何在應用程式中叫用 .NET 方法的 JavaScript 函�
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 10/02/2020
+ms.date: 10/20/2020
 no-loc:
 - ASP.NET Core Identity
 - cookie
@@ -18,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/call-javascript-from-dotnet
-ms.openlocfilehash: 3bd881b124e00b91ab0aa9d3eb7531f10ef895f2
-ms.sourcegitcommit: b5ebaf42422205d212e3dade93fcefcf7f16db39
+ms.openlocfilehash: 60682adf8056c99689087977cade0e272ba922c9
+ms.sourcegitcommit: d84a225ec3381355c343460deed50f2fa5722f60
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 10/21/2020
-ms.locfileid: "92326501"
+ms.lasthandoff: 10/22/2020
+ms.locfileid: "92429115"
 ---
 # <a name="call-javascript-functions-from-net-methods-in-aspnet-core-no-locblazor"></a>從 ASP.NET Core 中的 .NET 方法呼叫 JavaScript 函式 Blazor
 
@@ -208,40 +208,46 @@ JavaScript 程式碼（例如上述範例中所示的程式碼）也可以從 Ja
 >
 > 如果 JS interop 變動元素的內容， `MyList` 並 Blazor 嘗試將差異套用至專案，則差異不會與 DOM 相符。
 
-至於 .NET 程式碼， <xref:Microsoft.AspNetCore.Components.ElementReference> 則是不透明的控制碼。 您 *唯一* 可以做的事 <xref:Microsoft.AspNetCore.Components.ElementReference> ，是透過 JS interop 將其傳遞至 JavaScript 程式碼。 當您這樣做時，JavaScript 端程式碼會收到 `HTMLElement` 可搭配一般 DOM api 使用的實例。
-
-例如，下列程式碼會定義可讓您在元素上設定焦點的 .NET 擴充方法：
+<xref:Microsoft.AspNetCore.Components.ElementReference>會透過 JS interop 傳遞至 JavaScript 程式碼。 JavaScript 程式碼會接收 `HTMLElement` 可搭配一般 DOM api 使用的實例。 例如，下列程式碼會定義可讓您將滑鼠點擊傳送至專案的 .NET 擴充方法：
 
 `exampleJsInterop.js`:
 
 ```javascript
-window.exampleJsFunctions = {
-  focusElement : function (element) {
-    element.focus();
+window.interopFunctions = {
+  clickElement : function (element) {
+    element.click();
   }
 }
 ```
 
-若要呼叫不會傳回值的 JavaScript 函式，請使用 <xref:Microsoft.JSInterop.JSRuntimeExtensions.InvokeVoidAsync%2A?displayProperty=nameWithType> 。 下列程式碼會藉由使用已捕捉的來呼叫上述 JavaScript 函式，將焦點放在使用者名稱輸入上 <xref:Microsoft.AspNetCore.Components.ElementReference> ：
+::: moniker range=">= aspnetcore-5.0"
 
-[!code-razor[](call-javascript-from-dotnet/samples_snapshot/component1.razor?highlight=1,3,11-12)]
+> [!NOTE]
+> [`FocusAsync`](xref:blazor/components/event-handling#focus-an-element)在 c # 程式碼中使用，將內建于架構中的專案， Blazor 並搭配專案參考使用。
+
+::: moniker-end
+
+若要呼叫不會傳回值的 JavaScript 函式，請使用 <xref:Microsoft.JSInterop.JSRuntimeExtensions.InvokeVoidAsync%2A?displayProperty=nameWithType> 。 下列程式碼會 `Click` 使用所捕捉的先前 JavaScript 函式來呼叫之前的 JavaScript 函式，以觸發用戶端事件 <xref:Microsoft.AspNetCore.Components.ElementReference> ：
+
+[!code-razor[](call-javascript-from-dotnet/samples_snapshot/component1.razor?highlight=14-15)]
 
 若要使用擴充方法，請建立可接收實例的靜態擴充方法 <xref:Microsoft.JSInterop.IJSRuntime> ：
 
 ```csharp
-public static async Task Focus(this ElementReference elementRef, IJSRuntime jsRuntime)
+public static async Task TriggerClickEvent(this ElementReference elementRef, 
+    IJSRuntime jsRuntime)
 {
     await jsRuntime.InvokeVoidAsync(
-        "exampleJsFunctions.focusElement", elementRef);
+        "interopFunctions.clickElement", elementRef);
 }
 ```
 
-`Focus`方法會直接在物件上呼叫。 下列範例假設 `Focus` 方法可從 `JsInteropClasses` 命名空間中取得：
+`clickElement`方法會直接在物件上呼叫。 下列範例假設 `TriggerClickEvent` 方法可從 `JsInteropClasses` 命名空間中取得：
 
-[!code-razor[](call-javascript-from-dotnet/samples_snapshot/component2.razor?highlight=1-4,12)]
+[!code-razor[](call-javascript-from-dotnet/samples_snapshot/component2.razor?highlight=15)]
 
 > [!IMPORTANT]
-> `username`變數只會在呈現元件之後填入。 如果將擴展 <xref:Microsoft.AspNetCore.Components.ElementReference> 傳遞至 javascript 程式碼，javascript 程式碼會收到的值 `null` 。 若要在元件完成轉譯之後操作專案參考 (設定元素的初始焦點) 使用[ `OnAfterRenderAsync` 或 `OnAfterRender` 元件生命週期方法](xref:blazor/components/lifecycle#after-component-render)。
+> `exampleButton`變數只會在呈現元件之後填入。 如果將擴展 <xref:Microsoft.AspNetCore.Components.ElementReference> 傳遞至 javascript 程式碼，javascript 程式碼會收到的值 `null` 。 若要在元件完成轉譯後操作元素參考，請使用[ `OnAfterRenderAsync` 或 `OnAfterRender` 元件生命週期方法](xref:blazor/components/lifecycle#after-component-render)。
 
 使用泛型型別並傳回值時，請使用 <xref:System.Threading.Tasks.ValueTask%601> ：
 
@@ -260,7 +266,12 @@ public static ValueTask<T> GenericMethod<T>(this ElementReference elementRef,
 
 ## <a name="reference-elements-across-components"></a>跨元件參考元素
 
-<xref:Microsoft.AspNetCore.Components.ElementReference>實例只保證在元件的方法中有效 <xref:Microsoft.AspNetCore.Components.ComponentBase.OnAfterRender%2A> (而且專案參考是 `struct`) ，因此無法在元件之間傳遞元素參考。 若要讓父元件能讓元素參考可供其他元件使用，父元件可以：
+<xref:Microsoft.AspNetCore.Components.ElementReference>無法在元件之間傳遞，因為：
+
+* 只有在轉譯元件之後（在元件的方法執行期間或之後），才能保證實例存在 <xref:Microsoft.AspNetCore.Components.ComponentBase.OnAfterRender%2A> / <xref:Microsoft.AspNetCore.Components.ComponentBase.OnAfterRenderAsync%2A> 。
+* <xref:Microsoft.AspNetCore.Components.ElementReference>是 [`struct`](/csharp/language-reference/builtin-types/struct) ，無法以[元件參數](xref:blazor/components/index#component-parameters)形式傳遞。
+
+若要讓父元件能讓元素參考可供其他元件使用，父元件可以：
 
 * 允許子元件註冊回呼。
 * 使用傳遞的元素參考，在事件期間叫用已註冊的回呼 <xref:Microsoft.AspNetCore.Components.ComponentBase.OnAfterRender%2A> 。 這種方法間接可讓子元件與父系的元素參考互動。

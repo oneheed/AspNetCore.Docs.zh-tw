@@ -5,7 +5,7 @@ description: 瞭解應用程式中元件和 DOM 元素的資料系結功能 Blaz
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 08/19/2020
+ms.date: 10/22/2020
 no-loc:
 - ASP.NET Core Identity
 - cookie
@@ -18,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/components/data-binding
-ms.openlocfilehash: 0884b0bedd9ed31b8c85790c6950c7c5d63bdf44
-ms.sourcegitcommit: e519d95d17443abafba8f712ac168347b15c8b57
+ms.openlocfilehash: 5a4d50d88ebdf606da397666bf3003232cddd955
+ms.sourcegitcommit: d84a225ec3381355c343460deed50f2fa5722f60
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 10/02/2020
-ms.locfileid: "91653902"
+ms.lasthandoff: 10/22/2020
+ms.locfileid: "92429109"
 ---
 # <a name="aspnet-core-no-locblazor-data-binding"></a>ASP.NET Core Blazor 資料系結
 
@@ -90,7 +90,7 @@ Razor 元件會透過以 [`@bind`](xref:mvc/views/razor#bind) 欄位、屬性或
 
 當使用者提供無法剖析的值給資料系結專案時，會在觸發 bind 事件時，將無法剖析的值自動還原為先前的值。
 
-請考慮下列案例：
+考慮下列案例：
 
 * 專案 `<input>` 會系結至 `int` 值為的類型 `123` ：
 
@@ -141,9 +141,15 @@ Razor 元件會透過以 [`@bind`](xref:mvc/views/razor#bind) 欄位、屬性或
 <input type="date" @bind="startDate" @bind:format="yyyy-MM-dd">
 ```
 
-## <a name="parent-to-child-binding-with-component-parameters"></a>使用元件參數的父系對子系結
+## <a name="binding-with-component-parameters"></a>使用元件參數進行系結
+
+常見的案例是將子元件中的屬性系結至其父系中的屬性。 此案例稱為 *連鎖* 系結，因為有多個層級的系結同時發生。
 
 元件參數允許父元件的系結屬性和欄位具有 `@bind-{PROPERTY OR FIELD}` 語法。
+
+連結系結無法使用 [`@bind`](xref:mvc/views/razor#bind) 子元件中的語法來執行。 必須個別指定事件處理常式和值，以支援從子元件的父系更新屬性。
+
+父元件仍會利用 [`@bind`](xref:mvc/views/razor#bind) 語法來設定子元件的資料系結。
 
 下列 `Child` 元件 (`Shared/Child.razor`) 具有 `Year` 元件參數和 `YearChanged` 回呼：
 
@@ -155,16 +161,25 @@ Razor 元件會透過以 [`@bind`](xref:mvc/views/razor#bind) 欄位、屬性或
     </div>
 </div>
 
+<button @onclick="UpdateYearFromChild">Update Year from Child</button>
+
 @code {
+    private Random r = new Random();
+
     [Parameter]
     public int Year { get; set; }
 
     [Parameter]
     public EventCallback<int> YearChanged { get; set; }
+
+    private async Task UpdateYearFromChild()
+    {
+        await YearChanged.InvokeAsync(r.Next(1950, 2021));
+    }
 }
 ```
 
-回呼 (<xref:Microsoft.AspNetCore.Components.EventCallback%601>) 必須命名為元件參數名稱，後面接著 " `Changed` " 尾碼 (`{PARAMETER NAME}Changed`) 。 在上述範例中，回呼的名稱為 `YearChanged` 。 如需 <xref:Microsoft.AspNetCore.Components.EventCallback%601> 的詳細資訊，請參閱 <xref:blazor/components/event-handling#eventcallback>。
+回呼 (<xref:Microsoft.AspNetCore.Components.EventCallback%601>) 必須命名為元件參數名稱，後面接著 " `Changed` " 尾碼 (`{PARAMETER NAME}Changed`) 。 在上述範例中，回呼的名稱為 `YearChanged` 。 <xref:Microsoft.AspNetCore.Components.EventCallback.InvokeAsync%2A?displayProperty=nameWithType> 使用提供的引數叫用與系結相關聯的委派，並分派已變更屬性的事件通知。
 
 在下列 `Parent` 元件 (`Parent.razor`) 中，欄位會系結 `year` 至 `Year` 子元件的參數：
 
@@ -198,13 +213,7 @@ Razor 元件會透過以 [`@bind`](xref:mvc/views/razor#bind) 欄位、屬性或
 <Child @bind-Year="year" @bind-Year:event="YearChanged" />
 ```
 
-## <a name="child-to-parent-binding-with-chained-bind"></a>具有連結系結的子系對父系系結
-
-常見的案例是將資料系結參數連結至元件輸出中的頁面元素。 此案例稱為 *連鎖* 系結，因為有多個層級的系結同時發生。
-
-連結系結無法使用 [`@bind`](xref:mvc/views/razor#bind) 子元件中的語法來執行。 您必須分別指定事件處理常式和值。 不過，父元件可以搭配 [`@bind`](xref:mvc/views/razor#bind) 子元件的參數使用語法。
-
-下列 `PasswordField` 元件 (`PasswordField.razor`) ：
+在更複雜的真實世界範例中，下列 `PasswordField` 元件 (`PasswordField.razor`) ：
 
 * 將 `<input>` 元素的值設定為 `password` 欄位。
 * 將屬性的變更公開 `Password` 至父代元件 [`EventCallback`](xref:blazor/components/event-handling#eventcallback) ，該元件會傳入子系欄位的目前值 `password` 做為其引數。
@@ -315,6 +324,8 @@ Password:
     }
 }
 ```
+
+如需 <xref:Microsoft.AspNetCore.Components.EventCallback%601> 的詳細資訊，請參閱 <xref:blazor/components/event-handling#eventcallback>。
 
 ## <a name="bind-across-more-than-two-components"></a>跨兩個以上的元件進行系結
 

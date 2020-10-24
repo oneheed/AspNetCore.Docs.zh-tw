@@ -18,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: tutorials/signalr-blazor-webassembly
-ms.openlocfilehash: e4c77bd5bf5a26a11cdd23664ac24ae50986969b
-ms.sourcegitcommit: d60bfd52bfb559e805abd654b87a2a0c7eb69cf8
+ms.openlocfilehash: 6086c422b2d0598af309bbf8b900b9e03a3fe147
+ms.sourcegitcommit: d5ecad1103306fac8d5468128d3e24e529f1472c
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 10/06/2020
-ms.locfileid: "91754706"
+ms.lasthandoff: 10/23/2020
+ms.locfileid: "92491583"
 ---
 # <a name="use-aspnet-core-no-locsignalr-with-no-locblazor-webassembly"></a>搭配使用 SignalR ASP.NET Core Blazor WebAssembly
 
@@ -52,7 +52,7 @@ ms.locfileid: "91754706"
 * [Visual Studio 2019 16.8 或更新版本 (在 ](https://visualstudio.microsoft.com/vs/preview/) **ASP.NET 和 網頁程式開發** 工作負載的預覽) 中
 * [!INCLUDE [.NET Core 5.0 SDK](~/includes/5.0-SDK.md)]
 
-# <a name="visual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code) \(英文\)
+# <a name="visual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code)
 
 [!INCLUDE[](~/includes/net-core-prereqs-vsc-5.0.md)]
 
@@ -77,7 +77,7 @@ ms.locfileid: "91754706"
 * 使用**ASP.NET 和 網頁程式開發**工作負載[Visual Studio 2019 16.6 或更新版本](https://visualstudio.microsoft.com/downloads/?utm_medium=microsoft&utm_source=docs.microsoft.com&utm_campaign=inline+link&utm_content=download+vs2019)
 * [!INCLUDE [.NET Core 3.1 SDK](~/includes/3.1-SDK.md)]
 
-# <a name="visual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code) \(英文\)
+# <a name="visual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code)
 
 [!INCLUDE[](~/includes/net-core-prereqs-vsc-3.1.md)]
 
@@ -126,7 +126,7 @@ ms.locfileid: "91754706"
 
 1. 選取 [建立]。
 
-# <a name="visual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code) \(英文\)
+# <a name="visual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code)
 
 1. 在命令 shell 中，執行下列命令：
 
@@ -146,9 +146,9 @@ ms.locfileid: "91754706"
 
 1. 在側邊欄中，選取 [ **Web] 和 [主控台**  >  **應用程式**]。
 
-1. 選擇** Blazor WebAssembly 應用程式**範本。 選取 [下一步] 。
+1. 選擇** Blazor WebAssembly 應用程式**範本。 選取 [下一步]  。
 
-1. 確認 [ **驗證** ] 設定為 [ **無驗證**]。 選取 [ **主控 ASP.NET Core** ] 核取方塊。 選取 [下一步] 。
+1. 確認 [ **驗證** ] 設定為 [ **無驗證**]。 選取 [ **主控 ASP.NET Core** ] 核取方塊。 選取 [下一步]  。
 
 1. 在 [ **專案名稱** ] 欄位中，為應用程式命名 `BlazorSignalRApp` 。 選取 [建立]。
 
@@ -182,7 +182,7 @@ dotnet new blazorwasm --hosted --output BlazorSignalRApp
 
 1. 如果出現 [ **接受授權** ] 對話方塊，請選取 [如果您同意授權條款即 **接受** ]。
 
-# <a name="visual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code/) \(英文\)
+# <a name="visual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code/)
 
 在**整合式終端**機**View**中  >  ，從工具列)  (查看**終端**機，請執行下列命令：
 
@@ -304,7 +304,7 @@ dotnet add Client package Microsoft.AspNetCore.SignalR.Client
 
    引號： *星星 TREK VI：未探索的國家/地區* &copy; 1991 最 [重要](https://www.paramountmovies.com/movies/star-trek-vi-the-undiscovered-country)
 
-# <a name="visual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code) \(英文\)
+# <a name="visual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code)
 
 1. 當 VS Code 提供來為伺服器應用程式 () 建立啟動設定檔時 `.vscode/launch.json` ， `program` 專案會顯示如下，以指向應用程式的元件 (`{APPLICATION NAME}.Server.dll`) ：
 
@@ -380,6 +380,7 @@ dotnet add Client package Microsoft.AspNetCore.SignalR.Client
 
 > [!div class="nextstepaction"]
 > <xref:blazor/index>
+> [使用 Identity 伺服器、websocket 和 Server-Sent 事件的持有人權杖驗證](xref:signalr/authn-and-authz#bearer-token-authentication)
 
 ## <a name="additional-resources"></a>其他資源
 

@@ -18,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/security/webassembly/hosted-with-identity-server
-ms.openlocfilehash: 6ae8c55fcfc85dc725a7dd20a7dbecba063a13e9
-ms.sourcegitcommit: daa9ccf580df531254da9dce8593441ac963c674
+ms.openlocfilehash: 5d92d12a1fcd3797dcffb301998b529935751e8b
+ms.sourcegitcommit: d5ecad1103306fac8d5468128d3e24e529f1472c
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 10/09/2020
-ms.locfileid: "91900777"
+ms.lasthandoff: 10/23/2020
+ms.locfileid: "92491479"
 ---
 # <a name="secure-an-aspnet-core-no-locblazor-webassembly-hosted-app-with-no-locidentity-server"></a>Blazor WebAssembly使用伺服器保護 ASP.NET Core 託管應用 Identity 程式
 
@@ -56,7 +56,7 @@ dotnet new blazorwasm -au Individual -ho -o {APP NAME}
 | ------------ | -------------- |
 | `{APP NAME}` | `BlazorSample` |
 
-使用選項指定的輸出位置會 `-o|--output` 建立專案資料夾（如果不存在），而且會成為應用程式名稱的一部分。
+使用 `-o|--output` 選項指定的輸出位置會建立專案資料夾 (如果不存在)，並成為應用程式名稱的一部分。
 
 如需詳細資訊，請參閱 [`dotnet new`](/dotnet/core/tools/dotnet-new) .Net Core 指南中的命令。
 
@@ -418,7 +418,7 @@ public class ProfileService : IProfileService
     {
     }
 
-    public Task GetProfileDataAsync(ProfileDataRequestContext context)
+    public async Task GetProfileDataAsync(ProfileDataRequestContext context)
     {
         var nameClaim = context.Subject.FindAll(JwtClaimTypes.Name);
         context.IssuedClaims.AddRange(nameClaim);
@@ -426,12 +426,12 @@ public class ProfileService : IProfileService
         var roleClaims = context.Subject.FindAll(JwtClaimTypes.Role);
         context.IssuedClaims.AddRange(roleClaims);
 
-        return Task.CompletedTask;
+        await Task.CompletedTask;
     }
 
-    public Task IsActiveAsync(IsActiveContext context)
+    public async Task IsActiveAsync(IsActiveContext context)
     {
-        return Task.CompletedTask;
+        await Task.CompletedTask;
     }
 }
 ```

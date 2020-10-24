@@ -4,7 +4,7 @@ author: scottaddie
 description: 了解如何使用 HTTP REPL .NET Core 全域工具來瀏覽和測試 ASP.NET Core Web API。
 monikerRange: '>= aspnetcore-2.1'
 ms.author: scaddie
-ms.custom: mvc
+ms.custom: mvc, devx-track-azurecli
 ms.date: 05/20/2020
 no-loc:
 - ASP.NET Core Identity
@@ -18,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: web-api/http-repl
-ms.openlocfilehash: e6263f19cdb7f9957fa8360f9e782e622589ea18
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: b12f4b10230f2631392011a6e443156bf9a2d843
+ms.sourcegitcommit: d5ecad1103306fac8d5468128d3e24e529f1472c
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88633314"
+ms.lasthandoff: 10/23/2020
+ms.locfileid: "92491440"
 ---
 # <a name="test-web-apis-with-the-http-repl"></a>使用 HTTP REPL 來測試 web API
 
@@ -39,7 +39,7 @@ HTTP「讀取、求值、輸出」迴圈 (REPL) 是：
 
 * [DELETE](#test-http-delete-requests)
 * [GET](#test-http-get-requests)
-* [HEAD](#test-http-head-requests)
+* [頭](#test-http-head-requests)
 * [選項](#test-http-options-requests)
 * [補丁](#test-http-patch-requests)
 * [POST](#test-http-post-requests)
@@ -47,7 +47,7 @@ HTTP「讀取、求值、輸出」迴圈 (REPL) 是：
 
 若要跟著做，[請檢視或下載範例 ASP.NET Core web API](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/web-api/http-repl/samples) ([如何下載](xref:index#how-to-download-a-sample))。
 
-## <a name="prerequisites"></a>Prerequisites
+## <a name="prerequisites"></a>必要條件
 
 * [!INCLUDE [2.1-SDK](~/includes/2.1-SDK.md)]
 
@@ -61,7 +61,7 @@ dotnet tool install -g Microsoft.dotnet-httprepl
 
 會從 [Microsoft.dotnet-httprepl](https://www.nuget.org/packages/Microsoft.dotnet-httprepl) \(英文\) NuGet 套件安裝 [.NET Core 全域工具](/dotnet/core/tools/global-tools#install-a-global-tool)。
 
-## <a name="usage"></a>使用方式
+## <a name="usage"></a>使用量
 
 成功安裝工具後，請執行以下命令來啟動 HTTP REPL：
 
@@ -366,7 +366,7 @@ pref set editor.command.default "C:\Program Files\Microsoft VS Code\Code.exe"
 
 ---
 
-若要以特定 CLI 引數啟動預設文字編輯器，請設定 `editor.command.default.arguments` 機碼。 假設 Visual Studio Code 是預設文字編輯器，且您希望 HTTP REPL 在新的工作階段開啟 Visual Studio Code，但停用延伸模組。 執行以下命令：
+若要以特定 CLI 引數啟動預設文字編輯器，請設定 `editor.command.default.arguments` 機碼。 假設 Visual Studio Code 是預設文字編輯器，且您希望 HTTP REPL 在新的工作階段開啟 Visual Studio Code，但停用延伸模組。 執行下列命令：
 
 ```console
 pref set editor.command.default.arguments "--disable-extensions --new-window"

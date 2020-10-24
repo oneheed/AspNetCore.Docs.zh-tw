@@ -18,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/components/event-handling
-ms.openlocfilehash: 4897abdd067d9068aee9d5843888d188ff240404
-ms.sourcegitcommit: d84a225ec3381355c343460deed50f2fa5722f60
+ms.openlocfilehash: e8c3d6a9f2c6b50fc18da59b8e0b5475360673c7
+ms.sourcegitcommit: d5ecad1103306fac8d5468128d3e24e529f1472c
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 10/22/2020
-ms.locfileid: "92429087"
+ms.lasthandoff: 10/23/2020
+ms.locfileid: "92491455"
 ---
 # <a name="aspnet-core-no-locblazor-event-handling"></a>ASP.NET Core Blazor 事件處理
 
@@ -71,7 +71,7 @@ Razor 元件提供事件處理功能。 針對名為 (的 HTML 元素屬性 [`@o
 @code {
     private async Task UpdateHeading(MouseEventArgs e)
     {
-        ...
+        await ...
     }
 }
 ```

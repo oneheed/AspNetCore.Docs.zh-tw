@@ -18,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: signalr/authn-and-authz
-ms.openlocfilehash: 3a2ae5c7bc4853bad7b94af0d26ad5cd0358688f
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: e16efa59a82d0f3cb1a2272ae0c07654ebec6a51
+ms.sourcegitcommit: d5ecad1103306fac8d5468128d3e24e529f1472c
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88628926"
+ms.lasthandoff: 10/23/2020
+ms.locfileid: "92491557"
 ---
 # <a name="authentication-and-authorization-in-aspnet-core-no-locsignalr"></a>ASP.NET Core 中的驗證和授權 SignalR
 
@@ -99,8 +99,6 @@ Cookie是以瀏覽器特定的方式傳送存取權杖，但是非瀏覽器用�
 
 用戶端可以提供存取權杖，而不是使用 cookie 。 伺服器會驗證權杖，並使用它來識別使用者。 只有在建立連接時，才會進行這項驗證。 在連線的存留期內，伺服器不會自動重新驗證以檢查權杖撤銷。
 
-在伺服器上，會使用 [JWT 持有人中介軟體](/dotnet/api/microsoft.extensions.dependencyinjection.jwtbearerextensions.addjwtbearer)來設定持有人權杖驗證。
-
 在 JavaScript 用戶端中，您可以使用 [accessTokenFactory](xref:signalr/configuration#configure-bearer-authentication) 選項來提供權杖。
 
 [!code-typescript[Configure Access Token](authn-and-authz/sample/wwwroot/js/chat.ts?range=52-55)]
@@ -119,14 +117,60 @@ var connection = new HubConnectionBuilder()
 > [!NOTE]
 > 您提供的存取權杖函式會在 **每個** 發出的 HTTP 要求之前呼叫 SignalR 。 如果您需要更新權杖以便讓連接保持使用中 (，因為它可能會在連線) 期間過期，請從這個函式中執行，並傳回更新的權杖。
 
-在標準 web Api 中，會在 HTTP 標頭中傳送持有人權杖。 不過， SignalR 使用某些傳輸時，無法在瀏覽器中設定這些標頭。 使用 Websocket 和伺服器傳送的事件時，會以查詢字串參數的形式傳送權杖。 若要在伺服器上支援此功能，需要進行其他設定：
+在標準 web Api 中，會在 HTTP 標頭中傳送持有人權杖。 不過， SignalR 使用某些傳輸時，無法在瀏覽器中設定這些標頭。 使用 Websocket 和 Server-Sent 事件時，會以查詢字串參數的形式傳送權杖。 
+
+#### <a name="built-in-jwt-authentication"></a>內建 JWT 驗證
+
+在伺服器上，持有人權杖驗證是使用 [JWT 持有人中介軟體](xref:Microsoft.Extensions.DependencyInjection.JwtBearerExtensions.AddJwtBearer%2A)進行設定：
 
 [!code-csharp[Configure Server to accept access token from Query String](authn-and-authz/sample/Startup.cs?name=snippet)]
 
 [!INCLUDE[request localized comments](~/includes/code-comments-loc.md)]
 
 > [!NOTE]
-> 因為瀏覽器 API 的限制，使用 Websocket 和伺服器傳送的事件連接時，會在瀏覽器上使用查詢字串。 使用 HTTPS 時，查詢字串值是由 TLS 連接所保護。 但是，許多伺服器會記錄查詢字串值。 如需詳細資訊，請參閱[ASP.NET Core SignalR 中的安全性考慮](xref:signalr/security)。 SignalR 使用標頭在支援這些權杖的環境中傳輸權杖 (例如 .NET 和 JAVA 用戶端) 。
+> 因為瀏覽器 API 的限制，使用 Websocket 和 Server-Sent 事件時，會在瀏覽器上使用查詢字串。 使用 HTTPS 時，查詢字串值是由 TLS 連接所保護。 但是，許多伺服器會記錄查詢字串值。 如需詳細資訊，請參閱[ASP.NET Core SignalR 中的安全性考慮](xref:signalr/security)。 SignalR 使用標頭在支援這些權杖的環境中傳輸權杖 (例如 .NET 和 JAVA 用戶端) 。
+
+#### <a name="no-locidentity-server-jwt-authentication"></a>Identity 伺服器 JWT 驗證
+
+使用 Identity 伺服器時，請將 <xref:Microsoft.Extensions.Options.PostConfigureOptions%601> 服務新增至專案：
+
+```csharp
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.Extensions.Options;
+public class ConfigureJwtBearerOptions : IPostConfigureOptions<JwtBearerOptions>
+{
+    public void PostConfigure(string name, JwtBearerOptions options)
+    {
+        var originalOnMessageReceived = options.Events.OnMessageReceived;
+        options.Events.OnMessageReceived = async context =>
+        {
+            await originalOnMessageReceived(context);
+                
+            if (string.IsNullOrEmpty(context.Token))
+            {
+                var accessToken = context.Request.Query["access_token"];
+                var path = context.HttpContext.Request.Path;
+                
+                if (!string.IsNullOrEmpty(accessToken) && 
+                    path.StartsWithSegments("/hubs"))
+                {
+                    context.Token = accessToken;
+                }
+            }
+        };
+    }
+}
+```
+
+在 `Startup.ConfigureServices` 新增驗證 (<xref:Microsoft.Extensions.DependencyInjection.AuthenticationServiceCollectionExtensions.AddAuthentication%2A>) 和 Identity 伺服器 () 的驗證處理常式之後，在中註冊服務 <xref:Microsoft.AspNetCore.Authentication.AuthenticationBuilderExtensions.AddIdentityServerJwt%2A> ：
+
+```csharp
+services.AddAuthentication()
+    .AddIdentityServerJwt();
+services.TryAddEnumerable(
+    ServiceDescriptor.Singleton<IPostConfigureOptions<JwtBearerOptions>, 
+        ConfigureJwtBearerOptions>());
+```
 
 ### <a name="no-loccookies-vs-bearer-tokens"></a>Cookie和持有人權杖 
 

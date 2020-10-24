@@ -18,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: fundamentals/servers/kestrel
-ms.openlocfilehash: 44558a0f2fdc61eb860223658f5bef1d0117ba87
-ms.sourcegitcommit: e519d95d17443abafba8f712ac168347b15c8b57
+ms.openlocfilehash: 50bf2a60f14238c9b71fe90a64c284da202bff59
+ms.sourcegitcommit: d5ecad1103306fac8d5468128d3e24e529f1472c
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 10/02/2020
-ms.locfileid: "91653934"
+ms.lasthandoff: 10/23/2020
+ms.locfileid: "92491596"
 ---
 # <a name="kestrel-web-server-implementation-in-aspnet-core"></a>ASP.NET Core 中的 Kestrel 網頁伺服器實作
 
@@ -354,6 +354,34 @@ webBuilder.ConfigureKestrel(serverOptions =>
 ```
 
 預設值為 96 KB (98,304)。
+
+::: moniker-end
+
+::: moniker range=">= aspnetcore-5.0"
+
+### <a name="http2-keep-alive-ping-configuration"></a>HTTP/2 保持運作 ping 設定
+
+Kestrel 可以設定為將 HTTP/2 ping 傳送至連線的用戶端。 HTTP/2 ping 的服務有多個用途：
+
+* 保持閒置連接保持運作。 某些用戶端和 proxy 伺服器會關閉閒置的連線。 HTTP/2 ping 會視為連線上的活動，並防止連接關閉為閒置。
+* 關閉狀況不良的連接。 在設定的時間內，用戶端沒有回應「保持運作」偵測的連接會由伺服器關閉。
+
+有兩個與 HTTP/2 保持運作 ping 相關的設定選項：
+
+* `Http2.KeepAlivePingInterval` 是設定 `TimeSpan` 偵測內部的。 如果伺服器在這段時間內未收到任何框架，則伺服器會將保持運作的偵測傳送至用戶端。 當此選項設定為時，會停用 [保持作用中的 ping] `TimeSpan.MaxValue` 。 預設值是 `TimeSpan.MaxValue`。
+* `Http2.KeepAlivePingTimeout` 是 `TimeSpan` 設定 ping timeout 的。 如果伺服器未在此時間內接收任何框架，例如回應偵測，則連接會關閉。 當此選項設定為時，會停用 [保持作用中] 超時 `TimeSpan.MaxValue` 。 預設值為 20 秒。
+
+```csharp
+webBuilder.ConfigureKestrel(serverOptions =>
+{
+    serverOptions.Limits.Http2.KeepAlivePingInterval = TimeSpan.FromSeconds(30);
+    serverOptions.Limits.Http2.KeepAlivePingTimeout = TimeSpan.FromSeconds(60);
+});
+```
+
+::: moniker-end
+
+::: moniker range=">= aspnetcore-3.0"
 
 ### <a name="trailers"></a>預告片
 
@@ -733,8 +761,8 @@ HTTP/2 的 TLS 限制：
 * 已停用重新交涉
 * 已停用壓縮
 * 暫時金鑰交換大小下限：
-  * 橢圓曲線 Diffie-hellman (>ECDHE) &lbrack; [RFC4492](https://www.ietf.org/rfc/rfc4492.txt) &rbrack; ：224位最小值
-  * 有限欄位 diffie-hellman (DHE) &lbrack; `TLS12` &rbrack; ：2048位最小值
+  * 橢圓曲線 Diffie-Hellman (>ECDHE) &lbrack; [RFC4492](https://www.ietf.org/rfc/rfc4492.txt) &rbrack; ：最少224位
+  * 有限的欄位 Diffie-Hellman (DHE) &lbrack; `TLS12` &rbrack; ：最低2048位
 * 不禁止加密套件。 
 
 `TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256`&lbrack;`TLS-ECDHE`&rbrack;預設支援使用 P-256 橢圓曲線 &lbrack; `FIPS186` &rbrack; 。
@@ -1734,8 +1762,8 @@ HTTP/2 的 TLS 限制：
 * 已停用重新交涉
 * 已停用壓縮
 * 暫時金鑰交換大小下限：
-  * 橢圓曲線 Diffie-hellman (>ECDHE) &lbrack; [RFC4492](https://www.ietf.org/rfc/rfc4492.txt) &rbrack; ：224位最小值
-  * 有限欄位 diffie-hellman (DHE) &lbrack; `TLS12` &rbrack; ：2048位最小值
+  * 橢圓曲線 Diffie-Hellman (>ECDHE) &lbrack; [RFC4492](https://www.ietf.org/rfc/rfc4492.txt) &rbrack; ：最少224位
+  * 有限的欄位 Diffie-Hellman (DHE) &lbrack; `TLS12` &rbrack; ：最低2048位
 * 未封鎖加密套件
 
 `TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256`&lbrack;`TLS-ECDHE`&rbrack;預設支援使用 P-256 橢圓曲線 &lbrack; `FIPS186` &rbrack; 。

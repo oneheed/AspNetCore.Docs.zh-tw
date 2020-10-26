@@ -18,10 +18,10 @@ no-loc:
 - SignalR
 uid: fundamentals/target-aspnetcore
 ms.openlocfilehash: 571e6c66f60bbc09b902ff9064d2fb1c18c433dc
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.sourcegitcommit: d5ecad1103306fac8d5468128d3e24e529f1472c
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 08/19/2020
+ms.lasthandoff: 10/26/2020
 ms.locfileid: "88630051"
 ---
 # <a name="use-aspnet-core-apis-in-a-class-library"></a>在類別庫中使用 ASP.NET Core Api
@@ -61,7 +61,7 @@ Blazor 支援 WebAssembly (WASM) 和伺服器 [裝載模型](xref:blazor/hosting
 
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
-使用 [ ** Razor 類別庫**] 專案範本。 範本的 **支援頁面和 [視圖** ] 核取方塊應取消選取。
+使用 [ **Razor 類別庫** ] 專案範本。 範本的 **支援頁面和 [視圖** ] 核取方塊應取消選取。
 
 # <a name="visual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code)
 
@@ -73,7 +73,7 @@ dotnet new razorclasslib
 
 # <a name="visual-studio-for-mac"></a>[Visual Studio for Mac](#tab/visual-studio-mac)
 
-使用 [ ** Razor 類別庫**] 專案範本。
+使用 [ **Razor 類別庫** ] 專案範本。
 
 ---
 
@@ -121,11 +121,11 @@ dotnet new razorclasslib
 * `AddRazorSupportForMvc`設定為的 MSBuild 屬性 `true` 。
 * `<FrameworkReference>`共用架構的元素。
 
-** Razor 類別庫**專案範本滿足上述以 .net Core 2.x 為目標的專案需求。 針對您的編輯器，請使用下列指示。
+**Razor 類別庫** 專案範本滿足上述以 .net Core 2.x 為目標的專案需求。 針對您的編輯器，請使用下列指示。
 
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
-使用 [ ** Razor 類別庫**] 專案範本。 應選取範本的 [ **支援頁面和流覽** 器] 核取方塊。
+使用 [ **Razor 類別庫** ] 專案範本。 應選取範本的 [ **支援頁面和流覽** 器] 核取方塊。
 
 # <a name="visual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code)
 

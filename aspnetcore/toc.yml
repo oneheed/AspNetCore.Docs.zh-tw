@@ -55,7 +55,7 @@
         - name: MVC
           displayName: tutorial
           items:
-            - name: 總覽
+            - name: 概觀
               uid: tutorials/first-mvc-app/index
             - name: 開始使用
               uid: tutorials/first-mvc-app/start-mvc
@@ -385,6 +385,8 @@
               uid: blazor/components/virtualization
             - name: 樣板化元件
               uid: blazor/components/templated-components
+            - name: CSS 隔離
+              uid: blazor/components/css-isolation
             - name: 整合元件
               uid: blazor/components/integrate-components-into-razor-pages-and-mvc-apps
             - name: 元件程式庫
@@ -447,7 +449,7 @@
           uid: blazor/webassembly-lazy-load-assemblies
         - name: WebAssembly 效能
           uid: blazor/webassembly-performance-best-practices
-        - name: 測試
+        - name: 測試元件
           uid: blazor/test
         - name: 漸進式 Web 應用程式
           uid: blazor/progressive-web-app

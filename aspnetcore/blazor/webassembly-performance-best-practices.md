@@ -4,7 +4,7 @@ author: pranavkm
 description: 提升 ASP.NET Core Blazor WebAssembly 應用程式效能，並避免常見效能問題的秘訣。
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
-ms.custom: mvc
+ms.custom: mvc, devx-track-js
 ms.date: 10/09/2020
 no-loc:
 - ASP.NET Core Identity
@@ -18,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/webassembly-performance-best-practices
-ms.openlocfilehash: ea3f197e5bab82f4fb40238fe31cd5ce29ab62ad
-ms.sourcegitcommit: daa9ccf580df531254da9dce8593441ac963c674
+ms.openlocfilehash: 0e827680e7024eabed09b989466476a3a80eb225
+ms.sourcegitcommit: 2e3a967331b2c69f585dd61e9ad5c09763615b44
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 10/09/2020
-ms.locfileid: "91900969"
+ms.lasthandoff: 10/27/2020
+ms.locfileid: "92690272"
 ---
 # <a name="aspnet-core-no-locblazor-webassembly-performance-best-practices"></a>ASP.NET Core Blazor WebAssembly 效能最佳做法
 
@@ -31,8 +31,8 @@ ms.locfileid: "91900969"
 
 Blazor WebAssembly 經過仔細設計和優化，可在最實際的應用程式 UI 案例中啟用高效能。 不過，產生最佳結果取決於使用正確模式和功能的開發人員。 請考慮下列層面：
 
-* **執行時間輸送量**： .net 程式碼會在 WebAssembly 執行時間內的解譯器上執行，因此 CPU 輸送量受限。 在要求的案例中，應用程式受益于 [優化轉譯速度](#optimize-rendering-speed)。
-* **啟動時間**：應用程式將 .net 執行時間傳送到瀏覽器，因此請務必使用 [最小化應用程式下載大小](#minimize-app-download-size)的功能。
+* **執行時間輸送量** ： .net 程式碼會在 WebAssembly 執行時間內的解譯器上執行，因此 CPU 輸送量受限。 在要求的案例中，應用程式受益于 [優化轉譯速度](#optimize-rendering-speed)。
+* **啟動時間** ：應用程式將 .net 執行時間傳送到瀏覽器，因此請務必使用 [最小化應用程式下載大小](#minimize-app-download-size)的功能。
 
 ## <a name="optimize-rendering-speed"></a>優化轉譯速度
 

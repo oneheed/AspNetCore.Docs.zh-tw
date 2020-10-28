@@ -4,7 +4,7 @@ author: anurse
 description: 瞭解如何從您的 ASP.NET Core 應用程式收集診斷資訊 SignalR 。
 monikerRange: '>= aspnetcore-2.1'
 ms.author: anurse
-ms.custom: devx-track-csharp, signalr
+ms.custom: devx-track-csharp, signalr, devx-track-js
 ms.date: 06/12/2020
 no-loc:
 - ASP.NET Core Identity
@@ -18,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: signalr/diagnostics
-ms.openlocfilehash: 649398a3868117b2e7f3358aa25544c99cc625b3
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: 890359c9e9f6c3c60f3105124f52c66b09a8a4fb
+ms.sourcegitcommit: 2e3a967331b2c69f585dd61e9ad5c09763615b44
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88631338"
+ms.lasthandoff: 10/27/2020
+ms.locfileid: "92690676"
 ---
 # <a name="logging-and-diagnostics-in-aspnet-core-no-locsignalr"></a>ASP.NET Core 中的記錄和診斷 SignalR
 
@@ -41,7 +41,7 @@ ms.locfileid: "88631338"
 SignalR 使用兩個記錄器類別：
 
 * `Microsoft.AspNetCore.SignalR`：適用于與中樞通訊協定相關的記錄、啟動中樞、叫用方法，以及其他中樞相關的活動。
-* `Microsoft.AspNetCore.Http.Connections`：適用于傳輸的相關記錄，例如 Websocket、長時間輪詢、伺服器傳送的事件，以及低層級的 SignalR 基礎結構。
+* `Microsoft.AspNetCore.Http.Connections`：適用于傳輸的相關記錄，例如 Websocket、長時間輪詢、Server-Sent 事件，以及低層級的 SignalR 基礎結構。
 
 若要從啟用詳細記錄 SignalR ，請 `Debug` 將下列專案新增至中的子區段，以將上述兩個前置詞設定為檔案 *appsettings.js* 中的層級 `LogLevel` `Logging` ：
 
@@ -74,7 +74,7 @@ Visual Studio 會在 [ **輸出** ] 視窗中顯示記錄輸出。 選取 [ **AS
 
 ### <a name="azure-app-service"></a>Azure App Service
 
-在 Azure App Service 入口網站的 [**診斷記錄**] 區段中，啟用** (Filesystem) 選項的應用程式記錄**，並將**層級**設定為 `Verbose` 。 記錄應該可從 **記錄串流** 服務和 App Service 檔案系統的記錄中取得。 如需詳細資訊，請參閱 [Azure 記錄資料流程](xref:fundamentals/logging/index#azure-log-streaming)。
+在 Azure App Service 入口網站的 [ **診斷記錄** ] 區段中，啟用 **(Filesystem) 選項的應用程式記錄** ，並將 **層級** 設定為 `Verbose` 。 記錄應該可從 **記錄串流** 服務和 App Service 檔案系統的記錄中取得。 如需詳細資訊，請參閱 [Azure 記錄資料流程](xref:fundamentals/logging/index#azure-log-streaming)。
 
 ### <a name="other-environments"></a>其他環境
 
@@ -157,7 +157,7 @@ Fiddler 是一個非常強大的工具，可用於收集 HTTP 追蹤。 從 [tel
 
 如果您使用 HTTPS 進行連線，則有一些額外的步驟可確保 Fiddler 可將 HTTPS 流量解密。 如需詳細資訊，請參閱 [Fiddler 檔](https://docs.telerik.com/fiddler/Configure-Fiddler/Tasks/DecryptHTTPS)。
 
-收集追蹤之後，您可以從功能表列**選擇 [** 檔案  >  **儲存**  >  **所有會話**] 來匯出追蹤。
+收集追蹤之後，您可以從功能表列 **選擇 [** 檔案  >  **儲存**  >  **所有會話** ] 來匯出追蹤。
 
 ![從 Fiddler 匯出所有會話](diagnostics/fiddler-export.png)
 
@@ -177,7 +177,7 @@ tcpdump -i [interface] -w trace.pcap
 
 此方法僅適用于以瀏覽器為基礎的應用程式。
 
-大部分的瀏覽器開發人員工具都有一個 [網路] 索引標籤，可讓您在瀏覽器與伺服器之間抓取網路活動。 不過，這些追蹤不包含 WebSocket 和伺服器傳送的事件訊息。 如果您使用這些傳輸，則使用 Fiddler 或 TcpDump 等工具 (如下所述) 是較佳的方法。
+大部分的瀏覽器開發人員工具都有一個 [網路] 索引標籤，可讓您在瀏覽器與伺服器之間抓取網路活動。 不過，這些追蹤不會包含 WebSocket 和 Server-Sent 事件訊息。 如果您使用這些傳輸，則使用 Fiddler 或 TcpDump 等工具 (如下所述) 是較佳的方法。
 
 ### <a name="microsoft-edge-and-internet-explorer"></a>Microsoft Edge 和 Internet Explorer
 

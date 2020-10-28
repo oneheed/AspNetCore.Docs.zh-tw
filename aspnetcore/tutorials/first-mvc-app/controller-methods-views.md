@@ -16,12 +16,12 @@ no-loc:
 - Razor
 - SignalR
 uid: tutorials/first-mvc-app/controller-methods-views
-ms.openlocfilehash: 07b67cd7c267c39b99277114b73642b5caa3e312
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: 745703aaa4ceb39c75789bab0bde4564f3d79a30
+ms.sourcegitcommit: c06a5bf419541d17595af30e4cf6f2787c21855e
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88632833"
+ms.lasthandoff: 10/27/2020
+ms.locfileid: "92678546"
 ---
 # <a name="part-6-controller-methods-and-views-in-aspnet-core"></a>ASP.NET Core 中的第6部分、控制器方法和觀點
 
@@ -43,7 +43,7 @@ ms.locfileid: "88632833"
 
 ![滑鼠停留在 Edit 連結並顯示 https://localhost:5001/Movies/Edit/5 的 Url 的瀏覽器視窗](~/tutorials/first-mvc-app/controller-methods-views/_static/edit7.png)
 
-在 *Views/Movies/Index.cshtml* 檔案中，**Edit**、**Details ** 和 **Delete** 連結是由 Core MVC 錨點標記協助程式所產生。
+在 *Views/Movies/Index.cshtml* 檔案中， **Edit** 、 **Details** 和 **Delete** 連結是由 Core MVC 錨點標記協助程式所產生。
 
 [!code-cshtml[](~/tutorials/first-mvc-app/start-mvc/sample/MvcMovie/Views/Movies/IndexOriginal.cshtml?highlight=1-3&range=46-50)]
 
@@ -57,7 +57,7 @@ ms.locfileid: "88632833"
 </td>
 ```
 
-回想在 *Startup.cs* 檔案中設定的[路由](xref:mvc/controllers/routing)格式：
+回想在 *Startup.cs* 檔案中設定的 [路由](xref:mvc/controllers/routing)格式：
 
 [!code-csharp[](~/tutorials/first-mvc-app/start-mvc/sample/MvcMovie3/Startup.cs?name=snippet_1&highlight=5)]
 
@@ -67,7 +67,7 @@ ASP.NET Core 會將 `https://localhost:5001/Movies/Edit/4` 轉譯成對 `Movies`
 
 <a name="get-post"></a>
 
-開啟 `Movies` 控制器，並檢查兩個 `Edit` 動作方法。 下列程式碼顯示 `HTTP GET Edit` 方法，它會提取電影並填入 *編輯 cshtml*檔案所產生的編輯表單 Razor 。
+開啟 `Movies` 控制器，並檢查兩個 `Edit` 動作方法。 下列程式碼顯示 `HTTP GET Edit` 方法，它會提取電影並填入 *編輯 cshtml* 檔案所產生的編輯表單 Razor 。
 
 ::: moniker range=">= aspnetcore-2.1"
 
@@ -105,9 +105,9 @@ ASP.NET Core 會將 `https://localhost:5001/Movies/Edit/4` 轉譯成對 `Movies`
 
 ::: moniker-end
 
-`HttpPost` 屬性指定「只」** 能為 `POST` 要求叫用這個 `Edit` 方法。 您可以將 `[HttpGet]` 屬性套用至第一個編輯方法，但不需要執行此動作，因為 `[HttpGet]` 是預設值。
+`HttpPost` 屬性指定「只」  能為 `POST` 要求叫用這個 `Edit` 方法。 您可以將 `[HttpGet]` 屬性套用至第一個編輯方法，但不需要執行此動作，因為 `[HttpGet]` 是預設值。
 
-`ValidateAntiForgeryToken` 屬性是用來[防範要求偽造](xref:security/anti-request-forgery)，並與編輯檢視檔案 (*Views/Movies/Edit.cshtml*) 所產生的防偽語彙基元成對。 編輯檢視檔案使用[表單標記協助程式](xref:mvc/views/working-with-forms)產生防偽語彙基元。
+`ValidateAntiForgeryToken` 屬性是用來 [防範要求偽造](xref:security/anti-request-forgery)，並與編輯檢視檔案 ( *Views/Movies/Edit.cshtml* ) 所產生的防偽語彙基元成對。 編輯檢視檔案使用[表單標記協助程式](xref:mvc/views/working-with-forms)產生防偽語彙基元。
 
 [!code-cshtml[](~/tutorials/first-mvc-app/start-mvc/sample/MvcMovie/Views/Movies/Edit.cshtml?range=9)]
 
@@ -149,9 +149,9 @@ ASP.NET Core 會將 `https://localhost:5001/Movies/Edit/4` 轉譯成對 `Movies`
 
 `[ValidateAntiForgeryToken]` 屬性會驗證[表單標記協助程式](xref:mvc/views/working-with-forms) 中的防偽語彙基元產生器所產生的隱藏 [XSRF](xref:security/anti-request-forgery) 語彙基元
 
-[模型繫結](xref:mvc/models/model-binding)系統採用已發佈的表單值，並建立以 `movie` 參數傳遞的 `Movie` 物件。 `ModelState.IsValid` 方法會驗證表單中提交的資料可用於修改 (編輯或更新) `Movie` 物件。 如果資料有效，則會進行儲存。 藉由呼叫資料庫內容的 `SaveChangesAsync` 方法，更新 (編輯) 的電影資料會儲存到資料庫。 儲存資料之後，程式碼將使用者重新導向至 `MoviesController` 類別的 `Index` 動作方法，此方法會顯示電影集合，包括剛剛所進行的變更。
+[模型繫結](xref:mvc/models/model-binding)系統採用已發佈的表單值，並建立以 `movie` 參數傳遞的 `Movie` 物件。 `ModelState.IsValid`屬性會驗證表單中提交的資料可以用來修改物件)  (編輯或更新 `Movie` 。 如果資料有效，則會進行儲存。 藉由呼叫資料庫內容的 `SaveChangesAsync` 方法，更新 (編輯) 的電影資料會儲存到資料庫。 儲存資料之後，程式碼將使用者重新導向至 `MoviesController` 類別的 `Index` 動作方法，此方法會顯示電影集合，包括剛剛所進行的變更。
 
-在表單發佈至伺服器之前，用戶端驗證會對欄位檢查任何驗證規則。 如果出現任何驗證錯誤，即會顯示錯誤訊息，且不會發佈該表單。 如果已停用 JavaScript，就不會進行用戶端驗證，但伺服器偵測到無效的發佈值，因此會重新顯示表單值並顯示錯誤訊息。 稍後在本教學課程中，我們會更詳細檢查[模型驗證](xref:mvc/models/validation)。 *Views/Movies/Edit.cshtml* 檢視範本中的[驗證標記協助程式](xref:mvc/views/working-with-forms)負責顯示適當的錯誤訊息。
+在表單發佈至伺服器之前，用戶端驗證會對欄位檢查任何驗證規則。 如果出現任何驗證錯誤，即會顯示錯誤訊息，且不會發佈該表單。 如果已停用 JavaScript，就不會進行用戶端驗證，但伺服器偵測到無效的發佈值，因此會重新顯示表單值並顯示錯誤訊息。 稍後在本教學課程中，我們會更詳細檢查[模型驗證](xref:mvc/models/validation)。 *Views/Movies/Edit.cshtml* 檢視範本中的 [驗證標記協助程式](xref:mvc/views/working-with-forms)負責顯示適當的錯誤訊息。
 
 ![Edit 檢視：Price 值 abc 不正確的例外狀況指出 Price 欄位必須是數字。 Release Date 值 xyz 不正確的例外狀況指出請輸入有效的日期。](~/tutorials/first-mvc-app/controller-methods-views/_static/val.png)
 

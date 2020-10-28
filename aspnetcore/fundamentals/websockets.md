@@ -5,7 +5,7 @@ description: 了解如何在 ASP.NET Core 中開始使用 WebSocket。
 monikerRange: '>= aspnetcore-1.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 11/12/2019
+ms.date: 11/1/2020
 no-loc:
 - ASP.NET Core Identity
 - cookie
@@ -18,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: fundamentals/websockets
-ms.openlocfilehash: 685e694a3d974a8a51255bdbb83d33459137a3d9
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: 11cd1c266516c696859c4116c940400e90d09ab4
+ms.sourcegitcommit: c06a5bf419541d17595af30e4cf6f2787c21855e
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88629011"
+ms.lasthandoff: 10/27/2020
+ms.locfileid: "92678538"
 ---
 # <a name="websockets-support-in-aspnet-core"></a>ASP.NET Core 中的 WebSockets 支援
 
@@ -37,39 +37,25 @@ ms.locfileid: "88629011"
 
 [ASP.NET Core SignalR ](xref:signalr/introduction)是可簡化將即時 web 功能新增至應用程式的程式庫。 它會盡可能使用 WebSockets。
 
-針對大部分的應用程式，我們建議您不要透過 SignalR 原始 websocket。 SignalR 針對無法使用 Websocket 的環境提供傳輸回復。 它也提供簡單的遠端程序呼叫應用程式模型。 在大部分的情況下， SignalR 相較于使用原始 websocket，沒有顯著的效能缺點。
+針對大部分的應用程式，我們建議您不要透過 SignalR 原始 websocket。 SignalR 針對無法使用 Websocket 的環境提供傳輸回復。 它也會提供基本的遠端程序呼叫應用程式模型。 在大部分的情況下， SignalR 相較于使用原始 websocket，沒有顯著的效能缺點。
 
-## <a name="prerequisites"></a>Prerequisites
+針對某些應用程式， [gRPC on .net](xref:grpc/index) 提供 websocket 的替代方案。
 
-* ASP.NET Core 1.1 或更新版本
-* 支援 ASP.NET Core 的任何作業系統：
-  
+## <a name="prerequisites"></a>必要條件
+
+* 支援 ASP.NET Core 的任何作業系統：  
   * Windows 7/Windows Server 2008 或更新版本
   * Linux
-  * macOS
-  
+  * macOS  
 * 如果應用程式在 Windows 上與 IIS 搭配執行：
-
   * Windows 8 / Windows Server 2012 或更新版本
   * IIS 8 / IIS 8 Express
-  * 必須啟用 WebSocket (請參閱 [IIS/IIS Express 支援](#iisiis-express-support)一節。)。
-  
+  * 必須啟用 Websocket。 請參閱 [IIS/IIS Express 支援](#iisiis-express-support) 一節。  
 * 如果應用程式在 [HTTP.sys](xref:fundamentals/servers/httpsys) 上執行：
-
   * Windows 8 / Windows Server 2012 或更新版本
-
 * 如需支援的瀏覽器，請請參閱 https://caniuse.com/#feat=websockets。
 
-::: moniker range="< aspnetcore-2.1"
-
-## <a name="nuget-package"></a>Nuget 套件
-
-安裝 [Microsoft.AspNetCore.WebSockets](https://www.nuget.org/packages/Microsoft.AspNetCore.WebSockets/) 套件。
-
-::: moniker-end
-
 ## <a name="configure-the-middleware"></a>設定中介軟體
-
 
 在 `Startup` 類別的 `Configure` 方法中新增 WebSocket 中介軟體：
 
@@ -106,7 +92,7 @@ ms.locfileid: "88629011"
 
 WebSocket 要求可以傳入任何 URL，但此範例程式碼只接受 `/ws` 的要求。
 
-使用 WebSocket 時，您**必須**確保中介軟體管線會在連線期間內持續執行。 如果您嘗試在中介軟體管線結束後傳送或接收 WebSocket 訊息，便可能會收到類似下列的例外狀況：
+使用 WebSocket 時，您 **必須** 確保中介軟體管線會在連線期間內持續執行。 如果您嘗試在中介軟體管線結束後傳送或接收 WebSocket 訊息，便可能會收到類似下列的例外狀況：
 
 ```
 System.Net.WebSockets.WebSocketException (0x80004005): The remote party closed the WebSocket connection without completing the close handshake. ---> System.ObjectDisposedException: Cannot write to the response body, the response has completed.
@@ -115,19 +101,11 @@ Object name: 'HttpResponseStream'.
 
 如果您是使用背景服務來將資料寫入 WebSocket，請務必使中介軟體管線持續執行。 請使用 <xref:System.Threading.Tasks.TaskCompletionSource%601> 來這麼做。 將 `TaskCompletionSource` 傳遞至您的背景服務，並讓它在您完成使用 WebSocket 時呼叫 <xref:System.Threading.Tasks.TaskCompletionSource%601.TrySetResult%2A>。 然後，在要求期間，`await`<xref:System.Threading.Tasks.TaskCompletionSource%601.Task> 屬性，如下列範例所示：
 
-```csharp
-app.Use(async (context, next) => {
-    var socket = await context.WebSockets.AcceptWebSocketAsync();
-    var socketFinishedTcs = new TaskCompletionSource<object>();
+[!code-csharp[](websockets/samples/2.x/WebSocketsSample/Startup2.cs?name=AcceptWebSocket)]
 
-    BackgroundSocketProcessor.AddSocket(socket, socketFinishedTcs); 
+從動作方法傳回太短時，也可能會發生 WebSocket 封閉式例外狀況。 在動作方法中接受通訊端時，請等候使用通訊端的程式碼完成後，再從動作方法返回。
 
-    await socketFinishedTcs.Task;
-});
-```
-如果您太快從動作方法返回，也可能發生 WebSocket 關閉的例外狀況。 如果您在動作方法中接受通訊端，請先等候使用通訊端的程式碼完成，再從動作方法返回。
-
-絕不要使用 `Task.Wait()`、`Task.Result` 或類似的封鎖呼叫等候通訊端完成，因為這會導致嚴重的執行緒處理問題。 一律使用 `await`。
+絕不要使用 `Task.Wait`、`Task.Result` 或類似的封鎖呼叫等候通訊端完成，因為這會導致嚴重的執行緒處理問題。 一律使用 `await`。
 
 ## <a name="send-and-receive-messages"></a>傳送及接收訊息
 
@@ -149,7 +127,7 @@ app.Use(async (context, next) => {
 
 ## <a name="websocket-origin-restriction"></a>WebSocket 來源限制
 
-CORS 所提供的保護不套用至 WebSocket。 瀏覽器**不**會：
+CORS 所提供的保護不套用至 WebSocket。 瀏覽器 **不** 會：
 
 * 執行 CORS 的事前要求。
 * 進行 WebSocket 要求時，採用 `Access-Control` 標頭中所指定的限制。
@@ -161,7 +139,7 @@ CORS 所提供的保護不套用至 WebSocket。 瀏覽器**不**會：
 [!code-csharp[](websockets/samples/2.x/WebSocketsSample/Startup.cs?name=UseWebSocketsOptionsAO&highlight=6-7)]
 
 > [!NOTE]
-> 因為 `Origin` 由用戶端控制，所以和 `Referer` 標頭一樣可能受到偽造。 **請勿**使用這些標頭作為驗證機制。
+> 因為 `Origin` 由用戶端控制，所以和 `Referer` 標頭一樣可能受到偽造。 **請勿** 使用這些標頭作為驗證機制。
 
 ::: moniker-end
 
@@ -179,27 +157,27 @@ CORS 所提供的保護不套用至 WebSocket。 瀏覽器**不**會：
 > [!NOTE]
 > 使用 IIS Express 時，不需要這些步驟
 
-1. 使用來自 [管理]**** 功能表的 [新增角色及功能]**** 精靈，或是 [伺服器管理員]**** 中的連結。
-1. 選取 [角色型或功能型安裝]****。 選取 [下一步]  。
+1. 使用來自 [管理]  功能表的 [新增角色及功能]  精靈，或是 [伺服器管理員]  中的連結。
+1. 選取 [角色型或功能型安裝]  。 選取 [下一步]  。
 1. 選取適當的伺服器 (預設會選取本機伺服器)。 選取 [下一步]  。
-1. 展開 [角色]**** 樹狀目錄中的 [網頁伺服器 (IIS)]****，展開 [網頁伺服器]****，然後展開 [應用程式開發]****。
-1. 選取 [WebSocket 通訊協定]****。 選取 [下一步]  。
-1. 如果不需要額外的功能，請選取 [下一步]****。
+1. 展開 [角色]  樹狀目錄中的 [網頁伺服器 (IIS)]  ，展開 [網頁伺服器]  ，然後展開 [應用程式開發]  。
+1. 選取 [WebSocket 通訊協定]  。 選取 [下一步]  。
+1. 如果不需要額外的功能，請選取 [下一步]  。
 1. 選取 [安裝]  。
-1. 當安裝完成時，選取 [關閉]**** 來結束精靈。
+1. 當安裝完成時，選取 [關閉]  來結束精靈。
 
 若要在 Windows 8 或更新版本中啟用 WebSocket 通訊協定的支援：
 
 > [!NOTE]
 > 使用 IIS Express 時，不需要這些步驟
 
-1. 流覽至**主控台**  >  **程式**的 [  >  **程式和功能]，**  >  **開啟或關閉**畫面) 左側 (的 [Windows 功能]。
-1. 開啟下列節點： **Internet Information Services**  >  **World Wide Web 服務**  >  **應用程式開發功能**。
-1. 選取 [WebSocket 通訊協定]**** 功能。 選取 [確定]。
+1. 流覽至 **主控台**  >  **程式** 的 [  >  **程式和功能]，**  >  **開啟或關閉** 畫面) 左側 (的 [Windows 功能]。
+1. 開啟下列節點： **Internet Information Services**  >  **World Wide Web 服務**  >  **應用程式開發功能** 。
+1. 選取 [WebSocket 通訊協定]  功能。 選取 [確定]。
 
 ### <a name="disable-websocket-when-using-socketio-on-nodejs"></a>在 Node.js 上使用 socket.io 時停用 WebSocket
 
-如果在[Node.js](https://nodejs.org/)上使用[Socket.io](https://socket.io/)中的 WebSocket 支援，請使用 `webSocket` *web.config*或*applicationHost.config*中的元素，停用預設的 IIS WebSocket 模組。如果未執行此步驟，IIS WebSocket 模組會嘗試處理 WebSocket 通訊，而不是 Node.js 和應用程式。
+如果在 [Node.js](https://nodejs.org/)上使用 [Socket.io](https://socket.io/)中的 WebSocket 支援，請使用 `webSocket` *web.config* 或 *applicationHost.config* 中的元素，停用預設的 IIS WebSocket 模組。如果未執行此步驟，IIS WebSocket 模組會嘗試處理 WebSocket 通訊，而不是 Node.js 和應用程式。
 
 ```xml
 <system.webServer>
@@ -213,7 +191,7 @@ CORS 所提供的保護不套用至 WebSocket。 瀏覽器**不**會：
 
 ![網頁的初始狀態](websockets/_static/start.png)
 
-選取 [連線]**** 將 WebSocket 要求傳送到顯示的 URL。 輸入測試訊息，然後選取 [傳送]****。 完成後，請選取 [關閉通訊端]****。 [通訊記錄檔]**** 區段會報告每次進行的開啟、傳送和關閉動作。
+選取 [連線]  將 WebSocket 要求傳送到顯示的 URL。 輸入測試訊息，然後選取 [傳送]  。 完成後，請選取 [關閉通訊端]  。 [通訊記錄檔]  區段會報告每次進行的開啟、傳送和關閉動作。
 
 ![網頁的初始狀態](websockets/_static/end.png)
 

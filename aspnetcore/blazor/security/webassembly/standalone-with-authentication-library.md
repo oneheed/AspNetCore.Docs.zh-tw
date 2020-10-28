@@ -5,7 +5,7 @@ description: 瞭解如何使用驗證程式庫保護 ASP.NET Core 的 Blazor Web
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 10/08/2020
+ms.date: 10/27/2020
 no-loc:
 - ASP.NET Core Identity
 - cookie
@@ -18,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/security/webassembly/standalone-with-authentication-library
-ms.openlocfilehash: 03abaf0676860f50a3e4c1cba64039070910ff9d
-ms.sourcegitcommit: daa9ccf580df531254da9dce8593441ac963c674
+ms.openlocfilehash: 332bf73d21dfe36d2f79e4c016f7f8391c67a1f7
+ms.sourcegitcommit: 2e3a967331b2c69f585dd61e9ad5c09763615b44
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 10/09/2020
-ms.locfileid: "91900868"
+ms.lasthandoff: 10/27/2020
+ms.locfileid: "92690356"
 ---
 # <a name="secure-an-aspnet-core-no-locblazor-webassembly-standalone-app-with-the-authentication-library"></a>使用驗證程式庫保護 ASP.NET Core 的 Blazor WebAssembly 獨立應用程式
 
@@ -37,9 +37,9 @@ ms.locfileid: "91900868"
 
 若要建立 Blazor WebAssembly 具有驗證機制的新專案：
 
-1. 在 [**建立新的 ASP.NET Core Web 應用程式**] 對話方塊中選擇** Blazor WebAssembly 應用程式**範本之後，請選取 [**驗證**] 下的 [**變更**]。
+1. 在 [ **建立新的 ASP.NET Core Web 應用程式** ] 對話方塊中選擇 **Blazor WebAssembly 應用程式** 範本之後，請選取 [ **驗證** ] 下的 [ **變更** ]。
 
-1. 使用「**儲存使用者帳戶應用程式內**」選項選取**個別使用者帳戶**，以使用 ASP.NET Core 的系統將使用者儲存在應用程式內 [Identity](xref:security/authentication/identity) 。
+1. 使用「 **儲存使用者帳戶應用程式內** 」選項選取 **個別使用者帳戶** ，以使用 ASP.NET Core 的系統將使用者儲存在應用程式內 [Identity](xref:security/authentication/identity) 。
 
 # <a name="visual-studio-code--net-core-cli"></a>[Visual Studio Code / .NET Core CLI](#tab/visual-studio-code+netcore-cli)
 
@@ -53,7 +53,7 @@ dotnet new blazorwasm -au Individual -o {APP NAME}
 | ------------ | -------------- |
 | `{APP NAME}` | `BlazorSample` |
 
-使用選項指定的輸出位置會 `-o|--output` 建立專案資料夾（如果不存在），而且會成為應用程式名稱的一部分。
+使用 `-o|--output` 選項指定的輸出位置會建立專案資料夾 (如果不存在)，並成為應用程式名稱的一部分。
 
 如需詳細資訊，請參閱 [`dotnet new`](/dotnet/core/tools/dotnet-new) .Net Core 指南中的命令。
 
@@ -61,7 +61,7 @@ dotnet new blazorwasm -au Individual -o {APP NAME}
 
 若要建立 Blazor WebAssembly 具有驗證機制的新專案：
 
-1. 在 [**設定新的 Blazor WebAssembly 應用程式**] 步驟中，從 [**驗證**] 下拉式清單中選取 [**應用程式內) 的個別驗證 (** 。
+1. 在 [ **設定新的 Blazor WebAssembly 應用程式** ] 步驟中，從 [ **驗證** ] 下拉式清單中選取 [ **應用程式內) 的個別驗證 (** 。
 
 1. 應用程式會針對使用 ASP.NET Core 儲存在應用程式中的個別使用者建立 [Identity](xref:security/authentication/identity) 。
 
@@ -120,8 +120,6 @@ builder.Services.AddOidcAuthentication(options =>
     options.ProviderOptions.DefaultScopes.Add("{SCOPE URI}");
 });
 ```
-
-[!INCLUDE[](~/includes/blazor-security/azure-scope-3x.md)]
 
 如需詳細資訊，請參閱下列 *其他案例* 文章的各節：
 

@@ -5,7 +5,7 @@ description: 瞭解如何使用 Azure Active Directory 保護 ASP.NET Core Blazo
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: devx-track-csharp, mvc
-ms.date: 10/08/2020
+ms.date: 10/27/2020
 no-loc:
 - ASP.NET Core Identity
 - cookie
@@ -18,18 +18,25 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/security/webassembly/hosted-with-azure-active-directory
-ms.openlocfilehash: e6f514793a2efde120f70ac58f4ad4be7516ada7
-ms.sourcegitcommit: daa9ccf580df531254da9dce8593441ac963c674
+ms.openlocfilehash: cb1deb71723660964954c2faae4512b7df9b2ed4
+ms.sourcegitcommit: 2e3a967331b2c69f585dd61e9ad5c09763615b44
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 10/09/2020
-ms.locfileid: "91900832"
+ms.lasthandoff: 10/27/2020
+ms.locfileid: "92690541"
 ---
 # <a name="secure-an-aspnet-core-no-locblazor-webassembly-hosted-app-with-azure-active-directory"></a>Blazor WebAssembly使用 Azure Active Directory 保護 ASP.NET Core 託管應用程式
 
 由 [Javier Calvarro Nelson](https://github.com/javiercn) 和 [Luke Latham](https://github.com/guardrex)
 
 本文說明如何建立使用[Azure Active Directory (AAD) ](https://azure.microsoft.com/services/active-directory/)進行驗證的[託管 Blazor WebAssembly 應用程式](xref:blazor/hosting-models#blazor-webassembly)。
+
+::: moniker range=">= aspnetcore-5.0"
+
+> [!NOTE]
+> 針對 Blazor WebAssembly 在 Visual Studio 中建立的應用程式，這些應用程式設定為支援 AAD 組織目錄中的帳戶，Visual Studio 不會在產生專案時正確設定應用程式。 未來的 Visual Studio 版本將會解決此問題。 本文說明如何使用 .NET Core CLI 的命令來建立應用程式 `dotnet new` 。 如果您想要在 IDE 更新 ASP.NET Core 5.0 中的最新範本之前使用 Visual Studio 建立應用程式 Blazor ，請參閱本文的每一節，然後在 Visual Studio 建立應用程式之後，確認或更新應用程式的設定。
+
+::: moniker-end
 
 ## <a name="register-apps-in-aad-and-create-solution"></a>在 AAD 中註冊應用程式並建立解決方案
 
@@ -41,29 +48,29 @@ ms.locfileid: "91900832"
 
 遵循快速入門中的指導方針 [：使用 Microsoft 身分識別平臺註冊應用程式](/azure/active-directory/develop/quickstart-register-app) ，以及後續的 Azure AAD 主題以註冊 *伺服器 API 應用* 程式的 AAD 應用程式，然後執行下列動作：
 
-1. 在**Azure Active Directory**  >  **應用程式註冊**中，選取 [**新增註冊**]。
-1. 提供應用程式的**名稱** (例如， ** Blazor Server AAD**) 。
-1. 選擇 **支援的帳戶類型**。 您可以選取 **此組織目錄中的帳戶，只** (此體驗的單一租使用者) 。
+1. 在 **Azure Active Directory**  >  **應用程式註冊** 中，選取 [ **新增註冊** ]。
+1. 提供應用程式的 **名稱** (例如， **Blazor Server AAD** ) 。
+1. 選擇 **支援的帳戶類型** 。 您可以選取 **此組織目錄中的帳戶，只** (此體驗的單一租使用者) 。
 1. 在此案例中， *伺服器 API 應用程式* 不需要重新 **導向 uri** ，因此請將下拉式清單保持設定為 [ **Web** ]，而不要輸入重新導向 uri。
-1. 清除 [授**與系統**  >  **管理員同意 openid 和 offline_access 許可權**] 核取方塊。
+1. 清除 [授 **與系統**  >  **管理員同意 openid 和 offline_access 許可權** ] 核取方塊。
 1. 選取 [註冊]。
 
 記錄下列資訊：
 
 * *伺服器 API 應用程式* 應用程式 (用戶端) 識別碼 (例如 `41451fa7-82d9-4673-8fa5-69eff5a761fd`) 
 * 目錄 (租使用者) 識別碼 (例如 `e86c78e2-8bb4-4c41-aefd-918e0565a45e`) 
-* AAD 主要/發行者/租使用者網域 (例如 `contoso.onmicrosoft.com`) ：網域可作為已註冊應用程式之 Azure 入口網站的 [**商標**] 分頁中的**發行者網域**。
+* AAD 主要/發行者/租使用者網域 (例如 `contoso.onmicrosoft.com`) ：網域可作為已註冊應用程式之 Azure 入口網站的 [ **商標** ] 分頁中的 **發行者網域** 。
 
-在 [ **API 許可權**] 中，移除**Microsoft Graph**的  >  **使用者。讀取**許可權，因為應用程式不需要登入或使用者設定檔存取權。
+在 [ **API 許可權** ] 中，移除 **Microsoft Graph** 的  >  **使用者。讀取** 許可權，因為應用程式不需要登入或使用者設定檔存取權。
 
-在中 **公開 API**：
+在中 **公開 API** ：
 
 1. 選取 [新增範圍]  。
 1. 選取 [儲存並繼續]  。
 1. 提供 **範圍名稱** (例如 `API.Access`) 。
 1. 提供系統 **管理員同意顯示名稱** (例如 `Access API`) 。
 1. 提供 **管理員同意描述** (例如 `Allows the app to access server app API endpoints.`) 。
-1. 確認 **狀態** 設定為 [ **已啟用**]。
+1. 確認 **狀態** 設定為 [ **已啟用** ]。
 1. 選取 [新增範圍]。
 
 記錄下列資訊：
@@ -77,19 +84,19 @@ ms.locfileid: "91900832"
 
 ::: moniker range=">= aspnetcore-5.0"
 
-1. 在 **Azure Active Directory** > **應用程式註冊**中，選取 [ **新增註冊**]。
-1. 提供應用程式的**名稱** (例如， ** Blazor 用戶端 AAD**) 。
-1. 選擇 **支援的帳戶類型**。 您可以選取 **此組織目錄中的帳戶，只** (此體驗的單一租使用者) 。
-1. 將 [重新 **導向 uri** ] 下拉式清單設定為 **單一頁面應用程式 (SPA) ** 並提供下列重新導向 uri： `https://localhost:{PORT}/authentication/login-callback` 。 在 Kestrel 上執行之應用程式的預設埠是5001。 如果應用程式是在不同的 Kestrel 埠上執行，請使用應用程式的埠。 針對 IIS Express，可在 [ *`Server`* **調試** 程式] 面板的應用程式屬性中找到應用程式隨機產生的埠。 由於應用程式目前不存在，且 IIS Express 埠未知，因此在建立應用程式之後，請返回此步驟，並更新重新導向 URI。 批註會出現在 [ [建立應用程式](#create-the-app) ] 區段中，以提醒 IIS Express 使用者更新重新導向 URI。
+1. 在 **Azure Active Directory** > **應用程式註冊** 中，選取 [ **新增註冊** ]。
+1. 提供應用程式的 **名稱** (例如， **Blazor 用戶端 AAD** ) 。
+1. 選擇 **支援的帳戶類型** 。 您可以選取 **此組織目錄中的帳戶，只** (此體驗的單一租使用者) 。
+1. 將 [重新 **導向 uri** ] 下拉式清單設定為 **單一頁面應用程式 (SPA)** 並提供下列重新導向 uri： `https://localhost:{PORT}/authentication/login-callback` 。 在 Kestrel 上執行應用程式的預設連接埠是 5001。 如果應用程式是在不同的 Kestrel 埠上執行，請使用應用程式的埠。 針對 IIS Express，可在 [ *`Server`* **調試** 程式] 面板的應用程式屬性中找到應用程式隨機產生的埠。 由於應用程式目前不存在，且 IIS Express 埠未知，因此在建立應用程式之後，請返回此步驟，並更新重新導向 URI。 批註會出現在 [ [建立應用程式](#create-the-app) ] 區段中，以提醒 IIS Express 使用者更新重新導向 URI。
 1. 清除 [授 **與系統** > **管理員同意 openid 和 offline_access 許可權** ] 核取方塊。
 1. 選取 [註冊]。
 
 記錄 *`Client`* 應用程式應用程式 (用戶端) 識別碼 (例如 `4369008b-21fa-427c-abaa-9b53bf58e538`) 。
 
-在「**驗證**平臺設定」的 > **Platform configurations** > **單一頁面應用程式中， (SPA) **：
+在「 **驗證** 平臺設定」的 > **Platform configurations** > **單一頁面應用程式中， (SPA)** ：
 
 1. 確認的重新 **導向 URI** `https://localhost:{PORT}/authentication/login-callback` 存在。
-1. 針對**隱含授**與，請確定**未**選取**存取權杖**和**識別碼權杖**的核取方塊。
+1. 針對 **隱含授** 與，請確定 **未** 選取 **存取權杖** 和 **識別碼權杖** 的核取方塊。
 1. 此體驗可接受應用程式的其餘預設值。
 1. 選取 [儲存] 按鈕。
 
@@ -97,33 +104,33 @@ ms.locfileid: "91900832"
 
 ::: moniker range="< aspnetcore-5.0"
 
-1. 在 **Azure Active Directory** > **應用程式註冊**中，選取 [ **新增註冊**]。
-1. 提供應用程式的**名稱** (例如， ** Blazor 用戶端 AAD**) 。
-1. 選擇 **支援的帳戶類型**。 您可以選取 **此組織目錄中的帳戶，只** (此體驗的單一租使用者) 。
-1. 將 [重新 **導向 URI** ] 下拉式清單保持設定為 [ **Web** ]，並提供下列重新導向 uri： `https://localhost:{PORT}/authentication/login-callback` 。 在 Kestrel 上執行之應用程式的預設埠是5001。 如果應用程式是在不同的 Kestrel 埠上執行，請使用應用程式的埠。 針對 IIS Express，可在 [ *`Server`* **調試** 程式] 面板的應用程式屬性中找到應用程式隨機產生的埠。 由於應用程式目前不存在，且 IIS Express 埠未知，因此在建立應用程式之後，請返回此步驟，並更新重新導向 URI。 批註會出現在 [ [建立應用程式](#create-the-app) ] 區段中，以提醒 IIS Express 使用者更新重新導向 URI。
+1. 在 **Azure Active Directory** > **應用程式註冊** 中，選取 [ **新增註冊** ]。
+1. 提供應用程式的 **名稱** (例如， **Blazor 用戶端 AAD** ) 。
+1. 選擇 **支援的帳戶類型** 。 您可以選取 **此組織目錄中的帳戶，只** (此體驗的單一租使用者) 。
+1. 將 [重新 **導向 URI** ] 下拉式清單保持設定為 [ **Web** ]，並提供下列重新導向 uri： `https://localhost:{PORT}/authentication/login-callback` 。 在 Kestrel 上執行應用程式的預設連接埠是 5001。 如果應用程式是在不同的 Kestrel 埠上執行，請使用應用程式的埠。 針對 IIS Express，可在 [ *`Server`* **調試** 程式] 面板的應用程式屬性中找到應用程式隨機產生的埠。 由於應用程式目前不存在，且 IIS Express 埠未知，因此在建立應用程式之後，請返回此步驟，並更新重新導向 URI。 批註會出現在 [ [建立應用程式](#create-the-app) ] 區段中，以提醒 IIS Express 使用者更新重新導向 URI。
 1. 清除 [授 **與系統** > **管理員同意 openid 和 offline_access 許可權** ] 核取方塊。
 1. 選取 [註冊]。
 
 記錄 *`Client`* 應用程式應用程式 (用戶端) 識別碼 (例如 `4369008b-21fa-427c-abaa-9b53bf58e538`) 。
 
-在 [ **驗證** > **平臺**設定] > **Web**：
+在 [ **驗證** > **平臺** 設定] > **Web** ：
 
 1. 確認的重新 **導向 URI** `https://localhost:{PORT}/authentication/login-callback` 存在。
-1. 針對 **[隱含授**與]，選取 **存取權杖** 和 **識別碼權杖**的核取方塊。
+1. 針對 **[隱含授** 與]，選取 **存取權杖** 和 **識別碼權杖** 的核取方塊。
 1. 此體驗可接受應用程式的其餘預設值。
 1. 選取 [儲存] 按鈕。
 
 ::: moniker-end
 
-在 **API 許可權**中：
+在 **API 許可權** 中：
 
-1. 確認應用程式已**Microsoft Graph**  >  **使用者。讀取**許可權。
-1. 選取 [ **新增] 許可權** ，然後選取 [我的 **api**]。
-1. 從 [**名稱**] 資料行中選取*伺服器 API 應用程式* (例如， ** Blazor Server AAD**) 。
+1. 確認應用程式已 **Microsoft Graph**  >  **使用者。讀取** 許可權。
+1. 選取 [ **新增] 許可權** ，然後選取 [我的 **api** ]。
+1. 從 [ **名稱** ] 資料行中選取 *伺服器 API 應用程式* (例如， **Blazor Server AAD** ) 。
 1. 開啟 **API** 清單。
 1. 啟用對 API 的存取 (例如 `API.Access`) 。
 1. 選取 [新增權限]。
-1. 選取 [ **授與系統管理員同意 {租使用者名稱}** ] 按鈕。 選取 [是]  確認。
+1. 選取 [ **授與系統管理員同意 {租使用者名稱}** ] 按鈕。 選取 [是] 以確認。
 
 ### <a name="create-the-app"></a>建立應用程式
 
@@ -138,12 +145,12 @@ dotnet new blazorwasm -au SingleOrg --api-client-id "{SERVER API APP CLIENT ID}"
 | `{APP NAME}`                 | &mdash;                                               | `BlazorSample`                               |
 | `{CLIENT APP CLIENT ID}`     | 應用程式 (用戶端) 的應用程式識別碼 *`Client`*        | `4369008b-21fa-427c-abaa-9b53bf58e538`       |
 | `{DEFAULT SCOPE}`            | 範圍名稱                                            | `API.Access`                                 |
-| `{SERVER API APP CLIENT ID}` | *伺服器 API 應用*程式 (用戶端) 識別碼      | `41451fa7-82d9-4673-8fa5-69eff5a761fd`       |
+| `{SERVER API APP CLIENT ID}` | *伺服器 API 應用* 程式 (用戶端) 識別碼      | `41451fa7-82d9-4673-8fa5-69eff5a761fd`       |
 | `{SERVER API APP ID URI}`    | 應用程式識別碼 URI                                    | `api://41451fa7-82d9-4673-8fa5-69eff5a761fd` |
 | `{TENANT DOMAIN}`            | 主要/發行者/租使用者網域                       | `contoso.onmicrosoft.com`                    |
 | `{TENANT ID}`                | 目錄 (租用戶) 識別碼                                 | `e86c78e2-8bb4-4c41-aefd-918e0565a45e`       |
 
-使用選項指定的輸出位置會 `-o|--output` 建立專案資料夾（如果不存在），而且會成為應用程式名稱的一部分。
+使用 `-o|--output` 選項指定的輸出位置會建立專案資料夾 (如果不存在)，並成為應用程式名稱的一部分。
 
 ::: moniker range=">= aspnetcore-5.0"
 
@@ -162,7 +169,7 @@ dotnet new blazorwasm -au SingleOrg --api-client-id "{SERVER API APP CLIENT ID}"
 > [!NOTE]
 > 在 Azure 入口網站中， *`Client`* 會針對使用預設設定在 Kestrel 伺服器上執行的應用程式，將應用程式的平臺設定重新 **導向 URI** 設定為使用埠5001。
 >
-> 如果 *`Client`* 應用程式是在隨機的 IIS Express 埠上執行，則可以在 [**調試**程式] 面板中的*伺服器 API 應用程式*屬性中找到應用程式的埠。
+> 如果 *`Client`* 應用程式是在隨機的 IIS Express 埠上執行，則可以在 [ **調試** 程式] 面板中的 *伺服器 API 應用程式* 屬性中找到應用程式的埠。
 >
 > 如果先前未使用 *`Client`* 應用程式的已知埠設定埠，請返回 *`Client`* Azure 入口網站中的應用程式註冊，然後以正確的埠更新重新導向 URI。
 
@@ -321,7 +328,7 @@ services.Configure<JwtBearerOptions>(
 
 ### <a name="weatherforecast-controller"></a>WeatherForecast 控制器
 
-WeatherForecast 控制器 (*控制器/WeatherForecastController*) 會公開受保護的 API，並將 [`[Authorize]`](xref:Microsoft.AspNetCore.Authorization.AuthorizeAttribute) 屬性套用至控制器。 請 **務必** 瞭解：
+WeatherForecast 控制器 ( *控制器/WeatherForecastController* ) 會公開受保護的 API，並將 [`[Authorize]`](xref:Microsoft.AspNetCore.Authorization.AuthorizeAttribute) 屬性套用至控制器。 請 **務必** 瞭解：
 
 * [`[Authorize]`](xref:Microsoft.AspNetCore.Authorization.AuthorizeAttribute)此 api 控制器中的屬性是保護此 api 不會遭到未經授權存取的唯一做法。
 * [`[Authorize]`](xref:Microsoft.AspNetCore.Authorization.AuthorizeAttribute)應用程式中使用的屬性 Blazor WebAssembly 僅做為應用程式的提示，使用者應獲得授權才能讓應用程式正常運作。

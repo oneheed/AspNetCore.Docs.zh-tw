@@ -18,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/globalization-localization
-ms.openlocfilehash: 4345dd8525c2e72aaddc8e45a4fd4d9bfdd63040
-ms.sourcegitcommit: b5ebaf42422205d212e3dade93fcefcf7f16db39
+ms.openlocfilehash: 52810cb5a5961ffe932a7f5ac2a3a03033781cc9
+ms.sourcegitcommit: c06a5bf419541d17595af30e4cf6f2787c21855e
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 10/21/2020
-ms.locfileid: "92326522"
+ms.lasthandoff: 10/27/2020
+ms.locfileid: "92678488"
 ---
 # <a name="aspnet-core-no-locblazor-globalization-and-localization"></a>ASP.NET Core Blazor 全球化和當地語系化
 
@@ -66,7 +66,7 @@ Blazor的 [`@bind`](xref:mvc/views/razor#bind) 功能會根據使用者目前的
 
 [`@bind`](xref:mvc/views/razor#bind) 支援 `@bind:culture` 參數，以提供 <xref:System.Globalization.CultureInfo?displayProperty=fullName> 剖析和格式化值的。 使用 `date` 和欄位類型時，不建議使用指定文化特性 `number` 。 `date` 而且 `number` 具有內建的 Blazor 支援，可提供必要的文化特性。
 
-## <a name="localization"></a>當地語系化
+## <a name="localization"></a>Localization
 
 ### Blazor WebAssembly
 
@@ -164,6 +164,19 @@ Blazor Server 應用程式會使用 [當地語系化中介軟體](xref:fundament
 1. 瀏覽器會開啟 WebSocket 連接來建立互動式 Blazor Server 會話。
 1. 當地語系化中介軟體會讀取 cookie 並指派文化特性。
 1. Blazor Server會話的開頭是正確的文化特性。
+
+使用時 <xref:Microsoft.AspNetCore.Mvc.Razor.RazorPage> ，請使用 <xref:Microsoft.AspNetCore.Mvc.Razor.RazorPage.Context> 屬性：
+
+```razor
+@{
+    this.Context.Response.Cookies.Append(
+        CookieRequestCultureProvider.DefaultCookieName,
+        CookieRequestCultureProvider.MakeCookieValue(
+            new RequestCulture(
+                CultureInfo.CurrentCulture,
+                CultureInfo.CurrentUICulture)));
+}
+```
 
 #### <a name="provide-ui-to-choose-the-culture"></a>提供 UI 以選擇文化特性
 

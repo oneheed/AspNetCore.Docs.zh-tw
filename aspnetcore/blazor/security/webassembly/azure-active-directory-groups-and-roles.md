@@ -5,7 +5,7 @@ description: 瞭解如何設定 Blazor WebAssembly 以使用 Azure Active Direct
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: devx-track-csharp, mvc
-ms.date: 07/28/2020
+ms.date: 10/27/2020
 no-loc:
 - ASP.NET Core Identity
 - cookie
@@ -18,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/security/webassembly/aad-groups-roles
-ms.openlocfilehash: ac666a4c7493140d4ae93047e18202c3d8314c7b
-ms.sourcegitcommit: daa9ccf580df531254da9dce8593441ac963c674
+ms.openlocfilehash: 7a56f03f2c3acd08b009673ef7533186bf703604
+ms.sourcegitcommit: 2e3a967331b2c69f585dd61e9ad5c09763615b44
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 10/09/2020
-ms.locfileid: "91900696"
+ms.lasthandoff: 10/27/2020
+ms.locfileid: "92690464"
 ---
 # <a name="azure-active-directory-aad-groups-administrator-roles-and-user-defined-roles"></a>Azure Active Directory (AAD) 群組、系統管理員角色和使用者定義的角色
 
@@ -45,17 +45,17 @@ Azure Active Directory (AAD) 提供數個可結合的授權方法 ASP.NET Core I
 * [獨立的 AAD](xref:blazor/security/webassembly/standalone-with-azure-active-directory)
 * [使用 AAD 託管](xref:blazor/security/webassembly/hosted-with-azure-active-directory)
 
-## <a name="microsoft-graph-api-permission"></a>Microsoft Graph API 許可權
+## <a name="scopes"></a>範圍
 
 具有超過五個 AAD 系統管理員角色和安全性群組成員資格的任何應用程式使用者都需要 [MICROSOFT GRAPH API](/graph/use-the-api) 呼叫。
 
-若要允許圖形 API 呼叫，請 *`Client`* Blazor 在 Azure 入口網站中提供下列任何 [圖形 API 許可權](/graph/permissions-reference) 給裝載解決方案的獨立或應用程式：
+若要允許圖形 API 呼叫，請將 *`Client`* Blazor Azure 入口網站中) 的下列任何 [圖形 API 許可權](/graph/permissions-reference) 授與裝載解決方案的獨立或應用程式 (範圍：
 
 * `Directory.Read.All`
 * `Directory.ReadWrite.All`
 * `Directory.AccessAsUser.All`
 
-`Directory.Read.All` 是最低許可權許可權，而且是本文中所述範例所使用的許可權。
+`Directory.Read.All` 是最低許可權的範圍，而且是本文中所述範例所使用的範圍。
 
 ## <a name="user-defined-groups-and-administrator-roles"></a>使用者定義群組和系統管理員角色
 
@@ -88,7 +88,145 @@ public class CustomUserAccount : RemoteUserAccount
 }
 ```
 
-在獨立應用程式或 *`Client`* 託管解決方案的應用程式中 Blazor ，建立自訂 <xref:Microsoft.AspNetCore.Components.WebAssembly.Authentication.AuthorizationMessageHandler> 類別。 針對取得角色和群組資訊的圖形 API 呼叫，請使用正確的範圍 (許可權) 。
+::: moniker range=">= aspnetcore-5.0"
+
+您可以使用下列 **其中一** 種方法來建立 AAD 群組和角色的宣告：
+
+* [使用 Graph SDK](#use-the-graph-sdk)
+* [使用名為 `HttpClient`](#use-a-named-httpclient)
+
+### <a name="use-the-graph-sdk"></a>使用 Graph SDK
+
+將封裝參考新增至的託管解決方案的獨立應用程式或 *`Client`* 應用程式 Blazor [`Microsoft.Graph`](https://www.nuget.org/packages/Microsoft.Graph) 。
+
+在文章的 *GRAPH sdk* 區段中，新增 graph sdk 公用程式類別和設定 <xref:blazor/security/webassembly/graph-api#graph-sdk> 。
+
+將下列自訂使用者帳戶 factory 新增至裝載解決方案的獨立 appo 或 *`Client`* 應用程式 Blazor (`CustomAccountFactory.cs`) 。 自訂使用者 factory 用來處理角色和群組宣告。 宣告 `roles` 陣列涵蓋于 [使用者定義的角色](#user-defined-roles) 一節中。 如果宣告 `hasgroups` 存在，GRAPH SDK 會用來向圖形 API 提出授權要求，以取得使用者的角色和群組：
+
+```csharp
+using System;
+using System.Net.Http;
+using System.Net.Http.Json;
+using System.Security.Claims;
+using System.Threading.Tasks;
+using Microsoft.AspNetCore.Components.WebAssembly.Authentication;
+using Microsoft.AspNetCore.Components.WebAssembly.Authentication.Internal;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
+using Microsoft.Graph;
+
+public class CustomAccountFactory
+    : AccountClaimsPrincipalFactory<CustomUserAccount>
+{
+    private readonly ILogger<CustomAccountFactory> logger;
+    private readonly IServiceProvider serviceProvider;
+
+    public CustomAccountFactory(IAccessTokenProviderAccessor accessor, 
+        IServiceProvider serviceProvider,
+        ILogger<CustomAccountFactory> logger)
+        : base(accessor)
+    {
+        this.serviceProvider = serviceProvider;
+        this.logger = logger;
+    }
+
+    public async override ValueTask<ClaimsPrincipal> CreateUserAsync(
+        CustomUserAccount account,
+        RemoteAuthenticationUserOptions options)
+    {
+        var initialUser = await base.CreateUserAsync(account, options);
+
+        if (initialUser.Identity.IsAuthenticated)
+        {
+            var userIdentity = (ClaimsIdentity)initialUser.Identity;
+
+            foreach (var role in account.Roles)
+            {
+                userIdentity.AddClaim(new Claim("role", role));
+            }
+
+            if (userIdentity.HasClaim(c => c.Type == "hasgroups"))
+            {
+                IUserMemberOfCollectionWithReferencesPage groupsAndAzureRoles = 
+                    null;
+
+                try
+                {
+                    var graphClient = ActivatorUtilities
+                        .CreateInstance<GraphServiceClient>(serviceProvider);
+                    var oid = userIdentity.Claims.FirstOrDefault(x => x.Type == "oid")?
+                        .Value;
+
+                    if (!string.IsNullOrEmpty(oid))
+                    {
+                        groupsAndAzureRoles = await graphClient.Users[oid].MemberOf
+                            .Request().GetAsync();
+                    }
+                }
+                catch (ServiceException serviceException)
+                {
+                    // Optional: Log the error
+                }
+
+                if (groupsAndAzureRoles != null)
+                {
+                    foreach (var entry in groupsAndAzureRoles)
+                    {
+                        userIdentity.AddClaim(new Claim("group", entry.Id));
+                    }
+                }
+
+                var claim = userIdentity.Claims.FirstOrDefault(
+                    c => c.Type == "hasgroups");
+
+                userIdentity.RemoveClaim(claim);
+            }
+            else
+            {
+                foreach (var group in account.Groups)
+                {
+                    userIdentity.AddClaim(new Claim("group", group));
+                }
+            }
+        }
+
+        return initialUser;
+    }
+}
+```
+
+上述程式碼不包含可轉移的成員資格。 如果應用程式需要直接且可轉移的群組成員資格宣告：
+
+* 將的 `IUserMemberOfCollectionWithReferencesPage` 型別變更 `groupsAndAzureRoles` 為 `IUserTransitiveMemberOfCollectionWithReferencesPage` 。
+* 要求使用者的群組和角色時，請將 `MemberOf` 屬性取代為 `TransitiveMemberOf` 。
+
+在 `Program.Main` (`Program.cs`) 中，將 MSAL authentication 設定為使用自訂使用者帳戶 Factory：如果應用程式使用擴充的自訂使用者帳戶類別 <xref:Microsoft.AspNetCore.Components.WebAssembly.Authentication.RemoteUserAccount> ，請 <xref:Microsoft.AspNetCore.Components.WebAssembly.Authentication.RemoteUserAccount> 在下列程式碼中交換的自訂使用者帳戶類別：
+
+```csharp
+using Microsoft.AspNetCore.Components.WebAssembly.Authentication;
+using Microsoft.Extensions.Configuration;
+
+...
+
+builder.Services.AddMsalAuthentication<RemoteAuthenticationState, 
+    CustomUserAccount>(options =>
+{
+    builder.Configuration.Bind("AzureAd", 
+        options.ProviderOptions.Authentication);
+    options.ProviderOptions.DefaultAccessTokenScopes.Add("...");
+
+    options.ProviderOptions.AdditionalScopesToConsent.Add(
+        "https://graph.microsoft.com/Directory.Read.All");
+})
+.AddAccountClaimsPrincipalFactory<RemoteAuthenticationState, CustomUserAccount, 
+    CustomUserFactory>();
+```
+
+### <a name="use-a-named-httpclient"></a>使用名為 `HttpClient`
+
+::: moniker-end
+
+在獨立應用程式或 *`Client`* 託管解決方案的應用程式中 Blazor ，建立自訂 <xref:Microsoft.AspNetCore.Components.WebAssembly.Authentication.AuthorizationMessageHandler> 類別。 針對取得角色和群組資訊的圖形 API 呼叫，請使用正確的範圍。
 
 `GraphAPIAuthorizationMessageHandler.cs`:
 
@@ -146,7 +284,7 @@ public class Value
 }
 ```
 
-建立自訂的使用者 factory 來處理角色和群組宣告。 下列範例範例也會處理宣告 `roles` 陣列，這會在 [使用者定義的角色](#user-defined-roles) 一節中討論。 如果宣告 `hasgroups` 存在， <xref:System.Net.Http.HttpClient> 就會使用命名的來提出要求圖形 API 的授權要求，以取得使用者的角色和群組。 此實行使用 Microsoft Identity Platform v1.0 端點 `https://graph.microsoft.com/v1.0/me/memberOf` ([API 檔](/graph/api/user-list-memberof)) 。 Identity針對 v2.0 升級 MSAL 套件時，本主題中的指導方針將會針對 v2.0 進行更新。
+建立自訂的使用者 factory 來處理角色和群組宣告。 下列範例範例也會處理宣告 `roles` 陣列，這會在 [使用者定義的角色](#user-defined-roles) 一節中討論。 如果宣告 `hasgroups` 存在， <xref:System.Net.Http.HttpClient> 就會使用命名的來提出要求圖形 API 的授權要求，以取得使用者的角色和群組。 此實行使用 Microsoft Identity Platform v1.0 端點 `https://graph.microsoft.com/v1.0/me/memberOf` ([API 檔](/graph/api/user-list-memberof)) 。
 
 `CustomAccountFactory.cs`:
 
@@ -221,7 +359,7 @@ public class CustomUserFactory
                 }
                 catch (AccessTokenNotAvailableException exception)
                 {
-                    logger.LogError("Graph API access token failure: {MESSAGE}", 
+                    logger.LogError("Graph API access token failure: {Message}", 
                         exception.Message);
                 }
             }
@@ -250,9 +388,14 @@ public class CustomUserFactory
 >
 > 您可以在本文中找到此方法的一般涵蓋範圍 <xref:blazor/security/webassembly/additional-scenarios#custom-authorizationmessagehandler-class> 。
 
-在 `Program.Main` `Program.cs` 託管解決方案的獨立應用程式或應用程式 () 中註冊 factory *`Client`* Blazor 。 同意 `Directory.Read.All` 許可權範圍作為應用程式的其他範圍：
+在 `Program.Main` `Program.cs` 託管解決方案的獨立應用程式或應用程式 () 中註冊 factory *`Client`* Blazor 。 同意 `Directory.Read.All` 範圍作為應用程式的其他範圍：
 
 ```csharp
+using Microsoft.AspNetCore.Components.WebAssembly.Authentication;
+using Microsoft.Extensions.Configuration;
+
+...
+
 builder.Services.AddMsalAuthentication<RemoteAuthenticationState, 
     CustomUserAccount>(options =>
 {
@@ -266,6 +409,8 @@ builder.Services.AddMsalAuthentication<RemoteAuthenticationState,
 .AddAccountClaimsPrincipalFactory<RemoteAuthenticationState, CustomUserAccount, 
     CustomUserFactory>();
 ```
+
+## <a name="authorization-configuration"></a>授權設定
 
 在中為每個群組或角色建立 [原則](xref:security/authorization/policies) `Program.Main` 。 下列範例會建立 AAD *計費管理員* 角色的原則：
 
@@ -352,24 +497,24 @@ builder.Services.AddAuthorizationCore(options =>
 
 除了授權用戶端 WebAssembly 應用程式中的使用者存取頁面和資源，伺服器 API 還可以授權使用者存取安全的 API 端點。 在 *伺服器* 應用程式驗證使用者的存取權杖之後：
 
-* 應用程式會使用使用者的不可變 [物件識別碼宣告 (`oid`) ](/azure/active-directory/develop/id-tokens#payload-claims) 從 JWT (`id_token`) 取得圖形 API 的存取權杖。
-* 圖形 API 呼叫會取得使用者的 Azure 使用者定義安全性群組和系統管理員角色成員資格。
+* 伺服器 API 應用程式會使用使用者的不可變 [物件識別碼宣告 (`oid`) ](/azure/active-directory/develop/id-tokens#payload-claims) 從其存取權杖取得圖形 API 的存取權杖。
+* 圖形 API 呼叫會透過呼叫使用者來取得使用者的 Azure 使用者定義安全性群組和系統管理員角色成員資格 [`memberOf`](/graph/api/user-list-memberof) 。
 * 成員資格是用來建立 `group` 宣告。
-* [授權原則](xref:security/authorization/policies) 可以用來限制使用者對伺服器 API 端點的存取。
+* [授權原則](xref:security/authorization/policies) 可用來限制使用者存取整個應用程式中的伺服器 API 端點。
 
 > [!NOTE]
 > 本指南目前不包含授權使用者的 [AAD 使用者定義角色](#user-defined-roles)基礎。
 
-### <a name="packages"></a>Packages
+本節中的指導方針會將伺服器 API 應用程式設定為 Microsoft Graph API 呼叫的 [*daemon 應用程式*](/azure/active-directory/develop/scenario-daemon-overview) 。 這種方法 **不會：**
 
-針對下列套件，將套件參考新增至 *伺服器* 應用程式：
+* 需要 `access_as_user` 範圍。
+* 代表發出 API 要求的使用者/用戶端存取圖形 API。
 
-* [Microsoft.Graph](https://www.nuget.org/packages/Microsoft.Graph)
-* [Microsoft。 IdentityModel. ActiveDirectory](https://www.nuget.org/packages?q=Microsoft.IdentityModel.Clients.ActiveDirectory)
+伺服器 API 應用程式圖形 API 的呼叫只需要在 Azure 入口網站中圖形 API 範圍的伺服器 API 應用 **程式應用程式** `Directory.Read.All` 。 這種方法絕對可以防止用戶端應用程式存取伺服器 API 未明確允許的目錄資料。 用戶端應用程式只能存取伺服器 API 應用程式的控制器端點。
 
 ### <a name="azure-configuration"></a>Azure 設定
 
-* 確認已對 *伺服器* 應用程式註冊授與圖形 API 許可權的 API 存取權 `Directory.Read.All` ，這是安全性群組的最低許可權存取層級。 確認在進行許可權指派之後，會將系統管理員同意套用至許可權。
+* 確認 [ *伺服器* 應用程式註冊] 為 [ **應用程式** (未) 圖形 API 範圍 **委派** 給 `Directory.Read.All` ，這是安全性群組的最低許可權存取層級。 確認在進行範圍指派之後，會將系統管理員同意套用至範圍。
 * 將新的用戶端密碼指派給 *伺服器* 應用程式。 在 [ [應用程式設定](#app-settings) ] 區段中，記下應用程式設定的秘密。
 
 ### <a name="app-settings"></a>應用程式設定
@@ -398,9 +543,49 @@ builder.Services.AddAuthorizationCore(options =>
 },
 ```
 
+::: moniker range=">= aspnetcore-5.0"
+
+> [!NOTE]
+> 如果未驗證租使用者發行者網域，則使用者/用戶端存取的伺服器 API 範圍會使用以 `https://` URI 為基礎的 URI。 在此案例中，伺服器 API 應用程式需要 `Audience` 在檔案中設定 `appsettings.json` 。 在下列設定中，值的結尾 `Audience` **不** 包含預設範圍 `/{DEFAULT SCOPE}` ，其中預留位置 `{DEFAULT SCOPE}` 為預設範圍：
+>
+> ```json
+> {
+>   "AzureAd": {
+>     ...
+>
+>     "Audience": "https://{TENANT}.onmicrosoft.com/{SERVER API APP CLIENT ID OR CUSTOM VALUE}"
+>   }
+> }
+>
+> In the preceding configuration, the placeholder `{TENANT}` is the app's tenant, and the placeholder `{SERVER API APP CLIENT ID OR CUSTOM VALUE}` is the server API app's `ClientId` or custom value provided in the Azure portal's app registration.
+>
+> Example:
+>
+> ```json
+> {
+>   "AzureAd": {
+>     ...
+>
+>     "Audience": "https://contoso.onmicrosoft.com/41451fa7-82d9-4673-8fa5-69eff5a761fd"
+>   }
+> }
+> ```
+>
+> 在上述的範例設定中：
+>
+> * 租使用者網域為 `contoso.onmicrosoft.com` 。
+> * 伺服器 API 應用程式 `ClientId` 為 `41451fa7-82d9-4673-8fa5-69eff5a761fd` 。
+>
+> > [!NOTE]
+> > 如果 `Audience` 應用程式的發行者網域具有以架構為基礎的 API 範圍，則通常 **不** 需要明確地設定 `api://` 。
+>
+> 如需詳細資訊，請參閱<xref:blazor/security/webassembly/hosted-with-azure-active-directory#app-settings>。
+
+::: moniker-end
+
 ### <a name="authorization-policies"></a>在命名空間層級設定的授權原則
 
-*Server* [authorization policies](xref:security/authorization/policies) `Startup.ConfigureServices` `Startup.cs` 根據群組物件識別碼和[aad 系統管理員角色物件識別碼](#aad-administrator-role-object-ids)，在伺服器應用程式的 () 中建立 aad 安全性群組和 aad 系統管理員角色的授權原則。
+*Server* [authorization policies](xref:security/authorization/policies) `Startup.ConfigureServices` `Startup.cs` 根據群組物件識別碼和 [aad 系統管理員角色物件識別碼](#aad-administrator-role-object-ids)，在伺服器應用程式的 () 中建立 aad 安全性群組和 aad 系統管理員角色的授權原則。
 
 例如，Azure 計費管理員角色原則具有下列設定：
 
@@ -430,14 +615,154 @@ public class BillingDataController : ControllerBase
 }
 ```
 
+::: moniker range=">= aspnetcore-5.0"
+
+### <a name="packages"></a>套件
+
+針對下列套件，將套件參考新增至 *伺服器* 應用程式：
+
+* [Microsoft.Graph](https://www.nuget.org/packages/Microsoft.Graph)
+* [Microsoft ... Identity客戶](https://www.nuget.org/packages/Microsoft.Identity.Client)
+
+### <a name="services"></a>服務
+
+在 *伺服器* 應用程式的 `Startup.ConfigureServices` 方法中， `Startup` *伺服器* 應用程式類別中的程式碼需要其他命名空間。 將下列命名空間新增至 `Startup.cs` ：
+
+```csharp
+using System;
+using System.IdentityModel.Tokens.Jwt;
+using System.Net.Http.Headers;
+using System.Security.Claims;
+using System.Threading.Tasks;
+using Microsoft.Graph;
+using Microsoft.Identity.Client;
+using Microsoft.IdentityModel.Logging;
+```
+
+設定時 <xref:Microsoft.AspNetCore.Authentication.JwtBearer.JwtBearerEvents> ：
+
+* （選擇性）包含的處理 <xref:Microsoft.AspNetCore.Authentication.JwtBearer.JwtBearerEvents.OnAuthenticationFailed?displayProperty=nameWithType> 。 例如，應用程式可以記錄失敗的驗證。
+* 在中 <xref:Microsoft.AspNetCore.Authentication.JwtBearer.JwtBearerEvents.OnTokenValidated?displayProperty=nameWithType> ，提出圖形 API 呼叫，以取得使用者的群組和角色。
+
+> [!WARNING]
+> <xref:Microsoft.IdentityModel.Logging.IdentityModelEventSource.ShowPII?displayProperty=nameWithType> 提供個人識別資訊 (PII) 記錄訊息中。 只啟用 PII 以測試使用者帳戶進行偵錯工具。
+
+在 `Startup.ConfigureServices` 中：
+
+```csharp
+JwtSecurityTokenHandler.DefaultMapInboundClaims = false;
+
+#if DEBUG
+IdentityModelEventSource.ShowPII = true;
+#endif
+
+var scopes = new string[] { "https://graph.microsoft.com/.default" };
+
+var app = ConfidentialClientApplicationBuilder.Create(Configuration["AzureAd:ClientId"])
+   .WithClientSecret(Configuration["AzureAd:ClientSecret"])
+   .WithAuthority(new Uri(Configuration["AzureAd:Instance"] + Configuration["AzureAd:Domain"]))
+   .Build();
+
+services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+    .AddMicrosoftIdentityWebApi(options =>
+{
+    Configuration.Bind("AzureAd", options);
+
+    options.Events = new JwtBearerEvents()
+    {
+        OnTokenValidated = async context =>
+        {
+            var accessToken = context.SecurityToken as JwtSecurityToken;
+
+            var oid = accessToken.Claims.FirstOrDefault(x => x.Type == "oid")?
+                .Value;
+
+            if (!string.IsNullOrEmpty(oid))
+            {
+                var userIdentity = (ClaimsIdentity)context.Principal.Identity;
+
+                AuthenticationResult authResult = null;
+
+                try
+                {
+                    authResult = await app.AcquireTokenForClient(scopes)
+                        .ExecuteAsync();
+                }
+                catch (MsalUiRequiredException ex)
+                {
+                    // Optional: Log the exception
+                }
+                catch (MsalServiceException ex)
+                {
+                    // Optional: Log the exception
+                }
+
+                var graphClient = new GraphServiceClient(
+                    new DelegateAuthenticationProvider(async requestMessage => {
+                        requestMessage.Headers.Authorization =
+                            new AuthenticationHeaderValue("Bearer", authResult.AccessToken);
+
+                        await Task.CompletedTask;
+                    }));
+
+                IUserMemberOfCollectionWithReferencesPage groupsAndAzureRoles = 
+                    null;
+
+                try
+                {
+                    groupsAndAzureRoles = await graphClient.Users[oid].MemberOf.Request()
+                        .GetAsync();
+                }
+                catch (ServiceException serviceException)
+                {
+                    // Optional: Log the exception
+                }
+
+                if (groupsAndAzureRoles != null)
+                {
+                    foreach (var entry in groupsAndAzureRoles)
+                    {
+                        userIdentity.AddClaim(new Claim("group", entry.Id));
+                    }
+                }
+            }
+
+            await Task.FromResult(0);
+        }
+    };
+}, 
+options =>
+{
+    Configuration.Bind("AzureAd", options);
+});
+```
+
+在上述程式碼中，處理下列權杖錯誤是選擇性的：
+
+* `MsalUiRequiredException`：應用程式沒有足夠的許可權 (範圍) 。
+  * 判斷 Azure 入口網站中的伺服器 API 應用程式範圍是否包含的 **應用程式** 許可權 `Directory.Read.All` 。
+  * 確認租使用者系統管理員已授與應用程式的許可權。
+* `MsalServiceException` (`AADSTS70011`) ：確認範圍為 `https://graph.microsoft.com/.default` 。
+
+::: moniker-end
+
+::: moniker range="< aspnetcore-5.0"
+
+### <a name="packages"></a>套件
+
+針對下列套件，將套件參考新增至 *伺服器* 應用程式：
+
+* [Microsoft.Graph](https://www.nuget.org/packages/Microsoft.Graph)
+* [Microsoft。 IdentityModel. ActiveDirectory](https://www.nuget.org/packages?q=Microsoft.IdentityModel.Clients.ActiveDirectory)
+
 ### <a name="service-configuration"></a>服務設定
 
 在 *伺服器* 應用程式的 `Startup.ConfigureServices` 方法中，新增邏輯以進行圖形 API 呼叫，並建立 `group` 使用者安全性群組和角色的使用者宣告。
 
 > [!NOTE]
-> 本節中的範例程式碼會使用 Active Directory 驗證程式庫 (ADAL) （以 Microsoft Platform v1.0 為基礎） Identity 。 本主題將針對適用于 .NET 5 的 v2.0 進行更新 Identity 。 監視 [[RC1] Microsoft Identity Platform 2.0 for Blazor (dotnet/AspNetCore.Docs #19503) ，以 ](https://github.com/dotnet/AspNetCore.Docs/issues/19503)追蹤此工作的進度。
+> 本節中的範例程式碼會使用 Active Directory 驗證程式庫 (ADAL) （以 Microsoft Platform v1.0 為基礎） Identity 。
 
-`Startup`*伺服器*應用程式類別中的程式碼需要其他命名空間。 下列一組 `using` 語句包括本節後面的程式碼所需的命名空間：
+`Startup`*伺服器* 應用程式類別中的程式碼需要其他命名空間。 下列一組 `using` 語句包括本節後面的程式碼所需的命名空間：
 
 ```csharp
 using System;
@@ -483,16 +808,6 @@ services.Configure<JwtBearerOptions>(AzureADDefaults.JwtBearerAuthenticationSche
 {
     options.Events = new JwtBearerEvents()
     {
-        OnAuthenticationFailed = context =>
-        {
-            // Optional: Log the exception
-
-#if DEBUG
-            Console.WriteLine($"OnAuthenticationFailed: {context.Exception}");
-#endif
-
-            return Task.FromResult(0);
-        },
         OnTokenValidated = async context =>
         {
             var accessToken = context.SecurityToken as JwtSecurityToken;
@@ -552,12 +867,6 @@ services.Configure<JwtBearerOptions>(AzureADDefaults.JwtBearerAuthenticationSche
                 catch (ServiceException serviceException)
                 {
                     // Optional: Log the error
-
-#if DEBUG
-                    Console.WriteLine(
-                        "OnTokenValidated: Service Exception: " +
-                        $"{serviceException.Message}");
-#endif
                 }
 
                 if (groupsAndAzureRoles != null)
@@ -567,15 +876,6 @@ services.Configure<JwtBearerOptions>(AzureADDefaults.JwtBearerAuthenticationSche
                         userIdentity.AddClaim(new Claim("group", entry.Id));
                     }
                 }
-            }
-            else
-            {
-                // Optional: Log missing OID claim
-
-#if DEBUG
-                Console.WriteLine($"OnTokenValidated: OID missing: " +
-                    $"{accessToken.RawData}");
-#endif
             }
 
             await Task.FromResult(0);
@@ -588,6 +888,8 @@ services.Configure<JwtBearerOptions>(AzureADDefaults.JwtBearerAuthenticationSche
 
 * <xref:Microsoft.IdentityModel.Clients.ActiveDirectory.AuthenticationContext.AcquireTokenSilentAsync%2A>因為存取權杖可能已儲存在 ADAL 權杖快取中，所以會先嘗試使用「無訊息權杖取得」 () 。 從快取取得權杖比要求新權杖更快。
 * 如果不是 (從快取取得存取 <xref:Microsoft.IdentityModel.Clients.ActiveDirectory.AdalError.FailedToAcquireTokenSilently?displayProperty=nameWithType> 權杖 <xref:Microsoft.IdentityModel.Clients.ActiveDirectory.AdalError.UserInteractionRequired?displayProperty=nameWithType> ，或) 擲回，則 <xref:Microsoft.IdentityModel.Clients.ActiveDirectory.UserAssertion> 會使用用戶端認證來) 使用者判斷提示 ( (<xref:Microsoft.IdentityModel.Clients.ActiveDirectory.ClientCredential>) ，代表使用者 () 取得權杖 <xref:Microsoft.IdentityModel.Clients.ActiveDirectory.AuthenticationContext.AcquireTokenAsync%2A> 。 接下來， `Microsoft.Graph.GraphServiceClient` 可以繼續使用權杖來進行圖形 API 呼叫。 權杖會置於 ADAL 權杖快取中。 針對相同使用者的未來圖形 API 呼叫，會以無訊息方式從快取中取得權杖 <xref:Microsoft.IdentityModel.Clients.ActiveDirectory.AuthenticationContext.AcquireTokenSilentAsync%2A> 。
+
+::: moniker-end
 
 中的程式碼 <xref:Microsoft.AspNetCore.Authentication.JwtBearer.JwtBearerEvents.OnTokenValidated> 不會取得可轉移的成員資格。 若要變更程式碼以取得直接與可轉移的成員資格：
 
@@ -651,7 +953,7 @@ AAD 註冊的應用程式也可以設定為使用使用者定義的角色。
 
 AAD 所傳送的單一宣告會 `roles` 將使用者定義的角色顯示為 `appRoles` `value` JSON 陣列中的 s。 應用程式必須將角色的 JSON 陣列轉換成個別 `role` 宣告。
 
-`CustomUserFactory`[使用者定義群組和 AAD 系統管理員角色](#user-defined-groups-and-administrator-roles)一節中顯示的會設定為 `roles` 使用 JSON 陣列值的宣告。 `CustomUserFactory`在託管解決方案的獨立應用程式或應用程式中新增並註冊， *`Client`* Blazor 如[使用者定義的群組和 AAD 系統管理員角色](#user-defined-groups-and-administrator-roles)一節所示。 不需要提供程式碼來移除原始宣告， `roles` 因為它會由架構自動移除。
+`CustomUserFactory`[使用者定義群組和 AAD 系統管理員角色](#user-defined-groups-and-administrator-roles)一節中顯示的會設定為 `roles` 使用 JSON 陣列值的宣告。 `CustomUserFactory`在託管解決方案的獨立應用程式或應用程式中新增並註冊， *`Client`* Blazor 如 [使用者定義的群組和 AAD 系統管理員角色](#user-defined-groups-and-administrator-roles)一節所示。 不需要提供程式碼來移除原始宣告， `roles` 因為它會由架構自動移除。
 
 在 `Program.Main` 託管解決方案的獨立應用程式或 *`Client`* 應用程式中 Blazor ，將名為 "" 的宣告指定 `role` 為角色宣告：
 

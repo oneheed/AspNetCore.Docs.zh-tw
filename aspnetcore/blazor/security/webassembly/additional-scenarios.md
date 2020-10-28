@@ -5,7 +5,7 @@ description: 瞭解如何設定 Blazor WebAssembly 額外的安全性案例。
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 08/03/2020
+ms.date: 10/27/2020
 no-loc:
 - ASP.NET Core Identity
 - cookie
@@ -18,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/security/webassembly/additional-scenarios
-ms.openlocfilehash: 50d455b37c51fdd6d3b52b10b3e819eb45526de4
-ms.sourcegitcommit: daa9ccf580df531254da9dce8593441ac963c674
+ms.openlocfilehash: 055e248abfadd9092c173e4630e56ea69517da3b
+ms.sourcegitcommit: 2e3a967331b2c69f585dd61e9ad5c09763615b44
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 10/09/2020
-ms.locfileid: "91900956"
+ms.lasthandoff: 10/27/2020
+ms.locfileid: "92690580"
 ---
 # <a name="aspnet-core-no-locblazor-webassembly-additional-security-scenarios"></a>ASP.NET Core Blazor WebAssembly 額外的安全性案例
 
@@ -33,7 +33,7 @@ ms.locfileid: "91900956"
 
 <xref:Microsoft.AspNetCore.Components.WebAssembly.Authentication.AuthorizationMessageHandler> 是 <xref:System.Net.Http.DelegatingHandler> 用來將存取權杖附加至外寄 <xref:System.Net.Http.HttpResponseMessage> 實例。 您可以使用 <xref:Microsoft.AspNetCore.Components.WebAssembly.Authentication.IAccessTokenProvider> 由架構註冊的服務來取得權杖。 如果無法取得權杖， <xref:Microsoft.AspNetCore.Components.WebAssembly.Authentication.AccessTokenNotAvailableException> 就會擲回。 <xref:Microsoft.AspNetCore.Components.WebAssembly.Authentication.AccessTokenNotAvailableException> 具有 <xref:Microsoft.AspNetCore.Components.WebAssembly.Authentication.AccessTokenNotAvailableException.Redirect%2A> 方法，可用來將使用者流覽至身分識別提供者，以取得新的權杖。
 
-為了方便起見，架構會提供 <xref:Microsoft.AspNetCore.Components.WebAssembly.Authentication.BaseAddressAuthorizationMessageHandler> 預先設定的應用程式基底位址作為授權的 URL。 **只有當要求 URI 在應用程式的基底 URI 內時，才會新增存取權杖。** 當外寄要求 Uri 不在應用程式的基底 URI 內時，請使用[自訂 `AuthorizationMessageHandler` 類別 (*建議*](#custom-authorizationmessagehandler-class) [的 `AuthorizationMessageHandler` ](#configure-authorizationmessagehandler)) 或設定。
+為了方便起見，架構會提供 <xref:Microsoft.AspNetCore.Components.WebAssembly.Authentication.BaseAddressAuthorizationMessageHandler> 預先設定的應用程式基底位址作為授權的 URL。 **只有當要求 URI 在應用程式的基底 URI 內時，才會新增存取權杖。** 當外寄要求 Uri 不在應用程式的基底 URI 內時，請使用 [自訂 `AuthorizationMessageHandler` 類別 ( *建議*](#custom-authorizationmessagehandler-class) [的 `AuthorizationMessageHandler`](#configure-authorizationmessagehandler)) 或設定。
 
 > [!NOTE]
 > 除了用於伺服器 API 存取的用戶端應用程式設定之外，當用戶端和伺服器不在相同的基底位址時，伺服器 API 也必須允許跨原始來源的要求 (CORS) 。 如需伺服器端 CORS 設定的詳細資訊，請參閱本文稍後的「 [跨原始資源分享 (CORS) ](#cross-origin-resource-sharing-cors) 一節。
@@ -174,128 +174,6 @@ builder.Services.AddScoped(sp => new HttpClient(
 
 * <xref:System.Net.Http.HttpClient.BaseAddress?displayProperty=nameWithType> (`new Uri(builder.HostEnvironment.BaseAddress)`) 。
 * 陣列的 URL `authorizedUrls` 。
-
-### <a name="graph-api-example"></a>圖形 API 範例
-
-在下列範例中，名 <xref:System.Net.Http.HttpClient> 為的圖形 API 是用來取得使用者的行動電話號碼來處理通話。 在 `User.Read` Azure 入口網站的 AAD 區域中新增 MICROSOFT GRAPH API 許可權之後，會針對裝載解決方案的獨立應用程式或應用程式中的已命名用戶端設定範圍 *`Client`* Blazor 。
-
-> [!NOTE]
-> 本章節中的範例會取得使用者在 *元件程式碼*中圖形 API 資料。 若要從圖形 API 建立使用者宣告，請參閱下列資源：
->
-> * [自訂使用者](#customize-the-user) 區段
-> * <xref:blazor/security/webassembly/aad-groups-roles>
-
-`GraphAuthorizationMessageHandler.cs`:
-
-```csharp
-public class GraphAPIAuthorizationMessageHandler : AuthorizationMessageHandler
-{
-    public GraphAPIAuthorizationMessageHandler(IAccessTokenProvider provider,
-        NavigationManager navigationManager)
-        : base(provider, navigationManager)
-    {
-        ConfigureHandler(
-            authorizedUrls: new[] { "https://graph.microsoft.com" },
-            scopes: new[] { "https://graph.microsoft.com/User.Read" });
-    }
-}
-```
-
-在 `Program.Main` (`Program.cs`) ：
-
-```csharp
-builder.Services.AddScoped<GraphAPIAuthorizationMessageHandler>();
-
-builder.Services.AddHttpClient("GraphAPI",
-        client => client.BaseAddress = new Uri("https://graph.microsoft.com"))
-    .AddHttpMessageHandler<GraphAPIAuthorizationMessageHandler>();
-```
-
-在 Razor 元件 (`Pages/CallUser.razor`) ：
-
-```razor
-@page "/CallUser"
-@using System.ComponentModel.DataAnnotations
-@using System.Text.Json.Serialization
-@using Microsoft.AspNetCore.Components.WebAssembly.Authentication
-@using Microsoft.Extensions.Logging
-@inject IAccessTokenProvider TokenProvider
-@inject IHttpClientFactory ClientFactory
-@inject ILogger<CallUser> Logger
-@inject ICallProcessor CallProcessor
-
-<h3>Call User</h3>
-
-<EditForm Model="@callInfo" OnValidSubmit="@HandleValidSubmit">
-    <DataAnnotationsValidator />
-    <ValidationSummary />
-
-    <p>
-        <label>
-            Message:
-            <InputTextArea @bind-Value="callInfo.Message" />
-        </label>
-    </p>
-
-    <button type="submit">Place call</button>
-
-    <p>
-        @formStatus
-    </p>
-</EditForm>
-
-@code {
-    private string formStatus;
-    private CallInfo callInfo = new CallInfo();
-
-    private async Task HandleValidSubmit()
-    {
-        var tokenResult = await TokenProvider.RequestAccessToken(
-            new AccessTokenRequestOptions
-            {
-                Scopes = new[] { "https://graph.microsoft.com/User.Read" }
-            });
-
-        if (tokenResult.TryGetToken(out var token))
-        {
-            var client = ClientFactory.CreateClient("GraphAPI");
-
-            var userInfo = await client.GetFromJsonAsync<UserInfo>("v1.0/me");
-
-            if (userInfo != null)
-            {
-                CallProcessor.Send(userInfo.MobilePhone, callInfo.Message);
-
-                formStatus = "Form successfully processed.";
-                Logger.LogInformation(
-                    $"Form successfully processed at {DateTime.UtcNow}. " +
-                    $"Mobile Phone: {userInfo.MobilePhone}");
-            }
-        }
-        else
-        {
-            formStatus = "There was a problem processing the form.";
-            Logger.LogError("Token failure");
-        }
-    }
-
-    private class CallInfo
-    {
-        [Required]
-        [StringLength(1000, ErrorMessage = "Message too long (1,000 char limit)")]
-        public string Message { get; set; }
-    }
-
-    private class UserInfo
-    {
-        [JsonPropertyName("mobilePhone")]
-        public string MobilePhone { get; set; }
-    }
-}
-```
-
-> [!NOTE]
-> 在上述範例中，開發人員會將自訂 `ICallProcessor` (`CallProcessor`) 排入佇列，然後放置自動化的呼叫。
 
 ## <a name="typed-httpclient"></a>類型 `HttpClient`
 
@@ -931,134 +809,6 @@ public class CustomAccountFactory
           CustomUserAccount, CustomAccountFactory>();
   ```
 
-### <a name="customize-the-user-with-graph-api-claims"></a>使用圖形 API 宣告自訂使用者
-
-在下列範例中，應用程式會使用從圖形 API 建立使用者的行動電話號碼宣告 <xref:Microsoft.AspNetCore.Components.WebAssembly.Authentication.RemoteUserAccount> 。 應用程式必須具有 `User.Read` 在 AAD 中設定)  (範圍圖形 API 許可權。
-
-`GraphAuthorizationMessageHandler.cs`:
-
-```csharp
-using Microsoft.AspNetCore.Components;
-using Microsoft.AspNetCore.Components.WebAssembly.Authentication;
-
-public class GraphAPIAuthorizationMessageHandler : AuthorizationMessageHandler
-{
-    public GraphAPIAuthorizationMessageHandler(IAccessTokenProvider provider,
-        NavigationManager navigationManager)
-        : base(provider, navigationManager)
-    {
-        ConfigureHandler(
-            authorizedUrls: new[] { "https://graph.microsoft.com" },
-            scopes: new[] { "https://graph.microsoft.com/User.Read" });
-    }
-}
-```
-
-名 <xref:System.Net.Http.HttpClient> 為的圖形 API 是在 `Program.Main` () 中 `Program.cs` 使用 `GraphAPIAuthorizationMessageHandler` 下列方式建立：
-
-```csharp
-using System;
-
-...
-
-builder.Services.AddScoped<GraphAPIAuthorizationMessageHandler>();
-
-builder.Services.AddHttpClient("GraphAPI",
-        client => client.BaseAddress = new Uri("https://graph.microsoft.com"))
-    .AddHttpMessageHandler<GraphAPIAuthorizationMessageHandler>();
-```
-
-`Models/UserInfo.cs`:
-
-```csharp
-using System.Text.Json.Serialization;
-
-public class UserInfo
-{
-    [JsonPropertyName("mobilePhone")]
-    public string MobilePhone { get; set; }
-}
-```
-
-在下列 `CustomAccountFactory` (`CustomAccountFactory.cs`) 中，架構 <xref:Microsoft.AspNetCore.Components.WebAssembly.Authentication.RemoteUserAccount> 代表使用者的帳戶。 如果應用程式需要擴充的自訂使用者帳戶類別 <xref:Microsoft.AspNetCore.Components.WebAssembly.Authentication.RemoteUserAccount> ，請在下列程式碼中交換的自訂使用者帳戶類別 <xref:Microsoft.AspNetCore.Components.WebAssembly.Authentication.RemoteUserAccount> ：
-
-```csharp
-using System.Net.Http;
-using System.Net.Http.Json;
-using System.Security.Claims;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Components.WebAssembly.Authentication;
-using Microsoft.AspNetCore.Components.WebAssembly.Authentication.Internal;
-using Microsoft.Extensions.Logging;
-
-public class CustomAccountFactory
-    : AccountClaimsPrincipalFactory<RemoteUserAccount>
-{
-    private readonly ILogger<CustomAccountFactory> logger;
-    private readonly IHttpClientFactory clientFactory;
-
-    public CustomAccountFactory(IAccessTokenProviderAccessor accessor, 
-        IHttpClientFactory clientFactory, 
-        ILogger<CustomAccountFactory> logger)
-        : base(accessor)
-    {
-        this.clientFactory = clientFactory;
-        this.logger = logger;
-    }
-
-    public async override ValueTask<ClaimsPrincipal> CreateUserAsync(
-        RemoteUserAccount account,
-        RemoteAuthenticationUserOptions options)
-    {
-        var initialUser = await base.CreateUserAsync(account, options);
-
-        if (initialUser.Identity.IsAuthenticated)
-        {
-            var userIdentity = (ClaimsIdentity)initialUser.Identity;
-
-            try
-            {
-                var client = clientFactory.CreateClient("GraphAPI");
-
-                var userInfo = await client.GetFromJsonAsync<UserInfo>("v1.0/me");
-
-                if (userInfo != null)
-                {
-                    userIdentity.AddClaim(new Claim("mobilephone", userInfo.MobilePhone));
-                }
-            }
-            catch (AccessTokenNotAvailableException exception)
-            {
-                logger.LogError("Graph API access token failure: {MESSAGE}",
-                    exception.Message);
-            }
-        }
-
-        return initialUser;
-    }
-}
-```
-
-在 `Program.Main` (`Program.cs`) 中，將應用程式設定為使用自訂 factory。 如果應用程式使用擴充的自訂使用者帳戶類別 <xref:Microsoft.AspNetCore.Components.WebAssembly.Authentication.RemoteUserAccount> ，請在下列程式碼中交換的自訂使用者帳戶類別 <xref:Microsoft.AspNetCore.Components.WebAssembly.Authentication.RemoteUserAccount> ：
-
-```csharp
-using Microsoft.Extensions.Configuration;
-using Microsoft.AspNetCore.Components.WebAssembly.Authentication;
-
-...
-
-builder.Services.AddMsalAuthentication<RemoteAuthenticationState, 
-    RemoteUserAccount>(options =>
-    {
-        builder.Configuration.Bind("AzureAd", 
-            options.ProviderOptions.Authentication);
-    })
-    .AddAccountClaimsPrincipalFactory<RemoteAuthenticationState, RemoteUserAccount, 
-        CustomAccountFactory>();
-```
-
-上述範例適用于搭配 MSAL 使用 AAD 驗證的應用程式。 OIDC 和 API 驗證都有類似的模式。 如需詳細資訊，請參閱使用承載宣告 [自訂使用者](#customize-the-user-with-a-payload-claim) 一節中的範例。
-
 ### <a name="aad-security-groups-and-roles-with-a-custom-user-account-class"></a>具有自訂使用者帳戶類別的 AAD 安全性群組和角色
 
 如需適用于 AAD 安全性群組和 AAD 系統管理員角色和自訂使用者帳戶類別的其他範例，請參閱 <xref:blazor/security/webassembly/aad-groups-roles> 。
@@ -1299,4 +1049,5 @@ Server response: <strong>@serverResponse</strong>
 
 ## <a name="additional-resources"></a>其他資源
 
+* <xref:blazor/security/webassembly/graph-api>
 * [`HttpClient` 以及 `HttpRequestMessage` 使用 FETCH API 要求選項](xref:blazor/call-web-api#httpclient-and-httprequestmessage-with-fetch-api-request-options)

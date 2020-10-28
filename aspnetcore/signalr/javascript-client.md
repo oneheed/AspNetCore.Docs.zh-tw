@@ -4,7 +4,7 @@ author: bradygaster
 description: ASP.NET Core SignalR JavaScript 用戶端的總覽。
 monikerRange: '>= aspnetcore-2.1'
 ms.author: bradyg
-ms.custom: mvc
+ms.custom: mvc, devx-track-js
 ms.date: 04/08/2020
 no-loc:
 - ASP.NET Core Identity
@@ -18,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: signalr/javascript-client
-ms.openlocfilehash: 6f611e56ec62ad7aea8a93e4761e1f67d0f76574
-ms.sourcegitcommit: fad0cd264c9d07a48a8c6ba1690807e0f8728898
+ms.openlocfilehash: be271272c952487fccc5136307c84fdf49391848
+ms.sourcegitcommit: 2e3a967331b2c69f585dd61e9ad5c09763615b44
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 10/22/2020
-ms.locfileid: "92379458"
+ms.lasthandoff: 10/27/2020
+ms.locfileid: "92690653"
 ---
 # <a name="aspnet-core-no-locsignalr-javascript-client"></a>ASP.NET Core SignalR JavaScript 用戶端
 
@@ -41,14 +41,14 @@ SignalRJavaScript 用戶端程式庫會以[npm](https://www.npmjs.com/)套件的
 
 ### <a name="install-with-npm"></a>使用 npm 安裝
 
-針對 Visual Studio，請在根資料夾中從 **封裝管理員主控台** 執行下列命令。 針對 Visual Studio Code，請從 **整合式終端**機執行下列命令。
+針對 Visual Studio，請在根資料夾中從 **封裝管理員主控台** 執行下列命令。 針對 Visual Studio Code，請從 **整合式終端** 機執行下列命令。
 
 ```bash
 npm init -y
 npm install @microsoft/signalr
 ```
 
-npm 會將套件內容安裝*node_modules \\ @microsoft\signalr\dist\browser *資料夾。 在*wwwroot \\ lib*資料夾下建立名為*signalr*的新資料夾。 將 *signalr.js* 檔案複製到 *wwwroot\lib\signalr* 資料夾。
+npm 會將套件內容安裝 *node_modules \\ @microsoft\signalr\dist\browser* 資料夾。 在 *wwwroot \\ lib* 資料夾下建立名為 *signalr* 的新資料夾。 將 *signalr.js* 檔案複製到 *wwwroot\lib\signalr* 資料夾。
 
 參考 SignalR 元素中的 JavaScript 用戶端 `<script>` 。 例如：
 
@@ -306,14 +306,14 @@ SignalRJavaScript 用戶端程式庫會以[npm](https://www.npmjs.com/)套件的
 
 ### <a name="install-with-npm"></a>使用 npm 安裝
 
-如果使用 Visual Studio，請在根資料夾中從 **封裝管理員主控台** 執行下列命令。 針對 Visual Studio Code，請從 **整合式終端**機執行下列命令。
+如果使用 Visual Studio，請在根資料夾中從 **封裝管理員主控台** 執行下列命令。 針對 Visual Studio Code，請從 **整合式終端** 機執行下列命令。
 
 ```bash
 npm init -y
 npm install @aspnet/signalr
 ```
 
-npm 會將套件內容安裝*node_modules \\ @aspnet\signalr\dist\browser *資料夾。 在*wwwroot \\ lib*資料夾下建立名為*signalr*的新資料夾。 將 *signalr.js* 檔案複製到 *wwwroot\lib\signalr* 資料夾。
+npm 會將套件內容安裝 *node_modules \\ @aspnet\signalr\dist\browser* 資料夾。 在 *wwwroot \\ lib* 資料夾下建立名為 *signalr* 的新資料夾。 將 *signalr.js* 檔案複製到 *wwwroot\lib\signalr* 資料夾。
 
 參考 SignalR 元素中的 JavaScript 用戶端 `<script>` 。 例如：
 

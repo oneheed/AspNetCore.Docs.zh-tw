@@ -4,7 +4,7 @@ author: scottaddie
 description: 瞭解使用 JavaScript 服務建立單一頁面應用程式 (SPA) ASP.NET Core 支援的優點。
 monikerRange: '>= aspnetcore-2.1'
 ms.author: scaddie
-ms.custom: H1Hack27Feb2017
+ms.custom: H1Hack27Feb2017, devx-track-js
 ms.date: 09/06/2019
 no-loc:
 - ASP.NET Core Identity
@@ -18,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: client-side/spa-services
-ms.openlocfilehash: 379a8f52dab36d331bc42c1fee8d64b3971e9e91
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: 33ae16c033142aa1c0f4cea53ca746e8a6aaf052
+ms.sourcegitcommit: 2e3a967331b2c69f585dd61e9ad5c09763615b44
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88625657"
+ms.lasthandoff: 10/27/2020
+ms.locfileid: "92690655"
 ---
 # <a name="use-javascript-services-to-create-single-page-applications-in-aspnet-core"></a>使用 JavaScript 服務在 ASP.NET Core 中建立單一頁面應用程式
 
@@ -132,7 +132,7 @@ npm i -S aspnet-prerendering
 
 [!code-typescript[](../client-side/spa-services/sample/SpaServicesSampleApp/ClientApp/boot-server.ts?range=6,10-21,38-52,79-)]
 
-以標記協助程式傳遞的屬性名稱會以 **PascalCase** 標記法來表示。 相較于 JavaScript，相同的屬性名稱會以 **camelCase**表示。 預設的 JSON 序列化設定負責這項差異。
+以標記協助程式傳遞的屬性名稱會以 **PascalCase** 標記法來表示。 相較于 JavaScript，相同的屬性名稱會以 **camelCase** 表示。 預設的 JSON 序列化設定負責這項差異。
 
 若要展開上述的程式碼範例，您可以藉由 hydrating 提供給函數的屬性，將資料從伺服器傳遞到視圖 `globals` `resolve` ：
 
@@ -166,7 +166,7 @@ Webpack Dev 中介軟體會透過 *Startup.cs* 檔的方法中的下列程式碼
 
 `UseWebpackDevMiddleware`必須先呼叫擴充方法，才能透過擴充方法[註冊靜態檔案裝載](xref:fundamentals/static-files) `UseStaticFiles` 。 基於安全性理由，只有在應用程式在開發模式中執行時，才註冊中介軟體。
 
-*webpack.config.js*檔案的 `output.publicPath` 屬性會告知中介軟體監看 `dist` 資料夾的變更：
+*webpack.config.js* 檔案的 `output.publicPath` 屬性會告知中介軟體監看 `dist` 資料夾的變更：
 
 [!code-javascript[](../client-side/spa-services/sample/SpaServicesSampleApp/webpack.config.js?range=6,13-16)]
 
@@ -194,7 +194,7 @@ app.UseWebpackDevMiddleware(new WebpackDevMiddlewareOptions {
 
 如同 [Webpack Dev 中介軟體](#webpack-dev-middleware)的情況一樣，您 `UseWebpackDevMiddleware` 必須在擴充方法之前呼叫擴充方法 `UseStaticFiles` 。 基於安全性理由，只有在應用程式在開發模式中執行時，才註冊中介軟體。
 
-*webpack.config.js*檔案必須定義 `plugins` 陣列，即使它是空的也一樣：
+*webpack.config.js* 檔案必須定義 `plugins` 陣列，即使它是空的也一樣：
 
 [!code-javascript[](../client-side/spa-services/sample/SpaServicesSampleApp/webpack.config.js?range=6,25)]
 
@@ -236,13 +236,13 @@ dotnet new --install Microsoft.AspNetCore.SpaTemplates::*
 
 會顯示可用的 SPA 範本清單：
 
-| 範本                                 | 簡短名稱 | Language | 標籤        |
+| 範本                                 | 簡短名稱 | Language | Tags        |
 | ------------------------------------------| :--------: | :------: | :---------: |
 | 具有角度的 MVC ASP.NET Core             | angular    | [C#]     | Web/MVC/SPA |
 | 使用 React.js 的 MVC ASP.NET Core            | react      | [C#]     | Web/MVC/SPA |
 | 使用 React.js 和 Redux 的 MVC ASP.NET Core  | reactredux | [C#]     | Web/MVC/SPA |
 
-若要使用其中一個 SPA 範本建立新的專案，請在[dotnet new](/dotnet/core/tools/dotnet-new)命令中包含範本的**簡短名稱**。 下列命令會建立一個具有針對伺服器端設定 ASP.NET Core MVC 的「角」應用程式：
+若要使用其中一個 SPA 範本建立新的專案，請在 [dotnet new](/dotnet/core/tools/dotnet-new)命令中包含範本的 **簡短名稱** 。 下列命令會建立一個具有針對伺服器端設定 ASP.NET Core MVC 的「角」應用程式：
 
 ```dotnetcli
 dotnet new angular
@@ -252,10 +252,10 @@ dotnet new angular
 
 有兩個主要執行時間設定模式：
 
-* **開發**：
+* **開發** ：
   * 包含來源對應以簡化調試。
   * 不會優化用戶端程式代碼的效能。
-* **生產環境**：
+* **生產環境** ：
   * 排除來源對應。
   * 透過組合和縮制優化用戶端程式代碼。
 
@@ -279,7 +279,7 @@ dotnet run
 
 ### <a name="run-with-visual-studio-2017"></a>使用 Visual Studio 2017 執行
 
-開啟[dotnet new](/dotnet/core/tools/dotnet-new)命令所產生的 *.csproj*檔案。 當專案開啟時，會自動還原必要的 NuGet 和 npm 套件。 此還原程式最多可能需要幾分鐘的時間，而且應用程式會在完成時準備好執行。 按一下綠色的 [執行] 按鈕或按下 `Ctrl + F5` ，瀏覽器會開啟至應用程式的登陸頁面。 應用程式會根據執行時間設定 [模式](#set-the-runtime-configuration-mode)在 localhost 上執行。
+開啟 [dotnet new](/dotnet/core/tools/dotnet-new)命令所產生的 *.csproj* 檔案。 當專案開啟時，會自動還原必要的 NuGet 和 npm 套件。 此還原程式最多可能需要幾分鐘的時間，而且應用程式會在完成時準備好執行。 按一下綠色的 [執行] 按鈕或按下 `Ctrl + F5` ，瀏覽器會開啟至應用程式的登陸頁面。 應用程式會根據執行時間設定 [模式](#set-the-runtime-configuration-mode)在 localhost 上執行。
 
 ## <a name="test-the-app"></a>測試應用程式
 
@@ -289,7 +289,7 @@ SpaServices 範本已預先設定為使用 [Karma](https://karma-runner.github.i
 
 [!code-typescript[](../client-side/spa-services/sample/SpaServicesSampleApp/ClientApp/app/components/counter/counter.component.spec.ts?range=15-28)]
 
-在 *ClientApp* 目錄中開啟命令提示字元。 執行以下命令：
+在 *ClientApp* 目錄中開啟命令提示字元。 執行下列命令：
 
 ```console
 npm test

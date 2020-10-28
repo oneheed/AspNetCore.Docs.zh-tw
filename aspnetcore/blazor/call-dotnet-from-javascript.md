@@ -4,7 +4,7 @@ author: guardrex
 description: 瞭解如何從應用程式中的 JavaScript 函式叫用 .NET 方法 Blazor 。
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
-ms.custom: mvc
+ms.custom: mvc, devx-track-js
 ms.date: 08/12/2020
 no-loc:
 - ASP.NET Core Identity
@@ -18,18 +18,18 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/call-dotnet-from-javascript
-ms.openlocfilehash: 2a3685dbc654fb8be3420da73e5a62fe729092e6
-ms.sourcegitcommit: ad63e131224f3217bbafff4eb0e6fa1b25294460
+ms.openlocfilehash: 4a7c06ed985c290eb4b3ffca6d5ed74c6bc4e031
+ms.sourcegitcommit: 2e3a967331b2c69f585dd61e9ad5c09763615b44
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 08/31/2020
-ms.locfileid: "89199689"
+ms.lasthandoff: 10/27/2020
+ms.locfileid: "92690303"
 ---
 # <a name="call-net-methods-from-javascript-functions-in-aspnet-core-no-locblazor"></a>從 ASP.NET Core 中的 JavaScript 函式呼叫 .NET 方法 Blazor
 
 [Javier Calvarro Nelson](https://github.com/javiercn)、 [Daniel Roth](https://github.com/danroth27)、 [Shashikant Rudrawadi](http://wisne.co)和[Luke Latham](https://github.com/guardrex)
 
-Blazor應用程式可以從 javascript 函式的 .net 方法和 .net 方法中叫用 javascript 函式。 這些案例稱為 *JavaScript 互通性* (*JS interop*) 。
+Blazor應用程式可以從 javascript 函式的 .net 方法和 .net 方法中叫用 javascript 函式。 這些案例稱為 *JavaScript 互通性* ( *JS interop* ) 。
 
 本文涵蓋從 JavaScript 叫用 .NET 方法。 如需如何從 .NET 呼叫 JavaScript 函數的詳細資訊，請參閱 <xref:blazor/call-javascript-from-dotnet> 。
 
@@ -337,7 +337,7 @@ function updateMessageCallerJS() {
   }
   ```
 
-  `message`選取 [**呼叫 JS 方法**] 按鈕時的輸出：
+  `message`選取 [ **呼叫 JS 方法** ] 按鈕時的輸出：
 
   ```
   Sarah Jane, UpdateMessage Called!

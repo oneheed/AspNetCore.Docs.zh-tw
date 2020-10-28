@@ -5,7 +5,7 @@ description: 瞭解如何將 Blazor WebAssemlby 應用程式保護為單一頁�
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 07/16/2020
+ms.date: 10/27/2020
 no-loc:
 - ASP.NET Core Identity
 - cookie
@@ -18,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/security/webassembly/index
-ms.openlocfilehash: e1af8f1de61edd934505a44e75ea07e0f09a67b5
-ms.sourcegitcommit: a07f83b00db11f32313045b3492e5d1ff83c4437
+ms.openlocfilehash: 2c160f21ccccb44f9047cf23c67bc191ad1b2b3d
+ms.sourcegitcommit: 2e3a967331b2c69f585dd61e9ad5c09763615b44
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 09/15/2020
-ms.locfileid: "90592952"
+ms.lasthandoff: 10/27/2020
+ms.locfileid: "92690369"
 ---
 # <a name="secure-aspnet-core-no-locblazor-webassembly"></a>安全 ASP.NET Core Blazor WebAssembly
 
@@ -91,7 +91,7 @@ Blazor WebAssembly 支援透過程式庫使用 OIDC 來驗證和授權應用程�
 * 將屬性新增至 Razor 資料夾中的每個元件 `Pages` 。
 
 > [!NOTE]
-> <xref:Microsoft.AspNetCore.Authorization.AuthorizationOptions.FallbackPolicy?displayProperty=nameWithType>不支援使用將設定為 <xref:Microsoft.AspNetCore.Authorization.AuthorizationPolicyBuilder.RequireAuthenticatedUser%2A> 原則**not** 。
+> <xref:Microsoft.AspNetCore.Authorization.AuthorizationOptions.FallbackPolicy?displayProperty=nameWithType>不支援使用將設定為 <xref:Microsoft.AspNetCore.Authorization.AuthorizationPolicyBuilder.RequireAuthenticatedUser%2A> 原則 **not** 。
 
 ## <a name="refresh-tokens"></a>重新整理權杖
 
@@ -123,4 +123,17 @@ Blazor WebAssembly 支援透過程式庫使用 OIDC 來驗證和授權應用程�
 * [Azure Active Directory (AAD) B2C](xref:blazor/security/webassembly/hosted-with-azure-active-directory-b2c)
 * [Identity 伺服器](xref:blazor/security/webassembly/hosted-with-identity-server)
 
-如需設定的進一步指引，請參閱 <xref:blazor/security/webassembly/additional-scenarios> 。
+::: moniker range=">= aspnetcore-5.0"
+
+您可以在下列文章中找到進一步的設定指引：
+
+* <xref:blazor/security/webassembly/additional-scenarios>
+* <xref:blazor/security/webassembly/graph-api>
+
+::: moniker-end
+
+::: moniker range="< aspnetcore-5.0"
+
+如需進一步的設定指引，請參閱 <xref:blazor/security/webassembly/additional-scenarios> 。
+
+::: moniker-end

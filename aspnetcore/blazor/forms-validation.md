@@ -18,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/forms-validation
-ms.openlocfilehash: 88c3ded79db65557d9426fde6f43aace4d9d8ae2
-ms.sourcegitcommit: d1a897ebd89daa05170ac448e4831d327f6b21a8
+ms.openlocfilehash: ad244c29c8e8e904793745119366cd677389b12d
+ms.sourcegitcommit: 2e3a967331b2c69f585dd61e9ad5c09763615b44
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 10/01/2020
-ms.locfileid: "91606670"
+ms.lasthandoff: 10/27/2020
+ms.locfileid: "92690605"
 ---
 # <a name="aspnet-core-no-locblazor-forms-and-validation"></a>ASP.NET Core Blazor 表單和驗證
 
@@ -224,7 +224,7 @@ public class Starship
 
 <xref:Microsoft.AspNetCore.Components.Forms.EditForm> <xref:Microsoft.AspNetCore.Components.Forms.EditContext> 會建立做為階層式[值](xref:blazor/components/cascading-values-and-parameters)，以追蹤編輯程式的相關中繼資料，包括已修改的欄位和目前的驗證訊息。
 
-將**either** <xref:Microsoft.AspNetCore.Components.Forms.EditContext> **或**指派給 <xref:Microsoft.AspNetCore.Components.Forms.EditForm.Model?displayProperty=nameWithType> <xref:Microsoft.AspNetCore.Components.Forms.EditForm> 。 不支援同時指派，且會產生 **執行階段錯誤**。
+將 **either** <xref:Microsoft.AspNetCore.Components.Forms.EditContext> **或** 指派給 <xref:Microsoft.AspNetCore.Components.Forms.EditForm.Model?displayProperty=nameWithType> <xref:Microsoft.AspNetCore.Components.Forms.EditForm> 。 不支援同時指派，且會產生 **執行階段錯誤** 。
 
 <xref:Microsoft.AspNetCore.Components.Forms.EditForm>提供方便的事件，以進行有效和不正確表單提交：
 
@@ -450,13 +450,13 @@ namespace BlazorSample.Client
 * 使用元件，處理表單中的用戶端驗證 <xref:Microsoft.AspNetCore.Components.Forms.DataAnnotationsValidator> 。
 * 當表單通過用戶端驗證時 <xref:Microsoft.AspNetCore.Components.Forms.EditForm.OnValidSubmit> ， (稱為) ，請將傳送 <xref:Microsoft.AspNetCore.Components.Forms.EditContext.Model?displayProperty=nameWithType> 至後端伺服器 API 以進行表單處理。
 * 伺服器上的進程模型驗證。
-* 伺服器 API 包含內建的架構資料批註驗證，以及開發人員所提供的自訂驗證邏輯。 如果驗證是在伺服器上通過，請處理表單並將成功狀態碼傳回 (*200-確定*) 。 如果驗證失敗，會傳回失敗狀態碼 (*400-錯誤的要求*) 和欄位驗證錯誤。
+* 伺服器 API 包含內建的架構資料批註驗證，以及開發人員所提供的自訂驗證邏輯。 如果驗證是在伺服器上通過，請處理表單並將成功狀態碼傳回 ( *200-確定* ) 。 如果驗證失敗，會傳回失敗狀態碼 ( *400-錯誤的要求* ) 和欄位驗證錯誤。
 * 請停用成功的表單，或顯示錯誤。
 
 下列範例是根據：
 
 * 主控 Blazor 的[ Blazor 專案範本](xref:blazor/hosting-models#blazor-webassembly)所建立的裝載方案。 此範例可以與 Blazor [安全性和 Identity 檔](xref:blazor/security/webassembly/index#implementation-guidance)中所述的任何安全託管解決方案搭配使用。
-* 上述內[建表單元件](#built-in-forms-components)區段中的*Starfleet Starship 資料庫*表單範例。
+* 上述內 [建表單元件](#built-in-forms-components)區段中的 *Starfleet Starship 資料庫* 表單範例。
 * Blazor架構的 <xref:Microsoft.AspNetCore.Components.Forms.DataAnnotationsValidator> 元件。
 * 在 `CustomValidator` [ [驗證程式元件](#validator-components) ] 區段中顯示的元件。
 
@@ -519,7 +519,7 @@ namespace BlazorSample.Server.Controllers
             }
             catch (Exception ex)
             {
-                logger.LogError("Validation Error: {MESSAGE}", ex.Message);
+                logger.LogError("Validation Error: {Message}", ex.Message);
             }
 
             return BadRequest(ModelState);
@@ -706,7 +706,7 @@ services.AddControllersWithViews()
         }
         catch (Exception ex)
         {
-            Logger.LogError("Form processing error: {MESSAGE}", ex.Message);
+            Logger.LogError("Form processing error: {Message}", ex.Message);
             disabled = true;
             messageStyles = "color:red";
             message = "There was an error processing the form.";
@@ -810,7 +810,7 @@ public enum Color { ImperialRed, SpacecruiserGreen, StarshipBlue, VoyagerOrange 
 public enum Engine { Ion, Plasma, Fusion, Warp }
 ```
 
-更新內[建表單元件](#built-in-forms-components)一節中所述的*Starfleet Starship 資料庫*表單。 新增要產生的元件：
+更新內 [建表單元件](#built-in-forms-components)一節中所述的 *Starfleet Starship 資料庫* 表單。 新增要產生的元件：
 
 * 出貨製造商的選項按鈕群組。
 * 出貨色彩和引擎的嵌套選項按鈕群組。
@@ -975,7 +975,7 @@ Blazor嘗試雙向系結至值時，架構不會自動處理 `null` 空字串轉
 Blazor 會執行兩種類型的驗證：
 
 * *欄位驗證* 是在使用者索引標籤離開欄位時執行。 在欄位驗證期間， <xref:Microsoft.AspNetCore.Components.Forms.DataAnnotationsValidator> 元件會將所有報告的驗證結果與欄位相關聯。
-* 當使用者提交表單時，會執行*模型驗證*。 在模型驗證期間， <xref:Microsoft.AspNetCore.Components.Forms.DataAnnotationsValidator> 元件會嘗試根據驗證結果報告的成員名稱來決定欄位。 未與個別成員相關聯的驗證結果會與模型相關聯，而不是與欄位相關聯。
+* 當使用者提交表單時，會執行 *模型驗證* 。 在模型驗證期間， <xref:Microsoft.AspNetCore.Components.Forms.DataAnnotationsValidator> 元件會嘗試根據驗證結果報告的成員名稱來決定欄位。 未與個別成員相關聯的驗證結果會與模型相關聯，而不是與欄位相關聯。
 
 ### <a name="validation-summary-and-validation-message-components"></a>驗證摘要和驗證訊息元件
 
@@ -1059,20 +1059,20 @@ private class MyFieldClassProvider : FieldCssClassProvider
 
 ### <a name="no-locblazor-data-annotations-validation-package"></a>Blazor 資料批註驗證套件
 
-[`Microsoft.AspNetCore.Components.DataAnnotations.Validation`](https://www.nuget.org/packages/Microsoft.AspNetCore.Components.DataAnnotations.Validation)是使用元件填滿驗證體驗間距的封裝 <xref:Microsoft.AspNetCore.Components.Forms.DataAnnotationsValidator> 。 封裝目前為 *實驗*性。
+[`Microsoft.AspNetCore.Components.DataAnnotations.Validation`](https://www.nuget.org/packages/Microsoft.AspNetCore.Components.DataAnnotations.Validation)是使用元件填滿驗證體驗間距的封裝 <xref:Microsoft.AspNetCore.Components.Forms.DataAnnotationsValidator> 。 封裝目前為 *實驗* 性。
 
 > [!NOTE]
-> [`Microsoft.AspNetCore.Components.DataAnnotations.Validation`](https://www.nuget.org/packages/Microsoft.AspNetCore.Components.DataAnnotations.Validation)套件在[Nuget.org](https://www.nuget.org/packages/Microsoft.AspNetCore.Components.DataAnnotations.Validation)有最新版本的*候選版*。請繼續使用*實驗*性發行候選套件。 封裝的元件可能會在未來的版本中移至架構或執行時間。 觀看 [公告 github 存放庫](https://github.com/aspnet/Announcements)、 [Dotnet/aspnetcore GitHub 存放庫](https://github.com/dotnet/aspnetcore)，或本主題一節以取得進一步的更新。
+> [`Microsoft.AspNetCore.Components.DataAnnotations.Validation`](https://www.nuget.org/packages/Microsoft.AspNetCore.Components.DataAnnotations.Validation)套件在 [Nuget.org](https://www.nuget.org/packages/Microsoft.AspNetCore.Components.DataAnnotations.Validation)有最新版本的 *候選版* 。請繼續使用 *實驗* 性發行候選套件。 封裝的元件可能會在未來的版本中移至架構或執行時間。 觀看 [公告 github 存放庫](https://github.com/aspnet/Announcements)、 [Dotnet/aspnetcore GitHub 存放庫](https://github.com/dotnet/aspnetcore)，或本主題一節以取得進一步的更新。
 
 ### <a name="compareproperty-attribute"></a>[CompareProperty] 屬性
 
-<xref:System.ComponentModel.DataAnnotations.CompareAttribute>無法與元件搭配使用， <xref:Microsoft.AspNetCore.Components.Forms.DataAnnotationsValidator> 因為它不會將驗證結果與特定成員產生關聯。 這可能會導致欄位層級驗證與在提交時驗證整個模型的行為不一致。 [`Microsoft.AspNetCore.Components.DataAnnotations.Validation`](https://www.nuget.org/packages/Microsoft.AspNetCore.Components.DataAnnotations.Validation)*實驗*性封裝引進了一個額外的驗證屬性， `ComparePropertyAttribute` 它可以解決這些限制。 在 Blazor 應用程式中， `[CompareProperty]` 是屬性的直接取代 [`[Compare]`](xref:System.ComponentModel.DataAnnotations.CompareAttribute) 。
+<xref:System.ComponentModel.DataAnnotations.CompareAttribute>無法與元件搭配使用， <xref:Microsoft.AspNetCore.Components.Forms.DataAnnotationsValidator> 因為它不會將驗證結果與特定成員產生關聯。 這可能會導致欄位層級驗證與在提交時驗證整個模型的行為不一致。 [`Microsoft.AspNetCore.Components.DataAnnotations.Validation`](https://www.nuget.org/packages/Microsoft.AspNetCore.Components.DataAnnotations.Validation)*實驗* 性封裝引進了一個額外的驗證屬性， `ComparePropertyAttribute` 它可以解決這些限制。 在 Blazor 應用程式中， `[CompareProperty]` 是屬性的直接取代 [`[Compare]`](xref:System.ComponentModel.DataAnnotations.CompareAttribute) 。
 
 ### <a name="nested-models-collection-types-and-complex-types"></a>嵌套模型、集合類型和複雜類型
 
 Blazor 提供使用資料批註搭配內建來驗證表單輸入的支援 <xref:Microsoft.AspNetCore.Components.Forms.DataAnnotationsValidator> 。 不過，只會驗證系結 <xref:Microsoft.AspNetCore.Components.Forms.DataAnnotationsValidator> 至不是集合型別或複雜型別屬性之表單之模型的最上層屬性。
 
-若要驗證系結模型的整個物件圖形（包括集合型別和複雜型別屬性），請使用 `ObjectGraphDataAnnotationsValidator` *實驗*性封裝所提供的 [`Microsoft.AspNetCore.Components.DataAnnotations.Validation`](https://www.nuget.org/packages/Microsoft.AspNetCore.Components.DataAnnotations.Validation) ：
+若要驗證系結模型的整個物件圖形（包括集合型別和複雜型別屬性），請使用 `ObjectGraphDataAnnotationsValidator` *實驗* 性封裝所提供的 [`Microsoft.AspNetCore.Components.DataAnnotations.Validation`](https://www.nuget.org/packages/Microsoft.AspNetCore.Components.DataAnnotations.Validation) ：
 
 ```razor
 <EditForm Model="@model" OnValidSubmit="@HandleValidSubmit">

@@ -3,7 +3,7 @@ title: 教學課程：使用 JavaScript 呼叫 ASP.NET Core web API
 author: rick-anderson
 description: 了解如何使用 JavaScript 呼叫 ASP.NET Core Web API。
 ms.author: riande
-ms.custom: mvc
+ms.custom: mvc, devx-track-js
 ms.date: 11/26/2019
 no-loc:
 - ASP.NET Core Identity
@@ -17,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: tutorials/web-api-javascript
-ms.openlocfilehash: 3d097d724ac5e2313d24f1f06e47b881f29a4a98
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: b41288bd63267a9aa7035e25ebc8d838eed5d93b
+ms.sourcegitcommit: 2e3a967331b2c69f585dd61e9ad5c09763615b44
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88633795"
+ms.lasthandoff: 10/27/2020
+ms.locfileid: "92690691"
 ---
 # <a name="tutorial-call-an-aspnet-core-web-api-with-javascript"></a>教學課程：使用 JavaScript 呼叫 ASP.NET Core web API
 
@@ -38,7 +38,7 @@ ms.locfileid: "88633795"
 
 ::: moniker range=">= aspnetcore-3.0"
 
-## <a name="prerequisites"></a>Prerequisites
+## <a name="prerequisites"></a>必要條件
 
 * 完成 [教學課程：建立 WEB API](xref:tutorials/first-web-api)
 * 熟悉 CSS、HTML 和 JavaScript
@@ -57,7 +57,7 @@ ms.locfileid: "88633795"
 
 1. 在專案根目錄中建立 *wwwroot* 資料夾。
 
-1. 在*wwwroot*資料夾內建立*js*資料夾。
+1. 在 *wwwroot* 資料夾內建立 *js* 資料夾。
 
 1. 將名為 *index.html* 的 HTML 檔案新增至 *wwwroot* 資料夾。 以下列標記取代 *index.html* 的內容：
 
@@ -69,8 +69,8 @@ ms.locfileid: "88633795"
 
 若要在本機測試 HTML 網頁，可能需要變更 ASP.NET Core 專案的啟動設定：
 
-1. 開啟 *Properties\launchSettings.json*。
-1. 移除 `launchUrl` 屬性，以強制在專案的預設檔案*index.html*開啟應用程式 &mdash; 。
+1. 開啟 *Properties\launchSettings.json* 。
+1. 移除 `launchUrl` 屬性，以強制在專案的預設檔案 *index.html* 開啟應用程式 &mdash; 。
 
 此範例會呼叫 Web API 的所有 CRUD 方法。 以下是關於 Web API 要求的說明。
 
@@ -80,7 +80,7 @@ ms.locfileid: "88633795"
 
 [!code-javascript[](first-web-api/samples/3.0/TodoApi/wwwroot/js/site.js?name=snippet_GetItems)]
 
-當 Web API 傳回成功狀態碼時，會叫用 `_displayItems` 函式。 `_displayItems` 所接受之陣列參數中的每個待辦事項，都會加入具有 [編輯]**** 和 [刪除]**** 按鈕的表格。 如果 Web API 要求失敗，則會在瀏覽器的主控台中記錄錯誤。
+當 Web API 傳回成功狀態碼時，會叫用 `_displayItems` 函式。 `_displayItems` 所接受之陣列參數中的每個待辦事項，都會加入具有 [編輯]  和 [刪除]  按鈕的表格。 如果 Web API 要求失敗，則會在瀏覽器的主控台中記錄錯誤。
 
 ### <a name="add-a-to-do-item"></a>新增待辦事項
 
@@ -101,7 +101,7 @@ ms.locfileid: "88633795"
 
 更新待辦事項類似於新增待辦事項；不過，有兩個重大差異：
 
-* 路由的尾碼為要更新之項目的唯一識別碼。 例如，*api/TodoItems/1*。
+* 路由的尾碼為要更新之項目的唯一識別碼。 例如， *api/TodoItems/1* 。
 * HTTP 動作動詞命令是 PUT，如 `method` 選項所指示。
 
 [!code-javascript[](first-web-api/samples/3.0/TodoApi/wwwroot/js/site.js?name=snippet_UpdateItem)]

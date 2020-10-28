@@ -253,7 +253,7 @@
           uid: razor-pages/razor-pages-conventions
     - name: MVC
       items:
-        - name: 總覽
+        - name: 概觀
           uid: mvc/overview
         - name: 教學課程
           items:
@@ -431,6 +431,8 @@
                   uid: blazor/security/webassembly/additional-scenarios
                 - name: AAD 群組及角色
                   uid: blazor/security/webassembly/aad-groups-roles
+                - name: 圖形 API
+                  uid: blazor/security/webassembly/graph-api
             - name: Blazor 伺服器
               items:
                 - name: 總覽

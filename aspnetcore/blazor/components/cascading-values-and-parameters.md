@@ -1,5 +1,5 @@
 ---
-title: ASP.NET Core Blazor 級聯值和參數
+title: 'ASP.NET Core :::no-loc(Blazor)::: 級聯值和參數'
 author: guardrex
 description: 瞭解如何將資料從上階元件傳送到附屬元件。
 monikerRange: '>= aspnetcore-3.1'
@@ -7,37 +7,38 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 07/06/2020
 no-loc:
-- ASP.NET Core Identity
-- cookie
-- Cookie
-- Blazor
-- Blazor Server
-- Blazor WebAssembly
-- Identity
-- Let's Encrypt
-- Razor
-- SignalR
+- ':::no-loc(appsettings.json):::'
+- ':::no-loc(ASP.NET Core Identity):::'
+- ':::no-loc(cookie):::'
+- ':::no-loc(Cookie):::'
+- ':::no-loc(Blazor):::'
+- ':::no-loc(Blazor Server):::'
+- ':::no-loc(Blazor WebAssembly):::'
+- ':::no-loc(Identity):::'
+- ":::no-loc(Let's Encrypt):::"
+- ':::no-loc(Razor):::'
+- ':::no-loc(SignalR):::'
 uid: blazor/components/cascading-values-and-parameters
-ms.openlocfilehash: 8cb2bd5f19a4cc21671a0b077d4ef0fda2e30455
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: dec71f881dc815a26d62da6df92118926b1dcf06
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88628582"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93056422"
 ---
-# <a name="aspnet-core-no-locblazor-cascading-values-and-parameters"></a><span data-ttu-id="44adf-103">ASP.NET Core Blazor 級聯值和參數</span><span class="sxs-lookup"><span data-stu-id="44adf-103">ASP.NET Core Blazor cascading values and parameters</span></span>
+# <a name="aspnet-core-no-locblazor-cascading-values-and-parameters"></a><span data-ttu-id="84d60-103">ASP.NET Core :::no-loc(Blazor)::: 級聯值和參數</span><span class="sxs-lookup"><span data-stu-id="84d60-103">ASP.NET Core :::no-loc(Blazor)::: cascading values and parameters</span></span>
 
-<span data-ttu-id="44adf-104">依 [Luke Latham](https://github.com/guardrex) 和 [Daniel Roth](https://github.com/danroth27)</span><span class="sxs-lookup"><span data-stu-id="44adf-104">By [Luke Latham](https://github.com/guardrex) and [Daniel Roth](https://github.com/danroth27)</span></span>
+<span data-ttu-id="84d60-104">依 [Luke Latham](https://github.com/guardrex) 和 [Daniel Roth](https://github.com/danroth27)</span><span class="sxs-lookup"><span data-stu-id="84d60-104">By [Luke Latham](https://github.com/guardrex) and [Daniel Roth](https://github.com/danroth27)</span></span>
 
-<span data-ttu-id="44adf-105">[查看或下載範例程式碼](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/blazor/common/samples/) ([如何下載](xref:index#how-to-download-a-sample)) </span><span class="sxs-lookup"><span data-stu-id="44adf-105">[View or download sample code](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/blazor/common/samples/) ([how to download](xref:index#how-to-download-a-sample))</span></span>
+<span data-ttu-id="84d60-105">[查看或下載範例程式碼](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/blazor/common/samples/) ([如何下載](xref:index#how-to-download-a-sample)) </span><span class="sxs-lookup"><span data-stu-id="84d60-105">[View or download sample code](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/blazor/common/samples/) ([how to download](xref:index#how-to-download-a-sample))</span></span>
 
-<span data-ttu-id="44adf-106">在某些情況下，使用 [元件參數](xref:blazor/components/index#component-parameters)將資料從上階元件傳送至子元件很不方便，尤其是在有數個元件層時。</span><span class="sxs-lookup"><span data-stu-id="44adf-106">In some scenarios, it's inconvenient to flow data from an ancestor component to a descendent component using [component parameters](xref:blazor/components/index#component-parameters), especially when there are several component layers.</span></span> <span data-ttu-id="44adf-107">串聯值和參數藉由提供一個便利的方式，讓祖系元件為其所有的子元件提供值，來解決這個問題。</span><span class="sxs-lookup"><span data-stu-id="44adf-107">Cascading values and parameters solve this problem by providing a convenient way for an ancestor component to provide a value to all of its descendent components.</span></span> <span data-ttu-id="44adf-108">串聯值和參數也會提供元件的座標方法。</span><span class="sxs-lookup"><span data-stu-id="44adf-108">Cascading values and parameters also provide an approach for components to coordinate.</span></span>
+<span data-ttu-id="84d60-106">在某些情況下，使用 [元件參數](xref:blazor/components/index#component-parameters)將資料從上階元件傳送至子元件很不方便，尤其是在有數個元件層時。</span><span class="sxs-lookup"><span data-stu-id="84d60-106">In some scenarios, it's inconvenient to flow data from an ancestor component to a descendent component using [component parameters](xref:blazor/components/index#component-parameters), especially when there are several component layers.</span></span> <span data-ttu-id="84d60-107">串聯值和參數藉由提供一個便利的方式，讓祖系元件為其所有的子元件提供值，來解決這個問題。</span><span class="sxs-lookup"><span data-stu-id="84d60-107">Cascading values and parameters solve this problem by providing a convenient way for an ancestor component to provide a value to all of its descendent components.</span></span> <span data-ttu-id="84d60-108">串聯值和參數也會提供元件的座標方法。</span><span class="sxs-lookup"><span data-stu-id="84d60-108">Cascading values and parameters also provide an approach for components to coordinate.</span></span>
 
-### <a name="theme-example"></a><span data-ttu-id="44adf-109">主題範例</span><span class="sxs-lookup"><span data-stu-id="44adf-109">Theme example</span></span>
+### <a name="theme-example"></a><span data-ttu-id="84d60-109">主題範例</span><span class="sxs-lookup"><span data-stu-id="84d60-109">Theme example</span></span>
 
-<span data-ttu-id="44adf-110">在來自範例應用程式的下列範例中， `ThemeInfo` 類別會指定要在元件階層中流動的主題資訊，讓應用程式的特定部分中的所有按鈕共用相同的樣式。</span><span class="sxs-lookup"><span data-stu-id="44adf-110">In the following example from the sample app, the `ThemeInfo` class specifies the theme information to flow down the component hierarchy so that all of the buttons within a given part of the app share the same style.</span></span>
+<span data-ttu-id="84d60-110">在來自範例應用程式的下列範例中， `ThemeInfo` 類別會指定要在元件階層中流動的主題資訊，讓應用程式的特定部分中的所有按鈕共用相同的樣式。</span><span class="sxs-lookup"><span data-stu-id="84d60-110">In the following example from the sample app, the `ThemeInfo` class specifies the theme information to flow down the component hierarchy so that all of the buttons within a given part of the app share the same style.</span></span>
 
-<span data-ttu-id="44adf-111">`UIThemeClasses/ThemeInfo.cs`:</span><span class="sxs-lookup"><span data-stu-id="44adf-111">`UIThemeClasses/ThemeInfo.cs`:</span></span>
+<span data-ttu-id="84d60-111">`UIThemeClasses/ThemeInfo.cs`:</span><span class="sxs-lookup"><span data-stu-id="84d60-111">`UIThemeClasses/ThemeInfo.cs`:</span></span>
 
 ```csharp
 public class ThemeInfo
@@ -46,15 +47,15 @@ public class ThemeInfo
 }
 ```
 
-<span data-ttu-id="44adf-112">上階的元件可以使用級聯的值元件來提供階層式值。</span><span class="sxs-lookup"><span data-stu-id="44adf-112">An ancestor component can provide a cascading value using the Cascading Value component.</span></span> <span data-ttu-id="44adf-113"><xref:Microsoft.AspNetCore.Components.CascadingValue%601>元件會包裝元件階層的子樹，並提供單一值給該子樹內的所有元件。</span><span class="sxs-lookup"><span data-stu-id="44adf-113">The <xref:Microsoft.AspNetCore.Components.CascadingValue%601> component wraps a subtree of the component hierarchy and supplies a single value to all components within that subtree.</span></span>
+<span data-ttu-id="84d60-112">上階的元件可以使用級聯的值元件來提供階層式值。</span><span class="sxs-lookup"><span data-stu-id="84d60-112">An ancestor component can provide a cascading value using the Cascading Value component.</span></span> <span data-ttu-id="84d60-113"><xref:Microsoft.AspNetCore.Components.CascadingValue%601>元件會包裝元件階層的子樹，並提供單一值給該子樹內的所有元件。</span><span class="sxs-lookup"><span data-stu-id="84d60-113">The <xref:Microsoft.AspNetCore.Components.CascadingValue%601> component wraps a subtree of the component hierarchy and supplies a single value to all components within that subtree.</span></span>
 
-<span data-ttu-id="44adf-114">例如，範例應用程式 `ThemeInfo` 會在其中一個應用程式的版面配置中，指定主題資訊 () ，做為組成屬性之版面配置主體的所有元件的串聯參數 `@Body` 。</span><span class="sxs-lookup"><span data-stu-id="44adf-114">For example, the sample app specifies theme information (`ThemeInfo`) in one of the app's layouts as a cascading parameter for all components that make up the layout body of the `@Body` property.</span></span> <span data-ttu-id="44adf-115">`ButtonClass` 會 `btn-success` 在版面配置元件中指派的值。</span><span class="sxs-lookup"><span data-stu-id="44adf-115">`ButtonClass` is assigned a value of `btn-success` in the layout component.</span></span> <span data-ttu-id="44adf-116">任何子代元件都可以透過串聯物件取用這個屬性 `ThemeInfo` 。</span><span class="sxs-lookup"><span data-stu-id="44adf-116">Any descendent component can consume this property through the `ThemeInfo` cascading object.</span></span>
+<span data-ttu-id="84d60-114">例如，範例應用程式 `ThemeInfo` 會在其中一個應用程式的版面配置中，指定主題資訊 () ，做為組成屬性之版面配置主體的所有元件的串聯參數 `@Body` 。</span><span class="sxs-lookup"><span data-stu-id="84d60-114">For example, the sample app specifies theme information (`ThemeInfo`) in one of the app's layouts as a cascading parameter for all components that make up the layout body of the `@Body` property.</span></span> <span data-ttu-id="84d60-115">`ButtonClass` 會 `btn-success` 在版面配置元件中指派的值。</span><span class="sxs-lookup"><span data-stu-id="84d60-115">`ButtonClass` is assigned a value of `btn-success` in the layout component.</span></span> <span data-ttu-id="84d60-116">任何子代元件都可以透過串聯物件取用這個屬性 `ThemeInfo` 。</span><span class="sxs-lookup"><span data-stu-id="84d60-116">Any descendent component can consume this property through the `ThemeInfo` cascading object.</span></span>
 
-<span data-ttu-id="44adf-117">`CascadingValuesParametersLayout` 元件：</span><span class="sxs-lookup"><span data-stu-id="44adf-117">`CascadingValuesParametersLayout` component:</span></span>
+<span data-ttu-id="84d60-117">`CascadingValuesParametersLayout` 元件：</span><span class="sxs-lookup"><span data-stu-id="84d60-117">`CascadingValuesParametersLayout` component:</span></span>
 
 ```razor
 @inherits LayoutComponentBase
-@using BlazorSample.UIThemeClasses
+@using :::no-loc(Blazor):::Sample.UIThemeClasses
 
 <div class="container-fluid">
     <div class="row">
@@ -76,16 +77,16 @@ public class ThemeInfo
 }
 ```
 
-<span data-ttu-id="44adf-118">為了利用串聯值，元件會使用屬性來宣告串聯參數 [`[CascadingParameter]`](xref:Microsoft.AspNetCore.Components.CascadingParameterAttribute) 。</span><span class="sxs-lookup"><span data-stu-id="44adf-118">To make use of cascading values, components declare cascading parameters using the [`[CascadingParameter]`](xref:Microsoft.AspNetCore.Components.CascadingParameterAttribute) attribute.</span></span> <span data-ttu-id="44adf-119">串聯值會依類型系結至串聯參數。</span><span class="sxs-lookup"><span data-stu-id="44adf-119">Cascading values are bound to cascading parameters by type.</span></span>
+<span data-ttu-id="84d60-118">為了利用串聯值，元件會使用屬性來宣告串聯參數 [`[CascadingParameter]`](xref:Microsoft.AspNetCore.Components.CascadingParameterAttribute) 。</span><span class="sxs-lookup"><span data-stu-id="84d60-118">To make use of cascading values, components declare cascading parameters using the [`[CascadingParameter]`](xref:Microsoft.AspNetCore.Components.CascadingParameterAttribute) attribute.</span></span> <span data-ttu-id="84d60-119">串聯值會依類型系結至串聯參數。</span><span class="sxs-lookup"><span data-stu-id="84d60-119">Cascading values are bound to cascading parameters by type.</span></span>
 
-<span data-ttu-id="44adf-120">在範例應用程式中，元件會將串聯值系結 `CascadingValuesParametersTheme` `ThemeInfo` 至串聯參數。</span><span class="sxs-lookup"><span data-stu-id="44adf-120">In the sample app, the `CascadingValuesParametersTheme` component binds the `ThemeInfo` cascading value to a cascading parameter.</span></span> <span data-ttu-id="44adf-121">參數是用來設定元件所顯示的其中一個按鈕的 CSS 類別。</span><span class="sxs-lookup"><span data-stu-id="44adf-121">The parameter is used to set the CSS class for one of the buttons displayed by the component.</span></span>
+<span data-ttu-id="84d60-120">在範例應用程式中，元件會將串聯值系結 `CascadingValuesParametersTheme` `ThemeInfo` 至串聯參數。</span><span class="sxs-lookup"><span data-stu-id="84d60-120">In the sample app, the `CascadingValuesParametersTheme` component binds the `ThemeInfo` cascading value to a cascading parameter.</span></span> <span data-ttu-id="84d60-121">參數是用來設定元件所顯示的其中一個按鈕的 CSS 類別。</span><span class="sxs-lookup"><span data-stu-id="84d60-121">The parameter is used to set the CSS class for one of the buttons displayed by the component.</span></span>
 
-<span data-ttu-id="44adf-122">`CascadingValuesParametersTheme` 元件：</span><span class="sxs-lookup"><span data-stu-id="44adf-122">`CascadingValuesParametersTheme` component:</span></span>
+<span data-ttu-id="84d60-122">`CascadingValuesParametersTheme` 元件：</span><span class="sxs-lookup"><span data-stu-id="84d60-122">`CascadingValuesParametersTheme` component:</span></span>
 
 ```razor
 @page "/cascadingvaluesparameterstheme"
 @layout CascadingValuesParametersLayout
-@using BlazorSample.UIThemeClasses
+@using :::no-loc(Blazor):::Sample.UIThemeClasses
 
 <h1>Cascading Values & Parameters</h1>
 
@@ -116,7 +117,7 @@ public class ThemeInfo
 }
 ```
 
-<span data-ttu-id="44adf-123">若要在相同的子樹中串聯多個相同類型的值，請為 <xref:Microsoft.AspNetCore.Components.CascadingValue%601.Name%2A> 每個 <xref:Microsoft.AspNetCore.Components.CascadingValue%601> 元件和其對應的屬性提供唯一的字串 [`[CascadingParameter]`](xref:Microsoft.AspNetCore.Components.CascadingParameterAttribute) 。</span><span class="sxs-lookup"><span data-stu-id="44adf-123">To cascade multiple values of the same type within the same subtree, provide a unique <xref:Microsoft.AspNetCore.Components.CascadingValue%601.Name%2A> string to each <xref:Microsoft.AspNetCore.Components.CascadingValue%601> component and its corresponding [`[CascadingParameter]`](xref:Microsoft.AspNetCore.Components.CascadingParameterAttribute) attribute.</span></span> <span data-ttu-id="44adf-124">在下列範例中，兩個 <xref:Microsoft.AspNetCore.Components.CascadingValue%601> 元件 `MyCascadingType` 依名稱來串聯不同的實例：</span><span class="sxs-lookup"><span data-stu-id="44adf-124">In the following example, two <xref:Microsoft.AspNetCore.Components.CascadingValue%601> components cascade different instances of `MyCascadingType` by name:</span></span>
+<span data-ttu-id="84d60-123">若要在相同的子樹中串聯多個相同類型的值，請為 <xref:Microsoft.AspNetCore.Components.CascadingValue%601.Name%2A> 每個 <xref:Microsoft.AspNetCore.Components.CascadingValue%601> 元件和其對應的屬性提供唯一的字串 [`[CascadingParameter]`](xref:Microsoft.AspNetCore.Components.CascadingParameterAttribute) 。</span><span class="sxs-lookup"><span data-stu-id="84d60-123">To cascade multiple values of the same type within the same subtree, provide a unique <xref:Microsoft.AspNetCore.Components.CascadingValue%601.Name%2A> string to each <xref:Microsoft.AspNetCore.Components.CascadingValue%601> component and its corresponding [`[CascadingParameter]`](xref:Microsoft.AspNetCore.Components.CascadingParameterAttribute) attribute.</span></span> <span data-ttu-id="84d60-124">在下列範例中，兩個 <xref:Microsoft.AspNetCore.Components.CascadingValue%601> 元件 `MyCascadingType` 依名稱來串聯不同的實例：</span><span class="sxs-lookup"><span data-stu-id="84d60-124">In the following example, two <xref:Microsoft.AspNetCore.Components.CascadingValue%601> components cascade different instances of `MyCascadingType` by name:</span></span>
 
 ```razor
 <CascadingValue Value="@parentCascadeParameter1" Name="CascadeParam1">
@@ -135,7 +136,7 @@ public class ThemeInfo
 }
 ```
 
-<span data-ttu-id="44adf-125">在子系元件中，串聯的參數會依名稱從上階元件的對應串聯值接收其值：</span><span class="sxs-lookup"><span data-stu-id="44adf-125">In a descendant component, the cascaded parameters receive their values from the corresponding cascaded values in the ancestor component by name:</span></span>
+<span data-ttu-id="84d60-125">在子系元件中，串聯的參數會依名稱從上階元件的對應串聯值接收其值：</span><span class="sxs-lookup"><span data-stu-id="84d60-125">In a descendant component, the cascaded parameters receive their values from the corresponding cascaded values in the ancestor component by name:</span></span>
 
 ```razor
 ...
@@ -149,15 +150,15 @@ public class ThemeInfo
 }
 ```
 
-### <a name="tabset-example"></a><span data-ttu-id="44adf-126">TabSet 範例</span><span class="sxs-lookup"><span data-stu-id="44adf-126">TabSet example</span></span>
+### <a name="tabset-example"></a><span data-ttu-id="84d60-126">TabSet 範例</span><span class="sxs-lookup"><span data-stu-id="84d60-126">TabSet example</span></span>
 
-<span data-ttu-id="44adf-127">串聯參數也可讓元件在元件階層之間共同作業。</span><span class="sxs-lookup"><span data-stu-id="44adf-127">Cascading parameters also enable components to collaborate across the component hierarchy.</span></span> <span data-ttu-id="44adf-128">例如，請考慮 `TabSet` 範例應用程式中的下列範例。</span><span class="sxs-lookup"><span data-stu-id="44adf-128">For example, consider the following `TabSet` example in the sample app.</span></span>
+<span data-ttu-id="84d60-127">串聯參數也可讓元件在元件階層之間共同作業。</span><span class="sxs-lookup"><span data-stu-id="84d60-127">Cascading parameters also enable components to collaborate across the component hierarchy.</span></span> <span data-ttu-id="84d60-128">例如，請考慮 `TabSet` 範例應用程式中的下列範例。</span><span class="sxs-lookup"><span data-stu-id="84d60-128">For example, consider the following `TabSet` example in the sample app.</span></span>
 
-<span data-ttu-id="44adf-129">範例應用程式具有可執行索引標籤 `ITab` 的介面：</span><span class="sxs-lookup"><span data-stu-id="44adf-129">The sample app has an `ITab` interface that tabs implement:</span></span>
+<span data-ttu-id="84d60-129">範例應用程式具有可執行索引標籤 `ITab` 的介面：</span><span class="sxs-lookup"><span data-stu-id="84d60-129">The sample app has an `ITab` interface that tabs implement:</span></span>
 
-[!code-csharp[](../common/samples/3.x/BlazorWebAssemblySample/UIInterfaces/ITab.cs)]
+[!code-csharp[](../common/samples/3.x/:::no-loc(Blazor):::WebAssemblySample/UIInterfaces/ITab.cs)]
 
-<span data-ttu-id="44adf-130">`CascadingValuesParametersTabSet`元件使用 `TabSet` 元件，其中包含數個 `Tab` 元件：</span><span class="sxs-lookup"><span data-stu-id="44adf-130">The `CascadingValuesParametersTabSet` component uses the `TabSet` component, which contains several `Tab` components:</span></span>
+<span data-ttu-id="84d60-130">`CascadingValuesParametersTabSet`元件使用 `TabSet` 元件，其中包含數個 `Tab` 元件：</span><span class="sxs-lookup"><span data-stu-id="84d60-130">The `CascadingValuesParametersTabSet` component uses the `TabSet` component, which contains several `Tab` components:</span></span>
 
 ```razor
 @page "/CascadingValuesParametersTabSet"
@@ -189,14 +190,14 @@ public class ThemeInfo
 }
 ```
 
-<span data-ttu-id="44adf-131">子 `Tab` 元件不會明確地以參數形式傳遞至 `TabSet` 。</span><span class="sxs-lookup"><span data-stu-id="44adf-131">The child `Tab` components aren't explicitly passed as parameters to the `TabSet`.</span></span> <span data-ttu-id="44adf-132">相反地，子 `Tab` 元件是的子內容的一部分 `TabSet` 。</span><span class="sxs-lookup"><span data-stu-id="44adf-132">Instead, the child `Tab` components are part of the child content of the `TabSet`.</span></span> <span data-ttu-id="44adf-133">但是， `TabSet` 仍然需要知道每個元件， `Tab` 才能轉譯標頭和使用中的索引標籤。若要在不需要額外程式碼的情況下啟用此協調， `TabSet` 元件 *可以提供本身* 的串聯值，然後由子 `Tab` 元件挑選。</span><span class="sxs-lookup"><span data-stu-id="44adf-133">However, the `TabSet` still needs to know about each `Tab` component so that it can render the headers and the active tab. To enable this coordination without requiring additional code, the `TabSet` component *can provide itself as a cascading value* that is then picked up by the descendent `Tab` components.</span></span>
+<span data-ttu-id="84d60-131">子 `Tab` 元件不會明確地以參數形式傳遞至 `TabSet` 。</span><span class="sxs-lookup"><span data-stu-id="84d60-131">The child `Tab` components aren't explicitly passed as parameters to the `TabSet`.</span></span> <span data-ttu-id="84d60-132">相反地，子 `Tab` 元件是的子內容的一部分 `TabSet` 。</span><span class="sxs-lookup"><span data-stu-id="84d60-132">Instead, the child `Tab` components are part of the child content of the `TabSet`.</span></span> <span data-ttu-id="84d60-133">但是， `TabSet` 仍然需要知道每個元件， `Tab` 才能轉譯標頭和使用中的索引標籤。若要在不需要額外程式碼的情況下啟用此協調， `TabSet` 元件 *可以提供本身* 的串聯值，然後由子 `Tab` 元件挑選。</span><span class="sxs-lookup"><span data-stu-id="84d60-133">However, the `TabSet` still needs to know about each `Tab` component so that it can render the headers and the active tab. To enable this coordination without requiring additional code, the `TabSet` component *can provide itself as a cascading value* that is then picked up by the descendent `Tab` components.</span></span>
 
-<span data-ttu-id="44adf-134">`TabSet` 元件：</span><span class="sxs-lookup"><span data-stu-id="44adf-134">`TabSet` component:</span></span>
+<span data-ttu-id="84d60-134">`TabSet` 元件：</span><span class="sxs-lookup"><span data-stu-id="84d60-134">`TabSet` component:</span></span>
 
-[!code-razor[](../common/samples/3.x/BlazorWebAssemblySample/Components/TabSet.razor)]
+[!code-razor[](../common/samples/3.x/:::no-loc(Blazor):::WebAssemblySample/Components/TabSet.razor)]
 
-<span data-ttu-id="44adf-135">這些子代 `Tab` 元件會將包含的 `TabSet` 視為串聯參數，因此 `Tab` 元件會將自己加入至 `TabSet` ，並在哪一個索引標籤為作用中協調。</span><span class="sxs-lookup"><span data-stu-id="44adf-135">The descendent `Tab` components capture the containing `TabSet` as a cascading parameter, so the `Tab` components add themselves to the `TabSet` and coordinate on which tab is active.</span></span>
+<span data-ttu-id="84d60-135">這些子代 `Tab` 元件會將包含的 `TabSet` 視為串聯參數，因此 `Tab` 元件會將自己加入至 `TabSet` ，並在哪一個索引標籤為作用中協調。</span><span class="sxs-lookup"><span data-stu-id="84d60-135">The descendent `Tab` components capture the containing `TabSet` as a cascading parameter, so the `Tab` components add themselves to the `TabSet` and coordinate on which tab is active.</span></span>
 
-<span data-ttu-id="44adf-136">`Tab` 元件：</span><span class="sxs-lookup"><span data-stu-id="44adf-136">`Tab` component:</span></span>
+<span data-ttu-id="84d60-136">`Tab` 元件：</span><span class="sxs-lookup"><span data-stu-id="84d60-136">`Tab` component:</span></span>
 
-[!code-razor[](../common/samples/3.x/BlazorWebAssemblySample/Components/Tab.razor)]
+[!code-razor[](../common/samples/3.x/:::no-loc(Blazor):::WebAssemblySample/Components/Tab.razor)]

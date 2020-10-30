@@ -1,99 +1,100 @@
 ---
-title: 使用 ASP.NET Core 中的 WS-同盟來驗證使用者
+title: 使用 ASP.NET Core 中的 WS-Federation 來驗證使用者
 author: chlowell
-description: 本教學課程示範如何在 ASP.NET Core 應用程式中使用 WS-同盟。
+description: 本教學課程示範如何使用 ASP.NET Core 應用程式中的 WS-Federation。
 ms.author: scaddie
 ms.custom: mvc
 ms.date: 01/16/2019
 no-loc:
-- ASP.NET Core Identity
-- cookie
-- Cookie
-- Blazor
-- Blazor Server
-- Blazor WebAssembly
-- Identity
-- Let's Encrypt
-- Razor
-- SignalR
+- ':::no-loc(appsettings.json):::'
+- ':::no-loc(ASP.NET Core Identity):::'
+- ':::no-loc(cookie):::'
+- ':::no-loc(Cookie):::'
+- ':::no-loc(Blazor):::'
+- ':::no-loc(Blazor Server):::'
+- ':::no-loc(Blazor WebAssembly):::'
+- ':::no-loc(Identity):::'
+- ":::no-loc(Let's Encrypt):::"
+- ':::no-loc(Razor):::'
+- ':::no-loc(SignalR):::'
 uid: security/authentication/ws-federation
-ms.openlocfilehash: 8a593efd799e900483d0337a06e02c3558b63bfb
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: ed78923a2bdd1ed683a72c0a6f34337a38350035
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88634081"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93053367"
 ---
-# <a name="authenticate-users-with-ws-federation-in-aspnet-core"></a><span data-ttu-id="4f363-103">使用 ASP.NET Core 中的 WS-同盟來驗證使用者</span><span class="sxs-lookup"><span data-stu-id="4f363-103">Authenticate users with WS-Federation in ASP.NET Core</span></span>
+# <a name="authenticate-users-with-ws-federation-in-aspnet-core"></a><span data-ttu-id="51e17-103">使用 ASP.NET Core 中的 WS-Federation 來驗證使用者</span><span class="sxs-lookup"><span data-stu-id="51e17-103">Authenticate users with WS-Federation in ASP.NET Core</span></span>
 
-<span data-ttu-id="4f363-104">本教學課程示範如何讓使用者以 WS-同盟驗證提供者登入，例如 Active Directory 同盟服務 (ADFS) 或 [Azure Active Directory](/azure/active-directory/) (AAD) 。</span><span class="sxs-lookup"><span data-stu-id="4f363-104">This tutorial demonstrates how to enable users to sign in with a WS-Federation authentication provider like Active Directory Federation Services (ADFS) or [Azure Active Directory](/azure/active-directory/) (AAD).</span></span> <span data-ttu-id="4f363-105">它會使用 [Facebook、Google 和外部提供者驗證](xref:security/authentication/social/index)中所述的 ASP.NET Core 範例應用程式。</span><span class="sxs-lookup"><span data-stu-id="4f363-105">It uses the ASP.NET Core sample app described in [Facebook, Google, and external provider authentication](xref:security/authentication/social/index).</span></span>
+<span data-ttu-id="51e17-104">本教學課程示範如何讓使用者使用 WS-Federation authentication 提供者登入，例如 Active Directory 同盟服務 (ADFS) 或 [Azure Active Directory](/azure/active-directory/) (AAD) 。</span><span class="sxs-lookup"><span data-stu-id="51e17-104">This tutorial demonstrates how to enable users to sign in with a WS-Federation authentication provider like Active Directory Federation Services (ADFS) or [Azure Active Directory](/azure/active-directory/) (AAD).</span></span> <span data-ttu-id="51e17-105">它會使用 [Facebook、Google 和外部提供者驗證](xref:security/authentication/social/index)中所述的 ASP.NET Core 範例應用程式。</span><span class="sxs-lookup"><span data-stu-id="51e17-105">It uses the ASP.NET Core sample app described in [Facebook, Google, and external provider authentication](xref:security/authentication/social/index).</span></span>
 
-<span data-ttu-id="4f363-106">對於 ASP.NET Core 應用程式，WS-同盟支援是由 [AspNetCore WsFederation](https://www.nuget.org/packages/Microsoft.AspNetCore.Authentication.WsFederation)提供。</span><span class="sxs-lookup"><span data-stu-id="4f363-106">For ASP.NET Core apps, WS-Federation support is provided by [Microsoft.AspNetCore.Authentication.WsFederation](https://www.nuget.org/packages/Microsoft.AspNetCore.Authentication.WsFederation).</span></span> <span data-ttu-id="4f363-107">此元件會從 [Owin](https://www.nuget.org/packages/Microsoft.Owin.Security.WsFederation) 移植，並共用許多元件的機制。</span><span class="sxs-lookup"><span data-stu-id="4f363-107">This component is ported from [Microsoft.Owin.Security.WsFederation](https://www.nuget.org/packages/Microsoft.Owin.Security.WsFederation) and shares many of that component's mechanics.</span></span> <span data-ttu-id="4f363-108">不過，元件有幾個重要的差異。</span><span class="sxs-lookup"><span data-stu-id="4f363-108">However, the components differ in a couple of important ways.</span></span>
+<span data-ttu-id="51e17-106">對於 ASP.NET Core 應用程式，WS-Federation 支援是由 [WsFederation](https://www.nuget.org/packages/Microsoft.AspNetCore.Authentication.WsFederation)提供。</span><span class="sxs-lookup"><span data-stu-id="51e17-106">For ASP.NET Core apps, WS-Federation support is provided by [Microsoft.AspNetCore.Authentication.WsFederation](https://www.nuget.org/packages/Microsoft.AspNetCore.Authentication.WsFederation).</span></span> <span data-ttu-id="51e17-107">此元件會從 [Owin](https://www.nuget.org/packages/Microsoft.Owin.Security.WsFederation) 移植，並共用許多元件的機制。</span><span class="sxs-lookup"><span data-stu-id="51e17-107">This component is ported from [Microsoft.Owin.Security.WsFederation](https://www.nuget.org/packages/Microsoft.Owin.Security.WsFederation) and shares many of that component's mechanics.</span></span> <span data-ttu-id="51e17-108">不過，元件有幾個重要的差異。</span><span class="sxs-lookup"><span data-stu-id="51e17-108">However, the components differ in a couple of important ways.</span></span>
 
-<span data-ttu-id="4f363-109">依預設，新的中介軟體：</span><span class="sxs-lookup"><span data-stu-id="4f363-109">By default, the new middleware:</span></span>
+<span data-ttu-id="51e17-109">依預設，新的中介軟體：</span><span class="sxs-lookup"><span data-stu-id="51e17-109">By default, the new middleware:</span></span>
 
-* <span data-ttu-id="4f363-110">不允許未經要求的登入。</span><span class="sxs-lookup"><span data-stu-id="4f363-110">Doesn't allow unsolicited logins.</span></span> <span data-ttu-id="4f363-111">WS-同盟通訊協定的這項功能很容易遭受 XSRF 攻擊。</span><span class="sxs-lookup"><span data-stu-id="4f363-111">This feature of the WS-Federation protocol is vulnerable to XSRF attacks.</span></span> <span data-ttu-id="4f363-112">不過，您可以使用選項來啟用它 `AllowUnsolicitedLogins` 。</span><span class="sxs-lookup"><span data-stu-id="4f363-112">However, it can be enabled with the `AllowUnsolicitedLogins` option.</span></span>
-* <span data-ttu-id="4f363-113">不會檢查每個表單張貼是否有登入訊息。</span><span class="sxs-lookup"><span data-stu-id="4f363-113">Doesn't check every form post for sign-in messages.</span></span> <span data-ttu-id="4f363-114">只 `CallbackPath` 會檢查登入的要求。 `CallbackPath` 預設為， `/signin-wsfed` 但可透過[WsFederationOptions](/dotnet/api/microsoft.aspnetcore.authentication.wsfederation.wsfederationoptions)類別的繼承[RemoteAuthenticationOptions. CallbackPath](/dotnet/api/microsoft.aspnetcore.authentication.remoteauthenticationoptions.callbackpath)屬性來變更。</span><span class="sxs-lookup"><span data-stu-id="4f363-114">Only requests to the `CallbackPath` are checked for sign-ins. `CallbackPath` defaults to `/signin-wsfed` but can be changed via the inherited [RemoteAuthenticationOptions.CallbackPath](/dotnet/api/microsoft.aspnetcore.authentication.remoteauthenticationoptions.callbackpath) property of the [WsFederationOptions](/dotnet/api/microsoft.aspnetcore.authentication.wsfederation.wsfederationoptions) class.</span></span> <span data-ttu-id="4f363-115">您可以啟用 [SkipUnrecognizedRequests](/dotnet/api/microsoft.aspnetcore.authentication.wsfederation.wsfederationoptions.skipunrecognizedrequests) 選項，與其他驗證提供者共用此路徑。</span><span class="sxs-lookup"><span data-stu-id="4f363-115">This path can be shared with other authentication providers by enabling the [SkipUnrecognizedRequests](/dotnet/api/microsoft.aspnetcore.authentication.wsfederation.wsfederationoptions.skipunrecognizedrequests) option.</span></span>
+* <span data-ttu-id="51e17-110">不允許未經要求的登入。</span><span class="sxs-lookup"><span data-stu-id="51e17-110">Doesn't allow unsolicited logins.</span></span> <span data-ttu-id="51e17-111">WS-Federation 通訊協定的這項功能很容易遭受 XSRF 攻擊。</span><span class="sxs-lookup"><span data-stu-id="51e17-111">This feature of the WS-Federation protocol is vulnerable to XSRF attacks.</span></span> <span data-ttu-id="51e17-112">不過，您可以使用選項來啟用它 `AllowUnsolicitedLogins` 。</span><span class="sxs-lookup"><span data-stu-id="51e17-112">However, it can be enabled with the `AllowUnsolicitedLogins` option.</span></span>
+* <span data-ttu-id="51e17-113">不會檢查每個表單張貼是否有登入訊息。</span><span class="sxs-lookup"><span data-stu-id="51e17-113">Doesn't check every form post for sign-in messages.</span></span> <span data-ttu-id="51e17-114">只 `CallbackPath` 會檢查登入的要求。 `CallbackPath` 預設為， `/signin-wsfed` 但可透過[WsFederationOptions](/dotnet/api/microsoft.aspnetcore.authentication.wsfederation.wsfederationoptions)類別的繼承[RemoteAuthenticationOptions. CallbackPath](/dotnet/api/microsoft.aspnetcore.authentication.remoteauthenticationoptions.callbackpath)屬性來變更。</span><span class="sxs-lookup"><span data-stu-id="51e17-114">Only requests to the `CallbackPath` are checked for sign-ins. `CallbackPath` defaults to `/signin-wsfed` but can be changed via the inherited [RemoteAuthenticationOptions.CallbackPath](/dotnet/api/microsoft.aspnetcore.authentication.remoteauthenticationoptions.callbackpath) property of the [WsFederationOptions](/dotnet/api/microsoft.aspnetcore.authentication.wsfederation.wsfederationoptions) class.</span></span> <span data-ttu-id="51e17-115">您可以啟用 [SkipUnrecognizedRequests](/dotnet/api/microsoft.aspnetcore.authentication.wsfederation.wsfederationoptions.skipunrecognizedrequests) 選項，與其他驗證提供者共用此路徑。</span><span class="sxs-lookup"><span data-stu-id="51e17-115">This path can be shared with other authentication providers by enabling the [SkipUnrecognizedRequests](/dotnet/api/microsoft.aspnetcore.authentication.wsfederation.wsfederationoptions.skipunrecognizedrequests) option.</span></span>
 
-## <a name="register-the-app-with-active-directory"></a><span data-ttu-id="4f363-116">使用 Active Directory 註冊應用程式</span><span class="sxs-lookup"><span data-stu-id="4f363-116">Register the app with Active Directory</span></span>
+## <a name="register-the-app-with-active-directory"></a><span data-ttu-id="51e17-116">使用 Active Directory 註冊應用程式</span><span class="sxs-lookup"><span data-stu-id="51e17-116">Register the app with Active Directory</span></span>
 
-### <a name="active-directory-federation-services"></a><span data-ttu-id="4f363-117">Active Directory Federation Services</span><span class="sxs-lookup"><span data-stu-id="4f363-117">Active Directory Federation Services</span></span>
+### <a name="active-directory-federation-services"></a><span data-ttu-id="51e17-117">Active Directory Federation Services</span><span class="sxs-lookup"><span data-stu-id="51e17-117">Active Directory Federation Services</span></span>
 
-* <span data-ttu-id="4f363-118">從 ADFS 管理主控台開啟伺服器的 [ **新增信賴憑證者信任] 嚮導** ：</span><span class="sxs-lookup"><span data-stu-id="4f363-118">Open the server's **Add Relying Party Trust Wizard** from the ADFS Management console:</span></span>
+* <span data-ttu-id="51e17-118">從 ADFS 管理主控台開啟伺服器的 [ **新增信賴憑證者信任] 嚮導** ：</span><span class="sxs-lookup"><span data-stu-id="51e17-118">Open the server's **Add Relying Party Trust Wizard** from the ADFS Management console:</span></span>
 
 ![新增信賴憑證者信任嚮導：歡迎使用](ws-federation/_static/AdfsAddTrust.png)
 
-* <span data-ttu-id="4f363-120">選擇手動輸入資料：</span><span class="sxs-lookup"><span data-stu-id="4f363-120">Choose to enter data manually:</span></span>
+* <span data-ttu-id="51e17-120">選擇手動輸入資料：</span><span class="sxs-lookup"><span data-stu-id="51e17-120">Choose to enter data manually:</span></span>
 
 ![新增信賴憑證者信任 Wizard：選取資料來源](ws-federation/_static/AdfsSelectDataSource.png)
 
-* <span data-ttu-id="4f363-122">輸入信賴憑證者的顯示名稱。</span><span class="sxs-lookup"><span data-stu-id="4f363-122">Enter a display name for the relying party.</span></span> <span data-ttu-id="4f363-123">此名稱對 ASP.NET Core 應用程式而言並不重要。</span><span class="sxs-lookup"><span data-stu-id="4f363-123">The name isn't important to the ASP.NET Core app.</span></span>
+* <span data-ttu-id="51e17-122">輸入信賴憑證者的顯示名稱。</span><span class="sxs-lookup"><span data-stu-id="51e17-122">Enter a display name for the relying party.</span></span> <span data-ttu-id="51e17-123">此名稱對 ASP.NET Core 應用程式而言並不重要。</span><span class="sxs-lookup"><span data-stu-id="51e17-123">The name isn't important to the ASP.NET Core app.</span></span>
 
-* <span data-ttu-id="4f363-124">[AspNetCore WsFederation](https://www.nuget.org/packages/Microsoft.AspNetCore.Authentication.WsFederation) 缺少權杖加密的支援，因此請勿設定權杖加密憑證：</span><span class="sxs-lookup"><span data-stu-id="4f363-124">[Microsoft.AspNetCore.Authentication.WsFederation](https://www.nuget.org/packages/Microsoft.AspNetCore.Authentication.WsFederation) lacks support for token encryption, so don't configure a token encryption certificate:</span></span>
+* <span data-ttu-id="51e17-124">[AspNetCore WsFederation](https://www.nuget.org/packages/Microsoft.AspNetCore.Authentication.WsFederation) 缺少權杖加密的支援，因此請勿設定權杖加密憑證：</span><span class="sxs-lookup"><span data-stu-id="51e17-124">[Microsoft.AspNetCore.Authentication.WsFederation](https://www.nuget.org/packages/Microsoft.AspNetCore.Authentication.WsFederation) lacks support for token encryption, so don't configure a token encryption certificate:</span></span>
 
 ![新增信賴憑證者信任 Wizard：設定憑證](ws-federation/_static/AdfsConfigureCert.png)
 
-* <span data-ttu-id="4f363-126">使用應用程式的 URL 啟用 WS-同盟被動式通訊協定的支援。</span><span class="sxs-lookup"><span data-stu-id="4f363-126">Enable support for WS-Federation Passive protocol, using the app's URL.</span></span> <span data-ttu-id="4f363-127">確認應用程式的埠正確：</span><span class="sxs-lookup"><span data-stu-id="4f363-127">Verify the port is correct for the app:</span></span>
+* <span data-ttu-id="51e17-126">使用應用程式的 URL 啟用 WS-Federation 被動通訊協定的支援。</span><span class="sxs-lookup"><span data-stu-id="51e17-126">Enable support for WS-Federation Passive protocol, using the app's URL.</span></span> <span data-ttu-id="51e17-127">確認應用程式的埠正確：</span><span class="sxs-lookup"><span data-stu-id="51e17-127">Verify the port is correct for the app:</span></span>
 
 ![新增信賴憑證者信任 Wizard：設定 URL](ws-federation/_static/AdfsConfigureUrl.png)
 
 > [!NOTE]
-> <span data-ttu-id="4f363-129">這必須是 HTTPS URL。</span><span class="sxs-lookup"><span data-stu-id="4f363-129">This must be an HTTPS URL.</span></span> <span data-ttu-id="4f363-130">IIS Express 可以在開發期間裝載應用程式時提供自我簽署的憑證。</span><span class="sxs-lookup"><span data-stu-id="4f363-130">IIS Express can provide a self-signed certificate when hosting the app during development.</span></span> <span data-ttu-id="4f363-131">Kestrel 需要手動憑證設定。</span><span class="sxs-lookup"><span data-stu-id="4f363-131">Kestrel requires manual certificate configuration.</span></span> <span data-ttu-id="4f363-132">如需詳細資訊，請參閱 [Kestrel 檔](xref:fundamentals/servers/kestrel) 。</span><span class="sxs-lookup"><span data-stu-id="4f363-132">See the [Kestrel documentation](xref:fundamentals/servers/kestrel) for more details.</span></span>
+> <span data-ttu-id="51e17-129">這必須是 HTTPS URL。</span><span class="sxs-lookup"><span data-stu-id="51e17-129">This must be an HTTPS URL.</span></span> <span data-ttu-id="51e17-130">IIS Express 可以在開發期間裝載應用程式時提供自我簽署的憑證。</span><span class="sxs-lookup"><span data-stu-id="51e17-130">IIS Express can provide a self-signed certificate when hosting the app during development.</span></span> <span data-ttu-id="51e17-131">Kestrel 需要手動憑證設定。</span><span class="sxs-lookup"><span data-stu-id="51e17-131">Kestrel requires manual certificate configuration.</span></span> <span data-ttu-id="51e17-132">如需詳細資訊，請參閱 [Kestrel 檔](xref:fundamentals/servers/kestrel) 。</span><span class="sxs-lookup"><span data-stu-id="51e17-132">See the [Kestrel documentation](xref:fundamentals/servers/kestrel) for more details.</span></span>
 
-* <span data-ttu-id="4f363-133">按一下 [ **下一步** ]，再按嚮導的其餘部分，並在結尾處 **關閉** 。</span><span class="sxs-lookup"><span data-stu-id="4f363-133">Click **Next** through the rest of the wizard and **Close** at the end.</span></span>
+* <span data-ttu-id="51e17-133">按一下 [ **下一步** ]，再按嚮導的其餘部分，並在結尾處 **關閉** 。</span><span class="sxs-lookup"><span data-stu-id="51e17-133">Click **Next** through the rest of the wizard and **Close** at the end.</span></span>
 
-* <span data-ttu-id="4f363-134">ASP.NET Core Identity 需要 **名稱識別碼** 宣告。</span><span class="sxs-lookup"><span data-stu-id="4f363-134">ASP.NET Core Identity requires a **Name ID** claim.</span></span> <span data-ttu-id="4f363-135">從 [編輯宣告 **規則** ] 對話方塊新增一個：</span><span class="sxs-lookup"><span data-stu-id="4f363-135">Add one from the **Edit Claim Rules** dialog:</span></span>
+* <span data-ttu-id="51e17-134">:::no-loc(ASP.NET Core Identity)::: 需要 **名稱識別碼** 宣告。</span><span class="sxs-lookup"><span data-stu-id="51e17-134">:::no-loc(ASP.NET Core Identity)::: requires a **Name ID** claim.</span></span> <span data-ttu-id="51e17-135">從 [編輯宣告 **規則** ] 對話方塊新增一個：</span><span class="sxs-lookup"><span data-stu-id="51e17-135">Add one from the **Edit Claim Rules** dialog:</span></span>
 
 ![編輯宣告規則](ws-federation/_static/EditClaimRules.png)
 
-* <span data-ttu-id="4f363-137">在 [ **新增轉換宣告規則] 嚮導**中，保留選取 [ **傳送 LDAP 屬性作為宣告** 範本] 的預設值，然後按 **[下一步]**。</span><span class="sxs-lookup"><span data-stu-id="4f363-137">In the **Add Transform Claim Rule Wizard**, leave the default **Send LDAP Attributes as Claims** template selected, and click **Next**.</span></span> <span data-ttu-id="4f363-138">新增規則，將 **SAM 帳戶名稱** LDAP 屬性對應到 **名稱識別碼** 輸出宣告：</span><span class="sxs-lookup"><span data-stu-id="4f363-138">Add a rule mapping the **SAM-Account-Name** LDAP attribute to the **Name ID** outgoing claim:</span></span>
+* <span data-ttu-id="51e17-137">在 [ **新增轉換宣告規則] 嚮導** 中，保留選取 [ **傳送 LDAP 屬性作為宣告** 範本] 的預設值，然後按 **[下一步]** 。</span><span class="sxs-lookup"><span data-stu-id="51e17-137">In the **Add Transform Claim Rule Wizard** , leave the default **Send LDAP Attributes as Claims** template selected, and click **Next** .</span></span> <span data-ttu-id="51e17-138">新增規則，將 **SAM 帳戶名稱** LDAP 屬性對應到 **名稱識別碼** 輸出宣告：</span><span class="sxs-lookup"><span data-stu-id="51e17-138">Add a rule mapping the **SAM-Account-Name** LDAP attribute to the **Name ID** outgoing claim:</span></span>
 
 ![新增轉換宣告規則 Wizard：設定宣告規則](ws-federation/_static/AddTransformClaimRule.png)
 
-* <span data-ttu-id="4f363-140">按一下**Finish**  >  [**編輯宣告規則**] 視窗中的 [完成 **]** 。</span><span class="sxs-lookup"><span data-stu-id="4f363-140">Click **Finish** > **OK** in the **Edit Claim Rules** window.</span></span>
+* <span data-ttu-id="51e17-140">按一下 **Finish**  >  [ **編輯宣告規則** ] 視窗中的 [完成 **]** 。</span><span class="sxs-lookup"><span data-stu-id="51e17-140">Click **Finish** > **OK** in the **Edit Claim Rules** window.</span></span>
 
-### <a name="azure-active-directory"></a><span data-ttu-id="4f363-141">Azure Active Directory</span><span class="sxs-lookup"><span data-stu-id="4f363-141">Azure Active Directory</span></span>
+### <a name="azure-active-directory"></a><span data-ttu-id="51e17-141">Azure Active Directory</span><span class="sxs-lookup"><span data-stu-id="51e17-141">Azure Active Directory</span></span>
 
-* <span data-ttu-id="4f363-142">流覽至 AAD 租使用者的 [應用程式註冊] 分頁。</span><span class="sxs-lookup"><span data-stu-id="4f363-142">Navigate to the AAD tenant's app registrations blade.</span></span> <span data-ttu-id="4f363-143">按一下 [ **新增應用程式註冊**：</span><span class="sxs-lookup"><span data-stu-id="4f363-143">Click **New application registration**:</span></span>
+* <span data-ttu-id="51e17-142">流覽至 AAD 租使用者的 [應用程式註冊] 分頁。</span><span class="sxs-lookup"><span data-stu-id="51e17-142">Navigate to the AAD tenant's app registrations blade.</span></span> <span data-ttu-id="51e17-143">按一下 [ **新增應用程式註冊** ：</span><span class="sxs-lookup"><span data-stu-id="51e17-143">Click **New application registration** :</span></span>
 
 ![Azure Active Directory：應用程式註冊](ws-federation/_static/AadNewAppRegistration.png)
 
-* <span data-ttu-id="4f363-145">輸入應用程式註冊的名稱。</span><span class="sxs-lookup"><span data-stu-id="4f363-145">Enter a name for the app registration.</span></span> <span data-ttu-id="4f363-146">這對 ASP.NET Core 應用程式而言並不重要。</span><span class="sxs-lookup"><span data-stu-id="4f363-146">This isn't important to the ASP.NET Core app.</span></span>
-* <span data-ttu-id="4f363-147">輸入應用程式接聽的 URL 作為登 **入 url**：</span><span class="sxs-lookup"><span data-stu-id="4f363-147">Enter the URL the app listens on as the **Sign-on URL**:</span></span>
+* <span data-ttu-id="51e17-145">輸入應用程式註冊的名稱。</span><span class="sxs-lookup"><span data-stu-id="51e17-145">Enter a name for the app registration.</span></span> <span data-ttu-id="51e17-146">這對 ASP.NET Core 應用程式而言並不重要。</span><span class="sxs-lookup"><span data-stu-id="51e17-146">This isn't important to the ASP.NET Core app.</span></span>
+* <span data-ttu-id="51e17-147">輸入應用程式接聽的 URL 作為登 **入 url** ：</span><span class="sxs-lookup"><span data-stu-id="51e17-147">Enter the URL the app listens on as the **Sign-on URL** :</span></span>
 
 ![Azure Active Directory：建立應用程式註冊](ws-federation/_static/AadCreateAppRegistration.png)
 
-* <span data-ttu-id="4f363-149">按一下 [ **端點** ]，並記下 **同盟元資料檔案** URL。</span><span class="sxs-lookup"><span data-stu-id="4f363-149">Click **Endpoints** and note the **Federation Metadata Document** URL.</span></span> <span data-ttu-id="4f363-150">這是 WS-同盟中介軟體 `MetadataAddress` ：</span><span class="sxs-lookup"><span data-stu-id="4f363-150">This is the WS-Federation middleware's `MetadataAddress`:</span></span>
+* <span data-ttu-id="51e17-149">按一下 [ **端點** ]，並記下 **同盟元資料檔案** URL。</span><span class="sxs-lookup"><span data-stu-id="51e17-149">Click **Endpoints** and note the **Federation Metadata Document** URL.</span></span> <span data-ttu-id="51e17-150">這是 WS-Federation 中介軟體 `MetadataAddress` ：</span><span class="sxs-lookup"><span data-stu-id="51e17-150">This is the WS-Federation middleware's `MetadataAddress`:</span></span>
 
 ![Azure Active Directory：端點](ws-federation/_static/AadFederationMetadataDocument.png)
 
-* <span data-ttu-id="4f363-152">流覽至新的應用程式註冊。</span><span class="sxs-lookup"><span data-stu-id="4f363-152">Navigate to the new app registration.</span></span> <span data-ttu-id="4f363-153">按一下 [ **公開 API**]。</span><span class="sxs-lookup"><span data-stu-id="4f363-153">Click **Expose an API**.</span></span> <span data-ttu-id="4f363-154">按一下 [應用程式識別碼 URI**設定**  >  **儲存**]。</span><span class="sxs-lookup"><span data-stu-id="4f363-154">Click Application ID URI **Set** > **Save**.</span></span> <span data-ttu-id="4f363-155">記下  **應用程式識別碼 URI**。</span><span class="sxs-lookup"><span data-stu-id="4f363-155">Make note of the  **Application ID URI**.</span></span> <span data-ttu-id="4f363-156">這是 WS-同盟中介軟體 `Wtrealm` ：</span><span class="sxs-lookup"><span data-stu-id="4f363-156">This is the WS-Federation middleware's `Wtrealm`:</span></span>
+* <span data-ttu-id="51e17-152">流覽至新的應用程式註冊。</span><span class="sxs-lookup"><span data-stu-id="51e17-152">Navigate to the new app registration.</span></span> <span data-ttu-id="51e17-153">按一下 [ **公開 API** ]。</span><span class="sxs-lookup"><span data-stu-id="51e17-153">Click **Expose an API** .</span></span> <span data-ttu-id="51e17-154">按一下 [應用程式識別碼 URI **設定**  >  **儲存** ]。</span><span class="sxs-lookup"><span data-stu-id="51e17-154">Click Application ID URI **Set** > **Save** .</span></span> <span data-ttu-id="51e17-155">記下  **應用程式識別碼 URI** 。</span><span class="sxs-lookup"><span data-stu-id="51e17-155">Make note of the  **Application ID URI** .</span></span> <span data-ttu-id="51e17-156">這是 WS-Federation 中介軟體 `Wtrealm` ：</span><span class="sxs-lookup"><span data-stu-id="51e17-156">This is the WS-Federation middleware's `Wtrealm`:</span></span>
 
 ![Azure Active Directory：應用程式註冊屬性](ws-federation/_static/AadAppIdUri.png)
 
-## <a name="use-ws-federation-without-no-locaspnet-core-identity"></a><span data-ttu-id="4f363-158">使用 WS-同盟但不使用 ASP.NET Core Identity</span><span class="sxs-lookup"><span data-stu-id="4f363-158">Use WS-Federation without ASP.NET Core Identity</span></span>
+## <a name="use-ws-federation-without-no-locaspnet-core-identity"></a><span data-ttu-id="51e17-158">使用 WS-Federation 但不使用 :::no-loc(ASP.NET Core Identity):::</span><span class="sxs-lookup"><span data-stu-id="51e17-158">Use WS-Federation without :::no-loc(ASP.NET Core Identity):::</span></span>
 
-<span data-ttu-id="4f363-159">您可以不使用 WS-同盟中介軟體 Identity 。</span><span class="sxs-lookup"><span data-stu-id="4f363-159">The WS-Federation middleware can be used without Identity.</span></span> <span data-ttu-id="4f363-160">例如：</span><span class="sxs-lookup"><span data-stu-id="4f363-160">For example:</span></span>
+<span data-ttu-id="51e17-159">您可以不使用 WS-Federation 中介軟體 :::no-loc(Identity)::: 。</span><span class="sxs-lookup"><span data-stu-id="51e17-159">The WS-Federation middleware can be used without :::no-loc(Identity):::.</span></span> <span data-ttu-id="51e17-160">例如：</span><span class="sxs-lookup"><span data-stu-id="51e17-160">For example:</span></span>
 ::: moniker range=">= aspnetcore-3.0"
 [!code-csharp[](ws-federation/samples/StartupNon31.cs?name=snippet)]
 ::: moniker-end
@@ -102,10 +103,10 @@ ms.locfileid: "88634081"
 [!code-csharp[](ws-federation/samples/StartupNon21.cs?name=snippet)]
 ::: moniker-end
 
-## <a name="add-ws-federation-as-an-external-login-provider-for-no-locaspnet-core-identity"></a><span data-ttu-id="4f363-161">將 WS-同盟新增為的外部登入提供者 ASP.NET Core Identity</span><span class="sxs-lookup"><span data-stu-id="4f363-161">Add WS-Federation as an external login provider for ASP.NET Core Identity</span></span>
+## <a name="add-ws-federation-as-an-external-login-provider-for-no-locaspnet-core-identity"></a><span data-ttu-id="51e17-161">將 WS-Federation 新增為的外部登入提供者 :::no-loc(ASP.NET Core Identity):::</span><span class="sxs-lookup"><span data-stu-id="51e17-161">Add WS-Federation as an external login provider for :::no-loc(ASP.NET Core Identity):::</span></span>
 
-* <span data-ttu-id="4f363-162">將 [AspNetCore](https://www.nuget.org/packages/Microsoft.AspNetCore.Authentication.WsFederation) 的相依性新增至專案。</span><span class="sxs-lookup"><span data-stu-id="4f363-162">Add a dependency on [Microsoft.AspNetCore.Authentication.WsFederation](https://www.nuget.org/packages/Microsoft.AspNetCore.Authentication.WsFederation) to the project.</span></span>
-* <span data-ttu-id="4f363-163">將 WS-同盟新增至 `Startup.ConfigureServices` ：</span><span class="sxs-lookup"><span data-stu-id="4f363-163">Add WS-Federation to `Startup.ConfigureServices`:</span></span>
+* <span data-ttu-id="51e17-162">將 [AspNetCore](https://www.nuget.org/packages/Microsoft.AspNetCore.Authentication.WsFederation) 的相依性新增至專案。</span><span class="sxs-lookup"><span data-stu-id="51e17-162">Add a dependency on [Microsoft.AspNetCore.Authentication.WsFederation](https://www.nuget.org/packages/Microsoft.AspNetCore.Authentication.WsFederation) to the project.</span></span>
+* <span data-ttu-id="51e17-163">將 WS-Federation 新增至 `Startup.ConfigureServices` ：</span><span class="sxs-lookup"><span data-stu-id="51e17-163">Add WS-Federation to `Startup.ConfigureServices`:</span></span>
 
 ::: moniker range=">= aspnetcore-3.0"
 [!code-csharp[](ws-federation/samples/Startup31.cs?name=snippet)]
@@ -117,12 +118,12 @@ ms.locfileid: "88634081"
 
 [!INCLUDE [default settings configuration](social/includes/default-settings.md)]
 
-### <a name="log-in-with-ws-federation"></a><span data-ttu-id="4f363-164">使用 WS-同盟登入</span><span class="sxs-lookup"><span data-stu-id="4f363-164">Log in with WS-Federation</span></span>
+### <a name="log-in-with-ws-federation"></a><span data-ttu-id="51e17-164">使用 WS-Federation 登入</span><span class="sxs-lookup"><span data-stu-id="51e17-164">Log in with WS-Federation</span></span>
 
-<span data-ttu-id="4f363-165">流覽至應用程式，然後按一下導覽標頭中的 [ **登入** ] 連結。</span><span class="sxs-lookup"><span data-stu-id="4f363-165">Browse to the app and click the **Log in** link in the nav header.</span></span> <span data-ttu-id="4f363-166">有一個選項可使用 WsFederation： [登入] 頁面登入 ![](ws-federation/_static/WsFederationButton.png)</span><span class="sxs-lookup"><span data-stu-id="4f363-166">There's an option to log in with WsFederation: ![Log in page](ws-federation/_static/WsFederationButton.png)</span></span>
+<span data-ttu-id="51e17-165">流覽至應用程式，然後按一下導覽標頭中的 [ **登入** ] 連結。</span><span class="sxs-lookup"><span data-stu-id="51e17-165">Browse to the app and click the **Log in** link in the nav header.</span></span> <span data-ttu-id="51e17-166">有一個選項可使用 WsFederation： [登入] 頁面登入 ![](ws-federation/_static/WsFederationButton.png)</span><span class="sxs-lookup"><span data-stu-id="51e17-166">There's an option to log in with WsFederation: ![Log in page](ws-federation/_static/WsFederationButton.png)</span></span>
 
-<span data-ttu-id="4f363-167">使用 ADFS 作為提供者時，按鈕會重新導向至 ADFS 登入頁面： ![ adfs 登入頁面](ws-federation/_static/AdfsLoginPage.png)</span><span class="sxs-lookup"><span data-stu-id="4f363-167">With ADFS as the provider, the button redirects to an ADFS sign-in page: ![ADFS sign-in page](ws-federation/_static/AdfsLoginPage.png)</span></span>
+<span data-ttu-id="51e17-167">使用 ADFS 作為提供者時，按鈕會重新導向至 ADFS 登入頁面： ![ adfs 登入頁面](ws-federation/_static/AdfsLoginPage.png)</span><span class="sxs-lookup"><span data-stu-id="51e17-167">With ADFS as the provider, the button redirects to an ADFS sign-in page: ![ADFS sign-in page](ws-federation/_static/AdfsLoginPage.png)</span></span>
 
-<span data-ttu-id="4f363-168">使用 Azure Active Directory 作為提供者時，按鈕會重新導向至 AAD 登入頁面： ![ aad 登入頁面](ws-federation/_static/AadSignIn.png)</span><span class="sxs-lookup"><span data-stu-id="4f363-168">With Azure Active Directory as the provider, the button redirects to an AAD sign-in page: ![AAD sign-in page](ws-federation/_static/AadSignIn.png)</span></span>
+<span data-ttu-id="51e17-168">使用 Azure Active Directory 作為提供者時，按鈕會重新導向至 AAD 登入頁面： ![ aad 登入頁面](ws-federation/_static/AadSignIn.png)</span><span class="sxs-lookup"><span data-stu-id="51e17-168">With Azure Active Directory as the provider, the button redirects to an AAD sign-in page: ![AAD sign-in page](ws-federation/_static/AadSignIn.png)</span></span>
 
-<span data-ttu-id="4f363-169">成功登入新的使用者會重新導向至應用程式的使用者註冊頁面： ![ 註冊頁面](ws-federation/_static/Register.png)</span><span class="sxs-lookup"><span data-stu-id="4f363-169">A successful sign-in for a new user redirects to the app's user registration page: ![Register page](ws-federation/_static/Register.png)</span></span>
+<span data-ttu-id="51e17-169">成功登入新的使用者會重新導向至應用程式的使用者註冊頁面： ![ 註冊頁面](ws-federation/_static/Register.png)</span><span class="sxs-lookup"><span data-stu-id="51e17-169">A successful sign-in for a new user redirects to the app's user registration page: ![Register page](ws-federation/_static/Register.png)</span></span>

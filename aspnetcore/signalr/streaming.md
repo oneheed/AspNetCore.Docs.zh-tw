@@ -5,7 +5,7 @@ description: 瞭解如何在用戶端與伺服器之間串流資料。
 monikerRange: '>= aspnetcore-2.1'
 ms.author: bradyg
 ms.custom: mvc, devx-track-js
-ms.date: 11/12/2019
+ms.date: 10/29/2020
 no-loc:
 - appsettings.json
 - ASP.NET Core Identity
@@ -19,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: signalr/streaming
-ms.openlocfilehash: 2f21248934395b682adf8060dae4e3d145e52215
-ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
+ms.openlocfilehash: b07c280f271ccdd525128b973da065001a5cf0ed
+ms.sourcegitcommit: 0d40fc4932531ce13fc4ee9432144584e03c2f1c
 ms.translationtype: MT
 ms.contentlocale: zh-TW
 ms.lasthandoff: 10/30/2020
-ms.locfileid: "93058203"
+ms.locfileid: "93062437"
 ---
 # <a name="use-streaming-in-aspnet-core-no-locsignalr"></a>在 ASP.NET Core 中使用串流 SignalR
 
@@ -320,6 +320,22 @@ hubConnection.stream(String.class, "ExampleStreamingHubMethod", "Arg1")
 ```
 
 上的方法會傳回 `stream` `HubConnection` 資料流程專案類型的可觀察專案。 可觀察型別的 `subscribe` 方法是在其中 `onNext` `onError` `onCompleted` 定義和處理常式。
+
+### <a name="client-to-server-streaming"></a>用戶端對伺服器串流
+
+SignalRJAVA 用戶端可以在中樞上呼叫用戶端對伺服器串流方法，方法是根據[Observable](https://rxjs-dev.firebaseapp.com/api/index/class/Observable)所叫用 `send` `invoke` `stream` 的中樞方法，將可觀察的引數當作引數傳遞至、或。
+
+```java
+ReplaySubject<String> stream = ReplaySubject.create();
+hubConnection.send("UploadStream", stream);
+stream.onNext("FirstItem");
+stream.onNext("SecondItem");
+stream.onComplete();
+```
+
+使用專案呼叫會將 `stream.onNext(item)` 專案寫入資料流程，而 hub 方法會接收伺服器上的專案。
+
+若要結束資料流程，請呼叫 `stream.onComplete()` 。
 
 ::: moniker-end
 

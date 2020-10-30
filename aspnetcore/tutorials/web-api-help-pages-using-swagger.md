@@ -1,10 +1,10 @@
 ---
-title: 使用 Swagger/OpenAPI 的 ASP.NET Core Web API 說明頁面
+title: 使用 Swagger/OpenAPI ASP.NET Core web API 檔
 author: RicoSuter
-description: 本教學課程提供新增 Swagger，以產生 Web API 應用程式之文件和說明頁面的逐步解說。
+description: 本教學課程提供新增 Swagger，以產生 web API 應用程式之檔和說明頁面的逐步解說。
 ms.author: scaddie
 ms.custom: mvc
-ms.date: 07/06/2020
+ms.date: 10/29/2020
 no-loc:
 - appsettings.json
 - ASP.NET Core Identity
@@ -18,32 +18,39 @@ no-loc:
 - Razor
 - SignalR
 uid: tutorials/web-api-help-pages-using-swagger
-ms.openlocfilehash: b4b27e6b845d960b4b92612b90938f0770f23170
-ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
+ms.openlocfilehash: e5442c88048cf41e289fb476b4082cb6029b1b75
+ms.sourcegitcommit: 0d40fc4932531ce13fc4ee9432144584e03c2f1c
 ms.translationtype: MT
 ms.contentlocale: zh-TW
 ms.lasthandoff: 10/30/2020
-ms.locfileid: "93056669"
+ms.locfileid: "93062450"
 ---
-# <a name="aspnet-core-web-api-help-pages-with-swagger--openapi"></a>使用 Swagger/OpenAPI 的 ASP.NET Core Web API 說明頁面
+# <a name="aspnet-core-web-api-documentation-with-swagger--openapi"></a>使用 Swagger/OpenAPI ASP.NET Core web API 檔
 
 作者：[Christoph Nienaber](https://twitter.com/zuckerthoben) 和 [Rico Suter](https://blog.rsuter.com/)
 
-使用 web API 時，瞭解其各種方法對於開發人員而言可能是一項挑戰。 [Swagger](https://swagger.io/)（也稱為 [OpenAPI](https://www.openapis.org/)）可解決為 web api 產生有用檔與說明頁面的問題。 它提供如互動式文件、用戶端 SDK 產生作業和 API 發現性等優點。
+Swagger (OpenAPI) 是描述 REST Api 的語言無關規格。 它可讓電腦和人類瞭解 REST API 的功能，而不需要直接存取原始程式碼。 其主要目標是：
 
-在本文中，展示了 [Swashbuckle.AspNetCore](https://github.com/domaindrivendev/Swashbuckle.AspNetCore) 和 [NSwag](https://github.com/RicoSuter/NSwag) .NET Swagger 實作：
+* 將連接低耦合服務所需的工作量降至最低。
+* 減少正確記錄服務所需的時間量。
 
-* **Swashbuckle.AspNetCore** 是用來為 ASP.NET Core Web API 產生 Swagger 文件的開放原始碼專案。
+.NET 的兩個主要 OpenAPI 實作為 [Swashbuckle](https://github.com/domaindrivendev/Swashbuckle.AspNetCore) 和 [NSwag](https://github.com/RicoSuter/NSwag)，請參閱：
 
-* **NSwag** 是用來產生 Swagger 文件，並將 [Swagger UI](https://swagger.io/swagger-ui/) 或 [ReDoc](https://github.com/Rebilly/ReDoc) 整合到 ASP.NET Core Web API 的其他開放原始碼專案。 此外，NSwag 提供方法來為您的 API 產生 C# 和 TypeScript 用戶端程式碼。
+* [使用 Swashbuckle 消費者入門](xref:tutorials/get-started-with-swashbuckle)
+* [使用 NSwag 消費者入門](xref:tutorials/get-started-with-nswag)
 
-## <a name="what-is-swagger--openapi"></a>什麼是 Swagger/OpenAPI？
+## <a name="openapi-vs-swagger"></a>OpenApi 與 Swagger 的比較
 
-Swagger 是用來描述 [REST](https://en.wikipedia.org/wiki/Representational_state_transfer) API 的語言無關規格。 Swagger 專案已捐贈給 [OpenAPI Initiative](https://www.openapis.org/) (OpenAPI 方案)，目前在該方案中將其稱為 OpenAPI。 這兩個名稱可交替使用；不過，OpenAPI 是慣用名稱。 它可讓電腦和人類都了解服務的功能，而不必直接存取實作 (原始碼、網路存取、文件)。 其中一個目標是要將連線未相關聯之服務所需的工作量減到最少。 另一個目標則是減少正確記錄服務所需的時間量。
+Swagger 專案已在2015中捐贈給 OpenAPI 方案，而且自稱為 OpenAPI。 這兩個名稱可交替使用。 但是，「OpenAPI」是指規格。 「Swagger」指的是 Smartbear ready 中使用 OpenAPI 規格的開放原始碼和商業產品系列。 後續的開放原始碼產品（例如 [OpenAPIGenerator](https://github.com/OpenAPITools/openapi-generator)）也會落在 Swagger 系列名稱下，儘管 smartbear ready 並未發行。
+
+簡言之：
+
+* OpenAPI 是一種規格。
+* Swagger 是使用 OpenAPI 規格的工具。 例如，OpenAPIGenerator 和 Swashbuckle.aspnetcore.swaggerui。
 
 ## <a name="openapi-specification-openapijson"></a>) 上的 OpenAPI 規格 ( # B0
 
-根據預設，OpenAPI 流程的核心是指定 &mdash; 為 *openapi.js* 的檔。 它是由 OpenAPI 工具鏈所產生， (或其協力廠商的) 根據您的服務來執行。 它會描述 API 的功能，以及如何使用 HTTP 來進行存取。 它可驅動 Swagger UI，並由工具鏈用來啟用探索和產生用戶端程式碼功能。 以下是 OpenAPI 規格的範例，為了簡潔起見，已縮減：
+OpenAPI 規格是描述 API 功能的檔。 檔是以控制器和模型內的 XML 和屬性注釋為基礎。 它是 OpenAPI 流程的核心部分，用來推動像是 Swashbuckle.aspnetcore.swaggerui 之類的工具。 預設會將其命名為 *openapi.js開啟* 。 以下是 OpenAPI 規格的範例，為了簡潔起見，已縮減：
 
 ```json
 {
@@ -137,14 +144,14 @@ Swagger 是用來描述 [REST](https://en.wikipedia.org/wiki/Representational_st
 
 ![Swagger UI](web-api-help-pages-using-swagger/_static/swagger-ui.png)
 
-控制器中的每個公用動作方法都可以從 UI 進行測試。 按一下方法名稱以展開該區段。 新增任何必要的參數，然後按一下 [立即 **試用]！** 。
+控制器中的每個公用動作方法都可以從 UI 進行測試。 選取方法名稱以展開區段。 新增任何必要的參數，然後選取 [立即 **試用]！** 。
 
 ![範例 Swagger GET 測試](web-api-help-pages-using-swagger/_static/get-try-it-out.png)
 
 > [!NOTE]
 > 用於螢幕擷取畫面的 Swagger UI 版本為第 2 版。 如需第 3 版的範例，請參閱 [Petstore 範例](https://petstore.swagger.io/)。
 
-## <a name="next-steps"></a>後續步驟
+## <a name="next-steps"></a>下一步
 
 * [開始使用 Swashbuckle](xref:tutorials/get-started-with-swashbuckle)
 * [開始使用 NSwag](xref:tutorials/get-started-with-nswag)

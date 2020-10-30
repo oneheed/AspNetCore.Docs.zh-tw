@@ -5,6 +5,7 @@ description: 探索如何為使用 ASP.NET Core 雙因素驗證的 TOTP 驗證�
 ms.author: riande
 ms.date: 08/14/2018
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -16,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: security/authentication/identity-enable-qrcodes
-ms.openlocfilehash: e61aa925262fc9fe25c7bb2d37958cfaa308aeaf
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: b778e7238911ec9966edf7f0f7becd113b1e197a
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88630792"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93060829"
 ---
 # <a name="enable-qr-code-generation-for-totp-authenticator-apps-in-aspnet-core"></a>在 ASP.NET Core 中啟用 TOTP 驗證器應用程式的 QR 代碼產生
 
@@ -49,8 +50,8 @@ ASP.NET Core web 應用程式範本支援驗證器，但不提供 QRCode 產生�
 
 ::: moniker range=">= aspnetcore-2.1"
 
-* 遵循[Scaffold Identity ](xref:security/authentication/scaffold-identity)中的指示來產生 */Areas/ Identity /Pages/Account/Manage/EnableAuthenticator.cshtml*。
-* 在 */Areas/ Identity /Pages/Account/Manage/EnableAuthenticator.cshtml*中，找出 `Scripts` 檔案結尾的區段：
+* 遵循 [Scaffold Identity](xref:security/authentication/scaffold-identity)中的指示來產生 */Areas/ Identity /Pages/Account/Manage/EnableAuthenticator.cshtml* 。
+* 在 */Areas/ Identity /Pages/Account/Manage/EnableAuthenticator.cshtml* 中，找出 `Scripts` 檔案結尾的區段：
 
 ::: moniker-end
 
@@ -96,7 +97,7 @@ ASP.NET Core web 應用程式範本支援驗證器，但不提供 QRCode 產生�
 
 ::: moniker range=">= aspnetcore-2.1"
 
-QR 代碼中的網站名稱是取自最初建立專案時所選擇的專案名稱。 您可以藉由 `GenerateQrCodeUri(string email, string unformattedKey)` 在 */Areas/ Identity /Pages/Account/Manage/EnableAuthenticator.cshtml.cs*中尋找方法來變更它。
+QR 代碼中的網站名稱是取自最初建立專案時所選擇的專案名稱。 您可以藉由 `GenerateQrCodeUri(string email, string unformattedKey)` 在 */Areas/ Identity /Pages/Account/Manage/EnableAuthenticator.cshtml.cs* 中尋找方法來變更它。
 
 ::: moniker-end
 
@@ -134,6 +135,6 @@ private string GenerateQrCodeUri(string email, string unformattedKey)
 
 ## <a name="totp-client-and-server-time-skew"></a>TOTP 用戶端和伺服器時間誤差
 
-TOTP (以時間為基礎的單次密碼) 驗證取決於具有精確時間的伺服器和驗證器裝置。 權杖的最新時間為30秒。 如果 TOTP 2FA 登入失敗，請檢查伺服器時間是否正確，以及是否最好同步至正確的 NTP 服務。
+TOTP (以時間為基礎的 One-Time 密碼) 驗證取決於具有精確時間的伺服器和驗證器裝置。 權杖的最新時間為30秒。 如果 TOTP 2FA 登入失敗，請檢查伺服器時間是否正確，以及是否最好同步至正確的 NTP 服務。
 
 ::: moniker-end

@@ -7,6 +7,7 @@ ms.author: bradyg
 ms.custom: mvc
 ms.date: 11/12/2019
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -18,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: signalr/background-services
-ms.openlocfilehash: d2ac5ebf6c469c9ec842e7f3ea4f37069b4efdcb
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: 810eff7ccb08ecc22ea255bf0a9fe3d22637179f
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88631591"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93060101"
 ---
 # <a name="host-aspnet-core-no-locsignalr-in-background-services"></a>SignalR背景服務中的主機 ASP.NET Core
 
@@ -160,6 +161,6 @@ public partial class ClockHubClient : IClock, IHostedService
 ## <a name="additional-resources"></a>其他資源
 
 * [開始使用](xref:tutorials/signalr)
-* [集線器](xref:signalr/hubs)
+* [中樞](xref:signalr/hubs)
 * [發佈至 Azure](xref:signalr/publish-to-azure-web-app)
 * [強型別中樞](xref:signalr/hubs#strongly-typed-hubs)

@@ -6,6 +6,7 @@ ms.author: casoper
 ms.custom: devx-track-csharp, mvc
 ms.date: 01/21/2019
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -17,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: security/authentication/azure-ad-b2c
-ms.openlocfilehash: edacded5df4d5f4819b3657bc7eff99e6d96d394
-ms.sourcegitcommit: 9a90b956af8d8584d597f1e5c1dbfb0ea9bb8454
+ms.openlocfilehash: f917bec8f2d929e62bf43494159a63458f135c5f
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 08/21/2020
-ms.locfileid: "88712541"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93061388"
 ---
 # <a name="cloud-authentication-with-azure-active-directory-b2c-in-aspnet-core"></a>ASP.NET Core 中的 Azure Active Directory B2C 雲端驗證
 
@@ -41,7 +42,7 @@ ms.locfileid: "88712541"
 > * 使用 Visual Studio 建立 ASP.NET Core web 應用程式，並將其設定為使用 Azure AD B2C 租使用者進行驗證
 > * 設定控制 Azure AD B2C 租使用者行為的原則
 
-## <a name="prerequisites"></a>先決條件
+## <a name="prerequisites"></a>必要條件
 
 本逐步解說需要下列各項：
 
@@ -54,13 +55,13 @@ ms.locfileid: "88712541"
 
 ## <a name="register-the-app-in-azure-ad-b2c"></a>在 Azure AD B2C 中註冊應用程式
 
-在新建立的 Azure AD B2C 租使用者中，使用 [**註冊 web 應用程式**] 區段下[的檔中的步驟](/azure/active-directory-b2c/tutorial-register-applications#register-a-web-application)註冊您的應用程式。 在 [ **建立 web 應用程式用戶端密碼** ] 區段上停止。 本教學課程不需要用戶端密碼。 
+在新建立的 Azure AD B2C 租使用者中，使用 [ **註冊 web 應用程式** ] 區段下 [的檔中的步驟](/azure/active-directory-b2c/tutorial-register-applications#register-a-web-application)註冊您的應用程式。 在 [ **建立 web 應用程式用戶端密碼** ] 區段上停止。 本教學課程不需要用戶端密碼。 
 
 輸入下列值：
 
 | 設定                       | 值                     | 注意                                                                                                                                                                                              |
 |-------------------------------|---------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **Name**                      | *&lt;應用程式名稱&gt;*        | 輸入應用程式的 **名稱** ，以向取用者說明您的應用程式。                                                                                                                                 |
+| **名稱**                      | *&lt;應用程式名稱&gt;*        | 輸入應用程式的 **名稱** ，以向取用者說明您的應用程式。                                                                                                                                 |
 | **包含 Web 應用程式 / Web API** | 是                       |                                                                                                                                                                                                    |
 | **允許隱含流程**       | 是                       |                                                                                                                                                                                                    |
 | **回覆 URL**                 | `https://localhost:44300/signin-oidc` | 回覆 URL 是 Azure AD B2C 傳回您應用程式要求之任何權杖的所在端點。 Visual Studio 提供要使用的回復 URL。 現在，請輸入 `https://localhost:44300/signin-oidc` 來完成表單。 |
@@ -70,7 +71,7 @@ ms.locfileid: "88712541"
 > [!WARNING]
 > 如果設定非 localhost 回復 URL，請留意 [[回復 url] 清單中允許的條件約束](/azure/active-directory-b2c/tutorial-register-applications#register-a-web-application)。 
 
-註冊應用程式之後，就會顯示租使用者中的應用程式清單。 選取剛註冊的應用程式。 選取 [**應用程式識別碼**] 欄位右邊的**複製**圖示，將它複製到剪貼簿。
+註冊應用程式之後，就會顯示租使用者中的應用程式清單。 選取剛註冊的應用程式。 選取 [ **應用程式識別碼** ] 欄位右邊的 **複製** 圖示，將它複製到剪貼簿。
 
 目前不能在 Azure AD B2C 租使用者中設定任何專案，但請將瀏覽器視窗保持開啟。 建立 ASP.NET Core 應用程式之後，會有更多設定。
 
@@ -86,7 +87,7 @@ Visual Studio Web 應用程式範本可以設定為使用 Azure AD B2C 租使用
     
     ![變更驗證按鈕](./azure-ad-b2c/_static/changeauth.png)
 
-4. 在 [ **變更驗證** ] 對話方塊中，選取 [ **個別使用者帳戶**]，然後在下拉式清單中選取 [連線 **到雲端中現有的使用者存放區]** 。 
+4. 在 [ **變更驗證** ] 對話方塊中，選取 [ **個別使用者帳戶** ]，然後在下拉式清單中選取 [連線 **到雲端中現有的使用者存放區]** 。 
     
     ![[變更驗證] 對話方塊](./azure-ad-b2c/_static/changeauthdialog.png)
 
@@ -101,21 +102,21 @@ Visual Studio Web 應用程式範本可以設定為使用 Azure AD B2C 租使用
     | **重設密碼原則**     | `B2C_1_SSPR`                                          |
     | **編輯設定檔原則**       | *&lt;保留空白&gt;*                                 |
     
-    選取 [**回復 uri** ] 旁的 [**複製**] 連結，將回復 uri 複製到剪貼簿。 選取 **[確定** ] 以關閉 [ **變更驗證** ] 對話方塊。 選取 **[確定]** 以建立 web 應用程式。
+    選取 [ **回復 uri** ] 旁的 [ **複製** ] 連結，將回復 uri 複製到剪貼簿。 選取 **[確定** ] 以關閉 [ **變更驗證** ] 對話方塊。 選取 **[確定]** 以建立 web 應用程式。
 
 ## <a name="finish-the-b2c-app-registration"></a>完成 B2C 應用程式註冊
 
 返回仍開啟 B2C 應用程式屬性的瀏覽器視窗。 將稍早指定的暫時 **回復 URL** 變更為從 Visual Studio 複製的值。 選取視窗頂端的 [ **儲存** ]。
 
 > [!TIP]
-> 如果您沒有複製回復 URL，請從 Web 專案屬性的 [調試] 索引標籤使用 HTTPS 位址，然後從*appsettings.js*附加**CallbackPath**值。
+> 如果您沒有複製回復 URL，請從 Web 專案屬性的 [調試] 索引標籤使用 HTTPS 位址，並從附加 **CallbackPath** 值 *appsettings.json* 。
 
 ## <a name="configure-policies"></a>設定原則
 
-使用 Azure AD B2C 檔中的步驟來 [建立註冊或登入原則](/azure/active-directory-b2c/active-directory-b2c-reference-policies#user-flow-versions)，然後 [建立密碼重設原則](/azure/active-directory-b2c/active-directory-b2c-reference-policies#user-flow-versions)。 使用提供** Identity 者**的檔中提供的範例值、**註冊屬性**和**應用程式宣告**。 使用 [ **立即執行** ] 按鈕來測試原則（如檔中所述）是選擇性的。
+使用 Azure AD B2C 檔中的步驟來 [建立註冊或登入原則](/azure/active-directory-b2c/active-directory-b2c-reference-policies#user-flow-versions)，然後 [建立密碼重設原則](/azure/active-directory-b2c/active-directory-b2c-reference-policies#user-flow-versions)。 使用提供 **Identity 者** 的檔中提供的範例值、 **註冊屬性** 和 **應用程式宣告** 。 使用 [ **立即執行** ] 按鈕來測試原則（如檔中所述）是選擇性的。
 
 > [!WARNING]
-> 請確定原則名稱與檔中所述的完全相同，因為這些原則是在 Visual Studio 的 [ **變更驗證** ] 對話方塊中使用。 原則名稱可以在 *appsettings.js*中進行驗證。
+> 請確定原則名稱與檔中所述的完全相同，因為這些原則是在 Visual Studio 的 [ **變更驗證** ] 對話方塊中使用。 您可以在中驗證原則名稱 *appsettings.json* 。
 
 ## <a name="configure-the-underlying-openidconnectoptionsjwtbearerno-loccookie-options"></a>設定基礎 OpenIdConnectOptions/JwtBearer/ Cookie 選項
 
@@ -143,7 +144,7 @@ services.Configure<JwtBearerOptions>(
 
 ## <a name="run-the-app"></a>執行應用程式
 
-在 Visual Studio 中，按 **F5** 以建立並執行應用程式。 在 web 應用程式啟動後，選取 [ **接受** ] 以接受使用 cookie s (如果出現提示) ，然後選取 [登 **入**]。
+在 Visual Studio 中，按 **F5** 以建立並執行應用程式。 在 web 應用程式啟動後，選取 [ **接受** ] 以接受使用 cookie s (如果出現提示) ，然後選取 [登 **入** ]。
 
 ![登入應用程式](./azure-ad-b2c/_static/signin.png)
 

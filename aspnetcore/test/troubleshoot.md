@@ -6,6 +6,7 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 07/10/2019
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -17,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: test/troubleshoot
-ms.openlocfilehash: 24781e7689a1a238e9d2fa9666fa61a8642135c3
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: 8e6c640cd775e5d4cbe6e34c1cecc391baf57344
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88632131"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93059568"
 ---
 # <a name="troubleshoot-and-debug-aspnet-core-projects"></a>針對 ASP.NET Core 專案進行疑難排解和調試
 
@@ -49,7 +50,7 @@ ms.locfileid: "88632131"
 * 32位 .NET Core SDK 是由另一個應用程式安裝。
 * 下載並安裝錯誤的版本。
 
-卸載32位 .NET Core SDK 以防止此警告。 從**主控台**的 [  >  **程式和功能**] 卸載  >  **或變更程式**。 如果您瞭解為什麼會發生警告和其含意，您可以忽略此警告。
+卸載32位 .NET Core SDK 以防止此警告。 從 **主控台** 的 [  >  **程式和功能** ] 卸載  >  **或變更程式** 。 如果您瞭解為什麼會發生警告和其含意，您可以忽略此警告。
 
 ### <a name="the-net-core-sdk-is-installed-in-multiple-locations"></a>.NET Core SDK 安裝在多個位置
 
@@ -57,9 +58,9 @@ ms.locfileid: "88632131"
 
 > .NET Core SDK 安裝在多個位置。 只會顯示 [C： \\ Program Files dotnet sdk] 安裝的 sdk 範本 \\ \\ \\ 。
 
-當您在*C： \\ Program Files \\ dotnet \\ SDK \\ *以外的目錄中至少有一個 .NET Core SDK 安裝時，就會看到此訊息。 當 .NET Core SDK 已使用複製/貼上部署到電腦上，而不是使用 MSI 安裝程式時，通常就會發生這種情況。
+當您在 *C： \\ Program Files \\ dotnet \\ SDK \\* 以外的目錄中至少有一個 .NET Core SDK 安裝時，就會看到此訊息。 當 .NET Core SDK 已使用複製/貼上部署到電腦上，而不是使用 MSI 安裝程式時，通常就會發生這種情況。
 
-卸載所有32位 .NET Core Sdk 和執行時間以防止此警告。 從**主控台**的 [  >  **程式和功能**] 卸載  >  **或變更程式**。 如果您瞭解為什麼會發生警告和其含意，您可以忽略此警告。
+卸載所有32位 .NET Core Sdk 和執行時間以防止此警告。 從 **主控台** 的 [  >  **程式和功能** ] 卸載  >  **或變更程式** 。 如果您瞭解為什麼會發生警告和其含意，您可以忽略此警告。
 
 ### <a name="no-net-core-sdks-were-detected"></a>未偵測到任何 .NET Core Sdk
 

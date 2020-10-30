@@ -6,6 +6,7 @@ monikerRange: '>= aspnetcore-3.0'
 ms.author: johluo
 ms.date: 07/09/2020
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -17,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: grpc/basics
-ms.openlocfilehash: aacaf9cca131d3fba1c3ae96cf42d51d3fdc17b6
-ms.sourcegitcommit: 47c9a59ff8a359baa6bca2637d3af87ddca1245b
+ms.openlocfilehash: 4968ac889cd3b4e0780ce73dc729d0107a416932
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 08/27/2020
-ms.locfileid: "88945424"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93061011"
 ---
 # <a name="grpc-services-with-c"></a>使用 C gRPC 服務\#
 
@@ -32,14 +33,14 @@ ms.locfileid: "88945424"
 
 ## <a name="proto-file"></a>proto 檔案
 
-gRPC 使用合約優先的方法來開發 API。 根據預設， (protobuf) 的通訊協定緩衝區作為介面定義語言 (IDL) 。 * \* Proto*檔案包含：
+gRPC 使用合約優先的方法來開發 API。 根據預設， (protobuf) 的通訊協定緩衝區作為介面定義語言 (IDL) 。 *\* Proto* 檔案包含：
 
 * GRPC 服務的定義。
 * 用戶端與伺服器之間傳送的訊息。
 
 如需 protobuf 檔語法的詳細資訊，請參閱 <xref:grpc/protobuf> 。
 
-例如，請考慮開始[使用 gRPC service](xref:tutorials/grpc/grpc-start)中所使用的*歡迎*檔：
+例如，請考慮開始 [使用 gRPC service](xref:tutorials/grpc/grpc-start)中所使用的 *歡迎* 檔：
 
 * 定義 `Greeter` 服務。
 * `Greeter`服務會定義 `SayHello` 呼叫。
@@ -50,7 +51,7 @@ gRPC 使用合約優先的方法來開發 API。 根據預設， (protobuf) 的�
 
 ## <a name="add-a-proto-file-to-a-c-app"></a>將 proto 檔案新增至 C \# 應用程式
 
-藉由將* \* proto*檔案新增至專案群組，即可將該檔案包含在專案中 `<Protobuf>` ：
+藉由將 *\* proto* 檔案新增至專案群組，即可將該檔案包含在專案中 `<Protobuf>` ：
 
 [!code-xml[](~/tutorials/grpc/grpc-start/sample/GrpcGreeter/GrpcGreeter.csproj?highlight=2&range=7-9)]
 
@@ -63,7 +64,7 @@ gRPC 使用合約優先的方法來開發 API。 根據預設， (protobuf) 的�
 
 ## <a name="c-tooling-support-for-proto-files"></a>適用于 proto 檔案的 c # 工具支援
 
-需要工具套件[Grpc](https://www.nuget.org/packages/Grpc.Tools/) ，才能從* \* Proto*檔案產生 c # 資產。 產生的資產 (檔) ：
+需要工具套件 [Grpc](https://www.nuget.org/packages/Grpc.Tools/) ，才能從 *\* Proto* 檔案產生 c # 資產。 產生的資產 (檔) ：
 
 * 每次建立專案時，會根據需要來產生。
 * 不會加入至專案或簽入原始檔控制。
@@ -79,7 +80,7 @@ gRPC 使用合約優先的方法來開發 API。 根據預設， (protobuf) 的�
 
 ## <a name="generated-c-assets"></a>產生的 c # 資產
 
-工具套件會產生 c # 類型，代表包含的* \* proto*檔案中定義的訊息。
+工具套件會產生 c # 類型，代表包含的 *\* proto* 檔案中定義的訊息。
 
 針對伺服器端資產，會產生抽象服務基底類型。 基底類型包含 gRPC 中包含的所有呼叫的定義 *。* 建立衍生自此基底類型的具體服務執行，並執行 gRPC 呼叫的邏輯。 如 `greet.proto` 先前所述的範例， `GreeterBase` 會產生包含虛擬方法的抽象型別 `SayHello` 。 具體的實作為會 `GreeterService` 覆寫方法，並執行處理 gRPC 呼叫的邏輯。
 
@@ -89,7 +90,7 @@ gRPC 使用合約優先的方法來開發 API。 根據預設， (protobuf) 的�
 
 [!code-csharp[](~/tutorials/grpc/grpc-start/sample/GrpcGreeterClient/Program.cs?name=snippet)]
 
-依預設，會針對專案群組中包含的每個* \* proto*檔案產生伺服器和用戶端資產 `<Protobuf>` 。 為確保伺服器專案中只會產生伺服器資產， `GrpcServices` 屬性會設定為 `Server` 。
+依預設，會針對專案群組中包含的每個 *\* proto* 檔案產生伺服器和用戶端資產 `<Protobuf>` 。 為確保伺服器專案中只會產生伺服器資產， `GrpcServices` 屬性會設定為 `Server` 。
 
 [!code-xml[](~/tutorials/grpc/grpc-start/sample/GrpcGreeter/GrpcGreeter.csproj?highlight=2&range=7-9)]
 

@@ -6,6 +6,7 @@ monikerRange: '>= aspnetcore-2.1'
 ms.author: riande
 ms.date: 04/06/2020
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -17,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: performance/performance-best-practices
-ms.openlocfilehash: 01575ec87d2d346da7367523ca5e257d53de4983
-ms.sourcegitcommit: 24106b7ffffc9fff410a679863e28aeb2bbe5b7e
+ms.openlocfilehash: a3fc398569fafefc0b4634e80433a5d4e0e1b4ff
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 09/17/2020
-ms.locfileid: "90722614"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93060998"
 ---
 # <a name="aspnet-core-performance-best-practices"></a>ASP.NET Core 效能最佳做法
 
@@ -44,13 +45,13 @@ ASP.NET Core 應用程式應設計為同時處理許多要求。 非同步 Api �
 
 ASP.NET Core 應用程式中常見的效能問題是封鎖可能為非同步呼叫。 許多同步封鎖呼叫會導致 [執行緒集](/archive/blogs/vancem/diagnosing-net-core-threadpool-starvation-with-perfview-why-my-service-is-not-saturating-all-cores-or-seems-to-stall) 區耗盡和降級的回應時間。
 
-**請勿**：
+**請勿** ：
 
 * 藉由呼叫 [task. Wait](/dotnet/api/system.threading.tasks.task.wait) 或 task 來封鎖非同步執行。 [結果](/dotnet/api/system.threading.tasks.task-1.result)。
 * 取得通用程式碼路徑中的鎖定。 當架構為平行執行程式碼時，ASP.NET Core 應用程式的效能最高。
 * 呼叫工作 [。執行](/dotnet/api/system.threading.tasks.task.run) 並立即等待它。 ASP.NET Core 已在一般執行緒集區執行緒上執行應用程式程式碼，因此呼叫工作。執行只會導致額外的不必要執行緒集區排程。 即使已排程的程式碼會封鎖執行緒，但工作卻無法防止這種情況。
 
-**執行**：
+**執行** ：
 
 * 使 [熱程式碼路徑](#understand-hot-code-paths) 成為非同步。
 * 如果有可用的非同步 API，則以非同步方式呼叫資料存取、i/o 和長時間執行的作業 Api。 請勿 **使用** 工作 [。執行](/dotnet/api/system.threading.tasks.task.run) 以將同步 API 設為非同步。
@@ -71,7 +72,7 @@ ASP.NET Core 應用程式中常見的效能問題是封鎖可能為非同步呼�
 建議：
 
 * **請考慮快** 取經常使用的大型物件。 快取大型物件可防止昂貴的配置。
-* 使用[ArrayPool \<T> ](/dotnet/api/system.buffers.arraypool-1)來儲存大型陣列，以**進行**集區緩衝區。
+* 使用 [ArrayPool \<T>](/dotnet/api/system.buffers.arraypool-1)來儲存大型陣列，以 **進行** 集區緩衝區。
 * **請勿** 在經常性程式 [代碼路徑](#understand-hot-code-paths)上配置許多存留期較短的大型物件。
 
 記憶體問題（例如上述）可以藉由在 [PerfView](https://github.com/Microsoft/perfview) 中檢查垃圾收集 (GC) 統計資料來診斷，並檢查：
@@ -90,11 +91,11 @@ ASP.NET Core 應用程式中常見的效能問題是封鎖可能為非同步呼�
 
 * **請** 以非同步方式呼叫所有資料存取 api。
 * **請勿** 取出超過所需的資料。 撰寫查詢，只傳回目前 HTTP 要求所需的資料。
-* 如果可接受稍微過期的資料，**請考慮快**取從資料庫或遠端服務取出的經常存取資料。 視案例而定，使用 [MemoryCache](xref:performance/caching/memory) 或 [microsoft.web.distributedcache](xref:performance/caching/distributed)。 如需詳細資訊，請參閱<xref:performance/caching/response>。
+* 如果可接受稍微過期的資料， **請考慮快** 取從資料庫或遠端服務取出的經常存取資料。 視案例而定，使用 [MemoryCache](xref:performance/caching/memory) 或 [microsoft.web.distributedcache](xref:performance/caching/distributed)。 如需詳細資訊，請參閱<xref:performance/caching/response>。
 * **儘量減少** 網路往返。 目標是在單一呼叫中取出所需的資料，而不是使用數個呼叫。
-* 針對唯讀用途存取資料時，**請**使用 Entity Framework Core 中的[無追蹤查詢](/ef/core/querying/tracking#no-tracking-queries)。 EF Core 可以更有效率地傳回無追蹤查詢的結果。
-* 使用、或語句來**篩選和**匯總 LINQ 查詢 (`.Where` `.Select` `.Sum` ，例如) ，以便讓資料庫進行篩選。
-* 請**注意，** EF Core 會在用戶端上解析某些查詢運算子，而這可能會導致執行效率不佳的查詢。 如需詳細資訊，請參閱 [用戶端評估效能問題](/ef/core/querying/client-eval#client-evaluation-performance-issues)。
+* 針對唯讀用途存取資料時， **請** 使用 Entity Framework Core 中的 [無追蹤查詢](/ef/core/querying/tracking#no-tracking-queries)。 EF Core 可以更有效率地傳回無追蹤查詢的結果。
+* 使用、或語句來 **篩選和** 匯總 LINQ 查詢 (`.Where` `.Select` `.Sum` ，例如) ，以便讓資料庫進行篩選。
+* 請 **注意，** EF Core 會在用戶端上解析某些查詢運算子，而這可能會導致執行效率不佳的查詢。 如需詳細資訊，請參閱 [用戶端評估效能問題](/ef/core/querying/client-eval#client-evaluation-performance-issues)。
 * **請勿** 在集合上使用投影查詢，這可能會導致執行「N + 1」 SQL 查詢。 如需詳細資訊，請參閱相互 [關聯子查詢的優化](/ef/core/what-is-new/ef-core-2.1#optimization-of-correlated-subqueries)。
 
 查看 [EF High 效能](/ef/core/what-is-new/ef-core-2.0#explicitly-compiled-queries) ，以取得可改善高規模應用程式效能的方法：
@@ -134,7 +135,7 @@ ASP.NET Core 應用程式中常見的效能問題是封鎖可能為非同步呼�
 建議：
 
 * **請勿** 等待長時間執行的工作完成，作為一般 HTTP 要求處理的一部分。
-* **請考慮使用** [Azure](/azure/azure-functions/)函式，以[背景服務](xref:fundamentals/host/hosted-services)或跨進程處理長時間執行的要求。 完成跨進程工作對於需要大量 CPU 的工作特別有用。
+* **請考慮使用** [Azure](/azure/azure-functions/)函式，以 [背景服務](xref:fundamentals/host/hosted-services)或跨進程處理長時間執行的要求。 完成跨進程工作對於需要大量 CPU 的工作特別有用。
 * **請使用即時** 通訊選項（例如 [SignalR](xref:signalr/introduction) ），以非同步方式與用戶端通訊。
 
 ## <a name="minify-client-assets"></a>縮短用戶端資產
@@ -165,7 +166,7 @@ ASP.NET Core 的每個新版本都包含效能改進。 .NET Core 和 ASP.NET Co
 
 * **請勿** 使用擲回或攔截例外狀況作為一般程式流程的方法，尤其是在經常性程式 [代碼路徑](#understand-hot-code-paths)中。
 * **請** 在應用程式中包含邏輯，以偵測並處理會造成例外狀況的條件。
-* 針對不尋常或非預期的狀況，**請**擲回或攔截例外狀況。
+* 針對不尋常或非預期的狀況， **請** 擲回或攔截例外狀況。
 
 應用程式診斷工具（例如 Application Insights）有助於識別應用程式中可能會影響效能的常見例外狀況。
 
@@ -177,7 +178,7 @@ ASP.NET Core 的每個新版本都包含效能改進。 .NET Core 和 ASP.NET Co
 
 ASP.NET Core 中的所有 i/o 都是非同步。 伺服器會執行 `Stream` 介面，同時具有同步和非同步多載。 最好的作法是避免封鎖執行緒集區執行緒。 封鎖執行緒可能會導致執行緒集區耗盡。
 
-請勿這樣**做：** 下列範例會使用 <xref:System.IO.StreamReader.ReadToEnd*> 。 它會封鎖目前的執行緒以等待結果。 這是透過 [非同步同步](https://github.com/davidfowl/AspNetCoreDiagnosticScenarios/blob/master/AsyncGuidance.md#warning-sync-over-async
+請勿這樣 **做：** 下列範例會使用 <xref:System.IO.StreamReader.ReadToEnd*> 。 它會封鎖目前的執行緒以等待結果。 這是透過 [非同步同步](https://github.com/davidfowl/AspNetCoreDiagnosticScenarios/blob/master/AsyncGuidance.md#warning-sync-over-async
 )的範例。
 
 [!code-csharp[](performance-best-practices/samples/3.0/Controllers/MyFirstController.cs?name=snippet1)]
@@ -207,7 +208,7 @@ ASP.NET Core 中的所有 i/o 都是非同步。 伺服器會執行 `Stream` 介
 * 已透過呼叫來讀取表單 `ReadFormAsync` ，以及
 * 正在使用讀取快取的表單值 `HttpContext.Request.Form`
 
-請勿這樣**做：** 下列範例會使用 `HttpContext.Request.Form` 。  `HttpContext.Request.Form` 使用 [sync over async](https://github.com/davidfowl/AspNetCoreDiagnosticScenarios/blob/master/AsyncGuidance.md#warning-sync-over-async
+請勿這樣 **做：** 下列範例會使用 `HttpContext.Request.Form` 。  `HttpContext.Request.Form` 使用 [sync over async](https://github.com/davidfowl/AspNetCoreDiagnosticScenarios/blob/master/AsyncGuidance.md#warning-sync-over-async
 ) ，可能導致執行緒集區耗盡。
 
 [!code-csharp[](performance-best-practices/samples/3.0/Controllers/MySecondController.cs?name=snippet1)]
@@ -251,9 +252,9 @@ ASP.NET Core 3.0 預設會使用 <xref:System.Text.Json> JSON 序列化。 <xref
 
 ## <a name="do-not-store-ihttpcontextaccessorhttpcontext-in-a-field"></a>請勿將 >iHTTPcoNtextaccessor 儲存在欄位中
 
-[IHttpContextAccessor.HttpContext](xref:Microsoft.AspNetCore.Http.IHttpContextAccessor.HttpContext) `HttpContext` 從要求執行緒存取時，>iHTTPcoNtextaccessor 會傳回使用中要求的。 `IHttpContextAccessor.HttpContext`**不**應儲存在欄位或變數中。
+[IHttpContextAccessor.HttpContext](xref:Microsoft.AspNetCore.Http.IHttpContextAccessor.HttpContext) `HttpContext` 從要求執行緒存取時，>iHTTPcoNtextaccessor 會傳回使用中要求的。 `IHttpContextAccessor.HttpContext`**不** 應儲存在欄位或變數中。
 
-請勿這樣**做：** 下列範例會將儲存 `HttpContext` 在欄位中，然後稍後再嘗試使用它。
+請勿這樣 **做：** 下列範例會將儲存 `HttpContext` 在欄位中，然後稍後再嘗試使用它。
 
 [!code-csharp[](performance-best-practices/samples/3.0/MyType.cs?name=snippet1)]
 
@@ -270,7 +271,7 @@ ASP.NET Core 3.0 預設會使用 <xref:System.Text.Json> JSON 序列化。 <xref
 
 `HttpContext` 不 *是安全* 執行緒。 `HttpContext`以平行方式從多個執行緒存取可能會導致未定義的行為，例如當機、損毀和資料損毀。
 
-請勿這樣**做：** 下列範例會產生三個平行要求，並在傳出 HTTP 要求之前和之後記錄傳入的要求路徑。 要求路徑可從多個執行緒存取，可能會以平行方式進行存取。
+請勿這樣 **做：** 下列範例會產生三個平行要求，並在傳出 HTTP 要求之前和之後記錄傳入的要求路徑。 要求路徑可從多個執行緒存取，可能會以平行方式進行存取。
 
 [!code-csharp[](performance-best-practices/samples/3.0/Controllers/AsyncFirstController.cs?name=snippet1&highlight=25,28)]
 
@@ -282,7 +283,7 @@ ASP.NET Core 3.0 預設會使用 <xref:System.Text.Json> JSON 序列化。 <xref
 
 `HttpContext` 只有在 ASP.NET Core 管線中有使用中的 HTTP 要求時，才有效。 整個 ASP.NET Core 管線是執行每個要求的非同步委派鏈。 當 `Task` 此鏈傳回的完成時， `HttpContext` 會回收。
 
-請勿這樣**做：** 下列範例會使用， `async void` 以在達到第一個要求時完成 HTTP 要求 `await` ：
+請勿這樣 **做：** 下列範例會使用， `async void` 以在達到第一個要求時完成 HTTP 要求 `await` ：
 
 * 在 ASP.NET Core 應用程式中，這 **一律** 是不良的做法。
 * 在 `HttpResponse` HTTP 要求完成後存取。
@@ -296,7 +297,7 @@ ASP.NET Core 3.0 預設會使用 <xref:System.Text.Json> JSON 序列化。 <xref
 
 ## <a name="do-not-capture-the-httpcontext-in-background-threads"></a>請勿在背景執行緒中捕捉 HttpCoNtext
 
-請勿這樣**做：** 下列範例顯示的是 `HttpContext` 從屬性中捕捉的關閉 `Controller` 。 這是不正確的作法，因為工作專案可以：
+請勿這樣 **做：** 下列範例顯示的是 `HttpContext` 從屬性中捕捉的關閉 `Controller` 。 這是不正確的作法，因為工作專案可以：
 
 * 在要求範圍之外執行。
 * 嘗試讀取錯誤 `HttpContext` 。
@@ -314,7 +315,7 @@ ASP.NET Core 3.0 預設會使用 <xref:System.Text.Json> JSON 序列化。 <xref
 
 ## <a name="do-not-capture-services-injected-into-the-controllers-on-background-threads"></a>不要在背景執行緒上捕捉插入控制器的服務
 
-請勿這樣**做：** 下列範例顯示的是 `DbContext` 從 action 參數中捕捉的關閉 `Controller` 。 這是不正確的作法。  工作專案可以在要求範圍之外執行。 的 `ContosoDbContext` 範圍是要求，會產生 `ObjectDisposedException` 。
+請勿這樣 **做：** 下列範例顯示的是 `DbContext` 從 action 參數中捕捉的關閉 `Controller` 。 這是不正確的作法。  工作專案可以在要求範圍之外執行。 的 `ContosoDbContext` 範圍是要求，會產生 `ObjectDisposedException` 。
 
 [!code-csharp[](performance-best-practices/samples/3.0/Controllers/FireAndForgetSecondController.cs?name=snippet1)]
 
@@ -341,7 +342,7 @@ ASP.NET Core 不會緩衝 HTTP 回應主體。 第一次寫入回應時：
 * 標頭會連同主體的區區塊轉送給用戶端。
 * 您不再可以變更回應標頭。
 
-請勿這樣**做：** 下列程式碼會嘗試在回應已開始之後新增回應標頭：
+請勿這樣 **做：** 下列程式碼會嘗試在回應已開始之後新增回應標頭：
 
 [!code-csharp[](performance-best-practices/samples/3.0/Startup22.cs?name=snippet1)]
 

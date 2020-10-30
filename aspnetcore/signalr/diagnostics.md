@@ -7,6 +7,7 @@ ms.author: anurse
 ms.custom: devx-track-csharp, signalr, devx-track-js
 ms.date: 06/12/2020
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -18,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: signalr/diagnostics
-ms.openlocfilehash: 890359c9e9f6c3c60f3105124f52c66b09a8a4fb
-ms.sourcegitcommit: 2e3a967331b2c69f585dd61e9ad5c09763615b44
+ms.openlocfilehash: 6e5e9d866a1e03e69856cc63dcfe30284048dd6d
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 10/27/2020
-ms.locfileid: "92690676"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93061310"
 ---
 # <a name="logging-and-diagnostics-in-aspnet-core-no-locsignalr"></a>ASP.NET Core 中的記錄和診斷 SignalR
 
@@ -43,7 +44,7 @@ SignalR 使用兩個記錄器類別：
 * `Microsoft.AspNetCore.SignalR`：適用于與中樞通訊協定相關的記錄、啟動中樞、叫用方法，以及其他中樞相關的活動。
 * `Microsoft.AspNetCore.Http.Connections`：適用于傳輸的相關記錄，例如 Websocket、長時間輪詢、Server-Sent 事件，以及低層級的 SignalR 基礎結構。
 
-若要從啟用詳細記錄 SignalR ，請 `Debug` 將下列專案新增至中的子區段，以將上述兩個前置詞設定為檔案 *appsettings.js* 中的層級 `LogLevel` `Logging` ：
+若要從啟用詳細記錄 SignalR ，請將 `Debug` *appsettings.json* 下列專案新增至檔案中的 `LogLevel` 子區段，以將上述兩個前置詞設定為檔案中的層級 `Logging` ：
 
 [!code-json[](diagnostics/logging-config.json?highlight=7-8)]
 

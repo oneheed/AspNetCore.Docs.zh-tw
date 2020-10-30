@@ -7,6 +7,7 @@ ms.custom: mvc
 ms.date: 03/19/2020
 monikerRange: '>= aspnetcore-3.0'
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -18,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: security/authentication/microsoft-logins
-ms.openlocfilehash: 36341a0e439be57d7da4f787aa6103b92c624e96
-ms.sourcegitcommit: 62cc131969b2379f7a45c286a751e22d961dfbdb
+ms.openlocfilehash: 3161e4f0f735294d69dd51634b424d1ed573e615
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 09/22/2020
-ms.locfileid: "90847581"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93060296"
 ---
 # <a name="microsoft-account-external-login-setup-with-aspnet-core"></a>使用 ASP.NET Core 的 Microsoft 帳戶外部登入設定
 
@@ -36,25 +37,25 @@ ms.locfileid: "90847581"
 * 將 [AspNetCore MicrosoftAccount](https://www.nuget.org/packages/Microsoft.AspNetCore.Authentication.MicrosoftAccount/) NuGet 套件新增至專案。
 * 流覽至 [ [Azure 入口網站應用程式註冊](https://go.microsoft.com/fwlink/?linkid=2083908) ] 頁面，並建立或登入 Microsoft 帳戶：
 
-如果您沒有 Microsoft 帳戶，請選取 [ **建立一個**]。 登入之後，系統會將您重新導向至 **應用程式註冊** 頁面：
+如果您沒有 Microsoft 帳戶，請選取 [ **建立一個** ]。 登入之後，系統會將您重新導向至 **應用程式註冊** 頁面：
 
 * 選取 **新的註冊**
 * 輸入 [名稱]。
-* 選取 **支援的帳戶類型**的選項。  <!-- Accounts for any org work with MS domain accounts. Most folks probably want the last option, personal MS accounts. It took 24 hours after setting this up for the keys to work -->
+* 選取 **支援的帳戶類型** 的選項。  <!-- Accounts for any org work with MS domain accounts. Most folks probably want the last option, personal MS accounts. It took 24 hours after setting this up for the keys to work -->
   * `MicrosoftAccount`依預設，此套件支援使用「任何組織目錄中的帳戶」或「任何組織目錄中的帳戶和 Microsoft 帳戶」選項所建立的應用程式註冊。
-  * 若要使用其他選項，請在 [ `AuthorizationEndpoint` `TokenEndpoint` `MicrosoftAccountOptions` **總覽**]) 頁面上按一下 [端點]，將用來將 Microsoft 帳戶驗證初始化至應用程式註冊的 [**端點**] 頁面上所顯示之 url 的 [設定] 和 [成員]， (可供使用。
-* 在 [重新 **導向 URI**] 下，輸入您附加的開發 URL `/signin-microsoft` 。 例如： `https://localhost:5001/signin-microsoft` 。 本範例稍後設定的 Microsoft 驗證配置會自動處理在 `/signin-microsoft` 路由執行的要求，以實行 OAuth 流程。
+  * 若要使用其他選項，請在 [ `AuthorizationEndpoint` `TokenEndpoint` `MicrosoftAccountOptions` **總覽** ]) 頁面上按一下 [端點]，將用來將 Microsoft 帳戶驗證初始化至應用程式註冊的 [ **端點** ] 頁面上所顯示之 url 的 [設定] 和 [成員]， (可供使用。
+* 在 [重新 **導向 URI** ] 下，輸入您附加的開發 URL `/signin-microsoft` 。 例如： `https://localhost:5001/signin-microsoft` 。 本範例稍後設定的 Microsoft 驗證配置會自動處理在 `/signin-microsoft` 路由執行的要求，以實行 OAuth 流程。
 * 選取 [註冊]
 
 ### <a name="create-client-secret"></a>建立用戶端密碼
 
 * 在左側窗格中，選取 [憑證及祕密]。
-* 在 [**用戶端密碼**] 下，選取 [**新增用戶端密碼**]
+* 在 [ **用戶端密碼** ] 下，選取 [ **新增用戶端密碼** ]
 
   * 新增用戶端密碼的描述。
   * 選取 [新增] 按鈕。
 
-* 在 [ **用戶端密碼**] 下，複製用戶端密碼的值。
+* 在 [ **用戶端密碼** ] 下，複製用戶端密碼的值。
 
 URI 區段 `/signin-microsoft` 會設定為 Microsoft 驗證提供者的預設回呼。 您可以在設定 Microsoft 驗證中介軟體時，透過[MicrosoftAccountOptions](/dotnet/api/microsoft.aspnetcore.authentication.microsoftaccount.microsoftaccountoptions)類別的繼承[RemoteAuthenticationOptions. CallbackPath](/dotnet/api/microsoft.aspnetcore.authentication.remoteauthenticationoptions.callbackpath)屬性來變更預設回呼 URI。
 
@@ -84,7 +85,7 @@ URI 區段 `/signin-microsoft` 會設定為 Microsoft 驗證提供者的預設�
 
 ## <a name="sign-in-with-microsoft-account"></a>使用 Microsoft 帳戶登入帳戶
 
-執行應用程式，然後按一下 [ **登入**]。 使用 Microsoft 登入的選項隨即出現。 當您按一下 [Microsoft] 時，系統會將您重新導向至 Microsoft 進行驗證。 使用您的 Microsoft 帳戶登入之後，系統會提示您讓應用程式存取您的資訊：
+執行應用程式，然後按一下 [ **登入** ]。 使用 Microsoft 登入的選項隨即出現。 當您按一下 [Microsoft] 時，系統會將您重新導向至 Microsoft 進行驗證。 使用您的 Microsoft 帳戶登入之後，系統會提示您讓應用程式存取您的資訊：
 
 請按一下 **[是]** ，系統會將您重新導向回到可設定電子郵件的網站。
 
@@ -98,8 +99,8 @@ URI 區段 `/signin-microsoft` 會設定為 Microsoft 驗證提供者的預設�
 
 * 如果 Microsoft 帳戶提供者將您重新導向至 [登入錯誤] 頁面，請注意 Uri 中的 (主題標籤) 的錯誤標題和描述查詢字串參數 `#` 。
 
-  雖然錯誤訊息似乎指出 Microsoft 驗證有問題，但最常見的原因是您的應用程式 Uri 不符合為**Web**平臺指定的任何重新**導向 uri** 。
-* 如果 Identity 未透過呼叫來 `services.AddIdentity` 設定 `ConfigureServices` ，嘗試驗證將會導致 *ArgumentException：必須提供 ' SignInScheme ' 選項*。 此範例中使用的專案範本可確保完成此操作。
+  雖然錯誤訊息似乎指出 Microsoft 驗證有問題，但最常見的原因是您的應用程式 Uri 不符合為 **Web** 平臺指定的任何重新 **導向 uri** 。
+* 如果 Identity 未透過呼叫來 `services.AddIdentity` 設定 `ConfigureServices` ，嘗試驗證將會導致 *ArgumentException：必須提供 ' SignInScheme ' 選項* 。 此範例中使用的專案範本可確保完成此操作。
 * 如果未藉由套用初始遷移來建立網站資料庫，則在處理要求錯誤時，您將會收到 *資料庫操作失敗* 。 請按一下 [套用 **遷移** ] 來建立資料庫，並重新整理以繼續發生錯誤。
 
 ## <a name="next-steps"></a>後續步驟

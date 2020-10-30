@@ -6,6 +6,7 @@ monikerRange: '>= aspnetcore-2.1'
 ms.author: riande
 ms.date: 11/08/2019
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -17,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: security/authorization/views
-ms.openlocfilehash: 775ebdffe2b0753de18bf07d9ff1193235a45b17
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: b3d6e595aa08208f2bf9e95d7070cf9c24802b62
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88629882"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93061323"
 ---
 # <a name="view-based-authorization-in-aspnet-core-mvc"></a>ASP.NET Core MVC 中以視圖為基礎的授權
 
@@ -33,7 +34,7 @@ ms.locfileid: "88629882"
 @inject IAuthorizationService AuthorizationService
 ```
 
-如果您想要每個視圖中的授權服務，請將指示詞放 `@inject` 入*Views*目錄的 *_ViewImports. cshtml*檔案中。 如需詳細資訊，請參閱[在檢視中插入相依性](xref:mvc/views/dependency-injection)。
+如果您想要每個視圖中的授權服務，請將指示詞放 `@inject` 入 *Views* 目錄的 *_ViewImports. cshtml* 檔案中。 如需詳細資訊，請參閱[在檢視中插入相依性](xref:mvc/views/dependency-injection)。
 
 使用插入的授權服務，以 `AuthorizeAsync` 您在以 [資源為基礎的授權](xref:security/authorization/resourcebased#security-authorization-resource-based-imperative)期間檢查的相同方式進行叫用：
 
@@ -57,4 +58,4 @@ ms.locfileid: "88629882"
 在上述程式碼中，模型會以資源的形式傳遞，原則評估應考慮考慮。
 
 > [!WARNING]
-> 請勿依賴切換應用程式 UI 元素的可見度作為唯一的授權檢查。 隱藏 UI 元素可能無法完全防止存取其相關聯的控制器動作。 例如，請考慮上述程式碼片段中的按鈕。 `Edit`如果使用者知道相對資源 URL 是 */Document/Edit/1*，則使用者可以叫用該動作方法。 基於這個理由， `Edit` 動作方法應該執行它自己的授權檢查。
+> 請勿依賴切換應用程式 UI 元素的可見度作為唯一的授權檢查。 隱藏 UI 元素可能無法完全防止存取其相關聯的控制器動作。 例如，請考慮上述程式碼片段中的按鈕。 `Edit`如果使用者知道相對資源 URL 是 */Document/Edit/1* ，則使用者可以叫用該動作方法。 基於這個理由， `Edit` 動作方法應該執行它自己的授權檢查。

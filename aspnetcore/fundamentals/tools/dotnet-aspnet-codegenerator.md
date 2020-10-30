@@ -6,6 +6,7 @@ monikerRange: '>= aspnetcore-2.1'
 ms.author: riande
 ms.date: 07/04/2019
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -17,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: fundamentals/tools/dotnet-aspnet-codegenerator
-ms.openlocfilehash: 12825c13e1c9de984251b5554833f7194edff8c3
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: 88d761b09833a14de5af9f9610753174867aa09a
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88629934"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93059984"
 ---
 # <a name="dotnet-aspnet-codegenerator"></a>dotnet aspnet-codegenerator
 
@@ -63,7 +64,7 @@ dotnet aspnet-codegenerator [-h|--help]
 
 要執行的程式碼產生器。 可用產生器如下︰
 
-| 產生器  | 作業                                                            |
+| Generator  | 作業                                                            |
 | ---------- | -------------------------------------------------------------------- |
 | 區域       | [架起區域](xref:mvc/controllers/areas)                      |
 | controller | [架起控制器](xref:tutorials/first-mvc-app/adding-model)  |
@@ -71,7 +72,7 @@ dotnet aspnet-codegenerator [-h|--help]
 | razorpage  | [Scaffold Razor 頁面](xref:tutorials/razor-pages/model)            |
 | 檢視       | [架起檢視](xref:mvc/views/overview)                          |
 
-## <a name="options"></a>選項。
+## <a name="options"></a>選項
 
 `-n|--nuget-package-dir`
 
@@ -142,7 +143,7 @@ dotnet aspnet-codegenerator [-h|--help]
 | ------------------------------ | --------------------------------------------------------------------------------------------------------- |
 | --controllerName 或 -name      | 控制器的名稱。                                                                                   |
 | --useAsyncActions 或 -async    | 產生非同步控制器動作。                                                                        |
-| --noViews 或 -nv               | **不**產生任何檢視。                                                                                    |
+| --noViews 或 -nv               | **不** 產生任何檢視。                                                                                    |
 | --restWithNoViews 或 -api      | 使用 REST 樣式 API 產生控制器。 假設使用 `noViews` 且會忽略所有檢視相關選項。 |
 | --readWriteActions 或 -actions | 在不使用模型的情況下使用讀取/寫入動作產生控制器。                                              |
 
@@ -167,7 +168,7 @@ Razor 您可以藉由指定新頁面的名稱和要使用的範本來個別 scaf
 * `Details`
 * `List`
 
-例如，下列命令會使用「編輯」範本來產生 *MyEdit.cshtml* 與 *MyEdit.cshtml.cs*：
+例如，下列命令會使用「編輯」範本來產生 *MyEdit.cshtml* 與 *MyEdit.cshtml.cs* ：
 
 ```dotnetcli
 dotnet aspnet-codegenerator razorpage MyEdit Edit -m Movie -dc RazorPagesMovieContext -outDir Pages/Movies

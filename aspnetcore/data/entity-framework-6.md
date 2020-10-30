@@ -6,6 +6,7 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 7/14/2020
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -15,12 +16,12 @@ no-loc:
 - Razor
 - SignalR
 uid: data/entity-framework-6
-ms.openlocfilehash: 64d420d7076f1da453ee423cc4a3732eeb47b221
-ms.sourcegitcommit: 4df148cbbfae9ec8d377283ee71394944a284051
+ms.openlocfilehash: 086418c161677f585b08ed360555c93d8575e701
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 08/26/2020
-ms.locfileid: "88876694"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93059451"
 ---
 # <a name="aspnet-core-and-entity-framework-6"></a>ASP.NET Core 和 Entity Framework 6
 ::: moniker range=">= aspnetcore-3.0"
@@ -49,7 +50,7 @@ ms.locfileid: "88876694"
 
 在 ASP.NET Core 應用程式中使用 Entity Framework 6 的建議方式，是將 EF6 內容和模型類別放在以 .NET Framework 為目標的類別庫專案中。 從 ASP.NET Core 專案新增類別庫的參考。 請參閱[使用 EF6 和 ASP.NET Core 專案的 Visual Studio 方案](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/data/entity-framework-6/sample/)範例。  
 
-您無法將 EF6 內容置於 ASP.NET Core 專案中，因為 .NET Core 專案不支援 EF6 命令 (例如 *Enable-Migrations*) 需要的所有功能。    
+您無法將 EF6 內容置於 ASP.NET Core 專案中，因為 .NET Core 專案不支援 EF6 命令 (例如 *Enable-Migrations* ) 需要的所有功能。    
 
 不論您放置 EF6 內容的專案類型為何，只有 EF6 命令列工具才適用於 EF6 內容。 例如，`Scaffold-DbContext` 僅可用於 Entity Framework Core。 如果您需要對資料庫進行反向工程以 EF6 模型，請參閱 <https://docs.microsoft.com/ef/ef6/modeling/code-first/workflows/existing-database> 。    
 
@@ -91,12 +92,12 @@ ms.locfileid: "88876694"
 
 * 建立方案。    
 
-* [新增]**[新專案]** > **[Web]** > **[ASP.NET Core Web 應用程式]** > ****    
+* [新增]     
   * 在專案範本選取項目對話方塊中，選取下拉式清單中的 API 和.NET Framework 
 
-* [新增]**[新增專案]** > **[Windows Desktop]** > **[類別庫 (.NET Framework)]** > ****  
+* [新增]   
 
-* 在這兩個專案的 [套件管理員主控台]**** (PMC) 中，執行 `Install-Package Entityframework` 命令。    
+* 在這兩個專案的 [套件管理員主控台]  (PMC) 中，執行 `Install-Package Entityframework` 命令。    
 
 * 在類別庫專案中，建立資料模型類別和內容類別，以及 `IDbContextFactory` 的實作。    
 
@@ -106,7 +107,7 @@ ms.locfileid: "88876694"
 
 * 在 Core 專案的 *Startup.cs* 中，登錄 DI 的內容。    
 
-* 在 Core 專案的 *appsettings.json* 中，新增連接字串。    
+* 在 Core 專案的中， *appsettings.json* 加入連接字串。  
 
 * 在 Core 專案中，新增控制器和檢視，以確認您可以讀取和寫入資料。 (請注意，ASP.NET Core MVC Scaffolding 不會使用參考自類別庫的 EF6 內容。)
 

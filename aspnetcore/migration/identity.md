@@ -5,6 +5,7 @@ description: 瞭解如何將 ASP.NET MVC 專案中的驗證和身分識別遷移
 ms.author: riande
 ms.date: 3/22/2020
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -16,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: migration/identity
-ms.openlocfilehash: c8e6a1a8bf9ef06d98db0e7e0a6a0e5ff393e322
-ms.sourcegitcommit: f09407d128634d200c893bfb1c163e87fa47a161
+ms.openlocfilehash: 8ceff0596c069d815c38b9bb526477a9d1430951
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 08/26/2020
-ms.locfileid: "88865529"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93060647"
 ---
 # <a name="migrate-authentication-and-no-locidentity-to-aspnet-core"></a>遷移驗證和 Identity ASP.NET Core
 
@@ -31,7 +32,7 @@ ms.locfileid: "88865529"
 
 ## <a name="configure-no-locidentity-and-membership"></a>設定 Identity 和成員資格
 
-在 ASP.NET MVC 中，會使用 Identity *Startup.Auth.cs*和* Identity Config.cs*中的 ASP.NET （位於*App_Start*資料夾）來設定驗證和身分識別功能。 在 ASP.NET Core MVC 中，這些功能是在 *Startup.cs*中設定。
+在 ASP.NET MVC 中，會使用 Identity *Startup.Auth.cs* 和 *Identity Config.cs* 中的 ASP.NET （位於 *App_Start* 資料夾）來設定驗證和身分識別功能。 在 ASP.NET Core MVC 中，這些功能是在 *Startup.cs* 中設定。
 
 安裝下列 NuGet 封裝：
 
@@ -39,7 +40,7 @@ ms.locfileid: "88865529"
 * `Microsoft.AspNetCore.Authentication.Cookies`
 * `Microsoft.EntityFrameworkCore.SqlServer`
 
-在 *Startup.cs*中，更新 `Startup.ConfigureServices` 方法以使用 Entity Framework 和 Identity 服務：
+在 *Startup.cs* 中，更新 `Startup.ConfigureServices` 方法以使用 Entity Framework 和 Identity 服務：
 
 ```csharp
 public void ConfigureServices(IServiceCollection services)
@@ -56,9 +57,9 @@ public void ConfigureServices(IServiceCollection services)
 }
 ```
 
-此時，上述程式碼中所參考的兩種類型尚未從 ASP.NET MVC 專案中遷移： `ApplicationDbContext` 和 `ApplicationUser` 。 在 ASP.NET Core 專案中建立新的 [ *模型* ] 資料夾，並將兩個類別新增至對應至這些類型的類別。 您會在 */Models/ Identity Models.cs*中找到這些類別的 ASP.NET MVC 版本，但我們會在已遷移的專案中針對每個類別使用一個檔案，因為這比較清楚。
+此時，上述程式碼中所參考的兩種類型尚未從 ASP.NET MVC 專案中遷移： `ApplicationDbContext` 和 `ApplicationUser` 。 在 ASP.NET Core 專案中建立新的 [ *模型* ] 資料夾，並將兩個類別新增至對應至這些類型的類別。 您會在 */Models/ Identity Models.cs* 中找到這些類別的 ASP.NET MVC 版本，但我們會在已遷移的專案中針對每個類別使用一個檔案，因為這比較清楚。
 
-*ApplicationUser.cs*：
+*ApplicationUser.cs* ：
 
 ```csharp
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
@@ -71,7 +72,7 @@ namespace NewMvcProject.Models
 }
 ```
 
-*ApplicationDbCoNtext.cs*：
+*ApplicationDbCoNtext.cs* ：
 
 ```csharp
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
@@ -114,9 +115,9 @@ using Microsoft.Extensions.DependencyInjection;
 
 ## <a name="migrate-registration-and-login-logic"></a>遷移註冊和登入邏輯
 
-透過 Identity 針對使用 Entity Framework 和 SQL Server 所設定的應用程式和資料存取設定的服務，我們已準備好將註冊和登入的支援新增至應用程式。 回想一下，稍[早在遷移過程中](xref:migration/mvc#migrate-the-layout-file)，我們會將 *_Layout*的 *_LoginPartial*參考批註化。 現在可以回到該程式碼、將它取消批註，然後加入必要的控制器和 views 來支援登入功能。
+透過 Identity 針對使用 Entity Framework 和 SQL Server 所設定的應用程式和資料存取設定的服務，我們已準備好將註冊和登入的支援新增至應用程式。 回想一下，稍 [早在遷移過程中](xref:migration/mvc#migrate-the-layout-file)，我們會將 *_Layout* 的 *_LoginPartial* 參考批註化。 現在可以回到該程式碼、將它取消批註，然後加入必要的控制器和 views 來支援登入功能。
 
-將 `@Html.Partial` *_Layout*中的行取消批註：
+將 `@Html.Partial` *_Layout* 中的行取消批註：
 
 ```cshtml
       <li>@Html.ActionLink("Contact", "Contact", "Home")</li>

@@ -7,6 +7,7 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 08/21/2020
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -18,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: mvc/models/file-uploads
-ms.openlocfilehash: 6ff78b26e8e2363cf6c54ebb2a392f390fb2995c
-ms.sourcegitcommit: cd412a44f26cb416ceb348fc0a1ccc9a6e9ca73e
+ms.openlocfilehash: 14561bace565c104d0a9c926cad3105c4865e72a
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 08/21/2020
-ms.locfileid: "88720275"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93061167"
 ---
 # <a name="upload-files-in-aspnet-core"></a>在 ASP.NET Core 上傳檔案
 
@@ -112,7 +113,7 @@ ASP.NET Core 支援針對較小的檔案使用緩衝的模型系結上傳一或�
 本主題的下列各節涵蓋了小型檔案的緩衝：
 
 * [實體儲存體](#upload-small-files-with-buffered-model-binding-to-physical-storage)
-* [Database](#upload-small-files-with-buffered-model-binding-to-a-database)
+* [資料庫](#upload-small-files-with-buffered-model-binding-to-a-database)
 
 **串流**
 
@@ -124,7 +125,7 @@ ASP.NET Core 支援針對較小的檔案使用緩衝的模型系結上傳一或�
 
 若要上傳小型檔案，請使用多部分形式的表單，或使用 JavaScript 來建立 POST 要求。
 
-下列範例將示範 Razor 如何使用頁面表單，在範例應用程式) 中上傳單一檔案 (*Pages/BufferedSingleFileUploadPhysical. cshtml* ：
+下列範例將示範 Razor 如何使用頁面表單，在範例應用程式) 中上傳單一檔案 ( *Pages/BufferedSingleFileUploadPhysical. cshtml* ：
 
 ```cshtml
 <form enctype="multipart/form-data" method="post">
@@ -307,7 +308,7 @@ foreach (var formFile in files)
 
 使用此技術所上傳的檔案 <xref:Microsoft.AspNetCore.Http.IFormFile> 會在處理之前，在記憶體或伺服器的磁片上進行緩衝處理。 在動作方法內， <xref:Microsoft.AspNetCore.Http.IFormFile> 內容可作為進行存取 <xref:System.IO.Stream> 。 除了本機檔案系統之外，檔案也可以儲存到網路共用或檔案儲存體服務（例如 [Azure Blob 儲存體](/azure/visual-studio/vs-storage-aspnet5-getting-started-blobs)）。
 
-如需在多個要上傳的檔案上進行迴圈，並使用安全檔案名的另一個範例，請參閱範例應用程式中的*Pages/BufferedMultipleFileUploadPhysical。*
+如需在多個要上傳的檔案上進行迴圈，並使用安全檔案名的另一個範例，請參閱範例應用程式中的 *Pages/BufferedMultipleFileUploadPhysical。*
 
 > [!WARNING]
 > [GetTempFileName](xref:System.IO.Path.GetTempFileName*) 會擲回， <xref:System.IO.IOException> 如果在不刪除先前的暫存檔的情況下建立65535個以上的檔案，則擲回。 65535檔案的限制為每個伺服器的限制。 如需 Windows OS 上這項限制的詳細資訊，請參閱下列主題中的備註：
@@ -435,7 +436,7 @@ public async Task<IActionResult> OnPostUploadAsync()
 
 [!code-csharp[](file-uploads/samples/3.x/SampleApp/Controllers/StreamingController.cs?name=snippet_UploadDatabase)]
 
-`MultipartRequestHelper` (*公用程式/MultipartRequestHelper .cs*) ：
+`MultipartRequestHelper` ( *公用程式/MultipartRequestHelper .cs* ) ：
 
 [!code-csharp[](file-uploads/samples/3.x/SampleApp/Utilities/MultipartRequestHelper.cs)]
 
@@ -533,7 +534,7 @@ Razor從開始，一律 <xref:System.Net.WebUtility.HtmlEncode*> 是使用者要
 
 限制上傳檔案的大小。
 
-在範例應用程式中，檔案大小限制為 2 MB (以位元組) 表示。 這項限制是透過[Configuration](xref:fundamentals/configuration/index)檔案*appsettings.js*的設定提供：
+在範例應用程式中，檔案大小限制為 2 MB (以位元組) 表示。 這項限制是透過 [檔案的設定](xref:fundamentals/configuration/index) 提供的 *appsettings.json* ：
 
 ```json
 {
@@ -836,7 +837,7 @@ ASP.NET Core 支援針對較小的檔案使用緩衝的模型系結上傳一或�
 本主題的下列各節涵蓋了小型檔案的緩衝：
 
 * [實體儲存體](#upload-small-files-with-buffered-model-binding-to-physical-storage)
-* [Database](#upload-small-files-with-buffered-model-binding-to-a-database)
+* [資料庫](#upload-small-files-with-buffered-model-binding-to-a-database)
 
 **串流**
 
@@ -848,7 +849,7 @@ ASP.NET Core 支援針對較小的檔案使用緩衝的模型系結上傳一或�
 
 若要上傳小型檔案，請使用多部分形式的表單，或使用 JavaScript 來建立 POST 要求。
 
-下列範例將示範 Razor 如何使用頁面表單，在範例應用程式) 中上傳單一檔案 (*Pages/BufferedSingleFileUploadPhysical. cshtml* ：
+下列範例將示範 Razor 如何使用頁面表單，在範例應用程式) 中上傳單一檔案 ( *Pages/BufferedSingleFileUploadPhysical. cshtml* ：
 
 ```cshtml
 <form enctype="multipart/form-data" method="post">
@@ -1031,7 +1032,7 @@ foreach (var formFile in files)
 
 使用此技術所上傳的檔案 <xref:Microsoft.AspNetCore.Http.IFormFile> 會在處理之前，在記憶體或伺服器的磁片上進行緩衝處理。 在動作方法內， <xref:Microsoft.AspNetCore.Http.IFormFile> 內容可作為進行存取 <xref:System.IO.Stream> 。 除了本機檔案系統之外，檔案也可以儲存到網路共用或檔案儲存體服務（例如 [Azure Blob 儲存體](/azure/visual-studio/vs-storage-aspnet5-getting-started-blobs)）。
 
-如需在多個要上傳的檔案上進行迴圈，並使用安全檔案名的另一個範例，請參閱範例應用程式中的*Pages/BufferedMultipleFileUploadPhysical。*
+如需在多個要上傳的檔案上進行迴圈，並使用安全檔案名的另一個範例，請參閱範例應用程式中的 *Pages/BufferedMultipleFileUploadPhysical。*
 
 > [!WARNING]
 > [GetTempFileName](xref:System.IO.Path.GetTempFileName*) 會擲回， <xref:System.IO.IOException> 如果在不刪除先前的暫存檔的情況下建立65535個以上的檔案，則擲回。 65535檔案的限制為每個伺服器的限制。 如需 Windows OS 上這項限制的詳細資訊，請參閱下列主題中的備註：
@@ -1159,7 +1160,7 @@ public async Task<IActionResult> OnPostUploadAsync()
 
 [!code-csharp[](file-uploads/samples/3.x/SampleApp/Controllers/StreamingController.cs?name=snippet_UploadDatabase)]
 
-`MultipartRequestHelper` (*公用程式/MultipartRequestHelper .cs*) ：
+`MultipartRequestHelper` ( *公用程式/MultipartRequestHelper .cs* ) ：
 
 [!code-csharp[](file-uploads/samples/3.x/SampleApp/Utilities/MultipartRequestHelper.cs)]
 
@@ -1257,7 +1258,7 @@ Razor從開始，一律 <xref:System.Net.WebUtility.HtmlEncode*> 是使用者要
 
 限制上傳檔案的大小。
 
-在範例應用程式中，檔案大小限制為 2 MB (以位元組) 表示。 這項限制是透過[Configuration](xref:fundamentals/configuration/index)檔案*appsettings.js*的設定提供：
+在範例應用程式中，檔案大小限制為 2 MB (以位元組) 表示。 這項限制是透過 [檔案的設定](xref:fundamentals/configuration/index) 提供的 *appsettings.json* ：
 
 ```json
 {
@@ -1571,7 +1572,7 @@ ASP.NET Core 支援針對較小的檔案使用緩衝的模型系結上傳一或�
 本主題的下列各節涵蓋了小型檔案的緩衝：
 
 * [實體儲存體](#upload-small-files-with-buffered-model-binding-to-physical-storage)
-* [Database](#upload-small-files-with-buffered-model-binding-to-a-database)
+* [資料庫](#upload-small-files-with-buffered-model-binding-to-a-database)
 
 **串流**
 
@@ -1583,7 +1584,7 @@ ASP.NET Core 支援針對較小的檔案使用緩衝的模型系結上傳一或�
 
 若要上傳小型檔案，請使用多部分形式的表單，或使用 JavaScript 來建立 POST 要求。
 
-下列範例將示範 Razor 如何使用頁面表單，在範例應用程式) 中上傳單一檔案 (*Pages/BufferedSingleFileUploadPhysical. cshtml* ：
+下列範例將示範 Razor 如何使用頁面表單，在範例應用程式) 中上傳單一檔案 ( *Pages/BufferedSingleFileUploadPhysical. cshtml* ：
 
 ```cshtml
 <form enctype="multipart/form-data" method="post">
@@ -1766,7 +1767,7 @@ foreach (var formFile in files)
 
 使用此技術所上傳的檔案 <xref:Microsoft.AspNetCore.Http.IFormFile> 會在處理之前，在記憶體或伺服器的磁片上進行緩衝處理。 在動作方法內， <xref:Microsoft.AspNetCore.Http.IFormFile> 內容可作為進行存取 <xref:System.IO.Stream> 。 除了本機檔案系統之外，檔案也可以儲存到網路共用或檔案儲存體服務（例如 [Azure Blob 儲存體](/azure/visual-studio/vs-storage-aspnet5-getting-started-blobs)）。
 
-如需在多個要上傳的檔案上進行迴圈，並使用安全檔案名的另一個範例，請參閱範例應用程式中的*Pages/BufferedMultipleFileUploadPhysical。*
+如需在多個要上傳的檔案上進行迴圈，並使用安全檔案名的另一個範例，請參閱範例應用程式中的 *Pages/BufferedMultipleFileUploadPhysical。*
 
 > [!WARNING]
 > [GetTempFileName](xref:System.IO.Path.GetTempFileName*) 會擲回， <xref:System.IO.IOException> 如果在不刪除先前的暫存檔的情況下建立65535個以上的檔案，則擲回。 65535檔案的限制為每個伺服器的限制。 如需 Windows OS 上這項限制的詳細資訊，請參閱下列主題中的備註：
@@ -1894,7 +1895,7 @@ public async Task<IActionResult> OnPostUploadAsync()
 
 [!code-csharp[](file-uploads/samples/2.x/SampleApp/Controllers/StreamingController.cs?name=snippet_UploadDatabase)]
 
-`MultipartRequestHelper` (*公用程式/MultipartRequestHelper .cs*) ：
+`MultipartRequestHelper` ( *公用程式/MultipartRequestHelper .cs* ) ：
 
 [!code-csharp[](file-uploads/samples/2.x/SampleApp/Utilities/MultipartRequestHelper.cs)]
 
@@ -1992,7 +1993,7 @@ Razor從開始，一律 <xref:System.Net.WebUtility.HtmlEncode*> 是使用者要
 
 限制上傳檔案的大小。
 
-在範例應用程式中，檔案大小限制為 2 MB (以位元組) 表示。 這項限制是透過[Configuration](xref:fundamentals/configuration/index)檔案*appsettings.js*的設定提供：
+在範例應用程式中，檔案大小限制為 2 MB (以位元組) 表示。 這項限制是透過 [檔案的設定](xref:fundamentals/configuration/index) 提供的 *appsettings.json* ：
 
 ```json
 {

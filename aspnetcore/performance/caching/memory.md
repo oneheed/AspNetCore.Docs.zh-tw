@@ -6,6 +6,7 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 02/02/2020
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -17,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: performance/caching/memory
-ms.openlocfilehash: c4d21992695828e81e03eca92f167c0a3d69c724
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: 4d5f459d54a3c74a2eb23a50db6537eeaf8596b3
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88627282"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93061440"
 ---
 # <a name="cache-in-memory-in-aspnet-core"></a>ASP.NET Core 中的快取記憶體
 
@@ -65,11 +66,11 @@ Web 伺服陣列中的非粘滯話需要 [分散式](distributed.md) 快取，�
 ## <a name="use-imemorycache"></a>使用 IMemoryCache
 
 > [!WARNING]
-> 使用來自相依性[插入](xref:fundamentals/dependency-injection)的*共用*記憶體快取，以及呼叫 `SetSize` 、 `Size` 或 `SizeLimit` 來限制快取大小，可能會導致應用程式失敗。 在快取上設定大小限制時，所有專案都必須在新增時指定大小。 這可能會導致問題，因為開發人員可能無法完全掌控使用共用快取的內容。 例如，Entity Framework Core 會使用共用快取，且不會指定大小。 如果應用程式設定快取大小限制並使用 EF Core，應用程式會擲回 `InvalidOperationException` 。
+> 使用來自相依性 [插入](xref:fundamentals/dependency-injection)的 *共用* 記憶體快取，以及呼叫 `SetSize` 、 `Size` 或 `SizeLimit` 來限制快取大小，可能會導致應用程式失敗。 在快取上設定大小限制時，所有專案都必須在新增時指定大小。 這可能會導致問題，因為開發人員可能無法完全掌控使用共用快取的內容。 例如，Entity Framework Core 會使用共用快取，且不會指定大小。 如果應用程式設定快取大小限制並使用 EF Core，應用程式會擲回 `InvalidOperationException` 。
 > 使用 `SetSize` 、或來限制快取時，請建立快取 `Size` `SizeLimit` singleton 以進行快取。 如需詳細資訊和範例，請參閱 [使用 SetSize、大小和 SizeLimit 來限制](#use-setsize-size-and-sizelimit-to-limit-cache-size)快取大小。
 > 共用快取是由其他架構或程式庫共用。 例如，EF Core 會使用共用快取，且不會指定大小。 
 
-記憶體內部快取是從使用相依性[插入](xref:fundamentals/dependency-injection)的應用程式所參考的*服務*。 在函式 `IMemoryCache` 中要求實例：
+記憶體內部快取是從使用相依性 [插入](xref:fundamentals/dependency-injection)的應用程式所參考的 *服務* 。 在函式 `IMemoryCache` 中要求實例：
 
 [!code-csharp[](memory/3.0sample/WebCacheSample/Controllers/HomeController.cs?name=snippet_ctor)]
 
@@ -246,10 +247,10 @@ Web 伺服陣列中的非粘滯話需要 [分散式](distributed.md) 快取，�
 ## <a name="using-imemorycache"></a>使用 IMemoryCache
 
 > [!WARNING]
-> 使用來自相依性[插入](xref:fundamentals/dependency-injection)的*共用*記憶體快取，以及呼叫 `SetSize` 、 `Size` 或 `SizeLimit` 來限制快取大小，可能會導致應用程式失敗。 在快取上設定大小限制時，所有專案都必須在新增時指定大小。 這可能會導致問題，因為開發人員可能無法完全掌控使用共用快取的內容。 例如，Entity Framework Core 會使用共用快取，且不會指定大小。 如果應用程式設定快取大小限制並使用 EF Core，應用程式會擲回 `InvalidOperationException` 。
+> 使用來自相依性 [插入](xref:fundamentals/dependency-injection)的 *共用* 記憶體快取，以及呼叫 `SetSize` 、 `Size` 或 `SizeLimit` 來限制快取大小，可能會導致應用程式失敗。 在快取上設定大小限制時，所有專案都必須在新增時指定大小。 這可能會導致問題，因為開發人員可能無法完全掌控使用共用快取的內容。 例如，Entity Framework Core 會使用共用快取，且不會指定大小。 如果應用程式設定快取大小限制並使用 EF Core，應用程式會擲回 `InvalidOperationException` 。
 > 使用 `SetSize` 、或來限制快取時，請建立快取 `Size` `SizeLimit` singleton 以進行快取。 如需詳細資訊和範例，請參閱 [使用 SetSize、大小和 SizeLimit 來限制](#use-setsize-size-and-sizelimit-to-limit-cache-size)快取大小。
 
-記憶體內部快取是使用相依性[插入](../../fundamentals/dependency-injection.md)從您的應用程式參考的*服務*。 呼叫 `AddMemoryCache` 于 `ConfigureServices` ：
+記憶體內部快取是使用相依性 [插入](../../fundamentals/dependency-injection.md)從您的應用程式參考的 *服務* 。 呼叫 `AddMemoryCache` 于 `ConfigureServices` ：
 
 [!code-csharp[](memory/sample/WebCache/Startup.cs?highlight=9)]
 

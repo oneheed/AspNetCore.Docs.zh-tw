@@ -6,6 +6,7 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 7/23/2019
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -17,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: tutorials/razor-pages/validation
-ms.openlocfilehash: 86c523c69d3ee85f56bf1a51719a0bd93cbe97fc
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: 991a0f29c0edc5a220dfde69bd22dc4ed758394d
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88633548"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93060725"
 ---
 # <a name="part-8-add-validation-to-an-aspnet-core-no-locrazor-page"></a>第8部分：將驗證新增至 ASP.NET Core Razor 頁面
 
@@ -32,7 +33,7 @@ ms.locfileid: "88633548"
 
 ## <a name="validation"></a>驗證
 
-軟體開發的核心原則稱為 [DRY](https://wikipedia.org/wiki/Don%27t_repeat_yourself)("**D**on't **R**epeat **Y**ourself", 不重複原則)。 Razor 頁面會鼓勵開發環境指定一次，而且會反映在整個應用程式中。 DRY 有助於：
+軟體開發的核心原則稱為 [DRY](https://wikipedia.org/wiki/Don%27t_repeat_yourself)(" **D** on't **R** epeat **Y** ourself", 不重複原則)。 Razor 頁面會鼓勵開發環境指定一次，而且會反映在整個應用程式中。 DRY 有助於：
 
 * 降低應用程式中的程式碼數量。
 * 使程式碼較少出現錯誤，而且更容易進行測試和維護。
@@ -78,11 +79,11 @@ DataAnnotations 命名空間提供一組內建的驗證屬性 (attribute)，其�
 
 請注意表單在包含無效值的每個欄位中自動呈現驗證錯誤訊息的方式。 用戶端 (使用 JavaScript 和 jQuery) 與伺服器端 (當使用者已停用 JavaScript 時) 都會強制執行這些錯誤。
 
-明顯的好處是：**不**需要在 Create 或 Edit 頁面中進行程式碼變更。 一旦 DataAnnotations 套用至模型，就會啟用驗證 UI。 Razor本教學課程中建立的頁面會自動挑選驗證規則 (在模型類別的屬性) 上使用驗證屬性 `Movie` 。 使用 Edit 頁面測試驗證，會套用相同的驗證。
+明顯的好處是： **不** 需要在 Create 或 Edit 頁面中進行程式碼變更。 一旦 DataAnnotations 套用至模型，就會啟用驗證 UI。 Razor本教學課程中建立的頁面會自動挑選驗證規則 (在模型類別的屬性) 上使用驗證屬性 `Movie` 。 使用 Edit 頁面測試驗證，會套用相同的驗證。
 
 要一直到沒有任何用戶端驗證錯誤之後，才會將表單資料發佈到伺服器。 請確認表單資料不會經由下列一或多種方式發佈：
 
-* 將中斷點放置在 `OnPostAsync` 方法中。 提交表單 (選取 [建立]**** 或 [儲存]****)。 永遠不會叫用中斷點。
+* 將中斷點放置在 `OnPostAsync` 方法中。 提交表單 (選取 [建立]  或 [儲存]  )。 永遠不會叫用中斷點。
 * 使用 [Fiddler 工具](https://www.telerik.com/fiddler)。
 * 使用瀏覽器開發人員工具來監視網路流量。
 
@@ -124,7 +125,7 @@ Create 和 Edit 頁面中沒有任何驗證規則。 只有在 `Movie` 類別中
 
 `DataType` 屬性只提供檢視引擎將資料格式化的提示 (以及提供一些屬性，例如用於 URL 的 `<a>` 和用於電子郵件的 `<a href="mailto:EmailAddress.com">`)。 使用 `RegularExpression` 屬性來驗證資料的格式。 `DataType` 屬性可用於指定比資料庫內建類型更特定的資料類型。 `DataType` 屬性不是驗證屬性。 在範例應用程式中，只會顯示日期，而不含時間。
 
-`DataType` 列舉可提供給許多資料類型，例如 Date、Time、PhoneNumber、Currency、EmailAddress 等等。 `DataType` 屬性也可讓應用程式自動提供類型的特定功能。 例如，可針對 `DataType.EmailAddress` 建立 `mailto:` 連結。 在支援 HTML5 的瀏覽器中，可以為 `DataType.Date` 提供日期選取器。 這些 `DataType` 屬性會發出 html 5 `data-` (發音資料虛線) html 5 瀏覽器所取用的屬性。 `DataType` 屬性**不**會提供任何驗證。
+`DataType` 列舉可提供給許多資料類型，例如 Date、Time、PhoneNumber、Currency、EmailAddress 等等。 `DataType` 屬性也可讓應用程式自動提供類型的特定功能。 例如，可針對 `DataType.EmailAddress` 建立 `mailto:` 連結。 在支援 HTML5 的瀏覽器中，可以為 `DataType.Date` 提供日期選取器。 這些 `DataType` 屬性會發出 html 5 `data-` (發音資料虛線) html 5 瀏覽器所取用的屬性。 `DataType` 屬性 **不** 會提供任何驗證。
 
 `DataType.Date` 未指定顯示日期的格式。 根據預設，將依據以伺服器 `CultureInfo` 為基礎的預設格式顯示資料欄位。
 
@@ -186,7 +187,7 @@ CREATE TABLE [dbo].[Movie] (
 
 上述結構描述變更不會造成 EF 擲回例外狀況。 不過，請建立移轉，讓結構描述與模型一致。
 
- 從 [工具]**** 功能表中，選取 [NuGet 套件管理員] > [套件管理員主控台]****。
+ 從 [工具]  功能表中，選取 [NuGet 套件管理員] > [套件管理員主控台]  。
 在 PMC 中，輸入下列命令：
 
 ```powershell

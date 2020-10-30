@@ -6,6 +6,7 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 12/05/2019
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -17,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: aspnetcore-2.1
-ms.openlocfilehash: d10fd89a3eac34e855ba92673033edc541aa6393
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: 62fc9d866adcf05ff024501db68cce8bb8b11a98
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88632404"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93059711"
 ---
 # <a name="whats-new-in-aspnet-core-21"></a>ASP.NET Core 2.1 的新功能
 
@@ -54,7 +55,7 @@ ASP.NET Core 2.1 可讓您更輕鬆地在程式庫中建立並包含以架構為
 
 ASP.NET Core 2.1 [ASP.NET Core Identity](xref:security/authentication/identity) 以[ Razor 類別庫](xref:razor-pages/ui-class)的形式提供。 包含的應用程式 Identity 可以套用新的 Identity scaffolder，以選擇性地新增類別庫中包含的原始程式碼 Identity Razor (RCL) 。 建議您產生原始程式碼，以便能夠修改程式碼並變更行為。 例如，您可以指示 Scaffolder 產生註冊使用的程式碼。 產生的程式碼優先于 RCL 中的相同程式碼 Identity 。
 
-**未**包含驗證的應用程式可以套用 Identity SCAFFOLDER 來新增 RCL Identity 套件。 您可以選擇 Identity 要產生的程式碼。
+**未** 包含驗證的應用程式可以套用 Identity SCAFFOLDER 來新增 RCL Identity 套件。 您可以選擇 Identity 要產生的程式碼。
 
 如需詳細資訊，請參閱 [ Identity ASP.NET Core 專案中的 Scaffold](xref:security/authentication/scaffold-identity)。
 
@@ -92,7 +93,7 @@ ASP.NET Core 提供 API 和範本以利符合某些 [EU General Data Protection 
 
 引進新套件簡化測試的建立和執行。 [Microsoft.AspNetCore.Mvc.Testing](https://www.nuget.org/packages/Microsoft.AspNetCore.Mvc.Testing/) 套件處理下列工作：
 
-* 從已測試的應用程式將相依性檔案 (* \* d*) 複製到測試專案的*bin*資料夾中。
+* 從已測試的應用程式將相依性檔案 ( *\* d* ) 複製到測試專案的 *bin* 資料夾中。
 * 將內容的根目錄設定為經過測試之應用程式的專案根目錄，以便在執行測試時找到靜態檔案和頁面/檢視。
 * 提供 [WebApplicationFactory](/dotnet/api/microsoft.aspnetcore.mvc.testing.webapplicationfactory-1) 類別來簡化以 [TestServer](/dotnet/api/microsoft.aspnetcore.testhost.testserver) 啟動載入經過測試的應用程式。
 
@@ -172,7 +173,7 @@ Angular 範本以 Angular CLI 為基礎，React 範本以 create-react-app 為�
 
 ## <a name="no-locrazor-pages-in-an-area"></a>Razor 區域中的頁面
 
-Razor 頁面現在支援 [區域](xref:mvc/controllers/areas)。 若要查看區域範例，請 Razor 使用個別的使用者帳戶建立新的頁面 web 應用程式。 Razor具有個別使用者帳戶的頁面 web 應用程式包含 */Areas/ Identity /Pages*。
+Razor 頁面現在支援 [區域](xref:mvc/controllers/areas)。 若要查看區域範例，請 Razor 使用個別的使用者帳戶建立新的頁面 web 應用程式。 Razor具有個別使用者帳戶的頁面 web 應用程式包含 */Areas/ Identity /Pages* 。
 
 ## <a name="mvc-compatibility-version"></a>MVC 相容性版本
 

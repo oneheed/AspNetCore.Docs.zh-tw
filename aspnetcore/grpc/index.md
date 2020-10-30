@@ -6,6 +6,7 @@ monikerRange: '>= aspnetcore-3.0'
 ms.author: johluo
 ms.date: 09/20/2019
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -17,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: grpc/index
-ms.openlocfilehash: 4a2f86d906c7b268b1fb2a63c50a1b8f0dd2b154
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: 80f44e3845cc1e3c87d5d657807a318eb65e6c6f
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88633184"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93059893"
 ---
 # <a name="introduction-to-grpc-on-net-core"></a>.NET Core 上的 gRPC 簡介
 
@@ -46,7 +47,7 @@ gRPC 的主要優點包括：
 
 ## <a name="c-tooling-support-for-proto-files"></a>適用于 proto 檔案的 c # 工具支援
 
-gRPC 使用合約優先的方法來開發 API。 服務和訊息是在* \* proto*檔案中定義：
+gRPC 使用合約優先的方法來開發 API。 服務和訊息是在 *\* proto* 檔案中定義：
 
 ```protobuf
 syntax = "proto3";
@@ -64,10 +65,10 @@ message HelloReply {
 }
 ```
 
-服務、用戶端和訊息的 .NET 類型會透過在專案中包含* \* proto*檔案來自動產生：
+服務、用戶端和訊息的 .NET 類型會透過在專案中包含 *\* proto* 檔案來自動產生：
 
 * 將套件參考新增至 [Grpc 工具](https://www.nuget.org/packages/Grpc.Tools/) 套件。
-* 將* \* proto*檔新增至 `<Protobuf>` 專案群組。
+* 將 *\* proto* 檔新增至 `<Protobuf>` 專案群組。
 
 ```xml
 <ItemGroup>
@@ -105,7 +106,7 @@ public class GreeterService : Greeter.GreeterBase
 }
 ```
 
-`GreeterService`繼承自從 `GreeterBase` `Greeter` * \* proto*檔案中的服務產生的類型。 服務可供 *Startup.cs*中的用戶端存取：
+`GreeterService`繼承自從 `GreeterBase` `Greeter` *\* proto* 檔案中的服務產生的類型。 服務可供 *Startup.cs* 中的用戶端存取：
 
 ```csharp
 app.UseEndpoints(endpoints =>
@@ -118,7 +119,7 @@ app.UseEndpoints(endpoints =>
 
 ## <a name="call-grpc-services-with-a-net-client"></a>使用 .NET 用戶端呼叫 gRPC 服務
 
-gRPC 用戶端是[從* \* proto*檔案產生](xref:grpc/basics#generated-c-assets)的具體用戶端類型。 具體 gRPC 用戶端的方法會轉譯為* \* proto*檔案中的 gRPC 服務。
+gRPC 用戶端是 [從 *\* proto* 檔案產生](xref:grpc/basics#generated-c-assets)的具體用戶端類型。 具體 gRPC 用戶端的方法會轉譯為 *\* proto* 檔案中的 gRPC 服務。
 
 ```csharp
 var channel = GrpcChannel.ForAddress("https://localhost:5001");

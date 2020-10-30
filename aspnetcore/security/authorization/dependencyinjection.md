@@ -5,6 +5,7 @@ description: 瞭解如何使用相依性插入將授權需求處理常式插入 
 ms.author: riande
 ms.date: 10/14/2016
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -16,22 +17,22 @@ no-loc:
 - Razor
 - SignalR
 uid: security/authorization/dependencyinjection
-ms.openlocfilehash: 4bc7eb38262c8a94a84aacc978737a778bfd71a1
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: 6598a9c9cfd1e6597fffcc1aa0c53fa493532458
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88632560"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93060257"
 ---
 # <a name="dependency-injection-in-requirement-handlers-in-aspnet-core"></a>ASP.NET Core 中的需求處理常式中的相依性插入
 
 <a name="security-authorization-di"></a>
 
-使用相依性[插入](xref:fundamentals/dependency-injection)) ，在設定 (時，必須在服務集合中[註冊授權處理常式](xref:security/authorization/policies#handler-registration)。
+使用相依性[插入](xref:fundamentals/dependency-injection)進行設定時，必須在服務集合中[註冊授權處理常式](xref:security/authorization/policies#handler-registration)。
 
-假設您有想要在授權處理常式內評估的規則存放庫，而且該存放庫已在服務集合中註冊。 授權將會解析並插入至您的函式。
+假設您有想要在授權處理常式內評估的規則存放庫，而且該存放庫已在服務集合中註冊。 授權會解析並將其插入至函式。
 
-例如，如果您想要使用 ASP。您想要插入處理常式中的網路記錄基礎結構 `ILoggerFactory` 。 這類處理常式可能看起來像這樣：
+例如，使用 ASP。NET 的記錄基礎結構，插入 `ILoggerFactory` 處理常式中。 這類處理常式可能看起來像下列程式碼：
 
 ```csharp
 public class LoggingAuthorizationHandler : AuthorizationHandler<MyRequirement>
@@ -52,13 +53,13 @@ public class LoggingAuthorizationHandler : AuthorizationHandler<MyRequirement>
    }
    ```
 
-您會向註冊處理常式 `services.AddSingleton()` ：
+先前的處理常式可以在任何 [服務存留期](/dotnet/core/extensions/dependency-injection#service-lifetimes)註冊。 下列程式碼會使用 `AddSingleton` 來註冊先前的處理常式：
 
 ```csharp
 services.AddSingleton<IAuthorizationHandler, LoggingAuthorizationHandler>();
 ```
 
-當您的應用程式啟動時，將會建立處理常式的實例，而 DI 會將註冊的插入您的函式 `ILoggerFactory` 中。
+當應用程式啟動時，會建立處理常式的實例，而 DI 會將註冊的 `ILoggerFactory` 插入至函式。
 
 > [!NOTE]
 > 使用 Entity Framework 的處理常式不應該註冊為 singleton。

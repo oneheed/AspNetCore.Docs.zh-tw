@@ -7,6 +7,7 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 05/20/2020
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -18,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: fundamentals/configuration/options
-ms.openlocfilehash: 6eafad63bd4c49cee6a85108b37a8b61e1214bce
-ms.sourcegitcommit: d7991068bc6b04063f4bd836fc5b9591d614d448
+ms.openlocfilehash: dedc17d7d793a6fd2eac1c8017b704d98a86f1cb
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 10/06/2020
-ms.locfileid: "91762330"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93061089"
 ---
 # <a name="options-pattern-in-aspnet-core"></a>ASP.NET Core 中的選項模式
 
@@ -54,8 +55,7 @@ ms.locfileid: "91762330"
 
 <xref:Microsoft.Extensions.Options.IOptions%601>:
 
-* 不***支援：***
-  * 在應用程式啟動後讀取設定資料。
+* * **Not** _ 支援： _ 在應用程式啟動後讀取設定資料。
   * [具名選項](#named)
 * 註冊為 [Singleton](xref:fundamentals/dependency-injection#singleton) ，並且可以插入至任何 [服務存留期](xref:fundamentals/dependency-injection#service-lifetimes)。
 
@@ -123,7 +123,7 @@ ms.locfileid: "91762330"
 * 當多個設定區段系結至相同的屬性時，會很有用。
 * 會區分大小寫。
 
-請考慮下列 *appsettings.json* file：
+請考慮下列檔案 *appsettings.json* ：
 
 [!code-json[](~/fundamentals/configuration/options/samples/3.x/OptionsSample/appsettings.NO.json)]
 
@@ -170,7 +170,7 @@ ms.locfileid: "91762330"
 
 選項驗證可讓您驗證選項值。
 
-請考慮下列 *appsettings.json* file：
+請考慮下列檔案 *appsettings.json* ：
 
 [!code-json[](~/fundamentals/configuration/options/samples/3.x/OptionsValidationSample/appsettings.Dev2.json)]
 
@@ -320,7 +320,7 @@ ASP.NET Core 應用程式中會隱含參考 [Microsoft.Extensions.Options.Config
 
 一般選項設定是以範例應用程式中的範例 1 來示範。
 
-選項類別必須為非抽象，且具有公用的無參數建構函式。 下列 `MyOptions` 類別有兩個屬性，`Option1` 和 `Option2`。 設定預設值為選擇性，但在下列範例中，類別建構函式會設定 `Option1` 的預設值。 `Option2` 的預設值直接藉由初始化屬性來設定 (*Models/MyOptions.cs*)：
+選項類別必須為非抽象，且具有公用的無參數建構函式。 下列 `MyOptions` 類別有兩個屬性，`Option1` 和 `Option2`。 設定預設值為選擇性，但在下列範例中，類別建構函式會設定 `Option1` 的預設值。 `Option2` 的預設值直接藉由初始化屬性來設定 ( *Models/MyOptions.cs* )：
 
 [!code-csharp[](options/samples/2.x/OptionsSample/Models/MyOptions.cs?name=snippet1)]
 
@@ -328,7 +328,7 @@ ASP.NET Core 應用程式中會隱含參考 [Microsoft.Extensions.Options.Config
 
 [!code-csharp[](options/samples/2.x/OptionsSample/Startup.cs?name=snippet_Example1)]
 
-下列頁面模型使用[建構函式相依性插入](xref:mvc/controllers/dependency-injection)搭配 <xref:Microsoft.Extensions.Options.IOptionsMonitor%601> 來存取設定 (*Pages/Index.cshtml.cs*)：
+下列頁面模型使用 [建構函式相依性插入](xref:mvc/controllers/dependency-injection)搭配 <xref:Microsoft.Extensions.Options.IOptionsMonitor%601> 來存取設定 ( *Pages/Index.cshtml.cs* )：
 
 [!code-csharp[](options/samples/2.x/OptionsSample/Pages/Index.cshtml.cs?range=9)]
 
@@ -336,7 +336,7 @@ ASP.NET Core 應用程式中會隱含參考 [Microsoft.Extensions.Options.Config
 
 [!code-csharp[](options/samples/2.x/OptionsSample/Pages/Index.cshtml.cs?name=snippet_Example1)]
 
-範例的 *appsettings.json* 檔案指定 `option1` 和 `option2` 的值：
+範例的檔案會 *appsettings.json* 指定和的 `option1` 值 `option2` ：
 
 [!code-json[](options/samples/2.x/OptionsSample/appsettings.json?highlight=2-3)]
 
@@ -364,7 +364,7 @@ option1 = value1_from_json, option2 = -1
 
 使用委派設定簡單的選項是以範例應用程式中的範例 2 來示範。
 
-使用委派來設定選項值。 範例應用程式使用 `MyOptionsWithDelegateConfig` 類別 (*Models/MyOptionsWithDelegateConfig.cs*)：
+使用委派來設定選項值。 範例應用程式使用 `MyOptionsWithDelegateConfig` 類別 ( *Models/MyOptionsWithDelegateConfig.cs* )：
 
 [!code-csharp[](options/samples/2.x/OptionsSample/Models/MyOptionsWithDelegateConfig.cs?name=snippet1)]
 
@@ -372,7 +372,7 @@ option1 = value1_from_json, option2 = -1
 
 [!code-csharp[](options/samples/2.x/OptionsSample/Startup.cs?name=snippet_Example2)]
 
-*Index.cshtml.cs*：
+*Index.cshtml.cs* ：
 
 [!code-csharp[](options/samples/2.x/OptionsSample/Pages/Index.cshtml.cs?range=10)]
 
@@ -382,9 +382,9 @@ option1 = value1_from_json, option2 = -1
 
 您可以新增多個設定提供者。 設定提供者可在 NuGet 套件中找到，而且會依註冊順序套用。 如需詳細資訊，請參閱<xref:fundamentals/configuration/index>。
 
-每次呼叫 <xref:Microsoft.Extensions.Options.IConfigureOptions%601.Configure*> 時都會新增 <xref:Microsoft.Extensions.Options.IConfigureOptions%601> 服務到服務容器。 在上述範例中，`Option1` 和 `Option2` 的值都指定在 *appsettings.json* 中，但 `Option1` 和 `Option2` 的值會被設定的委派所覆寫。
+每次呼叫 <xref:Microsoft.Extensions.Options.IConfigureOptions%601.Configure*> 時都會新增 <xref:Microsoft.Extensions.Options.IConfigureOptions%601> 服務到服務容器。 在上述範例中，和的值 `Option1` 都 `Option2` 是指定于中 *appsettings.json* ，但是和的值 `Option1` `Option2` 會由設定的委派覆寫。
 
-啟用多個設定服務時，最後一個指定的設定來源會「勝出」** 並設定此組態值。 當應用程式執行時，頁面模型的 `OnGet` 方法會傳回字串，顯示選項類別值：
+啟用多個設定服務時，最後一個指定的設定來源會「勝出」  並設定此組態值。 當應用程式執行時，頁面模型的 `OnGet` 方法會傳回字串，顯示選項類別值：
 
 ```html
 delegate_option1 = value1_configured_by_delegate, delegate_option2 = 500
@@ -396,23 +396,23 @@ delegate_option1 = value1_configured_by_delegate, delegate_option2 = 500
 
 應用程式應該建立屬於應用程式中特定案例群組 (類別) 的選項類別。 需要組態值的應用程式組件應該只能存取它們使用的設定值。
 
-將選項繫結至組態時，選項類型中的每一個屬性都會繫結至 `property[:sub-property:]` 格式的組態索引鍵。 例如，`MyOptions.Option1` 屬性繫結至索引鍵 `Option1`，其是從 *appsettings.json* 中的 `option1` 屬性讀取。
+將選項繫結至組態時，選項類型中的每一個屬性都會繫結至 `property[:sub-property:]` 格式的組態索引鍵。 例如， `MyOptions.Option1` 屬性會系結至索引鍵，這個索引鍵 `Option1` 是從的 `option1` 屬性中讀取的 *appsettings.json* 。
 
-在下列程式碼中，第三個 <xref:Microsoft.Extensions.Options.IConfigureOptions%601> 服務新增至服務容器。 它將 `MySubOptions` 繫結至 *appSettings.json* 檔案的 `subsection` 區段：
+在下列程式碼中，第三個 <xref:Microsoft.Extensions.Options.IConfigureOptions%601> 服務新增至服務容器。 它會系結至檔案的 `MySubOptions` 區段 `subsection` *appsettings.json* ：
 
 [!code-csharp[](options/samples/2.x/OptionsSample/Startup.cs?name=snippet_Example3)]
 
 `GetSection`方法需要 <xref:Microsoft.Extensions.Configuration?displayProperty=fullName> 命名空間。
 
-範例的 *appsettings.json* 檔案會定義 `subsection` 成員，並具有 `suboption1` 和 `suboption2` 的索引鍵：
+範例的檔案會 *appsettings.json* 定義 `subsection` 具有和之索引鍵的成員 `suboption1` `suboption2` ：
 
 [!code-json[](options/samples/2.x/OptionsSample/appsettings.json?highlight=4-7)]
 
-`MySubOptions` 類別會定義屬性 `SubOption1` 和 `SubOption2`，來保存選項值 (*Models/MySubOptions.cs*)：
+`MySubOptions` 類別會定義屬性 `SubOption1` 和 `SubOption2`，來保存選項值 ( *Models/MySubOptions.cs* )：
 
 [!code-csharp[](options/samples/2.x/OptionsSample/Models/MySubOptions.cs?name=snippet1)]
 
-頁面模型的 `OnGet` 方法會傳回具有選項值 (*Pages/Index.cshtml.cs*) 的字串：
+頁面模型的 `OnGet` 方法會傳回具有選項值 ( *Pages/Index.cshtml.cs* ) 的字串：
 
 [!code-csharp[](options/samples/2.x/OptionsSample/Pages/Index.cshtml.cs?range=11)]
 
@@ -435,7 +435,7 @@ subOption1 = subvalue1_from_json, subOption2 = 200
 * 具有指示詞的 Razor 頁面或 MVC 視圖 [`@inject`](xref:mvc/views/razor#inject) Razor 。
 * 頁面或視圖模型。
 
-範例應用程式中的下列範例會插入 <xref:Microsoft.Extensions.Options.IOptionsMonitor%601> 頁面模型中， (*Pages/Index. cshtml*) ：
+範例應用程式中的下列範例會插入 <xref:Microsoft.Extensions.Options.IOptionsMonitor%601> 頁面模型中， ( *Pages/Index. cshtml* ) ：
 
 [!code-csharp[](options/samples/2.x/OptionsSample/Pages/Index.cshtml.cs?range=9)]
 
@@ -462,7 +462,7 @@ subOption1 = subvalue1_from_json, subOption2 = 200
 * `IOptionsMonitor` 是 [單一服務](xref:fundamentals/dependency-injection#singleton) ，可隨時抓取目前的選項值，這在單一相依性中特別有用。
 * `IOptionsSnapshot` 是限 [域的服務](xref:fundamentals/dependency-injection#scoped) ，會在建立物件時提供選項的快照 `IOptionsSnapshot<T>` 。 選項快照集的設計目的是要搭配使用暫時性和限定範圍的相依性。
 
-下列範例示範在 *appsettings.json* 變更之後如何建立新的 <xref:Microsoft.Extensions.Options.IOptionsSnapshot%601> (*Pages/Index.cshtml.cs*)。 對伺服器的多個要求會傳回 *appsettings.json* 檔案所提供的常數值，直到檔案變更並重新載入組態為止。
+下列範例示範如何在 <xref:Microsoft.Extensions.Options.IOptionsSnapshot%601> *appsettings.json* 變更 ( *頁面/索引* ) 之後建立新的。 伺服器的多個要求會傳回檔案所提供的常數值 *appsettings.json* ，直到檔案變更和設定重載為止。
 
 [!code-csharp[](options/samples/2.x/OptionsSample/Pages/Index.cshtml.cs?range=12)]
 
@@ -470,13 +470,13 @@ subOption1 = subvalue1_from_json, subOption2 = 200
 
 [!code-csharp[](options/samples/2.x/OptionsSample/Pages/Index.cshtml.cs?name=snippet_Example5)]
 
-下圖顯示從 *appsettings.json* 檔案載入的初始 `option1` 和 `option2` 值：
+下圖顯示從檔案載入的初始 `option1` 和 `option2` 值 *appsettings.json* ：
 
 ```html
 snapshot option1 = value1_from_json, snapshot option2 = -1
 ```
 
-將 *appsettings.json* 檔案中的值變更為 `value1_from_json UPDATED` 和 `200`。 將 *appsettings.js儲存在檔案上* 。 重新整理瀏覽器，以查看選項值更新：
+將檔案中的值變更 *appsettings.json* 為 `value1_from_json UPDATED` 和 `200` 。 儲存 *appsettings.json* 檔案。 重新整理瀏覽器，以查看選項值更新：
 
 ```html
 snapshot option1 = value1_from_json UPDATED, snapshot option2 = 200
@@ -490,7 +490,7 @@ snapshot option1 = value1_from_json UPDATED, snapshot option2 = 200
 
 [!code-csharp[](options/samples/2.x/OptionsSample/Startup.cs?name=snippet_Example6)]
 
-範例應用程式會使用　<xref:Microsoft.Extensions.Options.IOptionsSnapshot`1.Get*> (*Pages/Index.cshtml.cs*) 來存取具名選項：
+範例應用程式會使用　<xref:Microsoft.Extensions.Options.IOptionsSnapshot`1.Get*> ( *Pages/Index.cshtml.cs* ) 來存取具名選項：
 
 [!code-csharp[](options/samples/2.x/OptionsSample/Pages/Index.cshtml.cs?range=13-14)]
 
@@ -505,7 +505,7 @@ named_options_1: option1 = value1_from_json, option2 = -1
 named_options_2: option1 = named_options_2_value1_from_action, option2 = 5
 ```
 
-`named_options_1` 值會從設定提供，這會從 *appsettings.json* 檔案載入。 `named_options_2` 值是由以下提供：
+`named_options_1` 系統會從設定中提供值，這些值是從檔案載入的 *appsettings.json* 。 `named_options_2` 值是由以下提供：
 
 * `ConfigureServices` 中 `Option1` 的 `named_options_2` 委派。
 * `MyOptions` 類別所提供的 `Option2` 預設值。
@@ -593,7 +593,7 @@ catch (OptionsValidationException e)
 當選項執行個體建立之後，便會執行驗證。 選項實例保證會在第一次存取時通過驗證。
 
 > [!IMPORTANT]
-> 選項驗證不會在建立選項實例之後防止修改選項。 例如，在 `IOptionsSnapshot` 第一次存取選項時，會針對每個要求建立和驗證選項一次。 在對 `IOptionsSnapshot` *相同要求進行*後續的存取嘗試時，不會再次驗證這些選項。
+> 選項驗證不會在建立選項實例之後防止修改選項。 例如，在 `IOptionsSnapshot` 第一次存取選項時，會針對每個要求建立和驗證選項一次。 在對 `IOptionsSnapshot` *相同要求進行* 後續的存取嘗試時，不會再次驗證這些選項。
 
 `Validate` 方法可接受 `Func<TOptions, bool>`。 若要完整地自訂驗證，請實作 `IValidateOptions<TOptions>`，它允許：
 
@@ -742,7 +742,7 @@ public void Configure(IApplicationBuilder app, IOptionsMonitor<MyOptions> option
 
 一般選項設定是以範例應用程式中的範例 1 來示範。
 
-選項類別必須為非抽象，且具有公用的無參數建構函式。 下列 `MyOptions` 類別有兩個屬性，`Option1` 和 `Option2`。 設定預設值為選擇性，但在下列範例中，類別建構函式會設定 `Option1` 的預設值。 `Option2` 的預設值直接藉由初始化屬性來設定 (*Models/MyOptions.cs*)：
+選項類別必須為非抽象，且具有公用的無參數建構函式。 下列 `MyOptions` 類別有兩個屬性，`Option1` 和 `Option2`。 設定預設值為選擇性，但在下列範例中，類別建構函式會設定 `Option1` 的預設值。 `Option2` 的預設值直接藉由初始化屬性來設定 ( *Models/MyOptions.cs* )：
 
 [!code-csharp[](options/samples/2.x/OptionsSample/Models/MyOptions.cs?name=snippet1)]
 
@@ -750,7 +750,7 @@ public void Configure(IApplicationBuilder app, IOptionsMonitor<MyOptions> option
 
 [!code-csharp[](options/samples/2.x/OptionsSample/Startup.cs?name=snippet_Example1)]
 
-下列頁面模型使用[建構函式相依性插入](xref:mvc/controllers/dependency-injection)搭配 <xref:Microsoft.Extensions.Options.IOptionsMonitor%601> 來存取設定 (*Pages/Index.cshtml.cs*)：
+下列頁面模型使用 [建構函式相依性插入](xref:mvc/controllers/dependency-injection)搭配 <xref:Microsoft.Extensions.Options.IOptionsMonitor%601> 來存取設定 ( *Pages/Index.cshtml.cs* )：
 
 [!code-csharp[](options/samples/2.x/OptionsSample/Pages/Index.cshtml.cs?range=9)]
 
@@ -758,7 +758,7 @@ public void Configure(IApplicationBuilder app, IOptionsMonitor<MyOptions> option
 
 [!code-csharp[](options/samples/2.x/OptionsSample/Pages/Index.cshtml.cs?name=snippet_Example1)]
 
-範例的 *appsettings.json* 檔案指定 `option1` 和 `option2` 的值：
+範例的檔案會 *appsettings.json* 指定和的 `option1` 值 `option2` ：
 
 [!code-json[](options/samples/2.x/OptionsSample/appsettings.json?highlight=2-3)]
 
@@ -786,7 +786,7 @@ option1 = value1_from_json, option2 = -1
 
 使用委派設定簡單的選項是以範例應用程式中的範例 2 來示範。
 
-使用委派來設定選項值。 範例應用程式使用 `MyOptionsWithDelegateConfig` 類別 (*Models/MyOptionsWithDelegateConfig.cs*)：
+使用委派來設定選項值。 範例應用程式使用 `MyOptionsWithDelegateConfig` 類別 ( *Models/MyOptionsWithDelegateConfig.cs* )：
 
 [!code-csharp[](options/samples/2.x/OptionsSample/Models/MyOptionsWithDelegateConfig.cs?name=snippet1)]
 
@@ -794,7 +794,7 @@ option1 = value1_from_json, option2 = -1
 
 [!code-csharp[](options/samples/2.x/OptionsSample/Startup.cs?name=snippet_Example2)]
 
-*Index.cshtml.cs*：
+*Index.cshtml.cs* ：
 
 [!code-csharp[](options/samples/2.x/OptionsSample/Pages/Index.cshtml.cs?range=10)]
 
@@ -804,9 +804,9 @@ option1 = value1_from_json, option2 = -1
 
 您可以新增多個設定提供者。 設定提供者可在 NuGet 套件中找到，而且會依註冊順序套用。 如需詳細資訊，請參閱<xref:fundamentals/configuration/index>。
 
-每次呼叫 <xref:Microsoft.Extensions.Options.IConfigureOptions%601.Configure*> 時都會新增 <xref:Microsoft.Extensions.Options.IConfigureOptions%601> 服務到服務容器。 在上述範例中，`Option1` 和 `Option2` 的值都指定在 *appsettings.json* 中，但 `Option1` 和 `Option2` 的值會被設定的委派所覆寫。
+每次呼叫 <xref:Microsoft.Extensions.Options.IConfigureOptions%601.Configure*> 時都會新增 <xref:Microsoft.Extensions.Options.IConfigureOptions%601> 服務到服務容器。 在上述範例中，和的值 `Option1` 都 `Option2` 是指定于中 *appsettings.json* ，但是和的值 `Option1` `Option2` 會由設定的委派覆寫。
 
-啟用多個設定服務時，最後一個指定的設定來源會「勝出」** 並設定此組態值。 當應用程式執行時，頁面模型的 `OnGet` 方法會傳回字串，顯示選項類別值：
+啟用多個設定服務時，最後一個指定的設定來源會「勝出」  並設定此組態值。 當應用程式執行時，頁面模型的 `OnGet` 方法會傳回字串，顯示選項類別值：
 
 ```html
 delegate_option1 = value1_configured_by_delegate, delegate_option2 = 500
@@ -818,23 +818,23 @@ delegate_option1 = value1_configured_by_delegate, delegate_option2 = 500
 
 應用程式應該建立屬於應用程式中特定案例群組 (類別) 的選項類別。 需要組態值的應用程式組件應該只能存取它們使用的設定值。
 
-將選項繫結至組態時，選項類型中的每一個屬性都會繫結至 `property[:sub-property:]` 格式的組態索引鍵。 例如，`MyOptions.Option1` 屬性繫結至索引鍵 `Option1`，其是從 *appsettings.json* 中的 `option1` 屬性讀取。
+將選項繫結至組態時，選項類型中的每一個屬性都會繫結至 `property[:sub-property:]` 格式的組態索引鍵。 例如， `MyOptions.Option1` 屬性會系結至索引鍵，這個索引鍵 `Option1` 是從的 `option1` 屬性中讀取的 *appsettings.json* 。
 
-在下列程式碼中，第三個 <xref:Microsoft.Extensions.Options.IConfigureOptions%601> 服務新增至服務容器。 它將 `MySubOptions` 繫結至 *appSettings.json* 檔案的 `subsection` 區段：
+在下列程式碼中，第三個 <xref:Microsoft.Extensions.Options.IConfigureOptions%601> 服務新增至服務容器。 它會系結至檔案的 `MySubOptions` 區段 `subsection` *appsettings.json* ：
 
 [!code-csharp[](options/samples/2.x/OptionsSample/Startup.cs?name=snippet_Example3)]
 
 `GetSection`方法需要 <xref:Microsoft.Extensions.Configuration?displayProperty=fullName> 命名空間。
 
-範例的 *appsettings.json* 檔案會定義 `subsection` 成員，並具有 `suboption1` 和 `suboption2` 的索引鍵：
+範例的檔案會 *appsettings.json* 定義 `subsection` 具有和之索引鍵的成員 `suboption1` `suboption2` ：
 
 [!code-json[](options/samples/2.x/OptionsSample/appsettings.json?highlight=4-7)]
 
-`MySubOptions` 類別會定義屬性 `SubOption1` 和 `SubOption2`，來保存選項值 (*Models/MySubOptions.cs*)：
+`MySubOptions` 類別會定義屬性 `SubOption1` 和 `SubOption2`，來保存選項值 ( *Models/MySubOptions.cs* )：
 
 [!code-csharp[](options/samples/2.x/OptionsSample/Models/MySubOptions.cs?name=snippet1)]
 
-頁面模型的 `OnGet` 方法會傳回具有選項值 (*Pages/Index.cshtml.cs*) 的字串：
+頁面模型的 `OnGet` 方法會傳回具有選項值 ( *Pages/Index.cshtml.cs* ) 的字串：
 
 [!code-csharp[](options/samples/2.x/OptionsSample/Pages/Index.cshtml.cs?range=11)]
 
@@ -852,7 +852,7 @@ subOption1 = subvalue1_from_json, subOption2 = 200
 
 檢視模型提供的選項或使用直接檢視插入提供的選項是以範例應用程式中的範例 4 來示範。
 
-可以在檢視模型中提供選項，或藉由將 <xref:Microsoft.Extensions.Options.IOptionsMonitor%601> 直接插入至檢視來提供選項 (*Pages/Index.cshtml.cs*)：
+可以在檢視模型中提供選項，或藉由將 <xref:Microsoft.Extensions.Options.IOptionsMonitor%601> 直接插入至檢視來提供選項 ( *Pages/Index.cshtml.cs* )：
 
 [!code-csharp[](options/samples/2.x/OptionsSample/Pages/Index.cshtml.cs?range=9)]
 
@@ -876,7 +876,7 @@ subOption1 = subvalue1_from_json, subOption2 = 200
 
 在要求的存留期內存取及快取選項時，會針對每個要求計算一次選項。
 
-下列範例示範在 *appsettings.json* 變更之後如何建立新的 <xref:Microsoft.Extensions.Options.IOptionsSnapshot%601> (*Pages/Index.cshtml.cs*)。 對伺服器的多個要求會傳回 *appsettings.json* 檔案所提供的常數值，直到檔案變更並重新載入組態為止。
+下列範例示範如何在 <xref:Microsoft.Extensions.Options.IOptionsSnapshot%601> *appsettings.json* 變更 ( *頁面/索引* ) 之後建立新的。 伺服器的多個要求會傳回檔案所提供的常數值 *appsettings.json* ，直到檔案變更和設定重載為止。
 
 [!code-csharp[](options/samples/2.x/OptionsSample/Pages/Index.cshtml.cs?range=12)]
 
@@ -884,13 +884,13 @@ subOption1 = subvalue1_from_json, subOption2 = 200
 
 [!code-csharp[](options/samples/2.x/OptionsSample/Pages/Index.cshtml.cs?name=snippet_Example5)]
 
-下圖顯示從 *appsettings.json* 檔案載入的初始 `option1` 和 `option2` 值：
+下圖顯示從檔案載入的初始 `option1` 和 `option2` 值 *appsettings.json* ：
 
 ```html
 snapshot option1 = value1_from_json, snapshot option2 = -1
 ```
 
-將 *appsettings.json* 檔案中的值變更為 `value1_from_json UPDATED` 和 `200`。 將 *appsettings.js儲存在檔案上* 。 重新整理瀏覽器，以查看選項值更新：
+將檔案中的值變更 *appsettings.json* 為 `value1_from_json UPDATED` 和 `200` 。 儲存 *appsettings.json* 檔案。 重新整理瀏覽器，以查看選項值更新：
 
 ```html
 snapshot option1 = value1_from_json UPDATED, snapshot option2 = 200
@@ -904,7 +904,7 @@ snapshot option1 = value1_from_json UPDATED, snapshot option2 = 200
 
 [!code-csharp[](options/samples/2.x/OptionsSample/Startup.cs?name=snippet_Example6)]
 
-範例應用程式會使用　<xref:Microsoft.Extensions.Options.IOptionsSnapshot`1.Get*> (*Pages/Index.cshtml.cs*) 來存取具名選項：
+範例應用程式會使用　<xref:Microsoft.Extensions.Options.IOptionsSnapshot`1.Get*> ( *Pages/Index.cshtml.cs* ) 來存取具名選項：
 
 [!code-csharp[](options/samples/2.x/OptionsSample/Pages/Index.cshtml.cs?range=13-14)]
 
@@ -919,7 +919,7 @@ named_options_1: option1 = value1_from_json, option2 = -1
 named_options_2: option1 = named_options_2_value1_from_action, option2 = 5
 ```
 
-`named_options_1` 值會從設定提供，這會從 *appsettings.json* 檔案載入。 `named_options_2` 值是由以下提供：
+`named_options_1` 系統會從設定中提供值，這些值是從檔案載入的 *appsettings.json* 。 `named_options_2` 值是由以下提供：
 
 * `ConfigureServices` 中 `Option1` 的 `named_options_2` 委派。
 * `MyOptions` 類別所提供的 `Option2` 預設值。

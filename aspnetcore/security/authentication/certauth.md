@@ -6,6 +6,7 @@ monikerRange: '>= aspnetcore-3.0'
 ms.author: bdorrans
 ms.date: 07/16/2020
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -17,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: security/authentication/certauth
-ms.openlocfilehash: 57d46e34993148943b1e9680a372405be9c80605
-ms.sourcegitcommit: 6c82d78662332cd40d614019b9ed17c46e25be28
+ms.openlocfilehash: 83525a4c1e87a60b57130c1bba14360c7d03f552
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 09/29/2020
-ms.locfileid: "91424200"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93061375"
 ---
 # <a name="configure-certificate-authentication-in-aspnet-core"></a>在 ASP.NET Core 中設定憑證驗證
 
@@ -234,7 +235,7 @@ services.AddAuthentication(
 
 ### <a name="kestrel"></a>Kestrel
 
-在 *Program.cs*中，設定 Kestrel，如下所示：
+在 *Program.cs* 中，設定 Kestrel，如下所示：
 
 ```csharp
 public static void Main(string[] args)
@@ -266,8 +267,8 @@ public static IHostBuilder CreateHostBuilder(string[] args)
 在 IIS 管理員中完成下列步驟：
 
 1. 從 [ **連接** ] 索引標籤中選取您的網站。
-1. 在 [**功能] 視圖**視窗中，按兩下 [ **SSL 設定**] 選項。
-1. 選取 [**需要 SSL** ] 核取方塊，然後在 [**用戶端憑證**] 區段中選取 [**需要**] 選項按鈕。
+1. 在 [ **功能] 視圖** 視窗中，按兩下 [ **SSL 設定** ] 選項。
+1. 選取 [ **需要 SSL** ] 核取方塊，然後在 [ **用戶端憑證** ] 區段中選取 [ **需要** ] 選項按鈕。
 
 ![IIS 中的用戶端憑證設定](README-IISConfig.png)
 

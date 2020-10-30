@@ -6,6 +6,7 @@ ms.author: scaddie
 ms.custom: mvc
 ms.date: 05/26/2020
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -17,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: migration/webapi
-ms.openlocfilehash: e3e46f8050ba87c3108885341675c9d2a2cb7847
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: 320805c0d40bf06cee384e6d98caea5c420d45bc
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88635160"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93061466"
 ---
 # <a name="migrate-from-aspnet-web-api-to-aspnet-core"></a>從 ASP.NET Web API 遷移至 ASP.NET Core
 
@@ -34,7 +35,7 @@ ASP.NET 4.x Web API 是一種 HTTP 服務，可達到各式各樣的用戶端，
 
 ::: moniker range=">= aspnetcore-3.0"
 
-## <a name="prerequisites"></a>Prerequisites
+## <a name="prerequisites"></a>必要條件
 
 [!INCLUDE [prerequisites](../includes/net-core-prereqs-vs-3.1.md)]
 
@@ -42,11 +43,11 @@ ASP.NET 4.x Web API 是一種 HTTP 服務，可達到各式各樣的用戶端，
 
 本文使用消費者入門中建立的 *ProductsApp* 專案搭配 [ASP.NET Web API 2](/aspnet/web-api/overview/getting-started-with-aspnet-web-api/tutorial-your-first-web-api)。 在該專案中，基本的 ASP.NET 4.x Web API 專案會依照下列方式設定。
 
-在 *Global.asax.cs*中，呼叫會進行 `WebApiConfig.Register` 下列動作：
+在 *Global.asax.cs* 中，呼叫會進行 `WebApiConfig.Register` 下列動作：
 
 [!code-csharp[](webapi/sample/3.x/ProductsApp/Global.asax.cs?highlight=14)]
 
-`WebApiConfig`類別可在*App_Start*資料夾中找到，並具有靜態 `Register` 方法：
+`WebApiConfig`類別可在 *App_Start* 資料夾中找到，並具有靜態 `Register` 方法：
 
 [!code-csharp[](webapi/sample/3.x/ProductsApp/App_Start/WebApiConfig.cs)]
 
@@ -62,17 +63,17 @@ ASP.NET 4.x Web API 是一種 HTTP 服務，可達到各式各樣的用戶端，
 
 在 Visual Studio 中建立新的空白解決方案，並新增 ASP.NET 4.x Web API 專案以進行遷移：
 
-1. 從 [檔案]**** 功能表選取 [新增]**[專案]** > ****。
-1. 選取 **空白的解決方案** 範本，然後選取 **[下一步]**。
-1. 將方案命名為 *WebAPIMigration*。 選取 [建立]。
+1. 從 [ **檔案** ] 功能表選取 [ **新增** > **專案** ]。
+1. 選取 **空白的解決方案** 範本，然後選取 **[下一步]** 。
+1. 將方案命名為 *WebAPIMigration* 。 選取 [建立]。
 1. 將現有的 *ProductsApp* 專案加入至方案。
 
 新增要遷移至的 API 專案：
 
 1. 將新的 **ASP.NET Core Web 應用程式** 專案加入至方案。
-1. 在 [ **設定您的新專案** ] 對話方塊中，將專案命名為 *ProductsCore*，然後選取 [ **建立**]。
-1. 在 [ **建立新的 ASP.NET Core Web 應用程式** ] 對話方塊中，確認已選取 [ **.net Core** ] 和 [ **ASP.NET Core 3.1** ]。 選取 [API]**** 專案範本，然後選取 [確定]****。
-1. 從新的*ProductsCore*專案中移除*WeatherForecast.cs*和*控制器/WeatherForecastController .cs*範例檔案。
+1. 在 [ **設定您的新專案** ] 對話方塊中，將專案命名為 *ProductsCore* ，然後選取 [ **建立** ]。
+1. 在 [ **建立新的 ASP.NET Core Web 應用程式** ] 對話方塊中，確認已選取 [ **.net Core** ] 和 [ **ASP.NET Core 3.1** ]。 選取 [API]  專案範本，然後選取 [確定]  。
+1. 從新的 *ProductsCore* 專案中移除 *WeatherForecast.cs* 和 *控制器/WeatherForecastController .cs* 範例檔案。
 
 方案現在包含兩個專案。 下列各節說明如何將 *ProductsApp* 專案的內容遷移至 *ProductsCore* 專案。
 
@@ -82,7 +83,7 @@ ASP.NET Core 不會使用 *App_Start* 資料夾或 *global.asax* 檔案。 此�
 
 `Startup` 類別：
 
-* 取代 *global.asax*。
+* 取代 *global.asax* 。
 * 處理所有應用程式啟動工作。
 
 如需詳細資訊，請參閱<xref:fundamentals/startup>。
@@ -145,7 +146,7 @@ ASP.NET Core *API* 專案範本在產生的程式碼中包含端點路由設定�
     * 將 [`[HttpGet]`](xref:Microsoft.AspNetCore.Mvc.HttpGetAttribute) 屬性套用至 `GetAllProducts` 動作。
     * 將 `[HttpGet("{id}")]` 屬性套用至 `GetProduct` 動作。
 
-執行已遷移的專案，然後流覽至 `/api/products` 。 三個產品的完整清單隨即出現。 瀏覽至 `/api/products/1` 。 第一個產品隨即出現。
+執行已遷移的專案，然後流覽至 `/api/products` 。 三個產品的完整清單隨即出現。 瀏覽至 `/api/products/1`。 第一個產品隨即出現。
 
 ## <a name="additional-resources"></a>其他資源
 
@@ -156,7 +157,7 @@ ASP.NET Core *API* 專案範本在產生的程式碼中包含端點路由設定�
 ::: moniker-end
 
 ::: moniker range="<= aspnetcore-2.2"
-## <a name="prerequisites"></a>Prerequisites
+## <a name="prerequisites"></a>必要條件
 
 [!INCLUDE [prerequisites](../includes/net-core-prereqs-vs2019-2.2.md)]
 
@@ -164,11 +165,11 @@ ASP.NET Core *API* 專案範本在產生的程式碼中包含端點路由設定�
 
 本文使用消費者入門中建立的 *ProductsApp* 專案搭配 [ASP.NET Web API 2](/aspnet/web-api/overview/getting-started-with-aspnet-web-api/tutorial-your-first-web-api)。 在該專案中，基本的 ASP.NET 4.x Web API 專案會依照下列方式設定。
 
-在 *Global.asax.cs*中，呼叫會進行 `WebApiConfig.Register` 下列動作：
+在 *Global.asax.cs* 中，呼叫會進行 `WebApiConfig.Register` 下列動作：
 
 [!code-csharp[](webapi/sample/2.x/ProductsApp/Global.asax.cs?highlight=14)]
 
-`WebApiConfig`類別可在*App_Start*資料夾中找到，並具有靜態 `Register` 方法：
+`WebApiConfig`類別可在 *App_Start* 資料夾中找到，並具有靜態 `Register` 方法：
 
 [!code-csharp[](webapi/sample/2.x/ProductsApp/App_Start/WebApiConfig.cs)]
 
@@ -180,9 +181,9 @@ ASP.NET Core *API* 專案範本在產生的程式碼中包含端點路由設定�
 
 在 Visual Studio 中完成下列步驟：
 
-* 移至 **[**  >  **新增**  >  **專案**]  >  **其他專案類型**  >  **Visual Studio 方案**。 選取 [ **空白方案**]，並將方案命名為 *WebAPIMigration*。 按一下 [確定] 按鈕。
+* 移至 **[**  >  **新增**  >  **專案** ]  >  **其他專案類型**  >  **Visual Studio 方案** 。 選取 [ **空白方案** ]，並將方案命名為 *WebAPIMigration* 。 按一下 [確定] 按鈕。
 * 將現有的 *ProductsApp* 專案加入至方案。
-* 將新的 **ASP.NET Core Web 應用程式** 專案加入至方案。 從下拉式清單中選取 [ **.Net Core** 目標 framework]，然後選取 [ **API** ] 專案範本。 將專案命名為 *ProductsCore*，然後按一下 [ **確定]** 按鈕。
+* 將新的 **ASP.NET Core Web 應用程式** 專案加入至方案。 從下拉式清單中選取 [ **.Net Core** 目標 framework]，然後選取 [ **API** ] 專案範本。 將專案命名為 *ProductsCore* ，然後按一下 [ **確定]** 按鈕。
 
 方案現在包含兩個專案。 下列各節說明如何將 *ProductsApp* 專案的內容遷移至 *ProductsCore* 專案。
 
@@ -195,7 +196,7 @@ ASP.NET Core 不會使用：
 
 `Startup` 類別：
 
-* 取代 *global.asax*。
+* 取代 *global.asax* 。
 * 處理所有應用程式啟動工作。
 
 如需詳細資訊，請參閱<xref:fundamentals/startup>。
@@ -258,7 +259,7 @@ ASP.NET Core 不會使用：
     * 將 [`[HttpGet]`](xref:Microsoft.AspNetCore.Mvc.HttpGetAttribute) 屬性套用至 `GetAllProducts` 動作。
     * 將 `[HttpGet("{id}")]` 屬性套用至 `GetProduct` 動作。
 
-執行已遷移的專案，然後流覽至 `/api/products` 。 三個產品的完整清單隨即出現。 瀏覽至 `/api/products/1` 。 第一個產品隨即出現。
+執行已遷移的專案，然後流覽至 `/api/products` 。 三個產品的完整清單隨即出現。 瀏覽至 `/api/products/1`。 第一個產品隨即出現。
 
 ## <a name="compatibility-shim"></a>相容性填充碼
 

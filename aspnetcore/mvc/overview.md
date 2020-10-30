@@ -5,6 +5,7 @@ description: 了解 ASP.NET Core MVC 何以是建置使用模型檢視控制器�
 ms.author: riande
 ms.date: 02/12/2020
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -16,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: mvc/overview
-ms.openlocfilehash: 29701506d9f6c1ff90081a548d524bc0deb65cda
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: c55421efa1fd559f462549bfaceb794d4a9c35b8
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88633613"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93059308"
 ---
 # <a name="overview-of-aspnet-core-mvc"></a>ASP.NET Core MVC 概觀
 
@@ -66,7 +67,7 @@ ASP.NET Core MVC 架構是輕量型、開放原始碼且可高度測試的展示
 
 ASP.NET Core MVC 可讓您透過模式建立動態網站，以清楚關注點分離。 它可讓您完全掌控標記，支援適合 TDD 的開發，並使用最新的網站標準。
 
-## <a name="features"></a>特性
+## <a name="features"></a>功能
 
 ASP.NET Core MVC 包括下列各項：
 
@@ -87,13 +88,13 @@ ASP.NET Core MVC 包括下列各項：
 
 ASP.NET Core MVC 是以 [ASP.NET Core 路由](../fundamentals/routing.md)為建置基礎且功能強大的 URL 對應元件，可讓您建置具有可理解且可搜尋之 URL 的應用程式。 這可讓您定義適用於搜尋引擎最佳化 (SEO) 和連結產生的應用程式 URL 命名模式，而不需要考慮如何在網頁伺服器上組織檔案。 您可以使用方便且支援路由值條件約束、預設值和選用值的路由範本語法，來定義您的路由。
 
-「以慣例為基礎的路由」** 可讓您全域定義應用程式接受的的 URL 格式，以及每種格式如何對應至指定控制器上的特定動作方法。 當收到內送要求時，路由引擎會剖析 URL 定並將它對應至其中一個已定義的 URL 格式，再呼叫關聯控制器的動作方法。
+「以慣例為基礎的路由」  可讓您全域定義應用程式接受的的 URL 格式，以及每種格式如何對應至指定控制器上的特定動作方法。 當收到內送要求時，路由引擎會剖析 URL 定並將它對應至其中一個已定義的 URL 格式，再呼叫關聯控制器的動作方法。
 
 ```csharp
 routes.MapRoute(name: "Default", template: "{controller=Home}/{action=Index}/{id?}");
 ```
 
-「屬性路由」** 可讓您指定路由資訊，方法是使用定義應用程式路由的屬性來裝飾控制器和動作。 這表示路由定義會緊接著其所關聯的控制器和動作。
+「屬性路由」  可讓您指定路由資訊，方法是使用定義應用程式路由的屬性來裝飾控制器和動作。 這表示路由定義會緊接著其所關聯的控制器和動作。
 
 ```csharp
 [Route("api/[controller]")]
@@ -268,5 +269,5 @@ Razor MVC 中的 views 可以根據您的模型以強型別為基礎。 控制�
 
 ## <a name="additional-resources"></a>其他資源
 
-* [MyTested. AspNetCore：適用于 ASP.NET CORE mvc](https://github.com/ivaylokenov/MyTested.AspNetCore.Mvc)：強型別單元測試程式庫的，提供流暢的介面來測試 mvc 和 web API 應用程式。  (*不會受到 Microsoft 的維護或支援*) 
+* [MyTested. AspNetCore：適用于 ASP.NET CORE mvc](https://github.com/ivaylokenov/MyTested.AspNetCore.Mvc)：強型別單元測試程式庫的，提供流暢的介面來測試 mvc 和 web API 應用程式。  ( *不會受到 Microsoft 的維護或支援* ) 
 * <xref:blazor/components/integrate-components-into-razor-pages-and-mvc-apps>

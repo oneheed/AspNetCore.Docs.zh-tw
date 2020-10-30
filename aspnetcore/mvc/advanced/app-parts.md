@@ -5,6 +5,7 @@ description: RazorASP.NET Core 中的應用程式元件共用控制器、視圖�
 ms.author: riande
 ms.date: 11/11/2019
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -16,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: mvc/extensibility/app-parts
-ms.openlocfilehash: 2e86025eaf98c4e2cbbd86a5a353664204c35594
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: 33deb5ff794982e0c074186bb2abb88344e8a116
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88630415"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93061180"
 ---
 # <a name="share-controllers-views-no-locrazor-pages-and-more-with-application-parts"></a>使用應用程式元件共用控制器、視圖、 Razor 頁面和其他
 
@@ -31,7 +32,7 @@ ms.locfileid: "88630415"
 
 [查看或下載範例程式碼](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/mvc/advanced/app-parts) ([如何下載](xref:index#how-to-download-a-sample)) 
 
-*應用程式元件*是應用程式資源的抽象概念。 應用程式元件可讓 ASP.NET Core 探索控制器、視圖元件、標籤協助程式、 Razor 頁面、razor 編譯來源等等。 <xref:Microsoft.AspNetCore.Mvc.ApplicationParts.AssemblyPart> 是應用程式元件。 `AssemblyPart` 封裝元件參考，並公開類型和編譯參考。
+*應用程式元件* 是應用程式資源的抽象概念。 應用程式元件可讓 ASP.NET Core 探索控制器、視圖元件、標籤協助程式、 Razor 頁面、razor 編譯來源等等。 <xref:Microsoft.AspNetCore.Mvc.ApplicationParts.AssemblyPart> 是應用程式元件。 `AssemblyPart` 封裝元件參考，並公開類型和編譯參考。
 
 [功能提供者](#fp) 會使用應用程式元件，以填入 ASP.NET Core 應用程式的功能。 應用程式元件的主要使用案例是設定應用程式以探索 (，或避免從元件載入) ASP.NET Core 功能。 例如，您可能會想要在多個應用程式之間共用通用功能。 使用應用程式元件時，您可以透過多個應用程式，共用包含控制器、視圖、 Razor 頁面、razor 編譯來源、標記協助程式等元件 (DLL) 。 建議您共用元件，以便在多個專案中複製程式碼。
 
@@ -121,7 +122,7 @@ View Components:
 
 [查看或下載範例程式碼](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/mvc/advanced/app-parts) ([如何下載](xref:index#how-to-download-a-sample)) 
 
-*應用程式元件*是應用程式資源的抽象概念。 應用程式元件可讓 ASP.NET Core 探索控制器、視圖元件、標籤協助程式、 Razor 頁面、razor 編譯來源等等。 [AssemblyPart](/dotnet/api/microsoft.aspnetcore.mvc.applicationparts.assemblypart#Microsoft_AspNetCore_Mvc_ApplicationParts_AssemblyPart) 是一個應用程式元件。 `AssemblyPart` 封裝元件參考，並公開類型和編譯參考。
+*應用程式元件* 是應用程式資源的抽象概念。 應用程式元件可讓 ASP.NET Core 探索控制器、視圖元件、標籤協助程式、 Razor 頁面、razor 編譯來源等等。 [AssemblyPart](/dotnet/api/microsoft.aspnetcore.mvc.applicationparts.assemblypart#Microsoft_AspNetCore_Mvc_ApplicationParts_AssemblyPart) 是一個應用程式元件。 `AssemblyPart` 封裝元件參考，並公開類型和編譯參考。
 
 *功能提供者* 會使用應用程式元件，以填入 ASP.NET Core 應用程式的功能。 應用程式元件的主要使用案例是設定應用程式以探索 (，或避免從元件載入) ASP.NET Core 功能。 例如，您可能會想要在多個應用程式之間共用通用功能。 使用應用程式元件時，您可以透過多個應用程式，共用包含控制器、視圖、 Razor 頁面、razor 編譯來源、標記協助程式等元件 (DLL) 。 建議您共用元件，以便在多個專案中複製程式碼。
 

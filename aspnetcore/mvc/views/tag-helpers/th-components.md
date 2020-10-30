@@ -6,6 +6,7 @@ monikerRange: '>= aspnetcore-2.0'
 ms.author: scaddie
 ms.date: 06/12/2019
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -17,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: mvc/views/tag-helpers/th-components
-ms.openlocfilehash: d3bae9cd5b4a5c7315c795229c7eafbf1e44e22d
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: 15bddd8ce18546bef7ee7e6ec2e32e369d0858a3
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88627581"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93060556"
 ---
 # <a name="tag-helper-components-in-aspnet-core"></a>ASP.NET Core 中的標籤協助程式元件
 
@@ -123,7 +124,7 @@ ASP.NET Core 包含兩個內建標籤協助程式元件：`head` 和 `body`。 �
 
 * 建立衍生自 <xref:Microsoft.AspNetCore.Mvc.Razor.TagHelpers.TagHelperComponentTagHelper> 的公用類別。
 * 將 [`[HtmlTargetElement]`](xref:Microsoft.AspNetCore.Razor.TagHelpers.HtmlTargetElementAttribute) 屬性套用至類別。 指定目標 HTML 項目的名稱。
-* *選擇性*：將 [`[EditorBrowsable(EditorBrowsableState.Never)]`](xref:System.ComponentModel.EditorBrowsableAttribute) 屬性套用至類別，以隱藏 IntelliSense 中的類型顯示。
+* *選擇性* ：將 [`[EditorBrowsable(EditorBrowsableState.Never)]`](xref:System.ComponentModel.EditorBrowsableAttribute) 屬性套用至類別，以隱藏 IntelliSense 中的類型顯示。
 
 下列程式碼會建立以 `<address>` HTML 項目為目標的自訂標籤協助程式元件：
 

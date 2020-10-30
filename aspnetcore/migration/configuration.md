@@ -5,6 +5,7 @@ description: 瞭解如何將 configuration 從 ASP.NET MVC 專案遷移至 ASP.N
 ms.author: riande
 ms.date: 10/14/2016
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -16,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: migration/configuration
-ms.openlocfilehash: 8cbb174539234039a05306ec5ab89026bc90da23
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: d84204c8c791bfaf36432462cde3a42c294c7966
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88631091"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93059789"
 ---
 # <a name="migrate-configuration-to-aspnet-core"></a>將設定遷移至 ASP.NET Core
 
@@ -33,9 +34,9 @@ ms.locfileid: "88631091"
 
 ## <a name="setup-configuration"></a>設定組態
 
-ASP.NET Core 不會再使用舊版 ASP.NET 所使用的 *global.asax* 和 *web.config* 檔案。 在舊版的 ASP.NET 中，應用程式啟動邏輯會置於 `Application_StartUp` *global.asax*內的方法中。 之後，在 ASP.NET MVC 中， *Startup.cs* 檔案會包含在專案的根目錄中;而且，它會在應用程式啟動時呼叫。 ASP.NET Core 已將所有啟動邏輯放在 *Startup.cs* 檔中，以完全採用此方法。
+ASP.NET Core 不會再使用舊版 ASP.NET 所使用的 *global.asax* 和 *web.config* 檔案。 在舊版的 ASP.NET 中，應用程式啟動邏輯會置於 `Application_StartUp` *global.asax* 內的方法中。 之後，在 ASP.NET MVC 中， *Startup.cs* 檔案會包含在專案的根目錄中;而且，它會在應用程式啟動時呼叫。 ASP.NET Core 已將所有啟動邏輯放在 *Startup.cs* 檔中，以完全採用此方法。
 
-*web.config*檔案也已在 ASP.NET Core 中取代。 現在設定本身可以設定為 *Startup.cs*中所述的應用程式啟動程式的一部分。 設定仍可以利用 XML 檔案，但 ASP.NET Core 專案通常會將設定值放在 JSON 格式的檔案中，例如 *appsettings.js*。 ASP.NET Core 的設定系統也可以輕鬆地存取環境變數，以便為環境特定的值提供 [更安全且更穩固的位置](xref:security/app-secrets) 。 這特別適用于不應簽入原始檔控制的秘密，例如連接字串和 API 金鑰。 請 [參閱](xref:fundamentals/configuration/index) 設定，以深入瞭解 ASP.NET Core 中的設定。
+*web.config* 檔案也已在 ASP.NET Core 中取代。 現在設定本身可以設定為 *Startup.cs* 中所述的應用程式啟動程式的一部分。 設定仍可以利用 XML 檔案，但 ASP.NET Core 專案通常會將設定值放在 JSON 格式的檔案中，例如 *appsettings.json* 。 ASP.NET Core 的設定系統也可以輕鬆地存取環境變數，以便為環境特定的值提供 [更安全且更穩固的位置](xref:security/app-secrets) 。 這特別適用于不應簽入原始檔控制的秘密，例如連接字串和 API 金鑰。 請 [參閱](xref:fundamentals/configuration/index) 設定，以深入瞭解 ASP.NET Core 中的設定。
 
 在本文中，我們將從 [前一篇文章](xref:migration/mvc)開始部分遷移的 ASP.NET Core 專案。 若要設定設定，請將下列函式和屬性新增至位於專案根目錄中的 *Startup.cs* 檔案：
 
@@ -47,13 +48,13 @@ ASP.NET Core 不會再使用舊版 ASP.NET 所使用的 *global.asax* 和 *web.c
 using Microsoft.Extensions.Configuration;
 ```
 
-使用適當的專案範本，將檔案 * 上的appsettings.js* 新增至專案的根目錄：
+*appsettings.json* 使用適當的專案範本，將檔案加入至專案的根目錄：
 
 ![新增 AppSettings JSON](configuration/_static/add-appsettings-json.png)
 
 ## <a name="migrate-configuration-settings-from-webconfig"></a>從 web.config 遷移設定設定
 
-我們的 ASP.NET MVC 專案在 *web.config*的元素中包含必要的資料庫連接字串 `<connectionStrings>` 。 在 ASP.NET Core 專案中，我們會將此資訊儲存在檔案中的 *appsettings.js* 。 開啟 *appsettings.js開啟*，並請注意它已包含下列內容：
+我們的 ASP.NET MVC 專案在 *web.config* 的元素中包含必要的資料庫連接字串 `<connectionStrings>` 。 在 ASP.NET Core 專案中，我們會將此資訊儲存在檔案中 *appsettings.json* 。 開啟 *appsettings.json* ，並請注意它已包含下列內容：
 
 [!code-json[](../migration/configuration/samples/WebApp1/src/WebApp1/appsettings.json?highlight=4)]
 

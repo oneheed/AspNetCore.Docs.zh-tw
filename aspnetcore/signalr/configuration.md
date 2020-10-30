@@ -7,6 +7,7 @@ ms.author: bradyg
 ms.custom: mvc
 ms.date: 04/12/2020
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -18,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: signalr/configuration
-ms.openlocfilehash: 8851246dbaa076af1fdbc4e5e4f1ada0e4e3988a
-ms.sourcegitcommit: b5ebaf42422205d212e3dade93fcefcf7f16db39
+ms.openlocfilehash: 7dac8c84683553a52e07ecc61c8bcf8616e77dc6
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 10/21/2020
-ms.locfileid: "92326586"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93061232"
 ---
 # <a name="aspnet-core-no-locsignalr-configuration"></a>ASP.NET Core SignalR 設定
 
@@ -196,7 +197,7 @@ let connection = new signalR.HubConnectionBuilder()
     .build();
 ```
 
-下表列出可用的記錄層級。 您所提供的值， `configureLogging` 用來設定將記錄的 **最小** 記錄層級。 記錄在此層級的訊息， **或是在資料表中所列的層級**，將會被記錄下來。
+下表列出可用的記錄層級。 您所提供的值， `configureLogging` 用來設定將記錄的 **最小** 記錄層級。 記錄在此層級的訊息， **或是在資料表中所列的層級** ，將會被記錄下來。
 
 | String                      | LogLevel               |
 | --------------------------- | ---------------------- |
@@ -342,7 +343,7 @@ HubConnection hubConnection = HubConnectionBuilder.create("https://example.com/c
 | .NET 選項 |  預設值 | 描述 |
 | ----------- | -------------- | ----------- |
 | `AccessTokenProvider` | `null` | 傳回字串的函式，在 HTTP 要求中以持有人驗證權杖的形式提供。 |
-| `SkipNegotiation` | `false` | 將此設定為， `true` 以略過協商步驟。 **只有當 websocket 傳輸是唯一啟用的傳輸時才支援**。 使用 Azure 服務時，無法啟用此設定 SignalR 。 |
+| `SkipNegotiation` | `false` | 將此設定為， `true` 以略過協商步驟。 **只有當 websocket 傳輸是唯一啟用的傳輸時才支援** 。 使用 Azure 服務時，無法啟用此設定 SignalR 。 |
 | `ClientCertificates` | Empty | 要傳送以驗證要求的 TLS 憑證集合。 |
 | `Cookies` | Empty | cookie要與每個 HTTP 要求一起傳送的 HTTP 集合。 |
 | `Credentials` | Empty | 每個 HTTP 要求所要傳送的認證。 |
@@ -361,7 +362,7 @@ HubConnection hubConnection = HubConnectionBuilder.create("https://example.com/c
 | `transport` | `null` | <xref:Microsoft.AspNetCore.Http.Connections.HttpTransportType>值，指定要用於連接的傳輸。 |
 | `headers` | `null` | 每個 HTTP 要求傳送的標頭字典。 在瀏覽器中傳送標頭不適用於 Websocket 或 <xref:Microsoft.AspNetCore.Http.Connections.HttpTransportType.ServerSentEvents> 串流。 |
 | `logMessageContent` | `null` | 設定為， `true` 以記錄用戶端所傳送和接收之訊息的位元組/字元。 |
-| `skipNegotiation` | `false` | 將此設定為， `true` 以略過協商步驟。 **只有當 websocket 傳輸是唯一啟用的傳輸時才支援**。 使用 Azure 服務時，無法啟用此設定 SignalR 。 |
+| `skipNegotiation` | `false` | 將此設定為， `true` 以略過協商步驟。 **只有當 websocket 傳輸是唯一啟用的傳輸時才支援** 。 使用 Azure 服務時，無法啟用此設定 SignalR 。 |
 | `withCredentials` | `true` | 指定是否將使用 CORS 要求傳送認證。 Azure App Service 會使用 cookie 來進行粘滯話，且必須啟用此選項才能正確運作。 如需 CORS 與的詳細資訊 SignalR ，請參閱 <xref:signalr/security#cross-origin-resource-sharing> 。 |
 
 # <a name="java"></a>[Java](#tab/java)
@@ -369,7 +370,7 @@ HubConnection hubConnection = HubConnectionBuilder.create("https://example.com/c
 | JAVA 選項 | 預設值 | 描述 |
 | ----------- | ------------- | ----------- |
 | `withAccessTokenProvider` | `null` | 傳回字串的函式，在 HTTP 要求中以持有人驗證權杖的形式提供。 |
-| `shouldSkipNegotiate` | `false` | 將此設定為， `true` 以略過協商步驟。 **只有當 websocket 傳輸是唯一啟用的傳輸時才支援**。 使用 Azure 服務時，無法啟用此設定 SignalR 。 |
+| `shouldSkipNegotiate` | `false` | 將此設定為， `true` 以略過協商步驟。 **只有當 websocket 傳輸是唯一啟用的傳輸時才支援** 。 使用 Azure 服務時，無法啟用此設定 SignalR 。 |
 | `withHeader` `withHeaders` | Empty | 要與每個 HTTP 要求一起傳送的其他 HTTP 標頭對應。 |
 
 ---
@@ -588,7 +589,7 @@ let connection = new signalR.HubConnectionBuilder()
     .build();
 ```
 
-下表列出可用的記錄層級。 您所提供的值， `configureLogging` 用來設定將記錄的 **最小** 記錄層級。 記錄在此層級的訊息， **或是在資料表中所列的層級**，將會被記錄下來。
+下表列出可用的記錄層級。 您所提供的值， `configureLogging` 用來設定將記錄的 **最小** 記錄層級。 記錄在此層級的訊息， **或是在資料表中所列的層級** ，將會被記錄下來。
 
 | String                      | LogLevel               |
 | --------------------------- | ---------------------- |
@@ -734,7 +735,7 @@ HubConnection hubConnection = HubConnectionBuilder.create("https://example.com/c
 | .NET 選項 |  預設值 | 描述 |
 | ----------- | -------------- | ----------- |
 | `AccessTokenProvider` | `null` | 傳回字串的函式，在 HTTP 要求中以持有人驗證權杖的形式提供。 |
-| `SkipNegotiation` | `false` | 將此設定為， `true` 以略過協商步驟。 **只有當 websocket 傳輸是唯一啟用的傳輸時才支援**。 使用 Azure 服務時，無法啟用此設定 SignalR 。 |
+| `SkipNegotiation` | `false` | 將此設定為， `true` 以略過協商步驟。 **只有當 websocket 傳輸是唯一啟用的傳輸時才支援** 。 使用 Azure 服務時，無法啟用此設定 SignalR 。 |
 | `ClientCertificates` | Empty | 要傳送以驗證要求的 TLS 憑證集合。 |
 | `Cookies` | Empty | cookie要與每個 HTTP 要求一起傳送的 HTTP 集合。 |
 | `Credentials` | Empty | 每個 HTTP 要求所要傳送的認證。 |
@@ -752,14 +753,14 @@ HubConnection hubConnection = HubConnectionBuilder.create("https://example.com/c
 | `accessTokenFactory` | `null` | 傳回字串的函式，在 HTTP 要求中以持有人驗證權杖的形式提供。 |
 | `transport` | `null` | <xref:Microsoft.AspNetCore.Http.Connections.HttpTransportType>值，指定要用於連接的傳輸。 |
 | `logMessageContent` | `null` | 設定為， `true` 以記錄用戶端所傳送和接收之訊息的位元組/字元。 |
-| `skipNegotiation` | `false` | 將此設定為， `true` 以略過協商步驟。 **只有當 websocket 傳輸是唯一啟用的傳輸時才支援**。 使用 Azure 服務時，無法啟用此設定 SignalR 。 |
+| `skipNegotiation` | `false` | 將此設定為， `true` 以略過協商步驟。 **只有當 websocket 傳輸是唯一啟用的傳輸時才支援** 。 使用 Azure 服務時，無法啟用此設定 SignalR 。 |
 
 # <a name="java"></a>[Java](#tab/java)
 
 | JAVA 選項 | 預設值 | 描述 |
 | ----------- | ------------- | ----------- |
 | `withAccessTokenProvider` | `null` | 傳回字串的函式，在 HTTP 要求中以持有人驗證權杖的形式提供。 |
-| `shouldSkipNegotiate` | `false` | 將此設定為， `true` 以略過協商步驟。 **只有當 websocket 傳輸是唯一啟用的傳輸時才支援**。 使用 Azure 服務時，無法啟用此設定 SignalR 。 |
+| `shouldSkipNegotiate` | `false` | 將此設定為， `true` 以略過協商步驟。 **只有當 websocket 傳輸是唯一啟用的傳輸時才支援** 。 使用 Azure 服務時，無法啟用此設定 SignalR 。 |
 | `withHeader` `withHeaders` | Empty | 要與每個 HTTP 要求一起傳送的其他 HTTP 標頭對應。 |
 
 ---
@@ -974,7 +975,7 @@ let connection = new signalR.HubConnectionBuilder()
     .build();
 ```
 
-下表列出可用的記錄層級。 您所提供的值， `configureLogging` 用來設定將記錄的 **最小** 記錄層級。 記錄在此層級的訊息， **或是在資料表中所列的層級**，將會被記錄下來。
+下表列出可用的記錄層級。 您所提供的值， `configureLogging` 用來設定將記錄的 **最小** 記錄層級。 記錄在此層級的訊息， **或是在資料表中所列的層級** ，將會被記錄下來。
 
 | String                      | LogLevel               |
 | --------------------------- | ---------------------- |
@@ -1120,7 +1121,7 @@ HubConnection hubConnection = HubConnectionBuilder.create("https://example.com/c
 | .NET 選項 |  預設值 | 描述 |
 | ----------- | -------------- | ----------- |
 | `AccessTokenProvider` | `null` | 傳回字串的函式，在 HTTP 要求中以持有人驗證權杖的形式提供。 |
-| `SkipNegotiation` | `false` | 將此設定為， `true` 以略過協商步驟。 **只有當 websocket 傳輸是唯一啟用的傳輸時才支援**。 使用 Azure 服務時，無法啟用此設定 SignalR 。 |
+| `SkipNegotiation` | `false` | 將此設定為， `true` 以略過協商步驟。 **只有當 websocket 傳輸是唯一啟用的傳輸時才支援** 。 使用 Azure 服務時，無法啟用此設定 SignalR 。 |
 | `ClientCertificates` | Empty | 要傳送以驗證要求的 TLS 憑證集合。 |
 | `Cookies` | Empty | cookie要與每個 HTTP 要求一起傳送的 HTTP 集合。 |
 | `Credentials` | Empty | 每個 HTTP 要求所要傳送的認證。 |
@@ -1138,14 +1139,14 @@ HubConnection hubConnection = HubConnectionBuilder.create("https://example.com/c
 | `accessTokenFactory` | `null` | 傳回字串的函式，在 HTTP 要求中以持有人驗證權杖的形式提供。 |
 | `transport` | `null` | <xref:Microsoft.AspNetCore.Http.Connections.HttpTransportType>值，指定要用於連接的傳輸。 |
 | `logMessageContent` | `null` | 設定為， `true` 以記錄用戶端所傳送和接收之訊息的位元組/字元。 |
-| `skipNegotiation` | `false` | 將此設定為， `true` 以略過協商步驟。 **只有當 websocket 傳輸是唯一啟用的傳輸時才支援**。 使用 Azure 服務時，無法啟用此設定 SignalR 。 |
+| `skipNegotiation` | `false` | 將此設定為， `true` 以略過協商步驟。 **只有當 websocket 傳輸是唯一啟用的傳輸時才支援** 。 使用 Azure 服務時，無法啟用此設定 SignalR 。 |
 
 # <a name="java"></a>[Java](#tab/java)
 
 | JAVA 選項 | 預設值 | 描述 |
 | ----------- | ------------- | ----------- |
 | `withAccessTokenProvider` | `null` | 傳回字串的函式，在 HTTP 要求中以持有人驗證權杖的形式提供。 |
-| `shouldSkipNegotiate` | `false` | 將此設定為， `true` 以略過協商步驟。 **只有當 websocket 傳輸是唯一啟用的傳輸時才支援**。 使用 Azure 服務時，無法啟用此設定 SignalR 。 |
+| `shouldSkipNegotiate` | `false` | 將此設定為， `true` 以略過協商步驟。 **只有當 websocket 傳輸是唯一啟用的傳輸時才支援** 。 使用 Azure 服務時，無法啟用此設定 SignalR 。 |
 | `withHeader` `withHeaders` | Empty | 要與每個 HTTP 要求一起傳送的其他 HTTP 標頭對應。 |
 
 ---
@@ -1470,7 +1471,7 @@ HubConnection hubConnection = HubConnectionBuilder.create("https://example.com/c
 | .NET 選項 |  預設值 | 描述 |
 | ----------- | -------------- | ----------- |
 | `AccessTokenProvider` | `null` | 傳回字串的函式，在 HTTP 要求中以持有人驗證權杖的形式提供。 |
-| `SkipNegotiation` | `false` | 將此設定為， `true` 以略過協商步驟。 **只有當 websocket 傳輸是唯一啟用的傳輸時才支援**。 使用 Azure 服務時，無法啟用此設定 SignalR 。 |
+| `SkipNegotiation` | `false` | 將此設定為， `true` 以略過協商步驟。 **只有當 websocket 傳輸是唯一啟用的傳輸時才支援** 。 使用 Azure 服務時，無法啟用此設定 SignalR 。 |
 | `ClientCertificates` | Empty | 要傳送以驗證要求的 TLS 憑證集合。 |
 | `Cookies` | Empty | cookie要與每個 HTTP 要求一起傳送的 HTTP 集合。 |
 | `Credentials` | Empty | 每個 HTTP 要求所要傳送的認證。 |
@@ -1488,14 +1489,14 @@ HubConnection hubConnection = HubConnectionBuilder.create("https://example.com/c
 | `accessTokenFactory` | `null` | 傳回字串的函式，在 HTTP 要求中以持有人驗證權杖的形式提供。 |
 | `transport` | `null` | <xref:Microsoft.AspNetCore.Http.Connections.HttpTransportType>值，指定要用於連接的傳輸。 |
 | `logMessageContent` | `null` | 設定為， `true` 以記錄用戶端所傳送和接收之訊息的位元組/字元。 |
-| `skipNegotiation` | `false` | 將此設定為， `true` 以略過協商步驟。 **只有當 websocket 傳輸是唯一啟用的傳輸時才支援**。 使用 Azure 服務時，無法啟用此設定 SignalR 。 |
+| `skipNegotiation` | `false` | 將此設定為， `true` 以略過協商步驟。 **只有當 websocket 傳輸是唯一啟用的傳輸時才支援** 。 使用 Azure 服務時，無法啟用此設定 SignalR 。 |
 
 # <a name="java"></a>[Java](#tab/java)
 
 | JAVA 選項 | 預設值 | 描述 |
 | ----------- | ------------- | ----------- |
 | `withAccessTokenProvider` | `null` | 傳回字串的函式，在 HTTP 要求中以持有人驗證權杖的形式提供。 |
-| `shouldSkipNegotiate` | `false` | 將此設定為， `true` 以略過協商步驟。 **只有當 websocket 傳輸是唯一啟用的傳輸時才支援**。 使用 Azure 服務時，無法啟用此設定 SignalR 。 |
+| `shouldSkipNegotiate` | `false` | 將此設定為， `true` 以略過協商步驟。 **只有當 websocket 傳輸是唯一啟用的傳輸時才支援** 。 使用 Azure 服務時，無法啟用此設定 SignalR 。 |
 | `withHeader` `withHeaders` | Empty | 要與每個 HTTP 要求一起傳送的其他 HTTP 標頭對應。 |
 
 ---
@@ -1814,7 +1815,7 @@ HubConnection hubConnection = HubConnectionBuilder.create("https://example.com/c
 | .NET 選項 |  預設值 | 描述 |
 | ----------- | -------------- | ----------- |
 | `AccessTokenProvider` | `null` | 傳回字串的函式，在 HTTP 要求中以持有人驗證權杖的形式提供。 |
-| `SkipNegotiation` | `false` | 將此設定為， `true` 以略過協商步驟。 **只有當 websocket 傳輸是唯一啟用的傳輸時才支援**。 使用 Azure 服務時，無法啟用此設定 SignalR 。 |
+| `SkipNegotiation` | `false` | 將此設定為， `true` 以略過協商步驟。 **只有當 websocket 傳輸是唯一啟用的傳輸時才支援** 。 使用 Azure 服務時，無法啟用此設定 SignalR 。 |
 | `ClientCertificates` | Empty | 要傳送以驗證要求的 TLS 憑證集合。 |
 | `Cookies` | Empty | cookie要與每個 HTTP 要求一起傳送的 HTTP 集合。 |
 | `Credentials` | Empty | 每個 HTTP 要求所要傳送的認證。 |
@@ -1832,14 +1833,14 @@ HubConnection hubConnection = HubConnectionBuilder.create("https://example.com/c
 | `accessTokenFactory` | `null` | 傳回字串的函式，在 HTTP 要求中以持有人驗證權杖的形式提供。 |
 | `transport` | `null` | <xref:Microsoft.AspNetCore.Http.Connections.HttpTransportType>值，指定要用於連接的傳輸。 |
 | `logMessageContent` | `null` | 設定為， `true` 以記錄用戶端所傳送和接收之訊息的位元組/字元。 |
-| `skipNegotiation` | `false` | 將此設定為， `true` 以略過協商步驟。 **只有當 websocket 傳輸是唯一啟用的傳輸時才支援**。 使用 Azure 服務時，無法啟用此設定 SignalR 。 |
+| `skipNegotiation` | `false` | 將此設定為， `true` 以略過協商步驟。 **只有當 websocket 傳輸是唯一啟用的傳輸時才支援** 。 使用 Azure 服務時，無法啟用此設定 SignalR 。 |
 
 # <a name="java"></a>[Java](#tab/java)
 
 | JAVA 選項 | 預設值 | 描述 |
 | ----------- | ------------- | ----------- |
 | `withAccessTokenProvider` | `null` | 傳回字串的函式，在 HTTP 要求中以持有人驗證權杖的形式提供。 |
-| `shouldSkipNegotiate` | `false` | 將此設定為， `true` 以略過協商步驟。 **只有當 websocket 傳輸是唯一啟用的傳輸時才支援**。 使用 Azure 服務時，無法啟用此設定 SignalR 。 |
+| `shouldSkipNegotiate` | `false` | 將此設定為， `true` 以略過協商步驟。 **只有當 websocket 傳輸是唯一啟用的傳輸時才支援** 。 使用 Azure 服務時，無法啟用此設定 SignalR 。 |
 | `withHeader` `withHeaders` | Empty | 要與每個 HTTP 要求一起傳送的其他 HTTP 標頭對應。 |
 
 ---

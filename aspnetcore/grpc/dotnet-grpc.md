@@ -6,6 +6,7 @@ monikerRange: '>= aspnetcore-3.0'
 ms.author: johluo
 ms.date: 10/17/2019
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -17,18 +18,18 @@ no-loc:
 - Razor
 - SignalR
 uid: grpc/dotnet-grpc
-ms.openlocfilehash: 18d504d7a130aeaa9f8ab6cca6c92dab5febfae6
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: f34e1543d9695e138a85db3b79e013cf5fb6d138
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88633236"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93059906"
 ---
 # <a name="manage-protobuf-references-with-dotnet-grpc"></a>使用 dotnet-grpc 管理 Protobuf 參考
 
 作者：[John Luo](https://github.com/juntaoluo)
 
-`dotnet-grpc` 是一種 .NET Core 通用工具，可用於管理 [Protobuf (*proto*) ](xref:grpc/basics#proto-file) .net gRPC 專案中的參考。 您可以使用此工具來新增、重新整理、移除及列出 Protobuf 參考。
+`dotnet-grpc` 是一種 .NET Core 通用工具，可用於管理 [Protobuf ( *proto* )](xref:grpc/basics#proto-file) .net gRPC 專案中的參考。 您可以使用此工具來新增、重新整理、移除及列出 Protobuf 參考。
 
 ## <a name="installation"></a>安裝
 
@@ -75,7 +76,7 @@ dotnet grpc add-file [options] <files>...
 |-|-|
 | files | Protobuf 檔參考。 這些可以是本機 protobuf 檔案的 glob 路徑。 |
 
-#### <a name="options"></a>選項。
+#### <a name="options"></a>選項
 
 | Short 選項 | Long 選項 | 描述 |
 |-|-|-|
@@ -100,7 +101,7 @@ dotnet-grpc add-url [options] <url>
 |-|-|
 | url | 遠端 protobuf 檔的 URL。 |
 
-#### <a name="options"></a>選項。
+#### <a name="options"></a>選項
 
 | Short 選項 | Long 選項 | 描述 |
 |-|-|-|
@@ -129,7 +130,7 @@ dotnet-grpc remove [options] <references>...
 |-|-|
 | 參考 | 要移除之 protobuf 參考的 Url 或檔案路徑。 |
 
-### <a name="options"></a>選項。
+### <a name="options"></a>選項
 
 | Short 選項 | Long 選項 | 描述 |
 |-|-|-|
@@ -137,7 +138,7 @@ dotnet-grpc remove [options] <references>...
 
 ## <a name="refresh"></a>重新整理
 
-此 `refresh` 命令可用來從來源 URL 的最新內容更新遠端參考。 下載檔案路徑和來源 URL 都可以用來指定要更新的參考。 注意:
+此 `refresh` 命令可用來從來源 URL 的最新內容更新遠端參考。 下載檔案路徑和來源 URL 都可以用來指定要更新的參考。 附註：
 
 * 檔案內容的雜湊會進行比較，以判斷是否應該更新本機檔案。
 * 不會比較時間戳記資訊。
@@ -156,7 +157,7 @@ dotnet-grpc refresh [options] [<references>...]
 |-|-|
 | 參考 | 應更新之遠端 protobuf 參考的 Url 或檔案路徑。 將此引數保留為空白，以重新整理所有遠端參考。 |
 
-### <a name="options"></a>選項。
+### <a name="options"></a>選項
 
 | Short 選項 | Long 選項 | 描述 |
 |-|-|-|
@@ -173,7 +174,7 @@ dotnet-grpc refresh [options] [<references>...]
 dotnet-grpc list [options]
 ```
 
-### <a name="options"></a>選項。
+### <a name="options"></a>選項
 
 | Short 選項 | Long 選項 | 描述 |
 |-|-|-|

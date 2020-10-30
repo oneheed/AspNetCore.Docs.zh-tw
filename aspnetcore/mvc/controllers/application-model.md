@@ -5,6 +5,7 @@ description: 了解如何讀取及操作應用程式模型，來修改 ASP.NET C
 ms.author: riande
 ms.date: 12/05/2019
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -16,18 +17,18 @@ no-loc:
 - Razor
 - SignalR
 uid: mvc/controllers/application-model
-ms.openlocfilehash: f2e86a8607ddd00dc7f4bec36079660f0cd1eea3
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: a7a654eb43c0dbf375af911d8d5353ac4c04a825
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88630285"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93060933"
 ---
 # <a name="work-with-the-application-model-in-aspnet-core"></a>在 ASP.NET Core 中使用應用程式模型
 
 作者：[Steve Smith](https://ardalis.com/)
 
-ASP.NET Core MVC 定義了一個「應用程式模型」**，代表 MVC 應用程式的元件。 您可以讀取及操作此模型來修改 MVC 項目的行為。 根據預設，MVC 遵循特定慣例來判斷哪些類別會被視為控制器、對這些類別的哪些方法是動作，以及參數和路由的行為方式。 您可以自訂此行為，以符合您的應用程式需求，方法是建立自己的慣例，並將其全域套用或作為屬性來套用。
+ASP.NET Core MVC 定義了一個「應用程式模型」  ，代表 MVC 應用程式的元件。 您可以讀取及操作此模型來修改 MVC 項目的行為。 根據預設，MVC 遵循特定慣例來判斷哪些類別會被視為控制器、對這些類別的哪些方法是動作，以及參數和路由的行為方式。 您可以自訂此行為，以符合您的應用程式需求，方法是建立自己的慣例，並將其全域套用或作為屬性來套用。
 
 ## <a name="models-and-providers"></a>模型和提供者
 
@@ -141,7 +142,7 @@ ASP.NET Core MVC 使用 [IApplicationModelProvider](/dotnet/api/microsoft.aspnet
 
 ### <a name="sample-modifying-the-actionmodel-name"></a>範例：修改 ActionModel 名稱
 
-下列慣例會修改 `ActionModel` 以更新其所套用之動作的「名稱」**。 新的名稱會當作傳給屬性的參數。 這個新名稱由路由使用，因此它會影響用來連線到此動作方法的路由。
+下列慣例會修改 `ActionModel` 以更新其所套用之動作的「名稱」  。 新的名稱會當作傳給屬性的參數。 這個新名稱由路由使用，因此它會影響用來連線到此動作方法的路由。
 
 [!code-csharp[](./application-model/sample/src/AppModelSample/Conventions/CustomActionNameAttribute.cs)]
 

@@ -6,6 +6,7 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 09/28/2019
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -17,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: data/ef-rp/read-related-data
-ms.openlocfilehash: dd00b9d7faf467857ec1e47f4cfb0296d84e5d3f
-ms.sourcegitcommit: 62cc131969b2379f7a45c286a751e22d961dfbdb
+ms.openlocfilehash: e52e4aefc18b84f85bea28a9724894eed50ca54a
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 09/22/2020
-ms.locfileid: "90847698"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93061063"
 ---
 # <a name="part-6-no-locrazor-pages-with-ef-core-in-aspnet-core---read-related-data"></a>第6部分： Razor ASP.NET Core 讀取相關資料的 EF Core 頁面
 
@@ -57,7 +58,7 @@ EF Core 有幾種方式可以將相關資料載入到實體的導覽屬性：
 
   ![個別查詢範例](read-related-data/_static/separate-queries.png)
 
-  **注意：** EF Core 會將導覽屬性自動修正為先前已載入至內容實例的任何其他實體。 即使「未」** 明確包含導覽屬性的資料，如果先前已載入某些或所有相關實體，仍然可能會填入該屬性。
+  **注意：** EF Core 會將導覽屬性自動修正為先前已載入至內容實例的任何其他實體。 即使「未」  明確包含導覽屬性的資料，如果先前已載入某些或所有相關實體，仍然可能會填入該屬性。
 
 * [明確載入](/ef/core/querying/related-data#explicit-loading)。 第一次讀取實體時，不會擷取相關資料。 必須撰寫程式碼，才能在需要時擷取相關資料。 使用個別查詢的明確式載入會導致多個查詢傳送至資料庫。 透過明確式載入，程式碼會指定要載入的導覽屬性。 請使用 `Load` 方法來執行明確式載入。 例如：
 
@@ -110,7 +111,7 @@ EF Core 有幾種方式可以將相關資料載入到實體的導覽屬性：
 
 * 開啟 *Pages/Courses/Index.cshtml.cs* 並檢查 `OnGetAsync` 方法。 Scaffolding 引擎已針對 `Department` 導覽屬性指定積極式載入。 `Include` 方法可指定積極式載入。
 
-* 執行應用程式並選取**課程**連結。 部門資料行便會顯示沒有用的 `DepartmentID`。
+* 執行應用程式並選取 **課程** 連結。 部門資料行便會顯示沒有用的 `DepartmentID`。
 
 ### <a name="display-the-department-name"></a>顯示部門名稱
 
@@ -120,21 +121,21 @@ EF Core 有幾種方式可以將相關資料載入到實體的導覽屬性：
 
 上述程式碼會將 `Course` 屬性變更為 `Courses`，並新增 `AsNoTracking`。 `AsNoTracking` 可改善效能，因為不會追蹤傳回的實體。 無需追蹤實體的原因是它們不會在目前內容中更新。
 
-使用下列程式碼更新 *Pages/Courses/Index.cshtml*。
+使用下列程式碼更新 *Pages/Courses/Index.cshtml* 。
 
 [!code-cshtml[](intro/samples/cu30/Pages/Courses/Index.cshtml?highlight=5,8,16-18,20,23,26,32,35-37,45)]
 
 已對包含 Scaffold 的程式碼進行下列變更：
 
 * 已將 `Course` 屬性名稱變更為 `Courses`。
-* 新增顯示 `CourseID` 屬性值的 [編號]**** 資料行。 主索引鍵預設不會進行 Scaffold，因為它們對終端使用者通常沒有任何意義。 不過，在此情況下，主索引鍵有意義。
-* 變更 [部門]**** 資料行來顯示部門名稱。 此程式碼會顯示已載入到 `Department` 導覽屬性之 `Department` 實體的 `Name` 屬性：
+* 新增顯示 `CourseID` 屬性值的 [編號]  資料行。 主索引鍵預設不會進行 Scaffold，因為它們對終端使用者通常沒有任何意義。 不過，在此情況下，主索引鍵有意義。
+* 變更 [部門]  資料行來顯示部門名稱。 此程式碼會顯示已載入到 `Department` 導覽屬性之 `Department` 實體的 `Name` 屬性：
 
   ```html
   @Html.DisplayFor(modelItem => item.Department.Name)
   ```
 
-執行應用程式，並選取 [Courses]**** 索引標籤來查看含有部門名稱的清單。
+執行應用程式，並選取 [Courses]  索引標籤來查看含有部門名稱的清單。
 
 ![Courses [索引] 頁面](read-related-data/_static/courses-index30.png)
 
@@ -148,7 +149,7 @@ EF Core 有幾種方式可以將相關資料載入到實體的導覽屬性：
 
 [!code-csharp[](intro/samples/cu30snapshots/6-related/Pages/Courses/IndexSelect.cshtml.cs?name=snippet_RevisedIndexMethod&highlight=6)]
 
-上述程式碼不會傳回任何實體類型，因此不會進行追蹤。 如需 EF 追蹤的詳細資訊，請參閱 [追蹤與無追蹤查詢](/ef/core/querying/tracking)的比較。
+上述程式碼不會傳回任何實體類型，因此不會進行追蹤。 如需 EF 追蹤的詳細資訊，請參閱 [追蹤與 No-Tracking 查詢](/ef/core/querying/tracking)。
 
 `CourseViewModel`：
 
@@ -173,7 +174,7 @@ EF Core 有幾種方式可以將相關資料載入到實體的導覽屬性：
 
 講師頁面會顯示下列三個不同資料表的資料。 需要檢視模型，其包含代表三個資料表的三個屬性。
 
-使用下列程式碼建立 *SchoolViewModels/InstructorIndexData.cs*：
+使用下列程式碼建立 *SchoolViewModels/InstructorIndexData.cs* ：
 
 [!code-csharp[](intro/samples/cu30/Models/SchoolViewModels/InstructorIndexData.cs)]
 
@@ -248,13 +249,13 @@ EF Core 有幾種方式可以將相關資料載入到實體的導覽屬性：
 
 ### <a name="update-the-instructors-index-page"></a>更新 Instructors [索引] 頁面
 
-使用下列程式碼更新 *Pages/Instructors/Index.cshtml*。
+使用下列程式碼更新 *Pages/Instructors/Index.cshtml* 。
 
 [!code-cshtml[](intro/samples/cu30/Pages/Instructors/Index.cshtml?highlight=1,5,8,16-21,25-32,43-57,67-102,104-126)]
 
 上述程式碼會進行下列變更：
 
-* 將 `page` 指示詞從 `@page` 更新為 `@page "{id:int?}"`。 `"{id:int?}"` 是路由範本。 路由範本將 URL 中的整數查詢字串變更為路由資料。 例如，只有在 `@page` 指示詞產生如下的 URL 時，按一下講師的 [選取]**** 連結：
+* 將 `page` 指示詞從 `@page` 更新為 `@page "{id:int?}"`。 `"{id:int?}"` 是路由範本。 路由範本將 URL 中的整數查詢字串變更為路由資料。 例如，只有在 `@page` 指示詞產生如下的 URL 時，按一下講師的 [選取]  連結：
 
   `https://localhost:5001/Instructors?id=2`
 
@@ -262,7 +263,7 @@ EF Core 有幾種方式可以將相關資料載入到實體的導覽屬性：
 
   `https://localhost:5001/Instructors/2`
 
-* 新增 [辦公室]**** 資料行，該資料行只有在 `item.OfficeAssignment` 不是 Null 時才會顯示 `item.OfficeAssignment.Location`。 因為這是一對零或一關聯性，所有可能沒有相關的 OfficeAssignment 實體。
+* 新增 [辦公室]  資料行，該資料行只有在 `item.OfficeAssignment` 不是 Null 時才會顯示 `item.OfficeAssignment.Location`。 因為這是一對零或一關聯性，所有可能沒有相關的 OfficeAssignment 實體。
 
   ```html
   @if (item.OfficeAssignment != null)
@@ -271,7 +272,7 @@ EF Core 有幾種方式可以將相關資料載入到實體的導覽屬性：
   }
   ```
 
-* 新增 [課程]**** 資料行，以顯示每位講師所教授的課程。 如需此 razor 語法的詳細資訊，請參閱 [明確的行轉換](xref:mvc/views/razor#explicit-line-transition) 。
+* 新增 [課程]  資料行，以顯示每位講師所教授的課程。 如需此 razor 語法的詳細資訊，請參閱 [明確的行轉換](xref:mvc/views/razor#explicit-line-transition) 。
 
 * 新增程式碼，將 `class="success"` 動態新增至所選講師和課程的 `tr` 項目。 這會使用啟動程序類別設定所選取資料列的背景色彩。
 
@@ -284,7 +285,7 @@ EF Core 有幾種方式可以將相關資料載入到實體的導覽屬性：
   <tr class="@selectedRow">
   ```
 
-* 新增標示為**選取**的超連結。 此連結會將所選取的講師識別碼傳送至 `Index` 方法，並設定背景色彩。
+* 新增標示為 **選取** 的超連結。 此連結會將所選取的講師識別碼傳送至 `Index` 方法，並設定背景色彩。
 
   ```html
   <a asp-action="Index" asp-route-id="@item.ID">Select</a> |
@@ -296,7 +297,7 @@ EF Core 有幾種方式可以將相關資料載入到實體的導覽屬性：
 
 執行應用程式，然後選取 [ **講師** ] 索引標籤。此頁面會顯示 `Location` 來自相關實體的 (office) `OfficeAssignment` 。 如果 `OfficeAssignment` 為 Null，則會顯示空的資料表資料格。
 
-按一下講師的 [選取]**** 連結。 資料列樣式會變更，並會顯示指派給該講師的課程。
+按一下講師的 [選取]  連結。 資料列樣式會變更，並會顯示指派給該講師的課程。
 
 選取課程，以查看已註冊學生和其年級的清單。
 
@@ -318,7 +319,7 @@ EF Core 有幾種方式可以將相關資料載入到實體的導覽屬性：
 
 假設使用者很少會想要查看課程中的註冊項目。 在此情況下，最佳方法就是在要求時，只載入註冊資料。 在本節中，`OnGetAsync` 更新為針對 `Enrollments` 和 `Students` 使用明確式載入。
 
-使用下列程式碼更新 *Pages/Instructors/Index.cshtml.cs*。
+使用下列程式碼更新 *Pages/Instructors/Index.cshtml.cs* 。
 
 [!code-csharp[](intro/samples/cu30/Pages/Instructors/Index.cshtml.cs?highlight=31-35,52-56)]
 
@@ -370,7 +371,7 @@ EF Core 有幾種方式可以將相關資料載入到實體的導覽屬性：
 
   ![個別查詢範例](read-related-data/_static/separate-queries.png)
 
-  注意：EF Core 會將導覽屬性自動修正為先前已載入至內容執行個體的任何其他實體。 即使「未」** 明確包含導覽屬性的資料，如果先前已載入某些或所有相關實體，仍然可能會填入該屬性。
+  注意：EF Core 會將導覽屬性自動修正為先前已載入至內容執行個體的任何其他實體。 即使「未」  明確包含導覽屬性的資料，如果先前已載入某些或所有相關實體，仍然可能會填入該屬性。
 
 * [明確載入](/ef/core/querying/related-data#explicit-loading)。 第一次讀取實體時，不會擷取相關資料。 必須撰寫程式碼，才能在需要時擷取相關資料。 使用個別查詢的明確式載入會導致多個查詢傳送至資料庫。 透過明確式載入，程式碼會指定要載入的導覽屬性。 請使用 `Load` 方法來執行明確式載入。 例如：
 
@@ -401,7 +402,7 @@ Course 實體包含導覽屬性，其中包含 `Department` 實體。 `Departmen
 
 # <a name="visual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code)
 
- 執行以下命令：
+ 執行下列命令：
 
   ```dotnetcli
   dotnet aspnet-codegenerator razorpage -m Course -dc SchoolContext -udl -outDir Pages\Courses --referenceScriptLibraries
@@ -413,7 +414,7 @@ Course 實體包含導覽屬性，其中包含 `Department` 實體。 `Departmen
 
 開啟 *Pages/Courses/Index.cshtml.cs* 並檢查 `OnGetAsync` 方法。 Scaffolding 引擎已針對 `Department` 導覽屬性指定積極式載入。 `Include` 方法可指定積極式載入。
 
-執行應用程式並選取**課程**連結。 部門資料行便會顯示沒有用的 `DepartmentID`。
+執行應用程式並選取 **課程** 連結。 部門資料行便會顯示沒有用的 `DepartmentID`。
 
 以下列程式碼更新 `OnGetAsync` 方法：
 
@@ -421,21 +422,21 @@ Course 實體包含導覽屬性，其中包含 `Department` 實體。 `Departmen
 
 上述程式碼會新增 `AsNoTracking`。 `AsNoTracking` 可改善效能，因為不會追蹤傳回的實體。 不會追蹤實體的原因是它們不會在目前的內容中更新。
 
-以下列醒目提示的標記更新 *Pages/Courses/Index.cshtml*：
+以下列醒目提示的標記更新 *Pages/Courses/Index.cshtml* ：
 
 [!code-cshtml[](intro/samples/cu/Pages/Courses/Index.cshtml?highlight=4,7,15-17,34-36,44)]
 
 已對包含 Scaffold 的程式碼進行下列變更：
 
 * 已將標題從「索引」) 變更為「課程」。
-* 新增顯示 `CourseID` 屬性值的 [編號]**** 資料行。 主索引鍵預設不會進行 Scaffold，因為它們對終端使用者通常沒有任何意義。 不過，在此情況下，主索引鍵有意義。
-* 變更 [部門]**** 資料行來顯示部門名稱。 此程式碼會顯示已載入到 `Department` 導覽屬性之 `Department` 實體的 `Name` 屬性：
+* 新增顯示 `CourseID` 屬性值的 [編號]  資料行。 主索引鍵預設不會進行 Scaffold，因為它們對終端使用者通常沒有任何意義。 不過，在此情況下，主索引鍵有意義。
+* 變更 [部門]  資料行來顯示部門名稱。 此程式碼會顯示已載入到 `Department` 導覽屬性之 `Department` 實體的 `Name` 屬性：
 
   ```html
   @Html.DisplayFor(modelItem => item.Department.Name)
   ```
 
-執行應用程式，並選取 [Courses]**** 索引標籤來查看含有部門名稱的清單。
+執行應用程式，並選取 [Courses]  索引標籤來查看含有部門名稱的清單。
 
 ![Courses [索引] 頁面](read-related-data/_static/courses-index.png)
 
@@ -476,7 +477,7 @@ Course 實體包含導覽屬性，其中包含 `Department` 實體。 `Departmen
 
 講師頁面會顯示下列三個不同資料表的資料。 建立的檢視模型會包含三個實體代表三個資料表。
 
-在 *SchoolViewModels* 資料夾中，以下列程式碼建立 *InstructorIndexData.cs*：
+在 *SchoolViewModels* 資料夾中，以下列程式碼建立 *InstructorIndexData.cs* ：
 
 [!code-csharp[](intro/samples/cu/Models/SchoolViewModels/InstructorIndexData.cs)]
 
@@ -488,7 +489,7 @@ Course 實體包含導覽屬性，其中包含 `Department` 實體。 `Departmen
 
 # <a name="visual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code)
 
- 執行以下命令：
+ 執行下列命令：
 
   ```dotnetcli
   dotnet aspnet-codegenerator razorpage -m Instructor -dc SchoolContext -udl -outDir Pages\Instructors --referenceScriptLibraries
@@ -499,7 +500,7 @@ Course 實體包含導覽屬性，其中包含 `Department` 實體。 `Departmen
 上述命令會 Scaffold `Instructor` 模型。 
 執行應用程式並巡覽至講師頁面。
 
-以下列程式碼取代 *Pages/Instructors/Index.cshtml.cs*：
+以下列程式碼取代 *Pages/Instructors/Index.cshtml.cs* ：
 
 [!code-csharp[](intro/samples/cu/Pages/Instructors/Index1.cshtml.cs?name=snippet_all&highlight=2,18-99)]
 
@@ -516,13 +517,13 @@ Course 實體包含導覽屬性，其中包含 `Department` 實體。 `Departmen
 
 ### <a name="update-the-instructors-index-page"></a>更新 Instructors [索引] 頁面
 
-以下列標記更新 *Pages/Instructors/Index.cshtml*：
+以下列標記更新 *Pages/Instructors/Index.cshtml* ：
 
 [!code-cshtml[](intro/samples/cu/Pages/Instructors/IndexRRD.cshtml?range=1-65&highlight=1,5,8,16-21,25-32,43-57)]
 
 上述標記會進行下列變更：
 
-* 將 `page` 指示詞從 `@page` 更新為 `@page "{id:int?}"`。 `"{id:int?}"` 是路由範本。 路由範本將 URL 中的整數查詢字串變更為路由資料。 例如，只有在 `@page` 指示詞產生如下的 URL 時，按一下講師的 [選取]**** 連結：
+* 將 `page` 指示詞從 `@page` 更新為 `@page "{id:int?}"`。 `"{id:int?}"` 是路由範本。 路由範本將 URL 中的整數查詢字串變更為路由資料。 例如，只有在 `@page` 指示詞產生如下的 URL 時，按一下講師的 [選取]  連結：
 
   `http://localhost:1234/Instructors?id=2`
 
@@ -530,8 +531,8 @@ Course 實體包含導覽屬性，其中包含 `Department` 實體。 `Departmen
 
   `http://localhost:1234/Instructors/2`
 
-* 頁面標題是 **Instructors**。
-* 新增 [辦公室]**** 資料行，該資料行只有在 `item.OfficeAssignment` 不是 Null 時才會顯示 `item.OfficeAssignment.Location`。 因為這是一對零或一關聯性，所有可能沒有相關的 OfficeAssignment 實體。
+* 頁面標題是 **Instructors** 。
+* 新增 [辦公室]  資料行，該資料行只有在 `item.OfficeAssignment` 不是 Null 時才會顯示 `item.OfficeAssignment.Location`。 因為這是一對零或一關聯性，所有可能沒有相關的 OfficeAssignment 實體。
 
   ```html
   @if (item.OfficeAssignment != null)
@@ -540,7 +541,7 @@ Course 實體包含導覽屬性，其中包含 `Department` 實體。 `Departmen
   }
   ```
 
-* 新增 [課程]**** 資料行，以顯示每位講師所教授的課程。 如需此 razor 語法的詳細資訊，請參閱 [明確的行轉換](xref:mvc/views/razor#explicit-line-transition) 。
+* 新增 [課程]  資料行，以顯示每位講師所教授的課程。 如需此 razor 語法的詳細資訊，請參閱 [明確的行轉換](xref:mvc/views/razor#explicit-line-transition) 。
 
 * 新增程式碼，將 `class="success"` 動態新增至所選取講師的 `tr` 項目。 這會使用啟動程序類別設定所選取資料列的背景色彩。
 
@@ -553,7 +554,7 @@ Course 實體包含導覽屬性，其中包含 `Department` 實體。 `Departmen
   <tr class="@selectedRow">
   ```
 
-* 新增標示為**選取**的超連結。 此連結會將所選取的講師識別碼傳送至 `Index` 方法，並設定背景色彩。
+* 新增標示為 **選取** 的超連結。 此連結會將所選取的講師識別碼傳送至 `Index` 方法，並設定背景色彩。
 
   ```html
   <a asp-action="Index" asp-route-id="@item.ID">Select</a> |
@@ -561,7 +562,7 @@ Course 實體包含導覽屬性，其中包含 `Department` 實體。 `Departmen
 
 執行應用程式，然後選取 [ **講師** ] 索引標籤。此頁面會顯示 `Location` 來自相關實體的 (office) `OfficeAssignment` 。 如果 OfficeAssignment 是 Null，就會顯示空的資料表資料格。
 
-按一下**選取**連結。 資料列樣式變更。
+按一下 **選取** 連結。 資料列樣式變更。
 
 ### <a name="add-courses-taught-by-selected-instructor"></a>新增選取的講師所教授的課程
 
@@ -602,7 +603,7 @@ Course 實體包含導覽屬性，其中包含 `Department` 實體。 `Departmen
 
 當選取講師時，上述標記會顯示與講師相關的課程。
 
-測試應用程式。 按一下講師頁面上的**選取**連結。
+測試應用程式。 按一下講師頁面上的 **選取** 連結。
 
 ### <a name="show-student-data"></a>顯示學生資料
 
@@ -612,7 +613,7 @@ Course 實體包含導覽屬性，其中包含 `Department` 實體。 `Departmen
 
 [!code-csharp[](intro/samples/cu/Pages/Instructors/Index.cshtml.cs?name=snippet_ThenInclude&highlight=6-9)]
 
-更新 *Pages/Instructors/Index.cshtml*。 將下列標記新增至檔案結尾：
+更新 *Pages/Instructors/Index.cshtml* 。 將下列標記新增至檔案結尾：
 
 [!code-cshtml[](intro/samples/cu/Pages/Instructors/IndexRRD.cshtml?range=103-)]
 

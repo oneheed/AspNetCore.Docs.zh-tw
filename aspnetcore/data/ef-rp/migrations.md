@@ -5,6 +5,7 @@ description: 頁面的第4部分 Razor 和 Entity Framework 的教學課程系�
 ms.author: riande
 ms.date: 07/22/2019
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -16,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: data/ef-rp/migrations
-ms.openlocfilehash: 78eb466fcfeb130e411df490f033114b3fdebeef
-ms.sourcegitcommit: 24106b7ffffc9fff410a679863e28aeb2bbe5b7e
+ms.openlocfilehash: e6d1b9f041e892aaa37840c28fdb3153bf098b0d
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 09/17/2020
-ms.locfileid: "90722627"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93061102"
 ---
 # <a name="part-4-no-locrazor-pages-with-ef-core-migrations-in-aspnet-core"></a>第4部分： Razor ASP.NET Core 中有 EF Core 遷移的頁面
 
@@ -45,7 +46,7 @@ ms.locfileid: "90722627"
 
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
-使用 **SQL Server 物件總管** (SSOX) 刪除資料庫，或在**套件管理員主控台** (PMC) 中執行下列命令：
+使用 **SQL Server 物件總管** (SSOX) 刪除資料庫，或在 **套件管理員主控台** (PMC) 中執行下列命令：
 
 ```powershell
 Drop-Database
@@ -113,7 +114,7 @@ EF Core `migrations add` 命令已產生用來建立資料庫的程式碼。 此
 
 ## <a name="the-data-model-snapshot"></a>資料模型快照集
 
-移轉會在 *Migrations/SchoolContextModelSnapshot.cs* 中建立目前資料模型的「快照集」**。 當您新增移轉時，EF 會比較目前資料模型與快照集檔案，以判斷變更的內容。
+移轉會在  。 當您新增移轉時，EF 會比較目前資料模型與快照集檔案，以判斷變更的內容。
 
 由於快照集檔案會追蹤資料模型的狀態，您無法藉由刪除 `<timestamp>_<migrationname>.cs` 檔案來刪除移轉。 若要退出最新的移轉，您必須使用 `migrations remove` 命令。 該命令會刪除移轉，並確保能正確地重設快照集。 如需詳細資訊，請參閱 [dotnet ef 遷移移除](/ef/core/miscellaneous/cli/dotnet#dotnet-ef-migrations-remove)。
 
@@ -132,7 +133,7 @@ context.Database.EnsureCreated();
 
 ## <a name="applying-migrations-in-production"></a>在生產環境中套用移轉
 
-建議在應用程式啟動時，生產環境應用程式**不應該**呼叫 [Database.Migrate](/dotnet/api/microsoft.entityframeworkcore.relationaldatabasefacadeextensions.migrate#Microsoft_EntityFrameworkCore_RelationalDatabaseFacadeExtensions_Migrate_Microsoft_EntityFrameworkCore_Infrastructure_DatabaseFacade_)。 不應該從部署至伺服器陣列的應用程式呼叫 `Migrate`。 如果應用程式相應放大至多個伺服器執行個體，則很難確保不從多部伺服器進行資料庫結構描述更新，或與讀取/寫入存取發生衝突。
+建議在應用程式啟動時，生產環境應用程式 **不應該** 呼叫 [Database.Migrate](/dotnet/api/microsoft.entityframeworkcore.relationaldatabasefacadeextensions.migrate#Microsoft_EntityFrameworkCore_RelationalDatabaseFacadeExtensions_Migrate_Microsoft_EntityFrameworkCore_Infrastructure_DatabaseFacade_)。 不應該從部署至伺服器陣列的應用程式呼叫 `Migrate`。 如果應用程式相應放大至多個伺服器執行個體，則很難確保不從多部伺服器進行資料庫結構描述更新，或與讀取/寫入存取發生衝突。
 
 資料庫移轉應該在部署中以受控制的方式完成。 生產環境資料庫移轉方法包括：
 
@@ -185,11 +186,11 @@ https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/data/ef-rp/intr
 
 ## <a name="drop-the-database"></a>卸除資料庫
 
-使用 [SQL Server 物件總管]**** (SSOX) 或 `database drop` 命令：
+使用 [SQL Server 物件總管]  (SSOX) 或 `database drop` 命令：
 
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
-在 [套件管理員主控台]**** (PMC) 中，執行下列命令：
+在 [套件管理員主控台]  (PMC) 中，執行下列命令：
 
 ```powershell
 Drop-Database
@@ -250,7 +251,7 @@ Migrations 會呼叫 `Up` 方法，以實作移轉所需的資料模型變更。
 
 ### <a name="the-data-model-snapshot"></a>資料模型快照集
 
-移轉會在 *Migrations/SchoolContextModelSnapshot.cs* 中建立目前資料庫結構描述的「快照」**。 當您新增移轉時，EF 會比較資料模型與快照集檔案，以判斷變更的內容。
+移轉會在  。 當您新增移轉時，EF 會比較資料模型與快照集檔案，以判斷變更的內容。
 
 若要刪除移轉，請使用下列命令：
 
@@ -276,7 +277,7 @@ remove migrations 命令會刪除移轉，並確保正確地重設快照集。
 
 * 略過移轉，並建立資料庫和結構描述。
 * 不會建立移轉資料表。
-* 「無法」** 與移轉搭配使用。
+* 「無法」  與移轉搭配使用。
 * 設計用來測試或快速原型化經常卸除並重新建立資料庫的位置。
 
 移除 `EnsureCreated`：
@@ -289,13 +290,13 @@ context.Database.EnsureCreated();
 
 ### <a name="inspect-the-database"></a>檢查資料庫
 
-使用 **SQL Server 物件總管**來檢查資料庫。 請注意已新增 `__EFMigrationsHistory` 資料表。 `__EFMigrationsHistory` 資料表會追蹤哪些移轉經套用至資料庫。 檢視 `__EFMigrationsHistory` 資料表中的資料，它會顯示第一個移轉的某個資料列。 上述 CLI 輸出範例中的最後一則記錄會顯示建立此資料列的 INSERT 陳述式。
+使用 **SQL Server 物件總管** 來檢查資料庫。 請注意已新增 `__EFMigrationsHistory` 資料表。 `__EFMigrationsHistory` 資料表會追蹤哪些移轉經套用至資料庫。 檢視 `__EFMigrationsHistory` 資料表中的資料，它會顯示第一個移轉的某個資料列。 上述 CLI 輸出範例中的最後一則記錄會顯示建立此資料列的 INSERT 陳述式。
 
 執行應用程式，並確認一切運作正常。
 
 ## <a name="applying-migrations-in-production"></a>在生產環境中套用移轉
 
-建議在應用程式啟動時，生產環境應用程式**不**應該呼叫 [Database.Migrate](/dotnet/api/microsoft.entityframeworkcore.relationaldatabasefacadeextensions.migrate#Microsoft_EntityFrameworkCore_RelationalDatabaseFacadeExtensions_Migrate_Microsoft_EntityFrameworkCore_Infrastructure_DatabaseFacade_)。 `Migrate` 不應該從伺服器陣列中的應用程式進行呼叫。 例如，如果應用程式已使用向外延展 (執行應用程式的多個執行個體) 進行雲端部署。
+建議在應用程式啟動時，生產環境應用程式 **不** 應該呼叫 [Database.Migrate](/dotnet/api/microsoft.entityframeworkcore.relationaldatabasefacadeextensions.migrate#Microsoft_EntityFrameworkCore_RelationalDatabaseFacadeExtensions_Migrate_Microsoft_EntityFrameworkCore_Infrastructure_DatabaseFacade_)。 `Migrate` 不應該從伺服器陣列中的應用程式進行呼叫。 例如，如果應用程式已使用向外延展 (執行應用程式的多個執行個體) 進行雲端部署。
 
 資料庫移轉應該在部署中以受控制的方式完成。 生產環境資料庫移轉方法包括：
 

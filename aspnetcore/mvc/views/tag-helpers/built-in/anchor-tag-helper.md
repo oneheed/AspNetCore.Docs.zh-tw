@@ -6,6 +6,7 @@ ms.author: scaddie
 ms.custom: mvc
 ms.date: 10/13/2019
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -17,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: mvc/views/tag-helpers/builtin-th/anchor-tag-helper
-ms.openlocfilehash: fcb58e2e0bfc6598edeb8c7f79986c3faf84e316
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: d39db59b0fc273fe4193a4864f302ecd3f4ad348
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88633925"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93060907"
 ---
 # <a name="anchor-tag-helper-in-aspnet-core"></a>ASP.NET Core 中的錨點標籤協助程式
 
@@ -34,7 +35,7 @@ ms.locfileid: "88633925"
 
 [查看或下載範例程式碼](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/mvc/views/tag-helpers/built-in/samples) ([如何下載](xref:index#how-to-download-a-sample)) 
 
-這整份文件的範例皆使用 *SpeakerController*：
+這整份文件的範例皆使用 *SpeakerController* ：
 
 [!code-csharp[](samples/TagHelpersBuiltIn/Controllers/SpeakerController.cs?name=snippet_SpeakerController)]
 
@@ -52,7 +53,7 @@ ms.locfileid: "88633925"
 <a href="/Speaker">All Speakers</a>
 ```
 
-若僅指定 `asp-controller` 屬性而未指定 `asp-action`，則預設的 `asp-action` 值即為與目前所執行之檢視相關的控制器動作。 若在上述的標記中省略 `asp-action`，且在 *HomeController*'s *Index* 檢視 (*/Home*) 使用錨點標籤協助程式，則產生的 HTML 即為：
+若僅指定 `asp-controller` 屬性而未指定 `asp-action`，則預設的 `asp-action` 值即為與目前所執行之檢視相關的控制器動作。 若在上述的標記中省略 `asp-action`，且在 *HomeController* 's *Index* 檢視 ( */Home* ) 使用錨點標籤協助程式，則產生的 HTML 即為：
 
 ```html
 <a href="/Home">All Speakers</a>
@@ -138,7 +139,7 @@ MVC 檢視會使用動作提供的模型，如下所示：
 
 [!code-cshtml[](samples/TagHelpersBuiltIn/Views/Home/Index.cshtml?name=snippet_AspRoute)]
 
-錨點標記協助程式會使用 URL */Speaker/Evaluations*，直接對該控制器動作產生路由。 產生的 HTML：
+錨點標記協助程式會使用 URL */Speaker/Evaluations* ，直接對該控制器動作產生路由。 產生的 HTML：
 
 ```html
 <a href="/Speaker/Evaluations">Speaker Evaluations</a>
@@ -200,7 +201,7 @@ Razor ASP.NET Core 2.1 或更新版本支援頁面區域。
         * *Index.cshtml.cs*
   * **頁面**
 
-參考*會話*區域索引頁面的標記*Index* Razor 為：
+參考 *會話* 區域索引頁面的標記 *Index* Razor 為：
 
 [!code-cshtml[](samples/TagHelpersBuiltIn/Views/Home/Index.cshtml?name=snippet_AspAreaRazorPages)]
 
@@ -235,7 +236,7 @@ Razor ASP.NET Core 2.1 或更新版本支援頁面區域。
         * *\_>viewstart*
   * **控制器**
 
-將 `asp-area` 設定為 "Blogs" 會在 此錨點標籤之相關控制器和檢視的路由前面加上目錄 *Areas/Blogs*。 要參考 *AboutBlog* 檢視的標記如下：
+將 `asp-area` 設定為 "Blogs" 會在 此錨點標籤之相關控制器和檢視的路由前面加上目錄 *Areas/Blogs* 。 要參考 *AboutBlog* 檢視的標記如下：
 
 [!code-cshtml[](samples/TagHelpersBuiltIn/Views/Home/Index.cshtml?name=snippet_AspArea)]
 

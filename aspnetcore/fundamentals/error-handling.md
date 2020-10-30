@@ -7,6 +7,7 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 12/05/2019
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -18,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: fundamentals/error-handling
-ms.openlocfilehash: da7f50b27e447b86bd8a06851b767488d51b7050
-ms.sourcegitcommit: a07f83b00db11f32313045b3492e5d1ff83c4437
+ms.openlocfilehash: c8174c7e253a596d02dbc6cec183453b3723bc24
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 09/15/2020
-ms.locfileid: "90592887"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93060465"
 ---
 # <a name="handle-errors-in-aspnet-core"></a>處理 ASP.NET Core 中的錯誤
 
@@ -37,7 +38,7 @@ ms.locfileid: "90592887"
 
 ## <a name="developer-exception-page"></a>開發人員例外狀況頁面
 
-「開發人員例外狀況頁面」** 會顯示要求例外狀況的詳細資訊。 ASP.NET Core 範本會產生下列程式碼：
+「開發人員例外狀況頁面」  會顯示要求例外狀況的詳細資訊。 ASP.NET Core 範本會產生下列程式碼：
 
 [!code-csharp[](error-handling/samples/5.x/ErrorHandlingSample/Startup.cs?name=snippet&highlight=3-6)]
 
@@ -45,11 +46,11 @@ ms.locfileid: "90592887"
 
 範本 <xref:Microsoft.AspNetCore.Builder.DeveloperExceptionPageExtensions.UseDeveloperExceptionPage%2A> 會提早放置於中介軟體管線中，讓它可以攔截接下來中介軟體中擲回的例外狀況。
 
-上述程式碼只會在應用程式于開發環境中執行時， ***才*** 啟用開發人員例外狀況頁面。 當應用程式在生產環境中執行時，不應公開顯示詳細的例外狀況資訊。 如需設定環境的詳細資訊，請參閱<xref:fundamentals/environments>。
+上述程式碼只會在應用程式于開發環境中執行時， **才** 啟用開發人員例外狀況頁面 *。 當應用程式在生產環境中執行時，不應公開顯示詳細的例外狀況資訊。 如需設定環境的詳細資訊，請參閱<xref:fundamentals/environments>。
 
 開發人員例外狀況頁面包含下列有關例外狀況和要求的資訊：
 
-* 堆疊追蹤
+_ 堆疊追蹤
 * 查詢字串參數（如果有的話）
 * Cookie如果有的話
 * 標題
@@ -76,12 +77,12 @@ RazorPages 應用程式範本會 *.cshtml* <xref:Microsoft.AspNetCore.Mvc.RazorP
 [!code-csharp[](error-handling/samples/5.x/ErrorHandlingSample/Pages/Error.cshtml.cs?name=snippet)]
 
 > [!WARNING]
-> 請**勿**提供敏感性的錯誤資訊給用戶端。 提供錯誤有安全性風險。
+> 請 **勿** 提供敏感性的錯誤資訊給用戶端。 提供錯誤有安全性風險。
 
 若要測試 [範例應用程式](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/error-handling/samples/5.x)中的例外狀況：
 
 * 將環境設定為生產環境。
-* 從 `webBuilder.UseStartup<Startup>();` *Program.cs*中移除批註。
+* 從 `webBuilder.UseStartup<Startup>();` *Program.cs* 中移除批註。
 * 在首頁上選取 [ **觸發例外** 狀況]。
 
 ## <a name="exception-handler-lambda"></a>例外處理常式 Lambda
@@ -97,17 +98,17 @@ In the preceding code, `await context.Response.WriteAsync(new string(' ', 512));
 -->
 
 > [!WARNING]
-> 請**勿**從 <xref:Microsoft.AspNetCore.Diagnostics.IExceptionHandlerFeature> 或 <xref:Microsoft.AspNetCore.Diagnostics.IExceptionHandlerPathFeature> 提供錯誤資訊給用戶端。 提供錯誤有安全性風險。
+> 請 **勿** 從 <xref:Microsoft.AspNetCore.Diagnostics.IExceptionHandlerFeature> 或 <xref:Microsoft.AspNetCore.Diagnostics.IExceptionHandlerPathFeature> 提供錯誤資訊給用戶端。 提供錯誤有安全性風險。
 
 測試 [範例應用程式](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/error-handling/samples/5.x)中的例外狀況處理 lambda：
 
 * 將環境設定為生產環境。
-* 從 `webBuilder.UseStartup<StartupLambda>();` *Program.cs*中移除批註。
+* 從 `webBuilder.UseStartup<StartupLambda>();` *Program.cs* 中移除批註。
 * 在首頁上選取 [ **觸發例外** 狀況]。
 
 ## <a name="usestatuscodepages"></a>UseStatusCodePages
 
-根據預設，ASP.NET Core 的應用程式不會提供 HTTP 錯誤狀態碼（例如 *404-找不*到）的狀態字碼頁面。 當應用程式遇到沒有主體的 HTTP 400-499 錯誤條件時，會傳回狀態碼和空白的回應主體。 若要提供狀態字碼頁面，請使用狀態字碼頁面中介軟體。 若要針對常見的錯誤狀態碼啟用預設的純文字處理常式，請呼叫 `Startup.Configure` 方法中的 <xref:Microsoft.AspNetCore.Builder.StatusCodePagesExtensions.UseStatusCodePages%2A>：
+根據預設，ASP.NET Core 的應用程式不會提供 HTTP 錯誤狀態碼（例如 *404-找不* 到）的狀態字碼頁面。 當應用程式遇到沒有主體的 HTTP 400-499 錯誤條件時，會傳回狀態碼和空白的回應主體。 若要提供狀態字碼頁面，請使用狀態字碼頁面中介軟體。 若要針對常見的錯誤狀態碼啟用預設的純文字處理常式，請呼叫 `Startup.Configure` 方法中的 <xref:Microsoft.AspNetCore.Builder.StatusCodePagesExtensions.UseStatusCodePages%2A>：
 
 [!code-csharp[](error-handling/samples/5.x/ErrorHandlingSample/StartupUseStatusCodePages.cs?name=snippet&highlight=13)]
 
@@ -130,7 +131,7 @@ Status Code: 404; Not Found
 若要 `UseStatusCodePages` 在 [範例應用程式](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/error-handling/samples/5.x)中進行測試：
 
 * 將環境設定為生產環境。
-* 從 `webBuilder.UseStartup<StartupUseStatusCodePages>();` *Program.cs*中移除批註。
+* 從 `webBuilder.UseStartup<StartupUseStatusCodePages>();` *Program.cs* 中移除批註。
 * 選取首頁首頁上的連結。
 
 ### <a name="usestatuscodepages-with-format-string"></a>具格式字串的 UseStatusCodePages
@@ -143,7 +144,7 @@ Status Code: 404; Not Found
 
 `UseStatusCodePages` 使用格式字串時，通常不會在生產環境中使用，因為它會傳回不適合用戶的訊息。
 
-若要 `UseStatusCodePages` 在 [範例應用程式](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/error-handling/samples/5.x)中進行測試，請 `webBuilder.UseStartup<StartupFormat>();` 從 *Program.cs*中移除批註。
+若要 `UseStatusCodePages` 在 [範例應用程式](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/error-handling/samples/5.x)中進行測試，請 `webBuilder.UseStartup<StartupFormat>();` 從 *Program.cs* 中移除批註。
 
 ### <a name="usestatuscodepages-with-lambda"></a>具 Lambda 的 UseStatusCodePages
 
@@ -153,7 +154,7 @@ Status Code: 404; Not Found
 
 `UseStatusCodePages` 使用 lambda 時，通常不會在生產環境中使用，因為它會傳回不適合用戶的訊息。
 
-若要 `UseStatusCodePages` 在 [範例應用程式](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/error-handling/samples/5.x)中進行測試，請 `webBuilder.UseStartup<StartupStatusLambda>();` 從 *Program.cs*中移除批註。
+若要 `UseStatusCodePages` 在 [範例應用程式](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/error-handling/samples/5.x)中進行測試，請 `webBuilder.UseStartup<StartupStatusLambda>();` 從 *Program.cs* 中移除批註。
 
 ### <a name="usestatuscodepageswithredirects"></a>UseStatusCodePagesWithRedirects
 
@@ -171,7 +172,7 @@ URL 範本可以包含 `{0}` 狀態碼的預留位置，如上述程式碼所示
 * 應用程式應將用戶端重新導向至不同的端點時 (通常是在由其他應用程式處理錯誤的情況下)。 針對 Web 應用程式，用戶端的瀏覽器網址列會反映重新導向後的端點。
 * 應用程式不應該保留並傳回原始狀態碼與初始重新導向回應時。
 
-若要 `UseStatusCodePages` 在 [範例應用程式](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/error-handling/samples/5.x)中進行測試，請 `webBuilder.UseStartup<StartupSCredirect>();` 從 *Program.cs*中移除批註。
+若要 `UseStatusCodePages` 在 [範例應用程式](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/error-handling/samples/5.x)中進行測試，請 `webBuilder.UseStartup<StartupSCredirect>();` 從 *Program.cs* 中移除批註。
 
 ### <a name="usestatuscodepageswithreexecute"></a>UseStatusCodePagesWithReExecute
 
@@ -208,7 +209,7 @@ When using a placeholder in the path, confirm that the endpoint can process the 
 
 如需 Razor 頁面範例，請參閱[範例應用程式](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/error-handling/samples/5.x)中的[pages/MyStatusCode2。](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/error-handling/samples/5.x/ErrorHandlingSample/Pages)
 
-若要 `UseStatusCodePages` 在 [範例應用程式](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/error-handling/samples/5.x)中進行測試，請 `webBuilder.UseStartup<StartupSCreX>();` 從 *Program.cs*中移除批註。
+若要 `UseStatusCodePages` 在 [範例應用程式](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/error-handling/samples/5.x)中進行測試，請 `webBuilder.UseStartup<StartupSCreX>();` 從 *Program.cs* 中移除批註。
 
 ## <a name="disable-status-code-pages"></a>停用狀態碼頁面
 
@@ -248,7 +249,7 @@ When using a placeholder in the path, confirm that the endpoint can process the 
 * Dotnet 會處理損毀狀況。
 * 當 HTTP 伺服器是 [Kestrel](xref:fundamentals/servers/kestrel) 時，不會顯示任何錯誤頁面。
 
-在 [IIS](/iis) (或 Azure App Service) 或 [IIS Express](/iis/extensions/introduction-to-iis-express/iis-express-overview) 上執行時，如果無法啟動處理序，[模組](xref:host-and-deploy/aspnet-core-module)會傳回 *502.5 - 處理序失敗*。 如需詳細資訊，請參閱<xref:test/troubleshoot-azure-iis>。
+在 [IIS](/iis) (或 Azure App Service) 或 [IIS Express](/iis/extensions/introduction-to-iis-express/iis-express-overview) 上執行時，如果無法啟動處理序， [模組](xref:host-and-deploy/aspnet-core-module)會傳回 *502.5 - 處理序失敗* 。 如需詳細資訊，請參閱<xref:test/troubleshoot-azure-iis>。
 
 ## <a name="database-error-page"></a>資料庫錯誤頁面
 
@@ -285,7 +286,7 @@ When using a placeholder in the path, confirm that the endpoint can process the 
 
 ## <a name="developer-exception-page"></a>開發人員例外狀況頁面
 
-「開發人員例外狀況頁面」** 會顯示要求例外狀況的詳細資訊。 ASP.NET Core 範本會產生下列程式碼：
+「開發人員例外狀況頁面」  會顯示要求例外狀況的詳細資訊。 ASP.NET Core 範本會產生下列程式碼：
 
 [!code-csharp[](error-handling/samples/2.x/ErrorHandlingSample/Startup.cs?name=snippet_DevPageAndHandlerPage&highlight=1-4)]
 
@@ -293,7 +294,7 @@ When using a placeholder in the path, confirm that the endpoint can process the 
 
 範本會在 <xref:Microsoft.AspNetCore.Builder.DeveloperExceptionPageExtensions.UseDeveloperExceptionPage%2A> 任何中介軟體之前放置，因此例外狀況會在接下來的中介軟體中捕捉。
 
-上述 **程式碼只會在應用程式于開發環境中執行時，才會**啟用開發人員例外狀況頁面。 當應用程式在生產環境中執行時，不應公開顯示詳細的例外狀況資訊。 如需設定環境的詳細資訊，請參閱<xref:fundamentals/environments>。
+上述 **程式碼只會在應用程式于開發環境中執行時，才會** 啟用開發人員例外狀況頁面。 當應用程式在生產環境中執行時，不應公開顯示詳細的例外狀況資訊。 如需設定環境的詳細資訊，請參閱<xref:fundamentals/environments>。
 
 開發人員例外狀況頁面包含下列有關例外狀況和要求的資訊：
 
@@ -324,7 +325,7 @@ RazorPages 應用程式範本會 *.cshtml* <xref:Microsoft.AspNetCore.Mvc.RazorP
 [!code-csharp[](error-handling/samples/2.x/ErrorHandlingSample/Pages/MyFolder/Error.cshtml.cs?name=snippet_ExceptionHandlerPathFeature&3,7)]
 
 > [!WARNING]
-> 請**勿**提供敏感性的錯誤資訊給用戶端。 提供錯誤有安全性風險。
+> 請 **勿** 提供敏感性的錯誤資訊給用戶端。 提供錯誤有安全性風險。
 
 若要觸發先前的例外狀況處理頁面，請將環境設定為生產環境，並強制執行例外狀況。
 
@@ -339,13 +340,13 @@ RazorPages 應用程式範本會 *.cshtml* <xref:Microsoft.AspNetCore.Mvc.RazorP
 在上述程式碼中， `await context.Response.WriteAsync(new string(' ', 512));` 會加入，因此 Internet Explorer 瀏覽器會顯示錯誤訊息，而不是 IE 錯誤訊息。 如需詳細資訊，請參閱 [此 GitHub 問題](https://github.com/dotnet/AspNetCore.Docs/issues/16144)。
 
 > [!WARNING]
-> 請**勿**從 <xref:Microsoft.AspNetCore.Diagnostics.IExceptionHandlerFeature> 或 <xref:Microsoft.AspNetCore.Diagnostics.IExceptionHandlerPathFeature> 提供錯誤資訊給用戶端。 提供錯誤有安全性風險。
+> 請 **勿** 從 <xref:Microsoft.AspNetCore.Diagnostics.IExceptionHandlerFeature> 或 <xref:Microsoft.AspNetCore.Diagnostics.IExceptionHandlerPathFeature> 提供錯誤資訊給用戶端。 提供錯誤有安全性風險。
 
-若要在[範例應用程式](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/error-handling/samples) \(英文\) 中查看例外狀況處理 Lambda 的結果，請使用 `ProdEnvironment` 和 `ErrorHandlerLambda` 前置處理器指示詞，並選取首頁上的 [觸發例外狀況]****。
+若要在  。
 
 ## <a name="usestatuscodepages"></a>UseStatusCodePages
 
-根據預設，ASP.NET Core 應用程式不會提供 HTTP 狀態碼 (例如「404 - 找不到」**) 等狀態碼頁面。 應用程式會傳回狀態碼和空白回應主體。 若要提供狀態碼頁面，請使用狀態碼頁面中介軟體。
+根據預設，ASP.NET Core 應用程式不會提供 HTTP 狀態碼 (例如「404 - 找不到」  ) 等狀態碼頁面。 應用程式會傳回狀態碼和空白回應主體。 若要提供狀態碼頁面，請使用狀態碼頁面中介軟體。
 
 中介軟體是由 [AspNetCore](https://www.nuget.org/packages/Microsoft.AspNetCore.Diagnostics/) 套件提供。
 
@@ -377,12 +378,12 @@ Status Code: 404; Not Found
 
 <xref:Microsoft.AspNetCore.Builder.StatusCodePagesExtensions.UseStatusCodePagesWithRedirects%2A> 擴充方法：
 
-* 傳送「302 - 已找到」** 狀態碼傳送給用戶端。
+* 傳送「302 - 已找到」  狀態碼傳送給用戶端。
 * 將用戶端重新導向到 URL 範本中提供的位置。
 
 [!code-csharp[](error-handling/samples/2.x/ErrorHandlingSample/Startup.cs?name=snippet_StatusCodePagesWithRedirect)]
 
-URL 範本可以針對狀態碼包含 `{0}` 預留位置，如範例所示。 如果 URL 範本的開頭是 (波狀符號 `~`) ， `~` 會由應用程式取代 `PathBase` 。 如果您指向應用程式內的端點，請建立端點的 MVC 視圖或 Razor 頁面。 如需 Razor 頁面範例，請參閱[範例應用程式](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/error-handling/samples)中的*pages/StatusCode. cshtml。*
+URL 範本可以針對狀態碼包含 `{0}` 預留位置，如範例所示。 如果 URL 範本的開頭是 (波狀符號 `~`) ， `~` 會由應用程式取代 `PathBase` 。 如果您指向應用程式內的端點，請建立端點的 MVC 視圖或 Razor 頁面。 如需 Razor 頁面範例，請參閱 [範例應用程式](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/error-handling/samples)中的 *pages/StatusCode. cshtml。*
 
 此方法通常是在下列應用程式相關情況下使用：
 
@@ -398,7 +399,7 @@ URL 範本可以針對狀態碼包含 `{0}` 預留位置，如範例所示。 �
 
 [!code-csharp[](error-handling/samples/2.x/ErrorHandlingSample/Startup.cs?name=snippet_StatusCodePagesWithReExecute)]
 
-如果您指向應用程式內的端點，請建立端點的 MVC 視圖或 Razor 頁面。 請確定先放置，才能將 `UseStatusCodePagesWithReExecute` `UseRouting` 要求重新路由至狀態頁面。 如需 Razor 頁面範例，請參閱[範例應用程式](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/error-handling/samples)中的*pages/StatusCode. cshtml。*
+如果您指向應用程式內的端點，請建立端點的 MVC 視圖或 Razor 頁面。 請確定先放置，才能將 `UseStatusCodePagesWithReExecute` `UseRouting` 要求重新路由至狀態頁面。 如需 Razor 頁面範例，請參閱 [範例應用程式](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/error-handling/samples)中的 *pages/StatusCode. cshtml。*
 
 此方法通常是在下列應用程式相關情況下使用：
 
@@ -443,7 +444,7 @@ if (statusCodePagesFeature != null)
 
 ## <a name="server-exception-handling"></a>伺服器例外狀況處理
 
-除了應用程式中的例外狀況處理邏輯之外，[HTTP 伺服器實作](xref:fundamentals/servers/index)也可以處理一些例外狀況。 如果伺服器在回應標頭傳送之前攔截到例外狀況，伺服器會傳送「500 - 內部伺服器錯誤」** 回應，且沒有回應本文。 如果伺服器在回應標頭傳送之後攔截到例外狀況，伺服器會關閉連線。 應用程式未處理的要求會由伺服器來處理。 當伺服器處理要求時，任何發生的例外狀況均由伺服器的例外狀況處理功能來處理。 應用程式的自訂錯誤頁面、例外狀況處理中介軟體或篩選條件並不會影響此行為。
+除了應用程式中的例外狀況處理邏輯之外，[HTTP 伺服器實作](xref:fundamentals/servers/index)也可以處理一些例外狀況。 如果伺服器在回應標頭傳送之前攔截到例外狀況，伺服器會傳送「500 - 內部伺服器錯誤」  回應，且沒有回應本文。 如果伺服器在回應標頭傳送之後攔截到例外狀況，伺服器會關閉連線。 應用程式未處理的要求會由伺服器來處理。 當伺服器處理要求時，任何發生的例外狀況均由伺服器的例外狀況處理功能來處理。 應用程式的自訂錯誤頁面、例外狀況處理中介軟體或篩選條件並不會影響此行為。
 
 ## <a name="startup-exception-handling"></a>啟動例外狀況處理
 
@@ -455,7 +456,7 @@ if (statusCodePagesFeature != null)
 * Dotnet 會處理損毀狀況。
 * 當 HTTP 伺服器是 [Kestrel](xref:fundamentals/servers/kestrel) 時，不會顯示任何錯誤頁面。
 
-在 [IIS](/iis) (或 Azure App Service) 或 [IIS Express](/iis/extensions/introduction-to-iis-express/iis-express-overview) 上執行時，如果無法啟動處理序，[模組](xref:host-and-deploy/aspnet-core-module)會傳回 *502.5 - 處理序失敗*。 如需詳細資訊，請參閱<xref:test/troubleshoot-azure-iis>。
+在 [IIS](/iis) (或 Azure App Service) 或 [IIS Express](/iis/extensions/introduction-to-iis-express/iis-express-overview) 上執行時，如果無法啟動處理序， [模組](xref:host-and-deploy/aspnet-core-module)會傳回 *502.5 - 處理序失敗* 。 如需詳細資訊，請參閱<xref:test/troubleshoot-azure-iis>。
 
 ## <a name="database-error-page"></a>資料庫錯誤頁面
 

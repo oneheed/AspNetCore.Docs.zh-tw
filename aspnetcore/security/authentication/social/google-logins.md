@@ -6,6 +6,7 @@ ms.author: riande
 ms.custom: mvc, seodec18
 ms.date: 03/19/2020
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -17,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: security/authentication/google-logins
-ms.openlocfilehash: a7a5260a2446ac3f3be00755ef051e56080a7485
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: 111ea7c972778dfd5296d0401c16563aeaa36a63
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88634289"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93060309"
 ---
 # <a name="google-external-login-setup-in-aspnet-core"></a>ASP.NET Core 中的 Google 外部登入設定
 
@@ -33,11 +34,11 @@ ms.locfileid: "88634289"
 ## <a name="create-a-google-api-console-project-and-client-id"></a>建立 Google API 主控台專案和用戶端識別碼
 
 * 安裝 [AspNetCore。 Google](https://www.nuget.org/packages/Microsoft.AspNetCore.Authentication.Google)。
-* 流覽至將 [Google 登入整合到您的 web 應用程式](https://developers.google.com/identity/sign-in/web/sign-in) ，並選取 [ **設定專案**]。
-* 在 [ **設定 OAuth 用戶端** ] 對話方塊中，選取 [ **Web 服務器**]。
+* 流覽至將 [Google Sign-In 整合到您的 web 應用程式](https://developers.google.com/identity/sign-in/web/sign-in) ，並選取 [ **設定專案** ]。
+* 在 [ **設定 OAuth 用戶端** ] 對話方塊中，選取 [ **Web 服務器** ]。
 * 在 [ **授權重新導向 uri** ] 文字專案方塊中，設定重新導向 uri。 例如， `https://localhost:44312/signin-google`
-* 儲存 **用戶端識別碼** 和 **用戶端密碼**。
-* 部署網站時，請從 **Google 主控台**註冊新的公用 url。
+* 儲存 **用戶端識別碼** 和 **用戶端密碼** 。
+* 部署網站時，請從 **Google 主控台** 註冊新的公用 url。
 
 ## <a name="store-the-google-client-id-and-secret"></a>儲存 Google 用戶端識別碼和密碼
 
@@ -65,7 +66,7 @@ ms.locfileid: "88634289"
 
 ## <a name="sign-in-with-google"></a>以 Google 登入
 
-* 執行應用程式，然後按一下 [ **登入**]。 使用 Google 登入的選項隨即出現。
+* 執行應用程式，然後按一下 [ **登入** ]。 使用 Google 登入的選項隨即出現。
 * 按一下 [ **google** ] 按鈕，這會重新導向至 google 進行驗證。
 * 輸入您的 Google 認證之後，系統會將您重新導向回到網站。
 
@@ -82,7 +83,7 @@ URI 區段 `/signin-google` 會設定為 Google 驗證提供者的預設回呼�
 ## <a name="troubleshooting"></a>疑難排解
 
 * 如果登入無法運作，而且您未收到任何錯誤，請切換到開發模式，讓問題更容易進行偵測。
-* 如果 Identity 未透過呼叫來 `services.AddIdentity` 設定 `ConfigureServices` ，則嘗試在 ArgumentException 中驗證結果 *：必須提供 ' SignInScheme ' 選項*。 本教學課程中使用的專案範本可確保這項操作已完成。
+* 如果 Identity 未透過呼叫來 `services.AddIdentity` 設定 `ConfigureServices` ，則嘗試在 ArgumentException 中驗證結果 *：必須提供 ' SignInScheme ' 選項* 。 本教學課程中使用的專案範本可確保這項操作已完成。
 * 如果未藉由套用初始遷移來建立網站資料庫，則在 *處理要求錯誤時* ，您會收到資料庫作業失敗。 選取 [套用 **遷移** ] 來建立資料庫，然後重新整理頁面以繼續發生錯誤。
 
 ## <a name="next-steps"></a>後續步驟

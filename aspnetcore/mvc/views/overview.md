@@ -5,6 +5,7 @@ description: 了解檢視如何處理 ASP.NET Core MVC 中的應用程式資料�
 ms.author: riande
 ms.date: 12/05/2019
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -16,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: mvc/views/overview
-ms.openlocfilehash: 6afd69414f2dc0158f724c6e6f7b3a3e51c1e92c
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: 373b17377740441d3859e3b7d942017a22bc7a68
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88630675"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93060621"
 ---
 # <a name="views-in-aspnet-core-mvc"></a>ASP.NET Core MVC 中的檢視
 
@@ -29,13 +30,13 @@ ms.locfileid: "88630675"
 
 本文件說明 ASP.NET Core MVC 應用程式中所使用的檢視。 如需頁面的詳細資訊 Razor ，請參閱 [ Razor 頁面簡介](xref:razor-pages/index)。
 
-在模型檢視控制器 (MVC) 模式中，*view* 會處理應用程式的資料呈現和使用者互動。 View 是具有內嵌[ Razor 標記](xref:mvc/views/razor)的 HTML 範本。 Razor 標記是與 HTML 標籤互動的程式碼，用來產生傳送至用戶端的網頁。
+在模型檢視控制器 (MVC) 模式中， *view* 會處理應用程式的資料呈現和使用者互動。 View 是具有內嵌[ Razor 標記](xref:mvc/views/razor)的 HTML 範本。 Razor 標記是與 HTML 標籤互動的程式碼，用來產生傳送至用戶端的網頁。
 
-在 ASP.NET Core MVC 中，views 是在標記中使用[c # 程式設計語言](/dotnet/csharp/)的*cshtml 檔案。* Razor 通常，檢視檔案會分組成針對每個應用程式之[控制器](xref:mvc/controllers/actions)而命名的資料夾。 資料夾會儲存至應用程式根目錄的 *Views* 資料夾中：
+在 ASP.NET Core MVC 中，views 是在標記中使用 [c # 程式設計語言](/dotnet/csharp/)的 *cshtml 檔案。* Razor 通常，檢視檔案會分組成針對每個應用程式之[控制器](xref:mvc/controllers/actions)而命名的資料夾。 資料夾會儲存至應用程式根目錄的 *Views* 資料夾中：
 
 ![Visual Studio 方案總管中的 Views 資料夾是與 Home 資料夾一起開啟，以顯示 About.cshtml、Contact.cshtml 和 Index.cshtml 檔案](overview/_static/views_solution_explorer.png)
 
-*Home* 控制器是由 *Views* 資料夾內的 *Home* 資料夾所呈現。 *Home* 資料夾包含 *About*、*Contact* 和 *Index* (首頁) 網頁的檢視。 使用者要求這三個網頁中的其中一個時，*Home* 控制器中的控制器動作可決定使用這三個檢視的哪一個來建置網頁並將其傳回給使用者。
+*Home* 控制器是由 *Views* 資料夾內的 *Home* 資料夾所呈現。 *Home* 資料夾包含 *About* 、 *Contact* 和 *Index* (首頁) 網頁的檢視。 使用者要求這三個網頁中的其中一個時， *Home* 控制器中的控制器動作可決定使用這三個檢視的哪一個來建置網頁並將其傳回給使用者。
 
 使用[配置](xref:mvc/views/layout)，提供一致的網頁區段，並減少程式碼重複。 配置通常包含標頭、導覽和功能表項目，以及頁尾。 標頭和頁尾通常會包含許多中繼資料項目以及指令碼和樣式表連結的未定案標記。 配置可協助您避免在檢視中使用此未定案標記。
 
@@ -54,7 +55,7 @@ ms.locfileid: "88630675"
 
 ## <a name="creating-a-view"></a>建立檢視
 
-會在 *Views/[ControllerName]* 資料夾中建立控制器特有的檢視。 在控制器之間共用的檢視會放在 *Views/Shared* 資料夾中。 若要建立檢視，請新增檔案，並讓它與建立關聯的控制器動作同名，且副檔名為 *.cshtml*。 若要在 *Home* 控制器中建立與 *About* 動作對應的檢視，請在 *Views/Home* 資料夾中建立 *About.cshtml* 檔案：
+會在 *Views/[ControllerName]* 資料夾中建立控制器特有的檢視。 在控制器之間共用的檢視會放在 *Views/Shared* 資料夾中。 若要建立檢視，請新增檔案，並讓它與建立關聯的控制器動作同名，且副檔名為 *.cshtml* 。 若要在 *Home* 控制器中建立與 *About* 動作對應的檢視，請在 *Views/Home* 資料夾中建立 *About.cshtml* 檔案：
 
 [!code-cshtml[](../../common/samples/WebApplication1/Views/Home/About.cshtml)]
 
@@ -96,7 +97,7 @@ ms.locfileid: "88630675"
 
 ### <a name="view-discovery"></a>檢視探索
 
-動作傳回檢視時，會進行稱為「檢視探索」** 的程序。 此程序根據檢視名稱來決定使用的檢視檔案。 
+動作傳回檢視時，會進行稱為「檢視探索」  的程序。 此程序根據檢視名稱來決定使用的檢視檔案。 
 
 `View` 方法的預設行為 (`return View();`) 是傳回的檢視與從中呼叫它的動作方法同名。 例如，使用控制器的 *About* `ActionResult` 方法名稱來搜尋名為 *About.cshtml* 的檢視檔案。 首先，執行階段會在 *Views/[ControllerName]* 資料夾中尋找檢視。 如果在這裡找不到相符的檢視，則會搜尋檢視的 *Shared* 資料夾。
 
@@ -142,9 +143,9 @@ return View("./About");
 
 ### <a name="strongly-typed-data-viewmodel"></a>強型別資料 (viewmodel)
 
-最穩健的方法是在檢視中指定 [model](xref:mvc/models/model-binding) 類型。 此模型通常稱為 *viewmodel*。 您可以透過動作將 viewmodel 類型執行個體傳遞至檢視。
+最穩健的方法是在檢視中指定 [model](xref:mvc/models/model-binding) 類型。 此模型通常稱為 *viewmodel* 。 您可以透過動作將 viewmodel 類型執行個體傳遞至檢視。
 
-使用 viewmodel 將資料傳遞至檢視，讓檢視利用「強式」** 檢查。 *強式型別* (或*強型別*) 代表每個變數與常數都有明確定義的類型 (例如，`string`、`int` 或 `DateTime`)。 在編譯時期檢查檢視中所使用之類型的有效性。
+使用 viewmodel 將資料傳遞至檢視，讓檢視利用「強式」  檢查。 *強式型別* (或 *強型別* ) 代表每個變數與常數都有明確定義的類型 (例如，`string`、`int` 或 `DateTime`)。 在編譯時期檢查檢視中所使用之類型的有效性。
 
 [Visual Studio](https://visualstudio.microsoft.com) 與 [Visual Studio Code](https://code.visualstudio.com/) 會使用稱為 [IntelliSense](/visualstudio/ide/using-intellisense) 的功能，列出強型別類別成員。 當您想要查看 viewmodel 的屬性時，請鍵入 viewmodel 的變數名稱，後面接著句號 (`.`)。 這有助於更快速地撰寫程式碼，並且減少錯誤。
 
@@ -205,7 +206,7 @@ namespace WebApplication1.ViewModels
 
 `ViewBag`*無法在 Razor頁面。*
 
-除了強型別檢視之外，檢視還可以存取*弱型別* (也稱為*鬆散型別*) 資料集合。 與強式型別不同，「弱式型別」** (或「鬆散型別」**) 表示您未明確宣告所使用資料的類型。 您可以使用弱型別資料的集合，對控制器與檢視傳遞將少量的資料進出。
+除了強型別檢視之外，檢視還可以存取 *弱型別* (也稱為 *鬆散型別* ) 資料集合。 與強式型別不同，「弱式型別」  (或「鬆散型別」  ) 表示您未明確宣告所使用資料的類型。 您可以使用弱型別資料的集合，對控制器與檢視傳遞將少量的資料進出。
 
 | 在 ... 之間傳遞資料                        | 範例                                                                        |
 | ------------------------------------------------- | ------------------------------------------------------------------------------ |

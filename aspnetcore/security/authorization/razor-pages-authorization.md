@@ -7,6 +7,7 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 08/12/2019
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -18,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: security/authorization/razor-pages-authorization
-ms.openlocfilehash: b17717e7b3cbaa64d4ff00661f15439728f161d3
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: 69e1d639aeb55ae64cc54b1cda402ed6bcbb04ab
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88634887"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93060179"
 ---
 # <a name="no-locrazor-pages-authorization-conventions-in-aspnet-core"></a>Razor ASP.NET Core 中的頁面授權慣例
 
@@ -74,7 +75,7 @@ options.Conventions.AuthorizeFolder("/Private", "AtLeast21");
 options.Conventions.AuthorizeAreaPage("Identity", "/Manage/Accounts");
 ```
 
-頁面名稱是檔案的路徑，沒有相對於指定區域之頁面根目錄的副檔名。 例如，檔案 *區域/ Identity /Pages/Manage/Accounts.cshtml* 的頁面名稱為 */Manage/Accounts*。
+頁面名稱是檔案的路徑，沒有相對於指定區域之頁面根目錄的副檔名。 例如，檔案 *區域/ Identity /Pages/Manage/Accounts.cshtml* 的頁面名稱為 */Manage/Accounts* 。
 
 若要指定 [授權原則](xref:security/authorization/policies)，請使用 [AuthorizeAreaPage](xref:Microsoft.Extensions.DependencyInjection.PageConventionCollectionExtensions.AuthorizeAreaPage*)多載：
 
@@ -90,7 +91,7 @@ options.Conventions.AuthorizeAreaPage("Identity", "/Manage/Accounts", "AtLeast21
 options.Conventions.AuthorizeAreaFolder("Identity", "/Manage");
 ```
 
-資料夾路徑是相對於指定區域之頁面根目錄的資料夾路徑。 例如， *區域/ Identity /Pages/Manage/* 下檔案的資料夾路徑為 */Manage*。
+資料夾路徑是相對於指定區域之頁面根目錄的資料夾路徑。 例如， *區域/ Identity /Pages/Manage/* 下檔案的資料夾路徑為 */Manage* 。
 
 若要指定 [授權原則](xref:security/authorization/policies)，請使用 [AuthorizeAreaFolder](xref:Microsoft.Extensions.DependencyInjection.PageConventionCollectionExtensions.AuthorizeAreaFolder*)多載：
 
@@ -186,7 +187,7 @@ options.Conventions.AuthorizeFolder("/Private", "AtLeast21");
 options.Conventions.AuthorizeAreaPage("Identity", "/Manage/Accounts");
 ```
 
-頁面名稱是檔案的路徑，沒有相對於指定區域之頁面根目錄的副檔名。 例如，檔案 *區域/ Identity /Pages/Manage/Accounts.cshtml* 的頁面名稱為 */Manage/Accounts*。
+頁面名稱是檔案的路徑，沒有相對於指定區域之頁面根目錄的副檔名。 例如，檔案 *區域/ Identity /Pages/Manage/Accounts.cshtml* 的頁面名稱為 */Manage/Accounts* 。
 
 若要指定 [授權原則](xref:security/authorization/policies)，請使用 [AuthorizeAreaPage](xref:Microsoft.Extensions.DependencyInjection.PageConventionCollectionExtensions.AuthorizeAreaPage*)多載：
 
@@ -202,7 +203,7 @@ options.Conventions.AuthorizeAreaPage("Identity", "/Manage/Accounts", "AtLeast21
 options.Conventions.AuthorizeAreaFolder("Identity", "/Manage");
 ```
 
-資料夾路徑是相對於指定區域之頁面根目錄的資料夾路徑。 例如， *區域/ Identity /Pages/Manage/* 下檔案的資料夾路徑為 */Manage*。
+資料夾路徑是相對於指定區域之頁面根目錄的資料夾路徑。 例如， *區域/ Identity /Pages/Manage/* 下檔案的資料夾路徑為 */Manage* 。
 
 若要指定 [授權原則](xref:security/authorization/policies)，請使用 [AuthorizeAreaFolder](xref:Microsoft.Extensions.DependencyInjection.PageConventionCollectionExtensions.AuthorizeAreaFolder*)多載：
 

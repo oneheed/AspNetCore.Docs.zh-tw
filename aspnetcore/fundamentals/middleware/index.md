@@ -7,6 +7,7 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 07/15/2020
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -18,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: fundamentals/middleware/index
-ms.openlocfilehash: 32a4e54a46f062f3ff45d0b840237be53406dbdb
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: 06f55647ba2bb41152e16bb054e098abbe157cb8
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88630883"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93059360"
 ---
 # <a name="aspnet-core-middleware"></a>ASP.NET Core 中介軟體
 
@@ -38,7 +39,7 @@ ms.locfileid: "88630883"
 
 要求委派用於建置要求管線， 其會處理每個 HTTP 要求。
 
-要求委派的設定方式為使用 <xref:Microsoft.AspNetCore.Builder.RunExtensions.Run%2A>、<xref:Microsoft.AspNetCore.Builder.MapExtensions.Map%2A> 和 <xref:Microsoft.AspNetCore.Builder.UseExtensions.Use%2A> 擴充方法。 您可將個別要求委派指定為內嵌匿名方法 (在內嵌中介軟體中呼叫)，或於可重複使用的類別中加以定義。 這些可重複使用的類別及內嵌匿名方法皆為「中介軟體」**，也稱為「中介軟體元件」**。 要求管線中的每個中介軟體元件負責叫用管線中下一個元件，或對管線執行最少運算。 當中介軟體短路時，稱為「終端中介軟體」**，因為它會防止接下來的中介軟體處理要求。
+要求委派的設定方式為使用 <xref:Microsoft.AspNetCore.Builder.RunExtensions.Run%2A>、<xref:Microsoft.AspNetCore.Builder.MapExtensions.Map%2A> 和 <xref:Microsoft.AspNetCore.Builder.UseExtensions.Use%2A> 擴充方法。 您可將個別要求委派指定為內嵌匿名方法 (在內嵌中介軟體中呼叫)，或於可重複使用的類別中加以定義。 這些可重複使用的類別及內嵌匿名方法皆為「中介軟體」  ，也稱為「中介軟體元件」  。 要求管線中的每個中介軟體元件負責叫用管線中下一個元件，或對管線執行最少運算。 當中介軟體短路時，稱為「終端中介軟體」  ，因為它會防止接下來的中介軟體處理要求。
 
 <xref:migration/http-modules> 說明 ASP.NET Core 和 ASP.NET 4.x 之間的要求管線差異，並提供更多中介軟體範例。
 
@@ -54,11 +55,11 @@ ASP.NET Core 要求管線由要求委派序列組成，並會一個接著一個�
 
 [!code-csharp[](index/snapshot/Middleware/Startup.cs)]
 
-將多個要求委派鏈結在一起的方法是使用 <xref:Microsoft.AspNetCore.Builder.UseExtensions.Use%2A>。 `next` 參數代表管線中的下個委派。 您可以「不」** 呼叫「下一個」** 參數來對管線執行最少運算。 您通常可以在下個委派的前後執行動作，如下列範例所示：
+將多個要求委派鏈結在一起的方法是使用 <xref:Microsoft.AspNetCore.Builder.UseExtensions.Use%2A>。 `next` 參數代表管線中的下個委派。 您可以「不」  呼叫「下一個」  參數來對管線執行最少運算。 您通常可以在下個委派的前後執行動作，如下列範例所示：
 
 [!code-csharp[](index/snapshot/Chain/Startup.cs?highlight=5-10)]
 
-當委派不將要求傳遞到下一個委派時，這就是所謂*讓要求管線短路*。 因為最少運算可避免不必要的工作，所以經常使用。 例如，[靜態檔案中介軟體](xref:fundamentals/static-files)可以做為*終端中介軟體*使用，方式是處理靜態檔案的要求，並對剩餘的管線執行短路。 在中介軟體之前新增到管線且終結進一步處理的中介軟體在其 `next.Invoke` 陳述式之後仍然處理程式碼。 不過，查看下列有關嘗試寫入已傳送之回應的警告。
+當委派不將要求傳遞到下一個委派時，這就是所謂 *讓要求管線短路* 。 因為最少運算可避免不必要的工作，所以經常使用。 例如， [靜態檔案中介軟體](xref:fundamentals/static-files)可以做為 *終端中介軟體* 使用，方式是處理靜態檔案的要求，並對剩餘的管線執行短路。 在中介軟體之前新增到管線且終結進一步處理的中介軟體在其 `next.Invoke` 陳述式之後仍然處理程式碼。 不過，查看下列有關嘗試寫入已傳送之回應的警告。
 
 > [!WARNING]
 > 請不要在回應已傳送給用戶端之後呼叫 `next.Invoke`。 回應啟動後，變更為 <xref:Microsoft.AspNetCore.Http.HttpResponse> 會擲回例外狀況。 例如， [設定標頭和狀態碼會擲回例外狀況](xref:performance/performance-best-practices#do-not-modify-the-status-code-or-headers-after-the-response-body-has-started)。 若在呼叫 `next` 後寫入回應本文：
@@ -163,7 +164,7 @@ public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
 
 <xref:Microsoft.AspNetCore.Builder.ExceptionHandlerExtensions.UseExceptionHandler%2A> 是第一個新增到管道的中介軟體元件。 因此，例外處理常式中介軟體會攔截後續呼叫中發生的所有例外狀況。
 
-靜態檔案中介軟體會提前在管線中呼叫，以便其無須逐一處理剩餘的元件，就能處理要求及執行最少運算。 靜態檔案中介軟體 **不提供任何** 授權檢查。 靜態檔案中介軟體所提供的任何檔案（包括 *wwwroot*下的檔案）都可以公開使用。 如需保護靜態檔案的方法，請參閱 <xref:fundamentals/static-files>。
+靜態檔案中介軟體會提前在管線中呼叫，以便其無須逐一處理剩餘的元件，就能處理要求及執行最少運算。 靜態檔案中介軟體 **不提供任何** 授權檢查。 靜態檔案中介軟體所提供的任何檔案（包括 *wwwroot* 下的檔案）都可以公開使用。 如需保護靜態檔案的方法，請參閱 <xref:fundamentals/static-files>。
 
 若靜態檔案中介軟體未處理要求，該要求會繼續傳遞給執行驗證的驗證中介軟體 (<xref:Microsoft.AspNetCore.Builder.AuthAppBuilderExtensions.UseAuthentication%2A>)。 驗證不會對未經驗證的要求執行最少運算。 雖然驗證中介軟體會驗證要求，但只有在 MVC 選取特定 Razor 頁面或 mvc 控制器和動作之後，才會發生授權 (和拒絕) 。
 
@@ -248,7 +249,7 @@ app.Map("/level1", level1App => {
 
 ## <a name="built-in-middleware"></a>內建的中介軟體
 
-ASP.NET Core 隨附下列中介軟體元件。 「順序」** 欄說明 中介軟體在要求處理管線中的位置，以及中介軟體可終止要求處理的情況。 當中介軟體將要求處理管線短路並防止接下來的下游中介軟體處理要求時，這就是所謂的「終端中介軟體」**。 如需詳細資訊，請參閱[使用 IApplicationBuilder 建立中介軟體管線](#create-a-middleware-pipeline-with-iapplicationbuilder)。
+ASP.NET Core 隨附下列中介軟體元件。 「順序」  欄說明 中介軟體在要求處理管線中的位置，以及中介軟體可終止要求處理的情況。 當中介軟體將要求處理管線短路並防止接下來的下游中介軟體處理要求時，這就是所謂的「終端中介軟體」  。 如需詳細資訊，請參閱[使用 IApplicationBuilder 建立中介軟體管線](#create-a-middleware-pipeline-with-iapplicationbuilder)。
 
 | 中介軟體 | 描述 | 單 |
 | ---------- | ----------- | ----- |
@@ -277,7 +278,7 @@ ASP.NET Core 隨附下列中介軟體元件。 「順序」** 欄說明 中介�
 
 ## <a name="additional-resources"></a>其他資源
 
-* [存留期和註冊選項](xref:fundamentals/dependency-injection#lifetime-and-registration-options) 包含具有 *範圍*、 *暫時性*和 *單一* 存留期服務之中介軟體的完整範例。
+* [存留期和註冊選項](xref:fundamentals/dependency-injection#lifetime-and-registration-options) 包含具有 *範圍* 、 *暫時性* 和 *單一* 存留期服務之中介軟體的完整範例。
 * <xref:fundamentals/middleware/write>
 * <xref:test/middleware>
 * <xref:migration/http-modules>
@@ -299,7 +300,7 @@ ASP.NET Core 隨附下列中介軟體元件。 「順序」** 欄說明 中介�
 
 要求委派用於建置要求管線， 其會處理每個 HTTP 要求。
 
-要求委派的設定方式為使用 <xref:Microsoft.AspNetCore.Builder.RunExtensions.Run%2A>、<xref:Microsoft.AspNetCore.Builder.MapExtensions.Map%2A> 和 <xref:Microsoft.AspNetCore.Builder.UseExtensions.Use%2A> 擴充方法。 您可將個別要求委派指定為內嵌匿名方法 (在內嵌中介軟體中呼叫)，或於可重複使用的類別中加以定義。 這些可重複使用的類別及內嵌匿名方法皆為「中介軟體」**，也稱為「中介軟體元件」**。 要求管線中的每個中介軟體元件負責叫用管線中下一個元件，或對管線執行最少運算。 當中介軟體短路時，稱為「終端中介軟體」**，因為它會防止接下來的中介軟體處理要求。
+要求委派的設定方式為使用 <xref:Microsoft.AspNetCore.Builder.RunExtensions.Run%2A>、<xref:Microsoft.AspNetCore.Builder.MapExtensions.Map%2A> 和 <xref:Microsoft.AspNetCore.Builder.UseExtensions.Use%2A> 擴充方法。 您可將個別要求委派指定為內嵌匿名方法 (在內嵌中介軟體中呼叫)，或於可重複使用的類別中加以定義。 這些可重複使用的類別及內嵌匿名方法皆為「中介軟體」  ，也稱為「中介軟體元件」  。 要求管線中的每個中介軟體元件負責叫用管線中下一個元件，或對管線執行最少運算。 當中介軟體短路時，稱為「終端中介軟體」  ，因為它會防止接下來的中介軟體處理要求。
 
 <xref:migration/http-modules> 說明 ASP.NET Core 和 ASP.NET 4.x 之間的要求管線差異，並提供更多中介軟體範例。
 
@@ -317,11 +318,11 @@ ASP.NET Core 要求管線由要求委派序列組成，並會一個接著一個�
 
 第一個 <xref:Microsoft.AspNetCore.Builder.RunExtensions.Run%2A> 委派會終止管線。
 
-將多個要求委派鏈結在一起的方法是使用 <xref:Microsoft.AspNetCore.Builder.UseExtensions.Use%2A>。 `next` 參數代表管線中的下個委派。 您可以「不」** 呼叫「下一個」** 參數來對管線執行最少運算。 您通常可以在下個委派的前後執行動作，如下列範例所示：
+將多個要求委派鏈結在一起的方法是使用 <xref:Microsoft.AspNetCore.Builder.UseExtensions.Use%2A>。 `next` 參數代表管線中的下個委派。 您可以「不」  呼叫「下一個」  參數來對管線執行最少運算。 您通常可以在下個委派的前後執行動作，如下列範例所示：
 
 [!code-csharp[](index/snapshot/Chain/Startup.cs)]
 
-當委派不將要求傳遞到下一個委派時，這就是所謂*讓要求管線短路*。 因為最少運算可避免不必要的工作，所以經常使用。 例如，[靜態檔案中介軟體](xref:fundamentals/static-files)可以做為*終端中介軟體*使用，方式是處理靜態檔案的要求，並對剩餘的管線執行短路。 在中介軟體之前新增到管線且終結進一步處理的中介軟體在其 `next.Invoke` 陳述式之後仍然處理程式碼。 不過，查看下列有關嘗試寫入已傳送之回應的警告。
+當委派不將要求傳遞到下一個委派時，這就是所謂 *讓要求管線短路* 。 因為最少運算可避免不必要的工作，所以經常使用。 例如， [靜態檔案中介軟體](xref:fundamentals/static-files)可以做為 *終端中介軟體* 使用，方式是處理靜態檔案的要求，並對剩餘的管線執行短路。 在中介軟體之前新增到管線且終結進一步處理的中介軟體在其 `next.Invoke` 陳述式之後仍然處理程式碼。 不過，查看下列有關嘗試寫入已傳送之回應的警告。
 
 > [!WARNING]
 > 請不要在回應已傳送給用戶端之後呼叫 `next.Invoke`。 回應啟動後，變更為 <xref:Microsoft.AspNetCore.Http.HttpResponse> 會擲回例外狀況。 例如，變更設定標頭、狀態碼等都會擲回例外狀況。 若在呼叫 `next` 後寫入回應本文：
@@ -389,7 +390,7 @@ public void Configure(IApplicationBuilder app, IHostingEnvironment env)
 
 <xref:Microsoft.AspNetCore.Builder.ExceptionHandlerExtensions.UseExceptionHandler%2A> 是第一個新增到管道的中介軟體元件。 因此，例外處理常式中介軟體會攔截後續呼叫中發生的所有例外狀況。
 
-靜態檔案中介軟體會提前在管線中呼叫，以便其無須逐一處理剩餘的元件，就能處理要求及執行最少運算。 靜態檔案中介軟體 **不提供任何** 授權檢查。 靜態檔案中介軟體所提供的任何檔案（包括 *wwwroot*下的檔案）都可以公開使用。 如需保護靜態檔案的方法，請參閱 <xref:fundamentals/static-files>。
+靜態檔案中介軟體會提前在管線中呼叫，以便其無須逐一處理剩餘的元件，就能處理要求及執行最少運算。 靜態檔案中介軟體 **不提供任何** 授權檢查。 靜態檔案中介軟體所提供的任何檔案（包括 *wwwroot* 下的檔案）都可以公開使用。 如需保護靜態檔案的方法，請參閱 <xref:fundamentals/static-files>。
 
 若靜態檔案中介軟體未處理要求，該要求會繼續傳遞給執行驗證的驗證中介軟體 (<xref:Microsoft.AspNetCore.Builder.AuthAppBuilderExtensions.UseAuthentication%2A>)。 驗證不會對未經驗證的要求執行最少運算。 雖然驗證中介軟體會驗證要求，但只有在 MVC 選取特定 Razor 頁面或 mvc 控制器和動作之後，才會發生授權 (和拒絕) 。
 
@@ -456,7 +457,7 @@ app.Map("/level1", level1App => {
 
 ## <a name="built-in-middleware"></a>內建的中介軟體
 
-ASP.NET Core 隨附下列中介軟體元件。 「順序」** 欄說明 中介軟體在要求處理管線中的位置，以及中介軟體可終止要求處理的情況。 當中介軟體將要求處理管線短路並防止接下來的下游中介軟體處理要求時，這就是所謂的「終端中介軟體」**。 如需詳細資訊，請參閱[使用 IApplicationBuilder 建立中介軟體管線](#create-a-middleware-pipeline-with-iapplicationbuilder)。
+ASP.NET Core 隨附下列中介軟體元件。 「順序」  欄說明 中介軟體在要求處理管線中的位置，以及中介軟體可終止要求處理的情況。 當中介軟體將要求處理管線短路並防止接下來的下游中介軟體處理要求時，這就是所謂的「終端中介軟體」  。 如需詳細資訊，請參閱[使用 IApplicationBuilder 建立中介軟體管線](#create-a-middleware-pipeline-with-iapplicationbuilder)。
 
 | 中介軟體 | 描述 | 單 |
 | ---------- | ----------- | ----- |

@@ -7,6 +7,7 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 02/07/2020
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -18,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: razor-pages/razor-pages-conventions
-ms.openlocfilehash: fc639178fc29438e16ad0989e61bd8dd32cf7590
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: 2947bf0b697ca01f17d260b9f31aa3cc79d457b6
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88625488"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93059867"
 ---
 # <a name="no-locrazor-pages-route-and-app-conventions-in-aspnet-core"></a>Razor ASP.NET Core 中的頁面路由和應用程式慣例
 
@@ -127,7 +128,7 @@ Razor<xref:Microsoft.AspNetCore.Mvc.RazorPages.RazorPagesOptions.Conventions>當
 
 [!code-csharp[](razor-pages-conventions/samples/3.x/SampleApp/Conventions/GlobalHeaderPageApplicationModelConvention.cs?name=snippet1)]
 
-*Startup.cs*：
+*Startup.cs* ：
 
 [!code-csharp[](razor-pages-conventions/samples/3.x/SampleApp/Startup.cs?name=snippet2)]
 
@@ -141,7 +142,7 @@ Razor<xref:Microsoft.AspNetCore.Mvc.RazorPages.RazorPagesOptions.Conventions>當
 
 [!code-csharp[](razor-pages-conventions/samples/3.x/SampleApp/Conventions/GlobalPageHandlerModelConvention.cs?name=snippet1)]
 
-*Startup.cs*：
+*Startup.cs* ：
 
 [!code-csharp[](razor-pages-conventions/samples/3.x/SampleApp/Startup.cs?name=snippet10)]
 
@@ -287,7 +288,7 @@ Contact 頁面也可以透過其預設路由在 `/Contact` 上連線。
 
 [!code-csharp[](razor-pages-conventions/samples/3.x/SampleApp/Startup.cs?name=snippet9)]
 
-*AddHeaderWithFactory.cs*：
+*AddHeaderWithFactory.cs* ：
 
 [!code-csharp[](razor-pages-conventions/samples/3.x/SampleApp/Factories/AddHeaderWithFactory.cs?name=snippet1)]
 
@@ -409,7 +410,7 @@ Razor<xref:Microsoft.AspNetCore.Mvc.RazorPages.RazorPagesOptions.Conventions>當
 
 [!code-csharp[](razor-pages-conventions/samples/2.x/SampleApp/Conventions/GlobalHeaderPageApplicationModelConvention.cs?name=snippet1)]
 
-*Startup.cs*：
+*Startup.cs* ：
 
 [!code-csharp[](razor-pages-conventions/samples/2.x/SampleApp/Startup.cs?name=snippet2)]
 
@@ -423,7 +424,7 @@ Razor<xref:Microsoft.AspNetCore.Mvc.RazorPages.RazorPagesOptions.Conventions>當
 
 [!code-csharp[](razor-pages-conventions/samples/2.x/SampleApp/Conventions/GlobalPageHandlerModelConvention.cs?name=snippet1)]
 
-*Startup.cs*：
+*Startup.cs* ：
 
 [!code-csharp[](razor-pages-conventions/samples/2.x/SampleApp/Startup.cs?name=snippet10)]
 
@@ -577,7 +578,7 @@ Contact 頁面也可以透過其預設路由在 `/Contact` 上連線。
 
 [!code-csharp[](razor-pages-conventions/samples/2.x/SampleApp/Startup.cs?name=snippet9)]
 
-*AddHeaderWithFactory.cs*：
+*AddHeaderWithFactory.cs* ：
 
 [!code-csharp[](razor-pages-conventions/samples/2.x/SampleApp/Factories/AddHeaderWithFactory.cs?name=snippet1)]
 
@@ -699,7 +700,7 @@ Razor<xref:Microsoft.AspNetCore.Mvc.RazorPages.RazorPagesOptions.Conventions>當
 
 [!code-csharp[](razor-pages-conventions/samples/2.x/SampleApp/Conventions/GlobalHeaderPageApplicationModelConvention.cs?name=snippet1)]
 
-*Startup.cs*：
+*Startup.cs* ：
 
 [!code-csharp[](razor-pages-conventions/samples/2.x/SampleApp/Startup.cs?name=snippet2)]
 
@@ -713,7 +714,7 @@ Razor<xref:Microsoft.AspNetCore.Mvc.RazorPages.RazorPagesOptions.Conventions>當
 
 [!code-csharp[](razor-pages-conventions/samples/2.x/SampleApp/Conventions/GlobalPageHandlerModelConvention.cs?name=snippet1)]
 
-*Startup.cs*：
+*Startup.cs* ：
 
 [!code-csharp[](razor-pages-conventions/samples/2.x/SampleApp/Startup.cs?name=snippet10)]
 
@@ -833,7 +834,7 @@ Contact 頁面也可以透過其預設路由在 `/Contact` 上連線。
 
 [!code-csharp[](razor-pages-conventions/samples/2.x/SampleApp/Startup.cs?name=snippet9)]
 
-*AddHeaderWithFactory.cs*：
+*AddHeaderWithFactory.cs* ：
 
 [!code-csharp[](razor-pages-conventions/samples/2.x/SampleApp/Factories/AddHeaderWithFactory.cs?name=snippet1)]
 

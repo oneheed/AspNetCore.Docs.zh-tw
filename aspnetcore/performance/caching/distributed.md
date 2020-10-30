@@ -7,6 +7,7 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 02/07/2020
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -18,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: performance/caching/distributed
-ms.openlocfilehash: 0d27206412a098f4ea749ec10189bf24d2322de1
-ms.sourcegitcommit: 9a90b956af8d8584d597f1e5c1dbfb0ea9bb8454
+ms.openlocfilehash: 6d87c8de66bf5600189465b96dee903841106b6f
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 08/21/2020
-ms.locfileid: "88712476"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93061141"
 ---
 # <a name="distributed-caching-in-aspnet-core"></a>ASP.NET Core 中的分散式快取
 
@@ -45,7 +46,7 @@ ms.locfileid: "88712476"
 
 [查看或下載範例程式碼](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/performance/caching/distributed/samples/) ([如何下載](xref:index#how-to-download-a-sample)) 
 
-## <a name="prerequisites"></a>先決條件
+## <a name="prerequisites"></a>必要條件
 
 若要使用 SQL Server 的分散式快取，請將封裝參考新增至[node.js 套件。](https://www.nuget.org/packages/Microsoft.Extensions.Caching.SqlServer)
 
@@ -112,7 +113,7 @@ Table and index were created successfully.
 [!code-csharp[](distributed/samples/3.x/DistCacheSample/Startup.cs?name=snippet_AddDistributedSqlServerCache)]
 
 > [!NOTE]
-> <xref:Microsoft.Extensions.Caching.SqlServer.SqlServerCacheOptions.ConnectionString*> (以及（選擇性） <xref:Microsoft.Extensions.Caching.SqlServer.SqlServerCacheOptions.SchemaName*> 和 <xref:Microsoft.Extensions.Caching.SqlServer.SqlServerCacheOptions.TableName*>) 通常會儲存在原始檔控制之外 (例如，由[秘密管理員](xref:security/app-secrets)儲存或在 appsettings 的*appsettings.js*儲存 / *。環境}. json*檔案) 。 連接字串可能包含應從原始檔控制系統中保留的認證。
+> <xref:Microsoft.Extensions.Caching.SqlServer.SqlServerCacheOptions.ConnectionString*> (以及（選擇性） <xref:Microsoft.Extensions.Caching.SqlServer.SqlServerCacheOptions.SchemaName*> 和 <xref:Microsoft.Extensions.Caching.SqlServer.SqlServerCacheOptions.TableName*>) 通常會儲存在原始檔控制之外 (例如，由 [秘密管理員](xref:security/app-secrets)或 *appsettings.json* / *appsettings 儲存。環境}. json* 檔案) 。 連接字串可能包含應從原始檔控制系統中保留的認證。
 
 ### <a name="distributed-redis-cache"></a>分散式 Redis 快取
 
@@ -155,7 +156,7 @@ Table and index were created successfully.
 
 範例應用程式會插入到中供 <xref:Microsoft.Extensions.Caching.Distributed.IDistributedCache> `IndexModel` 索引頁面使用。
 
-每次載入 [索引] 頁面時，都會檢查快取中的快取時間 `OnGetAsync` 。 如果快取的時間尚未過期，則會顯示時間。 如果自上一次存取快取時間以來已經過了20秒 (上次載入此頁面的時間) ，則頁面會顯示快取的 *時間已過期*。
+每次載入 [索引] 頁面時，都會檢查快取中的快取時間 `OnGetAsync` 。 如果快取的時間尚未過期，則會顯示時間。 如果自上一次存取快取時間以來已經過了20秒 (上次載入此頁面的時間) ，則頁面會顯示快取的 *時間已過期* 。
 
 選取 [ **重設** 快取時間] 按鈕，立即將快取的時間更新為目前時間。 按鈕會觸發 `OnPostResetCachedTime` 處理常式方法。
 
@@ -212,7 +213,7 @@ Table and index were created successfully.
 
 [查看或下載範例程式碼](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/performance/caching/distributed/samples/) ([如何下載](xref:index#how-to-download-a-sample)) 
 
-## <a name="prerequisites"></a>先決條件
+## <a name="prerequisites"></a>必要條件
 
 若要使用 SQL Server 分散式快取，請參考[AspNetCore 中繼套件](xref:fundamentals/metapackage-app)，或將封裝參考加入至[。](https://www.nuget.org/packages/Microsoft.Extensions.Caching.SqlServer)
 
@@ -279,7 +280,7 @@ Table and index were created successfully.
 [!code-csharp[](distributed/samples/2.x/DistCacheSample/Startup.cs?name=snippet_AddDistributedSqlServerCache)]
 
 > [!NOTE]
-> <xref:Microsoft.Extensions.Caching.SqlServer.SqlServerCacheOptions.ConnectionString*> (以及（選擇性） <xref:Microsoft.Extensions.Caching.SqlServer.SqlServerCacheOptions.SchemaName*> 和 <xref:Microsoft.Extensions.Caching.SqlServer.SqlServerCacheOptions.TableName*>) 通常會儲存在原始檔控制之外 (例如，由[秘密管理員](xref:security/app-secrets)儲存或在 appsettings 的*appsettings.js*儲存 / *。環境}. json*檔案) 。 連接字串可能包含應從原始檔控制系統中保留的認證。
+> <xref:Microsoft.Extensions.Caching.SqlServer.SqlServerCacheOptions.ConnectionString*> (以及（選擇性） <xref:Microsoft.Extensions.Caching.SqlServer.SqlServerCacheOptions.SchemaName*> 和 <xref:Microsoft.Extensions.Caching.SqlServer.SqlServerCacheOptions.TableName*>) 通常會儲存在原始檔控制之外 (例如，由 [秘密管理員](xref:security/app-secrets)或 *appsettings.json* / *appsettings 儲存。環境}. json* 檔案) 。 連接字串可能包含應從原始檔控制系統中保留的認證。
 
 ### <a name="distributed-redis-cache"></a>分散式 Redis 快取
 
@@ -325,7 +326,7 @@ Table and index were created successfully.
 
 範例應用程式會插入到中供 <xref:Microsoft.Extensions.Caching.Distributed.IDistributedCache> `IndexModel` 索引頁面使用。
 
-每次載入 [索引] 頁面時，都會檢查快取中的快取時間 `OnGetAsync` 。 如果快取的時間尚未過期，則會顯示時間。 如果自上一次存取快取時間以來已經過了20秒 (上次載入此頁面的時間) ，則頁面會顯示快取的 *時間已過期*。
+每次載入 [索引] 頁面時，都會檢查快取中的快取時間 `OnGetAsync` 。 如果快取的時間尚未過期，則會顯示時間。 如果自上一次存取快取時間以來已經過了20秒 (上次載入此頁面的時間) ，則頁面會顯示快取的 *時間已過期* 。
 
 選取 [ **重設** 快取時間] 按鈕，立即將快取的時間更新為目前時間。 按鈕會觸發 `OnPostResetCachedTime` 處理常式方法。
 
@@ -382,7 +383,7 @@ Table and index were created successfully.
 
 [查看或下載範例程式碼](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/performance/caching/distributed/samples/) ([如何下載](xref:index#how-to-download-a-sample)) 
 
-## <a name="prerequisites"></a>先決條件
+## <a name="prerequisites"></a>必要條件
 
 若要使用 SQL Server 分散式快取，請參考[AspNetCore 中繼套件](xref:fundamentals/metapackage-app)，或將封裝參考加入至[。](https://www.nuget.org/packages/Microsoft.Extensions.Caching.SqlServer)
 
@@ -449,7 +450,7 @@ Table and index were created successfully.
 [!code-csharp[](distributed/samples/2.x/DistCacheSample/Startup.cs?name=snippet_AddDistributedSqlServerCache)]
 
 > [!NOTE]
-> <xref:Microsoft.Extensions.Caching.SqlServer.SqlServerCacheOptions.ConnectionString*> (以及（選擇性） <xref:Microsoft.Extensions.Caching.SqlServer.SqlServerCacheOptions.SchemaName*> 和 <xref:Microsoft.Extensions.Caching.SqlServer.SqlServerCacheOptions.TableName*>) 通常會儲存在原始檔控制之外 (例如，由[秘密管理員](xref:security/app-secrets)儲存或在 appsettings 的*appsettings.js*儲存 / *。環境}. json*檔案) 。 連接字串可能包含應從原始檔控制系統中保留的認證。
+> <xref:Microsoft.Extensions.Caching.SqlServer.SqlServerCacheOptions.ConnectionString*> (以及（選擇性） <xref:Microsoft.Extensions.Caching.SqlServer.SqlServerCacheOptions.SchemaName*> 和 <xref:Microsoft.Extensions.Caching.SqlServer.SqlServerCacheOptions.TableName*>) 通常會儲存在原始檔控制之外 (例如，由 [秘密管理員](xref:security/app-secrets)或 *appsettings.json* / *appsettings 儲存。環境}. json* 檔案) 。 連接字串可能包含應從原始檔控制系統中保留的認證。
 
 ### <a name="distributed-redis-cache"></a>分散式 Redis 快取
 
@@ -501,7 +502,7 @@ services.AddDistributedRedisCache(options =>
 
 範例應用程式會插入到中供 <xref:Microsoft.Extensions.Caching.Distributed.IDistributedCache> `IndexModel` 索引頁面使用。
 
-每次載入 [索引] 頁面時，都會檢查快取中的快取時間 `OnGetAsync` 。 如果快取的時間尚未過期，則會顯示時間。 如果自上一次存取快取時間以來已經過了20秒 (上次載入此頁面的時間) ，則頁面會顯示快取的 *時間已過期*。
+每次載入 [索引] 頁面時，都會檢查快取中的快取時間 `OnGetAsync` 。 如果快取的時間尚未過期，則會顯示時間。 如果自上一次存取快取時間以來已經過了20秒 (上次載入此頁面的時間) ，則頁面會顯示快取的 *時間已過期* 。
 
 選取 [ **重設** 快取時間] 按鈕，立即將快取的時間更新為目前時間。 按鈕會觸發 `OnPostResetCachedTime` 處理常式方法。
 

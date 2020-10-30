@@ -5,6 +5,7 @@ description: ''
 ms.author: riande
 ms.date: 12/07/2016
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -16,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: migration/http-modules
-ms.openlocfilehash: 808215d103db9c5d63fe63b6875a222e6b0ba1fa
-ms.sourcegitcommit: b5ebaf42422205d212e3dade93fcefcf7f16db39
+ms.openlocfilehash: 9664f49bd709d2c9e46130773211c339e391d1f6
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 10/21/2020
-ms.locfileid: "92326619"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93060699"
 ---
 # <a name="migrate-http-handlers-and-modules-to-aspnet-core-middleware"></a>將 HTTP 處理常式和模組遷移至 ASP.NET Core 中介軟體
 
@@ -39,7 +40,7 @@ ms.locfileid: "92326619"
 
 * 用來處理具有指定之檔案名或副檔名的要求，例如 *. report*
 
-* 在*Web.config*中[設定](/iis/configuration/system.webserver/handlers/)
+* 在 *Web.config* 中 [設定](/iis/configuration/system.webserver/handlers/)
 
 **模組包括：**
 
@@ -51,13 +52,13 @@ ms.locfileid: "92326619"
 
 * 可以新增至 HTTP 回應，或建立自己的
 
-* 在*Web.config*中[設定](/iis/configuration/system.webserver/modules/)
+* 在 *Web.config* 中 [設定](/iis/configuration/system.webserver/modules/)
 
 **模組處理傳入要求的順序取決於：**
 
 1. <https://docs.microsoft.com/previous-versions/ms227673(v=vs.140)>，這是 ASP.NET： [BeginRequest](/dotnet/api/system.web.httpapplication.beginrequest)、 [AuthenticateRequest](/dotnet/api/system.web.httpapplication.authenticaterequest)等所引發的一連串事件。每個模組都可以建立一個或多個事件的處理常式。
 
-2. 針對相同事件， *Web.config*中設定它們的順序。
+2. 針對相同事件， *Web.config* 中設定它們的順序。
 
 除了模組之外，您還可以將生命週期事件的處理常式加入至 *Global.asax.cs* 檔案。 這些處理常式會在設定的模組中的處理常式之後執行。
 
@@ -65,7 +66,7 @@ ms.locfileid: "92326619"
 
 **中介軟體比 HTTP 模組和處理常式簡單：**
 
-* 模組、處理常式、 *Global.asax.cs*、 *Web.config* (除了 IIS 設定) 和應用程式生命週期消失之外
+* 模組、處理常式、 *Global.asax.cs* 、 *Web.config* (除了 IIS 設定) 和應用程式生命週期消失之外
 
 * 模組和處理常式的角色已由中介軟體接管
 
@@ -132,7 +133,7 @@ ms.locfileid: "92326619"
 
 ## <a name="migrating-module-insertion-into-the-request-pipeline"></a>將模組插入遷移至要求管線
 
-HTTP 模組通常會使用 *Web.config*新增至要求管線：
+HTTP 模組通常會使用 *Web.config* 新增至要求管線：
 
 [!code-xml[](../migration/http-modules/sample/Asp.Net4/Asp.Net4/Web.config?highlight=6&range=1-3,32-33,36,43,50,101)]
 
@@ -140,7 +141,7 @@ HTTP 模組通常會使用 *Web.config*新增至要求管線：
 
 [!code-csharp[](../migration/http-modules/sample/Asp.Net.Core/Startup.cs?name=snippet_Configure&highlight=16)]
 
-在管線中，您插入新中介軟體的確切位置，取決於它以模組形式處理的事件 (`BeginRequest` 、等等 `EndRequest` ) 及其在 *Web.config*的模組清單中的順序。
+在管線中，您插入新中介軟體的確切位置，取決於它以模組形式處理的事件 (`BeginRequest` 、等等 `EndRequest` ) 及其在 *Web.config* 的模組清單中的順序。
 
 如先前所述，ASP.NET Core 中沒有應用程式生命週期，中介軟體的處理回應順序與模組所使用的順序不同。 這可能會讓您的訂購決策更具挑戰性。
 
@@ -180,7 +181,7 @@ HTTP 處理常式看起來像這樣：
 
 ## <a name="loading-middleware-options-using-the-options-pattern"></a>使用選項模式載入中介軟體選項
 
-某些模組和處理常式具有儲存在 *Web.config*中的設定選項。不過，在 ASP.NET Core 新的設定模型是用來取代 *Web.config*。
+某些模組和處理常式具有儲存在 *Web.config* 中的設定選項。不過，在 ASP.NET Core 新的設定模型是用來取代 *Web.config* 。
 
 新的設定 [系統](xref:fundamentals/configuration/index) 提供下列選項來解決此問題：
 
@@ -194,11 +195,11 @@ HTTP 處理常式看起來像這樣：
 
 2. 儲存選項值
 
-   設定系統可讓您將選項值儲存在任何您想要的位置。 不過，大部分的網站會使用 *appsettings.js*，因此我們將採用該方法：
+   設定系統可讓您將選項值儲存在任何您想要的位置。 不過，大部分的網站 *appsettings.json* 會使用，因此我們將採用該方法：
 
    [!code-json[](http-modules/sample/Asp.Net.Core/appsettings.json?range=1,14-18)]
 
-   這裡的*MyMiddlewareOptionsSection*是區段名稱。 它不一定要與選項類別的名稱相同。
+   這裡的 *MyMiddlewareOptionsSection* 是區段名稱。 它不一定要與選項類別的名稱相同。
 
 3. 建立選項值與 options 類別的關聯
 
@@ -206,7 +207,7 @@ HTTP 處理常式看起來像這樣：
 
     更新您的 `Startup` 類別：
 
-   1. 如果您使用 *appsettings.json*，請將它新增至函式中的設定產生器 `Startup` ：
+   1. 如果您正在使用 *appsettings.json* ，請將它新增至函式中的設定產生器 `Startup` ：
 
       [!code-csharp[](../migration/http-modules/sample/Asp.Net.Core/Startup.cs?name=snippet_Ctor&highlight=5-6)]
 
@@ -234,9 +235,9 @@ HTTP 處理常式看起來像這樣：
 
 解決方法是在類別中取得具有實際選項值的選項物件 `Startup` ，並將它們直接傳遞至中介軟體的每個實例。
 
-1. 新增第二個金鑰以 *appsettings.js于*
+1. 將第二個索引鍵新增至 *appsettings.json*
 
-   若要將第二組選項新增至 *appsettings.json* 檔案，請使用新的金鑰來唯一識別它：
+   若要在檔案中新增第二組選項 *appsettings.json* ，請使用新的金鑰來唯一識別它：
 
    [!code-json[](http-modules/sample/Asp.Net.Core/appsettings.json?range=1,10-18&highlight=2-5)]
 
@@ -266,7 +267,7 @@ public async Task Invoke(HttpContext context)
 
 [!code-csharp[](http-modules/sample/Asp.Net.Core/Middleware/HttpContextDemoMiddleware.cs?name=snippet_Items)]
 
-**唯一的要求識別碼 (沒有 system.string 對應) **
+**唯一的要求識別碼 (沒有 system.string 對應)**
 
 為您提供每個要求的唯一識別碼。 包含在您的記錄中非常有用。
 
@@ -323,7 +324,7 @@ public async Task Invoke(HttpContext context)
 [!code-csharp[](http-modules/sample/Asp.Net.Core/Middleware/HttpContextDemoMiddleware.cs?name=snippet_Form)]
 
 > [!WARNING]
-> 只有在內容子類型為 *x-www 表單 urlencoded* 或 *表單資料*時，才會讀取表單值。
+> 只有在內容子類型為 *x-www 表單 urlencoded* 或 *表單資料* 時，才會讀取表單值。
 
 **InputStream** 會將轉換成：
 
@@ -379,7 +380,7 @@ public async Task Invoke(HttpContext httpContext)
 
 **HttpCoNtext. 回應。 Cookie！**
 
-Cookie在*設定 Cookie *回應標頭中移動至瀏覽器。 如此一來，傳送 cookie 必須與用來傳送回應標頭的回呼相同：
+Cookie在 *設定 Cookie* 回應標頭中移動至瀏覽器。 如此一來，傳送 cookie 必須與用來傳送回應標頭的回呼相同：
 
 ```csharp
 public async Task Invoke(HttpContext httpContext)
@@ -396,6 +397,6 @@ public async Task Invoke(HttpContext httpContext)
 ## <a name="additional-resources"></a>其他資源
 
 * [HTTP 處理常式和 HTTP 模組總覽](/iis/configuration/system.webserver/)
-* [設定](xref:fundamentals/configuration/index)
+* [Configuration](xref:fundamentals/configuration/index)
 * [應用程式啟動](xref:fundamentals/startup)
 * [中介軟體](xref:fundamentals/middleware/index)

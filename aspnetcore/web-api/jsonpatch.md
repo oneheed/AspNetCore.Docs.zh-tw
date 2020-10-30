@@ -6,6 +6,7 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 04/02/2020
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -17,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: web-api/jsonpatch
-ms.openlocfilehash: e57c5185323305ccbef7960653c9174931e45d75
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: da507974b88c21de22e2c7a56950943207565138
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88635394"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93060543"
 ---
 # <a name="jsonpatch-in-aspnet-core-web-api"></a>ASP.NET Core Web API 中的 JsonPatch
 
@@ -67,7 +68,7 @@ PUT 和 [PATCH](https://tools.ietf.org/html/rfc5789) \(英文\) 方法均用來�
 
 ## <a name="json-patch"></a>JSON Patch
 
-[JSON Patch](https://tools.ietf.org/html/rfc6902) \(英文\) 是一種格式，可用來指定要套用至資源的更新。 JSON Patch 文件具有一個「作業」** 陣列。 每個作業都會識別特定的變更類型。 這類變更的範例包括新增陣列元素或取代屬性值。
+[JSON Patch](https://tools.ietf.org/html/rfc6902) \(英文\) 是一種格式，可用來指定要套用至資源的更新。 JSON Patch 文件具有一個「作業」  陣列。 每個作業都會識別特定的變更類型。 這類變更的範例包括新增陣列元素或取代屬性值。
 
 例如，下列 JSON 檔代表資源、資源的 JSON 修補檔，以及套用修補作業的結果。
 
@@ -121,7 +122,7 @@ PUT 和 [PATCH](https://tools.ietf.org/html/rfc5789) \(英文\) 方法均用來�
 
 下表顯示支援的作業，如 [JSON Patch 規格](https://tools.ietf.org/html/rfc6902) \(英文\) 中所定義：
 
-|作業  | 注意 |
+|作業  | 備註 |
 |-----------|--------------------------------|
 | `add`     | 加入屬性或陣列元素。 針對現有的屬性：設定值。|
 | `remove`  | 移除屬性或陣列元素。 |
@@ -279,7 +280,7 @@ PUT 和 [PATCH](https://tools.ietf.org/html/rfc5789) \(英文\) 方法均用來�
 
 ## <a name="json-patch"></a>JSON Patch
 
-[JSON Patch](https://tools.ietf.org/html/rfc6902) \(英文\) 是一種格式，可用來指定要套用至資源的更新。 JSON Patch 文件具有一個「作業」** 陣列。 每個作業都會識別特定類型的變更，例如，加入陣列元素或取代屬性值。
+[JSON Patch](https://tools.ietf.org/html/rfc6902) \(英文\) 是一種格式，可用來指定要套用至資源的更新。 JSON Patch 文件具有一個「作業」  陣列。 每個作業都會識別特定類型的變更，例如，加入陣列元素或取代屬性值。
 
 例如，下列 JSON 文件代表一個資源、一份適用於該資源的 JSON 修補文件，以及套用修補作業的結果。
 
@@ -333,7 +334,7 @@ PUT 和 [PATCH](https://tools.ietf.org/html/rfc5789) \(英文\) 方法均用來�
 
 下表顯示支援的作業，如 [JSON Patch 規格](https://tools.ietf.org/html/rfc6902) \(英文\) 中所定義：
 
-|作業  | 注意 |
+|作業  | 備註 |
 |-----------|--------------------------------|
 | `add`     | 加入屬性或陣列元素。 針對現有的屬性：設定值。|
 | `remove`  | 移除屬性或陣列元素。 |

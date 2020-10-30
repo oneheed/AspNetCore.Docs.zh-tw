@@ -5,6 +5,7 @@ description: 提供 ASP.NET Core 存放庫中驗證範例的連結。
 ms.author: riande
 ms.date: 01/31/2019
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -16,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: security/authentication/samples
-ms.openlocfilehash: 290c956b2035e47e5b34dba15fbec665461dd94a
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: 4153a443748dbff40be19e25fc1c719ee4e39609
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88630740"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93060335"
 ---
 # <a name="authentication-samples-for-aspnet-core"></a>ASP.NET Core 的驗證範例
 
@@ -29,7 +30,7 @@ ms.locfileid: "88630740"
 
 ::: moniker range=">= aspnetcore-3.0"
 
-[ASP.NET Core 存放庫](https://github.com/dotnet/AspNetCore)會在*AspNetCore/src/Security/samples*資料夾中包含下列驗證範例：
+[ASP.NET Core 存放庫](https://github.com/dotnet/AspNetCore)會在 *AspNetCore/src/Security/samples* 資料夾中包含下列驗證範例：
 
 * [宣告轉換](https://github.com/dotnet/AspNetCore/tree/release/3.1/src/Security/samples/ClaimsTransformation)
 * [Cookie 認證](https://github.com/dotnet/AspNetCore/tree/release/3.1/src/Security/samples/Cookies)
@@ -50,7 +51,7 @@ ms.locfileid: "88630740"
 
 ::: moniker range="< aspnetcore-3.0"
 
-[ASP.NET Core 存放庫](https://github.com/dotnet/AspNetCore)會在*AspNetCore/src/Security/samples*資料夾中包含下列驗證範例：
+[ASP.NET Core 存放庫](https://github.com/dotnet/AspNetCore)會在 *AspNetCore/src/Security/samples* 資料夾中包含下列驗證範例：
 
 * [宣告轉換](https://github.com/dotnet/AspNetCore/tree/release/2.1/src/Security/samples/ClaimsTransformation)
 * [Cookie 認證](https://github.com/dotnet/AspNetCore/tree/release/2.1/src/Security/samples/Cookies)

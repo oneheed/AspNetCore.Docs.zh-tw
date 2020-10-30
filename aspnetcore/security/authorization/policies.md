@@ -6,6 +6,7 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 04/15/2020
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -17,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: security/authorization/policies
-ms.openlocfilehash: 140969c80191c9549bc19507b9c4818b88fed0d1
-ms.sourcegitcommit: c026bf76a0e14a5ee68983519a63574c674e9ff7
+ms.openlocfilehash: 286dc3bcc66b86a2a6b7d3cb7b6052bf7b474aff
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 10/01/2020
-ms.locfileid: "91636799"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93060205"
 ---
 # <a name="policy-based-authorization-in-aspnet-core"></a>ASP.NET Core 中以原則為基礎的授權
 
@@ -132,7 +133,7 @@ Razor使用具有原則名稱的屬性，將原則套用至頁面 `[Authorize]` 
 
 [!code-csharp[](policies/samples/PoliciesAuthApp2/Pages/AlcoholPurchase.cshtml.cs?name=snippet_AlcoholPurchaseModelClass&highlight=4)]
 
-原則 ***無法*** 在 Razor 頁面處理常式層級套用，它們必須套用至頁面。
+原則可以 * **不** 是在 Razor 頁面處理常式層級套用，必須套用到頁面上。
 
 您可以 Razor 使用 [授權慣例](xref:security/authorization/razor-pages-authorization)，將原則套用至頁面。
 
@@ -142,7 +143,7 @@ Razor使用具有原則名稱的屬性，將原則套用至頁面 `[Authorize]` 
 
 [!code-csharp[](policies/samples/PoliciesAuthApp1/Services/Requirements/MinimumAgeRequirement.cs?name=snippet_MinimumAgeRequirementClass)]
 
-如果授權原則包含多個授權需求，則所有需求都必須通過，原則評估才會成功。 換句話說，新增至單一授權原則的多個授權需求會以 **和** 為基礎來處理。
+如果授權原則包含多個授權需求，則所有需求都必須通過，原則評估才會成功。 換句話說，新增至單一授權原則的多個授權需求會以 _ *和* * 為基礎來處理。
 
 > [!NOTE]
 > 需求不需要有資料或屬性。
@@ -202,7 +203,7 @@ Razor使用具有原則名稱的屬性，將原則套用至頁面 `[Authorize]` 
 
 ## <a name="why-would-i-want-multiple-handlers-for-a-requirement"></a>為什麼需要要求多個處理常式？
 
-如果您想要以 **或** 基礎進行評估，請針對單一需求執行多個處理常式。 例如，Microsoft 的大門只會以重要卡片開啟。 如果您在家離開您的金鑰卡，則接待員會印出暫存的貼紙，並為您開啟門。 在此案例中，您會有單一需求 *BuildingEntry*，但有多個處理常式，每一個都檢查單一需求。
+如果您想要以 **或** 基礎進行評估，請針對單一需求執行多個處理常式。 例如，Microsoft 的大門只會以重要卡片開啟。 如果您在家離開您的金鑰卡，則接待員會印出暫存的貼紙，並為您開啟門。 在此案例中，您會有單一需求 *BuildingEntry* ，但有多個處理常式，每一個都檢查單一需求。
 
 *BuildingEntryRequirement.cs*
 
@@ -436,7 +437,7 @@ Razor使用具有原則名稱的屬性，將原則套用至頁面 `[Authorize]` 
 
 ## <a name="why-would-i-want-multiple-handlers-for-a-requirement"></a>為什麼需要要求多個處理常式？
 
-如果您想要以 **或** 基礎進行評估，請針對單一需求執行多個處理常式。 例如，Microsoft 的大門只會以重要卡片開啟。 如果您在家離開您的金鑰卡，則接待員會印出暫存的貼紙，並為您開啟門。 在此案例中，您會有單一需求 *BuildingEntry*，但有多個處理常式，每一個都檢查單一需求。
+如果您想要以 **或** 基礎進行評估，請針對單一需求執行多個處理常式。 例如，Microsoft 的大門只會以重要卡片開啟。 如果您在家離開您的金鑰卡，則接待員會印出暫存的貼紙，並為您開啟門。 在此案例中，您會有單一需求 *BuildingEntry* ，但有多個處理常式，每一個都檢查單一需求。
 
 *BuildingEntryRequirement.cs*
 

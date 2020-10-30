@@ -5,6 +5,7 @@ description: 瞭解 ASP.NET Core 資料保護金鑰儲存格式的執行詳細�
 ms.author: riande
 ms.date: 04/08/2020
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -16,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: security/data-protection/implementation/key-storage-format
-ms.openlocfilehash: daf86d3e3357d42ddad74d5e2f06e00e0e24db07
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: 4a8503964c98d1828dc9d02640a7621b370e679c
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88631988"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93060140"
 ---
 # <a name="key-storage-format-in-aspnet-core"></a>ASP.NET Core 中的金鑰儲存格式
 
@@ -34,7 +35,7 @@ ms.locfileid: "88631988"
 
 ## <a name="the-key-element"></a>\<key> 項目
 
-金鑰會以最上層物件的形式存在於金鑰儲存機制中。 依照慣例，索引鍵的檔案名為 **{guid} .xml**，其中 {guid} 是金鑰的識別碼。 每個這類檔案都包含單一金鑰。 檔案的格式如下所示。
+金鑰會以最上層物件的形式存在於金鑰儲存機制中。 依照慣例，索引鍵的檔案名為 **{guid} .xml** ，其中 {guid} 是金鑰的識別碼。 每個這類檔案都包含單一金鑰。 檔案的格式如下所示。
 
 ```xml
 <?xml version="1.0" encoding="utf-8"?>
@@ -77,7 +78,7 @@ Outer \<descriptor> 元素包含屬性 deserializerType，這是實 IAuthenticat
 
 ## <a name="the-encryptedsecret-element"></a>\<encryptedSecret> 項目
 
-如果[已啟用待用秘密的加密，](xref:security/data-protection/implementation/key-encryption-at-rest)則包含加密形式之秘密金鑰內容的** &lt; encryptedSecret &gt; **元素可能會存在。 屬性 `decryptorType` 是實 [IXmlDecryptor](/dotnet/api/microsoft.aspnetcore.dataprotection.xmlencryption.ixmldecryptor)之型別的元件限定名稱。 此類型負責讀取內部** &lt; encryptedKey &gt; **元素，並將其解密以復原原始純文字。
+如果 [已啟用待用秘密的加密，](xref:security/data-protection/implementation/key-encryption-at-rest)則包含加密形式之秘密金鑰內容的 **&lt; encryptedSecret &gt;** 元素可能會存在。 屬性 `decryptorType` 是實 [IXmlDecryptor](/dotnet/api/microsoft.aspnetcore.dataprotection.xmlencryption.ixmldecryptor)之型別的元件限定名稱。 此類型負責讀取內部 **&lt; encryptedKey &gt;** 元素，並將其解密以復原原始純文字。
 
 如同 `<descriptor>` ，元素的特定格式取決於 `<encryptedSecret>` 使用中的靜止加密機制。 在上述範例中，主要金鑰會根據批註使用 Windows DPAPI 進行加密。
 

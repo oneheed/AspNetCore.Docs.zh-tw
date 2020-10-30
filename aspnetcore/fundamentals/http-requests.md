@@ -7,6 +7,7 @@ ms.author: scaddie
 ms.custom: mvc
 ms.date: 02/09/2020
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -18,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: fundamentals/http-requests
-ms.openlocfilehash: ca52b6cf8646bced3a228341717f8ccb1edff582
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: 34c35daac3da845bac9156fe96078df7902a4cd0
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88634198"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93059490"
 ---
 # <a name="make-http-requests-using-ihttpclientfactory-in-aspnet-core"></a>在 ASP.NET Core 中使用 IHttpClientFactory 發出 HTTP 要求
 
@@ -377,9 +378,9 @@ public class ValuesController : ControllerBase
 
 透過 `IHttpClientFactory` 建立的用戶端會記錄所有要求的記錄訊息。 在記錄設定中啟用適當的資訊層級，以查看預設記錄檔訊息。 額外的記錄功能，例如要求標頭的記錄，只會包含在追蹤層級。
 
-用於每個用戶端的記錄檔分類包含用戶端的名稱。 例如，名為 *MyNamedClient*的用戶端會記錄類別為 "HttpClient" 的訊息。**MyNamedClient**。LogicalHandler". 後面加上 *LogicalHandler* 的訊息發生在要求處理常式管線之外。 在要求中，訊息會在管線中任何其他處理常式處理它之前就記錄。 在回應中，訊息會在任何其他管線處理常式收到回應之後記錄。
+用於每個用戶端的記錄檔分類包含用戶端的名稱。 例如，名為 *MyNamedClient* 的用戶端會記錄類別為 "HttpClient" 的訊息。 **MyNamedClient** 。LogicalHandler". 後面加上 *LogicalHandler* 的訊息發生在要求處理常式管線之外。 在要求中，訊息會在管線中任何其他處理常式處理它之前就記錄。 在回應中，訊息會在任何其他管線處理常式收到回應之後記錄。
 
-記錄也會發生在要求處理常式管線之內。 在 *MyNamedClient* 範例中，這些訊息會記錄在記錄檔類別中為 "HttpClient"。**MyNamedClient**。ClientHandler". 針對要求，這會發生在所有其他處理常式都已執行，且在傳送要求之前立即執行。 在回應中，此記錄會包含回應傳回通過處理常式管線之前的狀態。
+記錄也會發生在要求處理常式管線之內。 在 *MyNamedClient* 範例中，這些訊息會記錄在記錄檔類別中為 "HttpClient"。 **MyNamedClient** 。ClientHandler". 針對要求，這會發生在所有其他處理常式都已執行，且在傳送要求之前立即執行。 在回應中，此記錄會包含回應傳回通過處理常式管線之前的狀態。
 
 在管線內外啟用記錄，可讓您檢查其他管線處理常式所做的變更。 這可能包括對要求標頭的變更或回應狀態碼的變更。
 
@@ -471,11 +472,11 @@ public class ValuesController : ControllerBase
 
 ### <a name="named-clients"></a>具名用戶端
 
-如果應用程式需要使用多個不同的 `HttpClient`，且每個都有不同的設定，可以選擇使用**具名用戶端**。 具名 `HttpClient` 的組態可以在 `Startup.ConfigureServices` 中註冊時指定。
+如果應用程式需要使用多個不同的 `HttpClient`，且每個都有不同的設定，可以選擇使用 **具名用戶端** 。 具名 `HttpClient` 的組態可以在 `Startup.ConfigureServices` 中註冊時指定。
 
 [!code-csharp[](http-requests/samples/2.x/HttpClientFactorySample/Startup.cs?name=snippet2)]
 
-在上述程式碼中， `AddHttpClient` 會呼叫，並提供名稱 *github*。 此用戶端已套用一些預設組態&mdash;即使用 GitHub API 所需的基底位址和兩個標頭。
+在上述程式碼中， `AddHttpClient` 會呼叫，並提供名稱 *github* 。 此用戶端已套用一些預設組態&mdash;即使用 GitHub API 所需的基底位址和兩個標頭。
 
 每次呼叫 `CreateClient` 時，會建立 `HttpClient` 的新執行個體並呼叫組態動作。
 
@@ -695,7 +696,7 @@ public class ValuesController : ControllerBase
 
 透過 `IHttpClientFactory` 建立的用戶端會記錄所有要求的記錄訊息。 在記錄設定中啟用適當的資訊層級，以查看預設記錄檔訊息。 額外的記錄功能，例如要求標頭的記錄，只會包含在追蹤層級。
 
-用於每個用戶端的記錄檔分類包含用戶端的名稱。 例如，名為 *MyNamedClient*的用戶端會記錄類別為的訊息 `System.Net.Http.HttpClient.MyNamedClient.LogicalHandler` 。 後面加上 *LogicalHandler* 的訊息發生在要求處理常式管線之外。 在要求中，訊息會在管線中任何其他處理常式處理它之前就記錄。 在回應中，訊息會在任何其他管線處理常式收到回應之後記錄。
+用於每個用戶端的記錄檔分類包含用戶端的名稱。 例如，名為 *MyNamedClient* 的用戶端會記錄類別為的訊息 `System.Net.Http.HttpClient.MyNamedClient.LogicalHandler` 。 後面加上 *LogicalHandler* 的訊息發生在要求處理常式管線之外。 在要求中，訊息會在管線中任何其他處理常式處理它之前就記錄。 在回應中，訊息會在任何其他管線處理常式收到回應之後記錄。
 
 記錄也會發生在要求處理常式管線之內。 在 *MyNamedClient* 範例中，那些訊息是針對記錄檔分類 `System.Net.Http.HttpClient.MyNamedClient.ClientHandler` 而記錄。 對於要求，這是發生在所有其他處理常式都已執行之後，並且緊接在網路上傳送要求之前。 在回應中，此記錄會包含回應傳回通過處理常式管線之前的狀態。
 
@@ -747,7 +748,7 @@ public class ValuesController : ControllerBase
 
 [查看或下載範例程式碼](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/http-requests/samples) ([如何下載](xref:index#how-to-download-a-sample)) 
 
-## <a name="prerequisites"></a>Prerequisites
+## <a name="prerequisites"></a>必要條件
 
 以 .NET Framework 為目標的專案，需要安裝 [Microsoft.Extensions.Http](https://www.nuget.org/packages/Microsoft.Extensions.Http/) NuGet 套件。 以 .NET Core 為目標且參考 [Microsoft.AspNetCore.App metapackage](xref:fundamentals/metapackage-app) 的專案，已包含 `Microsoft.Extensions.Http` 套件。
 
@@ -776,11 +777,11 @@ public class ValuesController : ControllerBase
 
 ### <a name="named-clients"></a>具名用戶端
 
-如果應用程式需要使用多個不同的 `HttpClient`，且每個都有不同的設定，可以選擇使用**具名用戶端**。 具名 `HttpClient` 的組態可以在 `Startup.ConfigureServices` 中註冊時指定。
+如果應用程式需要使用多個不同的 `HttpClient`，且每個都有不同的設定，可以選擇使用 **具名用戶端** 。 具名 `HttpClient` 的組態可以在 `Startup.ConfigureServices` 中註冊時指定。
 
 [!code-csharp[](http-requests/samples/2.x/HttpClientFactorySample/Startup.cs?name=snippet2)]
 
-在上述程式碼中， `AddHttpClient` 會呼叫，並提供名稱 *github*。 此用戶端已套用一些預設組態&mdash;即使用 GitHub API 所需的基底位址和兩個標頭。
+在上述程式碼中， `AddHttpClient` 會呼叫，並提供名稱 *github* 。 此用戶端已套用一些預設組態&mdash;即使用 GitHub API 所需的基底位址和兩個標頭。
 
 每次呼叫 `CreateClient` 時，會建立 `HttpClient` 的新執行個體並呼叫組態動作。
 
@@ -892,7 +893,7 @@ public class ValuesController : ControllerBase
 
 [!code-csharp[](http-requests/samples/2.x/HttpClientFactorySample/Startup.cs?name=snippet5)]
 
-在上述程式碼，`ValidateHeaderHandler` 已向 DI 註冊。 處理常式**必須**在 DI 中註冊為暫時性服務，無限定範圍。 如果處理常式已註冊為範圍服務，而且處理常式所相依的任何服務都是可處置的：
+在上述程式碼，`ValidateHeaderHandler` 已向 DI 註冊。 處理常式 **必須** 在 DI 中註冊為暫時性服務，無限定範圍。 如果處理常式已註冊為範圍服務，而且處理常式所相依的任何服務都是可處置的：
 
 * 處理常式的服務可能會在處理常式超出範圍之前加以處置。
 * 已處置的處理常式服務會導致處理常式失敗。
@@ -1003,7 +1004,7 @@ public class ValuesController : ControllerBase
 
 透過 `IHttpClientFactory` 建立的用戶端會記錄所有要求的記錄訊息。 在記錄設定中啟用適當的資訊層級，以查看預設記錄檔訊息。 額外的記錄功能，例如要求標頭的記錄，只會包含在追蹤層級。
 
-用於每個用戶端的記錄檔分類包含用戶端的名稱。 例如，名為 *MyNamedClient*的用戶端會記錄類別為的訊息 `System.Net.Http.HttpClient.MyNamedClient.LogicalHandler` 。 後面加上 *LogicalHandler* 的訊息發生在要求處理常式管線之外。 在要求中，訊息會在管線中任何其他處理常式處理它之前就記錄。 在回應中，訊息會在任何其他管線處理常式收到回應之後記錄。
+用於每個用戶端的記錄檔分類包含用戶端的名稱。 例如，名為 *MyNamedClient* 的用戶端會記錄類別為的訊息 `System.Net.Http.HttpClient.MyNamedClient.LogicalHandler` 。 後面加上 *LogicalHandler* 的訊息發生在要求處理常式管線之外。 在要求中，訊息會在管線中任何其他處理常式處理它之前就記錄。 在回應中，訊息會在任何其他管線處理常式收到回應之後記錄。
 
 記錄也會發生在要求處理常式管線之內。 在 *MyNamedClient* 範例中，那些訊息是針對記錄檔分類 `System.Net.Http.HttpClient.MyNamedClient.ClientHandler` 而記錄。 對於要求，這是發生在所有其他處理常式都已執行之後，並且緊接在網路上傳送要求之前。 在回應中，此記錄會包含回應傳回通過處理常式管線之前的狀態。
 

@@ -6,6 +6,7 @@ ms.author: riande
 ms.custom: mvc, seodec18
 ms.date: 10/24/2018
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -17,20 +18,20 @@ no-loc:
 - Razor
 - SignalR
 uid: security/data-protection/extensibility/key-management
-ms.openlocfilehash: db718b8d4c305b75ad52054efde6b2d03f6825ed
-ms.sourcegitcommit: 4cce99cbd44372fd4575e8da8c0f4345949f4d9a
+ms.openlocfilehash: 08ec018238d18cd253e793267c5b146df8319485
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 08/31/2020
-ms.locfileid: "89153528"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93060764"
 ---
 # <a name="key-management-extensibility-in-aspnet-core"></a>ASP.NET Core 中的金鑰管理擴充性
 
 閱讀本節之前，請閱讀 [金鑰管理](xref:security/data-protection/implementation/key-management#data-protection-implementation-key-management) 區段，其說明這些 api 背後的一些基本概念。
 
-**警告**：實作為下列任何介面的型別應該是多個呼叫端的安全線程。
+**警告** ：實作為下列任何介面的型別應該是多個呼叫端的安全線程。
 
-## <a name="key"></a>Key
+## <a name="key"></a>答案
 
 `IKey`介面是 cryptosystem 中索引鍵的基本標記法。 詞彙索引鍵是在這裡以抽象意義來使用，而不是在「密碼編譯金鑰內容」的常值意義中。 索引鍵具有下列屬性：
 

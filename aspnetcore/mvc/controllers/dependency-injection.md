@@ -5,6 +5,7 @@ description: 了解 ASP.NET Core MVC 控制器如何在 ASP.NET Core 中，透�
 ms.author: riande
 ms.date: 02/24/2019
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -16,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: mvc/controllers/dependency-injection
-ms.openlocfilehash: 74c43e4f01e5b0d6923bf06f8859341c49088ef6
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: 1282cd984584be423fba755e64e5d2f1afd2af89
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88635238"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93060608"
 ---
 # <a name="dependency-injection-into-controllers-in-aspnet-core"></a>ASP.NET Core 控制器的相依性插入
 
@@ -63,7 +64,7 @@ ASP.NET Core MVC 控制器會透過建構函式明確地要求相依性。 ASP.N
 
 ## <a name="access-settings-from-a-controller"></a>從控制器存取設定
 
-從控制器存取應用程式或組態設定是常見的模式。 <xref:fundamentals/configuration/options> 中所述的「選項模式」** 是管理設定的慣用方法。 一般而言，不要將 <xref:Microsoft.Extensions.Configuration.IConfiguration> 直接插入至控制器。
+從控制器存取應用程式或組態設定是常見的模式。 <xref:fundamentals/configuration/options> 中所述的「選項模式」  是管理設定的慣用方法。 一般而言，不要將 <xref:Microsoft.Extensions.Configuration.IConfiguration> 直接插入至控制器。
 
 建立要代表選項的類別。 例如：
 
@@ -127,7 +128,7 @@ ASP.NET Core MVC 控制器會透過建構函式明確地要求相依性。 ASP.N
 
 ## <a name="access-settings-from-a-controller"></a>從控制器存取設定
 
-從控制器存取應用程式或組態設定是常見的模式。 <xref:fundamentals/configuration/options> 中所述的「選項模式」** 是管理設定的慣用方法。 一般而言，不要將 <xref:Microsoft.Extensions.Configuration.IConfiguration> 直接插入至控制器。
+從控制器存取應用程式或組態設定是常見的模式。 <xref:fundamentals/configuration/options> 中所述的「選項模式」  是管理設定的慣用方法。 一般而言，不要將 <xref:Microsoft.Extensions.Configuration.IConfiguration> 直接插入至控制器。
 
 建立要代表選項的類別。 例如：
 

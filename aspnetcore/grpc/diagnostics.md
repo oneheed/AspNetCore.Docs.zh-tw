@@ -6,6 +6,7 @@ monikerRange: '>= aspnetcore-3.0'
 ms.author: jamesnk
 ms.date: 09/23/2019
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -17,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: grpc/diagnostics
-ms.openlocfilehash: 7d2da20d04b93ebcd16fb58a4b74b5b67d37bd72
-ms.sourcegitcommit: 24106b7ffffc9fff410a679863e28aeb2bbe5b7e
+ms.openlocfilehash: 1f25ae76e5a480e5e6f247e4ac78d06dd4e778e9
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 09/17/2020
-ms.locfileid: "90722919"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93060439"
 ---
 # <a name="logging-and-diagnostics-in-grpc-on-net"></a>在 .NET 上 gRPC 中的記錄和診斷
 
@@ -45,7 +46,7 @@ gRPC services 和 gRPC 用戶端會使用 [.Net Core 記錄](xref:fundamentals/l
 
 由於 gRPC 服務是裝載在 ASP.NET Core 上，因此會使用 ASP.NET Core 記錄系統。 在預設設定中，gRPC 會記錄極少的資訊，但這可以設定。 如需有關設定 ASP.NET Core 記錄的詳細資訊，請參閱 [ASP.NET Core 記錄](xref:fundamentals/logging/index#configuration) 檔。
 
-gRPC 會在類別下新增記錄 `Grpc` 。 若要啟用 gRPC 的詳細記錄，請 `Grpc` `Debug` 將下列專案新增至中的子區段，以將前置詞設定為檔案 *appsettings.js* 中的層級 `LogLevel` `Logging` ：
+gRPC 會在類別下新增記錄 `Grpc` 。 若要啟用 gRPC 的詳細記錄，請 `Grpc` `Debug` 將下列專案新增至您檔案中的層級， *appsettings.json* 方法是將下列專案新增至 `LogLevel` 中的子區段 `Logging` ：
 
 [!code-json[](diagnostics/sample/logging-config.json?highlight=7)]
 
@@ -222,7 +223,7 @@ Press p to pause, r to resume, q to quit.
 
 另一種觀察 gRPC 計量的方式，就是使用 Application Insights 的 [ApplicationInsights EventCounterCollector 套件](/azure/azure-monitor/app/eventcounters)來捕捉計數器資料。 一旦安裝之後，Application Insights 會在執行時間收集常見的 .NET 計數器。 預設不會收集 gRPC 的計數器，但可以自訂 App Insights [以包含額外的計數器](/azure/azure-monitor/app/eventcounters#customizing-counters-to-be-collected)。
 
-針對要在 *Startup.cs*中收集的應用程式見解指定 gRPC 計數器：
+針對要在 *Startup.cs* 中收集的應用程式見解指定 gRPC 計數器：
 
 ```csharp
     using Microsoft.ApplicationInsights.Extensibility.EventCounterCollector;

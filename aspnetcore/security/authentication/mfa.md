@@ -7,6 +7,7 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 03/17/2020
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -18,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: security/authentication/mfa
-ms.openlocfilehash: 76a11aa7b89b3ce60ed11bd7553a7e5898f661f4
-ms.sourcegitcommit: d1a897ebd89daa05170ac448e4831d327f6b21a8
+ms.openlocfilehash: 873f7d113df84c931ad7fbf2c72aa292e4e87c48
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 10/01/2020
-ms.locfileid: "91606805"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93060387"
 ---
 # <a name="multi-factor-authentication-in-aspnet-core"></a>ASP.NET Core 中的多重要素驗證
 
@@ -151,7 +152,7 @@ namespace IdentityStandaloneMfa
 }
 ```
 
-因為 Identity 服務設定在類別中有所變更 `Startup` ，所以需要更新的版面配置 Identity 。 將 Identity 頁面 Scaffold 到應用程式中。 在* Identity /Account/Manage/_Layout cshtml*檔案中定義版面配置。
+因為 Identity 服務設定在類別中有所變更 `Startup` ，所以需要更新的版面配置 Identity 。 將 Identity 頁面 Scaffold 到應用程式中。 在 *Identity /Account/Manage/_Layout cshtml* 檔案中定義版面配置。
 
 ```cshtml
 @{
@@ -225,7 +226,7 @@ services.AddAuthorization(options =>
 @inject IAuthorizationService AuthorizationService
 ```
 
-如果身分識別已使用 MFA 登入，則會顯示系統 **管理** 功能表，而不會出現工具提示警告。 當使用者登入但未啟用 MFA 時，系統會顯示 [系統 **管理員 (未啟用]) ** 功能表和工具提示，告知使用者 (說明警告) 。
+如果身分識別已使用 MFA 登入，則會顯示系統 **管理** 功能表，而不會出現工具提示警告。 當使用者登入但未啟用 MFA 時，系統會顯示 [系統 **管理員 (未啟用])** 功能表和工具提示，告知使用者 (說明警告) 。
 
 ```cshtml
 @if (SignInManager.IsSignedIn(User))
@@ -332,7 +333,7 @@ You can enable MFA to login here:
 
 在 `Login` 方法中， `IIdentityServerInteractionService` 會使用介面實作為 `_interaction` 存取 OpenID Connect 要求參數。 您 `acr_values` 可以使用屬性來存取參數 `AcrValues` 。 當用戶端使用 set 傳送此 `mfa` 設定時，就可以檢查。
 
-如果需要 MFA，且中的使用者 ASP.NET Core Identity 已啟用 mfa，則會繼續登入。 當使用者未啟用 MFA 時，會將使用者重新導向至自訂視圖*ErrorEnable2FA。* 然後 ASP.NET Core Identity 將使用者登入。
+如果需要 MFA，且中的使用者 ASP.NET Core Identity 已啟用 mfa，則會繼續登入。 當使用者未啟用 MFA 時，會將使用者重新導向至自訂視圖 *ErrorEnable2FA。* 然後 ASP.NET Core Identity 將使用者登入。
 
 ```csharp
 //

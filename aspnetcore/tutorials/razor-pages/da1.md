@@ -5,6 +5,7 @@ description: 頁面上教學課程系列的第5部分 Razor 。
 ms.author: riande
 ms.date: 12/20/2018
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -16,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: tutorials/razor-pages/da1
-ms.openlocfilehash: 04479e5c3a0b1e9badbb4e58043cf059beefb4ab
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: 7d25dae67c928fa659654ce4ab34cfdad08b5300
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88632794"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93060062"
 ---
 # <a name="part-5-update-the-generated-pages-in-an-aspnet-core-app"></a>第5部分：在 ASP.NET Core 應用程式中更新產生的頁面
 
@@ -47,13 +48,13 @@ Scaffolded 電影應用程式是一個不錯的起點，但其呈現效果卻不
 
 ![滑鼠停留在 Edit 連結並顯示 http://localhost:1234/Movies/Edit/5 的 Url 的瀏覽器視窗](~/tutorials/razor-pages/da1/edit7.png)
 
-在 *Pages/Movies/Index.cshtml* 檔案中，**Edit**、**Details ** 和 **Delete** 連結是由[錨點標記協助程式](xref:mvc/views/tag-helpers/builtin-th/anchor-tag-helper)所產生。
+在 *Pages/Movies/Index.cshtml* 檔案中， **Edit** 、 **Details** 和 **Delete** 連結是由 [錨點標記協助程式](xref:mvc/views/tag-helpers/builtin-th/anchor-tag-helper)所產生。
 
 [!code-cshtml[](~/tutorials/razor-pages/razor-pages-start/snapshot_sample/RazorPagesMovie/Pages/Movies/Index.cshtml?highlight=16-18&range=32-)]
 
 [標記](xref:mvc/views/tag-helpers/intro) 協助程式可讓伺服器端程式碼參與建立和轉譯檔案中的 HTML 元素 Razor 。 在上述程式碼中， `AnchorTagHelper` 會以動態方式 `href` 從頁面產生 HTML 屬性值 Razor (路由是相對) 、 `asp-page` 和路由識別碼 (`asp-route-id`) 。 如需詳細資訊，請參閱[頁面的 URL 產生](xref:razor-pages/index#url-generation-for-pages)。
 
-從您最愛的瀏覽器中使用 [檢視原始檔]**** 來檢查產生的標記。 產生的 HTML 部分如下所示：
+從您最愛的瀏覽器中使用 [檢視原始檔]  來檢查產生的標記。 產生的 HTML 部分如下所示：
 
 ```html
 <td>
@@ -77,7 +78,7 @@ Scaffolded 電影應用程式是一個不錯的起點，但其呈現效果卻不
 </td>
 ```
 
-對使用 "{id:int}" 路由範本的頁面提出的要求若**未**包含整數，將傳回 HTTP 404 (找不到) 錯誤。 例如，`http://localhost:5000/Movies/Details` 會傳回 404 錯誤。 若要使識別碼成為選擇性，請將 `?` 附加至路由條件約束：
+對使用 "{id:int}" 路由範本的頁面提出的要求若 **未** 包含整數，將傳回 HTTP 404 (找不到) 錯誤。 例如，`http://localhost:5000/Movies/Details` 會傳回 404 錯誤。 若要使識別碼成為選擇性，請將 `?` 附加至路由條件約束：
 
  ```cshtml
 @page "{id:int?}"
@@ -86,7 +87,7 @@ Scaffolded 電影應用程式是一個不錯的起點，但其呈現效果卻不
 若要測試 `@page "{id:int?}"` 的行為：
 
 * 將 *Pages/Movies/Details.cshtml* 中的頁面指示詞設定為 `@page "{id:int?}"`。
-* 設定 `public async Task<IActionResult> OnGetAsync(int? id)` (位於 *Pages/Movies/Details.cshtml.cs*) 中的中斷點。
+* 設定 `public async Task<IActionResult> OnGetAsync(int? id)` (位於 *Pages/Movies/Details.cshtml.cs* ) 中的中斷點。
 * 瀏覽至 `https://localhost:5001/Movies/Details/`。
 
 使用 `@page "{id:int}"` 指示詞，永遠不會叫用中斷點。 路由引擎會傳回 HTTP 404。 使用 `@page "{id:int?}"`，`OnGetAsync` 方法會傳回 `NotFound` (HTTP 404)。
@@ -102,7 +103,7 @@ Scaffolded 電影應用程式是一個不錯的起點，但其呈現效果卻不
 若要測試 `catch` 區段：
 
 * 在 `catch (DbUpdateConcurrencyException)`上設定中斷點
-* 針對電影選取 [編輯]****，進行變更，但不要輸入 [儲存]****。
+* 針對電影選取 [編輯]  ，進行變更，但不要輸入 [儲存]  。
 * 在另一個瀏覽器視窗中，選取相同電影的 **Delete** 連結，然後刪除電影。
 * 在先前的瀏覽器視窗中，發佈對電影的變更。
 
@@ -162,13 +163,13 @@ Scaffolded 電影應用程式是一個不錯的起點，但其呈現效果卻不
 
 ![滑鼠停留在 Edit 連結並顯示 http://localhost:1234/Movies/Edit/5 的 Url 的瀏覽器視窗](~/tutorials/razor-pages/da1/edit7.png)
 
-在 *Pages/Movies/Index.cshtml* 檔案中，**Edit**、**Details ** 和 **Delete** 連結是由[錨點標記協助程式](xref:mvc/views/tag-helpers/builtin-th/anchor-tag-helper)所產生。
+在 *Pages/Movies/Index.cshtml* 檔案中， **Edit** 、 **Details** 和 **Delete** 連結是由 [錨點標記協助程式](xref:mvc/views/tag-helpers/builtin-th/anchor-tag-helper)所產生。
 
 [!code-cshtml[](~/tutorials/razor-pages/razor-pages-start/snapshot_sample/RazorPagesMovie/Pages/Movies/Index.cshtml?highlight=16-18&range=32-)]
 
 [標記](xref:mvc/views/tag-helpers/intro) 協助程式可讓伺服器端程式碼參與建立和轉譯檔案中的 HTML 元素 Razor 。 在上述程式碼中， `AnchorTagHelper` 會以動態方式 `href` 從頁面產生 HTML 屬性值 Razor (路由是相對) 、 `asp-page` 和路由識別碼 (`asp-route-id`) 。 如需詳細資訊，請參閱[頁面的 URL 產生](xref:razor-pages/index#url-generation-for-pages)。
 
-從您最愛的瀏覽器中使用 [檢視原始檔]**** 來檢查產生的標記。 產生的 HTML 部分如下所示：
+從您最愛的瀏覽器中使用 [檢視原始檔]  來檢查產生的標記。 產生的 HTML 部分如下所示：
 
 ```html
 <td>
@@ -190,7 +191,7 @@ Scaffolded 電影應用程式是一個不錯的起點，但其呈現效果卻不
 </td>
 ```
 
-對使用 "{id:int}" 路由範本的頁面提出的要求若**未**包含整數，將傳回 HTTP 404 (找不到) 錯誤。 例如，`http://localhost:5000/Movies/Details` 會傳回 404 錯誤。 若要使識別碼成為選擇性，請將 `?` 附加至路由條件約束：
+對使用 "{id:int}" 路由範本的頁面提出的要求若 **未** 包含整數，將傳回 HTTP 404 (找不到) 錯誤。 例如，`http://localhost:5000/Movies/Details` 會傳回 404 錯誤。 若要使識別碼成為選擇性，請將 `?` 附加至路由條件約束：
 
  ```cshtml
 @page "{id:int?}"
@@ -199,7 +200,7 @@ Scaffolded 電影應用程式是一個不錯的起點，但其呈現效果卻不
 若要測試 `@page "{id:int?}"` 的行為：
 
 * 將 *Pages/Movies/Details.cshtml* 中的頁面指示詞設定為 `@page "{id:int?}"`。
-* 設定 `public async Task<IActionResult> OnGetAsync(int? id)` (位於 *Pages/Movies/Details.cshtml.cs*) 中的中斷點。
+* 設定 `public async Task<IActionResult> OnGetAsync(int? id)` (位於 *Pages/Movies/Details.cshtml.cs* ) 中的中斷點。
 * 瀏覽至 `https://localhost:5001/Movies/Details/`。
 
 使用 `@page "{id:int}"` 指示詞，永遠不會叫用中斷點。 路由引擎會傳回 HTTP 404。 使用 `@page "{id:int?}"`，`OnGetAsync` 方法會傳回 `NotFound` (HTTP 404)。
@@ -215,7 +216,7 @@ Scaffolded 電影應用程式是一個不錯的起點，但其呈現效果卻不
 若要測試 `catch` 區段：
 
 * 在 `catch (DbUpdateConcurrencyException)`上設定中斷點
-* 針對電影選取 [編輯]****，進行變更，但不要輸入 [儲存]****。
+* 針對電影選取 [編輯]  ，進行變更，但不要輸入 [儲存]  。
 * 在另一個瀏覽器視窗中，選取相同電影的 **Delete** 連結，然後刪除電影。
 * 在先前的瀏覽器視窗中，發佈對電影的變更。
 

@@ -6,6 +6,7 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 10/10/2018
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -17,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: mvc/views/tag-helpers/builtin-th/cache-tag-helper
-ms.openlocfilehash: b1cab7ab8b491529ee4208d92fb30082be795eda
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: a87f91255bd1f280b1567f522423a6f4e88a6dd8
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88635056"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93060881"
 ---
 # <a name="cache-tag-helper-in-aspnet-core-mvc"></a>ASP.NET Core MVC 中的快取標籤協助程式
 
@@ -48,7 +49,7 @@ ms.locfileid: "88635056"
 | --------------- | --------------- | ------- |
 | Boolean         | `true`, `false` | `true`  |
 
-`enabled` 會決定是否快取以快取標籤協助程式括住的內容。 預設值為 `true`。 如果設定為 `false`，則轉譯輸出**不會**被快取。
+`enabled` 會決定是否快取以快取標籤協助程式括住的內容。 預設為 `true`。 如果設定為 `false`，則轉譯輸出 **不會** 被快取。
 
 範例：
 
@@ -150,7 +151,7 @@ Razor視圖引擎會將預設 `expires-after` 值設定為20分鐘。
 
 範例：
 
-*Startup.cs*：
+*Startup.cs* ：
 
 ```csharp
 routes.MapRoute(
@@ -158,7 +159,7 @@ routes.MapRoute(
     template: "{controller=Home}/{action=Index}/{Make?}/{Model?}");
 ```
 
-*Index. cshtml*：
+*Index. cshtml* ：
 
 ```cshtml
 <cache vary-by-route="Make,Model">
@@ -198,7 +199,7 @@ routes.MapRoute(
 </cache>
 ```
 
-使用此屬性可保留登入與登出週期中的快取內容。 當此值設定為 `true` 時，驗證週期將使已驗證之使用者的快取無效。 快取無效，因為 cookie 當使用者經過驗證時，會產生新的唯一值。 如果不 cookie 存在或已過期，則會為匿名狀態維護快取 cookie 。 如果使用者**未**通過驗證，則會維護快取。
+使用此屬性可保留登入與登出週期中的快取內容。 當此值設定為 `true` 時，驗證週期將使已驗證之使用者的快取無效。 快取無效，因為 cookie 當使用者經過驗證時，會產生新的唯一值。 如果不 cookie 存在或已過期，則會為匿名狀態維護快取 cookie 。 如果使用者 **未** 通過驗證，則會維護快取。
 
 ### <a name="vary-by"></a>vary-by
 
@@ -223,7 +224,7 @@ public IActionResult Index(string myParam1, string myParam2, string myParam3)
 }
 ```
 
-*Index. cshtml*：
+*Index. cshtml* ：
 
 ```cshtml
 <cache vary-by="@Model">

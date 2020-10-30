@@ -6,6 +6,7 @@ ms.author: riande
 ms.custom: devx-track-csharp, mvc
 ms.date: 07/10/2019
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -17,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: tutorials/publish-to-azure-webapp-using-vs
-ms.openlocfilehash: ebfe89d68725d597d6975015bbf84414ff818829
-ms.sourcegitcommit: 24106b7ffffc9fff410a679863e28aeb2bbe5b7e
+ms.openlocfilehash: 817169503a80a771354e32123d65ba2bf388aa2d
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 09/17/2020
-ms.locfileid: "90722906"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93060218"
 ---
 # <a name="publish-an-aspnet-core-app-to-azure-with-visual-studio"></a>使用 Visual Studio 將 ASP.NET Core 應用程式發行到 Azure
 
@@ -44,28 +45,28 @@ ms.locfileid: "90722906"
 
 ## <a name="create-a-web-app"></a>建立 Web 應用程式
 
-在 Visual Studio 起始畫面中，選取 [檔案] > [新增] > [專案...]****
+在 Visual Studio 起始畫面中，選取 [檔案] > [新增] > [專案...] 
 
 ![[檔案] 功能表](publish-to-azure-webapp-using-vs/_static/file_new_project.png)
 
-完成 [新增專案]**** 對話方塊：
+完成 [新增專案]  對話方塊：
 
-* 選取 **ASP.NET Core Web 應用程式**。
-* 選取 [下一步] 。
+* 選取 **ASP.NET Core Web 應用程式** 。
+* 選取 [下一步]  。
 
 ![[新增專案] 對話方塊](publish-to-azure-webapp-using-vs/_static/new_prj.png)
 
-在 [新增 ASP.NET Core Web 應用程式]**** 對話方塊中：
+在 [新增 ASP.NET Core Web 應用程式]  對話方塊中：
 
-* 選取 [ **Web 應用程式**]。
+* 選取 [ **Web 應用程式** ]。
 * 選取 [驗證] 下的 [ **變更** ]。
 
 ![新的 ASP.NET Core Web 對話方塊](publish-to-azure-webapp-using-vs/_static/new_prj_2.png)
 
-[變更驗證]**** 對話方塊會隨即出現。 
+[變更驗證]  對話方塊會隨即出現。 
 
-* 選取 [個別使用者帳戶]****。
-* 選取 **[確定]** 以返回 **新的 ASP.NET Core Web 應用程式**，然後選取 [ **建立**]。
+* 選取 [個別使用者帳戶]  。
+* 選取 **[確定]** 以返回 **新的 ASP.NET Core Web 應用程式** ，然後選取 [ **建立** ]。
 
 ![[新增 ASP.NET Core Web 驗證] 對話方塊](publish-to-azure-webapp-using-vs/_static/new_prj_auth.png) 
 
@@ -80,10 +81,10 @@ Visual Studio 會建立解決方案。
 
 ### <a name="register-a-user"></a>註冊使用者
 
-* 選取 [註冊]**** 並註冊新的使用者。 您可以使用虛構的電子郵件地址。 提交時，頁面會顯示下列錯誤：
+* 選取 [註冊]  並註冊新的使用者。 您可以使用虛構的電子郵件地址。 提交時，頁面會顯示下列錯誤：
 
     *「處理要求時資料庫作業失敗。針對應用程式資料庫內容套用現有的遷移可解決此問題。」*
-* 選取 [套用移轉]****，並在頁面更新後重新整理頁面。
+* 選取 [套用移轉]  ，並在頁面更新後重新整理頁面。
 
 ![處理要求時資料庫作業失敗。 為應用程式資料庫內容套用現有的移轉可能會解決此問題。](publish-to-azure-webapp-using-vs/_static/mig.png)
 
@@ -93,21 +94,21 @@ Visual Studio 會建立解決方案。
 
 ## <a name="deploy-the-app-to-azure"></a>將應用程式部署至 Azure
 
-在方案總管中，以滑鼠右鍵按一下專案，然後選取 [發行]****。
+在方案總管中，以滑鼠右鍵按一下專案，然後選取 [發行]  。
 
 ![反白顯示 [發行] 連結的已開啟操作功能表](publish-to-azure-webapp-using-vs/_static/pub.png)
 
-在 [發行]**** 對話方塊中：
+在 [發行]  對話方塊中：
 
-* 選取 [ **Azure**]。
-* 選取 [下一步] 。
+* 選取 [ **Azure** ]。
+* 選取 [下一步]  。
 
 ![發佈對話方塊](publish-to-azure-webapp-using-vs/_static/maas1.png)
 
-在 [發行]**** 對話方塊中：
+在 [發行]  對話方塊中：
 
-* 選取 **Azure App Service (Linux) **。
-* 選取 [下一步] 。
+* 選取 **Azure App Service (Linux)** 。
+* 選取 [下一步]  。
 
 ![發佈對話方塊：選取 Azure 服務](publish-to-azure-webapp-using-vs/_static/maas2.png)
 
@@ -117,8 +118,8 @@ Visual Studio 會建立解決方案。
 
 [ **建立 App Service** ] 對話方塊隨即出現：
 
-* 會填入 [應用程式名稱]****、[資源群組]**** 和 [App Service 方案]**** 輸入欄位。 您可以保留這些名稱，或變更它們。
-* 選取 [建立]  。
+* 會填入 [應用程式名稱]  、[資源群組]  和 [App Service 方案]  輸入欄位。 您可以保留這些名稱，或變更它們。
+* 選取 [建立]。
 
 ![建立 App Service 對話方塊](publish-to-azure-webapp-using-vs/_static/newrg1.png)
 
@@ -129,14 +130,14 @@ Visual Studio 會建立解決方案。
 
 ![發佈對話方塊：選取 App Service 實例](publish-to-azure-webapp-using-vs/_static/select_as.png)
 
-接下來，您會看到 [ **發行設定檔摘要** ] 頁面。 Visual Studio 偵測到此應用程式需要 SQL Server 資料庫，並要求您進行設定。 選取 [設定] 。
+接下來，您會看到 [ **發行設定檔摘要** ] 頁面。 Visual Studio 偵測到此應用程式需要 SQL Server 資料庫，並要求您進行設定。 選取 [設定]  。
 
 ![發行設定檔摘要頁面：設定 SQL Server 相依性](publish-to-azure-webapp-using-vs/_static/sql.png)
 
 [ **設定** 相依性] 對話方塊隨即出現：
 
-* 選取 **Azure SQL Database**。
-* 選取 [下一步] 。
+* 選取 **Azure SQL Database** 。
+* 選取 [下一步]  。
 
 ![設定 SQL Server 相依性對話方塊](publish-to-azure-webapp-using-vs/_static/sql1.png)
 
@@ -146,16 +147,16 @@ Visual Studio 會建立解決方案。
 
 [ **建立 Azure SQL Database** 隨即出現：
 
-* 填入 **資料庫名稱**、 **資源群組**、 **資料庫伺服器** 和 **App Service 計畫** 專案欄位。 您可以保留這些值或變更它們。
-* 輸入所選**資料庫伺服器**的**資料庫系統管理員使用者名稱**和**資料庫管理員密碼** (請注意，您使用的帳戶必須具有建立新 Azure SQL 資料庫的必要許可權) 
-* 選取 [建立]  。
+* 填入 **資料庫名稱** 、 **資源群組** 、 **資料庫伺服器** 和 **App Service 計畫** 專案欄位。 您可以保留這些值或變更它們。
+* 輸入所選 **資料庫伺服器** 的 **資料庫系統管理員使用者名稱** 和 **資料庫管理員密碼** (請注意，您使用的帳戶必須具有建立新 Azure SQL 資料庫的必要許可權) 
+* 選取 [建立]。
 
 ![新增 Azure SQL Database 對話方塊](publish-to-azure-webapp-using-vs/_static/sql_create.png)
 
 建立完成之後，對話方塊會自動關閉，且 [ **設定 Azure SQL Database** ] 對話方塊會再次取得焦點：
 
 * 系統會自動選取剛建立的新實例。
-* 選取 [下一步] 。
+* 選取 [下一步]  。
 
 ![設定 Azure SQL Database 對話方塊](publish-to-azure-webapp-using-vs/_static/sql_select.png)
 
@@ -166,16 +167,16 @@ Visual Studio 會建立解決方案。
 
 ![設定 Azure SQL Database 對話方塊，連接字串詳細資料](publish-to-azure-webapp-using-vs/_static/sql_connection.png)
 
-在 [ **發行設定檔] 摘要** 頁面中，選取 [ **設定**：
+在 [ **發行設定檔] 摘要** 頁面中，選取 [ **設定** ：
 
 ![發行設定檔摘要頁面：編輯設定](publish-to-azure-webapp-using-vs/_static/pp_configured.png)
 
-在 [發行]**** 對話方塊的 [設定]**** 頁面上：
+在 [發行]  對話方塊的 [設定]  頁面上：
 
-* 展開 [資料庫]**** 並選取 [在執行階段使用此連接字串]****。
-* 展開 **Entity Framework 的遷移** ，並核取 [ **在發行時套用此遷移**]。
+* 展開 [資料庫]  並選取 [在執行階段使用此連接字串]  。
+* 展開 **Entity Framework 的遷移** ，並核取 [ **在發行時套用此遷移** ]。
 
-* 選取 [儲存]。 Visual Studio 會回到 [發行]**** 對話方塊。 
+* 選取 [儲存]  。 Visual Studio 會回到 [發行]  對話方塊。 
 
 ![[發行] 對話方塊：設定面板](publish-to-azure-webapp-using-vs/_static/pp_settings.png)
 
@@ -189,7 +190,7 @@ Visual Studio 會建立解決方案。
 
     [!code-html[Index](publish-to-azure-webapp-using-vs/sample/index.cshtml?highlight=10&range=1-12)]
 
-* 再次選取 [發行**設定檔摘要**] 頁面中的 [**發行**]。
+* 再次選取 [發行 **設定檔摘要** ] 頁面中的 [ **發行** ]。
 
 ![發行設定檔摘要頁面](publish-to-azure-webapp-using-vs/_static/pp_publish.png)
 
@@ -201,15 +202,15 @@ Visual Studio 會建立解決方案。
 
 當您完成測試應用程式時，請移至 [Azure 入口網站](https://portal.azure.com/)並刪除應用程式。
 
-* 選取 [資源群組]****，然後選取您建立的資源群組。
+* 選取 [資源群組]  ，然後選取您建立的資源群組。
 
 ![Azure 入口網站：資訊看板功能表中的 [資源群組]](publish-to-azure-webapp-using-vs/_static/portalrg.png)
 
-* 在 [資源群組]**** 頁面中，選取 [刪除]****。
+* 在 [資源群組]  頁面中，選取 [刪除]  。
 
 ![Azure 入口網站：[資源群組] 頁面](publish-to-azure-webapp-using-vs/_static/rgd.png)
 
-* 輸入資源群組的名稱，然後選取 [ **刪除**]。 您在本教學課程中建立的應用程式和其他所有資源都會立即從 Azure 中刪除。
+* 輸入資源群組的名稱，然後選取 [ **刪除** ]。 您在本教學課程中建立的應用程式和其他所有資源都會立即從 Azure 中刪除。
 
 ### <a name="next-steps"></a>後續步驟
 

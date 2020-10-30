@@ -5,6 +5,7 @@ description: ''
 ms.author: riande
 ms.date: 12/05/2019
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -16,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: mvc/controllers/actions
-ms.openlocfilehash: 9542a7c0fd16c00f46ee69c5873878a7c70ef626
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: a9319e74d0213b178c2a71be69a0332270d9446c
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88630324"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93061453"
 ---
 # <a name="handle-requests-with-controllers-in-aspnet-core-mvc"></a>在 ASP.NET Core MVC 中處理控制器要求
 
@@ -31,7 +32,7 @@ ms.locfileid: "88630324"
 
 ## <a name="what-is-a-controller"></a>什麼是控制器？
 
-控制器是用來定義和分組一組動作。 動作 (或「動作方法」**) 是控制器上處理要求的方法。 控制器會以邏輯方式將類似動作群組在一起。 這項動作彙總允許統一套用一組通用規則 (例如路由、快取和授權)。 要求會透過[路由](xref:mvc/controllers/routing)對應至動作。
+控制器是用來定義和分組一組動作。 動作 (或「動作方法」  ) 是控制器上處理要求的方法。 控制器會以邏輯方式將類似動作群組在一起。 這項動作彙總允許統一套用一組通用規則 (例如路由、快取和授權)。 要求會透過[路由](xref:mvc/controllers/routing)對應至動作。
 
 依照慣例，控制器類別：
 
@@ -48,11 +49,11 @@ ms.locfileid: "88630324"
 
 控制器應該遵循[明確相依性準則](/dotnet/standard/modern-web-apps-azure-architecture/architectural-principles#explicit-dependencies)。 有幾種方法可以實作此準則。 如果多個控制器動作需要相同的服務，請考慮使用[建構函式插入](xref:mvc/controllers/dependency-injection#constructor-injection)來要求這些相依性。 如果只有單一動作方法需要服務，請考慮使用[動作插入](xref:mvc/controllers/dependency-injection#action-injection-with-fromservices)來要求相依性。
 
-在**模型檢視控制器********** 模式內，控制器負責初始處理要求和模型具現化。 一般而言，應該在模型內執行商業決策。
+在  模式內，控制器負責初始處理要求和模型具現化。 一般而言，應該在模型內執行商業決策。
 
 控制器會使用模型處理結果 (如果有的話)，並傳回適當檢視和其相關聯的檢視資料或 API 呼叫結果。 深入了解 [ASP.NET Core MVC 概觀](xref:mvc/overview)和 [ASP.NET Core MVC 與 Visual Studio 使用者入門](xref:tutorials/first-mvc-app/start-mvc)。
 
-控制器是「UI 層級」** 抽象概念。 其負責確保要求資料有效，並選擇應該傳回的檢視 (或 API 的結果)。 在構造良好的應用程式中，不會直接包括資料存取或商務邏輯。 相反地，控制器會委派給處理這些責任的服務。
+控制器是「UI 層級」  抽象概念。 其負責確保要求資料有效，並選擇應該傳回的檢視 (或 API 的結果)。 在構造良好的應用程式中，不會直接包括資料存取或商務邏輯。 相反地，控制器會委派給處理這些責任的服務。
 
 ## <a name="defining-actions"></a>定義動作
 
@@ -60,7 +61,7 @@ ms.locfileid: "88630324"
 
 動作方法應該包含將要求對應至商務關注的邏輯。 商務關注應該一般呈現為控制器透過[相依性插入](xref:mvc/controllers/dependency-injection)存取的服務。 動作接著會將商務動作的結果對應至應用程式狀態。
 
-動作可以傳回任何項目，但經常會傳回可產生回應的 `IActionResult` 執行個體 (或適用於非同步方法的 `Task<IActionResult>`)。 動作方法負責選擇「回應類型」**。 動作結果「會執行對應項目」**。
+動作可以傳回任何項目，但經常會傳回可產生回應的 `IActionResult` 執行個體 (或適用於非同步方法的 `Task<IActionResult>`)。 動作方法負責選擇「回應類型」  。 動作結果「會執行對應項目」  。
 
 ### <a name="controller-helper-methods"></a>控制器協助程式方法
 
@@ -100,13 +101,13 @@ ms.locfileid: "88630324"
 
 #### <a name="3-methods-resulting-in-a-non-empty-response-body-formatted-in-a-content-type-negotiated-with-the-client"></a>3. 方法會產生非空白的回應主體，並以與用戶端協商的內容類型進行格式化
 
-此類別普遍稱為**內容交涉**。 只要動作傳回 [ObjectResult](/dotnet/api/microsoft.aspnetcore.mvc.objectresult) 類型或 [IActionResult](/dotnet/api/microsoft.aspnetcore.mvc.iactionresult) 實作以外的某個項目，就會套用[內容交涉](xref:web-api/advanced/formatting#content-negotiation)。 傳回非 `IActionResult` 實作的動作 (例如，`object`) 也會傳回「格式化回應」。
+此類別普遍稱為 **內容交涉** 。 只要動作傳回 [ObjectResult](/dotnet/api/microsoft.aspnetcore.mvc.objectresult) 類型或 [IActionResult](/dotnet/api/microsoft.aspnetcore.mvc.iactionresult) 實作以外的某個項目，就會套用[內容交涉](xref:web-api/advanced/formatting#content-negotiation)。 傳回非 `IActionResult` 實作的動作 (例如，`object`) 也會傳回「格式化回應」。
 
 此類型的一些協助程式方法包括 `BadRequest`、`CreatedAtRoute` 和 `Ok`。 這些方法的範例分別包括 `return BadRequest(modelState);`、`return CreatedAtRoute("routename", values, newobject);` 和 `return Ok(value);`。 請注意，只有在傳遞值時，`BadRequest` 和 `Ok` 才會執行內容交涉；如果未傳遞值，則會改成作為「HTTP 狀態碼」結果類型。 相反地，`CreatedAtRoute` 方法一律會執行內容交涉，因為其多載全部都需要傳遞值。
 
 ### <a name="cross-cutting-concerns"></a>跨領域關注
 
-應用程式通常會共用其工作流程的各部分。 範例包括需要驗證購物車存取權的應用程式，或快取某些頁面上資料的應用程式。 若要在動作方法之前或之後執行邏輯，請使用 *filter*。 在交叉關注上使用[篩選](xref:mvc/controllers/filters)可減少重複。
+應用程式通常會共用其工作流程的各部分。 範例包括需要驗證購物車存取權的應用程式，或快取某些頁面上資料的應用程式。 若要在動作方法之前或之後執行邏輯，請使用 *filter* 。 在交叉關注上使用[篩選](xref:mvc/controllers/filters)可減少重複。
 
 大部分的篩選屬性 (例如 `[Authorize]`) 可以套用至控制器或動作層級 (視所需的細微性層級而定)。
 

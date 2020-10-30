@@ -7,6 +7,7 @@ ms.author: riande
 ms.custom: mvc, seodec18
 ms.date: 03/26/2020
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -18,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: razor-pages/sdk
-ms.openlocfilehash: d11600af88d499d63adf9eae90d6deb929f9d92a
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: d3b01889b7634dce8ef1d6a4886a9a6ac39a6473
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88632911"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93060868"
 ---
 # <a name="aspnet-core-no-locrazor-sdk"></a>ASP.NET Core Razor SDK
 
@@ -36,7 +37,7 @@ ms.locfileid: "88632911"
 ::: moniker range=">= aspnetcore-3.0"
 
 * 需要建立、封裝和發佈包含 [Razor](xref:mvc/views/razor) ASP.NET CORE MVC 或專案之檔案的專案 [Blazor](xref:blazor/index) 。
-* 包含一組預先定義的目標、屬性和專案，可讓您自訂 Razor (的 *cshtml* 或 *razor*) 檔的編譯。
+* 包含一組預先定義的目標、屬性和專案，可讓您自訂 Razor (的 *cshtml* 或 *razor* ) 檔的編譯。
 
 RazorSDK 包含 `Content` `Include` 屬性設定為和萬用字元模式的 `**\*.cshtml` 專案 `**\*.razor` 。 已發行相符的檔案。
 
@@ -51,7 +52,7 @@ RazorSDK 包含 `Content` `Include` 屬性設定為 `**\*.cshtml` 萬用字元�
 
 ::: moniker-end
 
-## <a name="prerequisites"></a>Prerequisites
+## <a name="prerequisites"></a>必要條件
 
 [!INCLUDE[](~/includes/2.1-SDK.md)]
 
@@ -61,7 +62,7 @@ RazorSDK 包含 `Content` `Include` 屬性設定為 `**\*.cshtml` 萬用字元�
 
 ::: moniker range=">= aspnetcore-3.0"
 
-若要使用 Razor SDK 來建立包含 Razor 視圖或頁面的類別庫 Razor ，建議您從 Razor 類別庫 (RCL) 專案範本開始。 用來建立 Blazor (*razor*) 檔案的 RCL，至少需要 [AspNetCore 元件](https://www.nuget.org/packages/Microsoft.AspNetCore.Components) 封裝的參考。 用來 Razor (*cshtml* 檔案建立 views 或頁面的 RCL，) 至少需要目標 `netcoreapp3.0` 或更新版本，並且 `FrameworkReference` 在其專案檔中 [AspNetCore 中繼套件](xref:fundamentals/metapackage-app) 。
+若要使用 Razor SDK 來建立包含 Razor 視圖或頁面的類別庫 Razor ，建議您從 Razor 類別庫 (RCL) 專案範本開始。 用來建立 Blazor ( *razor* ) 檔案的 RCL，至少需要 [AspNetCore 元件](https://www.nuget.org/packages/Microsoft.AspNetCore.Components) 封裝的參考。 用來 Razor ( *cshtml* 檔案建立 views 或頁面的 RCL，) 至少需要目標 `netcoreapp3.0` 或更新版本，並且 `FrameworkReference` 在其專案檔中 [AspNetCore 中繼套件](xref:fundamentals/metapackage-app) 。
 
 ::: moniker-end
 
@@ -102,8 +103,8 @@ RazorSDK 包含 `Content` `Include` 屬性設定為 `**\*.cshtml` 萬用字元�
 
 下列屬性會控制 Razor 作為專案組建一部分的 SDK 行為：
 
-* `RazorCompileOnBuild`：在 `true` 建立專案時，編譯和發出元件的時間 Razor 。 預設為 `true`。
-* `RazorCompileOnPublish`：在 `true` 發行專案時，編譯和發出元件的時間 Razor 。 預設為 `true`。
+* `RazorCompileOnBuild`：在 `true` 建立專案時，編譯和發出元件的時間 Razor 。 預設值為 `true`。
+* `RazorCompileOnPublish`：在 `true` 發行專案時，編譯和發出元件的時間 Razor 。 預設值為 `true`。
 
 下表中的屬性和專案可用來設定 SDK 的輸入和輸出 Razor 。
 
@@ -117,8 +118,8 @@ RazorSDK 包含 `Content` `Include` 屬性設定為 `**\*.cshtml` 萬用字元�
 | 項目 | 描述 |
 | ----- | ----------- |
 | `RazorGenerate` | 專案專案 (做為產生程式碼之輸入的 cshtml 檔案) *。* |
-| `RazorComponent` | 專案專案 (*razor* 檔案) ，其為元件程式 Razor 代碼產生的輸入。 |
-| `RazorCompile` | 專案元素 (*.cs*檔案) ，其為編譯目標的輸入。 Razor 您可以使用這個 `ItemGroup` 來指定要編譯到元件中的其他檔案 Razor 。 |
+| `RazorComponent` | 專案專案 ( *razor* 檔案) ，其為元件程式 Razor 代碼產生的輸入。 |
+| `RazorCompile` | 專案元素 ( *.cs* 檔案) ，其為編譯目標的輸入。 Razor 您可以使用這個 `ItemGroup` 來指定要編譯到元件中的其他檔案 Razor 。 |
 | `RazorTargetAssemblyAttribute` | 用來撰寫程式碼的專案專案會產生元件的屬性 Razor 。 例如：  <br>`RazorAssemblyAttribute`<br>`Include="System.Reflection.AssemblyMetadataAttribute"`<br>`_Parameter1="BuildSource" _Parameter2="https://docs.microsoft.com/">` |
 | `RazorEmbeddedResource` | 將專案專案新增為所產生元件中的內嵌資源 Razor 。 |
 
@@ -129,14 +130,14 @@ RazorSDK 包含 `Content` `Include` 屬性設定為 `**\*.cshtml` 萬用字元�
 | `RazorTargetName` | 檔案名 (沒有所產生之元件的副檔名) Razor 。 |
 | `RazorOutputPath` | Razor輸出目錄。 |
 | `RazorCompileToolset` | 用來判斷用來建立元件的工具組 Razor 。 有效值是 `Implicit`、`RazorSDK` 和 `PrecompilationTool`。 |
-| [EnableDefaultContentItems](https://github.com/aspnet/websdk/blob/rel-2.0.0/src/ProjectSystem/Microsoft.NET.Sdk.Web.ProjectSystem.Targets/netstandard1.0/Microsoft.NET.Sdk.Web.ProjectSystem.targets#L21) | 預設值為 `true`。 當 `true` 為時，會包含 *web.config*、 *. json*和 *cshtml* 檔案做為專案中的內容。 透過參考時 `Microsoft.NET.Sdk.Web` ，也會包含 *wwwroot* 和設定檔下的檔案。 |
+| [EnableDefaultContentItems](https://github.com/aspnet/websdk/blob/rel-2.0.0/src/ProjectSystem/Microsoft.NET.Sdk.Web.ProjectSystem.Targets/netstandard1.0/Microsoft.NET.Sdk.Web.ProjectSystem.targets#L21) | 預設值為 `true`。 當 `true` 為時，會包含 *web.config* 、 *. json* 和 *cshtml* 檔案做為專案中的內容。 透過參考時 `Microsoft.NET.Sdk.Web` ，也會包含 *wwwroot* 和設定檔下的檔案。 |
 | `EnableDefaultRazorGenerateItems` | 如果是 `true`，請包括來自 `RazorGenerate` 項目之 `Content` 項目的 *.cshtml* 檔案。 |
 | `GenerateRazorTargetAssemblyInfo` | 當 `true` 為時，會產生包含所指定之屬性的 *.cs* 檔案 `RazorAssemblyAttribute` ，而且會在編譯輸出中包含檔案。 |
 | `EnableDefaultRazorTargetAssemblyInfoAttributes` | 如果是 `true`，請將一組預設的組件屬性新增至 `RazorAssemblyAttribute`。 |
-| `CopyRazorGenerateFilesToPublishDirectory` | 當 `true` 為時，會將 `RazorGenerate` 專案 (*. cshtml*) 檔案複製到發行目錄。 Razor如果已發行的應用程式在組建階段或發行時間參與編譯，通常不需要這些檔案。 預設為 `false`。 |
-| `PreserveCompilationReferences` | 如果是 `true`，請將參考組件項目複製到發行目錄。 一般來說，如果 Razor 在組建階段或發行時間進行編譯，則發行的應用程式不需要參考元件。 `true`如果您已發佈的應用程式需要執行時間編譯，請將設定為。 例如， `true` 如果應用程式在執行時間修改 *cshtml* 檔案，或使用內嵌的視圖，請將值設定為。 預設為 `false`。 |
-| `IncludeRazorContentInPack` | 若 `true` 為，則 Razor 會在產生的 NuGet 套件中標示要包含的所有內容專案 (的) *。* 預設為 `false`。 |
-| `EmbedRazorGenerateSources` | 當 `true` 為時，會將 Razor 產生 (*. cshtml*) 專案做為內嵌檔案新增至產生的 Razor 元件。 預設為 `false`。 |
+| `CopyRazorGenerateFilesToPublishDirectory` | 當 `true` 為時，會將 `RazorGenerate` 專案 ( *. cshtml* ) 檔案複製到發行目錄。 Razor如果已發行的應用程式在組建階段或發行時間參與編譯，通常不需要這些檔案。 預設值為 `false`。 |
+| `PreserveCompilationReferences` | 如果是 `true`，請將參考組件項目複製到發行目錄。 一般來說，如果 Razor 在組建階段或發行時間進行編譯，則發行的應用程式不需要參考元件。 `true`如果您已發佈的應用程式需要執行時間編譯，請將設定為。 例如， `true` 如果應用程式在執行時間修改 *cshtml* 檔案，或使用內嵌的視圖，請將值設定為。 預設值為 `false`。 |
+| `IncludeRazorContentInPack` | 若 `true` 為，則 Razor 會在產生的 NuGet 套件中標示要包含的所有內容專案 (的) *。* 預設值為 `false`。 |
+| `EmbedRazorGenerateSources` | 當 `true` 為時，會將 Razor 產生 ( *. cshtml* ) 專案做為內嵌檔案新增至產生的 Razor 元件。 預設值為 `false`。 |
 | `UseRazorBuildServer` | 如果是 `true`，請使用持續性組建伺服器處理序來卸載程式碼產生工作。 預設值為 `UseSharedCompilation`。 |
 | `GenerateMvcApplicationPartsAssemblyAttributes` | 當 `true` 為時，SDK 會在執行時間產生 MVC 用來執行應用程式元件探索的其他屬性。 |
 | `DefaultWebContentItemExcludes` | 專案專案的萬用字元模式，這些專案會 `Content` 在以 Web 或 SDK 為目標的專案中，從專案群組中排除 Razor |
@@ -153,14 +154,14 @@ RazorSDK 包含 `Content` `Include` 屬性設定為 `**\*.cshtml` 萬用字元�
 | `RazorTargetName` | 檔案名 (沒有所產生之元件的副檔名) Razor 。 |
 | `RazorOutputPath` | Razor輸出目錄。 |
 | `RazorCompileToolset` | 用來判斷用來建立元件的工具組 Razor 。 有效值是 `Implicit`、`RazorSDK` 和 `PrecompilationTool`。 |
-| [EnableDefaultContentItems](https://github.com/aspnet/websdk/blob/rel-2.0.0/src/ProjectSystem/Microsoft.NET.Sdk.Web.ProjectSystem.Targets/netstandard1.0/Microsoft.NET.Sdk.Web.ProjectSystem.targets#L21) | 預設值為 `true`。 當 `true` 為時，會包含 *web.config*、 *. json*和 *cshtml* 檔案做為專案中的內容。 透過參考時 `Microsoft.NET.Sdk.Web` ，也會包含 *wwwroot* 和設定檔下的檔案。 |
+| [EnableDefaultContentItems](https://github.com/aspnet/websdk/blob/rel-2.0.0/src/ProjectSystem/Microsoft.NET.Sdk.Web.ProjectSystem.Targets/netstandard1.0/Microsoft.NET.Sdk.Web.ProjectSystem.targets#L21) | 預設值為 `true`。 當 `true` 為時，會包含 *web.config* 、 *. json* 和 *cshtml* 檔案做為專案中的內容。 透過參考時 `Microsoft.NET.Sdk.Web` ，也會包含 *wwwroot* 和設定檔下的檔案。 |
 | `EnableDefaultRazorGenerateItems` | 如果是 `true`，請包括來自 `RazorGenerate` 項目之 `Content` 項目的 *.cshtml* 檔案。 |
 | `GenerateRazorTargetAssemblyInfo` | 當 `true` 為時，會產生包含所指定之屬性的 *.cs* 檔案 `RazorAssemblyAttribute` ，而且會在編譯輸出中包含檔案。 |
 | `EnableDefaultRazorTargetAssemblyInfoAttributes` | 如果是 `true`，請將一組預設的組件屬性新增至 `RazorAssemblyAttribute`。 |
-| `CopyRazorGenerateFilesToPublishDirectory` | 當 `true` 為時，會將 `RazorGenerate` 專案 (*. cshtml*) 檔案複製到發行目錄。 Razor如果已發行的應用程式在組建階段或發行時間參與編譯，通常不需要這些檔案。 預設為 `false`。 |
-| `CopyRefAssembliesToPublishDirectory` | 如果是 `true`，請將參考組件項目複製到發行目錄。 一般來說，如果 Razor 在組建階段或發行時間進行編譯，則發行的應用程式不需要參考元件。 `true`如果您已發佈的應用程式需要執行時間編譯，請將設定為。 例如， `true` 如果應用程式在執行時間修改 *cshtml* 檔案，或使用內嵌的視圖，請將值設定為。 預設為 `false`。 |
-| `IncludeRazorContentInPack` | 若 `true` 為，則 Razor 會在產生的 NuGet 套件中標示要包含的所有內容專案 (的) *。* 預設為 `false`。 |
-| `EmbedRazorGenerateSources` | 當 `true` 為時，會將 Razor 產生 (*. cshtml*) 專案做為內嵌檔案新增至產生的 Razor 元件。 預設為 `false`。 |
+| `CopyRazorGenerateFilesToPublishDirectory` | 當 `true` 為時，會將 `RazorGenerate` 專案 ( *. cshtml* ) 檔案複製到發行目錄。 Razor如果已發行的應用程式在組建階段或發行時間參與編譯，通常不需要這些檔案。 預設值為 `false`。 |
+| `CopyRefAssembliesToPublishDirectory` | 如果是 `true`，請將參考組件項目複製到發行目錄。 一般來說，如果 Razor 在組建階段或發行時間進行編譯，則發行的應用程式不需要參考元件。 `true`如果您已發佈的應用程式需要執行時間編譯，請將設定為。 例如， `true` 如果應用程式在執行時間修改 *cshtml* 檔案，或使用內嵌的視圖，請將值設定為。 預設值為 `false`。 |
+| `IncludeRazorContentInPack` | 若 `true` 為，則 Razor 會在產生的 NuGet 套件中標示要包含的所有內容專案 (的) *。* 預設值為 `false`。 |
+| `EmbedRazorGenerateSources` | 當 `true` 為時，會將 Razor 產生 ( *. cshtml* ) 專案做為內嵌檔案新增至產生的 Razor 元件。 預設值為 `false`。 |
 | `UseRazorBuildServer` | 如果是 `true`，請使用持續性組建伺服器處理序來卸載程式碼產生工作。 預設值為 `UseSharedCompilation`。 |
 | `GenerateMvcApplicationPartsAssemblyAttributes` | 當 `true` 為時，SDK 會在執行時間產生 MVC 用來執行應用程式元件探索的其他屬性。 |
 | `DefaultWebContentItemExcludes` | 專案專案的萬用字元模式，這些專案會 `Content` 在以 Web 或 SDK 為目標的專案中，從專案群組中排除 Razor |
@@ -176,7 +177,7 @@ RazorSDK 包含 `Content` `Include` 屬性設定為 `**\*.cshtml` 萬用字元�
 
 RazorSDK 會定義兩個主要目標：
 
-* `RazorGenerate`：程式碼會從專案元素產生 *.cs*檔案。 `RazorGenerate` 您 `RazorGenerateDependsOn` 可以使用屬性來指定可在此目標之前或之後執行的其他目標。
+* `RazorGenerate`：程式碼會從專案元素產生 *.cs* 檔案。 `RazorGenerate` 您 `RazorGenerateDependsOn` 可以使用屬性來指定可在此目標之前或之後執行的其他目標。
 * `RazorCompile`：將產生的 *.cs* 檔案編譯成 Razor 元件。 使用 `RazorCompileDependsOn` 指定可在此目標之前或之後執行的其他目標。
 * `RazorComponentGenerate`：程式碼會產生專案元素的 *.cs 檔案。* `RazorComponent` 您 `RazorComponentGenerateDependsOn` 可以使用屬性來指定可在此目標之前或之後執行的其他目標。
 

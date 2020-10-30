@@ -7,6 +7,7 @@ ms.author: riande
 ms.custom: mvc, seodec18
 ms.date: 09/26/2019
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -18,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: fundamentals/configuration/platform-specific-configuration
-ms.openlocfilehash: fadd93cf28603653e20ed6c7dceadcabf0dfb9a5
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: c12487875db69472ee328dfc7a611ee99974c770
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88627516"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93061050"
 ---
 # <a name="use-hosting-startup-assemblies-in-aspnet-core"></a>在 ASP.NET Core 中使用裝載啟動組件
 
@@ -105,41 +106,41 @@ ms.locfileid: "88627516"
 
 類別庫可以提供裝載啟動的增強功能。 此程式庫包含 `HostingStartup` 屬性。
 
-[範例程式碼](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/host/platform-specific-configuration/samples/)包含 Razor 頁面應用程式、 *HostingStartupApp*，以及類別庫 *>hostingstartuplibrary*。 類別庫：
+[範例程式碼](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/host/platform-specific-configuration/samples/)包含 Razor 頁面應用程式、 *HostingStartupApp* ，以及類別庫 *>hostingstartuplibrary* 。 類別庫：
 
 * 包含主機啟動類別 `ServiceKeyInjection`，其會實作 `IHostingStartup`。 `ServiceKeyInjection` 使用記憶體內部組態提供者 ([AddInMemoryCollection](xref:Microsoft.Extensions.Configuration.MemoryConfigurationBuilderExtensions.AddInMemoryCollection*))，將成對的服務字串新增至應用程式的組態。
 * 包含 `HostingStartup` 屬性，可識別裝載啟動的命名空間和類別。
 
 `ServiceKeyInjection`類別的 <xref:Microsoft.AspNetCore.Hosting.IHostingStartup.Configure*> 方法會使用將 <xref:Microsoft.AspNetCore.Hosting.IWebHostBuilder> 增強功能新增至應用程式。
 
-*HostingStartupLibrary/ServiceKeyInjection.cs*：
+*HostingStartupLibrary/ServiceKeyInjection.cs* ：
 
 [!code-csharp[](platform-specific-configuration/samples/3.x/HostingStartupLibrary/ServiceKeyInjection.cs?name=snippet1)]
 
 應用程式的 [索引] 頁面會讀取並呈現類別庫裝載啟動組件所設定之兩個索引鍵的組態值：
 
-*HostingStartupApp/Pages/Index.cshtml.cs*：
+*HostingStartupApp/Pages/Index.cshtml.cs* ：
 
 [!code-csharp[](platform-specific-configuration/samples/3.x/HostingStartupApp/Pages/Index.cshtml.cs?name=snippet1&highlight=5-6,11-12)]
 
-[程式碼範例](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/host/platform-specific-configuration/samples/)也包含提供另一個主機啟動 (*HostingStartupPackage*) 的 NuGet 套件專案。 此套件特性與前文所述之類別庫相同。 套件：
+[程式碼範例](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/host/platform-specific-configuration/samples/)也包含提供另一個主機啟動 ( *HostingStartupPackage* ) 的 NuGet 套件專案。 此套件特性與前文所述之類別庫相同。 套件：
 
 * 包含主機啟動類別 `ServiceKeyInjection`，其會實作 `IHostingStartup`。 `ServiceKeyInjection` 將成對的服務字串新增到應用程式組態。
 * 包含 `HostingStartup` 屬性。
 
-*HostingStartupPackage/ServiceKeyInjection.cs*：
+*HostingStartupPackage/ServiceKeyInjection.cs* ：
 
 [!code-csharp[](platform-specific-configuration/samples/3.x/HostingStartupPackage/ServiceKeyInjection.cs?name=snippet1)]
 
 應用程式的 [索引] 頁面會讀取並呈現套件裝載啟動組件所設定之兩個索引鍵的組態值：
 
-*HostingStartupApp/Pages/Index.cshtml.cs*：
+*HostingStartupApp/Pages/Index.cshtml.cs* ：
 
 [!code-csharp[](platform-specific-configuration/samples/3.x/HostingStartupApp/Pages/Index.cshtml.cs?name=snippet1&highlight=7-8,13-14)]
 
 ### <a name="console-app-without-an-entry-point"></a>沒有進入點的主控台應用程式
 
-這個方法僅適用於 .NET Core 應用程式，不適用於 .NET Framework。**
+這個方法僅適用於 .NET Core 應用程式，不適用於 .NET Framework。 
 
 在沒有包含 `HostingStartup` 屬性之進入點的主控台應用程式中，可以提供不需要啟用編譯時間參考的動態裝載啟動增強功能。 發佈主控台應用程式會產生裝載啟動組件，這些組件可從執行階段存放區取用。
 
@@ -169,7 +170,7 @@ ms.locfileid: "88627516"
 
 [!code-csharp[](platform-specific-configuration/samples-snapshot/3.x/StartupEnhancement.cs?name=snippet2&highlight=3,5)]
 
-建置 `IHostingStartup` 專案時，相依性檔案 (*.deps.json*) 會將組件的 `runtime` 位置設定為 *bin* 資料夾：
+建置 `IHostingStartup` 專案時，相依性檔案 ( *.deps.json* ) 會將組件的 `runtime` 位置設定為 *bin* 資料夾：
 
 [!code-json[](platform-specific-configuration/samples-snapshot/3.x/StartupEnhancement1.deps.json?range=2-13&highlight=8)]
 
@@ -262,7 +263,7 @@ public static IHostBuilder CreateHostBuilder(string[] args) =>
 dotnet store --manifest {MANIFEST FILE} --runtime {RUNTIME IDENTIFIER} --output {OUTPUT LOCATION} --skip-optimization
 ```
 
-在範例應用程式 (*RuntimeStore* 專案) 中，我們使用下列命令：
+在範例應用程式 ( *RuntimeStore* 專案) 中，我們使用下列命令：
 
 ```dotnetcli
 dotnet store --manifest store.manifest.csproj --runtime win7-x64 --output ./deployment/store --skip-optimization
@@ -339,7 +340,7 @@ dotnet store --manifest store.manifest.csproj --runtime win7-x64 --output ./depl
 * `{SHARED FRAMEWORK VERSION}`：共用 framework 的最小版本。
 * `{ENHANCEMENT ASSEMBLY NAME}`：增強的元件名稱。
 
-在範例應用程式 (*RuntimeStore* 專案) 中，額外的相依性檔案是放到下列位置：
+在範例應用程式 ( *RuntimeStore* 專案) 中，額外的相依性檔案是放到下列位置：
 
 ```
 deployment/additionalDeps/shared/Microsoft.AspNetCore.App/3.0.0/StartupDiagnostics.deps.json
@@ -347,7 +348,7 @@ deployment/additionalDeps/shared/Microsoft.AspNetCore.App/3.0.0/StartupDiagnosti
 
 為讓執行階段探索執行階段存放區，額外的相依性檔案位置會新增到 `DOTNET_ADDITIONAL_DEPS` 環境變數。
 
-在範例應用程式 (*RuntimeStore* 專案) 中，建置執行階段存放區並產生額外的相依性檔案是透過使用 [PowerShell](/powershell/scripting/powershell-scripting) 指令碼來完成的。
+在範例應用程式 ( *RuntimeStore* 專案) 中，建置執行階段存放區並產生額外的相依性檔案是透過使用 [PowerShell](/powershell/scripting/powershell-scripting) 指令碼來完成的。
 
 如需如何為各種作業系統設定環境變數的範例，請參閱[使用多個環境](xref:fundamentals/environments)。
 
@@ -363,7 +364,7 @@ deployment/additionalDeps/shared/Microsoft.AspNetCore.App/3.0.0/StartupDiagnosti
 
 NuGet 套件可以提供裝載啟動的增強功能。 此套件具有 `HostingStartup` 屬性。 使用下列兩種方法的任一方法，套件提供的裝載啟動類型即可提供應用程式使用：
 
-* 增強應用程式的專案檔會在應用程式專案檔 (編譯時間參考) 中建立裝載啟動的套件參考。 當編譯時間參考就定位時，裝載啟動組件及其所有相依性都會併入應用程式的相依性檔案 (*.deps.json*)。 這種方法適用於發佈至 [nuget.org](https://www.nuget.org/) 的裝載啟動組件套件。
+* 增強應用程式的專案檔會在應用程式專案檔 (編譯時間參考) 中建立裝載啟動的套件參考。 當編譯時間參考就定位時，裝載啟動組件及其所有相依性都會併入應用程式的相依性檔案 ( *.deps.json* )。 這種方法適用於發佈至 [nuget.org](https://www.nuget.org/) 的裝載啟動組件套件。
 * 裝載啟動的相依性檔案可提供增強應用程式使用，如[執行階段存放區](#runtime-store) 區段 (沒有編譯時間參考)。
 
 如需有關 NuGet 套件和執行階段存放區的詳細資訊，請參閱下列主題：
@@ -376,12 +377,12 @@ NuGet 套件可以提供裝載啟動的增強功能。 此套件具有 `HostingS
 
 部署在增強應用程式 *bin* 下的組件可提供裝載啟動增強功能。 您可以使用下列任一種方法，讓應用程式能夠使用組件所提供的裝載啟動類型：
 
-* 增強應用程式的專案檔會建立裝載啟動的組件參考 (編譯時間參考)。 當編譯時間參考就定位時，裝載啟動組件及其所有相依性都會併入應用程式的相依性檔案 (*.deps.json*)。 當部署案例呼叫以建立裝載啟動組件 (*.dll* 檔案) 的編譯時間參考，並將組件移至下列其中一項時，適用此方法：
+* 增強應用程式的專案檔會建立裝載啟動的組件參考 (編譯時間參考)。 當編譯時間參考就定位時，裝載啟動組件及其所有相依性都會併入應用程式的相依性檔案 ( *.deps.json* )。 當部署案例呼叫以建立裝載啟動組件 ( *.dll* 檔案) 的編譯時間參考，並將組件移至下列其中一項時，適用此方法：
   * 取用專案。
   * 取用專案可存取的位置。
 * 裝載啟動的相依性檔案可提供增強應用程式使用，如[執行階段存放區](#runtime-store) 區段 (沒有編譯時間參考)。
 * 以 .NET Framework 為目標時，可在預設載入內容中載入組件，在 .NET Framework 上，這表示組件位於下列其中一個位置：
-  * 應用程式基底路徑：應用程式可執行檔 (*.exe*) 所在的*bin*資料夾。
+  * 應用程式基底路徑：應用程式可執行檔 ( *.exe* ) 所在的 *bin* 資料夾。
   * 全域組件快取 (GAC) ： GAC 會儲存數個 .NET Framework apps 共用的元件。 如需詳細資訊，請參閱 .NET Framework 檔中的 [如何：將元件安裝到全域組件快取](/dotnet/framework/app-domains/how-to-install-an-assembly-into-the-gac) 。
 
 ## <a name="sample-code"></a>範例程式碼
@@ -389,9 +390,9 @@ NuGet 套件可以提供裝載啟動的增強功能。 此套件具有 `HostingS
 [程式碼範例](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/host/platform-specific-configuration/samples/) ([如何下載](xref:index#how-to-download-a-sample)) 示範裝載啟動實作案例：
 
 * 兩個裝載啟動組件 (類別程式庫) 各設定一對記憶體內部組態索引鍵/值組：
-  * NuGet 套件 (*HostingStartupPackage*)
-  * 類別庫 (*HostingStartupLibrary*)
-* 從部署在執行階段存放區的組件啟動裝載啟動 (*StartupDiagnostics*)。 此組件會在啟動時將兩個中介軟體新增至應用程式，以提供診斷資訊：
+  * NuGet 套件 ( *HostingStartupPackage* )
+  * 類別庫 ( *HostingStartupLibrary* )
+* 從部署在執行階段存放區的組件啟動裝載啟動 ( *StartupDiagnostics* )。 此組件會在啟動時將兩個中介軟體新增至應用程式，以提供診斷資訊：
   * 已註冊服務
   * 位址 (配置、主機、基底路徑、路徑、查詢字串)
   * 連線 (遠端 IP、遠端連接埠、本機 IP、本機連接埠、用戶端憑證)
@@ -404,7 +405,7 @@ NuGet 套件可以提供裝載啟動的增強功能。 此套件具有 `HostingS
 
 1. 使用 [dotnet pack](/dotnet/core/tools/dotnet-pack) 命令編譯 *HostingStartupPackage* 套件。
 1. 將 *HostingStartupPackage* 的套件組件名稱新增至 `ASPNETCORE_HOSTINGSTARTUPASSEMBLIES` 環境變數。
-1. 編譯和執行應用程式。 增強的應用程式中有套件參考 (編譯時間參考)。 應用程式專案檔中的 `<PropertyGroup>` 會指定套件專案的輸出 (*../HostingStartupPackage/bin/Debug*) 為套件來源。 這可讓應用程式在不將封裝上傳至 [nuget.org](https://www.nuget.org/)的情況下使用套件。如需詳細資訊，請參閱 HostingStartupApp 的專案檔案中的附注。
+1. 編譯和執行應用程式。 增強的應用程式中有套件參考 (編譯時間參考)。 應用程式專案檔中的 `<PropertyGroup>` 會指定套件專案的輸出 ( *../HostingStartupPackage/bin/Debug* ) 為套件來源。 這可讓應用程式在不將封裝上傳至 [nuget.org](https://www.nuget.org/)的情況下使用套件。如需詳細資訊，請參閱 HostingStartupApp 的專案檔案中的附注。
 
    ```xml
    <PropertyGroup>
@@ -425,7 +426,7 @@ dotnet nuget locals all --clear
 1. 使用 [dotnet build](/dotnet/core/tools/dotnet-build) 命令編譯 *HostingStartupLibrary* 類別庫。
 1. 將 *HostingStartupLibrary* 的類別庫組件名稱新增至 `ASPNETCORE_HOSTINGSTARTUPASSEMBLIES` 環境變數。
 1. 將 *HostingStartupLibrary.dll* 檔案從類別庫的編譯輸出複製到應用程式的 *bin/Debug* 資料夾，在應用程式的 *bin* 下部署類別庫組件。
-1. 編譯和執行應用程式。 `<ItemGroup>`應用程式專案檔中的會參考類別庫的元件 (*.\bin\Debug\netcoreapp3.0\HostingStartupLibrary.dll*)  (編譯時期參考) 。 如需詳細資訊，請參閱 HostingStartupApp 專案檔中的資訊。
+1. 編譯和執行應用程式。 `<ItemGroup>`應用程式專案檔中的會參考類別庫的元件 ( *.\bin\Debug\netcoreapp3.0\HostingStartupLibrary.dll* )  (編譯時期參考) 。 如需詳細資訊，請參閱 HostingStartupApp 專案檔中的資訊。
 
    ```xml
    <ItemGroup>
@@ -441,10 +442,10 @@ dotnet nuget locals all --clear
 **從部署在執行階段存放區的組件啟用**
 
 1. *StartupDiagnostics* 專案使用 [PowerShell](/powershell/scripting/powershell-scripting) 修改其 *StartupDiagnostics.deps.json* 檔案。 從 Windows 7 SP1 和 Windows Server 2008 R2 SP1 開始，會在 Windows 上預設安裝 PowerShell。 若要在其他平臺上取得 PowerShell，請參閱 [安裝各種版本的 powershell](/powershell/scripting/install/installing-powershell)。
-1. 執行 *RuntimeStore* 資料夾中的 *build.ps1* 指令碼。 此指令碼會：
-   * `StartupDiagnostics`在*obj\packages*資料夾中產生封裝。
-   * 在 *store* 資料夾中產生 `StartupDiagnostics` 的執行階段存放區。 指令碼中的 `dotnet store` 命令會使用  的 `win7-x64` [runtime identifier (RID) (執行階段識別碼 (RID))](/dotnet/core/rid-catalog) 作為部署至 Windows 的裝載啟動。 為不同的執行階段提供裝載啟動時，請在指令碼的行 37 上替換成正確的 RID。 稍後的執行時間存放區將會 `StartupDiagnostics` 移至將取用元件之電腦上的使用者或系統的執行時間存放區。 元件的使用者執行時間存放區安裝位置 `StartupDiagnostics` 為 *. dotnet/store/x64/netcoreapp 3.0/>startupdiagnostics.deps.json/1.0.0/lib/netcoreapp 3.0/StartupDiagnostics.dll*。
-   * `additionalDeps` `StartupDiagnostics` 在 *>additionaldeps*資料夾中產生的。 其他相依性稍後將移至使用者或系統的其他相依性。 使用者的 `StartupDiagnostics` 其他相依性安裝位置為 *. dotnet/X64/>additionaldeps/>startupdiagnostics.deps.json/Shared/NETCore. App/3.0.0/StartupDiagnostics.deps.json*。
+1. 執行 *RuntimeStore* 資料夾中的 *build.ps1* 指令碼。 指令碼：
+   * `StartupDiagnostics`在 *obj\packages* 資料夾中產生封裝。
+   * 在 *store* 資料夾中產生 `StartupDiagnostics` 的執行階段存放區。 指令碼中的 `dotnet store` 命令會使用  的 `win7-x64` [runtime identifier (RID) (執行階段識別碼 (RID))](/dotnet/core/rid-catalog) 作為部署至 Windows 的裝載啟動。 為不同的執行階段提供裝載啟動時，請在指令碼的行 37 上替換成正確的 RID。 稍後的執行時間存放區將會 `StartupDiagnostics` 移至將取用元件之電腦上的使用者或系統的執行時間存放區。 元件的使用者執行時間存放區安裝位置 `StartupDiagnostics` 為 *. dotnet/store/x64/netcoreapp 3.0/>startupdiagnostics.deps.json/1.0.0/lib/netcoreapp 3.0/StartupDiagnostics.dll* 。
+   * `additionalDeps` `StartupDiagnostics` 在 *>additionaldeps* 資料夾中產生的。 其他相依性稍後將移至使用者或系統的其他相依性。 使用者的 `StartupDiagnostics` 其他相依性安裝位置為 *. dotnet/X64/>additionaldeps/>startupdiagnostics.deps.json/Shared/NETCore. App/3.0.0/StartupDiagnostics.deps.json* 。
    * 將 *deploy.ps1* 檔案置於 *deployment* 資料夾中。
 1. 執行 *deployment* 資料夾中的 *deploy.ps1* 指令碼。 該指令碼會附加至：
    * `StartupDiagnostics` 至 `ASPNETCORE_HOSTINGSTARTUPASSEMBLIES` 環境變數。
@@ -503,41 +504,41 @@ dotnet nuget locals all --clear
 
 類別庫可以提供裝載啟動的增強功能。 此程式庫包含 `HostingStartup` 屬性。
 
-[範例程式碼](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/host/platform-specific-configuration/samples/)包含 Razor 頁面應用程式、 *HostingStartupApp*，以及類別庫 *>hostingstartuplibrary*。 類別庫：
+[範例程式碼](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/host/platform-specific-configuration/samples/)包含 Razor 頁面應用程式、 *HostingStartupApp* ，以及類別庫 *>hostingstartuplibrary* 。 類別庫：
 
 * 包含主機啟動類別 `ServiceKeyInjection`，其會實作 `IHostingStartup`。 `ServiceKeyInjection` 使用記憶體內部組態提供者 ([AddInMemoryCollection](xref:Microsoft.Extensions.Configuration.MemoryConfigurationBuilderExtensions.AddInMemoryCollection*))，將成對的服務字串新增至應用程式的組態。
 * 包含 `HostingStartup` 屬性，可識別裝載啟動的命名空間和類別。
 
 `ServiceKeyInjection`類別的 <xref:Microsoft.AspNetCore.Hosting.IHostingStartup.Configure*> 方法會使用將 <xref:Microsoft.AspNetCore.Hosting.IWebHostBuilder> 增強功能新增至應用程式。
 
-*HostingStartupLibrary/ServiceKeyInjection.cs*：
+*HostingStartupLibrary/ServiceKeyInjection.cs* ：
 
 [!code-csharp[](platform-specific-configuration/samples/2.x/HostingStartupLibrary/ServiceKeyInjection.cs?name=snippet1)]
 
 應用程式的 [索引] 頁面會讀取並呈現類別庫裝載啟動組件所設定之兩個索引鍵的組態值：
 
-*HostingStartupApp/Pages/Index.cshtml.cs*：
+*HostingStartupApp/Pages/Index.cshtml.cs* ：
 
 [!code-csharp[](platform-specific-configuration/samples/2.x/HostingStartupApp/Pages/Index.cshtml.cs?name=snippet1&highlight=5-6,11-12)]
 
-[程式碼範例](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/host/platform-specific-configuration/samples/)也包含提供另一個主機啟動 (*HostingStartupPackage*) 的 NuGet 套件專案。 此套件特性與前文所述之類別庫相同。 套件：
+[程式碼範例](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/host/platform-specific-configuration/samples/)也包含提供另一個主機啟動 ( *HostingStartupPackage* ) 的 NuGet 套件專案。 此套件特性與前文所述之類別庫相同。 套件：
 
 * 包含主機啟動類別 `ServiceKeyInjection`，其會實作 `IHostingStartup`。 `ServiceKeyInjection` 將成對的服務字串新增到應用程式組態。
 * 包含 `HostingStartup` 屬性。
 
-*HostingStartupPackage/ServiceKeyInjection.cs*：
+*HostingStartupPackage/ServiceKeyInjection.cs* ：
 
 [!code-csharp[](platform-specific-configuration/samples/2.x/HostingStartupPackage/ServiceKeyInjection.cs?name=snippet1)]
 
 應用程式的 [索引] 頁面會讀取並呈現套件裝載啟動組件所設定之兩個索引鍵的組態值：
 
-*HostingStartupApp/Pages/Index.cshtml.cs*：
+*HostingStartupApp/Pages/Index.cshtml.cs* ：
 
 [!code-csharp[](platform-specific-configuration/samples/2.x/HostingStartupApp/Pages/Index.cshtml.cs?name=snippet1&highlight=7-8,13-14)]
 
 ### <a name="console-app-without-an-entry-point"></a>沒有進入點的主控台應用程式
 
-這個方法僅適用於 .NET Core 應用程式，不適用於 .NET Framework。**
+這個方法僅適用於 .NET Core 應用程式，不適用於 .NET Framework。 
 
 在沒有包含 `HostingStartup` 屬性之進入點的主控台應用程式中，可以提供不需要啟用編譯時間參考的動態裝載啟動增強功能。 發佈主控台應用程式會產生裝載啟動組件，這些組件可從執行階段存放區取用。
 
@@ -567,7 +568,7 @@ dotnet nuget locals all --clear
 
 [!code-csharp[](platform-specific-configuration/samples-snapshot/2.x/StartupEnhancement.cs?name=snippet2&highlight=3,5)]
 
-建置 `IHostingStartup` 專案時，相依性檔案 (*.deps.json*) 會將組件的 `runtime` 位置設定為 *bin* 資料夾：
+建置 `IHostingStartup` 專案時，相依性檔案 ( *.deps.json* ) 會將組件的 `runtime` 位置設定為 *bin* 資料夾：
 
 [!code-json[](platform-specific-configuration/samples-snapshot/2.x/StartupEnhancement1.deps.json?range=2-13&highlight=8)]
 
@@ -648,7 +649,7 @@ HostingStartupLibrary;HostingStartupPackage;StartupDiagnostics
 dotnet store --manifest {MANIFEST FILE} --runtime {RUNTIME IDENTIFIER} --output {OUTPUT LOCATION} --skip-optimization
 ```
 
-在範例應用程式 (*RuntimeStore* 專案) 中，我們使用下列命令：
+在範例應用程式 ( *RuntimeStore* 專案) 中，我們使用下列命令：
 
 ```dotnetcli
 dotnet store --manifest store.manifest.csproj --runtime win7-x64 --output ./deployment/store --skip-optimization
@@ -725,7 +726,7 @@ dotnet store --manifest store.manifest.csproj --runtime win7-x64 --output ./depl
 * `{SHARED FRAMEWORK VERSION}`：共用 framework 的最小版本。
 * `{ENHANCEMENT ASSEMBLY NAME}`：增強的元件名稱。
 
-在範例應用程式 (*RuntimeStore* 專案) 中，額外的相依性檔案是放到下列位置：
+在範例應用程式 ( *RuntimeStore* 專案) 中，額外的相依性檔案是放到下列位置：
 
 ```
 deployment/additionalDeps/shared/Microsoft.AspNetCore.App/2.1.0/StartupDiagnostics.deps.json
@@ -733,7 +734,7 @@ deployment/additionalDeps/shared/Microsoft.AspNetCore.App/2.1.0/StartupDiagnosti
 
 為讓執行階段探索執行階段存放區，額外的相依性檔案位置會新增到 `DOTNET_ADDITIONAL_DEPS` 環境變數。
 
-在範例應用程式 (*RuntimeStore* 專案) 中，建置執行階段存放區並產生額外的相依性檔案是透過使用 [PowerShell](/powershell/scripting/powershell-scripting) 指令碼來完成的。
+在範例應用程式 ( *RuntimeStore* 專案) 中，建置執行階段存放區並產生額外的相依性檔案是透過使用 [PowerShell](/powershell/scripting/powershell-scripting) 指令碼來完成的。
 
 如需如何為各種作業系統設定環境變數的範例，請參閱[使用多個環境](xref:fundamentals/environments)。
 
@@ -749,7 +750,7 @@ deployment/additionalDeps/shared/Microsoft.AspNetCore.App/2.1.0/StartupDiagnosti
 
 NuGet 套件可以提供裝載啟動的增強功能。 此套件具有 `HostingStartup` 屬性。 使用下列兩種方法的任一方法，套件提供的裝載啟動類型即可提供應用程式使用：
 
-* 增強應用程式的專案檔會在應用程式專案檔 (編譯時間參考) 中建立裝載啟動的套件參考。 當編譯時間參考就定位時，裝載啟動組件及其所有相依性都會併入應用程式的相依性檔案 (*.deps.json*)。 這種方法適用於發佈至 [nuget.org](https://www.nuget.org/) 的裝載啟動組件套件。
+* 增強應用程式的專案檔會在應用程式專案檔 (編譯時間參考) 中建立裝載啟動的套件參考。 當編譯時間參考就定位時，裝載啟動組件及其所有相依性都會併入應用程式的相依性檔案 ( *.deps.json* )。 這種方法適用於發佈至 [nuget.org](https://www.nuget.org/) 的裝載啟動組件套件。
 * 裝載啟動的相依性檔案可提供增強應用程式使用，如[執行階段存放區](#runtime-store) 區段 (沒有編譯時間參考)。
 
 如需有關 NuGet 套件和執行階段存放區的詳細資訊，請參閱下列主題：
@@ -762,12 +763,12 @@ NuGet 套件可以提供裝載啟動的增強功能。 此套件具有 `HostingS
 
 部署在增強應用程式 *bin* 下的組件可提供裝載啟動增強功能。 您可以使用下列任一種方法，讓應用程式能夠使用組件所提供的裝載啟動類型：
 
-* 增強應用程式的專案檔會建立裝載啟動的組件參考 (編譯時間參考)。 當編譯時間參考就定位時，裝載啟動組件及其所有相依性都會併入應用程式的相依性檔案 (*.deps.json*)。 當部署案例呼叫以建立裝載啟動組件 (*.dll* 檔案) 的編譯時間參考，並將組件移至下列其中一項時，適用此方法：
+* 增強應用程式的專案檔會建立裝載啟動的組件參考 (編譯時間參考)。 當編譯時間參考就定位時，裝載啟動組件及其所有相依性都會併入應用程式的相依性檔案 ( *.deps.json* )。 當部署案例呼叫以建立裝載啟動組件 ( *.dll* 檔案) 的編譯時間參考，並將組件移至下列其中一項時，適用此方法：
   * 取用專案。
   * 取用專案可存取的位置。
 * 裝載啟動的相依性檔案可提供增強應用程式使用，如[執行階段存放區](#runtime-store) 區段 (沒有編譯時間參考)。
 * 以 .NET Framework 為目標時，可在預設載入內容中載入組件，在 .NET Framework 上，這表示組件位於下列其中一個位置：
-  * 應用程式基底路徑：應用程式可執行檔 (*.exe*) 所在的*bin*資料夾。
+  * 應用程式基底路徑：應用程式可執行檔 ( *.exe* ) 所在的 *bin* 資料夾。
   * 全域組件快取 (GAC) ： GAC 會儲存數個 .NET Framework apps 共用的元件。 如需詳細資訊，請參閱 .NET Framework 檔中的 [如何：將元件安裝到全域組件快取](/dotnet/framework/app-domains/how-to-install-an-assembly-into-the-gac) 。
 
 ## <a name="sample-code"></a>範例程式碼
@@ -775,9 +776,9 @@ NuGet 套件可以提供裝載啟動的增強功能。 此套件具有 `HostingS
 [程式碼範例](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/host/platform-specific-configuration/samples/) ([如何下載](xref:index#how-to-download-a-sample)) 示範裝載啟動實作案例：
 
 * 兩個裝載啟動組件 (類別程式庫) 各設定一對記憶體內部組態索引鍵/值組：
-  * NuGet 套件 (*HostingStartupPackage*)
-  * 類別庫 (*HostingStartupLibrary*)
-* 從部署在執行階段存放區的組件啟動裝載啟動 (*StartupDiagnostics*)。 此組件會在啟動時將兩個中介軟體新增至應用程式，以提供診斷資訊：
+  * NuGet 套件 ( *HostingStartupPackage* )
+  * 類別庫 ( *HostingStartupLibrary* )
+* 從部署在執行階段存放區的組件啟動裝載啟動 ( *StartupDiagnostics* )。 此組件會在啟動時將兩個中介軟體新增至應用程式，以提供診斷資訊：
   * 已註冊服務
   * 位址 (配置、主機、基底路徑、路徑、查詢字串)
   * 連線 (遠端 IP、遠端連接埠、本機 IP、本機連接埠、用戶端憑證)
@@ -790,7 +791,7 @@ NuGet 套件可以提供裝載啟動的增強功能。 此套件具有 `HostingS
 
 1. 使用 [dotnet pack](/dotnet/core/tools/dotnet-pack) 命令編譯 *HostingStartupPackage* 套件。
 1. 將 *HostingStartupPackage* 的套件組件名稱新增至 `ASPNETCORE_HOSTINGSTARTUPASSEMBLIES` 環境變數。
-1. 編譯和執行應用程式。 增強的應用程式中有套件參考 (編譯時間參考)。 應用程式專案檔中的 `<PropertyGroup>` 會指定套件專案的輸出 (*../HostingStartupPackage/bin/Debug*) 為套件來源。 這可讓應用程式在不將封裝上傳至 [nuget.org](https://www.nuget.org/)的情況下使用套件。如需詳細資訊，請參閱 HostingStartupApp 的專案檔案中的附注。
+1. 編譯和執行應用程式。 增強的應用程式中有套件參考 (編譯時間參考)。 應用程式專案檔中的 `<PropertyGroup>` 會指定套件專案的輸出 ( *../HostingStartupPackage/bin/Debug* ) 為套件來源。 這可讓應用程式在不將封裝上傳至 [nuget.org](https://www.nuget.org/)的情況下使用套件。如需詳細資訊，請參閱 HostingStartupApp 的專案檔案中的附注。
 
    ```xml
    <PropertyGroup>
@@ -811,7 +812,7 @@ dotnet nuget locals all --clear
 1. 使用 [dotnet build](/dotnet/core/tools/dotnet-build) 命令編譯 *HostingStartupLibrary* 類別庫。
 1. 將 *HostingStartupLibrary* 的類別庫組件名稱新增至 `ASPNETCORE_HOSTINGSTARTUPASSEMBLIES` 環境變數。
 1. 將 *HostingStartupLibrary.dll* 檔案從類別庫的編譯輸出複製到應用程式的 *bin/Debug* 資料夾，在應用程式的 *bin* 下部署類別庫組件。
-1. 編譯和執行應用程式。 應用程式專案檔中的 `<ItemGroup>` 參考類別庫的組件 (*.\bin\Debug\netcoreapp2.1\HostingStartupLibrary.dll*) (編譯時間參考)。 如需詳細資訊，請參閱 HostingStartupApp 專案檔中的資訊。
+1. 編譯和執行應用程式。 應用程式專案檔中的 `<ItemGroup>` 參考類別庫的組件 ( *.\bin\Debug\netcoreapp2.1\HostingStartupLibrary.dll* ) (編譯時間參考)。 如需詳細資訊，請參閱 HostingStartupApp 專案檔中的資訊。
 
    ```xml
    <ItemGroup>
@@ -827,10 +828,10 @@ dotnet nuget locals all --clear
 **從部署在執行階段存放區的組件啟用**
 
 1. *StartupDiagnostics* 專案使用 [PowerShell](/powershell/scripting/powershell-scripting) 修改其 *StartupDiagnostics.deps.json* 檔案。 從 Windows 7 SP1 和 Windows Server 2008 R2 SP1 開始，會在 Windows 上預設安裝 PowerShell。 若要在其他平臺上取得 PowerShell，請參閱 [安裝各種版本的 powershell](/powershell/scripting/install/installing-powershell)。
-1. 執行 *RuntimeStore* 資料夾中的 *build.ps1* 指令碼。 此指令碼會：
-   * `StartupDiagnostics`在*obj\packages*資料夾中產生封裝。
-   * 在 *store* 資料夾中產生 `StartupDiagnostics` 的執行階段存放區。 指令碼中的 `dotnet store` 命令會使用  的 `win7-x64` [runtime identifier (RID) (執行階段識別碼 (RID))](/dotnet/core/rid-catalog) 作為部署至 Windows 的裝載啟動。 為不同的執行階段提供裝載啟動時，請在指令碼的行 37 上替換成正確的 RID。 稍後的執行時間存放區將會 `StartupDiagnostics` 移至將取用元件之電腦上的使用者或系統的執行時間存放區。 元件的使用者執行時間存放區安裝位置 `StartupDiagnostics` 為 *. dotnet/store/x64/netcoreapp 2.2/>startupdiagnostics.deps.json/1.0.0/lib/netcoreapp 2.2/StartupDiagnostics.dll*。
-   * `additionalDeps` `StartupDiagnostics` 在 *>additionaldeps*資料夾中產生的。 其他相依性稍後將移至使用者或系統的其他相依性。 使用者的 `StartupDiagnostics` 其他相依性安裝位置為 *. dotnet/X64/>additionaldeps/>startupdiagnostics.deps.json/Shared/NETCore. App/2.2.0/StartupDiagnostics.deps.json*。
+1. 執行 *RuntimeStore* 資料夾中的 *build.ps1* 指令碼。 指令碼：
+   * `StartupDiagnostics`在 *obj\packages* 資料夾中產生封裝。
+   * 在 *store* 資料夾中產生 `StartupDiagnostics` 的執行階段存放區。 指令碼中的 `dotnet store` 命令會使用  的 `win7-x64` [runtime identifier (RID) (執行階段識別碼 (RID))](/dotnet/core/rid-catalog) 作為部署至 Windows 的裝載啟動。 為不同的執行階段提供裝載啟動時，請在指令碼的行 37 上替換成正確的 RID。 稍後的執行時間存放區將會 `StartupDiagnostics` 移至將取用元件之電腦上的使用者或系統的執行時間存放區。 元件的使用者執行時間存放區安裝位置 `StartupDiagnostics` 為 *. dotnet/store/x64/netcoreapp 2.2/>startupdiagnostics.deps.json/1.0.0/lib/netcoreapp 2.2/StartupDiagnostics.dll* 。
+   * `additionalDeps` `StartupDiagnostics` 在 *>additionaldeps* 資料夾中產生的。 其他相依性稍後將移至使用者或系統的其他相依性。 使用者的 `StartupDiagnostics` 其他相依性安裝位置為 *. dotnet/X64/>additionaldeps/>startupdiagnostics.deps.json/Shared/NETCore. App/2.2.0/StartupDiagnostics.deps.json* 。
    * 將 *deploy.ps1* 檔案置於 *deployment* 資料夾中。
 1. 執行 *deployment* 資料夾中的 *deploy.ps1* 指令碼。 該指令碼會附加至：
    * `StartupDiagnostics` 至 `ASPNETCORE_HOSTINGSTARTUPASSEMBLIES` 環境變數。

@@ -6,6 +6,7 @@ ms.author: riande
 ms.custom: H1Hack27Feb2017
 ms.date: 03/18/2019
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -17,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: mvc/views/tag-helpers/intro
-ms.openlocfilehash: 345d20494111b808dac9678637de060169730a53
-ms.sourcegitcommit: f09407d128634d200c893bfb1c163e87fa47a161
+ms.openlocfilehash: 781365d99c6d36d8abaec9681128ba712db8cb88
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 08/26/2020
-ms.locfileid: "88865348"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93060660"
 ---
 # <a name="tag-helpers-in-aspnet-core"></a>ASP.NET Core 中的標籤協助程式
 
@@ -34,13 +35,13 @@ ms.locfileid: "88865348"
 
 ## <a name="what-tag-helpers-provide"></a>標籤協助程式所提供的內容
 
-易於**使用 HTML 的開發體驗**大部分的情況下，使用標籤協助程式的 Razor 標記看起來就像標準 HTML。 使用 HTML/CSS/JavaScript 所熟悉的前端設計工具可以進行編輯， Razor 而不需要學習 c # Razor 語法。
+易於 **使用 HTML 的開發體驗** 大部分的情況下，使用標籤協助程式的 Razor 標記看起來就像標準 HTML。 使用 HTML/CSS/JavaScript 所熟悉的前端設計工具可以進行編輯， Razor 而不需要學習 c # Razor 語法。
 
-用來**建立 html 和 Razor 標記的豐富 IntelliSense 環境**，與 html 協助程式很清晰，後者是伺服器端在視圖中建立標記的方式 Razor 。 [標籤協助程式與 HTML 協助程式的比較](#tag-helpers-compared-to-html-helpers)會詳述差異。 [標籤協助程式的 IntelliSense 支援](#intellisense-support-for-tag-helpers)說明 IntelliSense 環境。 即使 Razor 是使用 c # 語法經驗的開發人員，使用標記協助程式比撰寫 c # 標記更具生產力 Razor 。
+用來 **建立 html 和 Razor 標記的豐富 IntelliSense 環境** ，與 html 協助程式很清晰，後者是伺服器端在視圖中建立標記的方式 Razor 。 [標籤協助程式與 HTML 協助程式的比較](#tag-helpers-compared-to-html-helpers)會詳述差異。 [標籤協助程式的 IntelliSense 支援](#intellisense-support-for-tag-helpers)說明 IntelliSense 環境。 即使 Razor 是使用 c # 語法經驗的開發人員，使用標記協助程式比撰寫 c # 標記更具生產力 Razor 。
 
-**讓您更具生產力，而且可以只使用伺服器上的可用資訊來產生更強固、可靠和易維護的程式碼**：例如，在過去，更新映像的目的是要在您變更映像時變更映像名稱。 基於效能考量，應該主動快取影像，而且除非您變更影像的名稱，否則用戶端會有取得過時複本的風險。 在過去，編輯映像之後，必須變更名稱，而且需要更新 Web 應用程式中映像的每個參考。 這並不只是非常耗費人力，也很容易出錯 (您可能遺漏參考、不小心輸入錯誤的字串等等。 ) 內建 `ImageTagHelper` 可以自動為您進行這項作業。 `ImageTagHelper` 可以將版本號碼附加到映像名稱後面；因此，只要映像變更，伺服器就會自動產生映像的新唯一版本。 用戶端保證會取得目前的映像。 使用 `ImageTagHelper`，此健全性和人力節省基本上是免費的。
+**讓您更具生產力，而且可以只使用伺服器上的可用資訊來產生更強固、可靠和易維護的程式碼** ：例如，在過去，更新映像的目的是要在您變更映像時變更映像名稱。 基於效能考量，應該主動快取影像，而且除非您變更影像的名稱，否則用戶端會有取得過時複本的風險。 在過去，編輯映像之後，必須變更名稱，而且需要更新 Web 應用程式中映像的每個參考。 這並不只是非常耗費人力，也很容易出錯 (您可能遺漏參考、不小心輸入錯誤的字串等等。 ) 內建 `ImageTagHelper` 可以自動為您進行這項作業。 `ImageTagHelper` 可以將版本號碼附加到映像名稱後面；因此，只要映像變更，伺服器就會自動產生映像的新唯一版本。 用戶端保證會取得目前的映像。 使用 `ImageTagHelper`，此健全性和人力節省基本上是免費的。
 
-大部分的內建的標籤協助程式都可以在標準的 HTML 元素中使用，可為元素提供伺服器端的屬性。 例如，在 [檢視/帳戶]** 資料夾內許多檢視中所使用的 `<input>` 元素會包含 `asp-for` 屬性。 此屬性會擷取指定之模型屬性的名稱，並將其放入轉譯的 HTML 中。 請考慮 Razor 具有下列模型的視圖：
+大部分的內建的標籤協助程式都可以在標準的 HTML 元素中使用，可為元素提供伺服器端的屬性。 例如，在 [檢視/帳戶]  資料夾內許多檢視中所使用的 `<input>` 元素會包含 `asp-for` 屬性。 此屬性會擷取指定之模型屬性的名稱，並將其放入轉譯的 HTML 中。 請考慮 Razor 具有下列模型的視圖：
 
 ```csharp
 public class Movie
@@ -79,7 +80,7 @@ public class Movie
 
 [!code-cshtml[](../../../mvc/views/tag-helpers/authoring/sample/AuthoringTagHelpers/src/AuthoringTagHelpers/Views/_ViewImportsCopy.cshtml?highlight=2&range=2-3)]
 
-`@addTagHelper` 指示詞讓標籤協助程式可供檢視使用。 在此情況下，view 檔案是 *pages/_ViewImports. cshtml*，預設會由 *pages* 資料夾和子資料夾中的所有檔案繼承;讓標籤協助程式可供使用。 上述程式碼使用萬用字元語法 ( " \* " ) 來指定指定元件中的所有標籤協助程式 (*>microsoft.aspnetcore.mvc.taghelpers*) 將可供 *Views* 目錄或子目錄中的每個 view 檔案使用。 `@addTagHelper` 後面的第一個參數指定要載入的標籤協助程式 (使用 "\*" 表示所有標籤協助程式)，而第二個參數 "Microsoft.AspNetCore.Mvc.TagHelpers" 指定包含標籤協助程式的組件。 *Microsoft.AspNetCore.Mvc.TagHelpers* 是內建 ASP.NET Core 標籤協助程式的組件。
+`@addTagHelper` 指示詞讓標籤協助程式可供檢視使用。 在此情況下，view 檔案是 *pages/_ViewImports. cshtml* ，預設會由 *pages* 資料夾和子資料夾中的所有檔案繼承;讓標籤協助程式可供使用。 上述程式碼使用萬用字元語法 ( " \* " ) 來指定指定元件中的所有標籤協助程式 ( *>microsoft.aspnetcore.mvc.taghelpers* ) 將可供 *Views* 目錄或子目錄中的每個 view 檔案使用。 `@addTagHelper` 後面的第一個參數指定要載入的標籤協助程式 (使用 "\*" 表示所有標籤協助程式)，而第二個參數 "Microsoft.AspNetCore.Mvc.TagHelpers" 指定包含標籤協助程式的組件。 *Microsoft.AspNetCore.Mvc.TagHelpers* 是內建 ASP.NET Core 標籤協助程式的組件。
 
 若要公開此專案中的所有標籤協助程式 (這會建立名為 *AuthoringTagHelpers* 的組件)，請使用下列內容：
 
@@ -93,7 +94,7 @@ public class Movie
 @addTagHelper AuthoringTagHelpers.TagHelpers.EmailTagHelper, AuthoringTagHelpers
 ```
 
-若要使用 FQN 將標籤協助程式新增至檢視，請依序新增 FQN (`AuthoringTagHelpers.TagHelpers.EmailTagHelper`) 和組件名稱 (*AuthoringTagHelpers*)。 大部分開發人員都會想要使用 "\*" 萬用字元語法。 萬用字元語法可讓您在 FQN 中插入萬用字元 "\*" 作為尾碼。 例如，下列任何指示詞都會顯示 `EmailTagHelper`：
+若要使用 FQN 將標籤協助程式新增至檢視，請依序新增 FQN (`AuthoringTagHelpers.TagHelpers.EmailTagHelper`) 和組件名稱 ( *AuthoringTagHelpers* )。 大部分開發人員都會想要使用 "\*" 萬用字元語法。 萬用字元語法可讓您在 FQN 中插入萬用字元 "\*" 作為尾碼。 例如，下列任何指示詞都會顯示 `EmailTagHelper`：
 
 ```cshtml
 @addTagHelper AuthoringTagHelpers.TagHelpers.E*, AuthoringTagHelpers
@@ -190,7 +191,7 @@ IntelliSense 陳述式完成可讓您輸入 Tab 鍵，來完成具有所選取�
 
 ![image](intro/_static/labelaspfor2.png)
 
-您可以在雙引號 ("") 內輸入 Visual Studio *CompleteWord* 快速鍵 (Ctrl+空格鍵是[預設值](/visualstudio/ide/default-keyboard-shortcuts-in-visual-studio)，而且現在可以使用 C#，就像使用 C# 類別一樣。 IntelliSense 會顯示頁面模型上的所有方法和屬性。 因為屬性類型是 `ModelExpression`，所以可以使用方法和屬性。 在下列影像中，我正在編輯 `Register` 檢視，因此 `RegisterViewModel` 可供使用。
+您可以在雙引號 ("") 內輸入 Visual Studio *CompleteWord* 快速鍵 (Ctrl+空格鍵是 [預設值](/visualstudio/ide/default-keyboard-shortcuts-in-visual-studio)，而且現在可以使用 C#，就像使用 C# 類別一樣。 IntelliSense 會顯示頁面模型上的所有方法和屬性。 因為屬性類型是 `ModelExpression`，所以可以使用方法和屬性。 在下列影像中，我正在編輯 `Register` 檢視，因此 `RegisterViewModel` 可供使用。
 
 ![image](intro/_static/intellemail.png)
 
@@ -228,7 +229,7 @@ new {@class="caption"}
 
 IntelliSense 可協助您撰寫整行。
 
-下列程式碼影像顯示 *Views/Account/Register. cshtml*視圖的表單部分， Razor 從 Visual Studio 隨附的 ASP.NET 4.5. x MVC 範本產生。
+下列程式碼影像顯示 *Views/Account/Register. cshtml* 視圖的表單部分， Razor 從 Visual Studio 隨附的 ASP.NET 4.5. x MVC 範本產生。
 
 ![image](intro/_static/regCS.png)
 
@@ -250,7 +251,7 @@ Visual Studio 編輯器會以灰色背景顯示 C# 程式碼。 例如，`AntiFo
 
 每個 "asp-" 屬性的值都是 "Email"，但 "Email" 不是字串。 在此內容中，"Email" 是 `RegisterViewModel` 的 C# 模型運算式屬性。
 
-Visual Studio 編輯器可協助您撰寫註冊表單之標籤 (tag) 協助程式方法中的**所有**標籤 (markup)，而 Visual Studio 不提供 HTML 協助程式方法中大部分程式碼的協助。 [標籤協助程式的 IntelliSense 支援](#intellisense-support-for-tag-helpers)會詳述如何在 Visual Studio 編輯器中使用標籤協助程式。
+Visual Studio 編輯器可協助您撰寫註冊表單之標籤 (tag) 協助程式方法中的 **所有** 標籤 (markup)，而 Visual Studio 不提供 HTML 協助程式方法中大部分程式碼的協助。 [標籤協助程式的 IntelliSense 支援](#intellisense-support-for-tag-helpers)會詳述如何在 Visual Studio 編輯器中使用標籤協助程式。
 
 ## <a name="tag-helpers-compared-to-web-server-controls"></a>標籤協助程式與網頁伺服器控制項的比較
 
@@ -272,7 +273,7 @@ Visual Studio 編輯器可協助您撰寫註冊表單之標籤 (tag) 協助程�
 
 ## <a name="customizing-the-tag-helper-element-font"></a>自訂標籤協助程式項目字型
 
-您可以從 [**工具**  >  **選項**]  >  **環境**字型  >  **和色彩**自訂字型和顏色標示：
+您可以從 [ **工具**  >  **選項** ]  >  **環境** 字型  >  **和色彩** 自訂字型和顏色標示：
 
 ![image](intro/_static/fontoptions2.png)
 

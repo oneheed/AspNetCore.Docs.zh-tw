@@ -7,6 +7,7 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 08/22/2020
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -18,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: tutorials/build-a-blazor-app
-ms.openlocfilehash: 7335b68ad06b9d2b8d7e056cfc1a6d8214119b21
-ms.sourcegitcommit: f09407d128634d200c893bfb1c163e87fa47a161
+ms.openlocfilehash: 68a38b82f5a89365e4f345a60f1f34b697c027ed
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 08/26/2020
-ms.locfileid: "88865418"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93060088"
 ---
 # <a name="build-a-no-locblazor-todo-list-app"></a>建立 Blazor 待辦事項清單應用程式
 
@@ -39,7 +40,7 @@ ms.locfileid: "88865418"
 
 在本教學課程結尾處，您將會有一個工作 todo 清單應用程式。
 
-## <a name="prerequisites"></a>先決條件
+## <a name="prerequisites"></a>必要條件
 
 [!INCLUDE[](~/includes/3.1-SDK.md)]
 
@@ -51,7 +52,7 @@ ms.locfileid: "88865418"
    dotnet new blazorserver -o TodoList
    ```
 
-   上述命令會建立名為的資料夾 `TodoList` 來保存應用程式。 `TodoList`資料夾是專案的*根資料夾*。 使用下列命令，將目錄變更為 `TodoList` 資料夾：
+   上述命令會建立名為的資料夾 `TodoList` 來保存應用程式。 `TodoList`資料夾是專案的 *根資料夾* 。 使用下列命令，將目錄變更為 `TodoList` 資料夾：
 
    ```dotnetcli
    cd TodoList

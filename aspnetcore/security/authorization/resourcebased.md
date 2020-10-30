@@ -6,6 +6,7 @@ ms.author: scaddie
 ms.custom: mvc
 ms.date: 11/15/2018
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -17,18 +18,18 @@ no-loc:
 - Razor
 - SignalR
 uid: security/authorization/resourcebased
-ms.openlocfilehash: bb47f3452d29dfeea0e4d3c4a9c22a06869a3fe7
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: 202ca681a66ddf7f729d8835e2f77da846583df1
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88631351"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93060166"
 ---
 # <a name="resource-based-authorization-in-aspnet-core"></a>ASP.NET Core 中以資源為基礎的授權
 
 授權策略取決於所存取的資源。 請考慮具有 author 屬性的檔。 只允許作者更新檔。 因此，必須先從資料存放區取出檔，授權評估才能進行。
 
-屬性評估發生于資料系結之前，以及在執行載入檔的頁面處理常式或動作之前。 基於這些理由，具有屬性的宣告式授權 `[Authorize]` 並不足夠。 相反地，您可以 &mdash; 使用稱為 *命令式授權*的樣式來叫用自訂授權方法。
+屬性評估發生于資料系結之前，以及在執行載入檔的頁面處理常式或動作之前。 基於這些理由，具有屬性的宣告式授權 `[Authorize]` 並不足夠。 相反地，您可以 &mdash; 使用稱為 *命令式授權* 的樣式來叫用自訂授權方法。
 
 ::: moniker range=">= aspnetcore-3.0"
 [檢視或下載範例程式碼](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/security/authorization/resourcebased/samples/3_0) ([如何下載](xref:index#how-to-download-a-sample))。

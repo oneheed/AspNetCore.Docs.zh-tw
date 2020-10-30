@@ -7,6 +7,7 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 10/15/2019
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -18,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: security/authentication/social/additional-claims
-ms.openlocfilehash: eeddc75e7bcf368b476f62900c14575c9937e1f7
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: 733afec8d3253ec58a7edf6d7fcf35e303a7fe57
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88631520"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93060322"
 ---
 # <a name="persist-additional-claims-and-tokens-from-external-providers-in-aspnet-core"></a>在 ASP.NET Core 中保存外部提供者的其他宣告和權杖
 
@@ -33,7 +34,7 @@ ASP.NET Core 的應用程式可以從外部驗證提供者（例如 Facebook、G
 
 [查看或下載範例程式碼](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/security/authentication/social/additional-claims/samples) ([如何下載](xref:index#how-to-download-a-sample)) 
 
-## <a name="prerequisites"></a>Prerequisites
+## <a name="prerequisites"></a>必要條件
 
 決定要在應用程式中支援的外部驗證提供者。 針對每個提供者，註冊應用程式並取得用戶端識別碼和用戶端密碼。 如需詳細資訊，請參閱<xref:security/authentication/social/index>。 範例應用程式會使用 [Google 驗證提供者](xref:security/authentication/google-logins)。
 
@@ -56,7 +57,7 @@ OAuth 驗證提供者會使用用戶端識別碼和用戶端密碼，建立與�
 
 指定，以指定要從提供者取出的許可權清單 <xref:Microsoft.AspNetCore.Authentication.OAuth.OAuthOptions.Scope*> 。 下表顯示常見外部提供者的驗證範圍。
 
-| 提供者  | 範圍                                                            |
+| 提供者  | 影響範圍                                                            |
 | --------- | ---------------------------------------------------------------- |
 | Facebook  | `https://www.facebook.com/dialog/oauth`                          |
 | Google    | `https://www.googleapis.com/auth/userinfo.profile`               |
@@ -79,7 +80,7 @@ options.Scope.Add("https://www.googleapis.com/auth/user.birthday.read");
 
 在中 `Microsoft.AspNetCore.Identity.UI.Pages.Account.Internal.ExternalLoginModel.OnPostConfirmationAsync` ， <xref:Microsoft.AspNetCore.Identity.IdentityUser> (`ApplicationUser`) 會使用來登入應用程式 <xref:Microsoft.AspNetCore.Identity.SignInManager%601.SignInAsync*> 。 在登入程式中， <xref:Microsoft.AspNetCore.Identity.UserManager%601> 可以 `ApplicationUser` 為提供的使用者資料儲存宣告 <xref:Microsoft.AspNetCore.Identity.ExternalLoginInfo.Principal*> 。
 
-在範例應用程式中， `OnPostConfirmationAsync` (*Account/ExternalLogin* ]) 會 `urn:google:locale` 為已登入 () 和圖片 () 宣告建立地區設定 `urn:google:picture` `ApplicationUser` ，包括下列的宣告 <xref:System.Security.Claims.ClaimTypes.GivenName> ：
+在範例應用程式中， `OnPostConfirmationAsync` ( *Account/ExternalLogin* ]) 會 `urn:google:locale` 為已登入 () 和圖片 () 宣告建立地區設定 `urn:google:picture` `ApplicationUser` ，包括下列的宣告 <xref:System.Security.Claims.ClaimTypes.GivenName> ：
 
 [!code-csharp[](additional-claims/samples/3.x/ClaimsSample/Areas/Identity/Pages/Account/ExternalLogin.cshtml.cs?name=snippet_OnPostConfirmationAsync&highlight=35-51)]
 
@@ -103,7 +104,7 @@ options.Scope.Add("https://www.googleapis.com/auth/user.birthday.read");
 
 當 `OnPostConfirmationAsync` 執行時，請在的外部提供者中儲存存取權杖 ([ExternalLoginInfo AuthenticationTokens](xref:Microsoft.AspNetCore.Identity.ExternalLoginInfo.AuthenticationTokens*)) `ApplicationUser` 。 `AuthenticationProperties`
 
-範例應用程式會將存取權杖儲存在 `OnPostConfirmationAsync` (新的使用者註冊) ，並 `OnGetCallbackAsync` (先前在 *Account/ExternalLogin*中註冊的使用者) ：
+範例應用程式會將存取權杖儲存在 `OnPostConfirmationAsync` (新的使用者註冊) ，並 `OnGetCallbackAsync` (先前在 *Account/ExternalLogin* 中註冊的使用者) ：
 
 [!code-csharp[](additional-claims/samples/3.x/ClaimsSample/Areas/Identity/Pages/Account/ExternalLogin.cshtml.cs?name=snippet_OnPostConfirmationAsync&highlight=54-56)]
 
@@ -173,7 +174,7 @@ ASP.NET Core 的應用程式可以從外部驗證提供者（例如 Facebook、G
 
 [查看或下載範例程式碼](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/security/authentication/social/additional-claims/samples) ([如何下載](xref:index#how-to-download-a-sample)) 
 
-## <a name="prerequisites"></a>Prerequisites
+## <a name="prerequisites"></a>必要條件
 
 決定要在應用程式中支援的外部驗證提供者。 針對每個提供者，註冊應用程式並取得用戶端識別碼和用戶端密碼。 如需詳細資訊，請參閱<xref:security/authentication/social/index>。 範例應用程式會使用 [Google 驗證提供者](xref:security/authentication/google-logins)。
 
@@ -196,7 +197,7 @@ OAuth 驗證提供者會使用用戶端識別碼和用戶端密碼，建立與�
 
 指定，以指定要從提供者取出的許可權清單 <xref:Microsoft.AspNetCore.Authentication.OAuth.OAuthOptions.Scope*> 。 下表顯示常見外部提供者的驗證範圍。
 
-| 提供者  | 範圍                                                            |
+| 提供者  | 影響範圍                                                            |
 | --------- | ---------------------------------------------------------------- |
 | Facebook  | `https://www.facebook.com/dialog/oauth`                          |
 | Google    | `https://www.googleapis.com/auth/userinfo.profile`               |
@@ -219,7 +220,7 @@ options.Scope.Add("https://www.googleapis.com/auth/user.birthday.read");
 
 在中 `Microsoft.AspNetCore.Identity.UI.Pages.Account.Internal.ExternalLoginModel.OnPostConfirmationAsync` ， <xref:Microsoft.AspNetCore.Identity.IdentityUser> (`ApplicationUser`) 會使用來登入應用程式 <xref:Microsoft.AspNetCore.Identity.SignInManager%601.SignInAsync*> 。 在登入程式中， <xref:Microsoft.AspNetCore.Identity.UserManager%601> 可以 `ApplicationUser` 為提供的使用者資料儲存宣告 <xref:Microsoft.AspNetCore.Identity.ExternalLoginInfo.Principal*> 。
 
-在範例應用程式中， `OnPostConfirmationAsync` (*Account/ExternalLogin* ]) 會 `urn:google:locale` 為已登入 () 和圖片 () 宣告建立地區設定 `urn:google:picture` `ApplicationUser` ，包括下列的宣告 <xref:System.Security.Claims.ClaimTypes.GivenName> ：
+在範例應用程式中， `OnPostConfirmationAsync` ( *Account/ExternalLogin* ]) 會 `urn:google:locale` 為已登入 () 和圖片 () 宣告建立地區設定 `urn:google:picture` `ApplicationUser` ，包括下列的宣告 <xref:System.Security.Claims.ClaimTypes.GivenName> ：
 
 [!code-csharp[](additional-claims/samples/2.x/ClaimsSample/Areas/Identity/Pages/Account/ExternalLogin.cshtml.cs?name=snippet_OnPostConfirmationAsync&highlight=35-51)]
 
@@ -243,7 +244,7 @@ options.Scope.Add("https://www.googleapis.com/auth/user.birthday.read");
 
 當 `OnPostConfirmationAsync` 執行時，請在的外部提供者中儲存存取權杖 ([ExternalLoginInfo AuthenticationTokens](xref:Microsoft.AspNetCore.Identity.ExternalLoginInfo.AuthenticationTokens*)) `ApplicationUser` 。 `AuthenticationProperties`
 
-範例應用程式會將存取權杖儲存在 `OnPostConfirmationAsync` (新的使用者註冊) ，並 `OnGetCallbackAsync` (先前在 *Account/ExternalLogin*中註冊的使用者) ：
+範例應用程式會將存取權杖儲存在 `OnPostConfirmationAsync` (新的使用者註冊) ，並 `OnGetCallbackAsync` (先前在 *Account/ExternalLogin* 中註冊的使用者) ：
 
 [!code-csharp[](additional-claims/samples/2.x/ClaimsSample/Areas/Identity/Pages/Account/ExternalLogin.cshtml.cs?name=snippet_OnPostConfirmationAsync&highlight=54-56)]
 

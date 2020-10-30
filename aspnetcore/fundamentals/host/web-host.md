@@ -7,6 +7,7 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 10/07/2019
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -18,16 +19,16 @@ no-loc:
 - Razor
 - SignalR
 uid: fundamentals/host/web-host
-ms.openlocfilehash: 67831237ab1f95c6535cf586681150a230b491d0
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: 09383cb9067d7fdc2d7b69213b741e7ae823e9ea
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88635264"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93060010"
 ---
 # <a name="aspnet-core-web-host"></a>ASP.NET Core Web 主機
 
-ASP.NET Core 的應用程式會設定並啟動 *主機*。 主機負責應用程式啟動和存留期管理。 至少，主機會設定伺服器和要求處理管線。 主機也可以設定記錄、相依性插入和設定。
+ASP.NET Core 的應用程式會設定並啟動 *主機* 。 主機負責應用程式啟動和存留期管理。 至少，主機會設定伺服器和要求處理管線。 主機也可以設定記錄、相依性插入和設定。
 
 ::: moniker range=">= aspnetcore-3.0"
 
@@ -45,7 +46,7 @@ ASP.NET Core 的應用程式會設定並啟動 *主機*。 主機負責應用程
 
 使用 ([IWebHostBuilder](/dotnet/api/microsoft.aspnetcore.hosting.iwebhostbuilder)) 的執行個體建立主機。 這通常在應用程式的進入點執行，也就是 `Main` 方法。
 
-在專案範本中， `Main` 位於 *Program.cs*。 一般的應用程式會呼叫 [CreateDefaultBuilder](/dotnet/api/microsoft.aspnetcore.webhost.createdefaultbuilder) 來開始設定主機：
+在專案範本中， `Main` 位於 *Program.cs* 。 一般的應用程式會呼叫 [CreateDefaultBuilder](/dotnet/api/microsoft.aspnetcore.webhost.createdefaultbuilder) 來開始設定主機：
 
 ```csharp
 public class Program
@@ -71,12 +72,12 @@ public class Program
   * 前面加上 `ASPNETCORE_` 的環境變數 (例如，`ASPNETCORE_ENVIRONMENT`)。
   * 命令列引數。
 * 以下列順序載入應用程式組態：
-  * *appsettings.js開啟*。
+  * *appsettings.json* .
   * *appsettings.{Environment}.json*
   * 應用程式在使用項目組件之 `Development` 環境中執行時的[秘密管理員](xref:security/app-secrets)。
   * 環境變數。
   * 命令列引數。
-* 設定主控台和偵錯輸出的[記錄](xref:fundamentals/logging/index)。 記錄包含 *appsettings.json* 或 *appsettings.{Environment}.json* 檔案的記錄組態區段中指定的[記錄檔篩選](xref:fundamentals/logging/index#log-filtering)規則。
+* 設定主控台和偵錯輸出的[記錄](xref:fundamentals/logging/index)。 記錄包括在或 appsettings 的記錄設定區段中指定的 [記錄篩選](xref:fundamentals/logging/index#log-filtering) 規則 *appsettings.json* *。環境}. json* 檔案。
 * 使用 [ASP.NET Core 模組](xref:host-and-deploy/aspnet-core-module)在 iis 後方執行時，會 `CreateDefaultBuilder` 啟用 [iis 整合](xref:host-and-deploy/iis/index)，以設定應用程式的基底位址和埠。 IIS 整合也會設定應用程式以[擷取啟動錯誤](#capture-startup-errors)。 如需 IIS 預設選項，請參閱 <xref:host-and-deploy/iis/index#iis-options>。
 * 如果應用程式的環境是「開發」，請將 [ServiceProviderOptions.ValidateScopes](/dotnet/api/microsoft.extensions.dependencyinjection.serviceprovideroptions.validatescopes) 設定為 `true`。 如需詳細資訊，請參閱[範圍驗證](#scope-validation)。
 
@@ -93,7 +94,7 @@ public class Program
         ...
     ```
 
-* 下列 `ConfigureLogging` 呼叫會新增委派，將最低的記錄層級 ([SetMinimumLevel](/dotnet/api/microsoft.extensions.logging.loggingbuilderextensions.setminimumlevel)) 設定為 [LogLevel.Warning](/dotnet/api/microsoft.extensions.logging.loglevel)。 這項設定會覆寫 () 上 *appsettings.Development.js* 的設定 `LogLevel.Debug` ，並在設定的 () * 上appsettings.Production.js* `LogLevel.Error` `CreateDefaultBuilder` 。 可能會多次呼叫 `ConfigureLogging`。
+* 下列 `ConfigureLogging` 呼叫會新增委派，將最低的記錄層級 ([SetMinimumLevel](/dotnet/api/microsoft.extensions.logging.loggingbuilderextensions.setminimumlevel)) 設定為 [LogLevel.Warning](/dotnet/api/microsoft.extensions.logging.loglevel)。 這項設定會覆寫 () 上 *appsettings.Development.js* 的設定 `LogLevel.Debug` ，並在設定的 () *上appsettings.Production.js* `LogLevel.Error` `CreateDefaultBuilder` 。 可能會多次呼叫 `ConfigureLogging`。
 
     ```csharp
     WebHost.CreateDefaultBuilder(args)
@@ -165,11 +166,11 @@ public class Program
 
 ::: moniker-end
 
-**索引鍵**：applicationName  
-**類型**： *字串*  
-**預設**：包含應用程式進入點的組件名稱。  
-**設定使用**： `UseSetting`  
-**環境變數**： `ASPNETCORE_APPLICATIONNAME`
+**索引鍵** ：applicationName  
+**類型** ： *字串*  
+**預設** ：包含應用程式進入點的組件名稱。  
+**設定使用** ： `UseSetting`  
+**環境變數** ： `ASPNETCORE_APPLICATIONNAME`
 
 ```csharp
 WebHost.CreateDefaultBuilder(args)
@@ -180,11 +181,11 @@ WebHost.CreateDefaultBuilder(args)
 
 此設定會控制啟動錯誤的擷取。
 
-**索引鍵**：captureStartupErrors  
-**類型**：*bool* (`true` 或 `1`)  
-**預設值**：預設為 `false`，除非應用程式執行時在 IIS 背後有 Kestrel，此時預設值即為 `true`。  
-**設定使用**： `CaptureStartupErrors`  
-**環境變數**： `ASPNETCORE_CAPTURESTARTUPERRORS`
+**索引鍵** ：captureStartupErrors  
+**類型** ： *bool* (`true` 或 `1`)  
+**預設值** ：預設為 `false`，除非應用程式執行時在 IIS 背後有 Kestrel，此時預設值即為 `true`。  
+**設定使用** ： `CaptureStartupErrors`  
+**環境變數** ： `ASPNETCORE_CAPTURESTARTUPERRORS`
 
 當它為 `false` 時，啟動期間發生的錯誤會導致主機結束。 當它為 `true` 時，主機會擷取啟動期間的例外狀況，並嘗試啟動伺服器。
 
@@ -197,11 +198,11 @@ WebHost.CreateDefaultBuilder(args)
 
 此設定會決定 ASP.NET Core 開始搜尋內容檔案的位置。
 
-**索引鍵**：contentRoot  
-**類型**： *字串*  
-**預設值**：預設為應用程式組件所在的資料夾。  
-**設定使用**： `UseContentRoot`  
-**環境變數**： `ASPNETCORE_CONTENTROOT`
+**索引鍵** ：contentRoot  
+**類型** ： *字串*  
+**預設值** ：預設為應用程式組件所在的資料夾。  
+**設定使用** ： `UseContentRoot`  
+**環境變數** ： `ASPNETCORE_CONTENTROOT`
 
 內容根目錄也會用來做為 [web 根目錄](xref:fundamentals/index#web-root)的基底路徑。 如果內容根路徑不存在，則無法啟動主機。
 
@@ -219,11 +220,11 @@ WebHost.CreateDefaultBuilder(args)
 
 決定是否應該擷取詳細的錯誤。
 
-**索引鍵**：detailedErrors  
-**類型**：*bool* (`true` 或 `1`)  
-**預設值**： false  
-**設定使用**： `UseSetting`  
-**環境變數**： `ASPNETCORE_DETAILEDERRORS`
+**索引鍵** ：detailedErrors  
+**類型** ： *bool* (`true` 或 `1`)  
+**預設值** ： false  
+**設定使用** ： `UseSetting`  
+**環境變數** ： `ASPNETCORE_DETAILEDERRORS`
 
 啟用時 (或當 <a href="#environment">Environment</a> 設定為 `Development` 時)，應用程式會擷取詳細例外狀況。
 
@@ -236,13 +237,13 @@ WebHost.CreateDefaultBuilder(args)
 
 設定應用程式的環境。
 
-**索引鍵**：environment  
-**類型**： *字串*  
-**預設值**：Production  
-**設定使用**： `UseEnvironment`  
-**環境變數**： `ASPNETCORE_ENVIRONMENT`
+**索引鍵** ：environment  
+**類型** ： *字串*  
+**預設值** ：Production  
+**設定使用** ： `UseEnvironment`  
+**環境變數** ： `ASPNETCORE_ENVIRONMENT`
 
-環境可以設定為任何值。 架構定義的值包括 `Development`、`Staging` 和 `Production`。 值不區分大小寫。 根據預設，*Environment* 是從 `ASPNETCORE_ENVIRONMENT` 環境變數讀取。 使用 [Visual Studio](https://visualstudio.microsoft.com) 時，可能會在 *launchSettings.json* 檔案設定環境變數。 如需詳細資訊，請參閱<xref:fundamentals/environments>。
+環境可以設定為任何值。 架構定義的值包括 `Development`、`Staging` 和 `Production`。 值不區分大小寫。 根據預設， *Environment* 是從 `ASPNETCORE_ENVIRONMENT` 環境變數讀取。 使用 [Visual Studio](https://visualstudio.microsoft.com) 時，可能會在 *launchSettings.json* 檔案設定環境變數。 如需詳細資訊，請參閱<xref:fundamentals/environments>。
 
 ```csharp
 WebHost.CreateDefaultBuilder(args)
@@ -253,11 +254,11 @@ WebHost.CreateDefaultBuilder(args)
 
 設定應用程式的裝載啟動組件。
 
-**索引鍵**：hostingStartupAssemblies  
-**類型**： *字串*  
-**預設值**：空字串  
-**設定使用**： `UseSetting`  
-**環境變數**： `ASPNETCORE_HOSTINGSTARTUPASSEMBLIES`
+**索引鍵** ：hostingStartupAssemblies  
+**類型** ： *字串*  
+**預設值** ：空字串  
+**設定使用** ： `UseSetting`  
+**環境變數** ： `ASPNETCORE_HOSTINGSTARTUPASSEMBLIES`
 
 在啟動時載入的裝載啟動組件字串，以分號分隔。
 
@@ -272,10 +273,10 @@ WebHost.CreateDefaultBuilder(args)
 
 設定 HTTPS 重新導向連接埠。 用於[強制 HTTPS](xref:security/enforcing-ssl)。
 
-**機碼**：https_port **類型**：*字串*
-**預設值**：未設定預設值。
-**設定使用**： `UseSetting` 
- **環境變數**：`ASPNETCORE_HTTPS_PORT`
+**機碼** ：https_port **類型** ： *字串*
+**預設值** ：未設定預設值。
+**設定使用** ： `UseSetting` 
+ **環境變數** ：`ASPNETCORE_HTTPS_PORT`
 
 ```csharp
 WebHost.CreateDefaultBuilder(args)
@@ -286,11 +287,11 @@ WebHost.CreateDefaultBuilder(args)
 
 在啟動時排除以分號分隔的裝載啟動組件字串。
 
-**索引鍵**：hostingStartupExcludeAssemblies  
-**類型**： *字串*  
-**預設值**：空字串  
-**設定使用**： `UseSetting`  
-**環境變數**： `ASPNETCORE_HOSTINGSTARTUPEXCLUDEASSEMBLIES`
+**索引鍵** ：hostingStartupExcludeAssemblies  
+**類型** ： *字串*  
+**預設值** ：空字串  
+**設定使用** ： `UseSetting`  
+**環境變數** ： `ASPNETCORE_HOSTINGSTARTUPEXCLUDEASSEMBLIES`
 
 ```csharp
 WebHost.CreateDefaultBuilder(args)
@@ -301,11 +302,11 @@ WebHost.CreateDefaultBuilder(args)
 
 表示主機是否應接聽使用 `WebHostBuilder` 設定的 URL，而不是 `IServer` 實作所設定的 URL。
 
-**索引鍵**：preferHostingUrls  
-**類型**：*bool* (`true` 或 `1`)  
-**預設值**： true  
-**設定使用**： `PreferHostingUrls`  
-**環境變數**： `ASPNETCORE_PREFERHOSTINGURLS`
+**索引鍵** ：preferHostingUrls  
+**類型** ： *bool* (`true` 或 `1`)  
+**預設值** ： true  
+**設定使用** ： `PreferHostingUrls`  
+**環境變數** ： `ASPNETCORE_PREFERHOSTINGURLS`
 
 ```csharp
 WebHost.CreateDefaultBuilder(args)
@@ -316,11 +317,11 @@ WebHost.CreateDefaultBuilder(args)
 
 可防止自動載入裝載啟動組件，包括應用程式組件所設定的裝載啟動組件。 如需詳細資訊，請參閱<xref:fundamentals/configuration/platform-specific-configuration>。
 
-**索引鍵**preventHostingStartup  
-**類型**：*bool* (`true` 或 `1`)  
-**預設值**： false  
-**設定使用**： `UseSetting`  
-**環境變數**： `ASPNETCORE_PREVENTHOSTINGSTARTUP`
+**索引鍵** preventHostingStartup  
+**類型** ： *bool* (`true` 或 `1`)  
+**預設值** ： false  
+**設定使用** ： `UseSetting`  
+**環境變數** ： `ASPNETCORE_PREVENTHOSTINGSTARTUP`
 
 ```csharp
 WebHost.CreateDefaultBuilder(args)
@@ -331,11 +332,11 @@ WebHost.CreateDefaultBuilder(args)
 
 表示伺服器應該接聽要求的 IP 位址或主機位址，以及連接埠和通訊協定。
 
-**索引鍵**：urls  
-**類型**： *字串*  
-**預設值**： http://localhost:5000  
-**設定使用**： `UseUrls`  
-**環境變數**： `ASPNETCORE_URLS`
+**索引鍵** ：urls  
+**類型** ： *字串*  
+**預設值** ： http://localhost:5000  
+**設定使用** ： `UseUrls`  
+**環境變數** ： `ASPNETCORE_URLS`
 
 設定為伺服器應該回應的 URL 前置清單，並以分號 (;) 分隔。 例如： `http://localhost:123` 。 使用 "\*"，表示伺服器應接聽任何 IP 位址或主機名稱上的要求，並使用指定的連接埠和通訊協定 (例如，`http://*:5000`)。 通訊協定 (`http://` 或 `https://`) 必須包含在每個 URL 中。 支援的格式會依伺服器而有所不同。
 
@@ -350,13 +351,13 @@ Kestrel 有它自己的端點設定 API。 如需詳細資訊，請參閱<xref:f
 
 指定等待 Web 主機關機的時間長度。
 
-**索引鍵**：shutdownTimeoutSeconds  
-**類型**： *int*  
-**預設值**：5  
-**設定使用**： `UseShutdownTimeout`  
-**環境變數**： `ASPNETCORE_SHUTDOWNTIMEOUTSECONDS`
+**索引鍵** ：shutdownTimeoutSeconds  
+**類型** ： *int*  
+**預設值** ：5  
+**設定使用** ： `UseShutdownTimeout`  
+**環境變數** ： `ASPNETCORE_SHUTDOWNTIMEOUTSECONDS`
 
-雖然索引鍵接受 *int* 與 `UseSetting` (例如 `.UseSetting(WebHostDefaults.ShutdownTimeoutKey, "10")`)，[UseShutdownTimeout](/dotnet/api/microsoft.aspnetcore.hosting.hostingabstractionswebhostbuilderextensions.useshutdowntimeout) 擴充方法會採用 [TimeSpan](/dotnet/api/system.timespan)。
+雖然索引鍵接受 *int* 與 `UseSetting` (例如 `.UseSetting(WebHostDefaults.ShutdownTimeoutKey, "10")`)， [UseShutdownTimeout](/dotnet/api/microsoft.aspnetcore.hosting.hostingabstractionswebhostbuilderextensions.useshutdowntimeout) 擴充方法會採用 [TimeSpan](/dotnet/api/system.timespan)。
 
 在逾時期間，裝載會：
 
@@ -374,11 +375,11 @@ WebHost.CreateDefaultBuilder(args)
 
 決定要搜尋 `Startup` 類別的組件。
 
-**索引鍵**：startupAssembly  
-**類型**： *字串*  
-**預設值**：應用程式的組件  
-**設定使用**： `UseStartup`  
-**環境變數**： `ASPNETCORE_STARTUPASSEMBLY`
+**索引鍵** ：startupAssembly  
+**類型** ： *字串*  
+**預設值** ：應用程式的組件  
+**設定使用** ： `UseStartup`  
+**環境變數** ： `ASPNETCORE_STARTUPASSEMBLY`
 
 可以參考依名稱 (`string`) 或類型 (`TStartup`) 的組件。 如果呼叫多個 `UseStartup` 方法，最後一個將會優先。
 
@@ -396,11 +397,11 @@ WebHost.CreateDefaultBuilder(args)
 
 設定應用程式靜態資產的相對路徑。
 
-**索引鍵**：webroot  
-**類型**： *字串*  
-**預設**值：預設值為 `wwwroot` 。 *{Content root}/wwwroot*的路徑必須存在。 如果路徑不存在，則會使用無作業檔案提供者。  
-**設定使用**： `UseWebRoot`  
-**環境變數**： `ASPNETCORE_WEBROOT`
+**索引鍵** ：webroot  
+**類型** ： *字串*  
+**預設** 值：預設值為 `wwwroot` 。 *{Content root}/wwwroot* 的路徑必須存在。 如果路徑不存在，則會使用無作業檔案提供者。  
+**設定使用** ： `UseWebRoot`  
+**環境變數** ： `ASPNETCORE_WEBROOT`
 
 ```csharp
 WebHost.CreateDefaultBuilder(args)
@@ -446,7 +447,7 @@ public class Program
 }
 ```
 
-*hostsettings.json*：
+*hostsettings.json* ：
 
 ```json
 {
@@ -473,7 +474,7 @@ dotnet run --urls "http://*:8080"
 host.Run();
 ```
 
-**啟動**
+**開始**
 
 藉由呼叫 `Start` 方法，以非封鎖方式執行主機：
 

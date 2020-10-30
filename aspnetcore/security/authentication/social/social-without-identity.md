@@ -5,6 +5,7 @@ description: 說明如何使用 Facebook、Google、Twitter 等帳戶使用者�
 ms.author: riande
 ms.date: 12/10/2019
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -16,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: security/authentication/social/social-without-identity
-ms.openlocfilehash: a91a2f2fb7873e5a672c624e9cf863ae720c8005
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: cd7545a3ddaccedfa64ef5e9d5458c21c651257a
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88634224"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93060283"
 ---
 # <a name="use-social-sign-in-provider-authentication-without-no-locaspnet-core-identity"></a>使用社交登入提供者驗證但不使用 ASP.NET Core Identity
 
@@ -31,7 +32,7 @@ ms.locfileid: "88634224"
 
 <xref:security/authentication/social/index> 說明如何讓使用者使用 OAuth 2.0 搭配外部驗證提供者的認證進行登入。 本主題中所述的方法包括 ASP.NET Core Identity 做為驗證提供者。
 
-這個範例示範如何在不使用的 **情況下**使用外部驗證提供者 ASP.NET Core Identity 。 這適用于不需要所有功能的應用程式 ASP.NET Core Identity ，但仍需要與受信任的外部驗證提供者整合。
+這個範例示範如何在不使用的 **情況下** 使用外部驗證提供者 ASP.NET Core Identity 。 這適用于不需要所有功能的應用程式 ASP.NET Core Identity ，但仍需要與受信任的外部驗證提供者整合。
 
 此範例會使用 [Google 驗證](xref:security/authentication/google-logins) 來驗證使用者。 使用 Google 驗證可將管理登入程式的許多複雜性轉移至 Google。 若要與不同的外部驗證提供者整合，請參閱下列主題：
 
@@ -86,7 +87,7 @@ ms.locfileid: "88634224"
 
 <xref:security/authentication/social/index> 說明如何讓使用者使用 OAuth 2.0 搭配外部驗證提供者的認證進行登入。 本主題中所述的方法包括 ASP.NET Core Identity 做為驗證提供者。
 
-這個範例示範如何在不使用的 **情況下**使用外部驗證提供者 ASP.NET Core Identity 。 這適用于不需要所有功能的應用程式 ASP.NET Core Identity ，但仍需要與受信任的外部驗證提供者整合。
+這個範例示範如何在不使用的 **情況下** 使用外部驗證提供者 ASP.NET Core Identity 。 這適用于不需要所有功能的應用程式 ASP.NET Core Identity ，但仍需要與受信任的外部驗證提供者整合。
 
 此範例會使用 [Google 驗證](xref:security/authentication/google-logins) 來驗證使用者。 使用 Google 驗證可將管理登入程式的許多複雜性轉移至 Google。 若要與不同的外部驗證提供者整合，請參閱下列主題：
 

@@ -5,6 +5,7 @@ description: 瞭解 IAuthenticatedEncryptor、IAuthenticatedEncryptorDescriptor�
 ms.author: riande
 ms.date: 08/11/2017
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -16,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: security/data-protection/extensibility/core-crypto
-ms.openlocfilehash: 4c802bc4beb1f1fde812e6c3f55fc43b5d569b66
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: 99ce283d56a6010ddd846f21e0ca9a9a324d55fc
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88635316"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93060777"
 ---
 # <a name="core-cryptography-extensibility-in-aspnet-core"></a>ASP.NET Core 中的核心加密擴充性
 
@@ -34,7 +35,7 @@ ms.locfileid: "88635316"
 
 ## <a name="iauthenticatedencryptor"></a>IAuthenticatedEncryptor
 
-**IAuthenticatedEncryptor**介面是密碼編譯子系統的基本組建區塊。 一般來說，每個金鑰都有一個 IAuthenticatedEncryptor，而 IAuthenticatedEncryptor 實例會包裝執行密碼編譯作業所需的所有密碼編譯金鑰內容和演算法資訊。
+**IAuthenticatedEncryptor** 介面是密碼編譯子系統的基本組建區塊。 一般來說，每個金鑰都有一個 IAuthenticatedEncryptor，而 IAuthenticatedEncryptor 實例會包裝執行密碼編譯作業所需的所有密碼編譯金鑰內容和演算法資訊。
 
 顧名思義，型別負責提供經過驗證的加密和解密服務。 它會公開下列兩個 Api。
 
@@ -54,7 +55,7 @@ Encrypt 方法會傳回包含 enciphered 純文字和驗證標記的 blob。 驗
 
 # <a name="aspnet-core-2x"></a>[ASP.NET Core 2.x](#tab/aspnetcore2x)
 
-**IAuthenticatedEncryptorFactory**介面代表知道如何建立[IAuthenticatedEncryptor](xref:security/data-protection/extensibility/core-crypto#data-protection-extensibility-core-crypto-iauthenticatedencryptor)實例的型別。 其 API 如下所示。
+**IAuthenticatedEncryptorFactory** 介面代表知道如何建立 [IAuthenticatedEncryptor](xref:security/data-protection/extensibility/core-crypto#data-protection-extensibility-core-crypto-iauthenticatedencryptor)實例的型別。 其 API 如下所示。
 
 * CreateEncryptorInstance (IKey key) ： IAuthenticatedEncryptor
 
@@ -81,7 +82,7 @@ byte[] roundTripped = encryptor2.Decrypt(new ArraySegment<byte>(ciphertext), aad
 
 # <a name="aspnet-core-1x"></a>[ASP.NET Core 1.x](#tab/aspnetcore1x)
 
-**IAuthenticatedEncryptorDescriptor**介面代表知道如何建立[IAuthenticatedEncryptor](xref:security/data-protection/extensibility/core-crypto#data-protection-extensibility-core-crypto-iauthenticatedencryptor)實例的型別。 其 API 如下所示。
+**IAuthenticatedEncryptorDescriptor** 介面代表知道如何建立 [IAuthenticatedEncryptor](xref:security/data-protection/extensibility/core-crypto#data-protection-extensibility-core-crypto-iauthenticatedencryptor)實例的型別。 其 API 如下所示。
 
 * CreateEncryptorInstance ( # A1： IAuthenticatedEncryptor
 
@@ -115,7 +116,7 @@ byte[] roundTripped = encryptor2.Decrypt(new ArraySegment<byte>(ciphertext), aad
 
 # <a name="aspnet-core-2x"></a>[ASP.NET Core 2.x](#tab/aspnetcore2x)
 
-**IAuthenticatedEncryptorDescriptor**介面代表一種知道如何將本身匯出為 XML 的型別。 其 API 如下所示。
+**IAuthenticatedEncryptorDescriptor** 介面代表一種知道如何將本身匯出為 XML 的型別。 其 API 如下所示。
 
 * ExportToXml ( # A1： XmlSerializedDescriptorInfo
 
@@ -142,7 +143,7 @@ IAuthenticatedEncryptor 和 IAuthenticatedEncryptorDescriptor 之間的主要差
 
 ## <a name="iauthenticatedencryptordescriptordeserializer"></a>IAuthenticatedEncryptorDescriptorDeserializer
 
-**IAuthenticatedEncryptorDescriptorDeserializer**介面代表一種類型，知道如何從 system.xml.linq.xelement> 還原序列化 IAuthenticatedEncryptorDescriptor 實例。 它會公開單一方法：
+**IAuthenticatedEncryptorDescriptorDeserializer** 介面代表一種類型，知道如何從 system.xml.linq.xelement> 還原序列化 IAuthenticatedEncryptorDescriptor 實例。 它會公開單一方法：
 
 * ImportFromXml (System.xml.linq.xelement> 元素) ： IAuthenticatedEncryptorDescriptor
 
@@ -161,7 +162,7 @@ ImportFromXml 方法會採用 [IAuthenticatedEncryptorDescriptor](xref:security/
 
 # <a name="aspnet-core-2x"></a>[ASP.NET Core 2.x](#tab/aspnetcore2x)
 
-**AlgorithmConfiguration**類別代表知道如何建立[IAuthenticatedEncryptorDescriptor](xref:security/data-protection/extensibility/core-crypto#data-protection-extensibility-core-crypto-iauthenticatedencryptordescriptor)實例的型別。 它會公開單一 API。
+**AlgorithmConfiguration** 類別代表知道如何建立 [IAuthenticatedEncryptorDescriptor](xref:security/data-protection/extensibility/core-crypto#data-protection-extensibility-core-crypto-iauthenticatedencryptordescriptor)實例的型別。 它會公開單一 API。
 
 * CreateNewDescriptor ( # A1： IAuthenticatedEncryptorDescriptor
 
@@ -173,7 +174,7 @@ AlgorithmConfiguration 型別可做為金鑰建立常式的進入點，例如 [�
 
 # <a name="aspnet-core-1x"></a>[ASP.NET Core 1.x](#tab/aspnetcore1x)
 
-**IAuthenticatedEncryptorConfiguration**介面代表知道如何建立[IAuthenticatedEncryptorDescriptor](xref:security/data-protection/extensibility/core-crypto#data-protection-extensibility-core-crypto-iauthenticatedencryptordescriptor)實例的型別。 它會公開單一 API。
+**IAuthenticatedEncryptorConfiguration** 介面代表知道如何建立 [IAuthenticatedEncryptorDescriptor](xref:security/data-protection/extensibility/core-crypto#data-protection-extensibility-core-crypto-iauthenticatedencryptordescriptor)實例的型別。 它會公開單一 API。
 
 * CreateNewDescriptor ( # A1： IAuthenticatedEncryptorDescriptor
 

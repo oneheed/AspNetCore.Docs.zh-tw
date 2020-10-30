@@ -7,6 +7,7 @@ ms.author: anurse
 ms.custom: mvc
 ms.date: 11/12/2019
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -18,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: signalr/api-design
-ms.openlocfilehash: 4a838c3a051476bd3d281e133d08b643656ae3b7
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: 87665a7950edbc70b664230d2f078598e9dbc0aa
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88632898"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93059646"
 ---
 # <a name="no-locsignalr-api-design-considerations"></a>SignalR API 設計考慮
 
@@ -33,7 +34,7 @@ ms.locfileid: "88632898"
 
 ## <a name="use-custom-object-parameters-to-ensure-backwards-compatibility"></a>使用自訂物件參數以確保回溯相容性
 
-將參數加入至 SignalR 中樞方法 (用戶端或伺服器上的) 是一項 *重大變更*。 這表示較舊的用戶端/伺服器在嘗試叫用方法時，如果沒有適當的參數數目，就會收到錯誤。 不過，將屬性新增至自訂物件參數 **不** 是中斷性變更。 這可以用來設計可在用戶端或伺服器上復原變更的相容 Api。
+將參數加入至 SignalR 中樞方法 (用戶端或伺服器上的) 是一項 *重大變更* 。 這表示較舊的用戶端/伺服器在嘗試叫用方法時，如果沒有適當的參數數目，就會收到錯誤。 不過，將屬性新增至自訂物件參數 **不** 是中斷性變更。 這可以用來設計可在用戶端或伺服器上復原變更的相容 Api。
 
 例如，請考慮伺服器端 API，如下所示：
 

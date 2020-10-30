@@ -6,6 +6,7 @@ monikerRange: '>= aspnetcore-3.0'
 ms.author: jamesnk
 ms.date: 07/27/2020
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -17,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: grpc/client
-ms.openlocfilehash: 6515e87845cc5aa101532c18711d175a73581bee
-ms.sourcegitcommit: 24106b7ffffc9fff410a679863e28aeb2bbe5b7e
+ms.openlocfilehash: 9322020083ce25b00b2979633ae8a692cfd4da4a
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 09/17/2020
-ms.locfileid: "90722705"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93060959"
 ---
 # <a name="call-grpc-services-with-the-net-client"></a>利用 .NET 用戶端呼叫 gRPC 服務
 
@@ -33,7 +34,7 @@ ms.locfileid: "90722705"
 
 ## <a name="configure-grpc-client"></a>設定 gRPC 用戶端
 
-gRPC 用戶端是[從* \* proto*檔案產生](xref:grpc/basics#generated-c-assets)的具體用戶端類型。 具體 gRPC 用戶端的方法會轉譯為* \* proto*檔案中的 gRPC 服務。 例如，名為的服務會 `Greeter` 產生 `GreeterClient` 具有方法的型別來呼叫服務。
+gRPC 用戶端是 [從 *\* proto* 檔案產生](xref:grpc/basics#generated-c-assets)的具體用戶端類型。 具體 gRPC 用戶端的方法會轉譯為 *\* proto* 檔案中的 gRPC 服務。 例如，名為的服務會 `Greeter` 產生 `GreeterClient` 具有方法的型別來呼叫服務。
 
 GRPC 用戶端是從通道建立。 首先，使用 `GrpcChannel.ForAddress` 建立通道，然後使用通道來建立 gRPC 用戶端：
 
@@ -102,7 +103,7 @@ Console.WriteLine("Greeting: " + response.Message);
 // Greeting: Hello World
 ```
 
-在該* \* proto*檔中，每個一元服務方法都會在實體 gRPC 用戶端類型上產生兩個 .net 方法，以呼叫方法：非同步方法和封鎖方法。 例如， `GreeterClient` 有兩種方式可呼叫 `SayHello` ：
+在該 *\* proto* 檔中，每個一元服務方法都會在實體 gRPC 用戶端類型上產生兩個 .net 方法，以呼叫方法：非同步方法和封鎖方法。 例如， `GreeterClient` 有兩種方式可呼叫 `SayHello` ：
 
 * `GreeterClient.SayHelloAsync` - `Greeter.SayHello` 以非同步方式呼叫服務。 可以等候。
 * `GreeterClient.SayHello` -呼叫 `Greeter.SayHello` 服務並封鎖直到完成為止。 請勿在非同步程式碼中使用。

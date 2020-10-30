@@ -6,6 +6,7 @@ ms.author: riande
 ms.custom: mvc, devx-track-js
 ms.date: 12/05/2019
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -17,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: security/anti-request-forgery
-ms.openlocfilehash: 201ffe692c1ded3661a5e1ac566f90b29d61ce9e
-ms.sourcegitcommit: 2e3a967331b2c69f585dd61e9ad5c09763615b44
+ms.openlocfilehash: 197954965ee57b2a44ad0217d79ba142114e7df6
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 10/27/2020
-ms.locfileid: "92690345"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93060842"
 ---
 # <a name="prevent-cross-site-request-forgery-xsrfcsrf-attacks-in-aspnet-core"></a>防止跨網站偽造要求 (XSRF/CSRF) 攻擊 ASP.NET Core
 
@@ -249,7 +250,7 @@ services.AddAntiforgery(options =>
 | ------ | ----------- |
 | [Cookie](/dotnet/api/microsoft.aspnetcore.antiforgery.antiforgeryoptions.cookie) | 決定用來建立 antiforgery 的設定 cookie 。 |
 | [Cookie網域](/dotnet/api/microsoft.aspnetcore.antiforgery.antiforgeryoptions.cookiedomain) | 的網域 cookie 。 預設值為 `null`。 這個屬性已過時，將在未來的版本中移除。 建議的替代方式是 Cookie 。域。 |
-| [Cookie名字](/dotnet/api/microsoft.aspnetcore.antiforgery.antiforgeryoptions.cookiename) | cookie 的名稱。 如果未設定，系統會產生以 [預設 Cookie 前置](/dotnet/api/microsoft.aspnetcore.antiforgery.antiforgeryoptions.defaultcookieprefix) 詞 ( "開頭的唯一名稱。AspNetCore. Antiforgery. ") 。 這個屬性已過時，將在未來的版本中移除。 建議的替代方式是 Cookie 。名字。 |
+| [Cookie名稱](/dotnet/api/microsoft.aspnetcore.antiforgery.antiforgeryoptions.cookiename) | cookie 的名稱。 如果未設定，系統會產生以 [預設 Cookie 前置](/dotnet/api/microsoft.aspnetcore.antiforgery.antiforgeryoptions.defaultcookieprefix) 詞 ( "開頭的唯一名稱。AspNetCore. Antiforgery. ") 。 這個屬性已過時，將在未來的版本中移除。 建議的替代方式是 Cookie 。名字。 |
 | [CookiePath](/dotnet/api/microsoft.aspnetcore.antiforgery.antiforgeryoptions.cookiepath) | 在上設定的路徑 cookie 。 這個屬性已過時，將在未來的版本中移除。 建議的替代方式是 Cookie 。路徑。 |
 | [FormFieldName](/dotnet/api/microsoft.aspnetcore.antiforgery.antiforgeryoptions.formfieldname) | Antiforgery 系統用來在 views 中轉譯 antiforgery token 之隱藏表單欄位的名稱。 |
 | [HeaderName](/dotnet/api/microsoft.aspnetcore.antiforgery.antiforgeryoptions.headername) | Antiforgery 系統所使用的標頭名稱。 如果 `null` 為，則系統只會考慮表單資料。 |

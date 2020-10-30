@@ -5,6 +5,7 @@ description: 第 7 Razor 頁和 Entity Framework 教學課程系列。
 ms.author: riande
 ms.date: 07/22/2019
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -16,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: data/ef-rp/update-related-data
-ms.openlocfilehash: 17b200f0ba90035c417c96689798263af16551de
-ms.sourcegitcommit: 24106b7ffffc9fff410a679863e28aeb2bbe5b7e
+ms.openlocfilehash: 3ec88a862697c540a1a98e733c31d76922f81f7c
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 09/17/2020
-ms.locfileid: "90722815"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93060530"
 ---
 # <a name="part-7-no-locrazor-pages-with-ef-core-in-aspnet-core---update-related-data"></a>第7部分： Razor ASP.NET Core 更新相關資料中有 EF Core 的頁面
 
@@ -56,7 +57,7 @@ Course 會指派給 Department。 Create 和 Edit 頁面的基底類別會提供
 
 ![建立課程](update-related-data/_static/ddl30.png)
 
-使用下列程式碼更新 *Pages/Courses/Create.cshtml.cs*：
+使用下列程式碼更新 *Pages/Courses/Create.cshtml.cs* ：
 
 [!code-csharp[](intro/samples/cu30/Pages/Courses/Create.cshtml.cs?highlight=7,18,27-41)]
 
@@ -70,13 +71,13 @@ Course 會指派給 Department。 Create 和 Edit 頁面的基底類別會提供
 
 ### <a name="update-the-course-create-no-locrazor-page"></a>更新課程的 [建立] Razor 頁面
 
-使用下列程式碼更新 *Pages/Courses/Create.cshtml*：
+使用下列程式碼更新 *Pages/Courses/Create.cshtml* ：
 
 [!code-cshtml[](intro/samples/cu30/Pages/Courses/Create.cshtml?highlight=29-34)]
 
 上述程式碼會進行下列變更：
 
-* 將標題從 **DepartmentID** 變更為 **Department**。
+* 將標題從 **DepartmentID** 變更為 **Department** 。
 * 以 `DepartmentNameSL` (來自基底類別) 取代 `"ViewBag.DepartmentID"`。
 * 新增 [選取部門] 選項。 此變更會在尚未選取任何部門時，在下拉式清單中轉譯「選取部門」而非第一個部門。
 * 未選取部門時，請新增驗證訊息。
@@ -89,7 +90,7 @@ Course 會指派給 Department。 Create 和 Edit 頁面的基底類別會提供
 
 ### <a name="update-the-course-edit-page-model"></a>更新 Course Edit 頁面模型
 
-使用下列程式碼更新 *Pages/Courses/Edit.cshtml.cs*：
+使用下列程式碼更新 *Pages/Courses/Edit.cshtml.cs* ：
 
 [!code-csharp[](intro/samples/cu30/Pages/Courses/Edit.cshtml.cs?highlight=8,28,35,36,40-66)]
 
@@ -97,17 +98,17 @@ Course 會指派給 Department。 Create 和 Edit 頁面的基底類別會提供
 
 ### <a name="update-the-course-edit-no-locrazor-page"></a>更新課程的 [編輯] Razor 頁面
 
-使用下列程式碼更新 *Pages/Courses/Edit.cshtml*：
+使用下列程式碼更新 *Pages/Courses/Edit.cshtml* ：
 
 [!code-cshtml[](intro/samples/cu30/Pages/Courses/Edit.cshtml?highlight=17-20,32-35)]
 
 上述程式碼會進行下列變更：
 
 * 顯示課程識別碼。 通常不會顯示實體的主索引鍵 (PK)。 PK 對使用者來說通常是沒有意義的。 在此情況下，PK 是課程編號。
-* 將 Department 下拉式清單的標題從 **DepartmentID** 變更為 **Department**。
+* 將 Department 下拉式清單的標題從 **DepartmentID** 變更為 **Department** 。
 * 以 `DepartmentNameSL` (來自基底類別) 取代 `"ViewBag.DepartmentID"`。
 
-此頁面包含課程編號的隱藏欄位 (`<input type="hidden">`)。 新增 `<label>` 標籤協助程式與 `asp-for="Course.CourseID"` 無法免除隱藏欄位的需求。 當使用者按一下 [儲存] **** 時，需要有 `<input type="hidden">` 才能將課程編號包含在張貼資料中。
+此頁面包含課程編號的隱藏欄位 (`<input type="hidden">`)。 新增 `<label>` 標籤協助程式與 `asp-for="Course.CourseID"` 無法免除隱藏欄位的需求。 當使用者按一下 [儲存]  時，需要有 `<input type="hidden">` 才能將課程編號包含在張貼資料中。
 
 ## <a name="update-the-course-details-and-delete-pages"></a>更新 Course Detail 和 Delete 頁面
 
@@ -125,7 +126,7 @@ Course 會指派給 Department。 Create 和 Edit 頁面的基底類別會提供
 
 ### <a name="update-the-course-no-locrazor-pages"></a>更新課程 Razor 頁面
 
-使用下列程式碼更新 *Pages/Courses/Delete.cshtml*：
+使用下列程式碼更新 *Pages/Courses/Delete.cshtml* ：
 
 [!code-cshtml[](intro/samples/cu30/Pages/Courses/Delete.cshtml?highlight=15-20,37)]
 
@@ -147,7 +148,7 @@ Course 會指派給 Department。 Create 和 Edit 頁面的基底類別會提供
 
 ### <a name="create-a-class-for-assigned-courses-data"></a>建立受指派課程資料的類別
 
-以下列程式碼建立 *SchoolViewModels/AssignedCourseData.cs*：
+以下列程式碼建立 *SchoolViewModels/AssignedCourseData.cs* ：
 
 [!code-csharp[](intro/samples/cu30/Models/SchoolViewModels/AssignedCourseData.cs)]
 
@@ -187,7 +188,7 @@ Course 會指派給 Department。 Create 和 Edit 頁面的基底類別會提供
 
 ### <a name="update-the-instructor-edit-page-model"></a>更新 Instructor Edit 頁面模型
 
-使用下列程式碼更新 *Pages/Instructors/Edit.cshtml.cs*：
+使用下列程式碼更新 *Pages/Instructors/Edit.cshtml.cs* ：
 
 [!code-csharp[](intro/samples/cu30/Pages/Instructors/Edit.cshtml.cs?name=snippet_All&highlight=9,28-32,38,42-77)]
 
@@ -202,7 +203,7 @@ Course 會指派給 Department。 Create 和 Edit 頁面的基底類別會提供
 
 ### <a name="update-the-instructor-edit-no-locrazor-page"></a>更新講師 [編輯] Razor 頁面
 
-使用下列程式碼更新 *Pages/Instructors/Edit.cshtml*：
+使用下列程式碼更新 *Pages/Instructors/Edit.cshtml* ：
 
 [!code-cshtml[](intro/samples/cu30/Pages/Instructors/Edit.cshtml?highlight=29-59)]
 
@@ -226,7 +227,7 @@ Course 會指派給 Department。 Create 和 Edit 頁面的基底類別會提供
 
 ## <a name="update-the-instructor-delete-page"></a>更新 Instructor Delete 頁面
 
-使用下列程式碼更新 *Pages/Instructors/Delete.cshtml.cs*：
+使用下列程式碼更新 *Pages/Instructors/Delete.cshtml.cs* ：
 
 [!code-csharp[](intro/samples/cu30/Pages/Instructors/Delete.cshtml.cs?highlight=45-61)]
 
@@ -287,13 +288,13 @@ Course 會指派給 Department。 Create 和 Edit 頁面的基底類別會提供
 
 ### <a name="update-the-courses-create-page"></a>更新 Courses 的 *Create* 頁面
 
-使用下列程式碼更新 *Pages/Courses/Create.cshtml*：
+使用下列程式碼更新 *Pages/Courses/Create.cshtml* ：
 
 [!code-cshtml[](intro/samples/cu/Pages/Courses/Create.cshtml?highlight=29-34)]
 
 上述標記會進行下列變更：
 
-* 將標題從 **DepartmentID** 變更為 **Department**。
+* 將標題從 **DepartmentID** 變更為 **Department** 。
 * 以 `DepartmentNameSL` (來自基底類別) 取代 `"ViewBag.DepartmentID"`。
 * 新增 [選取部門] 選項。 這項變更會呈現 [選取部門] ，而不是第一個部門。
 * 未選取部門時，請新增驗證訊息。
@@ -312,17 +313,17 @@ Course 會指派給 Department。 Create 和 Edit 頁面的基底類別會提供
 
 這些變更類似於 *Create* 頁面模型中所做的變更。 在上述程式碼中，`PopulateDepartmentsDropDownList` 會傳入部門識別碼，以選取下拉式清單中指定的部門。
 
-以下列標記更新 *Pages/Courses/Edit.cshtml*：
+以下列標記更新 *Pages/Courses/Edit.cshtml* ：
 
 [!code-cshtml[](intro/samples/cu/Pages/Courses/Edit.cshtml?highlight=17-20,32-35)]
 
 上述標記會進行下列變更：
 
 * 顯示課程識別碼。 通常不會顯示實體的主索引鍵 (PK)。 PK 對使用者來說通常是沒有意義的。 在此情況下，PK 是課程編號。
-* 將標題從 **DepartmentID** 變更為 **Department**。
+* 將標題從 **DepartmentID** 變更為 **Department** 。
 * 以 `DepartmentNameSL` (來自基底類別) 取代 `"ViewBag.DepartmentID"`。
 
-此頁面包含課程編號的隱藏欄位 (`<input type="hidden">`)。 新增 `<label>` 標籤協助程式與 `asp-for="Course.CourseID"` 無法免除隱藏欄位的需求。 當使用者按一下 [儲存] **** 時，需要有 `<input type="hidden">` 才能將課程編號包含在張貼資料中。
+此頁面包含課程編號的隱藏欄位 (`<input type="hidden">`)。 新增 `<label>` 標籤協助程式與 `asp-for="Course.CourseID"` 無法免除隱藏欄位的需求。 當使用者按一下 [儲存]  時，需要有 `<input type="hidden">` 才能將課程編號包含在張貼資料中。
 
 測試更新過的程式碼。 建立、編輯和刪除課程。
 
@@ -372,7 +373,7 @@ Course 會指派給 Department。 Create 和 Edit 頁面的基底類別會提供
 
 ### <a name="update-the-instructor-edit-page"></a>更新講師 [編輯] 頁面
 
-使用辦公室位置更新 *Pages/Instructors/Edit.cshtml*：
+使用辦公室位置更新 *Pages/Instructors/Edit.cshtml* ：
 
 [!code-cshtml[](intro/samples/cu/Pages/Instructors/Edit1.cshtml?highlight=29-33)]
 
@@ -393,7 +394,7 @@ Course 會指派給 Department。 Create 和 Edit 頁面的基底類別會提供
 
 ### <a name="add-classes-to-support-create-and-edit-instructor-pages"></a>新增類別來支援 *Create* 和 *Edit* 講師頁面
 
-以下列程式碼建立 *SchoolViewModels/AssignedCourseData.cs*：
+以下列程式碼建立 *SchoolViewModels/AssignedCourseData.cs* ：
 
 [!code-csharp[](intro/samples/cu/Models/SchoolViewModels/AssignedCourseData.cs)]
 

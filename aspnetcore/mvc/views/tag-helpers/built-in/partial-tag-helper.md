@@ -7,6 +7,7 @@ ms.author: scaddie
 ms.custom: mvc
 ms.date: 04/06/2019
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -18,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: mvc/views/tag-helpers/builtin-th/partial-tag-helper
-ms.openlocfilehash: 4a9f1958cd26bb57fcf3944aabacd57c470fb17e
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: 124f23caa4a757f63a80dfea627304204ba2cdca
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88626944"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93061427"
 ---
 # <a name="partial-tag-helper-in-aspnet-core"></a>ASP.NET Core 的部分標記協助程式
 
@@ -58,7 +59,7 @@ ms.locfileid: "88626944"
 
 `name` 屬性 (Attribute) 是必要項。 它會指出要呈現之部分檢視的名稱或路徑。 當提供部分檢視名稱時，就會起始[檢視探索](xref:mvc/views/overview#view-discovery)程序。 提供明確的路徑時，則會略過該程序。 如需了解所有可接受的 `name` 值，請參閱[部分檢視探索](xref:mvc/views/partial#partial-view-discovery)。
 
-下列標記會使用明確的路徑，指出將從 *Shared* 資料夾載入 *_ProductPartial.cshtml*。 使用 [for](#for) 屬性，模型就會傳遞到部分檢視以進行繫結。
+下列標記會使用明確的路徑，指出將從 *Shared* 資料夾載入 *_ProductPartial.cshtml* 。 使用 [for](#for) 屬性，模型就會傳遞到部分檢視以進行繫結。
 
 [!code-cshtml[](samples/TagHelpersBuiltIn/Pages/Product.cshtml?name=snippet_Name)]
 
@@ -66,7 +67,7 @@ ms.locfileid: "88626944"
 
 `for` 屬性會針對目前的模型指派一個要評估的 [ModelExpression](/dotnet/api/microsoft.aspnetcore.mvc.viewfeatures.modelexpression)。 `ModelExpression` 可推斷 `@Model.` 語法。 例如，可以使用 `for="Product"`，而不是 `for="@Model.Product"`。 使用 `@` 符號來定義內嵌運算式會覆寫這個預設的推斷行為。
 
-下列標記將載入 *_ProductPartial.cshtml*：
+下列標記將載入 *_ProductPartial.cshtml* ：
 
 [!code-cshtml[](samples/TagHelpersBuiltIn/Pages/Product.cshtml?name=snippet_For)]
 
@@ -96,7 +97,7 @@ ms.locfileid: "88626944"
 
 ## <a name="migrate-from-an-html-helper"></a>從 HTML 協助程式移轉
 
-請考慮下列非同步 HTML 協助程式範例。 逐一查看和顯示產品集合。 依據 `PartialAsync` 方法的第一個參數載入 *_ProductPartial.cshtml*部分檢視。 `Product` 模型的執行個體會傳遞到部分檢視以進行繫結。
+請考慮下列非同步 HTML 協助程式範例。 逐一查看和顯示產品集合。 依據 `PartialAsync` 方法的第一個參數載入 *_ProductPartial.cshtml* 部分檢視。 `Product` 模型的執行個體會傳遞到部分檢視以進行繫結。
 
 [!code-cshtml[](samples/TagHelpersBuiltIn/Pages/Products.cshtml?name=snippet_HtmlHelper&highlight=3)]
 

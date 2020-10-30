@@ -6,6 +6,7 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 4/05/2019
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -17,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: performance/memory
-ms.openlocfilehash: 7f1d20687f6dd588e125acf3815815c2bcf0cd04
-ms.sourcegitcommit: 24106b7ffffc9fff410a679863e28aeb2bbe5b7e
+ms.openlocfilehash: 6d2a89ec7c64728bc585ad235293f2277f9a66f7
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 09/17/2020
-ms.locfileid: "90722679"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93061479"
 ---
 # <a name="memory-management-and-garbage-collection-gc-in-aspnet-core"></a>ASP.NET Core 中的記憶體管理和垃圾收集 (GC) 
 
@@ -50,7 +51,7 @@ GC 會配置堆積區段，其中每個區段都是連續的記憶體範圍。 �
 
 呼叫 [GC。明確收集](xref:System.GC.Collect*) ：
 
-* **不**應由生產環境 ASP.NET Core 應用程式完成。
+* **不** 應由生產環境 ASP.NET Core 應用程式完成。
 * 在調查記憶體流失時很實用。
 * 進行調查時，會驗證 GC 是否已從記憶體中移除所有的無關聯物件，以便測量記憶體。
 
@@ -137,8 +138,8 @@ public ActionResult<string> GetBigString()
 
 .NET 垃圾收集行程有兩種不同的模式：
 
-* **工作站 GC**：已針對桌面優化。
-* **伺服器 GC**。 ASP.NET Core 應用程式的預設 GC。 已針對伺服器優化。
+* **工作站 GC** ：已針對桌面優化。
+* **伺服器 GC** 。 ASP.NET Core 應用程式的預設 GC。 已針對伺服器優化。
 
 GC 模式可以在專案檔或已發佈應用程式的 *runtimeconfig.js* 檔案中明確設定。 下列標記會顯示專案檔中的設定 `ServerGarbageCollection` ：
 
@@ -235,7 +236,7 @@ public void GetFileProvider()
 
 ### <a name="large-objects-heap"></a>大型物件堆積
 
-頻繁的記憶體配置/可用迴圈可將記憶體片段化，尤其是在配置大型記憶體區塊時。 物件會配置在連續的記憶體區塊中。 若要減少片段，當 GC 釋出記憶體時，它會嘗試將它重組。 此進程稱為「 **壓縮**」。 壓縮牽涉到移動物件。 移動大型物件會對效能造成負面影響。 基於這個理由，GC 會為 _大型_ 物件建立特殊的記憶體區域，稱為 [大型物件堆積](/dotnet/standard/garbage-collection/large-object-heap) (LOH) 。 大於85000個位元組的物件 (大約 83 KB) 為：
+頻繁的記憶體配置/可用迴圈可將記憶體片段化，尤其是在配置大型記憶體區塊時。 物件會配置在連續的記憶體區塊中。 若要減少片段，當 GC 釋出記憶體時，它會嘗試將它重組。 此進程稱為「 **壓縮** 」。 壓縮牽涉到移動物件。 移動大型物件會對效能造成負面影響。 基於這個理由，GC 會為 _大型_ 物件建立特殊的記憶體區域，稱為 [大型物件堆積](/dotnet/standard/garbage-collection/large-object-heap) (LOH) 。 大於85000個位元組的物件 (大約 83 KB) 為：
 
 * 放在 LOH 上。
 * 未壓縮。
@@ -271,7 +272,7 @@ public int GetLOH1(int size)
 
 ![上圖](memory/_static/loh1.png)
 
-下圖顯示呼叫端點的記憶體設定檔 `/api/loh/84976` ， *只配置一個位元組*：
+下圖顯示呼叫端點的記憶體設定檔 `/api/loh/84976` ， *只配置一個位元組* ：
 
 ![上圖](memory/_static/loh2.png)
 
@@ -306,7 +307,7 @@ public int GetLOH1(int size)
 
 有經驗的 .NET 開發人員知道要在實的 <xref:System.IDisposable.Dispose*> 物件上呼叫 <xref:System.IDisposable> 。 未處置執行的物件 `IDisposable` 通常會導致記憶體流失或洩漏的系統資源。
 
-`HttpClient``IDisposable`會執行，但**不**應該在每次調用時處置。 相反地， `HttpClient` 應該重複使用。
+`HttpClient``IDisposable`會執行，但 **不** 應該在每次調用時處置。 相反地， `HttpClient` 應該重複使用。
 
 下列端點會  `HttpClient` 在每個要求上建立並處置新的實例：
 

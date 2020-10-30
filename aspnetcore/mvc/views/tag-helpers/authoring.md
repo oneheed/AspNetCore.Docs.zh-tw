@@ -6,6 +6,7 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 12/05/2019
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -17,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: mvc/views/tag-helpers/authoring
-ms.openlocfilehash: c1891b8093c5a4c1599cd3c4ed4e5e60e2fd13e8
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: 306416db3d9ae0219f859c3cf459eb08a5b778cf
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88628998"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93060920"
 ---
 # <a name="author-tag-helpers-in-aspnet-core"></a>ASP.NET Core 中的編寫標籤協助程式
 
@@ -38,7 +39,7 @@ ms.locfileid: "88628998"
 
 1. 建立稱為 **AuthoringTagHelpers** 的新 ASP.NET Core 專案。 您不需要驗證此專案。
 
-1. 建立資料夾以保存稱為 *TagHelpers* 的標籤協助程式。 *TagHelpers* 資料夾「不」** 是必要的，但是為合理的慣例。 現在開始撰寫一些簡單的標籤協助程式。
+1. 建立資料夾以保存稱為 *TagHelpers* 的標籤協助程式。  是必要的，但是為合理的慣例。 現在開始撰寫一些簡單的標籤協助程式。
 
 ## <a name="a-minimal-tag-helper"></a>最精簡的標籤協助程式
 
@@ -60,7 +61,7 @@ ms.locfileid: "88628998"
 
    [!code-csharp[](authoring/sample/AuthoringTagHelpers/src/AuthoringTagHelpers/TagHelpers/z1EmailTagHelperCopy.cs)]
 
-   * 標籤協助程式使用以根類別名稱的項目為目標的命名慣例 (去掉類別名稱的 *TagHelper* 部分)。 在此範例中，**EmailTagHelper** 的根名稱是 *email*，因此將會以 `<email>` 標籤為目標。 此命名慣例應該適用於大部分的標籤協助程式，稍後將示範如何行覆寫它。
+   * 標籤協助程式使用以根類別名稱的項目為目標的命名慣例 (去掉類別名稱的 *TagHelper* 部分)。 在此範例中， **EmailTagHelper** 的根名稱是 *email* ，因此將會以 `<email>` 標籤為目標。 此命名慣例應該適用於大部分的標籤協助程式，稍後將示範如何行覆寫它。
 
    * `EmailTagHelper` 類別衍生自 `TagHelper`。 `TagHelper` 類別提供撰寫標籤協助程式的方法和屬性。
 
@@ -70,7 +71,7 @@ ms.locfileid: "88628998"
 
    * `Process` (和 `ProcessAsync`) 的輸出參數包含具狀態 HTML 項目，以呈現用來產生 HTML 標籤和內容的原始來源。
 
-   * 類別名稱的尾碼為 **TagHelper**，這「不」** 是必要的，但視為最佳做法慣例。 您可以將類別宣告為：
+   * 類別名稱的尾碼為  是必要的，但視為最佳做法慣例。 您可以將類別宣告為：
 
    ```csharp
    public class Email : TagHelper
@@ -93,7 +94,7 @@ the following snippet uses TagHelpers3 and should use TagHelpers (not the 3)
     [!code-cshtml[](../../../mvc/views/tag-helpers/authoring/sample/AuthoringTagHelpers/src/AuthoringTagHelpers/Views/_ViewImports.cshtml?highlight=3&range=1-3)]
 -->
 
-若要使用 FQN 將標籤協助程式新增至檢視，您需先新增 FQN (`AuthoringTagHelpers.TagHelpers.EmailTagHelper`)，再新增**組件名稱** (*AuthoringTagHelpers*，不一定要是 `namespace`)。 大部分開發人員都會想要使用萬用字元語法。 [標籤協助程式簡介](intro.md)會詳述標籤協助程式新增、移除、階層和萬用字元語法。
+若要使用 FQN 將標籤協助程式新增至檢視，您需先新增 FQN (`AuthoringTagHelpers.TagHelpers.EmailTagHelper`)，再新增 **組件名稱** ( *AuthoringTagHelpers* ，不一定要是 `namespace`)。 大部分開發人員都會想要使用萬用字元語法。 [標籤協助程式簡介](intro.md)會詳述標籤協助程式新增、移除、階層和萬用字元語法。
 
 1. 使用下列變更來更新 *Views/Home/Contact.cshtml* 檔案中的標記：
 
@@ -172,7 +173,7 @@ the following snippet uses TagHelpers3 and should use TagHelpers (not the 3)
 
    上面的 `[HtmlTargetElement]` 屬性只會將目標設為提供屬性名稱 "bold" 的 HTML 標記。 標籤協助程式未曾修改 `<bold>` 項目。
 
-1. 將 `[HtmlTargetElement]` 屬性行標籤為註解，而且它會預設為目標 `<bold>` 標籤 (tag)，也就是表單 `<bold>` 的 HTML 標記 (markup)。 請記住，預設命名慣例將符合類別名稱 **Bold**TagHelper 與 `<bold>` 標籤。
+1. 將 `[HtmlTargetElement]` 屬性行標籤為註解，而且它會預設為目標 `<bold>` 標籤 (tag)，也就是表單 `<bold>` 的 HTML 標記 (markup)。 請記住，預設命名慣例將符合類別名稱 **Bold** TagHelper 與 `<bold>` 標籤。
 
 1. 執行應用程式，並驗證標籤協助程式已處理 `<bold>` 標籤。
 

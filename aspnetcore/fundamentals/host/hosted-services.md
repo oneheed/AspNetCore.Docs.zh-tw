@@ -7,6 +7,7 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 02/10/2020
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -18,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: fundamentals/host/hosted-services
-ms.openlocfilehash: 04841eb4f6adfec76020d3fe61601037c3fc0733
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: b8d6ec079ed39fb3a2c314816ebae6cea0847a36
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88635342"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93061076"
 ---
 # <a name="background-tasks-with-hosted-services-in-aspnet-core"></a>在 ASP.NET Core 中使用託管服務的背景工作
 
@@ -31,7 +32,7 @@ ms.locfileid: "88635342"
 
 ::: moniker range=">= aspnetcore-3.0"
 
-在 ASP.NET Core 中，背景工作可實作為「託管服務」**。 託管服務是具有背景工作邏輯的類別，可實作 <xref:Microsoft.Extensions.Hosting.IHostedService> 介面。 本主題提供三個託管服務範例：
+在 ASP.NET Core 中，背景工作可實作為「託管服務」  。 託管服務是具有背景工作邏輯的類別，可實作 <xref:Microsoft.Extensions.Hosting.IHostedService> 介面。 本主題提供三個託管服務範例：
 
 * 在計時器上執行的背景工作。
 * 啟用 [範圍服務](xref:fundamentals/dependency-injection#service-lifetimes)的託管服務。 已設定範圍的服務可以使用 [ (DI) ](xref:fundamentals/dependency-injection)的相依性插入。
@@ -51,9 +52,9 @@ ASP.NET Core 背景工作服務範本提供撰寫長期執行服務應用程式�
 
 [!INCLUDE[](~/includes/worker-template-instructions.md)]
 
-## <a name="package"></a>Package
+## <a name="package"></a>套件
 
-以背景工作角色服務範本為基礎的應用程式會使用 `Microsoft.NET.Sdk.Worker` SDK，而且會有明確的套件參考，可參考至 [裝載](https://www.nuget.org/packages/Microsoft.Extensions.Hosting) 套件。 例如，請參閱範例應用程式的專案檔 (*BackgroundTasksSample .csproj*) 。
+以背景工作角色服務範本為基礎的應用程式會使用 `Microsoft.NET.Sdk.Worker` SDK，而且會有明確的套件參考，可參考至 [裝載](https://www.nuget.org/packages/Microsoft.Extensions.Hosting) 套件。 例如，請參閱範例應用程式的專案檔 ( *BackgroundTasksSample .csproj* ) 。
 
 針對使用 SDK 的 web 應用程式 `Microsoft.NET.Sdk.Web` ，會以隱含方式從共用架構參考 [裝載](https://www.nuget.org/packages/Microsoft.Extensions.Hosting) 套件。 應用程式專案檔中不需要明確的套件參考。
 
@@ -61,7 +62,7 @@ ASP.NET Core 背景工作服務範本提供撰寫長期執行服務應用程式�
 
 <xref:Microsoft.Extensions.Hosting.IHostedService>介面會為主機所管理的物件定義兩種方法：
 
-* [StartAsync (CancellationToken) ](xref:Microsoft.Extensions.Hosting.IHostedService.StartAsync*)： `StartAsync` 包含啟動背景工作的邏輯。 `StartAsync` 會 *在之前*呼叫：
+* [StartAsync (CancellationToken) ](xref:Microsoft.Extensions.Hosting.IHostedService.StartAsync*)： `StartAsync` 包含啟動背景工作的邏輯。 `StartAsync` 會 *在之前* 呼叫：
 
   * 應用程式的要求處理管線已設定 (`Startup.Configure`) 。
   * 伺服器已啟動且 [IApplicationLifetime。 ApplicationStarted](xref:Microsoft.AspNetCore.Hosting.IApplicationLifetime.ApplicationStarted*) 已觸發。
@@ -127,7 +128,7 @@ ASP.NET Core 背景工作服務範本提供撰寫長期執行服務應用程式�
 
 <xref:System.Threading.Timer>不會等候先前的執行 `DoWork` 完成，因此所顯示的方法可能不適合每種案例。 [連鎖。遞增](xref:System.Threading.Interlocked.Increment*) 是用來將執行計數器遞增為不可部分完成的作業，以確保多個執行緒不會 `executionCount` 同時更新。
 
-服務會在 `IHostBuilder.ConfigureServices` (*Program.cs*) 中註冊 `AddHostedService` 擴充方法：
+服務會在 `IHostBuilder.ConfigureServices` ( *Program.cs* ) 中註冊 `AddHostedService` 擴充方法：
 
 [!code-csharp[](hosted-services/samples/3.x/BackgroundTasksSample/Program.cs?name=snippet1)]
 
@@ -146,7 +147,7 @@ ASP.NET Core 背景工作服務範本提供撰寫長期執行服務應用程式�
 
 [!code-csharp[](hosted-services/samples/3.x/BackgroundTasksSample/Services/ConsumeScopedServiceHostedService.cs?name=snippet1&highlight=19,22-35)]
 
-這些服務會在 `IHostBuilder.ConfigureServices` (*Program.cs*) 中註冊。 託管服務是使用 `AddHostedService` 擴充方法來註冊：
+這些服務會在 `IHostBuilder.ConfigureServices` ( *Program.cs* ) 中註冊。 託管服務是使用 `AddHostedService` 擴充方法來註冊：
 
 [!code-csharp[](hosted-services/samples/3.x/BackgroundTasksSample/Program.cs?name=snippet2)]
 
@@ -169,12 +170,12 @@ ASP.NET Core 背景工作服務範本提供撰寫長期執行服務應用程式�
 * `IBackgroundTaskQueue`會插入 `MonitorLoop` 服務中。
 * `IBackgroundTaskQueue.QueueBackgroundWorkItem` 呼叫以將工作專案排入佇列。
 * 工作專案會模擬長時間執行的背景工作：
-  *  () 會執行三個5秒的延遲 `Task.Delay` 。
+  * 3 5-秒的延遲是 (`Task.Delay`) 執行。
   * `try-catch` <xref:System.OperationCanceledException> 如果工作已取消，則語句會補漏白。
 
 [!code-csharp[](hosted-services/samples/3.x/BackgroundTasksSample/Services/MonitorLoop.cs?name=snippet_Monitor&highlight=7,33)]
 
-這些服務會在 `IHostBuilder.ConfigureServices` (*Program.cs*) 中註冊。 託管服務是使用 `AddHostedService` 擴充方法來註冊：
+這些服務會在 `IHostBuilder.ConfigureServices` ( *Program.cs* ) 中註冊。 託管服務是使用 `AddHostedService` 擴充方法來註冊：
 
 [!code-csharp[](hosted-services/samples/3.x/BackgroundTasksSample/Program.cs?name=snippet3)]
 
@@ -186,7 +187,7 @@ ASP.NET Core 背景工作服務範本提供撰寫長期執行服務應用程式�
 
 ::: moniker range="< aspnetcore-3.0"
 
-在 ASP.NET Core 中，背景工作可實作為「託管服務」**。 託管服務是具有背景工作邏輯的類別，可實作 <xref:Microsoft.Extensions.Hosting.IHostedService> 介面。 本主題提供三個託管服務範例：
+在 ASP.NET Core 中，背景工作可實作為「託管服務」  。 託管服務是具有背景工作邏輯的類別，可實作 <xref:Microsoft.Extensions.Hosting.IHostedService> 介面。 本主題提供三個託管服務範例：
 
 * 在計時器上執行的背景工作。
 * 啟用 [範圍服務](xref:fundamentals/dependency-injection#service-lifetimes)的託管服務。 已設定範圍的服務可以使用相依性 [插入 (DI) ](xref:fundamentals/dependency-injection)
@@ -194,7 +195,7 @@ ASP.NET Core 背景工作服務範本提供撰寫長期執行服務應用程式�
 
 [查看或下載範例程式碼](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/host/hosted-services/samples/) ([如何下載](xref:index#how-to-download-a-sample)) 
 
-## <a name="package"></a>Package
+## <a name="package"></a>套件
 
 參考 [Microsoft.AspNetCore.App 中繼套件](xref:fundamentals/metapackage-app)，或新增 [Microsoft.Extensions.Hosting](https://www.nuget.org/packages/Microsoft.Extensions.Hosting) 套件的套件參考。
 
@@ -271,7 +272,7 @@ ASP.NET Core 背景工作服務範本提供撰寫長期執行服務應用程式�
 
 [!code-csharp[](hosted-services/samples/2.x/BackgroundTasksSample/Pages/Index.cshtml.cs?name=snippet1)]
 
-在索引頁面上選取 [新增工作]**** 按鈕時，就會執行 `OnPostAddTask` 方法。 `QueueBackgroundWorkItem` 呼叫以將工作專案排入佇列：
+在索引頁面上選取 [新增工作]  按鈕時，就會執行 `OnPostAddTask` 方法。 `QueueBackgroundWorkItem` 呼叫以將工作專案排入佇列：
 
 [!code-csharp[](hosted-services/samples/2.x/BackgroundTasksSample/Pages/Index.cshtml.cs?name=snippet2)]
 

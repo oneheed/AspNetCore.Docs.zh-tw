@@ -6,6 +6,7 @@ ms.author: scaddie
 ms.custom: mvc
 ms.date: 03/26/2019
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -17,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: migration/claimsprincipal-current
-ms.openlocfilehash: 426fd90374a460cb283d0d3ba921e1312fb17940
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: 3aa0adb299789efbb071cdb934d43832a84cf540
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88634068"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93059763"
 ---
 # <a name="migrate-from-claimsprincipalcurrent"></a>從 ClaimsPrincipal 遷移
 
@@ -37,9 +38,9 @@ ms.locfileid: "88634068"
 有幾個選項可以用來在 ASP.NET Core 中抓取目前已驗證的使用者， `ClaimsPrincipal` 以取代 `ClaimsPrincipal.Current` ：
 
 * **ControllerBase。** MVC 控制器可以使用其 [使用者](/dotnet/api/microsoft.aspnetcore.mvc.controllerbase.user) 屬性來存取目前已驗證的使用者。
-* **HttpCoNtext. 使用者**。 可存取目前 `HttpContext` (中介軟體的元件，例如) 可以從 HttpCoNtext 取得目前的使用者 `ClaimsPrincipal` 。 [HttpContext.User](/dotnet/api/microsoft.aspnetcore.http.httpcontext.user)
-* **從呼叫端傳入**。 沒有目前存取權的程式庫 `HttpContext` 通常會從控制器或中介軟體元件呼叫，並且可以將目前使用者的身分識別做為引數傳遞。
-* **>iHTTPcoNtextaccessor**。 正在遷移至 ASP.NET Core 的專案可能太大，無法輕鬆地將目前使用者的身分識別傳遞至所有必要的位置。 在這種情況下， [>iHTTPcoNtextaccessor](/dotnet/api/microsoft.aspnetcore.http.ihttpcontextaccessor) 可用來作為因應措施。 `IHttpContextAccessor` 可以存取目前的 (（ `HttpContext` 如果有的話）) 。 如果正在使用 DI，請參閱 <xref:fundamentals/httpcontext> 。 在程式碼中取得目前使用者的身分識別，但尚未更新為使用 ASP.NET Core 的 DI 驅動架構的短期解決方案如下：
+* **HttpCoNtext. 使用者** 。 可存取目前 `HttpContext` (中介軟體的元件，例如) 可以從 HttpCoNtext 取得目前的使用者 `ClaimsPrincipal` 。 [HttpContext.User](/dotnet/api/microsoft.aspnetcore.http.httpcontext.user)
+* **從呼叫端傳入** 。 沒有目前存取權的程式庫 `HttpContext` 通常會從控制器或中介軟體元件呼叫，並且可以將目前使用者的身分識別做為引數傳遞。
+* **>iHTTPcoNtextaccessor** 。 正在遷移至 ASP.NET Core 的專案可能太大，無法輕鬆地將目前使用者的身分識別傳遞至所有必要的位置。 在這種情況下， [>iHTTPcoNtextaccessor](/dotnet/api/microsoft.aspnetcore.http.ihttpcontextaccessor) 可用來作為因應措施。 `IHttpContextAccessor` 可以存取目前的 (（ `HttpContext` 如果有的話）) 。 如果正在使用 DI，請參閱 <xref:fundamentals/httpcontext> 。 在程式碼中取得目前使用者的身分識別，但尚未更新為使用 ASP.NET Core 的 DI 驅動架構的短期解決方案如下：
 
   * 在 `IHttpContextAccessor` 中呼叫 [AddHttpCoNtextAccessor](https://github.com/aspnet/Hosting/issues/793) ，以便在 DI 容器中使用 `Startup.ConfigureServices` 。
   * 在啟動期間取得的實例 `IHttpContextAccessor` ，並將它儲存在靜態變數中。 此實例可供先前從靜態屬性取得目前使用者的程式碼使用。

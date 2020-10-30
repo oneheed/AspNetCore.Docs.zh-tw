@@ -7,6 +7,7 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 03/12/2020
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -18,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: security/ip-safelist
-ms.openlocfilehash: 621be5351acb251335a42f57e8ea670af1b35a87
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: dfc134b97bb0976bc682a53d536cd27785550c7d
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88634445"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93059659"
 ---
 # <a name="client-ip-safelist-for-aspnet-core"></a>ASP.NET Core 的用戶端 IP 安全的安全
 
@@ -48,7 +49,7 @@ ms.locfileid: "88634445"
 
 在範例應用程式中，IP 位址的安全可為：
 
-* 由 `AdminSafeList` *appsettings.json* 檔案中的屬性所定義。
+* 由檔案中的屬性所定義 `AdminSafeList` *appsettings.json* 。
 * 以分號分隔的字串，其中可能包含 [第四版網際網路協定 (IPv4) ](https://wikipedia.org/wiki/IPv4) 和 [網際網路通訊協定第6版 (IPv6) ](https://wikipedia.org/wiki/IPv6) 位址。
 
 [!code-json[](ip-safelist/samples/3.x/ClientIpAspNetCore/appsettings.json?range=1-3&highlight=2)]
@@ -122,7 +123,7 @@ ms.locfileid: "88634445"
 
 ::: moniker-end
 
-要求範例應用程式的 [ *索引*] Razor 頁面時， Razor 頁面篩選會驗證用戶端 IP 位址。 篩選器會產生下列主控台輸出的變化：
+要求範例應用程式的 [ *索引* ] Razor 頁面時， Razor 頁面篩選會驗證用戶端 IP 位址。 篩選器會產生下列主控台輸出的變化：
 
 ```
 dbug: ClientIpSafelistComponents.Filters.ClientIpCheckPageFilter[0]

@@ -5,6 +5,7 @@ description: 瞭解如何建立具有電子郵件確認和密碼重設的 ASP.NE
 ms.author: riande
 ms.date: 03/11/2019
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -16,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: security/authentication/accconfirm
-ms.openlocfilehash: d6ea37ceb83ffbaa94187e0c541c79428594e4b4
-ms.sourcegitcommit: 2039e60eb7b482da8298f82dcd5eda27cf747f32
+ms.openlocfilehash: 91148c67d5dc0bf97e2f926f50dcff5dd0708f4b
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 08/26/2020
-ms.locfileid: "88906445"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93052314"
 ---
 # <a name="account-confirmation-and-password-recovery-in-aspnet-core"></a>ASP.NET Core 中的帳戶確認和密碼復原
 
@@ -56,7 +57,7 @@ dotnet run
 * 選取 `Click here to confirm your account` 連結。
 * 選取登入連結，並使用相同的認證 **登** 入。
 * 選取 `Hello YourEmail@provider.com!` 連結，此連結會將您重新導向至 `/Identity/Account/Manage/PersonalData` 頁面。
-* 選取左側的 [ **個人資料** ] 索引標籤，然後選取 [ **刪除**]。
+* 選取左側的 [ **個人資料** ] 索引標籤，然後選取 [ **刪除** ]。
 
 ### <a name="configure-an-email-provider"></a>設定電子郵件提供者
 
@@ -64,7 +65,7 @@ dotnet run
 
 SendGrid 帳戶可能需要 [新增寄件者](https://sendgrid.com/docs/ui/sending-email/senders/)。
 
-建立類別來提取安全的電子郵件金鑰。 針對此範例，請建立 *服務/AuthMessageSenderOptions .cs*：
+建立類別來提取安全的電子郵件金鑰。 針對此範例，請建立 *服務/AuthMessageSenderOptions .cs* ：
 
 [!code-csharp[](accconfirm/sample/WebPWrecover30/Services/AuthMessageSenderOptions.cs?name=snippet1)]
 
@@ -81,7 +82,7 @@ Successfully saved SendGridUser = RickAndMSFT to the secret store.
 
 在 Windows 上，秘密管理員會將檔案中的機碼/值組儲存在目錄中的檔案 *secrets.js* `%APPDATA%/Microsoft/UserSecrets/<WebAppName-userSecretsId>` 。
 
-檔案 *secrets.js* 的內容不會加密。 下列標記會顯示檔案 * 上的secrets.js* 。 已 `SendGridKey` 移除值。
+檔案 *secrets.js* 的內容不會加密。 下列標記會顯示檔案 *上的secrets.js* 。 已 `SendGridKey` 移除值。
 
 ```json
 {
@@ -155,7 +156,7 @@ https://github.com/dotnet/aspnetcore/blob/master/src/Identity/UI/src/Areas/Ident
 
 ### <a name="test-password-reset"></a>測試密碼重設
 
-* 如果您已登入，請選取 [ **登出**]。
+* 如果您已登入，請選取 [ **登出** ]。
 * 選取 [ **登入** ] 連結，然後選取 [ **忘記密碼？** ] 連結。
 * 輸入您用來註冊帳戶的電子郵件。
 * 系統會傳送具有重設密碼連結的電子郵件。 檢查您的電子郵件，然後按一下連結來重設您的密碼。 成功重設您的密碼之後，您可以使用您的電子郵件和新密碼登入。
@@ -164,7 +165,7 @@ https://github.com/dotnet/aspnetcore/blob/master/src/Identity/UI/src/Areas/Ident
 
 ## <a name="resend-email-confirmation"></a>重新傳送電子郵件確認
 
-在 ASP.NET Core 5.0 和更新版本中，選取 [**登**入] 頁面上的 [**重新傳送電子郵件確認**] 連結。
+在 ASP.NET Core 5.0 和更新版本中，選取 [ **登** 入] 頁面上的 [ **重新傳送電子郵件確認** ] 連結。
 
 ### <a name="change-email-and-activity-timeout"></a>變更電子郵件和活動超時
 
@@ -266,7 +267,7 @@ dotnet run
 
 請注意，資料表的 `EmailConfirmed` 欄位是 `False` 。
 
-當應用程式傳送確認電子郵件時，您可能會想要在下一個步驟中再次使用此電子郵件。 以滑鼠右鍵按一下資料列，然後選取 [ **刪除**]。 刪除電子郵件別名可讓您更輕鬆地進行下列步驟。
+當應用程式傳送確認電子郵件時，您可能會想要在下一個步驟中再次使用此電子郵件。 以滑鼠右鍵按一下資料列，然後選取 [ **刪除** ]。 刪除電子郵件別名可讓您更輕鬆地進行下列步驟。
 
 <a name="prevent-login-at-registration"></a>
 
@@ -286,7 +287,7 @@ dotnet run
 
 在本教學課程中， [SendGrid](https://sendgrid.com) 是用來傳送電子郵件。 您需要 SendGrid 帳戶和金鑰才能傳送電子郵件。 您可以使用其他電子郵件提供者。 ASP.NET Core 2.x 包含，可 `System.Net.Mail` 讓您從應用程式傳送電子郵件。 建議您使用 SendGrid 或其他電子郵件服務傳送電子郵件。 SMTP 很難安全地進行保護和設定。
 
-建立類別來提取安全的電子郵件金鑰。 針對此範例，請建立 *服務/AuthMessageSenderOptions .cs*：
+建立類別來提取安全的電子郵件金鑰。 針對此範例，請建立 *服務/AuthMessageSenderOptions .cs* ：
 
 [!code-csharp[](accconfirm/sample/WebPWrecover22/Services/AuthMessageSenderOptions.cs?name=snippet1)]
 
@@ -301,7 +302,7 @@ info: Successfully saved SendGridUser = RickAndMSFT to the secret store.
 
 在 Windows 上，秘密管理員會將檔案中的機碼/值組儲存在目錄中的檔案 *secrets.js* `%APPDATA%/Microsoft/UserSecrets/<WebAppName-userSecretsId>` 。
 
-檔案 *secrets.js* 的內容不會加密。 下列標記會顯示檔案 * 上的secrets.js* 。 已 `SendGridKey` 移除值。
+檔案 *secrets.js* 的內容不會加密。 下列標記會顯示檔案 *上的secrets.js* 。 已 `SendGridKey` 移除值。
 
 ```json
 {
@@ -355,7 +356,7 @@ dotnet add package SendGrid
 
 ## <a name="enable-account-confirmation-and-password-recovery"></a>啟用帳戶確認和密碼復原
 
-此範本具有帳戶確認和密碼復原的程式碼。 `OnPostAsync`在*區域/ Identity /Pages/Account/Register.cshtml.cs*中尋找方法。
+此範本具有帳戶確認和密碼復原的程式碼。 `OnPostAsync`在 *區域/ Identity /Pages/Account/Register.cshtml.cs* 中尋找方法。
 
 將下列程式程式碼批註化，以防止新註冊的使用者自動登入：
 
@@ -381,11 +382,11 @@ await _signInManager.SignInAsync(user, isPersistent: false);
 
 在瀏覽器中選取您的使用者名稱 ![ ，並在 [瀏覽器] 視窗中選取使用者名稱](accconfirm/_static/un.png)
 
-[管理] 頁面隨即顯示，並選取 [ **設定檔** ] 索引標籤。 **電子郵件**會顯示一個核取方塊，指出已確認電子郵件。
+[管理] 頁面隨即顯示，並選取 [ **設定檔** ] 索引標籤。 **電子郵件** 會顯示一個核取方塊，指出已確認電子郵件。
 
 ### <a name="test-password-reset"></a>測試密碼重設
 
-* 如果您已登入，請選取 [ **登出**]。
+* 如果您已登入，請選取 [ **登出** ]。
 * 選取 [ **登入** ] 連結，然後選取 [ **忘記密碼？** ] 連結。
 * 輸入您用來註冊帳戶的電子郵件。
 * 系統會傳送具有重設密碼連結的電子郵件。 檢查您的電子郵件，然後按一下連結來重設您的密碼。 成功重設您的密碼之後，您可以使用您的電子郵件和新密碼登入。

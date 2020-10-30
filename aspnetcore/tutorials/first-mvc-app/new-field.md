@@ -6,6 +6,7 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 12/13/2018
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -17,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: tutorials/first-mvc-app/new-field
-ms.openlocfilehash: 2a80a9c4848703802b15348a30f2564f9580a24b
-ms.sourcegitcommit: ecae2aa432628b9181d1fa11037c231c7dd56c9e
+ms.openlocfilehash: d2b3b22a94e3119712e331565cc74ffa60ada726
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 10/16/2020
-ms.locfileid: "92113877"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93050702"
 ---
 # <a name="part-8-add-a-new-field-to-an-aspnet-core-mvc-app"></a>第8部分：將新欄位新增至 ASP.NET Core MVC 應用程式
 
@@ -40,7 +41,7 @@ ms.locfileid: "92113877"
 
 ## <a name="add-a-rating-property-to-the-movie-model"></a>將 Rating 屬性新增至電影模型
 
-將 `Rating` 屬性新增至 *Models/Movie.cs*：
+將 `Rating` 屬性新增至 *Models/Movie.cs* ：
 
 [!code-csharp[](~/tutorials/first-mvc-app/start-mvc/sample/MvcMovie22/Models/MovieDateRating.cs?highlight=13&name=snippet)]
 
@@ -74,7 +75,7 @@ Command ⌘ + B
 
 [!code-cshtml[](~/tutorials/first-mvc-app/start-mvc/sample/MvcMovie22/Views/Movies/IndexGenreRating.cshtml?highlight=16,38&range=24-64)]
 
-使用 `Rating` 欄位更新 */Views/Movies/Create.cshtml*。
+使用 `Rating` 欄位更新 */Views/Movies/Create.cshtml* 。
 
 # <a name="visual-studio--visual-studio-for-mac"></a>[Visual Studio / Visual Studio for Mac](#tab/visual-studio+visual-studio-mac)
 
@@ -112,7 +113,7 @@ Command ⌘ + B
 
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
- 從 [工具]**** 功能表中，選取 [NuGet 套件管理員] > [套件管理員主控台]****。
+ 從 [工具]  功能表中，選取 [NuGet 套件管理員] > [套件管理員主控台]  。
 
   ![PMC 功能表](adding-model/_static/pmc.png)
 

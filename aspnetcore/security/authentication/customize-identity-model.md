@@ -5,6 +5,7 @@ description: 本文描述如何自訂的基礎 Entity Framework Core 資料模�
 ms.author: avickers
 ms.date: 07/01/2019
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -16,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: security/authentication/customize_identity_model
-ms.openlocfilehash: 71f532aa00c2afeeb0d6b93c01cb6a1fbd0a686c
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: 6e520c76a3377e889166ca8d08b75754ef34b6a1
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88634302"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93052041"
 ---
 # <a name="no-locidentity-model-customization-in-aspnet-core"></a>Identity ASP.NET Core 中的模型自訂
 
@@ -83,7 +84,7 @@ ASP.NET Core 有開發階段錯誤頁面處理常式。 當應用程式執行時
 
 ### <a name="default-model-configuration"></a>預設模型設定
 
-Identity定義許多從[DbCoNtext](/dotnet/api/microsoft.entityframeworkcore.dbcontext)繼承以設定和使用模型的*內容類別*。 這項設定是在內容類別的[OnModelCreating](/dotnet/api/microsoft.entityframeworkcore.dbcontext.onmodelcreating)方法中，使用[EF CORE Code First 流暢 API](/ef/core/modeling/)來完成。 預設設定為：
+Identity定義許多從 [DbCoNtext](/dotnet/api/microsoft.entityframeworkcore.dbcontext)繼承以設定和使用模型的 *內容類別* 。 這項設定是在內容類別的[OnModelCreating](/dotnet/api/microsoft.entityframeworkcore.dbcontext.onmodelcreating)方法中，使用[EF CORE Code First 流暢 API](/ef/core/modeling/)來完成。 預設設定為：
 
 ```csharp
 builder.Entity<TUser>(b =>
@@ -358,7 +359,7 @@ public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
 @inject UserManager<ApplicationUser> UserManager
 ```
 
-更新*區域/ Identity / Identity HostingStartup.cs* `Startup.ConfigureServices` ，或取代 `IdentityUser` 為 `ApplicationUser` 。
+更新 *區域/ Identity / Identity HostingStartup.cs* `Startup.ConfigureServices` ，或取代 `IdentityUser` 為 `ApplicationUser` 。
 
 ```csharp
 services.AddIdentity<ApplicationUser>()

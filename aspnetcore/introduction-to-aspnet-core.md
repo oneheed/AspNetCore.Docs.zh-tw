@@ -6,6 +6,7 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 04/17/2020
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -17,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: index
-ms.openlocfilehash: f1235337748bacdb6eaa775a5853238bf729e605
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: 4301e0d59364573767ab4cae25a4818ff84b9abc
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88634549"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93052223"
 ---
 # <a name="introduction-to-aspnet-core"></a>ASP.NET Core 簡介
 
@@ -57,7 +58,7 @@ ASP.NET Core MVC 提供了建置 [Web API](xref:tutorials/first-web-api) 和 [We
 
 ## <a name="client-side-development"></a>用戶端開發
 
-ASP.NET Core 與熱門的用戶端架構和程式庫緊密整合，包括 [Blazor](xref:blazor/index) 、 [角度](xref:spa/angular)、 [回應](xref:spa/react)及 [啟動](https://getbootstrap.com/)程式。 如需詳細資訊，請參閱 <xref:blazor/index> 及*用戶端開發*下的相關主題。
+ASP.NET Core 與熱門的用戶端架構和程式庫緊密整合，包括 [Blazor](xref:blazor/index) 、 [角度](xref:spa/angular)、 [回應](xref:spa/react)及 [啟動](https://getbootstrap.com/)程式。 如需詳細資訊，請參閱 <xref:blazor/index> 及 *用戶端開發* 下的相關主題。
 
 <a name="target-framework"></a>
 
@@ -136,7 +137,7 @@ ASP.NET Core MVC 提供了建置 [Web API](xref:tutorials/first-web-api) 和 [We
 
 ## <a name="client-side-development"></a>用戶端開發
 
-ASP.NET Core 與熱門的用戶端架構和程式庫緊密整合，包括 [Blazor](xref:blazor/index) 、 [角度](xref:spa/angular)、 [回應](xref:spa/react)及 [啟動](https://getbootstrap.com/)程式。 如需詳細資訊，請參閱 <xref:blazor/index> 及*用戶端開發*下的相關主題。
+ASP.NET Core 與熱門的用戶端架構和程式庫緊密整合，包括 [Blazor](xref:blazor/index) 、 [角度](xref:spa/angular)、 [回應](xref:spa/react)及 [啟動](https://getbootstrap.com/)程式。 如需詳細資訊，請參閱 <xref:blazor/index> 及 *用戶端開發* 下的相關主題。
 
 <a name="target-framework"></a>
 

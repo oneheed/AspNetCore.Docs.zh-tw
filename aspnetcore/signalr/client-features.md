@@ -6,6 +6,7 @@ ms.author: bradyg
 ms.custom: mvc
 ms.date: 11/12/2019
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -17,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: signalr/client-features
-ms.openlocfilehash: bb8352b11e78582c4a32b67da7dcb701d020b0d9
-ms.sourcegitcommit: 24106b7ffffc9fff410a679863e28aeb2bbe5b7e
+ms.openlocfilehash: 1d1778f95c53179ca05eaced3d1913f208220df4
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 09/17/2020
-ms.locfileid: "90721706"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93050975"
 ---
 # <a name="aspnet-core-no-locsignalr-clients"></a>ASP.NET Core SignalR 用戶端
 
@@ -53,7 +54,7 @@ SignalR用戶端隨附于伺服器元件，並已建立版本以符合。 任何
 | [用戶端對伺服器串流](xref:signalr/streaming)          |3.0.0|3.0.0|3.0.0|3.0.0|
 | 自動重新連接 ([.net](./dotnet-client.md?tabs=visual-studio&view=aspnetcore-3.0#handle-lost-connection)、 [JavaScript](./javascript-client.md?view=aspnetcore-3.0#reconnect-clients))           |3.0.0|3.0.0|3.0.0|❌|
 | Websocket 傳輸 |2.1.0|1.0.0|1.0.0|1.0.0|
-| 伺服器傳送的事件傳輸 |2.1.0|1.0.0|1.0.0|❌|
+| Server-Sent 事件傳輸 |2.1.0|1.0.0|1.0.0|❌|
 | 長時間輪詢傳輸 |2.1.0|1.0.0|1.0.0|3.0.0|
 | JSON 中樞通訊協定 |2.1.0|1.0.0|1.0.0|1.0.0|
 | MessagePack 中樞通訊協定 |2.1.0|1.0.0|1.0.0|❌|

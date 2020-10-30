@@ -5,6 +5,7 @@ description: 瞭解 ASP.NET Core 中的資料保護金鑰管理和存留期。
 ms.author: riande
 ms.date: 10/14/2016
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -16,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: security/data-protection/configuration/default-settings
-ms.openlocfilehash: b4578737a0ea36463b3c44254aad85a484c46090
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: 1303c5c2c993f1d20383457666aebfa2a583e938
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88634471"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93053003"
 ---
 # <a name="data-protection-key-management-and-lifetime-in-aspnet-core"></a>ASP.NET Core 中的資料保護金鑰管理和存留期
 
@@ -33,7 +34,7 @@ ms.locfileid: "88634471"
 
 1. 如果應用程式裝載在 [Azure 應用程式](https://azure.microsoft.com/services/app-service/)中，金鑰會保存至 *%HOME%\ASP.NET\DataProtection-Keys* 資料夾。 此資料夾使用網路儲存體進行保存，並會在裝載應用程式的所有電腦上同步。
    * 金鑰待用時不受保護。
-   * *DataProtection 金鑰*資料夾會將金鑰通道提供給單一部署位置中應用程式的所有實例。
+   * *DataProtection 金鑰* 資料夾會將金鑰通道提供給單一部署位置中應用程式的所有實例。
    * 各部署位置，例如預備和生產位置，不會共用金鑰環。 當您在部署位置（例如將預備環境移至生產環境或使用 A/B 測試）之間交換時，任何使用資料保護的應用程式將無法使用前一個插槽內的金鑰環來解密儲存的資料。 這會導致使用者登出使用標準 ASP.NET Core 驗證的應用程式 cookie ，因為它使用資料保護來保護它的 cookie 。 如果您想要與位置無關的按鍵環形，請使用外部金鑰環形提供者，例如 Azure Blob 儲存體、Azure Key Vault、SQL 存放區或 Redis 快取。
 
 1. 如果有可用的使用者設定檔，則會將金鑰保存到 *%LOCALAPPDATA%\ASP.NET\DataProtection-Keys* 資料夾。 如果作業系統是 Windows，則會使用 DPAPI 將金鑰加密。

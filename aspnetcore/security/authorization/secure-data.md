@@ -6,6 +6,7 @@ ms.author: riande
 ms.date: 7/18/2020
 ms.custom: mvc, seodec18
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -17,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: security/authorization/secure-data
-ms.openlocfilehash: 5f86e514ee6339888171d83ab3117e9b3fcf107e
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: accfd46fa72c33976f8af2a39267c993447e036e
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88627815"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93051937"
 ---
 # <a name="create-an-aspnet-core-web-app-with-user-data-protected-by-authorization"></a>使用受授權保護的使用者資料建立 ASP.NET Core web 應用程式
 
@@ -40,11 +41,11 @@ ms.locfileid: "88627815"
 
 * **註冊的使用者** 可以查看所有核准的資料，並可編輯/刪除他們自己的資料。
 * **管理員** 可以核准或拒絕連絡人資料。 只有核准的連絡人可以看到使用者。
-* 系統**管理員**可以核准/拒絕和編輯/刪除任何資料。
+* 系統 **管理員** 可以核准/拒絕和編輯/刪除任何資料。
 
 本檔中的影像與最新的範本不完全相符。
 
-在下圖中，使用者 Rick (`rick@example.com`) 已登入。 Rick 只能查看核准的連絡人，並**編輯** / **刪除** / 為連絡人**建立新**的連結。 只有 Rick 所建立的最後一筆記錄會顯示 [ **編輯** ] 和 [ **刪除** ] 連結。 在管理員或系統管理員將狀態變更為 [已核准] 之前，其他使用者將不會看到最後一筆記錄。
+在下圖中，使用者 Rick (`rick@example.com`) 已登入。 Rick 只能查看核准的連絡人，並 **編輯** / **刪除** / 為連絡人 **建立新** 的連結。 只有 Rick 所建立的最後一筆記錄會顯示 [ **編輯** ] 和 [ **刪除** ] 連結。 在管理員或系統管理員將狀態變更為 [已核准] 之前，其他使用者將不會看到最後一筆記錄。
 
 ![顯示 Rick 已登入的螢幕擷取畫面](secure-data/_static/rick.png)
 
@@ -74,7 +75,7 @@ ms.locfileid: "88627815"
 * `ContactManagerAuthorizationHandler`：可讓管理員核准或拒絕連絡人。
 * `ContactAdministratorsAuthorizationHandler`：可讓系統管理員核准或拒絕連絡人，以及編輯/刪除連絡人。
 
-## <a name="prerequisites"></a>Prerequisites
+## <a name="prerequisites"></a>必要條件
 
 本教學課程是 advanced。 您應該熟悉：
 
@@ -127,11 +128,11 @@ dotnet ef database update
 
 [!code-csharp[](secure-data/samples/final3/Startup.cs?name=snippet&highlight=13-99)]
 
-上述反白顯示的程式碼會設定回溯 [驗證原則](xref:Microsoft.AspNetCore.Authorization.AuthorizationOptions.FallbackPolicy)。 除了***all*** Razor 具有驗證屬性的頁面、控制器或動作方法之外，fallback 驗證原則需要驗證所有使用者。 例如，使用 Razor 或的頁面、控制器或動作方法，會 `[AllowAnonymous]` `[Authorize(PolicyName="MyPolicy")]` 使用套用的驗證屬性，而不是回溯驗證原則。
+上述反白顯示的程式碼會設定回溯 [驗證原則](xref:Microsoft.AspNetCore.Authorization.AuthorizationOptions.FallbackPolicy)。 除了具有驗證屬性的頁面、控制器或動作方法之外，fallback 驗證原則需要驗證 * *_all_* _ 使用者 Razor 。 例如，使用 Razor 或的頁面、控制器或動作方法，會 `[AllowAnonymous]` `[Authorize(PolicyName="MyPolicy")]` 使用套用的驗證屬性，而不是回溯驗證原則。
 
 回退驗證原則：
 
-* 會套用至未明確指定驗證原則的所有要求。 針對端點路由所提供的要求，這會包含未指定授權屬性的任何端點。 針對其他中介軟體在授權中介軟體之後所提供的要求（例如 [靜態](xref:fundamentals/static-files)檔案），這會將原則套用至所有要求。
+_ 會套用至未明確指定驗證原則的所有要求。 針對端點路由所提供的要求，這會包含未指定授權屬性的任何端點。 針對其他中介軟體在授權中介軟體之後所提供的要求（例如 [靜態](xref:fundamentals/static-files)檔案），這會將原則套用至所有要求。
 
 將回溯驗證原則設定為要求使用者進行驗證，可保護新新增 Razor 的頁面和控制器。 預設需要驗證比依賴新控制器和 Razor 頁面來包含屬性更安全 `[Authorize]` 。
 
@@ -151,7 +152,7 @@ MVC 控制器和 Razor 頁面需要驗證所有使用者的另一種方法是新
 
 ### <a name="configure-the-test-account"></a>設定測試帳戶
 
-`SeedData`類別會建立兩個帳戶：系統管理員和管理員。 使用 [Secret Manager 工具](xref:security/app-secrets) 來設定這些帳戶的密碼。 將專案目錄中的密碼設定 (包含 *Program.cs*) 的目錄：
+`SeedData`類別會建立兩個帳戶：系統管理員和管理員。 使用 [Secret Manager 工具](xref:security/app-secrets) 來設定這些帳戶的密碼。 將專案目錄中的密碼設定 (包含 *Program.cs* ) 的目錄：
 
 ```dotnetcli
 dotnet user-secrets set SeedUserPW <PW>
@@ -175,7 +176,7 @@ dotnet user-secrets set SeedUserPW <PW>
 
 ## <a name="create-owner-manager-and-administrator-authorization-handlers"></a>建立擁有者、管理員和系統管理員授權處理常式
 
-`ContactIsOwnerAuthorizationHandler`在*授權*資料夾中建立類別。 `ContactIsOwnerAuthorizationHandler`會確認對資源採取行動的使用者擁有資源。
+`ContactIsOwnerAuthorizationHandler`在 *授權* 資料夾中建立類別。 `ContactIsOwnerAuthorizationHandler`會確認對資源採取行動的使用者擁有資源。
 
 [!code-csharp[](secure-data/samples/final3/Authorization/ContactIsOwnerAuthorizationHandler.cs)]
 
@@ -190,13 +191,13 @@ dotnet user-secrets set SeedUserPW <PW>
 
 ### <a name="create-a-manager-authorization-handler"></a>建立管理員授權處理常式
 
-`ContactManagerAuthorizationHandler`在*授權*資料夾中建立類別。 `ContactManagerAuthorizationHandler`會驗證資源上的使用者是否為管理員。 只有管理員可以核准或拒絕 (新增或變更) 的內容變更。
+`ContactManagerAuthorizationHandler`在 *授權* 資料夾中建立類別。 `ContactManagerAuthorizationHandler`會驗證資源上的使用者是否為管理員。 只有管理員可以核准或拒絕 (新增或變更) 的內容變更。
 
 [!code-csharp[](secure-data/samples/final3/Authorization/ContactManagerAuthorizationHandler.cs)]
 
 ### <a name="create-an-administrator-authorization-handler"></a>建立系統管理員授權處理常式
 
-`ContactAdministratorsAuthorizationHandler`在*授權*資料夾中建立類別。 `ContactAdministratorsAuthorizationHandler`會驗證資源的使用者是否為系統管理員。 系統管理員可以進行所有作業。
+`ContactAdministratorsAuthorizationHandler`在 *授權* 資料夾中建立類別。 `ContactAdministratorsAuthorizationHandler`會驗證資源的使用者是否為系統管理員。 系統管理員可以進行所有作業。
 
 [!code-csharp[](secure-data/samples/final3/Authorization/ContactAdministratorsAuthorizationHandler.cs)]
 
@@ -271,7 +272,7 @@ dotnet user-secrets set SeedUserPW <PW>
 
 上述標記會新增數個 `using` 語句。
 
-更新*Pages/Contacts/Index*中的 [**編輯**] 和 [**刪除**] 連結，以便只針對具有適當許可權的使用者轉譯這些連結：
+更新 *Pages/Contacts/Index* 中的 [ **編輯** ] 和 [ **刪除** ] 連結，以便只針對具有適當許可權的使用者轉譯這些連結：
 
 [!code-cshtml[](secure-data/samples/final3/Pages/Contacts/Index.cshtml?highlight=34-36,62-999)]
 
@@ -331,7 +332,7 @@ dotnet user-secrets set SeedUserPW <PW>
 * 管理員可以核准/拒絕連絡人資料。 此 `Details` 視圖會顯示 [ **核准** ] 和 [ **拒絕** ] 按鈕。
 * 系統管理員可以核准/拒絕和編輯/刪除所有資料。
 
-| User                | 由應用程式植入 | 選項。                                  |
+| User                | 由應用程式植入 | 選項                                  |
 | ------------------- | :---------------: | ---------------------------------------- |
 | test@example.com    | 否                | 編輯/刪除自己的資料。                |
 | manager@contoso.com | 是               | 核准/拒絕和編輯/刪除自己的資料。 |
@@ -342,7 +343,7 @@ dotnet user-secrets set SeedUserPW <PW>
 ## <a name="create-the-starter-app"></a>建立入門應用程式
 
 * 建立 Razor 名為 "ContactManager" 的頁面應用程式
-  * 使用 **個別的使用者帳戶**建立應用程式。
+  * 使用 **個別的使用者帳戶** 建立應用程式。
   * 將它命名為 "ContactManager"，讓命名空間符合範例中使用的命名空間。
   * `-uld` 指定 LocalDB 而不是 SQLite
 
@@ -350,7 +351,7 @@ dotnet user-secrets set SeedUserPW <PW>
   dotnet new webapp -o ContactManager -au Individual -uld
   ```
 
-* 新增 *模型/連絡人 .cs*：
+* 新增 *模型/連絡人 .cs* ：
 
   [!code-csharp[](secure-data/samples/starter2.1/Models/Contact.cs?name=snippet1)]
 
@@ -368,7 +369,7 @@ dotnet ef database update
 
 如果您在命令中遇到錯誤 `dotnet aspnet-codegenerator razorpage` ，請參閱 [此 GitHub 問題](https://github.com/aspnet/Scaffolding/issues/984)。
 
-* 更新*Pages/Shared/_Layout cshtml*檔案中的**ContactManager**錨點：
+* 更新 *Pages/Shared/_Layout cshtml* 檔案中的 **ContactManager** 錨點：
 
  ```cshtml
 <a class="navbar-brand" asp-area="" asp-page="/Contacts/Index">ContactManager</a>
@@ -396,9 +397,9 @@ dotnet ef database update
 
 * **註冊的使用者** 可以查看所有核准的資料，並可編輯/刪除他們自己的資料。
 * **管理員** 可以核准或拒絕連絡人資料。 只有核准的連絡人可以看到使用者。
-* 系統**管理員**可以核准/拒絕和編輯/刪除任何資料。
+* 系統 **管理員** 可以核准/拒絕和編輯/刪除任何資料。
 
-在下圖中，使用者 Rick (`rick@example.com`) 已登入。 Rick 只能查看核准的連絡人，並**編輯** / **刪除** / 為連絡人**建立新**的連結。 只有 Rick 所建立的最後一筆記錄會顯示 [ **編輯** ] 和 [ **刪除** ] 連結。 在管理員或系統管理員將狀態變更為 [已核准] 之前，其他使用者將不會看到最後一筆記錄。
+在下圖中，使用者 Rick (`rick@example.com`) 已登入。 Rick 只能查看核准的連絡人，並 **編輯** / **刪除** / 為連絡人 **建立新** 的連結。 只有 Rick 所建立的最後一筆記錄會顯示 [ **編輯** ] 和 [ **刪除** ] 連結。 在管理員或系統管理員將狀態變更為 [已核准] 之前，其他使用者將不會看到最後一筆記錄。
 
 ![顯示 Rick 已登入的螢幕擷取畫面](secure-data/_static/rick.png)
 
@@ -428,7 +429,7 @@ dotnet ef database update
 * `ContactManagerAuthorizationHandler`：可讓管理員核准或拒絕連絡人。
 * `ContactAdministratorsAuthorizationHandler`：可讓系統管理員核准或拒絕連絡人，以及編輯/刪除連絡人。
 
-## <a name="prerequisites"></a>Prerequisites
+## <a name="prerequisites"></a>必要條件
 
 本教學課程是 advanced。 您應該熟悉：
 
@@ -487,7 +488,7 @@ dotnet ef database update
 
 ### <a name="configure-the-test-account"></a>設定測試帳戶
 
-`SeedData`類別會建立兩個帳戶：系統管理員和管理員。 使用 [Secret Manager 工具](xref:security/app-secrets) 來設定這些帳戶的密碼。 將專案目錄中的密碼設定 (包含 *Program.cs*) 的目錄：
+`SeedData`類別會建立兩個帳戶：系統管理員和管理員。 使用 [Secret Manager 工具](xref:security/app-secrets) 來設定這些帳戶的密碼。 將專案目錄中的密碼設定 (包含 *Program.cs* ) 的目錄：
 
 ```dotnetcli
 dotnet user-secrets set SeedUserPW <PW>
@@ -526,13 +527,13 @@ dotnet user-secrets set SeedUserPW <PW>
 
 ### <a name="create-a-manager-authorization-handler"></a>建立管理員授權處理常式
 
-`ContactManagerAuthorizationHandler`在*授權*資料夾中建立類別。 `ContactManagerAuthorizationHandler`會驗證資源上的使用者是否為管理員。 只有管理員可以核准或拒絕 (新增或變更) 的內容變更。
+`ContactManagerAuthorizationHandler`在 *授權* 資料夾中建立類別。 `ContactManagerAuthorizationHandler`會驗證資源上的使用者是否為管理員。 只有管理員可以核准或拒絕 (新增或變更) 的內容變更。
 
 [!code-csharp[](secure-data/samples/final2.1/Authorization/ContactManagerAuthorizationHandler.cs)]
 
 ### <a name="create-an-administrator-authorization-handler"></a>建立系統管理員授權處理常式
 
-`ContactAdministratorsAuthorizationHandler`在*授權*資料夾中建立類別。 `ContactAdministratorsAuthorizationHandler`會驗證資源的使用者是否為系統管理員。 系統管理員可以進行所有作業。
+`ContactAdministratorsAuthorizationHandler`在 *授權* 資料夾中建立類別。 `ContactAdministratorsAuthorizationHandler`會驗證資源的使用者是否為系統管理員。 系統管理員可以進行所有作業。
 
 [!code-csharp[](secure-data/samples/final2.1/Authorization/ContactAdministratorsAuthorizationHandler.cs)]
 
@@ -607,7 +608,7 @@ dotnet user-secrets set SeedUserPW <PW>
 
 上述標記會新增數個 `using` 語句。
 
-更新*Pages/Contacts/Index*中的 [**編輯**] 和 [**刪除**] 連結，以便只針對具有適當許可權的使用者轉譯這些連結：
+更新 *Pages/Contacts/Index* 中的 [ **編輯** ] 和 [ **刪除** ] 連結，以便只針對具有適當許可權的使用者轉譯這些連結：
 
 [!code-cshtml[](secure-data/samples/final2.1/Pages/Contacts/Index.cshtml?highlight=34-36,62-999)]
 
@@ -658,7 +659,7 @@ dotnet user-secrets set SeedUserPW <PW>
 * 管理員可以核准/拒絕連絡人資料。 此 `Details` 視圖會顯示 [ **核准** ] 和 [ **拒絕** ] 按鈕。
 * 系統管理員可以核准/拒絕和編輯/刪除所有資料。
 
-| User                | 由應用程式植入 | 選項。                                  |
+| User                | 由應用程式植入 | 選項                                  |
 | ------------------- | :---------------: | ---------------------------------------- |
 | test@example.com    | 否                | 編輯/刪除自己的資料。                |
 | manager@contoso.com | 是               | 核准/拒絕和編輯/刪除自己的資料。 |
@@ -669,7 +670,7 @@ dotnet user-secrets set SeedUserPW <PW>
 ## <a name="create-the-starter-app"></a>建立入門應用程式
 
 * 建立 Razor 名為 "ContactManager" 的頁面應用程式
-  * 使用 **個別的使用者帳戶**建立應用程式。
+  * 使用 **個別的使用者帳戶** 建立應用程式。
   * 將它命名為 "ContactManager"，讓命名空間符合範例中使用的命名空間。
   * `-uld` 指定 LocalDB 而不是 SQLite
 
@@ -677,7 +678,7 @@ dotnet user-secrets set SeedUserPW <PW>
   dotnet new webapp -o ContactManager -au Individual -uld
   ```
 
-* 新增 *模型/連絡人 .cs*：
+* 新增 *模型/連絡人 .cs* ：
 
   [!code-csharp[](secure-data/samples/starter2.1/Models/Contact.cs?name=snippet1)]
 
@@ -691,7 +692,7 @@ dotnet user-secrets set SeedUserPW <PW>
   dotnet ef database update
   ```
 
-* 更新*Pages/_Layout cshtml*檔案中的**ContactManager**錨點：
+* 更新 *Pages/_Layout cshtml* 檔案中的 **ContactManager** 錨點：
 
   ```cshtml
   <a asp-page="/Contacts/Index" class="navbar-brand">ContactManager</a>

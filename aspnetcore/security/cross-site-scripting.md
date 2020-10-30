@@ -5,6 +5,7 @@ description: 瞭解跨網站腳本 (XSS) 以及在 ASP.NET Core 應用程式中�
 ms.author: riande
 ms.date: 10/02/2018
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -16,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: security/cross-site-scripting
-ms.openlocfilehash: 38e9e102e9ac18ec14bceebf391c11a434492ac9
-ms.sourcegitcommit: 6ecdc481d5b9a10d2c6e091217f017b36bdba957
+ms.openlocfilehash: 1c90a786efe8c3c205a729a2da9d3a99d0222012
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 09/15/2020
-ms.locfileid: "90456058"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93053081"
 ---
 # <a name="prevent-cross-site-scripting-xss-in-aspnet-core"></a>防止 ASP.NET Core 中的跨網站腳本 (XSS) 
 
@@ -161,10 +162,9 @@ Razor在 MVC 中使用的引擎會自動將所有源自于變數的輸出編碼�
 ```
 
 >[!WARNING]
-> 請勿在 JavaScript 中串連 ***未*** 受信任的輸入，以建立 DOM 元素或使用 `document.write()` 于動態產生的內容。
+> 請勿在 JavaScript 中串連 **未** 受信任的輸入，以建立 DOM 元素或使用 `document.write()` 于動態產生的內容。
 >
-> 您可以使用下列其中一種方法，防止將程式碼公開給以 DOM 為基礎的 XSS：
-> * `createElement()` 並使用適當的方法或屬性（例如或 node）來指派屬性值 `node.textContent=` 。InnerText = '。
+> 您可以使用下列其中一種方法，防止程式碼公開至 DOM 型 XSS： _ `createElement()` ，並使用適當的方法或屬性（例如或 node）指派屬性值 `node.textContent=` 。InnerText = '。
 > * `document.CreateTextNode()` 並將其附加至適當的 DOM 位置。
 > * `element.SetAttribute()`
 > * `element[attribute]=`
@@ -173,7 +173,7 @@ Razor在 MVC 中使用的引擎會自動將所有源自于變數的輸出編碼�
 
 HTML、JavaScript 和 URL 編碼器以兩種方式提供給您的程式碼，您可以透過相依性 [插入](xref:fundamentals/dependency-injection) 將它們插入，也可以使用命名空間中包含的預設編碼器 `System.Text.Encodings.Web` 。 如果您使用預設編碼器，則任何套用至字元範圍以視為安全的系統都不會生效，預設編碼器會使用最安全的編碼規則。
 
-若要透過 DI 使用可設定的編碼器，您的函式應適當地採用 *HtmlEncoder*、 *JavaScriptEncoder* 和 *UrlEncoder* 參數。 例如：
+若要透過 DI 使用可設定的編碼器，您的函式應適當地採用 *HtmlEncoder* 、 *JavaScriptEncoder* 和 *UrlEncoder* 參數。 例如：
 
 ```csharp
 public class HomeController : Controller
@@ -195,7 +195,7 @@ public class HomeController : Controller
 
 ## <a name="encoding-url-parameters"></a>編碼 URL 參數
 
-如果您想要使用不受信任的輸入來建立 URL 查詢字串作為值，請使用 `UrlEncoder` 來編碼值。 例如，
+如果您想要使用不受信任的輸入來建立 URL 查詢字串作為值，請使用 `UrlEncoder` 來編碼值。 例如，套用至物件的
 
 ```csharp
 var example = "\"Quoted Value with spaces and &\"";

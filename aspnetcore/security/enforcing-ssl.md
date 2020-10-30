@@ -6,6 +6,7 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 12/06/2019
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -17,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: security/enforcing-ssl
-ms.openlocfilehash: b5260084c2fdd296168e918f06d8b54faf1865d5
-ms.sourcegitcommit: 24106b7ffffc9fff410a679863e28aeb2bbe5b7e
+ms.openlocfilehash: e473da9a7cbd91a601ad4af0c7c02c7f576f348c
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 09/17/2020
-ms.locfileid: "90722653"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93051118"
 ---
 # <a name="enforce-https-in-aspnet-core"></a>在 ASP.NET Core 中強制使用 HTTPS
 
@@ -113,7 +114,7 @@ ms.locfileid: "90722653"
 
   * 在 [主機設定] 中。
   * 藉由設定 `ASPNETCORE_HTTPS_PORT` 環境變數。
-  * 藉由在 *appsettings.js*中新增最上層專案：
+  * 在中加入最上層專案 *appsettings.json* ：
 
     [!code-json[](enforcing-ssl/sample-snapshot/3.x/appsettings.json?highlight=2)]
 
@@ -127,7 +128,7 @@ ms.locfileid: "90722653"
 
   * 在 [主機設定] 中。
   * 藉由設定 `ASPNETCORE_HTTPS_PORT` 環境變數。
-  * 藉由在 *appsettings.js*中新增最上層專案：
+  * 在中加入最上層專案 *appsettings.json* ：
 
     [!code-json[](enforcing-ssl/sample-snapshot/2.x/appsettings.json?highlight=2)]
 
@@ -135,7 +136,7 @@ ms.locfileid: "90722653"
 
 ::: moniker-end
 
-* 在開發中，請在 *launchsettings.js*中設定 HTTPS URL。 使用 IIS Express 時啟用 HTTPS。
+* 在開發中，請在 *launchsettings.js* 中設定 HTTPS URL。 使用 IIS Express 時啟用 HTTPS。
 
 * 針對 [Kestrel](xref:fundamentals/servers/kestrel) server 或 [HTTP.sys](xref:fundamentals/servers/httpsys) server 的公眾面向邊緣部署設定 HTTPS URL 端點。 應用程式只會使用 **一個 HTTPS 埠** 。 中介軟體會透過來探索埠 <xref:Microsoft.AspNetCore.Hosting.Server.Features.IServerAddressesFeature> 。
 
@@ -192,7 +193,7 @@ ms.locfileid: "90722653"
 
 ::: moniker range=">= aspnetcore-3.0"
 
-在 *Startup.cs*中設定服務時：
+在 *Startup.cs* 中設定服務時：
 
 ```csharp
 public void ConfigureServices(IServiceCollection services)
@@ -213,7 +214,7 @@ public void ConfigureServices(IServiceCollection services)
 
 ::: moniker range="<= aspnetcore-2.2"
 
-在 *Startup.cs*中設定服務時：
+在 *Startup.cs* 中設定服務時：
 
 ```csharp
 public void ConfigureServices(IServiceCollection services)
@@ -324,7 +325,7 @@ ASP.NET Core 2.1 和更新版本會使用擴充方法來執行 HSTS `UseHsts` �
 
 # <a name="net-core-cli"></a>[.NET Core CLI](#tab/netcore-cli) 
 
-使用 `--no-https` 選項。 例如
+使用 `--no-https` 選項。 例如：
 
 ```dotnetcli
 dotnet new webapp --no-https
@@ -412,7 +413,7 @@ dotnet dev-certs https --trust
 ### <a name="docker---certificate-not-trusted"></a>Docker-憑證不受信任
 
 * 刪除 *C:\Users \{ USER} \AppData\Roaming\ASP.NET\Https* 資料夾。
-* 清除方案。 刪除 [bin]** 和 [obj]** 資料夾。
+* 清除方案。 刪除 [bin]  和 [obj]  資料夾。
 * 重新開機開發工具。 例如，Visual Studio、Visual Studio Code 或 Visual Studio for Mac。
 
 ### <a name="windows---certificate-not-trusted"></a>Windows-憑證不受信任

@@ -6,6 +6,7 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 03/06/2020
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -17,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: fundamentals/app-state
-ms.openlocfilehash: 95035ec372ab6adb5bafb40f2b939c549ac6f839
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: c11b748f9d79235b14c9541019da6e1fb3428af6
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88633808"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93051404"
 ---
 # <a name="session-and-state-management-in-aspnet-core"></a>ASP.NET Core 中的工作階段和狀態管理 (機器翻譯)
 
@@ -40,7 +41,7 @@ HTTP 是無狀態的通訊協定。 根據預設，HTTP 要求是獨立的訊息
 
 | 儲存方法 | 儲存機制 |
 | ---------------- | ----------------- |
-| [Cookie！](#cookies) | HTTP cookie s。 可能包括使用伺服器端應用程式程式碼儲存的資料。 |
+| [Cookies](#cookies) | HTTP cookie s。 可能包括使用伺服器端應用程式程式碼儲存的資料。 |
 | [會話狀態](#session-state) | HTTP cookie s 和伺服器端應用程式程式碼 |
 | [TempData](#tempdata) | HTTP cookie s 或會話狀態 |
 | [查詢字串](#query-strings) | HTTP 查詢字串 |
@@ -87,7 +88,7 @@ ASP.NET Core 藉由提供 cookie 給包含會話識別碼的用戶端來維護�
 
 記憶體中快取提供者會將工作階段資料存放在應用程式所在伺服器的記憶體中。 在伺服器陣列案例中：
 
-* 使用「黏性工作階段」** 將每個工作階段繫結至個別伺服器上的特定應用程式執行個體。 [Azure App Service](https://azure.microsoft.com/services/app-service/) 預設會使用[應用程式要求路由 (ARR)](/iis/extensions/planning-for-arr/using-the-application-request-routing-module) 來強制執行自黏工作階段。 不過，黏性工作階段可能會影響延展性，並使 Web 應用程式更新複雜化。 較好的方法是使用 Redis 或 SQL Server 分散式快取，這不需要黏性工作階段。 如需詳細資訊，請參閱<xref:performance/caching/distributed>。
+* 使用「黏性工作階段」  將每個工作階段繫結至個別伺服器上的特定應用程式執行個體。 [Azure App Service](https://azure.microsoft.com/services/app-service/) 預設會使用[應用程式要求路由 (ARR)](/iis/extensions/planning-for-arr/using-the-application-request-routing-module) 來強制執行自黏工作階段。 不過，黏性工作階段可能會影響延展性，並使 Web 應用程式更新複雜化。 較好的方法是使用 Redis 或 SQL Server 分散式快取，這不需要黏性工作階段。 如需詳細資訊，請參閱<xref:performance/caching/distributed>。
 * 此會話 cookie 會透過進行加密 <xref:Microsoft.AspNetCore.DataProtection.IDataProtector> 。 必須正確設定資料保護，才能讀取每部 cookie 電腦上的會話。 如需詳細資訊，請參閱 <xref:security/data-protection/introduction>與[金鑰儲存提供者](xref:security/data-protection/implementation/key-storage-providers)。
 
 ### <a name="configure-session-state"></a>設定工作階段狀態
@@ -141,7 +142,7 @@ ASP.NET Core 中的預設會話提供者 <xref:Microsoft.Extensions.Caching.Dist
 
 應用程式會使用 <xref:Microsoft.AspNetCore.Builder.SessionOptions.IdleTimeout> 屬性來判斷會話可以閒置多久之後，才能放棄其在伺服器快取中的內容。 這個屬性與 cookie 到期無關。 透過[工作階段中介軟體](xref:Microsoft.AspNetCore.Session.SessionMiddleware)傳遞的每個要求都會重設逾時。
 
-工作階段狀態為「非鎖定」**。 如果兩個要求同時嘗試修改工作階段的內容，則最後一個要求會覆寫第一個要求。 `Session` 會實作為「一致性工作階段」**，這表示所有內容會都儲存在一起。 當兩個要求試圖修改不同的工作階段值時，最後一個要求可能會覆寫第一個要求所做的工作階段變更。
+工作階段狀態為「非鎖定」  。 如果兩個要求同時嘗試修改工作階段的內容，則最後一個要求會覆寫第一個要求。 `Session` 會實作為「一致性工作階段」  ，這表示所有內容會都儲存在一起。 當兩個要求試圖修改不同的工作階段值時，最後一個要求可能會覆寫第一個要求所做的工作階段變更。
 
 ### <a name="set-and-get-session-values"></a>設定和取得工作階段值
 
@@ -310,7 +311,7 @@ HTTP 是無狀態的通訊協定。 若不採取其他步驟，HTTP 要求是獨
 
 | 儲存方法 | 儲存機制 |
 | ---------------- | ----------------- |
-| [Cookie！](#cookies) | HTTP cookie s (可能包括使用伺服器端應用程式程式碼儲存的資料)  |
+| [Cookies](#cookies) | HTTP cookie s (可能包括使用伺服器端應用程式程式碼儲存的資料)  |
 | [會話狀態](#session-state) | HTTP cookie s 和伺服器端應用程式程式碼 |
 | [TempData](#tempdata) | HTTP cookie s 或會話狀態 |
 | [查詢字串](#query-strings) | HTTP 查詢字串 |
@@ -354,7 +355,7 @@ ASP.NET Core 藉由提供 cookie 給包含會話識別碼的用戶端來維護�
 
 記憶體中快取提供者會將工作階段資料存放在應用程式所在伺服器的記憶體中。 在伺服器陣列案例中：
 
-* 使用「黏性工作階段」** 將每個工作階段繫結至個別伺服器上的特定應用程式執行個體。 [Azure App Service](https://azure.microsoft.com/services/app-service/) 預設會使用[應用程式要求路由 (ARR)](/iis/extensions/planning-for-arr/using-the-application-request-routing-module) 來強制執行自黏工作階段。 不過，黏性工作階段可能會影響延展性，並使 Web 應用程式更新複雜化。 較好的方法是使用 Redis 或 SQL Server 分散式快取，這不需要黏性工作階段。 如需詳細資訊，請參閱<xref:performance/caching/distributed>。
+* 使用「黏性工作階段」  將每個工作階段繫結至個別伺服器上的特定應用程式執行個體。 [Azure App Service](https://azure.microsoft.com/services/app-service/) 預設會使用[應用程式要求路由 (ARR)](/iis/extensions/planning-for-arr/using-the-application-request-routing-module) 來強制執行自黏工作階段。 不過，黏性工作階段可能會影響延展性，並使 Web 應用程式更新複雜化。 較好的方法是使用 Redis 或 SQL Server 分散式快取，這不需要黏性工作階段。 如需詳細資訊，請參閱<xref:performance/caching/distributed>。
 * 此會話 cookie 會透過進行加密 <xref:Microsoft.AspNetCore.DataProtection.IDataProtector> 。 必須正確設定資料保護，才能讀取每部 cookie 電腦上的會話。 如需詳細資訊，請參閱 <xref:security/data-protection/introduction>與[金鑰儲存提供者](xref:security/data-protection/implementation/key-storage-providers)。
 
 ### <a name="configure-session-state"></a>設定工作階段狀態
@@ -401,7 +402,7 @@ ASP.NET Core 中的預設會話提供者 <xref:Microsoft.Extensions.Caching.Dist
 
 應用程式會使用 <xref:Microsoft.AspNetCore.Builder.SessionOptions.IdleTimeout> 屬性來判斷會話可以閒置多久之後，才能放棄其在伺服器快取中的內容。 這個屬性與 cookie 到期無關。 透過[工作階段中介軟體](xref:Microsoft.AspNetCore.Session.SessionMiddleware)傳遞的每個要求都會重設逾時。
 
-工作階段狀態為「非鎖定」**。 如果兩個要求同時嘗試修改工作階段的內容，則最後一個要求會覆寫第一個要求。 `Session` 會實作為「一致性工作階段」**，這表示所有內容會都儲存在一起。 當兩個要求試圖修改不同的工作階段值時，最後一個要求可能會覆寫第一個要求所做的工作階段變更。
+工作階段狀態為「非鎖定」  。 如果兩個要求同時嘗試修改工作階段的內容，則最後一個要求會覆寫第一個要求。 `Session` 會實作為「一致性工作階段」  ，這表示所有內容會都儲存在一起。 當兩個要求試圖修改不同的工作階段值時，最後一個要求可能會覆寫第一個要求所做的工作階段變更。
 
 ### <a name="set-and-get-session-values"></a>設定和取得工作階段值
 

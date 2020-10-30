@@ -7,6 +7,7 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 5/12/2020
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -18,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: test/middleware
-ms.openlocfilehash: 1a5259f65261fb95fcfaa59df3f04da14d3f1ae3
-ms.sourcegitcommit: 7258e94cf60c16e5b6883138e5e68516751ead0f
+ms.openlocfilehash: 2dd5fa127af4432c612bb654d50eb4147aea6868
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 08/29/2020
-ms.locfileid: "89102861"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93051430"
 ---
 # <a name="test-aspnet-core-middleware"></a>測試 ASP.NET Core 中介軟體
 
@@ -67,7 +68,7 @@ ms.locfileid: "89102861"
 
 判斷提示結果。 首先，讓判斷提示的結果與您預期的結果相反。 具有 false 正數判斷提示的初始回合，可確認當中間件正常執行時，測試會失敗。 執行測試，並確認測試失敗。
 
-在下列範例中，中介軟體應該會傳回404狀態碼 (當要求根端點時， *找不到*) 。 執行第一個測試 `Assert.NotEqual( ... );` ，這應該會失敗：
+在下列範例中，中介軟體應該會傳回404狀態碼 (當要求根端點時， *找不到* ) 。 執行第一個測試 `Assert.NotEqual( ... );` ，這應該會失敗：
 
 [!code-csharp[](middleware/samples_snapshot/3.x/false-failure-check.cs?highlight=22)]
 
@@ -135,14 +136,14 @@ public async Task TestMiddleware_ExpectedResponse()
 TestServer
 
 * 是為了將伺服器行為複寫到測試中介軟體所建立。
-* 不 ***會嘗試複寫*** 所有 <xref:System.Net.Http.HttpClient> 行為。
-* 盡可能讓用戶端存取伺服器，盡可能充分掌控伺服器，以及盡可能瞭解伺服器上發生的狀況。 例如，它可能會擲回通常未擲回的例外 `HttpClient` 狀況，以便直接傳達伺服器狀態。
+* * **Not** _ 會嘗試複寫所有 <xref:System.Net.Http.HttpClient> 行為。
+_ 會盡可能讓用戶端存取伺服器的存取權限，而且可以盡可能看到伺服器上發生的狀況。 例如，它可能會擲回通常未擲回的例外 `HttpClient` 狀況，以便直接傳達伺服器狀態。
 * 預設不會設定某些傳輸特定標頭，因為這些標頭通常與中介軟體無關。 如需詳細資訊，請參閱下一節。
 
-### <a name="content-length-and-transfer-encoding-headers"></a>內容長度和傳輸編碼標頭
+### <a name="content-length-and-transfer-encoding-headers"></a>Content-type 長度和 Transfer-Encoding 標頭
 
-TestServer 不 ***會設定傳輸*** 相關要求或回應標頭，例如 [內容長度](https://developer.mozilla.org/docs/Web/HTTP/Headers/Content-Length) 或 [傳輸編碼](https://developer.mozilla.org/docs/Web/HTTP/Headers/Transfer-Encoding)。 應用程式應該避免根據這些標頭，因為其使用方式會因用戶端、案例和通訊協定而異。 如果 `Content-Length` 和 `Transfer-Encoding` 是測試特定案例的必要項，則可以在撰寫或時于測試中指定 <xref:System.Net.Http.HttpRequestMessage> 它們 <xref:Microsoft.AspNetCore.Http.HttpContext> 。 如需詳細資訊，請參閱下列 GitHub 問題：
+TestServer **不會** 設定傳輸相關的要求或回應標頭，例如 [內容長度](https://developer.mozilla.org/docs/Web/HTTP/Headers/Content-Length) 或 [傳輸編碼](https://developer.mozilla.org/docs/Web/HTTP/Headers/Transfer-Encoding)。 應用程式應該避免根據這些標頭，因為其使用方式會因用戶端、案例和通訊協定而異。 如果 `Content-Length` 和 `Transfer-Encoding` 是測試特定案例的必要項，則可以在撰寫或時于測試中指定 <xref:System.Net.Http.HttpRequestMessage> 它們 <xref:Microsoft.AspNetCore.Http.HttpContext> 。 如需詳細資訊，請參閱下列 GitHub 問題：
 
-* [dotnet/aspnetcore # 21677](https://github.com/dotnet/aspnetcore/issues/21677)
+_ [dotnet/aspnetcore # 21677](https://github.com/dotnet/aspnetcore/issues/21677)
 * [dotnet/aspnetcore # 18463](https://github.com/dotnet/aspnetcore/issues/18463)
 * [dotnet/aspnetcore # 13273](https://github.com/dotnet/aspnetcore/issues/13273)

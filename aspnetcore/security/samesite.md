@@ -6,6 +6,7 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 12/03/2019
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -18,12 +19,12 @@ no-loc:
 - SignalR
 - Electron
 uid: security/samesite
-ms.openlocfilehash: 3ba033b4165b19131d11311e5ae9d64e6afe48ca
-ms.sourcegitcommit: f09407d128634d200c893bfb1c163e87fa47a161
+ms.openlocfilehash: 6f826416e3045df32abf41e94e667120e71ae717
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 08/26/2020
-ms.locfileid: "88865426"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93051612"
 ---
 # <a name="work-with-samesite-no-loccookies-in-aspnet-core"></a>cookie在 ASP.NET Core 中使用 SameSite
 
@@ -51,7 +52,7 @@ SameSite 是一項 [IETF](https://ietf.org/about/) 草稿標準，其設計目�
 
 您可以下載並測試下列範例：
 
-| 範例               | Document |
+| 範例               | 文件 |
 | ----------------- | ------------ |
 | [.NET Core MVC](https://github.com/blowdart/AspNetSameSiteSamples/tree/master/AspNetCore21MVC)  | <xref:security/samesite/mvc21> |
 | [.NET Core Razor 頁面](https://github.com/blowdart/AspNetSameSiteSamples/tree/master/AspNetCore21RazorPages)  | <xref:security/samesite/rp21> |
@@ -63,7 +64,7 @@ SameSite 是一項 [IETF](https://ietf.org/about/) 草稿標準，其設計目�
 您可以下載並測試下列範例：
 
 
-| 範例               | Document |
+| 範例               | 文件 |
 | ----------------- | ------------ |
 | [.NET Core Razor 頁面](https://github.com/blowdart/AspNetSameSiteSamples/tree/master/AspNetCore31RazorPages)  | <xref:security/samesite/rp31> |
 
@@ -157,7 +158,7 @@ SameSite 支援首次使用 [2016 draft 標準](https://tools.ietf.org/html/draf
 
 ## <a name="supporting-older-browsers"></a>支援較舊的瀏覽器
 
-2016 SameSite 標準規定必須將未知值視為 `SameSite=Strict` 值。 從較舊的瀏覽器存取的應用程式（支援 2016 SameSite 標準）在取得具有值的 SameSite 屬性時可能會中斷 `None` 。 如果 Web 應用程式想要支援較舊的瀏覽器，則必須執行瀏覽器偵測。 ASP.NET Core 不會執行瀏覽器偵測，因為使用者代理程式值會高度變動且經常變更。 中的擴充點 <xref:Microsoft.AspNetCore.CookiePolicy> 可讓您插入使用者代理程式特定邏輯。
+2016 SameSite 標準規定必須將未知值視為 `SameSite=Strict` 值。 從較舊的瀏覽器存取的應用程式（支援 2016 SameSite 標準）在取得具有值的 SameSite 屬性時可能會中斷 `None` 。 如果 Web 應用程式想要支援較舊的瀏覽器，則必須執行瀏覽器偵測。 ASP.NET Core 不會執行瀏覽器偵測，因為 User-Agents 值會高度變動且經常變更。 中的擴充點 <xref:Microsoft.AspNetCore.CookiePolicy> 可讓您插入 User-Agent 的特定邏輯。
 
 在中 `Startup.Configure` ，加入呼叫之前呼叫的程式碼， <xref:Microsoft.AspNetCore.Builder.CookiePolicyAppBuilderExtensions.UseCookiePolicy*> <xref:Microsoft.AspNetCore.Builder.AuthAppBuilderExtensions.UseAuthentication*> 或 *任何* 寫入 s 的方法 cookie ：
 
@@ -201,7 +202,7 @@ SameSite 支援首次使用 [2016 draft 標準](https://tools.ietf.org/html/draf
 
 ### <a name="test-with-chrome"></a>使用 Chrome 測試
 
-Chrome 78 + 提供誤導的結果，因為它有暫時的緩和措施。 Chrome 78 + 暫時緩和可允許 cookie 不到兩分鐘的舊。 使用已啟用適當測試旗標的 Chrome 76 或77可提供更精確的結果。 測試新的 SameSite 行為切換 `chrome://flags/#same-site-by-default-cookies` 為 **啟用狀態**。 較舊版本的 Chrome (75 和以下的) 會回報為失敗，並出現新的 `None` 設定。 請參閱本檔中的 [支援舊版瀏覽器](#sob) 。
+Chrome 78 + 提供誤導的結果，因為它有暫時的緩和措施。 Chrome 78 + 暫時緩和可允許 cookie 不到兩分鐘的舊。 使用已啟用適當測試旗標的 Chrome 76 或77可提供更精確的結果。 測試新的 SameSite 行為切換 `chrome://flags/#same-site-by-default-cookies` 為 **啟用狀態** 。 較舊版本的 Chrome (75 和以下的) 會回報為失敗，並出現新的 `None` 設定。 請參閱本檔中的 [支援舊版瀏覽器](#sob) 。
 
 Google 未提供較舊的 chrome 版本。 遵循 [下載 Chromium](https://www.chromium.org/getting-involved/download-chromium) 中的指示，測試舊版的 Chrome。 請勿從搜尋較舊版本 chrome 所提供的 **連結下載 Chrome** 。
 
@@ -238,7 +239,7 @@ SameSite 旗標是在頁面上設定的 `edge://flags/#same-site-by-default-cook
 
  ::: moniker range=">= aspnetcore-2.1 < aspnetcore-3.0"
 
-| 範例               | Document |
+| 範例               | 文件 |
 | ----------------- | ------------ |
 | [.NET Core MVC](https://github.com/blowdart/AspNetSameSiteSamples/tree/master/AspNetCore21MVC)  | <xref:security/samesite/mvc21> |
 | [.NET Core Razor 頁面](https://github.com/blowdart/AspNetSameSiteSamples/tree/master/AspNetCore21RazorPages)  | <xref:security/samesite/rp21> |
@@ -247,7 +248,7 @@ SameSite 旗標是在頁面上設定的 `edge://flags/#same-site-by-default-cook
 
  ::: moniker range=">= aspnetcore-3.0"
 
-| 範例               | Document |
+| 範例               | 文件 |
 | ----------------- | ------------ |
 | [.NET Core Razor 頁面](https://github.com/blowdart/AspNetSameSiteSamples/tree/master/AspNetCore31RazorPages)  | <xref:security/samesite/rp31> |
 

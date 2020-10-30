@@ -7,6 +7,7 @@ ms.author: scaddie
 ms.custom: mvc
 ms.date: 07/20/2020
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -18,18 +19,18 @@ no-loc:
 - Razor
 - SignalR
 uid: web-api/index
-ms.openlocfilehash: 594d3dcbf55ed0a3476bb580df8e122cedb1dcd3
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: 51f76bc33d2da6097d26c1ffe17b1c93046a7b88
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88634367"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93052457"
 ---
 # <a name="create-web-apis-with-aspnet-core"></a>使用 ASP.NET Core 建立 Web API
 
 作者：[Scott Addie](https://github.com/scottaddie) 與 [Tom Dykstra](https://github.com/tdykstra)
 
-ASP.NET Core 支援使用 C# 建立 RESTful 服務，也稱為 Web API。 若要處理要求，Web API 會使用控制器。 Web API 中的「控制器」** 都衍生自類別 `ControllerBase`。 本文說明如何使用控制器來處理 web API 要求。
+ASP.NET Core 支援使用 C# 建立 RESTful 服務，也稱為 Web API。 若要處理要求，Web API 會使用控制器。 Web API 中的「控制器」  都衍生自類別 `ControllerBase`。 本文說明如何使用控制器來處理 web API 要求。
 
 [查看或下載範例程式碼](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/web-api/index/samples)。 ([如何下載](xref:index#how-to-download-a-sample))。
 
@@ -75,7 +76,7 @@ Web API 是由一或多個衍生自的控制器類別所組成 <xref:Microsoft.A
 
 以下是一些其他可用的屬性範例。
 
-|屬性|注意|
+|屬性|備註|
 |---------|-----|
 |[`[Route]`](<xref:Microsoft.AspNetCore.Mvc.RouteAttribute>)      |指定控制器或動作的 URL 模式。|
 |[`[Bind]`](<xref:Microsoft.AspNetCore.Mvc.BindAttribute>)        |指定模型繫結要包含的前置詞和屬性。|
@@ -97,7 +98,7 @@ Web API 是由一或多個衍生自的控制器類別所組成 <xref:Microsoft.A
 * [多部分/表單資料要求推斷](#multipartform-data-request-inference)
 * [錯誤狀態碼的問題詳細資料](#problem-details-for-error-status-codes)
 
-*錯誤狀態碼功能的問題詳細資料*需要2.2 或更新[版本的相容性版本](xref:mvc/compatibility-version)。 其他功能需要2.1 或更新版本的相容性版本。
+*錯誤狀態碼功能的問題詳細資料* 需要2.2 或更新 [版本的相容性版本](xref:mvc/compatibility-version)。 其他功能需要2.1 或更新版本的相容性版本。
 
 ::: moniker-end
 

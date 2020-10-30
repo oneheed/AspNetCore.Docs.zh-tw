@@ -7,6 +7,7 @@ ms.author: ravipal
 ms.custom: mvc
 ms.date: 03/28/2020
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -18,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: security/docker-compose-https
-ms.openlocfilehash: cd46fdcbe10dc0b7829fbe7eaef821889f395df4
-ms.sourcegitcommit: 74f4a4ddbe3c2f11e2e09d05d2a979784d89d3f5
+ms.openlocfilehash: 37a0142dac1e26afd26dbf2aad46bee20693652e
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 09/27/2020
-ms.locfileid: "91393700"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93051638"
 ---
 # <a name="hosting-aspnet-core-images-with-docker-compose-over-https"></a>使用 Docker Compose 透過 HTTPS 裝載 ASP.NET Core 映射
 
@@ -51,7 +52,7 @@ ASP.NET Core 預設會使用 [HTTPS](./enforcing-ssl.md)。 [HTTPS](https://en.w
 * `dotnet dev-certs`這是不必要的工具。
 * 憑證不需要儲存在指示中所使用的位置。 將憑證儲存在網站目錄以外的任何位置。
 
-下列章節中包含的指示會使用 `volumes` *>docker-compose.yml. yml*中的屬性，將憑證掛接到容器中。 您可以使用 Dockerfile 中的命令，將憑證新增至容器映射中 `COPY` ，但不建議這麼做。 *Dockerfile* 基於下列原因，不建議將憑證複製到映射：
+下列章節中包含的指示會使用 `volumes` *>docker-compose.yml. yml* 中的屬性，將憑證掛接到容器中。 您可以使用 Dockerfile 中的命令，將憑證新增至容器映射中 `COPY` ，但不建議這麼做。 *Dockerfile* 基於下列原因，不建議將憑證複製到映射：
 
 * 這會讓您難以使用相同的映射來測試開發人員憑證。
 * 這使得使用相同的映射來裝載生產憑證很困難。

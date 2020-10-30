@@ -5,8 +5,9 @@ description: 搭配使用 Identity 于 ASP.NET Core 應用程式內的單一頁�
 monikerRange: '>= aspnetcore-3.0'
 ms.author: scaddie
 ms.custom: mvc
-ms.date: 11/08/2019
+ms.date: 10/27/2020
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -18,30 +19,30 @@ no-loc:
 - Razor
 - SignalR
 uid: security/authentication/identity/spa
-ms.openlocfilehash: 1e50fb2f2f5e3621b189f756c53e80a2dd64c8a6
-ms.sourcegitcommit: d60bfd52bfb559e805abd654b87a2a0c7eb69cf8
+ms.openlocfilehash: 8acc34c88bf62b3da1b920acc7318c94435c100e
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 10/06/2020
-ms.locfileid: "91754524"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93051976"
 ---
 # <a name="authentication-and-authorization-for-spas"></a>Spa 的驗證和授權
 
 ASP.NET Core 3.1 和更新版本的範本會在單一頁面應用程式中提供驗證， (使用 API 授權支援的 Spa) 。 ASP.NET Core Identity針對驗證和儲存使用者，會結合[ Identity 伺服器](https://identityserver.io/)來執行 OpenID Connect。
 
-驗證參數已新增至「 **角度** 」和「 **回應** 」專案範本，類似于 Web 應用程式中的驗證參數 ** (模型-視圖控制器) ** (MVC) 和 **web 應用程式** (Razor 頁面) 專案範本。 允許的參數值為 [ **無** ] 和 [ **個人**]。 **React.js 和 Redux**專案範本目前不支援驗證參數。
+驗證參數已新增至「 **角度** 」和「 **回應** 」專案範本，類似于 Web 應用程式中的驗證參數 **(模型-視圖控制器)** (MVC) 和 **web 應用程式** (Razor 頁面) 專案範本。 允許的參數值為 [ **無** ] 和 [ **個人** ]。 **React.js 和 Redux** 專案範本目前不支援驗證參數。
 
 ## <a name="create-an-app-with-api-authorization-support"></a>建立具有 API 授權支援的應用程式
 
 使用者驗證和授權可以搭配使用角度和回應 Spa。 開啟命令 shell，然後執行下列命令：
 
-**角度**：
+**角度** ：
 
 ```dotnetcli
 dotnet new angular -o <output_directory_name> -au Individual
 ```
 
-**回應**：
+**回應** ：
 
 ```dotnetcli
 dotnet new react -o <output_directory_name> -au Individual
@@ -119,9 +120,9 @@ dotnet new react -o <output_directory_name> -au Individual
 
 在 *Controllers\OidcConfigurationController.cs* 檔案中，請注意布建來提供用戶端需要使用之 OIDC 參數的端點。
 
-### <a name="appsettingsjson"></a>appsettings.json
+### appsettings.json
 
-在專案根目錄的 *appsettings.js* 檔案中，有一個新的 `IdentityServer` 區段描述已設定的用戶端清單。 在下列範例中，有一個用戶端。 用戶端名稱會對應到應用程式名稱，並依照慣例對應至 OAuth `ClientId` 參數。 設定檔會指出正在設定的應用程式類型。 它是在內部用來推動可簡化伺服器設定流程的慣例。 有數個可用的設定檔，如 [應用程式佈建檔](#application-profiles) 一節中所述。
+在專案根目錄的檔案中 *appsettings.json* ，有一個新的 `IdentityServer` 區段描述已設定的用戶端清單。 在下列範例中，有一個用戶端。 用戶端名稱會對應到應用程式名稱，並依照慣例對應至 OAuth `ClientId` 參數。 設定檔會指出正在設定的應用程式類型。 它是在內部用來推動可簡化伺服器設定流程的慣例。 有數個可用的設定檔，如 [應用程式佈建檔](#application-profiles) 一節中所述。
 
 ```json
 "IdentityServer": {
@@ -150,8 +151,8 @@ dotnet new react -o <output_directory_name> -au Individual
 角度範本中的驗證和 API 授權支援位於其本身在 *ClientApp\src\api-authorization* 目錄中的角度模組。 模組是由下列元素所組成：
 
 * 3個元件：
-  * *login*：處理應用程式的登入流程。
-  * *登出。 component*：處理應用程式的登出流程。
+  * *login* ：處理應用程式的登入流程。
+  * *登出。 component* ：處理應用程式的登出流程。
   * *登入-功能表.* t：顯示下列其中一組連結的 widget：
     * 使用者設定檔管理和登出連結（當使用者通過驗證時）。
     * 當使用者未通過驗證時，註冊並登入連結。
@@ -165,12 +166,12 @@ dotnet new react -o <output_directory_name> -au Individual
 回應範本中的驗證和 API 授權支援位於 *ClientApp\src\components\api-authorization* 目錄中。 它是由下列元素所組成：
 
 * 4個元件：
-  * *Login.js*：處理應用程式的登入流程。
-  * *Logout.js*：處理應用程式的登出流程。
-  * *LoginMenu.js*：顯示下列其中一組連結的 widget：
+  * *Login.js* ：處理應用程式的登入流程。
+  * *Logout.js* ：處理應用程式的登出流程。
+  * *LoginMenu.js* ：顯示下列其中一組連結的 widget：
     * 使用者設定檔管理和登出連結（當使用者通過驗證時）。
     * 當使用者未通過驗證時，註冊並登入連結。
-  * *AuthorizeRoute.js*：需要先驗證使用者才能轉譯參數中所指出之元件的路由元件 `Component` 。
+  * *AuthorizeRoute.js* ：需要先驗證使用者才能轉譯參數中所指出之元件的路由元件 `Component` 。
 * 已匯出 `authService` 之類別的實例 `AuthorizeService` ，可處理驗證進程的較低層級詳細資料，並將已驗證使用者的相關資訊公開給其餘的應用程式以供取用。
 
 現在您已瞭解解決方案的主要元件，您可以進一步瞭解應用程式的個別案例。
@@ -282,11 +283,32 @@ async populateWeatherData() {
   * 您可以透過 PowerShell 或 OpenSSL 等標準工具來產生它。
   * 您可以將它安裝到目的電腦上的憑證存放區中，或部署為具有強式密碼的 *.pfx* 檔案。
 
+### <a name="example-deploy-to-a-non-azure-web-hosting-provider"></a>範例：部署至非 Azure web 主控提供者
+
+在您的 web 主控面板中，建立或載入您的憑證。 然後，在應用程式的檔案中 *appsettings.json* ，修改 `IdentityServer` 區段以包含金鑰詳細資料。 例如：
+
+```json
+"IdentityServer": {
+  "Key": {
+    "Type": "Store",
+    "StoreName": "WebHosting",
+    "StoreLocation": "CurrentUser",
+    "Name": "CN=MyApplication"
+  }
+}
+```
+
+在上述範例中：
+
+* `StoreName` 代表用來儲存憑證的憑證存放區名稱。 在此情況下，它會指向 web 主控存放區。
+* `StoreLocation` 代表在此案例中從 (載入憑證的位置 `CurrentUser`) 。
+* `Name` 對應于憑證的辨別主體。
+
 ### <a name="example-deploy-to-azure-app-service"></a>範例：部署至 Azure App Service
 
 本節說明如何使用儲存在憑證存放區中的憑證，將應用程式部署至 Azure App Service。 若要修改應用程式以從憑證存放區載入憑證，當您在稍後的步驟中設定 Azure 入口網站中的應用程式時，需要標準層服務方案或更高的版本。
 
-在應用程式的檔案 *appsettings.js* 中，修改 `IdentityServer` 區段以包含金鑰詳細資料：
+在應用程式的檔案中 *appsettings.json* ，修改 `IdentityServer` 區段以包含金鑰詳細資料：
 
 ```json
 "IdentityServer": {

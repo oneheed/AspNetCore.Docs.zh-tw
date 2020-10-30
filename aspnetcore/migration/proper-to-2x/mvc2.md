@@ -6,6 +6,7 @@ ms.author: scaddie
 ms.custom: mvc
 ms.date: 10/24/2018
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -17,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: migration/mvc2
-ms.openlocfilehash: bd2c33d35a3433532b48f6615a81adac8d03b9ee
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: cf7d2e3a94c14fb752180d9349536d17b4557e0a
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88634536"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93051326"
 ---
 # <a name="migrate-from-aspnet-to-aspnet-core-20"></a>從 ASP.NET 遷移至 ASP.NET Core 2.0
 
@@ -30,14 +31,14 @@ ms.locfileid: "88634536"
 
 這篇文章可作為 ASP.NET 應用程式移轉至 ASP.NET Core 2.0 的參考指南。
 
-## <a name="prerequisites"></a>Prerequisites
+## <a name="prerequisites"></a>必要條件
 
 從 .Net 下載安裝下列 **其中一** 項 [： Windows](https://dotnet.microsoft.com/download)：
 
 * .NET Core SDK
 * 適用於 Windows 的 Visual Studio
-  * **ASP.NET 與網頁程式開發**工作負載
-  * **.NET Core 跨平台開發**工作負載
+  * **ASP.NET 與網頁程式開發** 工作負載
+  * **.NET Core 跨平台開發** 工作負載
 
 ## <a name="target-frameworks"></a>目標 Framework
 
@@ -105,7 +106,7 @@ ASP.NET 支援儲存設定。 例如，這些設定是用來支援要部署應�
 
 [!code-csharp[](samples/read-webconfig.cs)]
 
-ASP.NET Core 可將應用程式的組態資料儲存在任何檔案中，將它們當成中介軟體啟動程序的一部分載入。 專案範本中所用的預設檔案是 *appsettings.json*：
+ASP.NET Core 可將應用程式的組態資料儲存在任何檔案中，將它們當成中介軟體啟動程序的一部分載入。 專案範本中使用的預設檔案 *appsettings.json* 如下：
 
 [!code-json[](samples/appsettings-sample.json)]
 
@@ -158,7 +159,7 @@ services.Configure<AppConfiguration>(Configuration.GetSection("AppConfiguration"
 
 在 ASP.NET 中，靜態檔案會儲存在不同目錄中，於檢視中提供參考。
 
-在 ASP.NET Core 中，除非另有設定，否則靜態檔案會儲存在 [web 根目錄] (* &lt; 內容根目錄 &gt; /wwwroot*) 。 從 `Startup.Configure` 叫用 `UseStaticFiles` 擴充方法，將檔案載入至要求管線：
+在 ASP.NET Core 中，除非另有設定，否則靜態檔案會儲存在 [web 根目錄] ( *&lt; 內容根目錄 &gt; /wwwroot* ) 。 從 `Startup.Configure` 叫用 `UseStaticFiles` 擴充方法，將檔案載入至要求管線：
 
 [!code-csharp[](../../fundamentals/static-files/samples/1.x/StaticFilesSample/StartupStaticFiles.cs?highlight=3&name=snippet_ConfigureMethod)]
 

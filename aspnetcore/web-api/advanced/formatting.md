@@ -6,6 +6,7 @@ ms.author: riande
 ms.custom: H1Hack27Feb2017
 ms.date: 04/17/2020
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -17,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: web-api/advanced/formatting
-ms.openlocfilehash: b89be93fc33d1eba5c2ad9508adf93fa54014ff8
-ms.sourcegitcommit: d1a897ebd89daa05170ac448e4831d327f6b21a8
+ms.openlocfilehash: 89e3e51373db5f7cff974b7a8c69d06bedf856ca
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 10/01/2020
-ms.locfileid: "91606781"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93052509"
 ---
 # <a name="format-response-data-in-aspnet-core-web-api"></a>在 ASP.NET Core Web API 中格式化回應資料
 
@@ -80,7 +81,7 @@ ASP.NET Core MVC 支援格式化回應資料。 您可以使用特定格式或�
 
 ### <a name="the-accept-header"></a>Accept 標頭
 
-當*negotiation* `Accept` 要求中出現標頭時，會發生內容協商。 當要求包含 accept 標頭時，ASP.NET Core：
+當 *negotiation* `Accept` 要求中出現標頭時，會發生內容協商。 當要求包含 accept 標頭時，ASP.NET Core：
 
 * 依喜好設定順序列舉 accept 標頭中的媒體類型。
 * 嘗試尋找可以使用其中一個指定的格式產生回應的格式器。
@@ -238,7 +239,7 @@ XML 格式需要 [Microsoft.AspNetCore.Mvc.Formatters.Xml](https://www.nuget.org
 
 ### <a name="special-case-formatters"></a>特殊案例格式器
 
-有些特殊案例是使用內建格式器所實作。 根據預設， `string` 如果透過標頭) 要求，傳回類型會格式化為 *text/純* (*text/html* `Accept` 。 您可以藉由移除來刪除此行為 <xref:Microsoft.AspNetCore.Mvc.Formatters.StringOutputFormatter> 。 方法中會移除格式器 `ConfigureServices` 。 傳回時，具有模型物件傳回型別的動作 `204 No Content` `null` 。 您可以藉由移除來刪除此行為 <xref:Microsoft.AspNetCore.Mvc.Formatters.HttpNoContentOutputFormatter> 。 下列程式碼會移除 `StringOutputFormatter` 和 `HttpNoContentOutputFormatter`。
+有些特殊案例是使用內建格式器所實作。 根據預設， `string` 如果透過標頭) 要求，傳回類型會格式化為 *text/純* ( *text/html* `Accept` 。 您可以藉由移除來刪除此行為 <xref:Microsoft.AspNetCore.Mvc.Formatters.StringOutputFormatter> 。 方法中會移除格式器 `ConfigureServices` 。 傳回時，具有模型物件傳回型別的動作 `204 No Content` `null` 。 您可以藉由移除來刪除此行為 <xref:Microsoft.AspNetCore.Mvc.Formatters.HttpNoContentOutputFormatter> 。 下列程式碼會移除 `StringOutputFormatter` 和 `HttpNoContentOutputFormatter`。
 
 ::: moniker range=">= aspnetcore-3.0"
 [!code-csharp[](./formatting/3.0sample/StartupStringOutputFormatter.cs?name=snippet)]

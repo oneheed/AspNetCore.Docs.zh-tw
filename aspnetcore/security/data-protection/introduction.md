@@ -6,6 +6,7 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 10/24/2018
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -17,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: security/data-protection/introduction
-ms.openlocfilehash: 4f578e30a972b0d4ce5db08b2ec844e270c11406
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: 5fd5676b286e758f0648d78bf8cb4171e7a98f60
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88630077"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93051690"
 ---
 # <a name="aspnet-core-data-protection"></a>ASP.NET Core 資料保護
 
@@ -58,7 +59,7 @@ ASP.NET Core 資料保護堆疊的設計目的是要做為 &lt; ASP.NET 1.x-4.x 
 
 ASP.NET Core 的資料保護 Api 主要是供機密承載的無限持續性所用。 其他像是 [WINDOWS CNG DPAPI](/windows/win32/seccng/cng-dpapi) 和 [Azure Rights Management](/rights-management/) 的技術更適合不限數量的儲存體案例，而且它們也有增強的金鑰管理功能。 話雖如此，開發人員不會禁止開發人員使用 ASP.NET Core 資料保護 Api 來進行機密資料的長期保護。
 
-## <a name="audience"></a>對象
+## <a name="audience"></a>適用對象
 
 資料保護系統分為五個主要套件。 這些 Api 的各個層面都以三個主要物件為目標;
 
@@ -74,7 +75,7 @@ ASP.NET Core 的資料保護 Api 主要是供機密承載的無限持續性所�
 
    「我需要取代系統內的整個元件，因為我有真正獨特的行為需求。 我願意學習覆使用的 API 介面部分，以建立可滿足我需求的外掛程式。」
 
-## <a name="package-layout"></a>封裝版面配置
+## <a name="package-layout"></a>封裝配置
 
 資料保護堆疊由五個套件組成。
 

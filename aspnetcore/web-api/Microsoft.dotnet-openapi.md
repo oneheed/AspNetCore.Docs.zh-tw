@@ -6,6 +6,7 @@ ms.author: rybrande
 ms.date: 09/26/2019
 monikerRange: '>= aspnetcore-3.0'
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -17,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: web-api/Microsoft.dotnet-openapi
-ms.openlocfilehash: 45921deb35452876b0a92a8731da68539a880c1d
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: 28a71c7040667c7544cc17c1184c09b5b39959b9
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88626554"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93052548"
 ---
 # <a name="develop-aspnet-core-apps-using-openapi-tools"></a>使用 OpenAPI 工具開發 ASP.NET Core 應用程式
 
@@ -65,7 +66,7 @@ dotnet tool install -g Microsoft.dotnet-openapi
 
 ### <a name="add-file"></a>新增檔案
 
-#### <a name="options"></a>選項。
+#### <a name="options"></a>選項
 
 | Short 選項| Long 選項| 描述 | 範例 |
 |-------|------|-------|---------|
@@ -81,7 +82,7 @@ dotnet tool install -g Microsoft.dotnet-openapi
 
 ### <a name="add-url"></a>新增 URL
 
-#### <a name="options"></a>選項。
+#### <a name="options"></a>選項
 
 | Short 選項| Long 選項| 描述 | 範例 |
 |-------|------|-------------|---------|
@@ -100,7 +101,7 @@ dotnet tool install -g Microsoft.dotnet-openapi
 
 從 *.csproj* 檔案移除符合指定檔案名的 OpenAPI 參考。 移除 OpenAPI 的參考時，不會產生用戶端。 將會刪除本機 *json* 和 *yaml* 檔案。
 
-### <a name="options"></a>選項。
+### <a name="options"></a>選項
 
 | Short 選項| Long 選項| 描述| 範例 |
 |-------|------|------------|---------|
@@ -117,7 +118,7 @@ dotnet tool install -g Microsoft.dotnet-openapi
 
 重新整理使用下載 URL 的最新內容所下載之檔案的本機版本。
 
-### <a name="options"></a>選項。
+### <a name="options"></a>選項
 
 | Short 選項| Long 選項| 描述 | 範例 |
 |-------|------|-------------|---------|

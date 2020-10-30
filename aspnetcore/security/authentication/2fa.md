@@ -7,6 +7,7 @@ ms.author: riande
 ms.date: 09/22/2018
 ms.custom: mvc, seodec18
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -18,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: security/authentication/2fa
-ms.openlocfilehash: e5e606afaf0219f3a0eb7301203b7142a00322be
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: 1ee9e656c2e631c9b5588149e0a75e07108baff1
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88634107"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93051261"
 ---
 # <a name="two-factor-authentication-with-sms-in-aspnet-core"></a>ASP.NET Core 中的 SMS 雙因素驗證
 
@@ -48,17 +49,17 @@ ms.locfileid: "88634107"
 
 **Twilio**
 
-從 Twilio 帳戶的 [儀表板] 索引標籤中，複製 **帳戶 SID** 和 **驗證權杖**。
+從 Twilio 帳戶的 [儀表板] 索引標籤中，複製 **帳戶 SID** 和 **驗證權杖** 。
 
 **ASPSMS:**
 
-從您的帳戶設定中，流覽至 **Userkey** ，並將其與您的 **密碼**一起複製。
+從您的帳戶設定中，流覽至 **Userkey** ，並將其與您的 **密碼** 一起複製。
 
 稍後我們將在中使用秘密管理員工具將這些值儲存在金鑰 `SMSAccountIdentification` 和中 `SMSAccountPassword` 。
 
 #### <a name="specifying-senderid--originator"></a>指定 SenderID/建立者
 
-**Twilio：** 在 [數位] 索引標籤中，複製您的 Twilio **電話號碼**。
+**Twilio：** 在 [數位] 索引標籤中，複製您的 Twilio **電話號碼** 。
 
 **ASPSMS：** 在 [解除鎖定的寄件者] 功能表中，解除鎖定一或多個發件 (人，或選擇不受所有網路) 支援的英數位元。
 
@@ -105,7 +106,7 @@ info: Successfully saved SMSAccountIdentification = 12345 to the secret store.
 
 ### <a name="enable-two-factor-authentication"></a>啟用雙因素驗證
 
-開啟 [ *Views]/[管理]/[索引*] 視圖檔 Razor ，並移除批註字元 (因此) 不會將標記標記為批註。
+開啟 [ *Views]/[管理]/[索引* ] 視圖檔 Razor ，並移除批註字元 (因此) 不會將標記標記為批註。
 
 ## <a name="log-in-with-two-factor-authentication"></a>使用雙因素驗證登入
 
@@ -117,11 +118,11 @@ info: Successfully saved SMSAccountIdentification = 12345 to the secret store.
 
 ![管理 view-請按 [新增] 連結](2fa/_static/login2fa2.png)
 
-* 新增將接收驗證碼的電話號碼，然後按一下 [ **傳送驗證碼**]。
+* 新增將接收驗證碼的電話號碼，然後按一下 [ **傳送驗證碼** ]。
 
 ![[新增電話號碼] 頁面](2fa/_static/login2fa3.png)
 
-* 您將會收到包含驗證碼的文字訊息。 輸入它，然後按一下 [**提交**]
+* 您將會收到包含驗證碼的文字訊息。 輸入它，然後按一下 [ **提交** ]
 
 ![驗證電話號碼頁面](2fa/_static/login2fa4.png)
 
@@ -141,13 +142,13 @@ info: Successfully saved SMSAccountIdentification = 12345 to the secret store.
 
 * 登入。
 
-* 使用者帳戶已啟用雙因素驗證，因此您必須提供第二個驗證因素。 在本教學課程中，您已啟用電話驗證。 內建範本也可讓您將電子郵件設定為第二個因素。 您可以針對驗證（例如 QR 代碼）設定額外的第二個因素。 點擊 [ **提交**]。
+* 使用者帳戶已啟用雙因素驗證，因此您必須提供第二個驗證因素。 在本教學課程中，您已啟用電話驗證。 內建範本也可讓您將電子郵件設定為第二個因素。 您可以針對驗證（例如 QR 代碼）設定額外的第二個因素。 點擊 [ **提交** ]。
 
 ![傳送驗證碼視圖](2fa/_static/login2fa7.png)
 
 * 輸入您在 SMS 訊息中取得的代碼。
 
-* 按一下 [ **記住此瀏覽器** ] 核取方塊，將會豁免您在使用相同的裝置和瀏覽器時，不需要使用2FA 來登入。 啟用2FA，然後按一下 [ **記住此瀏覽器** ]，只要使用者沒有您的裝置存取權，就能為您提供強大的2FA 保護，讓您免于惡意使用者嘗試存取您的帳戶。 您可以在任何您經常使用的私人裝置上執行此動作。 藉由設定  **記住此瀏覽器**，您可以從不常使用的裝置獲得2FA 的額外安全性，並讓您在自己的裝置上不需要經歷2FA 的便利性。
+* 按一下 [ **記住此瀏覽器** ] 核取方塊，將會豁免您在使用相同的裝置和瀏覽器時，不需要使用2FA 來登入。 啟用2FA，然後按一下 [ **記住此瀏覽器** ]，只要使用者沒有您的裝置存取權，就能為您提供強大的2FA 保護，讓您免于惡意使用者嘗試存取您的帳戶。 您可以在任何您經常使用的私人裝置上執行此動作。 藉由設定  **記住此瀏覽器** ，您可以從不常使用的裝置獲得2FA 的額外安全性，並讓您在自己的裝置上不需要經歷2FA 的便利性。
 
 ![確認 view](2fa/_static/login2fa8.png)
 

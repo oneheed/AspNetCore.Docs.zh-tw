@@ -6,6 +6,7 @@ ms.author: casoper
 ms.custom: devx-track-csharp, mvc, seodec18, devx-track-azurecli
 ms.date: 10/24/2018
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -17,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: azure/devops/deploy-to-app-service
-ms.openlocfilehash: e6d8b4bcbbbe909fde971a8c706287654fcc98ba
-ms.sourcegitcommit: 62cc131969b2379f7a45c286a751e22d961dfbdb
+ms.openlocfilehash: 52c4905ecb3a76f1dd10629f834b2b541b698774
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 09/22/2020
-ms.locfileid: "90847620"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93052353"
 ---
 # <a name="deploy-an-app-to-app-service"></a>將應用程式部署至 App Service
 
@@ -78,7 +79,7 @@ ms.locfileid: "90847620"
 
      ![顯示 RSS 摘要內容的應用程式](./media/deploying-to-app-service/app-in-browser.png)
 
-6. 當您滿意應用程式運作正常之後，請在命令列介面中按下**Ctrl** + **C**以關閉應用程式。
+6. 當您滿意應用程式運作正常之後，請在命令列介面中按下 **Ctrl** + **C** 以關閉應用程式。
 
 ## <a name="create-the-azure-app-service-web-app"></a>建立 Azure App Service Web 應用程式
 
@@ -114,19 +115,19 @@ ms.locfileid: "90847620"
     az webapp create --name $webappname --resource-group AzureTutorial --plan $webappname
     ```
 
-    e. 設定部署認證。 這些部署認證適用于您訂用帳戶中的所有 web 應用程式。 請勿在使用者名稱中使用特殊字元。
+    e。 設定部署認證。 這些部署認證適用于您訂用帳戶中的所有 web 應用程式。 請勿在使用者名稱中使用特殊字元。
 
     ```azurecli
     az webapp deployment user set --user-name REPLACE_WITH_USER_NAME --password REPLACE_WITH_PASSWORD
     ```
 
-    f. 將 web 應用程式設定為接受本機 Git 的部署，並顯示 *Git 部署 URL*。 **請注意此 URL 以供稍後參考**。
+    f. 將 web 應用程式設定為接受本機 Git 的部署，並顯示 *Git 部署 URL* 。 **請注意此 URL 以供稍後參考** 。
 
     ```azurecli
     echo Git deployment URL: $(az webapp deployment source config-local-git --name $webappname --resource-group AzureTutorial --query url --output tsv)
     ```
 
-    g. 顯示 *web 應用程式 URL*。 流覽至此 URL 以查看空白 web 應用程式。 **請注意此 URL 以供稍後參考**。
+    如 顯示 *web 應用程式 URL* 。 流覽至此 URL 以查看空白 web 應用程式。 **請注意此 URL 以供稍後參考** 。
 
     ```console
     echo Web app URL: http://$webappname.azurewebsites.net
@@ -157,14 +158,14 @@ ms.locfileid: "90847620"
 應用程式已從命令 shell 部署。 讓我們使用 Visual Studio 的整合式工具，將更新部署到應用程式。 在幕後，Visual Studio 完成與命令列工具相同的工作，但是在 Visual Studio 的熟悉 UI 內。
 
 1. 在 Visual Studio 中開啟 *SimpleFeedReader .sln* 。
-2. 在方案總管中，開啟 *Pages\Index.cshtml*。 將 `<h2>Simple Feed Reader</h2>` 變更為 `<h2>Simple Feed Reader - V2</h2>`。
-3. 按**Ctrl** + **Shift** + **B**來建立應用程式。
-4. 在方案總管中，以滑鼠右鍵按一下專案，然後按一下 [ **發佈**]。
+2. 在方案總管中，開啟 *Pages\Index.cshtml* 。 將 `<h2>Simple Feed Reader</h2>` 變更為 `<h2>Simple Feed Reader - V2</h2>`。
+3. 按 **Ctrl** + **Shift** + **B** 來建立應用程式。
+4. 在方案總管中，以滑鼠右鍵按一下專案，然後按一下 [ **發佈** ]。
 
     ![顯示以滑鼠右鍵按一下、發佈的螢幕擷取畫面](./media/deploying-to-app-service/publish.png)
-5. Visual Studio 可以建立新的 App Service 資源，但此更新將會透過現有的部署發行。 在 [ **挑選發行目標** ] 對話方塊中，從左側清單中選取 **App Service** ，然後選取 [ **選取現有**的]。 按一下 [發佈] 。
+5. Visual Studio 可以建立新的 App Service 資源，但此更新將會透過現有的部署發行。 在 [ **挑選發行目標** ] 對話方塊中，從左側清單中選取 **App Service** ，然後選取 [ **選取現有** 的]。 按一下 [發佈] 。
 6. 在 [ **App Service** ] 對話方塊中，確認用來建立 Azure 訂用帳戶的 Microsoft 或組織帳戶顯示在右上角。 如果不是，請按一下下拉式清單並加以新增。
-7. 確認已選取正確的 Azure **訂** 用帳戶。 若要 **查看**，請選取 **資源群組**。 展開 **AzureTutorial** 資源群組，然後選取現有的 web 應用程式。 按一下 [確定]。
+7. 確認已選取正確的 Azure **訂** 用帳戶。 若要 **查看** ，請選取 **資源群組** 。 展開 **AzureTutorial** 資源群組，然後選取現有的 web 應用程式。 按一下 [確定]  。
 
     ![顯示 [發佈 App Service] 對話方塊的螢幕擷取畫面](./media/deploying-to-app-service/publish-dialog.png)
 
@@ -179,19 +180,19 @@ Visual Studio 建立應用程式，並將其部署到 Azure。 流覽至 web 應
 1. 登入 [Azure Cloud Shell](https://shell.azure.com/bash)（如果尚未登入）。
 2. 建立預備位置。
 
-    a. 建立具有名稱 *暫存*的部署位置。
+    a. 建立具有名稱 *暫存* 的部署位置。
 
     ```azurecli
     az webapp deployment slot create --name $webappname --resource-group AzureTutorial --slot staging
     ```
 
-    b. 將預備位置設定為使用本機 Git 的部署，並取得 **預備** 部署 URL。 **請注意此 URL 以供稍後參考**。
+    b. 將預備位置設定為使用本機 Git 的部署，並取得 **預備** 部署 URL。 **請注意此 URL 以供稍後參考** 。
 
     ```azurecli
     echo Git deployment URL for staging: $(az webapp deployment source config-local-git --name $webappname --resource-group AzureTutorial --slot staging --query url --output tsv)
     ```
 
-    c. 顯示預備位置的 URL。 流覽至 URL 以查看空的預備位置。 **請注意此 URL 以供稍後參考**。
+    c. 顯示預備位置的 URL。 流覽至 URL 以查看空的預備位置。 **請注意此 URL 以供稍後參考** 。
 
     ```console
     echo Staging web app URL: http://$webappname-staging.azurewebsites.net
@@ -199,7 +200,7 @@ Visual Studio 建立應用程式，並將其部署到 Azure。 流覽至 web 應
 
 3. 在文字編輯器或 Visual Studio 中，再次修改 *Pages/Index. cshtml* ，讓 `<h2>` 元素讀取 `<h2>Simple Feed Reader - V3</h2>` 和儲存檔案。
 
-4. 使用 Visual Studio 的*Team Explorer* ] 索引標籤中的 [**變更**] 頁面，或使用本機電腦的命令 shell 輸入下列命令，將檔案認可至本機 Git 存放庫：
+4. 使用 Visual Studio 的 *Team Explorer* ] 索引標籤中的 [ **變更** ] 頁面，或使用本機電腦的命令 shell 輸入下列命令，將檔案認可至本機 Git 存放庫：
 
     ```console
     git commit -a -m "upgraded to V3"

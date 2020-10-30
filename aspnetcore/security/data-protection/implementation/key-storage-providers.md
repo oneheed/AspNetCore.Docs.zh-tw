@@ -5,6 +5,7 @@ description: 瞭解 ASP.NET Core 中的金鑰儲存提供者，以及如何設�
 ms.author: riande
 ms.date: 12/05/2019
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -16,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: security/data-protection/implementation/key-storage-providers
-ms.openlocfilehash: fb21f7d4d784451096db5c420f2ffd4532c2b490
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: 36e8bc494125d0770347ddf32390365d83a91d27
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88631325"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93051742"
 ---
 # <a name="key-storage-providers-in-aspnet-core"></a>ASP.NET Core 中的金鑰儲存提供者
 
@@ -131,7 +132,7 @@ public void ConfigureServices(IServiceCollection services)
 
 **僅適用于 Windows 部署。**
 
-有時候應用程式可能沒有檔案系統的寫入權限。 假設應用程式是以虛擬服務帳戶的形式執行， (例如 *w3wp.exe*的應用程式集區身分識別) 。 在這些情況下，系統管理員可以布建可由服務帳戶身分識別存取的登錄機碼。 呼叫 [PersistKeysToRegistry](/dotnet/api/microsoft.aspnetcore.dataprotection.dataprotectionbuilderextensions.persistkeystoregistry) 擴充方法，如下所示。 提供 [RegistryKey](/dotnet/api/microsoft.aspnetcore.dataprotection.repositories.registryxmlrepository.registrykey) ，指向應儲存密碼編譯金鑰的位置：
+有時候應用程式可能沒有檔案系統的寫入權限。 假設應用程式是以虛擬服務帳戶的形式執行， (例如 *w3wp.exe* 的應用程式集區身分識別) 。 在這些情況下，系統管理員可以布建可由服務帳戶身分識別存取的登錄機碼。 呼叫 [PersistKeysToRegistry](/dotnet/api/microsoft.aspnetcore.dataprotection.dataprotectionbuilderextensions.persistkeystoregistry) 擴充方法，如下所示。 提供 [RegistryKey](/dotnet/api/microsoft.aspnetcore.dataprotection.repositories.registryxmlrepository.registrykey) ，指向應儲存密碼編譯金鑰的位置：
 
 ```csharp
 public void ConfigureServices(IServiceCollection services)

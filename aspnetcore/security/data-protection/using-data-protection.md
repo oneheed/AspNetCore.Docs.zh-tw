@@ -5,6 +5,7 @@ description: 瞭解如何使用 ASP.NET Core 資料保護 Api 來保護和取消
 ms.author: riande
 ms.date: 11/12/2019
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -16,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: security/data-protection/using-data-protection
-ms.openlocfilehash: bfe1dc800f65eaca00bb1dd145d6ecc4159b783f
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: 1f0d42a7b12edb870481024372d75cdc9e57be21
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88631676"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93051651"
 ---
 # <a name="get-started-with-the-data-protection-apis-in-aspnet-core"></a>ASP.NET Core 中的資料保護 Api 入門
 

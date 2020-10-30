@@ -7,6 +7,7 @@ ms.author: bradyg
 ms.custom: mvc
 ms.date: 11/27/2019
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -18,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: signalr/introduction
-ms.openlocfilehash: ab850fa8afbee9d2664868937362388a03374908
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: 1810fef903362addcef4a6c9ec53264604f58d2b
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88634692"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93051469"
 ---
 # <a name="introduction-to-aspnet-core-no-locsignalr"></a>ASP.NET Core 簡介 SignalR
 
@@ -54,12 +55,12 @@ SignalR 提供 API，可用於建立 (RPC) 的伺服器對用戶端 [遠端程�
 SignalR 支援下列用來處理即時通訊 (的技巧，以順利回復) ：
 
 * [WebSocket](https://tools.ietf.org/html/rfc7118)
-* 伺服器傳送的事件
+* Server-Sent 事件
 * 長時間輪詢
 
 SignalR 自動選擇伺服器和用戶端功能內的最佳傳輸方法。
 
-## <a name="hubs"></a>集線器
+## <a name="hubs"></a>中樞
 
 SignalR 使用 *中樞* 在用戶端與伺服器之間進行通訊。
 
@@ -71,5 +72,5 @@ SignalR 使用 *中樞* 在用戶端與伺服器之間進行通訊。
 
 * [開始使用 SignalR ASP.NET Core](xref:tutorials/signalr)
 * [支援的平臺](xref:signalr/supported-platforms)
-* [集線器](xref:signalr/hubs)
+* [中樞](xref:signalr/hubs)
 * [JavaScript 用戶端](xref:signalr/javascript-client)

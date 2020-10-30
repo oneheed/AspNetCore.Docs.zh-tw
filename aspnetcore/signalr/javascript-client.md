@@ -7,6 +7,7 @@ ms.author: bradyg
 ms.custom: mvc, devx-track-js
 ms.date: 04/08/2020
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -18,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: signalr/javascript-client
-ms.openlocfilehash: be271272c952487fccc5136307c84fdf49391848
-ms.sourcegitcommit: 2e3a967331b2c69f585dd61e9ad5c09763615b44
+ms.openlocfilehash: b4b1bc6131a6676710adbf2503efe3f304d89a58
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 10/27/2020
-ms.locfileid: "92690653"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93050845"
 ---
 # <a name="aspnet-core-no-locsignalr-javascript-client"></a>ASP.NET Core SignalR JavaScript 用戶端
 
@@ -81,6 +82,9 @@ npm 會將套件內容安裝 *node_modules \\ @microsoft\signalr\dist\browser* �
 ### <a name="cross-origin-connections"></a>跨原始連接
 
 一般而言，瀏覽器會從與要求的頁面相同的網域載入連接。 不過，在某些情況下需要連接到另一個網域。
+
+> [!IMPORTANT]
+> 用戶端程式代碼必須使用絕對 URL，而不是相對 URL。 將 `.withUrl("/chathub")` 變更為 `.withUrl("https://myappurl/chathub")`。
 
 為了防止惡意網站從另一個網站讀取敏感性資料，預設會停用 [跨原始來源的連接](xref:security/cors) 。 若要允許跨原始來源的要求，請在類別中啟用它 `Startup` ：
 

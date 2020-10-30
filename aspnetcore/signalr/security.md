@@ -7,6 +7,7 @@ ms.author: anurse
 ms.custom: mvc
 ms.date: 01/16/2020
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -18,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: signalr/security
-ms.openlocfilehash: 12293c5cb3dc49d505225f1b44e824e9273cfffc
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: 5ecbf07b1527e9c68443870f7fce77adc29a5416
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88630987"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93050832"
 ---
 # <a name="security-considerations-in-aspnet-core-no-locsignalr"></a>ASP.NET Core 中的安全性考慮 SignalR
 
@@ -40,7 +41,7 @@ ms.locfileid: "88630987"
 
 您應在應用程式中設定 CORS SignalR ，以只允許來源 `www.example.com` 。
 
-如需設定 CORS 的詳細資訊，請參閱 [啟用跨原始來源要求 (CORS) ](xref:security/cors)。 SignalR**需要**下列 CORS 原則：
+如需設定 CORS 的詳細資訊，請參閱 [啟用跨原始來源要求 (CORS) ](xref:security/cors)。 SignalR**需要** 下列 CORS 原則：
 
 * 允許特定的預期來源。 允許任何來源都可以，但 **不** 是安全或建議的做法。
 * HTTP 方法 `GET` 和 `POST` 必須是允許的。
@@ -101,7 +102,7 @@ CORS 所提供的保護不套用至 WebSocket。 如需 Websocket 的原始限�
 
 ::: moniker range="< aspnetcore-2.2"
 
-CORS 所提供的保護不套用至 WebSocket。 瀏覽器**不**會：
+CORS 所提供的保護不套用至 WebSocket。 瀏覽器 **不** 會：
 
 * 執行 CORS 的事前要求。
 * 進行 WebSocket 要求時，採用 `Access-Control` 標頭中所指定的限制。
@@ -123,7 +124,7 @@ CORS 所提供的保護不套用至 WebSocket。 瀏覽器**不**會：
 
 ## <a name="access-token-logging"></a>存取權杖記錄
 
-使用 Websocket 或伺服器傳送的事件時，瀏覽器用戶端會在查詢字串中傳送存取權杖。 透過查詢字串接收存取權杖通常是安全的，因為使用標準 `Authorization` 標頭。 請一律使用 HTTPS 來確保用戶端與伺服器之間有安全的端對端連接。 許多 web 伺服器會記錄每個要求的 URL，包括查詢字串。 記錄 Url 可能會記錄存取權杖。 ASP.NET Core 預設會記錄每個要求的 URL，其中包含查詢字串。 例如：
+使用 Websocket 或 Server-Sent 事件時，瀏覽器用戶端會在查詢字串中傳送存取權杖。 透過查詢字串接收存取權杖通常是安全的，因為使用標準 `Authorization` 標頭。 請一律使用 HTTPS 來確保用戶端與伺服器之間有安全的端對端連接。 許多 web 伺服器會記錄每個要求的 URL，包括查詢字串。 記錄 Url 可能會記錄存取權杖。 ASP.NET Core 預設會記錄每個要求的 URL，其中包含查詢字串。 例如：
 
 ```
 info: Microsoft.AspNetCore.Hosting.Internal.WebHost[1]

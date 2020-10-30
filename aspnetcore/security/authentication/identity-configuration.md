@@ -6,6 +6,7 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 02/11/2019
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -17,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: security/authentication/identity-configuration
-ms.openlocfilehash: ae4a2eb9d95339651c3810a9f8489d703d73a3fe
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: b11a2d584b7275a9065c9915021ac945823531f8
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88632677"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93051989"
 ---
 # <a name="configure-no-locaspnet-core-identity"></a>設定 ASP.NET Core Identity
 
@@ -130,7 +131,7 @@ ASP.NET Core Identity 使用密碼原則、鎖定和設定等設定的預設值 
 
 ### <a name="no-loccookie-settings"></a>Cookie 設定
 
-在中設定應用 cookie 程式 `Startup.ConfigureServices` 。 [ConfigureApplication Cookie ](/dotnet/api/microsoft.extensions.dependencyinjection.identityservicecollectionextensions.configureapplicationcookie#Microsoft_Extensions_DependencyInjection_IdentityServiceCollectionExtensions_ConfigureApplicationCookie_Microsoft_Extensions_DependencyInjection_IServiceCollection_System_Action_Microsoft_AspNetCore_Authentication_Cookies_CookieAuthenticationOptions__)必須在呼叫或**之後**呼叫 `AddIdentity` `AddDefaultIdentity` 。
+在中設定應用 cookie 程式 `Startup.ConfigureServices` 。 [ConfigureApplication Cookie](/dotnet/api/microsoft.extensions.dependencyinjection.identityservicecollectionextensions.configureapplicationcookie#Microsoft_Extensions_DependencyInjection_IdentityServiceCollectionExtensions_ConfigureApplicationCookie_Microsoft_Extensions_DependencyInjection_IServiceCollection_System_Action_Microsoft_AspNetCore_Authentication_Cookies_CookieAuthenticationOptions__)必須在呼叫或 **之後** 呼叫 `AddIdentity` `AddDefaultIdentity` 。
 
 [!code-csharp[](identity-configuration/sample/Startup.cs?name=snippet_cookie)]
 
@@ -142,7 +143,7 @@ ASP.NET Core Identity 使用密碼原則、鎖定和設定等設定的預設值 
 
 | 選項 | 描述 |
 | ------ | ----------- |
-| <xref:Microsoft.AspNetCore.Identity.PasswordHasherOptions.CompatibilityMode> | 雜湊新密碼時使用的相容性模式。 預設為 <xref:Microsoft.AspNetCore.Identity.PasswordHasherCompatibilityMode.IdentityV3>。 雜湊密碼的第一個位元組（稱為 *格式標記*）指定用來雜湊密碼的雜湊演算法版本。 針對雜湊驗證密碼時，方法會根據 <xref:Microsoft.AspNetCore.Identity.PasswordHasher`1.VerifyHashedPassword*> 第一個位元組來選取正確的演算法。 無論用來雜湊密碼的演算法版本為何，用戶端都可以進行驗證。 設定相容性模式會影響 *新密碼*的雜湊。 |
+| <xref:Microsoft.AspNetCore.Identity.PasswordHasherOptions.CompatibilityMode> | 雜湊新密碼時使用的相容性模式。 預設值為 <xref:Microsoft.AspNetCore.Identity.PasswordHasherCompatibilityMode.IdentityV3>。 雜湊密碼的第一個位元組（稱為 *格式標記* ）指定用來雜湊密碼的雜湊演算法版本。 針對雜湊驗證密碼時，方法會根據 <xref:Microsoft.AspNetCore.Identity.PasswordHasher`1.VerifyHashedPassword*> 第一個位元組來選取正確的演算法。 無論用來雜湊密碼的演算法版本為何，用戶端都可以進行驗證。 設定相容性模式會影響 *新密碼* 的雜湊。 |
 | <xref:Microsoft.AspNetCore.Identity.PasswordHasherOptions.IterationCount> | 使用 PBKDF2 來雜湊密碼時，所使用的反覆運算次數。 只有當設定為時，才會使用這個值 <xref:Microsoft.AspNetCore.Identity.PasswordHasherOptions.CompatibilityMode> <xref:Microsoft.AspNetCore.Identity.PasswordHasherCompatibilityMode.IdentityV3> 。 值必須是正整數，且預設值為 `10000` 。 |
 
 在下列範例中， <xref:Microsoft.AspNetCore.Identity.PasswordHasherOptions.IterationCount> 會 `12000` 在中設定為 `Startup.ConfigureServices` ：

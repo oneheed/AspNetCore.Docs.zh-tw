@@ -7,6 +7,7 @@ ms.author: bradyg
 ms.custom: mvc
 ms.date: 05/17/2020
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -18,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: signalr/groups
-ms.openlocfilehash: 0dfdf3a5eccd7462b675554e02fe4d2e166e8b92
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: a86408eaae8d3df32faef79453d9db0cdbd64a78
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88627555"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93050949"
 ---
 # <a name="manage-users-and-groups-in-no-locsignalr"></a>管理中的使用者和群組 SignalR
 
@@ -62,5 +63,5 @@ SignalR 允許將訊息傳送至與特定使用者相關聯的所有連接，以
 ## <a name="related-resources"></a>相關資源
 
 * [開始使用](xref:tutorials/signalr)
-* [集線器](xref:signalr/hubs)
+* [中樞](xref:signalr/hubs)
 * [發佈至 Azure](xref:signalr/publish-to-azure-web-app)

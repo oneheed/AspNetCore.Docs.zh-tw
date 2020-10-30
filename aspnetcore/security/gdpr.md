@@ -6,6 +6,7 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 07/11/2019
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -17,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: security/gdpr
-ms.openlocfilehash: 35a12cb8d2a9617e51d886e798cff5ee60b0a8ad
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: ec65a2c8362c15716bebd6b22f5639785ba74c98
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88634705"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93051001"
 ---
 # <a name="eu-general-data-protection-regulation-gdpr-support-in-aspnet-core"></a>EU 一般資料保護規定 (GDPR) 支援 ASP.NET Core
 
@@ -46,7 +47,7 @@ ASP.NET Core 提供 Api 和範本，以協助符合某些 [EU 一般資料保護
 
   [!code-cshtml[Main](gdpr/sample/RP3.0/Pages/Shared/_Layout.cshtml?name=snippet&highlight=4)]
 
-* 將* \_ Cookie ConsentPartial*檔加入至專案：
+* 將 *\_ Cookie ConsentPartial* 檔加入至專案：
 
   [!code-cshtml[Main](gdpr/sample/RP3.0/Pages/Shared/_CookieConsentPartial.cshtml)]
 
@@ -71,8 +72,8 @@ ASP.NET Core 提供 Api 和範本，以協助符合某些 [EU 一般資料保護
 Razor 以專案範本建立的頁面和 MVC 專案包含下列 GDPR 支援：
 
 * [ Cookie PolicyOptions](/dotnet/api/microsoft.aspnetcore.builder.cookiepolicyoptions)和[使用 Cookie 原則](/dotnet/api/microsoft.aspnetcore.builder.cookiepolicyappbuilderextensions.usecookiepolicy)是在類別中設定 `Startup` 。
-* * \_ Cookie ConsentPartial* [部分視圖](xref:mvc/views/tag-helpers/builtin-th/partial-tag-helper)。 此檔案中包含 [ **接受** ] 按鈕。 當使用者按一下 [ **接受** ] 按鈕時，會提供同意存放區 cookie 。
-* [ *頁面/隱私權* ] 頁面或 [ *視圖/首頁/隱私權* ] 會提供頁面來詳細說明您的網站隱私權原則。 * \_ Cookie ConsentPartial. cshtml*檔案會產生隱私權頁面的連結。
+* *\_ Cookie ConsentPartial* [部分視圖](xref:mvc/views/tag-helpers/builtin-th/partial-tag-helper)。 此檔案中包含 [ **接受** ] 按鈕。 當使用者按一下 [ **接受** ] 按鈕時，會提供同意存放區 cookie 。
+* [ *頁面/隱私權* ] 頁面或 [ *視圖/首頁/隱私權* ] 會提供頁面來詳細說明您的網站隱私權原則。 *\_ Cookie ConsentPartial. cshtml* 檔案會產生隱私權頁面的連結。
 * 針對使用個別使用者帳戶所建立的應用程式，[管理] 頁面會提供下載和刪除 [個人使用者資料](#pd)的連結。
 
 ### <a name="no-loccookiepolicyoptions-and-useno-loccookiepolicy"></a>CookiePolicyOptions 和使用 Cookie 原則
@@ -87,13 +88,13 @@ Razor 以專案範本建立的頁面和 MVC 專案包含下列 GDPR 支援：
 
 ### <a name="_no-loccookieconsentpartialcshtml-partial-view"></a>\_CookieConsentPartial. cshtml 部分視圖
 
-* \_ Cookie ConsentPartial*的部分觀點：
+*\_ Cookie ConsentPartial* 的部分觀點：
 
 [!code-cshtml[](gdpr/sample/RP2.2/Pages/Shared/_CookieConsentPartial.cshtml)]
 
 部分：
 
-* 取得使用者追蹤的狀態。 如果應用程式設定為要求同意，則使用者必須先同意才能 cookie 追蹤。 如果需要同意，則 cookie 會在配置* \_ cshtml*檔案所建立的導覽列頂端修正同意面板。
+* 取得使用者追蹤的狀態。 如果應用程式設定為要求同意，則使用者必須先同意才能 cookie 追蹤。 如果需要同意，則 cookie 會在配置 *\_ cshtml* 檔案所建立的導覽列頂端修正同意面板。
 * 提供 HTML `<p>` 元素，以摘要您的隱私權和 cookie 使用原則。
 * 提供隱私權頁面的連結，或可讓您詳細瞭解網站隱私權原則的位置。
 
@@ -121,14 +122,14 @@ Razor 以專案範本建立的頁面和 MVC 專案包含下列 GDPR 支援：
 
 使用個別使用者帳戶建立的 ASP.NET Core 應用程式包含下載及刪除個人資料的程式碼。
 
-選取使用者名稱，然後選取 [ **個人資料**]：
+選取使用者名稱，然後選取 [ **個人資料** ]：
 
 ![管理個人資料頁面](gdpr/_static/pd.png)
 
 注意：
 
 * 若要產生程式 `Account/Manage` 代碼，請參閱[Scaffold Identity ](xref:security/authentication/scaffold-identity)。
-* **刪除**和**下載**連結僅適用于預設的身分識別資料。 您必須擴充建立自訂使用者資料的應用程式，才能刪除/下載自訂的使用者資料。 如需詳細資訊，請參閱[新增、下載及刪除自訂使用者 Identity 資料](xref:security/authentication/add-user-data)。
+* **刪除** 和 **下載** 連結僅適用于預設的身分識別資料。 您必須擴充建立自訂使用者資料的應用程式，才能刪除/下載自訂的使用者資料。 如需詳細資訊，請參閱[新增、下載及刪除自訂使用者 Identity 資料](xref:security/authentication/add-user-data)。
 * Identity `AspNetUserTokens` 當使用者因為[外鍵](https://github.com/aspnet/Identity/blob/release/2.1/src/EF/IdentityUserContext.cs#L152)而透過串聯刪除行為刪除時，會刪除儲存在資料庫資料表中的使用者儲存的權杖。
 * 在接受原則之前，無法使用[外部提供者驗證](xref:security/authentication/social/index)，例如 Facebook 和 Google cookie 。
 

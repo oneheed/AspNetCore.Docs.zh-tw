@@ -6,6 +6,7 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 12/05/2019
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -17,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: aspnetcore-3.0
-ms.openlocfilehash: a1cbd8f434214ce488fc3febe63d8aaf54db71a3
-ms.sourcegitcommit: 24106b7ffffc9fff410a679863e28aeb2bbe5b7e
+ms.openlocfilehash: 235daac5c08248ca2052de6b44e66a8162ce23ad
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 09/17/2020
-ms.locfileid: "90722783"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93051235"
 ---
 # <a name="whats-new-in-aspnet-core-30"></a>ASP.NET Core 3.0 的新功能
 
@@ -218,7 +219,7 @@ public class ChatHub : Hub
 
 建立 `DomainRestricted` 原則可能包括：
 
-* 在 *Startup.cs*中，加入新的原則。
+* 在 *Startup.cs* 中，加入新的原則。
 * 將自訂 `DomainRestrictedRequirement` 需求提供為參數。
 * `DomainRestricted`向授權中介軟體註冊。
 
@@ -512,7 +513,7 @@ app.UseEndpoints(endpoints =>
 
 此案例已在 ASP.NET Core 3.0 中修正。 當環境變數設定為時，主機會啟用 [轉送的標頭中介軟體](xref:host-and-deploy/proxy-load-balancer#forwarded-headers-middleware-options) `ASPNETCORE_FORWARDEDHEADERS_ENABLED` `true` 。 `ASPNETCORE_FORWARDEDHEADERS_ENABLED``true`在容器映射中設定為。
 
-## <a name="performance-improvements"></a>效能改善
+## <a name="performance-improvements"></a>效能改進
 
 ASP.NET Core 3.0 包含許多改進，可減少記憶體使用量並提升輸送量：
 

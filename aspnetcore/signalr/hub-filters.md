@@ -7,6 +7,7 @@ ms.author: brecon
 ms.custom: mvc
 ms.date: 05/22/2020
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -18,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: signalr/hub-filters
-ms.openlocfilehash: c3c44efcb3702f3edb51c821d042c2e7eb1748cd
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: 5a4cb5122080b72875ac11cf2e682162d017d7b9
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88626662"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93052717"
 ---
 # <a name="use-hub-filters-in-aspnet-core-no-locsignalr"></a>使用 ASP.NET Core 中的中樞篩選 SignalR
 
@@ -142,7 +143,7 @@ public class CustomFilter : IHubFilter
     }
     ```
 
-1. 定義中樞篩選以檢查屬性，並以下列內容取代中樞方法引數中的禁用片語 `***` ：
+1. 定義中樞篩選以檢查屬性，並以下列內容取代中樞方法引數中的禁用片語 `**_` ：
 
     ```csharp
     public class LanguageFilter : IHubFilter
@@ -161,7 +162,7 @@ public class CustomFilter : IHubFilter
             {
                 foreach (var bannedPhrase in bannedPhrases)
                 {
-                    str = str.Replace(bannedPhrase, "***");
+                    str = str.Replace(bannedPhrase, "_**");
                 }
 
                 arguments = invocationContext.HubMethodArguments.ToArray();

@@ -7,6 +7,7 @@ ms.author: bradyg
 ms.custom: mvc
 ms.date: 01/17/2020
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -18,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: signalr/scale
-ms.openlocfilehash: 2bfe05748e6740043be7f1ccc6dbe22ad4b0ca44
-ms.sourcegitcommit: 24106b7ffffc9fff410a679863e28aeb2bbe5b7e
+ms.openlocfilehash: d3e9cd23a55702bcf9b002dcce556428683afeca
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 09/17/2020
-ms.locfileid: "90722562"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93052769"
 ---
 # <a name="aspnet-core-no-locsignalr-hosting-and-scaling"></a>ASP.NET Core SignalR 裝載和調整
 
@@ -45,7 +46,7 @@ SignalR 要求特定連接的所有 HTTP 要求都必須由相同的伺服器進
 
 ## <a name="tcp-connection-resources"></a>TCP 連接資源
 
-Web 服務器可支援的並行 TCP 連線數目有限。 標準 HTTP 用戶端會使用 *暫時* 連接。 當用戶端閒置並在稍後重新開啟時，可以關閉這些連接。 另一方面， SignalR 連接是 *永久性*的。 SignalR 即使用戶端閒置，連線仍會保持開啟。 在提供許多用戶端的高流量應用程式中，這些持續連線可能會導致伺服器達到其最大連線數目。
+Web 服務器可支援的並行 TCP 連線數目有限。 標準 HTTP 用戶端會使用 *暫時* 連接。 當用戶端閒置並在稍後重新開啟時，可以關閉這些連接。 另一方面， SignalR 連接是 *永久性* 的。 SignalR 即使用戶端閒置，連線仍會保持開啟。 在提供許多用戶端的高流量應用程式中，這些持續連線可能會導致伺服器達到其最大連線數目。
 
 持續性連接也會耗用一些額外的記憶體，以追蹤每個連接。
 
@@ -99,7 +100,7 @@ Azure SignalR 服務是 proxy，而不是背板。 每次用戶端啟動伺服�
 
 稍早所述的 Azure SignalR 服務優點是 Redis 背板的缺點：
 
-* 除非下列**兩項**都成立，否則需要有粘滯話（也稱為[用戶端親和性](/iis/extensions/configuring-application-request-routing-arr/http-load-balancing-using-application-request-routing#step-3---configure-client-affinity)）：
+* 除非下列 **兩項** 都成立，否則需要有粘滯話（也稱為 [用戶端親和性](/iis/extensions/configuring-application-request-routing-arr/http-load-balancing-using-application-request-routing#step-3---configure-client-affinity)）：
   * 所有用戶端都設定為 **僅** 使用 websocket。
   * 用戶端設定中已啟用 [SkipNegotiation 設定](xref:signalr/configuration#configure-additional-options) 。 
    一旦在伺服器上起始連接，連接就必須保持在該伺服器上。
@@ -111,7 +112,7 @@ Azure SignalR 服務是 proxy，而不是背板。 每次用戶端啟動伺服�
 Windows 10 和 Windows 8. x 是用戶端作業系統。 用戶端作業系統上的 IIS 有10個並行連接的限制。 SignalR的連接包括：
 
 * 暫時性且經常重新建立。
-* 不再使用時，**不會**立即處置。
+* 不再使用時， **不會** 立即處置。
 
 上述條件讓它有可能達到用戶端作業系統上的10個連接限制。 當用戶端作業系統用於開發時，建議您：
 
@@ -120,14 +121,85 @@ Windows 10 和 Windows 8. x 是用戶端作業系統。 用戶端作業系統上
 
 ## <a name="linux-with-nginx"></a>使用 Nginx 的 Linux
 
-針對 websocket 將 proxy 的 `Connection` 和 `Upgrade` 標頭設定為下列各項 SignalR ：
+以下包含啟用 Websocket、ServerSentEvents 和 LongPolling 的最低必要設定 SignalR ：
 
 ```nginx
-proxy_set_header Upgrade $http_upgrade;
-proxy_set_header Connection $connection_upgrade;
+http {
+  map $http_connection $connection_upgrade {
+    "~*Upgrade" $http_connection;
+    default keep-alive;
+}
+
+  server {
+    listen 80;
+    server_name example.com *.example.com;
+
+    # Configure the SignalR Endpoint
+    location /hubroute {
+      # App server url
+      proxy_pass http://localhost:5000;
+
+      # Configuration for WebSockets
+      proxy_set_header Upgrade $http_upgrade;
+      proxy_set_header Connection $connection_upgrade;
+      proxy_cache off;
+
+      # Configuration for ServerSentEvents
+      proxy_buffering off;
+
+      # Configuration for LongPolling or if your KeepAliveInterval is longer than 60 seconds
+      proxy_read_timeout 100s;
+
+      proxy_set_header Host $host;
+      proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+      proxy_set_header X-Forwarded-Proto $scheme;
+    }
+  }
+}
 ```
 
-如需詳細資訊，請參閱 [NGINX 作為 WebSocket Proxy](https://www.nginx.com/blog/websocket-nginx/)。
+使用多個後端伺服器時，必須新增「粘滯話」以防止連線 SignalR 在連接時切換伺服器。 有多種方式可以在 Nginx 中新增多個會話。 下列兩種方法會根據您可用的內容顯示在下方。
+
+除了先前的設定之外，還會新增下列各項。 在下列範例中， `backend` 是伺服器群組的名稱。
+
+使用 [Nginx 開放原始](https://nginx.org/en/)碼時， `ip_hash` 可根據用戶端的 IP 位址，使用將連接路由至伺服器：
+
+```nginx
+http {
+  upstream backend {
+    # App server 1
+    server http://localhost:5000;
+    # App server 2
+    server http://localhost:5002;
+
+    ip_hash;
+  }
+}
+```
+
+使用 [Nginx Plus](https://www.nginx.com/products/nginx)，請使用將 `sticky` 新增 cookie 至要求，並將使用者的要求釘選到伺服器：
+
+```nginx
+http {
+  upstream backend {
+    # App server 1
+    server http://localhost:5000;
+    # App server 2
+    server http://localhost:5002;
+
+    sticky cookie srv_id expires=max domain=.example.com path=/ httponly;
+  }
+}
+```
+
+最後，將 `proxy_pass http://localhost:5000` 區段中的變更 `server` 為 `proxy_pass http://backend` 。
+
+如需有關 Websocket over Nginx 的詳細資訊，請參閱 [Nginx 作為 Websocket Proxy](https://www.nginx.com/blog/websocket-nginx)。
+
+如需負載平衡和粘滯話的詳細資訊，請參閱 [NGINX 負載平衡](https://docs.nginx.com/nginx/admin-guide/load-balancer/http-load-balancer/)。
+
+如需有關 Nginx ASP.NET Core 的詳細資訊，請參閱下列文章：
+* <xref:host-and-deploy/linux-nginx>
 
 ## <a name="third-party-no-locsignalr-backplane-providers"></a>協力廠商 SignalR 背板提供者
 

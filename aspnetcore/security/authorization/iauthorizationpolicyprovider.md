@@ -6,6 +6,7 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 11/14/2019
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -17,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: security/authorization/iauthorizationpolicyprovider
-ms.openlocfilehash: 2d231440847270b3b2fe47fbe29359f494900292
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: 0f6f628cee0623c21a2a93aa11470005f8c78c58
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88635199"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93053133"
 ---
 # <a name="custom-authorization-policy-providers-using-iauthorizationpolicyprovider-in-aspnet-core"></a>在 ASP.NET Core 中使用 IAuthorizationPolicyProvider 的自訂授權原則提供者 
 
@@ -36,7 +37,7 @@ ms.locfileid: "88635199"
 * 使用適用于不同房間號碼或年齡的大量原則 (（例如) ），因此使用呼叫新增每個個別授權原則並不合理。 `AuthorizationOptions.AddPolicy`
 * 根據外部資料源中的資訊在執行時間建立原則 (例如資料庫) ，或透過其他機制動態判斷授權需求。
 
-從[AspNetCore GitHub 存放庫](https://github.com/dotnet/AspNetCore)[查看或下載範例程式碼](https://github.com/dotnet/aspnetcore/tree/v3.1.3/src/Security/samples/CustomPolicyProvider)。 下載 dotnet/AspNetCore 存放庫壓縮檔案。 解壓縮檔案。 流覽至 *src/Security/samples/CustomPolicyProvider* 專案資料夾。
+從[AspNetCore GitHub 存放庫](https://github.com/dotnet/AspNetCore)[查看或下載範例程式碼](https://github.com/dotnet/aspnetcore/tree/v3.1.3/src/Security/samples/CustomPolicyProvider)。 下載 dotnet/AspNetCore 存放庫壓縮檔案。 將檔案解壓縮。 流覽至 *src/Security/samples/CustomPolicyProvider* 專案資料夾。
 
 ## <a name="customize-policy-retrieval"></a>自訂原則抓取
 
@@ -187,9 +188,9 @@ public Task<AuthorizationPolicy> GetFallbackPolicyAsync() =>
 
 ## <a name="use-a-custom-iauthorizationpolicyprovider"></a>使用自訂 IAuthorizationPolicyProvider
 
-若要從使用自訂原則 `IAuthorizationPolicyProvider` ，您 ***必須***：
+若要從使用自訂原則 `IAuthorizationPolicyProvider` ，您 **必須** *：
 
-* `AuthorizationHandler`使用以[原則為基礎的授權](xref:security/authorization/policies#authorization-handlers)) 中所述的相依性插入來註冊適當的類型 (，如同所有以原則為基礎的授權案例。
+_ 向相依性插入註冊適當的 `AuthorizationHandler` 類型， (以原則為基礎的 [授權](xref:security/authorization/policies#authorization-handlers)) 中所述，如同所有以原則為基礎的授權案例。
 * `IAuthorizationPolicyProvider`在中，于應用程式的相依性插入服務集合中註冊自訂類型 `Startup.ConfigureServices` ，以取代預設的原則提供者。
 
   ```csharp

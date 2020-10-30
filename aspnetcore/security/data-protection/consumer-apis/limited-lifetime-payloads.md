@@ -5,65 +5,66 @@ description: 瞭解如何使用 ASP.NET Core 資料保護 Api 來限制受保護
 ms.author: riande
 ms.date: 10/14/2016
 no-loc:
-- ASP.NET Core Identity
-- cookie
-- Cookie
-- Blazor
-- Blazor Server
-- Blazor WebAssembly
-- Identity
-- Let's Encrypt
-- Razor
-- SignalR
+- ':::no-loc(appsettings.json):::'
+- ':::no-loc(ASP.NET Core Identity):::'
+- ':::no-loc(cookie):::'
+- ':::no-loc(Cookie):::'
+- ':::no-loc(Blazor):::'
+- ':::no-loc(Blazor Server):::'
+- ':::no-loc(Blazor WebAssembly):::'
+- ':::no-loc(Identity):::'
+- ":::no-loc(Let's Encrypt):::"
+- ':::no-loc(Razor):::'
+- ':::no-loc(SignalR):::'
 uid: security/data-protection/consumer-apis/limited-lifetime-payloads
-ms.openlocfilehash: f76aca460c293b5f814ba10ee6c8ac68b3d147bb
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: 74417d076399066a49271c27ff128d9de6c10f94
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88634419"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93060790"
 ---
-# <a name="limit-the-lifetime-of-protected-payloads-in-aspnet-core"></a><span data-ttu-id="b0523-103">限制 ASP.NET Core 中受保護承載的存留期</span><span class="sxs-lookup"><span data-stu-id="b0523-103">Limit the lifetime of protected payloads in ASP.NET Core</span></span>
+# <a name="limit-the-lifetime-of-protected-payloads-in-aspnet-core"></a><span data-ttu-id="4687b-103">限制 ASP.NET Core 中受保護承載的存留期</span><span class="sxs-lookup"><span data-stu-id="4687b-103">Limit the lifetime of protected payloads in ASP.NET Core</span></span>
 
-<span data-ttu-id="b0523-104">在某些情況下，應用程式開發人員想要建立在一段時間後過期的受保護承載。</span><span class="sxs-lookup"><span data-stu-id="b0523-104">There are scenarios where the application developer wants to create a protected payload that expires after a set period of time.</span></span> <span data-ttu-id="b0523-105">比方說，受保護的承載可能代表密碼重設權杖，此權杖的有效期應只為一小時。</span><span class="sxs-lookup"><span data-stu-id="b0523-105">For instance, the protected payload might represent a password reset token that should only be valid for one hour.</span></span> <span data-ttu-id="b0523-106">開發人員當然可以建立自己的裝載格式，其中包含內嵌的到期日，而且資深開發人員可能會想要這麼做，但對於管理這些過期的大多數開發人員來說，可能會變得很繁瑣。</span><span class="sxs-lookup"><span data-stu-id="b0523-106">It's certainly possible for the developer to create their own payload format that contains an embedded expiration date, and advanced developers may wish to do this anyway, but for the majority of developers managing these expirations can grow tedious.</span></span>
+<span data-ttu-id="4687b-104">在某些情況下，應用程式開發人員想要建立在一段時間後過期的受保護承載。</span><span class="sxs-lookup"><span data-stu-id="4687b-104">There are scenarios where the application developer wants to create a protected payload that expires after a set period of time.</span></span> <span data-ttu-id="4687b-105">比方說，受保護的承載可能代表密碼重設權杖，此權杖的有效期應只為一小時。</span><span class="sxs-lookup"><span data-stu-id="4687b-105">For instance, the protected payload might represent a password reset token that should only be valid for one hour.</span></span> <span data-ttu-id="4687b-106">開發人員當然可以建立自己的裝載格式，其中包含內嵌的到期日，而且資深開發人員可能會想要這麼做，但對於管理這些過期的大多數開發人員來說，可能會變得很繁瑣。</span><span class="sxs-lookup"><span data-stu-id="4687b-106">It's certainly possible for the developer to create their own payload format that contains an embedded expiration date, and advanced developers may wish to do this anyway, but for the majority of developers managing these expirations can grow tedious.</span></span>
 
-<span data-ttu-id="b0523-107">為了讓我們的開發人員更容易使用， [AspNetCore. DataProtection](https://www.nuget.org/packages/Microsoft.AspNetCore.DataProtection.Extensions/) 包含公用程式 api，可用於建立可在一段時間後自動到期的裝載。</span><span class="sxs-lookup"><span data-stu-id="b0523-107">To make this easier for our developer audience, the package [Microsoft.AspNetCore.DataProtection.Extensions](https://www.nuget.org/packages/Microsoft.AspNetCore.DataProtection.Extensions/) contains utility APIs for creating payloads that automatically expire after a set period of time.</span></span> <span data-ttu-id="b0523-108">這些 Api 會停止回應 `ITimeLimitedDataProtector` 類型。</span><span class="sxs-lookup"><span data-stu-id="b0523-108">These APIs hang off of the `ITimeLimitedDataProtector` type.</span></span>
+<span data-ttu-id="4687b-107">為了讓我們的開發人員更容易使用， [AspNetCore. DataProtection](https://www.nuget.org/packages/Microsoft.AspNetCore.DataProtection.Extensions/) 包含公用程式 api，可用於建立可在一段時間後自動到期的裝載。</span><span class="sxs-lookup"><span data-stu-id="4687b-107">To make this easier for our developer audience, the package [Microsoft.AspNetCore.DataProtection.Extensions](https://www.nuget.org/packages/Microsoft.AspNetCore.DataProtection.Extensions/) contains utility APIs for creating payloads that automatically expire after a set period of time.</span></span> <span data-ttu-id="4687b-108">這些 Api 會停止回應 `ITimeLimitedDataProtector` 類型。</span><span class="sxs-lookup"><span data-stu-id="4687b-108">These APIs hang off of the `ITimeLimitedDataProtector` type.</span></span>
 
-## <a name="api-usage"></a><span data-ttu-id="b0523-109">API 使用方式</span><span class="sxs-lookup"><span data-stu-id="b0523-109">API usage</span></span>
+## <a name="api-usage"></a><span data-ttu-id="4687b-109">API 使用方式</span><span class="sxs-lookup"><span data-stu-id="4687b-109">API usage</span></span>
 
-<span data-ttu-id="b0523-110">`ITimeLimitedDataProtector`介面是用來保護和取消保護限時/自我過期承載的核心介面。</span><span class="sxs-lookup"><span data-stu-id="b0523-110">The `ITimeLimitedDataProtector` interface is the core interface for protecting and unprotecting time-limited / self-expiring payloads.</span></span> <span data-ttu-id="b0523-111">若要建立的實例 `ITimeLimitedDataProtector` ，您首先需要以特定用途所建立的一般 [>idataprotector](xref:security/data-protection/consumer-apis/overview) 實例。</span><span class="sxs-lookup"><span data-stu-id="b0523-111">To create an instance of an `ITimeLimitedDataProtector`, you'll first need an instance of a regular [IDataProtector](xref:security/data-protection/consumer-apis/overview) constructed with a specific purpose.</span></span> <span data-ttu-id="b0523-112">`IDataProtector`實例可供使用之後，請呼叫 `IDataProtector.ToTimeLimitedDataProtector` 擴充方法以取回具有內建到期功能的保護裝置。</span><span class="sxs-lookup"><span data-stu-id="b0523-112">Once the `IDataProtector` instance is available, call the `IDataProtector.ToTimeLimitedDataProtector` extension method to get back a protector with built-in expiration capabilities.</span></span>
+<span data-ttu-id="4687b-110">`ITimeLimitedDataProtector`介面是用來保護和取消保護限時/自我過期承載的核心介面。</span><span class="sxs-lookup"><span data-stu-id="4687b-110">The `ITimeLimitedDataProtector` interface is the core interface for protecting and unprotecting time-limited / self-expiring payloads.</span></span> <span data-ttu-id="4687b-111">若要建立的實例 `ITimeLimitedDataProtector` ，您首先需要以特定用途所建立的一般 [>idataprotector](xref:security/data-protection/consumer-apis/overview) 實例。</span><span class="sxs-lookup"><span data-stu-id="4687b-111">To create an instance of an `ITimeLimitedDataProtector`, you'll first need an instance of a regular [IDataProtector](xref:security/data-protection/consumer-apis/overview) constructed with a specific purpose.</span></span> <span data-ttu-id="4687b-112">`IDataProtector`實例可供使用之後，請呼叫 `IDataProtector.ToTimeLimitedDataProtector` 擴充方法以取回具有內建到期功能的保護裝置。</span><span class="sxs-lookup"><span data-stu-id="4687b-112">Once the `IDataProtector` instance is available, call the `IDataProtector.ToTimeLimitedDataProtector` extension method to get back a protector with built-in expiration capabilities.</span></span>
 
-<span data-ttu-id="b0523-113">`ITimeLimitedDataProtector` 公開下列 API 介面和擴充方法：</span><span class="sxs-lookup"><span data-stu-id="b0523-113">`ITimeLimitedDataProtector` exposes the following API surface and extension methods:</span></span>
+<span data-ttu-id="4687b-113">`ITimeLimitedDataProtector` 公開下列 API 介面和擴充方法：</span><span class="sxs-lookup"><span data-stu-id="4687b-113">`ITimeLimitedDataProtector` exposes the following API surface and extension methods:</span></span>
 
-* <span data-ttu-id="b0523-114">CreateProtector (字串用途) ： ITimeLimitedDataProtector-此 API 類似于現有的 `IDataProtectionProvider.CreateProtector` ，可用來從根時間限制的保護裝置建立 [目的鏈](xref:security/data-protection/consumer-apis/purpose-strings) 。</span><span class="sxs-lookup"><span data-stu-id="b0523-114">CreateProtector(string purpose) : ITimeLimitedDataProtector - This API is similar to the existing `IDataProtectionProvider.CreateProtector` in that it can be used to create [purpose chains](xref:security/data-protection/consumer-apis/purpose-strings) from a root time-limited protector.</span></span>
+* <span data-ttu-id="4687b-114">CreateProtector (字串用途) ： ITimeLimitedDataProtector-此 API 類似于現有的 `IDataProtectionProvider.CreateProtector` ，可用來從根時間限制的保護裝置建立 [目的鏈](xref:security/data-protection/consumer-apis/purpose-strings) 。</span><span class="sxs-lookup"><span data-stu-id="4687b-114">CreateProtector(string purpose) : ITimeLimitedDataProtector - This API is similar to the existing `IDataProtectionProvider.CreateProtector` in that it can be used to create [purpose chains](xref:security/data-protection/consumer-apis/purpose-strings) from a root time-limited protector.</span></span>
 
-* <span data-ttu-id="b0523-115">保護 (byte [] 純文字，DateTimeOffset 到期) ： byte []</span><span class="sxs-lookup"><span data-stu-id="b0523-115">Protect(byte[] plaintext, DateTimeOffset expiration) : byte[]</span></span>
+* <span data-ttu-id="4687b-115">保護 (byte [] 純文字，DateTimeOffset 到期) ： byte []</span><span class="sxs-lookup"><span data-stu-id="4687b-115">Protect(byte[] plaintext, DateTimeOffset expiration) : byte[]</span></span>
 
-* <span data-ttu-id="b0523-116">保護 (byte [] 純文字，TimeSpan 存留期) ： byte []</span><span class="sxs-lookup"><span data-stu-id="b0523-116">Protect(byte[] plaintext, TimeSpan lifetime) : byte[]</span></span>
+* <span data-ttu-id="4687b-116">保護 (byte [] 純文字，TimeSpan 存留期) ： byte []</span><span class="sxs-lookup"><span data-stu-id="4687b-116">Protect(byte[] plaintext, TimeSpan lifetime) : byte[]</span></span>
 
-* <span data-ttu-id="b0523-117">保護 (byte [] 純文字) ： byte []</span><span class="sxs-lookup"><span data-stu-id="b0523-117">Protect(byte[] plaintext) : byte[]</span></span>
+* <span data-ttu-id="4687b-117">保護 (byte [] 純文字) ： byte []</span><span class="sxs-lookup"><span data-stu-id="4687b-117">Protect(byte[] plaintext) : byte[]</span></span>
 
-* <span data-ttu-id="b0523-118">保護 (字串純文字，DateTimeOffset 到期) ：字串</span><span class="sxs-lookup"><span data-stu-id="b0523-118">Protect(string plaintext, DateTimeOffset expiration) : string</span></span>
+* <span data-ttu-id="4687b-118">保護 (字串純文字，DateTimeOffset 到期) ：字串</span><span class="sxs-lookup"><span data-stu-id="4687b-118">Protect(string plaintext, DateTimeOffset expiration) : string</span></span>
 
-* <span data-ttu-id="b0523-119">保護 (字串純文字、TimeSpan 存留期) ：字串</span><span class="sxs-lookup"><span data-stu-id="b0523-119">Protect(string plaintext, TimeSpan lifetime) : string</span></span>
+* <span data-ttu-id="4687b-119">保護 (字串純文字、TimeSpan 存留期) ：字串</span><span class="sxs-lookup"><span data-stu-id="4687b-119">Protect(string plaintext, TimeSpan lifetime) : string</span></span>
 
-* <span data-ttu-id="b0523-120">保護 (字串純文字) ：字串</span><span class="sxs-lookup"><span data-stu-id="b0523-120">Protect(string plaintext) : string</span></span>
+* <span data-ttu-id="4687b-120">保護 (字串純文字) ：字串</span><span class="sxs-lookup"><span data-stu-id="4687b-120">Protect(string plaintext) : string</span></span>
 
-<span data-ttu-id="b0523-121">除了 `Protect` 只接受純文字的核心方法之外，還有新的多載，可讓您指定承載的到期日。</span><span class="sxs-lookup"><span data-stu-id="b0523-121">In addition to the core `Protect` methods which take only the plaintext, there are new overloads which allow specifying the payload's expiration date.</span></span> <span data-ttu-id="b0523-122">您可以透過 `DateTimeOffset`) 或從目前系統時間 (的相對時間) ，將到期日指定為絕對日期 (`TimeSpan` 。</span><span class="sxs-lookup"><span data-stu-id="b0523-122">The expiration date can be specified as an absolute date (via a `DateTimeOffset`) or as a relative time (from the current system time, via a `TimeSpan`).</span></span> <span data-ttu-id="b0523-123">如果呼叫未採用到期時間的多載，則會假設承載永不過期。</span><span class="sxs-lookup"><span data-stu-id="b0523-123">If an overload which doesn't take an expiration is called, the payload is assumed never to expire.</span></span>
+<span data-ttu-id="4687b-121">除了 `Protect` 只接受純文字的核心方法之外，還有新的多載，可讓您指定承載的到期日。</span><span class="sxs-lookup"><span data-stu-id="4687b-121">In addition to the core `Protect` methods which take only the plaintext, there are new overloads which allow specifying the payload's expiration date.</span></span> <span data-ttu-id="4687b-122">您可以透過 `DateTimeOffset`) 或從目前系統時間 (的相對時間) ，將到期日指定為絕對日期 (`TimeSpan` 。</span><span class="sxs-lookup"><span data-stu-id="4687b-122">The expiration date can be specified as an absolute date (via a `DateTimeOffset`) or as a relative time (from the current system time, via a `TimeSpan`).</span></span> <span data-ttu-id="4687b-123">如果呼叫未採用到期時間的多載，則會假設承載永不過期。</span><span class="sxs-lookup"><span data-stu-id="4687b-123">If an overload which doesn't take an expiration is called, the payload is assumed never to expire.</span></span>
 
-* <span data-ttu-id="b0523-124">取消保護 (byte [] protectedData，out DateTimeOffset 到期) ： byte []</span><span class="sxs-lookup"><span data-stu-id="b0523-124">Unprotect(byte[] protectedData, out DateTimeOffset expiration) : byte[]</span></span>
+* <span data-ttu-id="4687b-124">取消保護 (byte [] protectedData，out DateTimeOffset 到期) ： byte []</span><span class="sxs-lookup"><span data-stu-id="4687b-124">Unprotect(byte[] protectedData, out DateTimeOffset expiration) : byte[]</span></span>
 
-* <span data-ttu-id="b0523-125">取消保護 (byte [] protectedData) ： byte []</span><span class="sxs-lookup"><span data-stu-id="b0523-125">Unprotect(byte[] protectedData) : byte[]</span></span>
+* <span data-ttu-id="4687b-125">取消保護 (byte [] protectedData) ： byte []</span><span class="sxs-lookup"><span data-stu-id="4687b-125">Unprotect(byte[] protectedData) : byte[]</span></span>
 
-* <span data-ttu-id="b0523-126">取消保護 (字串 protectedData，輸出 DateTimeOffset 到期) ：字串</span><span class="sxs-lookup"><span data-stu-id="b0523-126">Unprotect(string protectedData, out DateTimeOffset expiration) : string</span></span>
+* <span data-ttu-id="4687b-126">取消保護 (字串 protectedData，輸出 DateTimeOffset 到期) ：字串</span><span class="sxs-lookup"><span data-stu-id="4687b-126">Unprotect(string protectedData, out DateTimeOffset expiration) : string</span></span>
 
-* <span data-ttu-id="b0523-127">取消保護 (字串 protectedData) ：字串</span><span class="sxs-lookup"><span data-stu-id="b0523-127">Unprotect(string protectedData) : string</span></span>
+* <span data-ttu-id="4687b-127">取消保護 (字串 protectedData) ：字串</span><span class="sxs-lookup"><span data-stu-id="4687b-127">Unprotect(string protectedData) : string</span></span>
 
-<span data-ttu-id="b0523-128">方法會傳回 `Unprotect` 原始未受保護的資料。</span><span class="sxs-lookup"><span data-stu-id="b0523-128">The `Unprotect` methods return the original unprotected data.</span></span> <span data-ttu-id="b0523-129">如果承載尚未過期，則會以選擇性 out 參數傳回絕對到期，以及原始未受保護的資料。</span><span class="sxs-lookup"><span data-stu-id="b0523-129">If the payload hasn't yet expired, the absolute expiration is returned as an optional out parameter along with the original unprotected data.</span></span> <span data-ttu-id="b0523-130">如果承載已過期，則取消保護方法的所有多載都會擲回 System.security.cryptography.cryptographicexception。</span><span class="sxs-lookup"><span data-stu-id="b0523-130">If the payload is expired, all overloads of the Unprotect method will throw CryptographicException.</span></span>
+<span data-ttu-id="4687b-128">方法會傳回 `Unprotect` 原始未受保護的資料。</span><span class="sxs-lookup"><span data-stu-id="4687b-128">The `Unprotect` methods return the original unprotected data.</span></span> <span data-ttu-id="4687b-129">如果承載尚未過期，則會以選擇性 out 參數傳回絕對到期，以及原始未受保護的資料。</span><span class="sxs-lookup"><span data-stu-id="4687b-129">If the payload hasn't yet expired, the absolute expiration is returned as an optional out parameter along with the original unprotected data.</span></span> <span data-ttu-id="4687b-130">如果承載已過期，則取消保護方法的所有多載都會擲回 System.security.cryptography.cryptographicexception。</span><span class="sxs-lookup"><span data-stu-id="4687b-130">If the payload is expired, all overloads of the Unprotect method will throw CryptographicException.</span></span>
 
 >[!WARNING]
-> <span data-ttu-id="b0523-131">不建議使用這些 Api 來保護需要長期或無限持續性的承載。</span><span class="sxs-lookup"><span data-stu-id="b0523-131">It's not advised to use these APIs to protect payloads which require long-term or indefinite persistence.</span></span> <span data-ttu-id="b0523-132">「我可以承受受保護的承載在一個月後永久無法復原嗎？」</span><span class="sxs-lookup"><span data-stu-id="b0523-132">"Can I afford for the protected payloads to be permanently unrecoverable after a month?"</span></span> <span data-ttu-id="b0523-133">可以作為最佳的經驗法則;如果答案為否，則開發人員應該考慮替代 Api。</span><span class="sxs-lookup"><span data-stu-id="b0523-133">can serve as a good rule of thumb; if the answer is no then developers should consider alternative APIs.</span></span>
+> <span data-ttu-id="4687b-131">不建議使用這些 Api 來保護需要長期或無限持續性的承載。</span><span class="sxs-lookup"><span data-stu-id="4687b-131">It's not advised to use these APIs to protect payloads which require long-term or indefinite persistence.</span></span> <span data-ttu-id="4687b-132">「我可以承受受保護的承載在一個月後永久無法復原嗎？」</span><span class="sxs-lookup"><span data-stu-id="4687b-132">"Can I afford for the protected payloads to be permanently unrecoverable after a month?"</span></span> <span data-ttu-id="4687b-133">可以作為最佳的經驗法則;如果答案為否，則開發人員應該考慮替代 Api。</span><span class="sxs-lookup"><span data-stu-id="4687b-133">can serve as a good rule of thumb; if the answer is no then developers should consider alternative APIs.</span></span>
 
-<span data-ttu-id="b0523-134">下列範例會使用 [非 DI 程式碼路徑](xref:security/data-protection/configuration/non-di-scenarios) 來具現化資料保護系統。</span><span class="sxs-lookup"><span data-stu-id="b0523-134">The sample below uses the [non-DI code paths](xref:security/data-protection/configuration/non-di-scenarios) for instantiating the data protection system.</span></span> <span data-ttu-id="b0523-135">若要執行這個範例，請確定您已先加入 AspNetCore. DataProtection 副檔名套件的參考。</span><span class="sxs-lookup"><span data-stu-id="b0523-135">To run this sample, ensure that you have first added a reference to the Microsoft.AspNetCore.DataProtection.Extensions package.</span></span>
+<span data-ttu-id="4687b-134">下列範例會使用 [非 DI 程式碼路徑](xref:security/data-protection/configuration/non-di-scenarios) 來具現化資料保護系統。</span><span class="sxs-lookup"><span data-stu-id="4687b-134">The sample below uses the [non-DI code paths](xref:security/data-protection/configuration/non-di-scenarios) for instantiating the data protection system.</span></span> <span data-ttu-id="4687b-135">若要執行這個範例，請確定您已先加入 AspNetCore. DataProtection 副檔名套件的參考。</span><span class="sxs-lookup"><span data-stu-id="4687b-135">To run this sample, ensure that you have first added a reference to the Microsoft.AspNetCore.DataProtection.Extensions package.</span></span>
 
 [!code-csharp[](limited-lifetime-payloads/samples/limitedlifetimepayloads.cs)]

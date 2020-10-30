@@ -1,72 +1,73 @@
 ---
-title: 建立 Blazor 待辦事項清單應用程式
+title: '建立 :::no-loc(Blazor)::: 待辦事項清單應用程式'
 author: guardrex
-description: 逐步建立 Blazor 應用程式。
+description: '逐步建立 :::no-loc(Blazor)::: 應用程式。'
 monikerRange: '>= aspnetcore-3.0'
 ms.author: riande
 ms.custom: mvc
 ms.date: 08/22/2020
 no-loc:
-- ASP.NET Core Identity
-- cookie
-- Cookie
-- Blazor
-- Blazor Server
-- Blazor WebAssembly
-- Identity
-- Let's Encrypt
-- Razor
-- SignalR
+- ':::no-loc(appsettings.json):::'
+- ':::no-loc(ASP.NET Core Identity):::'
+- ':::no-loc(cookie):::'
+- ':::no-loc(Cookie):::'
+- ':::no-loc(Blazor):::'
+- ':::no-loc(Blazor Server):::'
+- ':::no-loc(Blazor WebAssembly):::'
+- ':::no-loc(Identity):::'
+- ":::no-loc(Let's Encrypt):::"
+- ':::no-loc(Razor):::'
+- ':::no-loc(SignalR):::'
 uid: tutorials/build-a-blazor-app
-ms.openlocfilehash: 7335b68ad06b9d2b8d7e056cfc1a6d8214119b21
-ms.sourcegitcommit: f09407d128634d200c893bfb1c163e87fa47a161
+ms.openlocfilehash: 68a38b82f5a89365e4f345a60f1f34b697c027ed
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 08/26/2020
-ms.locfileid: "88865418"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93060088"
 ---
-# <a name="build-a-no-locblazor-todo-list-app"></a><span data-ttu-id="bfb3e-103">建立 Blazor 待辦事項清單應用程式</span><span class="sxs-lookup"><span data-stu-id="bfb3e-103">Build a Blazor todo list app</span></span>
+# <a name="build-a-no-locblazor-todo-list-app"></a><span data-ttu-id="fbdf4-103">建立 :::no-loc(Blazor)::: 待辦事項清單應用程式</span><span class="sxs-lookup"><span data-stu-id="fbdf4-103">Build a :::no-loc(Blazor)::: todo list app</span></span>
 
-<span data-ttu-id="bfb3e-104">作者：[Daniel Roth](https://github.com/danroth27) 和 [Luke Latham](https://github.com/guardrex)</span><span class="sxs-lookup"><span data-stu-id="bfb3e-104">By [Daniel Roth](https://github.com/danroth27) and [Luke Latham](https://github.com/guardrex)</span></span>
+<span data-ttu-id="fbdf4-104">作者：[Daniel Roth](https://github.com/danroth27) 和 [Luke Latham](https://github.com/guardrex)</span><span class="sxs-lookup"><span data-stu-id="fbdf4-104">By [Daniel Roth](https://github.com/danroth27) and [Luke Latham](https://github.com/guardrex)</span></span>
 
-<span data-ttu-id="bfb3e-105">本教學課程說明如何建立和修改 Blazor 應用程式。</span><span class="sxs-lookup"><span data-stu-id="bfb3e-105">This tutorial shows you how to build and modify a Blazor app.</span></span> <span data-ttu-id="bfb3e-106">您會了解如何：</span><span class="sxs-lookup"><span data-stu-id="bfb3e-106">You learn how to:</span></span>
+<span data-ttu-id="fbdf4-105">本教學課程說明如何建立和修改 :::no-loc(Blazor)::: 應用程式。</span><span class="sxs-lookup"><span data-stu-id="fbdf4-105">This tutorial shows you how to build and modify a :::no-loc(Blazor)::: app.</span></span> <span data-ttu-id="fbdf4-106">您會了解如何：</span><span class="sxs-lookup"><span data-stu-id="fbdf4-106">You learn how to:</span></span>
 
 > [!div class="checklist"]
-> * <span data-ttu-id="bfb3e-107">建立待辦事項清單 Blazor 應用程式專案</span><span class="sxs-lookup"><span data-stu-id="bfb3e-107">Create a todo list Blazor app project</span></span>
-> * <span data-ttu-id="bfb3e-108">修改 Razor 元件</span><span class="sxs-lookup"><span data-stu-id="bfb3e-108">Modify Razor components</span></span>
-> * <span data-ttu-id="bfb3e-109">在元件中使用事件處理和資料系結</span><span class="sxs-lookup"><span data-stu-id="bfb3e-109">Use event handling and data binding in components</span></span>
-> * <span data-ttu-id="bfb3e-110">在應用程式中使用路由 Blazor</span><span class="sxs-lookup"><span data-stu-id="bfb3e-110">Use routing in a Blazor app</span></span>
+> * <span data-ttu-id="fbdf4-107">建立待辦事項清單 :::no-loc(Blazor)::: 應用程式專案</span><span class="sxs-lookup"><span data-stu-id="fbdf4-107">Create a todo list :::no-loc(Blazor)::: app project</span></span>
+> * <span data-ttu-id="fbdf4-108">修改 :::no-loc(Razor)::: 元件</span><span class="sxs-lookup"><span data-stu-id="fbdf4-108">Modify :::no-loc(Razor)::: components</span></span>
+> * <span data-ttu-id="fbdf4-109">在元件中使用事件處理和資料系結</span><span class="sxs-lookup"><span data-stu-id="fbdf4-109">Use event handling and data binding in components</span></span>
+> * <span data-ttu-id="fbdf4-110">在應用程式中使用路由 :::no-loc(Blazor):::</span><span class="sxs-lookup"><span data-stu-id="fbdf4-110">Use routing in a :::no-loc(Blazor)::: app</span></span>
 
-<span data-ttu-id="bfb3e-111">在本教學課程結尾處，您將會有一個工作 todo 清單應用程式。</span><span class="sxs-lookup"><span data-stu-id="bfb3e-111">At the end of this tutorial, you'll have a working todo list app.</span></span>
+<span data-ttu-id="fbdf4-111">在本教學課程結尾處，您將會有一個工作 todo 清單應用程式。</span><span class="sxs-lookup"><span data-stu-id="fbdf4-111">At the end of this tutorial, you'll have a working todo list app.</span></span>
 
-## <a name="prerequisites"></a><span data-ttu-id="bfb3e-112">先決條件</span><span class="sxs-lookup"><span data-stu-id="bfb3e-112">Prerequisites</span></span>
+## <a name="prerequisites"></a><span data-ttu-id="fbdf4-112">必要條件</span><span class="sxs-lookup"><span data-stu-id="fbdf4-112">Prerequisites</span></span>
 
 [!INCLUDE[](~/includes/3.1-SDK.md)]
 
-## <a name="create-a-todo-list-no-locblazor-app"></a><span data-ttu-id="bfb3e-113">建立 todo 清單 Blazor 應用程式</span><span class="sxs-lookup"><span data-stu-id="bfb3e-113">Create a todo list Blazor app</span></span>
+## <a name="create-a-todo-list-no-locblazor-app"></a><span data-ttu-id="fbdf4-113">建立 todo 清單 :::no-loc(Blazor)::: 應用程式</span><span class="sxs-lookup"><span data-stu-id="fbdf4-113">Create a todo list :::no-loc(Blazor)::: app</span></span>
 
-1. <span data-ttu-id="bfb3e-114">Blazor在命令列介面中建立名為的新應用程式 `TodoList` ：</span><span class="sxs-lookup"><span data-stu-id="bfb3e-114">Create a new Blazor app named `TodoList` in a command shell:</span></span>
+1. <span data-ttu-id="fbdf4-114">:::no-loc(Blazor):::在命令列介面中建立名為的新應用程式 `TodoList` ：</span><span class="sxs-lookup"><span data-stu-id="fbdf4-114">Create a new :::no-loc(Blazor)::: app named `TodoList` in a command shell:</span></span>
 
    ```dotnetcli
    dotnet new blazorserver -o TodoList
    ```
 
-   <span data-ttu-id="bfb3e-115">上述命令會建立名為的資料夾 `TodoList` 來保存應用程式。</span><span class="sxs-lookup"><span data-stu-id="bfb3e-115">The preceding command creates a folder named `TodoList` to hold the app.</span></span> <span data-ttu-id="bfb3e-116">`TodoList`資料夾是專案的*根資料夾*。</span><span class="sxs-lookup"><span data-stu-id="bfb3e-116">The `TodoList` folder is the *root folder* of the project.</span></span> <span data-ttu-id="bfb3e-117">使用下列命令，將目錄變更為 `TodoList` 資料夾：</span><span class="sxs-lookup"><span data-stu-id="bfb3e-117">Change directories to the `TodoList` folder with the following command:</span></span>
+   <span data-ttu-id="fbdf4-115">上述命令會建立名為的資料夾 `TodoList` 來保存應用程式。</span><span class="sxs-lookup"><span data-stu-id="fbdf4-115">The preceding command creates a folder named `TodoList` to hold the app.</span></span> <span data-ttu-id="fbdf4-116">`TodoList`資料夾是專案的 *根資料夾* 。</span><span class="sxs-lookup"><span data-stu-id="fbdf4-116">The `TodoList` folder is the *root folder* of the project.</span></span> <span data-ttu-id="fbdf4-117">使用下列命令，將目錄變更為 `TodoList` 資料夾：</span><span class="sxs-lookup"><span data-stu-id="fbdf4-117">Change directories to the `TodoList` folder with the following command:</span></span>
 
    ```dotnetcli
    cd TodoList
    ```
 
-1. <span data-ttu-id="bfb3e-118">`Todo` Razor 使用下列命令，在資料夾中將新元件新增至應用程式 `Pages` ：</span><span class="sxs-lookup"><span data-stu-id="bfb3e-118">Add a new `Todo` Razor component to the app in the `Pages` folder using the following command:</span></span>
+1. <span data-ttu-id="fbdf4-118">`Todo` :::no-loc(Razor)::: 使用下列命令，在資料夾中將新元件新增至應用程式 `Pages` ：</span><span class="sxs-lookup"><span data-stu-id="fbdf4-118">Add a new `Todo` :::no-loc(Razor)::: component to the app in the `Pages` folder using the following command:</span></span>
 
    ```dotnetcli
    dotnet new razorcomponent -n Todo -o Pages
    ```
 
    > [!IMPORTANT]
-   > <span data-ttu-id="bfb3e-119">Razor 元件檔案名需要大寫的第一個字母。</span><span class="sxs-lookup"><span data-stu-id="bfb3e-119">Razor component file names require a capitalized first letter.</span></span> <span data-ttu-id="bfb3e-120">開啟 `Pages` 資料夾，並確認 `Todo` 元件檔案名以大寫字母開頭 `T` 。</span><span class="sxs-lookup"><span data-stu-id="bfb3e-120">Open the `Pages` folder and confirm that the `Todo` component file name starts with a capital letter `T`.</span></span> <span data-ttu-id="bfb3e-121">檔案名應該是 `Todo.razor` 。</span><span class="sxs-lookup"><span data-stu-id="bfb3e-121">The file name should be `Todo.razor`.</span></span>
+   > <span data-ttu-id="fbdf4-119">:::no-loc(Razor)::: 元件檔案名需要大寫的第一個字母。</span><span class="sxs-lookup"><span data-stu-id="fbdf4-119">:::no-loc(Razor)::: component file names require a capitalized first letter.</span></span> <span data-ttu-id="fbdf4-120">開啟 `Pages` 資料夾，並確認 `Todo` 元件檔案名以大寫字母開頭 `T` 。</span><span class="sxs-lookup"><span data-stu-id="fbdf4-120">Open the `Pages` folder and confirm that the `Todo` component file name starts with a capital letter `T`.</span></span> <span data-ttu-id="fbdf4-121">檔案名應該是 `Todo.razor` 。</span><span class="sxs-lookup"><span data-stu-id="fbdf4-121">The file name should be `Todo.razor`.</span></span>
 
-1. <span data-ttu-id="bfb3e-122">`Pages/Todo.razor`提供元件的初始標記：</span><span class="sxs-lookup"><span data-stu-id="bfb3e-122">In `Pages/Todo.razor` provide the initial markup for the component:</span></span>
+1. <span data-ttu-id="fbdf4-122">`Pages/Todo.razor`提供元件的初始標記：</span><span class="sxs-lookup"><span data-stu-id="fbdf4-122">In `Pages/Todo.razor` provide the initial markup for the component:</span></span>
 
    ```razor
    @page "/todo"
@@ -74,11 +75,11 @@ ms.locfileid: "88865418"
    <h3>Todo</h3>
    ```
 
-1. <span data-ttu-id="bfb3e-123">將 `Todo` 元件新增至導覽列。</span><span class="sxs-lookup"><span data-stu-id="bfb3e-123">Add the `Todo` component to the navigation bar.</span></span>
+1. <span data-ttu-id="fbdf4-123">將 `Todo` 元件新增至導覽列。</span><span class="sxs-lookup"><span data-stu-id="fbdf4-123">Add the `Todo` component to the navigation bar.</span></span>
 
-   <span data-ttu-id="bfb3e-124">`NavMenu`元件 (`Shared/NavMenu.razor`) 會用於應用程式的版面配置中。</span><span class="sxs-lookup"><span data-stu-id="bfb3e-124">The `NavMenu` component (`Shared/NavMenu.razor`) is used in the app's layout.</span></span> <span data-ttu-id="bfb3e-125">版面配置是可讓您避免應用程式中內容重複的元件。</span><span class="sxs-lookup"><span data-stu-id="bfb3e-125">Layouts are components that allow you to avoid duplication of content in the app.</span></span>
+   <span data-ttu-id="fbdf4-124">`NavMenu`元件 (`Shared/NavMenu.razor`) 會用於應用程式的版面配置中。</span><span class="sxs-lookup"><span data-stu-id="fbdf4-124">The `NavMenu` component (`Shared/NavMenu.razor`) is used in the app's layout.</span></span> <span data-ttu-id="fbdf4-125">版面配置是可讓您避免應用程式中內容重複的元件。</span><span class="sxs-lookup"><span data-stu-id="fbdf4-125">Layouts are components that allow you to avoid duplication of content in the app.</span></span>
 
-   <span data-ttu-id="bfb3e-126">在檔案 `<NavLink>` `Todo` 中的現有清單專案下方新增下列清單專案標記，以新增元件的元素 `Shared/NavMenu.razor` ：</span><span class="sxs-lookup"><span data-stu-id="bfb3e-126">Add a `<NavLink>` element for the `Todo` component by adding the following list item markup below the existing list items in the `Shared/NavMenu.razor` file:</span></span>
+   <span data-ttu-id="fbdf4-126">在檔案 `<NavLink>` `Todo` 中的現有清單專案下方新增下列清單專案標記，以新增元件的元素 `Shared/NavMenu.razor` ：</span><span class="sxs-lookup"><span data-stu-id="fbdf4-126">Add a `<NavLink>` element for the `Todo` component by adding the following list item markup below the existing list items in the `Shared/NavMenu.razor` file:</span></span>
 
    ```razor
    <li class="nav-item px-3">
@@ -88,30 +89,30 @@ ms.locfileid: "88865418"
    </li>
    ```
 
-1. <span data-ttu-id="bfb3e-127">`dotnet run`從資料夾的命令 shell 中執行命令，以建立並執行應用程式 `TodoList` 。</span><span class="sxs-lookup"><span data-stu-id="bfb3e-127">Build and run the app by executing the `dotnet run` command in the command shell from the `TodoList` folder.</span></span> <span data-ttu-id="bfb3e-128">瀏覽新的 [待辦事項] 頁面，以確認 `Todo` 元件的連結可以運作。</span><span class="sxs-lookup"><span data-stu-id="bfb3e-128">Visit the new Todo page to confirm that the link to the `Todo` component works.</span></span>
+1. <span data-ttu-id="fbdf4-127">`dotnet run`從資料夾的命令 shell 中執行命令，以建立並執行應用程式 `TodoList` 。</span><span class="sxs-lookup"><span data-stu-id="fbdf4-127">Build and run the app by executing the `dotnet run` command in the command shell from the `TodoList` folder.</span></span> <span data-ttu-id="fbdf4-128">瀏覽新的 [待辦事項] 頁面，以確認 `Todo` 元件的連結可以運作。</span><span class="sxs-lookup"><span data-stu-id="fbdf4-128">Visit the new Todo page to confirm that the link to the `Todo` component works.</span></span>
 
-1. <span data-ttu-id="bfb3e-129">將檔案加入 `TodoItem.cs` 至專案的根目錄， (`TodoList` 資料夾) 來保存代表 todo 專案的類別。</span><span class="sxs-lookup"><span data-stu-id="bfb3e-129">Add a `TodoItem.cs` file to the root of the project (the `TodoList` folder) to hold a class that represents a todo item.</span></span> <span data-ttu-id="bfb3e-130">請使用下列 `TodoItem` 類別的 C# 程式碼：</span><span class="sxs-lookup"><span data-stu-id="bfb3e-130">Use the following C# code for the `TodoItem` class:</span></span>
+1. <span data-ttu-id="fbdf4-129">將檔案加入 `TodoItem.cs` 至專案的根目錄， (`TodoList` 資料夾) 來保存代表 todo 專案的類別。</span><span class="sxs-lookup"><span data-stu-id="fbdf4-129">Add a `TodoItem.cs` file to the root of the project (the `TodoList` folder) to hold a class that represents a todo item.</span></span> <span data-ttu-id="fbdf4-130">請使用下列 `TodoItem` 類別的 C# 程式碼：</span><span class="sxs-lookup"><span data-stu-id="fbdf4-130">Use the following C# code for the `TodoItem` class:</span></span>
 
    [!code-csharp[](build-a-blazor-app/samples_snapshot/3.x/TodoItem.cs)]
 
-1. <span data-ttu-id="bfb3e-131">回到 `Todo` 元件 (`Pages/Todo.razor`) ：</span><span class="sxs-lookup"><span data-stu-id="bfb3e-131">Return to the `Todo` component (`Pages/Todo.razor`):</span></span>
+1. <span data-ttu-id="fbdf4-131">回到 `Todo` 元件 (`Pages/Todo.razor`) ：</span><span class="sxs-lookup"><span data-stu-id="fbdf4-131">Return to the `Todo` component (`Pages/Todo.razor`):</span></span>
 
-   * <span data-ttu-id="bfb3e-132">在 `@code` 區塊中新增待辦事項的欄位。</span><span class="sxs-lookup"><span data-stu-id="bfb3e-132">Add a field for the todo items in an `@code` block.</span></span> <span data-ttu-id="bfb3e-133">`Todo` 元件會使用此欄位來維護待辦事項清單的狀態。</span><span class="sxs-lookup"><span data-stu-id="bfb3e-133">The `Todo` component uses this field to maintain the state of the todo list.</span></span>
-   * <span data-ttu-id="bfb3e-134">新增未排序的清單標記和 `foreach` 迴圈，將每個待辦事項轉譯為清單項目 (`<li>`)。</span><span class="sxs-lookup"><span data-stu-id="bfb3e-134">Add unordered list markup and a `foreach` loop to render each todo item as a list item (`<li>`).</span></span>
+   * <span data-ttu-id="fbdf4-132">在 `@code` 區塊中新增待辦事項的欄位。</span><span class="sxs-lookup"><span data-stu-id="fbdf4-132">Add a field for the todo items in an `@code` block.</span></span> <span data-ttu-id="fbdf4-133">`Todo` 元件會使用此欄位來維護待辦事項清單的狀態。</span><span class="sxs-lookup"><span data-stu-id="fbdf4-133">The `Todo` component uses this field to maintain the state of the todo list.</span></span>
+   * <span data-ttu-id="fbdf4-134">新增未排序的清單標記和 `foreach` 迴圈，將每個待辦事項轉譯為清單項目 (`<li>`)。</span><span class="sxs-lookup"><span data-stu-id="fbdf4-134">Add unordered list markup and a `foreach` loop to render each todo item as a list item (`<li>`).</span></span>
 
    [!code-razor[](build-a-blazor-app/samples_snapshot/3.x/ToDo4.razor?highlight=5-10,12-14)]
 
-1. <span data-ttu-id="bfb3e-135">應用程式需要 UI 元素，才能將待辦事項新增至清單。</span><span class="sxs-lookup"><span data-stu-id="bfb3e-135">The app requires UI elements for adding todo items to the list.</span></span> <span data-ttu-id="bfb3e-136">在未排序清單 (`<ul>...</ul>`) 下方新增文字輸出 (`<input>`) 與按鈕 (`<button>`)：</span><span class="sxs-lookup"><span data-stu-id="bfb3e-136">Add a text input (`<input>`) and a button (`<button>`) below the unordered list (`<ul>...</ul>`):</span></span>
+1. <span data-ttu-id="fbdf4-135">應用程式需要 UI 元素，才能將待辦事項新增至清單。</span><span class="sxs-lookup"><span data-stu-id="fbdf4-135">The app requires UI elements for adding todo items to the list.</span></span> <span data-ttu-id="fbdf4-136">在未排序清單 (`<ul>...</ul>`) 下方新增文字輸出 (`<input>`) 與按鈕 (`<button>`)：</span><span class="sxs-lookup"><span data-stu-id="fbdf4-136">Add a text input (`<input>`) and a button (`<button>`) below the unordered list (`<ul>...</ul>`):</span></span>
 
    [!code-razor[](build-a-blazor-app/samples_snapshot/3.x/ToDo5.razor?highlight=12-13)]
 
-1. <span data-ttu-id="bfb3e-137">在命令 shell 中停止執行中的應用程式。</span><span class="sxs-lookup"><span data-stu-id="bfb3e-137">Stop the running app in the command shell.</span></span> <span data-ttu-id="bfb3e-138">許多命令 shell 都接受鍵盤命令<kbd>Ctrl</kbd> + <kbd>c</kbd>以停止應用程式。</span><span class="sxs-lookup"><span data-stu-id="bfb3e-138">Many command shells accept the keyboard command <kbd>Ctrl</kbd>+<kbd>c</kbd> to stop an app.</span></span> <span data-ttu-id="bfb3e-139">使用命令重建並執行應用程式 `dotnet run` 。</span><span class="sxs-lookup"><span data-stu-id="bfb3e-139">Rebuild and run the app with the `dotnet run` command.</span></span> <span data-ttu-id="bfb3e-140">當 **`Add todo`** 選取按鈕時，不會發生任何事，因為事件處理常式不會連接到按鈕。</span><span class="sxs-lookup"><span data-stu-id="bfb3e-140">When the **`Add todo`** button is selected, nothing happens because an event handler isn't wired up to the button.</span></span>
+1. <span data-ttu-id="fbdf4-137">在命令 shell 中停止執行中的應用程式。</span><span class="sxs-lookup"><span data-stu-id="fbdf4-137">Stop the running app in the command shell.</span></span> <span data-ttu-id="fbdf4-138">許多命令 shell 都接受鍵盤命令<kbd>Ctrl</kbd> + <kbd>c</kbd>以停止應用程式。</span><span class="sxs-lookup"><span data-stu-id="fbdf4-138">Many command shells accept the keyboard command <kbd>Ctrl</kbd>+<kbd>c</kbd> to stop an app.</span></span> <span data-ttu-id="fbdf4-139">使用命令重建並執行應用程式 `dotnet run` 。</span><span class="sxs-lookup"><span data-stu-id="fbdf4-139">Rebuild and run the app with the `dotnet run` command.</span></span> <span data-ttu-id="fbdf4-140">當 **`Add todo`** 選取按鈕時，不會發生任何事，因為事件處理常式不會連接到按鈕。</span><span class="sxs-lookup"><span data-stu-id="fbdf4-140">When the **`Add todo`** button is selected, nothing happens because an event handler isn't wired up to the button.</span></span>
 
-1. <span data-ttu-id="bfb3e-141">將 `AddTodo` 方法新增至 `Todo` 元件並註冊，以便使用 `@onclick` 屬性來進行按鈕選取。</span><span class="sxs-lookup"><span data-stu-id="bfb3e-141">Add an `AddTodo` method to the `Todo` component and register it for button selections using the `@onclick` attribute.</span></span> <span data-ttu-id="bfb3e-142">當選取按鈕時，就會呼叫 `AddTodo` C# 方法：</span><span class="sxs-lookup"><span data-stu-id="bfb3e-142">The `AddTodo` C# method is called when the button is selected:</span></span>
+1. <span data-ttu-id="fbdf4-141">將 `AddTodo` 方法新增至 `Todo` 元件並註冊，以便使用 `@onclick` 屬性來進行按鈕選取。</span><span class="sxs-lookup"><span data-stu-id="fbdf4-141">Add an `AddTodo` method to the `Todo` component and register it for button selections using the `@onclick` attribute.</span></span> <span data-ttu-id="fbdf4-142">當選取按鈕時，就會呼叫 `AddTodo` C# 方法：</span><span class="sxs-lookup"><span data-stu-id="fbdf4-142">The `AddTodo` C# method is called when the button is selected:</span></span>
 
    [!code-razor[](build-a-blazor-app/samples_snapshot/3.x/ToDo6.razor?highlight=2,7-10)]
 
-1. <span data-ttu-id="bfb3e-143">若要取得新待辦事項的標題，請在 `@code` 區塊頂端新增 `newTodo` 字串欄位，然後使用 `<input>` 元素中的 `bind` 屬性將它繫結至文字輸入的值：</span><span class="sxs-lookup"><span data-stu-id="bfb3e-143">To get the title of the new todo item, add a `newTodo` string field at the top of the `@code` block and bind it to the value of the text input using the `bind` attribute in the `<input>` element:</span></span>
+1. <span data-ttu-id="fbdf4-143">若要取得新待辦事項的標題，請在 `@code` 區塊頂端新增 `newTodo` 字串欄位，然後使用 `<input>` 元素中的 `bind` 屬性將它繫結至文字輸入的值：</span><span class="sxs-lookup"><span data-stu-id="fbdf4-143">To get the title of the new todo item, add a `newTodo` string field at the top of the `@code` block and bind it to the value of the text input using the `bind` attribute in the `<input>` element:</span></span>
 
    [!code-razor[](build-a-blazor-app/samples_snapshot/3.x/ToDo7.razor?highlight=2)]
 
@@ -119,39 +120,39 @@ ms.locfileid: "88865418"
    <input placeholder="Something todo" @bind="newTodo" />
    ```
 
-1. <span data-ttu-id="bfb3e-144">更新 `AddTodo` 方法，將 `TodoItem` 與指定的標題新增至清單。</span><span class="sxs-lookup"><span data-stu-id="bfb3e-144">Update the `AddTodo` method to add the `TodoItem` with the specified title to the list.</span></span> <span data-ttu-id="bfb3e-145">請將 `newTodo` 設定為空字串，以清除文字輸入的值：</span><span class="sxs-lookup"><span data-stu-id="bfb3e-145">Clear the value of the text input by setting `newTodo` to an empty string:</span></span>
+1. <span data-ttu-id="fbdf4-144">更新 `AddTodo` 方法，將 `TodoItem` 與指定的標題新增至清單。</span><span class="sxs-lookup"><span data-stu-id="fbdf4-144">Update the `AddTodo` method to add the `TodoItem` with the specified title to the list.</span></span> <span data-ttu-id="fbdf4-145">請將 `newTodo` 設定為空字串，以清除文字輸入的值：</span><span class="sxs-lookup"><span data-stu-id="fbdf4-145">Clear the value of the text input by setting `newTodo` to an empty string:</span></span>
 
    [!code-razor[](build-a-blazor-app/samples_snapshot/3.x/ToDo8.razor?highlight=19-26)]
 
-1. <span data-ttu-id="bfb3e-146">在命令 shell 中停止執行中的應用程式。</span><span class="sxs-lookup"><span data-stu-id="bfb3e-146">Stop the running app in the command shell.</span></span> <span data-ttu-id="bfb3e-147">使用命令重建並執行應用程式 `dotnet run` 。</span><span class="sxs-lookup"><span data-stu-id="bfb3e-147">Rebuild and run the app with the `dotnet run` command.</span></span> <span data-ttu-id="bfb3e-148">請將一些待辦事項新增至待辦事項清單，以測試新程式碼。</span><span class="sxs-lookup"><span data-stu-id="bfb3e-148">Add some todo items to the todo list to test the new code.</span></span>
+1. <span data-ttu-id="fbdf4-146">在命令 shell 中停止執行中的應用程式。</span><span class="sxs-lookup"><span data-stu-id="fbdf4-146">Stop the running app in the command shell.</span></span> <span data-ttu-id="fbdf4-147">使用命令重建並執行應用程式 `dotnet run` 。</span><span class="sxs-lookup"><span data-stu-id="fbdf4-147">Rebuild and run the app with the `dotnet run` command.</span></span> <span data-ttu-id="fbdf4-148">請將一些待辦事項新增至待辦事項清單，以測試新程式碼。</span><span class="sxs-lookup"><span data-stu-id="fbdf4-148">Add some todo items to the todo list to test the new code.</span></span>
 
-1. <span data-ttu-id="bfb3e-149">每個待辦事項的標題文字都可設定為可編輯，而核取方塊則可協助使用者記錄已完成的項目。</span><span class="sxs-lookup"><span data-stu-id="bfb3e-149">The title text for each todo item can be made editable, and a check box can help the user keep track of completed items.</span></span> <span data-ttu-id="bfb3e-150">請為每個待辦事項新增核取方塊輸入，然後將其值繫結至 `IsDone` 屬性。</span><span class="sxs-lookup"><span data-stu-id="bfb3e-150">Add a check box input for each todo item and bind its value to the `IsDone` property.</span></span> <span data-ttu-id="bfb3e-151">將 `@todo.Title` 變更為繫結至 `@todo.Title` 的 `<input>` 元素：</span><span class="sxs-lookup"><span data-stu-id="bfb3e-151">Change `@todo.Title` to an `<input>` element bound to `@todo.Title`:</span></span>
+1. <span data-ttu-id="fbdf4-149">每個待辦事項的標題文字都可設定為可編輯，而核取方塊則可協助使用者記錄已完成的項目。</span><span class="sxs-lookup"><span data-stu-id="fbdf4-149">The title text for each todo item can be made editable, and a check box can help the user keep track of completed items.</span></span> <span data-ttu-id="fbdf4-150">請為每個待辦事項新增核取方塊輸入，然後將其值繫結至 `IsDone` 屬性。</span><span class="sxs-lookup"><span data-stu-id="fbdf4-150">Add a check box input for each todo item and bind its value to the `IsDone` property.</span></span> <span data-ttu-id="fbdf4-151">將 `@todo.Title` 變更為繫結至 `@todo.Title` 的 `<input>` 元素：</span><span class="sxs-lookup"><span data-stu-id="fbdf4-151">Change `@todo.Title` to an `<input>` element bound to `@todo.Title`:</span></span>
 
    [!code-razor[](build-a-blazor-app/samples_snapshot/3.x/ToDo9.razor?highlight=5-6)]
 
-1. <span data-ttu-id="bfb3e-152">若要確認是否已繫結這些值，請更新 `<h3>` 標頭，以顯示未完成之待辦事項 (`IsDone` 為 `false`) 的數目計數。</span><span class="sxs-lookup"><span data-stu-id="bfb3e-152">To verify that these values are bound, update the `<h3>` header to show a count of the number of todo items that aren't complete (`IsDone` is `false`).</span></span>
+1. <span data-ttu-id="fbdf4-152">若要確認是否已繫結這些值，請更新 `<h3>` 標頭，以顯示未完成之待辦事項 (`IsDone` 為 `false`) 的數目計數。</span><span class="sxs-lookup"><span data-stu-id="fbdf4-152">To verify that these values are bound, update the `<h3>` header to show a count of the number of todo items that aren't complete (`IsDone` is `false`).</span></span>
 
    ```razor
    <h3>Todo (@todos.Count(todo => !todo.IsDone))</h3>
    ```
 
-1. <span data-ttu-id="bfb3e-153">完成的 `Todo` 元件 (`Pages/Todo.razor`) ：</span><span class="sxs-lookup"><span data-stu-id="bfb3e-153">The completed `Todo` component (`Pages/Todo.razor`):</span></span>
+1. <span data-ttu-id="fbdf4-153">完成的 `Todo` 元件 (`Pages/Todo.razor`) ：</span><span class="sxs-lookup"><span data-stu-id="fbdf4-153">The completed `Todo` component (`Pages/Todo.razor`):</span></span>
 
    [!code-razor[](build-a-blazor-app/samples_snapshot/3.x/Todo.razor)]
 
-1. <span data-ttu-id="bfb3e-154">在命令 shell 中停止執行中的應用程式。</span><span class="sxs-lookup"><span data-stu-id="bfb3e-154">Stop the running app in the command shell.</span></span> <span data-ttu-id="bfb3e-155">使用命令重建並執行應用程式 `dotnet run` 。</span><span class="sxs-lookup"><span data-stu-id="bfb3e-155">Rebuild and run the app with the `dotnet run` command.</span></span> <span data-ttu-id="bfb3e-156">請新增待辦事項，以測試新程式碼。</span><span class="sxs-lookup"><span data-stu-id="bfb3e-156">Add todo items to test the new code.</span></span>
+1. <span data-ttu-id="fbdf4-154">在命令 shell 中停止執行中的應用程式。</span><span class="sxs-lookup"><span data-stu-id="fbdf4-154">Stop the running app in the command shell.</span></span> <span data-ttu-id="fbdf4-155">使用命令重建並執行應用程式 `dotnet run` 。</span><span class="sxs-lookup"><span data-stu-id="fbdf4-155">Rebuild and run the app with the `dotnet run` command.</span></span> <span data-ttu-id="fbdf4-156">請新增待辦事項，以測試新程式碼。</span><span class="sxs-lookup"><span data-stu-id="fbdf4-156">Add todo items to test the new code.</span></span>
 
-## <a name="next-steps"></a><span data-ttu-id="bfb3e-157">後續步驟</span><span class="sxs-lookup"><span data-stu-id="bfb3e-157">Next steps</span></span>
+## <a name="next-steps"></a><span data-ttu-id="fbdf4-157">後續步驟</span><span class="sxs-lookup"><span data-stu-id="fbdf4-157">Next steps</span></span>
 
-<span data-ttu-id="bfb3e-158">在本教學課程中，您已了解如何：</span><span class="sxs-lookup"><span data-stu-id="bfb3e-158">In this tutorial, you learned how to:</span></span>
+<span data-ttu-id="fbdf4-158">在本教學課程中，您已了解如何：</span><span class="sxs-lookup"><span data-stu-id="fbdf4-158">In this tutorial, you learned how to:</span></span>
 
 > [!div class="checklist"]
-> * <span data-ttu-id="bfb3e-159">建立待辦事項清單 Blazor 應用程式專案</span><span class="sxs-lookup"><span data-stu-id="bfb3e-159">Create a todo list Blazor app project</span></span>
-> * <span data-ttu-id="bfb3e-160">修改 Razor 元件</span><span class="sxs-lookup"><span data-stu-id="bfb3e-160">Modify Razor components</span></span>
-> * <span data-ttu-id="bfb3e-161">在元件中使用事件處理和資料系結</span><span class="sxs-lookup"><span data-stu-id="bfb3e-161">Use event handling and data binding in components</span></span>
-> * <span data-ttu-id="bfb3e-162">在應用程式中使用路由 Blazor</span><span class="sxs-lookup"><span data-stu-id="bfb3e-162">Use routing in a Blazor app</span></span>
+> * <span data-ttu-id="fbdf4-159">建立待辦事項清單 :::no-loc(Blazor)::: 應用程式專案</span><span class="sxs-lookup"><span data-stu-id="fbdf4-159">Create a todo list :::no-loc(Blazor)::: app project</span></span>
+> * <span data-ttu-id="fbdf4-160">修改 :::no-loc(Razor)::: 元件</span><span class="sxs-lookup"><span data-stu-id="fbdf4-160">Modify :::no-loc(Razor)::: components</span></span>
+> * <span data-ttu-id="fbdf4-161">在元件中使用事件處理和資料系結</span><span class="sxs-lookup"><span data-stu-id="fbdf4-161">Use event handling and data binding in components</span></span>
+> * <span data-ttu-id="fbdf4-162">在應用程式中使用路由 :::no-loc(Blazor):::</span><span class="sxs-lookup"><span data-stu-id="fbdf4-162">Use routing in a :::no-loc(Blazor)::: app</span></span>
 
-<span data-ttu-id="bfb3e-163">瞭解 ASP.NET Core 的工具 Blazor ：</span><span class="sxs-lookup"><span data-stu-id="bfb3e-163">Learn about tooling for ASP.NET Core Blazor:</span></span>
+<span data-ttu-id="fbdf4-163">瞭解 ASP.NET Core 的工具 :::no-loc(Blazor)::: ：</span><span class="sxs-lookup"><span data-stu-id="fbdf4-163">Learn about tooling for ASP.NET Core :::no-loc(Blazor)::::</span></span>
 
 > [!div class="nextstepaction"]
 > <xref:blazor/tooling>

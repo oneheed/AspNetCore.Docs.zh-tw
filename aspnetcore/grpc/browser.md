@@ -6,6 +6,7 @@ monikerRange: '>= aspnetcore-3.0'
 ms.author: jamesnk
 ms.date: 06/30/2020
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -17,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: grpc/browser
-ms.openlocfilehash: 5c9501b3e7cbdcbb02e3d78d67185a0a75ccba7c
-ms.sourcegitcommit: c9b03d8a6a4dcc59e4aacb30a691f349235a74c8
+ms.openlocfilehash: 6456707620ae1c1f4d23f3562c78d1bf05d4844f
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 09/02/2020
-ms.locfileid: "89379402"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93058905"
 ---
 # <a name="use-grpc-in-browser-apps"></a>在瀏覽器應用程式中使用 gRPC
 
@@ -123,11 +124,11 @@ ASP.NET Core 中裝載的 gRPC 服務可以設定為支援 gRPC Web 和 HTTP/2 g
 
 `GrpcWebHandler` 具有下列設定選項：
 
-* **InnerHandler**： <xref:System.Net.Http.HttpMessageHandler> 建立 gRPC HTTP 要求的基礎，例如 `HttpClientHandler` 。
-* **GrpcWebMode**：列舉型別，這個型別會指定 gRPC HTTP 要求是否 `Content-Type` 為 `application/grpc-web` 或 `application/grpc-web-text` 。
+* **InnerHandler** ： <xref:System.Net.Http.HttpMessageHandler> 建立 gRPC HTTP 要求的基礎，例如 `HttpClientHandler` 。
+* **GrpcWebMode** ：列舉型別，這個型別會指定 gRPC HTTP 要求是否 `Content-Type` 為 `application/grpc-web` 或 `application/grpc-web-text` 。
     * `GrpcWebMode.GrpcWeb` 設定要在不編碼的情況下傳送的內容。 預設值。
     * `GrpcWebMode.GrpcWebText` 將內容設定為 base64 編碼。 在瀏覽器中進行伺服器串流呼叫的必要項。
-* **HttpVersion**： HTTP 通訊協定， `Version` 用來設定基礎 gRPC Http 要求的[HttpRequestMessage。](xref:System.Net.Http.HttpRequestMessage.Version) gRPC-Web 不需要特定版本，除非已指定，否則不會覆寫預設值。
+* **HttpVersion** ： HTTP 通訊協定， `Version` 用來設定基礎 gRPC Http 要求的 [HttpRequestMessage。](xref:System.Net.Http.HttpRequestMessage.Version) gRPC-Web 不需要特定版本，除非已指定，否則不會覆寫預設值。
 
 > [!IMPORTANT]
 > 產生的 gRPC 用戶端具有可呼叫一元方法的同步和非同步方法。 例如， `SayHello` 為 sync 且 `SayHelloAsync` 為 async。 在應用程式中呼叫同步方法 Blazor WebAssembly 會導致應用程式沒有回應。 非同步方法必須一律用於中 Blazor WebAssembly 。

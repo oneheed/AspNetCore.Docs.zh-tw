@@ -6,6 +6,7 @@ ms.author: riande
 ms.date: 01/25/2020
 ms.custom: mvc, seodec18
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -17,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: razor-pages/ui-class
-ms.openlocfilehash: 95399246df954549cb76139a66d6998fd05a051a
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: e87e74533fe6900d8e0a73708ad24b765a968493
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88634822"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93056799"
 ---
 # <a name="create-reusable-ui-using-the-no-locrazor-class-library-project-in-aspnet-core"></a>使用 Razor ASP.NET Core 中的類別庫專案建立可重複使用的 UI
 
@@ -38,12 +39,12 @@ Razor您可以將視圖、頁面、控制器、頁面模型、 [ Razor 元件](x
 
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
-* 從 Visual Studio 選取 [ **建立新專案**]。
-* 選取 [ ** Razor 類別庫** > **下一步]**。
-* 將程式庫命名 (例如，" Razor ClassLib" ) > **建立**]。 若要避免與產生的檢視程式庫發生檔案名稱衝突，程式庫名稱結尾請務必不要使用 `.Views`。
+* 從 Visual Studio 選取 [ **建立新專案** ]。
+* 選取 [ **Razor 類別庫** > **下一步]** 。
+* 將程式庫命名 (例如，" Razor ClassLib" ) > **建立** ]。 若要避免與產生的檢視程式庫發生檔案名稱衝突，程式庫名稱結尾請務必不要使用 `.Views`。
 * 如果您需要支援 views，請選取 [ **支援頁面和視圖** ]。 依預設，只 Razor 支援頁面。 選取 [建立]。
 
-Razor依預設，類別庫 (RCL) 範本預設為 Razor 元件開發。 **支援頁面和 views**選項支援頁面和視圖。
+Razor依預設，類別庫 (RCL) 範本預設為 Razor 元件開發。 **支援頁面和 views** 選項支援頁面和視圖。
 
 # <a name="net-core-cli"></a>[.NET Core CLI](#tab/netcore-cli)
 
@@ -68,7 +69,7 @@ ASP.NET Core 範本會假設 RCL 內容位於 [ *區域* ] 資料夾中。 請�
 RCL 可以由下列各項參考：
 
 * NuGet 套件。 請參閱[建立 NuGet 套件](/nuget/create-packages/creating-a-package)和 [dotnet add package](/dotnet/core/tools/dotnet-add-package) 和[建立和發佈 NuGet 套件](/nuget/quickstart/create-and-publish-a-package-using-visual-studio)。
-* *{ProjectName}.csproj*。 請參閱 [dotnet-add reference](/dotnet/core/tools/dotnet-add-reference)。
+* *{ProjectName}.csproj* 。 請參閱 [dotnet-add reference](/dotnet/core/tools/dotnet-add-reference)。
 
 ## <a name="override-views-partial-views-and-pages"></a>覆寫檢視、部分檢視和頁面
 
@@ -76,7 +77,7 @@ RCL 可以由下列各項參考：
 
 在下載範例中，將 *WebApp1/Areas/MyFeature2* 重新命名為 *WebApp1/Areas/MyFeature* 以測試優先順序。
 
-將* Razor UIClassLib/Areas/MyFeature/Pages/shared/_Message. cshtml* partial View 複製到*WebApp1/Areas/MyFeature/pages/shared/_Message cshtml*。 更新標記來指示新的位置。 建置並執行應用程式，以確認正在使用部分檢視的應用程式版本。
+將 *Razor UIClassLib/Areas/MyFeature/Pages/shared/_Message. cshtml* partial View 複製到 *WebApp1/Areas/MyFeature/pages/shared/_Message cshtml* 。 更新標記來指示新的位置。 建置並執行應用程式，以確認正在使用部分檢視的應用程式版本。
 
 ### <a name="rcl-pages-layout"></a>RCL 頁面版面配置
 
@@ -85,7 +86,7 @@ RCL 可以由下列各項參考：
 * *RazorUIClassLib/Pages*
 * *RazorUIClassLib/Pages/Shared*
 
-假設* Razor UIClassLib/Pages/Shared*包含兩個部分檔案： *_Header cshtml*和 *_Footer. cshtml*。 `<partial>`標記可新增至 _Layout 的*cshtml*檔案：
+假設 *Razor UIClassLib/Pages/Shared* 包含兩個部分檔案： *_Header cshtml* 和 *_Footer. cshtml* 。 `<partial>`標記可新增至 _Layout 的 *cshtml* 檔案：
 
 ```cshtml
 <body>
@@ -109,7 +110,7 @@ RCL 可能需要隨附的靜態資產，可由 RCL 或 RCL 的取用應用程式
 
 若要排除靜態資產，請將所需的排除路徑新增至 `$(DefaultItemExcludes)` 專案檔中的屬性群組。 以分號 () 分隔專案 `;` 。
 
-在下列範例中，[ *wwwroot* ] 資料夾中的*lib*樣式表單不會被視為靜態資產，且不會包含在已發佈的 RCL 中：
+在下列範例中，[ *wwwroot* ] 資料夾中的 *lib* 樣式表單不會被視為靜態資產，且不會包含在已發佈的 RCL 中：
 
 ```xml
 <PropertyGroup>
@@ -121,7 +122,7 @@ RCL 可能需要隨附的靜態資產，可由 RCL 或 RCL 的取用應用程式
 
 若要在 RCL 中包含 TypeScript 檔案：
 
-1. 將 TypeScript *檔案 () * 在 *wwwroot* 資料夾之外。 例如，將檔案放在 *用戶端* 資料夾中。
+1. 將 TypeScript *檔案 ()* 在 *wwwroot* 資料夾之外。 例如，將檔案放在 *用戶端* 資料夾中。
 
 1. 設定 *wwwroot* 資料夾的 TypeScript 組建輸出。 在專案檔中，于的 `TypescriptOutDir` 內設定屬性 `PropertyGroup` ：
 
@@ -140,7 +141,7 @@ RCL 可能需要隨附的靜態資產，可由 RCL 或 RCL 的取用應用程式
 
 ### <a name="consume-content-from-a-referenced-rcl"></a>使用參考 RCL 中的內容
 
-RCL 的 *wwwroot* 資料夾中包含的檔案會公開給 RCL 或使用中的應用程式（前置詞下） `_content/{LIBRARY NAME}/` 。 例如，名為的程式庫* Razor 。類別 .Lib*會產生靜態內容的路徑 `_content/Razor.Class.Lib/` 。 當產生 NuGet 封裝且元件名稱與封裝識別碼不同時，請使用的封裝識別碼 `{LIBRARY NAME}` 。
+RCL 的 *wwwroot* 資料夾中包含的檔案會公開給 RCL 或使用中的應用程式（前置詞下） `_content/{LIBRARY NAME}/` 。 例如，名為的程式庫 *Razor 。類別 .Lib* 會產生靜態內容的路徑 `_content/Razor.Class.Lib/` 。 當產生 NuGet 封裝且元件名稱與封裝識別碼不同時，請使用的封裝識別碼 `{LIBRARY NAME}` 。
 
 取用應用程式會參考程式庫透過 `<script>` 、 `<style>` 、 `<img>` 和其他 HTML 標籤所提供的靜態資產。 使用中的應用程式必須在中啟用 [靜態檔案支援](xref:fundamentals/static-files) `Startup.Configure` ：
 
@@ -155,7 +156,7 @@ public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
 }
 ```
 
-從組建輸出 () 執行取用應用程式時 `dotnet run` ，預設會在開發環境中啟用靜態 web 資產。 若要在從組建輸出執行時支援其他環境中的資產，請在 `UseStaticWebAssets` *Program.cs*的主機建立器上呼叫：
+從組建輸出 () 執行取用應用程式時 `dotnet run` ，預設會在開發環境中啟用靜態 web 資產。 若要在從組建輸出執行時支援其他環境中的資產，請在 `UseStaticWebAssets` *Program.cs* 的主機建立器上呼叫：
 
 ```csharp
 using Microsoft.AspNetCore.Hosting;
@@ -205,11 +206,11 @@ Razor您可以將視圖、頁面、控制器、頁面模型、 [ Razor 元件](x
 
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
-* 從 Visual Studio 的 [檔案]**** 功能表中，選取 [新增]**[專案]** > **** 。
-* 選取 **ASP.NET Core Web 應用程式**。
-* 將程式庫命名 (例如 " Razor ClassLib" ) > **確定]**。 若要避免與產生的檢視程式庫發生檔案名稱衝突，程式庫名稱結尾請務必不要使用 `.Views`。
+* 從 Visual Studio 的 [檔案]  功能表中，選取 [新增]  。
+* 選取 **ASP.NET Core Web 應用程式** 。
+* 將程式庫命名 (例如 " Razor ClassLib" ) > **確定]** 。 若要避免與產生的檢視程式庫發生檔案名稱衝突，程式庫名稱結尾請務必不要使用 `.Views`。
 * 確認已選取 **ASP.NET Core 2.1** 或更新版本。
-* 選取 [ ** Razor 類別庫** > **確定]**。
+* 選取 [ **Razor 類別庫** > **確定]** 。
 
 RCL 具有下列專案檔案：
 
@@ -236,7 +237,7 @@ ASP.NET Core 範本會假設 RCL 內容位於 [ *區域* ] 資料夾中。 請�
 RCL 可以由下列各項參考：
 
 * NuGet 套件。 請參閱[建立 NuGet 套件](/nuget/create-packages/creating-a-package)和 [dotnet add package](/dotnet/core/tools/dotnet-add-package) 和[建立和發佈 NuGet 套件](/nuget/quickstart/create-and-publish-a-package-using-visual-studio)。
-* *{ProjectName}.csproj*。 請參閱 [dotnet-add reference](/dotnet/core/tools/dotnet-add-reference)。
+* *{ProjectName}.csproj* 。 請參閱 [dotnet-add reference](/dotnet/core/tools/dotnet-add-reference)。
 
 ## <a name="walkthrough-create-an-rcl-project-and-use-from-a-no-locrazor-pages-project"></a>逐步解說：建立 RCL 專案並使用於 Razor 頁面專案中
 
@@ -276,12 +277,12 @@ dotnet run
 
 建立 RCL 專案：
 
-* 從 Visual Studio 的 [檔案]**** 功能表中，選取 [新增]**[專案]** > **** 。
-* 選取 **ASP.NET Core Web 應用程式**。
-* 將應用程式命名為** Razor UIClassLib** > **OK**。
+* 從 Visual Studio 的 [檔案]  功能表中，選取 [新增]  。
+* 選取 **ASP.NET Core Web 應用程式** 。
+* 將應用程式命名為 **Razor UIClassLib** > **OK** 。
 * 確認已選取 **ASP.NET Core 2.1** 或更新版本。
-* 選取 [ ** Razor 類別庫** > **確定]**。
-* 加入 Razor 名為* Razor UIClassLib/Areas/MyFeature/Pages/Shared/_Message*的部分視圖檔案。
+* 選取 [ **Razor 類別庫** > **確定]** 。
+* 加入 Razor 名為 *Razor UIClassLib/Areas/MyFeature/Pages/Shared/_Message* 的部分視圖檔案。
 
 # <a name="net-core-cli"></a>[.NET Core CLI](#tab/netcore-cli)
 
@@ -305,11 +306,11 @@ dotnet new viewstart -o RazorUIClassLib/Areas/MyFeature/Pages
 
 ### <a name="add-no-locrazor-files-and-folders-to-the-project"></a>將檔案 Razor 和資料夾加入至專案
 
-* 將* Razor UIClassLib/Areas/MyFeature/Pages/Shared/_Message*中的標記取代為下列程式碼：
+* 將 *Razor UIClassLib/Areas/MyFeature/Pages/Shared/_Message* 中的標記取代為下列程式碼：
 
   [!code-cshtml[](ui-class/samples/cli/RazorUIClassLib/Areas/MyFeature/Pages/Shared/_Message.cshtml)]
 
-* 將* Razor UIClassLib/Areas/MyFeature/Pages/Page1. cshtml*中的標記取代為下列程式碼：
+* 將 *Razor UIClassLib/Areas/MyFeature/Pages/Page1. cshtml* 中的標記取代為下列程式碼：
 
   [!code-cshtml[](ui-class/samples/cli/RazorUIClassLib/Areas/MyFeature/Pages/Page1.cshtml)]
 
@@ -319,7 +320,7 @@ dotnet new viewstart -o RazorUIClassLib/Areas/MyFeature/Pages
   dotnet new viewimports -o RazorUIClassLib/Areas/MyFeature/Pages
   ```
 
-  如需有關 _ViewImports 的詳細資訊，請參閱匯[入共用](xref:mvc/views/layout#importing-shared-directives)指示詞 *。*
+  如需有關 _ViewImports 的詳細資訊，請參閱匯 [入共用](xref:mvc/views/layout#importing-shared-directives)指示詞 *。*
 
 * 建置類別庫，以確認沒有任何編譯器錯誤：
 
@@ -327,7 +328,7 @@ dotnet new viewstart -o RazorUIClassLib/Areas/MyFeature/Pages
   dotnet build RazorUIClassLib
   ```
 
-組建輸出包含* RazorUIClassLib.dll*和* RazorUIClassLib.Views.dll*。 * RazorUIClassLib.Views.dll*包含已編譯的 Razor 內容。
+組建輸出包含 *RazorUIClassLib.dll* 和 *RazorUIClassLib.Views.dll* 。 *RazorUIClassLib.Views.dll* 包含已編譯的 Razor 內容。
 
 ### <a name="use-the-no-locrazor-ui-library-from-a-no-locrazor-pages-project"></a>使用 Razor 頁面專案的 UI 程式庫 Razor
 
@@ -335,17 +336,17 @@ dotnet new viewstart -o RazorUIClassLib/Areas/MyFeature/Pages
 
 建立 Razor 頁面 web 應用程式：
 
-* 在 [方案總管]**** 中，以滑鼠右鍵按一下解決方案 > [新增]**[新增專案]** >  ****。
-* 選取 **ASP.NET Core Web 應用程式**。
-* 將應用程式命名為 **WebApp1**。
+* 在 [方案總管]  中，以滑鼠右鍵按一下解決方案 > [新增]  。
+* 選取 **ASP.NET Core Web 應用程式** 。
+* 將應用程式命名為 **WebApp1** 。
 * 確認已選取 **ASP.NET Core 2.1** 或更新版本。
-* 選取 [Web 應用程式]**[確定]** > ****。
+* 選取 [Web 應用程式]  。
 
-* 從 [方案總管]****，以滑鼠右鍵按一下 **WebApp1**，然後選取 [設定為啟始專案]****。
-* 從方案總管****，以滑鼠右鍵按一下 **WebApp1**，然後選取 [建置相依性]**[專案相依性]** > ****。
-* 檢查** Razor UIClassLib**是否為**WebApp1**的相依性。
-* 從 [方案總管]****，以滑鼠右鍵按一下 **WebApp1**，然後選取 [新增]**[參考]** > ****。
-* 在 [**參考管理員**] 對話方塊中，檢查** Razor UIClassLib** > **確定**。
+* 從 [方案總管]  ，以滑鼠右鍵按一下  。
+* 從方案總管  ，以滑鼠右鍵按一下  。
+* 檢查 **Razor UIClassLib** 是否為 **WebApp1** 的相依性。
+* 從 [方案總管]  ，以滑鼠右鍵按一下  。
+* 在 [ **參考管理員** ] 對話方塊中，檢查 **Razor UIClassLib** > **確定** 。
 
 執行應用程式。
 
@@ -380,7 +381,7 @@ dotnet run
 
 在下載範例中，將 *WebApp1/Areas/MyFeature2* 重新命名為 *WebApp1/Areas/MyFeature* 以測試優先順序。
 
-將* Razor UIClassLib/Areas/MyFeature/Pages/shared/_Message. cshtml* partial View 複製到*WebApp1/Areas/MyFeature/pages/shared/_Message cshtml*。 更新標記來指示新的位置。 建置並執行應用程式，以確認正在使用部分檢視的應用程式版本。
+將 *Razor UIClassLib/Areas/MyFeature/Pages/shared/_Message. cshtml* partial View 複製到 *WebApp1/Areas/MyFeature/pages/shared/_Message cshtml* 。 更新標記來指示新的位置。 建置並執行應用程式，以確認正在使用部分檢視的應用程式版本。
 
 ### <a name="rcl-pages-layout"></a>RCL 頁面版面配置
 
@@ -389,7 +390,7 @@ dotnet run
 * *RazorUIClassLib/Pages*
 * *RazorUIClassLib/Pages/Shared*
 
-假設* Razor UIClassLib/Pages/Shared*包含兩個部分檔案： *_Header cshtml*和 *_Footer. cshtml*。 `<partial>`標記可新增至 _Layout 的*cshtml*檔案：
+假設 *Razor UIClassLib/Pages/Shared* 包含兩個部分檔案： *_Header cshtml* 和 *_Footer. cshtml* 。 `<partial>`標記可新增至 _Layout 的 *cshtml* 檔案：
 
 ```cshtml
 <body>

@@ -6,6 +6,7 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 12/15/2019
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -17,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: mvc/models/validation
-ms.openlocfilehash: e911512c1dce892c670659f04959be89cea067bb
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: 77d49710b9d69f6fbbe92970f1c455de32489444
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88630103"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93056955"
 ---
 # <a name="model-validation-in-aspnet-core-mvc-and-no-locrazor-pages"></a>ASP.NET Core MVC 和頁面中的模型驗證 Razor
 
@@ -209,7 +210,7 @@ public string MiddleName { get; set; }
 
 [!code-csharp[](validation/samples/3.x/ValidationSample/Controllers/UsersController.cs?name=snippet_CheckAgeSignature)]
 
-在 [檢查年齡] 頁面 (*CheckAge.cshtml*) 中，有兩個表單。 第一個表單會將 `Age` 的值提交 `99` 為查詢字串參數： `https://localhost:5001/Users/CheckAge?Age=99` 。
+在 [檢查年齡] 頁面 ( *CheckAge.cshtml* ) 中，有兩個表單。 第一個表單會將 `Age` 的值提交 `99` 為查詢字串參數： `https://localhost:5001/Users/CheckAge?Age=99` 。
 
 從查詢字串提交正確格式化的 `age` 時，即會驗證表單。
 
@@ -270,7 +271,7 @@ public string MiddleName { get; set; }
 </div>
 ```
 
-請注意，HTML 輸出中的 `data-` 屬性 (attribute) 會對應至 `Movie.ReleaseDate` 屬性 (property) 的驗證屬性 (attribute)。 `data-val-required` 屬性包含使用者未填入發行日期欄位時所要顯示的錯誤訊息。 jQuery 不顯眼驗證會將此值傳遞給 [所需的 Jquery 驗證 ( # B1 ](https://jqueryvalidation.org/required-method/) 方法，然後在伴隨的元素中顯示該訊息 **\<span>** 。
+請注意，HTML 輸出中的 `data-` 屬性 (attribute) 會對應至 `Movie.ReleaseDate` 屬性 (property) 的驗證屬性 (attribute)。 `data-val-required` 屬性包含使用者未填入發行日期欄位時所要顯示的錯誤訊息。 jQuery 不顯眼驗證會將此值傳遞給 [所需的 Jquery 驗證 ( # B1](https://jqueryvalidation.org/required-method/) 方法，然後在伴隨的元素中顯示該訊息 **\<span>** 。
 
 資料型別驗證是根據屬性的 .NET 型別，除非是由 `[DataType]` 屬性覆寫。 瀏覽器具有自己的預設錯誤訊息，但 jQuery 驗證低調驗證套件可以覆寫這些訊息。 `[DataType]` 屬性和子類別 (例如 `[EmailAddress]`) 可讓您指定錯誤訊息。
 
@@ -572,7 +573,7 @@ public string MiddleName { get; set; }
 
 [!code-csharp[](validation/samples/2.x/ValidationSample/Controllers/UsersController.cs?name=snippet_CheckAge)]
 
-在 [檢查年齡] 頁面 (*CheckAge.cshtml*) 中，有兩個表單。 第一個表單會提交 `Age` 值 `99` 作為查詢字串：`https://localhost:5001/Users/CheckAge?Age=99`。
+在 [檢查年齡] 頁面 ( *CheckAge.cshtml* ) 中，有兩個表單。 第一個表單會提交 `Age` 值 `99` 作為查詢字串：`https://localhost:5001/Users/CheckAge?Age=99`。
 
 從查詢字串提交正確格式化的 `age` 時，即會驗證表單。
 
@@ -645,7 +646,7 @@ public string MiddleName { get; set; }
 </form>
 ```
 
-請注意，HTML 輸出中的 `data-` 屬性 (attribute) 會對應至 `ReleaseDate` 屬性 (property) 的驗證屬性 (attribute)。 `data-val-required` 屬性包含使用者未填入發行日期欄位時所要顯示的錯誤訊息。 jQuery 不顯眼驗證會將此值傳遞給 [ ( # B1 方法所需 ](https://jqueryvalidation.org/required-method/) 的 jquery 驗證，然後在伴隨的元素中顯示該訊息 **\<span>** 。
+請注意，HTML 輸出中的 `data-` 屬性 (attribute) 會對應至 `ReleaseDate` 屬性 (property) 的驗證屬性 (attribute)。 `data-val-required` 屬性包含使用者未填入發行日期欄位時所要顯示的錯誤訊息。 jQuery 不顯眼驗證會將此值傳遞給 [ ( # B1 方法所需](https://jqueryvalidation.org/required-method/) 的 jquery 驗證，然後在伴隨的元素中顯示該訊息 **\<span>** 。
 
 資料型別驗證是根據屬性的 .NET 型別，除非是由 `[DataType]` 屬性覆寫。 瀏覽器具有自己的預設錯誤訊息，但 jQuery 驗證低調驗證套件可以覆寫這些訊息。 `[DataType]` 屬性和子類別 (例如 `[EmailAddress]`) 可讓您指定錯誤訊息。
 

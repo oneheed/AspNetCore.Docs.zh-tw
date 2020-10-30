@@ -7,6 +7,7 @@ ms.author: prkrishn
 ms.custom: mvc
 ms.date: 09/05/2019
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -18,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: web-api/advanced/analyzers
-ms.openlocfilehash: 1bc76f3965009dbdd66c58b197f4c12bd44faf18
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: cf0415e7d72e21a48db8bbeb4540f05e0b0a4198
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88633028"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93057917"
 ---
 # <a name="use-web-api-analyzers"></a>使用 Web API 分析器
 
@@ -58,8 +59,8 @@ ASP.NET Core 2.2 和更新版本提供適用于 web API 專案的 MVC 分析器�
 
 ### <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
-從 [套件管理員主控台]**** 視窗中：
-  * 移至 [ **查看** > **其他 Windows** > **封裝管理員主控台**]。
+從 [套件管理員主控台]  視窗中：
+  * 移至 [ **查看** > **其他 Windows** > **封裝管理員主控台** ]。
   * 巡覽至 *ApiConventions.csproj* 檔案所在的目錄。
   * 執行以下命令：
 
@@ -69,14 +70,14 @@ ASP.NET Core 2.2 和更新版本提供適用于 web API 專案的 MVC 分析器�
 
 ### <a name="visual-studio-for-mac"></a>[Visual Studio for Mac](#tab/visual-studio-mac)
 
-* 以滑鼠右鍵按一下*Packages* **Solution Pad** > **新增套件**] 中的 [封裝] 資料夾。
+* 以滑鼠右鍵按一下 *Packages* **Solution Pad** > **新增套件** ] 中的 [封裝] 資料夾。
 * 將 [ **新增封裝** ] 視窗的 [ **來源** ] 下拉式清單設定為 [nuget.org]。
 * 在搜尋方塊中輸入 "Microsoft.AspNetCore.Mvc.Api.Analyzers"。
-* 從結果窗格中選取 "Microsoft.AspNetCore.Mvc.Api.Analyzers" 套件，然後按一下 [新增套件]****。
+* 從結果窗格中選取 "Microsoft.AspNetCore.Mvc.Api.Analyzers" 套件，然後按一下 [新增套件]  。
 
 ### <a name="visual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code)
 
-從 [整合式終端機]**** 執行下列命令：
+從 [整合式終端機]  執行下列命令：
 
 ```dotnetcli
 dotnet add ApiConventions.csproj package Microsoft.AspNetCore.Mvc.Api.Analyzers
@@ -84,7 +85,7 @@ dotnet add ApiConventions.csproj package Microsoft.AspNetCore.Mvc.Api.Analyzers
 
 ### <a name="net-core-cli"></a>[.NET Core CLI](#tab/netcore-cli)
 
-執行以下命令：
+執行下列命令：
 
 ```dotnetcli
 dotnet add ApiConventions.csproj package Microsoft.AspNetCore.Mvc.Api.Analyzers

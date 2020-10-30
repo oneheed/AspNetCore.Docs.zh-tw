@@ -6,6 +6,7 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 6/23/2020
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -15,12 +16,12 @@ no-loc:
 - Razor
 - SignalR
 uid: fundamentals/static-files
-ms.openlocfilehash: 36eeb3532ed5ea6f5f75c20cbe14331ed840a788
-ms.sourcegitcommit: 74f4a4ddbe3c2f11e2e09d05d2a979784d89d3f5
+ms.openlocfilehash: 2e25af03a8a6aaff5b343885711c6ebb68340fac
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 09/27/2020
-ms.locfileid: "91393934"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93057852"
 ---
 # <a name="static-files-in-aspnet-core"></a>ASP.NET Core 中的靜態檔案
 
@@ -57,7 +58,7 @@ ms.locfileid: "91393934"
 
 [!code-csharp[](~/fundamentals/static-files/samples/3.x/StaticFilesSample/Startup.cs?name=snippet_Configure&highlight=15)]
 
-無參數方法多載會 `UseStaticFiles` 將 [web 根目錄](xref:fundamentals/index#web-root) 中的檔案標示為 servable。 下列標記會參考 *wwwroot/images/MyImage.jpg*：
+無參數方法多載會 `UseStaticFiles` 將 [web 根目錄](xref:fundamentals/index#web-root) 中的檔案標示為 servable。 下列標記會參考 *wwwroot/images/MyImage.jpg* ：
 
 ```html
 <img src="~/images/MyImage.jpg" class="img" alt="My image" />
@@ -81,9 +82,9 @@ ms.locfileid: "91393934"
 
 [!code-csharp[](~/fundamentals/static-files/samples/3.x/StaticFilesSample/StartupRose.cs?name=snippet_Configure&highlight=15-22)]
 
-上述程式碼會透過 *StaticFiles* URI 區段公開 *MyStaticFiles* 目錄階層。 `https://<hostname>/StaticFiles/images/red-rose.jpg`服務*red-rose.jpg*檔案的要求。
+上述程式碼會透過 *StaticFiles* URI 區段公開 *MyStaticFiles* 目錄階層。 `https://<hostname>/StaticFiles/images/red-rose.jpg`服務 *red-rose.jpg* 檔案的要求。
 
-下列標記參考 *>mystaticfiles/images/red-rose.jpg*：
+下列標記參考 *>mystaticfiles/images/red-rose.jpg* ：
 
 ```html
 <img src="~/StaticFiles/images/red-rose.jpg" class="img" alt="A red rose" />
@@ -157,7 +158,7 @@ ms.locfileid: "91393934"
 
 系統會提供從清單中找到的第一個檔案，就像提出的要求是完整 URI 一樣。 瀏覽器 URL 仍會繼續反應要求的 URI。
 
-下列程式碼會將預設檔案名稱變更為 *mydefault.html*：
+下列程式碼會將預設檔案名稱變更為 *mydefault.html* ：
 
 [!code-csharp[](~/fundamentals/static-files/samples/3.x/StaticFilesSample/StartupDefault.cs?name=snippet_DefaultFiles)]
 
@@ -211,7 +212,7 @@ app.UseFileServer(enableDirectoryBrowsing: true);
 
 ![靜態檔案清單](static-files/_static/db2.png)
 
-<xref:Microsoft.AspNetCore.Builder.DefaultFilesExtensions.UseDefaultFiles*> 然後 <xref:Microsoft.AspNetCore.Builder.DirectoryBrowserExtensions.UseDirectoryBrowser*> 從目標 uri 執行用戶端重新導向，不含尾端的 `/`  目標 uri `/` 。 例如，從 `https://<hostname>/StaticFiles` 到 `https://<hostname>/StaticFiles/` 。 *StaticFiles*目錄內的相對 url 無效，不含尾端斜線 (`/`) 。
+<xref:Microsoft.AspNetCore.Builder.DefaultFilesExtensions.UseDefaultFiles*> 然後 <xref:Microsoft.AspNetCore.Builder.DirectoryBrowserExtensions.UseDirectoryBrowser*> 從目標 uri 執行用戶端重新導向，不含尾端的 `/`  目標 uri `/` 。 例如，從 `https://<hostname>/StaticFiles` 到 `https://<hostname>/StaticFiles/` 。 *StaticFiles* 目錄內的相對 url 無效，不含尾端斜線 (`/`) 。
 
 ## <a name="fileextensioncontenttypeprovider"></a>FileExtensionContentTypeProvider
 
@@ -227,7 +228,7 @@ app.UseFileServer(enableDirectoryBrowsing: true);
 
 ## <a name="non-standard-content-types"></a>非標準的內容類型
 
-靜態檔案中介軟體瞭解將近400個已知的檔案內容類型。 如果使用者要求具有未知檔案類型的檔案，則靜態檔案中介軟體會將要求傳遞至管線中的下一個中介軟體。 如果沒有中介軟體處理要求，則會傳回「404 找不到」** 回應。 如果啟用目錄瀏覽功能，則會在目錄清單中顯示檔案的連結。
+靜態檔案中介軟體瞭解將近400個已知的檔案內容類型。 如果使用者要求具有未知檔案類型的檔案，則靜態檔案中介軟體會將要求傳遞至管線中的下一個中介軟體。 如果沒有中介軟體處理要求，則會傳回「404 找不到」  回應。 如果啟用目錄瀏覽功能，則會在目錄清單中顯示檔案的連結。
 
 下列程式碼可讓您提供未知的類型，並會將未知的檔案轉譯為影像：
 
@@ -258,14 +259,14 @@ app.UseFileServer(enableDirectoryBrowsing: true);
 * 裝載於 IIS 中的 ASP.NET Core 應用程式會使用 [ASP.NET Core 模組](xref:host-and-deploy/aspnet-core-module)，將所有要求轉送給應用程式 (包括靜態檔案要求)， 未使用 IIS 靜態檔案處理常式，且沒有機會處理要求。
 
 * 請完成 IIS 管理員中的下列步驟，以移除伺服器或網站層級的 IIS 靜態檔案處理常式：
-    1. 巡覽至 [模組]**** 功能。
-    1. 選取清單中的 **StaticFileModule**。
-    1. 按一下 [動作]**** 側邊欄中的 [移除]****。
+    1. 巡覽至 [模組]  功能。
+    1. 選取清單中的 **StaticFileModule** 。
+    1. 按一下 [動作]  側邊欄中的 [移除]  。
 
 > [!WARNING]
-> 如果已啟用 IIS 靜態檔案處理常式，**但是**未正確設定 ASP.NET Core 模組，仍可提供靜態檔案。 舉例來說，未部署 *web.config* 檔案時可能會發生上述情況。
+> 如果已啟用 IIS 靜態檔案處理常式， **但是** 未正確設定 ASP.NET Core 模組，仍可提供靜態檔案。 舉例來說，未部署 *web.config* 檔案時可能會發生上述情況。
 
-* 將程式碼檔案（包括 *.cs* 和 *cshtml*）放在應用程式專案的 [web 根目錄](xref:fundamentals/index#web-root)外部。 如此一來，即會建立應用程式的用戶端內容與伺服器端程式碼之間的邏輯分隔。 這樣可以防止伺服器端程式碼外洩。
+* 將程式碼檔案（包括 *.cs* 和 *cshtml* ）放在應用程式專案的 [web 根目錄](xref:fundamentals/index#web-root)外部。 如此一來，即會建立應用程式的用戶端內容與伺服器端程式碼之間的邏輯分隔。 這樣可以防止伺服器端程式碼外洩。
 
 ## <a name="additional-resources"></a>其他資源
 
@@ -284,7 +285,7 @@ HTML、CSS、影像和 JavaScript 這類靜態檔案都是 ASP.NET Core 應用�
 
 ## <a name="serve-static-files"></a>提供靜態檔案
 
-靜態檔案會儲存在專案的 [web 根目錄](xref:fundamentals/index#web-root) 中。 預設目錄是 *{content root}/wwwroot*，但是可以透過方法來變更 <xref:Microsoft.AspNetCore.Hosting.HostingAbstractionsWebHostBuilderExtensions.UseWebRoot%2A> 。 如需詳細資訊，請參閱[內容根目錄](xref:fundamentals/index#content-root)和 [Web 根目錄](xref:fundamentals/index#web-root)。
+靜態檔案會儲存在專案的 [web 根目錄](xref:fundamentals/index#web-root) 中。 預設目錄是 *{content root}/wwwroot* ，但是可以透過方法來變更 <xref:Microsoft.AspNetCore.Hosting.HostingAbstractionsWebHostBuilderExtensions.UseWebRoot%2A> 。 如需詳細資訊，請參閱[內容根目錄](xref:fundamentals/index#content-root)和 [Web 根目錄](xref:fundamentals/index#web-root)。
 
 您必須讓應用程式的 Web 主機記住內容根目錄。
 
@@ -299,7 +300,7 @@ HTML、CSS、影像和 JavaScript 這類靜態檔案都是 ASP.NET Core 應用�
   * `images`
   * `js`
 
-用來存取*images*子資料夾中檔案的 URI 格式為*HTTP:// \<server_address> /images/ \<image_file_name> *。 例如： *http://localhost:9189/images/banner3.svg* 。
+用來存取 *images* 子資料夾中檔案的 URI 格式為 *HTTP:// \<server_address> /images/ \<image_file_name>* 。 例如： *http://localhost:9189/images/banner3.svg* 。
 
 如以 .NET Framework 為目標，請將 [Microsoft.AspNetCore.StaticFiles](https://www.nuget.org/packages/Microsoft.AspNetCore.StaticFiles/) 套件新增至專案。 如以 .NET Core 為目標，[Microsoft.AspNetCore.All 中繼套件](xref:fundamentals/metapackage-app)會包含此套件。
 
@@ -311,7 +312,7 @@ HTML、CSS、影像和 JavaScript 這類靜態檔案都是 ASP.NET Core 應用�
 
 [!code-csharp[](static-files/samples/1.x/StaticFilesSample/StartupStaticFiles.cs?name=snippet_ConfigureMethod&highlight=3)]
 
-無參數方法多載會 `UseStaticFiles` 將 [web 根目錄](xref:fundamentals/index#web-root) 中的檔案標示為 servable。 下列標記參考 *wwwroot/images/banner1.svg*：
+無參數方法多載會 `UseStaticFiles` 將 [web 根目錄](xref:fundamentals/index#web-root) 中的檔案標示為 servable。 下列標記參考 *wwwroot/images/banner1.svg* ：
 
 [!code-cshtml[](static-files/samples/1.x/StaticFilesSample/Views/Home/Index.cshtml?name=snippet_static_file_wwwroot)]
 
@@ -335,7 +336,7 @@ HTML、CSS、影像和 JavaScript 這類靜態檔案都是 ASP.NET Core 應用�
 
 上述程式碼會透過 *StaticFiles* URI 區段公開 *MyStaticFiles* 目錄階層。 對 *Http:// \<server_address> /StaticFiles/images/banner1.svg* 的要求會提供 *>banner1.svg svg* 檔案。
 
-下列標記參考 *MyStaticFiles/images/banner1.svg*：
+下列標記參考 *MyStaticFiles/images/banner1.svg* ：
 
 [!code-cshtml[](static-files/samples/1.x/StaticFilesSample/Views/Home/Index.cshtml?name=snippet_static_file_outside)]
 
@@ -371,13 +372,13 @@ HTML、CSS、影像和 JavaScript 這類靜態檔案都是 ASP.NET Core 應用�
 
 [!code-csharp[](static-files/samples/1.x/StaticFilesSample/StartupBrowse.cs?name=snippet_ConfigureServicesMethod&highlight=3)]
 
-上述程式碼允許使用 URL *Http:// \<server_address> /MyImages*來流覽*wwwroot/images*資料夾，其中包含每個檔案和資料夾的連結：
+上述程式碼允許使用 URL *Http:// \<server_address> /MyImages* 來流覽 *wwwroot/images* 資料夾，其中包含每個檔案和資料夾的連結：
 
 ![目錄瀏覽](static-files/_static/dir-browse.png)
 
 如需了解啟用瀏覽功能時的安全性風險，請參閱[考量](#considerations)。
 
-請注意下列範例中的兩個 `UseStaticFiles` 呼叫。 第一個呼叫可提供 *wwwroot* 資料夾中的靜態檔案。 第二次呼叫會使用 URL *Http:// \<server_address> /MyImages*來啟用*wwwroot/images*資料夾的瀏覽目錄：
+請注意下列範例中的兩個 `UseStaticFiles` 呼叫。 第一個呼叫可提供 *wwwroot* 資料夾中的靜態檔案。 第二次呼叫會使用 URL *Http:// \<server_address> /MyImages* 來啟用 *wwwroot/images* 資料夾的瀏覽目錄：
 
 [!code-csharp[](static-files/samples/1.x/StaticFilesSample/StartupBrowse.cs?name=snippet_ConfigureMethod&highlight=3,5)]
 
@@ -399,7 +400,7 @@ HTML、CSS、影像和 JavaScript 這類靜態檔案都是 ASP.NET Core 應用�
 
 系統會提供從清單中找到的第一個檔案，就像提出的要求是完整 URI 一樣。 瀏覽器 URL 仍會繼續反應要求的 URI。
 
-下列程式碼會將預設檔案名稱變更為 *mydefault.html*：
+下列程式碼會將預設檔案名稱變更為 *mydefault.html* ：
 
 [!code-csharp[](static-files/samples/1.x/StaticFilesSample/StartupDefault.cs?name=snippet_ConfigureMethod)]
 
@@ -454,7 +455,7 @@ app.UseFileServer(enableDirectoryBrowsing: true);
 
 ## <a name="fileextensioncontenttypeprovider"></a>FileExtensionContentTypeProvider
 
-<xref:Microsoft.AspNetCore.StaticFiles.FileExtensionContentTypeProvider>類別包含一個屬性，此屬性會當做 `Mappings` 副檔名與 MIME 內容類型的對應。 在下列範例中，已有數個副檔名註冊為已知的 MIME 類型。 已取代 *.rtf* 副檔名，並已移除 *.mp4*。
+<xref:Microsoft.AspNetCore.StaticFiles.FileExtensionContentTypeProvider>類別包含一個屬性，此屬性會當做 `Mappings` 副檔名與 MIME 內容類型的對應。 在下列範例中，已有數個副檔名註冊為已知的 MIME 類型。 已取代 *.rtf* 副檔名，並已移除 *.mp4* 。
 
 [!code-csharp[](static-files/samples/1.x/StaticFilesSample/StartupFileExtensionContentTypeProvider.cs?name=snippet_ConfigureMethod&highlight=3-12,19)]
 
@@ -464,7 +465,7 @@ app.UseFileServer(enableDirectoryBrowsing: true);
 
 ## <a name="non-standard-content-types"></a>非標準的內容類型
 
-靜態檔案中介軟體可理解幾乎 400 種已知的檔案內容類型。 如果使用者要求具有未知檔案類型的檔案，則靜態檔案中介軟體會將該要求傳遞至管線中的下一個中介軟體。 如果沒有中介軟體處理要求，則會傳回「404 找不到」** 回應。 如果啟用目錄瀏覽功能，則會在目錄清單中顯示檔案的連結。
+靜態檔案中介軟體可理解幾乎 400 種已知的檔案內容類型。 如果使用者要求具有未知檔案類型的檔案，則靜態檔案中介軟體會將該要求傳遞至管線中的下一個中介軟體。 如果沒有中介軟體處理要求，則會傳回「404 找不到」  回應。 如果啟用目錄瀏覽功能，則會在目錄清單中顯示檔案的連結。
 
 下列程式碼可讓您提供未知的類型，並會將未知的檔案轉譯為影像：
 
@@ -477,26 +478,26 @@ app.UseFileServer(enableDirectoryBrowsing: true);
 
 ## <a name="serve-files-from-multiple-locations"></a>提供多個位置的檔案
 
-`UseStaticFiles` 而且 `UseFileServer` 預設為指向 *wwwroot*的檔案提供者。 您可以提供其他的實例 `UseStaticFiles` 和 `UseFileServer` 其他檔案提供者，以提供來自其他位置的檔案。 如需詳細資訊，請參閱 [此 GitHub 問題](https://github.com/dotnet/AspNetCore.Docs/issues/15578)。
+`UseStaticFiles` 而且 `UseFileServer` 預設為指向 *wwwroot* 的檔案提供者。 您可以提供其他的實例 `UseStaticFiles` 和 `UseFileServer` 其他檔案提供者，以提供來自其他位置的檔案。 如需詳細資訊，請參閱 [此 GitHub 問題](https://github.com/dotnet/AspNetCore.Docs/issues/15578)。
 
 ### <a name="considerations"></a>考量
 
 > [!WARNING]
-> `UseDirectoryBrowser` 和 `UseStaticFiles` 可能會導致洩漏祕密。 強烈建議您在生產環境中停用目錄瀏覽功能。 透過 `UseStaticFiles` 或 `UseDirectoryBrowser`，仔細檢閱要啟用哪些目錄。 因為整個目錄和其子目錄都可供公開存取。 儲存適合在專用目錄中提供公用的檔案，例如* \<content_root> /wwwroot*。 將這些檔案和 MVC 視圖分開、 Razor 頁面 (2.x 僅) 、設定檔等。
+> `UseDirectoryBrowser` 和 `UseStaticFiles` 可能會導致洩漏祕密。 強烈建議您在生產環境中停用目錄瀏覽功能。 透過 `UseStaticFiles` 或 `UseDirectoryBrowser`，仔細檢閱要啟用哪些目錄。 因為整個目錄和其子目錄都可供公開存取。 儲存適合在專用目錄中提供公用的檔案，例如 *\<content_root> /wwwroot* 。 將這些檔案和 MVC 視圖分開、 Razor 頁面 (2.x 僅) 、設定檔等。
 
 * 使用 `UseDirectoryBrowser` 和 `UseStaticFiles` 公開內容的 URL 可能有區分大小寫，並受限於基礎檔案系統的字元限制。 例如，Windows 不區分大小寫&mdash;macOS 和 Linux 則區分大小寫。
 
 * 裝載於 IIS 中的 ASP.NET Core 應用程式會使用 [ASP.NET Core 模組](xref:host-and-deploy/aspnet-core-module)，將所有要求轉送給應用程式 (包括靜態檔案要求)， 而不會使用 IIS 靜態檔案處理常式。 因此，上述處理常式不可能在模組處理要求之前處理要求。
 
 * 請完成 IIS 管理員中的下列步驟，以移除伺服器或網站層級的 IIS 靜態檔案處理常式：
-    1. 巡覽至 [模組]**** 功能。
-    1. 選取清單中的 **StaticFileModule**。
-    1. 按一下 [動作]**** 側邊欄中的 [移除]****。
+    1. 巡覽至 [模組]  功能。
+    1. 選取清單中的 **StaticFileModule** 。
+    1. 按一下 [動作]  側邊欄中的 [移除]  。
 
 > [!WARNING]
-> 如果已啟用 IIS 靜態檔案處理常式，**但是**未正確設定 ASP.NET Core 模組，仍可提供靜態檔案。 舉例來說，未部署 *web.config* 檔案時可能會發生上述情況。
+> 如果已啟用 IIS 靜態檔案處理常式， **但是** 未正確設定 ASP.NET Core 模組，仍可提供靜態檔案。 舉例來說，未部署 *web.config* 檔案時可能會發生上述情況。
 
-* 將程式碼檔案放在應用程式專案的[web 根目錄](xref:fundamentals/index#web-root)外 (，包括 *.cs*和*cshtml*) 。 如此一來，即會建立應用程式的用戶端內容與伺服器端程式碼之間的邏輯分隔。 這樣可以防止伺服器端程式碼外洩。
+* 將程式碼檔案放在應用程式專案的 [web 根目錄](xref:fundamentals/index#web-root)外 (，包括 *.cs* 和 *cshtml* ) 。 如此一來，即會建立應用程式的用戶端內容與伺服器端程式碼之間的邏輯分隔。 這樣可以防止伺服器端程式碼外洩。
 
 ## <a name="additional-resources"></a>其他資源
 

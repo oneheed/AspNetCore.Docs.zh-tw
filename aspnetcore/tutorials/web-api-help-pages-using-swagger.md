@@ -6,6 +6,7 @@ ms.author: scaddie
 ms.custom: mvc
 ms.date: 07/06/2020
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -17,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: tutorials/web-api-help-pages-using-swagger
-ms.openlocfilehash: c40aede044c78122a9057613f0eece9acf84df7b
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: b4b27e6b845d960b4b92612b90938f0770f23170
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88633990"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93056669"
 ---
 # <a name="aspnet-core-web-api-help-pages-with-swagger--openapi"></a>使用 Swagger/OpenAPI 的 ASP.NET Core Web API 說明頁面
 
@@ -42,7 +43,7 @@ Swagger 是用來描述 [REST](https://en.wikipedia.org/wiki/Representational_st
 
 ## <a name="openapi-specification-openapijson"></a>) 上的 OpenAPI 規格 ( # B0
 
-根據預設，OpenAPI 流程的核心是指定 &mdash; 為 *openapi.js*的檔。 它是由 OpenAPI 工具鏈所產生， (或其協力廠商的) 根據您的服務來執行。 它會描述 API 的功能，以及如何使用 HTTP 來進行存取。 它可驅動 Swagger UI，並由工具鏈用來啟用探索和產生用戶端程式碼功能。 以下是 OpenAPI 規格的範例，為了簡潔起見，已縮減：
+根據預設，OpenAPI 流程的核心是指定 &mdash; 為 *openapi.js* 的檔。 它是由 OpenAPI 工具鏈所產生， (或其協力廠商的) 根據您的服務來執行。 它會描述 API 的功能，以及如何使用 HTTP 來進行存取。 它可驅動 Swagger UI，並由工具鏈用來啟用探索和產生用戶端程式碼功能。 以下是 OpenAPI 規格的範例，為了簡潔起見，已縮減：
 
 ```json
 {
@@ -136,7 +137,7 @@ Swagger 是用來描述 [REST](https://en.wikipedia.org/wiki/Representational_st
 
 ![Swagger UI](web-api-help-pages-using-swagger/_static/swagger-ui.png)
 
-控制器中的每個公用動作方法都可以從 UI 進行測試。 按一下方法名稱以展開該區段。 新增任何必要的參數，然後按一下 [立即 **試用]！**。
+控制器中的每個公用動作方法都可以從 UI 進行測試。 按一下方法名稱以展開該區段。 新增任何必要的參數，然後按一下 [立即 **試用]！** 。
 
 ![範例 Swagger GET 測試](web-api-help-pages-using-swagger/_static/get-try-it-out.png)
 

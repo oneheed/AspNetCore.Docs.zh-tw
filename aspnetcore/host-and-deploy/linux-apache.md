@@ -7,6 +7,7 @@ ms.author: shboyer
 ms.custom: mvc
 ms.date: 04/10/2020
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -18,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: host-and-deploy/linux-apache
-ms.openlocfilehash: ac23f3f53bd7e200b843c10cd246ff16d4a12811
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: 0bae3f888a1b7a3c2860b85754779189c636d86f
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88634653"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93057696"
 ---
 # <a name="host-aspnet-core-on-linux-with-apache"></a>在 Linux 上使用 Apache 裝載 ASP.NET Core
 
@@ -31,13 +32,13 @@ ms.locfileid: "88634653"
 
 使用本指南來了解如何在 [CentOS 7](https://www.centos.org/) 上將 [Apache](https://httpd.apache.org/) 設定為反向 Proxy 伺服器，以將 HTTP 流量重新導向至在 [Kestrel](xref:fundamentals/servers/kestrel) 伺服器上執行的 ASP.NET Core Web 應用程式。 [mod_proxy 延伸模組](https://httpd.apache.org/docs/2.4/mod/mod_proxy.html)和相關的模組會建立伺服器的反向 Proxy。
 
-## <a name="prerequisites"></a>Prerequisites
+## <a name="prerequisites"></a>必要條件
 
 * 執行 CentOS 7 的伺服器搭配具有 sudo 權限的標準使用者帳戶。
 * 在伺服器上安裝 .NET Core 執行階段。
    1. 流覽 [ [下載 .Net Core] 頁面](https://dotnet.microsoft.com/download/dotnet-core)。
    1. 選取最新的非預覽 .NET Core 版本。
-   1. 在 [ **執行應用程式-運行**時間] 下的表格中下載最新的非預覽執行時間。
+   1. 在 [ **執行應用程式-運行** 時間] 下的表格中下載最新的非預覽執行時間。
    1. 選取 [Linux **套件管理員指示** ] 連結，並遵循 CentOS 指示。
 * 現有的 ASP.NET Core 應用程式。
 
@@ -52,7 +53,7 @@ ms.locfileid: "88634653"
 * 設定應用程式以處理安全的本機連線。 如需詳細資訊，請參閱 [HTTPS 組態](#https-configuration)一節。
 * 從 *Properties/launchSettings.json* 檔案中的 `applicationUrl` 屬性移除 `https://localhost:5001` (如果有的話)。
 
-從開發環境執行 [dotnet publish](/dotnet/core/tools/dotnet-publish) 將應用程式封裝到可在伺服器上執行的目錄 (例如，*bin/Release/&lt;target_framework_moniker&gt;/publish*)：
+從開發環境執行 [dotnet publish](/dotnet/core/tools/dotnet-publish) 將應用程式封裝到可在伺服器上執行的目錄 (例如， *bin/Release/&lt;target_framework_moniker&gt;/publish* )：
 
 ```dotnetcli
 dotnet publish --configuration Release
@@ -60,7 +61,7 @@ dotnet publish --configuration Release
 
 如果您不想在伺服器上維護 .NET Core 執行階段，應用程式也可以發佈為[獨立式部署](/dotnet/core/deploying/#self-contained-deployments-scd)。
 
-使用整合至組織工作流程的工具 (SCP、SFTP 等等) 將 ASP.NET Core 應用程式複製到伺服器。 Web 應用程式通常可在 *var* 目錄下找到 (例如 *var/www/helloapp*)。
+使用整合至組織工作流程的工具 (SCP、SFTP 等等) 將 ASP.NET Core 應用程式複製到伺服器。 Web 應用程式通常可在 *var* 目錄下找到 (例如 *var/www/helloapp* )。
 
 > [!NOTE]
 > 在生產環境部署案例中，持續整合工作流程會執行發佈應用程式並將資產複製到伺服器的工作。
@@ -217,7 +218,7 @@ WantedBy=multi-user.target
 
 在上述範例中，管理服務的使用者是由選項所指定 `User` 。 使用者 (`apache`) 必須存在，且擁有應用程式檔案的適當擁有權。
 
-使用 `TimeoutStopSec` 可設定應用程式收到初始中斷訊號之後等待關閉的時間。 如果應用程式在此期間後未關閉，則會發出 SIGKILL 來終止應用程式。 提供不具單位的秒值 (例如 `150`)、時間範圍值 (例如 `2min 30s`) 或 `infinity` (表示停用逾時)。 `TimeoutStopSec` 在管理員設定檔 (*systemd-system.conf*、*system.conf.d*、*systemd-user.conf*、*user.conf.d*) 的預設值為 `DefaultTimeoutStopSec`。 大多數發行版本的預設逾時為 90 秒。
+使用 `TimeoutStopSec` 可設定應用程式收到初始中斷訊號之後等待關閉的時間。 如果應用程式在此期間後未關閉，則會發出 SIGKILL 來終止應用程式。 提供不具單位的秒值 (例如 `150`)、時間範圍值 (例如 `2min 30s`) 或 `infinity` (表示停用逾時)。 `TimeoutStopSec` 在管理員設定檔 ( *systemd-system.conf* 、 *system.conf.d* 、 *systemd-user.conf* 、 *user.conf.d* ) 的預設值為 `DefaultTimeoutStopSec`。 大多數發行版本的預設逾時為 90 秒。
 
 ```
 # The default value is 90 seconds for most distributions.
@@ -265,7 +266,7 @@ Main PID: 9021 (dotnet)
             └─9021 /usr/local/bin/dotnet /var/www/helloapp/helloapp.dll
 ```
 
-設定好反向 Proxy 並透過 *systemd* 管理 Kestrel 之後，Web 應用程式便已完全設定妥當，而從本機電腦瀏覽器透過 `http://localhost` 即可存取它。 檢查回應標頭時，**Server** 標頭會指出是由 Kestrel 為 ASP.NET Core 應用程式提供服務：
+設定好反向 Proxy 並透過 *systemd* 管理 Kestrel 之後，Web 應用程式便已完全設定妥當，而從本機電腦瀏覽器透過 `http://localhost` 即可存取它。 檢查回應標頭時， **Server** 標頭會指出是由 Kestrel 為 ASP.NET Core 應用程式提供服務：
 
 ```
 HTTP/1.1 200 OK
@@ -309,7 +310,7 @@ sudo journalctl -fu kestrel-helloapp.service --since "2016-10-18" --until "2016-
 
 ### <a name="configure-firewall"></a>設定防火牆
 
-*Firewalld* 是一個可管理防火牆並支援網路區域的動態精靈。 您仍然可以使用 iptables 來管理連接埠和封包篩選。 預設應該安裝 *Firewalld*。 您可以使用 `yum` 來安裝套件或確認是否已安裝套件。
+*Firewalld* 是一個可管理防火牆並支援網路區域的動態精靈。 您仍然可以使用 iptables 來管理連接埠和封包篩選。 預設應該安裝 *Firewalld* 。 您可以使用 `yum` 來安裝套件或確認是否已安裝套件。
 
 ```bash
 sudo yum install firewalld -y
@@ -349,7 +350,7 @@ rich rules:
 
 使用下列其中一種方法，設定應用程式將憑證用在針對 `dotnet run` 命令的開發，或用在開發環境 (F5，若在 Visual Studio Code 中則為 Ctrl+F5)：
 
-* [取代組態中的預設憑證](xref:fundamentals/servers/kestrel#configuration) (建議使用**)
+*  )
 * [KestrelServerOptions.ConfigureHttpsDefaults](xref:fundamentals/servers/kestrel#configurehttpsdefaultsactionhttpsconnectionadapteroptions)
 
 **設定反向 Prooxy 以進行安全的用戶端連線 (HTTPS)**
@@ -424,7 +425,7 @@ sudo yum install mod_headers
 
 #### <a name="secure-apache-from-clickjacking-attacks"></a>保護 Apache 免於點閱綁架攻擊
 
-[點閱綁架](https://blog.qualys.com/securitylabs/2015/10/20/clickjacking-a-common-implementation-mistake-that-can-put-your-websites-in-danger)(也稱為「UI 偽裝攻擊」**) 是一種惡意攻擊，會誘騙網站訪客點選與其目前所瀏覽頁面不同的頁面上連結或按鈕。 請使用 `X-FRAME-OPTIONS` 來保護網站安全。
+ ) 是一種惡意攻擊，會誘騙網站訪客點選與其目前所瀏覽頁面不同的頁面上連結或按鈕。 請使用 `X-FRAME-OPTIONS` 來保護網站安全。
 
 減輕點擊劫持攻擊：
 
@@ -440,7 +441,7 @@ sudo yum install mod_headers
 
 #### <a name="mime-type-sniffing"></a>MIME 類型探查
 
-`X-Content-Type-Options` 標頭可防止 Internet Explorer 執行「MIME 探查」** (從檔案的內容判斷檔案的 `Content-Type`)。 如果伺服器將 `Content-Type` 標頭設定為 `text/html` 並搭配設定 `nosniff` 選項，則不論檔案內容為何，Internet Explorer 都會將該內容轉譯為 `text/html`。
+`X-Content-Type-Options` 標頭可防止 Internet Explorer 執行「MIME 探查」  (從檔案的內容判斷檔案的 `Content-Type`)。 如果伺服器將 `Content-Type` 標頭設定為 `text/html` 並搭配設定 `nosniff` 選項，則不論檔案內容為何，Internet Explorer 都會將該內容轉譯為 `text/html`。
 
 編輯 *httpd.conf* 檔案：
 
@@ -452,7 +453,7 @@ sudo nano /etc/httpd/conf/httpd.conf
 
 ### <a name="load-balancing"></a>負載平衡
 
-這個範例示範如何在 CentOS 7 上安裝和設定 Apache，以及如何在相同的執行個體電腦上安裝和設定 Kestrel。 為了避免產生單一失敗點的情況，使用 *mod_proxy_balancer* 並修改 **VirtualHost**將可允許管理位於 Apache Proxy 伺服器後方的多個 Web 應用程式執行個體。
+這個範例示範如何在 CentOS 7 上安裝和設定 Apache，以及如何在相同的執行個體電腦上安裝和設定 Kestrel。 為了避免產生單一失敗點的情況，使用 *mod_proxy_balancer* 並修改 **VirtualHost** 將可允許管理位於 Apache Proxy 伺服器後方的多個 Web 應用程式執行個體。
 
 ```bash
 sudo yum install mod_proxy_balancer

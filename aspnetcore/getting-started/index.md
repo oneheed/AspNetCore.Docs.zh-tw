@@ -6,6 +6,7 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 01/07/2020
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -17,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: getting-started
-ms.openlocfilehash: afded8890afe3b8f7b1d0b5634fc7764906bc9d7
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: fef5ae525a7c01d0ea7733e990233f413aac61a7
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88635004"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93057787"
 ---
 # <a name="tutorial-get-started-with-aspnet-core"></a>教學課程：ASP.NET Core 使用者入門
 
@@ -40,7 +41,7 @@ ms.locfileid: "88635004"
 
 ![Web 應用程式首頁](_static/home-page.png)
 
-## <a name="prerequisites"></a>Prerequisites
+## <a name="prerequisites"></a>必要條件
 
 [!INCLUDE[](~/includes/3.1-SDK.md)]
 
@@ -55,7 +56,7 @@ dotnet new webapp -o aspnetcoreapp
 上述命令︰
 
 * 建立新的 web 應用程式。  
-* `-o aspnetcoreapp`參數會建立名為*aspnetcoreapp*的目錄，其中包含應用程式的原始程式檔。
+* `-o aspnetcoreapp`參數會建立名為 *aspnetcoreapp* 的目錄，其中包含應用程式的原始程式檔。
 
 ### <a name="trust-the-development-certificate"></a>信任開發憑證
 
@@ -71,7 +72,7 @@ dotnet dev-certs https --trust
 
 ![安全性警告對話方塊](~/getting-started/_static/cert.png)
 
-若您同意信任開發憑證，請選取 [是]****。
+若您同意信任開發憑證，請選取 [是]  。
 
 # <a name="macos"></a>[macOS](#tab/macos)
 

@@ -6,6 +6,7 @@ ms.author: scaddie
 ms.custom: mvc
 ms.date: 4/20/2020
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -17,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: security/app-secrets
-ms.openlocfilehash: 74c9ae63ffbe39d6ba6e77aee8f6adcc8c8a157a
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: 174f831583c2ef6cb7f122a22fe855acc8fe3047
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88634900"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93056864"
 ---
 # <a name="safe-storage-of-app-secrets-in-development-in-aspnet-core"></a>在 ASP.NET Core 的開發中安全儲存應用程式秘密
 
@@ -38,7 +39,7 @@ ms.locfileid: "88634900"
 
 環境變數是用來避免在程式碼或本機設定檔案中儲存應用程式秘密。 環境變數會覆寫所有先前指定設定來源的設定值。
 
-請考慮啟用 **個別使用者帳戶** 安全性的 ASP.NET Core web 應用程式。 預設的資料庫連接字串會包含在專案的檔案中，具有該索引鍵的 *appsettings.js* `DefaultConnection` 。 預設連接字串適用于 LocalDB，以使用者模式執行，且不需要密碼。 在應用程式部署期間， `DefaultConnection` 可以使用環境變數的值來覆寫金鑰值。 環境變數可以儲存具有敏感性認證的完整連接字串。
+請考慮啟用 **個別使用者帳戶** 安全性的 ASP.NET Core web 應用程式。 具有該索引鍵的專案檔案中包含預設的資料庫連接字串 *appsettings.json* `DefaultConnection` 。 預設連接字串適用于 LocalDB，以使用者模式執行，且不需要密碼。 在應用程式部署期間， `DefaultConnection` 可以使用環境變數的值來覆寫金鑰值。 環境變數可以儲存具有敏感性認證的完整連接字串。
 
 > [!WARNING]
 > 環境變數通常會以純文字未加密的文字儲存。 如果電腦或進程遭到入侵，則不受信任的合作物件可以存取環境變數。 可能需要其他措施來防止洩漏使用者秘密。
@@ -181,7 +182,7 @@ JSON 結構會在透過或修改之後進行壓平合併 `dotnet user-secrets re
 
 ## <a name="string-replacement-with-secrets"></a>使用秘密取代字串
 
-以純文字儲存密碼並非安全的。 例如，儲存在 *appsettings.js* 中的資料庫連接字串可能包含指定使用者的密碼：
+以純文字儲存密碼並非安全的。 例如，儲存在中的資料庫連接字串 *appsettings.json* 可能包含指定使用者的密碼：
 
 [!code-json[](app-secrets/samples/3.x/UserSecrets/appsettings-unsecure.json?highlight=3)]
 
@@ -191,7 +192,7 @@ JSON 結構會在透過或修改之後進行壓平合併 `dotnet user-secrets re
 dotnet user-secrets set "DbPassword" "pass123"
 ```
 
-`Password`從*appsettings.json*的連接字串中移除機碼值組。 例如：
+`Password`從的連接字串中移除機碼值組 *appsettings.json* 。 例如：
 
 [!code-json[](app-secrets/samples/3.x/UserSecrets/appsettings.json?highlight=3)]
 
@@ -216,7 +217,7 @@ Movies:ConnectionString = Server=(localdb)\mssqllocaldb;Database=Movie-1;Trusted
 Movies:ServiceApiKey = 12345
 ```
 
-在上述範例中，索引鍵名稱中的冒號代表 *secrets.js*中的物件階層。
+在上述範例中，索引鍵名稱中的冒號代表 *secrets.js* 中的物件階層。
 
 ## <a name="remove-a-single-secret"></a>移除單一秘密
 
@@ -228,7 +229,7 @@ Movies:ServiceApiKey = 12345
 dotnet user-secrets remove "Movies:ConnectionString"
 ```
 
-應用程式 * 在檔案上的secrets.js* 已修改為移除與機碼相關聯的索引鍵/值組 `MoviesConnectionString` ：
+應用程式 *在檔案上的secrets.js* 已修改為移除與機碼相關聯的索引鍵/值組 `MoviesConnectionString` ：
 
 ```json
 {
@@ -286,7 +287,7 @@ No secrets configured for this application.
 
 環境變數是用來避免在程式碼或本機設定檔案中儲存應用程式秘密。 環境變數會覆寫所有先前指定設定來源的設定值。
 
-請考慮啟用 **個別使用者帳戶** 安全性的 ASP.NET Core web 應用程式。 預設的資料庫連接字串會包含在專案的檔案中，具有該索引鍵的 *appsettings.js* `DefaultConnection` 。 預設連接字串適用于 LocalDB，以使用者模式執行，且不需要密碼。 在應用程式部署期間， `DefaultConnection` 可以使用環境變數的值來覆寫金鑰值。 環境變數可以儲存具有敏感性認證的完整連接字串。
+請考慮啟用 **個別使用者帳戶** 安全性的 ASP.NET Core web 應用程式。 具有該索引鍵的專案檔案中包含預設的資料庫連接字串 *appsettings.json* `DefaultConnection` 。 預設連接字串適用于 LocalDB，以使用者模式執行，且不需要密碼。 在應用程式部署期間， `DefaultConnection` 可以使用環境變數的值來覆寫金鑰值。 環境變數可以儲存具有敏感性認證的完整連接字串。
 
 > [!WARNING]
 > 環境變數通常會以純文字未加密的文字儲存。 如果電腦或進程遭到入侵，則不受信任的合作物件可以存取環境變數。 可能需要其他措施來防止洩漏使用者秘密。
@@ -426,7 +427,7 @@ JSON 結構會在透過或修改之後進行壓平合併 `dotnet user-secrets re
 
 ## <a name="string-replacement-with-secrets"></a>使用秘密取代字串
 
-以純文字儲存密碼並非安全的。 例如，儲存在 *appsettings.js* 中的資料庫連接字串可能包含指定使用者的密碼：
+以純文字儲存密碼並非安全的。 例如，儲存在中的資料庫連接字串 *appsettings.json* 可能包含指定使用者的密碼：
 
 [!code-json[](app-secrets/samples/2.x/UserSecrets/appsettings-unsecure.json?highlight=3)]
 
@@ -436,7 +437,7 @@ JSON 結構會在透過或修改之後進行壓平合併 `dotnet user-secrets re
 dotnet user-secrets set "DbPassword" "pass123"
 ```
 
-`Password`從*appsettings.json*的連接字串中移除機碼值組。 例如：
+`Password`從的連接字串中移除機碼值組 *appsettings.json* 。 例如：
 
 [!code-json[](app-secrets/samples/2.x/UserSecrets/appsettings.json?highlight=3)]
 
@@ -461,7 +462,7 @@ Movies:ConnectionString = Server=(localdb)\mssqllocaldb;Database=Movie-1;Trusted
 Movies:ServiceApiKey = 12345
 ```
 
-在上述範例中，索引鍵名稱中的冒號代表 *secrets.js*中的物件階層。
+在上述範例中，索引鍵名稱中的冒號代表 *secrets.js* 中的物件階層。
 
 ## <a name="remove-a-single-secret"></a>移除單一秘密
 
@@ -473,7 +474,7 @@ Movies:ServiceApiKey = 12345
 dotnet user-secrets remove "Movies:ConnectionString"
 ```
 
-應用程式 * 在檔案上的secrets.js* 已修改為移除與機碼相關聯的索引鍵/值組 `MoviesConnectionString` ：
+應用程式 *在檔案上的secrets.js* 已修改為移除與機碼相關聯的索引鍵/值組 `MoviesConnectionString` ：
 
 ```json
 {

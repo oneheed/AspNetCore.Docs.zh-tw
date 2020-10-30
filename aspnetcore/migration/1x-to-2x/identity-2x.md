@@ -5,6 +5,7 @@ description: 本文概述遷移 ASP.NET Core 1.x 驗證和 ASP.NET Core 2.0 的�
 ms.author: scaddie
 ms.date: 06/21/2019
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -16,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: migration/1x-to-2x/identity-2x
-ms.openlocfilehash: 63f2fadc328650063078339467e65c6b0e97a08e
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: cad7582670013661f5fcbfbebad923f0f092462e
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88634315"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93057176"
 ---
 # <a name="migrate-authentication-and-no-locidentity-to-aspnet-core-20"></a>將驗證遷移 Identity 至 ASP.NET Core 2。0
 
@@ -41,7 +42,7 @@ ASP.NET Core 2.0 有新的驗證模型， [Identity](xref:security/authenticatio
 
 在1.x 專案中，驗證是透過中介軟體來設定。 系統會針對您想要支援的每個驗證配置叫用中介軟體方法。
 
-下列1.x 範例會 Identity 在 *Startup.cs*中設定 Facebook 驗證：
+下列1.x 範例會 Identity 在 *Startup.cs* 中設定 Facebook 驗證：
 
 ```csharp
 public void ConfigureServices(IServiceCollection services)
@@ -60,9 +61,9 @@ public void Configure(IApplicationBuilder app, ILoggerFactory loggerfactory)
 }
 ```
 
-在2.0 專案中，驗證是透過服務來設定。 每個驗證配置都是在 `ConfigureServices` *Startup.cs*方法中註冊。 `UseIdentity`方法會被取代為 `UseAuthentication` 。
+在2.0 專案中，驗證是透過服務來設定。 每個驗證配置都是在 `ConfigureServices` *Startup.cs* 方法中註冊。 `UseIdentity`方法會被取代為 `UseAuthentication` 。
 
-下列2.0 範例會 Identity 在 *Startup.cs*中設定 Facebook 驗證：
+下列2.0 範例會 Identity 在 *Startup.cs* 中設定 Facebook 驗證：
 
 ```csharp
 public void ConfigureServices(IServiceCollection services)
@@ -91,7 +92,7 @@ public void Configure(IApplicationBuilder app, ILoggerFactory loggerfactory) {
 
 ### <a name="no-loccookie-based-authentication"></a>Cookie以驗證為基礎
 
-選取下列兩個選項的其中一個，並在 *Startup.cs*中進行必要的變更：
+選取下列兩個選項的其中一個，並在 *Startup.cs* 中進行必要的變更：
 
 1. 使用 cookieIdentity
     - 以 `UseIdentity` `UseAuthentication` 方法中的取代 `Configure` ：
@@ -133,7 +134,7 @@ public void Configure(IApplicationBuilder app, ILoggerFactory loggerfactory) {
 
 ### <a name="jwt-bearer-authentication"></a>JWT 持有人驗證
 
-在 *Startup.cs*中進行下列變更：
+在 *Startup.cs* 中進行下列變更：
 - `UseJwtBearerAuthentication` `Configure` 以下列內容取代方法中的方法呼叫 `UseAuthentication` ：
 
     ```csharp
@@ -155,7 +156,7 @@ public void Configure(IApplicationBuilder app, ILoggerFactory loggerfactory) {
 
 ### <a name="openid-connect-oidc-authentication"></a>OpenID Connect (OIDC) 驗證
 
-在 *Startup.cs*中進行下列變更：
+在 *Startup.cs* 中進行下列變更：
 
 - `UseOpenIdConnectAuthentication` `Configure` 以下列內容取代方法中的方法呼叫 `UseAuthentication` ：
 
@@ -190,7 +191,7 @@ public void Configure(IApplicationBuilder app, ILoggerFactory loggerfactory) {
     
 ### <a name="facebook-authentication"></a>Facebook 驗證
 
-在 *Startup.cs*中進行下列變更：
+在 *Startup.cs* 中進行下列變更：
 - `UseFacebookAuthentication` `Configure` 以下列內容取代方法中的方法呼叫 `UseAuthentication` ：
 
     ```csharp
@@ -210,7 +211,7 @@ public void Configure(IApplicationBuilder app, ILoggerFactory loggerfactory) {
 
 ### <a name="google-authentication"></a>Google 驗證
 
-在 *Startup.cs*中進行下列變更：
+在 *Startup.cs* 中進行下列變更：
 - `UseGoogleAuthentication` `Configure` 以下列內容取代方法中的方法呼叫 `UseAuthentication` ：
 
     ```csharp
@@ -232,7 +233,7 @@ public void Configure(IApplicationBuilder app, ILoggerFactory loggerfactory) {
 
 如需 Microsoft 帳戶驗證的詳細資訊，請參閱 [此 GitHub 問題](https://github.com/dotnet/AspNetCore.Docs/issues/14455)。
 
-在 *Startup.cs*中進行下列變更：
+在 *Startup.cs* 中進行下列變更：
 - `UseMicrosoftAccountAuthentication` `Configure` 以下列內容取代方法中的方法呼叫 `UseAuthentication` ：
 
     ```csharp
@@ -252,7 +253,7 @@ public void Configure(IApplicationBuilder app, ILoggerFactory loggerfactory) {
 
 ### <a name="twitter-authentication"></a>Twitter 驗證
 
-在 *Startup.cs*中進行下列變更：
+在 *Startup.cs* 中進行下列變更：
 - `UseTwitterAuthentication` `Configure` 以下列內容取代方法中的方法呼叫 `UseAuthentication` ：
 
     ```csharp
@@ -349,7 +350,7 @@ Windows 驗證的變化有兩種：
 
 2.0 變更的副作用是切換為使用命名選項，而不是 cookie 選項實例。 已移除自訂 Identity cookie 配置名稱的功能。
 
-例如，1.x 專案使用「函式 [插入](xref:mvc/controllers/dependency-injection#constructor-injection) 」將參數傳遞至 `IdentityCookieOptions` *AccountController.cs* 和 *ManageController.cs*。 您 cookie 可以從提供的實例存取外部驗證配置：
+例如，1.x 專案使用「函式 [插入](xref:mvc/controllers/dependency-injection#constructor-injection) 」將參數傳遞至 `IdentityCookieOptions` *AccountController.cs* 和 *ManageController.cs* 。 您 cookie 可以從提供的實例存取外部驗證配置：
 
 [!code-csharp[](../1x-to-2x/samples/AspNetCoreDotNetCore1App/AspNetCoreDotNetCore1App/Controllers/AccountController.cs?name=snippet_AccountControllerConstructor&highlight=4,11)]
 
@@ -429,7 +430,7 @@ protected override void OnModelCreating(ModelBuilder builder)
 
 ## <a name="replace-getexternalauthenticationschemes"></a>取代 GetExternalAuthenticationSchemes
 
-同步方法 `GetExternalAuthenticationSchemes` 已移除，以取代非同步版本。 1.x 專案在 *控制器/ManageController*中有下列程式碼：
+同步方法 `GetExternalAuthenticationSchemes` 已移除，以取代非同步版本。 1.x 專案在 *控制器/ManageController* 中有下列程式碼：
 
 [!code-csharp[](../1x-to-2x/samples/AspNetCoreDotNetCore1App/AspNetCoreDotNetCore1App/Controllers/ManageController.cs?name=snippet_GetExternalAuthenticationSchemes)]
 
@@ -437,11 +438,11 @@ protected override void OnModelCreating(ModelBuilder builder)
 
 [!code-cshtml[](../1x-to-2x/samples/AspNetCoreDotNetCore1App/AspNetCoreDotNetCore1App/Views/Account/Login.cshtml?name=snippet_GetExtAuthNSchemes&highlight=2)]
 
-在2.0 專案中，請使用 <xref:Microsoft.AspNetCore.Identity.SignInManager`1.GetExternalAuthenticationSchemesAsync*> 方法。 *ManageController.cs*中的變更類似于下列程式碼：
+在2.0 專案中，請使用 <xref:Microsoft.AspNetCore.Identity.SignInManager`1.GetExternalAuthenticationSchemesAsync*> 方法。 *ManageController.cs* 中的變更類似于下列程式碼：
 
 [!code-csharp[](../1x-to-2x/samples/AspNetCoreDotNetCore2App/AspNetCoreDotNetCore2App/Controllers/ManageController.cs?name=snippet_GetExternalAuthenticationSchemesAsync)]
 
-在 *Login*中，在 `AuthenticationScheme` 迴圈中存取的屬性會 `foreach` 變更為 `Name` ：
+在 *Login* 中，在 `AuthenticationScheme` 迴圈中存取的屬性會 `foreach` 變更為 `Name` ：
 
 [!code-cshtml[](../1x-to-2x/samples/AspNetCoreDotNetCore2App/AspNetCoreDotNetCore2App/Views/Account/Login.cshtml?name=snippet_GetExtAuthNSchemesAsync&highlight=2,19)]
 

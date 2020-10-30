@@ -7,6 +7,7 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 11/1/2020
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -18,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: fundamentals/websockets
-ms.openlocfilehash: 11cd1c266516c696859c4116c940400e90d09ab4
-ms.sourcegitcommit: c06a5bf419541d17595af30e4cf6f2787c21855e
+ms.openlocfilehash: 83a41d503b2d56bca3f1bac14eeb9d54a8257642
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 10/27/2020
-ms.locfileid: "92678538"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93057774"
 ---
 # <a name="websockets-support-in-aspnet-core"></a>ASP.NET Core 中的 WebSockets 支援
 
@@ -41,7 +42,7 @@ ms.locfileid: "92678538"
 
 針對某些應用程式， [gRPC on .net](xref:grpc/index) 提供 websocket 的替代方案。
 
-## <a name="prerequisites"></a>必要條件
+## <a name="prerequisites"></a>Prerequisites
 
 * 支援 ASP.NET Core 的任何作業系統：  
   * Windows 7/Windows Server 2008 或更新版本
@@ -173,7 +174,7 @@ CORS 所提供的保護不套用至 WebSocket。 瀏覽器 **不** 會：
 
 1. 流覽至 **主控台**  >  **程式** 的 [  >  **程式和功能]，**  >  **開啟或關閉** 畫面) 左側 (的 [Windows 功能]。
 1. 開啟下列節點： **Internet Information Services**  >  **World Wide Web 服務**  >  **應用程式開發功能** 。
-1. 選取 [WebSocket 通訊協定]  功能。 選取 [確定]。
+1. 選取 [WebSocket 通訊協定]  功能。 選取 [確定]  。
 
 ### <a name="disable-websocket-when-using-socketio-on-nodejs"></a>在 Node.js 上使用 socket.io 時停用 WebSocket
 

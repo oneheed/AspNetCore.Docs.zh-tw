@@ -7,6 +7,7 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 02/07/2020
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -18,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: host-and-deploy/iis/hosting-bundle
-ms.openlocfilehash: 888f517d86cb9456ea8b933d3de842a0a21423b5
-ms.sourcegitcommit: d60bfd52bfb559e805abd654b87a2a0c7eb69cf8
+ms.openlocfilehash: ecf3dd45575390eee263a275e7f1fb9ec50011bb
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 10/06/2020
-ms.locfileid: "91755244"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93058437"
 ---
 # <a name="the-net-core-hosting-bundle"></a>.NET Core 裝載套件組合
 
@@ -48,7 +49,7 @@ ms.locfileid: "91755244"
 
 1. 流覽至 [ [下載 .Net Core](https://dotnet.microsoft.com/download/dotnet-core) ] 頁面。
 1. 選取所需的 .NET Core 版本。
-1. 在 [執行應用程式 - 執行階段]**** 欄中，尋找想要的 .NET Core 執行階段版本列。
+1. 在 [執行應用程式 - 執行階段]  欄中，尋找想要的 .NET Core 執行階段版本列。
 1. 使用 **裝載** 套件組合連結來下載安裝程式。
 
 > [!WARNING]
@@ -87,7 +88,7 @@ net start w3svc
 
 1. 在主控系統上，流覽至 `%PROGRAMFILES%\IIS\Asp.Net Core Module\V2` 。
 1. 找出檔案 `aspnetcorev2.dll` 。
-1. 在該檔案上按一下滑鼠右鍵，然後從關聯式功能表中選取 [內容]****。
+1. 在該檔案上按一下滑鼠右鍵，然後從關聯式功能表中選取 [內容]  。
 1. 選取 [ **詳細資料** ] 索引標籤。檔案 **版本** 和 **產品版本** 代表已安裝的模組版本。
 
 模組的裝載套件組合安裝程式記錄檔位於 `C:\Users\%UserName%\AppData\Local\Temp` 。 檔案的名稱 `dd_DotNetCoreWinSvrHosting__{TIMESTAMP}_000_AspNetCoreModule_x64.log` ，其中預留位置是檔案的 `{TIMESTAMP}` 時間戳記。

@@ -6,6 +6,7 @@ monikerRange: '>= aspnetcore-2.1'
 ms.author: riande
 ms.date: 11/04/2019
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -17,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: performance/caching/response
-ms.openlocfilehash: 9516410399ce69f1d69b09781b2530d052a11e7a
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: 2864de5b9931ed255569cb087c67c71004c4df92
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88631871"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93059009"
 ---
 # <a name="response-caching-in-aspnet-core"></a>ASP.NET Core 中的回應快取
 
@@ -38,7 +39,7 @@ ms.locfileid: "88631871"
 
 ## <a name="http-based-response-caching"></a>以 HTTP 為基礎的回應快取
 
-[HTTP 1.1](https://tools.ietf.org/html/rfc7234)快取規格描述了網際網路快取的行為。 用於快取的主要 HTTP 標頭是快取[控制項](https://tools.ietf.org/html/rfc7234#section-5.2)，用來指定快取指示*詞。* 指示詞會控制快取行為，因為要求會從用戶端傳送到伺服器，而回應會將其從伺服器傳回給用戶端。 要求和回應會在 proxy 伺服器之間移動，而 proxy 伺服器也必須符合 HTTP 1.1 快取規格。
+[HTTP 1.1](https://tools.ietf.org/html/rfc7234)快取規格描述了網際網路快取的行為。 用於快取的主要 HTTP 標頭是快取 [控制項](https://tools.ietf.org/html/rfc7234#section-5.2)，用來指定快取指示 *詞。* 指示詞會控制快取行為，因為要求會從用戶端傳送到伺服器，而回應會將其從伺服器傳回給用戶端。 要求和回應會在 proxy 伺服器之間移動，而 proxy 伺服器也必須符合 HTTP 1.1 快取規格。
 
 `Cache-Control`下表顯示一般指示詞。
 
@@ -47,21 +48,21 @@ ms.locfileid: "88631871"
 | [public](https://tools.ietf.org/html/rfc7234#section-5.2.2.5)   | 快取可以儲存回應。 |
 | [私人](https://tools.ietf.org/html/rfc7234#section-5.2.2.6)  | 共用快取不得儲存回應。 私用快取可能會儲存並重複使用回應。 |
 | [最大壽命](https://tools.ietf.org/html/rfc7234#section-5.2.1.1)  | 用戶端不會接受其存留期大於指定秒數的回應。 範例： `max-age=60` (60 秒) ， `max-age=2592000` (1 個月)  |
-| [no-cache](https://tools.ietf.org/html/rfc7234#section-5.2.1.4) | **在要求上**：快取不能使用預存回應來滿足要求。 源伺服器會重新產生用戶端的回應，中介軟體會更新其快取中的預存回應。<br><br>**回應時**：回應不得用於後續要求，而不需要在源伺服器上進行驗證。 |
-| [無存放區](https://tools.ietf.org/html/rfc7234#section-5.2.1.5) | **要求時**：快取不得儲存要求。<br><br>**回應時**：快取不得儲存回應的任何部分。 |
+| [no-cache](https://tools.ietf.org/html/rfc7234#section-5.2.1.4) | **在要求上** ：快取不能使用預存回應來滿足要求。 源伺服器會重新產生用戶端的回應，中介軟體會更新其快取中的預存回應。<br><br>**回應時** ：回應不得用於後續要求，而不需要在源伺服器上進行驗證。 |
+| [無存放區](https://tools.ietf.org/html/rfc7234#section-5.2.1.5) | **要求時** ：快取不得儲存要求。<br><br>**回應時** ：快取不得儲存回應的任何部分。 |
 
 下表顯示在快取中扮演角色的其他快取標頭。
 
 | 標頭                                                     | 函式 |
 | ---------------------------------------------------------- | -------- |
-| [年齡](https://tools.ietf.org/html/rfc7234#section-5.1)     | 從源伺服器上產生或成功驗證回應以來的時間量預估（以秒為單位）。 |
+| [Age](https://tools.ietf.org/html/rfc7234#section-5.1)     | 從源伺服器上產生或成功驗證回應以來的時間量預估（以秒為單位）。 |
 | [到期](https://tools.ietf.org/html/rfc7234#section-5.3) | 經過一段時間之後，就會將回應視為過時。 |
 | [Pragma](https://tools.ietf.org/html/rfc7234#section-5.4)  | 存在於與 HTTP/1.0 快取之間的相容性，以設定 `no-cache` 行為。 如果 `Cache-Control` 標頭存在，則 `Pragma` 會忽略標頭。 |
 | [不同](https://tools.ietf.org/html/rfc7231#section-7.1.4)  | 指定除非快取 `Vary` 回應的原始要求和新要求中的所有標頭欄位都相符，否則不得傳送快取回應。 |
 
-## <a name="http-based-caching-respects-request-cache-control-directives"></a>以 HTTP 為基礎的快取遵循要求快取控制指示詞
+## <a name="http-based-caching-respects-request-cache-control-directives"></a>以 HTTP 為基礎的快取遵循要求 Cache-Control 指示詞
 
-快取 [控制標頭的 HTTP 1.1](https://tools.ietf.org/html/rfc7234#section-5.2) 快取規格需要快取，才能接受 `Cache-Control` 用戶端所傳送的有效標頭。 用戶端可以使用 `no-cache` 標頭值提出要求，並強制服務器針對每個要求產生新的回應。
+[Cache-Control 標頭的 HTTP 1.1](https://tools.ietf.org/html/rfc7234#section-5.2)快取規格需要快取，才能接受 `Cache-Control` 用戶端所傳送的有效標頭。 用戶端可以使用 `no-cache` 標頭值提出要求，並強制服務器針對每個要求產生新的回應。
 
 如果您考慮 HTTP 快取的目標，一律接受用戶端 `Cache-Control` 要求標頭會有意義。 在官方規格下，快取的目的是要降低跨用戶端、proxy 和伺服器網路滿足要求的延遲和網路額外負荷。 它不一定是控制源伺服器負載的方式。
 
@@ -71,7 +72,7 @@ ms.locfileid: "88631871"
 
 ### <a name="in-memory-caching"></a>記憶體內部快取
 
-記憶體中的快取會使用伺服器記憶體來儲存快取的資料。 這種類型的快取適用于單一伺服器或使用「 *粘滯話*」的多部伺服器。 「粘滯話」表示來自用戶端的要求一律會路由傳送至相同的伺服器進行處理。
+記憶體中的快取會使用伺服器記憶體來儲存快取的資料。 這種類型的快取適用于單一伺服器或使用「 *粘滯話* 」的多部伺服器。 「粘滯話」表示來自用戶端的要求一律會路由傳送至相同的伺服器進行處理。
 
 如需詳細資訊，請參閱<xref:performance/caching/memory>。
 

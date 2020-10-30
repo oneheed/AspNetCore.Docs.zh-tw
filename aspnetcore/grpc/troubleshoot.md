@@ -7,6 +7,7 @@ ms.author: jamesnk
 ms.custom: mvc
 ms.date: 07/09/2020
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -18,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: grpc/troubleshoot
-ms.openlocfilehash: 0c897c8c640f8713fc7d3b6cad0e6c571131d7a5
-ms.sourcegitcommit: ecae2aa432628b9181d1fa11037c231c7dd56c9e
+ms.openlocfilehash: cbce85caf7ba792253ba62c6be084c8905acd00f
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 10/16/2020
-ms.locfileid: "92113838"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93058710"
 ---
 # <a name="troubleshoot-grpc-on-net-core"></a>針對 .NET Core 上的 gRPC 進行疑難排解
 
@@ -108,7 +109,7 @@ Kestrel 在 macOS 和舊版 Windows （例如 Windows 7）上不支援具有 TLS
 
 若要解決此問題，請將 Kestrel 和 gRPC 用戶端設定為使用 *沒有* TLS 的 HTTP/2。 您應該只在開發期間執行此動作。 不使用 TLS 會導致傳送 gRPC 的訊息，而不加密。
 
-Kestrel 必須在 *Program.cs*中設定不含 TLS 的 HTTP/2 端點：
+Kestrel 必須在 *Program.cs* 中設定不含 TLS 的 HTTP/2 端點：
 
 ```csharp
 public static IHostBuilder CreateHostBuilder(string[] args) =>
@@ -136,7 +137,7 @@ GRPC 用戶端也必須設定為不使用 TLS。 如需詳細資訊，請參閱 
 
 實體用戶端和服務基類的 gRPC 程式碼產生需要從專案參考 protobuf 檔案和工具。 您必須包含：
 
-* 您要在專案群組中使用的*proto*檔。 `<Protobuf>` 專案必須參考匯[入的 *. proto* ](https://developers.google.com/protocol-buffers/docs/proto3#importing-definitions)檔案。
+* 您要在專案群組中使用的 *proto* 檔。 `<Protobuf>` 專案必須參考匯 [入的 *. proto*](https://developers.google.com/protocol-buffers/docs/proto3#importing-definitions)檔案。
 * GRPC 工具套件 [gRPC](https://www.nuget.org/packages/Grpc.Tools/)的套件參考。
 
 如需產生 gRPC c # 資產的詳細資訊，請參閱 <xref:grpc/basics> 。
@@ -166,9 +167,9 @@ WPF 專案有 [已知的問題](https://github.com/dotnet/wpf/issues/810) ，導
 您可以透過下列方式解決此問題：
 
 1. 建立新的 .NET Core 類別庫專案。
-2. 在新的專案中，新增參考以[從* \* proto*檔案啟用 c # 程式碼產生](xref:grpc/basics#generated-c-assets)：
+2. 在新的專案中，新增參考以 [從 *\* proto* 檔案啟用 c # 程式碼產生](xref:grpc/basics#generated-c-assets)：
     * 將套件參考新增至 [Grpc 工具](https://www.nuget.org/packages/Grpc.Tools/) 套件。
-    * 將* \* proto*檔新增至 `<Protobuf>` 專案群組。
+    * 將 *\* proto* 檔新增至 `<Protobuf>` 專案群組。
 3. 在 WPF 應用程式中，加入新專案的參考。
 
 WPF 應用程式可以從新的類別庫專案使用 gRPC 產生的類型。

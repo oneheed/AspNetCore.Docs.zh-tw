@@ -5,6 +5,7 @@ description: 了解如何建立和使用 ASP.NET Core 中的 Web API 自訂格�
 ms.author: riande
 ms.date: 06/25/2020
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -16,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: web-api/advanced/custom-formatters
-ms.openlocfilehash: 9f87d02dd3abe6dca8db495e482ccf9c440a2469
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: e4d73fdc0db3faeace5d68b3d71718315e68cae3
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88627542"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93058918"
 ---
 # <a name="custom-formatters-in-aspnet-core-web-api"></a>ASP.NET Core Web API 中的自訂格式器
 

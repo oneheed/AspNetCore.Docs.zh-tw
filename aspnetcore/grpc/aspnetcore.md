@@ -6,6 +6,7 @@ monikerRange: '>= aspnetcore-3.0'
 ms.author: johluo
 ms.date: 09/03/2019
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -17,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: grpc/aspnetcore
-ms.openlocfilehash: 11237c93832e095abb03d761773d213dfa336052
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: b120aa4ab6922445f2c53f3b1cb3bd5c159d8a84
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88633886"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93057826"
 ---
 # <a name="grpc-services-with-aspnet-core"></a>搭配 ASP.NET Core 的 gRPC 服務
 
@@ -30,7 +31,7 @@ ms.locfileid: "88633886"
 
 [!INCLUDE[](~/includes/gRPCazure.md)]
 
-## <a name="prerequisites"></a>Prerequisites
+## <a name="prerequisites"></a>必要條件
 
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
@@ -93,11 +94,11 @@ Kestrel 支援大部分新式作業系統上的 [HTTP/2](xref:fundamentals/serve
 
 用於 gRPC 的 Kestrel 端點應使用 TLS 來保護。 在開發期間，會在 `https://localhost:5001` ASP.NET Core 開發憑證存在時自動建立以 TLS 保護的端點。 不需要組態。 `https`前置詞會驗證 Kestrel 端點是否使用 TLS。
 
-在生產環境中，必須明確設定 TLS。 在下列 *appsettings.js* 範例中，會提供以 TLS 保護的 HTTP/2 端點：
+在生產環境中，必須明確設定 TLS。 下列 *appsettings.json* 範例會提供以 TLS 保護的 HTTP/2 端點：
 
 [!code-json[](~/grpc/aspnetcore/sample/appsettings.json?highlight=4)]
 
-或者，您也可以在 *Program.cs*中設定 Kestrel 端點：
+或者，您也可以在 *Program.cs* 中設定 Kestrel 端點：
 
 [!code-csharp[](~/grpc/aspnetcore/sample/Program.cs?highlight=7&name=snippet)]
 

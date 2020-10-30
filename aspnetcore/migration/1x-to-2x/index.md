@@ -6,6 +6,7 @@ ms.author: scaddie
 ms.custom: mvc
 ms.date: 12/05/2019
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -17,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: migration/1x-to-2x/index
-ms.openlocfilehash: 6160dfd117235065ba4b990b95bbc1f4abdf1626
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: 6d67924d87cdbe72cb08c5305dfe45c5b22b31bc
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88634341"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93057111"
 ---
 # <a name="migrate-from-aspnet-core-1x-to-20"></a>從 ASP.NET Core 1.x 遷移至 2.0
 
@@ -34,7 +35,7 @@ ms.locfileid: "88634341"
 
 <a name="prerequisites"></a>
 
-## <a name="prerequisites"></a>Prerequisites
+## <a name="prerequisites"></a>必要條件
 
 請參閱 [ASP.NET Core 使用者入門](xref:getting-started)。
 
@@ -69,7 +70,7 @@ ms.locfileid: "88634341"
 
 1.x 專案中的 *.csproj* 檔案列出專案所使用的每個 NuGet 套件。
 
-在以 .NET Core 2.0 為目標的 ASP.NET Core 2.0 專案中，*.csproj* 檔案中的單一[中繼套件](xref:fundamentals/metapackage) metapackage 參考會取代套件的集合：
+在以 .NET Core 2.0 為目標的 ASP.NET Core 2.0 專案中， *.csproj* 檔案中的單一 [中繼套件](xref:fundamentals/metapackage) metapackage 參考會取代套件的集合：
 
 [!code-xml[](../1x-to-2x/samples/AspNetCoreDotNetCore2App/AspNetCoreDotNetCore2App/AspNetCoreDotNetCore2App.csproj?range=8-10)]
 
@@ -107,11 +108,11 @@ ms.locfileid: "88634341"
 
 ## <a name="update-main-method-in-programcs"></a>更新 Program.cs 中的 Main 方法
 
-在 1.x 專案中，*Program.cs*的 `Main` 方法看起來像這樣：
+在 1.x 專案中， *Program.cs* 的 `Main` 方法看起來像這樣：
 
 [!code-csharp[](../1x-to-2x/samples/AspNetCoreDotNetCore1App/AspNetCoreDotNetCore1App/Program.cs?name=snippet_ProgramCs&highlight=8-19)]
 
-在 2.0 專案中，*Program.cs*的 `Main` 方法已經過簡化：
+在 2.0 專案中， *Program.cs* 的 `Main` 方法已經過簡化：
 
 [!code-csharp[](../1x-to-2x/samples/AspNetCoreDotNetCore2App/AspNetCoreDotNetCore2App/Program.cs?highlight=8-11)]
 
@@ -129,7 +130,7 @@ Unable to create an object of type '<Context>'. Add an implementation of 'IDesig
 
 [!code-csharp[](../1x-to-2x/samples/AspNetCoreDotNetCore1App/AspNetCoreDotNetCore1App/Startup.cs?name=snippet_1xStartup)]
 
-上述範例會 `Configuration` 從 *appsettings.js的* 設定，以及任何 appsettings，載入具有設定的成員 * \<EnvironmentName\> 。* 符合屬性的 json 檔案 `IHostingEnvironment.EnvironmentName` 。 這些檔案的位置與 *Startup.cs* 的路徑相同。
+上述範例會載入 `Configuration` 具有設定的成員，以及 *appsettings.json* 任何 *appsettings。 \<EnvironmentName\>* 符合屬性的 json 檔案 `IHostingEnvironment.EnvironmentName` 。 這些檔案的位置與 *Startup.cs* 的路徑相同。
 
 在 2.0 專案中，1.x 專案固有的模板組態程式碼會在幕後執行。 例如，環境變數及應用程式設定會在啟動時載入。 對等的 *Startup.cs* 程式碼會縮減成為插入執行個體的 `IConfiguration` 初始化：
 

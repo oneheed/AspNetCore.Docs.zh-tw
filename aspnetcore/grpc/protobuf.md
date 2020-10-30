@@ -6,6 +6,7 @@ monikerRange: '>= aspnetcore-3.0'
 ms.author: jamesnk
 ms.date: 08/23/2020
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -17,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: grpc/protobuf
-ms.openlocfilehash: ea46e04bc4aa6269efbf8917d5f32194402a66ef
-ms.sourcegitcommit: 24106b7ffffc9fff410a679863e28aeb2bbe5b7e
+ms.openlocfilehash: b70a5ee00405eecfce900b86dc631a54682dce1a
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 09/17/2020
-ms.locfileid: "90722692"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93058892"
 ---
 # <a name="create-protobuf-messages-for-net-apps"></a>建立 .NET 應用程式的 Protobuf 訊息
 
@@ -95,7 +96,7 @@ Protobuf 支援一系列原生純量實數值型別。 下表列出它們都具�
 
 下表顯示日期和時間類型：
 
-| .NET 類型        | Protobuf 知名型別    |
+| .NET 類型        | Protobuf Well-Known 類型    |
 | ---------------- | --------------------------- |
 | `DateTimeOffset` | `google.protobuf.Timestamp` |
 | `DateTime`       | `google.protobuf.Timestamp` |
@@ -136,7 +137,7 @@ var duration = meeting.Duration?.ToTimeSpan();
 
 C # 的 Protobuf 程式碼產生會使用原生類型，例如 `int` for `int32` 。 因此，一律會包含這些值，而且不能是 `null` 。
 
-對於需要明確的值（ `null` 例如 `int?` 在 c # 程式碼中使用），Protobuf 的已知型別包含編譯成可為 Null 的 c # 型別的包裝函式。 若要使用這些檔案，請將其匯入 `wrappers.proto` 您 `.proto` 的檔案，如下列程式碼所示：
+對於需要明確的值（ `null` 例如 `int?` 在 c # 程式碼中使用），Protobuf 的 Well-Known 類型包含編譯成可為 Null 的 c # 類型的包裝函式。 若要使用這些檔案，請將其匯入 `wrappers.proto` 您 `.proto` 的檔案，如下列程式碼所示：
 
 ```protobuf  
 syntax = "proto3"
@@ -153,7 +154,7 @@ message Person {
 
 下表顯示包裝函式類型的完整清單及其對等的 c # 類型：
 
-| C# 類型      | 知名的型別包裝函式       |
+| C# 類型      | Well-Known 型別包裝函式       |
 | ------------ | ----------------------------- |
 | `bool?`      | `google.protobuf.BoolValue`   |
 | `double?`    | `google.protobuf.DoubleValue` |
@@ -188,7 +189,7 @@ await File.WriteAllBytesAsync(path, payload.Data.ToByteArray());
 
 ### <a name="decimals"></a>小數位數
 
-Protobuf 本身並不支援 .NET `decimal` 型別， `double` 而是和 `float` 。 Protobuf 專案中有一項持續的討論，當中有可能會將標準的 decimal 型別新增至已知型別，並提供支援的語言和架構平臺支援。 尚未執行任何動作。
+Protobuf 本身並不支援 .NET `decimal` 型別， `double` 而是和 `float` 。 Protobuf 專案中有一項持續的討論，當中有可能會將標準的 decimal 型別新增至 Well-Known 類型，並提供支援的語言和架構平臺支援。 尚未執行任何動作。
 
 您可以建立訊息定義來代表可在 `decimal` .net 用戶端和伺服器之間進行安全序列化的型別。 但是，其他平臺上的開發人員必須瞭解所使用的格式，並對其執行自己的處理。
 
@@ -388,7 +389,7 @@ switch (response.ResultCase)
 
 ### <a name="value"></a>值
 
-`Value`型別代表動態類型的值。 它可以是 `null` 、數位、字串、布林值、值的字典 (`Struct`) ，或 () 的值清單 `ValueList` 。 `Value` 是使用先前所討論之功能的 Protobuf 知名型別 `oneof` 。 若要使用 `Value` 類型，請匯入 `struct.proto` 。
+`Value`型別代表動態類型的值。 它可以是 `null` 、數位、字串、布林值、值的字典 (`Struct`) ，或 () 的值清單 `ValueList` 。 `Value` 是使用先前所討論之功能的 Protobuf Well-Known 類型 `oneof` 。 若要使用 `Value` 類型，請匯入 `struct.proto` 。
 
 ```protobuf
 import "google/protobuf/struct.proto";

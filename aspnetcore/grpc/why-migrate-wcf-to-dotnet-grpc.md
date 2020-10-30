@@ -1,11 +1,12 @@
 ---
-title: 為何要將 WCF 遷移至 ASP.NET Core gRPC
+title: 為何將 WCF 遷移至 ASP.NET Core gRPC
 author: markrendle
 description: 本文提供 ASP.NET Core gRPC 適用于 Windows Communication Foundation (WCF) 開發人員想要遷移到新式架構和平臺的相關摘要。
 monikerRange: '>= aspnetcore-3.0'
 ms.author: wpickett
 ms.date: 09/02/2020
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -17,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: grpc/wcf
-ms.openlocfilehash: 811e6037b058b26fcf91063123d04d448a9a28a8
-ms.sourcegitcommit: 8fcb08312a59c37e3542e7a67dad25faf5bb8e76
+ms.openlocfilehash: 26629b4aa5510f4ef5f53f57b64e45f6c32d4014
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 09/11/2020
-ms.locfileid: "90012755"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93058684"
 ---
 # <a name="grpc-for-windows-communication-foundation-wcf-developers"></a>Windows Communication Foundation (WCF) 開發人員的 gRPC
 

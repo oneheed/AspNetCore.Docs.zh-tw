@@ -5,6 +5,7 @@ description: 示範如何防止針對 ASP.NET Core 應用程式的開啟重新�
 ms.author: riande
 ms.date: 07/07/2017
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -16,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: security/preventing-open-redirects
-ms.openlocfilehash: 5226e301960a56145b94b6128d0034c40b86bffd
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: e546cd852367921c7c694db3639f7a233f606e75
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88633457"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93058385"
 ---
 # <a name="prevent-open-redirect-attacks-in-aspnet-core"></a>防止 ASP.NET Core 中的開啟重新導向攻擊
 
@@ -39,7 +40,7 @@ Web 應用程式會在存取需要驗證的資源時，經常將使用者重新�
 
 惡意使用者可能會開發出一種攻擊，目的是要讓惡意使用者存取使用者的認證或機密資訊。 若要開始攻擊，惡意使用者說服使用者按一下網站登入頁面的連結，並將 `returnUrl` querystring 值新增至 URL。 例如，假設有一個 `contoso.com` 包含登入頁面的應用程式 `http://contoso.com/Account/LogOn?returnUrl=/Home/About` 。 攻擊會遵循下列步驟：
 
-1. 使用者按一下惡意連結來 `http://contoso.com/Account/LogOn?returnUrl=http://contoso1.com/Account/LogOn` (第二個 URL 是 "contoso**1**.com"，而非 "contoso.com" ) 。
+1. 使用者按一下惡意連結來 `http://contoso.com/Account/LogOn?returnUrl=http://contoso1.com/Account/LogOn` (第二個 URL 是 "contoso **1** .com"，而非 "contoso.com" ) 。
 2. 使用者成功登入。
 3. 網站) 將使用者重新導向 (，以 `http://contoso1.com/Account/LogOn` (看似真實網站) 的惡意網站。
 4. 使用者再次登入 (為惡意網站提供其認證) ，然後重新導向回到實際的網站。

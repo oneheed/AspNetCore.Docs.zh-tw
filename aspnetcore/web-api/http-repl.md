@@ -7,6 +7,7 @@ ms.author: scaddie
 ms.custom: mvc, devx-track-azurecli
 ms.date: 05/20/2020
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -18,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: web-api/http-repl
-ms.openlocfilehash: b12f4b10230f2631392011a6e443156bf9a2d843
-ms.sourcegitcommit: d5ecad1103306fac8d5468128d3e24e529f1472c
+ms.openlocfilehash: efd2208044ad6392131216266afc34187d738b78
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 10/23/2020
-ms.locfileid: "92491440"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93058970"
 ---
 # <a name="test-web-apis-with-the-http-repl"></a>使用 HTTP REPL 來測試 web API
 
@@ -61,7 +62,7 @@ dotnet tool install -g Microsoft.dotnet-httprepl
 
 會從 [Microsoft.dotnet-httprepl](https://www.nuget.org/packages/Microsoft.dotnet-httprepl) \(英文\) NuGet 套件安裝 [.NET Core 全域工具](/dotnet/core/tools/global-tools#install-a-global-tool)。
 
-## <a name="usage"></a>使用量
+## <a name="usage"></a>使用方式
 
 成功安裝工具後，請執行以下命令來啟動 HTTP REPL：
 
@@ -401,7 +402,7 @@ get <PARAMETER> [-F|--no-formatting] [-h|--header] [--response] [--response:body
 
 相關控制器動作方法預期的路由參數 (如果有的話)。
 
-### <a name="options"></a>選項。
+### <a name="options"></a>選項
 
 以下是使用 `get` 命令時可用的選項：
 
@@ -485,7 +486,7 @@ post <PARAMETER> [-c|--content] [-f|--file] [-h|--header] [--no-body] [-F|--no-f
 
 相關控制器動作方法預期的路由參數 (如果有的話)。
 
-### <a name="options"></a>選項。
+### <a name="options"></a>選項
 
 [!INCLUDE [standard CLI options](~/includes/http-repl/standard-options.md)]
 
@@ -555,7 +556,7 @@ put <PARAMETER> [-c|--content] [-f|--file] [-h|--header] [--no-body] [-F|--no-fo
 
 相關控制器動作方法預期的路由參數 (如果有的話)。
 
-### <a name="options"></a>選項。
+### <a name="options"></a>選項
 
 [!INCLUDE [standard CLI options](~/includes/http-repl/standard-options.md)]
 
@@ -565,7 +566,7 @@ put <PARAMETER> [-c|--content] [-f|--file] [-h|--header] [--no-body] [-F|--no-fo
 
 若要發出 HTTP PUT 要求：
 
-1. *選擇性*：執行 `get` 命令以在修改資料之前加以查看：
+1. *選擇性* ：執行 `get` 命令以在修改資料之前加以查看：
 
     ```console
     https://localhost:5001/fruits~ get
@@ -627,7 +628,7 @@ put <PARAMETER> [-c|--content] [-f|--file] [-h|--header] [--no-body] [-F|--no-fo
     Server: Kestrel
     ```
 
-1. *選擇性*：發出 `get` 命令以查看修改。 舉例來說，如果您在文字編輯器中鍵入 "Cherry"，`get` 會傳回以下內容：
+1. *選擇性* ：發出 `get` 命令以查看修改。 舉例來說，如果您在文字編輯器中鍵入 "Cherry"，`get` 會傳回以下內容：
 
     ```console
     https://localhost:5001/fruits~ get
@@ -670,7 +671,7 @@ delete <PARAMETER> [-F|--no-formatting] [-h|--header] [--response] [--response:b
 
 相關控制器動作方法預期的路由參數 (如果有的話)。
 
-### <a name="options"></a>選項。
+### <a name="options"></a>選項
 
 [!INCLUDE [standard CLI options](~/includes/http-repl/standard-options.md)]
 
@@ -678,7 +679,7 @@ delete <PARAMETER> [-F|--no-formatting] [-h|--header] [--response] [--response:b
 
 若要發出 HTTP DELETE 要求：
 
-1. *選擇性*：執行 `get` 命令以在修改資料之前加以查看：
+1. *選擇性* ：執行 `get` 命令以在修改資料之前加以查看：
 
     ```console
     https://localhost:5001/fruits~ get
@@ -718,7 +719,7 @@ delete <PARAMETER> [-F|--no-formatting] [-h|--header] [--response] [--response:b
     Server: Kestrel
     ```
 
-1. *選擇性*：發出 `get` 命令以查看修改。 在本範例中，`get` 會傳回以下內容：
+1. *選擇性* ：發出 `get` 命令以查看修改。 在本範例中，`get` 會傳回以下內容：
 
     ```console
     https://localhost:5001/fruits~ get
@@ -757,7 +758,7 @@ patch <PARAMETER> [-c|--content] [-f|--file] [-h|--header] [--no-body] [-F|--no-
 
 相關控制器動作方法預期的路由參數 (如果有的話)。
 
-### <a name="options"></a>選項。
+### <a name="options"></a>選項
 
 [!INCLUDE [standard CLI options](~/includes/http-repl/standard-options.md)]
 
@@ -777,7 +778,7 @@ head <PARAMETER> [-F|--no-formatting] [-h|--header] [--response] [--response:bod
 
 相關控制器動作方法預期的路由參數 (如果有的話)。
 
-### <a name="options"></a>選項。
+### <a name="options"></a>選項
 
 [!INCLUDE [standard CLI options](~/includes/http-repl/standard-options.md)]
 
@@ -795,7 +796,7 @@ options <PARAMETER> [-F|--no-formatting] [-h|--header] [--response] [--response:
 
 相關控制器動作方法預期的路由參數 (如果有的話)。
 
-### <a name="options"></a>選項。
+### <a name="options"></a>選項
 
 [!INCLUDE [standard CLI options](~/includes/http-repl/standard-options.md)]
 

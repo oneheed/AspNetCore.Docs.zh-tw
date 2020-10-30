@@ -5,6 +5,7 @@ description: 頁面上教學課程系列的第4部分 Razor 。
 ms.author: riande
 ms.date: 7/22/2019
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -16,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: tutorials/razor-pages/sql
-ms.openlocfilehash: d2e18782411b1801c74fa33ba1b31bad9662f3b2
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: d592cf7d8a96a7e4ec2e53418843a186488951be
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88627113"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93058151"
 ---
 # <a name="part-4-with-a-database-and-aspnet-core"></a>第4部分：資料庫和 ASP.NET Core
 
@@ -31,7 +32,7 @@ ms.locfileid: "88627113"
 
 [!INCLUDE[](~/includes/rp/download.md)]
 
-`RazorPagesMovieContext` 物件會處理連線到資料庫和將 `Movie` 物件對應至資料庫記錄的工作。 在 *Startup.cs* 的 `ConfigureServices` 方法中，以[相依性插入](xref:fundamentals/dependency-injection)容器登錄資料庫內容：
+`RazorPagesMovieContext` 物件會處理連線到資料庫和將 `Movie` 物件對應至資料庫記錄的工作。 在 *Startup.cs* 的 `ConfigureServices` 方法中，以 [相依性插入](xref:fundamentals/dependency-injection)容器登錄資料庫內容：
 
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
@@ -43,7 +44,7 @@ ms.locfileid: "88627113"
 
 ---
 
-ASP.NET Core [組態](xref:fundamentals/configuration/index)系統會讀取 `ConnectionString`。 針對本機開發，它會從檔案中的 *appsettings.js* 取得連接字串。
+ASP.NET Core [組態](xref:fundamentals/configuration/index)系統會讀取 `ConnectionString`。 針對本機開發，它會從檔案取得連接字串 *appsettings.json* 。
 
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
@@ -66,11 +67,11 @@ ASP.NET Core [組態](xref:fundamentals/configuration/index)系統會讀取 `Con
 LocalDB 為輕量版的 SQL Server Express 資料庫引擎，鎖定程式開發為其目標。 LocalDB 會依需求啟動，並以使用者模式執行，因此沒有複雜的組態。 LocalDB 資料庫預設會在 `C:\Users\<user>\` 目錄中建立 `*.mdf` 檔案。
 
 <a name="ssox"></a>
-* 從 [檢視]**** 功能表中，開啟 [SQL Server 物件總管]**** (SSOX)。
+* 從 [檢視]  功能表中，開啟 [SQL Server 物件總管]  (SSOX)。
 
   ![檢視功能表](sql/_static/ssox.png)
 
-* 以滑鼠右鍵按一下 `Movie` 資料表，並選取 [檢視表設計工具]****：
+* 以滑鼠右鍵按一下 `Movie` 資料表，並選取 [檢視表設計工具]  ：
 
   ![在 Movie 資料表上開啟的操作功能表](sql/_static/design.png)
 
@@ -78,7 +79,7 @@ LocalDB 為輕量版的 SQL Server Express 資料庫引擎，鎖定程式開發�
 
 請注意 `ID` 旁的索引鍵圖示。 根據預設，EF 會為主索引鍵建立名為 `ID` 的屬性。
 
-* 以滑鼠右鍵按一下 `Movie` 資料表，並選取 [檢視資料]****：
+* 以滑鼠右鍵按一下 `Movie` 資料表，並選取 [檢視資料]  ：
 
   ![開啟的電影資料表顯示資料表資料](sql/_static/vd22.png)
 
@@ -130,7 +131,7 @@ if (context.Movie.Any())
 * 刪除資料庫中的所有記錄。 您可以使用瀏覽器或 [SSOX](xref:tutorials/razor-pages/new-field#ssox) 的刪除連結來執行這項操作
 * 強制應用程式初始化 (呼叫 `Startup` 類別中的方法)，以執行植入方法。 若要強制初始化，IIS Express 必須停止並重新啟動。 您可以使用下列其中一個方法來執行此工作：
 
-  * 以滑鼠右鍵按一下通知區域中的 [IIS Express 系統匣] 圖示，然後 **按一下 [結束] 或 [** **停止網站**]：
+  * 以滑鼠右鍵按一下通知區域中的 [IIS Express 系統匣] 圖示，然後 **按一下 [結束] 或 [** **停止網站** ]：
 
     ![IIS Express 系統匣圖示](../first-mvc-app/working-with-sql/_static/iisExIcon.png)
 
@@ -161,7 +162,7 @@ if (context.Movie.Any())
 
 [!INCLUDE[](~/includes/rp/download.md)]
 
-`RazorPagesMovieContext` 物件會處理連線到資料庫和將 `Movie` 物件對應至資料庫記錄的工作。 在 *Startup.cs* 的 `ConfigureServices` 方法中，以[相依性插入](xref:fundamentals/dependency-injection)容器登錄資料庫內容：
+`RazorPagesMovieContext` 物件會處理連線到資料庫和將 `Movie` 物件對應至資料庫記錄的工作。 在 *Startup.cs* 的 `ConfigureServices` 方法中，以 [相依性插入](xref:fundamentals/dependency-injection)容器登錄資料庫內容：
 
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
@@ -178,7 +179,7 @@ if (context.Movie.Any())
 * 適用於 `CookiePolicyOptions` 的 [ASP.NET Core 中的 EU 一般資料保護規定 (GDPR) 支援](xref:security/gdpr)。
 * [SetCompatibilityVersion](xref:mvc/compatibility-version)
 
-ASP.NET Core [組態](xref:fundamentals/configuration/index)系統會讀取 `ConnectionString`。 針對本機開發，它會從檔案中的 *appsettings.js* 取得連接字串。
+ASP.NET Core [組態](xref:fundamentals/configuration/index)系統會讀取 `ConnectionString`。 針對本機開發，它會從檔案取得連接字串 *appsettings.json* 。
 
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
@@ -205,11 +206,11 @@ ASP.NET Core [組態](xref:fundamentals/configuration/index)系統會讀取 `Con
 LocalDB 為輕量版的 SQL Server Express 資料庫引擎，鎖定程式開發為其目標。 LocalDB 會依需求啟動，並以使用者模式執行，因此沒有複雜的組態。 LocalDB 資料庫預設會在 `C:/Users/<user/>` 目錄中建立 `*.mdf` 檔案。
 
 <a name="ssox"></a>
-* 從 [檢視]**** 功能表中，開啟 [SQL Server 物件總管]**** (SSOX)。
+* 從 [檢視]  功能表中，開啟 [SQL Server 物件總管]  (SSOX)。
 
   ![檢視功能表](sql/_static/ssox.png)
 
-* 以滑鼠右鍵按一下 `Movie` 資料表，並選取 [檢視表設計工具]****：
+* 以滑鼠右鍵按一下 `Movie` 資料表，並選取 [檢視表設計工具]  ：
 
   ![在電影資料表上開啟操作功能表](sql/_static/design.png)
 
@@ -217,7 +218,7 @@ LocalDB 為輕量版的 SQL Server Express 資料庫引擎，鎖定程式開發�
 
 請注意 `ID` 旁的索引鍵圖示。 根據預設，EF 會為主索引鍵建立名為 `ID` 的屬性。
 
-* 以滑鼠右鍵按一下 `Movie` 資料表，並選取 [檢視資料]****：
+* 以滑鼠右鍵按一下 `Movie` 資料表，並選取 [檢視資料]  ：
 
   ![開啟的電影資料表顯示資料表資料](sql/_static/vd22.png)
 
@@ -274,7 +275,7 @@ SqlException：無法開啟 Razor 登入所要求的資料庫 "PagesMovieCoNtext
 * 刪除資料庫中的所有記錄。 您可以使用瀏覽器或 [SSOX](xref:tutorials/razor-pages/new-field#ssox) 的刪除連結來執行這項操作
 * 強制應用程式初始化 (呼叫 `Startup` 類別中的方法)，以執行植入方法。 若要強制初始化，IIS Express 必須停止並重新啟動。 您可以使用下列其中一個方法來執行此工作：
 
-  * 以滑鼠右鍵按一下通知區域中的 IIS Express 系統匣圖示，然後點選 [結束]**** 或 [停止站台]****：
+  * 以滑鼠右鍵按一下通知區域中的 IIS Express 系統匣圖示，然後點選 [結束]  或 [停止站台]  ：
 
     ![IIS Express 系統匣圖示](../first-mvc-app/working-with-sql/_static/iisExIcon.png)
 

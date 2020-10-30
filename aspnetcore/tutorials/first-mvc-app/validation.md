@@ -5,6 +5,7 @@ description: ASP.NET Core MVC 之教學課程系列的第9部分。
 ms.author: riande
 ms.date: 04/13/2017
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -16,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: tutorials/first-mvc-app/validation
-ms.openlocfilehash: c6904606cfe82a6c3a375667b2b2fcae0ab31d26
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: 340a66c4a561c6e00bf6f38bcf51abc795aa649c
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88628634"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93059087"
 ---
 # <a name="part-9-add-validation-to-an-aspnet-core-mvc-app"></a>第9部分：將驗證新增至 ASP.NET Core MVC 應用程式
 
@@ -44,7 +45,7 @@ MVC 和 Entity Framework Core Code First 所提供的驗證支援就是執行 DR
 
 執行應用程式並巡覽至電影控制器。
 
-點選 [新建]**** 連結以新增新電影。 使用無效值填寫表單。 jQuery 用戶端驗證一偵測到錯誤，就會顯示錯誤訊息。
+點選 [新建]  連結以新增新電影。 使用無效值填寫表單。 jQuery 用戶端驗證一偵測到錯誤，就會顯示錯誤訊息。
 
 ![有多個 jQuery 用戶端驗證錯誤的電影檢視表單](~/tutorials/first-mvc-app/validation/_static/val.png)
 
@@ -96,7 +97,7 @@ MVC 和 Entity Framework Core Code First 所提供的驗證支援就是執行 DR
 
 [!code-csharp[](~/tutorials/first-mvc-app/start-mvc/sample/MvcMovie/Models/MovieDateRatingDA.cs?highlight=2,6&name=snippet2)]
 
-`DataType` 屬性只會提供檢視引擎格式化資料的提示 (同時會提供一些項目/屬性，例如 URL 的 `<a>` 以及用於電子郵件的 `<a href="mailto:EmailAddress.com">`)。 您可使用 `RegularExpression` 屬性来驗證資料的格式。 `DataType`屬性用於指定比資料庫內建類型更特定的資料類型，這些並非驗證屬性。 本例中，我們只想要追蹤日期，不追蹤時間。 `DataType` 列舉提供許多資料類型，例如 Date、Time、PhoneNumber、Currency、EmailAddress 等等。 `DataType` 屬性也可讓應用程式自動提供類型的特定功能。 例如，可建立 `DataType.EmailAddress` 的 `mailto:` 連結，而且可以在支援 HTML5 的瀏覽器中提供 `DataType.Date` 的日期選擇器。 `DataType` 屬性會發出 HTML 5 瀏覽器了解的 HTML 5 `data-` (讀音 data dash) 屬性。 `DataType` 屬性**不**會提供任何驗證。
+`DataType` 屬性只會提供檢視引擎格式化資料的提示 (同時會提供一些項目/屬性，例如 URL 的 `<a>` 以及用於電子郵件的 `<a href="mailto:EmailAddress.com">`)。 您可使用 `RegularExpression` 屬性来驗證資料的格式。 `DataType`屬性用於指定比資料庫內建類型更特定的資料類型，這些並非驗證屬性。 本例中，我們只想要追蹤日期，不追蹤時間。 `DataType` 列舉提供許多資料類型，例如 Date、Time、PhoneNumber、Currency、EmailAddress 等等。 `DataType` 屬性也可讓應用程式自動提供類型的特定功能。 例如，可建立 `DataType.EmailAddress` 的 `mailto:` 連結，而且可以在支援 HTML5 的瀏覽器中提供 `DataType.Date` 的日期選擇器。 `DataType` 屬性會發出 HTML 5 瀏覽器了解的 HTML 5 `data-` (讀音 data dash) 屬性。 `DataType` 屬性 **不** 會提供任何驗證。
 
 `DataType.Date` 未指定顯示日期的格式。 根據預設，將依據以伺服器 `CultureInfo` 為基礎的預設格式顯示資料欄位。
 

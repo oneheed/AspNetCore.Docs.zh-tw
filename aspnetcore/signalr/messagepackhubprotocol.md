@@ -7,6 +7,7 @@ ms.author: bradyg
 ms.custom: mvc
 ms.date: 09/24/2020
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -18,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: signalr/messagepackhubprotocol
-ms.openlocfilehash: 15ae8911e2ffba43c7bb885efd153d8b6803bc2a
-ms.sourcegitcommit: 74f4a4ddbe3c2f11e2e09d05d2a979784d89d3f5
+ms.openlocfilehash: e7d19a42e48048d2be4b87d6b0ac1ba6b2596ff1
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 09/27/2020
-ms.locfileid: "91393674"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93058164"
 ---
 # <a name="use-messagepack-hub-protocol-in-no-locsignalr-for-aspnet-core"></a>使用中的 MessagePack Hub 通訊協定 SignalR 進行 ASP.NET Core
 
@@ -96,10 +97,10 @@ npm install @microsoft/signalr-protocol-msgpack
 
 *node_modules\\@microsoft\signalr-protocol-msgpack\dist\browser\signalr-protocol-msgpack.js* 
 
-在瀏覽器中， `msgpack5` 也必須參考程式庫。 使用 `<script>` 標記來建立參考。 您可以在 *node_modules\msgpack5\dist\msgpack5.js*找到該程式庫。
+在瀏覽器中， `msgpack5` 也必須參考程式庫。 使用 `<script>` 標記來建立參考。 您可以在 *node_modules\msgpack5\dist\msgpack5.js* 找到該程式庫。
 
 > [!NOTE]
-> 使用專案時 `<script>` ，順序很重要。 如果在*msgpack5.js*之前參考*signalr-protocol-msgpack.js* ，則嘗試使用 MessagePack 連接時，就會發生錯誤。 *signalr-protocol-msgpack.js*之前也需要*signalr.js* 。
+> 使用專案時 `<script>` ，順序很重要。 如果在 *msgpack5.js* 之前參考 *signalr-protocol-msgpack.js* ，則嘗試使用 MessagePack 連接時，就會發生錯誤。 *signalr-protocol-msgpack.js* 之前也需要 *signalr.js* 。
 
 ```html
 <script src="~/lib/signalr/signalr.js"></script>
@@ -276,10 +277,10 @@ npm install @microsoft/signalr-protocol-msgpack
 
 *node_modules\\@microsoft\signalr-protocol-msgpack\dist\browser\signalr-protocol-msgpack.js* 
 
-在瀏覽器中， `msgpack5` 也必須參考程式庫。 使用 `<script>` 標記來建立參考。 您可以在 *node_modules\msgpack5\dist\msgpack5.js*找到該程式庫。
+在瀏覽器中， `msgpack5` 也必須參考程式庫。 使用 `<script>` 標記來建立參考。 您可以在 *node_modules\msgpack5\dist\msgpack5.js* 找到該程式庫。
 
 > [!NOTE]
-> 使用專案時 `<script>` ，順序很重要。 如果在*msgpack5.js*之前參考*signalr-protocol-msgpack.js* ，則嘗試使用 MessagePack 連接時，就會發生錯誤。 *signalr-protocol-msgpack.js*之前也需要*signalr.js* 。
+> 使用專案時 `<script>` ，順序很重要。 如果在 *msgpack5.js* 之前參考 *signalr-protocol-msgpack.js* ，則嘗試使用 MessagePack 連接時，就會發生錯誤。 *signalr-protocol-msgpack.js* 之前也需要 *signalr.js* 。
 
 ```html
 <script src="~/lib/signalr/signalr.js"></script>
@@ -456,10 +457,10 @@ npm install @aspnet/signalr-protocol-msgpack
 
 *node_modules\\@aspnet\signalr-protocol-msgpack\dist\browser\signalr-protocol-msgpack.js*
 
-在瀏覽器中， `msgpack5` 也必須參考程式庫。 使用 `<script>` 標記來建立參考。 您可以在 *node_modules\msgpack5\dist\msgpack5.js*找到該程式庫。
+在瀏覽器中， `msgpack5` 也必須參考程式庫。 使用 `<script>` 標記來建立參考。 您可以在 *node_modules\msgpack5\dist\msgpack5.js* 找到該程式庫。
 
 > [!NOTE]
-> 使用專案時 `<script>` ，順序很重要。 如果在*msgpack5.js*之前參考*signalr-protocol-msgpack.js* ，則嘗試使用 MessagePack 連接時，就會發生錯誤。 *signalr-protocol-msgpack.js*之前也需要*signalr.js* 。
+> 使用專案時 `<script>` ，順序很重要。 如果在 *msgpack5.js* 之前參考 *signalr-protocol-msgpack.js* ，則嘗試使用 MessagePack 連接時，就會發生錯誤。 *signalr-protocol-msgpack.js* 之前也需要 *signalr.js* 。
 
 ```html
 <script src="~/lib/signalr/signalr.js"></script>

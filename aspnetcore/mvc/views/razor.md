@@ -5,6 +5,7 @@ description: 瞭解將 Razor 以伺服器為基礎的程式碼內嵌到網頁中
 ms.author: riande
 ms.date: 02/12/2020
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -16,22 +17,22 @@ no-loc:
 - Razor
 - SignalR
 uid: mvc/views/razor
-ms.openlocfilehash: 9c2bbd2d463af8a2ea7db716d01bf1436338ea77
-ms.sourcegitcommit: cd861463faf44956855e3c4b3669483bbc4a7463
+ms.openlocfilehash: c1278b0cd3e58814b1c06dca81efd662c3de0c54
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 08/29/2020
-ms.locfileid: "89101357"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93059191"
 ---
 # <a name="no-locrazor-syntax-reference-for-aspnet-core"></a>Razor ASP.NET Core 的語法參考
 
 由 [Rick Anderson](https://twitter.com/RickAndMSFT)、 [Taylor Mullen](https://twitter.com/ntaylormullen)和 [Dan Vicarel](https://github.com/Rabadash8820)
 
-Razor 是將伺服器程式碼內嵌到網頁中的標記語法。 Razor語法包含 Razor 標記、c # 和 HTML。 通常包含 Razor 的檔案副檔名為 *cshtml* 。 Razor也可在 (*razor*) 的[ Razor 元件](xref:blazor/components/index)檔案中找到。
+Razor 是將伺服器程式碼內嵌到網頁中的標記語法。 Razor語法包含 Razor 標記、c # 和 HTML。 通常包含 Razor 的檔案副檔名為 *cshtml* 。 Razor也可在 ( *razor* ) 的 [ Razor 元件](xref:blazor/components/index)檔案中找到。
 
 ## <a name="rendering-html"></a>轉譯 HTML
 
-預設 Razor 語言為 HTML。 從標記呈現 HTML 與 Razor 從 html 檔案轉譯 html 並無不同。 *Cshtml*檔案中的 HTML 標籤 Razor 是由伺服器轉譯，而不會變更。
+預設 Razor 語言為 HTML。 從標記呈現 HTML 與 Razor 從 html 檔案轉譯 html 並無不同。 *Cshtml* 檔案中的 HTML 標籤 Razor 是由伺服器轉譯，而不會變更。
 
 ## <a name="no-locrazor-syntax"></a>Razor 語法
 
@@ -72,7 +73,7 @@ HTML 屬性及含有電子郵件地址的內容不會將 `@` 符號視為轉換�
 <p>@await DoSomething("hello", "world")</p>
 ```
 
-隱含運算式「不能」**** 包含 C# 泛型，因為括弧 (`<>`) 內的字元會解譯為 HTML 標籤。 下列程式碼**無效**：
+隱含運算式「不能」  包含 C# 泛型，因為括弧 (`<>`) 內的字元會解譯為 HTML 標籤。 下列程式碼 **無效** ：
 
 ```cshtml
 <p>@GenericMethod<int>()</p>
@@ -657,7 +658,7 @@ Razor 公開 `Model` 屬性，以存取傳遞給視圖的模型：
 
 針對 Razor 下表所示的頁面範例：
 
-* 每個頁面都會匯入 *Pages/_ViewImports.cshtml*。
+* 每個頁面都會匯入 *Pages/_ViewImports.cshtml* 。
 * *Pages/_ViewImports.cshtml* 包含 `@namespace Hello.World`。
 * 每個頁面都有 `Hello.World` 作為其命名空間的根目錄。
 
@@ -692,7 +693,7 @@ Razor 公開 `Model` 屬性，以存取傳遞給視圖的模型：
 
 ::: moniker range="< aspnetcore-3.0"
 
-`@page` *Cshtml*檔案第一行的指示詞指出檔案是 Razor 頁面。 如需詳細資訊，請參閱<xref:razor-pages/index>。
+`@page` *Cshtml* 檔案第一行的指示詞指出檔案是 Razor 頁面。 如需詳細資訊，請參閱<xref:razor-pages/index>。
 
 ::: moniker-end
 
@@ -930,7 +931,7 @@ C # Razor 關鍵字必須以 (進行雙重換用 `@(@C# Razor Keyword)` ，例�
 
 ::: moniker range=">= aspnetcore-2.1"
 
-在 .NET Core SDK 2.1 或更新版本中， [ Razor SDK](xref:razor-pages/sdk)會處理檔案的編譯 Razor 。 建立專案時，SDK 會 Razor 在專案根目錄中產生一個*obj/<build_configuration>/<Razor target_framework_moniker>/* 目錄。 目錄中的目錄結構會 *Razor* 鏡像專案的目錄結構。
+在 .NET Core SDK 2.1 或更新版本中， [ Razor SDK](xref:razor-pages/sdk)會處理檔案的編譯 Razor 。 建立專案時，SDK 會 Razor 在專案根目錄中產生一個 *obj/<build_configuration>/<Razor target_framework_moniker>/* 目錄。 目錄中的目錄結構會 *Razor* 鏡像專案的目錄結構。
 
 在以 .NET Core 2.1 為目標的 ASP.NET Core 2.1 頁面專案中，請考慮下列目錄結構 Razor ：
 
@@ -968,7 +969,7 @@ C # Razor 關鍵字必須以 (進行雙重換用 `@(@C# Razor Keyword)` ，例�
            Index.g.cshtml.cs
 ```
 
-若要查看針對 *Pages/Index*所產生的類別，請開啟 *obj/Debug/netcoreapp 2.1/ Razor /Pages/Index.g.cshtml.cs*。
+若要查看針對 *Pages/Index* 所產生的類別，請開啟 *obj/Debug/netcoreapp 2.1/ Razor /Pages/Index.g.cshtml.cs* 。
 
 ::: moniker-end
 
@@ -994,7 +995,7 @@ RazorView engine 會針對視圖執行區分大小寫的查閱。 不過，實�
 
 * 檔案式來源：
   * 在具有不區分大小寫之檔案系統的作業系統上 (例如 Windows)，實體檔案提供者查閱不會區分大小寫。 例如，`return View("Test")` 針對 */Views/Home/Test.cshtml* 和 */Views/home/test.cshtml* (以及任何其他大小寫變體) 會有相符的結果。
-  * 在區分大小寫的檔案系統上 (例如 Linux、OSX 及使用 `EmbeddedFileProvider`)，查閱會區分大小寫。 例如，`return View("Test")` 會明確符合 */Views/Home/Test.cshtml*。
+  * 在區分大小寫的檔案系統上 (例如 Linux、OSX 及使用 `EmbeddedFileProvider`)，查閱會區分大小寫。 例如，`return View("Test")` 會明確符合 */Views/Home/Test.cshtml* 。
 * 先行編譯的檢視：在 ASP.NET Core 2.0 和更新版本中，在所有作業系統上查閱先行編譯的檢視不會區分大小寫。 此行為與 Windows 上之實體檔案提供者的行為相同。 如果兩個先行編譯的檢視只有大小寫不同，查閱的結果不會由此決定。
 
 建議開發人員比對檔案和目錄的大小寫以及下列項目的大小寫：

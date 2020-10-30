@@ -6,6 +6,7 @@ monikerRange: '>= aspnetcore-2.1'
 ms.author: riande
 ms.date: 2/18/2020
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -17,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: razor-pages/filter
-ms.openlocfilehash: 436d640130b378e2c770322186020c6e252872ef
-ms.sourcegitcommit: 24106b7ffffc9fff410a679863e28aeb2bbe5b7e
+ms.openlocfilehash: a6d25c1b88e09560c1aad9aefd9148f7fe293909
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 09/17/2020
-ms.locfileid: "90722510"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93056825"
 ---
 # <a name="filter-methods-for-no-locrazor-pages-in-aspnet-core"></a>RazorASP.NET Core 中頁面的篩選方法
 
@@ -58,7 +59,7 @@ Razor 頁面篩選器提供下列方法，可在全域或在頁面層級套用�
   * [OnPageHandlerSelectionAsync](/dotnet/api/microsoft.aspnetcore.mvc.filters.iasyncpagefilter.onpagehandlerselectionasync?view=aspnetcore-2.0)：在選取處理常式方法之後，但在進行模型繫結之前以非同步方式呼叫。
   * [OnPageHandlerExecutionAsync](/dotnet/api/microsoft.aspnetcore.mvc.filters.iasyncpagefilter.onpagehandlerexecutionasync?view=aspnetcore-2.0)：在叫用處理常式方法之前，並在完成模型繫結之後以非同步方式呼叫。
 
-請實作同步**或**非同步版本的篩選條件介面，而**不要**同時實作這兩者。 架構會先檢查以查看篩選條件是否實作非同步介面，如果是的話，便呼叫該介面。 如果沒有，它會呼叫同步介面的方法。 如果這兩個介面都已執行，則只會呼叫非同步方法。 相同的規則會套用至頁面中的覆寫，實作覆寫的同步或非同步版本，但不能同時實作。
+請實作同步 **或** 非同步版本的篩選條件介面，而 **不要** 同時實作這兩者。 架構會先檢查以查看篩選條件是否實作非同步介面，如果是的話，便呼叫該介面。 如果沒有，它會呼叫同步介面的方法。 如果這兩個介面都已執行，則只會呼叫非同步方法。 相同的規則會套用至頁面中的覆寫，實作覆寫的同步或非同步版本，但不能同時實作。
 
 ## <a name="implement-no-locrazor-page-filters-globally"></a>Razor全域執行頁面篩選
 
@@ -72,7 +73,7 @@ Razor 頁面篩選器提供下列方法，可在全域或在頁面層級套用�
 
 [!code-csharp[Main](filter/3.1sample/PageFilter/Startup.cs?name=snippet2)]
 
-下列程式碼會呼叫，將套用 <xref:Microsoft.AspNetCore.Mvc.ApplicationModels.PageConventionCollection.AddFolderApplicationModelConvention*> `SampleAsyncPageFilter` 至 */Movies*中的頁面：
+下列程式碼會呼叫，將套用 <xref:Microsoft.AspNetCore.Mvc.ApplicationModels.PageConventionCollection.AddFolderApplicationModelConvention*> `SampleAsyncPageFilter` 至 */Movies* 中的頁面：
 
 [!code-csharp[Main](filter/3.1sample/PageFilter/Startup2.cs?name=snippet2)]
 
@@ -102,7 +103,7 @@ Razor 頁面篩選器提供下列方法，可在全域或在頁面層級套用�
 
 [!code-csharp[Main](filter/3.1sample/PageFilter/Pages/Movies/Test.cshtml.cs)]
 
-使用瀏覽器開發人員工具之類的工具來檢查標頭。 在 [ **回應標頭**] 底下 `author: Rick` 顯示。
+使用瀏覽器開發人員工具之類的工具來檢查標頭。 在 [ **回應標頭** ] 底下 `author: Rick` 顯示。
 
 如需覆寫順序的指示，請參閱[覆寫預設順序](xref:mvc/controllers/filters#overriding-the-default-order)。
 
@@ -150,7 +151,7 @@ Razor 頁面篩選器提供下列方法，可在全域或在頁面層級套用�
   * [OnPageHandlerExecutionAsync](/dotnet/api/microsoft.aspnetcore.mvc.filters.iasyncpagefilter.onpagehandlerexecutionasync?view=aspnetcore-2.0)：在叫用處理常式方法之前，並在完成模型繫結之後以非同步方式呼叫。
 
 > [!NOTE]
-> 請實作同步**或**非同步版本的篩選條件介面，而不要同時實作這兩者。 架構會先檢查以查看篩選條件是否實作非同步介面，如果是的話，便呼叫該介面。 如果沒有，它會呼叫同步介面的方法。 如果這兩個介面都已執行，則只會呼叫非同步方法。 相同的規則會套用至頁面中的覆寫，實作覆寫的同步或非同步版本，但不能同時實作。
+> 請實作同步 **或** 非同步版本的篩選條件介面，而不要同時實作這兩者。 架構會先檢查以查看篩選條件是否實作非同步介面，如果是的話，便呼叫該介面。 如果沒有，它會呼叫同步介面的方法。 如果這兩個介面都已執行，則只會呼叫非同步方法。 相同的規則會套用至頁面中的覆寫，實作覆寫的同步或非同步版本，但不能同時實作。
 
 ## <a name="implement-no-locrazor-page-filters-globally"></a>Razor全域執行頁面篩選
 

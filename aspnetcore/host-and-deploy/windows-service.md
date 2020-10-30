@@ -7,6 +7,7 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 02/07/2020
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -18,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: host-and-deploy/windows-service
-ms.openlocfilehash: d4df10f9450ca956d7b1a4297caa63cdd0caf23e
-ms.sourcegitcommit: ecae2aa432628b9181d1fa11037c231c7dd56c9e
+ms.openlocfilehash: 31a738e7aa8779171dfa09a5678d7240b8f62343
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 10/16/2020
-ms.locfileid: "92113747"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93057228"
 ---
 # <a name="host-aspnet-core-in-a-windows-service"></a>在 Windows 服務上裝載 ASP.NET Core
 
@@ -58,10 +59,10 @@ ASP.NET Core 背景工作服務範本提供撰寫長期執行服務應用程式�
 * 啟用記錄至事件記錄檔：
   * 應用程式名稱會用來做為預設來源名稱。
   * 根據呼叫來建立主機的 ASP.NET Core 範本，應用程式的預設記錄層級為 *警告* 或更高 `CreateDefaultBuilder` 。
-  * 在 `Logging:EventLog:LogLevel:Default` appsettings*上使用appsettings.js*中的金鑰覆寫預設記錄層級 / *。 {環境}. json*或其他設定提供者。
-  * 只有系統管理員才能建立新的事件來源。 如果無法使用應用程式名稱建立事件來源，則會向「應用程式」** 來源記錄警告，並停用事件記錄檔。
+  * 使用 appsettings 中的金鑰覆寫預設記錄層級 `Logging:EventLog:LogLevel:Default` *appsettings.json* / *。 {環境}. json* 或其他設定提供者。
+  * 只有系統管理員才能建立新的事件來源。 如果無法使用應用程式名稱建立事件來源，則會向「應用程式」  來源記錄警告，並停用事件記錄檔。
 
-在 `CreateHostBuilder` *Program.cs*中：
+在 `CreateHostBuilder` *Program.cs* 中：
 
 ```csharp
 Host.CreateDefaultBuilder(args)
@@ -96,7 +97,7 @@ Host.CreateDefaultBuilder(args)
 
 ### <a name="framework-dependent-deployment-fdd"></a>架構相依部署 (FDD)
 
-架構相依部署 (FDD) 仰賴存在於目標系統上的全系統共用 .NET Core 版本。 依照此文章中的指導方針採用 FDD 案例時，SDK 會產生可執行檔 (*.exe*)，稱為「架構相依可執行檔」**。
+架構相依部署 (FDD) 仰賴存在於目標系統上的全系統共用 .NET Core 版本。 依照此文章中的指導方針採用 FDD 案例時，SDK 會產生可執行檔 (  。
 
 如果使用 [WEB SDK](#sdk)，則在發佈 ASP.NET Core 應用程式時通常會產生的 *web.config* 檔案，對 Windows 服務應用程式而言是不必要的。 若要停用 *web.config* 檔案的建立，請新增 `<IsTransformWebConfigDisabled>` 屬性集到 `true`。
 
@@ -150,16 +151,16 @@ powershell -Command "New-LocalUser -Name {SERVICE NAME}"
 
 ## <a name="log-on-as-a-service-rights"></a>以服務方式登入權限
 
-若要為服務使用者帳戶建立「以服務方式登入」** 權限：
+若要為服務使用者帳戶建立「以服務方式登入」  權限：
 
 1. 執行 *secpol.msc* 來開啟 [本機安全性原則編輯器]。
-1. 展開 [本機原則]**** 節點，然後選取 [使用者權限指派]****。
-1. 開啟 [以服務方式登入]**** 原則。
-1. 選取 [新增使用者或群組]****。
+1. 展開 [本機原則]  節點，然後選取 [使用者權限指派]  。
+1. 開啟 [以服務方式登入]  原則。
+1. 選取 [新增使用者或群組]  。
 1. 使用下列其中一種方法提供物件名稱 (使用者帳戶)：
-   1. 在物件名稱欄位中輸入使用者帳戶 (`{DOMAIN OR COMPUTER NAME\USER}`)，然後選取 [確定]**** 將使用者新增至原則。
-   1. 選取 [進階]  。 選取 [立即尋找]****。 從清單中選取使用者帳戶。 選取 [確定]  。 再次選取 [確定]**** 將使用者新增至原則。
-1. 選取 [確定]**** 或 [套用]**** 以接受變更。
+   1. 在物件名稱欄位中輸入使用者帳戶 (`{DOMAIN OR COMPUTER NAME\USER}`)，然後選取 [確定]  將使用者新增至原則。
+   1. 選取 [進階]  。 選取 [立即尋找]  。 從清單中選取使用者帳戶。 選取 [確定]  。 再次選取 [確定]  將使用者新增至原則。
+1. 選取 [確定]  或 [套用]  以接受變更。
 
 ## <a name="create-and-manage-the-windows-service"></a>建立及管理 Windows 服務
 
@@ -253,9 +254,9 @@ ASP.NET Core 預設會繫結至 `http://localhost:5000`。 藉由設定環境變
 
 當應用程式以服務的形式執行時，會 <xref:Microsoft.Extensions.Hosting.WindowsServiceLifetimeHostBuilderExtensions.UseWindowsService*> 將設定 <xref:Microsoft.Extensions.Hosting.IHostEnvironment.ContentRootPath> 為 [AppCoNtext. BaseDirectory](xref:System.AppContext.BaseDirectory)。
 
-應用程式的預設設定檔， *appsettings.js開啟* 和 *appsettings。 {* 從應用程式的內容根目錄載入環境} json，方法是 [在主機結構期間呼叫 >createdefaultbuilder](xref:fundamentals/host/generic-host#set-up-a-host)。
+應用程式的預設設定檔案， *appsettings.json* 以及 *appsettings. {* 從應用程式的內容根目錄載入環境} json，方法是 [在主機結構期間呼叫 >createdefaultbuilder](xref:fundamentals/host/generic-host#set-up-a-host)。
 
-若為開發人員程式碼在中載入的其他設定檔案 <xref:Microsoft.Extensions.Hosting.HostBuilder.ConfigureAppConfiguration*> ，則不需要呼叫 <xref:Microsoft.Extensions.Configuration.FileConfigurationExtensions.SetBasePath*> 。 在下列範例中，檔案 * 上的custom_settings.js* 會存在於應用程式的內容根目錄中，並在未明確設定基底路徑的情況下載入：
+若為開發人員程式碼在中載入的其他設定檔案 <xref:Microsoft.Extensions.Hosting.HostBuilder.ConfigureAppConfiguration*> ，則不需要呼叫 <xref:Microsoft.Extensions.Configuration.FileConfigurationExtensions.SetBasePath*> 。 在下列範例中，檔案 *上的custom_settings.js* 會存在於應用程式的內容根目錄中，並在未明確設定基底路徑的情況下載入：
 
 [!code-csharp[](windows-service/samples_snapshot/CustomSettingsExample.cs?highlight=13)]
 
@@ -272,11 +273,11 @@ ASP.NET Core 預設會繫結至 `http://localhost:5000`。 藉由設定環境變
 ### <a name="common-errors"></a>常見錯誤
 
 * 舊版或發行前版本的 PowerShell 正在使用中。
-* 註冊的服務不會使用[dotnet publish](/dotnet/core/tools/dotnet-publish)命令中的應用程式**已發佈**輸出。 應用程式部署不支援 [dotnet 組建](/dotnet/core/tools/dotnet-build) 命令的輸出。 根據部署類型，您可以在下列其中一個資料夾中找到已發佈的資產：
+* 註冊的服務不會使用 [dotnet publish](/dotnet/core/tools/dotnet-publish)命令中的應用程式 **已發佈** 輸出。 應用程式部署不支援 [dotnet 組建](/dotnet/core/tools/dotnet-build) 命令的輸出。 根據部署類型，您可以在下列其中一個資料夾中找到已發佈的資產：
   * *bin/Release/{目標 FRAMEWORK}/publish* (FDD) 
   * *bin/Release/{目標 FRAMEWORK}/{RUNTIME 識別碼}/publish* (SCD) 
 * 服務未處於執行中狀態。
-* 應用程式使用的資源路徑 (例如，憑證) 不正確。 Windows 服務的基底路徑是 *c： \\ windows \\ System32*。
+* 應用程式使用的資源路徑 (例如，憑證) 不正確。 Windows 服務的基底路徑是 *c： \\ windows \\ System32* 。
 * 使用者沒有 [ *以服務方式登* 入] 許可權。
 * 執行 PowerShell 命令時，使用者的密碼已過期或不正確地傳遞 `New-Service` 。
 * 應用程式需要 ASP.NET Core authentication，但未設定 (HTTPS) 的安全連線。
@@ -286,9 +287,9 @@ ASP.NET Core 預設會繫結至 `http://localhost:5000`。 藉由設定環境變
 
 存取系統和應用程式事件記錄：
 
-1. 開啟 [開始] 功能表、搜尋 *事件檢視器*，然後選取 **事件檢視器** 應用程式。
-1. 在 [事件檢視器]**** 中，開啟 [Windows 記錄]**** 節點。
-1. 選取 [ **系統** ] 以開啟 [系統事件記錄檔]。 選取 [應用程式]**** 以開啟「應用程式事件記錄檔」。
+1. 開啟 [開始] 功能表、搜尋 *事件檢視器* ，然後選取 **事件檢視器** 應用程式。
+1. 在 [事件檢視器]  中，開啟 [Windows 記錄]  節點。
+1. 選取 [ **系統** ] 以開啟 [系統事件記錄檔]。 選取 [應用程式]  以開啟「應用程式事件記錄檔」。
 1. 搜尋與失敗應用程式相關的錯誤。
 
 ### <a name="run-the-app-at-a-command-prompt"></a>在命令提示字元中執行應用程式
@@ -299,7 +300,7 @@ ASP.NET Core 預設會繫結至 `http://localhost:5000`。 藉由設定環境變
 
 在升級開發電腦上的 .NET Core SDK 或變更應用程式內的套件版本之後，正常運作的應用程式可能會立即失敗。 在某些情況下，執行主要升級時，不一致的套件可能會中斷應用程式。 大多數這些問題都可依照下列指示來進行修正：
 
-1. 刪除 [bin]** 和 [obj]** 資料夾。
+1. 刪除 [bin]  和 [obj]  資料夾。
 1. 從命令列介面執行 [dotnet nuget 區域變數](/dotnet/core/tools/dotnet-nuget-locals) ，以清除套件快取。
 
    清除套件快取也可以使用 [nuget.exe](https://www.nuget.org/downloads) 工具和執行命令來完成 `nuget locals all -clear` 。 *nuget.exe* 並未隨附在 Windows 桌面作業系統的安裝中，必須另外從 [NuGet 網站](https://www.nuget.org/downloads)取得。
@@ -398,9 +399,9 @@ ASP.NET Core 應用程式可以裝載在 Windows 上作為 [Windows 服務](/dot
 
 ### <a name="framework-dependent-deployment-fdd"></a>架構相依部署 (FDD)
 
-架構相依部署 (FDD) 仰賴存在於目標系統上的全系統共用 .NET Core 版本。 依照此文章中的指導方針採用 FDD 案例時，SDK 會產生可執行檔 (*.exe*)，稱為「架構相依可執行檔」**。
+架構相依部署 (FDD) 仰賴存在於目標系統上的全系統共用 .NET Core 版本。 依照此文章中的指導方針採用 FDD 案例時，SDK 會產生可執行檔 (  。
 
-Windows [執行時間識別碼 (RID) ](/dotnet/core/rid-catalog) ([\<RuntimeIdentifier>](/dotnet/core/tools/csproj#runtimeidentifier)) 包含目標 framework。 在下列範例中，RID 已設定為 `win7-x64`。 `<SelfContained>` 屬性會設定為 `false`。 這些屬性會指示 SDK，針對 Windows 和相依於共用 .NET Core framework 的應用程式產生可執行檔 (*.exe*)。
+Windows [執行時間識別碼 (RID) ](/dotnet/core/rid-catalog) ([\<RuntimeIdentifier>](/dotnet/core/tools/csproj#runtimeidentifier)) 包含目標 framework。 在下列範例中，RID 已設定為 `win7-x64`。 `<SelfContained>` 屬性設定為 `false`。 這些屬性會指示 SDK，針對 Windows 和相依於共用 .NET Core framework 的應用程式產生可執行檔 ( *.exe* )。
 
 針對 Windows Services 應用程式，不需要 *web.config* 檔案 (發行 ASP.NET Core 應用程式時通常會產生此檔案)。 若要停用 *web.config* 檔案的建立，請新增 `<IsTransformWebConfigDisabled>` 屬性集到 `true`。
 
@@ -462,16 +463,16 @@ powershell -Command "New-LocalUser -Name {SERVICE NAME}"
 
 ## <a name="log-on-as-a-service-rights"></a>以服務方式登入權限
 
-若要為服務使用者帳戶建立「以服務方式登入」** 權限：
+若要為服務使用者帳戶建立「以服務方式登入」  權限：
 
 1. 執行 *secpol.msc* 來開啟 [本機安全性原則編輯器]。
-1. 展開 [本機原則]**** 節點，然後選取 [使用者權限指派]****。
-1. 開啟 [以服務方式登入]**** 原則。
-1. 選取 [新增使用者或群組]****。
+1. 展開 [本機原則]  節點，然後選取 [使用者權限指派]  。
+1. 開啟 [以服務方式登入]  原則。
+1. 選取 [新增使用者或群組]  。
 1. 使用下列其中一種方法提供物件名稱 (使用者帳戶)：
-   1. 在物件名稱欄位中輸入使用者帳戶 (`{DOMAIN OR COMPUTER NAME\USER}`)，然後選取 [確定]**** 將使用者新增至原則。
-   1. 選取 [進階]  。 選取 [立即尋找]****。 從清單中選取使用者帳戶。 選取 [確定]  。 再次選取 [確定]**** 將使用者新增至原則。
-1. 選取 [確定]**** 或 [套用]**** 以接受變更。
+   1. 在物件名稱欄位中輸入使用者帳戶 (`{DOMAIN OR COMPUTER NAME\USER}`)，然後選取 [確定]  將使用者新增至原則。
+   1. 選取 [進階]  。 選取 [立即尋找]  。 從清單中選取使用者帳戶。 選取 [確定]  。 再次選取 [確定]  將使用者新增至原則。
+1. 選取 [確定]  或 [套用]  以接受變更。
 
 ## <a name="create-and-manage-the-windows-service"></a>建立及管理 Windows 服務
 
@@ -606,11 +607,11 @@ CreateWebHostBuilder(args)
 ### <a name="common-errors"></a>常見錯誤
 
 * 舊版或發行前版本的 PowerShell 正在使用中。
-* 註冊的服務不會使用[dotnet publish](/dotnet/core/tools/dotnet-publish)命令中的應用程式**已發佈**輸出。 應用程式部署不支援 [dotnet 組建](/dotnet/core/tools/dotnet-build) 命令的輸出。 根據部署類型，您可以在下列其中一個資料夾中找到已發佈的資產：
+* 註冊的服務不會使用 [dotnet publish](/dotnet/core/tools/dotnet-publish)命令中的應用程式 **已發佈** 輸出。 應用程式部署不支援 [dotnet 組建](/dotnet/core/tools/dotnet-build) 命令的輸出。 根據部署類型，您可以在下列其中一個資料夾中找到已發佈的資產：
   * *bin/Release/{目標 FRAMEWORK}/publish* (FDD) 
   * *bin/Release/{目標 FRAMEWORK}/{RUNTIME 識別碼}/publish* (SCD) 
 * 服務未處於執行中狀態。
-* 應用程式使用的資源路徑 (例如，憑證) 不正確。 Windows 服務的基底路徑是 *c： \\ windows \\ System32*。
+* 應用程式使用的資源路徑 (例如，憑證) 不正確。 Windows 服務的基底路徑是 *c： \\ windows \\ System32* 。
 * 使用者沒有 [ *以服務方式登* 入] 許可權。
 * 執行 PowerShell 命令時，使用者的密碼已過期或不正確地傳遞 `New-Service` 。
 * 應用程式需要 ASP.NET Core authentication，但未設定 (HTTPS) 的安全連線。
@@ -620,9 +621,9 @@ CreateWebHostBuilder(args)
 
 存取系統和應用程式事件記錄：
 
-1. 開啟 [開始] 功能表、搜尋 *事件檢視器*，然後選取 **事件檢視器** 應用程式。
-1. 在 [事件檢視器]**** 中，開啟 [Windows 記錄]**** 節點。
-1. 選取 [ **系統** ] 以開啟 [系統事件記錄檔]。 選取 [應用程式]**** 以開啟「應用程式事件記錄檔」。
+1. 開啟 [開始] 功能表、搜尋 *事件檢視器* ，然後選取 **事件檢視器** 應用程式。
+1. 在 [事件檢視器]  中，開啟 [Windows 記錄]  節點。
+1. 選取 [ **系統** ] 以開啟 [系統事件記錄檔]。 選取 [應用程式]  以開啟「應用程式事件記錄檔」。
 1. 搜尋與失敗應用程式相關的錯誤。
 
 ### <a name="run-the-app-at-a-command-prompt"></a>在命令提示字元中執行應用程式
@@ -633,7 +634,7 @@ CreateWebHostBuilder(args)
 
 在升級開發電腦上的 .NET Core SDK 或變更應用程式內的套件版本之後，正常運作的應用程式可能會立即失敗。 在某些情況下，執行主要升級時，不一致的套件可能會中斷應用程式。 大多數這些問題都可依照下列指示來進行修正：
 
-1. 刪除 [bin]** 和 [obj]** 資料夾。
+1. 刪除 [bin]  和 [obj]  資料夾。
 1. 從命令列介面執行 [dotnet nuget 區域變數](/dotnet/core/tools/dotnet-nuget-locals) ，以清除套件快取。
 
    清除套件快取也可以使用 [nuget.exe](https://www.nuget.org/downloads) 工具和執行命令來完成 `nuget locals all -clear` 。 *nuget.exe* 並未隨附在 Windows 桌面作業系統的安裝中，必須另外從 [NuGet 網站](https://www.nuget.org/downloads)取得。
@@ -732,11 +733,11 @@ ASP.NET Core 應用程式可以裝載在 Windows 上作為 [Windows 服務](/dot
 
 ### <a name="framework-dependent-deployment-fdd"></a>架構相依部署 (FDD)
 
-架構相依部署 (FDD) 仰賴存在於目標系統上的全系統共用 .NET Core 版本。 依照此文章中的指導方針採用 FDD 案例時，SDK 會產生可執行檔 (*.exe*)，稱為「架構相依可執行檔」**。
+架構相依部署 (FDD) 仰賴存在於目標系統上的全系統共用 .NET Core 版本。 依照此文章中的指導方針採用 FDD 案例時，SDK 會產生可執行檔 (  。
 
-Windows [執行時間識別碼 (RID) ](/dotnet/core/rid-catalog) ([\<RuntimeIdentifier>](/dotnet/core/tools/csproj#runtimeidentifier)) 包含目標 framework。 在下列範例中，RID 已設定為 `win7-x64`。 `<SelfContained>` 屬性會設定為 `false`。 這些屬性會指示 SDK，針對 Windows 和相依於共用 .NET Core framework 的應用程式產生可執行檔 (*.exe*)。
+Windows [執行時間識別碼 (RID) ](/dotnet/core/rid-catalog) ([\<RuntimeIdentifier>](/dotnet/core/tools/csproj#runtimeidentifier)) 包含目標 framework。 在下列範例中，RID 已設定為 `win7-x64`。 `<SelfContained>` 屬性設定為 `false`。 這些屬性會指示 SDK，針對 Windows 和相依於共用 .NET Core framework 的應用程式產生可執行檔 ( *.exe* )。
 
-`<UseAppHost>` 屬性會設定為 `true`。 此屬性為服務提供 FDD 的啟用路徑 (可執行檔 *.exe*)。
+`<UseAppHost>` 屬性設定為 `true`。 此屬性為服務提供 FDD 的啟用路徑 (可執行檔 *.exe* )。
 
 針對 Windows Services 應用程式，不需要 *web.config* 檔案 (發行 ASP.NET Core 應用程式時通常會產生此檔案)。 若要停用 *web.config* 檔案的建立，請新增 `<IsTransformWebConfigDisabled>` 屬性集到 `true`。
 
@@ -799,16 +800,16 @@ powershell -Command "New-LocalUser -Name {SERVICE NAME}"
 
 ## <a name="log-on-as-a-service-rights"></a>以服務方式登入權限
 
-若要為服務使用者帳戶建立「以服務方式登入」** 權限：
+若要為服務使用者帳戶建立「以服務方式登入」  權限：
 
 1. 執行 *secpol.msc* 來開啟 [本機安全性原則編輯器]。
-1. 展開 [本機原則]**** 節點，然後選取 [使用者權限指派]****。
-1. 開啟 [以服務方式登入]**** 原則。
-1. 選取 [新增使用者或群組]****。
+1. 展開 [本機原則]  節點，然後選取 [使用者權限指派]  。
+1. 開啟 [以服務方式登入]  原則。
+1. 選取 [新增使用者或群組]  。
 1. 使用下列其中一種方法提供物件名稱 (使用者帳戶)：
-   1. 在物件名稱欄位中輸入使用者帳戶 (`{DOMAIN OR COMPUTER NAME\USER}`)，然後選取 [確定]**** 將使用者新增至原則。
-   1. 選取 [進階]  。 選取 [立即尋找]****。 從清單中選取使用者帳戶。 選取 [確定]  。 再次選取 [確定]**** 將使用者新增至原則。
-1. 選取 [確定]**** 或 [套用]**** 以接受變更。
+   1. 在物件名稱欄位中輸入使用者帳戶 (`{DOMAIN OR COMPUTER NAME\USER}`)，然後選取 [確定]  將使用者新增至原則。
+   1. 選取 [進階]  。 選取 [立即尋找]  。 從清單中選取使用者帳戶。 選取 [確定]  。 再次選取 [確定]  將使用者新增至原則。
+1. 選取 [確定]  或 [套用]  以接受變更。
 
 ## <a name="create-and-manage-the-windows-service"></a>建立及管理 Windows 服務
 
@@ -943,11 +944,11 @@ CreateWebHostBuilder(args)
 ### <a name="common-errors"></a>常見錯誤
 
 * 舊版或發行前版本的 PowerShell 正在使用中。
-* 註冊的服務不會使用[dotnet publish](/dotnet/core/tools/dotnet-publish)命令中的應用程式**已發佈**輸出。 應用程式部署不支援 [dotnet 組建](/dotnet/core/tools/dotnet-build) 命令的輸出。 根據部署類型，您可以在下列其中一個資料夾中找到已發佈的資產：
+* 註冊的服務不會使用 [dotnet publish](/dotnet/core/tools/dotnet-publish)命令中的應用程式 **已發佈** 輸出。 應用程式部署不支援 [dotnet 組建](/dotnet/core/tools/dotnet-build) 命令的輸出。 根據部署類型，您可以在下列其中一個資料夾中找到已發佈的資產：
   * *bin/Release/{目標 FRAMEWORK}/publish* (FDD) 
   * *bin/Release/{目標 FRAMEWORK}/{RUNTIME 識別碼}/publish* (SCD) 
 * 服務未處於執行中狀態。
-* 應用程式使用的資源路徑 (例如，憑證) 不正確。 Windows 服務的基底路徑是 *c： \\ windows \\ System32*。
+* 應用程式使用的資源路徑 (例如，憑證) 不正確。 Windows 服務的基底路徑是 *c： \\ windows \\ System32* 。
 * 使用者沒有 [ *以服務方式登* 入] 許可權。
 * 執行 PowerShell 命令時，使用者的密碼已過期或不正確地傳遞 `New-Service` 。
 * 應用程式需要 ASP.NET Core authentication，但未設定 (HTTPS) 的安全連線。
@@ -957,9 +958,9 @@ CreateWebHostBuilder(args)
 
 存取系統和應用程式事件記錄：
 
-1. 開啟 [開始] 功能表、搜尋 *事件檢視器*，然後選取 **事件檢視器** 應用程式。
-1. 在 [事件檢視器]**** 中，開啟 [Windows 記錄]**** 節點。
-1. 選取 [ **系統** ] 以開啟 [系統事件記錄檔]。 選取 [應用程式]**** 以開啟「應用程式事件記錄檔」。
+1. 開啟 [開始] 功能表、搜尋 *事件檢視器* ，然後選取 **事件檢視器** 應用程式。
+1. 在 [事件檢視器]  中，開啟 [Windows 記錄]  節點。
+1. 選取 [ **系統** ] 以開啟 [系統事件記錄檔]。 選取 [應用程式]  以開啟「應用程式事件記錄檔」。
 1. 搜尋與失敗應用程式相關的錯誤。
 
 ### <a name="run-the-app-at-a-command-prompt"></a>在命令提示字元中執行應用程式
@@ -970,7 +971,7 @@ CreateWebHostBuilder(args)
 
 在升級開發電腦上的 .NET Core SDK 或變更應用程式內的套件版本之後，正常運作的應用程式可能會立即失敗。 在某些情況下，執行主要升級時，不一致的套件可能會中斷應用程式。 大多數這些問題都可依照下列指示來進行修正：
 
-1. 刪除 [bin]** 和 [obj]** 資料夾。
+1. 刪除 [bin]  和 [obj]  資料夾。
 1. 從命令列介面執行 [dotnet nuget 區域變數](/dotnet/core/tools/dotnet-nuget-locals) ，以清除套件快取。
 
    清除套件快取也可以使用 [nuget.exe](https://www.nuget.org/downloads) 工具和執行命令來完成 `nuget locals all -clear` 。 *nuget.exe* 並未隨附在 Windows 桌面作業系統的安裝中，必須另外從 [NuGet 網站](https://www.nuget.org/downloads)取得。

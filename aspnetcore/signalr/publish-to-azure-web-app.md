@@ -7,6 +7,7 @@ ms.author: bradyg
 ms.custom: mvc
 ms.date: 11/12/2019
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -18,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: signalr/publish-to-azure-web-app
-ms.openlocfilehash: b9d32e2f3c37f652be15c5857d14ac48f66695ad
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: e00eea81788c9b335691b7e5ffe6a46534c3c492
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88631923"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93058216"
 ---
 # <a name="publish-an-aspnet-core-no-locsignalr-app-to-azure-app-service"></a>SignalR將 ASP.NET Core 應用程式發佈至 Azure App Service
 
@@ -38,15 +39,15 @@ ms.locfileid: "88631923"
 
 本文涵蓋使用 Visual Studio 中的工具進行發佈。 Visual Studio Code 使用者可以使用 [Azure CLI](/cli/azure) 命令，將應用程式發佈至 Azure。 如需詳細資訊，請參閱 [使用命令列工具將 ASP.NET Core 應用程式發佈至 Azure](/azure/app-service/app-service-web-get-started-dotnet)。
 
-1. 以滑鼠右鍵按一下 **方案總管** 中的專案，然後選取 [ **發行**]。
+1. 以滑鼠右鍵按一下 **方案總管** 中的專案，然後選取 [ **發行** ]。
 
-1. 確認在 [**挑選發佈目標**] 對話方塊中選取了 [ **App Service**和**建立新**的]。
+1. 確認在 [ **挑選發佈目標** ] 對話方塊中選取了 [ **App Service** 和 **建立新** 的]。
 
-1. 從 [**發行**] 按鈕下拉式清單中選取 [**建立設定檔**]。
+1. 從 [ **發行** ] 按鈕下拉式清單中選取 [ **建立設定檔** ]。
 
-   在 [ **建立 App Service** ] 對話方塊中，輸入下表所述的資訊，然後選取 [ **建立**]。
+   在 [ **建立 App Service** ] 對話方塊中，輸入下表所述的資訊，然後選取 [ **建立** ]。
 
-   | Item               | 描述 |
+   | 項目               | 描述 |
    | ------------------ | ----------- |
    | **名稱**           | 應用程式的唯一名稱。 |
    | **訂用帳戶**   | 應用程式使用的 Azure 訂用帳戶。 |
@@ -57,9 +58,9 @@ ms.locfileid: "88631923"
 
    ![[相依性] 區域會顯示在 [新增] 下拉式清單中選取的 Azure：：： no-loc (SignalR) ：：： Service](publish-to-azure-web-app/_static/signalr-service-dependency.png)
 
-1. 在 [ **azure SignalR 服務** ] 對話方塊中，選取 [ **建立新的 azure SignalR 服務實例**]。
+1. 在 [ **azure SignalR 服務** ] 對話方塊中，選取 [ **建立新的 azure SignalR 服務實例** ]。
 
-1. 提供 **名稱**、 **資源群組**和 **位置**。 返回 [ **Azure SignalR 服務** ] 對話方塊，然後選取 [ **新增**]。
+1. 提供 **名稱** 、 **資源群組** 和 **位置** 。 返回 [ **Azure SignalR 服務** ] 對話方塊，然後選取 [ **新增** ]。
 
 Visual Studio 完成下列工作：
 
@@ -81,17 +82,17 @@ Visual Studio 完成下列工作：
 
 針對沒有 Azure 服務所裝載的應用程式 SignalR ，請啟用：
 
-* [ARR 親和性] (https://azure.github.io/AppService/2016/05/16/Disable-Session-affinity- cookie - (ARR- cookie) # B0 l) 將使用者的要求路由傳送回相同的 App Service 實例。 預設設定為 [ **開啟**]。
-* [Web 通訊端](xref:fundamentals/websockets) ，以允許 Web 通訊端傳輸運作。 預設設定為 [ **關閉**]。
+* [ARR 親和性] (https://azure.github.io/AppService/2016/05/16/Disable-Session-affinity- cookie - (ARR- cookie) # B0 l) 將使用者的要求路由傳送回相同的 App Service 實例。 預設設定為 [ **開啟** ]。
+* [Web 通訊端](xref:fundamentals/websockets) ，以允許 Web 通訊端傳輸運作。 預設設定為 [ **關閉** ]。
 
-1. 在 Azure 入口網站中，流覽至 **應用程式服務**中的 web 應用程式。
-1. 開啟**Configuration**  >  **[設定一般設定**]。
-1. 將 **Web 通訊端** 設定為 **開啟**。
-1. 確認 [ **ARR 親和性** ] 設為 [ **開啟**]。
+1. 在 Azure 入口網站中，流覽至 **應用程式服務** 中的 web 應用程式。
+1. 開啟 **Configuration**  >  **[設定一般設定** ]。
+1. 將 **Web 通訊端** 設定為 **開啟** 。
+1. 確認 [ **ARR 親和性** ] 設為 [ **開啟** ]。
 
 ## <a name="app-service-plan-limits"></a>App Service 方案限制
 
-Web 通訊端和其他傳輸會根據選取的 App Service 方案而受到限制。 如需詳細資訊，請參閱[Azure 訂用帳戶和服務限制、配額和限制](/azure/azure-subscription-service-limits#app-service-limits)一文的*Azure 雲端服務限制*和*App Service 限制*章節。
+Web 通訊端和其他傳輸會根據選取的 App Service 方案而受到限制。 如需詳細資訊，請參閱 [Azure 訂用帳戶和服務限制、配額和限制](/azure/azure-subscription-service-limits#app-service-limits)一文的 *Azure 雲端服務限制* 和 *App Service 限制* 章節。
 
 ## <a name="additional-resources"></a>其他資源
 

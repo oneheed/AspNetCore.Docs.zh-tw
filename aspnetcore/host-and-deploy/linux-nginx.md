@@ -7,6 +7,7 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 07/09/2020
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -18,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: host-and-deploy/linux-nginx
-ms.openlocfilehash: 63227f068926c4158ac8162fdc1ac11399fd65cb
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: 916bb1f761ce99b2296c84e1653e55fffa04f83c
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88633782"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93057683"
 ---
 # <a name="host-aspnet-core-on-linux-with-nginx"></a>在 Linux 上使用 Nginx 裝載 ASP.NET Core
 
@@ -34,7 +35,7 @@ ms.locfileid: "88633782"
 如需有關 ASP.NET Core 支援之其他 Linux 發行版本的資訊，請參閱 [Linux 上 .NET Core 的必要條件](/dotnet/core/linux-prerequisites)。
 
 > [!NOTE]
-> 針對 Ubuntu 14.04，建議使用 *supervisord*作為監視 Kestrel 處理序的解決方案。 在 Ubuntu 14.04 上無法使用 *systemd*。 如需 Ubuntu 14.04 指示，請參閱[本主題前一版本](https://github.com/dotnet/AspNetCore.Docs/blob/e9c1419175c4dd7e152df3746ba1df5935aaafd5/aspnetcore/publishing/linuxproduction.md)。
+> 針對 Ubuntu 14.04，建議使用 *supervisord* 作為監視 Kestrel 處理序的解決方案。 在 Ubuntu 14.04 上無法使用 *systemd* 。 如需 Ubuntu 14.04 指示，請參閱[本主題前一版本](https://github.com/dotnet/AspNetCore.Docs/blob/e9c1419175c4dd7e152df3746ba1df5935aaafd5/aspnetcore/publishing/linuxproduction.md)。
 
 本指南：
 
@@ -43,13 +44,13 @@ ms.locfileid: "88633782"
 * 確保 Web 應用程式在啟動時以精靈的形式執行。
 * 設定程序管理工具以協助重新啟動 Web 應用程式。
 
-## <a name="prerequisites"></a>Prerequisites
+## <a name="prerequisites"></a>必要條件
 
 1. 以 sudo 權限使用標準使用者帳戶存取 Ubuntu 16.04 伺服器。
 1. 在伺服器上安裝 .NET Core 執行階段。
    1. 流覽 [ [下載 .Net Core] 頁面](https://dotnet.microsoft.com/download/dotnet-core)。
    1. 選取最新的非預覽 .NET Core 版本。
-   1. 在 [ **執行應用程式-運行**時間] 下的表格中下載最新的非預覽執行時間。
+   1. 在 [ **執行應用程式-運行** 時間] 下的表格中下載最新的非預覽執行時間。
    1. 選取 [Linux **套件管理員指示** ] 連結，然後依照您的 ubuntu 版本的 ubuntu 指示進行。
 1. 現有的 ASP.NET Core 應用程式。
 
@@ -64,7 +65,7 @@ ms.locfileid: "88633782"
 * 設定應用程式以處理安全的本機連線。 如需詳細資訊，請參閱 [HTTPS 組態](#https-configuration)一節。
 * 從 *Properties/launchSettings.json* 檔案中的 `applicationUrl` 屬性移除 `https://localhost:5001` (如果有的話)。
 
-從開發環境執行 [dotnet publish](/dotnet/core/tools/dotnet-publish) 將應用程式封裝到可在伺服器上執行的目錄 (例如，*bin/Release/&lt;target_framework_moniker&gt;/publish*)：
+從開發環境執行 [dotnet publish](/dotnet/core/tools/dotnet-publish) 將應用程式封裝到可在伺服器上執行的目錄 (例如， *bin/Release/&lt;target_framework_moniker&gt;/publish* )：
 
 ```dotnetcli
 dotnet publish --configuration Release
@@ -72,7 +73,7 @@ dotnet publish --configuration Release
 
 如果您不想在伺服器上維護 .NET Core 執行階段，應用程式也可以發佈為[獨立式部署](/dotnet/core/deploying/#self-contained-deployments-scd)。
 
-使用整合至組織工作流程的工具 (SCP、SFTP 等等) 將 ASP.NET Core 應用程式複製到伺服器。 Web 應用程式通常可在 *var* 目錄下找到 (例如 *var/www/helloapp*)。
+使用整合至組織工作流程的工具 (SCP、SFTP 等等) 將 ASP.NET Core 應用程式複製到伺服器。 Web 應用程式通常可在 *var* 目錄下找到 (例如 *var/www/helloapp* )。
 
 > [!NOTE]
 > 在生產環境部署案例中，持續整合工作流程會執行發佈應用程式並將資產複製到伺服器的工作。
@@ -142,7 +143,7 @@ sudo service nginx start
 
 ### <a name="configure-nginx"></a>設定 Nginx
 
-若要將 Nginx 設定為反向 Proxy 以將要求轉送至您的 ASP.NET Core 應用程式，請修改 */etc/nginx/sites-available/default*。 以文字編輯器開啟它，並以下列項目取代內容：
+若要將 Nginx 設定為反向 Proxy 以將要求轉送至您的 ASP.NET Core 應用程式，請修改 */etc/nginx/sites-available/default* 。 以文字編輯器開啟它，並以下列項目取代內容：
 
 ```nginx
 server {
@@ -161,7 +162,7 @@ server {
 }
 ```
 
-如果應用程式是 Blazor Server 依賴 websocket 的應用程式 SignalR ，請參閱，以 <xref:blazor/host-and-deploy/server#linux-with-nginx> 取得如何設定標頭的相關資訊 `Connection` 。
+如果應用程式是 SignalR 或應用程式， Blazor Server 請 <xref:signalr/scale#linux-with-nginx> 分別參閱和， <xref:blazor/host-and-deploy/server#linux-with-nginx> 以取得詳細資訊。
 
 當沒有任何與 `server_name` 相符的項目時，Nginx 會使用預設伺服器。 如果未定義任何預設伺服器，則設定檔中的第一個伺服器就是預設伺服器。 最佳做法是，在您的設定檔中新增一個會傳回狀態碼 444 的特定預設伺服器。 預設伺服器設定範例如下：
 
@@ -225,14 +226,14 @@ WantedBy=multi-user.target
 
 在上述範例中，管理服務的使用者是由選項所指定 `User` 。 使用者 (`www-data`) 必須存在，且擁有應用程式檔案的適當擁有權。
 
-使用 `TimeoutStopSec` 可設定應用程式收到初始中斷訊號之後等待關閉的時間。 如果應用程式在此期間後未關閉，則會發出 SIGKILL 來終止應用程式。 提供不具單位的秒值 (例如 `150`)、時間範圍值 (例如 `2min 30s`) 或 `infinity` (表示停用逾時)。 `TimeoutStopSec` 在管理員設定檔 (*systemd-system.conf*、*system.conf.d*、*systemd-user.conf*、*user.conf.d*) 的預設值為 `DefaultTimeoutStopSec`。 大多數發行版本的預設逾時為 90 秒。
+使用 `TimeoutStopSec` 可設定應用程式收到初始中斷訊號之後等待關閉的時間。 如果應用程式在此期間後未關閉，則會發出 SIGKILL 來終止應用程式。 提供不具單位的秒值 (例如 `150`)、時間範圍值 (例如 `2min 30s`) 或 `infinity` (表示停用逾時)。 `TimeoutStopSec` 在管理員設定檔 ( *systemd-system.conf* 、 *system.conf.d* 、 *systemd-user.conf* 、 *user.conf.d* ) 的預設值為 `DefaultTimeoutStopSec`。 大多數發行版本的預設逾時為 90 秒。
 
 ```
 # The default value is 90 seconds for most distributions.
 TimeoutStopSec=90
 ```
 
-Linux 的檔案系統會區分大小寫。 將 ASPNETCORE_ENVIRONMENT 設定為 "Production" 會導致搜尋 *appsettings.Production.json* 設定檔，而不是搜尋 *appsettings.production.json*。
+Linux 的檔案系統會區分大小寫。 將 ASPNETCORE_ENVIRONMENT 設定為 "Production" 會導致搜尋 *appsettings.Production.json* 設定檔，而不是搜尋 *appsettings.production.json* 。
 
 有些值 (例如 SQL 連接字串) 必須以逸出方式處理，設定提供者才能讀取環境變數。 請使用下列命令來產生要在設定檔中使用並已適當逸出的值：
 
@@ -356,7 +357,7 @@ sudo ufw enable
 
 #### <a name="change-the-nginx-response-name"></a>變更 Nginx 回應名稱
 
-編輯 *src/http/ngx_http_header_filter_module.c*：
+編輯 *src/http/ngx_http_header_filter_module.c* ：
 
 ```
 static char ngx_http_server_string[] = "Server: Web Server" CRLF;
@@ -375,7 +376,7 @@ static char ngx_http_server_full_string[] = "Server: Web Server" CRLF;
 
 使用下列其中一種方法，設定應用程式將憑證用在針對 `dotnet run` 命令的開發，或用在開發環境 (F5，若在 Visual Studio Code 中則為 Ctrl+F5)：
 
-* [取代組態中的預設憑證](xref:fundamentals/servers/kestrel#configuration) (建議使用**)
+*  )
 * [KestrelServerOptions.ConfigureHttpsDefaults](xref:fundamentals/servers/kestrel#configurehttpsdefaultsactionhttpsconnectionadapteroptions)
 
 **設定反向 Prooxy 以進行安全的用戶端連線 (HTTPS)**
@@ -404,7 +405,7 @@ static char ngx_http_server_full_string[] = "Server: Web Server" CRLF;
 
 #### <a name="secure-nginx-from-clickjacking"></a>保護 Nginx 免於點閱綁架
 
-[點閱綁架](https://blog.qualys.com/securitylabs/2015/10/20/clickjacking-a-common-implementation-mistake-that-can-put-your-websites-in-danger)(也稱為「UI 偽裝攻擊」**) 是一種惡意攻擊，會誘騙網站訪客點選與其目前所瀏覽頁面不同的頁面上連結或按鈕。 請使用 `X-FRAME-OPTIONS` 來保護網站安全。
+ ) 是一種惡意攻擊，會誘騙網站訪客點選與其目前所瀏覽頁面不同的頁面上連結或按鈕。 請使用 `X-FRAME-OPTIONS` 來保護網站安全。
 
 減輕點擊劫持攻擊：
 

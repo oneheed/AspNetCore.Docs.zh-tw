@@ -7,6 +7,7 @@ ms.author: jeliknes
 ms.custom: mvc
 ms.date: 08/14/2020
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -18,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/blazor-server-ef-core
-ms.openlocfilehash: ac84b9d2fac4fe3df48d356eea3ea48fd23bfda4
-ms.sourcegitcommit: ecae2aa432628b9181d1fa11037c231c7dd56c9e
+ms.openlocfilehash: bfc8f334b9229fed54e6b9841e4fb255ed18249a
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 10/16/2020
-ms.locfileid: "92113630"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93056617"
 ---
 # <a name="aspnet-core-no-locblazor-server-with-entity-framework-core-efcore"></a>ASP.NET Core Blazor Server 與 Entity Framework Core (EFCore) 
 
@@ -31,7 +32,7 @@ ms.locfileid: "92113630"
 
 :::moniker range=">= aspnetcore-5.0"
 
-Blazor Server 是具狀態的應用程式架構。 應用程式會維持與伺服器的持續連線，而且使用者的狀態會保留在*伺服器的記憶體中。* 使用者狀態的其中一個範例是在相依性插入中保存的資料 [ (DI) ](xref:fundamentals/dependency-injection) 服務實例的範圍設定為線路。 提供的唯一應用程式模型 Blazor Server 需要使用 Entity Framework Core 的特殊方法。
+Blazor Server 是具狀態的應用程式架構。 應用程式會維持與伺服器的持續連線，而且使用者的狀態會保留在 *伺服器的記憶體中。* 使用者狀態的其中一個範例是在相依性插入中保存的資料 [ (DI) ](xref:fundamentals/dependency-injection) 服務實例的範圍設定為線路。 提供的唯一應用程式模型 Blazor Server 需要使用 Entity Framework Core 的特殊方法。
 
 > [!NOTE]
 > 本文說明應用程式中的 EF Core Blazor Server 。 Blazor WebAssembly 應用程式會在 WebAssembly 沙箱中執行，以防止大部分的直接資料庫連接。 在中執行 EF Core Blazor WebAssembly 已超出本文的範圍。
@@ -55,8 +56,8 @@ Grid、add 和 view 元件會使用「每一作業的內容」模式，其中會
 
 EF Core 依賴 <xref:Microsoft.EntityFrameworkCore.DbContext> 作為 [設定資料庫存取](/ef/core/miscellaneous/configuring-dbcontext) 的方法，並作為 [*工作單位*](https://martinfowler.com/eaaCatalog/unitOfWork.html)。 EF Core 提供 <xref:Microsoft.Extensions.DependencyInjection.EntityFrameworkServiceCollectionExtensions.AddDbContext%2A> ASP.NET Core 應用程式的擴充功能，這些應用程式預設會將內容註冊為 *範圍* 服務。 在 Blazor Server 應用程式中，已設定範圍的服務註冊可能會有問題，因為該實例會在使用者的線路內跨元件共用。 <xref:Microsoft.EntityFrameworkCore.DbContext> 不是安全線程，而且不是為了並行使用而設計。 現有的存留期不適當，原因如下：
 
-* 在應用程式的所有使用者之間**單獨**共用狀態，並導致不當的並行使用。
-* 限**域** (預設) 在相同使用者的元件之間提出類似的問題。
+* 在應用程式的所有使用者之間 **單獨** 共用狀態，並導致不當的並行使用。
+* 限 **域** (預設) 在相同使用者的元件之間提出類似的問題。
 * **暫時性** 會在每個要求中產生新的實例;但由於元件的存留期可能很長，因此可能會產生比預期更長的內容。
 
 下列建議旨在提供在應用程式中使用 EF Core 的一致方法 Blazor Server 。
@@ -143,7 +144,7 @@ services.AddScoped<ApplicationDbContext>(p =>
 
 <h3 id="enable-sensitive-data-logging">啟用敏感資料記錄</h3>
 
-<xref:Microsoft.EntityFrameworkCore.DbContextOptionsBuilder.EnableSensitiveDataLogging%2A> 包含例外狀況訊息和架構記錄中的應用程式資料。 記錄的資料可以包含指派給實體實例屬性的值，以及傳送至資料庫之命令的參數值。 記錄資料的 <xref:Microsoft.EntityFrameworkCore.DbContextOptionsBuilder.EnableSensitiveDataLogging%2A> **安全性風險**，因為它可能會在記錄針對資料庫執行的 SQL 語句時， (PII) 公開密碼和其他個人識別資訊。
+<xref:Microsoft.EntityFrameworkCore.DbContextOptionsBuilder.EnableSensitiveDataLogging%2A> 包含例外狀況訊息和架構記錄中的應用程式資料。 記錄的資料可以包含指派給實體實例屬性的值，以及傳送至資料庫之命令的參數值。 記錄資料的 <xref:Microsoft.EntityFrameworkCore.DbContextOptionsBuilder.EnableSensitiveDataLogging%2A> **安全性風險** ，因為它可能會在記錄針對資料庫執行的 SQL 語句時， (PII) 公開密碼和其他個人識別資訊。
 
 建議您只 <xref:Microsoft.EntityFrameworkCore.DbContextOptionsBuilder.EnableSensitiveDataLogging%2A> 針對開發和測試啟用：
 
@@ -162,7 +163,7 @@ services.AddScoped<ApplicationDbContext>(p =>
 
 :::moniker range="< aspnetcore-5.0"
 
-Blazor Server 是具狀態的應用程式架構。 應用程式會維持與伺服器的持續連線，而且使用者的狀態會保留在*伺服器的記憶體中。* 使用者狀態的其中一個範例是在相依性插入中保存的資料 [ (DI) ](xref:fundamentals/dependency-injection) 服務實例的範圍設定為線路。 提供的唯一應用程式模型 Blazor Server 需要使用 Entity Framework Core 的特殊方法。
+Blazor Server 是具狀態的應用程式架構。 應用程式會維持與伺服器的持續連線，而且使用者的狀態會保留在 *伺服器的記憶體中。* 使用者狀態的其中一個範例是在相依性插入中保存的資料 [ (DI) ](xref:fundamentals/dependency-injection) 服務實例的範圍設定為線路。 提供的唯一應用程式模型 Blazor Server 需要使用 Entity Framework Core 的特殊方法。
 
 > [!NOTE]
 > 本文說明應用程式中的 EF Core Blazor Server 。 Blazor WebAssembly 應用程式會在 WebAssembly 沙箱中執行，以防止大部分的直接資料庫連接。 在中執行 EF Core Blazor WebAssembly 已超出本文的範圍。
@@ -186,8 +187,8 @@ Grid、add 和 view 元件會使用「每一作業的內容」模式，其中會
 
 EF Core 依賴 <xref:Microsoft.EntityFrameworkCore.DbContext> 作為 [設定資料庫存取](/ef/core/miscellaneous/configuring-dbcontext) 的方法，並作為 [*工作單位*](https://martinfowler.com/eaaCatalog/unitOfWork.html)。 EF Core 提供 <xref:Microsoft.Extensions.DependencyInjection.EntityFrameworkServiceCollectionExtensions.AddDbContext%2A> ASP.NET Core 應用程式的擴充功能，這些應用程式預設會將內容註冊為 *範圍* 服務。 在 Blazor Server 應用程式中，這可能會造成問題，因為該實例會在使用者的線路內跨元件共用。 <xref:Microsoft.EntityFrameworkCore.DbContext> 不是安全線程，而且不是為了並行使用而設計。 現有的存留期不適當，原因如下：
 
-* 在應用程式的所有使用者之間**單獨**共用狀態，並導致不當的並行使用。
-* 限**域** (預設) 在相同使用者的元件之間提出類似的問題。
+* 在應用程式的所有使用者之間 **單獨** 共用狀態，並導致不當的並行使用。
+* 限 **域** (預設) 在相同使用者的元件之間提出類似的問題。
 * **暫時性** 會在每個要求中產生新的實例;但由於元件的存留期可能很長，因此可能會產生比預期更長的內容。
 
 下列建議旨在提供在應用程式中使用 EF Core 的一致方法 Blazor Server 。
@@ -286,7 +287,7 @@ services.AddScoped<ApplicationDbContext>(p =>
 
 <h3 id="enable-sensitive-data-logging">啟用敏感資料記錄</h3>
 
-<xref:Microsoft.EntityFrameworkCore.DbContextOptionsBuilder.EnableSensitiveDataLogging%2A> 包含例外狀況訊息和架構記錄中的應用程式資料。 記錄的資料可以包含指派給實體實例屬性的值，以及傳送至資料庫之命令的參數值。 記錄資料的 <xref:Microsoft.EntityFrameworkCore.DbContextOptionsBuilder.EnableSensitiveDataLogging%2A> **安全性風險**，因為它可能會在記錄針對資料庫執行的 SQL 語句時， (PII) 公開密碼和其他個人識別資訊。
+<xref:Microsoft.EntityFrameworkCore.DbContextOptionsBuilder.EnableSensitiveDataLogging%2A> 包含例外狀況訊息和架構記錄中的應用程式資料。 記錄的資料可以包含指派給實體實例屬性的值，以及傳送至資料庫之命令的參數值。 記錄資料的 <xref:Microsoft.EntityFrameworkCore.DbContextOptionsBuilder.EnableSensitiveDataLogging%2A> **安全性風險** ，因為它可能會在記錄針對資料庫執行的 SQL 語句時， (PII) 公開密碼和其他個人識別資訊。
 
 建議您只 <xref:Microsoft.EntityFrameworkCore.DbContextOptionsBuilder.EnableSensitiveDataLogging%2A> 針對開發和測試啟用：
 

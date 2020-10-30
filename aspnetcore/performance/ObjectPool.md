@@ -6,6 +6,7 @@ monikerRange: '>= aspnetcore-1.1'
 ms.author: riande
 ms.date: 04/11/2019
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -17,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: performance/ObjectPool
-ms.openlocfilehash: 6997dbfdd5c654e4a8b15a026fd3ec61d024f02d
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: 3bbfde6f68a238131149e67ce72f0ddc68a9ea0f
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88632365"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93056903"
 ---
 # <a name="object-reuse-with-objectpool-in-aspnet-core"></a>在 ASP.NET Core 中使用 ObjectPool 的物件重複使用
 
@@ -73,8 +74,8 @@ ObjectPool 可以透過多種方式在應用程式中使用：
 ::: moniker range=">= aspnetcore-3.0"
 當 <xref:Microsoft.Extensions.ObjectPool.DefaultObjectPoolProvider> 使用和 `T` 實行時 `IDisposable` ：
 
-* 系統將會處置 ***未*** 傳回集區的專案。
-* 當集區由 DI 處置時，集區中的所有專案都會被處置。
+* 將會處置 * **not** _ 傳回給集區的專案。
+_ 當集區由 DI 處置時，集區中的所有專案都會被處置。
 
 注意：處置集區之後：
 

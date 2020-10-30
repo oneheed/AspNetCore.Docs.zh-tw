@@ -6,6 +6,7 @@ ms.author: casoper
 ms.custom: devx-track-csharp, mvc, seodec18
 ms.date: 10/24/2018
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -17,18 +18,18 @@ no-loc:
 - Razor
 - SignalR
 uid: azure/devops/tools-and-downloads
-ms.openlocfilehash: 3242031f07f3fa344422db4591ea1a244b6723dd
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: 8c7f10a6b6f8504efaba6054533aba034982820c
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88625241"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93056565"
 ---
 # <a name="tools-and-downloads"></a>工具及下載
 
 Azure 提供數種介面來布建和管理資源，例如 [Azure 入口網站](https://portal.azure.com)、 [Azure CLI](/cli/azure/)、 [Azure PowerShell](/powershell/azure/overview)、 [Azure Cloud Shell](https://shell.azure.com/bash)和 Visual Studio。 本指南採用極簡方法，並盡可能使用 Azure Cloud Shell，以減少所需的步驟。 不過，Azure 入口網站必須用於某些部分。
 
-## <a name="prerequisites"></a>Prerequisites
+## <a name="prerequisites"></a>必要條件
 
 需要下列訂用帳戶：
 

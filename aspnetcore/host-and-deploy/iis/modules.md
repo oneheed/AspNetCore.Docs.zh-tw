@@ -7,6 +7,7 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 01/13/2020
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -18,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: host-and-deploy/iis/modules
-ms.openlocfilehash: 6936071339786262fa8eeb669a59225a695d7488
-ms.sourcegitcommit: 24106b7ffffc9fff410a679863e28aeb2bbe5b7e
+ms.openlocfilehash: 47ba04f199f9b77cf6032de9f80f2410f5c69424
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 09/17/2020
-ms.locfileid: "90722802"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93057397"
 ---
 # <a name="iis-modules-with-aspnet-core"></a>與 ASP.NET Core 搭配運作的 IIS 模組
 
@@ -59,7 +60,7 @@ ms.locfileid: "90722802"
 | **通訊協定支援**<br>`ProtocolSupportModule`                                                  | 是 | |
 | **要求篩選**<br>`RequestFilteringModule`                                                | 是 | [URL 重寫中介軟體 `IRule`](xref:fundamentals/url-rewriting#irule-based-rule) |
 | **要求監視器**<br>`RequestMonitorModule`                                                    | 是 | |
-| **URL 重新寫入**&#8224;<br>`RewriteModule`                                                      | 是 | [URL 重寫中介軟體](xref:fundamentals/url-rewriting) |
+| **URL 重新寫入** &#8224;<br>`RewriteModule`                                                      | 是 | [URL 重寫中介軟體](xref:fundamentals/url-rewriting) |
 | **伺服器端包含**<br>`ServerSideIncludeModule`                                            | 否  | |
 | **靜態壓縮**<br>`StaticCompressionModule`                                              | 否  | [回應壓縮中介軟體](xref:performance/response-compression) |
 | **靜態內容**<br>`StaticFileModule`                                                         | 否  | [靜態檔案中介軟體](xref:fundamentals/static-files) |
@@ -72,7 +73,7 @@ ms.locfileid: "90722802"
 
 ## <a name="managed-modules"></a>受控模組
 
-當應用程式集區的 .NET CLR 版本已設定為 [沒有 Managed 程式碼]**** 時，受控模組對所裝載的 ASP.NET Core 應用程式「沒有」** 作用。 ASP.NET Core 在數種案例中都有提供中介軟體替代方案。
+當應用程式集區的 .NET CLR 版本已設定為 [沒有 Managed 程式碼]  時，受控模組對所裝載的 ASP.NET Core 應用程式「沒有」  作用。 ASP.NET Core 在數種案例中都有提供中介軟體替代方案。
 
 | 模組                  | ASP.NET Core 選項 |
 | ----------------------- | ------------------- |
@@ -92,7 +93,7 @@ ms.locfileid: "90722802"
 
 ## <a name="iis-manager-application-changes"></a>IIS 管理員應用程式變更
 
-使用「IIS 管理員」來進行設定時，會變更應用程式的 *web.config* 檔案。 如果部署應用程式並包含 *web.config*，則所部署的 *web.config* 檔案會覆寫使用「IIS 管理員」來進行的所有變更。 對伺服器的 *web.config* 檔案進行變更後，請立即將伺服器上已更新的 *web.config* 檔案複製到本機專案。
+使用「IIS 管理員」來進行設定時，會變更應用程式的 *web.config* 檔案。 如果部署應用程式並包含 *web.config* ，則所部署的 *web.config* 檔案會覆寫使用「IIS 管理員」來進行的所有變更。 對伺服器的 *web.config* 檔案進行變更後，請立即將伺服器上已更新的 *web.config* 檔案複製到本機專案。
 
 ## <a name="disabling-iis-modules"></a>停用 IIS 模組
 
@@ -110,17 +111,17 @@ ms.locfileid: "90722802"
 </configuration>
 ```
 
-如需停用具有設定設定之模組的詳細資訊，請遵循[ \<system.webServer> IIS](/iis/configuration/system.webServer/)之*子項目*區段中的連結。
+如需停用具有設定設定之模組的詳細資訊，請遵循 [ \<system.webServer> IIS](/iis/configuration/system.webServer/)之 *子項目* 區段中的連結。
 
 ### <a name="module-removal"></a>模組移除
 
 如果選擇透過 *web.config* 中的設定來移除模組，請先將模組解除鎖定，以及將 *web.config* 的 `<modules>` 區段解除鎖定：
 
-1. 將伺服器層級的模組解除鎖定。 選取「IIS 管理員」[連線]**** 資訊看板中的 IIS 伺服器。 開啟 [IIS]**** 區域中的 [模組]****。 選取清單中的模組。 在右邊的 [動作]**** 資訊看板上，選取 [解除鎖定]****。 若模組的動作項目顯示為**鎖定**，就代表該模組已經解除鎖定，且不需要任何動作。 將您打算稍後從 *web.config* 移除的模組都解除鎖定。
+1. 將伺服器層級的模組解除鎖定。 選取「IIS 管理員」[連線]  資訊看板中的 IIS 伺服器。 開啟 [IIS]  區域中的 [模組]  。 選取清單中的模組。 在右邊的 [動作]  資訊看板上，選取 [解除鎖定]  。 若模組的動作項目顯示為 **鎖定** ，就代表該模組已經解除鎖定，且不需要任何動作。 將您打算稍後從 *web.config* 移除的模組都解除鎖定。
 
-2. 部署應用程式，而不使用 `<modules>` *web.config*中的區段。如果以包含區段的 *web.config* 部署應用程式 `<modules>` ，但未在 IIS 管理員中先解除鎖定區段，則在嘗試解除鎖定區段時，Configuration Manager 會擲回例外狀況。 因此，請在沒有 `<modules>` 區段的情況下部署應用程式。
+2. 部署應用程式，而不使用 `<modules>` *web.config* 中的區段。如果以包含區段的 *web.config* 部署應用程式 `<modules>` ，但未在 IIS 管理員中先解除鎖定區段，則在嘗試解除鎖定區段時，Configuration Manager 會擲回例外狀況。 因此，請在沒有 `<modules>` 區段的情況下部署應用程式。
 
-3. 解除鎖定 `<modules>` *web.config*的區段。 **在 [連線] 提要欄位** 中，選取 [ **網站**] 中的網站。 在 [管理]**** 區域中，開啟 [設定編輯器]****。 使用導覽控制項來選取 `system.webServer/modules` 區段。 在右邊的 [動作]**** 資訊看板上，選取將區段 [解除鎖定]****。 若模組區段的動作項目顯示為**鎖定區段**，就代表該模組區段已經解除鎖定，且不需要任何動作。
+3. 解除鎖定 `<modules>` *web.config* 的區段。 **在 [連線] 提要欄位** 中，選取 [ **網站** ] 中的網站。 在 [管理]  區域中，開啟 [設定編輯器]  。 使用導覽控制項來選取 `system.webServer/modules` 區段。 在右邊的 [動作]  資訊看板上，選取將區段 [解除鎖定]  。 若模組區段的動作項目顯示為 **鎖定區段** ，就代表該模組區段已經解除鎖定，且不需要任何動作。
 
 4. 將 `<modules>` 區段新增至具有 `<remove>` 元素的應用程式本機 *web.config* 檔案，以從應用程式移除該模組。 新增多個 `<remove>` 元素以移除多個模組。 如果已在伺服器上進行 *web.config* 變更，請立即在本機對專案的 *web.config* 檔案進行相同的變更。 使用此方法移除模組不會影響模組與伺服器上其他應用程式的搭配使用。
 
@@ -136,7 +137,7 @@ ms.locfileid: "90722802"
 
 若要使用 *web.config* 對 IIS Express 新增或移除模組，請修改 *applicationHost.config* 以解除鎖定 `<modules>` 區段：
 
-1. 開啟 *{APPLICATION ROOT}\\.vs\config\applicationhost.config*。
+1. 開啟 *{APPLICATION ROOT}\\.vs\config\applicationhost.config* 。
 
 1. 找出 IIS 模組的 `<section>` 元素，並將 `overrideModeDefault` 從 `Deny` 變更為 `Allow`：
 

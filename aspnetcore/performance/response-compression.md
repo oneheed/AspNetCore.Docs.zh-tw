@@ -7,6 +7,7 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 02/07/2020
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -18,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: performance/response-compression
-ms.openlocfilehash: b8947e3c3c4f634fbd838c22ff60799257143480
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: 9327c98c22a4d42d31ea8ba1eb8337153040b5b5
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88634991"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93056968"
 ---
 # <a name="response-compression-in-aspnet-core"></a>ASP.NET Core 中的回應壓縮
 
@@ -69,7 +70,7 @@ ms.locfileid: "88634991"
 
 在用戶端傳送壓縮配置的優先順序時，中介軟體能夠回應品質值 (qvalue， `q`) 加權。 如需詳細資訊，請參閱 [RFC 7231：接受編碼](https://tools.ietf.org/html/rfc7231#section-5.3.4)。
 
-壓縮演算法受限於壓縮速度與壓縮效率之間的取捨。 此內容中的*有效性*是指壓縮之後的輸出大小。 最大的壓縮是以最 *理想* 的壓縮來達成。
+壓縮演算法受限於壓縮速度與壓縮效率之間的取捨。 此內容中的 *有效性* 是指壓縮之後的輸出大小。 最大的壓縮是以最 *理想* 的壓縮來達成。
 
 下表說明要求、傳送、快取及接收壓縮內容所涉及的標頭。
 
@@ -87,7 +88,7 @@ ms.locfileid: "88634991"
 * 使用 Gzip 和自訂壓縮提供者壓縮應用程式回應。
 * 如何將 MIME 類型加入至預設的 MIME 類型清單以進行壓縮。
 
-## <a name="package"></a>Package
+## <a name="package"></a>套件
 
 回應壓縮中介軟體是由 [AspNetCore ResponseCompression](https://www.nuget.org/packages/Microsoft.AspNetCore.ResponseCompression/) 封裝所提供，該封裝會隱含地包含在 ASP.NET Core apps 中。
 
@@ -117,11 +118,11 @@ public class Startup
 
 將要求提交給範例應用程式，而不使用 `Accept-Encoding` 標頭，並觀察回應是否未壓縮。 `Content-Encoding`和 `Vary` 標頭不存在於回應中。
 
-![顯示要求結果（不含接受編碼標頭）的 Fiddler 視窗。 未壓縮回應。](response-compression/_static/request-uncompressed.png)
+![Fiddler 視窗，顯示沒有 Accept-Encoding 標頭的要求結果。 未壓縮回應。](response-compression/_static/request-uncompressed.png)
 
 使用標頭 (Brotli 壓縮) 將要求提交至範例應用程式 `Accept-Encoding: br` ，並觀察回應是否已壓縮。 `Content-Encoding`和 `Vary` 標頭出現在回應中。
 
-![顯示要求結果與接受編碼標頭以及 br 值的 Fiddler 視窗。 變更和內容編碼標頭會新增至回應。 回應會壓縮。](response-compression/_static/request-compressed-br.png)
+![Fiddler 視窗顯示要求的結果，其中 Accept-Encoding 標頭和值為 br。 變更和內容編碼標頭會新增至回應。 回應會壓縮。](response-compression/_static/request-compressed-br.png)
 
 ## <a name="providers"></a>提供者
 
@@ -218,7 +219,7 @@ public void ConfigureServices(IServiceCollection services)
 
 使用標頭將要求提交至範例應用程式 `Accept-Encoding: mycustomcompression` ，並觀察回應標頭。 `Vary`和 `Content-Encoding` 標頭出現在回應中。 未 (顯示的回應主體) 不會被範例壓縮。 範例的類別中沒有壓縮的執行 `CustomCompressionProvider` 。 不過，此範例會示範您要在哪裡執行這類壓縮演算法。
 
-![Fiddler 視窗顯示具有接受編碼標頭和值 mycustomcompression 的要求結果。 變更和內容編碼標頭會新增至回應。](response-compression/_static/request-custom-compression.png)
+![Fiddler 視窗顯示要求的結果，其中 Accept-Encoding 標頭和值為 mycustomcompression。 變更和內容編碼標頭會新增至回應。](response-compression/_static/request-custom-compression.png)
 
 ## <a name="mime-types"></a>MIME 類型
 
@@ -233,7 +234,7 @@ public void ConfigureServices(IServiceCollection services)
 * `text/plain`
 * `text/xml`
 
-以回應壓縮中介軟體選項取代或附加 MIME 類型。 請注意，不支援萬用字元 MIME 類型（例如） `text/*` 。 範例應用程式會新增的 MIME 類型 `image/svg+xml` ，並壓縮並提供 ASP.NET Core 橫幅影像 (的橫幅 *。 svg*) 。
+以回應壓縮中介軟體選項取代或附加 MIME 類型。 請注意，不支援萬用字元 MIME 類型（例如） `text/*` 。 範例應用程式會新增的 MIME 類型 `image/svg+xml` ，並壓縮並提供 ASP.NET Core 橫幅影像 (的橫幅 *。 svg* ) 。
 
 [!code-csharp[](response-compression/samples/3.x/SampleApp/Startup.cs?name=snippet1&highlight=8-10)]
 
@@ -315,7 +316,7 @@ public void ConfigureServices(IServiceCollection services)
 
 在用戶端傳送壓縮配置的優先順序時，中介軟體能夠回應品質值 (qvalue， `q`) 加權。 如需詳細資訊，請參閱 [RFC 7231：接受編碼](https://tools.ietf.org/html/rfc7231#section-5.3.4)。
 
-壓縮演算法受限於壓縮速度與壓縮效率之間的取捨。 此內容中的*有效性*是指壓縮之後的輸出大小。 最大的壓縮是以最 *理想* 的壓縮來達成。
+壓縮演算法受限於壓縮速度與壓縮效率之間的取捨。 此內容中的 *有效性* 是指壓縮之後的輸出大小。 最大的壓縮是以最 *理想* 的壓縮來達成。
 
 下表說明要求、傳送、快取及接收壓縮內容所涉及的標頭。
 
@@ -333,7 +334,7 @@ public void ConfigureServices(IServiceCollection services)
 * 使用 Gzip 和自訂壓縮提供者壓縮應用程式回應。
 * 如何將 MIME 類型加入至預設的 MIME 類型清單以進行壓縮。
 
-## <a name="package"></a>Package
+## <a name="package"></a>套件
 
 若要在專案中包含中介軟體，請新增 [AspNetCore 中繼套件](xref:fundamentals/metapackage-app)的參考，其中包含 [AspNetCore. ResponseCompression](https://www.nuget.org/packages/Microsoft.AspNetCore.ResponseCompression/) 套件。
 
@@ -363,11 +364,11 @@ public class Startup
 
 將要求提交給範例應用程式，而不使用 `Accept-Encoding` 標頭，並觀察回應是否未壓縮。 `Content-Encoding`和 `Vary` 標頭不存在於回應中。
 
-![顯示要求結果（不含接受編碼標頭）的 Fiddler 視窗。 未壓縮回應。](response-compression/_static/request-uncompressed.png)
+![Fiddler 視窗，顯示沒有 Accept-Encoding 標頭的要求結果。 未壓縮回應。](response-compression/_static/request-uncompressed.png)
 
 使用標頭 (Brotli 壓縮) 將要求提交至範例應用程式 `Accept-Encoding: br` ，並觀察回應是否已壓縮。 `Content-Encoding`和 `Vary` 標頭出現在回應中。
 
-![顯示要求結果與接受編碼標頭以及 br 值的 Fiddler 視窗。 變更和內容編碼標頭會新增至回應。 回應會壓縮。](response-compression/_static/request-compressed-br.png)
+![Fiddler 視窗顯示要求的結果，其中 Accept-Encoding 標頭和值為 br。 變更和內容編碼標頭會新增至回應。 回應會壓縮。](response-compression/_static/request-compressed-br.png)
 
 ## <a name="providers"></a>提供者
 
@@ -463,7 +464,7 @@ public void ConfigureServices(IServiceCollection services)
 
 使用標頭將要求提交至範例應用程式 `Accept-Encoding: mycustomcompression` ，並觀察回應標頭。 `Vary`和 `Content-Encoding` 標頭出現在回應中。 未 (顯示的回應主體) 不會被範例壓縮。 範例的類別中沒有壓縮的執行 `CustomCompressionProvider` 。 不過，此範例會示範您要在哪裡執行這類壓縮演算法。
 
-![Fiddler 視窗顯示具有接受編碼標頭和值 mycustomcompression 的要求結果。 變更和內容編碼標頭會新增至回應。](response-compression/_static/request-custom-compression.png)
+![Fiddler 視窗顯示要求的結果，其中 Accept-Encoding 標頭和值為 mycustomcompression。 變更和內容編碼標頭會新增至回應。](response-compression/_static/request-custom-compression.png)
 
 ## <a name="mime-types"></a>MIME 類型
 
@@ -478,7 +479,7 @@ public void ConfigureServices(IServiceCollection services)
 * `text/plain`
 * `text/xml`
 
-以回應壓縮中介軟體選項取代或附加 MIME 類型。 請注意，不支援萬用字元 MIME 類型（例如） `text/*` 。 範例應用程式會新增的 MIME 類型 `image/svg+xml` ，並壓縮並提供 ASP.NET Core 橫幅影像 (的橫幅 *。 svg*) 。
+以回應壓縮中介軟體選項取代或附加 MIME 類型。 請注意，不支援萬用字元 MIME 類型（例如） `text/*` 。 範例應用程式會新增的 MIME 類型 `image/svg+xml` ，並壓縮並提供 ASP.NET Core 橫幅影像 (的橫幅 *。 svg* ) 。
 
 [!code-csharp[](response-compression/samples/2.x/SampleApp/Startup.cs?name=snippet1&highlight=8-10)]
 
@@ -560,7 +561,7 @@ public void ConfigureServices(IServiceCollection services)
 
 在用戶端傳送壓縮配置的優先順序時，中介軟體能夠回應品質值 (qvalue， `q`) 加權。 如需詳細資訊，請參閱 [RFC 7231：接受編碼](https://tools.ietf.org/html/rfc7231#section-5.3.4)。
 
-壓縮演算法受限於壓縮速度與壓縮效率之間的取捨。 此內容中的*有效性*是指壓縮之後的輸出大小。 最大的壓縮是以最 *理想* 的壓縮來達成。
+壓縮演算法受限於壓縮速度與壓縮效率之間的取捨。 此內容中的 *有效性* 是指壓縮之後的輸出大小。 最大的壓縮是以最 *理想* 的壓縮來達成。
 
 下表說明要求、傳送、快取及接收壓縮內容所涉及的標頭。
 
@@ -578,7 +579,7 @@ public void ConfigureServices(IServiceCollection services)
 * 使用 Gzip 和自訂壓縮提供者壓縮應用程式回應。
 * 如何將 MIME 類型加入至預設的 MIME 類型清單以進行壓縮。
 
-## <a name="package"></a>Package
+## <a name="package"></a>套件
 
 若要在專案中包含中介軟體，請新增 [AspNetCore 中繼套件](xref:fundamentals/metapackage-app)的參考，其中包含 [AspNetCore. ResponseCompression](https://www.nuget.org/packages/Microsoft.AspNetCore.ResponseCompression/) 套件。
 
@@ -608,11 +609,11 @@ public class Startup
 
 將要求提交給範例應用程式，而不使用 `Accept-Encoding` 標頭，並觀察回應是否未壓縮。 `Content-Encoding`和 `Vary` 標頭不存在於回應中。
 
-![顯示要求結果（不含接受編碼標頭）的 Fiddler 視窗。 未壓縮回應。](response-compression/_static/request-uncompressed.png)
+![Fiddler 視窗，顯示沒有 Accept-Encoding 標頭的要求結果。 未壓縮回應。](response-compression/_static/request-uncompressed.png)
 
 使用標頭將要求提交至範例應用程式 `Accept-Encoding: gzip` ，並觀察回應已壓縮。 `Content-Encoding`和 `Vary` 標頭出現在回應中。
 
-![Fiddler 視窗顯示具有接受編碼標頭和值 gzip 的要求結果。 變更和內容編碼標頭會新增至回應。 回應會壓縮。](response-compression/_static/request-compressed.png)
+![Fiddler 視窗顯示要求的結果，其中 Accept-Encoding 標頭和值為 gzip。 變更和內容編碼標頭會新增至回應。 回應會壓縮。](response-compression/_static/request-compressed.png)
 
 ## <a name="providers"></a>提供者
 
@@ -668,7 +669,7 @@ public void ConfigureServices(IServiceCollection services)
 
 使用標頭將要求提交至範例應用程式 `Accept-Encoding: mycustomcompression` ，並觀察回應標頭。 `Vary`和 `Content-Encoding` 標頭出現在回應中。 未 (顯示的回應主體) 不會被範例壓縮。 範例的類別中沒有壓縮的執行 `CustomCompressionProvider` 。 不過，此範例會示範您要在哪裡執行這類壓縮演算法。
 
-![Fiddler 視窗顯示具有接受編碼標頭和值 mycustomcompression 的要求結果。 變更和內容編碼標頭會新增至回應。](response-compression/_static/request-custom-compression.png)
+![Fiddler 視窗顯示要求的結果，其中 Accept-Encoding 標頭和值為 mycustomcompression。 變更和內容編碼標頭會新增至回應。](response-compression/_static/request-custom-compression.png)
 
 ## <a name="mime-types"></a>MIME 類型
 
@@ -683,7 +684,7 @@ public void ConfigureServices(IServiceCollection services)
 * `text/plain`
 * `text/xml`
 
-以回應壓縮中介軟體選項取代或附加 MIME 類型。 請注意，不支援萬用字元 MIME 類型（例如） `text/*` 。 範例應用程式會新增的 MIME 類型 `image/svg+xml` ，並壓縮並提供 ASP.NET Core 橫幅影像 (的橫幅 *。 svg*) 。
+以回應壓縮中介軟體選項取代或附加 MIME 類型。 請注意，不支援萬用字元 MIME 類型（例如） `text/*` 。 範例應用程式會新增的 MIME 類型 `image/svg+xml` ，並壓縮並提供 ASP.NET Core 橫幅影像 (的橫幅 *。 svg* ) 。
 
 [!code-csharp[](response-compression/samples/2.x/SampleApp/Startup.cs?name=snippet1&highlight=8-10)]
 

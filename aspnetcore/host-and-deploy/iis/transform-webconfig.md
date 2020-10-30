@@ -7,6 +7,7 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 01/13/2020
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -18,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: host-and-deploy/iis/transform-webconfig
-ms.openlocfilehash: a2f26f32d2a282189b391aa9bb8c4637723dc60a
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: 259b5bf9bf2a6de987494b5771897355e3ea67db
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88634627"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93057308"
 ---
 # <a name="transform-webconfig"></a>轉換 web.config
 
@@ -109,13 +110,13 @@ dotnet publish --configuration Release /p:PublishProfile=FolderProfile
 
 設定檔名稱的 MSBuild 屬性為 `$(PublishProfile)`。
 
-如果未傳遞任何設定檔，則預設的設定檔名稱為 **FileSystem**，而如果檔案存在於應用程式的內容根目錄中，就會套用 *web.FileSystem.config*。
+如果未傳遞任何設定檔，則預設的設定檔名稱為 **FileSystem** ，而如果檔案存在於應用程式的內容根目錄中，就會套用 *web.FileSystem.config* 。
 
 ## <a name="environment"></a>環境
 
 環境轉換會第三個執行，亦即在 [組建組態](#build-configuration)與[設定檔](#profile)轉換之後執行。
 
-請為每個需要進行 *web.config* 轉換的[環境](xref:fundamentals/environments)包含一個 *web.{ENVIRONMENT}.config*檔案。
+請為每個需要進行 *web.config* 轉換的 [環境](xref:fundamentals/environments)包含一個 *web.{ENVIRONMENT}.config* 檔案。
 
 在下列範例中，會在生產環境的 *web.Production.config* 中設定一個環境特定的環境變數：
 

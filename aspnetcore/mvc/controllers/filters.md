@@ -6,6 +6,7 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 02/04/2020
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -17,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: mvc/controllers/filters
-ms.openlocfilehash: eeae167286e793ecd5a547cea0142cf7d8014ece
-ms.sourcegitcommit: c0a15ab8549cb729731a0fdf1d7da0b7feaa11ff
+ms.openlocfilehash: ecb4de3439656eb56507b920db704048d8f96759
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 10/02/2020
-ms.locfileid: "91671778"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93058502"
 ---
 # <a name="filters-in-aspnet-core"></a>ASP.NET Core 中的篩選條件
 
@@ -30,7 +31,7 @@ ms.locfileid: "91671778"
 
 作者：[Kirk Larkin](https://github.com/serpent5) \(英文\)、[Rick Anderson](https://twitter.com/RickAndMSFT) \(英文\)、[Tom Dykstra](https://github.com/tdykstra/) \(英文\) 及 [Steve Smith](https://ardalis.com/) \(英文\)
 
-ASP.NET Core 中的「篩選條件」** 可讓程式碼在要求處理管線中的特定階段之前或之後執行。
+ASP.NET Core 中的「篩選條件」  可讓程式碼在要求處理管線中的特定階段之前或之後執行。
 
 內建篩選條件會處理工作，例如：
 
@@ -48,7 +49,7 @@ ASP.NET Core 中的「篩選條件」** 可讓程式碼在要求處理管線中�
 
 ## <a name="how-filters-work"></a>篩選條件如何運作
 
-篩選條件會在「ASP.NET Core 動作引動過程管線」** 中執行，其有時也被稱為「篩選條件管線」**。 在 ASP.NET Core 之後執行的篩選條件管線會選取要執行的動作。
+篩選條件會在「ASP.NET Core 動作引動過程管線」  中執行，其有時也被稱為「篩選條件管線」  。 在 ASP.NET Core 之後執行的篩選條件管線會選取要執行的動作。
 
 ![要求會透過其他中介軟體、路由中介軟體、動作選取和動作調用管線來處理。 要求處理繼續往回歷經動作選取、路由中介軟體，以及各種其他中介軟體，然後才能成為傳送至用戶端的回應。](filters/_static/filter-pipeline-1.png)
 
@@ -103,7 +104,7 @@ ASP.NET Core 中的「篩選條件」** 可讓程式碼在要求處理管線中�
 * 非同步： <xref:Microsoft.AspNetCore.Mvc.Filters.IAsyncActionFilter> 和 <xref:Microsoft.AspNetCore.Mvc.Filters.IAsyncResultFilter>
 * <xref:Microsoft.AspNetCore.Mvc.Filters.IOrderedFilter>
 
-請實作同步**或**非同步版本的篩選條件介面，而**不要**同時實作這兩者。 執行階段會先檢查以查看篩選條件是否會實作非同步介面，如果是，便會呼叫該介面。 如果沒有，它會呼叫同步介面的方法。 如果同時在單一類別中實作非同步和同步介面，系統只會呼叫非同步方法。 使用類似的抽象類別時 <xref:Microsoft.AspNetCore.Mvc.Filters.ActionFilterAttribute> ，只會覆寫同步方法或每個篩選準則類型的非同步方法。
+請實作同步 **或** 非同步版本的篩選條件介面，而 **不要** 同時實作這兩者。 執行階段會先檢查以查看篩選條件是否會實作非同步介面，如果是，便會呼叫該介面。 如果沒有，它會呼叫同步介面的方法。 如果同時在單一類別中實作非同步和同步介面，系統只會呼叫非同步方法。 使用類似的抽象類別時 <xref:Microsoft.AspNetCore.Mvc.Filters.ActionFilterAttribute> ，只會覆寫同步方法或每個篩選準則類型的非同步方法。
 
 ### <a name="built-in-filter-attributes"></a>內建篩選條件屬性
 
@@ -117,7 +118,7 @@ ASP.NET Core 包含內建的屬性型篩選條件，可對其進行子類別化�
 
 [!code-csharp[](./filters/3.1sample/FiltersSample/Controllers/SampleController.cs?name=snippet_AddHeader&highlight=1)]
 
-使用 [瀏覽器開發人員工具](https://developer.mozilla.org/docs/Learn/Common_questions/What_are_browser_developer_tools) 之類的工具來檢查標頭。 在 [ **回應標頭**] 底下 `author: Rick Anderson` 顯示。
+使用 [瀏覽器開發人員工具](https://developer.mozilla.org/docs/Learn/Common_questions/What_are_browser_developer_tools) 之類的工具來檢查標頭。 在 [ **回應標頭** ] 底下 `author: Rick Anderson` 顯示。
 
 下列程式碼會實行 `ActionFilterAttribute` ：
 
@@ -126,7 +127,7 @@ ASP.NET Core 包含內建的屬性型篩選條件，可對其進行子類別化�
 
 [!code-csharp[](./filters/3.1sample/FiltersSample/Filters/MyActionFilterAttribute.cs?name=snippet)]
 
-設定選項是使用[選項模式](xref:fundamentals/configuration/options)從設定[系統](xref:fundamentals/configuration/index)提供。 例如，從檔案 *appsettings.js* ：
+設定選項是使用[選項模式](xref:fundamentals/configuration/options)從設定[系統](xref:fundamentals/configuration/index)提供。 例如，從檔案 *appsettings.json* ：
 
 [!code-json[](filters/3.1sample/FiltersSample/appsettings.json)]
 
@@ -166,7 +167,7 @@ ASP.NET Core 包含內建的屬性型篩選條件，可對其進行子類別化�
 
 ## <a name="filter-scopes-and-order-of-execution"></a>篩選條件範圍和執行的順序
 
-篩選條件能以三個「範圍」** 之一新增至管線：
+篩選條件能以三個「範圍」  之一新增至管線：
 
 * 在控制器動作上使用屬性。 篩選屬性無法套用至 Razor 頁面處理常式方法。
 * 使用控制器或頁面上的屬性 Razor 。
@@ -178,14 +179,14 @@ ASP.NET Core 包含內建的屬性型篩選條件，可對其進行子類別化�
 
 當管線的特定階段有多個篩選條件時，範圍會決定篩選條件的預設執行順序。  全域篩選條件會圍繞類別篩選條件，後者又圍繞方法篩選條件。
 
-因為篩選條件巢狀結構的原因，篩選條件的「之後」** 程式碼的執行順序會與「之前」** 程式碼相反。 篩選條件序列：
+因為篩選條件巢狀結構的原因，篩選條件的「之後」  程式碼的執行順序會與「之前」  程式碼相反。 篩選條件序列：
 
-* 全域篩選條件的「之前」** 程式碼。
+* 全域篩選條件的「之前」  程式碼。
   * 控制器和頁面篩選器的先前 *程式碼* Razor 。
-    * 動作方法篩選條件的「之前」** 程式碼。
-    * 動作方法篩選條件的「之後」** 程式碼。
+    * 動作方法篩選條件的「之前」  程式碼。
+    * 動作方法篩選條件的「之後」  程式碼。
   * 控制器和頁面篩選器的 *之後* 程式碼 Razor 。
-* 全域篩選條件的「之後」** 程式碼。
+* 全域篩選條件的「之後」  程式碼。
   
 下列範例說明針對同步動作篩選條件呼叫篩選條件方法的順序。
 
@@ -239,8 +240,8 @@ ASP.NET Core 包含內建的屬性型篩選條件，可對其進行子類別化�
 
 可以藉由實作 <xref:Microsoft.AspNetCore.Mvc.Filters.IOrderedFilter> 來覆寫預設執行序列。 `IOrderedFilter` 會公開 <xref:Microsoft.AspNetCore.Mvc.Filters.IOrderedFilter.Order> 屬性，其優先順序會高於範圍以決定執行順序。 具有較低 `Order` 值的篩選條件：
 
-* 在具有較高 `Order` 值的篩選條件之前執行「之前」** 程式碼。
-* 在具有較高 `Order` 值的篩選條件之後執行「之後」** 程式碼。
+* 在具有較高 `Order` 值的篩選條件之前執行「之前」  程式碼。
+* 在具有較高 `Order` 值的篩選條件之後執行「之後」  程式碼。
 
 使用函式 `Order` 參數設定屬性：
 
@@ -314,7 +315,7 @@ ASP.NET Core 包含內建的屬性型篩選條件，可對其進行子類別化�
 DI 會提供記錄器。 不過，請避免僅針對記錄目的建立並使用篩選條件。 [內建架構記錄](xref:fundamentals/logging/index)通常便可以提供記錄所需的項目。 新增至篩選條件的記錄：
 
 * 應該專注在篩選條件特定的商務領域考量或行為。
-* **不**應該記錄動作或其他架構事件。 內建的篩選準則會記錄動作和架構事件。
+* **不** 應該記錄動作或其他架構事件。 內建的篩選準則會記錄動作和架構事件。
 
 ### <a name="servicefilterattribute"></a>ServiceFilterAttribute
 
@@ -334,7 +335,7 @@ DI 會提供記錄器。 不過，請避免僅針對記錄目的建立並使用�
 
 使用 `ServiceFilterAttribute` 時，設定 [ServiceFilterAttribute.IsReusable](xref:Microsoft.AspNetCore.Mvc.ServiceFilterAttribute.IsReusable)：
 
-* 能提供篩選條件執行個體「可能」** 可以在其建立的要求範圍之外重複使用的提示。 ASP.NET Core 執行階段並不保證：
+* 能提供篩選條件執行個體「可能」  可以在其建立的要求範圍之外重複使用的提示。 ASP.NET Core 執行階段並不保證：
 
   * 將會建立篩選條件的單一執行個體。
   * 將不會於稍後的時間從 DI 容器重新要求篩選條件。
@@ -353,7 +354,7 @@ DI 會提供記錄器。 不過，請避免僅針對記錄目的建立並使用�
 * `TypeFilterAttribute` 可以選擇性地接受類型的建構函式引數。
 
 使用 `TypeFilterAttribute` 時，設定 [TypeFilterAttribute.IsReusable](xref:Microsoft.AspNetCore.Mvc.TypeFilterAttribute.IsReusable)：
-* 能提供篩選條件執行個體「可能」** 可以在其建立的要求範圍之外重複使用的提示。 ASP.NET Core 執行階段不保證將建立篩選條件的單一執行個體。
+* 能提供篩選條件執行個體「可能」  可以在其建立的要求範圍之外重複使用的提示。 ASP.NET Core 執行階段不保證將建立篩選條件的單一執行個體。
 
 * 不應該搭配仰賴具有非單一資料庫存留期之服務的篩選條件使用。
 
@@ -380,7 +381,7 @@ FiltersSample.Filters.LogConstantFilter:Information: Method 'Hi' called
 * 呼叫授權系統。
 * 不會授權要求。
 
-**不會**在授權篩選條件內擲回例外狀況：
+**不會** 在授權篩選條件內擲回例外狀況：
 
 * 該例外狀況將不會被處理。
 * 例外狀況篩選條件將不會處理例外狀況。
@@ -489,7 +490,7 @@ FiltersSample.Filters.LogConstantFilter:Information: Method 'Hi' called
 * 沒有之前和之後的事件。
 * 實作 <xref:Microsoft.AspNetCore.Mvc.Filters.IExceptionFilter.OnException*> 或 <xref:Microsoft.AspNetCore.Mvc.Filters.IAsyncExceptionFilter.OnExceptionAsync*>。
 * 處理 Razor 頁面或控制器建立、 [模型](xref:mvc/models/model-binding)系結、動作篩選準則或動作方法中發生的未處理例外狀況。
-* **不會**攔截在資源篩選條件、結果篩選條件或 MVC 結果執行中發生的例外狀況。
+* **不會** 攔截在資源篩選條件、結果篩選條件或 MVC 結果執行中發生的例外狀況。
 
 若要處理例外狀況，請將 <xref:System.Web.Mvc.ExceptionContext.ExceptionHandled> 屬性設為 `true`，或撰寫回應。 這樣會阻止傳播例外狀況。 例外狀況篩選條件無法將例外狀況變成「成功」。 只有動作篩選條件可以這麼做。
 
@@ -498,7 +499,7 @@ FiltersSample.Filters.LogConstantFilter:Information: Method 'Hi' called
 * 適合用於設陷在動作內發生的例外狀況。
 * 不像錯誤處理中介軟體那麼有彈性。
 
-偏好使用中介軟體進行例外狀況處理。 只有在錯誤處理會根據所呼叫的動作方法而「不同」** 時才使用例外狀況篩選條件。 比方說，應用程式可能會有適用於 API 端點及檢視/HTML 的動作方法。 API 端點可能將錯誤資訊傳回為 JSON，而以檢視為基礎的動作則可能將錯誤頁面傳回為 HTML。
+偏好使用中介軟體進行例外狀況處理。 只有在錯誤處理會根據所呼叫的動作方法而「不同」  時才使用例外狀況篩選條件。 比方說，應用程式可能會有適用於 API 端點及檢視/HTML 的動作方法。 API 端點可能將錯誤資訊傳回為 JSON，而以檢視為基礎的動作則可能將錯誤頁面傳回為 HTML。
 
 ## <a name="result-filters"></a>結果篩選條件
 
@@ -546,7 +547,7 @@ FiltersSample.Filters.LogConstantFilter:Information: Method 'Hi' called
 * 簡短電路的授權篩選和資源篩選。
 * 例外狀況篩選條件。
 
-例如，下列篩選一律會執行，並會在內容交涉失敗時，為動作結果 (<xref:Microsoft.AspNetCore.Mvc.ObjectResult>) 設定「422 無法處理的實體」** 狀態碼：
+例如，下列篩選一律會執行，並會在內容交涉失敗時，為動作結果 (<xref:Microsoft.AspNetCore.Mvc.ObjectResult>) 設定「422 無法處理的實體」  狀態碼：
 
 [!code-csharp[](./filters/3.1sample/FiltersSample/Filters/UnprocessableResultFilter.cs?name=snippet)]
 
@@ -622,7 +623,7 @@ What's a non-named attribute?
 
 作者：[Kirk Larkin](https://github.com/serpent5) \(英文\)、[Rick Anderson](https://twitter.com/RickAndMSFT) \(英文\)、[Tom Dykstra](https://github.com/tdykstra/) \(英文\) 及 [Steve Smith](https://ardalis.com/) \(英文\)
 
-ASP.NET Core 中的「篩選條件」** 可讓程式碼在要求處理管線中的特定階段之前或之後執行。
+ASP.NET Core 中的「篩選條件」  可讓程式碼在要求處理管線中的特定階段之前或之後執行。
 
 內建篩選條件會處理工作，例如：
 
@@ -637,7 +638,7 @@ ASP.NET Core 中的「篩選條件」** 可讓程式碼在要求處理管線中�
 
 ## <a name="how-filters-work"></a>篩選條件如何運作
 
-篩選條件會在「ASP.NET Core 動作引動過程管線」** 中執行，其有時也被稱為「篩選條件管線」**。  在 ASP.NET Core 之後執行的篩選條件管線會選取要執行的動作。
+篩選條件會在「ASP.NET Core 動作引動過程管線」  中執行，其有時也被稱為「篩選條件管線」  。  在 ASP.NET Core 之後執行的篩選條件管線會選取要執行的動作。
 
 ![要求處理會歷經其他中介軟體、路由中介軟體、動作選取和 ASP.NET Core 動作引動過程管線。 要求處理繼續往回歷經動作選取、路由中介軟體，以及各種其他中介軟體，然後才能成為傳送至用戶端的回應。](filters/_static/filter-pipeline-1.png)
 
@@ -681,7 +682,7 @@ ASP.NET Core 中的「篩選條件」** 可讓程式碼在要求處理管線中�
 
 可以在單一類別中實作多個篩選條件階段的介面。 例如，<xref:Microsoft.AspNetCore.Mvc.Filters.ActionFilterAttribute> 類別會實作 `IActionFilter`、`IResultFilter` 與其非同步對等項目。
 
-請實作同步**或**非同步版本的篩選條件介面，而**不要**同時實作這兩者。 執行階段會先檢查以查看篩選條件是否會實作非同步介面，如果是，便會呼叫該介面。 如果沒有，它會呼叫同步介面的方法。 如果同時在單一類別中實作非同步和同步介面，系統只會呼叫非同步方法。 使用抽象類別 (例如 <xref:Microsoft.AspNetCore.Mvc.Filters.ActionFilterAttribute>) 時，請僅覆寫每個篩選條件類型的同步方法或非同步方法。
+請實作同步 **或** 非同步版本的篩選條件介面，而 **不要** 同時實作這兩者。 執行階段會先檢查以查看篩選條件是否會實作非同步介面，如果是，便會呼叫該介面。 如果沒有，它會呼叫同步介面的方法。 如果同時在單一類別中實作非同步和同步介面，系統只會呼叫非同步方法。 使用抽象類別 (例如 <xref:Microsoft.AspNetCore.Mvc.Filters.ActionFilterAttribute>) 時，請僅覆寫每個篩選條件類型的同步方法或非同步方法。
 
 ### <a name="built-in-filter-attributes"></a>內建篩選條件屬性
 
@@ -710,7 +711,7 @@ ASP.NET Core 包含內建的屬性型篩選條件，可對其進行子類別化�
 
 ## <a name="filter-scopes-and-order-of-execution"></a>篩選條件範圍和執行的順序
 
-篩選條件能以三個「範圍」** 之一新增至管線：
+篩選條件能以三個「範圍」  之一新增至管線：
 
 * 針對動作使用屬性。
 * 針對控制器使用屬性。
@@ -722,16 +723,16 @@ ASP.NET Core 包含內建的屬性型篩選條件，可對其進行子類別化�
 
 ### <a name="default-order-of-execution"></a>預設執行順序
 
-當有多個 *相同類型*的篩選準則時，範圍會決定篩選執行的預設順序。  全域篩選會圍繞類別篩選。 類別篩選準則圍繞方法篩選。
+當有多個 *相同類型* 的篩選準則時，範圍會決定篩選執行的預設順序。  全域篩選會圍繞類別篩選。 類別篩選準則圍繞方法篩選。
 
-因為篩選條件巢狀結構的原因，篩選條件的「之後」** 程式碼的執行順序會與「之前」** 程式碼相反。 篩選條件序列：
+因為篩選條件巢狀結構的原因，篩選條件的「之後」  程式碼的執行順序會與「之前」  程式碼相反。 篩選條件序列：
 
-* 全域篩選條件的「之前」** 程式碼。
-  * 控制器篩選條件的「之前」** 程式碼。
-    * 動作方法篩選條件的「之前」** 程式碼。
-    * 動作方法篩選條件的「之後」** 程式碼。
-  * 控制器篩選條件的「之後」** 程式碼。
-* 全域篩選條件的「之後」** 程式碼。
+* 全域篩選條件的「之前」  程式碼。
+  * 控制器篩選條件的「之前」  程式碼。
+    * 動作方法篩選條件的「之前」  程式碼。
+    * 動作方法篩選條件的「之後」  程式碼。
+  * 控制器篩選條件的「之後」  程式碼。
+* 全域篩選條件的「之後」  程式碼。
   
 下列範例說明針對同步動作篩選條件呼叫篩選條件方法的順序。
 
@@ -784,8 +785,8 @@ ASP.NET Core 包含內建的屬性型篩選條件，可對其進行子類別化�
 
 可以藉由實作 <xref:Microsoft.AspNetCore.Mvc.Filters.IOrderedFilter> 來覆寫預設執行序列。 `IOrderedFilter` 會公開 <xref:Microsoft.AspNetCore.Mvc.Filters.IOrderedFilter.Order> 屬性，其優先順序會高於範圍以決定執行順序。 具有較低 `Order` 值的篩選條件：
 
-* 在具有較高 `Order` 值的篩選條件之前執行「之前」** 程式碼。
-* 在具有較高 `Order` 值的篩選條件之後執行「之後」** 程式碼。
+* 在具有較高 `Order` 值的篩選條件之前執行「之前」  程式碼。
+* 在具有較高 `Order` 值的篩選條件之後執行「之後」  程式碼。
 
 `Order` 屬性可以搭配建構函式參數設定：
 
@@ -846,7 +847,7 @@ ASP.NET Core 包含內建的屬性型篩選條件，可對其進行子類別化�
 DI 會提供記錄器。 不過，請避免僅針對記錄目的建立並使用篩選條件。 [內建架構記錄](xref:fundamentals/logging/index)通常便可以提供記錄所需的項目。 新增至篩選條件的記錄：
 
 * 應該專注在篩選條件特定的商務領域考量或行為。
-* **不**應該記錄動作或其他架構事件。 內建篩選條件能記錄動作和架構事件。
+* **不** 應該記錄動作或其他架構事件。 內建篩選條件能記錄動作和架構事件。
 
 ### <a name="servicefilterattribute"></a>ServiceFilterAttribute
 
@@ -866,7 +867,7 @@ DI 會提供記錄器。 不過，請避免僅針對記錄目的建立並使用�
 
 使用 `ServiceFilterAttribute` 時，設定 [ServiceFilterAttribute.IsReusable](xref:Microsoft.AspNetCore.Mvc.ServiceFilterAttribute.IsReusable)：
 
-* 能提供篩選條件執行個體「可能」** 可以在其建立的要求範圍之外重複使用的提示。 ASP.NET Core 執行階段並不保證：
+* 能提供篩選條件執行個體「可能」  可以在其建立的要求範圍之外重複使用的提示。 ASP.NET Core 執行階段並不保證：
 
   * 將會建立篩選條件的單一執行個體。
   * 將不會於稍後的時間從 DI 容器重新要求篩選條件。
@@ -885,7 +886,7 @@ DI 會提供記錄器。 不過，請避免僅針對記錄目的建立並使用�
 * `TypeFilterAttribute` 可以選擇性地接受類型的建構函式引數。
 
 使用 `TypeFilterAttribute` 時，設定 [TypeFilterAttribute.IsReusable](xref:Microsoft.AspNetCore.Mvc.TypeFilterAttribute.IsReusable)：
-* 能提供篩選條件執行個體「可能」** 可以在其建立的要求範圍之外重複使用的提示。 ASP.NET Core 執行階段不保證將建立篩選條件的單一執行個體。
+* 能提供篩選條件執行個體「可能」  可以在其建立的要求範圍之外重複使用的提示。 ASP.NET Core 執行階段不保證將建立篩選條件的單一執行個體。
 
 * 不應該搭配仰賴具有非單一資料庫存留期之服務的篩選條件使用。
 
@@ -913,7 +914,7 @@ FiltersSample.Filters.LogConstantFilter:Information: Method 'Hi' called
 * 呼叫授權系統。
 * 不會授權要求。
 
-**不會**在授權篩選條件內擲回例外狀況：
+**不會** 在授權篩選條件內擲回例外狀況：
 
 * 該例外狀況將不會被處理。
 * 例外狀況篩選條件將不會處理例外狀況。
@@ -1016,7 +1017,7 @@ FiltersSample.Filters.LogConstantFilter:Information: Method 'Hi' called
 * 沒有之前和之後的事件。
 * 實作 <xref:Microsoft.AspNetCore.Mvc.Filters.IExceptionFilter.OnException*> 或 <xref:Microsoft.AspNetCore.Mvc.Filters.IAsyncExceptionFilter.OnExceptionAsync*>。
 * 處理 Razor 頁面或控制器建立、 [模型](xref:mvc/models/model-binding)系結、動作篩選準則或動作方法中發生的未處理例外狀況。
-* **不會**攔截在資源篩選條件、結果篩選條件或 MVC 結果執行中發生的例外狀況。
+* **不會** 攔截在資源篩選條件、結果篩選條件或 MVC 結果執行中發生的例外狀況。
 
 若要處理例外狀況，請將 <xref:System.Web.Mvc.ExceptionContext.ExceptionHandled> 屬性設為 `true`，或撰寫回應。 這樣會阻止傳播例外狀況。 例外狀況篩選條件無法將例外狀況變成「成功」。 只有動作篩選條件可以這麼做。
 
@@ -1025,7 +1026,7 @@ FiltersSample.Filters.LogConstantFilter:Information: Method 'Hi' called
 * 適合用於設陷在動作內發生的例外狀況。
 * 不像錯誤處理中介軟體那麼有彈性。
 
-偏好使用中介軟體進行例外狀況處理。 只有在錯誤處理會根據所呼叫的動作方法而「不同」** 時才使用例外狀況篩選條件。 比方說，應用程式可能會有適用於 API 端點及檢視/HTML 的動作方法。 API 端點可能將錯誤資訊傳回為 JSON，而以檢視為基礎的動作則可能將錯誤頁面傳回為 HTML。
+偏好使用中介軟體進行例外狀況處理。 只有在錯誤處理會根據所呼叫的動作方法而「不同」  時才使用例外狀況篩選條件。 比方說，應用程式可能會有適用於 API 端點及檢視/HTML 的動作方法。 API 端點可能將錯誤資訊傳回為 JSON，而以檢視為基礎的動作則可能將錯誤頁面傳回為 HTML。
 
 ## <a name="result-filters"></a>結果篩選條件
 
@@ -1073,7 +1074,7 @@ FiltersSample.Filters.LogConstantFilter:Information: Method 'Hi' called
 * 簡短電路的授權篩選和資源篩選。
 * 例外狀況篩選條件。
 
-例如，下列篩選一律會執行，並會在內容交涉失敗時，為動作結果 (<xref:Microsoft.AspNetCore.Mvc.ObjectResult>) 設定「422 無法處理的實體」** 狀態碼：
+例如，下列篩選一律會執行，並會在內容交涉失敗時，為動作結果 (<xref:Microsoft.AspNetCore.Mvc.ObjectResult>) 設定「422 無法處理的實體」  狀態碼：
 
 [!code-csharp[](./filters/sample/FiltersSample/Filters/UnprocessableResultFilter.cs?name=snippet)]
 

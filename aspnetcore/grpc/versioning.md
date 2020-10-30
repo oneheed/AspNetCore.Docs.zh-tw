@@ -6,6 +6,7 @@ monikerRange: '>= aspnetcore-3.0'
 ms.author: jamesnk
 ms.date: 01/09/2020
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -17,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: grpc/versioning
-ms.openlocfilehash: 0d8c5d953c9d703788a1686bbc800248c46efa48
-ms.sourcegitcommit: 47c9a59ff8a359baa6bca2637d3af87ddca1245b
+ms.openlocfilehash: 38204b16d041f21221862c566b90a6a9571d26a1
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 08/27/2020
-ms.locfileid: "88945398"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93058697"
 ---
 # <a name="versioning-grpc-services"></a>Versioning gRPC 服務
 
@@ -57,18 +58,18 @@ GRPC 通訊協定是設計來支援隨時間變化的服務。 一般而言，gR
 
 下列變更在 gRPC 通訊協定層級不會中斷，但如果用戶端升級至最新的 *proto* 合約或用戶端 .net 元件，則需要更新用戶端。 如果您打算將 gRPC 程式庫發佈至 NuGet，二進位相容性很重要。
 
-* 從已移除的欄位**移除欄位**值會還原序列化為訊息的[未知欄位](https://developers.google.com/protocol-buffers/docs/proto3#unknowns)。 這不是 gRPC 的通訊協定重大變更，但如果用戶端升級至最新的合約，則需要更新用戶端。 很重要的是，在未來不會意外重複使用移除的欄位編號。 為確保不會發生這種情況，請使用 Protobuf 的 [reserved](https://developers.google.com/protocol-buffers/docs/proto3#reserved) 關鍵字來指定訊息上已刪除的欄位編號和名稱。
-* 重新**命名訊息**訊息名稱通常不會在網路上傳送，因此這不是 gRPC 的通訊協定中斷變更。 如果用戶端升級至最新的合約，就必須更新用戶端。 當訊息名稱用來識別訊息類型時，網路 **上傳送訊息名稱的** 其中一種情況是使用 [任何](https://developers.google.com/protocol-buffers/docs/proto3#any) 欄位。
-* 變更**csharp_namespace**變更 `csharp_namespace` 將會變更所產生 .net 類型的命名空間。 這不是 gRPC 的通訊協定重大變更，但如果用戶端升級至最新的合約，則需要更新用戶端。
+* 從已移除的欄位 **移除欄位** 值會還原序列化為訊息的 [未知欄位](https://developers.google.com/protocol-buffers/docs/proto3#unknowns)。 這不是 gRPC 的通訊協定重大變更，但如果用戶端升級至最新的合約，則需要更新用戶端。 很重要的是，在未來不會意外重複使用移除的欄位編號。 為確保不會發生這種情況，請使用 Protobuf 的 [reserved](https://developers.google.com/protocol-buffers/docs/proto3#reserved) 關鍵字來指定訊息上已刪除的欄位編號和名稱。
+* 重新 **命名訊息** 訊息名稱通常不會在網路上傳送，因此這不是 gRPC 的通訊協定中斷變更。 如果用戶端升級至最新的合約，就必須更新用戶端。 當訊息名稱用來識別訊息類型時，網路 **上傳送訊息名稱的** 其中一種情況是使用 [任何](https://developers.google.com/protocol-buffers/docs/proto3#any) 欄位。
+* 變更 **csharp_namespace** 變更 `csharp_namespace` 將會變更所產生 .net 類型的命名空間。 這不是 gRPC 的通訊協定重大變更，但如果用戶端升級至最新的合約，則需要更新用戶端。
 
 ### <a name="protocol-breaking-changes"></a>通訊協定的重大變更
 
 下列專案是通訊協定和二進位中斷性變更：
 
-* 重新**命名欄位**-使用 Protobuf 內容時，功能變數名稱只會在產生的程式碼中使用。 欄位號用來識別網路上的欄位。 重新命名欄位不是 Protobuf 的通訊協定重大變更。 但是，如果伺服器使用 JSON 內容，則重新命名欄位是一項重大變更。
+* 重新 **命名欄位** -使用 Protobuf 內容時，功能變數名稱只會在產生的程式碼中使用。 欄位號用來識別網路上的欄位。 重新命名欄位不是 Protobuf 的通訊協定重大變更。 但是，如果伺服器使用 JSON 內容，則重新命名欄位是一項重大變更。
 * **變更欄位資料類型** -將欄位的資料類型變更為 [不相容的類型](https://developers.google.com/protocol-buffers/docs/proto3#updating) 時，將會在還原序列化訊息時發生錯誤。 即使新的資料類型相容，如果用戶端升級至最新的合約，則可能需要更新用戶端，以支援新的類型。
 * **變更欄位編號** -使用 Protobuf 承載時，會使用欄位編號來識別網路上的欄位。
-* 重新**命名封裝、服務或方法**gRPC 時，會使用封裝名稱、服務名稱和方法名稱來建立 URL。 用戶端會從伺服器取得未 *實現* 的狀態。
+* 重新 **命名封裝、服務或方法** gRPC 時，會使用封裝名稱、服務名稱和方法名稱來建立 URL。 用戶端會從伺服器取得未 *實現* 的狀態。
 * **移除服務或方法** -當呼叫已移除的方法時，用戶端會從伺服器 *取得未完成的狀態* 。
 
 ### <a name="behavior-breaking-changes"></a>行為重大變更
@@ -93,7 +94,7 @@ gRPC 支援選擇性的 [封裝](https://developers.google.com/protocol-buffers/
 * `greet.v1.Greeter`
 * `greet.v2.Greeter`
 
-已建立版本之服務的實 *Startup.cs*：
+已建立版本之服務的實 *Startup.cs* ：
 
 ```csharp
 app.UseEndpoints(endpoints =>
@@ -116,7 +117,7 @@ app.UseEndpoints(endpoints =>
 
 [!code-csharp[](versioning/sample/GreeterServiceV1.cs?highlight=10,19)]
 
-使用不同封裝名稱產生的服務和訊息是 **不同的 .net 類型**。 將商務邏輯移至中央位置需要將訊息對應至一般類型。
+使用不同封裝名稱產生的服務和訊息是 **不同的 .net 類型** 。 將商務邏輯移至中央位置需要將訊息對應至一般類型。
 
 ## <a name="additional-resources"></a>其他資源
 

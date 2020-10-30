@@ -7,6 +7,7 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 01/13/2020
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -18,23 +19,23 @@ no-loc:
 - Razor
 - SignalR
 uid: host-and-deploy/web-farm
-ms.openlocfilehash: 13f1ad5dcd4a230ec05b08c402f4ee9e455c3c29
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: ee78e80a4eda3089943765700aa6bb62c6c1e07d
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88634133"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93057514"
 ---
 # <a name="host-aspnet-core-in-a-web-farm"></a>在 Web 伺服陣列上裝載 ASP.NET Core
 
 由 [Chris Ross](https://github.com/Tratcher)
 
-*Web 伺服陣列*是一組兩個或多個 Web 伺服器 (或稱為「節點」**)，用於裝載應用程式的多個執行個體。 當使用者的要求抵達 Web 伺服陣列時，「負載平衡器」** 會將要求分散到 Web 伺服陣列的節點。 Web 伺服陣列改善：
+ )，用於裝載應用程式的多個執行個體。 當使用者的要求抵達 Web 伺服陣列時，「負載平衡器」  會將要求分散到 Web 伺服陣列的節點。 Web 伺服陣列改善：
 
-* **可靠性/可用性**：當一或多個節點失敗時，負載平衡器可以將要求路由至其他正常運作的節點，以繼續處理要求。
-* **容量/效能**：多個節點可以處理比單一伺服器更多的要求。 負載平衡器可以將要求分散到節點，藉以平衡工作負載。
-* 擴充**性**：需要更多或更少的容量時，可以增加或減少作用中節點的數目以符合工作負載。 Web 伺服陣列的平台技術 (例如 [Azure App Service](https://azure.microsoft.com/services/app-service/)) 可以依系統管理員的要求自動新增或移除節點，也可以在沒有人為介入的情況下自動新增或移除節點。
-* 可**維護性**： web 伺服陣列的節點可以依賴一組共用服務，這會使得系統管理更容易。 例如，Web 伺服陣列的節點可以依賴單一資料庫伺服器和靜態資源的通用網路位置，例如影像和可下載檔案。
+* **可靠性/可用性** ：當一或多個節點失敗時，負載平衡器可以將要求路由至其他正常運作的節點，以繼續處理要求。
+* **容量/效能** ：多個節點可以處理比單一伺服器更多的要求。 負載平衡器可以將要求分散到節點，藉以平衡工作負載。
+* 擴充 **性** ：需要更多或更少的容量時，可以增加或減少作用中節點的數目以符合工作負載。 Web 伺服陣列的平台技術 (例如 [Azure App Service](https://azure.microsoft.com/services/app-service/)) 可以依系統管理員的要求自動新增或移除節點，也可以在沒有人為介入的情況下自動新增或移除節點。
+* 可 **維護性** ： web 伺服陣列的節點可以依賴一組共用服務，這會使得系統管理更容易。 例如，Web 伺服陣列的節點可以依賴單一資料庫伺服器和靜態資源的通用網路位置，例如影像和可下載檔案。
 
 本主題針對依賴共用資源的 Web 伺服陣列，說明其中所裝載 ASP.NET Core 應用程式的設定和相依性。
 
@@ -59,7 +60,7 @@ ms.locfileid: "88634133"
 
 ### <a name="data-protection"></a>資料保護
 
-應用程式使用 [ASP.NET Core 資料保護系統](xref:security/data-protection/introduction)來保護資料。 資料保護會依賴一組儲存在*金鑰環*中的密碼編譯金鑰。 初始化資料保護系統時，會套用在本機儲存金鑰環的[預設設定](xref:security/data-protection/configuration/default-settings)。 在預設設定下，Web 伺服陣列的每個節點上都會儲存一個唯一的金鑰環。 因此，每個 Web 伺服陣列節點都無法解密由任何其他節點上的應用程式加密的資料。 預設設定通常不適用於在 Web 伺服陣列中裝載應用程式。 實作共用金鑰環的替代方式，是一律將使用者要求路由至相同的節點。 如需有關 Web 伺服陣列部署的資料保護系統設定詳細資訊，請參閱 <xref:security/data-protection/configuration/overview>。
+應用程式使用 [ASP.NET Core 資料保護系統](xref:security/data-protection/introduction)來保護資料。 資料保護會依賴一組儲存在 *金鑰環* 中的密碼編譯金鑰。 初始化資料保護系統時，會套用在本機儲存金鑰環的[預設設定](xref:security/data-protection/configuration/default-settings)。 在預設設定下，Web 伺服陣列的每個節點上都會儲存一個唯一的金鑰環。 因此，每個 Web 伺服陣列節點都無法解密由任何其他節點上的應用程式加密的資料。 預設設定通常不適用於在 Web 伺服陣列中裝載應用程式。 實作共用金鑰環的替代方式，是一律將使用者要求路由至相同的節點。 如需有關 Web 伺服陣列部署的資料保護系統設定詳細資訊，請參閱 <xref:security/data-protection/configuration/overview>。
 
 ### <a name="caching"></a>Caching
 
@@ -85,7 +86,7 @@ ms.locfileid: "88634133"
 
 請考慮使用驗證登入應用程式的使用者 cookie 。 使用者在某個 Web 伺服陣列節點上登入應用程式。 如果其下一個要求抵達其登入的相同節點，則應用程式可以將驗證解密 cookie ，並允許存取應用程式的資源。 如果其下一個要求抵達不同的節點，應用程式就無法 cookie 從使用者登入的節點解密驗證，且要求的資源的授權會失敗。
 
-如果**間歇性**發生下列任何徵兆，則問題通常可追溯到 Web 伺服陣列環境的不正確資料保護或快取設定：
+如果 **間歇性** 發生下列任何徵兆，則問題通常可追溯到 Web 伺服陣列環境的不正確資料保護或快取設定：
 
 * 驗證中斷：驗證設定 cookie 不正確或無法解密。 OAuth (Facebook、Microsoft、Twitter) 或 OpenIdConnect 登入失敗並出現錯誤「相互關聯失敗」。
 * 授權中斷： Identity 會遺失。

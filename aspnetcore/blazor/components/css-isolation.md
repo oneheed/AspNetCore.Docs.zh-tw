@@ -7,6 +7,7 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 10/20/2020
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -18,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/components/css-isolation
-ms.openlocfilehash: c154e746c4c88fc919b2c0dddaea5fd585427a82
-ms.sourcegitcommit: d84a225ec3381355c343460deed50f2fa5722f60
+ms.openlocfilehash: 628e7dc897912beaae0df792b82958517ac70ca4
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 10/22/2020
-ms.locfileid: "92431835"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93056318"
 ---
 # <a name="aspnet-core-no-locblazor-css-isolation"></a>ASP.NET Core Blazor CSS 隔離
 
@@ -33,9 +34,9 @@ CSS 隔離會防止全域樣式的相依性，並協助避免元件和程式庫�
 
 ## <a name="enable-css-isolation"></a>啟用 CSS 隔離 
 
-若要定義元件特定樣式，請建立 `razor.css` 符合元件檔案名的檔案 `.razor` 。 這個檔案 `razor.css` 是限 *域的 CSS*檔案。 
+若要定義元件特定樣式，請建立 `razor.css` 符合元件檔案名的檔案 `.razor` 。 這個檔案 `razor.css` 是限 *域的 CSS* 檔案。 
 
-若為 `MyComponent` 具有檔案的元件 `MyComponent.razor` ，請建立檔案與名為的元件 `MyComponent.razor.css` 。 `MyComponent`檔案名中的值 `razor.css` **不**區分大小寫。
+若為 `MyComponent` 具有檔案的元件 `MyComponent.razor` ，請建立檔案與名為的元件 `MyComponent.razor.css` 。 `MyComponent`檔案名中的值 `razor.css` **不** 區分大小寫。
 
 例如，若要 `Counter` 在預設專案範本中將 CSS 隔離新增至元件，請在檔案中 Blazor 加入名為的新檔案 `Counter.razor.css` `Counter.razor` ，然後新增下列 CSS：
 
@@ -85,7 +86,7 @@ h1[b-3xxtam6d07] {
 
 ## <a name="child-component-support"></a>子元件支援
 
-CSS 隔離預設僅適用于您與格式相關聯的元件 `{COMPONENT NAME}.razor.css` ，其中預留位置 `{COMPONENT NAME}` 通常是元件名稱。 若要將變更套用至子元件，請使用 `::deep` 組合器至父元件檔案中的任何子代元素 `razor.css` 。 `::deep`組合器會選取*專案所*產生之範圍識別碼子系的元素。 
+CSS 隔離預設僅適用于您與格式相關聯的元件 `{COMPONENT NAME}.razor.css` ，其中預留位置 `{COMPONENT NAME}` 通常是元件名稱。 若要將變更套用至子元件，請使用 `::deep` 組合器至父元件檔案中的任何子代元素 `razor.css` 。 `::deep`組合器會選取 *專案所* 產生之範圍識別碼子系的元素。 
 
 下列範例顯示使用稱為的子元件呼叫的父元件 `Parent` `Child` 。
 

@@ -6,6 +6,7 @@ ms.author: riande
 ms.custom: H1Hack27Feb2017
 ms.date: 01/09/2020
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -17,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: client-side/using-browserlink
-ms.openlocfilehash: ab4ca78fa50768ff66536608a7cf03e73aecf73a
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: 80f05acab55af973faf08b5db79ea4cbaf896b14
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88628816"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93054485"
 ---
 # <a name="browser-link-in-aspnet-core"></a>ASP.NET Core 中的瀏覽器連結
 
@@ -34,7 +35,7 @@ ms.locfileid: "88628816"
 
 ::: moniker range=">= aspnetcore-3.0"
 
-將 [VisualStudio BrowserLink](https://www.nuget.org/packages/Microsoft.VisualStudio.Web.BrowserLink/) 套件新增至您的專案。 針對 ASP.NET Core Razor 頁面或 MVC 專案，也可以依照中的 Razor 說明，啟用 (*cshtml*) 檔案的執行時間編譯 <xref:mvc/views/view-compilation> 。 Razor 只有在已啟用執行時間編譯時，才會套用語法變更。
+將 [VisualStudio BrowserLink](https://www.nuget.org/packages/Microsoft.VisualStudio.Web.BrowserLink/) 套件新增至您的專案。 針對 ASP.NET Core Razor 頁面或 MVC 專案，也可以依照中的 Razor 說明，啟用 ( *cshtml* ) 檔案的執行時間編譯 <xref:mvc/views/view-compilation> 。 Razor 只有在已啟用執行時間編譯時，才會套用語法變更。
 
 ::: moniker-end
 
@@ -46,7 +47,7 @@ ms.locfileid: "88628816"
 
 ::: moniker range="= aspnetcore-2.0"
 
-ASP.NET Core 2.0 **Web 應用程式**、 **空白**和 **Web API** 專案範本會使用 [AspNetCore. All 中繼套件](xref:fundamentals/metapackage)，其中包含 [BrowserLink](https://www.nuget.org/packages/Microsoft.VisualStudio.Web.BrowserLink/)的套件參考。 因此，使用 `Microsoft.AspNetCore.All` 中繼套件不需要進一步的動作，就能讓瀏覽器連結可供使用。
+ASP.NET Core 2.0 **Web 應用程式** 、 **空白** 和 **Web API** 專案範本會使用 [AspNetCore. All 中繼套件](xref:fundamentals/metapackage)，其中包含 [BrowserLink](https://www.nuget.org/packages/Microsoft.VisualStudio.Web.BrowserLink/)的套件參考。 因此，使用 `Microsoft.AspNetCore.All` 中繼套件不需要進一步的動作，就能讓瀏覽器連結可供使用。
 
 ::: moniker-end
 
@@ -85,8 +86,8 @@ if (env.IsDevelopment())
 您可以從瀏覽器連結的工具列控制項，：
 
 * 一次在數個瀏覽器中重新整理 web 應用程式。
-* 開啟 **瀏覽器連結儀表板**。
-* 啟用或停用 **瀏覽器連結**。 注意：在 Visual Studio 中，預設會停用瀏覽器連結。
+* 開啟 **瀏覽器連結儀表板** 。
+* 啟用或停用 **瀏覽器連結** 。 注意：在 Visual Studio 中，預設會停用瀏覽器連結。
 * 啟用或停用 [CSS 自動同步](#enable-or-disable-css-auto-sync)處理。
 
 ## <a name="refresh-the-web-app-in-several-browsers-at-once"></a>一次在數個瀏覽器中重新整理 web 應用程式
@@ -95,7 +96,7 @@ if (env.IsDevelopment())
 
 ![F5 下拉式功能表](using-browserlink/_static/debug-target-dropdown-menu.png)
 
-若要一次開啟多個瀏覽器，請從相同的下拉式清單中選擇 **[流覽方式]** 。 按住 <kbd>Ctrl</kbd> 鍵以選取您想要的瀏覽器，然後按一下 **[流覽]**：
+若要一次開啟多個瀏覽器，請從相同的下拉式清單中選擇 **[流覽方式]** 。 按住 <kbd>Ctrl</kbd> 鍵以選取您想要的瀏覽器，然後按一下 **[流覽]** ：
 
 ![一次開啟許多瀏覽器](using-browserlink/_static/open-many-browsers-at-once.png)
 

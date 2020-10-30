@@ -5,6 +5,7 @@ description: 了解其為 ASP.NET MVC 功能的區域，如何用來將相關功
 ms.author: riande
 ms.date: 03/21/2019
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -16,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: mvc/controllers/areas
-ms.openlocfilehash: 033b57f5406d0344347b2f787fa2b2fbb2da8604
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: 42eec406813adce4d7edbc1ab66a1f689c4aca0e
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88630246"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93053523"
 ---
 # <a name="areas-in-aspnet-core"></a>ASP.NET Core 中的區域
 
@@ -62,7 +63,7 @@ ms.locfileid: "88630246"
 
 ### <a name="area-folder-structure"></a>區域資料夾結構
 
-假設應用程式具有兩個邏輯群組：「產品」** 和「服務」**。 使用區域，資料夾結構應該如下：
+假設應用程式具有兩個邏輯群組：「產品」  和「服務」  。 使用區域，資料夾結構應該如下：
 
 * 專案名稱
   * 區域
@@ -138,7 +139,7 @@ ms.locfileid: "88630246"
 
 ### <a name="shared-layout-for-areas-using-the-_viewstartcshtml-file"></a>使用 _ViewStart.cshtml 檔案共用區域的配置
 
-若要共用整個應用程式的一般版面配置，請在[應用程式根資料夾](#arf)中保留 *_ViewStart 的 cshtml* 。 如需詳細資訊，請參閱＜<xref:mvc/views/layout>＞
+若要共用整個應用程式的一般版面配置，請在 [應用程式根資料夾](#arf)中保留 *_ViewStart 的 cshtml* 。 如需詳細資訊，請參閱<xref:mvc/views/layout>。
 
 <a name="arf"></a>
 
@@ -148,12 +149,12 @@ ms.locfileid: "88630246"
 
 ### <a name="_viewimportscshtml"></a>_ViewImports.cshtml
 
- */Views/_ViewImports cshtml*、適用于 MVC 的 */Pages/_ViewImports* 和頁面的 Razor ，不會匯入區域中的 Views。 您可以使用下列其中一種方法，提供所有視圖的 view imports：
+ */Views/_ViewImports cshtml* 、適用于 MVC 的 */Pages/_ViewImports* 和頁面的 Razor ，不會匯入區域中的 Views。 您可以使用下列其中一種方法，提供所有視圖的 view imports：
 
 * 將 *_ViewImports 的 cshtml* 加入至 [應用程式根資料夾](#arf)。 應用程式根資料夾中的 *_ViewImports* 會套用至應用程式中的所有 views。
 * 將 *_ViewImports 的 cshtml* 檔案複製到 [區域] 底下的適當 [view] 資料夾中。
 
-*_ViewImports 的 cshtml*檔案[通常包含卷](xref:mvc/views/tag-helpers/intro)標協助程式 imports、 `@using` 和 `@inject` 語句。 如需詳細資訊，請參閱匯 [入共用](xref:mvc/views/layout#importing-shared-directives)指示詞。
+*_ViewImports 的 cshtml* 檔案 [通常包含卷](xref:mvc/views/tag-helpers/intro)標協助程式 imports、 `@using` 和 `@inject` 語句。 如需詳細資訊，請參閱匯 [入共用](xref:mvc/views/layout#importing-shared-directives)指示詞。
 
 <a name="rename"></a>
 
@@ -172,12 +173,12 @@ ms.locfileid: "88630246"
 * 專案名稱
   * 區域
     * 產品
-      * 頁面
+      * Pages
         * _ViewImports
         * 關於
         * 索引
     * 服務
-      * 頁面
+      * Pages
         * 管理
           * 關於
           * 索引
@@ -190,7 +191,7 @@ ms.locfileid: "88630246"
 
 範例下載包括[部分檢視](xref:mvc/views/partial)，其中可在未指定區域的情況下包含上述連結和相同連結。 部分檢視會在[配置檔案](xref:mvc/views/layout)中進行參考，因此，應用程式中的每個頁面都會顯示產生的連結。 在未指定區域的情況下產生的連結，只有在從相同區域中的頁面進行參考時才有效。
 
-未指定區域時，路由即會取決於「環境」** 值。 目前要求的目前路由值被視為用於連結產生的環境值。 在許多適用於範例應用程式的案例中，使用環境值會產生不正確的連結。 例如，試想從下列程式碼產生的連結：
+未指定區域時，路由即會取決於「環境」  值。 目前要求的目前路由值被視為用於連結產生的環境值。 在許多適用於範例應用程式的案例中，使用環境值會產生不正確的連結。 例如，試想從下列程式碼產生的連結：
 
 [!code-cshtml[](areas/31samples/RPareas/Pages/Shared/_testLinksPartial.cshtml?name=snippet2)]
 
@@ -264,7 +265,7 @@ ms.locfileid: "88630246"
 
 ### <a name="area-folder-structure"></a>區域資料夾結構
 
-假設應用程式具有兩個邏輯群組：「產品」** 和「服務」**。 使用區域，資料夾結構應該如下：
+假設應用程式具有兩個邏輯群組：「產品」  和「服務」  。 使用區域，資料夾結構應該如下：
 
 * 專案名稱
   * 區域
@@ -330,7 +331,7 @@ ms.locfileid: "88630246"
 
 範例下載包括[部分檢視](xref:mvc/views/partial)，其中可在未指定區域的情況下包含上述連結和相同連結。 部分檢視會在[配置檔案](xref:mvc/views/layout)中進行參考，因此，應用程式中的每個頁面都會顯示產生的連結。 在未指定區域的情況下產生的連結，只有在從相同區域與控制器中的頁面進行參考時才有效。
 
-未指定區域或控制站時，路由即會取決於「環境」** 值。 目前要求的目前路由值被視為用於連結產生的環境值。 在許多適用於範例應用程式的案例中，使用環境值會產生不正確的連結。
+未指定區域或控制站時，路由即會取決於「環境」  值。 目前要求的目前路由值被視為用於連結產生的環境值。 在許多適用於範例應用程式的案例中，使用環境值會產生不正確的連結。
 
 如需詳細資訊，請參閱[路由至控制器動作](xref:mvc/controllers/routing)。
 
@@ -340,7 +341,7 @@ ms.locfileid: "88630246"
 
 ### <a name="_viewimportscshtml"></a>_ViewImports.cshtml
 
-在其標準位置中，*/Views/_ViewImports.cshtml* 不適用於區域。 若要在您的區域中 [使用一般卷](xref:mvc/views/tag-helpers/intro)標協助程式、或，請 `@using` `@inject` 確定適當的 *_ViewImports cshtml* 檔案 [適用于您的區域查看](xref:mvc/views/layout#importing-shared-directives)。 如果您希望在所有檢視中都有相同的行為，請將 */Views/_ViewImports.cshtml* 移至應用程式根目錄。
+在其標準位置中， */Views/_ViewImports.cshtml* 不適用於區域。 若要在您的區域中 [使用一般卷](xref:mvc/views/tag-helpers/intro)標協助程式、或，請 `@using` `@inject` 確定適當的 *_ViewImports cshtml* 檔案 [適用于您的區域查看](xref:mvc/views/layout#importing-shared-directives)。 如果您希望在所有檢視中都有相同的行為，請將 */Views/_ViewImports.cshtml* 移至應用程式根目錄。
 
 <a name="rename"></a>
 
@@ -359,12 +360,12 @@ ms.locfileid: "88630246"
 * 專案名稱
   * 區域
     * 產品
-      * 頁面
+      * Pages
         * _ViewImports
         * 關於
         * 索引
     * 服務
-      * 頁面
+      * Pages
         * 管理
           * 關於
           * 索引
@@ -379,7 +380,7 @@ ms.locfileid: "88630246"
 
 範例下載包括[部分檢視](xref:mvc/views/partial)，其中可在未指定區域的情況下包含上述連結和相同連結。 部分檢視會在[配置檔案](xref:mvc/views/layout)中進行參考，因此，應用程式中的每個頁面都會顯示產生的連結。 在未指定區域的情況下產生的連結，只有在從相同區域中的頁面進行參考時才有效。
 
-未指定區域時，路由即會取決於「環境」** 值。 目前要求的目前路由值被視為用於連結產生的環境值。 在許多適用於範例應用程式的案例中，使用環境值會產生不正確的連結。 例如，試想從下列程式碼產生的連結：
+未指定區域時，路由即會取決於「環境」  值。 目前要求的目前路由值被視為用於連結產生的環境值。 在許多適用於範例應用程式的案例中，使用環境值會產生不正確的連結。 例如，試想從下列程式碼產生的連結：
 
 [!code-cshtml[](areas/samples/RPareas/Pages/Shared/_testLinksPartial.cshtml?name=snippet2)]
 

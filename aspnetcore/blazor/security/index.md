@@ -7,6 +7,7 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 05/19/2020
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -18,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/security/index
-ms.openlocfilehash: f198cef0cf990dcc2806d3967130db64af47c1d0
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: 6110f51eb5d5ee40d6ce5a5d49ddda3329d1f033
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88627828"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93055538"
 ---
 # <a name="aspnet-core-no-locblazor-authentication-and-authorization"></a>ASP.NET Core Blazor 驗證與授權
 
@@ -36,7 +37,7 @@ Blazor Server和應用程式之間的安全性案例不同 Blazor WebAssembly �
 * 要提供給使用者的 UI 選項 (例如，使用者可以使用哪些功能表項目)。
 * 適用於應用程式和元件之特定區域的存取規則。
 
-Blazor WebAssembly 應用程式會在用戶端上執行。 授權「僅」** 會被用來決定要顯示的 UI 選項。 由於用戶端檢查可以由使用者修改或略過，因此 Blazor WebAssembly 應用程式無法強制執行授權存取規則。
+Blazor WebAssembly 應用程式會在用戶端上執行。 授權「僅」  會被用來決定要顯示的 UI 選項。 由於用戶端檢查可以由使用者修改或略過，因此 Blazor WebAssembly 應用程式無法強制執行授權存取規則。
 
 [ Razor 頁面授權慣例](xref:security/authorization/razor-pages-authorization)不適用於可路由傳送的 Razor 元件。 如果無法路由傳送的 Razor 元件 [內嵌在頁面中](xref:blazor/components/integrate-components-into-razor-pages-and-mvc-apps#render-components-from-a-page-or-view)，頁面的授權慣例會間接影響 Razor 元件以及頁面內容的其餘部分。
 
@@ -241,20 +242,20 @@ builder.Services.AddAuthorizationCore();
 
 ## <a name="authorization"></a>授權
 
-在使用者被驗證之後，系統便會套用「授權」** 規則以控制使用者可以執行的動作。
+在使用者被驗證之後，系統便會套用「授權」  規則以控制使用者可以執行的動作。
 
 存取權通常會依據下列情況來授與或拒絕：
 
 * 使用者已通過驗證 (已登入)。
-* 使用者屬於某個「角色」**。
-* 使用者具有「宣告」**。
-* 已滿足某個「原則」**。
+* 使用者屬於某個「角色」  。
+* 使用者具有「宣告」  。
+* 已滿足某個「原則」  。
 
 這些概念與 ASP.NET Core MVC 或 Pages 應用程式中的每個概念相同 Razor 。 如需 ASP.NET Core 安全性的詳細資訊，請參閱[ASP.NET Core 安全性和 Identity ](xref:security/index)的相關文章。
 
 ## <a name="authorizeview-component"></a>AuthorizeView 元件
 
-<xref:Microsoft.AspNetCore.Components.Authorization.AuthorizeView> 元件會根據使用者是否獲得授權以查看某個 UI 來選擇性地顯示該 UI。 此方法可讓您只需要向使用者「顯示」** 資料，而不需要在程序性邏輯中使用該使用者的身分識別。
+<xref:Microsoft.AspNetCore.Components.Authorization.AuthorizeView> 元件會根據使用者是否獲得授權以查看某個 UI 來選擇性地顯示該 UI。 此方法可讓您只需要向使用者「顯示」  資料，而不需要在程序性邏輯中使用該使用者的身分識別。
 
 該元件會公開 <xref:Microsoft.AspNetCore.Components.Authorization.AuthenticationState> 類型的 `context` 變數，您可以使用它來存取已登入使用者的相關資訊：
 
@@ -293,7 +294,7 @@ builder.Services.AddAuthorizationCore();
 
 ### <a name="role-based-and-policy-based-authorization"></a>角色型和原則型授權
 
-<xref:Microsoft.AspNetCore.Components.Authorization.AuthorizeView> 元件支援「角色型」** 或「原則型」** 授權。
+<xref:Microsoft.AspNetCore.Components.Authorization.AuthorizeView> 元件支援「角色型」  或「原則型」  授權。
 
 針對角色型授權，請使用 <xref:Microsoft.AspNetCore.Components.Authorization.AuthorizeView.Roles> 參數：
 
@@ -321,7 +322,7 @@ builder.Services.AddAuthorizationCore();
 
 ### <a name="content-displayed-during-asynchronous-authentication"></a>在非同步驗證期間所顯示的內容
 
-Blazor 允許以 *非同步方式*判斷驗證狀態。 這種方法的主要案例是對 Blazor WebAssembly 外部端點提出要求以進行驗證的應用程式。
+Blazor 允許以 *非同步方式* 判斷驗證狀態。 這種方法的主要案例是對 Blazor WebAssembly 外部端點提出要求以進行驗證的應用程式。
 
 在驗證期間，<xref:Microsoft.AspNetCore.Components.Authorization.AuthorizeView> 預設不會顯示任何內容。 若要在進行驗證時顯示內容，請使用 `<Authorizing>` 標記：
 
@@ -352,7 +353,7 @@ You can only see this if you're signed in.
 ```
 
 > [!IMPORTANT]
-> 僅 [`[Authorize]`](xref:Microsoft.AspNetCore.Authorization.AuthorizeAttribute) 在透過 `@page` 路由器達成的元件上使用 Blazor 。 授權僅會以路由的層面執行，且「不」** 適用於在頁面內轉譯的子元件。 若要授權在頁面內顯示特定組件，請改為使用 <xref:Microsoft.AspNetCore.Components.Authorization.AuthorizeView>。
+> 僅 [`[Authorize]`](xref:Microsoft.AspNetCore.Authorization.AuthorizeAttribute) 在透過 `@page` 路由器達成的元件上使用 Blazor 。 授權僅會以路由的層面執行，且「不」  適用於在頁面內轉譯的子元件。 若要授權在頁面內顯示特定組件，請改為使用 <xref:Microsoft.AspNetCore.Components.Authorization.AuthorizeView>。
 
 [`[Authorize]`](xref:Microsoft.AspNetCore.Authorization.AuthorizeAttribute)屬性也支援以角色為基礎或以原則為基礎的授權。 針對角色型授權，請使用 <xref:Microsoft.AspNetCore.Authorization.AuthorizeAttribute.Roles> 參數：
 

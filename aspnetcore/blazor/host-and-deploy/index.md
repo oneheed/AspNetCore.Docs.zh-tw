@@ -7,6 +7,7 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 07/15/2020
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -18,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/host-and-deploy/index
-ms.openlocfilehash: 7bde61b0ff1d122b449ccc9d7ea9629fc8fb6108
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: 082072d2b70abfe60da8e2cd40daa8b93ebcc9ac
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88628088"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93055811"
 ---
 # <a name="host-and-deploy-aspnet-core-no-locblazor"></a>裝載和部署 ASP.NET Core Blazor
 
@@ -35,13 +36,13 @@ ms.locfileid: "88628088"
 
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
-1. **Build**  >  從巡覽列選取 [組建**發行 {應用程式**]。
-1. 選取「發佈目標」**。 若要在本機發佈，請選取 [資料夾]****。
-1. 接受 [選擇資料夾]**** 欄位中的預設位置，或指定不同的位置。 選取 [`Publish`] 按鈕。
+1. **Build**  >  從巡覽列選取 [組建 **發行 {應用程式** ]。
+1. 選取「發佈目標」  。 若要在本機發佈，請選取 [資料夾]  。
+1. 接受 [選擇資料夾]  欄位中的預設位置，或指定不同的位置。 選取 [`Publish`] 按鈕。
 
 # <a name="visual-studio-for-mac"></a>[Visual Studio for Mac](#tab/visual-studio-mac)
 
-1. 選取 [**組建**  >  **發行至資料夾**]。
+1. 選取 [ **組建**  >  **發行至資料夾** ]。
 1. 確認要接收已發佈資產的資料夾，然後選取 [] **`Publish`** 。
 
 # <a name="net-core-cli"></a>[.NET Core CLI](#tab/netcore-cli)
@@ -67,7 +68,7 @@ dotnet publish -c Release
 
 ## <a name="app-base-path"></a>應用程式基底路徑
 
-*應用程式基底路徑*是應用程式的根 URL 路徑。 請考慮下列 ASP.NET Core 應用程式和 Blazor 子應用程式：
+*應用程式基底路徑* 是應用程式的根 URL 路徑。 請考慮下列 ASP.NET Core 應用程式和 Blazor 子應用程式：
 
 * ASP.NET Core 應用程式的名稱 `MyApp` 如下：
   * 應用程式實際上位於 `d:/MyApp` 。
@@ -96,7 +97,7 @@ app.UsePathBase("/CoolApp");
 
 若要設定應用程式的基底路徑，請在檔案 `<base>` `<head>` `Pages/_Host.cshtml` (Blazor Server) 或檔案 `wwwroot/index.html` () 的標記元素內更新標記 Blazor WebAssembly 。 將 `href` 屬性值設定為 `/{RELATIVE URL PATH}/` (需要尾端斜線) ，其中 `{RELATIVE URL PATH}` 是應用程式的完整相對 URL 路徑。
 
-針對 Blazor WebAssembly 具有非根相對 URL 路徑的應用程式 (例如 `<base href="/CoolApp/">`) ，應用程式 *在本機執行時*，會無法找到其資源。 若要在本機開發和測試期間解決這個問題，您可以提供「基底路徑」** 引數，讓它在執行時符合 `<base>` 標籤的 `href` 值。 請勿包含結尾的斜線。 若要在本機執行應用程式時傳遞路徑基底引數，請 `dotnet run` 使用下列選項，從應用程式的目錄執行命令 `--pathbase` ：
+針對 Blazor WebAssembly 具有非根相對 URL 路徑的應用程式 (例如 `<base href="/CoolApp/">`) ，應用程式 *在本機執行時* ，會無法找到其資源。 若要在本機開發和測試期間解決這個問題，您可以提供「基底路徑」  引數，讓它在執行時符合 `<base>` 標籤的 `href` 值。 請勿包含結尾的斜線。 若要在本機執行應用程式時傳遞路徑基底引數，請 `dotnet run` 使用下列選項，從應用程式的目錄執行命令 `--pathbase` ：
 
 ```dotnetcli
 dotnet run --pathbase=/{RELATIVE URL PATH (no trailing slash)}

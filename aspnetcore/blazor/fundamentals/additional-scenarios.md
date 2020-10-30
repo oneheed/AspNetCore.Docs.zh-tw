@@ -5,8 +5,9 @@ description: 瞭解 ASP.NET Core 裝載模型設定的其他案例 Blazor 。
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 08/12/2020
+ms.date: 10/27/2020
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -18,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/fundamentals/additional-scenarios
-ms.openlocfilehash: 075bcc68fd2dff0ebf2cfceacec24fde8c818603
-ms.sourcegitcommit: b5ebaf42422205d212e3dade93fcefcf7f16db39
+ms.openlocfilehash: f8b6e65424948aaa7b28023497bbbf2a1ceb47dd
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 10/21/2020
-ms.locfileid: "92326532"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93056045"
 ---
 # <a name="aspnet-core-no-locblazor-hosting-model-configuration"></a>ASP.NET Core Blazor 裝載模型設定
 
@@ -300,11 +301,13 @@ window.addEventListener('pagehide', () => {
 });
 ```
 
-## <a name="influence-html-head-tag-elements"></a>影響 HTML `<head>` 標記元素
+<!-- HOLD for reactivation at 5x
 
-*本節適用于和的即將推出的 ASP.NET Core 5.0 Blazor WebAssembly 版本 Blazor Server 。*
+## Influence HTML `<head>` tag elements
 
-轉譯時， `Title` 、 `Link` 和元件會 `Meta` 新增或更新 HTML 標籤元素中的資料 `<head>` ：
+*This section applies to the upcoming ASP.NET Core 5.0 release of Blazor WebAssembly and Blazor Server.*
+
+When rendered, the `Title`, `Link`, and `Meta` components add or update data in the HTML `<head>` tag elements:
 
 ```razor
 @using Microsoft.AspNetCore.Components.Web.Extensions.Head
@@ -314,22 +317,24 @@ window.addEventListener('pagehide', () => {
 <Meta content="{DESCRIPTION}" name="description" />
 ```
 
-在上述範例中， `{TITLE}` 、和的預留位置 `{URL}` `{DESCRIPTION}` 是字串值、 Razor 變數或 Razor 運算式。
+In the preceding example, placeholders for `{TITLE}`, `{URL}`, and `{DESCRIPTION}` are string values, Razor variables, or Razor expressions.
 
-適用下列特性：
+The following characteristics apply:
 
-* 支援伺服器端預先呈現。
-* `Value`參數是唯一有效的 `Title` 元件參數。
-* 提供給和元件的 HTML 屬性 `Meta` `Link` 會在 [其他屬性](xref:blazor/components/index#attribute-splatting-and-arbitrary-parameters) 中捕捉，並傳遞至轉譯的 HTML 標籤。
-* 針對多個 `Title` 元件，頁面的標題會反映最後轉譯的 `Value` `Title` 元件的。
-* 如果有多個 `Meta` 或 `Link` 元件包含在相同的屬性中，每個或元件只會轉譯一個 HTML 標籤 `Meta` `Link` 。 兩個 `Meta` 或 `Link` 元件無法參考相同的呈現 HTML 標籤。
-* 現有或元件的參數變更 `Meta` `Link` 會反映在其呈現的 HTML 標籤中。
-* 當 `Link` 或 `Meta` 元件不再呈現，且由架構處置時，會移除其轉譯的 HTML 標籤。
+* Server-side prerendering is supported.
+* The `Value` parameter is the only valid parameter for the `Title` component.
+* HTML attributes provided to the `Meta` and `Link` components are captured in [additional attributes](xref:blazor/components/index#attribute-splatting-and-arbitrary-parameters) and passed through to the rendered HTML tag.
+* For multiple `Title` components, the title of the page reflects the `Value` of the last `Title` component rendered.
+* If multiple `Meta` or `Link` components are included with identical attributes, there's exactly one HTML tag rendered per `Meta` or `Link` component. Two `Meta` or `Link` components can't refer to the same rendered HTML tag.
+* Changes to the parameters of existing `Meta` or `Link` components are reflected in their rendered HTML tags.
+* When the `Link` or `Meta` components are no longer rendered and thus disposed by the framework, their rendered HTML tags are removed.
 
-在子元件中使用其中一個架構元件時，只要轉譯包含 framework 元件的子元件，轉譯的 HTML 標籤就會影響父元件的任何其他子元件。 在子元件中使用其中一個架構元件，並在或中放置 HTML 標籤的差異在於 `wwwroot/index.html` `Pages/_Host.cshtml` 架構元件的轉譯 html 標記：
+When one of the framework components is used in a child component, the rendered HTML tag influences any other child component of the parent component as long as the child component containing the framework component is rendered. The distinction between using the one of these framework components in a child component and placing a an HTML tag in `wwwroot/index.html` or `Pages/_Host.cshtml` is that a framework component's rendered HTML tag:
 
-* 可依應用程式狀態修改。 應用程式狀態無法修改硬式編碼的 HTML 標籤。
-* 當父元件不再呈現時，會從 HTML 中移除 `<head>` 。
+* Can be modified by application state. A hard-coded HTML tag can't be modified by application state.
+* Is removed from the HTML `<head>` when the parent component is no longer rendered.
+
+-->
 
 ::: moniker-end
 

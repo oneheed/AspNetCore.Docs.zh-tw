@@ -5,6 +5,7 @@ description: 探索以個別使用者帳戶建立之 ASP.NET Core 專案為基�
 ms.author: riande
 ms.date: 12/11/2019
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -16,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: security/authentication/individual
-ms.openlocfilehash: 0cbde7cf0be830dab9dd094df6d102d81f9f0949
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: 656006396de120b7feae6f2e08b5dad3b5a170b5
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88632612"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93053341"
 ---
 # <a name="articles-based-on-aspnet-core-projects-created-with-individual-user-accounts"></a>以個別使用者帳戶建立的 ASP.NET Core 專案為基礎的文章
 
@@ -53,7 +54,7 @@ dotnet new razor -au Individual
 
 ## <a name="no-authentication"></a>不需要驗證
 
-您可以使用選項，在 .NET Core CLI 中指定驗證 `-au` 。 在 Visual Studio 中，新的 web 應用程式可以使用 [ **變更驗證** ] 對話方塊。 Visual Studio 中新 web 應用程式的預設值為 [ **無驗證**]。
+您可以使用選項，在 .NET Core CLI 中指定驗證 `-au` 。 在 Visual Studio 中，新的 web 應用程式可以使用 [ **變更驗證** ] 對話方塊。 Visual Studio 中新 web 應用程式的預設值為 [ **無驗證** ]。
 
 使用無驗證建立的專案：
 
@@ -74,7 +75,7 @@ dotnet new razor -au Individual
 
 | 選項 | 驗證類型 | 連結取得詳細資訊 |
  | ----------------- | ------------ | ---------- |
-| 無            |  不需要驗證 | | 
+| None            |  不需要驗證 | | 
 | 個人      |  個別驗證 | <xref:security/authentication/identity>
 | IndividualB2C   |  使用 Azure AD B2C 的雲端託管個別驗證 | [Azure AD B2C](/azure/active-directory-b2c/) |
 | SingleOrg       |  單一租使用者的組織驗證 | [Azure AD](/azure/active-directory/develop/quickstart-v2-aspnet-core-webapp) |
@@ -87,7 +88,7 @@ dotnet new razor -au Individual
 
 | 選項 | 驗證類型 | 連結取得詳細資訊 |
  | ----------------- | ------------ | ---------- |
-| 無            |  不需要驗證 | | 
+| None            |  不需要驗證 | | 
 | 個別使用者帳戶/在應用程式中儲存使用者帳戶 |  個別驗證 | <xref:security/authentication/identity> |
 | 個別使用者帳戶/連接到雲端中的現有使用者存放區 |  使用 Azure AD B2C 的雲端託管個別驗證 | [Azure AD B2C](/azure/active-directory-b2c/) |
 | 公司或學校雲端/單一組織  |  單一租使用者的組織驗證 | [Azure AD](/azure/active-directory/develop/quickstart-v2-aspnet-core-webapp) |

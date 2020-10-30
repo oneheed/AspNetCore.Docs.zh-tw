@@ -7,6 +7,7 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 05/19/2020
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -18,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/host-and-deploy/configure-linker
-ms.openlocfilehash: 34582fdeb4951a110b03880887b978add07687f4
-ms.sourcegitcommit: 0cfada7cbcd8e76aba0ae70eb6bbbf4437f287cc
+ms.openlocfilehash: 0c99056053356133e901d6cf468fec8034dfb845
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 09/14/2020
-ms.locfileid: "90081633"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93055824"
 ---
 # <a name="configure-the-linker-for-aspnet-core-no-locblazor"></a>設定 ASP.NET Core 的連結器 Blazor
 
@@ -125,7 +126,7 @@ Blazor WebAssembly 在組建期間執行 [中繼語言 (IL) ](/dotnet/standard/m
 | `all`            | 包含的所有元件 |
 | `cjk`            | `I18N.CJK.dll`          |
 | `mideast`        | `I18N.MidEast.dll`      |
-| `none` (預設) | 無                    |
+| `none` (預設) | None                    |
 | `other`          | `I18N.Other.dll`        |
 | `rare`           | `I18N.Rare.dll`         |
 | `west`           | `I18N.West.dll`         |

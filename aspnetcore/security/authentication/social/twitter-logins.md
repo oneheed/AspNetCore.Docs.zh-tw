@@ -7,6 +7,7 @@ ms.custom: mvc
 ms.date: 03/19/2020
 monikerRange: '>= aspnetcore-3.0'
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -18,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: security/authentication/twitter-logins
-ms.openlocfilehash: da0c5579b0828aee7f1c78ec7f5731db50151e90
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: 47926d12ac5f922f2937df164d38ff6eb63cacf1
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88634055"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93053276"
 ---
 # <a name="twitter-external-sign-in-setup-with-aspnet-core"></a>使用 ASP.NET Core 的 Twitter 外部登錄設定
 
@@ -37,18 +38,18 @@ ms.locfileid: "88634055"
 
 * 流覽 [https://apps.twitter.com/](https://apps.twitter.com/) 並登入。 如果您還沒有 Twitter 帳戶，請使用 [ **[立即註冊](https://twitter.com/signup)** ] 連結來建立一個帳戶。
 
-* 選取 [ **建立應用程式**]。 填寫應用程式 **名稱**、 **應用程式描述** 和公用 **網站** URI (這可以是暫時性的，直到您註冊功能變數名稱) ：
+* 選取 [ **建立應用程式** ]。 填寫應用程式 **名稱** 、 **應用程式描述** 和公用 **網站** URI (這可以是暫時性的，直到您註冊功能變數名稱) ：
 
-* 核取 [**啟用 Twitter 登入**] 旁的核取方塊
+* 核取 [ **啟用 Twitter 登入** ] 旁的核取方塊
 
-* AspNetCore。Identity 預設會要求使用者擁有電子郵件地址。 移至 [ **許可權** ] 索引標籤，按一下 [ **編輯** ] 按鈕，然後核取 [ **使用者要求電子郵件地址**] 旁的核取方塊。
+* AspNetCore。Identity 預設會要求使用者擁有電子郵件地址。 移至 [ **許可權** ] 索引標籤，按一下 [ **編輯** ] 按鈕，然後核取 [ **使用者要求電子郵件地址** ] 旁的核取方塊。
 
 * 輸入您的開發 URI，並 `/signin-twitter` 將其附加至 **回呼 url** 欄位 (例如： `https://webapp128.azurewebsites.net/signin-twitter`) 。 稍後在此範例中設定的 Twitter 驗證配置會自動處理路由上的要求 `/signin-twitter` ，以實行 OAuth 流程。
 
   > [!NOTE]
   > URI 區段 `/signin-twitter` 會設定為 Twitter 驗證提供者的預設回呼。 您可以在透過[TwitterOptions](/dotnet/api/microsoft.aspnetcore.authentication.twitter.twitteroptions)類別的繼承[RemoteAuthenticationOptions. CallbackPath](/dotnet/api/microsoft.aspnetcore.authentication.remoteauthenticationoptions.callbackpath)屬性設定 Twitter 驗證中介軟體時，變更預設回呼 URI。
 
-* 填寫表單的其餘部分，然後選取 [ **建立**]。 隨即顯示新的應用程式詳細資料：
+* 填寫表單的其餘部分，然後選取 [ **建立** ]。 隨即顯示新的應用程式詳細資料：
 
 ## <a name="store-the-twitter-consumer-api-key-and-secret"></a>儲存 Twitter 取用者 API 金鑰和秘密
 
@@ -80,7 +81,7 @@ ms.locfileid: "88634055"
 
 ## <a name="sign-in-with-twitter"></a>使用 Twitter 登入
 
-執行應用程式並選取 [ **登入**]。 使用 Twitter 登入的選項隨即出現：
+執行應用程式並選取 [ **登入** ]。 使用 Twitter 登入的選項隨即出現：
 
 按一下 **twitter** 重新導向至 twitter 以進行驗證：
 
@@ -98,7 +99,7 @@ Rather in the twitter setup, you can provide an External sign-in homepage. The e
 
 ## <a name="troubleshooting"></a>疑難排解
 
-* **僅 ASP.NET Core 2.x：** 如果 Identity 未透過呼叫來 `services.AddIdentity` 設定 `ConfigureServices` ，嘗試驗證將會導致 *ArgumentException：必須提供 ' SignInScheme ' 選項*。 此範例中使用的專案範本可確保完成此操作。
+* **僅 ASP.NET Core 2.x：** 如果 Identity 未透過呼叫來 `services.AddIdentity` 設定 `ConfigureServices` ，嘗試驗證將會導致 *ArgumentException：必須提供 ' SignInScheme ' 選項* 。 此範例中使用的專案範本可確保完成此操作。
 * 如果未藉由套用初始遷移來建立網站資料庫，則在處理要求錯誤時，您將會收到 *資料庫操作失敗* 。 請按一下 [套用 **遷移** ] 來建立資料庫，並重新整理以繼續發生錯誤。
 
 ## <a name="next-steps"></a>後續步驟

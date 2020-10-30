@@ -6,6 +6,7 @@ ms.author: riande
 ms.date: 09/28/2019
 ms.topic: tutorial
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -17,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: data/ef-mvc/read-related-data
-ms.openlocfilehash: f2b4fd9fb1e328882583536b704d516955343417
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: 610a9e9b0007fb468ea9cdae6fadd2e756de4290
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88629453"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93054050"
 ---
 # <a name="tutorial-read-related-data---aspnet-mvc-with-ef-core"></a>教學課程：使用 EF Core 讀取相關資料-ASP.NET MVC
 
@@ -42,7 +43,7 @@ ms.locfileid: "88629453"
 > * 建立 Instructors 頁面
 > * 了解明確載入
 
-## <a name="prerequisites"></a>Prerequisites
+## <a name="prerequisites"></a>必要條件
 
 * [建立複雜的資料模型](complex-data-model.md)
 
@@ -74,17 +75,17 @@ Entity Framework 等物件關聯式對應 (ORM) 有幾種方式可以將相關�
 
 Course 實體包括一個導覽屬性，其中包含已指派課程之部門的 Department 實體。 若要在課程清單中顯示所指派部門的名稱，您需要從位於 `Course.Department` 導覽屬性的 Department 實體中取得 Name 屬性。
 
-針對 Course 實體類型建立名為 CoursesController 的控制器，並對**使用 Entity Framework 執行檢視的 MVC 控制器**框架使用先前針對學生控制器使用的相同選項，如下圖所示：
+針對 Course 實體類型建立名為 CoursesController 的控制器，並對 **使用 Entity Framework 執行檢視的 MVC 控制器** 框架使用先前針對學生控制器使用的相同選項，如下圖所示：
 
 ![新增課程控制器](read-related-data/_static/add-courses-controller.png)
 
-開啟 *CoursesController.cs*，並檢查 `Index` 方法。 自動 Scaffolding 已使用 `Include` 方法，針對 `Department` 導覽屬性指定積極式載入。
+開啟 *CoursesController.cs* ，並檢查 `Index` 方法。 自動 Scaffolding 已使用 `Include` 方法，針對 `Department` 導覽屬性指定積極式載入。
 
 以下列程式碼取代 `Index` 方法，以針對傳回 Course 實體的 `IQueryable` 使用更合適的名稱 (`courses` 而不是 `schoolContext`)：
 
 [!code-csharp[](intro/samples/cu/Controllers/CoursesController.cs?name=snippet_RevisedIndexMethod)]
 
-開啟 *Views/Courses/Index.cshtml*，並以下列程式碼取代範本程式碼。 所做的變更已醒目提示：
+開啟 *Views/Courses/Index.cshtml* ，並以下列程式碼取代範本程式碼。 所做的變更已醒目提示：
 
 [!code-cshtml[](intro/samples/cu/Views/Courses/Index.cshtml?highlight=4,7,15-17,34-36,44)]
 
@@ -92,15 +93,15 @@ Course 實體包括一個導覽屬性，其中包含已指派課程之部門的 
 
 * 已將標題從「索引」) 變更為「課程」。
 
-* 新增顯示 `CourseID` 屬性值的 [編號]**** 資料行。 主索引鍵預設不會進行 Scaffold，因為它們對終端使用者通常沒有任何意義。 不過，在此情況下主索引鍵有意義，因此您想要顯示它。
+* 新增顯示 `CourseID` 屬性值的 [編號]  資料行。 主索引鍵預設不會進行 Scaffold，因為它們對終端使用者通常沒有任何意義。 不過，在此情況下主索引鍵有意義，因此您想要顯示它。
 
-* 變更 [部門]**** 資料行來顯示部門名稱。 此程式碼會顯示已載入到 `Department` 導覽屬性之 Department 實體的 `Name` 屬性：
+* 變更 [部門]  資料行來顯示部門名稱。 此程式碼會顯示已載入到 `Department` 導覽屬性之 Department 實體的 `Name` 屬性：
 
   ```html
   @Html.DisplayFor(modelItem => item.Department.Name)
   ```
 
-執行應用程式，並選取 [Courses]**** 索引標籤來查看含有部門名稱的清單。
+執行應用程式，並選取 [Courses]  索引標籤來查看含有部門名稱的清單。
 
 ![Courses [索引] 頁面](read-related-data/_static/courses-index.png)
 
@@ -122,7 +123,7 @@ Course 實體包括一個導覽屬性，其中包含已指派課程之部門的 
 
 Instructors 頁面會顯示下列三個不同資料表的資料。 因此，您將建立包含三個屬性的檢視模型，每個保留其中一個資料表的資料。
 
-在 *SchoolViewModels* 資料夾中建立 *InstructorIndexData.cs*，然後以下列程式碼取代現有的程式碼：
+在 *SchoolViewModels* 資料夾中建立 *InstructorIndexData.cs* ，然後以下列程式碼取代現有的程式碼：
 
 [!code-csharp[](intro/samples/cu/Models/SchoolViewModels/InstructorIndexData.cs)]
 
@@ -132,7 +133,7 @@ Instructors 頁面會顯示下列三個不同資料表的資料。 因此，您�
 
 ![新增 Instructors 控制器](read-related-data/_static/add-instructors-controller.png)
 
-開啟 *InstructorsController.cs*，並針對 ViewModels 命名空間新增 using 陳述式：
+開啟 *InstructorsController.cs* ，並針對 ViewModels 命名空間新增 using 陳述式：
 
 [!code-csharp[](intro/samples/cu/Controllers/InstructorsController.cs?name=snippet_Using)]
 
@@ -140,7 +141,7 @@ Instructors 頁面會顯示下列三個不同資料表的資料。 因此，您�
 
 [!code-csharp[](intro/samples/cu/Controllers/InstructorsController.cs?name=snippet_EagerLoading)]
 
-此方法可接受選擇性的路由資料 (`id`) 和查詢字串參數 (`courseID`)，以提供所選取講師和所選取課程的識別碼值。 這些參數由頁面上的**選取**超連結提供。
+此方法可接受選擇性的路由資料 (`id`) 和查詢字串參數 (`courseID`)，以提供所選取講師和所選取課程的識別碼值。 這些參數由頁面上的 **選取** 超連結提供。
 
 此程式碼是從建立檢視模型的執行個體，並將其置於講師清單開始。 這個程式碼會針對 `Instructor.OfficeAssignment` 和 `Instructor.CourseAssignments` 導覽屬性指定積極式載入。 在 `CourseAssignments` 屬性內載入 `Course` 屬性，並在其中載入 `Enrollments` 和 `Department` 屬性，而在每個 `Enrollment` 實體內載入 `Student` 屬性。
 
@@ -188,9 +189,9 @@ Instructors 頁面會顯示下列三個不同資料表的資料。 因此，您�
 
 * 已將模型類別變更為 `InstructorIndexData`。
 
-* 已將頁面標題從**索引**變更為**講師**。
+* 已將頁面標題從 **索引** 變更為 **講師** 。
 
-* 新增 [辦公室]**** 資料行，該資料行只有在 `item.OfficeAssignment` 不是 Null 時才會顯示 `item.OfficeAssignment.Location`。 (因為這是一對零或一關聯性，所有可能沒有相關的 OfficeAssignment 實體。)
+* 新增 [辦公室]  資料行，該資料行只有在 `item.OfficeAssignment` 不是 Null 時才會顯示 `item.OfficeAssignment.Location`。 (因為這是一對零或一關聯性，所有可能沒有相關的 OfficeAssignment 實體。)
 
   ```html
   @if (item.OfficeAssignment != null)
@@ -199,7 +200,7 @@ Instructors 頁面會顯示下列三個不同資料表的資料。 因此，您�
   }
   ```
 
-* 新增 [課程]**** 資料行，以顯示每位講師所教授的課程。 如需詳細資訊，請參閱語法文章的 [明確行轉換](xref:mvc/views/razor#explicit-line-transition) 一節 Razor 。
+* 新增 [課程]  資料行，以顯示每位講師所教授的課程。 如需詳細資訊，請參閱語法文章的 [明確行轉換](xref:mvc/views/razor#explicit-line-transition) 一節 Razor 。
 
 * 新增程式碼，將 `class="success"` 動態新增至所選取講師的 `tr` 項目。 這會使用啟動程序類別設定所選取資料列的背景色彩。
 
@@ -212,7 +213,7 @@ Instructors 頁面會顯示下列三個不同資料表的資料。 因此，您�
   <tr class="@selectedRow">
   ```
 
-* 在每個資料列的其他連結之前，立即新增標示為**選取**的超連結，這會使得選取的講師識別碼傳送到 `Index` 方法。
+* 在每個資料列的其他連結之前，立即新增標示為 **選取** 的超連結，這會使得選取的講師識別碼傳送到 `Index` 方法。
 
   ```html
   <a asp-action="Index" asp-route-id="@item.ID">Select</a> |
@@ -226,7 +227,7 @@ Instructors 頁面會顯示下列三個不同資料表的資料。 因此，您�
 
 [!code-cshtml[](intro/samples/cu/Views/Instructors/Index1.cshtml?range=66-101)]
 
-此程式碼會讀取檢視模型的 `Courses` 屬性以顯示課程清單。 它也會提供**選取**超連結，將所選取課程的識別碼傳送至 `Index` 動作方法。
+此程式碼會讀取檢視模型的 `Courses` 屬性以顯示課程清單。 它也會提供 **選取** 超連結，將所選取課程的識別碼傳送至 `Index` 動作方法。
 
 重新整理頁面，然後選取講師。 現在您會看到一個方格，其中顯示指派給所選取講師的課程，而且在每個課程中，您可以看到指派的部門名稱。
 

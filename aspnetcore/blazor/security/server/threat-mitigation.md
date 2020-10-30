@@ -7,6 +7,7 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 05/05/2020
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -18,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/security/server/threat-mitigation
-ms.openlocfilehash: a9bdf68e30d2688d4d7836410a7913794a73fe01
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: 5c3a002a8e3df030d53c8625597342a68ca0d4b5
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88626424"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93055408"
 ---
 # <a name="threat-mitigation-guidance-for-aspnet-core-no-locblazor-server"></a>ASP.NET Core 的威脅風險降低指導方針 Blazor Server
 
@@ -60,7 +61,7 @@ Blazor Server 應用程式採用具 *狀態* 的資料處理模型，其中伺�
 
 當一或多個用戶端強制服務器執行密集的 CPU 工作時，可能會發生 CPU 耗盡。
 
-例如，假設有一個 Blazor Server 應用程式會計算 *Fibonnacci 數位*。 Fibonnacci 數位是從 Fibonnacci 序列產生的，其中序列中的每個數位都是上述兩個數字的總和。 到達答案所需的工作量取決於序列的長度和初始值的大小。 如果應用程式未對用戶端的要求進行限制，則需要大量 CPU 的計算可能會讓 CPU 的時間降低，並降低其他工作的效能。 過度耗用資源是安全性考慮，會影響可用性。
+例如，假設有一個 Blazor Server 應用程式會計算 *Fibonnacci 數位* 。 Fibonnacci 數位是從 Fibonnacci 序列產生的，其中序列中的每個數位都是上述兩個數字的總和。 到達答案所需的工作量取決於序列的長度和初始值的大小。 如果應用程式未對用戶端的要求進行限制，則需要大量 CPU 的計算可能會讓 CPU 的時間降低，並降低其他工作的效能。 過度耗用資源是安全性考慮，會影響可用性。
 
 CPU 耗盡是所有公開應用程式的考慮。 在一般 web 應用程式中，要求和連接會以安全的形式 Blazor Server 提供，但應用程式不會提供相同的保護。 Blazor Server 應用程式必須包含適當的檢查和限制，才能執行可能需要大量 CPU 的工作。
 
@@ -76,7 +77,7 @@ CPU 耗盡是所有公開應用程式的考慮。 在一般 web 應用程式中�
 * 如果沒有使用分頁配置來進行轉譯，伺服器會針對 UI 中看不到的物件使用額外的記憶體。 如果沒有專案數的限制，記憶體需求可能會耗盡可用的伺服器記憶體。 若要避免這種情況，請使用下列其中一種方法：
   * 轉譯時使用分頁清單。
   * 只顯示前100至1000個專案，並且要求使用者輸入搜尋準則，以在顯示的專案之外尋找專案。
-  * 如需更先進的轉譯案例，請執行支援 *虛擬化*的清單或格線。 使用虛擬化時，清單只會呈現使用者目前可見的專案子集。 當使用者與 UI 中的捲軸互動時，元件只會轉譯顯示所需的專案。 目前不需要顯示的專案可以保留在次要儲存體中，這是理想的方法。 Undisplayed 專案也可以保留在記憶體中，這比較不理想。
+  * 如需更先進的轉譯案例，請執行支援 *虛擬化* 的清單或格線。 使用虛擬化時，清單只會呈現使用者目前可見的專案子集。 當使用者與 UI 中的捲軸互動時，元件只會轉譯顯示所需的專案。 目前不需要顯示的專案可以保留在次要儲存體中，這是理想的方法。 Undisplayed 專案也可以保留在記憶體中，這比較不理想。
 
 Blazor Server 應用程式會提供類似的程式設計模型給具狀態應用程式的其他 UI 架構，例如 WPF、Windows Forms 或 Blazor WebAssembly 。 主要的差異在於，應用程式所耗用的記憶體屬於用戶端，而且只會影響該個別用戶端的幾個 UI 架構。 例如， Blazor WebAssembly 應用程式會完全在用戶端上執行，而且只會使用用戶端記憶體資源。 在此 Blazor Server 案例中，應用程式所耗用的記憶體屬於伺服器，並在伺服器實例上的用戶端間共用。
 

@@ -5,8 +5,9 @@ description: 瞭解如何在應用程式中保存狀態 Blazor Server 。
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 07/22/2020
+ms.date: 10/29/2020
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -19,12 +20,12 @@ no-loc:
 - SignalR
 uid: blazor/state-management
 zone_pivot_groups: blazor-hosting-models
-ms.openlocfilehash: a74f056447839c4cf057948f26a9ece9b5799656
-ms.sourcegitcommit: d1a897ebd89daa05170ac448e4831d327f6b21a8
+ms.openlocfilehash: 1769ddbb95c9ffe373e916c885e411adc3d4c65b
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 10/01/2020
-ms.locfileid: "91606718"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93054992"
 ---
 # <a name="aspnet-core-no-locblazor-state-management"></a>ASP.NET Core Blazor 狀態管理
 
@@ -54,7 +55,7 @@ ms.locfileid: "91606718"
 * 多重步驟的 web 表單：當使用者的狀態遺失時，使用者重新輸入多步驟 web 表單的幾個已完成步驟的資料相當耗時。 如果使用者離開表單並在稍後返回，則會在此案例中失去狀態。
 * 購物車：應用程式中任何代表潛在收益的商業重要元件都可以維護。 如果使用者遺失其狀態，而使用者的購物車可能會在稍後返回網站時購買較少的產品或服務。
 
-應用程式只能保存 *應用程式狀態*。 Ui 無法保存，例如元件實例和其轉譯樹狀結構。 元件和轉譯樹狀結構通常不是可序列化的。 若要保存 UI 狀態，例如樹狀檢視控制項的展開節點，應用程式必須使用自訂程式碼，將 UI 狀態的行為模型化為可序列化的應用程式狀態。
+應用程式只能保存 *應用程式狀態* 。 Ui 無法保存，例如元件實例和其轉譯樹狀結構。 元件和轉譯樹狀結構通常不是可序列化的。 若要保存 UI 狀態，例如樹狀檢視控制項的展開節點，應用程式必須使用自訂程式碼，將 UI 狀態的行為模型化為可序列化的應用程式狀態。
 
 ## <a name="where-to-persist-state"></a>保存狀態的位置
 
@@ -67,7 +68,7 @@ ms.locfileid: "91606718"
 
 ### <a name="server-side-storage"></a>伺服器端儲存空間
 
-針對跨越多個使用者和裝置的永久資料持續性，應用程式可以使用透過 web API 存取的獨立伺服器端儲存體。 選項包括：
+針對跨越多個使用者和裝置的永久資料持續性，應用程式可以使用透過 web API 存取的獨立伺服器端儲存體。 這些選項包括：
 
 * Blob 儲存體
 * 機碼值儲存體
@@ -82,7 +83,7 @@ ms.locfileid: "91606718"
 
 * <xref:blazor/call-web-api>
 * <xref:blazor/security/webassembly/index>
-* Blazor*安全性和 Identity *文章
+* Blazor*安全性和 Identity* 文章
 
 如需 Azure 資料儲存體選項的詳細資訊，請參閱下列各項：
 
@@ -134,7 +135,7 @@ ms.locfileid: "91606718"
 
 ::: zone pivot="server"
 
-Blazor Server 是具狀態的應用程式架構。 大部分的情況下，應用程式會維護與伺服器的連線。 使用者的狀態會保留在*伺服器的記憶體中。* 
+Blazor Server 是具狀態的應用程式架構。 大部分的情況下，應用程式會維護與伺服器的連線。 使用者的狀態會保留在 *伺服器的記憶體中。* 
 
 線路中保留的使用者狀態範例包括：
 
@@ -163,7 +164,7 @@ Blazor Server 是具狀態的應用程式架構。 大部分的情況下，應�
 * 多重步驟的 web 表單：當使用者的狀態遺失時，使用者重新輸入多步驟 web 表單的幾個已完成步驟的資料相當耗時。 如果使用者離開表單並在稍後返回，則會在此案例中失去狀態。
 * 購物車：應用程式中任何代表潛在收益的商業重要元件都可以維護。 如果使用者遺失其狀態，而使用者的購物車可能會在稍後返回網站時購買較少的產品或服務。
 
-應用程式只能保存 *應用程式狀態*。 Ui 無法保存，例如元件實例和其轉譯樹狀結構。 元件和轉譯樹狀結構通常不是可序列化的。 若要保存 UI 狀態，例如樹狀檢視控制項的展開節點，應用程式必須使用自訂程式碼，將 UI 狀態的行為模型化為可序列化的應用程式狀態。
+應用程式只能保存 *應用程式狀態* 。 Ui 無法保存，例如元件實例和其轉譯樹狀結構。 元件和轉譯樹狀結構通常不是可序列化的。 若要保存 UI 狀態，例如樹狀檢視控制項的展開節點，應用程式必須使用自訂程式碼，將 UI 狀態的行為模型化為可序列化的應用程式狀態。
 
 ## <a name="where-to-persist-state"></a>保存狀態的位置
 
@@ -176,7 +177,7 @@ Blazor Server 是具狀態的應用程式架構。 大部分的情況下，應�
 
 ### <a name="server-side-storage"></a>伺服器端儲存空間
 
-針對跨越多個使用者和裝置的永久資料持續性，應用程式可以使用伺服器端儲存體。 選項包括：
+針對跨越多個使用者和裝置的永久資料持續性，應用程式可以使用伺服器端儲存體。 這些選項包括：
 
 * Blob 儲存體
 * 機碼值儲存體
@@ -225,7 +226,7 @@ Blazor Server 是具狀態的應用程式架構。 大部分的情況下，應�
 * 儲存幾 kb 的資料可合理保存 Blazor Server 應用程式。 除了幾 kb 以外，您還必須考慮效能影響，因為資料是在網路上載入和儲存。
 * 使用者可能會看到或篡改資料。 [ASP.NET Core 資料保護](xref:security/data-protection/introduction) 可減輕風險。 例如， [ASP.NET Core 受保護的瀏覽器儲存體](#aspnet-core-protected-browser-storage) 使用 ASP.NET Core 資料保護。
 
-協力廠商 NuGet 套件提供使用和的 Api `localStorage` `sessionStorage` 。 值得考慮選擇明確使用 [ASP.NET Core 資料保護](xref:security/data-protection/introduction)的封裝。 資料保護會加密儲存的資料，並減少篡改儲存資料的潛在風險。 如果以純文字儲存 JSON 序列化資料，使用者就可以使用瀏覽器開發人員工具來查看資料，也可以修改儲存的資料。 保護資料並不一定會造成問題，因為資料在本質上可能很簡單。 例如，讀取或修改 UI 元素的預存色彩，對於使用者或組織而言並不是重大的安全性風險。 避免讓使用者檢查或篡改 *機密資料*。
+協力廠商 NuGet 套件提供使用和的 Api `localStorage` `sessionStorage` 。 值得考慮選擇明確使用 [ASP.NET Core 資料保護](xref:security/data-protection/introduction)的封裝。 資料保護會加密儲存的資料，並減少篡改儲存資料的潛在風險。 如果以純文字儲存 JSON 序列化資料，使用者就可以使用瀏覽器開發人員工具來查看資料，也可以修改儲存的資料。 保護資料並不一定會造成問題，因為資料在本質上可能很簡單。 例如，讀取或修改 UI 元素的預存色彩，對於使用者或組織而言並不是重大的安全性風險。 避免讓使用者檢查或篡改 *機密資料* 。
 
 ::: moniker range=">= aspnetcore-5.0"
 
@@ -235,15 +236,6 @@ ASP.NET Core 受保護的瀏覽器儲存體會利用和的 [ASP.NET Core 資料�
 
 > [!NOTE]
 > 受保護的瀏覽器存放裝置依賴 ASP.NET Core 資料保護，且僅支援 Blazor Server 應用程式。
-
-### <a name="configuration"></a>組態
-
-1. 將封裝參考加入至 [`Microsoft.AspNetCore.Components.Web.Extensions`](https://www.nuget.org/packages/Microsoft.AspNetCore.Http.Extensions) 。
-1. 在中 `Startup.ConfigureServices` ，呼叫 `AddProtectedBrowserStorage` 以將 `localStorage` 和服務加入 `sessionStorage` 至服務集合：
-
-   ```csharp
-   services.AddProtectedBrowserStorage();
-   ```
 
 ### <a name="save-and-load-data-within-a-component"></a>儲存並載入元件中的資料
 
@@ -255,7 +247,7 @@ ASP.NET Core 受保護的瀏覽器儲存體會利用和的 [ASP.NET Core 資料�
 選擇取決於您想要使用的瀏覽器儲存位置。 在下列範例中， `sessionStorage` 會使用：
 
 ```razor
-@using Microsoft.AspNetCore.Components.Web.Extensions
+@using Microsoft.AspNetCore.Components.Server.ProtectedBrowserStorage
 @inject ProtectedSessionStorage ProtectedSessionStore
 ```
 
@@ -336,7 +328,7 @@ else
 針對不使用或的其他頁面，可進行的自動呈現可能很有用 `localStorage` `sessionStorage` 。 若要保留已呈現，請延遲載入作業，直到瀏覽器連線至線路為止。 以下是儲存計數器值的範例：
 
 ```razor
-@using Microsoft.AspNetCore.Components.Web.Extensions
+@using Microsoft.AspNetCore.Components.Server.ProtectedBrowserStorage
 @inject ProtectedLocalStorage ProtectedLocalStore
 
 @if (isConnected)
@@ -384,7 +376,7 @@ else
 在下列的元件範例中 `CounterStateProvider` ，計數器資料會保存到 `sessionStorage` ：
 
 ```razor
-@using Microsoft.AspNetCore.Components.Web.Extensions
+@using Microsoft.AspNetCore.Components.Server.ProtectedBrowserStorage
 @inject ProtectedSessionStorage ProtectedSessionStore
 
 @if (isLoaded)

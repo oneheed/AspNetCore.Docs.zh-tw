@@ -7,6 +7,7 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 08/26/2020
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -18,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/debug
-ms.openlocfilehash: b8dd272d673e84b45a39272531385ebfd1d06175
-ms.sourcegitcommit: daa9ccf580df531254da9dce8593441ac963c674
+ms.openlocfilehash: 669ebaf6dcd05561340aefda4a75b6fe1068d207
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 10/09/2020
-ms.locfileid: "91900982"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93056188"
 ---
 # <a name="debug-aspnet-core-no-locblazor-webassembly"></a>Debug ASP.NET Core Blazor WebAssembly
 
@@ -44,7 +45,7 @@ Blazor WebAssembly 您可以使用以 Chromium 為基礎的瀏覽器中的瀏覽
 * 在 [ *區域變數* ] 視窗中，觀察本機變數的值。
 * 請參閱呼叫堆疊，包括 JavaScript 和 .NET 之間的呼叫鏈。
 
-目前，您 *不能*：
+目前，您 *不能* ：
 
 * 中斷未處理的例外狀況。
 * 在應用程式啟動期間，在執行 debug proxy 之前叫用中斷點。 這包括 () 中的中斷點 `Program.Main` `Program.cs` ，以及應用程式所要求的第一個頁面所載入之元件[ `OnInitialized{Async}` 方法](xref:blazor/components/lifecycle#component-initialization-methods)中的中斷點。
@@ -91,7 +92,7 @@ Visual Studio for Mac 需要8.8 版 (組建 1532) 或更新版本：
 1. 按 <kbd>F5</kbd> 以在偵錯工具中執行應用程式。
 
    > [!NOTE]
-   > 不支援 (<kbd>Ctrl</kbd>F5) **啟動而不進行調試** + <kbd>F5</kbd> 。 當應用程式在偵錯工具設定中執行時，偵錯工具的額外負荷一律會降低效能。
+   > 不支援 ( <kbd>Ctrl</kbd>F5) **啟動而不進行調試** + <kbd>F5</kbd> 。 當應用程式在偵錯工具設定中執行時，偵錯工具的額外負荷一律會降低效能。
 
 1. 在 `*Client*` 應用程式中的行上設定中斷點 `currentCount++;` `Pages/Counter.razor` 。
 1. 在瀏覽器中，流覽至 `Counter` 頁面，然後選取 [按 **我** ] 按鈕以點擊中斷點。
@@ -155,7 +156,7 @@ Visual Studio for Mac 需要8.8 版 (組建 1532) 或更新版本：
 
 如需使用應用程式的自訂應用程式基底路徑的詳細資訊 Blazor WebAssembly ，請參閱 <xref:blazor/host-and-deploy/index#app-base-path> 。
 
-# <a name="visual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code) \(英文\)
+# <a name="visual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code)
 
 <h2 id="vscode">獨立調試 Blazor WebAssembly</h2>
 
@@ -167,16 +168,16 @@ Visual Studio for Mac 需要8.8 版 (組建 1532) 或更新版本：
 
    如果您收到通知：
 
-   * 確認已安裝 [適用于 Visual Studio Code 擴充](https://marketplace.visualstudio.com/items?itemName=ms-dotnettools.csharp) 功能的最新 c #。 若要檢查已安裝的擴充功能，請從功能表列開啟 [**視圖**  >  **擴充**功能]，或選取 [**活動**] 提要欄位中的**延伸**模組圖示。
-   * 確認已啟用 JavaScript preview 的偵錯工具。 從功能表列開啟設定 **， (檔案**  >  **喜好**  >  **設定**) 。 使用關鍵字搜尋 `debug preview` 。 在搜尋結果中，確認已核取 [ **Debug > JavaScript： Use Preview** ] 的核取方塊。 如果不存在啟用預覽偵錯工具的選項，請升級至最新版的 VS Code 或安裝 [JavaScript 偵錯工具擴充](https://marketplace.visualstudio.com/items?itemName=ms-vscode.js-debug-nightly) 功能 (VS Code 1.46 版或更早版本的) 。
+   * 確認已安裝 [適用于 Visual Studio Code 擴充](https://marketplace.visualstudio.com/items?itemName=ms-dotnettools.csharp) 功能的最新 c #。 若要檢查已安裝的擴充功能，請從功能表列開啟 [ **視圖**  >  **擴充** 功能]，或選取 [ **活動** ] 提要欄位中的 **延伸** 模組圖示。
+   * 確認已啟用 JavaScript preview 的偵錯工具。 從功能表列開啟設定 **， (檔案**  >  **喜好**  >  **設定** ) 。 使用關鍵字搜尋 `debug preview` 。 在搜尋結果中，確認已核取 [ **Debug > JavaScript： Use Preview** ] 的核取方塊。 如果不存在啟用預覽偵錯工具的選項，請升級至最新版的 VS Code 或安裝 [JavaScript 偵錯工具擴充](https://marketplace.visualstudio.com/items?itemName=ms-vscode.js-debug-nightly) 功能 (VS Code 1.46 版或更早版本的) 。
    * 重載視窗。
 
 1. 使用 <kbd>F5</kbd> 鍵盤快速鍵或功能表項目來啟動調試。
 
    > [!NOTE]
-   > 不支援 (<kbd>Ctrl</kbd>F5) **啟動而不進行調試** + <kbd>F5</kbd> 。 當應用程式在偵錯工具設定中執行時，偵錯工具的額外負荷一律會降低效能。
+   > 不支援 ( <kbd>Ctrl</kbd>F5) **啟動而不進行調試** + <kbd>F5</kbd> 。 當應用程式在偵錯工具設定中執行時，偵錯工具的額外負荷一律會降低效能。
 
-1. 出現提示時，請選取 [ ** Blazor WebAssembly Debug** ] 選項以開始進行調試。
+1. 出現提示時，請選取 [ **Blazor WebAssembly Debug** ] 選項以開始進行調試。
 
 1. 獨立應用程式會啟動，並開啟偵錯工具瀏覽器。
 
@@ -280,7 +281,7 @@ Visual Studio for Mac 需要8.8 版 (組建 1532) 或更新版本：
 1. 按<kbd>&#8984;</kbd> + <kbd>&#8617;</kbd> ，以在偵錯工具中執行應用程式。
 
    > [!NOTE]
-   > **啟動但不** (<kbd>&#8997;</kbd> + <kbd>&#8984;</kbd> + <kbd>&#8617;</kbd>) 不受支援。 當應用程式在偵錯工具設定中執行時，偵錯工具的額外負荷一律會降低效能。
+   > **啟動但不** ( <kbd>&#8997;</kbd> + <kbd>&#8984;</kbd> + <kbd>&#8617;</kbd>) 不受支援。 當應用程式在偵錯工具設定中執行時，偵錯工具的額外負荷一律會降低效能。
 
    > [!IMPORTANT]
    > Google Chrome 或 Microsoft Edge 必須是所選的瀏覽器，才能進行偵錯工具會話。
@@ -344,7 +345,7 @@ Blazor 提供可執行 [Chrome DevTools 通訊協定](https://chromedevtools.git
 
 * 在 [ **偵錯工具** ] 索引標籤中，開啟瀏覽器中的開發人員工具。 在主控台中，執行 `localStorage.clear()` 以移除任何中斷點。
 * 確認您已安裝並信任 ASP.NET Core HTTPS 開發憑證。 如需詳細資訊，請參閱<xref:security/enforcing-ssl#troubleshoot-certificate-problems>。
-* Visual Studio 需要在 [**工具**選項] 的 [一般] 選項中 **，啟用 ASP.NET (Chrome、Edge 和 IE) 選項的 JavaScript 偵錯工具**  >  **Options**  >  **Debugging**  >  ** **。 這是 Visual Studio 的預設設定。 如果偵錯工具無法運作，請確認已選取該選項。
+* Visual Studio 需要在 [  。 這是 Visual Studio 的預設設定。 如果偵錯工具無法運作，請確認已選取該選項。
 * 如果您的環境使用 HTTP proxy，請確定 `localhost` 已包含在 proxy 略過設定中。 您可以 `NO_PROXY` 在下列其中一項設定環境變數來完成此動作：
   * 專案的檔案 `launchSettings.json` 。
   * 將其套用至所有應用程式的使用者或系統內容變數層級。 使用環境變數時，請重新開機 Visual Studio，變更才會生效。

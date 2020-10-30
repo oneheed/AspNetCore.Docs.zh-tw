@@ -6,6 +6,7 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 7/23/2019
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -17,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: tutorials/razor-pages/new-field
-ms.openlocfilehash: f5efb121b95d84876c9029cf06a96f827137e660
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: 951a8ada57ae523f362313426c0279556eb8339b
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88631442"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93050611"
 ---
 # <a name="part-7-add-a-new-field-to-a-no-locrazor-page-in-aspnet-core"></a>第7部分： Razor 在頁面中新增欄位，ASP.NET Core
 
@@ -52,7 +53,7 @@ ms.locfileid: "88631442"
 
 建置應用程式。
 
-編輯 *Pages/Movies/Index.cshtml*，然後新增 `Rating` 欄位：
+編輯 *Pages/Movies/Index.cshtml* ，然後新增 `Rating` 欄位：
 
 <a name="addrat"></a>
 
@@ -94,7 +95,7 @@ ms.locfileid: "88631442"
 
 ### <a name="add-a-migration-for-the-rating-field"></a>新增評等欄位的移轉
 
- 從 [工具]**** 功能表中，選取 [NuGet 套件管理員] > [套件管理員主控台]****。
+ 從 [工具]  功能表中，選取 [NuGet 套件管理員] > [套件管理員主控台]  。
 在 PMC 中，輸入下列命令：
 
 ```powershell
@@ -118,9 +119,9 @@ Update-Database
 另一個選擇是刪除資料庫並使用移轉重新建立資料庫。 若要在 SSOX 中刪除資料庫：
 
 * 在 SSOX 中選取資料庫。
-* 以滑鼠右鍵按一下資料庫，然後選取 [刪除]**。
-* 勾選 [ **關閉現有的連接**]。
-* 選取 [確定]。
+* 以滑鼠右鍵按一下資料庫，然後選取 [刪除]  。
+* 勾選 [ **關閉現有的連接** ]。
+* 選取 [確定]  。
 * 在 [PMC](xref:tutorials/razor-pages/new-field#pmc)中，更新資料庫：
 
   ```powershell
@@ -179,7 +180,7 @@ dotnet ef database update
 
 建置應用程式。
 
-編輯 *Pages/Movies/Index.cshtml*，然後新增 `Rating` 欄位：
+編輯 *Pages/Movies/Index.cshtml* ，然後新增 `Rating` 欄位：
 
 [!code-cshtml[](razor-pages-start/sample/RazorPagesMovie22/Pages/Movies/IndexRating.cshtml?highlight=40-42,61-63)]
 
@@ -219,7 +220,7 @@ dotnet ef database update
 
 ### <a name="add-a-migration-for-the-rating-field"></a>新增評等欄位的移轉
 
- 從 [工具]**** 功能表中，選取 [NuGet 套件管理員] > [套件管理員主控台]****。
+ 從 [工具]  功能表中，選取 [NuGet 套件管理員] > [套件管理員主控台]  。
 在 PMC 中，輸入下列命令：
 
 ```powershell
@@ -243,9 +244,9 @@ Update-Database
 另一個選擇是刪除資料庫並使用移轉重新建立資料庫。 若要在 SSOX 中刪除資料庫：
 
 * 在 SSOX 中選取資料庫。
-* 以滑鼠右鍵按一下資料庫，然後選取 [刪除]**。
-* 勾選 [ **關閉現有的連接**]。
-* 選取 [確定]。
+* 以滑鼠右鍵按一下資料庫，然後選取 [刪除]  。
+* 勾選 [ **關閉現有的連接** ]。
+* 選取 [確定]  。
 * 在 [PMC](xref:tutorials/razor-pages/new-field#pmc)中，更新資料庫：
 
   ```powershell
@@ -258,7 +259,7 @@ Update-Database
 
 [!INCLUDE[](~/includes/RP-mvc-shared/sqlite-warn.md)]
 
-刪除資料庫並使用移轉重新建立資料庫。 若要刪除資料庫，請刪除資料庫檔案 (*MvcMovie.db*)。 然後執行 `ef database update` 命令：
+刪除資料庫並使用移轉重新建立資料庫。 若要刪除資料庫，請刪除資料庫檔案 ( *MvcMovie.db* )。 然後執行 `ef database update` 命令：
 
 ```dotnetcli
 dotnet ef database update

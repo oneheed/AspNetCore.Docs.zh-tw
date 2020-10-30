@@ -7,6 +7,7 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 05/19/2020
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -18,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/fundamentals/dependency-injection
-ms.openlocfilehash: 3dc15f5efcc8f48a809bf9132588fb38732a7b35
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: 7b573c0635aafe7efcf56185c250dbab836e6cf4
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88628283"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93056018"
 ---
 # <a name="aspnet-core-no-locblazor-dependency-injection"></a>ASP.NET Core 相依性 Blazor 插入
 
@@ -165,7 +166,7 @@ public void ConfigureServices(IServiceCollection services)
 
 | 存留期 | 描述 |
 | -------- | ----------- |
-| <xref:Microsoft.Extensions.DependencyInjection.ServiceDescriptor.Scoped%2A> | Blazor WebAssembly 應用程式目前不具有 DI 範圍的概念。 `Scoped`-註冊的服務行為類似 `Singleton` 服務。 不過， Blazor Server 裝載模型支援 `Scoped` 存留期。 在 Blazor Server 應用程式中，範圍服務註冊的範圍為 *連接*。 基於這個理由，即使目前的目的是要在瀏覽器中執行用戶端，也最好使用範圍服務來作為應範圍為目前使用者的服務。 |
+| <xref:Microsoft.Extensions.DependencyInjection.ServiceDescriptor.Scoped%2A> | Blazor WebAssembly 應用程式目前不具有 DI 範圍的概念。 `Scoped`-註冊的服務行為類似 `Singleton` 服務。 不過， Blazor Server 裝載模型支援 `Scoped` 存留期。 在 Blazor Server 應用程式中，範圍服務註冊的範圍為 *連接* 。 基於這個理由，即使目前的目的是要在瀏覽器中執行用戶端，也最好使用範圍服務來作為應範圍為目前使用者的服務。 |
 | <xref:Microsoft.Extensions.DependencyInjection.ServiceDescriptor.Singleton%2A> | DI 會建立服務的 *單一實例* 。 所有需要服務的元件 `Singleton` 都會收到相同服務的實例。 |
 | <xref:Microsoft.Extensions.DependencyInjection.ServiceDescriptor.Transient%2A> | 每當元件 `Transient` 從服務容器取得服務的實例時，就會收到服務的 *新實例* 。 |
 
@@ -211,7 +212,7 @@ public class ComponentBase : IComponent
 
 ## <a name="use-di-in-services"></a>使用服務中的 DI
 
-複雜的服務可能需要其他服務。 在先前的範例中， `DataAccess` 可能需要 <xref:System.Net.Http.HttpClient> 預設服務。 [`@inject`](xref:mvc/views/razor#inject) (或 [`[Inject]`](xref:Microsoft.AspNetCore.Components.InjectAttribute) 屬性) 無法在服務中使用。 必須改為使用函式*插入*。 將參數加入至服務的函式，即可新增必要的服務。 當 DI 建立服務時，它會辨識其在函式中所需的服務，並據以提供它們。 在下列範例中，此函式會接收 <xref:System.Net.Http.HttpClient> VIA DI 的。 <xref:System.Net.Http.HttpClient> 是預設服務。
+複雜的服務可能需要其他服務。 在先前的範例中， `DataAccess` 可能需要 <xref:System.Net.Http.HttpClient> 預設服務。 [`@inject`](xref:mvc/views/razor#inject) (或 [`[Inject]`](xref:Microsoft.AspNetCore.Components.InjectAttribute) 屬性) 無法在服務中使用。 必須改為使用函式 *插入* 。 將參數加入至服務的函式，即可新增必要的服務。 當 DI 建立服務時，它會辨識其在函式中所需的服務，並據以提供它們。 在下列範例中，此函式會接收 <xref:System.Net.Http.HttpClient> VIA DI 的。 <xref:System.Net.Http.HttpClient> 是預設服務。
 
 ```csharp
 public class DataAccess : IDataAccess

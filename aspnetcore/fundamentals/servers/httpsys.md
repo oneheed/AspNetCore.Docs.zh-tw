@@ -7,6 +7,7 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 02/07/2020
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -18,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: fundamentals/servers/httpsys
-ms.openlocfilehash: 8ed9ec3447205107194ffa5c329c0e5ae0fc5553
-ms.sourcegitcommit: e519d95d17443abafba8f712ac168347b15c8b57
+ms.openlocfilehash: ca8aa126a44ea417017f0be0372e818a95ad8413
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 10/02/2020
-ms.locfileid: "91653967"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93053744"
 ---
 # <a name="httpsys-web-server-implementation-in-aspnet-core"></a>ASP.NET Core 中的 HTTP.sys 網頁伺服器實作
 
@@ -108,7 +109,7 @@ HTTP.sys 使用 Kerberos 驗證通訊協定委派給核心模式驗證。 Kerber
 | `RequestQueueMode` | 這會指出伺服器是否負責建立和設定要求佇列，或是否應該附加至現有的佇列。<br>附加至現有的佇列時，大部分現有的設定選項都不適用。 | `RequestQueueMode.Create` |
 | `RequestQueueName` | HTTP.sys 要求佇列的名稱。 | `null` (匿名佇列)  |
 | <xref:Microsoft.AspNetCore.Server.HttpSys.HttpSysOptions.ThrowWriteExceptions> | 指出若回應本文因為用戶端中斷連線而寫入失敗時，應擲回例外狀況或正常完成。 | `false`<br>(正常完成) |
-| <xref:Microsoft.AspNetCore.Server.HttpSys.HttpSysOptions.Timeouts> | 公開 HTTP.sys <xref:Microsoft.AspNetCore.Server.HttpSys.TimeoutManager> 設定，這也可在登錄中設定。 API 連結可提供包括預設值在內每個設定的詳細資訊：<ul><li>[TimeoutManager. DrainEntityBody](xref:Microsoft.AspNetCore.Server.HttpSys.TimeoutManager.DrainEntityBody)： HTTP 伺服器 API 在 keep-alive 連線上清空實體主體所允許的時間。</li><li>[TimeoutManager. EntityBody](xref:Microsoft.AspNetCore.Server.HttpSys.TimeoutManager.EntityBody)：要求實體內容到達的允許時間。</li><li>[TimeoutManager. HeaderWait](xref:Microsoft.AspNetCore.Server.HttpSys.TimeoutManager.HeaderWait)： HTTP 伺服器 API 允許的時間剖析要求標頭。</li><li>[TimeoutManager. IdleConnection](xref:Microsoft.AspNetCore.Server.HttpSys.TimeoutManager.IdleConnection)：允許閒置連接的時間。</li><li>[TimeoutManager. MinSendBytesPerSecond](xref:Microsoft.AspNetCore.Server.HttpSys.TimeoutManager.MinSendBytesPerSecond)：回應的最小傳送速率。</li><li>[TimeoutManager. RequestQueue](xref:Microsoft.AspNetCore.Server.HttpSys.TimeoutManager.RequestQueue)：允許要求在應用程式拾取之前保留在要求佇列中的時間。</li></ul> |  |
+| <xref:Microsoft.AspNetCore.Server.HttpSys.HttpSysOptions.Timeouts> | 公開 HTTP.sys <xref:Microsoft.AspNetCore.Server.HttpSys.TimeoutManager> 設定，這也可在登錄中設定。 API 連結可提供包括預設值在內每個設定的詳細資訊：<ul><li>[TimeoutManager. DrainEntityBody](xref:Microsoft.AspNetCore.Server.HttpSys.TimeoutManager.DrainEntityBody)： HTTP 伺服器 API 在 Keep-Alive 連接上清空實體主體所允許的時間。</li><li>[TimeoutManager. EntityBody](xref:Microsoft.AspNetCore.Server.HttpSys.TimeoutManager.EntityBody)：要求實體內容到達的允許時間。</li><li>[TimeoutManager. HeaderWait](xref:Microsoft.AspNetCore.Server.HttpSys.TimeoutManager.HeaderWait)： HTTP 伺服器 API 允許的時間剖析要求標頭。</li><li>[TimeoutManager. IdleConnection](xref:Microsoft.AspNetCore.Server.HttpSys.TimeoutManager.IdleConnection)：允許閒置連接的時間。</li><li>[TimeoutManager. MinSendBytesPerSecond](xref:Microsoft.AspNetCore.Server.HttpSys.TimeoutManager.MinSendBytesPerSecond)：回應的最小傳送速率。</li><li>[TimeoutManager. RequestQueue](xref:Microsoft.AspNetCore.Server.HttpSys.TimeoutManager.RequestQueue)：允許要求在應用程式拾取之前保留在要求佇列中的時間。</li></ul> |  |
 | <xref:Microsoft.AspNetCore.Server.HttpSys.HttpSysOptions.UrlPrefixes> | 指定 <xref:Microsoft.AspNetCore.Server.HttpSys.UrlPrefixCollection> 以向 HTTP.sys 註冊。 最實用的是 [UrlPrefixCollection.Add](xref:Microsoft.AspNetCore.Server.HttpSys.UrlPrefixCollection.Add*)，可用來將前置詞加入集合。 處置接聽程式之前可隨時修改這些內容。 |  |
 
 <a name="maxrequestbodysize"></a>
@@ -146,12 +147,12 @@ public IActionResult MyActionMethod()
 
    在 Windows 上，請使用 [New-SelfSignedCertificate PowerShell Cmdlet](/powershell/module/pkiclient/new-selfsignedcertificate) 來建立自我簽署的憑證。 如需不支援的範例，請參閱 [UpdateIISExpressSSLForChrome.ps1](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/includes/make-x509-cert/UpdateIISExpressSSLForChrome.ps1) \(英文\)。
 
-   將自我簽署的憑證或 CA 簽署的憑證安裝在伺服器的 [本機電腦]**個人** > **** 存放區中。
+   將自我簽署的憑證或 CA 簽署的憑證安裝在伺服器的 [本機電腦]  存放區中。
 
 1. 如果應用程式是[與架構相依的部署](/dotnet/core/deploying/#framework-dependent-deployments-fdd)，請安裝 .NET Core、.NET Framework 或兩者 (如果應用程式是以 .NET Framework 為目標的 .NET Core 應用程式)。
 
-   * **.Net core**：如果應用程式需要 .net core，請從[.net core 下載](https://dotnet.microsoft.com/download)取得並執行 **.net core 運行**時間安裝程式。 請勿在伺服器上安裝完整的 SDK。
-   * **.NET Framework**：如果應用程式需要 .NET Framework，請參閱 [.NET Framework 安裝指南](/dotnet/framework/install/)。 安裝必要的 .NET Framework。 您可以從 [.NET Core 下載](https://dotnet.microsoft.com/download)頁面取得最新 .NET Framework 的安裝程式。
+   * **.Net core** ：如果應用程式需要 .net core，請從 [.net core 下載](https://dotnet.microsoft.com/download)取得並執行 **.net core 運行** 時間安裝程式。 請勿在伺服器上安裝完整的 SDK。
+   * **.NET Framework** ：如果應用程式需要 .NET Framework，請參閱 [.NET Framework 安裝指南](/dotnet/framework/install/)。 安裝必要的 .NET Framework。 您可以從 [.NET Core 下載](https://dotnet.microsoft.com/download)頁面取得最新 .NET Framework 的安裝程式。
 
    如果應用程式是[自封式部署](/dotnet/core/deploying/#self-contained-deployments-scd)，則應用程式的部署中會包含執行階段。 不需要在伺服器上安裝任何架構。
 
@@ -175,11 +176,11 @@ public IActionResult MyActionMethod()
    HTTP.sys 使用 [HTTP Server API UrlPrefix 字串格式](/windows/win32/http/urlprefix-strings)。
 
    > [!WARNING]
-   > 請**勿**使用最上層萬用字元繫結 (`http://*:80/`與 `http://+:80`)。 最上層萬用字元繫結會導致應用程式安全性弱點。 這對強式與弱式萬用字元皆適用。 請使用明確的主機名稱或 IP 位址，而不要使用萬用字元。 若您擁有整個父網域 (相對於有弱點的 `*.com`) 的控制權，則子網域萬用字元繫結 (例如 `*.mysub.com`) 便不構成安全性風險。 如需詳細資訊，請參閱 [RFC 7230：第5.4 節： Host](https://tools.ietf.org/html/rfc7230#section-5.4)。
+   > 請 **勿** 使用最上層萬用字元繫結 (`http://*:80/`與 `http://+:80`)。 最上層萬用字元繫結會導致應用程式安全性弱點。 這對強式與弱式萬用字元皆適用。 請使用明確的主機名稱或 IP 位址，而不要使用萬用字元。 若您擁有整個父網域 (相對於有弱點的 `*.com`) 的控制權，則子網域萬用字元繫結 (例如 `*.mysub.com`) 便不構成安全性風險。 如需詳細資訊，請參閱 [RFC 7230：第5.4 節： Host](https://tools.ietf.org/html/rfc7230#section-5.4)。
 
 1. 在伺服器上預先註冊 URL 首碼。
 
-   用來設定 HTTP.sys 的內建工具是 *netsh.exe*。 *netsh.exe* 是用來保留 URL 前置詞，並指派 X.509 憑證。 此工具需要系統管理員權限。
+   用來設定 HTTP.sys 的內建工具是 *netsh.exe* 。 *netsh.exe* 是用來保留 URL 前置詞，並指派 X.509 憑證。 此工具需要系統管理員權限。
 
    使用 *netsh.exe* 工具來為應用程式註冊 URL：
 
@@ -187,7 +188,7 @@ public IActionResult MyActionMethod()
    netsh http add urlacl url=<URL> user=<USER>
    ```
 
-   * `<URL>`： (URL) 的完整統一資源定位器。 請勿使用萬用字元繫結。 請使用有效的主機名稱或本機 IP 位址。 URL 必須包含結尾斜線。**
+   * `<URL>`： (URL) 的完整統一資源定位器。 請勿使用萬用字元繫結。 請使用有效的主機名稱或本機 IP 位址。 URL 必須包含結尾斜線。 
    * `<USER>`：指定使用者或使用者組名。
 
    在以下範例中，伺服器的本機 IP 位址是 `10.0.0.4`：
@@ -220,9 +221,9 @@ public IActionResult MyActionMethod()
    為了便於參考，請將 GUID 以套件標記的形式儲存在應用程式中：
 
    * 在 Visual Studio 中：
-     * 在 [方案總管]**** 中的專案上按一下滑鼠右鍵，然後選取 [屬性]****，以開啟應用程式的專案屬性。
-     * 選取 [套件]**** 索引標籤。
-     * 輸入您在 [標記]**** 欄位中建立的 GUID。
+     * 在 [方案總管]  中的專案上按一下滑鼠右鍵，然後選取 [屬性]  ，以開啟應用程式的專案屬性。
+     * 選取 [套件]  索引標籤。
+     * 輸入您在 [標記]  欄位中建立的 GUID。
    * 不是使用 Visual Studio 時：
      * 開啟應用程式的專案檔。
      * 將 `<PackageTags>` 屬性搭配您所建立的 GUID 新增至新的或現有的 `<PropertyGroup>`：
@@ -376,7 +377,7 @@ HTTP.sys 使用 Kerberos 驗證通訊協定委派給核心模式驗證。 Kerber
 | <xref:Microsoft.AspNetCore.Server.HttpSys.HttpSysOptions.MaxRequestBodySize> | 請參閱 <a href="#maxrequestbodysize">MaxRequestBodySize</a> 小節。 | 30000000 位元組<br>(~28.6 MB) |
 | <xref:Microsoft.AspNetCore.Server.HttpSys.HttpSysOptions.RequestQueueLimit> | 可以加入佇列的最大要求數目。 | 1000 |
 | <xref:Microsoft.AspNetCore.Server.HttpSys.HttpSysOptions.ThrowWriteExceptions> | 指出若回應本文因為用戶端中斷連線而寫入失敗時，應擲回例外狀況或正常完成。 | `false`<br>(正常完成) |
-| <xref:Microsoft.AspNetCore.Server.HttpSys.HttpSysOptions.Timeouts> | 公開 HTTP.sys <xref:Microsoft.AspNetCore.Server.HttpSys.TimeoutManager> 設定，這也可在登錄中設定。 API 連結可提供包括預設值在內每個設定的詳細資訊：<ul><li>[TimeoutManager. DrainEntityBody](xref:Microsoft.AspNetCore.Server.HttpSys.TimeoutManager.DrainEntityBody)： HTTP 伺服器 API 在 keep-alive 連線上清空實體主體所允許的時間。</li><li>[TimeoutManager. EntityBody](xref:Microsoft.AspNetCore.Server.HttpSys.TimeoutManager.EntityBody)：要求實體內容到達的允許時間。</li><li>[TimeoutManager. HeaderWait](xref:Microsoft.AspNetCore.Server.HttpSys.TimeoutManager.HeaderWait)： HTTP 伺服器 API 允許的時間剖析要求標頭。</li><li>[TimeoutManager. IdleConnection](xref:Microsoft.AspNetCore.Server.HttpSys.TimeoutManager.IdleConnection)：允許閒置連接的時間。</li><li>[TimeoutManager. MinSendBytesPerSecond](xref:Microsoft.AspNetCore.Server.HttpSys.TimeoutManager.MinSendBytesPerSecond)：回應的最小傳送速率。</li><li>[TimeoutManager. RequestQueue](xref:Microsoft.AspNetCore.Server.HttpSys.TimeoutManager.RequestQueue)：允許要求在應用程式拾取之前保留在要求佇列中的時間。</li></ul> |  |
+| <xref:Microsoft.AspNetCore.Server.HttpSys.HttpSysOptions.Timeouts> | 公開 HTTP.sys <xref:Microsoft.AspNetCore.Server.HttpSys.TimeoutManager> 設定，這也可在登錄中設定。 API 連結可提供包括預設值在內每個設定的詳細資訊：<ul><li>[TimeoutManager. DrainEntityBody](xref:Microsoft.AspNetCore.Server.HttpSys.TimeoutManager.DrainEntityBody)： HTTP 伺服器 API 在 Keep-Alive 連接上清空實體主體所允許的時間。</li><li>[TimeoutManager. EntityBody](xref:Microsoft.AspNetCore.Server.HttpSys.TimeoutManager.EntityBody)：要求實體內容到達的允許時間。</li><li>[TimeoutManager. HeaderWait](xref:Microsoft.AspNetCore.Server.HttpSys.TimeoutManager.HeaderWait)： HTTP 伺服器 API 允許的時間剖析要求標頭。</li><li>[TimeoutManager. IdleConnection](xref:Microsoft.AspNetCore.Server.HttpSys.TimeoutManager.IdleConnection)：允許閒置連接的時間。</li><li>[TimeoutManager. MinSendBytesPerSecond](xref:Microsoft.AspNetCore.Server.HttpSys.TimeoutManager.MinSendBytesPerSecond)：回應的最小傳送速率。</li><li>[TimeoutManager. RequestQueue](xref:Microsoft.AspNetCore.Server.HttpSys.TimeoutManager.RequestQueue)：允許要求在應用程式拾取之前保留在要求佇列中的時間。</li></ul> |  |
 | <xref:Microsoft.AspNetCore.Server.HttpSys.HttpSysOptions.UrlPrefixes> | 指定 <xref:Microsoft.AspNetCore.Server.HttpSys.UrlPrefixCollection> 以向 HTTP.sys 註冊。 最實用的是 [UrlPrefixCollection.Add](xref:Microsoft.AspNetCore.Server.HttpSys.UrlPrefixCollection.Add*)，可用來將前置詞加入集合。 處置接聽程式之前可隨時修改這些內容。 |  |
 
 <a name="maxrequestbodysize"></a>
@@ -414,12 +415,12 @@ public IActionResult MyActionMethod()
 
    在 Windows 上，請使用 [New-SelfSignedCertificate PowerShell Cmdlet](/powershell/module/pkiclient/new-selfsignedcertificate) 來建立自我簽署的憑證。 如需不支援的範例，請參閱 [UpdateIISExpressSSLForChrome.ps1](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/includes/make-x509-cert/UpdateIISExpressSSLForChrome.ps1) \(英文\)。
 
-   將自我簽署的憑證或 CA 簽署的憑證安裝在伺服器的 [本機電腦]**個人** > **** 存放區中。
+   將自我簽署的憑證或 CA 簽署的憑證安裝在伺服器的 [本機電腦]  存放區中。
 
 1. 如果應用程式是[與架構相依的部署](/dotnet/core/deploying/#framework-dependent-deployments-fdd)，請安裝 .NET Core、.NET Framework 或兩者 (如果應用程式是以 .NET Framework 為目標的 .NET Core 應用程式)。
 
-   * **.Net core**：如果應用程式需要 .net core，請從[.net core 下載](https://dotnet.microsoft.com/download)取得並執行 **.net core 運行**時間安裝程式。 請勿在伺服器上安裝完整的 SDK。
-   * **.NET Framework**：如果應用程式需要 .NET Framework，請參閱 [.NET Framework 安裝指南](/dotnet/framework/install/)。 安裝必要的 .NET Framework。 您可以從 [.NET Core 下載](https://dotnet.microsoft.com/download)頁面取得最新 .NET Framework 的安裝程式。
+   * **.Net core** ：如果應用程式需要 .net core，請從 [.net core 下載](https://dotnet.microsoft.com/download)取得並執行 **.net core 運行** 時間安裝程式。 請勿在伺服器上安裝完整的 SDK。
+   * **.NET Framework** ：如果應用程式需要 .NET Framework，請參閱 [.NET Framework 安裝指南](/dotnet/framework/install/)。 安裝必要的 .NET Framework。 您可以從 [.NET Core 下載](https://dotnet.microsoft.com/download)頁面取得最新 .NET Framework 的安裝程式。
 
    如果應用程式是[自封式部署](/dotnet/core/deploying/#self-contained-deployments-scd)，則應用程式的部署中會包含執行階段。 不需要在伺服器上安裝任何架構。
 
@@ -443,11 +444,11 @@ public IActionResult MyActionMethod()
    HTTP.sys 使用 [HTTP Server API UrlPrefix 字串格式](/windows/win32/http/urlprefix-strings)。
 
    > [!WARNING]
-   > 請**勿**使用最上層萬用字元繫結 (`http://*:80/`與 `http://+:80`)。 最上層萬用字元繫結會導致應用程式安全性弱點。 這對強式與弱式萬用字元皆適用。 請使用明確的主機名稱或 IP 位址，而不要使用萬用字元。 若您擁有整個父網域 (相對於有弱點的 `*.com`) 的控制權，則子網域萬用字元繫結 (例如 `*.mysub.com`) 便不構成安全性風險。 如需詳細資訊，請參閱 [RFC 7230：第5.4 節： Host](https://tools.ietf.org/html/rfc7230#section-5.4)。
+   > 請 **勿** 使用最上層萬用字元繫結 (`http://*:80/`與 `http://+:80`)。 最上層萬用字元繫結會導致應用程式安全性弱點。 這對強式與弱式萬用字元皆適用。 請使用明確的主機名稱或 IP 位址，而不要使用萬用字元。 若您擁有整個父網域 (相對於有弱點的 `*.com`) 的控制權，則子網域萬用字元繫結 (例如 `*.mysub.com`) 便不構成安全性風險。 如需詳細資訊，請參閱 [RFC 7230：第5.4 節： Host](https://tools.ietf.org/html/rfc7230#section-5.4)。
 
 1. 在伺服器上預先註冊 URL 首碼。
 
-   用來設定 HTTP.sys 的內建工具是 *netsh.exe*。 *netsh.exe* 是用來保留 URL 前置詞，並指派 X.509 憑證。 此工具需要系統管理員權限。
+   用來設定 HTTP.sys 的內建工具是 *netsh.exe* 。 *netsh.exe* 是用來保留 URL 前置詞，並指派 X.509 憑證。 此工具需要系統管理員權限。
 
    使用 *netsh.exe* 工具來為應用程式註冊 URL：
 
@@ -455,7 +456,7 @@ public IActionResult MyActionMethod()
    netsh http add urlacl url=<URL> user=<USER>
    ```
 
-   * `<URL>`： (URL) 的完整統一資源定位器。 請勿使用萬用字元繫結。 請使用有效的主機名稱或本機 IP 位址。 URL 必須包含結尾斜線。**
+   * `<URL>`： (URL) 的完整統一資源定位器。 請勿使用萬用字元繫結。 請使用有效的主機名稱或本機 IP 位址。 URL 必須包含結尾斜線。 
    * `<USER>`：指定使用者或使用者組名。
 
    在以下範例中，伺服器的本機 IP 位址是 `10.0.0.4`：
@@ -488,9 +489,9 @@ public IActionResult MyActionMethod()
    為了便於參考，請將 GUID 以套件標記的形式儲存在應用程式中：
 
    * 在 Visual Studio 中：
-     * 在 [方案總管]**** 中的專案上按一下滑鼠右鍵，然後選取 [屬性]****，以開啟應用程式的專案屬性。
-     * 選取 [套件]**** 索引標籤。
-     * 輸入您在 [標記]**** 欄位中建立的 GUID。
+     * 在 [方案總管]  中的專案上按一下滑鼠右鍵，然後選取 [屬性]  ，以開啟應用程式的專案屬性。
+     * 選取 [套件]  索引標籤。
+     * 輸入您在 [標記]  欄位中建立的 GUID。
    * 不是使用 Visual Studio 時：
      * 開啟應用程式的專案檔。
      * 將 `<PackageTags>` 屬性搭配您所建立的 GUID 新增至新的或現有的 `<PropertyGroup>`：
@@ -629,7 +630,7 @@ HTTP.sys 使用 Kerberos 驗證通訊協定委派給核心模式驗證。 Kerber
 | <xref:Microsoft.AspNetCore.Server.HttpSys.HttpSysOptions.MaxRequestBodySize> | 請參閱 <a href="#maxrequestbodysize">MaxRequestBodySize</a> 小節。 | 30000000 位元組<br>(~28.6 MB) |
 | <xref:Microsoft.AspNetCore.Server.HttpSys.HttpSysOptions.RequestQueueLimit> | 可以加入佇列的最大要求數目。 | 1000 |
 | <xref:Microsoft.AspNetCore.Server.HttpSys.HttpSysOptions.ThrowWriteExceptions> | 指出若回應本文因為用戶端中斷連線而寫入失敗時，應擲回例外狀況或正常完成。 | `false`<br>(正常完成) |
-| <xref:Microsoft.AspNetCore.Server.HttpSys.HttpSysOptions.Timeouts> | 公開 HTTP.sys <xref:Microsoft.AspNetCore.Server.HttpSys.TimeoutManager> 設定，這也可在登錄中設定。 API 連結可提供包括預設值在內每個設定的詳細資訊：<ul><li>[TimeoutManager. DrainEntityBody](xref:Microsoft.AspNetCore.Server.HttpSys.TimeoutManager.DrainEntityBody)： HTTP 伺服器 API 在 keep-alive 連線上清空實體主體所允許的時間。</li><li>[TimeoutManager. EntityBody](xref:Microsoft.AspNetCore.Server.HttpSys.TimeoutManager.EntityBody)：要求實體內容到達的允許時間。</li><li>[TimeoutManager. HeaderWait](xref:Microsoft.AspNetCore.Server.HttpSys.TimeoutManager.HeaderWait)： HTTP 伺服器 API 允許的時間剖析要求標頭。</li><li>[TimeoutManager. IdleConnection](xref:Microsoft.AspNetCore.Server.HttpSys.TimeoutManager.IdleConnection)：允許閒置連接的時間。</li><li>[TimeoutManager. MinSendBytesPerSecond](xref:Microsoft.AspNetCore.Server.HttpSys.TimeoutManager.MinSendBytesPerSecond)：回應的最小傳送速率。</li><li>[TimeoutManager. RequestQueue](xref:Microsoft.AspNetCore.Server.HttpSys.TimeoutManager.RequestQueue)：允許要求在應用程式拾取之前保留在要求佇列中的時間。</li></ul> |  |
+| <xref:Microsoft.AspNetCore.Server.HttpSys.HttpSysOptions.Timeouts> | 公開 HTTP.sys <xref:Microsoft.AspNetCore.Server.HttpSys.TimeoutManager> 設定，這也可在登錄中設定。 API 連結可提供包括預設值在內每個設定的詳細資訊：<ul><li>[TimeoutManager. DrainEntityBody](xref:Microsoft.AspNetCore.Server.HttpSys.TimeoutManager.DrainEntityBody)： HTTP 伺服器 API 在 Keep-Alive 連接上清空實體主體所允許的時間。</li><li>[TimeoutManager. EntityBody](xref:Microsoft.AspNetCore.Server.HttpSys.TimeoutManager.EntityBody)：要求實體內容到達的允許時間。</li><li>[TimeoutManager. HeaderWait](xref:Microsoft.AspNetCore.Server.HttpSys.TimeoutManager.HeaderWait)： HTTP 伺服器 API 允許的時間剖析要求標頭。</li><li>[TimeoutManager. IdleConnection](xref:Microsoft.AspNetCore.Server.HttpSys.TimeoutManager.IdleConnection)：允許閒置連接的時間。</li><li>[TimeoutManager. MinSendBytesPerSecond](xref:Microsoft.AspNetCore.Server.HttpSys.TimeoutManager.MinSendBytesPerSecond)：回應的最小傳送速率。</li><li>[TimeoutManager. RequestQueue](xref:Microsoft.AspNetCore.Server.HttpSys.TimeoutManager.RequestQueue)：允許要求在應用程式拾取之前保留在要求佇列中的時間。</li></ul> |  |
 | <xref:Microsoft.AspNetCore.Server.HttpSys.HttpSysOptions.UrlPrefixes> | 指定 <xref:Microsoft.AspNetCore.Server.HttpSys.UrlPrefixCollection> 以向 HTTP.sys 註冊。 最實用的是 [UrlPrefixCollection.Add](xref:Microsoft.AspNetCore.Server.HttpSys.UrlPrefixCollection.Add*)，可用來將前置詞加入集合。 處置接聽程式之前可隨時修改這些內容。 |  |
 
 <a name="maxrequestbodysize"></a>
@@ -667,12 +668,12 @@ public IActionResult MyActionMethod()
 
    在 Windows 上，請使用 [New-SelfSignedCertificate PowerShell Cmdlet](/powershell/module/pkiclient/new-selfsignedcertificate) 來建立自我簽署的憑證。 如需不支援的範例，請參閱 [UpdateIISExpressSSLForChrome.ps1](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/includes/make-x509-cert/UpdateIISExpressSSLForChrome.ps1) \(英文\)。
 
-   將自我簽署的憑證或 CA 簽署的憑證安裝在伺服器的 [本機電腦]**個人** > **** 存放區中。
+   將自我簽署的憑證或 CA 簽署的憑證安裝在伺服器的 [本機電腦]  存放區中。
 
 1. 如果應用程式是[與架構相依的部署](/dotnet/core/deploying/#framework-dependent-deployments-fdd)，請安裝 .NET Core、.NET Framework 或兩者 (如果應用程式是以 .NET Framework 為目標的 .NET Core 應用程式)。
 
-   * **.Net core**：如果應用程式需要 .net core，請從[.net core 下載](https://dotnet.microsoft.com/download)取得並執行 **.net core 運行**時間安裝程式。 請勿在伺服器上安裝完整的 SDK。
-   * **.NET Framework**：如果應用程式需要 .NET Framework，請參閱 [.NET Framework 安裝指南](/dotnet/framework/install/)。 安裝必要的 .NET Framework。 您可以從 [.NET Core 下載](https://dotnet.microsoft.com/download)頁面取得最新 .NET Framework 的安裝程式。
+   * **.Net core** ：如果應用程式需要 .net core，請從 [.net core 下載](https://dotnet.microsoft.com/download)取得並執行 **.net core 運行** 時間安裝程式。 請勿在伺服器上安裝完整的 SDK。
+   * **.NET Framework** ：如果應用程式需要 .NET Framework，請參閱 [.NET Framework 安裝指南](/dotnet/framework/install/)。 安裝必要的 .NET Framework。 您可以從 [.NET Core 下載](https://dotnet.microsoft.com/download)頁面取得最新 .NET Framework 的安裝程式。
 
    如果應用程式是[自封式部署](/dotnet/core/deploying/#self-contained-deployments-scd)，則應用程式的部署中會包含執行階段。 不需要在伺服器上安裝任何架構。
 
@@ -696,11 +697,11 @@ public IActionResult MyActionMethod()
    HTTP.sys 使用 [HTTP Server API UrlPrefix 字串格式](/windows/win32/http/urlprefix-strings)。
 
    > [!WARNING]
-   > 請**勿**使用最上層萬用字元繫結 (`http://*:80/`與 `http://+:80`)。 最上層萬用字元繫結會導致應用程式安全性弱點。 這對強式與弱式萬用字元皆適用。 請使用明確的主機名稱或 IP 位址，而不要使用萬用字元。 若您擁有整個父網域 (相對於有弱點的 `*.com`) 的控制權，則子網域萬用字元繫結 (例如 `*.mysub.com`) 便不構成安全性風險。 如需詳細資訊，請參閱 [RFC 7230：第5.4 節： Host](https://tools.ietf.org/html/rfc7230#section-5.4)。
+   > 請 **勿** 使用最上層萬用字元繫結 (`http://*:80/`與 `http://+:80`)。 最上層萬用字元繫結會導致應用程式安全性弱點。 這對強式與弱式萬用字元皆適用。 請使用明確的主機名稱或 IP 位址，而不要使用萬用字元。 若您擁有整個父網域 (相對於有弱點的 `*.com`) 的控制權，則子網域萬用字元繫結 (例如 `*.mysub.com`) 便不構成安全性風險。 如需詳細資訊，請參閱 [RFC 7230：第5.4 節： Host](https://tools.ietf.org/html/rfc7230#section-5.4)。
 
 1. 在伺服器上預先註冊 URL 首碼。
 
-   用來設定 HTTP.sys 的內建工具是 *netsh.exe*。 *netsh.exe* 是用來保留 URL 前置詞，並指派 X.509 憑證。 此工具需要系統管理員權限。
+   用來設定 HTTP.sys 的內建工具是 *netsh.exe* 。 *netsh.exe* 是用來保留 URL 前置詞，並指派 X.509 憑證。 此工具需要系統管理員權限。
 
    使用 *netsh.exe* 工具來為應用程式註冊 URL：
 
@@ -708,7 +709,7 @@ public IActionResult MyActionMethod()
    netsh http add urlacl url=<URL> user=<USER>
    ```
 
-   * `<URL>`： (URL) 的完整統一資源定位器。 請勿使用萬用字元繫結。 請使用有效的主機名稱或本機 IP 位址。 URL 必須包含結尾斜線。**
+   * `<URL>`： (URL) 的完整統一資源定位器。 請勿使用萬用字元繫結。 請使用有效的主機名稱或本機 IP 位址。 URL 必須包含結尾斜線。 
    * `<USER>`：指定使用者或使用者組名。
 
    在以下範例中，伺服器的本機 IP 位址是 `10.0.0.4`：
@@ -741,9 +742,9 @@ public IActionResult MyActionMethod()
    為了便於參考，請將 GUID 以套件標記的形式儲存在應用程式中：
 
    * 在 Visual Studio 中：
-     * 在 [方案總管]**** 中的專案上按一下滑鼠右鍵，然後選取 [屬性]****，以開啟應用程式的專案屬性。
-     * 選取 [套件]**** 索引標籤。
-     * 輸入您在 [標記]**** 欄位中建立的 GUID。
+     * 在 [方案總管]  中的專案上按一下滑鼠右鍵，然後選取 [屬性]  ，以開啟應用程式的專案屬性。
+     * 選取 [套件]  索引標籤。
+     * 輸入您在 [標記]  欄位中建立的 GUID。
    * 不是使用 Visual Studio 時：
      * 開啟應用程式的專案檔。
      * 將 `<PackageTags>` 屬性搭配您所建立的 GUID 新增至新的或現有的 `<PropertyGroup>`：
@@ -882,7 +883,7 @@ HTTP.sys 使用 Kerberos 驗證通訊協定委派給核心模式驗證。 Kerber
 | <xref:Microsoft.AspNetCore.Server.HttpSys.HttpSysOptions.MaxRequestBodySize> | 請參閱 <a href="#maxrequestbodysize">MaxRequestBodySize</a> 小節。 | 30000000 位元組<br>(~28.6 MB) |
 | <xref:Microsoft.AspNetCore.Server.HttpSys.HttpSysOptions.RequestQueueLimit> | 可以加入佇列的最大要求數目。 | 1000 |
 | <xref:Microsoft.AspNetCore.Server.HttpSys.HttpSysOptions.ThrowWriteExceptions> | 指出若回應本文因為用戶端中斷連線而寫入失敗時，應擲回例外狀況或正常完成。 | `false`<br>(正常完成) |
-| <xref:Microsoft.AspNetCore.Server.HttpSys.HttpSysOptions.Timeouts> | 公開 HTTP.sys <xref:Microsoft.AspNetCore.Server.HttpSys.TimeoutManager> 設定，這也可在登錄中設定。 API 連結可提供包括預設值在內每個設定的詳細資訊：<ul><li>[TimeoutManager. DrainEntityBody](xref:Microsoft.AspNetCore.Server.HttpSys.TimeoutManager.DrainEntityBody)： HTTP 伺服器 API 在 keep-alive 連線上清空實體主體所允許的時間。</li><li>[TimeoutManager. EntityBody](xref:Microsoft.AspNetCore.Server.HttpSys.TimeoutManager.EntityBody)：要求實體內容到達的允許時間。</li><li>[TimeoutManager. HeaderWait](xref:Microsoft.AspNetCore.Server.HttpSys.TimeoutManager.HeaderWait)： HTTP 伺服器 API 允許的時間剖析要求標頭。</li><li>[TimeoutManager. IdleConnection](xref:Microsoft.AspNetCore.Server.HttpSys.TimeoutManager.IdleConnection)：允許閒置連接的時間。</li><li>[TimeoutManager. MinSendBytesPerSecond](xref:Microsoft.AspNetCore.Server.HttpSys.TimeoutManager.MinSendBytesPerSecond)：回應的最小傳送速率。</li><li>[TimeoutManager. RequestQueue](xref:Microsoft.AspNetCore.Server.HttpSys.TimeoutManager.RequestQueue)：允許要求在應用程式拾取之前保留在要求佇列中的時間。</li></ul> |  |
+| <xref:Microsoft.AspNetCore.Server.HttpSys.HttpSysOptions.Timeouts> | 公開 HTTP.sys <xref:Microsoft.AspNetCore.Server.HttpSys.TimeoutManager> 設定，這也可在登錄中設定。 API 連結可提供包括預設值在內每個設定的詳細資訊：<ul><li>[TimeoutManager. DrainEntityBody](xref:Microsoft.AspNetCore.Server.HttpSys.TimeoutManager.DrainEntityBody)： HTTP 伺服器 API 在 Keep-Alive 連接上清空實體主體所允許的時間。</li><li>[TimeoutManager. EntityBody](xref:Microsoft.AspNetCore.Server.HttpSys.TimeoutManager.EntityBody)：要求實體內容到達的允許時間。</li><li>[TimeoutManager. HeaderWait](xref:Microsoft.AspNetCore.Server.HttpSys.TimeoutManager.HeaderWait)： HTTP 伺服器 API 允許的時間剖析要求標頭。</li><li>[TimeoutManager. IdleConnection](xref:Microsoft.AspNetCore.Server.HttpSys.TimeoutManager.IdleConnection)：允許閒置連接的時間。</li><li>[TimeoutManager. MinSendBytesPerSecond](xref:Microsoft.AspNetCore.Server.HttpSys.TimeoutManager.MinSendBytesPerSecond)：回應的最小傳送速率。</li><li>[TimeoutManager. RequestQueue](xref:Microsoft.AspNetCore.Server.HttpSys.TimeoutManager.RequestQueue)：允許要求在應用程式拾取之前保留在要求佇列中的時間。</li></ul> |  |
 | <xref:Microsoft.AspNetCore.Server.HttpSys.HttpSysOptions.UrlPrefixes> | 指定 <xref:Microsoft.AspNetCore.Server.HttpSys.UrlPrefixCollection> 以向 HTTP.sys 註冊。 最實用的是 [UrlPrefixCollection.Add](xref:Microsoft.AspNetCore.Server.HttpSys.UrlPrefixCollection.Add*)，可用來將前置詞加入集合。 處置接聽程式之前可隨時修改這些內容。 |  |
 
 <a name="maxrequestbodysize"></a>
@@ -920,12 +921,12 @@ public IActionResult MyActionMethod()
 
    在 Windows 上，請使用 [New-SelfSignedCertificate PowerShell Cmdlet](/powershell/module/pkiclient/new-selfsignedcertificate) 來建立自我簽署的憑證。 如需不支援的範例，請參閱 [UpdateIISExpressSSLForChrome.ps1](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/includes/make-x509-cert/UpdateIISExpressSSLForChrome.ps1) \(英文\)。
 
-   將自我簽署的憑證或 CA 簽署的憑證安裝在伺服器的 [本機電腦]**個人** > **** 存放區中。
+   將自我簽署的憑證或 CA 簽署的憑證安裝在伺服器的 [本機電腦]  存放區中。
 
 1. 如果應用程式是[與架構相依的部署](/dotnet/core/deploying/#framework-dependent-deployments-fdd)，請安裝 .NET Core、.NET Framework 或兩者 (如果應用程式是以 .NET Framework 為目標的 .NET Core 應用程式)。
 
-   * **.Net core**：如果應用程式需要 .net core，請從[.net core 下載](https://dotnet.microsoft.com/download)取得並執行 **.net core 運行**時間安裝程式。 請勿在伺服器上安裝完整的 SDK。
-   * **.NET Framework**：如果應用程式需要 .NET Framework，請參閱 [.NET Framework 安裝指南](/dotnet/framework/install/)。 安裝必要的 .NET Framework。 您可以從 [.NET Core 下載](https://dotnet.microsoft.com/download)頁面取得最新 .NET Framework 的安裝程式。
+   * **.Net core** ：如果應用程式需要 .net core，請從 [.net core 下載](https://dotnet.microsoft.com/download)取得並執行 **.net core 運行** 時間安裝程式。 請勿在伺服器上安裝完整的 SDK。
+   * **.NET Framework** ：如果應用程式需要 .NET Framework，請參閱 [.NET Framework 安裝指南](/dotnet/framework/install/)。 安裝必要的 .NET Framework。 您可以從 [.NET Core 下載](https://dotnet.microsoft.com/download)頁面取得最新 .NET Framework 的安裝程式。
 
    如果應用程式是[自封式部署](/dotnet/core/deploying/#self-contained-deployments-scd)，則應用程式的部署中會包含執行階段。 不需要在伺服器上安裝任何架構。
 
@@ -949,11 +950,11 @@ public IActionResult MyActionMethod()
    HTTP.sys 使用 [HTTP Server API UrlPrefix 字串格式](/windows/win32/http/urlprefix-strings)。
 
    > [!WARNING]
-   > 請**勿**使用最上層萬用字元繫結 (`http://*:80/`與 `http://+:80`)。 最上層萬用字元繫結會導致應用程式安全性弱點。 這對強式與弱式萬用字元皆適用。 請使用明確的主機名稱或 IP 位址，而不要使用萬用字元。 若您擁有整個父網域 (相對於有弱點的 `*.com`) 的控制權，則子網域萬用字元繫結 (例如 `*.mysub.com`) 便不構成安全性風險。 如需詳細資訊，請參閱 [RFC 7230：第5.4 節： Host](https://tools.ietf.org/html/rfc7230#section-5.4)。
+   > 請 **勿** 使用最上層萬用字元繫結 (`http://*:80/`與 `http://+:80`)。 最上層萬用字元繫結會導致應用程式安全性弱點。 這對強式與弱式萬用字元皆適用。 請使用明確的主機名稱或 IP 位址，而不要使用萬用字元。 若您擁有整個父網域 (相對於有弱點的 `*.com`) 的控制權，則子網域萬用字元繫結 (例如 `*.mysub.com`) 便不構成安全性風險。 如需詳細資訊，請參閱 [RFC 7230：第5.4 節： Host](https://tools.ietf.org/html/rfc7230#section-5.4)。
 
 1. 在伺服器上預先註冊 URL 首碼。
 
-   用來設定 HTTP.sys 的內建工具是 *netsh.exe*。 *netsh.exe* 是用來保留 URL 前置詞，並指派 X.509 憑證。 此工具需要系統管理員權限。
+   用來設定 HTTP.sys 的內建工具是 *netsh.exe* 。 *netsh.exe* 是用來保留 URL 前置詞，並指派 X.509 憑證。 此工具需要系統管理員權限。
 
    使用 *netsh.exe* 工具來為應用程式註冊 URL：
 
@@ -961,7 +962,7 @@ public IActionResult MyActionMethod()
    netsh http add urlacl url=<URL> user=<USER>
    ```
 
-   * `<URL>`： (URL) 的完整統一資源定位器。 請勿使用萬用字元繫結。 請使用有效的主機名稱或本機 IP 位址。 URL 必須包含結尾斜線。**
+   * `<URL>`： (URL) 的完整統一資源定位器。 請勿使用萬用字元繫結。 請使用有效的主機名稱或本機 IP 位址。 URL 必須包含結尾斜線。 
    * `<USER>`：指定使用者或使用者組名。
 
    在以下範例中，伺服器的本機 IP 位址是 `10.0.0.4`：
@@ -994,9 +995,9 @@ public IActionResult MyActionMethod()
    為了便於參考，請將 GUID 以套件標記的形式儲存在應用程式中：
 
    * 在 Visual Studio 中：
-     * 在 [方案總管]**** 中的專案上按一下滑鼠右鍵，然後選取 [屬性]****，以開啟應用程式的專案屬性。
-     * 選取 [套件]**** 索引標籤。
-     * 輸入您在 [標記]**** 欄位中建立的 GUID。
+     * 在 [方案總管]  中的專案上按一下滑鼠右鍵，然後選取 [屬性]  ，以開啟應用程式的專案屬性。
+     * 選取 [套件]  索引標籤。
+     * 輸入您在 [標記]  欄位中建立的 GUID。
    * 不是使用 Visual Studio 時：
      * 開啟應用程式的專案檔。
      * 將 `<PackageTags>` 屬性搭配您所建立的 GUID 新增至新的或現有的 `<PropertyGroup>`：

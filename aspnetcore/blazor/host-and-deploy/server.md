@@ -7,6 +7,7 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 08/26/2020
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -18,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/host-and-deploy/server
-ms.openlocfilehash: afbaad2f27359a4a1cac5c5fe1da16d3e80d038f
-ms.sourcegitcommit: 7258e94cf60c16e5b6883138e5e68516751ead0f
+ms.openlocfilehash: 74473eb5c0efcd8798d260b765c848d7e621e534
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 08/29/2020
-ms.locfileid: "89102649"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93055759"
 ---
 # <a name="host-and-deploy-no-locblazor-server"></a>裝載和部署 Blazor Server
 
@@ -37,7 +38,7 @@ ms.locfileid: "89102649"
 
 使用[ Blazor Server 裝載模型](xref:blazor/hosting-models#blazor-server)， Blazor 會在伺服器上從 ASP.NET Core 應用程式內執行。 UI 更新、事件處理及 JavaScript 呼叫會透過連接來處理 [SignalR](xref:signalr/introduction) 。
 
-需要能夠裝載 ASP.NET Core 應用程式的網路伺服器。 使用命令) 時，Visual Studio 包含** Blazor Server 應用程式**專案範本 (`blazorserverside` 範本 [`dotnet new`](/dotnet/core/tools/dotnet-new) 。
+需要能夠裝載 ASP.NET Core 應用程式的網路伺服器。 使用命令) 時，Visual Studio 包含 **Blazor Server 應用程式** 專案範本 (`blazorserverside` 範本 [`dotnet new`](/dotnet/core/tools/dotnet-new) 。
 
 ## <a name="scalability"></a>延展性
 
@@ -55,7 +56,7 @@ ms.locfileid: "89102649"
 
 如需建立安全且可擴充的 Blazor 伺服器應用程式的指引，請參閱 <xref:blazor/security/server/threat-mitigation> 。
 
-針對基本的 *Hello World*樣式應用程式，每個線路會使用大約 250 KB 的記憶體。 電路的大小取決於應用程式的程式碼，以及與每個元件相關聯的狀態維護需求。 建議您在開發期間測量應用程式和基礎結構的資源需求，但下列基準可作為規劃部署目標的起點：如果您希望應用程式支援5000的並行使用者，請考慮將至少 1.3 GB 的伺服器記憶體預算為應用程式 (或 ~ 每位使用者) ~ 273 KB。
+針對基本的 *Hello World* 樣式應用程式，每個線路會使用大約 250 KB 的記憶體。 電路的大小取決於應用程式的程式碼，以及與每個元件相關聯的狀態維護需求。 建議您在開發期間測量應用程式和基礎結構的資源需求，但下列基準可作為規劃部署目標的起點：如果您希望應用程式支援5000的並行使用者，請考慮將至少 1.3 GB 的伺服器記憶體預算為應用程式 (或 ~ 每位使用者) ~ 273 KB。
 
 ### <a name="no-locsignalr-configuration"></a>SignalR 配置
 
@@ -79,7 +80,7 @@ Blazor 使用 Websocket 作為傳輸的最佳方式 SignalR ，是因為延遲�
 
 若要設定應用程式 (並選擇性地布建 Azure SignalR 服務) ：
 
-1. 啟用服務以支援「 *粘滯話*」，其中用戶端會在進行預導 [時重新導向回相同的伺服器](xref:blazor/hosting-models#connection-to-the-server)。 將 `ServerStickyMode` 選項或設定值設定為 `Required` 。 一般而言，應用程式會使用下列 **其中一** 種方法來建立設定：
+1. 啟用服務以支援「 *粘滯話* 」，其中用戶端會在進行預導 [時重新導向回相同的伺服器](xref:blazor/hosting-models#connection-to-the-server)。 將 `ServerStickyMode` 選項或設定值設定為 `Required` 。 一般而言，應用程式會使用下列 **其中一** 種方法來建立設定：
 
    * `Startup.ConfigureServices`:
   
@@ -99,7 +100,7 @@ Blazor 使用 Websocket 作為傳輸的最佳方式 SignalR ，是因為延遲�
        "Azure:SignalR:ServerStickyMode": "Required"
        ```
 
-     * Azure 入口網站中**的 app**service  >  **設定應用程式設定** (**名稱**： `Azure:SignalR:ServerStickyMode` ，**值**： `Required`) 。
+     * Azure 入口網站中 **的 app** service  >  **設定應用程式設定** ( **名稱** ： `Azure:SignalR:ServerStickyMode` ， **值** ： `Required`) 。
 
 1. 在應用程式的 Visual Studio 中建立 Azure 應用程式發佈設定檔 Blazor Server 。
 1. 將 **Azure SignalR 服務** 相依性新增至設定檔。 如果 Azure 訂用帳戶沒有預先存在的 Azure SignalR 服務實例可指派給該應用程式，請選取 [ **建立新的 azure SignalR 服務實例** ] 以布建新的服務實例。

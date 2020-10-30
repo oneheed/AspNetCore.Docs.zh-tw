@@ -7,6 +7,7 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 06/10/2020
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -18,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/progressive-web-app
-ms.openlocfilehash: 4f184a1264614b16ce98ba5474aacd60f175bd8a
-ms.sourcegitcommit: f09407d128634d200c893bfb1c163e87fa47a161
+ms.openlocfilehash: c8ff2fc0f2f4d4e75f535f379ec94ea9de2e3ecb
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 08/26/2020
-ms.locfileid: "88865215"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93055694"
 ---
 # <a name="build-progressive-web-applications-with-aspnet-core-no-locblazor-webassembly"></a>使用 ASP.NET Core 建立漸進式 Web 應用程式 Blazor WebAssembly
 
@@ -46,7 +47,7 @@ ms.locfileid: "88865215"
 
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
-在 [**建立新專案**] 對話方塊中建立新的** Blazor WebAssembly 應用**程式時，選取 [**漸進式 Web 應用程式**] 核取方塊：
+在 [ **建立新專案** ] 對話方塊中建立新的 **Blazor WebAssembly 應用** 程式時，選取 [ **漸進式 Web 應用程式** ] 核取方塊：
 
 ![在 Visual Studio [新增專案] 對話方塊中，已選取 [漸進式 Web 應用程式] 核取方塊。](progressive-web-app/_static/image1.png)
 
@@ -74,7 +75,7 @@ dotnet new blazorwasm -o MyNewProject --pwa
 
 ![Google Chrome 中的確認對話方塊會向使用者顯示 [My：：： no- (Blazor) ：：:P wa] 應用程式的 [安裝] 按鈕。](progressive-web-app/_static/image2.png)
 
-在 iOS 上，訪客可以使用 Safari 的 [ **共用** ] 按鈕和 [ **新增至 Homescreen** ] 選項來安裝 PWA。 在適用于 Android 的 Chrome 上，使用者應選取右上角的 **功能表** 按鈕，然後選取 [ **新增至主畫面**]。
+在 iOS 上，訪客可以使用 Safari 的 [ **共用** ] 按鈕和 [ **新增至 Homescreen** ] 選項來安裝 PWA。 在適用于 Android 的 Chrome 上，使用者應選取右上角的 **功能表** 按鈕，然後選取 [ **新增至主畫面** ]。
 
 一旦安裝之後，應用程式就會出現在其本身的視窗中，而不使用網址列：
 
@@ -96,7 +97,7 @@ dotnet new blazorwasm -o MyNewProject --pwa
 
 1. 發行應用程式。 如需詳細資訊，請參閱<xref:blazor/host-and-deploy/index#publish-the-app>。
 1. 將應用程式部署至支援 HTTPS 的伺服器，並在瀏覽器中以其安全的 HTTPS 位址存取應用程式。
-1. 開啟瀏覽器的開發工具，並確認已在 [**應用程式**] 索引標籤上註冊主機的*服務工作者*：
+1. 開啟瀏覽器的開發工具，並確認已在 [ **應用程式** ] 索引標籤上註冊主機的 *服務工作者* ：
 
    ![Google Chrome 開發人員工具的 [應用程式] 索引標籤會顯示已啟動且正在執行的服務工作者。](progressive-web-app/_static/image4.png)
 
@@ -144,7 +145,7 @@ Blazor的 PWA 範本會產生兩個服務工作者檔案：
 
 BlazorPWA 範本會產生應用程式，每當使用者造訪並具有運作中的網路連線時，就會自動嘗試在背景中自行更新。 其運作方式如下所示：
 
-* 在編譯期間，專案會產生 *服務工作者資產資訊清單*。 根據預設，會呼叫此方法 `service-worker-assets.js` 。 資訊清單會列出應用程式離線運作所需的所有靜態資源，例如 .NET 元件、JavaScript 檔案和 CSS，包括其內容雜湊。 資源清單是由服務工作者載入，因此它知道要快取哪些資源。
+* 在編譯期間，專案會產生 *服務工作者資產資訊清單* 。 根據預設，會呼叫此方法 `service-worker-assets.js` 。 資訊清單會列出應用程式離線運作所需的所有靜態資源，例如 .NET 元件、JavaScript 檔案和 CSS，包括其內容雜湊。 資源清單是由服務工作者載入，因此它知道要快取哪些資源。
 * 每次使用者造訪應用程式時，瀏覽器會 `service-worker.js` `service-worker-assets.js` 在背景中重新要求和。 這些檔案會與現有已安裝的服務工作者進行位元組的位元組比較。 如果伺服器傳回任何這些檔案的變更內容，服務工作者會嘗試安裝新版的。
 * 當您安裝新的版本時，服務背景工作會為離線資源建立新的個別快取，並開始使用中所列的資源來填入快取 `service-worker-assets.js` 。 此邏輯會在內部的函式中執行 `onInstall` `service-worker.published.js` 。
 * 當所有資源都已載入且沒有錯誤，且所有內容雜湊相符時，此程式就會順利完成。 如果成功，新的服務工作者會進入 *等待啟用* 狀態。 一旦使用者關閉應用程式 (沒有剩餘的應用程式索引標籤或 windows) ，新的服務工作者就會變成使用中 *狀態* ，並用於後續的應用程式造訪。 舊的服務工作者及其快取會被刪除。
@@ -213,7 +214,7 @@ const shouldServeIndexHtml = event.request.mode === 'navigate'
 > [!IMPORTANT]
 > 新增 `ServiceWorkerAssetsManifestItem` 不會導致檔案在應用程式的目錄中發行 `wwwroot` 。 發佈輸出必須個別控制。 `ServiceWorkerAssetsManifestItem`只會導致服務背景工作角色資訊清單中出現額外的專案。
 
-## <a name="push-notifications"></a>推播通知
+## <a name="push-notifications"></a>推送通知
 
 Pwa 與其他任何 PWA 一樣， Blazor WebAssembly 都可以接收來自後端伺服器的推播通知。 即使使用者未主動使用應用程式，伺服器也可以隨時傳送推播通知。 例如，您可以在不同的使用者執行相關動作時傳送推播通知。
 

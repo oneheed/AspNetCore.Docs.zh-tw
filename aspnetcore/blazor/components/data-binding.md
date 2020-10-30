@@ -7,6 +7,7 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 10/22/2020
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -18,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/components/data-binding
-ms.openlocfilehash: fd337a6fb54c418ff08af18014073a6b3f07bb8c
-ms.sourcegitcommit: d5ecad1103306fac8d5468128d3e24e529f1472c
+ms.openlocfilehash: f1730ed366fc81444ffe54e88bcd33147efb0aa7
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 10/23/2020
-ms.locfileid: "92491456"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93056292"
 ---
 # <a name="aspnet-core-no-locblazor-data-binding"></a>ASP.NET Core Blazor 資料系結
 
@@ -331,8 +332,8 @@ Password:
 
 您可以透過任意數目的嵌套元件進行系結，但您必須遵守單向的資料流程：
 
-* 變更通知會在階層中 *往上流動*。
-* 新的參數值會在階層中 *往下流動*。
+* 變更通知會在階層中 *往上流動* 。
+* 新的參數值會在階層中 *往下流動* 。
 
 常見和建議的方法是只將基礎資料儲存在父元件中，以避免任何必須更新狀態的混淆。
 

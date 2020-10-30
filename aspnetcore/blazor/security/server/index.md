@@ -7,6 +7,7 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 10/06/2020
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -18,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/security/server/index
-ms.openlocfilehash: d6d0f6f859dbaef98c6c8a9c53fe9858705cdc0a
-ms.sourcegitcommit: 139c998d37e9f3e3d0e3d72e10dbce8b75957d89
+ms.openlocfilehash: 108fb3a8a24295cad43fd8c83303abd95a7ecd33
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 10/07/2020
-ms.locfileid: "91805501"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93055473"
 ---
 # <a name="secure-aspnet-core-no-locblazor-server-apps"></a>保護 ASP.NET Core Blazor Server 應用程式的安全
 
@@ -39,12 +40,12 @@ Blazor Server 應用程式會以與 ASP.NET Core 應用程式相同的方式來�
 
 遵循中的 Visual Studio 指導方針 <xref:blazor/tooling> ，建立 Blazor Server 具有驗證機制的新專案。
 
-在 [**建立新的 ASP.NET Core Web 應用程式**] 對話方塊中選擇** Blazor Server 應用程式**範本之後，請選取 [**驗證**] 下的 [**變更**]。
+在 [ **建立新的 ASP.NET Core Web 應用程式** ] 對話方塊中選擇 **Blazor Server 應用程式** 範本之後，請選取 [ **驗證** ] 下的 [ **變更** ]。
 
 對話方塊隨即開啟，並提供可供其他 ASP.NET Core 專案使用的相同驗證機制集合：
 
 * **無驗證**
-* **個別使用者帳戶**：可儲存使用者帳戶：
+* **個別使用者帳戶** ：可儲存使用者帳戶：
   * 在使用 ASP.NET Core 系統的應用程式內 [Identity](xref:security/authentication/identity) 。
   * 使用 [Azure AD B2C](xref:security/authentication/azure-ad-b2c) 儲存。
 * **公司或學校帳戶**
@@ -80,7 +81,7 @@ dotnet new blazorserver -o {APP NAME} -au {AUTHENTICATION}
 
 1. 遵循中的 Visual Studio for Mac 指導方針 <xref:blazor/tooling> 。
 
-1. 在 [**設定新的 Blazor Server 應用程式**] 步驟中，從 [**驗證**] 下拉式清單中選取 [**應用程式內) 的個別驗證 (** 。
+1. 在 [ **設定新的 Blazor Server 應用程式** ] 步驟中，從 [ **驗證** ] 下拉式清單中選取 [ **應用程式內) 的個別驗證 (** 。
 
 1. 應用程式會針對儲存在應用程式中的個別使用者建立 ASP.NET Core Identity 。
 

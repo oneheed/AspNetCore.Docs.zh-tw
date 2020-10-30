@@ -6,6 +6,7 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 10/20/2020
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -17,18 +18,18 @@ no-loc:
 - Razor
 - SignalR
 uid: fundamentals/request-features
-ms.openlocfilehash: 879b775ba2998ee803708ebf231b5fcd363b811c
-ms.sourcegitcommit: b5ebaf42422205d212e3dade93fcefcf7f16db39
+ms.openlocfilehash: d906474b0fd291cc4a68390f390b2bf538e21eff
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 10/21/2020
-ms.locfileid: "92326433"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93053705"
 ---
 # <a name="request-features-in-aspnet-core"></a>ASP.NET Core 中的要求功能
 
 作者：[Steve Smith](https://ardalis.com/)
 
-`HttpContext`應用程式和中介軟體用來處理要求的 API 有一個抽象層 undernieth 它稱為*功能介面*。 每個功能介面都會提供所公開之功能的詳細子集 `HttpContext` 。 這些介面可以加入、修改、包裝、取代，或甚至由伺服器或中介軟體移除，因為要求會經過處理，而不需要重新執行整個 `HttpContext` 。 它們也可以用來模擬測試時的功能。
+`HttpContext`應用程式和中介軟體用來處理要求的 API 有一個抽象層 undernieth 它稱為 *功能介面* 。 每個功能介面都會提供所公開之功能的詳細子集 `HttpContext` 。 這些介面可以加入、修改、包裝、取代，或甚至由伺服器或中介軟體移除，因為要求會經過處理，而不需要重新執行整個 `HttpContext` 。 它們也可以用來模擬測試時的功能。
 
 ## <a name="feature-collections"></a>功能集合
 

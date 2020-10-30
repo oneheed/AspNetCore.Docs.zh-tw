@@ -7,6 +7,7 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 05/19/2020
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -18,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/security/content-security-policy
-ms.openlocfilehash: 09f4cb5ba11feb7d81a410dd3869f9863d104d0e
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: 66fd41abe4f85071797bacc0a5531bbab35bd227
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88627841"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93055590"
 ---
 # <a name="enforce-a-content-security-policy-for-aspnet-core-no-locblazor"></a>針對 ASP.NET Core 強制執行內容安全性原則 Blazor
 
@@ -153,7 +154,7 @@ ms.locfileid: "88627841"
 * [報表至](https://developer.mozilla.org/docs/Web/HTTP/Headers/Content-Security-Policy/report-to)
 * [報告-uri](https://developer.mozilla.org/docs/Web/HTTP/Headers/Content-Security-Policy/report-uri)
 
-雖然不再 `report-uri` 建議使用，但 `report-to` 在所有主要瀏覽器都支援之前，都應該使用這兩個指示詞。 請勿單獨使用 `report-uri` ，因為的支援隨時 `report-uri` 都可從*at any time*瀏覽器卸載。 `report-uri`當完全受支援時，請移除原則中的支援 `report-to` 。 若要追蹤的採用 `report-to` ，請參閱 [我可以使用： report to](https://caniuse.com/#feat=mdn-http_headers_csp_content-security-policy_report-to)。
+雖然不再 `report-uri` 建議使用，但 `report-to` 在所有主要瀏覽器都支援之前，都應該使用這兩個指示詞。 請勿單獨使用 `report-uri` ，因為的支援隨時 `report-uri` 都可從 *at any time* 瀏覽器卸載。 `report-uri`當完全受支援時，請移除原則中的支援 `report-to` 。 若要追蹤的採用 `report-to` ，請參閱 [我可以使用： report to](https://caniuse.com/#feat=mdn-http_headers_csp_content-security-policy_report-to)。
 
 每次發行時測試並更新應用程式的原則。
 

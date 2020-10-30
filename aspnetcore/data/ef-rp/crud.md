@@ -5,6 +5,7 @@ description: 頁面第2部分 Razor 和 Entity Framework 教學課程系列。
 ms.author: riande
 ms.date: 07/22/2019
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -16,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: data/ef-rp/crud
-ms.openlocfilehash: 083214c01dbec6c6f44d6b82f5b514a029e57cbe
-ms.sourcegitcommit: d1a897ebd89daa05170ac448e4831d327f6b21a8
+ms.openlocfilehash: c5b9be64ea30cce7a3178bfbb244ef893e9639d2
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 10/01/2020
-ms.locfileid: "91606739"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93053861"
 ---
 # <a name="part-2-no-locrazor-pages-with-ef-core-in-aspnet-core---crud"></a>第2部分： Razor ASP.NET Core 中有 EF Core 的頁面-CRUD
 
@@ -63,7 +64,7 @@ Students 頁面的 Scaffold 程式碼不包含註冊資料。 在本節中，您
 
 上述程式碼會以迴圈逐一巡覽 `Enrollments` 導覽屬性中的實體。 針對每個註冊，會顯示課程標題及成績。 課程標題會從儲存於 Enrollments 實體之 `Course` 導覽屬性中的課程 (Course) 實體擷取。
 
-執行應用程式，選取 [Students]**** 索引標籤，然後按一下學生的 [詳細資料]**** 連結。 將會顯示所選取學生的課程及成績清單。
+執行應用程式，選取 [Students]  索引標籤，然後按一下學生的 [詳細資料]  連結。 將會顯示所選取學生的課程及成績清單。
 
 ### <a name="ways-to-read-one-entity"></a>讀取單一實體的方式
 
@@ -183,7 +184,7 @@ Students 頁面的 Scaffold 程式碼不包含註冊資料。 在本節中，您
 * 攔截到資料庫例外狀況。
 * [刪除] 頁面的 `OnGetAsync` 方法會以 `saveChangesError=true` 呼叫。
 
-將錯誤訊息加入至 *Pages/student/Delete。 cshtml*：
+將錯誤訊息加入至 *Pages/student/Delete。 cshtml* ：
 
 [!code-cshtml[Main](intro/samples/cu30/Pages/Students/Delete.cshtml?highlight=10)]
 
@@ -231,7 +232,7 @@ Students 頁面的 Scaffold 程式碼不包含註冊資料。 在本節中，會
 
 上述程式碼會以迴圈逐一巡覽 `Enrollments` 導覽屬性中的實體。 針對每個註冊，會顯示課程標題及成績。 課程標題會從儲存於 Enrollments 實體之 `Course` 導覽屬性中的課程 (Course) 實體擷取。
 
-執行應用程式，選取 [Students]**** 索引標籤，然後按一下學生的 [詳細資料]**** 連結。 將會顯示所選取學生的課程及成績清單。
+執行應用程式，選取 [Students]  索引標籤，然後按一下學生的 [詳細資料]  連結。 將會顯示所選取學生的課程及成績清單。
 
 ### <a name="ways-to-read-one-entity"></a>讀取單一實體的方式
 
@@ -346,7 +347,7 @@ Students 頁面的 Scaffold 程式碼不包含註冊資料。 在本節中，會
 * 攔截到資料庫例外狀況。
 * [刪除] 頁面的 `OnGetAsync` 方法會以 `saveChangesError=true` 呼叫。
 
-將錯誤訊息加入至 [刪除] Razor 頁面， (*Pages/Student/Delete. cshtml*) ：
+將錯誤訊息加入至 [刪除] Razor 頁面， ( *Pages/Student/Delete. cshtml* ) ：
 
 [!code-cshtml[Main](intro/samples/cu30/Pages/Students/Delete.cshtml?highlight=10)]
 
@@ -404,15 +405,15 @@ Scaffold 程式碼會為 [建立]、[編輯]、[刪除] 頁面使用下列模式
 
 ## <a name="customize-the-details-page"></a>自訂 [詳細資料] 頁面
 
-瀏覽至 `Pages/Students` 頁面。 在 *Pages/Students/Index.cshtml* 檔案中，**編輯**、**詳細資料**、**刪除** 連結是由[錨點標籤協助程式](xref:mvc/views/tag-helpers/builtin-th/anchor-tag-helper)所產生。
+瀏覽至 `Pages/Students` 頁面。 在 *Pages/Students/Index.cshtml* 檔案中， **編輯** 、 **詳細資料** 、 **刪除** 連結是由 [錨點標籤協助程式](xref:mvc/views/tag-helpers/builtin-th/anchor-tag-helper)所產生。
 
 [!code-cshtml[](intro/samples/cu21/Pages/Students/Index1.cshtml?name=snippet)]
 
-執行應用程式並選取 [詳細資料]**** 連結。 URL 的格式為 `http://localhost:5000/Students/Details?id=2`。 使用 (`?id=2`) 查詢字串來傳遞 Student ID。
+執行應用程式並選取 [詳細資料]  連結。 URL 的格式為 `http://localhost:5000/Students/Details?id=2`。 使用 (`?id=2`) 查詢字串來傳遞 Student ID。
 
 更新 [編輯]、[詳細資料] 和 [刪除] Razor 頁面，以使用 `"{id:int}"` 路由範本。 將這些頁面每一頁的頁面指示詞從 `@page` 變更為 `@page "{id:int}"`。
 
-對使用 "{id:int}" 路由範本的頁面提出的要求若**未**包含整數路由值，將傳回 HTTP 404 (找不到) 錯誤。 例如，`http://localhost:5000/Students/Details` 傳回 404 錯誤。 若要使識別碼成為選擇性，請將 `?` 附加至路由條件約束：
+對使用 "{id:int}" 路由範本的頁面提出的要求若 **未** 包含整數路由值，將傳回 HTTP 404 (找不到) 錯誤。 例如，`http://localhost:5000/Students/Details` 傳回 404 錯誤。 若要使識別碼成為選擇性，請將 `?` 附加至路由條件約束：
 
  ```cshtml
 @page "{id:int?}"
@@ -438,7 +439,7 @@ Students [索引] 頁面的 Scaffold 程式碼不包含 `Enrollments` 屬性。 
 
 ### <a name="display-related-enrollments-on-the-details-page"></a>在 [詳細資料] 頁面上顯示相關的註冊
 
-開啟 *Pages/Students/Details.cshtml*。 請新增下列醒目顯示的程式碼，以顯示一份註冊清單：
+開啟 *Pages/Students/Details.cshtml* 。 請新增下列醒目顯示的程式碼，以顯示一份註冊清單：
 
 [!code-cshtml[](intro/samples/cu21/Pages/Students/Details.cshtml?highlight=32-53)]
 
@@ -446,7 +447,7 @@ Students [索引] 頁面的 Scaffold 程式碼不包含 `Enrollments` 屬性。 
 
 上述程式碼會以迴圈逐一巡覽 `Enrollments` 導覽屬性中的實體。 針對每個註冊，會顯示課程標題及成績。 課程標題會從儲存於 Enrollments 實體之 `Course` 導覽屬性中的課程 (Course) 實體擷取。
 
-執行應用程式，選取 [Students]**** 索引標籤，然後按一下學生的 [詳細資料]**** 連結。 將會顯示所選取學生的課程及成績清單。
+執行應用程式，選取 [Students]  索引標籤，然後按一下學生的 [詳細資料]  連結。 將會顯示所選取學生的課程及成績清單。
 
 ## <a name="update-the-create-page"></a>更新 [建立] 頁面
 

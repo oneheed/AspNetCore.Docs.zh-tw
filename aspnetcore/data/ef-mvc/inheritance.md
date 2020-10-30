@@ -7,6 +7,7 @@ ms.custom: mvc
 ms.date: 03/27/2019
 ms.topic: tutorial
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -18,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: data/ef-mvc/inheritance
-ms.openlocfilehash: fabb0ed9c0f64a529b516d521d60a7d862e2654a
-ms.sourcegitcommit: d60bfd52bfb559e805abd654b87a2a0c7eb69cf8
+ms.openlocfilehash: 581a31bad4069523699fbbac63862c9dff12034d
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 10/06/2020
-ms.locfileid: "91754563"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93054212"
 ---
 # <a name="tutorial-implement-inheritance---aspnet-mvc-with-ef-core"></a>教學課程：執行繼承-使用 EF Core ASP.NET MVC
 
@@ -97,7 +98,7 @@ School 資料模型中的 `Instructor` 和 `Student` 類別有數個完全相同
 
 ## <a name="add-person-to-the-model"></a>將 Person 新增至模型
 
-將 Person 實體類型新增至 *SchoolContext.cs*。 新增的行已醒目提示。
+將 Person 實體類型新增至 *SchoolContext.cs* 。 新增的行已醒目提示。
 
 [!code-csharp[](intro/samples/cu/Data/SchoolContext.cs?name=snippet_AfterInheritance&highlight=19,30)]
 
@@ -154,11 +155,11 @@ dotnet ef database update
 
 執行應用程式，然後嘗試各種頁面。 一切項目的運作與之前一樣。
 
-在 [SQL Server 物件總管]**** 中，展開 [資料連線/SchoolContext]****，然後展開 [資料表]****，您會看到 Person 資料表已取代 Student 和 Instructor 資料表。 開啟 Person 資料表設計工具，您會看到它包含了過去位在 Student 和 Instructor 資料表中的所有資料行。
+在 [SQL Server 物件總管]  中，展開 [資料連線/SchoolContext]  ，然後展開 [資料表]  ，您會看到 Person 資料表已取代 Student 和 Instructor 資料表。 開啟 Person 資料表設計工具，您會看到它包含了過去位在 Student 和 Instructor 資料表中的所有資料行。
 
 ![SSOX 中的 Person 資料表](inheritance/_static/ssox-person-table.png)
 
-以滑鼠右鍵按一下 Person 資料表，然後按一下 [顯示資料表資料]**** 以查看鑑別子資料行。
+以滑鼠右鍵按一下 Person 資料表，然後按一下 [顯示資料表資料]  以查看鑑別子資料行。
 
 ![SSOX 中的 Person 資料 - 資料表資料](inheritance/_static/ssox-person-data.png)
 

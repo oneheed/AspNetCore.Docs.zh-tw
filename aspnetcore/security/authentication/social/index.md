@@ -6,6 +6,7 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 01/23/2020
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -17,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: security/authentication/social/index
-ms.openlocfilehash: da025cb8dced8ac8a6ecf559d4de7795c9797f71
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: 1f7c8cd0716f1ada3517add0d37a09e419f38774
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88634276"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93053302"
 ---
 # <a name="facebook-google-and-external-provider-authentication-in-aspnet-core"></a>ASP.NET Core 中的 Facebook、Google 及外部提供者驗證
 
@@ -44,11 +45,11 @@ ms.locfileid: "88634276"
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
 * 建立新專案。
-* 選取 [ASP.NET Core Web 應用程式]**** 和 [下一步]****。
-* 提供**專案名稱**並確認或變更**位置**。 選取 [建立]。
-* 在下拉式 (**ASP.NET Core {X. Y}**) 中選取最新版本的 ASP.NET Core，然後選取 [ **Web 應用程式**]。
-* 選取 [驗證]**** 下的 [變更]****，並將驗證設定為 [個別使用者帳戶]****。 選取 [確定]。
-* 在 [建立新的 ASP.NET Core Web 應用程式]**** 視窗中選取 [建立]****。
+* 選取 [ASP.NET Core Web 應用程式]  和 [下一步]  。
+* 提供 **專案名稱** 並確認或變更 **位置** 。 選取 [建立]。
+* 在下拉式 ( **ASP.NET Core {X. Y}** ) 中選取最新版本的 ASP.NET Core，然後選取 [ **Web 應用程式** ]。
+* 選取 [驗證]  下的 [變更]  ，並將驗證設定為 [個別使用者帳戶]  。 選取 [確定]  。
+* 在 [建立新的 ASP.NET Core Web 應用程式]  視窗中選取 [建立]  。
 
 # <a name="visual-studio-code--visual-studio-for-mac"></a>[Visual Studio Code / Visual Studio for Mac](#tab/visual-studio-code+visual-studio-mac)
 
@@ -71,21 +72,21 @@ ms.locfileid: "88634276"
   * 此 `dotnet new` 命令會 Razor 在 *WebApp1* 資料夾中建立新的頁面專案。
   * `-au Individual` 會建立程式碼以進行個別驗證。
   * `-uld` 使用 LocalDB，此為適用于 Windows 的 SQL Server Express 輕量版本。 省略 `-uld` 以使用 SQLite。
-  * `code` 命令會在新的 Visual Studio Code 執行個體中開啟 [WebApp1]** 資料夾。
+  * `code` 命令會在新的 Visual Studio Code 執行個體中開啟 [WebApp1]  資料夾。
 
 ---
 
 ## <a name="apply-migrations"></a>套用移轉
 
-* 執行應用程式並選取 [登錄]**** 連結。
-* 輸入新帳戶的電子郵件和密碼，然後選取 [註冊]****。
+* 執行應用程式並選取 [登錄]  連結。
+* 輸入新帳戶的電子郵件和密碼，然後選取 [註冊]  。
 * 遵循指示以套用移轉。
 
 [!INCLUDE[Forward request information when behind a proxy or load balancer section](includes/forwarded-headers-middleware.md)]
 
 ## <a name="use-secretmanager-to-store-tokens-assigned-by-login-providers"></a>使用 SecretManager 來儲存登入提供者指派的權杖
 
-社交登入提供者會在註冊程序期間指派**應用程式識別碼**和**應用程式密碼**權杖。 確切權杖名稱會依提供者而有所不同。 這些權杖代表您的應用程式用來存取其 API 的認證。 這些權杖會組成「祕密」，在[祕密管理員](xref:security/app-secrets#secret-manager)的協助下連結到您的應用程式設定。 相較於在設定檔 (例如 *appsettings.json*) 中儲存權杖，祕密管理員是較安全的替代方案。
+社交登入提供者會在註冊程序期間指派 **應用程式識別碼** 和 **應用程式密碼** 權杖。 確切權杖名稱會依提供者而有所不同。 這些權杖代表您的應用程式用來存取其 API 的認證。 這些權杖會組成「祕密」，在[祕密管理員](xref:security/app-secrets#secret-manager)的協助下連結到您的應用程式設定。 秘密管理員是將權杖儲存在設定檔中的更安全替代方法，例如 *appsettings.json* 。
 
 > [!IMPORTANT]
 > 祕密管理員僅供用於開發用途。 您可以透過 [Azure Key Vault 設定提供者](xref:security/key-vault-configuration)儲存及保護 Azure 測試與生產祕密。
@@ -110,7 +111,7 @@ ms.locfileid: "88634276"
 
 若要建立密碼，並使用您在外部提供者登入程序期間所設的電子郵件進行登入：
 
-* 選取右上角的 [Hello &lt;電子郵件別名&gt;]**** 連結以瀏覽至 [管理]**** 檢視。
+* 選取右上角的 [Hello &lt;電子郵件別名&gt;]  連結以瀏覽至 [管理]  檢視。
 
 ![Web 應用程式的 [管理] 檢視](index/_static/pass1a.png)
 

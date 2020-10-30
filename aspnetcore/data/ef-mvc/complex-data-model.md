@@ -7,6 +7,7 @@ ms.custom: mvc
 ms.date: 03/27/2019
 ms.topic: tutorial
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -18,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: data/ef-mvc/complex-data-model
-ms.openlocfilehash: 07f5e910236f78105c039e462ab51d6e62b09439
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: cee9e9eb4c5435f3f63f7d1d04f131d88effe9f6
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88626931"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93054472"
 ---
 # <a name="tutorial-create-a-complex-data-model---aspnet-mvc-with-ef-core"></a>教學課程：建立複雜的資料模型-使用 EF Core ASP.NET MVC
 
@@ -117,11 +118,11 @@ dotnet ef migrations add MaxLengthOnNames
 dotnet ef database update
 ```
 
-`migrations add` 命令會警告可能發生資料遺失，因為該項變更縮短了兩個資料行的最大長度。  遷移會建立名為* \<timeStamp> _MaxLengthOnNames .cs*的檔案。 此檔案包含了 `Up` 方法中的程式碼，可更新資料庫，使其符合目前的資料模型。 `database update` 命令執行了該程式碼。
+`migrations add` 命令會警告可能發生資料遺失，因為該項變更縮短了兩個資料行的最大長度。  遷移會建立名為 *\<timeStamp> _MaxLengthOnNames .cs* 的檔案。 此檔案包含了 `Up` 方法中的程式碼，可更新資料庫，使其符合目前的資料模型。 `database update` 命令執行了該程式碼。
 
 Entity Framework 會使用移轉檔案名稱前置的時間戳記來排序移轉。 您可以在執行 update-database 命令前建立多個移轉，然後所有的移轉便會依照其建立的先後順序套用。
 
-請執行應用程式、選取 [Students]**** 索引標籤、按一下 [建立新項目]****，然後嘗試輸入長度超過 50 個字元的名稱。 應用程式應該會防止您這麼做。 
+請執行應用程式、選取 [Students]  索引標籤、按一下 [建立新項目]  ，然後嘗試輸入長度超過 50 個字元的名稱。 應用程式應該會防止您這麼做。 
 
 ### <a name="the-column-attribute"></a>Column 屬性
 
@@ -145,7 +146,7 @@ dotnet ef migrations add ColumnFirstName
 dotnet ef database update
 ```
 
-在 [SQL Server 物件總管]**** 中，按兩下 [Student]**** 資料表來開啟 Student 資料表設計工具。
+在 [SQL Server 物件總管]  中，按兩下 [Student]  資料表來開啟 Student 資料表設計工具。
 
 ![移轉之後 SSOX 中的 Students 資料表](complex-data-model/_static/ssox-after-migration.png)
 
@@ -223,7 +224,7 @@ public OfficeAssignment OfficeAssignment { get; set; }
 
 ![OfficeAssignment 實體](complex-data-model/_static/officeassignment-entity.png)
 
-使用下列程式碼建立 *Models/OfficeAssignment.cs*：
+使用下列程式碼建立 *Models/OfficeAssignment.cs* ：
 
 [!code-csharp[](intro/samples/cu/Models/OfficeAssignment.cs)]
 
@@ -299,7 +300,7 @@ public ICollection<CourseAssignment> CourseAssignments { get; set; }
 
 ![部門實體](complex-data-model/_static/department-entity.png)
 
-使用下列程式碼建立 *Models/Department.cs*：
+使用下列程式碼建立 *Models/Department.cs* ：
 
 [!code-csharp[](intro/samples/cu/Models/Department.cs?name=snippet_Begin)]
 
@@ -369,7 +370,7 @@ public Student Student { get; set; }
 
 ## <a name="many-to-many-relationships"></a>多對多關聯性
 
-Student 和 Course 實體之間存在一個多對多關聯性，且 Enrollment 實體的功能便是多對多聯結資料表，其在資料庫中帶有*承載*。 「帶有承載」的意思是 Enrollment 資料表除了聯結資料表的外部索引鍵之外，還包含了額外的資料 (在此案例中為主索引鍵和 Grade 屬性)。
+Student 和 Course 實體之間存在一個多對多關聯性，且 Enrollment 實體的功能便是多對多聯結資料表，其在資料庫中帶有 *承載* 。 「帶有承載」的意思是 Enrollment 資料表除了聯結資料表的外部索引鍵之外，還包含了額外的資料 (在此案例中為主索引鍵和 Grade 屬性)。
 
 下列圖例展示了在實體圖表中這些關聯性的樣子。 (此圖表使用了 EF 6.x 的 Entity Framework Power Tools 產生。建立圖表不是此教學課程的一部分，其僅作為展示之用。)
 
@@ -385,7 +386,7 @@ Student 和 Course 實體之間存在一個多對多關聯性，且 Enrollment �
 
 ![CourseAssignment 實體](complex-data-model/_static/courseassignment-entity.png)
 
-使用下列程式碼建立 *Models/CourseAssignment.cs*：
+使用下列程式碼建立 *Models/CourseAssignment.cs* ：
 
 [!code-csharp[](intro/samples/cu/Models/CourseAssignment.cs)]
 
@@ -481,7 +482,7 @@ Done. To undo this action, use 'ef migrations remove'
 
 ## <a name="change-the-connection-string"></a>變更連接字串
 
-您現在在 `DbInitializer` 類別中已有了新的程式碼，可將新實體的種子資料新增至空白資料庫中。 若要使 EF 建立新的空白資料庫，將位於 *appsettings.json* 連接字串中的資料庫名稱變更為 ContosoUniversity3 或您所使用之電腦上未用過的其他名稱。
+您現在在 `DbInitializer` 類別中已有了新的程式碼，可將新實體的種子資料新增至空白資料庫中。 若要讓 EF 建立新的空白資料庫，請將連接字串中的資料庫名稱變更 *appsettings.json* 為 ContosoUniversity3，或是您所使用的電腦上未使用的其他名稱。
 
 ```json
 {
@@ -490,10 +491,10 @@ Done. To undo this action, use 'ef migrations remove'
   },
 ```
 
-將您的變更儲存到 *appsettings.json*。
+將您的變更儲存至 *appsettings.json* 。
 
 > [!NOTE]
-> 如果您不想變更資料庫名稱，替代方法是刪除資料庫。 使用 [SQL Server 物件總管]**** (SSOX) 或 `database drop` CLI 命令：
+> 如果您不想變更資料庫名稱，替代方法是刪除資料庫。 使用 [SQL Server 物件總管]  (SSOX) 或 `database drop` CLI 命令：
 >
 > ```dotnetcli
 > dotnet ef database drop
@@ -509,13 +510,13 @@ dotnet ef database update
 
 執行應用程式以執行 `DbInitializer.Initialize` 方法並填入新資料庫。
 
-如同先前操作，在 SSOX 中開啟資料庫，展開 [資料表]**** 節點以查看所有已建立的資料表。 (若您先前開啟的 SSOX 還在，請按一下 [重新整理]**** 按鈕。)
+如同先前操作，在 SSOX 中開啟資料庫，展開 [資料表]  節點以查看所有已建立的資料表。 (若您先前開啟的 SSOX 還在，請按一下 [重新整理]  按鈕。)
 
 ![SSOX 中的資料表](complex-data-model/_static/ssox-tables.png)
 
 執行應用程式以觸發植入資料庫的初始設定式程式碼。
 
-以滑鼠右鍵按一下 **CourseAssignment** 資料表，然後選取 [檢視資料]**** 以驗證其中已有資料。
+以滑鼠右鍵按一下  以驗證其中已有資料。
 
 ![SSOX 中的 CourseAssignment 資料](complex-data-model/_static/ssox-ci-data.png)
 

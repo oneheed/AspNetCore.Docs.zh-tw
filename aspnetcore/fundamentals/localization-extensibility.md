@@ -7,6 +7,7 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 08/03/2019
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -18,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: fundamentals/localization-extensibility
-ms.openlocfilehash: 2e1041ed4cce3c3919d75ff47e2bc24fc446e9c3
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: a6ef5a547e6ccba6771cdf892a9636f83d6796b1
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88627607"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93053731"
 ---
 # <a name="localization-extensibility"></a>當地語系化擴充性
 
@@ -104,7 +105,7 @@ options.AddInitialRequestCultureProvider(new CustomRequestCultureProvider(async 
 
 <xref:Microsoft.AspNetCore.Localization.RequestCultureProvider> 的新實作可建立來從自訂來源判斷要求文化特性資訊。 例如，自訂來源可以是設定檔或資料庫。
 
-下列範例顯示 `AppSettingsRequestCultureProvider`，其會擴充 <xref:Microsoft.AspNetCore.Localization.RequestCultureProvider> 以判斷來自 *appsettings.json* 的要求文化特性資訊：
+下列範例會顯示 `AppSettingsRequestCultureProvider` ，它會擴充 <xref:Microsoft.AspNetCore.Localization.RequestCultureProvider> 以判斷來自的要求文化特性資訊 *appsettings.json* ：
 
 ```csharp
 public class AppSettingsRequestCultureProvider : RequestCultureProvider

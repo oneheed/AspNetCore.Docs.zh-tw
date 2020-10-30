@@ -5,6 +5,7 @@ description: 本文介紹可攜式物件檔案，並概述在具有 Orchard Core
 ms.author: scaddie
 ms.date: 09/26/2017
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -16,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: fundamentals/portable-object-localization
-ms.openlocfilehash: f471c5b7511434cf42717e52ef271663c2e36647
-ms.sourcegitcommit: 6ecdc481d5b9a10d2c6e091217f017b36bdba957
+ms.openlocfilehash: 2e28ebaf1962ebd834c43f1cfbc28929b1937c40
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 09/15/2020
-ms.locfileid: "90456045"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93053718"
 ---
 # <a name="configure-portable-object-localization-in-aspnet-core"></a>使用 ASP.NET Core 設定可攜式物件當地語系化
 
@@ -38,7 +39,7 @@ ms.locfileid: "90456045"
 ## <a name="what-is-a-po-file"></a>什麼是 PO 檔案？
 
 PO 檔案以文字檔的形式散發，其中包含給定語言的翻譯字串。 使用 PO 檔案而不是使用 *.resx* 檔案的一些優點包括：
-- PO 檔案支援複數表示；*.resx* 檔案不支援複數表示。
+- PO 檔案支援複數表示； *.resx* 檔案不支援複數表示。
 - PO 檔案不會像 *.resx* 檔案一樣進行編譯。 因此，不需要特殊化工具與建置步驟。
 - PO 檔案適用於共同作業的線上編輯工具。
 
@@ -96,7 +97,7 @@ msgstr[1] "Les adresses email sont \"{0}\""
 
 [!code-csharp[](localization/sample/3.x/POLocalization/Startup.cs?name=snippet_Configure&highlight=15)]
 
-將下列程式碼新增至您 Razor 選擇的觀點。 此範例中使用 *About.cshtml*。
+將下列程式碼新增至您 Razor 選擇的觀點。 此範例中使用 *About.cshtml* 。
 
 [!code-cshtml[](localization/sample/3.x/POLocalization/Views/Home/About.cshtml)]
 
@@ -104,7 +105,7 @@ msgstr[1] "Les adresses email sont \"{0}\""
 
 ### <a name="creating-a-po-file"></a>建立 PO 檔案
 
-在您的應用程式根資料夾中，建立名為 po 的檔案* \<culture code> 。* 在此範例中，檔案名稱是 *fr.po*，因為使用法文語言：
+在您的應用程式根資料夾中，建立名為 po 的檔案 *\<culture code> 。* 在此範例中，檔案名稱是 *fr.po* ，因為使用法文語言：
 
 [!code-text[](localization/sample/3.x/POLocalization/fr.po)]
 
@@ -253,7 +254,7 @@ services.AddPortableObjectLocalization(options => options.ResourcesPath = "Local
 ## <a name="what-is-a-po-file"></a>什麼是 PO 檔案？
 
 PO 檔案以文字檔的形式散發，其中包含給定語言的翻譯字串。 使用 PO 檔案而不是使用 *.resx* 檔案的一些優點包括：
-- PO 檔案支援複數表示；*.resx* 檔案不支援複數表示。
+- PO 檔案支援複數表示； *.resx* 檔案不支援複數表示。
 - PO 檔案不會像 *.resx* 檔案一樣進行編譯。 因此，不需要特殊化工具與建置步驟。
 - PO 檔案適用於共同作業的線上編輯工具。
 
@@ -311,7 +312,7 @@ msgstr[1] "Les adresses email sont \"{0}\""
 
 [!code-csharp[](localization/sample/2.x/POLocalization/Startup.cs?name=snippet_Configure&highlight=15)]
 
-將下列程式碼新增至您 Razor 選擇的觀點。 此範例中使用 *About.cshtml*。
+將下列程式碼新增至您 Razor 選擇的觀點。 此範例中使用 *About.cshtml* 。
 
 [!code-cshtml[](localization/sample/2.x/POLocalization/Views/Home/About.cshtml)]
 
@@ -319,7 +320,7 @@ msgstr[1] "Les adresses email sont \"{0}\""
 
 ### <a name="creating-a-po-file"></a>建立 PO 檔案
 
-在您的應用程式根資料夾中，建立名為 po 的檔案* \<culture code> 。* 在此範例中，檔案名稱是 *fr.po*，因為使用法文語言：
+在您的應用程式根資料夾中，建立名為 po 的檔案 *\<culture code> 。* 在此範例中，檔案名稱是 *fr.po* ，因為使用法文語言：
 
 [!code-text[](localization/sample/2.x/POLocalization/fr.po)]
 

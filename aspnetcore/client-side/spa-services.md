@@ -7,6 +7,7 @@ ms.author: scaddie
 ms.custom: H1Hack27Feb2017, devx-track-js
 ms.date: 09/06/2019
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -18,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: client-side/spa-services
-ms.openlocfilehash: 33ae16c033142aa1c0f4cea53ca746e8a6aaf052
-ms.sourcegitcommit: 2e3a967331b2c69f585dd61e9ad5c09763615b44
+ms.openlocfilehash: 1b9f5b4b4e066cdd3dd5fbfa666c7a087949979f
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 10/27/2020
-ms.locfileid: "92690655"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93054641"
 ---
 # <a name="use-javascript-services-to-create-single-page-applications-in-aspnet-core"></a>使用 JavaScript 服務在 ASP.NET Core 中建立單一頁面應用程式
 
@@ -236,7 +237,7 @@ dotnet new --install Microsoft.AspNetCore.SpaTemplates::*
 
 會顯示可用的 SPA 範本清單：
 
-| 範本                                 | 簡短名稱 | Language | Tags        |
+| 範本                                 | 簡短名稱 | 語言 | 標籤        |
 | ------------------------------------------| :--------: | :------: | :---------: |
 | 具有角度的 MVC ASP.NET Core             | angular    | [C#]     | Web/MVC/SPA |
 | 使用 React.js 的 MVC ASP.NET Core            | react      | [C#]     | Web/MVC/SPA |

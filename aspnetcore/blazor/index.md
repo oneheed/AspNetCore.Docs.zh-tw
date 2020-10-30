@@ -7,6 +7,7 @@ ms.author: riande
 ms.custom: mvc, seoapril2019, devx-track-js
 ms.date: 09/25/2020
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -18,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/index
-ms.openlocfilehash: bae3e96021971e373ad743a0b52da7f69d839c40
-ms.sourcegitcommit: 2e3a967331b2c69f585dd61e9ad5c09763615b44
+ms.openlocfilehash: ecdf4f59aca0fe71bbfcfe61a99109127c8b92df
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 10/27/2020
-ms.locfileid: "92690598"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93055708"
 ---
 # <a name="introduction-to-aspnet-core-no-locblazor"></a>ASP.NET Core 簡介 Blazor
 
@@ -47,7 +48,7 @@ Blazor 是使用 [.net](/dotnet/standard/tour)建立互動式用戶端 web UI �
 * 利用 Windows、Linux 和 macOS 上的 [Visual Studio](https://visualstudio.microsoft.com) 保持生產力。
 * 以常用的語言、架構和工具建置，不僅穩定、功能豐富，而且容易使用。
 
-## <a name="components"></a>元件
+## <a name="components"></a>單元
 
 Blazor 應用程式是以 *元件* 為基礎。 中的元件 Blazor 是 UI 的元素，例如頁面、對話方塊或資料輸入表單。
 

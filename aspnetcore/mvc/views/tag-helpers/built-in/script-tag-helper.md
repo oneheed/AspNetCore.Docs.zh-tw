@@ -2,10 +2,11 @@
 title: ASP.NET Core 中的腳本標記協助程式
 author: rick-anderson
 ms.author: riande
-description: 探索 ASP.NET Core 腳本標記協助程式屬性，以及每個屬性在 HTML 腳本標記的擴充行為中所扮演的角色。
+description: 探索 ASP.NET Core 腳本標籤協助程式屬性，以及每個屬性在 HTML 腳本標記的擴充行為中所扮演的角色。
 ms.custom: mvc
 ms.date: 12/02/2019
 no-loc:
+- appsettings.json
 - cookie
 - Cookie
 - Blazor
@@ -16,22 +17,22 @@ no-loc:
 - Razor
 - SignalR
 uid: mvc/views/tag-helpers/builtin-th/script-tag-helper
-ms.openlocfilehash: b2f10b8230c1292614927d61c1e6d997dcb5640c
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: f5856bf19681a42551f82bb15c769f192f338b4a
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88020219"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93053497"
 ---
 # <a name="script-tag-helper-in-aspnet-core"></a>ASP.NET Core 中的腳本標記協助程式
 
 作者：[Rick Anderson](https://twitter.com/RickAndMSFT)
 
-[腳本標記](xref:Microsoft.AspNetCore.Mvc.TagHelpers.ScriptTagHelper)協助程式會產生主要或切換回腳本檔案的連結。 主要腳本檔案通常是在[內容傳遞網路](/office365/enterprise/content-delivery-networks#what-exactly-is-a-cdn) (CDN) 上。
+[腳本](xref:Microsoft.AspNetCore.Mvc.TagHelpers.ScriptTagHelper)標籤協助程式會產生主要或回溯腳本檔案的連結。 主要腳本檔案通常位於 (CDN) 的 [內容傳遞網路](/office365/enterprise/content-delivery-networks#what-exactly-is-a-cdn) 上。
 
 [!INCLUDE[](~/includes/cdn.md)]
 
-當 CDN 無法使用時，腳本標籤協助程式可讓您指定腳本檔案的 CDN 和回退。 腳本標記協助程式可提供 CDN 的效能優勢，以及本機裝載的穩定性。
+腳本標籤協助程式可讓您在 CDN 無法使用時，指定腳本檔案的 CDN 和回復。 腳本標籤協助程式可提供 CDN 的效能優勢，以及本機裝載的健全度。
 
 下列 Razor 標記顯示 `script` 具有 fallback 的元素：
 
@@ -44,19 +45,19 @@ ms.locfileid: "88020219"
 </script>
 ```
 
-請勿使用 `<script>` 元素的[defer](https://developer.mozilla.org/docs/Web/HTML/Element/script)屬性來延遲載入 CDN 腳本。 腳本標記協助程式會轉譯 JavaScript，以立即執行[asp-fallback-測試](#asp-fallback-test)運算式。 如果載入 CDN 腳本已延遲，運算式就會失敗。
+請勿使用 `<script>` 元素的 [defer](https://developer.mozilla.org/docs/Web/HTML/Element/script) 屬性來延遲載入 CDN 腳本。 腳本標籤協助程式會轉譯 JavaScript，以立即執行 [asp-回溯測試](#asp-fallback-test) 運算式。 如果載入 CDN 腳本已延後，運算式就會失敗。
 
 ## <a name="commonly-used-script-tag-helper-attributes"></a>常用的腳本標記協助程式屬性
 
-如需所有腳本標記協助程式屬性、屬性和方法，請參閱[腳本標記 helper](xref:Microsoft.AspNetCore.Mvc.TagHelpers.ScriptTagHelper) 。
+請參閱腳本標籤協助程式，以取得所有腳本標籤協助程式屬性、屬性和方法的 [腳本標記 helper](xref:Microsoft.AspNetCore.Mvc.TagHelpers.ScriptTagHelper) 。
 
 ### <a name="asp-fallback-test"></a>asp-回溯-測試
 
-要用於回溯測試之主要腳本中定義的腳本方法。 如需詳細資訊，請參閱<xref:Microsoft.AspNetCore.Mvc.TagHelpers.ScriptTagHelper.FallbackTestExpression>。
+要用於回溯測試的主要腳本中定義的腳本方法。 如需詳細資訊，請參閱<xref:Microsoft.AspNetCore.Mvc.TagHelpers.ScriptTagHelper.FallbackTestExpression>。
 
 ### <a name="asp-fallback-src"></a>asp-fallback-src
 
-當主要複本失敗時，要回復之腳本標記的 URL。 如需詳細資訊，請參閱<xref:Microsoft.AspNetCore.Mvc.TagHelpers.ScriptTagHelper.FallbackSrc>。
+當主要複本失敗時，要回復的腳本標記 URL。 如需詳細資訊，請參閱<xref:Microsoft.AspNetCore.Mvc.TagHelpers.ScriptTagHelper.FallbackSrc>。
 
 ## <a name="additional-resources"></a>其他資源
 

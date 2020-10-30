@@ -7,6 +7,7 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 08/19/2020
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -18,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/components/index
-ms.openlocfilehash: be1584e72fc1504ac9f8ca10a6b084c95a579b5b
-ms.sourcegitcommit: 8fcb08312a59c37e3542e7a67dad25faf5bb8e76
+ms.openlocfilehash: d30f40945a3b2799dfc2d9391bba37eee1bfdc18
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 09/11/2020
-ms.locfileid: "90009618"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93056266"
 ---
 # <a name="create-and-use-aspnet-core-no-locrazor-components"></a>建立和使用 ASP.NET Core Razor 元件
 
@@ -31,11 +32,11 @@ ms.locfileid: "90009618"
 
 [查看或下載範例程式碼](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/blazor/common/samples/) ([如何下載](xref:index#how-to-download-a-sample)) 
 
-Blazor 應用程式是使用 *元件*建立的。 元件是獨立的使用者介面區塊， (UI) ，例如頁面、對話方塊或表單。 元件包含 HTML 標籤以及插入資料或回應 UI 事件所需的處理邏輯。 元件具有彈性和輕量。 這些專案可以在專案之間進行嵌套、重複使用及共用。
+Blazor 應用程式是使用 *元件* 建立的。 元件是獨立的使用者介面區塊， (UI) ，例如頁面、對話方塊或表單。 元件包含 HTML 標籤以及插入資料或回應 UI 事件所需的處理邏輯。 元件具有彈性和輕量。 這些專案可以在專案之間進行嵌套、重複使用及共用。
 
 ## <a name="component-classes"></a>元件類別
 
-元件會 [Razor](xref:mvc/views/razor) `.razor` 使用 c # 和 HTML 標籤的組合，在元件檔 () 中實作為元件。 中的元件 Blazor 正式參考為* Razor 元件*。
+元件會 [Razor](xref:mvc/views/razor) `.razor` 使用 c # 和 HTML 標籤的組合，在元件檔 () 中實作為元件。 中的元件 Blazor 正式參考為 *Razor 元件* 。
 
 ### <a name="no-locrazor-syntax"></a>Razor 語法
 
@@ -253,7 +254,7 @@ namespace BlazorSample
 
 ### <a name="component-parameters"></a>元件參數
 
-元件可以有 *元件參數*，這些參數是使用元件類別上的公用屬性（attribute）來定義的 [`[Parameter]`](xref:Microsoft.AspNetCore.Components.ParameterAttribute) 。 使用這些屬性來指定標記中元件的引數。
+元件可以有 *元件參數* ，這些參數是使用元件類別上的公用屬性（attribute）來定義的 [`[Parameter]`](xref:Microsoft.AspNetCore.Components.ParameterAttribute) 。 使用這些屬性來指定標記中元件的引數。
 
 `Components/ChildComponent.razor`:
 
@@ -266,7 +267,7 @@ namespace BlazorSample
 [!code-razor[](index/samples_snapshot/ParentComponent.razor?highlight=5-6)]
 
 > [!WARNING]
-> 請勿建立會寫入其本身 *元件參數*的元件，而是改用私用欄位。 如需詳細資訊，請參閱 [覆寫的參數](#overwritten-parameters) 一節。
+> 請勿建立會寫入其本身 *元件參數* 的元件，而是改用私用欄位。 如需詳細資訊，請參閱 [覆寫的參數](#overwritten-parameters) 一節。
 
 ## <a name="child-content"></a>子內容
 
@@ -683,7 +684,7 @@ public class NotifierService
 下列修訂的 `Expander` 元件：
 
 * 接受 `Expanded` 來自父系的元件參數值。
-* 將元件參數值指派給*private field* `expanded` [OnInitialized 事件](xref:blazor/components/lifecycle#component-initialization-methods)中 () 的私用欄位。
+* 將元件參數值指派給 *private field* `expanded` [OnInitialized 事件](xref:blazor/components/lifecycle#component-initialization-methods)中 () 的私用欄位。
 * 使用私用欄位來維護其內部切換狀態。
 
 ```razor

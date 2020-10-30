@@ -7,6 +7,7 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 10/09/2020
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -18,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/host-and-deploy/webassembly
-ms.openlocfilehash: c3f537ff3b55f295db478cb097bc99023cc71a87
-ms.sourcegitcommit: b5ebaf42422205d212e3dade93fcefcf7f16db39
+ms.openlocfilehash: 0912b3fbcd0b891deb4985eaa18841c22f4f3264
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 10/21/2020
-ms.locfileid: "92326518"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93055746"
 ---
 # <a name="host-and-deploy-aspnet-core-no-locblazor-webassembly"></a>裝載和部署 ASP.NET Core Blazor WebAssembly
 
@@ -112,9 +113,9 @@ dotnet publish -p:BlazorEnableCompression=false
 1. `index.html` 啟動應用程式。
 1. Blazor的路由器會載入，而 Razor `Main` 元件則會呈現。
 
-在主頁面中，選取元件的連結可 `About` 在用戶端上運作，因為 Blazor 路由器會停止瀏覽器在網際網路上提出要求， `www.contoso.com` 並提供轉譯 `About` 的 `About` 元件本身。 * Blazor WebAssembly 應用程式內*內部端點的所有要求運作方式相同：要求不會對網際網路上伺服器裝載的資源觸發以瀏覽器為基礎的要求。 路由器會在內部處理要求。
+在主頁面中，選取元件的連結可 `About` 在用戶端上運作，因為 Blazor 路由器會停止瀏覽器在網際網路上提出要求， `www.contoso.com` 並提供轉譯 `About` 的 `About` 元件本身。 *Blazor WebAssembly 應用程式內* 內部端點的所有要求運作方式相同：要求不會對網際網路上伺服器裝載的資源觸發以瀏覽器為基礎的要求。 路由器會在內部處理要求。
 
-如果使用瀏覽器之網址列提出對 `www.contoso.com/About` 的要求，則要求會失敗。 在應用程式的網際網路主機上沒有這類資源存在，因此會傳回「404 - 找不到」** 的回應。
+如果使用瀏覽器之網址列提出對 `www.contoso.com/About` 的要求，則要求會失敗。 在應用程式的網際網路主機上沒有這類資源存在，因此會傳回「404 - 找不到」  的回應。
 
 因為瀏覽器會對以網際網路為基礎的主機發出要求，以提供用戶端頁面，所以 web 伺服器和主機服務必須將所有不在伺服器上的資源要求重寫為 `index.html` 頁面。 當 `index.html` 傳回時，應用程式的 Blazor 路由器會接管並回應正確的資源。
 
@@ -122,9 +123,9 @@ dotnet publish -p:BlazorEnableCompression=false
 
 ## <a name="hosted-deployment-with-aspnet-core"></a>搭配 ASP.NET Core 的已裝載部署
 
-*託管部署* Blazor WebAssembly 可從 web 伺服器上執行的[ASP.NET Core 應用程式](xref:index)，將應用程式提供給瀏覽器。
+*託管部署* Blazor WebAssembly 可從 web 伺服器上執行的 [ASP.NET Core 應用程式](xref:index)，將應用程式提供給瀏覽器。
 
-用戶端 Blazor WebAssembly 應用程式會 `/bin/Release/{TARGET FRAMEWORK}/publish/wwwroot` 與伺服器應用程式的任何其他靜態 web 資產一起發行至伺服器應用程式的資料夾中。 這兩個應用程式會一起部署。 需要有能夠裝載 ASP.NET Core 應用程式的網頁伺服器。 針對裝載的部署，當使用命令) 時，Visual Studio 包含** Blazor WebAssembly 應用程式**專案範本 (`blazorwasm` 範本， [`dotnet new`](/dotnet/core/tools/dotnet-new) **`Hosted`** (`-ho|--hosted` 使用命令) 時所選取的選項 `dotnet new` 。
+用戶端 Blazor WebAssembly 應用程式會 `/bin/Release/{TARGET FRAMEWORK}/publish/wwwroot` 與伺服器應用程式的任何其他靜態 web 資產一起發行至伺服器應用程式的資料夾中。 這兩個應用程式會一起部署。 需要有能夠裝載 ASP.NET Core 應用程式的網頁伺服器。 針對裝載的部署，當使用命令) 時，Visual Studio 包含 **Blazor WebAssembly 應用程式** 專案範本 (`blazorwasm` 範本， [`dotnet new`](/dotnet/core/tools/dotnet-new) **`Hosted`** (`-ho|--hosted` 使用命令) 時所選取的選項 `dotnet new` 。
 
 如需 ASP.NET Core 應用程式裝載和部署的詳細資訊，請參閱 <xref:host-and-deploy/index>。
 
@@ -289,22 +290,30 @@ dotnet publish -p:BlazorEnableCompression=false
   <img alt="..." src="_content/{LIBRARY NAME}/{ASSET FILE NAME}" />
   ```
 
+<!-- HOLD for reactivation at 5.x
+
 ::: moniker range=">= aspnetcore-5.0"
 
-類別庫提供給用戶端應用程式的元件會正常地參考。 如果有任何元件需要樣式表單或 JavaScript 檔案，請使用下列其中一種方法來取得靜態資產：
+Components provided to a client app by a class library are referenced normally. If any components require stylesheets or JavaScript files, use either of the following approaches to obtain the static assets:
 
-* 用戶端應用程式的檔案 `wwwroot/index.html` 可以將 (`<link>`) 連結到靜態資產。
-* 元件可以使用架構的[ `Link` 元件](xref:blazor/fundamentals/additional-scenarios#influence-html-head-tag-elements)來取得靜態資產。
+* The client app's `wwwroot/index.html` file can link (`<link>`) to the static assets.
+* The component can use the framework's [`Link` component](xref:blazor/fundamentals/additional-scenarios#influence-html-head-tag-elements) to obtain the static assets.
 
-上述的方法會在下列範例中示範。
+The preceding approaches are demonstrated in the following examples.
 
 ::: moniker-end
 
 ::: moniker range="< aspnetcore-5.0"
 
+-->
+
 類別庫提供給用戶端應用程式的元件會正常地參考。 如果有任何元件需要樣式表單或 JavaScript 檔案，用戶端應用程式的檔案 `wwwroot/index.html` 必須包含正確的靜態資產連結。 下列範例會示範這些方法。
 
+<!-- HOLD for reactivation at 5.x
+
 ::: moniker-end
+
+-->
 
 將下列 `Jeep` 元件新增至其中一個用戶端應用程式。 `Jeep`元件使用：
 
@@ -338,9 +347,11 @@ dotnet publish -p:BlazorEnableCompression=false
 > [!WARNING]
 > 除非您擁有映射， **否則請勿公開發布車輛** 的影像。 否則，您會面臨著作權侵權的風險。
 
+<!-- HOLD for reactivation at 5.x
+
 ::: moniker range=">= aspnetcore-5.0"
 
-程式庫的 `jeep-yj.png` 影像也可以新增至程式庫的 `Component1` 元件 (`Component1.razor`) 。 若要將 `my-component` CSS 類別提供給用戶端應用程式的頁面，請使用架構的[ `Link` 元件](xref:blazor/fundamentals/additional-scenarios#influence-html-head-tag-elements)連結至程式庫的樣式表單：
+The library's `jeep-yj.png` image can also be added to the library's `Component1` component (`Component1.razor`). To provide the `my-component` CSS class to the client app's page, link to the library's stylesheet using the framework's [`Link` component](xref:blazor/fundamentals/additional-scenarios#influence-html-head-tag-elements):
 
 ```razor
 <div class="my-component">
@@ -358,7 +369,7 @@ dotnet publish -p:BlazorEnableCompression=false
 </div>
 ```
 
-使用[ `Link` 元件](xref:blazor/fundamentals/additional-scenarios#influence-html-head-tag-elements)的另一種方式是從用戶端應用程式的檔案載入樣式表單 `wwwroot/index.html` 。 這種方法可讓用戶端應用程式中的所有元件使用樣式表單：
+An alternative to using the [`Link` component](xref:blazor/fundamentals/additional-scenarios#influence-html-head-tag-elements) is to load the stylesheet from the client app's `wwwroot/index.html` file. This approach makes the stylesheet available to all of the components in the client app:
 
 ```html
 <head>
@@ -370,6 +381,8 @@ dotnet publish -p:BlazorEnableCompression=false
 ::: moniker-end
 
 ::: moniker range="< aspnetcore-5.0"
+
+-->
 
 程式庫的 `jeep-yj.png` 映射也可以新增至程式庫的 `Component1` 元件 (`Component1.razor`) ：
 
@@ -396,7 +409,11 @@ dotnet publish -p:BlazorEnableCompression=false
 </head>
 ```
 
+<!-- HOLD for reactivation at 5.x
+
 ::: moniker-end
+
+-->
 
 將流覽新增至 `Jeep` 用戶端應用程式元件中的元件 `NavMenu` (`Shared/NavMenu.razor`) ：
 
@@ -462,12 +479,12 @@ Blazor發行專案時， `web.config` 會使用下列 IIS 設定來建立檔案�
 
 需要 [URL Rewrite Module](https://www.iis.net/downloads/microsoft/url-rewrite)，才可重寫 URL。 預設不會安裝此模組，且其無法用來安裝為網頁伺服器 (IIS) 角色服務功能。 必須從 IIS 網站下載模組。 請使用 Web Platform Installer 安裝模組：
 
-1. 在本機上，巡覽至 [URL Rewrite Module 下載頁面](https://www.iis.net/downloads/microsoft/url-rewrite#additionalDownloads)。 如需英文版，請選取 [WebPI]**** 下載 WebPI 安裝程式。 如需其他語言，請選取適當的伺服器架構 (x86 x64) 來下載安裝程式。
-1. 將安裝程式複製到伺服器。 執行安裝程式。 選取 [安裝]**** 按鈕，並接受授權條款。 安裝完成之後，不需要重新啟動伺服器。
+1. 在本機上，巡覽至 [URL Rewrite Module 下載頁面](https://www.iis.net/downloads/microsoft/url-rewrite#additionalDownloads)。 如需英文版，請選取 [WebPI]  下載 WebPI 安裝程式。 如需其他語言，請選取適當的伺服器架構 (x86 x64) 來下載安裝程式。
+1. 將安裝程式複製到伺服器。 執行安裝程式。 選取 [安裝]  按鈕，並接受授權條款。 安裝完成之後，不需要重新啟動伺服器。
 
 #### <a name="configure-the-website"></a>設定網站
 
-將網站的 [實體路徑]**** 設為應用程式的資料夾。 此資料夾包含：
+將網站的 [實體路徑]  設為應用程式的資料夾。 此資料夾包含：
 
 * `web.config`IIS 用來設定網站的檔案，包括必要的重新導向規則和檔案內容類型。
 * 應用程式的靜態資產資料夾。
@@ -510,7 +527,7 @@ Blazor發行專案時， `web.config` 會使用下列 IIS 設定來建立檔案�
 
 #### <a name="troubleshooting"></a>疑難排解
 
-如果收到「500 - 內部伺服器錯誤」**，且 IIS 管理員在嘗試存取網站設定時擲回錯誤，請確認是否已安裝 URL Rewrite 模組。 未安裝模組時，IIS 無法剖析該檔案 `web.config` 。 這可防止 IIS 管理員從服務的靜態檔案載入網站的設定和網站 Blazor 。
+如果收到「500 - 內部伺服器錯誤」  ，且 IIS 管理員在嘗試存取網站設定時擲回錯誤，請確認是否已安裝 URL Rewrite 模組。 未安裝模組時，IIS 無法剖析該檔案 `web.config` 。 這可防止 IIS 管理員從服務的靜態檔案載入網站的設定和網站 Blazor 。
 
 如需針對部署至 IIS 進行疑難排解的詳細資訊，請參閱 <xref:test/troubleshoot-azure-iis>。
 
@@ -520,8 +537,8 @@ Blazor發行專案時， `web.config` 會使用下列 IIS 設定來建立檔案�
 
 當 Blob 服務針對儲存體帳戶上的靜態網站裝載啟用時：
 
-* 將 [索引文件名稱]**** 設定為 `index.html`。
-* 將 [錯誤文件路徑]**** 設定為 `index.html`。 Razor 元件和其他非檔案端點不會位於 blob 服務所儲存之靜態內容中的實體路徑。 當收到路由器應處理之其中一個資源的要求時 Blazor ，blob 服務所產生的 *404-找不* 到錯誤會將要求路由傳送至 **錯誤檔路徑**。 `index.html`會傳回 blob，而且路由器會 Blazor 載入並處理路徑。
+* 將 [索引文件名稱]  設定為 `index.html`。
+* 將 [錯誤文件路徑]  設定為 `index.html`。 Razor 元件和其他非檔案端點不會位於 blob 服務所儲存之靜態內容中的實體路徑。 當收到路由器應處理之其中一個資源的要求時 Blazor ，blob 服務所產生的 *404-找不* 到錯誤會將要求路由傳送至 **錯誤檔路徑** 。 `index.html`會傳回 blob，而且路由器會 Blazor 載入並處理路徑。
 
 如果檔案的標頭中有不適當的 MIME 類型，則不會在執行時間載入檔案 `Content-Type` ，請採取下列其中一項動作：
 
@@ -530,7 +547,7 @@ Blazor發行專案時， `web.config` 會使用下列 IIS 設定來建立檔案�
 
   在儲存體總管 (Azure 入口網站每個檔案的) ：
   
-  1. 以滑鼠右鍵按一下檔案，然後選取 [ **屬性**]。
+  1. 以滑鼠右鍵按一下檔案，然後選取 [ **屬性** ]。
   1. 設定 **ContentType** ，然後選取 [ **儲存** ] 按鈕。
 
 如需詳細資訊，請參閱 [Azure 儲存體中的靜態網站裝載](/azure/storage/blobs/storage-blob-static-website)。
@@ -659,13 +676,13 @@ COPY nginx.conf /etc/nginx/nginx.conf
   dotnet run --contentroot=/content-root-path
   ```
 
-* `launchSettings.json`在**IIS Express**設定檔中，將專案新增至應用程式的檔案。 此設定的使用時機為當應用程式是搭配 Visual Studio 偵錯工具並以 `dotnet run` 從命令提示字元執行的情況。
+* `launchSettings.json`在 **IIS Express** 設定檔中，將專案新增至應用程式的檔案。 此設定的使用時機為當應用程式是搭配 Visual Studio 偵錯工具並以 `dotnet run` 從命令提示字元執行的情況。
 
   ```json
   "commandLineArgs": "--contentroot=/content-root-path"
   ```
 
-* 在 Visual Studio 中，于 [**屬性**]  >  **調試**  >  **程式引數**中指定引數。 在 [Visual Studio] 屬性頁中設定引數，會將引數新增至檔案 `launchSettings.json` 。
+* 在 Visual Studio 中，于 [ **屬性** ]  >  **調試**  >  **程式引數** 中指定引數。 在 [Visual Studio] 屬性頁中設定引數，會將引數新增至檔案 `launchSettings.json` 。
 
   ```console
   --contentroot=/content-root-path
@@ -684,13 +701,13 @@ COPY nginx.conf /etc/nginx/nginx.conf
   dotnet run --pathbase=/relative-URL-path
   ```
 
-* `launchSettings.json`在**IIS Express**設定檔中，將專案新增至應用程式的檔案。 此設定的使用時機為當應用程式是搭配 Visual Studio 偵錯工具並以 `dotnet run` 從命令提示字元執行的情況。
+* `launchSettings.json`在 **IIS Express** 設定檔中，將專案新增至應用程式的檔案。 此設定的使用時機為當應用程式是搭配 Visual Studio 偵錯工具並以 `dotnet run` 從命令提示字元執行的情況。
 
   ```json
   "commandLineArgs": "--pathbase=/relative-URL-path"
   ```
 
-* 在 Visual Studio 中，于 [**屬性**]  >  **調試**  >  **程式引數**中指定引數。 在 [Visual Studio] 屬性頁中設定引數，會將引數新增至檔案 `launchSettings.json` 。
+* 在 Visual Studio 中，于 [ **屬性** ]  >  **調試**  >  **程式引數** 中指定引數。 在 [Visual Studio] 屬性頁中設定引數，會將引數新增至檔案 `launchSettings.json` 。
 
   ```console
   --pathbase=/relative-URL-path
@@ -706,13 +723,13 @@ COPY nginx.conf /etc/nginx/nginx.conf
   dotnet run --urls=http://127.0.0.1:0
   ```
 
-* `launchSettings.json`在**IIS Express**設定檔中，將專案新增至應用程式的檔案。 此設定的使用時機為當應用程式是搭配 Visual Studio 偵錯工具並以 `dotnet run` 從命令提示字元執行的情況。
+* `launchSettings.json`在 **IIS Express** 設定檔中，將專案新增至應用程式的檔案。 此設定的使用時機為當應用程式是搭配 Visual Studio 偵錯工具並以 `dotnet run` 從命令提示字元執行的情況。
 
   ```json
   "commandLineArgs": "--urls=http://127.0.0.1:0"
   ```
 
-* 在 Visual Studio 中，于 [**屬性**]  >  **調試**  >  **程式引數**中指定引數。 在 [Visual Studio] 屬性頁中設定引數，會將引數新增至檔案 `launchSettings.json` 。
+* 在 Visual Studio 中，于 [ **屬性** ]  >  **調試**  >  **程式引數** 中指定引數。 在 [Visual Studio] 屬性頁中設定引數，會將引數新增至檔案 `launchSettings.json` 。
 
   ```console
   --urls=http://127.0.0.1:0
@@ -896,7 +913,7 @@ Failed to find a valid digest in the 'integrity' attribute for resource 'https:/
 
 這種失敗的常見原因如下：
 
- * Web 服務器的回應是錯誤 (例如， *找不到 404* 或 *500-Internal server 錯誤*) ，而不是瀏覽器要求的檔案。 瀏覽器會將此報告為完整性檢查失敗，而不是回應失敗。
+ * Web 服務器的回應是錯誤 (例如， *找不到 404* 或 *500-Internal server 錯誤* ) ，而不是瀏覽器要求的檔案。 瀏覽器會將此報告為完整性檢查失敗，而不是回應失敗。
  * 在檔案的組建和傳遞之間，檔案的內容已變更至瀏覽器。 這可能會發生：
    * 如果您或組建工具手動修改組建輸出。
    * 如果部署程式的某些層面修改了檔案。 例如，如果您使用以 Git 為基礎的部署機制，請記住，如果您在 Windows 上認可檔案並在 Linux 上查看檔案，則 Git 會以透明的方式將 Windows 樣式的行尾結束符號轉換為 Unix 樣式的行尾結束符號。 變更檔案行尾結束符號會變更 256 SHA-1 雜湊。 若要避免這個問題，請考慮 [使用 `.gitattributes` 將組建構件 `binary` 視為](https://git-scm.com/book/en/v2/Customizing-Git-Git-Attributes)檔案。

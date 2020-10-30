@@ -7,6 +7,7 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 06/04/2020
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -18,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/globalization-localization
-ms.openlocfilehash: 52810cb5a5961ffe932a7f5ac2a3a03033781cc9
-ms.sourcegitcommit: c06a5bf419541d17595af30e4cf6f2787c21855e
+ms.openlocfilehash: f8f261f25d854a9bf36ad3299f4af392d5c4fafd
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 10/27/2020
-ms.locfileid: "92678488"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93055876"
 ---
 # <a name="aspnet-core-no-locblazor-globalization-and-localization"></a>ASP.NET Core Blazor 全球化和當地語系化
 
@@ -121,7 +122,7 @@ Blazor Server 應用程式會使用 [當地語系化中介軟體](xref:fundament
 
 您可以使用下列其中一種方法來設定文化特性：
 
-* [Cookie！](#cookies)
+* [Cookies](#cookies)
 * [提供 UI 以選擇文化特性](#provide-ui-to-choose-the-culture)
 
 如需詳細資訊和範例，請參閱 <xref:fundamentals/localization>。

@@ -7,6 +7,7 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 04/23/2020
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -18,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/fundamentals/handle-errors
-ms.openlocfilehash: dfe6f1ac79732d158e31fb5250645d4ff98d1c0b
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: c789928252417ef1cf95c60deb7edef24d58126e
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88628335"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93055993"
 ---
 # <a name="handle-errors-in-aspnet-core-no-locblazor-apps"></a>處理 ASP.NET Core 應用程式中的錯誤 Blazor
 
@@ -90,7 +91,7 @@ ms.locfileid: "88628335"
 
 ## <a name="how-a-no-locblazor-server-app-reacts-to-unhandled-exceptions"></a>Blazor Server應用程式如何回應未處理的例外狀況
 
-Blazor Server 是具狀態的架構。 當使用者與應用程式互動時，它們會維持與伺服器的連線，稱為 *線路*。 線路會保存作用中的元件實例，再加上許多其他狀態的層面，例如：
+Blazor Server 是具狀態的架構。 當使用者與應用程式互動時，它們會維持與伺服器的連線，稱為 *線路* 。 線路會保存作用中的元件實例，再加上許多其他狀態的層面，例如：
 
 * 元件的最新轉譯輸出。
 * 可由用戶端事件觸發的目前事件處理委派集。

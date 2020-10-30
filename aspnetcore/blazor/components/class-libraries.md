@@ -7,6 +7,7 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 07/27/2020
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -18,18 +19,18 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/components/class-libraries
-ms.openlocfilehash: afd1bfffae11520a5d9abccc1d2ee4cf3a46a4bf
-ms.sourcegitcommit: 24106b7ffffc9fff410a679863e28aeb2bbe5b7e
+ms.openlocfilehash: f8e36cbe905b5ec2e674123c0f2ab6db99683c7c
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 09/17/2020
-ms.locfileid: "90722458"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93056409"
 ---
 # <a name="aspnet-core-no-locrazor-components-class-libraries"></a>ASP.NET Core Razor 元件類別庫
 
 依 [Simon Timms](https://github.com/stimms)
 
-您可以在類別庫中共用元件， [ Razor (RCL](xref:razor-pages/ui-class)跨專案) 。 * Razor 元件類別庫*可以包含在：
+您可以在類別庫中共用元件， [ Razor (RCL](xref:razor-pages/ui-class)跨專案) 。 *Razor 元件類別庫* 可以包含在：
 
 * 方案中的另一個專案。
 * NuGet 套件。
@@ -42,16 +43,16 @@ ms.locfileid: "90722458"
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
 1. 建立新專案。
-1. 選取 [ ** Razor 類別庫**]。 選取 [下一步] 。
-1. 在 [ **建立新的 Razor 類別庫** ] 對話方塊中，選取 [ **建立**]。
-1. 在 [專案名稱]**** 欄位中提供專案名稱，或接受預設專案名稱。 本主題中的範例會使用專案名稱 `ComponentLibrary` 。 選取 [建立]  。
+1. 選取 [ **Razor 類別庫** ]。 選取 [下一步]  。
+1. 在 [ **建立新的 Razor 類別庫** ] 對話方塊中，選取 [ **建立** ]。
+1. 在 [專案名稱]  欄位中提供專案名稱，或接受預設專案名稱。 本主題中的範例會使用專案名稱 `ComponentLibrary` 。 選取 [建立]。
 1. 將 RCL 新增至方案：
-   1. 以滑鼠右鍵按一下方案。 選取 [**加入**  >  **現有專案**]。
+   1. 以滑鼠右鍵按一下方案。 選取 [ **加入**  >  **現有專案** ]。
    1. 流覽至 RCL 的專案檔。
    1. 選取 RCL 的專案檔 (`.csproj`) 。
 1. 從應用程式新增參考 RCL：
-   1. 以滑鼠右鍵按一下應用程式專案。 選取 [**加入**  >  **參考**]。
-   1. 選取 RCL 專案。 選取 [確定]。
+   1. 以滑鼠右鍵按一下應用程式專案。 選取 [ **加入**  >  **參考** ]。
+   1. 選取 RCL 專案。 選取 [確定]  。
 
 > [!NOTE]
 > 從範本產生 RCL 時，如果已選取 [ **支援頁面和流覽** 器] 核取方塊，則也請 `_Imports.razor` 使用下列內容將檔案新增至所產生專案的根目錄，以啟用 Razor 元件撰寫：
@@ -64,7 +65,7 @@ ms.locfileid: "90722458"
 
 # <a name="net-core-cli"></a>[.NET Core CLI](#tab/netcore-cli)
 
-1. 使用 [ ** Razor 類別庫**] 範本 (`razorclasslib`) 搭配 [`dotnet new`](/dotnet/core/tools/dotnet-new) 命令 shell 中的命令。 在下列範例中，會建立名為的 RCL `ComponentLibrary` 。 `ComponentLibrary`執行命令時，會自動建立保存的資料夾：
+1. 使用 [ **Razor 類別庫** ] 範本 (`razorclasslib`) 搭配 [`dotnet new`](/dotnet/core/tools/dotnet-new) 命令 shell 中的命令。 在下列範例中，會建立名為的 RCL `ComponentLibrary` 。 `ComponentLibrary`執行命令時，會自動建立保存的資料夾：
 
    ```dotnetcli
    dotnet new razorclasslib -o ComponentLibrary
@@ -120,9 +121,11 @@ Welcome to your new app.
 
 （選擇性）在最上層檔案中加入指示詞， `@using ComponentLibrary` `_Import.razor` 讓程式庫的元件可供整個專案使用。 將指示詞加入至 `_Import.razor` 任何層級的檔案，以將命名空間套用至資料夾內的單一元件或元件集。
 
+<!-- HOLD for reactivation at 5.x
+
 ::: moniker range=">= aspnetcore-5.0"
 
-若要將 `Component1` 的 `my-component` CSS 類別提供給元件，請在中使用架構的[ `Link` 元件](xref:blazor/fundamentals/additional-scenarios#influence-html-head-tag-elements)連結至程式庫的樣式表單 `Component1.razor` ：
+To provide `Component1`'s `my-component` CSS class to the component, link to the library's stylesheet using the framework's [`Link` component](xref:blazor/fundamentals/additional-scenarios#influence-html-head-tag-elements) in `Component1.razor`:
 
 ```razor
 <div class="my-component">
@@ -134,7 +137,7 @@ Welcome to your new app.
 </div>
 ```
 
-若要在應用程式中提供樣式表單，您可以在應用程式的檔案中連結至程式庫的樣式表單 `wwwroot/index.html` (Blazor WebAssembly) 或檔案 `Pages/_Host.cshtml` (Blazor Server) ：
+To provide the stylesheet across the app, you can alternatively link to the library's stylesheet in the app's `wwwroot/index.html` file (Blazor WebAssembly) or `Pages/_Host.cshtml` file (Blazor Server):
 
 ```html
 <head>
@@ -143,14 +146,16 @@ Welcome to your new app.
 </head>
 ```
 
-在 `Link` 子元件中使用元件時，只要轉譯具有元件的子系，則父元件的任何其他子元件也可以使用連結的資產 `Link` 。 在子元件中使用 `Link` 元件並將 `<link>` HTML 標籤放在或中的差異 `wwwroot/index.html` 在於 `Pages/_Host.cshtml` 架構元件的轉譯 html 標記：
+When the `Link` component is used in a child component, the linked asset is also available to any other child component of the parent component as long as the child with the `Link` component is rendered. The distinction between using the `Link` component in a child component and placing a `<link>` HTML tag in `wwwroot/index.html` or `Pages/_Host.cshtml` is that a framework component's rendered HTML tag:
 
-* 可依應用程式狀態修改。 `<link>`應用程式狀態無法修改硬式編碼的 HTML 標籤。
-* 當父元件不再呈現時，會從 HTML 中移除 `<head>` 。
+* Can be modified by application state. A hard-coded `<link>` HTML tag can't be modified by application state.
+* Is removed from the HTML `<head>` when the parent component is no longer rendered.
 
 ::: moniker-end
 
 ::: moniker range="< aspnetcore-5.0"
+
+-->
 
 若要提供 `Component1` 的 `my-component` CSS 類別，請連結至應用程式檔案中程式庫的樣式表單 `wwwroot/index.html` (Blazor WebAssembly) 或 `Pages/_Host.cshtml` 檔 (Blazor Server) ：
 
@@ -161,7 +166,11 @@ Welcome to your new app.
 </head>
 ```
 
+<!-- HOLD for reactivation at 5.x
+
 ::: moniker-end
+
+-->
 
 ## <a name="create-a-no-locrazor-components-class-library-with-static-assets"></a>建立 Razor 具有靜態資產的元件類別庫
 

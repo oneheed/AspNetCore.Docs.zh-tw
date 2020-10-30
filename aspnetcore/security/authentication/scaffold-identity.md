@@ -7,6 +7,7 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 5/1/2020
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -18,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: security/authentication/scaffold-identity
-ms.openlocfilehash: 09535f41d15b90fa5e50eb1f22f6aecef0530f0c
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: c79dfc64d4311088c3f9ea03aad7570189000e2a
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88629557"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93053315"
 ---
 # <a name="scaffold-no-locidentity-in-aspnet-core-projects"></a>IdentityASP.NET Core 專案中的 Scaffold
 
@@ -33,7 +34,7 @@ ms.locfileid: "88629557"
 
 ASP.NET Core [ASP.NET Core Identity](xref:security/authentication/identity) 以[ Razor 類別庫](xref:razor-pages/ui-class)的形式提供。 包含的應用程式 Identity 可以套用 scaffolder，以選擇性地加入類別庫中包含的原始程式碼 Identity Razor (RCL) 。 建議您產生原始程式碼，以便能夠修改程式碼並變更行為。 例如，您可以指示 Scaffolder 產生註冊使用的程式碼。 產生的程式碼優先于 RCL 中的相同程式碼 Identity 。 若要完全掌控 UI，而不使用預設 RCL，請參閱 [建立完整 Identity UI 來源](#full)一節。
 
-**未**包含驗證的應用程式可以套用 scaffolder 來新增 RCL Identity 套件。 您可以選擇 Identity 要產生的程式碼。
+**未** 包含驗證的應用程式可以套用 scaffolder 來新增 RCL Identity 套件。 您可以選擇 Identity 要產生的程式碼。
 
 雖然 scaffolder 會產生大部分必要的程式碼，但您必須更新您的專案，才能完成此程式。 本檔說明完成程式更新所需的步驟 Identity 。
 
@@ -51,9 +52,9 @@ ASP.NET Core [ASP.NET Core Identity](xref:security/authentication/identity) 以[
 
 [!code-csharp[](scaffold-identity/3.1sample/StartupRemove.cs?name=snippet)]
 
-先前的程式碼會將在*區域/ Identity / Identity HostingStartup.cs*中複製的程式碼批註
+先前的程式碼會將在 *區域/ Identity / Identity HostingStartup.cs* 中複製的程式碼批註
 
-一般而言，使用個別帳戶所建立的應用程式 ***不*** 應該建立新的資料內容。
+一般而言，使用個別帳戶所建立的應用程式應該 * **而不** 是建立新的資料內容。
 
 ## <a name="scaffold-no-locidentity-into-an-empty-project"></a>Scaffold Identity 至空白專案
 
@@ -96,7 +97,7 @@ before dotnet ef database update
 
 [!INCLUDE[](~/includes/scaffold-identity/id-scaffold-dlg.md)]
 
-Identity是在*區域/ Identity / Identity HostingStartup.cs*中設定。 如需詳細資訊，請參閱 [IHostingStartup](xref:fundamentals/configuration/platform-specific-configuration)。
+Identity在 _Areas/ Identity / Identity HostingStartup.cs * 中設定。 如需詳細資訊，請參閱 [IHostingStartup](xref:fundamentals/configuration/platform-specific-configuration)。
 
 <a name="efm"></a>
 
@@ -135,7 +136,7 @@ dotnet aspnet-codegenerator identity -dc RPauth.Data.ApplicationDbContext --file
 
 [!INCLUDE[](~/includes/scaffold-identity/id-scaffold-dlg-auth.md)]
 
-某些 Identity 選項是在*區域/ Identity / Identity HostingStartup.cs*中設定。 如需詳細資訊，請參閱 [IHostingStartup](xref:fundamentals/configuration/platform-specific-configuration)。
+某些 Identity 選項是在 *區域/ Identity / Identity HostingStartup.cs* 中設定。 如需詳細資訊，請參閱 [IHostingStartup](xref:fundamentals/configuration/platform-specific-configuration)。
 
 ## <a name="scaffold-no-locidentity-into-an-mvc-project-without-existing-authorization"></a>Scaffold Identity 至沒有現有授權的 MVC 專案
 
@@ -161,7 +162,7 @@ dotnet ef database update
 
 * 將 *Pages/shared/_LoginPartial 的 cshtml* 檔案移至 *Views/shared/_LoginPartial. cshtml*
 
-Identity是在*區域/ Identity / Identity HostingStartup.cs*中設定。 如需詳細資訊，請參閱 IHostingStartup。
+Identity是在 *區域/ Identity / Identity HostingStartup.cs* 中設定。 如需詳細資訊，請參閱 IHostingStartup。
 
 [!INCLUDE[](~/includes/scaffold-identity/migrations.md)]
 
@@ -187,7 +188,7 @@ dotnet aspnet-codegenerator identity -dc MvcAuth.Data.ApplicationDbContext  --fi
 
 [!INCLUDE[](~/includes/scaffold-identity/id-scaffold-dlg.md)]
 
-Identity是在*區域/ Identity / Identity HostingStartup.cs*中設定。 如需詳細資訊，請參閱 [IHostingStartup](xref:fundamentals/configuration/platform-specific-configuration)。
+Identity是在 *區域/ Identity / Identity HostingStartup.cs* 中設定。 如需詳細資訊，請參閱 [IHostingStartup](xref:fundamentals/configuration/platform-specific-configuration)。
 
 ### <a name="migrations"></a>移轉
 
@@ -217,7 +218,7 @@ var tokens = new InitialApplicationState
 };
 ```
 
-更新 `App` (*應用程式的元件。 Razor*) 以指派 `InitialState.XsrfToken` ：
+更新 `App` ( *應用程式的元件。 Razor* ) 以指派 `InitialState.XsrfToken` ：
 
 ```csharp
 @inject TokenProvider TokenProvider
@@ -245,7 +246,7 @@ TokenProvider.XsrfToken = InitialState.XsrfToken;
 
 ### <a name="layout-and-authentication-flow-changes"></a>版面配置和驗證流程變更
 
-將 `RedirectToLogin` (*RedirectToLogin* 的元件) 新增至專案根目錄中的應用程式 *共用* 資料夾：
+將 `RedirectToLogin` ( *RedirectToLogin* 的元件) 新增至專案根目錄中的應用程式 *共用* 資料夾：
 
 ```razor
 @inject NavigationManager Navigation
@@ -258,7 +259,7 @@ TokenProvider.XsrfToken = InitialState.XsrfToken;
 }
 ```
 
-將 `LoginDisplay` (*LoginDisplay* 的元件) 加入應用程式的 *共用* 資料夾。 [TokenProvider 服務](xref:blazor/security/server/additional-scenarios#pass-tokens-to-a-blazor-server-app)會針對張貼至登出端點的 HTML 表單，提供 XSRF token Identity ：
+將 `LoginDisplay` ( *LoginDisplay* 的元件) 加入應用程式的 *共用* 資料夾。 [TokenProvider 服務](xref:blazor/security/server/additional-scenarios#pass-tokens-to-a-blazor-server-app)會針對張貼至登出端點的 HTML 表單，提供 XSRF token Identity ：
 
 ```razor
 @using Microsoft.AspNetCore.Components.Authorization
@@ -283,7 +284,7 @@ TokenProvider.XsrfToken = InitialState.XsrfToken;
 </AuthorizeView>
 ```
 
-在 `MainLayout` 元件 (*共用/MainLayout* ]) 中，將元件新增 `LoginDisplay` 至最上層資料列 `<div>` 元素的內容：
+在 `MainLayout` 元件 ( *共用/MainLayout* ]) 中，將元件新增 `LoginDisplay` 至最上層資料列 `<div>` 元素的內容：
 
 ```razor
 <div class="top-row px-4 auth">
@@ -307,7 +308,7 @@ TokenProvider.XsrfToken = InitialState.XsrfToken;
 > [!NOTE]
 > 本節中的範例只是自訂的起點。 可能需要額外的工作才能獲得最佳使用者體驗。
 
-建立新的 `NavMenu_IdentityLayout` 元件， (*共用/NavMenu_ Identity 版面配置。 razor*) 。 針對元件的標記和程式碼，請使用應用程式元件的相同內容 `NavMenu` (*Shared/NavMenu razor*) 。 `NavLink`針對需要驗證或授權的元件，將任何無法匿名連接的元件帶出至元件，因為元件中的自動重新導向 `RedirectToLogin` 失敗。
+建立新的 `NavMenu_IdentityLayout` 元件， ( *共用/NavMenu_ Identity 版面配置。 razor* ) 。 針對元件的標記和程式碼，請使用應用程式元件的相同內容 `NavMenu` ( *Shared/NavMenu razor* ) 。 `NavLink`針對需要驗證或授權的元件，將任何無法匿名連接的元件帶出至元件，因為元件中的自動重新導向 `RedirectToLogin` 失敗。
 
 在 *Pages/Shared/Layout. cshtml* 檔案中，進行下列變更：
 
@@ -369,13 +370,13 @@ TokenProvider.XsrfToken = InitialState.XsrfToken;
 
 [!INCLUDE[](~/includes/scaffold-identity/id-scaffold-dlg-auth.md)]
 
-某些 Identity 選項是在*區域/ Identity / Identity HostingStartup.cs*中設定。 如需詳細資訊，請參閱 [IHostingStartup](xref:fundamentals/configuration/platform-specific-configuration)。
+某些 Identity 選項是在 *區域/ Identity / Identity HostingStartup.cs* 中設定。 如需詳細資訊，請參閱 [IHostingStartup](xref:fundamentals/configuration/platform-specific-configuration)。
 
 <a name="full"></a>
 
 ## <a name="create-full-no-locidentity-ui-source"></a>建立完整的 Identity UI 來源
 
-若要維持 UI 的完整控制權 Identity ，請執行 Identity scaffolder，然後選取 [覆 **寫所有**檔案]。
+若要維持 UI 的完整控制權 Identity ，請執行 Identity scaffolder，然後選取 [覆 **寫所有** 檔案]。
 
 下列醒目提示的程式碼顯示 Identity Identity 在 ASP.NET Core 2.1 web 應用程式中，用來取代預設 UI 的變更。 您可能會想要這樣做，才能完全控制 Identity UI。
 
@@ -431,7 +432,7 @@ dotnet aspnet-codegenerator identity -dc RPauth.Data.ApplicationDbContext --file
 
   [!code-cshtml[](scaffold-identity/sample/Register.cshtml)]
 
-* 批註或移除*區域/ Identity /Pages/Account/Login.cshtml*的註冊連結
+* 批註或移除 *區域/ Identity /Pages/Account/Login.cshtml* 的註冊連結
 
   ```cshtml
   @*
@@ -493,11 +494,11 @@ dotnet aspnet-codegenerator identity -dc RPauth.Data.ApplicationDbContext --file
 
 ASP.NET Core 2.1 和更新版本會 [ASP.NET Core Identity](xref:security/authentication/identity) 以[ Razor 類別庫](xref:razor-pages/ui-class)的形式提供。 包含的應用程式 Identity 可以套用 scaffolder，以選擇性地加入類別庫中包含的原始程式碼 Identity Razor (RCL) 。 建議您產生原始程式碼，以便能夠修改程式碼並變更行為。 例如，您可以指示 Scaffolder 產生註冊使用的程式碼。 產生的程式碼優先于 RCL 中的相同程式碼 Identity 。 若要完全掌控 UI，而不使用預設 RCL，請參閱 [建立完整身分識別 UI 來源](#full)一節。
 
-**未**包含驗證的應用程式可以套用 scaffolder 來新增 RCL Identity 套件。 您可以選擇 Identity 要產生的程式碼。
+**未** 包含驗證的應用程式可以套用 scaffolder 來新增 RCL Identity 套件。 您可以選擇 Identity 要產生的程式碼。
 
 雖然 scaffolder 會產生大部分必要的程式碼，但您必須更新您的專案，才能完成此程式。 本檔說明完成程式更新所需的步驟 Identity 。
 
-當 Identity scaffolder 執行時，會在專案目錄中建立 *ScaffoldingReadme.txt* 檔案。 *ScaffoldingReadme.txt*檔案包含完成此樣板更新所需功能的一般指示 Identity 。 本檔包含比 *ScaffoldingReadme.txt* 檔案更完整的指示。
+當 Identity scaffolder 執行時，會在專案目錄中建立 *ScaffoldingReadme.txt* 檔案。 *ScaffoldingReadme.txt* 檔案包含完成此樣板更新所需功能的一般指示 Identity 。 本檔包含比 *ScaffoldingReadme.txt* 檔案更完整的指示。
 
 我們建議使用可顯示檔案差異的原始檔控制系統，並可讓您將變更移出。 執行 scaffolder 後檢查變更 Identity 。
 
@@ -537,7 +538,7 @@ dotnet ef database update
 
 [!INCLUDE[](~/includes/scaffold-identity/id-scaffold-dlg.md)]
 
-Identity是在*區域/ Identity / Identity HostingStartup.cs*中設定。 如需詳細資訊，請參閱 [IHostingStartup](xref:fundamentals/configuration/platform-specific-configuration)。
+Identity是在 *區域/ Identity / Identity HostingStartup.cs* 中設定。 如需詳細資訊，請參閱 [IHostingStartup](xref:fundamentals/configuration/platform-specific-configuration)。
 
 <a name="efm"></a>
 
@@ -576,7 +577,7 @@ dotnet aspnet-codegenerator identity -dc RPauth.Data.ApplicationDbContext --file
 
 [!INCLUDE[](~/includes/scaffold-identity/id-scaffold-dlg-auth.md)]
 
-某些 Identity 選項是在*區域/ Identity / Identity HostingStartup.cs*中設定。 如需詳細資訊，請參閱 [IHostingStartup](xref:fundamentals/configuration/platform-specific-configuration)。
+某些 Identity 選項是在 *區域/ Identity / Identity HostingStartup.cs* 中設定。 如需詳細資訊，請參閱 [IHostingStartup](xref:fundamentals/configuration/platform-specific-configuration)。
 
 ## <a name="scaffold-no-locidentity-into-an-mvc-project-without-existing-authorization"></a>Scaffold Identity 至沒有現有授權的 MVC 專案
 
@@ -602,7 +603,7 @@ dotnet ef database update
 
 * 將 *Pages/shared/_LoginPartial 的 cshtml* 檔案移至 *Views/shared/_LoginPartial. cshtml*
 
-Identity是在*區域/ Identity / Identity HostingStartup.cs*中設定。 如需詳細資訊，請參閱 IHostingStartup。
+Identity是在 *區域/ Identity / Identity HostingStartup.cs* 中設定。 如需詳細資訊，請參閱 IHostingStartup。
 
 [!INCLUDE[](~/includes/scaffold-identity/migrations.md)]
 
@@ -630,7 +631,7 @@ dotnet aspnet-codegenerator identity -dc MvcAuth.Data.ApplicationDbContext  --fi
 
 ## <a name="create-full-no-locidentity-ui-source"></a>建立完整的 Identity UI 來源
 
-若要維持 UI 的完整控制權 Identity ，請執行 Identity scaffolder，然後選取 [覆 **寫所有**檔案]。
+若要維持 UI 的完整控制權 Identity ，請執行 Identity scaffolder，然後選取 [覆 **寫所有** 檔案]。
 
 下列醒目提示的程式碼顯示 Identity Identity 在 ASP.NET Core 2.1 web 應用程式中，用來取代預設 UI 的變更。 您可能會想要這樣做，才能完全控制 Identity UI。
 
@@ -684,7 +685,7 @@ dotnet aspnet-codegenerator identity -dc RPauth.Data.ApplicationDbContext --file
 
   [!code-cshtml[](scaffold-identity/sample/Register.cshtml)]
 
-* 批註或移除*區域/ Identity /Pages/Account/Login.cshtml*的註冊連結
+* 批註或移除 *區域/ Identity /Pages/Account/Login.cshtml* 的註冊連結
 
 ```cshtml
 @*

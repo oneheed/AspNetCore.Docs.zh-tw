@@ -7,6 +7,7 @@ ms.custom: mvc
 ms.date: 03/27/2019
 ms.topic: tutorial
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -18,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: data/ef-mvc/advanced
-ms.openlocfilehash: 9f02165f54d3cd3328496710dc92ebc86c4640d6
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: 386be395399bf4131e4b6c8cac8221f994e8b7c5
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88626827"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93054381"
 ---
 # <a name="tutorial-learn-about-advanced-scenarios---aspnet-mvc-with-ef-core"></a>教學課程：瞭解 advanced 案例-使用 EF Core ASP.NET MVC
 
@@ -42,7 +43,7 @@ ms.locfileid: "88626827"
 > * 了解 EF Core 原始程式碼和開發計劃
 > * 了解如何使用動態 LINQ 來簡化程式碼
 
-## <a name="prerequisites"></a>Prerequisites
+## <a name="prerequisites"></a>必要條件
 
 * [實作繼承](inheritance.md)
 
@@ -66,7 +67,7 @@ ms.locfileid: "88626827"
 
 [!code-csharp[](intro/samples/cu/Controllers/DepartmentsController.cs?name=snippet_RawSQL&highlight=8,9,10)]
 
-若要確認新的程式碼運作正常，請選取 [部門] **** 索引標籤，然後針對其中一個部門選取 [詳細資料] ****。
+若要確認新的程式碼運作正常，請選取 [部門]  索引標籤，然後針對其中一個部門選取 [詳細資料]  。
 
 ![部門詳細資料](advanced/_static/department-details.png)
 
@@ -100,25 +101,25 @@ ms.locfileid: "88626827"
 
 當控制器處理 HttpGet 要求時，不會在 `ViewData["RowsAffected"]` 中傳回任何項目，而檢視會顯示空白的文字方塊和提交按鈕，如上圖所示。
 
-按一下 [更新]**** 按鈕後，會呼叫 HttpPost 方法，而乘數具有在文字方塊中輸入的值。 程式碼接著執行的 SQL 會更新課程，並將受影響的資料列數目傳回至 `ViewData` 中的檢視。 當檢視取得 `RowsAffected` 值時，它會顯示更新的資料列數目。
+按一下 [更新]  按鈕後，會呼叫 HttpPost 方法，而乘數具有在文字方塊中輸入的值。 程式碼接著執行的 SQL 會更新課程，並將受影響的資料列數目傳回至 `ViewData` 中的檢視。 當檢視取得 `RowsAffected` 值時，它會顯示更新的資料列數目。
 
-在方案總管**** 中，以滑鼠右鍵按一下 *Views/Courses* 資料夾，然後按一下 [新增] > [新增項目]****。
+在方案總管  中，以滑鼠右鍵按一下  。
 
-在 [**加入新專案**] 對話方塊中，按一下左窗格中 [**已安裝**] 下方的**ASP.NET Core** ，按一下 [ ** Razor View**]，然後將新的 view UpdateCourseCredits 命名為*cshtml*。
+在 [ **加入新專案** ] 對話方塊中，按一下左窗格中 [ **已安裝** ] 下方的 **ASP.NET Core** ，按一下 [ **Razor View** ]，然後將新的 view UpdateCourseCredits 命名為 *cshtml* 。
 
 在 *Views/Courses/UpdateCourseCredits.cshtml* 中，以下列程式碼取代範本程式碼：
 
 [!code-cshtml[](intro/samples/cu/Views/Courses/UpdateCourseCredits.cshtml)]
 
-藉由選取 [課程] **** 索引標籤，然後將 "/UpdateCourseCredits" 新增至瀏覽器位址列中的 URL 結尾 (例如：`http://localhost:5813/Courses/UpdateCourseCredits`)，以執行 `UpdateCourseCredits` 方法。 在文字方塊中輸入數目：
+藉由選取 [課程]  索引標籤，然後將 "/UpdateCourseCredits" 新增至瀏覽器位址列中的 URL 結尾 (例如：`http://localhost:5813/Courses/UpdateCourseCredits`)，以執行 `UpdateCourseCredits` 方法。 在文字方塊中輸入數目：
 
 ![更新課程學分數頁面](advanced/_static/update-credits.png)
 
-按一下 [更新] 。 您會看到受影響的資料列數目：
+按一下 [更新]  。 您會看到受影響的資料列數目：
 
 ![更新課程學分數頁面之受影響的資料列](advanced/_static/update-credits-rows-affected.png)
 
-按一下 [回到清單]****，以查看課程與已修訂學分數的清單。
+按一下 [回到清單]  ，以查看課程與已修訂學分數的清單。
 
 請注意，生產環境程式碼可確保更新一律會產生有效的資料。 此處顯示的簡化程式碼會增加足夠的學分數而使其數目大於 5。  (`Credits` 屬性具有 `[Range(0, 5)]` 屬性。 ) 更新查詢將可運作，但不正確資料可能會導致系統的其他部分假設點數的其他部分是5或更少的結果。
 
@@ -128,11 +129,11 @@ ms.locfileid: "88626827"
 
 有時能夠看到傳送至資料庫的實際 SQL 查詢很有幫助。 EF Core 會自動使用 ASP.NET Core 的內建記錄功能來寫入記錄檔，以包含用於查詢和更新的 SQL。 在本節中，您將看到 SQL 記錄的一些範例。
 
-開啟 *StudentsController.cs*，並在 `Details` 方法中設定 `if (student == null)` 陳述式的中斷點。
+開啟 *StudentsController.cs* ，並在 `Details` 方法中設定 `if (student == null)` 陳述式的中斷點。
 
 以偵錯模式執行應用程式，並移至學生的 [詳細資料] 頁面。
 
-移至顯示偵錯輸出的 [輸出] **** 視窗，您會看到查詢：
+移至顯示偵錯輸出的 [輸出]  視窗，您會看到查詢：
 
 ```
 Microsoft.EntityFrameworkCore.Database.Command:Information: Executed DbCommand (56ms) [Parameters=[@__id_0='?'], CommandType='Text', CommandTimeout='30']
@@ -158,7 +159,7 @@ ORDER BY [t].[ID]
 * 如果查詢會傳回多個資料列，則方法會傳回 null。
 * 若要判斷查詢是否會傳回多個資料列，EF 必須檢查它是否會至少傳回 2。
 
-請注意，您不必使用偵錯模式並在中斷點處停止，便能在 [輸出] **** 視窗中取得記錄輸出。 它只是在您想要查看輸出的點上停止記錄的便利方式。 如果不這樣做，記錄將繼續進行，而您必須往回捲動以尋找您感興趣的部分。
+請注意，您不必使用偵錯模式並在中斷點處停止，便能在 [輸出]  視窗中取得記錄輸出。 它只是在您想要查看輸出的點上停止記錄的便利方式。 如果不這樣做，記錄將繼續進行，而您必須往回捲動以尋找您感興趣的部分。
 
 ## <a name="create-an-abstraction-layer"></a>建立抽象層
 
@@ -214,7 +215,7 @@ Tom Dykstra 和 Rick Anderson (Twitter @RickAndMSFT) 撰寫了本教學課程。
 
 <a id="common-errors"></a>
 
-## <a name="troubleshoot-common-errors"></a>常見問題疑難排解
+## <a name="troubleshoot-common-errors"></a>對常見錯誤進行疑難排解
 
 ### <a name="contosouniversitydll-used-by-another-process"></a>ContosoUniversity.dll 已由其他處理序使用
 
@@ -224,7 +225,7 @@ Tom Dykstra 和 Rick Anderson (Twitter @RickAndMSFT) 撰寫了本教學課程。
 
 解決方案：
 
-停止 IIS Express 中的網站。 移至 Windows 系統匣中，尋找 IIS Express 並以滑鼠右鍵按一下其圖示，選取 Contoso 大學網站，然後按一下 [停止網站]****。
+停止 IIS Express 中的網站。 移至 Windows 系統匣中，尋找 IIS Express 並以滑鼠右鍵按一下其圖示，選取 Contoso 大學網站，然後按一下 [停止網站]  。
 
 ### <a name="migration-scaffolded-with-no-code-in-up-and-down-methods"></a>Up 和 Down 方法中沒有程式碼的 Scaffold 移轉
 
@@ -240,9 +241,9 @@ EF CLI 命令不會自動關閉並儲存程式碼檔案。 如果您有未儲存
 
 在具有現有資料的資料庫中進行結構描述變更時，可能會收到其他錯誤。 如果收到無法解決的移轉錯誤，您可以變更連接字串中的資料庫名稱，或刪除該資料庫。 使用新資料庫時，沒有可移轉的資料，因此 update-database 命令更可能會在沒有錯誤的情況下完成。
 
-最簡單的方法是在 *appsettings.json* 中重新命名資料庫。 下次您執行 `database update` 時，就會建立新的資料庫。
+最簡單的方法是在中重新命名資料庫 *appsettings.json* 。 下次您執行 `database update` 時，就會建立新的資料庫。
 
-若要刪除 SSOX 中的資料庫，請以滑鼠右鍵按一下該資料庫，按一下 [刪除]****，然後在 [刪除資料庫]**** 對話方塊中選取 [關閉現有的連線]****，並按一下 [確定]****。
+若要刪除 SSOX 中的資料庫，請以滑鼠右鍵按一下該資料庫，按一下 [刪除]  ，然後在 [刪除資料庫]  對話方塊中選取 [關閉現有的連線]  ，並按一下 [確定]  。
 
 若要使用 CLI 來刪除資料庫，請執行 `database drop` CLI 命令：
 

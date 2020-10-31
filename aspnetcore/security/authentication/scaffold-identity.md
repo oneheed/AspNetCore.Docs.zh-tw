@@ -19,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: security/authentication/scaffold-identity
-ms.openlocfilehash: c79dfc64d4311088c3f9ea03aad7570189000e2a
-ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
+ms.openlocfilehash: 813dd7837c265c78c584d66dd51bc23399d12fbe
+ms.sourcegitcommit: 5156eab2118584405eb663e1fcd82f8bd7764504
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 10/30/2020
-ms.locfileid: "93053315"
+ms.lasthandoff: 10/31/2020
+ms.locfileid: "93141491"
 ---
 # <a name="scaffold-no-locidentity-in-aspnet-core-projects"></a>IdentityASP.NET Core 專案中的 Scaffold
 
@@ -372,6 +372,14 @@ TokenProvider.XsrfToken = InitialState.XsrfToken;
 
 某些 Identity 選項是在 *區域/ Identity / Identity HostingStartup.cs* 中設定。 如需詳細資訊，請參閱 [IHostingStartup](xref:fundamentals/configuration/platform-specific-configuration)。
 
+## <a name="standalone-or-hosted-no-locblazor-webassembly-apps"></a>獨立或託管的 Blazor WebAssembly 應用程式
+
+用戶端 Blazor WebAssembly 應用程式使用自己的 Identity UI 方法，無法使用樣板 ASP.NET Core Identity 。 裝載解決方案的伺服器端 ASP.NET Core 應用程式 Blazor 可以遵循本文 Razor 中的頁面/MVC 指導方針，其設定方式就像任何其他支援的 ASP.NET Core 應用程式類型 Identity 。
+
+Blazor架構不包含 Razor UI 頁面的元件版本 Identity 。 Identity UI Razor 元件可以自訂建立，也可以從不支援的協力廠商來源取得。
+
+如需詳細資訊，請參閱[ Blazor 安全性和 Identity 文章](xref:blazor/security/index)。
+
 <a name="full"></a>
 
 ## <a name="create-full-no-locidentity-ui-source"></a>建立完整的 Identity UI 來源
@@ -550,7 +558,7 @@ Identity是在 *區域/ Identity / Identity HostingStartup.cs* 中設定。 如�
 
 ### <a name="enable-authentication"></a>啟用驗證
 
-在 `Configure` 類別的方法中 `Startup` ，于之後呼叫 [UseAuthentication](/dotnet/api/microsoft.aspnetcore.builder.authappbuilderextensions.useauthentication?view=aspnetcore-2.0#Microsoft_AspNetCore_Builder_AuthAppBuilderExtensions_UseAuthentication_Microsoft_AspNetCore_Builder_IApplicationBuilder_) `UseStaticFiles` ：
+在 `Configure` 類別的方法中 `Startup` ，呼叫 <xref:Microsoft.AspNetCore.Builder.AuthAppBuilderExtensions.UseAuthentication%2A> 之後 `UseStaticFiles` ：
 
 [!code-csharp[](scaffold-identity/sample/StartupRPnoAuth.cs?name=snippet1&highlight=29)]
 
@@ -607,7 +615,7 @@ Identity是在 *區域/ Identity / Identity HostingStartup.cs* 中設定。 如�
 
 [!INCLUDE[](~/includes/scaffold-identity/migrations.md)]
 
-呼叫 [UseAuthentication](/dotnet/api/microsoft.aspnetcore.builder.authappbuilderextensions.useauthentication?view=aspnetcore-2.0#Microsoft_AspNetCore_Builder_AuthAppBuilderExtensions_UseAuthentication_Microsoft_AspNetCore_Builder_IApplicationBuilder_) 之後 `UseStaticFiles` ：
+呼叫 <xref:Microsoft.AspNetCore.Builder.AuthAppBuilderExtensions.UseAuthentication%2A> 之後 `UseStaticFiles` ：
 
 [!code-csharp[](scaffold-identity/sample/StartupMvcNoAuth.cs?name=snippet1&highlight=23)]
 

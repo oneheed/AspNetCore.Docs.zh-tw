@@ -5,7 +5,7 @@ description: 瞭解如何從外部提供者建立其他宣告和權杖。
 monikerRange: '>= aspnetcore-2.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 10/15/2019
+ms.date: 10/30/2020
 no-loc:
 - appsettings.json
 - ASP.NET Core Identity
@@ -19,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: security/authentication/social/additional-claims
-ms.openlocfilehash: 733afec8d3253ec58a7edf6d7fcf35e303a7fe57
-ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
+ms.openlocfilehash: 4503291ff887f79b1ad6eacd4e56943ce23335bc
+ms.sourcegitcommit: 5156eab2118584405eb663e1fcd82f8bd7764504
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 10/30/2020
-ms.locfileid: "93060322"
+ms.lasthandoff: 10/31/2020
+ms.locfileid: "93141504"
 ---
 # <a name="persist-additional-claims-and-tokens-from-external-providers-in-aspnet-core"></a>在 ASP.NET Core 中保存外部提供者的其他宣告和權杖
 
@@ -34,7 +34,7 @@ ASP.NET Core 的應用程式可以從外部驗證提供者（例如 Facebook、G
 
 [查看或下載範例程式碼](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/security/authentication/social/additional-claims/samples) ([如何下載](xref:index#how-to-download-a-sample)) 
 
-## <a name="prerequisites"></a>必要條件
+## <a name="prerequisites"></a>Prerequisites
 
 決定要在應用程式中支援的外部驗證提供者。 針對每個提供者，註冊應用程式並取得用戶端識別碼和用戶端密碼。 如需詳細資訊，請參閱<xref:security/authentication/social/index>。 範例應用程式會使用 [Google 驗證提供者](xref:security/authentication/google-logins)。
 
@@ -60,11 +60,11 @@ OAuth 驗證提供者會使用用戶端識別碼和用戶端密碼，建立與�
 | 提供者  | 影響範圍                                                            |
 | --------- | ---------------------------------------------------------------- |
 | Facebook  | `https://www.facebook.com/dialog/oauth`                          |
-| Google    | `https://www.googleapis.com/auth/userinfo.profile`               |
+| Google    | `profile`, `email`, `openid`                                     |
 | Microsoft | `https://login.microsoftonline.com/common/oauth2/v2.0/authorize` |
 | Twitter   | `https://api.twitter.com/oauth/authenticate`                     |
 
-在範例應用程式中， `userinfo.profile` 當在上呼叫時，架構會自動加入 Google 的範圍 <xref:Microsoft.Extensions.DependencyInjection.GoogleExtensions.AddGoogle*> <xref:Microsoft.AspNetCore.Authentication.AuthenticationBuilder> 。 如果應用程式需要其他範圍，請將它們新增至選項。 下列範例 `https://www.googleapis.com/auth/user.birthday.read` 會新增 Google 範圍，以取得使用者的生日：
+在範例應用程式中， `profile` 當在 `email` `openid` 上呼叫時，架構會自動加入 Google 的、和範圍 <xref:Microsoft.Extensions.DependencyInjection.GoogleExtensions.AddGoogle%2A> <xref:Microsoft.AspNetCore.Authentication.AuthenticationBuilder> 。 如果應用程式需要其他範圍，請將它們新增至選項。 在下列範例中， `https://www.googleapis.com/auth/user.birthday.read` 會新增 Google 範圍來取得使用者的生日：
 
 ```csharp
 options.Scope.Add("https://www.googleapis.com/auth/user.birthday.read");
@@ -174,7 +174,7 @@ ASP.NET Core 的應用程式可以從外部驗證提供者（例如 Facebook、G
 
 [查看或下載範例程式碼](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/security/authentication/social/additional-claims/samples) ([如何下載](xref:index#how-to-download-a-sample)) 
 
-## <a name="prerequisites"></a>必要條件
+## <a name="prerequisites"></a>Prerequisites
 
 決定要在應用程式中支援的外部驗證提供者。 針對每個提供者，註冊應用程式並取得用戶端識別碼和用戶端密碼。 如需詳細資訊，請參閱<xref:security/authentication/social/index>。 範例應用程式會使用 [Google 驗證提供者](xref:security/authentication/google-logins)。
 

@@ -12,8 +12,10 @@
       href: /dotnet/standard/choosing-core-framework-server?toc=/aspnet/core/toc.json&bc=/aspnet/core/breadcrumb/toc.json
 - name: 開始使用
   uid: getting-started
-- name: 版本資訊
+- name: 新功能
   items:
+    - name: 5.0 中的新功能
+      uid: aspnetcore-5.0
     - name: 3.1 中的新功能
       uid: aspnetcore-3.1
     - name: 3.0 中的新功能
@@ -357,20 +359,14 @@
                   href: blazor/forms-validation.md#built-in-forms-components
                 - name: InputTextArea
                   href: blazor/forms-validation.md#built-in-forms-components
-                - name: 連結
-                  href: blazor/fundamentals/additional-scenarios.md#influence-html-head-tag-elements
                 - name: MainLayout
                   href: blazor/layouts.md#mainlayout-component
-                - name: 中繼
-                  href: blazor/fundamentals/additional-scenarios.md#influence-html-head-tag-elements
                 - name: NavLink
                   href: blazor/fundamentals/routing.md#navlink-component
                 - name: NavMenu
                   href: blazor/fundamentals/routing.md#navlink-component
                 - name: 路由器
                   href: blazor/fundamentals/routing.md#route-templates
-                - name: Title
-                  href: blazor/fundamentals/additional-scenarios.md#influence-html-head-tag-elements
                 - name: Virtualize
                   uid: blazor/components/virtualization
             - name: 串聯的值及參數

@@ -5,7 +5,7 @@ description: 瞭解如何使用 Azure Active Directory 保護 ASP.NET Core Blazo
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: devx-track-csharp, mvc
-ms.date: 10/27/2020
+ms.date: 11/02/2020
 no-loc:
 - appsettings.json
 - ASP.NET Core Identity
@@ -19,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/security/webassembly/hosted-with-azure-active-directory
-ms.openlocfilehash: 3d0cc8d9891e0f656651a83dcd0bfdebfc266920
-ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
+ms.openlocfilehash: 17f96be762ece8c59577445eb2ae630a8ee3b3dd
+ms.sourcegitcommit: d64bf0cbe763beda22a7728c7f10d07fc5e19262
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 10/30/2020
-ms.locfileid: "93055317"
+ms.lasthandoff: 11/03/2020
+ms.locfileid: "93234474"
 ---
 # <a name="secure-an-aspnet-core-no-locblazor-webassembly-hosted-app-with-azure-active-directory"></a>Blazor WebAssembly使用 Azure Active Directory 保護 ASP.NET Core 託管應用程式
 
@@ -141,15 +141,17 @@ ms.locfileid: "93055317"
 dotnet new blazorwasm -au SingleOrg --api-client-id "{SERVER API APP CLIENT ID}" --app-id-uri "{SERVER API APP ID URI}" --client-id "{CLIENT APP CLIENT ID}" --default-scope "{DEFAULT SCOPE}" --domain "{TENANT DOMAIN}" -ho -o {APP NAME} --tenant-id "{TENANT ID}"
 ```
 
-| 預留位置                  | Azure 入口網站名稱                                     | 範例                                      |
-| ---------------------------- | ----------------------------------------------------- | -------------------------------------------- |
-| `{APP NAME}`                 | &mdash;                                               | `BlazorSample`                               |
-| `{CLIENT APP CLIENT ID}`     | 應用程式 (用戶端) 的應用程式識別碼 *`Client`*        | `4369008b-21fa-427c-abaa-9b53bf58e538`       |
-| `{DEFAULT SCOPE}`            | 範圍名稱                                            | `API.Access`                                 |
-| `{SERVER API APP CLIENT ID}` | *伺服器 API 應用* 程式 (用戶端) 識別碼      | `41451fa7-82d9-4673-8fa5-69eff5a761fd`       |
-| `{SERVER API APP ID URI}`    | 應用程式識別碼 URI                                    | `api://41451fa7-82d9-4673-8fa5-69eff5a761fd` |
-| `{TENANT DOMAIN}`            | 主要/發行者/租使用者網域                       | `contoso.onmicrosoft.com`                    |
-| `{TENANT ID}`                | 目錄 (租用戶) 識別碼                                 | `e86c78e2-8bb4-4c41-aefd-918e0565a45e`       |
+| 預留位置                  | Azure 入口網站名稱                                     | 範例                                        |
+| ---------------------------- | ----------------------------------------------------- | ---------------------------------------------- |
+| `{APP NAME}`                 | &mdash;                                               | `BlazorSample`                                 |
+| `{CLIENT APP CLIENT ID}`     | 應用程式 (用戶端) 的應用程式識別碼 *`Client`*        | `4369008b-21fa-427c-abaa-9b53bf58e538`         |
+| `{DEFAULT SCOPE}`            | 範圍名稱                                            | `API.Access`                                   |
+| `{SERVER API APP CLIENT ID}` | *伺服器 API 應用* 程式 (用戶端) 識別碼      | `41451fa7-82d9-4673-8fa5-69eff5a761fd`         |
+| `{SERVER API APP ID URI}`    | 應用程式識別碼 URI&dagger;                            | `41451fa7-82d9-4673-8fa5-69eff5a761fd`&dagger; |
+| `{TENANT DOMAIN}`            | 主要/發行者/租使用者網域                       | `contoso.onmicrosoft.com`                      |
+| `{TENANT ID}`                | 目錄 (租用戶) 識別碼                                 | `e86c78e2-8bb4-4c41-aefd-918e0565a45e`         |
+
+&dagger;Blazor WebAssembly範本會自動將配置新增 `api://` 至命令中傳遞的應用程式識別碼 URI 引數 `dotnet new` 。 提供預留位置的應用程式識別碼 URI， `{SERVER API APP ID URI}` 而且如果配置為 `api://` ，請從引數中移除配置 (`api://`) ，如同上表中的範例值所示。 如果應用程式識別碼 URI 是自訂值，或有一些其他配置 (例如，如果 `https://` 不受信任的發行者網域類似 `https://contoso.onmicrosoft.com/41451fa7-82d9-4673-8fa5-69eff5a761fd`) ，您必須手動更新預設範圍 URI，並在 `api://` *`Client`* 範本建立應用程式之後移除配置。 如需詳細資訊，請參閱 [存取權杖範圍](#access-token-scopes) 一節中的附注。 此 Blazor WebAssembly 範本可能會在未來的 ASP.NET Core 版本中變更，以解決這些案例。 如需詳細資訊，請參閱 [WASM template (hosted 的應用程式識別碼 URI 的雙配置 Blazor 、單一組織)  (dotnet/aspnetcore #27417) ](https://github.com/dotnet/aspnetcore/issues/27417)。
 
 使用 `-o|--output` 選項指定的輸出位置會建立專案資料夾 (如果不存在)，並成為應用程式名稱的一部分。
 
@@ -438,6 +440,29 @@ builder.Services.AddMsalAuthentication(options =>
     options.ProviderOptions.DefaultAccessTokenScopes.Add("{SCOPE URI}");
 });
 ```
+
+> [!NOTE]
+> Blazor WebAssembly範本會自動將配置新增 `api://` 至命令中傳遞的應用程式識別碼 URI 引數 `dotnet new` 。 從專案範本產生應用程式時 Blazor ，請確認預設存取權杖範圍的值使用您在 Azure 入口網站中提供的正確自訂應用程式識別碼 URI 值，或使用下列 **其中一** 種格式的值：
+>
+> * **信任** 目錄的發行者網域時，預設的存取權杖範圍通常會是類似下列範例的值，其中 `API.Access` 是預設的範圍名稱：
+>
+>   ```csharp
+>   options.ProviderOptions.DefaultAccessTokenScopes.Add(
+>       "api://41451fa7-82d9-4673-8fa5-69eff5a761fd/API.Access");
+>   ```
+>
+>   檢查雙精度浮配置的值 (`api://api://...`) 。 如果有雙重配置，請 `api://` 從值中移除第一個配置。
+>
+> * 當目錄的發行者網域不 **受信任** 時，預設存取權杖範圍通常會是類似下列範例的值，其中 `API.Access` 是預設的範圍名稱：
+>
+>   ```csharp
+>   options.ProviderOptions.DefaultAccessTokenScopes.Add(
+>       "https://contoso.onmicrosoft.com/41451fa7-82d9-4673-8fa5-69eff5a761fd/API.Access");
+>   ```
+>
+>   檢查額外 `api://` 配置 () 的值 `api://https://contoso.onmicrosoft.com/...` 。 如果有額外的 `api://` 配置，請 `api://` 從值中移除配置。
+>
+> 此 Blazor WebAssembly 範本可能會在未來的 ASP.NET Core 版本中變更，以解決這些案例。 如需詳細資訊，請參閱 [WASM template (hosted 的應用程式識別碼 URI 的雙配置 Blazor 、單一組織)  (dotnet/aspnetcore #27417) ](https://github.com/dotnet/aspnetcore/issues/27417)。
 
 使用下列內容指定其他範圍 `AdditionalScopesToConsent` ：
 

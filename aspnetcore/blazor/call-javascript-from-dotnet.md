@@ -19,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/call-javascript-from-dotnet
-ms.openlocfilehash: 217918fb946df966d45bba130606c8101d163aaf
-ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
+ms.openlocfilehash: 17d6087b884775a8bfcb41fe23296f508467e924
+ms.sourcegitcommit: d64bf0cbe763beda22a7728c7f10d07fc5e19262
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 10/30/2020
-ms.locfileid: "93056604"
+ms.lasthandoff: 11/03/2020
+ms.locfileid: "93234448"
 ---
 # <a name="call-javascript-functions-from-net-methods-in-aspnet-core-no-locblazor"></a>從 ASP.NET Core 中的 .NET 方法呼叫 JavaScript 函式 Blazor
 
@@ -56,7 +56,7 @@ JavaScript 程式碼（例如上述範例中所示的程式碼）也可以從 Ja
 
 下列元件：
 
-* `convertArray` `JSRuntime` 當選取元件按鈕 () 時，會叫用 JavaScript 函數 **`Convert Array`** 。
+* `convertArray` `JS` 當選取元件按鈕 () 時，會叫用 JavaScript 函數 **`Convert Array`** 。
 * 呼叫 JavaScript 函數之後，傳遞的陣列就會轉換成字串。 字串會傳回給元件以供顯示。
 
 [!code-razor[](call-javascript-from-dotnet/samples_snapshot/call-js-example.razor?highlight=2,34-35)]
@@ -77,7 +77,7 @@ JavaScript 程式碼（例如上述範例中所示的程式碼）也可以從 Ja
 
   [!code-csharp[](call-javascript-from-dotnet/samples_snapshot/inject-abstraction-class.cs?highlight=5)]
 
-  在 `<head>` `wwwroot/index.html` (Blazor WebAssembly) 或 () 的元素內 `Pages/_Host.cshtml` Blazor Server ，提供 `handleTickerChanged` JavaScript 函數。 呼叫函式時，會傳回 `JSRuntime.InvokeAsync` 值：
+  在 `<head>` `wwwroot/index.html` (Blazor WebAssembly) 或 () 的元素內 `Pages/_Host.cshtml` Blazor Server ，提供 `handleTickerChanged` JavaScript 函數。 呼叫函式時，會傳回 `JS.InvokeAsync` 值：
 
   [!code-html[](call-javascript-from-dotnet/samples_snapshot/index-script-handleTickerChanged2.html)]
 
@@ -85,7 +85,7 @@ JavaScript 程式碼（例如上述範例中所示的程式碼）也可以從 Ja
 
   ```razor
   [Inject]
-  IJSRuntime JSRuntime { get; set; }
+  IJSRuntime JS { get; set; }
   ```
 
 在本主題隨附的用戶端範例應用程式中，應用程式可以使用兩個 JavaScript 函式來與 DOM 互動，以接收使用者輸入並顯示歡迎訊息：
@@ -131,7 +131,7 @@ JavaScript 程式碼（例如上述範例中所示的程式碼）也可以從 Ja
 ```razor
 @page "/JSInterop"
 @using {APP ASSEMBLY}.JsInteropClasses
-@inject IJSRuntime JSRuntime
+@inject IJSRuntime JS
 
 <h1>JavaScript Interop</h1>
 
@@ -146,11 +146,11 @@ JavaScript 程式碼（例如上述範例中所示的程式碼）也可以從 Ja
 @code {
     public async Task TriggerJsPrompt()
     {
-        var name = await JSRuntime.InvokeAsync<string>(
+        var name = await JS.InvokeAsync<string>(
                 "exampleJsFunctions.showPrompt",
                 "What's your name?");
 
-        await JSRuntime.InvokeVoidAsync(
+        await JS.InvokeVoidAsync(
                 "exampleJsFunctions.displayWelcome",
                 $"Hello {name}! Welcome to Blazor!");
     }
@@ -236,10 +236,9 @@ window.interopFunctions = {
 
 ```csharp
 public static async Task TriggerClickEvent(this ElementReference elementRef, 
-    IJSRuntime jsRuntime)
+    IJSRuntime js)
 {
-    await jsRuntime.InvokeVoidAsync(
-        "interopFunctions.clickElement", elementRef);
+    await js.InvokeVoidAsync("interopFunctions.clickElement", elementRef);
 }
 ```
 
@@ -254,10 +253,9 @@ public static async Task TriggerClickEvent(this ElementReference elementRef,
 
 ```csharp
 public static ValueTask<T> GenericMethod<T>(this ElementReference elementRef, 
-    IJSRuntime jsRuntime)
+    IJSRuntime js)
 {
-    return jsRuntime.InvokeAsync<T>(
-        "exampleJsFunctions.doSomethingGeneric", elementRef);
+    return js.InvokeAsync<T>("exampleJsFunctions.doSomethingGeneric", elementRef);
 }
 ```
 
@@ -488,7 +486,7 @@ JS interop 可能因為網路錯誤而失敗，應該視為不可靠。 根據�
 * 元件程式碼中的每個調用，單一呼叫可以指定 timeout：
 
   ```csharp
-  var result = await JSRuntime.InvokeAsync<string>("MyJSOperation", 
+  var result = await JS.InvokeAsync<string>("MyJSOperation", 
       TimeSpan.FromSeconds({SECONDS}), new[] { "Arg1" });
   ```
 
@@ -525,10 +523,10 @@ export function showPrompt(message) {
 }
 ```
 
-將上述 JavaScript 模組新增至 .NET 程式庫作為靜態 web 資產 (`wwwroot/exampleJsInterop.js`) 然後使用服務將模組匯入至 .net 程式碼 <xref:Microsoft.JSInterop.IJSRuntime> 。 服務會插入為 `jsRuntime` 下列範例中未顯示的 () ：
+將上述 JavaScript 模組新增至 .NET 程式庫作為靜態 web 資產 (`wwwroot/exampleJsInterop.js`) 然後使用服務將模組匯入至 .net 程式碼 <xref:Microsoft.JSInterop.IJSRuntime> 。 服務會插入為 `js` 下列範例中未顯示的 () ：
 
 ```csharp
-var module = await jsRuntime.InvokeAsync<IJSObjectReference>(
+var module = await js.InvokeAsync<IJSObjectReference>(
     "import", "./_content/MyComponents/exampleJsInterop.js");
 ```
 
@@ -557,13 +555,15 @@ window.unmarshalledInstance = {
 ```
 
 ```csharp
-var unmarshalledRuntime = (IJSUnmarshalledRuntime)jsRuntime;
+var unmarshalledRuntime = (IJSUnmarshalledRuntime)js;
 var jsUnmarshalledReference = unmarshalledRuntime
     .InvokeUnmarshalled<IJSUnmarshalledObjectReference>("unmarshalledInstance");
 
 string helloWorldString = jsUnmarshalledReference.InvokeUnmarshalled<string, string>(
     "helloWorld");
 ```
+
+在上述範例中， <xref:Microsoft.JSInterop.IJSRuntime> 服務會插入到類別中，並指派給 `js` (未顯示) 。
 
 ## <a name="use-of-javascript-libraries-that-render-ui-dom-elements"></a>使用可轉譯 UI (DOM 元素的 JavaScript 程式庫) 
 

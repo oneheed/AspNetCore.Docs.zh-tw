@@ -5,7 +5,7 @@ description: 瞭解如何將 ASP.NET Core SignalR 應用程式發佈到 Azure Ap
 monikerRange: '>= aspnetcore-2.1'
 ms.author: bradyg
 ms.custom: mvc
-ms.date: 11/12/2019
+ms.date: 11/02/2020
 no-loc:
 - appsettings.json
 - ASP.NET Core Identity
@@ -19,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: signalr/publish-to-azure-web-app
-ms.openlocfilehash: e00eea81788c9b335691b7e5ffe6a46534c3c492
-ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
+ms.openlocfilehash: 8e6d36fe0b38486f94078b8f9cf12b852da7e0d9
+ms.sourcegitcommit: d64bf0cbe763beda22a7728c7f10d07fc5e19262
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 10/30/2020
-ms.locfileid: "93058216"
+ms.lasthandoff: 11/03/2020
+ms.locfileid: "93234502"
 ---
 # <a name="publish-an-aspnet-core-no-locsignalr-app-to-azure-app-service"></a>SignalR將 ASP.NET Core 應用程式發佈至 Azure App Service
 
@@ -54,7 +54,7 @@ ms.locfileid: "93058216"
    | **資源群組** | 應用程式所屬的相關資源群組。 |
    | **主控方案**   | Web 應用程式的定價方案。 |
 
-1. 在 [相依性新增] 下拉式清單中選取 [ **Azure SignalR 服務** **]**  >  **Add** ：
+1. 在 [服務相依性 **]** 區段中選取 [ **Azure SignalR 服務** ]。 選取 **+** 按鈕：
 
    ![[相依性] 區域會顯示在 [新增] 下拉式清單中選取的 Azure：：： no-loc (SignalR) ：：： Service](publish-to-azure-web-app/_static/signalr-service-dependency.png)
 

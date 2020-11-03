@@ -19,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/security/webassembly/additional-scenarios
-ms.openlocfilehash: 22c8ab52a93e7ea7df6be608501bebf33764b711
-ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
+ms.openlocfilehash: 88970b0e53b456467bdc2218a3a6b943bbbf0df5
+ms.sourcegitcommit: d64bf0cbe763beda22a7728c7f10d07fc5e19262
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 10/30/2020
-ms.locfileid: "93055330"
+ms.lasthandoff: 11/03/2020
+ms.locfileid: "93234383"
 ---
 # <a name="aspnet-core-no-locblazor-webassembly-additional-security-scenarios"></a>ASP.NET Core Blazor WebAssembly 額外的安全性案例
 
@@ -65,7 +65,7 @@ builder.Services.AddScoped(sp => sp.GetRequiredService<IHttpClientFactory>()
 
 ```razor
 @using Microsoft.AspNetCore.Components.WebAssembly.Authentication
-@inject HttpClient Client
+@inject HttpClient Http
 
 ...
 
@@ -76,7 +76,7 @@ protected override async Task OnInitializedAsync()
     try
     {
         examples = 
-            await Client.GetFromJsonAsync<ExampleType[]>("ExampleAPIMethod");
+            await Http.GetFromJsonAsync<ExampleType[]>("ExampleAPIMethod");
 
         ...
     }
@@ -191,11 +191,11 @@ using static {APP ASSEMBLY}.Data;
 
 public class WeatherForecastClient
 {
-    private readonly HttpClient client;
+    private readonly HttpClient http;
  
-    public WeatherForecastClient(HttpClient client)
+    public WeatherForecastClient(HttpClient http)
     {
-        this.client = client;
+        this.http = http;
     }
  
     public async Task<WeatherForecast[]> GetForecastAsync()
@@ -204,7 +204,7 @@ public class WeatherForecastClient
 
         try
         {
-            forecasts = await client.GetFromJsonAsync<WeatherForecast[]>(
+            forecasts = await http.GetFromJsonAsync<WeatherForecast[]>(
                 "WeatherForecast");
         }
         catch (AccessTokenNotAvailableException exception)
@@ -356,7 +356,7 @@ if (tokenResult.TryGetToken(out var token))
 * `true` 搭配 `token` 使用。
 * `false` 如果未抓取權杖，則為。
 
-## <a name="cross-origin-resource-sharing-cors"></a>跨原始資源分享 (CORS) 
+## <a name="cross-origin-resource-sharing-cors"></a>跨原始來源資源分享 (CORS)
 
 在 cookie cors 要求上 (授權 s/標頭) 傳送認證時， `Authorization` cors 原則必須允許標頭。
 
@@ -411,6 +411,11 @@ IP 發出給使用者的權杖通常會在短時間內有效（大約一小時�
 * 使用查詢字串參數，在驗證之後復原先前的狀態。
 
 ```razor
+...
+@using Microsoft.AspNetCore.Components.WebAssembly.Authentication
+@inject IAccessTokenProvider TokenProvider
+...
+
 <EditForm Model="User" @onsubmit="OnSaveAsync">
     <label>User
         <InputText @bind-Value="User.Name" />
@@ -442,12 +447,12 @@ IP 發出給使用者的權杖通常會在短時間內有效（大約一小時�
 
     public async Task OnSaveAsync()
     {
-        var httpClient = new HttpClient();
-        httpClient.BaseAddress = new Uri(Navigation.BaseUri);
+        var http = new HttpClient();
+        http.BaseAddress = new Uri(Navigation.BaseUri);
 
         var resumeUri = Navigation.Uri + $"?state=resumeSavingProfile";
 
-        var tokenResult = await AuthenticationService.RequestAccessToken(
+        var tokenResult = await TokenProvider.RequestAccessToken(
             new AccessTokenRequestOptions
             {
                 ReturnUrl = resumeUri
@@ -455,9 +460,9 @@ IP 發出給使用者的權杖通常會在短時間內有效（大約一小時�
 
         if (tokenResult.TryGetToken(out var token))
         {
-            httpClient.DefaultRequestHeaders.Add("Authorization", 
+            http.DefaultRequestHeaders.Add("Authorization", 
                 $"Bearer {token.Value}");
-            await httpClient.PostAsJsonAsync("Save", User);
+            await http.PostAsJsonAsync("Save", User);
         }
         else
         {
@@ -611,7 +616,7 @@ builder.Services.AddSingleton<StateContainer>();
 
 根據預設，連結 [`Microsoft.AspNetCore.Components.WebAssembly.Authentication`](https://www.nuget.org/packages/Microsoft.AspNetCore.Components.WebAssembly.Authentication) 庫會使用下表所示的路由來表示不同的驗證狀態。
 
-| 路由                            | 目的 |
+| 路由                            | 用途 |
 | -------------------------------- | ------- |
 | `authentication/login`           | 觸發登入操作。 |
 | `authentication/login-callback`  | 處理任何登入作業的結果。 |

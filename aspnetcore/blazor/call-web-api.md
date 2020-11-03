@@ -19,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/call-web-api
-ms.openlocfilehash: 75536447094b633d3f17f5182783fb9a67bd1e3a
-ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
+ms.openlocfilehash: 85b3ded6ec25310a573e99cbedf0df005d92bdbe
+ms.sourcegitcommit: d64bf0cbe763beda22a7728c7f10d07fc5e19262
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 10/30/2020
-ms.locfileid: "93056474"
+ms.lasthandoff: 11/03/2020
+ms.locfileid: "93234409"
 ---
 # <a name="call-a-web-api-from-aspnet-core-no-locblazor"></a>從 ASP.NET Core 呼叫 web API Blazor
 
@@ -228,29 +228,29 @@ using System.Net.Http;
 using System.Net.Http.Json;
 using System.Threading.Tasks;
 
-public class WeatherForecastClient
+public class WeatherForecastHttpClient
 {
-    private readonly HttpClient client;
+    private readonly HttpClient http;
 
-    public WeatherForecastClient(HttpClient client)
+    public WeatherForecastHttpClient(HttpClient http)
     {
-        this.client = client;
+        this.http = http;
     }
 
     public async Task<WeatherForecast[]> GetForecastAsync()
     {
         var forecasts = new WeatherForecast[0];
-    
+
         try
         {
-            forecasts = await client.GetFromJsonAsync<WeatherForecast[]>(
+            forecasts = await http.GetFromJsonAsync<WeatherForecast[]>(
                 "WeatherForecast");
         }
         catch
         {
             ...
         }
-    
+
         return forecasts;
     }
 }
@@ -259,7 +259,7 @@ public class WeatherForecastClient
 `Program.Main` (`Program.cs`):
 
 ```csharp
-builder.Services.AddHttpClient<WeatherForecastClient>(client => 
+builder.Services.AddHttpClient<WeatherForecastHttpClient>(client => 
     client.BaseAddress = new Uri(builder.HostEnvironment.BaseAddress));
 ```
 
@@ -268,7 +268,7 @@ builder.Services.AddHttpClient<WeatherForecastClient>(client =>
 `FetchData` 元件 (`Pages/FetchData.razor`) ：
 
 ```razor
-@inject WeatherForecastClient Client
+@inject WeatherForecastHttpClient Http
 
 ...
 
@@ -277,7 +277,7 @@ builder.Services.AddHttpClient<WeatherForecastClient>(client =>
 
     protected override async Task OnInitializedAsync()
     {
-        forecasts = await Client.GetForecastAsync();
+        forecasts = await Http.GetForecastAsync();
     }
 }
 ```
@@ -399,7 +399,7 @@ protected override async Task OnInitializedAsync()
 
 如需詳細資訊，請參閱<xref:blazor/fundamentals/handle-errors>。
 
-## <a name="cross-origin-resource-sharing-cors"></a>跨原始資源分享 (CORS) 
+## <a name="cross-origin-resource-sharing-cors"></a>跨原始來源資源分享 (CORS)
 
 瀏覽器安全性可防止網頁向與提供網頁的不同網域提出要求。 這項限制稱為 *相同原始來源原則* 。 相同來源原則可防止惡意網站從另一個網站讀取敏感性資料。 若要從瀏覽器向具有不同來源的端點提出要求， *端點* 必須啟用 [跨原始來源資源分享 (CORS)](https://www.w3.org/TR/cors/)。
 

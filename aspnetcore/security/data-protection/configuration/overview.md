@@ -4,7 +4,7 @@ author: rick-anderson
 description: 瞭解如何在 ASP.NET Core 中設定資料保護。
 ms.author: riande
 ms.custom: mvc
-ms.date: 09/04/2020
+ms.date: 11/02/2020
 no-loc:
 - appsettings.json
 - ASP.NET Core Identity
@@ -18,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: security/data-protection/configuration/overview
-ms.openlocfilehash: 620aab1e47caf7539b2c0e1deca060c7eafa786f
-ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
+ms.openlocfilehash: 048f6d6d57d3cc5d64004e18b18a3347ee92e450
+ms.sourcegitcommit: d64bf0cbe763beda22a7728c7f10d07fc5e19262
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 10/30/2020
-ms.locfileid: "93052743"
+ms.lasthandoff: 11/03/2020
+ms.locfileid: "93234565"
 ---
 # <a name="configure-aspnet-core-data-protection"></a>設定 ASP.NET Core 資料保護
 
@@ -52,6 +52,12 @@ ms.locfileid: "93052743"
 
 ## <a name="protectkeyswithazurekeyvault"></a>ProtectKeysWithAzureKeyVault
 
+使用 CLI 登入 Azure，例如：
+
+```azurecli
+az login
+``` 
+
 若要將金鑰儲存在 [Azure Key Vault](https://azure.microsoft.com/services/key-vault/)中，請在類別中使用 [ProtectKeysWithAzureKeyVault](/dotnet/api/microsoft.aspnetcore.dataprotection.azuredataprotectionbuilderextensions.protectkeyswithazurekeyvault) 來設定系統 `Startup` 。 `blobUriWithSasToken` 這是應儲存金鑰檔的完整 URI。 URI 必須包含作為查詢字串參數的 SAS 權杖：
 
 ```csharp
@@ -59,7 +65,7 @@ public void ConfigureServices(IServiceCollection services)
 {
     services.AddDataProtection()
         .PersistKeysToAzureBlobStorage(new Uri("<blobUriWithSasToken>"))
-        .ProtectKeysWithAzureKeyVault("<keyIdentifier>", "<clientId>", "<clientSecret>");
+        .ProtectKeysWithAzureKeyVault(new Uri("<keyIdentifier>"), new DefaultAzureCredential());
 }
 ```
 
@@ -69,9 +75,8 @@ public void ConfigureServices(IServiceCollection services)
 
 `ProtectKeysWithAzureKeyVault` 重載：
 
-* [ProtectKeysWithAzureKeyVault (IDataProtectionBuilder、KeyVaultClient、String) ](/dotnet/api/microsoft.aspnetcore.dataprotection.azuredataprotectionbuilderextensions.protectkeyswithazurekeyvault#Microsoft_AspNetCore_DataProtection_AzureDataProtectionBuilderExtensions_ProtectKeysWithAzureKeyVault_Microsoft_AspNetCore_DataProtection_IDataProtectionBuilder_Microsoft_Azure_KeyVault_KeyVaultClient_System_String_) 允許使用 [KeyVaultClient](/dotnet/api/microsoft.azure.keyvault.keyvaultclient) 讓資料保護系統使用金鑰保存庫。
-* [ProtectKeysWithAzureKeyVault (IDataProtectionBuilder、string、string、X509Certificate2) ](/dotnet/api/microsoft.aspnetcore.dataprotection.azuredataprotectionbuilderextensions.protectkeyswithazurekeyvault#Microsoft_AspNetCore_DataProtection_AzureDataProtectionBuilderExtensions_ProtectKeysWithAzureKeyVault_Microsoft_AspNetCore_DataProtection_IDataProtectionBuilder_System_String_System_String_System_Security_Cryptography_X509Certificates_X509Certificate2_) 允許使用 `ClientId` 和 [X509Certificate](/dotnet/api/system.security.cryptography.x509certificates.x509certificate2) 來讓資料保護系統使用金鑰保存庫。
-* [ProtectKeysWithAzureKeyVault (IDataProtectionBuilder、string、string、string) ](/dotnet/api/microsoft.aspnetcore.dataprotection.azuredataprotectionbuilderextensions.protectkeyswithazurekeyvault#Microsoft_AspNetCore_DataProtection_AzureDataProtectionBuilderExtensions_ProtectKeysWithAzureKeyVault_Microsoft_AspNetCore_DataProtection_IDataProtectionBuilder_System_String_System_String_System_String_) 允許使用 `ClientId` 和 `ClientSecret` 來讓資料保護系統使用金鑰保存庫。
+* [ProtectKeysWithAzureKeyVault (IDataProtectionBuilder、Uri、TokenCredential) ](/dotnet/api/microsoft.aspnetcore.dataprotection.azuredataprotectionkeyvaultkeybuilderextensions.protectkeyswithazurekeyvault#Microsoft_AspNetCore_DataProtection_AzureDataProtectionKeyVaultKeyBuilderExtensions_ProtectKeysWithAzureKeyVault_Microsoft_AspNetCore_DataProtection_IDataProtectionBuilder_System_Uri_Azure_Core_TokenCredential_) 允許使用 keyIdentifier Uri 和 TokenCredential，讓資料保護系統能夠使用金鑰保存庫。
+* [ProtectKeysWithAzureKeyVault (IDataProtectionBuilder、string、IKeyEncryptionKeyResolver) ](/dotnet/api/microsoft.aspnetcore.dataprotection.azuredataprotectionkeyvaultkeybuilderextensions.protectkeyswithazurekeyvault#Microsoft_AspNetCore_DataProtection_AzureDataProtectionKeyVaultKeyBuilderExtensions_ProtectKeysWithAzureKeyVault_Microsoft_AspNetCore_DataProtection_IDataProtectionBuilder_System_Uri_Azure_Core_TokenCredential_) 允許使用 keyIdentifier 字串和 IKeyEncryptionKeyResolver，讓資料保護系統使用金鑰保存庫。
 
 如果應用程式使用先前的 Azure 套件 ([`Microsoft.AspNetCore.DataProtection.AzureStorage`](https://www.nuget.org/packages/Microsoft.AspNetCore.DataProtection.AzureStorage) 和 [`Microsoft.AspNetCore.DataProtection.AzureKeyVault`](https://www.nuget.org/packages/Microsoft.AspNetCore.DataProtection.AzureKeyVault)) ，而且 Azure Key Vault 和 Azure 儲存體的組合會儲存並保護金鑰， <xref:System.UriFormatException?displayProperty=nameWithType> 則會在金鑰儲存的 blob 不存在時擲回。 在 Azure 入口網站中執行應用程式之前，可以手動建立 blob，或使用下列程式：
 
@@ -83,19 +88,11 @@ public void ConfigureServices(IServiceCollection services)
 我們建議您升級至 [AspNetCore. DataProtection.](https://www.nuget.org/packages/Azure.Extensions.AspNetCore.DataProtection.Blobs) [AspNetCore. DataProtection. a... a..](https://www.nuget.org/packages/Azure.Extensions.AspNetCore.DataProtection.Keys) 套件，因為提供的 API 會自動建立 blob （如果不存在的話）。
 
 ```csharp
-var storageAccount = CloudStorageAccount.Parse("<storage account connection string">);
-var client = storageAccount.CreateCloudBlobClient();
-var container = client.GetContainerReference("<key store container name>");
-
-var azureServiceTokenProvider = new AzureServiceTokenProvider();
-var keyVaultClient = new KeyVaultClient(new KeyVaultClient.AuthenticationCallback(
-        azureServiceTokenProvider.KeyVaultTokenCallback));
-
 services.AddDataProtection()
     //This blob must already exist before the application is run
-    .PersistKeysToAzureBlobStorage(container, "<key store blob name>")
+    .PersistKeysToAzureBlobStorage("<storage account connection string", "<key store container name>", "<key store blob name>")
     //Removing this line below for an initial run will ensure the file is created correctly
-    .ProtectKeysWithAzureKeyVault(keyVaultClient, "<keyIdentifier>");
+    .ProtectKeysWithAzureKeyVault(new Uri("<keyIdentifier>"), new DefaultAzureCredential());
 ```
 
 ::: moniker-end

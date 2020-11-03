@@ -6,6 +6,7 @@ ms.author: riande
 ms.custom: mvc, seodec18
 ms.date: 9/26/2020
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -17,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: data/ef-rp/intro
-ms.openlocfilehash: 35a5758500ae2bc691c8d08eccb22340f9998c39
-ms.sourcegitcommit: 6c82d78662332cd40d614019b9ed17c46e25be28
+ms.openlocfilehash: c4b4f2b89be2018857abaafb448f052c3848ec59
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 09/29/2020
-ms.locfileid: "91424271"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93054069"
 ---
 # <a name="no-locrazor-pages-with-entity-framework-core-in-aspnet-core---tutorial-1-of-8"></a>Razor ASP.NET Core 中有 Entity Framework Core 的頁面-教學課程 1/8
 
@@ -34,7 +35,7 @@ ms.locfileid: "91424271"
 
 [下載或檢視已完成的應用程式。](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/data/ef-rp/intro/samples) [下載指示](xref:index#how-to-download-a-sample)。
 
-## <a name="prerequisites"></a>Prerequisites
+## <a name="prerequisites"></a>必要條件
 
 * 如果您還不熟悉 Razor 頁面，請先流覽「開始 [使用 Razor 頁面](xref:tutorials/razor-pages/razor-pages-start) 」教學課程系列，再開始此課程。
 
@@ -118,10 +119,10 @@ To run the app after downloading the completed project:
 
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
-* 從 Visual Studio 的 [檔案]**** 功能表中，選取 [新增]**[專案]** > **** 。
-* 選取 **ASP.NET Core Web 應用程式**。
-* 將專案命名為 *ContosoUniversity*。 使用與此名稱完全相符的名稱非常重要 (包括大寫)，這樣做可以讓命名空間在您複製和貼上程式碼時相符。
-* 在下拉式清單中選取 [ **.Net Core** ] 和 [ **ASP.NET Core 5.0** ]，然後選取 [ **Web 應用程式**]。
+* 從 Visual Studio 的 [檔案] 功能表中，選取 [新增] **[專案]** >  。
+* 選取 **ASP.NET Core Web 應用程式** 。
+* 將專案命名為 *ContosoUniversity* 。 使用與此名稱完全相符的名稱非常重要 (包括大寫)，這樣做可以讓命名空間在您複製和貼上程式碼時相符。
+* 在下拉式清單中選取 [ **.Net Core** ] 和 [ **ASP.NET Core 5.0** ]，然後選取 [ **Web 應用程式** ]。
 
 # <a name="visual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code)
 
@@ -143,9 +144,9 @@ To run the app after downloading the completed project:
 
 * 每次出現 "ContosoUniversity" 至 "Contoso 大學"。 共有三個發生次數。
 * [ **首頁** ] 和 [ **隱私權** ] 功能表項目會被刪除。
-* 針對「 **關於**」、「 **學生**」、「 **課程**」、「 **講師**」和「 **部門**」新增專案。
+* 針對「 **關於** 」、「 **學生** 」、「 **課程** 」、「 **講師** 」和「 **部門** 」新增專案。
 
-在 *Pages/Index. cshtml*中，以下列程式碼取代檔案的內容：
+在 *Pages/Index. cshtml* 中，以下列程式碼取代檔案的內容：
 
 [!code-cshtml[Main](intro/samples/cu50/Pages/Index.cshtml)]
 
@@ -167,7 +168,7 @@ To run the app after downloading the completed project:
 
 * 在專案資料夾中建立 *Models* 資料夾。 
 
-* 使用下列程式碼建立 *Models/Student.cs*：
+* 使用下列程式碼建立 *Models/Student.cs* ：
 
   [!code-csharp[Main](intro/samples/cu30snapshots/1-intro/Models/Student.cs)]
 
@@ -175,7 +176,7 @@ To run the app after downloading the completed project:
 
 `Enrollments` 屬性為[導覽屬性](/ef/core/modeling/relationships)。 導覽屬性會保留與此實體相關的其他實體。 在這種情況下，`Student` 實體的 `Enrollments` 屬性會保留所有與該 Student 相關的 `Enrollment` 實體。 例如，若資料庫中的 Student 資料列有兩個相關的 Enrollment 資料列，則 `Enrollments` 導覽屬性便會包含這兩個 Enrollment 項目。 
 
-在資料庫中，若 Enrollment 資料列的 StudentID 資料行包含學生的識別碼值，則該資料列便會與 Student 資料列相關。 例如，假設某 Student 資料列的識別碼為 1。 相關的 Enrollment 資料列將會擁有 StudentID = 1。 StudentID 是 Enrollment 資料表中的「外部索引鍵」**。 
+在資料庫中，若 Enrollment 資料列的 StudentID 資料行包含學生的識別碼值，則該資料列便會與 Student 資料列相關。 例如，假設某 Student 資料列的識別碼為 1。 相關的 Enrollment 資料列將會擁有 StudentID = 1。 StudentID 是 Enrollment 資料表中的「外部索引鍵」。 
 
 `Enrollments` 屬性會定義為 `ICollection<Enrollment>`，因為可能會有多個相關的 Enrollment 實體。 您可以使用其他集合型別，例如 `List<Enrollment>` 或 `HashSet<Enrollment>`。 如使用 `ICollection<Enrollment>`，EF Core 預設將建立 `HashSet<Enrollment>` 集合。
 
@@ -183,7 +184,7 @@ To run the app after downloading the completed project:
 
 ![Enrollment 實體圖表](intro/_static/enrollment-entity.png)
 
-使用下列程式碼建立 *Models/Enrollment.cs*：
+使用下列程式碼建立 *Models/Enrollment.cs* ：
 
 [!code-csharp[Main](intro/samples/cu30snapshots/1-intro/Models/Enrollment.cs)]
 
@@ -201,7 +202,7 @@ To run the app after downloading the completed project:
 
 ![Course 實體圖表](intro/_static/course-entity.png)
 
-使用下列程式碼建立 *Models/Course.cs*：
+使用下列程式碼建立 *Models/Course.cs* ：
 
 [!code-csharp[Main](intro/samples/cu30snapshots/1-intro/Models/Course.cs)]
 
@@ -221,15 +222,15 @@ To run the app after downloading the completed project:
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
 * 建立 *Pages/Students* 資料夾。
-* 在 [方案總管]**** 中，以滑鼠右鍵按一下 *Page/Students* 資料夾，然後選取 [新增]** [新增 Scaffold 項目]** > ****。
+* 在 [方案總管] 中，以滑鼠右鍵按一下 *Page/Students* 資料夾，然後選取 [新增] **[新增 Scaffold 項目]** > 。
 * 在 [ **加入新的 Scaffold 專案** ] 對話方塊中：
-  * 在左側索引標籤中，選取 [**已安裝 > 一般 > Razor 頁面**]
-  * ** Razor 使用 Entity Framework (CRUD) **新增] 選取頁面 > ** **。
-* 在 [ ** Razor 使用 Entity Framework 加入頁面] (CRUD) ** 對話方塊：
-  * 在 [模型類別]**** 下拉式清單中，選取 [學生 (ContosoUniversity.Models)]****。
-  * 在 [資料內容類別]**** 資料列中，選取 **+** (加號)。
+  * 在左側索引標籤中，選取 [ **已安裝 > 一般 > Razor 頁面** ]
+  * **Razor 使用 Entity Framework (CRUD)** 新增] 選取頁面 > **** 。
+* 在 [ **Razor 使用 Entity Framework 加入頁面] (CRUD)** 對話方塊：
+  * 在 [模型類別] 下拉式清單中，選取 [學生 (ContosoUniversity.Models)]。
+  * 在 [資料內容類別] 資料列中，選取 **+** (加號)。
     * 將資料內容名稱變更為 end， `SchoolContext` 而不是 `ContosoUniversityContext` 。 更新的內容名稱： `ContosoUniversity.Data.SchoolContext`
-   * 選取 [新增]。
+   * 選取 [新增]  。
 
 會自動安裝下列套件：
 
@@ -281,19 +282,19 @@ To run the app after downloading the completed project:
 
 Scaffolding 流程：
 
-* Razor在 [*頁面/學生*] 資料夾中建立頁面：
+* Razor在 [ *頁面/學生* ] 資料夾中建立頁面：
   * *Create.cshtml* 和 *Create.cshtml.cs*
   * *Delete.cshtml* 和 *Delete.cshtml.cs*
   * *Details.cshtml* 和 *Details.cshtml.cs*
   * *Edit.cshtml* 和 *Edit.cshtml.cs*
   * *Index.cshtml* 和 *Index.cshtml.cs*
-* 建立 *Data/SchoolContext.cs*。
+* 建立 *Data/SchoolContext.cs* 。
 * 將內容新增到 *Startup.cs* 中的相依性插入。
-* 將資料庫連接字串新增到 *appsettings.json*。
+* 將資料庫連接字串加入至 *appsettings.json* 。
 
 ## <a name="database-connection-string"></a>資料庫連接字串
 
-「樣板」工具會在 *appsettings.json* 檔案產生連接字串。
+「樣板」工具會在檔案中產生連接字串 *appsettings.json* 。
 
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
@@ -305,7 +306,7 @@ LocalDB 是輕量版的 SQL Server Express Database Engine，旨在用於應用�
 
 # <a name="visual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code)
 
-將 SQLite 連接字串縮短為 *CU. db*：
+將 SQLite 連接字串縮短為 *CU. db* ：
 
 [!code-json[Main](intro/samples/cu50/appsettingsSQLite.json?highlight=11)]
 
@@ -315,7 +316,7 @@ LocalDB 是輕量版的 SQL Server Express Database Engine，旨在用於應用�
 
 協調指定資料模型 EF Core 功能的主類別是資料庫內容類別。 內容衍生自 [Microsoft.EntityFrameworkCore.DbContext](/dotnet/api/microsoft.entityframeworkcore.dbcontext)。 內容會指定哪些實體會包含在資料模型中。 在此專案中，類別命名為 `SchoolContext`。
 
-使用下列程式碼來更新 *Data/SchoolContext.cs*：
+使用下列程式碼來更新 *Data/SchoolContext.cs* ：
 
 [!code-csharp[Main](intro/samples/cu30snapshots/1-intro/Data/SchoolContext.cs?highlight=13-22)]
 
@@ -360,7 +361,7 @@ Scaffolder 已新增下列醒目提示的行：
 
 ---
 
-連接字串的名稱，會透過對 [DbContextOptions](/dotnet/api/microsoft.entityframeworkcore.dbcontextoptions) 物件呼叫方法來傳遞至內容。 作為本機開發之用，[ASP.NET Core configuration system](xref:fundamentals/configuration/index) 會從 *appsettings.json* 檔案讀取連接字串。
+連接字串的名稱，會透過對 [DbContextOptions](/dotnet/api/microsoft.entityframeworkcore.dbcontextoptions) 物件呼叫方法來傳遞至內容。 針對本機開發， [ASP.NET Core 設定系統](xref:fundamentals/configuration/index) 會從檔案讀取連接字串 *appsettings.json* 。
 
 ### <a name="add-the-database-exception-filter"></a>新增資料庫例外狀況篩選準則
 
@@ -406,14 +407,14 @@ Install-Package Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore -Version 5.
 ### <a name="test-the-app"></a>測試應用程式
 
 * 執行應用程式。
-* 選取 [學生]**** 連結，然後選取 [新建]****。
+* 選取 [學生] 連結，然後選取 [新建]。
 * 測試 [編輯]、[詳細資料] 和 [刪除] 連結。
 
 ## <a name="seed-the-database"></a>植入資料庫
 
 `EnsureCreated` 方法會建立空白資料庫。 本節會新增程式碼以使用測試資料來填入資料庫。
 
-使用下列程式碼建立 *Data/DbInitializer.cs*：
+使用下列程式碼建立 *Data/DbInitializer.cs* ：
 <!-- next update, keep this file in the project and surround with #if -->
   [!code-csharp[Main](intro/samples/cu30snapshots/1-intro/Data/DbInitializer.cs)]
 
@@ -428,7 +429,7 @@ Install-Package Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore -Version 5.
 
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
-停止應用程式 (如果它正在執行)，並在**套件管理員主控台** (PMC) 中執行下列命令：
+停止應用程式 (如果它正在執行)，並在 **套件管理員主控台** (PMC) 中執行下列命令：
 
 ```powershell
 Drop-Database -Confirm
@@ -450,10 +451,10 @@ Drop-Database -Confirm
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
 * 從 Visual Studio 中的 **View** 功能表開啟 **SQL Server 物件總管** (SSOX)。
-* 在 SSOX 中，選取 [(localdb)\MSSQLLocalDB] > [資料庫] > [SchoolContext-{GUID}]****。 資料庫名稱是以您稍早所提供的內容名稱加上虛線和 GUID 所產生。
+* 在 SSOX 中，選取 [(localdb)\MSSQLLocalDB] > [資料庫] > [SchoolContext-{GUID}]。 資料庫名稱是以您稍早所提供的內容名稱加上虛線和 GUID 所產生。
 * 展開 **Tables** 節點。
-* 以滑鼠右鍵按一下 **Students** 資料表，並按一下 [檢視資料]**** 查看建立的資料行、插入資料表中的資料列。
-* 以滑鼠右鍵按一下 **Student** 資料表然後按一下 [檢視程式碼]**** 來查看 `Student` 模型對應到 `Student` 資料表結構描述的方式。
+* 以滑鼠右鍵按一下 **Students** 資料表，並按一下 [檢視資料] 查看建立的資料行、插入資料表中的資料列。
+* 以滑鼠右鍵按一下 **Student** 資料表然後按一下 [檢視程式碼] 來查看 `Student` 模型對應到 `Student` 資料表結構描述的方式。
 
 # <a name="visual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code)
 
@@ -521,7 +522,7 @@ public async Task OnGetAsync()
 
 [下載或檢視已完成的應用程式。](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/data/ef-rp/intro/samples) [下載指示](xref:index#how-to-download-a-sample)。
 
-## <a name="prerequisites"></a>Prerequisites
+## <a name="prerequisites"></a>必要條件
 
 * 如果您還不熟悉 Razor 頁面，請先流覽「開始 [使用 Razor 頁面](xref:tutorials/razor-pages/razor-pages-start) 」教學課程系列，再開始此課程。
 
@@ -576,10 +577,10 @@ Visual Studio Code 說明則會使用 [SQLite](https://www.sqlite.org/)，它是
 
 在下載已完成的專案後執行應用程式：
 
-* 刪除 *ContosoUniversity.csproj*，並將 *ContosoUniversitySQLite.csproj* 重新命名為 *ContosoUniversity.csproj*。
-* 在 *Program.cs*中， `#define Startup` `StartupSQLite` 將會使用批註。
-* 刪除 *appSettings.json*，並將 *appSettingsSQLite.json* 重新命名為 *appSettings.json*。
-* 刪除 *Migrations* 資料夾，並將 *MigrationsSQL* 重新命名為 *Migrations*。
+* 刪除 *ContosoUniversity.csproj* ，並將 *ContosoUniversitySQLite.csproj* 重新命名為 *ContosoUniversity.csproj* 。
+* 在 *Program.cs* 中， `#define Startup` `StartupSQLite` 將會使用批註。
+* 刪除 *appSettings.json* ，並將 *appSettingsSQLite.json* 重新命名為 *appSettings.json* 。
+* 刪除 *Migrations* 資料夾，並將 *MigrationsSQL* 重新命名為 *Migrations* 。
 * 進行 `#if SQLiteVersion` 和移除的全域搜尋 `#if SQLiteVersion` 以及相關聯的 `#endif` 語句。
 * 建置專案。
 * 在專案資料夾中的命令提示字元內，執行下列命令：
@@ -604,10 +605,10 @@ Visual Studio Code 說明則會使用 [SQLite](https://www.sqlite.org/)，它是
 
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
-* 從 Visual Studio 的 [檔案]**** 功能表中，選取 [新增]**[專案]** > **** 。
-* 選取 **ASP.NET Core Web 應用程式**。
-* 將專案命名為 *ContosoUniversity*。 使用與此名稱完全相符的名稱非常重要 (包括大寫)，這樣做可以讓命名空間在您複製和貼上程式碼時相符。
-* 在下拉式清單中選取 [.NET Core]**** 及 [ASP.NET Core 3.0]****，然後選取 [Web 應用程式]****。
+* 從 Visual Studio 的 [檔案] 功能表中，選取 [新增] **[專案]** >  。
+* 選取 **ASP.NET Core Web 應用程式** 。
+* 將專案命名為 *ContosoUniversity* 。 使用與此名稱完全相符的名稱非常重要 (包括大寫)，這樣做可以讓命名空間在您複製和貼上程式碼時相符。
+* 在下拉式清單中選取 [.NET Core] 及 [ASP.NET Core 3.0]，然後選取 [Web 應用程式]。
 
 # <a name="visual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code)
 
@@ -628,7 +629,7 @@ Visual Studio Code 說明則會使用 [SQLite](https://www.sqlite.org/)，它是
 
 * 將每個出現的 "ContosoUniversity" 都變更為 "Contoso University"。 共有三個發生次數。
 
-* 刪除 [Home]**** 和 [Privacy]**** 功能表項目，然後新增 [About]****、[Students]****、[Courses]****、[Instructors]**** 和 [Departments]**** 的項目。
+* 刪除 [Home] 和 [Privacy] 功能表項目，然後新增 [About]、[Students]、[Courses]、[Instructors] 和 [Departments] 的項目。
 
 所做的變更已醒目提示。
 
@@ -653,7 +654,7 @@ Visual Studio Code 說明則會使用 [SQLite](https://www.sqlite.org/)，它是
 ![Student 實體圖表](intro/_static/student-entity.png)
 
 * 在專案資料夾中建立 *Models* 資料夾。
-* 使用下列程式碼建立 *Models/Student.cs*：
+* 使用下列程式碼建立 *Models/Student.cs* ：
 
   [!code-csharp[Main](intro/samples/cu30snapshots/1-intro/Models/Student.cs)]
 
@@ -661,7 +662,7 @@ Visual Studio Code 說明則會使用 [SQLite](https://www.sqlite.org/)，它是
 
 `Enrollments` 屬性為[導覽屬性](/ef/core/modeling/relationships)。 導覽屬性會保留與此實體相關的其他實體。 在這種情況下，`Student` 實體的 `Enrollments` 屬性會保留所有與該 Student 相關的 `Enrollment` 實體。 例如，若資料庫中的 Student 資料列有兩個相關的 Enrollment 資料列，則 `Enrollments` 導覽屬性便會包含這兩個 Enrollment 項目。 
 
-在資料庫中，若 Enrollment 資料列的 StudentID 資料行包含學生的識別碼值，則該資料列便會與 Student 資料列相關。 例如，假設某 Student 資料列的識別碼為 1。 相關的 Enrollment 資料列將會擁有 StudentID = 1。 StudentID 是 Enrollment 資料表中的「外部索引鍵」**。 
+在資料庫中，若 Enrollment 資料列的 StudentID 資料行包含學生的識別碼值，則該資料列便會與 Student 資料列相關。 例如，假設某 Student 資料列的識別碼為 1。 相關的 Enrollment 資料列將會擁有 StudentID = 1。 StudentID 是 Enrollment 資料表中的「外部索引鍵」。 
 
 `Enrollments` 屬性會定義為 `ICollection<Enrollment>`，因為可能會有多個相關的 Enrollment 實體。 您可以使用其他集合型別，例如 `List<Enrollment>` 或 `HashSet<Enrollment>`。 如使用 `ICollection<Enrollment>`，EF Core 預設將建立 `HashSet<Enrollment>` 集合。
 
@@ -669,7 +670,7 @@ Visual Studio Code 說明則會使用 [SQLite](https://www.sqlite.org/)，它是
 
 ![Enrollment 實體圖表](intro/_static/enrollment-entity.png)
 
-使用下列程式碼建立 *Models/Enrollment.cs*：
+使用下列程式碼建立 *Models/Enrollment.cs* ：
 
 [!code-csharp[Main](intro/samples/cu30snapshots/1-intro/Models/Enrollment.cs)]
 
@@ -687,7 +688,7 @@ Visual Studio Code 說明則會使用 [SQLite](https://www.sqlite.org/)，它是
 
 ![Course 實體圖表](intro/_static/course-entity.png)
 
-使用下列程式碼建立 *Models/Course.cs*：
+使用下列程式碼建立 *Models/Course.cs* ：
 
 [!code-csharp[Main](intro/samples/cu30snapshots/1-intro/Models/Course.cs)]
 
@@ -701,19 +702,19 @@ Visual Studio Code 說明則會使用 [SQLite](https://www.sqlite.org/)，它是
 
 在本節中，您會使用 ASP.NET scaffolding 工具來產生：
 
-* EF Core「內容」** 類別。 內容是協調指定資料模型 Entity Framework 功能的主類別。 它衍生自 `Microsoft.EntityFrameworkCore.DbContext` 類別。
+* EF Core「內容」類別。 內容是協調指定資料模型 Entity Framework 功能的主類別。 它衍生自 `Microsoft.EntityFrameworkCore.DbContext` 類別。
 * Razor 處理實體之建立、讀取、更新和刪除 (CRUD) 作業的頁面 `Student` 。
 
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
 * 在 *Pages* 資料夾中建立 *Students* 資料夾。
-* 在 [方案總管]**** 中，以滑鼠右鍵按一下 *Page/Students* 資料夾，然後選取 [新增]** [新增 Scaffold 項目]** > ****。
-* 在 [**新增 Scaffold** ] 對話方塊中， ** Razor 使用 Entity Framework (CRUD) **新增] 選取 [頁面] > ** **。
-* 在 [ ** Razor 使用 Entity Framework 加入頁面] (CRUD) ** 對話方塊：
-  * 在 [模型類別]**** 下拉式清單中，選取 [學生 (ContosoUniversity.Models)]****。
-  * 在 [資料內容類別]**** 資料列中，選取 **+** (加號)。
-  * 將資料內容的名稱從 *ContosoUniversity.Models.ContosoUniversityContext* 變更為 *ContosoUniversity.Data.SchoolContext*。
-  * 選取 [新增]。
+* 在 [方案總管] 中，以滑鼠右鍵按一下 *Page/Students* 資料夾，然後選取 [新增] **[新增 Scaffold 項目]** > 。
+* 在 [ **新增 Scaffold** ] 對話方塊中， **Razor 使用 Entity Framework (CRUD)** 新增] 選取 [頁面] > **** 。
+* 在 [ **Razor 使用 Entity Framework 加入頁面] (CRUD)** 對話方塊：
+  * 在 [模型類別] 下拉式清單中，選取 [學生 (ContosoUniversity.Models)]。
+  * 在 [資料內容類別] 資料列中，選取 **+** (加號)。
+  * 將資料內容的名稱從 *ContosoUniversity.Models.ContosoUniversityContext* 變更為 *ContosoUniversity.Data.SchoolContext* 。
+  * 選取 [新增]  。
 
 會自動安裝下列套件：
 
@@ -768,21 +769,21 @@ remove dotnet tool install --global  below
 
 Scaffolding 流程：
 
-* Razor在 [*頁面/學生*] 資料夾中建立頁面：
+* Razor在 [ *頁面/學生* ] 資料夾中建立頁面：
   * *Create.cshtml* 和 *Create.cshtml.cs*
   * *Delete.cshtml* 和 *Delete.cshtml.cs*
   * *Details.cshtml* 和 *Details.cshtml.cs*
   * *Edit.cshtml* 和 *Edit.cshtml.cs*
   * *Index.cshtml* 和 *Index.cshtml.cs*
-* 建立 *Data/SchoolContext.cs*。
+* 建立 *Data/SchoolContext.cs* 。
 * 將內容新增到 *Startup.cs* 中的相依性插入。
-* 將資料庫連接字串新增到 *appsettings.json*。
+* 將資料庫連接字串加入至 *appsettings.json* 。
 
 ## <a name="database-connection-string"></a>資料庫連接字串
 
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
-檔案 *appsettings.js* 會指定 [SQL Server LocalDB](/sql/database-engine/configure-windows/sql-server-2016-express-localdb)的連接字串。
+檔案會 *appsettings.json* 指定 [SQL Server LocalDB](/sql/database-engine/configure-windows/sql-server-2016-express-localdb)的連接字串。
 
 [!code-json[Main](intro/samples/cu30/appsettings.json?highlight=11)]
 
@@ -800,7 +801,7 @@ LocalDB 是輕量版的 SQL Server Express Database Engine，旨在用於應用�
 
 協調指定資料模型 EF Core 功能的主類別是資料庫內容類別。 內容衍生自 [Microsoft.EntityFrameworkCore.DbContext](/dotnet/api/microsoft.entityframeworkcore.dbcontext)。 內容會指定哪些實體會包含在資料模型中。 在此專案中，類別命名為 `SchoolContext`。
 
-使用下列程式碼來更新 *Data/SchoolContext.cs*：
+使用下列程式碼來更新 *Data/SchoolContext.cs* ：
 
 [!code-csharp[Main](intro/samples/cu30snapshots/1-intro/Data/SchoolContext.cs?highlight=13-22)]
 
@@ -835,7 +836,7 @@ Scaffolding 工具會自動對相依性插入容器註冊內容類別。
 
 ---
 
-連接字串的名稱，會透過對 [DbContextOptions](/dotnet/api/microsoft.entityframeworkcore.dbcontextoptions) 物件呼叫方法來傳遞至內容。 作為本機開發之用，[ASP.NET Core configuration system](xref:fundamentals/configuration/index) 會從 *appsettings.json* 檔案讀取連接字串。
+連接字串的名稱，會透過對 [DbContextOptions](/dotnet/api/microsoft.entityframeworkcore.dbcontextoptions) 物件呼叫方法來傳遞至內容。 針對本機開發， [ASP.NET Core 設定系統](xref:fundamentals/configuration/index) 會從檔案讀取連接字串 *appsettings.json* 。
 
 ## <a name="create-the-database"></a>建立資料庫
 
@@ -857,14 +858,14 @@ Scaffolding 工具會自動對相依性插入容器註冊內容類別。
 ### <a name="test-the-app"></a>測試應用程式
 
 * 執行應用程式。
-* 選取 [學生]**** 連結，然後選取 [新建]****。
+* 選取 [學生] 連結，然後選取 [新建]。
 * 測試 [編輯]、[詳細資料] 和 [刪除] 連結。
 
 ## <a name="seed-the-database"></a>植入資料庫
 
 `EnsureCreated` 方法會建立空白資料庫。 本節會新增程式碼以使用測試資料來填入資料庫。
 
-使用下列程式碼建立 *Data/DbInitializer.cs*：
+使用下列程式碼建立 *Data/DbInitializer.cs* ：
 <!-- next update, keep this file in the project and surround with #if -->
   [!code-csharp[Main](intro/samples/cu30snapshots/1-intro/Data/DbInitializer.cs)]
 
@@ -879,7 +880,7 @@ Scaffolding 工具會自動對相依性插入容器註冊內容類別。
 
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
-停止應用程式 (如果它正在執行)，並在**套件管理員主控台** (PMC) 中執行下列命令：
+停止應用程式 (如果它正在執行)，並在 **套件管理員主控台** (PMC) 中執行下列命令：
 
 ```powershell
 Drop-Database
@@ -900,10 +901,10 @@ Drop-Database
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
 * 從 Visual Studio 中的 **View** 功能表開啟 **SQL Server 物件總管** (SSOX)。
-* 在 SSOX 中，選取 [(localdb)\MSSQLLocalDB] > [資料庫] > [SchoolContext-{GUID}]****。 資料庫名稱是以您稍早所提供的內容名稱加上虛線和 GUID 所產生。
+* 在 SSOX 中，選取 [(localdb)\MSSQLLocalDB] > [資料庫] > [SchoolContext-{GUID}]。 資料庫名稱是以您稍早所提供的內容名稱加上虛線和 GUID 所產生。
 * 展開 **Tables** 節點。
-* 以滑鼠右鍵按一下 **Students** 資料表，並按一下 [檢視資料]**** 查看建立的資料行、插入資料表中的資料列。
-* 以滑鼠右鍵按一下 **Student** 資料表然後按一下 [檢視程式碼]**** 來查看 `Student` 模型對應到 `Student` 資料表結構描述的方式。
+* 以滑鼠右鍵按一下 **Students** 資料表，並按一下 [檢視資料] 查看建立的資料行、插入資料表中的資料列。
+* 以滑鼠右鍵按一下 **Student** 資料表然後按一下 [檢視程式碼] 來查看 `Student` 模型對應到 `Student` 資料表結構描述的方式。
 
 # <a name="visual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code)
 
@@ -958,7 +959,7 @@ Contoso 大學範例 web 應用程式示範如何 Razor 使用 Entity Framework 
 
 [下載或檢視已完成的應用程式。](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/data/ef-rp/intro/samples) [下載指示](xref:index#how-to-download-a-sample)。
 
-## <a name="prerequisites"></a>Prerequisites
+## <a name="prerequisites"></a>必要條件
 
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
@@ -992,9 +993,9 @@ Contoso 大學範例 web 應用程式示範如何 Razor 使用 Entity Framework 
 
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
-* 從 Visual Studio 的 [檔案]**** 功能表中，選取 [新增]**[專案]** > **** 。
-* 建立新的 ASP.NET Core Web 應用程式。 將專案命名為 **ContosoUniversity**。 請務必將專案命名為 *ContosoUniversity*，當您複製/貼上程式碼時，命名空間才會相符。
-* 在下拉式清單中選取 [ASP.NET Core 2.1]****，然後選取 [Web 應用程式]****。
+* 從 Visual Studio 的 [檔案] 功能表中，選取 [新增] **[專案]** >  。
+* 建立新的 ASP.NET Core Web 應用程式。 將專案命名為 **ContosoUniversity** 。 請務必將專案命名為 *ContosoUniversity* ，當您複製/貼上程式碼時，命名空間才會相符。
+* 在下拉式清單中選取 [ASP.NET Core 2.1]，然後選取 [Web 應用程式]。
 
 如需上述步驟的影像，請參閱 [建立 Razor web 應用程式](xref:tutorials/razor-pages/razor-pages-start#create-a-razor-pages-web-app)。
 執行應用程式。
@@ -1011,13 +1012,13 @@ dotnet run
 
 ## <a name="set-up-the-site-style"></a>設定網站樣式
 
-一些變更設定了網站的功能表、配置和首頁。 使用下列變更更新 *Pages/Shared/_Layout.cshtml*：
+一些變更設定了網站的功能表、配置和首頁。 使用下列變更更新 *Pages/Shared/_Layout.cshtml* ：
 
 * 將每個出現的 "ContosoUniversity" 都變更為 "Contoso University"。 共有三個發生次數。
 
-* 為 **Students**、**Courses**、**Instructors**、**Departments** 新增功能表項目，並刪除 **Contact** 功能表項目。
+* 為 **Students** 、 **Courses** 、 **Instructors** 、 **Departments** 新增功能表項目，並刪除 **Contact** 功能表項目。
 
-所做的變更已醒目提示。 (所有標記都「不會」** 顯示。)
+所做的變更已醒目提示。 (所有標記都「不會」顯示。)
 
 [!code-cshtml[](intro/samples/cu21/Pages/Shared/_Layout.cshtml?highlight=6,29,35-38,50&name=snippet)]
 
@@ -1053,7 +1054,7 @@ dotnet run
 
 ![Enrollment 實體圖表](intro/_static/enrollment-entity.png)
 
-在 *Models* 資料夾中，用下列程式碼建立 *Enrollment.cs*：
+在 *Models* 資料夾中，用下列程式碼建立 *Enrollment.cs* ：
 
 [!code-csharp[](intro/samples/cu21/Models/Enrollment.cs?name=snippet_Intro)]
 
@@ -1071,7 +1072,7 @@ dotnet run
 
 ![Course 實體圖表](intro/_static/course-entity.png)
 
-在 *Models* 資料夾中，用下列程式碼建立 *Course.cs*：
+在 *Models* 資料夾中，用下列程式碼建立 *Course.cs* ：
 
 [!code-csharp[](intro/samples/cu21/Models/Course.cs?name=snippet_Intro)]
 
@@ -1088,15 +1089,15 @@ dotnet run
 
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
-* 在 [方案總管]**** 中，以滑鼠右鍵按一下 *Pages/Students* 資料夾 > [新增]** [新增 Scaffold 項目]** > ****。
-* 在 [**新增 Scaffold** ] 對話方塊中， ** Razor 使用 Entity Framework (CRUD) **新增] 選取 [頁面] > ** **。
+* 在 [方案總管] 中，以滑鼠右鍵按一下 *Pages/Students* 資料夾 > [新增] **[新增 Scaffold 項目]** > 。
+* 在 [ **新增 Scaffold** ] 對話方塊中， **Razor 使用 Entity Framework (CRUD)** 新增] 選取 [頁面] > **** 。
 
-** Razor 使用 ENTITY FRAMEWORK (CRUD) 對話方塊來完成 [新增頁面**]：
+**Razor 使用 ENTITY FRAMEWORK (CRUD) 對話方塊來完成 [新增頁面** ]：
 
-* 在 [模型類別]**** 下拉式清單中，選取 [學生 (ContosoUniversity.Models)]****。
-* 在 [資料內容類別]**** 列中，選取 **+** (加號) 符號，並將產生的名稱變更為 **ContosoUniversity.Models.SchoolContext**。
-* 在 [資料內容類別]**** 下拉式清單中，選取 **ContosoUniversity.Models.SchoolContext**
-* 選取 [新增]。
+* 在 [模型類別] 下拉式清單中，選取 [學生 (ContosoUniversity.Models)]。
+* 在 [資料內容類別] 列中，選取 **+** (加號) 符號，並將產生的名稱變更為 **ContosoUniversity.Models.SchoolContext** 。
+* 在 [資料內容類別] 下拉式清單中，選取 **ContosoUniversity.Models.SchoolContext**
+* 選取 [新增]  。
 
 ![CRUD 對話方塊](intro/_static/s1.png)
 
@@ -1123,8 +1124,8 @@ dotnet aspnet-codegenerator razorpage -m Student -dc ContosoUniversity.Models.Sc
 
 ### <a name="file-updates"></a>檔案更新
 
-* *Startup.cs*：這個檔案的變更會於下一節詳述。
-* *appsettings.json*：已新增用來連線到本機資料庫的連接字串。
+* *Startup.cs* ：這個檔案的變更會於下一節詳述。
+* *appsettings.json* ：已加入用來連接到本機資料庫的連接字串。
 
 ## <a name="examine-the-context-registered-with-dependency-injection"></a>檢查使用相依性插入所註冊的內容
 
@@ -1136,7 +1137,7 @@ Scaffolding 工具會自動建立資料庫內容，並向相依性插入容器�
 
 [!code-csharp[](intro/samples/cu21/Startup.cs?name=snippet_SchoolContext&highlight=13-14)]
 
-連接字串的名稱，會透過對 [DbContextOptions](/dotnet/api/microsoft.entityframeworkcore.dbcontextoptions) 物件呼叫方法來傳遞至內容。 作為本機開發之用，[ASP.NET Core configuration system](xref:fundamentals/configuration/index) 會從 *appsettings.json* 檔案讀取連接字串。
+連接字串的名稱，會透過對 [DbContextOptions](/dotnet/api/microsoft.entityframeworkcore.dbcontextoptions) 物件呼叫方法來傳遞至內容。 針對本機開發， [ASP.NET Core 設定系統](xref:fundamentals/configuration/index) 會從檔案讀取連接字串 *appsettings.json* 。
 
 ## <a name="update-main"></a>更新 main
 
@@ -1165,14 +1166,14 @@ Scaffolding 工具會自動建立資料庫內容，並向相依性插入容器�
 
 執行應用程式並接受 cookie 原則。 此應用程式不會保留個人資訊。 您可以參閱 EU 的 cookie 原則 [一般資料保護規定 (GDPR) 支援人員](xref:security/gdpr)。
 
-* 選取 [學生]**** 連結，然後選取 [新建]****。
+* 選取 [學生] 連結，然後選取 [新建]。
 * 測試 [編輯]、[詳細資料] 和 [刪除] 連結。
 
 ## <a name="examine-the-schoolcontext-db-context"></a>檢查 SchoolContext 資料庫內容
 
 為給定的資料模型協調 EF Core 功能的主要類別是資料庫內容類別。 資料內容衍生自 [Microsoft.EntityFrameworkCore.DbContext](/dotnet/api/microsoft.entityframeworkcore.dbcontext)。 資料內容會指定資料模型包含哪些實體。 在此專案中，類別命名為 `SchoolContext`。
 
-使用下列程式碼來更新 *SchoolContext.cs*：
+使用下列程式碼來更新 *SchoolContext.cs* ：
 
 [!code-csharp[](intro/samples/cu21/Data/SchoolContext.cs?name=snippet_Intro&highlight=12-14)]
 
@@ -1207,7 +1208,7 @@ EF Core 會建立空白資料庫。 在本節中，會寫入 `Initialize` 方法
 
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
-停止應用程式 (如果它正在執行)，並在**套件管理員主控台** (PMC) 中執行下列命令：
+停止應用程式 (如果它正在執行)，並在 **套件管理員主控台** (PMC) 中執行下列命令：
 
 ```powershell
 Drop-Database
@@ -1223,11 +1224,11 @@ Drop-Database
 
 資料庫名稱是以您稍早所提供的內容名稱加上虛線和 GUID 所產生。 因此，資料庫名稱將會是 "SchoolContext-{GUID}"。 GUID 針對每個使用者都將不同。
 從 Visual Studio 中的 **View** 功能表開啟 **SQL Server 物件總管** (SSOX)。
-在 SSOX 中，按一下 **(localdb)\MSSQLLocalDB > Databases > SchoolContext-{GUID}**。
+在 SSOX 中，按一下 **(localdb)\MSSQLLocalDB > Databases > SchoolContext-{GUID}** 。
 
 展開 **Tables** 節點。
 
-以滑鼠右鍵按一下 **Students** 資料表，並按一下 [檢視資料]**** 查看建立的資料行、插入資料表中的資料列。
+以滑鼠右鍵按一下 **Students** 資料表，並按一下 [檢視資料] 查看建立的資料行、插入資料表中的資料列。
 
 ## <a name="asynchronous-code"></a>非同步程式碼
 

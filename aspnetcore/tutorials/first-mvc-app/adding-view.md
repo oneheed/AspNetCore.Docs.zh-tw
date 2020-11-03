@@ -60,7 +60,7 @@ ms.locfileid: "93052665"
 
 ![[新增項目] 對話方塊](adding-view/_static/add_view.png)
 
-# <a name="visual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code) \(英文\)
+# <a name="visual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code)
 
 為 `HelloWorldController` 新增 `Index` 檢視。
 
@@ -217,7 +217,7 @@ ms.locfileid: "93052665"
 
 ![[新增項目] 對話方塊](adding-view/_static/add_view.png)
 
-# <a name="visual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code) \(英文\)
+# <a name="visual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code)
 
 為 `HelloWorldController` 新增 `Index` 檢視。
 

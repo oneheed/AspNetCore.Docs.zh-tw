@@ -7,6 +7,7 @@ ms.custom: mvc
 ms.date: 02/04/2019
 ms.topic: tutorial
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -18,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: data/ef-mvc/crud
-ms.openlocfilehash: c17461f8d1d43335230a967a4b62943c055c06b9
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: 043fe513f370cf63637733b66ca195e7887faab0
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88629206"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93054290"
 ---
 # <a name="tutorial-implement-crud-functionality---aspnet-mvc-with-ef-core"></a>教學課程：實行 CRUD 功能-使用 EF Core ASP.NET MVC
 
@@ -41,13 +42,13 @@ ms.locfileid: "88629206"
 > * 更新 [刪除] 頁面
 > * 關閉資料庫連線
 
-## <a name="prerequisites"></a>Prerequisites
+## <a name="prerequisites"></a>必要條件
 
 * [開始使用 EF Core 和 ASP.NET Core MVC](intro.md)
 
 ## <a name="customize-the-details-page"></a>自訂 [詳細資料] 頁面
 
-為 Students [索引] 頁面建立的 Scaffold 程式碼省略了 `Enrollments` 屬性，因為該屬性的值為一個集合。 在 [詳細資料]**** 頁面中，您會在一個 HTML 表格中顯示集合的內容。
+為 Students [索引] 頁面建立的 Scaffold 程式碼省略了 `Enrollments` 屬性，因為該屬性的值為一個集合。 在 [詳細資料] 頁面中，您會在一個 HTML 表格中顯示集合的內容。
 
 在 *Controllers/StudentsController.cs* 中，[詳細資料] 檢視的動作方法會使用 `SingleOrDefaultAsync` 方法來擷取單一 `Student` 實體。 新增呼叫 `Include` 的程式碼。 `ThenInclude`，以及 `AsNoTracking` 方法，如下列醒目提示的程式碼所示。
 
@@ -59,7 +60,7 @@ ms.locfileid: "88629206"
 
 ### <a name="route-data"></a>路由傳送資料
 
-傳遞至 `Details` 方法的索引鍵值是來自「路由資料」**。 路由資料是模型繫結器在 URL 區段中找到的資料。 例如，預設路由指定了控制器、動作，以及識別碼區段：
+傳遞至 `Details` 方法的索引鍵值是來自「路由資料」。 路由資料是模型繫結器在 URL 區段中找到的資料。 例如，預設路由指定了控制器、動作，以及識別碼區段：
 
 [!code-csharp[](intro/samples/cu/Startup.cs?name=snippet_Route&highlight=5)]
 
@@ -103,7 +104,7 @@ http://localhost:1230/Instructor/Index?id=1&CourseID=2021
 
 ### <a name="add-enrollments-to-the-details-view"></a>將註冊新增至 [詳細資料] 檢視中
 
-開啟 *Views/Students/Details.cshtml*。 每個欄位都會使用 `DisplayNameFor` 及 `DisplayFor` 協助程式顯示，如下列範例所示：
+開啟 *Views/Students/Details.cshtml* 。 每個欄位都會使用 `DisplayNameFor` 及 `DisplayFor` 協助程式顯示，如下列範例所示：
 
 [!code-cshtml[](intro/samples/cu/Views/Students/Details.cshtml?range=13-18&highlight=2,5)]
 
@@ -115,7 +116,7 @@ http://localhost:1230/Instructor/Index?id=1&CourseID=2021
 
 此程式碼會以迴圈逐一巡覽 `Enrollments` 導覽屬性中的實體。 針對每個註冊，會顯示課程標題及成績。 課程標題會從儲存於 Enrollments 實體之 `Course` 導覽屬性中的課程 (Course) 實體擷取。
 
-執行應用程式，選取 [Students]**** 索引標籤，然後按一下學生的 [詳細資料]**** 連結。 您會看到選取學生的課程及成績清單：
+執行應用程式，選取 [Students] 索引標籤，然後按一下學生的 [詳細資料] 連結。 您會看到選取學生的課程及成績清單：
 
 ![Student [詳細資料] 頁面](crud/_static/student-details.png)
 
@@ -129,7 +130,7 @@ http://localhost:1230/Instructor/Index?id=1&CourseID=2021
 
 您從 `Bind` 屬性移除了 `ID`，因為該識別碼是 SQL Server 在插入該資料列時自動為其建立的主索引鍵值。 使用者輸入的內容不會設定識別碼值。
 
-除了 `Bind` 屬性外，try-catch 區塊是您對 Scaffold 程式碼進行的唯一變更。 若在儲存變更時捕捉到衍生自 `DbUpdateException` 的例外狀況，則會顯示一般錯誤訊息。 `DbUpdateException` 例外狀況有時候是因為某些外部因素造成的，而非程式設計上的錯誤，因此系統會建議使用者再試一次。 雖然在此範例中並未實作，但生產環境品質的應用程式應記錄例外狀況。 如需詳細資訊，請參閱[監視及遙測 (使用 Azure 建置現實世界的雲端應用程式)](/aspnet/aspnet/overview/developing-apps-with-windows-azure/building-real-world-cloud-apps-with-windows-azure/monitoring-and-telemetry)中的**深入解析記錄檔**一節。
+除了 `Bind` 屬性外，try-catch 區塊是您對 Scaffold 程式碼進行的唯一變更。 若在儲存變更時捕捉到衍生自 `DbUpdateException` 的例外狀況，則會顯示一般錯誤訊息。 `DbUpdateException` 例外狀況有時候是因為某些外部因素造成的，而非程式設計上的錯誤，因此系統會建議使用者再試一次。 雖然在此範例中並未實作，但生產環境品質的應用程式應記錄例外狀況。 如需詳細資訊，請參閱 [監視及遙測 (使用 Azure 建置現實世界的雲端應用程式)](/aspnet/aspnet/overview/developing-apps-with-windows-azure/building-real-world-cloud-apps-with-windows-azure/monitoring-and-telemetry)中的 **深入解析記錄檔** 一節。
 
 `ValidateAntiForgeryToken` 屬性可協助防止跨網站偽造要求 (CSRF) 攻擊。 [FormTagHelper](xref:mvc/views/working-with-forms#the-form-tag-helper) 會自動將權杖插入檢視中，並在使用者提交表單時包含在內。 權杖會由 `ValidateAntiForgeryToken` 屬性進行驗證。 如需詳細資訊，請參閱<xref:security/anti-request-forgery>。
 
@@ -162,9 +163,9 @@ public class Student
 
 ### <a name="test-the-create-page"></a>測試 [建立] 頁面
 
-*Views/student/Create. cshtml*中的程式碼會針對 `label` `input` 每個欄位) 標記協助程式，使用、和 `span` (來進行驗證訊息。
+*Views/student/Create. cshtml* 中的程式碼會針對 `label` `input` 每個欄位) 標記協助程式，使用、和 `span` (來進行驗證訊息。
 
-執行應用程式，選取 [Students]**** 索引標籤，然後按一下 [新建]****。
+執行應用程式，選取 [Students] 索引標籤，然後按一下 [新建]。
 
 輸入名稱和日期。 嘗試輸入無效的日期 (若您的瀏覽器允許的話)。  (部分瀏覽器會強制您使用日期選擇器。 ) 然後按一下 [ **建立** ] 以查看錯誤訊息。
 
@@ -174,7 +175,7 @@ public class Student
 
 [!code-csharp[](intro/samples/cu/Controllers/StudentsController.cs?name=snippet_Create&highlight=8)]
 
-將日期變更為有效的值，然後按一下 [建立]**** 來在 [索引]**** 頁面上查看新增的學生。
+將日期變更為有效的值，然後按一下 [建立] 來在 [索引] 頁面上查看新增的學生。
 
 ## <a name="update-the-edit-page"></a>更新 [編輯] 頁面
 
@@ -230,11 +231,11 @@ Scaffold 程式碼會使用「建立及連結 」方法，但僅會捕捉到 `Db
 
 ### <a name="test-the-edit-page"></a>測試 [編輯] 頁面
 
-執行應用程式，選取 [Students]**** 索引標籤，然後按一下 [編輯]**** 超連結。
+執行應用程式，選取 [Students] 索引標籤，然後按一下 [編輯] 超連結。
 
 ![Students [編輯] 頁面](crud/_static/student-edit.png)
 
-變更一部分的資料，然後按一下 [儲存]****。 [索引]**** 頁面便會開啟，而您會看到更新的資料。
+變更一部分的資料，然後按一下 [儲存]。 [索引] 頁面便會開啟，而您會看到更新的資料。
 
 ## <a name="update-the-delete-page"></a>更新 [刪除] 頁面
 
@@ -272,7 +273,7 @@ Scaffold 程式碼會使用「建立及連結 」方法，但僅會捕捉到 `Db
 
 [!code-cshtml[](intro/samples/cu/Views/Students/Delete.cshtml?range=7-9&highlight=2)]
 
-執行應用程式，選取 [Students]**** 索引標籤，然後按一下**刪除**超連結：
+執行應用程式，選取 [Students] 索引標籤，然後按一下 **刪除** 超連結：
 
 ![刪除確認頁面](crud/_static/student-delete.png)
 
@@ -317,7 +318,7 @@ Scaffold 程式碼會使用「建立及連結 」方法，但僅會捕捉到 `Db
 > * 更新 [刪除] 頁面
 > * 關閉資料庫連線
 
-若要了解如何藉由新增排序、篩選及分頁來擴充 [索引]**** 頁面的功能，請前往下一個教學課程。
+若要了解如何藉由新增排序、篩選及分頁來擴充 [索引] 頁面的功能，請前往下一個教學課程。
 
 > [!div class="nextstepaction"]
 > [下一步：排序、篩選和分頁](sort-filter-page.md)

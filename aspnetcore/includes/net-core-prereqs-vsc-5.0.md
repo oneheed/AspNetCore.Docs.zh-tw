@@ -1,4 +1,4 @@
-* [Visual Studio Code](https://code.visualstudio.com/download) \(英文\)
+* [Visual Studio Code](https://code.visualstudio.com/download)
 * [適用於 Visual Studio Code (最新版本) 的 C#](https://marketplace.visualstudio.com/items?itemName=ms-dotnettools.csharp)
 * [!INCLUDE [.NET 5.0 SDK](~/includes/5.0-SDK.md)]
 

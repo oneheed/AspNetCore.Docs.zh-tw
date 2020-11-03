@@ -7,6 +7,7 @@ ms.custom: mvc
 ms.date: 03/27/2019
 ms.topic: tutorial
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -18,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: data/ef-mvc/concurrency
-ms.openlocfilehash: 629baeba545142e156e1a51107b470c932dae3cb
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: d476c836e8d497ca1291992dda38da1fc9f59ed2
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88629271"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93054368"
 ---
 # <a name="tutorial-handle-concurrency---aspnet-mvc-with-ef-core"></a>教學課程：使用 EF Core 處理並行 ASP.NET MVC
 
@@ -48,7 +49,7 @@ ms.locfileid: "88629271"
 > * 更新 [刪除] 頁面
 > * 更新 [詳細資料] 及 [建立] 檢視
 
-## <a name="prerequisites"></a>Prerequisites
+## <a name="prerequisites"></a>必要條件
 
 * [更新相關資料](update-related-data.md)
 
@@ -68,15 +69,15 @@ ms.locfileid: "88629271"
 
 ![將預算變更為 0](concurrency/_static/change-budget.png)
 
-在 Jane 按一下 [儲存]**** 前，John 造訪了相同的頁面並將 [開始日期] 欄位從 2007/9/1 變更為 2013/9/1。
+在 Jane 按一下 [儲存] 前，John 造訪了相同的頁面並將 [開始日期] 欄位從 2007/9/1 變更為 2013/9/1。
 
 ![將開始日期變更為 2013 年](concurrency/_static/change-date.png)
 
-Jana 先按了一下 [儲存]****，並且在瀏覽器返回 [索引] 頁面時看到她做出的變更。
+Jana 先按了一下 [儲存]，並且在瀏覽器返回 [索引] 頁面時看到她做出的變更。
 
 ![預算已變更為 0](concurrency/_static/budget-zero.png)
 
-然後 John 在仍然顯示預算為美金 $350,000.00 的 [編輯] 頁面上按一下 [儲存]****。 接下來發生的情況便是由您處理並行衝突的方式決定。
+然後 John 在仍然顯示預算為美金 $350,000.00 的 [編輯] 頁面上按一下 [儲存]。 接下來發生的情況便是由您處理並行衝突的方式決定。
 
 一部分選項包括下列項目：
 
@@ -86,11 +87,11 @@ Jana 先按了一下 [儲存]****，並且在瀏覽器返回 [索引] 頁面時�
 
 * 您可以讓 John 的變更覆寫 Jane 的變更。
 
-     下一次當有人瀏覽英文部門時，他們便會看到開始日期為 2013/9/1，且預算的金額已還原到美金 $350,000.00 元。 這稱之為「用戶端獲勝 (Client Wins)」** 或「最後寫入為準 (Last in Wins)」** 案例。  (用戶端的所有值都優先于資料存放區中的內容。 ) 如本節簡介所述，如果您沒有針對並行處理進行任何編碼，則會自動發生這種情況。
+     下一次當有人瀏覽英文部門時，他們便會看到開始日期為 2013/9/1，且預算的金額已還原到美金 $350,000.00 元。 這稱之為「用戶端獲勝 (Client Wins)」或「最後寫入為準 (Last in Wins)」案例。  (用戶端的所有值都優先于資料存放區中的內容。 ) 如本節簡介所述，如果您沒有針對並行處理進行任何編碼，則會自動發生這種情況。
 
 * 您可以防止 John 的變更更新到資料庫中。
 
-     一般而言，您會顯示一個錯誤訊息，將資料目前的狀態顯示給他，然後允許他重新套用他所作出的變更 (若他還是要變更的話)。 這稱為「存放區獲勝 (Store Wins)」** 案例。  (資料存放區值的優先順序高於用戶端所提交的值。 ) 您將在本教學課程中實行 Store 獲勝案例。 這個方法可確保沒有任何變更會在使用者收到警示，告知其發生的事情前遭到覆寫。
+     一般而言，您會顯示一個錯誤訊息，將資料目前的狀態顯示給他，然後允許他重新套用他所作出的變更 (若他還是要變更的話)。 這稱為「存放區獲勝 (Store Wins)」案例。  (資料存放區值的優先順序高於用戶端所提交的值。 ) 您將在本教學課程中實行 Store 獲勝案例。 這個方法可確保沒有任何變更會在使用者收到警示，告知其發生的事情前遭到覆寫。
 
 ### <a name="detecting-concurrency-conflicts"></a>偵測並行衝突
 
@@ -141,7 +142,7 @@ Scaffold Departments 控制器和檢視，如同您先前為 Students、Courses 
 
 ![Scaffold Department](concurrency/_static/add-departments-controller.png)
 
-在 * DepartmentsController.cs* 檔案中，將四個 "FirstMidName" 變更為 "FullName" ，使部門系統管理員下拉式清單可包含講師的完整名稱，而非只有姓氏。
+在 *DepartmentsController.cs* 檔案中，將四個 "FirstMidName" 變更為 "FullName" ，使部門系統管理員下拉式清單可包含講師的完整名稱，而非只有姓氏。
 
 [!code-csharp[](intro/samples/cu/Controllers/DepartmentsController.cs?name=snippet_Dropdown)]
 
@@ -187,7 +188,7 @@ _context.Entry(departmentToUpdate).Property("RowVersion").OriginalValue = rowVer
 
 [!code-csharp[](intro/samples/cu/Controllers/DepartmentsController.cs?range=174-178)]
 
-最後，程式碼會將 `departmentToUpdate` 的 `RowVersion` 值設為從資料庫取得的新值。 這個新的 `RowVersion` 值會在編輯頁面重新顯示時儲存於隱藏欄位中，並且當下一次使用者按一下 [儲存]**** 時，只有在重新顯示 [編輯] 頁面之後發生的並行錯誤才會被捕捉到。
+最後，程式碼會將 `departmentToUpdate` 的 `RowVersion` 值設為從資料庫取得的新值。 這個新的 `RowVersion` 值會在編輯頁面重新顯示時儲存於隱藏欄位中，並且當下一次使用者按一下 [儲存] 時，只有在重新顯示 [編輯] 頁面之後發生的並行錯誤才會被捕捉到。
 
 [!code-csharp[](intro/samples/cu/Controllers/DepartmentsController.cs?range=199-200)]
 
@@ -205,9 +206,9 @@ _context.Entry(departmentToUpdate).Property("RowVersion").OriginalValue = rowVer
 
 ## <a name="test-concurrency-conflicts"></a>測試並行衝突
 
-執行應用程式，移至 Departments [索引] 頁面。 以滑鼠右鍵按一下 English 部門的**編輯** 超連結，然後選取 [開啟新的索引標籤]****，然後按一下 English 部門的**編輯**超連結。 兩個瀏覽器索引標籤現在會顯示相同的資訊。
+執行應用程式，移至 Departments [索引] 頁面。 以滑鼠右鍵按一下 English 部門的 **編輯** 超連結，然後選取 [開啟新的索引標籤]，然後按一下 English 部門的 **編輯** 超連結。 兩個瀏覽器索引標籤現在會顯示相同的資訊。
 
-變更第一個瀏覽器索引標籤中的欄位，然後按一下 [儲存]****。
+變更第一個瀏覽器索引標籤中的欄位，然後按一下 [儲存]。
 
 ![變更之後的 Department [編輯] 頁面 1](concurrency/_static/edit-after-change-1.png)
 
@@ -217,11 +218,11 @@ _context.Entry(departmentToUpdate).Property("RowVersion").OriginalValue = rowVer
 
 ![變更之後的 Department [編輯] 頁面 2](concurrency/_static/edit-after-change-2.png)
 
-按一下 [檔案] 。 您會看到一個錯誤訊息：
+按一下 [檔案]  。 您會看到一個錯誤訊息：
 
 ![Department [編輯] 頁面錯誤訊息](concurrency/_static/edit-error.png)
 
-再按一下 [儲存]****。 您在第二個瀏覽器索引標籤中輸入的值已儲存。 您會在索引頁面出現時看到儲存的值。
+再按一下 [儲存]。 您在第二個瀏覽器索引標籤中輸入的值已儲存。 您會在索引頁面出現時看到儲存的值。
 
 ## <a name="update-the-delete-page"></a>更新 [刪除] 頁面
 
@@ -267,23 +268,23 @@ public async Task<IActionResult> Delete(Department department)
 
 * 在 `h2` 和 `h3` 標題之間新增一個錯誤訊息。
 
-* 在 [系統管理員]**** 欄位中將 FirstMidName 取代為 FullName。
+* 在 [系統管理員] 欄位中將 FirstMidName 取代為 FullName。
 
 * 移除 RowVersion 欄位。
 
 * 為 `RowVersion` 屬性新增一個隱藏欄位。
 
-執行應用程式，移至 Departments [索引] 頁面。 以滑鼠右鍵按一下 English 部門的**刪除** 超連結，然後選取 [開啟新的索引標籤]****，然後在第一個索引標籤中按一下 English 部門的**編輯**超連結。
+執行應用程式，移至 Departments [索引] 頁面。 以滑鼠右鍵按一下 English 部門的 **刪除** 超連結，然後選取 [開啟新的索引標籤]，然後在第一個索引標籤中按一下 English 部門的 **編輯** 超連結。
 
-在第一個視窗中，變更其中一個值，然後按一下 [儲存]****：
+在第一個視窗中，變更其中一個值，然後按一下 [儲存]：
 
 ![刪除前變更後的 Department [編輯] 頁面](concurrency/_static/edit-after-change-for-delete.png)
 
-在第二個索引標籤中，按一下 [刪除]****。 您會看到並行錯誤訊息，並且 Department 值已根據資料庫中的內容重新整理。
+在第二個索引標籤中，按一下 [刪除]。 您會看到並行錯誤訊息，並且 Department 值已根據資料庫中的內容重新整理。
 
 ![Department [刪除] 確認頁面，其中包含了並行錯誤](concurrency/_static/delete-error.png)
 
-若您再按一下 [刪除]****，則您將會重新導向至 [索引] 頁面，並且系統將顯示該部門已遭刪除。
+若您再按一下 [刪除]，則您將會重新導向至 [索引] 頁面，並且系統將顯示該部門已遭刪除。
 
 ## <a name="update-details-and-create-views"></a>更新 [詳細資料] 及 [建立] 檢視
 

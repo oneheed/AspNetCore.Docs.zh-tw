@@ -7,6 +7,7 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 4/17/2020
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -18,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: fundamentals/host/generic-host
-ms.openlocfilehash: d3de81ce7248372279b423da865513ee5db73c79
-ms.sourcegitcommit: d7991068bc6b04063f4bd836fc5b9591d614d448
+ms.openlocfilehash: 3e44932c302713132a37534b97fffdd91acce2c7
+ms.sourcegitcommit: d64bf0cbe763beda22a7728c7f10d07fc5e19262
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 10/06/2020
-ms.locfileid: "91762317"
+ms.lasthandoff: 11/03/2020
+ms.locfileid: "93234552"
 ---
 # <a name="net-generic-host-in-aspnet-core"></a>ASP.NET Core 中的 .NET 泛型主機
 
@@ -35,7 +36,7 @@ ASP.NET Core 範本會建立 .NET Core 泛型主機 (<xref:Microsoft.Extensions.
 
 ## <a name="host-definition"></a>主機定義
 
-「主機」** 是封裝所有應用程式資源的物件，例如：
+「主機」是封裝所有應用程式資源的物件，例如：
 
 * 相依性插入 (DI)
 * 記錄
@@ -113,7 +114,7 @@ public static IHostBuilder CreateHostBuilder(string[] args) =>
   * 前面加上的環境變數 `DOTNET_` 。
   * 命令列引數。
 * 從下列項目載入應用程式組態：
-  * *appsettings.js開啟*。
+  * *appsettings.json*.
   * *appsettings.{Environment}.json*
   * 應用程式在 `Development` 環境中執行時的[祕密管理員](xref:security/app-secrets)。
   * 環境變數。
@@ -125,7 +126,7 @@ public static IHostBuilder CreateHostBuilder(string[] args) =>
   * EventLog (僅當在 Windows 上執行時)
 * 環境為開發時，會啟用[範圍驗證](xref:fundamentals/dependency-injection#scope-validation)和[相依性驗證](xref:Microsoft.Extensions.DependencyInjection.ServiceProviderOptions.ValidateOnBuild)。
 
-`ConfigureWebHostDefaults` 方法：
+<xref:Microsoft.Extensions.Hosting.GenericHostBuilderExtensions.ConfigureWebHostDefaults*> 方法：
 
 * 從前面加上的環境變數載入主機設定 `ASPNETCORE_` 。
 * 會將 [Kestrel](xref:fundamentals/servers/kestrel) 伺服器設為網頁伺服器，並使用應用程式的主機組態提供者進行設定。 如需 Kestrel 伺服器的預設選項，請參閱 <xref:fundamentals/servers/kestrel#kestrel-options>。
@@ -196,7 +197,7 @@ Web apps 會執行 `IWebHostEnvironment` 介面，此介面會繼承 `IHostEnvir
 
 ## <a name="settings-for-all-app-types"></a>所有應用程式類型的設定
 
-本節列出適用於 HTTP 和非 HTTP 工作負載的主機設定。 根據預設，用來設定這些設定的環境變數可以具有 `DOTNET_` 或 `ASPNETCORE_` 前置詞。
+本節列出適用於 HTTP 和非 HTTP 工作負載的主機設定。 根據預設，用來設定這些設定的環境變數可以具有 `DOTNET_` 或 `ASPNETCORE_` 前置詞。 如需詳細資訊，請參閱預設建立器 [設定](#default-builder-settings) 一節。
 
 <!-- In the following sections, two spaces at end of line are used to force line breaks in the rendered page. -->
 
@@ -204,10 +205,10 @@ Web apps 會執行 `IWebHostEnvironment` 介面，此介面會繼承 `IHostEnvir
 
 [IHostEnvironment.ApplicationName](xref:Microsoft.Extensions.Hosting.IHostEnvironment.ApplicationName*) 屬性是在主機建構期間從主機組態當中設定。
 
-機**碼**：`applicationName`  
-**輸入**： `string`  
-**預設值**：包含應用程式進入點的元件名稱。  
-**環境變數**： `<PREFIX_>APPLICATIONNAME`
+機 **碼** ：`applicationName`  
+**輸入** ： `string`  
+**預設值** ：包含應用程式進入點的元件名稱。  
+**環境變數** ： `<PREFIX_>APPLICATIONNAME`
 
 若要設定此值，請使用環境變數。 
 
@@ -215,10 +216,10 @@ Web apps 會執行 `IWebHostEnvironment` 介面，此介面會繼承 `IHostEnvir
 
 [IHostEnvironment.ContentRootPath](xref:Microsoft.Extensions.Hosting.IHostEnvironment.ContentRootPath*) 屬性會決定主機從哪裡開始搜尋內容檔案。 如果路徑不存在，就無法啟動主機。
 
-機**碼**：`contentRoot`  
-**輸入**： `string`  
-**預設值**：應用程式元件所在的資料夾。  
-**環境變數**： `<PREFIX_>CONTENTROOT`
+機 **碼** ：`contentRoot`  
+**輸入** ： `string`  
+**預設值** ：應用程式元件所在的資料夾。  
+**環境變數** ： `<PREFIX_>CONTENTROOT`
 
 若要設定此值，請使用環境變數或呼叫 `IHostBuilder` 上的 `UseContentRoot`：
 
@@ -237,10 +238,10 @@ Host.CreateDefaultBuilder(args)
 
 [IHostEnvironment.EnvironmentName](xref:Microsoft.Extensions.Hosting.IHostEnvironment.EnvironmentName*) 屬性可以設為任何值。 架構定義的值包括 `Development`、`Staging` 和 `Production`。 值不區分大小寫。
 
-機**碼**：`environment`  
-**輸入**： `string`  
-**預設值**： `Production`  
-**環境變數**： `<PREFIX_>ENVIRONMENT`
+機 **碼** ：`environment`  
+**輸入** ： `string`  
+**預設值** ： `Production`  
+**環境變數** ： `<PREFIX_>ENVIRONMENT`
 
 若要設定此值，請使用環境變數或呼叫 `IHostBuilder` 上的 `UseEnvironment`：
 
@@ -259,10 +260,10 @@ Host.CreateDefaultBuilder(args)
 
 如果在所有的託管服務停止之前逾時期限已到期，則應用程式關閉時，會停止任何剩餘的作用中服務。 即使服務尚未完成處理也會停止。 如果服務需要更多時間才能停止，請增加逾時。
 
-機**碼**：`shutdownTimeoutSeconds`  
-**輸入**： `int`  
-**預設值**：5秒  
-**環境變數**： `<PREFIX_>SHUTDOWNTIMEOUTSECONDS`
+機 **碼** ：`shutdownTimeoutSeconds`  
+**輸入** ： `int`  
+**預設值** ：5秒  
+**環境變數** ： `<PREFIX_>SHUTDOWNTIMEOUTSECONDS`
 
 若要設定此值，請使用環境變數或設定 `HostOptions`。 下列範例將逾時設為 20 秒：
 
@@ -270,13 +271,13 @@ Host.CreateDefaultBuilder(args)
 
 ### <a name="disable-app-configuration-reload-on-change"></a>變更時停用應用程式設定重載
 
-依 [預設](xref:fundamentals/configuration/index#default)， *appsettings.json* 和 *appsettings. {環境}。* 當檔案變更時，會重載 json。 若要在 ASP.NET Core 5.0 或更新版本中停用這個重載行為，請將索引 `hostBuilder:reloadConfigOnChange` 鍵設定為 `false` 。
+依 [預設](xref:fundamentals/configuration/index#default)， *appsettings.json* 和 *appsettings。環境}。* 當檔案變更時，會重載 json。 若要在 ASP.NET Core 5.0 或更新版本中停用這個重載行為，請將索引 `hostBuilder:reloadConfigOnChange` 鍵設定為 `false` 。
 
-機**碼**：`hostBuilder:reloadConfigOnChange`  
-**類型**： `bool` (`true` 或 `1`)   
-**預設值**： `true`  
-**命令列引數**： `hostBuilder:reloadConfigOnChange`  
-**環境變數**： `<PREFIX_>hostBuilder:reloadConfigOnChange`
+機 **碼** ：`hostBuilder:reloadConfigOnChange`  
+**類型** ： `bool` (`true` 或 `1`)   
+**預設值** ： `true`  
+**命令列引數** ： `hostBuilder:reloadConfigOnChange`  
+**環境變數** ： `<PREFIX_>hostBuilder:reloadConfigOnChange`
 
 > [!WARNING]
 > 冒號 (`:`) 分隔符號不適用於所有平臺上的環境變數階層式索引鍵。 如需詳細資訊，請參閱 [環境變數](xref:fundamentals/configuration/index#environment-variables)。
@@ -301,10 +302,10 @@ public static IHostBuilder CreateHostBuilder(string[] args) =>
 
 當它為 `false` 時，啟動期間發生的錯誤會導致主機結束。 當它為 `true` 時，主機會擷取啟動期間的例外狀況，並嘗試啟動伺服器。
 
-機**碼**：`captureStartupErrors`  
-**類型**： `bool` (`true` 或 `1`)   
-**預設值**：預設為 `false`，除非應用程式執行時在 IIS 背後有 Kestrel，此時預設值即為 `true`。  
-**環境變數**： `<PREFIX_>CAPTURESTARTUPERRORS`
+機 **碼** ：`captureStartupErrors`  
+**類型** ： `bool` (`true` 或 `1`)   
+**預設值** ：預設為 `false`，除非應用程式執行時在 IIS 背後有 Kestrel，此時預設值即為 `true`。  
+**環境變數** ： `<PREFIX_>CAPTURESTARTUPERRORS`
 
 若要設定此值，請使用組態或呼叫 `CaptureStartupErrors`：
 
@@ -316,10 +317,10 @@ webBuilder.CaptureStartupErrors(true);
 
 啟用時 (或當環境為 `Development` 時)，應用程式會擷取詳細錯誤。
 
-機**碼**：`detailedErrors`  
-**類型**： `bool` (`true` 或 `1`)   
-**預設值**： `false`  
-**環境變數**： `<PREFIX_>_DETAILEDERRORS`
+機 **碼** ：`detailedErrors`  
+**類型** ： `bool` (`true` 或 `1`)   
+**預設值** ： `false`  
+**環境變數** ： `<PREFIX_>_DETAILEDERRORS`
 
 若要設定此值，請使用組態或呼叫 `UseSetting`：
 
@@ -331,10 +332,10 @@ webBuilder.UseSetting(WebHostDefaults.DetailedErrorsKey, "true");
 
 在啟動時載入的裝載啟動組件字串，以分號分隔。 雖然設定值會預設為空字串，但裝載啟動組件一律會包含應用程式的組件。 提供裝載啟動組件時，它們會新增至應用程式的組件，以便在應用程式在啟動時建置其通用服務時載入。
 
-機**碼**：`hostingStartupAssemblies`  
-**輸入**： `string`  
-**預設值**：空字串  
-**環境變數**： `<PREFIX_>_HOSTINGSTARTUPASSEMBLIES`
+機 **碼** ：`hostingStartupAssemblies`  
+**輸入** ： `string`  
+**預設值** ：空字串  
+**環境變數** ： `<PREFIX_>_HOSTINGSTARTUPASSEMBLIES`
 
 若要設定此值，請使用組態或呼叫 `UseSetting`：
 
@@ -346,10 +347,10 @@ webBuilder.UseSetting(WebHostDefaults.HostingStartupAssembliesKey, "assembly1;as
 
 在啟動時排除以分號分隔的裝載啟動組件字串。
 
-機**碼**：`hostingStartupExcludeAssemblies`  
-**輸入**： `string`  
-**預設值**：空字串  
-**環境變數**： `<PREFIX_>_HOSTINGSTARTUPEXCLUDEASSEMBLIES`
+機 **碼** ：`hostingStartupExcludeAssemblies`  
+**輸入** ： `string`  
+**預設值** ：空字串  
+**環境變數** ： `<PREFIX_>_HOSTINGSTARTUPEXCLUDEASSEMBLIES`
 
 若要設定此值，請使用組態或呼叫 `UseSetting`：
 
@@ -361,10 +362,10 @@ webBuilder.UseSetting(WebHostDefaults.HostingStartupExcludeAssembliesKey, "assem
 
 HTTPS 重新導向連接埠。 用於[強制 HTTPS](xref:security/enforcing-ssl)。
 
-機**碼**：`https_port`  
-**輸入**： `string`  
-**預設**值：未設定預設值。  
-**環境變數**： `<PREFIX_>HTTPS_PORT`
+機 **碼** ：`https_port`  
+**輸入** ： `string`  
+**預設** 值：未設定預設值。  
+**環境變數** ： `<PREFIX_>HTTPS_PORT`
 
 若要設定此值，請使用組態或呼叫 `UseSetting`：
 
@@ -376,10 +377,10 @@ webBuilder.UseSetting("https_port", "8080");
 
 指出主機是否應接聽使用設定的 Url， `IWebHostBuilder` 而不是使用執行時所設定的 url `IServer` 。
 
-機**碼**：`preferHostingUrls`  
-**類型**： `bool` (`true` 或 `1`)   
-**預設值**： `true`  
-**環境變數**： `<PREFIX_>_PREFERHOSTINGURLS`
+機 **碼** ：`preferHostingUrls`  
+**類型** ： `bool` (`true` 或 `1`)   
+**預設值** ： `true`  
+**環境變數** ： `<PREFIX_>_PREFERHOSTINGURLS`
 
 若要設定此值，請使用環境變數或呼叫 `PreferHostingUrls`：
 
@@ -391,10 +392,10 @@ webBuilder.PreferHostingUrls(false);
 
 可防止自動載入裝載啟動組件，包括應用程式組件所設定的裝載啟動組件。 如需詳細資訊，請參閱<xref:fundamentals/configuration/platform-specific-configuration>。
 
-機**碼**：`preventHostingStartup`  
-**類型**： `bool` (`true` 或 `1`)   
-**預設值**： `false`  
-**環境變數**： `<PREFIX_>_PREVENTHOSTINGSTARTUP`
+機 **碼** ：`preventHostingStartup`  
+**類型** ： `bool` (`true` 或 `1`)   
+**預設值** ： `false`  
+**環境變數** ： `<PREFIX_>_PREVENTHOSTINGSTARTUP`
 
 若要設定此值，請使用環境變數或呼叫 `UseSetting`：
 
@@ -406,10 +407,10 @@ webBuilder.UseSetting(WebHostDefaults.PreventHostingStartupKey, "true");
 
 要搜尋 `Startup` 類別的組件。
 
-機**碼**：`startupAssembly`  
-**輸入**： `string`  
-**預設值**：應用程式的組件  
-**環境變數**： `<PREFIX_>STARTUPASSEMBLY`
+機 **碼** ：`startupAssembly`  
+**輸入** ： `string`  
+**預設值** ：應用程式的組件  
+**環境變數** ： `<PREFIX_>STARTUPASSEMBLY`
 
 若要設定此值，請使用環境變數或呼叫 `UseStartup`。 `UseStartup` 可以採用組件名稱 (`string`) 或類型 (`TStartup`)。 如果呼叫多個 `UseStartup` 方法，最後一個將會優先。
 
@@ -425,10 +426,10 @@ webBuilder.UseStartup<Startup>();
 
 以分號分隔的 IP 位址或主機位址，包含伺服器應接聽要求的連接埠和通訊協定。 例如： `http://localhost:123` 。 使用 "\*"，表示伺服器應接聽任何 IP 位址或主機名稱上的要求，並使用指定的連接埠和通訊協定 (例如，`http://*:5000`)。 通訊協定 (`http://` 或 `https://`) 必須包含在每個 URL 中。 支援的格式會依伺服器而有所不同。
 
-機**碼**：`urls`  
-**輸入**： `string`  
-**預設值**： `http://localhost:5000` 和 `https://localhost:5001`  
-**環境變數**： `<PREFIX_>URLS`
+機 **碼** ：`urls`  
+**輸入** ： `string`  
+**預設值** ： `http://localhost:5000` 和 `https://localhost:5001`  
+**環境變數** ： `<PREFIX_>URLS`
 
 若要設定此值，請使用環境變數或呼叫 `UseUrls`：
 
@@ -442,10 +443,10 @@ Kestrel 有它自己的端點設定 API。 如需詳細資訊，請參閱<xref:f
 
 [IWebHostEnvironment. WebRootPath](xref:Microsoft.AspNetCore.Hosting.IWebHostEnvironment.WebRootPath)屬性會決定應用程式靜態資產的相對路徑。 如果路徑不存在，則會使用無作業檔案提供者。  
 
-機**碼**：`webroot`  
-**輸入**： `string`  
-**預設**值：預設值為 `wwwroot` 。 *{Content root}/wwwroot*的路徑必須存在。  
-**環境變數**： `<PREFIX_>WEBROOT`
+機 **碼** ：`webroot`  
+**輸入** ： `string`  
+**預設** 值：預設值為 `wwwroot` 。 *{Content root}/wwwroot* 的路徑必須存在。  
+**環境變數** ： `<PREFIX_>WEBROOT`
 
 若要設定此值，請使用環境變數或呼叫 `IWebHostBuilder` 上的 `UseWebRoot`：
 
@@ -536,7 +537,7 @@ ASP.NET Core 範本會建立 .NET Core 泛型主機 (<xref:Microsoft.Extensions.
 
 ## <a name="host-definition"></a>主機定義
 
-「主機」** 是封裝所有應用程式資源的物件，例如：
+「主機」是封裝所有應用程式資源的物件，例如：
 
 * 相依性插入 (DI)
 * 記錄
@@ -616,7 +617,7 @@ public static IHostBuilder CreateHostBuilder(string[] args) =>
   * 前面加上的環境變數 `DOTNET_` 。
   * 命令列引數。
 * 從下列項目載入應用程式組態：
-  * *appsettings.js開啟*。
+  * *appsettings.json*.
   * *appsettings.{Environment}.json*
   * 應用程式在 `Development` 環境中執行時的[祕密管理員](xref:security/app-secrets)。
   * 環境變數。
@@ -707,10 +708,10 @@ Web apps 會執行 `IWebHostEnvironment` 介面，此介面會繼承 `IHostEnvir
 
 [IHostEnvironment.ApplicationName](xref:Microsoft.Extensions.Hosting.IHostEnvironment.ApplicationName*) 屬性是在主機建構期間從主機組態當中設定。
 
-機**碼**：`applicationName`  
-**輸入**： `string`  
-**預設值**：包含應用程式進入點的元件名稱。  
-**環境變數**： `<PREFIX_>APPLICATIONNAME`
+機 **碼** ：`applicationName`  
+**輸入** ： `string`  
+**預設值** ：包含應用程式進入點的元件名稱。  
+**環境變數** ： `<PREFIX_>APPLICATIONNAME`
 
 若要設定此值，請使用環境變數。 
 
@@ -718,10 +719,10 @@ Web apps 會執行 `IWebHostEnvironment` 介面，此介面會繼承 `IHostEnvir
 
 [IHostEnvironment.ContentRootPath](xref:Microsoft.Extensions.Hosting.IHostEnvironment.ContentRootPath*) 屬性會決定主機從哪裡開始搜尋內容檔案。 如果路徑不存在，就無法啟動主機。
 
-機**碼**：`contentRoot`  
-**輸入**： `string`  
-**預設值**：應用程式元件所在的資料夾。  
-**環境變數**： `<PREFIX_>CONTENTROOT`
+機 **碼** ：`contentRoot`  
+**輸入** ： `string`  
+**預設值** ：應用程式元件所在的資料夾。  
+**環境變數** ： `<PREFIX_>CONTENTROOT`
 
 若要設定此值，請使用環境變數或呼叫 `IHostBuilder` 上的 `UseContentRoot`：
 
@@ -740,10 +741,10 @@ Host.CreateDefaultBuilder(args)
 
 [IHostEnvironment.EnvironmentName](xref:Microsoft.Extensions.Hosting.IHostEnvironment.EnvironmentName*) 屬性可以設為任何值。 架構定義的值包括 `Development`、`Staging` 和 `Production`。 值不區分大小寫。
 
-機**碼**：`environment`  
-**輸入**： `string`  
-**預設值**： `Production`  
-**環境變數**： `<PREFIX_>ENVIRONMENT`
+機 **碼** ：`environment`  
+**輸入** ： `string`  
+**預設值** ： `Production`  
+**環境變數** ： `<PREFIX_>ENVIRONMENT`
 
 若要設定此值，請使用環境變數或呼叫 `IHostBuilder` 上的 `UseEnvironment`：
 
@@ -762,10 +763,10 @@ Host.CreateDefaultBuilder(args)
 
 如果在所有的託管服務停止之前逾時期限已到期，則應用程式關閉時，會停止任何剩餘的作用中服務。 即使服務尚未完成處理也會停止。 如果服務需要更多時間才能停止，請增加逾時。
 
-機**碼**：`shutdownTimeoutSeconds`  
-**輸入**： `int`  
-**預設值**：5秒  
-**環境變數**： `<PREFIX_>SHUTDOWNTIMEOUTSECONDS`
+機 **碼** ：`shutdownTimeoutSeconds`  
+**輸入** ： `int`  
+**預設值** ：5秒  
+**環境變數** ： `<PREFIX_>SHUTDOWNTIMEOUTSECONDS`
 
 若要設定此值，請使用環境變數或設定 `HostOptions`。 下列範例將逾時設為 20 秒：
 
@@ -791,10 +792,10 @@ public static IHostBuilder CreateHostBuilder(string[] args) =>
 
 當它為 `false` 時，啟動期間發生的錯誤會導致主機結束。 當它為 `true` 時，主機會擷取啟動期間的例外狀況，並嘗試啟動伺服器。
 
-機**碼**：`captureStartupErrors`  
-**類型**： `bool` (`true` 或 `1`)   
-**預設值**：預設為 `false`，除非應用程式執行時在 IIS 背後有 Kestrel，此時預設值即為 `true`。  
-**環境變數**： `<PREFIX_>CAPTURESTARTUPERRORS`
+機 **碼** ：`captureStartupErrors`  
+**類型** ： `bool` (`true` 或 `1`)   
+**預設值** ：預設為 `false`，除非應用程式執行時在 IIS 背後有 Kestrel，此時預設值即為 `true`。  
+**環境變數** ： `<PREFIX_>CAPTURESTARTUPERRORS`
 
 若要設定此值，請使用組態或呼叫 `CaptureStartupErrors`：
 
@@ -806,10 +807,10 @@ webBuilder.CaptureStartupErrors(true);
 
 啟用時 (或當環境為 `Development` 時)，應用程式會擷取詳細錯誤。
 
-機**碼**：`detailedErrors`  
-**類型**： `bool` (`true` 或 `1`)   
-**預設值**： `false`  
-**環境變數**： `<PREFIX_>_DETAILEDERRORS`
+機 **碼** ：`detailedErrors`  
+**類型** ： `bool` (`true` 或 `1`)   
+**預設值** ： `false`  
+**環境變數** ： `<PREFIX_>_DETAILEDERRORS`
 
 若要設定此值，請使用組態或呼叫 `UseSetting`：
 
@@ -821,10 +822,10 @@ webBuilder.UseSetting(WebHostDefaults.DetailedErrorsKey, "true");
 
 在啟動時載入的裝載啟動組件字串，以分號分隔。 雖然設定值會預設為空字串，但裝載啟動組件一律會包含應用程式的組件。 提供裝載啟動組件時，它們會新增至應用程式的組件，以便在應用程式在啟動時建置其通用服務時載入。
 
-機**碼**：`hostingStartupAssemblies`  
-**輸入**： `string`  
-**預設值**：空字串  
-**環境變數**： `<PREFIX_>_HOSTINGSTARTUPASSEMBLIES`
+機 **碼** ：`hostingStartupAssemblies`  
+**輸入** ： `string`  
+**預設值** ：空字串  
+**環境變數** ： `<PREFIX_>_HOSTINGSTARTUPASSEMBLIES`
 
 若要設定此值，請使用組態或呼叫 `UseSetting`：
 
@@ -836,10 +837,10 @@ webBuilder.UseSetting(WebHostDefaults.HostingStartupAssembliesKey, "assembly1;as
 
 在啟動時排除以分號分隔的裝載啟動組件字串。
 
-機**碼**：`hostingStartupExcludeAssemblies`  
-**輸入**： `string`  
-**預設值**：空字串  
-**環境變數**： `<PREFIX_>_HOSTINGSTARTUPEXCLUDEASSEMBLIES`
+機 **碼** ：`hostingStartupExcludeAssemblies`  
+**輸入** ： `string`  
+**預設值** ：空字串  
+**環境變數** ： `<PREFIX_>_HOSTINGSTARTUPEXCLUDEASSEMBLIES`
 
 若要設定此值，請使用組態或呼叫 `UseSetting`：
 
@@ -851,10 +852,10 @@ webBuilder.UseSetting(WebHostDefaults.HostingStartupExcludeAssembliesKey, "assem
 
 HTTPS 重新導向連接埠。 用於[強制 HTTPS](xref:security/enforcing-ssl)。
 
-機**碼**：`https_port`  
-**輸入**： `string`  
-**預設**值：未設定預設值。  
-**環境變數**： `<PREFIX_>HTTPS_PORT`
+機 **碼** ：`https_port`  
+**輸入** ： `string`  
+**預設** 值：未設定預設值。  
+**環境變數** ： `<PREFIX_>HTTPS_PORT`
 
 若要設定此值，請使用組態或呼叫 `UseSetting`：
 
@@ -866,10 +867,10 @@ webBuilder.UseSetting("https_port", "8080");
 
 指出主機是否應接聽使用設定的 Url， `IWebHostBuilder` 而不是使用執行時所設定的 url `IServer` 。
 
-機**碼**：`preferHostingUrls`  
-**類型**： `bool` (`true` 或 `1`)   
-**預設值**： `true`  
-**環境變數**： `<PREFIX_>_PREFERHOSTINGURLS`
+機 **碼** ：`preferHostingUrls`  
+**類型** ： `bool` (`true` 或 `1`)   
+**預設值** ： `true`  
+**環境變數** ： `<PREFIX_>_PREFERHOSTINGURLS`
 
 若要設定此值，請使用環境變數或呼叫 `PreferHostingUrls`：
 
@@ -881,10 +882,10 @@ webBuilder.PreferHostingUrls(false);
 
 可防止自動載入裝載啟動組件，包括應用程式組件所設定的裝載啟動組件。 如需詳細資訊，請參閱<xref:fundamentals/configuration/platform-specific-configuration>。
 
-機**碼**：`preventHostingStartup`  
-**類型**： `bool` (`true` 或 `1`)   
-**預設值**： `false`  
-**環境變數**： `<PREFIX_>_PREVENTHOSTINGSTARTUP`
+機 **碼** ：`preventHostingStartup`  
+**類型** ： `bool` (`true` 或 `1`)   
+**預設值** ： `false`  
+**環境變數** ： `<PREFIX_>_PREVENTHOSTINGSTARTUP`
 
 若要設定此值，請使用環境變數或呼叫 `UseSetting`：
 
@@ -896,10 +897,10 @@ webBuilder.UseSetting(WebHostDefaults.PreventHostingStartupKey, "true");
 
 要搜尋 `Startup` 類別的組件。
 
-機**碼**：`startupAssembly`  
-**輸入**： `string`  
-**預設值**：應用程式的組件  
-**環境變數**： `<PREFIX_>STARTUPASSEMBLY`
+機 **碼** ：`startupAssembly`  
+**輸入** ： `string`  
+**預設值** ：應用程式的組件  
+**環境變數** ： `<PREFIX_>STARTUPASSEMBLY`
 
 若要設定此值，請使用環境變數或呼叫 `UseStartup`。 `UseStartup` 可以採用組件名稱 (`string`) 或類型 (`TStartup`)。 如果呼叫多個 `UseStartup` 方法，最後一個將會優先。
 
@@ -915,10 +916,10 @@ webBuilder.UseStartup<Startup>();
 
 以分號分隔的 IP 位址或主機位址，包含伺服器應接聽要求的連接埠和通訊協定。 例如： `http://localhost:123` 。 使用 "\*"，表示伺服器應接聽任何 IP 位址或主機名稱上的要求，並使用指定的連接埠和通訊協定 (例如，`http://*:5000`)。 通訊協定 (`http://` 或 `https://`) 必須包含在每個 URL 中。 支援的格式會依伺服器而有所不同。
 
-機**碼**：`urls`  
-**輸入**： `string`  
-**預設值**： `http://localhost:5000` 和 `https://localhost:5001`  
-**環境變數**： `<PREFIX_>URLS`
+機 **碼** ：`urls`  
+**輸入** ： `string`  
+**預設值** ： `http://localhost:5000` 和 `https://localhost:5001`  
+**環境變數** ： `<PREFIX_>URLS`
 
 若要設定此值，請使用環境變數或呼叫 `UseUrls`：
 
@@ -932,10 +933,10 @@ Kestrel 有它自己的端點設定 API。 如需詳細資訊，請參閱<xref:f
 
 [IWebHostEnvironment. WebRootPath](xref:Microsoft.AspNetCore.Hosting.IWebHostEnvironment.WebRootPath)屬性會決定應用程式靜態資產的相對路徑。 如果路徑不存在，則會使用無作業檔案提供者。  
 
-機**碼**：`webroot`  
-**輸入**： `string`  
-**預設**值：預設值為 `wwwroot` 。 *{Content root}/wwwroot*的路徑必須存在。  
-**環境變數**： `<PREFIX_>WEBROOT`
+機 **碼** ：`webroot`  
+**輸入** ： `string`  
+**預設** 值：預設值為 `wwwroot` 。 *{Content root}/wwwroot* 的路徑必須存在。  
+**環境變數** ： `<PREFIX_>WEBROOT`
 
 若要設定此值，請使用環境變數或呼叫 `IWebHostBuilder` 上的 `UseWebRoot`：
 
@@ -1030,12 +1031,12 @@ ASP.NET Core 應用程式會設定並啟動主機。 主機負責應用程式啟
 
 [查看或下載範例程式碼](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/host/generic-host/samples/) ([如何下載](xref:index#how-to-download-a-sample)) 
 
-在 [Visual Studio Code](https://code.visualstudio.com/) 中執行範例應用程式時，請使用「外部或整合式終端機」**。 請勿在 `internalConsole` 中執行範例。
+在 [Visual Studio Code](https://code.visualstudio.com/) 中執行範例應用程式時，請使用「外部或整合式終端機」。 請勿在 `internalConsole` 中執行範例。
 
 若要在 Visual Studio Code 中設定主控台：
 
 1. 開啟 *.vscode/launch.json* 檔案。
-1. 在 [.NET Core Launch (console)] \(.NET Core 啟動 (主控台)\)**** 設定中，尋找 **console** 項目。 將此值設定為 `externalTerminal` 或 `integratedTerminal`。
+1. 在 [.NET Core Launch (console)] \(.NET Core 啟動 (主控台)\) 設定中，尋找 **console** 項目。 將此值設定為 `externalTerminal` 或 `integratedTerminal`。
 
 ## <a name="introduction"></a>簡介
 
@@ -1049,7 +1050,7 @@ ASP.NET Core 應用程式會設定並啟動主機。 主機負責應用程式啟
 
 [!code-csharp[](generic-host/samples-snapshot/2.x/GenericHostSample/Program.cs?name=snippet_HostBuilder)]
 
-## <a name="options"></a>選項。
+## <a name="options"></a>選項
 
 <xref:Microsoft.Extensions.Hosting.IHost> 的 <xref:Microsoft.Extensions.Hosting.HostOptions> 設定選項。
 
@@ -1097,21 +1098,21 @@ var host = new HostBuilder()
 
 [IHostingEnvironment.ApplicationName](xref:Microsoft.Extensions.Hosting.IHostingEnvironment.ApplicationName*) 屬性是在主機建構期間從主機設定當中設定。 若要明確設定該值，請使用 [HostDefaults.ApplicationKey](xref:Microsoft.Extensions.Hosting.HostDefaults.ApplicationKey)：
 
-機**碼**：`applicationName`  
-**輸入**： `string`  
-**預設**：包含應用程式進入點的組件名稱。  
-**設定使用**： `HostBuilderContext.HostingEnvironment.ApplicationName`  
-**環境變數**： `<PREFIX_>APPLICATIONNAME` (`<PREFIX_>` 是 [選擇性的，而且是使用者定義的](#configurehostconfiguration)) 
+機 **碼** ：`applicationName`  
+**輸入** ： `string`  
+**預設** ：包含應用程式進入點的組件名稱。  
+**設定使用** ： `HostBuilderContext.HostingEnvironment.ApplicationName`  
+**環境變數** ： `<PREFIX_>APPLICATIONNAME` (`<PREFIX_>` 是 [選擇性的，而且是使用者定義的](#configurehostconfiguration)) 
 
 ### <a name="content-root"></a>內容根目錄
 
 此設定可決定主機開始搜尋內容檔案的位置。
 
-機**碼**：`contentRoot`  
-**輸入**： `string`  
-**預設值**：預設為應用程式組件所在的資料夾。  
-**設定使用**： `UseContentRoot`  
-**環境變數**： `<PREFIX_>CONTENTROOT` (`<PREFIX_>` 是 [選擇性的，而且是使用者定義的](#configurehostconfiguration)) 
+機 **碼** ：`contentRoot`  
+**輸入** ： `string`  
+**預設值** ：預設為應用程式組件所在的資料夾。  
+**設定使用** ： `UseContentRoot`  
+**環境變數** ： `<PREFIX_>CONTENTROOT` (`<PREFIX_>` 是 [選擇性的，而且是使用者定義的](#configurehostconfiguration)) 
 
 如果路徑不存在，就無法啟動主機。
 
@@ -1123,11 +1124,11 @@ var host = new HostBuilder()
 
 設定應用程式的 [環境](xref:fundamentals/environments)。
 
-機**碼**：`environment`  
-**輸入**： `string`  
-**預設值**： `Production`  
-**設定使用**： `UseEnvironment`  
-**環境變數**： `<PREFIX_>ENVIRONMENT` (`<PREFIX_>` 是 [選擇性的，而且是使用者定義的](#configurehostconfiguration)) 
+機 **碼** ：`environment`  
+**輸入** ： `string`  
+**預設值** ： `Production`  
+**設定使用** ： `UseEnvironment`  
+**環境變數** ： `<PREFIX_>ENVIRONMENT` (`<PREFIX_>` 是 [選擇性的，而且是使用者定義的](#configurehostconfiguration)) 
 
 環境可以設定為任何值。 架構定義的值包括 `Development`、`Staging` 和 `Production`。 值不區分大小寫。
 
@@ -1146,7 +1147,7 @@ var host = new HostBuilder()
 * 命令列引數組態。
 * 任何其他必要的組態提供者。
 
-使用之後呼叫[檔案組態提供者](xref:fundamentals/configuration/index#file-configuration-provider)的 `SetBasePath`，並透過指定應用程式基底路徑，就可使用主機的檔案設定。 範例應用程式會使用 JSON 檔案，*hostsettings.json*，並呼叫 <xref:Microsoft.Extensions.Configuration.JsonConfigurationExtensions.AddJsonFile*> 取用檔案的主機組態設定。
+使用之後呼叫[檔案組態提供者](xref:fundamentals/configuration/index#file-configuration-provider)的 `SetBasePath`，並透過指定應用程式基底路徑，就可使用主機的檔案設定。 範例應用程式會使用 JSON 檔案， *hostsettings.json* ，並呼叫 <xref:Microsoft.Extensions.Configuration.JsonConfigurationExtensions.AddJsonFile*> 取用檔案的主機組態設定。
 
 若要新增主機的[環境變數組態](xref:fundamentals/configuration/index#environment-variables-configuration-provider)，請在主機建立器上呼叫 <xref:Microsoft.Extensions.Configuration.EnvironmentVariablesExtensions.AddEnvironmentVariables*>。 `AddEnvironmentVariables` 可接受選擇性的使用者定義前置詞。 範例應用程式會使用前置詞 `PREFIX_`。 讀取環境變數時，就會移除前置詞。 在設定範例應用程式的主機時，`PREFIX_ENVIRONMENT` 的環境變數值會變成 `environment` 索引鍵的主機組態值。
 
@@ -1154,7 +1155,7 @@ var host = new HostBuilder()
 
 [命令列組態](xref:fundamentals/configuration/index#command-line-configuration-provider)可透過呼叫 <xref:Microsoft.Extensions.Configuration.CommandLineConfigurationExtensions.AddCommandLine*> 新增。 命令列組態會在最後新增，以便命令列引數覆寫由先前組態提供者提供的組態。
 
-*hostsettings.json*：
+*hostsettings.json* ：
 
 [!code-json[](generic-host/samples/2.x/GenericHostSample/hostsettings.json)]
 
@@ -1174,19 +1175,19 @@ var host = new HostBuilder()
 
 [!code-csharp[](generic-host/samples-snapshot/2.x/GenericHostSample/Program.cs?name=snippet_ConfigureAppConfiguration)]
 
-*appsettings.js*：
+*appsettings.json* :
 
 [!code-json[](generic-host/samples/2.x/GenericHostSample/appsettings.json)]
 
-*appsettings.Development.json*：
+*appsettings.Development.json* ：
 
 [!code-json[](generic-host/samples/2.x/GenericHostSample/appsettings.Development.json)]
 
-*appsettings.Production.json*：
+*appsettings.Production.json* ：
 
 [!code-json[](generic-host/samples/2.x/GenericHostSample/appsettings.Production.json)]
 
-若要將設定檔移至輸出目錄，請在專案檔中將設定檔指定為 [MSBuild 專案項目](/visualstudio/msbuild/common-msbuild-project-items)。 範例應用程式使用下列 `<Content>` 項目，移動其 JSON 應用程式設定檔和 *hostsettings.json*：
+若要將設定檔移至輸出目錄，請在專案檔中將設定檔指定為 [MSBuild 專案項目](/visualstudio/msbuild/common-msbuild-project-items)。 範例應用程式使用下列 `<Content>` 項目，移動其 JSON 應用程式設定檔和 *hostsettings.json* ：
 
 ```xml
 <ItemGroup>
@@ -1482,7 +1483,7 @@ public class MyClass
 
 建構函式將 <xref:Microsoft.Extensions.Hosting.IApplicationLifetime> 服務插入任何類別。 [範例應用程式](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/host/generic-host/samples/)使用建構函式插入 `LifetimeEventsHostedService` 類別 (<xref:Microsoft.Extensions.Hosting.IHostedService> 實作) 來註冊事件。
 
-*LifetimeEventsHostedService.cs*：
+*LifetimeEventsHostedService.cs* ：
 
 [!code-csharp[](generic-host/samples/2.x/GenericHostSample/LifetimeEventsHostedService.cs?name=snippet1)]
 

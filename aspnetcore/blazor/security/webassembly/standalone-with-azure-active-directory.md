@@ -19,33 +19,25 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/security/webassembly/standalone-with-azure-active-directory
-ms.openlocfilehash: ce8e677cd774238faab7789d4e24bf1c755e5105
-ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
+ms.openlocfilehash: 4e8c22c56b7023301499fd273a9194b8c7b58f3d
+ms.sourcegitcommit: 45aa1c24c3fdeb939121e856282b00bdcf00ea55
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 10/30/2020
-ms.locfileid: "93055135"
+ms.lasthandoff: 11/04/2020
+ms.locfileid: "93343702"
 ---
 # <a name="secure-an-aspnet-core-no-locblazor-webassembly-standalone-app-with-azure-active-directory"></a>使用 Azure Active Directory 保護 ASP.NET Core 的 Blazor WebAssembly 獨立應用程式
 
 由 [Javier Calvarro Nelson](https://github.com/javiercn) 和 [Luke Latham](https://github.com/guardrex)
 
-本文涵蓋如何 Blazor WebAssembly 使用 Azure Active Directory (AAD) 保護 ASP.NET Core 獨立應用程式。
+本文涵蓋如何建立使用[Azure Active Directory (AAD) ](https://azure.microsoft.com/services/active-directory/)進行驗證的[獨立 Blazor WebAssembly 應用程式](xref:blazor/hosting-models#blazor-webassembly)。
 
 ::: moniker range=">= aspnetcore-5.0"
 
 > [!NOTE]
 > 針對 Blazor WebAssembly 在 Visual Studio 中建立的應用程式，這些應用程式設定為支援 AAD 組織目錄中的帳戶，Visual Studio 不會在產生專案時正確設定應用程式。 未來的 Visual Studio 版本將會解決此問題。 本文說明如何使用 .NET Core CLI 的命令來建立應用程式 `dotnet new` 。 如果您想要在 IDE 更新 ASP.NET Core 5.0 中的最新範本之前使用 Visual Studio 建立應用程式 Blazor ，請參閱本文的每一節，然後在 Visual Studio 建立應用程式之後，確認或更新應用程式的設定。
 
-::: moniker-end
-
-若要建立使用[Azure Active Directory (AAD) ](https://azure.microsoft.com/services/active-directory/)進行驗證的[獨立 Blazor WebAssembly 應用程式](xref:blazor/hosting-models#blazor-webassembly)：
-
-[建立 AAD 租使用者與 web 應用程式](/azure/active-directory/develop/v2-overview)：
-
-在 Azure 入口網站的 **Azure Active Directory**  >  **應用程式註冊** 區域中註冊 AAD 應用程式：
-
-::: moniker range=">= aspnetcore-5.0"
+在 Azure 入口網站的 **Azure Active Directory** > **應用程式註冊** 區域中註冊 AAD 應用程式：
 
 1. 提供應用程式的 **名稱** (例如 **Blazor 獨立 AAD** ) 。
 1. 選擇 **支援的帳戶類型** 。 您可以 **只在此體驗中選取此組織目錄中的帳戶** 。
@@ -68,6 +60,8 @@ ms.locfileid: "93055135"
 ::: moniker-end
 
 ::: moniker range="< aspnetcore-5.0"
+
+在 Azure 入口網站的 **Azure Active Directory** > **應用程式註冊** 區域中註冊 AAD 應用程式：
 
 1. 提供應用程式的 **名稱** (例如 **Blazor 獨立 AAD** ) 。
 1. 選擇 **支援的帳戶類型** 。 您可以 **只在此體驗中選取此組織目錄中的帳戶** 。
@@ -119,7 +113,7 @@ dotnet new blazorwasm -au SingleOrg --client-id "{CLIENT ID}" -o {APP NAME} --te
 建立應用程式之後，您應該能夠：
 
 * 使用 AAD 使用者帳戶登入應用程式。
-* 要求 Microsoft Api 的存取權杖。 如需詳細資訊，請參閱
+* 要求 Microsoft Api 的存取權杖。 如需詳細資訊，請參閱：
   * [存取權杖範圍](#access-token-scopes)
   * [快速入門：設定應用程式以公開 Web api](/azure/active-directory/develop/quickstart-configure-app-expose-web-apis)。
 

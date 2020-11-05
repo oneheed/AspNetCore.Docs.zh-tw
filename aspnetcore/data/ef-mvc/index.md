@@ -17,30 +17,30 @@ no-loc:
 - ':::no-loc(Razor):::'
 - ':::no-loc(SignalR):::'
 uid: data/ef-mvc/index
-ms.openlocfilehash: d66cd7737b167db274bdb5e252e763190a46743b
-ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
+ms.openlocfilehash: 791787612c471e17a886ee05b38dddcabdcceff2
+ms.sourcegitcommit: 33f631a4427b9a422755601ac9119953db0b4a3e
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 10/30/2020
-ms.locfileid: "93054186"
+ms.lasthandoff: 11/05/2020
+ms.locfileid: "93365326"
 ---
-# <a name="aspnet-core-mvc-with-ef-core---tutorial-series"></a><span data-ttu-id="46850-102">ASP.NET Core MVC 與 EF Core - 教學課程系列</span><span class="sxs-lookup"><span data-stu-id="46850-102">ASP.NET Core MVC with EF Core - tutorial series</span></span>
+# <a name="aspnet-core-mvc-with-ef-core---tutorial-series"></a><span data-ttu-id="e9a44-102">ASP.NET Core MVC 與 EF Core - 教學課程系列</span><span class="sxs-lookup"><span data-stu-id="e9a44-102">ASP.NET Core MVC with EF Core - tutorial series</span></span>
 
-::: moniker range=">= aspnetcore-3.0"
+::: moniker range=">= aspnetcore-3.0 < aspnetcore-5.0"
 
-<span data-ttu-id="46850-103">此教學課程 **尚未** 升級至 ASP.NET Core 3.0。</span><span class="sxs-lookup"><span data-stu-id="46850-103">This tutorial has **not** been updated to ASP.NET Core 3.0.</span></span> <span data-ttu-id="46850-104">[ :::no-loc(Razor)::: 頁面版本](xref:data/ef-rp/intro)已更新。</span><span class="sxs-lookup"><span data-stu-id="46850-104">The [:::no-loc(Razor)::: Pages version](xref:data/ef-rp/intro) has been updated.</span></span> <span data-ttu-id="46850-105">如需何時可能更新此資訊的詳細資訊，請參閱[此 GitHub 問題](https://github.com/dotnet/AspNetCore.Docs/issues/13920) \(英文\)。</span><span class="sxs-lookup"><span data-stu-id="46850-105">For information on when this might be updated, see [this GitHub issue](https://github.com/dotnet/AspNetCore.Docs/issues/13920).</span></span>
+<span data-ttu-id="e9a44-103">此教學課程 **尚未** 升級至 ASP.NET Core 3.0。</span><span class="sxs-lookup"><span data-stu-id="e9a44-103">This tutorial has **not** been updated to ASP.NET Core 3.0.</span></span> <span data-ttu-id="e9a44-104">[ :::no-loc(Razor)::: 頁面版本](xref:data/ef-rp/intro)已更新。</span><span class="sxs-lookup"><span data-stu-id="e9a44-104">The [:::no-loc(Razor)::: Pages version](xref:data/ef-rp/intro) has been updated.</span></span>
 
 ::: moniker-end
 
 [!INCLUDE [RP better than MVC](../../includes/RP-EF/rp-over-mvc.md)]
 
-1. [<span data-ttu-id="46850-106">開始使用</span><span class="sxs-lookup"><span data-stu-id="46850-106">Get started</span></span>](xref:data/ef-mvc/intro)
-1. [<span data-ttu-id="46850-107">建立、讀取、更新和刪除作業</span><span class="sxs-lookup"><span data-stu-id="46850-107">Create, Read, Update, and Delete operations</span></span>](xref:data/ef-mvc/crud)
-1. [<span data-ttu-id="46850-108">排序、篩選、分頁與群組</span><span class="sxs-lookup"><span data-stu-id="46850-108">Sorting, filtering, paging, and grouping</span></span>](xref:data/ef-mvc/sort-filter-page)
-1. [<span data-ttu-id="46850-109">移轉</span><span class="sxs-lookup"><span data-stu-id="46850-109">Migrations</span></span>](xref:data/ef-mvc/migrations)
-1. [<span data-ttu-id="46850-110">建立複雜的資料模型</span><span class="sxs-lookup"><span data-stu-id="46850-110">Create a complex data model</span></span>](xref:data/ef-mvc/complex-data-model)
-1. [<span data-ttu-id="46850-111">讀取相關資料</span><span class="sxs-lookup"><span data-stu-id="46850-111">Reading related data</span></span>](xref:data/ef-mvc/read-related-data)
-1. [<span data-ttu-id="46850-112">更新相關資料</span><span class="sxs-lookup"><span data-stu-id="46850-112">Updating related data</span></span>](xref:data/ef-mvc/update-related-data)
-1. [<span data-ttu-id="46850-113">處理並行衝突</span><span class="sxs-lookup"><span data-stu-id="46850-113">Handle concurrency conflicts</span></span>](xref:data/ef-mvc/concurrency)
-1. [<span data-ttu-id="46850-114">繼承</span><span class="sxs-lookup"><span data-stu-id="46850-114">Inheritance</span></span>](xref:data/ef-mvc/inheritance)
-1. [<span data-ttu-id="46850-115">進階主題</span><span class="sxs-lookup"><span data-stu-id="46850-115">Advanced topics</span></span>](xref:data/ef-mvc/advanced)
+1. [<span data-ttu-id="e9a44-105">開始使用</span><span class="sxs-lookup"><span data-stu-id="e9a44-105">Get started</span></span>](xref:data/ef-mvc/intro)
+1. [<span data-ttu-id="e9a44-106">建立、讀取、更新和刪除作業</span><span class="sxs-lookup"><span data-stu-id="e9a44-106">Create, Read, Update, and Delete operations</span></span>](xref:data/ef-mvc/crud)
+1. [<span data-ttu-id="e9a44-107">排序、篩選、分頁與群組</span><span class="sxs-lookup"><span data-stu-id="e9a44-107">Sorting, filtering, paging, and grouping</span></span>](xref:data/ef-mvc/sort-filter-page)
+1. [<span data-ttu-id="e9a44-108">移轉</span><span class="sxs-lookup"><span data-stu-id="e9a44-108">Migrations</span></span>](xref:data/ef-mvc/migrations)
+1. [<span data-ttu-id="e9a44-109">建立複雜的資料模型</span><span class="sxs-lookup"><span data-stu-id="e9a44-109">Create a complex data model</span></span>](xref:data/ef-mvc/complex-data-model)
+1. [<span data-ttu-id="e9a44-110">讀取相關資料</span><span class="sxs-lookup"><span data-stu-id="e9a44-110">Reading related data</span></span>](xref:data/ef-mvc/read-related-data)
+1. [<span data-ttu-id="e9a44-111">更新相關資料</span><span class="sxs-lookup"><span data-stu-id="e9a44-111">Updating related data</span></span>](xref:data/ef-mvc/update-related-data)
+1. [<span data-ttu-id="e9a44-112">處理並行衝突</span><span class="sxs-lookup"><span data-stu-id="e9a44-112">Handle concurrency conflicts</span></span>](xref:data/ef-mvc/concurrency)
+1. [<span data-ttu-id="e9a44-113">繼承</span><span class="sxs-lookup"><span data-stu-id="e9a44-113">Inheritance</span></span>](xref:data/ef-mvc/inheritance)
+1. [<span data-ttu-id="e9a44-114">進階主題</span><span class="sxs-lookup"><span data-stu-id="e9a44-114">Advanced topics</span></span>](xref:data/ef-mvc/advanced)

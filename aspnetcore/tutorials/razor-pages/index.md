@@ -1,9 +1,9 @@
 ---
 title: 教學課程： Razor 使用 ASP.NET Core 建立頁面 web 應用程式
 author: rick-anderson
-description: Razor使用 Visual Studio、ASP.NET Core 和 EF Core，在 Windows 上建立頁面 web 應用程式。
+description: 這一系列的教學課程將說明建立 Razor 頁面 web 應用程式的基本概念。
 ms.author: riande
-ms.date: 08/09/2019
+ms.date: 09/14/2020
 no-loc:
 - appsettings.json
 - ASP.NET Core Identity
@@ -17,18 +17,18 @@ no-loc:
 - Razor
 - SignalR
 uid: tutorials/razor-pages/index
-ms.openlocfilehash: 0feb60c7e0189bf12d584c3916e0254b3be729c0
-ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
+ms.openlocfilehash: cad4cf12e475c2f7db3e62a6ae78d53777710b6f
+ms.sourcegitcommit: 342588e10ae0054a6d6dc0fd11dae481006be099
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 10/30/2020
-ms.locfileid: "93058060"
+ms.lasthandoff: 11/07/2020
+ms.locfileid: "94360563"
 ---
 # <a name="tutorial-create-a-no-locrazor-pages-web-app-with-aspnet-core"></a>教學課程： Razor 使用 ASP.NET Core 建立頁面 web 應用程式
 
 這一系列的教學課程將說明建立 Razor 頁面 web 應用程式的基本概念。 
 
-[!INCLUDE[](~/includes/advancedRP.md)]
+如需更高階的簡介，適用于熟悉控制器和視圖的開發人員，請參閱 <xref:razor-pages/index> 。
 
 本系列包含下列教學課程：
 

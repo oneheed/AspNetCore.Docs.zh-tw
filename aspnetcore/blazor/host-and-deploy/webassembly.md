@@ -19,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/host-and-deploy/webassembly
-ms.openlocfilehash: 0912b3fbcd0b891deb4985eaa18841c22f4f3264
-ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
+ms.openlocfilehash: 7ae462ff9abd06fe4ab4b3e00a71515b76b0ee7d
+ms.sourcegitcommit: bb475e69cb647f22cf6d2c6f93d0836c160080d7
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 10/30/2020
-ms.locfileid: "93055746"
+ms.lasthandoff: 11/06/2020
+ms.locfileid: "94339980"
 ---
 # <a name="host-and-deploy-aspnet-core-no-locblazor-webassembly"></a>裝載和部署 ASP.NET Core Blazor WebAssembly
 
@@ -115,7 +115,7 @@ dotnet publish -p:BlazorEnableCompression=false
 
 在主頁面中，選取元件的連結可 `About` 在用戶端上運作，因為 Blazor 路由器會停止瀏覽器在網際網路上提出要求， `www.contoso.com` 並提供轉譯 `About` 的 `About` 元件本身。 *Blazor WebAssembly 應用程式內* 內部端點的所有要求運作方式相同：要求不會對網際網路上伺服器裝載的資源觸發以瀏覽器為基礎的要求。 路由器會在內部處理要求。
 
-如果使用瀏覽器之網址列提出對 `www.contoso.com/About` 的要求，則要求會失敗。 在應用程式的網際網路主機上沒有這類資源存在，因此會傳回「404 - 找不到」  的回應。
+如果使用瀏覽器之網址列提出對 `www.contoso.com/About` 的要求，則要求會失敗。 在應用程式的網際網路主機上沒有這類資源存在，因此會傳回「404 - 找不到」的回應。
 
 因為瀏覽器會對以網際網路為基礎的主機發出要求，以提供用戶端頁面，所以 web 伺服器和主機服務必須將所有不在伺服器上的資源要求重寫為 `index.html` 頁面。 當 `index.html` 傳回時，應用程式的 Blazor 路由器會接管並回應正確的資源。
 
@@ -479,12 +479,12 @@ Blazor發行專案時， `web.config` 會使用下列 IIS 設定來建立檔案�
 
 需要 [URL Rewrite Module](https://www.iis.net/downloads/microsoft/url-rewrite)，才可重寫 URL。 預設不會安裝此模組，且其無法用來安裝為網頁伺服器 (IIS) 角色服務功能。 必須從 IIS 網站下載模組。 請使用 Web Platform Installer 安裝模組：
 
-1. 在本機上，巡覽至 [URL Rewrite Module 下載頁面](https://www.iis.net/downloads/microsoft/url-rewrite#additionalDownloads)。 如需英文版，請選取 [WebPI]  下載 WebPI 安裝程式。 如需其他語言，請選取適當的伺服器架構 (x86 x64) 來下載安裝程式。
-1. 將安裝程式複製到伺服器。 執行安裝程式。 選取 [安裝]  按鈕，並接受授權條款。 安裝完成之後，不需要重新啟動伺服器。
+1. 在本機上，巡覽至 [URL Rewrite Module 下載頁面](https://www.iis.net/downloads/microsoft/url-rewrite#additionalDownloads)。 如需英文版，請選取 [WebPI] 下載 WebPI 安裝程式。 如需其他語言，請選取適當的伺服器架構 (x86 x64) 來下載安裝程式。
+1. 將安裝程式複製到伺服器。 執行安裝程式。 選取 [安裝] 按鈕，並接受授權條款。 安裝完成之後，不需要重新啟動伺服器。
 
 #### <a name="configure-the-website"></a>設定網站
 
-將網站的 [實體路徑]  設為應用程式的資料夾。 此資料夾包含：
+將網站的 [實體路徑] 設為應用程式的資料夾。 此資料夾包含：
 
 * `web.config`IIS 用來設定網站的檔案，包括必要的重新導向規則和檔案內容類型。
 * 應用程式的靜態資產資料夾。
@@ -523,11 +523,20 @@ Blazor發行專案時， `web.config` 會使用下列 IIS 設定來建立檔案�
 
 #### <a name="brotli-and-gzip-compression"></a>Brotli 和 Gzip 壓縮
 
-您可以透過設定 IIS `web.config` ，以提供 Brotli 或 Gzip 壓縮 Blazor 的資產。 如需範例設定，請參閱 [`web.config`](https://github.com/dotnet/AspNetCore.Docs/blob/master/aspnetcore/blazor/host-and-deploy/webassembly/_samples/web.config?raw=true) 。
+*本節僅適用于獨立的 Blazor WebAssembly 應用程式。裝載 Blazor 的應用程式會使用預設的 ASP.NET Core 應用程式 `web.config` 檔，而不是本節所連結的檔案。*
+
+您可以透過設定 IIS `web.config` ，為獨立應用程式提供 Brotli 或 Gzip 壓縮 Blazor 的資產 Blazor WebAssembly 。 如需範例設定檔，請參閱 [`web.config`](https://github.com/dotnet/AspNetCore.Docs/blob/master/aspnetcore/blazor/host-and-deploy/webassembly/_samples/web.config?raw=true) 。
+
+在下列情況下，可能需要額外的範例檔案設定 `web.config` ：
+
+* 應用程式的規格會呼叫下列其中一項：
+  * 提供範例檔案未設定的壓縮檔案 `web.config` 。
+  * 以未壓縮的格式提供範例檔案所設定的壓縮檔案 `web.config` 。
+* 伺服器的 IIS 設定 (例如， `applicationHost.config`) 提供伺服器層級的 iis 預設值。 根據伺服器層級的設定，應用程式可能需要與範例檔案所包含的 IIS 設定不同 `web.config` 。
 
 #### <a name="troubleshooting"></a>疑難排解
 
-如果收到「500 - 內部伺服器錯誤」  ，且 IIS 管理員在嘗試存取網站設定時擲回錯誤，請確認是否已安裝 URL Rewrite 模組。 未安裝模組時，IIS 無法剖析該檔案 `web.config` 。 這可防止 IIS 管理員從服務的靜態檔案載入網站的設定和網站 Blazor 。
+如果收到「500 - 內部伺服器錯誤」，且 IIS 管理員在嘗試存取網站設定時擲回錯誤，請確認是否已安裝 URL Rewrite 模組。 未安裝模組時，IIS 無法剖析該檔案 `web.config` 。 這可防止 IIS 管理員從服務的靜態檔案載入網站的設定和網站 Blazor 。
 
 如需針對部署至 IIS 進行疑難排解的詳細資訊，請參閱 <xref:test/troubleshoot-azure-iis>。
 
@@ -537,8 +546,8 @@ Blazor發行專案時， `web.config` 會使用下列 IIS 設定來建立檔案�
 
 當 Blob 服務針對儲存體帳戶上的靜態網站裝載啟用時：
 
-* 將 [索引文件名稱]  設定為 `index.html`。
-* 將 [錯誤文件路徑]  設定為 `index.html`。 Razor 元件和其他非檔案端點不會位於 blob 服務所儲存之靜態內容中的實體路徑。 當收到路由器應處理之其中一個資源的要求時 Blazor ，blob 服務所產生的 *404-找不* 到錯誤會將要求路由傳送至 **錯誤檔路徑** 。 `index.html`會傳回 blob，而且路由器會 Blazor 載入並處理路徑。
+* 將 [索引文件名稱] 設定為 `index.html`。
+* 將 [錯誤文件路徑] 設定為 `index.html`。 Razor 元件和其他非檔案端點不會位於 blob 服務所儲存之靜態內容中的實體路徑。 當收到路由器應處理之其中一個資源的要求時 Blazor ，blob 服務所產生的 *404-找不* 到錯誤會將要求路由傳送至 **錯誤檔路徑** 。 `index.html`會傳回 blob，而且路由器會 Blazor 載入並處理路徑。
 
 如果檔案的標頭中有不適當的 MIME 類型，則不會在執行時間載入檔案 `Content-Type` ，請採取下列其中一項動作：
 
@@ -761,7 +770,7 @@ Blazor 在每個發行組建上執行中繼語言 (IL) 連結，以從輸出元�
 
 `loadBootResource` 參數會出現在下表中。
 
-| 參數    | 描述 |
+| 參數    | 說明 |
 | ------------ | ----------- |
 | `type`       | 資源類型。 運算子類型： `assembly` 、 `pdb` 、 `dotnetjs` 、 `dotnetwasm` 、 `timezonedata` |
 | `name`       | 資源名稱。 |

@@ -19,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: data/ef-mvc/intro
-ms.openlocfilehash: 77cf1e9ad51b7044a35e1a9b2c125b0fdd91435e
-ms.sourcegitcommit: 33f631a4427b9a422755601ac9119953db0b4a3e
+ms.openlocfilehash: ef1d94ce7a0aa853336260b8d73b9d4036c907ac
+ms.sourcegitcommit: bb475e69cb647f22cf6d2c6f93d0836c160080d7
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 11/05/2020
-ms.locfileid: "93365369"
+ms.lasthandoff: 11/06/2020
+ms.locfileid: "94340006"
 ---
 # <a name="tutorial-get-started-with-ef-core-in-an-aspnet-mvc-web-app"></a>教學課程：開始使用 ASP.NET MVC web 應用程式中的 EF Core
 
@@ -38,7 +38,7 @@ Contoso 大學範例 web ap 示範如何使用 Entity Framework (EF) Core 和 Vi
 
 這個範例應用程式是虛構的 Contoso 大學網站。 其中包括的功能有學生入學許可、課程建立、教師指派。 這是一系列教學課程中的第一篇，說明如何建立 Contoso 大學範例應用程式。
 
-## <a name="prerequisites"></a>先決條件
+## <a name="prerequisites"></a>必要條件
 
 * 如果您是 ASP.NET Core MVC 的新手，請先完成 [ASP.NET CORE mvc](xref:tutorials/first-mvc-app/start-mvc) 教學課程系列的「開始使用」，再開始這一系列。
 
@@ -73,11 +73,15 @@ If you choose to use SQLite, download and install a third-party tool for managin
 
 ## <a name="create-web-app"></a>建立 Web 應用程式
 
-* 開始 Visual Studio，然後選取 [ **ASP.NET Core Web 應用程式** > **]** 。
-* 將專案命名為 `ContosoUniversity`。 請務必使用此完整名稱（包括大小寫），讓命名空間在複製程式碼時相符。
-* 選取 [建立]  。
-* 在下拉式清單中選取 [ **.Net Core** ] 和 [ **ASP.NET Core 5.0** ]，然後選取 [ **Web 應用程式] ([模型-視圖控制器])** 範本。
-  ![[新增 ASP.NET Core 專案] 對話方塊](intro/_static/new-aspnet5.png)
+1. 啟動 Visual Studio，然後選取 [建立新專案]。
+1. 在 [ **建立新專案** ] 對話方塊中，選取 [ **ASP.NET Core Web 應用程式** > **]** 。
+1. 在 [ **設定您的新專案** ] 對話方塊中，輸入 [ `ContosoUniversity` **專案名稱** ]。 請務必使用此完整名稱（包括大小寫），以便 `namespace` 在複製程式碼時使用每個相符專案。
+1. 選取 [建立]  。
+1. 在 [ **建立新的 ASP.NET Core web 應用程式** ] 對話方塊中，選取：
+    1. 下拉式清單中的 **.Net Core** 和 **ASP.NET Core 5.0** 。
+    1. **ASP.NET Core Web 應用程式 (模型-視圖控制器)** 。
+    1. **Create** 
+       建立 ![新增 ASP.NET Core 專案對話方塊](~/data/ef-mvc/intro/_static/new-aspnet5.png)
 
 ## <a name="set-up-the-site-style"></a>設定網站樣式
 
@@ -388,15 +392,17 @@ ASP.NET Core 相依性插入會負責傳遞 `SchoolContext` 的執行個體給�
 
 ::: moniker-end
 
-::: moniker range="< aspnetcore-3.0"
+::: moniker range="<= aspnetcore-3.1"
 
 [!INCLUDE [RP better than MVC](~/includes/RP-EF/rp-over-mvc.md)]
 
 Contoso 大學範例 Web 應用程式示範如何使用 Entity Framework (EF) Core 2.2 和 Visual Studio 2017 或 2019 建立 ASP.NET Core 2.2 MVC Web 應用程式。
 
+本教學課程尚未針對 ASP.NET Core 3.1 進行更新。 它已針對 [ASP.NET Core 5.0](xref:data/ef-mvc/intro?view=aspnetcore-5.0)進行更新。
+
 這個範例應用程式是虛構的 Contoso 大學網站。 其中包括的功能有學生入學許可、課程建立、教師指派。 這是說明如何從零開始建立 Contoso 大學範例應用程式教學課程系列中的第一頁。
 
-## <a name="prerequisites"></a>先決條件
+## <a name="prerequisites"></a>必要條件
 
 * [.NET Core SDK 2.2](https://dotnet.microsoft.com/download)
 * 包含下列工作負載的 [Visual Studio 2019](https://visualstudio.microsoft.com/downloads/?utm_medium=microsoft&utm_source=docs.microsoft.com&utm_campaign=inline+link&utm_content=download+vs2019)：

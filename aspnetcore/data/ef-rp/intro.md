@@ -1,22 +1,22 @@
 ---
-title: ':::no-loc(Razor)::: ASP.NET Core 中有 Entity Framework Core 的頁面-教學課程 1/8'
+title: 'Razor ASP.NET Core 中有 Entity Framework Core 的頁面-教學課程 1/8'
 author: rick-anderson
-description: '說明如何 :::no-loc(Razor)::: 使用 Entity Framework Core 建立頁面應用程式'
+description: '說明如何 Razor 使用 Entity Framework Core 建立頁面應用程式'
 ms.author: riande
 ms.custom: mvc, seodec18
 ms.date: 9/26/2020
 no-loc:
-- ':::no-loc(appsettings.json):::'
-- ':::no-loc(ASP.NET Core Identity):::'
-- ':::no-loc(cookie):::'
-- ':::no-loc(Cookie):::'
-- ':::no-loc(Blazor):::'
-- ':::no-loc(Blazor Server):::'
-- ':::no-loc(Blazor WebAssembly):::'
-- ':::no-loc(Identity):::'
-- ":::no-loc(Let's Encrypt):::"
-- ':::no-loc(Razor):::'
-- ':::no-loc(SignalR):::'
+- 'appsettings.json'
+- 'ASP.NET Core Identity'
+- 'cookie'
+- 'Cookie'
+- 'Blazor'
+- 'Blazor Server'
+- 'Blazor WebAssembly'
+- 'Identity'
+- "Let's Encrypt"
+- 'Razor'
+- 'SignalR'
 uid: data/ef-rp/intro
 ms.openlocfilehash: 5849f4bfb9d0355177ceb5c2f4236c6d39dd9e92
 ms.sourcegitcommit: bb475e69cb647f22cf6d2c6f93d0836c160080d7
@@ -25,19 +25,19 @@ ms.contentlocale: zh-TW
 ms.lasthandoff: 11/06/2020
 ms.locfileid: "94340032"
 ---
-# <a name="no-locrazor-pages-with-entity-framework-core-in-aspnet-core---tutorial-1-of-8"></a><span data-ttu-id="a0743-103">:::no-loc(Razor)::: ASP.NET Core 中有 Entity Framework Core 的頁面-教學課程 1/8</span><span class="sxs-lookup"><span data-stu-id="a0743-103">:::no-loc(Razor)::: Pages with Entity Framework Core in ASP.NET Core - Tutorial 1 of 8</span></span>
+# <a name="no-locrazor-pages-with-entity-framework-core-in-aspnet-core---tutorial-1-of-8"></a><span data-ttu-id="a0743-103">Razor ASP.NET Core 中有 Entity Framework Core 的頁面-教學課程 1/8</span><span class="sxs-lookup"><span data-stu-id="a0743-103">Razor Pages with Entity Framework Core in ASP.NET Core - Tutorial 1 of 8</span></span>
 
 <span data-ttu-id="a0743-104">作者：[Tom Dykstra](https://github.com/tdykstra) 和 [Rick Anderson](https://twitter.com/RickAndMSFT)</span><span class="sxs-lookup"><span data-stu-id="a0743-104">By [Tom Dykstra](https://github.com/tdykstra) and [Rick Anderson](https://twitter.com/RickAndMSFT)</span></span>
 
 ::: moniker range=">= aspnetcore-5.0"
 
-<span data-ttu-id="a0743-105">這是一系列教學課程中的第一個教學課程，示範如何在 [ASP.NET Core :::no-loc(Razor)::: Pages](xref:razor-pages/index) 應用程式中使用 Entity Framework (EF) Core。</span><span class="sxs-lookup"><span data-stu-id="a0743-105">This is the first in a series of tutorials that show how to use Entity Framework (EF) Core in an [ASP.NET Core :::no-loc(Razor)::: Pages](xref:razor-pages/index) app.</span></span> <span data-ttu-id="a0743-106">教學課程會為虛構的 Contoso 大學建置網站。</span><span class="sxs-lookup"><span data-stu-id="a0743-106">The tutorials build a web site for a fictional Contoso University.</span></span> <span data-ttu-id="a0743-107">網站包含學生入學許可、課程建立和講師指派等功能。</span><span class="sxs-lookup"><span data-stu-id="a0743-107">The site includes functionality such as student admission, course creation, and instructor assignments.</span></span> <span data-ttu-id="a0743-108">本教學課程使用 code first 方法。</span><span class="sxs-lookup"><span data-stu-id="a0743-108">The tutorial uses the code first approach.</span></span> <span data-ttu-id="a0743-109">如需使用 database first 方法來遵循本教學課程的詳細資訊，請參閱 [此 Github 問題](https://github.com/dotnet/AspNetCore.Docs/issues/16897)。</span><span class="sxs-lookup"><span data-stu-id="a0743-109">For information on following this tutorial using the database first approach, see [this Github issue](https://github.com/dotnet/AspNetCore.Docs/issues/16897).</span></span>
+<span data-ttu-id="a0743-105">這是一系列教學課程中的第一個教學課程，示範如何在 [ASP.NET Core Razor Pages](xref:razor-pages/index) 應用程式中使用 Entity Framework (EF) Core。</span><span class="sxs-lookup"><span data-stu-id="a0743-105">This is the first in a series of tutorials that show how to use Entity Framework (EF) Core in an [ASP.NET Core Razor Pages](xref:razor-pages/index) app.</span></span> <span data-ttu-id="a0743-106">教學課程會為虛構的 Contoso 大學建置網站。</span><span class="sxs-lookup"><span data-stu-id="a0743-106">The tutorials build a web site for a fictional Contoso University.</span></span> <span data-ttu-id="a0743-107">網站包含學生入學許可、課程建立和講師指派等功能。</span><span class="sxs-lookup"><span data-stu-id="a0743-107">The site includes functionality such as student admission, course creation, and instructor assignments.</span></span> <span data-ttu-id="a0743-108">本教學課程使用 code first 方法。</span><span class="sxs-lookup"><span data-stu-id="a0743-108">The tutorial uses the code first approach.</span></span> <span data-ttu-id="a0743-109">如需使用 database first 方法來遵循本教學課程的詳細資訊，請參閱 [此 Github 問題](https://github.com/dotnet/AspNetCore.Docs/issues/16897)。</span><span class="sxs-lookup"><span data-stu-id="a0743-109">For information on following this tutorial using the database first approach, see [this Github issue](https://github.com/dotnet/AspNetCore.Docs/issues/16897).</span></span>
 
 [<span data-ttu-id="a0743-110">下載或檢視已完成的應用程式。</span><span class="sxs-lookup"><span data-stu-id="a0743-110">Download or view the completed app.</span></span>](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/data/ef-rp/intro/samples) <span data-ttu-id="a0743-111">[下載指示](xref:index#how-to-download-a-sample)。</span><span class="sxs-lookup"><span data-stu-id="a0743-111">[Download instructions](xref:index#how-to-download-a-sample).</span></span>
 
 ## <a name="prerequisites"></a><span data-ttu-id="a0743-112">必要條件</span><span class="sxs-lookup"><span data-stu-id="a0743-112">Prerequisites</span></span>
 
-* <span data-ttu-id="a0743-113">如果您還不熟悉 :::no-loc(Razor)::: 頁面，請先流覽「開始 [使用 :::no-loc(Razor)::: 頁面](xref:tutorials/razor-pages/razor-pages-start) 」教學課程系列，再開始此課程。</span><span class="sxs-lookup"><span data-stu-id="a0743-113">If you're new to :::no-loc(Razor)::: Pages, go through the [Get started with :::no-loc(Razor)::: Pages](xref:tutorials/razor-pages/razor-pages-start) tutorial series before starting this one.</span></span>
+* <span data-ttu-id="a0743-113">如果您還不熟悉 Razor 頁面，請先流覽「開始 [使用 Razor 頁面](xref:tutorials/razor-pages/razor-pages-start) 」教學課程系列，再開始此課程。</span><span class="sxs-lookup"><span data-stu-id="a0743-113">If you're new to Razor Pages, go through the [Get started with Razor Pages](xref:tutorials/razor-pages/razor-pages-start) tutorial series before starting this one.</span></span>
 
 # <a name="visual-studio"></a>[<span data-ttu-id="a0743-114">Visual Studio</span><span class="sxs-lookup"><span data-stu-id="a0743-114">Visual Studio</span></span>](#tab/visual-studio)
 
@@ -133,7 +133,7 @@ To run the app after downloading the completed project:
 # <a name="visual-studio-code"></a>[<span data-ttu-id="a0743-142">Visual Studio Code</span><span class="sxs-lookup"><span data-stu-id="a0743-142">Visual Studio Code</span></span>](#tab/visual-studio-code)
 
 * <span data-ttu-id="a0743-143">在終端機中，巡覽至應建立專案資料夾的資料夾。</span><span class="sxs-lookup"><span data-stu-id="a0743-143">In a terminal, navigate to the folder in which the project folder should be created.</span></span>
-* <span data-ttu-id="a0743-144">執行下列命令，以建立 :::no-loc(Razor)::: 頁面專案並 `cd` 加入至新的專案資料夾：</span><span class="sxs-lookup"><span data-stu-id="a0743-144">Run the following commands to create a :::no-loc(Razor)::: Pages project and `cd` into the new project folder:</span></span>
+* <span data-ttu-id="a0743-144">執行下列命令，以建立 Razor 頁面專案並 `cd` 加入至新的專案資料夾：</span><span class="sxs-lookup"><span data-stu-id="a0743-144">Run the following commands to create a Razor Pages project and `cd` into the new project folder:</span></span>
 
   ```dotnetcli
   dotnet new webapp -o ContosoUniversity
@@ -223,16 +223,16 @@ To run the app after downloading the completed project:
 <span data-ttu-id="a0743-205">在本節中，您會使用 ASP.NET scaffolding 工具來產生：</span><span class="sxs-lookup"><span data-stu-id="a0743-205">In this section, you use the ASP.NET Core scaffolding tool to generate:</span></span>
 
 * <span data-ttu-id="a0743-206">EF Core `DbContext` 類別。</span><span class="sxs-lookup"><span data-stu-id="a0743-206">An EF Core `DbContext` class.</span></span> <span data-ttu-id="a0743-207">內容是協調指定資料模型 Entity Framework 功能的主類別。</span><span class="sxs-lookup"><span data-stu-id="a0743-207">The context is the main class that coordinates Entity Framework functionality for a given data model.</span></span> <span data-ttu-id="a0743-208">它衍生自 <xref:Microsoft.EntityFrameworkCore.DbContext?displayProperty=fullName> 類別。</span><span class="sxs-lookup"><span data-stu-id="a0743-208">It derives from the <xref:Microsoft.EntityFrameworkCore.DbContext?displayProperty=fullName> class.</span></span>
-* <span data-ttu-id="a0743-209">:::no-loc(Razor)::: 處理實體之建立、讀取、更新和刪除 (CRUD) 作業的頁面 `Student` 。</span><span class="sxs-lookup"><span data-stu-id="a0743-209">:::no-loc(Razor)::: pages that handle Create, Read, Update, and Delete (CRUD) operations for the `Student` entity.</span></span>
+* <span data-ttu-id="a0743-209">Razor 處理實體之建立、讀取、更新和刪除 (CRUD) 作業的頁面 `Student` 。</span><span class="sxs-lookup"><span data-stu-id="a0743-209">Razor pages that handle Create, Read, Update, and Delete (CRUD) operations for the `Student` entity.</span></span>
 
 # <a name="visual-studio"></a>[<span data-ttu-id="a0743-210">Visual Studio</span><span class="sxs-lookup"><span data-stu-id="a0743-210">Visual Studio</span></span>](#tab/visual-studio)
 
 * <span data-ttu-id="a0743-211">建立 *Pages/Students* 資料夾。</span><span class="sxs-lookup"><span data-stu-id="a0743-211">Create a *Pages/Students* folder.</span></span>
 * <span data-ttu-id="a0743-212">在 [方案總管] 中，以滑鼠右鍵按一下 *Page/Students* 資料夾，然後選取 [新增] **[新增 Scaffold 項目]** > 。</span><span class="sxs-lookup"><span data-stu-id="a0743-212">In **Solution Explorer** , right-click the *Pages/Students* folder and select **Add** > **New Scaffolded Item**.</span></span>
 * <span data-ttu-id="a0743-213">在 [ **加入新的 Scaffold 專案** ] 對話方塊中：</span><span class="sxs-lookup"><span data-stu-id="a0743-213">In the **Add New Scaffold Item** dialog:</span></span>
-  * <span data-ttu-id="a0743-214">在左側索引標籤中，選取 [ **已安裝 > 一般 > :::no-loc(Razor)::: 頁面** ]</span><span class="sxs-lookup"><span data-stu-id="a0743-214">In the left tab, select **Installed > Common > :::no-loc(Razor)::: Pages**</span></span>
-  * <span data-ttu-id="a0743-215">**:::no-loc(Razor)::: 使用 Entity Framework (CRUD)** 新增] 選取頁面 > \*\*\*\* 。</span><span class="sxs-lookup"><span data-stu-id="a0743-215">Select **:::no-loc(Razor)::: Pages using Entity Framework (CRUD)** > **ADD**.</span></span>
-* <span data-ttu-id="a0743-216">在 [ **:::no-loc(Razor)::: 使用 Entity Framework 加入頁面] (CRUD)** 對話方塊：</span><span class="sxs-lookup"><span data-stu-id="a0743-216">In the **Add :::no-loc(Razor)::: Pages using Entity Framework (CRUD)** dialog:</span></span>
+  * <span data-ttu-id="a0743-214">在左側索引標籤中，選取 [ **已安裝 > 一般 > Razor 頁面** ]</span><span class="sxs-lookup"><span data-stu-id="a0743-214">In the left tab, select **Installed > Common > Razor Pages**</span></span>
+  * <span data-ttu-id="a0743-215">**Razor 使用 Entity Framework (CRUD)** 新增] 選取頁面 > \*\*\*\* 。</span><span class="sxs-lookup"><span data-stu-id="a0743-215">Select **Razor Pages using Entity Framework (CRUD)** > **ADD**.</span></span>
+* <span data-ttu-id="a0743-216">在 [ **Razor 使用 Entity Framework 加入頁面] (CRUD)** 對話方塊：</span><span class="sxs-lookup"><span data-stu-id="a0743-216">In the **Add Razor Pages using Entity Framework (CRUD)** dialog:</span></span>
   * <span data-ttu-id="a0743-217">在 [模型類別] 下拉式清單中，選取 [學生 (ContosoUniversity.Models)]。</span><span class="sxs-lookup"><span data-stu-id="a0743-217">In the **Model class** drop-down, select **Student (ContosoUniversity.Models)**.</span></span>
   * <span data-ttu-id="a0743-218">在 [資料內容類別] 資料列中，選取 **+** (加號)。</span><span class="sxs-lookup"><span data-stu-id="a0743-218">In the **Data context class** row, select the **+** (plus) sign.</span></span>
     * <span data-ttu-id="a0743-219">將資料內容名稱變更為 end， `SchoolContext` 而不是 `ContosoUniversityContext` 。</span><span class="sxs-lookup"><span data-stu-id="a0743-219">Change the data context name to end in `SchoolContext` rather than `ContosoUniversityContext`.</span></span> <span data-ttu-id="a0743-220">更新的內容名稱： `ContosoUniversity.Data.SchoolContext`</span><span class="sxs-lookup"><span data-stu-id="a0743-220">The updated context name: `ContosoUniversity.Data.SchoolContext`</span></span>
@@ -288,7 +288,7 @@ To run the app after downloading the completed project:
 
 <span data-ttu-id="a0743-233">Scaffolding 流程：</span><span class="sxs-lookup"><span data-stu-id="a0743-233">The scaffolding process:</span></span>
 
-* <span data-ttu-id="a0743-234">:::no-loc(Razor):::在 [ *頁面/學生* ] 資料夾中建立頁面：</span><span class="sxs-lookup"><span data-stu-id="a0743-234">Creates :::no-loc(Razor)::: pages in the *Pages/Students* folder:</span></span>
+* <span data-ttu-id="a0743-234">Razor在 [ *頁面/學生* ] 資料夾中建立頁面：</span><span class="sxs-lookup"><span data-stu-id="a0743-234">Creates Razor pages in the *Pages/Students* folder:</span></span>
   * <span data-ttu-id="a0743-235">*Create.cshtml* 和 *Create.cshtml.cs*</span><span class="sxs-lookup"><span data-stu-id="a0743-235">*Create.cshtml* and *Create.cshtml.cs*</span></span>
   * <span data-ttu-id="a0743-236">*Delete.cshtml* 和 *Delete.cshtml.cs*</span><span class="sxs-lookup"><span data-stu-id="a0743-236">*Delete.cshtml* and *Delete.cshtml.cs*</span></span>
   * <span data-ttu-id="a0743-237">*Details.cshtml* 和 *Details.cshtml.cs*</span><span class="sxs-lookup"><span data-stu-id="a0743-237">*Details.cshtml* and *Details.cshtml.cs*</span></span>
@@ -296,17 +296,17 @@ To run the app after downloading the completed project:
   * <span data-ttu-id="a0743-239">*Index.cshtml* 和 *Index.cshtml.cs*</span><span class="sxs-lookup"><span data-stu-id="a0743-239">*Index.cshtml* and *Index.cshtml.cs*</span></span>
 * <span data-ttu-id="a0743-240">建立 *Data/SchoolContext.cs* 。</span><span class="sxs-lookup"><span data-stu-id="a0743-240">Creates *Data/SchoolContext.cs*.</span></span>
 * <span data-ttu-id="a0743-241">將內容新增到 *Startup.cs* 中的相依性插入。</span><span class="sxs-lookup"><span data-stu-id="a0743-241">Adds the context to dependency injection in *Startup.cs*.</span></span>
-* <span data-ttu-id="a0743-242">將資料庫連接字串加入至 *:::no-loc(appsettings.json):::* 。</span><span class="sxs-lookup"><span data-stu-id="a0743-242">Adds a database connection string to *:::no-loc(appsettings.json):::*.</span></span>
+* <span data-ttu-id="a0743-242">將資料庫連接字串加入至 *appsettings.json* 。</span><span class="sxs-lookup"><span data-stu-id="a0743-242">Adds a database connection string to *appsettings.json*.</span></span>
 
 ## <a name="database-connection-string"></a><span data-ttu-id="a0743-243">資料庫連接字串</span><span class="sxs-lookup"><span data-stu-id="a0743-243">Database connection string</span></span>
 
-<span data-ttu-id="a0743-244">「樣板」工具會在檔案中產生連接字串 *:::no-loc(appsettings.json):::* 。</span><span class="sxs-lookup"><span data-stu-id="a0743-244">The scaffolding tool generates a connection string in the *:::no-loc(appsettings.json):::* file.</span></span>
+<span data-ttu-id="a0743-244">「樣板」工具會在檔案中產生連接字串 *appsettings.json* 。</span><span class="sxs-lookup"><span data-stu-id="a0743-244">The scaffolding tool generates a connection string in the *appsettings.json* file.</span></span>
 
 # <a name="visual-studio"></a>[<span data-ttu-id="a0743-245">Visual Studio</span><span class="sxs-lookup"><span data-stu-id="a0743-245">Visual Studio</span></span>](#tab/visual-studio)
 
 <span data-ttu-id="a0743-246">連接字串會指定 [SQL Server LocalDB](/sql/database-engine/configure-windows/sql-server-2016-express-localdb)：</span><span class="sxs-lookup"><span data-stu-id="a0743-246">The connection string specifies [SQL Server LocalDB](/sql/database-engine/configure-windows/sql-server-2016-express-localdb):</span></span>
 
-[!code-json[Main](intro/samples/cu50/:::no-loc(appsettings.json):::?highlight=11)]
+[!code-json[Main](intro/samples/cu50/appsettings.json?highlight=11)]
 
 <span data-ttu-id="a0743-247">LocalDB 是輕量版的 SQL Server Express Database Engine，旨在用於應用程序開發，而不是生產用途。</span><span class="sxs-lookup"><span data-stu-id="a0743-247">LocalDB is a lightweight version of the SQL Server Express Database Engine and is intended for app development, not production use.</span></span> <span data-ttu-id="a0743-248">根據預設，LocalDB 會在 `C:/Users/<user>` 目錄中建立 *.mdf* 檔案。</span><span class="sxs-lookup"><span data-stu-id="a0743-248">By default, LocalDB creates *.mdf* files in the `C:/Users/<user>` directory.</span></span>
 
@@ -326,7 +326,7 @@ To run the app after downloading the completed project:
 
 [!code-csharp[Main](intro/samples/cu30snapshots/1-intro/Data/SchoolContext.cs?highlight=13-22)]
 
-<span data-ttu-id="a0743-257">上述程式碼會從單數變更 `DbSet<Student> Student` 為複數 `DbSet<Student> Students` 。</span><span class="sxs-lookup"><span data-stu-id="a0743-257">The preceding code changes from the singular `DbSet<Student> Student` to the  plural `DbSet<Student> Students`.</span></span> <span data-ttu-id="a0743-258">若要讓 :::no-loc(Razor)::: 頁面程式碼符合新的 `DBSet` 名稱，請從下列內容進行全域變更： `_context.Student.`</span><span class="sxs-lookup"><span data-stu-id="a0743-258">To make the :::no-loc(Razor)::: Pages code match the new `DBSet` name, make a global change from: `_context.Student.`</span></span>
+<span data-ttu-id="a0743-257">上述程式碼會從單數變更 `DbSet<Student> Student` 為複數 `DbSet<Student> Students` 。</span><span class="sxs-lookup"><span data-stu-id="a0743-257">The preceding code changes from the singular `DbSet<Student> Student` to the  plural `DbSet<Student> Students`.</span></span> <span data-ttu-id="a0743-258">若要讓 Razor 頁面程式碼符合新的 `DBSet` 名稱，請從下列內容進行全域變更： `_context.Student.`</span><span class="sxs-lookup"><span data-stu-id="a0743-258">To make the Razor Pages code match the new `DBSet` name, make a global change from: `_context.Student.`</span></span>
 <span data-ttu-id="a0743-259">自： `_context.Students.`</span><span class="sxs-lookup"><span data-stu-id="a0743-259">to: `_context.Students.`</span></span>
 
 <span data-ttu-id="a0743-260">會有 8 次變更。</span><span class="sxs-lookup"><span data-stu-id="a0743-260">There are 8 occurrences.</span></span>
@@ -347,7 +347,7 @@ To run the app after downloading the completed project:
 
 ## <a name="startupcs"></a><span data-ttu-id="a0743-272">Startup.cs</span><span class="sxs-lookup"><span data-stu-id="a0743-272">Startup.cs</span></span>
 
-<span data-ttu-id="a0743-273">ASP.NET Core 內建[相依性插入](xref:fundamentals/dependency-injection)。</span><span class="sxs-lookup"><span data-stu-id="a0743-273">ASP.NET Core is built with [dependency injection](xref:fundamentals/dependency-injection).</span></span> <span data-ttu-id="a0743-274">等服務 `SchoolContext` 會在應用程式啟動期間註冊相依性插入。</span><span class="sxs-lookup"><span data-stu-id="a0743-274">Services such as the `SchoolContext` are registered with dependency injection during app startup.</span></span> <span data-ttu-id="a0743-275">需要這些服務的元件（例如 :::no-loc(Razor)::: 頁面）是透過函式參數提供這些服務。</span><span class="sxs-lookup"><span data-stu-id="a0743-275">Components that require these services, such as :::no-loc(Razor)::: Pages, are provided these services via constructor parameters.</span></span> <span data-ttu-id="a0743-276">取得資料庫內容執行個體的建構函式程式碼會顯示在本教學課程稍後部分。</span><span class="sxs-lookup"><span data-stu-id="a0743-276">The constructor code that gets a database context instance is shown later in the tutorial.</span></span>
+<span data-ttu-id="a0743-273">ASP.NET Core 內建[相依性插入](xref:fundamentals/dependency-injection)。</span><span class="sxs-lookup"><span data-stu-id="a0743-273">ASP.NET Core is built with [dependency injection](xref:fundamentals/dependency-injection).</span></span> <span data-ttu-id="a0743-274">等服務 `SchoolContext` 會在應用程式啟動期間註冊相依性插入。</span><span class="sxs-lookup"><span data-stu-id="a0743-274">Services such as the `SchoolContext` are registered with dependency injection during app startup.</span></span> <span data-ttu-id="a0743-275">需要這些服務的元件（例如 Razor 頁面）是透過函式參數提供這些服務。</span><span class="sxs-lookup"><span data-stu-id="a0743-275">Components that require these services, such as Razor Pages, are provided these services via constructor parameters.</span></span> <span data-ttu-id="a0743-276">取得資料庫內容執行個體的建構函式程式碼會顯示在本教學課程稍後部分。</span><span class="sxs-lookup"><span data-stu-id="a0743-276">The constructor code that gets a database context instance is shown later in the tutorial.</span></span>
 
 <span data-ttu-id="a0743-277">Scaffolding 工具會自動對相依性插入容器註冊內容類別。</span><span class="sxs-lookup"><span data-stu-id="a0743-277">The scaffolding tool automatically registered the context class with the dependency injection container.</span></span>
 
@@ -367,7 +367,7 @@ To run the app after downloading the completed project:
 
 ---
 
-<span data-ttu-id="a0743-283">連接字串的名稱，會透過對 [DbContextOptions](/dotnet/api/microsoft.entityframeworkcore.dbcontextoptions) 物件呼叫方法來傳遞至內容。</span><span class="sxs-lookup"><span data-stu-id="a0743-283">The name of the connection string is passed in to the context by calling a method on a [DbContextOptions](/dotnet/api/microsoft.entityframeworkcore.dbcontextoptions) object.</span></span> <span data-ttu-id="a0743-284">針對本機開發， [ASP.NET Core 設定系統](xref:fundamentals/configuration/index) 會從檔案讀取連接字串 *:::no-loc(appsettings.json):::* 。</span><span class="sxs-lookup"><span data-stu-id="a0743-284">For local development, the [ASP.NET Core configuration system](xref:fundamentals/configuration/index) reads the connection string from the *:::no-loc(appsettings.json):::* file.</span></span>
+<span data-ttu-id="a0743-283">連接字串的名稱，會透過對 [DbContextOptions](/dotnet/api/microsoft.entityframeworkcore.dbcontextoptions) 物件呼叫方法來傳遞至內容。</span><span class="sxs-lookup"><span data-stu-id="a0743-283">The name of the connection string is passed in to the context by calling a method on a [DbContextOptions](/dotnet/api/microsoft.entityframeworkcore.dbcontextoptions) object.</span></span> <span data-ttu-id="a0743-284">針對本機開發， [ASP.NET Core 設定系統](xref:fundamentals/configuration/index) 會從檔案讀取連接字串 *appsettings.json* 。</span><span class="sxs-lookup"><span data-stu-id="a0743-284">For local development, the [ASP.NET Core configuration system](xref:fundamentals/configuration/index) reads the connection string from the *appsettings.json* file.</span></span>
 
 ### <a name="add-the-database-exception-filter"></a><span data-ttu-id="a0743-285">新增資料庫例外狀況篩選準則</span><span class="sxs-lookup"><span data-stu-id="a0743-285">Add the database exception filter</span></span>
 
@@ -526,13 +526,13 @@ public async Task OnGetAsync()
 
 ::: moniker range=">= aspnetcore-3.0 < aspnetcore-5.0"
 
-<span data-ttu-id="a0743-375">這是一系列教學課程中的第一個教學課程，示範如何在 [ASP.NET Core :::no-loc(Razor)::: Pages](xref:razor-pages/index) 應用程式中使用 Entity Framework (EF) Core。</span><span class="sxs-lookup"><span data-stu-id="a0743-375">This is the first in a series of tutorials that show how to use Entity Framework (EF) Core in an [ASP.NET Core :::no-loc(Razor)::: Pages](xref:razor-pages/index) app.</span></span> <span data-ttu-id="a0743-376">教學課程會為虛構的 Contoso 大學建置網站。</span><span class="sxs-lookup"><span data-stu-id="a0743-376">The tutorials build a web site for a fictional Contoso University.</span></span> <span data-ttu-id="a0743-377">網站包含學生入學許可、課程建立和講師指派等功能。</span><span class="sxs-lookup"><span data-stu-id="a0743-377">The site includes functionality such as student admission, course creation, and instructor assignments.</span></span> <span data-ttu-id="a0743-378">本教學課程使用 code first 方法。</span><span class="sxs-lookup"><span data-stu-id="a0743-378">The tutorial uses the code first approach.</span></span> <span data-ttu-id="a0743-379">如需使用 database first 方法來遵循本教學課程的詳細資訊，請參閱 [此 Github 問題](https://github.com/dotnet/AspNetCore.Docs/issues/16897)。</span><span class="sxs-lookup"><span data-stu-id="a0743-379">For information on following this tutorial using the database first approach, see [this Github issue](https://github.com/dotnet/AspNetCore.Docs/issues/16897).</span></span>
+<span data-ttu-id="a0743-375">這是一系列教學課程中的第一個教學課程，示範如何在 [ASP.NET Core Razor Pages](xref:razor-pages/index) 應用程式中使用 Entity Framework (EF) Core。</span><span class="sxs-lookup"><span data-stu-id="a0743-375">This is the first in a series of tutorials that show how to use Entity Framework (EF) Core in an [ASP.NET Core Razor Pages](xref:razor-pages/index) app.</span></span> <span data-ttu-id="a0743-376">教學課程會為虛構的 Contoso 大學建置網站。</span><span class="sxs-lookup"><span data-stu-id="a0743-376">The tutorials build a web site for a fictional Contoso University.</span></span> <span data-ttu-id="a0743-377">網站包含學生入學許可、課程建立和講師指派等功能。</span><span class="sxs-lookup"><span data-stu-id="a0743-377">The site includes functionality such as student admission, course creation, and instructor assignments.</span></span> <span data-ttu-id="a0743-378">本教學課程使用 code first 方法。</span><span class="sxs-lookup"><span data-stu-id="a0743-378">The tutorial uses the code first approach.</span></span> <span data-ttu-id="a0743-379">如需使用 database first 方法來遵循本教學課程的詳細資訊，請參閱 [此 Github 問題](https://github.com/dotnet/AspNetCore.Docs/issues/16897)。</span><span class="sxs-lookup"><span data-stu-id="a0743-379">For information on following this tutorial using the database first approach, see [this Github issue](https://github.com/dotnet/AspNetCore.Docs/issues/16897).</span></span>
 
 [<span data-ttu-id="a0743-380">下載或檢視已完成的應用程式。</span><span class="sxs-lookup"><span data-stu-id="a0743-380">Download or view the completed app.</span></span>](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/data/ef-rp/intro/samples) <span data-ttu-id="a0743-381">[下載指示](xref:index#how-to-download-a-sample)。</span><span class="sxs-lookup"><span data-stu-id="a0743-381">[Download instructions](xref:index#how-to-download-a-sample).</span></span>
 
 ## <a name="prerequisites"></a><span data-ttu-id="a0743-382">必要條件</span><span class="sxs-lookup"><span data-stu-id="a0743-382">Prerequisites</span></span>
 
-* <span data-ttu-id="a0743-383">如果您還不熟悉 :::no-loc(Razor)::: 頁面，請先流覽「開始 [使用 :::no-loc(Razor)::: 頁面](xref:tutorials/razor-pages/razor-pages-start) 」教學課程系列，再開始此課程。</span><span class="sxs-lookup"><span data-stu-id="a0743-383">If you're new to :::no-loc(Razor)::: Pages, go through the [Get started with :::no-loc(Razor)::: Pages](xref:tutorials/razor-pages/razor-pages-start) tutorial series before starting this one.</span></span>
+* <span data-ttu-id="a0743-383">如果您還不熟悉 Razor 頁面，請先流覽「開始 [使用 Razor 頁面](xref:tutorials/razor-pages/razor-pages-start) 」教學課程系列，再開始此課程。</span><span class="sxs-lookup"><span data-stu-id="a0743-383">If you're new to Razor Pages, go through the [Get started with Razor Pages](xref:tutorials/razor-pages/razor-pages-start) tutorial series before starting this one.</span></span>
 
 # <a name="visual-studio"></a>[<span data-ttu-id="a0743-384">Visual Studio</span><span class="sxs-lookup"><span data-stu-id="a0743-384">Visual Studio</span></span>](#tab/visual-studio)
 
@@ -622,7 +622,7 @@ public async Task OnGetAsync()
 
 * <span data-ttu-id="a0743-428">在終端機中，巡覽至應建立專案資料夾的資料夾。</span><span class="sxs-lookup"><span data-stu-id="a0743-428">In a terminal, navigate to the folder in which the project folder should be created.</span></span>
 
-* <span data-ttu-id="a0743-429">執行下列命令，以建立 :::no-loc(Razor)::: 頁面專案並 `cd` 加入至新的專案資料夾：</span><span class="sxs-lookup"><span data-stu-id="a0743-429">Run the following commands to create a :::no-loc(Razor)::: Pages project and `cd` into the new project folder:</span></span>
+* <span data-ttu-id="a0743-429">執行下列命令，以建立 Razor 頁面專案並 `cd` 加入至新的專案資料夾：</span><span class="sxs-lookup"><span data-stu-id="a0743-429">Run the following commands to create a Razor Pages project and `cd` into the new project folder:</span></span>
 
   ```dotnetcli
   dotnet new webapp -o ContosoUniversity
@@ -711,14 +711,14 @@ public async Task OnGetAsync()
 <span data-ttu-id="a0743-487">在本節中，您會使用 ASP.NET scaffolding 工具來產生：</span><span class="sxs-lookup"><span data-stu-id="a0743-487">In this section, you use the ASP.NET Core scaffolding tool to generate:</span></span>
 
 * <span data-ttu-id="a0743-488">EF Core「內容」類別。</span><span class="sxs-lookup"><span data-stu-id="a0743-488">An EF Core *context* class.</span></span> <span data-ttu-id="a0743-489">內容是協調指定資料模型 Entity Framework 功能的主類別。</span><span class="sxs-lookup"><span data-stu-id="a0743-489">The context is the main class that coordinates Entity Framework functionality for a given data model.</span></span> <span data-ttu-id="a0743-490">它衍生自 `Microsoft.EntityFrameworkCore.DbContext` 類別。</span><span class="sxs-lookup"><span data-stu-id="a0743-490">It derives from the `Microsoft.EntityFrameworkCore.DbContext` class.</span></span>
-* <span data-ttu-id="a0743-491">:::no-loc(Razor)::: 處理實體之建立、讀取、更新和刪除 (CRUD) 作業的頁面 `Student` 。</span><span class="sxs-lookup"><span data-stu-id="a0743-491">:::no-loc(Razor)::: pages that handle Create, Read, Update, and Delete (CRUD) operations for the `Student` entity.</span></span>
+* <span data-ttu-id="a0743-491">Razor 處理實體之建立、讀取、更新和刪除 (CRUD) 作業的頁面 `Student` 。</span><span class="sxs-lookup"><span data-stu-id="a0743-491">Razor pages that handle Create, Read, Update, and Delete (CRUD) operations for the `Student` entity.</span></span>
 
 # <a name="visual-studio"></a>[<span data-ttu-id="a0743-492">Visual Studio</span><span class="sxs-lookup"><span data-stu-id="a0743-492">Visual Studio</span></span>](#tab/visual-studio)
 
 * <span data-ttu-id="a0743-493">在 *Pages* 資料夾中建立 *Students* 資料夾。</span><span class="sxs-lookup"><span data-stu-id="a0743-493">Create a *Students* folder in the *Pages* folder.</span></span>
 * <span data-ttu-id="a0743-494">在 [方案總管] 中，以滑鼠右鍵按一下 *Page/Students* 資料夾，然後選取 [新增] **[新增 Scaffold 項目]** > 。</span><span class="sxs-lookup"><span data-stu-id="a0743-494">In **Solution Explorer** , right-click the *Pages/Students* folder and select **Add** > **New Scaffolded Item**.</span></span>
-* <span data-ttu-id="a0743-495">在 [ **新增 Scaffold** ] 對話方塊中， **:::no-loc(Razor)::: 使用 Entity Framework (CRUD)** 新增] 選取 [頁面] > \*\*\*\* 。</span><span class="sxs-lookup"><span data-stu-id="a0743-495">In the **Add Scaffold** dialog, select **:::no-loc(Razor)::: Pages using Entity Framework (CRUD)** > **ADD**.</span></span>
-* <span data-ttu-id="a0743-496">在 [ **:::no-loc(Razor)::: 使用 Entity Framework 加入頁面] (CRUD)** 對話方塊：</span><span class="sxs-lookup"><span data-stu-id="a0743-496">In the **Add :::no-loc(Razor)::: Pages using Entity Framework (CRUD)** dialog:</span></span>
+* <span data-ttu-id="a0743-495">在 [ **新增 Scaffold** ] 對話方塊中， **Razor 使用 Entity Framework (CRUD)** 新增] 選取 [頁面] > \*\*\*\* 。</span><span class="sxs-lookup"><span data-stu-id="a0743-495">In the **Add Scaffold** dialog, select **Razor Pages using Entity Framework (CRUD)** > **ADD**.</span></span>
+* <span data-ttu-id="a0743-496">在 [ **Razor 使用 Entity Framework 加入頁面] (CRUD)** 對話方塊：</span><span class="sxs-lookup"><span data-stu-id="a0743-496">In the **Add Razor Pages using Entity Framework (CRUD)** dialog:</span></span>
   * <span data-ttu-id="a0743-497">在 [模型類別] 下拉式清單中，選取 [學生 (ContosoUniversity.Models)]。</span><span class="sxs-lookup"><span data-stu-id="a0743-497">In the **Model class** drop-down, select **Student (ContosoUniversity.Models)**.</span></span>
   * <span data-ttu-id="a0743-498">在 [資料內容類別] 資料列中，選取 **+** (加號)。</span><span class="sxs-lookup"><span data-stu-id="a0743-498">In the **Data context class** row, select the **+** (plus) sign.</span></span>
   * <span data-ttu-id="a0743-499">將資料內容的名稱從 *ContosoUniversity.Models.ContosoUniversityContext* 變更為 *ContosoUniversity.Data.SchoolContext* 。</span><span class="sxs-lookup"><span data-stu-id="a0743-499">Change the data context name from *ContosoUniversity.Models.ContosoUniversityContext* to *ContosoUniversity.Data.SchoolContext*.</span></span>
@@ -777,7 +777,7 @@ remove dotnet tool install --global  below
 
 <span data-ttu-id="a0743-512">Scaffolding 流程：</span><span class="sxs-lookup"><span data-stu-id="a0743-512">The scaffolding process:</span></span>
 
-* <span data-ttu-id="a0743-513">:::no-loc(Razor):::在 [ *頁面/學生* ] 資料夾中建立頁面：</span><span class="sxs-lookup"><span data-stu-id="a0743-513">Creates :::no-loc(Razor)::: pages in the *Pages/Students* folder:</span></span>
+* <span data-ttu-id="a0743-513">Razor在 [ *頁面/學生* ] 資料夾中建立頁面：</span><span class="sxs-lookup"><span data-stu-id="a0743-513">Creates Razor pages in the *Pages/Students* folder:</span></span>
   * <span data-ttu-id="a0743-514">*Create.cshtml* 和 *Create.cshtml.cs*</span><span class="sxs-lookup"><span data-stu-id="a0743-514">*Create.cshtml* and *Create.cshtml.cs*</span></span>
   * <span data-ttu-id="a0743-515">*Delete.cshtml* 和 *Delete.cshtml.cs*</span><span class="sxs-lookup"><span data-stu-id="a0743-515">*Delete.cshtml* and *Delete.cshtml.cs*</span></span>
   * <span data-ttu-id="a0743-516">*Details.cshtml* 和 *Details.cshtml.cs*</span><span class="sxs-lookup"><span data-stu-id="a0743-516">*Details.cshtml* and *Details.cshtml.cs*</span></span>
@@ -785,15 +785,15 @@ remove dotnet tool install --global  below
   * <span data-ttu-id="a0743-518">*Index.cshtml* 和 *Index.cshtml.cs*</span><span class="sxs-lookup"><span data-stu-id="a0743-518">*Index.cshtml* and *Index.cshtml.cs*</span></span>
 * <span data-ttu-id="a0743-519">建立 *Data/SchoolContext.cs* 。</span><span class="sxs-lookup"><span data-stu-id="a0743-519">Creates *Data/SchoolContext.cs*.</span></span>
 * <span data-ttu-id="a0743-520">將內容新增到 *Startup.cs* 中的相依性插入。</span><span class="sxs-lookup"><span data-stu-id="a0743-520">Adds the context to dependency injection in *Startup.cs*.</span></span>
-* <span data-ttu-id="a0743-521">將資料庫連接字串加入至 *:::no-loc(appsettings.json):::* 。</span><span class="sxs-lookup"><span data-stu-id="a0743-521">Adds a database connection string to *:::no-loc(appsettings.json):::*.</span></span>
+* <span data-ttu-id="a0743-521">將資料庫連接字串加入至 *appsettings.json* 。</span><span class="sxs-lookup"><span data-stu-id="a0743-521">Adds a database connection string to *appsettings.json*.</span></span>
 
 ## <a name="database-connection-string"></a><span data-ttu-id="a0743-522">資料庫連接字串</span><span class="sxs-lookup"><span data-stu-id="a0743-522">Database connection string</span></span>
 
 # <a name="visual-studio"></a>[<span data-ttu-id="a0743-523">Visual Studio</span><span class="sxs-lookup"><span data-stu-id="a0743-523">Visual Studio</span></span>](#tab/visual-studio)
 
-<span data-ttu-id="a0743-524">檔案會 *:::no-loc(appsettings.json):::* 指定 [SQL Server LocalDB](/sql/database-engine/configure-windows/sql-server-2016-express-localdb)的連接字串。</span><span class="sxs-lookup"><span data-stu-id="a0743-524">The *:::no-loc(appsettings.json):::* file specifies the connection string [SQL Server LocalDB](/sql/database-engine/configure-windows/sql-server-2016-express-localdb).</span></span>
+<span data-ttu-id="a0743-524">檔案會 *appsettings.json* 指定 [SQL Server LocalDB](/sql/database-engine/configure-windows/sql-server-2016-express-localdb)的連接字串。</span><span class="sxs-lookup"><span data-stu-id="a0743-524">The *appsettings.json* file specifies the connection string [SQL Server LocalDB](/sql/database-engine/configure-windows/sql-server-2016-express-localdb).</span></span>
 
-[!code-json[Main](intro/samples/cu30/:::no-loc(appsettings.json):::?highlight=11)]
+[!code-json[Main](intro/samples/cu30/appsettings.json?highlight=11)]
 
 <span data-ttu-id="a0743-525">LocalDB 是輕量版的 SQL Server Express Database Engine，旨在用於應用程序開發，而不是生產用途。</span><span class="sxs-lookup"><span data-stu-id="a0743-525">LocalDB is a lightweight version of the SQL Server Express Database Engine and is intended for app development, not production use.</span></span> <span data-ttu-id="a0743-526">根據預設，LocalDB 會在 `C:/Users/<user>` 目錄中建立 *.mdf* 檔案。</span><span class="sxs-lookup"><span data-stu-id="a0743-526">By default, LocalDB creates *.mdf* files in the `C:/Users/<user>` directory.</span></span>
 
@@ -820,13 +820,13 @@ remove dotnet tool install --global  below
 
 <span data-ttu-id="a0743-539">因為實體集會包含多個實體，所以 DBSet 屬性應為複數名稱。</span><span class="sxs-lookup"><span data-stu-id="a0743-539">Since an entity set contains multiple entities, the DBSet properties should be plural names.</span></span> <span data-ttu-id="a0743-540">因為 scaffolding 工具建立了 `Student` DBSet，所以此步驟會將它變更為複數的 `Students`。</span><span class="sxs-lookup"><span data-stu-id="a0743-540">Since the scaffolding tool created a`Student` DBSet, this step changes it to plural `Students`.</span></span> 
 
-<span data-ttu-id="a0743-541">若要讓 :::no-loc(Razor)::: 頁面程式碼符合新的 DBSet 名稱，請在的整個專案之間進行全域 `_context.Student` 變更 `_context.Students` 。</span><span class="sxs-lookup"><span data-stu-id="a0743-541">To make the :::no-loc(Razor)::: Pages code match the new DBSet name, make a global change across the whole project of `_context.Student` to `_context.Students`.</span></span>  <span data-ttu-id="a0743-542">會有 8 次變更。</span><span class="sxs-lookup"><span data-stu-id="a0743-542">There are 8 occurrences.</span></span>
+<span data-ttu-id="a0743-541">若要讓 Razor 頁面程式碼符合新的 DBSet 名稱，請在的整個專案之間進行全域 `_context.Student` 變更 `_context.Students` 。</span><span class="sxs-lookup"><span data-stu-id="a0743-541">To make the Razor Pages code match the new DBSet name, make a global change across the whole project of `_context.Student` to `_context.Students`.</span></span>  <span data-ttu-id="a0743-542">會有 8 次變更。</span><span class="sxs-lookup"><span data-stu-id="a0743-542">There are 8 occurrences.</span></span>
 
 <span data-ttu-id="a0743-543">建置專案以確認沒有任何編譯器錯誤。</span><span class="sxs-lookup"><span data-stu-id="a0743-543">Build the project to verify there are no compiler errors.</span></span>
 
 ## <a name="startupcs"></a><span data-ttu-id="a0743-544">Startup.cs</span><span class="sxs-lookup"><span data-stu-id="a0743-544">Startup.cs</span></span>
 
-<span data-ttu-id="a0743-545">ASP.NET Core 內建[相依性插入](xref:fundamentals/dependency-injection)。</span><span class="sxs-lookup"><span data-stu-id="a0743-545">ASP.NET Core is built with [dependency injection](xref:fundamentals/dependency-injection).</span></span> <span data-ttu-id="a0743-546">服務 (例如 EF Core 資料庫內容) 會在應用程式啟動期間對相依性插入進行註冊。</span><span class="sxs-lookup"><span data-stu-id="a0743-546">Services (such as the EF Core database context) are registered with dependency injection during application startup.</span></span> <span data-ttu-id="a0743-547">需要這些服務的元件 (例如 :::no-loc(Razor)::: 頁面) 是透過函式參數提供這些服務。</span><span class="sxs-lookup"><span data-stu-id="a0743-547">Components that require these services (such as :::no-loc(Razor)::: Pages) are provided these services via constructor parameters.</span></span> <span data-ttu-id="a0743-548">取得資料庫內容執行個體的建構函式程式碼會顯示在本教學課程稍後部分。</span><span class="sxs-lookup"><span data-stu-id="a0743-548">The constructor code that gets a database context instance is shown later in the tutorial.</span></span>
+<span data-ttu-id="a0743-545">ASP.NET Core 內建[相依性插入](xref:fundamentals/dependency-injection)。</span><span class="sxs-lookup"><span data-stu-id="a0743-545">ASP.NET Core is built with [dependency injection](xref:fundamentals/dependency-injection).</span></span> <span data-ttu-id="a0743-546">服務 (例如 EF Core 資料庫內容) 會在應用程式啟動期間對相依性插入進行註冊。</span><span class="sxs-lookup"><span data-stu-id="a0743-546">Services (such as the EF Core database context) are registered with dependency injection during application startup.</span></span> <span data-ttu-id="a0743-547">需要這些服務的元件 (例如 Razor 頁面) 是透過函式參數提供這些服務。</span><span class="sxs-lookup"><span data-stu-id="a0743-547">Components that require these services (such as Razor Pages) are provided these services via constructor parameters.</span></span> <span data-ttu-id="a0743-548">取得資料庫內容執行個體的建構函式程式碼會顯示在本教學課程稍後部分。</span><span class="sxs-lookup"><span data-stu-id="a0743-548">The constructor code that gets a database context instance is shown later in the tutorial.</span></span>
 
 <span data-ttu-id="a0743-549">Scaffolding 工具會自動對相依性插入容器註冊內容類別。</span><span class="sxs-lookup"><span data-stu-id="a0743-549">The scaffolding tool automatically registered the context class with the dependency injection container.</span></span>
 
@@ -844,7 +844,7 @@ remove dotnet tool install --global  below
 
 ---
 
-<span data-ttu-id="a0743-554">連接字串的名稱，會透過對 [DbContextOptions](/dotnet/api/microsoft.entityframeworkcore.dbcontextoptions) 物件呼叫方法來傳遞至內容。</span><span class="sxs-lookup"><span data-stu-id="a0743-554">The name of the connection string is passed in to the context by calling a method on a [DbContextOptions](/dotnet/api/microsoft.entityframeworkcore.dbcontextoptions) object.</span></span> <span data-ttu-id="a0743-555">針對本機開發， [ASP.NET Core 設定系統](xref:fundamentals/configuration/index) 會從檔案讀取連接字串 *:::no-loc(appsettings.json):::* 。</span><span class="sxs-lookup"><span data-stu-id="a0743-555">For local development, the [ASP.NET Core configuration system](xref:fundamentals/configuration/index) reads the connection string from the *:::no-loc(appsettings.json):::* file.</span></span>
+<span data-ttu-id="a0743-554">連接字串的名稱，會透過對 [DbContextOptions](/dotnet/api/microsoft.entityframeworkcore.dbcontextoptions) 物件呼叫方法來傳遞至內容。</span><span class="sxs-lookup"><span data-stu-id="a0743-554">The name of the connection string is passed in to the context by calling a method on a [DbContextOptions](/dotnet/api/microsoft.entityframeworkcore.dbcontextoptions) object.</span></span> <span data-ttu-id="a0743-555">針對本機開發， [ASP.NET Core 設定系統](xref:fundamentals/configuration/index) 會從檔案讀取連接字串 *appsettings.json* 。</span><span class="sxs-lookup"><span data-stu-id="a0743-555">For local development, the [ASP.NET Core configuration system](xref:fundamentals/configuration/index) reads the connection string from the *appsettings.json* file.</span></span>
 
 ## <a name="create-the-database"></a><span data-ttu-id="a0743-556">建立資料庫</span><span class="sxs-lookup"><span data-stu-id="a0743-556">Create the database</span></span>
 
@@ -961,7 +961,7 @@ public async Task OnGetAsync()
 
 ::: moniker range="< aspnetcore-3.0"
 
-<span data-ttu-id="a0743-628">Contoso 大學範例 web 應用程式示範如何 :::no-loc(Razor)::: 使用 Entity Framework (EF) Core 來建立 ASP.NET Core 頁面應用程式。</span><span class="sxs-lookup"><span data-stu-id="a0743-628">The Contoso University sample web app demonstrates how to create an ASP.NET Core :::no-loc(Razor)::: Pages app using Entity Framework (EF) Core.</span></span>
+<span data-ttu-id="a0743-628">Contoso 大學範例 web 應用程式示範如何 Razor 使用 Entity Framework (EF) Core 來建立 ASP.NET Core 頁面應用程式。</span><span class="sxs-lookup"><span data-stu-id="a0743-628">The Contoso University sample web app demonstrates how to create an ASP.NET Core Razor Pages app using Entity Framework (EF) Core.</span></span>
 
 <span data-ttu-id="a0743-629">這個範例應用程式是虛構的 Contoso 大學網站。</span><span class="sxs-lookup"><span data-stu-id="a0743-629">The sample app is a web site for a fictional Contoso University.</span></span> <span data-ttu-id="a0743-630">其中包括的功能有學生入學許可、課程建立、教師指派。</span><span class="sxs-lookup"><span data-stu-id="a0743-630">It includes functionality such as student admission, course creation, and instructor assignments.</span></span> <span data-ttu-id="a0743-631">此頁面是說明如何建立 Contoso 大學範例應用程式教學課程系列中的第一頁。</span><span class="sxs-lookup"><span data-stu-id="a0743-631">This page is the first in a series of tutorials that explain how to build the Contoso University sample app.</span></span>
 
@@ -979,7 +979,7 @@ public async Task OnGetAsync()
 
 ---
 
-<span data-ttu-id="a0743-637">熟悉[ :::no-loc(Razor)::: 頁面](xref:razor-pages/index)。</span><span class="sxs-lookup"><span data-stu-id="a0743-637">Familiarity with [:::no-loc(Razor)::: Pages](xref:razor-pages/index).</span></span> <span data-ttu-id="a0743-638">新的程式設計人員應該在開始本系列之前，先完成 [ :::no-loc(Razor)::: 頁面的入門](xref:tutorials/razor-pages/razor-pages-start) 。</span><span class="sxs-lookup"><span data-stu-id="a0743-638">New programmers should complete [Get started with :::no-loc(Razor)::: Pages](xref:tutorials/razor-pages/razor-pages-start) before starting this series.</span></span>
+<span data-ttu-id="a0743-637">熟悉[ Razor 頁面](xref:razor-pages/index)。</span><span class="sxs-lookup"><span data-stu-id="a0743-637">Familiarity with [Razor Pages](xref:razor-pages/index).</span></span> <span data-ttu-id="a0743-638">新的程式設計人員應該在開始本系列之前，先完成 [ Razor 頁面的入門](xref:tutorials/razor-pages/razor-pages-start) 。</span><span class="sxs-lookup"><span data-stu-id="a0743-638">New programmers should complete [Get started with Razor Pages](xref:tutorials/razor-pages/razor-pages-start) before starting this series.</span></span>
 
 ## <a name="troubleshooting"></a><span data-ttu-id="a0743-639">疑難排解</span><span class="sxs-lookup"><span data-stu-id="a0743-639">Troubleshooting</span></span>
 
@@ -995,9 +995,9 @@ public async Task OnGetAsync()
 
 ![Students [編輯] 頁面](intro/_static/student-edit.png)
 
-<span data-ttu-id="a0743-648">此網站的 UI 樣式接近內建範本所產生的內容。</span><span class="sxs-lookup"><span data-stu-id="a0743-648">The UI style of this site is close to what's generated by the built-in templates.</span></span> <span data-ttu-id="a0743-649">本教學課程著重于 EF Core :::no-loc(Razor)::: 頁面，而不是 UI。</span><span class="sxs-lookup"><span data-stu-id="a0743-649">The tutorial focus is on EF Core with :::no-loc(Razor)::: Pages, not the UI.</span></span>
+<span data-ttu-id="a0743-648">此網站的 UI 樣式接近內建範本所產生的內容。</span><span class="sxs-lookup"><span data-stu-id="a0743-648">The UI style of this site is close to what's generated by the built-in templates.</span></span> <span data-ttu-id="a0743-649">本教學課程著重于 EF Core Razor 頁面，而不是 UI。</span><span class="sxs-lookup"><span data-stu-id="a0743-649">The tutorial focus is on EF Core with Razor Pages, not the UI.</span></span>
 
-## <a name="create-the-contosouniversity-no-locrazor-pages-web-app"></a><span data-ttu-id="a0743-650">建立 ContosoUniversity :::no-loc(Razor)::: 頁面 web 應用程式</span><span class="sxs-lookup"><span data-stu-id="a0743-650">Create the ContosoUniversity :::no-loc(Razor)::: Pages web app</span></span>
+## <a name="create-the-contosouniversity-no-locrazor-pages-web-app"></a><span data-ttu-id="a0743-650">建立 ContosoUniversity Razor 頁面 web 應用程式</span><span class="sxs-lookup"><span data-stu-id="a0743-650">Create the ContosoUniversity Razor Pages web app</span></span>
 
 # <a name="visual-studio"></a>[<span data-ttu-id="a0743-651">Visual Studio</span><span class="sxs-lookup"><span data-stu-id="a0743-651">Visual Studio</span></span>](#tab/visual-studio)
 
@@ -1005,7 +1005,7 @@ public async Task OnGetAsync()
 * <span data-ttu-id="a0743-653">建立新的 ASP.NET Core Web 應用程式。</span><span class="sxs-lookup"><span data-stu-id="a0743-653">Create a new ASP.NET Core Web Application.</span></span> <span data-ttu-id="a0743-654">將專案命名為 **ContosoUniversity** 。</span><span class="sxs-lookup"><span data-stu-id="a0743-654">Name the project **ContosoUniversity**.</span></span> <span data-ttu-id="a0743-655">請務必將專案命名為 *ContosoUniversity* ，當您複製/貼上程式碼時，命名空間才會相符。</span><span class="sxs-lookup"><span data-stu-id="a0743-655">It's important to name the project *ContosoUniversity* so the namespaces match when code is copy/pasted.</span></span>
 * <span data-ttu-id="a0743-656">在下拉式清單中選取 [ASP.NET Core 2.1]，然後選取 [Web 應用程式]。</span><span class="sxs-lookup"><span data-stu-id="a0743-656">Select **ASP.NET Core 2.1** in the dropdown, and then select **Web Application**.</span></span>
 
-<span data-ttu-id="a0743-657">如需上述步驟的影像，請參閱 [建立 :::no-loc(Razor)::: web 應用程式](xref:tutorials/razor-pages/razor-pages-start#create-a-razor-pages-web-app)。</span><span class="sxs-lookup"><span data-stu-id="a0743-657">For images of the preceding steps, see [Create a :::no-loc(Razor)::: web app](xref:tutorials/razor-pages/razor-pages-start#create-a-razor-pages-web-app).</span></span>
+<span data-ttu-id="a0743-657">如需上述步驟的影像，請參閱 [建立 Razor web 應用程式](xref:tutorials/razor-pages/razor-pages-start#create-a-razor-pages-web-app)。</span><span class="sxs-lookup"><span data-stu-id="a0743-657">For images of the preceding steps, see [Create a Razor web app](xref:tutorials/razor-pages/razor-pages-start#create-a-razor-pages-web-app).</span></span>
 <span data-ttu-id="a0743-658">執行應用程式。</span><span class="sxs-lookup"><span data-stu-id="a0743-658">Run the app.</span></span>
 
 # <a name="visual-studio-code"></a>[<span data-ttu-id="a0743-659">Visual Studio Code</span><span class="sxs-lookup"><span data-stu-id="a0743-659">Visual Studio Code</span></span>](#tab/visual-studio-code)
@@ -1098,9 +1098,9 @@ dotnet run
 # <a name="visual-studio"></a>[<span data-ttu-id="a0743-728">Visual Studio</span><span class="sxs-lookup"><span data-stu-id="a0743-728">Visual Studio</span></span>](#tab/visual-studio)
 
 * <span data-ttu-id="a0743-729">在 [方案總管] 中，以滑鼠右鍵按一下 *Pages/Students* 資料夾 > [新增] **[新增 Scaffold 項目]** > 。</span><span class="sxs-lookup"><span data-stu-id="a0743-729">In **Solution Explorer** , right click on the *Pages/Students* folder > **Add** > **New Scaffolded Item**.</span></span>
-* <span data-ttu-id="a0743-730">在 [ **新增 Scaffold** ] 對話方塊中， **:::no-loc(Razor)::: 使用 Entity Framework (CRUD)** 新增] 選取 [頁面] > \*\*\*\* 。</span><span class="sxs-lookup"><span data-stu-id="a0743-730">In the **Add Scaffold** dialog, select **:::no-loc(Razor)::: Pages using Entity Framework (CRUD)** > **ADD**.</span></span>
+* <span data-ttu-id="a0743-730">在 [ **新增 Scaffold** ] 對話方塊中， **Razor 使用 Entity Framework (CRUD)** 新增] 選取 [頁面] > \*\*\*\* 。</span><span class="sxs-lookup"><span data-stu-id="a0743-730">In the **Add Scaffold** dialog, select **Razor Pages using Entity Framework (CRUD)** > **ADD**.</span></span>
 
-<span data-ttu-id="a0743-731">**:::no-loc(Razor)::: 使用 ENTITY FRAMEWORK (CRUD) 對話方塊來完成 [新增頁面** ]：</span><span class="sxs-lookup"><span data-stu-id="a0743-731">Complete the **Add :::no-loc(Razor)::: Pages using Entity Framework (CRUD)** dialog:</span></span>
+<span data-ttu-id="a0743-731">**Razor 使用 ENTITY FRAMEWORK (CRUD) 對話方塊來完成 [新增頁面** ]：</span><span class="sxs-lookup"><span data-stu-id="a0743-731">Complete the **Add Razor Pages using Entity Framework (CRUD)** dialog:</span></span>
 
 * <span data-ttu-id="a0743-732">在 [模型類別] 下拉式清單中，選取 [學生 (ContosoUniversity.Models)]。</span><span class="sxs-lookup"><span data-stu-id="a0743-732">In the **Model class** drop-down, select **Student (ContosoUniversity.Models)**.</span></span>
 * <span data-ttu-id="a0743-733">在 [資料內容類別] 列中，選取 **+** (加號) 符號，並將產生的名稱變更為 **ContosoUniversity.Models.SchoolContext** 。</span><span class="sxs-lookup"><span data-stu-id="a0743-733">In the **Data context class** row, select the **+** (plus) sign and change the generated name to **ContosoUniversity.Models.SchoolContext**.</span></span>
@@ -1133,11 +1133,11 @@ dotnet aspnet-codegenerator razorpage -m Student -dc ContosoUniversity.Models.Sc
 ### <a name="file-updates"></a><span data-ttu-id="a0743-744">檔案更新</span><span class="sxs-lookup"><span data-stu-id="a0743-744">File updates</span></span>
 
 * <span data-ttu-id="a0743-745">*Startup.cs* ：這個檔案的變更會於下一節詳述。</span><span class="sxs-lookup"><span data-stu-id="a0743-745">*Startup.cs* : Changes to this file are detailed in the next section.</span></span>
-* <span data-ttu-id="a0743-746">*:::no-loc(appsettings.json):::* ：已加入用來連接到本機資料庫的連接字串。</span><span class="sxs-lookup"><span data-stu-id="a0743-746">*:::no-loc(appsettings.json):::* : The connection string used to connect to a local database is added.</span></span>
+* <span data-ttu-id="a0743-746">*appsettings.json* ：已加入用來連接到本機資料庫的連接字串。</span><span class="sxs-lookup"><span data-stu-id="a0743-746">*appsettings.json* : The connection string used to connect to a local database is added.</span></span>
 
 ## <a name="examine-the-context-registered-with-dependency-injection"></a><span data-ttu-id="a0743-747">檢查使用相依性插入所註冊的內容</span><span class="sxs-lookup"><span data-stu-id="a0743-747">Examine the context registered with dependency injection</span></span>
 
-<span data-ttu-id="a0743-748">ASP.NET Core 內建[相依性插入](xref:fundamentals/dependency-injection)。</span><span class="sxs-lookup"><span data-stu-id="a0743-748">ASP.NET Core is built with [dependency injection](xref:fundamentals/dependency-injection).</span></span> <span data-ttu-id="a0743-749">服務 (例如 EF Core DB 內容) 是在應用程式啟動期間使用相依性插入來註冊。</span><span class="sxs-lookup"><span data-stu-id="a0743-749">Services (such as the EF Core DB context) are registered with dependency injection during application startup.</span></span> <span data-ttu-id="a0743-750">需要這些服務的元件 (例如 :::no-loc(Razor)::: 頁面) 是透過函式參數提供這些服務。</span><span class="sxs-lookup"><span data-stu-id="a0743-750">Components that require these services (such as :::no-loc(Razor)::: Pages) are provided these services via constructor parameters.</span></span> <span data-ttu-id="a0743-751">取得資料庫內容執行個體的建構函式程式碼，在本教學課程稍後會示範。</span><span class="sxs-lookup"><span data-stu-id="a0743-751">The constructor code that gets a db context instance is shown later in the tutorial.</span></span>
+<span data-ttu-id="a0743-748">ASP.NET Core 內建[相依性插入](xref:fundamentals/dependency-injection)。</span><span class="sxs-lookup"><span data-stu-id="a0743-748">ASP.NET Core is built with [dependency injection](xref:fundamentals/dependency-injection).</span></span> <span data-ttu-id="a0743-749">服務 (例如 EF Core DB 內容) 是在應用程式啟動期間使用相依性插入來註冊。</span><span class="sxs-lookup"><span data-stu-id="a0743-749">Services (such as the EF Core DB context) are registered with dependency injection during application startup.</span></span> <span data-ttu-id="a0743-750">需要這些服務的元件 (例如 Razor 頁面) 是透過函式參數提供這些服務。</span><span class="sxs-lookup"><span data-stu-id="a0743-750">Components that require these services (such as Razor Pages) are provided these services via constructor parameters.</span></span> <span data-ttu-id="a0743-751">取得資料庫內容執行個體的建構函式程式碼，在本教學課程稍後會示範。</span><span class="sxs-lookup"><span data-stu-id="a0743-751">The constructor code that gets a db context instance is shown later in the tutorial.</span></span>
 
 <span data-ttu-id="a0743-752">Scaffolding 工具會自動建立資料庫內容，並向相依性插入容器註冊。</span><span class="sxs-lookup"><span data-stu-id="a0743-752">The scaffolding tool automatically created a DB Context and registered it with the dependency injection container.</span></span>
 
@@ -1145,7 +1145,7 @@ dotnet aspnet-codegenerator razorpage -m Student -dc ContosoUniversity.Models.Sc
 
 [!code-csharp[](intro/samples/cu21/Startup.cs?name=snippet_SchoolContext&highlight=13-14)]
 
-<span data-ttu-id="a0743-755">連接字串的名稱，會透過對 [DbContextOptions](/dotnet/api/microsoft.entityframeworkcore.dbcontextoptions) 物件呼叫方法來傳遞至內容。</span><span class="sxs-lookup"><span data-stu-id="a0743-755">The name of the connection string is passed in to the context by calling a method on a [DbContextOptions](/dotnet/api/microsoft.entityframeworkcore.dbcontextoptions) object.</span></span> <span data-ttu-id="a0743-756">針對本機開發， [ASP.NET Core 設定系統](xref:fundamentals/configuration/index) 會從檔案讀取連接字串 *:::no-loc(appsettings.json):::* 。</span><span class="sxs-lookup"><span data-stu-id="a0743-756">For local development, the [ASP.NET Core configuration system](xref:fundamentals/configuration/index) reads the connection string from the *:::no-loc(appsettings.json):::* file.</span></span>
+<span data-ttu-id="a0743-755">連接字串的名稱，會透過對 [DbContextOptions](/dotnet/api/microsoft.entityframeworkcore.dbcontextoptions) 物件呼叫方法來傳遞至內容。</span><span class="sxs-lookup"><span data-stu-id="a0743-755">The name of the connection string is passed in to the context by calling a method on a [DbContextOptions](/dotnet/api/microsoft.entityframeworkcore.dbcontextoptions) object.</span></span> <span data-ttu-id="a0743-756">針對本機開發， [ASP.NET Core 設定系統](xref:fundamentals/configuration/index) 會從檔案讀取連接字串 *appsettings.json* 。</span><span class="sxs-lookup"><span data-stu-id="a0743-756">For local development, the [ASP.NET Core configuration system](xref:fundamentals/configuration/index) reads the connection string from the *appsettings.json* file.</span></span>
 
 ## <a name="update-main"></a><span data-ttu-id="a0743-757">更新 main</span><span class="sxs-lookup"><span data-stu-id="a0743-757">Update main</span></span>
 
@@ -1172,7 +1172,7 @@ dotnet aspnet-codegenerator razorpage -m Student -dc ContosoUniversity.Models.Sc
 
 ### <a name="test-the-app"></a><span data-ttu-id="a0743-775">測試應用程式</span><span class="sxs-lookup"><span data-stu-id="a0743-775">Test the app</span></span>
 
-<span data-ttu-id="a0743-776">執行應用程式並接受 :::no-loc(cookie)::: 原則。</span><span class="sxs-lookup"><span data-stu-id="a0743-776">Run the app and accept the :::no-loc(cookie)::: policy.</span></span> <span data-ttu-id="a0743-777">此應用程式不會保留個人資訊。</span><span class="sxs-lookup"><span data-stu-id="a0743-777">This app doesn't keep personal information.</span></span> <span data-ttu-id="a0743-778">您可以參閱 EU 的 :::no-loc(cookie)::: 原則 [一般資料保護規定 (GDPR) 支援人員](xref:security/gdpr)。</span><span class="sxs-lookup"><span data-stu-id="a0743-778">You can read about the :::no-loc(cookie)::: policy at [EU General Data Protection Regulation (GDPR) support](xref:security/gdpr).</span></span>
+<span data-ttu-id="a0743-776">執行應用程式並接受 cookie 原則。</span><span class="sxs-lookup"><span data-stu-id="a0743-776">Run the app and accept the cookie policy.</span></span> <span data-ttu-id="a0743-777">此應用程式不會保留個人資訊。</span><span class="sxs-lookup"><span data-stu-id="a0743-777">This app doesn't keep personal information.</span></span> <span data-ttu-id="a0743-778">您可以參閱 EU 的 cookie 原則 [一般資料保護規定 (GDPR) 支援人員](xref:security/gdpr)。</span><span class="sxs-lookup"><span data-stu-id="a0743-778">You can read about the cookie policy at [EU General Data Protection Regulation (GDPR) support](xref:security/gdpr).</span></span>
 
 * <span data-ttu-id="a0743-779">選取 [學生] 連結，然後選取 [新建]。</span><span class="sxs-lookup"><span data-stu-id="a0743-779">Select the **Students** link and then **Create New**.</span></span>
 * <span data-ttu-id="a0743-780">測試 [編輯]、[詳細資料] 和 [刪除] 連結。</span><span class="sxs-lookup"><span data-stu-id="a0743-780">Test the Edit, Details, and Delete links.</span></span>

@@ -1,21 +1,21 @@
 ---
-title: ':::no-loc(Identity)::: ASP.NET Core 中的模型自訂'
+title: 'Identity ASP.NET Core 中的模型自訂'
 author: ajcvickers
-description: '本文描述如何自訂的基礎 Entity Framework Core 資料模型 :::no-loc(ASP.NET Core Identity)::: 。'
+description: '本文描述如何自訂的基礎 Entity Framework Core 資料模型 ASP.NET Core Identity 。'
 ms.author: avickers
 ms.date: 07/01/2019
 no-loc:
-- ':::no-loc(appsettings.json):::'
-- ':::no-loc(ASP.NET Core Identity):::'
-- ':::no-loc(cookie):::'
-- ':::no-loc(Cookie):::'
-- ':::no-loc(Blazor):::'
-- ':::no-loc(Blazor Server):::'
-- ':::no-loc(Blazor WebAssembly):::'
-- ':::no-loc(Identity):::'
-- ":::no-loc(Let's Encrypt):::"
-- ':::no-loc(Razor):::'
-- ':::no-loc(SignalR):::'
+- 'appsettings.json'
+- 'ASP.NET Core Identity'
+- 'cookie'
+- 'Cookie'
+- 'Blazor'
+- 'Blazor Server'
+- 'Blazor WebAssembly'
+- 'Identity'
+- "Let's Encrypt"
+- 'Razor'
+- 'SignalR'
 uid: security/authentication/customize_identity_model
 ms.openlocfilehash: 6e520c76a3377e889166ca8d08b75754ef34b6a1
 ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
@@ -24,15 +24,15 @@ ms.contentlocale: zh-TW
 ms.lasthandoff: 10/30/2020
 ms.locfileid: "93052041"
 ---
-# <a name="no-locidentity-model-customization-in-aspnet-core"></a><span data-ttu-id="b90c2-103">:::no-loc(Identity)::: ASP.NET Core 中的模型自訂</span><span class="sxs-lookup"><span data-stu-id="b90c2-103">:::no-loc(Identity)::: model customization in ASP.NET Core</span></span>
+# <a name="no-locidentity-model-customization-in-aspnet-core"></a><span data-ttu-id="b90c2-103">Identity ASP.NET Core 中的模型自訂</span><span class="sxs-lookup"><span data-stu-id="b90c2-103">Identity model customization in ASP.NET Core</span></span>
 
 <span data-ttu-id="b90c2-104">依 [Arthur Vickers](https://github.com/ajcvickers)</span><span class="sxs-lookup"><span data-stu-id="b90c2-104">By [Arthur Vickers](https://github.com/ajcvickers)</span></span>
 
-<span data-ttu-id="b90c2-105">:::no-loc(ASP.NET Core Identity)::: 提供在 ASP.NET Core apps 中管理和儲存使用者帳戶的架構。</span><span class="sxs-lookup"><span data-stu-id="b90c2-105">:::no-loc(ASP.NET Core Identity)::: provides a framework for managing and storing user accounts in ASP.NET Core apps.</span></span> <span data-ttu-id="b90c2-106">:::no-loc(Identity)::: 當選取 **個別使用者帳戶** 做為驗證機制時，會加入至您的專案。</span><span class="sxs-lookup"><span data-stu-id="b90c2-106">:::no-loc(Identity)::: is added to your project when **Individual User Accounts** is selected as the authentication mechanism.</span></span> <span data-ttu-id="b90c2-107">根據預設， :::no-loc(Identity)::: 會使用 Entity Framework (EF) 核心資料模型。</span><span class="sxs-lookup"><span data-stu-id="b90c2-107">By default, :::no-loc(Identity)::: makes use of an Entity Framework (EF) Core data model.</span></span> <span data-ttu-id="b90c2-108">本文說明如何自訂 :::no-loc(Identity)::: 模型。</span><span class="sxs-lookup"><span data-stu-id="b90c2-108">This article describes how to customize the :::no-loc(Identity)::: model.</span></span>
+<span data-ttu-id="b90c2-105">ASP.NET Core Identity 提供在 ASP.NET Core apps 中管理和儲存使用者帳戶的架構。</span><span class="sxs-lookup"><span data-stu-id="b90c2-105">ASP.NET Core Identity provides a framework for managing and storing user accounts in ASP.NET Core apps.</span></span> <span data-ttu-id="b90c2-106">Identity 當選取 **個別使用者帳戶** 做為驗證機制時，會加入至您的專案。</span><span class="sxs-lookup"><span data-stu-id="b90c2-106">Identity is added to your project when **Individual User Accounts** is selected as the authentication mechanism.</span></span> <span data-ttu-id="b90c2-107">根據預設， Identity 會使用 Entity Framework (EF) 核心資料模型。</span><span class="sxs-lookup"><span data-stu-id="b90c2-107">By default, Identity makes use of an Entity Framework (EF) Core data model.</span></span> <span data-ttu-id="b90c2-108">本文說明如何自訂 Identity 模型。</span><span class="sxs-lookup"><span data-stu-id="b90c2-108">This article describes how to customize the Identity model.</span></span>
 
-## <a name="no-locidentity-and-ef-core-migrations"></a><span data-ttu-id="b90c2-109">:::no-loc(Identity)::: 和 EF Core 遷移</span><span class="sxs-lookup"><span data-stu-id="b90c2-109">:::no-loc(Identity)::: and EF Core Migrations</span></span>
+## <a name="no-locidentity-and-ef-core-migrations"></a><span data-ttu-id="b90c2-109">Identity 和 EF Core 遷移</span><span class="sxs-lookup"><span data-stu-id="b90c2-109">Identity and EF Core Migrations</span></span>
 
-<span data-ttu-id="b90c2-110">檢查模型之前，請先瞭解如何 :::no-loc(Identity)::: 搭配使用 [EF Core 遷移](/ef/core/managing-schemas/migrations/) 來建立和更新資料庫。</span><span class="sxs-lookup"><span data-stu-id="b90c2-110">Before examining the model, it's useful to understand how :::no-loc(Identity)::: works with [EF Core Migrations](/ef/core/managing-schemas/migrations/) to create and update a database.</span></span> <span data-ttu-id="b90c2-111">最上層的程式是：</span><span class="sxs-lookup"><span data-stu-id="b90c2-111">At the top level, the process is:</span></span>
+<span data-ttu-id="b90c2-110">檢查模型之前，請先瞭解如何 Identity 搭配使用 [EF Core 遷移](/ef/core/managing-schemas/migrations/) 來建立和更新資料庫。</span><span class="sxs-lookup"><span data-stu-id="b90c2-110">Before examining the model, it's useful to understand how Identity works with [EF Core Migrations](/ef/core/managing-schemas/migrations/) to create and update a database.</span></span> <span data-ttu-id="b90c2-111">最上層的程式是：</span><span class="sxs-lookup"><span data-stu-id="b90c2-111">At the top level, the process is:</span></span>
 
 1. <span data-ttu-id="b90c2-112">[在程式碼中](/ef/core/modeling/)定義或更新資料模型。</span><span class="sxs-lookup"><span data-stu-id="b90c2-112">Define or update a [data model in code](/ef/core/modeling/).</span></span>
 1. <span data-ttu-id="b90c2-113">新增遷移以將此模型轉譯成可套用至資料庫的變更。</span><span class="sxs-lookup"><span data-stu-id="b90c2-113">Add a Migration to translate this model into changes that can be applied to the database.</span></span>
@@ -48,7 +48,7 @@ ms.locfileid: "93052041"
 
 <span data-ttu-id="b90c2-123">ASP.NET Core 有開發階段錯誤頁面處理常式。</span><span class="sxs-lookup"><span data-stu-id="b90c2-123">ASP.NET Core has a development-time error page handler.</span></span> <span data-ttu-id="b90c2-124">當應用程式執行時，處理常式可以套用遷移。</span><span class="sxs-lookup"><span data-stu-id="b90c2-124">The handler can apply migrations when the app is run.</span></span> <span data-ttu-id="b90c2-125">生產環境應用程式通常會從遷移產生 SQL 腳本，並在受控制的應用程式和資料庫部署中部署資料庫變更。</span><span class="sxs-lookup"><span data-stu-id="b90c2-125">Production apps typically generate SQL scripts from the migrations and deploy database changes as part of a controlled app and database deployment.</span></span>
 
-<span data-ttu-id="b90c2-126">當使用建立新的應用程式時 :::no-loc(Identity)::: ，上述步驟1和2已完成。</span><span class="sxs-lookup"><span data-stu-id="b90c2-126">When a new app using :::no-loc(Identity)::: is created, steps 1 and 2 above have already been completed.</span></span> <span data-ttu-id="b90c2-127">也就是說，初始資料模型已經存在，而且初始的遷移已加入至專案。</span><span class="sxs-lookup"><span data-stu-id="b90c2-127">That is, the initial data model already exists, and the initial migration has been added to the project.</span></span> <span data-ttu-id="b90c2-128">初始遷移仍然需要套用至資料庫。</span><span class="sxs-lookup"><span data-stu-id="b90c2-128">The initial migration still needs to be applied to the database.</span></span> <span data-ttu-id="b90c2-129">您可以透過下列其中一種方法來套用初始遷移：</span><span class="sxs-lookup"><span data-stu-id="b90c2-129">The initial migration can be applied via one of the following approaches:</span></span>
+<span data-ttu-id="b90c2-126">當使用建立新的應用程式時 Identity ，上述步驟1和2已完成。</span><span class="sxs-lookup"><span data-stu-id="b90c2-126">When a new app using Identity is created, steps 1 and 2 above have already been completed.</span></span> <span data-ttu-id="b90c2-127">也就是說，初始資料模型已經存在，而且初始的遷移已加入至專案。</span><span class="sxs-lookup"><span data-stu-id="b90c2-127">That is, the initial data model already exists, and the initial migration has been added to the project.</span></span> <span data-ttu-id="b90c2-128">初始遷移仍然需要套用至資料庫。</span><span class="sxs-lookup"><span data-stu-id="b90c2-128">The initial migration still needs to be applied to the database.</span></span> <span data-ttu-id="b90c2-129">您可以透過下列其中一種方法來套用初始遷移：</span><span class="sxs-lookup"><span data-stu-id="b90c2-129">The initial migration can be applied via one of the following approaches:</span></span>
 
 * <span data-ttu-id="b90c2-130">`Update-Database`在 PMC 中執行。</span><span class="sxs-lookup"><span data-stu-id="b90c2-130">Run `Update-Database` in PMC.</span></span>
 * <span data-ttu-id="b90c2-131">`dotnet ef database update`在命令 shell 中執行。</span><span class="sxs-lookup"><span data-stu-id="b90c2-131">Run `dotnet ef database update` in a command shell.</span></span>
@@ -56,11 +56,11 @@ ms.locfileid: "93052041"
 
 <span data-ttu-id="b90c2-133">在對模型進行變更時，重複上述步驟。</span><span class="sxs-lookup"><span data-stu-id="b90c2-133">Repeat the preceding steps as changes are made to the model.</span></span>
 
-## <a name="the-no-locidentity-model"></a><span data-ttu-id="b90c2-134">:::no-loc(Identity):::模型</span><span class="sxs-lookup"><span data-stu-id="b90c2-134">The :::no-loc(Identity)::: model</span></span>
+## <a name="the-no-locidentity-model"></a><span data-ttu-id="b90c2-134">Identity模型</span><span class="sxs-lookup"><span data-stu-id="b90c2-134">The Identity model</span></span>
 
 ### <a name="entity-types"></a><span data-ttu-id="b90c2-135">實體類型</span><span class="sxs-lookup"><span data-stu-id="b90c2-135">Entity types</span></span>
 
-<span data-ttu-id="b90c2-136">此 :::no-loc(Identity)::: 模型包含下列實體類型。</span><span class="sxs-lookup"><span data-stu-id="b90c2-136">The :::no-loc(Identity)::: model consists of the following entity types.</span></span>
+<span data-ttu-id="b90c2-136">此 Identity 模型包含下列實體類型。</span><span class="sxs-lookup"><span data-stu-id="b90c2-136">The Identity model consists of the following entity types.</span></span>
 
 |<span data-ttu-id="b90c2-137">實體類型</span><span class="sxs-lookup"><span data-stu-id="b90c2-137">Entity type</span></span>|<span data-ttu-id="b90c2-138">描述</span><span class="sxs-lookup"><span data-stu-id="b90c2-138">Description</span></span>                                                  |
 |-----------|-------------------------------------------------------------|
@@ -84,7 +84,7 @@ ms.locfileid: "93052041"
 
 ### <a name="default-model-configuration"></a><span data-ttu-id="b90c2-155">預設模型設定</span><span class="sxs-lookup"><span data-stu-id="b90c2-155">Default model configuration</span></span>
 
-<span data-ttu-id="b90c2-156">:::no-loc(Identity):::定義許多從 [DbCoNtext](/dotnet/api/microsoft.entityframeworkcore.dbcontext)繼承以設定和使用模型的 *內容類別* 。</span><span class="sxs-lookup"><span data-stu-id="b90c2-156">:::no-loc(Identity)::: defines many *context classes* that inherit from [DbContext](/dotnet/api/microsoft.entityframeworkcore.dbcontext) to configure and use the model.</span></span> <span data-ttu-id="b90c2-157">這項設定是在內容類別的[OnModelCreating](/dotnet/api/microsoft.entityframeworkcore.dbcontext.onmodelcreating)方法中，使用[EF CORE Code First 流暢 API](/ef/core/modeling/)來完成。</span><span class="sxs-lookup"><span data-stu-id="b90c2-157">This configuration is done using the [EF Core Code First Fluent API](/ef/core/modeling/) in the [OnModelCreating](/dotnet/api/microsoft.entityframeworkcore.dbcontext.onmodelcreating) method of the context class.</span></span> <span data-ttu-id="b90c2-158">預設設定為：</span><span class="sxs-lookup"><span data-stu-id="b90c2-158">The default configuration is:</span></span>
+<span data-ttu-id="b90c2-156">Identity定義許多從 [DbCoNtext](/dotnet/api/microsoft.entityframeworkcore.dbcontext)繼承以設定和使用模型的 *內容類別* 。</span><span class="sxs-lookup"><span data-stu-id="b90c2-156">Identity defines many *context classes* that inherit from [DbContext](/dotnet/api/microsoft.entityframeworkcore.dbcontext) to configure and use the model.</span></span> <span data-ttu-id="b90c2-157">這項設定是在內容類別的[OnModelCreating](/dotnet/api/microsoft.entityframeworkcore.dbcontext.onmodelcreating)方法中，使用[EF CORE Code First 流暢 API](/ef/core/modeling/)來完成。</span><span class="sxs-lookup"><span data-stu-id="b90c2-157">This configuration is done using the [EF Core Code First Fluent API](/ef/core/modeling/) in the [OnModelCreating](/dotnet/api/microsoft.entityframeworkcore.dbcontext.onmodelcreating) method of the context class.</span></span> <span data-ttu-id="b90c2-158">預設設定為：</span><span class="sxs-lookup"><span data-stu-id="b90c2-158">The default configuration is:</span></span>
 
 ```csharp
 builder.Entity<TUser>(b =>
@@ -209,92 +209,92 @@ builder.Entity<TUserRole>(b =>
 
 ### <a name="model-generic-types"></a><span data-ttu-id="b90c2-159">模型泛型型別</span><span class="sxs-lookup"><span data-stu-id="b90c2-159">Model generic types</span></span>
 
-<span data-ttu-id="b90c2-160">:::no-loc(Identity)::: 針對上面所列的每個實體類型，定義預設的 [Common Language Runtime](/dotnet/standard/glossary#clr) (CLR) 類型。</span><span class="sxs-lookup"><span data-stu-id="b90c2-160">:::no-loc(Identity)::: defines default [Common Language Runtime](/dotnet/standard/glossary#clr) (CLR) types for each of the entity types listed above.</span></span> <span data-ttu-id="b90c2-161">這些類型的前面都有 *:::no-loc(Identity):::* ：</span><span class="sxs-lookup"><span data-stu-id="b90c2-161">These types are all prefixed with *:::no-loc(Identity):::* :</span></span>
+<span data-ttu-id="b90c2-160">Identity 針對上面所列的每個實體類型，定義預設的 [Common Language Runtime](/dotnet/standard/glossary#clr) (CLR) 類型。</span><span class="sxs-lookup"><span data-stu-id="b90c2-160">Identity defines default [Common Language Runtime](/dotnet/standard/glossary#clr) (CLR) types for each of the entity types listed above.</span></span> <span data-ttu-id="b90c2-161">這些類型的前面都有 *Identity* ：</span><span class="sxs-lookup"><span data-stu-id="b90c2-161">These types are all prefixed with *Identity* :</span></span>
 
-* `:::no-loc(Identity):::User`
-* `:::no-loc(Identity):::Role`
-* `:::no-loc(Identity):::UserClaim`
-* `:::no-loc(Identity):::UserToken`
-* `:::no-loc(Identity):::UserLogin`
-* `:::no-loc(Identity):::RoleClaim`
-* `:::no-loc(Identity):::UserRole`
+* `IdentityUser`
+* `IdentityRole`
+* `IdentityUserClaim`
+* `IdentityUserToken`
+* `IdentityUserLogin`
+* `IdentityRoleClaim`
+* `IdentityUserRole`
 
-<span data-ttu-id="b90c2-162">類型不會直接使用這些類型，而是用來作為應用程式本身類型的基類。</span><span class="sxs-lookup"><span data-stu-id="b90c2-162">Rather than using these types directly, the types can be used as base classes for the app's own types.</span></span> <span data-ttu-id="b90c2-163">`DbContext`由定義的類別 :::no-loc(Identity)::: 為泛型，因此可以將不同的 CLR 型別用於模型中的一或多個實體類型。</span><span class="sxs-lookup"><span data-stu-id="b90c2-163">The `DbContext` classes defined by :::no-loc(Identity)::: are generic, such that different CLR types can be used for one or more of the entity types in the model.</span></span> <span data-ttu-id="b90c2-164">這些泛型型別也可讓 `User` 主鍵 (PK) 資料類型進行變更。</span><span class="sxs-lookup"><span data-stu-id="b90c2-164">These generic types also allow the `User` primary key (PK) data type to be changed.</span></span>
+<span data-ttu-id="b90c2-162">類型不會直接使用這些類型，而是用來作為應用程式本身類型的基類。</span><span class="sxs-lookup"><span data-stu-id="b90c2-162">Rather than using these types directly, the types can be used as base classes for the app's own types.</span></span> <span data-ttu-id="b90c2-163">`DbContext`由定義的類別 Identity 為泛型，因此可以將不同的 CLR 型別用於模型中的一或多個實體類型。</span><span class="sxs-lookup"><span data-stu-id="b90c2-163">The `DbContext` classes defined by Identity are generic, such that different CLR types can be used for one or more of the entity types in the model.</span></span> <span data-ttu-id="b90c2-164">這些泛型型別也可讓 `User` 主鍵 (PK) 資料類型進行變更。</span><span class="sxs-lookup"><span data-stu-id="b90c2-164">These generic types also allow the `User` primary key (PK) data type to be changed.</span></span>
 
-<span data-ttu-id="b90c2-165">使用 :::no-loc(Identity)::: 與角色的支援時， <xref:Microsoft.AspNetCore.:::no-loc(Identity):::.EntityFrameworkCore.:::no-loc(Identity):::DbContext> 應該使用類別。</span><span class="sxs-lookup"><span data-stu-id="b90c2-165">When using :::no-loc(Identity)::: with support for roles, an <xref:Microsoft.AspNetCore.:::no-loc(Identity):::.EntityFrameworkCore.:::no-loc(Identity):::DbContext> class should be used.</span></span> <span data-ttu-id="b90c2-166">例如：</span><span class="sxs-lookup"><span data-stu-id="b90c2-166">For example:</span></span>
+<span data-ttu-id="b90c2-165">使用 Identity 與角色的支援時， <xref:Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityDbContext> 應該使用類別。</span><span class="sxs-lookup"><span data-stu-id="b90c2-165">When using Identity with support for roles, an <xref:Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityDbContext> class should be used.</span></span> <span data-ttu-id="b90c2-166">例如：</span><span class="sxs-lookup"><span data-stu-id="b90c2-166">For example:</span></span>
 
 ```csharp
-// Uses all the built-in :::no-loc(Identity)::: types
+// Uses all the built-in Identity types
 // Uses `string` as the key type
-public class :::no-loc(Identity):::DbContext
-    : :::no-loc(Identity):::DbContext<:::no-loc(Identity):::User, :::no-loc(Identity):::Role, string>
+public class IdentityDbContext
+    : IdentityDbContext<IdentityUser, IdentityRole, string>
 {
 }
 
-// Uses the built-in :::no-loc(Identity)::: types except with a custom User type
+// Uses the built-in Identity types except with a custom User type
 // Uses `string` as the key type
-public class :::no-loc(Identity):::DbContext<TUser>
-    : :::no-loc(Identity):::DbContext<TUser, :::no-loc(Identity):::Role, string>
-        where TUser : :::no-loc(Identity):::User
+public class IdentityDbContext<TUser>
+    : IdentityDbContext<TUser, IdentityRole, string>
+        where TUser : IdentityUser
 {
 }
 
-// Uses the built-in :::no-loc(Identity)::: types except with custom User and Role types
+// Uses the built-in Identity types except with custom User and Role types
 // The key type is defined by TKey
-public class :::no-loc(Identity):::DbContext<TUser, TRole, TKey> : :::no-loc(Identity):::DbContext<
-    TUser, TRole, TKey, :::no-loc(Identity):::UserClaim<TKey>, :::no-loc(Identity):::UserRole<TKey>,
-    :::no-loc(Identity):::UserLogin<TKey>, :::no-loc(Identity):::RoleClaim<TKey>, :::no-loc(Identity):::UserToken<TKey>>
-        where TUser : :::no-loc(Identity):::User<TKey>
-        where TRole : :::no-loc(Identity):::Role<TKey>
+public class IdentityDbContext<TUser, TRole, TKey> : IdentityDbContext<
+    TUser, TRole, TKey, IdentityUserClaim<TKey>, IdentityUserRole<TKey>,
+    IdentityUserLogin<TKey>, IdentityRoleClaim<TKey>, IdentityUserToken<TKey>>
+        where TUser : IdentityUser<TKey>
+        where TRole : IdentityRole<TKey>
         where TKey : IEquatable<TKey>
 {
 }
 
-// No built-in :::no-loc(Identity)::: types are used; all are specified by generic arguments
+// No built-in Identity types are used; all are specified by generic arguments
 // The key type is defined by TKey
-public abstract class :::no-loc(Identity):::DbContext<
+public abstract class IdentityDbContext<
     TUser, TRole, TKey, TUserClaim, TUserRole, TUserLogin, TRoleClaim, TUserToken>
-    : :::no-loc(Identity):::UserContext<TUser, TKey, TUserClaim, TUserLogin, TUserToken>
-         where TUser : :::no-loc(Identity):::User<TKey>
-         where TRole : :::no-loc(Identity):::Role<TKey>
+    : IdentityUserContext<TUser, TKey, TUserClaim, TUserLogin, TUserToken>
+         where TUser : IdentityUser<TKey>
+         where TRole : IdentityRole<TKey>
          where TKey : IEquatable<TKey>
-         where TUserClaim : :::no-loc(Identity):::UserClaim<TKey>
-         where TUserRole : :::no-loc(Identity):::UserRole<TKey>
-         where TUserLogin : :::no-loc(Identity):::UserLogin<TKey>
-         where TRoleClaim : :::no-loc(Identity):::RoleClaim<TKey>
-         where TUserToken : :::no-loc(Identity):::UserToken<TKey>
+         where TUserClaim : IdentityUserClaim<TKey>
+         where TUserRole : IdentityUserRole<TKey>
+         where TUserLogin : IdentityUserLogin<TKey>
+         where TRoleClaim : IdentityRoleClaim<TKey>
+         where TUserToken : IdentityUserToken<TKey>
 ```
 
-<span data-ttu-id="b90c2-167">您也可以 :::no-loc(Identity)::: 在沒有角色的情況下使用 (只有宣告) ，在這種情況下 <xref:Microsoft.AspNetCore.:::no-loc(Identity):::.EntityFrameworkCore.:::no-loc(Identity):::UserContext%601> 應該使用類別：</span><span class="sxs-lookup"><span data-stu-id="b90c2-167">It's also possible to use :::no-loc(Identity)::: without roles (only claims), in which case an <xref:Microsoft.AspNetCore.:::no-loc(Identity):::.EntityFrameworkCore.:::no-loc(Identity):::UserContext%601> class should be used:</span></span>
+<span data-ttu-id="b90c2-167">您也可以 Identity 在沒有角色的情況下使用 (只有宣告) ，在這種情況下 <xref:Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityUserContext%601> 應該使用類別：</span><span class="sxs-lookup"><span data-stu-id="b90c2-167">It's also possible to use Identity without roles (only claims), in which case an <xref:Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityUserContext%601> class should be used:</span></span>
 
 ```csharp
-// Uses the built-in non-role :::no-loc(Identity)::: types except with a custom User type
+// Uses the built-in non-role Identity types except with a custom User type
 // Uses `string` as the key type
-public class :::no-loc(Identity):::UserContext<TUser>
-    : :::no-loc(Identity):::UserContext<TUser, string>
-        where TUser : :::no-loc(Identity):::User
+public class IdentityUserContext<TUser>
+    : IdentityUserContext<TUser, string>
+        where TUser : IdentityUser
 {
 }
 
-// Uses the built-in non-role :::no-loc(Identity)::: types except with a custom User type
+// Uses the built-in non-role Identity types except with a custom User type
 // The key type is defined by TKey
-public class :::no-loc(Identity):::UserContext<TUser, TKey> : :::no-loc(Identity):::UserContext<
-    TUser, TKey, :::no-loc(Identity):::UserClaim<TKey>, :::no-loc(Identity):::UserLogin<TKey>,
-    :::no-loc(Identity):::UserToken<TKey>>
-        where TUser : :::no-loc(Identity):::User<TKey>
+public class IdentityUserContext<TUser, TKey> : IdentityUserContext<
+    TUser, TKey, IdentityUserClaim<TKey>, IdentityUserLogin<TKey>,
+    IdentityUserToken<TKey>>
+        where TUser : IdentityUser<TKey>
         where TKey : IEquatable<TKey>
 {
 }
 
-// No built-in :::no-loc(Identity)::: types are used; all are specified by generic arguments, with no roles
+// No built-in Identity types are used; all are specified by generic arguments, with no roles
 // The key type is defined by TKey
-public abstract class :::no-loc(Identity):::UserContext<
+public abstract class IdentityUserContext<
     TUser, TKey, TUserClaim, TUserLogin, TUserToken> : DbContext
-        where TUser : :::no-loc(Identity):::User<TKey>
+        where TUser : IdentityUser<TKey>
         where TKey : IEquatable<TKey>
-        where TUserClaim : :::no-loc(Identity):::UserClaim<TKey>
-        where TUserLogin : :::no-loc(Identity):::UserLogin<TKey>
-        where TUserToken : :::no-loc(Identity):::UserToken<TKey>
+        where TUserClaim : IdentityUserClaim<TKey>
+        where TUserLogin : IdentityUserLogin<TKey>
+        where TUserToken : IdentityUserToken<TKey>
 {
 }
 ```
@@ -318,14 +318,14 @@ dotnet new webapp -o %projNam%
 cd %projNam%
 dotnet add package Microsoft.VisualStudio.Web.CodeGeneration.Design 
 dotnet aspnet-codegenerator identity  -dc ApplicationDbContext --useDefaultUI 
-dotnet ef migrations add Create:::no-loc(Identity):::Schema
+dotnet ef migrations add CreateIdentitySchema
 dotnet ef database update
  -->
 
-<span data-ttu-id="b90c2-179">[自訂使用者資料](xref:security/authentication/add-user-data) 的支援方式是繼承自 `:::no-loc(Identity):::User` 。</span><span class="sxs-lookup"><span data-stu-id="b90c2-179">[Custom user data](xref:security/authentication/add-user-data) is supported by inheriting from `:::no-loc(Identity):::User`.</span></span> <span data-ttu-id="b90c2-180">建議您將此類型命名為 `ApplicationUser` ：</span><span class="sxs-lookup"><span data-stu-id="b90c2-180">It's customary to name this type `ApplicationUser`:</span></span>
+<span data-ttu-id="b90c2-179">[自訂使用者資料](xref:security/authentication/add-user-data) 的支援方式是繼承自 `IdentityUser` 。</span><span class="sxs-lookup"><span data-stu-id="b90c2-179">[Custom user data](xref:security/authentication/add-user-data) is supported by inheriting from `IdentityUser`.</span></span> <span data-ttu-id="b90c2-180">建議您將此類型命名為 `ApplicationUser` ：</span><span class="sxs-lookup"><span data-stu-id="b90c2-180">It's customary to name this type `ApplicationUser`:</span></span>
 
 ```csharp
-public class ApplicationUser : :::no-loc(Identity):::User
+public class ApplicationUser : IdentityUser
 {
     public string CustomTag { get; set; }
 }
@@ -334,7 +334,7 @@ public class ApplicationUser : :::no-loc(Identity):::User
 <span data-ttu-id="b90c2-181">使用 `ApplicationUser` 類型作為內容的泛型引數：</span><span class="sxs-lookup"><span data-stu-id="b90c2-181">Use the `ApplicationUser` type as a generic argument for the context:</span></span>
 
 ```csharp
-public class ApplicationDbContext : :::no-loc(Identity):::DbContext<ApplicationUser>
+public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
 {
     public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
         : base(options)
@@ -348,29 +348,29 @@ public class ApplicationDbContext : :::no-loc(Identity):::DbContext<ApplicationU
 }
 ```
 
-<span data-ttu-id="b90c2-182">在類別中不需要覆寫 `OnModelCreating` `ApplicationDbContext` 。</span><span class="sxs-lookup"><span data-stu-id="b90c2-182">There's no need to override `OnModelCreating` in the `ApplicationDbContext` class.</span></span> <span data-ttu-id="b90c2-183">EF Core 依照 `CustomTag` 慣例對應屬性。</span><span class="sxs-lookup"><span data-stu-id="b90c2-183">EF Core maps the `CustomTag` property by convention.</span></span> <span data-ttu-id="b90c2-184">但是，資料庫需要更新才能建立新的資料 `CustomTag` 行。</span><span class="sxs-lookup"><span data-stu-id="b90c2-184">However, the database needs to be updated to create a new `CustomTag` column.</span></span> <span data-ttu-id="b90c2-185">若要建立資料行，請加入遷移，然後更新資料庫，如[ :::no-loc(Identity)::: 和 EF Core 遷移](#identity-and-ef-core-migrations)所述。</span><span class="sxs-lookup"><span data-stu-id="b90c2-185">To create the column, add a migration, and then update the database as described in [:::no-loc(Identity)::: and EF Core Migrations](#identity-and-ef-core-migrations).</span></span>
+<span data-ttu-id="b90c2-182">在類別中不需要覆寫 `OnModelCreating` `ApplicationDbContext` 。</span><span class="sxs-lookup"><span data-stu-id="b90c2-182">There's no need to override `OnModelCreating` in the `ApplicationDbContext` class.</span></span> <span data-ttu-id="b90c2-183">EF Core 依照 `CustomTag` 慣例對應屬性。</span><span class="sxs-lookup"><span data-stu-id="b90c2-183">EF Core maps the `CustomTag` property by convention.</span></span> <span data-ttu-id="b90c2-184">但是，資料庫需要更新才能建立新的資料 `CustomTag` 行。</span><span class="sxs-lookup"><span data-stu-id="b90c2-184">However, the database needs to be updated to create a new `CustomTag` column.</span></span> <span data-ttu-id="b90c2-185">若要建立資料行，請加入遷移，然後更新資料庫，如[ Identity 和 EF Core 遷移](#identity-and-ef-core-migrations)所述。</span><span class="sxs-lookup"><span data-stu-id="b90c2-185">To create the column, add a migration, and then update the database as described in [Identity and EF Core Migrations](#identity-and-ef-core-migrations).</span></span>
 
-<span data-ttu-id="b90c2-186">更新 *Pages/Shared/_LoginPartial* ，並 `:::no-loc(Identity):::User` 以 `ApplicationUser` 下列內容取代：</span><span class="sxs-lookup"><span data-stu-id="b90c2-186">Update *Pages/Shared/_LoginPartial.cshtml* and replace `:::no-loc(Identity):::User` with `ApplicationUser`:</span></span>
+<span data-ttu-id="b90c2-186">更新 *Pages/Shared/_LoginPartial* ，並 `IdentityUser` 以 `ApplicationUser` 下列內容取代：</span><span class="sxs-lookup"><span data-stu-id="b90c2-186">Update *Pages/Shared/_LoginPartial.cshtml* and replace `IdentityUser` with `ApplicationUser`:</span></span>
 
 ```cshtml
-@using Microsoft.AspNetCore.:::no-loc(Identity):::
-@using WebApp1.Areas.:::no-loc(Identity):::.Data
+@using Microsoft.AspNetCore.Identity
+@using WebApp1.Areas.Identity.Data
 @inject SignInManager<ApplicationUser> SignInManager
 @inject UserManager<ApplicationUser> UserManager
 ```
 
-<span data-ttu-id="b90c2-187">更新 *區域/ :::no-loc(Identity)::: / :::no-loc(Identity)::: HostingStartup.cs* `Startup.ConfigureServices` ，或取代 `:::no-loc(Identity):::User` 為 `ApplicationUser` 。</span><span class="sxs-lookup"><span data-stu-id="b90c2-187">Update *Areas/:::no-loc(Identity):::/:::no-loc(Identity):::HostingStartup.cs*  or `Startup.ConfigureServices` and replace `:::no-loc(Identity):::User` with `ApplicationUser`.</span></span>
+<span data-ttu-id="b90c2-187">更新 *區域/ Identity / Identity HostingStartup.cs* `Startup.ConfigureServices` ，或取代 `IdentityUser` 為 `ApplicationUser` 。</span><span class="sxs-lookup"><span data-stu-id="b90c2-187">Update *Areas/Identity/IdentityHostingStartup.cs*  or `Startup.ConfigureServices` and replace `IdentityUser` with `ApplicationUser`.</span></span>
 
 ```csharp
-services.Add:::no-loc(Identity):::<ApplicationUser>()
+services.AddIdentity<ApplicationUser>()
         .AddEntityFrameworkStores<ApplicationDbContext>()
         .AddDefaultUI();
 ```
 
-<span data-ttu-id="b90c2-188">在 ASP.NET Core 2.1 或更新版本中， :::no-loc(Identity)::: 是以 :::no-loc(Razor)::: 類別庫的形式提供。</span><span class="sxs-lookup"><span data-stu-id="b90c2-188">In ASP.NET Core 2.1 or later, :::no-loc(Identity)::: is provided as a :::no-loc(Razor)::: Class Library.</span></span> <span data-ttu-id="b90c2-189">如需詳細資訊，請參閱<xref:security/authentication/scaffold-identity>。</span><span class="sxs-lookup"><span data-stu-id="b90c2-189">For more information, see <xref:security/authentication/scaffold-identity>.</span></span> <span data-ttu-id="b90c2-190">因此，上述程式碼需要呼叫 <xref:Microsoft.AspNetCore.:::no-loc(Identity):::.:::no-loc(Identity):::BuilderUIExtensions.AddDefaultUI*> 。</span><span class="sxs-lookup"><span data-stu-id="b90c2-190">Consequently, the preceding code requires a call to <xref:Microsoft.AspNetCore.:::no-loc(Identity):::.:::no-loc(Identity):::BuilderUIExtensions.AddDefaultUI*>.</span></span> <span data-ttu-id="b90c2-191">如果 :::no-loc(Identity)::: scaffolder 是用來將檔案新增 :::no-loc(Identity)::: 至專案，請移除的呼叫 `AddDefaultUI` 。</span><span class="sxs-lookup"><span data-stu-id="b90c2-191">If the :::no-loc(Identity)::: scaffolder was used to add :::no-loc(Identity)::: files to the project, remove the call to `AddDefaultUI`.</span></span> <span data-ttu-id="b90c2-192">如需詳細資訊，請參閱</span><span class="sxs-lookup"><span data-stu-id="b90c2-192">For more information, see:</span></span>
+<span data-ttu-id="b90c2-188">在 ASP.NET Core 2.1 或更新版本中， Identity 是以 Razor 類別庫的形式提供。</span><span class="sxs-lookup"><span data-stu-id="b90c2-188">In ASP.NET Core 2.1 or later, Identity is provided as a Razor Class Library.</span></span> <span data-ttu-id="b90c2-189">如需詳細資訊，請參閱<xref:security/authentication/scaffold-identity>。</span><span class="sxs-lookup"><span data-stu-id="b90c2-189">For more information, see <xref:security/authentication/scaffold-identity>.</span></span> <span data-ttu-id="b90c2-190">因此，上述程式碼需要呼叫 <xref:Microsoft.AspNetCore.Identity.IdentityBuilderUIExtensions.AddDefaultUI*> 。</span><span class="sxs-lookup"><span data-stu-id="b90c2-190">Consequently, the preceding code requires a call to <xref:Microsoft.AspNetCore.Identity.IdentityBuilderUIExtensions.AddDefaultUI*>.</span></span> <span data-ttu-id="b90c2-191">如果 Identity scaffolder 是用來將檔案新增 Identity 至專案，請移除的呼叫 `AddDefaultUI` 。</span><span class="sxs-lookup"><span data-stu-id="b90c2-191">If the Identity scaffolder was used to add Identity files to the project, remove the call to `AddDefaultUI`.</span></span> <span data-ttu-id="b90c2-192">如需詳細資訊，請參閱</span><span class="sxs-lookup"><span data-stu-id="b90c2-192">For more information, see:</span></span>
 
-* [<span data-ttu-id="b90c2-193">支架 :::no-loc(Identity):::</span><span class="sxs-lookup"><span data-stu-id="b90c2-193">Scaffold :::no-loc(Identity):::</span></span>](xref:security/authentication/scaffold-identity)
-* [<span data-ttu-id="b90c2-194">新增、下載及刪除自訂使用者資料 :::no-loc(Identity):::</span><span class="sxs-lookup"><span data-stu-id="b90c2-194">Add, download, and delete custom user data to :::no-loc(Identity):::</span></span>](xref:security/authentication/add-user-data)
+* [<span data-ttu-id="b90c2-193">支架 Identity</span><span class="sxs-lookup"><span data-stu-id="b90c2-193">Scaffold Identity</span></span>](xref:security/authentication/scaffold-identity)
+* [<span data-ttu-id="b90c2-194">新增、下載及刪除自訂使用者資料 Identity</span><span class="sxs-lookup"><span data-stu-id="b90c2-194">Add, download, and delete custom user data to Identity</span></span>](xref:security/authentication/add-user-data)
 
 ### <a name="change-the-primary-key-type"></a><span data-ttu-id="b90c2-195">變更主要金鑰類型</span><span class="sxs-lookup"><span data-stu-id="b90c2-195">Change the primary key type</span></span>
 
@@ -380,11 +380,11 @@ services.Add:::no-loc(Identity):::<ApplicationUser>()
 
 1. <span data-ttu-id="b90c2-200">如果資料庫是在 PK 變更之前建立的，請執行 `Drop-Database` (PMC) 或 `dotnet ef database drop` ( .NET Core CLI) 來刪除它。</span><span class="sxs-lookup"><span data-stu-id="b90c2-200">If the database was created before the PK change, run `Drop-Database` (PMC) or `dotnet ef database drop` (.NET Core CLI) to delete it.</span></span>
 2. <span data-ttu-id="b90c2-201">確認刪除資料庫之後，請移除 (PMC) 的初始遷移， `Remove-Migration` 或 `dotnet ef migrations remove` ( .NET Core CLI) 。</span><span class="sxs-lookup"><span data-stu-id="b90c2-201">After confirming deletion of the database, remove the initial migration with `Remove-Migration` (PMC) or `dotnet ef migrations remove` (.NET Core CLI).</span></span>
-3. <span data-ttu-id="b90c2-202">將 `ApplicationDbContext` 類別更新為衍生自 <xref:Microsoft.AspNetCore.:::no-loc(Identity):::.EntityFrameworkCore.:::no-loc(Identity):::DbContext%603> 。</span><span class="sxs-lookup"><span data-stu-id="b90c2-202">Update the `ApplicationDbContext` class to derive from <xref:Microsoft.AspNetCore.:::no-loc(Identity):::.EntityFrameworkCore.:::no-loc(Identity):::DbContext%603>.</span></span> <span data-ttu-id="b90c2-203">為指定新的索引鍵類型 `TKey` 。</span><span class="sxs-lookup"><span data-stu-id="b90c2-203">Specify the new key type for `TKey`.</span></span> <span data-ttu-id="b90c2-204">例如，若要使用 `Guid` 金鑰類型：</span><span class="sxs-lookup"><span data-stu-id="b90c2-204">For example, to use a `Guid` key type:</span></span>
+3. <span data-ttu-id="b90c2-202">將 `ApplicationDbContext` 類別更新為衍生自 <xref:Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityDbContext%603> 。</span><span class="sxs-lookup"><span data-stu-id="b90c2-202">Update the `ApplicationDbContext` class to derive from <xref:Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityDbContext%603>.</span></span> <span data-ttu-id="b90c2-203">為指定新的索引鍵類型 `TKey` 。</span><span class="sxs-lookup"><span data-stu-id="b90c2-203">Specify the new key type for `TKey`.</span></span> <span data-ttu-id="b90c2-204">例如，若要使用 `Guid` 金鑰類型：</span><span class="sxs-lookup"><span data-stu-id="b90c2-204">For example, to use a `Guid` key type:</span></span>
 
     ```csharp
     public class ApplicationDbContext
-        : :::no-loc(Identity):::DbContext<:::no-loc(Identity):::User<Guid>, :::no-loc(Identity):::Role<Guid>, Guid>
+        : IdentityDbContext<IdentityUser<Guid>, IdentityRole<Guid>, Guid>
     {
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
             : base(options)
@@ -395,13 +395,13 @@ services.Add:::no-loc(Identity):::<ApplicationUser>()
 
     ::: moniker range=">= aspnetcore-2.0"
 
-    <span data-ttu-id="b90c2-205">在上述程式碼中，必須指定泛型類別， <xref:Microsoft.AspNetCore.:::no-loc(Identity):::.:::no-loc(Identity):::User%601> <xref:Microsoft.AspNetCore.:::no-loc(Identity):::.:::no-loc(Identity):::Role%601> 才能使用新的索引鍵類型。</span><span class="sxs-lookup"><span data-stu-id="b90c2-205">In the preceding code, the generic classes <xref:Microsoft.AspNetCore.:::no-loc(Identity):::.:::no-loc(Identity):::User%601> and <xref:Microsoft.AspNetCore.:::no-loc(Identity):::.:::no-loc(Identity):::Role%601> must be specified to use the new key type.</span></span>
+    <span data-ttu-id="b90c2-205">在上述程式碼中，必須指定泛型類別， <xref:Microsoft.AspNetCore.Identity.IdentityUser%601> <xref:Microsoft.AspNetCore.Identity.IdentityRole%601> 才能使用新的索引鍵類型。</span><span class="sxs-lookup"><span data-stu-id="b90c2-205">In the preceding code, the generic classes <xref:Microsoft.AspNetCore.Identity.IdentityUser%601> and <xref:Microsoft.AspNetCore.Identity.IdentityRole%601> must be specified to use the new key type.</span></span>
 
     ::: moniker-end
 
     ::: moniker range="<= aspnetcore-1.1"
 
-    <span data-ttu-id="b90c2-206">在上述程式碼中，必須指定泛型類別， <xref:Microsoft.AspNetCore.:::no-loc(Identity):::.EntityFrameworkCore.:::no-loc(Identity):::User%601> <xref:Microsoft.AspNetCore.:::no-loc(Identity):::.EntityFrameworkCore.:::no-loc(Identity):::Role%601> 才能使用新的索引鍵類型。</span><span class="sxs-lookup"><span data-stu-id="b90c2-206">In the preceding code, the generic classes <xref:Microsoft.AspNetCore.:::no-loc(Identity):::.EntityFrameworkCore.:::no-loc(Identity):::User%601> and <xref:Microsoft.AspNetCore.:::no-loc(Identity):::.EntityFrameworkCore.:::no-loc(Identity):::Role%601> must be specified to use the new key type.</span></span>
+    <span data-ttu-id="b90c2-206">在上述程式碼中，必須指定泛型類別， <xref:Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityUser%601> <xref:Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityRole%601> 才能使用新的索引鍵類型。</span><span class="sxs-lookup"><span data-stu-id="b90c2-206">In the preceding code, the generic classes <xref:Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityUser%601> and <xref:Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityRole%601> must be specified to use the new key type.</span></span>
 
     ::: moniker-end
 
@@ -410,7 +410,7 @@ services.Add:::no-loc(Identity):::<ApplicationUser>()
     ::: moniker range=">= aspnetcore-2.1"
 
     ```csharp
-    services.AddDefault:::no-loc(Identity):::<:::no-loc(Identity):::User<Guid>>()
+    services.AddDefaultIdentity<IdentityUser<Guid>>()
             .AddEntityFrameworkStores<ApplicationDbContext>();
     ```
 
@@ -419,7 +419,7 @@ services.Add:::no-loc(Identity):::<ApplicationUser>()
     ::: moniker range="= aspnetcore-2.0"
 
     ```csharp
-    services.Add:::no-loc(Identity):::<:::no-loc(Identity):::User<Guid>, :::no-loc(Identity):::Role>()
+    services.AddIdentity<IdentityUser<Guid>, IdentityRole>()
             .AddEntityFrameworkStores<ApplicationDbContext>()
             .AddDefaultTokenProviders();
     ```
@@ -429,14 +429,14 @@ services.Add:::no-loc(Identity):::<ApplicationUser>()
     ::: moniker range="<= aspnetcore-1.1"
 
     ```csharp
-    services.Add:::no-loc(Identity):::<:::no-loc(Identity):::User<Guid>, :::no-loc(Identity):::Role>()
+    services.AddIdentity<IdentityUser<Guid>, IdentityRole>()
             .AddEntityFrameworkStores<ApplicationDbContext, Guid>()
             .AddDefaultTokenProviders();
     ```
 
     ::: moniker-end
 
-4. <span data-ttu-id="b90c2-208">如果 `ApplicationUser` 正在使用自訂類別，請更新要繼承自的類別 `:::no-loc(Identity):::User` 。</span><span class="sxs-lookup"><span data-stu-id="b90c2-208">If a custom `ApplicationUser` class is being used, update the class to inherit from `:::no-loc(Identity):::User`.</span></span> <span data-ttu-id="b90c2-209">例如：</span><span class="sxs-lookup"><span data-stu-id="b90c2-209">For example:</span></span>
+4. <span data-ttu-id="b90c2-208">如果 `ApplicationUser` 正在使用自訂類別，請更新要繼承自的類別 `IdentityUser` 。</span><span class="sxs-lookup"><span data-stu-id="b90c2-208">If a custom `ApplicationUser` class is being used, update the class to inherit from `IdentityUser`.</span></span> <span data-ttu-id="b90c2-209">例如：</span><span class="sxs-lookup"><span data-stu-id="b90c2-209">For example:</span></span>
 
     ::: moniker range="<= aspnetcore-1.1"
 
@@ -446,7 +446,7 @@ services.Add:::no-loc(Identity):::<ApplicationUser>()
 
     ::: moniker range=">= aspnetcore-2.0"
 
-    [!code-csharp[](customize-identity-model/samples/2.1/:::no-loc(Razor):::PagesSampleApp/Data/ApplicationUser.cs?name=snippet_ApplicationUser&highlight=4)]
+    [!code-csharp[](customize-identity-model/samples/2.1/RazorPagesSampleApp/Data/ApplicationUser.cs?name=snippet_ApplicationUser&highlight=4)]
 
     ::: moniker-end
 
@@ -454,7 +454,7 @@ services.Add:::no-loc(Identity):::<ApplicationUser>()
 
     ```csharp
     public class ApplicationDbContext
-        : :::no-loc(Identity):::DbContext<ApplicationUser, :::no-loc(Identity):::Role<Guid>, Guid>
+        : IdentityDbContext<ApplicationUser, IdentityRole<Guid>, Guid>
     {
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
             : base(options)
@@ -463,12 +463,12 @@ services.Add:::no-loc(Identity):::<ApplicationUser>()
     }
     ```
 
-    <span data-ttu-id="b90c2-211">在中加入服務時，註冊自訂資料庫內容類別 :::no-loc(Identity)::: `Startup.ConfigureServices` ：</span><span class="sxs-lookup"><span data-stu-id="b90c2-211">Register the custom database context class when adding the :::no-loc(Identity)::: service in `Startup.ConfigureServices`:</span></span>
+    <span data-ttu-id="b90c2-211">在中加入服務時，註冊自訂資料庫內容類別 Identity `Startup.ConfigureServices` ：</span><span class="sxs-lookup"><span data-stu-id="b90c2-211">Register the custom database context class when adding the Identity service in `Startup.ConfigureServices`:</span></span>
 
     ::: moniker range=">= aspnetcore-2.1"
 
     ```csharp
-    services.Add:::no-loc(Identity):::<ApplicationUser>()
+    services.AddIdentity<ApplicationUser>()
             .AddEntityFrameworkStores<ApplicationDbContext>()
             .AddDefaultUI()
             .AddDefaultTokenProviders();
@@ -476,14 +476,14 @@ services.Add:::no-loc(Identity):::<ApplicationUser>()
 
     <span data-ttu-id="b90c2-212">主要索引鍵的資料類型是藉由分析 [DbCoNtext](/dotnet/api/microsoft.entityframeworkcore.dbcontext) 物件來推斷。</span><span class="sxs-lookup"><span data-stu-id="b90c2-212">The primary key's data type is inferred by analyzing the [DbContext](/dotnet/api/microsoft.entityframeworkcore.dbcontext) object.</span></span>
 
-    <span data-ttu-id="b90c2-213">在 ASP.NET Core 2.1 或更新版本中， :::no-loc(Identity)::: 是以 :::no-loc(Razor)::: 類別庫的形式提供。</span><span class="sxs-lookup"><span data-stu-id="b90c2-213">In ASP.NET Core 2.1 or later, :::no-loc(Identity)::: is provided as a :::no-loc(Razor)::: Class Library.</span></span> <span data-ttu-id="b90c2-214">如需詳細資訊，請參閱<xref:security/authentication/scaffold-identity>。</span><span class="sxs-lookup"><span data-stu-id="b90c2-214">For more information, see <xref:security/authentication/scaffold-identity>.</span></span> <span data-ttu-id="b90c2-215">因此，上述程式碼需要呼叫 <xref:Microsoft.AspNetCore.:::no-loc(Identity):::.:::no-loc(Identity):::BuilderUIExtensions.AddDefaultUI*> 。</span><span class="sxs-lookup"><span data-stu-id="b90c2-215">Consequently, the preceding code requires a call to <xref:Microsoft.AspNetCore.:::no-loc(Identity):::.:::no-loc(Identity):::BuilderUIExtensions.AddDefaultUI*>.</span></span> <span data-ttu-id="b90c2-216">如果 :::no-loc(Identity)::: scaffolder 是用來將檔案新增 :::no-loc(Identity)::: 至專案，請移除的呼叫 `AddDefaultUI` 。</span><span class="sxs-lookup"><span data-stu-id="b90c2-216">If the :::no-loc(Identity)::: scaffolder was used to add :::no-loc(Identity)::: files to the project, remove the call to `AddDefaultUI`.</span></span>
+    <span data-ttu-id="b90c2-213">在 ASP.NET Core 2.1 或更新版本中， Identity 是以 Razor 類別庫的形式提供。</span><span class="sxs-lookup"><span data-stu-id="b90c2-213">In ASP.NET Core 2.1 or later, Identity is provided as a Razor Class Library.</span></span> <span data-ttu-id="b90c2-214">如需詳細資訊，請參閱<xref:security/authentication/scaffold-identity>。</span><span class="sxs-lookup"><span data-stu-id="b90c2-214">For more information, see <xref:security/authentication/scaffold-identity>.</span></span> <span data-ttu-id="b90c2-215">因此，上述程式碼需要呼叫 <xref:Microsoft.AspNetCore.Identity.IdentityBuilderUIExtensions.AddDefaultUI*> 。</span><span class="sxs-lookup"><span data-stu-id="b90c2-215">Consequently, the preceding code requires a call to <xref:Microsoft.AspNetCore.Identity.IdentityBuilderUIExtensions.AddDefaultUI*>.</span></span> <span data-ttu-id="b90c2-216">如果 Identity scaffolder 是用來將檔案新增 Identity 至專案，請移除的呼叫 `AddDefaultUI` 。</span><span class="sxs-lookup"><span data-stu-id="b90c2-216">If the Identity scaffolder was used to add Identity files to the project, remove the call to `AddDefaultUI`.</span></span>
 
     ::: moniker-end
 
     ::: moniker range="= aspnetcore-2.0"
 
     ```csharp
-    services.Add:::no-loc(Identity):::<ApplicationUser, :::no-loc(Identity):::Role>()
+    services.AddIdentity<ApplicationUser, IdentityRole>()
             .AddEntityFrameworkStores<ApplicationDbContext>()
             .AddDefaultTokenProviders();
     ```
@@ -495,42 +495,42 @@ services.Add:::no-loc(Identity):::<ApplicationUser>()
     ::: moniker range="<= aspnetcore-1.1"
 
     ```csharp
-    services.Add:::no-loc(Identity):::<ApplicationUser, :::no-loc(Identity):::Role>()
+    services.AddIdentity<ApplicationUser, IdentityRole>()
             .AddEntityFrameworkStores<ApplicationDbContext, Guid>()
             .AddDefaultTokenProviders();
     ```
 
-    <span data-ttu-id="b90c2-218"><xref:Microsoft.Extensions.DependencyInjection.:::no-loc(Identity):::EntityFrameworkBuilderExtensions.AddEntityFrameworkStores*>方法會接受 `TKey` 表示主鍵資料類型的類型。</span><span class="sxs-lookup"><span data-stu-id="b90c2-218">The <xref:Microsoft.Extensions.DependencyInjection.:::no-loc(Identity):::EntityFrameworkBuilderExtensions.AddEntityFrameworkStores*> method accepts a `TKey` type indicating the primary key's data type.</span></span>
+    <span data-ttu-id="b90c2-218"><xref:Microsoft.Extensions.DependencyInjection.IdentityEntityFrameworkBuilderExtensions.AddEntityFrameworkStores*>方法會接受 `TKey` 表示主鍵資料類型的類型。</span><span class="sxs-lookup"><span data-stu-id="b90c2-218">The <xref:Microsoft.Extensions.DependencyInjection.IdentityEntityFrameworkBuilderExtensions.AddEntityFrameworkStores*> method accepts a `TKey` type indicating the primary key's data type.</span></span>
 
     ::: moniker-end
 
-5. <span data-ttu-id="b90c2-219">如果 `ApplicationRole` 正在使用自訂類別，請更新要繼承自的類別 `:::no-loc(Identity):::Role<TKey>` 。</span><span class="sxs-lookup"><span data-stu-id="b90c2-219">If a custom `ApplicationRole` class is being used, update the class to inherit from `:::no-loc(Identity):::Role<TKey>`.</span></span> <span data-ttu-id="b90c2-220">例如：</span><span class="sxs-lookup"><span data-stu-id="b90c2-220">For example:</span></span>
+5. <span data-ttu-id="b90c2-219">如果 `ApplicationRole` 正在使用自訂類別，請更新要繼承自的類別 `IdentityRole<TKey>` 。</span><span class="sxs-lookup"><span data-stu-id="b90c2-219">If a custom `ApplicationRole` class is being used, update the class to inherit from `IdentityRole<TKey>`.</span></span> <span data-ttu-id="b90c2-220">例如：</span><span class="sxs-lookup"><span data-stu-id="b90c2-220">For example:</span></span>
 
-    [!code-csharp[](customize-identity-model/samples/2.1/:::no-loc(Razor):::PagesSampleApp/Data/ApplicationRole.cs?name=snippet_ApplicationRole&highlight=4)]
+    [!code-csharp[](customize-identity-model/samples/2.1/RazorPagesSampleApp/Data/ApplicationRole.cs?name=snippet_ApplicationRole&highlight=4)]
 
     <span data-ttu-id="b90c2-221">更新 `ApplicationDbContext` 以參考自訂 `ApplicationRole` 類別。</span><span class="sxs-lookup"><span data-stu-id="b90c2-221">Update `ApplicationDbContext` to reference the custom `ApplicationRole` class.</span></span> <span data-ttu-id="b90c2-222">例如，下列類別會參考自訂 `ApplicationUser` 和自訂 `ApplicationRole` ：</span><span class="sxs-lookup"><span data-stu-id="b90c2-222">For example, the following class references a custom `ApplicationUser` and a custom `ApplicationRole`:</span></span>
 
     ::: moniker range=">= aspnetcore-2.1"
 
-    [!code-csharp[](customize-identity-model/samples/2.1/:::no-loc(Razor):::PagesSampleApp/Data/ApplicationDbContext.cs?name=snippet_ApplicationDbContext&highlight=5-6)]
+    [!code-csharp[](customize-identity-model/samples/2.1/RazorPagesSampleApp/Data/ApplicationDbContext.cs?name=snippet_ApplicationDbContext&highlight=5-6)]
 
-    <span data-ttu-id="b90c2-223">在中加入服務時，註冊自訂資料庫內容類別 :::no-loc(Identity)::: `Startup.ConfigureServices` ：</span><span class="sxs-lookup"><span data-stu-id="b90c2-223">Register the custom database context class when adding the :::no-loc(Identity)::: service in `Startup.ConfigureServices`:</span></span>
+    <span data-ttu-id="b90c2-223">在中加入服務時，註冊自訂資料庫內容類別 Identity `Startup.ConfigureServices` ：</span><span class="sxs-lookup"><span data-stu-id="b90c2-223">Register the custom database context class when adding the Identity service in `Startup.ConfigureServices`:</span></span>
 
-    [!code-csharp[](customize-identity-model/samples/2.1/:::no-loc(Razor):::PagesSampleApp/Startup.cs?name=snippet_ConfigureServices&highlight=13-16)]
+    [!code-csharp[](customize-identity-model/samples/2.1/RazorPagesSampleApp/Startup.cs?name=snippet_ConfigureServices&highlight=13-16)]
 
     <span data-ttu-id="b90c2-224">主要索引鍵的資料類型是藉由分析 [DbCoNtext](/dotnet/api/microsoft.entityframeworkcore.dbcontext) 物件來推斷。</span><span class="sxs-lookup"><span data-stu-id="b90c2-224">The primary key's data type is inferred by analyzing the [DbContext](/dotnet/api/microsoft.entityframeworkcore.dbcontext) object.</span></span>
 
-    <span data-ttu-id="b90c2-225">在 ASP.NET Core 2.1 或更新版本中， :::no-loc(Identity)::: 是以 :::no-loc(Razor)::: 類別庫的形式提供。</span><span class="sxs-lookup"><span data-stu-id="b90c2-225">In ASP.NET Core 2.1 or later, :::no-loc(Identity)::: is provided as a :::no-loc(Razor)::: Class Library.</span></span> <span data-ttu-id="b90c2-226">如需詳細資訊，請參閱<xref:security/authentication/scaffold-identity>。</span><span class="sxs-lookup"><span data-stu-id="b90c2-226">For more information, see <xref:security/authentication/scaffold-identity>.</span></span> <span data-ttu-id="b90c2-227">因此，上述程式碼需要呼叫 <xref:Microsoft.AspNetCore.:::no-loc(Identity):::.:::no-loc(Identity):::BuilderUIExtensions.AddDefaultUI*> 。</span><span class="sxs-lookup"><span data-stu-id="b90c2-227">Consequently, the preceding code requires a call to <xref:Microsoft.AspNetCore.:::no-loc(Identity):::.:::no-loc(Identity):::BuilderUIExtensions.AddDefaultUI*>.</span></span> <span data-ttu-id="b90c2-228">如果 :::no-loc(Identity)::: scaffolder 是用來將檔案新增 :::no-loc(Identity)::: 至專案，請移除的呼叫 `AddDefaultUI` 。</span><span class="sxs-lookup"><span data-stu-id="b90c2-228">If the :::no-loc(Identity)::: scaffolder was used to add :::no-loc(Identity)::: files to the project, remove the call to `AddDefaultUI`.</span></span>
+    <span data-ttu-id="b90c2-225">在 ASP.NET Core 2.1 或更新版本中， Identity 是以 Razor 類別庫的形式提供。</span><span class="sxs-lookup"><span data-stu-id="b90c2-225">In ASP.NET Core 2.1 or later, Identity is provided as a Razor Class Library.</span></span> <span data-ttu-id="b90c2-226">如需詳細資訊，請參閱<xref:security/authentication/scaffold-identity>。</span><span class="sxs-lookup"><span data-stu-id="b90c2-226">For more information, see <xref:security/authentication/scaffold-identity>.</span></span> <span data-ttu-id="b90c2-227">因此，上述程式碼需要呼叫 <xref:Microsoft.AspNetCore.Identity.IdentityBuilderUIExtensions.AddDefaultUI*> 。</span><span class="sxs-lookup"><span data-stu-id="b90c2-227">Consequently, the preceding code requires a call to <xref:Microsoft.AspNetCore.Identity.IdentityBuilderUIExtensions.AddDefaultUI*>.</span></span> <span data-ttu-id="b90c2-228">如果 Identity scaffolder 是用來將檔案新增 Identity 至專案，請移除的呼叫 `AddDefaultUI` 。</span><span class="sxs-lookup"><span data-stu-id="b90c2-228">If the Identity scaffolder was used to add Identity files to the project, remove the call to `AddDefaultUI`.</span></span>
 
     ::: moniker-end
 
     ::: moniker range="= aspnetcore-2.0"
 
-    [!code-csharp[](customize-identity-model/samples/2.0/:::no-loc(Razor):::PagesSampleApp/Data/ApplicationDbContext.cs?name=snippet_ApplicationDbContext&highlight=5-6)]
+    [!code-csharp[](customize-identity-model/samples/2.0/RazorPagesSampleApp/Data/ApplicationDbContext.cs?name=snippet_ApplicationDbContext&highlight=5-6)]
 
-    <span data-ttu-id="b90c2-229">在中加入服務時，註冊自訂資料庫內容類別 :::no-loc(Identity)::: `Startup.ConfigureServices` ：</span><span class="sxs-lookup"><span data-stu-id="b90c2-229">Register the custom database context class when adding the :::no-loc(Identity)::: service in `Startup.ConfigureServices`:</span></span>
+    <span data-ttu-id="b90c2-229">在中加入服務時，註冊自訂資料庫內容類別 Identity `Startup.ConfigureServices` ：</span><span class="sxs-lookup"><span data-stu-id="b90c2-229">Register the custom database context class when adding the Identity service in `Startup.ConfigureServices`:</span></span>
 
-    [!code-csharp[](customize-identity-model/samples/2.0/:::no-loc(Razor):::PagesSampleApp/Startup.cs?name=snippet_ConfigureServices&highlight=7-9)]
+    [!code-csharp[](customize-identity-model/samples/2.0/RazorPagesSampleApp/Startup.cs?name=snippet_ConfigureServices&highlight=7-9)]
 
     <span data-ttu-id="b90c2-230">主要索引鍵的資料類型是藉由分析 [DbCoNtext](/dotnet/api/microsoft.entityframeworkcore.dbcontext) 物件來推斷。</span><span class="sxs-lookup"><span data-stu-id="b90c2-230">The primary key's data type is inferred by analyzing the [DbContext](/dotnet/api/microsoft.entityframeworkcore.dbcontext) object.</span></span>
 
@@ -540,11 +540,11 @@ services.Add:::no-loc(Identity):::<ApplicationUser>()
 
     [!code-csharp[](customize-identity-model/samples/1.1/MvcSampleApp/Data/ApplicationDbContext.cs?name=snippet_ApplicationDbContext&highlight=5-6)]
 
-    <span data-ttu-id="b90c2-231">在中加入服務時，註冊自訂資料庫內容類別 :::no-loc(Identity)::: `Startup.ConfigureServices` ：</span><span class="sxs-lookup"><span data-stu-id="b90c2-231">Register the custom database context class when adding the :::no-loc(Identity)::: service in `Startup.ConfigureServices`:</span></span>
+    <span data-ttu-id="b90c2-231">在中加入服務時，註冊自訂資料庫內容類別 Identity `Startup.ConfigureServices` ：</span><span class="sxs-lookup"><span data-stu-id="b90c2-231">Register the custom database context class when adding the Identity service in `Startup.ConfigureServices`:</span></span>
 
     [!code-csharp[](customize-identity-model/samples/1.1/MvcSampleApp/Startup.cs?name=snippet_ConfigureServices&highlight=7-9)]
 
-    <span data-ttu-id="b90c2-232"><xref:Microsoft.Extensions.DependencyInjection.:::no-loc(Identity):::EntityFrameworkBuilderExtensions.AddEntityFrameworkStores*>方法會接受 `TKey` 表示主鍵資料類型的類型。</span><span class="sxs-lookup"><span data-stu-id="b90c2-232">The <xref:Microsoft.Extensions.DependencyInjection.:::no-loc(Identity):::EntityFrameworkBuilderExtensions.AddEntityFrameworkStores*> method accepts a `TKey` type indicating the primary key's data type.</span></span>
+    <span data-ttu-id="b90c2-232"><xref:Microsoft.Extensions.DependencyInjection.IdentityEntityFrameworkBuilderExtensions.AddEntityFrameworkStores*>方法會接受 `TKey` 表示主鍵資料類型的類型。</span><span class="sxs-lookup"><span data-stu-id="b90c2-232">The <xref:Microsoft.Extensions.DependencyInjection.IdentityEntityFrameworkBuilderExtensions.AddEntityFrameworkStores*> method accepts a `TKey` type indicating the primary key's data type.</span></span>
 
     ::: moniker-end
 
@@ -568,18 +568,18 @@ builder.Entity<TUser>(b =>
 <span data-ttu-id="b90c2-240">將導覽屬性加入至 `ApplicationUser` ，以允許 `UserClaims` 使用者參考相關聯的：</span><span class="sxs-lookup"><span data-stu-id="b90c2-240">Add a navigation property to `ApplicationUser` that allows associated `UserClaims` to be referenced from the user:</span></span>
 
 ```csharp
-public class ApplicationUser : :::no-loc(Identity):::User
+public class ApplicationUser : IdentityUser
 {
-    public virtual ICollection<:::no-loc(Identity):::UserClaim<string>> Claims { get; set; }
+    public virtual ICollection<IdentityUserClaim<string>> Claims { get; set; }
 }
 ```
 
-<span data-ttu-id="b90c2-241">的 `TKey` `:::no-loc(Identity):::UserClaim<TKey>` 是為使用者的 PK 指定的型別。</span><span class="sxs-lookup"><span data-stu-id="b90c2-241">The `TKey` for `:::no-loc(Identity):::UserClaim<TKey>` is the type specified for the PK of users.</span></span> <span data-ttu-id="b90c2-242">在此情況下， `TKey` 是 `string` 因為正在使用預設值。</span><span class="sxs-lookup"><span data-stu-id="b90c2-242">In this case, `TKey` is `string` because the defaults are being used.</span></span> <span data-ttu-id="b90c2-243">它 **不** 是實體類型的 PK 類型 `UserClaim` 。</span><span class="sxs-lookup"><span data-stu-id="b90c2-243">It's **not** the PK type for the `UserClaim` entity type.</span></span>
+<span data-ttu-id="b90c2-241">的 `TKey` `IdentityUserClaim<TKey>` 是為使用者的 PK 指定的型別。</span><span class="sxs-lookup"><span data-stu-id="b90c2-241">The `TKey` for `IdentityUserClaim<TKey>` is the type specified for the PK of users.</span></span> <span data-ttu-id="b90c2-242">在此情況下， `TKey` 是 `string` 因為正在使用預設值。</span><span class="sxs-lookup"><span data-stu-id="b90c2-242">In this case, `TKey` is `string` because the defaults are being used.</span></span> <span data-ttu-id="b90c2-243">它 **不** 是實體類型的 PK 類型 `UserClaim` 。</span><span class="sxs-lookup"><span data-stu-id="b90c2-243">It's **not** the PK type for the `UserClaim` entity type.</span></span>
 
 <span data-ttu-id="b90c2-244">現在導覽屬性存在，必須在中設定 `OnModelCreating` ：</span><span class="sxs-lookup"><span data-stu-id="b90c2-244">Now that the navigation property exists, it must be configured in `OnModelCreating`:</span></span>
 
 ```csharp
-public class ApplicationDbContext : :::no-loc(Identity):::DbContext<ApplicationUser>
+public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
 {
     public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
         : base(options)
@@ -611,17 +611,17 @@ public class ApplicationDbContext : :::no-loc(Identity):::DbContext<ApplicationU
 <span data-ttu-id="b90c2-251">使用上述的章節作為指引，下列範例會針對使用者上的所有關聯性設定單向導覽屬性：</span><span class="sxs-lookup"><span data-stu-id="b90c2-251">Using the section above as guidance, the following example configures unidirectional navigation properties for all relationships on User:</span></span>
 
 ```csharp
-public class ApplicationUser : :::no-loc(Identity):::User
+public class ApplicationUser : IdentityUser
 {
-    public virtual ICollection<:::no-loc(Identity):::UserClaim<string>> Claims { get; set; }
-    public virtual ICollection<:::no-loc(Identity):::UserLogin<string>> Logins { get; set; }
-    public virtual ICollection<:::no-loc(Identity):::UserToken<string>> Tokens { get; set; }
-    public virtual ICollection<:::no-loc(Identity):::UserRole<string>> UserRoles { get; set; }
+    public virtual ICollection<IdentityUserClaim<string>> Claims { get; set; }
+    public virtual ICollection<IdentityUserLogin<string>> Logins { get; set; }
+    public virtual ICollection<IdentityUserToken<string>> Tokens { get; set; }
+    public virtual ICollection<IdentityUserRole<string>> UserRoles { get; set; }
 }
 ```
 
 ```csharp
-public class ApplicationDbContext : :::no-loc(Identity):::DbContext<ApplicationUser>
+public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
 {
     public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
         : base(options)
@@ -667,20 +667,20 @@ public class ApplicationDbContext : :::no-loc(Identity):::DbContext<ApplicationU
 <span data-ttu-id="b90c2-253">使用上述的章節作為指引，下列範例會針對使用者和角色上的所有關聯性設定導覽屬性：</span><span class="sxs-lookup"><span data-stu-id="b90c2-253">Using the section above as guidance, the following example configures navigation properties for all relationships on User and Role:</span></span>
 
 ```csharp
-public class ApplicationUser : :::no-loc(Identity):::User
+public class ApplicationUser : IdentityUser
 {
-    public virtual ICollection<:::no-loc(Identity):::UserClaim<string>> Claims { get; set; }
-    public virtual ICollection<:::no-loc(Identity):::UserLogin<string>> Logins { get; set; }
-    public virtual ICollection<:::no-loc(Identity):::UserToken<string>> Tokens { get; set; }
+    public virtual ICollection<IdentityUserClaim<string>> Claims { get; set; }
+    public virtual ICollection<IdentityUserLogin<string>> Logins { get; set; }
+    public virtual ICollection<IdentityUserToken<string>> Tokens { get; set; }
     public virtual ICollection<ApplicationUserRole> UserRoles { get; set; }
 }
 
-public class ApplicationRole : :::no-loc(Identity):::Role
+public class ApplicationRole : IdentityRole
 {
     public virtual ICollection<ApplicationUserRole> UserRoles { get; set; }
 }
 
-public class ApplicationUserRole : :::no-loc(Identity):::UserRole<string>
+public class ApplicationUserRole : IdentityUserRole<string>
 {
     public virtual ApplicationUser User { get; set; }
     public virtual ApplicationRole Role { get; set; }
@@ -689,10 +689,10 @@ public class ApplicationUserRole : :::no-loc(Identity):::UserRole<string>
 
 ```csharp
 public class ApplicationDbContext
-    : :::no-loc(Identity):::DbContext<
+    : IdentityDbContext<
         ApplicationUser, ApplicationRole, string,
-        :::no-loc(Identity):::UserClaim<string>, ApplicationUserRole, :::no-loc(Identity):::UserLogin<string>,
-        :::no-loc(Identity):::RoleClaim<string>, :::no-loc(Identity):::UserToken<string>>
+        IdentityUserClaim<string>, ApplicationUserRole, IdentityUserLogin<string>,
+        IdentityRoleClaim<string>, IdentityUserToken<string>>
 {
     public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
         : base(options)
@@ -746,7 +746,7 @@ public class ApplicationDbContext
 <span data-ttu-id="b90c2-254">注意：</span><span class="sxs-lookup"><span data-stu-id="b90c2-254">Notes:</span></span>
 
 * <span data-ttu-id="b90c2-255">此範例也包含 `UserRole` 聯結實體，這是將多對多關聯性從使用者導覽至角色所需的實體。</span><span class="sxs-lookup"><span data-stu-id="b90c2-255">This example also includes the `UserRole` join entity, which is needed to navigate the many-to-many relationship from Users to Roles.</span></span>
-* <span data-ttu-id="b90c2-256">請記得變更導覽屬性的類型，以反映 `Application{...}` 目前正在使用的類型，而不是 `:::no-loc(Identity):::{...}` 類型。</span><span class="sxs-lookup"><span data-stu-id="b90c2-256">Remember to change the types of the navigation properties to reflect that `Application{...}` types are now being used instead of `:::no-loc(Identity):::{...}` types.</span></span>
+* <span data-ttu-id="b90c2-256">請記得變更導覽屬性的類型，以反映 `Application{...}` 目前正在使用的類型，而不是 `Identity{...}` 類型。</span><span class="sxs-lookup"><span data-stu-id="b90c2-256">Remember to change the types of the navigation properties to reflect that `Application{...}` types are now being used instead of `Identity{...}` types.</span></span>
 * <span data-ttu-id="b90c2-257">請記得 `Application{...}` 在泛型定義中使用 `ApplicationContext` 。</span><span class="sxs-lookup"><span data-stu-id="b90c2-257">Remember to use the `Application{...}` in the generic `ApplicationContext` definition.</span></span>
 
 ### <a name="add-all-navigation-properties"></a><span data-ttu-id="b90c2-258">新增所有導覽屬性</span><span class="sxs-lookup"><span data-stu-id="b90c2-258">Add all navigation properties</span></span>
@@ -754,7 +754,7 @@ public class ApplicationDbContext
 <span data-ttu-id="b90c2-259">下列範例使用上述的區段做為指導方針，為所有實體類型上的所有關聯性設定導覽屬性：</span><span class="sxs-lookup"><span data-stu-id="b90c2-259">Using the section above as guidance, the following example configures navigation properties for all relationships on all entity types:</span></span>
 
 ```csharp
-public class ApplicationUser : :::no-loc(Identity):::User
+public class ApplicationUser : IdentityUser
 {
     public virtual ICollection<ApplicationUserClaim> Claims { get; set; }
     public virtual ICollection<ApplicationUserLogin> Logins { get; set; }
@@ -762,34 +762,34 @@ public class ApplicationUser : :::no-loc(Identity):::User
     public virtual ICollection<ApplicationUserRole> UserRoles { get; set; }
 }
 
-public class ApplicationRole : :::no-loc(Identity):::Role
+public class ApplicationRole : IdentityRole
 {
     public virtual ICollection<ApplicationUserRole> UserRoles { get; set; }
     public virtual ICollection<ApplicationRoleClaim> RoleClaims { get; set; }
 }
 
-public class ApplicationUserRole : :::no-loc(Identity):::UserRole<string>
+public class ApplicationUserRole : IdentityUserRole<string>
 {
     public virtual ApplicationUser User { get; set; }
     public virtual ApplicationRole Role { get; set; }
 }
 
-public class ApplicationUserClaim : :::no-loc(Identity):::UserClaim<string>
+public class ApplicationUserClaim : IdentityUserClaim<string>
 {
     public virtual ApplicationUser User { get; set; }
 }
 
-public class ApplicationUserLogin : :::no-loc(Identity):::UserLogin<string>
+public class ApplicationUserLogin : IdentityUserLogin<string>
 {
     public virtual ApplicationUser User { get; set; }
 }
 
-public class ApplicationRoleClaim : :::no-loc(Identity):::RoleClaim<string>
+public class ApplicationRoleClaim : IdentityRoleClaim<string>
 {
     public virtual ApplicationRole Role { get; set; }
 }
 
-public class ApplicationUserToken : :::no-loc(Identity):::UserToken<string>
+public class ApplicationUserToken : IdentityUserToken<string>
 {
     public virtual ApplicationUser User { get; set; }
 }
@@ -797,7 +797,7 @@ public class ApplicationUserToken : :::no-loc(Identity):::UserToken<string>
 
 ```csharp
 public class ApplicationDbContext
-    : :::no-loc(Identity):::DbContext<
+    : IdentityDbContext<
         ApplicationUser, ApplicationRole, string,
         ApplicationUserClaim, ApplicationUserRole, ApplicationUserLogin,
         ApplicationRoleClaim, ApplicationUserToken>
@@ -858,55 +858,55 @@ public class ApplicationDbContext
 
 ### <a name="use-composite-keys"></a><span data-ttu-id="b90c2-260">使用複合索引鍵</span><span class="sxs-lookup"><span data-stu-id="b90c2-260">Use composite keys</span></span>
 
-<span data-ttu-id="b90c2-261">上述各節示範了變更模型中所使用的索引鍵類型 :::no-loc(Identity)::: 。</span><span class="sxs-lookup"><span data-stu-id="b90c2-261">The preceding sections demonstrated changing the type of key used in the :::no-loc(Identity)::: model.</span></span> <span data-ttu-id="b90c2-262">:::no-loc(Identity):::不支援或不建議將金鑰模型變更為使用複合索引鍵。</span><span class="sxs-lookup"><span data-stu-id="b90c2-262">Changing the :::no-loc(Identity)::: key model to use composite keys isn't supported or recommended.</span></span> <span data-ttu-id="b90c2-263">使用複合索引鍵包含 :::no-loc(Identity)::: 變更 :::no-loc(Identity)::: 管理員程式碼與模型互動的方式。</span><span class="sxs-lookup"><span data-stu-id="b90c2-263">Using a composite key with :::no-loc(Identity)::: involves changing how the :::no-loc(Identity)::: manager code interacts with the model.</span></span> <span data-ttu-id="b90c2-264">這項自訂已超出本檔的範圍。</span><span class="sxs-lookup"><span data-stu-id="b90c2-264">This customization is beyond the scope of this document.</span></span>
+<span data-ttu-id="b90c2-261">上述各節示範了變更模型中所使用的索引鍵類型 Identity 。</span><span class="sxs-lookup"><span data-stu-id="b90c2-261">The preceding sections demonstrated changing the type of key used in the Identity model.</span></span> <span data-ttu-id="b90c2-262">Identity不支援或不建議將金鑰模型變更為使用複合索引鍵。</span><span class="sxs-lookup"><span data-stu-id="b90c2-262">Changing the Identity key model to use composite keys isn't supported or recommended.</span></span> <span data-ttu-id="b90c2-263">使用複合索引鍵包含 Identity 變更 Identity 管理員程式碼與模型互動的方式。</span><span class="sxs-lookup"><span data-stu-id="b90c2-263">Using a composite key with Identity involves changing how the Identity manager code interacts with the model.</span></span> <span data-ttu-id="b90c2-264">這項自訂已超出本檔的範圍。</span><span class="sxs-lookup"><span data-stu-id="b90c2-264">This customization is beyond the scope of this document.</span></span>
 
 ### <a name="change-tablecolumn-names-and-facets"></a><span data-ttu-id="b90c2-265">變更資料表/資料行名稱和 facet</span><span class="sxs-lookup"><span data-stu-id="b90c2-265">Change table/column names and facets</span></span>
 
-<span data-ttu-id="b90c2-266">若要變更資料表和資料行的名稱，請呼叫 `base.OnModelCreating` 。</span><span class="sxs-lookup"><span data-stu-id="b90c2-266">To change the names of tables and columns, call `base.OnModelCreating`.</span></span> <span data-ttu-id="b90c2-267">然後，新增設定以覆寫任何預設值。</span><span class="sxs-lookup"><span data-stu-id="b90c2-267">Then, add configuration to override any of the defaults.</span></span> <span data-ttu-id="b90c2-268">例如，若要變更所有資料表的名稱 :::no-loc(Identity)::: ：</span><span class="sxs-lookup"><span data-stu-id="b90c2-268">For example, to change the name of all the :::no-loc(Identity)::: tables:</span></span>
+<span data-ttu-id="b90c2-266">若要變更資料表和資料行的名稱，請呼叫 `base.OnModelCreating` 。</span><span class="sxs-lookup"><span data-stu-id="b90c2-266">To change the names of tables and columns, call `base.OnModelCreating`.</span></span> <span data-ttu-id="b90c2-267">然後，新增設定以覆寫任何預設值。</span><span class="sxs-lookup"><span data-stu-id="b90c2-267">Then, add configuration to override any of the defaults.</span></span> <span data-ttu-id="b90c2-268">例如，若要變更所有資料表的名稱 Identity ：</span><span class="sxs-lookup"><span data-stu-id="b90c2-268">For example, to change the name of all the Identity tables:</span></span>
 
 ```csharp
 protected override void OnModelCreating(ModelBuilder modelBuilder)
 {
     base.OnModelCreating(modelBuilder);
 
-    modelBuilder.Entity<:::no-loc(Identity):::User>(b =>
+    modelBuilder.Entity<IdentityUser>(b =>
     {
         b.ToTable("MyUsers");
     });
 
-    modelBuilder.Entity<:::no-loc(Identity):::UserClaim<string>>(b =>
+    modelBuilder.Entity<IdentityUserClaim<string>>(b =>
     {
         b.ToTable("MyUserClaims");
     });
 
-    modelBuilder.Entity<:::no-loc(Identity):::UserLogin<string>>(b =>
+    modelBuilder.Entity<IdentityUserLogin<string>>(b =>
     {
         b.ToTable("MyUserLogins");
     });
 
-    modelBuilder.Entity<:::no-loc(Identity):::UserToken<string>>(b =>
+    modelBuilder.Entity<IdentityUserToken<string>>(b =>
     {
         b.ToTable("MyUserTokens");
     });
 
-    modelBuilder.Entity<:::no-loc(Identity):::Role>(b =>
+    modelBuilder.Entity<IdentityRole>(b =>
     {
         b.ToTable("MyRoles");
     });
 
-    modelBuilder.Entity<:::no-loc(Identity):::RoleClaim<string>>(b =>
+    modelBuilder.Entity<IdentityRoleClaim<string>>(b =>
     {
         b.ToTable("MyRoleClaims");
     });
 
-    modelBuilder.Entity<:::no-loc(Identity):::UserRole<string>>(b =>
+    modelBuilder.Entity<IdentityUserRole<string>>(b =>
     {
         b.ToTable("MyUserRoles");
     });
 }
 ```
 
-<span data-ttu-id="b90c2-269">這些範例會使用預設 :::no-loc(Identity)::: 類型。</span><span class="sxs-lookup"><span data-stu-id="b90c2-269">These examples use the default :::no-loc(Identity)::: types.</span></span> <span data-ttu-id="b90c2-270">如果使用應用程式類型（例如 `ApplicationUser` ），請設定該類型，而不是預設類型。</span><span class="sxs-lookup"><span data-stu-id="b90c2-270">If using an app type such as `ApplicationUser`, configure that type instead of the default type.</span></span>
+<span data-ttu-id="b90c2-269">這些範例會使用預設 Identity 類型。</span><span class="sxs-lookup"><span data-stu-id="b90c2-269">These examples use the default Identity types.</span></span> <span data-ttu-id="b90c2-270">如果使用應用程式類型（例如 `ApplicationUser` ），請設定該類型，而不是預設類型。</span><span class="sxs-lookup"><span data-stu-id="b90c2-270">If using an app type such as `ApplicationUser`, configure that type instead of the default type.</span></span>
 
 <span data-ttu-id="b90c2-271">下列範例會變更一些資料行名稱：</span><span class="sxs-lookup"><span data-stu-id="b90c2-271">The following example changes some column names:</span></span>
 
@@ -915,12 +915,12 @@ protected override void OnModelCreating(ModelBuilder modelBuilder)
 {
     base.OnModelCreating(modelBuilder);
 
-    modelBuilder.Entity<:::no-loc(Identity):::User>(b =>
+    modelBuilder.Entity<IdentityUser>(b =>
     {
         b.Property(e => e.Email).HasColumnName("EMail");
     });
 
-    modelBuilder.Entity<:::no-loc(Identity):::UserClaim<string>>(b =>
+    modelBuilder.Entity<IdentityUserClaim<string>>(b =>
     {
         b.Property(e => e.ClaimType).HasColumnName("CType");
         b.Property(e => e.ClaimValue).HasColumnName("CValue");
@@ -935,7 +935,7 @@ protected override void OnModelCreating(ModelBuilder modelBuilder)
 {
     base.OnModelCreating(modelBuilder);
 
-    modelBuilder.Entity<:::no-loc(Identity):::User>(b =>
+    modelBuilder.Entity<IdentityUser>(b =>
     {
         b.Property(u => u.UserName).HasMaxLength(128);
         b.Property(u => u.NormalizedUserName).HasMaxLength(128);
@@ -943,7 +943,7 @@ protected override void OnModelCreating(ModelBuilder modelBuilder)
         b.Property(u => u.NormalizedEmail).HasMaxLength(128);
     });
 
-    modelBuilder.Entity<:::no-loc(Identity):::UserToken<string>>(b =>
+    modelBuilder.Entity<IdentityUserToken<string>>(b =>
     {
         b.Property(t => t.LoginProvider).HasMaxLength(128);
         b.Property(t => t.Name).HasMaxLength(128);
@@ -968,7 +968,7 @@ protected override void OnModelCreating(ModelBuilder modelBuilder)
 
 ### <a name="lazy-loading"></a><span data-ttu-id="b90c2-279">消極式載入</span><span class="sxs-lookup"><span data-stu-id="b90c2-279">Lazy loading</span></span>
 
-<span data-ttu-id="b90c2-280">在本節中，會加入模型中延遲載入 proxy 的支援 :::no-loc(Identity)::: 。</span><span class="sxs-lookup"><span data-stu-id="b90c2-280">In this section, support for lazy-loading proxies in the :::no-loc(Identity)::: model is added.</span></span> <span data-ttu-id="b90c2-281">消極式載入會很有用，因為它可讓您在不先確保載入屬性的情況下使用導覽屬性。</span><span class="sxs-lookup"><span data-stu-id="b90c2-281">Lazy-loading is useful since it allows navigation properties to be used without first ensuring they're loaded.</span></span>
+<span data-ttu-id="b90c2-280">在本節中，會加入模型中延遲載入 proxy 的支援 Identity 。</span><span class="sxs-lookup"><span data-stu-id="b90c2-280">In this section, support for lazy-loading proxies in the Identity model is added.</span></span> <span data-ttu-id="b90c2-281">消極式載入會很有用，因為它可讓您在不先確保載入屬性的情況下使用導覽屬性。</span><span class="sxs-lookup"><span data-stu-id="b90c2-281">Lazy-loading is useful since it allows navigation properties to be used without first ensuring they're loaded.</span></span>
 
 <span data-ttu-id="b90c2-282">實體類型可以用數種方式進行消極式載入，如 [EF Core 檔](/ef/core/querying/related-data#lazy-loading)中所述。</span><span class="sxs-lookup"><span data-stu-id="b90c2-282">Entity types can be made suitable for lazy-loading in several ways, as described in the [EF Core documentation](/ef/core/querying/related-data#lazy-loading).</span></span> <span data-ttu-id="b90c2-283">為了簡單起見，請使用消極式載入 proxy，此 proxy 需要：</span><span class="sxs-lookup"><span data-stu-id="b90c2-283">For simplicity, use lazy-loading proxies, which requires:</span></span>
 
@@ -983,7 +983,7 @@ services
     .AddDbContext<ApplicationDbContext>(
         b => b.UseSqlServer(connectionString)
               .UseLazyLoadingProxies())
-    .AddDefault:::no-loc(Identity):::<ApplicationUser>()
+    .AddDefaultIdentity<ApplicationUser>()
     .AddEntityFrameworkStores<ApplicationDbContext>();
 ```
 

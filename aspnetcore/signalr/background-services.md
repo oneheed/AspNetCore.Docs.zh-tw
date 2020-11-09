@@ -1,23 +1,23 @@
 ---
-title: :::no-loc(SignalR):::背景服務中的主機 ASP.NET Core
+title: SignalR背景服務中的主機 ASP.NET Core
 author: bradygaster
-description: '瞭解如何 :::no-loc(SignalR)::: 從 .Net Core BackgroundService 類別將訊息傳送至用戶端。'
+description: '瞭解如何 SignalR 從 .Net Core BackgroundService 類別將訊息傳送至用戶端。'
 monikerRange: '>= aspnetcore-2.2'
 ms.author: bradyg
 ms.custom: mvc
 ms.date: 11/12/2019
 no-loc:
-- ':::no-loc(appsettings.json):::'
-- ':::no-loc(ASP.NET Core Identity):::'
-- ':::no-loc(cookie):::'
-- ':::no-loc(Cookie):::'
-- ':::no-loc(Blazor):::'
-- ':::no-loc(Blazor Server):::'
-- ':::no-loc(Blazor WebAssembly):::'
-- ':::no-loc(Identity):::'
-- ":::no-loc(Let's Encrypt):::"
-- ':::no-loc(Razor):::'
-- ':::no-loc(SignalR):::'
+- 'appsettings.json'
+- 'ASP.NET Core Identity'
+- 'cookie'
+- 'Cookie'
+- 'Blazor'
+- 'Blazor Server'
+- 'Blazor WebAssembly'
+- 'Identity'
+- "Let's Encrypt"
+- 'Razor'
+- 'SignalR'
 uid: signalr/background-services
 ms.openlocfilehash: 810eff7ccb08ecc22ea255bf0a9fe3d22637179f
 ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
@@ -26,13 +26,13 @@ ms.contentlocale: zh-TW
 ms.lasthandoff: 10/30/2020
 ms.locfileid: "93060101"
 ---
-# <a name="host-aspnet-core-no-locsignalr-in-background-services"></a><span data-ttu-id="e1e03-103">:::no-loc(SignalR):::背景服務中的主機 ASP.NET Core</span><span class="sxs-lookup"><span data-stu-id="e1e03-103">Host ASP.NET Core :::no-loc(SignalR)::: in background services</span></span>
+# <a name="host-aspnet-core-no-locsignalr-in-background-services"></a><span data-ttu-id="e1e03-103">SignalR背景服務中的主機 ASP.NET Core</span><span class="sxs-lookup"><span data-stu-id="e1e03-103">Host ASP.NET Core SignalR in background services</span></span>
 
 <span data-ttu-id="e1e03-104">依 [Brady Gaster](https://twitter.com/bradygaster)</span><span class="sxs-lookup"><span data-stu-id="e1e03-104">By [Brady Gaster](https://twitter.com/bradygaster)</span></span>
 
 <span data-ttu-id="e1e03-105">本文提供下列指引：</span><span class="sxs-lookup"><span data-stu-id="e1e03-105">This article provides guidance for:</span></span>
 
-* <span data-ttu-id="e1e03-106">:::no-loc(SignalR):::使用以 ASP.NET Core 主控的背景工作進程來裝載中樞。</span><span class="sxs-lookup"><span data-stu-id="e1e03-106">Hosting :::no-loc(SignalR)::: Hubs using a background worker process hosted with ASP.NET Core.</span></span>
+* <span data-ttu-id="e1e03-106">SignalR使用以 ASP.NET Core 主控的背景工作進程來裝載中樞。</span><span class="sxs-lookup"><span data-stu-id="e1e03-106">Hosting SignalR Hubs using a background worker process hosted with ASP.NET Core.</span></span>
 * <span data-ttu-id="e1e03-107">從 .NET Core [BackgroundService](xref:Microsoft.Extensions.Hosting.BackgroundService)中，將訊息傳送至已連線的用戶端。</span><span class="sxs-lookup"><span data-stu-id="e1e03-107">Sending messages to connected clients from within a .NET Core [BackgroundService](xref:Microsoft.Extensions.Hosting.BackgroundService).</span></span>
 
 ::: moniker range=">= aspnetcore-3.0"
@@ -46,18 +46,18 @@ ms.locfileid: "93060101"
 
 ::: moniker-end
 
-## <a name="enable-no-locsignalr-in-startup"></a><span data-ttu-id="e1e03-110">:::no-loc(SignalR):::在啟動時啟用</span><span class="sxs-lookup"><span data-stu-id="e1e03-110">Enable :::no-loc(SignalR)::: in startup</span></span>
+## <a name="enable-no-locsignalr-in-startup"></a><span data-ttu-id="e1e03-110">SignalR在啟動時啟用</span><span class="sxs-lookup"><span data-stu-id="e1e03-110">Enable SignalR in startup</span></span>
 
 ::: moniker range=">= aspnetcore-3.0"
 
-<span data-ttu-id="e1e03-111">:::no-loc(SignalR):::在背景工作進程的環境中裝載 ASP.NET Core 中樞，與在 ASP.NET Core web 應用程式中裝載中樞相同。</span><span class="sxs-lookup"><span data-stu-id="e1e03-111">Hosting ASP.NET Core :::no-loc(SignalR)::: Hubs in the context of a background worker process is identical to hosting a Hub in an ASP.NET Core web app.</span></span> <span data-ttu-id="e1e03-112">在 `Startup.ConfigureServices` 方法中，呼叫會 `services.Add:::no-loc(SignalR):::` 將必要的服務加入至 ASP.NET Core 相依性插入 (DI) 層以支援 :::no-loc(SignalR)::: 。</span><span class="sxs-lookup"><span data-stu-id="e1e03-112">In the `Startup.ConfigureServices` method, calling `services.Add:::no-loc(SignalR):::` adds the required services to the ASP.NET Core Dependency Injection (DI) layer to support :::no-loc(SignalR):::.</span></span> <span data-ttu-id="e1e03-113">在中 `Startup.Configure` ， `MapHub` 會在回呼中呼叫方法 `UseEndpoints` ，以連接 ASP.NET Core 要求管線中的中樞端點。</span><span class="sxs-lookup"><span data-stu-id="e1e03-113">In `Startup.Configure`, the `MapHub` method is called in the `UseEndpoints` callback to connect the Hub endpoints in the ASP.NET Core request pipeline.</span></span>
+<span data-ttu-id="e1e03-111">SignalR在背景工作進程的環境中裝載 ASP.NET Core 中樞，與在 ASP.NET Core web 應用程式中裝載中樞相同。</span><span class="sxs-lookup"><span data-stu-id="e1e03-111">Hosting ASP.NET Core SignalR Hubs in the context of a background worker process is identical to hosting a Hub in an ASP.NET Core web app.</span></span> <span data-ttu-id="e1e03-112">在 `Startup.ConfigureServices` 方法中，呼叫會 `services.AddSignalR` 將必要的服務加入至 ASP.NET Core 相依性插入 (DI) 層以支援 SignalR 。</span><span class="sxs-lookup"><span data-stu-id="e1e03-112">In the `Startup.ConfigureServices` method, calling `services.AddSignalR` adds the required services to the ASP.NET Core Dependency Injection (DI) layer to support SignalR.</span></span> <span data-ttu-id="e1e03-113">在中 `Startup.Configure` ， `MapHub` 會在回呼中呼叫方法 `UseEndpoints` ，以連接 ASP.NET Core 要求管線中的中樞端點。</span><span class="sxs-lookup"><span data-stu-id="e1e03-113">In `Startup.Configure`, the `MapHub` method is called in the `UseEndpoints` callback to connect the Hub endpoints in the ASP.NET Core request pipeline.</span></span>
 
 [!code-csharp[Startup](background-service/samples/3.x/Server/Startup.cs?name=Startup)]
 
 ::: moniker-end
 ::: moniker range="<= aspnetcore-2.2"
 
-<span data-ttu-id="e1e03-114">:::no-loc(SignalR):::在背景工作進程的環境中裝載 ASP.NET Core 中樞，與在 ASP.NET Core web 應用程式中裝載中樞相同。</span><span class="sxs-lookup"><span data-stu-id="e1e03-114">Hosting ASP.NET Core :::no-loc(SignalR)::: Hubs in the context of a background worker process is identical to hosting a Hub in an ASP.NET Core web app.</span></span> <span data-ttu-id="e1e03-115">在 `Startup.ConfigureServices` 方法中，呼叫會 `services.Add:::no-loc(SignalR):::` 將必要的服務加入至 ASP.NET Core 相依性插入 (DI) 層以支援 :::no-loc(SignalR)::: 。</span><span class="sxs-lookup"><span data-stu-id="e1e03-115">In the `Startup.ConfigureServices` method, calling `services.Add:::no-loc(SignalR):::` adds the required services to the ASP.NET Core Dependency Injection (DI) layer to support :::no-loc(SignalR):::.</span></span> <span data-ttu-id="e1e03-116">在中 `Startup.Configure` ， `Use:::no-loc(SignalR):::` 會呼叫方法，以連接 ASP.NET Core 要求管線中 (s) 的中樞端點。</span><span class="sxs-lookup"><span data-stu-id="e1e03-116">In `Startup.Configure`, the `Use:::no-loc(SignalR):::` method is called to connect the Hub endpoint(s) in the ASP.NET Core request pipeline.</span></span>
+<span data-ttu-id="e1e03-114">SignalR在背景工作進程的環境中裝載 ASP.NET Core 中樞，與在 ASP.NET Core web 應用程式中裝載中樞相同。</span><span class="sxs-lookup"><span data-stu-id="e1e03-114">Hosting ASP.NET Core SignalR Hubs in the context of a background worker process is identical to hosting a Hub in an ASP.NET Core web app.</span></span> <span data-ttu-id="e1e03-115">在 `Startup.ConfigureServices` 方法中，呼叫會 `services.AddSignalR` 將必要的服務加入至 ASP.NET Core 相依性插入 (DI) 層以支援 SignalR 。</span><span class="sxs-lookup"><span data-stu-id="e1e03-115">In the `Startup.ConfigureServices` method, calling `services.AddSignalR` adds the required services to the ASP.NET Core Dependency Injection (DI) layer to support SignalR.</span></span> <span data-ttu-id="e1e03-116">在中 `Startup.Configure` ， `UseSignalR` 會呼叫方法，以連接 ASP.NET Core 要求管線中 (s) 的中樞端點。</span><span class="sxs-lookup"><span data-stu-id="e1e03-116">In `Startup.Configure`, the `UseSignalR` method is called to connect the Hub endpoint(s) in the ASP.NET Core request pipeline.</span></span>
 
 [!code-csharp[Startup](background-service/samples/2.2/Server/Startup.cs?name=Startup)]
 
@@ -65,10 +65,10 @@ ms.locfileid: "93060101"
 
 <span data-ttu-id="e1e03-117">在上述範例中，類別會實 `ClockHub` 作為 `Hub<T>` 建立強型別中樞的類別。</span><span class="sxs-lookup"><span data-stu-id="e1e03-117">In the preceding example, the `ClockHub` class implements the `Hub<T>` class to create a strongly typed Hub.</span></span> <span data-ttu-id="e1e03-118">已 `ClockHub` 在類別中設定， `Startup` 以回應端點的要求 `/hubs/clock` 。</span><span class="sxs-lookup"><span data-stu-id="e1e03-118">The `ClockHub` has been configured in the `Startup` class to respond to requests at the endpoint `/hubs/clock`.</span></span>
 
-<span data-ttu-id="e1e03-119">如需強型別中樞的詳細資訊，請參閱 [使用中 :::no-loc(SignalR)::: 的中樞進行 ASP.NET Core](xref:signalr/hubs#strongly-typed-hubs)。</span><span class="sxs-lookup"><span data-stu-id="e1e03-119">For more information on strongly typed Hubs, see [Use hubs in :::no-loc(SignalR)::: for ASP.NET Core](xref:signalr/hubs#strongly-typed-hubs).</span></span>
+<span data-ttu-id="e1e03-119">如需強型別中樞的詳細資訊，請參閱 [使用中 SignalR 的中樞進行 ASP.NET Core](xref:signalr/hubs#strongly-typed-hubs)。</span><span class="sxs-lookup"><span data-stu-id="e1e03-119">For more information on strongly typed Hubs, see [Use hubs in SignalR for ASP.NET Core](xref:signalr/hubs#strongly-typed-hubs).</span></span>
 
 > [!NOTE]
-> <span data-ttu-id="e1e03-120">此功能不限於[中樞 \<T> ](xref:Microsoft.AspNetCore.:::no-loc(SignalR):::.Hub`1)類別。</span><span class="sxs-lookup"><span data-stu-id="e1e03-120">This functionality isn't limited to the [Hub\<T>](xref:Microsoft.AspNetCore.:::no-loc(SignalR):::.Hub`1) class.</span></span> <span data-ttu-id="e1e03-121">任何繼承自 [中樞](xref:Microsoft.AspNetCore.:::no-loc(SignalR):::.Hub)的類別（例如 [DynamicHub](xref:Microsoft.AspNetCore.:::no-loc(SignalR):::.DynamicHub)）都可以運作。</span><span class="sxs-lookup"><span data-stu-id="e1e03-121">Any class that inherits from [Hub](xref:Microsoft.AspNetCore.:::no-loc(SignalR):::.Hub), such as [DynamicHub](xref:Microsoft.AspNetCore.:::no-loc(SignalR):::.DynamicHub), works.</span></span>
+> <span data-ttu-id="e1e03-120">此功能不限於[中樞 \<T> ](xref:Microsoft.AspNetCore.SignalR.Hub`1)類別。</span><span class="sxs-lookup"><span data-stu-id="e1e03-120">This functionality isn't limited to the [Hub\<T>](xref:Microsoft.AspNetCore.SignalR.Hub`1) class.</span></span> <span data-ttu-id="e1e03-121">任何繼承自 [中樞](xref:Microsoft.AspNetCore.SignalR.Hub)的類別（例如 [DynamicHub](xref:Microsoft.AspNetCore.SignalR.DynamicHub)）都可以運作。</span><span class="sxs-lookup"><span data-stu-id="e1e03-121">Any class that inherits from [Hub](xref:Microsoft.AspNetCore.SignalR.Hub), such as [DynamicHub](xref:Microsoft.AspNetCore.SignalR.DynamicHub), works.</span></span>
 
 ::: moniker range=">= aspnetcore-3.0"
 
@@ -94,7 +94,7 @@ ms.locfileid: "93060101"
 
 ::: moniker-end
 
-## <a name="call-a-no-locsignalr-hub-from-a-background-service"></a><span data-ttu-id="e1e03-123">:::no-loc(SignalR):::從背景服務呼叫中樞</span><span class="sxs-lookup"><span data-stu-id="e1e03-123">Call a :::no-loc(SignalR)::: Hub from a background service</span></span>
+## <a name="call-a-no-locsignalr-hub-from-a-background-service"></a><span data-ttu-id="e1e03-123">SignalR從背景服務呼叫中樞</span><span class="sxs-lookup"><span data-stu-id="e1e03-123">Call a SignalR Hub from a background service</span></span>
 
 <span data-ttu-id="e1e03-124">在啟動期間， `Worker` `BackgroundService` 會使用來啟用類別（） `AddHostedService` 。</span><span class="sxs-lookup"><span data-stu-id="e1e03-124">During startup, the `Worker` class, a `BackgroundService`, is enabled using `AddHostedService`.</span></span>
 
@@ -102,7 +102,7 @@ ms.locfileid: "93060101"
 services.AddHostedService<Worker>();
 ```
 
-<span data-ttu-id="e1e03-125">因為 :::no-loc(SignalR)::: 也會在階段中啟用 `Startup` ，在此階段中，每個中樞會附加至 ASP.NET CORE 的 HTTP 要求管線中的個別端點，因此每個中樞都會以伺服器上的來表示 `IHubContext<T>` 。</span><span class="sxs-lookup"><span data-stu-id="e1e03-125">Since :::no-loc(SignalR)::: is also enabled up during the `Startup` phase, in which each Hub is attached to an individual endpoint in ASP.NET Core's HTTP request pipeline, each Hub is represented by an `IHubContext<T>` on the server.</span></span> <span data-ttu-id="e1e03-126">使用 ASP.NET Core 的 DI 功能時，裝載層（例如 `BackgroundService` 類別、MVC 控制器類別或頁面模型）所具現化的其他類別， :::no-loc(Razor)::: 可以藉由接受 `IHubContext<ClockHub, IClock>` 在結構內的實例來取得伺服器端中樞的參考。</span><span class="sxs-lookup"><span data-stu-id="e1e03-126">Using ASP.NET Core's DI features, other classes instantiated by the hosting layer, like `BackgroundService` classes, MVC Controller classes, or :::no-loc(Razor)::: page models, can get references to server-side Hubs by accepting instances of `IHubContext<ClockHub, IClock>` during construction.</span></span>
+<span data-ttu-id="e1e03-125">因為 SignalR 也會在階段中啟用 `Startup` ，在此階段中，每個中樞會附加至 ASP.NET CORE 的 HTTP 要求管線中的個別端點，因此每個中樞都會以伺服器上的來表示 `IHubContext<T>` 。</span><span class="sxs-lookup"><span data-stu-id="e1e03-125">Since SignalR is also enabled up during the `Startup` phase, in which each Hub is attached to an individual endpoint in ASP.NET Core's HTTP request pipeline, each Hub is represented by an `IHubContext<T>` on the server.</span></span> <span data-ttu-id="e1e03-126">使用 ASP.NET Core 的 DI 功能時，裝載層（例如 `BackgroundService` 類別、MVC 控制器類別或頁面模型）所具現化的其他類別， Razor 可以藉由接受 `IHubContext<ClockHub, IClock>` 在結構內的實例來取得伺服器端中樞的參考。</span><span class="sxs-lookup"><span data-stu-id="e1e03-126">Using ASP.NET Core's DI features, other classes instantiated by the hosting layer, like `BackgroundService` classes, MVC Controller classes, or Razor page models, can get references to server-side Hubs by accepting instances of `IHubContext<ClockHub, IClock>` during construction.</span></span>
 
 ::: moniker range=">= aspnetcore-3.0"
 
@@ -117,9 +117,9 @@ services.AddHostedService<Worker>();
 
 <span data-ttu-id="e1e03-127">在 `ExecuteAsync` 背景服務中反復呼叫方法時，會使用將伺服器的目前日期和時間傳送到連接的用戶端 `ClockHub` 。</span><span class="sxs-lookup"><span data-stu-id="e1e03-127">As the `ExecuteAsync` method is called iteratively in the background service, the server's current date and time are sent to the connected clients using the `ClockHub`.</span></span>
 
-## <a name="react-to-no-locsignalr-events-with-background-services"></a><span data-ttu-id="e1e03-128">:::no-loc(SignalR):::使用背景服務回應事件</span><span class="sxs-lookup"><span data-stu-id="e1e03-128">React to :::no-loc(SignalR)::: events with background services</span></span>
+## <a name="react-to-no-locsignalr-events-with-background-services"></a><span data-ttu-id="e1e03-128">SignalR使用背景服務回應事件</span><span class="sxs-lookup"><span data-stu-id="e1e03-128">React to SignalR events with background services</span></span>
 
-<span data-ttu-id="e1e03-129">如同使用的 JavaScript 用戶端或 .NET 傳統型應用程式的單一頁面應用程式 :::no-loc(SignalR)::: ，也可以使用 <xref:signalr/dotnet-client> 來執行， `BackgroundService` 或者， `IHostedService` 也可以使用或執行來連接至 :::no-loc(SignalR)::: 中樞並回應事件。</span><span class="sxs-lookup"><span data-stu-id="e1e03-129">Like a Single Page App using the JavaScript client for :::no-loc(SignalR)::: or a .NET desktop app can do using the using the <xref:signalr/dotnet-client>, a `BackgroundService` or `IHostedService` implementation can also be used to connect to :::no-loc(SignalR)::: Hubs and respond to events.</span></span>
+<span data-ttu-id="e1e03-129">如同使用的 JavaScript 用戶端或 .NET 傳統型應用程式的單一頁面應用程式 SignalR ，也可以使用 <xref:signalr/dotnet-client> 來執行， `BackgroundService` 或者， `IHostedService` 也可以使用或執行來連接至 SignalR 中樞並回應事件。</span><span class="sxs-lookup"><span data-stu-id="e1e03-129">Like a Single Page App using the JavaScript client for SignalR or a .NET desktop app can do using the using the <xref:signalr/dotnet-client>, a `BackgroundService` or `IHostedService` implementation can also be used to connect to SignalR Hubs and respond to events.</span></span>
 
 <span data-ttu-id="e1e03-130">`ClockHubClient`類別會同時執行 `IClock` 介面和 `IHostedService` 介面。</span><span class="sxs-lookup"><span data-stu-id="e1e03-130">The `ClockHubClient` class implements both the `IClock` interface and the `IHostedService` interface.</span></span> <span data-ttu-id="e1e03-131">如此一來，就可以在中 `Startup` 持續執行，並從伺服器回應中樞事件。</span><span class="sxs-lookup"><span data-stu-id="e1e03-131">This way it can be enabled during `Startup` to run continuously and respond to Hub events from the server.</span></span>
 

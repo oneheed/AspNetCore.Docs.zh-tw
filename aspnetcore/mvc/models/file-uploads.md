@@ -7,17 +7,17 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 08/21/2020
 no-loc:
-- ':::no-loc(appsettings.json):::'
-- ':::no-loc(ASP.NET Core Identity):::'
-- ':::no-loc(cookie):::'
-- ':::no-loc(Cookie):::'
-- ':::no-loc(Blazor):::'
-- ':::no-loc(Blazor Server):::'
-- ':::no-loc(Blazor WebAssembly):::'
-- ':::no-loc(Identity):::'
-- ":::no-loc(Let's Encrypt):::"
-- ':::no-loc(Razor):::'
-- ':::no-loc(SignalR):::'
+- 'appsettings.json'
+- 'ASP.NET Core Identity'
+- 'cookie'
+- 'Cookie'
+- 'Blazor'
+- 'Blazor Server'
+- 'Blazor WebAssembly'
+- 'Identity'
+- "Let's Encrypt"
+- 'Razor'
+- 'SignalR'
 uid: mvc/models/file-uploads
 ms.openlocfilehash: 14561bace565c104d0a9c926cad3105c4865e72a
 ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
@@ -48,7 +48,7 @@ ms.locfileid: "93061167"
 
 * <span data-ttu-id="e9835-114">將檔案上傳到專用檔案上傳區域，最好是非系統磁片磁碟機。</span><span class="sxs-lookup"><span data-stu-id="e9835-114">Upload files to a dedicated file upload area, preferably to a non-system drive.</span></span> <span data-ttu-id="e9835-115">專用位置可讓您更輕鬆地對上傳的檔案強加安全性限制。</span><span class="sxs-lookup"><span data-stu-id="e9835-115">A dedicated location makes it easier to impose security restrictions on uploaded files.</span></span> <span data-ttu-id="e9835-116">停用檔案上傳位置的執行許可權。&dagger;</span><span class="sxs-lookup"><span data-stu-id="e9835-116">Disable execute permissions on the file upload location.&dagger;</span></span>
 * <span data-ttu-id="e9835-117">請勿將上傳的 **檔案保存在** 與應用程式相同的目錄樹狀結構中。&dagger;</span><span class="sxs-lookup"><span data-stu-id="e9835-117">Do **not** persist uploaded files in the same directory tree as the app.&dagger;</span></span>
-* <span data-ttu-id="e9835-118">使用應用程式所決定的安全檔案名。</span><span class="sxs-lookup"><span data-stu-id="e9835-118">Use a safe file name determined by the app.</span></span> <span data-ttu-id="e9835-119">請勿使用使用者提供的檔案名或上傳檔案的不受信任檔案名。 &dagger; HTML 會在顯示不受信任的檔案名時進行編碼。</span><span class="sxs-lookup"><span data-stu-id="e9835-119">Don't use a file name provided by the user or the untrusted file name of the uploaded file.&dagger; HTML encode the untrusted file name when displaying it.</span></span> <span data-ttu-id="e9835-120">例如，記錄檔案名或在 UI 中顯示 (:::no-loc(Razor)::: 會自動以 HTML 編碼輸出) 。</span><span class="sxs-lookup"><span data-stu-id="e9835-120">For example, logging the file name or displaying in UI (:::no-loc(Razor)::: automatically HTML encodes output).</span></span>
+* <span data-ttu-id="e9835-118">使用應用程式所決定的安全檔案名。</span><span class="sxs-lookup"><span data-stu-id="e9835-118">Use a safe file name determined by the app.</span></span> <span data-ttu-id="e9835-119">請勿使用使用者提供的檔案名或上傳檔案的不受信任檔案名。 &dagger; HTML 會在顯示不受信任的檔案名時進行編碼。</span><span class="sxs-lookup"><span data-stu-id="e9835-119">Don't use a file name provided by the user or the untrusted file name of the uploaded file.&dagger; HTML encode the untrusted file name when displaying it.</span></span> <span data-ttu-id="e9835-120">例如，記錄檔案名或在 UI 中顯示 (Razor 會自動以 HTML 編碼輸出) 。</span><span class="sxs-lookup"><span data-stu-id="e9835-120">For example, logging the file name or displaying in UI (Razor automatically HTML encodes output).</span></span>
 * <span data-ttu-id="e9835-121">只允許應用程式設計規格的核准副檔名。&dagger;</span><span class="sxs-lookup"><span data-stu-id="e9835-121">Allow only approved file extensions for the app's design specification.&dagger;</span></span> <!-- * Check the file format signature to prevent a user from uploading a masqueraded file.&dagger; For example, don't permit a user to upload an *.exe* file with a *.txt* extension. Add this back when we get instructions how to do this.  -->
 * <span data-ttu-id="e9835-122">確認已在伺服器上執行用戶端檢查。 &dagger; 用戶端檢查很容易規避。</span><span class="sxs-lookup"><span data-stu-id="e9835-122">Verify that client-side checks are performed on the server.&dagger; Client-side checks are easy to circumvent.</span></span>
 * <span data-ttu-id="e9835-123">檢查上傳檔案的大小。</span><span class="sxs-lookup"><span data-stu-id="e9835-123">Check the size of an uploaded file.</span></span> <span data-ttu-id="e9835-124">設定大小上限以防止大上傳。&dagger;</span><span class="sxs-lookup"><span data-stu-id="e9835-124">Set a maximum size limit to prevent large uploads.&dagger;</span></span>
@@ -125,7 +125,7 @@ ms.locfileid: "93061167"
 
 <span data-ttu-id="e9835-171">若要上傳小型檔案，請使用多部分形式的表單，或使用 JavaScript 來建立 POST 要求。</span><span class="sxs-lookup"><span data-stu-id="e9835-171">To upload small files, use a multipart form or construct a POST request using JavaScript.</span></span>
 
-<span data-ttu-id="e9835-172">下列範例將示範 :::no-loc(Razor)::: 如何使用頁面表單，在範例應用程式) 中上傳單一檔案 ( *Pages/BufferedSingleFileUploadPhysical. cshtml* ：</span><span class="sxs-lookup"><span data-stu-id="e9835-172">The following example demonstrates the use of a :::no-loc(Razor)::: Pages form to upload a single file ( *Pages/BufferedSingleFileUploadPhysical.cshtml* in the sample app):</span></span>
+<span data-ttu-id="e9835-172">下列範例將示範 Razor 如何使用頁面表單，在範例應用程式) 中上傳單一檔案 ( *Pages/BufferedSingleFileUploadPhysical. cshtml* ：</span><span class="sxs-lookup"><span data-stu-id="e9835-172">The following example demonstrates the use of a Razor Pages form to upload a single file ( *Pages/BufferedSingleFileUploadPhysical.cshtml* in the sample app):</span></span>
 
 ```cshtml
 <form enctype="multipart/form-data" method="post">
@@ -352,7 +352,7 @@ public class BufferedSingleFileUploadDb
 > [!NOTE]
 > <span data-ttu-id="e9835-223"><xref:Microsoft.AspNetCore.Http.IFormFile> 可以直接當做動作方法參數使用，或作為系結模型屬性。</span><span class="sxs-lookup"><span data-stu-id="e9835-223"><xref:Microsoft.AspNetCore.Http.IFormFile> can be used directly as an action method parameter or as a bound model property.</span></span> <span data-ttu-id="e9835-224">先前的範例會使用系結模型屬性。</span><span class="sxs-lookup"><span data-stu-id="e9835-224">The prior example uses a bound model property.</span></span>
 
-<span data-ttu-id="e9835-225">在 `FileUpload` :::no-loc(Razor)::: 頁面表單中使用：</span><span class="sxs-lookup"><span data-stu-id="e9835-225">The `FileUpload` is used in the :::no-loc(Razor)::: Pages form:</span></span>
+<span data-ttu-id="e9835-225">在 `FileUpload` Razor 頁面表單中使用：</span><span class="sxs-lookup"><span data-stu-id="e9835-225">The `FileUpload` is used in the Razor Pages form:</span></span>
 
 ```cshtml
 <form enctype="multipart/form-data" method="post">
@@ -418,17 +418,17 @@ public async Task<IActionResult> OnPostUploadAsync()
 
 <span data-ttu-id="e9835-239">下列範例示範如何使用 JavaScript 將檔案串流至控制器動作。</span><span class="sxs-lookup"><span data-stu-id="e9835-239">The following example demonstrates how to use JavaScript to stream a file to a controller action.</span></span> <span data-ttu-id="e9835-240">檔案的 antiforgery token 是使用自訂篩選屬性所產生，並且傳遞至用戶端 HTTP 標頭，而不是在要求主體中。</span><span class="sxs-lookup"><span data-stu-id="e9835-240">The file's antiforgery token is generated using a custom filter attribute and passed to the client HTTP headers instead of in the request body.</span></span> <span data-ttu-id="e9835-241">因為動作方法會直接處理已上傳的資料，所以其他自訂篩選會停用表單模型系結。</span><span class="sxs-lookup"><span data-stu-id="e9835-241">Because the action method processes the uploaded data directly, form model binding is disabled by another custom filter.</span></span> <span data-ttu-id="e9835-242">在動作內，會使用 `MultipartReader` 來讀取表單內容，以讀取每個個別 `MultipartSection`、處理檔案，或視需要儲存內容。</span><span class="sxs-lookup"><span data-stu-id="e9835-242">Within the action, the form's contents are read using a `MultipartReader`, which reads each individual `MultipartSection`, processing the file or storing the contents as appropriate.</span></span> <span data-ttu-id="e9835-243">讀取多部分區段之後，動作會執行它自己的模型系結。</span><span class="sxs-lookup"><span data-stu-id="e9835-243">After the multipart sections are read, the action performs its own model binding.</span></span>
 
-<span data-ttu-id="e9835-244">初始頁面回應會載入表單，並透過屬性) 將 antiforgery token 儲存在 :::no-loc(cookie)::: (中 `GenerateAntiforgeryToken:::no-loc(Cookie):::Attribute` 。</span><span class="sxs-lookup"><span data-stu-id="e9835-244">The initial page response loads the form and saves an antiforgery token in a :::no-loc(cookie)::: (via the `GenerateAntiforgeryToken:::no-loc(Cookie):::Attribute` attribute).</span></span> <span data-ttu-id="e9835-245">屬性使用 ASP.NET Core 的內建 [antiforgery 支援](xref:security/anti-request-forgery) 來設定 :::no-loc(cookie)::: 具有要求權杖的。</span><span class="sxs-lookup"><span data-stu-id="e9835-245">The attribute uses ASP.NET Core's built-in [antiforgery support](xref:security/anti-request-forgery) to set a :::no-loc(cookie)::: with a request token:</span></span>
+<span data-ttu-id="e9835-244">初始頁面回應會載入表單，並透過屬性) 將 antiforgery token 儲存在 cookie (中 `GenerateAntiforgeryTokenCookieAttribute` 。</span><span class="sxs-lookup"><span data-stu-id="e9835-244">The initial page response loads the form and saves an antiforgery token in a cookie (via the `GenerateAntiforgeryTokenCookieAttribute` attribute).</span></span> <span data-ttu-id="e9835-245">屬性使用 ASP.NET Core 的內建 [antiforgery 支援](xref:security/anti-request-forgery) 來設定 cookie 具有要求權杖的。</span><span class="sxs-lookup"><span data-stu-id="e9835-245">The attribute uses ASP.NET Core's built-in [antiforgery support](xref:security/anti-request-forgery) to set a cookie with a request token:</span></span>
 
-[!code-csharp[](file-uploads/samples/3.x/SampleApp/Filters/Antiforgery.cs?name=snippet_GenerateAntiforgeryToken:::no-loc(Cookie):::Attribute)]
+[!code-csharp[](file-uploads/samples/3.x/SampleApp/Filters/Antiforgery.cs?name=snippet_GenerateAntiforgeryTokenCookieAttribute)]
 
 <span data-ttu-id="e9835-246">`DisableFormValueModelBindingAttribute`用來停用模型系結：</span><span class="sxs-lookup"><span data-stu-id="e9835-246">The `DisableFormValueModelBindingAttribute` is used to disable model binding:</span></span>
 
 [!code-csharp[](file-uploads/samples/3.x/SampleApp/Filters/ModelBinding.cs?name=snippet_DisableFormValueModelBindingAttribute)]
 
-<span data-ttu-id="e9835-247">在範例應用程式中 `GenerateAntiforgeryToken:::no-loc(Cookie):::Attribute` ， `DisableFormValueModelBindingAttribute` 會 `/StreamedSingleFileUploadDb` `/StreamedSingleFileUploadPhysical` `Startup.ConfigureServices` 使用[ :::no-loc(Razor)::: 頁面慣例](xref:razor-pages/razor-pages-conventions)，並在和的頁面應用程式模型中套用為篩選：</span><span class="sxs-lookup"><span data-stu-id="e9835-247">In the sample app, `GenerateAntiforgeryToken:::no-loc(Cookie):::Attribute` and `DisableFormValueModelBindingAttribute` are applied as filters to the page application models of `/StreamedSingleFileUploadDb` and `/StreamedSingleFileUploadPhysical` in `Startup.ConfigureServices` using [:::no-loc(Razor)::: Pages conventions](xref:razor-pages/razor-pages-conventions):</span></span>
+<span data-ttu-id="e9835-247">在範例應用程式中 `GenerateAntiforgeryTokenCookieAttribute` ， `DisableFormValueModelBindingAttribute` 會 `/StreamedSingleFileUploadDb` `/StreamedSingleFileUploadPhysical` `Startup.ConfigureServices` 使用[ Razor 頁面慣例](xref:razor-pages/razor-pages-conventions)，並在和的頁面應用程式模型中套用為篩選：</span><span class="sxs-lookup"><span data-stu-id="e9835-247">In the sample app, `GenerateAntiforgeryTokenCookieAttribute` and `DisableFormValueModelBindingAttribute` are applied as filters to the page application models of `/StreamedSingleFileUploadDb` and `/StreamedSingleFileUploadPhysical` in `Startup.ConfigureServices` using [Razor Pages conventions](xref:razor-pages/razor-pages-conventions):</span></span>
 
-[!code-csharp[](file-uploads/samples/3.x/SampleApp/Startup.cs?name=snippet_Add:::no-loc(Razor):::Pages&highlight=7-10,16-19)]
+[!code-csharp[](file-uploads/samples/3.x/SampleApp/Startup.cs?name=snippet_AddRazorPages&highlight=7-10,16-19)]
 
 <span data-ttu-id="e9835-248">由於模型系結不會讀取表單，因此從表單系結的參數不會系結 (查詢、路由和標頭會繼續運作) 。</span><span class="sxs-lookup"><span data-stu-id="e9835-248">Since model binding doesn't read the form, parameters that are bound from the form don't bind (query, route, and header continue to work).</span></span> <span data-ttu-id="e9835-249">動作方法會直接與屬性搭配使用 `Request` 。</span><span class="sxs-lookup"><span data-stu-id="e9835-249">The action method works directly with the `Request` property.</span></span> <span data-ttu-id="e9835-250">`MultipartReader` 是用來讀取每個區段。</span><span class="sxs-lookup"><span data-stu-id="e9835-250">A `MultipartReader` is used to read each section.</span></span> <span data-ttu-id="e9835-251">索引鍵/值資料儲存在中 `KeyValueAccumulator` 。</span><span class="sxs-lookup"><span data-stu-id="e9835-251">Key/value data is stored in a `KeyValueAccumulator`.</span></span> <span data-ttu-id="e9835-252">讀取多部分區段之後，的內容 `KeyValueAccumulator` 會用來將表單資料系結至模型類型。</span><span class="sxs-lookup"><span data-stu-id="e9835-252">After the multipart sections are read, the contents of the `KeyValueAccumulator` are used to bind the form data to a model type.</span></span>
 
@@ -514,7 +514,7 @@ using (var reader = new BinaryReader(uploadedFileData))
 
 <span data-ttu-id="e9835-285">絕對不要使用用戶端提供的檔案名將檔案儲存至實體儲存體。</span><span class="sxs-lookup"><span data-stu-id="e9835-285">Never use a client-supplied file name for saving a file to physical storage.</span></span> <span data-ttu-id="e9835-286">使用 [GetRandomFileName](xref:System.IO.Path.GetRandomFileName*) 或 [GetTempFileName](xref:System.IO.Path.GetTempFileName*) 建立檔案的安全檔案名，以建立完整路徑 (包括暫存儲存體的檔案名) 。</span><span class="sxs-lookup"><span data-stu-id="e9835-286">Create a safe file name for the file using [Path.GetRandomFileName](xref:System.IO.Path.GetRandomFileName*) or [Path.GetTempFileName](xref:System.IO.Path.GetTempFileName*) to create a full path (including the file name) for temporary storage.</span></span>
 
-<span data-ttu-id="e9835-287">:::no-loc(Razor)::: 自動為顯示的 HTML 編碼屬性值。</span><span class="sxs-lookup"><span data-stu-id="e9835-287">:::no-loc(Razor)::: automatically HTML encodes property values for display.</span></span> <span data-ttu-id="e9835-288">下列程式碼可安全地使用：</span><span class="sxs-lookup"><span data-stu-id="e9835-288">The following code is safe to use:</span></span>
+<span data-ttu-id="e9835-287">Razor 自動為顯示的 HTML 編碼屬性值。</span><span class="sxs-lookup"><span data-stu-id="e9835-287">Razor automatically HTML encodes property values for display.</span></span> <span data-ttu-id="e9835-288">下列程式碼可安全地使用：</span><span class="sxs-lookup"><span data-stu-id="e9835-288">The following code is safe to use:</span></span>
 
 ```cshtml
 @foreach (var file in Model.DatabaseFiles) {
@@ -526,7 +526,7 @@ using (var reader = new BinaryReader(uploadedFileData))
 }
 ```
 
-<span data-ttu-id="e9835-289">:::no-loc(Razor):::從開始，一律 <xref:System.Net.WebUtility.HtmlEncode*> 是使用者要求的檔案名內容。</span><span class="sxs-lookup"><span data-stu-id="e9835-289">Outside of :::no-loc(Razor):::, always <xref:System.Net.WebUtility.HtmlEncode*> file name content from a user's request.</span></span>
+<span data-ttu-id="e9835-289">Razor從開始，一律 <xref:System.Net.WebUtility.HtmlEncode*> 是使用者要求的檔案名內容。</span><span class="sxs-lookup"><span data-stu-id="e9835-289">Outside of Razor, always <xref:System.Net.WebUtility.HtmlEncode*> file name content from a user's request.</span></span>
 
 <span data-ttu-id="e9835-290">許多執行必須包含檢查檔案是否存在;否則，檔案會覆寫相同名稱的檔案。</span><span class="sxs-lookup"><span data-stu-id="e9835-290">Many implementations must include a check that the file exists; otherwise, the file is overwritten by a file of the same name.</span></span> <span data-ttu-id="e9835-291">提供其他邏輯以符合您應用程式的規格。</span><span class="sxs-lookup"><span data-stu-id="e9835-291">Supply additional logic to meet your app's specifications.</span></span>
 
@@ -534,7 +534,7 @@ using (var reader = new BinaryReader(uploadedFileData))
 
 <span data-ttu-id="e9835-293">限制上傳檔案的大小。</span><span class="sxs-lookup"><span data-stu-id="e9835-293">Limit the size of uploaded files.</span></span>
 
-<span data-ttu-id="e9835-294">在範例應用程式中，檔案大小限制為 2 MB (以位元組) 表示。</span><span class="sxs-lookup"><span data-stu-id="e9835-294">In the sample app, the size of the file is limited to 2 MB (indicated in bytes).</span></span> <span data-ttu-id="e9835-295">這項限制是透過 [檔案的設定](xref:fundamentals/configuration/index) 提供的 *:::no-loc(appsettings.json):::* ：</span><span class="sxs-lookup"><span data-stu-id="e9835-295">The limit is supplied via [Configuration](xref:fundamentals/configuration/index) from the *:::no-loc(appsettings.json):::* file:</span></span>
+<span data-ttu-id="e9835-294">在範例應用程式中，檔案大小限制為 2 MB (以位元組) 表示。</span><span class="sxs-lookup"><span data-stu-id="e9835-294">In the sample app, the size of the file is limited to 2 MB (indicated in bytes).</span></span> <span data-ttu-id="e9835-295">這項限制是透過 [檔案的設定](xref:fundamentals/configuration/index) 提供的 *appsettings.json* ：</span><span class="sxs-lookup"><span data-stu-id="e9835-295">The limit is supplied via [Configuration](xref:fundamentals/configuration/index) from the *appsettings.json* file:</span></span>
 
 ```json
 {
@@ -569,7 +569,7 @@ if (formFile.Length > _fileSizeLimit)
 
 ### <a name="match-name-attribute-value-to-parameter-name-of-post-method"></a><span data-ttu-id="e9835-298">將名稱屬性值與 POST 方法的參數名稱相符</span><span class="sxs-lookup"><span data-stu-id="e9835-298">Match name attribute value to parameter name of POST method</span></span>
 
-<span data-ttu-id="e9835-299">在 :::no-loc(Razor)::: 張貼表單資料或直接使用 JavaScript 的非表單中 `FormData` ，在表單的元素中指定的名稱或 `FormData` 必須符合控制器動作中參數的名稱。</span><span class="sxs-lookup"><span data-stu-id="e9835-299">In non-:::no-loc(Razor)::: forms that POST form data or use JavaScript's `FormData` directly, the name specified in the form's element or `FormData` must match the name of the parameter in the controller's action.</span></span>
+<span data-ttu-id="e9835-299">在 Razor 張貼表單資料或直接使用 JavaScript 的非表單中 `FormData` ，在表單的元素中指定的名稱或 `FormData` 必須符合控制器動作中參數的名稱。</span><span class="sxs-lookup"><span data-stu-id="e9835-299">In non-Razor forms that POST form data or use JavaScript's `FormData` directly, the name specified in the form's element or `FormData` must match the name of the parameter in the controller's action.</span></span>
 
 <span data-ttu-id="e9835-300">在下例中︰</span><span class="sxs-lookup"><span data-stu-id="e9835-300">In the following example:</span></span>
 
@@ -591,7 +591,7 @@ if (formFile.Length > _fileSizeLimit)
 
 <span data-ttu-id="e9835-303">針對 c # 方法 () 的參數使用相符的名稱 `battlePlans` ：</span><span class="sxs-lookup"><span data-stu-id="e9835-303">Use a matching name for the parameter of the C# method (`battlePlans`):</span></span>
 
-* <span data-ttu-id="e9835-304">針對名為的 :::no-loc(Razor)::: 頁面頁面處理常式方法 `Upload` ：</span><span class="sxs-lookup"><span data-stu-id="e9835-304">For a :::no-loc(Razor)::: Pages page handler method named `Upload`:</span></span>
+* <span data-ttu-id="e9835-304">針對名為的 Razor 頁面頁面處理常式方法 `Upload` ：</span><span class="sxs-lookup"><span data-stu-id="e9835-304">For a Razor Pages page handler method named `Upload`:</span></span>
 
   ```csharp
   public async Task<IActionResult> OnPostUploadAsync(List<IFormFile> battlePlans)
@@ -622,10 +622,10 @@ public void ConfigureServices(IServiceCollection services)
 
 <span data-ttu-id="e9835-312"><xref:Microsoft.AspNetCore.Mvc.RequestFormLimitsAttribute> 用來設定 <xref:Microsoft.AspNetCore.Http.Features.FormOptions.MultipartBodyLengthLimit> 單一頁面或動作的。</span><span class="sxs-lookup"><span data-stu-id="e9835-312"><xref:Microsoft.AspNetCore.Mvc.RequestFormLimitsAttribute> is used to set the <xref:Microsoft.AspNetCore.Http.Features.FormOptions.MultipartBodyLengthLimit> for a single page or action.</span></span>
 
-<span data-ttu-id="e9835-313">在 :::no-loc(Razor)::: 頁面應用程式中，將篩選套用至[convention](xref:razor-pages/razor-pages-conventions)下列慣例 `Startup.ConfigureServices` ：</span><span class="sxs-lookup"><span data-stu-id="e9835-313">In a :::no-loc(Razor)::: Pages app, apply the filter with a [convention](xref:razor-pages/razor-pages-conventions) in `Startup.ConfigureServices`:</span></span>
+<span data-ttu-id="e9835-313">在 Razor 頁面應用程式中，將篩選套用至[convention](xref:razor-pages/razor-pages-conventions)下列慣例 `Startup.ConfigureServices` ：</span><span class="sxs-lookup"><span data-stu-id="e9835-313">In a Razor Pages app, apply the filter with a [convention](xref:razor-pages/razor-pages-conventions) in `Startup.ConfigureServices`:</span></span>
 
 ```csharp
-services.Add:::no-loc(Razor):::Pages(options =>
+services.AddRazorPages(options =>
 {
     options.Conventions
         .AddPageApplicationModelConvention("/FileUploadPage",
@@ -638,7 +638,7 @@ services.Add:::no-loc(Razor):::Pages(options =>
 });
 ```
 
-<span data-ttu-id="e9835-314">在 :::no-loc(Razor)::: 頁面應用程式或 MVC 應用程式中，將篩選套用至頁面模型或動作方法：</span><span class="sxs-lookup"><span data-stu-id="e9835-314">In a :::no-loc(Razor)::: Pages app or an MVC app, apply the filter to the page model or action method:</span></span>
+<span data-ttu-id="e9835-314">在 Razor 頁面應用程式或 MVC 應用程式中，將篩選套用至頁面模型或動作方法：</span><span class="sxs-lookup"><span data-stu-id="e9835-314">In a Razor Pages app or an MVC app, apply the filter to the page model or action method:</span></span>
 
 ```csharp
 // Set the limit to 256 MB
@@ -669,10 +669,10 @@ public static IHostBuilder CreateHostBuilder(string[] args) =>
 
 <span data-ttu-id="e9835-318"><xref:Microsoft.AspNetCore.Mvc.RequestSizeLimitAttribute> 用來設定單一頁面或動作的 [>limits.maxrequestbodysize](xref:fundamentals/servers/kestrel#maximum-request-body-size) 。</span><span class="sxs-lookup"><span data-stu-id="e9835-318"><xref:Microsoft.AspNetCore.Mvc.RequestSizeLimitAttribute> is used to set the [MaxRequestBodySize](xref:fundamentals/servers/kestrel#maximum-request-body-size) for a single page or action.</span></span>
 
-<span data-ttu-id="e9835-319">在 :::no-loc(Razor)::: 頁面應用程式中，將篩選套用至[convention](xref:razor-pages/razor-pages-conventions)下列慣例 `Startup.ConfigureServices` ：</span><span class="sxs-lookup"><span data-stu-id="e9835-319">In a :::no-loc(Razor)::: Pages app, apply the filter with a [convention](xref:razor-pages/razor-pages-conventions) in `Startup.ConfigureServices`:</span></span>
+<span data-ttu-id="e9835-319">在 Razor 頁面應用程式中，將篩選套用至[convention](xref:razor-pages/razor-pages-conventions)下列慣例 `Startup.ConfigureServices` ：</span><span class="sxs-lookup"><span data-stu-id="e9835-319">In a Razor Pages app, apply the filter with a [convention](xref:razor-pages/razor-pages-conventions) in `Startup.ConfigureServices`:</span></span>
 
 ```csharp
-services.Add:::no-loc(Razor):::Pages(options =>
+services.AddRazorPages(options =>
 {
     options.Conventions
         .AddPageApplicationModelConvention("/FileUploadPage",
@@ -685,7 +685,7 @@ services.Add:::no-loc(Razor):::Pages(options =>
 });
 ```
 
-<span data-ttu-id="e9835-320">在 :::no-loc(Razor)::: 頁面應用程式或 MVC 應用程式中，將篩選套用至頁面處理常式類別或動作方法：</span><span class="sxs-lookup"><span data-stu-id="e9835-320">In a :::no-loc(Razor)::: pages app or an MVC app, apply the filter to the page handler class or action method:</span></span>
+<span data-ttu-id="e9835-320">在 Razor 頁面應用程式或 MVC 應用程式中，將篩選套用至頁面處理常式類別或動作方法：</span><span class="sxs-lookup"><span data-stu-id="e9835-320">In a Razor pages app or an MVC app, apply the filter to the page handler class or action method:</span></span>
 
 ```csharp
 // Handle requests up to 50 MB
@@ -696,7 +696,7 @@ public class BufferedSingleFileUploadPhysicalModel : PageModel
 }
 ```
 
-<span data-ttu-id="e9835-321">`RequestSizeLimitAttribute`也可以使用指示詞套用 [`@attribute`](xref:mvc/views/razor#attribute) :::no-loc(Razor)::: ：</span><span class="sxs-lookup"><span data-stu-id="e9835-321">The `RequestSizeLimitAttribute` can also be applied using the [`@attribute`](xref:mvc/views/razor#attribute) :::no-loc(Razor)::: directive:</span></span>
+<span data-ttu-id="e9835-321">`RequestSizeLimitAttribute`也可以使用指示詞套用 [`@attribute`](xref:mvc/views/razor#attribute) Razor ：</span><span class="sxs-lookup"><span data-stu-id="e9835-321">The `RequestSizeLimitAttribute` can also be applied using the [`@attribute`](xref:mvc/views/razor#attribute) Razor directive:</span></span>
 
 ```cshtml
 @attribute [RequestSizeLimitAttribute(52428800)]
@@ -772,7 +772,7 @@ The request filtering module is configured to deny a request that exceeds the re
 
 * <span data-ttu-id="e9835-358">將檔案上傳到專用檔案上傳區域，最好是非系統磁片磁碟機。</span><span class="sxs-lookup"><span data-stu-id="e9835-358">Upload files to a dedicated file upload area, preferably to a non-system drive.</span></span> <span data-ttu-id="e9835-359">專用位置可讓您更輕鬆地對上傳的檔案強加安全性限制。</span><span class="sxs-lookup"><span data-stu-id="e9835-359">A dedicated location makes it easier to impose security restrictions on uploaded files.</span></span> <span data-ttu-id="e9835-360">停用檔案上傳位置的執行許可權。&dagger;</span><span class="sxs-lookup"><span data-stu-id="e9835-360">Disable execute permissions on the file upload location.&dagger;</span></span>
 * <span data-ttu-id="e9835-361">請勿將上傳的 **檔案保存在** 與應用程式相同的目錄樹狀結構中。&dagger;</span><span class="sxs-lookup"><span data-stu-id="e9835-361">Do **not** persist uploaded files in the same directory tree as the app.&dagger;</span></span>
-* <span data-ttu-id="e9835-362">使用應用程式所決定的安全檔案名。</span><span class="sxs-lookup"><span data-stu-id="e9835-362">Use a safe file name determined by the app.</span></span> <span data-ttu-id="e9835-363">請勿使用使用者提供的檔案名或上傳檔案的不受信任檔案名。 &dagger; HTML 會在顯示不受信任的檔案名時進行編碼。</span><span class="sxs-lookup"><span data-stu-id="e9835-363">Don't use a file name provided by the user or the untrusted file name of the uploaded file.&dagger; HTML encode the untrusted file name when displaying it.</span></span> <span data-ttu-id="e9835-364">例如，記錄檔案名或在 UI 中顯示 (:::no-loc(Razor)::: 會自動以 HTML 編碼輸出) 。</span><span class="sxs-lookup"><span data-stu-id="e9835-364">For example, logging the file name or displaying in UI (:::no-loc(Razor)::: automatically HTML encodes output).</span></span>
+* <span data-ttu-id="e9835-362">使用應用程式所決定的安全檔案名。</span><span class="sxs-lookup"><span data-stu-id="e9835-362">Use a safe file name determined by the app.</span></span> <span data-ttu-id="e9835-363">請勿使用使用者提供的檔案名或上傳檔案的不受信任檔案名。 &dagger; HTML 會在顯示不受信任的檔案名時進行編碼。</span><span class="sxs-lookup"><span data-stu-id="e9835-363">Don't use a file name provided by the user or the untrusted file name of the uploaded file.&dagger; HTML encode the untrusted file name when displaying it.</span></span> <span data-ttu-id="e9835-364">例如，記錄檔案名或在 UI 中顯示 (Razor 會自動以 HTML 編碼輸出) 。</span><span class="sxs-lookup"><span data-stu-id="e9835-364">For example, logging the file name or displaying in UI (Razor automatically HTML encodes output).</span></span>
 * <span data-ttu-id="e9835-365">只允許應用程式設計規格的核准副檔名。&dagger;</span><span class="sxs-lookup"><span data-stu-id="e9835-365">Allow only approved file extensions for the app's design specification.&dagger;</span></span> <!-- * Check the file format signature to prevent a user from uploading a masqueraded file.&dagger; For example, don't permit a user to upload an *.exe* file with a *.txt* extension. Add this back when we get instructions how to do this.  -->
 * <span data-ttu-id="e9835-366">確認已在伺服器上執行用戶端檢查。 &dagger; 用戶端檢查很容易規避。</span><span class="sxs-lookup"><span data-stu-id="e9835-366">Verify that client-side checks are performed on the server.&dagger; Client-side checks are easy to circumvent.</span></span>
 * <span data-ttu-id="e9835-367">檢查上傳檔案的大小。</span><span class="sxs-lookup"><span data-stu-id="e9835-367">Check the size of an uploaded file.</span></span> <span data-ttu-id="e9835-368">設定大小上限以防止大上傳。&dagger;</span><span class="sxs-lookup"><span data-stu-id="e9835-368">Set a maximum size limit to prevent large uploads.&dagger;</span></span>
@@ -849,7 +849,7 @@ The request filtering module is configured to deny a request that exceeds the re
 
 <span data-ttu-id="e9835-415">若要上傳小型檔案，請使用多部分形式的表單，或使用 JavaScript 來建立 POST 要求。</span><span class="sxs-lookup"><span data-stu-id="e9835-415">To upload small files, use a multipart form or construct a POST request using JavaScript.</span></span>
 
-<span data-ttu-id="e9835-416">下列範例將示範 :::no-loc(Razor)::: 如何使用頁面表單，在範例應用程式) 中上傳單一檔案 ( *Pages/BufferedSingleFileUploadPhysical. cshtml* ：</span><span class="sxs-lookup"><span data-stu-id="e9835-416">The following example demonstrates the use of a :::no-loc(Razor)::: Pages form to upload a single file ( *Pages/BufferedSingleFileUploadPhysical.cshtml* in the sample app):</span></span>
+<span data-ttu-id="e9835-416">下列範例將示範 Razor 如何使用頁面表單，在範例應用程式) 中上傳單一檔案 ( *Pages/BufferedSingleFileUploadPhysical. cshtml* ：</span><span class="sxs-lookup"><span data-stu-id="e9835-416">The following example demonstrates the use of a Razor Pages form to upload a single file ( *Pages/BufferedSingleFileUploadPhysical.cshtml* in the sample app):</span></span>
 
 ```cshtml
 <form enctype="multipart/form-data" method="post">
@@ -1076,7 +1076,7 @@ public class BufferedSingleFileUploadDb
 > [!NOTE]
 > <span data-ttu-id="e9835-467"><xref:Microsoft.AspNetCore.Http.IFormFile> 可以直接當做動作方法參數使用，或作為系結模型屬性。</span><span class="sxs-lookup"><span data-stu-id="e9835-467"><xref:Microsoft.AspNetCore.Http.IFormFile> can be used directly as an action method parameter or as a bound model property.</span></span> <span data-ttu-id="e9835-468">先前的範例會使用系結模型屬性。</span><span class="sxs-lookup"><span data-stu-id="e9835-468">The prior example uses a bound model property.</span></span>
 
-<span data-ttu-id="e9835-469">在 `FileUpload` :::no-loc(Razor)::: 頁面表單中使用：</span><span class="sxs-lookup"><span data-stu-id="e9835-469">The `FileUpload` is used in the :::no-loc(Razor)::: Pages form:</span></span>
+<span data-ttu-id="e9835-469">在 `FileUpload` Razor 頁面表單中使用：</span><span class="sxs-lookup"><span data-stu-id="e9835-469">The `FileUpload` is used in the Razor Pages form:</span></span>
 
 ```cshtml
 <form enctype="multipart/form-data" method="post">
@@ -1142,17 +1142,17 @@ public async Task<IActionResult> OnPostUploadAsync()
 
 <span data-ttu-id="e9835-483">下列範例示範如何使用 JavaScript 將檔案串流至控制器動作。</span><span class="sxs-lookup"><span data-stu-id="e9835-483">The following example demonstrates how to use JavaScript to stream a file to a controller action.</span></span> <span data-ttu-id="e9835-484">檔案的 antiforgery token 是使用自訂篩選屬性所產生，並且傳遞至用戶端 HTTP 標頭，而不是在要求主體中。</span><span class="sxs-lookup"><span data-stu-id="e9835-484">The file's antiforgery token is generated using a custom filter attribute and passed to the client HTTP headers instead of in the request body.</span></span> <span data-ttu-id="e9835-485">因為動作方法會直接處理已上傳的資料，所以其他自訂篩選會停用表單模型系結。</span><span class="sxs-lookup"><span data-stu-id="e9835-485">Because the action method processes the uploaded data directly, form model binding is disabled by another custom filter.</span></span> <span data-ttu-id="e9835-486">在動作內，會使用 `MultipartReader` 來讀取表單內容，以讀取每個個別 `MultipartSection`、處理檔案，或視需要儲存內容。</span><span class="sxs-lookup"><span data-stu-id="e9835-486">Within the action, the form's contents are read using a `MultipartReader`, which reads each individual `MultipartSection`, processing the file or storing the contents as appropriate.</span></span> <span data-ttu-id="e9835-487">讀取多部分區段之後，動作會執行它自己的模型系結。</span><span class="sxs-lookup"><span data-stu-id="e9835-487">After the multipart sections are read, the action performs its own model binding.</span></span>
 
-<span data-ttu-id="e9835-488">初始頁面回應會載入表單，並透過屬性) 將 antiforgery token 儲存在 :::no-loc(cookie)::: (中 `GenerateAntiforgeryToken:::no-loc(Cookie):::Attribute` 。</span><span class="sxs-lookup"><span data-stu-id="e9835-488">The initial page response loads the form and saves an antiforgery token in a :::no-loc(cookie)::: (via the `GenerateAntiforgeryToken:::no-loc(Cookie):::Attribute` attribute).</span></span> <span data-ttu-id="e9835-489">屬性使用 ASP.NET Core 的內建 [antiforgery 支援](xref:security/anti-request-forgery) 來設定 :::no-loc(cookie)::: 具有要求權杖的。</span><span class="sxs-lookup"><span data-stu-id="e9835-489">The attribute uses ASP.NET Core's built-in [antiforgery support](xref:security/anti-request-forgery) to set a :::no-loc(cookie)::: with a request token:</span></span>
+<span data-ttu-id="e9835-488">初始頁面回應會載入表單，並透過屬性) 將 antiforgery token 儲存在 cookie (中 `GenerateAntiforgeryTokenCookieAttribute` 。</span><span class="sxs-lookup"><span data-stu-id="e9835-488">The initial page response loads the form and saves an antiforgery token in a cookie (via the `GenerateAntiforgeryTokenCookieAttribute` attribute).</span></span> <span data-ttu-id="e9835-489">屬性使用 ASP.NET Core 的內建 [antiforgery 支援](xref:security/anti-request-forgery) 來設定 cookie 具有要求權杖的。</span><span class="sxs-lookup"><span data-stu-id="e9835-489">The attribute uses ASP.NET Core's built-in [antiforgery support](xref:security/anti-request-forgery) to set a cookie with a request token:</span></span>
 
-[!code-csharp[](file-uploads/samples/3.x/SampleApp/Filters/Antiforgery.cs?name=snippet_GenerateAntiforgeryToken:::no-loc(Cookie):::Attribute)]
+[!code-csharp[](file-uploads/samples/3.x/SampleApp/Filters/Antiforgery.cs?name=snippet_GenerateAntiforgeryTokenCookieAttribute)]
 
 <span data-ttu-id="e9835-490">`DisableFormValueModelBindingAttribute`用來停用模型系結：</span><span class="sxs-lookup"><span data-stu-id="e9835-490">The `DisableFormValueModelBindingAttribute` is used to disable model binding:</span></span>
 
 [!code-csharp[](file-uploads/samples/3.x/SampleApp/Filters/ModelBinding.cs?name=snippet_DisableFormValueModelBindingAttribute)]
 
-<span data-ttu-id="e9835-491">在範例應用程式中 `GenerateAntiforgeryToken:::no-loc(Cookie):::Attribute` ， `DisableFormValueModelBindingAttribute` 會 `/StreamedSingleFileUploadDb` `/StreamedSingleFileUploadPhysical` `Startup.ConfigureServices` 使用[ :::no-loc(Razor)::: 頁面慣例](xref:razor-pages/razor-pages-conventions)，並在和的頁面應用程式模型中套用為篩選：</span><span class="sxs-lookup"><span data-stu-id="e9835-491">In the sample app, `GenerateAntiforgeryToken:::no-loc(Cookie):::Attribute` and `DisableFormValueModelBindingAttribute` are applied as filters to the page application models of `/StreamedSingleFileUploadDb` and `/StreamedSingleFileUploadPhysical` in `Startup.ConfigureServices` using [:::no-loc(Razor)::: Pages conventions](xref:razor-pages/razor-pages-conventions):</span></span>
+<span data-ttu-id="e9835-491">在範例應用程式中 `GenerateAntiforgeryTokenCookieAttribute` ， `DisableFormValueModelBindingAttribute` 會 `/StreamedSingleFileUploadDb` `/StreamedSingleFileUploadPhysical` `Startup.ConfigureServices` 使用[ Razor 頁面慣例](xref:razor-pages/razor-pages-conventions)，並在和的頁面應用程式模型中套用為篩選：</span><span class="sxs-lookup"><span data-stu-id="e9835-491">In the sample app, `GenerateAntiforgeryTokenCookieAttribute` and `DisableFormValueModelBindingAttribute` are applied as filters to the page application models of `/StreamedSingleFileUploadDb` and `/StreamedSingleFileUploadPhysical` in `Startup.ConfigureServices` using [Razor Pages conventions](xref:razor-pages/razor-pages-conventions):</span></span>
 
-[!code-csharp[](file-uploads/samples/3.x/SampleApp/Startup.cs?name=snippet_Add:::no-loc(Razor):::Pages&highlight=7-10,16-19)]
+[!code-csharp[](file-uploads/samples/3.x/SampleApp/Startup.cs?name=snippet_AddRazorPages&highlight=7-10,16-19)]
 
 <span data-ttu-id="e9835-492">由於模型系結不會讀取表單，因此從表單系結的參數不會系結 (查詢、路由和標頭會繼續運作) 。</span><span class="sxs-lookup"><span data-stu-id="e9835-492">Since model binding doesn't read the form, parameters that are bound from the form don't bind (query, route, and header continue to work).</span></span> <span data-ttu-id="e9835-493">動作方法會直接與屬性搭配使用 `Request` 。</span><span class="sxs-lookup"><span data-stu-id="e9835-493">The action method works directly with the `Request` property.</span></span> <span data-ttu-id="e9835-494">`MultipartReader` 是用來讀取每個區段。</span><span class="sxs-lookup"><span data-stu-id="e9835-494">A `MultipartReader` is used to read each section.</span></span> <span data-ttu-id="e9835-495">索引鍵/值資料儲存在中 `KeyValueAccumulator` 。</span><span class="sxs-lookup"><span data-stu-id="e9835-495">Key/value data is stored in a `KeyValueAccumulator`.</span></span> <span data-ttu-id="e9835-496">讀取多部分區段之後，的內容 `KeyValueAccumulator` 會用來將表單資料系結至模型類型。</span><span class="sxs-lookup"><span data-stu-id="e9835-496">After the multipart sections are read, the contents of the `KeyValueAccumulator` are used to bind the form data to a model type.</span></span>
 
@@ -1238,7 +1238,7 @@ using (var reader = new BinaryReader(uploadedFileData))
 
 <span data-ttu-id="e9835-529">絕對不要使用用戶端提供的檔案名將檔案儲存至實體儲存體。</span><span class="sxs-lookup"><span data-stu-id="e9835-529">Never use a client-supplied file name for saving a file to physical storage.</span></span> <span data-ttu-id="e9835-530">使用 [GetRandomFileName](xref:System.IO.Path.GetRandomFileName*) 或 [GetTempFileName](xref:System.IO.Path.GetTempFileName*) 建立檔案的安全檔案名，以建立完整路徑 (包括暫存儲存體的檔案名) 。</span><span class="sxs-lookup"><span data-stu-id="e9835-530">Create a safe file name for the file using [Path.GetRandomFileName](xref:System.IO.Path.GetRandomFileName*) or [Path.GetTempFileName](xref:System.IO.Path.GetTempFileName*) to create a full path (including the file name) for temporary storage.</span></span>
 
-<span data-ttu-id="e9835-531">:::no-loc(Razor)::: 自動為顯示的 HTML 編碼屬性值。</span><span class="sxs-lookup"><span data-stu-id="e9835-531">:::no-loc(Razor)::: automatically HTML encodes property values for display.</span></span> <span data-ttu-id="e9835-532">下列程式碼可安全地使用：</span><span class="sxs-lookup"><span data-stu-id="e9835-532">The following code is safe to use:</span></span>
+<span data-ttu-id="e9835-531">Razor 自動為顯示的 HTML 編碼屬性值。</span><span class="sxs-lookup"><span data-stu-id="e9835-531">Razor automatically HTML encodes property values for display.</span></span> <span data-ttu-id="e9835-532">下列程式碼可安全地使用：</span><span class="sxs-lookup"><span data-stu-id="e9835-532">The following code is safe to use:</span></span>
 
 ```cshtml
 @foreach (var file in Model.DatabaseFiles) {
@@ -1250,7 +1250,7 @@ using (var reader = new BinaryReader(uploadedFileData))
 }
 ```
 
-<span data-ttu-id="e9835-533">:::no-loc(Razor):::從開始，一律 <xref:System.Net.WebUtility.HtmlEncode*> 是使用者要求的檔案名內容。</span><span class="sxs-lookup"><span data-stu-id="e9835-533">Outside of :::no-loc(Razor):::, always <xref:System.Net.WebUtility.HtmlEncode*> file name content from a user's request.</span></span>
+<span data-ttu-id="e9835-533">Razor從開始，一律 <xref:System.Net.WebUtility.HtmlEncode*> 是使用者要求的檔案名內容。</span><span class="sxs-lookup"><span data-stu-id="e9835-533">Outside of Razor, always <xref:System.Net.WebUtility.HtmlEncode*> file name content from a user's request.</span></span>
 
 <span data-ttu-id="e9835-534">許多執行必須包含檢查檔案是否存在;否則，檔案會覆寫相同名稱的檔案。</span><span class="sxs-lookup"><span data-stu-id="e9835-534">Many implementations must include a check that the file exists; otherwise, the file is overwritten by a file of the same name.</span></span> <span data-ttu-id="e9835-535">提供其他邏輯以符合您應用程式的規格。</span><span class="sxs-lookup"><span data-stu-id="e9835-535">Supply additional logic to meet your app's specifications.</span></span>
 
@@ -1258,7 +1258,7 @@ using (var reader = new BinaryReader(uploadedFileData))
 
 <span data-ttu-id="e9835-537">限制上傳檔案的大小。</span><span class="sxs-lookup"><span data-stu-id="e9835-537">Limit the size of uploaded files.</span></span>
 
-<span data-ttu-id="e9835-538">在範例應用程式中，檔案大小限制為 2 MB (以位元組) 表示。</span><span class="sxs-lookup"><span data-stu-id="e9835-538">In the sample app, the size of the file is limited to 2 MB (indicated in bytes).</span></span> <span data-ttu-id="e9835-539">這項限制是透過 [檔案的設定](xref:fundamentals/configuration/index) 提供的 *:::no-loc(appsettings.json):::* ：</span><span class="sxs-lookup"><span data-stu-id="e9835-539">The limit is supplied via [Configuration](xref:fundamentals/configuration/index) from the *:::no-loc(appsettings.json):::* file:</span></span>
+<span data-ttu-id="e9835-538">在範例應用程式中，檔案大小限制為 2 MB (以位元組) 表示。</span><span class="sxs-lookup"><span data-stu-id="e9835-538">In the sample app, the size of the file is limited to 2 MB (indicated in bytes).</span></span> <span data-ttu-id="e9835-539">這項限制是透過 [檔案的設定](xref:fundamentals/configuration/index) 提供的 *appsettings.json* ：</span><span class="sxs-lookup"><span data-stu-id="e9835-539">The limit is supplied via [Configuration](xref:fundamentals/configuration/index) from the *appsettings.json* file:</span></span>
 
 ```json
 {
@@ -1293,7 +1293,7 @@ if (formFile.Length > _fileSizeLimit)
 
 ### <a name="match-name-attribute-value-to-parameter-name-of-post-method"></a><span data-ttu-id="e9835-542">將名稱屬性值與 POST 方法的參數名稱相符</span><span class="sxs-lookup"><span data-stu-id="e9835-542">Match name attribute value to parameter name of POST method</span></span>
 
-<span data-ttu-id="e9835-543">在 :::no-loc(Razor)::: 張貼表單資料或直接使用 JavaScript 的非表單中 `FormData` ，在表單的元素中指定的名稱或 `FormData` 必須符合控制器動作中參數的名稱。</span><span class="sxs-lookup"><span data-stu-id="e9835-543">In non-:::no-loc(Razor)::: forms that POST form data or use JavaScript's `FormData` directly, the name specified in the form's element or `FormData` must match the name of the parameter in the controller's action.</span></span>
+<span data-ttu-id="e9835-543">在 Razor 張貼表單資料或直接使用 JavaScript 的非表單中 `FormData` ，在表單的元素中指定的名稱或 `FormData` 必須符合控制器動作中參數的名稱。</span><span class="sxs-lookup"><span data-stu-id="e9835-543">In non-Razor forms that POST form data or use JavaScript's `FormData` directly, the name specified in the form's element or `FormData` must match the name of the parameter in the controller's action.</span></span>
 
 <span data-ttu-id="e9835-544">在下例中︰</span><span class="sxs-lookup"><span data-stu-id="e9835-544">In the following example:</span></span>
 
@@ -1315,7 +1315,7 @@ if (formFile.Length > _fileSizeLimit)
 
 <span data-ttu-id="e9835-547">針對 c # 方法 () 的參數使用相符的名稱 `battlePlans` ：</span><span class="sxs-lookup"><span data-stu-id="e9835-547">Use a matching name for the parameter of the C# method (`battlePlans`):</span></span>
 
-* <span data-ttu-id="e9835-548">針對名為的 :::no-loc(Razor)::: 頁面頁面處理常式方法 `Upload` ：</span><span class="sxs-lookup"><span data-stu-id="e9835-548">For a :::no-loc(Razor)::: Pages page handler method named `Upload`:</span></span>
+* <span data-ttu-id="e9835-548">針對名為的 Razor 頁面頁面處理常式方法 `Upload` ：</span><span class="sxs-lookup"><span data-stu-id="e9835-548">For a Razor Pages page handler method named `Upload`:</span></span>
 
   ```csharp
   public async Task<IActionResult> OnPostUploadAsync(List<IFormFile> battlePlans)
@@ -1346,10 +1346,10 @@ public void ConfigureServices(IServiceCollection services)
 
 <span data-ttu-id="e9835-556"><xref:Microsoft.AspNetCore.Mvc.RequestFormLimitsAttribute> 用來設定 <xref:Microsoft.AspNetCore.Http.Features.FormOptions.MultipartBodyLengthLimit> 單一頁面或動作的。</span><span class="sxs-lookup"><span data-stu-id="e9835-556"><xref:Microsoft.AspNetCore.Mvc.RequestFormLimitsAttribute> is used to set the <xref:Microsoft.AspNetCore.Http.Features.FormOptions.MultipartBodyLengthLimit> for a single page or action.</span></span>
 
-<span data-ttu-id="e9835-557">在 :::no-loc(Razor)::: 頁面應用程式中，將篩選套用至[convention](xref:razor-pages/razor-pages-conventions)下列慣例 `Startup.ConfigureServices` ：</span><span class="sxs-lookup"><span data-stu-id="e9835-557">In a :::no-loc(Razor)::: Pages app, apply the filter with a [convention](xref:razor-pages/razor-pages-conventions) in `Startup.ConfigureServices`:</span></span>
+<span data-ttu-id="e9835-557">在 Razor 頁面應用程式中，將篩選套用至[convention](xref:razor-pages/razor-pages-conventions)下列慣例 `Startup.ConfigureServices` ：</span><span class="sxs-lookup"><span data-stu-id="e9835-557">In a Razor Pages app, apply the filter with a [convention](xref:razor-pages/razor-pages-conventions) in `Startup.ConfigureServices`:</span></span>
 
 ```csharp
-services.Add:::no-loc(Razor):::Pages(options =>
+services.AddRazorPages(options =>
 {
     options.Conventions
         .AddPageApplicationModelConvention("/FileUploadPage",
@@ -1362,7 +1362,7 @@ services.Add:::no-loc(Razor):::Pages(options =>
 });
 ```
 
-<span data-ttu-id="e9835-558">在 :::no-loc(Razor)::: 頁面應用程式或 MVC 應用程式中，將篩選套用至頁面模型或動作方法：</span><span class="sxs-lookup"><span data-stu-id="e9835-558">In a :::no-loc(Razor)::: Pages app or an MVC app, apply the filter to the page model or action method:</span></span>
+<span data-ttu-id="e9835-558">在 Razor 頁面應用程式或 MVC 應用程式中，將篩選套用至頁面模型或動作方法：</span><span class="sxs-lookup"><span data-stu-id="e9835-558">In a Razor Pages app or an MVC app, apply the filter to the page model or action method:</span></span>
 
 ```csharp
 // Set the limit to 256 MB
@@ -1393,10 +1393,10 @@ public static IHostBuilder CreateHostBuilder(string[] args) =>
 
 <span data-ttu-id="e9835-562"><xref:Microsoft.AspNetCore.Mvc.RequestSizeLimitAttribute> 用來設定單一頁面或動作的 [>limits.maxrequestbodysize](xref:fundamentals/servers/kestrel#maximum-request-body-size) 。</span><span class="sxs-lookup"><span data-stu-id="e9835-562"><xref:Microsoft.AspNetCore.Mvc.RequestSizeLimitAttribute> is used to set the [MaxRequestBodySize](xref:fundamentals/servers/kestrel#maximum-request-body-size) for a single page or action.</span></span>
 
-<span data-ttu-id="e9835-563">在 :::no-loc(Razor)::: 頁面應用程式中，將篩選套用至[convention](xref:razor-pages/razor-pages-conventions)下列慣例 `Startup.ConfigureServices` ：</span><span class="sxs-lookup"><span data-stu-id="e9835-563">In a :::no-loc(Razor)::: Pages app, apply the filter with a [convention](xref:razor-pages/razor-pages-conventions) in `Startup.ConfigureServices`:</span></span>
+<span data-ttu-id="e9835-563">在 Razor 頁面應用程式中，將篩選套用至[convention](xref:razor-pages/razor-pages-conventions)下列慣例 `Startup.ConfigureServices` ：</span><span class="sxs-lookup"><span data-stu-id="e9835-563">In a Razor Pages app, apply the filter with a [convention](xref:razor-pages/razor-pages-conventions) in `Startup.ConfigureServices`:</span></span>
 
 ```csharp
-services.Add:::no-loc(Razor):::Pages(options =>
+services.AddRazorPages(options =>
 {
     options.Conventions
         .AddPageApplicationModelConvention("/FileUploadPage",
@@ -1409,7 +1409,7 @@ services.Add:::no-loc(Razor):::Pages(options =>
 });
 ```
 
-<span data-ttu-id="e9835-564">在 :::no-loc(Razor)::: 頁面應用程式或 MVC 應用程式中，將篩選套用至頁面處理常式類別或動作方法：</span><span class="sxs-lookup"><span data-stu-id="e9835-564">In a :::no-loc(Razor)::: pages app or an MVC app, apply the filter to the page handler class or action method:</span></span>
+<span data-ttu-id="e9835-564">在 Razor 頁面應用程式或 MVC 應用程式中，將篩選套用至頁面處理常式類別或動作方法：</span><span class="sxs-lookup"><span data-stu-id="e9835-564">In a Razor pages app or an MVC app, apply the filter to the page handler class or action method:</span></span>
 
 ```csharp
 // Handle requests up to 50 MB
@@ -1420,7 +1420,7 @@ public class BufferedSingleFileUploadPhysicalModel : PageModel
 }
 ```
 
-<span data-ttu-id="e9835-565">`RequestSizeLimitAttribute`也可以使用指示詞套用 [`@attribute`](xref:mvc/views/razor#attribute) :::no-loc(Razor)::: ：</span><span class="sxs-lookup"><span data-stu-id="e9835-565">The `RequestSizeLimitAttribute` can also be applied using the [`@attribute`](xref:mvc/views/razor#attribute) :::no-loc(Razor)::: directive:</span></span>
+<span data-ttu-id="e9835-565">`RequestSizeLimitAttribute`也可以使用指示詞套用 [`@attribute`](xref:mvc/views/razor#attribute) Razor ：</span><span class="sxs-lookup"><span data-stu-id="e9835-565">The `RequestSizeLimitAttribute` can also be applied using the [`@attribute`](xref:mvc/views/razor#attribute) Razor directive:</span></span>
 
 ```cshtml
 @attribute [RequestSizeLimitAttribute(52428800)]
@@ -1507,7 +1507,7 @@ The request filtering module is configured to deny a request that exceeds the re
 
 * <span data-ttu-id="e9835-605">將檔案上傳到專用檔案上傳區域，最好是非系統磁片磁碟機。</span><span class="sxs-lookup"><span data-stu-id="e9835-605">Upload files to a dedicated file upload area, preferably to a non-system drive.</span></span> <span data-ttu-id="e9835-606">專用位置可讓您更輕鬆地對上傳的檔案強加安全性限制。</span><span class="sxs-lookup"><span data-stu-id="e9835-606">A dedicated location makes it easier to impose security restrictions on uploaded files.</span></span> <span data-ttu-id="e9835-607">停用檔案上傳位置的執行許可權。&dagger;</span><span class="sxs-lookup"><span data-stu-id="e9835-607">Disable execute permissions on the file upload location.&dagger;</span></span>
 * <span data-ttu-id="e9835-608">請勿將上傳的 **檔案保存在** 與應用程式相同的目錄樹狀結構中。&dagger;</span><span class="sxs-lookup"><span data-stu-id="e9835-608">Do **not** persist uploaded files in the same directory tree as the app.&dagger;</span></span>
-* <span data-ttu-id="e9835-609">使用應用程式所決定的安全檔案名。</span><span class="sxs-lookup"><span data-stu-id="e9835-609">Use a safe file name determined by the app.</span></span> <span data-ttu-id="e9835-610">請勿使用使用者提供的檔案名或上傳檔案的不受信任檔案名。 &dagger; HTML 會在顯示不受信任的檔案名時進行編碼。</span><span class="sxs-lookup"><span data-stu-id="e9835-610">Don't use a file name provided by the user or the untrusted file name of the uploaded file.&dagger; HTML encode the untrusted file name when displaying it.</span></span> <span data-ttu-id="e9835-611">例如，記錄檔案名或在 UI 中顯示 (:::no-loc(Razor)::: 會自動以 HTML 編碼輸出) 。</span><span class="sxs-lookup"><span data-stu-id="e9835-611">For example, logging the file name or displaying in UI (:::no-loc(Razor)::: automatically HTML encodes output).</span></span>
+* <span data-ttu-id="e9835-609">使用應用程式所決定的安全檔案名。</span><span class="sxs-lookup"><span data-stu-id="e9835-609">Use a safe file name determined by the app.</span></span> <span data-ttu-id="e9835-610">請勿使用使用者提供的檔案名或上傳檔案的不受信任檔案名。 &dagger; HTML 會在顯示不受信任的檔案名時進行編碼。</span><span class="sxs-lookup"><span data-stu-id="e9835-610">Don't use a file name provided by the user or the untrusted file name of the uploaded file.&dagger; HTML encode the untrusted file name when displaying it.</span></span> <span data-ttu-id="e9835-611">例如，記錄檔案名或在 UI 中顯示 (Razor 會自動以 HTML 編碼輸出) 。</span><span class="sxs-lookup"><span data-stu-id="e9835-611">For example, logging the file name or displaying in UI (Razor automatically HTML encodes output).</span></span>
 * <span data-ttu-id="e9835-612">只允許應用程式設計規格的核准副檔名。&dagger;</span><span class="sxs-lookup"><span data-stu-id="e9835-612">Allow only approved file extensions for the app's design specification.&dagger;</span></span> <!-- * Check the file format signature to prevent a user from uploading a masqueraded file.&dagger; For example, don't permit a user to upload an *.exe* file with a *.txt* extension. Add this back when we get instructions how to do this.  -->
 * <span data-ttu-id="e9835-613">確認已在伺服器上執行用戶端檢查。 &dagger; 用戶端檢查很容易規避。</span><span class="sxs-lookup"><span data-stu-id="e9835-613">Verify that client-side checks are performed on the server.&dagger; Client-side checks are easy to circumvent.</span></span>
 * <span data-ttu-id="e9835-614">檢查上傳檔案的大小。</span><span class="sxs-lookup"><span data-stu-id="e9835-614">Check the size of an uploaded file.</span></span> <span data-ttu-id="e9835-615">設定大小上限以防止大上傳。&dagger;</span><span class="sxs-lookup"><span data-stu-id="e9835-615">Set a maximum size limit to prevent large uploads.&dagger;</span></span>
@@ -1584,7 +1584,7 @@ The request filtering module is configured to deny a request that exceeds the re
 
 <span data-ttu-id="e9835-663">若要上傳小型檔案，請使用多部分形式的表單，或使用 JavaScript 來建立 POST 要求。</span><span class="sxs-lookup"><span data-stu-id="e9835-663">To upload small files, use a multipart form or construct a POST request using JavaScript.</span></span>
 
-<span data-ttu-id="e9835-664">下列範例將示範 :::no-loc(Razor)::: 如何使用頁面表單，在範例應用程式) 中上傳單一檔案 ( *Pages/BufferedSingleFileUploadPhysical. cshtml* ：</span><span class="sxs-lookup"><span data-stu-id="e9835-664">The following example demonstrates the use of a :::no-loc(Razor)::: Pages form to upload a single file ( *Pages/BufferedSingleFileUploadPhysical.cshtml* in the sample app):</span></span>
+<span data-ttu-id="e9835-664">下列範例將示範 Razor 如何使用頁面表單，在範例應用程式) 中上傳單一檔案 ( *Pages/BufferedSingleFileUploadPhysical. cshtml* ：</span><span class="sxs-lookup"><span data-stu-id="e9835-664">The following example demonstrates the use of a Razor Pages form to upload a single file ( *Pages/BufferedSingleFileUploadPhysical.cshtml* in the sample app):</span></span>
 
 ```cshtml
 <form enctype="multipart/form-data" method="post">
@@ -1811,7 +1811,7 @@ public class BufferedSingleFileUploadDb
 > [!NOTE]
 > <span data-ttu-id="e9835-715"><xref:Microsoft.AspNetCore.Http.IFormFile> 可以直接當做動作方法參數使用，或作為系結模型屬性。</span><span class="sxs-lookup"><span data-stu-id="e9835-715"><xref:Microsoft.AspNetCore.Http.IFormFile> can be used directly as an action method parameter or as a bound model property.</span></span> <span data-ttu-id="e9835-716">先前的範例會使用系結模型屬性。</span><span class="sxs-lookup"><span data-stu-id="e9835-716">The prior example uses a bound model property.</span></span>
 
-<span data-ttu-id="e9835-717">在 `FileUpload` :::no-loc(Razor)::: 頁面表單中使用：</span><span class="sxs-lookup"><span data-stu-id="e9835-717">The `FileUpload` is used in the :::no-loc(Razor)::: Pages form:</span></span>
+<span data-ttu-id="e9835-717">在 `FileUpload` Razor 頁面表單中使用：</span><span class="sxs-lookup"><span data-stu-id="e9835-717">The `FileUpload` is used in the Razor Pages form:</span></span>
 
 ```cshtml
 <form enctype="multipart/form-data" method="post">
@@ -1877,15 +1877,15 @@ public async Task<IActionResult> OnPostUploadAsync()
 
 <span data-ttu-id="e9835-731">下列範例示範如何使用 JavaScript 將檔案串流至控制器動作。</span><span class="sxs-lookup"><span data-stu-id="e9835-731">The following example demonstrates how to use JavaScript to stream a file to a controller action.</span></span> <span data-ttu-id="e9835-732">檔案的 antiforgery token 是使用自訂篩選屬性所產生，並且傳遞至用戶端 HTTP 標頭，而不是在要求主體中。</span><span class="sxs-lookup"><span data-stu-id="e9835-732">The file's antiforgery token is generated using a custom filter attribute and passed to the client HTTP headers instead of in the request body.</span></span> <span data-ttu-id="e9835-733">因為動作方法會直接處理已上傳的資料，所以其他自訂篩選會停用表單模型系結。</span><span class="sxs-lookup"><span data-stu-id="e9835-733">Because the action method processes the uploaded data directly, form model binding is disabled by another custom filter.</span></span> <span data-ttu-id="e9835-734">在動作內，會使用 `MultipartReader` 來讀取表單內容，以讀取每個個別 `MultipartSection`、處理檔案，或視需要儲存內容。</span><span class="sxs-lookup"><span data-stu-id="e9835-734">Within the action, the form's contents are read using a `MultipartReader`, which reads each individual `MultipartSection`, processing the file or storing the contents as appropriate.</span></span> <span data-ttu-id="e9835-735">讀取多部分區段之後，動作會執行它自己的模型系結。</span><span class="sxs-lookup"><span data-stu-id="e9835-735">After the multipart sections are read, the action performs its own model binding.</span></span>
 
-<span data-ttu-id="e9835-736">初始頁面回應會載入表單，並透過屬性) 將 antiforgery token 儲存在 :::no-loc(cookie)::: (中 `GenerateAntiforgeryToken:::no-loc(Cookie):::Attribute` 。</span><span class="sxs-lookup"><span data-stu-id="e9835-736">The initial page response loads the form and saves an antiforgery token in a :::no-loc(cookie)::: (via the `GenerateAntiforgeryToken:::no-loc(Cookie):::Attribute` attribute).</span></span> <span data-ttu-id="e9835-737">屬性使用 ASP.NET Core 的內建 [antiforgery 支援](xref:security/anti-request-forgery) 來設定 :::no-loc(cookie)::: 具有要求權杖的。</span><span class="sxs-lookup"><span data-stu-id="e9835-737">The attribute uses ASP.NET Core's built-in [antiforgery support](xref:security/anti-request-forgery) to set a :::no-loc(cookie)::: with a request token:</span></span>
+<span data-ttu-id="e9835-736">初始頁面回應會載入表單，並透過屬性) 將 antiforgery token 儲存在 cookie (中 `GenerateAntiforgeryTokenCookieAttribute` 。</span><span class="sxs-lookup"><span data-stu-id="e9835-736">The initial page response loads the form and saves an antiforgery token in a cookie (via the `GenerateAntiforgeryTokenCookieAttribute` attribute).</span></span> <span data-ttu-id="e9835-737">屬性使用 ASP.NET Core 的內建 [antiforgery 支援](xref:security/anti-request-forgery) 來設定 cookie 具有要求權杖的。</span><span class="sxs-lookup"><span data-stu-id="e9835-737">The attribute uses ASP.NET Core's built-in [antiforgery support](xref:security/anti-request-forgery) to set a cookie with a request token:</span></span>
 
-[!code-csharp[](file-uploads/samples/2.x/SampleApp/Filters/Antiforgery.cs?name=snippet_GenerateAntiforgeryToken:::no-loc(Cookie):::Attribute)]
+[!code-csharp[](file-uploads/samples/2.x/SampleApp/Filters/Antiforgery.cs?name=snippet_GenerateAntiforgeryTokenCookieAttribute)]
 
 <span data-ttu-id="e9835-738">`DisableFormValueModelBindingAttribute`用來停用模型系結：</span><span class="sxs-lookup"><span data-stu-id="e9835-738">The `DisableFormValueModelBindingAttribute` is used to disable model binding:</span></span>
 
 [!code-csharp[](file-uploads/samples/2.x/SampleApp/Filters/ModelBinding.cs?name=snippet_DisableFormValueModelBindingAttribute)]
 
-<span data-ttu-id="e9835-739">在範例應用程式中 `GenerateAntiforgeryToken:::no-loc(Cookie):::Attribute` ， `DisableFormValueModelBindingAttribute` 會 `/StreamedSingleFileUploadDb` `/StreamedSingleFileUploadPhysical` `Startup.ConfigureServices` 使用[ :::no-loc(Razor)::: 頁面慣例](xref:razor-pages/razor-pages-conventions)，並在和的頁面應用程式模型中套用為篩選：</span><span class="sxs-lookup"><span data-stu-id="e9835-739">In the sample app, `GenerateAntiforgeryToken:::no-loc(Cookie):::Attribute` and `DisableFormValueModelBindingAttribute` are applied as filters to the page application models of `/StreamedSingleFileUploadDb` and `/StreamedSingleFileUploadPhysical` in `Startup.ConfigureServices` using [:::no-loc(Razor)::: Pages conventions](xref:razor-pages/razor-pages-conventions):</span></span>
+<span data-ttu-id="e9835-739">在範例應用程式中 `GenerateAntiforgeryTokenCookieAttribute` ， `DisableFormValueModelBindingAttribute` 會 `/StreamedSingleFileUploadDb` `/StreamedSingleFileUploadPhysical` `Startup.ConfigureServices` 使用[ Razor 頁面慣例](xref:razor-pages/razor-pages-conventions)，並在和的頁面應用程式模型中套用為篩選：</span><span class="sxs-lookup"><span data-stu-id="e9835-739">In the sample app, `GenerateAntiforgeryTokenCookieAttribute` and `DisableFormValueModelBindingAttribute` are applied as filters to the page application models of `/StreamedSingleFileUploadDb` and `/StreamedSingleFileUploadPhysical` in `Startup.ConfigureServices` using [Razor Pages conventions](xref:razor-pages/razor-pages-conventions):</span></span>
 
 [!code-csharp[](file-uploads/samples/2.x/SampleApp/Startup.cs?name=snippet_AddMvc&highlight=8-11,17-20)]
 
@@ -1973,7 +1973,7 @@ using (var reader = new BinaryReader(uploadedFileData))
 
 <span data-ttu-id="e9835-777">絕對不要使用用戶端提供的檔案名將檔案儲存至實體儲存體。</span><span class="sxs-lookup"><span data-stu-id="e9835-777">Never use a client-supplied file name for saving a file to physical storage.</span></span> <span data-ttu-id="e9835-778">使用 [GetRandomFileName](xref:System.IO.Path.GetRandomFileName*) 或 [GetTempFileName](xref:System.IO.Path.GetTempFileName*) 建立檔案的安全檔案名，以建立完整路徑 (包括暫存儲存體的檔案名) 。</span><span class="sxs-lookup"><span data-stu-id="e9835-778">Create a safe file name for the file using [Path.GetRandomFileName](xref:System.IO.Path.GetRandomFileName*) or [Path.GetTempFileName](xref:System.IO.Path.GetTempFileName*) to create a full path (including the file name) for temporary storage.</span></span>
 
-<span data-ttu-id="e9835-779">:::no-loc(Razor)::: 自動為顯示的 HTML 編碼屬性值。</span><span class="sxs-lookup"><span data-stu-id="e9835-779">:::no-loc(Razor)::: automatically HTML encodes property values for display.</span></span> <span data-ttu-id="e9835-780">下列程式碼可安全地使用：</span><span class="sxs-lookup"><span data-stu-id="e9835-780">The following code is safe to use:</span></span>
+<span data-ttu-id="e9835-779">Razor 自動為顯示的 HTML 編碼屬性值。</span><span class="sxs-lookup"><span data-stu-id="e9835-779">Razor automatically HTML encodes property values for display.</span></span> <span data-ttu-id="e9835-780">下列程式碼可安全地使用：</span><span class="sxs-lookup"><span data-stu-id="e9835-780">The following code is safe to use:</span></span>
 
 ```cshtml
 @foreach (var file in Model.DatabaseFiles) {
@@ -1985,7 +1985,7 @@ using (var reader = new BinaryReader(uploadedFileData))
 }
 ```
 
-<span data-ttu-id="e9835-781">:::no-loc(Razor):::從開始，一律 <xref:System.Net.WebUtility.HtmlEncode*> 是使用者要求的檔案名內容。</span><span class="sxs-lookup"><span data-stu-id="e9835-781">Outside of :::no-loc(Razor):::, always <xref:System.Net.WebUtility.HtmlEncode*> file name content from a user's request.</span></span>
+<span data-ttu-id="e9835-781">Razor從開始，一律 <xref:System.Net.WebUtility.HtmlEncode*> 是使用者要求的檔案名內容。</span><span class="sxs-lookup"><span data-stu-id="e9835-781">Outside of Razor, always <xref:System.Net.WebUtility.HtmlEncode*> file name content from a user's request.</span></span>
 
 <span data-ttu-id="e9835-782">許多執行必須包含檢查檔案是否存在;否則，檔案會覆寫相同名稱的檔案。</span><span class="sxs-lookup"><span data-stu-id="e9835-782">Many implementations must include a check that the file exists; otherwise, the file is overwritten by a file of the same name.</span></span> <span data-ttu-id="e9835-783">提供其他邏輯以符合您應用程式的規格。</span><span class="sxs-lookup"><span data-stu-id="e9835-783">Supply additional logic to meet your app's specifications.</span></span>
 
@@ -1993,7 +1993,7 @@ using (var reader = new BinaryReader(uploadedFileData))
 
 <span data-ttu-id="e9835-785">限制上傳檔案的大小。</span><span class="sxs-lookup"><span data-stu-id="e9835-785">Limit the size of uploaded files.</span></span>
 
-<span data-ttu-id="e9835-786">在範例應用程式中，檔案大小限制為 2 MB (以位元組) 表示。</span><span class="sxs-lookup"><span data-stu-id="e9835-786">In the sample app, the size of the file is limited to 2 MB (indicated in bytes).</span></span> <span data-ttu-id="e9835-787">這項限制是透過 [檔案的設定](xref:fundamentals/configuration/index) 提供的 *:::no-loc(appsettings.json):::* ：</span><span class="sxs-lookup"><span data-stu-id="e9835-787">The limit is supplied via [Configuration](xref:fundamentals/configuration/index) from the *:::no-loc(appsettings.json):::* file:</span></span>
+<span data-ttu-id="e9835-786">在範例應用程式中，檔案大小限制為 2 MB (以位元組) 表示。</span><span class="sxs-lookup"><span data-stu-id="e9835-786">In the sample app, the size of the file is limited to 2 MB (indicated in bytes).</span></span> <span data-ttu-id="e9835-787">這項限制是透過 [檔案的設定](xref:fundamentals/configuration/index) 提供的 *appsettings.json* ：</span><span class="sxs-lookup"><span data-stu-id="e9835-787">The limit is supplied via [Configuration](xref:fundamentals/configuration/index) from the *appsettings.json* file:</span></span>
 
 ```json
 {
@@ -2028,7 +2028,7 @@ if (formFile.Length > _fileSizeLimit)
 
 ### <a name="match-name-attribute-value-to-parameter-name-of-post-method"></a><span data-ttu-id="e9835-790">將名稱屬性值與 POST 方法的參數名稱相符</span><span class="sxs-lookup"><span data-stu-id="e9835-790">Match name attribute value to parameter name of POST method</span></span>
 
-<span data-ttu-id="e9835-791">在 :::no-loc(Razor)::: 張貼表單資料或直接使用 JavaScript 的非表單中 `FormData` ，在表單的元素中指定的名稱或 `FormData` 必須符合控制器動作中參數的名稱。</span><span class="sxs-lookup"><span data-stu-id="e9835-791">In non-:::no-loc(Razor)::: forms that POST form data or use JavaScript's `FormData` directly, the name specified in the form's element or `FormData` must match the name of the parameter in the controller's action.</span></span>
+<span data-ttu-id="e9835-791">在 Razor 張貼表單資料或直接使用 JavaScript 的非表單中 `FormData` ，在表單的元素中指定的名稱或 `FormData` 必須符合控制器動作中參數的名稱。</span><span class="sxs-lookup"><span data-stu-id="e9835-791">In non-Razor forms that POST form data or use JavaScript's `FormData` directly, the name specified in the form's element or `FormData` must match the name of the parameter in the controller's action.</span></span>
 
 <span data-ttu-id="e9835-792">在下例中︰</span><span class="sxs-lookup"><span data-stu-id="e9835-792">In the following example:</span></span>
 
@@ -2050,7 +2050,7 @@ if (formFile.Length > _fileSizeLimit)
 
 <span data-ttu-id="e9835-795">針對 c # 方法 () 的參數使用相符的名稱 `battlePlans` ：</span><span class="sxs-lookup"><span data-stu-id="e9835-795">Use a matching name for the parameter of the C# method (`battlePlans`):</span></span>
 
-* <span data-ttu-id="e9835-796">針對名為的 :::no-loc(Razor)::: 頁面頁面處理常式方法 `Upload` ：</span><span class="sxs-lookup"><span data-stu-id="e9835-796">For a :::no-loc(Razor)::: Pages page handler method named `Upload`:</span></span>
+* <span data-ttu-id="e9835-796">針對名為的 Razor 頁面頁面處理常式方法 `Upload` ：</span><span class="sxs-lookup"><span data-stu-id="e9835-796">For a Razor Pages page handler method named `Upload`:</span></span>
 
   ```csharp
   public async Task<IActionResult> OnPostUploadAsync(List<IFormFile> battlePlans)
@@ -2081,11 +2081,11 @@ public void ConfigureServices(IServiceCollection services)
 
 <span data-ttu-id="e9835-804"><xref:Microsoft.AspNetCore.Mvc.RequestFormLimitsAttribute> 用來設定 <xref:Microsoft.AspNetCore.Http.Features.FormOptions.MultipartBodyLengthLimit> 單一頁面或動作的。</span><span class="sxs-lookup"><span data-stu-id="e9835-804"><xref:Microsoft.AspNetCore.Mvc.RequestFormLimitsAttribute> is used to set the <xref:Microsoft.AspNetCore.Http.Features.FormOptions.MultipartBodyLengthLimit> for a single page or action.</span></span>
 
-<span data-ttu-id="e9835-805">在 :::no-loc(Razor)::: 頁面應用程式中，將篩選套用至[convention](xref:razor-pages/razor-pages-conventions)下列慣例 `Startup.ConfigureServices` ：</span><span class="sxs-lookup"><span data-stu-id="e9835-805">In a :::no-loc(Razor)::: Pages app, apply the filter with a [convention](xref:razor-pages/razor-pages-conventions) in `Startup.ConfigureServices`:</span></span>
+<span data-ttu-id="e9835-805">在 Razor 頁面應用程式中，將篩選套用至[convention](xref:razor-pages/razor-pages-conventions)下列慣例 `Startup.ConfigureServices` ：</span><span class="sxs-lookup"><span data-stu-id="e9835-805">In a Razor Pages app, apply the filter with a [convention](xref:razor-pages/razor-pages-conventions) in `Startup.ConfigureServices`:</span></span>
 
 ```csharp
 services.AddMvc()
-    .Add:::no-loc(Razor):::PagesOptions(options =>
+    .AddRazorPagesOptions(options =>
     {
         options.Conventions
             .AddPageApplicationModelConvention("/FileUploadPage",
@@ -2099,7 +2099,7 @@ services.AddMvc()
     .SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
 ```
 
-<span data-ttu-id="e9835-806">在 :::no-loc(Razor)::: 頁面應用程式或 MVC 應用程式中，將篩選套用至頁面模型或動作方法：</span><span class="sxs-lookup"><span data-stu-id="e9835-806">In a :::no-loc(Razor)::: Pages app or an MVC app, apply the filter to the page model or action method:</span></span>
+<span data-ttu-id="e9835-806">在 Razor 頁面應用程式或 MVC 應用程式中，將篩選套用至頁面模型或動作方法：</span><span class="sxs-lookup"><span data-stu-id="e9835-806">In a Razor Pages app or an MVC app, apply the filter to the page model or action method:</span></span>
 
 ```csharp
 // Set the limit to 256 MB
@@ -2127,11 +2127,11 @@ public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
 
 <span data-ttu-id="e9835-810"><xref:Microsoft.AspNetCore.Mvc.RequestSizeLimitAttribute> 用來設定單一頁面或動作的 [>limits.maxrequestbodysize](xref:fundamentals/servers/kestrel#maximum-request-body-size) 。</span><span class="sxs-lookup"><span data-stu-id="e9835-810"><xref:Microsoft.AspNetCore.Mvc.RequestSizeLimitAttribute> is used to set the [MaxRequestBodySize](xref:fundamentals/servers/kestrel#maximum-request-body-size) for a single page or action.</span></span>
 
-<span data-ttu-id="e9835-811">在 :::no-loc(Razor)::: 頁面應用程式中，將篩選套用至[convention](xref:razor-pages/razor-pages-conventions)下列慣例 `Startup.ConfigureServices` ：</span><span class="sxs-lookup"><span data-stu-id="e9835-811">In a :::no-loc(Razor)::: Pages app, apply the filter with a [convention](xref:razor-pages/razor-pages-conventions) in `Startup.ConfigureServices`:</span></span>
+<span data-ttu-id="e9835-811">在 Razor 頁面應用程式中，將篩選套用至[convention](xref:razor-pages/razor-pages-conventions)下列慣例 `Startup.ConfigureServices` ：</span><span class="sxs-lookup"><span data-stu-id="e9835-811">In a Razor Pages app, apply the filter with a [convention](xref:razor-pages/razor-pages-conventions) in `Startup.ConfigureServices`:</span></span>
 
 ```csharp
 services.AddMvc()
-    .Add:::no-loc(Razor):::PagesOptions(options =>
+    .AddRazorPagesOptions(options =>
     {
         options.Conventions
             .AddPageApplicationModelConvention("/FileUploadPage",
@@ -2145,7 +2145,7 @@ services.AddMvc()
     .SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
 ```
 
-<span data-ttu-id="e9835-812">在 :::no-loc(Razor)::: 頁面應用程式或 MVC 應用程式中，將篩選套用至頁面處理常式類別或動作方法：</span><span class="sxs-lookup"><span data-stu-id="e9835-812">In a :::no-loc(Razor)::: pages app or an MVC app, apply the filter to the page handler class or action method:</span></span>
+<span data-ttu-id="e9835-812">在 Razor 頁面應用程式或 MVC 應用程式中，將篩選套用至頁面處理常式類別或動作方法：</span><span class="sxs-lookup"><span data-stu-id="e9835-812">In a Razor pages app or an MVC app, apply the filter to the page handler class or action method:</span></span>
 
 ```csharp
 // Handle requests up to 50 MB

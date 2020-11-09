@@ -1,23 +1,23 @@
 ---
-title: ':::no-loc(SignalR)::: API 設計考慮'
+title: 'SignalR API 設計考慮'
 author: anurse
-description: '瞭解如何設計 :::no-loc(SignalR)::: api，以在您的應用程式版本之間進行相容性。'
+description: '瞭解如何設計 SignalR api，以在您的應用程式版本之間進行相容性。'
 monikerRange: '>= aspnetcore-2.1'
 ms.author: anurse
 ms.custom: mvc
 ms.date: 11/12/2019
 no-loc:
-- ':::no-loc(appsettings.json):::'
-- ':::no-loc(ASP.NET Core Identity):::'
-- ':::no-loc(cookie):::'
-- ':::no-loc(Cookie):::'
-- ':::no-loc(Blazor):::'
-- ':::no-loc(Blazor Server):::'
-- ':::no-loc(Blazor WebAssembly):::'
-- ':::no-loc(Identity):::'
-- ":::no-loc(Let's Encrypt):::"
-- ':::no-loc(Razor):::'
-- ':::no-loc(SignalR):::'
+- 'appsettings.json'
+- 'ASP.NET Core Identity'
+- 'cookie'
+- 'Cookie'
+- 'Blazor'
+- 'Blazor Server'
+- 'Blazor WebAssembly'
+- 'Identity'
+- "Let's Encrypt"
+- 'Razor'
+- 'SignalR'
 uid: signalr/api-design
 ms.openlocfilehash: 87665a7950edbc70b664230d2f078598e9dbc0aa
 ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
@@ -26,15 +26,15 @@ ms.contentlocale: zh-TW
 ms.lasthandoff: 10/30/2020
 ms.locfileid: "93059646"
 ---
-# <a name="no-locsignalr-api-design-considerations"></a><span data-ttu-id="fc04d-103">:::no-loc(SignalR)::: API 設計考慮</span><span class="sxs-lookup"><span data-stu-id="fc04d-103">:::no-loc(SignalR)::: API design considerations</span></span>
+# <a name="no-locsignalr-api-design-considerations"></a><span data-ttu-id="fc04d-103">SignalR API 設計考慮</span><span class="sxs-lookup"><span data-stu-id="fc04d-103">SignalR API design considerations</span></span>
 
 <span data-ttu-id="fc04d-104">[Andrew Stanton-護士](https://twitter.com/anurse)</span><span class="sxs-lookup"><span data-stu-id="fc04d-104">By [Andrew Stanton-Nurse](https://twitter.com/anurse)</span></span>
 
-<span data-ttu-id="fc04d-105">本文提供建立 :::no-loc(SignalR)::: 型 api 的指引。</span><span class="sxs-lookup"><span data-stu-id="fc04d-105">This article provides guidance for building :::no-loc(SignalR):::-based APIs.</span></span>
+<span data-ttu-id="fc04d-105">本文提供建立 SignalR 型 api 的指引。</span><span class="sxs-lookup"><span data-stu-id="fc04d-105">This article provides guidance for building SignalR-based APIs.</span></span>
 
 ## <a name="use-custom-object-parameters-to-ensure-backwards-compatibility"></a><span data-ttu-id="fc04d-106">使用自訂物件參數以確保回溯相容性</span><span class="sxs-lookup"><span data-stu-id="fc04d-106">Use custom object parameters to ensure backwards-compatibility</span></span>
 
-<span data-ttu-id="fc04d-107">將參數加入至 :::no-loc(SignalR)::: 中樞方法 (用戶端或伺服器上的) 是一項 *重大變更* 。</span><span class="sxs-lookup"><span data-stu-id="fc04d-107">Adding parameters to a :::no-loc(SignalR)::: hub method (on either the client or the server) is a *breaking change* .</span></span> <span data-ttu-id="fc04d-108">這表示較舊的用戶端/伺服器在嘗試叫用方法時，如果沒有適當的參數數目，就會收到錯誤。</span><span class="sxs-lookup"><span data-stu-id="fc04d-108">This means older clients/servers will get errors when they try to invoke the method without the appropriate number of parameters.</span></span> <span data-ttu-id="fc04d-109">不過，將屬性新增至自訂物件參數 **不** 是中斷性變更。</span><span class="sxs-lookup"><span data-stu-id="fc04d-109">However, adding properties to a custom object parameter is **not** a breaking change.</span></span> <span data-ttu-id="fc04d-110">這可以用來設計可在用戶端或伺服器上復原變更的相容 Api。</span><span class="sxs-lookup"><span data-stu-id="fc04d-110">This can be used to design compatible APIs that are resilient to changes on the client or the server.</span></span>
+<span data-ttu-id="fc04d-107">將參數加入至 SignalR 中樞方法 (用戶端或伺服器上的) 是一項 *重大變更* 。</span><span class="sxs-lookup"><span data-stu-id="fc04d-107">Adding parameters to a SignalR hub method (on either the client or the server) is a *breaking change* .</span></span> <span data-ttu-id="fc04d-108">這表示較舊的用戶端/伺服器在嘗試叫用方法時，如果沒有適當的參數數目，就會收到錯誤。</span><span class="sxs-lookup"><span data-stu-id="fc04d-108">This means older clients/servers will get errors when they try to invoke the method without the appropriate number of parameters.</span></span> <span data-ttu-id="fc04d-109">不過，將屬性新增至自訂物件參數 **不** 是中斷性變更。</span><span class="sxs-lookup"><span data-stu-id="fc04d-109">However, adding properties to a custom object parameter is **not** a breaking change.</span></span> <span data-ttu-id="fc04d-110">這可以用來設計可在用戶端或伺服器上復原變更的相容 Api。</span><span class="sxs-lookup"><span data-stu-id="fc04d-110">This can be used to design compatible APIs that are resilient to changes on the client or the server.</span></span>
 
 <span data-ttu-id="fc04d-111">例如，請考慮伺服器端 API，如下所示：</span><span class="sxs-lookup"><span data-stu-id="fc04d-111">For example, consider a server-side API like the following:</span></span>
 
@@ -51,7 +51,7 @@ ms.locfileid: "93059646"
 <span data-ttu-id="fc04d-115">當舊用戶端嘗試叫用此方法時，將會收到如下的錯誤：</span><span class="sxs-lookup"><span data-stu-id="fc04d-115">When the old client tries to invoke this method, it will get an error like this:</span></span>
 
 ```
-Microsoft.AspNetCore.:::no-loc(SignalR):::.HubException: Failed to invoke 'GetTotalLength' due to an error on the server.
+Microsoft.AspNetCore.SignalR.HubException: Failed to invoke 'GetTotalLength' due to an error on the server.
 ```
 
 <span data-ttu-id="fc04d-116">在伺服器上，您會看到如下的記錄訊息：</span><span class="sxs-lookup"><span data-stu-id="fc04d-116">On the server, you'll see a log message like this:</span></span>

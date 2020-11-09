@@ -1,23 +1,23 @@
 ---
-title: 'ASP.NET Core 中的記錄和診斷 :::no-loc(SignalR):::'
+title: 'ASP.NET Core 中的記錄和診斷 SignalR'
 author: anurse
-description: '瞭解如何從您的 ASP.NET Core 應用程式收集診斷資訊 :::no-loc(SignalR)::: 。'
+description: '瞭解如何從您的 ASP.NET Core 應用程式收集診斷資訊 SignalR 。'
 monikerRange: '>= aspnetcore-2.1'
 ms.author: anurse
 ms.custom: devx-track-csharp, signalr, devx-track-js
 ms.date: 06/12/2020
 no-loc:
-- ':::no-loc(appsettings.json):::'
-- ':::no-loc(ASP.NET Core Identity):::'
-- ':::no-loc(cookie):::'
-- ':::no-loc(Cookie):::'
-- ':::no-loc(Blazor):::'
-- ':::no-loc(Blazor Server):::'
-- ':::no-loc(Blazor WebAssembly):::'
-- ':::no-loc(Identity):::'
-- ":::no-loc(Let's Encrypt):::"
-- ':::no-loc(Razor):::'
-- ':::no-loc(SignalR):::'
+- 'appsettings.json'
+- 'ASP.NET Core Identity'
+- 'cookie'
+- 'Cookie'
+- 'Blazor'
+- 'Blazor Server'
+- 'Blazor WebAssembly'
+- 'Identity'
+- "Let's Encrypt"
+- 'Razor'
+- 'SignalR'
 uid: signalr/diagnostics
 ms.openlocfilehash: 6e5e9d866a1e03e69856cc63dcfe30284048dd6d
 ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
@@ -26,25 +26,25 @@ ms.contentlocale: zh-TW
 ms.lasthandoff: 10/30/2020
 ms.locfileid: "93061310"
 ---
-# <a name="logging-and-diagnostics-in-aspnet-core-no-locsignalr"></a><span data-ttu-id="2959d-103">ASP.NET Core 中的記錄和診斷 :::no-loc(SignalR):::</span><span class="sxs-lookup"><span data-stu-id="2959d-103">Logging and diagnostics in ASP.NET Core :::no-loc(SignalR):::</span></span>
+# <a name="logging-and-diagnostics-in-aspnet-core-no-locsignalr"></a><span data-ttu-id="2959d-103">ASP.NET Core 中的記錄和診斷 SignalR</span><span class="sxs-lookup"><span data-stu-id="2959d-103">Logging and diagnostics in ASP.NET Core SignalR</span></span>
 
 <span data-ttu-id="2959d-104">[Andrew Stanton-護士](https://twitter.com/anurse)</span><span class="sxs-lookup"><span data-stu-id="2959d-104">By [Andrew Stanton-Nurse](https://twitter.com/anurse)</span></span>
 
-<span data-ttu-id="2959d-105">本文提供從 ASP.NET Core :::no-loc(SignalR)::: 應用程式收集診斷資訊，以協助疑難排解問題的指引。</span><span class="sxs-lookup"><span data-stu-id="2959d-105">This article provides guidance for gathering diagnostics from your ASP.NET Core :::no-loc(SignalR)::: app to help troubleshoot issues.</span></span>
+<span data-ttu-id="2959d-105">本文提供從 ASP.NET Core SignalR 應用程式收集診斷資訊，以協助疑難排解問題的指引。</span><span class="sxs-lookup"><span data-stu-id="2959d-105">This article provides guidance for gathering diagnostics from your ASP.NET Core SignalR app to help troubleshoot issues.</span></span>
 
 ## <a name="server-side-logging"></a><span data-ttu-id="2959d-106">伺服器端記錄</span><span class="sxs-lookup"><span data-stu-id="2959d-106">Server-side logging</span></span>
 
 > [!WARNING]
 > <span data-ttu-id="2959d-107">伺服器端記錄檔可能包含來自您應用程式的機密資訊。</span><span class="sxs-lookup"><span data-stu-id="2959d-107">Server-side logs may contain sensitive information from your app.</span></span> <span data-ttu-id="2959d-108">**切勿** 將未經處理的記錄從生產環境應用程式張貼到 GitHub 之類的公用論壇。</span><span class="sxs-lookup"><span data-stu-id="2959d-108">**Never** post raw logs from production apps to public forums like GitHub.</span></span>
 
-<span data-ttu-id="2959d-109">由於 :::no-loc(SignalR)::: 是 ASP.NET Core 的一部分，因此會使用 ASP.NET Core 記錄系統。</span><span class="sxs-lookup"><span data-stu-id="2959d-109">Since :::no-loc(SignalR)::: is part of ASP.NET Core, it uses the ASP.NET Core logging system.</span></span> <span data-ttu-id="2959d-110">在預設設定中， :::no-loc(SignalR)::: 會記錄極少的資訊，但這可以設定。</span><span class="sxs-lookup"><span data-stu-id="2959d-110">In the default configuration, :::no-loc(SignalR)::: logs very little information, but this can configured.</span></span> <span data-ttu-id="2959d-111">如需有關設定 ASP.NET Core 記錄的詳細資訊，請參閱 [ASP.NET Core 記錄](xref:fundamentals/logging/index#configuration) 檔。</span><span class="sxs-lookup"><span data-stu-id="2959d-111">See the documentation on [ASP.NET Core logging](xref:fundamentals/logging/index#configuration) for details on configuring ASP.NET Core logging.</span></span>
+<span data-ttu-id="2959d-109">由於 SignalR 是 ASP.NET Core 的一部分，因此會使用 ASP.NET Core 記錄系統。</span><span class="sxs-lookup"><span data-stu-id="2959d-109">Since SignalR is part of ASP.NET Core, it uses the ASP.NET Core logging system.</span></span> <span data-ttu-id="2959d-110">在預設設定中， SignalR 會記錄極少的資訊，但這可以設定。</span><span class="sxs-lookup"><span data-stu-id="2959d-110">In the default configuration, SignalR logs very little information, but this can configured.</span></span> <span data-ttu-id="2959d-111">如需有關設定 ASP.NET Core 記錄的詳細資訊，請參閱 [ASP.NET Core 記錄](xref:fundamentals/logging/index#configuration) 檔。</span><span class="sxs-lookup"><span data-stu-id="2959d-111">See the documentation on [ASP.NET Core logging](xref:fundamentals/logging/index#configuration) for details on configuring ASP.NET Core logging.</span></span>
 
-<span data-ttu-id="2959d-112">:::no-loc(SignalR)::: 使用兩個記錄器類別：</span><span class="sxs-lookup"><span data-stu-id="2959d-112">:::no-loc(SignalR)::: uses two logger categories:</span></span>
+<span data-ttu-id="2959d-112">SignalR 使用兩個記錄器類別：</span><span class="sxs-lookup"><span data-stu-id="2959d-112">SignalR uses two logger categories:</span></span>
 
-* <span data-ttu-id="2959d-113">`Microsoft.AspNetCore.:::no-loc(SignalR):::`：適用于與中樞通訊協定相關的記錄、啟動中樞、叫用方法，以及其他中樞相關的活動。</span><span class="sxs-lookup"><span data-stu-id="2959d-113">`Microsoft.AspNetCore.:::no-loc(SignalR):::`: For logs related to Hub Protocols, activating Hubs, invoking methods, and other Hub-related activities.</span></span>
-* <span data-ttu-id="2959d-114">`Microsoft.AspNetCore.Http.Connections`：適用于傳輸的相關記錄，例如 Websocket、長時間輪詢、Server-Sent 事件，以及低層級的 :::no-loc(SignalR)::: 基礎結構。</span><span class="sxs-lookup"><span data-stu-id="2959d-114">`Microsoft.AspNetCore.Http.Connections`: For logs related to transports, such as WebSockets, Long Polling, Server-Sent Events, and low-level :::no-loc(SignalR)::: infrastructure.</span></span>
+* <span data-ttu-id="2959d-113">`Microsoft.AspNetCore.SignalR`：適用于與中樞通訊協定相關的記錄、啟動中樞、叫用方法，以及其他中樞相關的活動。</span><span class="sxs-lookup"><span data-stu-id="2959d-113">`Microsoft.AspNetCore.SignalR`: For logs related to Hub Protocols, activating Hubs, invoking methods, and other Hub-related activities.</span></span>
+* <span data-ttu-id="2959d-114">`Microsoft.AspNetCore.Http.Connections`：適用于傳輸的相關記錄，例如 Websocket、長時間輪詢、Server-Sent 事件，以及低層級的 SignalR 基礎結構。</span><span class="sxs-lookup"><span data-stu-id="2959d-114">`Microsoft.AspNetCore.Http.Connections`: For logs related to transports, such as WebSockets, Long Polling, Server-Sent Events, and low-level SignalR infrastructure.</span></span>
 
-<span data-ttu-id="2959d-115">若要從啟用詳細記錄 :::no-loc(SignalR)::: ，請將 `Debug` *:::no-loc(appsettings.json):::* 下列專案新增至檔案中的 `LogLevel` 子區段，以將上述兩個前置詞設定為檔案中的層級 `Logging` ：</span><span class="sxs-lookup"><span data-stu-id="2959d-115">To enable detailed logs from :::no-loc(SignalR):::, configure both of the preceding prefixes to the `Debug` level in your *:::no-loc(appsettings.json):::* file by adding the following items to the `LogLevel` sub-section in `Logging`:</span></span>
+<span data-ttu-id="2959d-115">若要從啟用詳細記錄 SignalR ，請將 `Debug` *appsettings.json* 下列專案新增至檔案中的 `LogLevel` 子區段，以將上述兩個前置詞設定為檔案中的層級 `Logging` ：</span><span class="sxs-lookup"><span data-stu-id="2959d-115">To enable detailed logs from SignalR, configure both of the preceding prefixes to the `Debug` level in your *appsettings.json* file by adding the following items to the `LogLevel` sub-section in `Logging`:</span></span>
 
 [!code-json[](diagnostics/logging-config.json?highlight=7-8)]
 
@@ -54,10 +54,10 @@ ms.locfileid: "93061310"
 
 <span data-ttu-id="2959d-117">如果您未使用以 JSON 為基礎的設定，請在設定系統中設定下列設定值：</span><span class="sxs-lookup"><span data-stu-id="2959d-117">If you aren't using JSON-based configuration, set the following configuration values in your configuration system:</span></span>
 
-* `Logging:LogLevel:Microsoft.AspNetCore.:::no-loc(SignalR):::` = `Debug`
+* `Logging:LogLevel:Microsoft.AspNetCore.SignalR` = `Debug`
 * `Logging:LogLevel:Microsoft.AspNetCore.Http.Connections` = `Debug`
 
-<span data-ttu-id="2959d-118">請檢查設定系統的檔，以判斷如何指定嵌套設定值。</span><span class="sxs-lookup"><span data-stu-id="2959d-118">Check the documentation for your configuration system to determine how to specify nested configuration values.</span></span> <span data-ttu-id="2959d-119">例如，使用環境變數時， `_` 會使用兩個字元，而不是 `:` (例如 `Logging__LogLevel__Microsoft.AspNetCore.:::no-loc(SignalR):::`) 。</span><span class="sxs-lookup"><span data-stu-id="2959d-119">For example, when using environment variables, two `_` characters are used instead of the `:` (for example, `Logging__LogLevel__Microsoft.AspNetCore.:::no-loc(SignalR):::`).</span></span>
+<span data-ttu-id="2959d-118">請檢查設定系統的檔，以判斷如何指定嵌套設定值。</span><span class="sxs-lookup"><span data-stu-id="2959d-118">Check the documentation for your configuration system to determine how to specify nested configuration values.</span></span> <span data-ttu-id="2959d-119">例如，使用環境變數時， `_` 會使用兩個字元，而不是 `:` (例如 `Logging__LogLevel__Microsoft.AspNetCore.SignalR`) 。</span><span class="sxs-lookup"><span data-stu-id="2959d-119">For example, when using environment variables, two `_` characters are used instead of the `:` (for example, `Logging__LogLevel__Microsoft.AspNetCore.SignalR`).</span></span>
 
 <span data-ttu-id="2959d-120">`Debug`針對您的應用程式收集更詳細的診斷時，建議使用此層級。</span><span class="sxs-lookup"><span data-stu-id="2959d-120">We recommend using the `Debug` level when gathering more detailed diagnostics for your app.</span></span> <span data-ttu-id="2959d-121">`Trace`層級會產生非常低層級的診斷，而且很少需要診斷您應用程式中的問題。</span><span class="sxs-lookup"><span data-stu-id="2959d-121">The `Trace` level produces very low-level diagnostics and is rarely needed to diagnose issues in your app.</span></span>
 
@@ -67,7 +67,7 @@ ms.locfileid: "93061310"
 
 ### <a name="as-a-console-app-outside-iis"></a><span data-ttu-id="2959d-124">作為 IIS 外部的主控台應用程式</span><span class="sxs-lookup"><span data-stu-id="2959d-124">As a console app outside IIS</span></span>
 
-<span data-ttu-id="2959d-125">如果您是在主控台應用程式中執行，則預設應啟用 [主控台記錄器](xref:fundamentals/logging/index#console) 。</span><span class="sxs-lookup"><span data-stu-id="2959d-125">If you're running in a console app, the [Console logger](xref:fundamentals/logging/index#console) should be enabled by default.</span></span> <span data-ttu-id="2959d-126">:::no-loc(SignalR)::: 記錄檔將會出現在主控台中。</span><span class="sxs-lookup"><span data-stu-id="2959d-126">:::no-loc(SignalR)::: logs will appear in the console.</span></span>
+<span data-ttu-id="2959d-125">如果您是在主控台應用程式中執行，則預設應啟用 [主控台記錄器](xref:fundamentals/logging/index#console) 。</span><span class="sxs-lookup"><span data-stu-id="2959d-125">If you're running in a console app, the [Console logger](xref:fundamentals/logging/index#console) should be enabled by default.</span></span> <span data-ttu-id="2959d-126">SignalR 記錄檔將會出現在主控台中。</span><span class="sxs-lookup"><span data-stu-id="2959d-126">SignalR logs will appear in the console.</span></span>
 
 ### <a name="within-iis-express-from-visual-studio"></a><span data-ttu-id="2959d-127">從 Visual Studio 的 IIS Express 內</span><span class="sxs-lookup"><span data-stu-id="2959d-127">Within IIS Express from Visual Studio</span></span>
 
@@ -117,7 +117,7 @@ ms.locfileid: "93061310"
 
 <span data-ttu-id="2959d-159">若要從 .NET 用戶端取得記錄，您可以 `ConfigureLogging` 在上使用方法 `HubConnectionBuilder` 。</span><span class="sxs-lookup"><span data-stu-id="2959d-159">To get logs from the .NET client, you can use the `ConfigureLogging` method on `HubConnectionBuilder`.</span></span> <span data-ttu-id="2959d-160">其運作方式與與上的 `ConfigureLogging` 方法相同 `WebHostBuilder` `HostBuilder` 。</span><span class="sxs-lookup"><span data-stu-id="2959d-160">This works the same way as the `ConfigureLogging` method on `WebHostBuilder` and `HostBuilder`.</span></span> <span data-ttu-id="2959d-161">您可以設定 ASP.NET Core 中所使用的相同記錄提供者。</span><span class="sxs-lookup"><span data-stu-id="2959d-161">You can configure the same logging providers you use in ASP.NET Core.</span></span> <span data-ttu-id="2959d-162">不過，您必須手動安裝和啟用個別記錄提供者的 NuGet 套件。</span><span class="sxs-lookup"><span data-stu-id="2959d-162">However, you have to manually install and enable the NuGet packages for the individual logging providers.</span></span>
 
-<span data-ttu-id="2959d-163">若要將 .NET 用戶端記錄新增至 :::no-loc(Blazor WebAssembly)::: 應用程式，請參閱 <xref:blazor/fundamentals/logging#blazor-webassembly-signalr-net-client-logging> 。</span><span class="sxs-lookup"><span data-stu-id="2959d-163">To add .NET client logging to a :::no-loc(Blazor WebAssembly)::: app, see <xref:blazor/fundamentals/logging#blazor-webassembly-signalr-net-client-logging>.</span></span>
+<span data-ttu-id="2959d-163">若要將 .NET 用戶端記錄新增至 Blazor WebAssembly 應用程式，請參閱 <xref:blazor/fundamentals/logging#blazor-webassembly-signalr-net-client-logging> 。</span><span class="sxs-lookup"><span data-stu-id="2959d-163">To add .NET client logging to a Blazor WebAssembly app, see <xref:blazor/fundamentals/logging#blazor-webassembly-signalr-net-client-logging>.</span></span>
 
 ### <a name="console-logging"></a><span data-ttu-id="2959d-164">主控台記錄</span><span class="sxs-lookup"><span data-stu-id="2959d-164">Console logging</span></span>
 
@@ -133,13 +133,13 @@ ms.locfileid: "93061310"
 
 ### <a name="other-logging-providers"></a><span data-ttu-id="2959d-170">其他記錄提供者</span><span class="sxs-lookup"><span data-stu-id="2959d-170">Other logging providers</span></span>
 
-<span data-ttu-id="2959d-171">:::no-loc(SignalR)::: 支援其他記錄提供者，例如 Serilog、Seq、NLog 或與整合的任何其他記錄系統 `Microsoft.Extensions.Logging` 。</span><span class="sxs-lookup"><span data-stu-id="2959d-171">:::no-loc(SignalR)::: supports other logging providers such as Serilog, Seq, NLog, or any other logging system that integrates with `Microsoft.Extensions.Logging`.</span></span> <span data-ttu-id="2959d-172">如果您的記錄系統提供 `ILoggerProvider` ，您可以使用下列程式來註冊 `AddProvider` ：</span><span class="sxs-lookup"><span data-stu-id="2959d-172">If your logging system provides an `ILoggerProvider`, you can register it with `AddProvider`:</span></span>
+<span data-ttu-id="2959d-171">SignalR 支援其他記錄提供者，例如 Serilog、Seq、NLog 或與整合的任何其他記錄系統 `Microsoft.Extensions.Logging` 。</span><span class="sxs-lookup"><span data-stu-id="2959d-171">SignalR supports other logging providers such as Serilog, Seq, NLog, or any other logging system that integrates with `Microsoft.Extensions.Logging`.</span></span> <span data-ttu-id="2959d-172">如果您的記錄系統提供 `ILoggerProvider` ，您可以使用下列程式來註冊 `AddProvider` ：</span><span class="sxs-lookup"><span data-stu-id="2959d-172">If your logging system provides an `ILoggerProvider`, you can register it with `AddProvider`:</span></span>
 
 [!code-csharp[](diagnostics/net-client-custom-log.cs?highlight=6)]
 
 ### <a name="control-verbosity"></a><span data-ttu-id="2959d-173">控制詳細資訊</span><span class="sxs-lookup"><span data-stu-id="2959d-173">Control verbosity</span></span>
 
-<span data-ttu-id="2959d-174">如果您是從應用程式中的其他位置進行記錄，將預設層級變更為 `Debug` 可能太詳細。</span><span class="sxs-lookup"><span data-stu-id="2959d-174">If you are logging from other places in your app, changing the default level to `Debug` may be too verbose.</span></span> <span data-ttu-id="2959d-175">您可以使用篩選來設定記錄的記錄層級 :::no-loc(SignalR)::: 。</span><span class="sxs-lookup"><span data-stu-id="2959d-175">You can use a Filter to configure the logging level for :::no-loc(SignalR)::: logs.</span></span> <span data-ttu-id="2959d-176">這可以在程式碼中完成，與伺服器上的方式大致相同：</span><span class="sxs-lookup"><span data-stu-id="2959d-176">This can be done in code, in much the same way as on the server:</span></span>
+<span data-ttu-id="2959d-174">如果您是從應用程式中的其他位置進行記錄，將預設層級變更為 `Debug` 可能太詳細。</span><span class="sxs-lookup"><span data-stu-id="2959d-174">If you are logging from other places in your app, changing the default level to `Debug` may be too verbose.</span></span> <span data-ttu-id="2959d-175">您可以使用篩選來設定記錄的記錄層級 SignalR 。</span><span class="sxs-lookup"><span data-stu-id="2959d-175">You can use a Filter to configure the logging level for SignalR logs.</span></span> <span data-ttu-id="2959d-176">這可以在程式碼中完成，與伺服器上的方式大致相同：</span><span class="sxs-lookup"><span data-stu-id="2959d-176">This can be done in code, in much the same way as on the server:</span></span>
 
 [!code-csharp[Controlling verbosity in .NET client](diagnostics/logging-config-client-code.cs?highlight=9-10)]
 
@@ -222,9 +222,9 @@ tcpdump -i [interface] -w trace.pcap
 
 <span data-ttu-id="2959d-228">計量是在一段時間內的資料量值標記法。</span><span class="sxs-lookup"><span data-stu-id="2959d-228">Metrics is a representation of data measures over intervals of time.</span></span> <span data-ttu-id="2959d-229">例如，每秒的要求數。</span><span class="sxs-lookup"><span data-stu-id="2959d-229">For example, requests per second.</span></span> <span data-ttu-id="2959d-230">計量資料可讓您觀察高階應用程式的狀態。</span><span class="sxs-lookup"><span data-stu-id="2959d-230">Metrics data allows observation of the state of an app at a high level.</span></span> <span data-ttu-id="2959d-231">.NET gRPC 計量是使用發出的 <xref:System.Diagnostics.Tracing.EventCounter> 。</span><span class="sxs-lookup"><span data-stu-id="2959d-231">.NET gRPC metrics are emitted using <xref:System.Diagnostics.Tracing.EventCounter>.</span></span>
 
-### <a name="no-locsignalr-server-metrics"></a><span data-ttu-id="2959d-232">:::no-loc(SignalR)::: 伺服器計量</span><span class="sxs-lookup"><span data-stu-id="2959d-232">:::no-loc(SignalR)::: server metrics</span></span>
+### <a name="no-locsignalr-server-metrics"></a><span data-ttu-id="2959d-232">SignalR 伺服器計量</span><span class="sxs-lookup"><span data-stu-id="2959d-232">SignalR server metrics</span></span>
 
-<span data-ttu-id="2959d-233">:::no-loc(SignalR)::: 系統會報告事件來源的伺服器計量 <xref:Microsoft.AspNetCore.Http.Connections> 。</span><span class="sxs-lookup"><span data-stu-id="2959d-233">:::no-loc(SignalR)::: server metrics are reported on the <xref:Microsoft.AspNetCore.Http.Connections> event source.</span></span>
+<span data-ttu-id="2959d-233">SignalR 系統會報告事件來源的伺服器計量 <xref:Microsoft.AspNetCore.Http.Connections> 。</span><span class="sxs-lookup"><span data-stu-id="2959d-233">SignalR server metrics are reported on the <xref:Microsoft.AspNetCore.Http.Connections> event source.</span></span>
 
 | <span data-ttu-id="2959d-234">名稱</span><span class="sxs-lookup"><span data-stu-id="2959d-234">Name</span></span>                    | <span data-ttu-id="2959d-235">描述</span><span class="sxs-lookup"><span data-stu-id="2959d-235">Description</span></span>                 |
 |-------------------------|-----------------------------|

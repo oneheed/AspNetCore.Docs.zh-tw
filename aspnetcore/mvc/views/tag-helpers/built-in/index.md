@@ -6,17 +6,17 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 10/10/2018
 no-loc:
-- ':::no-loc(appsettings.json):::'
-- ':::no-loc(ASP.NET Core Identity):::'
-- ':::no-loc(cookie):::'
-- ':::no-loc(Cookie):::'
-- ':::no-loc(Blazor):::'
-- ':::no-loc(Blazor Server):::'
-- ':::no-loc(Blazor WebAssembly):::'
-- ':::no-loc(Identity):::'
-- ":::no-loc(Let's Encrypt):::"
-- ':::no-loc(Razor):::'
-- ':::no-loc(SignalR):::'
+- 'appsettings.json'
+- 'ASP.NET Core Identity'
+- 'cookie'
+- 'Cookie'
+- 'Blazor'
+- 'Blazor Server'
+- 'Blazor WebAssembly'
+- 'Identity'
+- "Let's Encrypt"
+- 'Razor'
+- 'SignalR'
 uid: mvc/views/tag-helpers/builtin-th/Index
 ms.openlocfilehash: eac67307ac23153a8509c866b6e8da91cf3f935f
 ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
@@ -31,7 +31,7 @@ ms.locfileid: "93060361"
 
 <span data-ttu-id="2c426-105">如需標籤協助程式的概觀，請參閱 <xref:mvc/views/tag-helpers/intro>。</span><span class="sxs-lookup"><span data-stu-id="2c426-105">For an overview of Tag Helpers, see <xref:mvc/views/tag-helpers/intro>.</span></span>
 
-<span data-ttu-id="2c426-106">有一些內建標籤協助程式未列於本文件中。</span><span class="sxs-lookup"><span data-stu-id="2c426-106">There are built-in Tag Helpers which aren't listed in this document.</span></span> <span data-ttu-id="2c426-107">未列出的標籤協助程式會由 [:::no-loc(Razor):::](xref:mvc/views/razor) view 引擎在內部使用。</span><span class="sxs-lookup"><span data-stu-id="2c426-107">The unlisted Tag Helpers are used internally by the [:::no-loc(Razor):::](xref:mvc/views/razor) view engine.</span></span> <span data-ttu-id="2c426-108">`~` (波狀符號) 字元的標籤協助程式並未列出。</span><span class="sxs-lookup"><span data-stu-id="2c426-108">The Tag Helper for the `~` (tilde) character is unlisted.</span></span> <span data-ttu-id="2c426-109">波狀符號標籤協助程式會擴展到網站的根路徑。</span><span class="sxs-lookup"><span data-stu-id="2c426-109">The tilde Tag Helper expands to the root path of the website.</span></span>
+<span data-ttu-id="2c426-106">有一些內建標籤協助程式未列於本文件中。</span><span class="sxs-lookup"><span data-stu-id="2c426-106">There are built-in Tag Helpers which aren't listed in this document.</span></span> <span data-ttu-id="2c426-107">未列出的標籤協助程式會由 [Razor](xref:mvc/views/razor) view 引擎在內部使用。</span><span class="sxs-lookup"><span data-stu-id="2c426-107">The unlisted Tag Helpers are used internally by the [Razor](xref:mvc/views/razor) view engine.</span></span> <span data-ttu-id="2c426-108">`~` (波狀符號) 字元的標籤協助程式並未列出。</span><span class="sxs-lookup"><span data-stu-id="2c426-108">The Tag Helper for the `~` (tilde) character is unlisted.</span></span> <span data-ttu-id="2c426-109">波狀符號標籤協助程式會擴展到網站的根路徑。</span><span class="sxs-lookup"><span data-stu-id="2c426-109">The tilde Tag Helper expands to the root path of the website.</span></span>
 
 [!INCLUDE[](~/includes/built-in-TH.md)]
 

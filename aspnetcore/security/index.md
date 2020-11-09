@@ -6,17 +6,17 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 10/24/2018
 no-loc:
-- ':::no-loc(appsettings.json):::'
-- ':::no-loc(ASP.NET Core Identity):::'
-- ':::no-loc(cookie):::'
-- ':::no-loc(Cookie):::'
-- ':::no-loc(Blazor):::'
-- ':::no-loc(Blazor Server):::'
-- ':::no-loc(Blazor WebAssembly):::'
-- ':::no-loc(Identity):::'
-- ":::no-loc(Let's Encrypt):::"
-- ':::no-loc(Razor):::'
-- ':::no-loc(SignalR):::'
+- 'appsettings.json'
+- 'ASP.NET Core Identity'
+- 'cookie'
+- 'Cookie'
+- 'Blazor'
+- 'Blazor Server'
+- 'Blazor WebAssembly'
+- 'Identity'
+- "Let's Encrypt"
+- 'Razor'
+- 'SignalR'
 uid: security/index
 ms.openlocfilehash: 3c86c66bebe8a5ce1c195ebf931193e7e2a73fef
 ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
@@ -48,4 +48,4 @@ ms.locfileid: "93051625"
 * [<span data-ttu-id="422b4-120">跨網站要求偽造 (XSRF/CSRF) 攻擊</span><span class="sxs-lookup"><span data-stu-id="422b4-120">Cross-Site Request Forgery (XSRF/CSRF) attacks</span></span>](xref:security/anti-request-forgery)
 * <span data-ttu-id="422b4-121">[Open redirect attacks](xref:security/preventing-open-redirects) (開啟重新導向攻擊)</span><span class="sxs-lookup"><span data-stu-id="422b4-121">[Open redirect attacks](xref:security/preventing-open-redirects)</span></span>
 
-<span data-ttu-id="422b4-122">除此之外，還有許多弱點是您必須提防的。</span><span class="sxs-lookup"><span data-stu-id="422b4-122">There are more vulnerabilities that you should be aware of.</span></span> <span data-ttu-id="422b4-123">如需詳細資訊，請參閱目錄之 **安全性和 :::no-loc(Identity):::** 章節中的其他文章。</span><span class="sxs-lookup"><span data-stu-id="422b4-123">For more information, see the other articles in the **Security and :::no-loc(Identity):::** section of the table of contents.</span></span>
+<span data-ttu-id="422b4-122">除此之外，還有許多弱點是您必須提防的。</span><span class="sxs-lookup"><span data-stu-id="422b4-122">There are more vulnerabilities that you should be aware of.</span></span> <span data-ttu-id="422b4-123">如需詳細資訊，請參閱目錄之 **安全性和 Identity** 章節中的其他文章。</span><span class="sxs-lookup"><span data-stu-id="422b4-123">For more information, see the other articles in the **Security and Identity** section of the table of contents.</span></span>

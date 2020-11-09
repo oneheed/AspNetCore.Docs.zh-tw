@@ -5,17 +5,17 @@ description: ASP.NET Core MVC 之教學課程系列的第4部分。
 ms.author: riande
 ms.date: 01/13/2020
 no-loc:
-- ':::no-loc(appsettings.json):::'
-- ':::no-loc(ASP.NET Core Identity):::'
-- ':::no-loc(cookie):::'
-- ':::no-loc(Cookie):::'
-- ':::no-loc(Blazor):::'
-- ':::no-loc(Blazor Server):::'
-- ':::no-loc(Blazor WebAssembly):::'
-- ':::no-loc(Identity):::'
-- ":::no-loc(Let's Encrypt):::"
-- ':::no-loc(Razor):::'
-- ':::no-loc(SignalR):::'
+- 'appsettings.json'
+- 'ASP.NET Core Identity'
+- 'cookie'
+- 'Cookie'
+- 'Blazor'
+- 'Blazor Server'
+- 'Blazor WebAssembly'
+- 'Identity'
+- "Let's Encrypt"
+- 'Razor'
+- 'SignalR'
 uid: tutorials/first-mvc-app/adding-model
 ms.openlocfilehash: 428d153cd94c882db16484a3009c86d1f9593538
 ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
@@ -125,7 +125,7 @@ Install-Package Microsoft.EntityFrameworkCore.SqlServer
 
 ## <a name="register-the-database-context"></a><span data-ttu-id="a3b09-155">登錄資料庫內容</span><span class="sxs-lookup"><span data-stu-id="a3b09-155">Register the database context</span></span>
 
-<span data-ttu-id="a3b09-156">ASP.NET Core 內建[相依性插入 (DI)](xref:fundamentals/dependency-injection)。</span><span class="sxs-lookup"><span data-stu-id="a3b09-156">ASP.NET Core is built with [dependency injection (DI)](xref:fundamentals/dependency-injection).</span></span> <span data-ttu-id="a3b09-157">服務 (例如 EF Core 資料庫內容) 必須在應用程式啟動期間向 DI 進行註冊。</span><span class="sxs-lookup"><span data-stu-id="a3b09-157">Services (such as the EF Core DB context) must be registered with DI during application startup.</span></span> <span data-ttu-id="a3b09-158">需要這些服務的元件 (例如 :::no-loc(Razor)::: 頁面) 是透過函式參數提供這些服務。</span><span class="sxs-lookup"><span data-stu-id="a3b09-158">Components that require these services (such as :::no-loc(Razor)::: Pages) are provided these services via constructor parameters.</span></span> <span data-ttu-id="a3b09-159">取得資料庫內容執行個體的建構函式程式碼，本教學課程中稍後會示範。</span><span class="sxs-lookup"><span data-stu-id="a3b09-159">The constructor code that gets a DB context instance is shown later in the tutorial.</span></span> <span data-ttu-id="a3b09-160">在本節中，您會向 DI 容器註冊資料庫內容。</span><span class="sxs-lookup"><span data-stu-id="a3b09-160">In this section, you register the database context with the DI container.</span></span>
+<span data-ttu-id="a3b09-156">ASP.NET Core 內建[相依性插入 (DI)](xref:fundamentals/dependency-injection)。</span><span class="sxs-lookup"><span data-stu-id="a3b09-156">ASP.NET Core is built with [dependency injection (DI)](xref:fundamentals/dependency-injection).</span></span> <span data-ttu-id="a3b09-157">服務 (例如 EF Core 資料庫內容) 必須在應用程式啟動期間向 DI 進行註冊。</span><span class="sxs-lookup"><span data-stu-id="a3b09-157">Services (such as the EF Core DB context) must be registered with DI during application startup.</span></span> <span data-ttu-id="a3b09-158">需要這些服務的元件 (例如 Razor 頁面) 是透過函式參數提供這些服務。</span><span class="sxs-lookup"><span data-stu-id="a3b09-158">Components that require these services (such as Razor Pages) are provided these services via constructor parameters.</span></span> <span data-ttu-id="a3b09-159">取得資料庫內容執行個體的建構函式程式碼，本教學課程中稍後會示範。</span><span class="sxs-lookup"><span data-stu-id="a3b09-159">The constructor code that gets a DB context instance is shown later in the tutorial.</span></span> <span data-ttu-id="a3b09-160">在本節中，您會向 DI 容器註冊資料庫內容。</span><span class="sxs-lookup"><span data-stu-id="a3b09-160">In this section, you register the database context with the DI container.</span></span>
 
 <span data-ttu-id="a3b09-161">在 *Startup.cs* 最上方新增下列 `using` 陳述式：</span><span class="sxs-lookup"><span data-stu-id="a3b09-161">Add the following `using` statements at the top of *Startup.cs* :</span></span>
 
@@ -146,17 +146,17 @@ using Microsoft.EntityFrameworkCore;
 
 ---
 
-<span data-ttu-id="a3b09-165">連接字串的名稱，會透過對 [DbContextOptions](/dotnet/api/microsoft.entityframeworkcore.dbcontextoptions) 物件呼叫方法來傳遞至內容。</span><span class="sxs-lookup"><span data-stu-id="a3b09-165">The name of the connection string is passed in to the context by calling a method on a [DbContextOptions](/dotnet/api/microsoft.entityframeworkcore.dbcontextoptions) object.</span></span> <span data-ttu-id="a3b09-166">針對本機開發， [ASP.NET Core 設定系統](xref:fundamentals/configuration/index) 會從檔案讀取連接字串 *:::no-loc(appsettings.json):::* 。</span><span class="sxs-lookup"><span data-stu-id="a3b09-166">For local development, the [ASP.NET Core configuration system](xref:fundamentals/configuration/index) reads the connection string from the *:::no-loc(appsettings.json):::* file.</span></span>
+<span data-ttu-id="a3b09-165">連接字串的名稱，會透過對 [DbContextOptions](/dotnet/api/microsoft.entityframeworkcore.dbcontextoptions) 物件呼叫方法來傳遞至內容。</span><span class="sxs-lookup"><span data-stu-id="a3b09-165">The name of the connection string is passed in to the context by calling a method on a [DbContextOptions](/dotnet/api/microsoft.entityframeworkcore.dbcontextoptions) object.</span></span> <span data-ttu-id="a3b09-166">針對本機開發， [ASP.NET Core 設定系統](xref:fundamentals/configuration/index) 會從檔案讀取連接字串 *appsettings.json* 。</span><span class="sxs-lookup"><span data-stu-id="a3b09-166">For local development, the [ASP.NET Core configuration system](xref:fundamentals/configuration/index) reads the connection string from the *appsettings.json* file.</span></span>
 
 <a name="cs"></a>
 
 ## <a name="add-a-database-connection-string"></a><span data-ttu-id="a3b09-167">新增資料庫連線字串</span><span class="sxs-lookup"><span data-stu-id="a3b09-167">Add a database connection string</span></span>
 
-<span data-ttu-id="a3b09-168">將連接字串新增至檔案 *:::no-loc(appsettings.json):::* ：</span><span class="sxs-lookup"><span data-stu-id="a3b09-168">Add a connection string to the *:::no-loc(appsettings.json):::* file:</span></span>
+<span data-ttu-id="a3b09-168">將連接字串新增至檔案 *appsettings.json* ：</span><span class="sxs-lookup"><span data-stu-id="a3b09-168">Add a connection string to the *appsettings.json* file:</span></span>
 
 # <a name="visual-studio"></a>[<span data-ttu-id="a3b09-169">Visual Studio</span><span class="sxs-lookup"><span data-stu-id="a3b09-169">Visual Studio</span></span>](#tab/visual-studio)
 
-[!code-json[](~/tutorials/first-mvc-app/start-mvc/sample/MvcMovie3/:::no-loc(appsettings.json):::?highlight=10-12)]
+[!code-json[](~/tutorials/first-mvc-app/start-mvc/sample/MvcMovie3/appsettings.json?highlight=10-12)]
 
 # <a name="visual-studio-code--visual-studio-for-mac"></a>[<span data-ttu-id="a3b09-170">Visual Studio Code / Visual Studio for Mac</span><span class="sxs-lookup"><span data-stu-id="a3b09-170">Visual Studio Code / Visual Studio for Mac</span></span>](#tab/visual-studio-code+visual-studio-mac)
 
@@ -194,7 +194,7 @@ using Microsoft.EntityFrameworkCore;
 <span data-ttu-id="a3b09-186">Visual Studio 會建立：</span><span class="sxs-lookup"><span data-stu-id="a3b09-186">Visual Studio creates:</span></span>
 
 * <span data-ttu-id="a3b09-187">電影控制器 ( *Controllers/MoviesController.cs* )</span><span class="sxs-lookup"><span data-stu-id="a3b09-187">A movies controller ( *Controllers/MoviesController.cs* )</span></span>
-* <span data-ttu-id="a3b09-188">:::no-loc(Razor)::: 查看建立、刪除、詳細資料、編輯和索引頁面的檔案 ( *Views/電影/ \* cshtml* ) </span><span class="sxs-lookup"><span data-stu-id="a3b09-188">:::no-loc(Razor)::: view files for Create, Delete, Details, Edit, and Index pages ( *Views/Movies/\*.cshtml* )</span></span>
+* <span data-ttu-id="a3b09-188">Razor 查看建立、刪除、詳細資料、編輯和索引頁面的檔案 ( *Views/電影/ \* cshtml* ) </span><span class="sxs-lookup"><span data-stu-id="a3b09-188">Razor view files for Create, Delete, Details, Edit, and Index pages ( *Views/Movies/\*.cshtml* )</span></span>
 
 <span data-ttu-id="a3b09-189">自動建立這些檔案的流程稱為 *scaffolding* 。</span><span class="sxs-lookup"><span data-stu-id="a3b09-189">The automatic creation of these files is known as *scaffolding* .</span></span>
 
@@ -473,13 +473,13 @@ return View(movie);
 
 * <span data-ttu-id="a3b09-312">Entity Framework Core [資料庫內容類別](xref:data/ef-mvc/intro#create-the-database-context) ( *Data/MvcMovieContext.cs* )</span><span class="sxs-lookup"><span data-stu-id="a3b09-312">An Entity Framework Core [database context class](xref:data/ef-mvc/intro#create-the-database-context) ( *Data/MvcMovieContext.cs* )</span></span>
 * <span data-ttu-id="a3b09-313">電影控制器 ( *Controllers/MoviesController.cs* )</span><span class="sxs-lookup"><span data-stu-id="a3b09-313">A movies controller ( *Controllers/MoviesController.cs* )</span></span>
-* <span data-ttu-id="a3b09-314">:::no-loc(Razor)::: 查看建立、刪除、詳細資料、編輯和索引頁面的檔案 ( *Views/電影/ \* cshtml* ) </span><span class="sxs-lookup"><span data-stu-id="a3b09-314">:::no-loc(Razor)::: view files for Create, Delete, Details, Edit, and Index pages ( *Views/Movies/\*.cshtml* )</span></span>
+* <span data-ttu-id="a3b09-314">Razor 查看建立、刪除、詳細資料、編輯和索引頁面的檔案 ( *Views/電影/ \* cshtml* ) </span><span class="sxs-lookup"><span data-stu-id="a3b09-314">Razor view files for Create, Delete, Details, Edit, and Index pages ( *Views/Movies/\*.cshtml* )</span></span>
 
 <span data-ttu-id="a3b09-315">自動建立資料庫內容與 [CRUD](https://wikipedia.org/wiki/Create,_read,_update_and_delete) (建立、讀取、更新和刪除) 動作方法和檢視稱為 *Scaffolding* 。</span><span class="sxs-lookup"><span data-stu-id="a3b09-315">The automatic creation of the database context and [CRUD](https://wikipedia.org/wiki/Create,_read,_update_and_delete) (create, read, update, and delete) action methods and views is known as *scaffolding* .</span></span>
 
 # <a name="visual-studio-code"></a>[<span data-ttu-id="a3b09-316">Visual Studio Code</span><span class="sxs-lookup"><span data-stu-id="a3b09-316">Visual Studio Code</span></span>](#tab/visual-studio-code)
 
-<!--  Until https://github.com/aspnet/Scaffolding/issues/582 is fixed windows needs backslash or the namespace is namespace :::no-loc(Razor):::PagesMovie.Pages_Movies rather than namespace :::no-loc(Razor):::PagesMovie.Pages.Movies
+<!--  Until https://github.com/aspnet/Scaffolding/issues/582 is fixed windows needs backslash or the namespace is namespace RazorPagesMovie.Pages_Movies rather than namespace RazorPagesMovie.Pages.Movies
 -->
 
 * <span data-ttu-id="a3b09-317">在專案目錄 (包含 *Program.cs* 、 *Startup.cs* 和 *.csproj* 檔案的目錄) 中開啟一個命令視窗。</span><span class="sxs-lookup"><span data-stu-id="a3b09-317">Open a command window in the project directory (The directory that contains the *Program.cs* , *Startup.cs* , and *.csproj* files).</span></span>
@@ -536,7 +536,7 @@ An unhandled exception occurred while processing the request.
 SqlException: Cannot open database "MvcMovieContext-<GUID removed>" requested by the login. The login failed.
 Login failed for user 'Rick'.
 
-System.Data.SqlClient.SqlInternalConnectionTds..ctor(DbConnectionPool:::no-loc(Identity)::: identity, SqlConnectionString
+System.Data.SqlClient.SqlInternalConnectionTds..ctor(DbConnectionPoolIdentity identity, SqlConnectionString
 ```
 
 # <a name="visual-studio-code--visual-studio-for-mac"></a>[<span data-ttu-id="a3b09-327">Visual Studio Code / Visual Studio for Mac</span><span class="sxs-lookup"><span data-stu-id="a3b09-327">Visual Studio Code / Visual Studio for Mac</span></span>](#tab/visual-studio-code+visual-studio-mac)
@@ -592,7 +592,7 @@ Microsoft.Data.Sqlite.SqliteException.ThrowExceptionForRC(int rc, sqlite3 db)
 
 ## <a name="examine-the-context-registered-with-dependency-injection"></a><span data-ttu-id="a3b09-349">檢查使用相依性插入所註冊的內容</span><span class="sxs-lookup"><span data-stu-id="a3b09-349">Examine the context registered with dependency injection</span></span>
 
-<span data-ttu-id="a3b09-350">ASP.NET Core 內建[相依性插入 (DI)](xref:fundamentals/dependency-injection)。</span><span class="sxs-lookup"><span data-stu-id="a3b09-350">ASP.NET Core is built with [dependency injection (DI)](xref:fundamentals/dependency-injection).</span></span> <span data-ttu-id="a3b09-351">服務 (例如 EF Core DB 內容) 會在應用程式啟動期間使用 DI 來註冊。</span><span class="sxs-lookup"><span data-stu-id="a3b09-351">Services (such as the EF Core DB context) are registered with DI during application startup.</span></span> <span data-ttu-id="a3b09-352">需要這些服務的元件 (例如 :::no-loc(Razor)::: 頁面) 是透過函式參數提供這些服務。</span><span class="sxs-lookup"><span data-stu-id="a3b09-352">Components that require these services (such as :::no-loc(Razor)::: Pages) are provided these services via constructor parameters.</span></span> <span data-ttu-id="a3b09-353">取得資料庫內容執行個體的建構函式程式碼，本教學課程中稍後會示範。</span><span class="sxs-lookup"><span data-stu-id="a3b09-353">The constructor code that gets a DB context instance is shown later in the tutorial.</span></span>
+<span data-ttu-id="a3b09-350">ASP.NET Core 內建[相依性插入 (DI)](xref:fundamentals/dependency-injection)。</span><span class="sxs-lookup"><span data-stu-id="a3b09-350">ASP.NET Core is built with [dependency injection (DI)](xref:fundamentals/dependency-injection).</span></span> <span data-ttu-id="a3b09-351">服務 (例如 EF Core DB 內容) 會在應用程式啟動期間使用 DI 來註冊。</span><span class="sxs-lookup"><span data-stu-id="a3b09-351">Services (such as the EF Core DB context) are registered with DI during application startup.</span></span> <span data-ttu-id="a3b09-352">需要這些服務的元件 (例如 Razor 頁面) 是透過函式參數提供這些服務。</span><span class="sxs-lookup"><span data-stu-id="a3b09-352">Components that require these services (such as Razor Pages) are provided these services via constructor parameters.</span></span> <span data-ttu-id="a3b09-353">取得資料庫內容執行個體的建構函式程式碼，本教學課程中稍後會示範。</span><span class="sxs-lookup"><span data-stu-id="a3b09-353">The constructor code that gets a DB context instance is shown later in the tutorial.</span></span>
 
 # <a name="visual-studio"></a>[<span data-ttu-id="a3b09-354">Visual Studio</span><span class="sxs-lookup"><span data-stu-id="a3b09-354">Visual Studio</span></span>](#tab/visual-studio)
 
@@ -608,7 +608,7 @@ Microsoft.Data.Sqlite.SqliteException.ThrowExceptionForRC(int rc, sqlite3 db)
 
 <span data-ttu-id="a3b09-361">上述程式碼會建立實體集的[DbSet \<Movie> ](/dotnet/api/microsoft.entityframeworkcore.dbset-1)屬性。</span><span class="sxs-lookup"><span data-stu-id="a3b09-361">The preceding code creates a [DbSet\<Movie>](/dotnet/api/microsoft.entityframeworkcore.dbset-1) property for the entity set.</span></span> <span data-ttu-id="a3b09-362">在 Entity Framework 詞彙中，實體集通常會對應至資料庫資料表。</span><span class="sxs-lookup"><span data-stu-id="a3b09-362">In Entity Framework terminology, an entity set typically corresponds to a database table.</span></span> <span data-ttu-id="a3b09-363">實體會對應至資料表中的資料列。</span><span class="sxs-lookup"><span data-stu-id="a3b09-363">An entity corresponds to a row in the table.</span></span>
 
-<span data-ttu-id="a3b09-364">連接字串的名稱，會透過對 [DbContextOptions](/dotnet/api/microsoft.entityframeworkcore.dbcontextoptions) 物件呼叫方法來傳遞至內容。</span><span class="sxs-lookup"><span data-stu-id="a3b09-364">The name of the connection string is passed in to the context by calling a method on a [DbContextOptions](/dotnet/api/microsoft.entityframeworkcore.dbcontextoptions) object.</span></span> <span data-ttu-id="a3b09-365">針對本機開發， [ASP.NET Core 設定系統](xref:fundamentals/configuration/index) 會從檔案讀取連接字串 *:::no-loc(appsettings.json):::* 。</span><span class="sxs-lookup"><span data-stu-id="a3b09-365">For local development, the [ASP.NET Core configuration system](xref:fundamentals/configuration/index) reads the connection string from the *:::no-loc(appsettings.json):::* file.</span></span>
+<span data-ttu-id="a3b09-364">連接字串的名稱，會透過對 [DbContextOptions](/dotnet/api/microsoft.entityframeworkcore.dbcontextoptions) 物件呼叫方法來傳遞至內容。</span><span class="sxs-lookup"><span data-stu-id="a3b09-364">The name of the connection string is passed in to the context by calling a method on a [DbContextOptions](/dotnet/api/microsoft.entityframeworkcore.dbcontextoptions) object.</span></span> <span data-ttu-id="a3b09-365">針對本機開發， [ASP.NET Core 設定系統](xref:fundamentals/configuration/index) 會從檔案讀取連接字串 *appsettings.json* 。</span><span class="sxs-lookup"><span data-stu-id="a3b09-365">For local development, the [ASP.NET Core configuration system](xref:fundamentals/configuration/index) reads the connection string from the *appsettings.json* file.</span></span>
 
 # <a name="visual-studio-code--visual-studio-for-mac"></a>[<span data-ttu-id="a3b09-366">Visual Studio Code / Visual Studio for Mac</span><span class="sxs-lookup"><span data-stu-id="a3b09-366">Visual Studio Code / Visual Studio for Mac</span></span>](#tab/visual-studio-code+visual-studio-mac)
 

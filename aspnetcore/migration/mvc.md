@@ -5,17 +5,17 @@ description: 瞭解如何開始將 ASP.NET MVC 專案遷移至 ASP.NET Core MVC�
 ms.author: wpickett
 ms.date: 06/18/2020
 no-loc:
-- ':::no-loc(appsettings.json):::'
-- ':::no-loc(ASP.NET Core Identity):::'
-- ':::no-loc(cookie):::'
-- ':::no-loc(Cookie):::'
-- ':::no-loc(Blazor):::'
-- ':::no-loc(Blazor Server):::'
-- ':::no-loc(Blazor WebAssembly):::'
-- ':::no-loc(Identity):::'
-- ":::no-loc(Let's Encrypt):::"
-- ':::no-loc(Razor):::'
-- ':::no-loc(SignalR):::'
+- 'appsettings.json'
+- 'ASP.NET Core Identity'
+- 'cookie'
+- 'Cookie'
+- 'Blazor'
+- 'Blazor Server'
+- 'Blazor WebAssembly'
+- 'Identity'
+- "Let's Encrypt"
+- 'Razor'
+- 'SignalR'
 uid: migration/mvc
 ms.openlocfilehash: 226ac6da508378c7b3c81779d38dd2e0840f1fed
 ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
@@ -37,7 +37,7 @@ ms.locfileid: "93051509"
 * <span data-ttu-id="263e8-110">靜態內容。</span><span class="sxs-lookup"><span data-stu-id="263e8-110">Static content.</span></span>
 * <span data-ttu-id="263e8-111">用戶端相依性。</span><span class="sxs-lookup"><span data-stu-id="263e8-111">Client-side dependencies.</span></span>
 
-<span data-ttu-id="263e8-112">如需遷移設定和程式 :::no-loc(Identity)::: 代碼，請參閱 [將設定遷移至 ASP.NET Core](xref:migration/configuration) 以及 [將驗證遷移至 :::no-loc(Identity)::: ASP.NET Core](xref:migration/identity)。</span><span class="sxs-lookup"><span data-stu-id="263e8-112">For migrating configuration and :::no-loc(Identity)::: code, see [Migrate configuration to ASP.NET Core](xref:migration/configuration) and [Migrate Authentication and :::no-loc(Identity)::: to ASP.NET Core](xref:migration/identity).</span></span>
+<span data-ttu-id="263e8-112">如需遷移設定和程式 Identity 代碼，請參閱 [將設定遷移至 ASP.NET Core](xref:migration/configuration) 以及 [將驗證遷移至 Identity ASP.NET Core](xref:migration/identity)。</span><span class="sxs-lookup"><span data-stu-id="263e8-112">For migrating configuration and Identity code, see [Migrate configuration to ASP.NET Core](xref:migration/configuration) and [Migrate Authentication and Identity to ASP.NET Core](xref:migration/identity).</span></span>
 
 ## <a name="prerequisites"></a><span data-ttu-id="263e8-113">必要條件</span><span class="sxs-lookup"><span data-stu-id="263e8-113">Prerequisites</span></span>
 
@@ -101,7 +101,7 @@ ms.locfileid: "93051509"
 1. <span data-ttu-id="263e8-158">從 ASP.NET MVC 複製方法 `HomeController` ，以取代新的 ASP.NET Core `HomeController` 方法。</span><span class="sxs-lookup"><span data-stu-id="263e8-158">Copy the methods from the ASP.NET MVC `HomeController` to replace the new ASP.NET Core `HomeController` methods.</span></span> <span data-ttu-id="263e8-159">不需要變更動作方法的傳回型別。</span><span class="sxs-lookup"><span data-stu-id="263e8-159">There's no need to change the return type of the action methods.</span></span> <span data-ttu-id="263e8-160">ASP.NET MVC 內建範本的控制器動作方法傳回型別為 <https://docs.microsoft.com/dotnet/api/system.web.mvc.actionresult?view=aspnet-mvc-5.2> ; 在 ASP.NET CORE mvc 中，動作方法會改為傳回 `IActionResult` 。</span><span class="sxs-lookup"><span data-stu-id="263e8-160">The ASP.NET MVC built-in template's controller action method return type is <https://docs.microsoft.com/dotnet/api/system.web.mvc.actionresult?view=aspnet-mvc-5.2>; in ASP.NET Core MVC, the action methods return `IActionResult` instead.</span></span> <span data-ttu-id="263e8-161">`ActionResult` 會實作 `IActionResult`。</span><span class="sxs-lookup"><span data-stu-id="263e8-161">`ActionResult` implements `IActionResult`.</span></span>
 1. <span data-ttu-id="263e8-162">在 ASP.NET Core 專案中，以滑鼠右鍵按一下 *Views/Home* 目錄，然後選取 [ **加入** > **現有專案** ]。</span><span class="sxs-lookup"><span data-stu-id="263e8-162">In the ASP.NET Core project, right-click the *Views/Home* directory, select **Add** > **Existing Item** .</span></span>
 1. <span data-ttu-id="263e8-163">在 [ **加入現有專案** ] 對話方塊中，流覽至 ASP.NET MVC *WebApp1* 專案的 *Views/Home* 目錄。</span><span class="sxs-lookup"><span data-stu-id="263e8-163">In the **Add Existing Item** dialog, navigate to the ASP.NET MVC *WebApp1* project's *Views/Home* directory.</span></span>
-1. <span data-ttu-id="263e8-164">選取 [ *About* ]、[ *Contact* ] 和 [ *Index* ] :::no-loc(Razor)::: view 檔案，然後選取 [ **加入** ]，取代現有的檔案。</span><span class="sxs-lookup"><span data-stu-id="263e8-164">Select the *About.cshtml* , *Contact.cshtml* , and *Index.cshtml* :::no-loc(Razor)::: view files, then select **Add** , replacing the existing files.</span></span>
+1. <span data-ttu-id="263e8-164">選取 [ *About* ]、[ *Contact* ] 和 [ *Index* ] Razor view 檔案，然後選取 [ **加入** ]，取代現有的檔案。</span><span class="sxs-lookup"><span data-stu-id="263e8-164">Select the *About.cshtml* , *Contact.cshtml* , and *Index.cshtml* Razor view files, then select **Add** , replacing the existing files.</span></span>
 
 <span data-ttu-id="263e8-165">如需詳細資訊，請參閱 <xref:mvc/controllers/actions> 和 <xref:mvc/views/overview>。</span><span class="sxs-lookup"><span data-stu-id="263e8-165">For more information, see <xref:mvc/controllers/actions> and <xref:mvc/views/overview>.</span></span>
 
@@ -203,7 +203,7 @@ ms.locfileid: "93051509"
 * <span data-ttu-id="263e8-222">靜態內容</span><span class="sxs-lookup"><span data-stu-id="263e8-222">Static content</span></span>
 * <span data-ttu-id="263e8-223">用戶端相依性。</span><span class="sxs-lookup"><span data-stu-id="263e8-223">Client-side dependencies.</span></span>
 
-<span data-ttu-id="263e8-224">如需遷移設定和程式 :::no-loc(Identity)::: 代碼，請參閱 <xref:migration/configuration> 和 <xref:migration/identity> 。</span><span class="sxs-lookup"><span data-stu-id="263e8-224">For migrating configuration and :::no-loc(Identity)::: code, see <xref:migration/configuration> and <xref:migration/identity>.</span></span>
+<span data-ttu-id="263e8-224">如需遷移設定和程式 Identity 代碼，請參閱 <xref:migration/configuration> 和 <xref:migration/identity> 。</span><span class="sxs-lookup"><span data-stu-id="263e8-224">For migrating configuration and Identity code, see <xref:migration/configuration> and <xref:migration/identity>.</span></span>
 
 > [!NOTE]
 > <span data-ttu-id="263e8-225">範例中的版本號碼可能不是最新版本，請據以更新專案。</span><span class="sxs-lookup"><span data-stu-id="263e8-225">The version numbers in the samples might not be current, update the projects accordingly.</span></span>
@@ -254,7 +254,7 @@ ms.locfileid: "93051509"
 
 * <span data-ttu-id="263e8-261">新增 *Views/Home* 目錄。</span><span class="sxs-lookup"><span data-stu-id="263e8-261">Add a *Views/Home* directory.</span></span>
 
-* <span data-ttu-id="263e8-262">將名為 *Index. cshtml* 的 **:::no-loc(Razor)::: View** 新增至 *Views/Home* 目錄。</span><span class="sxs-lookup"><span data-stu-id="263e8-262">Add a **:::no-loc(Razor)::: View** named *Index.cshtml* to the *Views/Home* directory.</span></span>
+* <span data-ttu-id="263e8-262">將名為 *Index. cshtml* 的 **Razor View** 新增至 *Views/Home* 目錄。</span><span class="sxs-lookup"><span data-stu-id="263e8-262">Add a **Razor View** named *Index.cshtml* to the *Views/Home* directory.</span></span>
 
 ![[新增項目] 對話方塊](mvc/_static/view.png)
 
@@ -288,13 +288,13 @@ ms.locfileid: "93051509"
 
 * <span data-ttu-id="263e8-276">filters</span><span class="sxs-lookup"><span data-stu-id="263e8-276">filters</span></span>
 
-* <span data-ttu-id="263e8-277">登入/登出， :::no-loc(Identity)::: (在下一個教學課程中完成這項操作。 ) </span><span class="sxs-lookup"><span data-stu-id="263e8-277">Log in/out, :::no-loc(Identity)::: (This is done in the next tutorial.)</span></span>
+* <span data-ttu-id="263e8-277">登入/登出， Identity (在下一個教學課程中完成這項操作。 ) </span><span class="sxs-lookup"><span data-stu-id="263e8-277">Log in/out, Identity (This is done in the next tutorial.)</span></span>
 
 ## <a name="controllers-and-views"></a><span data-ttu-id="263e8-278">控制器與視圖</span><span class="sxs-lookup"><span data-stu-id="263e8-278">Controllers and views</span></span>
 
 * <span data-ttu-id="263e8-279">將 ASP.NET MVC 中的每個方法複製 `HomeController` 到新的 `HomeController` 。</span><span class="sxs-lookup"><span data-stu-id="263e8-279">Copy each of the methods from the ASP.NET MVC `HomeController` to the new `HomeController`.</span></span> <span data-ttu-id="263e8-280">在 ASP.NET MVC 中，內建範本的控制器動作方法傳回型別為 <https://docs.microsoft.com/dotnet/api/system.web.mvc.actionresult?view=aspnet-mvc-5.2> ; 在 ASP.NET CORE mvc 中，動作方法會 `IActionResult` 改為傳回。</span><span class="sxs-lookup"><span data-stu-id="263e8-280">In ASP.NET MVC, the built-in template's controller action method return type is <https://docs.microsoft.com/dotnet/api/system.web.mvc.actionresult?view=aspnet-mvc-5.2>; in ASP.NET Core MVC, the action methods return `IActionResult` instead.</span></span> <span data-ttu-id="263e8-281">`ActionResult` implements `IActionResult` ，因此不需要變更動作方法的傳回型別。</span><span class="sxs-lookup"><span data-stu-id="263e8-281">`ActionResult` implements `IActionResult`, so there's no need to change the return type of the action methods.</span></span>
 
-* <span data-ttu-id="263e8-282">將 ASP.NET MVC 專案中的 *About* 、 *Contact* 和 *Index.* cshtml view 檔案複製 :::no-loc(Razor)::: 到 ASP.NET Core 專案。</span><span class="sxs-lookup"><span data-stu-id="263e8-282">Copy the *About.cshtml* , *Contact.cshtml* , and *Index.cshtml* :::no-loc(Razor)::: view files from the ASP.NET MVC project to the ASP.NET Core project.</span></span>
+* <span data-ttu-id="263e8-282">將 ASP.NET MVC 專案中的 *About* 、 *Contact* 和 *Index.* cshtml view 檔案複製 Razor 到 ASP.NET Core 專案。</span><span class="sxs-lookup"><span data-stu-id="263e8-282">Copy the *About.cshtml* , *Contact.cshtml* , and *Index.cshtml* Razor view files from the ASP.NET MVC project to the ASP.NET Core project.</span></span>
 
 ## <a name="test-each-method"></a><span data-ttu-id="263e8-283">測試每個方法</span><span class="sxs-lookup"><span data-stu-id="263e8-283">Test each method</span></span>
 
@@ -330,7 +330,7 @@ ms.locfileid: "93051509"
 
 * <span data-ttu-id="263e8-313">移除 `@Scripts.Render("~/bundles/modernizr")`。</span><span class="sxs-lookup"><span data-stu-id="263e8-313">Remove `@Scripts.Render("~/bundles/modernizr")`.</span></span>
 
-* <span data-ttu-id="263e8-314">`@Html.Partial("_LoginPartial")`使用) 將行批註 (程式程式碼 `@*...*@` 。</span><span class="sxs-lookup"><span data-stu-id="263e8-314">Comment out the `@Html.Partial("_LoginPartial")` line (surround the line with `@*...*@`).</span></span> <span data-ttu-id="263e8-315">如需詳細資訊，請參閱 [遷移驗證和 :::no-loc(Identity)::: ASP.NET Core](xref:migration/identity)</span><span class="sxs-lookup"><span data-stu-id="263e8-315">For more information, see [Migrate Authentication and :::no-loc(Identity)::: to ASP.NET Core](xref:migration/identity)</span></span>
+* <span data-ttu-id="263e8-314">`@Html.Partial("_LoginPartial")`使用) 將行批註 (程式程式碼 `@*...*@` 。</span><span class="sxs-lookup"><span data-stu-id="263e8-314">Comment out the `@Html.Partial("_LoginPartial")` line (surround the line with `@*...*@`).</span></span> <span data-ttu-id="263e8-315">如需詳細資訊，請參閱 [遷移驗證和 Identity ASP.NET Core](xref:migration/identity)</span><span class="sxs-lookup"><span data-stu-id="263e8-315">For more information, see [Migrate Authentication and Identity to ASP.NET Core](xref:migration/identity)</span></span>
 
 * <span data-ttu-id="263e8-316">`@Scripts.Render("~/bundles/jquery")`以元素取代 `<script>` (請參閱以下) 。</span><span class="sxs-lookup"><span data-stu-id="263e8-316">Replace `@Scripts.Render("~/bundles/jquery")` with a `<script>` element (see below).</span></span>
 
@@ -389,7 +389,7 @@ ms.locfileid: "93051509"
 * <span data-ttu-id="263e8-343">靜態內容</span><span class="sxs-lookup"><span data-stu-id="263e8-343">Static content</span></span>
 * <span data-ttu-id="263e8-344">用戶端相依性。</span><span class="sxs-lookup"><span data-stu-id="263e8-344">Client-side dependencies.</span></span>
 
-<span data-ttu-id="263e8-345">如需遷移設定和程式 :::no-loc(Identity)::: 代碼，請參閱 [將設定遷移至 ASP.NET Core](xref:migration/configuration) 以及 [將驗證遷移至 :::no-loc(Identity)::: ASP.NET Core](xref:migration/identity)。</span><span class="sxs-lookup"><span data-stu-id="263e8-345">For migrating configuration and :::no-loc(Identity)::: code, see [Migrate configuration to ASP.NET Core](xref:migration/configuration) and [Migrate Authentication and :::no-loc(Identity)::: to ASP.NET Core](xref:migration/identity).</span></span>
+<span data-ttu-id="263e8-345">如需遷移設定和程式 Identity 代碼，請參閱 [將設定遷移至 ASP.NET Core](xref:migration/configuration) 以及 [將驗證遷移至 Identity ASP.NET Core](xref:migration/identity)。</span><span class="sxs-lookup"><span data-stu-id="263e8-345">For migrating configuration and Identity code, see [Migrate configuration to ASP.NET Core](xref:migration/configuration) and [Migrate Authentication and Identity to ASP.NET Core](xref:migration/identity).</span></span>
 
 > [!NOTE]
 > <span data-ttu-id="263e8-346">範例中的版本號碼可能不是最新版本，請據以更新專案。</span><span class="sxs-lookup"><span data-stu-id="263e8-346">The version numbers in the samples might not be current, update the projects accordingly.</span></span>
@@ -440,7 +440,7 @@ ms.locfileid: "93051509"
 
 * <span data-ttu-id="263e8-383">新增 *Views/Home* 目錄。</span><span class="sxs-lookup"><span data-stu-id="263e8-383">Add a *Views/Home* directory.</span></span>
 
-* <span data-ttu-id="263e8-384">將名為 *Index. cshtml* 的 **:::no-loc(Razor)::: View** 新增至 *Views/Home* 目錄。</span><span class="sxs-lookup"><span data-stu-id="263e8-384">Add a **:::no-loc(Razor)::: View** named *Index.cshtml* to the *Views/Home* directory.</span></span>
+* <span data-ttu-id="263e8-384">將名為 *Index. cshtml* 的 **Razor View** 新增至 *Views/Home* 目錄。</span><span class="sxs-lookup"><span data-stu-id="263e8-384">Add a **Razor View** named *Index.cshtml* to the *Views/Home* directory.</span></span>
 
 ![[新增項目] 對話方塊](mvc/_static/view.png)
 
@@ -474,13 +474,13 @@ ms.locfileid: "93051509"
 
 * <span data-ttu-id="263e8-398">filters</span><span class="sxs-lookup"><span data-stu-id="263e8-398">filters</span></span>
 
-* <span data-ttu-id="263e8-399">登入/登出， :::no-loc(Identity)::: (在下一個教學課程中完成這項操作。 ) </span><span class="sxs-lookup"><span data-stu-id="263e8-399">Log in/out, :::no-loc(Identity)::: (This is done in the next tutorial.)</span></span>
+* <span data-ttu-id="263e8-399">登入/登出， Identity (在下一個教學課程中完成這項操作。 ) </span><span class="sxs-lookup"><span data-stu-id="263e8-399">Log in/out, Identity (This is done in the next tutorial.)</span></span>
 
 ## <a name="controllers-and-views"></a><span data-ttu-id="263e8-400">控制器與視圖</span><span class="sxs-lookup"><span data-stu-id="263e8-400">Controllers and views</span></span>
 
 * <span data-ttu-id="263e8-401">將 ASP.NET MVC 中的每個方法複製 `HomeController` 到新的 `HomeController` 。</span><span class="sxs-lookup"><span data-stu-id="263e8-401">Copy each of the methods from the ASP.NET MVC `HomeController` to the new `HomeController`.</span></span> <span data-ttu-id="263e8-402">在 ASP.NET MVC 中，內建範本的控制器動作方法傳回型別為 <https://docs.microsoft.com/dotnet/api/system.web.mvc.actionresult?view=aspnet-mvc-5.2> ; 在 ASP.NET CORE mvc 中，動作方法會 `IActionResult` 改為傳回。</span><span class="sxs-lookup"><span data-stu-id="263e8-402">In ASP.NET MVC, the built-in template's controller action method return type is <https://docs.microsoft.com/dotnet/api/system.web.mvc.actionresult?view=aspnet-mvc-5.2>; in ASP.NET Core MVC, the action methods return `IActionResult` instead.</span></span> <span data-ttu-id="263e8-403">`ActionResult` implements `IActionResult` ，因此不需要變更動作方法的傳回型別。</span><span class="sxs-lookup"><span data-stu-id="263e8-403">`ActionResult` implements `IActionResult`, so there's no need to change the return type of the action methods.</span></span>
 
-* <span data-ttu-id="263e8-404">將 ASP.NET MVC 專案中的 *About* 、 *Contact* 和 *Index.* cshtml view 檔案複製 :::no-loc(Razor)::: 到 ASP.NET Core 專案。</span><span class="sxs-lookup"><span data-stu-id="263e8-404">Copy the *About.cshtml* , *Contact.cshtml* , and *Index.cshtml* :::no-loc(Razor)::: view files from the ASP.NET MVC project to the ASP.NET Core project.</span></span>
+* <span data-ttu-id="263e8-404">將 ASP.NET MVC 專案中的 *About* 、 *Contact* 和 *Index.* cshtml view 檔案複製 Razor 到 ASP.NET Core 專案。</span><span class="sxs-lookup"><span data-stu-id="263e8-404">Copy the *About.cshtml* , *Contact.cshtml* , and *Index.cshtml* Razor view files from the ASP.NET MVC project to the ASP.NET Core project.</span></span>
 
 ## <a name="test-each-method"></a><span data-ttu-id="263e8-405">測試每個方法</span><span class="sxs-lookup"><span data-stu-id="263e8-405">Test each method</span></span>
 
@@ -516,7 +516,7 @@ ms.locfileid: "93051509"
 
 * <span data-ttu-id="263e8-435">移除 `@Scripts.Render("~/bundles/modernizr")`。</span><span class="sxs-lookup"><span data-stu-id="263e8-435">Remove `@Scripts.Render("~/bundles/modernizr")`.</span></span>
 
-* <span data-ttu-id="263e8-436">`@Html.Partial("_LoginPartial")`使用) 將行批註 (程式程式碼 `@*...*@` 。</span><span class="sxs-lookup"><span data-stu-id="263e8-436">Comment out the `@Html.Partial("_LoginPartial")` line (surround the line with `@*...*@`).</span></span> <span data-ttu-id="263e8-437">如需詳細資訊，請參閱 [遷移驗證和 :::no-loc(Identity)::: ASP.NET Core](xref:migration/identity)</span><span class="sxs-lookup"><span data-stu-id="263e8-437">For more information, see [Migrate Authentication and :::no-loc(Identity)::: to ASP.NET Core](xref:migration/identity)</span></span>
+* <span data-ttu-id="263e8-436">`@Html.Partial("_LoginPartial")`使用) 將行批註 (程式程式碼 `@*...*@` 。</span><span class="sxs-lookup"><span data-stu-id="263e8-436">Comment out the `@Html.Partial("_LoginPartial")` line (surround the line with `@*...*@`).</span></span> <span data-ttu-id="263e8-437">如需詳細資訊，請參閱 [遷移驗證和 Identity ASP.NET Core](xref:migration/identity)</span><span class="sxs-lookup"><span data-stu-id="263e8-437">For more information, see [Migrate Authentication and Identity to ASP.NET Core](xref:migration/identity)</span></span>
 
 * <span data-ttu-id="263e8-438">`@Scripts.Render("~/bundles/jquery")`以元素取代 `<script>` (請參閱以下) 。</span><span class="sxs-lookup"><span data-stu-id="263e8-438">Replace `@Scripts.Render("~/bundles/jquery")` with a `<script>` element (see below).</span></span>
 

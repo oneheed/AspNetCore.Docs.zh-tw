@@ -6,17 +6,17 @@ ms.author: scaddie
 ms.custom: mvc
 ms.date: 4/20/2020
 no-loc:
-- ':::no-loc(appsettings.json):::'
-- ':::no-loc(ASP.NET Core Identity):::'
-- ':::no-loc(cookie):::'
-- ':::no-loc(Cookie):::'
-- ':::no-loc(Blazor):::'
-- ':::no-loc(Blazor Server):::'
-- ':::no-loc(Blazor WebAssembly):::'
-- ':::no-loc(Identity):::'
-- ":::no-loc(Let's Encrypt):::"
-- ':::no-loc(Razor):::'
-- ':::no-loc(SignalR):::'
+- 'appsettings.json'
+- 'ASP.NET Core Identity'
+- 'cookie'
+- 'Cookie'
+- 'Blazor'
+- 'Blazor Server'
+- 'Blazor WebAssembly'
+- 'Identity'
+- "Let's Encrypt"
+- 'Razor'
+- 'SignalR'
 uid: security/app-secrets
 ms.openlocfilehash: 174f831583c2ef6cb7f122a22fe855acc8fe3047
 ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
@@ -39,7 +39,7 @@ ms.locfileid: "93056864"
 
 <span data-ttu-id="9dbe8-112">環境變數是用來避免在程式碼或本機設定檔案中儲存應用程式秘密。</span><span class="sxs-lookup"><span data-stu-id="9dbe8-112">Environment variables are used to avoid storage of app secrets in code or in local configuration files.</span></span> <span data-ttu-id="9dbe8-113">環境變數會覆寫所有先前指定設定來源的設定值。</span><span class="sxs-lookup"><span data-stu-id="9dbe8-113">Environment variables override configuration values for all previously specified configuration sources.</span></span>
 
-<span data-ttu-id="9dbe8-114">請考慮啟用 **個別使用者帳戶** 安全性的 ASP.NET Core web 應用程式。</span><span class="sxs-lookup"><span data-stu-id="9dbe8-114">Consider an ASP.NET Core web app in which **Individual User Accounts** security is enabled.</span></span> <span data-ttu-id="9dbe8-115">具有該索引鍵的專案檔案中包含預設的資料庫連接字串 *:::no-loc(appsettings.json):::* `DefaultConnection` 。</span><span class="sxs-lookup"><span data-stu-id="9dbe8-115">A default database connection string is included in the project's *:::no-loc(appsettings.json):::* file with the key `DefaultConnection`.</span></span> <span data-ttu-id="9dbe8-116">預設連接字串適用于 LocalDB，以使用者模式執行，且不需要密碼。</span><span class="sxs-lookup"><span data-stu-id="9dbe8-116">The default connection string is for LocalDB, which runs in user mode and doesn't require a password.</span></span> <span data-ttu-id="9dbe8-117">在應用程式部署期間， `DefaultConnection` 可以使用環境變數的值來覆寫金鑰值。</span><span class="sxs-lookup"><span data-stu-id="9dbe8-117">During app deployment, the `DefaultConnection` key value can be overridden with an environment variable's value.</span></span> <span data-ttu-id="9dbe8-118">環境變數可以儲存具有敏感性認證的完整連接字串。</span><span class="sxs-lookup"><span data-stu-id="9dbe8-118">The environment variable may store the complete connection string with sensitive credentials.</span></span>
+<span data-ttu-id="9dbe8-114">請考慮啟用 **個別使用者帳戶** 安全性的 ASP.NET Core web 應用程式。</span><span class="sxs-lookup"><span data-stu-id="9dbe8-114">Consider an ASP.NET Core web app in which **Individual User Accounts** security is enabled.</span></span> <span data-ttu-id="9dbe8-115">具有該索引鍵的專案檔案中包含預設的資料庫連接字串 *appsettings.json* `DefaultConnection` 。</span><span class="sxs-lookup"><span data-stu-id="9dbe8-115">A default database connection string is included in the project's *appsettings.json* file with the key `DefaultConnection`.</span></span> <span data-ttu-id="9dbe8-116">預設連接字串適用于 LocalDB，以使用者模式執行，且不需要密碼。</span><span class="sxs-lookup"><span data-stu-id="9dbe8-116">The default connection string is for LocalDB, which runs in user mode and doesn't require a password.</span></span> <span data-ttu-id="9dbe8-117">在應用程式部署期間， `DefaultConnection` 可以使用環境變數的值來覆寫金鑰值。</span><span class="sxs-lookup"><span data-stu-id="9dbe8-117">During app deployment, the `DefaultConnection` key value can be overridden with an environment variable's value.</span></span> <span data-ttu-id="9dbe8-118">環境變數可以儲存具有敏感性認證的完整連接字串。</span><span class="sxs-lookup"><span data-stu-id="9dbe8-118">The environment variable may store the complete connection string with sensitive credentials.</span></span>
 
 > [!WARNING]
 > <span data-ttu-id="9dbe8-119">環境變數通常會以純文字未加密的文字儲存。</span><span class="sxs-lookup"><span data-stu-id="9dbe8-119">Environment variables are generally stored in plain, unencrypted text.</span></span> <span data-ttu-id="9dbe8-120">如果電腦或進程遭到入侵，則不受信任的合作物件可以存取環境變數。</span><span class="sxs-lookup"><span data-stu-id="9dbe8-120">If the machine or process is compromised, environment variables can be accessed by untrusted parties.</span></span> <span data-ttu-id="9dbe8-121">可能需要其他措施來防止洩漏使用者秘密。</span><span class="sxs-lookup"><span data-stu-id="9dbe8-121">Additional measures to prevent disclosure of user secrets may be required.</span></span>
@@ -182,7 +182,7 @@ dotnet user-secrets set "Movies:ServiceApiKey" "12345" --project "C:\apps\WebApp
 
 ## <a name="string-replacement-with-secrets"></a><span data-ttu-id="9dbe8-186">使用秘密取代字串</span><span class="sxs-lookup"><span data-stu-id="9dbe8-186">String replacement with secrets</span></span>
 
-<span data-ttu-id="9dbe8-187">以純文字儲存密碼並非安全的。</span><span class="sxs-lookup"><span data-stu-id="9dbe8-187">Storing passwords in plain text is insecure.</span></span> <span data-ttu-id="9dbe8-188">例如，儲存在中的資料庫連接字串 *:::no-loc(appsettings.json):::* 可能包含指定使用者的密碼：</span><span class="sxs-lookup"><span data-stu-id="9dbe8-188">For example, a database connection string stored in *:::no-loc(appsettings.json):::* may include a password for the specified user:</span></span>
+<span data-ttu-id="9dbe8-187">以純文字儲存密碼並非安全的。</span><span class="sxs-lookup"><span data-stu-id="9dbe8-187">Storing passwords in plain text is insecure.</span></span> <span data-ttu-id="9dbe8-188">例如，儲存在中的資料庫連接字串 *appsettings.json* 可能包含指定使用者的密碼：</span><span class="sxs-lookup"><span data-stu-id="9dbe8-188">For example, a database connection string stored in *appsettings.json* may include a password for the specified user:</span></span>
 
 [!code-json[](app-secrets/samples/3.x/UserSecrets/appsettings-unsecure.json?highlight=3)]
 
@@ -192,9 +192,9 @@ dotnet user-secrets set "Movies:ServiceApiKey" "12345" --project "C:\apps\WebApp
 dotnet user-secrets set "DbPassword" "pass123"
 ```
 
-<span data-ttu-id="9dbe8-191">`Password`從的連接字串中移除機碼值組 *:::no-loc(appsettings.json):::* 。</span><span class="sxs-lookup"><span data-stu-id="9dbe8-191">Remove the `Password` key-value pair from the connection string in *:::no-loc(appsettings.json):::* .</span></span> <span data-ttu-id="9dbe8-192">例如：</span><span class="sxs-lookup"><span data-stu-id="9dbe8-192">For example:</span></span>
+<span data-ttu-id="9dbe8-191">`Password`從的連接字串中移除機碼值組 *appsettings.json* 。</span><span class="sxs-lookup"><span data-stu-id="9dbe8-191">Remove the `Password` key-value pair from the connection string in *appsettings.json* .</span></span> <span data-ttu-id="9dbe8-192">例如：</span><span class="sxs-lookup"><span data-stu-id="9dbe8-192">For example:</span></span>
 
-[!code-json[](app-secrets/samples/3.x/UserSecrets/:::no-loc(appsettings.json):::?highlight=3)]
+[!code-json[](app-secrets/samples/3.x/UserSecrets/appsettings.json?highlight=3)]
 
 <span data-ttu-id="9dbe8-193">您可以在物件的屬性上設定秘密的值 <xref:System.Data.SqlClient.SqlConnectionStringBuilder> <xref:System.Data.SqlClient.SqlConnectionStringBuilder.Password%2A> ，以完成連接字串：</span><span class="sxs-lookup"><span data-stu-id="9dbe8-193">The secret's value can be set on a <xref:System.Data.SqlClient.SqlConnectionStringBuilder> object's <xref:System.Data.SqlClient.SqlConnectionStringBuilder.Password%2A> property to complete the connection string:</span></span>
 
@@ -287,7 +287,7 @@ No secrets configured for this application.
 
 <span data-ttu-id="9dbe8-216">環境變數是用來避免在程式碼或本機設定檔案中儲存應用程式秘密。</span><span class="sxs-lookup"><span data-stu-id="9dbe8-216">Environment variables are used to avoid storage of app secrets in code or in local configuration files.</span></span> <span data-ttu-id="9dbe8-217">環境變數會覆寫所有先前指定設定來源的設定值。</span><span class="sxs-lookup"><span data-stu-id="9dbe8-217">Environment variables override configuration values for all previously specified configuration sources.</span></span>
 
-<span data-ttu-id="9dbe8-218">請考慮啟用 **個別使用者帳戶** 安全性的 ASP.NET Core web 應用程式。</span><span class="sxs-lookup"><span data-stu-id="9dbe8-218">Consider an ASP.NET Core web app in which **Individual User Accounts** security is enabled.</span></span> <span data-ttu-id="9dbe8-219">具有該索引鍵的專案檔案中包含預設的資料庫連接字串 *:::no-loc(appsettings.json):::* `DefaultConnection` 。</span><span class="sxs-lookup"><span data-stu-id="9dbe8-219">A default database connection string is included in the project's *:::no-loc(appsettings.json):::* file with the key `DefaultConnection`.</span></span> <span data-ttu-id="9dbe8-220">預設連接字串適用于 LocalDB，以使用者模式執行，且不需要密碼。</span><span class="sxs-lookup"><span data-stu-id="9dbe8-220">The default connection string is for LocalDB, which runs in user mode and doesn't require a password.</span></span> <span data-ttu-id="9dbe8-221">在應用程式部署期間， `DefaultConnection` 可以使用環境變數的值來覆寫金鑰值。</span><span class="sxs-lookup"><span data-stu-id="9dbe8-221">During app deployment, the `DefaultConnection` key value can be overridden with an environment variable's value.</span></span> <span data-ttu-id="9dbe8-222">環境變數可以儲存具有敏感性認證的完整連接字串。</span><span class="sxs-lookup"><span data-stu-id="9dbe8-222">The environment variable may store the complete connection string with sensitive credentials.</span></span>
+<span data-ttu-id="9dbe8-218">請考慮啟用 **個別使用者帳戶** 安全性的 ASP.NET Core web 應用程式。</span><span class="sxs-lookup"><span data-stu-id="9dbe8-218">Consider an ASP.NET Core web app in which **Individual User Accounts** security is enabled.</span></span> <span data-ttu-id="9dbe8-219">具有該索引鍵的專案檔案中包含預設的資料庫連接字串 *appsettings.json* `DefaultConnection` 。</span><span class="sxs-lookup"><span data-stu-id="9dbe8-219">A default database connection string is included in the project's *appsettings.json* file with the key `DefaultConnection`.</span></span> <span data-ttu-id="9dbe8-220">預設連接字串適用于 LocalDB，以使用者模式執行，且不需要密碼。</span><span class="sxs-lookup"><span data-stu-id="9dbe8-220">The default connection string is for LocalDB, which runs in user mode and doesn't require a password.</span></span> <span data-ttu-id="9dbe8-221">在應用程式部署期間， `DefaultConnection` 可以使用環境變數的值來覆寫金鑰值。</span><span class="sxs-lookup"><span data-stu-id="9dbe8-221">During app deployment, the `DefaultConnection` key value can be overridden with an environment variable's value.</span></span> <span data-ttu-id="9dbe8-222">環境變數可以儲存具有敏感性認證的完整連接字串。</span><span class="sxs-lookup"><span data-stu-id="9dbe8-222">The environment variable may store the complete connection string with sensitive credentials.</span></span>
 
 > [!WARNING]
 > <span data-ttu-id="9dbe8-223">環境變數通常會以純文字未加密的文字儲存。</span><span class="sxs-lookup"><span data-stu-id="9dbe8-223">Environment variables are generally stored in plain, unencrypted text.</span></span> <span data-ttu-id="9dbe8-224">如果電腦或進程遭到入侵，則不受信任的合作物件可以存取環境變數。</span><span class="sxs-lookup"><span data-stu-id="9dbe8-224">If the machine or process is compromised, environment variables can be accessed by untrusted parties.</span></span> <span data-ttu-id="9dbe8-225">可能需要其他措施來防止洩漏使用者秘密。</span><span class="sxs-lookup"><span data-stu-id="9dbe8-225">Additional measures to prevent disclosure of user secrets may be required.</span></span>
@@ -427,7 +427,7 @@ dotnet user-secrets set "Movies:ServiceApiKey" "12345" --project "C:\apps\WebApp
 
 ## <a name="string-replacement-with-secrets"></a><span data-ttu-id="9dbe8-289">使用秘密取代字串</span><span class="sxs-lookup"><span data-stu-id="9dbe8-289">String replacement with secrets</span></span>
 
-<span data-ttu-id="9dbe8-290">以純文字儲存密碼並非安全的。</span><span class="sxs-lookup"><span data-stu-id="9dbe8-290">Storing passwords in plain text is insecure.</span></span> <span data-ttu-id="9dbe8-291">例如，儲存在中的資料庫連接字串 *:::no-loc(appsettings.json):::* 可能包含指定使用者的密碼：</span><span class="sxs-lookup"><span data-stu-id="9dbe8-291">For example, a database connection string stored in *:::no-loc(appsettings.json):::* may include a password for the specified user:</span></span>
+<span data-ttu-id="9dbe8-290">以純文字儲存密碼並非安全的。</span><span class="sxs-lookup"><span data-stu-id="9dbe8-290">Storing passwords in plain text is insecure.</span></span> <span data-ttu-id="9dbe8-291">例如，儲存在中的資料庫連接字串 *appsettings.json* 可能包含指定使用者的密碼：</span><span class="sxs-lookup"><span data-stu-id="9dbe8-291">For example, a database connection string stored in *appsettings.json* may include a password for the specified user:</span></span>
 
 [!code-json[](app-secrets/samples/2.x/UserSecrets/appsettings-unsecure.json?highlight=3)]
 
@@ -437,9 +437,9 @@ dotnet user-secrets set "Movies:ServiceApiKey" "12345" --project "C:\apps\WebApp
 dotnet user-secrets set "DbPassword" "pass123"
 ```
 
-<span data-ttu-id="9dbe8-294">`Password`從的連接字串中移除機碼值組 *:::no-loc(appsettings.json):::* 。</span><span class="sxs-lookup"><span data-stu-id="9dbe8-294">Remove the `Password` key-value pair from the connection string in *:::no-loc(appsettings.json):::* .</span></span> <span data-ttu-id="9dbe8-295">例如：</span><span class="sxs-lookup"><span data-stu-id="9dbe8-295">For example:</span></span>
+<span data-ttu-id="9dbe8-294">`Password`從的連接字串中移除機碼值組 *appsettings.json* 。</span><span class="sxs-lookup"><span data-stu-id="9dbe8-294">Remove the `Password` key-value pair from the connection string in *appsettings.json* .</span></span> <span data-ttu-id="9dbe8-295">例如：</span><span class="sxs-lookup"><span data-stu-id="9dbe8-295">For example:</span></span>
 
-[!code-json[](app-secrets/samples/2.x/UserSecrets/:::no-loc(appsettings.json):::?highlight=3)]
+[!code-json[](app-secrets/samples/2.x/UserSecrets/appsettings.json?highlight=3)]
 
 <span data-ttu-id="9dbe8-296">您可以在物件的屬性上設定秘密的值 <xref:System.Data.SqlClient.SqlConnectionStringBuilder> <xref:System.Data.SqlClient.SqlConnectionStringBuilder.Password%2A> ，以完成連接字串：</span><span class="sxs-lookup"><span data-stu-id="9dbe8-296">The secret's value can be set on a <xref:System.Data.SqlClient.SqlConnectionStringBuilder> object's <xref:System.Data.SqlClient.SqlConnectionStringBuilder.Password%2A> property to complete the connection string:</span></span>
 

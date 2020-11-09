@@ -6,17 +6,17 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 12/05/2019
 no-loc:
-- ':::no-loc(appsettings.json):::'
-- ':::no-loc(ASP.NET Core Identity):::'
-- ':::no-loc(cookie):::'
-- ':::no-loc(Cookie):::'
-- ':::no-loc(Blazor):::'
-- ':::no-loc(Blazor Server):::'
-- ':::no-loc(Blazor WebAssembly):::'
-- ':::no-loc(Identity):::'
-- ":::no-loc(Let's Encrypt):::"
-- ':::no-loc(Razor):::'
-- ':::no-loc(SignalR):::'
+- 'appsettings.json'
+- 'ASP.NET Core Identity'
+- 'cookie'
+- 'Cookie'
+- 'Blazor'
+- 'Blazor Server'
+- 'Blazor WebAssembly'
+- 'Identity'
+- "Let's Encrypt"
+- 'Razor'
+- 'SignalR'
 uid: aspnetcore-2.1
 ms.openlocfilehash: 62fc9d866adcf05ff024501db68cce8bb8b11a98
 ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
@@ -29,9 +29,9 @@ ms.locfileid: "93059711"
 
 <span data-ttu-id="7a207-104">本文會重點說明 ASP.NET Core 2.1 最重要的變更，附有相關文件的連結。</span><span class="sxs-lookup"><span data-stu-id="7a207-104">This article highlights the most significant changes in ASP.NET Core 2.1, with links to relevant documentation.</span></span>
 
-## :::no-loc(SignalR):::
+## SignalR
 
-<span data-ttu-id="7a207-105">:::no-loc(SignalR)::: 已重寫 ASP.NET Core 2.1。</span><span class="sxs-lookup"><span data-stu-id="7a207-105">:::no-loc(SignalR)::: has been rewritten for ASP.NET Core 2.1.</span></span> <span data-ttu-id="7a207-106">ASP.NET Core :::no-loc(SignalR)::: 包含一些改良功能：</span><span class="sxs-lookup"><span data-stu-id="7a207-106">ASP.NET Core :::no-loc(SignalR)::: includes a number of improvements:</span></span>
+<span data-ttu-id="7a207-105">SignalR 已重寫 ASP.NET Core 2.1。</span><span class="sxs-lookup"><span data-stu-id="7a207-105">SignalR has been rewritten for ASP.NET Core 2.1.</span></span> <span data-ttu-id="7a207-106">ASP.NET Core SignalR 包含一些改良功能：</span><span class="sxs-lookup"><span data-stu-id="7a207-106">ASP.NET Core SignalR includes a number of improvements:</span></span>
 
 * <span data-ttu-id="7a207-107">簡化的向外延展模型。</span><span class="sxs-lookup"><span data-stu-id="7a207-107">A simplified scale-out model.</span></span>
 * <span data-ttu-id="7a207-108">沒有 jQuery 相依性的新 JavaScript 用戶端。</span><span class="sxs-lookup"><span data-stu-id="7a207-108">A new JavaScript client with no jQuery dependency.</span></span>
@@ -40,24 +40,24 @@ ms.locfileid: "93059711"
 * <span data-ttu-id="7a207-111">新的資料流處理回應模型。</span><span class="sxs-lookup"><span data-stu-id="7a207-111">A new streaming response model.</span></span>
 * <span data-ttu-id="7a207-112">支援以裸機 WebSockets 為基礎的用戶端。</span><span class="sxs-lookup"><span data-stu-id="7a207-112">Support for clients based on bare WebSockets.</span></span>
 
-<span data-ttu-id="7a207-113">如需詳細資訊，請參閱[ASP.NET Core :::no-loc(SignalR)::: ](xref:signalr/introduction)。</span><span class="sxs-lookup"><span data-stu-id="7a207-113">For more information, see [ASP.NET Core :::no-loc(SignalR):::](xref:signalr/introduction).</span></span>
+<span data-ttu-id="7a207-113">如需詳細資訊，請參閱[ASP.NET Core SignalR ](xref:signalr/introduction)。</span><span class="sxs-lookup"><span data-stu-id="7a207-113">For more information, see [ASP.NET Core SignalR](xref:signalr/introduction).</span></span>
 
-## <a name="no-locrazor-class-libraries"></a><span data-ttu-id="7a207-114">:::no-loc(Razor)::: 類別庫</span><span class="sxs-lookup"><span data-stu-id="7a207-114">:::no-loc(Razor)::: class libraries</span></span>
+## <a name="no-locrazor-class-libraries"></a><span data-ttu-id="7a207-114">Razor 類別庫</span><span class="sxs-lookup"><span data-stu-id="7a207-114">Razor class libraries</span></span>
 
-<span data-ttu-id="7a207-115">ASP.NET Core 2.1 可讓您更輕鬆地在程式庫中建立並包含以架構為 :::no-loc(Razor)::: 基礎的 UI，並在多個專案之間共用。</span><span class="sxs-lookup"><span data-stu-id="7a207-115">ASP.NET Core 2.1 makes it easier to build and include :::no-loc(Razor):::-based UI in a library and share it across multiple projects.</span></span> <span data-ttu-id="7a207-116">新的 :::no-loc(Razor)::: SDK 可讓您將檔案建立 :::no-loc(Razor)::: 至類別庫專案，以封裝至 NuGet 套件。</span><span class="sxs-lookup"><span data-stu-id="7a207-116">The new :::no-loc(Razor)::: SDK enables building :::no-loc(Razor)::: files into a class library project that can be packaged into a NuGet package.</span></span> <span data-ttu-id="7a207-117">應用程式會自動探索並覆寫程式庫中的檢視和頁面。</span><span class="sxs-lookup"><span data-stu-id="7a207-117">Views and pages in libraries are automatically discovered and can be overridden by the app.</span></span> <span data-ttu-id="7a207-118">藉由整合 :::no-loc(Razor)::: 編譯到組建中：</span><span class="sxs-lookup"><span data-stu-id="7a207-118">By integrating :::no-loc(Razor)::: compilation into the build:</span></span>
+<span data-ttu-id="7a207-115">ASP.NET Core 2.1 可讓您更輕鬆地在程式庫中建立並包含以架構為 Razor 基礎的 UI，並在多個專案之間共用。</span><span class="sxs-lookup"><span data-stu-id="7a207-115">ASP.NET Core 2.1 makes it easier to build and include Razor-based UI in a library and share it across multiple projects.</span></span> <span data-ttu-id="7a207-116">新的 Razor SDK 可讓您將檔案建立 Razor 至類別庫專案，以封裝至 NuGet 套件。</span><span class="sxs-lookup"><span data-stu-id="7a207-116">The new Razor SDK enables building Razor files into a class library project that can be packaged into a NuGet package.</span></span> <span data-ttu-id="7a207-117">應用程式會自動探索並覆寫程式庫中的檢視和頁面。</span><span class="sxs-lookup"><span data-stu-id="7a207-117">Views and pages in libraries are automatically discovered and can be overridden by the app.</span></span> <span data-ttu-id="7a207-118">藉由整合 Razor 編譯到組建中：</span><span class="sxs-lookup"><span data-stu-id="7a207-118">By integrating Razor compilation into the build:</span></span>
 
 * <span data-ttu-id="7a207-119">大幅縮短應用程式的啟動時間。</span><span class="sxs-lookup"><span data-stu-id="7a207-119">The app startup time is significantly faster.</span></span>
-* <span data-ttu-id="7a207-120">:::no-loc(Razor):::在執行時間快速更新視圖和頁面，仍可作為反復開發工作流程的一部分。</span><span class="sxs-lookup"><span data-stu-id="7a207-120">Fast updates to :::no-loc(Razor)::: views and pages at runtime are still available as part of an iterative development workflow.</span></span>
+* <span data-ttu-id="7a207-120">Razor在執行時間快速更新視圖和頁面，仍可作為反復開發工作流程的一部分。</span><span class="sxs-lookup"><span data-stu-id="7a207-120">Fast updates to Razor views and pages at runtime are still available as part of an iterative development workflow.</span></span>
 
-<span data-ttu-id="7a207-121">如需詳細資訊，請參閱 [使用 :::no-loc(Razor)::: 類別庫專案建立可重複](xref:razor-pages/ui-class)使用的 UI。</span><span class="sxs-lookup"><span data-stu-id="7a207-121">For more information, see [Create reusable UI using the :::no-loc(Razor)::: Class Library project](xref:razor-pages/ui-class).</span></span>
+<span data-ttu-id="7a207-121">如需詳細資訊，請參閱 [使用 Razor 類別庫專案建立可重複](xref:razor-pages/ui-class)使用的 UI。</span><span class="sxs-lookup"><span data-stu-id="7a207-121">For more information, see [Create reusable UI using the Razor Class Library project](xref:razor-pages/ui-class).</span></span>
 
-## <a name="no-locidentity-ui-library--scaffolding"></a><span data-ttu-id="7a207-122">:::no-loc(Identity)::: UI 程式庫 & 的樣板</span><span class="sxs-lookup"><span data-stu-id="7a207-122">:::no-loc(Identity)::: UI library & scaffolding</span></span>
+## <a name="no-locidentity-ui-library--scaffolding"></a><span data-ttu-id="7a207-122">Identity UI 程式庫 & 的樣板</span><span class="sxs-lookup"><span data-stu-id="7a207-122">Identity UI library & scaffolding</span></span>
 
-<span data-ttu-id="7a207-123">ASP.NET Core 2.1 [:::no-loc(ASP.NET Core Identity):::](xref:security/authentication/identity) 以[ :::no-loc(Razor)::: 類別庫](xref:razor-pages/ui-class)的形式提供。</span><span class="sxs-lookup"><span data-stu-id="7a207-123">ASP.NET Core 2.1 provides [:::no-loc(ASP.NET Core Identity):::](xref:security/authentication/identity) as a [:::no-loc(Razor)::: Class Library](xref:razor-pages/ui-class).</span></span> <span data-ttu-id="7a207-124">包含的應用程式 :::no-loc(Identity)::: 可以套用新的 :::no-loc(Identity)::: scaffolder，以選擇性地新增類別庫中包含的原始程式碼 :::no-loc(Identity)::: :::no-loc(Razor)::: (RCL) 。</span><span class="sxs-lookup"><span data-stu-id="7a207-124">Apps that include :::no-loc(Identity)::: can apply the new :::no-loc(Identity)::: scaffolder to selectively add the source code contained in the :::no-loc(Identity)::: :::no-loc(Razor)::: Class Library (RCL).</span></span> <span data-ttu-id="7a207-125">建議您產生原始程式碼，以便能夠修改程式碼並變更行為。</span><span class="sxs-lookup"><span data-stu-id="7a207-125">You might want to generate source code so you can modify the code and change the behavior.</span></span> <span data-ttu-id="7a207-126">例如，您可以指示 Scaffolder 產生註冊使用的程式碼。</span><span class="sxs-lookup"><span data-stu-id="7a207-126">For example, you could instruct the scaffolder to generate the code used in registration.</span></span> <span data-ttu-id="7a207-127">產生的程式碼優先于 RCL 中的相同程式碼 :::no-loc(Identity)::: 。</span><span class="sxs-lookup"><span data-stu-id="7a207-127">Generated code takes precedence over the same code in the :::no-loc(Identity)::: RCL.</span></span>
+<span data-ttu-id="7a207-123">ASP.NET Core 2.1 [ASP.NET Core Identity](xref:security/authentication/identity) 以[ Razor 類別庫](xref:razor-pages/ui-class)的形式提供。</span><span class="sxs-lookup"><span data-stu-id="7a207-123">ASP.NET Core 2.1 provides [ASP.NET Core Identity](xref:security/authentication/identity) as a [Razor Class Library](xref:razor-pages/ui-class).</span></span> <span data-ttu-id="7a207-124">包含的應用程式 Identity 可以套用新的 Identity scaffolder，以選擇性地新增類別庫中包含的原始程式碼 Identity Razor (RCL) 。</span><span class="sxs-lookup"><span data-stu-id="7a207-124">Apps that include Identity can apply the new Identity scaffolder to selectively add the source code contained in the Identity Razor Class Library (RCL).</span></span> <span data-ttu-id="7a207-125">建議您產生原始程式碼，以便能夠修改程式碼並變更行為。</span><span class="sxs-lookup"><span data-stu-id="7a207-125">You might want to generate source code so you can modify the code and change the behavior.</span></span> <span data-ttu-id="7a207-126">例如，您可以指示 Scaffolder 產生註冊使用的程式碼。</span><span class="sxs-lookup"><span data-stu-id="7a207-126">For example, you could instruct the scaffolder to generate the code used in registration.</span></span> <span data-ttu-id="7a207-127">產生的程式碼優先于 RCL 中的相同程式碼 Identity 。</span><span class="sxs-lookup"><span data-stu-id="7a207-127">Generated code takes precedence over the same code in the Identity RCL.</span></span>
 
-<span data-ttu-id="7a207-128">**未** 包含驗證的應用程式可以套用 :::no-loc(Identity)::: SCAFFOLDER 來新增 RCL :::no-loc(Identity)::: 套件。</span><span class="sxs-lookup"><span data-stu-id="7a207-128">Apps that do **not** include authentication can apply the :::no-loc(Identity)::: scaffolder to add the RCL :::no-loc(Identity)::: package.</span></span> <span data-ttu-id="7a207-129">您可以選擇 :::no-loc(Identity)::: 要產生的程式碼。</span><span class="sxs-lookup"><span data-stu-id="7a207-129">You have the option of selecting :::no-loc(Identity)::: code to be generated.</span></span>
+<span data-ttu-id="7a207-128">**未** 包含驗證的應用程式可以套用 Identity SCAFFOLDER 來新增 RCL Identity 套件。</span><span class="sxs-lookup"><span data-stu-id="7a207-128">Apps that do **not** include authentication can apply the Identity scaffolder to add the RCL Identity package.</span></span> <span data-ttu-id="7a207-129">您可以選擇 Identity 要產生的程式碼。</span><span class="sxs-lookup"><span data-stu-id="7a207-129">You have the option of selecting Identity code to be generated.</span></span>
 
-<span data-ttu-id="7a207-130">如需詳細資訊，請參閱 [ :::no-loc(Identity)::: ASP.NET Core 專案中的 Scaffold](xref:security/authentication/scaffold-identity)。</span><span class="sxs-lookup"><span data-stu-id="7a207-130">For more information, see [Scaffold :::no-loc(Identity)::: in ASP.NET Core projects](xref:security/authentication/scaffold-identity).</span></span>
+<span data-ttu-id="7a207-130">如需詳細資訊，請參閱 [ Identity ASP.NET Core 專案中的 Scaffold](xref:security/authentication/scaffold-identity)。</span><span class="sxs-lookup"><span data-stu-id="7a207-130">For more information, see [Scaffold Identity in ASP.NET Core projects](xref:security/authentication/scaffold-identity).</span></span>
 
 ## <a name="https"></a><span data-ttu-id="7a207-131">HTTPS</span><span class="sxs-lookup"><span data-stu-id="7a207-131">HTTPS</span></span>
 
@@ -101,11 +101,11 @@ ms.locfileid: "93059711"
 
 ```csharp
 public class BasicTests
-    : IClassFixture<WebApplicationFactory<:::no-loc(Razor):::PagesProject.Startup>>
+    : IClassFixture<WebApplicationFactory<RazorPagesProject.Startup>>
 {
     private readonly HttpClient _client;
 
-    public BasicTests(WebApplicationFactory<:::no-loc(Razor):::PagesProject.Startup> factory)
+    public BasicTests(WebApplicationFactory<RazorPagesProject.Startup> factory)
     {
         _client = factory.CreateClient();
     }
@@ -163,17 +163,17 @@ public class BasicTests
 * <xref:spa/react>
 * <xref:spa/react-with-redux>
 
-## <a name="no-locrazor-pages-search-for-no-locrazor-assets"></a><span data-ttu-id="7a207-195">:::no-loc(Razor)::: 頁面搜尋 :::no-loc(Razor)::: 資產</span><span class="sxs-lookup"><span data-stu-id="7a207-195">:::no-loc(Razor)::: Pages search for :::no-loc(Razor)::: assets</span></span>
+## <a name="no-locrazor-pages-search-for-no-locrazor-assets"></a><span data-ttu-id="7a207-195">Razor 頁面搜尋 Razor 資產</span><span class="sxs-lookup"><span data-stu-id="7a207-195">Razor Pages search for Razor assets</span></span>
 
-<span data-ttu-id="7a207-196">在2.1 中，頁面會依列出的順序，在 :::no-loc(Razor)::: :::no-loc(Razor)::: 下列目錄中搜尋資產 (例如版面配置和部分) ：</span><span class="sxs-lookup"><span data-stu-id="7a207-196">In 2.1, :::no-loc(Razor)::: Pages search for :::no-loc(Razor)::: assets (such as layouts and partials) in the following directories in the listed order:</span></span>
+<span data-ttu-id="7a207-196">在2.1 中，頁面會依列出的順序，在 Razor Razor 下列目錄中搜尋資產 (例如版面配置和部分) ：</span><span class="sxs-lookup"><span data-stu-id="7a207-196">In 2.1, Razor Pages search for Razor assets (such as layouts and partials) in the following directories in the listed order:</span></span>
 
 1. <span data-ttu-id="7a207-197">目前的 Pages 資料夾。</span><span class="sxs-lookup"><span data-stu-id="7a207-197">Current Pages folder.</span></span>
 1. <span data-ttu-id="7a207-198">*/Pages/Shared/*</span><span class="sxs-lookup"><span data-stu-id="7a207-198">*/Pages/Shared/*</span></span>
 1. <span data-ttu-id="7a207-199">*/Views/Shared/*</span><span class="sxs-lookup"><span data-stu-id="7a207-199">*/Views/Shared/*</span></span>
 
-## <a name="no-locrazor-pages-in-an-area"></a><span data-ttu-id="7a207-200">:::no-loc(Razor)::: 區域中的頁面</span><span class="sxs-lookup"><span data-stu-id="7a207-200">:::no-loc(Razor)::: Pages in an area</span></span>
+## <a name="no-locrazor-pages-in-an-area"></a><span data-ttu-id="7a207-200">Razor 區域中的頁面</span><span class="sxs-lookup"><span data-stu-id="7a207-200">Razor Pages in an area</span></span>
 
-<span data-ttu-id="7a207-201">:::no-loc(Razor)::: 頁面現在支援 [區域](xref:mvc/controllers/areas)。</span><span class="sxs-lookup"><span data-stu-id="7a207-201">:::no-loc(Razor)::: Pages now support [areas](xref:mvc/controllers/areas).</span></span> <span data-ttu-id="7a207-202">若要查看區域範例，請 :::no-loc(Razor)::: 使用個別的使用者帳戶建立新的頁面 web 應用程式。</span><span class="sxs-lookup"><span data-stu-id="7a207-202">To see an example of areas, create a new :::no-loc(Razor)::: Pages web app with individual user accounts.</span></span> <span data-ttu-id="7a207-203">:::no-loc(Razor):::具有個別使用者帳戶的頁面 web 應用程式包含 */Areas/ :::no-loc(Identity)::: /Pages* 。</span><span class="sxs-lookup"><span data-stu-id="7a207-203">A :::no-loc(Razor)::: Pages web app with individual user accounts includes */Areas/:::no-loc(Identity):::/Pages* .</span></span>
+<span data-ttu-id="7a207-201">Razor 頁面現在支援 [區域](xref:mvc/controllers/areas)。</span><span class="sxs-lookup"><span data-stu-id="7a207-201">Razor Pages now support [areas](xref:mvc/controllers/areas).</span></span> <span data-ttu-id="7a207-202">若要查看區域範例，請 Razor 使用個別的使用者帳戶建立新的頁面 web 應用程式。</span><span class="sxs-lookup"><span data-stu-id="7a207-202">To see an example of areas, create a new Razor Pages web app with individual user accounts.</span></span> <span data-ttu-id="7a207-203">Razor具有個別使用者帳戶的頁面 web 應用程式包含 */Areas/ Identity /Pages* 。</span><span class="sxs-lookup"><span data-stu-id="7a207-203">A Razor Pages web app with individual user accounts includes */Areas/Identity/Pages* .</span></span>
 
 ## <a name="mvc-compatibility-version"></a><span data-ttu-id="7a207-204">MVC 相容性版本</span><span class="sxs-lookup"><span data-stu-id="7a207-204">MVC compatibility version</span></span>
 

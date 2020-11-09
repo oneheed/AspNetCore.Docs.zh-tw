@@ -6,17 +6,17 @@ monikerRange: '>= aspnetcore-2.1'
 ms.author: riande
 ms.date: 11/04/2019
 no-loc:
-- ':::no-loc(appsettings.json):::'
-- ':::no-loc(ASP.NET Core Identity):::'
-- ':::no-loc(cookie):::'
-- ':::no-loc(Cookie):::'
-- ':::no-loc(Blazor):::'
-- ':::no-loc(Blazor Server):::'
-- ':::no-loc(Blazor WebAssembly):::'
-- ':::no-loc(Identity):::'
-- ":::no-loc(Let's Encrypt):::"
-- ':::no-loc(Razor):::'
-- ':::no-loc(SignalR):::'
+- 'appsettings.json'
+- 'ASP.NET Core Identity'
+- 'cookie'
+- 'Cookie'
+- 'Blazor'
+- 'Blazor Server'
+- 'Blazor WebAssembly'
+- 'Identity'
+- "Let's Encrypt"
+- 'Razor'
+- 'SignalR'
 uid: performance/caching/response
 ms.openlocfilehash: 2864de5b9931ed255569cb087c67c71004c4df92
 ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
@@ -84,13 +84,13 @@ ms.locfileid: "93059009"
 
 ### <a name="cache-tag-helper"></a><span data-ttu-id="2f792-169">快取標籤協助程式</span><span class="sxs-lookup"><span data-stu-id="2f792-169">Cache Tag Helper</span></span>
 
-<span data-ttu-id="2f792-170">使用快取標籤協助程式從 MVC 視圖或頁面快取內容 :::no-loc(Razor)::: 。</span><span class="sxs-lookup"><span data-stu-id="2f792-170">Cache the content from an MVC view or :::no-loc(Razor)::: Page with the Cache Tag Helper.</span></span> <span data-ttu-id="2f792-171">快取標籤協助程式會使用記憶體內部快取來儲存資料。</span><span class="sxs-lookup"><span data-stu-id="2f792-171">The Cache Tag Helper uses in-memory caching to store data.</span></span>
+<span data-ttu-id="2f792-170">使用快取標籤協助程式從 MVC 視圖或頁面快取內容 Razor 。</span><span class="sxs-lookup"><span data-stu-id="2f792-170">Cache the content from an MVC view or Razor Page with the Cache Tag Helper.</span></span> <span data-ttu-id="2f792-171">快取標籤協助程式會使用記憶體內部快取來儲存資料。</span><span class="sxs-lookup"><span data-stu-id="2f792-171">The Cache Tag Helper uses in-memory caching to store data.</span></span>
 
 <span data-ttu-id="2f792-172">如需詳細資訊，請參閱<xref:mvc/views/tag-helpers/builtin-th/cache-tag-helper>。</span><span class="sxs-lookup"><span data-stu-id="2f792-172">For more information, see <xref:mvc/views/tag-helpers/builtin-th/cache-tag-helper>.</span></span>
 
 ### <a name="distributed-cache-tag-helper"></a><span data-ttu-id="2f792-173">分散式快取標籤協助程式</span><span class="sxs-lookup"><span data-stu-id="2f792-173">Distributed Cache Tag Helper</span></span>
 
-<span data-ttu-id="2f792-174">使用分散式快取標籤協助程式 :::no-loc(Razor)::: ，在分散式雲端或 web 伺服陣列案例中，從 MVC 視圖或頁面快取內容。</span><span class="sxs-lookup"><span data-stu-id="2f792-174">Cache the content from an MVC view or :::no-loc(Razor)::: Page in distributed cloud or web farm scenarios with the Distributed Cache Tag Helper.</span></span> <span data-ttu-id="2f792-175">分散式快取標籤協助程式會使用 SQL Server、 [Redis](https://www.nuget.org/packages/Microsoft.Extensions.Caching.StackExchangeRedis)或 [NCache](https://www.nuget.org/packages/Alachisoft.NCache.OpenSource.SDK/) 來儲存資料。</span><span class="sxs-lookup"><span data-stu-id="2f792-175">The Distributed Cache Tag Helper uses SQL Server, [Redis](https://www.nuget.org/packages/Microsoft.Extensions.Caching.StackExchangeRedis), or [NCache](https://www.nuget.org/packages/Alachisoft.NCache.OpenSource.SDK/) to store data.</span></span>
+<span data-ttu-id="2f792-174">使用分散式快取標籤協助程式 Razor ，在分散式雲端或 web 伺服陣列案例中，從 MVC 視圖或頁面快取內容。</span><span class="sxs-lookup"><span data-stu-id="2f792-174">Cache the content from an MVC view or Razor Page in distributed cloud or web farm scenarios with the Distributed Cache Tag Helper.</span></span> <span data-ttu-id="2f792-175">分散式快取標籤協助程式會使用 SQL Server、 [Redis](https://www.nuget.org/packages/Microsoft.Extensions.Caching.StackExchangeRedis)或 [NCache](https://www.nuget.org/packages/Alachisoft.NCache.OpenSource.SDK/) 來儲存資料。</span><span class="sxs-lookup"><span data-stu-id="2f792-175">The Distributed Cache Tag Helper uses SQL Server, [Redis](https://www.nuget.org/packages/Microsoft.Extensions.Caching.StackExchangeRedis), or [NCache](https://www.nuget.org/packages/Alachisoft.NCache.OpenSource.SDK/) to store data.</span></span>
 
 <span data-ttu-id="2f792-176">如需詳細資訊，請參閱<xref:mvc/views/tag-helpers/builtin-th/distributed-cache-tag-helper>。</span><span class="sxs-lookup"><span data-stu-id="2f792-176">For more information, see <xref:mvc/views/tag-helpers/builtin-th/distributed-cache-tag-helper>.</span></span>
 
@@ -176,7 +176,7 @@ Cache-Control: public,max-age=10
 
 ### <a name="cache-profiles"></a><span data-ttu-id="2f792-232">快取設定檔</span><span class="sxs-lookup"><span data-stu-id="2f792-232">Cache profiles</span></span>
 
-<span data-ttu-id="2f792-233">快取設定檔可設定為在中設定 MVC/Pages 時的選項，而不是複製許多控制器動作屬性上的回應快取設定 :::no-loc(Razor)::: `Startup.ConfigureServices` 。</span><span class="sxs-lookup"><span data-stu-id="2f792-233">Instead of duplicating response cache settings on many controller action attributes, cache profiles can be configured as options when setting up MVC/:::no-loc(Razor)::: Pages in `Startup.ConfigureServices`.</span></span> <span data-ttu-id="2f792-234">在參考的快取設定檔中找到的值會當做的預設值使用 <xref:Microsoft.AspNetCore.Mvc.ResponseCacheAttribute> ，並由屬性上指定的任何屬性覆寫。</span><span class="sxs-lookup"><span data-stu-id="2f792-234">Values found in a referenced cache profile are used as the defaults by the <xref:Microsoft.AspNetCore.Mvc.ResponseCacheAttribute> and are overridden by any properties specified on the attribute.</span></span>
+<span data-ttu-id="2f792-233">快取設定檔可設定為在中設定 MVC/Pages 時的選項，而不是複製許多控制器動作屬性上的回應快取設定 Razor `Startup.ConfigureServices` 。</span><span class="sxs-lookup"><span data-stu-id="2f792-233">Instead of duplicating response cache settings on many controller action attributes, cache profiles can be configured as options when setting up MVC/Razor Pages in `Startup.ConfigureServices`.</span></span> <span data-ttu-id="2f792-234">在參考的快取設定檔中找到的值會當做的預設值使用 <xref:Microsoft.AspNetCore.Mvc.ResponseCacheAttribute> ，並由屬性上指定的任何屬性覆寫。</span><span class="sxs-lookup"><span data-stu-id="2f792-234">Values found in a referenced cache profile are used as the defaults by the <xref:Microsoft.AspNetCore.Mvc.ResponseCacheAttribute> and are overridden by any properties specified on the attribute.</span></span>
 
 <span data-ttu-id="2f792-235">設定快取設定檔。</span><span class="sxs-lookup"><span data-stu-id="2f792-235">Set up a cache profile.</span></span> <span data-ttu-id="2f792-236">下列範例顯示範例應用程式中的30秒快取設定檔 `Startup.ConfigureServices` ：</span><span class="sxs-lookup"><span data-stu-id="2f792-236">The following example shows a 30 second cache profile in the sample app's `Startup.ConfigureServices`:</span></span>
 
@@ -198,7 +198,7 @@ Cache-Control: public,max-age=10
 
 <span data-ttu-id="2f792-238"><xref:Microsoft.AspNetCore.Mvc.ResponseCacheAttribute>可套用至：</span><span class="sxs-lookup"><span data-stu-id="2f792-238">The <xref:Microsoft.AspNetCore.Mvc.ResponseCacheAttribute> can be applied to:</span></span>
 
-* <span data-ttu-id="2f792-239">:::no-loc(Razor)::: 頁面：無法將屬性套用至處理常式方法。</span><span class="sxs-lookup"><span data-stu-id="2f792-239">:::no-loc(Razor)::: Pages: Attributes can't be applied to handler methods.</span></span>
+* <span data-ttu-id="2f792-239">Razor 頁面：無法將屬性套用至處理常式方法。</span><span class="sxs-lookup"><span data-stu-id="2f792-239">Razor Pages: Attributes can't be applied to handler methods.</span></span>
 * <span data-ttu-id="2f792-240">MVC 控制器。</span><span class="sxs-lookup"><span data-stu-id="2f792-240">MVC controllers.</span></span>
 * <span data-ttu-id="2f792-241">MVC 動作方法：方法層級屬性會覆寫類別層級屬性中指定的設定。</span><span class="sxs-lookup"><span data-stu-id="2f792-241">MVC action methods: Method-level attributes override the settings specified in class-level attributes.</span></span>
 

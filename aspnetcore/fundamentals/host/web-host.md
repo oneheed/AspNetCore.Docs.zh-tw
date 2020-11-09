@@ -7,17 +7,17 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 10/07/2019
 no-loc:
-- ':::no-loc(appsettings.json):::'
-- ':::no-loc(ASP.NET Core Identity):::'
-- ':::no-loc(cookie):::'
-- ':::no-loc(Cookie):::'
-- ':::no-loc(Blazor):::'
-- ':::no-loc(Blazor Server):::'
-- ':::no-loc(Blazor WebAssembly):::'
-- ':::no-loc(Identity):::'
-- ":::no-loc(Let's Encrypt):::"
-- ':::no-loc(Razor):::'
-- ':::no-loc(SignalR):::'
+- 'appsettings.json'
+- 'ASP.NET Core Identity'
+- 'cookie'
+- 'Cookie'
+- 'Blazor'
+- 'Blazor Server'
+- 'Blazor WebAssembly'
+- 'Identity'
+- "Let's Encrypt"
+- 'Razor'
+- 'SignalR'
 uid: fundamentals/host/web-host
 ms.openlocfilehash: 09383cb9067d7fdc2d7b69213b741e7ae823e9ea
 ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
@@ -72,12 +72,12 @@ public class Program
   * <span data-ttu-id="9e416-127">前面加上 `ASPNETCORE_` 的環境變數 (例如，`ASPNETCORE_ENVIRONMENT`)。</span><span class="sxs-lookup"><span data-stu-id="9e416-127">Environment variables prefixed with `ASPNETCORE_` (for example, `ASPNETCORE_ENVIRONMENT`).</span></span>
   * <span data-ttu-id="9e416-128">命令列引數。</span><span class="sxs-lookup"><span data-stu-id="9e416-128">Command-line arguments.</span></span>
 * <span data-ttu-id="9e416-129">以下列順序載入應用程式組態：</span><span class="sxs-lookup"><span data-stu-id="9e416-129">Loads app configuration in the following order from:</span></span>
-  * <span data-ttu-id="9e416-130">*:::no-loc(appsettings.json):::* .</span><span class="sxs-lookup"><span data-stu-id="9e416-130">*:::no-loc(appsettings.json):::* .</span></span>
+  * <span data-ttu-id="9e416-130">*appsettings.json* .</span><span class="sxs-lookup"><span data-stu-id="9e416-130">*appsettings.json* .</span></span>
   * <span data-ttu-id="9e416-131">*appsettings.{Environment}.json*</span><span class="sxs-lookup"><span data-stu-id="9e416-131">*appsettings.{Environment}.json* .</span></span>
   * <span data-ttu-id="9e416-132">應用程式在使用項目組件之 `Development` 環境中執行時的[秘密管理員](xref:security/app-secrets)。</span><span class="sxs-lookup"><span data-stu-id="9e416-132">[Secret Manager](xref:security/app-secrets) when the app runs in the `Development` environment using the entry assembly.</span></span>
   * <span data-ttu-id="9e416-133">環境變數。</span><span class="sxs-lookup"><span data-stu-id="9e416-133">Environment variables.</span></span>
   * <span data-ttu-id="9e416-134">命令列引數。</span><span class="sxs-lookup"><span data-stu-id="9e416-134">Command-line arguments.</span></span>
-* <span data-ttu-id="9e416-135">設定主控台和偵錯輸出的[記錄](xref:fundamentals/logging/index)。</span><span class="sxs-lookup"><span data-stu-id="9e416-135">Configures [logging](xref:fundamentals/logging/index) for console and debug output.</span></span> <span data-ttu-id="9e416-136">記錄包括在或 appsettings 的記錄設定區段中指定的 [記錄篩選](xref:fundamentals/logging/index#log-filtering) 規則 *:::no-loc(appsettings.json):::* *。環境}. json* 檔案。</span><span class="sxs-lookup"><span data-stu-id="9e416-136">Logging includes [log filtering](xref:fundamentals/logging/index#log-filtering) rules specified in a Logging configuration section of an *:::no-loc(appsettings.json):::* or *appsettings.{Environment}.json* file.</span></span>
+* <span data-ttu-id="9e416-135">設定主控台和偵錯輸出的[記錄](xref:fundamentals/logging/index)。</span><span class="sxs-lookup"><span data-stu-id="9e416-135">Configures [logging](xref:fundamentals/logging/index) for console and debug output.</span></span> <span data-ttu-id="9e416-136">記錄包括在或 appsettings 的記錄設定區段中指定的 [記錄篩選](xref:fundamentals/logging/index#log-filtering) 規則 *appsettings.json* *。環境}. json* 檔案。</span><span class="sxs-lookup"><span data-stu-id="9e416-136">Logging includes [log filtering](xref:fundamentals/logging/index#log-filtering) rules specified in a Logging configuration section of an *appsettings.json* or *appsettings.{Environment}.json* file.</span></span>
 * <span data-ttu-id="9e416-137">使用 [ASP.NET Core 模組](xref:host-and-deploy/aspnet-core-module)在 iis 後方執行時，會 `CreateDefaultBuilder` 啟用 [iis 整合](xref:host-and-deploy/iis/index)，以設定應用程式的基底位址和埠。</span><span class="sxs-lookup"><span data-stu-id="9e416-137">When running behind IIS with the [ASP.NET Core Module](xref:host-and-deploy/aspnet-core-module), `CreateDefaultBuilder` enables [IIS Integration](xref:host-and-deploy/iis/index), which configures the app's base address and port.</span></span> <span data-ttu-id="9e416-138">IIS 整合也會設定應用程式以[擷取啟動錯誤](#capture-startup-errors)。</span><span class="sxs-lookup"><span data-stu-id="9e416-138">IIS Integration also configures the app to [capture startup errors](#capture-startup-errors).</span></span> <span data-ttu-id="9e416-139">如需 IIS 預設選項，請參閱 <xref:host-and-deploy/iis/index#iis-options>。</span><span class="sxs-lookup"><span data-stu-id="9e416-139">For the IIS default options, see <xref:host-and-deploy/iis/index#iis-options>.</span></span>
 * <span data-ttu-id="9e416-140">如果應用程式的環境是「開發」，請將 [ServiceProviderOptions.ValidateScopes](/dotnet/api/microsoft.extensions.dependencyinjection.serviceprovideroptions.validatescopes) 設定為 `true`。</span><span class="sxs-lookup"><span data-stu-id="9e416-140">Sets [ServiceProviderOptions.ValidateScopes](/dotnet/api/microsoft.extensions.dependencyinjection.serviceprovideroptions.validatescopes) to `true` if the app's environment is Development.</span></span> <span data-ttu-id="9e416-141">如需詳細資訊，請參閱[範圍驗證](#scope-validation)。</span><span class="sxs-lookup"><span data-stu-id="9e416-141">For more information, see [Scope validation](#scope-validation).</span></span>
 

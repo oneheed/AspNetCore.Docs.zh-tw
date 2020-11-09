@@ -6,17 +6,17 @@ ms.author: scaddie
 ms.custom: mvc
 ms.date: 10/24/2018
 no-loc:
-- ':::no-loc(appsettings.json):::'
-- ':::no-loc(ASP.NET Core Identity):::'
-- ':::no-loc(cookie):::'
-- ':::no-loc(Cookie):::'
-- ':::no-loc(Blazor):::'
-- ':::no-loc(Blazor Server):::'
-- ':::no-loc(Blazor WebAssembly):::'
-- ':::no-loc(Identity):::'
-- ":::no-loc(Let's Encrypt):::"
-- ':::no-loc(Razor):::'
-- ':::no-loc(SignalR):::'
+- 'appsettings.json'
+- 'ASP.NET Core Identity'
+- 'cookie'
+- 'Cookie'
+- 'Blazor'
+- 'Blazor Server'
+- 'Blazor WebAssembly'
+- 'Identity'
+- "Let's Encrypt"
+- 'Razor'
+- 'SignalR'
 uid: migration/mvc2
 ms.openlocfilehash: cf7d2e3a94c14fb752180d9349536d17b4557e0a
 ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
@@ -88,7 +88,7 @@ ms.locfileid: "93051326"
 * <span data-ttu-id="afd42-152">錯誤頁面</span><span class="sxs-lookup"><span data-stu-id="afd42-152">Error pages</span></span>
 * <span data-ttu-id="afd42-153">靜態檔案</span><span class="sxs-lookup"><span data-stu-id="afd42-153">Static files</span></span>
 * <span data-ttu-id="afd42-154">ASP.NET Core MVC</span><span class="sxs-lookup"><span data-stu-id="afd42-154">ASP.NET Core MVC</span></span>
-* :::no-loc(Identity):::
+* Identity
 
 [!code-csharp[](../../common/samples/WebApplication1/Startup.cs?highlight=8,9,10,14,17,19,21&start=58&end=84)]
 
@@ -106,7 +106,7 @@ ms.locfileid: "93051326"
 
 [!code-csharp[](samples/read-webconfig.cs)]
 
-<span data-ttu-id="afd42-162">ASP.NET Core 可將應用程式的組態資料儲存在任何檔案中，將它們當成中介軟體啟動程序的一部分載入。</span><span class="sxs-lookup"><span data-stu-id="afd42-162">ASP.NET Core can store configuration data for the application in any file and load them as part of middleware bootstrapping.</span></span> <span data-ttu-id="afd42-163">專案範本中使用的預設檔案 *:::no-loc(appsettings.json):::* 如下：</span><span class="sxs-lookup"><span data-stu-id="afd42-163">The default file used in the project templates is *:::no-loc(appsettings.json):::* :</span></span>
+<span data-ttu-id="afd42-162">ASP.NET Core 可將應用程式的組態資料儲存在任何檔案中，將它們當成中介軟體啟動程序的一部分載入。</span><span class="sxs-lookup"><span data-stu-id="afd42-162">ASP.NET Core can store configuration data for the application in any file and load them as part of middleware bootstrapping.</span></span> <span data-ttu-id="afd42-163">專案範本中使用的預設檔案 *appsettings.json* 如下：</span><span class="sxs-lookup"><span data-stu-id="afd42-163">The default file used in the project templates is *appsettings.json* :</span></span>
 
 [!code-json[](samples/appsettings-sample.json)]
 

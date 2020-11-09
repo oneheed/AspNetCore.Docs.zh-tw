@@ -1,23 +1,23 @@
 ---
-title: 'ASP.NET Core 簡介 :::no-loc(Blazor):::'
+title: 'ASP.NET Core 簡介 Blazor'
 author: guardrex
-description: '探索 ASP.NET Core :::no-loc(Blazor)::: ，這是在 ASP.NET Core 應用程式中使用 .net 建立互動式用戶端 WEB UI 的方式。'
+description: '探索 ASP.NET Core Blazor ，這是在 ASP.NET Core 應用程式中使用 .net 建立互動式用戶端 WEB UI 的方式。'
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc, seoapril2019, devx-track-js
 ms.date: 09/25/2020
 no-loc:
-- ':::no-loc(appsettings.json):::'
-- ':::no-loc(ASP.NET Core Identity):::'
-- ':::no-loc(cookie):::'
-- ':::no-loc(Cookie):::'
-- ':::no-loc(Blazor):::'
-- ':::no-loc(Blazor Server):::'
-- ':::no-loc(Blazor WebAssembly):::'
-- ':::no-loc(Identity):::'
-- ":::no-loc(Let's Encrypt):::"
-- ':::no-loc(Razor):::'
-- ':::no-loc(SignalR):::'
+- 'appsettings.json'
+- 'ASP.NET Core Identity'
+- 'cookie'
+- 'Cookie'
+- 'Blazor'
+- 'Blazor Server'
+- 'Blazor WebAssembly'
+- 'Identity'
+- "Let's Encrypt"
+- 'Razor'
+- 'SignalR'
 uid: blazor/index
 ms.openlocfilehash: ecdf4f59aca0fe71bbfcfe61a99109127c8b92df
 ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
@@ -26,13 +26,13 @@ ms.contentlocale: zh-TW
 ms.lasthandoff: 10/30/2020
 ms.locfileid: "93055708"
 ---
-# <a name="introduction-to-aspnet-core-no-locblazor"></a><span data-ttu-id="49ceb-103">ASP.NET Core 簡介 :::no-loc(Blazor):::</span><span class="sxs-lookup"><span data-stu-id="49ceb-103">Introduction to ASP.NET Core :::no-loc(Blazor):::</span></span>
+# <a name="introduction-to-aspnet-core-no-locblazor"></a><span data-ttu-id="49ceb-103">ASP.NET Core 簡介 Blazor</span><span class="sxs-lookup"><span data-stu-id="49ceb-103">Introduction to ASP.NET Core Blazor</span></span>
 
 <span data-ttu-id="49ceb-104">作者：[Daniel Roth](https://github.com/danroth27) 和 [Luke Latham](https://github.com/guardrex)</span><span class="sxs-lookup"><span data-stu-id="49ceb-104">By [Daniel Roth](https://github.com/danroth27) and [Luke Latham](https://github.com/guardrex)</span></span>
 
-<span data-ttu-id="49ceb-105">*歡迎使用 :::no-loc(Blazor)::: ！*</span><span class="sxs-lookup"><span data-stu-id="49ceb-105">*Welcome to :::no-loc(Blazor):::!*</span></span>
+<span data-ttu-id="49ceb-105">*歡迎使用 Blazor ！*</span><span class="sxs-lookup"><span data-stu-id="49ceb-105">*Welcome to Blazor!*</span></span>
 
-<span data-ttu-id="49ceb-106">:::no-loc(Blazor)::: 是使用 [.net](/dotnet/standard/tour)建立互動式用戶端 web UI 的架構：</span><span class="sxs-lookup"><span data-stu-id="49ceb-106">:::no-loc(Blazor)::: is a framework for building interactive client-side web UI with [.NET](/dotnet/standard/tour):</span></span>
+<span data-ttu-id="49ceb-106">Blazor 是使用 [.net](/dotnet/standard/tour)建立互動式用戶端 web UI 的架構：</span><span class="sxs-lookup"><span data-stu-id="49ceb-106">Blazor is a framework for building interactive client-side web UI with [.NET](/dotnet/standard/tour):</span></span>
 
 * <span data-ttu-id="49ceb-107">使用 [c #](/dotnet/csharp/) 而非 [JavaScript](https://www.javascript.com)來建立豐富的互動式 ui。</span><span class="sxs-lookup"><span data-stu-id="49ceb-107">Create rich interactive UIs using [C#](/dotnet/csharp/) instead of [JavaScript](https://www.javascript.com).</span></span>
 * <span data-ttu-id="49ceb-108">共用以 .NET 撰寫的伺服器端與用戶端應用程式邏輯。</span><span class="sxs-lookup"><span data-stu-id="49ceb-108">Share server-side and client-side app logic written in .NET.</span></span>
@@ -50,18 +50,18 @@ ms.locfileid: "93055708"
 
 ## <a name="components"></a><span data-ttu-id="49ceb-118">單元</span><span class="sxs-lookup"><span data-stu-id="49ceb-118">Components</span></span>
 
-<span data-ttu-id="49ceb-119">:::no-loc(Blazor)::: 應用程式是以 *元件* 為基礎。</span><span class="sxs-lookup"><span data-stu-id="49ceb-119">:::no-loc(Blazor)::: apps are based on *components* .</span></span> <span data-ttu-id="49ceb-120">中的元件 :::no-loc(Blazor)::: 是 UI 的元素，例如頁面、對話方塊或資料輸入表單。</span><span class="sxs-lookup"><span data-stu-id="49ceb-120">A component in :::no-loc(Blazor)::: is an element of UI, such as a page, dialog, or data entry form.</span></span>
+<span data-ttu-id="49ceb-119">Blazor 應用程式是以 *元件* 為基礎。</span><span class="sxs-lookup"><span data-stu-id="49ceb-119">Blazor apps are based on *components* .</span></span> <span data-ttu-id="49ceb-120">中的元件 Blazor 是 UI 的元素，例如頁面、對話方塊或資料輸入表單。</span><span class="sxs-lookup"><span data-stu-id="49ceb-120">A component in Blazor is an element of UI, such as a page, dialog, or data entry form.</span></span>
 
 <span data-ttu-id="49ceb-121">元件是內建在 [.net 元件](/dotnet/standard/assembly/) 中的 .Net c # 類別：</span><span class="sxs-lookup"><span data-stu-id="49ceb-121">Components are .NET C# classes built into [.NET assemblies](/dotnet/standard/assembly/) that:</span></span>
 
 * <span data-ttu-id="49ceb-122">定義彈性 UI 轉譯邏輯。</span><span class="sxs-lookup"><span data-stu-id="49ceb-122">Define flexible UI rendering logic.</span></span>
 * <span data-ttu-id="49ceb-123">處理使用者動作。</span><span class="sxs-lookup"><span data-stu-id="49ceb-123">Handle user events.</span></span>
 * <span data-ttu-id="49ceb-124">可以為巢狀結構，且可重複使用。</span><span class="sxs-lookup"><span data-stu-id="49ceb-124">Can be nested and reused.</span></span>
-* <span data-ttu-id="49ceb-125">可以共用和散發為[ :::no-loc(Razor)::: 類別庫](xref:razor-pages/ui-class)或[NuGet 套件](/nuget/what-is-nuget)。</span><span class="sxs-lookup"><span data-stu-id="49ceb-125">Can be shared and distributed as [:::no-loc(Razor)::: class libraries](xref:razor-pages/ui-class) or [NuGet packages](/nuget/what-is-nuget).</span></span>
+* <span data-ttu-id="49ceb-125">可以共用和散發為[ Razor 類別庫](xref:razor-pages/ui-class)或[NuGet 套件](/nuget/what-is-nuget)。</span><span class="sxs-lookup"><span data-stu-id="49ceb-125">Can be shared and distributed as [Razor class libraries](xref:razor-pages/ui-class) or [NuGet packages](/nuget/what-is-nuget).</span></span>
 
-<span data-ttu-id="49ceb-126">元件類別通常是以 [:::no-loc(Razor):::](xref:mvc/views/razor) 具有副檔名的標記頁面形式來撰寫 `.razor` 。</span><span class="sxs-lookup"><span data-stu-id="49ceb-126">The component class is usually written in the form of a [:::no-loc(Razor):::](xref:mvc/views/razor) markup page with a `.razor` file extension.</span></span> <span data-ttu-id="49ceb-127">中的元件 :::no-loc(Blazor)::: 統稱為 *:::no-loc(Razor)::: 元件* 。</span><span class="sxs-lookup"><span data-stu-id="49ceb-127">Components in :::no-loc(Blazor)::: are formally referred to as *:::no-loc(Razor)::: components* .</span></span> <span data-ttu-id="49ceb-128">:::no-loc(Razor)::: 是一種語法，可將 HTML 標籤與設計為開發人員生產力的 c # 程式碼結合。</span><span class="sxs-lookup"><span data-stu-id="49ceb-128">:::no-loc(Razor)::: is a syntax for combining HTML markup with C# code designed for developer productivity.</span></span> <span data-ttu-id="49ceb-129">:::no-loc(Razor)::: 可讓您使用 Visual Studio 中的 [IntelliSense](/visualstudio/ide/using-intellisense) 程式設計支援，在相同檔案中的 HTML 標籤與 c # 之間切換。</span><span class="sxs-lookup"><span data-stu-id="49ceb-129">:::no-loc(Razor)::: allows you to switch between HTML markup and C# in the same file with [IntelliSense](/visualstudio/ide/using-intellisense) programming support in Visual Studio.</span></span> <span data-ttu-id="49ceb-130">:::no-loc(Razor)::: Pages 和 MVC 也會使用 :::no-loc(Razor)::: 。</span><span class="sxs-lookup"><span data-stu-id="49ceb-130">:::no-loc(Razor)::: Pages and MVC also use :::no-loc(Razor):::.</span></span> <span data-ttu-id="49ceb-131">不同 :::no-loc(Razor)::: 于建立在要求/回應模型周圍的頁面和 MVC，元件專門用於用戶端 UI 邏輯和組合。</span><span class="sxs-lookup"><span data-stu-id="49ceb-131">Unlike :::no-loc(Razor)::: Pages and MVC, which are built around a request/response model, components are used specifically for client-side UI logic and composition.</span></span>
+<span data-ttu-id="49ceb-126">元件類別通常是以 [Razor](xref:mvc/views/razor) 具有副檔名的標記頁面形式來撰寫 `.razor` 。</span><span class="sxs-lookup"><span data-stu-id="49ceb-126">The component class is usually written in the form of a [Razor](xref:mvc/views/razor) markup page with a `.razor` file extension.</span></span> <span data-ttu-id="49ceb-127">中的元件 Blazor 統稱為 *Razor 元件* 。</span><span class="sxs-lookup"><span data-stu-id="49ceb-127">Components in Blazor are formally referred to as *Razor components* .</span></span> <span data-ttu-id="49ceb-128">Razor 是一種語法，可將 HTML 標籤與設計為開發人員生產力的 c # 程式碼結合。</span><span class="sxs-lookup"><span data-stu-id="49ceb-128">Razor is a syntax for combining HTML markup with C# code designed for developer productivity.</span></span> <span data-ttu-id="49ceb-129">Razor 可讓您使用 Visual Studio 中的 [IntelliSense](/visualstudio/ide/using-intellisense) 程式設計支援，在相同檔案中的 HTML 標籤與 c # 之間切換。</span><span class="sxs-lookup"><span data-stu-id="49ceb-129">Razor allows you to switch between HTML markup and C# in the same file with [IntelliSense](/visualstudio/ide/using-intellisense) programming support in Visual Studio.</span></span> <span data-ttu-id="49ceb-130">Razor Pages 和 MVC 也會使用 Razor 。</span><span class="sxs-lookup"><span data-stu-id="49ceb-130">Razor Pages and MVC also use Razor.</span></span> <span data-ttu-id="49ceb-131">不同 Razor 于建立在要求/回應模型周圍的頁面和 MVC，元件專門用於用戶端 UI 邏輯和組合。</span><span class="sxs-lookup"><span data-stu-id="49ceb-131">Unlike Razor Pages and MVC, which are built around a request/response model, components are used specifically for client-side UI logic and composition.</span></span>
 
-<span data-ttu-id="49ceb-132">:::no-loc(Blazor)::: 使用自然 HTML 標籤進行 UI 組合。</span><span class="sxs-lookup"><span data-stu-id="49ceb-132">:::no-loc(Blazor)::: uses natural HTML tags for UI composition.</span></span> <span data-ttu-id="49ceb-133">下列 :::no-loc(Razor)::: 標記示範的元件 (`Dialog.razor`) 會顯示對話方塊，並在使用者選取按鈕時處理事件：</span><span class="sxs-lookup"><span data-stu-id="49ceb-133">The following :::no-loc(Razor)::: markup demonstrates a component (`Dialog.razor`) that displays a dialog and processes an event when the user selects a button:</span></span>
+<span data-ttu-id="49ceb-132">Blazor 使用自然 HTML 標籤進行 UI 組合。</span><span class="sxs-lookup"><span data-stu-id="49ceb-132">Blazor uses natural HTML tags for UI composition.</span></span> <span data-ttu-id="49ceb-133">下列 Razor 標記示範的元件 (`Dialog.razor`) 會顯示對話方塊，並在使用者選取按鈕時處理事件：</span><span class="sxs-lookup"><span data-stu-id="49ceb-133">The following Razor markup demonstrates a component (`Dialog.razor`) that displays a dialog and processes an event when the user selects a button:</span></span>
 
 ```razor
 <div class="card" style="width:22rem">
@@ -100,7 +100,7 @@ ms.locfileid: "93055708"
 </p>
 
 <Dialog Title="Learn More">
-    Do you want to <i>learn more</i> about :::no-loc(Blazor):::?
+    Do you want to <i>learn more</i> about Blazor?
 </Dialog>
 ```
 
@@ -110,9 +110,9 @@ ms.locfileid: "93055708"
 
 <span data-ttu-id="49ceb-146">元件會轉譯成瀏覽器 [檔物件模型 (DOM)](https://developer.mozilla.org/docs/Web/API/Document_Object_Model/Introduction) 的記憶體中標記法，稱為轉譯 *樹狀結構* ，可用來以彈性且有效率的方式更新 UI。</span><span class="sxs-lookup"><span data-stu-id="49ceb-146">Components render into an in-memory representation of the browser's [Document Object Model (DOM)](https://developer.mozilla.org/docs/Web/API/Document_Object_Model/Introduction) called a *render tree* , which is used to update the UI in a flexible and efficient way.</span></span>
 
-## :::no-loc(Blazor WebAssembly):::
+## Blazor WebAssembly
 
-<span data-ttu-id="49ceb-147">:::no-loc(Blazor WebAssembly)::: 是 [單一頁面應用程式， (SPA) 架構](/dotnet/architecture/modern-web-apps-azure/choose-between-traditional-web-and-single-page-apps) ，可使用 .net 建立互動式用戶端 web 應用程式。</span><span class="sxs-lookup"><span data-stu-id="49ceb-147">:::no-loc(Blazor WebAssembly)::: is a [single-page app (SPA) framework](/dotnet/architecture/modern-web-apps-azure/choose-between-traditional-web-and-single-page-apps) for building interactive client-side web apps with .NET.</span></span> <span data-ttu-id="49ceb-148">:::no-loc(Blazor WebAssembly)::: 使用開放式 web 標準，而不使用外掛程式或將程式碼重新編譯成其他語言。</span><span class="sxs-lookup"><span data-stu-id="49ceb-148">:::no-loc(Blazor WebAssembly)::: uses open web standards without plugins or recompiling code into other languages.</span></span> <span data-ttu-id="49ceb-149">:::no-loc(Blazor WebAssembly)::: 適用于所有新式網頁瀏覽器，包括行動瀏覽器。</span><span class="sxs-lookup"><span data-stu-id="49ceb-149">:::no-loc(Blazor WebAssembly)::: works in all modern web browsers, including mobile browsers.</span></span>
+<span data-ttu-id="49ceb-147">Blazor WebAssembly 是 [單一頁面應用程式， (SPA) 架構](/dotnet/architecture/modern-web-apps-azure/choose-between-traditional-web-and-single-page-apps) ，可使用 .net 建立互動式用戶端 web 應用程式。</span><span class="sxs-lookup"><span data-stu-id="49ceb-147">Blazor WebAssembly is a [single-page app (SPA) framework](/dotnet/architecture/modern-web-apps-azure/choose-between-traditional-web-and-single-page-apps) for building interactive client-side web apps with .NET.</span></span> <span data-ttu-id="49ceb-148">Blazor WebAssembly 使用開放式 web 標準，而不使用外掛程式或將程式碼重新編譯成其他語言。</span><span class="sxs-lookup"><span data-stu-id="49ceb-148">Blazor WebAssembly uses open web standards without plugins or recompiling code into other languages.</span></span> <span data-ttu-id="49ceb-149">Blazor WebAssembly 適用于所有新式網頁瀏覽器，包括行動瀏覽器。</span><span class="sxs-lookup"><span data-stu-id="49ceb-149">Blazor WebAssembly works in all modern web browsers, including mobile browsers.</span></span>
 
 <span data-ttu-id="49ceb-150">[WebAssembly](https://webassembly.org) (縮寫) 可讓您在網頁瀏覽器內執行 .net 程式碼 `wasm` 。</span><span class="sxs-lookup"><span data-stu-id="49ceb-150">Running .NET code inside web browsers is made possible by [WebAssembly](https://webassembly.org) (abbreviated `wasm`).</span></span> <span data-ttu-id="49ceb-151">WebAssembly 是一種精簡的位元組程式碼格式，針對快速下載和最快執行速度而最佳化。</span><span class="sxs-lookup"><span data-stu-id="49ceb-151">WebAssembly is a compact bytecode format optimized for fast download and maximum execution speed.</span></span> <span data-ttu-id="49ceb-152">WebAssembly 是開放式的 Web 標準，在不含外掛程式的網頁瀏覽器中支援。</span><span class="sxs-lookup"><span data-stu-id="49ceb-152">WebAssembly is an open web standard and supported in web browsers without plugins.</span></span>
 
@@ -120,13 +120,13 @@ ms.locfileid: "93055708"
 
 ![：：：非 loc (Blazor WebAssembly) ：：：在瀏覽器中使用 WebAssembly 執行 .NET 程式碼。](index/_static/blazor-webassembly.png)
 
-<span data-ttu-id="49ceb-156">當 :::no-loc(Blazor WebAssembly)::: 應用程式在瀏覽器中建立並執行時：</span><span class="sxs-lookup"><span data-stu-id="49ceb-156">When a :::no-loc(Blazor WebAssembly)::: app is built and run in a browser:</span></span>
+<span data-ttu-id="49ceb-156">當 Blazor WebAssembly 應用程式在瀏覽器中建立並執行時：</span><span class="sxs-lookup"><span data-stu-id="49ceb-156">When a Blazor WebAssembly app is built and run in a browser:</span></span>
 
-* <span data-ttu-id="49ceb-157">C # 程式碼檔案和檔案 :::no-loc(Razor)::: 會編譯成 .net 元件。</span><span class="sxs-lookup"><span data-stu-id="49ceb-157">C# code files and :::no-loc(Razor)::: files are compiled into .NET assemblies.</span></span>
+* <span data-ttu-id="49ceb-157">C # 程式碼檔案和檔案 Razor 會編譯成 .net 元件。</span><span class="sxs-lookup"><span data-stu-id="49ceb-157">C# code files and Razor files are compiled into .NET assemblies.</span></span>
 * <span data-ttu-id="49ceb-158">元件和 [.net 運行](/dotnet/framework/get-started/overview) 時間會下載至瀏覽器。</span><span class="sxs-lookup"><span data-stu-id="49ceb-158">The assemblies and the [.NET runtime](/dotnet/framework/get-started/overview) are downloaded to the browser.</span></span>
-* <span data-ttu-id="49ceb-159">:::no-loc(Blazor WebAssembly)::: 啟動 .NET 執行時間，並設定執行時間以載入應用程式的元件。</span><span class="sxs-lookup"><span data-stu-id="49ceb-159">:::no-loc(Blazor WebAssembly)::: bootstraps the .NET runtime and configures the runtime to load the assemblies for the app.</span></span> <span data-ttu-id="49ceb-160">執行時間會 :::no-loc(Blazor WebAssembly)::: 使用 JavaScript interop 來處理 DOM 操作和瀏覽器 API 呼叫。</span><span class="sxs-lookup"><span data-stu-id="49ceb-160">The :::no-loc(Blazor WebAssembly)::: runtime uses JavaScript interop to handle DOM manipulation and browser API calls.</span></span>
+* <span data-ttu-id="49ceb-159">Blazor WebAssembly 啟動 .NET 執行時間，並設定執行時間以載入應用程式的元件。</span><span class="sxs-lookup"><span data-stu-id="49ceb-159">Blazor WebAssembly bootstraps the .NET runtime and configures the runtime to load the assemblies for the app.</span></span> <span data-ttu-id="49ceb-160">執行時間會 Blazor WebAssembly 使用 JavaScript interop 來處理 DOM 操作和瀏覽器 API 呼叫。</span><span class="sxs-lookup"><span data-stu-id="49ceb-160">The Blazor WebAssembly runtime uses JavaScript interop to handle DOM manipulation and browser API calls.</span></span>
 
-<span data-ttu-id="49ceb-161">發佈的應用程式大小 (它的「承載大小」  ) 是應用程式使用性的重要效能因素。</span><span class="sxs-lookup"><span data-stu-id="49ceb-161">The size of the published app, its *payload size* , is a critical performance factor for an app's useability.</span></span> <span data-ttu-id="49ceb-162">大型應用程式需要相對較長的時間才能下載至瀏覽器，這點會對使用者體驗造成傷害。</span><span class="sxs-lookup"><span data-stu-id="49ceb-162">A large app takes a relatively long time to download to a browser, which diminishes the user experience.</span></span> <span data-ttu-id="49ceb-163">:::no-loc(Blazor WebAssembly)::: 優化承載大小以縮短下載時間：</span><span class="sxs-lookup"><span data-stu-id="49ceb-163">:::no-loc(Blazor WebAssembly)::: optimizes payload size to reduce download times:</span></span>
+<span data-ttu-id="49ceb-161">發佈的應用程式大小 (它的「承載大小」  ) 是應用程式使用性的重要效能因素。</span><span class="sxs-lookup"><span data-stu-id="49ceb-161">The size of the published app, its *payload size* , is a critical performance factor for an app's useability.</span></span> <span data-ttu-id="49ceb-162">大型應用程式需要相對較長的時間才能下載至瀏覽器，這點會對使用者體驗造成傷害。</span><span class="sxs-lookup"><span data-stu-id="49ceb-162">A large app takes a relatively long time to download to a browser, which diminishes the user experience.</span></span> <span data-ttu-id="49ceb-163">Blazor WebAssembly 優化承載大小以縮短下載時間：</span><span class="sxs-lookup"><span data-stu-id="49ceb-163">Blazor WebAssembly optimizes payload size to reduce download times:</span></span>
 
 ::: moniker range=">= aspnetcore-5.0"
 
@@ -144,16 +144,16 @@ ms.locfileid: "93055708"
 
 ::: moniker-end
 
-## :::no-loc(Blazor Server):::
+## Blazor Server
 
-<span data-ttu-id="49ceb-170">:::no-loc(Blazor)::: 將元件轉譯邏輯與應用程式 UI 更新的套用方式分離出來。</span><span class="sxs-lookup"><span data-stu-id="49ceb-170">:::no-loc(Blazor)::: decouples component rendering logic from how UI updates are applied.</span></span> <span data-ttu-id="49ceb-171">*:::no-loc(Blazor Server):::* 提供在 :::no-loc(Razor)::: ASP.NET Core 應用程式的伺服器上裝載元件的支援。</span><span class="sxs-lookup"><span data-stu-id="49ceb-171">*:::no-loc(Blazor Server):::* provides support for hosting :::no-loc(Razor)::: components on the server in an ASP.NET Core app.</span></span> <span data-ttu-id="49ceb-172">UI 更新會透過連接來處理 [:::no-loc(SignalR):::](xref:signalr/introduction) 。</span><span class="sxs-lookup"><span data-stu-id="49ceb-172">UI updates are handled over a [:::no-loc(SignalR):::](xref:signalr/introduction) connection.</span></span>
+<span data-ttu-id="49ceb-170">Blazor 將元件轉譯邏輯與應用程式 UI 更新的套用方式分離出來。</span><span class="sxs-lookup"><span data-stu-id="49ceb-170">Blazor decouples component rendering logic from how UI updates are applied.</span></span> <span data-ttu-id="49ceb-171">*Blazor Server* 提供在 Razor ASP.NET Core 應用程式的伺服器上裝載元件的支援。</span><span class="sxs-lookup"><span data-stu-id="49ceb-171">*Blazor Server* provides support for hosting Razor components on the server in an ASP.NET Core app.</span></span> <span data-ttu-id="49ceb-172">UI 更新會透過連接來處理 [SignalR](xref:signalr/introduction) 。</span><span class="sxs-lookup"><span data-stu-id="49ceb-172">UI updates are handled over a [SignalR](xref:signalr/introduction) connection.</span></span>
 
 <span data-ttu-id="49ceb-173">執行時間會處理：</span><span class="sxs-lookup"><span data-stu-id="49ceb-173">The runtime handles:</span></span>
 
 * <span data-ttu-id="49ceb-174">從瀏覽器傳送 UI 事件至伺服器。</span><span class="sxs-lookup"><span data-stu-id="49ceb-174">Sending UI events from the browser to the server.</span></span>
 * <span data-ttu-id="49ceb-175">將 UI 更新套用至已轉譯的元件，該元件會由伺服器傳回。</span><span class="sxs-lookup"><span data-stu-id="49ceb-175">Applying UI updates to the rendered component that are sent back by the server.</span></span>
 
-<span data-ttu-id="49ceb-176">用 :::no-loc(Blazor Server)::: 來與瀏覽器通訊的連接也會用來處理 JavaScript interop 呼叫。</span><span class="sxs-lookup"><span data-stu-id="49ceb-176">The connection used by :::no-loc(Blazor Server)::: to communicate with the browser is also used to handle JavaScript interop calls.</span></span>
+<span data-ttu-id="49ceb-176">用 Blazor Server 來與瀏覽器通訊的連接也會用來處理 JavaScript interop 呼叫。</span><span class="sxs-lookup"><span data-stu-id="49ceb-176">The connection used by Blazor Server to communicate with the browser is also used to handle JavaScript interop calls.</span></span>
 
 ![：：：非 loc (Blazor Server) ：：：在伺服器上執行 .NET 程式碼，並透過：：：無 loc (SignalR) ：：： connection 與用戶端上的檔物件模型互動](index/_static/blazor-server.png)
 
@@ -163,7 +163,7 @@ ms.locfileid: "93055708"
 
 ## <a name="code-sharing-and-net-standard"></a><span data-ttu-id="49ceb-182">程式碼共用和 .NET Standard</span><span class="sxs-lookup"><span data-stu-id="49ceb-182">Code sharing and .NET Standard</span></span>
 
-<span data-ttu-id="49ceb-183">:::no-loc(Blazor)::: 會執行 [.NET Standard](/dotnet/standard/net-standard)，讓 :::no-loc(Blazor)::: 專案參考符合 .NET Standard 規格的程式庫。</span><span class="sxs-lookup"><span data-stu-id="49ceb-183">:::no-loc(Blazor)::: implements the [.NET Standard](/dotnet/standard/net-standard), which enables :::no-loc(Blazor)::: projects to reference libraries that conform to .NET Standard specifications.</span></span> <span data-ttu-id="49ceb-184">.NET Standard 是所有 .NET 實作都具備的 .NET API 正式規格。</span><span class="sxs-lookup"><span data-stu-id="49ceb-184">.NET Standard is a formal specification of .NET APIs that are common across .NET implementations.</span></span> <span data-ttu-id="49ceb-185">.NET Standard 類別庫可以跨不同的 .NET 平臺共用，例如 :::no-loc(Blazor)::: .NET Framework、.Net Core、Xamarin、Mono 和 Unity。</span><span class="sxs-lookup"><span data-stu-id="49ceb-185">.NET Standard class libraries can be shared across different .NET platforms, such as :::no-loc(Blazor):::, .NET Framework, .NET Core, Xamarin, Mono, and Unity.</span></span>
+<span data-ttu-id="49ceb-183">Blazor 會執行 [.NET Standard](/dotnet/standard/net-standard)，讓 Blazor 專案參考符合 .NET Standard 規格的程式庫。</span><span class="sxs-lookup"><span data-stu-id="49ceb-183">Blazor implements the [.NET Standard](/dotnet/standard/net-standard), which enables Blazor projects to reference libraries that conform to .NET Standard specifications.</span></span> <span data-ttu-id="49ceb-184">.NET Standard 是所有 .NET 實作都具備的 .NET API 正式規格。</span><span class="sxs-lookup"><span data-stu-id="49ceb-184">.NET Standard is a formal specification of .NET APIs that are common across .NET implementations.</span></span> <span data-ttu-id="49ceb-185">.NET Standard 類別庫可以跨不同的 .NET 平臺共用，例如 Blazor .NET Framework、.Net Core、Xamarin、Mono 和 Unity。</span><span class="sxs-lookup"><span data-stu-id="49ceb-185">.NET Standard class libraries can be shared across different .NET platforms, such as Blazor, .NET Framework, .NET Core, Xamarin, Mono, and Unity.</span></span>
 
 <span data-ttu-id="49ceb-186">網頁瀏覽器內不適用的 API (例如，存取檔案系統、開啟通訊端與執行緒) 均會擲回 <xref:System.PlatformNotSupportedException>。</span><span class="sxs-lookup"><span data-stu-id="49ceb-186">APIs that aren't applicable inside of a web browser (for example, accessing the file system, opening a socket, and threading) throw a <xref:System.PlatformNotSupportedException>.</span></span>
 
@@ -177,4 +177,4 @@ ms.locfileid: "93055708"
 * [<span data-ttu-id="49ceb-189">C# 指南</span><span class="sxs-lookup"><span data-stu-id="49ceb-189">C# Guide</span></span>](/dotnet/csharp/)
 * <xref:mvc/views/razor>
 * [<span data-ttu-id="49ceb-190">HTML</span><span class="sxs-lookup"><span data-stu-id="49ceb-190">HTML</span></span>](https://www.w3.org/html/)
-* <span data-ttu-id="49ceb-191">[很 :::no-loc(Blazor)::: 棒](https://github.com/AdrienTorris/awesome-blazor)社區連結</span><span class="sxs-lookup"><span data-stu-id="49ceb-191">[Awesome :::no-loc(Blazor):::](https://github.com/AdrienTorris/awesome-blazor) community links</span></span>
+* <span data-ttu-id="49ceb-191">[很 Blazor 棒](https://github.com/AdrienTorris/awesome-blazor)社區連結</span><span class="sxs-lookup"><span data-stu-id="49ceb-191">[Awesome Blazor](https://github.com/AdrienTorris/awesome-blazor) community links</span></span>

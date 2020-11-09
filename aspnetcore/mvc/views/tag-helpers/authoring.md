@@ -6,17 +6,17 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 12/05/2019
 no-loc:
-- ':::no-loc(appsettings.json):::'
-- ':::no-loc(ASP.NET Core Identity):::'
-- ':::no-loc(cookie):::'
-- ':::no-loc(Cookie):::'
-- ':::no-loc(Blazor):::'
-- ':::no-loc(Blazor Server):::'
-- ':::no-loc(Blazor WebAssembly):::'
-- ':::no-loc(Identity):::'
-- ":::no-loc(Let's Encrypt):::"
-- ':::no-loc(Razor):::'
-- ':::no-loc(SignalR):::'
+- 'appsettings.json'
+- 'ASP.NET Core Identity'
+- 'cookie'
+- 'Cookie'
+- 'Blazor'
+- 'Blazor Server'
+- 'Blazor WebAssembly'
+- 'Identity'
+- "Let's Encrypt"
+- 'Razor'
+- 'SignalR'
 uid: mvc/views/tag-helpers/authoring
 ms.openlocfilehash: 306416db3d9ae0219f859c3cf459eb08a5b778cf
 ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
@@ -77,11 +77,11 @@ ms.locfileid: "93060920"
    public class Email : TagHelper
    ```
 
-1. <span data-ttu-id="1c5f5-134">若要讓 `EmailTagHelper` 類別可供所有的 :::no-loc(Razor)::: 視圖使用，請將指示詞新增 `addTagHelper` 至 *views/_ViewImports cshtml* 檔案：</span><span class="sxs-lookup"><span data-stu-id="1c5f5-134">To make the `EmailTagHelper` class available to all our :::no-loc(Razor)::: views, add the `addTagHelper` directive to the *Views/_ViewImports.cshtml* file:</span></span>
+1. <span data-ttu-id="1c5f5-134">若要讓 `EmailTagHelper` 類別可供所有的 Razor 視圖使用，請將指示詞新增 `addTagHelper` 至 *views/_ViewImports cshtml* 檔案：</span><span class="sxs-lookup"><span data-stu-id="1c5f5-134">To make the `EmailTagHelper` class available to all our Razor views, add the `addTagHelper` directive to the *Views/_ViewImports.cshtml* file:</span></span>
 
    [!code-cshtml[](../../../mvc/views/tag-helpers/authoring/sample/AuthoringTagHelpers/src/AuthoringTagHelpers/Views/_ViewImportsCopyEmail.cshtml?highlight=2,3)]
 
-   <span data-ttu-id="1c5f5-135">上述程式碼使用萬用字元語法，指定將使用組件中的所有標籤協助程式。</span><span class="sxs-lookup"><span data-stu-id="1c5f5-135">The code above uses the wildcard syntax to specify all the tag helpers in our assembly will be available.</span></span> <span data-ttu-id="1c5f5-136">`@addTagHelper` 後面的第一個字串指定要載入的標籤協助程式 (使用 "\*" 表示所有標籤協助程式)，而第二個字串 "AuthoringTagHelpers" 指定標籤協助程式所在的組件。</span><span class="sxs-lookup"><span data-stu-id="1c5f5-136">The first string after `@addTagHelper` specifies the tag helper to load (Use "\*" for all tag helpers), and the second string "AuthoringTagHelpers" specifies the assembly the tag helper is in.</span></span> <span data-ttu-id="1c5f5-137">另外也請注意，第二行則是使用萬用字元語法來 ASP.NET Core MVC 標記協助程式 (這些協助程式會在標籤協助程式的[簡介](intro.md)中討論。 ) 這是讓標籤協助 `@addTagHelper` 程式可供視圖使用的指示詞。 :::no-loc(Razor):::</span><span class="sxs-lookup"><span data-stu-id="1c5f5-137">Also, note that the second line brings in the ASP.NET Core MVC tag helpers using the wildcard syntax (those helpers are discussed in [Introduction to Tag Helpers](intro.md).) It's the `@addTagHelper` directive that makes the tag helper available to the :::no-loc(Razor)::: view.</span></span> <span data-ttu-id="1c5f5-138">或者，您可以提供標籤協助程式的完整名稱 (FQN)，如下所示：</span><span class="sxs-lookup"><span data-stu-id="1c5f5-138">Alternatively, you can provide the fully qualified name (FQN) of a tag helper as shown below:</span></span>
+   <span data-ttu-id="1c5f5-135">上述程式碼使用萬用字元語法，指定將使用組件中的所有標籤協助程式。</span><span class="sxs-lookup"><span data-stu-id="1c5f5-135">The code above uses the wildcard syntax to specify all the tag helpers in our assembly will be available.</span></span> <span data-ttu-id="1c5f5-136">`@addTagHelper` 後面的第一個字串指定要載入的標籤協助程式 (使用 "\*" 表示所有標籤協助程式)，而第二個字串 "AuthoringTagHelpers" 指定標籤協助程式所在的組件。</span><span class="sxs-lookup"><span data-stu-id="1c5f5-136">The first string after `@addTagHelper` specifies the tag helper to load (Use "\*" for all tag helpers), and the second string "AuthoringTagHelpers" specifies the assembly the tag helper is in.</span></span> <span data-ttu-id="1c5f5-137">另外也請注意，第二行則是使用萬用字元語法來 ASP.NET Core MVC 標記協助程式 (這些協助程式會在標籤協助程式的[簡介](intro.md)中討論。 ) 這是讓標籤協助 `@addTagHelper` 程式可供視圖使用的指示詞。 Razor</span><span class="sxs-lookup"><span data-stu-id="1c5f5-137">Also, note that the second line brings in the ASP.NET Core MVC tag helpers using the wildcard syntax (those helpers are discussed in [Introduction to Tag Helpers](intro.md).) It's the `@addTagHelper` directive that makes the tag helper available to the Razor view.</span></span> <span data-ttu-id="1c5f5-138">或者，您可以提供標籤協助程式的完整名稱 (FQN)，如下所示：</span><span class="sxs-lookup"><span data-stu-id="1c5f5-138">Alternatively, you can provide the fully qualified name (FQN) of a tag helper as shown below:</span></span>
 
 ```csharp
 @using AuthoringTagHelpers
@@ -104,7 +104,7 @@ the following snippet uses TagHelpers3 and should use TagHelpers (not the 3)
 
 ## <a name="setattribute-and-setcontent"></a><span data-ttu-id="1c5f5-146">SetAttribute 和 SetContent</span><span class="sxs-lookup"><span data-stu-id="1c5f5-146">SetAttribute and SetContent</span></span>
 
-<span data-ttu-id="1c5f5-147">在本節中，我們將更新 `EmailTagHelper`，以建立電子郵件的有效錨點標籤。</span><span class="sxs-lookup"><span data-stu-id="1c5f5-147">In this section, we'll update the `EmailTagHelper` so that it will create a valid anchor tag for email.</span></span> <span data-ttu-id="1c5f5-148">我們會將其更新為以屬性的 :::no-loc(Razor)::: 形式從 view (取得資訊 `mail-to`) 並使用它來產生錨點。</span><span class="sxs-lookup"><span data-stu-id="1c5f5-148">We'll update it to take information from a :::no-loc(Razor)::: view (in the form of a `mail-to` attribute) and use that in generating the anchor.</span></span>
+<span data-ttu-id="1c5f5-147">在本節中，我們將更新 `EmailTagHelper`，以建立電子郵件的有效錨點標籤。</span><span class="sxs-lookup"><span data-stu-id="1c5f5-147">In this section, we'll update the `EmailTagHelper` so that it will create a valid anchor tag for email.</span></span> <span data-ttu-id="1c5f5-148">我們會將其更新為以屬性的 Razor 形式從 view (取得資訊 `mail-to`) 並使用它來產生錨點。</span><span class="sxs-lookup"><span data-stu-id="1c5f5-148">We'll update it to take information from a Razor view (in the form of a `mail-to` attribute) and use that in generating the anchor.</span></span>
 
 <span data-ttu-id="1c5f5-149">使用下列程式碼更新 `EmailTagHelper` 類別：</span><span class="sxs-lookup"><span data-stu-id="1c5f5-149">Update the `EmailTagHelper` class with the following:</span></span>
 
@@ -205,7 +205,7 @@ the following snippet uses TagHelpers3 and should use TagHelpers (not the 3)
 
    [!code-csharp[](authoring/sample/AuthoringTagHelpers/src/AuthoringTagHelpers/TagHelpers/WebsiteInformationTagHelper.cs)]
 
-   * <span data-ttu-id="1c5f5-196">如前所述，標籤協助程式會將標籤協助程式依照 Pascal 大小寫 C# 命名法大小寫慣例的類別名稱和屬性轉譯成[小寫 kebab](https://wiki.c2.com/?KebabCase)。</span><span class="sxs-lookup"><span data-stu-id="1c5f5-196">As mentioned previously, tag helpers translates Pascal-cased C# class names and properties for tag helpers into [kebab case](https://wiki.c2.com/?KebabCase).</span></span> <span data-ttu-id="1c5f5-197">因此，若要 `WebsiteInformationTagHelper` 在中使用 :::no-loc(Razor)::: ，您將會撰寫 `<website-information />` 。</span><span class="sxs-lookup"><span data-stu-id="1c5f5-197">Therefore, to use the `WebsiteInformationTagHelper` in :::no-loc(Razor):::, you'll write `<website-information />`.</span></span>
+   * <span data-ttu-id="1c5f5-196">如前所述，標籤協助程式會將標籤協助程式依照 Pascal 大小寫 C# 命名法大小寫慣例的類別名稱和屬性轉譯成[小寫 kebab](https://wiki.c2.com/?KebabCase)。</span><span class="sxs-lookup"><span data-stu-id="1c5f5-196">As mentioned previously, tag helpers translates Pascal-cased C# class names and properties for tag helpers into [kebab case](https://wiki.c2.com/?KebabCase).</span></span> <span data-ttu-id="1c5f5-197">因此，若要 `WebsiteInformationTagHelper` 在中使用 Razor ，您將會撰寫 `<website-information />` 。</span><span class="sxs-lookup"><span data-stu-id="1c5f5-197">Therefore, to use the `WebsiteInformationTagHelper` in Razor, you'll write `<website-information />`.</span></span>
 
    * <span data-ttu-id="1c5f5-198">您未明確識別具有 `[HtmlTargetElement]` 屬性的目標項目，因此會將預設值 `website-information` 設為目標。</span><span class="sxs-lookup"><span data-stu-id="1c5f5-198">You are not explicitly identifying the target element with the `[HtmlTargetElement]` attribute, so the default of `website-information` will be targeted.</span></span> <span data-ttu-id="1c5f5-199">如果您已套用下列屬性 (請注意，它不是 Kebab 大小寫，但符合類別名稱)：</span><span class="sxs-lookup"><span data-stu-id="1c5f5-199">If you applied the following attribute (note it's not kebab case but matches the class name):</span></span>
 
@@ -219,7 +219,7 @@ the following snippet uses TagHelpers3 and should use TagHelpers (not the 3)
    [HtmlTargetElement("Website-Information")]
    ```
 
-   * <span data-ttu-id="1c5f5-202">自我結尾項目沒有內容。</span><span class="sxs-lookup"><span data-stu-id="1c5f5-202">Elements that are self-closing have no content.</span></span> <span data-ttu-id="1c5f5-203">在此範例中， :::no-loc(Razor)::: 標記會使用自我結束記號，但標籤協助程式將會建立不會自行關閉的 [區段](https://www.w3.org/TR/html5/sections.html#the-section-element) 專案 (，且您要在專案) 內撰寫內容 `section` 。</span><span class="sxs-lookup"><span data-stu-id="1c5f5-203">For this example, the :::no-loc(Razor)::: markup will use a self-closing tag, but the tag helper will be creating a [section](https://www.w3.org/TR/html5/sections.html#the-section-element) element (which isn't self-closing and you are writing content inside the `section` element).</span></span> <span data-ttu-id="1c5f5-204">因此，您需要將 `TagMode` 設定為 `StartTagAndEndTag`，才能撰寫輸出。</span><span class="sxs-lookup"><span data-stu-id="1c5f5-204">Therefore, you need to set `TagMode` to `StartTagAndEndTag` to write output.</span></span> <span data-ttu-id="1c5f5-205">或者，您可以將設定 `TagMode` 的行設定為註解，並撰寫含結尾標籤 (tag) 的標籤 (markup) </span><span class="sxs-lookup"><span data-stu-id="1c5f5-205">Alternatively, you can comment out the line setting `TagMode` and write markup with a closing tag.</span></span> <span data-ttu-id="1c5f5-206">(本教學課程稍後會提供範例標記)。</span><span class="sxs-lookup"><span data-stu-id="1c5f5-206">(Example markup is provided later in this tutorial.)</span></span>
+   * <span data-ttu-id="1c5f5-202">自我結尾項目沒有內容。</span><span class="sxs-lookup"><span data-stu-id="1c5f5-202">Elements that are self-closing have no content.</span></span> <span data-ttu-id="1c5f5-203">在此範例中， Razor 標記會使用自我結束記號，但標籤協助程式將會建立不會自行關閉的 [區段](https://www.w3.org/TR/html5/sections.html#the-section-element) 專案 (，且您要在專案) 內撰寫內容 `section` 。</span><span class="sxs-lookup"><span data-stu-id="1c5f5-203">For this example, the Razor markup will use a self-closing tag, but the tag helper will be creating a [section](https://www.w3.org/TR/html5/sections.html#the-section-element) element (which isn't self-closing and you are writing content inside the `section` element).</span></span> <span data-ttu-id="1c5f5-204">因此，您需要將 `TagMode` 設定為 `StartTagAndEndTag`，才能撰寫輸出。</span><span class="sxs-lookup"><span data-stu-id="1c5f5-204">Therefore, you need to set `TagMode` to `StartTagAndEndTag` to write output.</span></span> <span data-ttu-id="1c5f5-205">或者，您可以將設定 `TagMode` 的行設定為註解，並撰寫含結尾標籤 (tag) 的標籤 (markup) </span><span class="sxs-lookup"><span data-stu-id="1c5f5-205">Alternatively, you can comment out the line setting `TagMode` and write markup with a closing tag.</span></span> <span data-ttu-id="1c5f5-206">(本教學課程稍後會提供範例標記)。</span><span class="sxs-lookup"><span data-stu-id="1c5f5-206">(Example markup is provided later in this tutorial.)</span></span>
 
    * <span data-ttu-id="1c5f5-207">下行中的 `$` (貨幣符號) 使用[插入字串](/dotnet/csharp/language-reference/keywords/interpolated-strings)：</span><span class="sxs-lookup"><span data-stu-id="1c5f5-207">The `$` (dollar sign) in the following line uses an [interpolated string](/dotnet/csharp/language-reference/keywords/interpolated-strings):</span></span>
 
@@ -232,11 +232,11 @@ the following snippet uses TagHelpers3 and should use TagHelpers (not the 3)
    [!code-cshtml[](authoring/sample/AuthoringTagHelpers/src/AuthoringTagHelpers/Views/Home/About.cshtml?highlight=1,4-8, 18-999)]
 
    > [!NOTE]
-   > <span data-ttu-id="1c5f5-210">在如下所 :::no-loc(Razor)::: 示的標記中：</span><span class="sxs-lookup"><span data-stu-id="1c5f5-210">In the :::no-loc(Razor)::: markup shown below:</span></span>
+   > <span data-ttu-id="1c5f5-210">在如下所 Razor 示的標記中：</span><span class="sxs-lookup"><span data-stu-id="1c5f5-210">In the Razor markup shown below:</span></span>
    >
    > [!code-html[](authoring/sample/AuthoringTagHelpers/src/AuthoringTagHelpers/Views/Home/About.cshtml?range=18-18)]
    >
-   > <span data-ttu-id="1c5f5-211">:::no-loc(Razor)::: 知道 `info` 屬性是類別，而不是字串，而您想要撰寫 c # 程式碼。</span><span class="sxs-lookup"><span data-stu-id="1c5f5-211">:::no-loc(Razor)::: knows the `info` attribute is a class, not a string, and you want to write C# code.</span></span> <span data-ttu-id="1c5f5-212">應該撰寫任何無 `@` 字元的非字串標籤協助程式屬性。</span><span class="sxs-lookup"><span data-stu-id="1c5f5-212">Any non-string tag helper attribute should be written without the `@` character.</span></span>
+   > <span data-ttu-id="1c5f5-211">Razor 知道 `info` 屬性是類別，而不是字串，而您想要撰寫 c # 程式碼。</span><span class="sxs-lookup"><span data-stu-id="1c5f5-211">Razor knows the `info` attribute is a class, not a string, and you want to write C# code.</span></span> <span data-ttu-id="1c5f5-212">應該撰寫任何無 `@` 字元的非字串標籤協助程式屬性。</span><span class="sxs-lookup"><span data-stu-id="1c5f5-212">Any non-string tag helper attribute should be written without the `@` character.</span></span>
 
 1. <span data-ttu-id="1c5f5-213">執行應用程式，並巡覽至 About 檢視來查看網站資訊。</span><span class="sxs-lookup"><span data-stu-id="1c5f5-213">Run the app, and navigate to the About view to see the web site information.</span></span>
 

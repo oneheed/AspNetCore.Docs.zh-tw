@@ -6,17 +6,17 @@ ms.author: riande
 ms.date: 09/28/2019
 ms.topic: tutorial
 no-loc:
-- ':::no-loc(appsettings.json):::'
-- ':::no-loc(ASP.NET Core Identity):::'
-- ':::no-loc(cookie):::'
-- ':::no-loc(Cookie):::'
-- ':::no-loc(Blazor):::'
-- ':::no-loc(Blazor Server):::'
-- ':::no-loc(Blazor WebAssembly):::'
-- ':::no-loc(Identity):::'
-- ":::no-loc(Let's Encrypt):::"
-- ':::no-loc(Razor):::'
-- ':::no-loc(SignalR):::'
+- 'appsettings.json'
+- 'ASP.NET Core Identity'
+- 'cookie'
+- 'Cookie'
+- 'Blazor'
+- 'Blazor Server'
+- 'Blazor WebAssembly'
+- 'Identity'
+- "Let's Encrypt"
+- 'Razor'
+- 'SignalR'
 uid: data/ef-mvc/read-related-data
 ms.openlocfilehash: 610a9e9b0007fb468ea9cdae6fadd2e756de4290
 ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
@@ -200,7 +200,7 @@ ms.locfileid: "93054050"
   }
   ```
 
-* <span data-ttu-id="de14e-228">新增 [課程]  資料行，以顯示每位講師所教授的課程。</span><span class="sxs-lookup"><span data-stu-id="de14e-228">Added a **Courses** column that displays courses taught by each instructor.</span></span> <span data-ttu-id="de14e-229">如需詳細資訊，請參閱語法文章的 [明確行轉換](xref:mvc/views/razor#explicit-line-transition) 一節 :::no-loc(Razor)::: 。</span><span class="sxs-lookup"><span data-stu-id="de14e-229">For more information, see the [Explicit line transition](xref:mvc/views/razor#explicit-line-transition) section of the :::no-loc(Razor)::: syntax article.</span></span>
+* <span data-ttu-id="de14e-228">新增 [課程]  資料行，以顯示每位講師所教授的課程。</span><span class="sxs-lookup"><span data-stu-id="de14e-228">Added a **Courses** column that displays courses taught by each instructor.</span></span> <span data-ttu-id="de14e-229">如需詳細資訊，請參閱語法文章的 [明確行轉換](xref:mvc/views/razor#explicit-line-transition) 一節 Razor 。</span><span class="sxs-lookup"><span data-stu-id="de14e-229">For more information, see the [Explicit line transition](xref:mvc/views/razor#explicit-line-transition) section of the Razor syntax article.</span></span>
 
 * <span data-ttu-id="de14e-230">新增程式碼，將 `class="success"` 動態新增至所選取講師的 `tr` 項目。</span><span class="sxs-lookup"><span data-stu-id="de14e-230">Added code that dynamically adds `class="success"` to the `tr` element of the selected instructor.</span></span> <span data-ttu-id="de14e-231">這會使用啟動程序類別設定所選取資料列的背景色彩。</span><span class="sxs-lookup"><span data-stu-id="de14e-231">This sets a background color for the selected row using a Bootstrap class.</span></span>
 

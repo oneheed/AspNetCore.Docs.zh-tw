@@ -1,23 +1,23 @@
 ---
-title: '使用伺服器保護託管的 ASP.NET Core :::no-loc(Blazor WebAssembly)::: 應用程式 :::no-loc(Identity):::'
+title: '使用伺服器保護託管的 ASP.NET Core Blazor WebAssembly 應用程式 Identity'
 author: guardrex
-description: '瞭解如何使用伺服器保護託管的 ASP.NET Core :::no-loc(Blazor WebAssembly)::: 應用程式 :::no-loc(Identity)::: 。'
+description: '瞭解如何使用伺服器保護託管的 ASP.NET Core Blazor WebAssembly 應用程式 Identity 。'
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
 ms.date: 10/27/2020
 no-loc:
-- ':::no-loc(appsettings.json):::'
-- ':::no-loc(ASP.NET Core Identity):::'
-- ':::no-loc(cookie):::'
-- ':::no-loc(Cookie):::'
-- ':::no-loc(Blazor):::'
-- ':::no-loc(Blazor Server):::'
-- ':::no-loc(Blazor WebAssembly):::'
-- ':::no-loc(Identity):::'
-- ":::no-loc(Let's Encrypt):::"
-- ':::no-loc(Razor):::'
-- ':::no-loc(SignalR):::'
+- 'appsettings.json'
+- 'ASP.NET Core Identity'
+- 'cookie'
+- 'Cookie'
+- 'Blazor'
+- 'Blazor Server'
+- 'Blazor WebAssembly'
+- 'Identity'
+- "Let's Encrypt"
+- 'Razor'
+- 'SignalR'
 uid: blazor/security/webassembly/hosted-with-identity-server
 ms.openlocfilehash: 147f1d6cdea0b9992b8be333db4cb06e30c7feaf
 ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
@@ -26,28 +26,28 @@ ms.contentlocale: zh-TW
 ms.lasthandoff: 10/30/2020
 ms.locfileid: "93055213"
 ---
-# <a name="secure-an-aspnet-core-no-locblazor-webassembly-hosted-app-with-no-locidentity-server"></a><span data-ttu-id="1aa14-103">:::no-loc(Blazor WebAssembly):::使用伺服器保護 ASP.NET Core 託管應用 :::no-loc(Identity)::: 程式</span><span class="sxs-lookup"><span data-stu-id="1aa14-103">Secure an ASP.NET Core :::no-loc(Blazor WebAssembly)::: hosted app with :::no-loc(Identity)::: Server</span></span>
+# <a name="secure-an-aspnet-core-no-locblazor-webassembly-hosted-app-with-no-locidentity-server"></a><span data-ttu-id="1aa14-103">Blazor WebAssembly使用伺服器保護 ASP.NET Core 託管應用 Identity 程式</span><span class="sxs-lookup"><span data-stu-id="1aa14-103">Secure an ASP.NET Core Blazor WebAssembly hosted app with Identity Server</span></span>
 
 <span data-ttu-id="1aa14-104">由 [Javier Calvarro Nelson](https://github.com/javiercn) 和 [Luke Latham](https://github.com/guardrex)</span><span class="sxs-lookup"><span data-stu-id="1aa14-104">By [Javier Calvarro Nelson](https://github.com/javiercn) and [Luke Latham](https://github.com/guardrex)</span></span>
 
-<span data-ttu-id="1aa14-105">本文說明如何建立使用[ :::no-loc(Identity)::: 伺服器](https://identityserver.io/)來驗證使用者和 API 呼叫的[託管 :::no-loc(Blazor WebAssembly)::: 應用程式](xref:blazor/hosting-models#blazor-webassembly)。</span><span class="sxs-lookup"><span data-stu-id="1aa14-105">This article explains how to create a [hosted :::no-loc(Blazor WebAssembly)::: app](xref:blazor/hosting-models#blazor-webassembly) that uses [:::no-loc(Identity):::Server](https://identityserver.io/) to authenticate users and API calls.</span></span>
+<span data-ttu-id="1aa14-105">本文說明如何建立使用[ Identity 伺服器](https://identityserver.io/)來驗證使用者和 API 呼叫的[託管 Blazor WebAssembly 應用程式](xref:blazor/hosting-models#blazor-webassembly)。</span><span class="sxs-lookup"><span data-stu-id="1aa14-105">This article explains how to create a [hosted Blazor WebAssembly app](xref:blazor/hosting-models#blazor-webassembly) that uses [IdentityServer](https://identityserver.io/) to authenticate users and API calls.</span></span>
 
 > [!NOTE]
-> <span data-ttu-id="1aa14-106">若要將獨立或託管的 :::no-loc(Blazor WebAssembly)::: 應用程式設定為使用現有的外部 :::no-loc(Identity)::: 伺服器實例，請遵循中的指導方針 <xref:blazor/security/webassembly/standalone-with-authentication-library> 。</span><span class="sxs-lookup"><span data-stu-id="1aa14-106">To configure a standalone or hosted :::no-loc(Blazor WebAssembly)::: app to use an existing, external :::no-loc(Identity)::: Server instance, follow the guidance in <xref:blazor/security/webassembly/standalone-with-authentication-library>.</span></span>
+> <span data-ttu-id="1aa14-106">若要將獨立或託管的 Blazor WebAssembly 應用程式設定為使用現有的外部 Identity 伺服器實例，請遵循中的指導方針 <xref:blazor/security/webassembly/standalone-with-authentication-library> 。</span><span class="sxs-lookup"><span data-stu-id="1aa14-106">To configure a standalone or hosted Blazor WebAssembly app to use an existing, external Identity Server instance, follow the guidance in <xref:blazor/security/webassembly/standalone-with-authentication-library>.</span></span>
 
 # <a name="visual-studio"></a>[<span data-ttu-id="1aa14-107">Visual Studio</span><span class="sxs-lookup"><span data-stu-id="1aa14-107">Visual Studio</span></span>](#tab/visual-studio)
 
-<span data-ttu-id="1aa14-108">若要建立 :::no-loc(Blazor WebAssembly)::: 具有驗證機制的新專案：</span><span class="sxs-lookup"><span data-stu-id="1aa14-108">To create a new :::no-loc(Blazor WebAssembly)::: project with an authentication mechanism:</span></span>
+<span data-ttu-id="1aa14-108">若要建立 Blazor WebAssembly 具有驗證機制的新專案：</span><span class="sxs-lookup"><span data-stu-id="1aa14-108">To create a new Blazor WebAssembly project with an authentication mechanism:</span></span>
 
-1. <span data-ttu-id="1aa14-109">在 [ **建立新的 ASP.NET Core Web 應用程式** ] 對話方塊中選擇 **:::no-loc(Blazor WebAssembly)::: 應用程式** 範本之後，請選取 [ **驗證** ] 下的 [ **變更** ]。</span><span class="sxs-lookup"><span data-stu-id="1aa14-109">After choosing the **:::no-loc(Blazor WebAssembly)::: App** template in the **Create a new ASP.NET Core Web Application** dialog, select **Change** under **Authentication** .</span></span>
+1. <span data-ttu-id="1aa14-109">在 [ **建立新的 ASP.NET Core Web 應用程式** ] 對話方塊中選擇 **Blazor WebAssembly 應用程式** 範本之後，請選取 [ **驗證** ] 下的 [ **變更** ]。</span><span class="sxs-lookup"><span data-stu-id="1aa14-109">After choosing the **Blazor WebAssembly App** template in the **Create a new ASP.NET Core Web Application** dialog, select **Change** under **Authentication** .</span></span>
 
-1. <span data-ttu-id="1aa14-110">使用「 **儲存使用者帳戶應用程式內** 」選項選取 **個別使用者帳戶** ，以使用 ASP.NET Core 的系統將使用者儲存在應用程式內 [:::no-loc(Identity):::](xref:security/authentication/identity) 。</span><span class="sxs-lookup"><span data-stu-id="1aa14-110">Select **Individual User Accounts** with the **Store user accounts in-app** option to store users within the app using ASP.NET Core's [:::no-loc(Identity):::](xref:security/authentication/identity) system.</span></span>
+1. <span data-ttu-id="1aa14-110">使用「 **儲存使用者帳戶應用程式內** 」選項選取 **個別使用者帳戶** ，以使用 ASP.NET Core 的系統將使用者儲存在應用程式內 [Identity](xref:security/authentication/identity) 。</span><span class="sxs-lookup"><span data-stu-id="1aa14-110">Select **Individual User Accounts** with the **Store user accounts in-app** option to store users within the app using ASP.NET Core's [Identity](xref:security/authentication/identity) system.</span></span>
 
 1. <span data-ttu-id="1aa14-111">在 [ **Advanced** ] 區段中，選取 [裝載 **ASP.NET Core** ] 核取方塊。</span><span class="sxs-lookup"><span data-stu-id="1aa14-111">Select the **ASP.NET Core hosted** check box in the **Advanced** section.</span></span>
 
 # <a name="visual-studio-code--net-core-cli"></a>[<span data-ttu-id="1aa14-112">Visual Studio Code / .NET Core CLI</span><span class="sxs-lookup"><span data-stu-id="1aa14-112">Visual Studio Code / .NET Core CLI</span></span>](#tab/visual-studio-code+netcore-cli)
 
-<span data-ttu-id="1aa14-113">若要 :::no-loc(Blazor WebAssembly)::: 在空的資料夾中建立具有驗證機制的新專案，請指定 `Individual` 驗證機制，並 `-au|--auth` 使用 ASP.NET Core 的系統將使用者儲存在應用程式中的選項 [:::no-loc(Identity):::](xref:security/authentication/identity) ：</span><span class="sxs-lookup"><span data-stu-id="1aa14-113">To create a new :::no-loc(Blazor WebAssembly)::: project with an authentication mechanism in an empty folder, specify the `Individual` authentication mechanism with the `-au|--auth` option to store users within the app using ASP.NET Core's [:::no-loc(Identity):::](xref:security/authentication/identity) system:</span></span>
+<span data-ttu-id="1aa14-113">若要 Blazor WebAssembly 在空的資料夾中建立具有驗證機制的新專案，請指定 `Individual` 驗證機制，並 `-au|--auth` 使用 ASP.NET Core 的系統將使用者儲存在應用程式中的選項 [Identity](xref:security/authentication/identity) ：</span><span class="sxs-lookup"><span data-stu-id="1aa14-113">To create a new Blazor WebAssembly project with an authentication mechanism in an empty folder, specify the `Individual` authentication mechanism with the `-au|--auth` option to store users within the app using ASP.NET Core's [Identity](xref:security/authentication/identity) system:</span></span>
 
 ```dotnetcli
 dotnet new blazorwasm -au Individual -ho -o {APP NAME}
@@ -55,7 +55,7 @@ dotnet new blazorwasm -au Individual -ho -o {APP NAME}
 
 | <span data-ttu-id="1aa14-114">預留位置</span><span class="sxs-lookup"><span data-stu-id="1aa14-114">Placeholder</span></span>  | <span data-ttu-id="1aa14-115">範例</span><span class="sxs-lookup"><span data-stu-id="1aa14-115">Example</span></span>        |
 | ------------ | -------------- |
-| `{APP NAME}` | `:::no-loc(Blazor):::Sample` |
+| `{APP NAME}` | `BlazorSample` |
 
 <span data-ttu-id="1aa14-116">使用 `-o|--output` 選項指定的輸出位置會建立專案資料夾 (如果不存在)，並成為應用程式名稱的一部分。</span><span class="sxs-lookup"><span data-stu-id="1aa14-116">The output location specified with the `-o|--output` option creates a project folder if it doesn't exist and becomes part of the app's name.</span></span>
 
@@ -63,11 +63,11 @@ dotnet new blazorwasm -au Individual -ho -o {APP NAME}
 
 # <a name="visual-studio-for-mac"></a>[<span data-ttu-id="1aa14-118">Visual Studio for Mac</span><span class="sxs-lookup"><span data-stu-id="1aa14-118">Visual Studio for Mac</span></span>](#tab/visual-studio-mac)
 
-<span data-ttu-id="1aa14-119">若要建立 :::no-loc(Blazor WebAssembly)::: 具有驗證機制的新專案：</span><span class="sxs-lookup"><span data-stu-id="1aa14-119">To create a new :::no-loc(Blazor WebAssembly)::: project with an authentication mechanism:</span></span>
+<span data-ttu-id="1aa14-119">若要建立 Blazor WebAssembly 具有驗證機制的新專案：</span><span class="sxs-lookup"><span data-stu-id="1aa14-119">To create a new Blazor WebAssembly project with an authentication mechanism:</span></span>
 
-1. <span data-ttu-id="1aa14-120">在 [ **設定新的 :::no-loc(Blazor WebAssembly)::: 應用程式** ] 步驟中，從 [ **驗證** ] 下拉式清單中選取 [ **應用程式內) 的個別驗證 (** 。</span><span class="sxs-lookup"><span data-stu-id="1aa14-120">On the **Configure your new :::no-loc(Blazor WebAssembly)::: App** step, select **Individual Authentication (in-app)** from the **Authentication** drop down.</span></span>
+1. <span data-ttu-id="1aa14-120">在 [ **設定新的 Blazor WebAssembly 應用程式** ] 步驟中，從 [ **驗證** ] 下拉式清單中選取 [ **應用程式內) 的個別驗證 (** 。</span><span class="sxs-lookup"><span data-stu-id="1aa14-120">On the **Configure your new Blazor WebAssembly App** step, select **Individual Authentication (in-app)** from the **Authentication** drop down.</span></span>
 
-1. <span data-ttu-id="1aa14-121">應用程式會針對使用 ASP.NET Core 儲存在應用程式中的個別使用者建立 [:::no-loc(Identity):::](xref:security/authentication/identity) 。</span><span class="sxs-lookup"><span data-stu-id="1aa14-121">The app is created for individual users stored in the app with ASP.NET Core [:::no-loc(Identity):::](xref:security/authentication/identity).</span></span>
+1. <span data-ttu-id="1aa14-121">應用程式會針對使用 ASP.NET Core 儲存在應用程式中的個別使用者建立 [Identity](xref:security/authentication/identity) 。</span><span class="sxs-lookup"><span data-stu-id="1aa14-121">The app is created for individual users stored in the app with ASP.NET Core [Identity](xref:security/authentication/identity).</span></span>
 
 1. <span data-ttu-id="1aa14-122">選取 [ **主控 ASP.NET Core** ] 核取方塊。</span><span class="sxs-lookup"><span data-stu-id="1aa14-122">Select the **ASP.NET Core hosted** check box.</span></span>
 
@@ -83,38 +83,38 @@ dotnet new blazorwasm -au Individual -ho -o {APP NAME}
 
 * <span data-ttu-id="1aa14-127">在 `Startup.ConfigureServices` 中：</span><span class="sxs-lookup"><span data-stu-id="1aa14-127">In `Startup.ConfigureServices`:</span></span>
 
-  * <span data-ttu-id="1aa14-128">:::no-loc(ASP.NET Core Identity)::::</span><span class="sxs-lookup"><span data-stu-id="1aa14-128">:::no-loc(ASP.NET Core Identity)::::</span></span>
+  * <span data-ttu-id="1aa14-128">ASP.NET Core Identity:</span><span class="sxs-lookup"><span data-stu-id="1aa14-128">ASP.NET Core Identity:</span></span>
 
     ```csharp
     services.AddDbContext<ApplicationDbContext>(options =>
         options.UseSqlite(
             Configuration.GetConnectionString("DefaultConnection")));
 
-    services.AddDefault:::no-loc(Identity):::<ApplicationUser>(options => 
+    services.AddDefaultIdentity<ApplicationUser>(options => 
             options.SignIn.RequireConfirmedAccount = true)
         .AddEntityFrameworkStores<ApplicationDbContext>();
     ```
 
-  * <span data-ttu-id="1aa14-129">:::no-loc(Identity):::具有其他 <xref:Microsoft.Extensions.DependencyInjection.:::no-loc(Identity):::ServerBuilderConfigurationExtensions.AddApiAuthorization%2A> helper 方法的伺服器，可在伺服器上設定預設的 ASP.NET Core 慣例 :::no-loc(Identity)::: ：</span><span class="sxs-lookup"><span data-stu-id="1aa14-129">:::no-loc(Identity):::Server with an additional <xref:Microsoft.Extensions.DependencyInjection.:::no-loc(Identity):::ServerBuilderConfigurationExtensions.AddApiAuthorization%2A> helper method that sets up default ASP.NET Core conventions on top of :::no-loc(Identity):::Server:</span></span>
+  * <span data-ttu-id="1aa14-129">Identity具有其他 <xref:Microsoft.Extensions.DependencyInjection.IdentityServerBuilderConfigurationExtensions.AddApiAuthorization%2A> helper 方法的伺服器，可在伺服器上設定預設的 ASP.NET Core 慣例 Identity ：</span><span class="sxs-lookup"><span data-stu-id="1aa14-129">IdentityServer with an additional <xref:Microsoft.Extensions.DependencyInjection.IdentityServerBuilderConfigurationExtensions.AddApiAuthorization%2A> helper method that sets up default ASP.NET Core conventions on top of IdentityServer:</span></span>
 
     ```csharp
-    services.Add:::no-loc(Identity):::Server()
+    services.AddIdentityServer()
         .AddApiAuthorization<ApplicationUser, ApplicationDbContext>();
     ```
 
-  * <span data-ttu-id="1aa14-130">使用額外的 helper 方法進行驗證，以設定 <xref:Microsoft.AspNetCore.Authentication.AuthenticationBuilderExtensions.Add:::no-loc(Identity):::ServerJwt%2A> 應用程式驗證服務器所產生的 JWT 權杖 :::no-loc(Identity)::: ：</span><span class="sxs-lookup"><span data-stu-id="1aa14-130">Authentication with an additional <xref:Microsoft.AspNetCore.Authentication.AuthenticationBuilderExtensions.Add:::no-loc(Identity):::ServerJwt%2A> helper method that configures the app to validate JWT tokens produced by :::no-loc(Identity):::Server:</span></span>
+  * <span data-ttu-id="1aa14-130">使用額外的 helper 方法進行驗證，以設定 <xref:Microsoft.AspNetCore.Authentication.AuthenticationBuilderExtensions.AddIdentityServerJwt%2A> 應用程式驗證服務器所產生的 JWT 權杖 Identity ：</span><span class="sxs-lookup"><span data-stu-id="1aa14-130">Authentication with an additional <xref:Microsoft.AspNetCore.Authentication.AuthenticationBuilderExtensions.AddIdentityServerJwt%2A> helper method that configures the app to validate JWT tokens produced by IdentityServer:</span></span>
 
     ```csharp
     services.AddAuthentication()
-        .Add:::no-loc(Identity):::ServerJwt();
+        .AddIdentityServerJwt();
     ```
 
 * <span data-ttu-id="1aa14-131">在 `Startup.Configure` 中：</span><span class="sxs-lookup"><span data-stu-id="1aa14-131">In `Startup.Configure`:</span></span>
 
-  * <span data-ttu-id="1aa14-132">:::no-loc(Identity):::伺服器中介軟體會公開 OpenID Connect (OIDC) 端點：</span><span class="sxs-lookup"><span data-stu-id="1aa14-132">The :::no-loc(Identity):::Server middleware exposes the OpenID Connect (OIDC) endpoints:</span></span>
+  * <span data-ttu-id="1aa14-132">Identity伺服器中介軟體會公開 OpenID Connect (OIDC) 端點：</span><span class="sxs-lookup"><span data-stu-id="1aa14-132">The IdentityServer middleware exposes the OpenID Connect (OIDC) endpoints:</span></span>
 
     ```csharp
-    app.Use:::no-loc(Identity):::Server();
+    app.UseIdentityServer();
     ```
 
   * <span data-ttu-id="1aa14-133">驗證中介軟體負責驗證要求的認證，並在要求內容上設定使用者：</span><span class="sxs-lookup"><span data-stu-id="1aa14-133">The Authentication middleware is responsible for validating request credentials and setting the user on the request context:</span></span>
@@ -132,24 +132,24 @@ dotnet new blazorwasm -au Individual -ho -o {APP NAME}
 
 ### <a name="addapiauthorization"></a><span data-ttu-id="1aa14-135">AddApiAuthorization</span><span class="sxs-lookup"><span data-stu-id="1aa14-135">AddApiAuthorization</span></span>
 
-<span data-ttu-id="1aa14-136"><xref:Microsoft.Extensions.DependencyInjection.:::no-loc(Identity):::ServerBuilderConfigurationExtensions.AddApiAuthorization%2A>Helper 方法會設定 ASP.NET Core 案例的[ :::no-loc(Identity)::: 伺服器](https://identityserver.io/)。</span><span class="sxs-lookup"><span data-stu-id="1aa14-136">The <xref:Microsoft.Extensions.DependencyInjection.:::no-loc(Identity):::ServerBuilderConfigurationExtensions.AddApiAuthorization%2A> helper method configures [:::no-loc(Identity):::Server](https://identityserver.io/) for ASP.NET Core scenarios.</span></span> <span data-ttu-id="1aa14-137">:::no-loc(Identity):::伺服器是一種功能強大且可擴充的架構，可處理應用程式安全性的考慮。</span><span class="sxs-lookup"><span data-stu-id="1aa14-137">:::no-loc(Identity):::Server is a powerful and extensible framework for handling app security concerns.</span></span> <span data-ttu-id="1aa14-138">:::no-loc(Identity):::針對最常見的情況，伺服器會公開不必要的複雜性。</span><span class="sxs-lookup"><span data-stu-id="1aa14-138">:::no-loc(Identity):::Server exposes unnecessary complexity for the most common scenarios.</span></span> <span data-ttu-id="1aa14-139">因此，我們假設有一組慣例和設定選項，我們考慮的是很好的起點。</span><span class="sxs-lookup"><span data-stu-id="1aa14-139">Consequently, a set of conventions and configuration options is provided that we consider a good starting point.</span></span> <span data-ttu-id="1aa14-140">一旦您的驗證需要變更， :::no-loc(Identity)::: 就可以使用伺服器的完整功能來自訂驗證，以符合應用程式的需求。</span><span class="sxs-lookup"><span data-stu-id="1aa14-140">Once your authentication needs change, the full power of :::no-loc(Identity):::Server is available to customize authentication to suit an app's requirements.</span></span>
+<span data-ttu-id="1aa14-136"><xref:Microsoft.Extensions.DependencyInjection.IdentityServerBuilderConfigurationExtensions.AddApiAuthorization%2A>Helper 方法會設定 ASP.NET Core 案例的[ Identity 伺服器](https://identityserver.io/)。</span><span class="sxs-lookup"><span data-stu-id="1aa14-136">The <xref:Microsoft.Extensions.DependencyInjection.IdentityServerBuilderConfigurationExtensions.AddApiAuthorization%2A> helper method configures [IdentityServer](https://identityserver.io/) for ASP.NET Core scenarios.</span></span> <span data-ttu-id="1aa14-137">Identity伺服器是一種功能強大且可擴充的架構，可處理應用程式安全性的考慮。</span><span class="sxs-lookup"><span data-stu-id="1aa14-137">IdentityServer is a powerful and extensible framework for handling app security concerns.</span></span> <span data-ttu-id="1aa14-138">Identity針對最常見的情況，伺服器會公開不必要的複雜性。</span><span class="sxs-lookup"><span data-stu-id="1aa14-138">IdentityServer exposes unnecessary complexity for the most common scenarios.</span></span> <span data-ttu-id="1aa14-139">因此，我們假設有一組慣例和設定選項，我們考慮的是很好的起點。</span><span class="sxs-lookup"><span data-stu-id="1aa14-139">Consequently, a set of conventions and configuration options is provided that we consider a good starting point.</span></span> <span data-ttu-id="1aa14-140">一旦您的驗證需要變更， Identity 就可以使用伺服器的完整功能來自訂驗證，以符合應用程式的需求。</span><span class="sxs-lookup"><span data-stu-id="1aa14-140">Once your authentication needs change, the full power of IdentityServer is available to customize authentication to suit an app's requirements.</span></span>
 
-### <a name="addno-locidentityserverjwt"></a><span data-ttu-id="1aa14-141">新增 :::no-loc(Identity)::: ServerJwt</span><span class="sxs-lookup"><span data-stu-id="1aa14-141">Add:::no-loc(Identity):::ServerJwt</span></span>
+### <a name="addno-locidentityserverjwt"></a><span data-ttu-id="1aa14-141">新增 Identity ServerJwt</span><span class="sxs-lookup"><span data-stu-id="1aa14-141">AddIdentityServerJwt</span></span>
 
-<span data-ttu-id="1aa14-142"><xref:Microsoft.AspNetCore.Authentication.AuthenticationBuilderExtensions.Add:::no-loc(Identity):::ServerJwt%2A>Helper 方法會設定應用程式的原則配置作為預設驗證處理常式。</span><span class="sxs-lookup"><span data-stu-id="1aa14-142">The <xref:Microsoft.AspNetCore.Authentication.AuthenticationBuilderExtensions.Add:::no-loc(Identity):::ServerJwt%2A> helper method configures a policy scheme for the app as the default authentication handler.</span></span> <span data-ttu-id="1aa14-143">原則設定為允許 :::no-loc(Identity)::: 處理所有路由至 URL 空間中之子路徑的要求 :::no-loc(Identity)::: `/:::no-loc(Identity):::` 。</span><span class="sxs-lookup"><span data-stu-id="1aa14-143">The policy is configured to allow :::no-loc(Identity)::: to handle all requests routed to any subpath in the :::no-loc(Identity)::: URL space `/:::no-loc(Identity):::`.</span></span> <span data-ttu-id="1aa14-144">會 <xref:Microsoft.AspNetCore.Authentication.JwtBearer.JwtBearerHandler> 處理所有其他要求。</span><span class="sxs-lookup"><span data-stu-id="1aa14-144">The <xref:Microsoft.AspNetCore.Authentication.JwtBearer.JwtBearerHandler> handles all other requests.</span></span> <span data-ttu-id="1aa14-145">此外，這個方法：</span><span class="sxs-lookup"><span data-stu-id="1aa14-145">Additionally, this method:</span></span>
+<span data-ttu-id="1aa14-142"><xref:Microsoft.AspNetCore.Authentication.AuthenticationBuilderExtensions.AddIdentityServerJwt%2A>Helper 方法會設定應用程式的原則配置作為預設驗證處理常式。</span><span class="sxs-lookup"><span data-stu-id="1aa14-142">The <xref:Microsoft.AspNetCore.Authentication.AuthenticationBuilderExtensions.AddIdentityServerJwt%2A> helper method configures a policy scheme for the app as the default authentication handler.</span></span> <span data-ttu-id="1aa14-143">原則設定為允許 Identity 處理所有路由至 URL 空間中之子路徑的要求 Identity `/Identity` 。</span><span class="sxs-lookup"><span data-stu-id="1aa14-143">The policy is configured to allow Identity to handle all requests routed to any subpath in the Identity URL space `/Identity`.</span></span> <span data-ttu-id="1aa14-144">會 <xref:Microsoft.AspNetCore.Authentication.JwtBearer.JwtBearerHandler> 處理所有其他要求。</span><span class="sxs-lookup"><span data-stu-id="1aa14-144">The <xref:Microsoft.AspNetCore.Authentication.JwtBearer.JwtBearerHandler> handles all other requests.</span></span> <span data-ttu-id="1aa14-145">此外，這個方法：</span><span class="sxs-lookup"><span data-stu-id="1aa14-145">Additionally, this method:</span></span>
 
-* <span data-ttu-id="1aa14-146">註冊 `{APPLICATION NAME}API` 具有 :::no-loc(Identity)::: 預設範圍之伺服器的 API 資源 `{APPLICATION NAME}API` 。</span><span class="sxs-lookup"><span data-stu-id="1aa14-146">Registers an `{APPLICATION NAME}API` API resource with :::no-loc(Identity):::Server with a default scope of `{APPLICATION NAME}API`.</span></span>
-* <span data-ttu-id="1aa14-147">設定 JWT 持有人權杖中介軟體，以驗證 :::no-loc(Identity)::: 伺服器針對應用程式所發出的權杖。</span><span class="sxs-lookup"><span data-stu-id="1aa14-147">Configures the JWT Bearer Token Middleware to validate tokens issued by :::no-loc(Identity):::Server for the app.</span></span>
+* <span data-ttu-id="1aa14-146">註冊 `{APPLICATION NAME}API` 具有 Identity 預設範圍之伺服器的 API 資源 `{APPLICATION NAME}API` 。</span><span class="sxs-lookup"><span data-stu-id="1aa14-146">Registers an `{APPLICATION NAME}API` API resource with IdentityServer with a default scope of `{APPLICATION NAME}API`.</span></span>
+* <span data-ttu-id="1aa14-147">設定 JWT 持有人權杖中介軟體，以驗證 Identity 伺服器針對應用程式所發出的權杖。</span><span class="sxs-lookup"><span data-stu-id="1aa14-147">Configures the JWT Bearer Token Middleware to validate tokens issued by IdentityServer for the app.</span></span>
 
 ### <a name="weatherforecastcontroller"></a><span data-ttu-id="1aa14-148">WeatherForecastController</span><span class="sxs-lookup"><span data-stu-id="1aa14-148">WeatherForecastController</span></span>
 
-<span data-ttu-id="1aa14-149">在 `WeatherForecastController` (`Controllers/WeatherForecastController.cs`) 中，會將屬性套用 [`[Authorize]`](xref:Microsoft.AspNetCore.Authorization.AuthorizeAttribute) 至類別。</span><span class="sxs-lookup"><span data-stu-id="1aa14-149">In the `WeatherForecastController` (`Controllers/WeatherForecastController.cs`), the [`[Authorize]`](xref:Microsoft.AspNetCore.Authorization.AuthorizeAttribute) attribute is applied to the class.</span></span> <span data-ttu-id="1aa14-150">屬性（attribute）會指出使用者必須根據預設原則來取得存取資源的授權。</span><span class="sxs-lookup"><span data-stu-id="1aa14-150">The attribute indicates that the user must be authorized based on the default policy to access the resource.</span></span> <span data-ttu-id="1aa14-151">預設授權原則會設定為使用預設的驗證配置，此配置是由設定 <xref:Microsoft.AspNetCore.Authentication.AuthenticationBuilderExtensions.Add:::no-loc(Identity):::ServerJwt%2A> 。</span><span class="sxs-lookup"><span data-stu-id="1aa14-151">The default authorization policy is configured to use the default authentication scheme, which is set up by <xref:Microsoft.AspNetCore.Authentication.AuthenticationBuilderExtensions.Add:::no-loc(Identity):::ServerJwt%2A>.</span></span> <span data-ttu-id="1aa14-152">Helper 方法會將 <xref:Microsoft.AspNetCore.Authentication.JwtBearer.JwtBearerHandler> 要求設定為應用程式要求的預設處理常式。</span><span class="sxs-lookup"><span data-stu-id="1aa14-152">The helper method configures <xref:Microsoft.AspNetCore.Authentication.JwtBearer.JwtBearerHandler> as the default handler for requests to the app.</span></span>
+<span data-ttu-id="1aa14-149">在 `WeatherForecastController` (`Controllers/WeatherForecastController.cs`) 中，會將屬性套用 [`[Authorize]`](xref:Microsoft.AspNetCore.Authorization.AuthorizeAttribute) 至類別。</span><span class="sxs-lookup"><span data-stu-id="1aa14-149">In the `WeatherForecastController` (`Controllers/WeatherForecastController.cs`), the [`[Authorize]`](xref:Microsoft.AspNetCore.Authorization.AuthorizeAttribute) attribute is applied to the class.</span></span> <span data-ttu-id="1aa14-150">屬性（attribute）會指出使用者必須根據預設原則來取得存取資源的授權。</span><span class="sxs-lookup"><span data-stu-id="1aa14-150">The attribute indicates that the user must be authorized based on the default policy to access the resource.</span></span> <span data-ttu-id="1aa14-151">預設授權原則會設定為使用預設的驗證配置，此配置是由設定 <xref:Microsoft.AspNetCore.Authentication.AuthenticationBuilderExtensions.AddIdentityServerJwt%2A> 。</span><span class="sxs-lookup"><span data-stu-id="1aa14-151">The default authorization policy is configured to use the default authentication scheme, which is set up by <xref:Microsoft.AspNetCore.Authentication.AuthenticationBuilderExtensions.AddIdentityServerJwt%2A>.</span></span> <span data-ttu-id="1aa14-152">Helper 方法會將 <xref:Microsoft.AspNetCore.Authentication.JwtBearer.JwtBearerHandler> 要求設定為應用程式要求的預設處理常式。</span><span class="sxs-lookup"><span data-stu-id="1aa14-152">The helper method configures <xref:Microsoft.AspNetCore.Authentication.JwtBearer.JwtBearerHandler> as the default handler for requests to the app.</span></span>
 
 ### <a name="applicationdbcontext"></a><span data-ttu-id="1aa14-153">[ApplicationdbcoNtext</span><span class="sxs-lookup"><span data-stu-id="1aa14-153">ApplicationDbContext</span></span>
 
-<span data-ttu-id="1aa14-154">在 `ApplicationDbContext` (`Data/ApplicationDbContext.cs`) 中，會 <xref:Microsoft.EntityFrameworkCore.DbContext> 擴充 <xref:Microsoft.AspNetCore.ApiAuthorization.:::no-loc(Identity):::Server.ApiAuthorizationDbContext%601> 以包含伺服器的架構 :::no-loc(Identity)::: 。</span><span class="sxs-lookup"><span data-stu-id="1aa14-154">In the `ApplicationDbContext` (`Data/ApplicationDbContext.cs`), <xref:Microsoft.EntityFrameworkCore.DbContext> extends <xref:Microsoft.AspNetCore.ApiAuthorization.:::no-loc(Identity):::Server.ApiAuthorizationDbContext%601> to include the schema for :::no-loc(Identity):::Server.</span></span> <span data-ttu-id="1aa14-155"><xref:Microsoft.AspNetCore.ApiAuthorization.:::no-loc(Identity):::Server.ApiAuthorizationDbContext%601> 衍生自 <xref:Microsoft.AspNetCore.:::no-loc(Identity):::.EntityFrameworkCore.:::no-loc(Identity):::DbContext>。</span><span class="sxs-lookup"><span data-stu-id="1aa14-155"><xref:Microsoft.AspNetCore.ApiAuthorization.:::no-loc(Identity):::Server.ApiAuthorizationDbContext%601> is derived from <xref:Microsoft.AspNetCore.:::no-loc(Identity):::.EntityFrameworkCore.:::no-loc(Identity):::DbContext>.</span></span>
+<span data-ttu-id="1aa14-154">在 `ApplicationDbContext` (`Data/ApplicationDbContext.cs`) 中，會 <xref:Microsoft.EntityFrameworkCore.DbContext> 擴充 <xref:Microsoft.AspNetCore.ApiAuthorization.IdentityServer.ApiAuthorizationDbContext%601> 以包含伺服器的架構 Identity 。</span><span class="sxs-lookup"><span data-stu-id="1aa14-154">In the `ApplicationDbContext` (`Data/ApplicationDbContext.cs`), <xref:Microsoft.EntityFrameworkCore.DbContext> extends <xref:Microsoft.AspNetCore.ApiAuthorization.IdentityServer.ApiAuthorizationDbContext%601> to include the schema for IdentityServer.</span></span> <span data-ttu-id="1aa14-155"><xref:Microsoft.AspNetCore.ApiAuthorization.IdentityServer.ApiAuthorizationDbContext%601> 衍生自 <xref:Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityDbContext>。</span><span class="sxs-lookup"><span data-stu-id="1aa14-155"><xref:Microsoft.AspNetCore.ApiAuthorization.IdentityServer.ApiAuthorizationDbContext%601> is derived from <xref:Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityDbContext>.</span></span>
 
-<span data-ttu-id="1aa14-156">若要取得資料庫架構的完整控制權，請從其中一個可用類別繼承， :::no-loc(Identity)::: <xref:Microsoft.EntityFrameworkCore.DbContext> 並設定內容以包含 :::no-loc(Identity)::: 架構，方法是 `builder.ConfigurePersistedGrantContext(_operationalStoreOptions.Value)` 在方法中呼叫 <xref:Microsoft.EntityFrameworkCore.DbContext.OnModelCreating%2A> 。</span><span class="sxs-lookup"><span data-stu-id="1aa14-156">To gain full control of the database schema, inherit from one of the available :::no-loc(Identity)::: <xref:Microsoft.EntityFrameworkCore.DbContext> classes and configure the context to include the :::no-loc(Identity)::: schema by calling `builder.ConfigurePersistedGrantContext(_operationalStoreOptions.Value)` in the <xref:Microsoft.EntityFrameworkCore.DbContext.OnModelCreating%2A> method.</span></span>
+<span data-ttu-id="1aa14-156">若要取得資料庫架構的完整控制權，請從其中一個可用類別繼承， Identity <xref:Microsoft.EntityFrameworkCore.DbContext> 並設定內容以包含 Identity 架構，方法是 `builder.ConfigurePersistedGrantContext(_operationalStoreOptions.Value)` 在方法中呼叫 <xref:Microsoft.EntityFrameworkCore.DbContext.OnModelCreating%2A> 。</span><span class="sxs-lookup"><span data-stu-id="1aa14-156">To gain full control of the database schema, inherit from one of the available Identity <xref:Microsoft.EntityFrameworkCore.DbContext> classes and configure the context to include the Identity schema by calling `builder.ConfigurePersistedGrantContext(_operationalStoreOptions.Value)` in the <xref:Microsoft.EntityFrameworkCore.DbContext.OnModelCreating%2A> method.</span></span>
 
 ### <a name="oidcconfigurationcontroller"></a><span data-ttu-id="1aa14-157">OidcConfigurationController</span><span class="sxs-lookup"><span data-stu-id="1aa14-157">OidcConfigurationController</span></span>
 
@@ -157,19 +157,19 @@ dotnet new blazorwasm -au Individual -ho -o {APP NAME}
 
 ### <a name="app-settings"></a><span data-ttu-id="1aa14-159">應用程式設定</span><span class="sxs-lookup"><span data-stu-id="1aa14-159">App settings</span></span>
 
-<span data-ttu-id="1aa14-160">在應用程式佈建檔 (`:::no-loc(appsettings.json):::`) 的專案根目錄中， `:::no-loc(Identity):::Server` 區段會描述已設定的用戶端清單。</span><span class="sxs-lookup"><span data-stu-id="1aa14-160">In the app settings file (`:::no-loc(appsettings.json):::`) at the project root, the `:::no-loc(Identity):::Server` section describes the list of configured clients.</span></span> <span data-ttu-id="1aa14-161">在下列範例中，有一個用戶端。</span><span class="sxs-lookup"><span data-stu-id="1aa14-161">In the following example, there's a single client.</span></span> <span data-ttu-id="1aa14-162">用戶端名稱會對應到應用程式名稱，並依照慣例對應至 OAuth `ClientId` 參數。</span><span class="sxs-lookup"><span data-stu-id="1aa14-162">The client name corresponds to the app name and is mapped by convention to the OAuth `ClientId` parameter.</span></span> <span data-ttu-id="1aa14-163">設定檔會指出正在設定的應用程式類型。</span><span class="sxs-lookup"><span data-stu-id="1aa14-163">The profile indicates the app type being configured.</span></span> <span data-ttu-id="1aa14-164">設定檔會在內部使用，以促進可簡化伺服器設定程式的慣例。</span><span class="sxs-lookup"><span data-stu-id="1aa14-164">The profile is used internally to drive conventions that simplify the configuration process for the server.</span></span> <!-- There are several profiles available, as explained in the [Application profiles](#application-profiles) section. -->
+<span data-ttu-id="1aa14-160">在應用程式佈建檔 (`appsettings.json`) 的專案根目錄中， `IdentityServer` 區段會描述已設定的用戶端清單。</span><span class="sxs-lookup"><span data-stu-id="1aa14-160">In the app settings file (`appsettings.json`) at the project root, the `IdentityServer` section describes the list of configured clients.</span></span> <span data-ttu-id="1aa14-161">在下列範例中，有一個用戶端。</span><span class="sxs-lookup"><span data-stu-id="1aa14-161">In the following example, there's a single client.</span></span> <span data-ttu-id="1aa14-162">用戶端名稱會對應到應用程式名稱，並依照慣例對應至 OAuth `ClientId` 參數。</span><span class="sxs-lookup"><span data-stu-id="1aa14-162">The client name corresponds to the app name and is mapped by convention to the OAuth `ClientId` parameter.</span></span> <span data-ttu-id="1aa14-163">設定檔會指出正在設定的應用程式類型。</span><span class="sxs-lookup"><span data-stu-id="1aa14-163">The profile indicates the app type being configured.</span></span> <span data-ttu-id="1aa14-164">設定檔會在內部使用，以促進可簡化伺服器設定程式的慣例。</span><span class="sxs-lookup"><span data-stu-id="1aa14-164">The profile is used internally to drive conventions that simplify the configuration process for the server.</span></span> <!-- There are several profiles available, as explained in the [Application profiles](#application-profiles) section. -->
 
 ```json
-":::no-loc(Identity):::Server": {
+"IdentityServer": {
   "Clients": {
     "{APP ASSEMBLY}.Client": {
-      "Profile": ":::no-loc(Identity):::ServerSPA"
+      "Profile": "IdentityServerSPA"
     }
   }
 }
 ```
 
-<span data-ttu-id="1aa14-165">預留位置 `{APP ASSEMBLY}` 是應用程式的元件名稱 (例如 `:::no-loc(Blazor):::Sample.Client`) 。</span><span class="sxs-lookup"><span data-stu-id="1aa14-165">The placeholder `{APP ASSEMBLY}` is the app's assembly name (for example, `:::no-loc(Blazor):::Sample.Client`).</span></span>
+<span data-ttu-id="1aa14-165">預留位置 `{APP ASSEMBLY}` 是應用程式的元件名稱 (例如 `BlazorSample.Client`) 。</span><span class="sxs-lookup"><span data-stu-id="1aa14-165">The placeholder `{APP ASSEMBLY}` is the app's assembly name (for example, `BlazorSample.Client`).</span></span>
 
 ## <a name="client-app-configuration"></a><span data-ttu-id="1aa14-166">*`Client`* 應用程式設定</span><span class="sxs-lookup"><span data-stu-id="1aa14-166">*`Client`* app configuration</span></span>
 
@@ -201,7 +201,7 @@ builder.Services.AddScoped(sp => sp.GetRequiredService<IHttpClientFactory>()
 ```
 
 > [!NOTE]
-> <span data-ttu-id="1aa14-174">如果您要將 :::no-loc(Blazor WebAssembly)::: 應用程式設定為使用 :::no-loc(Identity)::: 不屬於託管解決方案的現有伺服器實例 :::no-loc(Blazor)::: ，請將 <xref:System.Net.Http.HttpClient> 基底位址註冊從 <xref:Microsoft.AspNetCore.Components.WebAssembly.Hosting.IWebAssemblyHostEnvironment.BaseAddress?displayProperty=nameWithType> () 變更 `builder.HostEnvironment.BaseAddress` 為伺服器應用程式的 API 授權端點 URL。</span><span class="sxs-lookup"><span data-stu-id="1aa14-174">If you're configuring a :::no-loc(Blazor WebAssembly)::: app to use an existing :::no-loc(Identity)::: Server instance that isn't part of a hosted :::no-loc(Blazor)::: solution, change the <xref:System.Net.Http.HttpClient> base address registration from <xref:Microsoft.AspNetCore.Components.WebAssembly.Hosting.IWebAssemblyHostEnvironment.BaseAddress?displayProperty=nameWithType> (`builder.HostEnvironment.BaseAddress`) to the server app's API authorization endpoint URL.</span></span>
+> <span data-ttu-id="1aa14-174">如果您要將 Blazor WebAssembly 應用程式設定為使用 Identity 不屬於託管解決方案的現有伺服器實例 Blazor ，請將 <xref:System.Net.Http.HttpClient> 基底位址註冊從 <xref:Microsoft.AspNetCore.Components.WebAssembly.Hosting.IWebAssemblyHostEnvironment.BaseAddress?displayProperty=nameWithType> () 變更 `builder.HostEnvironment.BaseAddress` 為伺服器應用程式的 API 授權端點 URL。</span><span class="sxs-lookup"><span data-stu-id="1aa14-174">If you're configuring a Blazor WebAssembly app to use an existing Identity Server instance that isn't part of a hosted Blazor solution, change the <xref:System.Net.Http.HttpClient> base address registration from <xref:Microsoft.AspNetCore.Components.WebAssembly.Hosting.IWebAssemblyHostEnvironment.BaseAddress?displayProperty=nameWithType> (`builder.HostEnvironment.BaseAddress`) to the server app's API authorization endpoint URL.</span></span>
 
 ### <a name="api-authorization-support"></a><span data-ttu-id="1aa14-175">API 授權支援</span><span class="sxs-lookup"><span data-stu-id="1aa14-175">API authorization support</span></span>
 
@@ -235,7 +235,7 @@ builder.Services.AddApiAuthorization();
 
 * <span data-ttu-id="1aa14-187">針對已驗證的使用者：</span><span class="sxs-lookup"><span data-stu-id="1aa14-187">For authenticated users:</span></span>
   * <span data-ttu-id="1aa14-188">顯示目前的使用者名稱。</span><span class="sxs-lookup"><span data-stu-id="1aa14-188">Displays the current user name.</span></span>
-  * <span data-ttu-id="1aa14-189">提供中 [使用者設定檔] 頁面的連結 :::no-loc(ASP.NET Core Identity)::: 。</span><span class="sxs-lookup"><span data-stu-id="1aa14-189">Offers a link to the user profile page in :::no-loc(ASP.NET Core Identity):::.</span></span>
+  * <span data-ttu-id="1aa14-189">提供中 [使用者設定檔] 頁面的連結 ASP.NET Core Identity 。</span><span class="sxs-lookup"><span data-stu-id="1aa14-189">Offers a link to the user profile page in ASP.NET Core Identity.</span></span>
   * <span data-ttu-id="1aa14-190">提供用來登出應用程式的按鈕。</span><span class="sxs-lookup"><span data-stu-id="1aa14-190">Offers a button to log out of the app.</span></span>
 * <span data-ttu-id="1aa14-191">匿名使用者：</span><span class="sxs-lookup"><span data-stu-id="1aa14-191">For anonymous users:</span></span>
   * <span data-ttu-id="1aa14-192">提供註冊的選項。</span><span class="sxs-lookup"><span data-stu-id="1aa14-192">Offers the option to register.</span></span>
@@ -249,7 +249,7 @@ builder.Services.AddApiAuthorization();
 
 <AuthorizeView>
     <Authorized>
-        <a href="authentication/profile">Hello, @context.User.:::no-loc(Identity):::.Name!</a>
+        <a href="authentication/profile">Hello, @context.User.Identity.Name!</a>
         <button class="nav-link btn btn-link" @onclick="BeginSignOut">
             Log out
         </button>
@@ -288,7 +288,7 @@ builder.Services.AddApiAuthorization();
 
 ### <a name="custom-user-factory"></a><span data-ttu-id="1aa14-202">自訂使用者 factory</span><span class="sxs-lookup"><span data-stu-id="1aa14-202">Custom user factory</span></span>
 
-<span data-ttu-id="1aa14-203">在 *`Client`* 應用程式中，建立自訂的使用者 factory。</span><span class="sxs-lookup"><span data-stu-id="1aa14-203">In the *`Client`* app, create a custom user factory.</span></span> <span data-ttu-id="1aa14-204">:::no-loc(Identity)::: 伺服器會在單一宣告中以 JSON 陣列的形式傳送多個角色 `role` 。</span><span class="sxs-lookup"><span data-stu-id="1aa14-204">:::no-loc(Identity)::: Server sends multiple roles as a JSON array in a single `role` claim.</span></span> <span data-ttu-id="1aa14-205">單一角色會以字串值的形式傳送到宣告中。</span><span class="sxs-lookup"><span data-stu-id="1aa14-205">A single role is sent as a string value in the claim.</span></span> <span data-ttu-id="1aa14-206">Factory 會 `role` 為每個使用者的角色建立個別宣告。</span><span class="sxs-lookup"><span data-stu-id="1aa14-206">The factory creates an individual `role` claim for each of the user's roles.</span></span>
+<span data-ttu-id="1aa14-203">在 *`Client`* 應用程式中，建立自訂的使用者 factory。</span><span class="sxs-lookup"><span data-stu-id="1aa14-203">In the *`Client`* app, create a custom user factory.</span></span> <span data-ttu-id="1aa14-204">Identity 伺服器會在單一宣告中以 JSON 陣列的形式傳送多個角色 `role` 。</span><span class="sxs-lookup"><span data-stu-id="1aa14-204">Identity Server sends multiple roles as a JSON array in a single `role` claim.</span></span> <span data-ttu-id="1aa14-205">單一角色會以字串值的形式傳送到宣告中。</span><span class="sxs-lookup"><span data-stu-id="1aa14-205">A single role is sent as a string value in the claim.</span></span> <span data-ttu-id="1aa14-206">Factory 會 `role` 為每個使用者的角色建立個別宣告。</span><span class="sxs-lookup"><span data-stu-id="1aa14-206">The factory creates an individual `role` claim for each of the user's roles.</span></span>
 
 <span data-ttu-id="1aa14-207">`CustomUserFactory.cs`:</span><span class="sxs-lookup"><span data-stu-id="1aa14-207">`CustomUserFactory.cs`:</span></span>
 
@@ -314,9 +314,9 @@ public class CustomUserFactory
     {
         var user = await base.CreateUserAsync(account, options);
 
-        if (user.:::no-loc(Identity):::.IsAuthenticated)
+        if (user.Identity.IsAuthenticated)
         {
-            var identity = (Claims:::no-loc(Identity):::)user.:::no-loc(Identity):::;
+            var identity = (ClaimsIdentity)user.Identity;
             var roleClaims = identity.FindAll(identity.RoleClaimType).ToArray();
 
             if (roleClaims != null && roleClaims.Any())
@@ -357,20 +357,20 @@ builder.Services.AddApiAuthorization()
     .AddAccountClaimsPrincipalFactory<CustomUserFactory>();
 ```
 
-<span data-ttu-id="1aa14-209">在應用程式中，在產生器 *`Server`* <xref:Microsoft.AspNetCore.:::no-loc(Identity):::.:::no-loc(Identity):::Builder.AddRoles*> 上呼叫 :::no-loc(Identity)::: ，以新增角色相關服務：</span><span class="sxs-lookup"><span data-stu-id="1aa14-209">In the *`Server`* app, call <xref:Microsoft.AspNetCore.:::no-loc(Identity):::.:::no-loc(Identity):::Builder.AddRoles*> on the :::no-loc(Identity)::: builder, which adds role-related services:</span></span>
+<span data-ttu-id="1aa14-209">在應用程式中，在產生器 *`Server`* <xref:Microsoft.AspNetCore.Identity.IdentityBuilder.AddRoles*> 上呼叫 Identity ，以新增角色相關服務：</span><span class="sxs-lookup"><span data-stu-id="1aa14-209">In the *`Server`* app, call <xref:Microsoft.AspNetCore.Identity.IdentityBuilder.AddRoles*> on the Identity builder, which adds role-related services:</span></span>
 
 ```csharp
-using Microsoft.AspNetCore.:::no-loc(Identity):::;
+using Microsoft.AspNetCore.Identity;
 
 ...
 
-services.AddDefault:::no-loc(Identity):::<ApplicationUser>(options => 
+services.AddDefaultIdentity<ApplicationUser>(options => 
     options.SignIn.RequireConfirmedAccount = true)
-    .AddRoles<:::no-loc(Identity):::Role>()
+    .AddRoles<IdentityRole>()
     .AddEntityFrameworkStores<ApplicationDbContext>();
 ```
 
-### <a name="configure-no-locidentity-server"></a><span data-ttu-id="1aa14-210">設定 :::no-loc(Identity)::: 伺服器</span><span class="sxs-lookup"><span data-stu-id="1aa14-210">Configure :::no-loc(Identity)::: Server</span></span>
+### <a name="configure-no-locidentity-server"></a><span data-ttu-id="1aa14-210">設定 Identity 伺服器</span><span class="sxs-lookup"><span data-stu-id="1aa14-210">Configure Identity Server</span></span>
 
 <span data-ttu-id="1aa14-211">使用下列 **其中一** 種方法：</span><span class="sxs-lookup"><span data-stu-id="1aa14-211">Use **one** of the following approaches:</span></span>
 
@@ -381,20 +381,20 @@ services.AddDefault:::no-loc(Identity):::<ApplicationUser>(options =>
 
 <span data-ttu-id="1aa14-215">在 *`Server`* 應用程式中：</span><span class="sxs-lookup"><span data-stu-id="1aa14-215">In the *`Server`* app:</span></span>
 
-* <span data-ttu-id="1aa14-216">設定 :::no-loc(Identity)::: 伺服器將 `name` 和宣告放 `role` 入識別碼權杖和存取權杖中。</span><span class="sxs-lookup"><span data-stu-id="1aa14-216">Configure :::no-loc(Identity)::: Server to put the `name` and `role` claims into the ID token and access token.</span></span>
+* <span data-ttu-id="1aa14-216">設定 Identity 伺服器將 `name` 和宣告放 `role` 入識別碼權杖和存取權杖中。</span><span class="sxs-lookup"><span data-stu-id="1aa14-216">Configure Identity Server to put the `name` and `role` claims into the ID token and access token.</span></span>
 * <span data-ttu-id="1aa14-217">防止 JWT 權杖處理常式中的角色預設對應。</span><span class="sxs-lookup"><span data-stu-id="1aa14-217">Prevent the default mapping for roles in the JWT token handler.</span></span>
 
 ```csharp
-using System.:::no-loc(Identity):::Model.Tokens.Jwt;
+using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
 
 ...
 
-services.Add:::no-loc(Identity):::Server()
+services.AddIdentityServer()
     .AddApiAuthorization<ApplicationUser, ApplicationDbContext>(options => {
-        options.:::no-loc(Identity):::Resources["openid"].UserClaims.Add("name");
+        options.IdentityResources["openid"].UserClaims.Add("name");
         options.ApiResources.Single().UserClaims.Add("name");
-        options.:::no-loc(Identity):::Resources["openid"].UserClaims.Add("role");
+        options.IdentityResources["openid"].UserClaims.Add("role");
         options.ApiResources.Single().UserClaims.Add("role");
     });
 
@@ -408,9 +408,9 @@ JwtSecurityTokenHandler.DefaultInboundClaimTypeMap.Remove("role");
 <span data-ttu-id="1aa14-220">`ProfileService.cs`:</span><span class="sxs-lookup"><span data-stu-id="1aa14-220">`ProfileService.cs`:</span></span>
 
 ```csharp
-using :::no-loc(Identity):::Model;
-using :::no-loc(Identity):::Server4.Models;
-using :::no-loc(Identity):::Server4.Services;
+using IdentityModel;
+using IdentityServer4.Models;
+using IdentityServer4.Services;
 using System.Threading.Tasks;
 
 public class ProfileService : IProfileService
@@ -440,7 +440,7 @@ public class ProfileService : IProfileService
 <span data-ttu-id="1aa14-221">在 *`Server`* 應用程式中，在中註冊設定檔服務 `Startup.ConfigureServices` ：</span><span class="sxs-lookup"><span data-stu-id="1aa14-221">In the *`Server`* app, register the Profile Service in `Startup.ConfigureServices`:</span></span>
 
 ```csharp
-using :::no-loc(Identity):::Server4.Services;
+using IdentityServer4.Services;
 
 ...
 
@@ -464,21 +464,21 @@ services.AddTransient<IProfileService, ProfileService>();
   }
   ```
 
-<span data-ttu-id="1aa14-229">`User.:::no-loc(Identity):::.Name` 會在 *`Client`* 應用程式中填入使用者的使用者名稱，通常是他們的登入電子郵件地址。</span><span class="sxs-lookup"><span data-stu-id="1aa14-229">`User.:::no-loc(Identity):::.Name` is populated in the *`Client`* app with the user's user name, which is usually their sign-in email address.</span></span>
+<span data-ttu-id="1aa14-229">`User.Identity.Name` 會在 *`Client`* 應用程式中填入使用者的使用者名稱，通常是他們的登入電子郵件地址。</span><span class="sxs-lookup"><span data-stu-id="1aa14-229">`User.Identity.Name` is populated in the *`Client`* app with the user's user name, which is usually their sign-in email address.</span></span>
 
 [!INCLUDE[](~/includes/blazor-security/usermanager-signinmanager.md)]
 
 ## <a name="host-in-azure-app-service-with-a-custom-domain"></a><span data-ttu-id="1aa14-230">使用自訂網域 Azure App Service 中的主機</span><span class="sxs-lookup"><span data-stu-id="1aa14-230">Host in Azure App Service with a custom domain</span></span>
 
-<span data-ttu-id="1aa14-231">下列指導方針說明如何 :::no-loc(Blazor WebAssembly)::: 使用伺服器將託管應用程式部署 :::no-loc(Identity)::: 至與自訂網域 [Azure App Service](https://azure.microsoft.com/services/app-service/) 。</span><span class="sxs-lookup"><span data-stu-id="1aa14-231">The following guidance explains how to deploy a hosted :::no-loc(Blazor WebAssembly)::: app with :::no-loc(Identity)::: Server to [Azure App Service](https://azure.microsoft.com/services/app-service/) with a custom domain.</span></span>
+<span data-ttu-id="1aa14-231">下列指導方針說明如何 Blazor WebAssembly 使用伺服器將託管應用程式部署 Identity 至與自訂網域 [Azure App Service](https://azure.microsoft.com/services/app-service/) 。</span><span class="sxs-lookup"><span data-stu-id="1aa14-231">The following guidance explains how to deploy a hosted Blazor WebAssembly app with Identity Server to [Azure App Service](https://azure.microsoft.com/services/app-service/) with a custom domain.</span></span>
 
-<span data-ttu-id="1aa14-232">在此裝載案例中， **請不要將** 相同的憑證用於 [ :::no-loc(Identity)::: 伺服器的權杖簽署金鑰](https://docs.identityserver.io/en/latest/topics/crypto.html#token-signing-and-validation)和網站與瀏覽器的 HTTPS 安全通訊：</span><span class="sxs-lookup"><span data-stu-id="1aa14-232">For this hosting scenario, do **not** use the same certificate for [:::no-loc(Identity)::: Server's token signing key](https://docs.identityserver.io/en/latest/topics/crypto.html#token-signing-and-validation) and the site's HTTPS secure communication with browsers:</span></span>
+<span data-ttu-id="1aa14-232">在此裝載案例中， **請不要將** 相同的憑證用於 [ Identity 伺服器的權杖簽署金鑰](https://docs.identityserver.io/en/latest/topics/crypto.html#token-signing-and-validation)和網站與瀏覽器的 HTTPS 安全通訊：</span><span class="sxs-lookup"><span data-stu-id="1aa14-232">For this hosting scenario, do **not** use the same certificate for [Identity Server's token signing key](https://docs.identityserver.io/en/latest/topics/crypto.html#token-signing-and-validation) and the site's HTTPS secure communication with browsers:</span></span>
 
 * <span data-ttu-id="1aa14-233">針對這兩個需求使用不同的憑證是很好的安全性作法，因為它會為每個用途隔離私密金鑰。</span><span class="sxs-lookup"><span data-stu-id="1aa14-233">Using different certificates for these two requirements is a good security practice because it isolates private keys for each purpose.</span></span>
-* <span data-ttu-id="1aa14-234">與瀏覽器通訊的 TLS 憑證會獨立管理，而不會影響 :::no-loc(Identity)::: 伺服器的權杖簽署。</span><span class="sxs-lookup"><span data-stu-id="1aa14-234">TLS certificates for communication with browsers is managed independently without affecting :::no-loc(Identity)::: Server's token signing.</span></span>
-* <span data-ttu-id="1aa14-235">當 [Azure Key Vault](https://azure.microsoft.com/services/key-vault/) 提供憑證給自訂網域系結的 App Service 應用程式時， :::no-loc(Identity)::: 伺服器無法從 Azure Key Vault 取得權杖簽署的相同憑證。</span><span class="sxs-lookup"><span data-stu-id="1aa14-235">When [Azure Key Vault](https://azure.microsoft.com/services/key-vault/) supplies a certificate to an App Service app for custom domain binding, :::no-loc(Identity)::: Server can't obtain the same certificate from Azure Key Vault for token signing.</span></span> <span data-ttu-id="1aa14-236">雖然 :::no-loc(Identity)::: 可能會將伺服器設定為使用來自實體路徑的相同 TLS 憑證，但將安全性憑證放入原始檔控制是一種不 **佳的作法，因此在大部分情況下都應該避免** 。</span><span class="sxs-lookup"><span data-stu-id="1aa14-236">Although configuring :::no-loc(Identity)::: Server to use the same TLS certificate from a physical path is possible, placing security certificates into source control is a **poor practice and should be avoided in most scenarios** .</span></span>
+* <span data-ttu-id="1aa14-234">與瀏覽器通訊的 TLS 憑證會獨立管理，而不會影響 Identity 伺服器的權杖簽署。</span><span class="sxs-lookup"><span data-stu-id="1aa14-234">TLS certificates for communication with browsers is managed independently without affecting Identity Server's token signing.</span></span>
+* <span data-ttu-id="1aa14-235">當 [Azure Key Vault](https://azure.microsoft.com/services/key-vault/) 提供憑證給自訂網域系結的 App Service 應用程式時， Identity 伺服器無法從 Azure Key Vault 取得權杖簽署的相同憑證。</span><span class="sxs-lookup"><span data-stu-id="1aa14-235">When [Azure Key Vault](https://azure.microsoft.com/services/key-vault/) supplies a certificate to an App Service app for custom domain binding, Identity Server can't obtain the same certificate from Azure Key Vault for token signing.</span></span> <span data-ttu-id="1aa14-236">雖然 Identity 可能會將伺服器設定為使用來自實體路徑的相同 TLS 憑證，但將安全性憑證放入原始檔控制是一種不 **佳的作法，因此在大部分情況下都應該避免** 。</span><span class="sxs-lookup"><span data-stu-id="1aa14-236">Although configuring Identity Server to use the same TLS certificate from a physical path is possible, placing security certificates into source control is a **poor practice and should be avoided in most scenarios** .</span></span>
 
-<span data-ttu-id="1aa14-237">在下列指引中，只會在 Azure Key Vault 中建立自我簽署憑證，以用於 :::no-loc(Identity)::: 伺服器權杖簽署。</span><span class="sxs-lookup"><span data-stu-id="1aa14-237">In the following guidance, a self-signed certificate is created in Azure Key Vault solely for :::no-loc(Identity)::: Server token signing.</span></span> <span data-ttu-id="1aa14-238">伺服器設定會透過 :::no-loc(Identity)::: 應用程式的 `My`  >  `CurrentUser` 憑證存放區使用金鑰保存庫憑證。</span><span class="sxs-lookup"><span data-stu-id="1aa14-238">The :::no-loc(Identity)::: Server configuration uses the key vault certificate via the app's `My` > `CurrentUser` certificate store.</span></span> <span data-ttu-id="1aa14-239">使用自訂網域的 HTTPS 流量所使用的其他憑證，會與伺服器簽署憑證分開建立和設定 :::no-loc(Identity)::: 。</span><span class="sxs-lookup"><span data-stu-id="1aa14-239">Other certificates used for HTTPS traffic with custom domains are created and configured separately from the :::no-loc(Identity)::: Server signing certificate.</span></span>
+<span data-ttu-id="1aa14-237">在下列指引中，只會在 Azure Key Vault 中建立自我簽署憑證，以用於 Identity 伺服器權杖簽署。</span><span class="sxs-lookup"><span data-stu-id="1aa14-237">In the following guidance, a self-signed certificate is created in Azure Key Vault solely for Identity Server token signing.</span></span> <span data-ttu-id="1aa14-238">伺服器設定會透過 Identity 應用程式的 `My`  >  `CurrentUser` 憑證存放區使用金鑰保存庫憑證。</span><span class="sxs-lookup"><span data-stu-id="1aa14-238">The Identity Server configuration uses the key vault certificate via the app's `My` > `CurrentUser` certificate store.</span></span> <span data-ttu-id="1aa14-239">使用自訂網域的 HTTPS 流量所使用的其他憑證，會與伺服器簽署憑證分開建立和設定 Identity 。</span><span class="sxs-lookup"><span data-stu-id="1aa14-239">Other certificates used for HTTPS traffic with custom domains are created and configured separately from the Identity Server signing certificate.</span></span>
 
 <span data-ttu-id="1aa14-240">若要使用自訂網域和 HTTPS 來設定應用程式、Azure App Service 和 Azure Key Vault 主機：</span><span class="sxs-lookup"><span data-stu-id="1aa14-240">To configure an app, Azure App Service, and Azure Key Vault to host with a custom domain and HTTPS:</span></span>
 
@@ -502,7 +502,7 @@ services.AddTransient<IProfileService, ProfileService>();
    <span data-ttu-id="1aa14-256">如需 Azure Key Vault 憑證的詳細資訊，請參閱 [Azure Key Vault：憑證](/azure/key-vault/certificates/)。</span><span class="sxs-lookup"><span data-stu-id="1aa14-256">For more information on Azure Key Vault certificates, see [Azure Key Vault: Certificates](/azure/key-vault/certificates/).</span></span>
 1. <span data-ttu-id="1aa14-257">建立新的 Azure Key Vault，或在您的 Azure 訂用帳戶中使用現有的金鑰保存庫。</span><span class="sxs-lookup"><span data-stu-id="1aa14-257">Create a new Azure Key Vault or use an existing key vault in your Azure subscription.</span></span>
 1. <span data-ttu-id="1aa14-258">在金鑰保存庫的 [ **憑證** ] 區域中，匯入 PFX 網站憑證。</span><span class="sxs-lookup"><span data-stu-id="1aa14-258">In the key vault's **Certificates** area, import the PFX site certificate.</span></span> <span data-ttu-id="1aa14-259">記錄憑證的憑證指紋，稍後會在應用程式的設定中使用。</span><span class="sxs-lookup"><span data-stu-id="1aa14-259">Record the certificate's thumbprint, which is used in the app's configuration later.</span></span>
-1. <span data-ttu-id="1aa14-260">在 Azure Key Vault 中，為伺服器權杖簽署產生新的自我簽署憑證 :::no-loc(Identity)::: 。</span><span class="sxs-lookup"><span data-stu-id="1aa14-260">In Azure Key Vault, generate a new self-signed certificate for :::no-loc(Identity)::: Server token signing.</span></span> <span data-ttu-id="1aa14-261">提供憑證的 **憑證名稱** 和 **主體** 。</span><span class="sxs-lookup"><span data-stu-id="1aa14-261">Give the certificate a **Certificate Name** and **Subject** .</span></span> <span data-ttu-id="1aa14-262">**主體** 會指定為 `CN={COMMON NAME}` ，其中 `{COMMON NAME}` 預留位置是憑證的一般名稱。</span><span class="sxs-lookup"><span data-stu-id="1aa14-262">The **Subject** is specified as `CN={COMMON NAME}`, where the `{COMMON NAME}` placeholder is the certificate's common name.</span></span> <span data-ttu-id="1aa14-263">一般名稱可以是任何英數位元字串。</span><span class="sxs-lookup"><span data-stu-id="1aa14-263">The common name can be any alphanumeric string.</span></span> <span data-ttu-id="1aa14-264">例如， `CN=:::no-loc(Identity):::ServerSigning` 是有效的憑證 **主體** 。</span><span class="sxs-lookup"><span data-stu-id="1aa14-264">For example, `CN=:::no-loc(Identity):::ServerSigning` is a valid certificate **Subject** .</span></span> <span data-ttu-id="1aa14-265">使用預設的 [ **Advanced Policy Configuration** ] 設定。</span><span class="sxs-lookup"><span data-stu-id="1aa14-265">Use the default **Advanced Policy Configuration** settings.</span></span> <span data-ttu-id="1aa14-266">記錄憑證的憑證指紋，稍後會在應用程式的設定中使用。</span><span class="sxs-lookup"><span data-stu-id="1aa14-266">Record the certificate's thumbprint, which is used in the app's configuration later.</span></span>
+1. <span data-ttu-id="1aa14-260">在 Azure Key Vault 中，為伺服器權杖簽署產生新的自我簽署憑證 Identity 。</span><span class="sxs-lookup"><span data-stu-id="1aa14-260">In Azure Key Vault, generate a new self-signed certificate for Identity Server token signing.</span></span> <span data-ttu-id="1aa14-261">提供憑證的 **憑證名稱** 和 **主體** 。</span><span class="sxs-lookup"><span data-stu-id="1aa14-261">Give the certificate a **Certificate Name** and **Subject** .</span></span> <span data-ttu-id="1aa14-262">**主體** 會指定為 `CN={COMMON NAME}` ，其中 `{COMMON NAME}` 預留位置是憑證的一般名稱。</span><span class="sxs-lookup"><span data-stu-id="1aa14-262">The **Subject** is specified as `CN={COMMON NAME}`, where the `{COMMON NAME}` placeholder is the certificate's common name.</span></span> <span data-ttu-id="1aa14-263">一般名稱可以是任何英數位元字串。</span><span class="sxs-lookup"><span data-stu-id="1aa14-263">The common name can be any alphanumeric string.</span></span> <span data-ttu-id="1aa14-264">例如， `CN=IdentityServerSigning` 是有效的憑證 **主體** 。</span><span class="sxs-lookup"><span data-stu-id="1aa14-264">For example, `CN=IdentityServerSigning` is a valid certificate **Subject** .</span></span> <span data-ttu-id="1aa14-265">使用預設的 [ **Advanced Policy Configuration** ] 設定。</span><span class="sxs-lookup"><span data-stu-id="1aa14-265">Use the default **Advanced Policy Configuration** settings.</span></span> <span data-ttu-id="1aa14-266">記錄憑證的憑證指紋，稍後會在應用程式的設定中使用。</span><span class="sxs-lookup"><span data-stu-id="1aa14-266">Record the certificate's thumbprint, which is used in the app's configuration later.</span></span>
 1. <span data-ttu-id="1aa14-267">流覽至 Azure 入口網站中的 Azure App Service，並使用下列設定建立新的 App Service：</span><span class="sxs-lookup"><span data-stu-id="1aa14-267">Navigate to Azure App Service in the Azure portal and create a new App Service with the following configuration:</span></span>
    * <span data-ttu-id="1aa14-268">**發行** 設定為 `Code` 。</span><span class="sxs-lookup"><span data-stu-id="1aa14-268">**Publish** set to `Code`.</span></span>
    * <span data-ttu-id="1aa14-269">**執行時間堆疊** 設定為應用程式的執行時間。</span><span class="sxs-lookup"><span data-stu-id="1aa14-269">**Runtime stack** set to the app's runtime.</span></span>
@@ -512,7 +512,7 @@ services.AddTransient<IProfileService, ProfileService>();
    * <span data-ttu-id="1aa14-276">值：`57443A552A46DB...D55E28D412B943565,29F43A772CB6AF...1D04F0C67F85FB0B1`</span><span class="sxs-lookup"><span data-stu-id="1aa14-276">Value: `57443A552A46DB...D55E28D412B943565,29F43A772CB6AF...1D04F0C67F85FB0B1`</span></span>
 
    <span data-ttu-id="1aa14-277">在 Azure 入口網站中，儲存應用程式設定有兩個步驟：儲存機 `WEBSITE_LOAD_CERTIFICATES` 碼-值設定，然後選取分頁頂端的 [ **儲存** ] 按鈕。</span><span class="sxs-lookup"><span data-stu-id="1aa14-277">In the Azure portal, saving app settings is a two-step process: Save the `WEBSITE_LOAD_CERTIFICATES` key-value setting, then select the **Save** button at the top of the blade.</span></span>
-1. <span data-ttu-id="1aa14-278">選取應用程式的 **TLS/SSL 設定** 。</span><span class="sxs-lookup"><span data-stu-id="1aa14-278">Select the app's **TLS/SSL settings** .</span></span> <span data-ttu-id="1aa14-279">選取 **私密金鑰憑證 ( .pfx)** 。</span><span class="sxs-lookup"><span data-stu-id="1aa14-279">Select **Private Key Certificates (.pfx)** .</span></span> <span data-ttu-id="1aa14-280">使用匯 **入 Key Vault 憑證** 程式兩次，以匯入網站憑證以進行 HTTPS 通訊和網站的自我簽署 :::no-loc(Identity)::: 伺服器權杖簽署憑證。</span><span class="sxs-lookup"><span data-stu-id="1aa14-280">Use the **Import Key Vault Certificate** process twice to import both the site's certificate for HTTPS communication and the site's self-signed :::no-loc(Identity)::: Server token signing certificate.</span></span>
+1. <span data-ttu-id="1aa14-278">選取應用程式的 **TLS/SSL 設定** 。</span><span class="sxs-lookup"><span data-stu-id="1aa14-278">Select the app's **TLS/SSL settings** .</span></span> <span data-ttu-id="1aa14-279">選取 **私密金鑰憑證 ( .pfx)** 。</span><span class="sxs-lookup"><span data-stu-id="1aa14-279">Select **Private Key Certificates (.pfx)** .</span></span> <span data-ttu-id="1aa14-280">使用匯 **入 Key Vault 憑證** 程式兩次，以匯入網站憑證以進行 HTTPS 通訊和網站的自我簽署 Identity 伺服器權杖簽署憑證。</span><span class="sxs-lookup"><span data-stu-id="1aa14-280">Use the **Import Key Vault Certificate** process twice to import both the site's certificate for HTTPS communication and the site's self-signed Identity Server token signing certificate.</span></span>
 1. <span data-ttu-id="1aa14-281">流覽至 [ **自訂網域** ] 分頁。</span><span class="sxs-lookup"><span data-stu-id="1aa14-281">Navigate to the **Custom domains** blade.</span></span> <span data-ttu-id="1aa14-282">在網域註冊機構的網站上，使用 **IP 位址** 和 **自訂網域驗證識別碼** 來設定網域。</span><span class="sxs-lookup"><span data-stu-id="1aa14-282">At your domain registrar's website, use the **IP address** and **Custom Domain Verification ID** to configure the domain.</span></span> <span data-ttu-id="1aa14-283">一般的網域設定包括：</span><span class="sxs-lookup"><span data-stu-id="1aa14-283">A typical domain configuration includes:</span></span>
    * <span data-ttu-id="1aa14-284">具有 **主機** 的 **a 記錄** `@` ，以及來自 Azure 入口網站之 IP 位址的值。</span><span class="sxs-lookup"><span data-stu-id="1aa14-284">An **A Record** with a **Host** of `@` and a value of the IP address from the Azure portal.</span></span>
    * <span data-ttu-id="1aa14-285">具有 **主機** 的 **TXT 記錄** `asuid` ，以及由 Azure 產生並由 Azure 入口網站提供的驗證識別碼值。</span><span class="sxs-lookup"><span data-stu-id="1aa14-285">A **TXT Record** with a **Host** of `asuid` and the value of the verification ID generated by Azure and provided by the Azure portal.</span></span>
@@ -522,10 +522,10 @@ services.AddTransient<IProfileService, ProfileService>();
 
    <span data-ttu-id="1aa14-293">網域註冊變更可能需要幾天的時間，才能在您的網域註冊機構處理 (DNS) 的網際網路功能變數名稱伺服器。</span><span class="sxs-lookup"><span data-stu-id="1aa14-293">It can take a few days for domain registration changes to propagate across Internet domain name servers (DNS) after they're processed by your domain registrar.</span></span> <span data-ttu-id="1aa14-294">如果未在三個工作天內更新網域記錄，請確認已使用網域註冊機構正確設定記錄，並與客戶支援人員聯繫。</span><span class="sxs-lookup"><span data-stu-id="1aa14-294">If domain records aren't updated within three business days, confirm the records are correctly set with the domain registrar and contact their customer support.</span></span>
 1. <span data-ttu-id="1aa14-295">在 [ **自訂網域** ] 分頁中，會標示網域的 **SSL 狀態** `Not Secure` 。</span><span class="sxs-lookup"><span data-stu-id="1aa14-295">In the **Custom domains** blade, the **SSL STATE** for the domain is marked `Not Secure`.</span></span> <span data-ttu-id="1aa14-296">選取 [ **新增** 系結] 連結。</span><span class="sxs-lookup"><span data-stu-id="1aa14-296">Select the **Add binding** link.</span></span> <span data-ttu-id="1aa14-297">從自訂網域系結的金鑰保存庫中，選取網站 HTTPS 憑證。</span><span class="sxs-lookup"><span data-stu-id="1aa14-297">Select the site HTTPS certificate from the key vault for the custom domain binding.</span></span>
-1. <span data-ttu-id="1aa14-298">在 Visual Studio 中，開啟 *伺服器* 專案的應用程式佈建檔 (`:::no-loc(appsettings.json):::` 或 `appsettings.Production.json`) 。</span><span class="sxs-lookup"><span data-stu-id="1aa14-298">In Visual Studio, open the *Server* project's app settings file (`:::no-loc(appsettings.json):::` or `appsettings.Production.json`).</span></span> <span data-ttu-id="1aa14-299">在 [伺服器設定] 中 :::no-loc(Identity)::: ，新增下列 `Key` 區段。</span><span class="sxs-lookup"><span data-stu-id="1aa14-299">In the :::no-loc(Identity)::: Server configuration, add the following `Key` section.</span></span> <span data-ttu-id="1aa14-300">指定金鑰的自我簽署憑證 **主體** `Name` 。</span><span class="sxs-lookup"><span data-stu-id="1aa14-300">Specify the self-signed certificate **Subject** for the `Name` key.</span></span> <span data-ttu-id="1aa14-301">在下列範例中，在金鑰保存庫中指派的憑證一般名稱是 `:::no-loc(Identity):::ServerSigning` ，它會產生 **Subject** 的主體 `CN=:::no-loc(Identity):::ServerSigning` ：</span><span class="sxs-lookup"><span data-stu-id="1aa14-301">In the following example, the certificate's common name assigned in the key vault is `:::no-loc(Identity):::ServerSigning`, which yields a **Subject** of `CN=:::no-loc(Identity):::ServerSigning`:</span></span>
+1. <span data-ttu-id="1aa14-298">在 Visual Studio 中，開啟 *伺服器* 專案的應用程式佈建檔 (`appsettings.json` 或 `appsettings.Production.json`) 。</span><span class="sxs-lookup"><span data-stu-id="1aa14-298">In Visual Studio, open the *Server* project's app settings file (`appsettings.json` or `appsettings.Production.json`).</span></span> <span data-ttu-id="1aa14-299">在 [伺服器設定] 中 Identity ，新增下列 `Key` 區段。</span><span class="sxs-lookup"><span data-stu-id="1aa14-299">In the Identity Server configuration, add the following `Key` section.</span></span> <span data-ttu-id="1aa14-300">指定金鑰的自我簽署憑證 **主體** `Name` 。</span><span class="sxs-lookup"><span data-stu-id="1aa14-300">Specify the self-signed certificate **Subject** for the `Name` key.</span></span> <span data-ttu-id="1aa14-301">在下列範例中，在金鑰保存庫中指派的憑證一般名稱是 `IdentityServerSigning` ，它會產生 **Subject** 的主體 `CN=IdentityServerSigning` ：</span><span class="sxs-lookup"><span data-stu-id="1aa14-301">In the following example, the certificate's common name assigned in the key vault is `IdentityServerSigning`, which yields a **Subject** of `CN=IdentityServerSigning`:</span></span>
 
    ```json
-   ":::no-loc(Identity):::Server": {
+   "IdentityServer": {
 
      ...
 
@@ -533,7 +533,7 @@ services.AddTransient<IProfileService, ProfileService>();
        "Type": "Store",
        "StoreName": "My",
        "StoreLocation": "CurrentUser",
-       "Name": "CN=:::no-loc(Identity):::ServerSigning"
+       "Name": "CN=IdentityServerSigning"
      }
    },
    ```
@@ -543,9 +543,9 @@ services.AddTransient<IProfileService, ProfileService>();
 
    <span data-ttu-id="1aa14-308">Key vault 服務不需要對預設設定進行任何設定變更。</span><span class="sxs-lookup"><span data-stu-id="1aa14-308">No configuration changes to the default settings are required for the key vault service.</span></span>
 
-   <span data-ttu-id="1aa14-309">基於測試目的，由範本預設設定的應用程式本機 [SQLite](https://www.sqlite.org/index.html) 資料庫， :::no-loc(Blazor)::: 可以與應用程式一起部署，而不需要額外設定。</span><span class="sxs-lookup"><span data-stu-id="1aa14-309">For testing purposes, an app's local [SQLite](https://www.sqlite.org/index.html) database, which is configured by default by the :::no-loc(Blazor)::: template, can be deployed with the app without additional configuration.</span></span> <span data-ttu-id="1aa14-310">:::no-loc(Identity):::在生產環境中為伺服器設定不同的資料庫已超出本文的範圍。</span><span class="sxs-lookup"><span data-stu-id="1aa14-310">Configuring a different database for :::no-loc(Identity)::: Server in production is beyond the scope of this article.</span></span> <span data-ttu-id="1aa14-311">如需詳細資訊，請參閱下列檔集中的資料庫資源：</span><span class="sxs-lookup"><span data-stu-id="1aa14-311">For more information, see the database resources in the following documentation sets:</span></span>
+   <span data-ttu-id="1aa14-309">基於測試目的，由範本預設設定的應用程式本機 [SQLite](https://www.sqlite.org/index.html) 資料庫， Blazor 可以與應用程式一起部署，而不需要額外設定。</span><span class="sxs-lookup"><span data-stu-id="1aa14-309">For testing purposes, an app's local [SQLite](https://www.sqlite.org/index.html) database, which is configured by default by the Blazor template, can be deployed with the app without additional configuration.</span></span> <span data-ttu-id="1aa14-310">Identity在生產環境中為伺服器設定不同的資料庫已超出本文的範圍。</span><span class="sxs-lookup"><span data-stu-id="1aa14-310">Configuring a different database for Identity Server in production is beyond the scope of this article.</span></span> <span data-ttu-id="1aa14-311">如需詳細資訊，請參閱下列檔集中的資料庫資源：</span><span class="sxs-lookup"><span data-stu-id="1aa14-311">For more information, see the database resources in the following documentation sets:</span></span>
    * [<span data-ttu-id="1aa14-312">App Service</span><span class="sxs-lookup"><span data-stu-id="1aa14-312">App Service</span></span>](/azure/app-service/)
-   * [<span data-ttu-id="1aa14-313">:::no-loc(Identity)::: 伺服器</span><span class="sxs-lookup"><span data-stu-id="1aa14-313">:::no-loc(Identity)::: Server</span></span>](https://identityserver4.readthedocs.io/en/latest/)
+   * [<span data-ttu-id="1aa14-313">Identity 伺服器</span><span class="sxs-lookup"><span data-stu-id="1aa14-313">Identity Server</span></span>](https://identityserver4.readthedocs.io/en/latest/)
 
 1. <span data-ttu-id="1aa14-314">在視窗頂端的 [部署設定檔名稱] 底下，選取 [ **編輯** ] 連結。</span><span class="sxs-lookup"><span data-stu-id="1aa14-314">Select the **Edit** link under the deployment profile name at the top of the window.</span></span> <span data-ttu-id="1aa14-315">將目的地 URL 變更為網站的自訂網域 URL (例如 `https://www.contoso.com`) 。</span><span class="sxs-lookup"><span data-stu-id="1aa14-315">Change the destination URL to the site's custom domain URL (for example, `https://www.contoso.com`).</span></span> <span data-ttu-id="1aa14-316">儲存設定。</span><span class="sxs-lookup"><span data-stu-id="1aa14-316">Save the settings.</span></span>
 1. <span data-ttu-id="1aa14-317">發行應用程式。</span><span class="sxs-lookup"><span data-stu-id="1aa14-317">Publish the app.</span></span> <span data-ttu-id="1aa14-318">Visual Studio 會開啟瀏覽器視窗，並在其自訂網域要求網站。</span><span class="sxs-lookup"><span data-stu-id="1aa14-318">Visual Studio opens a browser window and requests the site at its custom domain.</span></span>
@@ -557,7 +557,7 @@ services.AddTransient<IProfileService, ProfileService>();
 * [<span data-ttu-id="1aa14-323">在 Azure App Service 中使用 TLS/SSL 繫結保護自訂 DNS 名稱</span><span class="sxs-lookup"><span data-stu-id="1aa14-323">Secure a custom DNS name with a TLS/SSL binding in Azure App Service</span></span>](/azure/app-service/configure-ssl-bindings)
 * [<span data-ttu-id="1aa14-324">Azure 金鑰保存庫</span><span class="sxs-lookup"><span data-stu-id="1aa14-324">Azure Key Vault</span></span>](/azure/key-vault/)
 
-<span data-ttu-id="1aa14-325">建議您在變更應用程式、應用程式設定或 Azure 入口網站中的 Azure 服務之後，針對每個應用程式測試回合使用新的私用或 incognito 瀏覽器視窗。</span><span class="sxs-lookup"><span data-stu-id="1aa14-325">We recommend using a new in-private or incognito browser window for each app test run after a change to the app, app configuration, or Azure services in the Azure portal.</span></span> <span data-ttu-id="1aa14-326">先前測試回合的延遲 :::no-loc(cookie)::: 時間可能會導致在測試網站時驗證或授權失敗，即使網站的設定正確也一樣。</span><span class="sxs-lookup"><span data-stu-id="1aa14-326">Lingering :::no-loc(cookie):::s from a previous test run can result in failed authentication or authorization when testing the site even when the site's configuration is correct.</span></span> <span data-ttu-id="1aa14-327">如需如何設定 Visual Studio 以針對每個測試回合開啟新的私用或 incognito 瀏覽器視窗的詳細資訊，請參閱[ :::no-loc(Cookie)::: s 和網站資料](#:::no-loc(cookie):::s-and-site-data)一節。</span><span class="sxs-lookup"><span data-stu-id="1aa14-327">For more information on how to configure Visual Studio to open a new in-private or incognito browser window for each test run, see the [:::no-loc(Cookie):::s and site data](#:::no-loc(cookie):::s-and-site-data) section.</span></span>
+<span data-ttu-id="1aa14-325">建議您在變更應用程式、應用程式設定或 Azure 入口網站中的 Azure 服務之後，針對每個應用程式測試回合使用新的私用或 incognito 瀏覽器視窗。</span><span class="sxs-lookup"><span data-stu-id="1aa14-325">We recommend using a new in-private or incognito browser window for each app test run after a change to the app, app configuration, or Azure services in the Azure portal.</span></span> <span data-ttu-id="1aa14-326">先前測試回合的延遲 cookie 時間可能會導致在測試網站時驗證或授權失敗，即使網站的設定正確也一樣。</span><span class="sxs-lookup"><span data-stu-id="1aa14-326">Lingering cookies from a previous test run can result in failed authentication or authorization when testing the site even when the site's configuration is correct.</span></span> <span data-ttu-id="1aa14-327">如需如何設定 Visual Studio 以針對每個測試回合開啟新的私用或 incognito 瀏覽器視窗的詳細資訊，請參閱[ Cookie s 和網站資料](#cookies-and-site-data)一節。</span><span class="sxs-lookup"><span data-stu-id="1aa14-327">For more information on how to configure Visual Studio to open a new in-private or incognito browser window for each test run, see the [Cookies and site data](#cookies-and-site-data) section.</span></span>
 
 <span data-ttu-id="1aa14-328">當 Azure 入口網站中的 App Service 設定變更時，更新通常會快速生效但不會立即生效。</span><span class="sxs-lookup"><span data-stu-id="1aa14-328">When App Service configuration is changed in the Azure portal, the updates generally take effect quickly but aren't instant.</span></span> <span data-ttu-id="1aa14-329">有時候，您必須等候一小段時間，才能讓 App Service 重新開機，設定變更才會生效。</span><span class="sxs-lookup"><span data-stu-id="1aa14-329">Sometimes, you must wait a short period for an App Service to restart in order for a configuration change to take effect.</span></span>
 

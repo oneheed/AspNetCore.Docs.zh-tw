@@ -1,21 +1,21 @@
 ---
-title: '第7部分： :::no-loc(Razor)::: ASP.NET Core 更新相關資料中有 EF Core 的頁面'
+title: '第7部分： Razor ASP.NET Core 更新相關資料中有 EF Core 的頁面'
 author: rick-anderson
-description: '第 7 :::no-loc(Razor)::: 頁和 Entity Framework 教學課程系列。'
+description: '第 7 Razor 頁和 Entity Framework 教學課程系列。'
 ms.author: riande
 ms.date: 07/22/2019
 no-loc:
-- ':::no-loc(appsettings.json):::'
-- ':::no-loc(ASP.NET Core Identity):::'
-- ':::no-loc(cookie):::'
-- ':::no-loc(Cookie):::'
-- ':::no-loc(Blazor):::'
-- ':::no-loc(Blazor Server):::'
-- ':::no-loc(Blazor WebAssembly):::'
-- ':::no-loc(Identity):::'
-- ":::no-loc(Let's Encrypt):::"
-- ':::no-loc(Razor):::'
-- ':::no-loc(SignalR):::'
+- 'appsettings.json'
+- 'ASP.NET Core Identity'
+- 'cookie'
+- 'Cookie'
+- 'Blazor'
+- 'Blazor Server'
+- 'Blazor WebAssembly'
+- 'Identity'
+- "Let's Encrypt"
+- 'Razor'
+- 'SignalR'
 uid: data/ef-rp/update-related-data
 ms.openlocfilehash: 3ec88a862697c540a1a98e733c31d76922f81f7c
 ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
@@ -24,7 +24,7 @@ ms.contentlocale: zh-TW
 ms.lasthandoff: 10/30/2020
 ms.locfileid: "93060530"
 ---
-# <a name="part-7-no-locrazor-pages-with-ef-core-in-aspnet-core---update-related-data"></a><span data-ttu-id="8a9bc-103">第7部分： :::no-loc(Razor)::: ASP.NET Core 更新相關資料中有 EF Core 的頁面</span><span class="sxs-lookup"><span data-stu-id="8a9bc-103">Part 7, :::no-loc(Razor)::: Pages with EF Core in ASP.NET Core - Update Related Data</span></span>
+# <a name="part-7-no-locrazor-pages-with-ef-core-in-aspnet-core---update-related-data"></a><span data-ttu-id="8a9bc-103">第7部分： Razor ASP.NET Core 更新相關資料中有 EF Core 的頁面</span><span class="sxs-lookup"><span data-stu-id="8a9bc-103">Part 7, Razor Pages with EF Core in ASP.NET Core - Update Related Data</span></span>
 
 <span data-ttu-id="8a9bc-104">由 [Tom Dykstra](https://github.com/tdykstra)和 [Rick Anderson](https://twitter.com/RickAndMSFT)</span><span class="sxs-lookup"><span data-stu-id="8a9bc-104">By [Tom Dykstra](https://github.com/tdykstra), and [Rick Anderson](https://twitter.com/RickAndMSFT)</span></span>
 
@@ -68,9 +68,9 @@ ms.locfileid: "93060530"
 
 * <span data-ttu-id="8a9bc-125">衍生自 `DepartmentNamePageModel`。</span><span class="sxs-lookup"><span data-stu-id="8a9bc-125">Derives from `DepartmentNamePageModel`.</span></span>
 * <span data-ttu-id="8a9bc-126">使用 `TryUpdateModelAsync` 來防止[大量指派](xref:data/ef-rp/crud#overposting) (overposting)。</span><span class="sxs-lookup"><span data-stu-id="8a9bc-126">Uses `TryUpdateModelAsync` to prevent [overposting](xref:data/ef-rp/crud#overposting).</span></span>
-* <span data-ttu-id="8a9bc-127">移除 `ViewData["DepartmentID"]`。</span><span class="sxs-lookup"><span data-stu-id="8a9bc-127">Removes `ViewData["DepartmentID"]`.</span></span> <span data-ttu-id="8a9bc-128">`DepartmentNameSL` 基類是強型別模型，而且會由 :::no-loc(Razor)::: 頁面使用。</span><span class="sxs-lookup"><span data-stu-id="8a9bc-128">`DepartmentNameSL` from the base class is a strongly typed model and will be used by the :::no-loc(Razor)::: page.</span></span> <span data-ttu-id="8a9bc-129">強型別的模型優先於弱型別。</span><span class="sxs-lookup"><span data-stu-id="8a9bc-129">Strongly typed models are preferred over weakly typed.</span></span> <span data-ttu-id="8a9bc-130">如需詳細資訊，請參閱[弱型別資料 (ViewData 和 ViewBag)](xref:mvc/views/overview#VD_VB)。</span><span class="sxs-lookup"><span data-stu-id="8a9bc-130">For more information, see [Weakly typed data (ViewData and ViewBag)](xref:mvc/views/overview#VD_VB).</span></span>
+* <span data-ttu-id="8a9bc-127">移除 `ViewData["DepartmentID"]`。</span><span class="sxs-lookup"><span data-stu-id="8a9bc-127">Removes `ViewData["DepartmentID"]`.</span></span> <span data-ttu-id="8a9bc-128">`DepartmentNameSL` 基類是強型別模型，而且會由 Razor 頁面使用。</span><span class="sxs-lookup"><span data-stu-id="8a9bc-128">`DepartmentNameSL` from the base class is a strongly typed model and will be used by the Razor page.</span></span> <span data-ttu-id="8a9bc-129">強型別的模型優先於弱型別。</span><span class="sxs-lookup"><span data-stu-id="8a9bc-129">Strongly typed models are preferred over weakly typed.</span></span> <span data-ttu-id="8a9bc-130">如需詳細資訊，請參閱[弱型別資料 (ViewData 和 ViewBag)](xref:mvc/views/overview#VD_VB)。</span><span class="sxs-lookup"><span data-stu-id="8a9bc-130">For more information, see [Weakly typed data (ViewData and ViewBag)](xref:mvc/views/overview#VD_VB).</span></span>
 
-### <a name="update-the-course-create-no-locrazor-page"></a><span data-ttu-id="8a9bc-131">更新課程的 [建立] :::no-loc(Razor)::: 頁面</span><span class="sxs-lookup"><span data-stu-id="8a9bc-131">Update the Course Create :::no-loc(Razor)::: page</span></span>
+### <a name="update-the-course-create-no-locrazor-page"></a><span data-ttu-id="8a9bc-131">更新課程的 [建立] Razor 頁面</span><span class="sxs-lookup"><span data-stu-id="8a9bc-131">Update the Course Create Razor page</span></span>
 
 <span data-ttu-id="8a9bc-132">使用下列程式碼更新 *Pages/Courses/Create.cshtml* ：</span><span class="sxs-lookup"><span data-stu-id="8a9bc-132">Update *Pages/Courses/Create.cshtml* with the following code:</span></span>
 
@@ -83,7 +83,7 @@ ms.locfileid: "93060530"
 * <span data-ttu-id="8a9bc-136">新增 [選取部門] 選項。</span><span class="sxs-lookup"><span data-stu-id="8a9bc-136">Adds the "Select Department" option.</span></span> <span data-ttu-id="8a9bc-137">此變更會在尚未選取任何部門時，在下拉式清單中轉譯「選取部門」而非第一個部門。</span><span class="sxs-lookup"><span data-stu-id="8a9bc-137">This change renders "Select Department" in the drop-down when no department has been selected yet, rather than the first department.</span></span>
 * <span data-ttu-id="8a9bc-138">未選取部門時，請新增驗證訊息。</span><span class="sxs-lookup"><span data-stu-id="8a9bc-138">Adds a validation message when the department isn't selected.</span></span>
 
-<span data-ttu-id="8a9bc-139">此 :::no-loc(Razor)::: 頁面會使用 [選取標記](xref:mvc/views/working-with-forms#the-select-tag-helper)協助程式：</span><span class="sxs-lookup"><span data-stu-id="8a9bc-139">The :::no-loc(Razor)::: Page uses the [Select Tag Helper](xref:mvc/views/working-with-forms#the-select-tag-helper):</span></span>
+<span data-ttu-id="8a9bc-139">此 Razor 頁面會使用 [選取標記](xref:mvc/views/working-with-forms#the-select-tag-helper)協助程式：</span><span class="sxs-lookup"><span data-stu-id="8a9bc-139">The Razor Page uses the [Select Tag Helper](xref:mvc/views/working-with-forms#the-select-tag-helper):</span></span>
 
 [!code-cshtml[](intro/samples/cu/Pages/Courses/Create.cshtml?range=28-35&highlight=3-6)]
 
@@ -97,7 +97,7 @@ ms.locfileid: "93060530"
 
 <span data-ttu-id="8a9bc-144">這些變更類似於 *Create* 頁面模型中所做的變更。</span><span class="sxs-lookup"><span data-stu-id="8a9bc-144">The changes are similar to those made in the Create page model.</span></span> <span data-ttu-id="8a9bc-145">在上述程式碼中，`PopulateDepartmentsDropDownList` 會傳遞部門識別碼，其在下拉式清單中選取部門。</span><span class="sxs-lookup"><span data-stu-id="8a9bc-145">In the preceding code, `PopulateDepartmentsDropDownList` passes in the department ID, which selects that department in the drop-down list.</span></span>
 
-### <a name="update-the-course-edit-no-locrazor-page"></a><span data-ttu-id="8a9bc-146">更新課程的 [編輯] :::no-loc(Razor)::: 頁面</span><span class="sxs-lookup"><span data-stu-id="8a9bc-146">Update the Course Edit :::no-loc(Razor)::: page</span></span>
+### <a name="update-the-course-edit-no-locrazor-page"></a><span data-ttu-id="8a9bc-146">更新課程的 [編輯] Razor 頁面</span><span class="sxs-lookup"><span data-stu-id="8a9bc-146">Update the Course Edit Razor page</span></span>
 
 <span data-ttu-id="8a9bc-147">使用下列程式碼更新 *Pages/Courses/Edit.cshtml* ：</span><span class="sxs-lookup"><span data-stu-id="8a9bc-147">Update *Pages/Courses/Edit.cshtml* with the following code:</span></span>
 
@@ -125,7 +125,7 @@ ms.locfileid: "93060530"
 
 [!code-csharp[](intro/samples/cu30/Pages/Courses/Details.cshtml.cs?highlight=28)]
 
-### <a name="update-the-course-no-locrazor-pages"></a><span data-ttu-id="8a9bc-163">更新課程 :::no-loc(Razor)::: 頁面</span><span class="sxs-lookup"><span data-stu-id="8a9bc-163">Update the Course :::no-loc(Razor)::: pages</span></span>
+### <a name="update-the-course-no-locrazor-pages"></a><span data-ttu-id="8a9bc-163">更新課程 Razor 頁面</span><span class="sxs-lookup"><span data-stu-id="8a9bc-163">Update the Course Razor pages</span></span>
 
 <span data-ttu-id="8a9bc-164">使用下列程式碼更新 *Pages/Courses/Delete.cshtml* ：</span><span class="sxs-lookup"><span data-stu-id="8a9bc-164">Update *Pages/Courses/Delete.cshtml* with the following code:</span></span>
 
@@ -163,7 +163,7 @@ ms.locfileid: "93060530"
 
 <span data-ttu-id="8a9bc-184">`InstructorCoursesPageModel` 是您將用於 *Edit* 和 *Create* 頁面模型的基底類別。</span><span class="sxs-lookup"><span data-stu-id="8a9bc-184">The `InstructorCoursesPageModel` is the base class you will use for the Edit and Create page models.</span></span> <span data-ttu-id="8a9bc-185">`PopulateAssignedCourseData` 會讀取所有 `Course` 實體來擴展 `AssignedCourseDataList`。</span><span class="sxs-lookup"><span data-stu-id="8a9bc-185">`PopulateAssignedCourseData` reads all `Course` entities to populate `AssignedCourseDataList`.</span></span> <span data-ttu-id="8a9bc-186">對於每個課程，此程式碼設定 `CourseID`、標題以及是否將講師指派給課程。</span><span class="sxs-lookup"><span data-stu-id="8a9bc-186">For each course, the code sets the `CourseID`, title, and whether or not the instructor is assigned to the course.</span></span> <span data-ttu-id="8a9bc-187">[HashSet](/dotnet/api/system.collections.generic.hashset-1) 會用來進行有效率的查閱。</span><span class="sxs-lookup"><span data-stu-id="8a9bc-187">A [HashSet](/dotnet/api/system.collections.generic.hashset-1) is used for efficient lookups.</span></span>
 
-<span data-ttu-id="8a9bc-188">因為 :::no-loc(Razor)::: 頁面沒有課程實體的集合，所以模型系結器無法自動更新 `CourseAssignments` 導覽屬性。</span><span class="sxs-lookup"><span data-stu-id="8a9bc-188">Since the :::no-loc(Razor)::: page doesn't have a collection of Course entities, the model binder can't automatically update the `CourseAssignments` navigation property.</span></span> <span data-ttu-id="8a9bc-189">相較於使用模型繫結器更新 `CourseAssignments` 導覽屬性，您會在新的 `UpdateInstructorCourses` 方法中進行相同的操作。</span><span class="sxs-lookup"><span data-stu-id="8a9bc-189">Instead of using the model binder to update the `CourseAssignments` navigation property, you do that in the new `UpdateInstructorCourses` method.</span></span> <span data-ttu-id="8a9bc-190">因此您必須從模型繫結器中排除 `CourseAssignments` 屬性。</span><span class="sxs-lookup"><span data-stu-id="8a9bc-190">Therefore you need to exclude the `CourseAssignments` property from model binding.</span></span> <span data-ttu-id="8a9bc-191">這並不需要對呼叫的程式碼進行任何變更， `TryUpdateModel` 因為您是使用具有宣告屬性的多載，而 `CourseAssignments` 不是在包含清單中。</span><span class="sxs-lookup"><span data-stu-id="8a9bc-191">This doesn't require any change to the code that calls `TryUpdateModel` because you're using the overload with declared properties and `CourseAssignments` isn't in the include list.</span></span>
+<span data-ttu-id="8a9bc-188">因為 Razor 頁面沒有課程實體的集合，所以模型系結器無法自動更新 `CourseAssignments` 導覽屬性。</span><span class="sxs-lookup"><span data-stu-id="8a9bc-188">Since the Razor page doesn't have a collection of Course entities, the model binder can't automatically update the `CourseAssignments` navigation property.</span></span> <span data-ttu-id="8a9bc-189">相較於使用模型繫結器更新 `CourseAssignments` 導覽屬性，您會在新的 `UpdateInstructorCourses` 方法中進行相同的操作。</span><span class="sxs-lookup"><span data-stu-id="8a9bc-189">Instead of using the model binder to update the `CourseAssignments` navigation property, you do that in the new `UpdateInstructorCourses` method.</span></span> <span data-ttu-id="8a9bc-190">因此您必須從模型繫結器中排除 `CourseAssignments` 屬性。</span><span class="sxs-lookup"><span data-stu-id="8a9bc-190">Therefore you need to exclude the `CourseAssignments` property from model binding.</span></span> <span data-ttu-id="8a9bc-191">這並不需要對呼叫的程式碼進行任何變更， `TryUpdateModel` 因為您是使用具有宣告屬性的多載，而 `CourseAssignments` 不是在包含清單中。</span><span class="sxs-lookup"><span data-stu-id="8a9bc-191">This doesn't require any change to the code that calls `TryUpdateModel` because you're using the overload with declared properties and `CourseAssignments` isn't in the include list.</span></span>
 
 <span data-ttu-id="8a9bc-192">若沒有選取任何核取方塊，`UpdateInstructorCourses` 中的程式碼會使用空集合初始化 `CourseAssignments` 導覽屬性並傳回：</span><span class="sxs-lookup"><span data-stu-id="8a9bc-192">If no check boxes were selected, the code in `UpdateInstructorCourses` initializes the `CourseAssignments` navigation property with an empty collection and returns:</span></span>
 
@@ -202,7 +202,7 @@ ms.locfileid: "93060530"
 * <span data-ttu-id="8a9bc-212">在 `OnPostAsync` 中呼叫 `UpdateInstructorCourses` 來將核取方塊的資訊套用到正在編輯的 Instructor 實體。</span><span class="sxs-lookup"><span data-stu-id="8a9bc-212">Calls `UpdateInstructorCourses` in `OnPostAsync` to apply information from the checkboxes to the Instructor entity being edited.</span></span>
 * <span data-ttu-id="8a9bc-213">若 `TryUpdateModel` 失敗，則在 `OnPostAsync` 中呼叫 `PopulateAssignedCourseData` 和 `UpdateInstructorCourses`。</span><span class="sxs-lookup"><span data-stu-id="8a9bc-213">Calls `PopulateAssignedCourseData` and `UpdateInstructorCourses` in `OnPostAsync` if `TryUpdateModel` fails.</span></span> <span data-ttu-id="8a9bc-214">這些方法呼叫會在重新顯示並附帶錯誤訊息時，還原在頁面上輸入的已指派課程資料。</span><span class="sxs-lookup"><span data-stu-id="8a9bc-214">These method calls restore the assigned course data entered on the page when it is redisplayed with an error message.</span></span>
 
-### <a name="update-the-instructor-edit-no-locrazor-page"></a><span data-ttu-id="8a9bc-215">更新講師 [編輯] :::no-loc(Razor)::: 頁面</span><span class="sxs-lookup"><span data-stu-id="8a9bc-215">Update the Instructor Edit :::no-loc(Razor)::: page</span></span>
+### <a name="update-the-instructor-edit-no-locrazor-page"></a><span data-ttu-id="8a9bc-215">更新講師 [編輯] Razor 頁面</span><span class="sxs-lookup"><span data-stu-id="8a9bc-215">Update the Instructor Edit Razor page</span></span>
 
 <span data-ttu-id="8a9bc-216">使用下列程式碼更新 *Pages/Instructors/Edit.cshtml* ：</span><span class="sxs-lookup"><span data-stu-id="8a9bc-216">Update *Pages/Instructors/Edit.cshtml* with the following code:</span></span>
 
@@ -218,7 +218,7 @@ ms.locfileid: "93060530"
 
 ### <a name="update-the-instructor-create-page"></a><span data-ttu-id="8a9bc-229">更新 Instructor Create 頁面</span><span class="sxs-lookup"><span data-stu-id="8a9bc-229">Update the Instructor Create page</span></span>
 
-<span data-ttu-id="8a9bc-230">使用與編輯頁面類似的程式碼，更新講師建立頁面模型和 :::no-loc(Razor)::: 頁面：</span><span class="sxs-lookup"><span data-stu-id="8a9bc-230">Update the Instructor Create page model and :::no-loc(Razor)::: page with code similar to the Edit page:</span></span>
+<span data-ttu-id="8a9bc-230">使用與編輯頁面類似的程式碼，更新講師建立頁面模型和 Razor 頁面：</span><span class="sxs-lookup"><span data-stu-id="8a9bc-230">Update the Instructor Create page model and Razor page with code similar to the Edit page:</span></span>
 
 [!code-csharp[](intro/samples/cu30/Pages/Instructors/Create.cshtml.cs)]
 
@@ -302,7 +302,7 @@ ms.locfileid: "93060530"
 * <span data-ttu-id="8a9bc-277">新增 [選取部門] 選項。</span><span class="sxs-lookup"><span data-stu-id="8a9bc-277">Adds the "Select Department" option.</span></span> <span data-ttu-id="8a9bc-278">這項變更會呈現 [選取部門] ，而不是第一個部門。</span><span class="sxs-lookup"><span data-stu-id="8a9bc-278">This change renders "Select Department" rather than the first department.</span></span>
 * <span data-ttu-id="8a9bc-279">未選取部門時，請新增驗證訊息。</span><span class="sxs-lookup"><span data-stu-id="8a9bc-279">Adds a validation message when the department isn't selected.</span></span>
 
-<span data-ttu-id="8a9bc-280">此 :::no-loc(Razor)::: 頁面會使用 [選取標記](xref:mvc/views/working-with-forms#the-select-tag-helper)協助程式：</span><span class="sxs-lookup"><span data-stu-id="8a9bc-280">The :::no-loc(Razor)::: Page uses the [Select Tag Helper](xref:mvc/views/working-with-forms#the-select-tag-helper):</span></span>
+<span data-ttu-id="8a9bc-280">此 Razor 頁面會使用 [選取標記](xref:mvc/views/working-with-forms#the-select-tag-helper)協助程式：</span><span class="sxs-lookup"><span data-stu-id="8a9bc-280">The Razor Page uses the [Select Tag Helper](xref:mvc/views/working-with-forms#the-select-tag-helper):</span></span>
 
 [!code-cshtml[](intro/samples/cu/Pages/Courses/Create.cshtml?range=28-35&highlight=3-6)]
 
@@ -342,7 +342,7 @@ ms.locfileid: "93060530"
 
 ### <a name="modify-the-delete-and-details-pages"></a><span data-ttu-id="8a9bc-305">修改 *Delete* 和 *Details* 頁面</span><span class="sxs-lookup"><span data-stu-id="8a9bc-305">Modify the Delete and Details pages</span></span>
 
-<span data-ttu-id="8a9bc-306">以下列標記更新 [刪除] :::no-loc(Razor)::: 頁面：</span><span class="sxs-lookup"><span data-stu-id="8a9bc-306">Update the Delete :::no-loc(Razor)::: page with the following markup:</span></span>
+<span data-ttu-id="8a9bc-306">以下列標記更新 [刪除] Razor 頁面：</span><span class="sxs-lookup"><span data-stu-id="8a9bc-306">Update the Delete Razor page with the following markup:</span></span>
 
 [!code-cshtml[](intro/samples/cu/Pages/Courses/Delete.cshtml?highlight=15-20)]
 
@@ -417,7 +417,7 @@ ms.locfileid: "93060530"
 
 <span data-ttu-id="8a9bc-353">上述程式碼會處理辦公室指派變更。</span><span class="sxs-lookup"><span data-stu-id="8a9bc-353">The preceding code handles office assignment changes.</span></span>
 
-<span data-ttu-id="8a9bc-354">更新講師 :::no-loc(Razor)::: 觀點：</span><span class="sxs-lookup"><span data-stu-id="8a9bc-354">Update the instructor :::no-loc(Razor)::: View:</span></span>
+<span data-ttu-id="8a9bc-354">更新講師 Razor 觀點：</span><span class="sxs-lookup"><span data-stu-id="8a9bc-354">Update the instructor Razor View:</span></span>
 
 [!code-cshtml[](intro/samples/cu/Pages/Instructors/Edit.cshtml?highlight=34-59)]
 
@@ -441,7 +441,7 @@ ms.locfileid: "93060530"
 
 <span data-ttu-id="8a9bc-375">上述程式碼類似於 *Pages/Instructors/Edit.cshtml.cs* 程式碼。</span><span class="sxs-lookup"><span data-stu-id="8a9bc-375">The preceding code is similar to the *Pages/Instructors/Edit.cshtml.cs* code.</span></span>
 
-<span data-ttu-id="8a9bc-376">:::no-loc(Razor):::以下列標記更新講師建立頁面：</span><span class="sxs-lookup"><span data-stu-id="8a9bc-376">Update the instructor Create :::no-loc(Razor)::: page with the following markup:</span></span>
+<span data-ttu-id="8a9bc-376">Razor以下列標記更新講師建立頁面：</span><span class="sxs-lookup"><span data-stu-id="8a9bc-376">Update the instructor Create Razor page with the following markup:</span></span>
 
 [!code-cshtml[](intro/samples/cu/Pages/Instructors/Create.cshtml?highlight=32-62)]
 

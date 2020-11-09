@@ -7,17 +7,17 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 10/03/2019
 no-loc:
-- ':::no-loc(appsettings.json):::'
-- ':::no-loc(ASP.NET Core Identity):::'
-- ':::no-loc(cookie):::'
-- ':::no-loc(Cookie):::'
-- ':::no-loc(Blazor):::'
-- ':::no-loc(Blazor Server):::'
-- ':::no-loc(Blazor WebAssembly):::'
-- ':::no-loc(Identity):::'
-- ":::no-loc(Let's Encrypt):::"
-- ':::no-loc(Razor):::'
-- ':::no-loc(SignalR):::'
+- 'appsettings.json'
+- 'ASP.NET Core Identity'
+- 'cookie'
+- 'Cookie'
+- 'Blazor'
+- 'Blazor Server'
+- 'Blazor WebAssembly'
+- 'Identity'
+- "Let's Encrypt"
+- 'Razor'
+- 'SignalR'
 uid: tutorials/publish-to-iis
 ms.openlocfilehash: b3c714ea8e741430df1f70b2df258f1e8f1c7ad5
 ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
@@ -76,11 +76,11 @@ ms.locfileid: "93060504"
 
 1. <span data-ttu-id="4fc34-144">確認處理序模型身分識別具有適當的權限。</span><span class="sxs-lookup"><span data-stu-id="4fc34-144">Confirm the process model identity has the proper permissions.</span></span>
 
-   <span data-ttu-id="4fc34-145">如果應用程式集區的預設身分識別 ( **進程模型**  >  **:::no-loc(Identity):::** ) 已從變更 `ApplicationPool:::no-loc(Identity):::` 為其他身分識別，請確認新的身分識別具有存取應用程式資料夾、資料庫和其他必要資源的必要許可權。</span><span class="sxs-lookup"><span data-stu-id="4fc34-145">If the default identity of the app pool ( **Process Model** > **:::no-loc(Identity):::** ) is changed from `ApplicationPool:::no-loc(Identity):::` to another identity, verify that the new identity has the required permissions to access the app's folder, database, and other required resources.</span></span> <span data-ttu-id="4fc34-146">例如，應用程式集區需要針對應用程式讀取和寫入檔案的資料夾取得讀取和寫入權限。</span><span class="sxs-lookup"><span data-stu-id="4fc34-146">For example, the app pool requires read and write access to folders where the app reads and writes files.</span></span>
+   <span data-ttu-id="4fc34-145">如果應用程式集區的預設身分識別 ( **進程模型**  >  **Identity** ) 已從變更 `ApplicationPoolIdentity` 為其他身分識別，請確認新的身分識別具有存取應用程式資料夾、資料庫和其他必要資源的必要許可權。</span><span class="sxs-lookup"><span data-stu-id="4fc34-145">If the default identity of the app pool ( **Process Model** > **Identity** ) is changed from `ApplicationPoolIdentity` to another identity, verify that the new identity has the required permissions to access the app's folder, database, and other required resources.</span></span> <span data-ttu-id="4fc34-146">例如，應用程式集區需要針對應用程式讀取和寫入檔案的資料夾取得讀取和寫入權限。</span><span class="sxs-lookup"><span data-stu-id="4fc34-146">For example, the app pool requires read and write access to folders where the app reads and writes files.</span></span>
 
-## <a name="create-an-aspnet-core-no-locrazor-pages-app"></a><span data-ttu-id="4fc34-147">建立 ASP.NET Core :::no-loc(Razor)::: 頁面應用程式</span><span class="sxs-lookup"><span data-stu-id="4fc34-147">Create an ASP.NET Core :::no-loc(Razor)::: Pages app</span></span>
+## <a name="create-an-aspnet-core-no-locrazor-pages-app"></a><span data-ttu-id="4fc34-147">建立 ASP.NET Core Razor 頁面應用程式</span><span class="sxs-lookup"><span data-stu-id="4fc34-147">Create an ASP.NET Core Razor Pages app</span></span>
 
-<span data-ttu-id="4fc34-148">遵循 <xref:getting-started> 教學課程來建立 :::no-loc(Razor)::: 頁面應用程式。</span><span class="sxs-lookup"><span data-stu-id="4fc34-148">Follow the <xref:getting-started> tutorial to create a :::no-loc(Razor)::: Pages app.</span></span>
+<span data-ttu-id="4fc34-148">遵循 <xref:getting-started> 教學課程來建立 Razor 頁面應用程式。</span><span class="sxs-lookup"><span data-stu-id="4fc34-148">Follow the <xref:getting-started> tutorial to create a Razor Pages app.</span></span>
 
 ## <a name="publish-and-deploy-the-app"></a><span data-ttu-id="4fc34-149">發佈及部署應用程式</span><span class="sxs-lookup"><span data-stu-id="4fc34-149">Publish and deploy the app</span></span>
 

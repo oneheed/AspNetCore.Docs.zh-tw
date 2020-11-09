@@ -6,17 +6,17 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 02/04/2020
 no-loc:
-- ':::no-loc(appsettings.json):::'
-- ':::no-loc(ASP.NET Core Identity):::'
-- ':::no-loc(cookie):::'
-- ':::no-loc(Cookie):::'
-- ':::no-loc(Blazor):::'
-- ':::no-loc(Blazor Server):::'
-- ':::no-loc(Blazor WebAssembly):::'
-- ':::no-loc(Identity):::'
-- ":::no-loc(Let's Encrypt):::"
-- ':::no-loc(Razor):::'
-- ':::no-loc(SignalR):::'
+- 'appsettings.json'
+- 'ASP.NET Core Identity'
+- 'cookie'
+- 'Cookie'
+- 'Blazor'
+- 'Blazor Server'
+- 'Blazor WebAssembly'
+- 'Identity'
+- "Let's Encrypt"
+- 'Razor'
+- 'SignalR'
 uid: mvc/controllers/filters
 ms.openlocfilehash: ecb4de3439656eb56507b920db704048d8f96759
 ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
@@ -40,7 +40,7 @@ ms.locfileid: "93058502"
 
 <span data-ttu-id="d9728-109">可以建立自訂篩選條件來處理跨領域關注。</span><span class="sxs-lookup"><span data-stu-id="d9728-109">Custom filters can be created to handle cross-cutting concerns.</span></span> <span data-ttu-id="d9728-110">跨領域關注的範例包括錯誤處理、快取、設定、授權及記錄。</span><span class="sxs-lookup"><span data-stu-id="d9728-110">Examples of cross-cutting concerns include error handling, caching, configuration, authorization, and logging.</span></span>  <span data-ttu-id="d9728-111">篩選能避免重複的程式碼。</span><span class="sxs-lookup"><span data-stu-id="d9728-111">Filters avoid duplicating code.</span></span> <span data-ttu-id="d9728-112">例如，錯誤處理例外狀況篩選條件中可以合併錯誤處理。</span><span class="sxs-lookup"><span data-stu-id="d9728-112">For example, an error handling exception filter could consolidate error handling.</span></span>
 
-<span data-ttu-id="d9728-113">本檔適用于 :::no-loc(Razor)::: 具有 views 的頁面、API 控制器和控制器。</span><span class="sxs-lookup"><span data-stu-id="d9728-113">This document applies to :::no-loc(Razor)::: Pages, API controllers, and controllers with views.</span></span> <span data-ttu-id="d9728-114">篩選器無法直接使用[ :::no-loc(Razor)::: 元件](xref:blazor/components/index)。</span><span class="sxs-lookup"><span data-stu-id="d9728-114">Filters don't work directly with [:::no-loc(Razor)::: components](xref:blazor/components/index).</span></span> <span data-ttu-id="d9728-115">篩選準則只會在下列情況時間接影響元件：</span><span class="sxs-lookup"><span data-stu-id="d9728-115">A filter can only indirectly affect a component when:</span></span>
+<span data-ttu-id="d9728-113">本檔適用于 Razor 具有 views 的頁面、API 控制器和控制器。</span><span class="sxs-lookup"><span data-stu-id="d9728-113">This document applies to Razor Pages, API controllers, and controllers with views.</span></span> <span data-ttu-id="d9728-114">篩選器無法直接使用[ Razor 元件](xref:blazor/components/index)。</span><span class="sxs-lookup"><span data-stu-id="d9728-114">Filters don't work directly with [Razor components](xref:blazor/components/index).</span></span> <span data-ttu-id="d9728-115">篩選準則只會在下列情況時間接影響元件：</span><span class="sxs-lookup"><span data-stu-id="d9728-115">A filter can only indirectly affect a component when:</span></span>
 
 * <span data-ttu-id="d9728-116">元件內嵌于頁面或視圖中。</span><span class="sxs-lookup"><span data-stu-id="d9728-116">The component is embedded in a page or view.</span></span>
 * <span data-ttu-id="d9728-117">頁面或控制器/視圖會使用篩選。</span><span class="sxs-lookup"><span data-stu-id="d9728-117">The page or controller/view uses the filter.</span></span>
@@ -70,7 +70,7 @@ ms.locfileid: "93058502"
   * <span data-ttu-id="d9728-134">在呼叫動作方法之前和之後立即執行程式碼。</span><span class="sxs-lookup"><span data-stu-id="d9728-134">Run code immediately before and after an action method is called.</span></span>
   * <span data-ttu-id="d9728-135">可以變更傳遞至動作的引數。</span><span class="sxs-lookup"><span data-stu-id="d9728-135">Can change the arguments passed into an action.</span></span>
   * <span data-ttu-id="d9728-136">可以變更動作傳回的結果。</span><span class="sxs-lookup"><span data-stu-id="d9728-136">Can change the result returned from the action.</span></span>
-  * <span data-ttu-id="d9728-137">頁面中 **不** 支援 :::no-loc(Razor)::: 。</span><span class="sxs-lookup"><span data-stu-id="d9728-137">Are **not** supported in :::no-loc(Razor)::: Pages.</span></span>
+  * <span data-ttu-id="d9728-137">頁面中 **不** 支援 Razor 。</span><span class="sxs-lookup"><span data-stu-id="d9728-137">Are **not** supported in Razor Pages.</span></span>
 
 * <span data-ttu-id="d9728-138">[例外狀況篩選準則](#exception-filters) 會將全域原則套用至回應主體寫入之前發生的未處理例外狀況。</span><span class="sxs-lookup"><span data-stu-id="d9728-138">[Exception filters](#exception-filters) apply global policies to unhandled exceptions that occur before the response body has been written to.</span></span>
 
@@ -127,9 +127,9 @@ ms.locfileid: "93058502"
 
 [!code-csharp[](./filters/3.1sample/FiltersSample/Filters/MyActionFilterAttribute.cs?name=snippet)]
 
-<span data-ttu-id="d9728-175">設定選項是使用[選項模式](xref:fundamentals/configuration/options)從設定[系統](xref:fundamentals/configuration/index)提供。</span><span class="sxs-lookup"><span data-stu-id="d9728-175">The configuration options are provided from the [configuration system](xref:fundamentals/configuration/index) using the [options pattern](xref:fundamentals/configuration/options).</span></span> <span data-ttu-id="d9728-176">例如，從檔案 *:::no-loc(appsettings.json):::* ：</span><span class="sxs-lookup"><span data-stu-id="d9728-176">For example, from the *:::no-loc(appsettings.json):::* file:</span></span>
+<span data-ttu-id="d9728-175">設定選項是使用[選項模式](xref:fundamentals/configuration/options)從設定[系統](xref:fundamentals/configuration/index)提供。</span><span class="sxs-lookup"><span data-stu-id="d9728-175">The configuration options are provided from the [configuration system](xref:fundamentals/configuration/index) using the [options pattern](xref:fundamentals/configuration/options).</span></span> <span data-ttu-id="d9728-176">例如，從檔案 *appsettings.json* ：</span><span class="sxs-lookup"><span data-stu-id="d9728-176">For example, from the *appsettings.json* file:</span></span>
 
-[!code-json[](filters/3.1sample/FiltersSample/:::no-loc(appsettings.json):::)]
+[!code-json[](filters/3.1sample/FiltersSample/appsettings.json)]
 
 <span data-ttu-id="d9728-177">在 `StartUp.ConfigureServices` 中：</span><span class="sxs-lookup"><span data-stu-id="d9728-177">In the `StartUp.ConfigureServices`:</span></span>
 
@@ -148,11 +148,11 @@ ms.locfileid: "93058502"
 
 <span data-ttu-id="d9728-182">**Response Headers** `author: Rick Anderson` `Editor: Joe Smith` 當呼叫端點時，會顯示回應標頭、和 `Sample/Index2` 。</span><span class="sxs-lookup"><span data-stu-id="d9728-182">Under **Response Headers** , `author: Rick Anderson`, and `Editor: Joe Smith` is displayed when the `Sample/Index2` endpoint is called.</span></span>
 
-<span data-ttu-id="d9728-183">下列程式碼會將 `MyActionFilterAttribute` 和加入 `AddHeaderAttribute` 至 :::no-loc(Razor)::: 頁面：</span><span class="sxs-lookup"><span data-stu-id="d9728-183">The following code applies the `MyActionFilterAttribute` and the `AddHeaderAttribute` to the :::no-loc(Razor)::: Page:</span></span>
+<span data-ttu-id="d9728-183">下列程式碼會將 `MyActionFilterAttribute` 和加入 `AddHeaderAttribute` 至 Razor 頁面：</span><span class="sxs-lookup"><span data-stu-id="d9728-183">The following code applies the `MyActionFilterAttribute` and the `AddHeaderAttribute` to the Razor Page:</span></span>
 
 [!code-csharp[](filters/3.1sample/FiltersSample/Pages/Movies/Index.cshtml.cs?name=snippet)]
 
-<span data-ttu-id="d9728-184">篩選無法套用至 :::no-loc(Razor)::: 頁面處理常式方法。</span><span class="sxs-lookup"><span data-stu-id="d9728-184">Filters cannot be applied to :::no-loc(Razor)::: Page handler methods.</span></span> <span data-ttu-id="d9728-185">它們可以套用至 :::no-loc(Razor)::: 頁面模型或全域套用。</span><span class="sxs-lookup"><span data-stu-id="d9728-185">They can be applied either to the :::no-loc(Razor)::: Page model or globally.</span></span>
+<span data-ttu-id="d9728-184">篩選無法套用至 Razor 頁面處理常式方法。</span><span class="sxs-lookup"><span data-stu-id="d9728-184">Filters cannot be applied to Razor Page handler methods.</span></span> <span data-ttu-id="d9728-185">它們可以套用至 Razor 頁面模型或全域套用。</span><span class="sxs-lookup"><span data-stu-id="d9728-185">They can be applied either to the Razor Page model or globally.</span></span>
 
 <span data-ttu-id="d9728-186">有幾個篩選條件介面有對應的屬性，可用來作為自訂實作的基底類別。</span><span class="sxs-lookup"><span data-stu-id="d9728-186">Several of the filter interfaces have corresponding attributes that can be used as base classes for custom implementations.</span></span>
 
@@ -169,9 +169,9 @@ ms.locfileid: "93058502"
 
 <span data-ttu-id="d9728-189">篩選條件能以三個「範圍」  之一新增至管線：</span><span class="sxs-lookup"><span data-stu-id="d9728-189">A filter can be added to the pipeline at one of three *scopes* :</span></span>
 
-* <span data-ttu-id="d9728-190">在控制器動作上使用屬性。</span><span class="sxs-lookup"><span data-stu-id="d9728-190">Using an attribute on a controller action.</span></span> <span data-ttu-id="d9728-191">篩選屬性無法套用至 :::no-loc(Razor)::: 頁面處理常式方法。</span><span class="sxs-lookup"><span data-stu-id="d9728-191">Filter attributes cannot be applied to :::no-loc(Razor)::: Pages handler methods.</span></span>
-* <span data-ttu-id="d9728-192">使用控制器或頁面上的屬性 :::no-loc(Razor)::: 。</span><span class="sxs-lookup"><span data-stu-id="d9728-192">Using an attribute on a controller or :::no-loc(Razor)::: Page.</span></span>
-* <span data-ttu-id="d9728-193">全域適用于所有控制器、動作和 :::no-loc(Razor)::: 頁面，如下列程式碼所示：</span><span class="sxs-lookup"><span data-stu-id="d9728-193">Globally for all controllers, actions, and :::no-loc(Razor)::: Pages as shown in the following code:</span></span>
+* <span data-ttu-id="d9728-190">在控制器動作上使用屬性。</span><span class="sxs-lookup"><span data-stu-id="d9728-190">Using an attribute on a controller action.</span></span> <span data-ttu-id="d9728-191">篩選屬性無法套用至 Razor 頁面處理常式方法。</span><span class="sxs-lookup"><span data-stu-id="d9728-191">Filter attributes cannot be applied to Razor Pages handler methods.</span></span>
+* <span data-ttu-id="d9728-192">使用控制器或頁面上的屬性 Razor 。</span><span class="sxs-lookup"><span data-stu-id="d9728-192">Using an attribute on a controller or Razor Page.</span></span>
+* <span data-ttu-id="d9728-193">全域適用于所有控制器、動作和 Razor 頁面，如下列程式碼所示：</span><span class="sxs-lookup"><span data-stu-id="d9728-193">Globally for all controllers, actions, and Razor Pages as shown in the following code:</span></span>
 
 [!code-csharp[](./filters/3.1sample/FiltersSample/StartupOrder.cs?name=snippet)]
 
@@ -182,10 +182,10 @@ ms.locfileid: "93058502"
 <span data-ttu-id="d9728-197">因為篩選條件巢狀結構的原因，篩選條件的「之後」  程式碼的執行順序會與「之前」  程式碼相反。</span><span class="sxs-lookup"><span data-stu-id="d9728-197">As a result of filter nesting, the *after* code of filters runs in the reverse order of the *before* code.</span></span> <span data-ttu-id="d9728-198">篩選條件序列：</span><span class="sxs-lookup"><span data-stu-id="d9728-198">The filter sequence:</span></span>
 
 * <span data-ttu-id="d9728-199">全域篩選條件的「之前」  程式碼。</span><span class="sxs-lookup"><span data-stu-id="d9728-199">The *before* code of global filters.</span></span>
-  * <span data-ttu-id="d9728-200">控制器和頁面篩選器的先前 *程式碼* :::no-loc(Razor)::: 。</span><span class="sxs-lookup"><span data-stu-id="d9728-200">The *before* code of controller and :::no-loc(Razor)::: Page filters.</span></span>
+  * <span data-ttu-id="d9728-200">控制器和頁面篩選器的先前 *程式碼* Razor 。</span><span class="sxs-lookup"><span data-stu-id="d9728-200">The *before* code of controller and Razor Page filters.</span></span>
     * <span data-ttu-id="d9728-201">動作方法篩選條件的「之前」  程式碼。</span><span class="sxs-lookup"><span data-stu-id="d9728-201">The *before* code of action method filters.</span></span>
     * <span data-ttu-id="d9728-202">動作方法篩選條件的「之後」  程式碼。</span><span class="sxs-lookup"><span data-stu-id="d9728-202">The *after* code of action method filters.</span></span>
-  * <span data-ttu-id="d9728-203">控制器和頁面篩選器的 *之後* 程式碼 :::no-loc(Razor)::: 。</span><span class="sxs-lookup"><span data-stu-id="d9728-203">The *after* code of controller and :::no-loc(Razor)::: Page filters.</span></span>
+  * <span data-ttu-id="d9728-203">控制器和頁面篩選器的 *之後* 程式碼 Razor 。</span><span class="sxs-lookup"><span data-stu-id="d9728-203">The *after* code of controller and Razor Page filters.</span></span>
 * <span data-ttu-id="d9728-204">全域篩選條件的「之後」  程式碼。</span><span class="sxs-lookup"><span data-stu-id="d9728-204">The *after* code of global filters.</span></span>
   
 <span data-ttu-id="d9728-205">下列範例說明針對同步動作篩選條件呼叫篩選條件方法的順序。</span><span class="sxs-lookup"><span data-stu-id="d9728-205">The following example that illustrates the order in which filter methods are called for synchronous action filters.</span></span>
@@ -193,10 +193,10 @@ ms.locfileid: "93058502"
 | <span data-ttu-id="d9728-206">順序</span><span class="sxs-lookup"><span data-stu-id="d9728-206">Sequence</span></span> | <span data-ttu-id="d9728-207">篩選條件範圍</span><span class="sxs-lookup"><span data-stu-id="d9728-207">Filter scope</span></span> | <span data-ttu-id="d9728-208">篩選條件方法</span><span class="sxs-lookup"><span data-stu-id="d9728-208">Filter method</span></span> |
 |:--------:|:------------:|:-------------:|
 | <span data-ttu-id="d9728-209">1</span><span class="sxs-lookup"><span data-stu-id="d9728-209">1</span></span> | <span data-ttu-id="d9728-210">全球</span><span class="sxs-lookup"><span data-stu-id="d9728-210">Global</span></span> | `OnActionExecuting` |
-| <span data-ttu-id="d9728-211">2</span><span class="sxs-lookup"><span data-stu-id="d9728-211">2</span></span> | <span data-ttu-id="d9728-212">控制器或 :::no-loc(Razor)::: 頁面</span><span class="sxs-lookup"><span data-stu-id="d9728-212">Controller or :::no-loc(Razor)::: Page</span></span>| `OnActionExecuting` |
+| <span data-ttu-id="d9728-211">2</span><span class="sxs-lookup"><span data-stu-id="d9728-211">2</span></span> | <span data-ttu-id="d9728-212">控制器或 Razor 頁面</span><span class="sxs-lookup"><span data-stu-id="d9728-212">Controller or Razor Page</span></span>| `OnActionExecuting` |
 | <span data-ttu-id="d9728-213">3</span><span class="sxs-lookup"><span data-stu-id="d9728-213">3</span></span> | <span data-ttu-id="d9728-214">方法</span><span class="sxs-lookup"><span data-stu-id="d9728-214">Method</span></span> | `OnActionExecuting` |
 | <span data-ttu-id="d9728-215">4</span><span class="sxs-lookup"><span data-stu-id="d9728-215">4</span></span> | <span data-ttu-id="d9728-216">方法</span><span class="sxs-lookup"><span data-stu-id="d9728-216">Method</span></span> | `OnActionExecuted` |
-| <span data-ttu-id="d9728-217">5</span><span class="sxs-lookup"><span data-stu-id="d9728-217">5</span></span> | <span data-ttu-id="d9728-218">控制器或 :::no-loc(Razor)::: 頁面</span><span class="sxs-lookup"><span data-stu-id="d9728-218">Controller or :::no-loc(Razor)::: Page</span></span> | `OnActionExecuted` |
+| <span data-ttu-id="d9728-217">5</span><span class="sxs-lookup"><span data-stu-id="d9728-217">5</span></span> | <span data-ttu-id="d9728-218">控制器或 Razor 頁面</span><span class="sxs-lookup"><span data-stu-id="d9728-218">Controller or Razor Page</span></span> | `OnActionExecuted` |
 | <span data-ttu-id="d9728-219">6</span><span class="sxs-lookup"><span data-stu-id="d9728-219">6</span></span> | <span data-ttu-id="d9728-220">全球</span><span class="sxs-lookup"><span data-stu-id="d9728-220">Global</span></span> | `OnActionExecuted` |
 
 ### <a name="controller-level-filters"></a><span data-ttu-id="d9728-221">控制器層級篩選</span><span class="sxs-lookup"><span data-stu-id="d9728-221">Controller level filters</span></span>
@@ -235,7 +235,7 @@ ms.locfileid: "93058502"
 
 <span data-ttu-id="d9728-234">控制器層級篩選器會將 [ [順序](https://github.com/dotnet/AspNetCore/blob/master/src/Mvc/Mvc.Core/src/Filters/ControllerActionFilter.cs#L15-L17) ] 屬性設定為 `int.MinValue` 。</span><span class="sxs-lookup"><span data-stu-id="d9728-234">Controller level filters set the [Order](https://github.com/dotnet/AspNetCore/blob/master/src/Mvc/Mvc.Core/src/Filters/ControllerActionFilter.cs#L15-L17) property to `int.MinValue`.</span></span> <span data-ttu-id="d9728-235">在套用至方法的篩選之後，控制器層級篩選 **無法** 設定為執行。</span><span class="sxs-lookup"><span data-stu-id="d9728-235">Controller level filters can **not** be set to run after filters applied to methods.</span></span> <span data-ttu-id="d9728-236">下一節將說明順序。</span><span class="sxs-lookup"><span data-stu-id="d9728-236">Order is explained in the next section.</span></span>
 
-<span data-ttu-id="d9728-237">若為 :::no-loc(Razor)::: 頁面，請參閱藉 [由覆 :::no-loc(Razor)::: 寫篩選方法來執行頁面篩選](xref:razor-pages/filter#implement-razor-page-filters-by-overriding-filter-methods)。</span><span class="sxs-lookup"><span data-stu-id="d9728-237">For :::no-loc(Razor)::: Pages, see [Implement :::no-loc(Razor)::: Page filters by overriding filter methods](xref:razor-pages/filter#implement-razor-page-filters-by-overriding-filter-methods).</span></span>
+<span data-ttu-id="d9728-237">若為 Razor 頁面，請參閱藉 [由覆 Razor 寫篩選方法來執行頁面篩選](xref:razor-pages/filter#implement-razor-page-filters-by-overriding-filter-methods)。</span><span class="sxs-lookup"><span data-stu-id="d9728-237">For Razor Pages, see [Implement Razor Page filters by overriding filter methods](xref:razor-pages/filter#implement-razor-page-filters-by-overriding-filter-methods).</span></span>
 
 ### <a name="overriding-the-default-order"></a><span data-ttu-id="d9728-238">覆寫預設順序</span><span class="sxs-lookup"><span data-stu-id="d9728-238">Overriding the default order</span></span>
 
@@ -411,7 +411,7 @@ FiltersSample.Filters.LogConstantFilter:Information: Method 'Hi' called
 
 ## <a name="action-filters"></a><span data-ttu-id="d9728-340">動作篩選條件</span><span class="sxs-lookup"><span data-stu-id="d9728-340">Action filters</span></span>
 
-<span data-ttu-id="d9728-341">動作 **篩選不適用於** :::no-loc(Razor)::: 頁面。</span><span class="sxs-lookup"><span data-stu-id="d9728-341">Action filters do **not** apply to :::no-loc(Razor)::: Pages.</span></span> <span data-ttu-id="d9728-342">:::no-loc(Razor)::: 頁面支援 <xref:Microsoft.AspNetCore.Mvc.Filters.IPageFilter> 和 <xref:Microsoft.AspNetCore.Mvc.Filters.IAsyncPageFilter> 。</span><span class="sxs-lookup"><span data-stu-id="d9728-342">:::no-loc(Razor)::: Pages supports <xref:Microsoft.AspNetCore.Mvc.Filters.IPageFilter> and <xref:Microsoft.AspNetCore.Mvc.Filters.IAsyncPageFilter> .</span></span> <span data-ttu-id="d9728-343">如需詳細資訊，請參閱 [ :::no-loc(Razor)::: 頁面的篩選方法](xref:razor-pages/filter)。</span><span class="sxs-lookup"><span data-stu-id="d9728-343">For more information, see [Filter methods for :::no-loc(Razor)::: Pages](xref:razor-pages/filter).</span></span>
+<span data-ttu-id="d9728-341">動作 **篩選不適用於** Razor 頁面。</span><span class="sxs-lookup"><span data-stu-id="d9728-341">Action filters do **not** apply to Razor Pages.</span></span> <span data-ttu-id="d9728-342">Razor 頁面支援 <xref:Microsoft.AspNetCore.Mvc.Filters.IPageFilter> 和 <xref:Microsoft.AspNetCore.Mvc.Filters.IAsyncPageFilter> 。</span><span class="sxs-lookup"><span data-stu-id="d9728-342">Razor Pages supports <xref:Microsoft.AspNetCore.Mvc.Filters.IPageFilter> and <xref:Microsoft.AspNetCore.Mvc.Filters.IAsyncPageFilter> .</span></span> <span data-ttu-id="d9728-343">如需詳細資訊，請參閱 [ Razor 頁面的篩選方法](xref:razor-pages/filter)。</span><span class="sxs-lookup"><span data-stu-id="d9728-343">For more information, see [Filter methods for Razor Pages](xref:razor-pages/filter).</span></span>
 
 <span data-ttu-id="d9728-344">動作篩選條件：</span><span class="sxs-lookup"><span data-stu-id="d9728-344">Action filters:</span></span>
 
@@ -490,7 +490,7 @@ FiltersSample.Filters.LogConstantFilter:Information: Method 'Hi' called
 
 * <span data-ttu-id="d9728-385">沒有之前和之後的事件。</span><span class="sxs-lookup"><span data-stu-id="d9728-385">Don't have before and after events.</span></span>
 * <span data-ttu-id="d9728-386">實作 <xref:Microsoft.AspNetCore.Mvc.Filters.IExceptionFilter.OnException*> 或 <xref:Microsoft.AspNetCore.Mvc.Filters.IAsyncExceptionFilter.OnExceptionAsync*>。</span><span class="sxs-lookup"><span data-stu-id="d9728-386">Implement <xref:Microsoft.AspNetCore.Mvc.Filters.IExceptionFilter.OnException*> or <xref:Microsoft.AspNetCore.Mvc.Filters.IAsyncExceptionFilter.OnExceptionAsync*>.</span></span>
-* <span data-ttu-id="d9728-387">處理 :::no-loc(Razor)::: 頁面或控制器建立、 [模型](xref:mvc/models/model-binding)系結、動作篩選準則或動作方法中發生的未處理例外狀況。</span><span class="sxs-lookup"><span data-stu-id="d9728-387">Handle unhandled exceptions that occur in :::no-loc(Razor)::: Page or controller creation, [model binding](xref:mvc/models/model-binding), action filters, or action methods.</span></span>
+* <span data-ttu-id="d9728-387">處理 Razor 頁面或控制器建立、 [模型](xref:mvc/models/model-binding)系結、動作篩選準則或動作方法中發生的未處理例外狀況。</span><span class="sxs-lookup"><span data-stu-id="d9728-387">Handle unhandled exceptions that occur in Razor Page or controller creation, [model binding](xref:mvc/models/model-binding), action filters, or action methods.</span></span>
 * <span data-ttu-id="d9728-388">**不會** 攔截在資源篩選條件、結果篩選條件或 MVC 結果執行中發生的例外狀況。</span><span class="sxs-lookup"><span data-stu-id="d9728-388">Do **not** catch exceptions that occur in resource filters, result filters, or MVC result execution.</span></span>
 
 <span data-ttu-id="d9728-389">若要處理例外狀況，請將 <xref:System.Web.Mvc.ExceptionContext.ExceptionHandled> 屬性設為 `true`，或撰寫回應。</span><span class="sxs-lookup"><span data-stu-id="d9728-389">To handle an exception, set the <xref:System.Web.Mvc.ExceptionContext.ExceptionHandled> property to `true` or write a response.</span></span> <span data-ttu-id="d9728-390">這樣會阻止傳播例外狀況。</span><span class="sxs-lookup"><span data-stu-id="d9728-390">This stops propagation of the exception.</span></span> <span data-ttu-id="d9728-391">例外狀況篩選條件無法將例外狀況變成「成功」。</span><span class="sxs-lookup"><span data-stu-id="d9728-391">An exception filter can't turn an exception into a "success".</span></span> <span data-ttu-id="d9728-392">只有動作篩選條件可以這麼做。</span><span class="sxs-lookup"><span data-stu-id="d9728-392">Only an action filter can do that.</span></span>
@@ -615,7 +615,7 @@ What's a non-named attribute?
 
 ## <a name="next-actions"></a><span data-ttu-id="d9728-470">後續動作</span><span class="sxs-lookup"><span data-stu-id="d9728-470">Next actions</span></span>
 
-* <span data-ttu-id="d9728-471">請參閱 [ :::no-loc(Razor)::: 頁面的篩選方法](xref:razor-pages/filter)。</span><span class="sxs-lookup"><span data-stu-id="d9728-471">See [Filter methods for :::no-loc(Razor)::: Pages](xref:razor-pages/filter).</span></span>
+* <span data-ttu-id="d9728-471">請參閱 [ Razor 頁面的篩選方法](xref:razor-pages/filter)。</span><span class="sxs-lookup"><span data-stu-id="d9728-471">See [Filter methods for Razor Pages](xref:razor-pages/filter).</span></span>
 * <span data-ttu-id="d9728-472">若要嘗試使用篩選準則，請 [下載、測試及修改 GitHub 範例](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/mvc/controllers/filters/3.1sample)。</span><span class="sxs-lookup"><span data-stu-id="d9728-472">To experiment with filters, [download, test, and modify the GitHub sample](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/mvc/controllers/filters/3.1sample).</span></span>
 
 ::: moniker-end
@@ -633,7 +633,7 @@ What's a non-named attribute?
 
 <span data-ttu-id="d9728-478">可以建立自訂篩選條件來處理跨領域關注。</span><span class="sxs-lookup"><span data-stu-id="d9728-478">Custom filters can be created to handle cross-cutting concerns.</span></span> <span data-ttu-id="d9728-479">跨領域關注的範例包括錯誤處理、快取、設定、授權及記錄。</span><span class="sxs-lookup"><span data-stu-id="d9728-479">Examples of cross-cutting concerns include error handling, caching, configuration, authorization, and logging.</span></span>  <span data-ttu-id="d9728-480">篩選能避免重複的程式碼。</span><span class="sxs-lookup"><span data-stu-id="d9728-480">Filters avoid duplicating code.</span></span> <span data-ttu-id="d9728-481">例如，錯誤處理例外狀況篩選條件中可以合併錯誤處理。</span><span class="sxs-lookup"><span data-stu-id="d9728-481">For example, an error handling exception filter could consolidate error handling.</span></span>
 
-<span data-ttu-id="d9728-482">本檔適用于 :::no-loc(Razor)::: 具有 views 的頁面、API 控制器和控制器。</span><span class="sxs-lookup"><span data-stu-id="d9728-482">This document applies to :::no-loc(Razor)::: Pages, API controllers, and controllers with views.</span></span>
+<span data-ttu-id="d9728-482">本檔適用于 Razor 具有 views 的頁面、API 控制器和控制器。</span><span class="sxs-lookup"><span data-stu-id="d9728-482">This document applies to Razor Pages, API controllers, and controllers with views.</span></span>
 
 <span data-ttu-id="d9728-483">[檢視或下載範例](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/mvc/controllers/filters/sample) \(英文\) ([如何下載](xref:index#how-to-download-a-sample))。</span><span class="sxs-lookup"><span data-stu-id="d9728-483">[View or download sample](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/mvc/controllers/filters/sample) ([how to download](xref:index#how-to-download-a-sample)).</span></span>
 
@@ -655,7 +655,7 @@ What's a non-named attribute?
   * <span data-ttu-id="d9728-495"><xref:Microsoft.AspNetCore.Mvc.Filters.IResourceFilter.OnResourceExecuting*> 可以在其餘的篩選條件管線之前執行程式碼。</span><span class="sxs-lookup"><span data-stu-id="d9728-495"><xref:Microsoft.AspNetCore.Mvc.Filters.IResourceFilter.OnResourceExecuting*> can run code before the rest of the filter pipeline.</span></span> <span data-ttu-id="d9728-496">例如，`OnResourceExecuting` 可以在模型繫結之前執行程式碼。</span><span class="sxs-lookup"><span data-stu-id="d9728-496">For example, `OnResourceExecuting` can run code before model binding.</span></span>
   * <span data-ttu-id="d9728-497"><xref:Microsoft.AspNetCore.Mvc.Filters.IResourceFilter.OnResourceExecuted*> 可以在其餘的管線皆已完成之後執行程式碼。</span><span class="sxs-lookup"><span data-stu-id="d9728-497"><xref:Microsoft.AspNetCore.Mvc.Filters.IResourceFilter.OnResourceExecuted*> can run code after the rest of the pipeline has completed.</span></span>
 
-* <span data-ttu-id="d9728-498">[動作篩選條件](#action-filters)可以緊接在呼叫個別動作方法之前和之後執行程式碼。</span><span class="sxs-lookup"><span data-stu-id="d9728-498">[Action filters](#action-filters) can run code immediately before and after an individual action method is called.</span></span> <span data-ttu-id="d9728-499">它們可以用來處理傳遞至動作的引數，和從動作傳回的結果。</span><span class="sxs-lookup"><span data-stu-id="d9728-499">They can be used to manipulate the arguments passed into an action and the result returned from the action.</span></span> <span data-ttu-id="d9728-500">頁面中 **不** 支援動作篩選準則 :::no-loc(Razor)::: 。</span><span class="sxs-lookup"><span data-stu-id="d9728-500">Action filters are **not** supported in :::no-loc(Razor)::: Pages.</span></span>
+* <span data-ttu-id="d9728-498">[動作篩選條件](#action-filters)可以緊接在呼叫個別動作方法之前和之後執行程式碼。</span><span class="sxs-lookup"><span data-stu-id="d9728-498">[Action filters](#action-filters) can run code immediately before and after an individual action method is called.</span></span> <span data-ttu-id="d9728-499">它們可以用來處理傳遞至動作的引數，和從動作傳回的結果。</span><span class="sxs-lookup"><span data-stu-id="d9728-499">They can be used to manipulate the arguments passed into an action and the result returned from the action.</span></span> <span data-ttu-id="d9728-500">頁面中 **不** 支援動作篩選準則 Razor 。</span><span class="sxs-lookup"><span data-stu-id="d9728-500">Action filters are **not** supported in Razor Pages.</span></span>
 
 * <span data-ttu-id="d9728-501">[例外狀況篩選條件](#exception-filters)用來將通用原則套用到在任何項目寫入回應主體之前，發生的未處理例外狀況。</span><span class="sxs-lookup"><span data-stu-id="d9728-501">[Exception filters](#exception-filters) are used to apply global policies to unhandled exceptions that occur before anything has been written to the response body.</span></span>
 
@@ -751,7 +751,7 @@ What's a non-named attribute?
 * <span data-ttu-id="d9728-566">方法篩選條件巢狀位於控制器篩選條件內。</span><span class="sxs-lookup"><span data-stu-id="d9728-566">The method filter is nested within the controller filter.</span></span>
 * <span data-ttu-id="d9728-567">控制器篩選條件巢狀位於全域篩選條件內。</span><span class="sxs-lookup"><span data-stu-id="d9728-567">The controller filter is nested within the global filter.</span></span>
 
-### <a name="controller-and-no-locrazor-page-level-filters"></a><span data-ttu-id="d9728-568">控制器和 :::no-loc(Razor)::: 頁面層級篩選</span><span class="sxs-lookup"><span data-stu-id="d9728-568">Controller and :::no-loc(Razor)::: Page level filters</span></span>
+### <a name="controller-and-no-locrazor-page-level-filters"></a><span data-ttu-id="d9728-568">控制器和 Razor 頁面層級篩選</span><span class="sxs-lookup"><span data-stu-id="d9728-568">Controller and Razor Page level filters</span></span>
 
 <span data-ttu-id="d9728-569">繼承自 <xref:Microsoft.AspNetCore.Mvc.Controller> 基底類別的每個控制器都會包含 [Controller.OnActionExecuting](xref:Microsoft.AspNetCore.Mvc.Controller.OnActionExecuting*)、[Controller.OnActionExecutionAsync](xref:Microsoft.AspNetCore.Mvc.Controller.OnActionExecutionAsync*)，以及 [Controller.OnActionExecuted](xref:Microsoft.AspNetCore.Mvc.Controller.OnActionExecuted*)
 `OnActionExecuted` 方法。</span><span class="sxs-lookup"><span data-stu-id="d9728-569">Every controller that inherits from the <xref:Microsoft.AspNetCore.Mvc.Controller> base class includes [Controller.OnActionExecuting](xref:Microsoft.AspNetCore.Mvc.Controller.OnActionExecuting*),  [Controller.OnActionExecutionAsync](xref:Microsoft.AspNetCore.Mvc.Controller.OnActionExecutionAsync*), and [Controller.OnActionExecuted](xref:Microsoft.AspNetCore.Mvc.Controller.OnActionExecuted*)
@@ -781,7 +781,7 @@ What's a non-named attribute?
   * `MySampleActionFilter.OnActionExecuted`
 * `TestController.OnActionExecuted`
 
-<span data-ttu-id="d9728-581">若為 :::no-loc(Razor)::: 頁面，請參閱藉 [由覆 :::no-loc(Razor)::: 寫篩選方法來執行頁面篩選](xref:razor-pages/filter#implement-razor-page-filters-by-overriding-filter-methods)。</span><span class="sxs-lookup"><span data-stu-id="d9728-581">For :::no-loc(Razor)::: Pages, see [Implement :::no-loc(Razor)::: Page filters by overriding filter methods](xref:razor-pages/filter#implement-razor-page-filters-by-overriding-filter-methods).</span></span>
+<span data-ttu-id="d9728-581">若為 Razor 頁面，請參閱藉 [由覆 Razor 寫篩選方法來執行頁面篩選](xref:razor-pages/filter#implement-razor-page-filters-by-overriding-filter-methods)。</span><span class="sxs-lookup"><span data-stu-id="d9728-581">For Razor Pages, see [Implement Razor Page filters by overriding filter methods](xref:razor-pages/filter#implement-razor-page-filters-by-overriding-filter-methods).</span></span>
 
 ### <a name="overriding-the-default-order"></a><span data-ttu-id="d9728-582">覆寫預設順序</span><span class="sxs-lookup"><span data-stu-id="d9728-582">Overriding the default order</span></span>
 
@@ -946,7 +946,7 @@ FiltersSample.Filters.LogConstantFilter:Information: Method 'Hi' called
 ## <a name="action-filters"></a><span data-ttu-id="d9728-702">動作篩選條件</span><span class="sxs-lookup"><span data-stu-id="d9728-702">Action filters</span></span>
 
 > [!IMPORTANT]
-> <span data-ttu-id="d9728-703">動作 **篩選不適用於** :::no-loc(Razor)::: 頁面。</span><span class="sxs-lookup"><span data-stu-id="d9728-703">Action filters do **not** apply to :::no-loc(Razor)::: Pages.</span></span> <span data-ttu-id="d9728-704">:::no-loc(Razor)::: 頁面支援 <xref:Microsoft.AspNetCore.Mvc.Filters.IPageFilter> 和 <xref:Microsoft.AspNetCore.Mvc.Filters.IAsyncPageFilter> 。</span><span class="sxs-lookup"><span data-stu-id="d9728-704">:::no-loc(Razor)::: Pages supports <xref:Microsoft.AspNetCore.Mvc.Filters.IPageFilter> and <xref:Microsoft.AspNetCore.Mvc.Filters.IAsyncPageFilter> .</span></span> <span data-ttu-id="d9728-705">如需詳細資訊，請參閱 [ :::no-loc(Razor)::: 頁面的篩選方法](xref:razor-pages/filter)。</span><span class="sxs-lookup"><span data-stu-id="d9728-705">For more information, see [Filter methods for :::no-loc(Razor)::: Pages](xref:razor-pages/filter).</span></span>
+> <span data-ttu-id="d9728-703">動作 **篩選不適用於** Razor 頁面。</span><span class="sxs-lookup"><span data-stu-id="d9728-703">Action filters do **not** apply to Razor Pages.</span></span> <span data-ttu-id="d9728-704">Razor 頁面支援 <xref:Microsoft.AspNetCore.Mvc.Filters.IPageFilter> 和 <xref:Microsoft.AspNetCore.Mvc.Filters.IAsyncPageFilter> 。</span><span class="sxs-lookup"><span data-stu-id="d9728-704">Razor Pages supports <xref:Microsoft.AspNetCore.Mvc.Filters.IPageFilter> and <xref:Microsoft.AspNetCore.Mvc.Filters.IAsyncPageFilter> .</span></span> <span data-ttu-id="d9728-705">如需詳細資訊，請參閱 [ Razor 頁面的篩選方法](xref:razor-pages/filter)。</span><span class="sxs-lookup"><span data-stu-id="d9728-705">For more information, see [Filter methods for Razor Pages](xref:razor-pages/filter).</span></span>
 
 <span data-ttu-id="d9728-706">動作篩選條件：</span><span class="sxs-lookup"><span data-stu-id="d9728-706">Action filters:</span></span>
 
@@ -1018,7 +1018,7 @@ FiltersSample.Filters.LogConstantFilter:Information: Method 'Hi' called
 
 * <span data-ttu-id="d9728-744">沒有之前和之後的事件。</span><span class="sxs-lookup"><span data-stu-id="d9728-744">Don't have before and after events.</span></span>
 * <span data-ttu-id="d9728-745">實作 <xref:Microsoft.AspNetCore.Mvc.Filters.IExceptionFilter.OnException*> 或 <xref:Microsoft.AspNetCore.Mvc.Filters.IAsyncExceptionFilter.OnExceptionAsync*>。</span><span class="sxs-lookup"><span data-stu-id="d9728-745">Implement <xref:Microsoft.AspNetCore.Mvc.Filters.IExceptionFilter.OnException*> or <xref:Microsoft.AspNetCore.Mvc.Filters.IAsyncExceptionFilter.OnExceptionAsync*>.</span></span>
-* <span data-ttu-id="d9728-746">處理 :::no-loc(Razor)::: 頁面或控制器建立、 [模型](xref:mvc/models/model-binding)系結、動作篩選準則或動作方法中發生的未處理例外狀況。</span><span class="sxs-lookup"><span data-stu-id="d9728-746">Handle unhandled exceptions that occur in :::no-loc(Razor)::: Page or controller creation, [model binding](xref:mvc/models/model-binding), action filters, or action methods.</span></span>
+* <span data-ttu-id="d9728-746">處理 Razor 頁面或控制器建立、 [模型](xref:mvc/models/model-binding)系結、動作篩選準則或動作方法中發生的未處理例外狀況。</span><span class="sxs-lookup"><span data-stu-id="d9728-746">Handle unhandled exceptions that occur in Razor Page or controller creation, [model binding](xref:mvc/models/model-binding), action filters, or action methods.</span></span>
 * <span data-ttu-id="d9728-747">**不會** 攔截在資源篩選條件、結果篩選條件或 MVC 結果執行中發生的例外狀況。</span><span class="sxs-lookup"><span data-stu-id="d9728-747">Do **not** catch exceptions that occur in resource filters, result filters, or MVC result execution.</span></span>
 
 <span data-ttu-id="d9728-748">若要處理例外狀況，請將 <xref:System.Web.Mvc.ExceptionContext.ExceptionHandled> 屬性設為 `true`，或撰寫回應。</span><span class="sxs-lookup"><span data-stu-id="d9728-748">To handle an exception, set the <xref:System.Web.Mvc.ExceptionContext.ExceptionHandled> property to `true` or write a response.</span></span> <span data-ttu-id="d9728-749">這樣會阻止傳播例外狀況。</span><span class="sxs-lookup"><span data-stu-id="d9728-749">This stops propagation of the exception.</span></span> <span data-ttu-id="d9728-750">例外狀況篩選條件無法將例外狀況變成「成功」。</span><span class="sxs-lookup"><span data-stu-id="d9728-750">An exception filter can't turn an exception into a "success".</span></span> <span data-ttu-id="d9728-751">只有動作篩選條件可以這麼做。</span><span class="sxs-lookup"><span data-stu-id="d9728-751">Only an action filter can do that.</span></span>
@@ -1139,7 +1139,7 @@ What's a non-named attribute?
 
 ## <a name="next-actions"></a><span data-ttu-id="d9728-828">後續動作</span><span class="sxs-lookup"><span data-stu-id="d9728-828">Next actions</span></span>
 
-* <span data-ttu-id="d9728-829">請參閱 [ :::no-loc(Razor)::: 頁面的篩選方法](xref:razor-pages/filter)。</span><span class="sxs-lookup"><span data-stu-id="d9728-829">See [Filter methods for :::no-loc(Razor)::: Pages](xref:razor-pages/filter).</span></span>
+* <span data-ttu-id="d9728-829">請參閱 [ Razor 頁面的篩選方法](xref:razor-pages/filter)。</span><span class="sxs-lookup"><span data-stu-id="d9728-829">See [Filter methods for Razor Pages](xref:razor-pages/filter).</span></span>
 * <span data-ttu-id="d9728-830">若要嘗試使用篩選準則，請 [下載、測試及修改 GitHub 範例](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/mvc/controllers/filters/sample)。</span><span class="sxs-lookup"><span data-stu-id="d9728-830">To experiment with filters, [download, test, and modify the GitHub sample](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/mvc/controllers/filters/sample).</span></span>
 
 ::: moniker-end

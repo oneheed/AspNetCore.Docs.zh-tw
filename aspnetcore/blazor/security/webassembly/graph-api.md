@@ -1,23 +1,23 @@
 ---
-title: '搭配使用圖形 API 與 ASP.NET Core :::no-loc(Blazor WebAssembly):::'
+title: '搭配使用圖形 API 與 ASP.NET Core Blazor WebAssembly'
 author: guardrex
-description: '瞭解如何搭配使用圖形 API 與 :::no-loc(Blazor)::: WebAssemlby apps。'
+description: '瞭解如何搭配使用圖形 API 與 Blazor WebAssemlby apps。'
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
 ms.date: 10/27/2020
 no-loc:
-- ':::no-loc(appsettings.json):::'
-- ':::no-loc(ASP.NET Core Identity):::'
-- ':::no-loc(cookie):::'
-- ':::no-loc(Cookie):::'
-- ':::no-loc(Blazor):::'
-- ':::no-loc(Blazor Server):::'
-- ':::no-loc(Blazor WebAssembly):::'
-- ':::no-loc(Identity):::'
-- ":::no-loc(Let's Encrypt):::"
-- ':::no-loc(Razor):::'
-- ':::no-loc(SignalR):::'
+- 'appsettings.json'
+- 'ASP.NET Core Identity'
+- 'cookie'
+- 'Cookie'
+- 'Blazor'
+- 'Blazor Server'
+- 'Blazor WebAssembly'
+- 'Identity'
+- "Let's Encrypt"
+- 'Razor'
+- 'SignalR'
 uid: blazor/security/webassembly/graph-api
 ms.openlocfilehash: 569a88630f7b75e866d8ecda99605ebe3bc58db8
 ms.sourcegitcommit: d64bf0cbe763beda22a7728c7f10d07fc5e19262
@@ -26,13 +26,13 @@ ms.contentlocale: zh-TW
 ms.lasthandoff: 11/03/2020
 ms.locfileid: "93234423"
 ---
-# <a name="use-graph-api-with-aspnet-core-no-locblazor-webassembly"></a><span data-ttu-id="6d2d2-103">搭配使用圖形 API 與 ASP.NET Core :::no-loc(Blazor WebAssembly):::</span><span class="sxs-lookup"><span data-stu-id="6d2d2-103">Use Graph API with ASP.NET Core :::no-loc(Blazor WebAssembly):::</span></span>
+# <a name="use-graph-api-with-aspnet-core-no-locblazor-webassembly"></a><span data-ttu-id="6d2d2-103">搭配使用圖形 API 與 ASP.NET Core Blazor WebAssembly</span><span class="sxs-lookup"><span data-stu-id="6d2d2-103">Use Graph API with ASP.NET Core Blazor WebAssembly</span></span>
 
 <span data-ttu-id="6d2d2-104">由 [Javier Calvarro Nelson](https://github.com/javiercn) 和 [Luke Latham](https://github.com/guardrex)</span><span class="sxs-lookup"><span data-stu-id="6d2d2-104">By [Javier Calvarro Nelson](https://github.com/javiercn) and [Luke Latham](https://github.com/guardrex)</span></span>
 
 ::: moniker range=">= aspnetcore-5.0"
 
-<span data-ttu-id="6d2d2-105">[MICROSOFT GRAPH API](/graph/use-the-api) 是一種 RESTFUL web API，可讓 :::no-loc(Blazor)::: 和其他 .NET Framework 應用程式存取 Microsoft 雲端服務資源。</span><span class="sxs-lookup"><span data-stu-id="6d2d2-105">[Microsoft Graph API](/graph/use-the-api) is a RESTful web API that enables :::no-loc(Blazor)::: and other .NET Framework apps to access Microsoft Cloud service resources.</span></span>
+<span data-ttu-id="6d2d2-105">[MICROSOFT GRAPH API](/graph/use-the-api) 是一種 RESTFUL web API，可讓 Blazor 和其他 .NET Framework 應用程式存取 Microsoft 雲端服務資源。</span><span class="sxs-lookup"><span data-stu-id="6d2d2-105">[Microsoft Graph API](/graph/use-the-api) is a RESTful web API that enables Blazor and other .NET Framework apps to access Microsoft Cloud service resources.</span></span>
 
 ## <a name="graph-sdk"></a><span data-ttu-id="6d2d2-106">Graph SDK</span><span class="sxs-lookup"><span data-stu-id="6d2d2-106">Graph SDK</span></span>
 
@@ -50,7 +50,7 @@ ms.locfileid: "93234423"
 
 <span data-ttu-id="6d2d2-112">將 Microsoft Graph API 範圍新增至 Azure 入口網站的 AAD 區域之後：</span><span class="sxs-lookup"><span data-stu-id="6d2d2-112">After adding the Microsoft Graph API scopes in the AAD area of the Azure portal:</span></span>
 
-* <span data-ttu-id="6d2d2-113">將下列 `GraphClientExtensions.cs` 類別新增至裝載解決方案的獨立應用程式或 *`Client`* 應用程式 :::no-loc(Blazor)::: 。</span><span class="sxs-lookup"><span data-stu-id="6d2d2-113">Add the following `GraphClientExtensions.cs` class to the standalone app or *`Client`* app of a hosted :::no-loc(Blazor)::: solution.</span></span>
+* <span data-ttu-id="6d2d2-113">將下列 `GraphClientExtensions.cs` 類別新增至裝載解決方案的獨立應用程式或 *`Client`* 應用程式 Blazor 。</span><span class="sxs-lookup"><span data-stu-id="6d2d2-113">Add the following `GraphClientExtensions.cs` class to the standalone app or *`Client`* app of a hosted Blazor solution.</span></span>
 * <span data-ttu-id="6d2d2-114"><xref:Microsoft.AspNetCore.Components.WebAssembly.Authentication.AccessTokenRequestOptions.Scopes>在方法的屬性中，提供必要的範圍 <xref:Microsoft.AspNetCore.Components.WebAssembly.Authentication.AccessTokenRequestOptions> `AuthenticateRequestAsync` 。</span><span class="sxs-lookup"><span data-stu-id="6d2d2-114">Provide the required scopes to the <xref:Microsoft.AspNetCore.Components.WebAssembly.Authentication.AccessTokenRequestOptions.Scopes> property of the <xref:Microsoft.AspNetCore.Components.WebAssembly.Authentication.AccessTokenRequestOptions> in the `AuthenticateRequestAsync` method.</span></span> <span data-ttu-id="6d2d2-115">在下列範例中， `User.Read` 會指定範圍，以符合本文稍後章節中的範例。</span><span class="sxs-lookup"><span data-stu-id="6d2d2-115">In the following example, the `User.Read` scope is specified to match the examples in later sections of this article.</span></span>
 
 ```csharp
@@ -240,9 +240,9 @@ public class CustomAccountFactory
     {
         var initialUser = await base.CreateUserAsync(account, options);
 
-        if (initialUser.:::no-loc(Identity):::.IsAuthenticated)
+        if (initialUser.Identity.IsAuthenticated)
         {
-            var user:::no-loc(Identity)::: = (Claims:::no-loc(Identity):::)initialUser.:::no-loc(Identity):::;
+            var userIdentity = (ClaimsIdentity)initialUser.Identity;
 
             try
             {
@@ -253,7 +253,7 @@ public class CustomAccountFactory
 
                 if (user != null)
                 {
-                    user:::no-loc(Identity):::.AddClaim(new Claim("mobilephone", 
+                    userIdentity.AddClaim(new Claim("mobilephone", 
                         user.MobilePhone));
                 }
             }
@@ -335,7 +335,7 @@ builder.Services.AddHttpClient("GraphAPI",
 
 <span data-ttu-id="6d2d2-145">本節會使用 [圖形授權訊息處理常式 (本文稍早所述 `GraphAuthorizationMessageHandler.cs` `Program.Main` 的應用程式) 和新增](#named-client-with-graph-api) 專案，以提供 <xref:System.Net.Http.HttpClient> 針對圖形 API 命名的。</span><span class="sxs-lookup"><span data-stu-id="6d2d2-145">This section uses the [Graph Authorization Message Handler (`GraphAuthorizationMessageHandler.cs`) and `Program.Main` additions to the app](#named-client-with-graph-api) described earlier in this article, which provides a named <xref:System.Net.Http.HttpClient> for Graph API.</span></span>
 
-<span data-ttu-id="6d2d2-146">在 :::no-loc(Razor)::: 元件中：</span><span class="sxs-lookup"><span data-stu-id="6d2d2-146">In a :::no-loc(Razor)::: component:</span></span>
+<span data-ttu-id="6d2d2-146">在 Razor 元件中：</span><span class="sxs-lookup"><span data-stu-id="6d2d2-146">In a Razor component:</span></span>
 
 * <span data-ttu-id="6d2d2-147">建立 <xref:System.Net.Http.HttpClient> 圖形 API 的，併發出使用者設定檔資料的要求。</span><span class="sxs-lookup"><span data-stu-id="6d2d2-147">Create an <xref:System.Net.Http.HttpClient> for Graph API and issue a request for the user's profile data.</span></span>
 * <span data-ttu-id="6d2d2-148">`UserInfo.cs`類別會指定具有屬性的必要使用者設定檔屬性 <xref:System.Text.Json.Serialization.JsonPropertyNameAttribute> ，以及 AAD 針對這些屬性所使用的 JSON 名稱。</span><span class="sxs-lookup"><span data-stu-id="6d2d2-148">The `UserInfo.cs` class designates the required user profile properties with the <xref:System.Text.Json.Serialization.JsonPropertyNameAttribute> attribute and the JSON name used by AAD for those properties.</span></span>
@@ -478,9 +478,9 @@ public class CustomAccountFactory
     {
         var initialUser = await base.CreateUserAsync(account, options);
 
-        if (initialUser.:::no-loc(Identity):::.IsAuthenticated)
+        if (initialUser.Identity.IsAuthenticated)
         {
-            var user:::no-loc(Identity)::: = (Claims:::no-loc(Identity):::)initialUser.:::no-loc(Identity):::;
+            var userIdentity = (ClaimsIdentity)initialUser.Identity;
 
             try
             {
@@ -490,7 +490,7 @@ public class CustomAccountFactory
 
                 if (userInfo != null)
                 {
-                    user:::no-loc(Identity):::.AddClaim(new Claim("mobilephone", 
+                    userIdentity.AddClaim(new Claim("mobilephone", 
                         userInfo.MobilePhone));
                 }
             }

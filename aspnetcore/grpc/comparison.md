@@ -6,17 +6,17 @@ monikerRange: '>= aspnetcore-3.0'
 ms.author: jamesnk
 ms.date: 12/05/2019
 no-loc:
-- ':::no-loc(appsettings.json):::'
-- ':::no-loc(ASP.NET Core Identity):::'
-- ':::no-loc(cookie):::'
-- ':::no-loc(Cookie):::'
-- ':::no-loc(Blazor):::'
-- ':::no-loc(Blazor Server):::'
-- ':::no-loc(Blazor WebAssembly):::'
-- ':::no-loc(Identity):::'
-- ":::no-loc(Let's Encrypt):::"
-- ':::no-loc(Razor):::'
-- ':::no-loc(SignalR):::'
+- 'appsettings.json'
+- 'ASP.NET Core Identity'
+- 'cookie'
+- 'Cookie'
+- 'Blazor'
+- 'Blazor Server'
+- 'Blazor WebAssembly'
+- 'Identity'
+- "Let's Encrypt"
+- 'Razor'
+- 'SignalR'
 uid: grpc/comparison
 ms.openlocfilehash: 0fb50f07153f5f9953b667fe32062ad24b2bd66d
 ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
@@ -127,7 +127,7 @@ ms.locfileid: "93059945"
 <span data-ttu-id="fe44d-212">在下列案例中，建議使用其他架構，而不是 gRPC：</span><span class="sxs-lookup"><span data-stu-id="fe44d-212">Other frameworks are recommended over gRPC in the following scenarios:</span></span>
 
 * <span data-ttu-id="fe44d-213">**瀏覽器可存取的 api** ： gRPC 在瀏覽器中未受到完整支援。</span><span class="sxs-lookup"><span data-stu-id="fe44d-213">**Browser accessible APIs** : gRPC isn't fully supported in the browser.</span></span> <span data-ttu-id="fe44d-214">gRPC-Web 可以提供瀏覽器支援，但它有一些限制，並引進伺服器 proxy。</span><span class="sxs-lookup"><span data-stu-id="fe44d-214">gRPC-Web can offer browser support, but it has limitations and introduces a server proxy.</span></span>
-* <span data-ttu-id="fe44d-215">**廣播即時通訊** ： gRPC 透過串流支援即時通訊，但廣播訊息到已註冊連接的概念不存在。</span><span class="sxs-lookup"><span data-stu-id="fe44d-215">**Broadcast real-time communication** : gRPC supports real-time communication via streaming, but the concept of broadcasting a message out to registered connections doesn't exist.</span></span> <span data-ttu-id="fe44d-216">例如，在應該將新的聊天訊息傳送到聊天室中所有用戶端的聊天室案例中，每個 gRPC 呼叫都需要個別將新的聊天訊息串流至用戶端。</span><span class="sxs-lookup"><span data-stu-id="fe44d-216">For example in a chat room scenario where new chat messages should be sent to all clients in the chat room, each gRPC call is required to individually stream new chat messages to the client.</span></span> <span data-ttu-id="fe44d-217">[:::no-loc(SignalR):::](xref:signalr/introduction) 是適用于此案例的實用架構。</span><span class="sxs-lookup"><span data-stu-id="fe44d-217">[:::no-loc(SignalR):::](xref:signalr/introduction) is a useful framework for this scenario.</span></span> <span data-ttu-id="fe44d-218">:::no-loc(SignalR)::: 具有持續性連接的概念，以及廣播訊息的內建支援。</span><span class="sxs-lookup"><span data-stu-id="fe44d-218">:::no-loc(SignalR)::: has the concept of persistent connections and built-in support for broadcasting messages.</span></span>
+* <span data-ttu-id="fe44d-215">**廣播即時通訊** ： gRPC 透過串流支援即時通訊，但廣播訊息到已註冊連接的概念不存在。</span><span class="sxs-lookup"><span data-stu-id="fe44d-215">**Broadcast real-time communication** : gRPC supports real-time communication via streaming, but the concept of broadcasting a message out to registered connections doesn't exist.</span></span> <span data-ttu-id="fe44d-216">例如，在應該將新的聊天訊息傳送到聊天室中所有用戶端的聊天室案例中，每個 gRPC 呼叫都需要個別將新的聊天訊息串流至用戶端。</span><span class="sxs-lookup"><span data-stu-id="fe44d-216">For example in a chat room scenario where new chat messages should be sent to all clients in the chat room, each gRPC call is required to individually stream new chat messages to the client.</span></span> <span data-ttu-id="fe44d-217">[SignalR](xref:signalr/introduction) 是適用于此案例的實用架構。</span><span class="sxs-lookup"><span data-stu-id="fe44d-217">[SignalR](xref:signalr/introduction) is a useful framework for this scenario.</span></span> <span data-ttu-id="fe44d-218">SignalR 具有持續性連接的概念，以及廣播訊息的內建支援。</span><span class="sxs-lookup"><span data-stu-id="fe44d-218">SignalR has the concept of persistent connections and built-in support for broadcasting messages.</span></span>
 
 ## <a name="additional-resources"></a><span data-ttu-id="fe44d-219">其他資源</span><span class="sxs-lookup"><span data-stu-id="fe44d-219">Additional resources</span></span>
 

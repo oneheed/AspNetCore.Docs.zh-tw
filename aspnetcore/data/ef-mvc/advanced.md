@@ -7,17 +7,17 @@ ms.custom: mvc
 ms.date: 03/27/2019
 ms.topic: tutorial
 no-loc:
-- ':::no-loc(appsettings.json):::'
-- ':::no-loc(ASP.NET Core Identity):::'
-- ':::no-loc(cookie):::'
-- ':::no-loc(Cookie):::'
-- ':::no-loc(Blazor):::'
-- ':::no-loc(Blazor Server):::'
-- ':::no-loc(Blazor WebAssembly):::'
-- ':::no-loc(Identity):::'
-- ":::no-loc(Let's Encrypt):::"
-- ':::no-loc(Razor):::'
-- ':::no-loc(SignalR):::'
+- 'appsettings.json'
+- 'ASP.NET Core Identity'
+- 'cookie'
+- 'Cookie'
+- 'Blazor'
+- 'Blazor Server'
+- 'Blazor WebAssembly'
+- 'Identity'
+- "Let's Encrypt"
+- 'Razor'
+- 'SignalR'
 uid: data/ef-mvc/advanced
 ms.openlocfilehash: 386be395399bf4131e4b6c8cac8221f994e8b7c5
 ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
@@ -105,7 +105,7 @@ ms.locfileid: "93054381"
 
 <span data-ttu-id="4c39a-160">在方案總管  中，以滑鼠右鍵按一下  。</span><span class="sxs-lookup"><span data-stu-id="4c39a-160">In **Solution Explorer** , right-click the *Views/Courses* folder, and then click **Add > New Item** .</span></span>
 
-<span data-ttu-id="4c39a-161">在 [ **加入新專案** ] 對話方塊中，按一下左窗格中 [ **已安裝** ] 下方的 **ASP.NET Core** ，按一下 [ **:::no-loc(Razor)::: View** ]，然後將新的 view UpdateCourseCredits 命名為 *cshtml* 。</span><span class="sxs-lookup"><span data-stu-id="4c39a-161">In the **Add New Item** dialog, click **ASP.NET Core** under **Installed** in the left pane, click **:::no-loc(Razor)::: View** , and name the new view *UpdateCourseCredits.cshtml* .</span></span>
+<span data-ttu-id="4c39a-161">在 [ **加入新專案** ] 對話方塊中，按一下左窗格中 [ **已安裝** ] 下方的 **ASP.NET Core** ，按一下 [ **Razor View** ]，然後將新的 view UpdateCourseCredits 命名為 *cshtml* 。</span><span class="sxs-lookup"><span data-stu-id="4c39a-161">In the **Add New Item** dialog, click **ASP.NET Core** under **Installed** in the left pane, click **Razor View** , and name the new view *UpdateCourseCredits.cshtml* .</span></span>
 
 <span data-ttu-id="4c39a-162">在 *Views/Courses/UpdateCourseCredits.cshtml* 中，以下列程式碼取代範本程式碼：</span><span class="sxs-lookup"><span data-stu-id="4c39a-162">In *Views/Courses/UpdateCourseCredits.cshtml* , replace the template code with the following code:</span></span>
 
@@ -241,7 +241,7 @@ _context.ChangeTracker.AutoDetectChangesEnabled = false;
 
 <span data-ttu-id="4c39a-241">在具有現有資料的資料庫中進行結構描述變更時，可能會收到其他錯誤。</span><span class="sxs-lookup"><span data-stu-id="4c39a-241">It's possible to get other errors when making schema changes in a database that has existing data.</span></span> <span data-ttu-id="4c39a-242">如果收到無法解決的移轉錯誤，您可以變更連接字串中的資料庫名稱，或刪除該資料庫。</span><span class="sxs-lookup"><span data-stu-id="4c39a-242">If you get migration errors you can't resolve, you can either change the database name in the connection string or delete the database.</span></span> <span data-ttu-id="4c39a-243">使用新資料庫時，沒有可移轉的資料，因此 update-database 命令更可能會在沒有錯誤的情況下完成。</span><span class="sxs-lookup"><span data-stu-id="4c39a-243">With a new database, there's no data to migrate, and the update-database command is much more likely to complete without errors.</span></span>
 
-<span data-ttu-id="4c39a-244">最簡單的方法是在中重新命名資料庫 *:::no-loc(appsettings.json):::* 。</span><span class="sxs-lookup"><span data-stu-id="4c39a-244">The simplest approach is to rename the database in *:::no-loc(appsettings.json):::* .</span></span> <span data-ttu-id="4c39a-245">下次您執行 `database update` 時，就會建立新的資料庫。</span><span class="sxs-lookup"><span data-stu-id="4c39a-245">The next time you run `database update`, a new database will be created.</span></span>
+<span data-ttu-id="4c39a-244">最簡單的方法是在中重新命名資料庫 *appsettings.json* 。</span><span class="sxs-lookup"><span data-stu-id="4c39a-244">The simplest approach is to rename the database in *appsettings.json* .</span></span> <span data-ttu-id="4c39a-245">下次您執行 `database update` 時，就會建立新的資料庫。</span><span class="sxs-lookup"><span data-stu-id="4c39a-245">The next time you run `database update`, a new database will be created.</span></span>
 
 <span data-ttu-id="4c39a-246">若要刪除 SSOX 中的資料庫，請以滑鼠右鍵按一下該資料庫，按一下 [刪除]  ，然後在 [刪除資料庫]  對話方塊中選取 [關閉現有的連線]  ，並按一下 [確定]  。</span><span class="sxs-lookup"><span data-stu-id="4c39a-246">To delete a database in SSOX, right-click the database, click **Delete** , and then in the **Delete Database** dialog box select **Close existing connections** and click **OK** .</span></span>
 

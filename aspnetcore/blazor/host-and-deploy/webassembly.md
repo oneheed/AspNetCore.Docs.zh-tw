@@ -1,23 +1,23 @@
 ---
-title: '裝載和部署 ASP.NET Core :::no-loc(Blazor WebAssembly):::'
+title: '裝載和部署 ASP.NET Core Blazor WebAssembly'
 author: guardrex
-description: '瞭解如何 :::no-loc(Blazor)::: 使用 ASP.NET Core、內容傳遞網路 (CDN) 、檔案伺服器和 GitHub 頁面來裝載和部署應用程式。'
+description: '瞭解如何 Blazor 使用 ASP.NET Core、內容傳遞網路 (CDN) 、檔案伺服器和 GitHub 頁面來裝載和部署應用程式。'
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
 ms.date: 10/09/2020
 no-loc:
-- ':::no-loc(appsettings.json):::'
-- ':::no-loc(ASP.NET Core Identity):::'
-- ':::no-loc(cookie):::'
-- ':::no-loc(Cookie):::'
-- ':::no-loc(Blazor):::'
-- ':::no-loc(Blazor Server):::'
-- ':::no-loc(Blazor WebAssembly):::'
-- ':::no-loc(Identity):::'
-- ":::no-loc(Let's Encrypt):::"
-- ':::no-loc(Razor):::'
-- ':::no-loc(SignalR):::'
+- 'appsettings.json'
+- 'ASP.NET Core Identity'
+- 'cookie'
+- 'Cookie'
+- 'Blazor'
+- 'Blazor Server'
+- 'Blazor WebAssembly'
+- 'Identity'
+- "Let's Encrypt"
+- 'Razor'
+- 'SignalR'
 uid: blazor/host-and-deploy/webassembly
 ms.openlocfilehash: 7ae462ff9abd06fe4ab4b3e00a71515b76b0ee7d
 ms.sourcegitcommit: bb475e69cb647f22cf6d2c6f93d0836c160080d7
@@ -26,28 +26,28 @@ ms.contentlocale: zh-TW
 ms.lasthandoff: 11/06/2020
 ms.locfileid: "94339980"
 ---
-# <a name="host-and-deploy-aspnet-core-no-locblazor-webassembly"></a><span data-ttu-id="80af2-103">裝載和部署 ASP.NET Core :::no-loc(Blazor WebAssembly):::</span><span class="sxs-lookup"><span data-stu-id="80af2-103">Host and deploy ASP.NET Core :::no-loc(Blazor WebAssembly):::</span></span>
+# <a name="host-and-deploy-aspnet-core-no-locblazor-webassembly"></a><span data-ttu-id="80af2-103">裝載和部署 ASP.NET Core Blazor WebAssembly</span><span class="sxs-lookup"><span data-stu-id="80af2-103">Host and deploy ASP.NET Core Blazor WebAssembly</span></span>
 
 <span data-ttu-id="80af2-104">[Luke Latham](https://github.com/guardrex)、 [Rainer Stropek](https://www.timecockpit.com)、 [Daniel Roth](https://github.com/danroth27)、 [Ben Adams](https://twitter.com/ben_a_adams)及[Safia Abdalla](https://safia.rocks)</span><span class="sxs-lookup"><span data-stu-id="80af2-104">By [Luke Latham](https://github.com/guardrex), [Rainer Stropek](https://www.timecockpit.com), [Daniel Roth](https://github.com/danroth27), [Ben Adams](https://twitter.com/ben_a_adams), and [Safia Abdalla](https://safia.rocks)</span></span>
 
-<span data-ttu-id="80af2-105">使用[ :::no-loc(Blazor WebAssembly)::: 裝載模型](xref:blazor/hosting-models#blazor-webassembly)：</span><span class="sxs-lookup"><span data-stu-id="80af2-105">With the [:::no-loc(Blazor WebAssembly)::: hosting model](xref:blazor/hosting-models#blazor-webassembly):</span></span>
+<span data-ttu-id="80af2-105">使用[ Blazor WebAssembly 裝載模型](xref:blazor/hosting-models#blazor-webassembly)：</span><span class="sxs-lookup"><span data-stu-id="80af2-105">With the [Blazor WebAssembly hosting model](xref:blazor/hosting-models#blazor-webassembly):</span></span>
 
-* <span data-ttu-id="80af2-106">:::no-loc(Blazor):::應用程式、其相依性和 .net 執行時間會以平行方式下載至瀏覽器。</span><span class="sxs-lookup"><span data-stu-id="80af2-106">The :::no-loc(Blazor)::: app, its dependencies, and the .NET runtime are downloaded to the browser in parallel.</span></span>
+* <span data-ttu-id="80af2-106">Blazor應用程式、其相依性和 .net 執行時間會以平行方式下載至瀏覽器。</span><span class="sxs-lookup"><span data-stu-id="80af2-106">The Blazor app, its dependencies, and the .NET runtime are downloaded to the browser in parallel.</span></span>
 * <span data-ttu-id="80af2-107">應用程式會直接在瀏覽器 UI 執行緒上執行。</span><span class="sxs-lookup"><span data-stu-id="80af2-107">The app is executed directly on the browser UI thread.</span></span>
 
 <span data-ttu-id="80af2-108">以下是支援的部署策略：</span><span class="sxs-lookup"><span data-stu-id="80af2-108">The following deployment strategies are supported:</span></span>
 
-* <span data-ttu-id="80af2-109">:::no-loc(Blazor):::應用程式是由 ASP.NET Core 應用程式提供服務。</span><span class="sxs-lookup"><span data-stu-id="80af2-109">The :::no-loc(Blazor)::: app is served by an ASP.NET Core app.</span></span> <span data-ttu-id="80af2-110">此策略已於[搭配 ASP.NET Core 的已裝載部署](#hosted-deployment-with-aspnet-core)一節中涵蓋。</span><span class="sxs-lookup"><span data-stu-id="80af2-110">This strategy is covered in the [Hosted deployment with ASP.NET Core](#hosted-deployment-with-aspnet-core) section.</span></span>
-* <span data-ttu-id="80af2-111">:::no-loc(Blazor):::應用程式會放置在靜態裝載 web 伺服器或服務上，而不會使用 .net 來提供 :::no-loc(Blazor)::: 應用程式。</span><span class="sxs-lookup"><span data-stu-id="80af2-111">The :::no-loc(Blazor)::: app is placed on a static hosting web server or service, where .NET isn't used to serve the :::no-loc(Blazor)::: app.</span></span> <span data-ttu-id="80af2-112">此策略包含在 [獨立部署](#standalone-deployment) 區段中，其中包含將 :::no-loc(Blazor WebAssembly)::: 應用程式裝載為 IIS 子應用程式的相關資訊。</span><span class="sxs-lookup"><span data-stu-id="80af2-112">This strategy is covered in the [Standalone deployment](#standalone-deployment) section, which includes information on hosting a :::no-loc(Blazor WebAssembly)::: app as an IIS sub-app.</span></span>
+* <span data-ttu-id="80af2-109">Blazor應用程式是由 ASP.NET Core 應用程式提供服務。</span><span class="sxs-lookup"><span data-stu-id="80af2-109">The Blazor app is served by an ASP.NET Core app.</span></span> <span data-ttu-id="80af2-110">此策略已於[搭配 ASP.NET Core 的已裝載部署](#hosted-deployment-with-aspnet-core)一節中涵蓋。</span><span class="sxs-lookup"><span data-stu-id="80af2-110">This strategy is covered in the [Hosted deployment with ASP.NET Core](#hosted-deployment-with-aspnet-core) section.</span></span>
+* <span data-ttu-id="80af2-111">Blazor應用程式會放置在靜態裝載 web 伺服器或服務上，而不會使用 .net 來提供 Blazor 應用程式。</span><span class="sxs-lookup"><span data-stu-id="80af2-111">The Blazor app is placed on a static hosting web server or service, where .NET isn't used to serve the Blazor app.</span></span> <span data-ttu-id="80af2-112">此策略包含在 [獨立部署](#standalone-deployment) 區段中，其中包含將 Blazor WebAssembly 應用程式裝載為 IIS 子應用程式的相關資訊。</span><span class="sxs-lookup"><span data-stu-id="80af2-112">This strategy is covered in the [Standalone deployment](#standalone-deployment) section, which includes information on hosting a Blazor WebAssembly app as an IIS sub-app.</span></span>
 
 ## <a name="compression"></a><span data-ttu-id="80af2-113">壓縮</span><span class="sxs-lookup"><span data-stu-id="80af2-113">Compression</span></span>
 
-<span data-ttu-id="80af2-114">:::no-loc(Blazor WebAssembly):::發佈應用程式時，會在發行期間以靜態方式壓縮輸出，以減少應用程式的大小，並移除執行時間壓縮的額外負荷。</span><span class="sxs-lookup"><span data-stu-id="80af2-114">When a :::no-loc(Blazor WebAssembly)::: app is published, the output is statically compressed during publish to reduce the app's size and remove the overhead for runtime compression.</span></span> <span data-ttu-id="80af2-115">使用的壓縮演算法如下：</span><span class="sxs-lookup"><span data-stu-id="80af2-115">The following compression algorithms are used:</span></span>
+<span data-ttu-id="80af2-114">Blazor WebAssembly發佈應用程式時，會在發行期間以靜態方式壓縮輸出，以減少應用程式的大小，並移除執行時間壓縮的額外負荷。</span><span class="sxs-lookup"><span data-stu-id="80af2-114">When a Blazor WebAssembly app is published, the output is statically compressed during publish to reduce the app's size and remove the overhead for runtime compression.</span></span> <span data-ttu-id="80af2-115">使用的壓縮演算法如下：</span><span class="sxs-lookup"><span data-stu-id="80af2-115">The following compression algorithms are used:</span></span>
 
 * <span data-ttu-id="80af2-116">[Brotli](https://tools.ietf.org/html/rfc7932) (最高層級) </span><span class="sxs-lookup"><span data-stu-id="80af2-116">[Brotli](https://tools.ietf.org/html/rfc7932) (highest level)</span></span>
 * [<span data-ttu-id="80af2-117">Gzip</span><span class="sxs-lookup"><span data-stu-id="80af2-117">Gzip</span></span>](https://tools.ietf.org/html/rfc1952)
 
-<span data-ttu-id="80af2-118">:::no-loc(Blazor)::: 依賴主機提供適當的壓縮檔案。</span><span class="sxs-lookup"><span data-stu-id="80af2-118">:::no-loc(Blazor)::: relies on the host to the serve the appropriate compressed files.</span></span> <span data-ttu-id="80af2-119">使用 ASP.NET Core 裝載的專案時，主專案可以執行內容協商以及提供靜態壓縮檔案。</span><span class="sxs-lookup"><span data-stu-id="80af2-119">When using an ASP.NET Core hosted project, the host project is capable of performing content negotiation and serving the statically-compressed files.</span></span> <span data-ttu-id="80af2-120">裝載 :::no-loc(Blazor WebAssembly)::: 獨立應用程式時，可能需要額外的工作，以確保提供靜態壓縮檔案：</span><span class="sxs-lookup"><span data-stu-id="80af2-120">When hosting a :::no-loc(Blazor WebAssembly)::: standalone app, additional work might be required to ensure that statically-compressed files are served:</span></span>
+<span data-ttu-id="80af2-118">Blazor 依賴主機提供適當的壓縮檔案。</span><span class="sxs-lookup"><span data-stu-id="80af2-118">Blazor relies on the host to the serve the appropriate compressed files.</span></span> <span data-ttu-id="80af2-119">使用 ASP.NET Core 裝載的專案時，主專案可以執行內容協商以及提供靜態壓縮檔案。</span><span class="sxs-lookup"><span data-stu-id="80af2-119">When using an ASP.NET Core hosted project, the host project is capable of performing content negotiation and serving the statically-compressed files.</span></span> <span data-ttu-id="80af2-120">裝載 Blazor WebAssembly 獨立應用程式時，可能需要額外的工作，以確保提供靜態壓縮檔案：</span><span class="sxs-lookup"><span data-stu-id="80af2-120">When hosting a Blazor WebAssembly standalone app, additional work might be required to ensure that statically-compressed files are served:</span></span>
 
 * <span data-ttu-id="80af2-121">如需 IIS `web.config` 壓縮設定，請參閱 [Iis： Brotli 和 Gzip 壓縮](#brotli-and-gzip-compression) 一節。</span><span class="sxs-lookup"><span data-stu-id="80af2-121">For IIS `web.config` compression configuration, see the [IIS: Brotli and Gzip compression](#brotli-and-gzip-compression) section.</span></span> 
 * <span data-ttu-id="80af2-122">裝載在不支援靜態壓縮的檔案內容協商的靜態裝載方案（例如 GitHub 頁面）時，請考慮將應用程式設定為提取和解碼 Brotli 壓縮檔案：</span><span class="sxs-lookup"><span data-stu-id="80af2-122">When hosting on static hosting solutions that don't support statically-compressed file content negotiation, such as GitHub Pages, consider configuring the app to fetch and decode Brotli compressed files:</span></span>
@@ -63,7 +63,7 @@ ms.locfileid: "94339980"
     <script src="decode.js"></script>
     <script src="_framework/blazor.webassembly.js" autostart="false"></script>
     <script>
-      :::no-loc(Blazor):::.start({
+      Blazor.start({
         loadBootResource: function (type, name, defaultUri, integrity) {
           if (type !== 'dotnetjs' && location.hostname !== 'localhost') {
             return (async function () {
@@ -85,23 +85,23 @@ ms.locfileid: "94339980"
     </script>
     ```
  
-<span data-ttu-id="80af2-130">若要停用壓縮，請在 `:::no-loc(Blazor):::EnableCompression` 應用程式的專案檔中新增 MSBuild 屬性，並將值設定為 `false` ：</span><span class="sxs-lookup"><span data-stu-id="80af2-130">To disable compression, add the `:::no-loc(Blazor):::EnableCompression` MSBuild property to the app's project file and set the value to `false`:</span></span>
+<span data-ttu-id="80af2-130">若要停用壓縮，請在 `BlazorEnableCompression` 應用程式的專案檔中新增 MSBuild 屬性，並將值設定為 `false` ：</span><span class="sxs-lookup"><span data-stu-id="80af2-130">To disable compression, add the `BlazorEnableCompression` MSBuild property to the app's project file and set the value to `false`:</span></span>
 
 ```xml
 <PropertyGroup>
-  <:::no-loc(Blazor):::EnableCompression>false</:::no-loc(Blazor):::EnableCompression>
+  <BlazorEnableCompression>false</BlazorEnableCompression>
 </PropertyGroup>
 ```
 
-<span data-ttu-id="80af2-131">您 `:::no-loc(Blazor):::EnableCompression` 可以 [`dotnet publish`](/dotnet/core/tools/dotnet-publish) 在命令 shell 中使用下列語法，將屬性傳遞至命令：</span><span class="sxs-lookup"><span data-stu-id="80af2-131">The `:::no-loc(Blazor):::EnableCompression` property can be passed to the [`dotnet publish`](/dotnet/core/tools/dotnet-publish) command with the following syntax in a command shell:</span></span>
+<span data-ttu-id="80af2-131">您 `BlazorEnableCompression` 可以 [`dotnet publish`](/dotnet/core/tools/dotnet-publish) 在命令 shell 中使用下列語法，將屬性傳遞至命令：</span><span class="sxs-lookup"><span data-stu-id="80af2-131">The `BlazorEnableCompression` property can be passed to the [`dotnet publish`](/dotnet/core/tools/dotnet-publish) command with the following syntax in a command shell:</span></span>
 
 ```dotnetcli
-dotnet publish -p::::no-loc(Blazor):::EnableCompression=false
+dotnet publish -p:BlazorEnableCompression=false
 ```
 
 ## <a name="rewrite-urls-for-correct-routing"></a><span data-ttu-id="80af2-132">重寫 URL 以便正確地路由</span><span class="sxs-lookup"><span data-stu-id="80af2-132">Rewrite URLs for correct routing</span></span>
 
-<span data-ttu-id="80af2-133">應用程式中頁面元件的路由要求 :::no-loc(Blazor WebAssembly)::: ，與裝載應用程式中的路由要求一樣簡單 :::no-loc(Blazor Server)::: 。</span><span class="sxs-lookup"><span data-stu-id="80af2-133">Routing requests for page components in a :::no-loc(Blazor WebAssembly)::: app isn't as straightforward as routing requests in a :::no-loc(Blazor Server):::, hosted app.</span></span> <span data-ttu-id="80af2-134">請考慮 :::no-loc(Blazor WebAssembly)::: 具有兩個元件的應用程式：</span><span class="sxs-lookup"><span data-stu-id="80af2-134">Consider a :::no-loc(Blazor WebAssembly)::: app with two components:</span></span>
+<span data-ttu-id="80af2-133">應用程式中頁面元件的路由要求 Blazor WebAssembly ，與裝載應用程式中的路由要求一樣簡單 Blazor Server 。</span><span class="sxs-lookup"><span data-stu-id="80af2-133">Routing requests for page components in a Blazor WebAssembly app isn't as straightforward as routing requests in a Blazor Server, hosted app.</span></span> <span data-ttu-id="80af2-134">請考慮 Blazor WebAssembly 具有兩個元件的應用程式：</span><span class="sxs-lookup"><span data-stu-id="80af2-134">Consider a Blazor WebAssembly app with two components:</span></span>
 
 * <span data-ttu-id="80af2-135">`Main.razor`：在應用程式的根目錄載入，並且包含 `About` 元件 () 的連結 `href="About"` 。</span><span class="sxs-lookup"><span data-stu-id="80af2-135">`Main.razor`: Loads at the root of the app and contains a link to the `About` component (`href="About"`).</span></span>
 * <span data-ttu-id="80af2-136">`About.razor`： `About` component。</span><span class="sxs-lookup"><span data-stu-id="80af2-136">`About.razor`: `About` component.</span></span>
@@ -111,33 +111,33 @@ dotnet publish -p::::no-loc(Blazor):::EnableCompression=false
 1. <span data-ttu-id="80af2-138">瀏覽器提出要求。</span><span class="sxs-lookup"><span data-stu-id="80af2-138">The browser makes a request.</span></span>
 1. <span data-ttu-id="80af2-139">預設頁面會傳回，通常是 `index.html` 。</span><span class="sxs-lookup"><span data-stu-id="80af2-139">The default page is returned, which is usually `index.html`.</span></span>
 1. <span data-ttu-id="80af2-140">`index.html` 啟動應用程式。</span><span class="sxs-lookup"><span data-stu-id="80af2-140">`index.html` bootstraps the app.</span></span>
-1. <span data-ttu-id="80af2-141">:::no-loc(Blazor):::的路由器會載入，而 :::no-loc(Razor)::: `Main` 元件則會呈現。</span><span class="sxs-lookup"><span data-stu-id="80af2-141">:::no-loc(Blazor):::'s router loads, and the :::no-loc(Razor)::: `Main` component is rendered.</span></span>
+1. <span data-ttu-id="80af2-141">Blazor的路由器會載入，而 Razor `Main` 元件則會呈現。</span><span class="sxs-lookup"><span data-stu-id="80af2-141">Blazor's router loads, and the Razor `Main` component is rendered.</span></span>
 
-<span data-ttu-id="80af2-142">在主頁面中，選取元件的連結可 `About` 在用戶端上運作，因為 :::no-loc(Blazor)::: 路由器會停止瀏覽器在網際網路上提出要求， `www.contoso.com` 並提供轉譯 `About` 的 `About` 元件本身。</span><span class="sxs-lookup"><span data-stu-id="80af2-142">In the Main page, selecting the link to the `About` component works on the client because the :::no-loc(Blazor)::: router stops the browser from making a request on the Internet to `www.contoso.com` for `About` and serves the rendered `About` component itself.</span></span> <span data-ttu-id="80af2-143">*:::no-loc(Blazor WebAssembly)::: 應用程式內* 內部端點的所有要求運作方式相同：要求不會對網際網路上伺服器裝載的資源觸發以瀏覽器為基礎的要求。</span><span class="sxs-lookup"><span data-stu-id="80af2-143">All of the requests for internal endpoints *within the :::no-loc(Blazor WebAssembly)::: app* work the same way: Requests don't trigger browser-based requests to server-hosted resources on the Internet.</span></span> <span data-ttu-id="80af2-144">路由器會在內部處理要求。</span><span class="sxs-lookup"><span data-stu-id="80af2-144">The router handles the requests internally.</span></span>
+<span data-ttu-id="80af2-142">在主頁面中，選取元件的連結可 `About` 在用戶端上運作，因為 Blazor 路由器會停止瀏覽器在網際網路上提出要求， `www.contoso.com` 並提供轉譯 `About` 的 `About` 元件本身。</span><span class="sxs-lookup"><span data-stu-id="80af2-142">In the Main page, selecting the link to the `About` component works on the client because the Blazor router stops the browser from making a request on the Internet to `www.contoso.com` for `About` and serves the rendered `About` component itself.</span></span> <span data-ttu-id="80af2-143">*Blazor WebAssembly 應用程式內* 內部端點的所有要求運作方式相同：要求不會對網際網路上伺服器裝載的資源觸發以瀏覽器為基礎的要求。</span><span class="sxs-lookup"><span data-stu-id="80af2-143">All of the requests for internal endpoints *within the Blazor WebAssembly app* work the same way: Requests don't trigger browser-based requests to server-hosted resources on the Internet.</span></span> <span data-ttu-id="80af2-144">路由器會在內部處理要求。</span><span class="sxs-lookup"><span data-stu-id="80af2-144">The router handles the requests internally.</span></span>
 
 <span data-ttu-id="80af2-145">如果使用瀏覽器之網址列提出對 `www.contoso.com/About` 的要求，則要求會失敗。</span><span class="sxs-lookup"><span data-stu-id="80af2-145">If a request is made using the browser's address bar for `www.contoso.com/About`, the request fails.</span></span> <span data-ttu-id="80af2-146">在應用程式的網際網路主機上沒有這類資源存在，因此會傳回「404 - 找不到」的回應。</span><span class="sxs-lookup"><span data-stu-id="80af2-146">No such resource exists on the app's Internet host, so a *404 - Not Found* response is returned.</span></span>
 
-<span data-ttu-id="80af2-147">因為瀏覽器會對以網際網路為基礎的主機發出要求，以提供用戶端頁面，所以 web 伺服器和主機服務必須將所有不在伺服器上的資源要求重寫為 `index.html` 頁面。</span><span class="sxs-lookup"><span data-stu-id="80af2-147">Because browsers make requests to Internet-based hosts for client-side pages, web servers and hosting services must rewrite all requests for resources not physically on the server to the `index.html` page.</span></span> <span data-ttu-id="80af2-148">當 `index.html` 傳回時，應用程式的 :::no-loc(Blazor)::: 路由器會接管並回應正確的資源。</span><span class="sxs-lookup"><span data-stu-id="80af2-148">When `index.html` is returned, the app's :::no-loc(Blazor)::: router takes over and responds with the correct resource.</span></span>
+<span data-ttu-id="80af2-147">因為瀏覽器會對以網際網路為基礎的主機發出要求，以提供用戶端頁面，所以 web 伺服器和主機服務必須將所有不在伺服器上的資源要求重寫為 `index.html` 頁面。</span><span class="sxs-lookup"><span data-stu-id="80af2-147">Because browsers make requests to Internet-based hosts for client-side pages, web servers and hosting services must rewrite all requests for resources not physically on the server to the `index.html` page.</span></span> <span data-ttu-id="80af2-148">當 `index.html` 傳回時，應用程式的 Blazor 路由器會接管並回應正確的資源。</span><span class="sxs-lookup"><span data-stu-id="80af2-148">When `index.html` is returned, the app's Blazor router takes over and responds with the correct resource.</span></span>
 
 <span data-ttu-id="80af2-149">部署至 IIS 伺服器時，您可以使用 URL 重寫模組與應用程式的已發佈檔案 `web.config` 。</span><span class="sxs-lookup"><span data-stu-id="80af2-149">When deploying to an IIS server, you can use the URL Rewrite Module with the app's published `web.config` file.</span></span> <span data-ttu-id="80af2-150">如需詳細資訊，請參閱 [IIS](#iis) 一節。</span><span class="sxs-lookup"><span data-stu-id="80af2-150">For more information, see the [IIS](#iis) section.</span></span>
 
 ## <a name="hosted-deployment-with-aspnet-core"></a><span data-ttu-id="80af2-151">搭配 ASP.NET Core 的已裝載部署</span><span class="sxs-lookup"><span data-stu-id="80af2-151">Hosted deployment with ASP.NET Core</span></span>
 
-<span data-ttu-id="80af2-152">*託管部署* :::no-loc(Blazor WebAssembly)::: 可從 web 伺服器上執行的 [ASP.NET Core 應用程式](xref:index)，將應用程式提供給瀏覽器。</span><span class="sxs-lookup"><span data-stu-id="80af2-152">A *hosted deployment* serves the :::no-loc(Blazor WebAssembly)::: app to browsers from an [ASP.NET Core app](xref:index) that runs on a web server.</span></span>
+<span data-ttu-id="80af2-152">*託管部署* Blazor WebAssembly 可從 web 伺服器上執行的 [ASP.NET Core 應用程式](xref:index)，將應用程式提供給瀏覽器。</span><span class="sxs-lookup"><span data-stu-id="80af2-152">A *hosted deployment* serves the Blazor WebAssembly app to browsers from an [ASP.NET Core app](xref:index) that runs on a web server.</span></span>
 
-<span data-ttu-id="80af2-153">用戶端 :::no-loc(Blazor WebAssembly)::: 應用程式會 `/bin/Release/{TARGET FRAMEWORK}/publish/wwwroot` 與伺服器應用程式的任何其他靜態 web 資產一起發行至伺服器應用程式的資料夾中。</span><span class="sxs-lookup"><span data-stu-id="80af2-153">The client :::no-loc(Blazor WebAssembly)::: app is published into the `/bin/Release/{TARGET FRAMEWORK}/publish/wwwroot` folder of the server app, along with any other static web assets of the server app.</span></span> <span data-ttu-id="80af2-154">這兩個應用程式會一起部署。</span><span class="sxs-lookup"><span data-stu-id="80af2-154">The two apps are deployed together.</span></span> <span data-ttu-id="80af2-155">需要有能夠裝載 ASP.NET Core 應用程式的網頁伺服器。</span><span class="sxs-lookup"><span data-stu-id="80af2-155">A web server that is capable of hosting an ASP.NET Core app is required.</span></span> <span data-ttu-id="80af2-156">針對裝載的部署，當使用命令) 時，Visual Studio 包含 **:::no-loc(Blazor WebAssembly)::: 應用程式** 專案範本 (`blazorwasm` 範本， [`dotnet new`](/dotnet/core/tools/dotnet-new) **`Hosted`** (`-ho|--hosted` 使用命令) 時所選取的選項 `dotnet new` 。</span><span class="sxs-lookup"><span data-stu-id="80af2-156">For a hosted deployment, Visual Studio includes the **:::no-loc(Blazor WebAssembly)::: App** project template (`blazorwasm` template when using the [`dotnet new`](/dotnet/core/tools/dotnet-new) command) with the **`Hosted`** option selected (`-ho|--hosted` when using the `dotnet new` command).</span></span>
+<span data-ttu-id="80af2-153">用戶端 Blazor WebAssembly 應用程式會 `/bin/Release/{TARGET FRAMEWORK}/publish/wwwroot` 與伺服器應用程式的任何其他靜態 web 資產一起發行至伺服器應用程式的資料夾中。</span><span class="sxs-lookup"><span data-stu-id="80af2-153">The client Blazor WebAssembly app is published into the `/bin/Release/{TARGET FRAMEWORK}/publish/wwwroot` folder of the server app, along with any other static web assets of the server app.</span></span> <span data-ttu-id="80af2-154">這兩個應用程式會一起部署。</span><span class="sxs-lookup"><span data-stu-id="80af2-154">The two apps are deployed together.</span></span> <span data-ttu-id="80af2-155">需要有能夠裝載 ASP.NET Core 應用程式的網頁伺服器。</span><span class="sxs-lookup"><span data-stu-id="80af2-155">A web server that is capable of hosting an ASP.NET Core app is required.</span></span> <span data-ttu-id="80af2-156">針對裝載的部署，當使用命令) 時，Visual Studio 包含 **Blazor WebAssembly 應用程式** 專案範本 (`blazorwasm` 範本， [`dotnet new`](/dotnet/core/tools/dotnet-new) **`Hosted`** (`-ho|--hosted` 使用命令) 時所選取的選項 `dotnet new` 。</span><span class="sxs-lookup"><span data-stu-id="80af2-156">For a hosted deployment, Visual Studio includes the **Blazor WebAssembly App** project template (`blazorwasm` template when using the [`dotnet new`](/dotnet/core/tools/dotnet-new) command) with the **`Hosted`** option selected (`-ho|--hosted` when using the `dotnet new` command).</span></span>
 
 <span data-ttu-id="80af2-157">如需 ASP.NET Core 應用程式裝載和部署的詳細資訊，請參閱 <xref:host-and-deploy/index>。</span><span class="sxs-lookup"><span data-stu-id="80af2-157">For more information on ASP.NET Core app hosting and deployment, see <xref:host-and-deploy/index>.</span></span>
 
 <span data-ttu-id="80af2-158">如需部署至 Azure App Service 的相關資訊，請參閱 <xref:tutorials/publish-to-azure-webapp-using-vs>。</span><span class="sxs-lookup"><span data-stu-id="80af2-158">For information on deploying to Azure App Service, see <xref:tutorials/publish-to-azure-webapp-using-vs>.</span></span>
 
-## <a name="hosted-deployment-with-multiple-no-locblazor-webassembly-apps"></a><span data-ttu-id="80af2-159">具有多個應用程式的託管部署 :::no-loc(Blazor WebAssembly):::</span><span class="sxs-lookup"><span data-stu-id="80af2-159">Hosted deployment with multiple :::no-loc(Blazor WebAssembly)::: apps</span></span>
+## <a name="hosted-deployment-with-multiple-no-locblazor-webassembly-apps"></a><span data-ttu-id="80af2-159">具有多個應用程式的託管部署 Blazor WebAssembly</span><span class="sxs-lookup"><span data-stu-id="80af2-159">Hosted deployment with multiple Blazor WebAssembly apps</span></span>
 
 ### <a name="app-configuration"></a><span data-ttu-id="80af2-160">應用程式設定</span><span class="sxs-lookup"><span data-stu-id="80af2-160">App configuration</span></span>
 
-<span data-ttu-id="80af2-161">若要設定託管 :::no-loc(Blazor)::: 解決方案來提供多個 :::no-loc(Blazor WebAssembly)::: 應用程式服務：</span><span class="sxs-lookup"><span data-stu-id="80af2-161">To configure a hosted :::no-loc(Blazor)::: solution to serve multiple :::no-loc(Blazor WebAssembly)::: apps:</span></span>
+<span data-ttu-id="80af2-161">若要設定託管 Blazor 解決方案來提供多個 Blazor WebAssembly 應用程式服務：</span><span class="sxs-lookup"><span data-stu-id="80af2-161">To configure a hosted Blazor solution to serve multiple Blazor WebAssembly apps:</span></span>
 
-* <span data-ttu-id="80af2-162">使用現有的主控 :::no-loc(Blazor)::: 方案，或從裝載的專案範本建立新的方案 :::no-loc(Blazor)::: 。</span><span class="sxs-lookup"><span data-stu-id="80af2-162">Use an existing hosted :::no-loc(Blazor)::: solution or create a new solution from the :::no-loc(Blazor)::: Hosted project template.</span></span>
+* <span data-ttu-id="80af2-162">使用現有的主控 Blazor 方案，或從裝載的專案範本建立新的方案 Blazor 。</span><span class="sxs-lookup"><span data-stu-id="80af2-162">Use an existing hosted Blazor solution or create a new solution from the Blazor Hosted project template.</span></span>
 
 * <span data-ttu-id="80af2-163">在用戶端應用程式的專案檔中，將屬性新增至，並以的 `<StaticWebAssetBasePath>` `<PropertyGroup>` 值 `FirstApp` 設定專案靜態資產的基底路徑：</span><span class="sxs-lookup"><span data-stu-id="80af2-163">In the client app's project file, add a `<StaticWebAssetBasePath>` property to the `<PropertyGroup>` with a value of `FirstApp` to set the base path for the project's static assets:</span></span>
 
@@ -151,7 +151,7 @@ dotnet publish -p::::no-loc(Blazor):::EnableCompression=false
 * <span data-ttu-id="80af2-164">將第二個用戶端應用程式新增至解決方案：</span><span class="sxs-lookup"><span data-stu-id="80af2-164">Add a second client app to the solution:</span></span>
 
   * <span data-ttu-id="80af2-165">將名為的資料夾加入 `SecondClient` 方案的資料夾中。</span><span class="sxs-lookup"><span data-stu-id="80af2-165">Add a folder named `SecondClient` to the solution's folder.</span></span>
-  * <span data-ttu-id="80af2-166">在 :::no-loc(Blazor WebAssembly)::: `Second:::no-loc(Blazor):::App.Client` 專案範本的資料夾中，建立名為的應用程式 `SecondClient` :::no-loc(Blazor WebAssembly)::: 。</span><span class="sxs-lookup"><span data-stu-id="80af2-166">Create a :::no-loc(Blazor WebAssembly)::: app named `Second:::no-loc(Blazor):::App.Client` in the `SecondClient` folder from the :::no-loc(Blazor WebAssembly)::: project template.</span></span>
+  * <span data-ttu-id="80af2-166">在 Blazor WebAssembly `SecondBlazorApp.Client` 專案範本的資料夾中，建立名為的應用程式 `SecondClient` Blazor WebAssembly 。</span><span class="sxs-lookup"><span data-stu-id="80af2-166">Create a Blazor WebAssembly app named `SecondBlazorApp.Client` in the `SecondClient` folder from the Blazor WebAssembly project template.</span></span>
   * <span data-ttu-id="80af2-167">在應用程式的專案檔中：</span><span class="sxs-lookup"><span data-stu-id="80af2-167">In the app's project file:</span></span>
 
     * <span data-ttu-id="80af2-168">將屬性新增至，其 `<StaticWebAssetBasePath>` 值為 `<PropertyGroup>` `SecondApp` ：</span><span class="sxs-lookup"><span data-stu-id="80af2-168">Add a `<StaticWebAssetBasePath>` property to the `<PropertyGroup>` with a value of `SecondApp`:</span></span>
@@ -178,7 +178,7 @@ dotnet publish -p::::no-loc(Blazor):::EnableCompression=false
   ```xml
   <ItemGroup>
     ...
-    <ProjectReference Include="..\SecondClient\Second:::no-loc(Blazor):::App.Client.csproj" />
+    <ProjectReference Include="..\SecondClient\SecondBlazorApp.Client.csproj" />
   </ItemGroup>
   ```
 
@@ -191,14 +191,14 @@ dotnet publish -p::::no-loc(Blazor):::EnableCompression=false
 * <span data-ttu-id="80af2-173">在伺服器應用程式的 `Startup.Configure` 方法 (`Startup.cs`) 中，移除下列幾行，這些行會在呼叫之後出現 <xref:Microsoft.AspNetCore.Builder.HttpsPolicyBuilderExtensions.UseHttpsRedirection%2A> ：</span><span class="sxs-lookup"><span data-stu-id="80af2-173">In the server app's `Startup.Configure` method (`Startup.cs`), remove the following lines, which appear after the call to <xref:Microsoft.AspNetCore.Builder.HttpsPolicyBuilderExtensions.UseHttpsRedirection%2A>:</span></span>
 
   ```csharp
-  app.Use:::no-loc(Blazor):::FrameworkFiles();
+  app.UseBlazorFrameworkFiles();
   app.UseStaticFiles();
 
   app.UseRouting();
 
   app.UseEndpoints(endpoints =>
   {
-      endpoints.Map:::no-loc(Razor):::Pages();
+      endpoints.MapRazorPages();
       endpoints.MapControllers();
       endpoints.MapFallbackToFile("index.html");
   });
@@ -229,7 +229,7 @@ dotnet publish -p::::no-loc(Blazor):::EnableCompression=false
           return nxt();
       });
 
-      first.Use:::no-loc(Blazor):::FrameworkFiles("/FirstApp");
+      first.UseBlazorFrameworkFiles("/FirstApp");
       first.UseStaticFiles();
       first.UseStaticFiles("/FirstApp");
       first.UseRouting();
@@ -251,7 +251,7 @@ dotnet publish -p::::no-loc(Blazor):::EnableCompression=false
           return nxt();
       });
 
-      second.Use:::no-loc(Blazor):::FrameworkFiles("/SecondApp");
+      second.UseBlazorFrameworkFiles("/SecondApp");
       second.UseStaticFiles();
       second.UseStaticFiles("/SecondApp");
       second.UseRouting();
@@ -284,7 +284,7 @@ dotnet publish -p::::no-loc(Blazor):::EnableCompression=false
   <img alt="..." src="/{ASSET FILE NAME}" />
   ```
 
-* <span data-ttu-id="80af2-190">當資產位於 `wwwroot` 類別庫的資料夾中時[ :::no-loc(Razor)::: (RCL) ](xref:blazor/components/class-libraries)，請依[RCL 文章](xref:razor-pages/ui-class#consume-content-from-a-referenced-rcl)中的指導方針參考用戶端應用程式中的靜態資產：</span><span class="sxs-lookup"><span data-stu-id="80af2-190">When the asset is in the `wwwroot` folder of a [:::no-loc(Razor)::: Class Library (RCL)](xref:blazor/components/class-libraries), reference the static asset in the client app per the guidance in the [RCL article](xref:razor-pages/ui-class#consume-content-from-a-referenced-rcl):</span></span>
+* <span data-ttu-id="80af2-190">當資產位於 `wwwroot` 類別庫的資料夾中時[ Razor (RCL) ](xref:blazor/components/class-libraries)，請依[RCL 文章](xref:razor-pages/ui-class#consume-content-from-a-referenced-rcl)中的指導方針參考用戶端應用程式中的靜態資產：</span><span class="sxs-lookup"><span data-stu-id="80af2-190">When the asset is in the `wwwroot` folder of a [Razor Class Library (RCL)](xref:blazor/components/class-libraries), reference the static asset in the client app per the guidance in the [RCL article](xref:razor-pages/ui-class#consume-content-from-a-referenced-rcl):</span></span>
 
   ```razor
   <img alt="..." src="_content/{LIBRARY NAME}/{ASSET FILE NAME}" />
@@ -318,7 +318,7 @@ The preceding approaches are demonstrated in the following examples.
 <span data-ttu-id="80af2-194">將下列 `Jeep` 元件新增至其中一個用戶端應用程式。</span><span class="sxs-lookup"><span data-stu-id="80af2-194">Add the following `Jeep` component to one of the client apps.</span></span> <span data-ttu-id="80af2-195">`Jeep`元件使用：</span><span class="sxs-lookup"><span data-stu-id="80af2-195">The `Jeep` component uses:</span></span>
 
 * <span data-ttu-id="80af2-196">從用戶端應用程式的 `wwwroot` 資料夾 () 的映射 `jeep-cj.png` 。</span><span class="sxs-lookup"><span data-stu-id="80af2-196">An image from the client app's `wwwroot` folder (`jeep-cj.png`).</span></span>
-* <span data-ttu-id="80af2-197">新增的元件連結 [ :::no-loc(Razor)::: 庫](xref:blazor/components/class-libraries) 中的映射 (`JeepImage`) `wwwroot` 資料夾 (`jeep-yj.png`) 。</span><span class="sxs-lookup"><span data-stu-id="80af2-197">An image from an [added :::no-loc(Razor)::: component library](xref:blazor/components/class-libraries) (`JeepImage`) `wwwroot` folder (`jeep-yj.png`).</span></span>
+* <span data-ttu-id="80af2-197">新增的元件連結 [ Razor 庫](xref:blazor/components/class-libraries) 中的映射 (`JeepImage`) `wwwroot` 資料夾 (`jeep-yj.png`) 。</span><span class="sxs-lookup"><span data-stu-id="80af2-197">An image from an [added Razor component library](xref:blazor/components/class-libraries) (`JeepImage`) `wwwroot` folder (`jeep-yj.png`).</span></span>
 * <span data-ttu-id="80af2-198">`Component1`當連結 `JeepImage` 庫加入至方案時，RCL 專案範本會自動建立範例元件 () 。</span><span class="sxs-lookup"><span data-stu-id="80af2-198">The example component (`Component1`) is created automatically by the RCL project template when the `JeepImage` library is added to the solution.</span></span>
 
 ```razor
@@ -360,7 +360,7 @@ The library's `jeep-yj.png` image can also be added to the library's `Component1
     <h1>JeepImage.Component1</h1>
 
     <p>
-        This :::no-loc(Blazor)::: component is defined in the <strong>JeepImage</strong> package.
+        This Blazor component is defined in the <strong>JeepImage</strong> package.
     </p>
 
     <p>
@@ -391,7 +391,7 @@ An alternative to using the [`Link` component](xref:blazor/fundamentals/addition
     <h1>JeepImage.Component1</h1>
 
     <p>
-        This :::no-loc(Blazor)::: component is defined in the <strong>JeepImage</strong> package.
+        This Blazor component is defined in the <strong>JeepImage</strong> package.
     </p>
 
     <p>
@@ -432,25 +432,25 @@ An alternative to using the [`Link` component](xref:blazor/fundamentals/addition
 
 ## <a name="standalone-deployment"></a><span data-ttu-id="80af2-205">獨立部署</span><span class="sxs-lookup"><span data-stu-id="80af2-205">Standalone deployment</span></span>
 
-<span data-ttu-id="80af2-206">*獨立部署* :::no-loc(Blazor WebAssembly)::: 會以一組直接由用戶端要求的靜態檔案來提供應用程式。</span><span class="sxs-lookup"><span data-stu-id="80af2-206">A *standalone deployment* serves the :::no-loc(Blazor WebAssembly)::: app as a set of static files that are requested directly by clients.</span></span> <span data-ttu-id="80af2-207">任何靜態檔案伺服器都能提供 :::no-loc(Blazor)::: 應用程式。</span><span class="sxs-lookup"><span data-stu-id="80af2-207">Any static file server is able to serve the :::no-loc(Blazor)::: app.</span></span>
+<span data-ttu-id="80af2-206">*獨立部署* Blazor WebAssembly 會以一組直接由用戶端要求的靜態檔案來提供應用程式。</span><span class="sxs-lookup"><span data-stu-id="80af2-206">A *standalone deployment* serves the Blazor WebAssembly app as a set of static files that are requested directly by clients.</span></span> <span data-ttu-id="80af2-207">任何靜態檔案伺服器都能提供 Blazor 應用程式。</span><span class="sxs-lookup"><span data-stu-id="80af2-207">Any static file server is able to serve the Blazor app.</span></span>
 
 <span data-ttu-id="80af2-208">獨立部署資產會發佈到 `/bin/Release/{TARGET FRAMEWORK}/publish/wwwroot` 資料夾。</span><span class="sxs-lookup"><span data-stu-id="80af2-208">Standalone deployment assets are published into the `/bin/Release/{TARGET FRAMEWORK}/publish/wwwroot` folder.</span></span>
 
 ### <a name="azure-app-service"></a><span data-ttu-id="80af2-209">Azure App Service</span><span class="sxs-lookup"><span data-stu-id="80af2-209">Azure App Service</span></span>
 
-<span data-ttu-id="80af2-210">:::no-loc(Blazor WebAssembly)::: 您可以將應用程式部署至 Windows 上的 Azure App 服務，這會在 [IIS](#iis)上裝載應用程式。</span><span class="sxs-lookup"><span data-stu-id="80af2-210">:::no-loc(Blazor WebAssembly)::: apps can be deployed to Azure App Services on Windows, which hosts the app on [IIS](#iis).</span></span>
+<span data-ttu-id="80af2-210">Blazor WebAssembly 您可以將應用程式部署至 Windows 上的 Azure App 服務，這會在 [IIS](#iis)上裝載應用程式。</span><span class="sxs-lookup"><span data-stu-id="80af2-210">Blazor WebAssembly apps can be deployed to Azure App Services on Windows, which hosts the app on [IIS](#iis).</span></span>
 
-<span data-ttu-id="80af2-211">:::no-loc(Blazor WebAssembly):::目前不支援將獨立應用程式部署至適用于 Linux 的 Azure App Service。</span><span class="sxs-lookup"><span data-stu-id="80af2-211">Deploying a standalone :::no-loc(Blazor WebAssembly)::: app to Azure App Service for Linux isn't currently supported.</span></span> <span data-ttu-id="80af2-212">目前無法使用 Linux 伺服器映射來裝載應用程式。</span><span class="sxs-lookup"><span data-stu-id="80af2-212">A Linux server image to host the app isn't available at this time.</span></span> <span data-ttu-id="80af2-213">正在進行工作，以啟用此案例。</span><span class="sxs-lookup"><span data-stu-id="80af2-213">Work is in progress to enable this scenario.</span></span>
+<span data-ttu-id="80af2-211">Blazor WebAssembly目前不支援將獨立應用程式部署至適用于 Linux 的 Azure App Service。</span><span class="sxs-lookup"><span data-stu-id="80af2-211">Deploying a standalone Blazor WebAssembly app to Azure App Service for Linux isn't currently supported.</span></span> <span data-ttu-id="80af2-212">目前無法使用 Linux 伺服器映射來裝載應用程式。</span><span class="sxs-lookup"><span data-stu-id="80af2-212">A Linux server image to host the app isn't available at this time.</span></span> <span data-ttu-id="80af2-213">正在進行工作，以啟用此案例。</span><span class="sxs-lookup"><span data-stu-id="80af2-213">Work is in progress to enable this scenario.</span></span>
 
 ### <a name="iis"></a><span data-ttu-id="80af2-214">IIS</span><span class="sxs-lookup"><span data-stu-id="80af2-214">IIS</span></span>
 
-<span data-ttu-id="80af2-215">IIS 是適用于應用程式的可用靜態檔案伺服器 :::no-loc(Blazor)::: 。</span><span class="sxs-lookup"><span data-stu-id="80af2-215">IIS is a capable static file server for :::no-loc(Blazor)::: apps.</span></span> <span data-ttu-id="80af2-216">若要設定 IIS 以裝載 :::no-loc(Blazor)::: ，請參閱 [在 Iis 上建立靜態網站](/iis/manage/creating-websites/scenario-build-a-static-website-on-iis)。</span><span class="sxs-lookup"><span data-stu-id="80af2-216">To configure IIS to host :::no-loc(Blazor):::, see [Build a Static Website on IIS](/iis/manage/creating-websites/scenario-build-a-static-website-on-iis).</span></span>
+<span data-ttu-id="80af2-215">IIS 是適用于應用程式的可用靜態檔案伺服器 Blazor 。</span><span class="sxs-lookup"><span data-stu-id="80af2-215">IIS is a capable static file server for Blazor apps.</span></span> <span data-ttu-id="80af2-216">若要設定 IIS 以裝載 Blazor ，請參閱 [在 Iis 上建立靜態網站](/iis/manage/creating-websites/scenario-build-a-static-website-on-iis)。</span><span class="sxs-lookup"><span data-stu-id="80af2-216">To configure IIS to host Blazor, see [Build a Static Website on IIS](/iis/manage/creating-websites/scenario-build-a-static-website-on-iis).</span></span>
 
 <span data-ttu-id="80af2-217">已發佈的資產會在 `/bin/Release/{TARGET FRAMEWORK}/publish` 資料夾中建立。</span><span class="sxs-lookup"><span data-stu-id="80af2-217">Published assets are created in the `/bin/Release/{TARGET FRAMEWORK}/publish` folder.</span></span> <span data-ttu-id="80af2-218">在 `publish` web 伺服器或主機服務上裝載資料夾的內容。</span><span class="sxs-lookup"><span data-stu-id="80af2-218">Host the contents of the `publish` folder on the web server or hosting service.</span></span>
 
 #### <a name="webconfig"></a><span data-ttu-id="80af2-219">web.config</span><span class="sxs-lookup"><span data-stu-id="80af2-219">web.config</span></span>
 
-<span data-ttu-id="80af2-220">:::no-loc(Blazor):::發行專案時， `web.config` 會使用下列 IIS 設定來建立檔案：</span><span class="sxs-lookup"><span data-stu-id="80af2-220">When a :::no-loc(Blazor)::: project is published, a `web.config` file is created with the following IIS configuration:</span></span>
+<span data-ttu-id="80af2-220">Blazor發行專案時， `web.config` 會使用下列 IIS 設定來建立檔案：</span><span class="sxs-lookup"><span data-stu-id="80af2-220">When a Blazor project is published, a `web.config` file is created with the following IIS configuration:</span></span>
 
 * <span data-ttu-id="80af2-221">針對下列副檔名設定 MIME 類型：</span><span class="sxs-lookup"><span data-stu-id="80af2-221">MIME types are set for the following file extensions:</span></span>
   * <span data-ttu-id="80af2-222">`.dll`: `application/octet-stream`</span><span class="sxs-lookup"><span data-stu-id="80af2-222">`.dll`: `application/octet-stream`</span></span>
@@ -495,7 +495,7 @@ An alternative to using the [`Link` component](xref:blazor/fundamentals/addition
 
 * <span data-ttu-id="80af2-253">停用繼承的 ASP.NET Core 模組處理常式。</span><span class="sxs-lookup"><span data-stu-id="80af2-253">Disable the inherited ASP.NET Core Module handler.</span></span>
 
-  <span data-ttu-id="80af2-254">:::no-loc(Blazor)::: `web.config` 將區段新增至檔案，以移除應用程式已發佈檔案中的處理常式 `<handlers>` ：</span><span class="sxs-lookup"><span data-stu-id="80af2-254">Remove the handler in the :::no-loc(Blazor)::: app's published `web.config` file by adding a `<handlers>` section to the file:</span></span>
+  <span data-ttu-id="80af2-254">Blazor `web.config` 將區段新增至檔案，以移除應用程式已發佈檔案中的處理常式 `<handlers>` ：</span><span class="sxs-lookup"><span data-stu-id="80af2-254">Remove the handler in the Blazor app's published `web.config` file by adding a `<handlers>` section to the file:</span></span>
 
   ```xml
   <handlers>
@@ -523,9 +523,9 @@ An alternative to using the [`Link` component](xref:blazor/fundamentals/addition
 
 #### <a name="brotli-and-gzip-compression"></a><span data-ttu-id="80af2-258">Brotli 和 Gzip 壓縮</span><span class="sxs-lookup"><span data-stu-id="80af2-258">Brotli and Gzip compression</span></span>
 
-<span data-ttu-id="80af2-259">*本節僅適用于獨立的 :::no-loc(Blazor WebAssembly)::: 應用程式。裝載 :::no-loc(Blazor)::: 的應用程式會使用預設的 ASP.NET Core 應用程式 `web.config` 檔，而不是本節所連結的檔案。*</span><span class="sxs-lookup"><span data-stu-id="80af2-259">*This section only applies to standalone :::no-loc(Blazor WebAssembly)::: apps. Hosted :::no-loc(Blazor)::: apps use a default ASP.NET Core app `web.config` file, not the file linked in this section.*</span></span>
+<span data-ttu-id="80af2-259">*本節僅適用于獨立的 Blazor WebAssembly 應用程式。裝載 Blazor 的應用程式會使用預設的 ASP.NET Core 應用程式 `web.config` 檔，而不是本節所連結的檔案。*</span><span class="sxs-lookup"><span data-stu-id="80af2-259">*This section only applies to standalone Blazor WebAssembly apps. Hosted Blazor apps use a default ASP.NET Core app `web.config` file, not the file linked in this section.*</span></span>
 
-<span data-ttu-id="80af2-260">您可以透過設定 IIS `web.config` ，為獨立應用程式提供 Brotli 或 Gzip 壓縮 :::no-loc(Blazor)::: 的資產 :::no-loc(Blazor WebAssembly)::: 。</span><span class="sxs-lookup"><span data-stu-id="80af2-260">IIS can be configured via `web.config` to serve Brotli or Gzip compressed :::no-loc(Blazor)::: assets for standalone :::no-loc(Blazor WebAssembly)::: apps.</span></span> <span data-ttu-id="80af2-261">如需範例設定檔，請參閱 [`web.config`](https://github.com/dotnet/AspNetCore.Docs/blob/master/aspnetcore/blazor/host-and-deploy/webassembly/_samples/web.config?raw=true) 。</span><span class="sxs-lookup"><span data-stu-id="80af2-261">For an example configuration file, see [`web.config`](https://github.com/dotnet/AspNetCore.Docs/blob/master/aspnetcore/blazor/host-and-deploy/webassembly/_samples/web.config?raw=true).</span></span>
+<span data-ttu-id="80af2-260">您可以透過設定 IIS `web.config` ，為獨立應用程式提供 Brotli 或 Gzip 壓縮 Blazor 的資產 Blazor WebAssembly 。</span><span class="sxs-lookup"><span data-stu-id="80af2-260">IIS can be configured via `web.config` to serve Brotli or Gzip compressed Blazor assets for standalone Blazor WebAssembly apps.</span></span> <span data-ttu-id="80af2-261">如需範例設定檔，請參閱 [`web.config`](https://github.com/dotnet/AspNetCore.Docs/blob/master/aspnetcore/blazor/host-and-deploy/webassembly/_samples/web.config?raw=true) 。</span><span class="sxs-lookup"><span data-stu-id="80af2-261">For an example configuration file, see [`web.config`](https://github.com/dotnet/AspNetCore.Docs/blob/master/aspnetcore/blazor/host-and-deploy/webassembly/_samples/web.config?raw=true).</span></span>
 
 <span data-ttu-id="80af2-262">在下列情況下，可能需要額外的範例檔案設定 `web.config` ：</span><span class="sxs-lookup"><span data-stu-id="80af2-262">Additional configuration of the example `web.config` file might be required in the following scenarios:</span></span>
 
@@ -536,18 +536,18 @@ An alternative to using the [`Link` component](xref:blazor/fundamentals/addition
 
 #### <a name="troubleshooting"></a><span data-ttu-id="80af2-268">疑難排解</span><span class="sxs-lookup"><span data-stu-id="80af2-268">Troubleshooting</span></span>
 
-<span data-ttu-id="80af2-269">如果收到「500 - 內部伺服器錯誤」，且 IIS 管理員在嘗試存取網站設定時擲回錯誤，請確認是否已安裝 URL Rewrite 模組。</span><span class="sxs-lookup"><span data-stu-id="80af2-269">If a *500 - Internal Server Error* is received and IIS Manager throws errors when attempting to access the website's configuration, confirm that the URL Rewrite Module is installed.</span></span> <span data-ttu-id="80af2-270">未安裝模組時，IIS 無法剖析該檔案 `web.config` 。</span><span class="sxs-lookup"><span data-stu-id="80af2-270">When the module isn't installed, the `web.config` file can't be parsed by IIS.</span></span> <span data-ttu-id="80af2-271">這可防止 IIS 管理員從服務的靜態檔案載入網站的設定和網站 :::no-loc(Blazor)::: 。</span><span class="sxs-lookup"><span data-stu-id="80af2-271">This prevents the IIS Manager from loading the website's configuration and the website from serving :::no-loc(Blazor):::'s static files.</span></span>
+<span data-ttu-id="80af2-269">如果收到「500 - 內部伺服器錯誤」，且 IIS 管理員在嘗試存取網站設定時擲回錯誤，請確認是否已安裝 URL Rewrite 模組。</span><span class="sxs-lookup"><span data-stu-id="80af2-269">If a *500 - Internal Server Error* is received and IIS Manager throws errors when attempting to access the website's configuration, confirm that the URL Rewrite Module is installed.</span></span> <span data-ttu-id="80af2-270">未安裝模組時，IIS 無法剖析該檔案 `web.config` 。</span><span class="sxs-lookup"><span data-stu-id="80af2-270">When the module isn't installed, the `web.config` file can't be parsed by IIS.</span></span> <span data-ttu-id="80af2-271">這可防止 IIS 管理員從服務的靜態檔案載入網站的設定和網站 Blazor 。</span><span class="sxs-lookup"><span data-stu-id="80af2-271">This prevents the IIS Manager from loading the website's configuration and the website from serving Blazor's static files.</span></span>
 
 <span data-ttu-id="80af2-272">如需針對部署至 IIS 進行疑難排解的詳細資訊，請參閱 <xref:test/troubleshoot-azure-iis>。</span><span class="sxs-lookup"><span data-stu-id="80af2-272">For more information on troubleshooting deployments to IIS, see <xref:test/troubleshoot-azure-iis>.</span></span>
 
 ### <a name="azure-storage"></a><span data-ttu-id="80af2-273">Azure 儲存體</span><span class="sxs-lookup"><span data-stu-id="80af2-273">Azure Storage</span></span>
 
-<span data-ttu-id="80af2-274">[Azure 儲存體](/azure/storage/) 的靜態檔案裝載允許無伺服器 :::no-loc(Blazor)::: 應用程式裝載。</span><span class="sxs-lookup"><span data-stu-id="80af2-274">[Azure Storage](/azure/storage/) static file hosting allows serverless :::no-loc(Blazor)::: app hosting.</span></span> <span data-ttu-id="80af2-275">支援自訂網域名稱、Azure 內容傳遞網路 (CDN) 及 HTTPS。</span><span class="sxs-lookup"><span data-stu-id="80af2-275">Custom domain names, the Azure Content Delivery Network (CDN), and HTTPS are supported.</span></span>
+<span data-ttu-id="80af2-274">[Azure 儲存體](/azure/storage/) 的靜態檔案裝載允許無伺服器 Blazor 應用程式裝載。</span><span class="sxs-lookup"><span data-stu-id="80af2-274">[Azure Storage](/azure/storage/) static file hosting allows serverless Blazor app hosting.</span></span> <span data-ttu-id="80af2-275">支援自訂網域名稱、Azure 內容傳遞網路 (CDN) 及 HTTPS。</span><span class="sxs-lookup"><span data-stu-id="80af2-275">Custom domain names, the Azure Content Delivery Network (CDN), and HTTPS are supported.</span></span>
 
 <span data-ttu-id="80af2-276">當 Blob 服務針對儲存體帳戶上的靜態網站裝載啟用時：</span><span class="sxs-lookup"><span data-stu-id="80af2-276">When the blob service is enabled for static website hosting on a storage account:</span></span>
 
 * <span data-ttu-id="80af2-277">將 [索引文件名稱] 設定為 `index.html`。</span><span class="sxs-lookup"><span data-stu-id="80af2-277">Set the **Index document name** to `index.html`.</span></span>
-* <span data-ttu-id="80af2-278">將 [錯誤文件路徑] 設定為 `index.html`。</span><span class="sxs-lookup"><span data-stu-id="80af2-278">Set the **Error document path** to `index.html`.</span></span> <span data-ttu-id="80af2-279">:::no-loc(Razor)::: 元件和其他非檔案端點不會位於 blob 服務所儲存之靜態內容中的實體路徑。</span><span class="sxs-lookup"><span data-stu-id="80af2-279">:::no-loc(Razor)::: components and other non-file endpoints don't reside at physical paths in the static content stored by the blob service.</span></span> <span data-ttu-id="80af2-280">當收到路由器應處理之其中一個資源的要求時 :::no-loc(Blazor)::: ，blob 服務所產生的 *404-找不* 到錯誤會將要求路由傳送至 **錯誤檔路徑** 。</span><span class="sxs-lookup"><span data-stu-id="80af2-280">When a request for one of these resources is received that the :::no-loc(Blazor)::: router should handle, the *404 - Not Found* error generated by the blob service routes the request to the **Error document path**.</span></span> <span data-ttu-id="80af2-281">`index.html`會傳回 blob，而且路由器會 :::no-loc(Blazor)::: 載入並處理路徑。</span><span class="sxs-lookup"><span data-stu-id="80af2-281">The `index.html` blob is returned, and the :::no-loc(Blazor)::: router loads and processes the path.</span></span>
+* <span data-ttu-id="80af2-278">將 [錯誤文件路徑] 設定為 `index.html`。</span><span class="sxs-lookup"><span data-stu-id="80af2-278">Set the **Error document path** to `index.html`.</span></span> <span data-ttu-id="80af2-279">Razor 元件和其他非檔案端點不會位於 blob 服務所儲存之靜態內容中的實體路徑。</span><span class="sxs-lookup"><span data-stu-id="80af2-279">Razor components and other non-file endpoints don't reside at physical paths in the static content stored by the blob service.</span></span> <span data-ttu-id="80af2-280">當收到路由器應處理之其中一個資源的要求時 Blazor ，blob 服務所產生的 *404-找不* 到錯誤會將要求路由傳送至 **錯誤檔路徑** 。</span><span class="sxs-lookup"><span data-stu-id="80af2-280">When a request for one of these resources is received that the Blazor router should handle, the *404 - Not Found* error generated by the blob service routes the request to the **Error document path**.</span></span> <span data-ttu-id="80af2-281">`index.html`會傳回 blob，而且路由器會 Blazor 載入並處理路徑。</span><span class="sxs-lookup"><span data-stu-id="80af2-281">The `index.html` blob is returned, and the Blazor router loads and processes the path.</span></span>
 
 <span data-ttu-id="80af2-282">如果檔案的標頭中有不適當的 MIME 類型，則不會在執行時間載入檔案 `Content-Type` ，請採取下列其中一項動作：</span><span class="sxs-lookup"><span data-stu-id="80af2-282">If files aren't loaded at runtime due to inappropriate MIME types in the files' `Content-Type` headers, take either of the following actions:</span></span>
 
@@ -579,7 +579,7 @@ http {
 }
 ```
 
-<span data-ttu-id="80af2-291">使用設定 NGINX 高載 [速率限制](https://www.nginx.com/blog/rate-limiting-nginx/#bursts) 時 [`limit_req`](https://nginx.org/docs/http/ngx_http_limit_req_module.html#limit_req) ， :::no-loc(Blazor WebAssembly)::: 應用程式可能需要大型的 `burst` 參數值，以容納應用程式所提出的相對大量要求。</span><span class="sxs-lookup"><span data-stu-id="80af2-291">When setting the [NGINX burst rate limit](https://www.nginx.com/blog/rate-limiting-nginx/#bursts) with [`limit_req`](https://nginx.org/docs/http/ngx_http_limit_req_module.html#limit_req), :::no-loc(Blazor WebAssembly)::: apps may require a large `burst` parameter value to accommodate the relatively large number of requests made by an app.</span></span> <span data-ttu-id="80af2-292">一開始，請將值設定為至少60：</span><span class="sxs-lookup"><span data-stu-id="80af2-292">Initially, set the value to at least 60:</span></span>
+<span data-ttu-id="80af2-291">使用設定 NGINX 高載 [速率限制](https://www.nginx.com/blog/rate-limiting-nginx/#bursts) 時 [`limit_req`](https://nginx.org/docs/http/ngx_http_limit_req_module.html#limit_req) ， Blazor WebAssembly 應用程式可能需要大型的 `burst` 參數值，以容納應用程式所提出的相對大量要求。</span><span class="sxs-lookup"><span data-stu-id="80af2-291">When setting the [NGINX burst rate limit](https://www.nginx.com/blog/rate-limiting-nginx/#bursts) with [`limit_req`](https://nginx.org/docs/http/ngx_http_limit_req_module.html#limit_req), Blazor WebAssembly apps may require a large `burst` parameter value to accommodate the relatively large number of requests made by an app.</span></span> <span data-ttu-id="80af2-292">一開始，請將值設定為至少60：</span><span class="sxs-lookup"><span data-stu-id="80af2-292">Initially, set the value to at least 60:</span></span>
 
 ```
 http {
@@ -601,7 +601,7 @@ http {
 
 ### <a name="nginx-in-docker"></a><span data-ttu-id="80af2-295">Docker 中的 Nginx</span><span class="sxs-lookup"><span data-stu-id="80af2-295">Nginx in Docker</span></span>
 
-<span data-ttu-id="80af2-296">若要 :::no-loc(Blazor)::: 使用 Nginx 在 Docker 中裝載，請設定 Dockerfile 以使用以 Alpine 為基礎的 Nginx 映射。</span><span class="sxs-lookup"><span data-stu-id="80af2-296">To host :::no-loc(Blazor)::: in Docker using Nginx, setup the Dockerfile to use the Alpine-based Nginx image.</span></span> <span data-ttu-id="80af2-297">更新 Dockerfile，以將檔案複製 `nginx.config` 到容器中。</span><span class="sxs-lookup"><span data-stu-id="80af2-297">Update the Dockerfile to copy the `nginx.config` file into the container.</span></span>
+<span data-ttu-id="80af2-296">若要 Blazor 使用 Nginx 在 Docker 中裝載，請設定 Dockerfile 以使用以 Alpine 為基礎的 Nginx 映射。</span><span class="sxs-lookup"><span data-stu-id="80af2-296">To host Blazor in Docker using Nginx, setup the Dockerfile to use the Alpine-based Nginx image.</span></span> <span data-ttu-id="80af2-297">更新 Dockerfile，以將檔案複製 `nginx.config` 到容器中。</span><span class="sxs-lookup"><span data-stu-id="80af2-297">Update the Dockerfile to copy the `nginx.config` file into the container.</span></span>
 
 <span data-ttu-id="80af2-298">如下列範例所示，新增一行至 Dockerfile：</span><span class="sxs-lookup"><span data-stu-id="80af2-298">Add one line to the Dockerfile, as shown in the following example:</span></span>
 
@@ -613,7 +613,7 @@ COPY nginx.conf /etc/nginx/nginx.conf
 
 ### <a name="apache"></a><span data-ttu-id="80af2-299">Apache</span><span class="sxs-lookup"><span data-stu-id="80af2-299">Apache</span></span>
 
-<span data-ttu-id="80af2-300">若要將 :::no-loc(Blazor WebAssembly)::: 應用程式部署至 CentOS 7 或更新版本：</span><span class="sxs-lookup"><span data-stu-id="80af2-300">To deploy a :::no-loc(Blazor WebAssembly)::: app to CentOS 7 or later:</span></span>
+<span data-ttu-id="80af2-300">若要將 Blazor WebAssembly 應用程式部署至 CentOS 7 或更新版本：</span><span class="sxs-lookup"><span data-stu-id="80af2-300">To deploy a Blazor WebAssembly app to CentOS 7 or later:</span></span>
 
 1. <span data-ttu-id="80af2-301">建立 Apache 設定檔案。</span><span class="sxs-lookup"><span data-stu-id="80af2-301">Create the Apache configuration file.</span></span> <span data-ttu-id="80af2-302">下列範例是簡化的設定檔 (`blazorapp.config`) ：</span><span class="sxs-lookup"><span data-stu-id="80af2-302">The following example is a simplified configuration file (`blazorapp.config`):</span></span>
 
@@ -661,19 +661,19 @@ COPY nginx.conf /etc/nginx/nginx.conf
 
 ### <a name="github-pages"></a><span data-ttu-id="80af2-307">GitHub 頁面</span><span class="sxs-lookup"><span data-stu-id="80af2-307">GitHub Pages</span></span>
 
-<span data-ttu-id="80af2-308">若要處理 URL 重寫，請新增具有腳本的檔案，以處理將要求重新導向 `wwwroot/404.html` 至頁面的腳本 `index.html` 。</span><span class="sxs-lookup"><span data-stu-id="80af2-308">To handle URL rewrites, add a `wwwroot/404.html` file with a script that handles redirecting the request to the `index.html` page.</span></span> <span data-ttu-id="80af2-309">如需範例，請參閱 [SteveSandersonMS/ :::no-loc(Blazor)::: OnGitHubPages GitHub 存放庫](https://github.com/SteveSandersonMS/:::no-loc(Blazor):::OnGitHubPages)：</span><span class="sxs-lookup"><span data-stu-id="80af2-309">For an example, see the [SteveSandersonMS/:::no-loc(Blazor):::OnGitHubPages GitHub repository](https://github.com/SteveSandersonMS/:::no-loc(Blazor):::OnGitHubPages):</span></span>
+<span data-ttu-id="80af2-308">若要處理 URL 重寫，請新增具有腳本的檔案，以處理將要求重新導向 `wwwroot/404.html` 至頁面的腳本 `index.html` 。</span><span class="sxs-lookup"><span data-stu-id="80af2-308">To handle URL rewrites, add a `wwwroot/404.html` file with a script that handles redirecting the request to the `index.html` page.</span></span> <span data-ttu-id="80af2-309">如需範例，請參閱 [SteveSandersonMS/ Blazor OnGitHubPages GitHub 存放庫](https://github.com/SteveSandersonMS/BlazorOnGitHubPages)：</span><span class="sxs-lookup"><span data-stu-id="80af2-309">For an example, see the [SteveSandersonMS/BlazorOnGitHubPages GitHub repository](https://github.com/SteveSandersonMS/BlazorOnGitHubPages):</span></span>
 
-* [`wwwroot/404.html`](https://github.com/SteveSandersonMS/:::no-loc(Blazor):::OnGitHubPages/blob/master/wwwroot/404.html)
-* <span data-ttu-id="80af2-310">[即時網站](https://stevesandersonms.github.io/:::no-loc(Blazor):::OnGitHubPages/)) </span><span class="sxs-lookup"><span data-stu-id="80af2-310">[Live site](https://stevesandersonms.github.io/:::no-loc(Blazor):::OnGitHubPages/))</span></span>
+* [`wwwroot/404.html`](https://github.com/SteveSandersonMS/BlazorOnGitHubPages/blob/master/wwwroot/404.html)
+* <span data-ttu-id="80af2-310">[即時網站](https://stevesandersonms.github.io/BlazorOnGitHubPages/)) </span><span class="sxs-lookup"><span data-stu-id="80af2-310">[Live site](https://stevesandersonms.github.io/BlazorOnGitHubPages/))</span></span>
 
-<span data-ttu-id="80af2-311">使用專案網站而非組織網站時，請 `<base>` 在中更新標記 `wwwroot/index.html` 。</span><span class="sxs-lookup"><span data-stu-id="80af2-311">When using a project site instead of an organization site, update the `<base>` tag in `wwwroot/index.html`.</span></span> <span data-ttu-id="80af2-312">`href`使用尾端斜線將屬性值設定為 GitHub 存放庫名稱 (例如 `/my-repository/`) 。</span><span class="sxs-lookup"><span data-stu-id="80af2-312">Set the `href` attribute value to the GitHub repository name with a trailing slash (for example, `/my-repository/`).</span></span> <span data-ttu-id="80af2-313">在[SteveSandersonMS/ :::no-loc(Blazor)::: OnGitHubPages GitHub 存放庫](https://github.com/SteveSandersonMS/:::no-loc(Blazor):::OnGitHubPages)中， `href` [ `.github/workflows/main.yml` 設定檔](https://github.com/SteveSandersonMS/:::no-loc(Blazor):::OnGitHubPages/blob/master/.github/workflows/main.yml)會在發佈時更新基底。</span><span class="sxs-lookup"><span data-stu-id="80af2-313">In the [SteveSandersonMS/:::no-loc(Blazor):::OnGitHubPages GitHub repository](https://github.com/SteveSandersonMS/:::no-loc(Blazor):::OnGitHubPages), the base `href` is updated at publish by the [`.github/workflows/main.yml` configuration file](https://github.com/SteveSandersonMS/:::no-loc(Blazor):::OnGitHubPages/blob/master/.github/workflows/main.yml).</span></span>
+<span data-ttu-id="80af2-311">使用專案網站而非組織網站時，請 `<base>` 在中更新標記 `wwwroot/index.html` 。</span><span class="sxs-lookup"><span data-stu-id="80af2-311">When using a project site instead of an organization site, update the `<base>` tag in `wwwroot/index.html`.</span></span> <span data-ttu-id="80af2-312">`href`使用尾端斜線將屬性值設定為 GitHub 存放庫名稱 (例如 `/my-repository/`) 。</span><span class="sxs-lookup"><span data-stu-id="80af2-312">Set the `href` attribute value to the GitHub repository name with a trailing slash (for example, `/my-repository/`).</span></span> <span data-ttu-id="80af2-313">在[SteveSandersonMS/ Blazor OnGitHubPages GitHub 存放庫](https://github.com/SteveSandersonMS/BlazorOnGitHubPages)中， `href` [ `.github/workflows/main.yml` 設定檔](https://github.com/SteveSandersonMS/BlazorOnGitHubPages/blob/master/.github/workflows/main.yml)會在發佈時更新基底。</span><span class="sxs-lookup"><span data-stu-id="80af2-313">In the [SteveSandersonMS/BlazorOnGitHubPages GitHub repository](https://github.com/SteveSandersonMS/BlazorOnGitHubPages), the base `href` is updated at publish by the [`.github/workflows/main.yml` configuration file](https://github.com/SteveSandersonMS/BlazorOnGitHubPages/blob/master/.github/workflows/main.yml).</span></span>
 
 > [!NOTE]
-> <span data-ttu-id="80af2-314">[SteveSandersonMS/ :::no-loc(Blazor)::: OnGitHubPages GitHub 存放庫](https://github.com/SteveSandersonMS/:::no-loc(Blazor):::OnGitHubPages)並非由 .Net Foundation 或 Microsoft 所擁有、維護或支援。</span><span class="sxs-lookup"><span data-stu-id="80af2-314">The [SteveSandersonMS/:::no-loc(Blazor):::OnGitHubPages GitHub repository](https://github.com/SteveSandersonMS/:::no-loc(Blazor):::OnGitHubPages) isn't owned, maintained, or supported by the .NET Foundation or Microsoft.</span></span>
+> <span data-ttu-id="80af2-314">[SteveSandersonMS/ Blazor OnGitHubPages GitHub 存放庫](https://github.com/SteveSandersonMS/BlazorOnGitHubPages)並非由 .Net Foundation 或 Microsoft 所擁有、維護或支援。</span><span class="sxs-lookup"><span data-stu-id="80af2-314">The [SteveSandersonMS/BlazorOnGitHubPages GitHub repository](https://github.com/SteveSandersonMS/BlazorOnGitHubPages) isn't owned, maintained, or supported by the .NET Foundation or Microsoft.</span></span>
 
 ## <a name="host-configuration-values"></a><span data-ttu-id="80af2-315">主機組態值</span><span class="sxs-lookup"><span data-stu-id="80af2-315">Host configuration values</span></span>
 
-<span data-ttu-id="80af2-316">在開發環境中， [ :::no-loc(Blazor WebAssembly)::: 應用程式](xref:blazor/hosting-models#blazor-webassembly)可以在執行時間接受下列主機配置值作為命令列引數。</span><span class="sxs-lookup"><span data-stu-id="80af2-316">[:::no-loc(Blazor WebAssembly)::: apps](xref:blazor/hosting-models#blazor-webassembly) can accept the following host configuration values as command-line arguments at runtime in the development environment.</span></span>
+<span data-ttu-id="80af2-316">在開發環境中， [ Blazor WebAssembly 應用程式](xref:blazor/hosting-models#blazor-webassembly)可以在執行時間接受下列主機配置值作為命令列引數。</span><span class="sxs-lookup"><span data-stu-id="80af2-316">[Blazor WebAssembly apps](xref:blazor/hosting-models#blazor-webassembly) can accept the following host configuration values as command-line arguments at runtime in the development environment.</span></span>
 
 ### <a name="content-root"></a><span data-ttu-id="80af2-317">內容根目錄</span><span class="sxs-lookup"><span data-stu-id="80af2-317">Content root</span></span>
 
@@ -748,7 +748,7 @@ COPY nginx.conf /etc/nginx/nginx.conf
 
 ## <a name="configure-the-trimmer"></a><span data-ttu-id="80af2-346">設定修剪器</span><span class="sxs-lookup"><span data-stu-id="80af2-346">Configure the Trimmer</span></span>
 
-<span data-ttu-id="80af2-347">:::no-loc(Blazor)::: 在每個發行組建上執行中繼語言 (IL) 修剪，以從輸出元件中移除不必要的 IL。</span><span class="sxs-lookup"><span data-stu-id="80af2-347">:::no-loc(Blazor)::: performs Intermediate Language (IL) trimming on each Release build to remove unnecessary IL from the output assemblies.</span></span> <span data-ttu-id="80af2-348">如需詳細資訊，請參閱<xref:blazor/host-and-deploy/configure-trimmer>。</span><span class="sxs-lookup"><span data-stu-id="80af2-348">For more information, see <xref:blazor/host-and-deploy/configure-trimmer>.</span></span>
+<span data-ttu-id="80af2-347">Blazor 在每個發行組建上執行中繼語言 (IL) 修剪，以從輸出元件中移除不必要的 IL。</span><span class="sxs-lookup"><span data-stu-id="80af2-347">Blazor performs Intermediate Language (IL) trimming on each Release build to remove unnecessary IL from the output assemblies.</span></span> <span data-ttu-id="80af2-348">如需詳細資訊，請參閱<xref:blazor/host-and-deploy/configure-trimmer>。</span><span class="sxs-lookup"><span data-stu-id="80af2-348">For more information, see <xref:blazor/host-and-deploy/configure-trimmer>.</span></span>
 
 ::: moniker-end
 
@@ -756,13 +756,13 @@ COPY nginx.conf /etc/nginx/nginx.conf
 
 ## <a name="configure-the-linker"></a><span data-ttu-id="80af2-349">設定連結器</span><span class="sxs-lookup"><span data-stu-id="80af2-349">Configure the Linker</span></span>
 
-<span data-ttu-id="80af2-350">:::no-loc(Blazor)::: 在每個發行組建上執行中繼語言 (IL) 連結，以從輸出元件中移除不必要的 IL。</span><span class="sxs-lookup"><span data-stu-id="80af2-350">:::no-loc(Blazor)::: performs Intermediate Language (IL) linking on each Release build to remove unnecessary IL from the output assemblies.</span></span> <span data-ttu-id="80af2-351">如需詳細資訊，請參閱<xref:blazor/host-and-deploy/configure-linker>。</span><span class="sxs-lookup"><span data-stu-id="80af2-351">For more information, see <xref:blazor/host-and-deploy/configure-linker>.</span></span>
+<span data-ttu-id="80af2-350">Blazor 在每個發行組建上執行中繼語言 (IL) 連結，以從輸出元件中移除不必要的 IL。</span><span class="sxs-lookup"><span data-stu-id="80af2-350">Blazor performs Intermediate Language (IL) linking on each Release build to remove unnecessary IL from the output assemblies.</span></span> <span data-ttu-id="80af2-351">如需詳細資訊，請參閱<xref:blazor/host-and-deploy/configure-linker>。</span><span class="sxs-lookup"><span data-stu-id="80af2-351">For more information, see <xref:blazor/host-and-deploy/configure-linker>.</span></span>
 
 ::: moniker-end
 
 ## <a name="custom-boot-resource-loading"></a><span data-ttu-id="80af2-352">自訂開機資源載入</span><span class="sxs-lookup"><span data-stu-id="80af2-352">Custom boot resource loading</span></span>
 
-<span data-ttu-id="80af2-353">您 :::no-loc(Blazor WebAssembly)::: 可以使用函式來初始化應用程式 `loadBootResource` ，以覆寫內建的開機資源載入機制。</span><span class="sxs-lookup"><span data-stu-id="80af2-353">A :::no-loc(Blazor WebAssembly)::: app can be initialized with the `loadBootResource` function to override the built-in boot resource loading mechanism.</span></span> <span data-ttu-id="80af2-354">用於 `loadBootResource` 下列案例：</span><span class="sxs-lookup"><span data-stu-id="80af2-354">Use `loadBootResource` for the following scenarios:</span></span>
+<span data-ttu-id="80af2-353">您 Blazor WebAssembly 可以使用函式來初始化應用程式 `loadBootResource` ，以覆寫內建的開機資源載入機制。</span><span class="sxs-lookup"><span data-stu-id="80af2-353">A Blazor WebAssembly app can be initialized with the `loadBootResource` function to override the built-in boot resource loading mechanism.</span></span> <span data-ttu-id="80af2-354">用於 `loadBootResource` 下列案例：</span><span class="sxs-lookup"><span data-stu-id="80af2-354">Use `loadBootResource` for the following scenarios:</span></span>
 
 * <span data-ttu-id="80af2-355">允許使用者載入靜態資源，例如時區資料或 `dotnet.wasm` CDN。</span><span class="sxs-lookup"><span data-stu-id="80af2-355">Allow users to load static resources, such as timezone data or `dotnet.wasm` from a CDN.</span></span>
 * <span data-ttu-id="80af2-356">使用 HTTP 要求載入壓縮的元件，並在不支援從伺服器提取壓縮內容的主機用戶端上解壓縮這些元件。</span><span class="sxs-lookup"><span data-stu-id="80af2-356">Load compressed assemblies using an HTTP request and decompress them on the client for hosts that don't support fetching compressed contents from the server.</span></span>
@@ -790,7 +790,7 @@ COPY nginx.conf /etc/nginx/nginx.conf
 
   <script src="_framework/blazor.webassembly.js" autostart="false"></script>
   <script>
-    :::no-loc(Blazor):::.start({
+    Blazor.start({
       loadBootResource: function (type, name, defaultUri, integrity) {
         console.log(`Loading: '${type}', '${name}', '${defaultUri}', '${integrity}'`);
         switch (type) {
@@ -811,7 +811,7 @@ COPY nginx.conf /etc/nginx/nginx.conf
   ```html
   <script src="_framework/blazor.webassembly.js" autostart="false"></script>
   <script>
-    :::no-loc(Blazor):::.start({
+    Blazor.start({
       loadBootResource: function (type, name, defaultUri, integrity) {
         return fetch(defaultUri, { 
           cache: 'no-cache',
@@ -902,7 +902,7 @@ Remove-Item $filepath\bin\Release\$tfm\wwwroot\_framework\blazor.boot.json.gz
 
 ## <a name="resolve-integrity-check-failures"></a><span data-ttu-id="80af2-400">解決完整性檢查失敗</span><span class="sxs-lookup"><span data-stu-id="80af2-400">Resolve integrity check failures</span></span>
 
-<span data-ttu-id="80af2-401">當 :::no-loc(Blazor WebAssembly)::: 下載應用程式的啟動檔案時，它會指示瀏覽器對回應執行完整性檢查。</span><span class="sxs-lookup"><span data-stu-id="80af2-401">When :::no-loc(Blazor WebAssembly)::: downloads an app's startup files, it instructs the browser to perform integrity checks on the responses.</span></span> <span data-ttu-id="80af2-402">它會使用檔案中的資訊 `blazor.boot.json` `.dll` ，為、和其他檔案指定預期的 256 sha-1 雜湊值 `.wasm` 。</span><span class="sxs-lookup"><span data-stu-id="80af2-402">It uses information in the `blazor.boot.json` file to specify the expected SHA-256 hash values for `.dll`, `.wasm`, and other files.</span></span> <span data-ttu-id="80af2-403">這項功能很有用，原因如下：</span><span class="sxs-lookup"><span data-stu-id="80af2-403">This is beneficial for the following reasons:</span></span>
+<span data-ttu-id="80af2-401">當 Blazor WebAssembly 下載應用程式的啟動檔案時，它會指示瀏覽器對回應執行完整性檢查。</span><span class="sxs-lookup"><span data-stu-id="80af2-401">When Blazor WebAssembly downloads an app's startup files, it instructs the browser to perform integrity checks on the responses.</span></span> <span data-ttu-id="80af2-402">它會使用檔案中的資訊 `blazor.boot.json` `.dll` ，為、和其他檔案指定預期的 256 sha-1 雜湊值 `.wasm` 。</span><span class="sxs-lookup"><span data-stu-id="80af2-402">It uses information in the `blazor.boot.json` file to specify the expected SHA-256 hash values for `.dll`, `.wasm`, and other files.</span></span> <span data-ttu-id="80af2-403">這項功能很有用，原因如下：</span><span class="sxs-lookup"><span data-stu-id="80af2-403">This is beneficial for the following reasons:</span></span>
 
 * <span data-ttu-id="80af2-404">它可確保您不會在載入不一致的檔案集時產生風險，例如，當使用者在下載應用程式檔的過程中，將新的部署套用至您的 web 伺服器。</span><span class="sxs-lookup"><span data-stu-id="80af2-404">It ensures you don't risk loading an inconsistent set of files, for example if a new deployment is applied to your web server while the user is in the process of downloading the application files.</span></span> <span data-ttu-id="80af2-405">不一致的檔案可能會導致未定義的行為。</span><span class="sxs-lookup"><span data-stu-id="80af2-405">Inconsistent files could lead to undefined behavior.</span></span>
 * <span data-ttu-id="80af2-406">它可確保使用者的瀏覽器永遠不會快取不一致或不正確回應，這可能會讓他們無法啟動應用程式，即使它們手動重新整理頁面也是如此。</span><span class="sxs-lookup"><span data-stu-id="80af2-406">It ensures the user's browser never caches inconsistent or invalid responses, which could prevent them from starting the app even if they manually refresh the page.</span></span>
@@ -911,7 +911,7 @@ Remove-Item $filepath\bin\Release\$tfm\wwwroot\_framework\blazor.boot.json.gz
 <span data-ttu-id="80af2-408">如果您的 web 伺服器傳回的回應不符合預期的 256 SHA-1 雜湊，您將會在瀏覽器的開發人員主控台中看到類似下面的錯誤：</span><span class="sxs-lookup"><span data-stu-id="80af2-408">If your web server returns responses that don't match the expected SHA-256 hashes, you will see an error similar to the following appear in the browser's developer console:</span></span>
 
 ```
-Failed to find a valid digest in the 'integrity' attribute for resource 'https://myapp.example.com/_framework/My:::no-loc(Blazor):::App.dll' with computed SHA-256 integrity 'IIa70iwvmEg5WiDV17OpQ5eCztNYqL186J56852RpJY='. The resource has been blocked.
+Failed to find a valid digest in the 'integrity' attribute for resource 'https://myapp.example.com/_framework/MyBlazorApp.dll' with computed SHA-256 integrity 'IIa70iwvmEg5WiDV17OpQ5eCztNYqL186J56852RpJY='. The resource has been blocked.
 ```
 
 <span data-ttu-id="80af2-409">在大部分的情況下，這 *不* 是完整性檢查本身的問題。</span><span class="sxs-lookup"><span data-stu-id="80af2-409">In most cases, this is *not* a problem with integrity checking itself.</span></span> <span data-ttu-id="80af2-410">相反地，這表示有其他問題，而完整性檢查則會警告您有關該其他問題。</span><span class="sxs-lookup"><span data-stu-id="80af2-410">Instead, it means there is some other problem, and the integrity check is warning you about that other problem.</span></span>
@@ -944,20 +944,20 @@ Failed to find a valid digest in the 'integrity' attribute for resource 'https:/
 
 <span data-ttu-id="80af2-447">在大多數情況下，請勿停用完整性檢查。</span><span class="sxs-lookup"><span data-stu-id="80af2-447">In most cases, don't disable integrity checking.</span></span> <span data-ttu-id="80af2-448">停用完整性檢查並無法解決造成非預期回應的根本問題，因而導致遺失先前所列的權益。</span><span class="sxs-lookup"><span data-stu-id="80af2-448">Disabling integrity checking doesn't solve the underlying problem that has caused the unexpected responses and results in losing the benefits listed earlier.</span></span>
 
-<span data-ttu-id="80af2-449">在某些情況下，無法依賴網頁伺服器傳回一致的回應，而且您沒有任何選擇，而是停用完整性檢查。</span><span class="sxs-lookup"><span data-stu-id="80af2-449">There may be cases where the web server can't be relied upon to return consistent responses, and you have no choice but to disable integrity checks.</span></span> <span data-ttu-id="80af2-450">若要停用完整性檢查，請將下列內容新增至專案檔中的屬性群組 :::no-loc(Blazor WebAssembly)::: `.csproj` ：</span><span class="sxs-lookup"><span data-stu-id="80af2-450">To disable integrity checks, add the following to a property group in the :::no-loc(Blazor WebAssembly)::: project's `.csproj` file:</span></span>
+<span data-ttu-id="80af2-449">在某些情況下，無法依賴網頁伺服器傳回一致的回應，而且您沒有任何選擇，而是停用完整性檢查。</span><span class="sxs-lookup"><span data-stu-id="80af2-449">There may be cases where the web server can't be relied upon to return consistent responses, and you have no choice but to disable integrity checks.</span></span> <span data-ttu-id="80af2-450">若要停用完整性檢查，請將下列內容新增至專案檔中的屬性群組 Blazor WebAssembly `.csproj` ：</span><span class="sxs-lookup"><span data-stu-id="80af2-450">To disable integrity checks, add the following to a property group in the Blazor WebAssembly project's `.csproj` file:</span></span>
 
 ```xml
-<:::no-loc(Blazor):::CacheBootResources>false</:::no-loc(Blazor):::CacheBootResources>
+<BlazorCacheBootResources>false</BlazorCacheBootResources>
 ```
 
-<span data-ttu-id="80af2-451">`:::no-loc(Blazor):::CacheBootResources` 也會 :::no-loc(Blazor)::: `.dll` 根據其 256 sha-1 雜湊停用快取、和其他檔案的預設行為， `.wasm` 因為屬性指出無法依賴 sha-256 雜湊來取得正確性。</span><span class="sxs-lookup"><span data-stu-id="80af2-451">`:::no-loc(Blazor):::CacheBootResources` also disables :::no-loc(Blazor):::'s default behavior of caching the `.dll`, `.wasm`, and other files based on their SHA-256 hashes because the property indicates that the SHA-256 hashes can't be relied upon for correctness.</span></span> <span data-ttu-id="80af2-452">即使使用此設定，瀏覽器的一般 HTTP 快取仍可能會快取這些檔案，但這是否發生，取決於您的 web 伺服器設定和它所提供的 `cache-control` 標頭。</span><span class="sxs-lookup"><span data-stu-id="80af2-452">Even with this setting, the browser's normal HTTP cache may still cache those files, but whether or not this happens depends on your web server configuration and the `cache-control` headers that it serves.</span></span>
+<span data-ttu-id="80af2-451">`BlazorCacheBootResources` 也會 Blazor `.dll` 根據其 256 sha-1 雜湊停用快取、和其他檔案的預設行為， `.wasm` 因為屬性指出無法依賴 sha-256 雜湊來取得正確性。</span><span class="sxs-lookup"><span data-stu-id="80af2-451">`BlazorCacheBootResources` also disables Blazor's default behavior of caching the `.dll`, `.wasm`, and other files based on their SHA-256 hashes because the property indicates that the SHA-256 hashes can't be relied upon for correctness.</span></span> <span data-ttu-id="80af2-452">即使使用此設定，瀏覽器的一般 HTTP 快取仍可能會快取這些檔案，但這是否發生，取決於您的 web 伺服器設定和它所提供的 `cache-control` 標頭。</span><span class="sxs-lookup"><span data-stu-id="80af2-452">Even with this setting, the browser's normal HTTP cache may still cache those files, but whether or not this happens depends on your web server configuration and the `cache-control` headers that it serves.</span></span>
 
 > [!NOTE]
-> <span data-ttu-id="80af2-453">`:::no-loc(Blazor):::CacheBootResources`屬性不會停用[漸進式 Web 應用程式的完整性檢查 (pwa) ](xref:blazor/progressive-web-app)。</span><span class="sxs-lookup"><span data-stu-id="80af2-453">The `:::no-loc(Blazor):::CacheBootResources` property doesn't disable integrity checks for [Progressive Web Applications (PWAs)](xref:blazor/progressive-web-app).</span></span> <span data-ttu-id="80af2-454">如需 Pwa 的相關指引，請參閱 [停用 pwa 的完整性檢查](#disable-integrity-checking-for-pwas) 一節。</span><span class="sxs-lookup"><span data-stu-id="80af2-454">For guidance pertaining to PWAs, see the [Disable integrity checking for PWAs](#disable-integrity-checking-for-pwas) section.</span></span>
+> <span data-ttu-id="80af2-453">`BlazorCacheBootResources`屬性不會停用[漸進式 Web 應用程式的完整性檢查 (pwa) ](xref:blazor/progressive-web-app)。</span><span class="sxs-lookup"><span data-stu-id="80af2-453">The `BlazorCacheBootResources` property doesn't disable integrity checks for [Progressive Web Applications (PWAs)](xref:blazor/progressive-web-app).</span></span> <span data-ttu-id="80af2-454">如需 Pwa 的相關指引，請參閱 [停用 pwa 的完整性檢查](#disable-integrity-checking-for-pwas) 一節。</span><span class="sxs-lookup"><span data-stu-id="80af2-454">For guidance pertaining to PWAs, see the [Disable integrity checking for PWAs](#disable-integrity-checking-for-pwas) section.</span></span>
 
 ### <a name="disable-integrity-checking-for-pwas"></a><span data-ttu-id="80af2-455">停用 Pwa 的完整性檢查</span><span class="sxs-lookup"><span data-stu-id="80af2-455">Disable integrity checking for PWAs</span></span>
 
-<span data-ttu-id="80af2-456">:::no-loc(Blazor):::的漸進式 Web 應用程式 (PWA) 範本包含建議的檔案 `service-worker.published.js` ，該檔案負責提取和儲存應用程式檔，以供離線使用。</span><span class="sxs-lookup"><span data-stu-id="80af2-456">:::no-loc(Blazor):::'s Progressive Web Application (PWA) template contains a suggested `service-worker.published.js` file that's responsible for fetching and storing application files for offline use.</span></span> <span data-ttu-id="80af2-457">這是與一般應用程式啟動機制不同的程式，且具有自己的個別完整性檢查邏輯。</span><span class="sxs-lookup"><span data-stu-id="80af2-457">This is a separate process from the normal app startup mechanism and has its own separate integrity checking logic.</span></span>
+<span data-ttu-id="80af2-456">Blazor的漸進式 Web 應用程式 (PWA) 範本包含建議的檔案 `service-worker.published.js` ，該檔案負責提取和儲存應用程式檔，以供離線使用。</span><span class="sxs-lookup"><span data-stu-id="80af2-456">Blazor's Progressive Web Application (PWA) template contains a suggested `service-worker.published.js` file that's responsible for fetching and storing application files for offline use.</span></span> <span data-ttu-id="80af2-457">這是與一般應用程式啟動機制不同的程式，且具有自己的個別完整性檢查邏輯。</span><span class="sxs-lookup"><span data-stu-id="80af2-457">This is a separate process from the normal app startup mechanism and has its own separate integrity checking logic.</span></span>
 
 <span data-ttu-id="80af2-458">在檔案中 `service-worker.published.js` ，下列程式程式碼存在：</span><span class="sxs-lookup"><span data-stu-id="80af2-458">Inside the `service-worker.published.js` file, following line is present:</span></span>
 

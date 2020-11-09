@@ -1,23 +1,23 @@
 ---
-title: '建立 :::no-loc(Blazor)::: 待辦事項清單應用程式'
+title: '建立 Blazor 待辦事項清單應用程式'
 author: guardrex
-description: '逐步建立 :::no-loc(Blazor)::: 應用程式。'
+description: '逐步建立 Blazor 應用程式。'
 monikerRange: '>= aspnetcore-3.0'
 ms.author: riande
 ms.custom: mvc
 ms.date: 08/22/2020
 no-loc:
-- ':::no-loc(appsettings.json):::'
-- ':::no-loc(ASP.NET Core Identity):::'
-- ':::no-loc(cookie):::'
-- ':::no-loc(Cookie):::'
-- ':::no-loc(Blazor):::'
-- ':::no-loc(Blazor Server):::'
-- ':::no-loc(Blazor WebAssembly):::'
-- ':::no-loc(Identity):::'
-- ":::no-loc(Let's Encrypt):::"
-- ':::no-loc(Razor):::'
-- ':::no-loc(SignalR):::'
+- 'appsettings.json'
+- 'ASP.NET Core Identity'
+- 'cookie'
+- 'Cookie'
+- 'Blazor'
+- 'Blazor Server'
+- 'Blazor WebAssembly'
+- 'Identity'
+- "Let's Encrypt"
+- 'Razor'
+- 'SignalR'
 uid: tutorials/build-a-blazor-app
 ms.openlocfilehash: 68a38b82f5a89365e4f345a60f1f34b697c027ed
 ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
@@ -26,17 +26,17 @@ ms.contentlocale: zh-TW
 ms.lasthandoff: 10/30/2020
 ms.locfileid: "93060088"
 ---
-# <a name="build-a-no-locblazor-todo-list-app"></a><span data-ttu-id="fbdf4-103">建立 :::no-loc(Blazor)::: 待辦事項清單應用程式</span><span class="sxs-lookup"><span data-stu-id="fbdf4-103">Build a :::no-loc(Blazor)::: todo list app</span></span>
+# <a name="build-a-no-locblazor-todo-list-app"></a><span data-ttu-id="fbdf4-103">建立 Blazor 待辦事項清單應用程式</span><span class="sxs-lookup"><span data-stu-id="fbdf4-103">Build a Blazor todo list app</span></span>
 
 <span data-ttu-id="fbdf4-104">作者：[Daniel Roth](https://github.com/danroth27) 和 [Luke Latham](https://github.com/guardrex)</span><span class="sxs-lookup"><span data-stu-id="fbdf4-104">By [Daniel Roth](https://github.com/danroth27) and [Luke Latham](https://github.com/guardrex)</span></span>
 
-<span data-ttu-id="fbdf4-105">本教學課程說明如何建立和修改 :::no-loc(Blazor)::: 應用程式。</span><span class="sxs-lookup"><span data-stu-id="fbdf4-105">This tutorial shows you how to build and modify a :::no-loc(Blazor)::: app.</span></span> <span data-ttu-id="fbdf4-106">您會了解如何：</span><span class="sxs-lookup"><span data-stu-id="fbdf4-106">You learn how to:</span></span>
+<span data-ttu-id="fbdf4-105">本教學課程說明如何建立和修改 Blazor 應用程式。</span><span class="sxs-lookup"><span data-stu-id="fbdf4-105">This tutorial shows you how to build and modify a Blazor app.</span></span> <span data-ttu-id="fbdf4-106">您會了解如何：</span><span class="sxs-lookup"><span data-stu-id="fbdf4-106">You learn how to:</span></span>
 
 > [!div class="checklist"]
-> * <span data-ttu-id="fbdf4-107">建立待辦事項清單 :::no-loc(Blazor)::: 應用程式專案</span><span class="sxs-lookup"><span data-stu-id="fbdf4-107">Create a todo list :::no-loc(Blazor)::: app project</span></span>
-> * <span data-ttu-id="fbdf4-108">修改 :::no-loc(Razor)::: 元件</span><span class="sxs-lookup"><span data-stu-id="fbdf4-108">Modify :::no-loc(Razor)::: components</span></span>
+> * <span data-ttu-id="fbdf4-107">建立待辦事項清單 Blazor 應用程式專案</span><span class="sxs-lookup"><span data-stu-id="fbdf4-107">Create a todo list Blazor app project</span></span>
+> * <span data-ttu-id="fbdf4-108">修改 Razor 元件</span><span class="sxs-lookup"><span data-stu-id="fbdf4-108">Modify Razor components</span></span>
 > * <span data-ttu-id="fbdf4-109">在元件中使用事件處理和資料系結</span><span class="sxs-lookup"><span data-stu-id="fbdf4-109">Use event handling and data binding in components</span></span>
-> * <span data-ttu-id="fbdf4-110">在應用程式中使用路由 :::no-loc(Blazor):::</span><span class="sxs-lookup"><span data-stu-id="fbdf4-110">Use routing in a :::no-loc(Blazor)::: app</span></span>
+> * <span data-ttu-id="fbdf4-110">在應用程式中使用路由 Blazor</span><span class="sxs-lookup"><span data-stu-id="fbdf4-110">Use routing in a Blazor app</span></span>
 
 <span data-ttu-id="fbdf4-111">在本教學課程結尾處，您將會有一個工作 todo 清單應用程式。</span><span class="sxs-lookup"><span data-stu-id="fbdf4-111">At the end of this tutorial, you'll have a working todo list app.</span></span>
 
@@ -44,9 +44,9 @@ ms.locfileid: "93060088"
 
 [!INCLUDE[](~/includes/3.1-SDK.md)]
 
-## <a name="create-a-todo-list-no-locblazor-app"></a><span data-ttu-id="fbdf4-113">建立 todo 清單 :::no-loc(Blazor)::: 應用程式</span><span class="sxs-lookup"><span data-stu-id="fbdf4-113">Create a todo list :::no-loc(Blazor)::: app</span></span>
+## <a name="create-a-todo-list-no-locblazor-app"></a><span data-ttu-id="fbdf4-113">建立 todo 清單 Blazor 應用程式</span><span class="sxs-lookup"><span data-stu-id="fbdf4-113">Create a todo list Blazor app</span></span>
 
-1. <span data-ttu-id="fbdf4-114">:::no-loc(Blazor):::在命令列介面中建立名為的新應用程式 `TodoList` ：</span><span class="sxs-lookup"><span data-stu-id="fbdf4-114">Create a new :::no-loc(Blazor)::: app named `TodoList` in a command shell:</span></span>
+1. <span data-ttu-id="fbdf4-114">Blazor在命令列介面中建立名為的新應用程式 `TodoList` ：</span><span class="sxs-lookup"><span data-stu-id="fbdf4-114">Create a new Blazor app named `TodoList` in a command shell:</span></span>
 
    ```dotnetcli
    dotnet new blazorserver -o TodoList
@@ -58,14 +58,14 @@ ms.locfileid: "93060088"
    cd TodoList
    ```
 
-1. <span data-ttu-id="fbdf4-118">`Todo` :::no-loc(Razor)::: 使用下列命令，在資料夾中將新元件新增至應用程式 `Pages` ：</span><span class="sxs-lookup"><span data-stu-id="fbdf4-118">Add a new `Todo` :::no-loc(Razor)::: component to the app in the `Pages` folder using the following command:</span></span>
+1. <span data-ttu-id="fbdf4-118">`Todo` Razor 使用下列命令，在資料夾中將新元件新增至應用程式 `Pages` ：</span><span class="sxs-lookup"><span data-stu-id="fbdf4-118">Add a new `Todo` Razor component to the app in the `Pages` folder using the following command:</span></span>
 
    ```dotnetcli
    dotnet new razorcomponent -n Todo -o Pages
    ```
 
    > [!IMPORTANT]
-   > <span data-ttu-id="fbdf4-119">:::no-loc(Razor)::: 元件檔案名需要大寫的第一個字母。</span><span class="sxs-lookup"><span data-stu-id="fbdf4-119">:::no-loc(Razor)::: component file names require a capitalized first letter.</span></span> <span data-ttu-id="fbdf4-120">開啟 `Pages` 資料夾，並確認 `Todo` 元件檔案名以大寫字母開頭 `T` 。</span><span class="sxs-lookup"><span data-stu-id="fbdf4-120">Open the `Pages` folder and confirm that the `Todo` component file name starts with a capital letter `T`.</span></span> <span data-ttu-id="fbdf4-121">檔案名應該是 `Todo.razor` 。</span><span class="sxs-lookup"><span data-stu-id="fbdf4-121">The file name should be `Todo.razor`.</span></span>
+   > <span data-ttu-id="fbdf4-119">Razor 元件檔案名需要大寫的第一個字母。</span><span class="sxs-lookup"><span data-stu-id="fbdf4-119">Razor component file names require a capitalized first letter.</span></span> <span data-ttu-id="fbdf4-120">開啟 `Pages` 資料夾，並確認 `Todo` 元件檔案名以大寫字母開頭 `T` 。</span><span class="sxs-lookup"><span data-stu-id="fbdf4-120">Open the `Pages` folder and confirm that the `Todo` component file name starts with a capital letter `T`.</span></span> <span data-ttu-id="fbdf4-121">檔案名應該是 `Todo.razor` 。</span><span class="sxs-lookup"><span data-stu-id="fbdf4-121">The file name should be `Todo.razor`.</span></span>
 
 1. <span data-ttu-id="fbdf4-122">`Pages/Todo.razor`提供元件的初始標記：</span><span class="sxs-lookup"><span data-stu-id="fbdf4-122">In `Pages/Todo.razor` provide the initial markup for the component:</span></span>
 
@@ -147,12 +147,12 @@ ms.locfileid: "93060088"
 <span data-ttu-id="fbdf4-158">在本教學課程中，您已了解如何：</span><span class="sxs-lookup"><span data-stu-id="fbdf4-158">In this tutorial, you learned how to:</span></span>
 
 > [!div class="checklist"]
-> * <span data-ttu-id="fbdf4-159">建立待辦事項清單 :::no-loc(Blazor)::: 應用程式專案</span><span class="sxs-lookup"><span data-stu-id="fbdf4-159">Create a todo list :::no-loc(Blazor)::: app project</span></span>
-> * <span data-ttu-id="fbdf4-160">修改 :::no-loc(Razor)::: 元件</span><span class="sxs-lookup"><span data-stu-id="fbdf4-160">Modify :::no-loc(Razor)::: components</span></span>
+> * <span data-ttu-id="fbdf4-159">建立待辦事項清單 Blazor 應用程式專案</span><span class="sxs-lookup"><span data-stu-id="fbdf4-159">Create a todo list Blazor app project</span></span>
+> * <span data-ttu-id="fbdf4-160">修改 Razor 元件</span><span class="sxs-lookup"><span data-stu-id="fbdf4-160">Modify Razor components</span></span>
 > * <span data-ttu-id="fbdf4-161">在元件中使用事件處理和資料系結</span><span class="sxs-lookup"><span data-stu-id="fbdf4-161">Use event handling and data binding in components</span></span>
-> * <span data-ttu-id="fbdf4-162">在應用程式中使用路由 :::no-loc(Blazor):::</span><span class="sxs-lookup"><span data-stu-id="fbdf4-162">Use routing in a :::no-loc(Blazor)::: app</span></span>
+> * <span data-ttu-id="fbdf4-162">在應用程式中使用路由 Blazor</span><span class="sxs-lookup"><span data-stu-id="fbdf4-162">Use routing in a Blazor app</span></span>
 
-<span data-ttu-id="fbdf4-163">瞭解 ASP.NET Core 的工具 :::no-loc(Blazor)::: ：</span><span class="sxs-lookup"><span data-stu-id="fbdf4-163">Learn about tooling for ASP.NET Core :::no-loc(Blazor)::::</span></span>
+<span data-ttu-id="fbdf4-163">瞭解 ASP.NET Core 的工具 Blazor ：</span><span class="sxs-lookup"><span data-stu-id="fbdf4-163">Learn about tooling for ASP.NET Core Blazor:</span></span>
 
 > [!div class="nextstepaction"]
 > <xref:blazor/tooling>

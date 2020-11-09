@@ -6,17 +6,17 @@ ms.author: casoper
 ms.custom: devx-track-csharp, mvc
 ms.date: 01/21/2019
 no-loc:
-- ':::no-loc(appsettings.json):::'
-- ':::no-loc(ASP.NET Core Identity):::'
-- ':::no-loc(cookie):::'
-- ':::no-loc(Cookie):::'
-- ':::no-loc(Blazor):::'
-- ':::no-loc(Blazor Server):::'
-- ':::no-loc(Blazor WebAssembly):::'
-- ':::no-loc(Identity):::'
-- ":::no-loc(Let's Encrypt):::"
-- ':::no-loc(Razor):::'
-- ':::no-loc(SignalR):::'
+- 'appsettings.json'
+- 'ASP.NET Core Identity'
+- 'cookie'
+- 'Cookie'
+- 'Blazor'
+- 'Blazor Server'
+- 'Blazor WebAssembly'
+- 'Identity'
+- "Let's Encrypt"
+- 'Razor'
+- 'SignalR'
 uid: security/authentication/azure-ad-b2c
 ms.openlocfilehash: f917bec8f2d929e62bf43494159a63458f135c5f
 ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
@@ -109,16 +109,16 @@ ms.locfileid: "93061388"
 <span data-ttu-id="5f133-180">返回仍開啟 B2C 應用程式屬性的瀏覽器視窗。</span><span class="sxs-lookup"><span data-stu-id="5f133-180">Return to the browser window with the B2C app properties still open.</span></span> <span data-ttu-id="5f133-181">將稍早指定的暫時 **回復 URL** 變更為從 Visual Studio 複製的值。</span><span class="sxs-lookup"><span data-stu-id="5f133-181">Change the temporary **Reply URL** specified earlier to the value copied from Visual Studio.</span></span> <span data-ttu-id="5f133-182">選取視窗頂端的 [ **儲存** ]。</span><span class="sxs-lookup"><span data-stu-id="5f133-182">Select **Save** at the top of the window.</span></span>
 
 > [!TIP]
-> <span data-ttu-id="5f133-183">如果您沒有複製回復 URL，請從 Web 專案屬性的 [調試] 索引標籤使用 HTTPS 位址，並從附加 **CallbackPath** 值 *:::no-loc(appsettings.json):::* 。</span><span class="sxs-lookup"><span data-stu-id="5f133-183">If you didn't copy the Reply URL, use the HTTPS address from the Debug tab in the web project properties, and append the **CallbackPath** value from *:::no-loc(appsettings.json):::* .</span></span>
+> <span data-ttu-id="5f133-183">如果您沒有複製回復 URL，請從 Web 專案屬性的 [調試] 索引標籤使用 HTTPS 位址，並從附加 **CallbackPath** 值 *appsettings.json* 。</span><span class="sxs-lookup"><span data-stu-id="5f133-183">If you didn't copy the Reply URL, use the HTTPS address from the Debug tab in the web project properties, and append the **CallbackPath** value from *appsettings.json* .</span></span>
 
 ## <a name="configure-policies"></a><span data-ttu-id="5f133-184">設定原則</span><span class="sxs-lookup"><span data-stu-id="5f133-184">Configure policies</span></span>
 
-<span data-ttu-id="5f133-185">使用 Azure AD B2C 檔中的步驟來 [建立註冊或登入原則](/azure/active-directory-b2c/active-directory-b2c-reference-policies#user-flow-versions)，然後 [建立密碼重設原則](/azure/active-directory-b2c/active-directory-b2c-reference-policies#user-flow-versions)。</span><span class="sxs-lookup"><span data-stu-id="5f133-185">Use the steps in the Azure AD B2C documentation to [create a sign-up or sign-in policy](/azure/active-directory-b2c/active-directory-b2c-reference-policies#user-flow-versions), and then [create a password reset policy](/azure/active-directory-b2c/active-directory-b2c-reference-policies#user-flow-versions).</span></span> <span data-ttu-id="5f133-186">使用提供 **:::no-loc(Identity)::: 者** 的檔中提供的範例值、 **註冊屬性** 和 **應用程式宣告** 。</span><span class="sxs-lookup"><span data-stu-id="5f133-186">Use the example values provided in the documentation for **:::no-loc(Identity)::: providers** , **Sign-up attributes** , and **Application claims** .</span></span> <span data-ttu-id="5f133-187">使用 [ **立即執行** ] 按鈕來測試原則（如檔中所述）是選擇性的。</span><span class="sxs-lookup"><span data-stu-id="5f133-187">Using the **Run now** button to test the policies as described in the documentation is optional.</span></span>
+<span data-ttu-id="5f133-185">使用 Azure AD B2C 檔中的步驟來 [建立註冊或登入原則](/azure/active-directory-b2c/active-directory-b2c-reference-policies#user-flow-versions)，然後 [建立密碼重設原則](/azure/active-directory-b2c/active-directory-b2c-reference-policies#user-flow-versions)。</span><span class="sxs-lookup"><span data-stu-id="5f133-185">Use the steps in the Azure AD B2C documentation to [create a sign-up or sign-in policy](/azure/active-directory-b2c/active-directory-b2c-reference-policies#user-flow-versions), and then [create a password reset policy](/azure/active-directory-b2c/active-directory-b2c-reference-policies#user-flow-versions).</span></span> <span data-ttu-id="5f133-186">使用提供 **Identity 者** 的檔中提供的範例值、 **註冊屬性** 和 **應用程式宣告** 。</span><span class="sxs-lookup"><span data-stu-id="5f133-186">Use the example values provided in the documentation for **Identity providers** , **Sign-up attributes** , and **Application claims** .</span></span> <span data-ttu-id="5f133-187">使用 [ **立即執行** ] 按鈕來測試原則（如檔中所述）是選擇性的。</span><span class="sxs-lookup"><span data-stu-id="5f133-187">Using the **Run now** button to test the policies as described in the documentation is optional.</span></span>
 
 > [!WARNING]
-> <span data-ttu-id="5f133-188">請確定原則名稱與檔中所述的完全相同，因為這些原則是在 Visual Studio 的 [ **變更驗證** ] 對話方塊中使用。</span><span class="sxs-lookup"><span data-stu-id="5f133-188">Ensure the policy names are exactly as described in the documentation, as those policies were used in the **Change Authentication** dialog in Visual Studio.</span></span> <span data-ttu-id="5f133-189">您可以在中驗證原則名稱 *:::no-loc(appsettings.json):::* 。</span><span class="sxs-lookup"><span data-stu-id="5f133-189">The policy names can be verified in *:::no-loc(appsettings.json):::* .</span></span>
+> <span data-ttu-id="5f133-188">請確定原則名稱與檔中所述的完全相同，因為這些原則是在 Visual Studio 的 [ **變更驗證** ] 對話方塊中使用。</span><span class="sxs-lookup"><span data-stu-id="5f133-188">Ensure the policy names are exactly as described in the documentation, as those policies were used in the **Change Authentication** dialog in Visual Studio.</span></span> <span data-ttu-id="5f133-189">您可以在中驗證原則名稱 *appsettings.json* 。</span><span class="sxs-lookup"><span data-stu-id="5f133-189">The policy names can be verified in *appsettings.json* .</span></span>
 
-## <a name="configure-the-underlying-openidconnectoptionsjwtbearerno-loccookie-options"></a><span data-ttu-id="5f133-190">設定基礎 OpenIdConnectOptions/JwtBearer/ :::no-loc(Cookie)::: 選項</span><span class="sxs-lookup"><span data-stu-id="5f133-190">Configure the underlying OpenIdConnectOptions/JwtBearer/:::no-loc(Cookie)::: options</span></span>
+## <a name="configure-the-underlying-openidconnectoptionsjwtbearerno-loccookie-options"></a><span data-ttu-id="5f133-190">設定基礎 OpenIdConnectOptions/JwtBearer/ Cookie 選項</span><span class="sxs-lookup"><span data-stu-id="5f133-190">Configure the underlying OpenIdConnectOptions/JwtBearer/Cookie options</span></span>
 
 <span data-ttu-id="5f133-191">若要直接設定基礎選項，請在中使用適當的架構常數 `Startup.ConfigureServices` ：</span><span class="sxs-lookup"><span data-stu-id="5f133-191">To configure the underlying options directly, use the appropriate scheme constant in `Startup.ConfigureServices`:</span></span>
 
@@ -129,8 +129,8 @@ services.Configure<OpenIdConnectOptions>(
         // Omitted for brevity
     });
 
-services.Configure<:::no-loc(Cookie):::AuthenticationOptions>(
-    AzureAD[B2C]Defaults.:::no-loc(Cookie):::Scheme, options => 
+services.Configure<CookieAuthenticationOptions>(
+    AzureAD[B2C]Defaults.CookieScheme, options => 
     {
         // Omitted for brevity
     });
@@ -144,7 +144,7 @@ services.Configure<JwtBearerOptions>(
 
 ## <a name="run-the-app"></a><span data-ttu-id="5f133-192">執行應用程式</span><span class="sxs-lookup"><span data-stu-id="5f133-192">Run the app</span></span>
 
-<span data-ttu-id="5f133-193">在 Visual Studio 中，按 **F5** 以建立並執行應用程式。</span><span class="sxs-lookup"><span data-stu-id="5f133-193">In Visual Studio, press **F5** to build and run the app.</span></span> <span data-ttu-id="5f133-194">在 web 應用程式啟動後，選取 [ **接受** ] 以接受使用 :::no-loc(cookie)::: s (如果出現提示) ，然後選取 [登 **入** ]。</span><span class="sxs-lookup"><span data-stu-id="5f133-194">After the web app launches, select **Accept** to accept the use of :::no-loc(cookie):::s (if prompted), and then select **Sign in** .</span></span>
+<span data-ttu-id="5f133-193">在 Visual Studio 中，按 **F5** 以建立並執行應用程式。</span><span class="sxs-lookup"><span data-stu-id="5f133-193">In Visual Studio, press **F5** to build and run the app.</span></span> <span data-ttu-id="5f133-194">在 web 應用程式啟動後，選取 [ **接受** ] 以接受使用 cookie s (如果出現提示) ，然後選取 [登 **入** ]。</span><span class="sxs-lookup"><span data-stu-id="5f133-194">After the web app launches, select **Accept** to accept the use of cookies (if prompted), and then select **Sign in** .</span></span>
 
 ![登入應用程式](./azure-ad-b2c/_static/signin.png)
 

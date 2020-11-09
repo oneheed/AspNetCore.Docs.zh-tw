@@ -1,21 +1,21 @@
 ---
-title: :::no-loc(Razor):::ASP.NET Core 中的應用程式元件共用控制器、視圖、頁面和其他
+title: RazorASP.NET Core 中的應用程式元件共用控制器、視圖、頁面和其他
 author: rick-anderson
-description: :::no-loc(Razor):::ASP.NET Core 中的應用程式元件共用控制器、視圖、頁面和其他
+description: RazorASP.NET Core 中的應用程式元件共用控制器、視圖、頁面和其他
 ms.author: riande
 ms.date: 11/11/2019
 no-loc:
-- ':::no-loc(appsettings.json):::'
-- ':::no-loc(ASP.NET Core Identity):::'
-- ':::no-loc(cookie):::'
-- ':::no-loc(Cookie):::'
-- ':::no-loc(Blazor):::'
-- ':::no-loc(Blazor Server):::'
-- ':::no-loc(Blazor WebAssembly):::'
-- ':::no-loc(Identity):::'
-- ":::no-loc(Let's Encrypt):::"
-- ':::no-loc(Razor):::'
-- ':::no-loc(SignalR):::'
+- 'appsettings.json'
+- 'ASP.NET Core Identity'
+- 'cookie'
+- 'Cookie'
+- 'Blazor'
+- 'Blazor Server'
+- 'Blazor WebAssembly'
+- 'Identity'
+- "Let's Encrypt"
+- 'Razor'
+- 'SignalR'
 uid: mvc/extensibility/app-parts
 ms.openlocfilehash: 33deb5ff794982e0c074186bb2abb88344e8a116
 ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
@@ -24,7 +24,7 @@ ms.contentlocale: zh-TW
 ms.lasthandoff: 10/30/2020
 ms.locfileid: "93061180"
 ---
-# <a name="share-controllers-views-no-locrazor-pages-and-more-with-application-parts"></a><span data-ttu-id="505dd-103">使用應用程式元件共用控制器、視圖、 :::no-loc(Razor)::: 頁面和其他</span><span class="sxs-lookup"><span data-stu-id="505dd-103">Share controllers, views, :::no-loc(Razor)::: Pages and more with Application Parts</span></span>
+# <a name="share-controllers-views-no-locrazor-pages-and-more-with-application-parts"></a><span data-ttu-id="505dd-103">使用應用程式元件共用控制器、視圖、 Razor 頁面和其他</span><span class="sxs-lookup"><span data-stu-id="505dd-103">Share controllers, views, Razor Pages and more with Application Parts</span></span>
 
 ::: moniker range=">= aspnetcore-3.0"
 
@@ -32,9 +32,9 @@ ms.locfileid: "93061180"
 
 <span data-ttu-id="505dd-105">[查看或下載範例程式碼](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/mvc/advanced/app-parts) ([如何下載](xref:index#how-to-download-a-sample)) </span><span class="sxs-lookup"><span data-stu-id="505dd-105">[View or download sample code](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/mvc/advanced/app-parts) ([how to download](xref:index#how-to-download-a-sample))</span></span>
 
-<span data-ttu-id="505dd-106">*應用程式元件* 是應用程式資源的抽象概念。</span><span class="sxs-lookup"><span data-stu-id="505dd-106">An *Application Part* is an abstraction over the resources of an app.</span></span> <span data-ttu-id="505dd-107">應用程式元件可讓 ASP.NET Core 探索控制器、視圖元件、標籤協助程式、 :::no-loc(Razor)::: 頁面、razor 編譯來源等等。</span><span class="sxs-lookup"><span data-stu-id="505dd-107">Application Parts allow ASP.NET Core to discover controllers, view components, tag helpers, :::no-loc(Razor)::: Pages, razor compilation sources, and more.</span></span> <span data-ttu-id="505dd-108"><xref:Microsoft.AspNetCore.Mvc.ApplicationParts.AssemblyPart> 是應用程式元件。</span><span class="sxs-lookup"><span data-stu-id="505dd-108"><xref:Microsoft.AspNetCore.Mvc.ApplicationParts.AssemblyPart> is an Application part.</span></span> <span data-ttu-id="505dd-109">`AssemblyPart` 封裝元件參考，並公開類型和編譯參考。</span><span class="sxs-lookup"><span data-stu-id="505dd-109">`AssemblyPart` encapsulates an assembly reference and exposes types and compilation references.</span></span>
+<span data-ttu-id="505dd-106">*應用程式元件* 是應用程式資源的抽象概念。</span><span class="sxs-lookup"><span data-stu-id="505dd-106">An *Application Part* is an abstraction over the resources of an app.</span></span> <span data-ttu-id="505dd-107">應用程式元件可讓 ASP.NET Core 探索控制器、視圖元件、標籤協助程式、 Razor 頁面、razor 編譯來源等等。</span><span class="sxs-lookup"><span data-stu-id="505dd-107">Application Parts allow ASP.NET Core to discover controllers, view components, tag helpers, Razor Pages, razor compilation sources, and more.</span></span> <span data-ttu-id="505dd-108"><xref:Microsoft.AspNetCore.Mvc.ApplicationParts.AssemblyPart> 是應用程式元件。</span><span class="sxs-lookup"><span data-stu-id="505dd-108"><xref:Microsoft.AspNetCore.Mvc.ApplicationParts.AssemblyPart> is an Application part.</span></span> <span data-ttu-id="505dd-109">`AssemblyPart` 封裝元件參考，並公開類型和編譯參考。</span><span class="sxs-lookup"><span data-stu-id="505dd-109">`AssemblyPart` encapsulates an assembly reference and exposes types and compilation references.</span></span>
 
-<span data-ttu-id="505dd-110">[功能提供者](#fp) 會使用應用程式元件，以填入 ASP.NET Core 應用程式的功能。</span><span class="sxs-lookup"><span data-stu-id="505dd-110">[Feature providers](#fp) work with application parts to populate the features of an ASP.NET Core app.</span></span> <span data-ttu-id="505dd-111">應用程式元件的主要使用案例是設定應用程式以探索 (，或避免從元件載入) ASP.NET Core 功能。</span><span class="sxs-lookup"><span data-stu-id="505dd-111">The main use case for application parts is to configure an app to discover (or avoid loading) ASP.NET Core features from an assembly.</span></span> <span data-ttu-id="505dd-112">例如，您可能會想要在多個應用程式之間共用通用功能。</span><span class="sxs-lookup"><span data-stu-id="505dd-112">For example, you might want to share common functionality between multiple apps.</span></span> <span data-ttu-id="505dd-113">使用應用程式元件時，您可以透過多個應用程式，共用包含控制器、視圖、 :::no-loc(Razor)::: 頁面、razor 編譯來源、標記協助程式等元件 (DLL) 。</span><span class="sxs-lookup"><span data-stu-id="505dd-113">Using Application Parts, you can share an assembly (DLL) containing controllers, views, :::no-loc(Razor)::: Pages, razor compilation sources, Tag Helpers, and more with multiple apps.</span></span> <span data-ttu-id="505dd-114">建議您共用元件，以便在多個專案中複製程式碼。</span><span class="sxs-lookup"><span data-stu-id="505dd-114">Sharing an assembly is preferred to duplicating code in multiple projects.</span></span>
+<span data-ttu-id="505dd-110">[功能提供者](#fp) 會使用應用程式元件，以填入 ASP.NET Core 應用程式的功能。</span><span class="sxs-lookup"><span data-stu-id="505dd-110">[Feature providers](#fp) work with application parts to populate the features of an ASP.NET Core app.</span></span> <span data-ttu-id="505dd-111">應用程式元件的主要使用案例是設定應用程式以探索 (，或避免從元件載入) ASP.NET Core 功能。</span><span class="sxs-lookup"><span data-stu-id="505dd-111">The main use case for application parts is to configure an app to discover (or avoid loading) ASP.NET Core features from an assembly.</span></span> <span data-ttu-id="505dd-112">例如，您可能會想要在多個應用程式之間共用通用功能。</span><span class="sxs-lookup"><span data-stu-id="505dd-112">For example, you might want to share common functionality between multiple apps.</span></span> <span data-ttu-id="505dd-113">使用應用程式元件時，您可以透過多個應用程式，共用包含控制器、視圖、 Razor 頁面、razor 編譯來源、標記協助程式等元件 (DLL) 。</span><span class="sxs-lookup"><span data-stu-id="505dd-113">Using Application Parts, you can share an assembly (DLL) containing controllers, views, Razor Pages, razor compilation sources, Tag Helpers, and more with multiple apps.</span></span> <span data-ttu-id="505dd-114">建議您共用元件，以便在多個專案中複製程式碼。</span><span class="sxs-lookup"><span data-stu-id="505dd-114">Sharing an assembly is preferred to duplicating code in multiple projects.</span></span>
 
 <span data-ttu-id="505dd-115">ASP.NET Core apps 從中載入功能 <xref:System.Web.WebPages.ApplicationPart> 。</span><span class="sxs-lookup"><span data-stu-id="505dd-115">ASP.NET Core apps load features from <xref:System.Web.WebPages.ApplicationPart>.</span></span> <span data-ttu-id="505dd-116"><xref:Microsoft.AspNetCore.Mvc.ApplicationParts.AssemblyPart>類別代表元件所支援的應用程式元件。</span><span class="sxs-lookup"><span data-stu-id="505dd-116">The <xref:Microsoft.AspNetCore.Mvc.ApplicationParts.AssemblyPart> class represents an application part that's backed by an assembly.</span></span>
 
@@ -52,7 +52,7 @@ ms.locfileid: "93061180"
 
 ### <a name="include-views"></a><span data-ttu-id="505dd-125">包含視圖</span><span class="sxs-lookup"><span data-stu-id="505dd-125">Include views</span></span>
 
-<span data-ttu-id="505dd-126">使用[ :::no-loc(Razor)::: 類別庫](xref:razor-pages/ui-class)將視圖包含在元件中。</span><span class="sxs-lookup"><span data-stu-id="505dd-126">Use a [:::no-loc(Razor)::: class library](xref:razor-pages/ui-class) to include views in the assembly.</span></span>
+<span data-ttu-id="505dd-126">使用[ Razor 類別庫](xref:razor-pages/ui-class)將視圖包含在元件中。</span><span class="sxs-lookup"><span data-stu-id="505dd-126">Use a [Razor class library](xref:razor-pages/ui-class) to include views in the assembly.</span></span>
 
 ### <a name="prevent-loading-resources"></a><span data-ttu-id="505dd-127">防止載入資源</span><span class="sxs-lookup"><span data-stu-id="505dd-127">Prevent loading resources</span></span>
 
@@ -61,10 +61,10 @@ ms.locfileid: "93061180"
 <span data-ttu-id="505dd-134">`ApplicationPartManager`包含下列元件：</span><span class="sxs-lookup"><span data-stu-id="505dd-134">The `ApplicationPartManager` includes parts for:</span></span>
 
 * <span data-ttu-id="505dd-135">應用程式的元件和相依元件。</span><span class="sxs-lookup"><span data-stu-id="505dd-135">The app's assembly and dependent assemblies.</span></span>
-* `Microsoft.AspNetCore.Mvc.ApplicationParts.Compiled:::no-loc(Razor):::AssemblyPart`
-* `Microsoft.AspNetCore.Mvc.:::no-loc(Razor):::.RuntimeCompilation`
+* `Microsoft.AspNetCore.Mvc.ApplicationParts.CompiledRazorAssemblyPart`
+* `Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation`
 * <span data-ttu-id="505dd-136">`Microsoft.AspNetCore.Mvc.TagHelpers`.</span><span class="sxs-lookup"><span data-stu-id="505dd-136">`Microsoft.AspNetCore.Mvc.TagHelpers`.</span></span>
-* <span data-ttu-id="505dd-137">`Microsoft.AspNetCore.Mvc.:::no-loc(Razor):::`.</span><span class="sxs-lookup"><span data-stu-id="505dd-137">`Microsoft.AspNetCore.Mvc.:::no-loc(Razor):::`.</span></span>
+* <span data-ttu-id="505dd-137">`Microsoft.AspNetCore.Mvc.Razor`.</span><span class="sxs-lookup"><span data-stu-id="505dd-137">`Microsoft.AspNetCore.Mvc.Razor`.</span></span>
 
 <a name="fp"></a>
 
@@ -73,10 +73,10 @@ ms.locfileid: "93061180"
 <span data-ttu-id="505dd-139">應用程式功能提供者會檢查應用程式元件，並為這些元件提供功能。</span><span class="sxs-lookup"><span data-stu-id="505dd-139">Application feature providers examine application parts and provide features for those parts.</span></span> <span data-ttu-id="505dd-140">下列 ASP.NET Core 功能有內建功能提供者：</span><span class="sxs-lookup"><span data-stu-id="505dd-140">There are built-in feature providers for the following ASP.NET Core features:</span></span>
 
 * <xref:Microsoft.AspNetCore.Mvc.Controllers.ControllerFeatureProvider>
-* <xref:Microsoft.AspNetCore.Mvc.:::no-loc(Razor):::.TagHelpers.TagHelperFeatureProvider>
-* <xref:Microsoft.AspNetCore.Mvc.:::no-loc(Razor):::.Compilation.MetadataReferenceFeatureProvider>
-* <xref:Microsoft.AspNetCore.Mvc.:::no-loc(Razor):::.Compilation.ViewsFeatureProvider>
-* <span data-ttu-id="505dd-141">`internal class`[ :::no-loc(Razor)::: CompiledItemFeatureProvider](https://github.com/dotnet/AspNetCore/blob/master/src/Mvc/Mvc.:::no-loc(Razor):::/src/ApplicationParts/:::no-loc(Razor):::CompiledItemFeatureProvider.cs#L14)</span><span class="sxs-lookup"><span data-stu-id="505dd-141">`internal class` [:::no-loc(Razor):::CompiledItemFeatureProvider](https://github.com/dotnet/AspNetCore/blob/master/src/Mvc/Mvc.:::no-loc(Razor):::/src/ApplicationParts/:::no-loc(Razor):::CompiledItemFeatureProvider.cs#L14)</span></span>
+* <xref:Microsoft.AspNetCore.Mvc.Razor.TagHelpers.TagHelperFeatureProvider>
+* <xref:Microsoft.AspNetCore.Mvc.Razor.Compilation.MetadataReferenceFeatureProvider>
+* <xref:Microsoft.AspNetCore.Mvc.Razor.Compilation.ViewsFeatureProvider>
+* <span data-ttu-id="505dd-141">`internal class`[ Razor CompiledItemFeatureProvider](https://github.com/dotnet/AspNetCore/blob/master/src/Mvc/Mvc.Razor/src/ApplicationParts/RazorCompiledItemFeatureProvider.cs#L14)</span><span class="sxs-lookup"><span data-stu-id="505dd-141">`internal class` [RazorCompiledItemFeatureProvider](https://github.com/dotnet/AspNetCore/blob/master/src/Mvc/Mvc.Razor/src/ApplicationParts/RazorCompiledItemFeatureProvider.cs#L14)</span></span>
 
 <span data-ttu-id="505dd-142">繼承自 <xref:Microsoft.AspNetCore.Mvc.ApplicationParts.IApplicationFeatureProvider`1> 的功能提供者，其中 `T` 是功能的類型。</span><span class="sxs-lookup"><span data-stu-id="505dd-142">Feature providers inherit from <xref:Microsoft.AspNetCore.Mvc.ApplicationParts.IApplicationFeatureProvider`1>, where `T` is the type of the feature.</span></span> <span data-ttu-id="505dd-143">您可以針對任何先前列出的功能類型來執行功能提供者。</span><span class="sxs-lookup"><span data-stu-id="505dd-143">Feature providers can be implemented for any of the previously listed feature types.</span></span> <span data-ttu-id="505dd-144">中的功能提供者順序 `ApplicationPartManager.FeatureProviders` 可能會影響執行時間行為。</span><span class="sxs-lookup"><span data-stu-id="505dd-144">The order of feature providers in the `ApplicationPartManager.FeatureProviders` can impact run time behavior.</span></span> <span data-ttu-id="505dd-145">稍後新增的提供者可以回應先前新增的提供者所採取的動作。</span><span class="sxs-lookup"><span data-stu-id="505dd-145">Later added providers can react to actions taken by earlier added providers.</span></span>
 
@@ -122,9 +122,9 @@ View Components:
 
 <span data-ttu-id="505dd-160">[查看或下載範例程式碼](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/mvc/advanced/app-parts) ([如何下載](xref:index#how-to-download-a-sample)) </span><span class="sxs-lookup"><span data-stu-id="505dd-160">[View or download sample code](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/mvc/advanced/app-parts) ([how to download](xref:index#how-to-download-a-sample))</span></span>
 
-<span data-ttu-id="505dd-161">*應用程式元件* 是應用程式資源的抽象概念。</span><span class="sxs-lookup"><span data-stu-id="505dd-161">An *Application Part* is an abstraction over the resources of an app.</span></span> <span data-ttu-id="505dd-162">應用程式元件可讓 ASP.NET Core 探索控制器、視圖元件、標籤協助程式、 :::no-loc(Razor)::: 頁面、razor 編譯來源等等。</span><span class="sxs-lookup"><span data-stu-id="505dd-162">Application Parts allow ASP.NET Core to discover controllers, view components, tag helpers, :::no-loc(Razor)::: Pages, razor compilation sources, and more.</span></span> <span data-ttu-id="505dd-163">[AssemblyPart](/dotnet/api/microsoft.aspnetcore.mvc.applicationparts.assemblypart#Microsoft_AspNetCore_Mvc_ApplicationParts_AssemblyPart) 是一個應用程式元件。</span><span class="sxs-lookup"><span data-stu-id="505dd-163">[AssemblyPart](/dotnet/api/microsoft.aspnetcore.mvc.applicationparts.assemblypart#Microsoft_AspNetCore_Mvc_ApplicationParts_AssemblyPart) is an Application part.</span></span> <span data-ttu-id="505dd-164">`AssemblyPart` 封裝元件參考，並公開類型和編譯參考。</span><span class="sxs-lookup"><span data-stu-id="505dd-164">`AssemblyPart` encapsulates an assembly reference and exposes types and compilation references.</span></span>
+<span data-ttu-id="505dd-161">*應用程式元件* 是應用程式資源的抽象概念。</span><span class="sxs-lookup"><span data-stu-id="505dd-161">An *Application Part* is an abstraction over the resources of an app.</span></span> <span data-ttu-id="505dd-162">應用程式元件可讓 ASP.NET Core 探索控制器、視圖元件、標籤協助程式、 Razor 頁面、razor 編譯來源等等。</span><span class="sxs-lookup"><span data-stu-id="505dd-162">Application Parts allow ASP.NET Core to discover controllers, view components, tag helpers, Razor Pages, razor compilation sources, and more.</span></span> <span data-ttu-id="505dd-163">[AssemblyPart](/dotnet/api/microsoft.aspnetcore.mvc.applicationparts.assemblypart#Microsoft_AspNetCore_Mvc_ApplicationParts_AssemblyPart) 是一個應用程式元件。</span><span class="sxs-lookup"><span data-stu-id="505dd-163">[AssemblyPart](/dotnet/api/microsoft.aspnetcore.mvc.applicationparts.assemblypart#Microsoft_AspNetCore_Mvc_ApplicationParts_AssemblyPart) is an Application part.</span></span> <span data-ttu-id="505dd-164">`AssemblyPart` 封裝元件參考，並公開類型和編譯參考。</span><span class="sxs-lookup"><span data-stu-id="505dd-164">`AssemblyPart` encapsulates an assembly reference and exposes types and compilation references.</span></span>
 
-<span data-ttu-id="505dd-165">*功能提供者* 會使用應用程式元件，以填入 ASP.NET Core 應用程式的功能。</span><span class="sxs-lookup"><span data-stu-id="505dd-165">*Feature providers* work with application parts to populate the features of an ASP.NET Core app.</span></span> <span data-ttu-id="505dd-166">應用程式元件的主要使用案例是設定應用程式以探索 (，或避免從元件載入) ASP.NET Core 功能。</span><span class="sxs-lookup"><span data-stu-id="505dd-166">The main use case for application parts is to configure an app to discover (or avoid loading) ASP.NET Core features from an assembly.</span></span> <span data-ttu-id="505dd-167">例如，您可能會想要在多個應用程式之間共用通用功能。</span><span class="sxs-lookup"><span data-stu-id="505dd-167">For example, you might want to share common functionality between multiple apps.</span></span> <span data-ttu-id="505dd-168">使用應用程式元件時，您可以透過多個應用程式，共用包含控制器、視圖、 :::no-loc(Razor)::: 頁面、razor 編譯來源、標記協助程式等元件 (DLL) 。</span><span class="sxs-lookup"><span data-stu-id="505dd-168">Using Application Parts, you can share an assembly (DLL) containing controllers, views, :::no-loc(Razor)::: Pages, razor compilation sources, Tag Helpers, and more with multiple apps.</span></span> <span data-ttu-id="505dd-169">建議您共用元件，以便在多個專案中複製程式碼。</span><span class="sxs-lookup"><span data-stu-id="505dd-169">Sharing an assembly is preferred to duplicating code in multiple projects.</span></span>
+<span data-ttu-id="505dd-165">*功能提供者* 會使用應用程式元件，以填入 ASP.NET Core 應用程式的功能。</span><span class="sxs-lookup"><span data-stu-id="505dd-165">*Feature providers* work with application parts to populate the features of an ASP.NET Core app.</span></span> <span data-ttu-id="505dd-166">應用程式元件的主要使用案例是設定應用程式以探索 (，或避免從元件載入) ASP.NET Core 功能。</span><span class="sxs-lookup"><span data-stu-id="505dd-166">The main use case for application parts is to configure an app to discover (or avoid loading) ASP.NET Core features from an assembly.</span></span> <span data-ttu-id="505dd-167">例如，您可能會想要在多個應用程式之間共用通用功能。</span><span class="sxs-lookup"><span data-stu-id="505dd-167">For example, you might want to share common functionality between multiple apps.</span></span> <span data-ttu-id="505dd-168">使用應用程式元件時，您可以透過多個應用程式，共用包含控制器、視圖、 Razor 頁面、razor 編譯來源、標記協助程式等元件 (DLL) 。</span><span class="sxs-lookup"><span data-stu-id="505dd-168">Using Application Parts, you can share an assembly (DLL) containing controllers, views, Razor Pages, razor compilation sources, Tag Helpers, and more with multiple apps.</span></span> <span data-ttu-id="505dd-169">建議您共用元件，以便在多個專案中複製程式碼。</span><span class="sxs-lookup"><span data-stu-id="505dd-169">Sharing an assembly is preferred to duplicating code in multiple projects.</span></span>
 
 <span data-ttu-id="505dd-170">ASP.NET Core apps 從中載入功能 <xref:System.Web.WebPages.ApplicationPart> 。</span><span class="sxs-lookup"><span data-stu-id="505dd-170">ASP.NET Core apps load features from <xref:System.Web.WebPages.ApplicationPart>.</span></span> <span data-ttu-id="505dd-171"><xref:Microsoft.AspNetCore.Mvc.ApplicationParts.AssemblyPart>類別代表元件所支援的應用程式元件。</span><span class="sxs-lookup"><span data-stu-id="505dd-171">The <xref:Microsoft.AspNetCore.Mvc.ApplicationParts.AssemblyPart> class represents an application part that's backed by an assembly.</span></span>
 
@@ -142,7 +142,7 @@ View Components:
 
 ### <a name="include-views"></a><span data-ttu-id="505dd-180">包含視圖</span><span class="sxs-lookup"><span data-stu-id="505dd-180">Include views</span></span>
 
-<span data-ttu-id="505dd-181">使用[ :::no-loc(Razor)::: 類別庫](xref:razor-pages/ui-class)將視圖包含在元件中。</span><span class="sxs-lookup"><span data-stu-id="505dd-181">Use a [:::no-loc(Razor)::: class library](xref:razor-pages/ui-class) to include views in the assembly.</span></span>
+<span data-ttu-id="505dd-181">使用[ Razor 類別庫](xref:razor-pages/ui-class)將視圖包含在元件中。</span><span class="sxs-lookup"><span data-stu-id="505dd-181">Use a [Razor class library](xref:razor-pages/ui-class) to include views in the assembly.</span></span>
 
 ### <a name="prevent-loading-resources"></a><span data-ttu-id="505dd-182">防止載入資源</span><span class="sxs-lookup"><span data-stu-id="505dd-182">Prevent loading resources</span></span>
 
@@ -154,7 +154,7 @@ View Components:
 
 * <span data-ttu-id="505dd-191">應用程式的元件和相依元件。</span><span class="sxs-lookup"><span data-stu-id="505dd-191">The app's assembly and dependent assemblies.</span></span>
 * <span data-ttu-id="505dd-192">`Microsoft.AspNetCore.Mvc.TagHelpers`.</span><span class="sxs-lookup"><span data-stu-id="505dd-192">`Microsoft.AspNetCore.Mvc.TagHelpers`.</span></span>
-* <span data-ttu-id="505dd-193">`Microsoft.AspNetCore.Mvc.:::no-loc(Razor):::`.</span><span class="sxs-lookup"><span data-stu-id="505dd-193">`Microsoft.AspNetCore.Mvc.:::no-loc(Razor):::`.</span></span>
+* <span data-ttu-id="505dd-193">`Microsoft.AspNetCore.Mvc.Razor`.</span><span class="sxs-lookup"><span data-stu-id="505dd-193">`Microsoft.AspNetCore.Mvc.Razor`.</span></span>
 
 ## <a name="application-feature-providers"></a><span data-ttu-id="505dd-194">應用程式功能提供者</span><span class="sxs-lookup"><span data-stu-id="505dd-194">Application feature providers</span></span>
 

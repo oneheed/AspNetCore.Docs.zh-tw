@@ -7,17 +7,17 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 10/30/2020
 no-loc:
-- ':::no-loc(appsettings.json):::'
-- ':::no-loc(ASP.NET Core Identity):::'
-- ':::no-loc(cookie):::'
-- ':::no-loc(Cookie):::'
-- ':::no-loc(Blazor):::'
-- ':::no-loc(Blazor Server):::'
-- ':::no-loc(Blazor WebAssembly):::'
-- ':::no-loc(Identity):::'
-- ":::no-loc(Let's Encrypt):::"
-- ':::no-loc(Razor):::'
-- ':::no-loc(SignalR):::'
+- 'appsettings.json'
+- 'ASP.NET Core Identity'
+- 'cookie'
+- 'Cookie'
+- 'Blazor'
+- 'Blazor Server'
+- 'Blazor WebAssembly'
+- 'Identity'
+- "Let's Encrypt"
+- 'Razor'
+- 'SignalR'
 uid: security/authentication/social/additional-claims
 ms.openlocfilehash: 4503291ff887f79b1ad6eacd4e56943ce23335bc
 ms.sourcegitcommit: 5156eab2118584405eb663e1fcd82f8bd7764504
@@ -78,35 +78,35 @@ options.Scope.Add("https://www.googleapis.com/auth/user.birthday.read");
 
 [!code-csharp[](additional-claims/samples/3.x/ClaimsSample/Startup.cs?name=snippet_AddGoogle&highlight=13-14)]
 
-<span data-ttu-id="78a9a-141">在中 `Microsoft.AspNetCore.:::no-loc(Identity):::.UI.Pages.Account.Internal.ExternalLoginModel.OnPostConfirmationAsync` ， <xref:Microsoft.AspNetCore.:::no-loc(Identity):::.:::no-loc(Identity):::User> (`ApplicationUser`) 會使用來登入應用程式 <xref:Microsoft.AspNetCore.:::no-loc(Identity):::.SignInManager%601.SignInAsync*> 。</span><span class="sxs-lookup"><span data-stu-id="78a9a-141">In `Microsoft.AspNetCore.:::no-loc(Identity):::.UI.Pages.Account.Internal.ExternalLoginModel.OnPostConfirmationAsync`, an <xref:Microsoft.AspNetCore.:::no-loc(Identity):::.:::no-loc(Identity):::User> (`ApplicationUser`) is signed into the app with <xref:Microsoft.AspNetCore.:::no-loc(Identity):::.SignInManager%601.SignInAsync*>.</span></span> <span data-ttu-id="78a9a-142">在登入程式中， <xref:Microsoft.AspNetCore.:::no-loc(Identity):::.UserManager%601> 可以 `ApplicationUser` 為提供的使用者資料儲存宣告 <xref:Microsoft.AspNetCore.:::no-loc(Identity):::.ExternalLoginInfo.Principal*> 。</span><span class="sxs-lookup"><span data-stu-id="78a9a-142">During the sign in process, the <xref:Microsoft.AspNetCore.:::no-loc(Identity):::.UserManager%601> can store an `ApplicationUser` claims for user data available from the <xref:Microsoft.AspNetCore.:::no-loc(Identity):::.ExternalLoginInfo.Principal*>.</span></span>
+<span data-ttu-id="78a9a-141">在中 `Microsoft.AspNetCore.Identity.UI.Pages.Account.Internal.ExternalLoginModel.OnPostConfirmationAsync` ， <xref:Microsoft.AspNetCore.Identity.IdentityUser> (`ApplicationUser`) 會使用來登入應用程式 <xref:Microsoft.AspNetCore.Identity.SignInManager%601.SignInAsync*> 。</span><span class="sxs-lookup"><span data-stu-id="78a9a-141">In `Microsoft.AspNetCore.Identity.UI.Pages.Account.Internal.ExternalLoginModel.OnPostConfirmationAsync`, an <xref:Microsoft.AspNetCore.Identity.IdentityUser> (`ApplicationUser`) is signed into the app with <xref:Microsoft.AspNetCore.Identity.SignInManager%601.SignInAsync*>.</span></span> <span data-ttu-id="78a9a-142">在登入程式中， <xref:Microsoft.AspNetCore.Identity.UserManager%601> 可以 `ApplicationUser` 為提供的使用者資料儲存宣告 <xref:Microsoft.AspNetCore.Identity.ExternalLoginInfo.Principal*> 。</span><span class="sxs-lookup"><span data-stu-id="78a9a-142">During the sign in process, the <xref:Microsoft.AspNetCore.Identity.UserManager%601> can store an `ApplicationUser` claims for user data available from the <xref:Microsoft.AspNetCore.Identity.ExternalLoginInfo.Principal*>.</span></span>
 
 <span data-ttu-id="78a9a-143">在範例應用程式中， `OnPostConfirmationAsync` ( *Account/ExternalLogin* ]) 會 `urn:google:locale` 為已登入 () 和圖片 () 宣告建立地區設定 `urn:google:picture` `ApplicationUser` ，包括下列的宣告 <xref:System.Security.Claims.ClaimTypes.GivenName> ：</span><span class="sxs-lookup"><span data-stu-id="78a9a-143">In the sample app, `OnPostConfirmationAsync` ( *Account/ExternalLogin.cshtml.cs* ) establishes the locale (`urn:google:locale`) and picture (`urn:google:picture`) claims for the signed in `ApplicationUser`, including a claim for <xref:System.Security.Claims.ClaimTypes.GivenName>:</span></span>
 
-[!code-csharp[](additional-claims/samples/3.x/ClaimsSample/Areas/:::no-loc(Identity):::/Pages/Account/ExternalLogin.cshtml.cs?name=snippet_OnPostConfirmationAsync&highlight=35-51)]
+[!code-csharp[](additional-claims/samples/3.x/ClaimsSample/Areas/Identity/Pages/Account/ExternalLogin.cshtml.cs?name=snippet_OnPostConfirmationAsync&highlight=35-51)]
 
-<span data-ttu-id="78a9a-144">依預設，使用者的宣告會儲存在驗證中 :::no-loc(cookie)::: 。</span><span class="sxs-lookup"><span data-stu-id="78a9a-144">By default, a user's claims are stored in the authentication :::no-loc(cookie):::.</span></span> <span data-ttu-id="78a9a-145">如果驗證 :::no-loc(cookie)::: 過大，可能會導致應用程式失敗，因為：</span><span class="sxs-lookup"><span data-stu-id="78a9a-145">If the authentication :::no-loc(cookie)::: is too large, it can cause the app to fail because:</span></span>
+<span data-ttu-id="78a9a-144">依預設，使用者的宣告會儲存在驗證中 cookie 。</span><span class="sxs-lookup"><span data-stu-id="78a9a-144">By default, a user's claims are stored in the authentication cookie.</span></span> <span data-ttu-id="78a9a-145">如果驗證 cookie 過大，可能會導致應用程式失敗，因為：</span><span class="sxs-lookup"><span data-stu-id="78a9a-145">If the authentication cookie is too large, it can cause the app to fail because:</span></span>
 
-* <span data-ttu-id="78a9a-146">瀏覽器偵測到 :::no-loc(cookie)::: 標頭太長。</span><span class="sxs-lookup"><span data-stu-id="78a9a-146">The browser detects that the :::no-loc(cookie)::: header is too long.</span></span>
+* <span data-ttu-id="78a9a-146">瀏覽器偵測到 cookie 標頭太長。</span><span class="sxs-lookup"><span data-stu-id="78a9a-146">The browser detects that the cookie header is too long.</span></span>
 * <span data-ttu-id="78a9a-147">要求的整體大小太大。</span><span class="sxs-lookup"><span data-stu-id="78a9a-147">The overall size of the request is too large.</span></span>
 
 <span data-ttu-id="78a9a-148">如果處理使用者要求需要大量的使用者資料：</span><span class="sxs-lookup"><span data-stu-id="78a9a-148">If a large amount of user data is required for processing user requests:</span></span>
 
 * <span data-ttu-id="78a9a-149">將要求處理的使用者宣告數目和大小限制為僅限應用程式所需的數目和大小。</span><span class="sxs-lookup"><span data-stu-id="78a9a-149">Limit the number and size of user claims for request processing to only what the app requires.</span></span>
-* <span data-ttu-id="78a9a-150">使用自訂 <xref:Microsoft.AspNetCore.Authentication.:::no-loc(Cookie):::s.ITicketStore> 的 :::no-loc(Cookie)::: 驗證中介軟體 <xref:Microsoft.AspNetCore.Authentication.:::no-loc(Cookie):::s.:::no-loc(Cookie):::AuthenticationOptions.SessionStore> 來跨要求儲存身分識別。</span><span class="sxs-lookup"><span data-stu-id="78a9a-150">Use a custom <xref:Microsoft.AspNetCore.Authentication.:::no-loc(Cookie):::s.ITicketStore> for the :::no-loc(Cookie)::: Authentication Middleware's <xref:Microsoft.AspNetCore.Authentication.:::no-loc(Cookie):::s.:::no-loc(Cookie):::AuthenticationOptions.SessionStore> to store identity across requests.</span></span> <span data-ttu-id="78a9a-151">在伺服器上保留大量的身分識別資訊，同時只將小型會話識別碼金鑰傳送給用戶端。</span><span class="sxs-lookup"><span data-stu-id="78a9a-151">Preserve large quantities of identity information on the server while only sending a small session identifier key to the client.</span></span>
+* <span data-ttu-id="78a9a-150">使用自訂 <xref:Microsoft.AspNetCore.Authentication.Cookies.ITicketStore> 的 Cookie 驗證中介軟體 <xref:Microsoft.AspNetCore.Authentication.Cookies.CookieAuthenticationOptions.SessionStore> 來跨要求儲存身分識別。</span><span class="sxs-lookup"><span data-stu-id="78a9a-150">Use a custom <xref:Microsoft.AspNetCore.Authentication.Cookies.ITicketStore> for the Cookie Authentication Middleware's <xref:Microsoft.AspNetCore.Authentication.Cookies.CookieAuthenticationOptions.SessionStore> to store identity across requests.</span></span> <span data-ttu-id="78a9a-151">在伺服器上保留大量的身分識別資訊，同時只將小型會話識別碼金鑰傳送給用戶端。</span><span class="sxs-lookup"><span data-stu-id="78a9a-151">Preserve large quantities of identity information on the server while only sending a small session identifier key to the client.</span></span>
 
 ## <a name="save-the-access-token"></a><span data-ttu-id="78a9a-152">儲存存取權杖</span><span class="sxs-lookup"><span data-stu-id="78a9a-152">Save the access token</span></span>
 
-<span data-ttu-id="78a9a-153"><xref:Microsoft.AspNetCore.Authentication.RemoteAuthenticationOptions.SaveTokens*> 定義在成功授權之後，是否應將存取和重新整理權杖儲存在中 <xref:Microsoft.AspNetCore.Http.Authentication.AuthenticationProperties> 。</span><span class="sxs-lookup"><span data-stu-id="78a9a-153"><xref:Microsoft.AspNetCore.Authentication.RemoteAuthenticationOptions.SaveTokens*> defines whether access and refresh tokens should be stored in the <xref:Microsoft.AspNetCore.Http.Authentication.AuthenticationProperties> after a successful authorization.</span></span> <span data-ttu-id="78a9a-154">`SaveTokens` 預設會設定為， `false` 以縮減最終驗證的大小 :::no-loc(cookie)::: 。</span><span class="sxs-lookup"><span data-stu-id="78a9a-154">`SaveTokens` is set to `false` by default to reduce the size of the final authentication :::no-loc(cookie):::.</span></span>
+<span data-ttu-id="78a9a-153"><xref:Microsoft.AspNetCore.Authentication.RemoteAuthenticationOptions.SaveTokens*> 定義在成功授權之後，是否應將存取和重新整理權杖儲存在中 <xref:Microsoft.AspNetCore.Http.Authentication.AuthenticationProperties> 。</span><span class="sxs-lookup"><span data-stu-id="78a9a-153"><xref:Microsoft.AspNetCore.Authentication.RemoteAuthenticationOptions.SaveTokens*> defines whether access and refresh tokens should be stored in the <xref:Microsoft.AspNetCore.Http.Authentication.AuthenticationProperties> after a successful authorization.</span></span> <span data-ttu-id="78a9a-154">`SaveTokens` 預設會設定為， `false` 以縮減最終驗證的大小 cookie 。</span><span class="sxs-lookup"><span data-stu-id="78a9a-154">`SaveTokens` is set to `false` by default to reduce the size of the final authentication cookie.</span></span>
 
 <span data-ttu-id="78a9a-155">範例應用程式會在中將的值設定 `SaveTokens` 為 `true` <xref:Microsoft.AspNetCore.Authentication.Google.GoogleOptions> ：</span><span class="sxs-lookup"><span data-stu-id="78a9a-155">The sample app sets the value of `SaveTokens` to `true` in <xref:Microsoft.AspNetCore.Authentication.Google.GoogleOptions>:</span></span>
 
 [!code-csharp[](additional-claims/samples/3.x/ClaimsSample/Startup.cs?name=snippet_AddGoogle&highlight=15)]
 
-<span data-ttu-id="78a9a-156">當 `OnPostConfirmationAsync` 執行時，請在的外部提供者中儲存存取權杖 ([ExternalLoginInfo AuthenticationTokens](xref:Microsoft.AspNetCore.:::no-loc(Identity):::.ExternalLoginInfo.AuthenticationTokens*)) `ApplicationUser` 。 `AuthenticationProperties`</span><span class="sxs-lookup"><span data-stu-id="78a9a-156">When `OnPostConfirmationAsync` executes, store the access token ([ExternalLoginInfo.AuthenticationTokens](xref:Microsoft.AspNetCore.:::no-loc(Identity):::.ExternalLoginInfo.AuthenticationTokens*)) from the external provider in the `ApplicationUser`'s `AuthenticationProperties`.</span></span>
+<span data-ttu-id="78a9a-156">當 `OnPostConfirmationAsync` 執行時，請在的外部提供者中儲存存取權杖 ([ExternalLoginInfo AuthenticationTokens](xref:Microsoft.AspNetCore.Identity.ExternalLoginInfo.AuthenticationTokens*)) `ApplicationUser` 。 `AuthenticationProperties`</span><span class="sxs-lookup"><span data-stu-id="78a9a-156">When `OnPostConfirmationAsync` executes, store the access token ([ExternalLoginInfo.AuthenticationTokens](xref:Microsoft.AspNetCore.Identity.ExternalLoginInfo.AuthenticationTokens*)) from the external provider in the `ApplicationUser`'s `AuthenticationProperties`.</span></span>
 
 <span data-ttu-id="78a9a-157">範例應用程式會將存取權杖儲存在 `OnPostConfirmationAsync` (新的使用者註冊) ，並 `OnGetCallbackAsync` (先前在 *Account/ExternalLogin* 中註冊的使用者) ：</span><span class="sxs-lookup"><span data-stu-id="78a9a-157">The sample app saves the access token in `OnPostConfirmationAsync` (new user registration) and `OnGetCallbackAsync` (previously registered user) in *Account/ExternalLogin.cshtml.cs* :</span></span>
 
-[!code-csharp[](additional-claims/samples/3.x/ClaimsSample/Areas/:::no-loc(Identity):::/Pages/Account/ExternalLogin.cshtml.cs?name=snippet_OnPostConfirmationAsync&highlight=54-56)]
+[!code-csharp[](additional-claims/samples/3.x/ClaimsSample/Areas/Identity/Pages/Account/ExternalLogin.cshtml.cs?name=snippet_OnPostConfirmationAsync&highlight=54-56)]
 
 ## <a name="how-to-add-additional-custom-tokens"></a><span data-ttu-id="78a9a-158">如何新增其他自訂權杖</span><span class="sxs-lookup"><span data-stu-id="78a9a-158">How to add additional custom tokens</span></span>
 
@@ -135,7 +135,7 @@ http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier
     9b342344f-7aab-43c2-1ac1-ba75912ca999
 http://schemas.xmlsoap.org/ws/2005/05/identity/claims/name
     someone@gmail.com
-AspNet.:::no-loc(Identity):::.SecurityStamp
+AspNet.Identity.SecurityStamp
     7D4312MOWRYYBFI1KXRPHGOSTBVWSFDE
 http://schemas.xmlsoap.org/ws/2005/05/identity/claims/givenname
     Judy
@@ -218,35 +218,35 @@ options.Scope.Add("https://www.googleapis.com/auth/user.birthday.read");
 
 [!code-csharp[](additional-claims/samples/2.x/ClaimsSample/Startup.cs?name=snippet_AddGoogle&highlight=13-14)]
 
-<span data-ttu-id="78a9a-206">在中 `Microsoft.AspNetCore.:::no-loc(Identity):::.UI.Pages.Account.Internal.ExternalLoginModel.OnPostConfirmationAsync` ， <xref:Microsoft.AspNetCore.:::no-loc(Identity):::.:::no-loc(Identity):::User> (`ApplicationUser`) 會使用來登入應用程式 <xref:Microsoft.AspNetCore.:::no-loc(Identity):::.SignInManager%601.SignInAsync*> 。</span><span class="sxs-lookup"><span data-stu-id="78a9a-206">In `Microsoft.AspNetCore.:::no-loc(Identity):::.UI.Pages.Account.Internal.ExternalLoginModel.OnPostConfirmationAsync`, an <xref:Microsoft.AspNetCore.:::no-loc(Identity):::.:::no-loc(Identity):::User> (`ApplicationUser`) is signed into the app with <xref:Microsoft.AspNetCore.:::no-loc(Identity):::.SignInManager%601.SignInAsync*>.</span></span> <span data-ttu-id="78a9a-207">在登入程式中， <xref:Microsoft.AspNetCore.:::no-loc(Identity):::.UserManager%601> 可以 `ApplicationUser` 為提供的使用者資料儲存宣告 <xref:Microsoft.AspNetCore.:::no-loc(Identity):::.ExternalLoginInfo.Principal*> 。</span><span class="sxs-lookup"><span data-stu-id="78a9a-207">During the sign in process, the <xref:Microsoft.AspNetCore.:::no-loc(Identity):::.UserManager%601> can store an `ApplicationUser` claims for user data available from the <xref:Microsoft.AspNetCore.:::no-loc(Identity):::.ExternalLoginInfo.Principal*>.</span></span>
+<span data-ttu-id="78a9a-206">在中 `Microsoft.AspNetCore.Identity.UI.Pages.Account.Internal.ExternalLoginModel.OnPostConfirmationAsync` ， <xref:Microsoft.AspNetCore.Identity.IdentityUser> (`ApplicationUser`) 會使用來登入應用程式 <xref:Microsoft.AspNetCore.Identity.SignInManager%601.SignInAsync*> 。</span><span class="sxs-lookup"><span data-stu-id="78a9a-206">In `Microsoft.AspNetCore.Identity.UI.Pages.Account.Internal.ExternalLoginModel.OnPostConfirmationAsync`, an <xref:Microsoft.AspNetCore.Identity.IdentityUser> (`ApplicationUser`) is signed into the app with <xref:Microsoft.AspNetCore.Identity.SignInManager%601.SignInAsync*>.</span></span> <span data-ttu-id="78a9a-207">在登入程式中， <xref:Microsoft.AspNetCore.Identity.UserManager%601> 可以 `ApplicationUser` 為提供的使用者資料儲存宣告 <xref:Microsoft.AspNetCore.Identity.ExternalLoginInfo.Principal*> 。</span><span class="sxs-lookup"><span data-stu-id="78a9a-207">During the sign in process, the <xref:Microsoft.AspNetCore.Identity.UserManager%601> can store an `ApplicationUser` claims for user data available from the <xref:Microsoft.AspNetCore.Identity.ExternalLoginInfo.Principal*>.</span></span>
 
 <span data-ttu-id="78a9a-208">在範例應用程式中， `OnPostConfirmationAsync` ( *Account/ExternalLogin* ]) 會 `urn:google:locale` 為已登入 () 和圖片 () 宣告建立地區設定 `urn:google:picture` `ApplicationUser` ，包括下列的宣告 <xref:System.Security.Claims.ClaimTypes.GivenName> ：</span><span class="sxs-lookup"><span data-stu-id="78a9a-208">In the sample app, `OnPostConfirmationAsync` ( *Account/ExternalLogin.cshtml.cs* ) establishes the locale (`urn:google:locale`) and picture (`urn:google:picture`) claims for the signed in `ApplicationUser`, including a claim for <xref:System.Security.Claims.ClaimTypes.GivenName>:</span></span>
 
-[!code-csharp[](additional-claims/samples/2.x/ClaimsSample/Areas/:::no-loc(Identity):::/Pages/Account/ExternalLogin.cshtml.cs?name=snippet_OnPostConfirmationAsync&highlight=35-51)]
+[!code-csharp[](additional-claims/samples/2.x/ClaimsSample/Areas/Identity/Pages/Account/ExternalLogin.cshtml.cs?name=snippet_OnPostConfirmationAsync&highlight=35-51)]
 
-<span data-ttu-id="78a9a-209">依預設，使用者的宣告會儲存在驗證中 :::no-loc(cookie)::: 。</span><span class="sxs-lookup"><span data-stu-id="78a9a-209">By default, a user's claims are stored in the authentication :::no-loc(cookie):::.</span></span> <span data-ttu-id="78a9a-210">如果驗證 :::no-loc(cookie)::: 過大，可能會導致應用程式失敗，因為：</span><span class="sxs-lookup"><span data-stu-id="78a9a-210">If the authentication :::no-loc(cookie)::: is too large, it can cause the app to fail because:</span></span>
+<span data-ttu-id="78a9a-209">依預設，使用者的宣告會儲存在驗證中 cookie 。</span><span class="sxs-lookup"><span data-stu-id="78a9a-209">By default, a user's claims are stored in the authentication cookie.</span></span> <span data-ttu-id="78a9a-210">如果驗證 cookie 過大，可能會導致應用程式失敗，因為：</span><span class="sxs-lookup"><span data-stu-id="78a9a-210">If the authentication cookie is too large, it can cause the app to fail because:</span></span>
 
-* <span data-ttu-id="78a9a-211">瀏覽器偵測到 :::no-loc(cookie)::: 標頭太長。</span><span class="sxs-lookup"><span data-stu-id="78a9a-211">The browser detects that the :::no-loc(cookie)::: header is too long.</span></span>
+* <span data-ttu-id="78a9a-211">瀏覽器偵測到 cookie 標頭太長。</span><span class="sxs-lookup"><span data-stu-id="78a9a-211">The browser detects that the cookie header is too long.</span></span>
 * <span data-ttu-id="78a9a-212">要求的整體大小太大。</span><span class="sxs-lookup"><span data-stu-id="78a9a-212">The overall size of the request is too large.</span></span>
 
 <span data-ttu-id="78a9a-213">如果處理使用者要求需要大量的使用者資料：</span><span class="sxs-lookup"><span data-stu-id="78a9a-213">If a large amount of user data is required for processing user requests:</span></span>
 
 * <span data-ttu-id="78a9a-214">將要求處理的使用者宣告數目和大小限制為僅限應用程式所需的數目和大小。</span><span class="sxs-lookup"><span data-stu-id="78a9a-214">Limit the number and size of user claims for request processing to only what the app requires.</span></span>
-* <span data-ttu-id="78a9a-215">使用自訂 <xref:Microsoft.AspNetCore.Authentication.:::no-loc(Cookie):::s.ITicketStore> 的 :::no-loc(Cookie)::: 驗證中介軟體 <xref:Microsoft.AspNetCore.Authentication.:::no-loc(Cookie):::s.:::no-loc(Cookie):::AuthenticationOptions.SessionStore> 來跨要求儲存身分識別。</span><span class="sxs-lookup"><span data-stu-id="78a9a-215">Use a custom <xref:Microsoft.AspNetCore.Authentication.:::no-loc(Cookie):::s.ITicketStore> for the :::no-loc(Cookie)::: Authentication Middleware's <xref:Microsoft.AspNetCore.Authentication.:::no-loc(Cookie):::s.:::no-loc(Cookie):::AuthenticationOptions.SessionStore> to store identity across requests.</span></span> <span data-ttu-id="78a9a-216">在伺服器上保留大量的身分識別資訊，同時只將小型會話識別碼金鑰傳送給用戶端。</span><span class="sxs-lookup"><span data-stu-id="78a9a-216">Preserve large quantities of identity information on the server while only sending a small session identifier key to the client.</span></span>
+* <span data-ttu-id="78a9a-215">使用自訂 <xref:Microsoft.AspNetCore.Authentication.Cookies.ITicketStore> 的 Cookie 驗證中介軟體 <xref:Microsoft.AspNetCore.Authentication.Cookies.CookieAuthenticationOptions.SessionStore> 來跨要求儲存身分識別。</span><span class="sxs-lookup"><span data-stu-id="78a9a-215">Use a custom <xref:Microsoft.AspNetCore.Authentication.Cookies.ITicketStore> for the Cookie Authentication Middleware's <xref:Microsoft.AspNetCore.Authentication.Cookies.CookieAuthenticationOptions.SessionStore> to store identity across requests.</span></span> <span data-ttu-id="78a9a-216">在伺服器上保留大量的身分識別資訊，同時只將小型會話識別碼金鑰傳送給用戶端。</span><span class="sxs-lookup"><span data-stu-id="78a9a-216">Preserve large quantities of identity information on the server while only sending a small session identifier key to the client.</span></span>
 
 ## <a name="save-the-access-token"></a><span data-ttu-id="78a9a-217">儲存存取權杖</span><span class="sxs-lookup"><span data-stu-id="78a9a-217">Save the access token</span></span>
 
-<span data-ttu-id="78a9a-218"><xref:Microsoft.AspNetCore.Authentication.RemoteAuthenticationOptions.SaveTokens*> 定義在成功授權之後，是否應將存取和重新整理權杖儲存在中 <xref:Microsoft.AspNetCore.Http.Authentication.AuthenticationProperties> 。</span><span class="sxs-lookup"><span data-stu-id="78a9a-218"><xref:Microsoft.AspNetCore.Authentication.RemoteAuthenticationOptions.SaveTokens*> defines whether access and refresh tokens should be stored in the <xref:Microsoft.AspNetCore.Http.Authentication.AuthenticationProperties> after a successful authorization.</span></span> <span data-ttu-id="78a9a-219">`SaveTokens` 預設會設定為， `false` 以縮減最終驗證的大小 :::no-loc(cookie)::: 。</span><span class="sxs-lookup"><span data-stu-id="78a9a-219">`SaveTokens` is set to `false` by default to reduce the size of the final authentication :::no-loc(cookie):::.</span></span>
+<span data-ttu-id="78a9a-218"><xref:Microsoft.AspNetCore.Authentication.RemoteAuthenticationOptions.SaveTokens*> 定義在成功授權之後，是否應將存取和重新整理權杖儲存在中 <xref:Microsoft.AspNetCore.Http.Authentication.AuthenticationProperties> 。</span><span class="sxs-lookup"><span data-stu-id="78a9a-218"><xref:Microsoft.AspNetCore.Authentication.RemoteAuthenticationOptions.SaveTokens*> defines whether access and refresh tokens should be stored in the <xref:Microsoft.AspNetCore.Http.Authentication.AuthenticationProperties> after a successful authorization.</span></span> <span data-ttu-id="78a9a-219">`SaveTokens` 預設會設定為， `false` 以縮減最終驗證的大小 cookie 。</span><span class="sxs-lookup"><span data-stu-id="78a9a-219">`SaveTokens` is set to `false` by default to reduce the size of the final authentication cookie.</span></span>
 
 <span data-ttu-id="78a9a-220">範例應用程式會在中將的值設定 `SaveTokens` 為 `true` <xref:Microsoft.AspNetCore.Authentication.Google.GoogleOptions> ：</span><span class="sxs-lookup"><span data-stu-id="78a9a-220">The sample app sets the value of `SaveTokens` to `true` in <xref:Microsoft.AspNetCore.Authentication.Google.GoogleOptions>:</span></span>
 
 [!code-csharp[](additional-claims/samples/2.x/ClaimsSample/Startup.cs?name=snippet_AddGoogle&highlight=15)]
 
-<span data-ttu-id="78a9a-221">當 `OnPostConfirmationAsync` 執行時，請在的外部提供者中儲存存取權杖 ([ExternalLoginInfo AuthenticationTokens](xref:Microsoft.AspNetCore.:::no-loc(Identity):::.ExternalLoginInfo.AuthenticationTokens*)) `ApplicationUser` 。 `AuthenticationProperties`</span><span class="sxs-lookup"><span data-stu-id="78a9a-221">When `OnPostConfirmationAsync` executes, store the access token ([ExternalLoginInfo.AuthenticationTokens](xref:Microsoft.AspNetCore.:::no-loc(Identity):::.ExternalLoginInfo.AuthenticationTokens*)) from the external provider in the `ApplicationUser`'s `AuthenticationProperties`.</span></span>
+<span data-ttu-id="78a9a-221">當 `OnPostConfirmationAsync` 執行時，請在的外部提供者中儲存存取權杖 ([ExternalLoginInfo AuthenticationTokens](xref:Microsoft.AspNetCore.Identity.ExternalLoginInfo.AuthenticationTokens*)) `ApplicationUser` 。 `AuthenticationProperties`</span><span class="sxs-lookup"><span data-stu-id="78a9a-221">When `OnPostConfirmationAsync` executes, store the access token ([ExternalLoginInfo.AuthenticationTokens](xref:Microsoft.AspNetCore.Identity.ExternalLoginInfo.AuthenticationTokens*)) from the external provider in the `ApplicationUser`'s `AuthenticationProperties`.</span></span>
 
 <span data-ttu-id="78a9a-222">範例應用程式會將存取權杖儲存在 `OnPostConfirmationAsync` (新的使用者註冊) ，並 `OnGetCallbackAsync` (先前在 *Account/ExternalLogin* 中註冊的使用者) ：</span><span class="sxs-lookup"><span data-stu-id="78a9a-222">The sample app saves the access token in `OnPostConfirmationAsync` (new user registration) and `OnGetCallbackAsync` (previously registered user) in *Account/ExternalLogin.cshtml.cs* :</span></span>
 
-[!code-csharp[](additional-claims/samples/2.x/ClaimsSample/Areas/:::no-loc(Identity):::/Pages/Account/ExternalLogin.cshtml.cs?name=snippet_OnPostConfirmationAsync&highlight=54-56)]
+[!code-csharp[](additional-claims/samples/2.x/ClaimsSample/Areas/Identity/Pages/Account/ExternalLogin.cshtml.cs?name=snippet_OnPostConfirmationAsync&highlight=54-56)]
 
 ## <a name="how-to-add-additional-custom-tokens"></a><span data-ttu-id="78a9a-223">如何新增其他自訂權杖</span><span class="sxs-lookup"><span data-stu-id="78a9a-223">How to add additional custom tokens</span></span>
 
@@ -275,7 +275,7 @@ http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier
     9b342344f-7aab-43c2-1ac1-ba75912ca999
 http://schemas.xmlsoap.org/ws/2005/05/identity/claims/name
     someone@gmail.com
-AspNet.:::no-loc(Identity):::.SecurityStamp
+AspNet.Identity.SecurityStamp
     7D4312MOWRYYBFI1KXRPHGOSTBVWSFDE
 http://schemas.xmlsoap.org/ws/2005/05/identity/claims/givenname
     Judy

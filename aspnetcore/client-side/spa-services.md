@@ -7,17 +7,17 @@ ms.author: scaddie
 ms.custom: H1Hack27Feb2017, devx-track-js
 ms.date: 09/06/2019
 no-loc:
-- ':::no-loc(appsettings.json):::'
-- ':::no-loc(ASP.NET Core Identity):::'
-- ':::no-loc(cookie):::'
-- ':::no-loc(Cookie):::'
-- ':::no-loc(Blazor):::'
-- ':::no-loc(Blazor Server):::'
-- ':::no-loc(Blazor WebAssembly):::'
-- ':::no-loc(Identity):::'
-- ":::no-loc(Let's Encrypt):::"
-- ':::no-loc(Razor):::'
-- ':::no-loc(SignalR):::'
+- 'appsettings.json'
+- 'ASP.NET Core Identity'
+- 'cookie'
+- 'Cookie'
+- 'Blazor'
+- 'Blazor Server'
+- 'Blazor WebAssembly'
+- 'Identity'
+- "Let's Encrypt"
+- 'Razor'
+- 'SignalR'
 uid: client-side/spa-services
 ms.openlocfilehash: 1b9f5b4b4e066cdd3dd5fbfa666c7a087949979f
 ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
@@ -109,7 +109,7 @@ npm i -S aspnet-prerendering
 
 [!code-cshtml[](../client-side/spa-services/sample/SpaServicesSampleApp/Views/_ViewImports.cshtml?highlight=3)]
 
-<span data-ttu-id="77132-149">這些標籤協助程式會在視圖內利用類似 HTML 的語法，以簡化與低層級 Api 直接通訊的複雜性 :::no-loc(Razor)::: ：</span><span class="sxs-lookup"><span data-stu-id="77132-149">These Tag Helpers abstract away the intricacies of communicating directly with low-level APIs by leveraging an HTML-like syntax inside the :::no-loc(Razor)::: view:</span></span>
+<span data-ttu-id="77132-149">這些標籤協助程式會在視圖內利用類似 HTML 的語法，以簡化與低層級 Api 直接通訊的複雜性 Razor ：</span><span class="sxs-lookup"><span data-stu-id="77132-149">These Tag Helpers abstract away the intricacies of communicating directly with low-level APIs by leveraging an HTML-like syntax inside the Razor view:</span></span>
 
 [!code-cshtml[](../client-side/spa-services/sample/SpaServicesSampleApp/Views/Home/Index.cshtml?range=5)]
 
@@ -125,7 +125,7 @@ npm i -S aspnet-prerendering
 
 ### <a name="asp-prerender-data-tag-helper"></a><span data-ttu-id="77132-157">asp-預先呈現-資料標記協助程式</span><span class="sxs-lookup"><span data-stu-id="77132-157">asp-prerender-data Tag Helper</span></span>
 
-<span data-ttu-id="77132-158">加上標籤協助程式時，標籤協助 `asp-prerender-module` `asp-prerender-data` 程式可以用來將內容資訊從 :::no-loc(Razor)::: 視圖傳遞到伺服器端 JavaScript。</span><span class="sxs-lookup"><span data-stu-id="77132-158">When coupled with the `asp-prerender-module` Tag Helper, the `asp-prerender-data` Tag Helper can be used to pass contextual information from the :::no-loc(Razor)::: view to the server-side JavaScript.</span></span> <span data-ttu-id="77132-159">例如，下列標記會將使用者資料傳遞給 `main-server` 模組：</span><span class="sxs-lookup"><span data-stu-id="77132-159">For example, the following markup passes user data to the `main-server` module:</span></span>
+<span data-ttu-id="77132-158">加上標籤協助程式時，標籤協助 `asp-prerender-module` `asp-prerender-data` 程式可以用來將內容資訊從 Razor 視圖傳遞到伺服器端 JavaScript。</span><span class="sxs-lookup"><span data-stu-id="77132-158">When coupled with the `asp-prerender-module` Tag Helper, the `asp-prerender-data` Tag Helper can be used to pass contextual information from the Razor view to the server-side JavaScript.</span></span> <span data-ttu-id="77132-159">例如，下列標記會將使用者資料傳遞給 `main-server` 模組：</span><span class="sxs-lookup"><span data-stu-id="77132-159">For example, the following markup passes user data to the `main-server` module:</span></span>
 
 [!code-cshtml[](../client-side/spa-services/sample/SpaServicesSampleApp/Views/Home/Index.cshtml?range=9-12)]
 

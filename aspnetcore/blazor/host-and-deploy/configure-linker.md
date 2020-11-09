@@ -1,23 +1,23 @@
 ---
-title: '設定 ASP.NET Core 的連結器 :::no-loc(Blazor):::'
+title: '設定 ASP.NET Core 的連結器 Blazor'
 author: guardrex
-description: '瞭解如何在建立應用程式時，控制 (IL) 連結器的中繼語言 :::no-loc(Blazor)::: 。'
+description: '瞭解如何在建立應用程式時，控制 (IL) 連結器的中繼語言 Blazor 。'
 monikerRange: '>= aspnetcore-3.1 < aspnetcore-5.0'
 ms.author: riande
 ms.custom: mvc
 ms.date: 05/19/2020
 no-loc:
-- ':::no-loc(appsettings.json):::'
-- ':::no-loc(ASP.NET Core Identity):::'
-- ':::no-loc(cookie):::'
-- ':::no-loc(Cookie):::'
-- ':::no-loc(Blazor):::'
-- ':::no-loc(Blazor Server):::'
-- ':::no-loc(Blazor WebAssembly):::'
-- ':::no-loc(Identity):::'
-- ":::no-loc(Let's Encrypt):::"
-- ':::no-loc(Razor):::'
-- ':::no-loc(SignalR):::'
+- 'appsettings.json'
+- 'ASP.NET Core Identity'
+- 'cookie'
+- 'Cookie'
+- 'Blazor'
+- 'Blazor Server'
+- 'Blazor WebAssembly'
+- 'Identity'
+- "Let's Encrypt"
+- 'Razor'
+- 'SignalR'
 uid: blazor/host-and-deploy/configure-linker
 ms.openlocfilehash: 0c99056053356133e901d6cf468fec8034dfb845
 ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
@@ -26,28 +26,28 @@ ms.contentlocale: zh-TW
 ms.lasthandoff: 10/30/2020
 ms.locfileid: "93055824"
 ---
-# <a name="configure-the-linker-for-aspnet-core-no-locblazor"></a><span data-ttu-id="4d2f7-103">設定 ASP.NET Core 的連結器 :::no-loc(Blazor):::</span><span class="sxs-lookup"><span data-stu-id="4d2f7-103">Configure the Linker for ASP.NET Core :::no-loc(Blazor):::</span></span>
+# <a name="configure-the-linker-for-aspnet-core-no-locblazor"></a><span data-ttu-id="4d2f7-103">設定 ASP.NET Core 的連結器 Blazor</span><span class="sxs-lookup"><span data-stu-id="4d2f7-103">Configure the Linker for ASP.NET Core Blazor</span></span>
 
 <span data-ttu-id="4d2f7-104">作者：[Luke Latham](https://github.com/guardrex)</span><span class="sxs-lookup"><span data-stu-id="4d2f7-104">By [Luke Latham](https://github.com/guardrex)</span></span>
 
-<span data-ttu-id="4d2f7-105">:::no-loc(Blazor WebAssembly)::: 在組建期間執行 [中繼語言 (IL) ](/dotnet/standard/managed-code#intermediate-language--execution) 連結，以從應用程式的輸出元件中修剪不必要的 IL。</span><span class="sxs-lookup"><span data-stu-id="4d2f7-105">:::no-loc(Blazor WebAssembly)::: performs [Intermediate Language (IL)](/dotnet/standard/managed-code#intermediate-language--execution) linking during a build to trim unnecessary IL from the app's output assemblies.</span></span> <span data-ttu-id="4d2f7-106">在偵錯工具中建立時，連結器會停用。</span><span class="sxs-lookup"><span data-stu-id="4d2f7-106">The linker is disabled when building in Debug configuration.</span></span> <span data-ttu-id="4d2f7-107">應用程式必須在發行設定中建立，才能啟用連結器。</span><span class="sxs-lookup"><span data-stu-id="4d2f7-107">Apps must build in Release configuration to enable the linker.</span></span> <span data-ttu-id="4d2f7-108">我們建議您在部署應用程式時，建立版本 :::no-loc(Blazor WebAssembly)::: 。</span><span class="sxs-lookup"><span data-stu-id="4d2f7-108">We recommend building in Release when deploying your :::no-loc(Blazor WebAssembly)::: apps.</span></span> 
+<span data-ttu-id="4d2f7-105">Blazor WebAssembly 在組建期間執行 [中繼語言 (IL) ](/dotnet/standard/managed-code#intermediate-language--execution) 連結，以從應用程式的輸出元件中修剪不必要的 IL。</span><span class="sxs-lookup"><span data-stu-id="4d2f7-105">Blazor WebAssembly performs [Intermediate Language (IL)](/dotnet/standard/managed-code#intermediate-language--execution) linking during a build to trim unnecessary IL from the app's output assemblies.</span></span> <span data-ttu-id="4d2f7-106">在偵錯工具中建立時，連結器會停用。</span><span class="sxs-lookup"><span data-stu-id="4d2f7-106">The linker is disabled when building in Debug configuration.</span></span> <span data-ttu-id="4d2f7-107">應用程式必須在發行設定中建立，才能啟用連結器。</span><span class="sxs-lookup"><span data-stu-id="4d2f7-107">Apps must build in Release configuration to enable the linker.</span></span> <span data-ttu-id="4d2f7-108">我們建議您在部署應用程式時，建立版本 Blazor WebAssembly 。</span><span class="sxs-lookup"><span data-stu-id="4d2f7-108">We recommend building in Release when deploying your Blazor WebAssembly apps.</span></span> 
 
 <span data-ttu-id="4d2f7-109">連結應用程式可針對大小進行優化，但可能會產生不利的影響。</span><span class="sxs-lookup"><span data-stu-id="4d2f7-109">Linking an app optimizes for size but may have detrimental effects.</span></span> <span data-ttu-id="4d2f7-110">使用反映或相關動態功能的應用程式可能會在修剪時中斷，因為連結器不知道這個動態行為，而且無法判斷在執行時間的反映需要哪些類型。</span><span class="sxs-lookup"><span data-stu-id="4d2f7-110">Apps that use reflection or related dynamic features may break when trimmed because the linker doesn't know about this dynamic behavior and can't determine in general which types are required for reflection at runtime.</span></span> <span data-ttu-id="4d2f7-111">若要修剪這類應用程式，您必須在程式碼中和應用程式相依的封裝或架構中，針對反映所需的任何類型通知連結器。</span><span class="sxs-lookup"><span data-stu-id="4d2f7-111">To trim such apps, the linker must be informed about any types required by reflection in the code and in packages or frameworks that the app depends on.</span></span>
 
 <span data-ttu-id="4d2f7-112">若要確保已修剪的應用程式在部署後可以正常運作，請務必在開發期間經常測試應用程式的發行組建。</span><span class="sxs-lookup"><span data-stu-id="4d2f7-112">To ensure the trimmed app works correctly once deployed, it's important to test Release builds of the app frequently while developing.</span></span>
 
-<span data-ttu-id="4d2f7-113">您 :::no-loc(Blazor)::: 可以使用下列 MSBuild 功能來設定應用程式的連結：</span><span class="sxs-lookup"><span data-stu-id="4d2f7-113">Linking for :::no-loc(Blazor)::: apps can be configured using these MSBuild features:</span></span>
+<span data-ttu-id="4d2f7-113">您 Blazor 可以使用下列 MSBuild 功能來設定應用程式的連結：</span><span class="sxs-lookup"><span data-stu-id="4d2f7-113">Linking for Blazor apps can be configured using these MSBuild features:</span></span>
 
 * <span data-ttu-id="4d2f7-114">使用 [MSBuild 屬性](#control-linking-with-an-msbuild-property)來全域設定連結。</span><span class="sxs-lookup"><span data-stu-id="4d2f7-114">Configure linking globally with a [MSBuild property](#control-linking-with-an-msbuild-property).</span></span>
 * <span data-ttu-id="4d2f7-115">使用 [設定檔](#control-linking-with-a-configuration-file)來控制每個元件的連結。</span><span class="sxs-lookup"><span data-stu-id="4d2f7-115">Control linking on a per-assembly basis with a [configuration file](#control-linking-with-a-configuration-file).</span></span>
 
 ## <a name="control-linking-with-an-msbuild-property"></a><span data-ttu-id="4d2f7-116">使用 MSBuild 屬性的控制項連結</span><span class="sxs-lookup"><span data-stu-id="4d2f7-116">Control linking with an MSBuild property</span></span>
 
-<span data-ttu-id="4d2f7-117">在設定內建應用程式時，會啟用連結 `Release` 。</span><span class="sxs-lookup"><span data-stu-id="4d2f7-117">Linking is enabled when an app is built in `Release` configuration.</span></span> <span data-ttu-id="4d2f7-118">若要變更此專案，請 `:::no-loc(Blazor):::WebAssemblyEnableLinking` 在專案檔中設定 MSBuild 屬性：</span><span class="sxs-lookup"><span data-stu-id="4d2f7-118">To change this, configure the `:::no-loc(Blazor):::WebAssemblyEnableLinking` MSBuild property in the project file:</span></span>
+<span data-ttu-id="4d2f7-117">在設定內建應用程式時，會啟用連結 `Release` 。</span><span class="sxs-lookup"><span data-stu-id="4d2f7-117">Linking is enabled when an app is built in `Release` configuration.</span></span> <span data-ttu-id="4d2f7-118">若要變更此專案，請 `BlazorWebAssemblyEnableLinking` 在專案檔中設定 MSBuild 屬性：</span><span class="sxs-lookup"><span data-stu-id="4d2f7-118">To change this, configure the `BlazorWebAssemblyEnableLinking` MSBuild property in the project file:</span></span>
 
 ```xml
 <PropertyGroup>
-  <:::no-loc(Blazor):::WebAssemblyEnableLinking>false</:::no-loc(Blazor):::WebAssemblyEnableLinking>
+  <BlazorWebAssemblyEnableLinking>false</BlazorWebAssemblyEnableLinking>
 </PropertyGroup>
 ```
 
@@ -57,7 +57,7 @@ ms.locfileid: "93055824"
 
 ```xml
 <ItemGroup>
-  <:::no-loc(Blazor):::LinkerDescriptor Include="LinkerConfig.xml" />
+  <BlazorLinkerDescriptor Include="LinkerConfig.xml" />
 </ItemGroup>
 ```
 
@@ -66,7 +66,7 @@ ms.locfileid: "93055824"
 ```xml
 <?xml version="1.0" encoding="UTF-8" ?>
 <!--
-  This file specifies which parts of the BCL or :::no-loc(Blazor)::: packages must not be
+  This file specifies which parts of the BCL or Blazor packages must not be
   stripped by the IL Linker even if they aren't referenced by user code.
 -->
 <linker>
@@ -89,7 +89,7 @@ ms.locfileid: "93055824"
     In this example, the app's entry point assembly is listed. The assembly
     isn't stripped by the IL Linker.
   -->
-  <assembly fullname="MyCool:::no-loc(Blazor):::App" />
+  <assembly fullname="MyCoolBlazorApp" />
 </linker>
 ```
 
@@ -111,13 +111,13 @@ ms.locfileid: "93055824"
 
 ### <a name="configure-the-linker-for-internationalization"></a><span data-ttu-id="4d2f7-127">設定適用于國際化的連結器</span><span class="sxs-lookup"><span data-stu-id="4d2f7-127">Configure the linker for internationalization</span></span>
 
-<span data-ttu-id="4d2f7-128">根據預設， :::no-loc(Blazor)::: 應用程式的連結器設定會 :::no-loc(Blazor WebAssembly)::: 去除國際化資訊（明確要求的地區設定除外）。</span><span class="sxs-lookup"><span data-stu-id="4d2f7-128">By default, :::no-loc(Blazor):::'s linker configuration for :::no-loc(Blazor WebAssembly)::: apps strips out internationalization information except for locales explicitly requested.</span></span> <span data-ttu-id="4d2f7-129">移除這些元件可將應用程式大小降到最低。</span><span class="sxs-lookup"><span data-stu-id="4d2f7-129">Removing these assemblies minimizes the app's size.</span></span>
+<span data-ttu-id="4d2f7-128">根據預設， Blazor 應用程式的連結器設定會 Blazor WebAssembly 去除國際化資訊（明確要求的地區設定除外）。</span><span class="sxs-lookup"><span data-stu-id="4d2f7-128">By default, Blazor's linker configuration for Blazor WebAssembly apps strips out internationalization information except for locales explicitly requested.</span></span> <span data-ttu-id="4d2f7-129">移除這些元件可將應用程式大小降到最低。</span><span class="sxs-lookup"><span data-stu-id="4d2f7-129">Removing these assemblies minimizes the app's size.</span></span>
 
-<span data-ttu-id="4d2f7-130">若要控制要保留哪些國際化元件，請 `<:::no-loc(Blazor):::WebAssemblyI18NAssemblies>` 在專案檔中設定 MSBuild 屬性：</span><span class="sxs-lookup"><span data-stu-id="4d2f7-130">To control which I18N assemblies are retained, set the `<:::no-loc(Blazor):::WebAssemblyI18NAssemblies>` MSBuild property in the project file:</span></span>
+<span data-ttu-id="4d2f7-130">若要控制要保留哪些國際化元件，請 `<BlazorWebAssemblyI18NAssemblies>` 在專案檔中設定 MSBuild 屬性：</span><span class="sxs-lookup"><span data-stu-id="4d2f7-130">To control which I18N assemblies are retained, set the `<BlazorWebAssemblyI18NAssemblies>` MSBuild property in the project file:</span></span>
 
 ```xml
 <PropertyGroup>
-  <:::no-loc(Blazor):::WebAssemblyI18NAssemblies>{all|none|REGION1,REGION2,...}</:::no-loc(Blazor):::WebAssemblyI18NAssemblies>
+  <BlazorWebAssemblyI18NAssemblies>{all|none|REGION1,REGION2,...}</BlazorWebAssemblyI18NAssemblies>
 </PropertyGroup>
 ```
 

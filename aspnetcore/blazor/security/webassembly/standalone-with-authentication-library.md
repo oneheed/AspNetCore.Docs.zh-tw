@@ -1,23 +1,23 @@
 ---
-title: '使用驗證程式庫保護 ASP.NET Core 的 :::no-loc(Blazor WebAssembly)::: 獨立應用程式'
+title: '使用驗證程式庫保護 ASP.NET Core 的 Blazor WebAssembly 獨立應用程式'
 author: guardrex
-description: '瞭解如何使用驗證程式庫保護 ASP.NET Core 的 :::no-loc(Blazor WebAssembly)::: 獨立應用程式。'
+description: '瞭解如何使用驗證程式庫保護 ASP.NET Core 的 Blazor WebAssembly 獨立應用程式。'
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
 ms.date: 10/27/2020
 no-loc:
-- ':::no-loc(appsettings.json):::'
-- ':::no-loc(ASP.NET Core Identity):::'
-- ':::no-loc(cookie):::'
-- ':::no-loc(Cookie):::'
-- ':::no-loc(Blazor):::'
-- ':::no-loc(Blazor Server):::'
-- ':::no-loc(Blazor WebAssembly):::'
-- ':::no-loc(Identity):::'
-- ":::no-loc(Let's Encrypt):::"
-- ':::no-loc(Razor):::'
-- ':::no-loc(SignalR):::'
+- 'appsettings.json'
+- 'ASP.NET Core Identity'
+- 'cookie'
+- 'Cookie'
+- 'Blazor'
+- 'Blazor Server'
+- 'Blazor WebAssembly'
+- 'Identity'
+- "Let's Encrypt"
+- 'Razor'
+- 'SignalR'
 uid: blazor/security/webassembly/standalone-with-authentication-library
 ms.openlocfilehash: d030e97a3adc17f53b42b98a53f04f155ea93bb6
 ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
@@ -26,25 +26,25 @@ ms.contentlocale: zh-TW
 ms.lasthandoff: 10/30/2020
 ms.locfileid: "93055109"
 ---
-# <a name="secure-an-aspnet-core-no-locblazor-webassembly-standalone-app-with-the-authentication-library"></a><span data-ttu-id="4960c-103">使用驗證程式庫保護 ASP.NET Core 的 :::no-loc(Blazor WebAssembly)::: 獨立應用程式</span><span class="sxs-lookup"><span data-stu-id="4960c-103">Secure an ASP.NET Core :::no-loc(Blazor WebAssembly)::: standalone app with the Authentication library</span></span>
+# <a name="secure-an-aspnet-core-no-locblazor-webassembly-standalone-app-with-the-authentication-library"></a><span data-ttu-id="4960c-103">使用驗證程式庫保護 ASP.NET Core 的 Blazor WebAssembly 獨立應用程式</span><span class="sxs-lookup"><span data-stu-id="4960c-103">Secure an ASP.NET Core Blazor WebAssembly standalone app with the Authentication library</span></span>
 
 <span data-ttu-id="4960c-104">由 [Javier Calvarro Nelson](https://github.com/javiercn) 和 [Luke Latham](https://github.com/guardrex)</span><span class="sxs-lookup"><span data-stu-id="4960c-104">By [Javier Calvarro Nelson](https://github.com/javiercn) and [Luke Latham](https://github.com/guardrex)</span></span>
 
 <span data-ttu-id="4960c-105">*針對 Azure Active Directory (AAD) 和 Azure Active Directory B2C (AAD B2C) ，請不要依照本主題中的指導方針進行。請參閱此目錄節點中的 AAD 和 AAD B2C 主題。*</span><span class="sxs-lookup"><span data-stu-id="4960c-105">*For Azure Active Directory (AAD) and Azure Active Directory B2C (AAD B2C), don't follow the guidance in this topic. See the AAD and AAD B2C topics in this table of contents node.*</span></span>
 
-<span data-ttu-id="4960c-106">若要建立使用程式庫的 [獨立 :::no-loc(Blazor WebAssembly)::: 應用程式](xref:blazor/hosting-models#blazor-webassembly) [`Microsoft.AspNetCore.Components.WebAssembly.Authentication`](https://www.nuget.org/packages/Microsoft.AspNetCore.Components.WebAssembly.Authentication) ，請遵循您選擇的工具指導方針。</span><span class="sxs-lookup"><span data-stu-id="4960c-106">To create a [standalone :::no-loc(Blazor WebAssembly)::: app](xref:blazor/hosting-models#blazor-webassembly) that uses [`Microsoft.AspNetCore.Components.WebAssembly.Authentication`](https://www.nuget.org/packages/Microsoft.AspNetCore.Components.WebAssembly.Authentication) library, follow the guidance for your choice of tooling.</span></span>
+<span data-ttu-id="4960c-106">若要建立使用程式庫的 [獨立 Blazor WebAssembly 應用程式](xref:blazor/hosting-models#blazor-webassembly) [`Microsoft.AspNetCore.Components.WebAssembly.Authentication`](https://www.nuget.org/packages/Microsoft.AspNetCore.Components.WebAssembly.Authentication) ，請遵循您選擇的工具指導方針。</span><span class="sxs-lookup"><span data-stu-id="4960c-106">To create a [standalone Blazor WebAssembly app](xref:blazor/hosting-models#blazor-webassembly) that uses [`Microsoft.AspNetCore.Components.WebAssembly.Authentication`](https://www.nuget.org/packages/Microsoft.AspNetCore.Components.WebAssembly.Authentication) library, follow the guidance for your choice of tooling.</span></span>
 
 # <a name="visual-studio"></a>[<span data-ttu-id="4960c-107">Visual Studio</span><span class="sxs-lookup"><span data-stu-id="4960c-107">Visual Studio</span></span>](#tab/visual-studio)
 
-<span data-ttu-id="4960c-108">若要建立 :::no-loc(Blazor WebAssembly)::: 具有驗證機制的新專案：</span><span class="sxs-lookup"><span data-stu-id="4960c-108">To create a new :::no-loc(Blazor WebAssembly)::: project with an authentication mechanism:</span></span>
+<span data-ttu-id="4960c-108">若要建立 Blazor WebAssembly 具有驗證機制的新專案：</span><span class="sxs-lookup"><span data-stu-id="4960c-108">To create a new Blazor WebAssembly project with an authentication mechanism:</span></span>
 
-1. <span data-ttu-id="4960c-109">在 [ **建立新的 ASP.NET Core Web 應用程式** ] 對話方塊中選擇 **:::no-loc(Blazor WebAssembly)::: 應用程式** 範本之後，請選取 [ **驗證** ] 下的 [ **變更** ]。</span><span class="sxs-lookup"><span data-stu-id="4960c-109">After choosing the **:::no-loc(Blazor WebAssembly)::: App** template in the **Create a new ASP.NET Core Web Application** dialog, select **Change** under **Authentication** .</span></span>
+1. <span data-ttu-id="4960c-109">在 [ **建立新的 ASP.NET Core Web 應用程式** ] 對話方塊中選擇 **Blazor WebAssembly 應用程式** 範本之後，請選取 [ **驗證** ] 下的 [ **變更** ]。</span><span class="sxs-lookup"><span data-stu-id="4960c-109">After choosing the **Blazor WebAssembly App** template in the **Create a new ASP.NET Core Web Application** dialog, select **Change** under **Authentication** .</span></span>
 
-1. <span data-ttu-id="4960c-110">使用「 **儲存使用者帳戶應用程式內** 」選項選取 **個別使用者帳戶** ，以使用 ASP.NET Core 的系統將使用者儲存在應用程式內 [:::no-loc(Identity):::](xref:security/authentication/identity) 。</span><span class="sxs-lookup"><span data-stu-id="4960c-110">Select **Individual User Accounts** with the **Store user accounts in-app** option to store users within the app using ASP.NET Core's [:::no-loc(Identity):::](xref:security/authentication/identity) system.</span></span>
+1. <span data-ttu-id="4960c-110">使用「 **儲存使用者帳戶應用程式內** 」選項選取 **個別使用者帳戶** ，以使用 ASP.NET Core 的系統將使用者儲存在應用程式內 [Identity](xref:security/authentication/identity) 。</span><span class="sxs-lookup"><span data-stu-id="4960c-110">Select **Individual User Accounts** with the **Store user accounts in-app** option to store users within the app using ASP.NET Core's [Identity](xref:security/authentication/identity) system.</span></span>
 
 # <a name="visual-studio-code--net-core-cli"></a>[<span data-ttu-id="4960c-111">Visual Studio Code / .NET Core CLI</span><span class="sxs-lookup"><span data-stu-id="4960c-111">Visual Studio Code / .NET Core CLI</span></span>](#tab/visual-studio-code+netcore-cli)
 
-<span data-ttu-id="4960c-112">:::no-loc(Blazor WebAssembly):::在空的資料夾中建立具有驗證機制的新專案。</span><span class="sxs-lookup"><span data-stu-id="4960c-112">Create a new :::no-loc(Blazor WebAssembly)::: project with an authentication mechanism in an empty folder.</span></span> <span data-ttu-id="4960c-113">`Individual` `-au|--auth` 使用 ASP.NET Core 的系統，指定可選擇在應用程式中儲存使用者的驗證機制 [:::no-loc(Identity):::](xref:security/authentication/identity) ：</span><span class="sxs-lookup"><span data-stu-id="4960c-113">Specify the `Individual` authentication mechanism with the `-au|--auth` option to store users within the app using ASP.NET Core's [:::no-loc(Identity):::](xref:security/authentication/identity) system:</span></span>
+<span data-ttu-id="4960c-112">Blazor WebAssembly在空的資料夾中建立具有驗證機制的新專案。</span><span class="sxs-lookup"><span data-stu-id="4960c-112">Create a new Blazor WebAssembly project with an authentication mechanism in an empty folder.</span></span> <span data-ttu-id="4960c-113">`Individual` `-au|--auth` 使用 ASP.NET Core 的系統，指定可選擇在應用程式中儲存使用者的驗證機制 [Identity](xref:security/authentication/identity) ：</span><span class="sxs-lookup"><span data-stu-id="4960c-113">Specify the `Individual` authentication mechanism with the `-au|--auth` option to store users within the app using ASP.NET Core's [Identity](xref:security/authentication/identity) system:</span></span>
 
 ```dotnetcli
 dotnet new blazorwasm -au Individual -o {APP NAME}
@@ -52,7 +52,7 @@ dotnet new blazorwasm -au Individual -o {APP NAME}
 
 | <span data-ttu-id="4960c-114">預留位置</span><span class="sxs-lookup"><span data-stu-id="4960c-114">Placeholder</span></span>  | <span data-ttu-id="4960c-115">範例</span><span class="sxs-lookup"><span data-stu-id="4960c-115">Example</span></span>        |
 | ------------ | -------------- |
-| `{APP NAME}` | `:::no-loc(Blazor):::Sample` |
+| `{APP NAME}` | `BlazorSample` |
 
 <span data-ttu-id="4960c-116">使用 `-o|--output` 選項指定的輸出位置會建立專案資料夾 (如果不存在)，並成為應用程式名稱的一部分。</span><span class="sxs-lookup"><span data-stu-id="4960c-116">The output location specified with the `-o|--output` option creates a project folder if it doesn't exist and becomes part of the app's name.</span></span>
 
@@ -60,11 +60,11 @@ dotnet new blazorwasm -au Individual -o {APP NAME}
 
 # <a name="visual-studio-for-mac"></a>[<span data-ttu-id="4960c-118">Visual Studio for Mac</span><span class="sxs-lookup"><span data-stu-id="4960c-118">Visual Studio for Mac</span></span>](#tab/visual-studio-mac)
 
-<span data-ttu-id="4960c-119">若要建立 :::no-loc(Blazor WebAssembly)::: 具有驗證機制的新專案：</span><span class="sxs-lookup"><span data-stu-id="4960c-119">To create a new :::no-loc(Blazor WebAssembly)::: project with an authentication mechanism:</span></span>
+<span data-ttu-id="4960c-119">若要建立 Blazor WebAssembly 具有驗證機制的新專案：</span><span class="sxs-lookup"><span data-stu-id="4960c-119">To create a new Blazor WebAssembly project with an authentication mechanism:</span></span>
 
-1. <span data-ttu-id="4960c-120">在 [ **設定新的 :::no-loc(Blazor WebAssembly)::: 應用程式** ] 步驟中，從 [ **驗證** ] 下拉式清單中選取 [ **應用程式內) 的個別驗證 (** 。</span><span class="sxs-lookup"><span data-stu-id="4960c-120">On the **Configure your new :::no-loc(Blazor WebAssembly)::: App** step, select **Individual Authentication (in-app)** from the **Authentication** drop down.</span></span>
+1. <span data-ttu-id="4960c-120">在 [ **設定新的 Blazor WebAssembly 應用程式** ] 步驟中，從 [ **驗證** ] 下拉式清單中選取 [ **應用程式內) 的個別驗證 (** 。</span><span class="sxs-lookup"><span data-stu-id="4960c-120">On the **Configure your new Blazor WebAssembly App** step, select **Individual Authentication (in-app)** from the **Authentication** drop down.</span></span>
 
-1. <span data-ttu-id="4960c-121">應用程式會針對使用 ASP.NET Core 儲存在應用程式中的個別使用者建立 [:::no-loc(Identity):::](xref:security/authentication/identity) 。</span><span class="sxs-lookup"><span data-stu-id="4960c-121">The app is created for individual users stored in the app with ASP.NET Core [:::no-loc(Identity):::](xref:security/authentication/identity).</span></span>
+1. <span data-ttu-id="4960c-121">應用程式會針對使用 ASP.NET Core 儲存在應用程式中的個別使用者建立 [Identity](xref:security/authentication/identity) 。</span><span class="sxs-lookup"><span data-stu-id="4960c-121">The app is created for individual users stored in the app with ASP.NET Core [Identity](xref:security/authentication/identity).</span></span>
 
 ---
 
@@ -84,7 +84,7 @@ dotnet new blazorwasm -au Individual -o {APP NAME}
 
 ## <a name="authentication-service-support"></a><span data-ttu-id="4960c-127">驗證服務支援</span><span class="sxs-lookup"><span data-stu-id="4960c-127">Authentication service support</span></span>
 
-<span data-ttu-id="4960c-128">驗證使用者的支援是在服務容器中註冊，並具有 <xref:Microsoft.Extensions.DependencyInjection.WebAssemblyAuthenticationServiceCollectionExtensions.AddOidcAuthentication%2A> 由封裝提供的擴充方法 [`Microsoft.AspNetCore.Components.WebAssembly.Authentication`](https://www.nuget.org/packages/Microsoft.AspNetCore.Components.WebAssembly.Authentication) 。</span><span class="sxs-lookup"><span data-stu-id="4960c-128">Support for authenticating users is registered in the service container with the <xref:Microsoft.Extensions.DependencyInjection.WebAssemblyAuthenticationServiceCollectionExtensions.AddOidcAuthentication%2A> extension method provided by the [`Microsoft.AspNetCore.Components.WebAssembly.Authentication`](https://www.nuget.org/packages/Microsoft.AspNetCore.Components.WebAssembly.Authentication) package.</span></span> <span data-ttu-id="4960c-129">此方法會設定應用程式 :::no-loc(Identity)::: (IP) 與提供者互動所需的服務。</span><span class="sxs-lookup"><span data-stu-id="4960c-129">This method sets up the services required for the app to interact with the :::no-loc(Identity)::: Provider (IP).</span></span>
+<span data-ttu-id="4960c-128">驗證使用者的支援是在服務容器中註冊，並具有 <xref:Microsoft.Extensions.DependencyInjection.WebAssemblyAuthenticationServiceCollectionExtensions.AddOidcAuthentication%2A> 由封裝提供的擴充方法 [`Microsoft.AspNetCore.Components.WebAssembly.Authentication`](https://www.nuget.org/packages/Microsoft.AspNetCore.Components.WebAssembly.Authentication) 。</span><span class="sxs-lookup"><span data-stu-id="4960c-128">Support for authenticating users is registered in the service container with the <xref:Microsoft.Extensions.DependencyInjection.WebAssemblyAuthenticationServiceCollectionExtensions.AddOidcAuthentication%2A> extension method provided by the [`Microsoft.AspNetCore.Components.WebAssembly.Authentication`](https://www.nuget.org/packages/Microsoft.AspNetCore.Components.WebAssembly.Authentication) package.</span></span> <span data-ttu-id="4960c-129">此方法會設定應用程式 Identity (IP) 與提供者互動所需的服務。</span><span class="sxs-lookup"><span data-stu-id="4960c-129">This method sets up the services required for the app to interact with the Identity Provider (IP).</span></span>
 
 <span data-ttu-id="4960c-130">`Program.cs`:</span><span class="sxs-lookup"><span data-stu-id="4960c-130">`Program.cs`:</span></span>
 
@@ -95,7 +95,7 @@ builder.Services.AddOidcAuthentication(options =>
 });
 ```
 
-<span data-ttu-id="4960c-131">設定是由檔案提供 `wwwroot/:::no-loc(appsettings.json):::` ：</span><span class="sxs-lookup"><span data-stu-id="4960c-131">Configuration is supplied by the `wwwroot/:::no-loc(appsettings.json):::` file:</span></span>
+<span data-ttu-id="4960c-131">設定是由檔案提供 `wwwroot/appsettings.json` ：</span><span class="sxs-lookup"><span data-stu-id="4960c-131">Configuration is supplied by the `wwwroot/appsettings.json` file:</span></span>
 
 ```json
 {
@@ -110,9 +110,9 @@ builder.Services.AddOidcAuthentication(options =>
 
 ## <a name="access-token-scopes"></a><span data-ttu-id="4960c-136">存取權杖範圍</span><span class="sxs-lookup"><span data-stu-id="4960c-136">Access token scopes</span></span>
 
-<span data-ttu-id="4960c-137">此 :::no-loc(Blazor WebAssembly)::: 範本會自動為和設定預設範圍 `openid` `profile` 。</span><span class="sxs-lookup"><span data-stu-id="4960c-137">The :::no-loc(Blazor WebAssembly)::: template automatically configures default scopes for `openid` and `profile`.</span></span>
+<span data-ttu-id="4960c-137">此 Blazor WebAssembly 範本會自動為和設定預設範圍 `openid` `profile` 。</span><span class="sxs-lookup"><span data-stu-id="4960c-137">The Blazor WebAssembly template automatically configures default scopes for `openid` and `profile`.</span></span>
 
-<span data-ttu-id="4960c-138">:::no-loc(Blazor WebAssembly):::範本不會自動將應用程式設定為要求安全 API 的存取權杖。</span><span class="sxs-lookup"><span data-stu-id="4960c-138">The :::no-loc(Blazor WebAssembly)::: template doesn't automatically configure the app to request an access token for a secure API.</span></span> <span data-ttu-id="4960c-139">若要布建存取權杖作為登入流程的一部分，請將範圍新增至的預設權杖範圍 <xref:Microsoft.AspNetCore.Components.WebAssembly.Authentication.OidcProviderOptions> ：</span><span class="sxs-lookup"><span data-stu-id="4960c-139">To provision an access token as part of the sign-in flow, add the scope to the default token scopes of the <xref:Microsoft.AspNetCore.Components.WebAssembly.Authentication.OidcProviderOptions>:</span></span>
+<span data-ttu-id="4960c-138">Blazor WebAssembly範本不會自動將應用程式設定為要求安全 API 的存取權杖。</span><span class="sxs-lookup"><span data-stu-id="4960c-138">The Blazor WebAssembly template doesn't automatically configure the app to request an access token for a secure API.</span></span> <span data-ttu-id="4960c-139">若要布建存取權杖作為登入流程的一部分，請將範圍新增至的預設權杖範圍 <xref:Microsoft.AspNetCore.Components.WebAssembly.Authentication.OidcProviderOptions> ：</span><span class="sxs-lookup"><span data-stu-id="4960c-139">To provision an access token as part of the sign-in flow, add the scope to the default token scopes of the <xref:Microsoft.AspNetCore.Components.WebAssembly.Authentication.OidcProviderOptions>:</span></span>
 
 ```csharp
 builder.Services.AddOidcAuthentication(options =>
@@ -160,7 +160,7 @@ builder.Services.AddOidcAuthentication(options =>
 
 <AuthorizeView>
     <Authorized>
-        Hello, @context.User.:::no-loc(Identity):::.Name!
+        Hello, @context.User.Identity.Name!
         <button class="nav-link btn btn-link" @onclick="BeginSignOut">
             Log out
         </button>

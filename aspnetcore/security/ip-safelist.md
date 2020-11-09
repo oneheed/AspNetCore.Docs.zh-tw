@@ -7,17 +7,17 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 03/12/2020
 no-loc:
-- ':::no-loc(appsettings.json):::'
-- ':::no-loc(ASP.NET Core Identity):::'
-- ':::no-loc(cookie):::'
-- ':::no-loc(Cookie):::'
-- ':::no-loc(Blazor):::'
-- ':::no-loc(Blazor Server):::'
-- ':::no-loc(Blazor WebAssembly):::'
-- ':::no-loc(Identity):::'
-- ":::no-loc(Let's Encrypt):::"
-- ':::no-loc(Razor):::'
-- ':::no-loc(SignalR):::'
+- 'appsettings.json'
+- 'ASP.NET Core Identity'
+- 'cookie'
+- 'Cookie'
+- 'Blazor'
+- 'Blazor Server'
+- 'Blazor WebAssembly'
+- 'Identity'
+- "Let's Encrypt"
+- 'Razor'
+- 'SignalR'
 uid: security/ip-safelist
 ms.openlocfilehash: dfc134b97bb0976bc682a53d536cd27785550c7d
 ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
@@ -34,7 +34,7 @@ ms.locfileid: "93059659"
 
 * <span data-ttu-id="946c7-108">用來檢查每個要求之遠端 IP 位址的中介軟體。</span><span class="sxs-lookup"><span data-stu-id="946c7-108">Middleware to check the remote IP address of every request.</span></span>
 * <span data-ttu-id="946c7-109">MVC 動作篩選準則，可檢查特定控制器或動作方法的遠端 IP 位址要求。</span><span class="sxs-lookup"><span data-stu-id="946c7-109">MVC action filters to check the remote IP address of requests for specific controllers or action methods.</span></span>
-* <span data-ttu-id="946c7-110">:::no-loc(Razor)::: 頁面篩選以檢查頁面要求的遠端 IP 位址 :::no-loc(Razor)::: 。</span><span class="sxs-lookup"><span data-stu-id="946c7-110">:::no-loc(Razor)::: Pages filters to check the remote IP address of requests for :::no-loc(Razor)::: pages.</span></span>
+* <span data-ttu-id="946c7-110">Razor 頁面篩選以檢查頁面要求的遠端 IP 位址 Razor 。</span><span class="sxs-lookup"><span data-stu-id="946c7-110">Razor Pages filters to check the remote IP address of requests for Razor pages.</span></span>
 
 <span data-ttu-id="946c7-111">在每個案例中，包含已核准用戶端 IP 位址的字串會儲存在應用程式設定中。</span><span class="sxs-lookup"><span data-stu-id="946c7-111">In each case, a string containing approved client IP addresses is stored in an app setting.</span></span> <span data-ttu-id="946c7-112">中介軟體或篩選：</span><span class="sxs-lookup"><span data-stu-id="946c7-112">The middleware or filter:</span></span>
 
@@ -49,10 +49,10 @@ ms.locfileid: "93059659"
 
 <span data-ttu-id="946c7-119">在範例應用程式中，IP 位址的安全可為：</span><span class="sxs-lookup"><span data-stu-id="946c7-119">In the sample app, the IP address safelist is:</span></span>
 
-* <span data-ttu-id="946c7-120">由檔案中的屬性所定義 `AdminSafeList` *:::no-loc(appsettings.json):::* 。</span><span class="sxs-lookup"><span data-stu-id="946c7-120">Defined by the `AdminSafeList` property in the *:::no-loc(appsettings.json):::* file.</span></span>
+* <span data-ttu-id="946c7-120">由檔案中的屬性所定義 `AdminSafeList` *appsettings.json* 。</span><span class="sxs-lookup"><span data-stu-id="946c7-120">Defined by the `AdminSafeList` property in the *appsettings.json* file.</span></span>
 * <span data-ttu-id="946c7-121">以分號分隔的字串，其中可能包含 [第四版網際網路協定 (IPv4) ](https://wikipedia.org/wiki/IPv4) 和 [網際網路通訊協定第6版 (IPv6) ](https://wikipedia.org/wiki/IPv6) 位址。</span><span class="sxs-lookup"><span data-stu-id="946c7-121">A semicolon-delimited string that may contain both [Internet Protocol version 4 (IPv4)](https://wikipedia.org/wiki/IPv4) and [Internet Protocol version 6 (IPv6)](https://wikipedia.org/wiki/IPv6) addresses.</span></span>
 
-[!code-json[](ip-safelist/samples/3.x/ClientIpAspNetCore/:::no-loc(appsettings.json):::?range=1-3&highlight=2)]
+[!code-json[](ip-safelist/samples/3.x/ClientIpAspNetCore/appsettings.json?range=1-3&highlight=2)]
 
 <span data-ttu-id="946c7-122">在上述範例中， `127.0.0.1` `192.168.1.5` 會允許) 的 IPv4 位址和 (壓縮格式的 IPv6 回送位址 `::1` `0:0:0:0:0:0:0:1` 。</span><span class="sxs-lookup"><span data-stu-id="946c7-122">In the preceding example, the IPv4 addresses of `127.0.0.1` and `192.168.1.5` and the IPv6 loopback address of `::1` (compressed format for `0:0:0:0:0:0:0:1`) are allowed.</span></span>
 
@@ -103,13 +103,13 @@ ms.locfileid: "93059659"
 
 * <span data-ttu-id="946c7-140">除了 GET 以外的 HTTP 要求動詞， `AdminSafeListMiddleware` 中介軟體會驗證用戶端 IP 位址。</span><span class="sxs-lookup"><span data-stu-id="946c7-140">An HTTP request verb other than GET, the `AdminSafeListMiddleware` middleware validates the client IP address.</span></span>
 
-## <a name="no-locrazor-pages-filter"></a><span data-ttu-id="946c7-141">:::no-loc(Razor)::: 頁面篩選</span><span class="sxs-lookup"><span data-stu-id="946c7-141">:::no-loc(Razor)::: Pages filter</span></span>
+## <a name="no-locrazor-pages-filter"></a><span data-ttu-id="946c7-141">Razor 頁面篩選</span><span class="sxs-lookup"><span data-stu-id="946c7-141">Razor Pages filter</span></span>
 
-<span data-ttu-id="946c7-142">如果您想要網頁應用程式的安全安全存取控制 :::no-loc(Razor)::: ，請使用 :::no-loc(Razor)::: 頁面篩選。</span><span class="sxs-lookup"><span data-stu-id="946c7-142">If you want safelist-driven access control for a :::no-loc(Razor)::: Pages app, use a :::no-loc(Razor)::: Pages filter.</span></span> <span data-ttu-id="946c7-143">例如：</span><span class="sxs-lookup"><span data-stu-id="946c7-143">For example:</span></span>
+<span data-ttu-id="946c7-142">如果您想要網頁應用程式的安全安全存取控制 Razor ，請使用 Razor 頁面篩選。</span><span class="sxs-lookup"><span data-stu-id="946c7-142">If you want safelist-driven access control for a Razor Pages app, use a Razor Pages filter.</span></span> <span data-ttu-id="946c7-143">例如：</span><span class="sxs-lookup"><span data-stu-id="946c7-143">For example:</span></span>
 
 [!code-csharp[](ip-safelist/samples/Shared/ClientIpSafelistComponents/Filters/ClientIpCheckPageFilter.cs?name=snippet_ClassOnly)]
 
-<span data-ttu-id="946c7-144">在中 `Startup.ConfigureServices` ，藉 :::no-loc(Razor)::: 由將頁面加入至 MVC 篩選集合來啟用頁面篩選。</span><span class="sxs-lookup"><span data-stu-id="946c7-144">In `Startup.ConfigureServices`, enable the :::no-loc(Razor)::: Pages filter by adding it to the MVC filters collection.</span></span> <span data-ttu-id="946c7-145">在下列範例中， `ClientIpCheckPageFilter` :::no-loc(Razor)::: 會加入頁面篩選。</span><span class="sxs-lookup"><span data-stu-id="946c7-145">In the following example, a `ClientIpCheckPageFilter` :::no-loc(Razor)::: Pages filter is added.</span></span> <span data-ttu-id="946c7-146">系統會將「安全性記錄檔」和「主控台記錄器」實例作為「函式」參數傳遞。</span><span class="sxs-lookup"><span data-stu-id="946c7-146">A safelist and a console logger instance are passed as constructor parameters.</span></span>
+<span data-ttu-id="946c7-144">在中 `Startup.ConfigureServices` ，藉 Razor 由將頁面加入至 MVC 篩選集合來啟用頁面篩選。</span><span class="sxs-lookup"><span data-stu-id="946c7-144">In `Startup.ConfigureServices`, enable the Razor Pages filter by adding it to the MVC filters collection.</span></span> <span data-ttu-id="946c7-145">在下列範例中， `ClientIpCheckPageFilter` Razor 會加入頁面篩選。</span><span class="sxs-lookup"><span data-stu-id="946c7-145">In the following example, a `ClientIpCheckPageFilter` Razor Pages filter is added.</span></span> <span data-ttu-id="946c7-146">系統會將「安全性記錄檔」和「主控台記錄器」實例作為「函式」參數傳遞。</span><span class="sxs-lookup"><span data-stu-id="946c7-146">A safelist and a console logger instance are passed as constructor parameters.</span></span>
 
 ::: moniker range=">= aspnetcore-3.0"
 
@@ -123,7 +123,7 @@ ms.locfileid: "93059659"
 
 ::: moniker-end
 
-<span data-ttu-id="946c7-147">要求範例應用程式的 [ *索引* ] :::no-loc(Razor)::: 頁面時， :::no-loc(Razor)::: 頁面篩選會驗證用戶端 IP 位址。</span><span class="sxs-lookup"><span data-stu-id="946c7-147">When the sample app's *Index* :::no-loc(Razor)::: page is requested, the :::no-loc(Razor)::: Pages filter validates the client IP address.</span></span> <span data-ttu-id="946c7-148">篩選器會產生下列主控台輸出的變化：</span><span class="sxs-lookup"><span data-stu-id="946c7-148">The filter produces a variation of the following console output:</span></span>
+<span data-ttu-id="946c7-147">要求範例應用程式的 [ *索引* ] Razor 頁面時， Razor 頁面篩選會驗證用戶端 IP 位址。</span><span class="sxs-lookup"><span data-stu-id="946c7-147">When the sample app's *Index* Razor page is requested, the Razor Pages filter validates the client IP address.</span></span> <span data-ttu-id="946c7-148">篩選器會產生下列主控台輸出的變化：</span><span class="sxs-lookup"><span data-stu-id="946c7-148">The filter produces a variation of the following console output:</span></span>
 
 ```
 dbug: ClientIpSafelistComponents.Filters.ClientIpCheckPageFilter[0]

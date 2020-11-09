@@ -7,17 +7,17 @@ ms.author: scaddie
 ms.custom: mvc
 ms.date: 02/09/2020
 no-loc:
-- ':::no-loc(appsettings.json):::'
-- ':::no-loc(ASP.NET Core Identity):::'
-- ':::no-loc(cookie):::'
-- ':::no-loc(Cookie):::'
-- ':::no-loc(Blazor):::'
-- ':::no-loc(Blazor Server):::'
-- ':::no-loc(Blazor WebAssembly):::'
-- ':::no-loc(Identity):::'
-- ":::no-loc(Let's Encrypt):::"
-- ':::no-loc(Razor):::'
-- ':::no-loc(SignalR):::'
+- 'appsettings.json'
+- 'ASP.NET Core Identity'
+- 'cookie'
+- 'Cookie'
+- 'Blazor'
+- 'Blazor Server'
+- 'Blazor WebAssembly'
+- 'Identity'
+- "Let's Encrypt"
+- 'Razor'
+- 'SignalR'
 uid: fundamentals/http-requests
 ms.openlocfilehash: 34c35daac3da845bac9156fe96078df7902a4cd0
 ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
@@ -363,14 +363,14 @@ public class ValuesController : ControllerBase
 - <span data-ttu-id="ac014-301">`SocketsHttpHandler`共用實例之間的 `HttpClient` 連接。</span><span class="sxs-lookup"><span data-stu-id="ac014-301">The `SocketsHttpHandler` shares connections across `HttpClient` instances.</span></span> <span data-ttu-id="ac014-302">這種共用可防止通訊端耗盡。</span><span class="sxs-lookup"><span data-stu-id="ac014-302">This sharing prevents socket exhaustion.</span></span>
 - <span data-ttu-id="ac014-303">會 `SocketsHttpHandler` 根據來迴圈連接 `PooledConnectionLifetime` ，以避免過時的 DNS 問題。</span><span class="sxs-lookup"><span data-stu-id="ac014-303">The `SocketsHttpHandler` cycles connections according to `PooledConnectionLifetime` to avoid stale DNS problems.</span></span>
 
-### <a name="no-loccookies"></a><span data-ttu-id="ac014-304">:::no-loc(Cookie):::</span><span class="sxs-lookup"><span data-stu-id="ac014-304">:::no-loc(Cookie):::s</span></span>
+### <a name="no-loccookies"></a><span data-ttu-id="ac014-304">Cookie</span><span class="sxs-lookup"><span data-stu-id="ac014-304">Cookies</span></span>
 
-<span data-ttu-id="ac014-305">集區 `HttpMessageHandler` 實例會產生 `:::no-loc(Cookie):::Container` 共用的物件。</span><span class="sxs-lookup"><span data-stu-id="ac014-305">The pooled `HttpMessageHandler` instances results in `:::no-loc(Cookie):::Container` objects being shared.</span></span> <span data-ttu-id="ac014-306">非預期 `:::no-loc(Cookie):::Container` 的物件共用通常會導致不正確的程式碼。</span><span class="sxs-lookup"><span data-stu-id="ac014-306">Unanticipated `:::no-loc(Cookie):::Container` object sharing often results in incorrect code.</span></span> <span data-ttu-id="ac014-307">針對需要的應用程式 :::no-loc(cookie)::: ，請考慮下列其中一項：</span><span class="sxs-lookup"><span data-stu-id="ac014-307">For apps that require :::no-loc(cookie):::s, consider either:</span></span>
+<span data-ttu-id="ac014-305">集區 `HttpMessageHandler` 實例會產生 `CookieContainer` 共用的物件。</span><span class="sxs-lookup"><span data-stu-id="ac014-305">The pooled `HttpMessageHandler` instances results in `CookieContainer` objects being shared.</span></span> <span data-ttu-id="ac014-306">非預期 `CookieContainer` 的物件共用通常會導致不正確的程式碼。</span><span class="sxs-lookup"><span data-stu-id="ac014-306">Unanticipated `CookieContainer` object sharing often results in incorrect code.</span></span> <span data-ttu-id="ac014-307">針對需要的應用程式 cookie ，請考慮下列其中一項：</span><span class="sxs-lookup"><span data-stu-id="ac014-307">For apps that require cookies, consider either:</span></span>
 
- - <span data-ttu-id="ac014-308">停用自動 :::no-loc(cookie)::: 處理</span><span class="sxs-lookup"><span data-stu-id="ac014-308">Disabling automatic :::no-loc(cookie)::: handling</span></span>
+ - <span data-ttu-id="ac014-308">停用自動 cookie 處理</span><span class="sxs-lookup"><span data-stu-id="ac014-308">Disabling automatic cookie handling</span></span>
  - <span data-ttu-id="ac014-309">避免 `IHttpClientFactory`</span><span class="sxs-lookup"><span data-stu-id="ac014-309">Avoiding `IHttpClientFactory`</span></span>
 
-<span data-ttu-id="ac014-310">呼叫 <xref:Microsoft.Extensions.DependencyInjection.HttpClientBuilderExtensions.ConfigurePrimaryHttpMessageHandler*> 以停用自動 :::no-loc(cookie)::: 處理：</span><span class="sxs-lookup"><span data-stu-id="ac014-310">Call <xref:Microsoft.Extensions.DependencyInjection.HttpClientBuilderExtensions.ConfigurePrimaryHttpMessageHandler*> to disable automatic :::no-loc(cookie)::: handling:</span></span>
+<span data-ttu-id="ac014-310">呼叫 <xref:Microsoft.Extensions.DependencyInjection.HttpClientBuilderExtensions.ConfigurePrimaryHttpMessageHandler*> 以停用自動 cookie 處理：</span><span class="sxs-lookup"><span data-stu-id="ac014-310">Call <xref:Microsoft.Extensions.DependencyInjection.HttpClientBuilderExtensions.ConfigurePrimaryHttpMessageHandler*> to disable automatic cookie handling:</span></span>
 
 [!code-csharp[](http-requests/samples/2.x/HttpClientFactorySample/Startup.cs?name=snippet13)]
 
@@ -681,14 +681,14 @@ public class ValuesController : ControllerBase
 - <span data-ttu-id="ac014-505">`SocketsHttpHandler`共用實例之間的 `HttpClient` 連接。</span><span class="sxs-lookup"><span data-stu-id="ac014-505">The `SocketsHttpHandler` shares connections across `HttpClient` instances.</span></span> <span data-ttu-id="ac014-506">這種共用可防止通訊端耗盡。</span><span class="sxs-lookup"><span data-stu-id="ac014-506">This sharing prevents socket exhaustion.</span></span>
 - <span data-ttu-id="ac014-507">會 `SocketsHttpHandler` 根據來迴圈連接 `PooledConnectionLifetime` ，以避免過時的 DNS 問題。</span><span class="sxs-lookup"><span data-stu-id="ac014-507">The `SocketsHttpHandler` cycles connections according to `PooledConnectionLifetime` to avoid stale DNS problems.</span></span>
 
-### <a name="no-loccookies"></a><span data-ttu-id="ac014-508">:::no-loc(Cookie):::</span><span class="sxs-lookup"><span data-stu-id="ac014-508">:::no-loc(Cookie):::s</span></span>
+### <a name="no-loccookies"></a><span data-ttu-id="ac014-508">Cookie</span><span class="sxs-lookup"><span data-stu-id="ac014-508">Cookies</span></span>
 
-<span data-ttu-id="ac014-509">集區 `HttpMessageHandler` 實例會產生 `:::no-loc(Cookie):::Container` 共用的物件。</span><span class="sxs-lookup"><span data-stu-id="ac014-509">The pooled `HttpMessageHandler` instances results in `:::no-loc(Cookie):::Container` objects being shared.</span></span> <span data-ttu-id="ac014-510">非預期 `:::no-loc(Cookie):::Container` 的物件共用通常會導致不正確的程式碼。</span><span class="sxs-lookup"><span data-stu-id="ac014-510">Unanticipated `:::no-loc(Cookie):::Container` object sharing often results in incorrect code.</span></span> <span data-ttu-id="ac014-511">針對需要的應用程式 :::no-loc(cookie)::: ，請考慮下列其中一項：</span><span class="sxs-lookup"><span data-stu-id="ac014-511">For apps that require :::no-loc(cookie):::s, consider either:</span></span>
+<span data-ttu-id="ac014-509">集區 `HttpMessageHandler` 實例會產生 `CookieContainer` 共用的物件。</span><span class="sxs-lookup"><span data-stu-id="ac014-509">The pooled `HttpMessageHandler` instances results in `CookieContainer` objects being shared.</span></span> <span data-ttu-id="ac014-510">非預期 `CookieContainer` 的物件共用通常會導致不正確的程式碼。</span><span class="sxs-lookup"><span data-stu-id="ac014-510">Unanticipated `CookieContainer` object sharing often results in incorrect code.</span></span> <span data-ttu-id="ac014-511">針對需要的應用程式 cookie ，請考慮下列其中一項：</span><span class="sxs-lookup"><span data-stu-id="ac014-511">For apps that require cookies, consider either:</span></span>
 
- - <span data-ttu-id="ac014-512">停用自動 :::no-loc(cookie)::: 處理</span><span class="sxs-lookup"><span data-stu-id="ac014-512">Disabling automatic :::no-loc(cookie)::: handling</span></span>
+ - <span data-ttu-id="ac014-512">停用自動 cookie 處理</span><span class="sxs-lookup"><span data-stu-id="ac014-512">Disabling automatic cookie handling</span></span>
  - <span data-ttu-id="ac014-513">避免 `IHttpClientFactory`</span><span class="sxs-lookup"><span data-stu-id="ac014-513">Avoiding `IHttpClientFactory`</span></span>
 
-<span data-ttu-id="ac014-514">呼叫 <xref:Microsoft.Extensions.DependencyInjection.HttpClientBuilderExtensions.ConfigurePrimaryHttpMessageHandler*> 以停用自動 :::no-loc(cookie)::: 處理：</span><span class="sxs-lookup"><span data-stu-id="ac014-514">Call <xref:Microsoft.Extensions.DependencyInjection.HttpClientBuilderExtensions.ConfigurePrimaryHttpMessageHandler*> to disable automatic :::no-loc(cookie)::: handling:</span></span>
+<span data-ttu-id="ac014-514">呼叫 <xref:Microsoft.Extensions.DependencyInjection.HttpClientBuilderExtensions.ConfigurePrimaryHttpMessageHandler*> 以停用自動 cookie 處理：</span><span class="sxs-lookup"><span data-stu-id="ac014-514">Call <xref:Microsoft.Extensions.DependencyInjection.HttpClientBuilderExtensions.ConfigurePrimaryHttpMessageHandler*> to disable automatic cookie handling:</span></span>
 
 [!code-csharp[](http-requests/samples/2.x/HttpClientFactorySample/Startup.cs?name=snippet13)]
 
@@ -989,14 +989,14 @@ public class ValuesController : ControllerBase
 - <span data-ttu-id="ac014-706">`SocketsHttpHandler`共用實例之間的 `HttpClient` 連接。</span><span class="sxs-lookup"><span data-stu-id="ac014-706">The `SocketsHttpHandler` shares connections across `HttpClient` instances.</span></span> <span data-ttu-id="ac014-707">這種共用可防止通訊端耗盡。</span><span class="sxs-lookup"><span data-stu-id="ac014-707">This sharing prevents socket exhaustion.</span></span>
 - <span data-ttu-id="ac014-708">會 `SocketsHttpHandler` 根據來迴圈連接 `PooledConnectionLifetime` ，以避免過時的 DNS 問題。</span><span class="sxs-lookup"><span data-stu-id="ac014-708">The `SocketsHttpHandler` cycles connections according to `PooledConnectionLifetime` to avoid stale DNS problems.</span></span>
 
-### <a name="no-loccookies"></a><span data-ttu-id="ac014-709">:::no-loc(Cookie):::</span><span class="sxs-lookup"><span data-stu-id="ac014-709">:::no-loc(Cookie):::s</span></span>
+### <a name="no-loccookies"></a><span data-ttu-id="ac014-709">Cookie</span><span class="sxs-lookup"><span data-stu-id="ac014-709">Cookies</span></span>
 
-<span data-ttu-id="ac014-710">集區 `HttpMessageHandler` 實例會產生 `:::no-loc(Cookie):::Container` 共用的物件。</span><span class="sxs-lookup"><span data-stu-id="ac014-710">The pooled `HttpMessageHandler` instances results in `:::no-loc(Cookie):::Container` objects being shared.</span></span> <span data-ttu-id="ac014-711">非預期 `:::no-loc(Cookie):::Container` 的物件共用通常會導致不正確的程式碼。</span><span class="sxs-lookup"><span data-stu-id="ac014-711">Unanticipated `:::no-loc(Cookie):::Container` object sharing often results in incorrect code.</span></span> <span data-ttu-id="ac014-712">針對需要的應用程式 :::no-loc(cookie)::: ，請考慮下列其中一項：</span><span class="sxs-lookup"><span data-stu-id="ac014-712">For apps that require :::no-loc(cookie):::s, consider either:</span></span>
+<span data-ttu-id="ac014-710">集區 `HttpMessageHandler` 實例會產生 `CookieContainer` 共用的物件。</span><span class="sxs-lookup"><span data-stu-id="ac014-710">The pooled `HttpMessageHandler` instances results in `CookieContainer` objects being shared.</span></span> <span data-ttu-id="ac014-711">非預期 `CookieContainer` 的物件共用通常會導致不正確的程式碼。</span><span class="sxs-lookup"><span data-stu-id="ac014-711">Unanticipated `CookieContainer` object sharing often results in incorrect code.</span></span> <span data-ttu-id="ac014-712">針對需要的應用程式 cookie ，請考慮下列其中一項：</span><span class="sxs-lookup"><span data-stu-id="ac014-712">For apps that require cookies, consider either:</span></span>
 
- - <span data-ttu-id="ac014-713">停用自動 :::no-loc(cookie)::: 處理</span><span class="sxs-lookup"><span data-stu-id="ac014-713">Disabling automatic :::no-loc(cookie)::: handling</span></span>
+ - <span data-ttu-id="ac014-713">停用自動 cookie 處理</span><span class="sxs-lookup"><span data-stu-id="ac014-713">Disabling automatic cookie handling</span></span>
  - <span data-ttu-id="ac014-714">避免 `IHttpClientFactory`</span><span class="sxs-lookup"><span data-stu-id="ac014-714">Avoiding `IHttpClientFactory`</span></span>
 
-<span data-ttu-id="ac014-715">呼叫 <xref:Microsoft.Extensions.DependencyInjection.HttpClientBuilderExtensions.ConfigurePrimaryHttpMessageHandler*> 以停用自動 :::no-loc(cookie)::: 處理：</span><span class="sxs-lookup"><span data-stu-id="ac014-715">Call <xref:Microsoft.Extensions.DependencyInjection.HttpClientBuilderExtensions.ConfigurePrimaryHttpMessageHandler*> to disable automatic :::no-loc(cookie)::: handling:</span></span>
+<span data-ttu-id="ac014-715">呼叫 <xref:Microsoft.Extensions.DependencyInjection.HttpClientBuilderExtensions.ConfigurePrimaryHttpMessageHandler*> 以停用自動 cookie 處理：</span><span class="sxs-lookup"><span data-stu-id="ac014-715">Call <xref:Microsoft.Extensions.DependencyInjection.HttpClientBuilderExtensions.ConfigurePrimaryHttpMessageHandler*> to disable automatic cookie handling:</span></span>
 
 [!code-csharp[](http-requests/samples/2.x/HttpClientFactorySample/Startup.cs?name=snippet13)]
 

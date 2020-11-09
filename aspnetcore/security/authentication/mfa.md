@@ -7,17 +7,17 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 03/17/2020
 no-loc:
-- ':::no-loc(appsettings.json):::'
-- ':::no-loc(ASP.NET Core Identity):::'
-- ':::no-loc(cookie):::'
-- ':::no-loc(Cookie):::'
-- ':::no-loc(Blazor):::'
-- ':::no-loc(Blazor Server):::'
-- ':::no-loc(Blazor WebAssembly):::'
-- ':::no-loc(Identity):::'
-- ":::no-loc(Let's Encrypt):::"
-- ':::no-loc(Razor):::'
-- ':::no-loc(SignalR):::'
+- 'appsettings.json'
+- 'ASP.NET Core Identity'
+- 'cookie'
+- 'Cookie'
+- 'Blazor'
+- 'Blazor Server'
+- 'Blazor WebAssembly'
+- 'Identity'
+- "Let's Encrypt"
+- 'Razor'
+- 'SignalR'
 uid: security/authentication/mfa
 ms.openlocfilehash: 873f7d113df84c931ad7fbf2c72aa292e4e87c48
 ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
@@ -37,7 +37,7 @@ ms.locfileid: "93060387"
 <span data-ttu-id="d08e9-110">本文涵蓋下列領域：</span><span class="sxs-lookup"><span data-stu-id="d08e9-110">This article covers the following areas:</span></span>
 
 * <span data-ttu-id="d08e9-111">何謂 MFA，以及建議使用哪些 MFA 流程</span><span class="sxs-lookup"><span data-stu-id="d08e9-111">What is MFA and what MFA flows are recommended</span></span>
-* <span data-ttu-id="d08e9-112">使用管理頁面的設定 MFA :::no-loc(ASP.NET Core Identity):::</span><span class="sxs-lookup"><span data-stu-id="d08e9-112">Configure MFA for administration pages using :::no-loc(ASP.NET Core Identity):::</span></span>
+* <span data-ttu-id="d08e9-112">使用管理頁面的設定 MFA ASP.NET Core Identity</span><span class="sxs-lookup"><span data-stu-id="d08e9-112">Configure MFA for administration pages using ASP.NET Core Identity</span></span>
 * <span data-ttu-id="d08e9-113">將 MFA 登入需求傳送至 OpenID Connect server</span><span class="sxs-lookup"><span data-stu-id="d08e9-113">Send MFA sign-in requirement to OpenID Connect server</span></span>
 * <span data-ttu-id="d08e9-114">強制 ASP.NET Core OpenID Connect 用戶端要求 MFA</span><span class="sxs-lookup"><span data-stu-id="d08e9-114">Force ASP.NET Core OpenID Connect client to require MFA</span></span>
 
@@ -49,7 +49,7 @@ ms.locfileid: "93060387"
 
 ### <a name="mfa-totp-time-based-one-time-password-algorithm"></a><span data-ttu-id="d08e9-118">MFA TOTP (以時間為基礎的一次性密碼演算法) </span><span class="sxs-lookup"><span data-stu-id="d08e9-118">MFA TOTP (Time-based One-time Password Algorithm)</span></span>
 
-<span data-ttu-id="d08e9-119">使用 TOTP 的 MFA 是使用支援的實作為 :::no-loc(ASP.NET Core Identity)::: 。</span><span class="sxs-lookup"><span data-stu-id="d08e9-119">MFA using TOTP is a supported implementation using :::no-loc(ASP.NET Core Identity):::.</span></span> <span data-ttu-id="d08e9-120">這可以與任何符合規範的驗證器應用程式搭配使用，包括：</span><span class="sxs-lookup"><span data-stu-id="d08e9-120">This can be used together with any compliant authenticator app, including:</span></span>
+<span data-ttu-id="d08e9-119">使用 TOTP 的 MFA 是使用支援的實作為 ASP.NET Core Identity 。</span><span class="sxs-lookup"><span data-stu-id="d08e9-119">MFA using TOTP is a supported implementation using ASP.NET Core Identity.</span></span> <span data-ttu-id="d08e9-120">這可以與任何符合規範的驗證器應用程式搭配使用，包括：</span><span class="sxs-lookup"><span data-stu-id="d08e9-120">This can be used together with any compliant authenticator app, including:</span></span>
 
 * <span data-ttu-id="d08e9-121">Microsoft Authenticator 應用程式</span><span class="sxs-lookup"><span data-stu-id="d08e9-121">Microsoft Authenticator App</span></span>
 * <span data-ttu-id="d08e9-122">Google 驗證器應用程式</span><span class="sxs-lookup"><span data-stu-id="d08e9-122">Google Authenticator App</span></span>
@@ -75,13 +75,13 @@ ms.locfileid: "93060387"
 
 [<span data-ttu-id="d08e9-137">NIST 指導方針</span><span class="sxs-lookup"><span data-stu-id="d08e9-137">NIST guidelines</span></span>](https://pages.nist.gov/800-63-3/sp800-63b.html)
 
-## <a name="configure-mfa-for-administration-pages-using-no-locaspnet-core-identity"></a><span data-ttu-id="d08e9-138">使用管理頁面的設定 MFA :::no-loc(ASP.NET Core Identity):::</span><span class="sxs-lookup"><span data-stu-id="d08e9-138">Configure MFA for administration pages using :::no-loc(ASP.NET Core Identity):::</span></span>
+## <a name="configure-mfa-for-administration-pages-using-no-locaspnet-core-identity"></a><span data-ttu-id="d08e9-138">使用管理頁面的設定 MFA ASP.NET Core Identity</span><span class="sxs-lookup"><span data-stu-id="d08e9-138">Configure MFA for administration pages using ASP.NET Core Identity</span></span>
 
-<span data-ttu-id="d08e9-139">MFA 可能會強制使用者存取應用程式內的敏感頁面 :::no-loc(ASP.NET Core Identity)::: 。</span><span class="sxs-lookup"><span data-stu-id="d08e9-139">MFA could be forced on users to access sensitive pages within an :::no-loc(ASP.NET Core Identity)::: app.</span></span> <span data-ttu-id="d08e9-140">針對不同的身分識別存在不同存取層級的應用程式，這可能會很有用。</span><span class="sxs-lookup"><span data-stu-id="d08e9-140">This could be useful for apps where different levels of access exist for the different identities.</span></span> <span data-ttu-id="d08e9-141">例如，使用者或許可以使用密碼登入來查看設定檔資料，但系統管理員必須使用 MFA 來存取系統管理頁面。</span><span class="sxs-lookup"><span data-stu-id="d08e9-141">For example, users might be able to view the profile data using a password login, but an administrator would be required to use MFA to access the administrative pages.</span></span>
+<span data-ttu-id="d08e9-139">MFA 可能會強制使用者存取應用程式內的敏感頁面 ASP.NET Core Identity 。</span><span class="sxs-lookup"><span data-stu-id="d08e9-139">MFA could be forced on users to access sensitive pages within an ASP.NET Core Identity app.</span></span> <span data-ttu-id="d08e9-140">針對不同的身分識別存在不同存取層級的應用程式，這可能會很有用。</span><span class="sxs-lookup"><span data-stu-id="d08e9-140">This could be useful for apps where different levels of access exist for the different identities.</span></span> <span data-ttu-id="d08e9-141">例如，使用者或許可以使用密碼登入來查看設定檔資料，但系統管理員必須使用 MFA 來存取系統管理頁面。</span><span class="sxs-lookup"><span data-stu-id="d08e9-141">For example, users might be able to view the profile data using a password login, but an administrator would be required to use MFA to access the administrative pages.</span></span>
 
 ### <a name="extend-the-login-with-an-mfa-claim"></a><span data-ttu-id="d08e9-142">使用 MFA 宣告擴充登入</span><span class="sxs-lookup"><span data-stu-id="d08e9-142">Extend the login with an MFA claim</span></span>
 
-<span data-ttu-id="d08e9-143">示範程式碼是使用 ASP.NET Core 搭配 :::no-loc(Identity)::: 和頁面進行設定 :::no-loc(Razor)::: 。</span><span class="sxs-lookup"><span data-stu-id="d08e9-143">The demo code is setup using ASP.NET Core with :::no-loc(Identity)::: and :::no-loc(Razor)::: Pages.</span></span> <span data-ttu-id="d08e9-144">`Add:::no-loc(Identity):::`使用方法，而不是使用方法 `AddDefault:::no-loc(Identity):::` ，因此 `IUserClaimsPrincipalFactory` 可以在成功登入之後，使用執行將宣告加入至身分識別。</span><span class="sxs-lookup"><span data-stu-id="d08e9-144">The `Add:::no-loc(Identity):::` method is used instead of `AddDefault:::no-loc(Identity):::` one, so an `IUserClaimsPrincipalFactory` implementation can be used to add claims to the identity after a successful login.</span></span>
+<span data-ttu-id="d08e9-143">示範程式碼是使用 ASP.NET Core 搭配 Identity 和頁面進行設定 Razor 。</span><span class="sxs-lookup"><span data-stu-id="d08e9-143">The demo code is setup using ASP.NET Core with Identity and Razor Pages.</span></span> <span data-ttu-id="d08e9-144">`AddIdentity`使用方法，而不是使用方法 `AddDefaultIdentity` ，因此 `IUserClaimsPrincipalFactory` 可以在成功登入之後，使用執行將宣告加入至身分識別。</span><span class="sxs-lookup"><span data-stu-id="d08e9-144">The `AddIdentity` method is used instead of `AddDefaultIdentity` one, so an `IUserClaimsPrincipalFactory` implementation can be used to add claims to the identity after a successful login.</span></span>
 
 ```csharp
 public void ConfigureServices(IServiceCollection services)
@@ -90,49 +90,49 @@ public void ConfigureServices(IServiceCollection services)
         options.UseSqlite(
             Configuration.GetConnectionString("DefaultConnection")));
     
-    services.Add:::no-loc(Identity):::<:::no-loc(Identity):::User, :::no-loc(Identity):::Role>(
+    services.AddIdentity<IdentityUser, IdentityRole>(
             options => options.SignIn.RequireConfirmedAccount = false)
         .AddEntityFrameworkStores<ApplicationDbContext>()
         .AddDefaultTokenProviders();
 
     services.AddSingleton<IEmailSender, EmailSender>();
-    services.AddScoped<IUserClaimsPrincipalFactory<:::no-loc(Identity):::User>, 
+    services.AddScoped<IUserClaimsPrincipalFactory<IdentityUser>, 
         AdditionalUserClaimsPrincipalFactory>();
 
     services.AddAuthorization(options =>
         options.AddPolicy("TwoFactorEnabled",
             x => x.RequireClaim("amr", "mfa")));
 
-    services.Add:::no-loc(Razor):::Pages();
+    services.AddRazorPages();
 }
 ```
 
 <span data-ttu-id="d08e9-145">`AdditionalUserClaimsPrincipalFactory`類別只會在 `amr` 成功登入之後，將宣告新增至使用者宣告。</span><span class="sxs-lookup"><span data-stu-id="d08e9-145">The `AdditionalUserClaimsPrincipalFactory` class adds the `amr` claim to the user claims only after a successful login.</span></span> <span data-ttu-id="d08e9-146">宣告的值是從資料庫讀取的。</span><span class="sxs-lookup"><span data-stu-id="d08e9-146">The claim's value is read from the database.</span></span> <span data-ttu-id="d08e9-147">宣告會新增到此處，因為如果身分識別已使用 MFA 登入，則使用者應該只存取較高的受保護的檢視。</span><span class="sxs-lookup"><span data-stu-id="d08e9-147">The claim is added here because the user should only access the higher protected view if the identity has logged in with MFA.</span></span> <span data-ttu-id="d08e9-148">如果您直接從資料庫讀取資料庫檢視，而不是使用宣告，則在啟用 MFA 後，就可以直接存取沒有 MFA 的視圖。</span><span class="sxs-lookup"><span data-stu-id="d08e9-148">If the database view is read from the database directly instead of using the claim, it's possible to access the view without MFA directly after activating the MFA.</span></span>
 
 ```csharp
-using Microsoft.AspNetCore.:::no-loc(Identity):::;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Options;
 using System.Collections.Generic;
 using System.Security.Claims;
 using System.Threading.Tasks;
 
-namespace :::no-loc(Identity):::StandaloneMfa
+namespace IdentityStandaloneMfa
 {
     public class AdditionalUserClaimsPrincipalFactory : 
-        UserClaimsPrincipalFactory<:::no-loc(Identity):::User, :::no-loc(Identity):::Role>
+        UserClaimsPrincipalFactory<IdentityUser, IdentityRole>
     {
         public AdditionalUserClaimsPrincipalFactory( 
-            UserManager<:::no-loc(Identity):::User> userManager,
-            RoleManager<:::no-loc(Identity):::Role> roleManager, 
-            IOptions<:::no-loc(Identity):::Options> optionsAccessor) 
+            UserManager<IdentityUser> userManager,
+            RoleManager<IdentityRole> roleManager, 
+            IOptions<IdentityOptions> optionsAccessor) 
             : base(userManager, roleManager, optionsAccessor)
         {
         }
 
-        public async override Task<ClaimsPrincipal> CreateAsync(:::no-loc(Identity):::User user)
+        public async override Task<ClaimsPrincipal> CreateAsync(IdentityUser user)
         {
             var principal = await base.CreateAsync(user);
-            var identity = (Claims:::no-loc(Identity):::)principal.:::no-loc(Identity):::;
+            var identity = (ClaimsIdentity)principal.Identity;
 
             var claims = new List<Claim>();
 
@@ -152,7 +152,7 @@ namespace :::no-loc(Identity):::StandaloneMfa
 }
 ```
 
-<span data-ttu-id="d08e9-149">因為 :::no-loc(Identity)::: 服務設定在類別中有所變更 `Startup` ，所以需要更新的版面配置 :::no-loc(Identity)::: 。</span><span class="sxs-lookup"><span data-stu-id="d08e9-149">Because the :::no-loc(Identity)::: service setup changed in the `Startup` class, the layouts of the :::no-loc(Identity)::: need to be updated.</span></span> <span data-ttu-id="d08e9-150">將 :::no-loc(Identity)::: 頁面 Scaffold 到應用程式中。</span><span class="sxs-lookup"><span data-stu-id="d08e9-150">Scaffold the :::no-loc(Identity)::: pages into the app.</span></span> <span data-ttu-id="d08e9-151">在 *:::no-loc(Identity)::: /Account/Manage/_Layout cshtml* 檔案中定義版面配置。</span><span class="sxs-lookup"><span data-stu-id="d08e9-151">Define the layout in the *:::no-loc(Identity):::/Account/Manage/_Layout.cshtml* file.</span></span>
+<span data-ttu-id="d08e9-149">因為 Identity 服務設定在類別中有所變更 `Startup` ，所以需要更新的版面配置 Identity 。</span><span class="sxs-lookup"><span data-stu-id="d08e9-149">Because the Identity service setup changed in the `Startup` class, the layouts of the Identity need to be updated.</span></span> <span data-ttu-id="d08e9-150">將 Identity 頁面 Scaffold 到應用程式中。</span><span class="sxs-lookup"><span data-stu-id="d08e9-150">Scaffold the Identity pages into the app.</span></span> <span data-ttu-id="d08e9-151">在 *Identity /Account/Manage/_Layout cshtml* 檔案中定義版面配置。</span><span class="sxs-lookup"><span data-stu-id="d08e9-151">Define the layout in the *Identity/Account/Manage/_Layout.cshtml* file.</span></span>
 
 ```cshtml
 @{
@@ -160,7 +160,7 @@ namespace :::no-loc(Identity):::StandaloneMfa
 }
 ```
 
-<span data-ttu-id="d08e9-152">此外，請從頁面指派所有管理頁面的版面配置 :::no-loc(Identity)::: ：</span><span class="sxs-lookup"><span data-stu-id="d08e9-152">Also assign the layout for all the manage pages from the :::no-loc(Identity)::: pages:</span></span>
+<span data-ttu-id="d08e9-152">此外，請從頁面指派所有管理頁面的版面配置 Identity ：</span><span class="sxs-lookup"><span data-stu-id="d08e9-152">Also assign the layout for all the manage pages from the Identity pages:</span></span>
 
 ```cshtml
 @{
@@ -170,7 +170,7 @@ namespace :::no-loc(Identity):::StandaloneMfa
 
 ### <a name="validate-the-mfa-requirement-in-the-administration-page"></a><span data-ttu-id="d08e9-153">在 [系統管理] 頁面中驗證 MFA 需求</span><span class="sxs-lookup"><span data-stu-id="d08e9-153">Validate the MFA requirement in the administration page</span></span>
 
-<span data-ttu-id="d08e9-154">系統管理 :::no-loc(Razor)::: 頁面會驗證使用者是否已使用 MFA 登入。</span><span class="sxs-lookup"><span data-stu-id="d08e9-154">The administration :::no-loc(Razor)::: Page validates that the user has logged in using MFA.</span></span> <span data-ttu-id="d08e9-155">在 `OnGet` 方法中，會使用身分識別來存取使用者宣告。</span><span class="sxs-lookup"><span data-stu-id="d08e9-155">In the `OnGet` method, the identity is used to access the user claims.</span></span> <span data-ttu-id="d08e9-156">檢查宣告的 `amr` 值 `mfa` 。</span><span class="sxs-lookup"><span data-stu-id="d08e9-156">The `amr` claim is checked for the value `mfa`.</span></span> <span data-ttu-id="d08e9-157">如果身分識別缺少此宣告或為 `false` ，則頁面會重新導向至 [啟用 MFA] 頁面。</span><span class="sxs-lookup"><span data-stu-id="d08e9-157">If the identity is missing this claim or is `false`, the page redirects to the Enable MFA page.</span></span> <span data-ttu-id="d08e9-158">這是可能的，因為使用者已登入，但沒有 MFA。</span><span class="sxs-lookup"><span data-stu-id="d08e9-158">This is possible because the user has logged in already, but without MFA.</span></span>
+<span data-ttu-id="d08e9-154">系統管理 Razor 頁面會驗證使用者是否已使用 MFA 登入。</span><span class="sxs-lookup"><span data-stu-id="d08e9-154">The administration Razor Page validates that the user has logged in using MFA.</span></span> <span data-ttu-id="d08e9-155">在 `OnGet` 方法中，會使用身分識別來存取使用者宣告。</span><span class="sxs-lookup"><span data-stu-id="d08e9-155">In the `OnGet` method, the identity is used to access the user claims.</span></span> <span data-ttu-id="d08e9-156">檢查宣告的 `amr` 值 `mfa` 。</span><span class="sxs-lookup"><span data-stu-id="d08e9-156">The `amr` claim is checked for the value `mfa`.</span></span> <span data-ttu-id="d08e9-157">如果身分識別缺少此宣告或為 `false` ，則頁面會重新導向至 [啟用 MFA] 頁面。</span><span class="sxs-lookup"><span data-stu-id="d08e9-157">If the identity is missing this claim or is `false`, the page redirects to the Enable MFA page.</span></span> <span data-ttu-id="d08e9-158">這是可能的，因為使用者已登入，但沒有 MFA。</span><span class="sxs-lookup"><span data-stu-id="d08e9-158">This is possible because the user has logged in already, but without MFA.</span></span>
 
 ```csharp
 using System;
@@ -178,9 +178,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.:::no-loc(Razor):::Pages;
+using Microsoft.AspNetCore.Mvc.RazorPages;
 
-namespace :::no-loc(Identity):::StandaloneMfa
+namespace IdentityStandaloneMfa
 {
     public class AdminModel : PageModel
     {
@@ -197,7 +197,7 @@ namespace :::no-loc(Identity):::StandaloneMfa
             else
             {
                 return Redirect(
-                    "/:::no-loc(Identity):::/Account/Manage/TwoFactorAuthentication");
+                    "/Identity/Account/Manage/TwoFactorAuthentication");
             }
 
             return Page();
@@ -220,9 +220,9 @@ services.AddAuthorization(options =>
 
 ```cshtml
 @using Microsoft.AspNetCore.Authorization
-@using Microsoft.AspNetCore.:::no-loc(Identity):::
-@inject SignInManager<:::no-loc(Identity):::User> SignInManager
-@inject UserManager<:::no-loc(Identity):::User> UserManager
+@using Microsoft.AspNetCore.Identity
+@inject SignInManager<IdentityUser> SignInManager
+@inject UserManager<IdentityUser> UserManager
 @inject IAuthorizationService AuthorizationService
 ```
 
@@ -269,7 +269,7 @@ services.AddAuthorization(options =>
 
 ### <a name="openid-connect-aspnet-core-client"></a><span data-ttu-id="d08e9-172">OpenID Connect ASP.NET Core 用戶端</span><span class="sxs-lookup"><span data-stu-id="d08e9-172">OpenID Connect ASP.NET Core client</span></span>
 
-<span data-ttu-id="d08e9-173">:::no-loc(Razor):::用戶端應用程式 OpenID Connect 的 ASP.NET Core 頁面會使用 `AddOpenIdConnect` 方法來登入 OpenID Connect 伺服器。</span><span class="sxs-lookup"><span data-stu-id="d08e9-173">The ASP.NET Core :::no-loc(Razor)::: Pages OpenID Connect client app uses the `AddOpenIdConnect` method to login to the OpenID Connect server.</span></span> <span data-ttu-id="d08e9-174">`acr_values`參數會以 `mfa` 值設定，並與驗證要求一起傳送。</span><span class="sxs-lookup"><span data-stu-id="d08e9-174">The `acr_values` parameter is set with the `mfa` value and sent with the authentication request.</span></span> <span data-ttu-id="d08e9-175">`OpenIdConnectEvents`用來加入這個。</span><span class="sxs-lookup"><span data-stu-id="d08e9-175">The `OpenIdConnectEvents` is used to add this.</span></span>
+<span data-ttu-id="d08e9-173">Razor用戶端應用程式 OpenID Connect 的 ASP.NET Core 頁面會使用 `AddOpenIdConnect` 方法來登入 OpenID Connect 伺服器。</span><span class="sxs-lookup"><span data-stu-id="d08e9-173">The ASP.NET Core Razor Pages OpenID Connect client app uses the `AddOpenIdConnect` method to login to the OpenID Connect server.</span></span> <span data-ttu-id="d08e9-174">`acr_values`參數會以 `mfa` 值設定，並與驗證要求一起傳送。</span><span class="sxs-lookup"><span data-stu-id="d08e9-174">The `acr_values` parameter is set with the `mfa` value and sent with the authentication request.</span></span> <span data-ttu-id="d08e9-175">`OpenIdConnectEvents`用來加入這個。</span><span class="sxs-lookup"><span data-stu-id="d08e9-175">The `OpenIdConnectEvents` is used to add this.</span></span>
 
 <span data-ttu-id="d08e9-176">如需建議的 `acr_values` 參數值，請參閱 [驗證方法參考值](https://tools.ietf.org/html/draft-ietf-oauth-amr-values-08)。</span><span class="sxs-lookup"><span data-stu-id="d08e9-176">For recommended `acr_values` parameter values, see [Authentication Method Reference Values](https://tools.ietf.org/html/draft-ietf-oauth-amr-values-08).</span></span>
 
@@ -279,15 +279,15 @@ public void ConfigureServices(IServiceCollection services)
     services.AddAuthentication(options =>
     {
         options.DefaultScheme =
-            :::no-loc(Cookie):::AuthenticationDefaults.AuthenticationScheme;
+            CookieAuthenticationDefaults.AuthenticationScheme;
         options.DefaultChallengeScheme =
             OpenIdConnectDefaults.AuthenticationScheme;
     })
-    .Add:::no-loc(Cookie):::()
+    .AddCookie()
     .AddOpenIdConnect(options =>
     {
         options.SignInScheme =
-            :::no-loc(Cookie):::AuthenticationDefaults.AuthenticationScheme;
+            CookieAuthenticationDefaults.AuthenticationScheme;
         options.Authority = "<OpenID Connect server URL>";
         options.RequireHttpsMetadata = true;
         options.ClientId = "<OpenID Connect client ID>";
@@ -299,7 +299,7 @@ public void ConfigureServices(IServiceCollection services)
         options.SaveTokens = true;
         options.Events = new OpenIdConnectEvents
         {
-            OnRedirectTo:::no-loc(Identity):::Provider = context =>
+            OnRedirectToIdentityProvider = context =>
             {
                 context.ProtocolMessage.SetParameter("acr_values", "mfa");
                 return Task.FromResult(0);
@@ -308,11 +308,11 @@ public void ConfigureServices(IServiceCollection services)
     });
 ```
 
-### <a name="example-openid-connect-no-locidentityserver-4-server-with-no-locaspnet-core-identity"></a><span data-ttu-id="d08e9-177">範例 OpenID Connect :::no-loc(Identity)::: server 4 伺服器 :::no-loc(ASP.NET Core Identity):::</span><span class="sxs-lookup"><span data-stu-id="d08e9-177">Example OpenID Connect :::no-loc(Identity):::Server 4 server with :::no-loc(ASP.NET Core Identity):::</span></span>
+### <a name="example-openid-connect-no-locidentityserver-4-server-with-no-locaspnet-core-identity"></a><span data-ttu-id="d08e9-177">範例 OpenID Connect Identity server 4 伺服器 ASP.NET Core Identity</span><span class="sxs-lookup"><span data-stu-id="d08e9-177">Example OpenID Connect IdentityServer 4 server with ASP.NET Core Identity</span></span>
 
-<span data-ttu-id="d08e9-178">在使用搭配 MVC views 來執行的 OpenID Connect 伺服器上 :::no-loc(ASP.NET Core Identity)::: ，會建立名為 *ErrorEnable2FA* 的新視圖。</span><span class="sxs-lookup"><span data-stu-id="d08e9-178">On the OpenID Connect server, which is implemented using :::no-loc(ASP.NET Core Identity)::: with MVC views, a new view named *ErrorEnable2FA.cshtml* is created.</span></span> <span data-ttu-id="d08e9-179">檢視：</span><span class="sxs-lookup"><span data-stu-id="d08e9-179">The view:</span></span>
+<span data-ttu-id="d08e9-178">在使用搭配 MVC views 來執行的 OpenID Connect 伺服器上 ASP.NET Core Identity ，會建立名為 *ErrorEnable2FA* 的新視圖。</span><span class="sxs-lookup"><span data-stu-id="d08e9-178">On the OpenID Connect server, which is implemented using ASP.NET Core Identity with MVC views, a new view named *ErrorEnable2FA.cshtml* is created.</span></span> <span data-ttu-id="d08e9-179">檢視：</span><span class="sxs-lookup"><span data-stu-id="d08e9-179">The view:</span></span>
 
-* <span data-ttu-id="d08e9-180">如果 :::no-loc(Identity)::: 來自需要 MFA 但使用者未在中啟用此功能的應用程式，則會顯示 :::no-loc(Identity)::: 。</span><span class="sxs-lookup"><span data-stu-id="d08e9-180">Displays if the :::no-loc(Identity)::: comes from an app that requires MFA but the user hasn't activated this in :::no-loc(Identity):::.</span></span>
+* <span data-ttu-id="d08e9-180">如果 Identity 來自需要 MFA 但使用者未在中啟用此功能的應用程式，則會顯示 Identity 。</span><span class="sxs-lookup"><span data-stu-id="d08e9-180">Displays if the Identity comes from an app that requires MFA but the user hasn't activated this in Identity.</span></span>
 * <span data-ttu-id="d08e9-181">通知使用者，並新增用來啟用此的連結。</span><span class="sxs-lookup"><span data-stu-id="d08e9-181">Informs the user and adds a link to activate this.</span></span>
 
 ```cshtml
@@ -331,9 +331,9 @@ You can enable MFA to login here:
 <a asp-controller="Manage" asp-action="TwoFactorAuthentication">Enable MFA</a>
 ```
 
-<span data-ttu-id="d08e9-182">在 `Login` 方法中， `I:::no-loc(Identity):::ServerInteractionService` 會使用介面實作為 `_interaction` 存取 OpenID Connect 要求參數。</span><span class="sxs-lookup"><span data-stu-id="d08e9-182">In the `Login` method, the `I:::no-loc(Identity):::ServerInteractionService` interface implementation `_interaction` is used to access the OpenID Connect request parameters.</span></span> <span data-ttu-id="d08e9-183">您 `acr_values` 可以使用屬性來存取參數 `AcrValues` 。</span><span class="sxs-lookup"><span data-stu-id="d08e9-183">The `acr_values` parameter is accessed using the `AcrValues` property.</span></span> <span data-ttu-id="d08e9-184">當用戶端使用 set 傳送此 `mfa` 設定時，就可以檢查。</span><span class="sxs-lookup"><span data-stu-id="d08e9-184">As the client sent this with `mfa` set, this can then be checked.</span></span>
+<span data-ttu-id="d08e9-182">在 `Login` 方法中， `IIdentityServerInteractionService` 會使用介面實作為 `_interaction` 存取 OpenID Connect 要求參數。</span><span class="sxs-lookup"><span data-stu-id="d08e9-182">In the `Login` method, the `IIdentityServerInteractionService` interface implementation `_interaction` is used to access the OpenID Connect request parameters.</span></span> <span data-ttu-id="d08e9-183">您 `acr_values` 可以使用屬性來存取參數 `AcrValues` 。</span><span class="sxs-lookup"><span data-stu-id="d08e9-183">The `acr_values` parameter is accessed using the `AcrValues` property.</span></span> <span data-ttu-id="d08e9-184">當用戶端使用 set 傳送此 `mfa` 設定時，就可以檢查。</span><span class="sxs-lookup"><span data-stu-id="d08e9-184">As the client sent this with `mfa` set, this can then be checked.</span></span>
 
-<span data-ttu-id="d08e9-185">如果需要 MFA，且中的使用者 :::no-loc(ASP.NET Core Identity)::: 已啟用 mfa，則會繼續登入。</span><span class="sxs-lookup"><span data-stu-id="d08e9-185">If MFA is required, and the user in :::no-loc(ASP.NET Core Identity)::: has MFA enabled, then the login continues.</span></span> <span data-ttu-id="d08e9-186">當使用者未啟用 MFA 時，會將使用者重新導向至自訂視圖 *ErrorEnable2FA。*</span><span class="sxs-lookup"><span data-stu-id="d08e9-186">When the user has no MFA enabled, the user is redirected to the custom view *ErrorEnable2FA.cshtml* .</span></span> <span data-ttu-id="d08e9-187">然後 :::no-loc(ASP.NET Core Identity)::: 將使用者登入。</span><span class="sxs-lookup"><span data-stu-id="d08e9-187">Then :::no-loc(ASP.NET Core Identity)::: signs the user in.</span></span>
+<span data-ttu-id="d08e9-185">如果需要 MFA，且中的使用者 ASP.NET Core Identity 已啟用 mfa，則會繼續登入。</span><span class="sxs-lookup"><span data-stu-id="d08e9-185">If MFA is required, and the user in ASP.NET Core Identity has MFA enabled, then the login continues.</span></span> <span data-ttu-id="d08e9-186">當使用者未啟用 MFA 時，會將使用者重新導向至自訂視圖 *ErrorEnable2FA。*</span><span class="sxs-lookup"><span data-stu-id="d08e9-186">When the user has no MFA enabled, the user is redirected to the custom view *ErrorEnable2FA.cshtml* .</span></span> <span data-ttu-id="d08e9-187">然後 ASP.NET Core Identity 將使用者登入。</span><span class="sxs-lookup"><span data-stu-id="d08e9-187">Then ASP.NET Core Identity signs the user in.</span></span>
 
 ```csharp
 //
@@ -358,7 +358,7 @@ public async Task<IActionResult> Login(LoginInputModel model)
     // code omitted for brevity
 ```
 
-<span data-ttu-id="d08e9-188">`ExternalLoginCallback`方法的運作方式類似本機 :::no-loc(Identity)::: 登入。</span><span class="sxs-lookup"><span data-stu-id="d08e9-188">The `ExternalLoginCallback` method works like the local :::no-loc(Identity)::: login.</span></span> <span data-ttu-id="d08e9-189">`AcrValues`會檢查屬性的 `mfa` 值。</span><span class="sxs-lookup"><span data-stu-id="d08e9-189">The `AcrValues` property is checked for the `mfa` value.</span></span> <span data-ttu-id="d08e9-190">如果 `mfa` 有此值，則會在登入完成之前強制 MFA (例如，重新導向至 `ErrorEnable2FA` view) 。</span><span class="sxs-lookup"><span data-stu-id="d08e9-190">If the `mfa` value is present, MFA is forced before the login completes (for example, redirected to the `ErrorEnable2FA` view).</span></span>
+<span data-ttu-id="d08e9-188">`ExternalLoginCallback`方法的運作方式類似本機 Identity 登入。</span><span class="sxs-lookup"><span data-stu-id="d08e9-188">The `ExternalLoginCallback` method works like the local Identity login.</span></span> <span data-ttu-id="d08e9-189">`AcrValues`會檢查屬性的 `mfa` 值。</span><span class="sxs-lookup"><span data-stu-id="d08e9-189">The `AcrValues` property is checked for the `mfa` value.</span></span> <span data-ttu-id="d08e9-190">如果 `mfa` 有此值，則會在登入完成之前強制 MFA (例如，重新導向至 `ErrorEnable2FA` view) 。</span><span class="sxs-lookup"><span data-stu-id="d08e9-190">If the `mfa` value is present, MFA is forced before the login completes (for example, redirected to the `ErrorEnable2FA` view).</span></span>
 
 ```csharp
 //
@@ -414,13 +414,13 @@ public async Task<IActionResult> ExternalLoginCallback(
 <span data-ttu-id="d08e9-191">如果使用者已經登入，用戶端應用程式：</span><span class="sxs-lookup"><span data-stu-id="d08e9-191">If the user is already logged in, the client app:</span></span>
 
 * <span data-ttu-id="d08e9-192">仍會驗證宣告 `amr` 。</span><span class="sxs-lookup"><span data-stu-id="d08e9-192">Still validates the `amr` claim.</span></span>
-* <span data-ttu-id="d08e9-193">可以使用視圖的連結來設定 MFA :::no-loc(ASP.NET Core Identity)::: 。</span><span class="sxs-lookup"><span data-stu-id="d08e9-193">Can set up the MFA with a link to the :::no-loc(ASP.NET Core Identity)::: view.</span></span>
+* <span data-ttu-id="d08e9-193">可以使用視圖的連結來設定 MFA ASP.NET Core Identity 。</span><span class="sxs-lookup"><span data-stu-id="d08e9-193">Can set up the MFA with a link to the ASP.NET Core Identity view.</span></span>
 
 ![acr_values-1](mfa/_static/acr_values-1.png)
 
 ## <a name="force-aspnet-core-openid-connect-client-to-require-mfa"></a><span data-ttu-id="d08e9-195">強制 ASP.NET Core OpenID Connect 用戶端要求 MFA</span><span class="sxs-lookup"><span data-stu-id="d08e9-195">Force ASP.NET Core OpenID Connect client to require MFA</span></span>
 
-<span data-ttu-id="d08e9-196">此範例示範如何使用 :::no-loc(Razor)::: OpenID Connect 登入 ASP.NET Core 頁面應用程式，可以要求使用者使用 MFA 進行驗證。</span><span class="sxs-lookup"><span data-stu-id="d08e9-196">This example shows how an ASP.NET Core :::no-loc(Razor)::: Page app, which uses OpenID Connect to sign in, can require that users have authenticated using MFA.</span></span>
+<span data-ttu-id="d08e9-196">此範例示範如何使用 Razor OpenID Connect 登入 ASP.NET Core 頁面應用程式，可以要求使用者使用 MFA 進行驗證。</span><span class="sxs-lookup"><span data-stu-id="d08e9-196">This example shows how an ASP.NET Core Razor Page app, which uses OpenID Connect to sign in, can require that users have authenticated using MFA.</span></span>
 
 <span data-ttu-id="d08e9-197">若要驗證 MFA 需求， `IAuthorizationRequirement` 會建立一個需求。</span><span class="sxs-lookup"><span data-stu-id="d08e9-197">To validate the MFA requirement, an `IAuthorizationRequirement` requirement is created.</span></span> <span data-ttu-id="d08e9-198">這會使用需要 MFA 的原則新增到頁面。</span><span class="sxs-lookup"><span data-stu-id="d08e9-198">This will be added to the pages using a policy that requires MFA.</span></span>
 
@@ -437,7 +437,7 @@ namespace AspNetCoreRequireMfaOidc
 
 <span data-ttu-id="d08e9-201">傳回的值取決於身分識別如何進行驗證，以及如何在 OpenID Connect 伺服器上執行。</span><span class="sxs-lookup"><span data-stu-id="d08e9-201">The returned value depends on how the identity authenticated and on the OpenID Connect server implementation.</span></span>
 
-<span data-ttu-id="d08e9-202">會 `AuthorizationHandler` 使用 `RequireMfa` 需求並驗證宣告 `amr` 。</span><span class="sxs-lookup"><span data-stu-id="d08e9-202">The `AuthorizationHandler` uses the `RequireMfa` requirement and validates the `amr` claim.</span></span> <span data-ttu-id="d08e9-203">OpenID Connect 伺服器可以搭配使用 Server4 來執行 :::no-loc(Identity)::: :::no-loc(ASP.NET Core Identity)::: 。</span><span class="sxs-lookup"><span data-stu-id="d08e9-203">The OpenID Connect server can be implemented using :::no-loc(Identity):::Server4 with :::no-loc(ASP.NET Core Identity):::.</span></span> <span data-ttu-id="d08e9-204">當使用者使用 TOTP 進行登入時， `amr` 會傳回具有 MFA 值的宣告。</span><span class="sxs-lookup"><span data-stu-id="d08e9-204">When a user logs in using TOTP, the `amr` claim is returned with an MFA value.</span></span> <span data-ttu-id="d08e9-205">如果使用不同的 OpenID Connect server 執行或不同的 MFA 類型，宣告 `amr` 將會有不同的值，或可以有不同的值。</span><span class="sxs-lookup"><span data-stu-id="d08e9-205">If using a different OpenID Connect server implementation or a different MFA type, the `amr` claim will, or can, have a different value.</span></span> <span data-ttu-id="d08e9-206">您也必須延伸程式碼，才能接受此程式碼。</span><span class="sxs-lookup"><span data-stu-id="d08e9-206">The code must be extended to accept this as well.</span></span>
+<span data-ttu-id="d08e9-202">會 `AuthorizationHandler` 使用 `RequireMfa` 需求並驗證宣告 `amr` 。</span><span class="sxs-lookup"><span data-stu-id="d08e9-202">The `AuthorizationHandler` uses the `RequireMfa` requirement and validates the `amr` claim.</span></span> <span data-ttu-id="d08e9-203">OpenID Connect 伺服器可以搭配使用 Server4 來執行 Identity ASP.NET Core Identity 。</span><span class="sxs-lookup"><span data-stu-id="d08e9-203">The OpenID Connect server can be implemented using IdentityServer4 with ASP.NET Core Identity.</span></span> <span data-ttu-id="d08e9-204">當使用者使用 TOTP 進行登入時， `amr` 會傳回具有 MFA 值的宣告。</span><span class="sxs-lookup"><span data-stu-id="d08e9-204">When a user logs in using TOTP, the `amr` claim is returned with an MFA value.</span></span> <span data-ttu-id="d08e9-205">如果使用不同的 OpenID Connect server 執行或不同的 MFA 類型，宣告 `amr` 將會有不同的值，或可以有不同的值。</span><span class="sxs-lookup"><span data-stu-id="d08e9-205">If using a different OpenID Connect server implementation or a different MFA type, the `amr` claim will, or can, have a different value.</span></span> <span data-ttu-id="d08e9-206">您也必須延伸程式碼，才能接受此程式碼。</span><span class="sxs-lookup"><span data-stu-id="d08e9-206">The code must be extended to accept this as well.</span></span>
 
 ```csharp
 using Microsoft.AspNetCore.Authorization;
@@ -477,24 +477,24 @@ namespace AspNetCoreRequireMfaOidc
 ```csharp
 public void ConfigureServices(IServiceCollection services)
 {
-    services.ConfigureApplication:::no-loc(Cookie):::(options =>
-        options.:::no-loc(Cookie):::.SecurePolicy =
-            :::no-loc(Cookie):::SecurePolicy.Always);
+    services.ConfigureApplicationCookie(options =>
+        options.Cookie.SecurePolicy =
+            CookieSecurePolicy.Always);
 
     services.AddSingleton<IAuthorizationHandler, RequireMfaHandler>();
 
     services.AddAuthentication(options =>
     {
         options.DefaultScheme =
-            :::no-loc(Cookie):::AuthenticationDefaults.AuthenticationScheme;
+            CookieAuthenticationDefaults.AuthenticationScheme;
         options.DefaultChallengeScheme =
             OpenIdConnectDefaults.AuthenticationScheme;
     })
-    .Add:::no-loc(Cookie):::()
+    .AddCookie()
     .AddOpenIdConnect(options =>
     {
         options.SignInScheme =
-            :::no-loc(Cookie):::AuthenticationDefaults.AuthenticationScheme;
+            CookieAuthenticationDefaults.AuthenticationScheme;
         options.Authority = "https://localhost:44352";
         options.RequireHttpsMetadata = true;
         options.ClientId = "AspNetCoreRequireMfaOidc";
@@ -513,11 +513,11 @@ public void ConfigureServices(IServiceCollection services)
         });
     });
 
-    services.Add:::no-loc(Razor):::Pages();
+    services.AddRazorPages();
 }
 ```
 
-<span data-ttu-id="d08e9-210">然後，此原則會 :::no-loc(Razor)::: 視需要在頁面中使用。</span><span class="sxs-lookup"><span data-stu-id="d08e9-210">This policy is then used in the :::no-loc(Razor)::: page as required.</span></span> <span data-ttu-id="d08e9-211">您也可以全域為整個應用程式新增原則。</span><span class="sxs-lookup"><span data-stu-id="d08e9-211">The policy could be added globally for the entire app as well.</span></span>
+<span data-ttu-id="d08e9-210">然後，此原則會 Razor 視需要在頁面中使用。</span><span class="sxs-lookup"><span data-stu-id="d08e9-210">This policy is then used in the Razor page as required.</span></span> <span data-ttu-id="d08e9-211">您也可以全域為整個應用程式新增原則。</span><span class="sxs-lookup"><span data-stu-id="d08e9-211">The policy could be added globally for the entire app as well.</span></span>
 
 ```csharp
 using System;
@@ -526,7 +526,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.:::no-loc(Razor):::Pages;
+using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Logging;
 
 namespace AspNetCoreRequireMfaOidc.Pages
@@ -577,7 +577,7 @@ You require MFA to login here
 
     ![require_mfa_oidc_03.png](mfa/_static/require_mfa_oidc_03.png)
 
-<span data-ttu-id="d08e9-225">或者，使用 OTP 登入 :::no-loc(Identity)::: ：</span><span class="sxs-lookup"><span data-stu-id="d08e9-225">Alternatively, logging in using OTP with :::no-loc(Identity)::::</span></span>
+<span data-ttu-id="d08e9-225">或者，使用 OTP 登入 Identity ：</span><span class="sxs-lookup"><span data-stu-id="d08e9-225">Alternatively, logging in using OTP with Identity:</span></span>
 
 ![require_mfa_oidc_01.png](mfa/_static/require_mfa_oidc_01.png)
 

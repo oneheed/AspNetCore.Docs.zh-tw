@@ -5,17 +5,17 @@ description: 探索以個別使用者帳戶建立之 ASP.NET Core 專案為基�
 ms.author: riande
 ms.date: 12/11/2019
 no-loc:
-- ':::no-loc(appsettings.json):::'
-- ':::no-loc(ASP.NET Core Identity):::'
-- ':::no-loc(cookie):::'
-- ':::no-loc(Cookie):::'
-- ':::no-loc(Blazor):::'
-- ':::no-loc(Blazor Server):::'
-- ':::no-loc(Blazor WebAssembly):::'
-- ':::no-loc(Identity):::'
-- ":::no-loc(Let's Encrypt):::"
-- ':::no-loc(Razor):::'
-- ':::no-loc(SignalR):::'
+- 'appsettings.json'
+- 'ASP.NET Core Identity'
+- 'cookie'
+- 'Cookie'
+- 'Blazor'
+- 'Blazor Server'
+- 'Blazor WebAssembly'
+- 'Identity'
+- "Let's Encrypt"
+- 'Razor'
+- 'SignalR'
 uid: security/authentication/individual
 ms.openlocfilehash: 656006396de120b7feae6f2e08b5dad3b5a170b5
 ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
@@ -26,7 +26,7 @@ ms.locfileid: "93053341"
 ---
 # <a name="articles-based-on-aspnet-core-projects-created-with-individual-user-accounts"></a><span data-ttu-id="273fc-103">以個別使用者帳戶建立的 ASP.NET Core 專案為基礎的文章</span><span class="sxs-lookup"><span data-stu-id="273fc-103">Articles based on ASP.NET Core projects created with individual user accounts</span></span>
 
-<span data-ttu-id="273fc-104">:::no-loc(ASP.NET Core Identity)::: 包含在具有「個別使用者帳戶」選項 Visual Studio 的專案範本中。</span><span class="sxs-lookup"><span data-stu-id="273fc-104">:::no-loc(ASP.NET Core Identity)::: is included in project templates in Visual Studio with the "Individual User Accounts" option.</span></span>
+<span data-ttu-id="273fc-104">ASP.NET Core Identity 包含在具有「個別使用者帳戶」選項 Visual Studio 的專案範本中。</span><span class="sxs-lookup"><span data-stu-id="273fc-104">ASP.NET Core Identity is included in project templates in Visual Studio with the "Individual User Accounts" option.</span></span>
 
 <span data-ttu-id="273fc-105">驗證範本可在 .NET Core CLI 中提供 `-au Individual` ：</span><span class="sxs-lookup"><span data-stu-id="273fc-105">The authentication templates are available in .NET Core CLI with `-au Individual`:</span></span>
 

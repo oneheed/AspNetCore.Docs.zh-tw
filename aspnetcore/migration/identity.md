@@ -1,21 +1,21 @@
 ---
-title: '遷移驗證和 :::no-loc(Identity)::: ASP.NET Core'
+title: '遷移驗證和 Identity ASP.NET Core'
 author: ardalis
 description: 瞭解如何將 ASP.NET MVC 專案中的驗證和身分識別遷移至 ASP.NET Core MVC 專案。
 ms.author: riande
 ms.date: 3/22/2020
 no-loc:
-- ':::no-loc(appsettings.json):::'
-- ':::no-loc(ASP.NET Core Identity):::'
-- ':::no-loc(cookie):::'
-- ':::no-loc(Cookie):::'
-- ':::no-loc(Blazor):::'
-- ':::no-loc(Blazor Server):::'
-- ':::no-loc(Blazor WebAssembly):::'
-- ':::no-loc(Identity):::'
-- ":::no-loc(Let's Encrypt):::"
-- ':::no-loc(Razor):::'
-- ':::no-loc(SignalR):::'
+- 'appsettings.json'
+- 'ASP.NET Core Identity'
+- 'cookie'
+- 'Cookie'
+- 'Blazor'
+- 'Blazor Server'
+- 'Blazor WebAssembly'
+- 'Identity'
+- "Let's Encrypt"
+- 'Razor'
+- 'SignalR'
 uid: migration/identity
 ms.openlocfilehash: 8ceff0596c069d815c38b9bb526477a9d1430951
 ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
@@ -24,23 +24,23 @@ ms.contentlocale: zh-TW
 ms.lasthandoff: 10/30/2020
 ms.locfileid: "93060647"
 ---
-# <a name="migrate-authentication-and-no-locidentity-to-aspnet-core"></a><span data-ttu-id="a7d13-103">遷移驗證和 :::no-loc(Identity)::: ASP.NET Core</span><span class="sxs-lookup"><span data-stu-id="a7d13-103">Migrate Authentication and :::no-loc(Identity)::: to ASP.NET Core</span></span>
+# <a name="migrate-authentication-and-no-locidentity-to-aspnet-core"></a><span data-ttu-id="a7d13-103">遷移驗證和 Identity ASP.NET Core</span><span class="sxs-lookup"><span data-stu-id="a7d13-103">Migrate Authentication and Identity to ASP.NET Core</span></span>
 
 <span data-ttu-id="a7d13-104">作者：[Steve Smith](https://ardalis.com/)</span><span class="sxs-lookup"><span data-stu-id="a7d13-104">By [Steve Smith](https://ardalis.com/)</span></span>
 
 <span data-ttu-id="a7d13-105">在前一篇文章中，我們 [已將設定從 ASP.NET mvc 專案遷移至 ASP.NET CORE mvc](xref:migration/configuration)。</span><span class="sxs-lookup"><span data-stu-id="a7d13-105">In the previous article, we [migrated configuration from an ASP.NET MVC project to ASP.NET Core MVC](xref:migration/configuration).</span></span> <span data-ttu-id="a7d13-106">在本文中，我們會遷移註冊、登入和使用者管理功能。</span><span class="sxs-lookup"><span data-stu-id="a7d13-106">In this article, we migrate the registration, login, and user management features.</span></span>
 
-## <a name="configure-no-locidentity-and-membership"></a><span data-ttu-id="a7d13-107">設定 :::no-loc(Identity)::: 和成員資格</span><span class="sxs-lookup"><span data-stu-id="a7d13-107">Configure :::no-loc(Identity)::: and Membership</span></span>
+## <a name="configure-no-locidentity-and-membership"></a><span data-ttu-id="a7d13-107">設定 Identity 和成員資格</span><span class="sxs-lookup"><span data-stu-id="a7d13-107">Configure Identity and Membership</span></span>
 
-<span data-ttu-id="a7d13-108">在 ASP.NET MVC 中，會使用 :::no-loc(Identity)::: *Startup.Auth.cs* 和 *:::no-loc(Identity)::: Config.cs* 中的 ASP.NET （位於 *App_Start* 資料夾）來設定驗證和身分識別功能。</span><span class="sxs-lookup"><span data-stu-id="a7d13-108">In ASP.NET MVC, authentication and identity features are configured using ASP.NET :::no-loc(Identity)::: in *Startup.Auth.cs* and *:::no-loc(Identity):::Config.cs* , located in the *App_Start* folder.</span></span> <span data-ttu-id="a7d13-109">在 ASP.NET Core MVC 中，這些功能是在 *Startup.cs* 中設定。</span><span class="sxs-lookup"><span data-stu-id="a7d13-109">In ASP.NET Core MVC, these features are configured in *Startup.cs* .</span></span>
+<span data-ttu-id="a7d13-108">在 ASP.NET MVC 中，會使用 Identity *Startup.Auth.cs* 和 *Identity Config.cs* 中的 ASP.NET （位於 *App_Start* 資料夾）來設定驗證和身分識別功能。</span><span class="sxs-lookup"><span data-stu-id="a7d13-108">In ASP.NET MVC, authentication and identity features are configured using ASP.NET Identity in *Startup.Auth.cs* and *IdentityConfig.cs* , located in the *App_Start* folder.</span></span> <span data-ttu-id="a7d13-109">在 ASP.NET Core MVC 中，這些功能是在 *Startup.cs* 中設定。</span><span class="sxs-lookup"><span data-stu-id="a7d13-109">In ASP.NET Core MVC, these features are configured in *Startup.cs* .</span></span>
 
 <span data-ttu-id="a7d13-110">安裝下列 NuGet 封裝：</span><span class="sxs-lookup"><span data-stu-id="a7d13-110">Install the following NuGet packages:</span></span>
 
-* `Microsoft.AspNetCore.:::no-loc(Identity):::.EntityFrameworkCore`
-* `Microsoft.AspNetCore.Authentication.:::no-loc(Cookie):::s`
+* `Microsoft.AspNetCore.Identity.EntityFrameworkCore`
+* `Microsoft.AspNetCore.Authentication.Cookies`
 * `Microsoft.EntityFrameworkCore.SqlServer`
 
-<span data-ttu-id="a7d13-111">在 *Startup.cs* 中，更新 `Startup.ConfigureServices` 方法以使用 Entity Framework 和 :::no-loc(Identity)::: 服務：</span><span class="sxs-lookup"><span data-stu-id="a7d13-111">In *Startup.cs* , update the `Startup.ConfigureServices` method to use Entity Framework and :::no-loc(Identity)::: services:</span></span>
+<span data-ttu-id="a7d13-111">在 *Startup.cs* 中，更新 `Startup.ConfigureServices` 方法以使用 Entity Framework 和 Identity 服務：</span><span class="sxs-lookup"><span data-stu-id="a7d13-111">In *Startup.cs* , update the `Startup.ConfigureServices` method to use Entity Framework and Identity services:</span></span>
 
 ```csharp
 public void ConfigureServices(IServiceCollection services)
@@ -49,7 +49,7 @@ public void ConfigureServices(IServiceCollection services)
     services.AddDbContext<ApplicationDbContext>(options =>
         options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
 
-    services.Add:::no-loc(Identity):::<ApplicationUser, :::no-loc(Identity):::Role>()
+    services.AddIdentity<ApplicationUser, IdentityRole>()
         .AddEntityFrameworkStores<ApplicationDbContext>()
         .AddDefaultTokenProviders();
 
@@ -57,16 +57,16 @@ public void ConfigureServices(IServiceCollection services)
 }
 ```
 
-<span data-ttu-id="a7d13-112">此時，上述程式碼中所參考的兩種類型尚未從 ASP.NET MVC 專案中遷移： `ApplicationDbContext` 和 `ApplicationUser` 。</span><span class="sxs-lookup"><span data-stu-id="a7d13-112">At this point, there are two types referenced in the above code that we haven't yet migrated from the ASP.NET MVC project: `ApplicationDbContext` and `ApplicationUser`.</span></span> <span data-ttu-id="a7d13-113">在 ASP.NET Core 專案中建立新的 [ *模型* ] 資料夾，並將兩個類別新增至對應至這些類型的類別。</span><span class="sxs-lookup"><span data-stu-id="a7d13-113">Create a new *Models* folder in the ASP.NET Core project, and add two classes to it corresponding to these types.</span></span> <span data-ttu-id="a7d13-114">您會在 */Models/ :::no-loc(Identity)::: Models.cs* 中找到這些類別的 ASP.NET MVC 版本，但我們會在已遷移的專案中針對每個類別使用一個檔案，因為這比較清楚。</span><span class="sxs-lookup"><span data-stu-id="a7d13-114">You will find the ASP.NET MVC versions of these classes in */Models/:::no-loc(Identity):::Models.cs* , but we will use one file per class in the migrated project since that's more clear.</span></span>
+<span data-ttu-id="a7d13-112">此時，上述程式碼中所參考的兩種類型尚未從 ASP.NET MVC 專案中遷移： `ApplicationDbContext` 和 `ApplicationUser` 。</span><span class="sxs-lookup"><span data-stu-id="a7d13-112">At this point, there are two types referenced in the above code that we haven't yet migrated from the ASP.NET MVC project: `ApplicationDbContext` and `ApplicationUser`.</span></span> <span data-ttu-id="a7d13-113">在 ASP.NET Core 專案中建立新的 [ *模型* ] 資料夾，並將兩個類別新增至對應至這些類型的類別。</span><span class="sxs-lookup"><span data-stu-id="a7d13-113">Create a new *Models* folder in the ASP.NET Core project, and add two classes to it corresponding to these types.</span></span> <span data-ttu-id="a7d13-114">您會在 */Models/ Identity Models.cs* 中找到這些類別的 ASP.NET MVC 版本，但我們會在已遷移的專案中針對每個類別使用一個檔案，因為這比較清楚。</span><span class="sxs-lookup"><span data-stu-id="a7d13-114">You will find the ASP.NET MVC versions of these classes in */Models/IdentityModels.cs* , but we will use one file per class in the migrated project since that's more clear.</span></span>
 
 <span data-ttu-id="a7d13-115">*ApplicationUser.cs* ：</span><span class="sxs-lookup"><span data-stu-id="a7d13-115">*ApplicationUser.cs* :</span></span>
 
 ```csharp
-using Microsoft.AspNetCore.:::no-loc(Identity):::.EntityFrameworkCore;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 
 namespace NewMvcProject.Models
 {
-  public class ApplicationUser : :::no-loc(Identity):::User
+  public class ApplicationUser : IdentityUser
   {
   }
 }
@@ -75,12 +75,12 @@ namespace NewMvcProject.Models
 <span data-ttu-id="a7d13-116">*ApplicationDbCoNtext.cs* ：</span><span class="sxs-lookup"><span data-stu-id="a7d13-116">*ApplicationDbContext.cs* :</span></span>
 
 ```csharp
-using Microsoft.AspNetCore.:::no-loc(Identity):::.EntityFrameworkCore;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.Data.Entity;
 
 namespace NewMvcProject.Models
 {
-    public class ApplicationDbContext : :::no-loc(Identity):::DbContext<ApplicationUser>
+    public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
             : base(options)
@@ -90,8 +90,8 @@ namespace NewMvcProject.Models
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);
-            // Customize the :::no-loc(ASP.NET Core Identity)::: model and override the defaults if needed.
-            // For example, you can rename the :::no-loc(ASP.NET Core Identity)::: table names and more.
+            // Customize the ASP.NET Core Identity model and override the defaults if needed.
+            // For example, you can rename the ASP.NET Core Identity table names and more.
             // Add your customizations after calling base.OnModelCreating(builder);
         }
     }
@@ -104,18 +104,18 @@ namespace NewMvcProject.Models
 
 ```csharp
 using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.:::no-loc(Identity):::;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 ```
 
-<span data-ttu-id="a7d13-121">我們的應用程式現在已準備好支援驗證和 :::no-loc(Identity)::: 服務。</span><span class="sxs-lookup"><span data-stu-id="a7d13-121">Our app is now ready to support authentication and :::no-loc(Identity)::: services.</span></span> <span data-ttu-id="a7d13-122">只需要將這些功能公開給使用者即可。</span><span class="sxs-lookup"><span data-stu-id="a7d13-122">It just needs to have these features exposed to users.</span></span>
+<span data-ttu-id="a7d13-121">我們的應用程式現在已準備好支援驗證和 Identity 服務。</span><span class="sxs-lookup"><span data-stu-id="a7d13-121">Our app is now ready to support authentication and Identity services.</span></span> <span data-ttu-id="a7d13-122">只需要將這些功能公開給使用者即可。</span><span class="sxs-lookup"><span data-stu-id="a7d13-122">It just needs to have these features exposed to users.</span></span>
 
 ## <a name="migrate-registration-and-login-logic"></a><span data-ttu-id="a7d13-123">遷移註冊和登入邏輯</span><span class="sxs-lookup"><span data-stu-id="a7d13-123">Migrate registration and login logic</span></span>
 
-<span data-ttu-id="a7d13-124">透過 :::no-loc(Identity)::: 針對使用 Entity Framework 和 SQL Server 所設定的應用程式和資料存取設定的服務，我們已準備好將註冊和登入的支援新增至應用程式。</span><span class="sxs-lookup"><span data-stu-id="a7d13-124">With :::no-loc(Identity)::: services configured for the app and data access configured using Entity Framework and SQL Server, we're ready to add support for registration and login to the app.</span></span> <span data-ttu-id="a7d13-125">回想一下，稍 [早在遷移過程中](xref:migration/mvc#migrate-the-layout-file)，我們會將 *_Layout* 的 *_LoginPartial* 參考批註化。</span><span class="sxs-lookup"><span data-stu-id="a7d13-125">Recall that [earlier in the migration process](xref:migration/mvc#migrate-the-layout-file) we commented out a reference to *_LoginPartial* in *_Layout.cshtml* .</span></span> <span data-ttu-id="a7d13-126">現在可以回到該程式碼、將它取消批註，然後加入必要的控制器和 views 來支援登入功能。</span><span class="sxs-lookup"><span data-stu-id="a7d13-126">Now it's time to return to that code, uncomment it, and add in the necessary controllers and views to support login functionality.</span></span>
+<span data-ttu-id="a7d13-124">透過 Identity 針對使用 Entity Framework 和 SQL Server 所設定的應用程式和資料存取設定的服務，我們已準備好將註冊和登入的支援新增至應用程式。</span><span class="sxs-lookup"><span data-stu-id="a7d13-124">With Identity services configured for the app and data access configured using Entity Framework and SQL Server, we're ready to add support for registration and login to the app.</span></span> <span data-ttu-id="a7d13-125">回想一下，稍 [早在遷移過程中](xref:migration/mvc#migrate-the-layout-file)，我們會將 *_Layout* 的 *_LoginPartial* 參考批註化。</span><span class="sxs-lookup"><span data-stu-id="a7d13-125">Recall that [earlier in the migration process](xref:migration/mvc#migrate-the-layout-file) we commented out a reference to *_LoginPartial* in *_Layout.cshtml* .</span></span> <span data-ttu-id="a7d13-126">現在可以回到該程式碼、將它取消批註，然後加入必要的控制器和 views 來支援登入功能。</span><span class="sxs-lookup"><span data-stu-id="a7d13-126">Now it's time to return to that code, uncomment it, and add in the necessary controllers and views to support login functionality.</span></span>
 
 <span data-ttu-id="a7d13-127">將 `@Html.Partial` *_Layout* 中的行取消批註：</span><span class="sxs-lookup"><span data-stu-id="a7d13-127">Uncomment the `@Html.Partial` line in *_Layout.cshtml* :</span></span>
 
@@ -127,7 +127,7 @@ using Microsoft.Extensions.DependencyInjection;
 </div>
 ```
 
-<span data-ttu-id="a7d13-128">現在，將 :::no-loc(Razor)::: 名為 *_LoginPartial* 的新視圖新增至 *Views/Shared* 資料夾：</span><span class="sxs-lookup"><span data-stu-id="a7d13-128">Now, add a new :::no-loc(Razor)::: view called *_LoginPartial* to the *Views/Shared* folder:</span></span>
+<span data-ttu-id="a7d13-128">現在，將 Razor 名為 *_LoginPartial* 的新視圖新增至 *Views/Shared* 資料夾：</span><span class="sxs-lookup"><span data-stu-id="a7d13-128">Now, add a new Razor view called *_LoginPartial* to the *Views/Shared* folder:</span></span>
 
 <span data-ttu-id="a7d13-129">以下列程式碼更新 *_LoginPartial，* (取代) 的所有內容：</span><span class="sxs-lookup"><span data-stu-id="a7d13-129">Update *_LoginPartial.cshtml* with the following code (replace all of its contents):</span></span>
 
@@ -161,4 +161,4 @@ else
 
 ## <a name="summary"></a><span data-ttu-id="a7d13-131">摘要</span><span class="sxs-lookup"><span data-stu-id="a7d13-131">Summary</span></span>
 
-<span data-ttu-id="a7d13-132">ASP.NET Core 引進 ASP.NET 功能的變更 :::no-loc(Identity)::: 。</span><span class="sxs-lookup"><span data-stu-id="a7d13-132">ASP.NET Core introduces changes to the ASP.NET :::no-loc(Identity)::: features.</span></span> <span data-ttu-id="a7d13-133">在本文中，您已瞭解如何將 ASP.NET 的驗證和使用者管理功能遷移 :::no-loc(Identity)::: 至 ASP.NET Core。</span><span class="sxs-lookup"><span data-stu-id="a7d13-133">In this article, you have seen how to migrate the authentication and user management features of ASP.NET :::no-loc(Identity)::: to ASP.NET Core.</span></span>
+<span data-ttu-id="a7d13-132">ASP.NET Core 引進 ASP.NET 功能的變更 Identity 。</span><span class="sxs-lookup"><span data-stu-id="a7d13-132">ASP.NET Core introduces changes to the ASP.NET Identity features.</span></span> <span data-ttu-id="a7d13-133">在本文中，您已瞭解如何將 ASP.NET 的驗證和使用者管理功能遷移 Identity 至 ASP.NET Core。</span><span class="sxs-lookup"><span data-stu-id="a7d13-133">In this article, you have seen how to migrate the authentication and user management features of ASP.NET Identity to ASP.NET Core.</span></span>

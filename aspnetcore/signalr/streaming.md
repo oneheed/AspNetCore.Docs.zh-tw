@@ -1,5 +1,5 @@
 ---
-title: '在 ASP.NET Core 中使用串流 :::no-loc(SignalR):::'
+title: '在 ASP.NET Core 中使用串流 SignalR'
 author: bradygaster
 description: 瞭解如何在用戶端與伺服器之間串流資料。
 monikerRange: '>= aspnetcore-2.1'
@@ -7,17 +7,17 @@ ms.author: bradyg
 ms.custom: mvc, devx-track-js
 ms.date: 10/29/2020
 no-loc:
-- ':::no-loc(appsettings.json):::'
-- ':::no-loc(ASP.NET Core Identity):::'
-- ':::no-loc(cookie):::'
-- ':::no-loc(Cookie):::'
-- ':::no-loc(Blazor):::'
-- ':::no-loc(Blazor Server):::'
-- ':::no-loc(Blazor WebAssembly):::'
-- ':::no-loc(Identity):::'
-- ":::no-loc(Let's Encrypt):::"
-- ':::no-loc(Razor):::'
-- ':::no-loc(SignalR):::'
+- 'appsettings.json'
+- 'ASP.NET Core Identity'
+- 'cookie'
+- 'Cookie'
+- 'Blazor'
+- 'Blazor Server'
+- 'Blazor WebAssembly'
+- 'Identity'
+- "Let's Encrypt"
+- 'Razor'
+- 'SignalR'
 uid: signalr/streaming
 ms.openlocfilehash: b07c280f271ccdd525128b973da065001a5cf0ed
 ms.sourcegitcommit: 0d40fc4932531ce13fc4ee9432144584e03c2f1c
@@ -26,19 +26,19 @@ ms.contentlocale: zh-TW
 ms.lasthandoff: 10/30/2020
 ms.locfileid: "93062437"
 ---
-# <a name="use-streaming-in-aspnet-core-no-locsignalr"></a><span data-ttu-id="fd90b-103">在 ASP.NET Core 中使用串流 :::no-loc(SignalR):::</span><span class="sxs-lookup"><span data-stu-id="fd90b-103">Use streaming in ASP.NET Core :::no-loc(SignalR):::</span></span>
+# <a name="use-streaming-in-aspnet-core-no-locsignalr"></a><span data-ttu-id="fd90b-103">在 ASP.NET Core 中使用串流 SignalR</span><span class="sxs-lookup"><span data-stu-id="fd90b-103">Use streaming in ASP.NET Core SignalR</span></span>
 
 <span data-ttu-id="fd90b-104">依 [Brennan Conroy](https://github.com/BrennanConroy)</span><span class="sxs-lookup"><span data-stu-id="fd90b-104">By [Brennan Conroy](https://github.com/BrennanConroy)</span></span>
 
 ::: moniker range=">= aspnetcore-3.0"
 
-<span data-ttu-id="fd90b-105">ASP.NET Core :::no-loc(SignalR)::: 支援從用戶端到伺服器，以及從伺服器到用戶端的串流。</span><span class="sxs-lookup"><span data-stu-id="fd90b-105">ASP.NET Core :::no-loc(SignalR)::: supports streaming from client to server and from server to client.</span></span> <span data-ttu-id="fd90b-106">這適用于資料片段隨時間抵達的案例。</span><span class="sxs-lookup"><span data-stu-id="fd90b-106">This is useful for scenarios where fragments of data arrive over time.</span></span> <span data-ttu-id="fd90b-107">串流處理時，每個片段會在用戶端或伺服器變成可用時立即傳送給用戶端或伺服器，而不是等候所有資料變成可用。</span><span class="sxs-lookup"><span data-stu-id="fd90b-107">When streaming, each fragment is sent to the client or server as soon as it becomes available, rather than waiting for all of the data to become available.</span></span>
+<span data-ttu-id="fd90b-105">ASP.NET Core SignalR 支援從用戶端到伺服器，以及從伺服器到用戶端的串流。</span><span class="sxs-lookup"><span data-stu-id="fd90b-105">ASP.NET Core SignalR supports streaming from client to server and from server to client.</span></span> <span data-ttu-id="fd90b-106">這適用于資料片段隨時間抵達的案例。</span><span class="sxs-lookup"><span data-stu-id="fd90b-106">This is useful for scenarios where fragments of data arrive over time.</span></span> <span data-ttu-id="fd90b-107">串流處理時，每個片段會在用戶端或伺服器變成可用時立即傳送給用戶端或伺服器，而不是等候所有資料變成可用。</span><span class="sxs-lookup"><span data-stu-id="fd90b-107">When streaming, each fragment is sent to the client or server as soon as it becomes available, rather than waiting for all of the data to become available.</span></span>
 
 ::: moniker-end
 
 ::: moniker range="< aspnetcore-3.0"
 
-<span data-ttu-id="fd90b-108">ASP.NET Core :::no-loc(SignalR)::: 支援伺服器方法的資料流程傳回值。</span><span class="sxs-lookup"><span data-stu-id="fd90b-108">ASP.NET Core :::no-loc(SignalR)::: supports streaming return values of server methods.</span></span> <span data-ttu-id="fd90b-109">這適用于資料片段隨時間抵達的案例。</span><span class="sxs-lookup"><span data-stu-id="fd90b-109">This is useful for scenarios where fragments of data arrive over time.</span></span> <span data-ttu-id="fd90b-110">當傳回值串流至用戶端時，每個片段都會在它變成可用時立即傳送給用戶端，而不是等候所有資料變成可用。</span><span class="sxs-lookup"><span data-stu-id="fd90b-110">When a return value is streamed to the client, each fragment is sent to the client as soon as it becomes available, rather than waiting for all the data to become available.</span></span>
+<span data-ttu-id="fd90b-108">ASP.NET Core SignalR 支援伺服器方法的資料流程傳回值。</span><span class="sxs-lookup"><span data-stu-id="fd90b-108">ASP.NET Core SignalR supports streaming return values of server methods.</span></span> <span data-ttu-id="fd90b-109">這適用于資料片段隨時間抵達的案例。</span><span class="sxs-lookup"><span data-stu-id="fd90b-109">This is useful for scenarios where fragments of data arrive over time.</span></span> <span data-ttu-id="fd90b-110">當傳回值串流至用戶端時，每個片段都會在它變成可用時立即傳送給用戶端，而不是等候所有資料變成可用。</span><span class="sxs-lookup"><span data-stu-id="fd90b-110">When a return value is streamed to the client, each fragment is sent to the client as soon as it becomes available, rather than waiting for all the data to become available.</span></span>
 
 ::: moniker-end
 
@@ -305,7 +305,7 @@ channel.Writer.Complete();
 
 ### <a name="server-to-client-streaming"></a><span data-ttu-id="fd90b-177">伺服器對用戶端串流</span><span class="sxs-lookup"><span data-stu-id="fd90b-177">Server-to-client streaming</span></span>
 
-<span data-ttu-id="fd90b-178">:::no-loc(SignalR):::JAVA 用戶端會使用 `stream` 方法來叫用資料流程方法。</span><span class="sxs-lookup"><span data-stu-id="fd90b-178">The :::no-loc(SignalR)::: Java client uses the `stream` method to invoke streaming methods.</span></span> <span data-ttu-id="fd90b-179">`stream` 接受三個或多個引數：</span><span class="sxs-lookup"><span data-stu-id="fd90b-179">`stream` accepts three or more arguments:</span></span>
+<span data-ttu-id="fd90b-178">SignalRJAVA 用戶端會使用 `stream` 方法來叫用資料流程方法。</span><span class="sxs-lookup"><span data-stu-id="fd90b-178">The SignalR Java client uses the `stream` method to invoke streaming methods.</span></span> <span data-ttu-id="fd90b-179">`stream` 接受三個或多個引數：</span><span class="sxs-lookup"><span data-stu-id="fd90b-179">`stream` accepts three or more arguments:</span></span>
 
 * <span data-ttu-id="fd90b-180">資料流程專案的預期類型。</span><span class="sxs-lookup"><span data-stu-id="fd90b-180">The expected type of the stream items.</span></span>
 * <span data-ttu-id="fd90b-181">中樞方法的名稱。</span><span class="sxs-lookup"><span data-stu-id="fd90b-181">The name of the hub method.</span></span>
@@ -323,7 +323,7 @@ hubConnection.stream(String.class, "ExampleStreamingHubMethod", "Arg1")
 
 ### <a name="client-to-server-streaming"></a><span data-ttu-id="fd90b-185">用戶端對伺服器串流</span><span class="sxs-lookup"><span data-stu-id="fd90b-185">Client-to-server streaming</span></span>
 
-<span data-ttu-id="fd90b-186">:::no-loc(SignalR):::JAVA 用戶端可以在中樞上呼叫用戶端對伺服器串流方法，方法是根據[Observable](https://rxjs-dev.firebaseapp.com/api/index/class/Observable)所叫用 `send` `invoke` `stream` 的中樞方法，將可觀察的引數當作引數傳遞至、或。</span><span class="sxs-lookup"><span data-stu-id="fd90b-186">The :::no-loc(SignalR)::: Java client can call client-to-server streaming methods on hubs by passing in an [Observable](https://rxjs-dev.firebaseapp.com/api/index/class/Observable) as an argument to `send`, `invoke`, or `stream`, depending on the hub method invoked.</span></span>
+<span data-ttu-id="fd90b-186">SignalRJAVA 用戶端可以在中樞上呼叫用戶端對伺服器串流方法，方法是根據[Observable](https://rxjs-dev.firebaseapp.com/api/index/class/Observable)所叫用 `send` `invoke` `stream` 的中樞方法，將可觀察的引數當作引數傳遞至、或。</span><span class="sxs-lookup"><span data-stu-id="fd90b-186">The SignalR Java client can call client-to-server streaming methods on hubs by passing in an [Observable](https://rxjs-dev.firebaseapp.com/api/index/class/Observable) as an argument to `send`, `invoke`, or `stream`, depending on the hub method invoked.</span></span>
 
 ```java
 ReplaySubject<String> stream = ReplaySubject.create();

@@ -1,25 +1,25 @@
 ---
 title: 第7部分：新增欄位
 author: rick-anderson
-description: '頁面上教學課程系列的第7部分 :::no-loc(Razor)::: 。'
+description: '頁面上教學課程系列的第7部分 Razor 。'
 ms.author: riande
 ms.custom: mvc
 ms.date: 09/28/2020
 no-loc:
-- ':::no-loc(Index):::'
-- ':::no-loc(Create):::'
-- ':::no-loc(Delete):::'
-- ':::no-loc(appsettings.json):::'
-- ':::no-loc(ASP.NET Core Identity):::'
-- ':::no-loc(cookie):::'
-- ':::no-loc(Cookie):::'
-- ':::no-loc(Blazor):::'
-- ':::no-loc(Blazor Server):::'
-- ':::no-loc(Blazor WebAssembly):::'
-- ':::no-loc(Identity):::'
-- ":::no-loc(Let's Encrypt):::"
-- ':::no-loc(Razor):::'
-- ':::no-loc(SignalR):::'
+- 'Index'
+- 'Create'
+- 'Delete'
+- 'appsettings.json'
+- 'ASP.NET Core Identity'
+- 'cookie'
+- 'Cookie'
+- 'Blazor'
+- 'Blazor Server'
+- 'Blazor WebAssembly'
+- 'Identity'
+- "Let's Encrypt"
+- 'Razor'
+- 'SignalR'
 uid: tutorials/razor-pages/new-field
 ms.openlocfilehash: 2dca5a9552dd2800212f8cd78ace0578b3d38cdb
 ms.sourcegitcommit: 342588e10ae0054a6d6dc0fd11dae481006be099
@@ -28,13 +28,13 @@ ms.contentlocale: zh-TW
 ms.lasthandoff: 11/07/2020
 ms.locfileid: "94360875"
 ---
-# <a name="part-7-add-a-new-field-to-a-no-locrazor-page-in-aspnet-core"></a><span data-ttu-id="41ee7-103">第7部分： :::no-loc(Razor)::: 在頁面中新增欄位，ASP.NET Core</span><span class="sxs-lookup"><span data-stu-id="41ee7-103">Part 7, add a new field to a :::no-loc(Razor)::: Page in ASP.NET Core</span></span>
+# <a name="part-7-add-a-new-field-to-a-no-locrazor-page-in-aspnet-core"></a><span data-ttu-id="41ee7-103">第7部分： Razor 在頁面中新增欄位，ASP.NET Core</span><span class="sxs-lookup"><span data-stu-id="41ee7-103">Part 7, add a new field to a Razor Page in ASP.NET Core</span></span>
 
 <span data-ttu-id="41ee7-104">作者：[Rick Anderson](https://twitter.com/RickAndMSFT)</span><span class="sxs-lookup"><span data-stu-id="41ee7-104">By [Rick Anderson](https://twitter.com/RickAndMSFT)</span></span>
 
 ::: moniker range=">= aspnetcore-5.0"
 
-<span data-ttu-id="41ee7-105">[檢視或下載範例程式碼](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/tutorials/razor-pages/razor-pages-start/sample/:::no-loc(Razor):::PagesMovie50) ([如何下載](xref:index#how-to-download-a-sample))。</span><span class="sxs-lookup"><span data-stu-id="41ee7-105">[View or download sample code](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/tutorials/razor-pages/razor-pages-start/sample/:::no-loc(Razor):::PagesMovie50) ([how to download](xref:index#how-to-download-a-sample)).</span></span>
+<span data-ttu-id="41ee7-105">[檢視或下載範例程式碼](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/tutorials/razor-pages/razor-pages-start/sample/RazorPagesMovie50) ([如何下載](xref:index#how-to-download-a-sample))。</span><span class="sxs-lookup"><span data-stu-id="41ee7-105">[View or download sample code](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/tutorials/razor-pages/razor-pages-start/sample/RazorPagesMovie50) ([how to download](xref:index#how-to-download-a-sample)).</span></span>
 
 <span data-ttu-id="41ee7-106">在本節中，您會使用 [Entity Framework](/ef/core/get-started/aspnetcore/new-db) Code First 移轉：</span><span class="sxs-lookup"><span data-stu-id="41ee7-106">In this section [Entity Framework](/ef/core/get-started/aspnetcore/new-db) Code First Migrations is used to:</span></span>
 
@@ -52,19 +52,19 @@ ms.locfileid: "94360875"
 
 1. <span data-ttu-id="41ee7-114">開啟 *Models/Movie.cs* 檔案，然後新增 `Rating` 屬性：</span><span class="sxs-lookup"><span data-stu-id="41ee7-114">Open the *Models/Movie.cs* file and add a `Rating` property:</span></span>
 
-   [!code-csharp[](razor-pages-start/sample/:::no-loc(Razor):::PagesMovie50/Models/MovieDateRating.cs?highlight=13&name=snippet)]
+   [!code-csharp[](razor-pages-start/sample/RazorPagesMovie50/Models/MovieDateRating.cs?highlight=13&name=snippet)]
 
 1. <span data-ttu-id="41ee7-115">建置應用程式。</span><span class="sxs-lookup"><span data-stu-id="41ee7-115">Build the app.</span></span>
 
-1. <span data-ttu-id="41ee7-116">編輯 *Pages/電影/ :::no-loc(Index)::: cshtml* ，然後新增 `Rating` 欄位：</span><span class="sxs-lookup"><span data-stu-id="41ee7-116">Edit *Pages/Movies/:::no-loc(Index):::.cshtml* , and add a `Rating` field:</span></span>
+1. <span data-ttu-id="41ee7-116">編輯 *Pages/電影/ Index cshtml* ，然後新增 `Rating` 欄位：</span><span class="sxs-lookup"><span data-stu-id="41ee7-116">Edit *Pages/Movies/Index.cshtml* , and add a `Rating` field:</span></span>
 
    <a name="addrat"></a>
 
-   [!code-cshtml[](razor-pages-start/sample/:::no-loc(Razor):::PagesMovie50/SnapShots/:::no-loc(Index):::Rating.cshtml?highlight=40-42,62-64)]
+   [!code-cshtml[](razor-pages-start/sample/RazorPagesMovie50/SnapShots/IndexRating.cshtml?highlight=40-42,62-64)]
 
 1. <span data-ttu-id="41ee7-117">更新下列頁面：</span><span class="sxs-lookup"><span data-stu-id="41ee7-117">Update the following pages:</span></span>
-   1. <span data-ttu-id="41ee7-118">將 `Rating` 欄位加入至 :::no-loc(Delete)::: 和詳細資料頁面。</span><span class="sxs-lookup"><span data-stu-id="41ee7-118">Add the `Rating` field to the :::no-loc(Delete)::: and Details pages.</span></span>
-   1. <span data-ttu-id="41ee7-119">以欄位更新[ :::no-loc(Create)::: . cshtml](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/tutorials/razor-pages/razor-pages-start/sample/:::no-loc(Razor):::PagesMovie50/Pages/Movies/:::no-loc(Create):::.cshtml) 。 `Rating`</span><span class="sxs-lookup"><span data-stu-id="41ee7-119">Update [:::no-loc(Create):::.cshtml](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/tutorials/razor-pages/razor-pages-start/sample/:::no-loc(Razor):::PagesMovie50/Pages/Movies/:::no-loc(Create):::.cshtml) with a `Rating` field.</span></span>
+   1. <span data-ttu-id="41ee7-118">將 `Rating` 欄位加入至 Delete 和詳細資料頁面。</span><span class="sxs-lookup"><span data-stu-id="41ee7-118">Add the `Rating` field to the Delete and Details pages.</span></span>
+   1. <span data-ttu-id="41ee7-119">以欄位更新[ Create . cshtml](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/tutorials/razor-pages/razor-pages-start/sample/RazorPagesMovie50/Pages/Movies/Create.cshtml) 。 `Rating`</span><span class="sxs-lookup"><span data-stu-id="41ee7-119">Update [Create.cshtml](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/tutorials/razor-pages/razor-pages-start/sample/RazorPagesMovie50/Pages/Movies/Create.cshtml) with a `Rating` field.</span></span>
    1. <span data-ttu-id="41ee7-120">將 `Rating` 欄位新增至 Edit 頁面。</span><span class="sxs-lookup"><span data-stu-id="41ee7-120">Add the `Rating` field to the Edit Page.</span></span>
 
 <span data-ttu-id="41ee7-121">在資料庫更新為包含新欄位之前，應用程式將無法運作。</span><span class="sxs-lookup"><span data-stu-id="41ee7-121">The app won't work until the database is updated to include the new field.</span></span> <span data-ttu-id="41ee7-122">在沒有資料庫更新的情況下執行應用程式，會擲回 `SqlException` ：</span><span class="sxs-lookup"><span data-stu-id="41ee7-122">Running the app without an update to the database throws a `SqlException`:</span></span>
@@ -85,9 +85,9 @@ ms.locfileid: "94360875"
 
 <span data-ttu-id="41ee7-136">更新 `SeedData` 類別，使其提供新資料行的值。</span><span class="sxs-lookup"><span data-stu-id="41ee7-136">Update the `SeedData` class so that it provides a value for the new column.</span></span> <span data-ttu-id="41ee7-137">範例變更如下所示，但對每個區塊進行這項變更 `new Movie` 。</span><span class="sxs-lookup"><span data-stu-id="41ee7-137">A sample change is shown below, but make this change for each `new Movie` block.</span></span>
 
-[!code-csharp[](razor-pages-start/sample/:::no-loc(Razor):::PagesMovie50/Models/SeedDataRating.cs?name=snippet1&highlight=8)]
+[!code-csharp[](razor-pages-start/sample/RazorPagesMovie50/Models/SeedDataRating.cs?name=snippet1&highlight=8)]
 
-<span data-ttu-id="41ee7-138">請參閱[完整的 SeedData.cs 檔案](https://github.com/dotnet/AspNetCore.Docs/blob/master/aspnetcore/tutorials/razor-pages/razor-pages-start/sample/:::no-loc(Razor):::PagesMovie50/Models/SeedDataRating.cs) (英文)。</span><span class="sxs-lookup"><span data-stu-id="41ee7-138">See the [completed SeedData.cs file](https://github.com/dotnet/AspNetCore.Docs/blob/master/aspnetcore/tutorials/razor-pages/razor-pages-start/sample/:::no-loc(Razor):::PagesMovie50/Models/SeedDataRating.cs).</span></span>
+<span data-ttu-id="41ee7-138">請參閱[完整的 SeedData.cs 檔案](https://github.com/dotnet/AspNetCore.Docs/blob/master/aspnetcore/tutorials/razor-pages/razor-pages-start/sample/RazorPagesMovie50/Models/SeedDataRating.cs) (英文)。</span><span class="sxs-lookup"><span data-stu-id="41ee7-138">See the [completed SeedData.cs file](https://github.com/dotnet/AspNetCore.Docs/blob/master/aspnetcore/tutorials/razor-pages/razor-pages-start/sample/RazorPagesMovie50/Models/SeedDataRating.cs).</span></span>
 
 <span data-ttu-id="41ee7-139">建置方案。</span><span class="sxs-lookup"><span data-stu-id="41ee7-139">Build the solution.</span></span>
 
@@ -108,7 +108,7 @@ ms.locfileid: "94360875"
 <span data-ttu-id="41ee7-144">`Add-Migration` 命令會告知架構，以便：</span><span class="sxs-lookup"><span data-stu-id="41ee7-144">The `Add-Migration` command tells the framework to:</span></span>
 
 * <span data-ttu-id="41ee7-145">比較 `Movie` 模型與 `Movie` 資料庫架構。</span><span class="sxs-lookup"><span data-stu-id="41ee7-145">Compare the `Movie` model with the `Movie` database schema.</span></span>
-* <span data-ttu-id="41ee7-146">:::no-loc(Create)::: 將資料庫架構遷移至新模型的程式碼。</span><span class="sxs-lookup"><span data-stu-id="41ee7-146">:::no-loc(Create)::: code to migrate the database schema to the new model.</span></span>
+* <span data-ttu-id="41ee7-146">Create 將資料庫架構遷移至新模型的程式碼。</span><span class="sxs-lookup"><span data-stu-id="41ee7-146">Create code to migrate the database schema to the new model.</span></span>
 
 <span data-ttu-id="41ee7-147">"Rating" 是用來命名移轉檔案的任意名稱。</span><span class="sxs-lookup"><span data-stu-id="41ee7-147">The name "Rating" is arbitrary and is used to name the migration file.</span></span> <span data-ttu-id="41ee7-148">建議您針對移轉檔案使用有意義的名稱，這更加實用。</span><span class="sxs-lookup"><span data-stu-id="41ee7-148">It's helpful to use a meaningful name for the migration file.</span></span>
 
@@ -121,7 +121,7 @@ ms.locfileid: "94360875"
 <span data-ttu-id="41ee7-152">另一個選擇是刪除資料庫並使用移轉重新建立資料庫。</span><span class="sxs-lookup"><span data-stu-id="41ee7-152">Another option is to delete the database and use migrations to re-create the database.</span></span> <span data-ttu-id="41ee7-153">若要在 SSOX 中刪除資料庫：</span><span class="sxs-lookup"><span data-stu-id="41ee7-153">To delete the database in SSOX:</span></span>
 
 1. <span data-ttu-id="41ee7-154">在 SSOX 中選取資料庫。</span><span class="sxs-lookup"><span data-stu-id="41ee7-154">Select the database in SSOX.</span></span>
-1. <span data-ttu-id="41ee7-155">以滑鼠右鍵按一下資料庫，然後選取 [] **:::no-loc(Delete):::** 。</span><span class="sxs-lookup"><span data-stu-id="41ee7-155">Right-click on the database, and select **:::no-loc(Delete):::**.</span></span>
+1. <span data-ttu-id="41ee7-155">以滑鼠右鍵按一下資料庫，然後選取 [] **Delete** 。</span><span class="sxs-lookup"><span data-stu-id="41ee7-155">Right-click on the database, and select **Delete**.</span></span>
 1. <span data-ttu-id="41ee7-156">勾選 [ **關閉現有的連接** ]。</span><span class="sxs-lookup"><span data-stu-id="41ee7-156">Check **Close existing connections**.</span></span>
 1. <span data-ttu-id="41ee7-157">選取 [確定]。</span><span class="sxs-lookup"><span data-stu-id="41ee7-157">Select **OK**.</span></span>
 1. <span data-ttu-id="41ee7-158">在 [PMC](xref:tutorials/razor-pages/new-field#pmc)中，更新資料庫：</span><span class="sxs-lookup"><span data-stu-id="41ee7-158">In the [PMC](xref:tutorials/razor-pages/new-field#pmc), update the database:</span></span>
@@ -151,13 +151,13 @@ ms.locfileid: "94360875"
 > * [<span data-ttu-id="41ee7-177">資料植入</span><span class="sxs-lookup"><span data-stu-id="41ee7-177">Data seeding</span></span>](/ef/core/modeling/data-seeding)
 > * <span data-ttu-id="41ee7-178">[SQLite ALTER TABLE 陳述式](https://sqlite.org/lang_altertable.html) \(英文\)</span><span class="sxs-lookup"><span data-stu-id="41ee7-178">[SQLite ALTER TABLE statement](https://sqlite.org/lang_altertable.html)</span></span>
 
-1. <span data-ttu-id="41ee7-179">:::no-loc(Delete)::: 遷移資料夾。</span><span class="sxs-lookup"><span data-stu-id="41ee7-179">:::no-loc(Delete)::: the migration folder.</span></span>  
+1. <span data-ttu-id="41ee7-179">Delete 遷移資料夾。</span><span class="sxs-lookup"><span data-stu-id="41ee7-179">Delete the migration folder.</span></span>  
 
 1. <span data-ttu-id="41ee7-180">使用下列命令重新建立資料庫。</span><span class="sxs-lookup"><span data-stu-id="41ee7-180">Use the following commands to recreate the database.</span></span>
 
    ```dotnetcli
    dotnet ef database drop
-   dotnet ef migrations add Initial:::no-loc(Create):::
+   dotnet ef migrations add InitialCreate
    dotnet ef database update
    ```
 
@@ -176,7 +176,7 @@ ms.locfileid: "94360875"
 
 ::: moniker range="< aspnetcore-5.0 >= aspnetcore-3.0"
 
-<span data-ttu-id="41ee7-185">[檢視或下載範例程式碼](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/tutorials/razor-pages/razor-pages-start/sample/:::no-loc(Razor):::PagesMovie30) ([如何下載](xref:index#how-to-download-a-sample))。</span><span class="sxs-lookup"><span data-stu-id="41ee7-185">[View or download sample code](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/tutorials/razor-pages/razor-pages-start/sample/:::no-loc(Razor):::PagesMovie30) ([how to download](xref:index#how-to-download-a-sample)).</span></span>
+<span data-ttu-id="41ee7-185">[檢視或下載範例程式碼](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/tutorials/razor-pages/razor-pages-start/sample/RazorPagesMovie30) ([如何下載](xref:index#how-to-download-a-sample))。</span><span class="sxs-lookup"><span data-stu-id="41ee7-185">[View or download sample code](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/tutorials/razor-pages/razor-pages-start/sample/RazorPagesMovie30) ([how to download](xref:index#how-to-download-a-sample)).</span></span>
 
 <span data-ttu-id="41ee7-186">在本節中，您會使用 [Entity Framework](/ef/core/get-started/aspnetcore/new-db) Code First 移轉：</span><span class="sxs-lookup"><span data-stu-id="41ee7-186">In this section [Entity Framework](/ef/core/get-started/aspnetcore/new-db) Code First Migrations is used to:</span></span>
 
@@ -194,19 +194,19 @@ ms.locfileid: "94360875"
 
 1. <span data-ttu-id="41ee7-194">開啟 *Models/Movie.cs* 檔案，然後新增 `Rating` 屬性：</span><span class="sxs-lookup"><span data-stu-id="41ee7-194">Open the *Models/Movie.cs* file and add a `Rating` property:</span></span>
 
-   [!code-csharp[](razor-pages-start/sample/:::no-loc(Razor):::PagesMovie30/Models/MovieDateRating.cs?highlight=13&name=snippet)]
+   [!code-csharp[](razor-pages-start/sample/RazorPagesMovie30/Models/MovieDateRating.cs?highlight=13&name=snippet)]
 
 1. <span data-ttu-id="41ee7-195">建置應用程式。</span><span class="sxs-lookup"><span data-stu-id="41ee7-195">Build the app.</span></span>
 
-1. <span data-ttu-id="41ee7-196">編輯 *Pages/電影/ :::no-loc(Index)::: cshtml* ，然後新增 `Rating` 欄位：</span><span class="sxs-lookup"><span data-stu-id="41ee7-196">Edit *Pages/Movies/:::no-loc(Index):::.cshtml* , and add a `Rating` field:</span></span>
+1. <span data-ttu-id="41ee7-196">編輯 *Pages/電影/ Index cshtml* ，然後新增 `Rating` 欄位：</span><span class="sxs-lookup"><span data-stu-id="41ee7-196">Edit *Pages/Movies/Index.cshtml* , and add a `Rating` field:</span></span>
 
    <a name="addrat"></a>
 
-   [!code-cshtml[](razor-pages-start/sample/:::no-loc(Razor):::PagesMovie30/SnapShots/:::no-loc(Index):::Rating.cshtml?highlight=40-42,62-64)]
+   [!code-cshtml[](razor-pages-start/sample/RazorPagesMovie30/SnapShots/IndexRating.cshtml?highlight=40-42,62-64)]
 
 1. <span data-ttu-id="41ee7-197">更新下列頁面：</span><span class="sxs-lookup"><span data-stu-id="41ee7-197">Update the following pages:</span></span>
-   1. <span data-ttu-id="41ee7-198">將 `Rating` 欄位加入至 :::no-loc(Delete)::: 和詳細資料頁面。</span><span class="sxs-lookup"><span data-stu-id="41ee7-198">Add the `Rating` field to the :::no-loc(Delete)::: and Details pages.</span></span>
-   1. <span data-ttu-id="41ee7-199">以欄位更新[ :::no-loc(Create)::: . cshtml](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/tutorials/razor-pages/razor-pages-start/sample/:::no-loc(Razor):::PagesMovie30/Pages/Movies/:::no-loc(Create):::.cshtml) 。 `Rating`</span><span class="sxs-lookup"><span data-stu-id="41ee7-199">Update [:::no-loc(Create):::.cshtml](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/tutorials/razor-pages/razor-pages-start/sample/:::no-loc(Razor):::PagesMovie30/Pages/Movies/:::no-loc(Create):::.cshtml) with a `Rating` field.</span></span>
+   1. <span data-ttu-id="41ee7-198">將 `Rating` 欄位加入至 Delete 和詳細資料頁面。</span><span class="sxs-lookup"><span data-stu-id="41ee7-198">Add the `Rating` field to the Delete and Details pages.</span></span>
+   1. <span data-ttu-id="41ee7-199">以欄位更新[ Create . cshtml](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/tutorials/razor-pages/razor-pages-start/sample/RazorPagesMovie30/Pages/Movies/Create.cshtml) 。 `Rating`</span><span class="sxs-lookup"><span data-stu-id="41ee7-199">Update [Create.cshtml](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/tutorials/razor-pages/razor-pages-start/sample/RazorPagesMovie30/Pages/Movies/Create.cshtml) with a `Rating` field.</span></span>
    1. <span data-ttu-id="41ee7-200">將 `Rating` 欄位新增至 Edit 頁面。</span><span class="sxs-lookup"><span data-stu-id="41ee7-200">Add the `Rating` field to the Edit Page.</span></span>
 
 <span data-ttu-id="41ee7-201">在資料庫更新為包含新欄位之前，應用程式將無法運作。</span><span class="sxs-lookup"><span data-stu-id="41ee7-201">The app won't work until the database is updated to include the new field.</span></span> <span data-ttu-id="41ee7-202">在沒有資料庫更新的情況下執行應用程式，會擲回 `SqlException` ：</span><span class="sxs-lookup"><span data-stu-id="41ee7-202">Running the app without an update to the database throws a `SqlException`:</span></span>
@@ -227,9 +227,9 @@ ms.locfileid: "94360875"
 
 <span data-ttu-id="41ee7-216">更新 `SeedData` 類別，使其提供新資料行的值。</span><span class="sxs-lookup"><span data-stu-id="41ee7-216">Update the `SeedData` class so that it provides a value for the new column.</span></span> <span data-ttu-id="41ee7-217">範例變更如下所示，但對每個區塊進行這項變更 `new Movie` 。</span><span class="sxs-lookup"><span data-stu-id="41ee7-217">A sample change is shown below, but make this change for each `new Movie` block.</span></span>
 
-[!code-csharp[](razor-pages-start/sample/:::no-loc(Razor):::PagesMovie30/Models/SeedDataRating.cs?name=snippet1&highlight=8)]
+[!code-csharp[](razor-pages-start/sample/RazorPagesMovie30/Models/SeedDataRating.cs?name=snippet1&highlight=8)]
 
-<span data-ttu-id="41ee7-218">請參閱[完整的 SeedData.cs 檔案](https://github.com/dotnet/AspNetCore.Docs/blob/master/aspnetcore/tutorials/razor-pages/razor-pages-start/sample/:::no-loc(Razor):::PagesMovie50/Models/SeedDataRating.cs) (英文)。</span><span class="sxs-lookup"><span data-stu-id="41ee7-218">See the [completed SeedData.cs file](https://github.com/dotnet/AspNetCore.Docs/blob/master/aspnetcore/tutorials/razor-pages/razor-pages-start/sample/:::no-loc(Razor):::PagesMovie50/Models/SeedDataRating.cs).</span></span>
+<span data-ttu-id="41ee7-218">請參閱[完整的 SeedData.cs 檔案](https://github.com/dotnet/AspNetCore.Docs/blob/master/aspnetcore/tutorials/razor-pages/razor-pages-start/sample/RazorPagesMovie50/Models/SeedDataRating.cs) (英文)。</span><span class="sxs-lookup"><span data-stu-id="41ee7-218">See the [completed SeedData.cs file](https://github.com/dotnet/AspNetCore.Docs/blob/master/aspnetcore/tutorials/razor-pages/razor-pages-start/sample/RazorPagesMovie50/Models/SeedDataRating.cs).</span></span>
 
 <span data-ttu-id="41ee7-219">建置方案。</span><span class="sxs-lookup"><span data-stu-id="41ee7-219">Build the solution.</span></span>
 
@@ -250,7 +250,7 @@ ms.locfileid: "94360875"
 <span data-ttu-id="41ee7-224">`Add-Migration` 命令會告知架構，以便：</span><span class="sxs-lookup"><span data-stu-id="41ee7-224">The `Add-Migration` command tells the framework to:</span></span>
 
 * <span data-ttu-id="41ee7-225">比較 `Movie` 模型與 `Movie` 資料庫架構。</span><span class="sxs-lookup"><span data-stu-id="41ee7-225">Compare the `Movie` model with the `Movie` database schema.</span></span>
-* <span data-ttu-id="41ee7-226">:::no-loc(Create)::: 將資料庫架構遷移至新模型的程式碼。</span><span class="sxs-lookup"><span data-stu-id="41ee7-226">:::no-loc(Create)::: code to migrate the database schema to the new model.</span></span>
+* <span data-ttu-id="41ee7-226">Create 將資料庫架構遷移至新模型的程式碼。</span><span class="sxs-lookup"><span data-stu-id="41ee7-226">Create code to migrate the database schema to the new model.</span></span>
 
 <span data-ttu-id="41ee7-227">"Rating" 是用來命名移轉檔案的任意名稱。</span><span class="sxs-lookup"><span data-stu-id="41ee7-227">The name "Rating" is arbitrary and is used to name the migration file.</span></span> <span data-ttu-id="41ee7-228">建議您針對移轉檔案使用有意義的名稱，這更加實用。</span><span class="sxs-lookup"><span data-stu-id="41ee7-228">It's helpful to use a meaningful name for the migration file.</span></span>
 
@@ -263,7 +263,7 @@ ms.locfileid: "94360875"
 <span data-ttu-id="41ee7-232">另一個選擇是刪除資料庫並使用移轉重新建立資料庫。</span><span class="sxs-lookup"><span data-stu-id="41ee7-232">Another option is to delete the database and use migrations to re-create the database.</span></span> <span data-ttu-id="41ee7-233">若要在 SSOX 中刪除資料庫：</span><span class="sxs-lookup"><span data-stu-id="41ee7-233">To delete the database in SSOX:</span></span>
 
 * <span data-ttu-id="41ee7-234">在 SSOX 中選取資料庫。</span><span class="sxs-lookup"><span data-stu-id="41ee7-234">Select the database in SSOX.</span></span>
-* <span data-ttu-id="41ee7-235">以滑鼠右鍵按一下資料庫，然後選取 [] **:::no-loc(Delete):::** 。</span><span class="sxs-lookup"><span data-stu-id="41ee7-235">Right-click on the database, and select **:::no-loc(Delete):::**.</span></span>
+* <span data-ttu-id="41ee7-235">以滑鼠右鍵按一下資料庫，然後選取 [] **Delete** 。</span><span class="sxs-lookup"><span data-stu-id="41ee7-235">Right-click on the database, and select **Delete**.</span></span>
 * <span data-ttu-id="41ee7-236">勾選 [ **關閉現有的連接** ]。</span><span class="sxs-lookup"><span data-stu-id="41ee7-236">Check **Close existing connections**.</span></span>
 * <span data-ttu-id="41ee7-237">選取 [確定]。</span><span class="sxs-lookup"><span data-stu-id="41ee7-237">Select **OK**.</span></span>
 * <span data-ttu-id="41ee7-238">在 [PMC](xref:tutorials/razor-pages/new-field#pmc)中，更新資料庫：</span><span class="sxs-lookup"><span data-stu-id="41ee7-238">In the [PMC](xref:tutorials/razor-pages/new-field#pmc), update the database:</span></span>
@@ -293,13 +293,13 @@ ms.locfileid: "94360875"
 > * [<span data-ttu-id="41ee7-257">資料植入</span><span class="sxs-lookup"><span data-stu-id="41ee7-257">Data seeding</span></span>](/ef/core/modeling/data-seeding)
 > * <span data-ttu-id="41ee7-258">[SQLite ALTER TABLE 陳述式](https://sqlite.org/lang_altertable.html) \(英文\)</span><span class="sxs-lookup"><span data-stu-id="41ee7-258">[SQLite ALTER TABLE statement](https://sqlite.org/lang_altertable.html)</span></span>
 
-1. <span data-ttu-id="41ee7-259">:::no-loc(Delete)::: 遷移資料夾。</span><span class="sxs-lookup"><span data-stu-id="41ee7-259">:::no-loc(Delete)::: the migration folder.</span></span>  
+1. <span data-ttu-id="41ee7-259">Delete 遷移資料夾。</span><span class="sxs-lookup"><span data-stu-id="41ee7-259">Delete the migration folder.</span></span>  
 
 1. <span data-ttu-id="41ee7-260">使用下列命令重新建立資料庫。</span><span class="sxs-lookup"><span data-stu-id="41ee7-260">Use the following commands to recreate the database.</span></span>
 
    ```dotnetcli
    dotnet ef database drop
-   dotnet ef migrations add Initial:::no-loc(Create):::
+   dotnet ef migrations add InitialCreate
    dotnet ef database update
    ```
 
@@ -336,18 +336,18 @@ ms.locfileid: "94360875"
 
 <span data-ttu-id="41ee7-274">開啟 *Models/Movie.cs* 檔案，然後新增 `Rating` 屬性：</span><span class="sxs-lookup"><span data-stu-id="41ee7-274">Open the *Models/Movie.cs* file and add a `Rating` property:</span></span>
 
-[!code-csharp[](razor-pages-start/sample/:::no-loc(Razor):::PagesMovie22/Models/MovieDateRating.cs?highlight=13&name=snippet)]
+[!code-csharp[](razor-pages-start/sample/RazorPagesMovie22/Models/MovieDateRating.cs?highlight=13&name=snippet)]
 
 <span data-ttu-id="41ee7-275">建置應用程式。</span><span class="sxs-lookup"><span data-stu-id="41ee7-275">Build the app.</span></span>
 
-<span data-ttu-id="41ee7-276">編輯 *Pages/電影/ :::no-loc(Index)::: cshtml* ，然後新增 `Rating` 欄位：</span><span class="sxs-lookup"><span data-stu-id="41ee7-276">Edit *Pages/Movies/:::no-loc(Index):::.cshtml* , and add a `Rating` field:</span></span>
+<span data-ttu-id="41ee7-276">編輯 *Pages/電影/ Index cshtml* ，然後新增 `Rating` 欄位：</span><span class="sxs-lookup"><span data-stu-id="41ee7-276">Edit *Pages/Movies/Index.cshtml* , and add a `Rating` field:</span></span>
 
-[!code-cshtml[](razor-pages-start/sample/:::no-loc(Razor):::PagesMovie22/Pages/Movies/:::no-loc(Index):::Rating.cshtml?highlight=40-42,61-63)]
+[!code-cshtml[](razor-pages-start/sample/RazorPagesMovie22/Pages/Movies/IndexRating.cshtml?highlight=40-42,61-63)]
 
 <span data-ttu-id="41ee7-277">更新下列頁面：</span><span class="sxs-lookup"><span data-stu-id="41ee7-277">Update the following pages:</span></span>
 
-* <span data-ttu-id="41ee7-278">將 `Rating` 欄位加入至 :::no-loc(Delete)::: 和詳細資料頁面。</span><span class="sxs-lookup"><span data-stu-id="41ee7-278">Add the `Rating` field to the :::no-loc(Delete)::: and Details pages.</span></span>
-* <span data-ttu-id="41ee7-279">以欄位更新[ :::no-loc(Create)::: . cshtml](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/tutorials/razor-pages/razor-pages-start/sample/:::no-loc(Razor):::PagesMovie22/Pages/Movies/:::no-loc(Create):::.cshtml) 。 `Rating`</span><span class="sxs-lookup"><span data-stu-id="41ee7-279">Update [:::no-loc(Create):::.cshtml](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/tutorials/razor-pages/razor-pages-start/sample/:::no-loc(Razor):::PagesMovie22/Pages/Movies/:::no-loc(Create):::.cshtml) with a `Rating` field.</span></span>
+* <span data-ttu-id="41ee7-278">將 `Rating` 欄位加入至 Delete 和詳細資料頁面。</span><span class="sxs-lookup"><span data-stu-id="41ee7-278">Add the `Rating` field to the Delete and Details pages.</span></span>
+* <span data-ttu-id="41ee7-279">以欄位更新[ Create . cshtml](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/tutorials/razor-pages/razor-pages-start/sample/RazorPagesMovie22/Pages/Movies/Create.cshtml) 。 `Rating`</span><span class="sxs-lookup"><span data-stu-id="41ee7-279">Update [Create.cshtml](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/tutorials/razor-pages/razor-pages-start/sample/RazorPagesMovie22/Pages/Movies/Create.cshtml) with a `Rating` field.</span></span>
 * <span data-ttu-id="41ee7-280">將 `Rating` 欄位新增至 Edit 頁面。</span><span class="sxs-lookup"><span data-stu-id="41ee7-280">Add the `Rating` field to the Edit Page.</span></span>
 
 <span data-ttu-id="41ee7-281">在資料庫更新為包含新欄位之前，應用程式將無法運作。</span><span class="sxs-lookup"><span data-stu-id="41ee7-281">The app won't work until the database is updated to include the new field.</span></span> <span data-ttu-id="41ee7-282">如果立即執行應用程式，應用程式會擲回 `SqlException` ：</span><span class="sxs-lookup"><span data-stu-id="41ee7-282">If the app is run now, the app throws a `SqlException`:</span></span>
@@ -368,9 +368,9 @@ ms.locfileid: "94360875"
 
 <span data-ttu-id="41ee7-296">更新 `SeedData` 類別，使其提供新資料行的值。</span><span class="sxs-lookup"><span data-stu-id="41ee7-296">Update the `SeedData` class so that it provides a value for the new column.</span></span> <span data-ttu-id="41ee7-297">範例變更如下所示，但對每個區塊進行這項變更 `new Movie` 。</span><span class="sxs-lookup"><span data-stu-id="41ee7-297">A sample change is shown below, but make this change for each `new Movie` block.</span></span>
 
-[!code-csharp[](razor-pages-start/sample/:::no-loc(Razor):::PagesMovie22/Models/SeedDataRating.cs?name=snippet1&highlight=8)]
+[!code-csharp[](razor-pages-start/sample/RazorPagesMovie22/Models/SeedDataRating.cs?name=snippet1&highlight=8)]
 
-<span data-ttu-id="41ee7-298">請參閱[完整的 SeedData.cs 檔案](https://github.com/dotnet/AspNetCore.Docs/blob/master/aspnetcore/tutorials/razor-pages/razor-pages-start/sample/:::no-loc(Razor):::PagesMovie22/Models/SeedDataRating.cs) (英文)。</span><span class="sxs-lookup"><span data-stu-id="41ee7-298">See the [completed SeedData.cs file](https://github.com/dotnet/AspNetCore.Docs/blob/master/aspnetcore/tutorials/razor-pages/razor-pages-start/sample/:::no-loc(Razor):::PagesMovie22/Models/SeedDataRating.cs).</span></span>
+<span data-ttu-id="41ee7-298">請參閱[完整的 SeedData.cs 檔案](https://github.com/dotnet/AspNetCore.Docs/blob/master/aspnetcore/tutorials/razor-pages/razor-pages-start/sample/RazorPagesMovie22/Models/SeedDataRating.cs) (英文)。</span><span class="sxs-lookup"><span data-stu-id="41ee7-298">See the [completed SeedData.cs file](https://github.com/dotnet/AspNetCore.Docs/blob/master/aspnetcore/tutorials/razor-pages/razor-pages-start/sample/RazorPagesMovie22/Models/SeedDataRating.cs).</span></span>
 
 <span data-ttu-id="41ee7-299">建置方案。</span><span class="sxs-lookup"><span data-stu-id="41ee7-299">Build the solution.</span></span>
 
@@ -391,7 +391,7 @@ Update-Database
 <span data-ttu-id="41ee7-304">`Add-Migration` 命令會告知架構，以便：</span><span class="sxs-lookup"><span data-stu-id="41ee7-304">The `Add-Migration` command tells the framework to:</span></span>
 
 * <span data-ttu-id="41ee7-305">比較 `Movie` 模型與 `Movie` 資料庫架構。</span><span class="sxs-lookup"><span data-stu-id="41ee7-305">Compare the `Movie` model with the `Movie` database schema.</span></span>
-* <span data-ttu-id="41ee7-306">:::no-loc(Create)::: 將資料庫架構遷移至新模型的程式碼。</span><span class="sxs-lookup"><span data-stu-id="41ee7-306">:::no-loc(Create)::: code to migrate the database schema to the new model.</span></span>
+* <span data-ttu-id="41ee7-306">Create 將資料庫架構遷移至新模型的程式碼。</span><span class="sxs-lookup"><span data-stu-id="41ee7-306">Create code to migrate the database schema to the new model.</span></span>
 
 <span data-ttu-id="41ee7-307">"Rating" 是用來命名移轉檔案的任意名稱。</span><span class="sxs-lookup"><span data-stu-id="41ee7-307">The name "Rating" is arbitrary and is used to name the migration file.</span></span> <span data-ttu-id="41ee7-308">建議您針對移轉檔案使用有意義的名稱，這更加實用。</span><span class="sxs-lookup"><span data-stu-id="41ee7-308">It's helpful to use a meaningful name for the migration file.</span></span>
 
@@ -404,7 +404,7 @@ Update-Database
 <span data-ttu-id="41ee7-312">另一個選擇是刪除資料庫並使用移轉重新建立資料庫。</span><span class="sxs-lookup"><span data-stu-id="41ee7-312">Another option is to delete the database and use migrations to re-create the database.</span></span> <span data-ttu-id="41ee7-313">若要在 SSOX 中刪除資料庫：</span><span class="sxs-lookup"><span data-stu-id="41ee7-313">To delete the database in SSOX:</span></span>
 
 * <span data-ttu-id="41ee7-314">在 SSOX 中選取資料庫。</span><span class="sxs-lookup"><span data-stu-id="41ee7-314">Select the database in SSOX.</span></span>
-* <span data-ttu-id="41ee7-315">以滑鼠右鍵按一下資料庫，然後選取 [] **:::no-loc(Delete):::** 。</span><span class="sxs-lookup"><span data-stu-id="41ee7-315">Right-click on the database, and select **:::no-loc(Delete):::**.</span></span>
+* <span data-ttu-id="41ee7-315">以滑鼠右鍵按一下資料庫，然後選取 [] **Delete** 。</span><span class="sxs-lookup"><span data-stu-id="41ee7-315">Right-click on the database, and select **Delete**.</span></span>
 * <span data-ttu-id="41ee7-316">勾選 [ **關閉現有的連接** ]。</span><span class="sxs-lookup"><span data-stu-id="41ee7-316">Check **Close existing connections**.</span></span>
 * <span data-ttu-id="41ee7-317">選取 [確定]。</span><span class="sxs-lookup"><span data-stu-id="41ee7-317">Select **OK**.</span></span>
 * <span data-ttu-id="41ee7-318">在 [PMC](xref:tutorials/razor-pages/new-field#pmc)中，更新資料庫：</span><span class="sxs-lookup"><span data-stu-id="41ee7-318">In the [PMC](xref:tutorials/razor-pages/new-field#pmc), update the database:</span></span>
@@ -434,7 +434,7 @@ Update-Database
 > * [<span data-ttu-id="41ee7-337">資料植入</span><span class="sxs-lookup"><span data-stu-id="41ee7-337">Data seeding</span></span>](/ef/core/modeling/data-seeding)
 > * <span data-ttu-id="41ee7-338">[SQLite ALTER TABLE 陳述式](https://sqlite.org/lang_altertable.html) \(英文\)</span><span class="sxs-lookup"><span data-stu-id="41ee7-338">[SQLite ALTER TABLE statement](https://sqlite.org/lang_altertable.html)</span></span>
 
-<span data-ttu-id="41ee7-339">:::no-loc(Delete)::: 資料庫，並使用遷移來重新建立資料庫。</span><span class="sxs-lookup"><span data-stu-id="41ee7-339">:::no-loc(Delete)::: the database and use migrations to re-create the database.</span></span> <span data-ttu-id="41ee7-340">若要刪除資料庫，請刪除資料庫檔案 ( *MvcMovie.db* )。</span><span class="sxs-lookup"><span data-stu-id="41ee7-340">To delete the database, delete the database file ( *MvcMovie.db* ).</span></span> <span data-ttu-id="41ee7-341">然後執行 `ef database update` 命令：</span><span class="sxs-lookup"><span data-stu-id="41ee7-341">Then run the `ef database update` command:</span></span>
+<span data-ttu-id="41ee7-339">Delete 資料庫，並使用遷移來重新建立資料庫。</span><span class="sxs-lookup"><span data-stu-id="41ee7-339">Delete the database and use migrations to re-create the database.</span></span> <span data-ttu-id="41ee7-340">若要刪除資料庫，請刪除資料庫檔案 ( *MvcMovie.db* )。</span><span class="sxs-lookup"><span data-stu-id="41ee7-340">To delete the database, delete the database file ( *MvcMovie.db* ).</span></span> <span data-ttu-id="41ee7-341">然後執行 `ef database update` 命令：</span><span class="sxs-lookup"><span data-stu-id="41ee7-341">Then run the `ef database update` command:</span></span>
 
 ```dotnetcli
 dotnet ef database update

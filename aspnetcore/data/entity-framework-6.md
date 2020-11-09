@@ -6,15 +6,15 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 7/14/2020
 no-loc:
-- ':::no-loc(appsettings.json):::'
-- ':::no-loc(ASP.NET Core Identity):::'
-- ':::no-loc(cookie):::'
-- ':::no-loc(Cookie):::'
-- ':::no-loc(Blazor):::'
-- ':::no-loc(Identity):::'
-- ":::no-loc(Let's Encrypt):::"
-- ':::no-loc(Razor):::'
-- ':::no-loc(SignalR):::'
+- 'appsettings.json'
+- 'ASP.NET Core Identity'
+- 'cookie'
+- 'Cookie'
+- 'Blazor'
+- 'Identity'
+- "Let's Encrypt"
+- 'Razor'
+- 'SignalR'
 uid: data/entity-framework-6
 ms.openlocfilehash: 086418c161677f585b08ed360555c93d8575e701
 ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
@@ -107,7 +107,7 @@ ms.locfileid: "93059451"
 
 * <span data-ttu-id="2abf7-154">在 Core 專案的 *Startup.cs* 中，登錄 DI 的內容。</span><span class="sxs-lookup"><span data-stu-id="2abf7-154">In the Core project, in *Startup.cs* , register the context for DI.</span></span>    
 
-* <span data-ttu-id="2abf7-155">在 Core 專案的中， *:::no-loc(appsettings.json):::* 加入連接字串。</span><span class="sxs-lookup"><span data-stu-id="2abf7-155">In the Core project, in *:::no-loc(appsettings.json):::* , add the connection string.</span></span>  
+* <span data-ttu-id="2abf7-155">在 Core 專案的中， *appsettings.json* 加入連接字串。</span><span class="sxs-lookup"><span data-stu-id="2abf7-155">In the Core project, in *appsettings.json* , add the connection string.</span></span>  
 
 * <span data-ttu-id="2abf7-156">在 Core 專案中，新增控制器和檢視，以確認您可以讀取和寫入資料。</span><span class="sxs-lookup"><span data-stu-id="2abf7-156">In the Core project, add a controller and view(s) to verify that you can read and write data.</span></span> <span data-ttu-id="2abf7-157">(請注意，ASP.NET Core MVC Scaffolding 不會使用參考自類別庫的 EF6 內容。)</span><span class="sxs-lookup"><span data-stu-id="2abf7-157">(Note that ASP.NET Core MVC scaffolding won't work with the EF6 context referenced from the class library.)</span></span>
 

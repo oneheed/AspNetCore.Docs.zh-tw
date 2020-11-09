@@ -7,17 +7,17 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 4/17/2020
 no-loc:
-- ':::no-loc(appsettings.json):::'
-- ':::no-loc(ASP.NET Core Identity):::'
-- ':::no-loc(cookie):::'
-- ':::no-loc(Cookie):::'
-- ':::no-loc(Blazor):::'
-- ':::no-loc(Blazor Server):::'
-- ':::no-loc(Blazor WebAssembly):::'
-- ':::no-loc(Identity):::'
-- ":::no-loc(Let's Encrypt):::"
-- ':::no-loc(Razor):::'
-- ':::no-loc(SignalR):::'
+- 'appsettings.json'
+- 'ASP.NET Core Identity'
+- 'cookie'
+- 'Cookie'
+- 'Blazor'
+- 'Blazor Server'
+- 'Blazor WebAssembly'
+- 'Identity'
+- "Let's Encrypt"
+- 'Razor'
+- 'SignalR'
 uid: fundamentals/host/generic-host
 ms.openlocfilehash: 3e44932c302713132a37534b97fffdd91acce2c7
 ms.sourcegitcommit: d64bf0cbe763beda22a7728c7f10d07fc5e19262
@@ -114,7 +114,7 @@ public static IHostBuilder CreateHostBuilder(string[] args) =>
   * <span data-ttu-id="a6e77-132">前面加上的環境變數 `DOTNET_` 。</span><span class="sxs-lookup"><span data-stu-id="a6e77-132">Environment variables prefixed with `DOTNET_`.</span></span>
   * <span data-ttu-id="a6e77-133">命令列引數。</span><span class="sxs-lookup"><span data-stu-id="a6e77-133">Command-line arguments.</span></span>
 * <span data-ttu-id="a6e77-134">從下列項目載入應用程式組態：</span><span class="sxs-lookup"><span data-stu-id="a6e77-134">Loads app configuration from:</span></span>
-  * <span data-ttu-id="a6e77-135">*:::no-loc(appsettings.json):::*.</span><span class="sxs-lookup"><span data-stu-id="a6e77-135">*:::no-loc(appsettings.json):::*.</span></span>
+  * <span data-ttu-id="a6e77-135">*appsettings.json*.</span><span class="sxs-lookup"><span data-stu-id="a6e77-135">*appsettings.json*.</span></span>
   * <span data-ttu-id="a6e77-136">*appsettings.{Environment}.json*</span><span class="sxs-lookup"><span data-stu-id="a6e77-136">*appsettings.{Environment}.json*.</span></span>
   * <span data-ttu-id="a6e77-137">應用程式在 `Development` 環境中執行時的[祕密管理員](xref:security/app-secrets)。</span><span class="sxs-lookup"><span data-stu-id="a6e77-137">[Secret Manager](xref:security/app-secrets) when the app runs in the `Development` environment.</span></span>
   * <span data-ttu-id="a6e77-138">環境變數。</span><span class="sxs-lookup"><span data-stu-id="a6e77-138">Environment variables.</span></span>
@@ -271,7 +271,7 @@ Host.CreateDefaultBuilder(args)
 
 ### <a name="disable-app-configuration-reload-on-change"></a><span data-ttu-id="a6e77-244">變更時停用應用程式設定重載</span><span class="sxs-lookup"><span data-stu-id="a6e77-244">Disable app configuration reload on change</span></span>
 
-<span data-ttu-id="a6e77-245">依 [預設](xref:fundamentals/configuration/index#default)， *:::no-loc(appsettings.json):::* 和 *appsettings。環境}。* 當檔案變更時，會重載 json。</span><span class="sxs-lookup"><span data-stu-id="a6e77-245">By [default](xref:fundamentals/configuration/index#default), *:::no-loc(appsettings.json):::* and *appsettings.{Environment}.json* are reloaded when the file changes.</span></span> <span data-ttu-id="a6e77-246">若要在 ASP.NET Core 5.0 或更新版本中停用這個重載行為，請將索引 `hostBuilder:reloadConfigOnChange` 鍵設定為 `false` 。</span><span class="sxs-lookup"><span data-stu-id="a6e77-246">To disable this reload behavior in ASP.NET Core 5.0 or later, set the `hostBuilder:reloadConfigOnChange` key to `false`.</span></span>
+<span data-ttu-id="a6e77-245">依 [預設](xref:fundamentals/configuration/index#default)， *appsettings.json* 和 *appsettings。環境}。* 當檔案變更時，會重載 json。</span><span class="sxs-lookup"><span data-stu-id="a6e77-245">By [default](xref:fundamentals/configuration/index#default), *appsettings.json* and *appsettings.{Environment}.json* are reloaded when the file changes.</span></span> <span data-ttu-id="a6e77-246">若要在 ASP.NET Core 5.0 或更新版本中停用這個重載行為，請將索引 `hostBuilder:reloadConfigOnChange` 鍵設定為 `false` 。</span><span class="sxs-lookup"><span data-stu-id="a6e77-246">To disable this reload behavior in ASP.NET Core 5.0 or later, set the `hostBuilder:reloadConfigOnChange` key to `false`.</span></span>
 
 <span data-ttu-id="a6e77-247">機 **碼** ：`hostBuilder:reloadConfigOnChange`</span><span class="sxs-lookup"><span data-stu-id="a6e77-247">**Key** : `hostBuilder:reloadConfigOnChange`</span></span>  
 <span data-ttu-id="a6e77-248">**類型** ： `bool` (`true` 或 `1`) </span><span class="sxs-lookup"><span data-stu-id="a6e77-248">**Type** : `bool` (`true` or `1`)</span></span>  
@@ -617,7 +617,7 @@ public static IHostBuilder CreateHostBuilder(string[] args) =>
   * <span data-ttu-id="a6e77-399">前面加上的環境變數 `DOTNET_` 。</span><span class="sxs-lookup"><span data-stu-id="a6e77-399">Environment variables prefixed with `DOTNET_`.</span></span>
   * <span data-ttu-id="a6e77-400">命令列引數。</span><span class="sxs-lookup"><span data-stu-id="a6e77-400">Command-line arguments.</span></span>
 * <span data-ttu-id="a6e77-401">從下列項目載入應用程式組態：</span><span class="sxs-lookup"><span data-stu-id="a6e77-401">Loads app configuration from:</span></span>
-  * <span data-ttu-id="a6e77-402">*:::no-loc(appsettings.json):::*.</span><span class="sxs-lookup"><span data-stu-id="a6e77-402">*:::no-loc(appsettings.json):::*.</span></span>
+  * <span data-ttu-id="a6e77-402">*appsettings.json*.</span><span class="sxs-lookup"><span data-stu-id="a6e77-402">*appsettings.json*.</span></span>
   * <span data-ttu-id="a6e77-403">*appsettings.{Environment}.json*</span><span class="sxs-lookup"><span data-stu-id="a6e77-403">*appsettings.{Environment}.json*.</span></span>
   * <span data-ttu-id="a6e77-404">應用程式在 `Development` 環境中執行時的[祕密管理員](xref:security/app-secrets)。</span><span class="sxs-lookup"><span data-stu-id="a6e77-404">[Secret Manager](xref:security/app-secrets) when the app runs in the `Development` environment.</span></span>
   * <span data-ttu-id="a6e77-405">環境變數。</span><span class="sxs-lookup"><span data-stu-id="a6e77-405">Environment variables.</span></span>
@@ -1175,9 +1175,9 @@ var host = new HostBuilder()
 
 [!code-csharp[](generic-host/samples-snapshot/2.x/GenericHostSample/Program.cs?name=snippet_ConfigureAppConfiguration)]
 
-<span data-ttu-id="a6e77-729">*:::no-loc(appsettings.json):::* :</span><span class="sxs-lookup"><span data-stu-id="a6e77-729">*:::no-loc(appsettings.json):::* :</span></span>
+<span data-ttu-id="a6e77-729">*appsettings.json* :</span><span class="sxs-lookup"><span data-stu-id="a6e77-729">*appsettings.json* :</span></span>
 
-[!code-json[](generic-host/samples/2.x/GenericHostSample/:::no-loc(appsettings.json):::)]
+[!code-json[](generic-host/samples/2.x/GenericHostSample/appsettings.json)]
 
 <span data-ttu-id="a6e77-730">*appsettings.Development.json* ：</span><span class="sxs-lookup"><span data-stu-id="a6e77-730">*appsettings.Development.json* :</span></span>
 

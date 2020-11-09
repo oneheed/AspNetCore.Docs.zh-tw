@@ -1,23 +1,23 @@
 ---
-title: 'ASP.NET Core 的 :::no-loc(Blazor)::: advanced 案例'
+title: 'ASP.NET Core 的 Blazor advanced 案例'
 author: guardrex
-description: '瞭解中的先進案例 :::no-loc(Blazor)::: ，包括如何將手動 RenderTreeBuilder 邏輯併入應用程式。'
+description: '瞭解中的先進案例 Blazor ，包括如何將手動 RenderTreeBuilder 邏輯併入應用程式。'
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
 ms.date: 02/18/2020
 no-loc:
-- ':::no-loc(appsettings.json):::'
-- ':::no-loc(ASP.NET Core Identity):::'
-- ':::no-loc(cookie):::'
-- ':::no-loc(Cookie):::'
-- ':::no-loc(Blazor):::'
-- ':::no-loc(Blazor Server):::'
-- ':::no-loc(Blazor WebAssembly):::'
-- ':::no-loc(Identity):::'
-- ":::no-loc(Let's Encrypt):::"
-- ':::no-loc(Razor):::'
-- ':::no-loc(SignalR):::'
+- 'appsettings.json'
+- 'ASP.NET Core Identity'
+- 'cookie'
+- 'Cookie'
+- 'Blazor'
+- 'Blazor Server'
+- 'Blazor WebAssembly'
+- 'Identity'
+- "Let's Encrypt"
+- 'Razor'
+- 'SignalR'
 uid: blazor/advanced-scenarios
 ms.openlocfilehash: 95714b3c0d21d3b348a9a8a984e2a42e7708499e
 ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
@@ -26,13 +26,13 @@ ms.contentlocale: zh-TW
 ms.lasthandoff: 10/30/2020
 ms.locfileid: "93056552"
 ---
-# <a name="aspnet-core-no-locblazor-advanced-scenarios"></a><span data-ttu-id="d55a2-103">ASP.NET Core 的 :::no-loc(Blazor)::: advanced 案例</span><span class="sxs-lookup"><span data-stu-id="d55a2-103">ASP.NET Core :::no-loc(Blazor)::: advanced scenarios</span></span>
+# <a name="aspnet-core-no-locblazor-advanced-scenarios"></a><span data-ttu-id="d55a2-103">ASP.NET Core 的 Blazor advanced 案例</span><span class="sxs-lookup"><span data-stu-id="d55a2-103">ASP.NET Core Blazor advanced scenarios</span></span>
 
 <span data-ttu-id="d55a2-104">依 [Luke Latham](https://github.com/guardrex) 和 [Daniel Roth](https://github.com/danroth27)</span><span class="sxs-lookup"><span data-stu-id="d55a2-104">By [Luke Latham](https://github.com/guardrex) and [Daniel Roth](https://github.com/danroth27)</span></span>
 
-## <a name="no-locblazor-server-circuit-handler"></a><span data-ttu-id="d55a2-105">:::no-loc(Blazor Server)::: 電路處理常式</span><span class="sxs-lookup"><span data-stu-id="d55a2-105">:::no-loc(Blazor Server)::: circuit handler</span></span>
+## <a name="no-locblazor-server-circuit-handler"></a><span data-ttu-id="d55a2-105">Blazor Server 電路處理常式</span><span class="sxs-lookup"><span data-stu-id="d55a2-105">Blazor Server circuit handler</span></span>
 
-<span data-ttu-id="d55a2-106">:::no-loc(Blazor Server)::: 允許程式碼定義迴圈 *處理常式* ，以允許在使用者的線路狀態變更時執行程式碼。</span><span class="sxs-lookup"><span data-stu-id="d55a2-106">:::no-loc(Blazor Server)::: allows code to define a *circuit handler* , which allows running code on changes to the state of a user's circuit.</span></span> <span data-ttu-id="d55a2-107">在 `CircuitHandler` 應用程式的服務容器中衍生類別並將其註冊，會實作為電路處理常式。</span><span class="sxs-lookup"><span data-stu-id="d55a2-107">A circuit handler is implemented by deriving from `CircuitHandler` and registering the class in the app's service container.</span></span> <span data-ttu-id="d55a2-108">下列的電路處理常式範例會追蹤開啟的 :::no-loc(SignalR)::: 連接：</span><span class="sxs-lookup"><span data-stu-id="d55a2-108">The following example of a circuit handler tracks open :::no-loc(SignalR)::: connections:</span></span>
+<span data-ttu-id="d55a2-106">Blazor Server 允許程式碼定義迴圈 *處理常式* ，以允許在使用者的線路狀態變更時執行程式碼。</span><span class="sxs-lookup"><span data-stu-id="d55a2-106">Blazor Server allows code to define a *circuit handler* , which allows running code on changes to the state of a user's circuit.</span></span> <span data-ttu-id="d55a2-107">在 `CircuitHandler` 應用程式的服務容器中衍生類別並將其註冊，會實作為電路處理常式。</span><span class="sxs-lookup"><span data-stu-id="d55a2-107">A circuit handler is implemented by deriving from `CircuitHandler` and registering the class in the app's service container.</span></span> <span data-ttu-id="d55a2-108">下列的電路處理常式範例會追蹤開啟的 SignalR 連接：</span><span class="sxs-lookup"><span data-stu-id="d55a2-108">The following example of a circuit handler tracks open SignalR connections:</span></span>
 
 ```csharp
 using System.Collections.Generic;
@@ -74,7 +74,7 @@ public void ConfigureServices(IServiceCollection services)
 }
 ```
 
-<span data-ttu-id="d55a2-112">如果自訂電路處理常式的方法擲回未處理的例外狀況，則例外狀況對線路而言是嚴重的 :::no-loc(Blazor Server)::: 。</span><span class="sxs-lookup"><span data-stu-id="d55a2-112">If a custom circuit handler's methods throw an unhandled exception, the exception is fatal to the :::no-loc(Blazor Server)::: circuit.</span></span> <span data-ttu-id="d55a2-113">若要容忍處理常式程式碼或呼叫方法中的例外狀況，請將程式碼包裝在一或多個語句中， [`try-catch`](/dotnet/csharp/language-reference/keywords/try-catch) 並提供錯誤處理和記錄。</span><span class="sxs-lookup"><span data-stu-id="d55a2-113">To tolerate exceptions in a handler's code or called methods, wrap the code in one or more [`try-catch`](/dotnet/csharp/language-reference/keywords/try-catch) statements with error handling and logging.</span></span>
+<span data-ttu-id="d55a2-112">如果自訂電路處理常式的方法擲回未處理的例外狀況，則例外狀況對線路而言是嚴重的 Blazor Server 。</span><span class="sxs-lookup"><span data-stu-id="d55a2-112">If a custom circuit handler's methods throw an unhandled exception, the exception is fatal to the Blazor Server circuit.</span></span> <span data-ttu-id="d55a2-113">若要容忍處理常式程式碼或呼叫方法中的例外狀況，請將程式碼包裝在一或多個語句中， [`try-catch`](/dotnet/csharp/language-reference/keywords/try-catch) 並提供錯誤處理和記錄。</span><span class="sxs-lookup"><span data-stu-id="d55a2-113">To tolerate exceptions in a handler's code or called methods, wrap the code in one or more [`try-catch`](/dotnet/csharp/language-reference/keywords/try-catch) statements with error handling and logging.</span></span>
 
 <span data-ttu-id="d55a2-114">當線路因為使用者已中斷連線而結束，且架構正在清除電路狀態時，架構會處置電路的 DI 範圍。</span><span class="sxs-lookup"><span data-stu-id="d55a2-114">When a circuit ends because a user has disconnected and the framework is cleaning up the circuit state, the framework disposes of the circuit's DI scope.</span></span> <span data-ttu-id="d55a2-115">處置範圍會處置任何執行的線路範圍 DI 服務 <xref:System.IDisposable?displayProperty=fullName> 。</span><span class="sxs-lookup"><span data-stu-id="d55a2-115">Disposing the scope disposes any circuit-scoped DI services that implement <xref:System.IDisposable?displayProperty=fullName>.</span></span> <span data-ttu-id="d55a2-116">如果任何 DI 服務在處置期間擲回未處理的例外狀況，則架構會記錄例外狀況。</span><span class="sxs-lookup"><span data-stu-id="d55a2-116">If any DI service throws an unhandled exception during disposal, the framework logs the exception.</span></span>
 
@@ -99,7 +99,7 @@ public void ConfigureServices(IServiceCollection services)
 }
 ```
 
-<span data-ttu-id="d55a2-122">在下列範例中，方法中的迴圈會 `CreateComponent` 產生三個 `PetDetails` 元件。</span><span class="sxs-lookup"><span data-stu-id="d55a2-122">In the following example, the loop in the `CreateComponent` method generates three `PetDetails` components.</span></span> <span data-ttu-id="d55a2-123">在 <xref:Microsoft.AspNetCore.Components.Rendering.RenderTreeBuilder> 具有序號的方法中，序號是源程式碼號。</span><span class="sxs-lookup"><span data-stu-id="d55a2-123">In <xref:Microsoft.AspNetCore.Components.Rendering.RenderTreeBuilder> methods with a sequence number, sequence numbers are source code line numbers.</span></span> <span data-ttu-id="d55a2-124">:::no-loc(Blazor):::差異演算法依賴不同行程式碼（而不是不同的呼叫調用）對應的序號。</span><span class="sxs-lookup"><span data-stu-id="d55a2-124">The :::no-loc(Blazor)::: difference algorithm relies on the sequence numbers corresponding to distinct lines of code, not distinct call invocations.</span></span> <span data-ttu-id="d55a2-125">使用方法建立元件時 <xref:Microsoft.AspNetCore.Components.Rendering.RenderTreeBuilder> ，請將序號的引數硬式編碼。</span><span class="sxs-lookup"><span data-stu-id="d55a2-125">When creating a component with <xref:Microsoft.AspNetCore.Components.Rendering.RenderTreeBuilder> methods, hardcode the arguments for sequence numbers.</span></span> <span data-ttu-id="d55a2-126">**使用計算或計數器來產生序號可能會導致效能不佳。**</span><span class="sxs-lookup"><span data-stu-id="d55a2-126">**Using a calculation or counter to generate the sequence number can lead to poor performance.**</span></span> <span data-ttu-id="d55a2-127">如需詳細資訊，請參閱序號與程式 [程式碼號相關，而不是執行順序](#sequence-numbers-relate-to-code-line-numbers-and-not-execution-order) 一節。</span><span class="sxs-lookup"><span data-stu-id="d55a2-127">For more information, see the [Sequence numbers relate to code line numbers and not execution order](#sequence-numbers-relate-to-code-line-numbers-and-not-execution-order) section.</span></span>
+<span data-ttu-id="d55a2-122">在下列範例中，方法中的迴圈會 `CreateComponent` 產生三個 `PetDetails` 元件。</span><span class="sxs-lookup"><span data-stu-id="d55a2-122">In the following example, the loop in the `CreateComponent` method generates three `PetDetails` components.</span></span> <span data-ttu-id="d55a2-123">在 <xref:Microsoft.AspNetCore.Components.Rendering.RenderTreeBuilder> 具有序號的方法中，序號是源程式碼號。</span><span class="sxs-lookup"><span data-stu-id="d55a2-123">In <xref:Microsoft.AspNetCore.Components.Rendering.RenderTreeBuilder> methods with a sequence number, sequence numbers are source code line numbers.</span></span> <span data-ttu-id="d55a2-124">Blazor差異演算法依賴不同行程式碼（而不是不同的呼叫調用）對應的序號。</span><span class="sxs-lookup"><span data-stu-id="d55a2-124">The Blazor difference algorithm relies on the sequence numbers corresponding to distinct lines of code, not distinct call invocations.</span></span> <span data-ttu-id="d55a2-125">使用方法建立元件時 <xref:Microsoft.AspNetCore.Components.Rendering.RenderTreeBuilder> ，請將序號的引數硬式編碼。</span><span class="sxs-lookup"><span data-stu-id="d55a2-125">When creating a component with <xref:Microsoft.AspNetCore.Components.Rendering.RenderTreeBuilder> methods, hardcode the arguments for sequence numbers.</span></span> <span data-ttu-id="d55a2-126">**使用計算或計數器來產生序號可能會導致效能不佳。**</span><span class="sxs-lookup"><span data-stu-id="d55a2-126">**Using a calculation or counter to generate the sequence number can lead to poor performance.**</span></span> <span data-ttu-id="d55a2-127">如需詳細資訊，請參閱序號與程式 [程式碼號相關，而不是執行順序](#sequence-numbers-relate-to-code-line-numbers-and-not-execution-order) 一節。</span><span class="sxs-lookup"><span data-stu-id="d55a2-127">For more information, see the [Sequence numbers relate to code line numbers and not execution order](#sequence-numbers-relate-to-code-line-numbers-and-not-execution-order) section.</span></span>
 
 <span data-ttu-id="d55a2-128">`BuiltContent` 元件：</span><span class="sxs-lookup"><span data-stu-id="d55a2-128">`BuiltContent` component:</span></span>
 
@@ -135,15 +135,15 @@ public void ConfigureServices(IServiceCollection services)
 ```
 
 > [!WARNING]
-> <span data-ttu-id="d55a2-129">中的類型 <xref:Microsoft.AspNetCore.Components.RenderTree> 允許處理轉譯作業的 *結果* 。</span><span class="sxs-lookup"><span data-stu-id="d55a2-129">The types in <xref:Microsoft.AspNetCore.Components.RenderTree> allow processing of the *results* of rendering operations.</span></span> <span data-ttu-id="d55a2-130">這些是架構執行的內部詳細資料 :::no-loc(Blazor)::: 。</span><span class="sxs-lookup"><span data-stu-id="d55a2-130">These are internal details of the :::no-loc(Blazor)::: framework implementation.</span></span> <span data-ttu-id="d55a2-131">這些類型應該視為不 *穩定* ，未來的版本可能會變更。</span><span class="sxs-lookup"><span data-stu-id="d55a2-131">These types should be considered *unstable* and subject to change in future releases.</span></span>
+> <span data-ttu-id="d55a2-129">中的類型 <xref:Microsoft.AspNetCore.Components.RenderTree> 允許處理轉譯作業的 *結果* 。</span><span class="sxs-lookup"><span data-stu-id="d55a2-129">The types in <xref:Microsoft.AspNetCore.Components.RenderTree> allow processing of the *results* of rendering operations.</span></span> <span data-ttu-id="d55a2-130">這些是架構執行的內部詳細資料 Blazor 。</span><span class="sxs-lookup"><span data-stu-id="d55a2-130">These are internal details of the Blazor framework implementation.</span></span> <span data-ttu-id="d55a2-131">這些類型應該視為不 *穩定* ，未來的版本可能會變更。</span><span class="sxs-lookup"><span data-stu-id="d55a2-131">These types should be considered *unstable* and subject to change in future releases.</span></span>
 
 ### <a name="sequence-numbers-relate-to-code-line-numbers-and-not-execution-order"></a><span data-ttu-id="d55a2-132">序號與程式程式碼號和非執行順序相關</span><span class="sxs-lookup"><span data-stu-id="d55a2-132">Sequence numbers relate to code line numbers and not execution order</span></span>
 
-<span data-ttu-id="d55a2-133">:::no-loc(Razor)::: 元件檔 (`.razor`) 一律會進行編譯。</span><span class="sxs-lookup"><span data-stu-id="d55a2-133">:::no-loc(Razor)::: component files (`.razor`) are always compiled.</span></span> <span data-ttu-id="d55a2-134">相較于解讀程式碼，編譯是可能的優勢，因為編譯步驟可以用來插入可在執行時間改善應用程式效能的資訊。</span><span class="sxs-lookup"><span data-stu-id="d55a2-134">Compilation is a potential advantage over interpreting code because the compile step can be used to inject information that improves app performance at runtime.</span></span>
+<span data-ttu-id="d55a2-133">Razor 元件檔 (`.razor`) 一律會進行編譯。</span><span class="sxs-lookup"><span data-stu-id="d55a2-133">Razor component files (`.razor`) are always compiled.</span></span> <span data-ttu-id="d55a2-134">相較于解讀程式碼，編譯是可能的優勢，因為編譯步驟可以用來插入可在執行時間改善應用程式效能的資訊。</span><span class="sxs-lookup"><span data-stu-id="d55a2-134">Compilation is a potential advantage over interpreting code because the compile step can be used to inject information that improves app performance at runtime.</span></span>
 
 <span data-ttu-id="d55a2-135">這些改進的主要範例包含 *序號* 。</span><span class="sxs-lookup"><span data-stu-id="d55a2-135">A key example of these improvements involves *sequence numbers* .</span></span> <span data-ttu-id="d55a2-136">序號會向執行時間指出輸出來自哪些不同和已排序的程式程式碼。</span><span class="sxs-lookup"><span data-stu-id="d55a2-136">Sequence numbers indicate to the runtime which outputs came from which distinct and ordered lines of code.</span></span> <span data-ttu-id="d55a2-137">執行時間會使用這項資訊，以線性時間產生有效率的樹狀結構差異，這遠比一般樹狀結構差異演算法一般可能更快。</span><span class="sxs-lookup"><span data-stu-id="d55a2-137">The runtime uses this information to generate efficient tree diffs in linear time, which is far faster than is normally possible for a general tree diff algorithm.</span></span>
 
-<span data-ttu-id="d55a2-138">請考慮下列 :::no-loc(Razor)::: 元件 (`.razor`) 檔：</span><span class="sxs-lookup"><span data-stu-id="d55a2-138">Consider the following :::no-loc(Razor)::: component (`.razor`) file:</span></span>
+<span data-ttu-id="d55a2-138">請考慮下列 Razor 元件 (`.razor`) 檔：</span><span class="sxs-lookup"><span data-stu-id="d55a2-138">Consider the following Razor component (`.razor`) file:</span></span>
 
 ```razor
 @if (someFlag)
@@ -225,4 +225,4 @@ builder.AddContent(seq++, "Second");
 * <span data-ttu-id="d55a2-191">架構無法在執行時間自動建立自己的序號，因為必要的資訊不存在，除非它是在編譯時期進行捕捉。</span><span class="sxs-lookup"><span data-stu-id="d55a2-191">The framework can't create its own sequence numbers automatically at runtime because the necessary information doesn't exist unless it's captured at compile time.</span></span>
 * <span data-ttu-id="d55a2-192">請勿撰寫很長的手動執行 <xref:Microsoft.AspNetCore.Components.Rendering.RenderTreeBuilder> 邏輯區塊。</span><span class="sxs-lookup"><span data-stu-id="d55a2-192">Don't write long blocks of manually-implemented <xref:Microsoft.AspNetCore.Components.Rendering.RenderTreeBuilder> logic.</span></span> <span data-ttu-id="d55a2-193">偏好使用檔案 `.razor` ，並讓編譯器處理序號。</span><span class="sxs-lookup"><span data-stu-id="d55a2-193">Prefer `.razor` files and allow the compiler to deal with the sequence numbers.</span></span> <span data-ttu-id="d55a2-194">如果您無法避免手動 <xref:Microsoft.AspNetCore.Components.Rendering.RenderTreeBuilder> 邏輯，請將很長的程式碼區塊分割成包裝在呼叫中的較小部分 <xref:Microsoft.AspNetCore.Components.Rendering.RenderTreeBuilder.OpenRegion%2A> / <xref:Microsoft.AspNetCore.Components.Rendering.RenderTreeBuilder.CloseRegion%2A> 。</span><span class="sxs-lookup"><span data-stu-id="d55a2-194">If you're unable to avoid manual <xref:Microsoft.AspNetCore.Components.Rendering.RenderTreeBuilder> logic, split long blocks of code into smaller pieces wrapped in <xref:Microsoft.AspNetCore.Components.Rendering.RenderTreeBuilder.OpenRegion%2A>/<xref:Microsoft.AspNetCore.Components.Rendering.RenderTreeBuilder.CloseRegion%2A> calls.</span></span> <span data-ttu-id="d55a2-195">每個區域都有自己的序號不同的空間，因此您可以從零 (或在每個區域內) 任何其他任意數目的任一數字重新開機。</span><span class="sxs-lookup"><span data-stu-id="d55a2-195">Each region has its own separate space of sequence numbers, so you can restart from zero (or any other arbitrary number) inside each region.</span></span>
 * <span data-ttu-id="d55a2-196">如果序號是硬式編碼，則差異演算法只會要求序號增加值。</span><span class="sxs-lookup"><span data-stu-id="d55a2-196">If sequence numbers are hardcoded, the diff algorithm only requires that sequence numbers increase in value.</span></span> <span data-ttu-id="d55a2-197">初始值與間距無關。</span><span class="sxs-lookup"><span data-stu-id="d55a2-197">The initial value and gaps are irrelevant.</span></span> <span data-ttu-id="d55a2-198">其中一個合法的選項是使用程式程式碼號作為序號，或從零開始，並依一個或數百個 (或任何偏好的間隔) 來增加。</span><span class="sxs-lookup"><span data-stu-id="d55a2-198">One legitimate option is to use the code line number as the sequence number, or start from zero and increase by ones or hundreds (or any preferred interval).</span></span> 
-* <span data-ttu-id="d55a2-199">:::no-loc(Blazor)::: 使用序號，其他樹狀結構比較的 UI 架構則不會使用它們。</span><span class="sxs-lookup"><span data-stu-id="d55a2-199">:::no-loc(Blazor)::: uses sequence numbers, while other tree-diffing UI frameworks don't use them.</span></span> <span data-ttu-id="d55a2-200">使用序號時，比較會更快，且 :::no-loc(Blazor)::: 具有可自動處理開發人員撰寫檔案之序號的編譯步驟 `.razor` 。</span><span class="sxs-lookup"><span data-stu-id="d55a2-200">Diffing is far faster when sequence numbers are used, and :::no-loc(Blazor)::: has the advantage of a compile step that deals with sequence numbers automatically for developers authoring `.razor` files.</span></span>
+* <span data-ttu-id="d55a2-199">Blazor 使用序號，其他樹狀結構比較的 UI 架構則不會使用它們。</span><span class="sxs-lookup"><span data-stu-id="d55a2-199">Blazor uses sequence numbers, while other tree-diffing UI frameworks don't use them.</span></span> <span data-ttu-id="d55a2-200">使用序號時，比較會更快，且 Blazor 具有可自動處理開發人員撰寫檔案之序號的編譯步驟 `.razor` 。</span><span class="sxs-lookup"><span data-stu-id="d55a2-200">Diffing is far faster when sequence numbers are used, and Blazor has the advantage of a compile step that deals with sequence numbers automatically for developers authoring `.razor` files.</span></span>

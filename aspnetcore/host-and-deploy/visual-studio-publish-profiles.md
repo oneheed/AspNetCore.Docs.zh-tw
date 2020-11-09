@@ -7,17 +7,17 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 07/28/2020
 no-loc:
-- ':::no-loc(appsettings.json):::'
-- ':::no-loc(ASP.NET Core Identity):::'
-- ':::no-loc(cookie):::'
-- ':::no-loc(Cookie):::'
-- ':::no-loc(Blazor):::'
-- ':::no-loc(Blazor Server):::'
-- ':::no-loc(Blazor WebAssembly):::'
-- ':::no-loc(Identity):::'
-- ":::no-loc(Let's Encrypt):::"
-- ':::no-loc(Razor):::'
-- ':::no-loc(SignalR):::'
+- 'appsettings.json'
+- 'ASP.NET Core Identity'
+- 'cookie'
+- 'Cookie'
+- 'Blazor'
+- 'Blazor Server'
+- 'Blazor WebAssembly'
+- 'Identity'
+- "Let's Encrypt"
+- 'Razor'
+- 'SignalR'
 uid: host-and-deploy/visual-studio-publish-profiles
 ms.openlocfilehash: 98dfd539171807cbf94d4ac8746458152c809495
 ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
@@ -42,7 +42,7 @@ ms.locfileid: "93057566"
 
 <span data-ttu-id="c1660-109">上述 `<Project>` 元素的 `Sdk` 屬性會從 *$(MSBuildSDKsPath)\Microsoft.NET.Sdk.Web\Sdk\Sdk.props* 和 *$(MSBuildSDKsPath)\Microsoft.NET.Sdk.Web\Sdk\Sdk.targets* ，分別匯入 MSBuild [屬性](/visualstudio/msbuild/msbuild-properties)和 [目標](/visualstudio/msbuild/msbuild-targets)。</span><span class="sxs-lookup"><span data-stu-id="c1660-109">The preceding `<Project>` element's `Sdk` attribute imports the MSBuild [properties](/visualstudio/msbuild/msbuild-properties) and [targets](/visualstudio/msbuild/msbuild-targets) from *$(MSBuildSDKsPath)\Microsoft.NET.Sdk.Web\Sdk\Sdk.props* and *$(MSBuildSDKsPath)\Microsoft.NET.Sdk.Web\Sdk\Sdk.targets* , respectively.</span></span> <span data-ttu-id="c1660-110">`$(MSBuildSDKsPath)` (與 Visual Studio 2019 Enterprise) 的預設位置在 *%programfiles(x86)%\Microsoft Visual Studio\2019\Enterprise\MSBuild\Sdks* 資料夾。</span><span class="sxs-lookup"><span data-stu-id="c1660-110">The default location for `$(MSBuildSDKsPath)` (with Visual Studio 2019 Enterprise) is the *%programfiles(x86)%\Microsoft Visual Studio\2019\Enterprise\MSBuild\Sdks* folder.</span></span>
 
-<span data-ttu-id="c1660-111">`Microsoft.NET.Sdk.Web` ([WEB SDK](xref:razor-pages/web-sdk)) 相依于其他 sdk，包括 `Microsoft.NET.Sdk` ([.NET Core SDK](/dotnet/core/project-sdk/msbuild-props)) 和 `Microsoft.NET.Sdk.:::no-loc(Razor):::` ([ :::no-loc(Razor)::: SDK](xref:razor-pages/sdk)) 。</span><span class="sxs-lookup"><span data-stu-id="c1660-111">`Microsoft.NET.Sdk.Web` ([Web SDK](xref:razor-pages/web-sdk)) depends on other SDKs, including `Microsoft.NET.Sdk` ([.NET Core SDK](/dotnet/core/project-sdk/msbuild-props)) and `Microsoft.NET.Sdk.:::no-loc(Razor):::` ([:::no-loc(Razor)::: SDK](xref:razor-pages/sdk)).</span></span> <span data-ttu-id="c1660-112">系統會匯入與每個相依 SDK 相關聯的 MSBuild 屬性和目標。</span><span class="sxs-lookup"><span data-stu-id="c1660-112">The MSBuild properties and targets associated with each dependent SDK are imported.</span></span> <span data-ttu-id="c1660-113">發佈目標會根據所使用的發佈方法，匯入一組適當的目標。</span><span class="sxs-lookup"><span data-stu-id="c1660-113">Publish targets import the appropriate set of targets based on the publish method used.</span></span>
+<span data-ttu-id="c1660-111">`Microsoft.NET.Sdk.Web` ([WEB SDK](xref:razor-pages/web-sdk)) 相依于其他 sdk，包括 `Microsoft.NET.Sdk` ([.NET Core SDK](/dotnet/core/project-sdk/msbuild-props)) 和 `Microsoft.NET.Sdk.Razor` ([ Razor SDK](xref:razor-pages/sdk)) 。</span><span class="sxs-lookup"><span data-stu-id="c1660-111">`Microsoft.NET.Sdk.Web` ([Web SDK](xref:razor-pages/web-sdk)) depends on other SDKs, including `Microsoft.NET.Sdk` ([.NET Core SDK](/dotnet/core/project-sdk/msbuild-props)) and `Microsoft.NET.Sdk.Razor` ([Razor SDK](xref:razor-pages/sdk)).</span></span> <span data-ttu-id="c1660-112">系統會匯入與每個相依 SDK 相關聯的 MSBuild 屬性和目標。</span><span class="sxs-lookup"><span data-stu-id="c1660-112">The MSBuild properties and targets associated with each dependent SDK are imported.</span></span> <span data-ttu-id="c1660-113">發佈目標會根據所使用的發佈方法，匯入一組適當的目標。</span><span class="sxs-lookup"><span data-stu-id="c1660-113">Publish targets import the appropriate set of targets based on the publish method used.</span></span>
 
 <span data-ttu-id="c1660-114">當 MSBuild 或 Visual Studio 載入專案時，會執行下列高階動作：</span><span class="sxs-lookup"><span data-stu-id="c1660-114">When MSBuild or Visual Studio loads a project, the following high-level actions occur:</span></span>
 
@@ -58,13 +58,13 @@ ms.locfileid: "93057566"
 
 ::: moniker range=">= aspnetcore-3.0"
 
-<span data-ttu-id="c1660-126">[WEB sdk](xref:razor-pages/web-sdk)會匯入[ :::no-loc(Razor)::: SDK](xref:razor-pages/sdk)。</span><span class="sxs-lookup"><span data-stu-id="c1660-126">The [Web SDK](xref:razor-pages/web-sdk) imports the [:::no-loc(Razor)::: SDK](xref:razor-pages/sdk).</span></span> <span data-ttu-id="c1660-127">因此，符合 `**\*.cshtml` 和 `**\*.razor` 模式的檔案也會包含在 `Content` 項目清單中。</span><span class="sxs-lookup"><span data-stu-id="c1660-127">As a result, files matching the patterns `**\*.cshtml` and `**\*.razor` are also included in the `Content` item list.</span></span>
+<span data-ttu-id="c1660-126">[WEB sdk](xref:razor-pages/web-sdk)會匯入[ Razor SDK](xref:razor-pages/sdk)。</span><span class="sxs-lookup"><span data-stu-id="c1660-126">The [Web SDK](xref:razor-pages/web-sdk) imports the [Razor SDK](xref:razor-pages/sdk).</span></span> <span data-ttu-id="c1660-127">因此，符合 `**\*.cshtml` 和 `**\*.razor` 模式的檔案也會包含在 `Content` 項目清單中。</span><span class="sxs-lookup"><span data-stu-id="c1660-127">As a result, files matching the patterns `**\*.cshtml` and `**\*.razor` are also included in the `Content` item list.</span></span>
 
 ::: moniker-end
 
 ::: moniker range=">= aspnetcore-2.1 <= aspnetcore-2.2"
 
-<span data-ttu-id="c1660-128">[WEB sdk](xref:razor-pages/web-sdk)會匯入[ :::no-loc(Razor)::: SDK](xref:razor-pages/sdk)。</span><span class="sxs-lookup"><span data-stu-id="c1660-128">The [Web SDK](xref:razor-pages/web-sdk) imports the [:::no-loc(Razor)::: SDK](xref:razor-pages/sdk).</span></span> <span data-ttu-id="c1660-129">因此，符合 `**\*.cshtml` 模式的檔案也會包含在 `Content` 項目清單中。</span><span class="sxs-lookup"><span data-stu-id="c1660-129">As a result, files matching the `**\*.cshtml` pattern are also included in the `Content` item list.</span></span>
+<span data-ttu-id="c1660-128">[WEB sdk](xref:razor-pages/web-sdk)會匯入[ Razor SDK](xref:razor-pages/sdk)。</span><span class="sxs-lookup"><span data-stu-id="c1660-128">The [Web SDK](xref:razor-pages/web-sdk) imports the [Razor SDK](xref:razor-pages/sdk).</span></span> <span data-ttu-id="c1660-129">因此，符合 `**\*.cshtml` 模式的檔案也會包含在 `Content` 項目清單中。</span><span class="sxs-lookup"><span data-stu-id="c1660-129">As a result, files matching the `**\*.cshtml` pattern are also included in the `Content` item list.</span></span>
 
 ::: moniker-end
 
@@ -352,7 +352,7 @@ dotnet msbuild "AzureWebApp.csproj"
 * <span data-ttu-id="c1660-259">組建成品</span><span class="sxs-lookup"><span data-stu-id="c1660-259">Build artifacts</span></span>
 * <span data-ttu-id="c1660-260">符合下列萬用字元模式的資料夾和檔案：</span><span class="sxs-lookup"><span data-stu-id="c1660-260">Folders and files matching the following globbing patterns:</span></span>
   * <span data-ttu-id="c1660-261">`**\*.config` (例如， *web.config* )</span><span class="sxs-lookup"><span data-stu-id="c1660-261">`**\*.config` (for example, *web.config* )</span></span>
-  * <span data-ttu-id="c1660-262">`**\*.json` (例如， *:::no-loc(appsettings.json):::* ) </span><span class="sxs-lookup"><span data-stu-id="c1660-262">`**\*.json` (for example, *:::no-loc(appsettings.json):::* )</span></span>
+  * <span data-ttu-id="c1660-262">`**\*.json` (例如， *appsettings.json* ) </span><span class="sxs-lookup"><span data-stu-id="c1660-262">`**\*.json` (for example, *appsettings.json* )</span></span>
   * `wwwroot\**`
 
 <span data-ttu-id="c1660-263">MSBuild 支援[萬用字元模式](https://gruntjs.com/configuring-tasks#globbing-patterns)。</span><span class="sxs-lookup"><span data-stu-id="c1660-263">MSBuild supports [globbing patterns](https://gruntjs.com/configuring-tasks#globbing-patterns).</span></span> <span data-ttu-id="c1660-264">例如，下列 `<Content>` 元素會抑制在 *wwwroot/content* 資料夾及其子資料夾中複製文字檔 ( *.txt* )：</span><span class="sxs-lookup"><span data-stu-id="c1660-264">For example, the following `<Content>` element suppresses the copying of text ( *.txt* ) files in the *wwwroot\content* folder and its subfolders:</span></span>

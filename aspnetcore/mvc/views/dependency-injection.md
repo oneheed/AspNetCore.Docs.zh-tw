@@ -5,17 +5,17 @@ description: 了解 ASP.NET Core 如何支援 MVC 檢視中的相依性插入。
 ms.author: riande
 ms.date: 10/14/2016
 no-loc:
-- ':::no-loc(appsettings.json):::'
-- ':::no-loc(ASP.NET Core Identity):::'
-- ':::no-loc(cookie):::'
-- ':::no-loc(Cookie):::'
-- ':::no-loc(Blazor):::'
-- ':::no-loc(Blazor Server):::'
-- ':::no-loc(Blazor WebAssembly):::'
-- ':::no-loc(Identity):::'
-- ":::no-loc(Let's Encrypt):::"
-- ':::no-loc(Razor):::'
-- ':::no-loc(SignalR):::'
+- 'appsettings.json'
+- 'ASP.NET Core Identity'
+- 'cookie'
+- 'Cookie'
+- 'Blazor'
+- 'Blazor Server'
+- 'Blazor WebAssembly'
+- 'Identity'
+- "Let's Encrypt"
+- 'Razor'
+- 'SignalR'
 uid: mvc/views/dependency-injection
 ms.openlocfilehash: a596d05e3d1d73d4faa2f84d97a40e4a2c1234e4
 ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
@@ -34,9 +34,9 @@ ms.locfileid: "93059282"
 
 ## <a name="configuration-injection"></a><span data-ttu-id="28c5a-110">插入組態</span><span class="sxs-lookup"><span data-stu-id="28c5a-110">Configuration injection</span></span>
 
-<span data-ttu-id="28c5a-111">*:::no-loc(appsettings.json):::* 值可以直接插入到視圖中。</span><span class="sxs-lookup"><span data-stu-id="28c5a-111">*:::no-loc(appsettings.json):::* values can be injected directly into a view.</span></span>
+<span data-ttu-id="28c5a-111">*appsettings.json* 值可以直接插入到視圖中。</span><span class="sxs-lookup"><span data-stu-id="28c5a-111">*appsettings.json* values can be injected directly into a view.</span></span>
 
-<span data-ttu-id="28c5a-112">檔案範例 *:::no-loc(appsettings.json):::* ：</span><span class="sxs-lookup"><span data-stu-id="28c5a-112">Example of an *:::no-loc(appsettings.json):::* file:</span></span>
+<span data-ttu-id="28c5a-112">檔案範例 *appsettings.json* ：</span><span class="sxs-lookup"><span data-stu-id="28c5a-112">Example of an *appsettings.json* file:</span></span>
 
 ```json
 {

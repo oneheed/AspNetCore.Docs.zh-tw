@@ -1,22 +1,22 @@
 ---
 title: 使用受授權保護的使用者資料建立 ASP.NET Core 應用程式
 author: rick-anderson
-description: '瞭解如何使用受授權保護的使用者資料來建立 ASP.NET Core web 應用程式。 包含 HTTPS、驗證、安全性 :::no-loc(ASP.NET Core Identity)::: 。'
+description: '瞭解如何使用受授權保護的使用者資料來建立 ASP.NET Core web 應用程式。 包含 HTTPS、驗證、安全性 ASP.NET Core Identity 。'
 ms.author: riande
 ms.date: 7/18/2020
 ms.custom: mvc, seodec18
 no-loc:
-- ':::no-loc(appsettings.json):::'
-- ':::no-loc(ASP.NET Core Identity):::'
-- ':::no-loc(cookie):::'
-- ':::no-loc(Cookie):::'
-- ':::no-loc(Blazor):::'
-- ':::no-loc(Blazor Server):::'
-- ':::no-loc(Blazor WebAssembly):::'
-- ':::no-loc(Identity):::'
-- ":::no-loc(Let's Encrypt):::"
-- ':::no-loc(Razor):::'
-- ':::no-loc(SignalR):::'
+- 'appsettings.json'
+- 'ASP.NET Core Identity'
+- 'cookie'
+- 'Cookie'
+- 'Blazor'
+- 'Blazor Server'
+- 'Blazor WebAssembly'
+- 'Identity'
+- "Let's Encrypt"
+- 'Razor'
+- 'SignalR'
 uid: security/authorization/secure-data
 ms.openlocfilehash: accfd46fa72c33976f8af2a39267c993447e036e
 ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
@@ -101,11 +101,11 @@ ms.locfileid: "93051937"
 
 ### <a name="tie-the-contact-data-to-the-user"></a><span data-ttu-id="da4ec-151">將連絡人資料與使用者系結</span><span class="sxs-lookup"><span data-stu-id="da4ec-151">Tie the contact data to the user</span></span>
 
-<span data-ttu-id="da4ec-152">使用 ASP.NET [:::no-loc(Identity):::](xref:security/authentication/identity) 使用者識別碼，以確保使用者可以編輯其資料，而不是其他使用者資料。</span><span class="sxs-lookup"><span data-stu-id="da4ec-152">Use the ASP.NET [:::no-loc(Identity):::](xref:security/authentication/identity) user ID to ensure users can edit their data, but not other users data.</span></span> <span data-ttu-id="da4ec-153">將 `OwnerID` 和加入 `ContactStatus` 至 `Contact` 模型：</span><span class="sxs-lookup"><span data-stu-id="da4ec-153">Add `OwnerID` and `ContactStatus` to the `Contact` model:</span></span>
+<span data-ttu-id="da4ec-152">使用 ASP.NET [Identity](xref:security/authentication/identity) 使用者識別碼，以確保使用者可以編輯其資料，而不是其他使用者資料。</span><span class="sxs-lookup"><span data-stu-id="da4ec-152">Use the ASP.NET [Identity](xref:security/authentication/identity) user ID to ensure users can edit their data, but not other users data.</span></span> <span data-ttu-id="da4ec-153">將 `OwnerID` 和加入 `ContactStatus` 至 `Contact` 模型：</span><span class="sxs-lookup"><span data-stu-id="da4ec-153">Add `OwnerID` and `ContactStatus` to the `Contact` model:</span></span>
 
 [!code-csharp[](secure-data/samples/final3/Models/Contact.cs?name=snippet1&highlight=5-6,16-999)]
 
-<span data-ttu-id="da4ec-154">`OwnerID` 這是 `AspNetUser` 資料庫中資料表的使用者識別碼 [:::no-loc(Identity):::](xref:security/authentication/identity) 。</span><span class="sxs-lookup"><span data-stu-id="da4ec-154">`OwnerID` is the user's ID from the `AspNetUser` table in the [:::no-loc(Identity):::](xref:security/authentication/identity) database.</span></span> <span data-ttu-id="da4ec-155">`Status`欄位會決定一般使用者是否可以看到連絡人。</span><span class="sxs-lookup"><span data-stu-id="da4ec-155">The `Status` field determines if a contact is viewable by general users.</span></span>
+<span data-ttu-id="da4ec-154">`OwnerID` 這是 `AspNetUser` 資料庫中資料表的使用者識別碼 [Identity](xref:security/authentication/identity) 。</span><span class="sxs-lookup"><span data-stu-id="da4ec-154">`OwnerID` is the user's ID from the `AspNetUser` table in the [Identity](xref:security/authentication/identity) database.</span></span> <span data-ttu-id="da4ec-155">`Status`欄位會決定一般使用者是否可以看到連絡人。</span><span class="sxs-lookup"><span data-stu-id="da4ec-155">The `Status` field determines if a contact is viewable by general users.</span></span>
 
 <span data-ttu-id="da4ec-156">建立新的遷移，並更新資料庫：</span><span class="sxs-lookup"><span data-stu-id="da4ec-156">Create a new migration and update the database:</span></span>
 
@@ -114,9 +114,9 @@ dotnet ef migrations add userID_Status
 dotnet ef database update
 ```
 
-### <a name="add-role-services-to-no-locidentity"></a><span data-ttu-id="da4ec-157">將角色服務新增至 :::no-loc(Identity):::</span><span class="sxs-lookup"><span data-stu-id="da4ec-157">Add Role services to :::no-loc(Identity):::</span></span>
+### <a name="add-role-services-to-no-locidentity"></a><span data-ttu-id="da4ec-157">將角色服務新增至 Identity</span><span class="sxs-lookup"><span data-stu-id="da4ec-157">Add Role services to Identity</span></span>
 
-<span data-ttu-id="da4ec-158">附加 [AddRoles](/dotnet/api/microsoft.aspnetcore.identity.identitybuilder.addroles#Microsoft_AspNetCore_:::no-loc(Identity):::_:::no-loc(Identity):::Builder_AddRoles__1) 以新增角色服務：</span><span class="sxs-lookup"><span data-stu-id="da4ec-158">Append [AddRoles](/dotnet/api/microsoft.aspnetcore.identity.identitybuilder.addroles#Microsoft_AspNetCore_:::no-loc(Identity):::_:::no-loc(Identity):::Builder_AddRoles__1) to add Role services:</span></span>
+<span data-ttu-id="da4ec-158">附加 [AddRoles](/dotnet/api/microsoft.aspnetcore.identity.identitybuilder.addroles#Microsoft_AspNetCore_Identity_IdentityBuilder_AddRoles__1) 以新增角色服務：</span><span class="sxs-lookup"><span data-stu-id="da4ec-158">Append [AddRoles](/dotnet/api/microsoft.aspnetcore.identity.identitybuilder.addroles#Microsoft_AspNetCore_Identity_IdentityBuilder_AddRoles__1) to add Role services:</span></span>
 
 [!code-csharp[](secure-data/samples/final3/Startup.cs?name=snippet2&highlight=9)]
 
@@ -128,19 +128,19 @@ dotnet ef database update
 
 [!code-csharp[](secure-data/samples/final3/Startup.cs?name=snippet&highlight=13-99)]
 
-<span data-ttu-id="da4ec-161">上述反白顯示的程式碼會設定回溯 [驗證原則](xref:Microsoft.AspNetCore.Authorization.AuthorizationOptions.FallbackPolicy)。</span><span class="sxs-lookup"><span data-stu-id="da4ec-161">The preceding highlighted code sets the [fallback authentication policy](xref:Microsoft.AspNetCore.Authorization.AuthorizationOptions.FallbackPolicy).</span></span> <span data-ttu-id="da4ec-162">除了具有驗證屬性的頁面、控制器或動作方法之外，fallback 驗證原則需要驗證 \* *_all_* _ 使用者 :::no-loc(Razor)::: 。</span><span class="sxs-lookup"><span data-stu-id="da4ec-162">The fallback authentication policy requires \* *_all_* _ users to be authenticated, except for :::no-loc(Razor)::: Pages, controllers, or action methods with an authentication attribute.</span></span> <span data-ttu-id="da4ec-163">例如，使用 :::no-loc(Razor)::: 或的頁面、控制器或動作方法，會 `[AllowAnonymous]` `[Authorize(PolicyName="MyPolicy")]` 使用套用的驗證屬性，而不是回溯驗證原則。</span><span class="sxs-lookup"><span data-stu-id="da4ec-163">For example, :::no-loc(Razor)::: Pages, controllers, or action methods with `[AllowAnonymous]` or `[Authorize(PolicyName="MyPolicy")]` use the applied authentication attribute rather than the fallback authentication policy.</span></span>
+<span data-ttu-id="da4ec-161">上述反白顯示的程式碼會設定回溯 [驗證原則](xref:Microsoft.AspNetCore.Authorization.AuthorizationOptions.FallbackPolicy)。</span><span class="sxs-lookup"><span data-stu-id="da4ec-161">The preceding highlighted code sets the [fallback authentication policy](xref:Microsoft.AspNetCore.Authorization.AuthorizationOptions.FallbackPolicy).</span></span> <span data-ttu-id="da4ec-162">除了具有驗證屬性的頁面、控制器或動作方法之外，fallback 驗證原則需要驗證 \* *_all_* _ 使用者 Razor 。</span><span class="sxs-lookup"><span data-stu-id="da4ec-162">The fallback authentication policy requires \* *_all_* _ users to be authenticated, except for Razor Pages, controllers, or action methods with an authentication attribute.</span></span> <span data-ttu-id="da4ec-163">例如，使用 Razor 或的頁面、控制器或動作方法，會 `[AllowAnonymous]` `[Authorize(PolicyName="MyPolicy")]` 使用套用的驗證屬性，而不是回溯驗證原則。</span><span class="sxs-lookup"><span data-stu-id="da4ec-163">For example, Razor Pages, controllers, or action methods with `[AllowAnonymous]` or `[Authorize(PolicyName="MyPolicy")]` use the applied authentication attribute rather than the fallback authentication policy.</span></span>
 
 <span data-ttu-id="da4ec-164">回退驗證原則：</span><span class="sxs-lookup"><span data-stu-id="da4ec-164">The fallback authentication policy:</span></span>
 
 <span data-ttu-id="da4ec-165">_ 會套用至未明確指定驗證原則的所有要求。</span><span class="sxs-lookup"><span data-stu-id="da4ec-165">_ Is applied to all requests that do not explicitly specify an authentication policy.</span></span> <span data-ttu-id="da4ec-166">針對端點路由所提供的要求，這會包含未指定授權屬性的任何端點。</span><span class="sxs-lookup"><span data-stu-id="da4ec-166">For requests served by endpoint routing, this would include any endpoint that does not specify an authorization attribute.</span></span> <span data-ttu-id="da4ec-167">針對其他中介軟體在授權中介軟體之後所提供的要求（例如 [靜態](xref:fundamentals/static-files)檔案），這會將原則套用至所有要求。</span><span class="sxs-lookup"><span data-stu-id="da4ec-167">For requests served by other middleware after the authorization middleware, such as [static files](xref:fundamentals/static-files), this would apply the policy to all requests.</span></span>
 
-<span data-ttu-id="da4ec-168">將回溯驗證原則設定為要求使用者進行驗證，可保護新新增 :::no-loc(Razor)::: 的頁面和控制器。</span><span class="sxs-lookup"><span data-stu-id="da4ec-168">Setting the fallback authentication policy to require users to be authenticated protects newly added :::no-loc(Razor)::: Pages and controllers.</span></span> <span data-ttu-id="da4ec-169">預設需要驗證比依賴新控制器和 :::no-loc(Razor)::: 頁面來包含屬性更安全 `[Authorize]` 。</span><span class="sxs-lookup"><span data-stu-id="da4ec-169">Having authentication required by default is more secure than relying on new controllers and :::no-loc(Razor)::: Pages to include the `[Authorize]` attribute.</span></span>
+<span data-ttu-id="da4ec-168">將回溯驗證原則設定為要求使用者進行驗證，可保護新新增 Razor 的頁面和控制器。</span><span class="sxs-lookup"><span data-stu-id="da4ec-168">Setting the fallback authentication policy to require users to be authenticated protects newly added Razor Pages and controllers.</span></span> <span data-ttu-id="da4ec-169">預設需要驗證比依賴新控制器和 Razor 頁面來包含屬性更安全 `[Authorize]` 。</span><span class="sxs-lookup"><span data-stu-id="da4ec-169">Having authentication required by default is more secure than relying on new controllers and Razor Pages to include the `[Authorize]` attribute.</span></span>
 
 <span data-ttu-id="da4ec-170"><xref:Microsoft.AspNetCore.Authorization.AuthorizationOptions>類別也包含 <xref:Microsoft.AspNetCore.Authorization.AuthorizationOptions.DefaultPolicy?displayProperty=nameWithType> 。</span><span class="sxs-lookup"><span data-stu-id="da4ec-170">The <xref:Microsoft.AspNetCore.Authorization.AuthorizationOptions> class also contains <xref:Microsoft.AspNetCore.Authorization.AuthorizationOptions.DefaultPolicy?displayProperty=nameWithType>.</span></span> <span data-ttu-id="da4ec-171">`DefaultPolicy`是 `[Authorize]` 未指定任何原則時，與屬性搭配使用的原則。</span><span class="sxs-lookup"><span data-stu-id="da4ec-171">The `DefaultPolicy` is the policy used with the `[Authorize]` attribute when no policy is specified.</span></span> <span data-ttu-id="da4ec-172">`[Authorize]` 不包含命名原則，與不同 `[Authorize(PolicyName="MyPolicy")]` 。</span><span class="sxs-lookup"><span data-stu-id="da4ec-172">`[Authorize]` doesn't contain a named policy, unlike `[Authorize(PolicyName="MyPolicy")]`.</span></span>
 
 <span data-ttu-id="da4ec-173">如需原則的詳細資訊，請參閱 <xref:security/authorization/policies> 。</span><span class="sxs-lookup"><span data-stu-id="da4ec-173">For more information on policies, see <xref:security/authorization/policies>.</span></span>
 
-<span data-ttu-id="da4ec-174">MVC 控制器和 :::no-loc(Razor)::: 頁面需要驗證所有使用者的另一種方法是新增授權篩選準則：</span><span class="sxs-lookup"><span data-stu-id="da4ec-174">An alternative way for MVC controllers and :::no-loc(Razor)::: Pages to require all users be authenticated is adding an authorization filter:</span></span>
+<span data-ttu-id="da4ec-174">MVC 控制器和 Razor 頁面需要驗證所有使用者的另一種方法是新增授權篩選準則：</span><span class="sxs-lookup"><span data-stu-id="da4ec-174">An alternative way for MVC controllers and Razor Pages to require all users be authenticated is adding an authorization filter:</span></span>
 
 [!code-csharp[](secure-data/samples/final3/Startup2.cs?name=snippet&highlight=14-99)]
 
@@ -203,7 +203,7 @@ dotnet user-secrets set SeedUserPW <PW>
 
 ## <a name="register-the-authorization-handlers"></a><span data-ttu-id="da4ec-209">註冊授權處理常式</span><span class="sxs-lookup"><span data-stu-id="da4ec-209">Register the authorization handlers</span></span>
 
-<span data-ttu-id="da4ec-210">使用 Entity Framework Core 的服務必須使用[AddScoped](/dotnet/api/microsoft.extensions.dependencyinjection.servicecollectionserviceextensions)註冊相依性[插入](xref:fundamentals/dependency-injection)。</span><span class="sxs-lookup"><span data-stu-id="da4ec-210">Services using Entity Framework Core must be registered for [dependency injection](xref:fundamentals/dependency-injection) using [AddScoped](/dotnet/api/microsoft.extensions.dependencyinjection.servicecollectionserviceextensions).</span></span> <span data-ttu-id="da4ec-211">`ContactIsOwnerAuthorizationHandler`使用 ASP.NET Core [:::no-loc(Identity):::](xref:security/authentication/identity) ，以 Entity Framework Core 為基礎。</span><span class="sxs-lookup"><span data-stu-id="da4ec-211">The `ContactIsOwnerAuthorizationHandler` uses ASP.NET Core [:::no-loc(Identity):::](xref:security/authentication/identity), which is built on Entity Framework Core.</span></span> <span data-ttu-id="da4ec-212">使用服務集合註冊處理常式，以便透過相依性插入來使用它們 `ContactsController` 。 [dependency injection](xref:fundamentals/dependency-injection)</span><span class="sxs-lookup"><span data-stu-id="da4ec-212">Register the handlers with the service collection so they're available to the `ContactsController` through [dependency injection](xref:fundamentals/dependency-injection).</span></span> <span data-ttu-id="da4ec-213">將下列程式碼加入至結尾 `ConfigureServices` ：</span><span class="sxs-lookup"><span data-stu-id="da4ec-213">Add the following code to the end of `ConfigureServices`:</span></span>
+<span data-ttu-id="da4ec-210">使用 Entity Framework Core 的服務必須使用[AddScoped](/dotnet/api/microsoft.extensions.dependencyinjection.servicecollectionserviceextensions)註冊相依性[插入](xref:fundamentals/dependency-injection)。</span><span class="sxs-lookup"><span data-stu-id="da4ec-210">Services using Entity Framework Core must be registered for [dependency injection](xref:fundamentals/dependency-injection) using [AddScoped](/dotnet/api/microsoft.extensions.dependencyinjection.servicecollectionserviceextensions).</span></span> <span data-ttu-id="da4ec-211">`ContactIsOwnerAuthorizationHandler`使用 ASP.NET Core [Identity](xref:security/authentication/identity) ，以 Entity Framework Core 為基礎。</span><span class="sxs-lookup"><span data-stu-id="da4ec-211">The `ContactIsOwnerAuthorizationHandler` uses ASP.NET Core [Identity](xref:security/authentication/identity), which is built on Entity Framework Core.</span></span> <span data-ttu-id="da4ec-212">使用服務集合註冊處理常式，以便透過相依性插入來使用它們 `ContactsController` 。 [dependency injection](xref:fundamentals/dependency-injection)</span><span class="sxs-lookup"><span data-stu-id="da4ec-212">Register the handlers with the service collection so they're available to the `ContactsController` through [dependency injection](xref:fundamentals/dependency-injection).</span></span> <span data-ttu-id="da4ec-213">將下列程式碼加入至結尾 `ConfigureServices` ：</span><span class="sxs-lookup"><span data-stu-id="da4ec-213">Add the following code to the end of `ConfigureServices`:</span></span>
 
 [!code-csharp[](secure-data/samples/final3/Startup.cs?name=snippet_defaultPolicy&highlight=23-99)]
 
@@ -211,7 +211,7 @@ dotnet user-secrets set SeedUserPW <PW>
 
 ## <a name="support-authorization"></a><span data-ttu-id="da4ec-216">支援授權</span><span class="sxs-lookup"><span data-stu-id="da4ec-216">Support authorization</span></span>
 
-<span data-ttu-id="da4ec-217">在本節中，您會更新 :::no-loc(Razor)::: 頁面並新增作業需求類別。</span><span class="sxs-lookup"><span data-stu-id="da4ec-217">In this section, you update the :::no-loc(Razor)::: Pages and add an operations requirements class.</span></span>
+<span data-ttu-id="da4ec-217">在本節中，您會更新 Razor 頁面並新增作業需求類別。</span><span class="sxs-lookup"><span data-stu-id="da4ec-217">In this section, you update the Razor Pages and add an operations requirements class.</span></span>
 
 ### <a name="review-the-contact-operations-requirements-class"></a><span data-ttu-id="da4ec-218">複習 contact 作業需求課程</span><span class="sxs-lookup"><span data-stu-id="da4ec-218">Review the contact operations requirements class</span></span>
 
@@ -219,16 +219,16 @@ dotnet user-secrets set SeedUserPW <PW>
 
 [!code-csharp[](secure-data/samples/final3/Authorization/ContactOperations.cs)]
 
-### <a name="create-a-base-class-for-the-contacts-no-locrazor-pages"></a><span data-ttu-id="da4ec-221">建立連絡人頁面的基類 :::no-loc(Razor):::</span><span class="sxs-lookup"><span data-stu-id="da4ec-221">Create a base class for the Contacts :::no-loc(Razor)::: Pages</span></span>
+### <a name="create-a-base-class-for-the-contacts-no-locrazor-pages"></a><span data-ttu-id="da4ec-221">建立連絡人頁面的基類 Razor</span><span class="sxs-lookup"><span data-stu-id="da4ec-221">Create a base class for the Contacts Razor Pages</span></span>
 
-<span data-ttu-id="da4ec-222">建立包含 [連絡人] 頁面中所使用之服務的基類 :::no-loc(Razor)::: 。</span><span class="sxs-lookup"><span data-stu-id="da4ec-222">Create a base class that contains the services used in the contacts :::no-loc(Razor)::: Pages.</span></span> <span data-ttu-id="da4ec-223">基底類別會將初始化程式碼放在一個位置：</span><span class="sxs-lookup"><span data-stu-id="da4ec-223">The base class puts the initialization code in one location:</span></span>
+<span data-ttu-id="da4ec-222">建立包含 [連絡人] 頁面中所使用之服務的基類 Razor 。</span><span class="sxs-lookup"><span data-stu-id="da4ec-222">Create a base class that contains the services used in the contacts Razor Pages.</span></span> <span data-ttu-id="da4ec-223">基底類別會將初始化程式碼放在一個位置：</span><span class="sxs-lookup"><span data-stu-id="da4ec-223">The base class puts the initialization code in one location:</span></span>
 
 [!code-csharp[](secure-data/samples/final3/Pages/Contacts/DI_BasePageModel.cs)]
 
 <span data-ttu-id="da4ec-224">上述程式碼：</span><span class="sxs-lookup"><span data-stu-id="da4ec-224">The preceding code:</span></span>
 
 * <span data-ttu-id="da4ec-225">新增 `IAuthorizationService` 服務以存取授權處理常式。</span><span class="sxs-lookup"><span data-stu-id="da4ec-225">Adds the `IAuthorizationService` service to access to the authorization handlers.</span></span>
-* <span data-ttu-id="da4ec-226">加入 :::no-loc(Identity)::: `UserManager` 服務。</span><span class="sxs-lookup"><span data-stu-id="da4ec-226">Adds the :::no-loc(Identity)::: `UserManager` service.</span></span>
+* <span data-ttu-id="da4ec-226">加入 Identity `UserManager` 服務。</span><span class="sxs-lookup"><span data-stu-id="da4ec-226">Adds the Identity `UserManager` service.</span></span>
 * <span data-ttu-id="da4ec-227">加入 `ApplicationDbContext`。</span><span class="sxs-lookup"><span data-stu-id="da4ec-227">Add the `ApplicationDbContext`.</span></span>
 
 ### <a name="update-the-createmodel"></a><span data-ttu-id="da4ec-228">更新 CreateModel</span><span class="sxs-lookup"><span data-stu-id="da4ec-228">Update the CreateModel</span></span>
@@ -277,7 +277,7 @@ dotnet user-secrets set SeedUserPW <PW>
 [!code-cshtml[](secure-data/samples/final3/Pages/Contacts/Index.cshtml?highlight=34-36,62-999)]
 
 > [!WARNING]
-> <span data-ttu-id="da4ec-249">隱藏沒有變更資料許可權之使用者的連結，並不會保護應用程式的安全。</span><span class="sxs-lookup"><span data-stu-id="da4ec-249">Hiding links from users that don't have permission to change data doesn't secure the app.</span></span> <span data-ttu-id="da4ec-250">隱藏連結可只顯示有效的連結，讓應用程式更容易使用。</span><span class="sxs-lookup"><span data-stu-id="da4ec-250">Hiding links makes the app more user-friendly by displaying only valid links.</span></span> <span data-ttu-id="da4ec-251">使用者可以攻擊產生的 Url，以叫用其未擁有之資料的編輯和刪除作業。</span><span class="sxs-lookup"><span data-stu-id="da4ec-251">Users can hack the generated URLs to invoke edit and delete operations on data they don't own.</span></span> <span data-ttu-id="da4ec-252">:::no-loc(Razor):::頁面或控制器必須強制執行存取檢查以保護資料。</span><span class="sxs-lookup"><span data-stu-id="da4ec-252">The :::no-loc(Razor)::: Page or controller must enforce access checks to secure the data.</span></span>
+> <span data-ttu-id="da4ec-249">隱藏沒有變更資料許可權之使用者的連結，並不會保護應用程式的安全。</span><span class="sxs-lookup"><span data-stu-id="da4ec-249">Hiding links from users that don't have permission to change data doesn't secure the app.</span></span> <span data-ttu-id="da4ec-250">隱藏連結可只顯示有效的連結，讓應用程式更容易使用。</span><span class="sxs-lookup"><span data-stu-id="da4ec-250">Hiding links makes the app more user-friendly by displaying only valid links.</span></span> <span data-ttu-id="da4ec-251">使用者可以攻擊產生的 Url，以叫用其未擁有之資料的編輯和刪除作業。</span><span class="sxs-lookup"><span data-stu-id="da4ec-251">Users can hack the generated URLs to invoke edit and delete operations on data they don't own.</span></span> <span data-ttu-id="da4ec-252">Razor頁面或控制器必須強制執行存取檢查以保護資料。</span><span class="sxs-lookup"><span data-stu-id="da4ec-252">The Razor Page or controller must enforce access checks to secure the data.</span></span>
 
 ### <a name="update-details"></a><span data-ttu-id="da4ec-253">更新詳細資料</span><span class="sxs-lookup"><span data-stu-id="da4ec-253">Update Details</span></span>
 
@@ -342,7 +342,7 @@ dotnet user-secrets set SeedUserPW <PW>
 
 ## <a name="create-the-starter-app"></a><span data-ttu-id="da4ec-299">建立入門應用程式</span><span class="sxs-lookup"><span data-stu-id="da4ec-299">Create the starter app</span></span>
 
-* <span data-ttu-id="da4ec-300">建立 :::no-loc(Razor)::: 名為 "ContactManager" 的頁面應用程式</span><span class="sxs-lookup"><span data-stu-id="da4ec-300">Create a :::no-loc(Razor)::: Pages app named "ContactManager"</span></span>
+* <span data-ttu-id="da4ec-300">建立 Razor 名為 "ContactManager" 的頁面應用程式</span><span class="sxs-lookup"><span data-stu-id="da4ec-300">Create a Razor Pages app named "ContactManager"</span></span>
   * <span data-ttu-id="da4ec-301">使用 **個別的使用者帳戶** 建立應用程式。</span><span class="sxs-lookup"><span data-stu-id="da4ec-301">Create the app with **Individual User Accounts** .</span></span>
   * <span data-ttu-id="da4ec-302">將它命名為 "ContactManager"，讓命名空間符合範例中使用的命名空間。</span><span class="sxs-lookup"><span data-stu-id="da4ec-302">Name it "ContactManager" so the namespace matches the namespace used in the sample.</span></span>
   * <span data-ttu-id="da4ec-303">`-uld` 指定 LocalDB 而不是 SQLite</span><span class="sxs-lookup"><span data-stu-id="da4ec-303">`-uld` specifies LocalDB instead of SQLite</span></span>
@@ -455,11 +455,11 @@ dotnet ef database update
 
 ### <a name="tie-the-contact-data-to-the-user"></a><span data-ttu-id="da4ec-358">將連絡人資料與使用者系結</span><span class="sxs-lookup"><span data-stu-id="da4ec-358">Tie the contact data to the user</span></span>
 
-<span data-ttu-id="da4ec-359">使用 ASP.NET [:::no-loc(Identity):::](xref:security/authentication/identity) 使用者識別碼，以確保使用者可以編輯其資料，而不是其他使用者資料。</span><span class="sxs-lookup"><span data-stu-id="da4ec-359">Use the ASP.NET [:::no-loc(Identity):::](xref:security/authentication/identity) user ID to ensure users can edit their data, but not other users data.</span></span> <span data-ttu-id="da4ec-360">將 `OwnerID` 和加入 `ContactStatus` 至 `Contact` 模型：</span><span class="sxs-lookup"><span data-stu-id="da4ec-360">Add `OwnerID` and `ContactStatus` to the `Contact` model:</span></span>
+<span data-ttu-id="da4ec-359">使用 ASP.NET [Identity](xref:security/authentication/identity) 使用者識別碼，以確保使用者可以編輯其資料，而不是其他使用者資料。</span><span class="sxs-lookup"><span data-stu-id="da4ec-359">Use the ASP.NET [Identity](xref:security/authentication/identity) user ID to ensure users can edit their data, but not other users data.</span></span> <span data-ttu-id="da4ec-360">將 `OwnerID` 和加入 `ContactStatus` 至 `Contact` 模型：</span><span class="sxs-lookup"><span data-stu-id="da4ec-360">Add `OwnerID` and `ContactStatus` to the `Contact` model:</span></span>
 
 [!code-csharp[](secure-data/samples/final2.1/Models/Contact.cs?name=snippet1&highlight=5-6,16-999)]
 
-<span data-ttu-id="da4ec-361">`OwnerID` 這是 `AspNetUser` 資料庫中資料表的使用者識別碼 [:::no-loc(Identity):::](xref:security/authentication/identity) 。</span><span class="sxs-lookup"><span data-stu-id="da4ec-361">`OwnerID` is the user's ID from the `AspNetUser` table in the [:::no-loc(Identity):::](xref:security/authentication/identity) database.</span></span> <span data-ttu-id="da4ec-362">`Status`欄位會決定一般使用者是否可以看到連絡人。</span><span class="sxs-lookup"><span data-stu-id="da4ec-362">The `Status` field determines if a contact is viewable by general users.</span></span>
+<span data-ttu-id="da4ec-361">`OwnerID` 這是 `AspNetUser` 資料庫中資料表的使用者識別碼 [Identity](xref:security/authentication/identity) 。</span><span class="sxs-lookup"><span data-stu-id="da4ec-361">`OwnerID` is the user's ID from the `AspNetUser` table in the [Identity](xref:security/authentication/identity) database.</span></span> <span data-ttu-id="da4ec-362">`Status`欄位會決定一般使用者是否可以看到連絡人。</span><span class="sxs-lookup"><span data-stu-id="da4ec-362">The `Status` field determines if a contact is viewable by general users.</span></span>
 
 <span data-ttu-id="da4ec-363">建立新的遷移，並更新資料庫：</span><span class="sxs-lookup"><span data-stu-id="da4ec-363">Create a new migration and update the database:</span></span>
 
@@ -468,9 +468,9 @@ dotnet ef migrations add userID_Status
 dotnet ef database update
 ```
 
-### <a name="add-role-services-to-no-locidentity"></a><span data-ttu-id="da4ec-364">將角色服務新增至 :::no-loc(Identity):::</span><span class="sxs-lookup"><span data-stu-id="da4ec-364">Add Role services to :::no-loc(Identity):::</span></span>
+### <a name="add-role-services-to-no-locidentity"></a><span data-ttu-id="da4ec-364">將角色服務新增至 Identity</span><span class="sxs-lookup"><span data-stu-id="da4ec-364">Add Role services to Identity</span></span>
 
-<span data-ttu-id="da4ec-365">附加 [AddRoles](/dotnet/api/microsoft.aspnetcore.identity.identitybuilder.addroles#Microsoft_AspNetCore_:::no-loc(Identity):::_:::no-loc(Identity):::Builder_AddRoles__1) 以新增角色服務：</span><span class="sxs-lookup"><span data-stu-id="da4ec-365">Append [AddRoles](/dotnet/api/microsoft.aspnetcore.identity.identitybuilder.addroles#Microsoft_AspNetCore_:::no-loc(Identity):::_:::no-loc(Identity):::Builder_AddRoles__1) to add Role services:</span></span>
+<span data-ttu-id="da4ec-365">附加 [AddRoles](/dotnet/api/microsoft.aspnetcore.identity.identitybuilder.addroles#Microsoft_AspNetCore_Identity_IdentityBuilder_AddRoles__1) 以新增角色服務：</span><span class="sxs-lookup"><span data-stu-id="da4ec-365">Append [AddRoles](/dotnet/api/microsoft.aspnetcore.identity.identitybuilder.addroles#Microsoft_AspNetCore_Identity_IdentityBuilder_AddRoles__1) to add Role services:</span></span>
 
 [!code-csharp[](secure-data/samples/final2.1/Startup.cs?name=snippet2&highlight=11)]
 
@@ -480,7 +480,7 @@ dotnet ef database update
 
 [!code-csharp[](secure-data/samples/final2.1/Startup.cs?name=snippet&highlight=17-99)] 
 
- <span data-ttu-id="da4ec-368">您可以選擇不 :::no-loc(Razor)::: 使用屬性來進行頁面、控制器或動作方法層級的驗證 `[AllowAnonymous]` 。</span><span class="sxs-lookup"><span data-stu-id="da4ec-368">You can opt out of authentication at the :::no-loc(Razor)::: Page, controller, or action method level with the `[AllowAnonymous]` attribute.</span></span> <span data-ttu-id="da4ec-369">將預設的驗證原則設定為要求使用者進行驗證，可保護新新增 :::no-loc(Razor)::: 的頁面和控制器。</span><span class="sxs-lookup"><span data-stu-id="da4ec-369">Setting the default authentication policy to require users to be authenticated protects newly added :::no-loc(Razor)::: Pages and controllers.</span></span> <span data-ttu-id="da4ec-370">預設需要驗證比依賴新控制器和 :::no-loc(Razor)::: 頁面來包含屬性更安全 `[Authorize]` 。</span><span class="sxs-lookup"><span data-stu-id="da4ec-370">Having authentication required by default is more secure than relying on new controllers and :::no-loc(Razor)::: Pages to include the `[Authorize]` attribute.</span></span>
+ <span data-ttu-id="da4ec-368">您可以選擇不 Razor 使用屬性來進行頁面、控制器或動作方法層級的驗證 `[AllowAnonymous]` 。</span><span class="sxs-lookup"><span data-stu-id="da4ec-368">You can opt out of authentication at the Razor Page, controller, or action method level with the `[AllowAnonymous]` attribute.</span></span> <span data-ttu-id="da4ec-369">將預設的驗證原則設定為要求使用者進行驗證，可保護新新增 Razor 的頁面和控制器。</span><span class="sxs-lookup"><span data-stu-id="da4ec-369">Setting the default authentication policy to require users to be authenticated protects newly added Razor Pages and controllers.</span></span> <span data-ttu-id="da4ec-370">預設需要驗證比依賴新控制器和 Razor 頁面來包含屬性更安全 `[Authorize]` 。</span><span class="sxs-lookup"><span data-stu-id="da4ec-370">Having authentication required by default is more secure than relying on new controllers and Razor Pages to include the `[Authorize]` attribute.</span></span>
 
 <span data-ttu-id="da4ec-371">將 [AllowAnonymous](/dotnet/api/microsoft.aspnetcore.authorization.allowanonymousattribute) 加入至 Index、About 和 Contact 頁面，讓匿名使用者在註冊之前，可以取得網站的相關資訊。</span><span class="sxs-lookup"><span data-stu-id="da4ec-371">Add [AllowAnonymous](/dotnet/api/microsoft.aspnetcore.authorization.allowanonymousattribute) to the Index, About, and Contact pages so anonymous users can get information about the site before they register.</span></span>
 
@@ -539,7 +539,7 @@ dotnet user-secrets set SeedUserPW <PW>
 
 ## <a name="register-the-authorization-handlers"></a><span data-ttu-id="da4ec-403">註冊授權處理常式</span><span class="sxs-lookup"><span data-stu-id="da4ec-403">Register the authorization handlers</span></span>
 
-<span data-ttu-id="da4ec-404">使用 Entity Framework Core 的服務必須使用[AddScoped](/dotnet/api/microsoft.extensions.dependencyinjection.servicecollectionserviceextensions)註冊相依性[插入](xref:fundamentals/dependency-injection)。</span><span class="sxs-lookup"><span data-stu-id="da4ec-404">Services using Entity Framework Core must be registered for [dependency injection](xref:fundamentals/dependency-injection) using [AddScoped](/dotnet/api/microsoft.extensions.dependencyinjection.servicecollectionserviceextensions).</span></span> <span data-ttu-id="da4ec-405">`ContactIsOwnerAuthorizationHandler`使用 ASP.NET Core [:::no-loc(Identity):::](xref:security/authentication/identity) ，以 Entity Framework Core 為基礎。</span><span class="sxs-lookup"><span data-stu-id="da4ec-405">The `ContactIsOwnerAuthorizationHandler` uses ASP.NET Core [:::no-loc(Identity):::](xref:security/authentication/identity), which is built on Entity Framework Core.</span></span> <span data-ttu-id="da4ec-406">使用服務集合註冊處理常式，以便透過相依性插入來使用它們 `ContactsController` 。 [dependency injection](xref:fundamentals/dependency-injection)</span><span class="sxs-lookup"><span data-stu-id="da4ec-406">Register the handlers with the service collection so they're available to the `ContactsController` through [dependency injection](xref:fundamentals/dependency-injection).</span></span> <span data-ttu-id="da4ec-407">將下列程式碼加入至結尾 `ConfigureServices` ：</span><span class="sxs-lookup"><span data-stu-id="da4ec-407">Add the following code to the end of `ConfigureServices`:</span></span>
+<span data-ttu-id="da4ec-404">使用 Entity Framework Core 的服務必須使用[AddScoped](/dotnet/api/microsoft.extensions.dependencyinjection.servicecollectionserviceextensions)註冊相依性[插入](xref:fundamentals/dependency-injection)。</span><span class="sxs-lookup"><span data-stu-id="da4ec-404">Services using Entity Framework Core must be registered for [dependency injection](xref:fundamentals/dependency-injection) using [AddScoped](/dotnet/api/microsoft.extensions.dependencyinjection.servicecollectionserviceextensions).</span></span> <span data-ttu-id="da4ec-405">`ContactIsOwnerAuthorizationHandler`使用 ASP.NET Core [Identity](xref:security/authentication/identity) ，以 Entity Framework Core 為基礎。</span><span class="sxs-lookup"><span data-stu-id="da4ec-405">The `ContactIsOwnerAuthorizationHandler` uses ASP.NET Core [Identity](xref:security/authentication/identity), which is built on Entity Framework Core.</span></span> <span data-ttu-id="da4ec-406">使用服務集合註冊處理常式，以便透過相依性插入來使用它們 `ContactsController` 。 [dependency injection](xref:fundamentals/dependency-injection)</span><span class="sxs-lookup"><span data-stu-id="da4ec-406">Register the handlers with the service collection so they're available to the `ContactsController` through [dependency injection](xref:fundamentals/dependency-injection).</span></span> <span data-ttu-id="da4ec-407">將下列程式碼加入至結尾 `ConfigureServices` ：</span><span class="sxs-lookup"><span data-stu-id="da4ec-407">Add the following code to the end of `ConfigureServices`:</span></span>
 
 [!code-csharp[](secure-data/samples/final2.1/Startup.cs?name=snippet_defaultPolicy&highlight=27-99)]
 
@@ -547,7 +547,7 @@ dotnet user-secrets set SeedUserPW <PW>
 
 ## <a name="support-authorization"></a><span data-ttu-id="da4ec-410">支援授權</span><span class="sxs-lookup"><span data-stu-id="da4ec-410">Support authorization</span></span>
 
-<span data-ttu-id="da4ec-411">在本節中，您會更新 :::no-loc(Razor)::: 頁面並新增作業需求類別。</span><span class="sxs-lookup"><span data-stu-id="da4ec-411">In this section, you update the :::no-loc(Razor)::: Pages and add an operations requirements class.</span></span>
+<span data-ttu-id="da4ec-411">在本節中，您會更新 Razor 頁面並新增作業需求類別。</span><span class="sxs-lookup"><span data-stu-id="da4ec-411">In this section, you update the Razor Pages and add an operations requirements class.</span></span>
 
 ### <a name="review-the-contact-operations-requirements-class"></a><span data-ttu-id="da4ec-412">複習 contact 作業需求課程</span><span class="sxs-lookup"><span data-stu-id="da4ec-412">Review the contact operations requirements class</span></span>
 
@@ -555,16 +555,16 @@ dotnet user-secrets set SeedUserPW <PW>
 
 [!code-csharp[](secure-data/samples/final2.1/Authorization/ContactOperations.cs)]
 
-### <a name="create-a-base-class-for-the-contacts-no-locrazor-pages"></a><span data-ttu-id="da4ec-415">建立連絡人頁面的基類 :::no-loc(Razor):::</span><span class="sxs-lookup"><span data-stu-id="da4ec-415">Create a base class for the Contacts :::no-loc(Razor)::: Pages</span></span>
+### <a name="create-a-base-class-for-the-contacts-no-locrazor-pages"></a><span data-ttu-id="da4ec-415">建立連絡人頁面的基類 Razor</span><span class="sxs-lookup"><span data-stu-id="da4ec-415">Create a base class for the Contacts Razor Pages</span></span>
 
-<span data-ttu-id="da4ec-416">建立包含 [連絡人] 頁面中所使用之服務的基類 :::no-loc(Razor)::: 。</span><span class="sxs-lookup"><span data-stu-id="da4ec-416">Create a base class that contains the services used in the contacts :::no-loc(Razor)::: Pages.</span></span> <span data-ttu-id="da4ec-417">基底類別會將初始化程式碼放在一個位置：</span><span class="sxs-lookup"><span data-stu-id="da4ec-417">The base class puts the initialization code in one location:</span></span>
+<span data-ttu-id="da4ec-416">建立包含 [連絡人] 頁面中所使用之服務的基類 Razor 。</span><span class="sxs-lookup"><span data-stu-id="da4ec-416">Create a base class that contains the services used in the contacts Razor Pages.</span></span> <span data-ttu-id="da4ec-417">基底類別會將初始化程式碼放在一個位置：</span><span class="sxs-lookup"><span data-stu-id="da4ec-417">The base class puts the initialization code in one location:</span></span>
 
 [!code-csharp[](secure-data/samples/final2.1/Pages/Contacts/DI_BasePageModel.cs)]
 
 <span data-ttu-id="da4ec-418">上述程式碼：</span><span class="sxs-lookup"><span data-stu-id="da4ec-418">The preceding code:</span></span>
 
 * <span data-ttu-id="da4ec-419">新增 `IAuthorizationService` 服務以存取授權處理常式。</span><span class="sxs-lookup"><span data-stu-id="da4ec-419">Adds the `IAuthorizationService` service to access to the authorization handlers.</span></span>
-* <span data-ttu-id="da4ec-420">加入 :::no-loc(Identity)::: `UserManager` 服務。</span><span class="sxs-lookup"><span data-stu-id="da4ec-420">Adds the :::no-loc(Identity)::: `UserManager` service.</span></span>
+* <span data-ttu-id="da4ec-420">加入 Identity `UserManager` 服務。</span><span class="sxs-lookup"><span data-stu-id="da4ec-420">Adds the Identity `UserManager` service.</span></span>
 * <span data-ttu-id="da4ec-421">加入 `ApplicationDbContext`。</span><span class="sxs-lookup"><span data-stu-id="da4ec-421">Add the `ApplicationDbContext`.</span></span>
 
 ### <a name="update-the-createmodel"></a><span data-ttu-id="da4ec-422">更新 CreateModel</span><span class="sxs-lookup"><span data-stu-id="da4ec-422">Update the CreateModel</span></span>
@@ -613,7 +613,7 @@ dotnet user-secrets set SeedUserPW <PW>
 [!code-cshtml[](secure-data/samples/final2.1/Pages/Contacts/Index.cshtml?highlight=34-36,62-999)]
 
 > [!WARNING]
-> <span data-ttu-id="da4ec-443">隱藏沒有變更資料許可權之使用者的連結，並不會保護應用程式的安全。</span><span class="sxs-lookup"><span data-stu-id="da4ec-443">Hiding links from users that don't have permission to change data doesn't secure the app.</span></span> <span data-ttu-id="da4ec-444">隱藏連結可只顯示有效的連結，讓應用程式更容易使用。</span><span class="sxs-lookup"><span data-stu-id="da4ec-444">Hiding links makes the app more user-friendly by displaying only valid links.</span></span> <span data-ttu-id="da4ec-445">使用者可以攻擊產生的 Url，以叫用其未擁有之資料的編輯和刪除作業。</span><span class="sxs-lookup"><span data-stu-id="da4ec-445">Users can hack the generated URLs to invoke edit and delete operations on data they don't own.</span></span> <span data-ttu-id="da4ec-446">:::no-loc(Razor):::頁面或控制器必須強制執行存取檢查以保護資料。</span><span class="sxs-lookup"><span data-stu-id="da4ec-446">The :::no-loc(Razor)::: Page or controller must enforce access checks to secure the data.</span></span>
+> <span data-ttu-id="da4ec-443">隱藏沒有變更資料許可權之使用者的連結，並不會保護應用程式的安全。</span><span class="sxs-lookup"><span data-stu-id="da4ec-443">Hiding links from users that don't have permission to change data doesn't secure the app.</span></span> <span data-ttu-id="da4ec-444">隱藏連結可只顯示有效的連結，讓應用程式更容易使用。</span><span class="sxs-lookup"><span data-stu-id="da4ec-444">Hiding links makes the app more user-friendly by displaying only valid links.</span></span> <span data-ttu-id="da4ec-445">使用者可以攻擊產生的 Url，以叫用其未擁有之資料的編輯和刪除作業。</span><span class="sxs-lookup"><span data-stu-id="da4ec-445">Users can hack the generated URLs to invoke edit and delete operations on data they don't own.</span></span> <span data-ttu-id="da4ec-446">Razor頁面或控制器必須強制執行存取檢查以保護資料。</span><span class="sxs-lookup"><span data-stu-id="da4ec-446">The Razor Page or controller must enforce access checks to secure the data.</span></span>
 
 ### <a name="update-details"></a><span data-ttu-id="da4ec-447">更新詳細資料</span><span class="sxs-lookup"><span data-stu-id="da4ec-447">Update Details</span></span>
 
@@ -669,7 +669,7 @@ dotnet user-secrets set SeedUserPW <PW>
 
 ## <a name="create-the-starter-app"></a><span data-ttu-id="da4ec-483">建立入門應用程式</span><span class="sxs-lookup"><span data-stu-id="da4ec-483">Create the starter app</span></span>
 
-* <span data-ttu-id="da4ec-484">建立 :::no-loc(Razor)::: 名為 "ContactManager" 的頁面應用程式</span><span class="sxs-lookup"><span data-stu-id="da4ec-484">Create a :::no-loc(Razor)::: Pages app named "ContactManager"</span></span>
+* <span data-ttu-id="da4ec-484">建立 Razor 名為 "ContactManager" 的頁面應用程式</span><span class="sxs-lookup"><span data-stu-id="da4ec-484">Create a Razor Pages app named "ContactManager"</span></span>
   * <span data-ttu-id="da4ec-485">使用 **個別的使用者帳戶** 建立應用程式。</span><span class="sxs-lookup"><span data-stu-id="da4ec-485">Create the app with **Individual User Accounts** .</span></span>
   * <span data-ttu-id="da4ec-486">將它命名為 "ContactManager"，讓命名空間符合範例中使用的命名空間。</span><span class="sxs-lookup"><span data-stu-id="da4ec-486">Name it "ContactManager" so the namespace matches the namespace used in the sample.</span></span>
   * <span data-ttu-id="da4ec-487">`-uld` 指定 LocalDB 而不是 SQLite</span><span class="sxs-lookup"><span data-stu-id="da4ec-487">`-uld` specifies LocalDB instead of SQLite</span></span>

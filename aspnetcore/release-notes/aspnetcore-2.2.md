@@ -6,17 +6,17 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 12/05/2019
 no-loc:
-- ':::no-loc(appsettings.json):::'
-- ':::no-loc(ASP.NET Core Identity):::'
-- ':::no-loc(cookie):::'
-- ':::no-loc(Cookie):::'
-- ':::no-loc(Blazor):::'
-- ':::no-loc(Blazor Server):::'
-- ':::no-loc(Blazor WebAssembly):::'
-- ':::no-loc(Identity):::'
-- ":::no-loc(Let's Encrypt):::"
-- ':::no-loc(Razor):::'
-- ':::no-loc(SignalR):::'
+- 'appsettings.json'
+- 'ASP.NET Core Identity'
+- 'cookie'
+- 'Cookie'
+- 'Blazor'
+- 'Blazor Server'
+- 'Blazor WebAssembly'
+- 'Identity'
+- "Let's Encrypt"
+- 'Razor'
+- 'SignalR'
 uid: aspnetcore-2.2
 ms.openlocfilehash: 67581904c686b0f8b6736b751c8e3f1545f6a286
 ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
@@ -50,7 +50,7 @@ ms.locfileid: "93059698"
 <span data-ttu-id="5eae2-122">如需詳細資訊，請參閱下列資源：</span><span class="sxs-lookup"><span data-stu-id="5eae2-122">For more information, see the following resources:</span></span>
 
 * <span data-ttu-id="5eae2-123">[Endpoint routing in 2.2](https://blogs.msdn.microsoft.com/webdev/2018/08/27/asp-net-core-2-2-0-preview1-endpoint-routing/) (2.2 中的端點路由)</span><span class="sxs-lookup"><span data-stu-id="5eae2-123">[Endpoint routing in 2.2](https://blogs.msdn.microsoft.com/webdev/2018/08/27/asp-net-core-2-2-0-preview1-endpoint-routing/)</span></span>
-* <span data-ttu-id="5eae2-124"> 一節)</span><span class="sxs-lookup"><span data-stu-id="5eae2-124">[Route parameter transformers](https://www.hanselman.com/blog/ASPNETCore22ParameterTransformersForCleanURLGenerationAndSlugsIn:::no-loc(Razor):::PagesOrMVC.aspx) (see **Routing** section)</span></span>
+* <span data-ttu-id="5eae2-124"> 一節)</span><span class="sxs-lookup"><span data-stu-id="5eae2-124">[Route parameter transformers](https://www.hanselman.com/blog/ASPNETCore22ParameterTransformersForCleanURLGenerationAndSlugsInRazorPagesOrMVC.aspx) (see **Routing** section)</span></span>
 * [<span data-ttu-id="5eae2-125">IRouter 路由與端點路由之間的差異</span><span class="sxs-lookup"><span data-stu-id="5eae2-125">Differences between IRouter- and endpoint-based routing</span></span>](xref:fundamentals/routing?view=aspnetcore-2.2#differences-from-earlier-versions-of-routing)
 
 ## <a name="health-checks"></a><span data-ttu-id="5eae2-126">健康狀態檢查</span><span class="sxs-lookup"><span data-stu-id="5eae2-126">Health checks</span></span>
@@ -91,11 +91,11 @@ ms.locfileid: "93059698"
 
 <span data-ttu-id="5eae2-159">如需詳細資訊，請參閱 [IIS 的同處理序裝載](xref:host-and-deploy/aspnet-core-module?view=aspnetcore-2.2#in-process-hosting-model)。</span><span class="sxs-lookup"><span data-stu-id="5eae2-159">For more information, see [in-process hosting for IIS](xref:host-and-deploy/aspnet-core-module?view=aspnetcore-2.2#in-process-hosting-model).</span></span>
 
-## <a name="no-locsignalr-java-client"></a><span data-ttu-id="5eae2-160">:::no-loc(SignalR)::: JAVA 用戶端</span><span class="sxs-lookup"><span data-stu-id="5eae2-160">:::no-loc(SignalR)::: Java client</span></span>
+## <a name="no-locsignalr-java-client"></a><span data-ttu-id="5eae2-160">SignalR JAVA 用戶端</span><span class="sxs-lookup"><span data-stu-id="5eae2-160">SignalR Java client</span></span>
 
-<span data-ttu-id="5eae2-161">ASP.NET Core 2.2 引進的 JAVA 用戶端 :::no-loc(SignalR)::: 。</span><span class="sxs-lookup"><span data-stu-id="5eae2-161">ASP.NET Core 2.2 introduces a Java Client for :::no-loc(SignalR):::.</span></span> <span data-ttu-id="5eae2-162">此用戶端支援 :::no-loc(SignalR)::: 從 JAVA 程式碼（包括 Android 應用程式）連接到 ASP.NET Core 的伺服器。</span><span class="sxs-lookup"><span data-stu-id="5eae2-162">This client supports connecting to an ASP.NET Core :::no-loc(SignalR)::: Server from Java code, including Android apps.</span></span>
+<span data-ttu-id="5eae2-161">ASP.NET Core 2.2 引進的 JAVA 用戶端 SignalR 。</span><span class="sxs-lookup"><span data-stu-id="5eae2-161">ASP.NET Core 2.2 introduces a Java Client for SignalR.</span></span> <span data-ttu-id="5eae2-162">此用戶端支援 SignalR 從 JAVA 程式碼（包括 Android 應用程式）連接到 ASP.NET Core 的伺服器。</span><span class="sxs-lookup"><span data-stu-id="5eae2-162">This client supports connecting to an ASP.NET Core SignalR Server from Java code, including Android apps.</span></span>
 
-<span data-ttu-id="5eae2-163">如需詳細資訊，請參閱 [ASP.NET Core :::no-loc(SignalR)::: JAVA 用戶端](../signalr/java-client.md?view=aspnetcore-2.2)。</span><span class="sxs-lookup"><span data-stu-id="5eae2-163">For more information, see [ASP.NET Core :::no-loc(SignalR)::: Java client](../signalr/java-client.md?view=aspnetcore-2.2).</span></span>
+<span data-ttu-id="5eae2-163">如需詳細資訊，請參閱 [ASP.NET Core SignalR JAVA 用戶端](../signalr/java-client.md?view=aspnetcore-2.2)。</span><span class="sxs-lookup"><span data-stu-id="5eae2-163">For more information, see [ASP.NET Core SignalR Java client](../signalr/java-client.md?view=aspnetcore-2.2).</span></span>
 
 ## <a name="cors-improvements"></a><span data-ttu-id="5eae2-164">CORS 改善</span><span class="sxs-lookup"><span data-stu-id="5eae2-164">CORS improvements</span></span>
 

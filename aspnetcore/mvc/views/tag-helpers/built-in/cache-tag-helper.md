@@ -6,17 +6,17 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 10/10/2018
 no-loc:
-- ':::no-loc(appsettings.json):::'
-- ':::no-loc(ASP.NET Core Identity):::'
-- ':::no-loc(cookie):::'
-- ':::no-loc(Cookie):::'
-- ':::no-loc(Blazor):::'
-- ':::no-loc(Blazor Server):::'
-- ':::no-loc(Blazor WebAssembly):::'
-- ':::no-loc(Identity):::'
-- ":::no-loc(Let's Encrypt):::"
-- ':::no-loc(Razor):::'
-- ':::no-loc(SignalR):::'
+- 'appsettings.json'
+- 'ASP.NET Core Identity'
+- 'cookie'
+- 'Cookie'
+- 'Blazor'
+- 'Blazor Server'
+- 'Blazor WebAssembly'
+- 'Identity'
+- "Let's Encrypt"
+- 'Razor'
+- 'SignalR'
 uid: mvc/views/tag-helpers/builtin-th/cache-tag-helper
 ms.openlocfilehash: a87f91255bd1f280b1567f522423a6f4e88a6dd8
 ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
@@ -33,7 +33,7 @@ ms.locfileid: "93060881"
 
 <span data-ttu-id="f3c46-106">如需標籤協助程式的概觀，請參閱 <xref:mvc/views/tag-helpers/intro>。</span><span class="sxs-lookup"><span data-stu-id="f3c46-106">For an overview of Tag Helpers, see <xref:mvc/views/tag-helpers/intro>.</span></span>
 
-<span data-ttu-id="f3c46-107">下列標記會快取 :::no-loc(Razor)::: 目前的日期：</span><span class="sxs-lookup"><span data-stu-id="f3c46-107">The following :::no-loc(Razor)::: markup caches the current date:</span></span>
+<span data-ttu-id="f3c46-107">下列標記會快取 Razor 目前的日期：</span><span class="sxs-lookup"><span data-stu-id="f3c46-107">The following Razor markup caches the current date:</span></span>
 
 ```cshtml
 <cache>@DateTime.Now</cache>
@@ -91,7 +91,7 @@ ms.locfileid: "93060881"
 </cache>
 ```
 
-<span data-ttu-id="f3c46-133">:::no-loc(Razor):::視圖引擎會將預設 `expires-after` 值設定為20分鐘。</span><span class="sxs-lookup"><span data-stu-id="f3c46-133">The :::no-loc(Razor)::: View Engine sets the default `expires-after` value to twenty minutes.</span></span>
+<span data-ttu-id="f3c46-133">Razor視圖引擎會將預設 `expires-after` 值設定為20分鐘。</span><span class="sxs-lookup"><span data-stu-id="f3c46-133">The Razor View Engine sets the default `expires-after` value to twenty minutes.</span></span>
 
 ### <a name="expires-sliding"></a><span data-ttu-id="f3c46-134">expires-sliding</span><span class="sxs-lookup"><span data-stu-id="f3c46-134">expires-sliding</span></span>
 
@@ -167,18 +167,18 @@ routes.MapRoute(
 </cache>
 ```
 
-### <a name="vary-by-no-loccookie"></a><span data-ttu-id="f3c46-164">依:::no-loc(cookie):::</span><span class="sxs-lookup"><span data-stu-id="f3c46-164">vary-by-:::no-loc(cookie):::</span></span>
+### <a name="vary-by-no-loccookie"></a><span data-ttu-id="f3c46-164">依cookie</span><span class="sxs-lookup"><span data-stu-id="f3c46-164">vary-by-cookie</span></span>
 
 | <span data-ttu-id="f3c46-165">屬性類型</span><span class="sxs-lookup"><span data-stu-id="f3c46-165">Attribute Type</span></span> | <span data-ttu-id="f3c46-166">範例</span><span class="sxs-lookup"><span data-stu-id="f3c46-166">Examples</span></span>                                                                         |
 | -------------- | -------------------------------------------------------------------------------- |
-| <span data-ttu-id="f3c46-167">String</span><span class="sxs-lookup"><span data-stu-id="f3c46-167">String</span></span>         | <span data-ttu-id="f3c46-168">`.AspNetCore.:::no-loc(Identity):::.Application`, `.AspNetCore.:::no-loc(Identity):::.Application,HairColor`</span><span class="sxs-lookup"><span data-stu-id="f3c46-168">`.AspNetCore.:::no-loc(Identity):::.Application`, `.AspNetCore.:::no-loc(Identity):::.Application,HairColor`</span></span> |
+| <span data-ttu-id="f3c46-167">String</span><span class="sxs-lookup"><span data-stu-id="f3c46-167">String</span></span>         | <span data-ttu-id="f3c46-168">`.AspNetCore.Identity.Application`, `.AspNetCore.Identity.Application,HairColor`</span><span class="sxs-lookup"><span data-stu-id="f3c46-168">`.AspNetCore.Identity.Application`, `.AspNetCore.Identity.Application,HairColor`</span></span> |
 
-<span data-ttu-id="f3c46-169">`vary-by-:::no-loc(cookie):::` 接受以逗號分隔的名稱清單 :::no-loc(cookie)::: ，這些名稱會在值變更時觸發快取重新整理 :::no-loc(cookie)::: 。</span><span class="sxs-lookup"><span data-stu-id="f3c46-169">`vary-by-:::no-loc(cookie):::` accepts a comma-delimited list of :::no-loc(cookie)::: names that trigger a cache refresh when the :::no-loc(cookie)::: values change.</span></span>
+<span data-ttu-id="f3c46-169">`vary-by-cookie` 接受以逗號分隔的名稱清單 cookie ，這些名稱會在值變更時觸發快取重新整理 cookie 。</span><span class="sxs-lookup"><span data-stu-id="f3c46-169">`vary-by-cookie` accepts a comma-delimited list of cookie names that trigger a cache refresh when the cookie values change.</span></span>
 
-<span data-ttu-id="f3c46-170">下列範例會監視 :::no-loc(cookie)::: 與相關聯的 :::no-loc(ASP.NET Core Identity)::: 。</span><span class="sxs-lookup"><span data-stu-id="f3c46-170">The following example monitors the :::no-loc(cookie)::: associated with :::no-loc(ASP.NET Core Identity):::.</span></span> <span data-ttu-id="f3c46-171">當使用者經過驗證時，中的變更會觸發快取重新整理 :::no-loc(Identity)::: :::no-loc(cookie)::: ：</span><span class="sxs-lookup"><span data-stu-id="f3c46-171">When a user is authenticated, a change in the :::no-loc(Identity)::: :::no-loc(cookie)::: triggers a cache refresh:</span></span>
+<span data-ttu-id="f3c46-170">下列範例會監視 cookie 與相關聯的 ASP.NET Core Identity 。</span><span class="sxs-lookup"><span data-stu-id="f3c46-170">The following example monitors the cookie associated with ASP.NET Core Identity.</span></span> <span data-ttu-id="f3c46-171">當使用者經過驗證時，中的變更會觸發快取重新整理 Identity cookie ：</span><span class="sxs-lookup"><span data-stu-id="f3c46-171">When a user is authenticated, a change in the Identity cookie triggers a cache refresh:</span></span>
 
 ```cshtml
-<cache vary-by-:::no-loc(cookie):::=".AspNetCore.:::no-loc(Identity):::.Application">
+<cache vary-by-cookie=".AspNetCore.Identity.Application">
     Current Time Inside Cache Tag Helper: @DateTime.Now
 </cache>
 ```
@@ -189,7 +189,7 @@ routes.MapRoute(
 | --------------- | --------------- | ------- |
 | <span data-ttu-id="f3c46-176">Boolean</span><span class="sxs-lookup"><span data-stu-id="f3c46-176">Boolean</span></span>         | <span data-ttu-id="f3c46-177">`true`, `false`</span><span class="sxs-lookup"><span data-stu-id="f3c46-177">`true`, `false`</span></span> | `true`  |
 
-<span data-ttu-id="f3c46-178">`vary-by-user` 可指定當登入的使用者 (或內容主體) 變更時，是否重設快取。</span><span class="sxs-lookup"><span data-stu-id="f3c46-178">`vary-by-user` specifies whether or not the cache resets when the signed-in user (or Context Principal) changes.</span></span> <span data-ttu-id="f3c46-179">目前的使用者也稱為「要求內容主體」，您可以 :::no-loc(Razor)::: 參考來在視圖中查看 `@User.:::no-loc(Identity):::.Name` 。</span><span class="sxs-lookup"><span data-stu-id="f3c46-179">The current user is also known as the Request Context Principal and can be viewed in a :::no-loc(Razor)::: view by referencing `@User.:::no-loc(Identity):::.Name`.</span></span>
+<span data-ttu-id="f3c46-178">`vary-by-user` 可指定當登入的使用者 (或內容主體) 變更時，是否重設快取。</span><span class="sxs-lookup"><span data-stu-id="f3c46-178">`vary-by-user` specifies whether or not the cache resets when the signed-in user (or Context Principal) changes.</span></span> <span data-ttu-id="f3c46-179">目前的使用者也稱為「要求內容主體」，您可以 Razor 參考來在視圖中查看 `@User.Identity.Name` 。</span><span class="sxs-lookup"><span data-stu-id="f3c46-179">The current user is also known as the Request Context Principal and can be viewed in a Razor view by referencing `@User.Identity.Name`.</span></span>
 
 <span data-ttu-id="f3c46-180">下列範例會監視目前登入的使用者，以觸發快取重新整理：</span><span class="sxs-lookup"><span data-stu-id="f3c46-180">The following example monitors the current logged in user to trigger a cache refresh:</span></span>
 
@@ -199,7 +199,7 @@ routes.MapRoute(
 </cache>
 ```
 
-<span data-ttu-id="f3c46-181">使用此屬性可保留登入與登出週期中的快取內容。</span><span class="sxs-lookup"><span data-stu-id="f3c46-181">Using this attribute maintains the contents in cache through a sign-in and sign-out cycle.</span></span> <span data-ttu-id="f3c46-182">當此值設定為 `true` 時，驗證週期將使已驗證之使用者的快取無效。</span><span class="sxs-lookup"><span data-stu-id="f3c46-182">When the value is set to `true`, an authentication cycle invalidates the cache for the authenticated user.</span></span> <span data-ttu-id="f3c46-183">快取無效，因為 :::no-loc(cookie)::: 當使用者經過驗證時，會產生新的唯一值。</span><span class="sxs-lookup"><span data-stu-id="f3c46-183">The cache is invalidated because a new unique :::no-loc(cookie)::: value is generated when a user is authenticated.</span></span> <span data-ttu-id="f3c46-184">如果不 :::no-loc(cookie)::: 存在或已過期，則會為匿名狀態維護快取 :::no-loc(cookie)::: 。</span><span class="sxs-lookup"><span data-stu-id="f3c46-184">Cache is maintained for the anonymous state when no :::no-loc(cookie)::: is present or the :::no-loc(cookie)::: has expired.</span></span> <span data-ttu-id="f3c46-185">如果使用者 **未** 通過驗證，則會維護快取。</span><span class="sxs-lookup"><span data-stu-id="f3c46-185">If the user is **not** authenticated, the cache is maintained.</span></span>
+<span data-ttu-id="f3c46-181">使用此屬性可保留登入與登出週期中的快取內容。</span><span class="sxs-lookup"><span data-stu-id="f3c46-181">Using this attribute maintains the contents in cache through a sign-in and sign-out cycle.</span></span> <span data-ttu-id="f3c46-182">當此值設定為 `true` 時，驗證週期將使已驗證之使用者的快取無效。</span><span class="sxs-lookup"><span data-stu-id="f3c46-182">When the value is set to `true`, an authentication cycle invalidates the cache for the authenticated user.</span></span> <span data-ttu-id="f3c46-183">快取無效，因為 cookie 當使用者經過驗證時，會產生新的唯一值。</span><span class="sxs-lookup"><span data-stu-id="f3c46-183">The cache is invalidated because a new unique cookie value is generated when a user is authenticated.</span></span> <span data-ttu-id="f3c46-184">如果不 cookie 存在或已過期，則會為匿名狀態維護快取 cookie 。</span><span class="sxs-lookup"><span data-stu-id="f3c46-184">Cache is maintained for the anonymous state when no cookie is present or the cookie has expired.</span></span> <span data-ttu-id="f3c46-185">如果使用者 **未** 通過驗證，則會維護快取。</span><span class="sxs-lookup"><span data-stu-id="f3c46-185">If the user is **not** authenticated, the cache is maintained.</span></span>
 
 ### <a name="vary-by"></a><span data-ttu-id="f3c46-186">vary-by</span><span class="sxs-lookup"><span data-stu-id="f3c46-186">vary-by</span></span>
 

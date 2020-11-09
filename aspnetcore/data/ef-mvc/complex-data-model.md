@@ -7,17 +7,17 @@ ms.custom: mvc
 ms.date: 03/27/2019
 ms.topic: tutorial
 no-loc:
-- ':::no-loc(appsettings.json):::'
-- ':::no-loc(ASP.NET Core Identity):::'
-- ':::no-loc(cookie):::'
-- ':::no-loc(Cookie):::'
-- ':::no-loc(Blazor):::'
-- ':::no-loc(Blazor Server):::'
-- ':::no-loc(Blazor WebAssembly):::'
-- ':::no-loc(Identity):::'
-- ":::no-loc(Let's Encrypt):::"
-- ':::no-loc(Razor):::'
-- ':::no-loc(SignalR):::'
+- 'appsettings.json'
+- 'ASP.NET Core Identity'
+- 'cookie'
+- 'Cookie'
+- 'Blazor'
+- 'Blazor Server'
+- 'Blazor WebAssembly'
+- 'Identity'
+- "Let's Encrypt"
+- 'Razor'
+- 'SignalR'
 uid: data/ef-mvc/complex-data-model
 ms.openlocfilehash: cee9e9eb4c5435f3f63f7d1d04f131d88effe9f6
 ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
@@ -482,7 +482,7 @@ Done. To undo this action, use 'ef migrations remove'
 
 ## <a name="change-the-connection-string"></a><span data-ttu-id="f8fe2-354">變更連接字串</span><span class="sxs-lookup"><span data-stu-id="f8fe2-354">Change the connection string</span></span>
 
-<span data-ttu-id="f8fe2-355">您現在在 `DbInitializer` 類別中已有了新的程式碼，可將新實體的種子資料新增至空白資料庫中。</span><span class="sxs-lookup"><span data-stu-id="f8fe2-355">You now have new code in the `DbInitializer` class that adds seed data for the new entities to an empty database.</span></span> <span data-ttu-id="f8fe2-356">若要讓 EF 建立新的空白資料庫，請將連接字串中的資料庫名稱變更 *:::no-loc(appsettings.json):::* 為 ContosoUniversity3，或是您所使用的電腦上未使用的其他名稱。</span><span class="sxs-lookup"><span data-stu-id="f8fe2-356">To make EF create a new empty database, change the name of the database in the connection string in *:::no-loc(appsettings.json):::* to ContosoUniversity3 or some other name that you haven't used on the computer you're using.</span></span>
+<span data-ttu-id="f8fe2-355">您現在在 `DbInitializer` 類別中已有了新的程式碼，可將新實體的種子資料新增至空白資料庫中。</span><span class="sxs-lookup"><span data-stu-id="f8fe2-355">You now have new code in the `DbInitializer` class that adds seed data for the new entities to an empty database.</span></span> <span data-ttu-id="f8fe2-356">若要讓 EF 建立新的空白資料庫，請將連接字串中的資料庫名稱變更 *appsettings.json* 為 ContosoUniversity3，或是您所使用的電腦上未使用的其他名稱。</span><span class="sxs-lookup"><span data-stu-id="f8fe2-356">To make EF create a new empty database, change the name of the database in the connection string in *appsettings.json* to ContosoUniversity3 or some other name that you haven't used on the computer you're using.</span></span>
 
 ```json
 {
@@ -491,7 +491,7 @@ Done. To undo this action, use 'ef migrations remove'
   },
 ```
 
-<span data-ttu-id="f8fe2-357">將您的變更儲存至 *:::no-loc(appsettings.json):::* 。</span><span class="sxs-lookup"><span data-stu-id="f8fe2-357">Save your change to *:::no-loc(appsettings.json):::* .</span></span>
+<span data-ttu-id="f8fe2-357">將您的變更儲存至 *appsettings.json* 。</span><span class="sxs-lookup"><span data-stu-id="f8fe2-357">Save your change to *appsettings.json* .</span></span>
 
 > [!NOTE]
 > <span data-ttu-id="f8fe2-358">如果您不想變更資料庫名稱，替代方法是刪除資料庫。</span><span class="sxs-lookup"><span data-stu-id="f8fe2-358">As an alternative to changing the database name, you can delete the database.</span></span> <span data-ttu-id="f8fe2-359">使用 [SQL Server 物件總管]  (SSOX) 或 `database drop` CLI 命令：</span><span class="sxs-lookup"><span data-stu-id="f8fe2-359">Use **SQL Server Object Explorer** (SSOX) or the `database drop` CLI command:</span></span>

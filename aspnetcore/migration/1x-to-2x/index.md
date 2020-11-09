@@ -6,17 +6,17 @@ ms.author: scaddie
 ms.custom: mvc
 ms.date: 12/05/2019
 no-loc:
-- ':::no-loc(appsettings.json):::'
-- ':::no-loc(ASP.NET Core Identity):::'
-- ':::no-loc(cookie):::'
-- ':::no-loc(Cookie):::'
-- ':::no-loc(Blazor):::'
-- ':::no-loc(Blazor Server):::'
-- ':::no-loc(Blazor WebAssembly):::'
-- ':::no-loc(Identity):::'
-- ":::no-loc(Let's Encrypt):::"
-- ':::no-loc(Razor):::'
-- ':::no-loc(SignalR):::'
+- 'appsettings.json'
+- 'ASP.NET Core Identity'
+- 'cookie'
+- 'Cookie'
+- 'Blazor'
+- 'Blazor Server'
+- 'Blazor WebAssembly'
+- 'Identity'
+- "Let's Encrypt"
+- 'Razor'
+- 'SignalR'
 uid: migration/1x-to-2x/index
 ms.openlocfilehash: 6d67924d87cdbe72cb08c5305dfe45c5b22b31bc
 ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
@@ -130,7 +130,7 @@ Unable to create an object of type '<Context>'. Add an implementation of 'IDesig
 
 [!code-csharp[](../1x-to-2x/samples/AspNetCoreDotNetCore1App/AspNetCoreDotNetCore1App/Startup.cs?name=snippet_1xStartup)]
 
-<span data-ttu-id="579f0-143">上述範例會載入 `Configuration` 具有設定的成員，以及 *:::no-loc(appsettings.json):::* 任何 *appsettings。 \<EnvironmentName\>* 符合屬性的 json 檔案 `IHostingEnvironment.EnvironmentName` 。</span><span class="sxs-lookup"><span data-stu-id="579f0-143">The preceding example loads the `Configuration` member with configuration settings from *:::no-loc(appsettings.json):::* as well as any *appsettings.\<EnvironmentName\>.json* file matching the `IHostingEnvironment.EnvironmentName` property.</span></span> <span data-ttu-id="579f0-144">這些檔案的位置與 *Startup.cs* 的路徑相同。</span><span class="sxs-lookup"><span data-stu-id="579f0-144">The location of these files is at the same path as *Startup.cs* .</span></span>
+<span data-ttu-id="579f0-143">上述範例會載入 `Configuration` 具有設定的成員，以及 *appsettings.json* 任何 *appsettings。 \<EnvironmentName\>* 符合屬性的 json 檔案 `IHostingEnvironment.EnvironmentName` 。</span><span class="sxs-lookup"><span data-stu-id="579f0-143">The preceding example loads the `Configuration` member with configuration settings from *appsettings.json* as well as any *appsettings.\<EnvironmentName\>.json* file matching the `IHostingEnvironment.EnvironmentName` property.</span></span> <span data-ttu-id="579f0-144">這些檔案的位置與 *Startup.cs* 的路徑相同。</span><span class="sxs-lookup"><span data-stu-id="579f0-144">The location of these files is at the same path as *Startup.cs* .</span></span>
 
 <span data-ttu-id="579f0-145">在 2.0 專案中，1.x 專案固有的模板組態程式碼會在幕後執行。</span><span class="sxs-lookup"><span data-stu-id="579f0-145">In 2.0 projects, the boilerplate configuration code inherent to 1.x projects runs behind-the-scenes.</span></span> <span data-ttu-id="579f0-146">例如，環境變數及應用程式設定會在啟動時載入。</span><span class="sxs-lookup"><span data-stu-id="579f0-146">For example, environment variables and app settings are loaded at startup.</span></span> <span data-ttu-id="579f0-147">對等的 *Startup.cs* 程式碼會縮減成為插入執行個體的 `IConfiguration` 初始化：</span><span class="sxs-lookup"><span data-stu-id="579f0-147">The equivalent *Startup.cs* code is reduced to `IConfiguration` initialization with the injected instance:</span></span>
 
@@ -168,13 +168,13 @@ Unable to create an object of type '<Context>'. Add an implementation of 'IDesig
 
 <a name="view-compilation"></a>
 
-## <a name="review-no-locrazor-view-compilation-setting"></a><span data-ttu-id="579f0-166">審核 :::no-loc(Razor)::: 視圖編譯設定</span><span class="sxs-lookup"><span data-stu-id="579f0-166">Review :::no-loc(Razor)::: view compilation setting</span></span>
+## <a name="review-no-locrazor-view-compilation-setting"></a><span data-ttu-id="579f0-166">審核 Razor 視圖編譯設定</span><span class="sxs-lookup"><span data-stu-id="579f0-166">Review Razor view compilation setting</span></span>
 
-<span data-ttu-id="579f0-167">更快速的應用程式啟動時間和較小的發行組合對您而言極為重要。</span><span class="sxs-lookup"><span data-stu-id="579f0-167">Faster application startup time and smaller published bundles are of utmost importance to you.</span></span> <span data-ttu-id="579f0-168">基於這些理由，ASP.NET Core 2.0 中預設會啟用[ :::no-loc(Razor)::: view 編譯](xref:mvc/views/view-compilation)。</span><span class="sxs-lookup"><span data-stu-id="579f0-168">For these reasons, [:::no-loc(Razor)::: view compilation](xref:mvc/views/view-compilation) is enabled by default in ASP.NET Core 2.0.</span></span>
+<span data-ttu-id="579f0-167">更快速的應用程式啟動時間和較小的發行組合對您而言極為重要。</span><span class="sxs-lookup"><span data-stu-id="579f0-167">Faster application startup time and smaller published bundles are of utmost importance to you.</span></span> <span data-ttu-id="579f0-168">基於這些理由，ASP.NET Core 2.0 中預設會啟用[ Razor view 編譯](xref:mvc/views/view-compilation)。</span><span class="sxs-lookup"><span data-stu-id="579f0-168">For these reasons, [Razor view compilation](xref:mvc/views/view-compilation) is enabled by default in ASP.NET Core 2.0.</span></span>
 
-<span data-ttu-id="579f0-169">已不再需要將 `Mvc:::no-loc(Razor):::CompileOnPublish` 屬性設定為 true。</span><span class="sxs-lookup"><span data-stu-id="579f0-169">Setting the `Mvc:::no-loc(Razor):::CompileOnPublish` property to true is no longer required.</span></span> <span data-ttu-id="579f0-170">除非您停用檢視編譯，否則屬性可能會從 *.csproj* 檔案中移除。</span><span class="sxs-lookup"><span data-stu-id="579f0-170">Unless you're disabling view compilation, the property may be removed from the *.csproj* file.</span></span>
+<span data-ttu-id="579f0-169">已不再需要將 `MvcRazorCompileOnPublish` 屬性設定為 true。</span><span class="sxs-lookup"><span data-stu-id="579f0-169">Setting the `MvcRazorCompileOnPublish` property to true is no longer required.</span></span> <span data-ttu-id="579f0-170">除非您停用檢視編譯，否則屬性可能會從 *.csproj* 檔案中移除。</span><span class="sxs-lookup"><span data-stu-id="579f0-170">Unless you're disabling view compilation, the property may be removed from the *.csproj* file.</span></span>
 
-<span data-ttu-id="579f0-171">以 .NET Framework 為目標時，您仍然需要明確參考 [AspNetCore :::no-loc(Razor)::: 。](https://www.nuget.org/packages/Microsoft.AspNetCore.Mvc.:::no-loc(Razor):::.ViewCompilation) 在 *.csproj* 檔案中 >microsoft.aspnetcore.mvc.razor.viewcompilation NuGet 套件：</span><span class="sxs-lookup"><span data-stu-id="579f0-171">When targeting .NET Framework, you still need to explicitly reference the [Microsoft.AspNetCore.Mvc.:::no-loc(Razor):::.ViewCompilation](https://www.nuget.org/packages/Microsoft.AspNetCore.Mvc.:::no-loc(Razor):::.ViewCompilation) NuGet package in your *.csproj* file:</span></span>
+<span data-ttu-id="579f0-171">以 .NET Framework 為目標時，您仍然需要明確參考 [AspNetCore Razor 。](https://www.nuget.org/packages/Microsoft.AspNetCore.Mvc.Razor.ViewCompilation) 在 *.csproj* 檔案中 >microsoft.aspnetcore.mvc.razor.viewcompilation NuGet 套件：</span><span class="sxs-lookup"><span data-stu-id="579f0-171">When targeting .NET Framework, you still need to explicitly reference the [Microsoft.AspNetCore.Mvc.Razor.ViewCompilation](https://www.nuget.org/packages/Microsoft.AspNetCore.Mvc.Razor.ViewCompilation) NuGet package in your *.csproj* file:</span></span>
 
 [!code-xml[](../1x-to-2x/samples/AspNetCoreDotNetFx2.0App/AspNetCoreDotNetFx2.0App/AspNetCoreDotNetFx2.0App.csproj?range=15)]
 
@@ -202,9 +202,9 @@ Unable to create an object of type '<Context>'. Add an implementation of 'IDesig
 
 <a name="auth-and-identity"></a>
 
-## <a name="adopt-authenticationno-locidentity-improvements"></a><span data-ttu-id="579f0-183">採用驗證/ :::no-loc(Identity)::: 改進</span><span class="sxs-lookup"><span data-stu-id="579f0-183">Adopt authentication/:::no-loc(Identity)::: improvements</span></span>
+## <a name="adopt-authenticationno-locidentity-improvements"></a><span data-ttu-id="579f0-183">採用驗證/ Identity 改進</span><span class="sxs-lookup"><span data-stu-id="579f0-183">Adopt authentication/Identity improvements</span></span>
 
-<span data-ttu-id="579f0-184">ASP.NET Core 2.0 有新的驗證模型和的許多重大變更 :::no-loc(ASP.NET Core Identity)::: 。</span><span class="sxs-lookup"><span data-stu-id="579f0-184">ASP.NET Core 2.0 has a new authentication model and a number of significant changes to :::no-loc(ASP.NET Core Identity):::.</span></span> <span data-ttu-id="579f0-185">如果您已在啟用個別使用者帳戶的情況下建立您的專案，或您已手動新增驗證或 :::no-loc(Identity)::: ，請參閱 [遷移驗證以及 :::no-loc(Identity)::: ASP.NET Core 2.0](xref:migration/1x-to-2x/identity-2x)。</span><span class="sxs-lookup"><span data-stu-id="579f0-185">If you created your project with Individual User Accounts enabled, or if you have manually added authentication or :::no-loc(Identity):::, see [Migrate Authentication and :::no-loc(Identity)::: to ASP.NET Core 2.0](xref:migration/1x-to-2x/identity-2x).</span></span>
+<span data-ttu-id="579f0-184">ASP.NET Core 2.0 有新的驗證模型和的許多重大變更 ASP.NET Core Identity 。</span><span class="sxs-lookup"><span data-stu-id="579f0-184">ASP.NET Core 2.0 has a new authentication model and a number of significant changes to ASP.NET Core Identity.</span></span> <span data-ttu-id="579f0-185">如果您已在啟用個別使用者帳戶的情況下建立您的專案，或您已手動新增驗證或 Identity ，請參閱 [遷移驗證以及 Identity ASP.NET Core 2.0](xref:migration/1x-to-2x/identity-2x)。</span><span class="sxs-lookup"><span data-stu-id="579f0-185">If you created your project with Individual User Accounts enabled, or if you have manually added authentication or Identity, see [Migrate Authentication and Identity to ASP.NET Core 2.0](xref:migration/1x-to-2x/identity-2x).</span></span>
 
 ## <a name="additional-resources"></a><span data-ttu-id="579f0-186">其他資源</span><span class="sxs-lookup"><span data-stu-id="579f0-186">Additional resources</span></span>
 

@@ -6,17 +6,17 @@ monikerRange: '>= aspnetcore-3.0'
 ms.author: jamesnk
 ms.date: 09/23/2019
 no-loc:
-- ':::no-loc(appsettings.json):::'
-- ':::no-loc(ASP.NET Core Identity):::'
-- ':::no-loc(cookie):::'
-- ':::no-loc(Cookie):::'
-- ':::no-loc(Blazor):::'
-- ':::no-loc(Blazor Server):::'
-- ':::no-loc(Blazor WebAssembly):::'
-- ':::no-loc(Identity):::'
-- ":::no-loc(Let's Encrypt):::"
-- ':::no-loc(Razor):::'
-- ':::no-loc(SignalR):::'
+- 'appsettings.json'
+- 'ASP.NET Core Identity'
+- 'cookie'
+- 'Cookie'
+- 'Blazor'
+- 'Blazor Server'
+- 'Blazor WebAssembly'
+- 'Identity'
+- "Let's Encrypt"
+- 'Razor'
+- 'SignalR'
 uid: grpc/diagnostics
 ms.openlocfilehash: 1f25ae76e5a480e5e6f247e4ac78d06dd4e778e9
 ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
@@ -46,7 +46,7 @@ ms.locfileid: "93060439"
 
 <span data-ttu-id="56649-119">由於 gRPC 服務是裝載在 ASP.NET Core 上，因此會使用 ASP.NET Core 記錄系統。</span><span class="sxs-lookup"><span data-stu-id="56649-119">Since gRPC services are hosted on ASP.NET Core, it uses the ASP.NET Core logging system.</span></span> <span data-ttu-id="56649-120">在預設設定中，gRPC 會記錄極少的資訊，但這可以設定。</span><span class="sxs-lookup"><span data-stu-id="56649-120">In the default configuration, gRPC logs very little information, but this can configured.</span></span> <span data-ttu-id="56649-121">如需有關設定 ASP.NET Core 記錄的詳細資訊，請參閱 [ASP.NET Core 記錄](xref:fundamentals/logging/index#configuration) 檔。</span><span class="sxs-lookup"><span data-stu-id="56649-121">See the documentation on [ASP.NET Core logging](xref:fundamentals/logging/index#configuration) for details on configuring ASP.NET Core logging.</span></span>
 
-<span data-ttu-id="56649-122">gRPC 會在類別下新增記錄 `Grpc` 。</span><span class="sxs-lookup"><span data-stu-id="56649-122">gRPC adds logs under the `Grpc` category.</span></span> <span data-ttu-id="56649-123">若要啟用 gRPC 的詳細記錄，請 `Grpc` `Debug` 將下列專案新增至您檔案中的層級， *:::no-loc(appsettings.json):::* 方法是將下列專案新增至 `LogLevel` 中的子區段 `Logging` ：</span><span class="sxs-lookup"><span data-stu-id="56649-123">To enable detailed logs from gRPC, configure the `Grpc` prefixes to the `Debug` level in your *:::no-loc(appsettings.json):::* file by adding the following items to the `LogLevel` sub-section in `Logging`:</span></span>
+<span data-ttu-id="56649-122">gRPC 會在類別下新增記錄 `Grpc` 。</span><span class="sxs-lookup"><span data-stu-id="56649-122">gRPC adds logs under the `Grpc` category.</span></span> <span data-ttu-id="56649-123">若要啟用 gRPC 的詳細記錄，請 `Grpc` `Debug` 將下列專案新增至您檔案中的層級， *appsettings.json* 方法是將下列專案新增至 `LogLevel` 中的子區段 `Logging` ：</span><span class="sxs-lookup"><span data-stu-id="56649-123">To enable detailed logs from gRPC, configure the `Grpc` prefixes to the `Debug` level in your *appsettings.json* file by adding the following items to the `LogLevel` sub-section in `Logging`:</span></span>
 
 [!code-json[](diagnostics/sample/logging-config.json?highlight=7)]
 

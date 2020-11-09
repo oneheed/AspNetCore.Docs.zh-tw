@@ -7,17 +7,17 @@ ms.custom: seoapril2019, mvc, seodec18
 ms.date: 03/19/2020
 monikerRange: '>= aspnetcore-3.0'
 no-loc:
-- ':::no-loc(appsettings.json):::'
-- ':::no-loc(ASP.NET Core Identity):::'
-- ':::no-loc(cookie):::'
-- ':::no-loc(Cookie):::'
-- ':::no-loc(Blazor):::'
-- ':::no-loc(Blazor Server):::'
-- ':::no-loc(Blazor WebAssembly):::'
-- ':::no-loc(Identity):::'
-- ":::no-loc(Let's Encrypt):::"
-- ':::no-loc(Razor):::'
-- ':::no-loc(SignalR):::'
+- 'appsettings.json'
+- 'ASP.NET Core Identity'
+- 'cookie'
+- 'Cookie'
+- 'Blazor'
+- 'Blazor Server'
+- 'Blazor WebAssembly'
+- 'Identity'
+- "Let's Encrypt"
+- 'Razor'
+- 'SignalR'
 uid: security/authentication/facebook-logins
 ms.openlocfilehash: be0b655645fd2bd0eab9f9c30a65485f386cead3
 ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
@@ -147,7 +147,7 @@ services.AddAuthentication().AddFacebook(facebookOptions =>
 
 ## <a name="troubleshooting"></a><span data-ttu-id="b902f-164">疑難排解</span><span class="sxs-lookup"><span data-stu-id="b902f-164">Troubleshooting</span></span>
 
-* <span data-ttu-id="b902f-165">**僅 ASP.NET Core 2.x：** 如果 :::no-loc(Identity)::: 未透過呼叫來 `services.Add:::no-loc(Identity):::` 設定 `ConfigureServices` ，嘗試驗證將會導致 *ArgumentException：必須提供 ' SignInScheme ' 選項* 。</span><span class="sxs-lookup"><span data-stu-id="b902f-165">**ASP.NET Core 2.x only:** If :::no-loc(Identity)::: isn't configured by calling `services.Add:::no-loc(Identity):::` in `ConfigureServices`, attempting to authenticate will result in *ArgumentException: The 'SignInScheme' option must be provided* .</span></span> <span data-ttu-id="b902f-166">本教學課程中使用的專案範本可確保這項操作已完成。</span><span class="sxs-lookup"><span data-stu-id="b902f-166">The project template used in this tutorial ensures that this is done.</span></span>
+* <span data-ttu-id="b902f-165">**僅 ASP.NET Core 2.x：** 如果 Identity 未透過呼叫來 `services.AddIdentity` 設定 `ConfigureServices` ，嘗試驗證將會導致 *ArgumentException：必須提供 ' SignInScheme ' 選項* 。</span><span class="sxs-lookup"><span data-stu-id="b902f-165">**ASP.NET Core 2.x only:** If Identity isn't configured by calling `services.AddIdentity` in `ConfigureServices`, attempting to authenticate will result in *ArgumentException: The 'SignInScheme' option must be provided* .</span></span> <span data-ttu-id="b902f-166">本教學課程中使用的專案範本可確保這項操作已完成。</span><span class="sxs-lookup"><span data-stu-id="b902f-166">The project template used in this tutorial ensures that this is done.</span></span>
 * <span data-ttu-id="b902f-167">如果未藉由套用初始遷移來建立網站資料庫，則在 *處理要求錯誤時* ，您會收到資料庫作業失敗。</span><span class="sxs-lookup"><span data-stu-id="b902f-167">If the site database has not been created by applying the initial migration, you get *A database operation failed while processing the request* error.</span></span> <span data-ttu-id="b902f-168">請按一下 [套用 **遷移** ] 來建立資料庫，並重新整理以繼續發生錯誤。</span><span class="sxs-lookup"><span data-stu-id="b902f-168">Tap **Apply Migrations** to create the database and refresh to continue past the error.</span></span>
 
 ## <a name="next-steps"></a><span data-ttu-id="b902f-169">後續步驟</span><span class="sxs-lookup"><span data-stu-id="b902f-169">Next steps</span></span>

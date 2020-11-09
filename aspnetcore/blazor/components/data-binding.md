@@ -1,23 +1,23 @@
 ---
-title: 'ASP.NET Core :::no-loc(Blazor)::: 資料系結'
+title: 'ASP.NET Core Blazor 資料系結'
 author: guardrex
-description: '瞭解應用程式中元件和 DOM 元素的資料系結功能 :::no-loc(Blazor)::: 。'
+description: '瞭解應用程式中元件和 DOM 元素的資料系結功能 Blazor 。'
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
 ms.date: 10/22/2020
 no-loc:
-- ':::no-loc(appsettings.json):::'
-- ':::no-loc(ASP.NET Core Identity):::'
-- ':::no-loc(cookie):::'
-- ':::no-loc(Cookie):::'
-- ':::no-loc(Blazor):::'
-- ':::no-loc(Blazor Server):::'
-- ':::no-loc(Blazor WebAssembly):::'
-- ':::no-loc(Identity):::'
-- ":::no-loc(Let's Encrypt):::"
-- ':::no-loc(Razor):::'
-- ':::no-loc(SignalR):::'
+- 'appsettings.json'
+- 'ASP.NET Core Identity'
+- 'cookie'
+- 'Cookie'
+- 'Blazor'
+- 'Blazor Server'
+- 'Blazor WebAssembly'
+- 'Identity'
+- "Let's Encrypt"
+- 'Razor'
+- 'SignalR'
 uid: blazor/components/data-binding
 ms.openlocfilehash: f1730ed366fc81444ffe54e88bcd33147efb0aa7
 ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
@@ -26,11 +26,11 @@ ms.contentlocale: zh-TW
 ms.lasthandoff: 10/30/2020
 ms.locfileid: "93056292"
 ---
-# <a name="aspnet-core-no-locblazor-data-binding"></a><span data-ttu-id="056c7-103">ASP.NET Core :::no-loc(Blazor)::: 資料系結</span><span class="sxs-lookup"><span data-stu-id="056c7-103">ASP.NET Core :::no-loc(Blazor)::: data binding</span></span>
+# <a name="aspnet-core-no-locblazor-data-binding"></a><span data-ttu-id="056c7-103">ASP.NET Core Blazor 資料系結</span><span class="sxs-lookup"><span data-stu-id="056c7-103">ASP.NET Core Blazor data binding</span></span>
 
 <span data-ttu-id="056c7-104">[Luke Latham](https://github.com/guardrex)、 [Daniel Roth](https://github.com/danroth27)和[Steve Sanderson](https://github.com/SteveSandersonMS)</span><span class="sxs-lookup"><span data-stu-id="056c7-104">By [Luke Latham](https://github.com/guardrex), [Daniel Roth](https://github.com/danroth27), and [Steve Sanderson](https://github.com/SteveSandersonMS)</span></span>
 
-<span data-ttu-id="056c7-105">:::no-loc(Razor)::: 元件會透過以 [`@bind`](xref:mvc/views/razor#bind) 欄位、屬性或運算式值命名的 HTML 元素屬性，提供資料系結功能 :::no-loc(Razor)::: 。</span><span class="sxs-lookup"><span data-stu-id="056c7-105">:::no-loc(Razor)::: components provide data binding features via an HTML element attribute named [`@bind`](xref:mvc/views/razor#bind) with a field, property, or :::no-loc(Razor)::: expression value.</span></span>
+<span data-ttu-id="056c7-105">Razor 元件會透過以 [`@bind`](xref:mvc/views/razor#bind) 欄位、屬性或運算式值命名的 HTML 元素屬性，提供資料系結功能 Razor 。</span><span class="sxs-lookup"><span data-stu-id="056c7-105">Razor components provide data binding features via an HTML element attribute named [`@bind`](xref:mvc/views/razor#bind) with a field, property, or Razor expression value.</span></span>
 
 <span data-ttu-id="056c7-106">下列範例會將專案系結 `<input>` 至 `currentValue` 欄位，並將元素系結 `<input>` 至 `CurrentValue` 屬性：</span><span class="sxs-lookup"><span data-stu-id="056c7-106">The following example binds an `<input>` element to the `currentValue` field and an `<input>` element to the `CurrentValue` property:</span></span>
 
@@ -136,7 +136,7 @@ ms.locfileid: "93056292"
 
 <span data-ttu-id="056c7-151">`@bind:format`屬性會指定要套用至元素之的日期格式 `value` `<input>` 。</span><span class="sxs-lookup"><span data-stu-id="056c7-151">The `@bind:format` attribute specifies the date format to apply to the `value` of the `<input>` element.</span></span> <span data-ttu-id="056c7-152">當事件發生時，也會使用此格式來剖析該值 `onchange` 。</span><span class="sxs-lookup"><span data-stu-id="056c7-152">The format is also used to parse the value when an `onchange` event occurs.</span></span>
 
-<span data-ttu-id="056c7-153">`date`由於 :::no-loc(Blazor)::: 具有格式化日期的內建支援，因此不建議指定欄位類型的格式。</span><span class="sxs-lookup"><span data-stu-id="056c7-153">Specifying a format for the `date` field type isn't recommended because :::no-loc(Blazor)::: has built-in support to format dates.</span></span> <span data-ttu-id="056c7-154">在建議的情況下， `yyyy-MM-dd` 如果格式是以欄位類型提供，只使用日期格式讓系結正常運作 `date` ：</span><span class="sxs-lookup"><span data-stu-id="056c7-154">In spite of the recommendation, only use the `yyyy-MM-dd` date format for binding to function correctly if a format is supplied with the `date` field type:</span></span>
+<span data-ttu-id="056c7-153">`date`由於 Blazor 具有格式化日期的內建支援，因此不建議指定欄位類型的格式。</span><span class="sxs-lookup"><span data-stu-id="056c7-153">Specifying a format for the `date` field type isn't recommended because Blazor has built-in support to format dates.</span></span> <span data-ttu-id="056c7-154">在建議的情況下， `yyyy-MM-dd` 如果格式是以欄位類型提供，只使用日期格式讓系結正常運作 `date` ：</span><span class="sxs-lookup"><span data-stu-id="056c7-154">In spite of the recommendation, only use the `yyyy-MM-dd` date format for binding to function correctly if a format is supplied with the `date` field type:</span></span>
 
 ```razor
 <input type="date" @bind="startDate" @bind:format="yyyy-MM-dd">

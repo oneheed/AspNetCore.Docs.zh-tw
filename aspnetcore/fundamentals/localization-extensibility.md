@@ -7,17 +7,17 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 08/03/2019
 no-loc:
-- ':::no-loc(appsettings.json):::'
-- ':::no-loc(ASP.NET Core Identity):::'
-- ':::no-loc(cookie):::'
-- ':::no-loc(Cookie):::'
-- ':::no-loc(Blazor):::'
-- ':::no-loc(Blazor Server):::'
-- ':::no-loc(Blazor WebAssembly):::'
-- ':::no-loc(Identity):::'
-- ":::no-loc(Let's Encrypt):::"
-- ':::no-loc(Razor):::'
-- ':::no-loc(SignalR):::'
+- 'appsettings.json'
+- 'ASP.NET Core Identity'
+- 'cookie'
+- 'Cookie'
+- 'Blazor'
+- 'Blazor Server'
+- 'Blazor WebAssembly'
+- 'Identity'
+- "Let's Encrypt"
+- 'Razor'
+- 'SignalR'
 uid: fundamentals/localization-extensibility
 ms.openlocfilehash: a6ef5a547e6ccba6771cdf892a9636f83d6796b1
 ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
@@ -49,7 +49,7 @@ ms.locfileid: "93053731"
 <span data-ttu-id="55163-115">ASP.NET Core 當地語系化 API 具有四個預設提供者，可判斷執行中要求目前的文化特性：</span><span class="sxs-lookup"><span data-stu-id="55163-115">ASP.NET Core localization APIs have four default providers that can determine the current culture of an executing request:</span></span>
 
 * <xref:Microsoft.AspNetCore.Localization.QueryStringRequestCultureProvider>
-* <xref:Microsoft.AspNetCore.Localization.:::no-loc(Cookie):::RequestCultureProvider>
+* <xref:Microsoft.AspNetCore.Localization.CookieRequestCultureProvider>
 * <xref:Microsoft.AspNetCore.Localization.AcceptLanguageHeaderRequestCultureProvider>
 * <xref:Microsoft.AspNetCore.Localization.CustomRequestCultureProvider>
 
@@ -105,7 +105,7 @@ options.AddInitialRequestCultureProvider(new CustomRequestCultureProvider(async 
 
 <span data-ttu-id="55163-121"><xref:Microsoft.AspNetCore.Localization.RequestCultureProvider> 的新實作可建立來從自訂來源判斷要求文化特性資訊。</span><span class="sxs-lookup"><span data-stu-id="55163-121">A new implementation of <xref:Microsoft.AspNetCore.Localization.RequestCultureProvider> can be created that determines the request culture information from a custom source.</span></span> <span data-ttu-id="55163-122">例如，自訂來源可以是設定檔或資料庫。</span><span class="sxs-lookup"><span data-stu-id="55163-122">For example, the custom source can be a configuration file or database.</span></span>
 
-<span data-ttu-id="55163-123">下列範例會顯示 `AppSettingsRequestCultureProvider` ，它會擴充 <xref:Microsoft.AspNetCore.Localization.RequestCultureProvider> 以判斷來自的要求文化特性資訊 *:::no-loc(appsettings.json):::* ：</span><span class="sxs-lookup"><span data-stu-id="55163-123">The following example shows `AppSettingsRequestCultureProvider`, which extends the <xref:Microsoft.AspNetCore.Localization.RequestCultureProvider> to determine the request culture information from *:::no-loc(appsettings.json):::* :</span></span>
+<span data-ttu-id="55163-123">下列範例會顯示 `AppSettingsRequestCultureProvider` ，它會擴充 <xref:Microsoft.AspNetCore.Localization.RequestCultureProvider> 以判斷來自的要求文化特性資訊 *appsettings.json* ：</span><span class="sxs-lookup"><span data-stu-id="55163-123">The following example shows `AppSettingsRequestCultureProvider`, which extends the <xref:Microsoft.AspNetCore.Localization.RequestCultureProvider> to determine the request culture information from *appsettings.json* :</span></span>
 
 ```csharp
 public class AppSettingsRequestCultureProvider : RequestCultureProvider

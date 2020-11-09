@@ -5,17 +5,17 @@ description: 了解 ASP.NET Core MVC 何以是建置使用模型檢視控制器�
 ms.author: riande
 ms.date: 02/12/2020
 no-loc:
-- ':::no-loc(appsettings.json):::'
-- ':::no-loc(ASP.NET Core Identity):::'
-- ':::no-loc(cookie):::'
-- ':::no-loc(Cookie):::'
-- ':::no-loc(Blazor):::'
-- ':::no-loc(Blazor Server):::'
-- ':::no-loc(Blazor WebAssembly):::'
-- ':::no-loc(Identity):::'
-- ":::no-loc(Let's Encrypt):::"
-- ':::no-loc(Razor):::'
-- ':::no-loc(SignalR):::'
+- 'appsettings.json'
+- 'ASP.NET Core Identity'
+- 'cookie'
+- 'Cookie'
+- 'Blazor'
+- 'Blazor Server'
+- 'Blazor WebAssembly'
+- 'Identity'
+- "Let's Encrypt"
+- 'Razor'
+- 'SignalR'
 uid: mvc/overview
 ms.openlocfilehash: c55421efa1fd559f462549bfaceb794d4a9c35b8
 ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
@@ -49,7 +49,7 @@ ms.locfileid: "93059308"
 
 ### <a name="view-responsibilities"></a><span data-ttu-id="83c6b-127">檢視職責</span><span class="sxs-lookup"><span data-stu-id="83c6b-127">View Responsibilities</span></span>
 
-<span data-ttu-id="83c6b-128">檢視會負責透過使用者介面展示內容。</span><span class="sxs-lookup"><span data-stu-id="83c6b-128">Views are responsible for presenting content through the user interface.</span></span> <span data-ttu-id="83c6b-129">他們使用[ :::no-loc(Razor)::: view engine](#razor-view-engine)將 .net 程式碼內嵌在 HTML 標籤中。</span><span class="sxs-lookup"><span data-stu-id="83c6b-129">They use the [:::no-loc(Razor)::: view engine](#razor-view-engine) to embed .NET code in HTML markup.</span></span> <span data-ttu-id="83c6b-130">檢視內應該有基本邏輯，而且其中的任何邏輯都應該與展示內容相關。</span><span class="sxs-lookup"><span data-stu-id="83c6b-130">There should be minimal logic within views, and any logic in them should relate to presenting content.</span></span> <span data-ttu-id="83c6b-131">如果您需要在檢視檔案中執行大量邏輯以便顯示複雜模型中的資料，請考慮使用[檢視元件](views/view-components.md)、ViewModel 或檢視範本來簡化檢視。</span><span class="sxs-lookup"><span data-stu-id="83c6b-131">If you find the need to perform a great deal of logic in view files in order to display data from a complex model, consider using a [View Component](views/view-components.md), ViewModel, or view template to simplify the view.</span></span>
+<span data-ttu-id="83c6b-128">檢視會負責透過使用者介面展示內容。</span><span class="sxs-lookup"><span data-stu-id="83c6b-128">Views are responsible for presenting content through the user interface.</span></span> <span data-ttu-id="83c6b-129">他們使用[ Razor view engine](#razor-view-engine)將 .net 程式碼內嵌在 HTML 標籤中。</span><span class="sxs-lookup"><span data-stu-id="83c6b-129">They use the [Razor view engine](#razor-view-engine) to embed .NET code in HTML markup.</span></span> <span data-ttu-id="83c6b-130">檢視內應該有基本邏輯，而且其中的任何邏輯都應該與展示內容相關。</span><span class="sxs-lookup"><span data-stu-id="83c6b-130">There should be minimal logic within views, and any logic in them should relate to presenting content.</span></span> <span data-ttu-id="83c6b-131">如果您需要在檢視檔案中執行大量邏輯以便顯示複雜模型中的資料，請考慮使用[檢視元件](views/view-components.md)、ViewModel 或檢視範本來簡化檢視。</span><span class="sxs-lookup"><span data-stu-id="83c6b-131">If you find the need to perform a great deal of logic in view files in order to display data from a complex model, consider using a [View Component](views/view-components.md), ViewModel, or view template to simplify the view.</span></span>
 
 ### <a name="controller-responsibilities"></a><span data-ttu-id="83c6b-132">控制器職責</span><span class="sxs-lookup"><span data-stu-id="83c6b-132">Controller Responsibilities</span></span>
 
@@ -79,7 +79,7 @@ ms.locfileid: "93059308"
 * [<span data-ttu-id="83c6b-150">區域</span><span class="sxs-lookup"><span data-stu-id="83c6b-150">Areas</span></span>](#areas)
 * [<span data-ttu-id="83c6b-151">Web API</span><span class="sxs-lookup"><span data-stu-id="83c6b-151">Web APIs</span></span>](#web-apis)
 * [<span data-ttu-id="83c6b-152">可測試性</span><span class="sxs-lookup"><span data-stu-id="83c6b-152">Testability</span></span>](#testability)
-* [<span data-ttu-id="83c6b-153">:::no-loc(Razor)::: 查看引擎</span><span class="sxs-lookup"><span data-stu-id="83c6b-153">:::no-loc(Razor)::: view engine</span></span>](#razor-view-engine)
+* [<span data-ttu-id="83c6b-153">Razor 查看引擎</span><span class="sxs-lookup"><span data-stu-id="83c6b-153">Razor view engine</span></span>](#razor-view-engine)
 * [<span data-ttu-id="83c6b-154">強型別視圖</span><span class="sxs-lookup"><span data-stu-id="83c6b-154">Strongly typed views</span></span>](#strongly-typed-views)
 * [<span data-ttu-id="83c6b-155">標籤協助程式</span><span class="sxs-lookup"><span data-stu-id="83c6b-155">Tag Helpers</span></span>](#tag-helpers)
 * [<span data-ttu-id="83c6b-156">視圖元件</span><span class="sxs-lookup"><span data-stu-id="83c6b-156">View Components</span></span>](#view-components)
@@ -198,9 +198,9 @@ public class AccountController : Controller
 
 <span data-ttu-id="83c6b-198">此架構使用介面和相依性插入，因此相當適用於單元測試，而此架構所包含的功能 (例如 Entity Framework 的 TestHost 和 InMemory 提供者) 也讓您可以輕鬆快速地進行[整合測試](xref:test/integration-tests)。</span><span class="sxs-lookup"><span data-stu-id="83c6b-198">The framework's use of interfaces and dependency injection make it well-suited to unit testing, and the framework includes features (like a TestHost and InMemory provider for Entity Framework) that make [integration tests](xref:test/integration-tests) quick and easy as well.</span></span> <span data-ttu-id="83c6b-199">深入了解[如何測試控制器邏輯](controllers/testing.md)。</span><span class="sxs-lookup"><span data-stu-id="83c6b-199">Learn more about [how to test controller logic](controllers/testing.md).</span></span>
 
-### <a name="no-locrazor-view-engine"></a><span data-ttu-id="83c6b-200">:::no-loc(Razor)::: 查看引擎</span><span class="sxs-lookup"><span data-stu-id="83c6b-200">:::no-loc(Razor)::: view engine</span></span>
+### <a name="no-locrazor-view-engine"></a><span data-ttu-id="83c6b-200">Razor 查看引擎</span><span class="sxs-lookup"><span data-stu-id="83c6b-200">Razor view engine</span></span>
 
-<span data-ttu-id="83c6b-201">[ASP.NET CORE MVC 視圖](views/overview.md)器會使用[ :::no-loc(Razor)::: view engine](views/razor.md)來呈現視圖。</span><span class="sxs-lookup"><span data-stu-id="83c6b-201">[ASP.NET Core MVC views](views/overview.md) use the [:::no-loc(Razor)::: view engine](views/razor.md) to render views.</span></span> <span data-ttu-id="83c6b-202">:::no-loc(Razor)::: 是一種精簡、易懂且流暢的範本標記語言，可使用內嵌 c # 程式碼來定義視圖。</span><span class="sxs-lookup"><span data-stu-id="83c6b-202">:::no-loc(Razor)::: is a compact, expressive and fluid template markup language for defining views using embedded C# code.</span></span> <span data-ttu-id="83c6b-203">:::no-loc(Razor)::: 用來在伺服器上動態產生 web 內容。</span><span class="sxs-lookup"><span data-stu-id="83c6b-203">:::no-loc(Razor)::: is used to dynamically generate web content on the server.</span></span> <span data-ttu-id="83c6b-204">您可以完全混合伺服端程式碼以及用戶端內容和程式碼。</span><span class="sxs-lookup"><span data-stu-id="83c6b-204">You can cleanly mix server code with client side content and code.</span></span>
+<span data-ttu-id="83c6b-201">[ASP.NET CORE MVC 視圖](views/overview.md)器會使用[ Razor view engine](views/razor.md)來呈現視圖。</span><span class="sxs-lookup"><span data-stu-id="83c6b-201">[ASP.NET Core MVC views](views/overview.md) use the [Razor view engine](views/razor.md) to render views.</span></span> <span data-ttu-id="83c6b-202">Razor 是一種精簡、易懂且流暢的範本標記語言，可使用內嵌 c # 程式碼來定義視圖。</span><span class="sxs-lookup"><span data-stu-id="83c6b-202">Razor is a compact, expressive and fluid template markup language for defining views using embedded C# code.</span></span> <span data-ttu-id="83c6b-203">Razor 用來在伺服器上動態產生 web 內容。</span><span class="sxs-lookup"><span data-stu-id="83c6b-203">Razor is used to dynamically generate web content on the server.</span></span> <span data-ttu-id="83c6b-204">您可以完全混合伺服端程式碼以及用戶端內容和程式碼。</span><span class="sxs-lookup"><span data-stu-id="83c6b-204">You can cleanly mix server code with client side content and code.</span></span>
 
 ```cshtml
 <ul>
@@ -210,11 +210,11 @@ public class AccountController : Controller
 </ul>
 ```
 
-<span data-ttu-id="83c6b-205">:::no-loc(Razor):::您可以使用 view engine 來定義[版面](views/layout.md)配置、[部分視圖](views/partial.md)和可取代的區段。</span><span class="sxs-lookup"><span data-stu-id="83c6b-205">Using the :::no-loc(Razor)::: view engine you can define [layouts](views/layout.md), [partial views](views/partial.md) and replaceable sections.</span></span>
+<span data-ttu-id="83c6b-205">Razor您可以使用 view engine 來定義[版面](views/layout.md)配置、[部分視圖](views/partial.md)和可取代的區段。</span><span class="sxs-lookup"><span data-stu-id="83c6b-205">Using the Razor view engine you can define [layouts](views/layout.md), [partial views](views/partial.md) and replaceable sections.</span></span>
 
 ### <a name="strongly-typed-views"></a><span data-ttu-id="83c6b-206">強型別檢視</span><span class="sxs-lookup"><span data-stu-id="83c6b-206">Strongly typed views</span></span>
 
-<span data-ttu-id="83c6b-207">:::no-loc(Razor)::: MVC 中的 views 可以根據您的模型以強型別為基礎。</span><span class="sxs-lookup"><span data-stu-id="83c6b-207">:::no-loc(Razor)::: views in MVC can be strongly typed based on your model.</span></span> <span data-ttu-id="83c6b-208">控制器可以將強型別模型傳遞至檢視，讓您的檢視具有類型檢查和 IntelliSense 支援。</span><span class="sxs-lookup"><span data-stu-id="83c6b-208">Controllers can pass a strongly typed model to views enabling your views to have type checking and IntelliSense support.</span></span>
+<span data-ttu-id="83c6b-207">Razor MVC 中的 views 可以根據您的模型以強型別為基礎。</span><span class="sxs-lookup"><span data-stu-id="83c6b-207">Razor views in MVC can be strongly typed based on your model.</span></span> <span data-ttu-id="83c6b-208">控制器可以將強型別模型傳遞至檢視，讓您的檢視具有類型檢查和 IntelliSense 支援。</span><span class="sxs-lookup"><span data-stu-id="83c6b-208">Controllers can pass a strongly typed model to views enabling your views to have type checking and IntelliSense support.</span></span>
 
 <span data-ttu-id="83c6b-209">例如，下列檢視會呈現 `IEnumerable<Product>` 類型的模型：</span><span class="sxs-lookup"><span data-stu-id="83c6b-209">For example, the following view renders a model of type `IEnumerable<Product>`:</span></span>
 
@@ -230,7 +230,7 @@ public class AccountController : Controller
 
 ### <a name="tag-helpers"></a><span data-ttu-id="83c6b-210">標籤協助程式</span><span class="sxs-lookup"><span data-stu-id="83c6b-210">Tag Helpers</span></span>
 
-<span data-ttu-id="83c6b-211">[標記](views/tag-helpers/intro.md) 協助程式可讓伺服器端程式碼參與建立和轉譯檔案中的 HTML 元素 :::no-loc(Razor)::: 。</span><span class="sxs-lookup"><span data-stu-id="83c6b-211">[Tag Helpers](views/tag-helpers/intro.md) enable server side code to participate in creating and rendering HTML elements in :::no-loc(Razor)::: files.</span></span> <span data-ttu-id="83c6b-212">您可以使用標籤協助程式定義自訂標籤 (例如 `<environment>`)，或修改現有標籤 (例如 `<label>`) 的行為。</span><span class="sxs-lookup"><span data-stu-id="83c6b-212">You can use tag helpers to define custom tags (for example, `<environment>`) or to modify the behavior of existing tags (for example, `<label>`).</span></span> <span data-ttu-id="83c6b-213">標籤協助程式會根據元素名稱及其屬性，繫結至特定元素。</span><span class="sxs-lookup"><span data-stu-id="83c6b-213">Tag Helpers bind to specific elements based on the element name and its attributes.</span></span> <span data-ttu-id="83c6b-214">其提供伺服器端轉譯優點，同時仍然保留 HTML 編輯體驗。</span><span class="sxs-lookup"><span data-stu-id="83c6b-214">They provide the benefits of server-side rendering while still preserving an HTML editing experience.</span></span>
+<span data-ttu-id="83c6b-211">[標記](views/tag-helpers/intro.md) 協助程式可讓伺服器端程式碼參與建立和轉譯檔案中的 HTML 元素 Razor 。</span><span class="sxs-lookup"><span data-stu-id="83c6b-211">[Tag Helpers](views/tag-helpers/intro.md) enable server side code to participate in creating and rendering HTML elements in Razor files.</span></span> <span data-ttu-id="83c6b-212">您可以使用標籤協助程式定義自訂標籤 (例如 `<environment>`)，或修改現有標籤 (例如 `<label>`) 的行為。</span><span class="sxs-lookup"><span data-stu-id="83c6b-212">You can use tag helpers to define custom tags (for example, `<environment>`) or to modify the behavior of existing tags (for example, `<label>`).</span></span> <span data-ttu-id="83c6b-213">標籤協助程式會根據元素名稱及其屬性，繫結至特定元素。</span><span class="sxs-lookup"><span data-stu-id="83c6b-213">Tag Helpers bind to specific elements based on the element name and its attributes.</span></span> <span data-ttu-id="83c6b-214">其提供伺服器端轉譯優點，同時仍然保留 HTML 編輯體驗。</span><span class="sxs-lookup"><span data-stu-id="83c6b-214">They provide the benefits of server-side rendering while still preserving an HTML editing experience.</span></span>
 
 <span data-ttu-id="83c6b-215">有許多適用於一般工作 (例如建立表單和連結、載入資產等) 的內建標籤協助程式，還有更多位於公用 GitHub 存放庫及作為 NuGet 套件來提供。</span><span class="sxs-lookup"><span data-stu-id="83c6b-215">There are many built-in Tag Helpers for common tasks - such as creating forms, links, loading assets and more - and even more available in public GitHub repositories and as NuGet packages.</span></span> <span data-ttu-id="83c6b-216">標籤協助程式是以 C# 編寫，並根據項目名稱、屬性名稱或上層標籤來設定目標 HTML 項目。</span><span class="sxs-lookup"><span data-stu-id="83c6b-216">Tag Helpers are authored in C#, and they target HTML elements based on element name, attribute name, or parent tag.</span></span> <span data-ttu-id="83c6b-217">例如，內建 LinkTagHelper 可用來建立 `AccountsController` 之 `Login` 動作的連結：</span><span class="sxs-lookup"><span data-stu-id="83c6b-217">For example, the built-in LinkTagHelper can be used to create a link to the `Login` action of the `AccountsController`:</span></span>
 
@@ -255,7 +255,7 @@ public class AccountController : Controller
 </environment>
 ```
 
-<span data-ttu-id="83c6b-219">標籤協助程式提供方便 HTML 的開發體驗，以及豐富的 IntelliSense 環境，可用於建立 HTML 和 :::no-loc(Razor)::: 標記。</span><span class="sxs-lookup"><span data-stu-id="83c6b-219">Tag Helpers provide an HTML-friendly development experience and a rich IntelliSense environment for creating HTML and :::no-loc(Razor)::: markup.</span></span> <span data-ttu-id="83c6b-220">大部分的內建標籤協助程式都是以現有的 HTML 元素為目標，並提供元素的伺服器端屬性。</span><span class="sxs-lookup"><span data-stu-id="83c6b-220">Most of the built-in Tag Helpers target existing HTML elements and provide server-side attributes for the element.</span></span>
+<span data-ttu-id="83c6b-219">標籤協助程式提供方便 HTML 的開發體驗，以及豐富的 IntelliSense 環境，可用於建立 HTML 和 Razor 標記。</span><span class="sxs-lookup"><span data-stu-id="83c6b-219">Tag Helpers provide an HTML-friendly development experience and a rich IntelliSense environment for creating HTML and Razor markup.</span></span> <span data-ttu-id="83c6b-220">大部分的內建標籤協助程式都是以現有的 HTML 元素為目標，並提供元素的伺服器端屬性。</span><span class="sxs-lookup"><span data-stu-id="83c6b-220">Most of the built-in Tag Helpers target existing HTML elements and provide server-side attributes for the element.</span></span>
 
 ### <a name="view-components"></a><span data-ttu-id="83c6b-221">檢視元件</span><span class="sxs-lookup"><span data-stu-id="83c6b-221">View Components</span></span>
 

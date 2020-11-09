@@ -6,17 +6,17 @@ ms.author: riande
 ms.custom: mvc, seodec18
 ms.date: 03/19/2020
 no-loc:
-- ':::no-loc(appsettings.json):::'
-- ':::no-loc(ASP.NET Core Identity):::'
-- ':::no-loc(cookie):::'
-- ':::no-loc(Cookie):::'
-- ':::no-loc(Blazor):::'
-- ':::no-loc(Blazor Server):::'
-- ':::no-loc(Blazor WebAssembly):::'
-- ':::no-loc(Identity):::'
-- ":::no-loc(Let's Encrypt):::"
-- ':::no-loc(Razor):::'
-- ':::no-loc(SignalR):::'
+- 'appsettings.json'
+- 'ASP.NET Core Identity'
+- 'cookie'
+- 'Cookie'
+- 'Blazor'
+- 'Blazor Server'
+- 'Blazor WebAssembly'
+- 'Identity'
+- "Let's Encrypt"
+- 'Razor'
+- 'SignalR'
 uid: security/authentication/google-logins
 ms.openlocfilehash: 111ea7c972778dfd5296d0401c16563aeaa36a63
 ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
@@ -83,7 +83,7 @@ ms.locfileid: "93060309"
 ## <a name="troubleshooting"></a><span data-ttu-id="69979-132">疑難排解</span><span class="sxs-lookup"><span data-stu-id="69979-132">Troubleshooting</span></span>
 
 * <span data-ttu-id="69979-133">如果登入無法運作，而且您未收到任何錯誤，請切換到開發模式，讓問題更容易進行偵測。</span><span class="sxs-lookup"><span data-stu-id="69979-133">If the sign-in doesn't work and you aren't getting any errors, switch to development mode to make the issue easier to debug.</span></span>
-* <span data-ttu-id="69979-134">如果 :::no-loc(Identity)::: 未透過呼叫來 `services.Add:::no-loc(Identity):::` 設定 `ConfigureServices` ，則嘗試在 ArgumentException 中驗證結果 *：必須提供 ' SignInScheme ' 選項* 。</span><span class="sxs-lookup"><span data-stu-id="69979-134">If :::no-loc(Identity)::: isn't configured by calling `services.Add:::no-loc(Identity):::` in `ConfigureServices`, attempting to authenticate results in *ArgumentException: The 'SignInScheme' option must be provided* .</span></span> <span data-ttu-id="69979-135">本教學課程中使用的專案範本可確保這項操作已完成。</span><span class="sxs-lookup"><span data-stu-id="69979-135">The project template used in this tutorial ensures that this is done.</span></span>
+* <span data-ttu-id="69979-134">如果 Identity 未透過呼叫來 `services.AddIdentity` 設定 `ConfigureServices` ，則嘗試在 ArgumentException 中驗證結果 *：必須提供 ' SignInScheme ' 選項* 。</span><span class="sxs-lookup"><span data-stu-id="69979-134">If Identity isn't configured by calling `services.AddIdentity` in `ConfigureServices`, attempting to authenticate results in *ArgumentException: The 'SignInScheme' option must be provided* .</span></span> <span data-ttu-id="69979-135">本教學課程中使用的專案範本可確保這項操作已完成。</span><span class="sxs-lookup"><span data-stu-id="69979-135">The project template used in this tutorial ensures that this is done.</span></span>
 * <span data-ttu-id="69979-136">如果未藉由套用初始遷移來建立網站資料庫，則在 *處理要求錯誤時* ，您會收到資料庫作業失敗。</span><span class="sxs-lookup"><span data-stu-id="69979-136">If the site database has not been created by applying the initial migration, you get *A database operation failed while processing the request* error.</span></span> <span data-ttu-id="69979-137">選取 [套用 **遷移** ] 來建立資料庫，然後重新整理頁面以繼續發生錯誤。</span><span class="sxs-lookup"><span data-stu-id="69979-137">Select **Apply Migrations** to create the database, and refresh the page to continue past the error.</span></span>
 
 ## <a name="next-steps"></a><span data-ttu-id="69979-138">後續步驟</span><span class="sxs-lookup"><span data-stu-id="69979-138">Next steps</span></span>

@@ -1,25 +1,25 @@
 ---
 title: 第8部分，新增驗證
 author: rick-anderson
-description: '頁面上的第8部分教學課程系列 :::no-loc(Razor)::: 。'
+description: '頁面上的第8部分教學課程系列 Razor 。'
 ms.author: riande
 ms.custom: mvc
 ms.date: 09/29/2020
 no-loc:
-- ':::no-loc(Index):::'
-- ':::no-loc(Create):::'
-- ':::no-loc(Delete):::'
-- ':::no-loc(appsettings.json):::'
-- ':::no-loc(ASP.NET Core Identity):::'
-- ':::no-loc(cookie):::'
-- ':::no-loc(Cookie):::'
-- ':::no-loc(Blazor):::'
-- ':::no-loc(Blazor Server):::'
-- ':::no-loc(Blazor WebAssembly):::'
-- ':::no-loc(Identity):::'
-- ":::no-loc(Let's Encrypt):::"
-- ':::no-loc(Razor):::'
-- ':::no-loc(SignalR):::'
+- 'Index'
+- 'Create'
+- 'Delete'
+- 'appsettings.json'
+- 'ASP.NET Core Identity'
+- 'cookie'
+- 'Cookie'
+- 'Blazor'
+- 'Blazor Server'
+- 'Blazor WebAssembly'
+- 'Identity'
+- "Let's Encrypt"
+- 'Razor'
+- 'SignalR'
 uid: tutorials/razor-pages/validation
 ms.openlocfilehash: 960e248d6f83b031004e354c98d8637674a403e1
 ms.sourcegitcommit: 342588e10ae0054a6d6dc0fd11dae481006be099
@@ -28,7 +28,7 @@ ms.contentlocale: zh-TW
 ms.lasthandoff: 11/07/2020
 ms.locfileid: "94360683"
 ---
-# <a name="part-8-add-validation-to-an-aspnet-core-no-locrazor-page"></a><span data-ttu-id="92766-103">第8部分：將驗證新增至 ASP.NET Core :::no-loc(Razor)::: 頁面</span><span class="sxs-lookup"><span data-stu-id="92766-103">Part 8, add validation to an ASP.NET Core :::no-loc(Razor)::: Page</span></span>
+# <a name="part-8-add-validation-to-an-aspnet-core-no-locrazor-page"></a><span data-ttu-id="92766-103">第8部分：將驗證新增至 ASP.NET Core Razor 頁面</span><span class="sxs-lookup"><span data-stu-id="92766-103">Part 8, add validation to an ASP.NET Core Razor Page</span></span>
 
 <span data-ttu-id="92766-104">作者：[Rick Anderson](https://twitter.com/RickAndMSFT)</span><span class="sxs-lookup"><span data-stu-id="92766-104">By [Rick Anderson](https://twitter.com/RickAndMSFT)</span></span>
 
@@ -36,12 +36,12 @@ ms.locfileid: "94360683"
 
 ## <a name="validation"></a><span data-ttu-id="92766-107">驗證</span><span class="sxs-lookup"><span data-stu-id="92766-107">Validation</span></span>
 
-<span data-ttu-id="92766-108">軟體開發的核心原則稱為 [DRY](https://wikipedia.org/wiki/Don%27t_repeat_yourself)(" **D** on't **R** epeat **Y** ourself", 不重複原則)。</span><span class="sxs-lookup"><span data-stu-id="92766-108">A key tenet of software development is called [DRY](https://wikipedia.org/wiki/Don%27t_repeat_yourself) (" **D** on't **R** epeat **Y** ourself").</span></span> <span data-ttu-id="92766-109">:::no-loc(Razor)::: 頁面會鼓勵開發環境指定一次，而且會反映在整個應用程式中。</span><span class="sxs-lookup"><span data-stu-id="92766-109">:::no-loc(Razor)::: Pages encourages development where functionality is specified once, and it's reflected throughout the app.</span></span> <span data-ttu-id="92766-110">DRY 有助於：</span><span class="sxs-lookup"><span data-stu-id="92766-110">DRY can help:</span></span>
+<span data-ttu-id="92766-108">軟體開發的核心原則稱為 [DRY](https://wikipedia.org/wiki/Don%27t_repeat_yourself)(" **D** on't **R** epeat **Y** ourself", 不重複原則)。</span><span class="sxs-lookup"><span data-stu-id="92766-108">A key tenet of software development is called [DRY](https://wikipedia.org/wiki/Don%27t_repeat_yourself) (" **D** on't **R** epeat **Y** ourself").</span></span> <span data-ttu-id="92766-109">Razor 頁面會鼓勵開發環境指定一次，而且會反映在整個應用程式中。</span><span class="sxs-lookup"><span data-stu-id="92766-109">Razor Pages encourages development where functionality is specified once, and it's reflected throughout the app.</span></span> <span data-ttu-id="92766-110">DRY 有助於：</span><span class="sxs-lookup"><span data-stu-id="92766-110">DRY can help:</span></span>
 
 * <span data-ttu-id="92766-111">降低應用程式中的程式碼數量。</span><span class="sxs-lookup"><span data-stu-id="92766-111">Reduce the amount of code in an app.</span></span>
 * <span data-ttu-id="92766-112">使程式碼較少出現錯誤，而且更容易進行測試和維護。</span><span class="sxs-lookup"><span data-stu-id="92766-112">Make the code less error prone, and easier to test and maintain.</span></span>
 
-<span data-ttu-id="92766-113">頁面和 Entity Framework 所提供的驗證支援 :::no-loc(Razor)::: 是理想的策略範例：</span><span class="sxs-lookup"><span data-stu-id="92766-113">The validation support provided by :::no-loc(Razor)::: Pages and Entity Framework is a good example of the DRY principle:</span></span>
+<span data-ttu-id="92766-113">頁面和 Entity Framework 所提供的驗證支援 Razor 是理想的策略範例：</span><span class="sxs-lookup"><span data-stu-id="92766-113">The validation support provided by Razor Pages and Entity Framework is a good example of the DRY principle:</span></span>
 
 * <span data-ttu-id="92766-114">驗證規則會以宣告方式指定于模型類別中的一個位置。</span><span class="sxs-lookup"><span data-stu-id="92766-114">Validation rules are declaratively specified in one place, in the model class.</span></span>
 * <span data-ttu-id="92766-115">規則會在應用程式的任何位置強制執行。</span><span class="sxs-lookup"><span data-stu-id="92766-115">Rules are enforced everywhere in the app.</span></span>
@@ -55,7 +55,7 @@ ms.locfileid: "94360683"
 
 <span data-ttu-id="92766-120">更新 `Movie` 類別，以充分利用內建的 `[Required]`、`[StringLength]`、`[RegularExpression]` 和 `[Range]` 驗證屬性。</span><span class="sxs-lookup"><span data-stu-id="92766-120">Update the `Movie` class to take advantage of the built-in `[Required]`, `[StringLength]`, `[RegularExpression]`, and `[Range]` validation attributes.</span></span>
 
-[!code-csharp[](~/tutorials/razor-pages/razor-pages-start/sample/:::no-loc(Razor):::PagesMovie30/Models/MovieDateRatingDA.cs?name=snippet1)]
+[!code-csharp[](~/tutorials/razor-pages/razor-pages-start/sample/RazorPagesMovie30/Models/MovieDateRatingDA.cs?name=snippet1)]
 
 <span data-ttu-id="92766-121">驗證屬性會指定在其套用的模型屬性上強制執行的行為：</span><span class="sxs-lookup"><span data-stu-id="92766-121">The validation attributes specify behavior to enforce on the model properties they're applied to:</span></span>
 
@@ -81,11 +81,11 @@ ms.locfileid: "94360683"
 * <span data-ttu-id="92766-139">有助於讓應用程式更穩固。</span><span class="sxs-lookup"><span data-stu-id="92766-139">Helps make the app more robust.</span></span>
 * <span data-ttu-id="92766-140">減少將無效資料儲存到資料庫的機會。</span><span class="sxs-lookup"><span data-stu-id="92766-140">Reduce chances of saving invalid data to the database.</span></span>
 
-### <a name="validation-error-ui-in-no-locrazor-pages"></a><span data-ttu-id="92766-141">頁面中的驗證錯誤 UI :::no-loc(Razor):::</span><span class="sxs-lookup"><span data-stu-id="92766-141">Validation Error UI in :::no-loc(Razor)::: Pages</span></span>
+### <a name="validation-error-ui-in-no-locrazor-pages"></a><span data-ttu-id="92766-141">頁面中的驗證錯誤 UI Razor</span><span class="sxs-lookup"><span data-stu-id="92766-141">Validation Error UI in Razor Pages</span></span>
 
 <span data-ttu-id="92766-142">執行應用程式，並巡覽至 Pages/Movies。</span><span class="sxs-lookup"><span data-stu-id="92766-142">Run the app and navigate to Pages/Movies.</span></span>
 
-<span data-ttu-id="92766-143">選取 **:::no-loc(Create)::: 新** 的連結。</span><span class="sxs-lookup"><span data-stu-id="92766-143">Select the **:::no-loc(Create)::: New** link.</span></span> <span data-ttu-id="92766-144">使用某些無效值完成表單。</span><span class="sxs-lookup"><span data-stu-id="92766-144">Complete the form with some invalid values.</span></span> <span data-ttu-id="92766-145">當 jQuery 用戶端驗證偵測到錯誤時，它會顯示錯誤訊息。</span><span class="sxs-lookup"><span data-stu-id="92766-145">When jQuery client-side validation detects the error, it displays an error message.</span></span>
+<span data-ttu-id="92766-143">選取 **Create 新** 的連結。</span><span class="sxs-lookup"><span data-stu-id="92766-143">Select the **Create New** link.</span></span> <span data-ttu-id="92766-144">使用某些無效值完成表單。</span><span class="sxs-lookup"><span data-stu-id="92766-144">Complete the form with some invalid values.</span></span> <span data-ttu-id="92766-145">當 jQuery 用戶端驗證偵測到錯誤時，它會顯示錯誤訊息。</span><span class="sxs-lookup"><span data-stu-id="92766-145">When jQuery client-side validation detects the error, it displays an error message.</span></span>
 
 ![有多個 jQuery 用戶端驗證錯誤的電影檢視表單](validation/_static/val.png)
 
@@ -93,11 +93,11 @@ ms.locfileid: "94360683"
 
 <span data-ttu-id="92766-147">請注意表單在包含無效值的每個欄位中自動呈現驗證錯誤訊息的方式。</span><span class="sxs-lookup"><span data-stu-id="92766-147">Notice how the form has automatically rendered a validation error message in each field containing an invalid value.</span></span> <span data-ttu-id="92766-148">當使用者已停用 JavaScript 時，用戶端、使用 JavaScript 和 jQuery 以及伺服器端都會強制執行這些錯誤。</span><span class="sxs-lookup"><span data-stu-id="92766-148">The errors are enforced both client-side, using JavaScript and jQuery, and server-side, when a user has JavaScript disabled.</span></span>
 
-<span data-ttu-id="92766-149">重要的優點是，或編輯頁面中 **不** 需要變更程式碼 :::no-loc(Create)::: 。</span><span class="sxs-lookup"><span data-stu-id="92766-149">A significant benefit is that **no** code changes were necessary in the :::no-loc(Create)::: or Edit pages.</span></span> <span data-ttu-id="92766-150">一旦將資料批註套用至模型之後，就會啟用驗證 UI。</span><span class="sxs-lookup"><span data-stu-id="92766-150">Once data annotations were applied to the model, the validation UI was enabled.</span></span> <span data-ttu-id="92766-151">:::no-loc(Razor):::在本教學課程中建立的頁面，會在模型類別的屬性上使用驗證屬性，自動挑選驗證規則 `Movie` 。</span><span class="sxs-lookup"><span data-stu-id="92766-151">The :::no-loc(Razor)::: Pages created in this tutorial automatically picked up the validation rules, using validation attributes on the properties of the `Movie` model class.</span></span> <span data-ttu-id="92766-152">使用 Edit 頁面測試驗證，會套用相同的驗證。</span><span class="sxs-lookup"><span data-stu-id="92766-152">Test validation using the Edit page, the same validation is applied.</span></span>
+<span data-ttu-id="92766-149">重要的優點是，或編輯頁面中 **不** 需要變更程式碼 Create 。</span><span class="sxs-lookup"><span data-stu-id="92766-149">A significant benefit is that **no** code changes were necessary in the Create or Edit pages.</span></span> <span data-ttu-id="92766-150">一旦將資料批註套用至模型之後，就會啟用驗證 UI。</span><span class="sxs-lookup"><span data-stu-id="92766-150">Once data annotations were applied to the model, the validation UI was enabled.</span></span> <span data-ttu-id="92766-151">Razor在本教學課程中建立的頁面，會在模型類別的屬性上使用驗證屬性，自動挑選驗證規則 `Movie` 。</span><span class="sxs-lookup"><span data-stu-id="92766-151">The Razor Pages created in this tutorial automatically picked up the validation rules, using validation attributes on the properties of the `Movie` model class.</span></span> <span data-ttu-id="92766-152">使用 Edit 頁面測試驗證，會套用相同的驗證。</span><span class="sxs-lookup"><span data-stu-id="92766-152">Test validation using the Edit page, the same validation is applied.</span></span>
 
 <span data-ttu-id="92766-153">要一直到沒有任何用戶端驗證錯誤之後，才會將表單資料發佈到伺服器。</span><span class="sxs-lookup"><span data-stu-id="92766-153">The form data isn't posted to the server until there are no client-side validation errors.</span></span> <span data-ttu-id="92766-154">請確認表單資料不會經由下列一或多種方式發佈：</span><span class="sxs-lookup"><span data-stu-id="92766-154">Verify form data isn't posted by one or more of the following approaches:</span></span>
 
-* <span data-ttu-id="92766-155">將中斷點放置在 `OnPostAsync` 方法中。</span><span class="sxs-lookup"><span data-stu-id="92766-155">Put a break point in the `OnPostAsync` method.</span></span> <span data-ttu-id="92766-156">選取或儲存來提交表單 **:::no-loc(Create):::** 。 **Save**</span><span class="sxs-lookup"><span data-stu-id="92766-156">Submit the form by selecting **:::no-loc(Create):::** or **Save**.</span></span> <span data-ttu-id="92766-157">永遠不會叫用中斷點。</span><span class="sxs-lookup"><span data-stu-id="92766-157">The break point is never hit.</span></span>
+* <span data-ttu-id="92766-155">將中斷點放置在 `OnPostAsync` 方法中。</span><span class="sxs-lookup"><span data-stu-id="92766-155">Put a break point in the `OnPostAsync` method.</span></span> <span data-ttu-id="92766-156">選取或儲存來提交表單 **Create** 。 **Save**</span><span class="sxs-lookup"><span data-stu-id="92766-156">Submit the form by selecting **Create** or **Save**.</span></span> <span data-ttu-id="92766-157">永遠不會叫用中斷點。</span><span class="sxs-lookup"><span data-stu-id="92766-157">The break point is never hit.</span></span>
 * <span data-ttu-id="92766-158">使用 [Fiddler 工具](https://www.telerik.com/fiddler)。</span><span class="sxs-lookup"><span data-stu-id="92766-158">Use the [Fiddler tool](https://www.telerik.com/fiddler).</span></span>
 * <span data-ttu-id="92766-159">使用瀏覽器開發人員工具來監視網路流量。</span><span class="sxs-lookup"><span data-stu-id="92766-159">Use the browser developer tools to monitor network traffic.</span></span>
 
@@ -108,7 +108,7 @@ ms.locfileid: "94360683"
 <span data-ttu-id="92766-162">選擇性地測試伺服器端驗證：</span><span class="sxs-lookup"><span data-stu-id="92766-162">Optional, test server-side validation:</span></span>
 
 1. <span data-ttu-id="92766-163">在瀏覽器中停用 JavaScript。</span><span class="sxs-lookup"><span data-stu-id="92766-163">Disable JavaScript in the browser.</span></span> <span data-ttu-id="92766-164">您可以使用瀏覽器的開發人員工具來停用 JavaScript。</span><span class="sxs-lookup"><span data-stu-id="92766-164">JavaScript can be disabled using browser's developer tools.</span></span> <span data-ttu-id="92766-165">如果無法在瀏覽器中停用 JavaScript，請嘗試另一個瀏覽器。</span><span class="sxs-lookup"><span data-stu-id="92766-165">If JavaScript cannot be disabled in the browser, try another browser.</span></span>
-1. <span data-ttu-id="92766-166">在或 [編輯] 頁面的方法中設定中斷點 `OnPostAsync` :::no-loc(Create)::: 。</span><span class="sxs-lookup"><span data-stu-id="92766-166">Set a break point in the `OnPostAsync` method of the :::no-loc(Create)::: or Edit page.</span></span>
+1. <span data-ttu-id="92766-166">在或 [編輯] 頁面的方法中設定中斷點 `OnPostAsync` Create 。</span><span class="sxs-lookup"><span data-stu-id="92766-166">Set a break point in the `OnPostAsync` method of the Create or Edit page.</span></span>
 1. <span data-ttu-id="92766-167">提交含有無效資料的表單。</span><span class="sxs-lookup"><span data-stu-id="92766-167">Submit a form with invalid data.</span></span>
 1. <span data-ttu-id="92766-168">確認模型狀態無效：</span><span class="sxs-lookup"><span data-stu-id="92766-168">Verify the model state is invalid:</span></span>
 
@@ -121,16 +121,16 @@ ms.locfileid: "94360683"
   
 <span data-ttu-id="92766-169">或者， [在伺服器上停用用戶端驗證](xref:mvc/models/validation#disable-client-side-validation)。</span><span class="sxs-lookup"><span data-stu-id="92766-169">Alternatively, [Disable client-side validation on the server](xref:mvc/models/validation#disable-client-side-validation).</span></span>
 
-<span data-ttu-id="92766-170">下列程式碼顯示稍早在本教學課程中 scaffold 的部分 *:::no-loc(Create)::: . cshtml* 頁面。</span><span class="sxs-lookup"><span data-stu-id="92766-170">The following code shows a portion of the *:::no-loc(Create):::.cshtml* page scaffolded earlier in the tutorial.</span></span> <span data-ttu-id="92766-171">和 [編輯] 頁面會使用它 :::no-loc(Create)::: 來：</span><span class="sxs-lookup"><span data-stu-id="92766-171">It's used by the :::no-loc(Create)::: and Edit pages to:</span></span>
+<span data-ttu-id="92766-170">下列程式碼顯示稍早在本教學課程中 scaffold 的部分 *Create . cshtml* 頁面。</span><span class="sxs-lookup"><span data-stu-id="92766-170">The following code shows a portion of the *Create.cshtml* page scaffolded earlier in the tutorial.</span></span> <span data-ttu-id="92766-171">和 [編輯] 頁面會使用它 Create 來：</span><span class="sxs-lookup"><span data-stu-id="92766-171">It's used by the Create and Edit pages to:</span></span>
 
 * <span data-ttu-id="92766-172">顯示初始表單。</span><span class="sxs-lookup"><span data-stu-id="92766-172">Display the initial form.</span></span>
 * <span data-ttu-id="92766-173">發生錯誤時重新顯示表單。</span><span class="sxs-lookup"><span data-stu-id="92766-173">Redisplay the form in the event of an error.</span></span>
 
-[!code-cshtml[](razor-pages-start/sample/:::no-loc(Razor):::PagesMovie/Pages/Movies/:::no-loc(Create):::.cshtml?range=14-20)]
+[!code-cshtml[](razor-pages-start/sample/RazorPagesMovie/Pages/Movies/Create.cshtml?range=14-20)]
 
 <span data-ttu-id="92766-174">[輸入標記協助程式](xref:mvc/views/working-with-forms)會使用 [DataAnnotations](/aspnet/mvc/overview/older-versions/mvc-music-store/mvc-music-store-part-6) 屬性，並產生在用戶端上進行 jQuery 驗證所需的 HTML 屬性。</span><span class="sxs-lookup"><span data-stu-id="92766-174">The [Input Tag Helper](xref:mvc/views/working-with-forms) uses the [DataAnnotations](/aspnet/mvc/overview/older-versions/mvc-music-store/mvc-music-store-part-6) attributes and produces HTML attributes needed for jQuery Validation on the client-side.</span></span> <span data-ttu-id="92766-175">[驗證標記協助程式](xref:mvc/views/working-with-forms#the-validation-tag-helpers)會顯示驗證錯誤。</span><span class="sxs-lookup"><span data-stu-id="92766-175">The [Validation Tag Helper](xref:mvc/views/working-with-forms#the-validation-tag-helpers) displays validation errors.</span></span> <span data-ttu-id="92766-176">如需詳細資訊，請參閱[驗證](xref:mvc/models/validation)。</span><span class="sxs-lookup"><span data-stu-id="92766-176">See [Validation](xref:mvc/models/validation) for more information.</span></span>
 
-<span data-ttu-id="92766-177">:::no-loc(Create):::和編輯頁面中沒有任何驗證規則。</span><span class="sxs-lookup"><span data-stu-id="92766-177">The :::no-loc(Create)::: and Edit pages have no validation rules in them.</span></span> <span data-ttu-id="92766-178">只有在 `Movie` 類別中才能指定驗證規則和錯誤字串。</span><span class="sxs-lookup"><span data-stu-id="92766-178">The validation rules and the error strings are specified only in the `Movie` class.</span></span> <span data-ttu-id="92766-179">這些驗證規則會自動套用至 :::no-loc(Razor)::: 編輯模型的頁面 `Movie` 。</span><span class="sxs-lookup"><span data-stu-id="92766-179">These validation rules are automatically applied to :::no-loc(Razor)::: Pages that edit the `Movie` model.</span></span>
+<span data-ttu-id="92766-177">Create和編輯頁面中沒有任何驗證規則。</span><span class="sxs-lookup"><span data-stu-id="92766-177">The Create and Edit pages have no validation rules in them.</span></span> <span data-ttu-id="92766-178">只有在 `Movie` 類別中才能指定驗證規則和錯誤字串。</span><span class="sxs-lookup"><span data-stu-id="92766-178">The validation rules and the error strings are specified only in the `Movie` class.</span></span> <span data-ttu-id="92766-179">這些驗證規則會自動套用至 Razor 編輯模型的頁面 `Movie` 。</span><span class="sxs-lookup"><span data-stu-id="92766-179">These validation rules are automatically applied to Razor Pages that edit the `Movie` model.</span></span>
 
 <span data-ttu-id="92766-180">當驗證邏輯需要變更時，它只會在模型中進行。</span><span class="sxs-lookup"><span data-stu-id="92766-180">When validation logic needs to change, it's done only in the model.</span></span> <span data-ttu-id="92766-181">驗證會一致地套用到整個應用程式中，而驗證邏輯則定義于一個位置。</span><span class="sxs-lookup"><span data-stu-id="92766-181">Validation is applied consistently throughout the application, validation logic is defined in one place.</span></span> <span data-ttu-id="92766-182">位於一個位置的驗證有助於讓程式碼保持整潔，並可讓您更容易進行維護和更新。</span><span class="sxs-lookup"><span data-stu-id="92766-182">Validation in one place helps keep the code clean, and makes it easier to maintain and update.</span></span>
 
@@ -138,7 +138,7 @@ ms.locfileid: "94360683"
 
 <span data-ttu-id="92766-184">檢查 `Movie` 類別。</span><span class="sxs-lookup"><span data-stu-id="92766-184">Examine the `Movie` class.</span></span> <span data-ttu-id="92766-185">除了一組內建的驗證屬性之外，`System.ComponentModel.DataAnnotations` 命名空間還提供了格式屬性。</span><span class="sxs-lookup"><span data-stu-id="92766-185">The `System.ComponentModel.DataAnnotations` namespace provides formatting attributes in addition to the built-in set of validation attributes.</span></span> <span data-ttu-id="92766-186">`[DataType]` 屬性會套用到 `ReleaseDate` 和 `Price` 屬性。</span><span class="sxs-lookup"><span data-stu-id="92766-186">The `[DataType]` attribute is applied to the `ReleaseDate` and `Price` properties.</span></span>
 
-[!code-csharp[](razor-pages-start/sample/:::no-loc(Razor):::PagesMovie/Models/MovieDateRatingDA.cs?highlight=2,6&name=snippet2)]
+[!code-csharp[](razor-pages-start/sample/RazorPagesMovie/Models/MovieDateRatingDA.cs?highlight=2,6&name=snippet2)]
 
 <span data-ttu-id="92766-187">`[DataType]`屬性提供：</span><span class="sxs-lookup"><span data-stu-id="92766-187">The `[DataType]` attributes provide:</span></span>
 
@@ -185,15 +185,15 @@ public DateTime ReleaseDate { get; set; }
 
 <span data-ttu-id="92766-220">下列程式碼會顯示一行上的結合屬性：</span><span class="sxs-lookup"><span data-stu-id="92766-220">The following code shows combining attributes on one line:</span></span>
 
-[!code-csharp[](razor-pages-start/sample/:::no-loc(Razor):::PagesMovie30/Models/MovieDateRatingDAmult.cs?name=snippet1)]
+[!code-csharp[](razor-pages-start/sample/RazorPagesMovie30/Models/MovieDateRatingDAmult.cs?name=snippet1)]
 
-<span data-ttu-id="92766-221">[入門 :::no-loc(Razor)::: 頁面和 EF Core](xref:data/ef-rp/intro) 會顯示頁面的 advanced EF Core 作業 :::no-loc(Razor)::: 。</span><span class="sxs-lookup"><span data-stu-id="92766-221">[Get started with :::no-loc(Razor)::: Pages and EF Core](xref:data/ef-rp/intro) shows advanced EF Core operations with :::no-loc(Razor)::: Pages.</span></span>
+<span data-ttu-id="92766-221">[入門 Razor 頁面和 EF Core](xref:data/ef-rp/intro) 會顯示頁面的 advanced EF Core 作業 Razor 。</span><span class="sxs-lookup"><span data-stu-id="92766-221">[Get started with Razor Pages and EF Core](xref:data/ef-rp/intro) shows advanced EF Core operations with Razor Pages.</span></span>
 
 ### <a name="apply-migrations"></a><span data-ttu-id="92766-222">套用移轉</span><span class="sxs-lookup"><span data-stu-id="92766-222">Apply migrations</span></span>
 
 <span data-ttu-id="92766-223">套用至類別的 DataAnnotations 會變更架構。</span><span class="sxs-lookup"><span data-stu-id="92766-223">The DataAnnotations applied to the class changes the schema.</span></span> <span data-ttu-id="92766-224">例如，套用至 `Title` 欄位的 DataAnnotations：</span><span class="sxs-lookup"><span data-stu-id="92766-224">For example, the DataAnnotations applied to the `Title` field:</span></span>
 
-[!code-csharp[](razor-pages-start/sample/:::no-loc(Razor):::PagesMovie30/Models/MovieDateRatingDA.cs?name=snippet11)]
+[!code-csharp[](razor-pages-start/sample/RazorPagesMovie30/Models/MovieDateRatingDA.cs?name=snippet11)]
 
 * <span data-ttu-id="92766-225">將字元限制為 60 個。</span><span class="sxs-lookup"><span data-stu-id="92766-225">Limits the characters to 60.</span></span>
 * <span data-ttu-id="92766-226">不允許 `null` 值。</span><span class="sxs-lookup"><span data-stu-id="92766-226">Doesn't allow a `null` value.</span></span>
@@ -226,7 +226,7 @@ Update-Database
 
 <span data-ttu-id="92766-233">`Update-Database` 會執行 `New_DataAnnotations` 類別的 `Up` 方法。</span><span class="sxs-lookup"><span data-stu-id="92766-233">`Update-Database` runs the `Up` methods of the `New_DataAnnotations` class.</span></span> <span data-ttu-id="92766-234">檢查 `Up` 方法：</span><span class="sxs-lookup"><span data-stu-id="92766-234">Examine the `Up` method:</span></span>
 
-[!code-csharp[](razor-pages-start/sample/:::no-loc(Razor):::PagesMovie30/Migrations/20190724163003_New_DataAnnotations.cs?name=snippet)]
+[!code-csharp[](razor-pages-start/sample/RazorPagesMovie30/Migrations/20190724163003_New_DataAnnotations.cs?name=snippet)]
 
 <span data-ttu-id="92766-235">已更新的 `Movie` 資料表具有下列結構描述：</span><span class="sxs-lookup"><span data-stu-id="92766-235">The updated `Movie` table has the following schema:</span></span>
 
@@ -252,7 +252,7 @@ CREATE TABLE [dbo].[Movie] (
 
 <span data-ttu-id="92766-239">如需部署至 Azure 的詳細資訊，請參閱 [教學課程：使用 SQL Database 在 azure 中建立 ASP.NET Core 應用程式](/azure/app-service/app-service-web-tutorial-dotnetcore-sqldb)。</span><span class="sxs-lookup"><span data-stu-id="92766-239">For information on deploying to Azure, see [Tutorial: Build an ASP.NET Core app in Azure with SQL Database](/azure/app-service/app-service-web-tutorial-dotnetcore-sqldb).</span></span>
 
-<span data-ttu-id="92766-240">感謝您完成本頁面簡介 :::no-loc(Razor)::: 。</span><span class="sxs-lookup"><span data-stu-id="92766-240">Thanks for completing this introduction to :::no-loc(Razor)::: Pages.</span></span> <span data-ttu-id="92766-241">[入門 :::no-loc(Razor)::: 頁面和 EF Core](xref:data/ef-rp/intro) 是本教學課程的最佳追蹤。</span><span class="sxs-lookup"><span data-stu-id="92766-241">[Get started with :::no-loc(Razor)::: Pages and EF Core](xref:data/ef-rp/intro) is an excellent follow up to this tutorial.</span></span>
+<span data-ttu-id="92766-240">感謝您完成本頁面簡介 Razor 。</span><span class="sxs-lookup"><span data-stu-id="92766-240">Thanks for completing this introduction to Razor Pages.</span></span> <span data-ttu-id="92766-241">[入門 Razor 頁面和 EF Core](xref:data/ef-rp/intro) 是本教學課程的最佳追蹤。</span><span class="sxs-lookup"><span data-stu-id="92766-241">[Get started with Razor Pages and EF Core](xref:data/ef-rp/intro) is an excellent follow up to this tutorial.</span></span>
 
 ## <a name="additional-resources"></a><span data-ttu-id="92766-242">其他資源</span><span class="sxs-lookup"><span data-stu-id="92766-242">Additional resources</span></span>
 

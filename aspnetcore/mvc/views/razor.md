@@ -1,21 +1,21 @@
 ---
 title: ASP.NET Core 的 razor 語法參考
 author: rick-anderson
-description: '瞭解將 :::no-loc(Razor)::: 以伺服器為基礎的程式碼內嵌到網頁中的標記語法。'
+description: '瞭解將 Razor 以伺服器為基礎的程式碼內嵌到網頁中的標記語法。'
 ms.author: riande
 ms.date: 02/12/2020
 no-loc:
-- ':::no-loc(appsettings.json):::'
-- ':::no-loc(ASP.NET Core Identity):::'
-- ':::no-loc(cookie):::'
-- ':::no-loc(Cookie):::'
-- ':::no-loc(Blazor):::'
-- ':::no-loc(Blazor Server):::'
-- ':::no-loc(Blazor WebAssembly):::'
-- ':::no-loc(Identity):::'
-- ":::no-loc(Let's Encrypt):::"
-- ':::no-loc(Razor):::'
-- ':::no-loc(SignalR):::'
+- 'appsettings.json'
+- 'ASP.NET Core Identity'
+- 'cookie'
+- 'Cookie'
+- 'Blazor'
+- 'Blazor Server'
+- 'Blazor WebAssembly'
+- 'Identity'
+- "Let's Encrypt"
+- 'Razor'
+- 'SignalR'
 uid: mvc/views/razor
 ms.openlocfilehash: c1278b0cd3e58814b1c06dca81efd662c3de0c54
 ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
@@ -24,23 +24,23 @@ ms.contentlocale: zh-TW
 ms.lasthandoff: 10/30/2020
 ms.locfileid: "93059191"
 ---
-# <a name="no-locrazor-syntax-reference-for-aspnet-core"></a><span data-ttu-id="84779-103">:::no-loc(Razor)::: ASP.NET Core 的語法參考</span><span class="sxs-lookup"><span data-stu-id="84779-103">:::no-loc(Razor)::: syntax reference for ASP.NET Core</span></span>
+# <a name="no-locrazor-syntax-reference-for-aspnet-core"></a><span data-ttu-id="84779-103">Razor ASP.NET Core 的語法參考</span><span class="sxs-lookup"><span data-stu-id="84779-103">Razor syntax reference for ASP.NET Core</span></span>
 
 <span data-ttu-id="84779-104">由 [Rick Anderson](https://twitter.com/RickAndMSFT)、 [Taylor Mullen](https://twitter.com/ntaylormullen)和 [Dan Vicarel](https://github.com/Rabadash8820)</span><span class="sxs-lookup"><span data-stu-id="84779-104">By [Rick Anderson](https://twitter.com/RickAndMSFT), [Taylor Mullen](https://twitter.com/ntaylormullen), and [Dan Vicarel](https://github.com/Rabadash8820)</span></span>
 
-<span data-ttu-id="84779-105">:::no-loc(Razor)::: 是將伺服器程式碼內嵌到網頁中的標記語法。</span><span class="sxs-lookup"><span data-stu-id="84779-105">:::no-loc(Razor)::: is a markup syntax for embedding server-based code into webpages.</span></span> <span data-ttu-id="84779-106">:::no-loc(Razor):::語法包含 :::no-loc(Razor)::: 標記、c # 和 HTML。</span><span class="sxs-lookup"><span data-stu-id="84779-106">The :::no-loc(Razor)::: syntax consists of :::no-loc(Razor)::: markup, C#, and HTML.</span></span> <span data-ttu-id="84779-107">通常包含 :::no-loc(Razor)::: 的檔案副檔名為 *cshtml* 。</span><span class="sxs-lookup"><span data-stu-id="84779-107">Files containing :::no-loc(Razor)::: generally have a *.cshtml* file extension.</span></span> <span data-ttu-id="84779-108">:::no-loc(Razor):::也可在 ( *razor* ) 的 [ :::no-loc(Razor)::: 元件](xref:blazor/components/index)檔案中找到。</span><span class="sxs-lookup"><span data-stu-id="84779-108">:::no-loc(Razor)::: is also found in [:::no-loc(Razor)::: components](xref:blazor/components/index) files ( *.razor* ).</span></span>
+<span data-ttu-id="84779-105">Razor 是將伺服器程式碼內嵌到網頁中的標記語法。</span><span class="sxs-lookup"><span data-stu-id="84779-105">Razor is a markup syntax for embedding server-based code into webpages.</span></span> <span data-ttu-id="84779-106">Razor語法包含 Razor 標記、c # 和 HTML。</span><span class="sxs-lookup"><span data-stu-id="84779-106">The Razor syntax consists of Razor markup, C#, and HTML.</span></span> <span data-ttu-id="84779-107">通常包含 Razor 的檔案副檔名為 *cshtml* 。</span><span class="sxs-lookup"><span data-stu-id="84779-107">Files containing Razor generally have a *.cshtml* file extension.</span></span> <span data-ttu-id="84779-108">Razor也可在 ( *razor* ) 的 [ Razor 元件](xref:blazor/components/index)檔案中找到。</span><span class="sxs-lookup"><span data-stu-id="84779-108">Razor is also found in [Razor components](xref:blazor/components/index) files ( *.razor* ).</span></span>
 
 ## <a name="rendering-html"></a><span data-ttu-id="84779-109">轉譯 HTML</span><span class="sxs-lookup"><span data-stu-id="84779-109">Rendering HTML</span></span>
 
-<span data-ttu-id="84779-110">預設 :::no-loc(Razor)::: 語言為 HTML。</span><span class="sxs-lookup"><span data-stu-id="84779-110">The default :::no-loc(Razor)::: language is HTML.</span></span> <span data-ttu-id="84779-111">從標記呈現 HTML 與 :::no-loc(Razor)::: 從 html 檔案轉譯 html 並無不同。</span><span class="sxs-lookup"><span data-stu-id="84779-111">Rendering HTML from :::no-loc(Razor)::: markup is no different than rendering HTML from an HTML file.</span></span> <span data-ttu-id="84779-112">*Cshtml* 檔案中的 HTML 標籤 :::no-loc(Razor)::: 是由伺服器轉譯，而不會變更。</span><span class="sxs-lookup"><span data-stu-id="84779-112">HTML markup in *.cshtml* :::no-loc(Razor)::: files is rendered by the server unchanged.</span></span>
+<span data-ttu-id="84779-110">預設 Razor 語言為 HTML。</span><span class="sxs-lookup"><span data-stu-id="84779-110">The default Razor language is HTML.</span></span> <span data-ttu-id="84779-111">從標記呈現 HTML 與 Razor 從 html 檔案轉譯 html 並無不同。</span><span class="sxs-lookup"><span data-stu-id="84779-111">Rendering HTML from Razor markup is no different than rendering HTML from an HTML file.</span></span> <span data-ttu-id="84779-112">*Cshtml* 檔案中的 HTML 標籤 Razor 是由伺服器轉譯，而不會變更。</span><span class="sxs-lookup"><span data-stu-id="84779-112">HTML markup in *.cshtml* Razor files is rendered by the server unchanged.</span></span>
 
-## <a name="no-locrazor-syntax"></a><span data-ttu-id="84779-113">:::no-loc(Razor)::: 語法</span><span class="sxs-lookup"><span data-stu-id="84779-113">:::no-loc(Razor)::: syntax</span></span>
+## <a name="no-locrazor-syntax"></a><span data-ttu-id="84779-113">Razor 語法</span><span class="sxs-lookup"><span data-stu-id="84779-113">Razor syntax</span></span>
 
-<span data-ttu-id="84779-114">:::no-loc(Razor)::: 支援 c #，並使用 `@` 符號從 HTML 轉換成 c #。</span><span class="sxs-lookup"><span data-stu-id="84779-114">:::no-loc(Razor)::: supports C# and uses the `@` symbol to transition from HTML to C#.</span></span> <span data-ttu-id="84779-115">:::no-loc(Razor)::: 評估 c # 運算式，並在 HTML 輸出中加以呈現。</span><span class="sxs-lookup"><span data-stu-id="84779-115">:::no-loc(Razor)::: evaluates C# expressions and renders them in the HTML output.</span></span>
+<span data-ttu-id="84779-114">Razor 支援 c #，並使用 `@` 符號從 HTML 轉換成 c #。</span><span class="sxs-lookup"><span data-stu-id="84779-114">Razor supports C# and uses the `@` symbol to transition from HTML to C#.</span></span> <span data-ttu-id="84779-115">Razor 評估 c # 運算式，並在 HTML 輸出中加以呈現。</span><span class="sxs-lookup"><span data-stu-id="84779-115">Razor evaluates C# expressions and renders them in the HTML output.</span></span>
 
-<span data-ttu-id="84779-116">當 `@` 符號後面接著[ :::no-loc(Razor)::: 保留關鍵字](#razor-reserved-keywords)時，它會轉換為 :::no-loc(Razor)::: 特定的標記。</span><span class="sxs-lookup"><span data-stu-id="84779-116">When an `@` symbol is followed by a [:::no-loc(Razor)::: reserved keyword](#razor-reserved-keywords), it transitions into :::no-loc(Razor):::-specific markup.</span></span> <span data-ttu-id="84779-117">否則會轉換成一般 C#。</span><span class="sxs-lookup"><span data-stu-id="84779-117">Otherwise, it transitions into plain C#.</span></span>
+<span data-ttu-id="84779-116">當 `@` 符號後面接著[ Razor 保留關鍵字](#razor-reserved-keywords)時，它會轉換為 Razor 特定的標記。</span><span class="sxs-lookup"><span data-stu-id="84779-116">When an `@` symbol is followed by a [Razor reserved keyword](#razor-reserved-keywords), it transitions into Razor-specific markup.</span></span> <span data-ttu-id="84779-117">否則會轉換成一般 C#。</span><span class="sxs-lookup"><span data-stu-id="84779-117">Otherwise, it transitions into plain C#.</span></span>
 
-<span data-ttu-id="84779-118">若要 `@` 在標記中將符號進行 escape :::no-loc(Razor)::: ，請使用第二個 `@` 符號：</span><span class="sxs-lookup"><span data-stu-id="84779-118">To escape an `@` symbol in :::no-loc(Razor)::: markup, use a second `@` symbol:</span></span>
+<span data-ttu-id="84779-118">若要 `@` 在標記中將符號進行 escape Razor ，請使用第二個 `@` 符號：</span><span class="sxs-lookup"><span data-stu-id="84779-118">To escape an `@` symbol in Razor markup, use a second `@` symbol:</span></span>
 
 ```cshtml
 <p>@@Username</p>
@@ -52,15 +52,15 @@ ms.locfileid: "93059191"
 <p>@Username</p>
 ```
 
-<span data-ttu-id="84779-120">HTML 屬性及含有電子郵件地址的內容不會將 `@` 符號視為轉換字元。</span><span class="sxs-lookup"><span data-stu-id="84779-120">HTML attributes and content containing email addresses don't treat the `@` symbol as a transition character.</span></span> <span data-ttu-id="84779-121">下列範例中的電子郵件地址不會藉由剖析而改變 :::no-loc(Razor)::: ：</span><span class="sxs-lookup"><span data-stu-id="84779-121">The email addresses in the following example are untouched by :::no-loc(Razor)::: parsing:</span></span>
+<span data-ttu-id="84779-120">HTML 屬性及含有電子郵件地址的內容不會將 `@` 符號視為轉換字元。</span><span class="sxs-lookup"><span data-stu-id="84779-120">HTML attributes and content containing email addresses don't treat the `@` symbol as a transition character.</span></span> <span data-ttu-id="84779-121">下列範例中的電子郵件地址不會藉由剖析而改變 Razor ：</span><span class="sxs-lookup"><span data-stu-id="84779-121">The email addresses in the following example are untouched by Razor parsing:</span></span>
 
 ```cshtml
 <a href="mailto:Support@contoso.com">Support@contoso.com</a>
 ```
 
-## <a name="implicit-no-locrazor-expressions"></a><span data-ttu-id="84779-122">隱含 :::no-loc(Razor)::: 運算式</span><span class="sxs-lookup"><span data-stu-id="84779-122">Implicit :::no-loc(Razor)::: expressions</span></span>
+## <a name="implicit-no-locrazor-expressions"></a><span data-ttu-id="84779-122">隱含 Razor 運算式</span><span class="sxs-lookup"><span data-stu-id="84779-122">Implicit Razor expressions</span></span>
 
-<span data-ttu-id="84779-123">隱含 :::no-loc(Razor)::: 運算式的開頭 `@` 是 c # 程式碼：</span><span class="sxs-lookup"><span data-stu-id="84779-123">Implicit :::no-loc(Razor)::: expressions start with `@` followed by C# code:</span></span>
+<span data-ttu-id="84779-123">隱含 Razor 運算式的開頭 `@` 是 c # 程式碼：</span><span class="sxs-lookup"><span data-stu-id="84779-123">Implicit Razor expressions start with `@` followed by C# code:</span></span>
 
 ```cshtml
 <p>@DateTime.Now</p>
@@ -84,11 +84,11 @@ ms.locfileid: "93059191"
 * <span data-ttu-id="84779-129">"Int" 項目未關閉。</span><span class="sxs-lookup"><span data-stu-id="84779-129">The "int" element wasn't closed.</span></span> <span data-ttu-id="84779-130">所有項目都必須自行結束或具有相對應的結束標籤。</span><span class="sxs-lookup"><span data-stu-id="84779-130">All elements must be either self-closing or have a matching end tag.</span></span>
 * <span data-ttu-id="84779-131">無法將方法群組 'GenericMethod' 轉換成非委派類型 'type'。</span><span class="sxs-lookup"><span data-stu-id="84779-131">Cannot convert method group 'GenericMethod' to non-delegate type 'object'.</span></span> <span data-ttu-id="84779-132">您是否想要叫用方法？</span><span class="sxs-lookup"><span data-stu-id="84779-132">Did you intend to invoke the method?\`</span></span>
 
-<span data-ttu-id="84779-133">泛型方法呼叫必須包裝在明確的[ :::no-loc(Razor)::: 運算式](#explicit-razor-expressions)或程式[ :::no-loc(Razor)::: 代碼區塊](#razor-code-blocks)中。</span><span class="sxs-lookup"><span data-stu-id="84779-133">Generic method calls must be wrapped in an [explicit :::no-loc(Razor)::: expression](#explicit-razor-expressions) or a [:::no-loc(Razor)::: code block](#razor-code-blocks).</span></span>
+<span data-ttu-id="84779-133">泛型方法呼叫必須包裝在明確的[ Razor 運算式](#explicit-razor-expressions)或程式[ Razor 代碼區塊](#razor-code-blocks)中。</span><span class="sxs-lookup"><span data-stu-id="84779-133">Generic method calls must be wrapped in an [explicit Razor expression](#explicit-razor-expressions) or a [Razor code block](#razor-code-blocks).</span></span>
 
-## <a name="explicit-no-locrazor-expressions"></a><span data-ttu-id="84779-134">明確 :::no-loc(Razor)::: 運算式</span><span class="sxs-lookup"><span data-stu-id="84779-134">Explicit :::no-loc(Razor)::: expressions</span></span>
+## <a name="explicit-no-locrazor-expressions"></a><span data-ttu-id="84779-134">明確 Razor 運算式</span><span class="sxs-lookup"><span data-stu-id="84779-134">Explicit Razor expressions</span></span>
 
-<span data-ttu-id="84779-135">明確 :::no-loc(Razor)::: 運算式是由 `@` 具有對稱括弧的符號所組成。</span><span class="sxs-lookup"><span data-stu-id="84779-135">Explicit :::no-loc(Razor)::: expressions consist of an `@` symbol with balanced parenthesis.</span></span> <span data-ttu-id="84779-136">若要轉譯上周的時間，請 :::no-loc(Razor)::: 使用下列標記：</span><span class="sxs-lookup"><span data-stu-id="84779-136">To render last week's time, the following :::no-loc(Razor)::: markup is used:</span></span>
+<span data-ttu-id="84779-135">明確 Razor 運算式是由 `@` 具有對稱括弧的符號所組成。</span><span class="sxs-lookup"><span data-stu-id="84779-135">Explicit Razor expressions consist of an `@` symbol with balanced parenthesis.</span></span> <span data-ttu-id="84779-136">若要轉譯上周的時間，請 Razor 使用下列標記：</span><span class="sxs-lookup"><span data-stu-id="84779-136">To render last week's time, the following Razor markup is used:</span></span>
 
 ```cshtml
 <p>Last week this time: @(DateTime.Now - TimeSpan.FromDays(7))</p>
@@ -157,9 +157,9 @@ ms.locfileid: "93059191"
 <span>Hello World</span>
 ```
 
-## <a name="no-locrazor-code-blocks"></a><span data-ttu-id="84779-160">:::no-loc(Razor)::: 程式碼區塊</span><span class="sxs-lookup"><span data-stu-id="84779-160">:::no-loc(Razor)::: code blocks</span></span>
+## <a name="no-locrazor-code-blocks"></a><span data-ttu-id="84779-160">Razor 程式碼區塊</span><span class="sxs-lookup"><span data-stu-id="84779-160">Razor code blocks</span></span>
 
-<span data-ttu-id="84779-161">:::no-loc(Razor)::: 程式碼區塊會以開頭 `@` ，並以括住 `{}` 。</span><span class="sxs-lookup"><span data-stu-id="84779-161">:::no-loc(Razor)::: code blocks start with `@` and are enclosed by `{}`.</span></span> <span data-ttu-id="84779-162">不同於運算式，程式碼區塊內的 C# 程式碼不會轉譯。</span><span class="sxs-lookup"><span data-stu-id="84779-162">Unlike expressions, C# code inside code blocks isn't rendered.</span></span> <span data-ttu-id="84779-163">一個檢視中的程式碼區塊和運算式會共用相同的範圍並依序定義：</span><span class="sxs-lookup"><span data-stu-id="84779-163">Code blocks and expressions in a view share the same scope and are defined in order:</span></span>
+<span data-ttu-id="84779-161">Razor 程式碼區塊會以開頭 `@` ，並以括住 `{}` 。</span><span class="sxs-lookup"><span data-stu-id="84779-161">Razor code blocks start with `@` and are enclosed by `{}`.</span></span> <span data-ttu-id="84779-162">不同於運算式，程式碼區塊內的 C# 程式碼不會轉譯。</span><span class="sxs-lookup"><span data-stu-id="84779-162">Unlike expressions, C# code inside code blocks isn't rendered.</span></span> <span data-ttu-id="84779-163">一個檢視中的程式碼區塊和運算式會共用相同的範圍並依序定義：</span><span class="sxs-lookup"><span data-stu-id="84779-163">Code blocks and expressions in a view share the same scope and are defined in order:</span></span>
 
 ```cshtml
 @{
@@ -209,7 +209,7 @@ ms.locfileid: "93059191"
 
 ### <a name="implicit-transitions"></a><span data-ttu-id="84779-167">隱含轉換</span><span class="sxs-lookup"><span data-stu-id="84779-167">Implicit transitions</span></span>
 
-<span data-ttu-id="84779-168">程式碼區塊中的預設語言是 c #，但 :::no-loc(Razor)::: 頁面可以轉換回 HTML：</span><span class="sxs-lookup"><span data-stu-id="84779-168">The default language in a code block is C#, but the :::no-loc(Razor)::: Page can transition back to HTML:</span></span>
+<span data-ttu-id="84779-168">程式碼區塊中的預設語言是 c #，但 Razor 頁面可以轉換回 HTML：</span><span class="sxs-lookup"><span data-stu-id="84779-168">The default language in a code block is C#, but the Razor Page can transition back to HTML:</span></span>
 
 ```cshtml
 @{
@@ -220,7 +220,7 @@ ms.locfileid: "93059191"
 
 ### <a name="explicit-delimited-transition"></a><span data-ttu-id="84779-169">明確分隔的轉換</span><span class="sxs-lookup"><span data-stu-id="84779-169">Explicit delimited transition</span></span>
 
-<span data-ttu-id="84779-170">若要定義應呈現 HTML 的程式碼區塊子區段，請使用標記來括住要轉譯的字元 :::no-loc(Razor)::: `<text>` ：</span><span class="sxs-lookup"><span data-stu-id="84779-170">To define a subsection of a code block that should render HTML, surround the characters for rendering with the :::no-loc(Razor)::: `<text>` tag:</span></span>
+<span data-ttu-id="84779-170">若要定義應呈現 HTML 的程式碼區塊子區段，請使用標記來括住要轉譯的字元 Razor `<text>` ：</span><span class="sxs-lookup"><span data-stu-id="84779-170">To define a subsection of a code block that should render HTML, surround the characters for rendering with the Razor `<text>` tag:</span></span>
 
 ```cshtml
 @for (var i = 0; i < people.Length; i++)
@@ -230,7 +230,7 @@ ms.locfileid: "93059191"
 }
 ```
 
-<span data-ttu-id="84779-171">使用此方法可轉譯未以 HTML 標籤括住的 HTML。</span><span class="sxs-lookup"><span data-stu-id="84779-171">Use this approach to render HTML that isn't surrounded by an HTML tag.</span></span> <span data-ttu-id="84779-172">如果沒有 HTML 或 :::no-loc(Razor)::: 標記， :::no-loc(Razor)::: 就會發生執行階段錯誤。</span><span class="sxs-lookup"><span data-stu-id="84779-172">Without an HTML or :::no-loc(Razor)::: tag, a :::no-loc(Razor)::: runtime error occurs.</span></span>
+<span data-ttu-id="84779-171">使用此方法可轉譯未以 HTML 標籤括住的 HTML。</span><span class="sxs-lookup"><span data-stu-id="84779-171">Use this approach to render HTML that isn't surrounded by an HTML tag.</span></span> <span data-ttu-id="84779-172">如果沒有 HTML 或 Razor 標記， Razor 就會發生執行階段錯誤。</span><span class="sxs-lookup"><span data-stu-id="84779-172">Without an HTML or Razor tag, a Razor runtime error occurs.</span></span>
 
 <span data-ttu-id="84779-173">`<text>` 標籤可在轉譯內容時用來控制空白字元：</span><span class="sxs-lookup"><span data-stu-id="84779-173">The `<text>` tag is useful to control whitespace when rendering content:</span></span>
 
@@ -249,9 +249,9 @@ ms.locfileid: "93059191"
 }
 ```
 
-<span data-ttu-id="84779-178">如果沒有 `@:` 在程式碼中， :::no-loc(Razor)::: 就會產生執行階段錯誤。</span><span class="sxs-lookup"><span data-stu-id="84779-178">Without the `@:` in the code, a :::no-loc(Razor)::: runtime error is generated.</span></span>
+<span data-ttu-id="84779-178">如果沒有 `@:` 在程式碼中， Razor 就會產生執行階段錯誤。</span><span class="sxs-lookup"><span data-stu-id="84779-178">Without the `@:` in the code, a Razor runtime error is generated.</span></span>
 
-<span data-ttu-id="84779-179">檔案 `@` 中的額外字元 :::no-loc(Razor)::: 可能會在區塊中稍後的語句造成編譯器錯誤。</span><span class="sxs-lookup"><span data-stu-id="84779-179">Extra `@` characters in a :::no-loc(Razor)::: file can cause compiler errors at statements later in the block.</span></span> <span data-ttu-id="84779-180">這些編譯器錯誤可能很難了解，因為實際錯誤發生在回報的錯誤之前。</span><span class="sxs-lookup"><span data-stu-id="84779-180">These compiler errors can be difficult to understand because the actual error occurs before the reported error.</span></span> <span data-ttu-id="84779-181">將多個明確/隱含運算式合併成單一程式碼區塊之後，經常會出現此錯誤。</span><span class="sxs-lookup"><span data-stu-id="84779-181">This error is common after combining multiple implicit/explicit expressions into a single code block.</span></span>
+<span data-ttu-id="84779-179">檔案 `@` 中的額外字元 Razor 可能會在區塊中稍後的語句造成編譯器錯誤。</span><span class="sxs-lookup"><span data-stu-id="84779-179">Extra `@` characters in a Razor file can cause compiler errors at statements later in the block.</span></span> <span data-ttu-id="84779-180">這些編譯器錯誤可能很難了解，因為實際錯誤發生在回報的錯誤之前。</span><span class="sxs-lookup"><span data-stu-id="84779-180">These compiler errors can be difficult to understand because the actual error occurs before the reported error.</span></span> <span data-ttu-id="84779-181">將多個明確/隱含運算式合併成單一程式碼區塊之後，經常會出現此錯誤。</span><span class="sxs-lookup"><span data-stu-id="84779-181">This error is common after combining multiple implicit/explicit expressions into a single code block.</span></span>
 
 ## <a name="control-structures"></a><span data-ttu-id="84779-182">控制結構</span><span class="sxs-lookup"><span data-stu-id="84779-182">Control structures</span></span>
 
@@ -370,7 +370,7 @@ else
 
 ### <a name="compound-using"></a><span data-ttu-id="84779-193">複合 `@using`</span><span class="sxs-lookup"><span data-stu-id="84779-193">Compound `@using`</span></span>
 
-<span data-ttu-id="84779-194">在 C# 中，`using` 陳述式可用來確保物件經過處置。</span><span class="sxs-lookup"><span data-stu-id="84779-194">In C#, a `using` statement is used to ensure an object is disposed.</span></span> <span data-ttu-id="84779-195">在中 :::no-loc(Razor)::: ，會使用相同的機制來建立包含其他內容的 HTML helper。</span><span class="sxs-lookup"><span data-stu-id="84779-195">In :::no-loc(Razor):::, the same mechanism is used to create HTML Helpers that contain additional content.</span></span> <span data-ttu-id="84779-196">在下列程式碼中，HTML 協助程式會使用 `@using` 陳述式來轉譯 `<form>` 標籤：</span><span class="sxs-lookup"><span data-stu-id="84779-196">In the following code, HTML Helpers render a `<form>` tag with the `@using` statement:</span></span>
+<span data-ttu-id="84779-194">在 C# 中，`using` 陳述式可用來確保物件經過處置。</span><span class="sxs-lookup"><span data-stu-id="84779-194">In C#, a `using` statement is used to ensure an object is disposed.</span></span> <span data-ttu-id="84779-195">在中 Razor ，會使用相同的機制來建立包含其他內容的 HTML helper。</span><span class="sxs-lookup"><span data-stu-id="84779-195">In Razor, the same mechanism is used to create HTML Helpers that contain additional content.</span></span> <span data-ttu-id="84779-196">在下列程式碼中，HTML 協助程式會使用 `@using` 陳述式來轉譯 `<form>` 標籤：</span><span class="sxs-lookup"><span data-stu-id="84779-196">In the following code, HTML Helpers render a `<form>` tag with the `@using` statement:</span></span>
 
 ```cshtml
 @using (Html.BeginForm())
@@ -390,7 +390,7 @@ else
 
 ### `@lock`
 
-<span data-ttu-id="84779-198">:::no-loc(Razor)::: 具有使用 lock 語句保護重要區段的功能：</span><span class="sxs-lookup"><span data-stu-id="84779-198">:::no-loc(Razor)::: has the capability to protect critical sections with lock statements:</span></span>
+<span data-ttu-id="84779-198">Razor 具有使用 lock 語句保護重要區段的功能：</span><span class="sxs-lookup"><span data-stu-id="84779-198">Razor has the capability to protect critical sections with lock statements:</span></span>
 
 ```cshtml
 @lock (SomeLock)
@@ -401,7 +401,7 @@ else
 
 ### <a name="comments"></a><span data-ttu-id="84779-199">註解</span><span class="sxs-lookup"><span data-stu-id="84779-199">Comments</span></span>
 
-<span data-ttu-id="84779-200">:::no-loc(Razor)::: 支援 c # 和 HTML 批註：</span><span class="sxs-lookup"><span data-stu-id="84779-200">:::no-loc(Razor)::: supports C# and HTML comments:</span></span>
+<span data-ttu-id="84779-200">Razor 支援 c # 和 HTML 批註：</span><span class="sxs-lookup"><span data-stu-id="84779-200">Razor supports C# and HTML comments:</span></span>
 
 ```cshtml
 @{
@@ -417,7 +417,7 @@ else
 <!-- HTML comment -->
 ```
 
-<span data-ttu-id="84779-202">:::no-loc(Razor)::: 轉譯網頁之前，伺服器會移除批註。</span><span class="sxs-lookup"><span data-stu-id="84779-202">:::no-loc(Razor)::: comments are removed by the server before the webpage is rendered.</span></span> <span data-ttu-id="84779-203">:::no-loc(Razor)::: 用 `@*  *@` 來分隔批註。</span><span class="sxs-lookup"><span data-stu-id="84779-203">:::no-loc(Razor)::: uses `@*  *@` to delimit comments.</span></span> <span data-ttu-id="84779-204">下列程式碼會標記為註解，以確保伺服器不會轉譯任何標記：</span><span class="sxs-lookup"><span data-stu-id="84779-204">The following code is commented out, so the server doesn't render any markup:</span></span>
+<span data-ttu-id="84779-202">Razor 轉譯網頁之前，伺服器會移除批註。</span><span class="sxs-lookup"><span data-stu-id="84779-202">Razor comments are removed by the server before the webpage is rendered.</span></span> <span data-ttu-id="84779-203">Razor 用 `@*  *@` 來分隔批註。</span><span class="sxs-lookup"><span data-stu-id="84779-203">Razor uses `@*  *@` to delimit comments.</span></span> <span data-ttu-id="84779-204">下列程式碼會標記為註解，以確保伺服器不會轉譯任何標記：</span><span class="sxs-lookup"><span data-stu-id="84779-204">The following code is commented out, so the server doesn't render any markup:</span></span>
 
 ```cshtml
 @*
@@ -431,16 +431,16 @@ else
 
 ## <a name="directives"></a><span data-ttu-id="84779-205">指示詞</span><span class="sxs-lookup"><span data-stu-id="84779-205">Directives</span></span>
 
-<span data-ttu-id="84779-206">:::no-loc(Razor)::: 指示詞是以隱含運算式來表示，並在符號後面加上保留關鍵字 `@` 。</span><span class="sxs-lookup"><span data-stu-id="84779-206">:::no-loc(Razor)::: directives are represented by implicit expressions with reserved keywords following the `@` symbol.</span></span> <span data-ttu-id="84779-207">指示詞通常會變更檢視的剖析方式或啟用不同的功能。</span><span class="sxs-lookup"><span data-stu-id="84779-207">A directive typically changes the way a view is parsed or enables different functionality.</span></span>
+<span data-ttu-id="84779-206">Razor 指示詞是以隱含運算式來表示，並在符號後面加上保留關鍵字 `@` 。</span><span class="sxs-lookup"><span data-stu-id="84779-206">Razor directives are represented by implicit expressions with reserved keywords following the `@` symbol.</span></span> <span data-ttu-id="84779-207">指示詞通常會變更檢視的剖析方式或啟用不同的功能。</span><span class="sxs-lookup"><span data-stu-id="84779-207">A directive typically changes the way a view is parsed or enables different functionality.</span></span>
 
-<span data-ttu-id="84779-208">瞭解如何 :::no-loc(Razor)::: 為視圖產生程式碼，可讓您更輕鬆地瞭解指示詞的運作方式。</span><span class="sxs-lookup"><span data-stu-id="84779-208">Understanding how :::no-loc(Razor)::: generates code for a view makes it easier to understand how directives work.</span></span>
+<span data-ttu-id="84779-208">瞭解如何 Razor 為視圖產生程式碼，可讓您更輕鬆地瞭解指示詞的運作方式。</span><span class="sxs-lookup"><span data-stu-id="84779-208">Understanding how Razor generates code for a view makes it easier to understand how directives work.</span></span>
 
 [!code-cshtml[](razor/sample/Views/Home/Contact8.cshtml)]
 
 <span data-ttu-id="84779-209">程式碼會產生類似如下的類別：</span><span class="sxs-lookup"><span data-stu-id="84779-209">The code generates a class similar to the following:</span></span>
 
 ```csharp
-public class _Views_Something_cshtml : :::no-loc(Razor):::Page<dynamic>
+public class _Views_Something_cshtml : RazorPage<dynamic>
 {
     public override async Task ExecuteAsync()
     {
@@ -453,7 +453,7 @@ public class _Views_Something_cshtml : :::no-loc(Razor):::Page<dynamic>
 }
 ```
 
-<span data-ttu-id="84779-210">稍後在本文中，會 [檢查 :::no-loc(Razor)::: 為視圖產生的 c # 類別](#inspect-the-razor-c-class-generated-for-a-view) ，並說明如何查看這個產生的類別。</span><span class="sxs-lookup"><span data-stu-id="84779-210">Later in this article, the section [Inspect the :::no-loc(Razor)::: C# class generated for a view](#inspect-the-razor-c-class-generated-for-a-view) explains how to view this generated class.</span></span>
+<span data-ttu-id="84779-210">稍後在本文中，會 [檢查 Razor 為視圖產生的 c # 類別](#inspect-the-razor-c-class-generated-for-a-view) ，並說明如何查看這個產生的類別。</span><span class="sxs-lookup"><span data-stu-id="84779-210">Later in this article, the section [Inspect the Razor C# class generated for a view](#inspect-the-razor-c-class-generated-for-a-view) explains how to view this generated class.</span></span>
 
 ### `@attribute`
 
@@ -467,9 +467,9 @@ public class _Views_Something_cshtml : :::no-loc(Razor):::Page<dynamic>
 
 ### `@code`
 
-<span data-ttu-id="84779-213">*此案例僅適用于 :::no-loc(Razor):::)  ( razor 元件。*</span><span class="sxs-lookup"><span data-stu-id="84779-213">*This scenario only applies to :::no-loc(Razor)::: components (.razor).*</span></span>
+<span data-ttu-id="84779-213">*此案例僅適用于 Razor)  ( razor 元件。*</span><span class="sxs-lookup"><span data-stu-id="84779-213">*This scenario only applies to Razor components (.razor).*</span></span>
 
-<span data-ttu-id="84779-214">`@code`區塊可讓[ :::no-loc(Razor)::: 元件](xref:blazor/components/index)將 c # 成員新增 (欄位、屬性和方法) 至元件：</span><span class="sxs-lookup"><span data-stu-id="84779-214">The `@code` block enables a [:::no-loc(Razor)::: component](xref:blazor/components/index) to add C# members (fields, properties, and methods) to a component:</span></span>
+<span data-ttu-id="84779-214">`@code`區塊可讓[ Razor 元件](xref:blazor/components/index)將 c # 成員新增 (欄位、屬性和方法) 至元件：</span><span class="sxs-lookup"><span data-stu-id="84779-214">The `@code` block enables a [Razor component](xref:blazor/components/index) to add C# members (fields, properties, and methods) to a component:</span></span>
 
 ```razor
 @code {
@@ -477,7 +477,7 @@ public class _Views_Something_cshtml : :::no-loc(Razor):::Page<dynamic>
 }
 ```
 
-<span data-ttu-id="84779-215">針對 :::no-loc(Razor)::: 元件， `@code` 是的別名， [`@functions`](#functions) 建議使用 `@functions` 。</span><span class="sxs-lookup"><span data-stu-id="84779-215">For :::no-loc(Razor)::: components, `@code` is an alias of [`@functions`](#functions) and recommended over `@functions`.</span></span> <span data-ttu-id="84779-216">允許一個以上的 `@code` 區塊。</span><span class="sxs-lookup"><span data-stu-id="84779-216">More than one `@code` block is permissible.</span></span>
+<span data-ttu-id="84779-215">針對 Razor 元件， `@code` 是的別名， [`@functions`](#functions) 建議使用 `@functions` 。</span><span class="sxs-lookup"><span data-stu-id="84779-215">For Razor components, `@code` is an alias of [`@functions`](#functions) and recommended over `@functions`.</span></span> <span data-ttu-id="84779-216">允許一個以上的 `@code` 區塊。</span><span class="sxs-lookup"><span data-stu-id="84779-216">More than one `@code` block is permissible.</span></span>
 
 ::: moniker-end
 
@@ -493,7 +493,7 @@ public class _Views_Something_cshtml : :::no-loc(Razor):::Page<dynamic>
 
 ::: moniker range=">= aspnetcore-3.0"
 
-<span data-ttu-id="84779-218">在 [ [ :::no-loc(Razor)::: 元件](xref:blazor/components/index)] 中，使用 `@code` Over `@functions` 來加入 c # 成員。</span><span class="sxs-lookup"><span data-stu-id="84779-218">In [:::no-loc(Razor)::: components](xref:blazor/components/index), use `@code` over `@functions` to add C# members.</span></span>
+<span data-ttu-id="84779-218">在 [ [ Razor 元件](xref:blazor/components/index)] 中，使用 `@code` Over `@functions` 來加入 c # 成員。</span><span class="sxs-lookup"><span data-stu-id="84779-218">In [Razor components](xref:blazor/components/index), use `@code` over `@functions` to add C# members.</span></span>
 
 ::: moniker-end
 
@@ -507,7 +507,7 @@ public class _Views_Something_cshtml : :::no-loc(Razor):::Page<dynamic>
 <div>From method: Hello</div>
 ```
 
-<span data-ttu-id="84779-221">下列程式碼是產生的 :::no-loc(Razor)::: c # 類別：</span><span class="sxs-lookup"><span data-stu-id="84779-221">The following code is the generated :::no-loc(Razor)::: C# class:</span></span>
+<span data-ttu-id="84779-221">下列程式碼是產生的 Razor c # 類別：</span><span class="sxs-lookup"><span data-stu-id="84779-221">The following code is the generated Razor C# class:</span></span>
 
 [!code-csharp[](razor/sample/Classes/Views_Home_Test_cshtml.cs?range=1-19)]
 
@@ -566,9 +566,9 @@ public class _Views_Something_cshtml : :::no-loc(Razor):::Page<dynamic>
 @inherits TypeNameOfClassToInheritFrom
 ```
 
-<span data-ttu-id="84779-227">下列程式碼是自訂 :::no-loc(Razor)::: 頁面類型：</span><span class="sxs-lookup"><span data-stu-id="84779-227">The following code is a custom :::no-loc(Razor)::: page type:</span></span>
+<span data-ttu-id="84779-227">下列程式碼是自訂 Razor 頁面類型：</span><span class="sxs-lookup"><span data-stu-id="84779-227">The following code is a custom Razor page type:</span></span>
 
-[!code-csharp[](razor/sample/Classes/Custom:::no-loc(Razor):::Page.cs)]
+[!code-csharp[](razor/sample/Classes/CustomRazorPage.cs)]
 
 <span data-ttu-id="84779-228">`CustomText` 會顯示在檢視中：</span><span class="sxs-lookup"><span data-stu-id="84779-228">The `CustomText` is displayed in a view:</span></span>
 
@@ -603,21 +603,21 @@ public class _Views_Something_cshtml : :::no-loc(Razor):::Page<dynamic>
 
 ### `@inject`
 
-<span data-ttu-id="84779-234">指示詞 `@inject` 可讓 :::no-loc(Razor)::: 頁面將服務 [容器](xref:fundamentals/dependency-injection) 中的服務插入至視圖中。</span><span class="sxs-lookup"><span data-stu-id="84779-234">The `@inject` directive enables the :::no-loc(Razor)::: Page to inject a service from the [service container](xref:fundamentals/dependency-injection) into a view.</span></span> <span data-ttu-id="84779-235">如需詳細資訊，請參閱[在檢視中插入相依性](xref:mvc/views/dependency-injection)。</span><span class="sxs-lookup"><span data-stu-id="84779-235">For more information, see [Dependency injection into views](xref:mvc/views/dependency-injection).</span></span>
+<span data-ttu-id="84779-234">指示詞 `@inject` 可讓 Razor 頁面將服務 [容器](xref:fundamentals/dependency-injection) 中的服務插入至視圖中。</span><span class="sxs-lookup"><span data-stu-id="84779-234">The `@inject` directive enables the Razor Page to inject a service from the [service container](xref:fundamentals/dependency-injection) into a view.</span></span> <span data-ttu-id="84779-235">如需詳細資訊，請參閱[在檢視中插入相依性](xref:mvc/views/dependency-injection)。</span><span class="sxs-lookup"><span data-stu-id="84779-235">For more information, see [Dependency injection into views](xref:mvc/views/dependency-injection).</span></span>
 
 ::: moniker range=">= aspnetcore-3.0"
 
 ### `@layout`
 
-<span data-ttu-id="84779-236">*此案例僅適用于 :::no-loc(Razor):::)  ( razor 元件。*</span><span class="sxs-lookup"><span data-stu-id="84779-236">*This scenario only applies to :::no-loc(Razor)::: components (.razor).*</span></span>
+<span data-ttu-id="84779-236">*此案例僅適用于 Razor)  ( razor 元件。*</span><span class="sxs-lookup"><span data-stu-id="84779-236">*This scenario only applies to Razor components (.razor).*</span></span>
 
-<span data-ttu-id="84779-237">指示詞會 `@layout` 指定元件的版面配置 :::no-loc(Razor)::: 。</span><span class="sxs-lookup"><span data-stu-id="84779-237">The `@layout` directive specifies a layout for a :::no-loc(Razor)::: component.</span></span> <span data-ttu-id="84779-238">版面配置元件可用來避免程式碼重複和不一致。</span><span class="sxs-lookup"><span data-stu-id="84779-238">Layout components are used to avoid code duplication and inconsistency.</span></span> <span data-ttu-id="84779-239">如需詳細資訊，請參閱<xref:blazor/layouts>。</span><span class="sxs-lookup"><span data-stu-id="84779-239">For more information, see <xref:blazor/layouts>.</span></span>
+<span data-ttu-id="84779-237">指示詞會 `@layout` 指定元件的版面配置 Razor 。</span><span class="sxs-lookup"><span data-stu-id="84779-237">The `@layout` directive specifies a layout for a Razor component.</span></span> <span data-ttu-id="84779-238">版面配置元件可用來避免程式碼重複和不一致。</span><span class="sxs-lookup"><span data-stu-id="84779-238">Layout components are used to avoid code duplication and inconsistency.</span></span> <span data-ttu-id="84779-239">如需詳細資訊，請參閱<xref:blazor/layouts>。</span><span class="sxs-lookup"><span data-stu-id="84779-239">For more information, see <xref:blazor/layouts>.</span></span>
 
 ::: moniker-end
 
 ### `@model`
 
-<span data-ttu-id="84779-240">*此案例僅適用于 MVC 視圖和 :::no-loc(Razor)::: 頁面 ( cshtml) 。*</span><span class="sxs-lookup"><span data-stu-id="84779-240">*This scenario only applies to MVC views and :::no-loc(Razor)::: Pages (.cshtml).*</span></span>
+<span data-ttu-id="84779-240">*此案例僅適用于 MVC 視圖和 Razor 頁面 ( cshtml) 。*</span><span class="sxs-lookup"><span data-stu-id="84779-240">*This scenario only applies to MVC views and Razor Pages (.cshtml).*</span></span>
 
 <span data-ttu-id="84779-241">`@model` 指示詞會指定傳遞至檢視或頁面的模型類型：</span><span class="sxs-lookup"><span data-stu-id="84779-241">The `@model` directive specifies the type of the model passed to a view or page:</span></span>
 
@@ -625,38 +625,38 @@ public class _Views_Something_cshtml : :::no-loc(Razor):::Page<dynamic>
 @model TypeNameOfModel
 ```
 
-<span data-ttu-id="84779-242">在 :::no-loc(Razor)::: 使用個別使用者帳戶建立的 ASP.NET CORE MVC 或 Pages 應用程式中， *Views/Account/Login。 cshtml* 包含下列模型宣告：</span><span class="sxs-lookup"><span data-stu-id="84779-242">In an ASP.NET Core MVC or :::no-loc(Razor)::: Pages app created with individual user accounts, *Views/Account/Login.cshtml* contains the following model declaration:</span></span>
+<span data-ttu-id="84779-242">在 Razor 使用個別使用者帳戶建立的 ASP.NET CORE MVC 或 Pages 應用程式中， *Views/Account/Login。 cshtml* 包含下列模型宣告：</span><span class="sxs-lookup"><span data-stu-id="84779-242">In an ASP.NET Core MVC or Razor Pages app created with individual user accounts, *Views/Account/Login.cshtml* contains the following model declaration:</span></span>
 
 ```cshtml
 @model LoginViewModel
 ```
 
-<span data-ttu-id="84779-243">產生的類別繼承自 `:::no-loc(Razor):::Page<dynamic>`：</span><span class="sxs-lookup"><span data-stu-id="84779-243">The class generated inherits from `:::no-loc(Razor):::Page<dynamic>`:</span></span>
+<span data-ttu-id="84779-243">產生的類別繼承自 `RazorPage<dynamic>`：</span><span class="sxs-lookup"><span data-stu-id="84779-243">The class generated inherits from `RazorPage<dynamic>`:</span></span>
 
 ```csharp
-public class _Views_Account_Login_cshtml : :::no-loc(Razor):::Page<LoginViewModel>
+public class _Views_Account_Login_cshtml : RazorPage<LoginViewModel>
 ```
 
-<span data-ttu-id="84779-244">:::no-loc(Razor)::: 公開 `Model` 屬性，以存取傳遞給視圖的模型：</span><span class="sxs-lookup"><span data-stu-id="84779-244">:::no-loc(Razor)::: exposes a `Model` property for accessing the model passed to the view:</span></span>
+<span data-ttu-id="84779-244">Razor 公開 `Model` 屬性，以存取傳遞給視圖的模型：</span><span class="sxs-lookup"><span data-stu-id="84779-244">Razor exposes a `Model` property for accessing the model passed to the view:</span></span>
 
 ```cshtml
 <div>The Login Email: @Model.Email</div>
 ```
 
-<span data-ttu-id="84779-245">`@model` 指示詞會指定 `Model` 屬性的類型。</span><span class="sxs-lookup"><span data-stu-id="84779-245">The `@model` directive specifies the type of the `Model` property.</span></span> <span data-ttu-id="84779-246">該指示詞會將 `:::no-loc(Razor):::Page<T>` 中的 `T` 指定為檢視從中衍生的產生類別。</span><span class="sxs-lookup"><span data-stu-id="84779-246">The directive specifies the `T` in `:::no-loc(Razor):::Page<T>` that the generated class that the view derives from.</span></span> <span data-ttu-id="84779-247">若未指定 `@model` 指示詞，`Model` 屬性的類型為 `dynamic`。</span><span class="sxs-lookup"><span data-stu-id="84779-247">If the `@model` directive isn't specified, the `Model` property is of type `dynamic`.</span></span> <span data-ttu-id="84779-248">如需詳細資訊，請參閱強型別 [模型和 @model 關鍵字](xref:tutorials/first-mvc-app/adding-model#strongly-typed-models-and-the--keyword)。</span><span class="sxs-lookup"><span data-stu-id="84779-248">For more information, see [Strongly typed models and the @model keyword](xref:tutorials/first-mvc-app/adding-model#strongly-typed-models-and-the--keyword).</span></span>
+<span data-ttu-id="84779-245">`@model` 指示詞會指定 `Model` 屬性的類型。</span><span class="sxs-lookup"><span data-stu-id="84779-245">The `@model` directive specifies the type of the `Model` property.</span></span> <span data-ttu-id="84779-246">該指示詞會將 `RazorPage<T>` 中的 `T` 指定為檢視從中衍生的產生類別。</span><span class="sxs-lookup"><span data-stu-id="84779-246">The directive specifies the `T` in `RazorPage<T>` that the generated class that the view derives from.</span></span> <span data-ttu-id="84779-247">若未指定 `@model` 指示詞，`Model` 屬性的類型為 `dynamic`。</span><span class="sxs-lookup"><span data-stu-id="84779-247">If the `@model` directive isn't specified, the `Model` property is of type `dynamic`.</span></span> <span data-ttu-id="84779-248">如需詳細資訊，請參閱強型別 [模型和 @model 關鍵字](xref:tutorials/first-mvc-app/adding-model#strongly-typed-models-and-the--keyword)。</span><span class="sxs-lookup"><span data-stu-id="84779-248">For more information, see [Strongly typed models and the @model keyword](xref:tutorials/first-mvc-app/adding-model#strongly-typed-models-and-the--keyword).</span></span>
 
 ### `@namespace`
 
 <span data-ttu-id="84779-249">`@namespace` 指示詞：</span><span class="sxs-lookup"><span data-stu-id="84779-249">The `@namespace` directive:</span></span>
 
-* <span data-ttu-id="84779-250">設定產生的 :::no-loc(Razor)::: 頁面、MVC 視圖或元件之類別的命名空間 :::no-loc(Razor)::: 。</span><span class="sxs-lookup"><span data-stu-id="84779-250">Sets the namespace of the class of the generated :::no-loc(Razor)::: page, MVC view, or :::no-loc(Razor)::: component.</span></span>
-* <span data-ttu-id="84779-251">從目錄樹狀結構中最接近的匯入檔案，設定頁面、視圖或元件類別的根衍生命名空間， *_ViewImports* (視圖或頁面) 或 *_Imports razor* (:::no-loc(Razor)::: 元件) 。</span><span class="sxs-lookup"><span data-stu-id="84779-251">Sets the root derived namespaces of a pages, views, or components classes from the closest imports file in the directory tree, *_ViewImports.cshtml* (views or pages) or *_Imports.razor* (:::no-loc(Razor)::: components).</span></span>
+* <span data-ttu-id="84779-250">設定產生的 Razor 頁面、MVC 視圖或元件之類別的命名空間 Razor 。</span><span class="sxs-lookup"><span data-stu-id="84779-250">Sets the namespace of the class of the generated Razor page, MVC view, or Razor component.</span></span>
+* <span data-ttu-id="84779-251">從目錄樹狀結構中最接近的匯入檔案，設定頁面、視圖或元件類別的根衍生命名空間， *_ViewImports* (視圖或頁面) 或 *_Imports razor* (Razor 元件) 。</span><span class="sxs-lookup"><span data-stu-id="84779-251">Sets the root derived namespaces of a pages, views, or components classes from the closest imports file in the directory tree, *_ViewImports.cshtml* (views or pages) or *_Imports.razor* (Razor components).</span></span>
 
 ```cshtml
 @namespace Your.Namespace.Here
 ```
 
-<span data-ttu-id="84779-252">針對 :::no-loc(Razor)::: 下表所示的頁面範例：</span><span class="sxs-lookup"><span data-stu-id="84779-252">For the :::no-loc(Razor)::: Pages example shown in the following table:</span></span>
+<span data-ttu-id="84779-252">針對 Razor 下表所示的頁面範例：</span><span class="sxs-lookup"><span data-stu-id="84779-252">For the Razor Pages example shown in the following table:</span></span>
 
 * <span data-ttu-id="84779-253">每個頁面都會匯入 *Pages/_ViewImports.cshtml* 。</span><span class="sxs-lookup"><span data-stu-id="84779-253">Each page imports *Pages/_ViewImports.cshtml* .</span></span>
 * <span data-ttu-id="84779-254">*Pages/_ViewImports.cshtml* 包含 `@namespace Hello.World`。</span><span class="sxs-lookup"><span data-stu-id="84779-254">*Pages/_ViewImports.cshtml* contains `@namespace Hello.World`.</span></span>
@@ -668,7 +668,7 @@ public class _Views_Account_Login_cshtml : :::no-loc(Razor):::Page<LoginViewMode
 | <span data-ttu-id="84779-259">*Pages/MorePages/Page.cshtml*</span><span class="sxs-lookup"><span data-stu-id="84779-259">*Pages/MorePages/Page.cshtml*</span></span>               | `Hello.World.MorePages`               |
 | <span data-ttu-id="84779-260">*Pages/MorePages/EvenMorePages/Page.cshtml*</span><span class="sxs-lookup"><span data-stu-id="84779-260">*Pages/MorePages/EvenMorePages/Page.cshtml*</span></span> | `Hello.World.MorePages.EvenMorePages` |
 
-<span data-ttu-id="84779-261">上述的關聯性適用于匯入與 MVC views 和元件搭配使用的檔案 :::no-loc(Razor)::: 。</span><span class="sxs-lookup"><span data-stu-id="84779-261">The preceding relationships apply to import files used with MVC views and :::no-loc(Razor)::: components.</span></span>
+<span data-ttu-id="84779-261">上述的關聯性適用于匯入與 MVC views 和元件搭配使用的檔案 Razor 。</span><span class="sxs-lookup"><span data-stu-id="84779-261">The preceding relationships apply to import files used with MVC views and Razor components.</span></span>
 
 <span data-ttu-id="84779-262">當多個匯入檔案具有 `@namespace` 指示詞時，會使用目錄樹狀結構中最接近頁面、檢視或元件的檔案來設定根命名空間。</span><span class="sxs-lookup"><span data-stu-id="84779-262">When multiple import files have a `@namespace` directive, the file closest to the page, view, or component in the directory tree is used to set the root namespace.</span></span>
 
@@ -686,22 +686,22 @@ public class _Views_Account_Login_cshtml : :::no-loc(Razor):::Page<LoginViewMode
 
 <span data-ttu-id="84779-269">`@page` 指示詞會根據其出現的檔案類型而有不同的效果。</span><span class="sxs-lookup"><span data-stu-id="84779-269">The `@page` directive has different effects depending on the type of the file where it appears.</span></span> <span data-ttu-id="84779-270">指示詞：</span><span class="sxs-lookup"><span data-stu-id="84779-270">The directive:</span></span>
 
-* <span data-ttu-id="84779-271">在 *cshtml* 檔案中，表示該檔案為 :::no-loc(Razor)::: 頁面。</span><span class="sxs-lookup"><span data-stu-id="84779-271">In a *.cshtml* file indicates that the file is a :::no-loc(Razor)::: Page.</span></span> <span data-ttu-id="84779-272">如需詳細資訊，請參閱 [自訂路由](xref:razor-pages/index#custom-routes) 和 <xref:razor-pages/index> 。</span><span class="sxs-lookup"><span data-stu-id="84779-272">For more information, see [Custom routes](xref:razor-pages/index#custom-routes) and <xref:razor-pages/index>.</span></span>
-* <span data-ttu-id="84779-273">指定 :::no-loc(Razor)::: 元件應該直接處理要求。</span><span class="sxs-lookup"><span data-stu-id="84779-273">Specifies that a :::no-loc(Razor)::: component should handle requests directly.</span></span> <span data-ttu-id="84779-274">如需詳細資訊，請參閱<xref:blazor/fundamentals/routing>。</span><span class="sxs-lookup"><span data-stu-id="84779-274">For more information, see <xref:blazor/fundamentals/routing>.</span></span>
+* <span data-ttu-id="84779-271">在 *cshtml* 檔案中，表示該檔案為 Razor 頁面。</span><span class="sxs-lookup"><span data-stu-id="84779-271">In a *.cshtml* file indicates that the file is a Razor Page.</span></span> <span data-ttu-id="84779-272">如需詳細資訊，請參閱 [自訂路由](xref:razor-pages/index#custom-routes) 和 <xref:razor-pages/index> 。</span><span class="sxs-lookup"><span data-stu-id="84779-272">For more information, see [Custom routes](xref:razor-pages/index#custom-routes) and <xref:razor-pages/index>.</span></span>
+* <span data-ttu-id="84779-273">指定 Razor 元件應該直接處理要求。</span><span class="sxs-lookup"><span data-stu-id="84779-273">Specifies that a Razor component should handle requests directly.</span></span> <span data-ttu-id="84779-274">如需詳細資訊，請參閱<xref:blazor/fundamentals/routing>。</span><span class="sxs-lookup"><span data-stu-id="84779-274">For more information, see <xref:blazor/fundamentals/routing>.</span></span>
 
 ::: moniker-end
 
 ::: moniker range="< aspnetcore-3.0"
 
-<span data-ttu-id="84779-275">`@page` *Cshtml* 檔案第一行的指示詞指出檔案是 :::no-loc(Razor)::: 頁面。</span><span class="sxs-lookup"><span data-stu-id="84779-275">The `@page` directive on the first line of a *.cshtml* file indicates that the file is a :::no-loc(Razor)::: Page.</span></span> <span data-ttu-id="84779-276">如需詳細資訊，請參閱<xref:razor-pages/index>。</span><span class="sxs-lookup"><span data-stu-id="84779-276">For more information, see <xref:razor-pages/index>.</span></span>
+<span data-ttu-id="84779-275">`@page` *Cshtml* 檔案第一行的指示詞指出檔案是 Razor 頁面。</span><span class="sxs-lookup"><span data-stu-id="84779-275">The `@page` directive on the first line of a *.cshtml* file indicates that the file is a Razor Page.</span></span> <span data-ttu-id="84779-276">如需詳細資訊，請參閱<xref:razor-pages/index>。</span><span class="sxs-lookup"><span data-stu-id="84779-276">For more information, see <xref:razor-pages/index>.</span></span>
 
 ::: moniker-end
 
 ### `@section`
 
-<span data-ttu-id="84779-277">*此案例僅適用于 MVC 視圖和 :::no-loc(Razor)::: 頁面 ( cshtml) 。*</span><span class="sxs-lookup"><span data-stu-id="84779-277">*This scenario only applies to MVC views and :::no-loc(Razor)::: Pages (.cshtml).*</span></span>
+<span data-ttu-id="84779-277">*此案例僅適用于 MVC 視圖和 Razor 頁面 ( cshtml) 。*</span><span class="sxs-lookup"><span data-stu-id="84779-277">*This scenario only applies to MVC views and Razor Pages (.cshtml).*</span></span>
 
-<span data-ttu-id="84779-278">指示詞 `@section` 會與 [MVC 和 :::no-loc(Razor)::: 頁面版面](xref:mvc/views/layout) 配置搭配使用，讓視圖或頁面可以在 HTML 網頁的不同部分中呈現內容。</span><span class="sxs-lookup"><span data-stu-id="84779-278">The `@section` directive is used in conjunction with [MVC and :::no-loc(Razor)::: Pages layouts](xref:mvc/views/layout) to enable views or pages to render content in different parts of the HTML page.</span></span> <span data-ttu-id="84779-279">如需詳細資訊，請參閱<xref:mvc/views/layout>。</span><span class="sxs-lookup"><span data-stu-id="84779-279">For more information, see <xref:mvc/views/layout>.</span></span>
+<span data-ttu-id="84779-278">指示詞 `@section` 會與 [MVC 和 Razor 頁面版面](xref:mvc/views/layout) 配置搭配使用，讓視圖或頁面可以在 HTML 網頁的不同部分中呈現內容。</span><span class="sxs-lookup"><span data-stu-id="84779-278">The `@section` directive is used in conjunction with [MVC and Razor Pages layouts](xref:mvc/views/layout) to enable views or pages to render content in different parts of the HTML page.</span></span> <span data-ttu-id="84779-279">如需詳細資訊，請參閱<xref:mvc/views/layout>。</span><span class="sxs-lookup"><span data-stu-id="84779-279">For more information, see <xref:mvc/views/layout>.</span></span>
 
 ### `@using`
 
@@ -711,7 +711,7 @@ public class _Views_Account_Login_cshtml : :::no-loc(Razor):::Page<LoginViewMode
 
 ::: moniker range=">= aspnetcore-3.0"
 
-<span data-ttu-id="84779-281">在[ :::no-loc(Razor)::: 元件](xref:blazor/components/index)中， `@using` 也會控制在範圍內的元件。</span><span class="sxs-lookup"><span data-stu-id="84779-281">In [:::no-loc(Razor)::: components](xref:blazor/components/index), `@using` also controls which components are in scope.</span></span>
+<span data-ttu-id="84779-281">在[ Razor 元件](xref:blazor/components/index)中， `@using` 也會控制在範圍內的元件。</span><span class="sxs-lookup"><span data-stu-id="84779-281">In [Razor components](xref:blazor/components/index), `@using` also controls which components are in scope.</span></span>
 
 ::: moniker-end
 
@@ -719,25 +719,25 @@ public class _Views_Account_Login_cshtml : :::no-loc(Razor):::Page<LoginViewMode
 
 ## <a name="directive-attributes"></a><span data-ttu-id="84779-282">指示詞屬性</span><span class="sxs-lookup"><span data-stu-id="84779-282">Directive attributes</span></span>
 
-<span data-ttu-id="84779-283">:::no-loc(Razor)::: 指示詞屬性是以隱含的運算式來表示，並在符號後面加上保留關鍵字 `@` 。</span><span class="sxs-lookup"><span data-stu-id="84779-283">:::no-loc(Razor)::: directive attributes are represented by implicit expressions with reserved keywords following the `@` symbol.</span></span> <span data-ttu-id="84779-284">指示詞屬性通常會變更剖析元素或啟用不同功能的方式。</span><span class="sxs-lookup"><span data-stu-id="84779-284">A directive attribute typically changes the way an element is parsed or enables different functionality.</span></span>
+<span data-ttu-id="84779-283">Razor 指示詞屬性是以隱含的運算式來表示，並在符號後面加上保留關鍵字 `@` 。</span><span class="sxs-lookup"><span data-stu-id="84779-283">Razor directive attributes are represented by implicit expressions with reserved keywords following the `@` symbol.</span></span> <span data-ttu-id="84779-284">指示詞屬性通常會變更剖析元素或啟用不同功能的方式。</span><span class="sxs-lookup"><span data-stu-id="84779-284">A directive attribute typically changes the way an element is parsed or enables different functionality.</span></span>
 
 ### `@attributes`
 
-<span data-ttu-id="84779-285">*此案例僅適用于 :::no-loc(Razor):::)  ( razor 元件。*</span><span class="sxs-lookup"><span data-stu-id="84779-285">*This scenario only applies to :::no-loc(Razor)::: components (.razor).*</span></span>
+<span data-ttu-id="84779-285">*此案例僅適用于 Razor)  ( razor 元件。*</span><span class="sxs-lookup"><span data-stu-id="84779-285">*This scenario only applies to Razor components (.razor).*</span></span>
 
 <span data-ttu-id="84779-286">`@attributes` 允許元件轉譯非宣告的屬性。</span><span class="sxs-lookup"><span data-stu-id="84779-286">`@attributes` allows a component to render non-declared attributes.</span></span> <span data-ttu-id="84779-287">如需詳細資訊，請參閱<xref:blazor/components/index#attribute-splatting-and-arbitrary-parameters>。</span><span class="sxs-lookup"><span data-stu-id="84779-287">For more information, see <xref:blazor/components/index#attribute-splatting-and-arbitrary-parameters>.</span></span>
 
 ### `@bind`
 
-<span data-ttu-id="84779-288">*此案例僅適用于 :::no-loc(Razor):::)  ( razor 元件。*</span><span class="sxs-lookup"><span data-stu-id="84779-288">*This scenario only applies to :::no-loc(Razor)::: components (.razor).*</span></span>
+<span data-ttu-id="84779-288">*此案例僅適用于 Razor)  ( razor 元件。*</span><span class="sxs-lookup"><span data-stu-id="84779-288">*This scenario only applies to Razor components (.razor).*</span></span>
 
 <span data-ttu-id="84779-289">元件中的資料繫結會使用 `@bind` 屬性來完成。</span><span class="sxs-lookup"><span data-stu-id="84779-289">Data binding in components is accomplished with the `@bind` attribute.</span></span> <span data-ttu-id="84779-290">如需詳細資訊，請參閱<xref:blazor/components/data-binding>。</span><span class="sxs-lookup"><span data-stu-id="84779-290">For more information, see <xref:blazor/components/data-binding>.</span></span>
 
 ### `@on{EVENT}`
 
-<span data-ttu-id="84779-291">*此案例僅適用于 :::no-loc(Razor):::)  ( razor 元件。*</span><span class="sxs-lookup"><span data-stu-id="84779-291">*This scenario only applies to :::no-loc(Razor)::: components (.razor).*</span></span>
+<span data-ttu-id="84779-291">*此案例僅適用于 Razor)  ( razor 元件。*</span><span class="sxs-lookup"><span data-stu-id="84779-291">*This scenario only applies to Razor components (.razor).*</span></span>
 
-<span data-ttu-id="84779-292">:::no-loc(Razor)::: 提供元件的事件處理功能。</span><span class="sxs-lookup"><span data-stu-id="84779-292">:::no-loc(Razor)::: provides event handling features for components.</span></span> <span data-ttu-id="84779-293">如需詳細資訊，請參閱<xref:blazor/components/event-handling>。</span><span class="sxs-lookup"><span data-stu-id="84779-293">For more information, see <xref:blazor/components/event-handling>.</span></span>
+<span data-ttu-id="84779-292">Razor 提供元件的事件處理功能。</span><span class="sxs-lookup"><span data-stu-id="84779-292">Razor provides event handling features for components.</span></span> <span data-ttu-id="84779-293">如需詳細資訊，請參閱<xref:blazor/components/event-handling>。</span><span class="sxs-lookup"><span data-stu-id="84779-293">For more information, see <xref:blazor/components/event-handling>.</span></span>
 
 ::: moniker-end
 
@@ -745,13 +745,13 @@ public class _Views_Account_Login_cshtml : :::no-loc(Razor):::Page<LoginViewMode
 
 ### `@on{EVENT}:preventDefault`
 
-<span data-ttu-id="84779-294">*此案例僅適用于 :::no-loc(Razor):::)  ( razor 元件。*</span><span class="sxs-lookup"><span data-stu-id="84779-294">*This scenario only applies to :::no-loc(Razor)::: components (.razor).*</span></span>
+<span data-ttu-id="84779-294">*此案例僅適用于 Razor)  ( razor 元件。*</span><span class="sxs-lookup"><span data-stu-id="84779-294">*This scenario only applies to Razor components (.razor).*</span></span>
 
 <span data-ttu-id="84779-295">防止事件的預設動作。</span><span class="sxs-lookup"><span data-stu-id="84779-295">Prevents the default action for the event.</span></span>
 
 ### `@on{EVENT}:stopPropagation`
 
-<span data-ttu-id="84779-296">*此案例僅適用于 :::no-loc(Razor):::)  ( razor 元件。*</span><span class="sxs-lookup"><span data-stu-id="84779-296">*This scenario only applies to :::no-loc(Razor)::: components (.razor).*</span></span>
+<span data-ttu-id="84779-296">*此案例僅適用于 Razor)  ( razor 元件。*</span><span class="sxs-lookup"><span data-stu-id="84779-296">*This scenario only applies to Razor components (.razor).*</span></span>
 
 <span data-ttu-id="84779-297">停止事件的事件傳播。</span><span class="sxs-lookup"><span data-stu-id="84779-297">Stops event propagation for the event.</span></span>
 
@@ -761,33 +761,33 @@ public class _Views_Account_Login_cshtml : :::no-loc(Razor):::Page<LoginViewMode
 
 ### `@key`
 
-<span data-ttu-id="84779-298">*此案例僅適用于 :::no-loc(Razor):::)  ( razor 元件。*</span><span class="sxs-lookup"><span data-stu-id="84779-298">*This scenario only applies to :::no-loc(Razor)::: components (.razor).*</span></span>
+<span data-ttu-id="84779-298">*此案例僅適用于 Razor)  ( razor 元件。*</span><span class="sxs-lookup"><span data-stu-id="84779-298">*This scenario only applies to Razor components (.razor).*</span></span>
 
 <span data-ttu-id="84779-299">`@key` 指示詞屬性導致元件差異比較演算法會根據索引鍵的值來保證元素或元件的保留。</span><span class="sxs-lookup"><span data-stu-id="84779-299">The `@key` directive attribute causes the components diffing algorithm to guarantee preservation of elements or components based on the key's value.</span></span> <span data-ttu-id="84779-300">如需詳細資訊，請參閱<xref:blazor/components/index#use-key-to-control-the-preservation-of-elements-and-components>。</span><span class="sxs-lookup"><span data-stu-id="84779-300">For more information, see <xref:blazor/components/index#use-key-to-control-the-preservation-of-elements-and-components>.</span></span>
 
 ### `@ref`
 
-<span data-ttu-id="84779-301">*此案例僅適用于 :::no-loc(Razor):::)  ( razor 元件。*</span><span class="sxs-lookup"><span data-stu-id="84779-301">*This scenario only applies to :::no-loc(Razor)::: components (.razor).*</span></span>
+<span data-ttu-id="84779-301">*此案例僅適用于 Razor)  ( razor 元件。*</span><span class="sxs-lookup"><span data-stu-id="84779-301">*This scenario only applies to Razor components (.razor).*</span></span>
 
 <span data-ttu-id="84779-302">元件參考 (`@ref`) 提供一種方式來參考元件執行個體，讓您可以對該執行個體發出命令。</span><span class="sxs-lookup"><span data-stu-id="84779-302">Component references (`@ref`) provide a way to reference a component instance so that you can issue commands to that instance.</span></span> <span data-ttu-id="84779-303">如需詳細資訊，請參閱<xref:blazor/components/index#capture-references-to-components>。</span><span class="sxs-lookup"><span data-stu-id="84779-303">For more information, see <xref:blazor/components/index#capture-references-to-components>.</span></span>
 
 ### `@typeparam`
 
-<span data-ttu-id="84779-304">*此案例僅適用于 :::no-loc(Razor):::)  ( razor 元件。*</span><span class="sxs-lookup"><span data-stu-id="84779-304">*This scenario only applies to :::no-loc(Razor)::: components (.razor).*</span></span>
+<span data-ttu-id="84779-304">*此案例僅適用于 Razor)  ( razor 元件。*</span><span class="sxs-lookup"><span data-stu-id="84779-304">*This scenario only applies to Razor components (.razor).*</span></span>
 
 <span data-ttu-id="84779-305">指示詞會宣告 `@typeparam` 所產生元件類別的泛型型別參數。</span><span class="sxs-lookup"><span data-stu-id="84779-305">The `@typeparam` directive declares a generic type parameter for the generated component class.</span></span> <span data-ttu-id="84779-306">如需詳細資訊，請參閱<xref:blazor/components/templated-components#generic-typed-components>。</span><span class="sxs-lookup"><span data-stu-id="84779-306">For more information, see <xref:blazor/components/templated-components#generic-typed-components>.</span></span>
 
 ::: moniker-end
 
-## <a name="templated-no-locrazor-delegates"></a><span data-ttu-id="84779-307">樣板化 :::no-loc(Razor)::: 委派</span><span class="sxs-lookup"><span data-stu-id="84779-307">Templated :::no-loc(Razor)::: delegates</span></span>
+## <a name="templated-no-locrazor-delegates"></a><span data-ttu-id="84779-307">樣板化 Razor 委派</span><span class="sxs-lookup"><span data-stu-id="84779-307">Templated Razor delegates</span></span>
 
-<span data-ttu-id="84779-308">:::no-loc(Razor)::: 範本可讓您使用下列格式來定義 UI 程式碼片段：</span><span class="sxs-lookup"><span data-stu-id="84779-308">:::no-loc(Razor)::: templates allow you to define a UI snippet with the following format:</span></span>
+<span data-ttu-id="84779-308">Razor 範本可讓您使用下列格式來定義 UI 程式碼片段：</span><span class="sxs-lookup"><span data-stu-id="84779-308">Razor templates allow you to define a UI snippet with the following format:</span></span>
 
 ```cshtml
 @<tag>...</tag>
 ```
 
-<span data-ttu-id="84779-309">下列範例說明如何將樣板化委派指定 :::no-loc(Razor)::: 為 <xref:System.Func%602> 。</span><span class="sxs-lookup"><span data-stu-id="84779-309">The following example illustrates how to specify a templated :::no-loc(Razor)::: delegate as a <xref:System.Func%602>.</span></span> <span data-ttu-id="84779-310">該範例會指定 [dynamic 類型](/dotnet/csharp/programming-guide/types/using-type-dynamic)作為委派所封裝方法的參數。</span><span class="sxs-lookup"><span data-stu-id="84779-310">The [dynamic type](/dotnet/csharp/programming-guide/types/using-type-dynamic) is specified for the parameter of the method that the delegate encapsulates.</span></span> <span data-ttu-id="84779-311">並指定 [object 類型](/dotnet/csharp/language-reference/keywords/object)作為委派的傳回值。</span><span class="sxs-lookup"><span data-stu-id="84779-311">An [object type](/dotnet/csharp/language-reference/keywords/object) is specified as the return value of the delegate.</span></span> <span data-ttu-id="84779-312">此範本會搭配具有 `Name` 屬性之 `Pet` 的 <xref:System.Collections.Generic.List%601> 來使用。</span><span class="sxs-lookup"><span data-stu-id="84779-312">The template is used with a <xref:System.Collections.Generic.List%601> of `Pet` that has a `Name` property.</span></span>
+<span data-ttu-id="84779-309">下列範例說明如何將樣板化委派指定 Razor 為 <xref:System.Func%602> 。</span><span class="sxs-lookup"><span data-stu-id="84779-309">The following example illustrates how to specify a templated Razor delegate as a <xref:System.Func%602>.</span></span> <span data-ttu-id="84779-310">該範例會指定 [dynamic 類型](/dotnet/csharp/programming-guide/types/using-type-dynamic)作為委派所封裝方法的參數。</span><span class="sxs-lookup"><span data-stu-id="84779-310">The [dynamic type](/dotnet/csharp/programming-guide/types/using-type-dynamic) is specified for the parameter of the method that the delegate encapsulates.</span></span> <span data-ttu-id="84779-311">並指定 [object 類型](/dotnet/csharp/language-reference/keywords/object)作為委派的傳回值。</span><span class="sxs-lookup"><span data-stu-id="84779-311">An [object type](/dotnet/csharp/language-reference/keywords/object) is specified as the return value of the delegate.</span></span> <span data-ttu-id="84779-312">此範本會搭配具有 `Name` 屬性之 `Pet` 的 <xref:System.Collections.Generic.List%601> 來使用。</span><span class="sxs-lookup"><span data-stu-id="84779-312">The template is used with a <xref:System.Collections.Generic.List%601> of `Pet` that has a `Name` property.</span></span>
 
 ```csharp
 public class Pet
@@ -826,7 +826,7 @@ public class Pet
 <p>You have a pet named <strong>K-9</strong>.</p>
 ```
 
-<span data-ttu-id="84779-315">您也可以提供內嵌 :::no-loc(Razor)::: 範本做為方法的引數。</span><span class="sxs-lookup"><span data-stu-id="84779-315">You can also supply an inline :::no-loc(Razor)::: template as an argument to a method.</span></span> <span data-ttu-id="84779-316">在下列範例中， `Repeat` 方法會收到 :::no-loc(Razor)::: 範本。</span><span class="sxs-lookup"><span data-stu-id="84779-316">In the following example, the `Repeat` method receives a :::no-loc(Razor)::: template.</span></span> <span data-ttu-id="84779-317">此方法使用範本來產生 HTML 內容，並重複出現清單所提供的項目：</span><span class="sxs-lookup"><span data-stu-id="84779-317">The method uses the template to produce HTML content with repeats of items supplied from a list:</span></span>
+<span data-ttu-id="84779-315">您也可以提供內嵌 Razor 範本做為方法的引數。</span><span class="sxs-lookup"><span data-stu-id="84779-315">You can also supply an inline Razor template as an argument to a method.</span></span> <span data-ttu-id="84779-316">在下列範例中， `Repeat` 方法會收到 Razor 範本。</span><span class="sxs-lookup"><span data-stu-id="84779-316">In the following example, the `Repeat` method receives a Razor template.</span></span> <span data-ttu-id="84779-317">此方法使用範本來產生 HTML 內容，並重複出現清單所提供的項目：</span><span class="sxs-lookup"><span data-stu-id="84779-317">The method uses the template to produce HTML content with repeats of items supplied from a list:</span></span>
 
 ```cshtml
 @using Microsoft.AspNetCore.Html
@@ -880,7 +880,7 @@ public class Pet
 
 ## <a name="tag-helpers"></a><span data-ttu-id="84779-323">標籤協助程式</span><span class="sxs-lookup"><span data-stu-id="84779-323">Tag Helpers</span></span>
 
-<span data-ttu-id="84779-324">*此案例僅適用于 MVC 視圖和 :::no-loc(Razor)::: 頁面 ( cshtml) 。*</span><span class="sxs-lookup"><span data-stu-id="84779-324">*This scenario only applies to MVC views and :::no-loc(Razor)::: Pages (.cshtml).*</span></span>
+<span data-ttu-id="84779-324">*此案例僅適用于 MVC 視圖和 Razor 頁面 ( cshtml) 。*</span><span class="sxs-lookup"><span data-stu-id="84779-324">*This scenario only applies to MVC views and Razor Pages (.cshtml).*</span></span>
 
 <span data-ttu-id="84779-325">[標籤協助程式](xref:mvc/views/tag-helpers/intro)有三個相關的指示詞。</span><span class="sxs-lookup"><span data-stu-id="84779-325">There are three directives that pertain to [Tag Helpers](xref:mvc/views/tag-helpers/intro).</span></span>
 
@@ -890,9 +890,9 @@ public class Pet
 | [`@removeTagHelper`](xref:mvc/views/tag-helpers/intro#remove-razor-directives-label) | <span data-ttu-id="84779-329">移除先前從檢視新增的標籤協助程式。</span><span class="sxs-lookup"><span data-stu-id="84779-329">Removes Tag Helpers previously added from a view.</span></span> |
 | [`@tagHelperPrefix`](xref:mvc/views/tag-helpers/intro#prefix-razor-directives-label) | <span data-ttu-id="84779-330">指定標籤前置字元，以啟用標籤協助程式支援，並將標籤協助程式使用方式設為明確。</span><span class="sxs-lookup"><span data-stu-id="84779-330">Specifies a tag prefix to enable Tag Helper support and to make Tag Helper usage explicit.</span></span> |
 
-## <a name="no-locrazor-reserved-keywords"></a><span data-ttu-id="84779-331">:::no-loc(Razor)::: 保留的關鍵字</span><span class="sxs-lookup"><span data-stu-id="84779-331">:::no-loc(Razor)::: reserved keywords</span></span>
+## <a name="no-locrazor-reserved-keywords"></a><span data-ttu-id="84779-331">Razor 保留的關鍵字</span><span class="sxs-lookup"><span data-stu-id="84779-331">Razor reserved keywords</span></span>
 
-### <a name="no-locrazor-keywords"></a><span data-ttu-id="84779-332">:::no-loc(Razor)::: 關鍵 字</span><span class="sxs-lookup"><span data-stu-id="84779-332">:::no-loc(Razor)::: keywords</span></span>
+### <a name="no-locrazor-keywords"></a><span data-ttu-id="84779-332">Razor 關鍵 字</span><span class="sxs-lookup"><span data-stu-id="84779-332">Razor keywords</span></span>
 
 * <span data-ttu-id="84779-333">`page` (需要 ASP.NET Core 2.1 或更新版本) </span><span class="sxs-lookup"><span data-stu-id="84779-333">`page` (Requires ASP.NET Core 2.1 or later)</span></span>
 * `namespace`
@@ -902,9 +902,9 @@ public class Pet
 * `section`
 * <span data-ttu-id="84779-334">`helper` (目前 ASP.NET Core) 不支援</span><span class="sxs-lookup"><span data-stu-id="84779-334">`helper` (Not currently supported by ASP.NET Core)</span></span>
 
-<span data-ttu-id="84779-335">:::no-loc(Razor)::: 關鍵字會使用 `@(:::no-loc(Razor)::: Keyword)` (來進行轉義，例如， `@(functions)`) 。</span><span class="sxs-lookup"><span data-stu-id="84779-335">:::no-loc(Razor)::: keywords are escaped with `@(:::no-loc(Razor)::: Keyword)` (for example, `@(functions)`).</span></span>
+<span data-ttu-id="84779-335">Razor 關鍵字會使用 `@(Razor Keyword)` (來進行轉義，例如， `@(functions)`) 。</span><span class="sxs-lookup"><span data-stu-id="84779-335">Razor keywords are escaped with `@(Razor Keyword)` (for example, `@(functions)`).</span></span>
 
-### <a name="c-no-locrazor-keywords"></a><span data-ttu-id="84779-336">C # :::no-loc(Razor)::: 關鍵字</span><span class="sxs-lookup"><span data-stu-id="84779-336">C# :::no-loc(Razor)::: keywords</span></span>
+### <a name="c-no-locrazor-keywords"></a><span data-ttu-id="84779-336">C # Razor 關鍵字</span><span class="sxs-lookup"><span data-stu-id="84779-336">C# Razor keywords</span></span>
 
 * `case`
 * `do`
@@ -921,19 +921,19 @@ public class Pet
 * `using`
 * `while`
 
-<span data-ttu-id="84779-337">C # :::no-loc(Razor)::: 關鍵字必須以 (進行雙重換用 `@(@C# :::no-loc(Razor)::: Keyword)` ，例如 `@(@case)`) 。</span><span class="sxs-lookup"><span data-stu-id="84779-337">C# :::no-loc(Razor)::: keywords must be double-escaped with `@(@C# :::no-loc(Razor)::: Keyword)` (for example, `@(@case)`).</span></span> <span data-ttu-id="84779-338">第一次將剖析器 `@` 轉義 :::no-loc(Razor)::: 。</span><span class="sxs-lookup"><span data-stu-id="84779-338">The first `@` escapes the :::no-loc(Razor)::: parser.</span></span> <span data-ttu-id="84779-339">第二個 `@` 會將 C# 剖析器逸出。</span><span class="sxs-lookup"><span data-stu-id="84779-339">The second `@` escapes the C# parser.</span></span>
+<span data-ttu-id="84779-337">C # Razor 關鍵字必須以 (進行雙重換用 `@(@C# Razor Keyword)` ，例如 `@(@case)`) 。</span><span class="sxs-lookup"><span data-stu-id="84779-337">C# Razor keywords must be double-escaped with `@(@C# Razor Keyword)` (for example, `@(@case)`).</span></span> <span data-ttu-id="84779-338">第一次將剖析器 `@` 轉義 Razor 。</span><span class="sxs-lookup"><span data-stu-id="84779-338">The first `@` escapes the Razor parser.</span></span> <span data-ttu-id="84779-339">第二個 `@` 會將 C# 剖析器逸出。</span><span class="sxs-lookup"><span data-stu-id="84779-339">The second `@` escapes the C# parser.</span></span>
 
-### <a name="reserved-keywords-not-used-by-no-locrazor"></a><span data-ttu-id="84779-340">未使用的保留關鍵字 :::no-loc(Razor):::</span><span class="sxs-lookup"><span data-stu-id="84779-340">Reserved keywords not used by :::no-loc(Razor):::</span></span>
+### <a name="reserved-keywords-not-used-by-no-locrazor"></a><span data-ttu-id="84779-340">未使用的保留關鍵字 Razor</span><span class="sxs-lookup"><span data-stu-id="84779-340">Reserved keywords not used by Razor</span></span>
 
 * `class`
 
-## <a name="inspect-the-no-locrazor-c-class-generated-for-a-view"></a><span data-ttu-id="84779-341">檢查 :::no-loc(Razor)::: 為視圖產生的 c # 類別</span><span class="sxs-lookup"><span data-stu-id="84779-341">Inspect the :::no-loc(Razor)::: C# class generated for a view</span></span>
+## <a name="inspect-the-no-locrazor-c-class-generated-for-a-view"></a><span data-ttu-id="84779-341">檢查 Razor 為視圖產生的 c # 類別</span><span class="sxs-lookup"><span data-stu-id="84779-341">Inspect the Razor C# class generated for a view</span></span>
 
 ::: moniker range=">= aspnetcore-2.1"
 
-<span data-ttu-id="84779-342">在 .NET Core SDK 2.1 或更新版本中， [ :::no-loc(Razor)::: SDK](xref:razor-pages/sdk)會處理檔案的編譯 :::no-loc(Razor)::: 。</span><span class="sxs-lookup"><span data-stu-id="84779-342">With .NET Core SDK 2.1 or later, the [:::no-loc(Razor)::: SDK](xref:razor-pages/sdk) handles compilation of :::no-loc(Razor)::: files.</span></span> <span data-ttu-id="84779-343">建立專案時，SDK 會 :::no-loc(Razor)::: 在專案根目錄中產生一個 *obj/<build_configuration>/<:::no-loc(Razor)::: target_framework_moniker>/* 目錄。</span><span class="sxs-lookup"><span data-stu-id="84779-343">When building a project, the :::no-loc(Razor)::: SDK generates an *obj/<build_configuration>/<target_framework_moniker>/:::no-loc(Razor):::* directory in the project root.</span></span> <span data-ttu-id="84779-344">目錄中的目錄結構會 *:::no-loc(Razor):::* 鏡像專案的目錄結構。</span><span class="sxs-lookup"><span data-stu-id="84779-344">The directory structure within the *:::no-loc(Razor):::* directory mirrors the project's directory structure.</span></span>
+<span data-ttu-id="84779-342">在 .NET Core SDK 2.1 或更新版本中， [ Razor SDK](xref:razor-pages/sdk)會處理檔案的編譯 Razor 。</span><span class="sxs-lookup"><span data-stu-id="84779-342">With .NET Core SDK 2.1 or later, the [Razor SDK](xref:razor-pages/sdk) handles compilation of Razor files.</span></span> <span data-ttu-id="84779-343">建立專案時，SDK 會 Razor 在專案根目錄中產生一個 *obj/<build_configuration>/<Razor target_framework_moniker>/* 目錄。</span><span class="sxs-lookup"><span data-stu-id="84779-343">When building a project, the Razor SDK generates an *obj/<build_configuration>/<target_framework_moniker>/Razor* directory in the project root.</span></span> <span data-ttu-id="84779-344">目錄中的目錄結構會 *Razor* 鏡像專案的目錄結構。</span><span class="sxs-lookup"><span data-stu-id="84779-344">The directory structure within the *Razor* directory mirrors the project's directory structure.</span></span>
 
-<span data-ttu-id="84779-345">在以 .NET Core 2.1 為目標的 ASP.NET Core 2.1 頁面專案中，請考慮下列目錄結構 :::no-loc(Razor)::: ：</span><span class="sxs-lookup"><span data-stu-id="84779-345">Consider the following directory structure in an ASP.NET Core 2.1 :::no-loc(Razor)::: Pages project targeting .NET Core 2.1:</span></span>
+<span data-ttu-id="84779-345">在以 .NET Core 2.1 為目標的 ASP.NET Core 2.1 頁面專案中，請考慮下列目錄結構 Razor ：</span><span class="sxs-lookup"><span data-stu-id="84779-345">Consider the following directory structure in an ASP.NET Core 2.1 Razor Pages project targeting .NET Core 2.1:</span></span>
 
 ```
  Areas/
@@ -956,7 +956,7 @@ public class Pet
  obj/
    Debug/
      netcoreapp2.1/
-       :::no-loc(Razor):::/
+       Razor/
          Areas/
            Admin/
              Pages/
@@ -969,7 +969,7 @@ public class Pet
            Index.g.cshtml.cs
 ```
 
-<span data-ttu-id="84779-347">若要查看針對 *Pages/Index* 所產生的類別，請開啟 *obj/Debug/netcoreapp 2.1/ :::no-loc(Razor)::: /Pages/Index.g.cshtml.cs* 。</span><span class="sxs-lookup"><span data-stu-id="84779-347">To view the generated class for *Pages/Index.cshtml* , open *obj/Debug/netcoreapp2.1/:::no-loc(Razor):::/Pages/Index.g.cshtml.cs* .</span></span>
+<span data-ttu-id="84779-347">若要查看針對 *Pages/Index* 所產生的類別，請開啟 *obj/Debug/netcoreapp 2.1/ Razor /Pages/Index.g.cshtml.cs* 。</span><span class="sxs-lookup"><span data-stu-id="84779-347">To view the generated class for *Pages/Index.cshtml* , open *obj/Debug/netcoreapp2.1/Razor/Pages/Index.g.cshtml.cs* .</span></span>
 
 ::: moniker-end
 
@@ -979,7 +979,7 @@ public class Pet
 
 [!code-csharp[](razor/sample/Utilities/CustomTemplateEngine.cs)]
 
-<span data-ttu-id="84779-349">在 `Startup.ConfigureServices` 中，將 MVC 所新增的 `:::no-loc(Razor):::TemplateEngine` 覆寫為 `CustomTemplateEngine` 類別：</span><span class="sxs-lookup"><span data-stu-id="84779-349">In `Startup.ConfigureServices`, override the `:::no-loc(Razor):::TemplateEngine` added by MVC with the `CustomTemplateEngine` class:</span></span>
+<span data-ttu-id="84779-349">在 `Startup.ConfigureServices` 中，將 MVC 所新增的 `RazorTemplateEngine` 覆寫為 `CustomTemplateEngine` 類別：</span><span class="sxs-lookup"><span data-stu-id="84779-349">In `Startup.ConfigureServices`, override the `RazorTemplateEngine` added by MVC with the `CustomTemplateEngine` class:</span></span>
 
 [!code-csharp[](razor/sample/Startup.cs?highlight=4&range=10-14)]
 
@@ -991,7 +991,7 @@ public class Pet
 
 ## <a name="view-lookups-and-case-sensitivity"></a><span data-ttu-id="84779-353">檢視查閱和區分大小寫</span><span class="sxs-lookup"><span data-stu-id="84779-353">View lookups and case sensitivity</span></span>
 
-<span data-ttu-id="84779-354">:::no-loc(Razor):::View engine 會針對視圖執行區分大小寫的查閱。</span><span class="sxs-lookup"><span data-stu-id="84779-354">The :::no-loc(Razor)::: view engine performs case-sensitive lookups for views.</span></span> <span data-ttu-id="84779-355">不過，實際查閱則取決於基礎檔案系統：</span><span class="sxs-lookup"><span data-stu-id="84779-355">However, the actual lookup is determined by the underlying file system:</span></span>
+<span data-ttu-id="84779-354">RazorView engine 會針對視圖執行區分大小寫的查閱。</span><span class="sxs-lookup"><span data-stu-id="84779-354">The Razor view engine performs case-sensitive lookups for views.</span></span> <span data-ttu-id="84779-355">不過，實際查閱則取決於基礎檔案系統：</span><span class="sxs-lookup"><span data-stu-id="84779-355">However, the actual lookup is determined by the underlying file system:</span></span>
 
 * <span data-ttu-id="84779-356">檔案式來源：</span><span class="sxs-lookup"><span data-stu-id="84779-356">File based source:</span></span>
   * <span data-ttu-id="84779-357">在具有不區分大小寫之檔案系統的作業系統上 (例如 Windows)，實體檔案提供者查閱不會區分大小寫。</span><span class="sxs-lookup"><span data-stu-id="84779-357">On operating systems with case insensitive file systems (for example, Windows), physical file provider lookups are case insensitive.</span></span> <span data-ttu-id="84779-358">例如，`return View("Test")` 針對 */Views/Home/Test.cshtml* 和 */Views/home/test.cshtml* (以及任何其他大小寫變體) 會有相符的結果。</span><span class="sxs-lookup"><span data-stu-id="84779-358">For example, `return View("Test")` results in matches for */Views/Home/Test.cshtml* , */Views/home/test.cshtml* , and any other casing variant.</span></span>
@@ -1001,10 +1001,10 @@ public class Pet
 <span data-ttu-id="84779-364">建議開發人員比對檔案和目錄的大小寫以及下列項目的大小寫：</span><span class="sxs-lookup"><span data-stu-id="84779-364">Developers are encouraged to match the casing of file and directory names to the casing of:</span></span>
 
 * <span data-ttu-id="84779-365">區域、控制器和動作名稱。</span><span class="sxs-lookup"><span data-stu-id="84779-365">Area, controller, and action names.</span></span>
-* <span data-ttu-id="84779-366">:::no-loc(Razor)::: 頁面。</span><span class="sxs-lookup"><span data-stu-id="84779-366">:::no-loc(Razor)::: Pages.</span></span>
+* <span data-ttu-id="84779-366">Razor 頁面。</span><span class="sxs-lookup"><span data-stu-id="84779-366">Razor Pages.</span></span>
 
 <span data-ttu-id="84779-367">比對大小寫可確保不論基礎檔案系統為何，部署作業都能夠找到其值。</span><span class="sxs-lookup"><span data-stu-id="84779-367">Matching case ensures the deployments find their views regardless of the underlying file system.</span></span>
 
 ## <a name="additional-resources"></a><span data-ttu-id="84779-368">其他資源</span><span class="sxs-lookup"><span data-stu-id="84779-368">Additional resources</span></span>
 
-<span data-ttu-id="84779-369">[使用 ASP.NET Web 程式設計的 :::no-loc(Razor)::: 簡介語法](/aspnet/web-pages/overview/getting-started/introducing-razor-syntax-c) 提供許多使用語法進行程式設計的範例 :::no-loc(Razor)::: 。</span><span class="sxs-lookup"><span data-stu-id="84779-369">[Introduction to ASP.NET Web Programming Using the :::no-loc(Razor)::: Syntax](/aspnet/web-pages/overview/getting-started/introducing-razor-syntax-c) provides many samples of programming with :::no-loc(Razor)::: syntax.</span></span>
+<span data-ttu-id="84779-369">[使用 ASP.NET Web 程式設計的 Razor 簡介語法](/aspnet/web-pages/overview/getting-started/introducing-razor-syntax-c) 提供許多使用語法進行程式設計的範例 Razor 。</span><span class="sxs-lookup"><span data-stu-id="84779-369">[Introduction to ASP.NET Web Programming Using the Razor Syntax](/aspnet/web-pages/overview/getting-started/introducing-razor-syntax-c) provides many samples of programming with Razor syntax.</span></span>

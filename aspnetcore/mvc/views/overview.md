@@ -5,17 +5,17 @@ description: 了解檢視如何處理 ASP.NET Core MVC 中的應用程式資料�
 ms.author: riande
 ms.date: 12/05/2019
 no-loc:
-- ':::no-loc(appsettings.json):::'
-- ':::no-loc(ASP.NET Core Identity):::'
-- ':::no-loc(cookie):::'
-- ':::no-loc(Cookie):::'
-- ':::no-loc(Blazor):::'
-- ':::no-loc(Blazor Server):::'
-- ':::no-loc(Blazor WebAssembly):::'
-- ':::no-loc(Identity):::'
-- ":::no-loc(Let's Encrypt):::"
-- ':::no-loc(Razor):::'
-- ':::no-loc(SignalR):::'
+- 'appsettings.json'
+- 'ASP.NET Core Identity'
+- 'cookie'
+- 'Cookie'
+- 'Blazor'
+- 'Blazor Server'
+- 'Blazor WebAssembly'
+- 'Identity'
+- "Let's Encrypt"
+- 'Razor'
+- 'SignalR'
 uid: mvc/views/overview
 ms.openlocfilehash: 373b17377740441d3859e3b7d942017a22bc7a68
 ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
@@ -28,11 +28,11 @@ ms.locfileid: "93060621"
 
 <span data-ttu-id="1ea39-104">作者：[Steve Smith](https://ardalis.com/)</span><span class="sxs-lookup"><span data-stu-id="1ea39-104">By [Steve Smith](https://ardalis.com/)</span></span>
 
-<span data-ttu-id="1ea39-105">本文件說明 ASP.NET Core MVC 應用程式中所使用的檢視。</span><span class="sxs-lookup"><span data-stu-id="1ea39-105">This document explains views used in ASP.NET Core MVC applications.</span></span> <span data-ttu-id="1ea39-106">如需頁面的詳細資訊 :::no-loc(Razor)::: ，請參閱 [ :::no-loc(Razor)::: 頁面簡介](xref:razor-pages/index)。</span><span class="sxs-lookup"><span data-stu-id="1ea39-106">For information on :::no-loc(Razor)::: Pages, see [Introduction to :::no-loc(Razor)::: Pages](xref:razor-pages/index).</span></span>
+<span data-ttu-id="1ea39-105">本文件說明 ASP.NET Core MVC 應用程式中所使用的檢視。</span><span class="sxs-lookup"><span data-stu-id="1ea39-105">This document explains views used in ASP.NET Core MVC applications.</span></span> <span data-ttu-id="1ea39-106">如需頁面的詳細資訊 Razor ，請參閱 [ Razor 頁面簡介](xref:razor-pages/index)。</span><span class="sxs-lookup"><span data-stu-id="1ea39-106">For information on Razor Pages, see [Introduction to Razor Pages](xref:razor-pages/index).</span></span>
 
-<span data-ttu-id="1ea39-107">在模型檢視控制器 (MVC) 模式中， *view* 會處理應用程式的資料呈現和使用者互動。</span><span class="sxs-lookup"><span data-stu-id="1ea39-107">In the Model-View-Controller (MVC) pattern, the *view* handles the app's data presentation and user interaction.</span></span> <span data-ttu-id="1ea39-108">View 是具有內嵌[ :::no-loc(Razor)::: 標記](xref:mvc/views/razor)的 HTML 範本。</span><span class="sxs-lookup"><span data-stu-id="1ea39-108">A view is an HTML template with embedded [:::no-loc(Razor)::: markup](xref:mvc/views/razor).</span></span> <span data-ttu-id="1ea39-109">:::no-loc(Razor)::: 標記是與 HTML 標籤互動的程式碼，用來產生傳送至用戶端的網頁。</span><span class="sxs-lookup"><span data-stu-id="1ea39-109">:::no-loc(Razor)::: markup is code that interacts with HTML markup to produce a webpage that's sent to the client.</span></span>
+<span data-ttu-id="1ea39-107">在模型檢視控制器 (MVC) 模式中， *view* 會處理應用程式的資料呈現和使用者互動。</span><span class="sxs-lookup"><span data-stu-id="1ea39-107">In the Model-View-Controller (MVC) pattern, the *view* handles the app's data presentation and user interaction.</span></span> <span data-ttu-id="1ea39-108">View 是具有內嵌[ Razor 標記](xref:mvc/views/razor)的 HTML 範本。</span><span class="sxs-lookup"><span data-stu-id="1ea39-108">A view is an HTML template with embedded [Razor markup](xref:mvc/views/razor).</span></span> <span data-ttu-id="1ea39-109">Razor 標記是與 HTML 標籤互動的程式碼，用來產生傳送至用戶端的網頁。</span><span class="sxs-lookup"><span data-stu-id="1ea39-109">Razor markup is code that interacts with HTML markup to produce a webpage that's sent to the client.</span></span>
 
-<span data-ttu-id="1ea39-110">在 ASP.NET Core MVC 中，views 是在標記中使用 [c # 程式設計語言](/dotnet/csharp/)的 *cshtml 檔案。* :::no-loc(Razor):::</span><span class="sxs-lookup"><span data-stu-id="1ea39-110">In ASP.NET Core MVC, views are *.cshtml* files that use the [C# programming language](/dotnet/csharp/) in :::no-loc(Razor)::: markup.</span></span> <span data-ttu-id="1ea39-111">通常，檢視檔案會分組成針對每個應用程式之[控制器](xref:mvc/controllers/actions)而命名的資料夾。</span><span class="sxs-lookup"><span data-stu-id="1ea39-111">Usually, view files are grouped into folders named for each of the app's [controllers](xref:mvc/controllers/actions).</span></span> <span data-ttu-id="1ea39-112">資料夾會儲存至應用程式根目錄的 *Views* 資料夾中：</span><span class="sxs-lookup"><span data-stu-id="1ea39-112">The folders are stored in a *Views* folder at the root of the app:</span></span>
+<span data-ttu-id="1ea39-110">在 ASP.NET Core MVC 中，views 是在標記中使用 [c # 程式設計語言](/dotnet/csharp/)的 *cshtml 檔案。* Razor</span><span class="sxs-lookup"><span data-stu-id="1ea39-110">In ASP.NET Core MVC, views are *.cshtml* files that use the [C# programming language](/dotnet/csharp/) in Razor markup.</span></span> <span data-ttu-id="1ea39-111">通常，檢視檔案會分組成針對每個應用程式之[控制器](xref:mvc/controllers/actions)而命名的資料夾。</span><span class="sxs-lookup"><span data-stu-id="1ea39-111">Usually, view files are grouped into folders named for each of the app's [controllers](xref:mvc/controllers/actions).</span></span> <span data-ttu-id="1ea39-112">資料夾會儲存至應用程式根目錄的 *Views* 資料夾中：</span><span class="sxs-lookup"><span data-stu-id="1ea39-112">The folders are stored in a *Views* folder at the root of the app:</span></span>
 
 ![Visual Studio 方案總管中的 Views 資料夾是與 Home 資料夾一起開啟，以顯示 About.cshtml、Contact.cshtml 和 Index.cshtml 檔案](overview/_static/views_solution_explorer.png)
 
@@ -59,7 +59,7 @@ ms.locfileid: "93060621"
 
 [!code-cshtml[](../../common/samples/WebApplication1/Views/Home/About.cshtml)]
 
-<span data-ttu-id="1ea39-144">*:::no-loc(Razor):::* 標記是以 `@` 符號開頭。</span><span class="sxs-lookup"><span data-stu-id="1ea39-144">*:::no-loc(Razor):::* markup starts with the `@` symbol.</span></span> <span data-ttu-id="1ea39-145">藉由在程式[ :::no-loc(Razor)::: 代碼區塊](xref:mvc/views/razor#razor-code-blocks)中放置 c # 程式碼，並以大括弧 () 來執行 c # 語句 `{ ... }` 。</span><span class="sxs-lookup"><span data-stu-id="1ea39-145">Run C# statements by placing C# code within [:::no-loc(Razor)::: code blocks](xref:mvc/views/razor#razor-code-blocks) set off by curly braces (`{ ... }`).</span></span> <span data-ttu-id="1ea39-146">例如，請參閱上方將 "About" 指派給 `ViewData["Title"]`。</span><span class="sxs-lookup"><span data-stu-id="1ea39-146">For example, see the assignment of "About" to `ViewData["Title"]` shown above.</span></span> <span data-ttu-id="1ea39-147">只要使用 `@` 符號參考值，就可以在 HTML 內顯示值。</span><span class="sxs-lookup"><span data-stu-id="1ea39-147">You can display values within HTML by simply referencing the value with the `@` symbol.</span></span> <span data-ttu-id="1ea39-148">請參閱上方 `<h2>` 和 `<h3>` 項目的內容。</span><span class="sxs-lookup"><span data-stu-id="1ea39-148">See the contents of the `<h2>` and `<h3>` elements above.</span></span>
+<span data-ttu-id="1ea39-144">*Razor* 標記是以 `@` 符號開頭。</span><span class="sxs-lookup"><span data-stu-id="1ea39-144">*Razor* markup starts with the `@` symbol.</span></span> <span data-ttu-id="1ea39-145">藉由在程式[ Razor 代碼區塊](xref:mvc/views/razor#razor-code-blocks)中放置 c # 程式碼，並以大括弧 () 來執行 c # 語句 `{ ... }` 。</span><span class="sxs-lookup"><span data-stu-id="1ea39-145">Run C# statements by placing C# code within [Razor code blocks](xref:mvc/views/razor#razor-code-blocks) set off by curly braces (`{ ... }`).</span></span> <span data-ttu-id="1ea39-146">例如，請參閱上方將 "About" 指派給 `ViewData["Title"]`。</span><span class="sxs-lookup"><span data-stu-id="1ea39-146">For example, see the assignment of "About" to `ViewData["Title"]` shown above.</span></span> <span data-ttu-id="1ea39-147">只要使用 `@` 符號參考值，就可以在 HTML 內顯示值。</span><span class="sxs-lookup"><span data-stu-id="1ea39-147">You can display values within HTML by simply referencing the value with the `@` symbol.</span></span> <span data-ttu-id="1ea39-148">請參閱上方 `<h2>` 和 `<h3>` 項目的內容。</span><span class="sxs-lookup"><span data-stu-id="1ea39-148">See the contents of the `<h2>` and `<h3>` elements above.</span></span>
 
 <span data-ttu-id="1ea39-149">上述檢視內容只是轉譯給使用者之整個網頁的一部分。</span><span class="sxs-lookup"><span data-stu-id="1ea39-149">The view content shown above is only part of the entire webpage that's rendered to the user.</span></span> <span data-ttu-id="1ea39-150">其餘的頁面配置以及檢視的其他通用層面指定於其他檢視檔案中。</span><span class="sxs-lookup"><span data-stu-id="1ea39-150">The rest of the page's layout and other common aspects of the view are specified in other view files.</span></span> <span data-ttu-id="1ea39-151">若要深入了解，請參閱[配置主題](xref:mvc/views/layout)。</span><span class="sxs-lookup"><span data-stu-id="1ea39-151">To learn more, see the [Layout topic](xref:mvc/views/layout).</span></span>
 
@@ -204,7 +204,7 @@ namespace WebApplication1.ViewModels
 
 ### <a name="weakly-typed-data-viewdata-viewdata-attribute-and-viewbag"></a><span data-ttu-id="1ea39-212">弱型別資料 (ViewData、ViewData 屬性與 ViewBag)</span><span class="sxs-lookup"><span data-stu-id="1ea39-212">Weakly typed data (ViewData, ViewData attribute, and ViewBag)</span></span>
 
-<span data-ttu-id="1ea39-213">`ViewBag`*無法在 :::no-loc(Razor):::頁面。*</span><span class="sxs-lookup"><span data-stu-id="1ea39-213">`ViewBag` *isn't available in :::no-loc(Razor)::: Pages.*</span></span>
+<span data-ttu-id="1ea39-213">`ViewBag`*無法在 Razor頁面。*</span><span class="sxs-lookup"><span data-stu-id="1ea39-213">`ViewBag` *isn't available in Razor Pages.*</span></span>
 
 <span data-ttu-id="1ea39-214">除了強型別檢視之外，檢視還可以存取 *弱型別* (也稱為 *鬆散型別* ) 資料集合。</span><span class="sxs-lookup"><span data-stu-id="1ea39-214">In addition to strongly typed views, views have access to a *weakly typed* (also called *loosely typed* ) collection of data.</span></span> <span data-ttu-id="1ea39-215">與強式型別不同，「弱式型別」  (或「鬆散型別」  ) 表示您未明確宣告所使用資料的類型。</span><span class="sxs-lookup"><span data-stu-id="1ea39-215">Unlike strong types, *weak types* (or *loose types* ) means that you don't explicitly declare the type of data you're using.</span></span> <span data-ttu-id="1ea39-216">您可以使用弱型別資料的集合，對控制器與檢視傳遞將少量的資料進出。</span><span class="sxs-lookup"><span data-stu-id="1ea39-216">You can use the collection of weakly typed data for passing small amounts of data in and out of controllers and views.</span></span>
 
@@ -264,7 +264,7 @@ public IActionResult SomeAction()
 
 <span data-ttu-id="1ea39-238">**ViewData 屬性**</span><span class="sxs-lookup"><span data-stu-id="1ea39-238">**ViewData attribute**</span></span>
 
-<span data-ttu-id="1ea39-239">使用 [ViewDataDictionary](/dotnet/api/microsoft.aspnetcore.mvc.viewfeatures.viewdatadictionary) 的另一種方法是 [ViewDataAttribute](/dotnet/api/microsoft.aspnetcore.mvc.viewdataattribute)。</span><span class="sxs-lookup"><span data-stu-id="1ea39-239">Another approach that uses the [ViewDataDictionary](/dotnet/api/microsoft.aspnetcore.mvc.viewfeatures.viewdatadictionary) is [ViewDataAttribute](/dotnet/api/microsoft.aspnetcore.mvc.viewdataattribute).</span></span> <span data-ttu-id="1ea39-240">:::no-loc(Razor):::以屬性標示之控制器或頁面模型上的屬性 `[ViewData]` ，會從字典儲存和載入其值。</span><span class="sxs-lookup"><span data-stu-id="1ea39-240">Properties on controllers or :::no-loc(Razor)::: Page models marked with the `[ViewData]` attribute have their values stored and loaded from the dictionary.</span></span>
+<span data-ttu-id="1ea39-239">使用 [ViewDataDictionary](/dotnet/api/microsoft.aspnetcore.mvc.viewfeatures.viewdatadictionary) 的另一種方法是 [ViewDataAttribute](/dotnet/api/microsoft.aspnetcore.mvc.viewdataattribute)。</span><span class="sxs-lookup"><span data-stu-id="1ea39-239">Another approach that uses the [ViewDataDictionary](/dotnet/api/microsoft.aspnetcore.mvc.viewfeatures.viewdatadictionary) is [ViewDataAttribute](/dotnet/api/microsoft.aspnetcore.mvc.viewdataattribute).</span></span> <span data-ttu-id="1ea39-240">Razor以屬性標示之控制器或頁面模型上的屬性 `[ViewData]` ，會從字典儲存和載入其值。</span><span class="sxs-lookup"><span data-stu-id="1ea39-240">Properties on controllers or Razor Page models marked with the `[ViewData]` attribute have their values stored and loaded from the dictionary.</span></span>
 
 <span data-ttu-id="1ea39-241">在下列範例中，Home 控制器包含標示為 `Title` 的屬性 `[ViewData]` 。</span><span class="sxs-lookup"><span data-stu-id="1ea39-241">In the following example, the Home controller contains a `Title` property marked with `[ViewData]`.</span></span> <span data-ttu-id="1ea39-242">`About` 方法會設定 [About] 檢視的標題：</span><span class="sxs-lookup"><span data-stu-id="1ea39-242">The `About` method sets the title for the About view:</span></span>
 
@@ -298,7 +298,7 @@ public class HomeController : Controller
 
 <span data-ttu-id="1ea39-244">**ViewBag**</span><span class="sxs-lookup"><span data-stu-id="1ea39-244">**ViewBag**</span></span>
 
-<span data-ttu-id="1ea39-245">`ViewBag`*無法在 :::no-loc(Razor):::頁面。*</span><span class="sxs-lookup"><span data-stu-id="1ea39-245">`ViewBag` *isn't available in :::no-loc(Razor)::: Pages.*</span></span>
+<span data-ttu-id="1ea39-245">`ViewBag`*無法在 Razor頁面。*</span><span class="sxs-lookup"><span data-stu-id="1ea39-245">`ViewBag` *isn't available in Razor Pages.*</span></span>
 
 <span data-ttu-id="1ea39-246">`ViewBag` 是可動態存取 `ViewData` 中所儲存物件的 [DynamicViewData](/dotnet/api/microsoft.aspnetcore.mvc.viewfeatures.internal.dynamicviewdata) 物件。</span><span class="sxs-lookup"><span data-stu-id="1ea39-246">`ViewBag` is a [DynamicViewData](/dotnet/api/microsoft.aspnetcore.mvc.viewfeatures.internal.dynamicviewdata) object that provides dynamic access to the objects stored in `ViewData`.</span></span> <span data-ttu-id="1ea39-247">`ViewBag` 的使用更為方便，因為它不需要進行轉換。</span><span class="sxs-lookup"><span data-stu-id="1ea39-247">`ViewBag` can be more convenient to work with, since it doesn't require casting.</span></span> <span data-ttu-id="1ea39-248">下列範例示範如何使用 `ViewBag`，而其結果與上方使用 `ViewData` 相同：</span><span class="sxs-lookup"><span data-stu-id="1ea39-248">The following example shows how to use `ViewBag` with the same result as using `ViewData` above:</span></span>
 
@@ -331,7 +331,7 @@ public IActionResult SomeAction()
 
 <span data-ttu-id="1ea39-249">**同時使用 ViewData 和 ViewBag**</span><span class="sxs-lookup"><span data-stu-id="1ea39-249">**Using ViewData and ViewBag simultaneously**</span></span>
 
-<span data-ttu-id="1ea39-250">`ViewBag`*無法在 :::no-loc(Razor):::頁面。*</span><span class="sxs-lookup"><span data-stu-id="1ea39-250">`ViewBag` *isn't available in :::no-loc(Razor)::: Pages.*</span></span>
+<span data-ttu-id="1ea39-250">`ViewBag`*無法在 Razor頁面。*</span><span class="sxs-lookup"><span data-stu-id="1ea39-250">`ViewBag` *isn't available in Razor Pages.*</span></span>
 
 <span data-ttu-id="1ea39-251">因為 `ViewData` 和 `ViewBag` 參照相同的基礎 `ViewData` 集合，所以您可以同時使用 `ViewData` 和 `ViewBag`，並在讀取和寫入值時於其間混合使用和比對。</span><span class="sxs-lookup"><span data-stu-id="1ea39-251">Since `ViewData` and `ViewBag` refer to the same underlying `ViewData` collection, you can use both `ViewData` and `ViewBag` and mix and match between them when reading and writing values.</span></span>
 
@@ -371,7 +371,7 @@ public IActionResult SomeAction()
 
 <span data-ttu-id="1ea39-259">**ViewData 與 ViewBag 之間的差異摘要**</span><span class="sxs-lookup"><span data-stu-id="1ea39-259">**Summary of the differences between ViewData and ViewBag**</span></span>
 
- <span data-ttu-id="1ea39-260">`ViewBag` 在頁面中無法使用 :::no-loc(Razor)::: 。</span><span class="sxs-lookup"><span data-stu-id="1ea39-260">`ViewBag` isn't available in the :::no-loc(Razor)::: Pages.</span></span>
+ <span data-ttu-id="1ea39-260">`ViewBag` 在頁面中無法使用 Razor 。</span><span class="sxs-lookup"><span data-stu-id="1ea39-260">`ViewBag` isn't available in the Razor Pages.</span></span>
 
 * `ViewData`
   * <span data-ttu-id="1ea39-261">衍生自 [>viewdatadictionary](/dotnet/api/microsoft.aspnetcore.mvc.viewfeatures.viewdatadictionary)，因此它有可能有用的字典屬性，例如 `ContainsKey` 、 `Add` 、 `Remove` 和 `Clear` 。</span><span class="sxs-lookup"><span data-stu-id="1ea39-261">Derives from [ViewDataDictionary](/dotnet/api/microsoft.aspnetcore.mvc.viewfeatures.viewdatadictionary), so it has dictionary properties that can be useful, such as `ContainsKey`, `Add`, `Remove`, and `Clear`.</span></span>

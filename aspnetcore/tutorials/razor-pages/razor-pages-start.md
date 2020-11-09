@@ -1,24 +1,24 @@
 ---
-title: '教學課程：開始使用 :::no-loc(Razor)::: ASP.NET Core 中的頁面'
+title: '教學課程：開始使用 Razor ASP.NET Core 中的頁面'
 author: rick-anderson
-description: '這是一個系列的第一個教學課程，教您建立 ASP.NET Core :::no-loc(Razor)::: 頁面 web 應用程式的基本概念。'
+description: '這是一個系列的第一個教學課程，教您建立 ASP.NET Core Razor 頁面 web 應用程式的基本概念。'
 ms.author: riande
 ms.date: 09/15/2020
 no-loc:
-- ':::no-loc(Index):::'
-- ':::no-loc(Create):::'
-- ':::no-loc(Delete):::'
-- ':::no-loc(appsettings.json):::'
-- ':::no-loc(ASP.NET Core Identity):::'
-- ':::no-loc(cookie):::'
-- ':::no-loc(Cookie):::'
-- ':::no-loc(Blazor):::'
-- ':::no-loc(Blazor Server):::'
-- ':::no-loc(Blazor WebAssembly):::'
-- ':::no-loc(Identity):::'
-- ":::no-loc(Let's Encrypt):::"
-- ':::no-loc(Razor):::'
-- ':::no-loc(SignalR):::'
+- 'Index'
+- 'Create'
+- 'Delete'
+- 'appsettings.json'
+- 'ASP.NET Core Identity'
+- 'cookie'
+- 'Cookie'
+- 'Blazor'
+- 'Blazor Server'
+- 'Blazor WebAssembly'
+- 'Identity'
+- "Let's Encrypt"
+- 'Razor'
+- 'SignalR'
 uid: tutorials/razor-pages/razor-pages-start
 ms.openlocfilehash: b4dcbe9536107cdc5b0342782abc4bad0b89a8dc
 ms.sourcegitcommit: 342588e10ae0054a6d6dc0fd11dae481006be099
@@ -27,27 +27,27 @@ ms.contentlocale: zh-TW
 ms.lasthandoff: 11/07/2020
 ms.locfileid: "94360914"
 ---
-# <a name="tutorial-get-started-with-no-locrazor-pages-in-aspnet-core"></a><span data-ttu-id="8359b-103">教學課程：開始使用 :::no-loc(Razor)::: ASP.NET Core 中的頁面</span><span class="sxs-lookup"><span data-stu-id="8359b-103">Tutorial: Get started with :::no-loc(Razor)::: Pages in ASP.NET Core</span></span>
+# <a name="tutorial-get-started-with-no-locrazor-pages-in-aspnet-core"></a><span data-ttu-id="8359b-103">教學課程：開始使用 Razor ASP.NET Core 中的頁面</span><span class="sxs-lookup"><span data-stu-id="8359b-103">Tutorial: Get started with Razor Pages in ASP.NET Core</span></span>
 
 <span data-ttu-id="8359b-104">作者：[Rick Anderson](https://twitter.com/RickAndMSFT)</span><span class="sxs-lookup"><span data-stu-id="8359b-104">By [Rick Anderson](https://twitter.com/RickAndMSFT)</span></span>
 
 ::: moniker range=">= aspnetcore-5.0"
-<span data-ttu-id="8359b-105">這是一個系列的第一個教學課程，教您建立 ASP.NET Core :::no-loc(Razor)::: 頁面 web 應用程式的基本概念。</span><span class="sxs-lookup"><span data-stu-id="8359b-105">This is the first tutorial of a series that teaches the basics of building an ASP.NET Core :::no-loc(Razor)::: Pages web app.</span></span>
+<span data-ttu-id="8359b-105">這是一個系列的第一個教學課程，教您建立 ASP.NET Core Razor 頁面 web 應用程式的基本概念。</span><span class="sxs-lookup"><span data-stu-id="8359b-105">This is the first tutorial of a series that teaches the basics of building an ASP.NET Core Razor Pages web app.</span></span>
 
-<span data-ttu-id="8359b-106">如需更高階的簡介，適用于熟悉控制器和 views 的開發人員，請參閱 [ :::no-loc(Razor)::: 頁面簡介](xref:razor-pages/index)。</span><span class="sxs-lookup"><span data-stu-id="8359b-106">For a more advanced introduction aimed at developers who are familiar with controllers and views, see [Introduction to :::no-loc(Razor)::: Pages](xref:razor-pages/index).</span></span>
+<span data-ttu-id="8359b-106">如需更高階的簡介，適用于熟悉控制器和 views 的開發人員，請參閱 [ Razor 頁面簡介](xref:razor-pages/index)。</span><span class="sxs-lookup"><span data-stu-id="8359b-106">For a more advanced introduction aimed at developers who are familiar with controllers and views, see [Introduction to Razor Pages](xref:razor-pages/index).</span></span>
 
 <span data-ttu-id="8359b-107">在本系列結束時，您將會有一個可管理電影資料庫的應用程式。</span><span class="sxs-lookup"><span data-stu-id="8359b-107">At the end of the series, you'll have an app that manages a database of movies.</span></span>  
 
-<span data-ttu-id="8359b-108">[檢視或下載範例程式碼](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/tutorials/razor-pages/razor-pages-start/sample/:::no-loc(Razor):::PagesMovie50) ([如何下載](xref:index#how-to-download-a-sample))。</span><span class="sxs-lookup"><span data-stu-id="8359b-108">[View or download sample code](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/tutorials/razor-pages/razor-pages-start/sample/:::no-loc(Razor):::PagesMovie50) ([how to download](xref:index#how-to-download-a-sample)).</span></span>
+<span data-ttu-id="8359b-108">[檢視或下載範例程式碼](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/tutorials/razor-pages/razor-pages-start/sample/RazorPagesMovie50) ([如何下載](xref:index#how-to-download-a-sample))。</span><span class="sxs-lookup"><span data-stu-id="8359b-108">[View or download sample code](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/tutorials/razor-pages/razor-pages-start/sample/RazorPagesMovie50) ([how to download](xref:index#how-to-download-a-sample)).</span></span>
 
 <span data-ttu-id="8359b-109">在本教學課程中，您：</span><span class="sxs-lookup"><span data-stu-id="8359b-109">In this tutorial, you:</span></span>
 
 > [!div class="checklist"]
-> * <span data-ttu-id="8359b-110">:::no-loc(Create)::::::no-loc(Razor):::頁面 web 應用程式。</span><span class="sxs-lookup"><span data-stu-id="8359b-110">:::no-loc(Create)::: a :::no-loc(Razor)::: Pages web app.</span></span>
+> * <span data-ttu-id="8359b-110">CreateRazor頁面 web 應用程式。</span><span class="sxs-lookup"><span data-stu-id="8359b-110">Create a Razor Pages web app.</span></span>
 > * <span data-ttu-id="8359b-111">執行應用程式。</span><span class="sxs-lookup"><span data-stu-id="8359b-111">Run the app.</span></span>
 > * <span data-ttu-id="8359b-112">檢查專案檔。</span><span class="sxs-lookup"><span data-stu-id="8359b-112">Examine the project files.</span></span>
 
-<span data-ttu-id="8359b-113">在本教學課程結尾，您將會有一個工作 :::no-loc(Razor)::: 頁面 web 應用程式，您將在稍後的教學課程中加以增強。</span><span class="sxs-lookup"><span data-stu-id="8359b-113">At the end of this tutorial, you'll have a working :::no-loc(Razor)::: Pages web app that you'll enhance in later tutorials.</span></span>
+<span data-ttu-id="8359b-113">在本教學課程結尾，您將會有一個工作 Razor 頁面 web 應用程式，您將在稍後的教學課程中加以增強。</span><span class="sxs-lookup"><span data-stu-id="8359b-113">At the end of this tutorial, you'll have a working Razor Pages web app that you'll enhance in later tutorials.</span></span>
 
 ![Home 或：：：非 loc (Index) ：：： page](razor-pages-start/_static/5/home5.png)
 
@@ -67,28 +67,28 @@ ms.locfileid: "94360914"
 
 ---
 
-## <a name="no-loccreate-a-no-locrazor-pages-web-app"></a><span data-ttu-id="8359b-119">:::no-loc(Create)::::::no-loc(Razor):::頁面 web 應用程式</span><span class="sxs-lookup"><span data-stu-id="8359b-119">:::no-loc(Create)::: a :::no-loc(Razor)::: Pages web app</span></span>
+## <a name="no-loccreate-a-no-locrazor-pages-web-app"></a><span data-ttu-id="8359b-119">CreateRazor頁面 web 應用程式</span><span class="sxs-lookup"><span data-stu-id="8359b-119">Create a Razor Pages web app</span></span>
 
 # <a name="visual-studio"></a>[<span data-ttu-id="8359b-120">Visual Studio</span><span class="sxs-lookup"><span data-stu-id="8359b-120">Visual Studio</span></span>](#tab/visual-studio)
 
-1. <span data-ttu-id="8359b-121">開始 Visual Studio，然後選取 **:::no-loc(Create)::: 新專案** 。</span><span class="sxs-lookup"><span data-stu-id="8359b-121">Start Visual Studio and select **:::no-loc(Create)::: a new project**.</span></span> <span data-ttu-id="8359b-122">如需詳細資訊，請參閱[ :::no-loc(Create)::: Visual Studio 中的新專案](/visualstudio/ide/create-new-project)。</span><span class="sxs-lookup"><span data-stu-id="8359b-122">For more information, see [:::no-loc(Create)::: a new project in Visual Studio](/visualstudio/ide/create-new-project).</span></span>
+1. <span data-ttu-id="8359b-121">開始 Visual Studio，然後選取 **Create 新專案** 。</span><span class="sxs-lookup"><span data-stu-id="8359b-121">Start Visual Studio and select **Create a new project**.</span></span> <span data-ttu-id="8359b-122">如需詳細資訊，請參閱[ Create Visual Studio 中的新專案](/visualstudio/ide/create-new-project)。</span><span class="sxs-lookup"><span data-stu-id="8359b-122">For more information, see [Create a new project in Visual Studio](/visualstudio/ide/create-new-project).</span></span>
 
    ![：：：非 loc (從開始視窗建立) ：：：新專案](razor-pages-start/_static/5/start-window-create-new-project.png)
 
-1. <span data-ttu-id="8359b-124">在 [ **:::no-loc(Create)::: 新增專案** ] 對話方塊中，選取 [ **ASP.NET Core Web 應用程式** ]，然後選取 **[下一步]** 。</span><span class="sxs-lookup"><span data-stu-id="8359b-124">In the **:::no-loc(Create)::: a new project** dialog, select **ASP.NET Core Web Application** , and then select **Next**.</span></span>
+1. <span data-ttu-id="8359b-124">在 [ **Create 新增專案** ] 對話方塊中，選取 [ **ASP.NET Core Web 應用程式** ]，然後選取 **[下一步]** 。</span><span class="sxs-lookup"><span data-stu-id="8359b-124">In the **Create a new project** dialog, select **ASP.NET Core Web Application** , and then select **Next**.</span></span>
 
     ![新增 ASP.NET Core Web 應用程式](razor-pages-start/_static/5/np.png)
     
-1. <span data-ttu-id="8359b-126">在 [ **設定您的新專案** ] 對話方塊中，輸入 [ `:::no-loc(Razor):::PagesMovie` **專案名稱** ]。</span><span class="sxs-lookup"><span data-stu-id="8359b-126">In the **Configure your new project** dialog, enter `:::no-loc(Razor):::PagesMovie` for **Project name**.</span></span> <span data-ttu-id="8359b-127">請務必將專案命名為 *:::no-loc(Razor)::: PagesMovie* ，包括符合大小寫，如此一來，當您複製並貼上範例程式碼時，命名空間會相符。</span><span class="sxs-lookup"><span data-stu-id="8359b-127">It's important to name the project *:::no-loc(Razor):::PagesMovie* , including matching the capitalization, so the namespaces will match when you copy and paste example code.</span></span>
+1. <span data-ttu-id="8359b-126">在 [ **設定您的新專案** ] 對話方塊中，輸入 [ `RazorPagesMovie` **專案名稱** ]。</span><span class="sxs-lookup"><span data-stu-id="8359b-126">In the **Configure your new project** dialog, enter `RazorPagesMovie` for **Project name**.</span></span> <span data-ttu-id="8359b-127">請務必將專案命名為 *Razor PagesMovie* ，包括符合大小寫，如此一來，當您複製並貼上範例程式碼時，命名空間會相符。</span><span class="sxs-lookup"><span data-stu-id="8359b-127">It's important to name the project *RazorPagesMovie* , including matching the capitalization, so the namespaces will match when you copy and paste example code.</span></span>
 
-1. <span data-ttu-id="8359b-128">選取 [:::no-loc(Create):::]。</span><span class="sxs-lookup"><span data-stu-id="8359b-128">Select **:::no-loc(Create):::**.</span></span>
+1. <span data-ttu-id="8359b-128">選取 [Create]。</span><span class="sxs-lookup"><span data-stu-id="8359b-128">Select **Create**.</span></span>
 
     ![新增 ASP.NET Core Web 應用程式](razor-pages-start/_static/config.png)
 
-1. <span data-ttu-id="8359b-130">在 **:::no-loc(Create)::: 新的 ASP.NET Core web 應用程式** ] 對話方塊中，選取：</span><span class="sxs-lookup"><span data-stu-id="8359b-130">In the **:::no-loc(Create)::: a new ASP.NET Core web application** dialog, select:</span></span>
+1. <span data-ttu-id="8359b-130">在 **Create 新的 ASP.NET Core web 應用程式** ] 對話方塊中，選取：</span><span class="sxs-lookup"><span data-stu-id="8359b-130">In the **Create a new ASP.NET Core web application** dialog, select:</span></span>
     1. <span data-ttu-id="8359b-131">下拉式清單中的 **.Net Core** 和 **ASP.NET Core 5.0** 。</span><span class="sxs-lookup"><span data-stu-id="8359b-131">**.NET Core** and **ASP.NET Core 5.0** in the dropdowns.</span></span>
     1. <span data-ttu-id="8359b-132">**Web 應用程式** 。</span><span class="sxs-lookup"><span data-stu-id="8359b-132">**Web Application**.</span></span>
-    1. <span data-ttu-id="8359b-133">**:::no-loc(Create):::**.</span><span class="sxs-lookup"><span data-stu-id="8359b-133">**:::no-loc(Create):::**.</span></span>
+    1. <span data-ttu-id="8359b-133">**Create**.</span><span class="sxs-lookup"><span data-stu-id="8359b-133">**Create**.</span></span>
 
      ![新增 ASP.NET Core Web 應用程式](razor-pages-start/_static/5/npx.png)
 
@@ -105,12 +105,12 @@ ms.locfileid: "94360914"
 1. <span data-ttu-id="8359b-140">執行下列命令：</span><span class="sxs-lookup"><span data-stu-id="8359b-140">Run the following commands:</span></span>
 
    ```dotnetcli
-   dotnet new webapp -o :::no-loc(Razor):::PagesMovie
-   code -r :::no-loc(Razor):::PagesMovie
+   dotnet new webapp -o RazorPagesMovie
+   code -r RazorPagesMovie
    ```
 
-   * <span data-ttu-id="8359b-141">此 `dotnet new` 命令會 :::no-loc(Razor)::: 在 *:::no-loc(Razor)::: PagesMovie* 資料夾中建立新的頁面專案。</span><span class="sxs-lookup"><span data-stu-id="8359b-141">The `dotnet new` command creates a new :::no-loc(Razor)::: Pages project in the *:::no-loc(Razor):::PagesMovie* folder.</span></span>
-   * <span data-ttu-id="8359b-142">此 `code` 命令會在 Visual Studio Code 的目前實例中開啟 [ *:::no-loc(Razor)::: PagesMovie* ] 資料夾。</span><span class="sxs-lookup"><span data-stu-id="8359b-142">The `code` command opens the *:::no-loc(Razor):::PagesMovie* folder in the current instance of Visual Studio Code.</span></span>
+   * <span data-ttu-id="8359b-141">此 `dotnet new` 命令會 Razor 在 *Razor PagesMovie* 資料夾中建立新的頁面專案。</span><span class="sxs-lookup"><span data-stu-id="8359b-141">The `dotnet new` command creates a new Razor Pages project in the *RazorPagesMovie* folder.</span></span>
+   * <span data-ttu-id="8359b-142">此 `code` 命令會在 Visual Studio Code 的目前實例中開啟 [ *Razor PagesMovie* ] 資料夾。</span><span class="sxs-lookup"><span data-stu-id="8359b-142">The `code` command opens the *RazorPagesMovie* folder in the current instance of Visual Studio Code.</span></span>
 
 # <a name="visual-studio-for-mac"></a>[<span data-ttu-id="8359b-143">Visual Studio for Mac</span><span class="sxs-lookup"><span data-stu-id="8359b-143">Visual Studio for Mac</span></span>](#tab/visual-studio-mac)
 
@@ -128,9 +128,9 @@ ms.locfileid: "94360914"
     1. <span data-ttu-id="8359b-151">如果有選取 **目標 Framework** 的選項，請選取最新的 .net 5.x 版本。</span><span class="sxs-lookup"><span data-stu-id="8359b-151">If presented an option to select a **Target Framework** , select the latest .NET 5.x version.</span></span>
     1. <span data-ttu-id="8359b-152">選取 [下一步]。</span><span class="sxs-lookup"><span data-stu-id="8359b-152">Select **Next**.</span></span>
 
-1. <span data-ttu-id="8359b-153">將專案命名為 *:::no-loc(Razor)::: PagesMovie* ，然後選取 [] **:::no-loc(Create):::** 。</span><span class="sxs-lookup"><span data-stu-id="8359b-153">Name the project *:::no-loc(Razor):::PagesMovie* and select **:::no-loc(Create):::**.</span></span>
+1. <span data-ttu-id="8359b-153">將專案命名為 *Razor PagesMovie* ，然後選取 [] **Create** 。</span><span class="sxs-lookup"><span data-stu-id="8359b-153">Name the project *RazorPagesMovie* and select **Create**.</span></span>
 
-    ![macOS 為專案命名](razor-pages-start/_static/:::no-loc(Razor):::PagesMovie.png)
+    ![macOS 為專案命名](razor-pages-start/_static/RazorPagesMovie.png)
 
 <!-- End of VS tabs -->
 
@@ -146,9 +146,9 @@ ms.locfileid: "94360914"
 
 ### <a name="pages-folder"></a><span data-ttu-id="8359b-158">Pages 資料夾</span><span class="sxs-lookup"><span data-stu-id="8359b-158">Pages folder</span></span>
 
-<span data-ttu-id="8359b-159">包含 :::no-loc(Razor)::: 頁面和支援檔案。</span><span class="sxs-lookup"><span data-stu-id="8359b-159">Contains :::no-loc(Razor)::: pages and supporting files.</span></span> <span data-ttu-id="8359b-160">每個 :::no-loc(Razor)::: 頁面都是一對檔案：</span><span class="sxs-lookup"><span data-stu-id="8359b-160">Each :::no-loc(Razor)::: page is a pair of files:</span></span>
+<span data-ttu-id="8359b-159">包含 Razor 頁面和支援檔案。</span><span class="sxs-lookup"><span data-stu-id="8359b-159">Contains Razor pages and supporting files.</span></span> <span data-ttu-id="8359b-160">每個 Razor 頁面都是一對檔案：</span><span class="sxs-lookup"><span data-stu-id="8359b-160">Each Razor page is a pair of files:</span></span>
 
-* <span data-ttu-id="8359b-161">使用語法以 c # 程式碼撰寫 HTML 標籤的 *cshtml 檔案。* :::no-loc(Razor):::</span><span class="sxs-lookup"><span data-stu-id="8359b-161">A *.cshtml* file that has HTML markup with C# code using :::no-loc(Razor)::: syntax.</span></span>
+* <span data-ttu-id="8359b-161">使用語法以 c # 程式碼撰寫 HTML 標籤的 *cshtml 檔案。* Razor</span><span class="sxs-lookup"><span data-stu-id="8359b-161">A *.cshtml* file that has HTML markup with C# code using Razor syntax.</span></span>
 * <span data-ttu-id="8359b-162">具有處理頁面事件之 c # 程式碼的 *cshtml.cs 檔案。*</span><span class="sxs-lookup"><span data-stu-id="8359b-162">A *.cshtml.cs* file that has C# code that handles page events.</span></span>
 
 <span data-ttu-id="8359b-163">支援檔案的名稱以底線開頭。</span><span class="sxs-lookup"><span data-stu-id="8359b-163">Supporting files have names that begin with an underscore.</span></span> <span data-ttu-id="8359b-164">例如， *_Layout cshtml* 檔案會設定所有頁面通用的 UI 元素。</span><span class="sxs-lookup"><span data-stu-id="8359b-164">For example, the *_Layout.cshtml* file configures UI elements common to all pages.</span></span> <span data-ttu-id="8359b-165">此檔案會設定頁面頂端的導覽功能表和頁面底部的著作權標示。</span><span class="sxs-lookup"><span data-stu-id="8359b-165">This file sets up the navigation menu at the top of the page and the copyright notice at the bottom of the page.</span></span> <span data-ttu-id="8359b-166">如需詳細資訊，請參閱<xref:mvc/views/layout>。</span><span class="sxs-lookup"><span data-stu-id="8359b-166">For more information, see <xref:mvc/views/layout>.</span></span>
@@ -157,7 +157,7 @@ ms.locfileid: "94360914"
 
 <span data-ttu-id="8359b-168">包含靜態資產，例如 HTML 檔案、JavaScript 檔案和 CSS 檔案。</span><span class="sxs-lookup"><span data-stu-id="8359b-168">Contains static assets, like HTML files, JavaScript files, and CSS files.</span></span> <span data-ttu-id="8359b-169">如需詳細資訊，請參閱<xref:fundamentals/static-files>。</span><span class="sxs-lookup"><span data-stu-id="8359b-169">For more information, see <xref:fundamentals/static-files>.</span></span>
 
-### :::no-loc(appsettings.json):::
+### appsettings.json
 
 <span data-ttu-id="8359b-170">包含設定資料，例如連接字串。</span><span class="sxs-lookup"><span data-stu-id="8359b-170">Contains configuration data, like connection strings.</span></span> <span data-ttu-id="8359b-171">如需詳細資訊，請參閱<xref:fundamentals/configuration/index>。</span><span class="sxs-lookup"><span data-stu-id="8359b-171">For more information, see <xref:fundamentals/configuration/index>.</span></span>
 
@@ -180,22 +180,22 @@ ms.locfileid: "94360914"
 
 ::: moniker range=">= aspnetcore-3.0 < aspnetcore-5.0"
 
-<span data-ttu-id="8359b-180">這是一個系列的第一個教學課程，教您建立 ASP.NET Core :::no-loc(Razor)::: 頁面 web 應用程式的基本概念。</span><span class="sxs-lookup"><span data-stu-id="8359b-180">This is the first tutorial of a series that teaches the basics of building an ASP.NET Core :::no-loc(Razor)::: Pages web app.</span></span>
+<span data-ttu-id="8359b-180">這是一個系列的第一個教學課程，教您建立 ASP.NET Core Razor 頁面 web 應用程式的基本概念。</span><span class="sxs-lookup"><span data-stu-id="8359b-180">This is the first tutorial of a series that teaches the basics of building an ASP.NET Core Razor Pages web app.</span></span>
 
-<span data-ttu-id="8359b-181">如需更高階的簡介，適用于熟悉控制器和 views 的開發人員，請參閱 [ :::no-loc(Razor)::: 頁面簡介](xref:razor-pages/index)。</span><span class="sxs-lookup"><span data-stu-id="8359b-181">For a more advanced introduction aimed at developers who are familiar with controllers and views, see [Introduction to :::no-loc(Razor)::: Pages](xref:razor-pages/index).</span></span>
+<span data-ttu-id="8359b-181">如需更高階的簡介，適用于熟悉控制器和 views 的開發人員，請參閱 [ Razor 頁面簡介](xref:razor-pages/index)。</span><span class="sxs-lookup"><span data-stu-id="8359b-181">For a more advanced introduction aimed at developers who are familiar with controllers and views, see [Introduction to Razor Pages](xref:razor-pages/index).</span></span>
 
 <span data-ttu-id="8359b-182">在本系列結束時，您將會有一個可管理電影資料庫的應用程式。</span><span class="sxs-lookup"><span data-stu-id="8359b-182">At the end of the series, you'll have an app that manages a database of movies.</span></span>  
 
-<span data-ttu-id="8359b-183">[檢視或下載範例程式碼](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/tutorials/razor-pages/razor-pages-start/sample/:::no-loc(Razor):::PagesMovie30) ([如何下載](xref:index#how-to-download-a-sample))。</span><span class="sxs-lookup"><span data-stu-id="8359b-183">[View or download sample code](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/tutorials/razor-pages/razor-pages-start/sample/:::no-loc(Razor):::PagesMovie30) ([how to download](xref:index#how-to-download-a-sample)).</span></span>
+<span data-ttu-id="8359b-183">[檢視或下載範例程式碼](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/tutorials/razor-pages/razor-pages-start/sample/RazorPagesMovie30) ([如何下載](xref:index#how-to-download-a-sample))。</span><span class="sxs-lookup"><span data-stu-id="8359b-183">[View or download sample code](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/tutorials/razor-pages/razor-pages-start/sample/RazorPagesMovie30) ([how to download](xref:index#how-to-download-a-sample)).</span></span>
 
 <span data-ttu-id="8359b-184">在本教學課程中，您：</span><span class="sxs-lookup"><span data-stu-id="8359b-184">In this tutorial, you:</span></span>
 
 > [!div class="checklist"]
-> * <span data-ttu-id="8359b-185">:::no-loc(Create)::::::no-loc(Razor):::頁面 web 應用程式。</span><span class="sxs-lookup"><span data-stu-id="8359b-185">:::no-loc(Create)::: a :::no-loc(Razor)::: Pages web app.</span></span>
+> * <span data-ttu-id="8359b-185">CreateRazor頁面 web 應用程式。</span><span class="sxs-lookup"><span data-stu-id="8359b-185">Create a Razor Pages web app.</span></span>
 > * <span data-ttu-id="8359b-186">執行應用程式。</span><span class="sxs-lookup"><span data-stu-id="8359b-186">Run the app.</span></span>
 > * <span data-ttu-id="8359b-187">檢查專案檔。</span><span class="sxs-lookup"><span data-stu-id="8359b-187">Examine the project files.</span></span>
 
-<span data-ttu-id="8359b-188">在本教學課程結尾，您將會有一個工作 :::no-loc(Razor)::: 頁面 web 應用程式，您將在稍後的教學課程中建立此應用程式。</span><span class="sxs-lookup"><span data-stu-id="8359b-188">At the end of this tutorial, you'll have a working :::no-loc(Razor)::: Pages web app that you'll build on in later tutorials.</span></span>
+<span data-ttu-id="8359b-188">在本教學課程結尾，您將會有一個工作 Razor 頁面 web 應用程式，您將在稍後的教學課程中建立此應用程式。</span><span class="sxs-lookup"><span data-stu-id="8359b-188">At the end of this tutorial, you'll have a working Razor Pages web app that you'll build on in later tutorials.</span></span>
 
 ![Home 或：：：非 loc (Index) ：：： page](razor-pages-start/_static/home2.2.png)
 
@@ -215,17 +215,17 @@ ms.locfileid: "94360914"
 
 ---
 
-## <a name="no-loccreate-a-no-locrazor-pages-web-app"></a><span data-ttu-id="8359b-194">:::no-loc(Create)::::::no-loc(Razor):::頁面 web 應用程式</span><span class="sxs-lookup"><span data-stu-id="8359b-194">:::no-loc(Create)::: a :::no-loc(Razor)::: Pages web app</span></span>
+## <a name="no-loccreate-a-no-locrazor-pages-web-app"></a><span data-ttu-id="8359b-194">CreateRazor頁面 web 應用程式</span><span class="sxs-lookup"><span data-stu-id="8359b-194">Create a Razor Pages web app</span></span>
 
 # <a name="visual-studio"></a>[<span data-ttu-id="8359b-195">Visual Studio</span><span class="sxs-lookup"><span data-stu-id="8359b-195">Visual Studio</span></span>](#tab/visual-studio)
 
 * <span data-ttu-id="8359b-196">從 Visual Studio 的 [檔案] 功能表中，選取 [新增] **[專案]** >  。</span><span class="sxs-lookup"><span data-stu-id="8359b-196">From the Visual Studio **File** menu, select **New** > **Project**.</span></span>
-* <span data-ttu-id="8359b-197">:::no-loc(Create)::: 新的 ASP.NET Core Web 應用程式，然後選取 **[下一步]** 。</span><span class="sxs-lookup"><span data-stu-id="8359b-197">:::no-loc(Create)::: a new ASP.NET Core Web Application and select **Next**.</span></span>
+* <span data-ttu-id="8359b-197">Create 新的 ASP.NET Core Web 應用程式，然後選取 **[下一步]** 。</span><span class="sxs-lookup"><span data-stu-id="8359b-197">Create a new ASP.NET Core Web Application and select **Next**.</span></span>
   <span data-ttu-id="8359b-198">![新增 ASP.NET Core Web 應用程式](razor-pages-start/_static/np_2.1.png)</span><span class="sxs-lookup"><span data-stu-id="8359b-198">![new ASP.NET Core Web Application](razor-pages-start/_static/np_2.1.png)</span></span>
-* <span data-ttu-id="8359b-199">將專案命名為 **:::no-loc(Razor)::: PagesMovie** 。</span><span class="sxs-lookup"><span data-stu-id="8359b-199">Name the project **:::no-loc(Razor):::PagesMovie**.</span></span> <span data-ttu-id="8359b-200">請務必將專案命名為 *:::no-loc(Razor)::: PagesMovie* ，如此一來，當您複製並貼上程式碼時，命名空間才會相符。</span><span class="sxs-lookup"><span data-stu-id="8359b-200">It's important to name the project *:::no-loc(Razor):::PagesMovie* so the namespaces will match when you copy and paste code.</span></span>
+* <span data-ttu-id="8359b-199">將專案命名為 **Razor PagesMovie** 。</span><span class="sxs-lookup"><span data-stu-id="8359b-199">Name the project **RazorPagesMovie**.</span></span> <span data-ttu-id="8359b-200">請務必將專案命名為 *Razor PagesMovie* ，如此一來，當您複製並貼上程式碼時，命名空間才會相符。</span><span class="sxs-lookup"><span data-stu-id="8359b-200">It's important to name the project *RazorPagesMovie* so the namespaces will match when you copy and paste code.</span></span>
   <span data-ttu-id="8359b-201">![新增 ASP.NET Core Web 應用程式](razor-pages-start/_static/config.png)</span><span class="sxs-lookup"><span data-stu-id="8359b-201">![new ASP.NET Core Web Application](razor-pages-start/_static/config.png)</span></span>
 
-* <span data-ttu-id="8359b-202">在 [ **Web 應用程式** ] 下拉式清單中選取 **ASP.NET Core 3.1** ，然後選取 [] **:::no-loc(Create):::** 。</span><span class="sxs-lookup"><span data-stu-id="8359b-202">Select **ASP.NET Core 3.1** in the dropdown, **Web Application** , and then select **:::no-loc(Create):::**.</span></span>
+* <span data-ttu-id="8359b-202">在 [ **Web 應用程式** ] 下拉式清單中選取 **ASP.NET Core 3.1** ，然後選取 [] **Create** 。</span><span class="sxs-lookup"><span data-stu-id="8359b-202">Select **ASP.NET Core 3.1** in the dropdown, **Web Application** , and then select **Create**.</span></span>
 
 ![新增 ASP.NET Core Web 應用程式](razor-pages-start/_static/3/npx.png)
 
@@ -242,14 +242,14 @@ ms.locfileid: "94360914"
 * <span data-ttu-id="8359b-209">執行下列命令：</span><span class="sxs-lookup"><span data-stu-id="8359b-209">Run the following commands:</span></span>
 
   ```dotnetcli
-  dotnet new webapp -o :::no-loc(Razor):::PagesMovie
-  code -r :::no-loc(Razor):::PagesMovie
+  dotnet new webapp -o RazorPagesMovie
+  code -r RazorPagesMovie
   ```
 
-  * <span data-ttu-id="8359b-210">此 `dotnet new` 命令會 :::no-loc(Razor)::: 在 *:::no-loc(Razor)::: PagesMovie* 資料夾中建立新的頁面專案。</span><span class="sxs-lookup"><span data-stu-id="8359b-210">The `dotnet new` command creates a new :::no-loc(Razor)::: Pages project in the *:::no-loc(Razor):::PagesMovie* folder.</span></span>
-  * <span data-ttu-id="8359b-211">此 `code` 命令會在 Visual Studio Code 的目前實例中開啟 [ *:::no-loc(Razor)::: PagesMovie* ] 資料夾。</span><span class="sxs-lookup"><span data-stu-id="8359b-211">The `code` command opens the *:::no-loc(Razor):::PagesMovie* folder in the current instance of Visual Studio Code.</span></span>
+  * <span data-ttu-id="8359b-210">此 `dotnet new` 命令會 Razor 在 *Razor PagesMovie* 資料夾中建立新的頁面專案。</span><span class="sxs-lookup"><span data-stu-id="8359b-210">The `dotnet new` command creates a new Razor Pages project in the *RazorPagesMovie* folder.</span></span>
+  * <span data-ttu-id="8359b-211">此 `code` 命令會在 Visual Studio Code 的目前實例中開啟 [ *Razor PagesMovie* ] 資料夾。</span><span class="sxs-lookup"><span data-stu-id="8359b-211">The `code` command opens the *RazorPagesMovie* folder in the current instance of Visual Studio Code.</span></span>
 
-* <span data-ttu-id="8359b-212">在狀態列的 OmniSharp 火焰圖示變成綠色之後，會有一個對話方塊要求 **從 ' PagesMovie ' 中找不到建立和偵測所需的資產 :::no-loc(Razor)::: 。要新增它們嗎？**</span><span class="sxs-lookup"><span data-stu-id="8359b-212">After the status bar's OmniSharp flame icon turns green, a dialog asks **Required assets to build and debug are missing from ':::no-loc(Razor):::PagesMovie'. Add them?**</span></span> <span data-ttu-id="8359b-213">選取 [是]。</span><span class="sxs-lookup"><span data-stu-id="8359b-213">Select **Yes**.</span></span>
+* <span data-ttu-id="8359b-212">在狀態列的 OmniSharp 火焰圖示變成綠色之後，會有一個對話方塊要求 **從 ' PagesMovie ' 中找不到建立和偵測所需的資產 Razor 。要新增它們嗎？**</span><span class="sxs-lookup"><span data-stu-id="8359b-212">After the status bar's OmniSharp flame icon turns green, a dialog asks **Required assets to build and debug are missing from 'RazorPagesMovie'. Add them?**</span></span> <span data-ttu-id="8359b-213">選取 [是]。</span><span class="sxs-lookup"><span data-stu-id="8359b-213">Select **Yes**.</span></span>
 
   <span data-ttu-id="8359b-214">*.vscode* 目錄 (其中包含 *launch.json* 和 *tasks.json* 檔案) 會被新增至專案的根目錄。</span><span class="sxs-lookup"><span data-stu-id="8359b-214">A *.vscode* directory, containing *launch.json* and *tasks.json* files, is added to the project's root directory.</span></span>
 
@@ -270,9 +270,9 @@ ms.locfileid: "94360914"
 
   <span data-ttu-id="8359b-224">選取 [下一步]。</span><span class="sxs-lookup"><span data-stu-id="8359b-224">Select **Next**.</span></span>
 
-* <span data-ttu-id="8359b-225">將專案命名為 **:::no-loc(Razor)::: PagesMovie** ，然後選取 **:::no-loc(Create):::** 。</span><span class="sxs-lookup"><span data-stu-id="8359b-225">Name the project **:::no-loc(Razor):::PagesMovie** , and then select **:::no-loc(Create):::**.</span></span>
+* <span data-ttu-id="8359b-225">將專案命名為 **Razor PagesMovie** ，然後選取 **Create** 。</span><span class="sxs-lookup"><span data-stu-id="8359b-225">Name the project **RazorPagesMovie** , and then select **Create**.</span></span>
 
-  ![macOS 為專案命名](razor-pages-start/_static/:::no-loc(Razor):::PagesMovie.png)
+  ![macOS 為專案命名](razor-pages-start/_static/RazorPagesMovie.png)
 
 <!-- End of VS tabs -->
 
@@ -288,9 +288,9 @@ ms.locfileid: "94360914"
 
 ### <a name="pages-folder"></a><span data-ttu-id="8359b-230">Pages 資料夾</span><span class="sxs-lookup"><span data-stu-id="8359b-230">Pages folder</span></span>
 
-<span data-ttu-id="8359b-231">包含 :::no-loc(Razor)::: 頁面和支援檔案。</span><span class="sxs-lookup"><span data-stu-id="8359b-231">Contains :::no-loc(Razor)::: pages and supporting files.</span></span> <span data-ttu-id="8359b-232">每個 :::no-loc(Razor)::: 頁面都是一對檔案：</span><span class="sxs-lookup"><span data-stu-id="8359b-232">Each :::no-loc(Razor)::: page is a pair of files:</span></span>
+<span data-ttu-id="8359b-231">包含 Razor 頁面和支援檔案。</span><span class="sxs-lookup"><span data-stu-id="8359b-231">Contains Razor pages and supporting files.</span></span> <span data-ttu-id="8359b-232">每個 Razor 頁面都是一對檔案：</span><span class="sxs-lookup"><span data-stu-id="8359b-232">Each Razor page is a pair of files:</span></span>
 
-* <span data-ttu-id="8359b-233">使用語法以 c # 程式碼撰寫 HTML 標籤的 *cshtml 檔案。* :::no-loc(Razor):::</span><span class="sxs-lookup"><span data-stu-id="8359b-233">A *.cshtml* file that has HTML markup with C# code using :::no-loc(Razor)::: syntax.</span></span>
+* <span data-ttu-id="8359b-233">使用語法以 c # 程式碼撰寫 HTML 標籤的 *cshtml 檔案。* Razor</span><span class="sxs-lookup"><span data-stu-id="8359b-233">A *.cshtml* file that has HTML markup with C# code using Razor syntax.</span></span>
 * <span data-ttu-id="8359b-234">具有處理頁面事件之 c # 程式碼的 *cshtml.cs 檔案。*</span><span class="sxs-lookup"><span data-stu-id="8359b-234">A *.cshtml.cs* file that has C# code that handles page events.</span></span>
 
 <span data-ttu-id="8359b-235">支援檔案的名稱以底線開頭。</span><span class="sxs-lookup"><span data-stu-id="8359b-235">Supporting files have names that begin with an underscore.</span></span> <span data-ttu-id="8359b-236">例如， *_Layout cshtml* 檔案會設定所有頁面通用的 UI 元素。</span><span class="sxs-lookup"><span data-stu-id="8359b-236">For example, the *_Layout.cshtml* file configures UI elements common to all pages.</span></span> <span data-ttu-id="8359b-237">此檔案會設定頁面頂端的導覽功能表和頁面底部的著作權標示。</span><span class="sxs-lookup"><span data-stu-id="8359b-237">This file sets up the navigation menu at the top of the page and the copyright notice at the bottom of the page.</span></span> <span data-ttu-id="8359b-238">如需詳細資訊，請參閱<xref:mvc/views/layout>。</span><span class="sxs-lookup"><span data-stu-id="8359b-238">For more information, see <xref:mvc/views/layout>.</span></span>
@@ -322,9 +322,9 @@ ms.locfileid: "94360914"
 
 ::: moniker range="< aspnetcore-3.0"
 
-<span data-ttu-id="8359b-253">這是本系列的第一個教學課程。</span><span class="sxs-lookup"><span data-stu-id="8359b-253">This is the first tutorial of a series.</span></span> <span data-ttu-id="8359b-254">[此系列](xref:tutorials/razor-pages/index) 會教您建立 ASP.NET Core :::no-loc(Razor)::: 頁面 web 應用程式的基本概念。</span><span class="sxs-lookup"><span data-stu-id="8359b-254">[The series](xref:tutorials/razor-pages/index) teaches the basics of building an ASP.NET Core :::no-loc(Razor)::: Pages web app.</span></span>
+<span data-ttu-id="8359b-253">這是本系列的第一個教學課程。</span><span class="sxs-lookup"><span data-stu-id="8359b-253">This is the first tutorial of a series.</span></span> <span data-ttu-id="8359b-254">[此系列](xref:tutorials/razor-pages/index) 會教您建立 ASP.NET Core Razor 頁面 web 應用程式的基本概念。</span><span class="sxs-lookup"><span data-stu-id="8359b-254">[The series](xref:tutorials/razor-pages/index) teaches the basics of building an ASP.NET Core Razor Pages web app.</span></span>
 
-<span data-ttu-id="8359b-255">如需更高階的簡介，適用于熟悉控制器和 views 的開發人員，請參閱 [ :::no-loc(Razor)::: 頁面簡介](xref:razor-pages/index)。</span><span class="sxs-lookup"><span data-stu-id="8359b-255">For a more advanced introduction aimed at developers who are familiar with controllers and views, see [Introduction to :::no-loc(Razor)::: Pages](xref:razor-pages/index).</span></span>
+<span data-ttu-id="8359b-255">如需更高階的簡介，適用于熟悉控制器和 views 的開發人員，請參閱 [ Razor 頁面簡介](xref:razor-pages/index)。</span><span class="sxs-lookup"><span data-stu-id="8359b-255">For a more advanced introduction aimed at developers who are familiar with controllers and views, see [Introduction to Razor Pages](xref:razor-pages/index).</span></span>
 
 <span data-ttu-id="8359b-256">在本系列結束時，您將會有一個可管理電影資料庫的應用程式。</span><span class="sxs-lookup"><span data-stu-id="8359b-256">At the end of the series, you'll have an app that manages a database of movies.</span></span>  
 
@@ -333,11 +333,11 @@ ms.locfileid: "94360914"
 <span data-ttu-id="8359b-258">在本教學課程中，您：</span><span class="sxs-lookup"><span data-stu-id="8359b-258">In this tutorial, you:</span></span>
 
 > [!div class="checklist"]
-> * <span data-ttu-id="8359b-259">:::no-loc(Create)::::::no-loc(Razor):::頁面 web 應用程式。</span><span class="sxs-lookup"><span data-stu-id="8359b-259">:::no-loc(Create)::: a :::no-loc(Razor)::: Pages web app.</span></span>
+> * <span data-ttu-id="8359b-259">CreateRazor頁面 web 應用程式。</span><span class="sxs-lookup"><span data-stu-id="8359b-259">Create a Razor Pages web app.</span></span>
 > * <span data-ttu-id="8359b-260">執行應用程式。</span><span class="sxs-lookup"><span data-stu-id="8359b-260">Run the app.</span></span>
 > * <span data-ttu-id="8359b-261">檢查專案檔。</span><span class="sxs-lookup"><span data-stu-id="8359b-261">Examine the project files.</span></span>
 
-<span data-ttu-id="8359b-262">在本教學課程結尾，您將會有一個工作 :::no-loc(Razor)::: 頁面 web 應用程式，您將在稍後的教學課程中建立此應用程式。</span><span class="sxs-lookup"><span data-stu-id="8359b-262">At the end of this tutorial, you'll have a working :::no-loc(Razor)::: Pages web app that you'll build on in later tutorials.</span></span>
+<span data-ttu-id="8359b-262">在本教學課程結尾，您將會有一個工作 Razor 頁面 web 應用程式，您將在稍後的教學課程中建立此應用程式。</span><span class="sxs-lookup"><span data-stu-id="8359b-262">At the end of this tutorial, you'll have a working Razor Pages web app that you'll build on in later tutorials.</span></span>
 
 ![Home 或：：：非 loc (Index) ：：： page](razor-pages-start/_static/home2.2.png)
 
@@ -357,21 +357,21 @@ ms.locfileid: "94360914"
 
 ---
 
-## <a name="no-loccreate-a-no-locrazor-pages-web-app"></a><span data-ttu-id="8359b-268">:::no-loc(Create)::::::no-loc(Razor):::頁面 web 應用程式</span><span class="sxs-lookup"><span data-stu-id="8359b-268">:::no-loc(Create)::: a :::no-loc(Razor)::: Pages web app</span></span>
+## <a name="no-loccreate-a-no-locrazor-pages-web-app"></a><span data-ttu-id="8359b-268">CreateRazor頁面 web 應用程式</span><span class="sxs-lookup"><span data-stu-id="8359b-268">Create a Razor Pages web app</span></span>
 
 # <a name="visual-studio"></a>[<span data-ttu-id="8359b-269">Visual Studio</span><span class="sxs-lookup"><span data-stu-id="8359b-269">Visual Studio</span></span>](#tab/visual-studio)
 
 * <span data-ttu-id="8359b-270">從 Visual Studio 的 [檔案] 功能表中，選取 [新增] **[專案]** >  。</span><span class="sxs-lookup"><span data-stu-id="8359b-270">From the Visual Studio **File** menu, select **New** > **Project**.</span></span>
 
-* <span data-ttu-id="8359b-271">:::no-loc(Create)::: 新的 ASP.NET Core Web 應用程式，然後選取 **[下一步]** 。</span><span class="sxs-lookup"><span data-stu-id="8359b-271">:::no-loc(Create)::: a new ASP.NET Core Web Application and select **Next**.</span></span>
+* <span data-ttu-id="8359b-271">Create 新的 ASP.NET Core Web 應用程式，然後選取 **[下一步]** 。</span><span class="sxs-lookup"><span data-stu-id="8359b-271">Create a new ASP.NET Core Web Application and select **Next**.</span></span>
 
   ![新增 ASP.NET Core Web 應用程式](razor-pages-start/_static/np_2.1.png)
 
-* <span data-ttu-id="8359b-273">將專案命名為 **:::no-loc(Razor)::: PagesMovie** 。</span><span class="sxs-lookup"><span data-stu-id="8359b-273">Name the project **:::no-loc(Razor):::PagesMovie**.</span></span> <span data-ttu-id="8359b-274">請務必將專案命名為 *:::no-loc(Razor)::: PagesMovie* ，如此一來，當您複製並貼上程式碼時，命名空間才會相符。</span><span class="sxs-lookup"><span data-stu-id="8359b-274">It's important to name the project *:::no-loc(Razor):::PagesMovie* so the namespaces will match when you copy and paste code.</span></span>
+* <span data-ttu-id="8359b-273">將專案命名為 **Razor PagesMovie** 。</span><span class="sxs-lookup"><span data-stu-id="8359b-273">Name the project **RazorPagesMovie**.</span></span> <span data-ttu-id="8359b-274">請務必將專案命名為 *Razor PagesMovie* ，如此一來，當您複製並貼上程式碼時，命名空間才會相符。</span><span class="sxs-lookup"><span data-stu-id="8359b-274">It's important to name the project *RazorPagesMovie* so the namespaces will match when you copy and paste code.</span></span>
 
   ![新增 ASP.NET Core Web 應用程式](razor-pages-start/_static/config.png)
 
-* <span data-ttu-id="8359b-276">在 [ **Web 應用程式** ] 下拉式清單中選取 **ASP.NET Core 2.2** ，然後選取 [] **:::no-loc(Create):::** 。</span><span class="sxs-lookup"><span data-stu-id="8359b-276">Select **ASP.NET Core 2.2** in the dropdown, **Web Application** , and then select **:::no-loc(Create):::**.</span></span>
+* <span data-ttu-id="8359b-276">在 [ **Web 應用程式** ] 下拉式清單中選取 **ASP.NET Core 2.2** ，然後選取 [] **Create** 。</span><span class="sxs-lookup"><span data-stu-id="8359b-276">Select **ASP.NET Core 2.2** in the dropdown, **Web Application** , and then select **Create**.</span></span>
 
 ![新增 ASP.NET Core Web 應用程式](razor-pages-start/_static/np_2_2.2.png)
 
@@ -388,14 +388,14 @@ ms.locfileid: "94360914"
 * <span data-ttu-id="8359b-283">執行下列命令：</span><span class="sxs-lookup"><span data-stu-id="8359b-283">Run the following commands:</span></span>
 
   ```dotnetcli
-  dotnet new webapp -o :::no-loc(Razor):::PagesMovie
-  code -r :::no-loc(Razor):::PagesMovie
+  dotnet new webapp -o RazorPagesMovie
+  code -r RazorPagesMovie
   ```
 
-  * <span data-ttu-id="8359b-284">此 `dotnet new` 命令會 :::no-loc(Razor)::: 在 *:::no-loc(Razor)::: PagesMovie* 資料夾中建立新的頁面專案。</span><span class="sxs-lookup"><span data-stu-id="8359b-284">The `dotnet new` command creates a new :::no-loc(Razor)::: Pages project in the *:::no-loc(Razor):::PagesMovie* folder.</span></span>
-  * <span data-ttu-id="8359b-285">此 `code` 命令會在 Visual Studio Code 的目前實例中開啟 [ *:::no-loc(Razor)::: PagesMovie* ] 資料夾。</span><span class="sxs-lookup"><span data-stu-id="8359b-285">The `code` command opens the *:::no-loc(Razor):::PagesMovie* folder in the current instance of Visual Studio Code.</span></span>
+  * <span data-ttu-id="8359b-284">此 `dotnet new` 命令會 Razor 在 *Razor PagesMovie* 資料夾中建立新的頁面專案。</span><span class="sxs-lookup"><span data-stu-id="8359b-284">The `dotnet new` command creates a new Razor Pages project in the *RazorPagesMovie* folder.</span></span>
+  * <span data-ttu-id="8359b-285">此 `code` 命令會在 Visual Studio Code 的目前實例中開啟 [ *Razor PagesMovie* ] 資料夾。</span><span class="sxs-lookup"><span data-stu-id="8359b-285">The `code` command opens the *RazorPagesMovie* folder in the current instance of Visual Studio Code.</span></span>
 
-* <span data-ttu-id="8359b-286">在狀態列的 OmniSharp 火焰圖示變成綠色之後，會有一個對話方塊要求 **從 ' PagesMovie ' 中找不到建立和偵測所需的資產 :::no-loc(Razor)::: 。要新增它們嗎？**</span><span class="sxs-lookup"><span data-stu-id="8359b-286">After the status bar's OmniSharp flame icon turns green, a dialog asks **Required assets to build and debug are missing from ':::no-loc(Razor):::PagesMovie'. Add them?**</span></span> <span data-ttu-id="8359b-287">選取 [是]。</span><span class="sxs-lookup"><span data-stu-id="8359b-287">Select **Yes**.</span></span>
+* <span data-ttu-id="8359b-286">在狀態列的 OmniSharp 火焰圖示變成綠色之後，會有一個對話方塊要求 **從 ' PagesMovie ' 中找不到建立和偵測所需的資產 Razor 。要新增它們嗎？**</span><span class="sxs-lookup"><span data-stu-id="8359b-286">After the status bar's OmniSharp flame icon turns green, a dialog asks **Required assets to build and debug are missing from 'RazorPagesMovie'. Add them?**</span></span> <span data-ttu-id="8359b-287">選取 [是]。</span><span class="sxs-lookup"><span data-stu-id="8359b-287">Select **Yes**.</span></span>
 
   <span data-ttu-id="8359b-288">*.vscode* 目錄 (其中包含 *launch.json* 和 *tasks.json* 檔案) 會被新增至專案的根目錄。</span><span class="sxs-lookup"><span data-stu-id="8359b-288">A *.vscode* directory, containing *launch.json* and *tasks.json* files, is added to the project's root directory.</span></span>
 
@@ -414,9 +414,9 @@ ms.locfileid: "94360914"
 
   <span data-ttu-id="8359b-297">選取 [下一步]。</span><span class="sxs-lookup"><span data-stu-id="8359b-297">Select **Next**.</span></span>
 
-* <span data-ttu-id="8359b-298">將專案命名為 **:::no-loc(Razor)::: PagesMovie** ，然後選取 **:::no-loc(Create):::** 。</span><span class="sxs-lookup"><span data-stu-id="8359b-298">Name the project **:::no-loc(Razor):::PagesMovie** , and then select **:::no-loc(Create):::**.</span></span>
+* <span data-ttu-id="8359b-298">將專案命名為 **Razor PagesMovie** ，然後選取 **Create** 。</span><span class="sxs-lookup"><span data-stu-id="8359b-298">Name the project **RazorPagesMovie** , and then select **Create**.</span></span>
 
-  ![nameproj](razor-pages-start/_static/:::no-loc(Razor):::PagesMovie.png)
+  ![nameproj](razor-pages-start/_static/RazorPagesMovie.png)
 
 <!-- End of VS tabs -->
 
@@ -495,14 +495,14 @@ ms.locfileid: "94360914"
 
 ### <a name="pages-folder"></a><span data-ttu-id="8359b-340">Pages 資料夾</span><span class="sxs-lookup"><span data-stu-id="8359b-340">Pages folder</span></span>
 
-<span data-ttu-id="8359b-341">包含 :::no-loc(Razor)::: 頁面和支援檔案。</span><span class="sxs-lookup"><span data-stu-id="8359b-341">Contains :::no-loc(Razor)::: pages and supporting files.</span></span> <span data-ttu-id="8359b-342">每個 :::no-loc(Razor)::: 頁面都是一對檔案：</span><span class="sxs-lookup"><span data-stu-id="8359b-342">Each :::no-loc(Razor)::: page is a pair of files:</span></span>
+<span data-ttu-id="8359b-341">包含 Razor 頁面和支援檔案。</span><span class="sxs-lookup"><span data-stu-id="8359b-341">Contains Razor pages and supporting files.</span></span> <span data-ttu-id="8359b-342">每個 Razor 頁面都是一對檔案：</span><span class="sxs-lookup"><span data-stu-id="8359b-342">Each Razor page is a pair of files:</span></span>
 
-* <span data-ttu-id="8359b-343">使用語法以 c # 程式碼撰寫 HTML 標籤的 *cshtml 檔案。* :::no-loc(Razor):::</span><span class="sxs-lookup"><span data-stu-id="8359b-343">A *.cshtml* file that has HTML markup with C# code using :::no-loc(Razor)::: syntax.</span></span>
+* <span data-ttu-id="8359b-343">使用語法以 c # 程式碼撰寫 HTML 標籤的 *cshtml 檔案。* Razor</span><span class="sxs-lookup"><span data-stu-id="8359b-343">A *.cshtml* file that has HTML markup with C# code using Razor syntax.</span></span>
 * <span data-ttu-id="8359b-344">具有處理頁面事件之 c # 程式碼的 *cshtml.cs 檔案。*</span><span class="sxs-lookup"><span data-stu-id="8359b-344">A *.cshtml.cs* file that has C# code that handles page events.</span></span>
 
 <span data-ttu-id="8359b-345">支援檔案的名稱以底線開頭。</span><span class="sxs-lookup"><span data-stu-id="8359b-345">Supporting files have names that begin with an underscore.</span></span> <span data-ttu-id="8359b-346">例如， *_Layout cshtml* 檔案會設定所有頁面通用的 UI 元素。</span><span class="sxs-lookup"><span data-stu-id="8359b-346">For example, the *_Layout.cshtml* file configures UI elements common to all pages.</span></span> <span data-ttu-id="8359b-347">此檔案會設定頁面頂端的導覽功能表和頁面底部的著作權標示。</span><span class="sxs-lookup"><span data-stu-id="8359b-347">This file sets up the navigation menu at the top of the page and the copyright notice at the bottom of the page.</span></span> <span data-ttu-id="8359b-348">如需詳細資訊，請參閱<xref:mvc/views/layout>。</span><span class="sxs-lookup"><span data-stu-id="8359b-348">For more information, see <xref:mvc/views/layout>.</span></span>
 
-<span data-ttu-id="8359b-349">:::no-loc(Razor)::: 頁面衍生自 `PageModel` 。</span><span class="sxs-lookup"><span data-stu-id="8359b-349">:::no-loc(Razor)::: Pages are derived from `PageModel`.</span></span> <span data-ttu-id="8359b-350">依照慣例， `PageModel` 衍生的類別會命名為 `<PageName>Model` 。</span><span class="sxs-lookup"><span data-stu-id="8359b-350">By convention, the `PageModel`-derived class is named `<PageName>Model`.</span></span>
+<span data-ttu-id="8359b-349">Razor 頁面衍生自 `PageModel` 。</span><span class="sxs-lookup"><span data-stu-id="8359b-349">Razor Pages are derived from `PageModel`.</span></span> <span data-ttu-id="8359b-350">依照慣例， `PageModel` 衍生的類別會命名為 `<PageName>Model` 。</span><span class="sxs-lookup"><span data-stu-id="8359b-350">By convention, the `PageModel`-derived class is named `<PageName>Model`.</span></span>
 
 ### <a name="wwwroot-folder"></a><span data-ttu-id="8359b-351">wwwroot 資料夾</span><span class="sxs-lookup"><span data-stu-id="8359b-351">wwwroot folder</span></span>
 
@@ -518,7 +518,7 @@ ms.locfileid: "94360914"
 
 ### <a name="startupcs"></a><span data-ttu-id="8359b-360">Startup.cs</span><span class="sxs-lookup"><span data-stu-id="8359b-360">Startup.cs</span></span>
 
-<span data-ttu-id="8359b-361">包含設定應用程式行為的程式碼，例如是否需要的同意 :::no-loc(cookie)::: 。</span><span class="sxs-lookup"><span data-stu-id="8359b-361">Contains code that configures app behavior, such as whether it requires consent for :::no-loc(cookie):::s.</span></span> <span data-ttu-id="8359b-362">如需詳細資訊，請參閱<xref:fundamentals/startup>。</span><span class="sxs-lookup"><span data-stu-id="8359b-362">For more information, see <xref:fundamentals/startup>.</span></span>
+<span data-ttu-id="8359b-361">包含設定應用程式行為的程式碼，例如是否需要的同意 cookie 。</span><span class="sxs-lookup"><span data-stu-id="8359b-361">Contains code that configures app behavior, such as whether it requires consent for cookies.</span></span> <span data-ttu-id="8359b-362">如需詳細資訊，請參閱<xref:fundamentals/startup>。</span><span class="sxs-lookup"><span data-stu-id="8359b-362">For more information, see <xref:fundamentals/startup>.</span></span>
 
 ## <a name="additional-resources"></a><span data-ttu-id="8359b-363">其他資源</span><span class="sxs-lookup"><span data-stu-id="8359b-363">Additional resources</span></span>
 

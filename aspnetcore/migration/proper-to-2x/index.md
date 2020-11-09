@@ -5,17 +5,17 @@ description: 取得將現有 ASP.NET MVC 或 Web API 應用程式，移轉至 AS
 ms.author: scaddie
 ms.date: 10/18/2019
 no-loc:
-- ':::no-loc(appsettings.json):::'
-- ':::no-loc(ASP.NET Core Identity):::'
-- ':::no-loc(cookie):::'
-- ':::no-loc(Cookie):::'
-- ':::no-loc(Blazor):::'
-- ':::no-loc(Blazor Server):::'
-- ':::no-loc(Blazor WebAssembly):::'
-- ':::no-loc(Identity):::'
-- ":::no-loc(Let's Encrypt):::"
-- ':::no-loc(Razor):::'
-- ':::no-loc(SignalR):::'
+- 'appsettings.json'
+- 'ASP.NET Core Identity'
+- 'cookie'
+- 'Cookie'
+- 'Blazor'
+- 'Blazor Server'
+- 'Blazor WebAssembly'
+- 'Identity'
+- "Let's Encrypt"
+- 'Razor'
+- 'SignalR'
 uid: migration/proper-to-2x/index
 ms.openlocfilehash: 059ddc18d0c531efaba8aab916ddbb27b42b5e2c
 ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
@@ -100,7 +100,7 @@ ms.locfileid: "93053549"
 
 [!code-csharp[](samples/read-webconfig.cs)]
 
-<span data-ttu-id="896be-158">ASP.NET Core 可將應用程式的組態資料儲存在任何檔案中，將它們當成中介軟體啟動程序的一部分載入。</span><span class="sxs-lookup"><span data-stu-id="896be-158">ASP.NET Core can store configuration data for the application in any file and load them as part of middleware bootstrapping.</span></span> <span data-ttu-id="896be-159">專案範本中使用的預設檔案 *:::no-loc(appsettings.json):::* 如下：</span><span class="sxs-lookup"><span data-stu-id="896be-159">The default file used in the project templates is *:::no-loc(appsettings.json):::* :</span></span>
+<span data-ttu-id="896be-158">ASP.NET Core 可將應用程式的組態資料儲存在任何檔案中，將它們當成中介軟體啟動程序的一部分載入。</span><span class="sxs-lookup"><span data-stu-id="896be-158">ASP.NET Core can store configuration data for the application in any file and load them as part of middleware bootstrapping.</span></span> <span data-ttu-id="896be-159">專案範本中使用的預設檔案 *appsettings.json* 如下：</span><span class="sxs-lookup"><span data-stu-id="896be-159">The default file used in the project templates is *appsettings.json* :</span></span>
 
 [!code-json[](samples/appsettings-sample.json)]
 
@@ -167,9 +167,9 @@ services.Configure<AppConfiguration>(Configuration.GetSection("AppConfiguration"
 > [!NOTE]
 > <span data-ttu-id="896be-186">如需在 ASP.NET Core 中提供靜態檔案更深入的參考，請參閱[靜態檔案](xref:fundamentals/static-files)。</span><span class="sxs-lookup"><span data-stu-id="896be-186">For a more in-depth reference to serving static files in ASP.NET Core, see [Static files](xref:fundamentals/static-files).</span></span>
 
-## <a name="multi-value-no-loccookies"></a><span data-ttu-id="896be-187">多重值 :::no-loc(cookie)::: s</span><span class="sxs-lookup"><span data-stu-id="896be-187">Multi-value :::no-loc(cookie):::s</span></span>
+## <a name="multi-value-no-loccookies"></a><span data-ttu-id="896be-187">多重值 cookie s</span><span class="sxs-lookup"><span data-stu-id="896be-187">Multi-value cookies</span></span>
 
-<span data-ttu-id="896be-188">ASP.NET Core 中不支援[多值 :::no-loc(cookie)::: s](xref:System.Web.Http:::no-loc(Cookie):::.Values) 。</span><span class="sxs-lookup"><span data-stu-id="896be-188">[Multi-value :::no-loc(cookie):::s](xref:System.Web.Http:::no-loc(Cookie):::.Values) aren't supported in ASP.NET Core.</span></span> <span data-ttu-id="896be-189">:::no-loc(cookie):::每個值建立一個。</span><span class="sxs-lookup"><span data-stu-id="896be-189">Create one :::no-loc(cookie)::: per value.</span></span>
+<span data-ttu-id="896be-188">ASP.NET Core 中不支援[多值 cookie s](xref:System.Web.HttpCookie.Values) 。</span><span class="sxs-lookup"><span data-stu-id="896be-188">[Multi-value cookies](xref:System.Web.HttpCookie.Values) aren't supported in ASP.NET Core.</span></span> <span data-ttu-id="896be-189">cookie每個值建立一個。</span><span class="sxs-lookup"><span data-stu-id="896be-189">Create one cookie per value.</span></span>
 
 ## <a name="partial-app-migration"></a><span data-ttu-id="896be-190">部分應用程式遷移</span><span class="sxs-lookup"><span data-stu-id="896be-190">Partial app migration</span></span>
 

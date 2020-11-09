@@ -6,17 +6,17 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 03/03/2020
 no-loc:
-- ':::no-loc(appsettings.json):::'
-- ':::no-loc(ASP.NET Core Identity):::'
-- ':::no-loc(cookie):::'
-- ':::no-loc(Cookie):::'
-- ':::no-loc(Blazor):::'
-- ':::no-loc(Blazor Server):::'
-- ':::no-loc(Blazor WebAssembly):::'
-- ':::no-loc(Identity):::'
-- ":::no-loc(Let's Encrypt):::"
-- ':::no-loc(Razor):::'
-- ':::no-loc(SignalR):::'
+- 'appsettings.json'
+- 'ASP.NET Core Identity'
+- 'cookie'
+- 'Cookie'
+- 'Blazor'
+- 'Blazor Server'
+- 'Blazor WebAssembly'
+- 'Identity'
+- "Let's Encrypt"
+- 'Razor'
+- 'SignalR'
 uid: security/authentication/index
 ms.openlocfilehash: eb8c5b3c66f9a0d845d6a1d58c69e6fddefa5b0b
 ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
@@ -38,22 +38,22 @@ ms.locfileid: "93053380"
 
 <span data-ttu-id="d1b2b-113">驗證配置的指定方式是在中註冊驗證服務 `Startup.ConfigureServices` ：</span><span class="sxs-lookup"><span data-stu-id="d1b2b-113">Authentication schemes are specified by registering authentication services in `Startup.ConfigureServices`:</span></span>
 
-* <span data-ttu-id="d1b2b-114">藉由在呼叫 (（例如或）之後呼叫配置特定的擴充方法 `services.AddAuthentication` `AddJwtBearer` ，例如 `Add:::no-loc(Cookie):::`) 。</span><span class="sxs-lookup"><span data-stu-id="d1b2b-114">By calling a scheme-specific extension method after a call to `services.AddAuthentication` (such as `AddJwtBearer` or `Add:::no-loc(Cookie):::`, for example).</span></span> <span data-ttu-id="d1b2b-115">這些擴充方法會使用 [AuthenticationBuilder AddScheme](xref:Microsoft.AspNetCore.Authentication.AuthenticationBuilder.AddScheme*) ，以適當的設定來註冊配置。</span><span class="sxs-lookup"><span data-stu-id="d1b2b-115">These extension methods use [AuthenticationBuilder.AddScheme](xref:Microsoft.AspNetCore.Authentication.AuthenticationBuilder.AddScheme*) to register schemes with appropriate settings.</span></span>
+* <span data-ttu-id="d1b2b-114">藉由在呼叫 (（例如或）之後呼叫配置特定的擴充方法 `services.AddAuthentication` `AddJwtBearer` ，例如 `AddCookie`) 。</span><span class="sxs-lookup"><span data-stu-id="d1b2b-114">By calling a scheme-specific extension method after a call to `services.AddAuthentication` (such as `AddJwtBearer` or `AddCookie`, for example).</span></span> <span data-ttu-id="d1b2b-115">這些擴充方法會使用 [AuthenticationBuilder AddScheme](xref:Microsoft.AspNetCore.Authentication.AuthenticationBuilder.AddScheme*) ，以適當的設定來註冊配置。</span><span class="sxs-lookup"><span data-stu-id="d1b2b-115">These extension methods use [AuthenticationBuilder.AddScheme](xref:Microsoft.AspNetCore.Authentication.AuthenticationBuilder.AddScheme*) to register schemes with appropriate settings.</span></span>
 * <span data-ttu-id="d1b2b-116">通常會透過直接呼叫 [AuthenticationBuilder AddScheme](xref:Microsoft.AspNetCore.Authentication.AuthenticationBuilder.AddScheme*) 。</span><span class="sxs-lookup"><span data-stu-id="d1b2b-116">Less commonly, by calling [AuthenticationBuilder.AddScheme](xref:Microsoft.AspNetCore.Authentication.AuthenticationBuilder.AddScheme*) directly.</span></span>
 
-<span data-ttu-id="d1b2b-117">例如，下列程式碼會註冊的驗證服務和處理常式， :::no-loc(cookie)::: 以及 JWT 持有人驗證配置：</span><span class="sxs-lookup"><span data-stu-id="d1b2b-117">For example, the following code registers authentication services and handlers for :::no-loc(cookie)::: and JWT bearer authentication schemes:</span></span>
+<span data-ttu-id="d1b2b-117">例如，下列程式碼會註冊的驗證服務和處理常式， cookie 以及 JWT 持有人驗證配置：</span><span class="sxs-lookup"><span data-stu-id="d1b2b-117">For example, the following code registers authentication services and handlers for cookie and JWT bearer authentication schemes:</span></span>
 
 ```csharp
 services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
     .AddJwtBearer(JwtBearerDefaults.AuthenticationScheme, options => Configuration.Bind("JwtSettings", options))
-    .Add:::no-loc(Cookie):::(:::no-loc(Cookie):::AuthenticationDefaults.AuthenticationScheme, options => Configuration.Bind(":::no-loc(Cookie):::Settings", options));
+    .AddCookie(CookieAuthenticationDefaults.AuthenticationScheme, options => Configuration.Bind("CookieSettings", options));
 ```
 
 <span data-ttu-id="d1b2b-118">`AddAuthentication`參數 `JwtBearerDefaults.AuthenticationScheme` 是未要求特定配置時，預設要使用的配置名稱。</span><span class="sxs-lookup"><span data-stu-id="d1b2b-118">The `AddAuthentication` parameter `JwtBearerDefaults.AuthenticationScheme` is the name of the scheme to use by default when a specific scheme isn't requested.</span></span>
 
-<span data-ttu-id="d1b2b-119">如果使用了多個配置，則 (的授權原則或授權屬性) 可以 [指定驗證配置 () 或所依賴的配置 ](xref:security/authorization/limitingidentitybyscheme) ，以驗證使用者。</span><span class="sxs-lookup"><span data-stu-id="d1b2b-119">If multiple schemes are used, authorization policies (or authorization attributes) can [specify the authentication scheme (or schemes)](xref:security/authorization/limitingidentitybyscheme) they depend on to authenticate the user.</span></span> <span data-ttu-id="d1b2b-120">在上述範例中，您 :::no-loc(cookie)::: 可以藉由預設指定其名稱 (來使用驗證配置 `:::no-loc(Cookie):::AuthenticationDefaults.AuthenticationScheme` ，但在呼叫) 時可以提供不同的名稱 `Add:::no-loc(Cookie):::` 。</span><span class="sxs-lookup"><span data-stu-id="d1b2b-120">In the example above, the :::no-loc(cookie)::: authentication scheme could be used by specifying its name (`:::no-loc(Cookie):::AuthenticationDefaults.AuthenticationScheme` by default, though a different name could be provided when calling `Add:::no-loc(Cookie):::`).</span></span>
+<span data-ttu-id="d1b2b-119">如果使用了多個配置，則 (的授權原則或授權屬性) 可以 [指定驗證配置 () 或所依賴的配置 ](xref:security/authorization/limitingidentitybyscheme) ，以驗證使用者。</span><span class="sxs-lookup"><span data-stu-id="d1b2b-119">If multiple schemes are used, authorization policies (or authorization attributes) can [specify the authentication scheme (or schemes)](xref:security/authorization/limitingidentitybyscheme) they depend on to authenticate the user.</span></span> <span data-ttu-id="d1b2b-120">在上述範例中，您 cookie 可以藉由預設指定其名稱 (來使用驗證配置 `CookieAuthenticationDefaults.AuthenticationScheme` ，但在呼叫) 時可以提供不同的名稱 `AddCookie` 。</span><span class="sxs-lookup"><span data-stu-id="d1b2b-120">In the example above, the cookie authentication scheme could be used by specifying its name (`CookieAuthenticationDefaults.AuthenticationScheme` by default, though a different name could be provided when calling `AddCookie`).</span></span>
 
-<span data-ttu-id="d1b2b-121">在某些情況下，的呼叫會 `AddAuthentication` 由其他擴充方法自動進行。</span><span class="sxs-lookup"><span data-stu-id="d1b2b-121">In some cases, the call to `AddAuthentication` is automatically made by other extension methods.</span></span> <span data-ttu-id="d1b2b-122">例如，在使用時 [:::no-loc(ASP.NET Core Identity):::](xref:security/authentication/identity) ， `AddAuthentication` 會在內部呼叫。</span><span class="sxs-lookup"><span data-stu-id="d1b2b-122">For example, when using [:::no-loc(ASP.NET Core Identity):::](xref:security/authentication/identity), `AddAuthentication` is called internally.</span></span>
+<span data-ttu-id="d1b2b-121">在某些情況下，的呼叫會 `AddAuthentication` 由其他擴充方法自動進行。</span><span class="sxs-lookup"><span data-stu-id="d1b2b-121">In some cases, the call to `AddAuthentication` is automatically made by other extension methods.</span></span> <span data-ttu-id="d1b2b-122">例如，在使用時 [ASP.NET Core Identity](xref:security/authentication/identity) ， `AddAuthentication` 會在內部呼叫。</span><span class="sxs-lookup"><span data-stu-id="d1b2b-122">For example, when using [ASP.NET Core Identity](xref:security/authentication/identity), `AddAuthentication` is called internally.</span></span>
 
 <span data-ttu-id="d1b2b-123">藉 `Startup.Configure` 由呼叫 <xref:Microsoft.AspNetCore.Builder.AuthAppBuilderExtensions.UseAuthentication*> 應用程式上的擴充方法，即可在中新增驗證中介軟體 `IApplicationBuilder` 。</span><span class="sxs-lookup"><span data-stu-id="d1b2b-123">The Authentication middleware is added in `Startup.Configure` by calling the <xref:Microsoft.AspNetCore.Builder.AuthAppBuilderExtensions.UseAuthentication*> extension method on the app's `IApplicationBuilder`.</span></span> <span data-ttu-id="d1b2b-124">呼叫會 `UseAuthentication` 註冊使用先前註冊之驗證配置的中介軟體。</span><span class="sxs-lookup"><span data-stu-id="d1b2b-124">Calling `UseAuthentication` registers the middleware which uses the previously registered authentication schemes.</span></span> <span data-ttu-id="d1b2b-125">在 `UseAuthentication` 與要驗證之使用者相依的任何中介軟體之前呼叫。</span><span class="sxs-lookup"><span data-stu-id="d1b2b-125">Call `UseAuthentication` before any middleware that depends on users being authenticated.</span></span> <span data-ttu-id="d1b2b-126">使用端點路由時，的呼叫 `UseAuthentication` 必須移至：</span><span class="sxs-lookup"><span data-stu-id="d1b2b-126">When using endpoint routing, the call to `UseAuthentication` must go:</span></span>
 
@@ -94,14 +94,14 @@ services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
 
 <span data-ttu-id="d1b2b-153">驗證配置的驗證動作會負責根據要求內容來建立使用者的身分識別。</span><span class="sxs-lookup"><span data-stu-id="d1b2b-153">An authentication scheme's authenticate action is responsible for constructing the user's identity based on request context.</span></span> <span data-ttu-id="d1b2b-154">它會傳回 <xref:Microsoft.AspNetCore.Authentication.AuthenticateResult> ，指出驗證是否成功，以及使用者在驗證票證中的身分識別。</span><span class="sxs-lookup"><span data-stu-id="d1b2b-154">It returns an <xref:Microsoft.AspNetCore.Authentication.AuthenticateResult> indicating whether authentication was successful and, if so, the user's identity in an authentication ticket.</span></span> <span data-ttu-id="d1b2b-155">請參閱 <xref:Microsoft.AspNetCore.Authentication.AuthenticationHttpContextExtensions.AuthenticateAsync%2A>。</span><span class="sxs-lookup"><span data-stu-id="d1b2b-155">See <xref:Microsoft.AspNetCore.Authentication.AuthenticationHttpContextExtensions.AuthenticateAsync%2A>.</span></span> <span data-ttu-id="d1b2b-156">驗證範例包括：</span><span class="sxs-lookup"><span data-stu-id="d1b2b-156">Authenticate examples include:</span></span>
 
-* <span data-ttu-id="d1b2b-157">:::no-loc(cookie):::從建立使用者身分識別的驗證配置 :::no-loc(cookie)::: 。</span><span class="sxs-lookup"><span data-stu-id="d1b2b-157">A :::no-loc(cookie)::: authentication scheme constructing the user's identity from :::no-loc(cookie):::s.</span></span>
+* <span data-ttu-id="d1b2b-157">cookie從建立使用者身分識別的驗證配置 cookie 。</span><span class="sxs-lookup"><span data-stu-id="d1b2b-157">A cookie authentication scheme constructing the user's identity from cookies.</span></span>
 * <span data-ttu-id="d1b2b-158">JWT 持有人配置還原序列化和驗證 JWT 持有人權杖，以建立使用者的身分識別。</span><span class="sxs-lookup"><span data-stu-id="d1b2b-158">A JWT bearer scheme deserializing and validating a JWT bearer token to construct the user's identity.</span></span>
 
 ### <a name="challenge"></a><span data-ttu-id="d1b2b-159">挑戰</span><span class="sxs-lookup"><span data-stu-id="d1b2b-159">Challenge</span></span>
 
 <span data-ttu-id="d1b2b-160">當未驗證的使用者要求需要驗證的端點時，會在授權中叫用驗證挑戰。</span><span class="sxs-lookup"><span data-stu-id="d1b2b-160">An authentication challenge is invoked by Authorization when an unauthenticated user requests an endpoint that requires authentication.</span></span> <span data-ttu-id="d1b2b-161">例如，當匿名使用者要求受限的資源，或按一下登入連結時，就會發出驗證挑戰。</span><span class="sxs-lookup"><span data-stu-id="d1b2b-161">An authentication challenge is issued, for example, when an anonymous user requests a restricted resource or clicks on a login link.</span></span> <span data-ttu-id="d1b2b-162">授權會使用指定的驗證配置 (s) 來叫用挑戰，如果未指定，則會使用預設值。</span><span class="sxs-lookup"><span data-stu-id="d1b2b-162">Authorization invokes a challenge using the specified authentication scheme(s), or the default if none is specified.</span></span> <span data-ttu-id="d1b2b-163">請參閱 <xref:Microsoft.AspNetCore.Authentication.AuthenticationHttpContextExtensions.ChallengeAsync%2A>。</span><span class="sxs-lookup"><span data-stu-id="d1b2b-163">See <xref:Microsoft.AspNetCore.Authentication.AuthenticationHttpContextExtensions.ChallengeAsync%2A>.</span></span> <span data-ttu-id="d1b2b-164">驗證挑戰範例包括：</span><span class="sxs-lookup"><span data-stu-id="d1b2b-164">Authentication challenge examples include:</span></span>
 
-* <span data-ttu-id="d1b2b-165">將 :::no-loc(cookie)::: 使用者重新導向至登入頁面的驗證配置。</span><span class="sxs-lookup"><span data-stu-id="d1b2b-165">A :::no-loc(cookie)::: authentication scheme redirecting the user to a login page.</span></span>
+* <span data-ttu-id="d1b2b-165">將 cookie 使用者重新導向至登入頁面的驗證配置。</span><span class="sxs-lookup"><span data-stu-id="d1b2b-165">A cookie authentication scheme redirecting the user to a login page.</span></span>
 * <span data-ttu-id="d1b2b-166">JWT 持有人配置傳回401結果與 `www-authenticate: bearer` 標頭。</span><span class="sxs-lookup"><span data-stu-id="d1b2b-166">A JWT bearer scheme returning a 401 result with a `www-authenticate: bearer` header.</span></span>
 
 <span data-ttu-id="d1b2b-167">挑戰動作應該讓使用者知道要使用哪個驗證機制來存取要求的資源。</span><span class="sxs-lookup"><span data-stu-id="d1b2b-167">A challenge action should let the user know what authentication mechanism to use to access the requested resource.</span></span>
@@ -109,7 +109,7 @@ services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
 ### <a name="forbid"></a><span data-ttu-id="d1b2b-168">禁止</span><span class="sxs-lookup"><span data-stu-id="d1b2b-168">Forbid</span></span>
 
 <span data-ttu-id="d1b2b-169">當已驗證的使用者嘗試存取不允許存取的資源時，授權會呼叫驗證配置的禁止動作。</span><span class="sxs-lookup"><span data-stu-id="d1b2b-169">An authentication scheme's forbid action is called by Authorization when an authenticated user attempts to access a resource they are not permitted to access.</span></span> <span data-ttu-id="d1b2b-170">請參閱 <xref:Microsoft.AspNetCore.Authentication.AuthenticationHttpContextExtensions.ForbidAsync%2A>。</span><span class="sxs-lookup"><span data-stu-id="d1b2b-170">See <xref:Microsoft.AspNetCore.Authentication.AuthenticationHttpContextExtensions.ForbidAsync%2A>.</span></span> <span data-ttu-id="d1b2b-171">驗證禁止的範例包括：</span><span class="sxs-lookup"><span data-stu-id="d1b2b-171">Authentication forbid examples include:</span></span>
-* <span data-ttu-id="d1b2b-172">將 :::no-loc(cookie)::: 使用者重新導向至表示禁止存取之頁面的驗證配置。</span><span class="sxs-lookup"><span data-stu-id="d1b2b-172">A :::no-loc(cookie)::: authentication scheme redirecting the user to a page indicating access was forbidden.</span></span>
+* <span data-ttu-id="d1b2b-172">將 cookie 使用者重新導向至表示禁止存取之頁面的驗證配置。</span><span class="sxs-lookup"><span data-stu-id="d1b2b-172">A cookie authentication scheme redirecting the user to a page indicating access was forbidden.</span></span>
 * <span data-ttu-id="d1b2b-173">JWT 持有人配置傳回403結果。</span><span class="sxs-lookup"><span data-stu-id="d1b2b-173">A JWT bearer scheme returning a 403 result.</span></span>
 * <span data-ttu-id="d1b2b-174">重新導向至使用者可要求存取資源之頁面的自訂驗證配置。</span><span class="sxs-lookup"><span data-stu-id="d1b2b-174">A custom authentication scheme redirecting to a page where the user can request access to the resource.</span></span>
 

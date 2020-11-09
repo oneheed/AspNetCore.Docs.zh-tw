@@ -1,22 +1,22 @@
 ---
-title: 'ASP.NET Core 檔案上 :::no-loc(Blazor)::: 傳'
+title: 'ASP.NET Core 檔案上 Blazor 傳'
 author: guardrex
-description: '瞭解如何 :::no-loc(Blazor)::: 使用 InputFile 元件上傳檔案。'
+description: '瞭解如何 Blazor 使用 InputFile 元件上傳檔案。'
 monikerRange: '>= aspnetcore-5.0'
 ms.author: riande
 ms.custom: mvc
 no-loc:
-- ':::no-loc(appsettings.json):::'
-- ':::no-loc(ASP.NET Core Identity):::'
-- ':::no-loc(cookie):::'
-- ':::no-loc(Cookie):::'
-- ':::no-loc(Blazor):::'
-- ':::no-loc(Blazor Server):::'
-- ':::no-loc(Blazor WebAssembly):::'
-- ':::no-loc(Identity):::'
-- ":::no-loc(Let's Encrypt):::"
-- ':::no-loc(Razor):::'
-- ':::no-loc(SignalR):::'
+- 'appsettings.json'
+- 'ASP.NET Core Identity'
+- 'cookie'
+- 'Cookie'
+- 'Blazor'
+- 'Blazor Server'
+- 'Blazor WebAssembly'
+- 'Identity'
+- "Let's Encrypt"
+- 'Razor'
+- 'SignalR'
 ms.date: 10/27/2020
 uid: blazor/file-uploads
 ms.openlocfilehash: c0806c3a68a4d9e698925f6ec955dd2f53d7818f
@@ -26,7 +26,7 @@ ms.contentlocale: zh-TW
 ms.lasthandoff: 10/30/2020
 ms.locfileid: "93056123"
 ---
-# <a name="aspnet-core-no-locblazor-file-uploads"></a><span data-ttu-id="44c67-103">ASP.NET Core 檔案上 :::no-loc(Blazor)::: 傳</span><span class="sxs-lookup"><span data-stu-id="44c67-103">ASP.NET Core :::no-loc(Blazor)::: file uploads</span></span>
+# <a name="aspnet-core-no-locblazor-file-uploads"></a><span data-ttu-id="44c67-103">ASP.NET Core 檔案上 Blazor 傳</span><span class="sxs-lookup"><span data-stu-id="44c67-103">ASP.NET Core Blazor file uploads</span></span>
 
 <span data-ttu-id="44c67-104">依 [Daniel Roth](https://github.com/danroth27) 和 [Pranav Krishnamoorthy](https://github.com/pranavkm)</span><span class="sxs-lookup"><span data-stu-id="44c67-104">By [Daniel Roth](https://github.com/danroth27) and [Pranav Krishnamoorthy](https://github.com/pranavkm)</span></span>
 
@@ -47,7 +47,7 @@ ms.locfileid: "93056123"
 
 * <span data-ttu-id="44c67-115">`Microsoft.AspNetCore.Components.Forms.IBrowserFile.OpenReadStream`在檔案上呼叫，並從傳回的資料流程讀取。</span><span class="sxs-lookup"><span data-stu-id="44c67-115">Call `Microsoft.AspNetCore.Components.Forms.IBrowserFile.OpenReadStream` on the file and read from the returned stream.</span></span> <span data-ttu-id="44c67-116">如需詳細資訊，請參閱檔案 [資料流程](#file-streams) 一節。</span><span class="sxs-lookup"><span data-stu-id="44c67-116">For more information, see the [File streams](#file-streams) section.</span></span>
 * <span data-ttu-id="44c67-117"><xref:System.IO.Stream>傳回的會 `OpenReadStream` 強制讀取的大小上限（以位元組為單位） `Stream` 。</span><span class="sxs-lookup"><span data-stu-id="44c67-117">The <xref:System.IO.Stream> returned by `OpenReadStream` enforces a maximum size in bytes of the `Stream` being read.</span></span> <span data-ttu-id="44c67-118">依預設，只允許讀取小於 524288 KB (512 KB) 大小的檔案，再進一步讀取會導致例外狀況。</span><span class="sxs-lookup"><span data-stu-id="44c67-118">By default, only files smaller than 524,288 KB (512 KB) in size are allowed to be read before any further reads would result in an exception.</span></span> <span data-ttu-id="44c67-119">這項限制是為了避免開發人員不小心將大型檔案讀取到記憶體中。</span><span class="sxs-lookup"><span data-stu-id="44c67-119">This limit is present to prevent developers from accidentally reading large files in to memory.</span></span> <span data-ttu-id="44c67-120">`maxAllowedSize` `Microsoft.AspNetCore.Components.Forms.IBrowserFile.OpenReadStream` 如有需要，可以使用上的參數來指定較大的大小。</span><span class="sxs-lookup"><span data-stu-id="44c67-120">The `maxAllowedSize` parameter on `Microsoft.AspNetCore.Components.Forms.IBrowserFile.OpenReadStream` can be used to specify a larger size if required.</span></span>
-* <span data-ttu-id="44c67-121">避免直接將傳入檔案資料流程讀入記憶體中。</span><span class="sxs-lookup"><span data-stu-id="44c67-121">Avoid reading the incoming file stream directly into memory.</span></span> <span data-ttu-id="44c67-122">例如，請勿將檔案位元組複製到 <xref:System.IO.MemoryStream> 或讀取為位元組陣列。</span><span class="sxs-lookup"><span data-stu-id="44c67-122">For example, don't copy file bytes into a <xref:System.IO.MemoryStream> or read as a byte array.</span></span> <span data-ttu-id="44c67-123">這些方法可能會導致效能和安全性問題，尤其是在中 :::no-loc(Blazor Server)::: 。</span><span class="sxs-lookup"><span data-stu-id="44c67-123">These approaches can result in performance and security problems, especially in :::no-loc(Blazor Server):::.</span></span> <span data-ttu-id="44c67-124">相反地，請考慮將檔案位元組複製到外部存放區，例如 blob 或磁片上的檔案。</span><span class="sxs-lookup"><span data-stu-id="44c67-124">Instead, consider copying file bytes to an external store, such as a a blob or a file on disk.</span></span>
+* <span data-ttu-id="44c67-121">避免直接將傳入檔案資料流程讀入記憶體中。</span><span class="sxs-lookup"><span data-stu-id="44c67-121">Avoid reading the incoming file stream directly into memory.</span></span> <span data-ttu-id="44c67-122">例如，請勿將檔案位元組複製到 <xref:System.IO.MemoryStream> 或讀取為位元組陣列。</span><span class="sxs-lookup"><span data-stu-id="44c67-122">For example, don't copy file bytes into a <xref:System.IO.MemoryStream> or read as a byte array.</span></span> <span data-ttu-id="44c67-123">這些方法可能會導致效能和安全性問題，尤其是在中 Blazor Server 。</span><span class="sxs-lookup"><span data-stu-id="44c67-123">These approaches can result in performance and security problems, especially in Blazor Server.</span></span> <span data-ttu-id="44c67-124">相反地，請考慮將檔案位元組複製到外部存放區，例如 blob 或磁片上的檔案。</span><span class="sxs-lookup"><span data-stu-id="44c67-124">Instead, consider copying file bytes to an external store, such as a a blob or a file on disk.</span></span>
 
 <span data-ttu-id="44c67-125">接收影像檔案的元件可以呼叫檔案 `RequestImageFileAsync` 上的便利方法，在將影像串流至應用程式之前，先調整瀏覽器的 JavaScript 執行時間中影像資料的大小。</span><span class="sxs-lookup"><span data-stu-id="44c67-125">A component that receives an image file can call the `RequestImageFileAsync` convenience method on the file to resize the image data within the browser's JavaScript runtime before the image is streamed into the app.</span></span>
 
@@ -100,9 +100,9 @@ ms.locfileid: "93056123"
 
 ## <a name="file-streams"></a><span data-ttu-id="44c67-133">檔案資料流程</span><span class="sxs-lookup"><span data-stu-id="44c67-133">File streams</span></span>
 
-<span data-ttu-id="44c67-134">在 :::no-loc(Blazor WebAssembly)::: 應用程式中，資料會直接串流至瀏覽器中的 .net 程式碼。</span><span class="sxs-lookup"><span data-stu-id="44c67-134">In a :::no-loc(Blazor WebAssembly)::: app, the data is streamed directly into the .NET code within the browser.</span></span>
+<span data-ttu-id="44c67-134">在 Blazor WebAssembly 應用程式中，資料會直接串流至瀏覽器中的 .net 程式碼。</span><span class="sxs-lookup"><span data-stu-id="44c67-134">In a Blazor WebAssembly app, the data is streamed directly into the .NET code within the browser.</span></span>
 
-<span data-ttu-id="44c67-135">在 :::no-loc(Blazor Server)::: 應用程式中，檔案資料會透過 :::no-loc(SignalR)::: 連接串流至伺服器上的 .net 程式碼，因為該檔案是從資料流程讀取的。</span><span class="sxs-lookup"><span data-stu-id="44c67-135">In a :::no-loc(Blazor Server)::: app, the file data is streamed over the :::no-loc(SignalR)::: connection into .NET code on the server as the file is read from the stream.</span></span> <span data-ttu-id="44c67-136">[`Forms.RemoteBrowserFileStreamOptions`](https://github.com/dotnet/aspnetcore/blob/master/src/Components/Web/src/Forms/InputFile/RemoteBrowserFileStreamOptions.cs) 允許設定檔案上傳特性 :::no-loc(Blazor Server)::: 。</span><span class="sxs-lookup"><span data-stu-id="44c67-136">[`Forms.RemoteBrowserFileStreamOptions`](https://github.com/dotnet/aspnetcore/blob/master/src/Components/Web/src/Forms/InputFile/RemoteBrowserFileStreamOptions.cs) allows configuring file upload characteristics for :::no-loc(Blazor Server):::.</span></span>
+<span data-ttu-id="44c67-135">在 Blazor Server 應用程式中，檔案資料會透過 SignalR 連接串流至伺服器上的 .net 程式碼，因為該檔案是從資料流程讀取的。</span><span class="sxs-lookup"><span data-stu-id="44c67-135">In a Blazor Server app, the file data is streamed over the SignalR connection into .NET code on the server as the file is read from the stream.</span></span> <span data-ttu-id="44c67-136">[`Forms.RemoteBrowserFileStreamOptions`](https://github.com/dotnet/aspnetcore/blob/master/src/Components/Web/src/Forms/InputFile/RemoteBrowserFileStreamOptions.cs) 允許設定檔案上傳特性 Blazor Server 。</span><span class="sxs-lookup"><span data-stu-id="44c67-136">[`Forms.RemoteBrowserFileStreamOptions`](https://github.com/dotnet/aspnetcore/blob/master/src/Components/Web/src/Forms/InputFile/RemoteBrowserFileStreamOptions.cs) allows configuring file upload characteristics for Blazor Server.</span></span>
 
 ## <a name="additional-resources"></a><span data-ttu-id="44c67-137">其他資源</span><span class="sxs-lookup"><span data-stu-id="44c67-137">Additional resources</span></span>
 

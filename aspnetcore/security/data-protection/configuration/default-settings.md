@@ -5,17 +5,17 @@ description: 瞭解 ASP.NET Core 中的資料保護金鑰管理和存留期。
 ms.author: riande
 ms.date: 10/14/2016
 no-loc:
-- ':::no-loc(appsettings.json):::'
-- ':::no-loc(ASP.NET Core Identity):::'
-- ':::no-loc(cookie):::'
-- ':::no-loc(Cookie):::'
-- ':::no-loc(Blazor):::'
-- ':::no-loc(Blazor Server):::'
-- ':::no-loc(Blazor WebAssembly):::'
-- ':::no-loc(Identity):::'
-- ":::no-loc(Let's Encrypt):::"
-- ':::no-loc(Razor):::'
-- ':::no-loc(SignalR):::'
+- 'appsettings.json'
+- 'ASP.NET Core Identity'
+- 'cookie'
+- 'Cookie'
+- 'Blazor'
+- 'Blazor Server'
+- 'Blazor WebAssembly'
+- 'Identity'
+- "Let's Encrypt"
+- 'Razor'
+- 'SignalR'
 uid: security/data-protection/configuration/default-settings
 ms.openlocfilehash: 1303c5c2c993f1d20383457666aebfa2a583e938
 ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
@@ -35,7 +35,7 @@ ms.locfileid: "93053003"
 1. <span data-ttu-id="18739-107">如果應用程式裝載在 [Azure 應用程式](https://azure.microsoft.com/services/app-service/)中，金鑰會保存至 *%HOME%\ASP.NET\DataProtection-Keys* 資料夾。</span><span class="sxs-lookup"><span data-stu-id="18739-107">If the app is hosted in [Azure Apps](https://azure.microsoft.com/services/app-service/), keys are persisted to the *%HOME%\ASP.NET\DataProtection-Keys* folder.</span></span> <span data-ttu-id="18739-108">此資料夾使用網路儲存體進行保存，並會在裝載應用程式的所有電腦上同步。</span><span class="sxs-lookup"><span data-stu-id="18739-108">This folder is backed by network storage and is synchronized across all machines hosting the app.</span></span>
    * <span data-ttu-id="18739-109">金鑰待用時不受保護。</span><span class="sxs-lookup"><span data-stu-id="18739-109">Keys aren't protected at rest.</span></span>
    * <span data-ttu-id="18739-110">*DataProtection 金鑰* 資料夾會將金鑰通道提供給單一部署位置中應用程式的所有實例。</span><span class="sxs-lookup"><span data-stu-id="18739-110">The *DataProtection-Keys* folder supplies the key ring to all instances of an app in a single deployment slot.</span></span>
-   * <span data-ttu-id="18739-111">各部署位置，例如預備和生產位置，不會共用金鑰環。</span><span class="sxs-lookup"><span data-stu-id="18739-111">Separate deployment slots, such as Staging and Production, don't share a key ring.</span></span> <span data-ttu-id="18739-112">當您在部署位置（例如將預備環境移至生產環境或使用 A/B 測試）之間交換時，任何使用資料保護的應用程式將無法使用前一個插槽內的金鑰環來解密儲存的資料。</span><span class="sxs-lookup"><span data-stu-id="18739-112">When you swap between deployment slots, for example swapping Staging to Production or using A/B testing, any app using Data Protection won't be able to decrypt stored data using the key ring inside the previous slot.</span></span> <span data-ttu-id="18739-113">這會導致使用者登出使用標準 ASP.NET Core 驗證的應用程式 :::no-loc(cookie)::: ，因為它使用資料保護來保護它的 :::no-loc(cookie)::: 。</span><span class="sxs-lookup"><span data-stu-id="18739-113">This leads to users being logged out of an app that uses the standard ASP.NET Core :::no-loc(cookie)::: authentication, as it uses Data Protection to protect its :::no-loc(cookie):::s.</span></span> <span data-ttu-id="18739-114">如果您想要與位置無關的按鍵環形，請使用外部金鑰環形提供者，例如 Azure Blob 儲存體、Azure Key Vault、SQL 存放區或 Redis 快取。</span><span class="sxs-lookup"><span data-stu-id="18739-114">If you desire slot-independent key rings, use an external key ring provider, such as Azure Blob Storage, Azure Key Vault, a SQL store, or Redis cache.</span></span>
+   * <span data-ttu-id="18739-111">各部署位置，例如預備和生產位置，不會共用金鑰環。</span><span class="sxs-lookup"><span data-stu-id="18739-111">Separate deployment slots, such as Staging and Production, don't share a key ring.</span></span> <span data-ttu-id="18739-112">當您在部署位置（例如將預備環境移至生產環境或使用 A/B 測試）之間交換時，任何使用資料保護的應用程式將無法使用前一個插槽內的金鑰環來解密儲存的資料。</span><span class="sxs-lookup"><span data-stu-id="18739-112">When you swap between deployment slots, for example swapping Staging to Production or using A/B testing, any app using Data Protection won't be able to decrypt stored data using the key ring inside the previous slot.</span></span> <span data-ttu-id="18739-113">這會導致使用者登出使用標準 ASP.NET Core 驗證的應用程式 cookie ，因為它使用資料保護來保護它的 cookie 。</span><span class="sxs-lookup"><span data-stu-id="18739-113">This leads to users being logged out of an app that uses the standard ASP.NET Core cookie authentication, as it uses Data Protection to protect its cookies.</span></span> <span data-ttu-id="18739-114">如果您想要與位置無關的按鍵環形，請使用外部金鑰環形提供者，例如 Azure Blob 儲存體、Azure Key Vault、SQL 存放區或 Redis 快取。</span><span class="sxs-lookup"><span data-stu-id="18739-114">If you desire slot-independent key rings, use an external key ring provider, such as Azure Blob Storage, Azure Key Vault, a SQL store, or Redis cache.</span></span>
 
 1. <span data-ttu-id="18739-115">如果有可用的使用者設定檔，則會將金鑰保存到 *%LOCALAPPDATA%\ASP.NET\DataProtection-Keys* 資料夾。</span><span class="sxs-lookup"><span data-stu-id="18739-115">If the user profile is available, keys are persisted to the *%LOCALAPPDATA%\ASP.NET\DataProtection-Keys* folder.</span></span> <span data-ttu-id="18739-116">如果作業系統是 Windows，則會使用 DPAPI 將金鑰加密。</span><span class="sxs-lookup"><span data-stu-id="18739-116">If the operating system is Windows, the keys are encrypted at rest using DPAPI.</span></span>
 

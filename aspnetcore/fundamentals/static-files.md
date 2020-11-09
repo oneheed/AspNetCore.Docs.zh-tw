@@ -6,15 +6,15 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 6/23/2020
 no-loc:
-- ':::no-loc(appsettings.json):::'
-- ':::no-loc(ASP.NET Core Identity):::'
-- ':::no-loc(cookie):::'
-- ':::no-loc(Cookie):::'
-- ':::no-loc(Blazor):::'
-- ':::no-loc(Identity):::'
-- ":::no-loc(Let's Encrypt):::"
-- ':::no-loc(Razor):::'
-- ':::no-loc(SignalR):::'
+- 'appsettings.json'
+- 'ASP.NET Core Identity'
+- 'cookie'
+- 'Cookie'
+- 'Blazor'
+- 'Identity'
+- "Let's Encrypt"
+- 'Razor'
+- 'SignalR'
 uid: fundamentals/static-files
 ms.openlocfilehash: 2e25af03a8a6aaff5b343885711c6ebb68340fac
 ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
@@ -252,7 +252,7 @@ app.UseFileServer(enableDirectoryBrowsing: true);
 ### <a name="security-considerations-for-static-files"></a><span data-ttu-id="ec8af-208">靜態檔案的安全性考慮</span><span class="sxs-lookup"><span data-stu-id="ec8af-208">Security considerations for static files</span></span>
 
 > [!WARNING]
-> <span data-ttu-id="ec8af-209">`UseDirectoryBrowser` 和 `UseStaticFiles` 可能會導致洩漏祕密。</span><span class="sxs-lookup"><span data-stu-id="ec8af-209">`UseDirectoryBrowser` and `UseStaticFiles` can leak secrets.</span></span> <span data-ttu-id="ec8af-210">強烈建議您在生產環境中停用目錄瀏覽功能。</span><span class="sxs-lookup"><span data-stu-id="ec8af-210">Disabling directory browsing in production is highly recommended.</span></span> <span data-ttu-id="ec8af-211">透過 `UseStaticFiles` 或 `UseDirectoryBrowser`，仔細檢閱要啟用哪些目錄。</span><span class="sxs-lookup"><span data-stu-id="ec8af-211">Carefully review which directories are enabled via `UseStaticFiles` or `UseDirectoryBrowser`.</span></span> <span data-ttu-id="ec8af-212">因為整個目錄和其子目錄都可供公開存取。</span><span class="sxs-lookup"><span data-stu-id="ec8af-212">The entire directory and its sub-directories become publicly accessible.</span></span> <span data-ttu-id="ec8af-213">儲存適合在專用目錄中提供公用的檔案，例如 `<content_root>/wwwroot` 。</span><span class="sxs-lookup"><span data-stu-id="ec8af-213">Store files suitable for serving to the public in a dedicated directory, such as `<content_root>/wwwroot`.</span></span> <span data-ttu-id="ec8af-214">將這些檔案與 MVC 視圖、 :::no-loc(Razor)::: 頁面、設定檔等區隔開。</span><span class="sxs-lookup"><span data-stu-id="ec8af-214">Separate these files from MVC views, :::no-loc(Razor)::: Pages, configuration files, etc.</span></span>
+> <span data-ttu-id="ec8af-209">`UseDirectoryBrowser` 和 `UseStaticFiles` 可能會導致洩漏祕密。</span><span class="sxs-lookup"><span data-stu-id="ec8af-209">`UseDirectoryBrowser` and `UseStaticFiles` can leak secrets.</span></span> <span data-ttu-id="ec8af-210">強烈建議您在生產環境中停用目錄瀏覽功能。</span><span class="sxs-lookup"><span data-stu-id="ec8af-210">Disabling directory browsing in production is highly recommended.</span></span> <span data-ttu-id="ec8af-211">透過 `UseStaticFiles` 或 `UseDirectoryBrowser`，仔細檢閱要啟用哪些目錄。</span><span class="sxs-lookup"><span data-stu-id="ec8af-211">Carefully review which directories are enabled via `UseStaticFiles` or `UseDirectoryBrowser`.</span></span> <span data-ttu-id="ec8af-212">因為整個目錄和其子目錄都可供公開存取。</span><span class="sxs-lookup"><span data-stu-id="ec8af-212">The entire directory and its sub-directories become publicly accessible.</span></span> <span data-ttu-id="ec8af-213">儲存適合在專用目錄中提供公用的檔案，例如 `<content_root>/wwwroot` 。</span><span class="sxs-lookup"><span data-stu-id="ec8af-213">Store files suitable for serving to the public in a dedicated directory, such as `<content_root>/wwwroot`.</span></span> <span data-ttu-id="ec8af-214">將這些檔案與 MVC 視圖、 Razor 頁面、設定檔等區隔開。</span><span class="sxs-lookup"><span data-stu-id="ec8af-214">Separate these files from MVC views, Razor Pages, configuration files, etc.</span></span>
 
 * <span data-ttu-id="ec8af-215">使用 `UseDirectoryBrowser` 和 `UseStaticFiles` 公開內容的 URL 可能有區分大小寫，並受限於基礎檔案系統的字元限制。</span><span class="sxs-lookup"><span data-stu-id="ec8af-215">The URLs for content exposed with `UseDirectoryBrowser` and `UseStaticFiles` are subject to the case sensitivity and character restrictions of the underlying file system.</span></span> <span data-ttu-id="ec8af-216">例如，Windows 不區分大小寫，但 macOS 和 Linux 則不區分大小寫。</span><span class="sxs-lookup"><span data-stu-id="ec8af-216">For example, Windows is case insensitive, but macOS and Linux aren't.</span></span>
 
@@ -461,7 +461,7 @@ app.UseFileServer(enableDirectoryBrowsing: true);
 
 <span data-ttu-id="ec8af-328">請參閱 [MIME 內容類型](https://www.iana.org/assignments/media-types/media-types.xhtml)。</span><span class="sxs-lookup"><span data-stu-id="ec8af-328">See [MIME content types](https://www.iana.org/assignments/media-types/media-types.xhtml).</span></span>
 
-<span data-ttu-id="ec8af-329">如需在 <xref:Microsoft.AspNetCore.StaticFiles.FileExtensionContentTypeProvider> 伺服器應用程式中使用自訂或設定其他的詳細資訊 <xref:Microsoft.AspNetCore.Builder.StaticFileOptions> :::no-loc(Blazor)::: ，請參閱 <xref:blazor/fundamentals/additional-scenarios#static-files> 。</span><span class="sxs-lookup"><span data-stu-id="ec8af-329">For information on using a custom <xref:Microsoft.AspNetCore.StaticFiles.FileExtensionContentTypeProvider> or to configure other <xref:Microsoft.AspNetCore.Builder.StaticFileOptions> in :::no-loc(Blazor)::: Server apps, see <xref:blazor/fundamentals/additional-scenarios#static-files>.</span></span>
+<span data-ttu-id="ec8af-329">如需在 <xref:Microsoft.AspNetCore.StaticFiles.FileExtensionContentTypeProvider> 伺服器應用程式中使用自訂或設定其他的詳細資訊 <xref:Microsoft.AspNetCore.Builder.StaticFileOptions> Blazor ，請參閱 <xref:blazor/fundamentals/additional-scenarios#static-files> 。</span><span class="sxs-lookup"><span data-stu-id="ec8af-329">For information on using a custom <xref:Microsoft.AspNetCore.StaticFiles.FileExtensionContentTypeProvider> or to configure other <xref:Microsoft.AspNetCore.Builder.StaticFileOptions> in Blazor Server apps, see <xref:blazor/fundamentals/additional-scenarios#static-files>.</span></span>
 
 ## <a name="non-standard-content-types"></a><span data-ttu-id="ec8af-330">非標準的內容類型</span><span class="sxs-lookup"><span data-stu-id="ec8af-330">Non-standard content types</span></span>
 
@@ -483,7 +483,7 @@ app.UseFileServer(enableDirectoryBrowsing: true);
 ### <a name="considerations"></a><span data-ttu-id="ec8af-344">考量</span><span class="sxs-lookup"><span data-stu-id="ec8af-344">Considerations</span></span>
 
 > [!WARNING]
-> <span data-ttu-id="ec8af-345">`UseDirectoryBrowser` 和 `UseStaticFiles` 可能會導致洩漏祕密。</span><span class="sxs-lookup"><span data-stu-id="ec8af-345">`UseDirectoryBrowser` and `UseStaticFiles` can leak secrets.</span></span> <span data-ttu-id="ec8af-346">強烈建議您在生產環境中停用目錄瀏覽功能。</span><span class="sxs-lookup"><span data-stu-id="ec8af-346">Disabling directory browsing in production is highly recommended.</span></span> <span data-ttu-id="ec8af-347">透過 `UseStaticFiles` 或 `UseDirectoryBrowser`，仔細檢閱要啟用哪些目錄。</span><span class="sxs-lookup"><span data-stu-id="ec8af-347">Carefully review which directories are enabled via `UseStaticFiles` or `UseDirectoryBrowser`.</span></span> <span data-ttu-id="ec8af-348">因為整個目錄和其子目錄都可供公開存取。</span><span class="sxs-lookup"><span data-stu-id="ec8af-348">The entire directory and its sub-directories become publicly accessible.</span></span> <span data-ttu-id="ec8af-349">儲存適合在專用目錄中提供公用的檔案，例如 *\<content_root> /wwwroot* 。</span><span class="sxs-lookup"><span data-stu-id="ec8af-349">Store files suitable for serving to the public in a dedicated directory, such as *\<content_root>/wwwroot* .</span></span> <span data-ttu-id="ec8af-350">將這些檔案和 MVC 視圖分開、 :::no-loc(Razor)::: 頁面 (2.x 僅) 、設定檔等。</span><span class="sxs-lookup"><span data-stu-id="ec8af-350">Separate these files from MVC views, :::no-loc(Razor)::: Pages (2.x only), configuration files, etc.</span></span>
+> <span data-ttu-id="ec8af-345">`UseDirectoryBrowser` 和 `UseStaticFiles` 可能會導致洩漏祕密。</span><span class="sxs-lookup"><span data-stu-id="ec8af-345">`UseDirectoryBrowser` and `UseStaticFiles` can leak secrets.</span></span> <span data-ttu-id="ec8af-346">強烈建議您在生產環境中停用目錄瀏覽功能。</span><span class="sxs-lookup"><span data-stu-id="ec8af-346">Disabling directory browsing in production is highly recommended.</span></span> <span data-ttu-id="ec8af-347">透過 `UseStaticFiles` 或 `UseDirectoryBrowser`，仔細檢閱要啟用哪些目錄。</span><span class="sxs-lookup"><span data-stu-id="ec8af-347">Carefully review which directories are enabled via `UseStaticFiles` or `UseDirectoryBrowser`.</span></span> <span data-ttu-id="ec8af-348">因為整個目錄和其子目錄都可供公開存取。</span><span class="sxs-lookup"><span data-stu-id="ec8af-348">The entire directory and its sub-directories become publicly accessible.</span></span> <span data-ttu-id="ec8af-349">儲存適合在專用目錄中提供公用的檔案，例如 *\<content_root> /wwwroot* 。</span><span class="sxs-lookup"><span data-stu-id="ec8af-349">Store files suitable for serving to the public in a dedicated directory, such as *\<content_root>/wwwroot* .</span></span> <span data-ttu-id="ec8af-350">將這些檔案和 MVC 視圖分開、 Razor 頁面 (2.x 僅) 、設定檔等。</span><span class="sxs-lookup"><span data-stu-id="ec8af-350">Separate these files from MVC views, Razor Pages (2.x only), configuration files, etc.</span></span>
 
 * <span data-ttu-id="ec8af-351">使用 `UseDirectoryBrowser` 和 `UseStaticFiles` 公開內容的 URL 可能有區分大小寫，並受限於基礎檔案系統的字元限制。</span><span class="sxs-lookup"><span data-stu-id="ec8af-351">The URLs for content exposed with `UseDirectoryBrowser` and `UseStaticFiles` are subject to the case sensitivity and character restrictions of the underlying file system.</span></span> <span data-ttu-id="ec8af-352">例如，Windows 不區分大小寫&mdash;macOS 和 Linux 則區分大小寫。</span><span class="sxs-lookup"><span data-stu-id="ec8af-352">For example, Windows is case insensitive&mdash;macOS and Linux aren't.</span></span>
 

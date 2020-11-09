@@ -1,23 +1,23 @@
 ---
-title: 'ASP.NET Core :::no-loc(SignalR)::: JavaScript 用戶端'
+title: 'ASP.NET Core SignalR JavaScript 用戶端'
 author: bradygaster
-description: 'ASP.NET Core :::no-loc(SignalR)::: JavaScript 用戶端的總覽。'
+description: 'ASP.NET Core SignalR JavaScript 用戶端的總覽。'
 monikerRange: '>= aspnetcore-2.1'
 ms.author: bradyg
 ms.custom: mvc, devx-track-js
 ms.date: 04/08/2020
 no-loc:
-- ':::no-loc(appsettings.json):::'
-- ':::no-loc(ASP.NET Core Identity):::'
-- ':::no-loc(cookie):::'
-- ':::no-loc(Cookie):::'
-- ':::no-loc(Blazor):::'
-- ':::no-loc(Blazor Server):::'
-- ':::no-loc(Blazor WebAssembly):::'
-- ':::no-loc(Identity):::'
-- ":::no-loc(Let's Encrypt):::"
-- ':::no-loc(Razor):::'
-- ':::no-loc(SignalR):::'
+- 'appsettings.json'
+- 'ASP.NET Core Identity'
+- 'cookie'
+- 'Cookie'
+- 'Blazor'
+- 'Blazor Server'
+- 'Blazor WebAssembly'
+- 'Identity'
+- "Let's Encrypt"
+- 'Razor'
+- 'SignalR'
 uid: signalr/javascript-client
 ms.openlocfilehash: b4b1bc6131a6676710adbf2503efe3f304d89a58
 ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
@@ -26,19 +26,19 @@ ms.contentlocale: zh-TW
 ms.lasthandoff: 10/30/2020
 ms.locfileid: "93050845"
 ---
-# <a name="aspnet-core-no-locsignalr-javascript-client"></a><span data-ttu-id="a65a2-103">ASP.NET Core :::no-loc(SignalR)::: JavaScript 用戶端</span><span class="sxs-lookup"><span data-stu-id="a65a2-103">ASP.NET Core :::no-loc(SignalR)::: JavaScript client</span></span>
+# <a name="aspnet-core-no-locsignalr-javascript-client"></a><span data-ttu-id="a65a2-103">ASP.NET Core SignalR JavaScript 用戶端</span><span class="sxs-lookup"><span data-stu-id="a65a2-103">ASP.NET Core SignalR JavaScript client</span></span>
 
 ::: moniker range=">= aspnetcore-3.0"
 
 <span data-ttu-id="a65a2-104">作者：[Rachel Appel](https://twitter.com/rachelappel)</span><span class="sxs-lookup"><span data-stu-id="a65a2-104">By [Rachel Appel](https://twitter.com/rachelappel)</span></span>
 
-<span data-ttu-id="a65a2-105">ASP.NET Core :::no-loc(SignalR)::: JavaScript 用戶端程式庫可讓開發人員呼叫伺服器端中樞程式碼。</span><span class="sxs-lookup"><span data-stu-id="a65a2-105">The ASP.NET Core :::no-loc(SignalR)::: JavaScript client library enables developers to call server-side hub code.</span></span>
+<span data-ttu-id="a65a2-105">ASP.NET Core SignalR JavaScript 用戶端程式庫可讓開發人員呼叫伺服器端中樞程式碼。</span><span class="sxs-lookup"><span data-stu-id="a65a2-105">The ASP.NET Core SignalR JavaScript client library enables developers to call server-side hub code.</span></span>
 
 <span data-ttu-id="a65a2-106">[查看或下載範例程式碼](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/signalr/javascript-client/samples) ([如何下載](xref:index#how-to-download-a-sample)) </span><span class="sxs-lookup"><span data-stu-id="a65a2-106">[View or download sample code](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/signalr/javascript-client/samples) ([how to download](xref:index#how-to-download-a-sample))</span></span>
 
-## <a name="install-the-no-locsignalr-client-package"></a><span data-ttu-id="a65a2-107">安裝 :::no-loc(SignalR)::: 用戶端套件</span><span class="sxs-lookup"><span data-stu-id="a65a2-107">Install the :::no-loc(SignalR)::: client package</span></span>
+## <a name="install-the-no-locsignalr-client-package"></a><span data-ttu-id="a65a2-107">安裝 SignalR 用戶端套件</span><span class="sxs-lookup"><span data-stu-id="a65a2-107">Install the SignalR client package</span></span>
 
-<span data-ttu-id="a65a2-108">:::no-loc(SignalR):::JavaScript 用戶端程式庫會以[npm](https://www.npmjs.com/)套件的形式傳遞。</span><span class="sxs-lookup"><span data-stu-id="a65a2-108">The :::no-loc(SignalR)::: JavaScript client library is delivered as an [npm](https://www.npmjs.com/) package.</span></span> <span data-ttu-id="a65a2-109">下列各節概述安裝用戶端程式庫的不同方式。</span><span class="sxs-lookup"><span data-stu-id="a65a2-109">The following sections outline different ways to install the client library.</span></span>
+<span data-ttu-id="a65a2-108">SignalRJavaScript 用戶端程式庫會以[npm](https://www.npmjs.com/)套件的形式傳遞。</span><span class="sxs-lookup"><span data-stu-id="a65a2-108">The SignalR JavaScript client library is delivered as an [npm](https://www.npmjs.com/) package.</span></span> <span data-ttu-id="a65a2-109">下列各節概述安裝用戶端程式庫的不同方式。</span><span class="sxs-lookup"><span data-stu-id="a65a2-109">The following sections outline different ways to install the client library.</span></span>
 
 ### <a name="install-with-npm"></a><span data-ttu-id="a65a2-110">使用 npm 安裝</span><span class="sxs-lookup"><span data-stu-id="a65a2-110">Install with npm</span></span>
 
@@ -51,7 +51,7 @@ npm install @microsoft/signalr
 
 <span data-ttu-id="a65a2-113">npm 會將套件內容安裝 *node_modules \\ @microsoft\signalr\dist\browser* 資料夾。</span><span class="sxs-lookup"><span data-stu-id="a65a2-113">npm installs the package contents in the *node_modules\\@microsoft\signalr\dist\browser* folder.</span></span> <span data-ttu-id="a65a2-114">在 *wwwroot \\ lib* 資料夾下建立名為 *signalr* 的新資料夾。</span><span class="sxs-lookup"><span data-stu-id="a65a2-114">Create a new folder named *signalr* under the *wwwroot\\lib* folder.</span></span> <span data-ttu-id="a65a2-115">將 *signalr.js* 檔案複製到 *wwwroot\lib\signalr* 資料夾。</span><span class="sxs-lookup"><span data-stu-id="a65a2-115">Copy the *signalr.js* file to the *wwwroot\lib\signalr* folder.</span></span>
 
-<span data-ttu-id="a65a2-116">參考 :::no-loc(SignalR)::: 元素中的 JavaScript 用戶端 `<script>` 。</span><span class="sxs-lookup"><span data-stu-id="a65a2-116">Reference the :::no-loc(SignalR)::: JavaScript client in the `<script>` element.</span></span> <span data-ttu-id="a65a2-117">例如：</span><span class="sxs-lookup"><span data-stu-id="a65a2-117">For example:</span></span>
+<span data-ttu-id="a65a2-116">參考 SignalR 元素中的 JavaScript 用戶端 `<script>` 。</span><span class="sxs-lookup"><span data-stu-id="a65a2-116">Reference the SignalR JavaScript client in the `<script>` element.</span></span> <span data-ttu-id="a65a2-117">例如：</span><span class="sxs-lookup"><span data-stu-id="a65a2-117">For example:</span></span>
 
 ```html
 <script src="~/lib/signalr/signalr.js"></script>
@@ -61,7 +61,7 @@ npm install @microsoft/signalr
 
 <span data-ttu-id="a65a2-119">若要在沒有 npm 必要條件的情況下使用用戶端程式庫，請參考用戶端程式庫的 CDN 託管複本。</span><span class="sxs-lookup"><span data-stu-id="a65a2-119">To use the client library without the npm prerequisite, reference a CDN-hosted copy of the client library.</span></span> <span data-ttu-id="a65a2-120">例如：</span><span class="sxs-lookup"><span data-stu-id="a65a2-120">For example:</span></span>
 
-[!code-html[](javascript-client/samples/3.x/:::no-loc(SignalR):::Chat/Pages/Index.cshtml?name=snippet_CDN)]
+[!code-html[](javascript-client/samples/3.x/SignalRChat/Pages/Index.cshtml?name=snippet_CDN)]
 
 <span data-ttu-id="a65a2-121">用戶端程式庫可在下列 Cdn 上取得：</span><span class="sxs-lookup"><span data-stu-id="a65a2-121">The client library is available on the following CDNs:</span></span>
 
@@ -71,13 +71,13 @@ npm install @microsoft/signalr
 
 ### <a name="install-with-libman"></a><span data-ttu-id="a65a2-125">使用 LibMan 安裝</span><span class="sxs-lookup"><span data-stu-id="a65a2-125">Install with LibMan</span></span>
 
-<span data-ttu-id="a65a2-126">[LibMan](xref:client-side/libman/index) 可以用來從 CDN 裝載的用戶端程式庫安裝特定的用戶端程式庫檔案。</span><span class="sxs-lookup"><span data-stu-id="a65a2-126">[LibMan](xref:client-side/libman/index) can be used to install specific client library files from the CDN-hosted client library.</span></span> <span data-ttu-id="a65a2-127">例如，只將縮減 JavaScript 檔案新增至專案。</span><span class="sxs-lookup"><span data-stu-id="a65a2-127">For example, only add the minified JavaScript file to the project.</span></span> <span data-ttu-id="a65a2-128">如需該方法的詳細資訊，請參閱 [新增 :::no-loc(SignalR)::: 用戶端程式庫](xref:tutorials/signalr#add-the-signalr-client-library)。</span><span class="sxs-lookup"><span data-stu-id="a65a2-128">For details on that approach, see [Add the :::no-loc(SignalR)::: client library](xref:tutorials/signalr#add-the-signalr-client-library).</span></span>
+<span data-ttu-id="a65a2-126">[LibMan](xref:client-side/libman/index) 可以用來從 CDN 裝載的用戶端程式庫安裝特定的用戶端程式庫檔案。</span><span class="sxs-lookup"><span data-stu-id="a65a2-126">[LibMan](xref:client-side/libman/index) can be used to install specific client library files from the CDN-hosted client library.</span></span> <span data-ttu-id="a65a2-127">例如，只將縮減 JavaScript 檔案新增至專案。</span><span class="sxs-lookup"><span data-stu-id="a65a2-127">For example, only add the minified JavaScript file to the project.</span></span> <span data-ttu-id="a65a2-128">如需該方法的詳細資訊，請參閱 [新增 SignalR 用戶端程式庫](xref:tutorials/signalr#add-the-signalr-client-library)。</span><span class="sxs-lookup"><span data-stu-id="a65a2-128">For details on that approach, see [Add the SignalR client library](xref:tutorials/signalr#add-the-signalr-client-library).</span></span>
 
 ## <a name="connect-to-a-hub"></a><span data-ttu-id="a65a2-129">連接至中樞</span><span class="sxs-lookup"><span data-stu-id="a65a2-129">Connect to a hub</span></span>
 
 <span data-ttu-id="a65a2-130">下列程式碼會建立並啟動連接。</span><span class="sxs-lookup"><span data-stu-id="a65a2-130">The following code creates and starts a connection.</span></span> <span data-ttu-id="a65a2-131">中樞的名稱不區分大小寫：</span><span class="sxs-lookup"><span data-stu-id="a65a2-131">The hub's name is case insensitive:</span></span>
 
-[!code-javascript[](javascript-client/samples/3.x/:::no-loc(SignalR):::Chat/wwwroot/chat.js?range=3-6,29-43)]
+[!code-javascript[](javascript-client/samples/3.x/SignalRChat/wwwroot/chat.js?range=3-6,29-43)]
 
 ### <a name="cross-origin-connections"></a><span data-ttu-id="a65a2-132">跨原始連接</span><span class="sxs-lookup"><span data-stu-id="a65a2-132">Cross-origin connections</span></span>
 
@@ -88,7 +88,7 @@ npm install @microsoft/signalr
 
 <span data-ttu-id="a65a2-137">為了防止惡意網站從另一個網站讀取敏感性資料，預設會停用 [跨原始來源的連接](xref:security/cors) 。</span><span class="sxs-lookup"><span data-stu-id="a65a2-137">To prevent a malicious site from reading sensitive data from another site, [cross-origin connections](xref:security/cors) are disabled by default.</span></span> <span data-ttu-id="a65a2-138">若要允許跨原始來源的要求，請在類別中啟用它 `Startup` ：</span><span class="sxs-lookup"><span data-stu-id="a65a2-138">To allow a cross-origin request, enable it in the `Startup` class:</span></span>
 
-[!code-csharp[](javascript-client/samples/3.x/:::no-loc(SignalR):::Chat/Startup.cs?highlight=16-23,40)]
+[!code-csharp[](javascript-client/samples/3.x/SignalRChat/Startup.cs?highlight=16-23,40)]
 
 ## <a name="call-hub-methods-from-the-client"></a><span data-ttu-id="a65a2-139">從用戶端呼叫中樞方法</span><span class="sxs-lookup"><span data-stu-id="a65a2-139">Call hub methods from the client</span></span>
 
@@ -99,10 +99,10 @@ npm install @microsoft/signalr
 
 <span data-ttu-id="a65a2-144">在下列範例中，中樞上的方法名稱為 `SendMessage` 。</span><span class="sxs-lookup"><span data-stu-id="a65a2-144">In the following example, the method name on the hub is `SendMessage`.</span></span> <span data-ttu-id="a65a2-145">傳遞給的第二個和第三個引數會 `invoke` 對應至中樞方法的 `user` 和 `message` 引數：</span><span class="sxs-lookup"><span data-stu-id="a65a2-145">The second and third arguments passed to `invoke` map to the hub method's `user` and `message` arguments:</span></span>
 
-[!code-javascript[](javascript-client/samples/3.x/:::no-loc(SignalR):::Chat/wwwroot/chat.js?name=snippet_Invoke&highlight=2)]
+[!code-javascript[](javascript-client/samples/3.x/SignalRChat/wwwroot/chat.js?name=snippet_Invoke&highlight=2)]
 
 > [!NOTE]
-> <span data-ttu-id="a65a2-146">只有 :::no-loc(SignalR)::: 在 *預設* 模式下使用 Azure 服務時，才支援從用戶端呼叫中樞方法。</span><span class="sxs-lookup"><span data-stu-id="a65a2-146">Calling hub methods from a client is only supported when using the Azure :::no-loc(SignalR)::: Service in *Default* mode.</span></span> <span data-ttu-id="a65a2-147">如需詳細資訊，請參閱 [ (azure Signalr GitHub 存放庫) ](https://github.com/Azure/azure-signalr/blob/dev/docs/faq.md#what-is-the-meaning-of-service-mode-defaultserverlessclassic-how-can-i-choose)的常見問題。</span><span class="sxs-lookup"><span data-stu-id="a65a2-147">For more information, see [Frequently Asked Questions (azure-signalr GitHub repository)](https://github.com/Azure/azure-signalr/blob/dev/docs/faq.md#what-is-the-meaning-of-service-mode-defaultserverlessclassic-how-can-i-choose).</span></span>
+> <span data-ttu-id="a65a2-146">只有 SignalR 在 *預設* 模式下使用 Azure 服務時，才支援從用戶端呼叫中樞方法。</span><span class="sxs-lookup"><span data-stu-id="a65a2-146">Calling hub methods from a client is only supported when using the Azure SignalR Service in *Default* mode.</span></span> <span data-ttu-id="a65a2-147">如需詳細資訊，請參閱 [ (azure Signalr GitHub 存放庫) ](https://github.com/Azure/azure-signalr/blob/dev/docs/faq.md#what-is-the-meaning-of-service-mode-defaultserverlessclassic-how-can-i-choose)的常見問題。</span><span class="sxs-lookup"><span data-stu-id="a65a2-147">For more information, see [Frequently Asked Questions (azure-signalr GitHub repository)](https://github.com/Azure/azure-signalr/blob/dev/docs/faq.md#what-is-the-meaning-of-service-mode-defaultserverlessclassic-how-can-i-choose).</span></span>
 
 <span data-ttu-id="a65a2-148">方法會傳回 `invoke` JavaScript [承諾](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Promise)。</span><span class="sxs-lookup"><span data-stu-id="a65a2-148">The `invoke` method returns a JavaScript [Promise](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Promise).</span></span> <span data-ttu-id="a65a2-149">`Promise`當伺服器上的方法傳回時，會使用傳回值來解析 (是否有任何) 。</span><span class="sxs-lookup"><span data-stu-id="a65a2-149">The `Promise` is resolved with the return value (if any) when the method on the server returns.</span></span> <span data-ttu-id="a65a2-150">如果伺服器上的方法擲回錯誤，則 `Promise` 會被拒絕，並顯示錯誤訊息。</span><span class="sxs-lookup"><span data-stu-id="a65a2-150">If the method on the server throws an error, the `Promise` is rejected with the error message.</span></span> <span data-ttu-id="a65a2-151">使用 `async` 和 `await` 或的 `Promise` `then` 和 `catch` 方法來處理這些情況。</span><span class="sxs-lookup"><span data-stu-id="a65a2-151">Use `async` and `await` or the `Promise`'s `then` and `catch` methods to handle these cases.</span></span>
 
@@ -120,13 +120,13 @@ npm install @microsoft/signalr
 
 <span data-ttu-id="a65a2-164">在下列範例中，方法名稱為 `ReceiveMessage` 。</span><span class="sxs-lookup"><span data-stu-id="a65a2-164">In the following example, the method name is `ReceiveMessage`.</span></span> <span data-ttu-id="a65a2-165">引數名稱為 `user` 和 `message` ：</span><span class="sxs-lookup"><span data-stu-id="a65a2-165">The argument names are `user` and `message`:</span></span>
 
-[!code-javascript[](javascript-client/samples/3.x/:::no-loc(SignalR):::Chat/wwwroot/chat.js?name=snippet_ReceiveMessage)]
+[!code-javascript[](javascript-client/samples/3.x/SignalRChat/wwwroot/chat.js?name=snippet_ReceiveMessage)]
 
-<span data-ttu-id="a65a2-166">中的上述程式碼 `connection.on` 會在伺服器端程式碼使用方法呼叫它時執行 <xref:Microsoft.AspNetCore.:::no-loc(SignalR):::.ClientProxyExtensions.SendAsync%2A> ：</span><span class="sxs-lookup"><span data-stu-id="a65a2-166">The preceding code in `connection.on` runs when server-side code calls it using the <xref:Microsoft.AspNetCore.:::no-loc(SignalR):::.ClientProxyExtensions.SendAsync%2A> method:</span></span>
+<span data-ttu-id="a65a2-166">中的上述程式碼 `connection.on` 會在伺服器端程式碼使用方法呼叫它時執行 <xref:Microsoft.AspNetCore.SignalR.ClientProxyExtensions.SendAsync%2A> ：</span><span class="sxs-lookup"><span data-stu-id="a65a2-166">The preceding code in `connection.on` runs when server-side code calls it using the <xref:Microsoft.AspNetCore.SignalR.ClientProxyExtensions.SendAsync%2A> method:</span></span>
 
-[!code-csharp[Call client-side](javascript-client/samples/3.x/:::no-loc(SignalR):::Chat/Hubs/ChatHub.cs?name=snippet_SendMessage)]
+[!code-csharp[Call client-side](javascript-client/samples/3.x/SignalRChat/Hubs/ChatHub.cs?name=snippet_SendMessage)]
 
-<span data-ttu-id="a65a2-167">:::no-loc(SignalR)::: 藉由比對和中定義的方法名稱和引數，判斷要呼叫的用戶端方法 `SendAsync` `connection.on` 。</span><span class="sxs-lookup"><span data-stu-id="a65a2-167">:::no-loc(SignalR)::: determines which client method to call by matching the method name and arguments defined in `SendAsync` and `connection.on`.</span></span>
+<span data-ttu-id="a65a2-167">SignalR 藉由比對和中定義的方法名稱和引數，判斷要呼叫的用戶端方法 `SendAsync` `connection.on` 。</span><span class="sxs-lookup"><span data-stu-id="a65a2-167">SignalR determines which client method to call by matching the method name and arguments defined in `SendAsync` and `connection.on`.</span></span>
 
 > [!NOTE]
 > <span data-ttu-id="a65a2-168">最佳做法是在之後呼叫 [start](/javascript/api/%40aspnet/signalr/hubconnection#start) 方法 `HubConnection` `on` 。</span><span class="sxs-lookup"><span data-stu-id="a65a2-168">As a best practice, call the [start](/javascript/api/%40aspnet/signalr/hubconnection#start) method on the `HubConnection` after `on`.</span></span> <span data-ttu-id="a65a2-169">這麼做可確保您的處理常式會在收到任何訊息之前註冊。</span><span class="sxs-lookup"><span data-stu-id="a65a2-169">Doing so ensures your handlers are registered before any messages are received.</span></span>
@@ -135,7 +135,7 @@ npm install @microsoft/signalr
 
 <span data-ttu-id="a65a2-171">使用 `try` 和 `catch` 搭配 `async` 和 `await` 或的 `Promise` `catch` 方法來處理用戶端錯誤。</span><span class="sxs-lookup"><span data-stu-id="a65a2-171">Use `try` and `catch` with `async` and `await` or the `Promise`'s `catch` method to handle client-side errors.</span></span> <span data-ttu-id="a65a2-172">使用 `console.error` 將錯誤輸出至瀏覽器的主控台：</span><span class="sxs-lookup"><span data-stu-id="a65a2-172">Use `console.error` to output errors to the browser's console:</span></span>
 
-[!code-javascript[](javascript-client/samples/3.x/:::no-loc(SignalR):::Chat/wwwroot/chat.js?name=snippet_Invoke&highlight=1,3-5)]
+[!code-javascript[](javascript-client/samples/3.x/SignalRChat/wwwroot/chat.js?name=snippet_Invoke&highlight=1,3-5)]
 
 <span data-ttu-id="a65a2-173">設定用戶端記錄檔追蹤，方法是在建立連接時，傳遞記錄器和事件種類來記錄。</span><span class="sxs-lookup"><span data-stu-id="a65a2-173">Set up client-side log tracing by passing a logger and type of event to log when the connection is made.</span></span> <span data-ttu-id="a65a2-174">訊息會以指定的記錄層級和更新版本記錄。</span><span class="sxs-lookup"><span data-stu-id="a65a2-174">Messages are logged with the specified log level and higher.</span></span> <span data-ttu-id="a65a2-175">可用的記錄層級如下所示：</span><span class="sxs-lookup"><span data-stu-id="a65a2-175">Available log levels are as follows:</span></span>
 
@@ -146,13 +146,13 @@ npm install @microsoft/signalr
 
 <span data-ttu-id="a65a2-184">在[HubConnectionBuilder](/javascript/api/%40aspnet/signalr/hubconnectionbuilder)上使用[configureLogging](/javascript/api/%40aspnet/signalr/hubconnectionbuilder#configurelogging)方法來設定記錄層級。</span><span class="sxs-lookup"><span data-stu-id="a65a2-184">Use the [configureLogging](/javascript/api/%40aspnet/signalr/hubconnectionbuilder#configurelogging) method on [HubConnectionBuilder](/javascript/api/%40aspnet/signalr/hubconnectionbuilder) to configure the log level.</span></span> <span data-ttu-id="a65a2-185">訊息會記錄到瀏覽器主控台：</span><span class="sxs-lookup"><span data-stu-id="a65a2-185">Messages are logged to the browser console:</span></span>
 
-[!code-javascript[](javascript-client/samples/3.x/:::no-loc(SignalR):::Chat/wwwroot/chat.js?name=snippet_Connection&highlight=3)]
+[!code-javascript[](javascript-client/samples/3.x/SignalRChat/wwwroot/chat.js?name=snippet_Connection&highlight=3)]
 
 ## <a name="reconnect-clients"></a><span data-ttu-id="a65a2-186">重新連線用戶端</span><span class="sxs-lookup"><span data-stu-id="a65a2-186">Reconnect clients</span></span>
 
 ### <a name="automatically-reconnect"></a><span data-ttu-id="a65a2-187">自動重新連線</span><span class="sxs-lookup"><span data-stu-id="a65a2-187">Automatically reconnect</span></span>
 
-<span data-ttu-id="a65a2-188">的 JavaScript 用戶端 :::no-loc(SignalR)::: 可以設定為使用 `withAutomaticReconnect` [HubConnectionBuilder](/javascript/api/%40aspnet/signalr/hubconnectionbuilder)上的方法自動重新連接。</span><span class="sxs-lookup"><span data-stu-id="a65a2-188">The JavaScript client for :::no-loc(SignalR)::: can be configured to automatically reconnect using the `withAutomaticReconnect` method on [HubConnectionBuilder](/javascript/api/%40aspnet/signalr/hubconnectionbuilder).</span></span> <span data-ttu-id="a65a2-189">它預設不會自動重新連線。</span><span class="sxs-lookup"><span data-stu-id="a65a2-189">It won't automatically reconnect by default.</span></span>
+<span data-ttu-id="a65a2-188">的 JavaScript 用戶端 SignalR 可以設定為使用 `withAutomaticReconnect` [HubConnectionBuilder](/javascript/api/%40aspnet/signalr/hubconnectionbuilder)上的方法自動重新連接。</span><span class="sxs-lookup"><span data-stu-id="a65a2-188">The JavaScript client for SignalR can be configured to automatically reconnect using the `withAutomaticReconnect` method on [HubConnectionBuilder](/javascript/api/%40aspnet/signalr/hubconnectionbuilder).</span></span> <span data-ttu-id="a65a2-189">它預設不會自動重新連線。</span><span class="sxs-lookup"><span data-stu-id="a65a2-189">It won't automatically reconnect by default.</span></span>
 
 ```javascript
 const connection = new signalR.HubConnectionBuilder()
@@ -203,7 +203,7 @@ async function start() {
     try {
         await connection.start();
         console.assert(connection.state === signalR.HubConnectionState.Connected);
-        console.log(":::no-loc(SignalR)::: Connected.");
+        console.log("SignalR Connected.");
     } catch (err) {
         console.assert(connection.state === signalR.HubConnectionState.Disconnected);
         console.log(err);
@@ -278,7 +278,7 @@ const connection = new signalR.HubConnectionBuilder()
 1. <span data-ttu-id="a65a2-215">函式 (在此案例中， `start` 會建立函式) 以開始連接。</span><span class="sxs-lookup"><span data-stu-id="a65a2-215">A function (in this case, the `start` function) is created to start the connection.</span></span>
 1. <span data-ttu-id="a65a2-216">`start`在連接的事件處理常式中呼叫函式 `onclose` 。</span><span class="sxs-lookup"><span data-stu-id="a65a2-216">Call the `start` function in the connection's `onclose` event handler.</span></span>
 
-[!code-javascript[](javascript-client/samples/3.x/:::no-loc(SignalR):::Chat/wwwroot/chat.js?range=30-40)]
+[!code-javascript[](javascript-client/samples/3.x/SignalRChat/wwwroot/chat.js?range=30-40)]
 
 <span data-ttu-id="a65a2-217">實際執行會使用指數輪詢，或在放棄之前重試指定的次數。</span><span class="sxs-lookup"><span data-stu-id="a65a2-217">A real-world implementation would use an exponential back-off or retry a specified number of times before giving up.</span></span>
 
@@ -291,7 +291,7 @@ const connection = new signalR.HubConnectionBuilder()
 * [<span data-ttu-id="a65a2-223">.NET 用戶端</span><span class="sxs-lookup"><span data-stu-id="a65a2-223">.NET client</span></span>](xref:signalr/dotnet-client)
 * [<span data-ttu-id="a65a2-224">發佈至 Azure</span><span class="sxs-lookup"><span data-stu-id="a65a2-224">Publish to Azure</span></span>](xref:signalr/publish-to-azure-web-app)
 * [<span data-ttu-id="a65a2-225"> (CORS) 的跨原始來源要求 </span><span class="sxs-lookup"><span data-stu-id="a65a2-225">Cross-Origin Requests (CORS)</span></span>](xref:security/cors)
-* [<span data-ttu-id="a65a2-226">Azure :::no-loc(SignalR)::: 服務無伺服器檔</span><span class="sxs-lookup"><span data-stu-id="a65a2-226">Azure :::no-loc(SignalR)::: Service serverless documentation</span></span>](/azure/azure-signalr/signalr-concept-serverless-development-config)
+* [<span data-ttu-id="a65a2-226">Azure SignalR 服務無伺服器檔</span><span class="sxs-lookup"><span data-stu-id="a65a2-226">Azure SignalR Service serverless documentation</span></span>](/azure/azure-signalr/signalr-concept-serverless-development-config)
 * [<span data-ttu-id="a65a2-227">針對連線問題進行疑難排解</span><span class="sxs-lookup"><span data-stu-id="a65a2-227">Troubleshoot connection errors</span></span>](xref:signalr/troubleshoot)
 
 ::: moniker-end
@@ -300,13 +300,13 @@ const connection = new signalR.HubConnectionBuilder()
 
 <span data-ttu-id="a65a2-228">作者：[Rachel Appel](https://twitter.com/rachelappel)</span><span class="sxs-lookup"><span data-stu-id="a65a2-228">By [Rachel Appel](https://twitter.com/rachelappel)</span></span>
 
-<span data-ttu-id="a65a2-229">ASP.NET Core :::no-loc(SignalR)::: JavaScript 用戶端程式庫可讓開發人員呼叫伺服器端中樞程式碼。</span><span class="sxs-lookup"><span data-stu-id="a65a2-229">The ASP.NET Core :::no-loc(SignalR)::: JavaScript client library enables developers to call server-side hub code.</span></span>
+<span data-ttu-id="a65a2-229">ASP.NET Core SignalR JavaScript 用戶端程式庫可讓開發人員呼叫伺服器端中樞程式碼。</span><span class="sxs-lookup"><span data-stu-id="a65a2-229">The ASP.NET Core SignalR JavaScript client library enables developers to call server-side hub code.</span></span>
 
 <span data-ttu-id="a65a2-230">[查看或下載範例程式碼](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/signalr/javascript-client/samples) ([如何下載](xref:index#how-to-download-a-sample)) </span><span class="sxs-lookup"><span data-stu-id="a65a2-230">[View or download sample code](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/signalr/javascript-client/samples) ([how to download](xref:index#how-to-download-a-sample))</span></span>
 
-## <a name="install-the-no-locsignalr-client-package"></a><span data-ttu-id="a65a2-231">安裝 :::no-loc(SignalR)::: 用戶端套件</span><span class="sxs-lookup"><span data-stu-id="a65a2-231">Install the :::no-loc(SignalR)::: client package</span></span>
+## <a name="install-the-no-locsignalr-client-package"></a><span data-ttu-id="a65a2-231">安裝 SignalR 用戶端套件</span><span class="sxs-lookup"><span data-stu-id="a65a2-231">Install the SignalR client package</span></span>
 
-<span data-ttu-id="a65a2-232">:::no-loc(SignalR):::JavaScript 用戶端程式庫會以[npm](https://www.npmjs.com/)套件的形式傳遞。</span><span class="sxs-lookup"><span data-stu-id="a65a2-232">The :::no-loc(SignalR)::: JavaScript client library is delivered as an [npm](https://www.npmjs.com/) package.</span></span> <span data-ttu-id="a65a2-233">下列各節概述安裝用戶端程式庫的不同方式。</span><span class="sxs-lookup"><span data-stu-id="a65a2-233">The following sections outline different ways to install the client library.</span></span>
+<span data-ttu-id="a65a2-232">SignalRJavaScript 用戶端程式庫會以[npm](https://www.npmjs.com/)套件的形式傳遞。</span><span class="sxs-lookup"><span data-stu-id="a65a2-232">The SignalR JavaScript client library is delivered as an [npm](https://www.npmjs.com/) package.</span></span> <span data-ttu-id="a65a2-233">下列各節概述安裝用戶端程式庫的不同方式。</span><span class="sxs-lookup"><span data-stu-id="a65a2-233">The following sections outline different ways to install the client library.</span></span>
 
 ### <a name="install-with-npm"></a><span data-ttu-id="a65a2-234">使用 npm 安裝</span><span class="sxs-lookup"><span data-stu-id="a65a2-234">Install with npm</span></span>
 
@@ -319,7 +319,7 @@ npm install @aspnet/signalr
 
 <span data-ttu-id="a65a2-237">npm 會將套件內容安裝 *node_modules \\ @aspnet\signalr\dist\browser* 資料夾。</span><span class="sxs-lookup"><span data-stu-id="a65a2-237">npm installs the package contents in the *node_modules\\@aspnet\signalr\dist\browser* folder.</span></span> <span data-ttu-id="a65a2-238">在 *wwwroot \\ lib* 資料夾下建立名為 *signalr* 的新資料夾。</span><span class="sxs-lookup"><span data-stu-id="a65a2-238">Create a new folder named *signalr* under the *wwwroot\\lib* folder.</span></span> <span data-ttu-id="a65a2-239">將 *signalr.js* 檔案複製到 *wwwroot\lib\signalr* 資料夾。</span><span class="sxs-lookup"><span data-stu-id="a65a2-239">Copy the *signalr.js* file to the *wwwroot\lib\signalr* folder.</span></span>
 
-<span data-ttu-id="a65a2-240">參考 :::no-loc(SignalR)::: 元素中的 JavaScript 用戶端 `<script>` 。</span><span class="sxs-lookup"><span data-stu-id="a65a2-240">Reference the :::no-loc(SignalR)::: JavaScript client in the `<script>` element.</span></span> <span data-ttu-id="a65a2-241">例如：</span><span class="sxs-lookup"><span data-stu-id="a65a2-241">For example:</span></span>
+<span data-ttu-id="a65a2-240">參考 SignalR 元素中的 JavaScript 用戶端 `<script>` 。</span><span class="sxs-lookup"><span data-stu-id="a65a2-240">Reference the SignalR JavaScript client in the `<script>` element.</span></span> <span data-ttu-id="a65a2-241">例如：</span><span class="sxs-lookup"><span data-stu-id="a65a2-241">For example:</span></span>
 
 ```html
 <script src="~/lib/signalr/signalr.js"></script>
@@ -341,13 +341,13 @@ npm install @aspnet/signalr
 
 ### <a name="install-with-libman"></a><span data-ttu-id="a65a2-249">使用 LibMan 安裝</span><span class="sxs-lookup"><span data-stu-id="a65a2-249">Install with LibMan</span></span>
 
-<span data-ttu-id="a65a2-250">[LibMan](xref:client-side/libman/index) 可以用來從 CDN 裝載的用戶端程式庫安裝特定的用戶端程式庫檔案。</span><span class="sxs-lookup"><span data-stu-id="a65a2-250">[LibMan](xref:client-side/libman/index) can be used to install specific client library files from the CDN-hosted client library.</span></span> <span data-ttu-id="a65a2-251">例如，只將縮減 JavaScript 檔案新增至專案。</span><span class="sxs-lookup"><span data-stu-id="a65a2-251">For example, only add the minified JavaScript file to the project.</span></span> <span data-ttu-id="a65a2-252">如需該方法的詳細資訊，請參閱 [新增 :::no-loc(SignalR)::: 用戶端程式庫](xref:tutorials/signalr#add-the-signalr-client-library)。</span><span class="sxs-lookup"><span data-stu-id="a65a2-252">For details on that approach, see [Add the :::no-loc(SignalR)::: client library](xref:tutorials/signalr#add-the-signalr-client-library).</span></span>
+<span data-ttu-id="a65a2-250">[LibMan](xref:client-side/libman/index) 可以用來從 CDN 裝載的用戶端程式庫安裝特定的用戶端程式庫檔案。</span><span class="sxs-lookup"><span data-stu-id="a65a2-250">[LibMan](xref:client-side/libman/index) can be used to install specific client library files from the CDN-hosted client library.</span></span> <span data-ttu-id="a65a2-251">例如，只將縮減 JavaScript 檔案新增至專案。</span><span class="sxs-lookup"><span data-stu-id="a65a2-251">For example, only add the minified JavaScript file to the project.</span></span> <span data-ttu-id="a65a2-252">如需該方法的詳細資訊，請參閱 [新增 SignalR 用戶端程式庫](xref:tutorials/signalr#add-the-signalr-client-library)。</span><span class="sxs-lookup"><span data-stu-id="a65a2-252">For details on that approach, see [Add the SignalR client library](xref:tutorials/signalr#add-the-signalr-client-library).</span></span>
 
 ## <a name="connect-to-a-hub"></a><span data-ttu-id="a65a2-253">連接至中樞</span><span class="sxs-lookup"><span data-stu-id="a65a2-253">Connect to a hub</span></span>
 
 <span data-ttu-id="a65a2-254">下列程式碼會建立並啟動連接。</span><span class="sxs-lookup"><span data-stu-id="a65a2-254">The following code creates and starts a connection.</span></span> <span data-ttu-id="a65a2-255">中樞的名稱不區分大小寫。</span><span class="sxs-lookup"><span data-stu-id="a65a2-255">The hub's name is case insensitive.</span></span>
 
-[!code-javascript[Call hub methods](javascript-client/samples/2.x/:::no-loc(SignalR):::Chat/wwwroot/js/chat.js?range=9-13,28-51)]
+[!code-javascript[Call hub methods](javascript-client/samples/2.x/SignalRChat/wwwroot/js/chat.js?range=9-13,28-51)]
 
 ### <a name="cross-origin-connections"></a><span data-ttu-id="a65a2-256">跨原始連接</span><span class="sxs-lookup"><span data-stu-id="a65a2-256">Cross-origin connections</span></span>
 
@@ -355,7 +355,7 @@ npm install @aspnet/signalr
 
 <span data-ttu-id="a65a2-259">為了防止惡意網站從另一個網站讀取敏感性資料，預設會停用 [跨原始來源的連接](xref:security/cors) 。</span><span class="sxs-lookup"><span data-stu-id="a65a2-259">To prevent a malicious site from reading sensitive data from another site, [cross-origin connections](xref:security/cors) are disabled by default.</span></span> <span data-ttu-id="a65a2-260">若要允許跨原始來源的要求，請在類別中加以啟用 `Startup` 。</span><span class="sxs-lookup"><span data-stu-id="a65a2-260">To allow a cross-origin request, enable it in the `Startup` class.</span></span>
 
-[!code-csharp[Cross-origin connections](javascript-client/samples/2.x/:::no-loc(SignalR):::Chat/Startup.cs?highlight=29-35,56)]
+[!code-csharp[Cross-origin connections](javascript-client/samples/2.x/SignalRChat/Startup.cs?highlight=29-35,56)]
 
 ## <a name="call-hub-methods-from-client"></a><span data-ttu-id="a65a2-261">從用戶端呼叫中樞方法</span><span class="sxs-lookup"><span data-stu-id="a65a2-261">Call hub methods from client</span></span>
 
@@ -364,10 +364,10 @@ npm install @aspnet/signalr
 * <span data-ttu-id="a65a2-264">中樞方法的名稱。</span><span class="sxs-lookup"><span data-stu-id="a65a2-264">The name of the hub method.</span></span> <span data-ttu-id="a65a2-265">在下列範例中，中樞上的方法名稱為 `SendMessage` 。</span><span class="sxs-lookup"><span data-stu-id="a65a2-265">In the following example, the method name on the hub is `SendMessage`.</span></span>
 * <span data-ttu-id="a65a2-266">中樞方法中定義的任何引數。</span><span class="sxs-lookup"><span data-stu-id="a65a2-266">Any arguments defined in the hub method.</span></span> <span data-ttu-id="a65a2-267">在下列範例中，引數名稱為 `message` 。</span><span class="sxs-lookup"><span data-stu-id="a65a2-267">In the following example, the argument name is `message`.</span></span> <span data-ttu-id="a65a2-268">範例程式碼會使用箭號函式語法，此語法在所有主要瀏覽器的目前版本中受到支援，但 Internet Explorer 除外。</span><span class="sxs-lookup"><span data-stu-id="a65a2-268">The example code uses arrow function syntax that is supported in current versions of all major browsers except Internet Explorer.</span></span>
 
-  [!code-javascript[Call hub methods](javascript-client/samples/2.x/:::no-loc(SignalR):::Chat/wwwroot/js/chat.js?range=24)]
+  [!code-javascript[Call hub methods](javascript-client/samples/2.x/SignalRChat/wwwroot/js/chat.js?range=24)]
 
 > [!NOTE]
-> <span data-ttu-id="a65a2-269">只有 :::no-loc(SignalR)::: 在 *預設* 模式下使用 Azure 服務時，才支援從用戶端呼叫中樞方法。</span><span class="sxs-lookup"><span data-stu-id="a65a2-269">Calling hub methods from a client is only supported when using the Azure :::no-loc(SignalR)::: Service in *Default* mode.</span></span> <span data-ttu-id="a65a2-270">如需詳細資訊，請參閱 [ (azure Signalr GitHub 存放庫) ](https://github.com/Azure/azure-signalr/blob/dev/docs/faq.md#what-is-the-meaning-of-service-mode-defaultserverlessclassic-how-can-i-choose)的常見問題。</span><span class="sxs-lookup"><span data-stu-id="a65a2-270">For more information, see [Frequently Asked Questions (azure-signalr GitHub repository)](https://github.com/Azure/azure-signalr/blob/dev/docs/faq.md#what-is-the-meaning-of-service-mode-defaultserverlessclassic-how-can-i-choose).</span></span>
+> <span data-ttu-id="a65a2-269">只有 SignalR 在 *預設* 模式下使用 Azure 服務時，才支援從用戶端呼叫中樞方法。</span><span class="sxs-lookup"><span data-stu-id="a65a2-269">Calling hub methods from a client is only supported when using the Azure SignalR Service in *Default* mode.</span></span> <span data-ttu-id="a65a2-270">如需詳細資訊，請參閱 [ (azure Signalr GitHub 存放庫) ](https://github.com/Azure/azure-signalr/blob/dev/docs/faq.md#what-is-the-meaning-of-service-mode-defaultserverlessclassic-how-can-i-choose)的常見問題。</span><span class="sxs-lookup"><span data-stu-id="a65a2-270">For more information, see [Frequently Asked Questions (azure-signalr GitHub repository)](https://github.com/Azure/azure-signalr/blob/dev/docs/faq.md#what-is-the-meaning-of-service-mode-defaultserverlessclassic-how-can-i-choose).</span></span>
 
 <span data-ttu-id="a65a2-271">方法會傳回 `invoke` JavaScript [承諾](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Promise)。</span><span class="sxs-lookup"><span data-stu-id="a65a2-271">The `invoke` method returns a JavaScript [Promise](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Promise).</span></span> <span data-ttu-id="a65a2-272">`Promise`當伺服器上的方法傳回時，會使用傳回值來解析 (是否有任何) 。</span><span class="sxs-lookup"><span data-stu-id="a65a2-272">The `Promise` is resolved with the return value (if any) when the method on the server returns.</span></span> <span data-ttu-id="a65a2-273">如果伺服器上的方法擲回錯誤，則 `Promise` 會被拒絕，並顯示錯誤訊息。</span><span class="sxs-lookup"><span data-stu-id="a65a2-273">If the method on the server throws an error, the `Promise` is rejected with the error message.</span></span> <span data-ttu-id="a65a2-274">您 `then` 可以使用本身的和 `catch` 方法 `Promise` ， (或語法) 來處理這些情況 `await` 。</span><span class="sxs-lookup"><span data-stu-id="a65a2-274">Use the `then` and `catch` methods on the `Promise` itself to handle these cases (or `await` syntax).</span></span>
 
@@ -383,13 +383,13 @@ npm install @aspnet/signalr
 * <span data-ttu-id="a65a2-283">JavaScript 用戶端方法的名稱。</span><span class="sxs-lookup"><span data-stu-id="a65a2-283">The name of the JavaScript client method.</span></span> <span data-ttu-id="a65a2-284">在下列範例中，方法名稱為 `ReceiveMessage` 。</span><span class="sxs-lookup"><span data-stu-id="a65a2-284">In the following example, the method name is `ReceiveMessage`.</span></span>
 * <span data-ttu-id="a65a2-285">中樞傳遞給方法的引數。</span><span class="sxs-lookup"><span data-stu-id="a65a2-285">Arguments the hub passes to the method.</span></span> <span data-ttu-id="a65a2-286">在下列範例中，引數值為 `message` 。</span><span class="sxs-lookup"><span data-stu-id="a65a2-286">In the following example, the argument value is `message`.</span></span>
 
-[!code-javascript[Receive calls from hub](javascript-client/samples/2.x/:::no-loc(SignalR):::Chat/wwwroot/js/chat.js?range=14-19)]
+[!code-javascript[Receive calls from hub](javascript-client/samples/2.x/SignalRChat/wwwroot/js/chat.js?range=14-19)]
 
-<span data-ttu-id="a65a2-287">中的上述程式碼 `connection.on` 會在伺服器端程式碼使用方法呼叫它時執行 <xref:Microsoft.AspNetCore.:::no-loc(SignalR):::.ClientProxyExtensions.SendAsync%2A> 。</span><span class="sxs-lookup"><span data-stu-id="a65a2-287">The preceding code in `connection.on` runs when server-side code calls it using the <xref:Microsoft.AspNetCore.:::no-loc(SignalR):::.ClientProxyExtensions.SendAsync%2A> method.</span></span>
+<span data-ttu-id="a65a2-287">中的上述程式碼 `connection.on` 會在伺服器端程式碼使用方法呼叫它時執行 <xref:Microsoft.AspNetCore.SignalR.ClientProxyExtensions.SendAsync%2A> 。</span><span class="sxs-lookup"><span data-stu-id="a65a2-287">The preceding code in `connection.on` runs when server-side code calls it using the <xref:Microsoft.AspNetCore.SignalR.ClientProxyExtensions.SendAsync%2A> method.</span></span>
 
-[!code-csharp[Call client-side](javascript-client/samples/2.x/:::no-loc(SignalR):::Chat/hubs/chathub.cs?range=8-11)]
+[!code-csharp[Call client-side](javascript-client/samples/2.x/SignalRChat/hubs/chathub.cs?range=8-11)]
 
-<span data-ttu-id="a65a2-288">:::no-loc(SignalR)::: 藉由比對和中定義的方法名稱和引數，判斷要呼叫的用戶端方法 `SendAsync` `connection.on` 。</span><span class="sxs-lookup"><span data-stu-id="a65a2-288">:::no-loc(SignalR)::: determines which client method to call by matching the method name and arguments defined in `SendAsync` and `connection.on`.</span></span>
+<span data-ttu-id="a65a2-288">SignalR 藉由比對和中定義的方法名稱和引數，判斷要呼叫的用戶端方法 `SendAsync` `connection.on` 。</span><span class="sxs-lookup"><span data-stu-id="a65a2-288">SignalR determines which client method to call by matching the method name and arguments defined in `SendAsync` and `connection.on`.</span></span>
 
 > [!NOTE]
 > <span data-ttu-id="a65a2-289">最佳做法是在之後呼叫 [start](/javascript/api/%40aspnet/signalr/hubconnection#start) 方法 `HubConnection` `on` 。</span><span class="sxs-lookup"><span data-stu-id="a65a2-289">As a best practice, call the [start](/javascript/api/%40aspnet/signalr/hubconnection#start) method on the `HubConnection` after `on`.</span></span> <span data-ttu-id="a65a2-290">這麼做可確保您的處理常式會在收到任何訊息之前註冊。</span><span class="sxs-lookup"><span data-stu-id="a65a2-290">Doing so ensures your handlers are registered before any messages are received.</span></span>
@@ -398,7 +398,7 @@ npm install @aspnet/signalr
 
 <span data-ttu-id="a65a2-292">將 `catch` 方法連結至方法的結尾 `start` ，以處理用戶端錯誤。</span><span class="sxs-lookup"><span data-stu-id="a65a2-292">Chain a `catch` method to the end of the `start` method to handle client-side errors.</span></span> <span data-ttu-id="a65a2-293">用 `console.error` 來將錯誤輸出至瀏覽器的主控台。</span><span class="sxs-lookup"><span data-stu-id="a65a2-293">Use `console.error` to output errors to the browser's console.</span></span>
 
-[!code-javascript[Error handling](javascript-client/samples/2.x/:::no-loc(SignalR):::Chat/wwwroot/js/chat.js?range=50)]
+[!code-javascript[Error handling](javascript-client/samples/2.x/SignalRChat/wwwroot/js/chat.js?range=50)]
 
 <span data-ttu-id="a65a2-294">設定用戶端記錄檔追蹤，方法是在建立連接時，傳遞記錄器和事件種類來記錄。</span><span class="sxs-lookup"><span data-stu-id="a65a2-294">Set up client-side log tracing by passing a logger and type of event to log when the connection is made.</span></span> <span data-ttu-id="a65a2-295">訊息會以指定的記錄層級和更新版本記錄。</span><span class="sxs-lookup"><span data-stu-id="a65a2-295">Messages are logged with the specified log level and higher.</span></span> <span data-ttu-id="a65a2-296">可用的記錄層級如下所示：</span><span class="sxs-lookup"><span data-stu-id="a65a2-296">Available log levels are as follows:</span></span>
 
@@ -409,21 +409,21 @@ npm install @aspnet/signalr
 
 <span data-ttu-id="a65a2-305">在[HubConnectionBuilder](/javascript/api/%40aspnet/signalr/hubconnectionbuilder)上使用[configureLogging](/javascript/api/%40aspnet/signalr/hubconnectionbuilder#configurelogging)方法來設定記錄層級。</span><span class="sxs-lookup"><span data-stu-id="a65a2-305">Use the [configureLogging](/javascript/api/%40aspnet/signalr/hubconnectionbuilder#configurelogging) method on [HubConnectionBuilder](/javascript/api/%40aspnet/signalr/hubconnectionbuilder) to configure the log level.</span></span> <span data-ttu-id="a65a2-306">訊息會記錄到瀏覽器主控台。</span><span class="sxs-lookup"><span data-stu-id="a65a2-306">Messages are logged to the browser console.</span></span>
 
-[!code-javascript[Logging levels](javascript-client/samples/2.x/:::no-loc(SignalR):::Chat/wwwroot/js/chat.js?range=9-12)]
+[!code-javascript[Logging levels](javascript-client/samples/2.x/SignalRChat/wwwroot/js/chat.js?range=9-12)]
 
 ## <a name="reconnect-clients"></a><span data-ttu-id="a65a2-307">重新連線用戶端</span><span class="sxs-lookup"><span data-stu-id="a65a2-307">Reconnect clients</span></span>
 
 ### <a name="manually-reconnect"></a><span data-ttu-id="a65a2-308">手動重新連線</span><span class="sxs-lookup"><span data-stu-id="a65a2-308">Manually reconnect</span></span>
 
 > [!WARNING]
-> <span data-ttu-id="a65a2-309">在3.0 之前，的 JavaScript 用戶端 :::no-loc(SignalR)::: 不會自動重新連線。</span><span class="sxs-lookup"><span data-stu-id="a65a2-309">Prior to 3.0, the JavaScript client for :::no-loc(SignalR)::: doesn't automatically reconnect.</span></span> <span data-ttu-id="a65a2-310">您必須撰寫會以手動方式重新連接用戶端的程式碼。</span><span class="sxs-lookup"><span data-stu-id="a65a2-310">You must write code that will reconnect your client manually.</span></span>
+> <span data-ttu-id="a65a2-309">在3.0 之前，的 JavaScript 用戶端 SignalR 不會自動重新連線。</span><span class="sxs-lookup"><span data-stu-id="a65a2-309">Prior to 3.0, the JavaScript client for SignalR doesn't automatically reconnect.</span></span> <span data-ttu-id="a65a2-310">您必須撰寫會以手動方式重新連接用戶端的程式碼。</span><span class="sxs-lookup"><span data-stu-id="a65a2-310">You must write code that will reconnect your client manually.</span></span>
 
 <span data-ttu-id="a65a2-311">下列程式碼示範一般手動重新連接方法：</span><span class="sxs-lookup"><span data-stu-id="a65a2-311">The following code demonstrates a typical manual reconnection approach:</span></span>
 
 1. <span data-ttu-id="a65a2-312">函式 (在此案例中， `start` 會建立函式) 以開始連接。</span><span class="sxs-lookup"><span data-stu-id="a65a2-312">A function (in this case, the `start` function) is created to start the connection.</span></span>
 1. <span data-ttu-id="a65a2-313">`start`在連接的事件處理常式中呼叫函式 `onclose` 。</span><span class="sxs-lookup"><span data-stu-id="a65a2-313">Call the `start` function in the connection's `onclose` event handler.</span></span>
 
-[!code-javascript[Reconnect the JavaScript client](javascript-client/samples/2.x/:::no-loc(SignalR):::Chat/wwwroot/js/chat.js?range=28-40)]
+[!code-javascript[Reconnect the JavaScript client](javascript-client/samples/2.x/SignalRChat/wwwroot/js/chat.js?range=28-40)]
 
 <span data-ttu-id="a65a2-314">實際執行會使用指數輪詢，或在放棄之前重試指定的次數。</span><span class="sxs-lookup"><span data-stu-id="a65a2-314">A real-world implementation would use an exponential back-off or retry a specified number of times before giving up.</span></span>
 
@@ -436,6 +436,6 @@ npm install @aspnet/signalr
 * [<span data-ttu-id="a65a2-320">.NET 用戶端</span><span class="sxs-lookup"><span data-stu-id="a65a2-320">.NET client</span></span>](xref:signalr/dotnet-client)
 * [<span data-ttu-id="a65a2-321">發佈至 Azure</span><span class="sxs-lookup"><span data-stu-id="a65a2-321">Publish to Azure</span></span>](xref:signalr/publish-to-azure-web-app)
 * [<span data-ttu-id="a65a2-322"> (CORS) 的跨原始來源要求 </span><span class="sxs-lookup"><span data-stu-id="a65a2-322">Cross-Origin Requests (CORS)</span></span>](xref:security/cors)
-* [<span data-ttu-id="a65a2-323">Azure :::no-loc(SignalR)::: 服務無伺服器檔</span><span class="sxs-lookup"><span data-stu-id="a65a2-323">Azure :::no-loc(SignalR)::: Service serverless documentation</span></span>](/azure/azure-signalr/signalr-concept-serverless-development-config)
+* [<span data-ttu-id="a65a2-323">Azure SignalR 服務無伺服器檔</span><span class="sxs-lookup"><span data-stu-id="a65a2-323">Azure SignalR Service serverless documentation</span></span>](/azure/azure-signalr/signalr-concept-serverless-development-config)
 
 ::: moniker-end

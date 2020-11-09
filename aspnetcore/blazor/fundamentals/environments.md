@@ -1,23 +1,23 @@
 ---
-title: 'ASP.NET Core :::no-loc(Blazor)::: 環境'
+title: 'ASP.NET Core Blazor 環境'
 author: guardrex
-description: '瞭解中的環境 :::no-loc(Blazor)::: ，包括如何設定 :::no-loc(Blazor WebAssembly)::: 應用程式的環境。'
+description: '瞭解中的環境 Blazor ，包括如何設定 Blazor WebAssembly 應用程式的環境。'
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
 ms.date: 06/10/2020
 no-loc:
-- ':::no-loc(appsettings.json):::'
-- ':::no-loc(ASP.NET Core Identity):::'
-- ':::no-loc(cookie):::'
-- ':::no-loc(Cookie):::'
-- ':::no-loc(Blazor):::'
-- ':::no-loc(Blazor Server):::'
-- ':::no-loc(Blazor WebAssembly):::'
-- ':::no-loc(Identity):::'
-- ":::no-loc(Let's Encrypt):::"
-- ':::no-loc(Razor):::'
-- ':::no-loc(SignalR):::'
+- 'appsettings.json'
+- 'ASP.NET Core Identity'
+- 'cookie'
+- 'Cookie'
+- 'Blazor'
+- 'Blazor Server'
+- 'Blazor WebAssembly'
+- 'Identity'
+- "Let's Encrypt"
+- 'Razor'
+- 'SignalR'
 uid: blazor/fundamentals/environments
 ms.openlocfilehash: 61d46e0bd83d8bd82bf7faaf9d8f2fecbacc2ffa
 ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
@@ -26,14 +26,14 @@ ms.contentlocale: zh-TW
 ms.lasthandoff: 10/30/2020
 ms.locfileid: "93056032"
 ---
-# <a name="aspnet-core-no-locblazor-environments"></a><span data-ttu-id="6491f-103">ASP.NET Core :::no-loc(Blazor)::: 環境</span><span class="sxs-lookup"><span data-stu-id="6491f-103">ASP.NET Core :::no-loc(Blazor)::: environments</span></span>
+# <a name="aspnet-core-no-locblazor-environments"></a><span data-ttu-id="6491f-103">ASP.NET Core Blazor 環境</span><span class="sxs-lookup"><span data-stu-id="6491f-103">ASP.NET Core Blazor environments</span></span>
 
 > [!NOTE]
-> <span data-ttu-id="6491f-104">本主題適用于 :::no-loc(Blazor WebAssembly)::: 。</span><span class="sxs-lookup"><span data-stu-id="6491f-104">This topic applies to :::no-loc(Blazor WebAssembly):::.</span></span> <span data-ttu-id="6491f-105">如需 ASP.NET Core 應用程式設定的一般指引，請參閱 <xref:fundamentals/environments> 。</span><span class="sxs-lookup"><span data-stu-id="6491f-105">For general guidance on ASP.NET Core app configuration, see <xref:fundamentals/environments>.</span></span>
+> <span data-ttu-id="6491f-104">本主題適用于 Blazor WebAssembly 。</span><span class="sxs-lookup"><span data-stu-id="6491f-104">This topic applies to Blazor WebAssembly.</span></span> <span data-ttu-id="6491f-105">如需 ASP.NET Core 應用程式設定的一般指引，請參閱 <xref:fundamentals/environments> 。</span><span class="sxs-lookup"><span data-stu-id="6491f-105">For general guidance on ASP.NET Core app configuration, see <xref:fundamentals/environments>.</span></span>
 
 <span data-ttu-id="6491f-106">在本機執行應用程式時，環境會預設為開發環境。</span><span class="sxs-lookup"><span data-stu-id="6491f-106">When running an app locally, the environment defaults to Development.</span></span> <span data-ttu-id="6491f-107">當應用程式發佈時，環境會預設為生產環境。</span><span class="sxs-lookup"><span data-stu-id="6491f-107">When the app is published, the environment defaults to Production.</span></span>
 
-<span data-ttu-id="6491f-108">裝載的 :::no-loc(Blazor WebAssembly)::: 應用程式會透過可透過新增標頭將環境傳達給瀏覽器的中介軟體，從伺服器挑選環境 `blazor-environment` 。</span><span class="sxs-lookup"><span data-stu-id="6491f-108">A hosted :::no-loc(Blazor WebAssembly)::: app picks up the environment from the server via a middleware that communicates the environment to the browser by adding the `blazor-environment` header.</span></span> <span data-ttu-id="6491f-109">標頭的值是環境。</span><span class="sxs-lookup"><span data-stu-id="6491f-109">The value of the header is the environment.</span></span> <span data-ttu-id="6491f-110">託管 :::no-loc(Blazor)::: 應用程式和伺服器應用程式會共用相同的環境。</span><span class="sxs-lookup"><span data-stu-id="6491f-110">The hosted :::no-loc(Blazor)::: app and the server app share the same environment.</span></span> <span data-ttu-id="6491f-111">如需詳細資訊，包括如何設定環境的詳細資訊，請參閱 <xref:fundamentals/environments> 。</span><span class="sxs-lookup"><span data-stu-id="6491f-111">For more information, including how to configure the environment, see <xref:fundamentals/environments>.</span></span>
+<span data-ttu-id="6491f-108">裝載的 Blazor WebAssembly 應用程式會透過可透過新增標頭將環境傳達給瀏覽器的中介軟體，從伺服器挑選環境 `blazor-environment` 。</span><span class="sxs-lookup"><span data-stu-id="6491f-108">A hosted Blazor WebAssembly app picks up the environment from the server via a middleware that communicates the environment to the browser by adding the `blazor-environment` header.</span></span> <span data-ttu-id="6491f-109">標頭的值是環境。</span><span class="sxs-lookup"><span data-stu-id="6491f-109">The value of the header is the environment.</span></span> <span data-ttu-id="6491f-110">託管 Blazor 應用程式和伺服器應用程式會共用相同的環境。</span><span class="sxs-lookup"><span data-stu-id="6491f-110">The hosted Blazor app and the server app share the same environment.</span></span> <span data-ttu-id="6491f-111">如需詳細資訊，包括如何設定環境的詳細資訊，請參閱 <xref:fundamentals/environments> 。</span><span class="sxs-lookup"><span data-stu-id="6491f-111">For more information, including how to configure the environment, see <xref:fundamentals/environments>.</span></span>
 
 <span data-ttu-id="6491f-112">針對在本機執行的獨立應用程式，程式開發伺服器會新增 `blazor-environment` 標頭以指定開發環境。</span><span class="sxs-lookup"><span data-stu-id="6491f-112">For a standalone app running locally, the development server adds the `blazor-environment` header to specify the Development environment.</span></span> <span data-ttu-id="6491f-113">若要指定其他裝載環境的環境，請新增 `blazor-environment` 標頭。</span><span class="sxs-lookup"><span data-stu-id="6491f-113">To specify the environment for other hosting environments, add the `blazor-environment` header.</span></span>
 

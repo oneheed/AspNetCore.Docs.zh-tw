@@ -1,23 +1,23 @@
 ---
-title: '使用 Azure Active Directory 保護 ASP.NET Core 的 :::no-loc(Blazor WebAssembly)::: 獨立應用程式'
+title: '使用 Azure Active Directory 保護 ASP.NET Core 的 Blazor WebAssembly 獨立應用程式'
 author: guardrex
-description: '瞭解如何使用 Azure Active Directory 保護 ASP.NET Core 的 :::no-loc(Blazor WebAssembly)::: 獨立應用程式。'
+description: '瞭解如何使用 Azure Active Directory 保護 ASP.NET Core 的 Blazor WebAssembly 獨立應用程式。'
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: devx-track-csharp, mvc
 ms.date: 10/27/2020
 no-loc:
-- ':::no-loc(appsettings.json):::'
-- ':::no-loc(ASP.NET Core Identity):::'
-- ':::no-loc(cookie):::'
-- ':::no-loc(Cookie):::'
-- ':::no-loc(Blazor):::'
-- ':::no-loc(Blazor Server):::'
-- ':::no-loc(Blazor WebAssembly):::'
-- ':::no-loc(Identity):::'
-- ":::no-loc(Let's Encrypt):::"
-- ':::no-loc(Razor):::'
-- ':::no-loc(SignalR):::'
+- 'appsettings.json'
+- 'ASP.NET Core Identity'
+- 'cookie'
+- 'Cookie'
+- 'Blazor'
+- 'Blazor Server'
+- 'Blazor WebAssembly'
+- 'Identity'
+- "Let's Encrypt"
+- 'Razor'
+- 'SignalR'
 uid: blazor/security/webassembly/standalone-with-azure-active-directory
 ms.openlocfilehash: 4e8c22c56b7023301499fd273a9194b8c7b58f3d
 ms.sourcegitcommit: 45aa1c24c3fdeb939121e856282b00bdcf00ea55
@@ -26,20 +26,20 @@ ms.contentlocale: zh-TW
 ms.lasthandoff: 11/04/2020
 ms.locfileid: "93343702"
 ---
-# <a name="secure-an-aspnet-core-no-locblazor-webassembly-standalone-app-with-azure-active-directory"></a><span data-ttu-id="abf79-103">使用 Azure Active Directory 保護 ASP.NET Core 的 :::no-loc(Blazor WebAssembly)::: 獨立應用程式</span><span class="sxs-lookup"><span data-stu-id="abf79-103">Secure an ASP.NET Core :::no-loc(Blazor WebAssembly)::: standalone app with Azure Active Directory</span></span>
+# <a name="secure-an-aspnet-core-no-locblazor-webassembly-standalone-app-with-azure-active-directory"></a><span data-ttu-id="abf79-103">使用 Azure Active Directory 保護 ASP.NET Core 的 Blazor WebAssembly 獨立應用程式</span><span class="sxs-lookup"><span data-stu-id="abf79-103">Secure an ASP.NET Core Blazor WebAssembly standalone app with Azure Active Directory</span></span>
 
 <span data-ttu-id="abf79-104">由 [Javier Calvarro Nelson](https://github.com/javiercn) 和 [Luke Latham](https://github.com/guardrex)</span><span class="sxs-lookup"><span data-stu-id="abf79-104">By [Javier Calvarro Nelson](https://github.com/javiercn) and [Luke Latham](https://github.com/guardrex)</span></span>
 
-<span data-ttu-id="abf79-105">本文涵蓋如何建立使用[Azure Active Directory (AAD) ](https://azure.microsoft.com/services/active-directory/)進行驗證的[獨立 :::no-loc(Blazor WebAssembly)::: 應用程式](xref:blazor/hosting-models#blazor-webassembly)。</span><span class="sxs-lookup"><span data-stu-id="abf79-105">This article covers how to create a [standalone :::no-loc(Blazor WebAssembly)::: app](xref:blazor/hosting-models#blazor-webassembly) that uses [Azure Active Directory (AAD)](https://azure.microsoft.com/services/active-directory/) for authentication.</span></span>
+<span data-ttu-id="abf79-105">本文涵蓋如何建立使用[Azure Active Directory (AAD) ](https://azure.microsoft.com/services/active-directory/)進行驗證的[獨立 Blazor WebAssembly 應用程式](xref:blazor/hosting-models#blazor-webassembly)。</span><span class="sxs-lookup"><span data-stu-id="abf79-105">This article covers how to create a [standalone Blazor WebAssembly app](xref:blazor/hosting-models#blazor-webassembly) that uses [Azure Active Directory (AAD)](https://azure.microsoft.com/services/active-directory/) for authentication.</span></span>
 
 ::: moniker range=">= aspnetcore-5.0"
 
 > [!NOTE]
-> <span data-ttu-id="abf79-106">針對 :::no-loc(Blazor WebAssembly)::: 在 Visual Studio 中建立的應用程式，這些應用程式設定為支援 AAD 組織目錄中的帳戶，Visual Studio 不會在產生專案時正確設定應用程式。</span><span class="sxs-lookup"><span data-stu-id="abf79-106">For :::no-loc(Blazor WebAssembly)::: apps created in Visual Studio that are configured to support accounts in an AAD organizational directory, Visual Studio doesn't configure the app correctly on project generation.</span></span> <span data-ttu-id="abf79-107">未來的 Visual Studio 版本將會解決此問題。</span><span class="sxs-lookup"><span data-stu-id="abf79-107">This will be addressed in a future release of Visual Studio.</span></span> <span data-ttu-id="abf79-108">本文說明如何使用 .NET Core CLI 的命令來建立應用程式 `dotnet new` 。</span><span class="sxs-lookup"><span data-stu-id="abf79-108">This article shows how to create the app with the .NET Core CLI's `dotnet new` command.</span></span> <span data-ttu-id="abf79-109">如果您想要在 IDE 更新 ASP.NET Core 5.0 中的最新範本之前使用 Visual Studio 建立應用程式 :::no-loc(Blazor)::: ，請參閱本文的每一節，然後在 Visual Studio 建立應用程式之後，確認或更新應用程式的設定。</span><span class="sxs-lookup"><span data-stu-id="abf79-109">If you prefer to create the app with Visual Studio before the IDE is updated for the latest :::no-loc(Blazor)::: templates in ASP.NET Core 5.0, refer to each section of this article and confirm or update the app's configuration after Visual Studio creates the app.</span></span>
+> <span data-ttu-id="abf79-106">針對 Blazor WebAssembly 在 Visual Studio 中建立的應用程式，這些應用程式設定為支援 AAD 組織目錄中的帳戶，Visual Studio 不會在產生專案時正確設定應用程式。</span><span class="sxs-lookup"><span data-stu-id="abf79-106">For Blazor WebAssembly apps created in Visual Studio that are configured to support accounts in an AAD organizational directory, Visual Studio doesn't configure the app correctly on project generation.</span></span> <span data-ttu-id="abf79-107">未來的 Visual Studio 版本將會解決此問題。</span><span class="sxs-lookup"><span data-stu-id="abf79-107">This will be addressed in a future release of Visual Studio.</span></span> <span data-ttu-id="abf79-108">本文說明如何使用 .NET Core CLI 的命令來建立應用程式 `dotnet new` 。</span><span class="sxs-lookup"><span data-stu-id="abf79-108">This article shows how to create the app with the .NET Core CLI's `dotnet new` command.</span></span> <span data-ttu-id="abf79-109">如果您想要在 IDE 更新 ASP.NET Core 5.0 中的最新範本之前使用 Visual Studio 建立應用程式 Blazor ，請參閱本文的每一節，然後在 Visual Studio 建立應用程式之後，確認或更新應用程式的設定。</span><span class="sxs-lookup"><span data-stu-id="abf79-109">If you prefer to create the app with Visual Studio before the IDE is updated for the latest Blazor templates in ASP.NET Core 5.0, refer to each section of this article and confirm or update the app's configuration after Visual Studio creates the app.</span></span>
 
 <span data-ttu-id="abf79-110">在 Azure 入口網站的 **Azure Active Directory** > **應用程式註冊** 區域中註冊 AAD 應用程式：</span><span class="sxs-lookup"><span data-stu-id="abf79-110">Register an AAD app in the **Azure Active Directory** > **App registrations** area of the Azure portal:</span></span>
 
-1. <span data-ttu-id="abf79-111">提供應用程式的 **名稱** (例如 **:::no-loc(Blazor)::: 獨立 AAD** ) 。</span><span class="sxs-lookup"><span data-stu-id="abf79-111">Provide a **Name** for the app (for example, **:::no-loc(Blazor)::: Standalone AAD** ).</span></span>
+1. <span data-ttu-id="abf79-111">提供應用程式的 **名稱** (例如 **Blazor 獨立 AAD** ) 。</span><span class="sxs-lookup"><span data-stu-id="abf79-111">Provide a **Name** for the app (for example, **Blazor Standalone AAD** ).</span></span>
 1. <span data-ttu-id="abf79-112">選擇 **支援的帳戶類型** 。</span><span class="sxs-lookup"><span data-stu-id="abf79-112">Choose a **Supported account types**.</span></span> <span data-ttu-id="abf79-113">您可以 **只在此體驗中選取此組織目錄中的帳戶** 。</span><span class="sxs-lookup"><span data-stu-id="abf79-113">You may select **Accounts in this organizational directory only** for this experience.</span></span>
 1. <span data-ttu-id="abf79-114">將 [重新 **導向 uri** ] 下拉式清單設定為 **單一頁面應用程式 (SPA)** 並提供下列重新導向 uri： `https://localhost:{PORT}/authentication/login-callback` 。</span><span class="sxs-lookup"><span data-stu-id="abf79-114">Set the **Redirect URI** drop down to **Single-page application (SPA)** and provide the following redirect URI: `https://localhost:{PORT}/authentication/login-callback`.</span></span> <span data-ttu-id="abf79-115">在 Kestrel 上執行應用程式的預設連接埠是 5001。</span><span class="sxs-lookup"><span data-stu-id="abf79-115">The default port for an app running on Kestrel is 5001.</span></span> <span data-ttu-id="abf79-116">如果應用程式是在不同的 Kestrel 埠上執行，請使用應用程式的埠。</span><span class="sxs-lookup"><span data-stu-id="abf79-116">If the app is run on a different Kestrel port, use the app's port.</span></span> <span data-ttu-id="abf79-117">針對 IIS Express，可在 [ **調試** 程式] 面板的應用程式屬性中找到應用程式隨機產生的埠。</span><span class="sxs-lookup"><span data-stu-id="abf79-117">For IIS Express, the randomly generated port for the app can be found in the app's properties in the **Debug** panel.</span></span> <span data-ttu-id="abf79-118">由於應用程式目前不存在，且 IIS Express 埠未知，因此在建立應用程式之後，請返回此步驟，並更新重新導向 URI。</span><span class="sxs-lookup"><span data-stu-id="abf79-118">Since the app doesn't exist at this point and the IIS Express port isn't known, return to this step after the app is created and update the redirect URI.</span></span> <span data-ttu-id="abf79-119">本主題稍後會出現一個批註，提醒 IIS Express 使用者更新重新導向 URI。</span><span class="sxs-lookup"><span data-stu-id="abf79-119">A remark appears later in this topic to remind IIS Express users to update the redirect URI.</span></span>
 1. <span data-ttu-id="abf79-120">清除 [授 **與系統** > **管理員同意 openid 和 offline_access 許可權** ] 核取方塊。</span><span class="sxs-lookup"><span data-stu-id="abf79-120">Clear the **Permissions** > **Grant admin consent to openid and offline_access permissions** check box.</span></span>
@@ -63,7 +63,7 @@ ms.locfileid: "93343702"
 
 <span data-ttu-id="abf79-130">在 Azure 入口網站的 **Azure Active Directory** > **應用程式註冊** 區域中註冊 AAD 應用程式：</span><span class="sxs-lookup"><span data-stu-id="abf79-130">Register an AAD app in the **Azure Active Directory** > **App registrations** area of the Azure portal:</span></span>
 
-1. <span data-ttu-id="abf79-131">提供應用程式的 **名稱** (例如 **:::no-loc(Blazor)::: 獨立 AAD** ) 。</span><span class="sxs-lookup"><span data-stu-id="abf79-131">Provide a **Name** for the app (for example, **:::no-loc(Blazor)::: Standalone AAD** ).</span></span>
+1. <span data-ttu-id="abf79-131">提供應用程式的 **名稱** (例如 **Blazor 獨立 AAD** ) 。</span><span class="sxs-lookup"><span data-stu-id="abf79-131">Provide a **Name** for the app (for example, **Blazor Standalone AAD** ).</span></span>
 1. <span data-ttu-id="abf79-132">選擇 **支援的帳戶類型** 。</span><span class="sxs-lookup"><span data-stu-id="abf79-132">Choose a **Supported account types**.</span></span> <span data-ttu-id="abf79-133">您可以 **只在此體驗中選取此組織目錄中的帳戶** 。</span><span class="sxs-lookup"><span data-stu-id="abf79-133">You may select **Accounts in this organizational directory only** for this experience.</span></span>
 1. <span data-ttu-id="abf79-134">將 [重新 **導向 URI** ] 下拉式清單保持設定為 [ **Web** ]，並提供下列重新導向 uri： `https://localhost:{PORT}/authentication/login-callback` 。</span><span class="sxs-lookup"><span data-stu-id="abf79-134">Leave the **Redirect URI** drop down set to **Web** and provide the following redirect URI: `https://localhost:{PORT}/authentication/login-callback`.</span></span> <span data-ttu-id="abf79-135">在 Kestrel 上執行應用程式的預設連接埠是 5001。</span><span class="sxs-lookup"><span data-stu-id="abf79-135">The default port for an app running on Kestrel is 5001.</span></span> <span data-ttu-id="abf79-136">如果應用程式是在不同的 Kestrel 埠上執行，請使用應用程式的埠。</span><span class="sxs-lookup"><span data-stu-id="abf79-136">If the app is run on a different Kestrel port, use the app's port.</span></span> <span data-ttu-id="abf79-137">針對 IIS Express，可在 [ **調試** 程式] 面板的應用程式屬性中找到應用程式隨機產生的埠。</span><span class="sxs-lookup"><span data-stu-id="abf79-137">For IIS Express, the randomly generated port for the app can be found in the app's properties in the **Debug** panel.</span></span> <span data-ttu-id="abf79-138">由於應用程式目前不存在，且 IIS Express 埠未知，因此在建立應用程式之後，請返回此步驟，並更新重新導向 URI。</span><span class="sxs-lookup"><span data-stu-id="abf79-138">Since the app doesn't exist at this point and the IIS Express port isn't known, return to this step after the app is created and update the redirect URI.</span></span> <span data-ttu-id="abf79-139">本主題稍後會出現一個批註，提醒 IIS Express 使用者更新重新導向 URI。</span><span class="sxs-lookup"><span data-stu-id="abf79-139">A remark appears later in this topic to remind IIS Express users to update the redirect URI.</span></span>
 1. <span data-ttu-id="abf79-140">清除 [授 **與系統** > **管理員同意 openid 和 offline_access 許可權** ] 核取方塊。</span><span class="sxs-lookup"><span data-stu-id="abf79-140">Clear the **Permissions** > **Grant admin consent to openid and offline_access permissions** check box.</span></span>
@@ -91,7 +91,7 @@ dotnet new blazorwasm -au SingleOrg --client-id "{CLIENT ID}" -o {APP NAME} --te
 
 | <span data-ttu-id="abf79-152">預留位置</span><span class="sxs-lookup"><span data-stu-id="abf79-152">Placeholder</span></span>   | <span data-ttu-id="abf79-153">Azure 入口網站名稱</span><span class="sxs-lookup"><span data-stu-id="abf79-153">Azure portal name</span></span>       | <span data-ttu-id="abf79-154">範例</span><span class="sxs-lookup"><span data-stu-id="abf79-154">Example</span></span>                                |
 | ------------- | ----------------------- | -------------------------------------- |
-| `{APP NAME}`  | &mdash;                 | `:::no-loc(Blazor):::Sample`                         |
+| `{APP NAME}`  | &mdash;                 | `BlazorSample`                         |
 | `{CLIENT ID}` | <span data-ttu-id="abf79-155">應用程式 (用戶端) 識別碼</span><span class="sxs-lookup"><span data-stu-id="abf79-155">Application (client) ID</span></span> | `41451fa7-82d9-4673-8fa5-69eff5a761fd` |
 | `{TENANT ID}` | <span data-ttu-id="abf79-156">目錄 (租用戶) 識別碼</span><span class="sxs-lookup"><span data-stu-id="abf79-156">Directory (tenant) ID</span></span>   | `e86c78e2-8bb4-4c41-aefd-918e0565a45e` |
 
@@ -134,7 +134,7 @@ dotnet new blazorwasm -au SingleOrg --client-id "{CLIENT ID}" -o {APP NAME} --te
 
 ## <a name="authentication-service-support"></a><span data-ttu-id="abf79-173">驗證服務支援</span><span class="sxs-lookup"><span data-stu-id="abf79-173">Authentication service support</span></span>
 
-<span data-ttu-id="abf79-174">驗證使用者的支援是在服務容器中註冊，並具有 <xref:Microsoft.Extensions.DependencyInjection.MsalWebAssemblyServiceCollectionExtensions.AddMsalAuthentication%2A> 由封裝提供的擴充方法 [`Microsoft.Authentication.WebAssembly.Msal`](https://www.nuget.org/packages/Microsoft.Authentication.WebAssembly.Msal) 。</span><span class="sxs-lookup"><span data-stu-id="abf79-174">Support for authenticating users is registered in the service container with the <xref:Microsoft.Extensions.DependencyInjection.MsalWebAssemblyServiceCollectionExtensions.AddMsalAuthentication%2A> extension method provided by the [`Microsoft.Authentication.WebAssembly.Msal`](https://www.nuget.org/packages/Microsoft.Authentication.WebAssembly.Msal) package.</span></span> <span data-ttu-id="abf79-175">此方法會設定應用程式 :::no-loc(Identity)::: (IP) 與提供者互動所需的服務。</span><span class="sxs-lookup"><span data-stu-id="abf79-175">This method sets up the services required for the app to interact with the :::no-loc(Identity)::: Provider (IP).</span></span>
+<span data-ttu-id="abf79-174">驗證使用者的支援是在服務容器中註冊，並具有 <xref:Microsoft.Extensions.DependencyInjection.MsalWebAssemblyServiceCollectionExtensions.AddMsalAuthentication%2A> 由封裝提供的擴充方法 [`Microsoft.Authentication.WebAssembly.Msal`](https://www.nuget.org/packages/Microsoft.Authentication.WebAssembly.Msal) 。</span><span class="sxs-lookup"><span data-stu-id="abf79-174">Support for authenticating users is registered in the service container with the <xref:Microsoft.Extensions.DependencyInjection.MsalWebAssemblyServiceCollectionExtensions.AddMsalAuthentication%2A> extension method provided by the [`Microsoft.Authentication.WebAssembly.Msal`](https://www.nuget.org/packages/Microsoft.Authentication.WebAssembly.Msal) package.</span></span> <span data-ttu-id="abf79-175">此方法會設定應用程式 Identity (IP) 與提供者互動所需的服務。</span><span class="sxs-lookup"><span data-stu-id="abf79-175">This method sets up the services required for the app to interact with the Identity Provider (IP).</span></span>
 
 <span data-ttu-id="abf79-176">`Program.cs`:</span><span class="sxs-lookup"><span data-stu-id="abf79-176">`Program.cs`:</span></span>
 
@@ -147,7 +147,7 @@ builder.Services.AddMsalAuthentication(options =>
 
 <span data-ttu-id="abf79-177"><xref:Microsoft.Extensions.DependencyInjection.MsalWebAssemblyServiceCollectionExtensions.AddMsalAuthentication%2A>方法會接受回呼來設定驗證應用程式所需的參數。</span><span class="sxs-lookup"><span data-stu-id="abf79-177">The <xref:Microsoft.Extensions.DependencyInjection.MsalWebAssemblyServiceCollectionExtensions.AddMsalAuthentication%2A> method accepts a callback to configure the parameters required to authenticate an app.</span></span> <span data-ttu-id="abf79-178">當您註冊應用程式時，可以從 AAD 設定取得設定應用程式所需的值。</span><span class="sxs-lookup"><span data-stu-id="abf79-178">The values required for configuring the app can be obtained from the AAD configuration when you register the app.</span></span>
 
-<span data-ttu-id="abf79-179">設定是由檔案提供 `wwwroot/:::no-loc(appsettings.json):::` ：</span><span class="sxs-lookup"><span data-stu-id="abf79-179">Configuration is supplied by the `wwwroot/:::no-loc(appsettings.json):::` file:</span></span>
+<span data-ttu-id="abf79-179">設定是由檔案提供 `wwwroot/appsettings.json` ：</span><span class="sxs-lookup"><span data-stu-id="abf79-179">Configuration is supplied by the `wwwroot/appsettings.json` file:</span></span>
 
 ```json
 {
@@ -173,7 +173,7 @@ builder.Services.AddMsalAuthentication(options =>
 
 ## <a name="access-token-scopes"></a><span data-ttu-id="abf79-181">存取權杖範圍</span><span class="sxs-lookup"><span data-stu-id="abf79-181">Access token scopes</span></span>
 
-<span data-ttu-id="abf79-182">:::no-loc(Blazor WebAssembly):::範本不會自動將應用程式設定為要求安全 API 的存取權杖。</span><span class="sxs-lookup"><span data-stu-id="abf79-182">The :::no-loc(Blazor WebAssembly)::: template doesn't automatically configure the app to request an access token for a secure API.</span></span> <span data-ttu-id="abf79-183">若要布建存取權杖作為登入流程的一部分，請將範圍新增至的預設存取權杖範圍 <xref:Microsoft.Authentication.WebAssembly.Msal.Models.MsalProviderOptions> ：</span><span class="sxs-lookup"><span data-stu-id="abf79-183">To provision an access token as part of the sign-in flow, add the scope to the default access token scopes of the <xref:Microsoft.Authentication.WebAssembly.Msal.Models.MsalProviderOptions>:</span></span>
+<span data-ttu-id="abf79-182">Blazor WebAssembly範本不會自動將應用程式設定為要求安全 API 的存取權杖。</span><span class="sxs-lookup"><span data-stu-id="abf79-182">The Blazor WebAssembly template doesn't automatically configure the app to request an access token for a secure API.</span></span> <span data-ttu-id="abf79-183">若要布建存取權杖作為登入流程的一部分，請將範圍新增至的預設存取權杖範圍 <xref:Microsoft.Authentication.WebAssembly.Msal.Models.MsalProviderOptions> ：</span><span class="sxs-lookup"><span data-stu-id="abf79-183">To provision an access token as part of the sign-in flow, add the scope to the default access token scopes of the <xref:Microsoft.Authentication.WebAssembly.Msal.Models.MsalProviderOptions>:</span></span>
 
 ```csharp
 builder.Services.AddMsalAuthentication(options =>

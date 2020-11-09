@@ -6,17 +6,17 @@ ms.author: scaddie
 ms.custom: mvc
 ms.date: 12/16/2019
 no-loc:
-- ':::no-loc(appsettings.json):::'
-- ':::no-loc(ASP.NET Core Identity):::'
-- ':::no-loc(cookie):::'
-- ':::no-loc(Cookie):::'
-- ':::no-loc(Blazor):::'
-- ':::no-loc(Blazor Server):::'
-- ':::no-loc(Blazor WebAssembly):::'
-- ':::no-loc(Identity):::'
-- ":::no-loc(Let's Encrypt):::"
-- ':::no-loc(Razor):::'
-- ':::no-loc(SignalR):::'
+- 'appsettings.json'
+- 'ASP.NET Core Identity'
+- 'cookie'
+- 'Cookie'
+- 'Blazor'
+- 'Blazor Server'
+- 'Blazor WebAssembly'
+- 'Identity'
+- "Let's Encrypt"
+- 'Razor'
+- 'SignalR'
 uid: fundamentals/target-aspnetcore
 ms.openlocfilehash: c012658a6f48247af60c8bfd56a7d987f6aa8a68
 ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
@@ -44,7 +44,7 @@ ms.locfileid: "93061505"
 
 <span data-ttu-id="3c1b9-116">隨著 .NET Core 3.0 的發行，許多 ASP.NET Core 元件不再以套件的形式發佈至 NuGet。</span><span class="sxs-lookup"><span data-stu-id="3c1b9-116">With the release of .NET Core 3.0, many ASP.NET Core assemblies are no longer published to NuGet as packages.</span></span> <span data-ttu-id="3c1b9-117">相反地，這些元件會包含在 `Microsoft.AspNetCore.App` 與 .NET Core SDK 和執行時間安裝程式一起安裝的共用架構中。</span><span class="sxs-lookup"><span data-stu-id="3c1b9-117">Instead, the assemblies are included in the `Microsoft.AspNetCore.App` shared framework, which is installed with the .NET Core SDK and runtime installers.</span></span> <span data-ttu-id="3c1b9-118">如需不再發佈的套件清單，請參閱 [移除淘汰的封裝參考](xref:migration/22-to-30#remove-obsolete-package-references)。</span><span class="sxs-lookup"><span data-stu-id="3c1b9-118">For a list of packages no longer being published, see [Remove obsolete package references](xref:migration/22-to-30#remove-obsolete-package-references).</span></span>
 
-<span data-ttu-id="3c1b9-119">從 .NET Core 3.0，使用 MSBuild SDK 的專案會 `Microsoft.NET.Sdk.Web` 隱含地參考共用架構。</span><span class="sxs-lookup"><span data-stu-id="3c1b9-119">As of .NET Core 3.0, projects using the `Microsoft.NET.Sdk.Web` MSBuild SDK implicitly reference the shared framework.</span></span> <span data-ttu-id="3c1b9-120">使用 `Microsoft.NET.Sdk` 或 SDK 的專案 `Microsoft.NET.Sdk.:::no-loc(Razor):::` 必須參考 ASP.NET Core，才能在共用架構中使用 ASP.NET Core api。</span><span class="sxs-lookup"><span data-stu-id="3c1b9-120">Projects using the `Microsoft.NET.Sdk` or `Microsoft.NET.Sdk.:::no-loc(Razor):::` SDK must reference ASP.NET Core to use ASP.NET Core APIs in the shared framework.</span></span>
+<span data-ttu-id="3c1b9-119">從 .NET Core 3.0，使用 MSBuild SDK 的專案會 `Microsoft.NET.Sdk.Web` 隱含地參考共用架構。</span><span class="sxs-lookup"><span data-stu-id="3c1b9-119">As of .NET Core 3.0, projects using the `Microsoft.NET.Sdk.Web` MSBuild SDK implicitly reference the shared framework.</span></span> <span data-ttu-id="3c1b9-120">使用 `Microsoft.NET.Sdk` 或 SDK 的專案 `Microsoft.NET.Sdk.Razor` 必須參考 ASP.NET Core，才能在共用架構中使用 ASP.NET Core api。</span><span class="sxs-lookup"><span data-stu-id="3c1b9-120">Projects using the `Microsoft.NET.Sdk` or `Microsoft.NET.Sdk.Razor` SDK must reference ASP.NET Core to use ASP.NET Core APIs in the shared framework.</span></span>
 
 <span data-ttu-id="3c1b9-121">若要參考 ASP.NET Core，請將下列 `<FrameworkReference>` 元素新增至您的專案檔：</span><span class="sxs-lookup"><span data-stu-id="3c1b9-121">To reference ASP.NET Core, add the following `<FrameworkReference>` element to your project file:</span></span>
 
@@ -52,17 +52,17 @@ ms.locfileid: "93061505"
 
 <span data-ttu-id="3c1b9-122">以這種方式參考 ASP.NET Core 僅支援以 .NET Core 3.x 為目標的專案。</span><span class="sxs-lookup"><span data-stu-id="3c1b9-122">Referencing ASP.NET Core in this manner is only supported for projects targeting .NET Core 3.x.</span></span>
 
-## <a name="include-no-locblazor-extensibility"></a><span data-ttu-id="3c1b9-123">包含 :::no-loc(Blazor)::: 擴充性</span><span class="sxs-lookup"><span data-stu-id="3c1b9-123">Include :::no-loc(Blazor)::: extensibility</span></span>
+## <a name="include-no-locblazor-extensibility"></a><span data-ttu-id="3c1b9-123">包含 Blazor 擴充性</span><span class="sxs-lookup"><span data-stu-id="3c1b9-123">Include Blazor extensibility</span></span>
 
-<span data-ttu-id="3c1b9-124">:::no-loc(Blazor)::: 支援 WebAssembly (WASM) 和伺服器 [裝載模型](xref:blazor/hosting-models)。</span><span class="sxs-lookup"><span data-stu-id="3c1b9-124">:::no-loc(Blazor)::: supports WebAssembly (WASM) and Server [hosting models](xref:blazor/hosting-models).</span></span> <span data-ttu-id="3c1b9-125">除非有特定的原因不是，否則[ :::no-loc(Razor)::: 元件](xref:blazor/components/index)程式庫應同時支援這兩種裝載模型。</span><span class="sxs-lookup"><span data-stu-id="3c1b9-125">Unless there's a specific reason not to, a [:::no-loc(Razor)::: components](xref:blazor/components/index) library should support both hosting models.</span></span> <span data-ttu-id="3c1b9-126">:::no-loc(Razor):::元件程式庫必須使用[Microsoft .Net. Sdk :::no-loc(Razor)::: 。SDK](xref:razor-pages/sdk)。</span><span class="sxs-lookup"><span data-stu-id="3c1b9-126">A :::no-loc(Razor)::: components library must use the [Microsoft.NET.Sdk.:::no-loc(Razor)::: SDK](xref:razor-pages/sdk).</span></span>
+<span data-ttu-id="3c1b9-124">Blazor 支援 WebAssembly (WASM) 和伺服器 [裝載模型](xref:blazor/hosting-models)。</span><span class="sxs-lookup"><span data-stu-id="3c1b9-124">Blazor supports WebAssembly (WASM) and Server [hosting models](xref:blazor/hosting-models).</span></span> <span data-ttu-id="3c1b9-125">除非有特定的原因不是，否則[ Razor 元件](xref:blazor/components/index)程式庫應同時支援這兩種裝載模型。</span><span class="sxs-lookup"><span data-stu-id="3c1b9-125">Unless there's a specific reason not to, a [Razor components](xref:blazor/components/index) library should support both hosting models.</span></span> <span data-ttu-id="3c1b9-126">Razor元件程式庫必須使用[Microsoft .Net. Sdk Razor 。SDK](xref:razor-pages/sdk)。</span><span class="sxs-lookup"><span data-stu-id="3c1b9-126">A Razor components library must use the [Microsoft.NET.Sdk.Razor SDK](xref:razor-pages/sdk).</span></span>
 
 ### <a name="support-both-hosting-models"></a><span data-ttu-id="3c1b9-127">支援兩種裝載模型</span><span class="sxs-lookup"><span data-stu-id="3c1b9-127">Support both hosting models</span></span>
 
-<span data-ttu-id="3c1b9-128">若要支援 :::no-loc(Razor)::: 來自 [:::no-loc(Blazor Server):::](xref:blazor/hosting-models#blazor-server) 和[ :::no-loc(Blazor)::: WASM](xref:blazor/hosting-models#blazor-webassembly)專案的元件耗用量，請針對您的編輯器使用下列指示。</span><span class="sxs-lookup"><span data-stu-id="3c1b9-128">To support :::no-loc(Razor)::: component consumption from both [:::no-loc(Blazor Server):::](xref:blazor/hosting-models#blazor-server) and [:::no-loc(Blazor)::: WASM](xref:blazor/hosting-models#blazor-webassembly) projects, use the following instructions for your editor.</span></span>
+<span data-ttu-id="3c1b9-128">若要支援 Razor 來自 [Blazor Server](xref:blazor/hosting-models#blazor-server) 和[ Blazor WASM](xref:blazor/hosting-models#blazor-webassembly)專案的元件耗用量，請針對您的編輯器使用下列指示。</span><span class="sxs-lookup"><span data-stu-id="3c1b9-128">To support Razor component consumption from both [Blazor Server](xref:blazor/hosting-models#blazor-server) and [Blazor WASM](xref:blazor/hosting-models#blazor-webassembly) projects, use the following instructions for your editor.</span></span>
 
 # <a name="visual-studio"></a>[<span data-ttu-id="3c1b9-129">Visual Studio</span><span class="sxs-lookup"><span data-stu-id="3c1b9-129">Visual Studio</span></span>](#tab/visual-studio)
 
-<span data-ttu-id="3c1b9-130">使用 [ **:::no-loc(Razor)::: 類別庫** ] 專案範本。</span><span class="sxs-lookup"><span data-stu-id="3c1b9-130">Use the **:::no-loc(Razor)::: Class Library** project template.</span></span> <span data-ttu-id="3c1b9-131">範本的 **支援頁面和 [視圖** ] 核取方塊應取消選取。</span><span class="sxs-lookup"><span data-stu-id="3c1b9-131">The template's **Support pages and views** checkbox should be deselected.</span></span>
+<span data-ttu-id="3c1b9-130">使用 [ **Razor 類別庫** ] 專案範本。</span><span class="sxs-lookup"><span data-stu-id="3c1b9-130">Use the **Razor Class Library** project template.</span></span> <span data-ttu-id="3c1b9-131">範本的 **支援頁面和 [視圖** ] 核取方塊應取消選取。</span><span class="sxs-lookup"><span data-stu-id="3c1b9-131">The template's **Support pages and views** checkbox should be deselected.</span></span>
 
 # <a name="visual-studio-code"></a>[<span data-ttu-id="3c1b9-132">Visual Studio Code</span><span class="sxs-lookup"><span data-stu-id="3c1b9-132">Visual Studio Code</span></span>](#tab/visual-studio-code)
 
@@ -74,14 +74,14 @@ dotnet new razorclasslib
 
 # <a name="visual-studio-for-mac"></a>[<span data-ttu-id="3c1b9-134">Visual Studio for Mac</span><span class="sxs-lookup"><span data-stu-id="3c1b9-134">Visual Studio for Mac</span></span>](#tab/visual-studio-mac)
 
-<span data-ttu-id="3c1b9-135">使用 [ **:::no-loc(Razor)::: 類別庫** ] 專案範本。</span><span class="sxs-lookup"><span data-stu-id="3c1b9-135">Use the **:::no-loc(Razor)::: Class Library** project template.</span></span>
+<span data-ttu-id="3c1b9-135">使用 [ **Razor 類別庫** ] 專案範本。</span><span class="sxs-lookup"><span data-stu-id="3c1b9-135">Use the **Razor Class Library** project template.</span></span>
 
 ---
 
 <span data-ttu-id="3c1b9-136">從範本產生的專案會執行下列動作：</span><span class="sxs-lookup"><span data-stu-id="3c1b9-136">The project generated from the template does the following things:</span></span>
 
 * <span data-ttu-id="3c1b9-137">目標 .NET Standard 2.0。</span><span class="sxs-lookup"><span data-stu-id="3c1b9-137">Targets .NET Standard 2.0.</span></span>
-* <span data-ttu-id="3c1b9-138">將 `:::no-loc(Razor):::LangVersion` 屬性設定為 `3.0`。</span><span class="sxs-lookup"><span data-stu-id="3c1b9-138">Sets the `:::no-loc(Razor):::LangVersion` property to `3.0`.</span></span> <span data-ttu-id="3c1b9-139">`3.0` 是 .NET Core 3.x 的預設值。</span><span class="sxs-lookup"><span data-stu-id="3c1b9-139">`3.0` is the default value for .NET Core 3.x.</span></span>
+* <span data-ttu-id="3c1b9-138">將 `RazorLangVersion` 屬性設定為 `3.0`。</span><span class="sxs-lookup"><span data-stu-id="3c1b9-138">Sets the `RazorLangVersion` property to `3.0`.</span></span> <span data-ttu-id="3c1b9-139">`3.0` 是 .NET Core 3.x 的預設值。</span><span class="sxs-lookup"><span data-stu-id="3c1b9-139">`3.0` is the default value for .NET Core 3.x.</span></span>
 * <span data-ttu-id="3c1b9-140">新增下列封裝參考：</span><span class="sxs-lookup"><span data-stu-id="3c1b9-140">Adds the following package references:</span></span>
   * [<span data-ttu-id="3c1b9-141">AspNetCore 元件</span><span class="sxs-lookup"><span data-stu-id="3c1b9-141">Microsoft.AspNetCore.Components</span></span>](https://www.nuget.org/packages/Microsoft.AspNetCore.Components)
   * [<span data-ttu-id="3c1b9-142">AspNetCore Web 元件</span><span class="sxs-lookup"><span data-stu-id="3c1b9-142">Microsoft.AspNetCore.Components.Web</span></span>](https://www.nuget.org/packages/Microsoft.AspNetCore.Components.Web)
@@ -92,7 +92,7 @@ dotnet new razorclasslib
 
 ### <a name="support-a-specific-hosting-model"></a><span data-ttu-id="3c1b9-144">支援特定的裝載模型</span><span class="sxs-lookup"><span data-stu-id="3c1b9-144">Support a specific hosting model</span></span>
 
-<span data-ttu-id="3c1b9-145">最常見的情況是支援單一 :::no-loc(Blazor)::: 裝載模型。</span><span class="sxs-lookup"><span data-stu-id="3c1b9-145">It's far less common to support a single :::no-loc(Blazor)::: hosting model.</span></span> <span data-ttu-id="3c1b9-146">舉例而言， :::no-loc(Razor)::: 只支援專案的元件耗用量 [:::no-loc(Blazor Server):::](xref:blazor/hosting-models#blazor-server) ：</span><span class="sxs-lookup"><span data-stu-id="3c1b9-146">As an example, to support :::no-loc(Razor)::: component consumption from [:::no-loc(Blazor Server):::](xref:blazor/hosting-models#blazor-server) projects only:</span></span>
+<span data-ttu-id="3c1b9-145">最常見的情況是支援單一 Blazor 裝載模型。</span><span class="sxs-lookup"><span data-stu-id="3c1b9-145">It's far less common to support a single Blazor hosting model.</span></span> <span data-ttu-id="3c1b9-146">舉例而言， Razor 只支援專案的元件耗用量 [Blazor Server](xref:blazor/hosting-models#blazor-server) ：</span><span class="sxs-lookup"><span data-stu-id="3c1b9-146">As an example, to support Razor component consumption from [Blazor Server](xref:blazor/hosting-models#blazor-server) projects only:</span></span>
 
 * <span data-ttu-id="3c1b9-147">以 .NET Core 2.x 為目標。</span><span class="sxs-lookup"><span data-stu-id="3c1b9-147">Target .NET Core 3.x.</span></span>
 * <span data-ttu-id="3c1b9-148">新增 `<FrameworkReference>` 共用架構的元素。</span><span class="sxs-lookup"><span data-stu-id="3c1b9-148">Add a `<FrameworkReference>` element for the shared framework.</span></span>
@@ -101,32 +101,32 @@ dotnet new razorclasslib
 
 [!code-xml[](target-aspnetcore/samples/single-tfm/netcoreapp3.0-razor-components-library.csproj)]
 
-<span data-ttu-id="3c1b9-150">如需包含元件之程式庫的詳細資訊 :::no-loc(Razor)::: ，請參閱 [ASP.NET Core :::no-loc(Razor)::: 元件類別庫](xref:blazor/components/class-libraries)。</span><span class="sxs-lookup"><span data-stu-id="3c1b9-150">For more information on libraries containing :::no-loc(Razor)::: components, see [ASP.NET Core :::no-loc(Razor)::: components class libraries](xref:blazor/components/class-libraries).</span></span>
+<span data-ttu-id="3c1b9-150">如需包含元件之程式庫的詳細資訊 Razor ，請參閱 [ASP.NET Core Razor 元件類別庫](xref:blazor/components/class-libraries)。</span><span class="sxs-lookup"><span data-stu-id="3c1b9-150">For more information on libraries containing Razor components, see [ASP.NET Core Razor components class libraries](xref:blazor/components/class-libraries).</span></span>
 
 ## <a name="include-mvc-extensibility"></a><span data-ttu-id="3c1b9-151">包含 MVC 擴充性</span><span class="sxs-lookup"><span data-stu-id="3c1b9-151">Include MVC extensibility</span></span>
 
 <span data-ttu-id="3c1b9-152">本節概述程式庫的建議，包括：</span><span class="sxs-lookup"><span data-stu-id="3c1b9-152">This section outlines recommendations for libraries that include:</span></span>
 
-* [<span data-ttu-id="3c1b9-153">:::no-loc(Razor)::: views 或 :::no-loc(Razor)::: Pages</span><span class="sxs-lookup"><span data-stu-id="3c1b9-153">:::no-loc(Razor)::: views or :::no-loc(Razor)::: Pages</span></span>](#razor-views-or-razor-pages)
+* [<span data-ttu-id="3c1b9-153">Razor views 或 Razor Pages</span><span class="sxs-lookup"><span data-stu-id="3c1b9-153">Razor views or Razor Pages</span></span>](#razor-views-or-razor-pages)
 * [<span data-ttu-id="3c1b9-154">標籤協助程式</span><span class="sxs-lookup"><span data-stu-id="3c1b9-154">Tag Helpers</span></span>](#tag-helpers)
 * [<span data-ttu-id="3c1b9-155">檢視元件</span><span class="sxs-lookup"><span data-stu-id="3c1b9-155">View components</span></span>](#view-components)
 
 <span data-ttu-id="3c1b9-156">本節不會討論多目標，以支援多個版本的 MVC。</span><span class="sxs-lookup"><span data-stu-id="3c1b9-156">This section doesn't discuss multi-targeting to support multiple versions of MVC.</span></span> <span data-ttu-id="3c1b9-157">如需支援多個 ASP.NET Core 版本的指引，請參閱 [支援多個 ASP.NET Core 版本](#support-multiple-aspnet-core-versions)。</span><span class="sxs-lookup"><span data-stu-id="3c1b9-157">For guidance on supporting multiple ASP.NET Core versions, see [Support multiple ASP.NET Core versions](#support-multiple-aspnet-core-versions).</span></span>
 
-### <a name="no-locrazor-views-or-no-locrazor-pages"></a><span data-ttu-id="3c1b9-158">:::no-loc(Razor)::: views 或 :::no-loc(Razor)::: Pages</span><span class="sxs-lookup"><span data-stu-id="3c1b9-158">:::no-loc(Razor)::: views or :::no-loc(Razor)::: Pages</span></span>
+### <a name="no-locrazor-views-or-no-locrazor-pages"></a><span data-ttu-id="3c1b9-158">Razor views 或 Razor Pages</span><span class="sxs-lookup"><span data-stu-id="3c1b9-158">Razor views or Razor Pages</span></span>
 
-<span data-ttu-id="3c1b9-159">包含[ :::no-loc(Razor)::: 視圖](xref:mvc/views/overview)或[ :::no-loc(Razor)::: 頁面](xref:razor-pages/index)的專案必須使用[Microsoft .net Sdk :::no-loc(Razor)::: 。SDK](xref:razor-pages/sdk)。</span><span class="sxs-lookup"><span data-stu-id="3c1b9-159">A project that includes [:::no-loc(Razor)::: views](xref:mvc/views/overview) or [:::no-loc(Razor)::: Pages](xref:razor-pages/index) must use the [Microsoft.NET.Sdk.:::no-loc(Razor)::: SDK](xref:razor-pages/sdk).</span></span>
+<span data-ttu-id="3c1b9-159">包含[ Razor 視圖](xref:mvc/views/overview)或[ Razor 頁面](xref:razor-pages/index)的專案必須使用[Microsoft .net Sdk Razor 。SDK](xref:razor-pages/sdk)。</span><span class="sxs-lookup"><span data-stu-id="3c1b9-159">A project that includes [Razor views](xref:mvc/views/overview) or [Razor Pages](xref:razor-pages/index) must use the [Microsoft.NET.Sdk.Razor SDK](xref:razor-pages/sdk).</span></span>
 
 <span data-ttu-id="3c1b9-160">如果專案是以 .NET Core 2.x 為目標，則需要：</span><span class="sxs-lookup"><span data-stu-id="3c1b9-160">If the project targets .NET Core 3.x, it requires:</span></span>
 
-* <span data-ttu-id="3c1b9-161">`Add:::no-loc(Razor):::SupportForMvc`設定為的 MSBuild 屬性 `true` 。</span><span class="sxs-lookup"><span data-stu-id="3c1b9-161">An `Add:::no-loc(Razor):::SupportForMvc` MSBuild property set to `true`.</span></span>
+* <span data-ttu-id="3c1b9-161">`AddRazorSupportForMvc`設定為的 MSBuild 屬性 `true` 。</span><span class="sxs-lookup"><span data-stu-id="3c1b9-161">An `AddRazorSupportForMvc` MSBuild property set to `true`.</span></span>
 * <span data-ttu-id="3c1b9-162">`<FrameworkReference>`共用架構的元素。</span><span class="sxs-lookup"><span data-stu-id="3c1b9-162">A `<FrameworkReference>` element for the shared framework.</span></span>
 
-<span data-ttu-id="3c1b9-163">**:::no-loc(Razor)::: 類別庫** 專案範本滿足上述以 .net Core 2.x 為目標的專案需求。</span><span class="sxs-lookup"><span data-stu-id="3c1b9-163">The **:::no-loc(Razor)::: Class Library** project template satisfies the preceding requirements for projects targeting .NET Core 3.x.</span></span> <span data-ttu-id="3c1b9-164">針對您的編輯器，請使用下列指示。</span><span class="sxs-lookup"><span data-stu-id="3c1b9-164">Use the following instructions for your editor.</span></span>
+<span data-ttu-id="3c1b9-163">**Razor 類別庫** 專案範本滿足上述以 .net Core 2.x 為目標的專案需求。</span><span class="sxs-lookup"><span data-stu-id="3c1b9-163">The **Razor Class Library** project template satisfies the preceding requirements for projects targeting .NET Core 3.x.</span></span> <span data-ttu-id="3c1b9-164">針對您的編輯器，請使用下列指示。</span><span class="sxs-lookup"><span data-stu-id="3c1b9-164">Use the following instructions for your editor.</span></span>
 
 # <a name="visual-studio"></a>[<span data-ttu-id="3c1b9-165">Visual Studio</span><span class="sxs-lookup"><span data-stu-id="3c1b9-165">Visual Studio</span></span>](#tab/visual-studio)
 
-<span data-ttu-id="3c1b9-166">使用 [ **:::no-loc(Razor)::: 類別庫** ] 專案範本。</span><span class="sxs-lookup"><span data-stu-id="3c1b9-166">Use the **:::no-loc(Razor)::: Class Library** project template.</span></span> <span data-ttu-id="3c1b9-167">應選取範本的 [ **支援頁面和流覽** 器] 核取方塊。</span><span class="sxs-lookup"><span data-stu-id="3c1b9-167">The template's **Support pages and views** checkbox should be selected.</span></span>
+<span data-ttu-id="3c1b9-166">使用 [ **Razor 類別庫** ] 專案範本。</span><span class="sxs-lookup"><span data-stu-id="3c1b9-166">Use the **Razor Class Library** project template.</span></span> <span data-ttu-id="3c1b9-167">應選取範本的 [ **支援頁面和流覽** 器] 核取方塊。</span><span class="sxs-lookup"><span data-stu-id="3c1b9-167">The template's **Support pages and views** checkbox should be selected.</span></span>
 
 # <a name="visual-studio-code"></a>[<span data-ttu-id="3c1b9-168">Visual Studio Code</span><span class="sxs-lookup"><span data-stu-id="3c1b9-168">Visual Studio Code</span></span>](#tab/visual-studio-code)
 
@@ -156,7 +156,7 @@ dotnet new razorclasslib -s
 
 [!code-xml[](target-aspnetcore/samples/single-tfm/netcoreapp3.0-basic-library.csproj)]
 
-<span data-ttu-id="3c1b9-180">如果目標 .NET Standard (支援早于 ASP.NET Core 3.x) 的版本，請將套件參考新增至[AspNetCore :::no-loc(Razor)::: ](https://www.nuget.org/packages/Microsoft.AspNetCore.Mvc.:::no-loc(Razor):::)。</span><span class="sxs-lookup"><span data-stu-id="3c1b9-180">If targeting .NET Standard (to support versions earlier than ASP.NET Core 3.x), add a package reference to [Microsoft.AspNetCore.Mvc.:::no-loc(Razor):::](https://www.nuget.org/packages/Microsoft.AspNetCore.Mvc.:::no-loc(Razor):::).</span></span> <span data-ttu-id="3c1b9-181">`Microsoft.AspNetCore.Mvc.:::no-loc(Razor):::`封裝會移至共用架構中，因此不會再發佈。</span><span class="sxs-lookup"><span data-stu-id="3c1b9-181">The `Microsoft.AspNetCore.Mvc.:::no-loc(Razor):::` package moved into the shared framework and is therefore no longer published.</span></span> <span data-ttu-id="3c1b9-182">例如：</span><span class="sxs-lookup"><span data-stu-id="3c1b9-182">For example:</span></span>
+<span data-ttu-id="3c1b9-180">如果目標 .NET Standard (支援早于 ASP.NET Core 3.x) 的版本，請將套件參考新增至[AspNetCore Razor ](https://www.nuget.org/packages/Microsoft.AspNetCore.Mvc.Razor)。</span><span class="sxs-lookup"><span data-stu-id="3c1b9-180">If targeting .NET Standard (to support versions earlier than ASP.NET Core 3.x), add a package reference to [Microsoft.AspNetCore.Mvc.Razor](https://www.nuget.org/packages/Microsoft.AspNetCore.Mvc.Razor).</span></span> <span data-ttu-id="3c1b9-181">`Microsoft.AspNetCore.Mvc.Razor`封裝會移至共用架構中，因此不會再發佈。</span><span class="sxs-lookup"><span data-stu-id="3c1b9-181">The `Microsoft.AspNetCore.Mvc.Razor` package moved into the shared framework and is therefore no longer published.</span></span> <span data-ttu-id="3c1b9-182">例如：</span><span class="sxs-lookup"><span data-stu-id="3c1b9-182">For example:</span></span>
 
 [!code-xml[](target-aspnetcore/samples/single-tfm/netstandard2.0-tag-helpers-library.csproj)]
 
@@ -185,8 +185,8 @@ dotnet new razorclasslib -s
 <span data-ttu-id="3c1b9-197">使用上述的專案檔：</span><span class="sxs-lookup"><span data-stu-id="3c1b9-197">With the preceding project file:</span></span>
 
 * <span data-ttu-id="3c1b9-198">`Markdig`針對所有取用者新增套件。</span><span class="sxs-lookup"><span data-stu-id="3c1b9-198">The `Markdig` package is added for all consumers.</span></span>
-* <span data-ttu-id="3c1b9-199">AspNetCore 的參考[。 :::no-loc(Razor)::: ](https://www.nuget.org/packages/Microsoft.AspNetCore.Mvc.:::no-loc(Razor):::)</span><span class="sxs-lookup"><span data-stu-id="3c1b9-199">A reference to [Microsoft.AspNetCore.Mvc.:::no-loc(Razor):::](https://www.nuget.org/packages/Microsoft.AspNetCore.Mvc.:::no-loc(Razor):::)</span></span> <span data-ttu-id="3c1b9-200">是針對以 .NET Framework 4.6.1 或更新版本或 .NET Core 2.x 為目標的取用者新增的。</span><span class="sxs-lookup"><span data-stu-id="3c1b9-200">is added for consumers targeting .NET Framework 4.6.1 or later or .NET Core 2.x.</span></span> <span data-ttu-id="3c1b9-201">因為回溯相容性的原因，套件的版本2.1.0 適用于 ASP.NET Core 2.2。</span><span class="sxs-lookup"><span data-stu-id="3c1b9-201">Version 2.1.0 of the package works with ASP.NET Core 2.2 because of backwards compatibility.</span></span>
-* <span data-ttu-id="3c1b9-202">針對以 .NET Core 2.x 為目標的取用者，會參考共用架構。</span><span class="sxs-lookup"><span data-stu-id="3c1b9-202">The shared framework is referenced for consumers targeting .NET Core 3.x.</span></span> <span data-ttu-id="3c1b9-203">此 `Microsoft.AspNetCore.Mvc.:::no-loc(Razor):::` 封裝包含在共用架構中。</span><span class="sxs-lookup"><span data-stu-id="3c1b9-203">The `Microsoft.AspNetCore.Mvc.:::no-loc(Razor):::` package is included in the shared framework.</span></span>
+* <span data-ttu-id="3c1b9-199">AspNetCore 的參考[。 Razor ](https://www.nuget.org/packages/Microsoft.AspNetCore.Mvc.Razor)</span><span class="sxs-lookup"><span data-stu-id="3c1b9-199">A reference to [Microsoft.AspNetCore.Mvc.Razor](https://www.nuget.org/packages/Microsoft.AspNetCore.Mvc.Razor)</span></span> <span data-ttu-id="3c1b9-200">是針對以 .NET Framework 4.6.1 或更新版本或 .NET Core 2.x 為目標的取用者新增的。</span><span class="sxs-lookup"><span data-stu-id="3c1b9-200">is added for consumers targeting .NET Framework 4.6.1 or later or .NET Core 2.x.</span></span> <span data-ttu-id="3c1b9-201">因為回溯相容性的原因，套件的版本2.1.0 適用于 ASP.NET Core 2.2。</span><span class="sxs-lookup"><span data-stu-id="3c1b9-201">Version 2.1.0 of the package works with ASP.NET Core 2.2 because of backwards compatibility.</span></span>
+* <span data-ttu-id="3c1b9-202">針對以 .NET Core 2.x 為目標的取用者，會參考共用架構。</span><span class="sxs-lookup"><span data-stu-id="3c1b9-202">The shared framework is referenced for consumers targeting .NET Core 3.x.</span></span> <span data-ttu-id="3c1b9-203">此 `Microsoft.AspNetCore.Mvc.Razor` 封裝包含在共用架構中。</span><span class="sxs-lookup"><span data-stu-id="3c1b9-203">The `Microsoft.AspNetCore.Mvc.Razor` package is included in the shared framework.</span></span>
 
 <span data-ttu-id="3c1b9-204">或者，您可以將 .NET Standard 2.0 的目標設為目標，而不是以 .NET Core 2.1 和 .NET Framework 4.6.1 為目標：</span><span class="sxs-lookup"><span data-stu-id="3c1b9-204">Alternatively, .NET Standard 2.0 could be targeted instead of targeting both .NET Core 2.1 and .NET Framework 4.6.1:</span></span>
 

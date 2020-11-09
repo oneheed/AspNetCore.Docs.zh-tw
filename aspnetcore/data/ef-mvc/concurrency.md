@@ -7,17 +7,17 @@ ms.custom: mvc
 ms.date: 03/27/2019
 ms.topic: tutorial
 no-loc:
-- ':::no-loc(appsettings.json):::'
-- ':::no-loc(ASP.NET Core Identity):::'
-- ':::no-loc(cookie):::'
-- ':::no-loc(Cookie):::'
-- ':::no-loc(Blazor):::'
-- ':::no-loc(Blazor Server):::'
-- ':::no-loc(Blazor WebAssembly):::'
-- ':::no-loc(Identity):::'
-- ":::no-loc(Let's Encrypt):::"
-- ':::no-loc(Razor):::'
-- ':::no-loc(SignalR):::'
+- 'appsettings.json'
+- 'ASP.NET Core Identity'
+- 'cookie'
+- 'Cookie'
+- 'Blazor'
+- 'Blazor Server'
+- 'Blazor WebAssembly'
+- 'Identity'
+- "Let's Encrypt"
+- 'Razor'
+- 'SignalR'
 uid: data/ef-mvc/concurrency
 ms.openlocfilehash: d476c836e8d497ca1291992dda38da1fc9f59ed2
 ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
@@ -83,7 +83,7 @@ ms.locfileid: "93054368"
 
 * <span data-ttu-id="5b1b6-150">您可以追蹤使用者修改的屬性，然後僅在資料庫中更新相對應的資料行。</span><span class="sxs-lookup"><span data-stu-id="5b1b6-150">You can keep track of which property a user has modified and update only the corresponding columns in the database.</span></span>
 
-     <span data-ttu-id="5b1b6-151">在範例案例中，將不會發生資料遺失，因為兩名使用者更新的屬性不同。</span><span class="sxs-lookup"><span data-stu-id="5b1b6-151">In the example scenario, no data would be lost, because different properties were updated by the two users.</span></span> <span data-ttu-id="5b1b6-152">下一次當有人瀏覽英文部門時，他們便會同時看到 Jane 和 John 所作出的變更 -- 開始日期為 2013/9/1，預算為美金 0 元。</span><span class="sxs-lookup"><span data-stu-id="5b1b6-152">The next time someone browses the English department, they will see both Jane's and John's changes -- a start date of 9/1/2013 and a budget of zero dollars.</span></span> <span data-ttu-id="5b1b6-153">這個更新方法可減少可能導致資料遺失之衝突發生的次數，但卻無法在實體中的相同屬性遭到變更時避免資料遺失。</span><span class="sxs-lookup"><span data-stu-id="5b1b6-153">This method of updating can reduce the number of conflicts that could result in data loss, but it can't avoid data loss if competing changes are made to the same property of an entity.</span></span> <span data-ttu-id="5b1b6-154">Entity Framework 是否會以這種方式處理並行衝突，取決於您實作更新程式碼的方式。</span><span class="sxs-lookup"><span data-stu-id="5b1b6-154">Whether the Entity Framework works this way depends on how you implement your update code.</span></span> <span data-ttu-id="5b1b6-155">通常在 Web 應用程式中，這種方法並不實用，因為它需要您維持大量的狀態，以追蹤實體所有原始的屬性值和新的值。</span><span class="sxs-lookup"><span data-stu-id="5b1b6-155">It's often not practical in a web application, because it can require that you maintain large amounts of state in order to keep track of all original property values for an entity as well as new values.</span></span> <span data-ttu-id="5b1b6-156">維護大量的狀態可能會影響應用程式效能，因為它需要伺服器資源或必須包含在網頁本身 (例如，在隱藏的欄位) 或中 :::no-loc(cookie)::: 。</span><span class="sxs-lookup"><span data-stu-id="5b1b6-156">Maintaining large amounts of state can affect application performance because it either requires server resources or must be included in the web page itself (for example, in hidden fields) or in a :::no-loc(cookie):::.</span></span>
+     <span data-ttu-id="5b1b6-151">在範例案例中，將不會發生資料遺失，因為兩名使用者更新的屬性不同。</span><span class="sxs-lookup"><span data-stu-id="5b1b6-151">In the example scenario, no data would be lost, because different properties were updated by the two users.</span></span> <span data-ttu-id="5b1b6-152">下一次當有人瀏覽英文部門時，他們便會同時看到 Jane 和 John 所作出的變更 -- 開始日期為 2013/9/1，預算為美金 0 元。</span><span class="sxs-lookup"><span data-stu-id="5b1b6-152">The next time someone browses the English department, they will see both Jane's and John's changes -- a start date of 9/1/2013 and a budget of zero dollars.</span></span> <span data-ttu-id="5b1b6-153">這個更新方法可減少可能導致資料遺失之衝突發生的次數，但卻無法在實體中的相同屬性遭到變更時避免資料遺失。</span><span class="sxs-lookup"><span data-stu-id="5b1b6-153">This method of updating can reduce the number of conflicts that could result in data loss, but it can't avoid data loss if competing changes are made to the same property of an entity.</span></span> <span data-ttu-id="5b1b6-154">Entity Framework 是否會以這種方式處理並行衝突，取決於您實作更新程式碼的方式。</span><span class="sxs-lookup"><span data-stu-id="5b1b6-154">Whether the Entity Framework works this way depends on how you implement your update code.</span></span> <span data-ttu-id="5b1b6-155">通常在 Web 應用程式中，這種方法並不實用，因為它需要您維持大量的狀態，以追蹤實體所有原始的屬性值和新的值。</span><span class="sxs-lookup"><span data-stu-id="5b1b6-155">It's often not practical in a web application, because it can require that you maintain large amounts of state in order to keep track of all original property values for an entity as well as new values.</span></span> <span data-ttu-id="5b1b6-156">維護大量的狀態可能會影響應用程式效能，因為它需要伺服器資源或必須包含在網頁本身 (例如，在隱藏的欄位) 或中 cookie 。</span><span class="sxs-lookup"><span data-stu-id="5b1b6-156">Maintaining large amounts of state can affect application performance because it either requires server resources or must be included in the web page itself (for example, in hidden fields) or in a cookie.</span></span>
 
 * <span data-ttu-id="5b1b6-157">您可以讓 John 的變更覆寫 Jane 的變更。</span><span class="sxs-lookup"><span data-stu-id="5b1b6-157">You can let John's change overwrite Jane's change.</span></span>
 

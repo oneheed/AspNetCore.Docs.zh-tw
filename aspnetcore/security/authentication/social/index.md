@@ -6,17 +6,17 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 01/23/2020
 no-loc:
-- ':::no-loc(appsettings.json):::'
-- ':::no-loc(ASP.NET Core Identity):::'
-- ':::no-loc(cookie):::'
-- ':::no-loc(Cookie):::'
-- ':::no-loc(Blazor):::'
-- ':::no-loc(Blazor Server):::'
-- ':::no-loc(Blazor WebAssembly):::'
-- ':::no-loc(Identity):::'
-- ":::no-loc(Let's Encrypt):::"
-- ':::no-loc(Razor):::'
-- ':::no-loc(SignalR):::'
+- 'appsettings.json'
+- 'ASP.NET Core Identity'
+- 'cookie'
+- 'Cookie'
+- 'Blazor'
+- 'Blazor Server'
+- 'Blazor WebAssembly'
+- 'Identity'
+- "Let's Encrypt"
+- 'Razor'
+- 'SignalR'
 uid: security/authentication/social/index
 ms.openlocfilehash: 1f7c8cd0716f1ada3517add0d37a09e419f38774
 ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
@@ -69,7 +69,7 @@ ms.locfileid: "93053302"
   dotnet new webapp -o WebApp1 -au Individual
   ```
 
-  * <span data-ttu-id="ada11-128">此 `dotnet new` 命令會 :::no-loc(Razor)::: 在 *WebApp1* 資料夾中建立新的頁面專案。</span><span class="sxs-lookup"><span data-stu-id="ada11-128">The `dotnet new` command creates a new :::no-loc(Razor)::: Pages project in the *WebApp1* folder.</span></span>
+  * <span data-ttu-id="ada11-128">此 `dotnet new` 命令會 Razor 在 *WebApp1* 資料夾中建立新的頁面專案。</span><span class="sxs-lookup"><span data-stu-id="ada11-128">The `dotnet new` command creates a new Razor Pages project in the *WebApp1* folder.</span></span>
   * <span data-ttu-id="ada11-129">`-au Individual` 會建立程式碼以進行個別驗證。</span><span class="sxs-lookup"><span data-stu-id="ada11-129">`-au Individual` creates the code for Individual authentication.</span></span>
   * <span data-ttu-id="ada11-130">`-uld` 使用 LocalDB，此為適用于 Windows 的 SQL Server Express 輕量版本。</span><span class="sxs-lookup"><span data-stu-id="ada11-130">`-uld` uses LocalDB, a lightweight version of SQL Server Express for Windows.</span></span> <span data-ttu-id="ada11-131">省略 `-uld` 以使用 SQLite。</span><span class="sxs-lookup"><span data-stu-id="ada11-131">Omit `-uld` to use SQLite.</span></span>
   * <span data-ttu-id="ada11-132">`code` 命令會在新的 Visual Studio Code 執行個體中開啟 [WebApp1]  資料夾。</span><span class="sxs-lookup"><span data-stu-id="ada11-132">The `code` command opens the *WebApp1* folder in a new instance of Visual Studio Code.</span></span>
@@ -86,7 +86,7 @@ ms.locfileid: "93053302"
 
 ## <a name="use-secretmanager-to-store-tokens-assigned-by-login-providers"></a><span data-ttu-id="ada11-137">使用 SecretManager 來儲存登入提供者指派的權杖</span><span class="sxs-lookup"><span data-stu-id="ada11-137">Use SecretManager to store tokens assigned by login providers</span></span>
 
-<span data-ttu-id="ada11-138">社交登入提供者會在註冊程序期間指派 **應用程式識別碼** 和 **應用程式密碼** 權杖。</span><span class="sxs-lookup"><span data-stu-id="ada11-138">Social login providers assign **Application Id** and **Application Secret** tokens during the registration process.</span></span> <span data-ttu-id="ada11-139">確切權杖名稱會依提供者而有所不同。</span><span class="sxs-lookup"><span data-stu-id="ada11-139">The exact token names vary by provider.</span></span> <span data-ttu-id="ada11-140">這些權杖代表您的應用程式用來存取其 API 的認證。</span><span class="sxs-lookup"><span data-stu-id="ada11-140">These tokens represent the credentials your app uses to access their API.</span></span> <span data-ttu-id="ada11-141">這些權杖會組成「祕密」，在[祕密管理員](xref:security/app-secrets#secret-manager)的協助下連結到您的應用程式設定。</span><span class="sxs-lookup"><span data-stu-id="ada11-141">The tokens constitute the "secrets" that can be linked to your app configuration with the help of [Secret Manager](xref:security/app-secrets#secret-manager).</span></span> <span data-ttu-id="ada11-142">秘密管理員是將權杖儲存在設定檔中的更安全替代方法，例如 *:::no-loc(appsettings.json):::* 。</span><span class="sxs-lookup"><span data-stu-id="ada11-142">Secret Manager is a more secure alternative to storing the tokens in a configuration file, such as *:::no-loc(appsettings.json):::* .</span></span>
+<span data-ttu-id="ada11-138">社交登入提供者會在註冊程序期間指派 **應用程式識別碼** 和 **應用程式密碼** 權杖。</span><span class="sxs-lookup"><span data-stu-id="ada11-138">Social login providers assign **Application Id** and **Application Secret** tokens during the registration process.</span></span> <span data-ttu-id="ada11-139">確切權杖名稱會依提供者而有所不同。</span><span class="sxs-lookup"><span data-stu-id="ada11-139">The exact token names vary by provider.</span></span> <span data-ttu-id="ada11-140">這些權杖代表您的應用程式用來存取其 API 的認證。</span><span class="sxs-lookup"><span data-stu-id="ada11-140">These tokens represent the credentials your app uses to access their API.</span></span> <span data-ttu-id="ada11-141">這些權杖會組成「祕密」，在[祕密管理員](xref:security/app-secrets#secret-manager)的協助下連結到您的應用程式設定。</span><span class="sxs-lookup"><span data-stu-id="ada11-141">The tokens constitute the "secrets" that can be linked to your app configuration with the help of [Secret Manager](xref:security/app-secrets#secret-manager).</span></span> <span data-ttu-id="ada11-142">秘密管理員是將權杖儲存在設定檔中的更安全替代方法，例如 *appsettings.json* 。</span><span class="sxs-lookup"><span data-stu-id="ada11-142">Secret Manager is a more secure alternative to storing the tokens in a configuration file, such as *appsettings.json* .</span></span>
 
 > [!IMPORTANT]
 > <span data-ttu-id="ada11-143">祕密管理員僅供用於開發用途。</span><span class="sxs-lookup"><span data-stu-id="ada11-143">Secret Manager is for development purposes only.</span></span> <span data-ttu-id="ada11-144">您可以透過 [Azure Key Vault 設定提供者](xref:security/key-vault-configuration)儲存及保護 Azure 測試與生產祕密。</span><span class="sxs-lookup"><span data-stu-id="ada11-144">You can store and protect Azure test and production secrets with the [Azure Key Vault configuration provider](xref:security/key-vault-configuration).</span></span>

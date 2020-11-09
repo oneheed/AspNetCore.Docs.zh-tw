@@ -7,17 +7,17 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 02/07/2020
 no-loc:
-- ':::no-loc(appsettings.json):::'
-- ':::no-loc(ASP.NET Core Identity):::'
-- ':::no-loc(cookie):::'
-- ':::no-loc(Cookie):::'
-- ':::no-loc(Blazor):::'
-- ':::no-loc(Blazor Server):::'
-- ':::no-loc(Blazor WebAssembly):::'
-- ':::no-loc(Identity):::'
-- ":::no-loc(Let's Encrypt):::"
-- ':::no-loc(Razor):::'
-- ':::no-loc(SignalR):::'
+- 'appsettings.json'
+- 'ASP.NET Core Identity'
+- 'cookie'
+- 'Cookie'
+- 'Blazor'
+- 'Blazor Server'
+- 'Blazor WebAssembly'
+- 'Identity'
+- "Let's Encrypt"
+- 'Razor'
+- 'SignalR'
 uid: host-and-deploy/windows-service
 ms.openlocfilehash: 31a738e7aa8779171dfa09a5678d7240b8f62343
 ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
@@ -59,7 +59,7 @@ ms.locfileid: "93057228"
 * <span data-ttu-id="e348a-122">啟用記錄至事件記錄檔：</span><span class="sxs-lookup"><span data-stu-id="e348a-122">Enables logging to the event log:</span></span>
   * <span data-ttu-id="e348a-123">應用程式名稱會用來做為預設來源名稱。</span><span class="sxs-lookup"><span data-stu-id="e348a-123">The application name is used as the default source name.</span></span>
   * <span data-ttu-id="e348a-124">根據呼叫來建立主機的 ASP.NET Core 範本，應用程式的預設記錄層級為 *警告* 或更高 `CreateDefaultBuilder` 。</span><span class="sxs-lookup"><span data-stu-id="e348a-124">The default log level is *Warning* or higher for an app based on an ASP.NET Core template that calls `CreateDefaultBuilder` to build the host.</span></span>
-  * <span data-ttu-id="e348a-125">使用 appsettings 中的金鑰覆寫預設記錄層級 `Logging:EventLog:LogLevel:Default` *:::no-loc(appsettings.json):::* / *。 {環境}. json* 或其他設定提供者。</span><span class="sxs-lookup"><span data-stu-id="e348a-125">Override the default log level with the `Logging:EventLog:LogLevel:Default` key in *:::no-loc(appsettings.json):::*/*appsettings.{Environment}.json* or other configuration provider.</span></span>
+  * <span data-ttu-id="e348a-125">使用 appsettings 中的金鑰覆寫預設記錄層級 `Logging:EventLog:LogLevel:Default` *appsettings.json* / *。 {環境}. json* 或其他設定提供者。</span><span class="sxs-lookup"><span data-stu-id="e348a-125">Override the default log level with the `Logging:EventLog:LogLevel:Default` key in *appsettings.json*/*appsettings.{Environment}.json* or other configuration provider.</span></span>
   * <span data-ttu-id="e348a-126">只有系統管理員才能建立新的事件來源。</span><span class="sxs-lookup"><span data-stu-id="e348a-126">Only administrators can create new event sources.</span></span> <span data-ttu-id="e348a-127">如果無法使用應用程式名稱建立事件來源，則會向「應用程式」  來源記錄警告，並停用事件記錄檔。</span><span class="sxs-lookup"><span data-stu-id="e348a-127">When an event source can't be created using the application name, a warning is logged to the *Application* source and event logs are disabled.</span></span>
 
 <span data-ttu-id="e348a-128">在 `CreateHostBuilder` *Program.cs* 中：</span><span class="sxs-lookup"><span data-stu-id="e348a-128">In `CreateHostBuilder` of *Program.cs* :</span></span>
@@ -73,7 +73,7 @@ Host.CreateDefaultBuilder(args)
 <span data-ttu-id="e348a-129">本主題隨附的下列範例應用程式：</span><span class="sxs-lookup"><span data-stu-id="e348a-129">The following sample apps accompany this topic:</span></span>
 
 * <span data-ttu-id="e348a-130">背景工作角色服務範例：以背景工作使用[託管服務](xref:fundamentals/host/hosted-services)的背景工作[服務範本](#worker-service-template)為基礎的非 web 應用程式範例。</span><span class="sxs-lookup"><span data-stu-id="e348a-130">Background Worker Service Sample: A non-web app sample based on the [Worker Service template](#worker-service-template) that uses [hosted services](xref:fundamentals/host/hosted-services) for background tasks.</span></span>
-* <span data-ttu-id="e348a-131">Web App Service 範例： :::no-loc(Razor)::: 頁面 web 應用程式範例，該範例會以 Windows 服務的形式執行，並具有適用于背景工作的 [託管服務](xref:fundamentals/host/hosted-services) 。</span><span class="sxs-lookup"><span data-stu-id="e348a-131">Web App Service Sample: A :::no-loc(Razor)::: Pages web app sample that runs as a Windows Service with [hosted services](xref:fundamentals/host/hosted-services) for background tasks.</span></span>
+* <span data-ttu-id="e348a-131">Web App Service 範例： Razor 頁面 web 應用程式範例，該範例會以 Windows 服務的形式執行，並具有適用于背景工作的 [託管服務](xref:fundamentals/host/hosted-services) 。</span><span class="sxs-lookup"><span data-stu-id="e348a-131">Web App Service Sample: A Razor Pages web app sample that runs as a Windows Service with [hosted services](xref:fundamentals/host/hosted-services) for background tasks.</span></span>
 
 <span data-ttu-id="e348a-132">如需 MVC 指引，請參閱和底下的文章 <xref:mvc/overview> <xref:migration/22-to-30> 。</span><span class="sxs-lookup"><span data-stu-id="e348a-132">For MVC guidance, see the articles under <xref:mvc/overview> and <xref:migration/22-to-30>.</span></span>
 
@@ -83,7 +83,7 @@ Host.CreateDefaultBuilder(args)
 
 ### <a name="sdk"></a><span data-ttu-id="e348a-135">SDK</span><span class="sxs-lookup"><span data-stu-id="e348a-135">SDK</span></span>
 
-<span data-ttu-id="e348a-136">針對使用頁面或 MVC 架構的 web 應用程式型服務 :::no-loc(Razor)::: ，請在專案檔中指定 WEB SDK：</span><span class="sxs-lookup"><span data-stu-id="e348a-136">For a web app-based service that uses the :::no-loc(Razor)::: Pages or MVC frameworks, specify the Web SDK in the project file:</span></span>
+<span data-ttu-id="e348a-136">針對使用頁面或 MVC 架構的 web 應用程式型服務 Razor ，請在專案檔中指定 WEB SDK：</span><span class="sxs-lookup"><span data-stu-id="e348a-136">For a web app-based service that uses the Razor Pages or MVC frameworks, specify the Web SDK in the project file:</span></span>
 
 ```xml
 <Project Sdk="Microsoft.NET.Sdk.Web">
@@ -254,7 +254,7 @@ Remove-Service -Name {SERVICE NAME}
 
 <span data-ttu-id="e348a-213">當應用程式以服務的形式執行時，會 <xref:Microsoft.Extensions.Hosting.WindowsServiceLifetimeHostBuilderExtensions.UseWindowsService*> 將設定 <xref:Microsoft.Extensions.Hosting.IHostEnvironment.ContentRootPath> 為 [AppCoNtext. BaseDirectory](xref:System.AppContext.BaseDirectory)。</span><span class="sxs-lookup"><span data-stu-id="e348a-213">When the app runs as a service, <xref:Microsoft.Extensions.Hosting.WindowsServiceLifetimeHostBuilderExtensions.UseWindowsService*> sets the <xref:Microsoft.Extensions.Hosting.IHostEnvironment.ContentRootPath> to [AppContext.BaseDirectory](xref:System.AppContext.BaseDirectory).</span></span>
 
-<span data-ttu-id="e348a-214">應用程式的預設設定檔案， *:::no-loc(appsettings.json):::* 以及 *appsettings. {* 從應用程式的內容根目錄載入環境} json，方法是 [在主機結構期間呼叫 >createdefaultbuilder](xref:fundamentals/host/generic-host#set-up-a-host)。</span><span class="sxs-lookup"><span data-stu-id="e348a-214">The app's default settings files, *:::no-loc(appsettings.json):::* and *appsettings.{Environment}.json* , are loaded from the app's content root by calling [CreateDefaultBuilder during host construction](xref:fundamentals/host/generic-host#set-up-a-host).</span></span>
+<span data-ttu-id="e348a-214">應用程式的預設設定檔案， *appsettings.json* 以及 *appsettings. {* 從應用程式的內容根目錄載入環境} json，方法是 [在主機結構期間呼叫 >createdefaultbuilder](xref:fundamentals/host/generic-host#set-up-a-host)。</span><span class="sxs-lookup"><span data-stu-id="e348a-214">The app's default settings files, *appsettings.json* and *appsettings.{Environment}.json* , are loaded from the app's content root by calling [CreateDefaultBuilder during host construction](xref:fundamentals/host/generic-host#set-up-a-host).</span></span>
 
 <span data-ttu-id="e348a-215">若為開發人員程式碼在中載入的其他設定檔案 <xref:Microsoft.Extensions.Hosting.HostBuilder.ConfigureAppConfiguration*> ，則不需要呼叫 <xref:Microsoft.Extensions.Configuration.FileConfigurationExtensions.SetBasePath*> 。</span><span class="sxs-lookup"><span data-stu-id="e348a-215">For other settings files loaded by developer code in <xref:Microsoft.Extensions.Hosting.HostBuilder.ConfigureAppConfiguration*>, there's no need to call <xref:Microsoft.Extensions.Configuration.FileConfigurationExtensions.SetBasePath*>.</span></span> <span data-ttu-id="e348a-216">在下列範例中，檔案 *上的custom_settings.js* 會存在於應用程式的內容根目錄中，並在未明確設定基底路徑的情況下載入：</span><span class="sxs-lookup"><span data-stu-id="e348a-216">In the following example, the *custom_settings.json* file exists in the app's content root and is loaded without explicitly setting a base path:</span></span>
 
@@ -385,7 +385,7 @@ Remove-Service -Name {SERVICE NAME}
 
 ### <a name="sdk"></a><span data-ttu-id="e348a-299">SDK</span><span class="sxs-lookup"><span data-stu-id="e348a-299">SDK</span></span>
 
-<span data-ttu-id="e348a-300">針對使用頁面或 MVC 架構的 web 應用程式型服務 :::no-loc(Razor)::: ，請在專案檔中指定 WEB SDK：</span><span class="sxs-lookup"><span data-stu-id="e348a-300">For a web app-based service that uses the :::no-loc(Razor)::: Pages or MVC frameworks, specify the Web SDK in the project file:</span></span>
+<span data-ttu-id="e348a-300">針對使用頁面或 MVC 架構的 web 應用程式型服務 Razor ，請在專案檔中指定 WEB SDK：</span><span class="sxs-lookup"><span data-stu-id="e348a-300">For a web app-based service that uses the Razor Pages or MVC frameworks, specify the Web SDK in the project file:</span></span>
 
 ```xml
 <Project Sdk="Microsoft.NET.Sdk.Web">
@@ -719,7 +719,7 @@ CreateWebHostBuilder(args)
 
 ### <a name="sdk"></a><span data-ttu-id="e348a-471">SDK</span><span class="sxs-lookup"><span data-stu-id="e348a-471">SDK</span></span>
 
-<span data-ttu-id="e348a-472">針對使用頁面或 MVC 架構的 web 應用程式型服務 :::no-loc(Razor)::: ，請在專案檔中指定 WEB SDK：</span><span class="sxs-lookup"><span data-stu-id="e348a-472">For a web app-based service that uses the :::no-loc(Razor)::: Pages or MVC frameworks, specify the Web SDK in the project file:</span></span>
+<span data-ttu-id="e348a-472">針對使用頁面或 MVC 架構的 web 應用程式型服務 Razor ，請在專案檔中指定 WEB SDK：</span><span class="sxs-lookup"><span data-stu-id="e348a-472">For a web app-based service that uses the Razor Pages or MVC frameworks, specify the Web SDK in the project file:</span></span>
 
 ```xml
 <Project Sdk="Microsoft.NET.Sdk.Web">

@@ -6,17 +6,17 @@ monikerRange: '>= aspnetcore-3.0'
 ms.author: jamesnk
 ms.date: 05/26/2020
 no-loc:
-- ':::no-loc(appsettings.json):::'
-- ':::no-loc(ASP.NET Core Identity):::'
-- ':::no-loc(cookie):::'
-- ':::no-loc(Cookie):::'
-- ':::no-loc(Blazor):::'
-- ':::no-loc(Blazor Server):::'
-- ':::no-loc(Blazor WebAssembly):::'
-- ':::no-loc(Identity):::'
-- ":::no-loc(Let's Encrypt):::"
-- ':::no-loc(Razor):::'
-- ':::no-loc(SignalR):::'
+- 'appsettings.json'
+- 'ASP.NET Core Identity'
+- 'cookie'
+- 'Cookie'
+- 'Blazor'
+- 'Blazor Server'
+- 'Blazor WebAssembly'
+- 'Identity'
+- "Let's Encrypt"
+- 'Razor'
+- 'SignalR'
 uid: grpc/clientfactory
 ms.openlocfilehash: c63bf495f558237ed801881d378953119791b8ce
 ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
@@ -46,7 +46,7 @@ services.AddGrpcClient<Greeter.GreeterClient>(o =>
 });
 ```
 
-<span data-ttu-id="6b13c-113">GRPC 用戶端類型會註冊為暫時性， (DI) 的相依性插入。</span><span class="sxs-lookup"><span data-stu-id="6b13c-113">The gRPC client type is registered as transient with dependency injection (DI).</span></span> <span data-ttu-id="6b13c-114">用戶端現在可以直接插入，也可以直接在 DI 所建立的類型中使用。</span><span class="sxs-lookup"><span data-stu-id="6b13c-114">The client can now be injected and consumed directly in types created by DI.</span></span> <span data-ttu-id="6b13c-115">ASP.NET Core MVC 控制器、 :::no-loc(SignalR)::: 中樞和 gRPC 服務都是可自動插入 gRPC 用戶端的位置：</span><span class="sxs-lookup"><span data-stu-id="6b13c-115">ASP.NET Core MVC controllers, :::no-loc(SignalR)::: hubs and gRPC services are places where gRPC clients can automatically be injected:</span></span>
+<span data-ttu-id="6b13c-113">GRPC 用戶端類型會註冊為暫時性， (DI) 的相依性插入。</span><span class="sxs-lookup"><span data-stu-id="6b13c-113">The gRPC client type is registered as transient with dependency injection (DI).</span></span> <span data-ttu-id="6b13c-114">用戶端現在可以直接插入，也可以直接在 DI 所建立的類型中使用。</span><span class="sxs-lookup"><span data-stu-id="6b13c-114">The client can now be injected and consumed directly in types created by DI.</span></span> <span data-ttu-id="6b13c-115">ASP.NET Core MVC 控制器、 SignalR 中樞和 gRPC 服務都是可自動插入 gRPC 用戶端的位置：</span><span class="sxs-lookup"><span data-stu-id="6b13c-115">ASP.NET Core MVC controllers, SignalR hubs and gRPC services are places where gRPC clients can automatically be injected:</span></span>
 
 ```csharp
 public class AggregatorService : Aggregator.AggregatorBase

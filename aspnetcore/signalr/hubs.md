@@ -1,23 +1,23 @@
 ---
-title: '使用 ASP.NET Core 中的中樞 :::no-loc(SignalR):::'
+title: '使用 ASP.NET Core 中的中樞 SignalR'
 author: bradygaster
-description: '瞭解如何使用 ASP.NET Core 中的中樞 :::no-loc(SignalR)::: 。'
+description: '瞭解如何使用 ASP.NET Core 中的中樞 SignalR 。'
 monikerRange: '>= aspnetcore-2.1'
 ms.author: bradyg
 ms.custom: mvc
 ms.date: 01/16/2020
 no-loc:
-- ':::no-loc(appsettings.json):::'
-- ':::no-loc(ASP.NET Core Identity):::'
-- ':::no-loc(cookie):::'
-- ':::no-loc(Cookie):::'
-- ':::no-loc(Blazor):::'
-- ':::no-loc(Blazor Server):::'
-- ':::no-loc(Blazor WebAssembly):::'
-- ':::no-loc(Identity):::'
-- ":::no-loc(Let's Encrypt):::"
-- ':::no-loc(Razor):::'
-- ':::no-loc(SignalR):::'
+- 'appsettings.json'
+- 'ASP.NET Core Identity'
+- 'cookie'
+- 'Cookie'
+- 'Blazor'
+- 'Blazor Server'
+- 'Blazor WebAssembly'
+- 'Identity'
+- "Let's Encrypt"
+- 'Razor'
+- 'SignalR'
 uid: signalr/hubs
 ms.openlocfilehash: 4a31c16eb44e2244574d0df49c30e7a44b2bba6e
 ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
@@ -26,25 +26,25 @@ ms.contentlocale: zh-TW
 ms.lasthandoff: 10/30/2020
 ms.locfileid: "93050936"
 ---
-# <a name="use-hubs-in-no-locsignalr-for-aspnet-core"></a><span data-ttu-id="2dd45-103">使用中 :::no-loc(SignalR)::: 的中樞進行 ASP.NET Core</span><span class="sxs-lookup"><span data-stu-id="2dd45-103">Use hubs in :::no-loc(SignalR)::: for ASP.NET Core</span></span>
+# <a name="use-hubs-in-no-locsignalr-for-aspnet-core"></a><span data-ttu-id="2dd45-103">使用中 SignalR 的中樞進行 ASP.NET Core</span><span class="sxs-lookup"><span data-stu-id="2dd45-103">Use hubs in SignalR for ASP.NET Core</span></span>
 
 <span data-ttu-id="2dd45-104">[Rachel Appel](https://twitter.com/rachelappel)和[古柯 Griffin](https://twitter.com/1kevgriff)</span><span class="sxs-lookup"><span data-stu-id="2dd45-104">By [Rachel Appel](https://twitter.com/rachelappel) and [Kevin Griffin](https://twitter.com/1kevgriff)</span></span>
 
 <span data-ttu-id="2dd45-105">[查看或下載範例程式碼](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/signalr/hubs/sample/ ) [ (如何下載) ](xref:index#how-to-download-a-sample)</span><span class="sxs-lookup"><span data-stu-id="2dd45-105">[View or download sample code](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/signalr/hubs/sample/ ) [(how to download)](xref:index#how-to-download-a-sample)</span></span>
 
-## <a name="what-is-a-no-locsignalr-hub"></a><span data-ttu-id="2dd45-106">什麼是 :::no-loc(SignalR)::: 中樞</span><span class="sxs-lookup"><span data-stu-id="2dd45-106">What is a :::no-loc(SignalR)::: hub</span></span>
+## <a name="what-is-a-no-locsignalr-hub"></a><span data-ttu-id="2dd45-106">什麼是 SignalR 中樞</span><span class="sxs-lookup"><span data-stu-id="2dd45-106">What is a SignalR hub</span></span>
 
-<span data-ttu-id="2dd45-107">:::no-loc(SignalR):::中樞 API 可讓您從伺服器呼叫連接用戶端上的方法。</span><span class="sxs-lookup"><span data-stu-id="2dd45-107">The :::no-loc(SignalR)::: Hubs API enables you to call methods on connected clients from the server.</span></span> <span data-ttu-id="2dd45-108">在伺服器程式碼中，您可以定義用戶端所呼叫的方法。</span><span class="sxs-lookup"><span data-stu-id="2dd45-108">In the server code, you define methods that are called by client.</span></span> <span data-ttu-id="2dd45-109">在用戶端程式代碼中，您可以定義從伺服器呼叫的方法。</span><span class="sxs-lookup"><span data-stu-id="2dd45-109">In the client code, you define methods that are called from the server.</span></span> <span data-ttu-id="2dd45-110">:::no-loc(SignalR)::: 會處理幕後的所有專案，讓用戶端對伺服器和伺服器對用戶端的通訊能夠正常運作。</span><span class="sxs-lookup"><span data-stu-id="2dd45-110">:::no-loc(SignalR)::: takes care of everything behind the scenes that makes real-time client-to-server and server-to-client communications possible.</span></span>
+<span data-ttu-id="2dd45-107">SignalR中樞 API 可讓您從伺服器呼叫連接用戶端上的方法。</span><span class="sxs-lookup"><span data-stu-id="2dd45-107">The SignalR Hubs API enables you to call methods on connected clients from the server.</span></span> <span data-ttu-id="2dd45-108">在伺服器程式碼中，您可以定義用戶端所呼叫的方法。</span><span class="sxs-lookup"><span data-stu-id="2dd45-108">In the server code, you define methods that are called by client.</span></span> <span data-ttu-id="2dd45-109">在用戶端程式代碼中，您可以定義從伺服器呼叫的方法。</span><span class="sxs-lookup"><span data-stu-id="2dd45-109">In the client code, you define methods that are called from the server.</span></span> <span data-ttu-id="2dd45-110">SignalR 會處理幕後的所有專案，讓用戶端對伺服器和伺服器對用戶端的通訊能夠正常運作。</span><span class="sxs-lookup"><span data-stu-id="2dd45-110">SignalR takes care of everything behind the scenes that makes real-time client-to-server and server-to-client communications possible.</span></span>
 
-## <a name="configure-no-locsignalr-hubs"></a><span data-ttu-id="2dd45-111">設定 :::no-loc(SignalR)::: 中樞</span><span class="sxs-lookup"><span data-stu-id="2dd45-111">Configure :::no-loc(SignalR)::: hubs</span></span>
+## <a name="configure-no-locsignalr-hubs"></a><span data-ttu-id="2dd45-111">設定 SignalR 中樞</span><span class="sxs-lookup"><span data-stu-id="2dd45-111">Configure SignalR hubs</span></span>
 
-<span data-ttu-id="2dd45-112">:::no-loc(SignalR):::中介軟體需要一些透過呼叫所設定的服務 `services.Add:::no-loc(SignalR):::` 。</span><span class="sxs-lookup"><span data-stu-id="2dd45-112">The :::no-loc(SignalR)::: middleware requires some services, which are configured by calling `services.Add:::no-loc(SignalR):::`.</span></span>
+<span data-ttu-id="2dd45-112">SignalR中介軟體需要一些透過呼叫所設定的服務 `services.AddSignalR` 。</span><span class="sxs-lookup"><span data-stu-id="2dd45-112">The SignalR middleware requires some services, which are configured by calling `services.AddSignalR`.</span></span>
 
 [!code-csharp[Configure service](hubs/sample/startup.cs?range=38)]
 
 ::: moniker range=">= aspnetcore-3.0"
 
-<span data-ttu-id="2dd45-113">將 :::no-loc(SignalR)::: 功能新增至 ASP.NET Core 應用程式時，會 :::no-loc(SignalR)::: `endpoint.MapHub` 在 `Startup.Configure` 方法的回呼中呼叫來設定路由 `app.UseEndpoints` 。</span><span class="sxs-lookup"><span data-stu-id="2dd45-113">When adding :::no-loc(SignalR)::: functionality to an ASP.NET Core app, setup :::no-loc(SignalR)::: routes by calling `endpoint.MapHub` in the `Startup.Configure` method's `app.UseEndpoints` callback.</span></span>
+<span data-ttu-id="2dd45-113">將 SignalR 功能新增至 ASP.NET Core 應用程式時，會 SignalR `endpoint.MapHub` 在 `Startup.Configure` 方法的回呼中呼叫來設定路由 `app.UseEndpoints` 。</span><span class="sxs-lookup"><span data-stu-id="2dd45-113">When adding SignalR functionality to an ASP.NET Core app, setup SignalR routes by calling `endpoint.MapHub` in the `Startup.Configure` method's `app.UseEndpoints` callback.</span></span>
 
 ```csharp
 app.UseRouting();
@@ -58,7 +58,7 @@ app.UseEndpoints(endpoints =>
 
 ::: moniker range="<= aspnetcore-2.2"
 
-<span data-ttu-id="2dd45-114">將 :::no-loc(SignalR)::: 功能新增至 ASP.NET Core 應用程式時，會 :::no-loc(SignalR)::: `app.Use:::no-loc(SignalR):::` 在方法中呼叫來設定路由 `Startup.Configure` 。</span><span class="sxs-lookup"><span data-stu-id="2dd45-114">When adding :::no-loc(SignalR)::: functionality to an ASP.NET Core app, setup :::no-loc(SignalR)::: routes by calling `app.Use:::no-loc(SignalR):::` in the `Startup.Configure` method.</span></span>
+<span data-ttu-id="2dd45-114">將 SignalR 功能新增至 ASP.NET Core 應用程式時，會 SignalR `app.UseSignalR` 在方法中呼叫來設定路由 `Startup.Configure` 。</span><span class="sxs-lookup"><span data-stu-id="2dd45-114">When adding SignalR functionality to an ASP.NET Core app, setup SignalR routes by calling `app.UseSignalR` in the `Startup.Configure` method.</span></span>
 
 [!code-csharp[Configure routes to hubs](hubs/sample/startup.cs?range=57-60)]
 
@@ -78,7 +78,7 @@ public class ChatHub : Hub
 }
 ```
 
-<span data-ttu-id="2dd45-118">您可以指定傳回型別和參數，包括複雜類型和陣列，就像在任何 c # 方法中一樣。</span><span class="sxs-lookup"><span data-stu-id="2dd45-118">You can specify a return type and parameters, including complex types and arrays, as you would in any C# method.</span></span> <span data-ttu-id="2dd45-119">:::no-loc(SignalR)::: 在您的參數和傳回值中處理複雜物件和陣列的序列化和還原序列化。</span><span class="sxs-lookup"><span data-stu-id="2dd45-119">:::no-loc(SignalR)::: handles the serialization and deserialization of complex objects and arrays in your parameters and return values.</span></span>
+<span data-ttu-id="2dd45-118">您可以指定傳回型別和參數，包括複雜類型和陣列，就像在任何 c # 方法中一樣。</span><span class="sxs-lookup"><span data-stu-id="2dd45-118">You can specify a return type and parameters, including complex types and arrays, as you would in any C# method.</span></span> <span data-ttu-id="2dd45-119">SignalR 在您的參數和傳回值中處理複雜物件和陣列的序列化和還原序列化。</span><span class="sxs-lookup"><span data-stu-id="2dd45-119">SignalR handles the serialization and deserialization of complex objects and arrays in your parameters and return values.</span></span>
 
 > [!NOTE]
 > <span data-ttu-id="2dd45-120">中樞是暫時性的：</span><span class="sxs-lookup"><span data-stu-id="2dd45-120">Hubs are transient:</span></span>
@@ -92,8 +92,8 @@ public class ChatHub : Hub
 
 | <span data-ttu-id="2dd45-127">屬性</span><span class="sxs-lookup"><span data-stu-id="2dd45-127">Property</span></span> | <span data-ttu-id="2dd45-128">描述</span><span class="sxs-lookup"><span data-stu-id="2dd45-128">Description</span></span> |
 | ------ | ----------- |
-| `ConnectionId` | <span data-ttu-id="2dd45-129">取得所指派之連接的唯一識別碼 :::no-loc(SignalR)::: 。</span><span class="sxs-lookup"><span data-stu-id="2dd45-129">Gets the unique ID for the connection, assigned by :::no-loc(SignalR):::.</span></span> <span data-ttu-id="2dd45-130">每個連接都有一個連接識別碼。</span><span class="sxs-lookup"><span data-stu-id="2dd45-130">There is one connection ID for each connection.</span></span>|
-| `UserIdentifier` | <span data-ttu-id="2dd45-131">取得 [使用者識別碼](xref:signalr/groups)。</span><span class="sxs-lookup"><span data-stu-id="2dd45-131">Gets the [user identifier](xref:signalr/groups).</span></span> <span data-ttu-id="2dd45-132">根據預設，會 :::no-loc(SignalR)::: 使用 `ClaimTypes.NameIdentifier` `ClaimsPrincipal` 與連接相關聯的，做為使用者識別碼。</span><span class="sxs-lookup"><span data-stu-id="2dd45-132">By default, :::no-loc(SignalR)::: uses the `ClaimTypes.NameIdentifier` from the `ClaimsPrincipal` associated with the connection as the user identifier.</span></span> |
+| `ConnectionId` | <span data-ttu-id="2dd45-129">取得所指派之連接的唯一識別碼 SignalR 。</span><span class="sxs-lookup"><span data-stu-id="2dd45-129">Gets the unique ID for the connection, assigned by SignalR.</span></span> <span data-ttu-id="2dd45-130">每個連接都有一個連接識別碼。</span><span class="sxs-lookup"><span data-stu-id="2dd45-130">There is one connection ID for each connection.</span></span>|
+| `UserIdentifier` | <span data-ttu-id="2dd45-131">取得 [使用者識別碼](xref:signalr/groups)。</span><span class="sxs-lookup"><span data-stu-id="2dd45-131">Gets the [user identifier](xref:signalr/groups).</span></span> <span data-ttu-id="2dd45-132">根據預設，會 SignalR 使用 `ClaimTypes.NameIdentifier` `ClaimsPrincipal` 與連接相關聯的，做為使用者識別碼。</span><span class="sxs-lookup"><span data-stu-id="2dd45-132">By default, SignalR uses the `ClaimTypes.NameIdentifier` from the `ClaimsPrincipal` associated with the connection as the user identifier.</span></span> |
 | `User` | <span data-ttu-id="2dd45-133">取得 `ClaimsPrincipal` 與目前使用者相關聯的。</span><span class="sxs-lookup"><span data-stu-id="2dd45-133">Gets the `ClaimsPrincipal` associated with the current user.</span></span> |
 | `Items` | <span data-ttu-id="2dd45-134">取得索引鍵/值集合，可用來在此連接的範圍內共用資料。</span><span class="sxs-lookup"><span data-stu-id="2dd45-134">Gets a key/value collection that can be used to share data within the scope of this connection.</span></span> <span data-ttu-id="2dd45-135">資料可以儲存在此集合中，而且會針對跨不同中樞方法調用的連接保存。</span><span class="sxs-lookup"><span data-stu-id="2dd45-135">Data can be stored in this collection and it will persist for the connection across different hub method invocations.</span></span> |
 | `Features` | <span data-ttu-id="2dd45-136">取得連接上可用之功能的集合。</span><span class="sxs-lookup"><span data-stu-id="2dd45-136">Gets the collection of features available on the connection.</span></span> <span data-ttu-id="2dd45-137">目前，在大部分情況下並不需要此集合，因此尚未詳細記載。</span><span class="sxs-lookup"><span data-stu-id="2dd45-137">For now, this collection isn't needed in most scenarios, so it isn't documented in detail yet.</span></span> |
@@ -138,7 +138,7 @@ public class ChatHub : Hub
 
 * <span data-ttu-id="2dd45-169">`SendMessage` 使用將訊息傳送至所有連線的用戶端 `Clients.All` 。</span><span class="sxs-lookup"><span data-stu-id="2dd45-169">`SendMessage` sends a message to all connected clients, using `Clients.All`.</span></span>
 * <span data-ttu-id="2dd45-170">`SendMessageToCaller` 使用將訊息傳回給呼叫端 `Clients.Caller` 。</span><span class="sxs-lookup"><span data-stu-id="2dd45-170">`SendMessageToCaller` sends a message back to the caller, using `Clients.Caller`.</span></span>
-* <span data-ttu-id="2dd45-171">`SendMessageToGroups` 將訊息傳送給群組中的所有用戶端 `:::no-loc(SignalR)::: Users` 。</span><span class="sxs-lookup"><span data-stu-id="2dd45-171">`SendMessageToGroups` sends a message to all clients in the `:::no-loc(SignalR)::: Users` group.</span></span>
+* <span data-ttu-id="2dd45-171">`SendMessageToGroups` 將訊息傳送給群組中的所有用戶端 `SignalR Users` 。</span><span class="sxs-lookup"><span data-stu-id="2dd45-171">`SendMessageToGroups` sends a message to all clients in the `SignalR Users` group.</span></span>
 
 [!code-csharp[Send messages](hubs/sample/hubs/chathub.cs?name=HubMethods)]
 
@@ -146,7 +146,7 @@ public class ChatHub : Hub
 
 <span data-ttu-id="2dd45-173">使用的缺點 `SendAsync` 是它依賴魔術字串來指定要呼叫的用戶端方法。</span><span class="sxs-lookup"><span data-stu-id="2dd45-173">A drawback of using `SendAsync` is that it relies on a magic string to specify the client method to be called.</span></span> <span data-ttu-id="2dd45-174">如果用戶端的方法名稱拼錯或遺失，則會將程式碼開放給執行階段錯誤。</span><span class="sxs-lookup"><span data-stu-id="2dd45-174">This leaves code open to runtime errors if the method name is misspelled or missing from the client.</span></span>
 
-<span data-ttu-id="2dd45-175">使用的替代方法 `SendAsync` 是使用強型別 `Hub` <xref:Microsoft.AspNetCore.:::no-loc(SignalR):::.Hub%601> 。</span><span class="sxs-lookup"><span data-stu-id="2dd45-175">An alternative to using `SendAsync` is to strongly type the `Hub` with <xref:Microsoft.AspNetCore.:::no-loc(SignalR):::.Hub%601>.</span></span> <span data-ttu-id="2dd45-176">在下列範例中， `ChatHub` 已將用戶端方法解壓縮至名為的介面 `IChatClient` 。</span><span class="sxs-lookup"><span data-stu-id="2dd45-176">In the following example, the `ChatHub` client methods have been extracted out into an interface called `IChatClient`.</span></span>
+<span data-ttu-id="2dd45-175">使用的替代方法 `SendAsync` 是使用強型別 `Hub` <xref:Microsoft.AspNetCore.SignalR.Hub%601> 。</span><span class="sxs-lookup"><span data-stu-id="2dd45-175">An alternative to using `SendAsync` is to strongly type the `Hub` with <xref:Microsoft.AspNetCore.SignalR.Hub%601>.</span></span> <span data-ttu-id="2dd45-176">在下列範例中， `ChatHub` 已將用戶端方法解壓縮至名為的介面 `IChatClient` 。</span><span class="sxs-lookup"><span data-stu-id="2dd45-176">In the following example, the `ChatHub` client methods have been extracted out into an interface called `IChatClient`.</span></span>
 
 [!code-csharp[Interface for IChatClient](hubs/sample/hubs/ichatclient.cs?name=snippet_IChatClient)]
 
@@ -170,13 +170,13 @@ public interface IClient
 
 ## <a name="change-the-name-of-a-hub-method"></a><span data-ttu-id="2dd45-187">變更中樞方法的名稱</span><span class="sxs-lookup"><span data-stu-id="2dd45-187">Change the name of a hub method</span></span>
 
-<span data-ttu-id="2dd45-188">根據預設，伺服器中樞方法名稱是 .NET 方法的名稱。</span><span class="sxs-lookup"><span data-stu-id="2dd45-188">By default, a server hub method name is the name of the .NET method.</span></span> <span data-ttu-id="2dd45-189">不過，您可以使用 [HubMethodName](xref:Microsoft.AspNetCore.:::no-loc(SignalR):::.HubMethodNameAttribute) 屬性來變更這個預設值，並手動指定方法的名稱。</span><span class="sxs-lookup"><span data-stu-id="2dd45-189">However, you can use the [HubMethodName](xref:Microsoft.AspNetCore.:::no-loc(SignalR):::.HubMethodNameAttribute) attribute to change this default and manually specify a name for the method.</span></span> <span data-ttu-id="2dd45-190">叫用方法時，用戶端應該使用這個名稱，而不是 .NET 方法名稱。</span><span class="sxs-lookup"><span data-stu-id="2dd45-190">The client should use this name, instead of the .NET method name, when invoking the method.</span></span>
+<span data-ttu-id="2dd45-188">根據預設，伺服器中樞方法名稱是 .NET 方法的名稱。</span><span class="sxs-lookup"><span data-stu-id="2dd45-188">By default, a server hub method name is the name of the .NET method.</span></span> <span data-ttu-id="2dd45-189">不過，您可以使用 [HubMethodName](xref:Microsoft.AspNetCore.SignalR.HubMethodNameAttribute) 屬性來變更這個預設值，並手動指定方法的名稱。</span><span class="sxs-lookup"><span data-stu-id="2dd45-189">However, you can use the [HubMethodName](xref:Microsoft.AspNetCore.SignalR.HubMethodNameAttribute) attribute to change this default and manually specify a name for the method.</span></span> <span data-ttu-id="2dd45-190">叫用方法時，用戶端應該使用這個名稱，而不是 .NET 方法名稱。</span><span class="sxs-lookup"><span data-stu-id="2dd45-190">The client should use this name, instead of the .NET method name, when invoking the method.</span></span>
 
 [!code-csharp[HubMethodName attribute](hubs/sample/hubs/chathub.cs?name=HubMethodName&highlight=1)]
 
 ## <a name="handle-events-for-a-connection"></a><span data-ttu-id="2dd45-191">處理連接的事件</span><span class="sxs-lookup"><span data-stu-id="2dd45-191">Handle events for a connection</span></span>
 
-<span data-ttu-id="2dd45-192">:::no-loc(SignalR):::中樞 API 提供 `OnConnectedAsync` 和 `OnDisconnectedAsync` 虛擬方法來管理和追蹤連接。</span><span class="sxs-lookup"><span data-stu-id="2dd45-192">The :::no-loc(SignalR)::: Hubs API provides the `OnConnectedAsync` and `OnDisconnectedAsync` virtual methods to manage and track connections.</span></span> <span data-ttu-id="2dd45-193">覆寫 `OnConnectedAsync` 虛擬方法，以在用戶端連線至中樞時執行動作，例如將它新增至群組。</span><span class="sxs-lookup"><span data-stu-id="2dd45-193">Override the `OnConnectedAsync` virtual method to perform actions when a client connects to the Hub, such as adding it to a group.</span></span>
+<span data-ttu-id="2dd45-192">SignalR中樞 API 提供 `OnConnectedAsync` 和 `OnDisconnectedAsync` 虛擬方法來管理和追蹤連接。</span><span class="sxs-lookup"><span data-stu-id="2dd45-192">The SignalR Hubs API provides the `OnConnectedAsync` and `OnDisconnectedAsync` virtual methods to manage and track connections.</span></span> <span data-ttu-id="2dd45-193">覆寫 `OnConnectedAsync` 虛擬方法，以在用戶端連線至中樞時執行動作，例如將它新增至群組。</span><span class="sxs-lookup"><span data-stu-id="2dd45-193">Override the `OnConnectedAsync` virtual method to perform actions when a client connects to the Hub, such as adding it to a group.</span></span>
 
 [!code-csharp[Handle connection](hubs/sample/hubs/chathub.cs?name=OnConnectedAsync)]
 
@@ -192,23 +192,23 @@ public interface IClient
 
 [!code-javascript[Error](hubs/sample/wwwroot/js/chat.js?range=23)]
 
-<span data-ttu-id="2dd45-201">如果您的中樞擲回例外狀況，則不會關閉連接。</span><span class="sxs-lookup"><span data-stu-id="2dd45-201">If your Hub throws an exception, connections aren't closed.</span></span> <span data-ttu-id="2dd45-202">依預設，會將 :::no-loc(SignalR)::: 一般錯誤訊息傳回給用戶端。</span><span class="sxs-lookup"><span data-stu-id="2dd45-202">By default, :::no-loc(SignalR)::: returns a generic error message to the client.</span></span> <span data-ttu-id="2dd45-203">例如：</span><span class="sxs-lookup"><span data-stu-id="2dd45-203">For example:</span></span>
+<span data-ttu-id="2dd45-201">如果您的中樞擲回例外狀況，則不會關閉連接。</span><span class="sxs-lookup"><span data-stu-id="2dd45-201">If your Hub throws an exception, connections aren't closed.</span></span> <span data-ttu-id="2dd45-202">依預設，會將 SignalR 一般錯誤訊息傳回給用戶端。</span><span class="sxs-lookup"><span data-stu-id="2dd45-202">By default, SignalR returns a generic error message to the client.</span></span> <span data-ttu-id="2dd45-203">例如：</span><span class="sxs-lookup"><span data-stu-id="2dd45-203">For example:</span></span>
 
 ```
-Microsoft.AspNetCore.:::no-loc(SignalR):::.HubException: An unexpected error occurred invoking 'MethodName' on the server.
+Microsoft.AspNetCore.SignalR.HubException: An unexpected error occurred invoking 'MethodName' on the server.
 ```
 
-<span data-ttu-id="2dd45-204">非預期的例外狀況通常包含敏感性資訊，例如資料庫連接失敗時所觸發之例外狀況中的資料庫伺服器名稱。</span><span class="sxs-lookup"><span data-stu-id="2dd45-204">Unexpected exceptions often contain sensitive information, such as the name of a database server in an exception triggered when the database connection fails.</span></span> <span data-ttu-id="2dd45-205">:::no-loc(SignalR)::: 預設不會公開這些詳細的錯誤訊息做為安全性措施。</span><span class="sxs-lookup"><span data-stu-id="2dd45-205">:::no-loc(SignalR)::: doesn't expose these detailed error messages by default as a security measure.</span></span> <span data-ttu-id="2dd45-206">如需隱藏例外狀況詳細資料的詳細資訊，請參閱 [安全性考慮文章](xref:signalr/security#exceptions) 。</span><span class="sxs-lookup"><span data-stu-id="2dd45-206">See the [Security considerations article](xref:signalr/security#exceptions) for more information on why exception details are suppressed.</span></span>
+<span data-ttu-id="2dd45-204">非預期的例外狀況通常包含敏感性資訊，例如資料庫連接失敗時所觸發之例外狀況中的資料庫伺服器名稱。</span><span class="sxs-lookup"><span data-stu-id="2dd45-204">Unexpected exceptions often contain sensitive information, such as the name of a database server in an exception triggered when the database connection fails.</span></span> <span data-ttu-id="2dd45-205">SignalR 預設不會公開這些詳細的錯誤訊息做為安全性措施。</span><span class="sxs-lookup"><span data-stu-id="2dd45-205">SignalR doesn't expose these detailed error messages by default as a security measure.</span></span> <span data-ttu-id="2dd45-206">如需隱藏例外狀況詳細資料的詳細資訊，請參閱 [安全性考慮文章](xref:signalr/security#exceptions) 。</span><span class="sxs-lookup"><span data-stu-id="2dd45-206">See the [Security considerations article](xref:signalr/security#exceptions) for more information on why exception details are suppressed.</span></span>
 
-<span data-ttu-id="2dd45-207">如果 *您有想要* 傳播至用戶端的例外狀況，您可以使用 `HubException` 類別。</span><span class="sxs-lookup"><span data-stu-id="2dd45-207">If you have an exceptional condition you *do* want to propagate to the client, you can use the `HubException` class.</span></span> <span data-ttu-id="2dd45-208">如果您 `HubException` 從中樞方法擲回，則 :::no-loc(SignalR)::: **會將** 整個訊息傳送給用戶端（未經修改）。</span><span class="sxs-lookup"><span data-stu-id="2dd45-208">If you throw a `HubException` from your hub method, :::no-loc(SignalR)::: **will** send the entire message to the client, unmodified.</span></span>
+<span data-ttu-id="2dd45-207">如果 *您有想要* 傳播至用戶端的例外狀況，您可以使用 `HubException` 類別。</span><span class="sxs-lookup"><span data-stu-id="2dd45-207">If you have an exceptional condition you *do* want to propagate to the client, you can use the `HubException` class.</span></span> <span data-ttu-id="2dd45-208">如果您 `HubException` 從中樞方法擲回，則 SignalR **會將** 整個訊息傳送給用戶端（未經修改）。</span><span class="sxs-lookup"><span data-stu-id="2dd45-208">If you throw a `HubException` from your hub method, SignalR **will** send the entire message to the client, unmodified.</span></span>
 
 [!code-csharp[ThrowHubException](hubs/sample/hubs/chathub.cs?name=ThrowHubException&highlight=3)]
 
 > [!NOTE]
-> <span data-ttu-id="2dd45-209">:::no-loc(SignalR)::: 只會將 `Message` 例外狀況的屬性傳送至用戶端。</span><span class="sxs-lookup"><span data-stu-id="2dd45-209">:::no-loc(SignalR)::: only sends the `Message` property of the exception to the client.</span></span> <span data-ttu-id="2dd45-210">例外狀況的堆疊追蹤和其他屬性無法供用戶端使用。</span><span class="sxs-lookup"><span data-stu-id="2dd45-210">The stack trace and other properties on the exception aren't available to the client.</span></span>
+> <span data-ttu-id="2dd45-209">SignalR 只會將 `Message` 例外狀況的屬性傳送至用戶端。</span><span class="sxs-lookup"><span data-stu-id="2dd45-209">SignalR only sends the `Message` property of the exception to the client.</span></span> <span data-ttu-id="2dd45-210">例外狀況的堆疊追蹤和其他屬性無法供用戶端使用。</span><span class="sxs-lookup"><span data-stu-id="2dd45-210">The stack trace and other properties on the exception aren't available to the client.</span></span>
 
 ## <a name="related-resources"></a><span data-ttu-id="2dd45-211">相關資源</span><span class="sxs-lookup"><span data-stu-id="2dd45-211">Related resources</span></span>
 
-* [<span data-ttu-id="2dd45-212">ASP.NET Core 簡介 :::no-loc(SignalR):::</span><span class="sxs-lookup"><span data-stu-id="2dd45-212">Intro to ASP.NET Core :::no-loc(SignalR):::</span></span>](xref:signalr/introduction)
+* [<span data-ttu-id="2dd45-212">ASP.NET Core 簡介 SignalR</span><span class="sxs-lookup"><span data-stu-id="2dd45-212">Intro to ASP.NET Core SignalR</span></span>](xref:signalr/introduction)
 * [<span data-ttu-id="2dd45-213">JavaScript 用戶端</span><span class="sxs-lookup"><span data-stu-id="2dd45-213">JavaScript client</span></span>](xref:signalr/javascript-client)
 * [<span data-ttu-id="2dd45-214">發佈至 Azure</span><span class="sxs-lookup"><span data-stu-id="2dd45-214">Publish to Azure</span></span>](xref:signalr/publish-to-azure-web-app)

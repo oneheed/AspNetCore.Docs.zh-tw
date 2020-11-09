@@ -7,17 +7,17 @@ ms.custom: mvc
 ms.date: 03/19/2020
 monikerRange: '>= aspnetcore-3.0'
 no-loc:
-- ':::no-loc(appsettings.json):::'
-- ':::no-loc(ASP.NET Core Identity):::'
-- ':::no-loc(cookie):::'
-- ':::no-loc(Cookie):::'
-- ':::no-loc(Blazor):::'
-- ':::no-loc(Blazor Server):::'
-- ':::no-loc(Blazor WebAssembly):::'
-- ':::no-loc(Identity):::'
-- ":::no-loc(Let's Encrypt):::"
-- ':::no-loc(Razor):::'
-- ':::no-loc(SignalR):::'
+- 'appsettings.json'
+- 'ASP.NET Core Identity'
+- 'cookie'
+- 'Cookie'
+- 'Blazor'
+- 'Blazor Server'
+- 'Blazor WebAssembly'
+- 'Identity'
+- "Let's Encrypt"
+- 'Razor'
+- 'SignalR'
 uid: security/authentication/twitter-logins
 ms.openlocfilehash: 47926d12ac5f922f2937df164d38ff6eb63cacf1
 ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
@@ -42,7 +42,7 @@ ms.locfileid: "93053276"
 
 * <span data-ttu-id="c947d-112">核取 [ **啟用 Twitter 登入** ] 旁的核取方塊</span><span class="sxs-lookup"><span data-stu-id="c947d-112">Check the box next to **Enable Sign in with Twitter**</span></span>
 
-* <span data-ttu-id="c947d-113">AspNetCore。:::no-loc(Identity):::</span><span class="sxs-lookup"><span data-stu-id="c947d-113">Microsoft.AspNetCore.:::no-loc(Identity):::</span></span> <span data-ttu-id="c947d-114">預設會要求使用者擁有電子郵件地址。</span><span class="sxs-lookup"><span data-stu-id="c947d-114">requires users to have an email address by default.</span></span> <span data-ttu-id="c947d-115">移至 [ **許可權** ] 索引標籤，按一下 [ **編輯** ] 按鈕，然後核取 [ **使用者要求電子郵件地址** ] 旁的核取方塊。</span><span class="sxs-lookup"><span data-stu-id="c947d-115">Go to the **Permissions** tab, click the **Edit** button and check the box next to **Request email address from users** .</span></span>
+* <span data-ttu-id="c947d-113">AspNetCore。Identity</span><span class="sxs-lookup"><span data-stu-id="c947d-113">Microsoft.AspNetCore.Identity</span></span> <span data-ttu-id="c947d-114">預設會要求使用者擁有電子郵件地址。</span><span class="sxs-lookup"><span data-stu-id="c947d-114">requires users to have an email address by default.</span></span> <span data-ttu-id="c947d-115">移至 [ **許可權** ] 索引標籤，按一下 [ **編輯** ] 按鈕，然後核取 [ **使用者要求電子郵件地址** ] 旁的核取方塊。</span><span class="sxs-lookup"><span data-stu-id="c947d-115">Go to the **Permissions** tab, click the **Edit** button and check the box next to **Request email address from users** .</span></span>
 
 * <span data-ttu-id="c947d-116">輸入您的開發 URI，並 `/signin-twitter` 將其附加至 **回呼 url** 欄位 (例如： `https://webapp128.azurewebsites.net/signin-twitter`) 。</span><span class="sxs-lookup"><span data-stu-id="c947d-116">Enter your development URI with `/signin-twitter` appended into the **Callback URLs** field (for example: `https://webapp128.azurewebsites.net/signin-twitter`).</span></span> <span data-ttu-id="c947d-117">稍後在此範例中設定的 Twitter 驗證配置會自動處理路由上的要求 `/signin-twitter` ，以實行 OAuth 流程。</span><span class="sxs-lookup"><span data-stu-id="c947d-117">The Twitter authentication scheme configured later in this sample will automatically handle requests at `/signin-twitter` route to implement the OAuth flow.</span></span>
 
@@ -99,7 +99,7 @@ Rather in the twitter setup, you can provide an External sign-in homepage. The e
 
 ## <a name="troubleshooting"></a><span data-ttu-id="c947d-138">疑難排解</span><span class="sxs-lookup"><span data-stu-id="c947d-138">Troubleshooting</span></span>
 
-* <span data-ttu-id="c947d-139">**僅 ASP.NET Core 2.x：** 如果 :::no-loc(Identity)::: 未透過呼叫來 `services.Add:::no-loc(Identity):::` 設定 `ConfigureServices` ，嘗試驗證將會導致 *ArgumentException：必須提供 ' SignInScheme ' 選項* 。</span><span class="sxs-lookup"><span data-stu-id="c947d-139">**ASP.NET Core 2.x only:** If :::no-loc(Identity)::: isn't configured by calling `services.Add:::no-loc(Identity):::` in `ConfigureServices`, attempting to authenticate will result in *ArgumentException: The 'SignInScheme' option must be provided* .</span></span> <span data-ttu-id="c947d-140">此範例中使用的專案範本可確保完成此操作。</span><span class="sxs-lookup"><span data-stu-id="c947d-140">The project template used in this sample ensures that this is done.</span></span>
+* <span data-ttu-id="c947d-139">**僅 ASP.NET Core 2.x：** 如果 Identity 未透過呼叫來 `services.AddIdentity` 設定 `ConfigureServices` ，嘗試驗證將會導致 *ArgumentException：必須提供 ' SignInScheme ' 選項* 。</span><span class="sxs-lookup"><span data-stu-id="c947d-139">**ASP.NET Core 2.x only:** If Identity isn't configured by calling `services.AddIdentity` in `ConfigureServices`, attempting to authenticate will result in *ArgumentException: The 'SignInScheme' option must be provided* .</span></span> <span data-ttu-id="c947d-140">此範例中使用的專案範本可確保完成此操作。</span><span class="sxs-lookup"><span data-stu-id="c947d-140">The project template used in this sample ensures that this is done.</span></span>
 * <span data-ttu-id="c947d-141">如果未藉由套用初始遷移來建立網站資料庫，則在處理要求錯誤時，您將會收到 *資料庫操作失敗* 。</span><span class="sxs-lookup"><span data-stu-id="c947d-141">If the site database has not been created by applying the initial migration, you will get *A database operation failed while processing the request* error.</span></span> <span data-ttu-id="c947d-142">請按一下 [套用 **遷移** ] 來建立資料庫，並重新整理以繼續發生錯誤。</span><span class="sxs-lookup"><span data-stu-id="c947d-142">Tap **Apply Migrations** to create the database and refresh to continue past the error.</span></span>
 
 ## <a name="next-steps"></a><span data-ttu-id="c947d-143">後續步驟</span><span class="sxs-lookup"><span data-stu-id="c947d-143">Next steps</span></span>

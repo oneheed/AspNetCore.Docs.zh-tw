@@ -6,17 +6,17 @@ ms.author: scaddie
 ms.custom: mvc
 ms.date: 08/20/2018
 no-loc:
-- ':::no-loc(appsettings.json):::'
-- ':::no-loc(ASP.NET Core Identity):::'
-- ':::no-loc(cookie):::'
-- ':::no-loc(Cookie):::'
-- ':::no-loc(Blazor):::'
-- ':::no-loc(Blazor Server):::'
-- ':::no-loc(Blazor WebAssembly):::'
-- ':::no-loc(Identity):::'
-- ":::no-loc(Let's Encrypt):::"
-- ':::no-loc(Razor):::'
-- ':::no-loc(SignalR):::'
+- 'appsettings.json'
+- 'ASP.NET Core Identity'
+- 'cookie'
+- 'Cookie'
+- 'Blazor'
+- 'Blazor Server'
+- 'Blazor WebAssembly'
+- 'Identity'
+- "Let's Encrypt"
+- 'Razor'
+- 'SignalR'
 uid: client-side/libman/libman-vs
 ms.openlocfilehash: 1c97f5d7fbf64c5043e6d2277091b9a477833bf1
 ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
@@ -72,7 +72,7 @@ ms.locfileid: "93054706"
     * <span data-ttu-id="be13f-139">如果 *wwwroot* 不存在，就會使用 *lib* 。</span><span class="sxs-lookup"><span data-stu-id="be13f-139">*lib* is used if *wwwroot* doesn't exist.</span></span>
   * <span data-ttu-id="be13f-140">如果從專案資料夾啟動，則會使用對應的資料夾名稱。</span><span class="sxs-lookup"><span data-stu-id="be13f-140">If launched from a project folder, the corresponding folder name is used.</span></span>
 
-  <span data-ttu-id="be13f-141">資料夾的建議是以程式庫名稱做為尾碼。</span><span class="sxs-lookup"><span data-stu-id="be13f-141">The folder suggestion is suffixed with the library name.</span></span> <span data-ttu-id="be13f-142">下表說明在頁面專案中安裝 jQuery 時的資料夾建議 :::no-loc(Razor)::: 。</span><span class="sxs-lookup"><span data-stu-id="be13f-142">The following table illustrates folder suggestions when installing jQuery in a :::no-loc(Razor)::: Pages project.</span></span>
+  <span data-ttu-id="be13f-141">資料夾的建議是以程式庫名稱做為尾碼。</span><span class="sxs-lookup"><span data-stu-id="be13f-141">The folder suggestion is suffixed with the library name.</span></span> <span data-ttu-id="be13f-142">下表說明在頁面專案中安裝 jQuery 時的資料夾建議 Razor 。</span><span class="sxs-lookup"><span data-stu-id="be13f-142">The following table illustrates folder suggestions when installing jQuery in a Razor Pages project.</span></span>
   
   |<span data-ttu-id="be13f-143">啟動位置</span><span class="sxs-lookup"><span data-stu-id="be13f-143">Launch location</span></span>                           |<span data-ttu-id="be13f-144">建議的資料夾</span><span class="sxs-lookup"><span data-stu-id="be13f-144">Suggested folder</span></span>      |
   |------------------------------------------|----------------------|

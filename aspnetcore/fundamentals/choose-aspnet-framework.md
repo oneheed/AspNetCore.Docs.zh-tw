@@ -6,17 +6,17 @@ ms.author: riande
 ms.custom: mvc, seodec18
 ms.date: 02/12/2020
 no-loc:
-- ':::no-loc(appsettings.json):::'
-- ':::no-loc(ASP.NET Core Identity):::'
-- ':::no-loc(cookie):::'
-- ':::no-loc(Cookie):::'
-- ':::no-loc(Blazor):::'
-- ':::no-loc(Blazor Server):::'
-- ':::no-loc(Blazor WebAssembly):::'
-- ':::no-loc(Identity):::'
-- ":::no-loc(Let's Encrypt):::"
-- ':::no-loc(Razor):::'
-- ':::no-loc(SignalR):::'
+- 'appsettings.json'
+- 'ASP.NET Core Identity'
+- 'cookie'
+- 'Cookie'
+- 'Blazor'
+- 'Blazor Server'
+- 'Blazor WebAssembly'
+- 'Identity'
+- "Let's Encrypt"
+- 'Razor'
+- 'SignalR'
 uid: fundamentals/choose-between-aspnet-and-aspnetcore
 ms.openlocfilehash: 95ac4784634d38add5e28644d42b0182e15c6de9
 ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
@@ -46,7 +46,7 @@ ms.locfileid: "93060023"
 | <span data-ttu-id="7f7cc-112">ASP.NET Core</span><span class="sxs-lookup"><span data-stu-id="7f7cc-112">ASP.NET Core</span></span> | <span data-ttu-id="7f7cc-113">ASP.NET 4.x</span><span class="sxs-lookup"><span data-stu-id="7f7cc-113">ASP.NET 4.x</span></span> |
 |---|---|
 |<span data-ttu-id="7f7cc-114">為 Windows、macOS 或 Linux 建置</span><span class="sxs-lookup"><span data-stu-id="7f7cc-114">Build for Windows, macOS, or Linux</span></span>|<span data-ttu-id="7f7cc-115">為 Windows 建置</span><span class="sxs-lookup"><span data-stu-id="7f7cc-115">Build for Windows</span></span>|
-|<span data-ttu-id="7f7cc-116">[ :::no-loc(Razor)::: 頁面](xref:razor-pages/index)是建立 ASP.NET Core 2.X 的 Web UI 的建議方法。</span><span class="sxs-lookup"><span data-stu-id="7f7cc-116">[:::no-loc(Razor)::: Pages](xref:razor-pages/index) is the recommended approach to create a Web UI as of ASP.NET Core 2.x.</span></span> <span data-ttu-id="7f7cc-117">另請參閱 [MVC](xref:mvc/overview)、 [Web API](xref:tutorials/first-web-api)和 [:::no-loc(SignalR):::](xref:signalr/introduction) 。</span><span class="sxs-lookup"><span data-stu-id="7f7cc-117">See also [MVC](xref:mvc/overview), [Web API](xref:tutorials/first-web-api), and [:::no-loc(SignalR):::](xref:signalr/introduction).</span></span>|<span data-ttu-id="7f7cc-118">使用 [Web Form](/aspnet/web-forms)、 [:::no-loc(SignalR):::](/aspnet/signalr) 、 [MVC](/aspnet/mvc)、 [web API](/aspnet/web-api/)、 [webhook](/aspnet/webhooks/)或 [網頁](/aspnet/web-pages)</span><span class="sxs-lookup"><span data-stu-id="7f7cc-118">Use [Web Forms](/aspnet/web-forms), [:::no-loc(SignalR):::](/aspnet/signalr), [MVC](/aspnet/mvc), [Web API](/aspnet/web-api/), [WebHooks](/aspnet/webhooks/), or [Web Pages](/aspnet/web-pages)</span></span>|
+|<span data-ttu-id="7f7cc-116">[ Razor 頁面](xref:razor-pages/index)是建立 ASP.NET Core 2.X 的 Web UI 的建議方法。</span><span class="sxs-lookup"><span data-stu-id="7f7cc-116">[Razor Pages](xref:razor-pages/index) is the recommended approach to create a Web UI as of ASP.NET Core 2.x.</span></span> <span data-ttu-id="7f7cc-117">另請參閱 [MVC](xref:mvc/overview)、 [Web API](xref:tutorials/first-web-api)和 [SignalR](xref:signalr/introduction) 。</span><span class="sxs-lookup"><span data-stu-id="7f7cc-117">See also [MVC](xref:mvc/overview), [Web API](xref:tutorials/first-web-api), and [SignalR](xref:signalr/introduction).</span></span>|<span data-ttu-id="7f7cc-118">使用 [Web Form](/aspnet/web-forms)、 [SignalR](/aspnet/signalr) 、 [MVC](/aspnet/mvc)、 [web API](/aspnet/web-api/)、 [webhook](/aspnet/webhooks/)或 [網頁](/aspnet/web-pages)</span><span class="sxs-lookup"><span data-stu-id="7f7cc-118">Use [Web Forms](/aspnet/web-forms), [SignalR](/aspnet/signalr), [MVC](/aspnet/mvc), [Web API](/aspnet/web-api/), [WebHooks](/aspnet/webhooks/), or [Web Pages](/aspnet/web-pages)</span></span>|
 |<span data-ttu-id="7f7cc-119">每部電腦多個版本</span><span class="sxs-lookup"><span data-stu-id="7f7cc-119">Multiple versions per machine</span></span>|<span data-ttu-id="7f7cc-120">每部電腦一個版本</span><span class="sxs-lookup"><span data-stu-id="7f7cc-120">One version per machine</span></span>|
 |<span data-ttu-id="7f7cc-121">使用 c # 或 F [Visual Studio](https://visualstudio.microsoft.com/vs/)、 [Visual Studio for Mac](https://visualstudio.microsoft.com/vs/mac/)或 [Visual Studio Code](https://code.visualstudio.com/) 進行開發#</span><span class="sxs-lookup"><span data-stu-id="7f7cc-121">Develop with [Visual Studio](https://visualstudio.microsoft.com/vs/), [Visual Studio for Mac](https://visualstudio.microsoft.com/vs/mac/), or [Visual Studio Code](https://code.visualstudio.com/) using C# or F#</span></span>|<span data-ttu-id="7f7cc-122">使用 c #、VB 或 F 進行 [Visual Studio](https://visualstudio.microsoft.com/vs/) 開發#</span><span class="sxs-lookup"><span data-stu-id="7f7cc-122">Develop with [Visual Studio](https://visualstudio.microsoft.com/vs/) using C#, VB, or F#</span></span>|
 |<span data-ttu-id="7f7cc-123">效能比 ASP.NET 4.x 更高</span><span class="sxs-lookup"><span data-stu-id="7f7cc-123">Higher performance than ASP.NET 4.x</span></span>|<span data-ttu-id="7f7cc-124">效能良好</span><span class="sxs-lookup"><span data-stu-id="7f7cc-124">Good performance</span></span>|

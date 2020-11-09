@@ -1,21 +1,21 @@
 ---
-title: '第2部分： :::no-loc(Razor)::: ASP.NET Core 中有 EF Core 的頁面-CRUD'
+title: '第2部分： Razor ASP.NET Core 中有 EF Core 的頁面-CRUD'
 author: rick-anderson
-description: '頁面第2部分 :::no-loc(Razor)::: 和 Entity Framework 教學課程系列。'
+description: '頁面第2部分 Razor 和 Entity Framework 教學課程系列。'
 ms.author: riande
 ms.date: 07/22/2019
 no-loc:
-- ':::no-loc(appsettings.json):::'
-- ':::no-loc(ASP.NET Core Identity):::'
-- ':::no-loc(cookie):::'
-- ':::no-loc(Cookie):::'
-- ':::no-loc(Blazor):::'
-- ':::no-loc(Blazor Server):::'
-- ':::no-loc(Blazor WebAssembly):::'
-- ':::no-loc(Identity):::'
-- ":::no-loc(Let's Encrypt):::"
-- ':::no-loc(Razor):::'
-- ':::no-loc(SignalR):::'
+- 'appsettings.json'
+- 'ASP.NET Core Identity'
+- 'cookie'
+- 'Cookie'
+- 'Blazor'
+- 'Blazor Server'
+- 'Blazor WebAssembly'
+- 'Identity'
+- "Let's Encrypt"
+- 'Razor'
+- 'SignalR'
 uid: data/ef-rp/crud
 ms.openlocfilehash: c5b9be64ea30cce7a3178bfbb244ef893e9639d2
 ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
@@ -24,7 +24,7 @@ ms.contentlocale: zh-TW
 ms.lasthandoff: 10/30/2020
 ms.locfileid: "93053861"
 ---
-# <a name="part-2-no-locrazor-pages-with-ef-core-in-aspnet-core---crud"></a><span data-ttu-id="4a693-103">第2部分： :::no-loc(Razor)::: ASP.NET Core 中有 EF Core 的頁面-CRUD</span><span class="sxs-lookup"><span data-stu-id="4a693-103">Part 2, :::no-loc(Razor)::: Pages with EF Core in ASP.NET Core - CRUD</span></span>
+# <a name="part-2-no-locrazor-pages-with-ef-core-in-aspnet-core---crud"></a><span data-ttu-id="4a693-103">第2部分： Razor ASP.NET Core 中有 EF Core 的頁面-CRUD</span><span class="sxs-lookup"><span data-stu-id="4a693-103">Part 2, Razor Pages with EF Core in ASP.NET Core - CRUD</span></span>
 
 <span data-ttu-id="4a693-104">作者：[Tom Dykstra](https://github.com/tdykstra)、[Jon P Smith](https://twitter.com/thereformedprog)、[Rick Anderson](https://twitter.com/RickAndMSFT)</span><span class="sxs-lookup"><span data-stu-id="4a693-104">By [Tom Dykstra](https://github.com/tdykstra), [Jon P Smith](https://twitter.com/thereformedprog), and [Rick Anderson](https://twitter.com/RickAndMSFT)</span></span>
 
@@ -36,7 +36,7 @@ ms.locfileid: "93053861"
 
 ## <a name="no-repository"></a><span data-ttu-id="4a693-106">沒有任何存放庫</span><span class="sxs-lookup"><span data-stu-id="4a693-106">No repository</span></span>
 
-<span data-ttu-id="4a693-107">某些開發人員會使用服務層或儲存機制模式，在 UI (:::no-loc(Razor)::: 頁面) 和資料存取層之間建立抽象層。</span><span class="sxs-lookup"><span data-stu-id="4a693-107">Some developers use a service layer or repository pattern to create an abstraction layer between the UI (:::no-loc(Razor)::: Pages) and the data access layer.</span></span> <span data-ttu-id="4a693-108">本教學課程不會這麼做。</span><span class="sxs-lookup"><span data-stu-id="4a693-108">This tutorial doesn't do that.</span></span> <span data-ttu-id="4a693-109">為降低複雜性並將教學課程聚焦於 EF Core，EF Core 程式碼會直接新增至頁面模型類別中。</span><span class="sxs-lookup"><span data-stu-id="4a693-109">To minimize complexity and keep the tutorial focused on EF Core, EF Core code is added directly to the page model classes.</span></span> 
+<span data-ttu-id="4a693-107">某些開發人員會使用服務層或儲存機制模式，在 UI (Razor 頁面) 和資料存取層之間建立抽象層。</span><span class="sxs-lookup"><span data-stu-id="4a693-107">Some developers use a service layer or repository pattern to create an abstraction layer between the UI (Razor Pages) and the data access layer.</span></span> <span data-ttu-id="4a693-108">本教學課程不會這麼做。</span><span class="sxs-lookup"><span data-stu-id="4a693-108">This tutorial doesn't do that.</span></span> <span data-ttu-id="4a693-109">為降低複雜性並將教學課程聚焦於 EF Core，EF Core 程式碼會直接新增至頁面模型類別中。</span><span class="sxs-lookup"><span data-stu-id="4a693-109">To minimize complexity and keep the tutorial focused on EF Core, EF Core code is added directly to the page model classes.</span></span> 
 
 ## <a name="update-the-details-page"></a><span data-ttu-id="4a693-110">更新 [詳細資料] 頁面</span><span class="sxs-lookup"><span data-stu-id="4a693-110">Update the Details page</span></span>
 
@@ -89,7 +89,7 @@ ms.locfileid: "93053861"
 
 <span data-ttu-id="4a693-150">上述程式碼會建立 Student 物件，然後使用張貼的表單欄位來更新 Student 物件屬性。</span><span class="sxs-lookup"><span data-stu-id="4a693-150">The preceding code creates a Student object and then uses posted form fields to update the Student object's properties.</span></span> <span data-ttu-id="4a693-151">[TryUpdateModelAsync](/dotnet/api/microsoft.aspnetcore.mvc.controllerbase.tryupdatemodelasync#Microsoft_AspNetCore_Mvc_ControllerBase_TryUpdateModelAsync_System_Object_System_Type_System_String_) 方法：</span><span class="sxs-lookup"><span data-stu-id="4a693-151">The [TryUpdateModelAsync](/dotnet/api/microsoft.aspnetcore.mvc.controllerbase.tryupdatemodelasync#Microsoft_AspNetCore_Mvc_ControllerBase_TryUpdateModelAsync_System_Object_System_Type_System_String_) method:</span></span>
 
-* <span data-ttu-id="4a693-152">使用 [PageModel](/dotnet/api/microsoft.aspnetcore.mvc.razorpages.pagemodel) 中 [PageCoNtext](/dotnet/api/microsoft.aspnetcore.mvc.razorpages.pagemodel.pagecontext#Microsoft_AspNetCore_Mvc_:::no-loc(Razor):::Pages_PageModel_PageContext) 屬性的張貼表單值。</span><span class="sxs-lookup"><span data-stu-id="4a693-152">Uses the posted form values from the [PageContext](/dotnet/api/microsoft.aspnetcore.mvc.razorpages.pagemodel.pagecontext#Microsoft_AspNetCore_Mvc_:::no-loc(Razor):::Pages_PageModel_PageContext) property in the [PageModel](/dotnet/api/microsoft.aspnetcore.mvc.razorpages.pagemodel).</span></span>
+* <span data-ttu-id="4a693-152">使用 [PageModel](/dotnet/api/microsoft.aspnetcore.mvc.razorpages.pagemodel) 中 [PageCoNtext](/dotnet/api/microsoft.aspnetcore.mvc.razorpages.pagemodel.pagecontext#Microsoft_AspNetCore_Mvc_RazorPages_PageModel_PageContext) 屬性的張貼表單值。</span><span class="sxs-lookup"><span data-stu-id="4a693-152">Uses the posted form values from the [PageContext](/dotnet/api/microsoft.aspnetcore.mvc.razorpages.pagemodel.pagecontext#Microsoft_AspNetCore_Mvc_RazorPages_PageModel_PageContext) property in the [PageModel](/dotnet/api/microsoft.aspnetcore.mvc.razorpages.pagemodel).</span></span>
 * <span data-ttu-id="4a693-153">僅更新列出的屬性 (`s => s.FirstMidName, s => s.LastName, s => s.EnrollmentDate`)。</span><span class="sxs-lookup"><span data-stu-id="4a693-153">Updates only the properties listed (`s => s.FirstMidName, s => s.LastName, s => s.EnrollmentDate`).</span></span>
 * <span data-ttu-id="4a693-154">尋找具有 "student" 前置詞的表單欄位。</span><span class="sxs-lookup"><span data-stu-id="4a693-154">Looks for form fields with a "student" prefix.</span></span> <span data-ttu-id="4a693-155">例如： `Student.FirstMidName` 。</span><span class="sxs-lookup"><span data-stu-id="4a693-155">For example, `Student.FirstMidName`.</span></span> <span data-ttu-id="4a693-156">不區分大小寫。</span><span class="sxs-lookup"><span data-stu-id="4a693-156">It's not case sensitive.</span></span>
 * <span data-ttu-id="4a693-157">使用[模型繫結](xref:mvc/models/model-binding)系統，將字串中表單值轉換成 `Student` 模型中的型別。</span><span class="sxs-lookup"><span data-stu-id="4a693-157">Uses the [model binding](xref:mvc/models/model-binding) system to convert form values from strings to the types in the `Student` model.</span></span> <span data-ttu-id="4a693-158">例如， `EnrollmentDate` 會轉換成 `DateTime` 。</span><span class="sxs-lookup"><span data-stu-id="4a693-158">For example, `EnrollmentDate` is converted to `DateTime`.</span></span>
@@ -102,7 +102,7 @@ ms.locfileid: "93053861"
 
 [!code-csharp[Main](intro/samples/cu30snapshots/2-crud/Models/StudentZsecret.cs?name=snippet_Intro&highlight=7)]
 
-<span data-ttu-id="4a693-163">即使應用程式在 `Secret` [建立或更新] 頁面上沒有欄位 :::no-loc(Razor)::: ，駭客也可以藉 `Secret` 由大量指派來設定值。</span><span class="sxs-lookup"><span data-stu-id="4a693-163">Even if the app doesn't have a `Secret` field on the create or update :::no-loc(Razor)::: Page, a hacker could set the `Secret` value by overposting.</span></span> <span data-ttu-id="4a693-164">駭客仍可能使用 Fiddler 等工具，或是撰寫 JavaScript，來張貼 `Secret` 表單值。</span><span class="sxs-lookup"><span data-stu-id="4a693-164">A hacker could use a tool such as Fiddler, or write some JavaScript, to post a `Secret` form value.</span></span> <span data-ttu-id="4a693-165">原始程式碼並不會限制模型繫結器在建立 Student 執行個體時所使用的欄位。</span><span class="sxs-lookup"><span data-stu-id="4a693-165">The original code doesn't limit the fields that the model binder uses when it creates a Student instance.</span></span>
+<span data-ttu-id="4a693-163">即使應用程式在 `Secret` [建立或更新] 頁面上沒有欄位 Razor ，駭客也可以藉 `Secret` 由大量指派來設定值。</span><span class="sxs-lookup"><span data-stu-id="4a693-163">Even if the app doesn't have a `Secret` field on the create or update Razor Page, a hacker could set the `Secret` value by overposting.</span></span> <span data-ttu-id="4a693-164">駭客仍可能使用 Fiddler 等工具，或是撰寫 JavaScript，來張貼 `Secret` 表單值。</span><span class="sxs-lookup"><span data-stu-id="4a693-164">A hacker could use a tool such as Fiddler, or write some JavaScript, to post a `Secret` form value.</span></span> <span data-ttu-id="4a693-165">原始程式碼並不會限制模型繫結器在建立 Student 執行個體時所使用的欄位。</span><span class="sxs-lookup"><span data-stu-id="4a693-165">The original code doesn't limit the fields that the model binder uses when it creates a Student instance.</span></span>
 
 <span data-ttu-id="4a693-166">無論駭客在 `Secret` 表單欄位中指定了什麼值，該值都會更新到資料庫中。</span><span class="sxs-lookup"><span data-stu-id="4a693-166">Whatever value the hacker specified for the `Secret` form field is updated in the database.</span></span> <span data-ttu-id="4a693-167">下圖顯示 Fiddler 工具，將值為 `Secret` "OverPost" 的欄位新增至張貼的表單值。</span><span class="sxs-lookup"><span data-stu-id="4a693-167">The following image shows the Fiddler tool adding the `Secret` field, with the value "OverPost", to the posted form values.</span></span>
 
@@ -116,7 +116,7 @@ ms.locfileid: "93053861"
 
 <span data-ttu-id="4a693-173">應用程式模型通常稱為網域模型。</span><span class="sxs-lookup"><span data-stu-id="4a693-173">The application model is often called the domain model.</span></span> <span data-ttu-id="4a693-174">網域模型通常會包含資料庫中對應實體所需要的所有屬性。</span><span class="sxs-lookup"><span data-stu-id="4a693-174">The domain model typically contains all the properties required by the corresponding entity in the database.</span></span> <span data-ttu-id="4a693-175">視圖模型只包含 UI 頁面所需的屬性，例如 [建立] 頁面。</span><span class="sxs-lookup"><span data-stu-id="4a693-175">The view model contains only the properties needed for the UI page, for example, the Create page.</span></span>
 
-<span data-ttu-id="4a693-176">除了 view 模型之外，有些應用程式會使用系結模型或輸入模型，在 :::no-loc(Razor)::: 頁面頁面模型類別和瀏覽器之間傳遞資料。</span><span class="sxs-lookup"><span data-stu-id="4a693-176">In addition to the view model, some apps use a binding model or input model to pass data between the :::no-loc(Razor)::: Pages page model class and the browser.</span></span> 
+<span data-ttu-id="4a693-176">除了 view 模型之外，有些應用程式會使用系結模型或輸入模型，在 Razor 頁面頁面模型類別和瀏覽器之間傳遞資料。</span><span class="sxs-lookup"><span data-stu-id="4a693-176">In addition to the view model, some apps use a binding model or input model to pass data between the Razor Pages page model class and the browser.</span></span> 
 
 <span data-ttu-id="4a693-177">請看看下列 `StudentVM` 檢視模型：</span><span class="sxs-lookup"><span data-stu-id="4a693-177">Consider the following `StudentVM` view model:</span></span>
 
@@ -205,7 +205,7 @@ ms.locfileid: "93053861"
 
 ## <a name="no-repository"></a><span data-ttu-id="4a693-234">沒有任何存放庫</span><span class="sxs-lookup"><span data-stu-id="4a693-234">No repository</span></span>
 
-<span data-ttu-id="4a693-235">某些開發人員會使用服務層或儲存機制模式，在 UI (:::no-loc(Razor)::: 頁面) 和資料存取層之間建立抽象層。</span><span class="sxs-lookup"><span data-stu-id="4a693-235">Some developers use a service layer or repository pattern to create an abstraction layer between the UI (:::no-loc(Razor)::: Pages) and the data access layer.</span></span> <span data-ttu-id="4a693-236">本教學課程不會這麼做。</span><span class="sxs-lookup"><span data-stu-id="4a693-236">This tutorial doesn't do that.</span></span> <span data-ttu-id="4a693-237">為降低複雜性並將教學課程聚焦於 EF Core，EF Core 程式碼會直接新增至頁面模型類別中。</span><span class="sxs-lookup"><span data-stu-id="4a693-237">To minimize complexity and keep the tutorial focused on EF Core, EF Core code is added directly to the page model classes.</span></span> 
+<span data-ttu-id="4a693-235">某些開發人員會使用服務層或儲存機制模式，在 UI (Razor 頁面) 和資料存取層之間建立抽象層。</span><span class="sxs-lookup"><span data-stu-id="4a693-235">Some developers use a service layer or repository pattern to create an abstraction layer between the UI (Razor Pages) and the data access layer.</span></span> <span data-ttu-id="4a693-236">本教學課程不會這麼做。</span><span class="sxs-lookup"><span data-stu-id="4a693-236">This tutorial doesn't do that.</span></span> <span data-ttu-id="4a693-237">為降低複雜性並將教學課程聚焦於 EF Core，EF Core 程式碼會直接新增至頁面模型類別中。</span><span class="sxs-lookup"><span data-stu-id="4a693-237">To minimize complexity and keep the tutorial focused on EF Core, EF Core code is added directly to the page model classes.</span></span> 
 
 ## <a name="update-the-details-page"></a><span data-ttu-id="4a693-238">更新 [詳細資料] 頁面</span><span class="sxs-lookup"><span data-stu-id="4a693-238">Update the Details page</span></span>
 
@@ -258,7 +258,7 @@ ms.locfileid: "93053861"
 
 <span data-ttu-id="4a693-278">上述程式碼會建立 Student 物件，然後使用張貼的表單欄位來更新 Student 物件屬性。</span><span class="sxs-lookup"><span data-stu-id="4a693-278">The preceding code creates a Student object and then uses posted form fields to update the Student object's properties.</span></span> <span data-ttu-id="4a693-279">[TryUpdateModelAsync](/dotnet/api/microsoft.aspnetcore.mvc.controllerbase.tryupdatemodelasync#Microsoft_AspNetCore_Mvc_ControllerBase_TryUpdateModelAsync_System_Object_System_Type_System_String_) 方法：</span><span class="sxs-lookup"><span data-stu-id="4a693-279">The [TryUpdateModelAsync](/dotnet/api/microsoft.aspnetcore.mvc.controllerbase.tryupdatemodelasync#Microsoft_AspNetCore_Mvc_ControllerBase_TryUpdateModelAsync_System_Object_System_Type_System_String_) method:</span></span>
 
-* <span data-ttu-id="4a693-280">使用 [PageModel](/dotnet/api/microsoft.aspnetcore.mvc.razorpages.pagemodel) 中 [PageCoNtext](/dotnet/api/microsoft.aspnetcore.mvc.razorpages.pagemodel.pagecontext#Microsoft_AspNetCore_Mvc_:::no-loc(Razor):::Pages_PageModel_PageContext) 屬性的張貼表單值。</span><span class="sxs-lookup"><span data-stu-id="4a693-280">Uses the posted form values from the [PageContext](/dotnet/api/microsoft.aspnetcore.mvc.razorpages.pagemodel.pagecontext#Microsoft_AspNetCore_Mvc_:::no-loc(Razor):::Pages_PageModel_PageContext) property in the [PageModel](/dotnet/api/microsoft.aspnetcore.mvc.razorpages.pagemodel).</span></span>
+* <span data-ttu-id="4a693-280">使用 [PageModel](/dotnet/api/microsoft.aspnetcore.mvc.razorpages.pagemodel) 中 [PageCoNtext](/dotnet/api/microsoft.aspnetcore.mvc.razorpages.pagemodel.pagecontext#Microsoft_AspNetCore_Mvc_RazorPages_PageModel_PageContext) 屬性的張貼表單值。</span><span class="sxs-lookup"><span data-stu-id="4a693-280">Uses the posted form values from the [PageContext](/dotnet/api/microsoft.aspnetcore.mvc.razorpages.pagemodel.pagecontext#Microsoft_AspNetCore_Mvc_RazorPages_PageModel_PageContext) property in the [PageModel](/dotnet/api/microsoft.aspnetcore.mvc.razorpages.pagemodel).</span></span>
 * <span data-ttu-id="4a693-281">僅更新列出的屬性 (`s => s.FirstMidName, s => s.LastName, s => s.EnrollmentDate`)。</span><span class="sxs-lookup"><span data-stu-id="4a693-281">Updates only the properties listed (`s => s.FirstMidName, s => s.LastName, s => s.EnrollmentDate`).</span></span>
 * <span data-ttu-id="4a693-282">尋找具有 "student" 前置詞的表單欄位。</span><span class="sxs-lookup"><span data-stu-id="4a693-282">Looks for form fields with a "student" prefix.</span></span> <span data-ttu-id="4a693-283">例如： `Student.FirstMidName` 。</span><span class="sxs-lookup"><span data-stu-id="4a693-283">For example, `Student.FirstMidName`.</span></span> <span data-ttu-id="4a693-284">不區分大小寫。</span><span class="sxs-lookup"><span data-stu-id="4a693-284">It's not case sensitive.</span></span>
 * <span data-ttu-id="4a693-285">使用[模型繫結](xref:mvc/models/model-binding)系統，將字串中表單值轉換成 `Student` 模型中的型別。</span><span class="sxs-lookup"><span data-stu-id="4a693-285">Uses the [model binding](xref:mvc/models/model-binding) system to convert form values from strings to the types in the `Student` model.</span></span> <span data-ttu-id="4a693-286">例如，`EnrollmentDate` 必須轉換成 DateTime。</span><span class="sxs-lookup"><span data-stu-id="4a693-286">For example, `EnrollmentDate` has to be converted to DateTime.</span></span>
@@ -271,7 +271,7 @@ ms.locfileid: "93053861"
 
 [!code-csharp[Main](intro/samples/cu30snapshots/2-crud/Models/StudentZsecret.cs?name=snippet_Intro&highlight=7)]
 
-<span data-ttu-id="4a693-291">即使應用程式在 `Secret` [建立或更新] 頁面上沒有欄位 :::no-loc(Razor)::: ，駭客也可以藉 `Secret` 由大量指派來設定值。</span><span class="sxs-lookup"><span data-stu-id="4a693-291">Even if the app doesn't have a `Secret` field on the create or update :::no-loc(Razor)::: Page, a hacker could set the `Secret` value by overposting.</span></span> <span data-ttu-id="4a693-292">駭客仍可能使用 Fiddler 等工具，或是撰寫 JavaScript，來張貼 `Secret` 表單值。</span><span class="sxs-lookup"><span data-stu-id="4a693-292">A hacker could use a tool such as Fiddler, or write some JavaScript, to post a `Secret` form value.</span></span> <span data-ttu-id="4a693-293">原始程式碼並不會限制模型繫結器在建立 Student 執行個體時所使用的欄位。</span><span class="sxs-lookup"><span data-stu-id="4a693-293">The original code doesn't limit the fields that the model binder uses when it creates a Student instance.</span></span>
+<span data-ttu-id="4a693-291">即使應用程式在 `Secret` [建立或更新] 頁面上沒有欄位 Razor ，駭客也可以藉 `Secret` 由大量指派來設定值。</span><span class="sxs-lookup"><span data-stu-id="4a693-291">Even if the app doesn't have a `Secret` field on the create or update Razor Page, a hacker could set the `Secret` value by overposting.</span></span> <span data-ttu-id="4a693-292">駭客仍可能使用 Fiddler 等工具，或是撰寫 JavaScript，來張貼 `Secret` 表單值。</span><span class="sxs-lookup"><span data-stu-id="4a693-292">A hacker could use a tool such as Fiddler, or write some JavaScript, to post a `Secret` form value.</span></span> <span data-ttu-id="4a693-293">原始程式碼並不會限制模型繫結器在建立 Student 執行個體時所使用的欄位。</span><span class="sxs-lookup"><span data-stu-id="4a693-293">The original code doesn't limit the fields that the model binder uses when it creates a Student instance.</span></span>
 
 <span data-ttu-id="4a693-294">無論駭客在 `Secret` 表單欄位中指定了什麼值，該值都會更新到資料庫中。</span><span class="sxs-lookup"><span data-stu-id="4a693-294">Whatever value the hacker specified for the `Secret` form field is updated in the database.</span></span> <span data-ttu-id="4a693-295">下列影響顯示了 Fiddler 工具將 `Secret` 欄位 (其值為 "OverPost") 新增到表單的值中。</span><span class="sxs-lookup"><span data-stu-id="4a693-295">The following image shows the Fiddler tool adding the `Secret` field (with the value "OverPost") to the posted form values.</span></span>
 
@@ -285,7 +285,7 @@ ms.locfileid: "93053861"
 
 <span data-ttu-id="4a693-301">應用程式模型通常稱為網域模型。</span><span class="sxs-lookup"><span data-stu-id="4a693-301">The application model is often called the domain model.</span></span> <span data-ttu-id="4a693-302">網域模型通常會包含資料庫中對應實體所需要的所有屬性。</span><span class="sxs-lookup"><span data-stu-id="4a693-302">The domain model typically contains all the properties required by the corresponding entity in the database.</span></span> <span data-ttu-id="4a693-303">檢視模型只包含 UI 所需要的屬性 (例如 [建立] 頁面)。</span><span class="sxs-lookup"><span data-stu-id="4a693-303">The view model contains only the properties needed for the UI that it is used for (for example, the Create page).</span></span>
 
-<span data-ttu-id="4a693-304">除了 view 模型之外，有些應用程式會使用系結模型或輸入模型，在 :::no-loc(Razor)::: 頁面頁面模型類別和瀏覽器之間傳遞資料。</span><span class="sxs-lookup"><span data-stu-id="4a693-304">In addition to the view model, some apps use a binding model or input model to pass data between the :::no-loc(Razor)::: Pages page model class and the browser.</span></span> 
+<span data-ttu-id="4a693-304">除了 view 模型之外，有些應用程式會使用系結模型或輸入模型，在 Razor 頁面頁面模型類別和瀏覽器之間傳遞資料。</span><span class="sxs-lookup"><span data-stu-id="4a693-304">In addition to the view model, some apps use a binding model or input model to pass data between the Razor Pages page model class and the browser.</span></span> 
 
 <span data-ttu-id="4a693-305">請看看下列 `Student` 檢視模型：</span><span class="sxs-lookup"><span data-stu-id="4a693-305">Consider the following `Student` view model:</span></span>
 
@@ -348,7 +348,7 @@ ms.locfileid: "93053861"
 * <span data-ttu-id="4a693-353">攔截到資料庫例外狀況。</span><span class="sxs-lookup"><span data-stu-id="4a693-353">The database exception is caught.</span></span>
 * <span data-ttu-id="4a693-354">[刪除] 頁面的 `OnGetAsync` 方法會以 `saveChangesError=true` 呼叫。</span><span class="sxs-lookup"><span data-stu-id="4a693-354">The Delete pages `OnGetAsync` method is called with `saveChangesError=true`.</span></span>
 
-<span data-ttu-id="4a693-355">將錯誤訊息加入至 [刪除] :::no-loc(Razor)::: 頁面， ( *Pages/Student/Delete. cshtml* ) ：</span><span class="sxs-lookup"><span data-stu-id="4a693-355">Add an error message to the Delete :::no-loc(Razor)::: Page ( *Pages/Students/Delete.cshtml* ):</span></span>
+<span data-ttu-id="4a693-355">將錯誤訊息加入至 [刪除] Razor 頁面， ( *Pages/Student/Delete. cshtml* ) ：</span><span class="sxs-lookup"><span data-stu-id="4a693-355">Add an error message to the Delete Razor Page ( *Pages/Students/Delete.cshtml* ):</span></span>
 
 [!code-cshtml[Main](intro/samples/cu30/Pages/Students/Delete.cshtml?highlight=10)]
 
@@ -367,9 +367,9 @@ ms.locfileid: "93053861"
 
 <span data-ttu-id="4a693-359">在本教學課程中，將會檢閱並自訂 Scaffold CRUD (建立、讀取、更新、刪除)。</span><span class="sxs-lookup"><span data-stu-id="4a693-359">In this tutorial, the scaffolded CRUD (create, read, update, delete) code is reviewed and customized.</span></span>
 
-<span data-ttu-id="4a693-360">為降低複雜性並將教學課程聚焦於 EF Core，EF Core 程式碼會使用於頁面模型中。</span><span class="sxs-lookup"><span data-stu-id="4a693-360">To minimize complexity and keep these tutorials focused on EF Core, EF Core code is used in the page models.</span></span> <span data-ttu-id="4a693-361">某些開發人員會使用中的服務層或儲存機制模式，在 UI (:::no-loc(Razor)::: 頁面) 和資料存取層之間建立抽象層。</span><span class="sxs-lookup"><span data-stu-id="4a693-361">Some developers use a service layer or repository pattern in to create an abstraction layer between the UI (:::no-loc(Razor)::: Pages) and the data access layer.</span></span>
+<span data-ttu-id="4a693-360">為降低複雜性並將教學課程聚焦於 EF Core，EF Core 程式碼會使用於頁面模型中。</span><span class="sxs-lookup"><span data-stu-id="4a693-360">To minimize complexity and keep these tutorials focused on EF Core, EF Core code is used in the page models.</span></span> <span data-ttu-id="4a693-361">某些開發人員會使用中的服務層或儲存機制模式，在 UI (Razor 頁面) 和資料存取層之間建立抽象層。</span><span class="sxs-lookup"><span data-stu-id="4a693-361">Some developers use a service layer or repository pattern in to create an abstraction layer between the UI (Razor Pages) and the data access layer.</span></span>
 
-<span data-ttu-id="4a693-362">在本教學課程中， :::no-loc(Razor)::: 會檢查 [ *學生* ] 資料夾中的 [建立]、[編輯]、[刪除] 和 [詳細資料] 頁面</span><span class="sxs-lookup"><span data-stu-id="4a693-362">In this tutorial, the Create, Edit, Delete, and Details :::no-loc(Razor)::: Pages in the *Students* folder are examined.</span></span>
+<span data-ttu-id="4a693-362">在本教學課程中， Razor 會檢查 [ *學生* ] 資料夾中的 [建立]、[編輯]、[刪除] 和 [詳細資料] 頁面</span><span class="sxs-lookup"><span data-stu-id="4a693-362">In this tutorial, the Create, Edit, Delete, and Details Razor Pages in the *Students* folder are examined.</span></span>
 
 <span data-ttu-id="4a693-363">Scaffold 程式碼會為 [建立]、[編輯]、[刪除] 頁面使用下列模式：</span><span class="sxs-lookup"><span data-stu-id="4a693-363">The scaffolded code uses the following pattern for Create, Edit, and Delete pages:</span></span>
 
@@ -413,7 +413,7 @@ ms.locfileid: "93053861"
 
 <span data-ttu-id="4a693-388">執行應用程式並選取 [詳細資料]  連結。</span><span class="sxs-lookup"><span data-stu-id="4a693-388">Run the app and select a **Details** link.</span></span> <span data-ttu-id="4a693-389">URL 的格式為 `http://localhost:5000/Students/Details?id=2`。</span><span class="sxs-lookup"><span data-stu-id="4a693-389">The URL is of the form `http://localhost:5000/Students/Details?id=2`.</span></span> <span data-ttu-id="4a693-390">使用 (`?id=2`) 查詢字串來傳遞 Student ID。</span><span class="sxs-lookup"><span data-stu-id="4a693-390">The Student ID is passed using a query string (`?id=2`).</span></span>
 
-<span data-ttu-id="4a693-391">更新 [編輯]、[詳細資料] 和 [刪除] :::no-loc(Razor)::: 頁面，以使用 `"{id:int}"` 路由範本。</span><span class="sxs-lookup"><span data-stu-id="4a693-391">Update the Edit, Details, and Delete :::no-loc(Razor)::: Pages to use the `"{id:int}"` route template.</span></span> <span data-ttu-id="4a693-392">將這些頁面每一頁的頁面指示詞從 `@page` 變更為 `@page "{id:int}"`。</span><span class="sxs-lookup"><span data-stu-id="4a693-392">Change the page directive for each of these pages from `@page` to `@page "{id:int}"`.</span></span>
+<span data-ttu-id="4a693-391">更新 [編輯]、[詳細資料] 和 [刪除] Razor 頁面，以使用 `"{id:int}"` 路由範本。</span><span class="sxs-lookup"><span data-stu-id="4a693-391">Update the Edit, Details, and Delete Razor Pages to use the `"{id:int}"` route template.</span></span> <span data-ttu-id="4a693-392">將這些頁面每一頁的頁面指示詞從 `@page` 變更為 `@page "{id:int}"`。</span><span class="sxs-lookup"><span data-stu-id="4a693-392">Change the page directive for each of these pages from `@page` to `@page "{id:int}"`.</span></span>
 
 <span data-ttu-id="4a693-393">對使用 "{id:int}" 路由範本的頁面提出的要求若 **未** 包含整數路由值，將傳回 HTTP 404 (找不到) 錯誤。</span><span class="sxs-lookup"><span data-stu-id="4a693-393">A request to the page with the "{id:int}" route template that does **not** include a integer route value returns an HTTP 404 (not found) error.</span></span> <span data-ttu-id="4a693-394">例如，`http://localhost:5000/Students/Details` 傳回 404 錯誤。</span><span class="sxs-lookup"><span data-stu-id="4a693-394">For example, `http://localhost:5000/Students/Details` returns a 404 error.</span></span> <span data-ttu-id="4a693-395">若要使識別碼成為選擇性，請將 `?` 附加至路由條件約束：</span><span class="sxs-lookup"><span data-stu-id="4a693-395">To make the ID optional, append `?` to the route constraint:</span></span>
 
@@ -465,7 +465,7 @@ ms.locfileid: "93053861"
 
 [!code-csharp[](intro/samples/cu21/Pages/Students/Create.cshtml.cs?name=snippet_TryUpdateModelAsync)]
 
-<span data-ttu-id="4a693-420">在上述程式碼，`TryUpdateModelAsync<Student>` 從 [PageModel](/dotnet/api/microsoft.aspnetcore.mvc.razorpages.pagemodel) 中的 [PageContext](/dotnet/api/microsoft.aspnetcore.mvc.razorpages.pagemodel.pagecontext#Microsoft_AspNetCore_Mvc_:::no-loc(Razor):::Pages_PageModel_PageContext) 屬性中，使用已張貼的表單值來嘗試更新 `emptyStudent` 物件。</span><span class="sxs-lookup"><span data-stu-id="4a693-420">In the preceding code, `TryUpdateModelAsync<Student>` tries to update the `emptyStudent` object using the posted form values from the [PageContext](/dotnet/api/microsoft.aspnetcore.mvc.razorpages.pagemodel.pagecontext#Microsoft_AspNetCore_Mvc_:::no-loc(Razor):::Pages_PageModel_PageContext) property in the [PageModel](/dotnet/api/microsoft.aspnetcore.mvc.razorpages.pagemodel).</span></span> <span data-ttu-id="4a693-421">`TryUpdateModelAsync` 只會更新列出的屬性 (`s => s.FirstMidName, s => s.LastName, s => s.EnrollmentDate`)。</span><span class="sxs-lookup"><span data-stu-id="4a693-421">`TryUpdateModelAsync` only updates the properties listed (`s => s.FirstMidName, s => s.LastName, s => s.EnrollmentDate`).</span></span>
+<span data-ttu-id="4a693-420">在上述程式碼，`TryUpdateModelAsync<Student>` 從 [PageModel](/dotnet/api/microsoft.aspnetcore.mvc.razorpages.pagemodel) 中的 [PageContext](/dotnet/api/microsoft.aspnetcore.mvc.razorpages.pagemodel.pagecontext#Microsoft_AspNetCore_Mvc_RazorPages_PageModel_PageContext) 屬性中，使用已張貼的表單值來嘗試更新 `emptyStudent` 物件。</span><span class="sxs-lookup"><span data-stu-id="4a693-420">In the preceding code, `TryUpdateModelAsync<Student>` tries to update the `emptyStudent` object using the posted form values from the [PageContext](/dotnet/api/microsoft.aspnetcore.mvc.razorpages.pagemodel.pagecontext#Microsoft_AspNetCore_Mvc_RazorPages_PageModel_PageContext) property in the [PageModel](/dotnet/api/microsoft.aspnetcore.mvc.razorpages.pagemodel).</span></span> <span data-ttu-id="4a693-421">`TryUpdateModelAsync` 只會更新列出的屬性 (`s => s.FirstMidName, s => s.LastName, s => s.EnrollmentDate`)。</span><span class="sxs-lookup"><span data-stu-id="4a693-421">`TryUpdateModelAsync` only updates the properties listed (`s => s.FirstMidName, s => s.LastName, s => s.EnrollmentDate`).</span></span>
 
 <span data-ttu-id="4a693-422">在上述範例中：</span><span class="sxs-lookup"><span data-stu-id="4a693-422">In the preceding sample:</span></span>
 
@@ -480,7 +480,7 @@ ms.locfileid: "93053861"
 
 [!code-csharp[](intro/samples/cu21/Models/StudentZsecret.cs?name=snippet_Intro&highlight=7)]
 
-<span data-ttu-id="4a693-429">即使應用程式在 `Secret` [建立/更新] 頁面上沒有欄位 :::no-loc(Razor)::: ，駭客也可以藉 `Secret` 由大量指派來設定值。</span><span class="sxs-lookup"><span data-stu-id="4a693-429">Even if the app doesn't have a `Secret` field on the create/update :::no-loc(Razor)::: Page, a hacker could set the `Secret` value by overposting.</span></span> <span data-ttu-id="4a693-430">駭客仍可能使用 Fiddler 等工具，或是撰寫 JavaScript，來張貼 `Secret` 表單值。</span><span class="sxs-lookup"><span data-stu-id="4a693-430">A hacker could use a tool such as Fiddler, or write some JavaScript, to post a `Secret` form value.</span></span> <span data-ttu-id="4a693-431">原始程式碼並不會限制模型繫結器在建立 Student 執行個體時所使用的欄位。</span><span class="sxs-lookup"><span data-stu-id="4a693-431">The original code doesn't limit the fields that the model binder uses when it creates a Student instance.</span></span>
+<span data-ttu-id="4a693-429">即使應用程式在 `Secret` [建立/更新] 頁面上沒有欄位 Razor ，駭客也可以藉 `Secret` 由大量指派來設定值。</span><span class="sxs-lookup"><span data-stu-id="4a693-429">Even if the app doesn't have a `Secret` field on the create/update Razor Page, a hacker could set the `Secret` value by overposting.</span></span> <span data-ttu-id="4a693-430">駭客仍可能使用 Fiddler 等工具，或是撰寫 JavaScript，來張貼 `Secret` 表單值。</span><span class="sxs-lookup"><span data-stu-id="4a693-430">A hacker could use a tool such as Fiddler, or write some JavaScript, to post a `Secret` form value.</span></span> <span data-ttu-id="4a693-431">原始程式碼並不會限制模型繫結器在建立 Student 執行個體時所使用的欄位。</span><span class="sxs-lookup"><span data-stu-id="4a693-431">The original code doesn't limit the fields that the model binder uses when it creates a Student instance.</span></span>
 
 <span data-ttu-id="4a693-432">無論駭客在 `Secret` 表單欄位中指定了什麼值，該值都會更新到資料庫中。</span><span class="sxs-lookup"><span data-stu-id="4a693-432">Whatever value the hacker specified for the `Secret` form field is updated in the DB.</span></span> <span data-ttu-id="4a693-433">下列影響顯示了 Fiddler 工具將 `Secret` 欄位 (其值為 "OverPost") 新增到表單的值中。</span><span class="sxs-lookup"><span data-stu-id="4a693-433">The following image shows the Fiddler tool adding the `Secret` field (with the value "OverPost") to the posted form values.</span></span>
 
@@ -492,7 +492,7 @@ ms.locfileid: "93053861"
 
 ### <a name="view-model"></a><span data-ttu-id="4a693-437">檢視模型</span><span class="sxs-lookup"><span data-stu-id="4a693-437">View model</span></span>
 
-<span data-ttu-id="4a693-438">檢視模型通常包含屬性中的子集，這些屬性包含在應用程式使用的模型中。</span><span class="sxs-lookup"><span data-stu-id="4a693-438">A view model typically contains a subset of the properties included in the model used by the application.</span></span> <span data-ttu-id="4a693-439">應用程式模型通常稱為網域模型。</span><span class="sxs-lookup"><span data-stu-id="4a693-439">The application model is often called the domain model.</span></span> <span data-ttu-id="4a693-440">網域模型通常會包含資料庫中對應實體所需要的所有屬性。</span><span class="sxs-lookup"><span data-stu-id="4a693-440">The domain model typically contains all the properties required by the corresponding entity in the DB.</span></span> <span data-ttu-id="4a693-441">檢視模型只包含 UI 層所需要的屬性 (例如 [建立] 頁面)。</span><span class="sxs-lookup"><span data-stu-id="4a693-441">The view model contains only the properties needed for the UI layer (for example, the Create page).</span></span> <span data-ttu-id="4a693-442">除了 view 模型之外，有些應用程式會使用系結模型或輸入模型，在 :::no-loc(Razor)::: 頁面頁面模型類別和瀏覽器之間傳遞資料。</span><span class="sxs-lookup"><span data-stu-id="4a693-442">In addition to the view model, some apps use a binding model or input model to pass data between the :::no-loc(Razor)::: Pages page model class and the browser.</span></span> <span data-ttu-id="4a693-443">請看看下列 `Student` 檢視模型：</span><span class="sxs-lookup"><span data-stu-id="4a693-443">Consider the following `Student` view model:</span></span>
+<span data-ttu-id="4a693-438">檢視模型通常包含屬性中的子集，這些屬性包含在應用程式使用的模型中。</span><span class="sxs-lookup"><span data-stu-id="4a693-438">A view model typically contains a subset of the properties included in the model used by the application.</span></span> <span data-ttu-id="4a693-439">應用程式模型通常稱為網域模型。</span><span class="sxs-lookup"><span data-stu-id="4a693-439">The application model is often called the domain model.</span></span> <span data-ttu-id="4a693-440">網域模型通常會包含資料庫中對應實體所需要的所有屬性。</span><span class="sxs-lookup"><span data-stu-id="4a693-440">The domain model typically contains all the properties required by the corresponding entity in the DB.</span></span> <span data-ttu-id="4a693-441">檢視模型只包含 UI 層所需要的屬性 (例如 [建立] 頁面)。</span><span class="sxs-lookup"><span data-stu-id="4a693-441">The view model contains only the properties needed for the UI layer (for example, the Create page).</span></span> <span data-ttu-id="4a693-442">除了 view 模型之外，有些應用程式會使用系結模型或輸入模型，在 Razor 頁面頁面模型類別和瀏覽器之間傳遞資料。</span><span class="sxs-lookup"><span data-stu-id="4a693-442">In addition to the view model, some apps use a binding model or input model to pass data between the Razor Pages page model class and the browser.</span></span> <span data-ttu-id="4a693-443">請看看下列 `Student` 檢視模型：</span><span class="sxs-lookup"><span data-stu-id="4a693-443">Consider the following `Student` view model:</span></span>
 
 [!code-csharp[](intro/samples/cu21/Models/StudentVM.cs)]
 
@@ -506,7 +506,7 @@ ms.locfileid: "93053861"
 
 <span data-ttu-id="4a693-450">使用 `StudentVM` 需要 [CreateVM.cshtml](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/data/ef-rp/intro/samples/cu21/Pages/Students/CreateVM.cshtml) 更新為使用 `StudentVM`，而不是使用 `Student`。</span><span class="sxs-lookup"><span data-stu-id="4a693-450">Using `StudentVM` requires [CreateVM.cshtml](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/data/ef-rp/intro/samples/cu21/Pages/Students/CreateVM.cshtml) be updated to use `StudentVM` rather than `Student`.</span></span>
 
-<span data-ttu-id="4a693-451">在 :::no-loc(Razor)::: 頁面中， `PageModel` 衍生類別是視圖模型。</span><span class="sxs-lookup"><span data-stu-id="4a693-451">In :::no-loc(Razor)::: Pages, the `PageModel` derived class is the view model.</span></span>
+<span data-ttu-id="4a693-451">在 Razor 頁面中， `PageModel` 衍生類別是視圖模型。</span><span class="sxs-lookup"><span data-stu-id="4a693-451">In Razor Pages, the `PageModel` derived class is the view model.</span></span>
 
 ## <a name="update-the-edit-page"></a><span data-ttu-id="4a693-452">更新 [編輯] 頁面</span><span class="sxs-lookup"><span data-stu-id="4a693-452">Update the Edit page</span></span>
 
@@ -567,9 +567,9 @@ ms.locfileid: "93053861"
 * <span data-ttu-id="4a693-499">攔截到資料庫例外狀況。</span><span class="sxs-lookup"><span data-stu-id="4a693-499">The DB exception is caught.</span></span>
 * <span data-ttu-id="4a693-500">[刪除] 頁面的 `OnGetAsync` 方法會以 `saveChangesError=true` 呼叫。</span><span class="sxs-lookup"><span data-stu-id="4a693-500">The Delete pages `OnGetAsync` method is called with `saveChangesError=true`.</span></span>
 
-### <a name="update-the-delete-no-locrazor-page"></a><span data-ttu-id="4a693-501">更新 [刪除] :::no-loc(Razor)::: 頁面</span><span class="sxs-lookup"><span data-stu-id="4a693-501">Update the Delete :::no-loc(Razor)::: Page</span></span>
+### <a name="update-the-delete-no-locrazor-page"></a><span data-ttu-id="4a693-501">更新 [刪除] Razor 頁面</span><span class="sxs-lookup"><span data-stu-id="4a693-501">Update the Delete Razor Page</span></span>
 
-<span data-ttu-id="4a693-502">將下列反白顯示的錯誤訊息新增至 [刪除] :::no-loc(Razor)::: 頁面。</span><span class="sxs-lookup"><span data-stu-id="4a693-502">Add the following highlighted error message to the Delete :::no-loc(Razor)::: Page.</span></span>
+<span data-ttu-id="4a693-502">將下列反白顯示的錯誤訊息新增至 [刪除] Razor 頁面。</span><span class="sxs-lookup"><span data-stu-id="4a693-502">Add the following highlighted error message to the Delete Razor Page.</span></span>
 <!--
 [!code-cshtml[](intro/samples/cu21/Pages/Students/Delete.cshtml?name=snippet&highlight=11)]
 -->
@@ -581,13 +581,13 @@ ms.locfileid: "93053861"
 
 <span data-ttu-id="4a693-505">Students/Index 或其他連結運作失常：</span><span class="sxs-lookup"><span data-stu-id="4a693-505">Students/Index or other links don't work:</span></span>
 
-<span data-ttu-id="4a693-506">確認 :::no-loc(Razor)::: 頁面包含正確的指示詞 `@page` 。</span><span class="sxs-lookup"><span data-stu-id="4a693-506">Verify the :::no-loc(Razor)::: Page contains the correct `@page` directive.</span></span> <span data-ttu-id="4a693-507">例如，[學生/索引] :::no-loc(Razor)::: 頁面 **不** 應包含路由範本：</span><span class="sxs-lookup"><span data-stu-id="4a693-507">For example, The Students/Index :::no-loc(Razor)::: Page should **not** contain a route template:</span></span>
+<span data-ttu-id="4a693-506">確認 Razor 頁面包含正確的指示詞 `@page` 。</span><span class="sxs-lookup"><span data-stu-id="4a693-506">Verify the Razor Page contains the correct `@page` directive.</span></span> <span data-ttu-id="4a693-507">例如，[學生/索引] Razor 頁面 **不** 應包含路由範本：</span><span class="sxs-lookup"><span data-stu-id="4a693-507">For example, The Students/Index Razor Page should **not** contain a route template:</span></span>
 
 ```cshtml
 @page "{id:int}"
 ```
 
-<span data-ttu-id="4a693-508">每個 :::no-loc(Razor)::: 頁面都必須包含指示詞 `@page` 。</span><span class="sxs-lookup"><span data-stu-id="4a693-508">Each :::no-loc(Razor)::: Page must include the `@page` directive.</span></span>
+<span data-ttu-id="4a693-508">每個 Razor 頁面都必須包含指示詞 `@page` 。</span><span class="sxs-lookup"><span data-stu-id="4a693-508">Each Razor Page must include the `@page` directive.</span></span>
 
 
 

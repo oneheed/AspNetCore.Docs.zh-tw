@@ -7,17 +7,17 @@ ms.custom: mvc
 ms.date: 03/19/2020
 monikerRange: '>= aspnetcore-3.0'
 no-loc:
-- ':::no-loc(appsettings.json):::'
-- ':::no-loc(ASP.NET Core Identity):::'
-- ':::no-loc(cookie):::'
-- ':::no-loc(Cookie):::'
-- ':::no-loc(Blazor):::'
-- ':::no-loc(Blazor Server):::'
-- ':::no-loc(Blazor WebAssembly):::'
-- ':::no-loc(Identity):::'
-- ":::no-loc(Let's Encrypt):::"
-- ':::no-loc(Razor):::'
-- ':::no-loc(SignalR):::'
+- 'appsettings.json'
+- 'ASP.NET Core Identity'
+- 'cookie'
+- 'Cookie'
+- 'Blazor'
+- 'Blazor Server'
+- 'Blazor WebAssembly'
+- 'Identity'
+- "Let's Encrypt"
+- 'Razor'
+- 'SignalR'
 uid: security/authentication/microsoft-logins
 ms.openlocfilehash: 3161e4f0f735294d69dd51634b424d1ed573e615
 ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
@@ -100,7 +100,7 @@ ms.locfileid: "93060296"
 * <span data-ttu-id="77bc0-145">如果 Microsoft 帳戶提供者將您重新導向至 [登入錯誤] 頁面，請注意 Uri 中的 (主題標籤) 的錯誤標題和描述查詢字串參數 `#` 。</span><span class="sxs-lookup"><span data-stu-id="77bc0-145">If the Microsoft Account provider redirects you to a sign in error page, note the error title and description query string parameters directly following the `#` (hashtag) in the Uri.</span></span>
 
   <span data-ttu-id="77bc0-146">雖然錯誤訊息似乎指出 Microsoft 驗證有問題，但最常見的原因是您的應用程式 Uri 不符合為 **Web** 平臺指定的任何重新 **導向 uri** 。</span><span class="sxs-lookup"><span data-stu-id="77bc0-146">Although the error message seems to indicate a problem with Microsoft authentication, the most common cause is your application Uri not matching any of the **Redirect URIs** specified for the **Web** platform.</span></span>
-* <span data-ttu-id="77bc0-147">如果 :::no-loc(Identity)::: 未透過呼叫來 `services.Add:::no-loc(Identity):::` 設定 `ConfigureServices` ，嘗試驗證將會導致 *ArgumentException：必須提供 ' SignInScheme ' 選項* 。</span><span class="sxs-lookup"><span data-stu-id="77bc0-147">If :::no-loc(Identity)::: isn't configured by calling `services.Add:::no-loc(Identity):::` in `ConfigureServices`, attempting to authenticate will result in *ArgumentException: The 'SignInScheme' option must be provided* .</span></span> <span data-ttu-id="77bc0-148">此範例中使用的專案範本可確保完成此操作。</span><span class="sxs-lookup"><span data-stu-id="77bc0-148">The project template used in this sample ensures that this is done.</span></span>
+* <span data-ttu-id="77bc0-147">如果 Identity 未透過呼叫來 `services.AddIdentity` 設定 `ConfigureServices` ，嘗試驗證將會導致 *ArgumentException：必須提供 ' SignInScheme ' 選項* 。</span><span class="sxs-lookup"><span data-stu-id="77bc0-147">If Identity isn't configured by calling `services.AddIdentity` in `ConfigureServices`, attempting to authenticate will result in *ArgumentException: The 'SignInScheme' option must be provided* .</span></span> <span data-ttu-id="77bc0-148">此範例中使用的專案範本可確保完成此操作。</span><span class="sxs-lookup"><span data-stu-id="77bc0-148">The project template used in this sample ensures that this is done.</span></span>
 * <span data-ttu-id="77bc0-149">如果未藉由套用初始遷移來建立網站資料庫，則在處理要求錯誤時，您將會收到 *資料庫操作失敗* 。</span><span class="sxs-lookup"><span data-stu-id="77bc0-149">If the site database has not been created by applying the initial migration, you will get *A database operation failed while processing the request* error.</span></span> <span data-ttu-id="77bc0-150">請按一下 [套用 **遷移** ] 來建立資料庫，並重新整理以繼續發生錯誤。</span><span class="sxs-lookup"><span data-stu-id="77bc0-150">Tap **Apply Migrations** to create the database and refresh to continue past the error.</span></span>
 
 ## <a name="next-steps"></a><span data-ttu-id="77bc0-151">後續步驟</span><span class="sxs-lookup"><span data-stu-id="77bc0-151">Next steps</span></span>

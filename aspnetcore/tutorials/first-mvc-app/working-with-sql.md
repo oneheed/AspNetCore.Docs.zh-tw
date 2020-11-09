@@ -5,17 +5,17 @@ description: 第5部分：將模型新增至 ASP.NET Core MVC 應用程式
 ms.author: riande
 ms.date: 8/16/2019
 no-loc:
-- ':::no-loc(appsettings.json):::'
-- ':::no-loc(ASP.NET Core Identity):::'
-- ':::no-loc(cookie):::'
-- ':::no-loc(Cookie):::'
-- ':::no-loc(Blazor):::'
-- ':::no-loc(Blazor Server):::'
-- ':::no-loc(Blazor WebAssembly):::'
-- ':::no-loc(Identity):::'
-- ":::no-loc(Let's Encrypt):::"
-- ':::no-loc(Razor):::'
-- ':::no-loc(SignalR):::'
+- 'appsettings.json'
+- 'ASP.NET Core Identity'
+- 'cookie'
+- 'Cookie'
+- 'Blazor'
+- 'Blazor Server'
+- 'Blazor WebAssembly'
+- 'Identity'
+- "Let's Encrypt"
+- 'Razor'
+- 'SignalR'
 uid: tutorials/first-mvc-app/working-with-sql
 ms.openlocfilehash: f893aa1041a42c12514b825fb3c8e96a6104358d
 ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
@@ -36,15 +36,15 @@ ms.locfileid: "93051573"
 
 [!code-csharp[](~/tutorials/first-mvc-app/start-mvc/sample/MvcMovie3/Startup.cs?name=snippet_ConfigureServices&highlight=5-6)]
 
-<span data-ttu-id="23095-108">ASP.NET Core [組態](xref:fundamentals/configuration/index)系統會讀取 `ConnectionString`。</span><span class="sxs-lookup"><span data-stu-id="23095-108">The ASP.NET Core [Configuration](xref:fundamentals/configuration/index) system reads the `ConnectionString`.</span></span> <span data-ttu-id="23095-109">針對本機開發，它會從檔案取得連接字串 *:::no-loc(appsettings.json):::* ：</span><span class="sxs-lookup"><span data-stu-id="23095-109">For local development, it gets the connection string from the *:::no-loc(appsettings.json):::* file:</span></span>
+<span data-ttu-id="23095-108">ASP.NET Core [組態](xref:fundamentals/configuration/index)系統會讀取 `ConnectionString`。</span><span class="sxs-lookup"><span data-stu-id="23095-108">The ASP.NET Core [Configuration](xref:fundamentals/configuration/index) system reads the `ConnectionString`.</span></span> <span data-ttu-id="23095-109">針對本機開發，它會從檔案取得連接字串 *appsettings.json* ：</span><span class="sxs-lookup"><span data-stu-id="23095-109">For local development, it gets the connection string from the *appsettings.json* file:</span></span>
 
-[!code-json[](start-mvc/sample/MvcMovie/:::no-loc(appsettings.json):::?highlight=2&range=8-10)]
+[!code-json[](start-mvc/sample/MvcMovie/appsettings.json?highlight=2&range=8-10)]
 
 # <a name="visual-studio-code--visual-studio-for-mac"></a>[<span data-ttu-id="23095-110">Visual Studio Code / Visual Studio for Mac</span><span class="sxs-lookup"><span data-stu-id="23095-110">Visual Studio Code / Visual Studio for Mac</span></span>](#tab/visual-studio-code+visual-studio-mac)
 
 [!code-csharp[](~/tutorials/first-mvc-app/start-mvc/sample/MvcMovie3/Startup.cs?name=snippet_UseSqlite&highlight=5-6)]
 
-<span data-ttu-id="23095-111">ASP.NET Core [組態](xref:fundamentals/configuration/index)系統會讀取 `ConnectionString`。</span><span class="sxs-lookup"><span data-stu-id="23095-111">The ASP.NET Core [Configuration](xref:fundamentals/configuration/index) system reads the `ConnectionString`.</span></span> <span data-ttu-id="23095-112">針對本機開發，它會從檔案取得連接字串 *:::no-loc(appsettings.json):::* ：</span><span class="sxs-lookup"><span data-stu-id="23095-112">For local development, it gets the connection string from the *:::no-loc(appsettings.json):::* file:</span></span>
+<span data-ttu-id="23095-111">ASP.NET Core [組態](xref:fundamentals/configuration/index)系統會讀取 `ConnectionString`。</span><span class="sxs-lookup"><span data-stu-id="23095-111">The ASP.NET Core [Configuration](xref:fundamentals/configuration/index) system reads the `ConnectionString`.</span></span> <span data-ttu-id="23095-112">針對本機開發，它會從檔案取得連接字串 *appsettings.json* ：</span><span class="sxs-lookup"><span data-stu-id="23095-112">For local development, it gets the connection string from the *appsettings.json* file:</span></span>
 
 [!code-json[](~/tutorials/first-mvc-app/start-mvc/sample/MvcMovie22/appsettingsSQLite.json?highlight=2&range=8-10)]
 
@@ -149,15 +149,15 @@ if (context.Movie.Any())
 
 [!code-csharp[](~/tutorials/first-mvc-app/start-mvc/sample/MvcMovie22/Startup.cs?name=snippet_ConfigureServices&highlight=13-99)]
 
-<span data-ttu-id="23095-159">ASP.NET Core [組態](xref:fundamentals/configuration/index)系統會讀取 `ConnectionString`。</span><span class="sxs-lookup"><span data-stu-id="23095-159">The ASP.NET Core [Configuration](xref:fundamentals/configuration/index) system reads the `ConnectionString`.</span></span> <span data-ttu-id="23095-160">針對本機開發，它會從檔案取得連接字串 *:::no-loc(appsettings.json):::* ：</span><span class="sxs-lookup"><span data-stu-id="23095-160">For local development, it gets the connection string from the *:::no-loc(appsettings.json):::* file:</span></span>
+<span data-ttu-id="23095-159">ASP.NET Core [組態](xref:fundamentals/configuration/index)系統會讀取 `ConnectionString`。</span><span class="sxs-lookup"><span data-stu-id="23095-159">The ASP.NET Core [Configuration](xref:fundamentals/configuration/index) system reads the `ConnectionString`.</span></span> <span data-ttu-id="23095-160">針對本機開發，它會從檔案取得連接字串 *appsettings.json* ：</span><span class="sxs-lookup"><span data-stu-id="23095-160">For local development, it gets the connection string from the *appsettings.json* file:</span></span>
 
-[!code-json[](start-mvc/sample/MvcMovie/:::no-loc(appsettings.json):::?highlight=2&range=8-10)]
+[!code-json[](start-mvc/sample/MvcMovie/appsettings.json?highlight=2&range=8-10)]
 
 # <a name="visual-studio-code--visual-studio-for-mac"></a>[<span data-ttu-id="23095-161">Visual Studio Code / Visual Studio for Mac</span><span class="sxs-lookup"><span data-stu-id="23095-161">Visual Studio Code / Visual Studio for Mac</span></span>](#tab/visual-studio-code+visual-studio-mac)
 
 [!code-csharp[](~/tutorials/first-mvc-app/start-mvc/sample/MvcMovie22/Startup.cs?name=snippet_UseSqlite&highlight=11-12)]
 
-<span data-ttu-id="23095-162">ASP.NET Core [組態](xref:fundamentals/configuration/index)系統會讀取 `ConnectionString`。</span><span class="sxs-lookup"><span data-stu-id="23095-162">The ASP.NET Core [Configuration](xref:fundamentals/configuration/index) system reads the `ConnectionString`.</span></span> <span data-ttu-id="23095-163">針對本機開發，它會從檔案取得連接字串 *:::no-loc(appsettings.json):::* ：</span><span class="sxs-lookup"><span data-stu-id="23095-163">For local development, it gets the connection string from the *:::no-loc(appsettings.json):::* file:</span></span>
+<span data-ttu-id="23095-162">ASP.NET Core [組態](xref:fundamentals/configuration/index)系統會讀取 `ConnectionString`。</span><span class="sxs-lookup"><span data-stu-id="23095-162">The ASP.NET Core [Configuration](xref:fundamentals/configuration/index) system reads the `ConnectionString`.</span></span> <span data-ttu-id="23095-163">針對本機開發，它會從檔案取得連接字串 *appsettings.json* ：</span><span class="sxs-lookup"><span data-stu-id="23095-163">For local development, it gets the connection string from the *appsettings.json* file:</span></span>
 
 [!code-json[](~/tutorials/first-mvc-app/start-mvc/sample/MvcMovie22/appsettingsSQLite.json?highlight=2&range=8-10)]
 

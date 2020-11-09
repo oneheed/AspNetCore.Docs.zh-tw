@@ -5,17 +5,17 @@ description: 了解 ASP.NET Core MVC 如何使用路由中介軟體來比對內�
 ms.author: riande
 ms.date: 3/25/2020
 no-loc:
-- ':::no-loc(appsettings.json):::'
-- ':::no-loc(ASP.NET Core Identity):::'
-- ':::no-loc(cookie):::'
-- ':::no-loc(Cookie):::'
-- ':::no-loc(Blazor):::'
-- ':::no-loc(Blazor Server):::'
-- ':::no-loc(Blazor WebAssembly):::'
-- ':::no-loc(Identity):::'
-- ":::no-loc(Let's Encrypt):::"
-- ':::no-loc(Razor):::'
-- ':::no-loc(SignalR):::'
+- 'appsettings.json'
+- 'ASP.NET Core Identity'
+- 'cookie'
+- 'Cookie'
+- 'Blazor'
+- 'Blazor Server'
+- 'Blazor WebAssembly'
+- 'Identity'
+- "Let's Encrypt"
+- 'Razor'
+- 'SignalR'
 uid: mvc/controllers/routing
 ms.openlocfilehash: 9f64dd8f0ca026cec4b7ee4b5ea02523139eed4f
 ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
@@ -307,7 +307,7 @@ endpoints.MapControllerRoute("default", "{controller=Home}/{action=Index}/{id?}"
 
 ## <a name="reserved-routing-names"></a><span data-ttu-id="92068-281">保留的路由名稱</span><span class="sxs-lookup"><span data-stu-id="92068-281">Reserved routing names</span></span>
 
-<span data-ttu-id="92068-282">使用控制器或頁面時，下列關鍵字是保留的路由參數名稱 :::no-loc(Razor)::: ：</span><span class="sxs-lookup"><span data-stu-id="92068-282">The following keywords are reserved route parameter names when using Controllers or :::no-loc(Razor)::: Pages:</span></span>
+<span data-ttu-id="92068-282">使用控制器或頁面時，下列關鍵字是保留的路由參數名稱 Razor ：</span><span class="sxs-lookup"><span data-stu-id="92068-282">The following keywords are reserved route parameter names when using Controllers or Razor Pages:</span></span>
 
 * `action`
 * `area`
@@ -319,7 +319,7 @@ endpoints.MapControllerRoute("default", "{controller=Home}/{action=Index}/{id?}"
 
 [!code-csharp[](routing/samples/3.x/main/Controllers/MyDemo2Controller.cs?name=snippet)]
 
-<span data-ttu-id="92068-285">URL 產生會使用特殊參數名稱來判斷 URL 產生作業是指 :::no-loc(Razor)::: 頁面或控制器。</span><span class="sxs-lookup"><span data-stu-id="92068-285">The special parameter names are used by the URL generation to determine if a URL generation operation refers to a :::no-loc(Razor)::: Page or to a Controller.</span></span>
+<span data-ttu-id="92068-285">URL 產生會使用特殊參數名稱來判斷 URL 產生作業是指 Razor 頁面或控制器。</span><span class="sxs-lookup"><span data-stu-id="92068-285">The special parameter names are used by the URL generation to determine if a URL generation operation refers to a Razor Page or to a Controller.</span></span>
 
 <a name="verb"></a>
 
@@ -477,7 +477,7 @@ AmbiguousMatchException: The request matched multiple endpoints. Matches:
 * <span data-ttu-id="92068-387">上述程式碼為範例或不良的路由設計。</span><span class="sxs-lookup"><span data-stu-id="92068-387">The preceding code is an example or poor routing design.</span></span> <span data-ttu-id="92068-388">它是用來說明 `Order` 屬性。</span><span class="sxs-lookup"><span data-stu-id="92068-388">It was used to illustrate the `Order` property.</span></span>
 * <span data-ttu-id="92068-389">`Order`屬性只會解析不明確的情況，無法比對該範本。</span><span class="sxs-lookup"><span data-stu-id="92068-389">The `Order` property only resolves the ambiguity, that template cannot be matched.</span></span> <span data-ttu-id="92068-390">最好是移除 `[Route("Home")]` 範本。</span><span class="sxs-lookup"><span data-stu-id="92068-390">It would be better to remove the `[Route("Home")]` template.</span></span>
 
-<span data-ttu-id="92068-391">請參閱[ :::no-loc(Razor)::: 頁面路由和應用程式慣例：](xref:razor-pages/razor-pages-conventions#route-order)路由順序與頁面的路由順序資訊 :::no-loc(Razor)::: 。</span><span class="sxs-lookup"><span data-stu-id="92068-391">See [:::no-loc(Razor)::: Pages route and app conventions: Route order](xref:razor-pages/razor-pages-conventions#route-order) for information on route order with :::no-loc(Razor)::: Pages.</span></span>
+<span data-ttu-id="92068-391">請參閱[ Razor 頁面路由和應用程式慣例：](xref:razor-pages/razor-pages-conventions#route-order)路由順序與頁面的路由順序資訊 Razor 。</span><span class="sxs-lookup"><span data-stu-id="92068-391">See [Razor Pages route and app conventions: Route order](xref:razor-pages/razor-pages-conventions#route-order) for information on route order with Razor Pages.</span></span>
 
 <span data-ttu-id="92068-392">在某些情況下，會以不明確的路由傳回 HTTP 500 錯誤。</span><span class="sxs-lookup"><span data-stu-id="92068-392">In some cases, an HTTP 500 error is returned with ambiguous routes.</span></span> <span data-ttu-id="92068-393">使用 [記錄](xref:fundamentals/logging/index) 來查看造成的端點 `AmbiguousMatchException` 。</span><span class="sxs-lookup"><span data-stu-id="92068-393">Use [logging](xref:fundamentals/logging/index) to see which endpoints caused the `AmbiguousMatchException`.</span></span>
 
@@ -756,13 +756,13 @@ result: /UrlGeneration/Destination
 
 [!code-csharp[](routing/samples/3.x/main/Controllers/UrlGeneration2Controller.cs?name=snippet_1)]
 
-<span data-ttu-id="92068-544">下列檔案會 :::no-loc(Razor)::: 產生的 HTML 連結 `Destination_Route` ：</span><span class="sxs-lookup"><span data-stu-id="92068-544">The following :::no-loc(Razor)::: file generates an HTML link to the `Destination_Route`:</span></span>
+<span data-ttu-id="92068-544">下列檔案會 Razor 產生的 HTML 連結 `Destination_Route` ：</span><span class="sxs-lookup"><span data-stu-id="92068-544">The following Razor file generates an HTML link to the `Destination_Route`:</span></span>
 
 [!code-cshtml[](routing/samples/3.x/main/Views/Shared/MyLink.cshtml)]
 
 <a name="routing-gen-urls-html-ref-label"></a>
 
-### <a name="generate-urls-in-html-and-no-locrazor"></a><span data-ttu-id="92068-545">在 HTML 和中產生 Url :::no-loc(Razor):::</span><span class="sxs-lookup"><span data-stu-id="92068-545">Generate URLs in HTML and :::no-loc(Razor):::</span></span>
+### <a name="generate-urls-in-html-and-no-locrazor"></a><span data-ttu-id="92068-545">在 HTML 和中產生 Url Razor</span><span class="sxs-lookup"><span data-stu-id="92068-545">Generate URLs in HTML and Razor</span></span>
 
 <span data-ttu-id="92068-546"><xref:Microsoft.AspNetCore.Mvc.Rendering.IHtmlHelper> 提供 <xref:Microsoft.AspNetCore.Mvc.ViewFeatures.HtmlHelper> [Html.beginform](xref:Microsoft.AspNetCore.Mvc.Rendering.IHtmlHelper.BeginForm*) 和 [.html](xref:Microsoft.AspNetCore.Mvc.Rendering.IHtmlHelper.ActionLink*) `<form>` 分別產生和元素的方法 `<a>` 。</span><span class="sxs-lookup"><span data-stu-id="92068-546"><xref:Microsoft.AspNetCore.Mvc.Rendering.IHtmlHelper> provides the <xref:Microsoft.AspNetCore.Mvc.ViewFeatures.HtmlHelper> methods [Html.BeginForm](xref:Microsoft.AspNetCore.Mvc.Rendering.IHtmlHelper.BeginForm*) and [Html.ActionLink](xref:Microsoft.AspNetCore.Mvc.Rendering.IHtmlHelper.ActionLink*) to generate `<form>` and `<a>` elements respectively.</span></span> <span data-ttu-id="92068-547">這些方法會使用 [url. Action](xref:Microsoft.AspNetCore.Mvc.IUrlHelper.Action*) 方法來產生 url，並接受類似的引數。</span><span class="sxs-lookup"><span data-stu-id="92068-547">These methods use the [Url.Action](xref:Microsoft.AspNetCore.Mvc.IUrlHelper.Action*) method to generate a URL and they accept similar arguments.</span></span> <span data-ttu-id="92068-548">`HtmlHelper` 的成對 `Url.RouteUrl` 為 `Html.BeginRouteForm` 和 `Html.RouteLink`，這兩者的功能很類似。</span><span class="sxs-lookup"><span data-stu-id="92068-548">The `Url.RouteUrl` companions for `HtmlHelper` are `Html.BeginRouteForm` and `Html.RouteLink` which have similar functionality.</span></span>
 
@@ -1224,7 +1224,7 @@ public class HomeController : Controller
 > [!TIP]
 > <span data-ttu-id="92068-747">請避免依賴 `Order`。</span><span class="sxs-lookup"><span data-stu-id="92068-747">Avoid depending on `Order`.</span></span> <span data-ttu-id="92068-748">如果您的 URL 空間需要明確的順序值才能正確地路由，則同樣也可能會使用戶端混淆。</span><span class="sxs-lookup"><span data-stu-id="92068-748">If your URL-space requires explicit order values to route correctly, then it's likely confusing to clients as well.</span></span> <span data-ttu-id="92068-749">一般而言，屬性路由會透過 URL 比對來選取正確的路由。</span><span class="sxs-lookup"><span data-stu-id="92068-749">In general attribute routing will select the correct route with URL matching.</span></span> <span data-ttu-id="92068-750">如果用於 URL 產生的預設順序無效，使用路由名稱作為覆寫通常會比套用 `Order` 屬性更簡單。</span><span class="sxs-lookup"><span data-stu-id="92068-750">If the default order used for URL generation isn't working, using route name as an override is usually simpler than applying the `Order` property.</span></span>
 
-<span data-ttu-id="92068-751">:::no-loc(Razor)::: 頁面路由和 MVC 控制器路由會共用執行。</span><span class="sxs-lookup"><span data-stu-id="92068-751">:::no-loc(Razor)::: Pages routing and MVC controller routing share an implementation.</span></span> <span data-ttu-id="92068-752">頁面主題中路由順序的 :::no-loc(Razor)::: 相關資訊可從[ :::no-loc(Razor)::: 頁面路由和應用程式慣例取得：路由順序](xref:razor-pages/razor-pages-conventions#route-order)。</span><span class="sxs-lookup"><span data-stu-id="92068-752">Information on route order in the :::no-loc(Razor)::: Pages topics is available at [:::no-loc(Razor)::: Pages route and app conventions: Route order](xref:razor-pages/razor-pages-conventions#route-order).</span></span>
+<span data-ttu-id="92068-751">Razor 頁面路由和 MVC 控制器路由會共用執行。</span><span class="sxs-lookup"><span data-stu-id="92068-751">Razor Pages routing and MVC controller routing share an implementation.</span></span> <span data-ttu-id="92068-752">頁面主題中路由順序的 Razor 相關資訊可從[ Razor 頁面路由和應用程式慣例取得：路由順序](xref:razor-pages/razor-pages-conventions#route-order)。</span><span class="sxs-lookup"><span data-stu-id="92068-752">Information on route order in the Razor Pages topics is available at [Razor Pages route and app conventions: Route order](xref:razor-pages/razor-pages-conventions#route-order).</span></span>
 
 <a name="routing-token-replacement-templates-ref-label"></a>
 

@@ -5,17 +5,17 @@ description: ''
 ms.author: riande
 ms.date: 12/07/2016
 no-loc:
-- ':::no-loc(appsettings.json):::'
-- ':::no-loc(ASP.NET Core Identity):::'
-- ':::no-loc(cookie):::'
-- ':::no-loc(Cookie):::'
-- ':::no-loc(Blazor):::'
-- ':::no-loc(Blazor Server):::'
-- ':::no-loc(Blazor WebAssembly):::'
-- ':::no-loc(Identity):::'
-- ":::no-loc(Let's Encrypt):::"
-- ':::no-loc(Razor):::'
-- ':::no-loc(SignalR):::'
+- 'appsettings.json'
+- 'ASP.NET Core Identity'
+- 'cookie'
+- 'Cookie'
+- 'Blazor'
+- 'Blazor Server'
+- 'Blazor WebAssembly'
+- 'Identity'
+- "Let's Encrypt"
+- 'Razor'
+- 'SignalR'
 uid: migration/http-modules
 ms.openlocfilehash: 9664f49bd709d2c9e46130773211c339e391d1f6
 ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
@@ -195,9 +195,9 @@ ms.locfileid: "93060699"
 
 2. <span data-ttu-id="ed7e8-185">儲存選項值</span><span class="sxs-lookup"><span data-stu-id="ed7e8-185">Store the option values</span></span>
 
-   <span data-ttu-id="ed7e8-186">設定系統可讓您將選項值儲存在任何您想要的位置。</span><span class="sxs-lookup"><span data-stu-id="ed7e8-186">The configuration system allows you to store option values anywhere you want.</span></span> <span data-ttu-id="ed7e8-187">不過，大部分的網站 *:::no-loc(appsettings.json):::* 會使用，因此我們將採用該方法：</span><span class="sxs-lookup"><span data-stu-id="ed7e8-187">However, most sites use *:::no-loc(appsettings.json):::* , so we'll take that approach:</span></span>
+   <span data-ttu-id="ed7e8-186">設定系統可讓您將選項值儲存在任何您想要的位置。</span><span class="sxs-lookup"><span data-stu-id="ed7e8-186">The configuration system allows you to store option values anywhere you want.</span></span> <span data-ttu-id="ed7e8-187">不過，大部分的網站 *appsettings.json* 會使用，因此我們將採用該方法：</span><span class="sxs-lookup"><span data-stu-id="ed7e8-187">However, most sites use *appsettings.json* , so we'll take that approach:</span></span>
 
-   [!code-json[](http-modules/sample/Asp.Net.Core/:::no-loc(appsettings.json):::?range=1,14-18)]
+   [!code-json[](http-modules/sample/Asp.Net.Core/appsettings.json?range=1,14-18)]
 
    <span data-ttu-id="ed7e8-188">這裡的 *MyMiddlewareOptionsSection* 是區段名稱。</span><span class="sxs-lookup"><span data-stu-id="ed7e8-188">*MyMiddlewareOptionsSection* here is a section name.</span></span> <span data-ttu-id="ed7e8-189">它不一定要與選項類別的名稱相同。</span><span class="sxs-lookup"><span data-stu-id="ed7e8-189">It doesn't have to be the same as the name of your options class.</span></span>
 
@@ -207,7 +207,7 @@ ms.locfileid: "93060699"
 
     <span data-ttu-id="ed7e8-192">更新您的 `Startup` 類別：</span><span class="sxs-lookup"><span data-stu-id="ed7e8-192">Update your `Startup` class:</span></span>
 
-   1. <span data-ttu-id="ed7e8-193">如果您正在使用 *:::no-loc(appsettings.json):::* ，請將它新增至函式中的設定產生器 `Startup` ：</span><span class="sxs-lookup"><span data-stu-id="ed7e8-193">If you're using *:::no-loc(appsettings.json):::* , add it to the configuration builder in the `Startup` constructor:</span></span>
+   1. <span data-ttu-id="ed7e8-193">如果您正在使用 *appsettings.json* ，請將它新增至函式中的設定產生器 `Startup` ：</span><span class="sxs-lookup"><span data-stu-id="ed7e8-193">If you're using *appsettings.json* , add it to the configuration builder in the `Startup` constructor:</span></span>
 
       [!code-csharp[](../migration/http-modules/sample/Asp.Net.Core/Startup.cs?name=snippet_Ctor&highlight=5-6)]
 
@@ -235,11 +235,11 @@ ms.locfileid: "93060699"
 
 <span data-ttu-id="ed7e8-208">解決方法是在類別中取得具有實際選項值的選項物件 `Startup` ，並將它們直接傳遞至中介軟體的每個實例。</span><span class="sxs-lookup"><span data-stu-id="ed7e8-208">The solution is to get the options objects with the actual options values in your `Startup` class and pass those directly to each instance of your middleware.</span></span>
 
-1. <span data-ttu-id="ed7e8-209">將第二個索引鍵新增至 *:::no-loc(appsettings.json):::*</span><span class="sxs-lookup"><span data-stu-id="ed7e8-209">Add a second key to *:::no-loc(appsettings.json):::*</span></span>
+1. <span data-ttu-id="ed7e8-209">將第二個索引鍵新增至 *appsettings.json*</span><span class="sxs-lookup"><span data-stu-id="ed7e8-209">Add a second key to *appsettings.json*</span></span>
 
-   <span data-ttu-id="ed7e8-210">若要在檔案中新增第二組選項 *:::no-loc(appsettings.json):::* ，請使用新的金鑰來唯一識別它：</span><span class="sxs-lookup"><span data-stu-id="ed7e8-210">To add a second set of options to the *:::no-loc(appsettings.json):::* file, use a new key to uniquely identify it:</span></span>
+   <span data-ttu-id="ed7e8-210">若要在檔案中新增第二組選項 *appsettings.json* ，請使用新的金鑰來唯一識別它：</span><span class="sxs-lookup"><span data-stu-id="ed7e8-210">To add a second set of options to the *appsettings.json* file, use a new key to uniquely identify it:</span></span>
 
-   [!code-json[](http-modules/sample/Asp.Net.Core/:::no-loc(appsettings.json):::?range=1,10-18&highlight=2-5)]
+   [!code-json[](http-modules/sample/Asp.Net.Core/appsettings.json?range=1,10-18&highlight=2-5)]
 
 2. <span data-ttu-id="ed7e8-211">取出選項值，並將其傳遞至中介軟體。</span><span class="sxs-lookup"><span data-stu-id="ed7e8-211">Retrieve options values and pass them to middleware.</span></span> <span data-ttu-id="ed7e8-212">`Use...`擴充方法 (會將中介軟體新增至管線) 是要傳入選項值的邏輯位置：</span><span class="sxs-lookup"><span data-stu-id="ed7e8-212">The `Use...` extension method (which adds your middleware to the pipeline) is a logical place to pass in the option values:</span></span> 
 
@@ -295,9 +295,9 @@ public async Task Invoke(HttpContext context)
 
 [!code-csharp[](http-modules/sample/Asp.Net.Core/Middleware/HttpContextDemoMiddleware.cs?name=snippet_Host)]
 
-<span data-ttu-id="ed7e8-233">**HttpCoNtext. 要求。 :::no-loc(Cookie):::可轉換為** ：</span><span class="sxs-lookup"><span data-stu-id="ed7e8-233">**HttpContext.Request.:::no-loc(Cookie):::s** translates to:</span></span>
+<span data-ttu-id="ed7e8-233">**HttpCoNtext. 要求。 Cookie可轉換為** ：</span><span class="sxs-lookup"><span data-stu-id="ed7e8-233">**HttpContext.Request.Cookies** translates to:</span></span>
 
-[!code-csharp[](http-modules/sample/Asp.Net.Core/Middleware/HttpContextDemoMiddleware.cs?name=snippet_:::no-loc(Cookie):::s)]
+[!code-csharp[](http-modules/sample/Asp.Net.Core/Middleware/HttpContextDemoMiddleware.cs?name=snippet_Cookies)]
 
 <span data-ttu-id="ed7e8-234">**RequestCoNtext. RouteData** 可轉換為：</span><span class="sxs-lookup"><span data-stu-id="ed7e8-234">**HttpContext.Request.RequestContext.RouteData** translates to:</span></span>
 
@@ -378,21 +378,21 @@ public async Task Invoke(HttpContext httpContext)
 
 [!code-csharp[](http-modules/sample/Asp.Net.Core/Middleware/HttpContextDemoMiddleware.cs?name=snippet_SetHeaders)]
 
-<span data-ttu-id="ed7e8-260">**HttpCoNtext. 回應。 :::no-loc(Cookie):::！**</span><span class="sxs-lookup"><span data-stu-id="ed7e8-260">**HttpContext.Response.:::no-loc(Cookie):::s**</span></span>
+<span data-ttu-id="ed7e8-260">**HttpCoNtext. 回應。 Cookie！**</span><span class="sxs-lookup"><span data-stu-id="ed7e8-260">**HttpContext.Response.Cookies**</span></span>
 
-<span data-ttu-id="ed7e8-261">:::no-loc(Cookie):::在 *設定 :::no-loc(Cookie):::* 回應標頭中移動至瀏覽器。</span><span class="sxs-lookup"><span data-stu-id="ed7e8-261">:::no-loc(Cookie):::s travel to the browser in a *Set-:::no-loc(Cookie):::* response header.</span></span> <span data-ttu-id="ed7e8-262">如此一來，傳送 :::no-loc(cookie)::: 必須與用來傳送回應標頭的回呼相同：</span><span class="sxs-lookup"><span data-stu-id="ed7e8-262">As a result, sending :::no-loc(cookie):::s requires the same callback as used for sending response headers:</span></span>
+<span data-ttu-id="ed7e8-261">Cookie在 *設定 Cookie* 回應標頭中移動至瀏覽器。</span><span class="sxs-lookup"><span data-stu-id="ed7e8-261">Cookies travel to the browser in a *Set-Cookie* response header.</span></span> <span data-ttu-id="ed7e8-262">如此一來，傳送 cookie 必須與用來傳送回應標頭的回呼相同：</span><span class="sxs-lookup"><span data-stu-id="ed7e8-262">As a result, sending cookies requires the same callback as used for sending response headers:</span></span>
 
 ```csharp
 public async Task Invoke(HttpContext httpContext)
 {
     // ...
-    httpContext.Response.OnStarting(Set:::no-loc(Cookie):::s, state: httpContext);
+    httpContext.Response.OnStarting(SetCookies, state: httpContext);
     httpContext.Response.OnStarting(SetHeaders, state: httpContext);
 ```
 
-<span data-ttu-id="ed7e8-263">`Set:::no-loc(Cookie):::s`回呼方法如下所示：</span><span class="sxs-lookup"><span data-stu-id="ed7e8-263">The `Set:::no-loc(Cookie):::s` callback method would look like the following:</span></span>
+<span data-ttu-id="ed7e8-263">`SetCookies`回呼方法如下所示：</span><span class="sxs-lookup"><span data-stu-id="ed7e8-263">The `SetCookies` callback method would look like the following:</span></span>
 
-[!code-csharp[](http-modules/sample/Asp.Net.Core/Middleware/HttpContextDemoMiddleware.cs?name=snippet_Set:::no-loc(Cookie):::s)]
+[!code-csharp[](http-modules/sample/Asp.Net.Core/Middleware/HttpContextDemoMiddleware.cs?name=snippet_SetCookies)]
 
 ## <a name="additional-resources"></a><span data-ttu-id="ed7e8-264">其他資源</span><span class="sxs-lookup"><span data-stu-id="ed7e8-264">Additional resources</span></span>
 

@@ -6,17 +6,17 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 10/24/2018
 no-loc:
-- ':::no-loc(appsettings.json):::'
-- ':::no-loc(ASP.NET Core Identity):::'
-- ':::no-loc(cookie):::'
-- ':::no-loc(Cookie):::'
-- ':::no-loc(Blazor):::'
-- ':::no-loc(Blazor Server):::'
-- ':::no-loc(Blazor WebAssembly):::'
-- ':::no-loc(Identity):::'
-- ":::no-loc(Let's Encrypt):::"
-- ':::no-loc(Razor):::'
-- ':::no-loc(SignalR):::'
+- 'appsettings.json'
+- 'ASP.NET Core Identity'
+- 'cookie'
+- 'Cookie'
+- 'Blazor'
+- 'Blazor Server'
+- 'Blazor WebAssembly'
+- 'Identity'
+- "Let's Encrypt"
+- 'Razor'
+- 'SignalR'
 uid: security/data-protection/introduction
 ms.openlocfilehash: 5fd5676b286e758f0648d78bf8cb4171e7a98f60
 ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
@@ -35,7 +35,7 @@ ms.locfileid: "93051690"
 
 <span data-ttu-id="d5033-110">整體問題陳述可在單一句子中簡潔陳述：我需要保存受信任的資訊以供稍後抓取，但我不信任持續性機制。</span><span class="sxs-lookup"><span data-stu-id="d5033-110">The overall problem statement can be succinctly stated in a single sentence: I need to persist trusted information for later retrieval, but I don't trust the persistence mechanism.</span></span> <span data-ttu-id="d5033-111">在 web 詞彙中，這可能會撰寫為「我需要透過不受信任的用戶端來回存取受信任的狀態」。</span><span class="sxs-lookup"><span data-stu-id="d5033-111">In web terms, this might be written as "I need to round-trip trusted state via an untrusted client."</span></span>
 
-<span data-ttu-id="d5033-112">這是驗證或持有人權杖的標準範例 :::no-loc(cookie)::: 。</span><span class="sxs-lookup"><span data-stu-id="d5033-112">The canonical example of this is an authentication :::no-loc(cookie)::: or bearer token.</span></span> <span data-ttu-id="d5033-113">伺服器會產生「我 Groot 並擁有 xyz 許可權」權杖，並將它交給用戶端。</span><span class="sxs-lookup"><span data-stu-id="d5033-113">The server generates an "I am Groot and have xyz permissions" token and hands it to the client.</span></span> <span data-ttu-id="d5033-114">在未來的某個日期，用戶端會將該權杖呈現回伺服器，但是伺服器需要某種程度的保證，用戶端尚未偽造權杖。</span><span class="sxs-lookup"><span data-stu-id="d5033-114">At some future date the client will present that token back to the server, but the server needs some kind of assurance that the client hasn't forged the token.</span></span> <span data-ttu-id="d5033-115">因此，第一項需求：真品 (也稱為</span><span class="sxs-lookup"><span data-stu-id="d5033-115">Thus the first requirement: authenticity (a.k.a.</span></span> <span data-ttu-id="d5033-116">完整性，防篡改的) 。</span><span class="sxs-lookup"><span data-stu-id="d5033-116">integrity, tamper-proofing).</span></span>
+<span data-ttu-id="d5033-112">這是驗證或持有人權杖的標準範例 cookie 。</span><span class="sxs-lookup"><span data-stu-id="d5033-112">The canonical example of this is an authentication cookie or bearer token.</span></span> <span data-ttu-id="d5033-113">伺服器會產生「我 Groot 並擁有 xyz 許可權」權杖，並將它交給用戶端。</span><span class="sxs-lookup"><span data-stu-id="d5033-113">The server generates an "I am Groot and have xyz permissions" token and hands it to the client.</span></span> <span data-ttu-id="d5033-114">在未來的某個日期，用戶端會將該權杖呈現回伺服器，但是伺服器需要某種程度的保證，用戶端尚未偽造權杖。</span><span class="sxs-lookup"><span data-stu-id="d5033-114">At some future date the client will present that token back to the server, but the server needs some kind of assurance that the client hasn't forged the token.</span></span> <span data-ttu-id="d5033-115">因此，第一項需求：真品 (也稱為</span><span class="sxs-lookup"><span data-stu-id="d5033-115">Thus the first requirement: authenticity (a.k.a.</span></span> <span data-ttu-id="d5033-116">完整性，防篡改的) 。</span><span class="sxs-lookup"><span data-stu-id="d5033-116">integrity, tamper-proofing).</span></span>
 
 <span data-ttu-id="d5033-117">因為保存的狀態是伺服器所信任的狀態，所以我們預期此狀態可能會包含操作環境的特定資訊。</span><span class="sxs-lookup"><span data-stu-id="d5033-117">Since the persisted state is trusted by the server, we anticipate that this state might contain information that's specific to the operating environment.</span></span> <span data-ttu-id="d5033-118">這可能是檔案路徑的形式、許可權、控制碼或其他間接參考，或是其他部分的伺服器特定資料。</span><span class="sxs-lookup"><span data-stu-id="d5033-118">This could be in the form of a file path, a permission, a handle or other indirect reference, or some other piece of server-specific data.</span></span> <span data-ttu-id="d5033-119">這類資訊通常不會公開給不受信任的用戶端。</span><span class="sxs-lookup"><span data-stu-id="d5033-119">Such information should generally not be disclosed to an untrusted client.</span></span> <span data-ttu-id="d5033-120">因此，第二個需求：機密性。</span><span class="sxs-lookup"><span data-stu-id="d5033-120">Thus the second requirement: confidentiality.</span></span>
 

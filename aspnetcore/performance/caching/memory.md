@@ -6,17 +6,17 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 02/02/2020
 no-loc:
-- ':::no-loc(appsettings.json):::'
-- ':::no-loc(ASP.NET Core Identity):::'
-- ':::no-loc(cookie):::'
-- ':::no-loc(Cookie):::'
-- ':::no-loc(Blazor):::'
-- ':::no-loc(Blazor Server):::'
-- ':::no-loc(Blazor WebAssembly):::'
-- ':::no-loc(Identity):::'
-- ":::no-loc(Let's Encrypt):::"
-- ':::no-loc(Razor):::'
-- ':::no-loc(SignalR):::'
+- 'appsettings.json'
+- 'ASP.NET Core Identity'
+- 'cookie'
+- 'Cookie'
+- 'Blazor'
+- 'Blazor Server'
+- 'Blazor WebAssembly'
+- 'Identity'
+- "Let's Encrypt"
+- 'Razor'
+- 'SignalR'
 uid: performance/caching/memory
 ms.openlocfilehash: 4d5f459d54a3c74a2eb23a50db6537eeaf8596b3
 ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
@@ -190,7 +190,7 @@ ms.locfileid: "93061440"
 * <span data-ttu-id="38745-230">當某個快取專案用來建立另一個快取專案時，子系會複製父專案的到期權杖和以時間為基礎的到期設定。</span><span class="sxs-lookup"><span data-stu-id="38745-230">When one cache entry is used to create another, the child copies the parent entry's expiration tokens and time-based expiration settings.</span></span> <span data-ttu-id="38745-231">子系不會藉由手動移除或更新父專案而過期。</span><span class="sxs-lookup"><span data-stu-id="38745-231">The child isn't expired by manual removal or updating of the parent entry.</span></span>
 
 * <span data-ttu-id="38745-232">用 <xref:Microsoft.Extensions.Caching.Memory.ICacheEntry.PostEvictionCallbacks> 來設定從快取收回快取專案之後將引發的回呼。</span><span class="sxs-lookup"><span data-stu-id="38745-232">Use <xref:Microsoft.Extensions.Caching.Memory.ICacheEntry.PostEvictionCallbacks> to set the callbacks that will be fired after the cache entry is evicted from the cache.</span></span>
-* <span data-ttu-id="38745-233">針對大部分的應用程式， `IMemoryCache` 則會啟用。</span><span class="sxs-lookup"><span data-stu-id="38745-233">For most apps, `IMemoryCache` is enabled.</span></span> <span data-ttu-id="38745-234">例如， `AddMvc` 在中呼叫、、 `AddControllersWithViews` `Add:::no-loc(Razor):::Pages` 、 `AddMvcCore().Add:::no-loc(Razor):::ViewEngine` 及許多其他 `Add{Service}` 方法會 `ConfigureServices` 啟用 `IMemoryCache` 。</span><span class="sxs-lookup"><span data-stu-id="38745-234">For example, calling `AddMvc`, `AddControllersWithViews`, `Add:::no-loc(Razor):::Pages`, `AddMvcCore().Add:::no-loc(Razor):::ViewEngine`, and many other `Add{Service}` methods in `ConfigureServices`, enables `IMemoryCache`.</span></span> <span data-ttu-id="38745-235">針對未呼叫上述其中一個方法的應用程式 `Add{Service}` ，可能需要 <xref:Microsoft.Extensions.DependencyInjection.MemoryCacheServiceCollectionExtensions.AddMemoryCache*> 在中呼叫 `ConfigureServices` 。</span><span class="sxs-lookup"><span data-stu-id="38745-235">For apps that are not calling one of the preceding `Add{Service}` methods, it may be necessary to call <xref:Microsoft.Extensions.DependencyInjection.MemoryCacheServiceCollectionExtensions.AddMemoryCache*> in `ConfigureServices`.</span></span>
+* <span data-ttu-id="38745-233">針對大部分的應用程式， `IMemoryCache` 則會啟用。</span><span class="sxs-lookup"><span data-stu-id="38745-233">For most apps, `IMemoryCache` is enabled.</span></span> <span data-ttu-id="38745-234">例如， `AddMvc` 在中呼叫、、 `AddControllersWithViews` `AddRazorPages` 、 `AddMvcCore().AddRazorViewEngine` 及許多其他 `Add{Service}` 方法會 `ConfigureServices` 啟用 `IMemoryCache` 。</span><span class="sxs-lookup"><span data-stu-id="38745-234">For example, calling `AddMvc`, `AddControllersWithViews`, `AddRazorPages`, `AddMvcCore().AddRazorViewEngine`, and many other `Add{Service}` methods in `ConfigureServices`, enables `IMemoryCache`.</span></span> <span data-ttu-id="38745-235">針對未呼叫上述其中一個方法的應用程式 `Add{Service}` ，可能需要 <xref:Microsoft.Extensions.DependencyInjection.MemoryCacheServiceCollectionExtensions.AddMemoryCache*> 在中呼叫 `ConfigureServices` 。</span><span class="sxs-lookup"><span data-stu-id="38745-235">For apps that are not calling one of the preceding `Add{Service}` methods, it may be necessary to call <xref:Microsoft.Extensions.DependencyInjection.MemoryCacheServiceCollectionExtensions.AddMemoryCache*> in `ConfigureServices`.</span></span>
 
 ## <a name="background-cache-update"></a><span data-ttu-id="38745-236">背景快取更新</span><span class="sxs-lookup"><span data-stu-id="38745-236">Background cache update</span></span>
 

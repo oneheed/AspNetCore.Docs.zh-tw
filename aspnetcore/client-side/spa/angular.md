@@ -7,17 +7,17 @@ ms.author: stevesa
 ms.custom: mvc
 ms.date: 02/06/2020
 no-loc:
-- ':::no-loc(appsettings.json):::'
-- ':::no-loc(ASP.NET Core Identity):::'
-- ':::no-loc(cookie):::'
-- ':::no-loc(Cookie):::'
-- ':::no-loc(Blazor):::'
-- ':::no-loc(Blazor Server):::'
-- ':::no-loc(Blazor WebAssembly):::'
-- ':::no-loc(Identity):::'
-- ":::no-loc(Let's Encrypt):::"
-- ':::no-loc(Razor):::'
-- ':::no-loc(SignalR):::'
+- 'appsettings.json'
+- 'ASP.NET Core Identity'
+- 'cookie'
+- 'Cookie'
+- 'Blazor'
+- 'Blazor Server'
+- 'Blazor WebAssembly'
+- 'Identity'
+- "Let's Encrypt"
+- 'Razor'
+- 'SignalR'
 uid: spa/angular
 ms.openlocfilehash: 2fff0d60b71bbbab9347dbe74cad023264247388
 ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
@@ -133,7 +133,7 @@ npm install --save <package_name>
 
 ### <a name="pass-data-from-net-code-into-typescript-code"></a><span data-ttu-id="511a8-175">將資料從.NET 程式碼傳遞至 TypeScript 程式碼</span><span class="sxs-lookup"><span data-stu-id="511a8-175">Pass data from .NET code into TypeScript code</span></span>
 
-<span data-ttu-id="511a8-176">在 SSR 期間，您可能會想要將針對每個要求的資料從 ASP.NET Core 應用程式傳遞至 Angular 應用程式。</span><span class="sxs-lookup"><span data-stu-id="511a8-176">During SSR, you might want to pass per-request data from your ASP.NET Core app into your Angular app.</span></span> <span data-ttu-id="511a8-177">例如，您可以傳遞 :::no-loc(cookie)::: 資訊或從資料庫讀取的某些資訊。</span><span class="sxs-lookup"><span data-stu-id="511a8-177">For example, you could pass :::no-loc(cookie)::: information or something read from a database.</span></span> <span data-ttu-id="511a8-178">若要這樣做，請編輯您的 *Startup* 類別。</span><span class="sxs-lookup"><span data-stu-id="511a8-178">To do this, edit your *Startup* class.</span></span> <span data-ttu-id="511a8-179">在 `UseSpaPrerendering` 的回呼中，請將 `options.SupplyData` 的值設定為下方所示的內容：</span><span class="sxs-lookup"><span data-stu-id="511a8-179">In the callback for `UseSpaPrerendering`, set a value for `options.SupplyData` such as the following:</span></span>
+<span data-ttu-id="511a8-176">在 SSR 期間，您可能會想要將針對每個要求的資料從 ASP.NET Core 應用程式傳遞至 Angular 應用程式。</span><span class="sxs-lookup"><span data-stu-id="511a8-176">During SSR, you might want to pass per-request data from your ASP.NET Core app into your Angular app.</span></span> <span data-ttu-id="511a8-177">例如，您可以傳遞 cookie 資訊或從資料庫讀取的某些資訊。</span><span class="sxs-lookup"><span data-stu-id="511a8-177">For example, you could pass cookie information or something read from a database.</span></span> <span data-ttu-id="511a8-178">若要這樣做，請編輯您的 *Startup* 類別。</span><span class="sxs-lookup"><span data-stu-id="511a8-178">To do this, edit your *Startup* class.</span></span> <span data-ttu-id="511a8-179">在 `UseSpaPrerendering` 的回呼中，請將 `options.SupplyData` 的值設定為下方所示的內容：</span><span class="sxs-lookup"><span data-stu-id="511a8-179">In the callback for `UseSpaPrerendering`, set a value for `options.SupplyData` such as the following:</span></span>
 
 ```csharp
 options.SupplyData = (context, data) =>

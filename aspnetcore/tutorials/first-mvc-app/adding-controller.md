@@ -5,17 +5,17 @@ description: ASP.NET Core MVC 之教學課程系列的第2部分。
 ms.author: riande
 ms.date: 08/05/2017
 no-loc:
-- ':::no-loc(appsettings.json):::'
-- ':::no-loc(ASP.NET Core Identity):::'
-- ':::no-loc(cookie):::'
-- ':::no-loc(Cookie):::'
-- ':::no-loc(Blazor):::'
-- ':::no-loc(Blazor Server):::'
-- ':::no-loc(Blazor WebAssembly):::'
-- ':::no-loc(Identity):::'
-- ":::no-loc(Let's Encrypt):::"
-- ':::no-loc(Razor):::'
-- ':::no-loc(SignalR):::'
+- 'appsettings.json'
+- 'ASP.NET Core Identity'
+- 'cookie'
+- 'Cookie'
+- 'Blazor'
+- 'Blazor Server'
+- 'Blazor WebAssembly'
+- 'Identity'
+- "Let's Encrypt"
+- 'Razor'
+- 'SignalR'
 uid: tutorials/first-mvc-app/adding-controller
 ms.openlocfilehash: 1851a61441ed351442f86939022319ad59d10006
 ms.sourcegitcommit: 91e14f1e2a25c98a57c2217fe91b172e0ff2958c
@@ -135,7 +135,7 @@ ms.locfileid: "94422613"
 
 [!code-csharp[](~/tutorials/first-mvc-app/start-mvc/sample/MvcMovie3/Startup.cs?name=snippet_1&highlight=5)]
 
-<span data-ttu-id="bc816-195">在這些範例中，控制器已執行 MVC 的 "VC" 部分，也就是 **V** iew 和 **C** ontroller 工作。</span><span class="sxs-lookup"><span data-stu-id="bc816-195">In these examples the controller has been doing the "VC" portion of MVC - that is, the **V** iew and the **C** ontroller work.</span></span> <span data-ttu-id="bc816-196">控制器會直接傳回 HTML。</span><span class="sxs-lookup"><span data-stu-id="bc816-196">The controller is returning HTML directly.</span></span> <span data-ttu-id="bc816-197">一般來說，您不希望控制器直接傳回 HTML，因為撰寫程式碼和維護會變得很麻煩。</span><span class="sxs-lookup"><span data-stu-id="bc816-197">Generally you don't want controllers returning HTML directly, since that becomes very cumbersome to code and maintain.</span></span> <span data-ttu-id="bc816-198">相反地，您通常會使用個別的 :::no-loc(Razor)::: view 範本檔案來產生 HTML 回應。</span><span class="sxs-lookup"><span data-stu-id="bc816-198">Instead you typically use a separate :::no-loc(Razor)::: view template file to generate the HTML response.</span></span> <span data-ttu-id="bc816-199">您可在接下來的教學課程中這麼做。</span><span class="sxs-lookup"><span data-stu-id="bc816-199">You do that in the next tutorial.</span></span>
+<span data-ttu-id="bc816-195">在這些範例中，控制器已執行 MVC 的 "VC" 部分，也就是 **V** iew 和 **C** ontroller 工作。</span><span class="sxs-lookup"><span data-stu-id="bc816-195">In these examples the controller has been doing the "VC" portion of MVC - that is, the **V** iew and the **C** ontroller work.</span></span> <span data-ttu-id="bc816-196">控制器會直接傳回 HTML。</span><span class="sxs-lookup"><span data-stu-id="bc816-196">The controller is returning HTML directly.</span></span> <span data-ttu-id="bc816-197">一般來說，您不希望控制器直接傳回 HTML，因為撰寫程式碼和維護會變得很麻煩。</span><span class="sxs-lookup"><span data-stu-id="bc816-197">Generally you don't want controllers returning HTML directly, since that becomes very cumbersome to code and maintain.</span></span> <span data-ttu-id="bc816-198">相反地，您通常會使用個別的 Razor view 範本檔案來產生 HTML 回應。</span><span class="sxs-lookup"><span data-stu-id="bc816-198">Instead you typically use a separate Razor view template file to generate the HTML response.</span></span> <span data-ttu-id="bc816-199">您可在接下來的教學課程中這麼做。</span><span class="sxs-lookup"><span data-stu-id="bc816-199">You do that in the next tutorial.</span></span>
 
 > [!div class="step-by-step"]
 > <span data-ttu-id="bc816-200">[上一個](start-mvc.md) 
@@ -256,7 +256,7 @@ Remove link for simplified tutorial.
 
 [!code-csharp[](~/tutorials/first-mvc-app/start-mvc/sample/MvcMovie/Startup.cs?name=snippet_1&highlight=5)]
 
-<span data-ttu-id="bc816-291">在這些範例中，控制器已執行 MVC 的 "VC" 部分，也就是檢視和控制器工作。</span><span class="sxs-lookup"><span data-stu-id="bc816-291">In these examples the controller has been doing the "VC" portion of MVC - that is, the view and controller work.</span></span> <span data-ttu-id="bc816-292">控制器會直接傳回 HTML。</span><span class="sxs-lookup"><span data-stu-id="bc816-292">The controller is returning HTML directly.</span></span> <span data-ttu-id="bc816-293">一般來說，您不希望控制器直接傳回 HTML，因為撰寫程式碼和維護會變得很麻煩。</span><span class="sxs-lookup"><span data-stu-id="bc816-293">Generally you don't want controllers returning HTML directly, since that becomes very cumbersome to code and maintain.</span></span> <span data-ttu-id="bc816-294">相反地，您通常會使用個別的 :::no-loc(Razor)::: view 範本檔案來協助產生 HTML 回應。</span><span class="sxs-lookup"><span data-stu-id="bc816-294">Instead you typically use a separate :::no-loc(Razor)::: view template file to help generate the HTML response.</span></span> <span data-ttu-id="bc816-295">您可在接下來的教學課程中這麼做。</span><span class="sxs-lookup"><span data-stu-id="bc816-295">You do that in the next tutorial.</span></span>
+<span data-ttu-id="bc816-291">在這些範例中，控制器已執行 MVC 的 "VC" 部分，也就是檢視和控制器工作。</span><span class="sxs-lookup"><span data-stu-id="bc816-291">In these examples the controller has been doing the "VC" portion of MVC - that is, the view and controller work.</span></span> <span data-ttu-id="bc816-292">控制器會直接傳回 HTML。</span><span class="sxs-lookup"><span data-stu-id="bc816-292">The controller is returning HTML directly.</span></span> <span data-ttu-id="bc816-293">一般來說，您不希望控制器直接傳回 HTML，因為撰寫程式碼和維護會變得很麻煩。</span><span class="sxs-lookup"><span data-stu-id="bc816-293">Generally you don't want controllers returning HTML directly, since that becomes very cumbersome to code and maintain.</span></span> <span data-ttu-id="bc816-294">相反地，您通常會使用個別的 Razor view 範本檔案來協助產生 HTML 回應。</span><span class="sxs-lookup"><span data-stu-id="bc816-294">Instead you typically use a separate Razor view template file to help generate the HTML response.</span></span> <span data-ttu-id="bc816-295">您可在接下來的教學課程中這麼做。</span><span class="sxs-lookup"><span data-stu-id="bc816-295">You do that in the next tutorial.</span></span>
 
 > [!div class="step-by-step"]
 > <span data-ttu-id="bc816-296">[上一個](start-mvc.md) 

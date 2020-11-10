@@ -5,17 +5,17 @@ description: ASP.NET Core MVC 之教學課程系列的第3部分。
 ms.author: riande
 ms.date: 8/04/2019
 no-loc:
-- ':::no-loc(appsettings.json):::'
-- ':::no-loc(ASP.NET Core Identity):::'
-- ':::no-loc(cookie):::'
-- ':::no-loc(Cookie):::'
-- ':::no-loc(Blazor):::'
-- ':::no-loc(Blazor Server):::'
-- ':::no-loc(Blazor WebAssembly):::'
-- ':::no-loc(Identity):::'
-- ":::no-loc(Let's Encrypt):::"
-- ':::no-loc(Razor):::'
-- ':::no-loc(SignalR):::'
+- 'appsettings.json'
+- 'ASP.NET Core Identity'
+- 'cookie'
+- 'Cookie'
+- 'Blazor'
+- 'Blazor Server'
+- 'Blazor WebAssembly'
+- 'Identity'
+- "Let's Encrypt"
+- 'Razor'
+- 'SignalR'
 uid: tutorials/first-mvc-app/adding-view
 ms.openlocfilehash: 56f39643ccd69c6508148374033208eb3b2f25ab
 ms.sourcegitcommit: 91e14f1e2a25c98a57c2217fe91b172e0ff2958c
@@ -30,9 +30,9 @@ ms.locfileid: "94422713"
 
 ::: moniker range=">= aspnetcore-3.0"
 
-<span data-ttu-id="ec1af-105">在本節中，您會將 `HelloWorldController` 類別修改為使用 [:::no-loc(Razor):::](xref:mvc/views/razor) view files，以將產生 HTML 回應的程式明確封裝到用戶端。</span><span class="sxs-lookup"><span data-stu-id="ec1af-105">In this section you modify the `HelloWorldController` class to use [:::no-loc(Razor):::](xref:mvc/views/razor) view files to cleanly encapsulate the process of generating HTML responses to a client.</span></span>
+<span data-ttu-id="ec1af-105">在本節中，您會將 `HelloWorldController` 類別修改為使用 [Razor](xref:mvc/views/razor) view files，以將產生 HTML 回應的程式明確封裝到用戶端。</span><span class="sxs-lookup"><span data-stu-id="ec1af-105">In this section you modify the `HelloWorldController` class to use [Razor](xref:mvc/views/razor) view files to cleanly encapsulate the process of generating HTML responses to a client.</span></span>
 
-<span data-ttu-id="ec1af-106">您可以使用建立視圖範本檔案 :::no-loc(Razor)::: 。</span><span class="sxs-lookup"><span data-stu-id="ec1af-106">You create a view template file using :::no-loc(Razor):::.</span></span> <span data-ttu-id="ec1af-107">:::no-loc(Razor):::型視圖範本的副檔名為 *cshtml* 。</span><span class="sxs-lookup"><span data-stu-id="ec1af-107">:::no-loc(Razor):::-based view templates have a *.cshtml* file extension.</span></span> <span data-ttu-id="ec1af-108">它們提供了一種使用 C# 建立 HTML 輸出的簡潔方式。</span><span class="sxs-lookup"><span data-stu-id="ec1af-108">They provide an elegant way to create HTML output with C#.</span></span>
+<span data-ttu-id="ec1af-106">您可以使用建立視圖範本檔案 Razor 。</span><span class="sxs-lookup"><span data-stu-id="ec1af-106">You create a view template file using Razor.</span></span> <span data-ttu-id="ec1af-107">Razor型視圖範本的副檔名為 *cshtml* 。</span><span class="sxs-lookup"><span data-stu-id="ec1af-107">Razor-based view templates have a *.cshtml* file extension.</span></span> <span data-ttu-id="ec1af-108">它們提供了一種使用 C# 建立 HTML 輸出的簡潔方式。</span><span class="sxs-lookup"><span data-stu-id="ec1af-108">They provide an elegant way to create HTML output with C#.</span></span>
 
 <span data-ttu-id="ec1af-109">`Index` 方法目前會傳回字串，內含在控制器類別中已直接書寫好的固定訊息。</span><span class="sxs-lookup"><span data-stu-id="ec1af-109">Currently the `Index` method returns a string with a message that's hard-coded in the controller class.</span></span> <span data-ttu-id="ec1af-110">在 `HelloWorldController` 類別中，以下列程式碼取代 `Index` 方法：</span><span class="sxs-lookup"><span data-stu-id="ec1af-110">In the `HelloWorldController` class, replace the `Index` method with the following code:</span></span>
 
@@ -52,7 +52,7 @@ ms.locfileid: "94422713"
 
   * <span data-ttu-id="ec1af-119">在右上角的搜尋方塊中，輸入 *view*</span><span class="sxs-lookup"><span data-stu-id="ec1af-119">In the search box in the upper-right, enter *view*</span></span>
 
-  * <span data-ttu-id="ec1af-120">選取 **:::no-loc(Razor)::: 視圖**</span><span class="sxs-lookup"><span data-stu-id="ec1af-120">Select **:::no-loc(Razor)::: View**</span></span>
+  * <span data-ttu-id="ec1af-120">選取 **Razor 視圖**</span><span class="sxs-lookup"><span data-stu-id="ec1af-120">Select **Razor View**</span></span>
 
   * <span data-ttu-id="ec1af-121">保留 [名稱] 方塊值 *Index.cshtml* 。</span><span class="sxs-lookup"><span data-stu-id="ec1af-121">Keep the **Name** box value, *Index.cshtml*.</span></span>
 
@@ -82,7 +82,7 @@ ms.locfileid: "94422713"
 
 ---
 
-<span data-ttu-id="ec1af-137">以下列內容取代 *Views/HelloWorld/Index. cshtml* view 檔案的內容 :::no-loc(Razor)::: ：</span><span class="sxs-lookup"><span data-stu-id="ec1af-137">Replace the contents of the *Views/HelloWorld/Index.cshtml* :::no-loc(Razor)::: view file with the following:</span></span>
+<span data-ttu-id="ec1af-137">以下列內容取代 *Views/HelloWorld/Index. cshtml* view 檔案的內容 Razor ：</span><span class="sxs-lookup"><span data-stu-id="ec1af-137">Replace the contents of the *Views/HelloWorld/Index.cshtml* Razor view file with the following:</span></span>
 
 [!code-cshtml[](~/tutorials/first-mvc-app/start-mvc/sample/MvcMovie22/Views/HelloWorld/Index1.cshtml?highlight=7)]
 
@@ -200,9 +200,9 @@ ms.locfileid: "94422713"
 
 ::: moniker range="< aspnetcore-3.0"
 
-<span data-ttu-id="ec1af-219">在本節中，您會將 `HelloWorldController` 類別修改為使用 [:::no-loc(Razor):::](xref:mvc/views/razor) view files，以將產生 HTML 回應的程式明確封裝到用戶端。</span><span class="sxs-lookup"><span data-stu-id="ec1af-219">In this section you modify the `HelloWorldController` class to use [:::no-loc(Razor):::](xref:mvc/views/razor) view files to cleanly encapsulate the process of generating HTML responses to a client.</span></span>
+<span data-ttu-id="ec1af-219">在本節中，您會將 `HelloWorldController` 類別修改為使用 [Razor](xref:mvc/views/razor) view files，以將產生 HTML 回應的程式明確封裝到用戶端。</span><span class="sxs-lookup"><span data-stu-id="ec1af-219">In this section you modify the `HelloWorldController` class to use [Razor](xref:mvc/views/razor) view files to cleanly encapsulate the process of generating HTML responses to a client.</span></span>
 
-<span data-ttu-id="ec1af-220">您可以使用建立視圖範本檔案 :::no-loc(Razor)::: 。</span><span class="sxs-lookup"><span data-stu-id="ec1af-220">You create a view template file using :::no-loc(Razor):::.</span></span> <span data-ttu-id="ec1af-221">:::no-loc(Razor):::型視圖範本的副檔名為 *cshtml* 。</span><span class="sxs-lookup"><span data-stu-id="ec1af-221">:::no-loc(Razor):::-based view templates have a *.cshtml* file extension.</span></span> <span data-ttu-id="ec1af-222">它們提供了一種使用 C# 建立 HTML 輸出的簡潔方式。</span><span class="sxs-lookup"><span data-stu-id="ec1af-222">They provide an elegant way to create HTML output with C#.</span></span>
+<span data-ttu-id="ec1af-220">您可以使用建立視圖範本檔案 Razor 。</span><span class="sxs-lookup"><span data-stu-id="ec1af-220">You create a view template file using Razor.</span></span> <span data-ttu-id="ec1af-221">Razor型視圖範本的副檔名為 *cshtml* 。</span><span class="sxs-lookup"><span data-stu-id="ec1af-221">Razor-based view templates have a *.cshtml* file extension.</span></span> <span data-ttu-id="ec1af-222">它們提供了一種使用 C# 建立 HTML 輸出的簡潔方式。</span><span class="sxs-lookup"><span data-stu-id="ec1af-222">They provide an elegant way to create HTML output with C#.</span></span>
 
 <span data-ttu-id="ec1af-223">`Index` 方法目前會傳回字串，內含在控制器類別中已直接書寫好的固定訊息。</span><span class="sxs-lookup"><span data-stu-id="ec1af-223">Currently the `Index` method returns a string with a message that's hard-coded in the controller class.</span></span> <span data-ttu-id="ec1af-224">在 `HelloWorldController` 類別中，以下列程式碼取代 `Index` 方法：</span><span class="sxs-lookup"><span data-stu-id="ec1af-224">In the `HelloWorldController` class, replace the `Index` method with the following code:</span></span>
 
@@ -222,7 +222,7 @@ ms.locfileid: "94422713"
 
   * <span data-ttu-id="ec1af-233">在右上角的搜尋方塊中，輸入 *view*</span><span class="sxs-lookup"><span data-stu-id="ec1af-233">In the search box in the upper-right, enter *view*</span></span>
 
-  * <span data-ttu-id="ec1af-234">選取 **:::no-loc(Razor)::: 視圖**</span><span class="sxs-lookup"><span data-stu-id="ec1af-234">Select **:::no-loc(Razor)::: View**</span></span>
+  * <span data-ttu-id="ec1af-234">選取 **Razor 視圖**</span><span class="sxs-lookup"><span data-stu-id="ec1af-234">Select **Razor View**</span></span>
 
   * <span data-ttu-id="ec1af-235">保留 [名稱] 方塊值 *Index.cshtml* 。</span><span class="sxs-lookup"><span data-stu-id="ec1af-235">Keep the **Name** box value, *Index.cshtml*.</span></span>
 
@@ -252,7 +252,7 @@ ms.locfileid: "94422713"
 
 ---
 
-<span data-ttu-id="ec1af-251">以下列內容取代 *Views/HelloWorld/Index. cshtml* view 檔案的內容 :::no-loc(Razor)::: ：</span><span class="sxs-lookup"><span data-stu-id="ec1af-251">Replace the contents of the *Views/HelloWorld/Index.cshtml* :::no-loc(Razor)::: view file with the following:</span></span>
+<span data-ttu-id="ec1af-251">以下列內容取代 *Views/HelloWorld/Index. cshtml* view 檔案的內容 Razor ：</span><span class="sxs-lookup"><span data-stu-id="ec1af-251">Replace the contents of the *Views/HelloWorld/Index.cshtml* Razor view file with the following:</span></span>
 
 [!code-cshtml[](~/tutorials/first-mvc-app/start-mvc/sample/MvcMovie22/Views/HelloWorld/Index1.cshtml?highlight=7)]
 

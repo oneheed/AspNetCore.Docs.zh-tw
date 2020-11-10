@@ -21,12 +21,12 @@ no-loc:
 - Razor
 - SignalR
 uid: tutorials/razor-pages/validation
-ms.openlocfilehash: 960e248d6f83b031004e354c98d8637674a403e1
-ms.sourcegitcommit: 342588e10ae0054a6d6dc0fd11dae481006be099
+ms.openlocfilehash: efae7d79ff7a0b351afc68264463546bb26b4424
+ms.sourcegitcommit: 91e14f1e2a25c98a57c2217fe91b172e0ff2958c
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 11/07/2020
-ms.locfileid: "94360683"
+ms.lasthandoff: 11/10/2020
+ms.locfileid: "94422700"
 ---
 # <a name="part-8-add-validation-to-an-aspnet-core-no-locrazor-page"></a>第8部分：將驗證新增至 ASP.NET Core Razor 頁面
 
@@ -250,7 +250,7 @@ SQLite 不需要移轉。
 
 ### <a name="publish-to-azure"></a>發佈至 Azure
 
-如需部署至 Azure 的詳細資訊，請參閱 [教學課程：使用 SQL Database 在 azure 中建立 ASP.NET Core 應用程式](/azure/app-service/app-service-web-tutorial-dotnetcore-sqldb)。
+如需部署至 Azure 的詳細資訊，請參閱 [教學課程：使用 SQL Database 在 azure 中建立 ASP.NET Core 應用程式](/azure/app-service/tutorial-dotnetcore-sqldb-app)。
 
 感謝您完成本頁面簡介 Razor 。 [入門 Razor 頁面和 EF Core](xref:data/ef-rp/intro) 是本教學課程的最佳追蹤。
 

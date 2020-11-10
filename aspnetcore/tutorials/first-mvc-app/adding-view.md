@@ -17,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: tutorials/first-mvc-app/adding-view
-ms.openlocfilehash: 078329d1e5dfe41a7713b1e53894a9b09886752d
-ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
+ms.openlocfilehash: 56f39643ccd69c6508148374033208eb3b2f25ab
+ms.sourcegitcommit: 91e14f1e2a25c98a57c2217fe91b172e0ff2958c
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 10/30/2020
-ms.locfileid: "93052665"
+ms.lasthandoff: 11/10/2020
+ms.locfileid: "94422713"
 ---
 # <a name="part-3-add-a-view-to-an-aspnet-core-mvc-app"></a>第3部分：將視圖新增至 ASP.NET Core MVC 應用程式
 
@@ -99,8 +99,20 @@ ms.locfileid: "93052665"
 ## <a name="change-the-title-footer-and-menu-link-in-the-layout-file"></a>變更配置檔案中的標題、頁尾及功能表連結
 
 以下列標記取代 *Views/Shared/_Layout. cshtml* 檔案的內容。 所做的變更已醒目提示：
+::: moniker-end
+
+::: moniker range=">= aspnetcore-3.0 < aspnetcore-5.0"
 
 [!code-cshtml[](~/tutorials/first-mvc-app/start-mvc/sample/MvcMovie3/Views/Shared/_Layout.cshtml?highlight=6,14,40)]
+
+::: moniker-end
+
+::: moniker range=">= aspnetcore-5.0"
+
+[!code-cshtml[](~/tutorials/first-mvc-app/start-mvc/sample/MvcMovie5/Views/Shared/_Layout.cshtml?highlight=6,14,40)]
+::: moniker-end
+
+::: moniker range=">= aspnetcore-3.0"
 
 上述標記進行了下列變更：
 

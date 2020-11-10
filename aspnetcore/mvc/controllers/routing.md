@@ -17,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: mvc/controllers/routing
-ms.openlocfilehash: 9f64dd8f0ca026cec4b7ee4b5ea02523139eed4f
-ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
+ms.openlocfilehash: 59ad373cefaa12370aa7c02a367125c7a94f59a6
+ms.sourcegitcommit: 91e14f1e2a25c98a57c2217fe91b172e0ff2958c
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 10/30/2020
-ms.locfileid: "93057150"
+ms.lasthandoff: 11/10/2020
+ms.locfileid: "94422596"
 ---
 # <a name="routing-to-controller-actions-in-aspnet-core"></a>ASP.NET Core 中的路由至控制器動作
 
@@ -120,7 +120,7 @@ endpoints.MapControllerRoute("default", "{controller=Home}/{action=Index}/{id?}"
 
 [!code-csharp[](routing/samples/3.x/main/StartupDefaultMVC.cs?name=snippet2)]
 
-即為「慣例路由」  的範例。 因為它會建立 URL 路徑的 *慣例* ，所以稱為「 *傳統路由* 」：
+即為「慣例路由」的範例。 因為它會建立 URL 路徑的 *慣例* ，所以稱為「 *傳統路由* 」：
 
 * 第一個路徑區段，會 `{controller=Home}` 對應到控制器名稱。
 * 第二個區段會 `{action=Index}` 對應至 [動作](#action) 名稱。
@@ -435,7 +435,7 @@ REST Api 應該使用屬性路由，將應用程式的功能模型為一組資�
 | `[Route("")]` | 是 | `"Home"` |
 | `[Route("Index")]` | 是 | `"Home/Index"` |
 | `[Route("/")]` | **否** | `""` |
-| `[Route("About")]` | 是 | `"Home/About"` |
+| `[Route("About")]` | Yes | `"Home/About"` |
 
 <a name="routing-ordering-ref-label"></a>
 <a name="oar"></a>
@@ -725,7 +725,7 @@ result: /UrlGeneration/Destination
 
 您可能預期會在預設路由中遇到此問題 `{controller}/{action}/{id?}` 。 這個問題在實務上很罕見，因為 `Url.Action` 一定要明確指定 `controller` 和 `action` 值。
 
-Url 的數個多載[。 Action](xref:Microsoft.AspNetCore.Mvc.IUrlHelper.Action*)會採用路由值物件，為和以外的路由參數提供值。 `controller` `action` 路由值物件經常用於 `id` 。 例如： `Url.Action("Buy", "Products", new { id = 17 })` 。 路由值物件：
+Url 的數個多載[。 Action](xref:Microsoft.AspNetCore.Mvc.IUrlHelper.Action*)會採用路由值物件，為和以外的路由參數提供值。 `controller` `action` 路由值物件經常用於 `id` 。 例如：`Url.Action("Buy", "Products", new { id = 17 })`。 路由值物件：
 
 * 依照慣例，通常是匿名型別的物件。
 * 可以是 `IDictionary<>` 或 [POCO](https://wikipedia.org/wiki/Plain_old_CLR_object)) 。
@@ -837,9 +837,9 @@ TagHelper 透過 `form` TagHelper 和 `<a>` TagHelper 產生 URL。 這兩者使
 
 <a name="aa"></a>
 
-在「未符合任何值」  的情況下，缺少 `area` 值相當於 `area` 的值為 Null 或空字串。
+在「未符合任何值」的情況下，缺少 `area` 值相當於 `area` 的值為 Null 或空字串。
 
-在區域內執行動作時，的路由值 `area` 可作為路由用來產生 URL 的 [環境值](#ambient) 。 這表示區域預設會以「黏性」  方式來處理 URL 產生，如下列範例所示。
+在區域內執行動作時，的路由值 `area` 可作為路由用來產生 URL 的 [環境值](#ambient) 。 這表示區域預設會以「黏性」方式來處理 URL 產生，如下列範例所示。
 
 [!code-csharp[](routing/samples/3.x/AreasRouting/Startup3.cs?name=snippet3)]
 
@@ -857,7 +857,7 @@ TagHelper 透過 `form` TagHelper 和 `<a>` TagHelper 產生 URL。 這兩者使
 
 ## <a name="sample-code"></a>範例程式碼
 
- * [MyDisplayRouteInfo](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/mvc/controllers/routing/samples/3.x/main/Extensions/ControllerContextExtensions.cs)方法包含在[範例下載](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/mvc/controllers/routing/samples/3.x)中，可用來顯示路由資訊。
+* [!INCLUDE[](~/includes/MyDisplayRouteInfo.md)]
 * [查看或下載範例程式碼](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/mvc/controllers/routing/samples/3.x) ([如何下載](xref:index#how-to-download-a-sample)) 
 
 [!INCLUDE[](~/includes/dbg-route.md)]
@@ -1000,7 +1000,7 @@ app.UseMvc(routes =>
 });
 ```
 
-這裡的 `blog` 路由是「專用慣例路由」  ，也就是它會使用慣例路由系統，但專用於特定動作。 由於 `controller` 和 `action` 並未作為參數出現在路由範本中，它們只能有預設值，因此此路由一律會對應至動作 `BlogController.Article`。
+這裡的 `blog` 路由是「專用慣例路由」，也就是它會使用慣例路由系統，但專用於特定動作。 由於 `controller` 和 `action` 並未作為參數出現在路由範本中，它們只能有預設值，因此此路由一律會對應至動作 `BlogController.Article`。
 
 路由集合中的路由已經過排序，並將依其新增順序進行處理。 因此在此範例中，會先嘗試 `blog` 路由，再嘗試 `default` 路由。
 
@@ -1009,7 +1009,7 @@ app.UseMvc(routes =>
 
 ### <a name="fallback"></a>後援
 
-在要求處理過程中，MVC 會確認路由值是否可用來尋找應用程式中的控制器和動作。 如果路由值未符合任何動作，則不會將此路由視為一個相符項目，並將嘗試下一個路由。 這稱為「遞補」  ，其目的在於簡化慣例路由重疊的情況。
+在要求處理過程中，MVC 會確認路由值是否可用來尋找應用程式中的控制器和動作。 如果路由值未符合任何動作，則不會將此路由視為一個相符項目，並將嘗試下一個路由。 這稱為「遞補」，其目的在於簡化慣例路由重疊的情況。
 
 ### <a name="disambiguating-actions"></a>釐清動作
 
@@ -1086,7 +1086,7 @@ public class HomeController : Controller
 > [!NOTE]
 > 此範例醒目提示屬性路由與慣例路由之間的主要程式設計差異。 屬性路由需要更多輸入才能指定路由，而慣例預設路由處理路由的方式則更簡潔。 不過，屬性路由允許 (並需要) 精確地控制套用至每個動作的路由範本。
 
-使用屬性路由，選取動作時「不會」  根據控制器名稱和動作名稱。 此範例會符合與上一個範例相同的 URL。
+使用屬性路由，選取動作時「不會」根據控制器名稱和動作名稱。 此範例會符合與上一個範例相同的 URL。
 
 ```csharp
 public class MyDemoController : Controller
@@ -1151,7 +1151,7 @@ public class ProductsApiController : Controller
 
 ## <a name="route-name"></a>路由名稱
 
-下列程式碼會定義 `Products_List` 的「路由名稱」  ：
+下列程式碼會定義 `Products_List` 的「路由名稱」：
 
 ```csharp
 public class ProductsApiController : Controller
@@ -1164,7 +1164,7 @@ public class ProductsApiController : Controller
 您可以使用路由名稱根據特定路由來產生 URL。 路由名稱不會影響路由的 URL 比對行為，只會用於 URL 產生。 在整個應用程式內路由名稱必須是唯一的。
 
 > [!NOTE]
-> 慣例「預設路由」  與此相反，只會將 `id` 參數定義為選擇性 (`{id?}`)。 能夠精確指定 API 有些優點，像是允許將 `/products` 和 `/products/5` 分派至不同的動作。
+> 慣例「預設路由」與此相反，只會將 `id` 參數定義為選擇性 (`{id?}`)。 能夠精確指定 API 有些優點，像是允許將 `/products` 和 `/products/5` 分派至不同的動作。
 
 <a name="routing-combining-ref-label"></a>
 
@@ -1186,7 +1186,7 @@ public class ProductsApiController : Controller
 
 在此範例中，URL 路徑 `/products` 可能符合 `ProductsApi.ListProducts`，而 URL 路徑 `/products/5` 可能符合 `ProductsApi.GetProduct(int)`。 這兩個動作都只會比對 HTTP， `GET` 因為它們是以標記 `HttpGetAttribute` 。
 
-套用至開頭為 `/` 或 `~/` 之動作的路由範本，無法與套用至控制器的路由範本合併。 此範例會比對一組類似於「預設路由」  的 URL 路徑。
+套用至開頭為 `/` 或 `~/` 之動作的路由範本，無法與套用至控制器的路由範本合併。 此範例會比對一組類似於「預設路由」的 URL 路徑。
 
 ```csharp
 [Route("Home")]
@@ -1313,7 +1313,7 @@ public class SlugifyParameterTransformer : IOutboundParameterTransformer
 
 ### <a name="multiple-routes"></a>多個路由
 
-屬性路由支援定義多個路由來達到相同的動作。 最常見的用法是模擬「預設慣例路由」  的行為，如下列範例所示：
+屬性路由支援定義多個路由來達到相同的動作。 最常見的用法是模擬「預設慣例路由」的行為，如下列範例所示：
 
 ```csharp
 [Route("[controller]")]
@@ -1394,7 +1394,7 @@ public class MyApiControllerAttribute : Attribute, IRouteTemplateProvider
 
 ### <a name="using-application-model-to-customize-attribute-routes"></a>使用應用程式模型自訂屬性路由
 
-「應用程式模型」  是在啟動時建立的物件模型，其中包含 MVC 用來路由及執行動作的所有中繼資料。 「應用程式模型」  包含從路由屬性收集的所有資料 (透過 `IRouteTemplateProvider`)。 您可以撰寫「慣例」  來修改啟動時的應用程式模型，以自訂路由的運作方式。 本節簡單示範如何使用應用程式模型來自訂路由。
+「應用程式模型」是在啟動時建立的物件模型，其中包含 MVC 用來路由及執行動作的所有中繼資料。 「應用程式模型」包含從路由屬性收集的所有資料 (透過 `IRouteTemplateProvider`)。 您可以撰寫「慣例」來修改啟動時的應用程式模型，以自訂路由的運作方式。 本節簡單示範如何使用應用程式模型來自訂路由。
 
 [!code-csharp[](routing/samples/2.x/main/NamespaceRoutingConvention.cs)]
 
@@ -1437,7 +1437,7 @@ result: /UrlGeneration/Destination
 
 路由範本中每個路由參數的值都會以相符名稱的值和環境值所取代。 不具有任何值的路由參數可以使用預設值 (若有)；如果是選擇性，則可以略過 (如此範例中的 `id` 所示)。 如果任何必要的路由參數沒有對應的值，URL 產生會失敗。 如果某個路由的 URL 產生失敗，則會嘗試下一個路由，直到嘗試所有路由或找到相符項目為止。
 
-上述 `Url.Action` 範例假設使用慣例路由，但 URL 產生的運作方式會類似屬性路由，雖然概念完全不同。 在慣例路由中，使用路由值來展開範本，而且 `controller` 和 `action` 的路由值通常會出現在該範本中 (這是因為路由比對的 URL 符合「慣例」  )。 在屬性路由中，`controller` 和 `action` 的路由值不可以出現在範本中，而是用來查閱要使用的範本。
+上述 `Url.Action` 範例假設使用慣例路由，但 URL 產生的運作方式會類似屬性路由，雖然概念完全不同。 在慣例路由中，使用路由值來展開範本，而且 `controller` 和 `action` 的路由值通常會出現在該範本中 (這是因為路由比對的 URL 符合「慣例」)。 在屬性路由中，`controller` 和 `action` 的路由值不可以出現在範本中，而是用來查閱要使用的範本。
 
 此範例使用屬性路由：
 
@@ -1452,14 +1452,14 @@ MVC 建立所有屬性路由動作的查閱資料表，並將比對 `controller`
 `Url.Action` (`IUrlHelper` . `Action`) 及所有相關多載的基本概念，都是您想要透過指定控制器名稱和動作名稱，來指定連結的項目。
 
 > [!NOTE]
-> 使用 `Url.Action` 時，會為您指定`controller` 和 `action` 的目前路由值 (`controller` 和 `action` 的值都屬於「環境值」   )。 方法 `Url.Action` 一律會使用 `action` 和 `controller` 的目前值，而且會產生路由至目前動作的 URL 路徑。
+> 使用 `Url.Action` 時，會為您指定`controller` 和 `action` 的目前路由值 (`controller` 和 `action` 的值都屬於「環境值」 **和「值」** )。 方法 `Url.Action` 一律會使用 `action` 和 `controller` 的目前值，而且會產生路由至目前動作的 URL 路徑。
 
 路由會嘗試使用環境值中的值，來填入您在產生 URL 時未提供的資訊。 使用 `{a}/{b}/{c}/{d}` 等路由和環境值 `{ a = Alice, b = Bob, c = Carol, d = David }`，路由就會有足夠的資訊來產生不含任何其他值的 URL (因為所有路由參數都具有值)。 如果您新增值 `{ d = Donovan }`，則會忽略值 `{ d = David }`，而且產生的 URL 路徑會是 `Alice/Bob/Carol/Donovan`。
 
 > [!WARNING]
 > URL 路徑是階層式。 在上述範例中，如果您新增了值 `{ c = Cheryl }`，則會忽略 `{ c = Carol, d = David }` 這兩個值。 在此情況下，不再有 `d` 的值，因此 URL 產生會失敗。 您必須指定 `c` 和 `d` 所需的值。  使用預設路由 (`{controller}/{action}/{id?}`) 可能會遇到此問題，但實際上很少會遇到此行為，因為 `Url.Action` 一律會明確指定 `controller` 和 `action` 值。
 
-較長的 `Url.Action` 多載還會接受一個額外的「路由值」  物件，來為 `controller` 和 `action` 以外的路由參數提供值。 您最常會在搭配 `id` 時看到此用法，例如 `Url.Action("Buy", "Products", new { id = 17 })`。 依照慣例，「路由值」  物件通常是匿名型別的物件，但也可以是 `IDictionary<>` 或「純舊 .NET 物件」  。 不符合路由參數的任何額外路由值都會放在查詢字串中。
+較長的 `Url.Action` 多載還會接受一個額外的「路由值」物件，來為 `controller` 和 `action` 以外的路由參數提供值。 您最常會在搭配 `id` 時看到此用法，例如 `Url.Action("Buy", "Products", new { id = 17 })`。 依照慣例，「路由值」物件通常是匿名型別的物件，但也可以是 `IDictionary<>` 或「純舊 .NET 物件」。 不符合路由參數的任何額外路由值都會放在查詢字串中。
 
 [!code-csharp[](routing/samples/2.x/main/Controllers/TestController.cs)]
 
@@ -1470,7 +1470,7 @@ MVC 建立所有屬性路由動作的查閱資料表，並將比對 `controller`
 
 ### <a name="generating-urls-by-route"></a>由路由產生 URL
 
-上述程式碼示範如何藉由傳入控制器和動作名稱來產生 URL。 `IUrlHelper` 也提供 `Url.RouteUrl` 系列方法。 這些方法類似於 `Url.Action`，但不會將 `action` 和 `controller` 的目前值複製到路由值。 最常見的用法是指定路由名稱使用特定路由來產生 URL，通常「不需要」  指定控制器或動作名稱。
+上述程式碼示範如何藉由傳入控制器和動作名稱來產生 URL。 `IUrlHelper` 也提供 `Url.RouteUrl` 系列方法。 這些方法類似於 `Url.Action`，但不會將 `action` 和 `controller` 的目前值複製到路由值。 最常見的用法是指定路由名稱使用特定路由來產生 URL，通常「不需要」指定控制器或動作名稱。
 
 [!code-csharp[](routing/samples/2.x/main/Controllers/UrlGenerationControllerRouting.cs?name=snippet_1)]
 
@@ -1510,7 +1510,7 @@ public IActionResult Edit(int id, Customer customer)
 
 ### <a name="special-case-for-dedicated-conventional-routes"></a>專用慣例路由的特殊案例
 
-慣例路由可使用一種特殊路由定義，稱為「專用慣例路由」  。 在下列範例中，名為 `blog` 的路由是專用慣例路由。
+慣例路由可使用一種特殊路由定義，稱為「專用慣例路由」。 在下列範例中，名為 `blog` 的路由是專用慣例路由。
 
 ```csharp
 app.UseMvc(routes =>
@@ -1529,9 +1529,9 @@ app.UseMvc(routes =>
 
 ## <a name="areas"></a>區域
 
-[區域](areas.md)是 MVC 功能，可將相關功能組織成群組，作為個別路由命名空間 (適用於控制器動作) 和資料夾結構 (適用於檢視)。 使用區域可讓應用程式具有多個同名的控制器 (只要這些控制器具有不同的「區域」  即可)。 使用區域可建立用於路由的階層，方法是將另一個路由參數 `area` 新增至 `controller` 和 `action`。 本節將討論路由如何與區域互動；如需區域如何與檢視搭配使用的詳細資料，請參閱[區域](areas.md)。
+[區域](areas.md)是 MVC 功能，可將相關功能組織成群組，作為個別路由命名空間 (適用於控制器動作) 和資料夾結構 (適用於檢視)。 使用區域可讓應用程式具有多個同名的控制器 (只要這些控制器具有不同的「區域」即可)。 使用區域可建立用於路由的階層，方法是將另一個路由參數 `area` 新增至 `controller` 和 `action`。 本節將討論路由如何與區域互動；如需區域如何與檢視搭配使用的詳細資料，請參閱[區域](areas.md)。
 
-下列範例會設定 MVC 使用預設慣例路由，並為名為 `Blog` 的區域設定「區域路由」  ：
+下列範例會設定 MVC 使用預設慣例路由，並為名為 `Blog` 的區域設定「區域路由」：
 
 [!code-csharp[](routing/samples/3.x/AreasRouting/Startup.cs?name=snippet1)]
 
@@ -1562,9 +1562,9 @@ app.UseMvc(routes =>
 前兩個控制器是區域的成員，只有在 `area` 路由值提供其各自的區域名稱時才會符合。 第三個控制器不是任何區域的成員，只有路由未提供任何值給 `area` 時才會符合。
 
 > [!NOTE]
-> 在「未符合任何值」  的情況下，缺少 `area` 值相當於 `area` 的值為 Null 或空字串。
+> 在「未符合任何值」的情況下，缺少 `area` 值相當於 `area` 的值為 Null 或空字串。
 
-執行區域中的動作時，`area` 的路由值會作為路由用於 URL 產生的「環境值」  。 這表示區域預設會以「黏性」  方式來處理 URL 產生，如下列範例所示。
+執行區域中的動作時，`area` 的路由值會作為路由用於 URL 產生的「環境值」。 這表示區域預設會以「黏性」方式來處理 URL 產生，如下列範例所示。
 [!code-csharp[](routing/samples/3.x/AreasRouting/Startup.cs?name=snippet3)]
 
 [!code-csharp[](routing/samples/3.x/AreasRouting/Areas/Duck/Controllers/UsersController.cs)]
@@ -1590,9 +1590,9 @@ public class ProductsController : Controller
 
 假設在預設慣例路由中，URL 路徑 `/Products/Edit` 會產生值 `{ controller = Products, action = Edit }`，該值符合此處所示的 **兩個** 動作。 在 `IActionConstraint` 術語中，我們會假設這兩個動作可視為候選項目 (因為它們都符合路由資料)。
 
-當 `HttpGetAttribute` 執行時， *Edit()* 會符合 *GET* ，但不符合任何其他 HTTP 動詞命令。 `Edit(...)` 動作未定義任何條件約束，因此會符合任何 HTTP 動詞命令。 假設 `POST` - 只有 `Edit(...)` 相符。 但對於 `GET`，這兩個動作仍然相符；不過，具有 `IActionConstraint` 的動作一律比沒有的動作「更符合」  。 由於 `Edit()` 具有 `[HttpGet]`，因此更明確；如果兩個動作都相符，就會選取此動作。
+當 `HttpGetAttribute` 執行時， *Edit()* 會符合 *GET* ，但不符合任何其他 HTTP 動詞命令。 `Edit(...)` 動作未定義任何條件約束，因此會符合任何 HTTP 動詞命令。 假設 `POST` - 只有 `Edit(...)` 相符。 但對於 `GET`，這兩個動作仍然相符；不過，具有 `IActionConstraint` 的動作一律比沒有的動作「更符合」。 由於 `Edit()` 具有 `[HttpGet]`，因此更明確；如果兩個動作都相符，就會選取此動作。
 
-就概念而言，`IActionConstraint` 是一種「多載」  形式，但它會在符合相同 URL　的動作之間進行多載，而不是多載具有相同名稱的方法。 屬性路由也會使用 `IActionConstraint`，因此可能導致來自不同控制器的動作被視為候選項目。
+就概念而言，`IActionConstraint` 是一種「多載」形式，但它會在符合相同 URL　的動作之間進行多載，而不是多載具有相同名稱的方法。 屬性路由也會使用 `IActionConstraint`，因此可能導致來自不同控制器的動作被視為候選項目。
 
 <a name="iactionconstraint-impl-ref-label"></a>
 
@@ -1632,7 +1632,7 @@ public class CountrySpecificAttribute : Attribute, IActionConstraint
 
 您必須負責實作 `Accept` 方法，並選擇 'Order' 作為要執行的條件約束。 在本例中，`Accept` 方法會傳回 `true`，表示當 `country` 路由值相符時動作會符合。 這與 `RouteValueAttribute` 不同，後者允許切換回未使用屬性的動作。 此範例顯示如果您定義 `en-US` 動作，則 `fr-FR` 等國碼 (地區碼) 會切換回未套用 `[CountrySpecific(...)]` 的更泛型控制器。
 
-`Order` 屬性決定條件約束所屬的「階段」  。 群組中的動作條件約束會根據 `Order` 來執行。 例如，架構提供的所有 HTTP 方法屬性都會使用相同的 `Order` 值，以便在同一個階段中執行。 您可以視需要擁有許多階段來實作所需的原則。
+`Order` 屬性決定條件約束所屬的「階段」。 群組中的動作條件約束會根據 `Order` 來執行。 例如，架構提供的所有 HTTP 方法屬性都會使用相同的 `Order` 值，以便在同一個階段中執行。 您可以視需要擁有許多階段來實作所需的原則。
 
 > [!TIP]
 > 若要決定 `Order` 的值，請考慮是否應該在 HTTP 方法之前套用條件約束。 數值愈低會愈先執行。

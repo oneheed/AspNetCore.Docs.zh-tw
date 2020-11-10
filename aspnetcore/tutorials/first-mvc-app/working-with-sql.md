@@ -3,7 +3,7 @@ title: 第5部分：使用 ASP.NET Core MVC 應用程式中的資料庫
 author: rick-anderson
 description: 第5部分：將模型新增至 ASP.NET Core MVC 應用程式
 ms.author: riande
-ms.date: 8/16/2019
+ms.date: 11/10/2020
 no-loc:
 - appsettings.json
 - ASP.NET Core Identity
@@ -17,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: tutorials/first-mvc-app/working-with-sql
-ms.openlocfilehash: f893aa1041a42c12514b825fb3c8e96a6104358d
-ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
+ms.openlocfilehash: c082457258346637499b8ea8000dd8792931112f
+ms.sourcegitcommit: 91e14f1e2a25c98a57c2217fe91b172e0ff2958c
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 10/30/2020
-ms.locfileid: "93051573"
+ms.lasthandoff: 11/10/2020
+ms.locfileid: "94422648"
 ---
 # <a name="part-5-work-with-a-database-in-an-aspnet-core-mvc-app"></a>第5部分：使用 ASP.NET Core MVC 應用程式中的資料庫
 
@@ -58,11 +58,11 @@ ASP.NET Core [組態](xref:fundamentals/configuration/index)系統會讀取 `Con
 
 LocalDB 為輕量版的 SQL Server Express Database Engine，鎖定程式開發為其目標。 LocalDB 會依需求啟動，並以使用者模式執行，因此沒有複雜的組態。 根據預設，LocalDB 資料庫會在 *C：/Users/{user}* 目錄中建立 *.mdf 檔案。*
 
-* 從 [檢視]  功能表中，開啟 [SQL Server 物件總管]  (SSOX)。
+* 從 [檢視] 功能表中，開啟 [SQL Server 物件總管] (SSOX)。
 
   ![檢視功能表](working-with-sql/_static/ssox.png)
 
-* 以滑鼠右鍵按一下 `Movie` 資料表 > [檢視表設計工具] 
+* 以滑鼠右鍵按一下 `Movie` 資料表 > [檢視表設計工具]
 
   ![在電影資料表上開啟操作功能表](working-with-sql/_static/design.png)
 
@@ -70,7 +70,7 @@ LocalDB 為輕量版的 SQL Server Express Database Engine，鎖定程式開發�
 
 請注意 `ID` 旁的索引鍵圖示。 根據預設，EF 會將名為 `ID` 的屬性設為主索引鍵。
 
-* 以滑鼠右鍵按一下 `Movie` 資料表 > [檢視資料] 
+* 以滑鼠右鍵按一下 `Movie` 資料表 > [檢視資料]
 
   ![在電影資料表上開啟操作功能表](working-with-sql/_static/ssox2.png)
 
@@ -103,7 +103,7 @@ if (context.Movie.Any())
 
 ### <a name="add-the-seed-initializer"></a>新增種子初始設定式
 
-以下列程式碼取代 *Program.cs* 的內容：
+使用下列程式碼取代 *Program.cs* 的內容：
 
 [!code-csharp[](~/tutorials/first-mvc-app/start-mvc/sample/MvcMovie3/Program.cs)]
 
@@ -114,7 +114,7 @@ if (context.Movie.Any())
 * 刪除資料庫中的所有記錄。 您可以使用瀏覽器或 SSOX 的刪除連結來執行這項操作。
 * 強制應用程式初始化 (呼叫 `Startup` 類別中的方法)，以執行植入方法。 若要強制初始化，IIS Express 必須停止並重新啟動。 您可以使用下列其中一個方法來執行此工作：
 
-  * 以滑鼠右鍵按一下通知區域中的 IIS Express 系統匣圖示，然後點選 [結束]  或 [停止網站] 
+  * 以滑鼠右鍵按一下通知區域中的 IIS Express 系統匣圖示，然後點選 [結束] 或 [停止網站]
 
     ![IIS Express 系統匣圖示](working-with-sql/_static/iisExIcon.png)
 
@@ -170,11 +170,11 @@ ASP.NET Core [組態](xref:fundamentals/configuration/index)系統會讀取 `Con
 
 LocalDB 為輕量版的 SQL Server Express Database Engine，鎖定程式開發為其目標。 LocalDB 會依需求啟動，並以使用者模式執行，因此沒有複雜的組態。 根據預設，LocalDB 資料庫會在 *C：/Users/{user}* 目錄中建立 *.mdf 檔案。*
 
-* 從 [檢視]  功能表中，開啟 [SQL Server 物件總管]  (SSOX)。
+* 從 [檢視] 功能表中，開啟 [SQL Server 物件總管] (SSOX)。
 
   ![檢視功能表](working-with-sql/_static/ssox.png)
 
-* 以滑鼠右鍵按一下 `Movie` 資料表 > [檢視表設計工具] 
+* 以滑鼠右鍵按一下 `Movie` 資料表 > [檢視表設計工具]
 
   ![在電影資料表上開啟操作功能表](working-with-sql/_static/design.png)
 
@@ -182,7 +182,7 @@ LocalDB 為輕量版的 SQL Server Express Database Engine，鎖定程式開發�
 
 請注意 `ID` 旁的索引鍵圖示。 根據預設，EF 會將名為 `ID` 的屬性設為主索引鍵。
 
-* 以滑鼠右鍵按一下 `Movie` 資料表 > [檢視資料] 
+* 以滑鼠右鍵按一下 `Movie` 資料表 > [檢視資料]
 
   ![在電影資料表上開啟操作功能表](working-with-sql/_static/ssox2.png)
 
@@ -215,7 +215,7 @@ if (context.Movie.Any())
 
 ### <a name="add-the-seed-initializer"></a>新增種子初始設定式
 
-以下列程式碼取代 *Program.cs* 的內容：
+使用下列程式碼取代 *Program.cs* 的內容：
 
 [!code-csharp[](~/tutorials/first-mvc-app/start-mvc/sample/MvcMovie22/Program.cs)]
 
@@ -226,7 +226,7 @@ if (context.Movie.Any())
 * 刪除資料庫中的所有記錄。 您可以使用瀏覽器或 SSOX 的刪除連結來執行這項操作。
 * 強制應用程式初始化 (呼叫 `Startup` 類別中的方法)，以執行植入方法。 若要強制初始化，IIS Express 必須停止並重新啟動。 您可以使用下列其中一個方法來執行此工作：
 
-  * 以滑鼠右鍵按一下通知區域中的 IIS Express 系統匣圖示，然後點選 [結束]  或 [停止網站] 
+  * 以滑鼠右鍵按一下通知區域中的 IIS Express 系統匣圖示，然後點選 [結束] 或 [停止網站]
 
     ![IIS Express 系統匣圖示](working-with-sql/_static/iisExIcon.png)
 

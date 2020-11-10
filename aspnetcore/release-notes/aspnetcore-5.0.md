@@ -18,12 +18,12 @@ no-loc:
 - SignalR
 - Kestrel
 uid: aspnetcore-5.0
-ms.openlocfilehash: e9c74f7b45ebcdffc19a0483b4e98ad2f44d5747
-ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
+ms.openlocfilehash: 1f377f3be54ed8837d2857aed64c2d055ed9f582
+ms.sourcegitcommit: 91e14f1e2a25c98a57c2217fe91b172e0ff2958c
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 10/30/2020
-ms.locfileid: "93061765"
+ms.lasthandoff: 11/10/2020
+ms.locfileid: "94422583"
 ---
 # <a name="whats-new-in-aspnet-core-50"></a>ASP.NET Core 5.0 的新功能
 
@@ -224,6 +224,8 @@ Blazor WebAssembly 應用程式啟動效能可透過延後載入部分應用程�
 
 ## SignalR
 
+### <a name="no-locsignalr-hub-filters"></a>SignalR 中樞篩選
+
 SignalR 中樞篩選（在 ASP.NET 中稱為中樞管線 SignalR ）是一項功能，可讓程式碼在呼叫中樞方法之前和之後執行。 呼叫中樞方法之前和之後執行程式碼，類似于中介軟體在 HTTP 要求之前和之後執行程式碼的能力。 常見用途包括記錄、錯誤處理和引數驗證。
 
 如需詳細資訊，請參閱[使用 ASP.NET Core SignalR 中的中樞篩選](xref:signalr/hub-filters)。
@@ -355,7 +357,7 @@ See [Update SignalR code](xref:migration/31-to-50#signalr) for migration instruc
 
 在 .NET 5.0 之前，為 ASP.NET Core 應用程式建立和發佈 *Dockerfile* 需要提取整個 .NET Core SDK 和 ASP.NET Core 映射。 在此版本中，會減少提取 SDK 映射位元組，並大幅消除 ASP.NET Core 映射提取的位元組。 如需詳細資訊，請參閱 [此 GitHub 問題批註](https://github.com/dotnet/dotnet-docker/issues/1814#issuecomment-625294750)。
 
-## <a name="authentication-and-authorization"></a>驗證與授權
+## <a name="authentication-and-authorization"></a>驗證和授權
 
 ### <a name="azure-active-directory-authentication-with-microsoftno-locidentityweb"></a>使用 Microsoft 驗證 Identity Azure Active Directory。Web
 

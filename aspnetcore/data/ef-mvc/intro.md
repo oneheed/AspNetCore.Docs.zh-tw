@@ -19,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: data/ef-mvc/intro
-ms.openlocfilehash: ef1d94ce7a0aa853336260b8d73b9d4036c907ac
-ms.sourcegitcommit: bb475e69cb647f22cf6d2c6f93d0836c160080d7
+ms.openlocfilehash: a815502bb8aa97c137ea8940c7e5f1dde79e9999
+ms.sourcegitcommit: fe5a287fa6b9477b130aa39728f82cdad57611ee
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 11/06/2020
-ms.locfileid: "94340006"
+ms.lasthandoff: 11/10/2020
+ms.locfileid: "94430883"
 ---
 # <a name="tutorial-get-started-with-ef-core-in-an-aspnet-mvc-web-app"></a>教學課程：開始使用 ASP.NET MVC web 應用程式中的 EF Core
 
@@ -38,7 +38,7 @@ Contoso 大學範例 web ap 示範如何使用 Entity Framework (EF) Core 和 Vi
 
 這個範例應用程式是虛構的 Contoso 大學網站。 其中包括的功能有學生入學許可、課程建立、教師指派。 這是一系列教學課程中的第一篇，說明如何建立 Contoso 大學範例應用程式。
 
-## <a name="prerequisites"></a>必要條件
+## <a name="prerequisites"></a>先決條件
 
 * 如果您是 ASP.NET Core MVC 的新手，請先完成 [ASP.NET CORE mvc](xref:tutorials/first-mvc-app/start-mvc) 教學課程系列的「開始使用」，再開始這一系列。
 
@@ -76,7 +76,7 @@ If you choose to use SQLite, download and install a third-party tool for managin
 1. 啟動 Visual Studio，然後選取 [建立新專案]。
 1. 在 [ **建立新專案** ] 對話方塊中，選取 [ **ASP.NET Core Web 應用程式** > **]** 。
 1. 在 [ **設定您的新專案** ] 對話方塊中，輸入 [ `ContosoUniversity` **專案名稱** ]。 請務必使用此完整名稱（包括大小寫），以便 `namespace` 在複製程式碼時使用每個相符專案。
-1. 選取 [建立]  。
+1. 選取 [建立]。
 1. 在 [ **建立新的 ASP.NET Core web 應用程式** ] 對話方塊中，選取：
     1. 下拉式清單中的 **.Net Core** 和 **ASP.NET Core 5.0** 。
     1. **ASP.NET Core Web 應用程式 (模型-視圖控制器)** 。
@@ -113,8 +113,8 @@ EF SQL Server 套件及其相依性， `Microsoft.EntityFrameworkCore` 以及 `M
 新增 [AspNetCore Microsoft.entityframeworkcore](https://www.nuget.org/packages/Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore) nuget 套件和 [AspNetCore. microsoft.entityframeworkcore](https://www.nuget.org/packages/Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore) nuget 套件中的程式。 在 [Program Manager 主控台] (PMC) 中，輸入下列命令以新增 NuGet 套件：
 
 ```powershell
-Install-Package Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore -Version 5.0.0-rc.2.20475.17
-Install-Package Microsoft.EntityFrameworkCore.SqlServer -Version 5.0.0-rc.2.20475.6
+Install-Package Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore
+Install-Package Microsoft.EntityFrameworkCore.SqlServer
 ```
 
 `Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore`NuGet 套件提供 EF Core 錯誤頁面 ASP.NET Core 中介軟體。 此中介軟體有助於偵測並診斷 EF Core 遷移的錯誤。
@@ -283,11 +283,11 @@ EF 會建立空的資料庫。 在本節中，會加入在建立資料庫之後�
 * 在 **方案總管** 中，以滑鼠右鍵按一下 `Controllers` 資料夾，然後選取 [ **加入 > 新的 scaffold 專案** ]。
 * 在 [新增 Scaffold] 對話方塊中：
   * 選取 [使用 Entity Framework 執行檢視的 MVC 控制器]。
-  * 按一下 [新增]  。 [ **Entity Framework 使用 Scaffold 新增 MVC 控制器** ] 對話方塊隨即出現： ![ Student](intro/_static/scaffold-student2.png)
+  * 按一下 [新增] 。 [ **Entity Framework 使用 Scaffold 新增 MVC 控制器** ] 對話方塊隨即出現： ![ Student](intro/_static/scaffold-student2.png)
   * 在 [ **模型類別** ] 中選取 [ **Student** ]。
   * 在 [ **資料內容類別** ] 中，選取 [ **SchoolCoNtext** ]。
   * 接受預設的 **StudentsController** 作為名稱。
-  * 按一下 [新增]  。
+  * 按一下 [新增] 。
 
 Visual Studio 的樣板引擎會建立一個檔案 `StudentsController.cs` ，以及一組 `*.cshtml` 與控制器一起使用的 (檔案) 。
 
@@ -402,7 +402,7 @@ Contoso 大學範例 Web 應用程式示範如何使用 Entity Framework (EF) Co
 
 這個範例應用程式是虛構的 Contoso 大學網站。 其中包括的功能有學生入學許可、課程建立、教師指派。 這是說明如何從零開始建立 Contoso 大學範例應用程式教學課程系列中的第一頁。
 
-## <a name="prerequisites"></a>必要條件
+## <a name="prerequisites"></a>先決條件
 
 * [.NET Core SDK 2.2](https://dotnet.microsoft.com/download)
 * 包含下列工作負載的 [Visual Studio 2019](https://visualstudio.microsoft.com/downloads/?utm_medium=microsoft&utm_source=docs.microsoft.com&utm_campaign=inline+link&utm_content=download+vs2019)：
@@ -612,11 +612,11 @@ Entity Framework 會為您建立空白資料庫。 在本節中，您會撰寫�
 * 在方案總管中的 **Controllers** 資料夾上以滑鼠右鍵按一下，然後選取 [新增] > [新增 Scaffold 項目]。
 * 在 [新增 Scaffold] 對話方塊中：
   * 選取 [使用 Entity Framework 執行檢視的 MVC 控制器]。
-  * 按一下 [新增]  。 [ **Entity Framework 使用 Scaffold 新增 MVC 控制器** ] 對話方塊隨即出現： ![ Student](intro/_static/scaffold-student2.png)
+  * 按一下 [新增] 。 [ **Entity Framework 使用 Scaffold 新增 MVC 控制器** ] 對話方塊隨即出現： ![ Student](intro/_static/scaffold-student2.png)
   * 在 [模型類別] 中，選取 [Student]。
   * 在 [資料內容類別] 中，選取 [SchoolContext]。
   * 接受預設的 **StudentsController** 作為名稱。
-  * 按一下 [新增]  。
+  * 按一下 [新增] 。
 
 Visual Studio 的樣板引擎會建立一個 *StudentsController.cs* 檔案和一組與控制器 (的 *cshtml* 檔案) 的視圖。
 

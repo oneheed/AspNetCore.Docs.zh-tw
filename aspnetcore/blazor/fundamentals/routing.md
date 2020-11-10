@@ -19,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/fundamentals/routing
-ms.openlocfilehash: 5898059d83576cd0d2af15ad61bc399cbfbe0e99
-ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
+ms.openlocfilehash: 8f0aa80d092b6678131a2b7152f21ecb8e168257
+ms.sourcegitcommit: fe5a287fa6b9477b130aa39728f82cdad57611ee
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 10/30/2020
-ms.locfileid: "93055850"
+ms.lasthandoff: 11/10/2020
+ms.locfileid: "94430987"
 ---
 # <a name="aspnet-core-no-locblazor-routing"></a>ASP.NET Core Blazor 路由
 
@@ -223,7 +223,7 @@ endpoints.MapFallbackToPage("/example/{param?}", "/_Host");
 
 ::: moniker range="< aspnetcore-5.0"
 
-在 .NET 5 候選版 1 (RC1) 或更新版本中，ASP.NET Core 支援全部攔截路由參數。 *
+ASP.NET Core 5.0 或更新版本中支援 Catch-all 路由參數。
 
 ::: moniker-end
 

@@ -5,7 +5,7 @@ description: 瞭解如何建立和使用 Razor 元件，包括如何系結至資
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 08/19/2020
+ms.date: 11/09/2020
 no-loc:
 - appsettings.json
 - ASP.NET Core Identity
@@ -19,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/components/index
-ms.openlocfilehash: d30f40945a3b2799dfc2d9391bba37eee1bfdc18
-ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
+ms.openlocfilehash: 0f02bc3a92b9f62eb0e3efea0cd780ad6d09bef5
+ms.sourcegitcommit: fe5a287fa6b9477b130aa39728f82cdad57611ee
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 10/30/2020
-ms.locfileid: "93056266"
+ms.lasthandoff: 11/10/2020
+ms.locfileid: "94431000"
 ---
 # <a name="create-and-use-aspnet-core-no-locrazor-components"></a>建立和使用 ASP.NET Core Razor 元件
 
@@ -628,12 +628,26 @@ public class NotifierService
 
 ## <a name="overwritten-parameters"></a>覆寫的參數
 
-當父元件轉譯中時，會提供新的參數值（通常會覆寫現有的參數值）。
+Blazor架構通常會施加安全的父系對子參數指派：
 
-請考慮下列 `Expander` 元件：
+* 未預期地覆寫參數。
+* 最小化副作用。 例如，會避免其他轉譯，因為它們可能會建立無限的轉譯迴圈。
+
+當父元件轉譯中時，子元件會收到可能覆寫現有值的新參數值。 在使用一或多個資料系結參數開發元件時，通常會發生不小心覆寫子元件中的參數值，而開發人員則會直接寫入子系中的參數：
+
+* 子元件會以父元件中的一或多個參數值來呈現。
+* 子系直接寫入參數的值。
+* 父元件會轉譯中並覆寫子系參數的值。
+
+覆寫辨識值的可能也會延伸至子元件的屬性 setter。
+
+**我們的一般指引是不要建立直接寫入其本身參數的元件。**
+
+請考慮下列有問題的 `Expander` 元件：
 
 * 轉譯子內容。
-* 切換使用元件參數顯示子內容。
+* 切換 () ，以元件參數顯示子內容 `Expanded` 。
+* 元件會直接寫入 `Expanded` 參數，以示範覆寫參數的問題，應該予以避免。
 
 ```razor
 <div @onclick="@Toggle" class="card bg-light mb-3" style="width:30rem">
@@ -685,7 +699,7 @@ public class NotifierService
 
 * 接受 `Expanded` 來自父系的元件參數值。
 * 將元件參數值指派給 *private field* `expanded` [OnInitialized 事件](xref:blazor/components/lifecycle#component-initialization-methods)中 () 的私用欄位。
-* 使用私用欄位來維護其內部切換狀態。
+* 使用私用欄位來維護其內部切換狀態，以示範如何避免直接寫入參數。
 
 ```razor
 <div @onclick="@Toggle" class="card bg-light mb-3" style="width:30rem">
@@ -719,6 +733,8 @@ public class NotifierService
     }
 }
 ```
+
+如需詳細資訊，請參閱[ Blazor (dotnet/aspnetcore #24599) 的雙向](https://github.com/dotnet/aspnetcore/issues/24599)系結錯誤。 
 
 ## <a name="apply-an-attribute"></a>套用屬性
 

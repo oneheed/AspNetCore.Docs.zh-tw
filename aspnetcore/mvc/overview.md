@@ -17,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: mvc/overview
-ms.openlocfilehash: c55421efa1fd559f462549bfaceb794d4a9c35b8
-ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
+ms.openlocfilehash: 4f0e98057c03769a672ef350cc3ec724a4f7e721
+ms.sourcegitcommit: fe5a287fa6b9477b130aa39728f82cdad57611ee
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 10/30/2020
-ms.locfileid: "93059308"
+ms.lasthandoff: 11/10/2020
+ms.locfileid: "94431052"
 ---
 # <a name="overview-of-aspnet-core-mvc"></a>ASP.NET Core MVC 概觀
 
@@ -76,7 +76,7 @@ ASP.NET Core MVC 包括下列各項：
 * [模型驗證](#model-validation)
 * [相依性插入](../fundamentals/dependency-injection.md)
 * [篩選條件](#filters)
-* [區域](#areas)
+* [區](#areas)
 * [Web API](#web-apis)
 * [可測試性](#testability)
 * [Razor 查看引擎](#razor-view-engine)
@@ -88,13 +88,13 @@ ASP.NET Core MVC 包括下列各項：
 
 ASP.NET Core MVC 是以 [ASP.NET Core 路由](../fundamentals/routing.md)為建置基礎且功能強大的 URL 對應元件，可讓您建置具有可理解且可搜尋之 URL 的應用程式。 這可讓您定義適用於搜尋引擎最佳化 (SEO) 和連結產生的應用程式 URL 命名模式，而不需要考慮如何在網頁伺服器上組織檔案。 您可以使用方便且支援路由值條件約束、預設值和選用值的路由範本語法，來定義您的路由。
 
-「以慣例為基礎的路由」  可讓您全域定義應用程式接受的的 URL 格式，以及每種格式如何對應至指定控制器上的特定動作方法。 當收到內送要求時，路由引擎會剖析 URL 定並將它對應至其中一個已定義的 URL 格式，再呼叫關聯控制器的動作方法。
+「以慣例為基礎的路由」可讓您全域定義應用程式接受的的 URL 格式，以及每種格式如何對應至指定控制器上的特定動作方法。 當收到內送要求時，路由引擎會剖析 URL 定並將它對應至其中一個已定義的 URL 格式，再呼叫關聯控制器的動作方法。
 
 ```csharp
 routes.MapRoute(name: "Default", template: "{controller=Home}/{action=Index}/{id?}");
 ```
 
-「屬性路由」  可讓您指定路由資訊，方法是使用定義應用程式路由的屬性來裝飾控制器和動作。 這表示路由定義會緊接著其所關聯的控制器和動作。
+「屬性路由」可讓您指定路由資訊，方法是使用定義應用程式路由的屬性來裝飾控制器和動作。 這表示路由定義會緊接著其所關聯的控制器和動作。
 
 ```csharp
 [Route("api/[controller]")]
@@ -182,7 +182,7 @@ ASP.NET Core 內建[相依性插入 (DI)](../fundamentals/dependency-injection.m
 public class AccountController : Controller
 ```
 
-### <a name="areas"></a>區域
+### <a name="areas"></a>區
 
 [區域](controllers/areas.md) 提供將大型 ASP.NET Core MVC Web 應用程式分割成較小功能群組的方式。 一個區域是應用程式內的一個 MVC 結構。 在 MVC 專案中，模型、控制器和檢視等邏輯元件會保留在不同的資料夾中，而且 MVC 會使用命名慣例來建立這些元件之間的關聯性。 針對大型應用程式，將應用程式分割成個別高功能層級區域可能較有利。 例如，電子商務應用程式具有多個業務單位，例如結帳、帳單和搜尋等等。上述每個單位都有自己的邏輯元件視圖、控制器和模型。
 
@@ -270,4 +270,4 @@ Razor MVC 中的 views 可以根據您的模型以強型別為基礎。 控制�
 ## <a name="additional-resources"></a>其他資源
 
 * [MyTested. AspNetCore：適用于 ASP.NET CORE mvc](https://github.com/ivaylokenov/MyTested.AspNetCore.Mvc)：強型別單元測試程式庫的，提供流暢的介面來測試 mvc 和 web API 應用程式。  ( *不會受到 Microsoft 的維護或支援* ) 
-* <xref:blazor/components/integrate-components-into-razor-pages-and-mvc-apps>
+* <xref:blazor/components/prerendering-and-integration>

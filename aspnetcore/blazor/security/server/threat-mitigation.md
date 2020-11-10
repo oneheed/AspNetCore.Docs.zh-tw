@@ -5,7 +5,7 @@ description: 瞭解如何降低應用程式的安全性威脅 Blazor Server 。
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 05/05/2020
+ms.date: 11/09/2020
 no-loc:
 - appsettings.json
 - ASP.NET Core Identity
@@ -19,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/security/server/threat-mitigation
-ms.openlocfilehash: 5c3a002a8e3df030d53c8625597342a68ca0d4b5
-ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
+ms.openlocfilehash: 0e8b26110a970526b5f6306da236a92f52e64604
+ms.sourcegitcommit: fe5a287fa6b9477b130aa39728f82cdad57611ee
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 10/30/2020
-ms.locfileid: "93055408"
+ms.lasthandoff: 11/10/2020
+ms.locfileid: "94430949"
 ---
 # <a name="threat-mitigation-guidance-for-aspnet-core-no-locblazor-server"></a>ASP.NET Core 的威脅風險降低指導方針 Blazor Server
 
@@ -101,9 +101,12 @@ Blazor 用戶端會針對每個會話建立單一連線，只要開啟瀏覽器�
     * 需要驗證才能連線到應用程式，並追蹤每位使用者的作用中會話。
     * 在達到限制時拒絕新的會話。
     * Proxy WebSocket 透過使用 proxy 連線到應用程式，例如將分離信號從用戶端連線到應用程式的 [Azure SignalR 服務](/azure/azure-signalr/signalr-overview) 。 這會提供比單一用戶端可以建立的連接容量更大的應用程式，以防止用戶端耗盡與伺服器的連線。
-  * 在伺服器層級：在應用程式前面使用 proxy/閘道。 例如， [Azure Front Door](/azure/frontdoor/front-door-overview) 可讓您定義、管理及監視應用程式之 web 流量的全域路由。
+  * 在伺服器層級：在應用程式前面使用 proxy/閘道。 例如， [Azure Front Door](/azure/frontdoor/front-door-overview) 可讓您定義、管理及監視應用程式之 web 流量的全域路由，並在 Blazor Server 應用程式設定為使用長時間輪詢時運作。
+  
+    > [!NOTE]
+    > 雖然應用程式支援長時間輪詢 Blazor Server ，但 [websocket 是建議的傳輸通訊協定](xref:blazor/host-and-deploy/server#azure-signalr-service)。 [Azure Front Door](/azure/frontdoor/front-door-overview) 目前不支援 websocket，但在未來的服務版本中，會針對 websocket 的支援進行考慮。
 
-## <a name="denial-of-service-dos-attacks"></a>拒絕服務 (DoS) 攻擊
+## <a name="denial-of-service-dos-attacks"></a>拒絕服務 (DoS) 的攻擊
 
 阻絕服務 (DoS) 攻擊涉及用戶端，導致伺服器耗盡其一或多個資源，使應用程式無法使用。 Blazor Server 應用程式包含一些預設限制，並且依賴其他 ASP.NET Core 和 SignalR 限制來防止設定為的 DoS 攻擊 <xref:Microsoft.AspNetCore.Components.Server.CircuitOptions> 。
 

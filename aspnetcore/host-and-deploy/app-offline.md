@@ -19,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: host-and-deploy/iis/app-offline
-ms.openlocfilehash: 4d71b95680a9b160ebb25116e35096495a2eaf93
-ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
+ms.openlocfilehash: 29f3fc5ecd18196d914a46629bc9eb50b183bf61
+ms.sourcegitcommit: fe5a287fa6b9477b130aa39728f82cdad57611ee
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 10/30/2020
-ms.locfileid: "93058645"
+ms.lasthandoff: 11/10/2020
+ms.locfileid: "94431026"
 ---
 # <a name="app-offline-file-app_offlinehtm"></a>應用程式離線檔 (`app_offline.htm`) 
 
@@ -47,11 +47,12 @@ ASP.NET Core 模組會使用應用程式離線檔 (`app_offline.htm`) 來關閉�
 ```powershell
 $pathToApp = '{PATH TO APP}'
 
-New-Item -Path $pathToApp app_offline.htm
+
+New-Item -Path $pathToApp -Name "app_offline.htm" -ItemType "file"
 
 # Provide script commands here to deploy the app
 
-Remove-Item -Path $pathToApp app_offline.htm
+Remove-Item -Path $pathToApp\app_offline.htm
 ```
 
 在先前的 PowerShell 腳本中：

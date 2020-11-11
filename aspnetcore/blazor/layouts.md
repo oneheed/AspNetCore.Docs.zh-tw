@@ -19,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/layouts
-ms.openlocfilehash: 13b5c9db04cf23377aadc4e4f61f23855c2fd492
-ms.sourcegitcommit: fe5a287fa6b9477b130aa39728f82cdad57611ee
+ms.openlocfilehash: 9462b73ad67394e79de08e7d2b13bf6a3145a04e
+ms.sourcegitcommit: 1be547564381873fe9e84812df8d2088514c622a
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 11/10/2020
-ms.locfileid: "94430935"
+ms.lasthandoff: 11/11/2020
+ms.locfileid: "94507963"
 ---
 # <a name="aspnet-core-no-locblazor-layouts"></a>ASP.NET Core Blazor 版面配置
 
@@ -41,13 +41,23 @@ ms.locfileid: "94430935"
 
 下列程式碼範例會顯示 Razor 版面配置元件的範本 `MainLayout.razor` 。 版面配置會繼承 <xref:Microsoft.AspNetCore.Components.LayoutComponentBase> 並設定 `@Body` 導覽列和頁尾之間的：
 
-[!code-razor[](layouts/sample_snapshot/3.x/MainLayout.razor?highlight=1,13)]
+[!code-razor[](layouts/sample_snapshot/3.x/MainLayout.razor)]
 
 ## <a name="mainlayout-component"></a>`MainLayout` 元件
 
 在以其中一個專案範本為基礎的應用程式中 Blazor ， `MainLayout` (`MainLayout.razor`) 元件位於應用程式的 `Shared` 資料夾中：
 
+::: moniker range=">= aspnetcore-5.0"
+
+[!code-razor[](./common/samples/5.x/BlazorWebAssemblySample/Shared/MainLayout.razor)]
+
+::: moniker-end
+
+::: moniker range="< aspnetcore-5.0"
+
 [!code-razor[](./common/samples/3.x/BlazorWebAssemblySample/Shared/MainLayout.razor)]
+
+::: moniker-end
 
 ## <a name="default-layout"></a>預設配置
 

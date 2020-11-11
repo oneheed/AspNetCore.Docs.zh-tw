@@ -19,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/forms-validation
-ms.openlocfilehash: cd613b2b76b8e876786988fdcefc0e7275d3bf53
-ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
+ms.openlocfilehash: fe232b40a2255732dd375cc266937576d5b2d5d9
+ms.sourcegitcommit: 1be547564381873fe9e84812df8d2088514c622a
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 10/30/2020
-ms.locfileid: "93056058"
+ms.lasthandoff: 11/11/2020
+ms.locfileid: "94507820"
 ---
 # <a name="aspnet-core-no-locblazor-forms-and-validation"></a>ASP.NET Core Blazor 表單和驗證
 
@@ -71,7 +71,7 @@ public class ExampleModel
 
 * 表單會 `name` 使用型別中定義的驗證來驗證欄位中的使用者輸入 `ExampleModel` 。 此模型會在元件的區塊中建立 `@code` ，並保存在私用欄位中 (`exampleModel`) 。 此欄位會指派給專案的 `Model` 屬性 `<EditForm>` 。
 * <xref:Microsoft.AspNetCore.Components.Forms.InputText>元件的系結 `@bind-Value` ：
-  * 模型屬性 (`exampleModel.Name`) 至 <xref:Microsoft.AspNetCore.Components.Forms.InputText> 元件的 `Value` 屬性。 如需屬性系結的詳細資訊，請參閱 <xref:blazor/components/data-binding#parent-to-child-binding-with-component-parameters> 。
+  * 模型屬性 (`exampleModel.Name`) 至 <xref:Microsoft.AspNetCore.Components.Forms.InputText> 元件的 `Value` 屬性。 如需屬性系結的詳細資訊，請參閱 <xref:blazor/components/data-binding#binding-with-component-parameters> 。
   * 元件屬性的變更事件委派 <xref:Microsoft.AspNetCore.Components.Forms.InputText> `ValueChanged` 。
 * <xref:Microsoft.AspNetCore.Components.Forms.DataAnnotationsValidator>[驗證程式元件](#validator-components)會附加使用資料批註的驗證支援。
 * 此 <xref:Microsoft.AspNetCore.Components.Forms.ValidationSummary> 元件會摘要說明驗證訊息。

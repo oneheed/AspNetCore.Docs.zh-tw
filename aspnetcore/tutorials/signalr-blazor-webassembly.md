@@ -5,7 +5,7 @@ description: 建立搭配使用 ASP.NET Core 的聊天應用 SignalR 程式 Blaz
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 10/01/2020
+ms.date: 11/11/2020
 no-loc:
 - appsettings.json
 - ASP.NET Core Identity
@@ -19,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: tutorials/signalr-blazor-webassembly
-ms.openlocfilehash: 81cbfb692ffbd0bb6335ccef6dd10ad6c20fb334
-ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
+ms.openlocfilehash: afbfc44db8cb833df7a79061f9bd73052859fec2
+ms.sourcegitcommit: 1be547564381873fe9e84812df8d2088514c622a
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 10/30/2020
-ms.locfileid: "93052692"
+ms.lasthandoff: 11/11/2020
+ms.locfileid: "94508171"
 ---
 # <a name="use-aspnet-core-no-locsignalr-with-no-locblazor-webassembly"></a>搭配使用 SignalR ASP.NET Core Blazor WebAssembly
 
@@ -49,8 +49,7 @@ ms.locfileid: "93052692"
 
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
-<!-- * [Visual Studio 2019 16.8 or later](https://visualstudio.microsoft.com/downloads/?utm_medium=microsoft&utm_source=docs.microsoft.com&utm_campaign=inline+link&utm_content=download+vs2019) with the **ASP.NET and web development** workload -->
-* [Visual Studio 2019 16.8 或更新版本 (在](https://visualstudio.microsoft.com/vs/preview/) **ASP.NET 和 網頁程式開發** 工作負載的預覽) 中
+* 使用 **ASP.NET 和 網頁程式開發** 工作負載 [Visual Studio 2019 16.8 或更新版本](https://visualstudio.microsoft.com/downloads/?utm_medium=microsoft&utm_source=docs.microsoft.com&utm_campaign=inline+link&utm_content=download+vs2019)
 * [!INCLUDE [.NET Core 5.0 SDK](~/includes/5.0-SDK.md)]
 
 # <a name="visual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code)
@@ -59,8 +58,7 @@ ms.locfileid: "93052692"
 
 # <a name="visual-studio-for-mac"></a>[Visual Studio for Mac](#tab/visual-studio-mac)
 
-<!-- * [Visual Studio for Mac version 8.8 or later (in preview)](https://visualstudio.microsoft.com/vs/mac/) -->
-* [Visual Studio for Mac 8.8 版或更新版本 (預覽版) ](/visualstudio/releasenotes/vs2019-mac-preview-relnotes)
+* [Visual Studio for Mac 8.8 版或更新版本](https://visualstudio.microsoft.com/vs/mac/)
 * [!INCLUDE [.NET Core 5.0 SDK](~/includes/5.0-SDK.md)]
 
 # <a name="net-core-cli"></a>[.NET Core CLI](#tab/netcore-cli/)
@@ -147,9 +145,9 @@ ms.locfileid: "93052692"
 
 1. 在側邊欄中，選取 [ **Web] 和 [主控台**  >  **應用程式** ]。
 
-1. 選擇 **Blazor WebAssembly 應用程式** 範本。 選取 [下一步]  。
+1. 選擇 **Blazor WebAssembly 應用程式** 範本。 選取 [下一步]。
 
-1. 確認 [ **驗證** ] 設定為 [ **無驗證** ]。 選取 [ **主控 ASP.NET Core** ] 核取方塊。 選取 [下一步]  。
+1. 確認 [ **驗證** ] 設定為 [ **無驗證** ]。 選取 [ **主控 ASP.NET Core** ] 核取方塊。 選取 [下一步]。
 
 1. 在 [ **專案名稱** ] 欄位中，為應用程式命名 `BlazorSignalRApp` 。 選取 [建立]。
 

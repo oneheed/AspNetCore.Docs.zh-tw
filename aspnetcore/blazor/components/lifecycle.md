@@ -5,7 +5,7 @@ description: 瞭解如何 Razor 在 ASP.NET Core apps 中使用元件生命週�
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 10/14/2020
+ms.date: 11/06/2020
 no-loc:
 - appsettings.json
 - ASP.NET Core Identity
@@ -19,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/components/lifecycle
-ms.openlocfilehash: 30dfd9e821490d016d1d2be5c4cfd56818d46655
-ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
+ms.openlocfilehash: 08fc393160e0a7396963901e2add3b44fc7b02b9
+ms.sourcegitcommit: 1be547564381873fe9e84812df8d2088514c622a
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 10/30/2020
-ms.locfileid: "93056370"
+ms.lasthandoff: 11/11/2020
+ms.locfileid: "94507997"
 ---
 # <a name="aspnet-core-no-locblazor-lifecycle"></a>ASP.NET Core Blazor 生命週期
 
@@ -40,7 +40,7 @@ ms.locfileid: "93056370"
    * 建立元件的實例。
    * 執行屬性插入。 執行 [`SetParametersAsync`](#before-parameters-are-set) 。
    * 呼叫 [`OnInitialized{Async}`](#component-initialization-methods) 。 如果 <xref:System.Threading.Tasks.Task> 傳回，則 <xref:System.Threading.Tasks.Task> 會等待，然後轉譯元件。 如果 <xref:System.Threading.Tasks.Task> 未傳回，則會轉譯元件。
-1. 呼叫 [`OnParametersSet{Async}`](#after-parameters-are-set) 。 如果 <xref:System.Threading.Tasks.Task> 傳回，則 <xref:System.Threading.Tasks.Task> 會等待，然後轉譯元件。 如果 <xref:System.Threading.Tasks.Task> 未傳回，則會轉譯元件。
+1. 呼叫 [`OnParametersSet{Async}`](#after-parameters-are-set) 並呈現元件。 如果 <xref:System.Threading.Tasks.Task> 從傳回，則 `OnParametersSetAsync` <xref:System.Threading.Tasks.Task> 會等待，然後元件會保存。
 
 ![：：： No loc (Razor) ：：： component in：：： no-loc (Blazor) ：：：的元件生命週期事件](lifecycle/_static/lifecycle1.png)
 

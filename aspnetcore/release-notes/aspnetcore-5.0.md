@@ -18,12 +18,12 @@ no-loc:
 - SignalR
 - Kestrel
 uid: aspnetcore-5.0
-ms.openlocfilehash: 1f377f3be54ed8837d2857aed64c2d055ed9f582
-ms.sourcegitcommit: 91e14f1e2a25c98a57c2217fe91b172e0ff2958c
+ms.openlocfilehash: e25549d557dd971d0f2f4d67a182574f07138acb
+ms.sourcegitcommit: 1be547564381873fe9e84812df8d2088514c622a
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 11/10/2020
-ms.locfileid: "94422583"
+ms.lasthandoff: 11/11/2020
+ms.locfileid: "94508119"
 ---
 # <a name="whats-new-in-aspnet-core-50"></a>ASP.NET Core 5.0 的新功能
 
@@ -130,7 +130,7 @@ OpenAPI 預設為啟用，web API 開發人員的應用程式啟動體驗 (F5) �
 
 ## Blazor
 
-### <a name="performance-improvements"></a>效能改進
+### <a name="performance-improvements"></a>效能改善
 
 針對 .NET 5，我們對執行時間效能進行了大幅改善， Blazor WebAssembly 並將焦點放在複雜的 UI 轉譯和 JSON 序列化。 在我們的效能測試中， Blazor WebAssembly 在大部分情況下，.net 5 的速度會快二到三倍。 如需詳細資訊，請參閱 [ASP.NET Blog： .net 5 候選版1中的 ASP.NET Core 更新](https://devblogs.microsoft.com/aspnet/asp-net-core-updates-in-net-5-release-candidate-1/#blazor-webassembly-performance-improvements)。
 
@@ -328,7 +328,7 @@ See [Update SignalR code](xref:migration/31-to-50#signalr) for migration instruc
 
 伺服器名稱指示 (SNI) 是 TLS 延伸模組，可將虛擬網域納入 SSL 協商的一部分。 這實際上是指虛擬功能變數名稱（或主機名稱）可以用來識別網路端點。
 
-## <a name="performance-improvements"></a>效能改進
+## <a name="performance-improvements"></a>效能改善
 
 ### <a name="http2"></a>HTTP/2
 
@@ -410,13 +410,14 @@ endpoints.MapGet("/weather/{city:alpha}", async context =>
 
 ### <a name="frombodyattribute"></a>FromBodyAttribute
 
-<xref:Microsoft.AspNetCore.Mvc.FromBodyAttribute> 允許支援設定允許將這些參數或屬性視為選擇性的選項：
+<xref:Microsoft.AspNetCore.Mvc.FromBodyAttribute> 現在支援設定可將這些參數或屬性視為選擇性的選項：
 
 ```csharp
 public IActionResult Post([FromBody(EmptyBodyBehavior = EmptyBodyBehavior.Allow)]
-                           MyModel model) {
-     ...
-     }
+                          MyModel model)
+{
+    ...
+}
 ```
 
 ## <a name="miscellaneous-improvements"></a>其他改進

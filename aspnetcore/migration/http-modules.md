@@ -17,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: migration/http-modules
-ms.openlocfilehash: 9664f49bd709d2c9e46130773211c339e391d1f6
-ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
+ms.openlocfilehash: 4abba1d4304bf537bd96623527c851d9d15774a4
+ms.sourcegitcommit: 1be547564381873fe9e84812df8d2088514c622a
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 10/30/2020
-ms.locfileid: "93060699"
+ms.lasthandoff: 11/11/2020
+ms.locfileid: "94508158"
 ---
 # <a name="migrate-http-handlers-and-modules-to-aspnet-core-middleware"></a>將 HTTP 處理常式和模組遷移至 ASP.NET Core 中介軟體
 
@@ -357,7 +357,7 @@ public async Task Invoke(HttpContext context)
 
 **HttpCoNtext. TransmitFile**
 
-在 [中介軟體和要求功能](xref:fundamentals/request-features#middleware-and-request-features)中會討論如何提供檔案。
+提供檔案的相關討論 <xref:fundamentals/request-features> 。
 
 **HttpCoNtext. 標頭**
 
@@ -397,6 +397,6 @@ public async Task Invoke(HttpContext httpContext)
 ## <a name="additional-resources"></a>其他資源
 
 * [HTTP 處理常式和 HTTP 模組總覽](/iis/configuration/system.webserver/)
-* [Configuration](xref:fundamentals/configuration/index)
+* [設定](xref:fundamentals/configuration/index)
 * [應用程式啟動](xref:fundamentals/startup)
 * [中介軟體](xref:fundamentals/middleware/index)

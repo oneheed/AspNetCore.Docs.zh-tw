@@ -19,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/security/webassembly/additional-scenarios
-ms.openlocfilehash: 88970b0e53b456467bdc2218a3a6b943bbbf0df5
-ms.sourcegitcommit: d64bf0cbe763beda22a7728c7f10d07fc5e19262
+ms.openlocfilehash: baed18df2d127b592f420aac0432e0b28f076d46
+ms.sourcegitcommit: 1be547564381873fe9e84812df8d2088514c622a
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 11/03/2020
-ms.locfileid: "93234383"
+ms.lasthandoff: 11/11/2020
+ms.locfileid: "94508041"
 ---
 # <a name="aspnet-core-no-locblazor-webassembly-additional-security-scenarios"></a>ASP.NET Core Blazor WebAssembly 額外的安全性案例
 
@@ -616,7 +616,7 @@ builder.Services.AddSingleton<StateContainer>();
 
 根據預設，連結 [`Microsoft.AspNetCore.Components.WebAssembly.Authentication`](https://www.nuget.org/packages/Microsoft.AspNetCore.Components.WebAssembly.Authentication) 庫會使用下表所示的路由來表示不同的驗證狀態。
 
-| 路由                            | 用途 |
+| 路由                            | 目的 |
 | -------------------------------- | ------- |
 | `authentication/login`           | 觸發登入操作。 |
 | `authentication/login-callback`  | 處理任何登入作業的結果。 |
@@ -834,13 +834,9 @@ public class Program
     public static async Task Main(string[] args)
     {
         var builder = WebAssemblyHostBuilder.CreateDefault(args);
-        builder.RootComponents.Add<App>("app");
+        builder.RootComponents.Add...;
 
-        builder.Services.AddScoped(sp => 
-            new HttpClient
-            {
-                BaseAddress = new Uri(builder.HostEnvironment.BaseAddress)
-            });
+        builder.Services.AddScoped( ... );
 
         services.Add...;
 

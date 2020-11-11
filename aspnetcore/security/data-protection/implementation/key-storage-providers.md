@@ -17,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: security/data-protection/implementation/key-storage-providers
-ms.openlocfilehash: 36e8bc494125d0770347ddf32390365d83a91d27
-ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
+ms.openlocfilehash: 6a70183ce4b1a129ef213300473b233a5ef822f9
+ms.sourcegitcommit: fbd5427293d9ecccc388bd5fd305c2eb8ada7281
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 10/30/2020
-ms.locfileid: "93051742"
+ms.lasthandoff: 11/10/2020
+ms.locfileid: "94463882"
 ---
 # <a name="key-storage-providers-in-aspnet-core"></a>ASP.NET Core 中的金鑰儲存提供者
 
@@ -47,7 +47,7 @@ public void ConfigureServices(IServiceCollection services)
 
 ## <a name="azure-storage"></a>Azure 儲存體
 
-[AspNetCore. DataProtection. AzureStorage](https://www.nuget.org/packages/Microsoft.AspNetCore.DataProtection.AzureStorage/)封裝可讓您將資料保護金鑰儲存在 Azure Blob 儲存體中。 您可以在 web 應用程式的數個實例之間共用金鑰。 應用程式可以 cookie 在多部伺服器之間共用驗證或 CSRF 保護。
+[AspNetCore. DataProtection blob](https://www.nuget.org/packages/Azure.Extensions.AspNetCore.DataProtection.Blobs)封裝可讓您將資料保護金鑰儲存在 Azure Blob 儲存體中。 您可以在 web 應用程式的數個實例之間共用金鑰。 應用程式可以 cookie 在多部伺服器之間共用驗證或 CSRF 保護。
 
 若要設定 Azure Blob 儲存體提供者，請呼叫其中一個 [PersistKeysToAzureBlobStorage](/dotnet/api/microsoft.aspnetcore.dataprotection.azuredataprotectionbuilderextensions.persistkeystoazureblobstorage) 多載。
 
@@ -59,15 +59,12 @@ public void ConfigureServices(IServiceCollection services)
 }
 ```
 
-如果 web 應用程式是以 Azure 服務的形式執行，則可以使用 [AppAuthentication](https://www.nuget.org/packages/Microsoft.Azure.Services.AppAuthentication/)自動建立驗證權杖。
+如果 web 應用程式是以 Azure 服務的形式執行，則可以使用連接字串來 [透過 azure 儲存體](https://docs.microsoft.com/dotnet/api/azure.storage.blobs.blobcontainerclient)驗證 azure 儲存體。
 
 ```csharp
-var tokenProvider = new AzureServiceTokenProvider();
-var token = await tokenProvider.GetAccessTokenAsync("https://storage.azure.com/");
-var credentials = new StorageCredentials(new TokenCredential(token));
-var storageAccount = new CloudStorageAccount(credentials, "mystorageaccount", "core.windows.net", useHttps: true);
-var client = storageAccount.CreateCloudBlobClient();
-var container = client.GetContainerReference("my-key-container");
+string connectionString = "<connection_string>";
+string containerName = "my-key-container";
+BlobContainerClient container = new BlobContainerClient(connectionString, containerName);
 
 // optional - provision the container automatically
 await container.CreateIfNotExistsAsync();
@@ -76,7 +73,11 @@ services.AddDataProtection()
     .PersistKeysToAzureBlobStorage(container, "keys.xml");
 ```
 
-請參閱設定 [服務對服務驗證的更多詳細資料。](/azure/key-vault/service-to-service-authentication)
+> [!NOTE]
+> 您可以在 Azure 入口網站中的 [存取金鑰] 區段底下，或藉由執行下列 CLI 命令，在 Azure 入口網站中找到儲存體帳戶的連接字串： 
+> ```bash
+> az storage account show-connection-string --name <account_name> --resource-group <resource_group>
+> ```
 
 ## <a name="redis"></a>Redis
 

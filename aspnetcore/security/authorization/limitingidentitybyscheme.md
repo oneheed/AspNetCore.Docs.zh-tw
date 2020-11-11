@@ -18,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: security/authorization/limitingidentitybyscheme
-ms.openlocfilehash: 4dc86480d40d8ee40b3c03aa7fd2994e6c15b105
-ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
+ms.openlocfilehash: a5f2dff7b0e0d4f209ba445b2efb6fb261cbaab1
+ms.sourcegitcommit: fbd5427293d9ecccc388bd5fd305c2eb8ada7281
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 10/30/2020
-ms.locfileid: "93053120"
+ms.lasthandoff: 11/10/2020
+ms.locfileid: "94464012"
 ---
 # <a name="authorize-with-a-specific-scheme-in-aspnet-core"></a>使用 ASP.NET Core 中的特定配置進行授權
 
@@ -152,3 +152,5 @@ public void ConfigureServices(IServiceCollection services)
 由於預設授權原則遭到覆寫，因此可以 `[Authorize]` 在控制器中使用屬性。 然後，控制器會接受第一個或第二個簽發者所發出的 JWT 要求。
 
 ::: moniker-end
+
+請參閱 [此 GitHub](https://github.com/dotnet/aspnetcore/issues/26002) 有關使用多個驗證配置的問題。

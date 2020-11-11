@@ -18,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: security/authentication/index
-ms.openlocfilehash: eb8c5b3c66f9a0d845d6a1d58c69e6fddefa5b0b
-ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
+ms.openlocfilehash: e9e4ca11d20557666c75b84e56af825d002df0f1
+ms.sourcegitcommit: fbd5427293d9ecccc388bd5fd305c2eb8ada7281
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 10/30/2020
-ms.locfileid: "93053380"
+ms.lasthandoff: 11/10/2020
+ms.locfileid: "94463999"
 ---
 # <a name="overview-of-aspnet-core-authentication"></a>ASP.NET Core 驗證的總覽
 
@@ -92,14 +92,14 @@ services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
 
 ### <a name="authenticate"></a>Authenticate
 
-驗證配置的驗證動作會負責根據要求內容來建立使用者的身分識別。 它會傳回 <xref:Microsoft.AspNetCore.Authentication.AuthenticateResult> ，指出驗證是否成功，以及使用者在驗證票證中的身分識別。 請參閱 <xref:Microsoft.AspNetCore.Authentication.AuthenticationHttpContextExtensions.AuthenticateAsync%2A>。 驗證範例包括：
+驗證配置的驗證動作會負責根據要求內容來建立使用者的身分識別。 它會傳回 <xref:Microsoft.AspNetCore.Authentication.AuthenticateResult> ，指出驗證是否成功，以及使用者在驗證票證中的身分識別。 請參閱<xref:Microsoft.AspNetCore.Authentication.AuthenticationHttpContextExtensions.AuthenticateAsync%2A>。 驗證範例包括：
 
 * cookie從建立使用者身分識別的驗證配置 cookie 。
 * JWT 持有人配置還原序列化和驗證 JWT 持有人權杖，以建立使用者的身分識別。
 
 ### <a name="challenge"></a>挑戰
 
-當未驗證的使用者要求需要驗證的端點時，會在授權中叫用驗證挑戰。 例如，當匿名使用者要求受限的資源，或按一下登入連結時，就會發出驗證挑戰。 授權會使用指定的驗證配置 (s) 來叫用挑戰，如果未指定，則會使用預設值。 請參閱 <xref:Microsoft.AspNetCore.Authentication.AuthenticationHttpContextExtensions.ChallengeAsync%2A>。 驗證挑戰範例包括：
+當未驗證的使用者要求需要驗證的端點時，會在授權中叫用驗證挑戰。 例如，當匿名使用者要求受限的資源，或按一下登入連結時，就會發出驗證挑戰。 授權會使用指定的驗證配置 (s) 來叫用挑戰，如果未指定，則會使用預設值。 請參閱<xref:Microsoft.AspNetCore.Authentication.AuthenticationHttpContextExtensions.ChallengeAsync%2A>。 驗證挑戰範例包括：
 
 * 將 cookie 使用者重新導向至登入頁面的驗證配置。
 * JWT 持有人配置傳回401結果與 `www-authenticate: bearer` 標頭。
@@ -108,7 +108,7 @@ services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
 
 ### <a name="forbid"></a>禁止
 
-當已驗證的使用者嘗試存取不允許存取的資源時，授權會呼叫驗證配置的禁止動作。 請參閱 <xref:Microsoft.AspNetCore.Authentication.AuthenticationHttpContextExtensions.ForbidAsync%2A>。 驗證禁止的範例包括：
+當已驗證的使用者嘗試存取不允許存取的資源時，授權會呼叫驗證配置的禁止動作。 請參閱<xref:Microsoft.AspNetCore.Authentication.AuthenticationHttpContextExtensions.ForbidAsync%2A>。 驗證禁止的範例包括：
 * 將 cookie 使用者重新導向至表示禁止存取之頁面的驗證配置。
 * JWT 持有人配置傳回403結果。
 * 重新導向至使用者可要求存取資源之頁面的自訂驗證配置。
@@ -141,3 +141,4 @@ Orchard Core 為：
 * <xref:security/authentication/policyschemes>
 * <xref:security/authorization/secure-data>
 * [全球需要經過驗證的使用者](xref:security/authorization/secure-data#rau)
+* [使用多個驗證配置的 GitHub 問題](https://github.com/dotnet/aspnetcore/issues/26002)

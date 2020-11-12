@@ -1,10 +1,10 @@
 ---
-title: HTTP 複製遙測
+title: HttpRepl 遙測
 author: scottaddie
-description: 瞭解 HTTP 複寫所收集的遙測。
+description: 瞭解 HttpRepl 收集的遙測資料。
 monikerRange: '>= aspnetcore-2.1'
 ms.author: scaddie
-ms.date: 11/10/2020
+ms.date: 11/11/2020
 no-loc:
 - appsettings.json
 - ASP.NET Core Identity
@@ -18,20 +18,20 @@ no-loc:
 - Razor
 - SignalR
 uid: web-api/http-repl/telemetry
-ms.openlocfilehash: 8590959e43c2dda69090acb358e740b271426a44
-ms.sourcegitcommit: fb72e9c1ae5b279817f1fb4b46a52170449b6f30
+ms.openlocfilehash: 5ff22753f566c494e51dae67c8c4f6371211be78
+ms.sourcegitcommit: 202144092067ea81be1dbb229329518d781dbdfb
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 11/11/2020
-ms.locfileid: "94502021"
+ms.lasthandoff: 11/12/2020
+ms.locfileid: "94550604"
 ---
-# <a name="http-repl-telemetry"></a>HTTP 複製遙測
+# <a name="httprepl-telemetry"></a>HttpRepl 遙測
 
-[HTTP 讀取-評估-列印迴圈 (複製) ](xref:web-api/http-repl)包含可收集使用量資料的遙測功能。 HTTP 複寫小組必須瞭解工具的使用方式，才能加以改善。
+[HttpRepl](xref:web-api/http-repl)包含收集使用量資料的遙測功能。 HttpRepl 小組必須瞭解工具的使用方式，才能加以改善。
 
 ## <a name="how-to-opt-out"></a>如何選擇退出
 
-預設會啟用 HTTP 複製遙測功能。 若要退出遙測功能，請將 `DOTNET_HTTPREPL_TELEMETRY_OPTOUT` 環境變數設定為 `1` 或 `true`。
+預設會啟用 HttpRepl 遙測功能。 若要退出遙測功能，請將 `DOTNET_HTTPREPL_TELEMETRY_OPTOUT` 環境變數設定為 `1` 或 `true`。
 
 ## <a name="disclosure"></a>公開
 
@@ -40,8 +40,10 @@ ms.locfileid: "94502021"
 ```console
 Telemetry
 ---------
-The .NET Core tools collect usage data in order to help us improve your experience. It is collected by Microsoft and shared with the community. You can opt-out of telemetry by setting the DOTNET_HTTPREPL_TELEMETRY_OPTOUT environment variable to '1' or 'true' using your favorite shell.
+The .NET tools collect usage data in order to help us improve your experience. It is collected by Microsoft and shared with the community. You can opt-out of telemetry by setting the DOTNET_HTTPREPL_TELEMETRY_OPTOUT environment variable to '1' or 'true' using your favorite shell.
 ```
+
+若要隱藏「第一次執行」經驗文字，請將 `DOTNET_HTTPREPL_SKIP_FIRST_TIME_EXPERIENCE` 環境變數設為 `1` 或 `true` 。
 
 ## <a name="data-points"></a>資料點
 
@@ -68,7 +70,7 @@ The .NET Core tools collect usage data in order to help us improve your experien
 | >= 5。0        | 工具是否正在容器中執行。 |
 | >= 5。0        | 雜湊媒體存取控制 (MAC) 位址：密碼編譯 (SHA256) 雜湊和唯一的機器識別碼。 |
 | >= 5。0        | 核心版本。 |
-| >= 5。0        | HTTP 複寫版本。 |
+| >= 5。0        | HttpRepl 版本。 |
 | >= 5。0        | 工具是否以 `help` 、 `run` 或 `connect` 引數啟動。 不會收集實際的引數值。 |
 | >= 5。0        | 叫用的命令 (例如 `get`) ，以及是否成功。 |
 | >= 5。0        | 針對 `connect` 命令，是否 `root` `base` 提供、或 `openapi` 引數。 不會收集實際的引數值。 |

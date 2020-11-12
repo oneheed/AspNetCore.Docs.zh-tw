@@ -1,11 +1,11 @@
 ---
-title: 使用 HTTP REPL 來測試 web API
+title: 使用 HttpRepl 測試 web Api
 author: scottaddie
-description: 了解如何使用 HTTP REPL .NET Core 全域工具來瀏覽和測試 ASP.NET Core Web API。
+description: 瞭解如何使用 HttpRepl .NET Core 通用工具來流覽和測試 ASP.NET Core web API。
 monikerRange: '>= aspnetcore-2.1'
 ms.author: scaddie
 ms.custom: mvc, devx-track-azurecli
-ms.date: 11/10/2020
+ms.date: 11/11/2020
 no-loc:
 - appsettings.json
 - ASP.NET Core Identity
@@ -19,14 +19,14 @@ no-loc:
 - Razor
 - SignalR
 uid: web-api/http-repl
-ms.openlocfilehash: 81174b551c5b6d81e6ac80975f7f77ee6664059d
-ms.sourcegitcommit: fb72e9c1ae5b279817f1fb4b46a52170449b6f30
+ms.openlocfilehash: df2d4e63a18471b4c5f4f1c9434921303bb1da8a
+ms.sourcegitcommit: 202144092067ea81be1dbb229329518d781dbdfb
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 11/11/2020
-ms.locfileid: "94502022"
+ms.lasthandoff: 11/12/2020
+ms.locfileid: "94550617"
 ---
-# <a name="test-web-apis-with-the-http-repl"></a>使用 HTTP REPL 來測試 web API
+# <a name="test-web-apis-with-the-httprepl"></a>使用 HttpRepl 測試 web Api
 
 作者：[Scott Addie](https://twitter.com/Scott_Addie)
 
@@ -48,13 +48,13 @@ HTTP「讀取、求值、輸出」迴圈 (REPL) 是：
 
 若要跟著做，[請檢視或下載範例 ASP.NET Core web API](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/web-api/http-repl/samples) ([如何下載](xref:index#how-to-download-a-sample))。
 
-## <a name="prerequisites"></a>先決條件
+## <a name="prerequisites"></a>Prerequisites
 
 * [!INCLUDE [2.1-SDK](~/includes/2.1-SDK.md)]
 
 ## <a name="installation"></a>安裝
 
-若要安裝 HTTP REPL，請執行下列命令：
+若要安裝 HttpRepl，請執行下列命令：
 
 ```dotnetcli
 dotnet tool install -g Microsoft.dotnet-httprepl
@@ -62,15 +62,15 @@ dotnet tool install -g Microsoft.dotnet-httprepl
 
 會從 [Microsoft.dotnet-httprepl](https://www.nuget.org/packages/Microsoft.dotnet-httprepl) \(英文\) NuGet 套件安裝 [.NET Core 全域工具](/dotnet/core/tools/global-tools#install-a-global-tool)。
 
-## <a name="usage"></a>使用量
+## <a name="usage"></a>使用方式
 
-成功安裝工具後，請執行以下命令來啟動 HTTP REPL：
+成功安裝工具之後，請執行下列命令來啟動 HttpRepl：
 
 ```console
 httprepl
 ```
 
-若要檢視可用的 HTTP REPL 命令，請執行以下其中一個命令：
+若要查看可用的 HttpRepl 命令，請執行下列其中一個命令：
 
 ```console
 httprepl -h
@@ -135,7 +135,7 @@ Use `help <COMMAND>` for more detail on an individual command. e.g. `help get`.
 For detailed tool info, see https://aka.ms/http-repl-doc.
 ```
 
-HTTP REPL 提供命令完成。 按 <kbd>Tab</kbd> 鍵會逐一查看完成您所鍵入之字元或 API 端點的命令清單。 下列各節將概述可用的 CLI 命令。
+HttpRepl 會提供命令完成。 按 <kbd>Tab</kbd> 鍵會逐一查看完成您所鍵入之字元或 API 端點的命令清單。 下列各節將概述可用的 CLI 命令。
 
 ## <a name="connect-to-the-web-api"></a>連線至 web API
 
@@ -151,7 +151,7 @@ httprepl <ROOT URI>
 httprepl https://localhost:5001
 ```
 
-或是在 HTTP REPL 執行期間執行以下命令：
+或者，在 HttpRepl 執行時隨時執行下列命令：
 
 ```console
 connect <ROOT URI>
@@ -252,9 +252,9 @@ https://localhost:5001/> cd people
 https://localhost:5001/people>
 ```
 
-## <a name="customize-the-http-repl"></a>自訂 HTTP REPL
+## <a name="customize-the-httprepl"></a>自訂 HttpRepl
 
-您可自訂 HTTP RPEL 的預設[色彩](#set-color-preferences)。 此外，還可定義[預設文字編輯器](#set-the-default-text-editor)。 HTTP REPL 喜好設定會存在目前的各工作階段，且會套用至後續的工作階段。 修改後，喜好設定會儲存在以下檔案中：
+您可以自訂 HttpRepl 的預設 [色彩](#set-color-preferences) 。 此外，還可定義[預設文字編輯器](#set-the-default-text-editor)。 HttpRepl 喜好設定會保存在目前的會話中，並在未來的會話中接受。 修改後，喜好設定會儲存在以下檔案中：
 
 # <a name="linux"></a>[Linux](#tab/linux)
 
@@ -295,7 +295,7 @@ colors.status=BoldYellow
 
 ### <a name="set-color-preferences"></a>設定色彩喜好設定
 
-目前僅為 JSON 支援回應著色。 若要自訂預設 HTTP REPL 工具著色，請找到與所要變更之色彩相對應的機碼。 如需如何尋找機碼的指示，請參閱[檢視設定](#view-the-settings)一節。 舉例來說，將 `colors.json` 機碼值從 `Green` 變更為 `White`，如下所示：
+目前僅為 JSON 支援回應著色。 若要自訂預設 HttpRepl 工具色彩，請找出對應到要變更之色彩的索引鍵。 如需如何尋找機碼的指示，請參閱[檢視設定](#view-the-settings)一節。 舉例來說，將 `colors.json` 機碼值從 `Green` 變更為 `White`，如下所示：
 
 ```console
 https://localhost:5001/people> pref set colors.json White
@@ -358,7 +358,7 @@ pref set formatting.json.indentSize 4
 
 ### <a name="set-the-default-text-editor"></a>設定預設文字編輯器
 
-根據預設，HTTP REPL 並未設定要使用的文字編輯器。 您必須設定預設文字編輯器，才能測試需要 HTTP 要求本文的 web API 方法。 HTTP REPL 工具會啟動設定的文字編輯器，僅針對撰寫要求本文的目的使用。 請執行以下命令，來將您偏好的文字編輯器設為預設：
+根據預設，HttpRepl 沒有設定為使用的文字編輯器。 您必須設定預設文字編輯器，才能測試需要 HTTP 要求本文的 web API 方法。 HttpRepl 工具會針對撰寫要求本文的唯一目的，啟動已設定的文字編輯器。 請執行以下命令，來將您偏好的文字編輯器設為預設：
 
 ```console
 pref set editor.command.default "<EXECUTABLE>"
@@ -386,7 +386,7 @@ pref set editor.command.default "C:\Program Files\Microsoft VS Code\Code.exe"
 
 ---
 
-若要以特定 CLI 引數啟動預設文字編輯器，請設定 `editor.command.default.arguments` 機碼。 假設 Visual Studio Code 是預設文字編輯器，且您希望 HTTP REPL 在新的工作階段開啟 Visual Studio Code，但停用延伸模組。 執行以下命令：
+若要以特定 CLI 引數啟動預設文字編輯器，請設定 `editor.command.default.arguments` 機碼。 例如，假設 Visual Studio Code 是預設文字編輯器，而且您一律希望 HttpRepl 在已停用擴充功能的新會話中開啟 Visual Studio Code。 執行以下命令：
 
 ```console
 pref set editor.command.default.arguments "--disable-extensions --new-window"
@@ -397,7 +397,7 @@ pref set editor.command.default.arguments "--disable-extensions --new-window"
 
 ### <a name="set-the-openapi-description-search-paths"></a>設定 OpenAPI Description 搜尋路徑
 
-根據預設，HTTP 複寫會有一組相對路徑，用來在執行不含選項的命令時尋找 OpenAPI 描述 `connect` `--openapi` 。 這些相對路徑會與 `connect` 命令中指定的根路徑和基本路徑結合。 預設的相對路徑為：
+根據預設，HttpRepl 在執行命令時，會使用一組相對路徑來尋找 OpenAPI 描述（ `connect` 沒有 `--openapi` 選項）。 這些相對路徑會與 `connect` 命令中指定的根路徑和基本路徑結合。 預設的相對路徑為：
 
 - *swagger.js開啟*
 - *swagger/v1/swagger.js開啟*
@@ -440,7 +440,7 @@ get <PARAMETER> [-F|--no-formatting] [-h|--header] [--response:body] [--response
 
 相關控制器動作方法預期的路由參數 (如果有的話)。
 
-### <a name="options"></a>選項
+### <a name="options"></a>選項。
 
 以下是使用 `get` 命令時可用的選項：
 
@@ -524,7 +524,7 @@ post <PARAMETER> [-c|--content] [-f|--file] [-h|--header] [--no-body] [-F|--no-f
 
 相關控制器動作方法預期的路由參數 (如果有的話)。
 
-### <a name="options"></a>選項
+### <a name="options"></a>選項。
 
 [!INCLUDE [standard CLI options](~/includes/http-repl/standard-options.md)]
 
@@ -594,7 +594,7 @@ put <PARAMETER> [-c|--content] [-f|--file] [-h|--header] [--no-body] [-F|--no-fo
 
 相關控制器動作方法預期的路由參數 (如果有的話)。
 
-### <a name="options"></a>選項
+### <a name="options"></a>選項。
 
 [!INCLUDE [standard CLI options](~/includes/http-repl/standard-options.md)]
 
@@ -709,7 +709,7 @@ delete <PARAMETER> [-F|--no-formatting] [-h|--header] [--response] [--response:b
 
 相關控制器動作方法預期的路由參數 (如果有的話)。
 
-### <a name="options"></a>選項
+### <a name="options"></a>選項。
 
 [!INCLUDE [standard CLI options](~/includes/http-repl/standard-options.md)]
 
@@ -796,7 +796,7 @@ patch <PARAMETER> [-c|--content] [-f|--file] [-h|--header] [--no-body] [-F|--no-
 
 相關控制器動作方法預期的路由參數 (如果有的話)。
 
-### <a name="options"></a>選項
+### <a name="options"></a>選項。
 
 [!INCLUDE [standard CLI options](~/includes/http-repl/standard-options.md)]
 
@@ -816,7 +816,7 @@ head <PARAMETER> [-F|--no-formatting] [-h|--header] [--response] [--response:bod
 
 相關控制器動作方法預期的路由參數 (如果有的話)。
 
-### <a name="options"></a>選項
+### <a name="options"></a>選項。
 
 [!INCLUDE [standard CLI options](~/includes/http-repl/standard-options.md)]
 
@@ -834,7 +834,7 @@ options <PARAMETER> [-F|--no-formatting] [-h|--header] [--response] [--response:
 
 相關控制器動作方法預期的路由參數 (如果有的話)。
 
-### <a name="options"></a>選項
+### <a name="options"></a>選項。
 
 [!INCLUDE [standard CLI options](~/includes/http-repl/standard-options.md)]
 
@@ -864,7 +864,7 @@ options <PARAMETER> [-F|--no-formatting] [-h|--header] [--response] [--response:
 
 ## <a name="test-secured-endpoints"></a>測試安全的端點
 
-HTTP 複寫可透過下列方式支援保護端點的測試：
+HttpRepl 可透過下列方式支援保護端點的測試：
 
 * 透過登入使用者的預設認證。
 * 透過使用 HTTP 要求標頭。
@@ -907,7 +907,7 @@ HTTP 複寫可透過下列方式支援保護端點的測試：
 set header Authorization "bearer <TOKEN VALUE>"
 ```
 
-若要存取 Azure 託管端點或使用 [azure REST API](/rest/api/azure/)，您需要持有人權杖。 使用下列步驟，透過 [Azure CLI](/cli/azure/)為您的 Azure 訂用帳戶取得持有人權杖。 HTTP 複寫會在 HTTP 要求標頭中設定持有人權杖。 已抓取 Azure App Service Web Apps 清單。
+若要存取 Azure 託管端點或使用 [azure REST API](/rest/api/azure/)，您需要持有人權杖。 使用下列步驟，透過 [Azure CLI](/cli/azure/)為您的 Azure 訂用帳戶取得持有人權杖。 HttpRepl 會在 HTTP 要求標頭中設定持有人權杖。 已抓取 Azure App Service Web Apps 清單。
 
 1. 登入 Azure：
 
@@ -933,7 +933,7 @@ set header Authorization "bearer <TOKEN VALUE>"
     az account get-access-token --query accessToken
     ```
 
-1. 透過 HTTP 複寫連接至 Azure REST API：
+1. 透過 HttpRepl 連接到 Azure REST API：
 
     ```console
     httprepl https://management.azure.com
@@ -1041,7 +1041,7 @@ Request echoing is off
 
 ## <a name="run-a-script"></a>執行指令碼
 
-如果您經常執行一組相同的 HTTP REPL 命令，請考慮將它們儲存在文字檔中。 檔案中的命令所採用的格式，與在命令列上手動執行的命令相同。 您可使用 `run` 命令以批次的方式執行命令。 例如：
+如果您經常執行一組相同的 HttpRepl 命令，請考慮將它們儲存在文字檔中。 檔案中的命令所採用的格式，與在命令列上手動執行的命令相同。 您可使用 `run` 命令以批次的方式執行命令。 例如：
 
 1. 建立包含一組以新行分隔命令的文字檔。 為了說明，請參考包含以下命令的 *people-script.txt* 檔案：
 
@@ -1096,7 +1096,7 @@ Request echoing is off
 
 ## <a name="clear-the-output"></a>清除輸出
 
-若要移除由 HTTP REPL 工具寫入命令殼層的所有輸出，請執行 `clear` 或 `cls` 命令。 為了說明，請參考包含以下輸出的命令殼層：
+若要移除 HttpRepl 工具寫入命令 shell 的所有輸出，請執行 `clear` 或 `cls` 命令。 為了說明，請參考包含以下輸出的命令殼層：
 
 ```console
 httprepl https://localhost:5001
@@ -1126,4 +1126,4 @@ https://localhost:5001/>
 ## <a name="additional-resources"></a>其他資源
 
 * [REST API 要求](https://github.com/microsoft/api-guidelines/blob/vNext/Guidelines.md#74-supported-methods)
-* [HTTP REPL GitHub 存放庫](https://github.com/dotnet/HttpRepl)
+* [HttpRepl GitHub 存放庫](https://github.com/dotnet/HttpRepl)

@@ -3,7 +3,7 @@ title: 第2部分：加入模型
 author: rick-anderson
 description: 頁面上教學課程系列的第2部分 Razor 。 在本節中，會加入模型類別。
 ms.author: riande
-ms.date: 09/30/2020
+ms.date: 11/11/2020
 no-loc:
 - Index
 - Create
@@ -20,12 +20,12 @@ no-loc:
 - Razor
 - SignalR
 uid: tutorials/razor-pages/model
-ms.openlocfilehash: ee1b7d77d8d209a11669ba29c8a951c59368180e
-ms.sourcegitcommit: 342588e10ae0054a6d6dc0fd11dae481006be099
+ms.openlocfilehash: 6244ac8798fb470a88802389961968fb52bd3c0a
+ms.sourcegitcommit: 202144092067ea81be1dbb229329518d781dbdfb
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 11/07/2020
-ms.locfileid: "94361026"
+ms.lasthandoff: 11/12/2020
+ms.locfileid: "94550664"
 ---
 # <a name="part-2-add-a-model-to-a-no-locrazor-pages-app-in-aspnet-core"></a>第2部分：在 ASP.NET Core 中將模型新增至 Razor 頁面應用程式
 
@@ -97,7 +97,7 @@ ms.locfileid: "94361026"
 
 將連接字串新增至檔案，如下列醒目提示的程式 *appsettings.json* 代碼所示：
 
-[!code-json[](~/tutorials/razor-pages/razor-pages-start/sample/RazorPagesMovie30/appsettings_SQLite.json?highlight=10-12)]
+[!code-json[](~/tutorials/razor-pages/razor-pages-start/sample/RazorPagesMovie50/appsettings_SQLite.json?highlight=10-12)]
 
 <a name="reg"></a>
 
@@ -112,7 +112,7 @@ ms.locfileid: "94361026"
 
 1. 使用中的相依性 [插入](xref:fundamentals/dependency-injection) 容器來註冊資料庫內容 `Startup.ConfigureServices` ：
 
-   [!code-csharp[](~/tutorials/razor-pages/razor-pages-start/sample/RazorPagesMovie30/Startup.cs?name=snippet_UseSqlite&highlight=11-12)]
+   [!code-csharp[](~/tutorials/razor-pages/razor-pages-start/sample/RazorPagesMovie50/Startup.cs?name=snippet_UseSqlite&highlight=5-6)]
 
 # <a name="visual-studio-for-mac"></a>[Visual Studio for Mac](#tab/visual-studio-mac)
 
@@ -190,7 +190,7 @@ ms.locfileid: "94361026"
 
 <a name="codegenerator"></a> 下表詳細說明 ASP.NET Core 程式碼產生器選項。
 
-| 選項               | 說明|
+| 選項               | Description|
 | ----------------- | ------------ |
 | `-m`  | 模型的名稱。 |
 | `-dc`  | 要使用的 `DbContext` 類別。 |
@@ -477,7 +477,7 @@ using Microsoft.EntityFrameworkCore;
 
 使用[相依性插入](xref:fundamentals/dependency-injection)容器，在 `Startup.ConfigureServices` 中註冊資料庫內容。
 
-[!code-csharp[](~/tutorials/razor-pages/razor-pages-start/sample/RazorPagesMovie30/Startup.cs?name=snippet_UseSqlite&highlight=11-12)]
+[!code-csharp[](~/tutorials/razor-pages/razor-pages-start/sample/RazorPagesMovie30/Startup.cs?name=snippet_UseSqlite&highlight=5-6)]
 
 # <a name="visual-studio-for-mac"></a>[Visual Studio for Mac](#tab/visual-studio-mac)
 
@@ -557,7 +557,7 @@ Create*Pages/電影* 資料夾：
 
 <a name="codegenerator"></a> 下表詳細說明 ASP.NET Core 程式碼產生器選項：
 
-| 選項               | 說明|
+| 選項               | Description|
 | ----------------- | ------------ |
 | `-m`  | 模型的名稱。 |
 | `-dc`  | 要使用的 `DbContext` 類別。 |
@@ -834,7 +834,7 @@ Login failed for user 'User-name'.
 
 將連接字串新增至檔案，如下列醒目提示的程式 *appsettings.json* 代碼所示：
 
-[!code-json[](~/tutorials/razor-pages/razor-pages-start/sample/RazorPagesMovie/appsettings_SQLite.json?highlight=8-9)]
+[!code-json[](~/tutorials/razor-pages/razor-pages-start/sample/RazorPagesMovie22/appsettings_SQLite.json?highlight=8-10)]
 
 ### <a name="add-required-nuget-packages"></a>新增必要的 NuGet 封裝
 
@@ -947,7 +947,7 @@ to use Data, it should not use models. That will make the namespace the same for
 
 <a name="codegenerator"></a> 下表詳細說明 ASP.NET Core 程式碼產生器選項：
 
-| 選項               | 說明|
+| 選項               | Description|
 | ----------------- | ------------ |
 | `-m`  | 模型的名稱。 |
 | `-dc`  | 要使用的 `DbContext` 類別。 |

@@ -383,8 +383,8 @@
               uid: blazor/components/templated-components
             - name: CSS 隔離
               uid: blazor/components/css-isolation
-            - name: 整合元件
-              uid: blazor/components/integrate-components-into-razor-pages-and-mvc-apps
+            - name: Prerender 與整合元件
+              uid: blazor/components/prerendering-and-integration
             - name: 元件程式庫
               uid: blazor/components/class-libraries
         - name: 全球化和當地語系化
@@ -604,8 +604,12 @@
       uid: web-api/advanced/conventions
     - name: 處理錯誤
       uid: web-api/handle-errors
-    - name: 使用 HTTP REPL 測試 API
-      uid: web-api/http-repl
+    - name: HTTP REPL
+      items:
+        - name: 測試 API
+          uid: web-api/http-repl
+        - name: 遙測
+          uid: web-api/http-repl/telemetry
 - name: 即時應用程式
   displayName: signalr
   items:

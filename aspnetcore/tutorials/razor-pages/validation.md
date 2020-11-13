@@ -21,14 +21,14 @@ no-loc:
 - Razor
 - SignalR
 uid: tutorials/razor-pages/validation
-ms.openlocfilehash: efae7d79ff7a0b351afc68264463546bb26b4424
-ms.sourcegitcommit: 91e14f1e2a25c98a57c2217fe91b172e0ff2958c
+ms.openlocfilehash: d69ab3452f4f15e916049e5c772a20fe9f9fac65
+ms.sourcegitcommit: 1ea3f23bec63e96ffc3a927992f30a5fc0de3ff9
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 11/10/2020
-ms.locfileid: "94422700"
+ms.lasthandoff: 11/12/2020
+ms.locfileid: "94570220"
 ---
-# <a name="part-8-add-validation-to-an-aspnet-core-no-locrazor-page"></a>第8部分：將驗證新增至 ASP.NET Core Razor 頁面
+# <a name="part-8-of-tutorial-series-on-no-locrazor-pages"></a>頁面上的第8部分教學課程系列 Razor 。
 
 作者：[Rick Anderson](https://twitter.com/RickAndMSFT)
 

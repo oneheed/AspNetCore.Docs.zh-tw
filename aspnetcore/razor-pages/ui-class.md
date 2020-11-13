@@ -18,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: razor-pages/ui-class
-ms.openlocfilehash: e87e74533fe6900d8e0a73708ad24b765a968493
-ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
+ms.openlocfilehash: 0bfdb1932d829ec00c9de1bd38b7920cb1f40c51
+ms.sourcegitcommit: 1ea3f23bec63e96ffc3a927992f30a5fc0de3ff9
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 10/30/2020
-ms.locfileid: "93056799"
+ms.lasthandoff: 11/12/2020
+ms.locfileid: "94570168"
 ---
 # <a name="create-reusable-ui-using-the-no-locrazor-class-library-project-in-aspnet-core"></a>使用 Razor ASP.NET Core 中的類別庫專案建立可重複使用的 UI
 
@@ -190,7 +190,7 @@ public class Program
 
 建立 RCL 時，會產生資訊清單來描述靜態 web 資產位置。 取用應用程式會在執行時間讀取資訊清單，以取用參考專案和套件中的資產。 當新的資產新增至 RCL 時，必須重建 RCL，才能在取用應用程式存取新資產之前更新其資訊清單。
 
-### <a name="publish"></a>發佈
+### <a name="publish"></a>發行
 
 當應用程式發佈時，所有參考專案和套件中的隨附資產都會複製到下所發佈應用程式的 [ *wwwroot* ] 資料夾中 `_content/{LIBRARY NAME}/` 。
 
@@ -206,7 +206,7 @@ Razor您可以將視圖、頁面、控制器、頁面模型、 [ Razor 元件](x
 
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
-* 從 Visual Studio 的 [檔案]  功能表中，選取 [新增]  。
+* 從 Visual Studio 的 [檔案] 功能表中，選取 [新增] **[專案]** >  。
 * 選取 **ASP.NET Core Web 應用程式** 。
 * 將程式庫命名 (例如 " Razor ClassLib" ) > **確定]** 。 若要避免與產生的檢視程式庫發生檔案名稱衝突，程式庫名稱結尾請務必不要使用 `.Views`。
 * 確認已選取 **ASP.NET Core 2.1** 或更新版本。
@@ -277,7 +277,7 @@ dotnet run
 
 建立 RCL 專案：
 
-* 從 Visual Studio 的 [檔案]  功能表中，選取 [新增]  。
+* 從 Visual Studio 的 [檔案] 功能表中，選取 [新增] **[專案]** >  。
 * 選取 **ASP.NET Core Web 應用程式** 。
 * 將應用程式命名為 **Razor UIClassLib** > **OK** 。
 * 確認已選取 **ASP.NET Core 2.1** 或更新版本。
@@ -336,16 +336,16 @@ dotnet new viewstart -o RazorUIClassLib/Areas/MyFeature/Pages
 
 建立 Razor 頁面 web 應用程式：
 
-* 在 [方案總管]  中，以滑鼠右鍵按一下解決方案 > [新增]  。
+* 在 [方案總管] 中，以滑鼠右鍵按一下解決方案 > [新增] **[新增專案]** >  。
 * 選取 **ASP.NET Core Web 應用程式** 。
 * 將應用程式命名為 **WebApp1** 。
 * 確認已選取 **ASP.NET Core 2.1** 或更新版本。
-* 選取 [Web 應用程式]  。
+* 選取 [Web 應用程式] **[確定]** > 。
 
-* 從 [方案總管]  ，以滑鼠右鍵按一下  。
-* 從方案總管  ，以滑鼠右鍵按一下  。
+* 從 [方案總管]，以滑鼠右鍵按一下 **WebApp1** ，然後選取 [設定為啟始專案]。
+* 從方案總管，以滑鼠右鍵按一下 **WebApp1** ，然後選取 [建置相依性] **[專案相依性]** > 。
 * 檢查 **Razor UIClassLib** 是否為 **WebApp1** 的相依性。
-* 從 [方案總管]  ，以滑鼠右鍵按一下  。
+* 從 [方案總管]，以滑鼠右鍵按一下 **WebApp1** ，然後選取 [新增] **[參考]** > 。
 * 在 [ **參考管理員** ] 對話方塊中，檢查 **Razor UIClassLib** > **確定** 。
 
 執行應用程式。
@@ -404,4 +404,15 @@ dotnet run
 
 ## <a name="additional-resources"></a>其他資源
 
+::: moniker range=">= aspnetcore-5.0"
+
 * <xref:blazor/components/class-libraries>
+* <xref:blazor/components/css-isolation#razor-class-library-rcl-support>
+
+::: moniker-end
+
+::: moniker range="< aspnetcore-5.0"
+
+* <xref:blazor/components/class-libraries>
+
+::: moniker-end

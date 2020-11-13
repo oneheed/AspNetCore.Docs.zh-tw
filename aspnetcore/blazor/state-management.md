@@ -20,12 +20,12 @@ no-loc:
 - SignalR
 uid: blazor/state-management
 zone_pivot_groups: blazor-hosting-models
-ms.openlocfilehash: 1769ddbb95c9ffe373e916c885e411adc3d4c65b
-ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
+ms.openlocfilehash: 7e79836e3dd1da175a62a84e11dfd30fee7b2f1b
+ms.sourcegitcommit: 1ea3f23bec63e96ffc3a927992f30a5fc0de3ff9
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 10/30/2020
-ms.locfileid: "93054992"
+ms.lasthandoff: 11/12/2020
+ms.locfileid: "94570142"
 ---
 # <a name="aspnet-core-no-locblazor-state-management"></a>ASP.NET Core Blazor 狀態管理
 
@@ -61,19 +61,19 @@ ms.locfileid: "93054992"
 
 存在於保存狀態的常見位置：
 
-* [伺服器端儲存空間](#server-side-storage)
-* [URL](#url)
-* [瀏覽器儲存體](#browser-storage)
-* [記憶體內部狀態容器服務](#in-memory-state-container-service)
+* [伺服器端儲存空間](#server-side-storage-wasm)
+* [URL](#url-wasm)
+* [瀏覽器儲存體](#browser-storage-wasm)
+* [記憶體內部狀態容器服務](#in-memory-state-container-service-wasm)
 
-### <a name="server-side-storage"></a>伺服器端儲存空間
+<h2 id="server-side-storage-wasm">伺服器端儲存空間</h2>
 
-針對跨越多個使用者和裝置的永久資料持續性，應用程式可以使用透過 web API 存取的獨立伺服器端儲存體。 這些選項包括：
+針對跨越多個使用者和裝置的永久資料持續性，應用程式可以使用透過 web API 存取的獨立伺服器端儲存體。 選項包括：
 
 * Blob 儲存體
 * 機碼值儲存體
 * 關聯式資料庫
-* 表格儲存體
+* 資料表儲存體
 
 儲存資料之後，會保留使用者的狀態，並可在任何新的瀏覽器會話中使用。
 
@@ -90,7 +90,7 @@ ms.locfileid: "93054992"
 * [Azure 資料庫](https://azure.microsoft.com/product-categories/databases/)
 * [Azure 儲存體檔](/azure/storage/)
 
-### <a name="url"></a>URL
+<h2 id="url-wasm">URL</h2>
 
 若為代表導覽狀態的暫時性資料，請將資料模型為 URL 的一部分。 在 URL 中模型化使用者狀態的範例包括：
 
@@ -101,7 +101,7 @@ ms.locfileid: "93054992"
 
 如需使用指示詞定義 URL 模式的詳細資訊 [`@page`](xref:mvc/views/razor#page) ，請參閱 <xref:blazor/fundamentals/routing> 。
 
-### <a name="browser-storage"></a>瀏覽器儲存體
+<h2 id="browser-storage-wasm">瀏覽器儲存體</h2>
 
 對於使用者主動建立的暫時性資料，常用的儲存位置是瀏覽器 [`localStorage`](https://developer.mozilla.org/docs/Web/API/Window/localStorage) 和 [`sessionStorage`](https://developer.mozilla.org/docs/Web/API/Window/sessionStorage) 集合：
 
@@ -121,7 +121,7 @@ ms.locfileid: "93054992"
 > [!WARNING]
 > 使用者可能會看到或篡改儲存在和中的資料 `localStorage` `sessionStorage` 。
 
-## <a name="in-memory-state-container-service"></a>記憶體內部狀態容器服務
+<h2 id="in-memory-state-container-service-wasm">記憶體內部狀態容器服務</h2>
 
 [!INCLUDE[](~/includes/blazor-state-management/state-container.md)]
 
@@ -170,19 +170,19 @@ Blazor Server 是具狀態的應用程式架構。 大部分的情況下，應�
 
 存在於保存狀態的常見位置：
 
-* [伺服器端儲存空間](#server-side-storage)
-* [URL](#url)
-* [瀏覽器儲存體](#browser-storage)
-* [記憶體內部狀態容器服務](#in-memory-state-container-service)
+* [伺服器端儲存空間](#server-side-storage-server)
+* [URL](#url-server)
+* [瀏覽器儲存體](#browser-storage-server)
+* [記憶體內部狀態容器服務](#in-memory-state-container-service-server)
 
-### <a name="server-side-storage"></a>伺服器端儲存空間
+<h2 id="server-side-storage-server">伺服器端儲存空間</h2>
 
-針對跨越多個使用者和裝置的永久資料持續性，應用程式可以使用伺服器端儲存體。 這些選項包括：
+針對跨越多個使用者和裝置的永久資料持續性，應用程式可以使用伺服器端儲存體。 選項包括：
 
 * Blob 儲存體
 * 機碼值儲存體
 * 關聯式資料庫
-* 表格儲存體
+* 資料表儲存體
 
 儲存資料之後，會保留使用者的狀態，並可在任何新的線路中使用。
 
@@ -191,7 +191,7 @@ Blazor Server 是具狀態的應用程式架構。 大部分的情況下，應�
 * [Azure 資料庫](https://azure.microsoft.com/product-categories/databases/)
 * [Azure 儲存體檔](/azure/storage/)
 
-### <a name="url"></a>URL
+<h2 id="url-server">URL</h2>
 
 若為代表導覽狀態的暫時性資料，請將資料模型為 URL 的一部分。 在 URL 中模型化使用者狀態的範例包括：
 
@@ -205,7 +205,7 @@ Blazor Server 是具狀態的應用程式架構。 大部分的情況下，應�
 
 如需使用指示詞定義 URL 模式的詳細資訊 [`@page`](xref:mvc/views/razor#page) ，請參閱 <xref:blazor/fundamentals/routing> 。
 
-### <a name="browser-storage"></a>瀏覽器儲存體
+<h2 id="browser-storage-server">瀏覽器儲存體</h2>
 
 對於使用者主動建立的暫時性資料，常用的儲存位置是瀏覽器 [`localStorage`](https://developer.mozilla.org/docs/Web/API/Window/localStorage) 和 [`sessionStorage`](https://developer.mozilla.org/docs/Web/API/Window/sessionStorage) 集合：
 
@@ -700,7 +700,7 @@ else
 
 ::: moniker-end
 
-## <a name="in-memory-state-container-service"></a>記憶體內部狀態容器服務
+<h2 id="in-memory-state-container-service-server">記憶體內部狀態容器服務</h2>
 
 [!INCLUDE[](~/includes/blazor-state-management/state-container.md)]
 

@@ -19,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/security/content-security-policy
-ms.openlocfilehash: 66fd41abe4f85071797bacc0a5531bbab35bd227
-ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
+ms.openlocfilehash: 744449240fabc3dae317d0d7bc9090311521c224
+ms.sourcegitcommit: 1ea3f23bec63e96ffc3a927992f30a5fc0de3ff9
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 10/30/2020
-ms.locfileid: "93055590"
+ms.lasthandoff: 11/12/2020
+ms.locfileid: "94570116"
 ---
 # <a name="enforce-a-content-security-policy-for-aspnet-core-no-locblazor"></a>針對 ASP.NET Core 強制執行內容安全性原則 Blazor
 
@@ -57,12 +57,9 @@ ms.locfileid: "93055590"
   * 指定 `https://stackpath.bootstrapcdn.com/` 啟動程式腳本的主機來源。
   * 指定 `self` 以表示應用程式的來源（包括配置和埠號碼）是有效的來源。
   * 在 Blazor WebAssembly 應用程式中：
-    * 指定下列雜湊以允許載入必要的 Blazor WebAssembly 內嵌腳本：
-      * `sha256-v8ZC9OgMhcnEQ/Me77/R9TlJfzOBqrMTW8e1KuqLaqc=`
-      * `sha256-If//FtbPc03afjLezvWHnC3Nbu4fDM04IIzkPaf3pH0=`
-      * `sha256-v8v3RKRPmN4odZ1CWM5gw80QKPCCWMcpNeOmimNL2AA=`
+    * 指定雜湊以允許載入必要的腳本。
     * 指定 `unsafe-eval` 要使用 `eval()` 的和方法，以從字串建立程式碼。
-  * 在 Blazor Server 應用程式中，指定 `sha256-34WLX60Tw3aG6hylk0plKbZZFXCuepeQ6Hu7OqRf8PI=` 執行樣式表單之回溯偵測的內嵌腳本雜湊。
+  * 在 Blazor Server 應用程式中，指定雜湊以允許載入必要的腳本。
 * [style-src](https://developer.mozilla.org/docs/Web/HTTP/Headers/Content-Security-Policy/style-src)：表示樣式表單的有效來源。
   * 指定啟動載入器樣式表單的 `https://stackpath.bootstrapcdn.com/` 主機來源。
   * 指定 `self` 以表示應用程式的來源（包括配置和埠號碼）是有效的來源。
@@ -93,6 +90,29 @@ ms.locfileid: "93055590"
 
 在 [主機] 頁面的 [內容] 中，套用 [原則指示詞] `<head>` `wwwroot/index.html` 區段中所述的指示詞： [Policy directives](#policy-directives)
 
+::: moniker range=">= aspnetcore-5.0"
+
+```html
+<meta http-equiv="Content-Security-Policy" 
+      content="base-uri 'self';
+               block-all-mixed-content;
+               default-src 'self';
+               img-src data: https:;
+               object-src 'none';
+               script-src https://stackpath.bootstrapcdn.com/ 
+                          'self' 
+                          'sha256-v8v3RKRPmN4odZ1CWM5gw80QKPCCWMcpNeOmimNL2AA=' 
+                          'unsafe-eval';
+               style-src https://stackpath.bootstrapcdn.com/
+                         'self'
+                         'unsafe-inline';
+               upgrade-insecure-requests;">
+```
+
+::: moniker-end
+
+::: moniker range="< aspnetcore-5.0"
+
 ```html
 <meta http-equiv="Content-Security-Policy" 
       content="base-uri 'self';
@@ -112,9 +132,38 @@ ms.locfileid: "93055590"
                upgrade-insecure-requests;">
 ```
 
+::: moniker-end
+
+新增 `script-src` `style-src` 應用程式所需的其他和雜湊。 在開發期間，使用線上工具或瀏覽器開發人員工具來為您計算雜湊。 例如，下列瀏覽器工具主控台錯誤會報告原則未涵蓋之必要腳本的雜湊：
+
+> 拒絕執行內嵌腳本，因為它違反下列內容安全性原則指示詞： ".。。". 若要啟用內嵌執行，必須使用 ' unsafe-inline ' 關鍵字、雜湊 ( ' sha256 v8v3RKRPmN4odZ1CWM5gw80QKPCCWMcpNeOmimNL2AA = ' ) 或 nonce ( ' nonce-... ' ) 。
+
+與錯誤相關聯的特定腳本會顯示在主控台的錯誤旁。
+
 ### Blazor Server
 
 在 [主機] 頁面的 [內容] 中，套用 [原則指示詞] `<head>` `Pages/_Host.cshtml` 區段中所述的指示詞： [Policy directives](#policy-directives)
+
+::: moniker range=">= aspnetcore-5.0"
+
+```cshtml
+<meta http-equiv="Content-Security-Policy" 
+      content="base-uri 'self';
+               block-all-mixed-content;
+               default-src 'self';
+               img-src data: https:;
+               object-src 'none';
+               script-src https://stackpath.bootstrapcdn.com/ 
+                          'self';
+               style-src https://stackpath.bootstrapcdn.com/
+                         'self' 
+                         'unsafe-inline';
+               upgrade-insecure-requests;">
+```
+
+::: moniker-end
+
+::: moniker range="< aspnetcore-5.0"
 
 ```cshtml
 <meta http-equiv="Content-Security-Policy" 
@@ -131,6 +180,14 @@ ms.locfileid: "93055590"
                          'unsafe-inline';
                upgrade-insecure-requests;">
 ```
+
+::: moniker-end
+
+新增 `script-src` `style-src` 應用程式所需的其他和雜湊。 在開發期間，使用線上工具或瀏覽器開發人員工具來為您計算雜湊。 例如，下列瀏覽器工具主控台錯誤會報告原則未涵蓋之必要腳本的雜湊：
+
+> 拒絕執行內嵌腳本，因為它違反下列內容安全性原則指示詞： ".。。". 若要啟用內嵌執行，必須使用 ' unsafe-inline ' 關鍵字、雜湊 ( ' sha256 v8v3RKRPmN4odZ1CWM5gw80QKPCCWMcpNeOmimNL2AA = ' ) 或 nonce ( ' nonce-... ' ) 。
+
+與錯誤相關聯的特定腳本會顯示在主控台的錯誤旁。
 
 ## <a name="meta-tag-limitations"></a>中繼標記限制
 

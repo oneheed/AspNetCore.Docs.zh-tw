@@ -18,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: mvc/views/tag-helpers/builtin-th/component-tag-helper
-ms.openlocfilehash: 8e780de2367f66ad1f5197077d5243e0b85a41dd
-ms.sourcegitcommit: fe5a287fa6b9477b130aa39728f82cdad57611ee
+ms.openlocfilehash: 761c125e3c5f94157cf7bf4524374db2545610b1
+ms.sourcegitcommit: 98f92d766d4f343d7e717b542c1b08da29e789c1
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 11/10/2020
-ms.locfileid: "94431039"
+ms.lasthandoff: 11/13/2020
+ms.locfileid: "94595450"
 ---
 # <a name="component-tag-helper-in-aspnet-core"></a>ASP.NET Core 中的元件標記協助程式
 
@@ -31,10 +31,20 @@ ms.locfileid: "94431039"
 
 ## <a name="prerequisites"></a>先決條件
 
+::: moniker range=">= aspnetcore-5.0"
+
 遵循下列其中一項 *的設定一節中* 的指導方針：
 
 * [Blazor WebAssembly](xref:blazor/components/prerendering-and-integration?pivots=webassembly)
 * [Blazor Server](xref:blazor/components/prerendering-and-integration?pivots=server)
+
+::: moniker-end
+
+::: moniker range="< aspnetcore-5.0"
+
+遵循本文 *的設定一節中* 的指導方針 <xref:blazor/components/prerendering-and-integration?pivots=server> 。
+
+::: moniker-end
 
 ## <a name="component-tag-helper"></a>元件標記協助程式
 
@@ -52,14 +62,14 @@ ms.locfileid: "94431039"
 
 Blazor WebAssembly 應用程式轉譯模式如下表所示。
 
-| 轉譯模式 | 說明 |
+| 轉譯模式 | 描述 |
 | ----------- | ----------- |
 | `WebAssembly` | 轉譯應用程式的標記，以在 Blazor WebAssembly 瀏覽器中載入時用來包含互動式元件。 元件不是資源清單。 此選項可讓您更輕鬆地 Blazor WebAssembly 在不同的頁面上呈現不同的元件。 |
 | `WebAssemblyPrerendered` | 將元件 Prerenders 為靜態 HTML，並包含應用程式的標記， Blazor WebAssembly 以便稍後在瀏覽器中載入時，讓元件成為互動式元件。 |
 
 Blazor Server 應用程式轉譯模式如下表所示。
 
-| 轉譯模式 | 說明 |
+| 轉譯模式 | 描述 |
 | ----------- | ----------- |
 | <xref:Microsoft.AspNetCore.Mvc.Rendering.RenderMode.ServerPrerendered> | 將元件轉譯為靜態 HTML，並包含 Blazor Server 應用程式的標記。 當使用者代理程式啟動時，會使用此標記來啟動 Blazor 應用程式。 |
 | <xref:Microsoft.AspNetCore.Mvc.Rendering.RenderMode.Server> | 轉譯應用程式的標記 Blazor Server 。 不包含元件的輸出。 當使用者代理程式啟動時，會使用此標記來啟動 Blazor 應用程式。 |
@@ -71,7 +81,7 @@ Blazor Server 應用程式轉譯模式如下表所示。
 
 Blazor Server 應用程式轉譯模式如下表所示。
 
-| 轉譯模式 | 說明 |
+| 轉譯模式 | 描述 |
 | ----------- | ----------- |
 | <xref:Microsoft.AspNetCore.Mvc.Rendering.RenderMode.ServerPrerendered> | 將元件轉譯為靜態 HTML，並包含 Blazor Server 應用程式的標記。 當使用者代理程式啟動時，會使用此標記來啟動 Blazor 應用程式。 |
 | <xref:Microsoft.AspNetCore.Mvc.Rendering.RenderMode.Server> | 轉譯應用程式的標記 Blazor Server 。 不包含元件的輸出。 當使用者代理程式啟動時，會使用此標記來啟動 Blazor 應用程式。 |

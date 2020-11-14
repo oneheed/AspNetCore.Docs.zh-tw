@@ -17,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: fundamentals/dependency-injection
-ms.openlocfilehash: 9f9f41f4d25867c43cd49640bc76ef63f9415eb2
-ms.sourcegitcommit: 1ea3f23bec63e96ffc3a927992f30a5fc0de3ff9
+ms.openlocfilehash: 3f7cce475b5c7b0fcbb93644b2c39acd637a6f9d
+ms.sourcegitcommit: 98f92d766d4f343d7e717b542c1b08da29e789c1
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 11/12/2020
-ms.locfileid: "94570194"
+ms.lasthandoff: 11/13/2020
+ms.locfileid: "94595476"
 ---
 # <a name="dependency-injection-in-aspnet-core"></a>.NET Core 中的相依性插入
 
@@ -500,7 +500,10 @@ services.AddSingleton(typeof(ILogger<>), typeof(Logger<>));
 [!code-csharp[](dependency-injection/samples/2.x/DependencyInjectionSample/Startup.cs?name=snippet1&highlight=5)]
 
 > [!NOTE]
-> 每個 `services.Add{SERVICE_NAME}` 擴充方法都會新增 (並且可能會設定) 服務。 例如， `services.AddMvc()` 新增服務 Razor 頁面和 MVC 所需。 建議應用程式遵循此慣例。 在 [Microsoft.Extensions.DependencyInjection](/dotnet/api/microsoft.extensions.dependencyinjection) 命名空間中放置擴充方法，以封裝服務註冊群組。
+> 每個 `services.Add{SERVICE_NAME}` 擴充方法會新增並可能設定服務。 例如，、 `services.AddControllersWithViews` `services.AddRazorPages` 和會 `services.AddControllers` 新增 ASP.NET Core 應用程式所需的服務。 建議應用程式遵循此慣例。 在 <xref:Microsoft.Extensions.DependencyInjection?displayProperty=fullName> 命名空間中放置擴充方法，以封裝服務註冊群組。 包括 DI 擴充方法的命名空間部分， `Microsoft.Extensions.DependencyInjection` 也包括：
+>
+> * 可讓它們在 [IntelliSense](/visualstudio/ide/using-intellisense) 中顯示，而不需要新增其他 `using` 區塊。
+> * 防止類別中過多的 `using` 語句 `Startup` ，通常會從這些擴充方法呼叫這些擴充方法。
 
 如果服務的建構函式需要[內建類型](/dotnet/csharp/language-reference/keywords/built-in-types-table)，例如 `string`，可以使用[組態](xref:fundamentals/configuration/index)或[選項模式](xref:fundamentals/configuration/options)插入該類型：
 

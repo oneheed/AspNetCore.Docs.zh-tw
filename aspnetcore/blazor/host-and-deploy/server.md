@@ -19,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/host-and-deploy/server
-ms.openlocfilehash: 74473eb5c0efcd8798d260b765c848d7e621e534
-ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
+ms.openlocfilehash: a209109210ef5e335734a974ceb0c2af7cb8e1a1
+ms.sourcegitcommit: 98f92d766d4f343d7e717b542c1b08da29e789c1
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 10/30/2020
-ms.locfileid: "93055759"
+ms.lasthandoff: 11/13/2020
+ms.locfileid: "94595437"
 ---
 # <a name="host-and-deploy-no-locblazor-server"></a>裝載和部署 Blazor Server
 
@@ -78,9 +78,9 @@ Blazor 使用 Websocket 作為傳輸的最佳方式 SignalR ，是因為延遲�
 > * [什麼是 Azure SignalR 服務？](/azure/azure-signalr/signalr-overview)
 > * [Azure 服務的效能指南 SignalR](/azure-signalr/signalr-concept-performance#performance-factors)
 
-若要設定應用程式 (並選擇性地布建 Azure SignalR 服務) ：
+### <a name="configuration"></a>設定
 
-1. 啟用服務以支援「 *粘滯話* 」，其中用戶端會在進行預導 [時重新導向回相同的伺服器](xref:blazor/hosting-models#connection-to-the-server)。 將 `ServerStickyMode` 選項或設定值設定為 `Required` 。 一般而言，應用程式會使用下列 **其中一** 種方法來建立設定：
+若要設定 Azure 服務的應用程式 SignalR ，應用程式必須支援「 *粘滯話* 」，其中用戶端會在進行預導 [時重新導向回相同的伺服器](xref:blazor/hosting-models#connection-to-the-server)。 `ServerStickyMode`選項或設定值設定為 `Required` 。 一般而言，應用程式會使用下列 **_其中一_** 種方法來建立設定：
 
    * `Startup.ConfigureServices`:
   
@@ -92,19 +92,25 @@ Blazor 使用 Websocket 作為傳輸的最佳方式 SignalR ，是因為延遲�
      });
      ```
 
-   * Configuration (使用下列 **其中一** 種方法) ：
+   * Configuration (使用下列 **_其中一_** 種方法) ：
   
-     * `appsettings.json`:
+     * 在 `appsettings.json` 中：
 
        ```json
-       "Azure:SignalR:ServerStickyMode": "Required"
+       "Azure:SignalR:StickyServerMode": "Required"
        ```
 
-     * Azure 入口網站中 **的 app** service  >  **設定應用程式設定** ( **名稱** ： `Azure:SignalR:ServerStickyMode` ， **值** ： `Required`) 。
+     * Azure 入口網站中 **的 app** service  >  **設定應用程式設定** ( **名稱** ： `Azure__SignalR__StickyServerMode` ， **值** ： `Required`) 。 如果您布建 [Azure SignalR 服務](#provision-the-azure-signalr-service)，則會自動為應用程式採用此方法。
+
+### <a name="provision-the-azure-no-locsignalr-service"></a>布建 Azure SignalR 服務
+
+若要 SignalR 在 Visual Studio 中布建應用程式的 Azure 服務：
 
 1. 在應用程式的 Visual Studio 中建立 Azure 應用程式發佈設定檔 Blazor Server 。
 1. 將 **Azure SignalR 服務** 相依性新增至設定檔。 如果 Azure 訂用帳戶沒有預先存在的 Azure SignalR 服務實例可指派給該應用程式，請選取 [ **建立新的 azure SignalR 服務實例** ] 以布建新的服務實例。
 1. 將應用程式發佈至 Azure。
+
+SignalR在 Visual Studio 中布建 Azure 服務會自動 [啟用 *粘滯會話*](#configuration) ，並將 SignalR 連接字串新增至 app Service 的設定。
 
 #### <a name="iis"></a>IIS
 

@@ -19,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/fundamentals/additional-scenarios
-ms.openlocfilehash: f8b6e65424948aaa7b28023497bbbf2a1ceb47dd
-ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
+ms.openlocfilehash: 9ec3900b67897255e321462b83117f5c2e32ab45
+ms.sourcegitcommit: 98f92d766d4f343d7e717b542c1b08da29e789c1
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 10/30/2020
-ms.locfileid: "93056045"
+ms.lasthandoff: 11/13/2020
+ms.locfileid: "94595411"
 ---
 # <a name="aspnet-core-no-locblazor-hosting-model-configuration"></a>ASP.NET Core Blazor 裝載模型設定
 
@@ -102,32 +102,21 @@ ms.locfileid: "93056045"
 
 ## <a name="render-mode"></a>轉譯模式
 
+::: moniker range=">= aspnetcore-5.0"
+
+*本節適用于 hosted Blazor WebAssembly 和 Blazor Server 。*
+
+Blazor 依預設，應用程式會設定為伺服器上的可呈現的 UI。 如需詳細資訊，請參閱<xref:mvc/views/tag-helpers/builtin-th/component-tag-helper>。
+
+::: moniker-end
+
+::: moniker range="< aspnetcore-5.0"
+
 *本節適用于 Blazor Server 。*
 
-Blazor Server 根據預設，應用程式會在伺服器上建立用戶端連接之前，先將伺服器上的 UI 設定為預先呈現。 這會在頁面中設定 `_Host.cshtml` Razor ：
+Blazor Server 根據預設，應用程式會在伺服器上建立用戶端連接之前，先將伺服器上的 UI 設定為預先呈現。 如需詳細資訊，請參閱<xref:mvc/views/tag-helpers/builtin-th/component-tag-helper>。
 
-```cshtml
-<body>
-    <app>
-      <component type="typeof(App)" render-mode="ServerPrerendered" />
-    </app>
-
-    <script src="_framework/blazor.server.js"></script>
-</body>
-```
-
-<xref:Microsoft.AspNetCore.Mvc.TagHelpers.ComponentTagHelper.RenderMode> 設定元件是否為：
-
-* 會資源清單到頁面中。
-* 會在頁面上轉譯為靜態 HTML，或包含從使用者代理程式啟動應用程式所需的資訊 Blazor 。
-
-| 轉譯模式 | 描述 |
-| --- | --- |
-| <xref:Microsoft.AspNetCore.Mvc.Rendering.RenderMode.ServerPrerendered> | 將元件轉譯為靜態 HTML，並包含 Blazor Server 應用程式的標記。 當使用者代理程式啟動時，會使用此標記來啟動 Blazor 應用程式。 |
-| <xref:Microsoft.AspNetCore.Mvc.Rendering.RenderMode.Server> | 轉譯應用程式的標記 Blazor Server 。 不包含元件的輸出。 當使用者代理程式啟動時，會使用此標記來啟動 Blazor 應用程式。 |
-| <xref:Microsoft.AspNetCore.Mvc.Rendering.RenderMode.Static> | 將元件轉譯為靜態 HTML。 |
-
-不支援從靜態 HTML 網頁轉譯伺服器元件。
+::: moniker-end
 
 ## <a name="initialize-the-no-locblazor-circuit"></a>初始化 Blazor 線路
 

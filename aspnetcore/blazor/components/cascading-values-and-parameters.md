@@ -1,5 +1,5 @@
 ---
-title: 'ASP.NET Core :::no-loc(Blazor)::: 級聯值和參數'
+title: 'ASP.NET Core Blazor 級聯值和參數'
 author: guardrex
 description: 瞭解如何將資料從上階元件傳送到附屬元件。
 monikerRange: '>= aspnetcore-3.1'
@@ -7,17 +7,17 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 07/06/2020
 no-loc:
-- ':::no-loc(appsettings.json):::'
-- ':::no-loc(ASP.NET Core Identity):::'
-- ':::no-loc(cookie):::'
-- ':::no-loc(Cookie):::'
-- ':::no-loc(Blazor):::'
-- ':::no-loc(Blazor Server):::'
-- ':::no-loc(Blazor WebAssembly):::'
-- ':::no-loc(Identity):::'
-- ":::no-loc(Let's Encrypt):::"
-- ':::no-loc(Razor):::'
-- ':::no-loc(SignalR):::'
+- 'appsettings.json'
+- 'ASP.NET Core Identity'
+- 'cookie'
+- 'Cookie'
+- 'Blazor'
+- 'Blazor Server'
+- 'Blazor WebAssembly'
+- 'Identity'
+- "Let's Encrypt"
+- 'Razor'
+- 'SignalR'
 uid: blazor/components/cascading-values-and-parameters
 ms.openlocfilehash: 56d70cea50a3a913b4483f6ea488438269aa58fe
 ms.sourcegitcommit: 1be547564381873fe9e84812df8d2088514c622a
@@ -26,7 +26,7 @@ ms.contentlocale: zh-TW
 ms.lasthandoff: 11/11/2020
 ms.locfileid: "94507976"
 ---
-# <a name="aspnet-core-no-locblazor-cascading-values-and-parameters"></a><span data-ttu-id="9bd33-103">ASP.NET Core :::no-loc(Blazor)::: 級聯值和參數</span><span class="sxs-lookup"><span data-stu-id="9bd33-103">ASP.NET Core :::no-loc(Blazor)::: cascading values and parameters</span></span>
+# <a name="aspnet-core-no-locblazor-cascading-values-and-parameters"></a><span data-ttu-id="9bd33-103">ASP.NET Core Blazor 級聯值和參數</span><span class="sxs-lookup"><span data-stu-id="9bd33-103">ASP.NET Core Blazor cascading values and parameters</span></span>
 
 <span data-ttu-id="9bd33-104">依 [Luke Latham](https://github.com/guardrex) 和 [Daniel Roth](https://github.com/danroth27)</span><span class="sxs-lookup"><span data-stu-id="9bd33-104">By [Luke Latham](https://github.com/guardrex) and [Daniel Roth](https://github.com/danroth27)</span></span>
 
@@ -55,7 +55,7 @@ public class ThemeInfo
 
 ```razor
 @inherits LayoutComponentBase
-@using :::no-loc(Blazor):::Sample.UIThemeClasses
+@using BlazorSample.UIThemeClasses
 
 <div class="container-fluid">
     <div class="row">
@@ -86,7 +86,7 @@ public class ThemeInfo
 ```razor
 @page "/cascadingvaluesparameterstheme"
 @layout CascadingValuesParametersLayout
-@using :::no-loc(Blazor):::Sample.UIThemeClasses
+@using BlazorSample.UIThemeClasses
 
 <h1>Cascading Values & Parameters</h1>
 
@@ -156,7 +156,7 @@ public class ThemeInfo
 
 <span data-ttu-id="9bd33-129">範例應用程式具有可執行索引標籤 `ITab` 的介面：</span><span class="sxs-lookup"><span data-stu-id="9bd33-129">The sample app has an `ITab` interface that tabs implement:</span></span>
 
-[!code-csharp[](../common/samples/5.x/:::no-loc(Blazor):::WebAssemblySample/UIInterfaces/ITab.cs)]
+[!code-csharp[](../common/samples/5.x/BlazorWebAssemblySample/UIInterfaces/ITab.cs)]
 
 <span data-ttu-id="9bd33-130">`CascadingValuesParametersTabSet`元件使用 `TabSet` 元件，其中包含數個 `Tab` 元件：</span><span class="sxs-lookup"><span data-stu-id="9bd33-130">The `CascadingValuesParametersTabSet` component uses the `TabSet` component, which contains several `Tab` components:</span></span>
 
@@ -194,10 +194,10 @@ public class ThemeInfo
 
 <span data-ttu-id="9bd33-134">`TabSet` 元件：</span><span class="sxs-lookup"><span data-stu-id="9bd33-134">`TabSet` component:</span></span>
 
-[!code-razor[](../common/samples/5.x/:::no-loc(Blazor):::WebAssemblySample/Components/TabSet.razor)]
+[!code-razor[](../common/samples/5.x/BlazorWebAssemblySample/Components/TabSet.razor)]
 
 <span data-ttu-id="9bd33-135">這些子代 `Tab` 元件會將包含的 `TabSet` 視為串聯參數，因此 `Tab` 元件會將自己加入至 `TabSet` ，並在哪一個索引標籤為作用中協調。</span><span class="sxs-lookup"><span data-stu-id="9bd33-135">The descendent `Tab` components capture the containing `TabSet` as a cascading parameter, so the `Tab` components add themselves to the `TabSet` and coordinate on which tab is active.</span></span>
 
 <span data-ttu-id="9bd33-136">`Tab` 元件：</span><span class="sxs-lookup"><span data-stu-id="9bd33-136">`Tab` component:</span></span>
 
-[!code-razor[](../common/samples/5.x/:::no-loc(Blazor):::WebAssemblySample/Components/Tab.razor)]
+[!code-razor[](../common/samples/5.x/BlazorWebAssemblySample/Components/Tab.razor)]

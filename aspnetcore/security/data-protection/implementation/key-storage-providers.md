@@ -5,17 +5,17 @@ description: 瞭解 ASP.NET Core 中的金鑰儲存提供者，以及如何設�
 ms.author: riande
 ms.date: 12/05/2019
 no-loc:
-- ':::no-loc(appsettings.json):::'
-- ':::no-loc(ASP.NET Core Identity):::'
-- ':::no-loc(cookie):::'
-- ':::no-loc(Cookie):::'
-- ':::no-loc(Blazor):::'
-- ':::no-loc(Blazor Server):::'
-- ':::no-loc(Blazor WebAssembly):::'
-- ':::no-loc(Identity):::'
-- ":::no-loc(Let's Encrypt):::"
-- ':::no-loc(Razor):::'
-- ':::no-loc(SignalR):::'
+- 'appsettings.json'
+- 'ASP.NET Core Identity'
+- 'cookie'
+- 'Cookie'
+- 'Blazor'
+- 'Blazor Server'
+- 'Blazor WebAssembly'
+- 'Identity'
+- "Let's Encrypt"
+- 'Razor'
+- 'SignalR'
 uid: security/data-protection/implementation/key-storage-providers
 ms.openlocfilehash: 6a70183ce4b1a129ef213300473b233a5ef822f9
 ms.sourcegitcommit: fbd5427293d9ecccc388bd5fd305c2eb8ada7281
@@ -47,7 +47,7 @@ public void ConfigureServices(IServiceCollection services)
 
 ## <a name="azure-storage"></a><span data-ttu-id="225d7-114">Azure 儲存體</span><span class="sxs-lookup"><span data-stu-id="225d7-114">Azure Storage</span></span>
 
-<span data-ttu-id="225d7-115">[AspNetCore. DataProtection blob](https://www.nuget.org/packages/Azure.Extensions.AspNetCore.DataProtection.Blobs)封裝可讓您將資料保護金鑰儲存在 Azure Blob 儲存體中。</span><span class="sxs-lookup"><span data-stu-id="225d7-115">The [Azure.Extensions.AspNetCore.DataProtection.Blobs](https://www.nuget.org/packages/Azure.Extensions.AspNetCore.DataProtection.Blobs) package allows storing data protection keys in Azure Blob Storage.</span></span> <span data-ttu-id="225d7-116">您可以在 web 應用程式的數個實例之間共用金鑰。</span><span class="sxs-lookup"><span data-stu-id="225d7-116">Keys can be shared across several instances of a web app.</span></span> <span data-ttu-id="225d7-117">應用程式可以 :::no-loc(cookie)::: 在多部伺服器之間共用驗證或 CSRF 保護。</span><span class="sxs-lookup"><span data-stu-id="225d7-117">Apps can share authentication :::no-loc(cookie):::s or CSRF protection across multiple servers.</span></span>
+<span data-ttu-id="225d7-115">[AspNetCore. DataProtection blob](https://www.nuget.org/packages/Azure.Extensions.AspNetCore.DataProtection.Blobs)封裝可讓您將資料保護金鑰儲存在 Azure Blob 儲存體中。</span><span class="sxs-lookup"><span data-stu-id="225d7-115">The [Azure.Extensions.AspNetCore.DataProtection.Blobs](https://www.nuget.org/packages/Azure.Extensions.AspNetCore.DataProtection.Blobs) package allows storing data protection keys in Azure Blob Storage.</span></span> <span data-ttu-id="225d7-116">您可以在 web 應用程式的數個實例之間共用金鑰。</span><span class="sxs-lookup"><span data-stu-id="225d7-116">Keys can be shared across several instances of a web app.</span></span> <span data-ttu-id="225d7-117">應用程式可以 cookie 在多部伺服器之間共用驗證或 CSRF 保護。</span><span class="sxs-lookup"><span data-stu-id="225d7-117">Apps can share authentication cookies or CSRF protection across multiple servers.</span></span>
 
 <span data-ttu-id="225d7-118">若要設定 Azure Blob 儲存體提供者，請呼叫其中一個 [PersistKeysToAzureBlobStorage](/dotnet/api/microsoft.aspnetcore.dataprotection.azuredataprotectionbuilderextensions.persistkeystoazureblobstorage) 多載。</span><span class="sxs-lookup"><span data-stu-id="225d7-118">To configure the Azure Blob Storage provider, call one of the [PersistKeysToAzureBlobStorage](/dotnet/api/microsoft.aspnetcore.dataprotection.azuredataprotectionbuilderextensions.persistkeystoazureblobstorage) overloads.</span></span>
 
@@ -83,13 +83,13 @@ services.AddDataProtection()
 
 ::: moniker range=">= aspnetcore-2.2"
 
-<span data-ttu-id="225d7-122">[AspNetCore. DataProtection. StackExchangeRedis](https://www.nuget.org/packages/Microsoft.AspNetCore.DataProtection.StackExchangeRedis/)封裝可讓您將資料保護金鑰儲存在 Redis 快取中。</span><span class="sxs-lookup"><span data-stu-id="225d7-122">The [Microsoft.AspNetCore.DataProtection.StackExchangeRedis](https://www.nuget.org/packages/Microsoft.AspNetCore.DataProtection.StackExchangeRedis/) package allows storing data protection keys in a Redis cache.</span></span> <span data-ttu-id="225d7-123">您可以在 web 應用程式的數個實例之間共用金鑰。</span><span class="sxs-lookup"><span data-stu-id="225d7-123">Keys can be shared across several instances of a web app.</span></span> <span data-ttu-id="225d7-124">應用程式可以 :::no-loc(cookie)::: 在多部伺服器之間共用驗證或 CSRF 保護。</span><span class="sxs-lookup"><span data-stu-id="225d7-124">Apps can share authentication :::no-loc(cookie):::s or CSRF protection across multiple servers.</span></span>
+<span data-ttu-id="225d7-122">[AspNetCore. DataProtection. StackExchangeRedis](https://www.nuget.org/packages/Microsoft.AspNetCore.DataProtection.StackExchangeRedis/)封裝可讓您將資料保護金鑰儲存在 Redis 快取中。</span><span class="sxs-lookup"><span data-stu-id="225d7-122">The [Microsoft.AspNetCore.DataProtection.StackExchangeRedis](https://www.nuget.org/packages/Microsoft.AspNetCore.DataProtection.StackExchangeRedis/) package allows storing data protection keys in a Redis cache.</span></span> <span data-ttu-id="225d7-123">您可以在 web 應用程式的數個實例之間共用金鑰。</span><span class="sxs-lookup"><span data-stu-id="225d7-123">Keys can be shared across several instances of a web app.</span></span> <span data-ttu-id="225d7-124">應用程式可以 cookie 在多部伺服器之間共用驗證或 CSRF 保護。</span><span class="sxs-lookup"><span data-stu-id="225d7-124">Apps can share authentication cookies or CSRF protection across multiple servers.</span></span>
 
 ::: moniker-end
 
 ::: moniker range="< aspnetcore-2.2"
 
-<span data-ttu-id="225d7-125">[AspNetCore. DataProtection. Redis](https://www.nuget.org/packages/Microsoft.AspNetCore.DataProtection.Redis/)封裝可讓您將資料保護金鑰儲存在 Redis 快取中。</span><span class="sxs-lookup"><span data-stu-id="225d7-125">The [Microsoft.AspNetCore.DataProtection.Redis](https://www.nuget.org/packages/Microsoft.AspNetCore.DataProtection.Redis/) package allows storing data protection keys in a Redis cache.</span></span> <span data-ttu-id="225d7-126">您可以在 web 應用程式的數個實例之間共用金鑰。</span><span class="sxs-lookup"><span data-stu-id="225d7-126">Keys can be shared across several instances of a web app.</span></span> <span data-ttu-id="225d7-127">應用程式可以 :::no-loc(cookie)::: 在多部伺服器之間共用驗證或 CSRF 保護。</span><span class="sxs-lookup"><span data-stu-id="225d7-127">Apps can share authentication :::no-loc(cookie):::s or CSRF protection across multiple servers.</span></span>
+<span data-ttu-id="225d7-125">[AspNetCore. DataProtection. Redis](https://www.nuget.org/packages/Microsoft.AspNetCore.DataProtection.Redis/)封裝可讓您將資料保護金鑰儲存在 Redis 快取中。</span><span class="sxs-lookup"><span data-stu-id="225d7-125">The [Microsoft.AspNetCore.DataProtection.Redis](https://www.nuget.org/packages/Microsoft.AspNetCore.DataProtection.Redis/) package allows storing data protection keys in a Redis cache.</span></span> <span data-ttu-id="225d7-126">您可以在 web 應用程式的數個實例之間共用金鑰。</span><span class="sxs-lookup"><span data-stu-id="225d7-126">Keys can be shared across several instances of a web app.</span></span> <span data-ttu-id="225d7-127">應用程式可以 cookie 在多部伺服器之間共用驗證或 CSRF 保護。</span><span class="sxs-lookup"><span data-stu-id="225d7-127">Apps can share authentication cookies or CSRF protection across multiple servers.</span></span>
 
 ::: moniker-end
 

@@ -6,17 +6,17 @@ monikerRange: '>= aspnetcore-2.1'
 ms.author: riande
 ms.date: 11/08/2019
 no-loc:
-- ':::no-loc(appsettings.json):::'
-- ':::no-loc(ASP.NET Core Identity):::'
-- ':::no-loc(cookie):::'
-- ':::no-loc(Cookie):::'
-- ':::no-loc(Blazor):::'
-- ':::no-loc(Blazor Server):::'
-- ':::no-loc(Blazor WebAssembly):::'
-- ':::no-loc(Identity):::'
-- ":::no-loc(Let's Encrypt):::"
-- ':::no-loc(Razor):::'
-- ':::no-loc(SignalR):::'
+- 'appsettings.json'
+- 'ASP.NET Core Identity'
+- 'cookie'
+- 'Cookie'
+- 'Blazor'
+- 'Blazor Server'
+- 'Blazor WebAssembly'
+- 'Identity'
+- "Let's Encrypt"
+- 'Razor'
+- 'SignalR'
 uid: security/authorization/limitingidentitybyscheme
 ms.openlocfilehash: a5f2dff7b0e0d4f209ba445b2efb6fb261cbaab1
 ms.sourcegitcommit: fbd5427293d9ecccc388bd5fd305c2eb8ada7281
@@ -27,7 +27,7 @@ ms.locfileid: "94464012"
 ---
 # <a name="authorize-with-a-specific-scheme-in-aspnet-core"></a><span data-ttu-id="15024-103">使用 ASP.NET Core 中的特定配置進行授權</span><span class="sxs-lookup"><span data-stu-id="15024-103">Authorize with a specific scheme in ASP.NET Core</span></span>
 
-<span data-ttu-id="15024-104">在某些案例中，例如 (Spa) 的單一頁面應用程式，通常會使用多個驗證方法。</span><span class="sxs-lookup"><span data-stu-id="15024-104">In some scenarios, such as Single Page Applications (SPAs), it's common to use multiple authentication methods.</span></span> <span data-ttu-id="15024-105">例如，應用程式可能會使用 :::no-loc(cookie)::: 驗證來登入，並針對 JavaScript 要求進行 JWT 持有人驗證。</span><span class="sxs-lookup"><span data-stu-id="15024-105">For example, the app may use :::no-loc(cookie):::-based authentication to log in and JWT bearer authentication for JavaScript requests.</span></span> <span data-ttu-id="15024-106">在某些情況下，應用程式可能會有多個驗證處理常式的實例。</span><span class="sxs-lookup"><span data-stu-id="15024-106">In some cases, the app may have multiple instances of an authentication handler.</span></span> <span data-ttu-id="15024-107">例如，有兩個 :::no-loc(cookie)::: 處理常式，其中一個包含基本身分識別，而另一個處理常式在已觸發多重要素驗證 (MFA) 時建立。</span><span class="sxs-lookup"><span data-stu-id="15024-107">For example, two :::no-loc(cookie)::: handlers where one contains a basic identity and one is created when a multi-factor authentication (MFA) has been triggered.</span></span> <span data-ttu-id="15024-108">可能會觸發 MFA，因為使用者要求的作業需要額外的安全性。</span><span class="sxs-lookup"><span data-stu-id="15024-108">MFA may be triggered because the user requested an operation that requires extra security.</span></span> <span data-ttu-id="15024-109">如需在使用者要求需要 MFA 的資源時強制執行 MFA 的詳細資訊，請參閱 GitHub 問題 [保護區段與 mfa](https://github.com/dotnet/AspNetCore.Docs/issues/15791#issuecomment-580464195)。</span><span class="sxs-lookup"><span data-stu-id="15024-109">For more information on enforcing MFA when a user requests a resource that requires MFA, see the GitHub issue [Protect section with MFA](https://github.com/dotnet/AspNetCore.Docs/issues/15791#issuecomment-580464195).</span></span>
+<span data-ttu-id="15024-104">在某些案例中，例如 (Spa) 的單一頁面應用程式，通常會使用多個驗證方法。</span><span class="sxs-lookup"><span data-stu-id="15024-104">In some scenarios, such as Single Page Applications (SPAs), it's common to use multiple authentication methods.</span></span> <span data-ttu-id="15024-105">例如，應用程式可能會使用 cookie 驗證來登入，並針對 JavaScript 要求進行 JWT 持有人驗證。</span><span class="sxs-lookup"><span data-stu-id="15024-105">For example, the app may use cookie-based authentication to log in and JWT bearer authentication for JavaScript requests.</span></span> <span data-ttu-id="15024-106">在某些情況下，應用程式可能會有多個驗證處理常式的實例。</span><span class="sxs-lookup"><span data-stu-id="15024-106">In some cases, the app may have multiple instances of an authentication handler.</span></span> <span data-ttu-id="15024-107">例如，有兩個 cookie 處理常式，其中一個包含基本身分識別，而另一個處理常式在已觸發多重要素驗證 (MFA) 時建立。</span><span class="sxs-lookup"><span data-stu-id="15024-107">For example, two cookie handlers where one contains a basic identity and one is created when a multi-factor authentication (MFA) has been triggered.</span></span> <span data-ttu-id="15024-108">可能會觸發 MFA，因為使用者要求的作業需要額外的安全性。</span><span class="sxs-lookup"><span data-stu-id="15024-108">MFA may be triggered because the user requested an operation that requires extra security.</span></span> <span data-ttu-id="15024-109">如需在使用者要求需要 MFA 的資源時強制執行 MFA 的詳細資訊，請參閱 GitHub 問題 [保護區段與 mfa](https://github.com/dotnet/AspNetCore.Docs/issues/15791#issuecomment-580464195)。</span><span class="sxs-lookup"><span data-stu-id="15024-109">For more information on enforcing MFA when a user requests a resource that requires MFA, see the GitHub issue [Protect section with MFA](https://github.com/dotnet/AspNetCore.Docs/issues/15791#issuecomment-580464195).</span></span>
 
 <span data-ttu-id="15024-110">驗證方案是在驗證期間設定驗證服務時所命名。</span><span class="sxs-lookup"><span data-stu-id="15024-110">An authentication scheme is named when the authentication service is configured during authentication.</span></span> <span data-ttu-id="15024-111">例如：</span><span class="sxs-lookup"><span data-stu-id="15024-111">For example:</span></span>
 
@@ -37,7 +37,7 @@ public void ConfigureServices(IServiceCollection services)
     // Code omitted for brevity
 
     services.AddAuthentication()
-        .Add:::no-loc(Cookie):::(options => {
+        .AddCookie(options => {
             options.LoginPath = "/Account/Unauthorized/";
             options.AccessDeniedPath = "/Account/Forbidden/";
         })
@@ -47,7 +47,7 @@ public void ConfigureServices(IServiceCollection services)
         });
 ```
 
-<span data-ttu-id="15024-112">在上述程式碼中，已加入兩個驗證處理常式：一個用於 :::no-loc(cookie)::: s，另一個用於持有人。</span><span class="sxs-lookup"><span data-stu-id="15024-112">In the preceding code, two authentication handlers have been added: one for :::no-loc(cookie):::s and one for bearer.</span></span>
+<span data-ttu-id="15024-112">在上述程式碼中，已加入兩個驗證處理常式：一個用於 cookie s，另一個用於持有人。</span><span class="sxs-lookup"><span data-stu-id="15024-112">In the preceding code, two authentication handlers have been added: one for cookies and one for bearer.</span></span>
 
 >[!NOTE]
 ><span data-ttu-id="15024-113">指定預設配置 `HttpContext.User` 會導致屬性設定為該身分識別。</span><span class="sxs-lookup"><span data-stu-id="15024-113">Specifying the default scheme results in the `HttpContext.User` property being set to that identity.</span></span> <span data-ttu-id="15024-114">如果不想要該行為，請叫用無參數形式的來停用該行為 `AddAuthentication` 。</span><span class="sxs-lookup"><span data-stu-id="15024-114">If that behavior isn't desired, disable it by invoking the parameterless form of `AddAuthentication`.</span></span>
@@ -60,14 +60,14 @@ public void ConfigureServices(IServiceCollection services)
 [Authorize(AuthenticationSchemes = AuthSchemes)]
 public class MixedController : Controller
     // Requires the following imports:
-    // using Microsoft.AspNetCore.Authentication.:::no-loc(Cookie):::s;
+    // using Microsoft.AspNetCore.Authentication.Cookies;
     // using Microsoft.AspNetCore.Authentication.JwtBearer;
     private const string AuthSchemes =
-        :::no-loc(Cookie):::AuthenticationDefaults.AuthenticationScheme + "," +
+        CookieAuthenticationDefaults.AuthenticationScheme + "," +
         JwtBearerDefaults.AuthenticationScheme;
 ```
 
-<span data-ttu-id="15024-120">在上述範例中， :::no-loc(cookie)::: 和持有人處理常式都會執行，而且有機會建立和附加目前使用者的身分識別。</span><span class="sxs-lookup"><span data-stu-id="15024-120">In the preceding example, both the :::no-loc(cookie)::: and bearer handlers run and have a chance to create and append an identity for the current user.</span></span> <span data-ttu-id="15024-121">只要指定單一配置，就會執行對應的處理常式。</span><span class="sxs-lookup"><span data-stu-id="15024-121">By specifying a single scheme only, the corresponding handler runs.</span></span>
+<span data-ttu-id="15024-120">在上述範例中， cookie 和持有人處理常式都會執行，而且有機會建立和附加目前使用者的身分識別。</span><span class="sxs-lookup"><span data-stu-id="15024-120">In the preceding example, both the cookie and bearer handlers run and have a chance to create and append an identity for the current user.</span></span> <span data-ttu-id="15024-121">只要指定單一配置，就會執行對應的處理常式。</span><span class="sxs-lookup"><span data-stu-id="15024-121">By specifying a single scheme only, the corresponding handler runs.</span></span>
 
 ```csharp
 [Authorize(AuthenticationSchemes = 
@@ -75,7 +75,7 @@ public class MixedController : Controller
 public class MixedController : Controller
 ```
 
-<span data-ttu-id="15024-122">在上述程式碼中，只會執行具有「持有人」配置的處理常式。</span><span class="sxs-lookup"><span data-stu-id="15024-122">In the preceding code, only the handler with the "Bearer" scheme runs.</span></span> <span data-ttu-id="15024-123">系統會忽略任何以任何身分識別為基礎的身分識別 :::no-loc(cookie)::: 。</span><span class="sxs-lookup"><span data-stu-id="15024-123">Any :::no-loc(cookie):::-based identities are ignored.</span></span>
+<span data-ttu-id="15024-122">在上述程式碼中，只會執行具有「持有人」配置的處理常式。</span><span class="sxs-lookup"><span data-stu-id="15024-122">In the preceding code, only the handler with the "Bearer" scheme runs.</span></span> <span data-ttu-id="15024-123">系統會忽略任何以任何身分識別為基礎的身分識別 cookie 。</span><span class="sxs-lookup"><span data-stu-id="15024-123">Any cookie-based identities are ignored.</span></span>
 
 ## <a name="selecting-the-scheme-with-policies"></a><span data-ttu-id="15024-124">選取具有原則的配置</span><span class="sxs-lookup"><span data-stu-id="15024-124">Selecting the scheme with policies</span></span>
 

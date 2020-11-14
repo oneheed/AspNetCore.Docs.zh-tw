@@ -1,23 +1,23 @@
 ---
-title: 'ASP.NET Core :::no-loc(Razor)::: 元件類別庫'
+title: 'ASP.NET Core Razor 元件類別庫'
 author: guardrex
-description: '探索元件如何包含在 :::no-loc(Blazor)::: 外部元件程式庫的應用程式中。'
+description: '探索元件如何包含在 Blazor 外部元件程式庫的應用程式中。'
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
 ms.date: 07/27/2020
 no-loc:
-- ':::no-loc(appsettings.json):::'
-- ':::no-loc(ASP.NET Core Identity):::'
-- ':::no-loc(cookie):::'
-- ':::no-loc(Cookie):::'
-- ':::no-loc(Blazor):::'
-- ':::no-loc(Blazor Server):::'
-- ':::no-loc(Blazor WebAssembly):::'
-- ':::no-loc(Identity):::'
-- ":::no-loc(Let's Encrypt):::"
-- ':::no-loc(Razor):::'
-- ':::no-loc(SignalR):::'
+- 'appsettings.json'
+- 'ASP.NET Core Identity'
+- 'cookie'
+- 'Cookie'
+- 'Blazor'
+- 'Blazor Server'
+- 'Blazor WebAssembly'
+- 'Identity'
+- "Let's Encrypt"
+- 'Razor'
+- 'SignalR'
 uid: blazor/components/class-libraries
 ms.openlocfilehash: 24a5b93a18cfe36c50d9739ba56d12aca41615c0
 ms.sourcegitcommit: 1ea3f23bec63e96ffc3a927992f30a5fc0de3ff9
@@ -26,11 +26,11 @@ ms.contentlocale: zh-TW
 ms.lasthandoff: 11/12/2020
 ms.locfileid: "94570155"
 ---
-# <a name="aspnet-core-no-locrazor-components-class-libraries"></a><span data-ttu-id="95142-103">ASP.NET Core :::no-loc(Razor)::: 元件類別庫</span><span class="sxs-lookup"><span data-stu-id="95142-103">ASP.NET Core :::no-loc(Razor)::: components class libraries</span></span>
+# <a name="aspnet-core-no-locrazor-components-class-libraries"></a><span data-ttu-id="95142-103">ASP.NET Core Razor 元件類別庫</span><span class="sxs-lookup"><span data-stu-id="95142-103">ASP.NET Core Razor components class libraries</span></span>
 
 <span data-ttu-id="95142-104">依 [Simon Timms](https://github.com/stimms)</span><span class="sxs-lookup"><span data-stu-id="95142-104">By [Simon Timms](https://github.com/stimms)</span></span>
 
-<span data-ttu-id="95142-105">您可以在類別庫中共用元件， [ :::no-loc(Razor)::: (RCL](xref:razor-pages/ui-class)跨專案) 。</span><span class="sxs-lookup"><span data-stu-id="95142-105">Components can be shared in a [:::no-loc(Razor)::: class library (RCL)](xref:razor-pages/ui-class) across projects.</span></span> <span data-ttu-id="95142-106">*:::no-loc(Razor)::: 元件類別庫* 可以包含在：</span><span class="sxs-lookup"><span data-stu-id="95142-106">A *:::no-loc(Razor)::: components class library* can be included from:</span></span>
+<span data-ttu-id="95142-105">您可以在類別庫中共用元件， [ Razor (RCL](xref:razor-pages/ui-class)跨專案) 。</span><span class="sxs-lookup"><span data-stu-id="95142-105">Components can be shared in a [Razor class library (RCL)](xref:razor-pages/ui-class) across projects.</span></span> <span data-ttu-id="95142-106">*Razor 元件類別庫* 可以包含在：</span><span class="sxs-lookup"><span data-stu-id="95142-106">A *Razor components class library* can be included from:</span></span>
 
 * <span data-ttu-id="95142-107">方案中的另一個專案。</span><span class="sxs-lookup"><span data-stu-id="95142-107">Another project in the solution.</span></span>
 * <span data-ttu-id="95142-108">NuGet 套件。</span><span class="sxs-lookup"><span data-stu-id="95142-108">A NuGet package.</span></span>
@@ -43,8 +43,8 @@ ms.locfileid: "94570155"
 # <a name="visual-studio"></a>[<span data-ttu-id="95142-112">Visual Studio</span><span class="sxs-lookup"><span data-stu-id="95142-112">Visual Studio</span></span>](#tab/visual-studio)
 
 1. <span data-ttu-id="95142-113">建立新專案。</span><span class="sxs-lookup"><span data-stu-id="95142-113">Create a new project.</span></span>
-1. <span data-ttu-id="95142-114">選取 [ **:::no-loc(Razor)::: 類別庫** ]。</span><span class="sxs-lookup"><span data-stu-id="95142-114">Select **:::no-loc(Razor)::: Class Library**.</span></span> <span data-ttu-id="95142-115">選取 [下一步]。</span><span class="sxs-lookup"><span data-stu-id="95142-115">Select **Next**.</span></span>
-1. <span data-ttu-id="95142-116">在 [ **建立新的 :::no-loc(Razor)::: 類別庫** ] 對話方塊中，選取 [ **建立** ]。</span><span class="sxs-lookup"><span data-stu-id="95142-116">In the **Create a new :::no-loc(Razor)::: class library** dialog, select **Create**.</span></span>
+1. <span data-ttu-id="95142-114">選取 [ **Razor 類別庫** ]。</span><span class="sxs-lookup"><span data-stu-id="95142-114">Select **Razor Class Library**.</span></span> <span data-ttu-id="95142-115">選取 [下一步]。</span><span class="sxs-lookup"><span data-stu-id="95142-115">Select **Next**.</span></span>
+1. <span data-ttu-id="95142-116">在 [ **建立新的 Razor 類別庫** ] 對話方塊中，選取 [ **建立** ]。</span><span class="sxs-lookup"><span data-stu-id="95142-116">In the **Create a new Razor class library** dialog, select **Create**.</span></span>
 1. <span data-ttu-id="95142-117">在 [專案名稱] 欄位中提供專案名稱，或接受預設專案名稱。</span><span class="sxs-lookup"><span data-stu-id="95142-117">Provide a project name in the **Project name** field or accept the default project name.</span></span> <span data-ttu-id="95142-118">本主題中的範例會使用專案名稱 `ComponentLibrary` 。</span><span class="sxs-lookup"><span data-stu-id="95142-118">The examples in this topic use the project name `ComponentLibrary`.</span></span> <span data-ttu-id="95142-119">選取 [建立]。</span><span class="sxs-lookup"><span data-stu-id="95142-119">Select **Create**.</span></span>
 1. <span data-ttu-id="95142-120">將 RCL 新增至方案：</span><span class="sxs-lookup"><span data-stu-id="95142-120">Add the RCL to a solution:</span></span>
    1. <span data-ttu-id="95142-121">以滑鼠右鍵按一下方案。</span><span class="sxs-lookup"><span data-stu-id="95142-121">Right-click the solution.</span></span> <span data-ttu-id="95142-122">選取 [ **加入**  >  **現有專案** ]。</span><span class="sxs-lookup"><span data-stu-id="95142-122">Select **Add** > **Existing Project**.</span></span>
@@ -55,7 +55,7 @@ ms.locfileid: "94570155"
    1. <span data-ttu-id="95142-128">選取 RCL 專案。</span><span class="sxs-lookup"><span data-stu-id="95142-128">Select the RCL project.</span></span> <span data-ttu-id="95142-129">選取 [確定]。</span><span class="sxs-lookup"><span data-stu-id="95142-129">Select **OK**.</span></span>
 
 > [!NOTE]
-> <span data-ttu-id="95142-130">從範本產生 RCL 時，如果已選取 [ **支援頁面和流覽** 器] 核取方塊，則也請 `_Imports.razor` 使用下列內容將檔案新增至所產生專案的根目錄，以啟用 :::no-loc(Razor)::: 元件撰寫：</span><span class="sxs-lookup"><span data-stu-id="95142-130">If the **Support pages and views** check box is selected when generating the RCL from the template, then also add an `_Imports.razor` file to root of the generated project with the following contents to enable :::no-loc(Razor)::: component authoring:</span></span>
+> <span data-ttu-id="95142-130">從範本產生 RCL 時，如果已選取 [ **支援頁面和流覽** 器] 核取方塊，則也請 `_Imports.razor` 使用下列內容將檔案新增至所產生專案的根目錄，以啟用 Razor 元件撰寫：</span><span class="sxs-lookup"><span data-stu-id="95142-130">If the **Support pages and views** check box is selected when generating the RCL from the template, then also add an `_Imports.razor` file to root of the generated project with the following contents to enable Razor component authoring:</span></span>
 >
 > ```razor
 > @using Microsoft.AspNetCore.Components.Web
@@ -65,14 +65,14 @@ ms.locfileid: "94570155"
 
 # <a name="net-core-cli"></a>[<span data-ttu-id="95142-132">.NET Core CLI</span><span class="sxs-lookup"><span data-stu-id="95142-132">.NET Core CLI</span></span>](#tab/netcore-cli)
 
-1. <span data-ttu-id="95142-133">使用 [ **:::no-loc(Razor)::: 類別庫** ] 範本 (`razorclasslib`) 搭配 [`dotnet new`](/dotnet/core/tools/dotnet-new) 命令 shell 中的命令。</span><span class="sxs-lookup"><span data-stu-id="95142-133">Use the **:::no-loc(Razor)::: Class Library** template (`razorclasslib`) with the [`dotnet new`](/dotnet/core/tools/dotnet-new) command in a command shell.</span></span> <span data-ttu-id="95142-134">在下列範例中，會建立名為的 RCL `ComponentLibrary` 。</span><span class="sxs-lookup"><span data-stu-id="95142-134">In the following example, an RCL is created named `ComponentLibrary`.</span></span> <span data-ttu-id="95142-135">`ComponentLibrary`執行命令時，會自動建立保存的資料夾：</span><span class="sxs-lookup"><span data-stu-id="95142-135">The folder that holds `ComponentLibrary` is created automatically when the command is executed:</span></span>
+1. <span data-ttu-id="95142-133">使用 [ **Razor 類別庫** ] 範本 (`razorclasslib`) 搭配 [`dotnet new`](/dotnet/core/tools/dotnet-new) 命令 shell 中的命令。</span><span class="sxs-lookup"><span data-stu-id="95142-133">Use the **Razor Class Library** template (`razorclasslib`) with the [`dotnet new`](/dotnet/core/tools/dotnet-new) command in a command shell.</span></span> <span data-ttu-id="95142-134">在下列範例中，會建立名為的 RCL `ComponentLibrary` 。</span><span class="sxs-lookup"><span data-stu-id="95142-134">In the following example, an RCL is created named `ComponentLibrary`.</span></span> <span data-ttu-id="95142-135">`ComponentLibrary`執行命令時，會自動建立保存的資料夾：</span><span class="sxs-lookup"><span data-stu-id="95142-135">The folder that holds `ComponentLibrary` is created automatically when the command is executed:</span></span>
 
    ```dotnetcli
    dotnet new razorclasslib -o ComponentLibrary
    ```
 
    > [!NOTE]
-   > <span data-ttu-id="95142-136">如果 `-s|--support-pages-and-views` 從範本產生 RCL 時使用參數，則也請 `_Imports.razor` 使用下列內容將檔案新增至所產生專案的根目錄，以啟用 :::no-loc(Razor)::: 元件撰寫：</span><span class="sxs-lookup"><span data-stu-id="95142-136">If the `-s|--support-pages-and-views` switch is used when generating the RCL from the template, then also add an `_Imports.razor` file to root of the generated project with the following contents to enable :::no-loc(Razor)::: component authoring:</span></span>
+   > <span data-ttu-id="95142-136">如果 `-s|--support-pages-and-views` 從範本產生 RCL 時使用參數，則也請 `_Imports.razor` 使用下列內容將檔案新增至所產生專案的根目錄，以啟用 Razor 元件撰寫：</span><span class="sxs-lookup"><span data-stu-id="95142-136">If the `-s|--support-pages-and-views` switch is used when generating the RCL from the template, then also add an `_Imports.razor` file to root of the generated project with the following contents to enable Razor component authoring:</span></span>
    >
    > ```razor
    > @using Microsoft.AspNetCore.Components.Web
@@ -93,7 +93,7 @@ ms.locfileid: "94570155"
 <span data-ttu-id="95142-142">若要使用在另一個專案的程式庫中定義的元件，請使用下列其中一種方法：</span><span class="sxs-lookup"><span data-stu-id="95142-142">In order to consume components defined in a library in another project, use either of the following approaches:</span></span>
 
 * <span data-ttu-id="95142-143">使用完整類型名稱與命名空間。</span><span class="sxs-lookup"><span data-stu-id="95142-143">Use the full type name with the namespace.</span></span>
-* <span data-ttu-id="95142-144">使用 :::no-loc(Razor)::: 的指示詞 [`@using`](xref:mvc/views/razor#using) 。</span><span class="sxs-lookup"><span data-stu-id="95142-144">Use :::no-loc(Razor):::'s [`@using`](xref:mvc/views/razor#using) directive.</span></span> <span data-ttu-id="95142-145">您可以依名稱新增個別的元件。</span><span class="sxs-lookup"><span data-stu-id="95142-145">Individual components can be added by name.</span></span>
+* <span data-ttu-id="95142-144">使用 Razor 的指示詞 [`@using`](xref:mvc/views/razor#using) 。</span><span class="sxs-lookup"><span data-stu-id="95142-144">Use Razor's [`@using`](xref:mvc/views/razor#using) directive.</span></span> <span data-ttu-id="95142-145">您可以依名稱新增個別的元件。</span><span class="sxs-lookup"><span data-stu-id="95142-145">Individual components can be added by name.</span></span>
 
 <span data-ttu-id="95142-146">在下列範例中， `ComponentLibrary` 是包含元件 () 的元件程式庫 `Component1` `Component1.razor` 。</span><span class="sxs-lookup"><span data-stu-id="95142-146">In the following examples, `ComponentLibrary` is a component library containing the `Component1` component (`Component1.razor`).</span></span> <span data-ttu-id="95142-147">`Component1`元件是 RCL 專案範本在建立程式庫時自動新增的範例元件。</span><span class="sxs-lookup"><span data-stu-id="95142-147">The `Component1` component is an example component automatically added by the RCL project template when the library is created.</span></span>
 
@@ -132,12 +132,12 @@ To provide `Component1`'s `my-component` CSS class to the component, link to the
     <Link href="_content/ComponentLibrary/styles.css" rel="stylesheet" />
 
     <p>
-        This :::no-loc(Blazor)::: component is defined in the <strong>ComponentLibrary</strong> package.
+        This Blazor component is defined in the <strong>ComponentLibrary</strong> package.
     </p>
 </div>
 ```
 
-To provide the stylesheet across the app, you can alternatively link to the library's stylesheet in the app's `wwwroot/index.html` file (:::no-loc(Blazor WebAssembly):::) or `Pages/_Host.cshtml` file (:::no-loc(Blazor Server):::):
+To provide the stylesheet across the app, you can alternatively link to the library's stylesheet in the app's `wwwroot/index.html` file (Blazor WebAssembly) or `Pages/_Host.cshtml` file (Blazor Server):
 
 ```html
 <head>
@@ -157,7 +157,7 @@ When the `Link` component is used in a child component, the linked asset is also
 
 -->
 
-<span data-ttu-id="95142-152">若要提供 `Component1` 的 `my-component` CSS 類別，請連結至應用程式檔案中程式庫的樣式表單 `wwwroot/index.html` (:::no-loc(Blazor WebAssembly):::) 或 `Pages/_Host.cshtml` 檔 (:::no-loc(Blazor Server):::) ：</span><span class="sxs-lookup"><span data-stu-id="95142-152">To provide `Component1`'s `my-component` CSS class, link to the library's stylesheet in the app's `wwwroot/index.html` file (:::no-loc(Blazor WebAssembly):::) or `Pages/_Host.cshtml` file (:::no-loc(Blazor Server):::):</span></span>
+<span data-ttu-id="95142-152">若要提供 `Component1` 的 `my-component` CSS 類別，請連結至應用程式檔案中程式庫的樣式表單 `wwwroot/index.html` (Blazor WebAssembly) 或 `Pages/_Host.cshtml` 檔 (Blazor Server) ：</span><span class="sxs-lookup"><span data-stu-id="95142-152">To provide `Component1`'s `my-component` CSS class, link to the library's stylesheet in the app's `wwwroot/index.html` file (Blazor WebAssembly) or `Pages/_Host.cshtml` file (Blazor Server):</span></span>
 
 ```html
 <head>
@@ -172,21 +172,21 @@ When the `Link` component is used in a child component, the linked asset is also
 
 -->
 
-## <a name="create-a-no-locrazor-components-class-library-with-static-assets"></a><span data-ttu-id="95142-153">建立 :::no-loc(Razor)::: 具有靜態資產的元件類別庫</span><span class="sxs-lookup"><span data-stu-id="95142-153">Create a :::no-loc(Razor)::: components class library with static assets</span></span>
+## <a name="create-a-no-locrazor-components-class-library-with-static-assets"></a><span data-ttu-id="95142-153">建立 Razor 具有靜態資產的元件類別庫</span><span class="sxs-lookup"><span data-stu-id="95142-153">Create a Razor components class library with static assets</span></span>
 
 <span data-ttu-id="95142-154">RCL 可以包含靜態資產。</span><span class="sxs-lookup"><span data-stu-id="95142-154">An RCL can include static assets.</span></span> <span data-ttu-id="95142-155">靜態資產可供任何使用程式庫的應用程式使用。</span><span class="sxs-lookup"><span data-stu-id="95142-155">The static assets are available to any app that consumes the library.</span></span> <span data-ttu-id="95142-156">如需詳細資訊，請參閱<xref:razor-pages/ui-class#create-an-rcl-with-static-assets>。</span><span class="sxs-lookup"><span data-stu-id="95142-156">For more information, see <xref:razor-pages/ui-class#create-an-rcl-with-static-assets>.</span></span>
 
-## <a name="supply-components-and-static-assets-to-multiple-hosted-no-locblazor-apps"></a><span data-ttu-id="95142-157">將元件和靜態資產提供給多個託管 :::no-loc(Blazor)::: 應用程式</span><span class="sxs-lookup"><span data-stu-id="95142-157">Supply components and static assets to multiple hosted :::no-loc(Blazor)::: apps</span></span>
+## <a name="supply-components-and-static-assets-to-multiple-hosted-no-locblazor-apps"></a><span data-ttu-id="95142-157">將元件和靜態資產提供給多個託管 Blazor 應用程式</span><span class="sxs-lookup"><span data-stu-id="95142-157">Supply components and static assets to multiple hosted Blazor apps</span></span>
 
 <span data-ttu-id="95142-158">如需詳細資訊，請參閱<xref:blazor/host-and-deploy/webassembly#static-assets-and-class-libraries>。</span><span class="sxs-lookup"><span data-stu-id="95142-158">For more information, see <xref:blazor/host-and-deploy/webassembly#static-assets-and-class-libraries>.</span></span>
 
 ::: moniker range=">= aspnetcore-5.0"
 
-## <a name="browser-compatibility-analyzer-for-no-locblazor-webassembly"></a><span data-ttu-id="95142-159">的瀏覽器相容性分析器 :::no-loc(Blazor WebAssembly):::</span><span class="sxs-lookup"><span data-stu-id="95142-159">Browser compatibility analyzer for :::no-loc(Blazor WebAssembly):::</span></span>
+## <a name="browser-compatibility-analyzer-for-no-locblazor-webassembly"></a><span data-ttu-id="95142-159">的瀏覽器相容性分析器 Blazor WebAssembly</span><span class="sxs-lookup"><span data-stu-id="95142-159">Browser compatibility analyzer for Blazor WebAssembly</span></span>
 
-<span data-ttu-id="95142-160">:::no-loc(Blazor WebAssembly)::: 應用程式會以完整的 .NET API 介面區為目標，但由於瀏覽器沙箱條件約束，WebAssembly 並不支援所有的 .NET Api。</span><span class="sxs-lookup"><span data-stu-id="95142-160">:::no-loc(Blazor WebAssembly)::: apps target the full .NET API surface area, but not all .NET APIs are supported on WebAssembly due to browser sandbox constraints.</span></span> <span data-ttu-id="95142-161"><xref:System.PlatformNotSupportedException>在 WebAssembly 上執行時，不支援的 api 會擲回。</span><span class="sxs-lookup"><span data-stu-id="95142-161">Unsupported APIs throw <xref:System.PlatformNotSupportedException> when running on WebAssembly.</span></span> <span data-ttu-id="95142-162">當應用程式使用應用程式的目標平臺不支援的 Api 時，平臺相容性分析器會警告開發人員。</span><span class="sxs-lookup"><span data-stu-id="95142-162">A platform compatibility analyzer warns the developer when the app uses APIs that aren't supported by the app's target platforms.</span></span> <span data-ttu-id="95142-163">針對 :::no-loc(Blazor WebAssembly)::: 應用程式，這表示檢查瀏覽器中是否支援 api。</span><span class="sxs-lookup"><span data-stu-id="95142-163">For :::no-loc(Blazor WebAssembly)::: apps, this means checking that APIs are supported in browsers.</span></span> <span data-ttu-id="95142-164">針對相容性分析器標注 .NET framework Api 是一項持續進行的程式，所以並非所有的 .NET framework API 目前都有批註。</span><span class="sxs-lookup"><span data-stu-id="95142-164">Annotating .NET framework APIs for the compatibility analyzer is an on-going process, so not all .NET framework API is currently annotated.</span></span>
+<span data-ttu-id="95142-160">Blazor WebAssembly 應用程式會以完整的 .NET API 介面區為目標，但由於瀏覽器沙箱條件約束，WebAssembly 並不支援所有的 .NET Api。</span><span class="sxs-lookup"><span data-stu-id="95142-160">Blazor WebAssembly apps target the full .NET API surface area, but not all .NET APIs are supported on WebAssembly due to browser sandbox constraints.</span></span> <span data-ttu-id="95142-161"><xref:System.PlatformNotSupportedException>在 WebAssembly 上執行時，不支援的 api 會擲回。</span><span class="sxs-lookup"><span data-stu-id="95142-161">Unsupported APIs throw <xref:System.PlatformNotSupportedException> when running on WebAssembly.</span></span> <span data-ttu-id="95142-162">當應用程式使用應用程式的目標平臺不支援的 Api 時，平臺相容性分析器會警告開發人員。</span><span class="sxs-lookup"><span data-stu-id="95142-162">A platform compatibility analyzer warns the developer when the app uses APIs that aren't supported by the app's target platforms.</span></span> <span data-ttu-id="95142-163">針對 Blazor WebAssembly 應用程式，這表示檢查瀏覽器中是否支援 api。</span><span class="sxs-lookup"><span data-stu-id="95142-163">For Blazor WebAssembly apps, this means checking that APIs are supported in browsers.</span></span> <span data-ttu-id="95142-164">針對相容性分析器標注 .NET framework Api 是一項持續進行的程式，所以並非所有的 .NET framework API 目前都有批註。</span><span class="sxs-lookup"><span data-stu-id="95142-164">Annotating .NET framework APIs for the compatibility analyzer is an on-going process, so not all .NET framework API is currently annotated.</span></span>
 
-<span data-ttu-id="95142-165">:::no-loc(Blazor WebAssembly)::: 和 :::no-loc(Razor)::: 類別庫專案 *會* 藉由新增 `browser` 作為 MSBuild 專案的支援平臺，自動啟用瀏覽器相容性檢查 `SupportedPlatform` 。</span><span class="sxs-lookup"><span data-stu-id="95142-165">:::no-loc(Blazor WebAssembly)::: and :::no-loc(Razor)::: class library projects *automatically* enable browser compatibilty checks by adding `browser` as a supported platform with the `SupportedPlatform` MSBuild item.</span></span> <span data-ttu-id="95142-166">程式庫開發人員可以手動將 `SupportedPlatform` 專案新增至程式庫的專案檔，以啟用此功能：</span><span class="sxs-lookup"><span data-stu-id="95142-166">Library developers can manually add the `SupportedPlatform` item to a library's project file to enable the feature:</span></span>
+<span data-ttu-id="95142-165">Blazor WebAssembly 和 Razor 類別庫專案 *會* 藉由新增 `browser` 作為 MSBuild 專案的支援平臺，自動啟用瀏覽器相容性檢查 `SupportedPlatform` 。</span><span class="sxs-lookup"><span data-stu-id="95142-165">Blazor WebAssembly and Razor class library projects *automatically* enable browser compatibilty checks by adding `browser` as a supported platform with the `SupportedPlatform` MSBuild item.</span></span> <span data-ttu-id="95142-166">程式庫開發人員可以手動將 `SupportedPlatform` 專案新增至程式庫的專案檔，以啟用此功能：</span><span class="sxs-lookup"><span data-stu-id="95142-166">Library developers can manually add the `SupportedPlatform` item to a library's project file to enable the feature:</span></span>
 
 ```xml
 <ItemGroup>
@@ -206,9 +206,9 @@ private static string GetLoggingDirectory()
 
 <span data-ttu-id="95142-168">如需詳細資訊，請參閱將 [Api 標注為特定平臺上不支援 (dotnet/設計 GitHub 存放庫](https://github.com/dotnet/designs/blob/main/accepted/2020/platform-exclusion/platform-exclusion.md#build-configuration-for-platforms)。</span><span class="sxs-lookup"><span data-stu-id="95142-168">For more information, see [Annotating APIs as unsupported on specific platforms (dotnet/designs GitHub repository](https://github.com/dotnet/designs/blob/main/accepted/2020/platform-exclusion/platform-exclusion.md#build-configuration-for-platforms).</span></span>
 
-## <a name="no-locblazor-javascript-isolation-and-object-references"></a><span data-ttu-id="95142-169">:::no-loc(Blazor)::: JavaScript 隔離和物件參考</span><span class="sxs-lookup"><span data-stu-id="95142-169">:::no-loc(Blazor)::: JavaScript isolation and object references</span></span>
+## <a name="no-locblazor-javascript-isolation-and-object-references"></a><span data-ttu-id="95142-169">Blazor JavaScript 隔離和物件參考</span><span class="sxs-lookup"><span data-stu-id="95142-169">Blazor JavaScript isolation and object references</span></span>
 
-<span data-ttu-id="95142-170">:::no-loc(Blazor)::: 啟用標準 [javascript 模組](https://developer.mozilla.org/docs/Web/JavaScript/Guide/Modules)中的 JavaScript 隔離。</span><span class="sxs-lookup"><span data-stu-id="95142-170">:::no-loc(Blazor)::: enables JavaScript isolation in standard [JavaScript modules](https://developer.mozilla.org/docs/Web/JavaScript/Guide/Modules).</span></span> <span data-ttu-id="95142-171">JavaScript 隔離提供下列優點：</span><span class="sxs-lookup"><span data-stu-id="95142-171">JavaScript isolation provides the following benefits:</span></span>
+<span data-ttu-id="95142-170">Blazor 啟用標準 [javascript 模組](https://developer.mozilla.org/docs/Web/JavaScript/Guide/Modules)中的 JavaScript 隔離。</span><span class="sxs-lookup"><span data-stu-id="95142-170">Blazor enables JavaScript isolation in standard [JavaScript modules](https://developer.mozilla.org/docs/Web/JavaScript/Guide/Modules).</span></span> <span data-ttu-id="95142-171">JavaScript 隔離提供下列優點：</span><span class="sxs-lookup"><span data-stu-id="95142-171">JavaScript isolation provides the following benefits:</span></span>
 
 * <span data-ttu-id="95142-172">匯入的 JavaScript 不再干擾全域命名空間。</span><span class="sxs-lookup"><span data-stu-id="95142-172">Imported JavaScript no longer pollutes the global namespace.</span></span>
 * <span data-ttu-id="95142-173">不需要程式庫和元件的取用者手動匯入相關的 JavaScript。</span><span class="sxs-lookup"><span data-stu-id="95142-173">Consumers of the library and components aren't required to manually import the related JavaScript.</span></span>
@@ -233,7 +233,7 @@ dotnet pack
 
 * <xref:razor-pages/ui-class>
 * [<span data-ttu-id="95142-180">將 XML 中繼語言 (IL) 修剪器設定檔新增至程式庫</span><span class="sxs-lookup"><span data-stu-id="95142-180">Add an XML Intermediate Language (IL) Trimmer configuration file to a library</span></span>](xref:blazor/host-and-deploy/configure-trimmer)
-* [<span data-ttu-id="95142-181">類別庫的 CSS 隔離支援 :::no-loc(Razor):::</span><span class="sxs-lookup"><span data-stu-id="95142-181">CSS isolation support with :::no-loc(Razor)::: class libraries</span></span>](xref:blazor/components/css-isolation#razor-class-library-rcl-support)
+* [<span data-ttu-id="95142-181">類別庫的 CSS 隔離支援 Razor</span><span class="sxs-lookup"><span data-stu-id="95142-181">CSS isolation support with Razor class libraries</span></span>](xref:blazor/components/css-isolation#razor-class-library-rcl-support)
 
 ::: moniker-end
 

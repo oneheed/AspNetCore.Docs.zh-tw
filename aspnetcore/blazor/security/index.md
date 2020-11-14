@@ -1,23 +1,23 @@
 ---
-title: 'ASP.NET Core :::no-loc(Blazor)::: 驗證與授權'
+title: 'ASP.NET Core Blazor 驗證與授權'
 author: guardrex
-description: '瞭解 :::no-loc(Blazor)::: 驗證與授權案例。'
+description: '瞭解 Blazor 驗證與授權案例。'
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
 ms.date: 05/19/2020
 no-loc:
-- ':::no-loc(appsettings.json):::'
-- ':::no-loc(ASP.NET Core Identity):::'
-- ':::no-loc(cookie):::'
-- ':::no-loc(Cookie):::'
-- ':::no-loc(Blazor):::'
-- ':::no-loc(Blazor Server):::'
-- ':::no-loc(Blazor WebAssembly):::'
-- ':::no-loc(Identity):::'
-- ":::no-loc(Let's Encrypt):::"
-- ':::no-loc(Razor):::'
-- ':::no-loc(SignalR):::'
+- 'appsettings.json'
+- 'ASP.NET Core Identity'
+- 'cookie'
+- 'Cookie'
+- 'Blazor'
+- 'Blazor Server'
+- 'Blazor WebAssembly'
+- 'Identity'
+- "Let's Encrypt"
+- 'Razor'
+- 'SignalR'
 uid: blazor/security/index
 ms.openlocfilehash: a333c189e81a9f44e94deb6b37097f1a8b19a0f9
 ms.sourcegitcommit: fe5a287fa6b9477b130aa39728f82cdad57611ee
@@ -26,31 +26,31 @@ ms.contentlocale: zh-TW
 ms.lasthandoff: 11/10/2020
 ms.locfileid: "94430922"
 ---
-# <a name="aspnet-core-no-locblazor-authentication-and-authorization"></a><span data-ttu-id="6f47c-103">ASP.NET Core :::no-loc(Blazor)::: 驗證與授權</span><span class="sxs-lookup"><span data-stu-id="6f47c-103">ASP.NET Core :::no-loc(Blazor)::: authentication and authorization</span></span>
+# <a name="aspnet-core-no-locblazor-authentication-and-authorization"></a><span data-ttu-id="6f47c-103">ASP.NET Core Blazor 驗證與授權</span><span class="sxs-lookup"><span data-stu-id="6f47c-103">ASP.NET Core Blazor authentication and authorization</span></span>
 
 <span data-ttu-id="6f47c-104">由 [Steve Sanderson](https://github.com/SteveSandersonMS) 和 [Luke Latham](https://github.com/guardrex)</span><span class="sxs-lookup"><span data-stu-id="6f47c-104">By [Steve Sanderson](https://github.com/SteveSandersonMS) and [Luke Latham](https://github.com/guardrex)</span></span>
 
-<span data-ttu-id="6f47c-105">ASP.NET Core 支援在應用程式中設定和管理安全性 :::no-loc(Blazor)::: 。</span><span class="sxs-lookup"><span data-stu-id="6f47c-105">ASP.NET Core supports the configuration and management of security in :::no-loc(Blazor)::: apps.</span></span>
+<span data-ttu-id="6f47c-105">ASP.NET Core 支援在應用程式中設定和管理安全性 Blazor 。</span><span class="sxs-lookup"><span data-stu-id="6f47c-105">ASP.NET Core supports the configuration and management of security in Blazor apps.</span></span>
 
-<span data-ttu-id="6f47c-106">:::no-loc(Blazor Server):::和應用程式之間的安全性案例不同 :::no-loc(Blazor WebAssembly)::: 。</span><span class="sxs-lookup"><span data-stu-id="6f47c-106">Security scenarios differ between :::no-loc(Blazor Server)::: and :::no-loc(Blazor WebAssembly)::: apps.</span></span> <span data-ttu-id="6f47c-107">由於 :::no-loc(Blazor Server)::: 應用程式是在伺服器上執行，因此授權檢查能夠判斷：</span><span class="sxs-lookup"><span data-stu-id="6f47c-107">Because :::no-loc(Blazor Server)::: apps run on the server, authorization checks are able to determine:</span></span>
+<span data-ttu-id="6f47c-106">Blazor Server和應用程式之間的安全性案例不同 Blazor WebAssembly 。</span><span class="sxs-lookup"><span data-stu-id="6f47c-106">Security scenarios differ between Blazor Server and Blazor WebAssembly apps.</span></span> <span data-ttu-id="6f47c-107">由於 Blazor Server 應用程式是在伺服器上執行，因此授權檢查能夠判斷：</span><span class="sxs-lookup"><span data-stu-id="6f47c-107">Because Blazor Server apps run on the server, authorization checks are able to determine:</span></span>
 
 * <span data-ttu-id="6f47c-108">要提供給使用者的 UI 選項 (例如，使用者可以使用哪些功能表項目)。</span><span class="sxs-lookup"><span data-stu-id="6f47c-108">The UI options presented to a user (for example, which menu entries are available to a user).</span></span>
 * <span data-ttu-id="6f47c-109">適用於應用程式和元件之特定區域的存取規則。</span><span class="sxs-lookup"><span data-stu-id="6f47c-109">Access rules for areas of the app and components.</span></span>
 
-<span data-ttu-id="6f47c-110">:::no-loc(Blazor WebAssembly)::: 應用程式會在用戶端上執行。</span><span class="sxs-lookup"><span data-stu-id="6f47c-110">:::no-loc(Blazor WebAssembly)::: apps run on the client.</span></span> <span data-ttu-id="6f47c-111">授權「僅」會被用來決定要顯示的 UI 選項。</span><span class="sxs-lookup"><span data-stu-id="6f47c-111">Authorization is *only* used to determine which UI options to show.</span></span> <span data-ttu-id="6f47c-112">由於用戶端檢查可以由使用者修改或略過，因此 :::no-loc(Blazor WebAssembly)::: 應用程式無法強制執行授權存取規則。</span><span class="sxs-lookup"><span data-stu-id="6f47c-112">Since client-side checks can be modified or bypassed by a user, a :::no-loc(Blazor WebAssembly)::: app can't enforce authorization access rules.</span></span>
+<span data-ttu-id="6f47c-110">Blazor WebAssembly 應用程式會在用戶端上執行。</span><span class="sxs-lookup"><span data-stu-id="6f47c-110">Blazor WebAssembly apps run on the client.</span></span> <span data-ttu-id="6f47c-111">授權「僅」會被用來決定要顯示的 UI 選項。</span><span class="sxs-lookup"><span data-stu-id="6f47c-111">Authorization is *only* used to determine which UI options to show.</span></span> <span data-ttu-id="6f47c-112">由於用戶端檢查可以由使用者修改或略過，因此 Blazor WebAssembly 應用程式無法強制執行授權存取規則。</span><span class="sxs-lookup"><span data-stu-id="6f47c-112">Since client-side checks can be modified or bypassed by a user, a Blazor WebAssembly app can't enforce authorization access rules.</span></span>
 
-<span data-ttu-id="6f47c-113">[ :::no-loc(Razor)::: 頁面授權慣例](xref:security/authorization/razor-pages-authorization)不適用於可路由傳送的 :::no-loc(Razor)::: 元件。</span><span class="sxs-lookup"><span data-stu-id="6f47c-113">[:::no-loc(Razor)::: Pages authorization conventions](xref:security/authorization/razor-pages-authorization) don't apply to routable :::no-loc(Razor)::: components.</span></span> <span data-ttu-id="6f47c-114">如果無法路由傳送的 :::no-loc(Razor)::: 元件 [內嵌在頁面中](xref:blazor/components/prerendering-and-integration)，頁面的授權慣例會間接影響 :::no-loc(Razor)::: 元件以及頁面內容的其餘部分。</span><span class="sxs-lookup"><span data-stu-id="6f47c-114">If a non-routable :::no-loc(Razor)::: component is [embedded in a page](xref:blazor/components/prerendering-and-integration), the page's authorization conventions indirectly affect the :::no-loc(Razor)::: component along with the rest of the page's content.</span></span>
+<span data-ttu-id="6f47c-113">[ Razor 頁面授權慣例](xref:security/authorization/razor-pages-authorization)不適用於可路由傳送的 Razor 元件。</span><span class="sxs-lookup"><span data-stu-id="6f47c-113">[Razor Pages authorization conventions](xref:security/authorization/razor-pages-authorization) don't apply to routable Razor components.</span></span> <span data-ttu-id="6f47c-114">如果無法路由傳送的 Razor 元件 [內嵌在頁面中](xref:blazor/components/prerendering-and-integration)，頁面的授權慣例會間接影響 Razor 元件以及頁面內容的其餘部分。</span><span class="sxs-lookup"><span data-stu-id="6f47c-114">If a non-routable Razor component is [embedded in a page](xref:blazor/components/prerendering-and-integration), the page's authorization conventions indirectly affect the Razor component along with the rest of the page's content.</span></span>
 
 > [!NOTE]
-> <span data-ttu-id="6f47c-115"><xref:Microsoft.AspNetCore.:::no-loc(Identity):::.SignInManager%601><xref:Microsoft.AspNetCore.:::no-loc(Identity):::.UserManager%601>元件中不支援和 :::no-loc(Razor)::: 。</span><span class="sxs-lookup"><span data-stu-id="6f47c-115"><xref:Microsoft.AspNetCore.:::no-loc(Identity):::.SignInManager%601> and <xref:Microsoft.AspNetCore.:::no-loc(Identity):::.UserManager%601> aren't supported in :::no-loc(Razor)::: components.</span></span>
+> <span data-ttu-id="6f47c-115"><xref:Microsoft.AspNetCore.Identity.SignInManager%601><xref:Microsoft.AspNetCore.Identity.UserManager%601>元件中不支援和 Razor 。</span><span class="sxs-lookup"><span data-stu-id="6f47c-115"><xref:Microsoft.AspNetCore.Identity.SignInManager%601> and <xref:Microsoft.AspNetCore.Identity.UserManager%601> aren't supported in Razor components.</span></span>
 
 ## <a name="authentication"></a><span data-ttu-id="6f47c-116">驗證</span><span class="sxs-lookup"><span data-stu-id="6f47c-116">Authentication</span></span>
 
-<span data-ttu-id="6f47c-117">:::no-loc(Blazor)::: 使用現有的 ASP.NET Core 驗證機制來建立使用者的身分識別。</span><span class="sxs-lookup"><span data-stu-id="6f47c-117">:::no-loc(Blazor)::: uses the existing ASP.NET Core authentication mechanisms to establish the user's identity.</span></span> <span data-ttu-id="6f47c-118">確切的機制取決於應用程式的裝載方式 :::no-loc(Blazor)::: :::no-loc(Blazor WebAssembly)::: 或 :::no-loc(Blazor Server)::: 。</span><span class="sxs-lookup"><span data-stu-id="6f47c-118">The exact mechanism depends on how the :::no-loc(Blazor)::: app is hosted, :::no-loc(Blazor WebAssembly)::: or :::no-loc(Blazor Server):::.</span></span>
+<span data-ttu-id="6f47c-117">Blazor 使用現有的 ASP.NET Core 驗證機制來建立使用者的身分識別。</span><span class="sxs-lookup"><span data-stu-id="6f47c-117">Blazor uses the existing ASP.NET Core authentication mechanisms to establish the user's identity.</span></span> <span data-ttu-id="6f47c-118">確切的機制取決於應用程式的裝載方式 Blazor Blazor WebAssembly 或 Blazor Server 。</span><span class="sxs-lookup"><span data-stu-id="6f47c-118">The exact mechanism depends on how the Blazor app is hosted, Blazor WebAssembly or Blazor Server.</span></span>
 
-### <a name="no-locblazor-webassembly-authentication"></a><span data-ttu-id="6f47c-119">:::no-loc(Blazor WebAssembly)::: 驗證</span><span class="sxs-lookup"><span data-stu-id="6f47c-119">:::no-loc(Blazor WebAssembly)::: authentication</span></span>
+### <a name="no-locblazor-webassembly-authentication"></a><span data-ttu-id="6f47c-119">Blazor WebAssembly 驗證</span><span class="sxs-lookup"><span data-stu-id="6f47c-119">Blazor WebAssembly authentication</span></span>
 
-<span data-ttu-id="6f47c-120">在 :::no-loc(Blazor WebAssembly)::: 應用程式中，可以略過驗證檢查，因為使用者可以修改所有用戶端程式代碼。</span><span class="sxs-lookup"><span data-stu-id="6f47c-120">In :::no-loc(Blazor WebAssembly)::: apps, authentication checks can be bypassed because all client-side code can be modified by users.</span></span> <span data-ttu-id="6f47c-121">這同樣也適用於所有的用戶端應用程式技術，包括 JavaScript SPA 架構或任何作業系統的原生應用程式。</span><span class="sxs-lookup"><span data-stu-id="6f47c-121">The same is true for all client-side app technologies, including JavaScript SPA frameworks or native apps for any operating system.</span></span>
+<span data-ttu-id="6f47c-120">在 Blazor WebAssembly 應用程式中，可以略過驗證檢查，因為使用者可以修改所有用戶端程式代碼。</span><span class="sxs-lookup"><span data-stu-id="6f47c-120">In Blazor WebAssembly apps, authentication checks can be bypassed because all client-side code can be modified by users.</span></span> <span data-ttu-id="6f47c-121">這同樣也適用於所有的用戶端應用程式技術，包括 JavaScript SPA 架構或任何作業系統的原生應用程式。</span><span class="sxs-lookup"><span data-stu-id="6f47c-121">The same is true for all client-side app technologies, including JavaScript SPA frameworks or native apps for any operating system.</span></span>
 
 <span data-ttu-id="6f47c-122">新增下列內容：</span><span class="sxs-lookup"><span data-stu-id="6f47c-122">Add the following:</span></span>
 
@@ -61,11 +61,11 @@ ms.locfileid: "94430922"
 
 <span data-ttu-id="6f47c-126">如需建立應用程式和設定的詳細資訊，請參閱 <xref:blazor/security/webassembly/index> 。</span><span class="sxs-lookup"><span data-stu-id="6f47c-126">For more information on creating apps and configuration, see <xref:blazor/security/webassembly/index>.</span></span>
 
-### <a name="no-locblazor-server-authentication"></a><span data-ttu-id="6f47c-127">:::no-loc(Blazor Server)::: 驗證</span><span class="sxs-lookup"><span data-stu-id="6f47c-127">:::no-loc(Blazor Server)::: authentication</span></span>
+### <a name="no-locblazor-server-authentication"></a><span data-ttu-id="6f47c-127">Blazor Server 驗證</span><span class="sxs-lookup"><span data-stu-id="6f47c-127">Blazor Server authentication</span></span>
 
-<span data-ttu-id="6f47c-128">:::no-loc(Blazor Server)::: 應用程式會透過使用建立的即時連接來運作 :::no-loc(SignalR)::: 。</span><span class="sxs-lookup"><span data-stu-id="6f47c-128">:::no-loc(Blazor Server)::: apps operate over a real-time connection that's created using :::no-loc(SignalR):::.</span></span> <span data-ttu-id="6f47c-129">建立連線時，會處理[以 :::no-loc(SignalR)::: 應用程式為基礎的驗證](xref:signalr/authn-and-authz)。</span><span class="sxs-lookup"><span data-stu-id="6f47c-129">[Authentication in :::no-loc(SignalR):::-based apps](xref:signalr/authn-and-authz) is handled when the connection is established.</span></span> <span data-ttu-id="6f47c-130">驗證可以根據 :::no-loc(cookie)::: 或其他某些持有人權杖。</span><span class="sxs-lookup"><span data-stu-id="6f47c-130">Authentication can be based on a :::no-loc(cookie)::: or some other bearer token.</span></span>
+<span data-ttu-id="6f47c-128">Blazor Server 應用程式會透過使用建立的即時連接來運作 SignalR 。</span><span class="sxs-lookup"><span data-stu-id="6f47c-128">Blazor Server apps operate over a real-time connection that's created using SignalR.</span></span> <span data-ttu-id="6f47c-129">建立連線時，會處理[以 SignalR 應用程式為基礎的驗證](xref:signalr/authn-and-authz)。</span><span class="sxs-lookup"><span data-stu-id="6f47c-129">[Authentication in SignalR-based apps](xref:signalr/authn-and-authz) is handled when the connection is established.</span></span> <span data-ttu-id="6f47c-130">驗證可以根據 cookie 或其他某些持有人權杖。</span><span class="sxs-lookup"><span data-stu-id="6f47c-130">Authentication can be based on a cookie or some other bearer token.</span></span>
 
-<span data-ttu-id="6f47c-131"><xref:Microsoft.AspNetCore.Components.Authorization.AuthenticationStateProvider>適用于應用程式的內建服務會 :::no-loc(Blazor Server)::: 從 ASP.NET Core 取得驗證狀態資料 `HttpContext.User` 。</span><span class="sxs-lookup"><span data-stu-id="6f47c-131">The built-in <xref:Microsoft.AspNetCore.Components.Authorization.AuthenticationStateProvider> service for :::no-loc(Blazor Server)::: apps obtains authentication state data from ASP.NET Core's `HttpContext.User`.</span></span> <span data-ttu-id="6f47c-132">這是驗證狀態與現有 ASP.NET Core 驗證機制的整合方式。</span><span class="sxs-lookup"><span data-stu-id="6f47c-132">This is how authentication state integrates with existing ASP.NET Core authentication mechanisms.</span></span>
+<span data-ttu-id="6f47c-131"><xref:Microsoft.AspNetCore.Components.Authorization.AuthenticationStateProvider>適用于應用程式的內建服務會 Blazor Server 從 ASP.NET Core 取得驗證狀態資料 `HttpContext.User` 。</span><span class="sxs-lookup"><span data-stu-id="6f47c-131">The built-in <xref:Microsoft.AspNetCore.Components.Authorization.AuthenticationStateProvider> service for Blazor Server apps obtains authentication state data from ASP.NET Core's `HttpContext.User`.</span></span> <span data-ttu-id="6f47c-132">這是驗證狀態與現有 ASP.NET Core 驗證機制的整合方式。</span><span class="sxs-lookup"><span data-stu-id="6f47c-132">This is how authentication state integrates with existing ASP.NET Core authentication mechanisms.</span></span>
 
 <span data-ttu-id="6f47c-133">如需建立應用程式和設定的詳細資訊，請參閱 <xref:blazor/security/server/index> 。</span><span class="sxs-lookup"><span data-stu-id="6f47c-133">For more information on creating apps and configuration, see <xref:blazor/security/server/index>.</span></span>
 
@@ -111,9 +111,9 @@ ms.locfileid: "94430922"
         var authState = await AuthenticationStateProvider.GetAuthenticationStateAsync();
         var user = authState.User;
 
-        if (user.:::no-loc(Identity):::.IsAuthenticated)
+        if (user.Identity.IsAuthenticated)
         {
-            _authMessage = $"{user.:::no-loc(Identity):::.Name} is authenticated.";
+            _authMessage = $"{user.Identity.Name} is authenticated.";
             _claims = user.Claims;
             _surnameMessage = 
                 $"Surname: {user.FindFirst(c => c.Type == ClaimTypes.Surname)?.Value}";
@@ -126,7 +126,7 @@ ms.locfileid: "94430922"
 }
 ```
 
-<span data-ttu-id="6f47c-140">如果 `user.:::no-loc(Identity):::.IsAuthenticated` 為 `true`，且由於使用者為 <xref:System.Security.Claims.ClaimsPrincipal>，系統便可以列舉宣告，並評估角色中的成員資格。</span><span class="sxs-lookup"><span data-stu-id="6f47c-140">If `user.:::no-loc(Identity):::.IsAuthenticated` is `true` and because the user is a <xref:System.Security.Claims.ClaimsPrincipal>, claims can be enumerated and membership in roles evaluated.</span></span>
+<span data-ttu-id="6f47c-140">如果 `user.Identity.IsAuthenticated` 為 `true`，且由於使用者為 <xref:System.Security.Claims.ClaimsPrincipal>，系統便可以列舉宣告，並評估角色中的成員資格。</span><span class="sxs-lookup"><span data-stu-id="6f47c-140">If `user.Identity.IsAuthenticated` is `true` and because the user is a <xref:System.Security.Claims.ClaimsPrincipal>, claims can be enumerated and membership in roles evaluated.</span></span>
 
 <span data-ttu-id="6f47c-141">如需有關相依性插入 (DI) 與服務的詳細資訊，請參閱 <xref:blazor/fundamentals/dependency-injection> 與 <xref:fundamentals/dependency-injection>。</span><span class="sxs-lookup"><span data-stu-id="6f47c-141">For more information on dependency injection (DI) and services, see <xref:blazor/fundamentals/dependency-injection> and <xref:fundamentals/dependency-injection>.</span></span>
 
@@ -143,7 +143,7 @@ public class CustomAuthStateProvider : AuthenticationStateProvider
 {
     public override Task<AuthenticationState> GetAuthenticationStateAsync()
     {
-        var identity = new Claims:::no-loc(Identity):::(new[]
+        var identity = new ClaimsIdentity(new[]
         {
             new Claim(ClaimTypes.Name, "mrfibuli"),
         }, "Fake authentication type");
@@ -155,7 +155,7 @@ public class CustomAuthStateProvider : AuthenticationStateProvider
 }
 ```
 
-<span data-ttu-id="6f47c-144">在 :::no-loc(Blazor WebAssembly)::: 應用程式中， `CustomAuthStateProvider` 服務是在中 `Main` 註冊 `Program.cs` ：</span><span class="sxs-lookup"><span data-stu-id="6f47c-144">In a :::no-loc(Blazor WebAssembly)::: app, the `CustomAuthStateProvider` service is registered in `Main` of `Program.cs`:</span></span>
+<span data-ttu-id="6f47c-144">在 Blazor WebAssembly 應用程式中， `CustomAuthStateProvider` 服務是在中 `Main` 註冊 `Program.cs` ：</span><span class="sxs-lookup"><span data-stu-id="6f47c-144">In a Blazor WebAssembly app, the `CustomAuthStateProvider` service is registered in `Main` of `Program.cs`:</span></span>
 
 ```csharp
 using Microsoft.AspNetCore.Components.Authorization;
@@ -165,7 +165,7 @@ using Microsoft.AspNetCore.Components.Authorization;
 builder.Services.AddScoped<AuthenticationStateProvider, CustomAuthStateProvider>();
 ```
 
-<span data-ttu-id="6f47c-145">在 :::no-loc(Blazor Server)::: 應用程式中， `CustomAuthStateProvider` 服務會在中註冊 `Startup.ConfigureServices` ：</span><span class="sxs-lookup"><span data-stu-id="6f47c-145">In a :::no-loc(Blazor Server)::: app, the `CustomAuthStateProvider` service is registered in `Startup.ConfigureServices`:</span></span>
+<span data-ttu-id="6f47c-145">在 Blazor Server 應用程式中， `CustomAuthStateProvider` 服務會在中註冊 `Startup.ConfigureServices` ：</span><span class="sxs-lookup"><span data-stu-id="6f47c-145">In a Blazor Server app, the `CustomAuthStateProvider` service is registered in `Startup.ConfigureServices`:</span></span>
 
 ```csharp
 using Microsoft.AspNetCore.Components.Authorization;
@@ -199,9 +199,9 @@ services.AddScoped<AuthenticationStateProvider, CustomAuthStateProvider>();
         var authState = await authenticationStateTask;
         var user = authState.User;
 
-        if (user.:::no-loc(Identity):::.IsAuthenticated)
+        if (user.Identity.IsAuthenticated)
         {
-            _authMessage = $"{user.:::no-loc(Identity):::.Name} is authenticated.";
+            _authMessage = $"{user.Identity.Name} is authenticated.";
         }
         else
         {
@@ -211,7 +211,7 @@ services.AddScoped<AuthenticationStateProvider, CustomAuthStateProvider>();
 }
 ```
 
-<span data-ttu-id="6f47c-149">如果 `user.:::no-loc(Identity):::.IsAuthenticated` 為 `true`，系統便可以列舉宣告，並評估角色中的成員資格。</span><span class="sxs-lookup"><span data-stu-id="6f47c-149">If `user.:::no-loc(Identity):::.IsAuthenticated` is `true`, claims can be enumerated and membership in roles evaluated.</span></span>
+<span data-ttu-id="6f47c-149">如果 `user.Identity.IsAuthenticated` 為 `true`，系統便可以列舉宣告，並評估角色中的成員資格。</span><span class="sxs-lookup"><span data-stu-id="6f47c-149">If `user.Identity.IsAuthenticated` is `true`, claims can be enumerated and membership in roles evaluated.</span></span>
 
 <span data-ttu-id="6f47c-150">`Task<` <xref:Microsoft.AspNetCore.Components.Authorization.AuthenticationState> `>` 使用 <xref:Microsoft.AspNetCore.Components.Authorization.AuthorizeRouteView> <xref:Microsoft.AspNetCore.Components.Authorization.CascadingAuthenticationState> `App` 元件 () 中的和元件來設定串聯參數 `App.razor` ：</span><span class="sxs-lookup"><span data-stu-id="6f47c-150">Set up the `Task<`<xref:Microsoft.AspNetCore.Components.Authorization.AuthenticationState>`>` cascading parameter using the <xref:Microsoft.AspNetCore.Components.Authorization.AuthorizeRouteView> and <xref:Microsoft.AspNetCore.Components.Authorization.CascadingAuthenticationState> components in the `App` component (`App.razor`):</span></span>
 
@@ -231,14 +231,14 @@ services.AddScoped<AuthenticationStateProvider, CustomAuthStateProvider>();
 </CascadingAuthenticationState>
 ```
 
-<span data-ttu-id="6f47c-151">在 :::no-loc(Blazor WebAssembly)::: 應用程式中，將選項和授權的服務加入至 `Program.Main` ：</span><span class="sxs-lookup"><span data-stu-id="6f47c-151">In a :::no-loc(Blazor WebAssembly)::: App, add services for options and authorization to `Program.Main`:</span></span>
+<span data-ttu-id="6f47c-151">在 Blazor WebAssembly 應用程式中，將選項和授權的服務加入至 `Program.Main` ：</span><span class="sxs-lookup"><span data-stu-id="6f47c-151">In a Blazor WebAssembly App, add services for options and authorization to `Program.Main`:</span></span>
 
 ```csharp
 builder.Services.AddOptions();
 builder.Services.AddAuthorizationCore();
 ```
 
-<span data-ttu-id="6f47c-152">在 :::no-loc(Blazor Server)::: 應用程式中，選項和授權的服務已經存在，因此不需要採取進一步的動作。</span><span class="sxs-lookup"><span data-stu-id="6f47c-152">In a :::no-loc(Blazor Server)::: app, services for options and authorization are already present, so no further action is required.</span></span>
+<span data-ttu-id="6f47c-152">在 Blazor Server 應用程式中，選項和授權的服務已經存在，因此不需要採取進一步的動作。</span><span class="sxs-lookup"><span data-stu-id="6f47c-152">In a Blazor Server app, services for options and authorization are already present, so no further action is required.</span></span>
 
 ## <a name="authorization"></a><span data-ttu-id="6f47c-153">授權</span><span class="sxs-lookup"><span data-stu-id="6f47c-153">Authorization</span></span>
 
@@ -251,7 +251,7 @@ builder.Services.AddAuthorizationCore();
 * <span data-ttu-id="6f47c-158">使用者具有「宣告」。</span><span class="sxs-lookup"><span data-stu-id="6f47c-158">A user has a *claim*.</span></span>
 * <span data-ttu-id="6f47c-159">已滿足某個「原則」。</span><span class="sxs-lookup"><span data-stu-id="6f47c-159">A *policy* is satisfied.</span></span>
 
-<span data-ttu-id="6f47c-160">這些概念與 ASP.NET Core MVC 或 Pages 應用程式中的每個概念相同 :::no-loc(Razor)::: 。</span><span class="sxs-lookup"><span data-stu-id="6f47c-160">Each of these concepts is the same as in an ASP.NET Core MVC or :::no-loc(Razor)::: Pages app.</span></span> <span data-ttu-id="6f47c-161">如需 ASP.NET Core 安全性的詳細資訊，請參閱[ASP.NET Core 安全性和 :::no-loc(Identity)::: ](xref:security/index)的相關文章。</span><span class="sxs-lookup"><span data-stu-id="6f47c-161">For more information on ASP.NET Core security, see the articles under [ASP.NET Core Security and :::no-loc(Identity):::](xref:security/index).</span></span>
+<span data-ttu-id="6f47c-160">這些概念與 ASP.NET Core MVC 或 Pages 應用程式中的每個概念相同 Razor 。</span><span class="sxs-lookup"><span data-stu-id="6f47c-160">Each of these concepts is the same as in an ASP.NET Core MVC or Razor Pages app.</span></span> <span data-ttu-id="6f47c-161">如需 ASP.NET Core 安全性的詳細資訊，請參閱[ASP.NET Core 安全性和 Identity ](xref:security/index)的相關文章。</span><span class="sxs-lookup"><span data-stu-id="6f47c-161">For more information on ASP.NET Core security, see the articles under [ASP.NET Core Security and Identity](xref:security/index).</span></span>
 
 ## <a name="authorizeview-component"></a><span data-ttu-id="6f47c-162">AuthorizeView 元件</span><span class="sxs-lookup"><span data-stu-id="6f47c-162">AuthorizeView component</span></span>
 
@@ -261,7 +261,7 @@ builder.Services.AddAuthorizationCore();
 
 ```razor
 <AuthorizeView>
-    <h1>Hello, @context.User.:::no-loc(Identity):::.Name!</h1>
+    <h1>Hello, @context.User.Identity.Name!</h1>
     <p>You can only see this content if you're authenticated.</p>
 </AuthorizeView>
 ```
@@ -271,7 +271,7 @@ builder.Services.AddAuthorizationCore();
 ```razor
 <AuthorizeView>
     <Authorized>
-        <h1>Hello, @context.User.:::no-loc(Identity):::.Name!</h1>
+        <h1>Hello, @context.User.Identity.Name!</h1>
         <p>You can only see this content if you're authenticated.</p>
     </Authorized>
     <NotAuthorized>
@@ -316,20 +316,20 @@ builder.Services.AddAuthorizationCore();
 
 <span data-ttu-id="6f47c-179">宣告型授權是特殊案例的原則型授權。</span><span class="sxs-lookup"><span data-stu-id="6f47c-179">Claims-based authorization is a special case of policy-based authorization.</span></span> <span data-ttu-id="6f47c-180">例如，您可以定義要求使用者具備特定宣告的原則。</span><span class="sxs-lookup"><span data-stu-id="6f47c-180">For example, you can define a policy that requires users to have a certain claim.</span></span> <span data-ttu-id="6f47c-181">如需詳細資訊，請參閱<xref:security/authorization/policies>。</span><span class="sxs-lookup"><span data-stu-id="6f47c-181">For more information, see <xref:security/authorization/policies>.</span></span>
 
-<span data-ttu-id="6f47c-182">這些 Api 可以在 :::no-loc(Blazor Server)::: 或 :::no-loc(Blazor WebAssembly)::: 應用程式中使用。</span><span class="sxs-lookup"><span data-stu-id="6f47c-182">These APIs can be used in either :::no-loc(Blazor Server)::: or :::no-loc(Blazor WebAssembly)::: apps.</span></span>
+<span data-ttu-id="6f47c-182">這些 Api 可以在 Blazor Server 或 Blazor WebAssembly 應用程式中使用。</span><span class="sxs-lookup"><span data-stu-id="6f47c-182">These APIs can be used in either Blazor Server or Blazor WebAssembly apps.</span></span>
 
 <span data-ttu-id="6f47c-183">如果未指定 <xref:Microsoft.AspNetCore.Components.Authorization.AuthorizeView.Roles> 和 <xref:Microsoft.AspNetCore.Components.Authorization.AuthorizeView.Policy>，<xref:Microsoft.AspNetCore.Components.Authorization.AuthorizeView> 便會使用預設原則。</span><span class="sxs-lookup"><span data-stu-id="6f47c-183">If neither <xref:Microsoft.AspNetCore.Components.Authorization.AuthorizeView.Roles> nor <xref:Microsoft.AspNetCore.Components.Authorization.AuthorizeView.Policy> is specified, <xref:Microsoft.AspNetCore.Components.Authorization.AuthorizeView> uses the default policy.</span></span>
 
 ### <a name="content-displayed-during-asynchronous-authentication"></a><span data-ttu-id="6f47c-184">在非同步驗證期間所顯示的內容</span><span class="sxs-lookup"><span data-stu-id="6f47c-184">Content displayed during asynchronous authentication</span></span>
 
-<span data-ttu-id="6f47c-185">:::no-loc(Blazor)::: 允許以 *非同步方式* 判斷驗證狀態。</span><span class="sxs-lookup"><span data-stu-id="6f47c-185">:::no-loc(Blazor)::: allows for authentication state to be determined *asynchronously*.</span></span> <span data-ttu-id="6f47c-186">這種方法的主要案例是對 :::no-loc(Blazor WebAssembly)::: 外部端點提出要求以進行驗證的應用程式。</span><span class="sxs-lookup"><span data-stu-id="6f47c-186">The primary scenario for this approach is in :::no-loc(Blazor WebAssembly)::: apps that make a request to an external endpoint for authentication.</span></span>
+<span data-ttu-id="6f47c-185">Blazor 允許以 *非同步方式* 判斷驗證狀態。</span><span class="sxs-lookup"><span data-stu-id="6f47c-185">Blazor allows for authentication state to be determined *asynchronously*.</span></span> <span data-ttu-id="6f47c-186">這種方法的主要案例是對 Blazor WebAssembly 外部端點提出要求以進行驗證的應用程式。</span><span class="sxs-lookup"><span data-stu-id="6f47c-186">The primary scenario for this approach is in Blazor WebAssembly apps that make a request to an external endpoint for authentication.</span></span>
 
 <span data-ttu-id="6f47c-187">在驗證期間，<xref:Microsoft.AspNetCore.Components.Authorization.AuthorizeView> 預設不會顯示任何內容。</span><span class="sxs-lookup"><span data-stu-id="6f47c-187">While authentication is in progress, <xref:Microsoft.AspNetCore.Components.Authorization.AuthorizeView> displays no content by default.</span></span> <span data-ttu-id="6f47c-188">若要在進行驗證時顯示內容，請使用 `<Authorizing>` 標記：</span><span class="sxs-lookup"><span data-stu-id="6f47c-188">To display content while authentication occurs, use the `<Authorizing>` tag:</span></span>
 
 ```razor
 <AuthorizeView>
     <Authorized>
-        <h1>Hello, @context.User.:::no-loc(Identity):::.Name!</h1>
+        <h1>Hello, @context.User.Identity.Name!</h1>
         <p>You can only see this content if you're authenticated.</p>
     </Authorized>
     <Authorizing>
@@ -339,11 +339,11 @@ builder.Services.AddAuthorizationCore();
 </AuthorizeView>
 ```
 
-<span data-ttu-id="6f47c-189">這種方法通常不適用於 :::no-loc(Blazor Server)::: 應用程式。</span><span class="sxs-lookup"><span data-stu-id="6f47c-189">This approach isn't normally applicable to :::no-loc(Blazor Server)::: apps.</span></span> <span data-ttu-id="6f47c-190">:::no-loc(Blazor Server)::: 應用程式會在狀態建立後立即得知驗證狀態。</span><span class="sxs-lookup"><span data-stu-id="6f47c-190">:::no-loc(Blazor Server)::: apps know the authentication state as soon as the state is established.</span></span> <span data-ttu-id="6f47c-191"><xref:Microsoft.AspNetCore.Components.Authorization.AuthorizeViewCore.Authorizing> 您可以在 :::no-loc(Blazor Server)::: 應用程式的元件中提供內容 <xref:Microsoft.AspNetCore.Components.Authorization.AuthorizeView> ，但永遠不會顯示內容。</span><span class="sxs-lookup"><span data-stu-id="6f47c-191"><xref:Microsoft.AspNetCore.Components.Authorization.AuthorizeViewCore.Authorizing> content can be provided in a :::no-loc(Blazor Server)::: app's <xref:Microsoft.AspNetCore.Components.Authorization.AuthorizeView> component, but the content is never displayed.</span></span>
+<span data-ttu-id="6f47c-189">這種方法通常不適用於 Blazor Server 應用程式。</span><span class="sxs-lookup"><span data-stu-id="6f47c-189">This approach isn't normally applicable to Blazor Server apps.</span></span> <span data-ttu-id="6f47c-190">Blazor Server 應用程式會在狀態建立後立即得知驗證狀態。</span><span class="sxs-lookup"><span data-stu-id="6f47c-190">Blazor Server apps know the authentication state as soon as the state is established.</span></span> <span data-ttu-id="6f47c-191"><xref:Microsoft.AspNetCore.Components.Authorization.AuthorizeViewCore.Authorizing> 您可以在 Blazor Server 應用程式的元件中提供內容 <xref:Microsoft.AspNetCore.Components.Authorization.AuthorizeView> ，但永遠不會顯示內容。</span><span class="sxs-lookup"><span data-stu-id="6f47c-191"><xref:Microsoft.AspNetCore.Components.Authorization.AuthorizeViewCore.Authorizing> content can be provided in a Blazor Server app's <xref:Microsoft.AspNetCore.Components.Authorization.AuthorizeView> component, but the content is never displayed.</span></span>
 
 ## <a name="authorize-attribute"></a><span data-ttu-id="6f47c-192">[Authorize] 屬性</span><span class="sxs-lookup"><span data-stu-id="6f47c-192">[Authorize] attribute</span></span>
 
-<span data-ttu-id="6f47c-193">[`[Authorize]`](xref:Microsoft.AspNetCore.Authorization.AuthorizeAttribute)屬性可用於 :::no-loc(Razor)::: 元件中：</span><span class="sxs-lookup"><span data-stu-id="6f47c-193">The [`[Authorize]`](xref:Microsoft.AspNetCore.Authorization.AuthorizeAttribute) attribute can be used in :::no-loc(Razor)::: components:</span></span>
+<span data-ttu-id="6f47c-193">[`[Authorize]`](xref:Microsoft.AspNetCore.Authorization.AuthorizeAttribute)屬性可用於 Razor 元件中：</span><span class="sxs-lookup"><span data-stu-id="6f47c-193">The [`[Authorize]`](xref:Microsoft.AspNetCore.Authorization.AuthorizeAttribute) attribute can be used in Razor components:</span></span>
 
 ```razor
 @page "/"
@@ -353,7 +353,7 @@ You can only see this if you're signed in.
 ```
 
 > [!IMPORTANT]
-> <span data-ttu-id="6f47c-194">僅 [`[Authorize]`](xref:Microsoft.AspNetCore.Authorization.AuthorizeAttribute) 在透過 `@page` 路由器達成的元件上使用 :::no-loc(Blazor)::: 。</span><span class="sxs-lookup"><span data-stu-id="6f47c-194">Only use [`[Authorize]`](xref:Microsoft.AspNetCore.Authorization.AuthorizeAttribute) on `@page` components reached via the :::no-loc(Blazor)::: Router.</span></span> <span data-ttu-id="6f47c-195">授權僅會以路由的層面執行，且「不」適用於在頁面內轉譯的子元件。</span><span class="sxs-lookup"><span data-stu-id="6f47c-195">Authorization is only performed as an aspect of routing and *not* for child components rendered within a page.</span></span> <span data-ttu-id="6f47c-196">若要授權在頁面內顯示特定組件，請改為使用 <xref:Microsoft.AspNetCore.Components.Authorization.AuthorizeView>。</span><span class="sxs-lookup"><span data-stu-id="6f47c-196">To authorize the display of specific parts within a page, use <xref:Microsoft.AspNetCore.Components.Authorization.AuthorizeView> instead.</span></span>
+> <span data-ttu-id="6f47c-194">僅 [`[Authorize]`](xref:Microsoft.AspNetCore.Authorization.AuthorizeAttribute) 在透過 `@page` 路由器達成的元件上使用 Blazor 。</span><span class="sxs-lookup"><span data-stu-id="6f47c-194">Only use [`[Authorize]`](xref:Microsoft.AspNetCore.Authorization.AuthorizeAttribute) on `@page` components reached via the Blazor Router.</span></span> <span data-ttu-id="6f47c-195">授權僅會以路由的層面執行，且「不」適用於在頁面內轉譯的子元件。</span><span class="sxs-lookup"><span data-stu-id="6f47c-195">Authorization is only performed as an aspect of routing and *not* for child components rendered within a page.</span></span> <span data-ttu-id="6f47c-196">若要授權在頁面內顯示特定組件，請改為使用 <xref:Microsoft.AspNetCore.Components.Authorization.AuthorizeView>。</span><span class="sxs-lookup"><span data-stu-id="6f47c-196">To authorize the display of specific parts within a page, use <xref:Microsoft.AspNetCore.Components.Authorization.AuthorizeView> instead.</span></span>
 
 <span data-ttu-id="6f47c-197">[`[Authorize]`](xref:Microsoft.AspNetCore.Authorization.AuthorizeAttribute)屬性也支援以角色為基礎或以原則為基礎的授權。</span><span class="sxs-lookup"><span data-stu-id="6f47c-197">The [`[Authorize]`](xref:Microsoft.AspNetCore.Authorization.AuthorizeAttribute) attribute also supports role-based or policy-based authorization.</span></span> <span data-ttu-id="6f47c-198">針對角色型授權，請使用 <xref:Microsoft.AspNetCore.Authorization.AuthorizeAttribute.Roles> 參數：</span><span class="sxs-lookup"><span data-stu-id="6f47c-198">For role-based authorization, use the <xref:Microsoft.AspNetCore.Authorization.AuthorizeAttribute.Roles> parameter:</span></span>
 
@@ -386,7 +386,7 @@ You can only see this if you're signed in.
 * <span data-ttu-id="6f47c-206">使用者無法通過套用 [`[Authorize]`](xref:Microsoft.AspNetCore.Authorization.AuthorizeAttribute) 至元件的條件。</span><span class="sxs-lookup"><span data-stu-id="6f47c-206">The user fails an [`[Authorize]`](xref:Microsoft.AspNetCore.Authorization.AuthorizeAttribute) condition applied to the component.</span></span> <span data-ttu-id="6f47c-207">屬性 [`[Authorize]`](xref:Microsoft.AspNetCore.Authorization.AuthorizeAttribute) 區段中包含屬性。 [ `[Authorize]` ](#authorize-attribute)</span><span class="sxs-lookup"><span data-stu-id="6f47c-207">The [`[Authorize]`](xref:Microsoft.AspNetCore.Authorization.AuthorizeAttribute) attribute is covered in the [`[Authorize]` attribute](#authorize-attribute) section.</span></span>
 * <span data-ttu-id="6f47c-208">正在進行非同步驗證。</span><span class="sxs-lookup"><span data-stu-id="6f47c-208">Asynchronous authentication is in progress.</span></span>
 
-<span data-ttu-id="6f47c-209">在預設 :::no-loc(Blazor Server)::: 專案範本中， `App`) 的元件 (會 `App.razor` 示範如何設定自訂內容：</span><span class="sxs-lookup"><span data-stu-id="6f47c-209">In the default :::no-loc(Blazor Server)::: project template, the `App` component (`App.razor`) demonstrates how to set custom content:</span></span>
+<span data-ttu-id="6f47c-209">在預設 Blazor Server 專案範本中， `App`) 的元件 (會 `App.razor` 示範如何設定自訂內容：</span><span class="sxs-lookup"><span data-stu-id="6f47c-209">In the default Blazor Server project template, the `App` component (`App.razor`) demonstrates how to set custom content:</span></span>
 
 ```razor
 <CascadingAuthenticationState>
@@ -445,7 +445,7 @@ Not authorized.
     {
         var user = (await authenticationStateTask).User;
 
-        if (user.:::no-loc(Identity):::.IsAuthenticated)
+        if (user.Identity.IsAuthenticated)
         {
             // Perform an action only available to authenticated (signed-in) users.
         }
@@ -466,7 +466,7 @@ Not authorized.
 ```
 
 > [!NOTE]
-> <span data-ttu-id="6f47c-218">在 :::no-loc(Blazor WebAssembly)::: 應用程式元件中，新增 <xref:Microsoft.AspNetCore.Authorization> 和 <xref:Microsoft.AspNetCore.Components.Authorization> 命名空間：</span><span class="sxs-lookup"><span data-stu-id="6f47c-218">In a :::no-loc(Blazor WebAssembly)::: app component, add the <xref:Microsoft.AspNetCore.Authorization> and <xref:Microsoft.AspNetCore.Components.Authorization> namespaces:</span></span>
+> <span data-ttu-id="6f47c-218">在 Blazor WebAssembly 應用程式元件中，新增 <xref:Microsoft.AspNetCore.Authorization> 和 <xref:Microsoft.AspNetCore.Components.Authorization> 命名空間：</span><span class="sxs-lookup"><span data-stu-id="6f47c-218">In a Blazor WebAssembly app component, add the <xref:Microsoft.AspNetCore.Authorization> and <xref:Microsoft.AspNetCore.Components.Authorization> namespaces:</span></span>
 >
 > ```razor
 > @using Microsoft.AspNetCore.Authorization
@@ -483,7 +483,7 @@ Not authorized.
 
 * <span data-ttu-id="6f47c-223">**`null` 收到的值為 `authenticationStateTask`**</span><span class="sxs-lookup"><span data-stu-id="6f47c-223">**`null` value is received for `authenticationStateTask`**</span></span>
 
-<span data-ttu-id="6f47c-224">專案可能不是使用 :::no-loc(Blazor Server)::: 已啟用驗證的範本所建立。</span><span class="sxs-lookup"><span data-stu-id="6f47c-224">It's likely that the project wasn't created using a :::no-loc(Blazor Server)::: template with authentication enabled.</span></span> <span data-ttu-id="6f47c-225">`<CascadingAuthenticationState>`在 UI 樹狀結構的某個部分周圍包裝，例如在 `App` 元件 () ， `App.razor` 如下所示：</span><span class="sxs-lookup"><span data-stu-id="6f47c-225">Wrap a `<CascadingAuthenticationState>` around some part of the UI tree, for example in the `App` component (`App.razor`) as follows:</span></span>
+<span data-ttu-id="6f47c-224">專案可能不是使用 Blazor Server 已啟用驗證的範本所建立。</span><span class="sxs-lookup"><span data-stu-id="6f47c-224">It's likely that the project wasn't created using a Blazor Server template with authentication enabled.</span></span> <span data-ttu-id="6f47c-225">`<CascadingAuthenticationState>`在 UI 樹狀結構的某個部分周圍包裝，例如在 `App` 元件 () ， `App.razor` 如下所示：</span><span class="sxs-lookup"><span data-stu-id="6f47c-225">Wrap a `<CascadingAuthenticationState>` around some part of the UI tree, for example in the `App` component (`App.razor`) as follows:</span></span>
 
 ```razor
 <CascadingAuthenticationState>
@@ -499,4 +499,4 @@ Not authorized.
 
 * <xref:security/index>
 * <xref:security/authentication/windowsauth>
-* <span data-ttu-id="6f47c-228">[絕佳 :::no-loc(Blazor)::: ：驗證](https://github.com/AdrienTorris/awesome-blazor#authentication) 社區範例連結</span><span class="sxs-lookup"><span data-stu-id="6f47c-228">[Awesome :::no-loc(Blazor):::: Authentication](https://github.com/AdrienTorris/awesome-blazor#authentication) community sample links</span></span>
+* <span data-ttu-id="6f47c-228">[絕佳 Blazor ：驗證](https://github.com/AdrienTorris/awesome-blazor#authentication) 社區範例連結</span><span class="sxs-lookup"><span data-stu-id="6f47c-228">[Awesome Blazor: Authentication](https://github.com/AdrienTorris/awesome-blazor#authentication) community sample links</span></span>

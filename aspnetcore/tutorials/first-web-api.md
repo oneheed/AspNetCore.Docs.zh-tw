@@ -6,18 +6,18 @@ ms.author: riande
 ms.custom: mvc, devx-track-js
 ms.date: 08/13/2020
 no-loc:
-- ':::no-loc(appsettings.json):::'
-- ':::no-loc(ASP.NET Core Identity):::'
-- ':::no-loc(cookie):::'
-- ':::no-loc(Cookie):::'
-- ':::no-loc(Blazor):::'
-- ':::no-loc(Blazor Server):::'
-- ':::no-loc(Blazor WebAssembly):::'
-- ':::no-loc(Identity):::'
-- ":::no-loc(Let's Encrypt):::"
-- ':::no-loc(Razor):::'
-- ':::no-loc(SignalR):::'
-- ':::no-loc(Models):::'
+- 'appsettings.json'
+- 'ASP.NET Core Identity'
+- 'cookie'
+- 'Cookie'
+- 'Blazor'
+- 'Blazor Server'
+- 'Blazor WebAssembly'
+- 'Identity'
+- "Let's Encrypt"
+- 'Razor'
+- 'SignalR'
+- 'Models'
 uid: tutorials/first-web-api
 ms.openlocfilehash: 569744b2cbec062ec9abab9db1c94960f1f912e7
 ms.sourcegitcommit: 1ea3f23bec63e96ffc3a927992f30a5fc0de3ff9
@@ -229,25 +229,25 @@ ms.locfileid: "94570246"
 
 # <a name="visual-studio"></a>[<span data-ttu-id="b2ad0-205">Visual Studio</span><span class="sxs-lookup"><span data-stu-id="b2ad0-205">Visual Studio</span></span>](#tab/visual-studio)
 
-* <span data-ttu-id="b2ad0-206">在 **方案總管** 中，以滑鼠右鍵按一下專案。</span><span class="sxs-lookup"><span data-stu-id="b2ad0-206">In **Solution Explorer** , right-click the project.</span></span> <span data-ttu-id="b2ad0-207">選取 **[**  >  **新增資料夾** ]。</span><span class="sxs-lookup"><span data-stu-id="b2ad0-207">Select **Add** > **New Folder**.</span></span> <span data-ttu-id="b2ad0-208">為資料夾命名 *:::no-loc(Models):::* 。</span><span class="sxs-lookup"><span data-stu-id="b2ad0-208">Name the folder *:::no-loc(Models):::*.</span></span>
+* <span data-ttu-id="b2ad0-206">在 **方案總管** 中，以滑鼠右鍵按一下專案。</span><span class="sxs-lookup"><span data-stu-id="b2ad0-206">In **Solution Explorer** , right-click the project.</span></span> <span data-ttu-id="b2ad0-207">選取 **[**  >  **新增資料夾** ]。</span><span class="sxs-lookup"><span data-stu-id="b2ad0-207">Select **Add** > **New Folder**.</span></span> <span data-ttu-id="b2ad0-208">為資料夾命名 *Models* 。</span><span class="sxs-lookup"><span data-stu-id="b2ad0-208">Name the folder *Models*.</span></span>
 
-* <span data-ttu-id="b2ad0-209">以滑鼠右鍵按一下 *:::no-loc(Models):::* 資料夾，然後選取 [ **加入**  >  **類別** ]。</span><span class="sxs-lookup"><span data-stu-id="b2ad0-209">Right-click the *:::no-loc(Models):::* folder and select **Add** > **Class**.</span></span> <span data-ttu-id="b2ad0-210">將類別命名為 *TodoItem* ，然後選取 [新增]。</span><span class="sxs-lookup"><span data-stu-id="b2ad0-210">Name the class *TodoItem* and select **Add**.</span></span>
+* <span data-ttu-id="b2ad0-209">以滑鼠右鍵按一下 *Models* 資料夾，然後選取 [ **加入**  >  **類別** ]。</span><span class="sxs-lookup"><span data-stu-id="b2ad0-209">Right-click the *Models* folder and select **Add** > **Class**.</span></span> <span data-ttu-id="b2ad0-210">將類別命名為 *TodoItem* ，然後選取 [新增]。</span><span class="sxs-lookup"><span data-stu-id="b2ad0-210">Name the class *TodoItem* and select **Add**.</span></span>
 
 * <span data-ttu-id="b2ad0-211">以下列程式碼取代範本程式碼：</span><span class="sxs-lookup"><span data-stu-id="b2ad0-211">Replace the template code with the following:</span></span>
 
 # <a name="visual-studio-code"></a>[<span data-ttu-id="b2ad0-212">Visual Studio Code</span><span class="sxs-lookup"><span data-stu-id="b2ad0-212">Visual Studio Code</span></span>](#tab/visual-studio-code)
 
-* <span data-ttu-id="b2ad0-213">新增名為的資料夾 *:::no-loc(Models):::* 。</span><span class="sxs-lookup"><span data-stu-id="b2ad0-213">Add a folder named *:::no-loc(Models):::*.</span></span>
+* <span data-ttu-id="b2ad0-213">新增名為的資料夾 *Models* 。</span><span class="sxs-lookup"><span data-stu-id="b2ad0-213">Add a folder named *Models*.</span></span>
 
-* <span data-ttu-id="b2ad0-214">`TodoItem`使用下列程式碼，將類別新增至 *:::no-loc(Models):::* 資料夾：</span><span class="sxs-lookup"><span data-stu-id="b2ad0-214">Add a `TodoItem` class to the *:::no-loc(Models):::* folder with the following code:</span></span>
+* <span data-ttu-id="b2ad0-214">`TodoItem`使用下列程式碼，將類別新增至 *Models* 資料夾：</span><span class="sxs-lookup"><span data-stu-id="b2ad0-214">Add a `TodoItem` class to the *Models* folder with the following code:</span></span>
 
 # <a name="visual-studio-for-mac"></a>[<span data-ttu-id="b2ad0-215">Visual Studio for Mac</span><span class="sxs-lookup"><span data-stu-id="b2ad0-215">Visual Studio for Mac</span></span>](#tab/visual-studio-mac)
 
-* <span data-ttu-id="b2ad0-216">以滑鼠右鍵按一下專案。</span><span class="sxs-lookup"><span data-stu-id="b2ad0-216">Right-click the project.</span></span> <span data-ttu-id="b2ad0-217">選取 **[**  >  **新增資料夾** ]。</span><span class="sxs-lookup"><span data-stu-id="b2ad0-217">Select **Add** > **New Folder**.</span></span> <span data-ttu-id="b2ad0-218">為資料夾命名 *:::no-loc(Models):::* 。</span><span class="sxs-lookup"><span data-stu-id="b2ad0-218">Name the folder *:::no-loc(Models):::*.</span></span>
+* <span data-ttu-id="b2ad0-216">以滑鼠右鍵按一下專案。</span><span class="sxs-lookup"><span data-stu-id="b2ad0-216">Right-click the project.</span></span> <span data-ttu-id="b2ad0-217">選取 **[**  >  **新增資料夾** ]。</span><span class="sxs-lookup"><span data-stu-id="b2ad0-217">Select **Add** > **New Folder**.</span></span> <span data-ttu-id="b2ad0-218">為資料夾命名 *Models* 。</span><span class="sxs-lookup"><span data-stu-id="b2ad0-218">Name the folder *Models*.</span></span>
 
   ![新增資料夾](first-web-api-mac/_static/folder.png)
 
-* <span data-ttu-id="b2ad0-220">以滑鼠右鍵按一下 *:::no-loc(Models):::* 資料夾，然後選取 **Add** > [ **新增** 檔案 > **一般** ] > **空白類別** 。</span><span class="sxs-lookup"><span data-stu-id="b2ad0-220">Right-click the *:::no-loc(Models):::* folder, and select **Add** > **New File** > **General** > **Empty Class**.</span></span>
+* <span data-ttu-id="b2ad0-220">以滑鼠右鍵按一下 *Models* 資料夾，然後選取 **Add** > [ **新增** 檔案 > **一般** ] > **空白類別** 。</span><span class="sxs-lookup"><span data-stu-id="b2ad0-220">Right-click the *Models* folder, and select **Add** > **New File** > **General** > **Empty Class**.</span></span>
 
 * <span data-ttu-id="b2ad0-221">將類別命名為 *TodoItem* ，然後按一下 [新增]。</span><span class="sxs-lookup"><span data-stu-id="b2ad0-221">Name the class *TodoItem* , and then click **New**.</span></span>
 
@@ -255,11 +255,11 @@ ms.locfileid: "94570246"
 
 ---
 
-  [!code-csharp[](first-web-api/samples/5.x/TodoApi/:::no-loc(Models):::/TodoItem.cs?name=snippet)]
+  [!code-csharp[](first-web-api/samples/5.x/TodoApi/Models/TodoItem.cs?name=snippet)]
 
 <span data-ttu-id="b2ad0-223">`Id` 屬性的功能相當於關聯式資料庫中的唯一索引鍵。</span><span class="sxs-lookup"><span data-stu-id="b2ad0-223">The `Id` property functions as the unique key in a relational database.</span></span>
 
-<span data-ttu-id="b2ad0-224">模型類別可移至專案中的任何位置，但依照慣例，會 *:::no-loc(Models):::* 使用資料夾。</span><span class="sxs-lookup"><span data-stu-id="b2ad0-224">Model classes can go anywhere in the project, but the *:::no-loc(Models):::* folder is used by convention.</span></span>
+<span data-ttu-id="b2ad0-224">模型類別可移至專案中的任何位置，但依照慣例，會 *Models* 使用資料夾。</span><span class="sxs-lookup"><span data-stu-id="b2ad0-224">Model classes can go anywhere in the project, but the *Models* folder is used by convention.</span></span>
 
 ## <a name="add-a-database-context"></a><span data-ttu-id="b2ad0-225">新增資料庫內容</span><span class="sxs-lookup"><span data-stu-id="b2ad0-225">Add a database context</span></span>
 
@@ -283,17 +283,17 @@ ms.locfileid: "94570246"
 
 ## <a name="add-the-todocontext-database-context"></a><span data-ttu-id="b2ad0-238">新增 TodoCoNtext 資料庫內容</span><span class="sxs-lookup"><span data-stu-id="b2ad0-238">Add the TodoContext database context</span></span>
 
-* <span data-ttu-id="b2ad0-239">以滑鼠右鍵按一下 *:::no-loc(Models):::* 資料夾，然後選取 [ **加入**  >  **類別** ]。</span><span class="sxs-lookup"><span data-stu-id="b2ad0-239">Right-click the *:::no-loc(Models):::* folder and select **Add** > **Class**.</span></span> <span data-ttu-id="b2ad0-240">將類別命名為 *TodoContext* ，然後按一下 [新增]。</span><span class="sxs-lookup"><span data-stu-id="b2ad0-240">Name the class *TodoContext* and click **Add**.</span></span>
+* <span data-ttu-id="b2ad0-239">以滑鼠右鍵按一下 *Models* 資料夾，然後選取 [ **加入**  >  **類別** ]。</span><span class="sxs-lookup"><span data-stu-id="b2ad0-239">Right-click the *Models* folder and select **Add** > **Class**.</span></span> <span data-ttu-id="b2ad0-240">將類別命名為 *TodoContext* ，然後按一下 [新增]。</span><span class="sxs-lookup"><span data-stu-id="b2ad0-240">Name the class *TodoContext* and click **Add**.</span></span>
 
 # <a name="visual-studio-code--visual-studio-for-mac"></a>[<span data-ttu-id="b2ad0-241">Visual Studio Code / Visual Studio for Mac</span><span class="sxs-lookup"><span data-stu-id="b2ad0-241">Visual Studio Code / Visual Studio for Mac</span></span>](#tab/visual-studio-code+visual-studio-mac)
 
-* <span data-ttu-id="b2ad0-242">將 `TodoContext` 類別新增至 *:::no-loc(Models):::* 資料夾。</span><span class="sxs-lookup"><span data-stu-id="b2ad0-242">Add a `TodoContext` class to the *:::no-loc(Models):::* folder.</span></span>
+* <span data-ttu-id="b2ad0-242">將 `TodoContext` 類別新增至 *Models* 資料夾。</span><span class="sxs-lookup"><span data-stu-id="b2ad0-242">Add a `TodoContext` class to the *Models* folder.</span></span>
 
 ---
 
 * <span data-ttu-id="b2ad0-243">輸入下列程式碼：</span><span class="sxs-lookup"><span data-stu-id="b2ad0-243">Enter the following code:</span></span>
 
-  [!code-csharp[](first-web-api/samples/5.x/TodoApi/:::no-loc(Models):::/TodoContext.cs)]
+  [!code-csharp[](first-web-api/samples/5.x/TodoApi/Models/TodoContext.cs)]
 
 ## <a name="register-the-database-context"></a><span data-ttu-id="b2ad0-244">登錄資料庫內容</span><span class="sxs-lookup"><span data-stu-id="b2ad0-244">Register the database context</span></span>
 
@@ -319,8 +319,8 @@ ms.locfileid: "94570246"
 * <span data-ttu-id="b2ad0-257">選取 [使用 Entity Framework 執行動作的 API 控制器]，然後選取 [新增]。</span><span class="sxs-lookup"><span data-stu-id="b2ad0-257">Select **API Controller with actions, using Entity Framework** , and then select **Add**.</span></span>
 * <span data-ttu-id="b2ad0-258">在 [使用 Entity Framework 執行動作的 API 控制器] 對話方塊中：</span><span class="sxs-lookup"><span data-stu-id="b2ad0-258">In the **Add API Controller with actions, using Entity Framework** dialog:</span></span>
 
-  * <span data-ttu-id="b2ad0-259">選取 **模型類別** 中的 [ **TodoItem (TodoApi] :::no-loc(Models):::) 。**</span><span class="sxs-lookup"><span data-stu-id="b2ad0-259">Select **TodoItem (TodoApi.:::no-loc(Models):::)** in the **Model class**.</span></span>
-  * <span data-ttu-id="b2ad0-260">選取 **資料內容類別** 中的 **TodoCoNtext (TodoApi :::no-loc(Models):::) 。**</span><span class="sxs-lookup"><span data-stu-id="b2ad0-260">Select **TodoContext (TodoApi.:::no-loc(Models):::)** in the **Data context class**.</span></span>
+  * <span data-ttu-id="b2ad0-259">選取 **模型類別** 中的 [ **TodoItem (TodoApi] Models) 。**</span><span class="sxs-lookup"><span data-stu-id="b2ad0-259">Select **TodoItem (TodoApi.Models)** in the **Model class**.</span></span>
+  * <span data-ttu-id="b2ad0-260">選取 **資料內容類別** 中的 **TodoCoNtext (TodoApi Models) 。**</span><span class="sxs-lookup"><span data-stu-id="b2ad0-260">Select **TodoContext (TodoApi.Models)** in the **Data context class**.</span></span>
   * <span data-ttu-id="b2ad0-261">選取 [新增]  。</span><span class="sxs-lookup"><span data-stu-id="b2ad0-261">Select **Add**.</span></span>
 
 # <a name="visual-studio-code--visual-studio-for-mac"></a>[<span data-ttu-id="b2ad0-262">Visual Studio Code / Visual Studio for Mac</span><span class="sxs-lookup"><span data-stu-id="b2ad0-262">Visual Studio Code / Visual Studio for Mac</span></span>](#tab/visual-studio-code+visual-studio-mac)
@@ -536,7 +536,7 @@ dotnet aspnet-codegenerator controller -name TodoItemsController -async -api -m 
 
 <span data-ttu-id="b2ad0-392">若要示範 DTO 方法，請更新 `TodoItem` 類別以包含秘密欄位：</span><span class="sxs-lookup"><span data-stu-id="b2ad0-392">To demonstrate the DTO approach, update the `TodoItem` class to include a secret field:</span></span>
 
-[!code-csharp[](first-web-api/samples/5.x/TodoApiDTO/:::no-loc(Models):::/TodoItem.cs?name=snippet&highlight=8)]
+[!code-csharp[](first-web-api/samples/5.x/TodoApiDTO/Models/TodoItem.cs?name=snippet&highlight=8)]
 
 <span data-ttu-id="b2ad0-393">此應用程式必須隱藏秘密欄位，但系統管理應用程式可以選擇將它公開。</span><span class="sxs-lookup"><span data-stu-id="b2ad0-393">The secret field needs to be hidden from this app, but an administrative app could choose to expose it.</span></span>
 
@@ -544,7 +544,7 @@ dotnet aspnet-codegenerator controller -name TodoItemsController -async -api -m 
 
 <span data-ttu-id="b2ad0-395">建立 DTO 模型：</span><span class="sxs-lookup"><span data-stu-id="b2ad0-395">Create a DTO model:</span></span>
 
-[!code-csharp[](first-web-api/samples/5.x/TodoApiDTO/:::no-loc(Models):::/TodoItemDTO.cs?name=snippet)]
+[!code-csharp[](first-web-api/samples/5.x/TodoApiDTO/Models/TodoItemDTO.cs?name=snippet)]
 
 <span data-ttu-id="b2ad0-396">更新 `TodoItemsController` 以使用 `TodoItemDTO` ：</span><span class="sxs-lookup"><span data-stu-id="b2ad0-396">Update the `TodoItemsController` to use `TodoItemDTO`:</span></span>
 
@@ -725,25 +725,25 @@ dotnet aspnet-codegenerator controller -name TodoItemsController -async -api -m 
 
 # <a name="visual-studio"></a>[<span data-ttu-id="b2ad0-486">Visual Studio</span><span class="sxs-lookup"><span data-stu-id="b2ad0-486">Visual Studio</span></span>](#tab/visual-studio)
 
-* <span data-ttu-id="b2ad0-487">在 **方案總管** 中，以滑鼠右鍵按一下專案。</span><span class="sxs-lookup"><span data-stu-id="b2ad0-487">In **Solution Explorer** , right-click the project.</span></span> <span data-ttu-id="b2ad0-488">選取 **[**  >  **新增資料夾** ]。</span><span class="sxs-lookup"><span data-stu-id="b2ad0-488">Select **Add** > **New Folder**.</span></span> <span data-ttu-id="b2ad0-489">為資料夾命名 *:::no-loc(Models):::* 。</span><span class="sxs-lookup"><span data-stu-id="b2ad0-489">Name the folder *:::no-loc(Models):::*.</span></span>
+* <span data-ttu-id="b2ad0-487">在 **方案總管** 中，以滑鼠右鍵按一下專案。</span><span class="sxs-lookup"><span data-stu-id="b2ad0-487">In **Solution Explorer** , right-click the project.</span></span> <span data-ttu-id="b2ad0-488">選取 **[**  >  **新增資料夾** ]。</span><span class="sxs-lookup"><span data-stu-id="b2ad0-488">Select **Add** > **New Folder**.</span></span> <span data-ttu-id="b2ad0-489">為資料夾命名 *Models* 。</span><span class="sxs-lookup"><span data-stu-id="b2ad0-489">Name the folder *Models*.</span></span>
 
-* <span data-ttu-id="b2ad0-490">以滑鼠右鍵按一下 *:::no-loc(Models):::* 資料夾，然後選取 [ **加入**  >  **類別** ]。</span><span class="sxs-lookup"><span data-stu-id="b2ad0-490">Right-click the *:::no-loc(Models):::* folder and select **Add** > **Class**.</span></span> <span data-ttu-id="b2ad0-491">將類別命名為 *TodoItem* ，然後選取 [新增]。</span><span class="sxs-lookup"><span data-stu-id="b2ad0-491">Name the class *TodoItem* and select **Add**.</span></span>
+* <span data-ttu-id="b2ad0-490">以滑鼠右鍵按一下 *Models* 資料夾，然後選取 [ **加入**  >  **類別** ]。</span><span class="sxs-lookup"><span data-stu-id="b2ad0-490">Right-click the *Models* folder and select **Add** > **Class**.</span></span> <span data-ttu-id="b2ad0-491">將類別命名為 *TodoItem* ，然後選取 [新增]。</span><span class="sxs-lookup"><span data-stu-id="b2ad0-491">Name the class *TodoItem* and select **Add**.</span></span>
 
 * <span data-ttu-id="b2ad0-492">使用下列程式碼取代範本程式碼：</span><span class="sxs-lookup"><span data-stu-id="b2ad0-492">Replace the template code with the following code:</span></span>
 
 # <a name="visual-studio-code"></a>[<span data-ttu-id="b2ad0-493">Visual Studio Code</span><span class="sxs-lookup"><span data-stu-id="b2ad0-493">Visual Studio Code</span></span>](#tab/visual-studio-code)
 
-* <span data-ttu-id="b2ad0-494">新增名為的資料夾 *:::no-loc(Models):::* 。</span><span class="sxs-lookup"><span data-stu-id="b2ad0-494">Add a folder named *:::no-loc(Models):::*.</span></span>
+* <span data-ttu-id="b2ad0-494">新增名為的資料夾 *Models* 。</span><span class="sxs-lookup"><span data-stu-id="b2ad0-494">Add a folder named *Models*.</span></span>
 
-* <span data-ttu-id="b2ad0-495">`TodoItem`使用下列程式碼，將類別新增至 *:::no-loc(Models):::* 資料夾：</span><span class="sxs-lookup"><span data-stu-id="b2ad0-495">Add a `TodoItem` class to the *:::no-loc(Models):::* folder with the following code:</span></span>
+* <span data-ttu-id="b2ad0-495">`TodoItem`使用下列程式碼，將類別新增至 *Models* 資料夾：</span><span class="sxs-lookup"><span data-stu-id="b2ad0-495">Add a `TodoItem` class to the *Models* folder with the following code:</span></span>
 
 # <a name="visual-studio-for-mac"></a>[<span data-ttu-id="b2ad0-496">Visual Studio for Mac</span><span class="sxs-lookup"><span data-stu-id="b2ad0-496">Visual Studio for Mac</span></span>](#tab/visual-studio-mac)
 
-* <span data-ttu-id="b2ad0-497">以滑鼠右鍵按一下專案。</span><span class="sxs-lookup"><span data-stu-id="b2ad0-497">Right-click the project.</span></span> <span data-ttu-id="b2ad0-498">選取 **[**  >  **新增資料夾** ]。</span><span class="sxs-lookup"><span data-stu-id="b2ad0-498">Select **Add** > **New Folder**.</span></span> <span data-ttu-id="b2ad0-499">為資料夾命名 *:::no-loc(Models):::* 。</span><span class="sxs-lookup"><span data-stu-id="b2ad0-499">Name the folder *:::no-loc(Models):::*.</span></span>
+* <span data-ttu-id="b2ad0-497">以滑鼠右鍵按一下專案。</span><span class="sxs-lookup"><span data-stu-id="b2ad0-497">Right-click the project.</span></span> <span data-ttu-id="b2ad0-498">選取 **[**  >  **新增資料夾** ]。</span><span class="sxs-lookup"><span data-stu-id="b2ad0-498">Select **Add** > **New Folder**.</span></span> <span data-ttu-id="b2ad0-499">為資料夾命名 *Models* 。</span><span class="sxs-lookup"><span data-stu-id="b2ad0-499">Name the folder *Models*.</span></span>
 
   ![新增資料夾](first-web-api-mac/_static/folder.png)
 
-* <span data-ttu-id="b2ad0-501">以滑鼠右鍵按一下 *:::no-loc(Models):::* 資料夾，然後選取 **Add** > [ **新增** 檔案 > **一般** ] > **空白類別** 。</span><span class="sxs-lookup"><span data-stu-id="b2ad0-501">Right-click the *:::no-loc(Models):::* folder, and select **Add** > **New File** > **General** > **Empty Class**.</span></span>
+* <span data-ttu-id="b2ad0-501">以滑鼠右鍵按一下 *Models* 資料夾，然後選取 **Add** > [ **新增** 檔案 > **一般** ] > **空白類別** 。</span><span class="sxs-lookup"><span data-stu-id="b2ad0-501">Right-click the *Models* folder, and select **Add** > **New File** > **General** > **Empty Class**.</span></span>
 
 * <span data-ttu-id="b2ad0-502">將類別命名為 *TodoItem* ，然後按一下 [新增]。</span><span class="sxs-lookup"><span data-stu-id="b2ad0-502">Name the class *TodoItem* , and then click **New**.</span></span>
 
@@ -751,11 +751,11 @@ dotnet aspnet-codegenerator controller -name TodoItemsController -async -api -m 
 
 ---
 
-  [!code-csharp[](first-web-api/samples/3.0/TodoApi/:::no-loc(Models):::/TodoItem.cs?name=snippet)]
+  [!code-csharp[](first-web-api/samples/3.0/TodoApi/Models/TodoItem.cs?name=snippet)]
 
 <span data-ttu-id="b2ad0-504">`Id` 屬性的功能相當於關聯式資料庫中的唯一索引鍵。</span><span class="sxs-lookup"><span data-stu-id="b2ad0-504">The `Id` property functions as the unique key in a relational database.</span></span>
 
-<span data-ttu-id="b2ad0-505">模型類別可移至專案中的任何位置，但依照慣例，會 *:::no-loc(Models):::* 使用資料夾。</span><span class="sxs-lookup"><span data-stu-id="b2ad0-505">Model classes can go anywhere in the project, but the *:::no-loc(Models):::* folder is used by convention.</span></span>
+<span data-ttu-id="b2ad0-505">模型類別可移至專案中的任何位置，但依照慣例，會 *Models* 使用資料夾。</span><span class="sxs-lookup"><span data-stu-id="b2ad0-505">Model classes can go anywhere in the project, but the *Models* folder is used by convention.</span></span>
 
 ## <a name="add-a-database-context"></a><span data-ttu-id="b2ad0-506">新增資料庫內容</span><span class="sxs-lookup"><span data-stu-id="b2ad0-506">Add a database context</span></span>
 
@@ -775,17 +775,17 @@ dotnet aspnet-codegenerator controller -name TodoItemsController -async -api -m 
 
 ## <a name="add-the-todocontext-database-context"></a><span data-ttu-id="b2ad0-517">新增 TodoCoNtext 資料庫內容</span><span class="sxs-lookup"><span data-stu-id="b2ad0-517">Add the TodoContext database context</span></span>
 
-* <span data-ttu-id="b2ad0-518">以滑鼠右鍵按一下 *:::no-loc(Models):::* 資料夾，然後選取 [ **加入**  >  **類別** ]。</span><span class="sxs-lookup"><span data-stu-id="b2ad0-518">Right-click the *:::no-loc(Models):::* folder and select **Add** > **Class**.</span></span> <span data-ttu-id="b2ad0-519">將類別命名為 *TodoContext* ，然後按一下 [新增]。</span><span class="sxs-lookup"><span data-stu-id="b2ad0-519">Name the class *TodoContext* and click **Add**.</span></span>
+* <span data-ttu-id="b2ad0-518">以滑鼠右鍵按一下 *Models* 資料夾，然後選取 [ **加入**  >  **類別** ]。</span><span class="sxs-lookup"><span data-stu-id="b2ad0-518">Right-click the *Models* folder and select **Add** > **Class**.</span></span> <span data-ttu-id="b2ad0-519">將類別命名為 *TodoContext* ，然後按一下 [新增]。</span><span class="sxs-lookup"><span data-stu-id="b2ad0-519">Name the class *TodoContext* and click **Add**.</span></span>
 
 # <a name="visual-studio-code--visual-studio-for-mac"></a>[<span data-ttu-id="b2ad0-520">Visual Studio Code / Visual Studio for Mac</span><span class="sxs-lookup"><span data-stu-id="b2ad0-520">Visual Studio Code / Visual Studio for Mac</span></span>](#tab/visual-studio-code+visual-studio-mac)
 
-* <span data-ttu-id="b2ad0-521">將 `TodoContext` 類別新增至 *:::no-loc(Models):::* 資料夾。</span><span class="sxs-lookup"><span data-stu-id="b2ad0-521">Add a `TodoContext` class to the *:::no-loc(Models):::* folder.</span></span>
+* <span data-ttu-id="b2ad0-521">將 `TodoContext` 類別新增至 *Models* 資料夾。</span><span class="sxs-lookup"><span data-stu-id="b2ad0-521">Add a `TodoContext` class to the *Models* folder.</span></span>
 
 ---
 
 * <span data-ttu-id="b2ad0-522">輸入下列程式碼：</span><span class="sxs-lookup"><span data-stu-id="b2ad0-522">Enter the following code:</span></span>
 
-  [!code-csharp[](first-web-api/samples/3.0/TodoApi/:::no-loc(Models):::/TodoContext.cs)]
+  [!code-csharp[](first-web-api/samples/3.0/TodoApi/Models/TodoContext.cs)]
 
 ## <a name="register-the-database-context"></a><span data-ttu-id="b2ad0-523">登錄資料庫內容</span><span class="sxs-lookup"><span data-stu-id="b2ad0-523">Register the database context</span></span>
 
@@ -810,8 +810,8 @@ dotnet aspnet-codegenerator controller -name TodoItemsController -async -api -m 
 * <span data-ttu-id="b2ad0-535">選取 [使用 Entity Framework 執行動作的 API 控制器]，然後選取 [新增]。</span><span class="sxs-lookup"><span data-stu-id="b2ad0-535">Select **API Controller with actions, using Entity Framework** , and then select **Add**.</span></span>
 * <span data-ttu-id="b2ad0-536">在 [使用 Entity Framework 執行動作的 API 控制器] 對話方塊中：</span><span class="sxs-lookup"><span data-stu-id="b2ad0-536">In the **Add API Controller with actions, using Entity Framework** dialog:</span></span>
 
-  * <span data-ttu-id="b2ad0-537">選取 **模型類別** 中的 [ **TodoItem (TodoApi] :::no-loc(Models):::) 。**</span><span class="sxs-lookup"><span data-stu-id="b2ad0-537">Select **TodoItem (TodoApi.:::no-loc(Models):::)** in the **Model class**.</span></span>
-  * <span data-ttu-id="b2ad0-538">選取 **資料內容類別** 中的 **TodoCoNtext (TodoApi :::no-loc(Models):::) 。**</span><span class="sxs-lookup"><span data-stu-id="b2ad0-538">Select **TodoContext (TodoApi.:::no-loc(Models):::)** in the **Data context class**.</span></span>
+  * <span data-ttu-id="b2ad0-537">選取 **模型類別** 中的 [ **TodoItem (TodoApi] Models) 。**</span><span class="sxs-lookup"><span data-stu-id="b2ad0-537">Select **TodoItem (TodoApi.Models)** in the **Model class**.</span></span>
+  * <span data-ttu-id="b2ad0-538">選取 **資料內容類別** 中的 **TodoCoNtext (TodoApi Models) 。**</span><span class="sxs-lookup"><span data-stu-id="b2ad0-538">Select **TodoContext (TodoApi.Models)** in the **Data context class**.</span></span>
   * <span data-ttu-id="b2ad0-539">選取 [新增]  。</span><span class="sxs-lookup"><span data-stu-id="b2ad0-539">Select **Add**.</span></span>
 
 # <a name="visual-studio-code--visual-studio-for-mac"></a>[<span data-ttu-id="b2ad0-540">Visual Studio Code / Visual Studio for Mac</span><span class="sxs-lookup"><span data-stu-id="b2ad0-540">Visual Studio Code / Visual Studio for Mac</span></span>](#tab/visual-studio-code+visual-studio-mac)
@@ -1024,7 +1024,7 @@ dotnet aspnet-codegenerator controller -name TodoItemsController -async -api -m 
 
 <span data-ttu-id="b2ad0-667">若要示範 DTO 方法，請更新 `TodoItem` 類別以包含秘密欄位：</span><span class="sxs-lookup"><span data-stu-id="b2ad0-667">To demonstrate the DTO approach, update the `TodoItem` class to include a secret field:</span></span>
 
-[!code-csharp[](first-web-api/samples/3.0/TodoApiDTO/:::no-loc(Models):::/TodoItem.cs?name=snippet&highlight=6)]
+[!code-csharp[](first-web-api/samples/3.0/TodoApiDTO/Models/TodoItem.cs?name=snippet&highlight=6)]
 
 <span data-ttu-id="b2ad0-668">此應用程式必須隱藏秘密欄位，但系統管理應用程式可以選擇將它公開。</span><span class="sxs-lookup"><span data-stu-id="b2ad0-668">The secret field needs to be hidden from this app, but an administrative app could choose to expose it.</span></span>
 
@@ -1032,7 +1032,7 @@ dotnet aspnet-codegenerator controller -name TodoItemsController -async -api -m 
 
 <span data-ttu-id="b2ad0-670">建立 DTO 模型：</span><span class="sxs-lookup"><span data-stu-id="b2ad0-670">Create a DTO model:</span></span>
 
-[!code-csharp[](first-web-api/samples/3.0/TodoApiDTO/:::no-loc(Models):::/TodoItemDTO.cs?name=snippet)]
+[!code-csharp[](first-web-api/samples/3.0/TodoApiDTO/Models/TodoItemDTO.cs?name=snippet)]
 
 <span data-ttu-id="b2ad0-671">更新 `TodoItemsController` 以使用 `TodoItemDTO` ：</span><span class="sxs-lookup"><span data-stu-id="b2ad0-671">Update the `TodoItemsController` to use `TodoItemDTO`:</span></span>
 
@@ -1168,25 +1168,25 @@ dotnet aspnet-codegenerator controller -name TodoItemsController -async -api -m 
 
 # <a name="visual-studio"></a>[<span data-ttu-id="b2ad0-765">Visual Studio</span><span class="sxs-lookup"><span data-stu-id="b2ad0-765">Visual Studio</span></span>](#tab/visual-studio)
 
-* <span data-ttu-id="b2ad0-766">在 **方案總管** 中，以滑鼠右鍵按一下專案。</span><span class="sxs-lookup"><span data-stu-id="b2ad0-766">In **Solution Explorer** , right-click the project.</span></span> <span data-ttu-id="b2ad0-767">選取 **[**  >  **新增資料夾** ]。</span><span class="sxs-lookup"><span data-stu-id="b2ad0-767">Select **Add** > **New Folder**.</span></span> <span data-ttu-id="b2ad0-768">為資料夾命名 *:::no-loc(Models):::* 。</span><span class="sxs-lookup"><span data-stu-id="b2ad0-768">Name the folder *:::no-loc(Models):::*.</span></span>
+* <span data-ttu-id="b2ad0-766">在 **方案總管** 中，以滑鼠右鍵按一下專案。</span><span class="sxs-lookup"><span data-stu-id="b2ad0-766">In **Solution Explorer** , right-click the project.</span></span> <span data-ttu-id="b2ad0-767">選取 **[**  >  **新增資料夾** ]。</span><span class="sxs-lookup"><span data-stu-id="b2ad0-767">Select **Add** > **New Folder**.</span></span> <span data-ttu-id="b2ad0-768">為資料夾命名 *Models* 。</span><span class="sxs-lookup"><span data-stu-id="b2ad0-768">Name the folder *Models*.</span></span>
 
-* <span data-ttu-id="b2ad0-769">以滑鼠右鍵按一下 *:::no-loc(Models):::* 資料夾，然後選取 [ **加入**  >  **類別** ]。</span><span class="sxs-lookup"><span data-stu-id="b2ad0-769">Right-click the *:::no-loc(Models):::* folder and select **Add** > **Class**.</span></span> <span data-ttu-id="b2ad0-770">將類別命名為 *TodoItem* ，然後選取 [新增]。</span><span class="sxs-lookup"><span data-stu-id="b2ad0-770">Name the class *TodoItem* and select **Add**.</span></span>
+* <span data-ttu-id="b2ad0-769">以滑鼠右鍵按一下 *Models* 資料夾，然後選取 [ **加入**  >  **類別** ]。</span><span class="sxs-lookup"><span data-stu-id="b2ad0-769">Right-click the *Models* folder and select **Add** > **Class**.</span></span> <span data-ttu-id="b2ad0-770">將類別命名為 *TodoItem* ，然後選取 [新增]。</span><span class="sxs-lookup"><span data-stu-id="b2ad0-770">Name the class *TodoItem* and select **Add**.</span></span>
 
 * <span data-ttu-id="b2ad0-771">使用下列程式碼取代範本程式碼：</span><span class="sxs-lookup"><span data-stu-id="b2ad0-771">Replace the template code with the following code:</span></span>
 
 # <a name="visual-studio-code"></a>[<span data-ttu-id="b2ad0-772">Visual Studio Code</span><span class="sxs-lookup"><span data-stu-id="b2ad0-772">Visual Studio Code</span></span>](#tab/visual-studio-code)
 
-* <span data-ttu-id="b2ad0-773">新增名為的資料夾 *:::no-loc(Models):::* 。</span><span class="sxs-lookup"><span data-stu-id="b2ad0-773">Add a folder named *:::no-loc(Models):::*.</span></span>
+* <span data-ttu-id="b2ad0-773">新增名為的資料夾 *Models* 。</span><span class="sxs-lookup"><span data-stu-id="b2ad0-773">Add a folder named *Models*.</span></span>
 
-* <span data-ttu-id="b2ad0-774">`TodoItem`使用下列程式碼，將類別新增至 *:::no-loc(Models):::* 資料夾：</span><span class="sxs-lookup"><span data-stu-id="b2ad0-774">Add a `TodoItem` class to the *:::no-loc(Models):::* folder with the following code:</span></span>
+* <span data-ttu-id="b2ad0-774">`TodoItem`使用下列程式碼，將類別新增至 *Models* 資料夾：</span><span class="sxs-lookup"><span data-stu-id="b2ad0-774">Add a `TodoItem` class to the *Models* folder with the following code:</span></span>
 
 # <a name="visual-studio-for-mac"></a>[<span data-ttu-id="b2ad0-775">Visual Studio for Mac</span><span class="sxs-lookup"><span data-stu-id="b2ad0-775">Visual Studio for Mac</span></span>](#tab/visual-studio-mac)
 
-* <span data-ttu-id="b2ad0-776">以滑鼠右鍵按一下專案。</span><span class="sxs-lookup"><span data-stu-id="b2ad0-776">Right-click the project.</span></span> <span data-ttu-id="b2ad0-777">選取 **[**  >  **新增資料夾** ]。</span><span class="sxs-lookup"><span data-stu-id="b2ad0-777">Select **Add** > **New Folder**.</span></span> <span data-ttu-id="b2ad0-778">為資料夾命名 *:::no-loc(Models):::* 。</span><span class="sxs-lookup"><span data-stu-id="b2ad0-778">Name the folder *:::no-loc(Models):::*.</span></span>
+* <span data-ttu-id="b2ad0-776">以滑鼠右鍵按一下專案。</span><span class="sxs-lookup"><span data-stu-id="b2ad0-776">Right-click the project.</span></span> <span data-ttu-id="b2ad0-777">選取 **[**  >  **新增資料夾** ]。</span><span class="sxs-lookup"><span data-stu-id="b2ad0-777">Select **Add** > **New Folder**.</span></span> <span data-ttu-id="b2ad0-778">為資料夾命名 *Models* 。</span><span class="sxs-lookup"><span data-stu-id="b2ad0-778">Name the folder *Models*.</span></span>
 
   ![新增資料夾](first-web-api-mac/_static/folder.png)
 
-* <span data-ttu-id="b2ad0-780">以滑鼠右鍵按一下 *:::no-loc(Models):::* 資料夾，然後選取 **Add** > [ **新增** 檔案 > **一般** ] > **空白類別** 。</span><span class="sxs-lookup"><span data-stu-id="b2ad0-780">Right-click the *:::no-loc(Models):::* folder, and select **Add** > **New File** > **General** > **Empty Class**.</span></span>
+* <span data-ttu-id="b2ad0-780">以滑鼠右鍵按一下 *Models* 資料夾，然後選取 **Add** > [ **新增** 檔案 > **一般** ] > **空白類別** 。</span><span class="sxs-lookup"><span data-stu-id="b2ad0-780">Right-click the *Models* folder, and select **Add** > **New File** > **General** > **Empty Class**.</span></span>
 
 * <span data-ttu-id="b2ad0-781">將類別命名為 *TodoItem* ，然後按一下 [新增]。</span><span class="sxs-lookup"><span data-stu-id="b2ad0-781">Name the class *TodoItem* , and then click **New**.</span></span>
 
@@ -1194,11 +1194,11 @@ dotnet aspnet-codegenerator controller -name TodoItemsController -async -api -m 
 
 ---
 
-  [!code-csharp[](first-web-api/samples/2.2/TodoApi/:::no-loc(Models):::/TodoItem.cs)]
+  [!code-csharp[](first-web-api/samples/2.2/TodoApi/Models/TodoItem.cs)]
 
 <span data-ttu-id="b2ad0-783">`Id` 屬性的功能相當於關聯式資料庫中的唯一索引鍵。</span><span class="sxs-lookup"><span data-stu-id="b2ad0-783">The `Id` property functions as the unique key in a relational database.</span></span>
 
-<span data-ttu-id="b2ad0-784">模型類別可移至專案中的任何位置，但依照慣例，會 *:::no-loc(Models):::* 使用資料夾。</span><span class="sxs-lookup"><span data-stu-id="b2ad0-784">Model classes can go anywhere in the project, but the *:::no-loc(Models):::* folder is used by convention.</span></span>
+<span data-ttu-id="b2ad0-784">模型類別可移至專案中的任何位置，但依照慣例，會 *Models* 使用資料夾。</span><span class="sxs-lookup"><span data-stu-id="b2ad0-784">Model classes can go anywhere in the project, but the *Models* folder is used by convention.</span></span>
 
 ## <a name="add-a-database-context-21"></a><span data-ttu-id="b2ad0-785">新增資料庫內容2。1</span><span class="sxs-lookup"><span data-stu-id="b2ad0-785">Add a database context 2.1</span></span>
 
@@ -1206,17 +1206,17 @@ dotnet aspnet-codegenerator controller -name TodoItemsController -async -api -m 
 
 # <a name="visual-studio"></a>[<span data-ttu-id="b2ad0-788">Visual Studio</span><span class="sxs-lookup"><span data-stu-id="b2ad0-788">Visual Studio</span></span>](#tab/visual-studio)
 
-* <span data-ttu-id="b2ad0-789">以滑鼠右鍵按一下 *:::no-loc(Models):::* 資料夾，然後選取 [ **加入**  >  **類別** ]。</span><span class="sxs-lookup"><span data-stu-id="b2ad0-789">Right-click the *:::no-loc(Models):::* folder and select **Add** > **Class**.</span></span> <span data-ttu-id="b2ad0-790">將類別命名為 *TodoContext* ，然後按一下 [新增]。</span><span class="sxs-lookup"><span data-stu-id="b2ad0-790">Name the class *TodoContext* and click **Add**.</span></span>
+* <span data-ttu-id="b2ad0-789">以滑鼠右鍵按一下 *Models* 資料夾，然後選取 [ **加入**  >  **類別** ]。</span><span class="sxs-lookup"><span data-stu-id="b2ad0-789">Right-click the *Models* folder and select **Add** > **Class**.</span></span> <span data-ttu-id="b2ad0-790">將類別命名為 *TodoContext* ，然後按一下 [新增]。</span><span class="sxs-lookup"><span data-stu-id="b2ad0-790">Name the class *TodoContext* and click **Add**.</span></span>
 
 # <a name="visual-studio-code--visual-studio-for-mac"></a>[<span data-ttu-id="b2ad0-791">Visual Studio Code / Visual Studio for Mac</span><span class="sxs-lookup"><span data-stu-id="b2ad0-791">Visual Studio Code / Visual Studio for Mac</span></span>](#tab/visual-studio-code+visual-studio-mac)
 
-* <span data-ttu-id="b2ad0-792">將 `TodoContext` 類別新增至 *:::no-loc(Models):::* 資料夾。</span><span class="sxs-lookup"><span data-stu-id="b2ad0-792">Add a `TodoContext` class to the *:::no-loc(Models):::* folder.</span></span>
+* <span data-ttu-id="b2ad0-792">將 `TodoContext` 類別新增至 *Models* 資料夾。</span><span class="sxs-lookup"><span data-stu-id="b2ad0-792">Add a `TodoContext` class to the *Models* folder.</span></span>
 
 ---
 
 * <span data-ttu-id="b2ad0-793">使用下列程式碼取代範本程式碼：</span><span class="sxs-lookup"><span data-stu-id="b2ad0-793">Replace the template code with the following code:</span></span>
 
-  [!code-csharp[](first-web-api/samples/2.2/TodoApi/:::no-loc(Models):::/TodoContext.cs)]
+  [!code-csharp[](first-web-api/samples/2.2/TodoApi/Models/TodoContext.cs)]
 
 ## <a name="register-the-database-context-21"></a><span data-ttu-id="b2ad0-794">註冊資料庫內容2。1</span><span class="sxs-lookup"><span data-stu-id="b2ad0-794">Register the database context 2.1</span></span>
 
@@ -1495,7 +1495,7 @@ dotnet aspnet-codegenerator controller -name TodoItemsController -async -api -m 
 
 ## <a name="add-authentication-support-to-a-web-api-21"></a><span data-ttu-id="b2ad0-957">將驗證支援新增至 web API 2。1</span><span class="sxs-lookup"><span data-stu-id="b2ad0-957">Add authentication support to a web API 2.1</span></span>
 
-[!INCLUDE[](~/includes/:::no-loc(Identity):::Server4.md)]
+[!INCLUDE[](~/includes/IdentityServer4.md)]
 
 ## <a name="additional-resources-21"></a><span data-ttu-id="b2ad0-958">其他資源2。1</span><span class="sxs-lookup"><span data-stu-id="b2ad0-958">Additional resources 2.1</span></span>
 

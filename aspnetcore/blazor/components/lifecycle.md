@@ -19,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/components/lifecycle
-ms.openlocfilehash: 08fc393160e0a7396963901e2add3b44fc7b02b9
-ms.sourcegitcommit: 1be547564381873fe9e84812df8d2088514c622a
+ms.openlocfilehash: f435870e1e73fdb1296699ed62052b72b3b78abf
+ms.sourcegitcommit: e087b6a38e3d38625ebb567a973e75b4d79547b9
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 11/11/2020
-ms.locfileid: "94507997"
+ms.lasthandoff: 11/15/2020
+ms.locfileid: "94637713"
 ---
 # <a name="aspnet-core-no-locblazor-lifecycle"></a>ASP.NET Core Blazor 生命週期
 
@@ -81,7 +81,7 @@ public override async Task SetParametersAsync(ParameterView parameters)
 
 的預設實 <xref:Microsoft.AspNetCore.Components.ComponentBase.SetParametersAsync%2A> 值會設定每個屬性的值，其具有的 [`[Parameter]`](xref:Microsoft.AspNetCore.Components.ParameterAttribute) 或 [`[CascadingParameter]`](xref:Microsoft.AspNetCore.Components.CascadingParameterAttribute) 屬性在中具有對應的值 <xref:Microsoft.AspNetCore.Components.ParameterView> 。 在中沒有對應值的參數 <xref:Microsoft.AspNetCore.Components.ParameterView> 會保持不變。
 
-如果 [`base.SetParametersAync`](xref:Microsoft.AspNetCore.Components.ComponentBase.SetParametersAsync%2A) 未叫用，自訂程式碼就能以任何需要的方式解讀傳入的參數值。 例如，不需要將傳入參數指派給類別上的屬性。
+如果 [`base.SetParametersAsync`](xref:Microsoft.AspNetCore.Components.ComponentBase.SetParametersAsync%2A) 未叫用，自訂程式碼就能以任何需要的方式解讀傳入的參數值。 例如，不需要將傳入參數指派給類別上的屬性。
 
 如果已設定任何事件處理常式，請將它們解除鎖定以供處置。 如需詳細資訊，請參閱「[元件 `IDisposable` 處置方式](#component-disposal-with-idisposable)」一節。
 
@@ -109,7 +109,7 @@ protected override async Task OnInitializedAsync()
 }
 ```
 
-Blazor Server 將 [其內容呼叫呈現](xref:blazor/fundamentals/additional-scenarios#render-mode) <xref:Microsoft.AspNetCore.Components.ComponentBase.OnInitializedAsync%2A> **_兩次_** 的應用程式：
+Blazor Server 將 [其內容呼叫呈現](xref:blazor/fundamentals/additional-scenarios#render-mode) <xref:Microsoft.AspNetCore.Components.ComponentBase.OnInitializedAsync%2A> *兩次* 的應用程式：
 
 * 一開始是以靜態方式將元件轉譯為頁面的一部分。
 * 第二次當瀏覽器重新建立與伺服器的連接時。
@@ -218,7 +218,7 @@ protected override bool ShouldRender()
 
 在呈現元件之前，在生命週期事件中執行的非同步動作可能尚未完成。 `null`當生命週期方法執行時，物件可能會或未完全填入資料。 提供轉譯邏輯來確認物件已初始化。 轉譯預留位置 UI 元素 (例如，在物件為時) 載入訊息 `null` 。
 
-在 `FetchData` 範本的元件中 Blazor ， <xref:Microsoft.AspNetCore.Components.ComponentBase.OnInitializedAsync%2A> 會覆寫以 asychronously 接收預測資料 (`forecasts`) 。 當 `forecasts` 為時 `null` ，就會向使用者顯示載入訊息。 在 `Task` 傳回之後 <xref:Microsoft.AspNetCore.Components.ComponentBase.OnInitializedAsync%2A> ，元件會以更新狀態保存。
+在 `FetchData` 範本的元件中 Blazor ， <xref:Microsoft.AspNetCore.Components.ComponentBase.OnInitializedAsync%2A> 會覆寫以非同步方式接收預測資料 (`forecasts`) 。 當 `forecasts` 為時 `null` ，就會向使用者顯示載入訊息。 在 `Task` 傳回之後 <xref:Microsoft.AspNetCore.Components.ComponentBase.OnInitializedAsync%2A> ，元件會以更新狀態保存。
 
 `Pages/FetchData.razor` 在 Blazor Server 範本中：
 
@@ -392,3 +392,7 @@ public class WeatherForecastService
     }
 }
 ```
+
+## <a name="no-locblazor-server-reconnection-events"></a>Blazor Server 重新連接事件
+
+本文所涵蓋的元件生命週期事件，與重新[ Blazor Server 連接事件處理常式](xref:blazor/fundamentals/additional-scenarios#reflect-the-connection-state-in-the-ui)分開運作。 當 Blazor Server 應用程式失去其 SignalR 與用戶端的連線時，只會中斷 UI 更新。 重新建立連接時，會繼續 UI 更新。 如需線路處理程式事件和設定的詳細資訊，請參閱 <xref:blazor/fundamentals/additional-scenarios> 。

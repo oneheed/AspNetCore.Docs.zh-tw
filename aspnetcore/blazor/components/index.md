@@ -19,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/components/index
-ms.openlocfilehash: d78076eb29d6d09756e408b388fcf12b4b6460f6
-ms.sourcegitcommit: 1be547564381873fe9e84812df8d2088514c622a
+ms.openlocfilehash: d8838a458943599890420adec4551ad87e43d328
+ms.sourcegitcommit: e087b6a38e3d38625ebb567a973e75b4d79547b9
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 11/11/2020
-ms.locfileid: "94507937"
+ms.lasthandoff: 11/15/2020
+ms.locfileid: "94637700"
 ---
 # <a name="create-and-use-aspnet-core-no-locrazor-components"></a>建立和使用 ASP.NET Core Razor 元件
 
@@ -244,11 +244,25 @@ namespace BlazorSample
 
 元件可以從指示詞中提供的路由範本接收路由參數 [`@page`][9] 。 路由器會使用路由參數來填入對應的元件參數。
 
+::: moniker range=">= aspnetcore-5.0"
+
+支援選擇性參數。 在下列範例中， `text` 選擇性參數會將路由區段的值指派給元件的 `Text` 屬性。 如果區段不存在，的值 `Text` 會設定為 `fantastic` 。
+
 `Pages/RouteParameter.razor`:
 
-[!code-razor[](index/samples_snapshot/RouteParameter.razor?highlight=2,7-8)]
+[!code-razor[](index/samples_snapshot/RouteParameter-5x.razor?highlight=1,6-7)]
+
+::: moniker-end
+
+::: moniker range="< aspnetcore-5.0"
+
+`Pages/RouteParameter.razor`:
+
+[!code-razor[](index/samples_snapshot/RouteParameter-3x.razor?highlight=2,7-8)]
 
 不支援選擇性參數，因此 [`@page`][9] 在上述範例中會套用兩個指示詞。 第一個可讓您在不使用參數的情況下流覽至元件。 第二個指示詞會 [`@page`][9] 接收 `{text}` route 參數，並將值指派給 `Text` 屬性。
+
+::: moniker-end
 
 如需捕捉所有路由參數的詳細資訊 (`{*pageRoute}`) ，以在多個資料夾界限之間取得路徑，請參閱 <xref:blazor/fundamentals/routing#catch-all-route-parameters> 。
 
@@ -265,6 +279,14 @@ namespace BlazorSample
 `Pages/ParentComponent.razor`:
 
 [!code-razor[](index/samples_snapshot/ParentComponent.razor?highlight=5-6)]
+
+依照慣例，由 c # 程式碼所組成的屬性值會使用[ Razor 的保留 `@` 符號](xref:mvc/views/razor#razor-syntax)指派給參數：
+
+* 父欄位或屬性： `Title="@{FIELD OR PROPERTY}` ，其中預留位置 `{FIELD OR PROPERTY}` 是父元件的 c # 欄位或屬性。
+* 方法的結果： `Title="@{METHOD}"` ，其中預留位置 `{METHOD}` 是父元件的 c # 方法。
+* [隱含或明確運算式](xref:mvc/views/razor#implicit-razor-expressions)： `Title="@({EXPRESSION})"` ，其中預留位置 `{EXPRESSION}` 是 c # 運算式。
+  
+如需詳細資訊，請參閱<xref:mvc/views/razor>。
 
 > [!WARNING]
 > 請勿建立會寫入其本身 *元件參數* 的元件，而是改用私用欄位。 如需詳細資訊，請參閱 [覆寫的參數](#overwritten-parameters) 一節。
@@ -294,7 +316,7 @@ namespace BlazorSample
 > @for (int c = 0; c < 10; c++)
 > {
 >     var current = c;
->     <ChildComponent Param1="@c">
+>     <ChildComponent Title="@c">
 >         Child Content: Count: @current
 >     </ChildComponent>
 > }
@@ -305,7 +327,7 @@ namespace BlazorSample
 > ```razor
 > @foreach(var c in Enumerable.Range(0,10))
 > {
->     <ChildComponent Param1="@c">
+>     <ChildComponent Title="@c">
 >         Child Content: Count: @c
 >     </ChildComponent>
 > }
@@ -650,7 +672,7 @@ Blazor架構通常會施加安全的父系對子參數指派：
 * 元件會直接寫入 `Expanded` 參數，以示範覆寫參數的問題，應該予以避免。
 
 ```razor
-<div @onclick="@Toggle" class="card bg-light mb-3" style="width:30rem">
+<div @onclick="Toggle" class="card bg-light mb-3" style="width:30rem">
     <div class="card-body">
         <h2 class="card-title">Toggle (<code>Expanded</code> = @Expanded)</h2>
 
@@ -702,7 +724,7 @@ Blazor架構通常會施加安全的父系對子參數指派：
 * 使用私用欄位來維護其內部切換狀態，以示範如何避免直接寫入參數。
 
 ```razor
-<div @onclick="@Toggle" class="card bg-light mb-3" style="width:30rem">
+<div @onclick="Toggle" class="card bg-light mb-3" style="width:30rem">
     <div class="card-body">
         <h2 class="card-title">Toggle (<code>expanded</code> = @expanded)</h2>
 

@@ -19,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/fundamentals/additional-scenarios
-ms.openlocfilehash: 9ec3900b67897255e321462b83117f5c2e32ab45
-ms.sourcegitcommit: 98f92d766d4f343d7e717b542c1b08da29e789c1
+ms.openlocfilehash: ef37c539d377f14a2744c3ead28234d8497df700
+ms.sourcegitcommit: e087b6a38e3d38625ebb567a973e75b4d79547b9
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 11/13/2020
-ms.locfileid: "94595411"
+ms.lasthandoff: 11/15/2020
+ms.locfileid: "94637674"
 ---
 # <a name="aspnet-core-no-locblazor-hosting-model-configuration"></a>ASP.NET Core Blazor 裝載模型設定
 
@@ -378,3 +378,4 @@ When one of the framework components is used in a child component, the rendered 
 ## <a name="additional-resources"></a>其他資源
 
 * <xref:fundamentals/logging/index>
+* [Blazor Server 重新連接事件和元件生命週期事件](xref:blazor/components/lifecycle#blazor-server-reconnection-events)

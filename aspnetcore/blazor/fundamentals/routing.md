@@ -19,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/fundamentals/routing
-ms.openlocfilehash: 8f0aa80d092b6678131a2b7152f21ecb8e168257
-ms.sourcegitcommit: fe5a287fa6b9477b130aa39728f82cdad57611ee
+ms.openlocfilehash: 585b697aedf31bce2305df0ec5f84824c4019156
+ms.sourcegitcommit: e087b6a38e3d38625ebb567a973e75b4d79547b9
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 11/10/2020
-ms.locfileid: "94430987"
+ms.lasthandoff: 11/15/2020
+ms.locfileid: "94637687"
 ---
 # <a name="aspnet-core-no-locblazor-routing"></a>ASP.NET Core Blazor 路由
 
@@ -112,7 +112,31 @@ Blazor Server 已整合至 [ASP.NET Core 端點路由](xref:fundamentals/routing
 
 ## <a name="route-parameters"></a>路由參數
 
-路由器會使用路由參數，以相同的名稱填入對應的元件參數， (不區分大小寫) ：
+路由器會使用路由參數，以相同的名稱填入對應的元件參數， (不區分大小寫) 。
+
+::: moniker range=">= aspnetcore-5.0"
+
+支援選擇性參數。 在下列範例中， `text` 選擇性參數會將路由區段的值指派給元件的 `Text` 屬性。 如果區段不存在，的值 `Text` 會設定為 `fantastic` ：
+
+```razor
+@page "/RouteParameter/{text?}"
+
+<h1>Blazor is @Text!</h1>
+
+@code {
+    [Parameter]
+    public string Text { get; set; }
+
+    protected override void OnInitialized()
+    {
+        Text = Text ?? "fantastic";
+    }
+}
+```
+
+::: moniker-end
+
+::: moniker range="< aspnetcore-5.0"
 
 ```razor
 @page "/RouteParameter"
@@ -132,6 +156,8 @@ Blazor Server 已整合至 [ASP.NET Core 端點路由](xref:fundamentals/routing
 ```
 
 不支援選擇性參數。 上述範例會套用兩個指示詞 `@page` 。 第一個可讓您在不使用參數的情況下流覽至元件。 第二個指示詞 `@page` 會接受 `{text}` route 參數，並將值指派給 `Text` 屬性。
+
+::: moniker-end
 
 ## <a name="route-constraints"></a>路由條件約束
 

@@ -5,7 +5,7 @@ description: 瞭解如何使用 HttpRepl .NET Core 通用工具來流覽和測�
 monikerRange: '>= aspnetcore-2.1'
 ms.author: scaddie
 ms.custom: mvc, devx-track-azurecli
-ms.date: 11/11/2020
+ms.date: 11/12/2020
 no-loc:
 - appsettings.json
 - ASP.NET Core Identity
@@ -19,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: web-api/http-repl
-ms.openlocfilehash: 8dd763d270a00c9a71913d68d6a039b2d98c3864
-ms.sourcegitcommit: 1ea3f23bec63e96ffc3a927992f30a5fc0de3ff9
+ms.openlocfilehash: c661141c1bec93c0f7b6404964dc0bca2319b529
+ms.sourcegitcommit: 827e8be18cebbcc09b467c089e17fa6f5e430cb2
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 11/12/2020
-ms.locfileid: "94570207"
+ms.lasthandoff: 11/15/2020
+ms.locfileid: "94634609"
 ---
 # <a name="test-web-apis-with-the-httprepl"></a>使用 HttpRepl 測試 web Api
 
@@ -48,7 +48,7 @@ HTTP「讀取、求值、輸出」迴圈 (REPL) 是：
 
 若要跟著做，[請檢視或下載範例 ASP.NET Core web API](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/web-api/http-repl/samples) ([如何下載](xref:index#how-to-download-a-sample))。
 
-## <a name="prerequisites"></a>必要條件
+## <a name="prerequisites"></a>先決條件
 
 * [!INCLUDE [2.1-SDK](~/includes/2.1-SDK.md)]
 
@@ -1127,3 +1127,6 @@ https://localhost:5001/>
 
 * [REST API 要求](https://github.com/microsoft/api-guidelines/blob/vNext/Guidelines.md#74-supported-methods)
 * [HttpRepl GitHub 存放庫](https://github.com/dotnet/HttpRepl)
+* [設定 Visual Studio 以啟動 HttpRepl](https://devblogs.microsoft.com/aspnet/httprepl-a-command-line-tool-for-interacting-with-restful-http-services/#configure-visual-studio-for-windows-to-launch-httprepl-on-f5)
+* [設定 Visual Studio Code 以啟動 HttpRepl](https://devblogs.microsoft.com/aspnet/httprepl-a-command-line-tool-for-interacting-with-restful-http-services/#configure-visual-studio-code-to-launch-httprepl-on-debug)
+* [設定 Visual Studio for Mac 以啟動 HttpRepl](https://devblogs.microsoft.com/aspnet/httprepl-a-command-line-tool-for-interacting-with-restful-http-services/#configure-visual-studio-for-mac-to-launch-httprepl-as-a-custom-tool)

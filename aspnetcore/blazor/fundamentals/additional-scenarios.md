@@ -1,23 +1,23 @@
 ---
-title: 'ASP.NET Core :::no-loc(Blazor)::: 裝載模型設定'
+title: 'ASP.NET Core Blazor 裝載模型設定'
 author: guardrex
-description: '瞭解 ASP.NET Core 裝載模型設定的其他案例 :::no-loc(Blazor)::: 。'
+description: '瞭解 ASP.NET Core 裝載模型設定的其他案例 Blazor 。'
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
 ms.date: 10/27/2020
 no-loc:
-- ':::no-loc(appsettings.json):::'
-- ':::no-loc(ASP.NET Core Identity):::'
-- ':::no-loc(cookie):::'
-- ':::no-loc(Cookie):::'
-- ':::no-loc(Blazor):::'
-- ':::no-loc(Blazor Server):::'
-- ':::no-loc(Blazor WebAssembly):::'
-- ':::no-loc(Identity):::'
-- ":::no-loc(Let's Encrypt):::"
-- ':::no-loc(Razor):::'
-- ':::no-loc(SignalR):::'
+- 'appsettings.json'
+- 'ASP.NET Core Identity'
+- 'cookie'
+- 'Cookie'
+- 'Blazor'
+- 'Blazor Server'
+- 'Blazor WebAssembly'
+- 'Identity'
+- "Let's Encrypt"
+- 'Razor'
+- 'SignalR'
 uid: blazor/fundamentals/additional-scenarios
 ms.openlocfilehash: ef37c539d377f14a2744c3ead28234d8497df700
 ms.sourcegitcommit: e087b6a38e3d38625ebb567a973e75b4d79547b9
@@ -26,17 +26,17 @@ ms.contentlocale: zh-TW
 ms.lasthandoff: 11/15/2020
 ms.locfileid: "94637674"
 ---
-# <a name="aspnet-core-no-locblazor-hosting-model-configuration"></a><span data-ttu-id="6d1ab-103">ASP.NET Core :::no-loc(Blazor)::: 裝載模型設定</span><span class="sxs-lookup"><span data-stu-id="6d1ab-103">ASP.NET Core :::no-loc(Blazor)::: hosting model configuration</span></span>
+# <a name="aspnet-core-no-locblazor-hosting-model-configuration"></a><span data-ttu-id="6d1ab-103">ASP.NET Core Blazor 裝載模型設定</span><span class="sxs-lookup"><span data-stu-id="6d1ab-103">ASP.NET Core Blazor hosting model configuration</span></span>
 
 <span data-ttu-id="6d1ab-104">[Daniel Roth](https://github.com/danroth27)、 [Mackinnon Buck](https://github.com/MackinnonBuck)和[Luke Latham](https://github.com/guardrex)</span><span class="sxs-lookup"><span data-stu-id="6d1ab-104">By [Daniel Roth](https://github.com/danroth27), [Mackinnon Buck](https://github.com/MackinnonBuck), and [Luke Latham](https://github.com/guardrex)</span></span>
 
 <span data-ttu-id="6d1ab-105">本文涵蓋裝載模型設定。</span><span class="sxs-lookup"><span data-stu-id="6d1ab-105">This article covers hosting model configuration.</span></span>
 
-### <a name="no-locsignalr-cross-origin-negotiation-for-authentication"></a><span data-ttu-id="6d1ab-106">:::no-loc(SignalR)::: 驗證的跨原始來源協商</span><span class="sxs-lookup"><span data-stu-id="6d1ab-106">:::no-loc(SignalR)::: cross-origin negotiation for authentication</span></span>
+### <a name="no-locsignalr-cross-origin-negotiation-for-authentication"></a><span data-ttu-id="6d1ab-106">SignalR 驗證的跨原始來源協商</span><span class="sxs-lookup"><span data-stu-id="6d1ab-106">SignalR cross-origin negotiation for authentication</span></span>
 
-<span data-ttu-id="6d1ab-107">*本節適用于 :::no-loc(Blazor WebAssembly)::: 。*</span><span class="sxs-lookup"><span data-stu-id="6d1ab-107">*This section applies to :::no-loc(Blazor WebAssembly):::.*</span></span>
+<span data-ttu-id="6d1ab-107">*本節適用于 Blazor WebAssembly 。*</span><span class="sxs-lookup"><span data-stu-id="6d1ab-107">*This section applies to Blazor WebAssembly.*</span></span>
 
-<span data-ttu-id="6d1ab-108">設定 :::no-loc(SignalR)::: 的基礎用戶端以傳送認證，例如 :::no-loc(cookie)::: s 或 HTTP 驗證標頭：</span><span class="sxs-lookup"><span data-stu-id="6d1ab-108">To configure :::no-loc(SignalR):::'s underlying client to send credentials, such as :::no-loc(cookie):::s or HTTP authentication headers:</span></span>
+<span data-ttu-id="6d1ab-108">設定 SignalR 的基礎用戶端以傳送認證，例如 cookie s 或 HTTP 驗證標頭：</span><span class="sxs-lookup"><span data-stu-id="6d1ab-108">To configure SignalR's underlying client to send credentials, such as cookies or HTTP authentication headers:</span></span>
 
 * <span data-ttu-id="6d1ab-109">使用 <xref:Microsoft.AspNetCore.Components.WebAssembly.Http.WebAssemblyHttpRequestMessageExtensions.SetBrowserRequestCredentials%2A> 設定 <xref:Microsoft.AspNetCore.Components.WebAssembly.Http.BrowserRequestCredentials.Include> 跨原始來源的 [`fetch`](https://developer.mozilla.org/docs/Web/API/Fetch_API/Using_Fetch) 要求：</span><span class="sxs-lookup"><span data-stu-id="6d1ab-109">Use <xref:Microsoft.AspNetCore.Components.WebAssembly.Http.WebAssemblyHttpRequestMessageExtensions.SetBrowserRequestCredentials%2A> to set <xref:Microsoft.AspNetCore.Components.WebAssembly.Http.BrowserRequestCredentials.Include> on cross-origin [`fetch`](https://developer.mozilla.org/docs/Web/API/Fetch_API/Using_Fetch) requests:</span></span>
 
@@ -67,11 +67,11 @@ ms.locfileid: "94637674"
 
 ## <a name="reflect-the-connection-state-in-the-ui"></a><span data-ttu-id="6d1ab-112">反映 UI 中的連接狀態</span><span class="sxs-lookup"><span data-stu-id="6d1ab-112">Reflect the connection state in the UI</span></span>
 
-<span data-ttu-id="6d1ab-113">*本節適用于 :::no-loc(Blazor Server)::: 。*</span><span class="sxs-lookup"><span data-stu-id="6d1ab-113">*This section applies to :::no-loc(Blazor Server):::.*</span></span>
+<span data-ttu-id="6d1ab-113">*本節適用于 Blazor Server 。*</span><span class="sxs-lookup"><span data-stu-id="6d1ab-113">*This section applies to Blazor Server.*</span></span>
 
 <span data-ttu-id="6d1ab-114">當用戶端偵測到連線已遺失時，當用戶端嘗試重新連接時，會對使用者顯示預設的 UI。</span><span class="sxs-lookup"><span data-stu-id="6d1ab-114">When the client detects that the connection has been lost, a default UI is displayed to the user while the client attempts to reconnect.</span></span> <span data-ttu-id="6d1ab-115">如果重新連接失敗，就會提供使用者重試的選項。</span><span class="sxs-lookup"><span data-stu-id="6d1ab-115">If reconnection fails, the user is provided the option to retry.</span></span>
 
-<span data-ttu-id="6d1ab-116">若要自訂 UI，請在頁面的中，使用的來定義元素 `id` `components-reconnect-modal` `<body>` `_Host.cshtml` :::no-loc(Razor)::: ：</span><span class="sxs-lookup"><span data-stu-id="6d1ab-116">To customize the UI, define an element with an `id` of `components-reconnect-modal` in the `<body>` of the `_Host.cshtml` :::no-loc(Razor)::: page:</span></span>
+<span data-ttu-id="6d1ab-116">若要自訂 UI，請在頁面的中，使用的來定義元素 `id` `components-reconnect-modal` `<body>` `_Host.cshtml` Razor ：</span><span class="sxs-lookup"><span data-stu-id="6d1ab-116">To customize the UI, define an element with an `id` of `components-reconnect-modal` in the `<body>` of the `_Host.cshtml` Razor page:</span></span>
 
 ```cshtml
 <div id="components-reconnect-modal">
@@ -97,41 +97,41 @@ ms.locfileid: "94637674"
 | ------------------------------- | ----------------- |
 | `components-reconnect-show`     | <span data-ttu-id="6d1ab-121">遺失的連接。</span><span class="sxs-lookup"><span data-stu-id="6d1ab-121">A lost connection.</span></span> <span data-ttu-id="6d1ab-122">用戶端正在嘗試重新連接。</span><span class="sxs-lookup"><span data-stu-id="6d1ab-122">The client is attempting to reconnect.</span></span> <span data-ttu-id="6d1ab-123">顯示強制回應。</span><span class="sxs-lookup"><span data-stu-id="6d1ab-123">Show the modal.</span></span> |
 | `components-reconnect-hide`     | <span data-ttu-id="6d1ab-124">系統會重新建立與伺服器之間的使用中連接。</span><span class="sxs-lookup"><span data-stu-id="6d1ab-124">An active connection is re-established to the server.</span></span> <span data-ttu-id="6d1ab-125">隱形模式。</span><span class="sxs-lookup"><span data-stu-id="6d1ab-125">Hide the modal.</span></span> |
-| `components-reconnect-failed`   | <span data-ttu-id="6d1ab-126">重新連接失敗，可能是因為網路失敗。</span><span class="sxs-lookup"><span data-stu-id="6d1ab-126">Reconnection failed, probably due to a network failure.</span></span> <span data-ttu-id="6d1ab-127">若要嘗試重新連接，請呼叫 `window.:::no-loc(Blazor):::.reconnect()` 。</span><span class="sxs-lookup"><span data-stu-id="6d1ab-127">To attempt reconnection, call `window.:::no-loc(Blazor):::.reconnect()`.</span></span> |
+| `components-reconnect-failed`   | <span data-ttu-id="6d1ab-126">重新連接失敗，可能是因為網路失敗。</span><span class="sxs-lookup"><span data-stu-id="6d1ab-126">Reconnection failed, probably due to a network failure.</span></span> <span data-ttu-id="6d1ab-127">若要嘗試重新連接，請呼叫 `window.Blazor.reconnect()` 。</span><span class="sxs-lookup"><span data-stu-id="6d1ab-127">To attempt reconnection, call `window.Blazor.reconnect()`.</span></span> |
 | `components-reconnect-rejected` | <span data-ttu-id="6d1ab-128">重新連線遭到拒絕。</span><span class="sxs-lookup"><span data-stu-id="6d1ab-128">Reconnection rejected.</span></span> <span data-ttu-id="6d1ab-129">伺服器已達到但拒絕連線，而且伺服器上的使用者狀態遺失。</span><span class="sxs-lookup"><span data-stu-id="6d1ab-129">The server was reached but refused the connection, and the user's state on the server is lost.</span></span> <span data-ttu-id="6d1ab-130">若要重載應用程式，請呼叫 `location.reload()` 。</span><span class="sxs-lookup"><span data-stu-id="6d1ab-130">To reload the app, call `location.reload()`.</span></span> <span data-ttu-id="6d1ab-131">此連接狀態可能會在下列情況下產生：</span><span class="sxs-lookup"><span data-stu-id="6d1ab-131">This connection state may result when:</span></span><ul><li><span data-ttu-id="6d1ab-132">伺服器端線路發生損毀。</span><span class="sxs-lookup"><span data-stu-id="6d1ab-132">A crash in the server-side circuit occurs.</span></span></li><li><span data-ttu-id="6d1ab-133">用戶端已中斷連線到足夠的時間，讓伺服器卸載使用者的狀態。</span><span class="sxs-lookup"><span data-stu-id="6d1ab-133">The client is disconnected long enough for the server to drop the user's state.</span></span> <span data-ttu-id="6d1ab-134">系統會處置使用者進行互動的元件實例。</span><span class="sxs-lookup"><span data-stu-id="6d1ab-134">Instances of the components that the user is interacting with are disposed.</span></span></li><li><span data-ttu-id="6d1ab-135">伺服器會重新開機，或回收應用程式的背景工作進程。</span><span class="sxs-lookup"><span data-stu-id="6d1ab-135">The server is restarted, or the app's worker process is recycled.</span></span></li></ul> |
 
 ## <a name="render-mode"></a><span data-ttu-id="6d1ab-136">轉譯模式</span><span class="sxs-lookup"><span data-stu-id="6d1ab-136">Render mode</span></span>
 
 ::: moniker range=">= aspnetcore-5.0"
 
-<span data-ttu-id="6d1ab-137">*本節適用于 hosted :::no-loc(Blazor WebAssembly)::: 和 :::no-loc(Blazor Server)::: 。*</span><span class="sxs-lookup"><span data-stu-id="6d1ab-137">*This section applies to hosted :::no-loc(Blazor WebAssembly)::: and :::no-loc(Blazor Server):::.*</span></span>
+<span data-ttu-id="6d1ab-137">*本節適用于 hosted Blazor WebAssembly 和 Blazor Server 。*</span><span class="sxs-lookup"><span data-stu-id="6d1ab-137">*This section applies to hosted Blazor WebAssembly and Blazor Server.*</span></span>
 
-<span data-ttu-id="6d1ab-138">:::no-loc(Blazor)::: 依預設，應用程式會設定為伺服器上的可呈現的 UI。</span><span class="sxs-lookup"><span data-stu-id="6d1ab-138">:::no-loc(Blazor)::: apps are set up by default to prerender the UI on the server.</span></span> <span data-ttu-id="6d1ab-139">如需詳細資訊，請參閱<xref:mvc/views/tag-helpers/builtin-th/component-tag-helper>。</span><span class="sxs-lookup"><span data-stu-id="6d1ab-139">For more information, see <xref:mvc/views/tag-helpers/builtin-th/component-tag-helper>.</span></span>
+<span data-ttu-id="6d1ab-138">Blazor 依預設，應用程式會設定為伺服器上的可呈現的 UI。</span><span class="sxs-lookup"><span data-stu-id="6d1ab-138">Blazor apps are set up by default to prerender the UI on the server.</span></span> <span data-ttu-id="6d1ab-139">如需詳細資訊，請參閱<xref:mvc/views/tag-helpers/builtin-th/component-tag-helper>。</span><span class="sxs-lookup"><span data-stu-id="6d1ab-139">For more information, see <xref:mvc/views/tag-helpers/builtin-th/component-tag-helper>.</span></span>
 
 ::: moniker-end
 
 ::: moniker range="< aspnetcore-5.0"
 
-<span data-ttu-id="6d1ab-140">*本節適用于 :::no-loc(Blazor Server)::: 。*</span><span class="sxs-lookup"><span data-stu-id="6d1ab-140">*This section applies to :::no-loc(Blazor Server):::.*</span></span>
+<span data-ttu-id="6d1ab-140">*本節適用于 Blazor Server 。*</span><span class="sxs-lookup"><span data-stu-id="6d1ab-140">*This section applies to Blazor Server.*</span></span>
 
-<span data-ttu-id="6d1ab-141">:::no-loc(Blazor Server)::: 根據預設，應用程式會在伺服器上建立用戶端連接之前，先將伺服器上的 UI 設定為預先呈現。</span><span class="sxs-lookup"><span data-stu-id="6d1ab-141">:::no-loc(Blazor Server)::: apps are set up by default to prerender the UI on the server before the client connection to the server is established.</span></span> <span data-ttu-id="6d1ab-142">如需詳細資訊，請參閱<xref:mvc/views/tag-helpers/builtin-th/component-tag-helper>。</span><span class="sxs-lookup"><span data-stu-id="6d1ab-142">For more information, see <xref:mvc/views/tag-helpers/builtin-th/component-tag-helper>.</span></span>
+<span data-ttu-id="6d1ab-141">Blazor Server 根據預設，應用程式會在伺服器上建立用戶端連接之前，先將伺服器上的 UI 設定為預先呈現。</span><span class="sxs-lookup"><span data-stu-id="6d1ab-141">Blazor Server apps are set up by default to prerender the UI on the server before the client connection to the server is established.</span></span> <span data-ttu-id="6d1ab-142">如需詳細資訊，請參閱<xref:mvc/views/tag-helpers/builtin-th/component-tag-helper>。</span><span class="sxs-lookup"><span data-stu-id="6d1ab-142">For more information, see <xref:mvc/views/tag-helpers/builtin-th/component-tag-helper>.</span></span>
 
 ::: moniker-end
 
-## <a name="initialize-the-no-locblazor-circuit"></a><span data-ttu-id="6d1ab-143">初始化 :::no-loc(Blazor)::: 線路</span><span class="sxs-lookup"><span data-stu-id="6d1ab-143">Initialize the :::no-loc(Blazor)::: circuit</span></span>
+## <a name="initialize-the-no-locblazor-circuit"></a><span data-ttu-id="6d1ab-143">初始化 Blazor 線路</span><span class="sxs-lookup"><span data-stu-id="6d1ab-143">Initialize the Blazor circuit</span></span>
 
-<span data-ttu-id="6d1ab-144">*本節適用于 :::no-loc(Blazor Server)::: 。*</span><span class="sxs-lookup"><span data-stu-id="6d1ab-144">*This section applies to :::no-loc(Blazor Server):::.*</span></span>
+<span data-ttu-id="6d1ab-144">*本節適用于 Blazor Server 。*</span><span class="sxs-lookup"><span data-stu-id="6d1ab-144">*This section applies to Blazor Server.*</span></span>
 
-<span data-ttu-id="6d1ab-145">:::no-loc(Blazor Server):::在檔案中設定應用程式[ :::no-loc(SignalR)::: 線路](xref:blazor/hosting-models#circuits)的手動啟動 `Pages/_Host.cshtml` ：</span><span class="sxs-lookup"><span data-stu-id="6d1ab-145">Configure the manual start of a :::no-loc(Blazor Server)::: app's [:::no-loc(SignalR)::: circuit](xref:blazor/hosting-models#circuits) in the `Pages/_Host.cshtml` file:</span></span>
+<span data-ttu-id="6d1ab-145">Blazor Server在檔案中設定應用程式[ SignalR 線路](xref:blazor/hosting-models#circuits)的手動啟動 `Pages/_Host.cshtml` ：</span><span class="sxs-lookup"><span data-stu-id="6d1ab-145">Configure the manual start of a Blazor Server app's [SignalR circuit](xref:blazor/hosting-models#circuits) in the `Pages/_Host.cshtml` file:</span></span>
 
 * <span data-ttu-id="6d1ab-146">將 `autostart="false"` 屬性新增至 `<script>` 腳本的標記 `blazor.server.js` 。</span><span class="sxs-lookup"><span data-stu-id="6d1ab-146">Add an `autostart="false"` attribute to the `<script>` tag for the `blazor.server.js` script.</span></span>
-* <span data-ttu-id="6d1ab-147">將在腳本標記之後呼叫的腳本放在 `:::no-loc(Blazor):::.start` `blazor.server.js` 結尾 `</body>` 標記內。</span><span class="sxs-lookup"><span data-stu-id="6d1ab-147">Place a script that calls `:::no-loc(Blazor):::.start` after the `blazor.server.js` script's tag and inside the closing `</body>` tag.</span></span>
+* <span data-ttu-id="6d1ab-147">將在腳本標記之後呼叫的腳本放在 `Blazor.start` `blazor.server.js` 結尾 `</body>` 標記內。</span><span class="sxs-lookup"><span data-stu-id="6d1ab-147">Place a script that calls `Blazor.start` after the `blazor.server.js` script's tag and inside the closing `</body>` tag.</span></span>
 
-<span data-ttu-id="6d1ab-148">`autostart`停用時，不相依于電路的應用程式任何層面都能正常運作。</span><span class="sxs-lookup"><span data-stu-id="6d1ab-148">When `autostart` is disabled, any aspect of the app that doesn't depend on the circuit works normally.</span></span> <span data-ttu-id="6d1ab-149">例如，用戶端路由可運作。</span><span class="sxs-lookup"><span data-stu-id="6d1ab-149">For example, client-side routing is operational.</span></span> <span data-ttu-id="6d1ab-150">不過，與電路相依的任何層面在 `:::no-loc(Blazor):::.start` 呼叫之前都不會運作。</span><span class="sxs-lookup"><span data-stu-id="6d1ab-150">However, any aspect that depends on the circuit isn't operational until `:::no-loc(Blazor):::.start` is called.</span></span> <span data-ttu-id="6d1ab-151">沒有已建立的線路，應用程式行為無法預期。</span><span class="sxs-lookup"><span data-stu-id="6d1ab-151">App behavior is unpredictable without an established circuit.</span></span> <span data-ttu-id="6d1ab-152">例如，當線路中斷連線時，元件方法無法執行。</span><span class="sxs-lookup"><span data-stu-id="6d1ab-152">For example, component methods fail to execute while the circuit is disconnected.</span></span>
+<span data-ttu-id="6d1ab-148">`autostart`停用時，不相依于電路的應用程式任何層面都能正常運作。</span><span class="sxs-lookup"><span data-stu-id="6d1ab-148">When `autostart` is disabled, any aspect of the app that doesn't depend on the circuit works normally.</span></span> <span data-ttu-id="6d1ab-149">例如，用戶端路由可運作。</span><span class="sxs-lookup"><span data-stu-id="6d1ab-149">For example, client-side routing is operational.</span></span> <span data-ttu-id="6d1ab-150">不過，與電路相依的任何層面在 `Blazor.start` 呼叫之前都不會運作。</span><span class="sxs-lookup"><span data-stu-id="6d1ab-150">However, any aspect that depends on the circuit isn't operational until `Blazor.start` is called.</span></span> <span data-ttu-id="6d1ab-151">沒有已建立的線路，應用程式行為無法預期。</span><span class="sxs-lookup"><span data-stu-id="6d1ab-151">App behavior is unpredictable without an established circuit.</span></span> <span data-ttu-id="6d1ab-152">例如，當線路中斷連線時，元件方法無法執行。</span><span class="sxs-lookup"><span data-stu-id="6d1ab-152">For example, component methods fail to execute while the circuit is disconnected.</span></span>
 
-### <a name="initialize-no-locblazor-when-the-document-is-ready"></a><span data-ttu-id="6d1ab-153">在 :::no-loc(Blazor)::: 檔就緒時初始化</span><span class="sxs-lookup"><span data-stu-id="6d1ab-153">Initialize :::no-loc(Blazor)::: when the document is ready</span></span>
+### <a name="initialize-no-locblazor-when-the-document-is-ready"></a><span data-ttu-id="6d1ab-153">在 Blazor 檔就緒時初始化</span><span class="sxs-lookup"><span data-stu-id="6d1ab-153">Initialize Blazor when the document is ready</span></span>
 
-<span data-ttu-id="6d1ab-154">:::no-loc(Blazor):::當檔準備就緒時，將應用程式初始化：</span><span class="sxs-lookup"><span data-stu-id="6d1ab-154">To initialize the :::no-loc(Blazor)::: app when the document is ready:</span></span>
+<span data-ttu-id="6d1ab-154">Blazor當檔準備就緒時，將應用程式初始化：</span><span class="sxs-lookup"><span data-stu-id="6d1ab-154">To initialize the Blazor app when the document is ready:</span></span>
 
 ```cshtml
 <body>
@@ -141,7 +141,7 @@ ms.locfileid: "94637674"
     <script autostart="false" src="_framework/blazor.server.js"></script>
     <script>
       document.addEventListener("DOMContentLoaded", function() {
-        :::no-loc(Blazor):::.start();
+        Blazor.start();
       });
     </script>
 </body>
@@ -149,7 +149,7 @@ ms.locfileid: "94637674"
 
 ### <a name="chain-to-the-promise-that-results-from-a-manual-start"></a><span data-ttu-id="6d1ab-155">`Promise`從手動開始到該結果的鏈</span><span class="sxs-lookup"><span data-stu-id="6d1ab-155">Chain to the `Promise` that results from a manual start</span></span>
 
-<span data-ttu-id="6d1ab-156">若要執行其他工作（例如 JS interop 初始化），請使用 `then` 來連結至 `Promise` 手動 :::no-loc(Blazor)::: 應用程式啟動的結果：</span><span class="sxs-lookup"><span data-stu-id="6d1ab-156">To perform additional tasks, such as JS interop initialization, use `then` to chain to the `Promise` that results from a manual :::no-loc(Blazor)::: app start:</span></span>
+<span data-ttu-id="6d1ab-156">若要執行其他工作（例如 JS interop 初始化），請使用 `then` 來連結至 `Promise` 手動 Blazor 應用程式啟動的結果：</span><span class="sxs-lookup"><span data-stu-id="6d1ab-156">To perform additional tasks, such as JS interop initialization, use `then` to chain to the `Promise` that results from a manual Blazor app start:</span></span>
 
 ```cshtml
 <body>
@@ -158,18 +158,18 @@ ms.locfileid: "94637674"
 
     <script autostart="false" src="_framework/blazor.server.js"></script>
     <script>
-      :::no-loc(Blazor):::.start().then(function () {
+      Blazor.start().then(function () {
         ...
       });
     </script>
 </body>
 ```
 
-### <a name="configure-the-no-locsignalr-client"></a><span data-ttu-id="6d1ab-157">設定 :::no-loc(SignalR)::: 用戶端</span><span class="sxs-lookup"><span data-stu-id="6d1ab-157">Configure the :::no-loc(SignalR)::: client</span></span>
+### <a name="configure-the-no-locsignalr-client"></a><span data-ttu-id="6d1ab-157">設定 SignalR 用戶端</span><span class="sxs-lookup"><span data-stu-id="6d1ab-157">Configure the SignalR client</span></span>
 
 #### <a name="logging"></a><span data-ttu-id="6d1ab-158">記錄</span><span class="sxs-lookup"><span data-stu-id="6d1ab-158">Logging</span></span>
 
-<span data-ttu-id="6d1ab-159">若要設定 :::no-loc(SignalR)::: 用戶端記錄，請 `configure:::no-loc(SignalR):::` `configureLogging` 使用用戶端產生器上的記錄層級 () 傳入設定物件：</span><span class="sxs-lookup"><span data-stu-id="6d1ab-159">To configure :::no-loc(SignalR)::: client logging, pass in a configuration object (`configure:::no-loc(SignalR):::`) that calls `configureLogging` with the log level on the client builder:</span></span>
+<span data-ttu-id="6d1ab-159">若要設定 SignalR 用戶端記錄，請 `configureSignalR` `configureLogging` 使用用戶端產生器上的記錄層級 () 傳入設定物件：</span><span class="sxs-lookup"><span data-stu-id="6d1ab-159">To configure SignalR client logging, pass in a configuration object (`configureSignalR`) that calls `configureLogging` with the log level on the client builder:</span></span>
 
 ```cshtml
 <body>
@@ -178,8 +178,8 @@ ms.locfileid: "94637674"
 
     <script autostart="false" src="_framework/blazor.server.js"></script>
     <script>
-      :::no-loc(Blazor):::.start({
-        configure:::no-loc(SignalR):::: function (builder) {
+      Blazor.start({
+        configureSignalR: function (builder) {
           builder.configureLogging("information");
         }
       });
@@ -210,7 +210,7 @@ ms.locfileid: "94637674"
 
     <script autostart="false" src="_framework/blazor.server.js"></script>
     <script>
-      :::no-loc(Blazor):::.start({
+      Blazor.start({
         reconnectionHandler: {
           onConnectionDown: (options, error) => console.error(error);
           onConnectionUp: () => console.log("Up, up, and away!");
@@ -231,7 +231,7 @@ ms.locfileid: "94637674"
 
     <script autostart="false" src="_framework/blazor.server.js"></script>
     <script>
-      :::no-loc(Blazor):::.start({
+      Blazor.start({
         reconnectionOptions: {
           maxRetries: 3,
           retryIntervalMilliseconds: 2000
@@ -253,10 +253,10 @@ ms.locfileid: "94637674"
     <script autostart="false" src="_framework/blazor.server.js"></script>
     <script>
       window.addEventListener('beforeunload', function () {
-        :::no-loc(Blazor):::.defaultReconnectionHandler._reconnectionDisplay = {};
+        Blazor.defaultReconnectionHandler._reconnectionDisplay = {};
       });
 
-      :::no-loc(Blazor):::.start();
+      Blazor.start();
     </script>
 </body>
 ```
@@ -264,7 +264,7 @@ ms.locfileid: "94637674"
 <span data-ttu-id="6d1ab-173">若要取代重新連接顯示，請 `_reconnectionDisplay` 在上述範例中設定為要顯示的元素：</span><span class="sxs-lookup"><span data-stu-id="6d1ab-173">To replace the reconnection display, set `_reconnectionDisplay` in the preceding example to the element for display:</span></span>
 
 ```javascript
-:::no-loc(Blazor):::.defaultReconnectionHandler._reconnectionDisplay = 
+Blazor.defaultReconnectionHandler._reconnectionDisplay = 
   document.getElementById("{ELEMENT ID}");
 ```
 
@@ -280,13 +280,13 @@ ms.locfileid: "94637674"
 }
 ```
 
-## <a name="disconnect-the-no-locblazor-circuit-from-the-client"></a><span data-ttu-id="6d1ab-177">中斷與 :::no-loc(Blazor)::: 用戶端的線路連線</span><span class="sxs-lookup"><span data-stu-id="6d1ab-177">Disconnect the :::no-loc(Blazor)::: circuit from the client</span></span>
+## <a name="disconnect-the-no-locblazor-circuit-from-the-client"></a><span data-ttu-id="6d1ab-177">中斷與 Blazor 用戶端的線路連線</span><span class="sxs-lookup"><span data-stu-id="6d1ab-177">Disconnect the Blazor circuit from the client</span></span>
 
-<span data-ttu-id="6d1ab-178">依預設， :::no-loc(Blazor)::: 當觸發[ `unload` 頁面事件](https://developer.mozilla.org/docs/Web/API/Window/unload_event)時，電路會中斷連線。</span><span class="sxs-lookup"><span data-stu-id="6d1ab-178">By default, a :::no-loc(Blazor)::: circuit is disconnected when the [`unload` page event](https://developer.mozilla.org/docs/Web/API/Window/unload_event) is triggered.</span></span> <span data-ttu-id="6d1ab-179">若要中斷用戶端上其他案例的線路連接，請 `:::no-loc(Blazor):::.disconnect` 在適當的事件處理常式中叫用。</span><span class="sxs-lookup"><span data-stu-id="6d1ab-179">To disconnect the circuit for other scenarios on the client, invoke `:::no-loc(Blazor):::.disconnect` in the appropriate event handler.</span></span> <span data-ttu-id="6d1ab-180">在下列範例中，當 ([ `pagehide` 事件](https://developer.mozilla.org/docs/Web/API/Window/pagehide_event)) 隱藏頁面時，電路會中斷連線：</span><span class="sxs-lookup"><span data-stu-id="6d1ab-180">In the following example, the circuit is disconnected when the page is hidden ([`pagehide` event](https://developer.mozilla.org/docs/Web/API/Window/pagehide_event)):</span></span>
+<span data-ttu-id="6d1ab-178">依預設， Blazor 當觸發[ `unload` 頁面事件](https://developer.mozilla.org/docs/Web/API/Window/unload_event)時，電路會中斷連線。</span><span class="sxs-lookup"><span data-stu-id="6d1ab-178">By default, a Blazor circuit is disconnected when the [`unload` page event](https://developer.mozilla.org/docs/Web/API/Window/unload_event) is triggered.</span></span> <span data-ttu-id="6d1ab-179">若要中斷用戶端上其他案例的線路連接，請 `Blazor.disconnect` 在適當的事件處理常式中叫用。</span><span class="sxs-lookup"><span data-stu-id="6d1ab-179">To disconnect the circuit for other scenarios on the client, invoke `Blazor.disconnect` in the appropriate event handler.</span></span> <span data-ttu-id="6d1ab-180">在下列範例中，當 ([ `pagehide` 事件](https://developer.mozilla.org/docs/Web/API/Window/pagehide_event)) 隱藏頁面時，電路會中斷連線：</span><span class="sxs-lookup"><span data-stu-id="6d1ab-180">In the following example, the circuit is disconnected when the page is hidden ([`pagehide` event](https://developer.mozilla.org/docs/Web/API/Window/pagehide_event)):</span></span>
 
 ```javascript
 window.addEventListener('pagehide', () => {
-  :::no-loc(Blazor):::.disconnect();
+  Blazor.disconnect();
 });
 ```
 
@@ -294,7 +294,7 @@ window.addEventListener('pagehide', () => {
 
 ## Influence HTML `<head>` tag elements
 
-*This section applies to the upcoming ASP.NET Core 5.0 release of :::no-loc(Blazor WebAssembly)::: and :::no-loc(Blazor Server):::.*
+*This section applies to the upcoming ASP.NET Core 5.0 release of Blazor WebAssembly and Blazor Server.*
 
 When rendered, the `Title`, `Link`, and `Meta` components add or update data in the HTML `<head>` tag elements:
 
@@ -306,7 +306,7 @@ When rendered, the `Title`, `Link`, and `Meta` components add or update data in 
 <Meta content="{DESCRIPTION}" name="description" />
 ```
 
-In the preceding example, placeholders for `{TITLE}`, `{URL}`, and `{DESCRIPTION}` are string values, :::no-loc(Razor)::: variables, or :::no-loc(Razor)::: expressions.
+In the preceding example, placeholders for `{TITLE}`, `{URL}`, and `{DESCRIPTION}` are string values, Razor variables, or Razor expressions.
 
 The following characteristics apply:
 
@@ -329,7 +329,7 @@ When one of the framework components is used in a child component, the rendered 
 
 ## <a name="static-files"></a><span data-ttu-id="6d1ab-181">靜態檔案</span><span class="sxs-lookup"><span data-stu-id="6d1ab-181">Static files</span></span>
 
-<span data-ttu-id="6d1ab-182">*本節適用于 :::no-loc(Blazor Server)::: 。*</span><span class="sxs-lookup"><span data-stu-id="6d1ab-182">*This section applies to :::no-loc(Blazor Server):::.*</span></span>
+<span data-ttu-id="6d1ab-182">*本節適用于 Blazor Server 。*</span><span class="sxs-lookup"><span data-stu-id="6d1ab-182">*This section applies to Blazor Server.*</span></span>
 
 <span data-ttu-id="6d1ab-183">若要使用或其他設定來建立其他檔案對應 <xref:Microsoft.AspNetCore.StaticFiles.FileExtensionContentTypeProvider> <xref:Microsoft.AspNetCore.Builder.StaticFileOptions> ，請使用下列 **其中一** 種方法。</span><span class="sxs-lookup"><span data-stu-id="6d1ab-183">To create additional file mappings with a <xref:Microsoft.AspNetCore.StaticFiles.FileExtensionContentTypeProvider> or configure other <xref:Microsoft.AspNetCore.Builder.StaticFileOptions>, use **one** of the following approaches.</span></span> <span data-ttu-id="6d1ab-184">在下列範例中， `{EXTENSION}` 預留位置是副檔名，而 `{CONTENT TYPE}` 預留位置是內容類型。</span><span class="sxs-lookup"><span data-stu-id="6d1ab-184">In the following examples, the `{EXTENSION}` placeholder is the file extension, and the `{CONTENT TYPE}` placeholder is the content type.</span></span>
 
@@ -353,7 +353,7 @@ When one of the framework components is used in a child component, the rendered 
 
 * <span data-ttu-id="6d1ab-188"><xref:Microsoft.AspNetCore.Builder.StaticFileExtensions.UseStaticFiles%2A>在 () 中使用兩個呼叫 `Startup.Configure` `Startup.cs` ：</span><span class="sxs-lookup"><span data-stu-id="6d1ab-188">Use two calls to <xref:Microsoft.AspNetCore.Builder.StaticFileExtensions.UseStaticFiles%2A> in `Startup.Configure` (`Startup.cs`):</span></span>
   * <span data-ttu-id="6d1ab-189">在第一次呼叫時設定自訂檔案提供者 <xref:Microsoft.AspNetCore.Builder.StaticFileOptions> 。</span><span class="sxs-lookup"><span data-stu-id="6d1ab-189">Configure the custom file provider in the first call with <xref:Microsoft.AspNetCore.Builder.StaticFileOptions>.</span></span>
-  * <span data-ttu-id="6d1ab-190">第二個中間件會 `blazor.server.js` 提供，其使用架構所提供的預設靜態檔案設定 :::no-loc(Blazor)::: 。</span><span class="sxs-lookup"><span data-stu-id="6d1ab-190">The second middleware serves `blazor.server.js`, which uses the default static files configuration provided by the :::no-loc(Blazor)::: framework.</span></span>
+  * <span data-ttu-id="6d1ab-190">第二個中間件會 `blazor.server.js` 提供，其使用架構所提供的預設靜態檔案設定 Blazor 。</span><span class="sxs-lookup"><span data-stu-id="6d1ab-190">The second middleware serves `blazor.server.js`, which uses the default static files configuration provided by the Blazor framework.</span></span>
 
   ```csharp
   using Microsoft.AspNetCore.StaticFiles;
@@ -378,4 +378,4 @@ When one of the framework components is used in a child component, the rendered 
 ## <a name="additional-resources"></a><span data-ttu-id="6d1ab-192">其他資源</span><span class="sxs-lookup"><span data-stu-id="6d1ab-192">Additional resources</span></span>
 
 * <xref:fundamentals/logging/index>
-* [<span data-ttu-id="6d1ab-193">:::no-loc(Blazor Server)::: 重新連接事件和元件生命週期事件</span><span class="sxs-lookup"><span data-stu-id="6d1ab-193">:::no-loc(Blazor Server)::: reconnection events and component lifecycle events</span></span>](xref:blazor/components/lifecycle#blazor-server-reconnection-events)
+* [<span data-ttu-id="6d1ab-193">Blazor Server 重新連接事件和元件生命週期事件</span><span class="sxs-lookup"><span data-stu-id="6d1ab-193">Blazor Server reconnection events and component lifecycle events</span></span>](xref:blazor/components/lifecycle#blazor-server-reconnection-events)

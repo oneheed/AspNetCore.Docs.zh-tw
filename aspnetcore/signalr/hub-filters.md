@@ -1,23 +1,23 @@
 ---
-title: '使用 ASP.NET Core 中的中樞篩選 :::no-loc(SignalR):::'
+title: '使用 ASP.NET Core 中的中樞篩選 SignalR'
 author: brecon
-description: '瞭解如何使用 ASP.NET Core 中的中樞篩選 :::no-loc(SignalR)::: 。'
+description: '瞭解如何使用 ASP.NET Core 中的中樞篩選 SignalR 。'
 monikerRange: '>= aspnetcore-5.0'
 ms.author: brecon
 ms.custom: mvc
 ms.date: 05/22/2020
 no-loc:
-- ':::no-loc(appsettings.json):::'
-- ':::no-loc(ASP.NET Core Identity):::'
-- ':::no-loc(cookie):::'
-- ':::no-loc(Cookie):::'
-- ':::no-loc(Blazor):::'
-- ':::no-loc(Blazor Server):::'
-- ':::no-loc(Blazor WebAssembly):::'
-- ':::no-loc(Identity):::'
-- ":::no-loc(Let's Encrypt):::"
-- ':::no-loc(Razor):::'
-- ':::no-loc(SignalR):::'
+- 'appsettings.json'
+- 'ASP.NET Core Identity'
+- 'cookie'
+- 'Cookie'
+- 'Blazor'
+- 'Blazor Server'
+- 'Blazor WebAssembly'
+- 'Identity'
+- "Let's Encrypt"
+- 'Razor'
+- 'SignalR'
 uid: signalr/hub-filters
 ms.openlocfilehash: 9b131d8ec13204525f39263afaf506e336373a7c
 ms.sourcegitcommit: 827e8be18cebbcc09b467c089e17fa6f5e430cb2
@@ -26,7 +26,7 @@ ms.contentlocale: zh-TW
 ms.lasthandoff: 11/15/2020
 ms.locfileid: "94634570"
 ---
-# <a name="use-hub-filters-in-aspnet-core-no-locsignalr"></a><span data-ttu-id="4863a-103">使用 ASP.NET Core 中的中樞篩選 :::no-loc(SignalR):::</span><span class="sxs-lookup"><span data-stu-id="4863a-103">Use hub filters in ASP.NET Core :::no-loc(SignalR):::</span></span>
+# <a name="use-hub-filters-in-aspnet-core-no-locsignalr"></a><span data-ttu-id="4863a-103">使用 ASP.NET Core 中的中樞篩選 SignalR</span><span class="sxs-lookup"><span data-stu-id="4863a-103">Use hub filters in ASP.NET Core SignalR</span></span>
 
 <span data-ttu-id="4863a-104">中樞篩選器：</span><span class="sxs-lookup"><span data-stu-id="4863a-104">Hub filters:</span></span>
 
@@ -42,7 +42,7 @@ ms.locfileid: "94634570"
 ```csharp
 public void ConfigureServices(IServiceCollection services)
 {
-    services.Add:::no-loc(SignalR):::(options =>
+    services.AddSignalR(options =>
     {
         // Global filters will run first
         options.AddFilter<CustomFilter>();
@@ -184,7 +184,7 @@ public class CustomFilter : IHubFilter
     ```csharp
     public void ConfigureServices(IServiceCollection services)
     {
-        services.Add:::no-loc(SignalR):::(hubOptions =>
+        services.AddSignalR(hubOptions =>
         {
             hubOptions.AddFilter<LanguageFilter>();
         });

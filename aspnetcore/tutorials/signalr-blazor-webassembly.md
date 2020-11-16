@@ -1,23 +1,23 @@
 ---
-title: '搭配使用 ASP.NET Core :::no-loc(SignalR)::: 與託管 :::no-loc(Blazor WebAssembly)::: 應用程式'
+title: '搭配使用 ASP.NET Core SignalR 與託管 Blazor WebAssembly 應用程式'
 author: guardrex
-description: '建立搭配使用 ASP.NET Core 的聊天應用 :::no-loc(SignalR)::: 程式 :::no-loc(Blazor WebAssembly)::: 。'
+description: '建立搭配使用 ASP.NET Core 的聊天應用 SignalR 程式 Blazor WebAssembly 。'
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
 ms.date: 11/11/2020
 no-loc:
-- ':::no-loc(appsettings.json):::'
-- ':::no-loc(ASP.NET Core Identity):::'
-- ':::no-loc(cookie):::'
-- ':::no-loc(Cookie):::'
-- ':::no-loc(Blazor):::'
-- ':::no-loc(Blazor Server):::'
-- ':::no-loc(Blazor WebAssembly):::'
-- ':::no-loc(Identity):::'
-- ":::no-loc(Let's Encrypt):::"
-- ':::no-loc(Razor):::'
-- ':::no-loc(SignalR):::'
+- 'appsettings.json'
+- 'ASP.NET Core Identity'
+- 'cookie'
+- 'Cookie'
+- 'Blazor'
+- 'Blazor Server'
+- 'Blazor WebAssembly'
+- 'Identity'
+- "Let's Encrypt"
+- 'Razor'
+- 'SignalR'
 uid: tutorials/signalr-blazor-webassembly
 ms.openlocfilehash: 2975ee699a2535cdf63ef2f5af5790f178a09f93
 ms.sourcegitcommit: e087b6a38e3d38625ebb567a973e75b4d79547b9
@@ -26,18 +26,18 @@ ms.contentlocale: zh-TW
 ms.lasthandoff: 11/15/2020
 ms.locfileid: "94637726"
 ---
-# <a name="use-aspnet-core-no-locsignalr-with-a-hosted-no-locblazor-webassembly-app"></a><span data-ttu-id="3ff73-103">搭配使用 ASP.NET Core :::no-loc(SignalR)::: 與託管 :::no-loc(Blazor WebAssembly)::: 應用程式</span><span class="sxs-lookup"><span data-stu-id="3ff73-103">Use ASP.NET Core :::no-loc(SignalR)::: with a hosted :::no-loc(Blazor WebAssembly)::: app</span></span>
+# <a name="use-aspnet-core-no-locsignalr-with-a-hosted-no-locblazor-webassembly-app"></a><span data-ttu-id="3ff73-103">搭配使用 ASP.NET Core SignalR 與託管 Blazor WebAssembly 應用程式</span><span class="sxs-lookup"><span data-stu-id="3ff73-103">Use ASP.NET Core SignalR with a hosted Blazor WebAssembly app</span></span>
 
 <span data-ttu-id="3ff73-104">作者：[Daniel Roth](https://github.com/danroth27) 和 [Luke Latham](https://github.com/guardrex)</span><span class="sxs-lookup"><span data-stu-id="3ff73-104">By [Daniel Roth](https://github.com/danroth27) and [Luke Latham](https://github.com/guardrex)</span></span>
 
-<span data-ttu-id="3ff73-105">本教學課程會教您使用與建立即時應用程式的基本概念 :::no-loc(SignalR)::: :::no-loc(Blazor WebAssembly)::: 。</span><span class="sxs-lookup"><span data-stu-id="3ff73-105">This tutorial teaches the basics of building a real-time app using :::no-loc(SignalR)::: with :::no-loc(Blazor WebAssembly):::.</span></span> <span data-ttu-id="3ff73-106">您會了解如何：</span><span class="sxs-lookup"><span data-stu-id="3ff73-106">You learn how to:</span></span>
+<span data-ttu-id="3ff73-105">本教學課程會教您使用與建立即時應用程式的基本概念 SignalR Blazor WebAssembly 。</span><span class="sxs-lookup"><span data-stu-id="3ff73-105">This tutorial teaches the basics of building a real-time app using SignalR with Blazor WebAssembly.</span></span> <span data-ttu-id="3ff73-106">您會了解如何：</span><span class="sxs-lookup"><span data-stu-id="3ff73-106">You learn how to:</span></span>
 
 > [!div class="checklist"]
-> * <span data-ttu-id="3ff73-107">建立 :::no-loc(Blazor WebAssembly)::: 託管應用程式專案</span><span class="sxs-lookup"><span data-stu-id="3ff73-107">Create a :::no-loc(Blazor WebAssembly)::: Hosted app project</span></span>
-> * <span data-ttu-id="3ff73-108">新增 :::no-loc(SignalR)::: 用戶端程式庫</span><span class="sxs-lookup"><span data-stu-id="3ff73-108">Add the :::no-loc(SignalR)::: client library</span></span>
-> * <span data-ttu-id="3ff73-109">新增 :::no-loc(SignalR)::: 中樞</span><span class="sxs-lookup"><span data-stu-id="3ff73-109">Add a :::no-loc(SignalR)::: hub</span></span>
-> * <span data-ttu-id="3ff73-110">新增 :::no-loc(SignalR)::: 中樞的服務和端點 :::no-loc(SignalR):::</span><span class="sxs-lookup"><span data-stu-id="3ff73-110">Add :::no-loc(SignalR)::: services and an endpoint for the :::no-loc(SignalR)::: hub</span></span>
-> * <span data-ttu-id="3ff73-111">新增 :::no-loc(Razor)::: 聊天的元件程式碼</span><span class="sxs-lookup"><span data-stu-id="3ff73-111">Add :::no-loc(Razor)::: component code for chat</span></span>
+> * <span data-ttu-id="3ff73-107">建立 Blazor WebAssembly 託管應用程式專案</span><span class="sxs-lookup"><span data-stu-id="3ff73-107">Create a Blazor WebAssembly Hosted app project</span></span>
+> * <span data-ttu-id="3ff73-108">新增 SignalR 用戶端程式庫</span><span class="sxs-lookup"><span data-stu-id="3ff73-108">Add the SignalR client library</span></span>
+> * <span data-ttu-id="3ff73-109">新增 SignalR 中樞</span><span class="sxs-lookup"><span data-stu-id="3ff73-109">Add a SignalR hub</span></span>
+> * <span data-ttu-id="3ff73-110">新增 SignalR 中樞的服務和端點 SignalR</span><span class="sxs-lookup"><span data-stu-id="3ff73-110">Add SignalR services and an endpoint for the SignalR hub</span></span>
+> * <span data-ttu-id="3ff73-111">新增 Razor 聊天的元件程式碼</span><span class="sxs-lookup"><span data-stu-id="3ff73-111">Add Razor component code for chat</span></span>
 
 <span data-ttu-id="3ff73-112">在本教學課程結尾，您將會有一個可運作的聊天應用程式。</span><span class="sxs-lookup"><span data-stu-id="3ff73-112">At the end of this tutorial, you'll have a working chat app.</span></span>
 
@@ -93,7 +93,7 @@ ms.locfileid: "94637726"
 
 ::: moniker-end
 
-## <a name="create-a-hosted-no-locblazor-webassembly-app-project"></a><span data-ttu-id="3ff73-127">建立託管 :::no-loc(Blazor WebAssembly)::: 應用程式專案</span><span class="sxs-lookup"><span data-stu-id="3ff73-127">Create a hosted :::no-loc(Blazor WebAssembly)::: app project</span></span>
+## <a name="create-a-hosted-no-locblazor-webassembly-app-project"></a><span data-ttu-id="3ff73-127">建立託管 Blazor WebAssembly 應用程式專案</span><span class="sxs-lookup"><span data-stu-id="3ff73-127">Create a hosted Blazor WebAssembly app project</span></span>
 
 <span data-ttu-id="3ff73-128">遵循您選擇的工具指導方針：</span><span class="sxs-lookup"><span data-stu-id="3ff73-128">Follow the guidance for your choice of tooling:</span></span>
 
@@ -115,11 +115,11 @@ ms.locfileid: "94637726"
 
 1. <span data-ttu-id="3ff73-132">建立新專案。</span><span class="sxs-lookup"><span data-stu-id="3ff73-132">Create a new project.</span></span>
 
-1. <span data-ttu-id="3ff73-133">選取 **:::no-loc(Blazor)::: 應用程式** ，然後選取 **[下一步]** 。</span><span class="sxs-lookup"><span data-stu-id="3ff73-133">Select **:::no-loc(Blazor)::: App** and select **Next**.</span></span>
+1. <span data-ttu-id="3ff73-133">選取 **Blazor 應用程式** ，然後選取 **[下一步]** 。</span><span class="sxs-lookup"><span data-stu-id="3ff73-133">Select **Blazor App** and select **Next**.</span></span>
 
-1. <span data-ttu-id="3ff73-134">輸入 `:::no-loc(Blazor)::::::no-loc(SignalR):::App` [ **專案名稱** ] 欄位。</span><span class="sxs-lookup"><span data-stu-id="3ff73-134">Type `:::no-loc(Blazor)::::::no-loc(SignalR):::App` in the **Project name** field.</span></span> <span data-ttu-id="3ff73-135">確認 **位置** 專案是正確的，或提供專案的位置。</span><span class="sxs-lookup"><span data-stu-id="3ff73-135">Confirm the **Location** entry is correct or provide a location for the project.</span></span> <span data-ttu-id="3ff73-136">選取 [建立]。</span><span class="sxs-lookup"><span data-stu-id="3ff73-136">Select **Create**.</span></span>
+1. <span data-ttu-id="3ff73-134">輸入 `BlazorSignalRApp` [ **專案名稱** ] 欄位。</span><span class="sxs-lookup"><span data-stu-id="3ff73-134">Type `BlazorSignalRApp` in the **Project name** field.</span></span> <span data-ttu-id="3ff73-135">確認 **位置** 專案是正確的，或提供專案的位置。</span><span class="sxs-lookup"><span data-stu-id="3ff73-135">Confirm the **Location** entry is correct or provide a location for the project.</span></span> <span data-ttu-id="3ff73-136">選取 [建立]。</span><span class="sxs-lookup"><span data-stu-id="3ff73-136">Select **Create**.</span></span>
 
-1. <span data-ttu-id="3ff73-137">選擇 **:::no-loc(Blazor WebAssembly)::: 應用程式** 範本。</span><span class="sxs-lookup"><span data-stu-id="3ff73-137">Choose the **:::no-loc(Blazor WebAssembly)::: App** template.</span></span>
+1. <span data-ttu-id="3ff73-137">選擇 **Blazor WebAssembly 應用程式** 範本。</span><span class="sxs-lookup"><span data-stu-id="3ff73-137">Choose the **Blazor WebAssembly App** template.</span></span>
 
 1. <span data-ttu-id="3ff73-138">在 [ **Advanced** ] 底下，選取 [ **hosted ASP.NET Core** ] 核取方塊。</span><span class="sxs-lookup"><span data-stu-id="3ff73-138">Under **Advanced** , select the **ASP.NET Core hosted** check box.</span></span>
 
@@ -130,7 +130,7 @@ ms.locfileid: "94637726"
 1. <span data-ttu-id="3ff73-141">在命令 shell 中，執行下列命令：</span><span class="sxs-lookup"><span data-stu-id="3ff73-141">In a command shell, execute the following command:</span></span>
 
    ```dotnetcli
-   dotnet new blazorwasm --hosted --output :::no-loc(Blazor)::::::no-loc(SignalR):::App
+   dotnet new blazorwasm --hosted --output BlazorSignalRApp
    ```
 
 1. <span data-ttu-id="3ff73-142">在 Visual Studio Code 中，開啟應用程式的專案資料夾。</span><span class="sxs-lookup"><span data-stu-id="3ff73-142">In Visual Studio Code, open the app's project folder.</span></span>
@@ -145,11 +145,11 @@ ms.locfileid: "94637726"
 
 1. <span data-ttu-id="3ff73-148">在側邊欄中，選取 [ **Web] 和 [主控台**  >  **應用程式** ]。</span><span class="sxs-lookup"><span data-stu-id="3ff73-148">In the sidebar, select **Web and Console** > **App**.</span></span>
 
-1. <span data-ttu-id="3ff73-149">選擇 **:::no-loc(Blazor WebAssembly)::: 應用程式** 範本。</span><span class="sxs-lookup"><span data-stu-id="3ff73-149">Choose the **:::no-loc(Blazor WebAssembly)::: App** template.</span></span> <span data-ttu-id="3ff73-150">選取 [下一步]。</span><span class="sxs-lookup"><span data-stu-id="3ff73-150">Select **Next**.</span></span>
+1. <span data-ttu-id="3ff73-149">選擇 **Blazor WebAssembly 應用程式** 範本。</span><span class="sxs-lookup"><span data-stu-id="3ff73-149">Choose the **Blazor WebAssembly App** template.</span></span> <span data-ttu-id="3ff73-150">選取 [下一步]。</span><span class="sxs-lookup"><span data-stu-id="3ff73-150">Select **Next**.</span></span>
 
 1. <span data-ttu-id="3ff73-151">確認 [ **驗證** ] 設定為 [ **無驗證** ]。</span><span class="sxs-lookup"><span data-stu-id="3ff73-151">Confirm that **Authentication** is set to **No Authentication**.</span></span> <span data-ttu-id="3ff73-152">選取 [ **主控 ASP.NET Core** ] 核取方塊。</span><span class="sxs-lookup"><span data-stu-id="3ff73-152">Select the **ASP.NET Core Hosted** check box.</span></span> <span data-ttu-id="3ff73-153">選取 [下一步]。</span><span class="sxs-lookup"><span data-stu-id="3ff73-153">Select **Next**.</span></span>
 
-1. <span data-ttu-id="3ff73-154">在 [ **專案名稱** ] 欄位中，為應用程式命名 `:::no-loc(Blazor)::::::no-loc(SignalR):::App` 。</span><span class="sxs-lookup"><span data-stu-id="3ff73-154">In the **Project Name** field, name the app `:::no-loc(Blazor)::::::no-loc(SignalR):::App`.</span></span> <span data-ttu-id="3ff73-155">選取 [建立]。</span><span class="sxs-lookup"><span data-stu-id="3ff73-155">Select **Create**.</span></span>
+1. <span data-ttu-id="3ff73-154">在 [ **專案名稱** ] 欄位中，為應用程式命名 `BlazorSignalRApp` 。</span><span class="sxs-lookup"><span data-stu-id="3ff73-154">In the **Project Name** field, name the app `BlazorSignalRApp`.</span></span> <span data-ttu-id="3ff73-155">選取 [建立]。</span><span class="sxs-lookup"><span data-stu-id="3ff73-155">Select **Create**.</span></span>
 
    <span data-ttu-id="3ff73-156">如果出現提示信任開發憑證，請信任憑證並繼續。</span><span class="sxs-lookup"><span data-stu-id="3ff73-156">If a prompt appears to trust the development certificate, trust the certificate and continue.</span></span> <span data-ttu-id="3ff73-157">需要使用者和 keychain 密碼才能信任憑證。</span><span class="sxs-lookup"><span data-stu-id="3ff73-157">The user and keychain passwords are required to trust the certificate.</span></span>
 
@@ -160,22 +160,22 @@ ms.locfileid: "94637726"
 <span data-ttu-id="3ff73-160">在命令 shell 中，執行下列命令：</span><span class="sxs-lookup"><span data-stu-id="3ff73-160">In a command shell, execute the following command:</span></span>
 
 ```dotnetcli
-dotnet new blazorwasm --hosted --output :::no-loc(Blazor)::::::no-loc(SignalR):::App
+dotnet new blazorwasm --hosted --output BlazorSignalRApp
 ```
 
 ---
 
-## <a name="add-the-no-locsignalr-client-library"></a><span data-ttu-id="3ff73-161">新增 :::no-loc(SignalR)::: 用戶端程式庫</span><span class="sxs-lookup"><span data-stu-id="3ff73-161">Add the :::no-loc(SignalR)::: client library</span></span>
+## <a name="add-the-no-locsignalr-client-library"></a><span data-ttu-id="3ff73-161">新增 SignalR 用戶端程式庫</span><span class="sxs-lookup"><span data-stu-id="3ff73-161">Add the SignalR client library</span></span>
 
 # <a name="visual-studio"></a>[<span data-ttu-id="3ff73-162">Visual Studio</span><span class="sxs-lookup"><span data-stu-id="3ff73-162">Visual Studio</span></span>](#tab/visual-studio/)
 
-1. <span data-ttu-id="3ff73-163">在 **方案總管** 中，以滑鼠右鍵按一下 `:::no-loc(Blazor)::::::no-loc(SignalR):::App.Client` 專案，然後選取 [ **管理 NuGet 套件** ]。</span><span class="sxs-lookup"><span data-stu-id="3ff73-163">In **Solution Explorer** , right-click the `:::no-loc(Blazor)::::::no-loc(SignalR):::App.Client` project and select **Manage NuGet Packages**.</span></span>
+1. <span data-ttu-id="3ff73-163">在 **方案總管** 中，以滑鼠右鍵按一下 `BlazorSignalRApp.Client` 專案，然後選取 [ **管理 NuGet 套件** ]。</span><span class="sxs-lookup"><span data-stu-id="3ff73-163">In **Solution Explorer** , right-click the `BlazorSignalRApp.Client` project and select **Manage NuGet Packages**.</span></span>
 
 1. <span data-ttu-id="3ff73-164">在 [ **管理 NuGet 封裝** ] 對話方塊中，確認 [ **封裝來源** ] 設定為 `nuget.org` 。</span><span class="sxs-lookup"><span data-stu-id="3ff73-164">In the **Manage NuGet Packages** dialog, confirm that the **Package source** is set to `nuget.org`.</span></span>
 
-1. <span data-ttu-id="3ff73-165">選取 **[流覽]** 之後， `Microsoft.AspNetCore.:::no-loc(SignalR):::.Client` 在 [搜尋] 方塊中輸入。</span><span class="sxs-lookup"><span data-stu-id="3ff73-165">With **Browse** selected, type `Microsoft.AspNetCore.:::no-loc(SignalR):::.Client` in the search box.</span></span>
+1. <span data-ttu-id="3ff73-165">選取 **[流覽]** 之後， `Microsoft.AspNetCore.SignalR.Client` 在 [搜尋] 方塊中輸入。</span><span class="sxs-lookup"><span data-stu-id="3ff73-165">With **Browse** selected, type `Microsoft.AspNetCore.SignalR.Client` in the search box.</span></span>
 
-1. <span data-ttu-id="3ff73-166">在搜尋結果中選取封裝， [`Microsoft.AspNetCore.:::no-loc(SignalR):::.Client`](https://www.nuget.org/packages/Microsoft.AspNetCore.:::no-loc(SignalR):::.Client) 然後選取 [ **安裝** ]。</span><span class="sxs-lookup"><span data-stu-id="3ff73-166">In the search results, select the [`Microsoft.AspNetCore.:::no-loc(SignalR):::.Client`](https://www.nuget.org/packages/Microsoft.AspNetCore.:::no-loc(SignalR):::.Client) package and select **Install**.</span></span>
+1. <span data-ttu-id="3ff73-166">在搜尋結果中選取封裝， [`Microsoft.AspNetCore.SignalR.Client`](https://www.nuget.org/packages/Microsoft.AspNetCore.SignalR.Client) 然後選取 [ **安裝** ]。</span><span class="sxs-lookup"><span data-stu-id="3ff73-166">In the search results, select the [`Microsoft.AspNetCore.SignalR.Client`](https://www.nuget.org/packages/Microsoft.AspNetCore.SignalR.Client) package and select **Install**.</span></span>
 
 1. <span data-ttu-id="3ff73-167">如果出現 [ **預覽變更** ] 對話方塊，請選取 **[確定]** 。</span><span class="sxs-lookup"><span data-stu-id="3ff73-167">If the **Preview Changes** dialog appears, select **OK**.</span></span>
 
@@ -186,18 +186,18 @@ dotnet new blazorwasm --hosted --output :::no-loc(Blazor)::::::no-loc(SignalR)::
 <span data-ttu-id="3ff73-170">在 **整合式終端** 機 **View** 中  >  ，從工具列)  (查看 **終端** 機，請執行下列命令：</span><span class="sxs-lookup"><span data-stu-id="3ff73-170">In the **Integrated Terminal** ( **View** > **Terminal** from the toolbar), execute the following commands:</span></span>
 
 ```dotnetcli
-dotnet add Client package Microsoft.AspNetCore.:::no-loc(SignalR):::.Client
+dotnet add Client package Microsoft.AspNetCore.SignalR.Client
 ```
 
 # <a name="visual-studio-for-mac"></a>[<span data-ttu-id="3ff73-171">Visual Studio for Mac</span><span class="sxs-lookup"><span data-stu-id="3ff73-171">Visual Studio for Mac</span></span>](#tab/visual-studio-mac)
 
-1. <span data-ttu-id="3ff73-172">在 [ **方案** ] 提要欄位中，以滑鼠右鍵按一下 `:::no-loc(Blazor)::::::no-loc(SignalR):::App.Client` 專案，然後選取 [ **管理 NuGet 套件** ]。</span><span class="sxs-lookup"><span data-stu-id="3ff73-172">In the **Solution** sidebar, right-click the `:::no-loc(Blazor)::::::no-loc(SignalR):::App.Client` project and select **Manage NuGet Packages**.</span></span>
+1. <span data-ttu-id="3ff73-172">在 [ **方案** ] 提要欄位中，以滑鼠右鍵按一下 `BlazorSignalRApp.Client` 專案，然後選取 [ **管理 NuGet 套件** ]。</span><span class="sxs-lookup"><span data-stu-id="3ff73-172">In the **Solution** sidebar, right-click the `BlazorSignalRApp.Client` project and select **Manage NuGet Packages**.</span></span>
 
 1. <span data-ttu-id="3ff73-173">在 [ **管理 NuGet 封裝** ] 對話方塊中，確認 [來源] 下拉式清單設定為 `nuget.org` 。</span><span class="sxs-lookup"><span data-stu-id="3ff73-173">In the **Manage NuGet Packages** dialog, confirm that the source drop-down is set to `nuget.org`.</span></span>
 
-1. <span data-ttu-id="3ff73-174">選取 **[流覽]** 之後， `Microsoft.AspNetCore.:::no-loc(SignalR):::.Client` 在 [搜尋] 方塊中輸入。</span><span class="sxs-lookup"><span data-stu-id="3ff73-174">With **Browse** selected, type `Microsoft.AspNetCore.:::no-loc(SignalR):::.Client` in the search box.</span></span>
+1. <span data-ttu-id="3ff73-174">選取 **[流覽]** 之後， `Microsoft.AspNetCore.SignalR.Client` 在 [搜尋] 方塊中輸入。</span><span class="sxs-lookup"><span data-stu-id="3ff73-174">With **Browse** selected, type `Microsoft.AspNetCore.SignalR.Client` in the search box.</span></span>
 
-1. <span data-ttu-id="3ff73-175">在搜尋結果中，選取套件旁的核取方塊 [`Microsoft.AspNetCore.:::no-loc(SignalR):::.Client`](https://www.nuget.org/packages/Microsoft.AspNetCore.:::no-loc(SignalR):::.Client) ，然後選取 [ **新增套件** ]。</span><span class="sxs-lookup"><span data-stu-id="3ff73-175">In the search results, select the check box next to the [`Microsoft.AspNetCore.:::no-loc(SignalR):::.Client`](https://www.nuget.org/packages/Microsoft.AspNetCore.:::no-loc(SignalR):::.Client) package and select **Add Package**.</span></span>
+1. <span data-ttu-id="3ff73-175">在搜尋結果中，選取套件旁的核取方塊 [`Microsoft.AspNetCore.SignalR.Client`](https://www.nuget.org/packages/Microsoft.AspNetCore.SignalR.Client) ，然後選取 [ **新增套件** ]。</span><span class="sxs-lookup"><span data-stu-id="3ff73-175">In the search results, select the check box next to the [`Microsoft.AspNetCore.SignalR.Client`](https://www.nuget.org/packages/Microsoft.AspNetCore.SignalR.Client) package and select **Add Package**.</span></span>
 
 1. <span data-ttu-id="3ff73-176">如果出現 [ **接受授權** ] 對話方塊，請在您同意授權條款時選取 [ **接受** ]。</span><span class="sxs-lookup"><span data-stu-id="3ff73-176">If the **License Acceptance** dialog appears, select **Accept** if you agree with the license terms.</span></span>
 
@@ -206,49 +206,49 @@ dotnet add Client package Microsoft.AspNetCore.:::no-loc(SignalR):::.Client
 <span data-ttu-id="3ff73-178">在命令列介面中，執行下列命令：</span><span class="sxs-lookup"><span data-stu-id="3ff73-178">In a command shell, execute the following commands:</span></span>
 
 ```dotnetcli
-cd :::no-loc(Blazor)::::::no-loc(SignalR):::App
-dotnet add Client package Microsoft.AspNetCore.:::no-loc(SignalR):::.Client
+cd BlazorSignalRApp
+dotnet add Client package Microsoft.AspNetCore.SignalR.Client
 ```
 
 ---
 
-## <a name="add-a-no-locsignalr-hub"></a><span data-ttu-id="3ff73-179">新增 :::no-loc(SignalR)::: 中樞</span><span class="sxs-lookup"><span data-stu-id="3ff73-179">Add a :::no-loc(SignalR)::: hub</span></span>
+## <a name="add-a-no-locsignalr-hub"></a><span data-ttu-id="3ff73-179">新增 SignalR 中樞</span><span class="sxs-lookup"><span data-stu-id="3ff73-179">Add a SignalR hub</span></span>
 
-<span data-ttu-id="3ff73-180">在 `:::no-loc(Blazor)::::::no-loc(SignalR):::App.Server` 專案中，建立 `Hubs` (複數) 資料夾，並 () 新增下列 `ChatHub` 類別 `Hubs/ChatHub.cs` ：</span><span class="sxs-lookup"><span data-stu-id="3ff73-180">In the `:::no-loc(Blazor)::::::no-loc(SignalR):::App.Server` project, create a `Hubs` (plural) folder and add the following `ChatHub` class (`Hubs/ChatHub.cs`):</span></span>
+<span data-ttu-id="3ff73-180">在 `BlazorSignalRApp.Server` 專案中，建立 `Hubs` (複數) 資料夾，並 () 新增下列 `ChatHub` 類別 `Hubs/ChatHub.cs` ：</span><span class="sxs-lookup"><span data-stu-id="3ff73-180">In the `BlazorSignalRApp.Server` project, create a `Hubs` (plural) folder and add the following `ChatHub` class (`Hubs/ChatHub.cs`):</span></span>
 
 ::: moniker range=">= aspnetcore-5.0"
 
-[!code-csharp[](signalr-blazor-webassembly/samples/5.x/:::no-loc(Blazor)::::::no-loc(SignalR):::App/Server/Hubs/ChatHub.cs)]
+[!code-csharp[](signalr-blazor-webassembly/samples/5.x/BlazorSignalRApp/Server/Hubs/ChatHub.cs)]
 
 ::: moniker-end
 
 ::: moniker range="< aspnetcore-5.0"
 
-[!code-csharp[](signalr-blazor-webassembly/samples/3.x/:::no-loc(Blazor)::::::no-loc(SignalR):::App/Server/Hubs/ChatHub.cs)]
+[!code-csharp[](signalr-blazor-webassembly/samples/3.x/BlazorSignalRApp/Server/Hubs/ChatHub.cs)]
 
 ::: moniker-end
 
-## <a name="add-services-and-an-endpoint-for-the-no-locsignalr-hub"></a><span data-ttu-id="3ff73-181">新增中樞的服務和端點 :::no-loc(SignalR):::</span><span class="sxs-lookup"><span data-stu-id="3ff73-181">Add services and an endpoint for the :::no-loc(SignalR)::: hub</span></span>
+## <a name="add-services-and-an-endpoint-for-the-no-locsignalr-hub"></a><span data-ttu-id="3ff73-181">新增中樞的服務和端點 SignalR</span><span class="sxs-lookup"><span data-stu-id="3ff73-181">Add services and an endpoint for the SignalR hub</span></span>
 
-1. <span data-ttu-id="3ff73-182">在 `:::no-loc(Blazor)::::::no-loc(SignalR):::App.Server` 專案中，開啟 `Startup.cs` 檔案。</span><span class="sxs-lookup"><span data-stu-id="3ff73-182">In the `:::no-loc(Blazor)::::::no-loc(SignalR):::App.Server` project, open the `Startup.cs` file.</span></span>
+1. <span data-ttu-id="3ff73-182">在 `BlazorSignalRApp.Server` 專案中，開啟 `Startup.cs` 檔案。</span><span class="sxs-lookup"><span data-stu-id="3ff73-182">In the `BlazorSignalRApp.Server` project, open the `Startup.cs` file.</span></span>
 
 1. <span data-ttu-id="3ff73-183">將類別的命名空間新增 `ChatHub` 至檔案頂端：</span><span class="sxs-lookup"><span data-stu-id="3ff73-183">Add the namespace for the `ChatHub` class to the top of the file:</span></span>
 
    ```csharp
-   using :::no-loc(Blazor)::::::no-loc(SignalR):::App.Server.Hubs;
+   using BlazorSignalRApp.Server.Hubs;
    ```
 
-1. <span data-ttu-id="3ff73-184">新增 :::no-loc(SignalR)::: 和回應壓縮中介軟體服務至 `Startup.ConfigureServices` ：</span><span class="sxs-lookup"><span data-stu-id="3ff73-184">Add :::no-loc(SignalR)::: and Response Compression Middleware services to `Startup.ConfigureServices`:</span></span>
+1. <span data-ttu-id="3ff73-184">新增 SignalR 和回應壓縮中介軟體服務至 `Startup.ConfigureServices` ：</span><span class="sxs-lookup"><span data-stu-id="3ff73-184">Add SignalR and Response Compression Middleware services to `Startup.ConfigureServices`:</span></span>
 
 ::: moniker range=">= aspnetcore-5.0"
 
-   [!code-csharp[](signalr-blazor-webassembly/samples/5.x/:::no-loc(Blazor)::::::no-loc(SignalR):::App/Server/Startup.cs?name=snippet_ConfigureServices&highlight=3,5-9)]
+   [!code-csharp[](signalr-blazor-webassembly/samples/5.x/BlazorSignalRApp/Server/Startup.cs?name=snippet_ConfigureServices&highlight=3,5-9)]
 
 ::: moniker-end
 
 ::: moniker range="< aspnetcore-5.0"
 
-   [!code-csharp[](signalr-blazor-webassembly/samples/3.x/:::no-loc(Blazor)::::::no-loc(SignalR):::App/Server/Startup.cs?name=snippet_ConfigureServices&highlight=3,5-9)]
+   [!code-csharp[](signalr-blazor-webassembly/samples/3.x/BlazorSignalRApp/Server/Startup.cs?name=snippet_ConfigureServices&highlight=3,5-9)]
 
 ::: moniker-end
 
@@ -259,31 +259,31 @@ dotnet add Client package Microsoft.AspNetCore.:::no-loc(SignalR):::.Client
 
 ::: moniker range=">= aspnetcore-5.0"
 
-   [!code-csharp[](signalr-blazor-webassembly/samples/5.x/:::no-loc(Blazor)::::::no-loc(SignalR):::App/Server/Startup.cs?name=snippet_Configure&highlight=3,25)]
+   [!code-csharp[](signalr-blazor-webassembly/samples/5.x/BlazorSignalRApp/Server/Startup.cs?name=snippet_Configure&highlight=3,25)]
 
 ::: moniker-end
 
 ::: moniker range="< aspnetcore-5.0"
 
-   [!code-csharp[](signalr-blazor-webassembly/samples/3.x/:::no-loc(Blazor)::::::no-loc(SignalR):::App/Server/Startup.cs?name=snippet_Configure&highlight=3,25)]
+   [!code-csharp[](signalr-blazor-webassembly/samples/3.x/BlazorSignalRApp/Server/Startup.cs?name=snippet_Configure&highlight=3,25)]
 
 ::: moniker-end
 
-## <a name="add-no-locrazor-component-code-for-chat"></a><span data-ttu-id="3ff73-188">新增 :::no-loc(Razor)::: 聊天的元件程式碼</span><span class="sxs-lookup"><span data-stu-id="3ff73-188">Add :::no-loc(Razor)::: component code for chat</span></span>
+## <a name="add-no-locrazor-component-code-for-chat"></a><span data-ttu-id="3ff73-188">新增 Razor 聊天的元件程式碼</span><span class="sxs-lookup"><span data-stu-id="3ff73-188">Add Razor component code for chat</span></span>
 
-1. <span data-ttu-id="3ff73-189">在 `:::no-loc(Blazor)::::::no-loc(SignalR):::App.Client` 專案中，開啟 `Pages/Index.razor` 檔案。</span><span class="sxs-lookup"><span data-stu-id="3ff73-189">In the `:::no-loc(Blazor)::::::no-loc(SignalR):::App.Client` project, open the `Pages/Index.razor` file.</span></span>
+1. <span data-ttu-id="3ff73-189">在 `BlazorSignalRApp.Client` 專案中，開啟 `Pages/Index.razor` 檔案。</span><span class="sxs-lookup"><span data-stu-id="3ff73-189">In the `BlazorSignalRApp.Client` project, open the `Pages/Index.razor` file.</span></span>
 
 1. <span data-ttu-id="3ff73-190">以下列程式碼取代標記：</span><span class="sxs-lookup"><span data-stu-id="3ff73-190">Replace the markup with the following code:</span></span>
 
 ::: moniker range=">= aspnetcore-5.0"
 
-   [!code-razor[](signalr-blazor-webassembly/samples/5.x/:::no-loc(Blazor)::::::no-loc(SignalR):::App/Client/Pages/Index.razor)]
+   [!code-razor[](signalr-blazor-webassembly/samples/5.x/BlazorSignalRApp/Client/Pages/Index.razor)]
 
 ::: moniker-end
 
 ::: moniker range="< aspnetcore-5.0"
 
-   [!code-razor[](signalr-blazor-webassembly/samples/3.x/:::no-loc(Blazor)::::::no-loc(SignalR):::App/Client/Pages/Index.razor)]
+   [!code-razor[](signalr-blazor-webassembly/samples/3.x/BlazorSignalRApp/Client/Pages/Index.razor)]
 
 ::: moniker-end
 
@@ -293,7 +293,7 @@ dotnet add Client package Microsoft.AspNetCore.:::no-loc(SignalR):::.Client
 
 # <a name="visual-studio"></a>[<span data-ttu-id="3ff73-193">Visual Studio</span><span class="sxs-lookup"><span data-stu-id="3ff73-193">Visual Studio</span></span>](#tab/visual-studio)
 
-1. <span data-ttu-id="3ff73-194">在 **方案總管** 中，選取 `:::no-loc(Blazor)::::::no-loc(SignalR):::App.Server` 專案。</span><span class="sxs-lookup"><span data-stu-id="3ff73-194">In **Solution Explorer** , select the `:::no-loc(Blazor)::::::no-loc(SignalR):::App.Server` project.</span></span> <span data-ttu-id="3ff73-195">按下<kbd>f5</kbd>鍵以執行應用程式的偵錯工具，或按<kbd>Ctrl</kbd> + <kbd>F5</kbd>執行應用程式，而不進行偵錯工具。</span><span class="sxs-lookup"><span data-stu-id="3ff73-195">Press <kbd>F5</kbd> to run the app with debugging or <kbd>Ctrl</kbd>+<kbd>F5</kbd> to run the app without debugging.</span></span>
+1. <span data-ttu-id="3ff73-194">在 **方案總管** 中，選取 `BlazorSignalRApp.Server` 專案。</span><span class="sxs-lookup"><span data-stu-id="3ff73-194">In **Solution Explorer** , select the `BlazorSignalRApp.Server` project.</span></span> <span data-ttu-id="3ff73-195">按下<kbd>f5</kbd>鍵以執行應用程式的偵錯工具，或按<kbd>Ctrl</kbd> + <kbd>F5</kbd>執行應用程式，而不進行偵錯工具。</span><span class="sxs-lookup"><span data-stu-id="3ff73-195">Press <kbd>F5</kbd> to run the app with debugging or <kbd>Ctrl</kbd>+<kbd>F5</kbd> to run the app without debugging.</span></span>
 
 1. <span data-ttu-id="3ff73-196">從網址列複製 URL，開啟另一個瀏覽器執行個體或索引標籤，然後將 URL 貼入網址列。</span><span class="sxs-lookup"><span data-stu-id="3ff73-196">Copy the URL from the address bar, open another browser instance or tab, and paste the URL in the address bar.</span></span>
 
@@ -335,7 +335,7 @@ dotnet add Client package Microsoft.AspNetCore.:::no-loc(SignalR):::.Client
 
 # <a name="visual-studio-for-mac"></a>[<span data-ttu-id="3ff73-209">Visual Studio for Mac</span><span class="sxs-lookup"><span data-stu-id="3ff73-209">Visual Studio for Mac</span></span>](#tab/visual-studio-mac)
 
-1. <span data-ttu-id="3ff73-210">在 [ **方案** ] 側邊欄中，選取 `:::no-loc(Blazor)::::::no-loc(SignalR):::App.Server` 專案。</span><span class="sxs-lookup"><span data-stu-id="3ff73-210">In the **Solution** sidebar, select the `:::no-loc(Blazor)::::::no-loc(SignalR):::App.Server` project.</span></span> <span data-ttu-id="3ff73-211">按<kbd>⌘</kbd> + <kbd>↩</kbd>以執行應用程式的偵錯工具或<kbd>⌥</kbd> + <kbd>⌘</kbd> + <kbd>↩</kbd>執行應用程式，而不需進行任何偵錯工具。</span><span class="sxs-lookup"><span data-stu-id="3ff73-211">Press <kbd>⌘</kbd>+<kbd>↩</kbd> to run the app with debugging or <kbd>⌥</kbd>+<kbd>⌘</kbd>+<kbd>↩</kbd> to run the app without debugging.</span></span>
+1. <span data-ttu-id="3ff73-210">在 [ **方案** ] 側邊欄中，選取 `BlazorSignalRApp.Server` 專案。</span><span class="sxs-lookup"><span data-stu-id="3ff73-210">In the **Solution** sidebar, select the `BlazorSignalRApp.Server` project.</span></span> <span data-ttu-id="3ff73-211">按<kbd>⌘</kbd> + <kbd>↩</kbd>以執行應用程式的偵錯工具或<kbd>⌥</kbd> + <kbd>⌘</kbd> + <kbd>↩</kbd>執行應用程式，而不需進行任何偵錯工具。</span><span class="sxs-lookup"><span data-stu-id="3ff73-211">Press <kbd>⌘</kbd>+<kbd>↩</kbd> to run the app with debugging or <kbd>⌥</kbd>+<kbd>⌘</kbd>+<kbd>↩</kbd> to run the app without debugging.</span></span>
 
 1. <span data-ttu-id="3ff73-212">從網址列複製 URL，開啟另一個瀏覽器執行個體或索引標籤，然後將 URL 貼入網址列。</span><span class="sxs-lookup"><span data-stu-id="3ff73-212">Copy the URL from the address bar, open another browser instance or tab, and paste the URL in the address bar.</span></span>
 
@@ -369,20 +369,20 @@ dotnet add Client package Microsoft.AspNetCore.:::no-loc(SignalR):::.Client
 <span data-ttu-id="3ff73-225">在本教學課程中，您已了解如何：</span><span class="sxs-lookup"><span data-stu-id="3ff73-225">In this tutorial, you learned how to:</span></span>
 
 > [!div class="checklist"]
-> * <span data-ttu-id="3ff73-226">建立 :::no-loc(Blazor WebAssembly)::: 託管應用程式專案</span><span class="sxs-lookup"><span data-stu-id="3ff73-226">Create a :::no-loc(Blazor WebAssembly)::: Hosted app project</span></span>
-> * <span data-ttu-id="3ff73-227">新增 :::no-loc(SignalR)::: 用戶端程式庫</span><span class="sxs-lookup"><span data-stu-id="3ff73-227">Add the :::no-loc(SignalR)::: client library</span></span>
-> * <span data-ttu-id="3ff73-228">新增 :::no-loc(SignalR)::: 中樞</span><span class="sxs-lookup"><span data-stu-id="3ff73-228">Add a :::no-loc(SignalR)::: hub</span></span>
-> * <span data-ttu-id="3ff73-229">新增 :::no-loc(SignalR)::: 中樞的服務和端點 :::no-loc(SignalR):::</span><span class="sxs-lookup"><span data-stu-id="3ff73-229">Add :::no-loc(SignalR)::: services and an endpoint for the :::no-loc(SignalR)::: hub</span></span>
-> * <span data-ttu-id="3ff73-230">新增 :::no-loc(Razor)::: 聊天的元件程式碼</span><span class="sxs-lookup"><span data-stu-id="3ff73-230">Add :::no-loc(Razor)::: component code for chat</span></span>
+> * <span data-ttu-id="3ff73-226">建立 Blazor WebAssembly 託管應用程式專案</span><span class="sxs-lookup"><span data-stu-id="3ff73-226">Create a Blazor WebAssembly Hosted app project</span></span>
+> * <span data-ttu-id="3ff73-227">新增 SignalR 用戶端程式庫</span><span class="sxs-lookup"><span data-stu-id="3ff73-227">Add the SignalR client library</span></span>
+> * <span data-ttu-id="3ff73-228">新增 SignalR 中樞</span><span class="sxs-lookup"><span data-stu-id="3ff73-228">Add a SignalR hub</span></span>
+> * <span data-ttu-id="3ff73-229">新增 SignalR 中樞的服務和端點 SignalR</span><span class="sxs-lookup"><span data-stu-id="3ff73-229">Add SignalR services and an endpoint for the SignalR hub</span></span>
+> * <span data-ttu-id="3ff73-230">新增 Razor 聊天的元件程式碼</span><span class="sxs-lookup"><span data-stu-id="3ff73-230">Add Razor component code for chat</span></span>
 
-<span data-ttu-id="3ff73-231">若要深入瞭解如何建立 :::no-loc(Blazor)::: 應用程式，請參閱 :::no-loc(Blazor)::: 檔：</span><span class="sxs-lookup"><span data-stu-id="3ff73-231">To learn more about building :::no-loc(Blazor)::: apps, see the :::no-loc(Blazor)::: documentation:</span></span>
+<span data-ttu-id="3ff73-231">若要深入瞭解如何建立 Blazor 應用程式，請參閱 Blazor 檔：</span><span class="sxs-lookup"><span data-stu-id="3ff73-231">To learn more about building Blazor apps, see the Blazor documentation:</span></span>
 
 > [!div class="nextstepaction"]
 > <span data-ttu-id="3ff73-232"><xref:blazor/index>
-> [使用 :::no-loc(Identity)::: 伺服器、websocket 和 Server-Sent 事件的持有人權杖驗證](xref:signalr/authn-and-authz#bearer-token-authentication)</span><span class="sxs-lookup"><span data-stu-id="3ff73-232"><xref:blazor/index>
-[Bearer token authentication with :::no-loc(Identity)::: Server, WebSockets, and Server-Sent Events](xref:signalr/authn-and-authz#bearer-token-authentication)</span></span>
+> [使用 Identity 伺服器、websocket 和 Server-Sent 事件的持有人權杖驗證](xref:signalr/authn-and-authz#bearer-token-authentication)</span><span class="sxs-lookup"><span data-stu-id="3ff73-232"><xref:blazor/index>
+[Bearer token authentication with Identity Server, WebSockets, and Server-Sent Events](xref:signalr/authn-and-authz#bearer-token-authentication)</span></span>
 
 ## <a name="additional-resources"></a><span data-ttu-id="3ff73-233">其他資源</span><span class="sxs-lookup"><span data-stu-id="3ff73-233">Additional resources</span></span>
 
 * <xref:signalr/introduction>
-* [<span data-ttu-id="3ff73-234">:::no-loc(SignalR)::: 驗證的跨原始來源協商</span><span class="sxs-lookup"><span data-stu-id="3ff73-234">:::no-loc(SignalR)::: cross-origin negotiation for authentication</span></span>](xref:blazor/fundamentals/additional-scenarios#signalr-cross-origin-negotiation-for-authentication)
+* [<span data-ttu-id="3ff73-234">SignalR 驗證的跨原始來源協商</span><span class="sxs-lookup"><span data-stu-id="3ff73-234">SignalR cross-origin negotiation for authentication</span></span>](xref:blazor/fundamentals/additional-scenarios#signalr-cross-origin-negotiation-for-authentication)

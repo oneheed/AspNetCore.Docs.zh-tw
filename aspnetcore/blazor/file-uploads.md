@@ -19,12 +19,12 @@ no-loc:
 - SignalR
 ms.date: 10/27/2020
 uid: blazor/file-uploads
-ms.openlocfilehash: c0806c3a68a4d9e698925f6ec955dd2f53d7818f
-ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
+ms.openlocfilehash: ca49564136e030fdaf86eefac56146fcb79f7bad
+ms.sourcegitcommit: bce62ceaac7782e22d185814f2e8532c84efa472
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 10/30/2020
-ms.locfileid: "93056123"
+ms.lasthandoff: 11/17/2020
+ms.locfileid: "94673948"
 ---
 # <a name="aspnet-core-no-locblazor-file-uploads"></a>ASP.NET Core 檔案上 Blazor 傳
 
@@ -46,7 +46,7 @@ ms.locfileid: "93056123"
 若要從使用者選取的檔案讀取資料：
 
 * `Microsoft.AspNetCore.Components.Forms.IBrowserFile.OpenReadStream`在檔案上呼叫，並從傳回的資料流程讀取。 如需詳細資訊，請參閱檔案 [資料流程](#file-streams) 一節。
-* <xref:System.IO.Stream>傳回的會 `OpenReadStream` 強制讀取的大小上限（以位元組為單位） `Stream` 。 依預設，只允許讀取小於 524288 KB (512 KB) 大小的檔案，再進一步讀取會導致例外狀況。 這項限制是為了避免開發人員不小心將大型檔案讀取到記憶體中。 `maxAllowedSize` `Microsoft.AspNetCore.Components.Forms.IBrowserFile.OpenReadStream` 如有需要，可以使用上的參數來指定較大的大小。
+* <xref:System.IO.Stream>傳回的會 `OpenReadStream` 強制讀取的大小上限（以位元組為單位） `Stream` 。 根據預設，在任何進一步讀取會導致例外狀況之前，允許讀取不超過512000個位元組 (500 KB) 的檔案。 這項限制是為了避免開發人員不小心將大型檔案讀取到記憶體中。 `maxAllowedSize` `Microsoft.AspNetCore.Components.Forms.IBrowserFile.OpenReadStream` 如有需要，可以使用上的參數來指定較大的大小。
 * 避免直接將傳入檔案資料流程讀入記憶體中。 例如，請勿將檔案位元組複製到 <xref:System.IO.MemoryStream> 或讀取為位元組陣列。 這些方法可能會導致效能和安全性問題，尤其是在中 Blazor Server 。 相反地，請考慮將檔案位元組複製到外部存放區，例如 blob 或磁片上的檔案。
 
 接收影像檔案的元件可以呼叫檔案 `RequestImageFileAsync` 上的便利方法，在將影像串流至應用程式之前，先調整瀏覽器的 JavaScript 執行時間中影像資料的大小。

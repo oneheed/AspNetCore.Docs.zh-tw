@@ -3,7 +3,7 @@ title: 第4部分：將模型新增至 ASP.NET Core MVC 應用程式
 author: rick-anderson
 description: ASP.NET Core MVC 之教學課程系列的第4部分。
 ms.author: riande
-ms.date: 01/13/2020
+ms.date: 11/16/2020
 no-loc:
 - appsettings.json
 - ASP.NET Core Identity
@@ -17,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: tutorials/first-mvc-app/adding-model
-ms.openlocfilehash: fa1d79bed56f17afe69697a7e24ec200e6a0ab22
-ms.sourcegitcommit: 91e14f1e2a25c98a57c2217fe91b172e0ff2958c
+ms.openlocfilehash: 16cef6cc9e772f494515942072c2aaf58913ce91
+ms.sourcegitcommit: fb208f907249cc7aab029afff941a0266c187050
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 11/10/2020
-ms.locfileid: "94422734"
+ms.lasthandoff: 11/17/2020
+ms.locfileid: "94688445"
 ---
 # <a name="part-4-add-a-model-to-an-aspnet-core-mvc-app"></a>第4部分：將模型新增至 ASP.NET Core MVC 應用程式
 
@@ -42,15 +42,15 @@ ms.locfileid: "94422734"
 
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
-以滑鼠右鍵按一下 *Models* 資料夾 > [新增] > [類別]。 將檔案命名為 *Movie.cs* 。
+以滑鼠右鍵按一下 *Models* 資料夾 > [新增] > [類別]。 將檔案命名為 *Movie.cs*。
 
-# <a name="visual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code)
+# <a name="visual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code) \(英文\)
 
 將名為 *Movie.cs* 的檔案新增到 *Models* 資料夾。
 
 # <a name="visual-studio-for-mac"></a>[Visual Studio for Mac](#tab/visual-studio-mac)
 
-以滑鼠右鍵按一下 [ *模型* ] 資料夾 **，>**  >  **新增類別**  >  **空白類別** ]。 將檔案命名為 *Movie.cs* 。
+以滑鼠右鍵按一下 [*模型*] 資料夾 **，>**  >  **新增類別**  >  **空白類別**]。 將檔案命名為 *Movie.cs*。
 
 ---
 
@@ -71,7 +71,7 @@ ms.locfileid: "94422734"
 
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
-從 [工具] 功能表中，選取 [NuGet 套件管理員] **[套件管理器主控台]** >  (PMC)。
+從 [工具] 功能表中，選取 [NuGet 套件管理員]**[套件管理器主控台]** >  (PMC)。
 
 ![PMC 功能表](~/tutorials/first-mvc-app/adding-model/_static/pmc.png)
 
@@ -83,13 +83,13 @@ Install-Package Microsoft.EntityFrameworkCore.SqlServer
 
 上述命令會新增 EF Core SQL Server 提供者。 提供者套件會將 EF Core 套件作為相依性安裝。 其他套件會在本教學課程中稍後的 scaffolding 步驟內自動安裝。
 
-# <a name="visual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code)
+# <a name="visual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code) \(英文\)
 
 [!INCLUDE[](~/includes/add-EF-NuGet-SQLite-CLI-5.md)]
 
 # <a name="visual-studio-for-mac"></a>[Visual Studio for Mac](#tab/visual-studio-mac)
 
-從 [ **專案** ] 功能表選取 [ **管理 NuGet 套件** ]。
+從 [ **專案** ] 功能表選取 [ **管理 NuGet 套件**]。
 
 在右上方的 **搜尋** 欄位中，輸入， `Microsoft.EntityFrameworkCore.SQLite` 然後按下 **Return** 鍵進行搜尋。 選取相符的 NuGet 套件，然後按 [ **新增套件** ] 按鈕。
 
@@ -104,6 +104,14 @@ Install-Package Microsoft.EntityFrameworkCore.SqlServer
 * `Microsoft.VisualStudio.Web.CodeGeneration.Design`
 * `Microsoft.EntityFrameworkCore.SqlServer`
 * `Microsoft.EntityFrameworkCore.Design`
+
+執行下列 .NET CLI 命令：
+
+```dotnetcli
+dotnet tool install --global dotnet-aspnet-codegenerator
+```
+
+上述命令會新增 [aspnet codegenerator](xref:fundamentals/tools/dotnet-aspnet-codegenerator)的元件工具。
 
 ---
 
@@ -138,11 +146,11 @@ using Microsoft.EntityFrameworkCore;
 
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
-[!code-csharp[](~/tutorials/first-mvc-app/start-mvc/sample/MvcMovie3/Startup.cs?name=snippet_ConfigureServices&highlight=6-7)]
+[!code-csharp[](~/tutorials/first-mvc-app/start-mvc/sample/MvcMovie3/Startup.cs?name=snippet_ConfigureServices&highlight=5-6)]
 
 # <a name="visual-studio-code--visual-studio-for-mac"></a>[Visual Studio Code / Visual Studio for Mac](#tab/visual-studio-code+visual-studio-mac)
 
-[!code-csharp[](~/tutorials/first-mvc-app/start-mvc/sample/MvcMovie3/Startup.cs?name=snippet_UseSqlite&highlight=6-7)]
+[!code-csharp[](~/tutorials/first-mvc-app/start-mvc/sample/MvcMovie3/Startup.cs?name=snippet_UseSqlite&highlight=5-6)]
 
 ---
 
@@ -156,11 +164,11 @@ using Microsoft.EntityFrameworkCore;
 
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
-[!code-json[](~/tutorials/first-mvc-app/start-mvc/sample/MvcMovie3/appsettings.json?highlight=10-12)]
+[!code-json[](~/tutorials/first-mvc-app/start-mvc/sample/MvcMovie3/appsettings.json?highlight=10-11)]
 
 # <a name="visual-studio-code--visual-studio-for-mac"></a>[Visual Studio Code / Visual Studio for Mac](#tab/visual-studio-code+visual-studio-mac)
 
-[!code-json[](~/tutorials/first-mvc-app/start-mvc/sample/MvcMovie3/appsettings_SQLite.json?highlight=10-12)]
+[!code-json[](~/tutorials/first-mvc-app/start-mvc/sample/MvcMovie3/appsettings_SQLite.json?highlight=10-11)]
 
 ---
 
@@ -193,14 +201,14 @@ using Microsoft.EntityFrameworkCore;
 
 Visual Studio 會建立：
 
-* 電影控制器 ( *Controllers/MoviesController.cs* )
-* Razor 查看建立、刪除、詳細資料、編輯和索引頁面的檔案 ( *Views/電影/ \* cshtml* ) 
+* 電影控制器 (*Controllers/MoviesController.cs*)
+* Razor 查看建立、刪除、詳細資料、編輯和索引頁面的檔案 (*Views/電影/ \* cshtml*) 
 
-自動建立這些檔案的流程稱為 *scaffolding* 。
+自動建立這些檔案的流程稱為 *scaffolding*。
 
-### <a name="visual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code) 
+### <a name="visual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code) \(英文\) 
 
-* 在專案目錄 (包含 *Program.cs* 、 *Startup.cs* 和 *.csproj* 檔案的目錄) 中開啟一個命令視窗。
+* 在專案目錄 (包含 *Program.cs*、*Startup.cs* 和 *.csproj* 檔案的目錄) 中開啟一個命令視窗。
 
 * 在 Linux 上，匯出 scaffold 工具路徑：
 
@@ -208,7 +216,7 @@ Visual Studio 會建立：
   export PATH=$HOME/.dotnet/tools:$PATH
   ```
 
-* 執行以下命令：
+* 執行下列命令：
 
   ```dotnetcli
   dotnet aspnet-codegenerator controller -name MoviesController -m Movie -dc MvcMovieContext --relativeFolderPath Controllers --useDefaultLayout --referenceScriptLibraries
@@ -218,9 +226,9 @@ Visual Studio 會建立：
 
 ### <a name="visual-studio-for-mac"></a>[Visual Studio for Mac](#tab/visual-studio-mac)
 
-* 在專案目錄 (包含 *Program.cs* 、 *Startup.cs* 和 *.csproj* 檔案的目錄) 中開啟一個命令視窗。
+* 在專案目錄 (包含 *Program.cs*、*Startup.cs* 和 *.csproj* 檔案的目錄) 中開啟一個命令視窗。
 
-* 執行以下命令：
+* 執行下列命令：
 
   ```dotnetcli
   dotnet aspnet-codegenerator controller -name MoviesController -m Movie -dc MvcMovieContext --relativeFolderPath Controllers --useDefaultLayout --referenceScriptLibraries
@@ -242,7 +250,7 @@ Visual Studio 會建立：
 
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
-從 [工具] 功能表中，選取 [NuGet 套件管理員] **[套件管理器主控台]** >  (PMC)。
+從 [工具] 功能表中，選取 [NuGet 套件管理員]**[套件管理器主控台]** >  (PMC)。
 
 在 PMC 中，輸入下列命令：
 
@@ -316,7 +324,7 @@ dotnet ef database update
   > [!NOTE]
   > 您可能無法在 `Price` 欄位中輸入小數逗號。 若要對使用逗號 (",") 作為小數點的非英文地區設定和非英文日期格式支援 [jQuery 驗證](https://jqueryvalidation.org/)，則必須將應用程式全球化。 如需全球化指示，請參閱[此 GitHub 問題](https://github.com/dotnet/AspNetCore.Docs/issues/4076#issuecomment-326590420) \(英文\)。
 
-* 測試 **Edit** 、 **Details** 和 **Delete** 頁面。
+* 測試 **Edit**、**Details** 和 **Delete** 頁面。
 
 ## <a name="dependency-injection-in-the-controller"></a>控制器中的相依性插入
 
@@ -428,15 +436,15 @@ return View(movie);
 
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
-以滑鼠右鍵按一下 *Models* 資料夾 > [新增] > [類別]。 將檔案命名為 *Movie.cs* 。
+以滑鼠右鍵按一下 *Models* 資料夾 > [新增] > [類別]。 將檔案命名為 *Movie.cs*。
 
-# <a name="visual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code)
+# <a name="visual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code) \(英文\)
 
 將名為 *Movie.cs* 的檔案新增到 *Models* 資料夾。
 
 # <a name="visual-studio-for-mac"></a>[Visual Studio for Mac](#tab/visual-studio-mac)
 
-以滑鼠右鍵按一下 [ *模型* ] 資料夾 **，>**  >  **新增類別**  >  **空白類別** ]。 將檔案命名為 *Movie.cs* 。
+以滑鼠右鍵按一下 [*模型*] 資料夾 **，>**  >  **新增類別**  >  **空白類別**]。 將檔案命名為 *Movie.cs*。
 
 ---
 
@@ -457,7 +465,7 @@ return View(movie);
 
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
-從 [工具] 功能表中，選取 [NuGet 套件管理員] **[套件管理器主控台]** >  (PMC)。
+從 [工具] 功能表中，選取 [NuGet 套件管理員]**[套件管理器主控台]** >  (PMC)。
 
 ![PMC 功能表](~/tutorials/first-mvc-app/adding-model/_static/pmc.png)
 
@@ -469,13 +477,13 @@ Install-Package Microsoft.EntityFrameworkCore.SqlServer
 
 上述命令會新增 EF Core SQL Server 提供者。 提供者套件會將 EF Core 套件作為相依性安裝。 其他套件會在本教學課程中稍後的 scaffolding 步驟內自動安裝。
 
-# <a name="visual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code)
+# <a name="visual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code) \(英文\)
 
 [!INCLUDE[](~/includes/add-EF-NuGet-SQLite-CLI.md)]
 
 # <a name="visual-studio-for-mac"></a>[Visual Studio for Mac](#tab/visual-studio-mac)
 
-從 [ **專案** ] 功能表選取 [ **管理 NuGet 套件** ]。
+從 [ **專案** ] 功能表選取 [ **管理 NuGet 套件**]。
 
 在右上方的 **搜尋** 欄位中，輸入， `Microsoft.EntityFrameworkCore.SQLite` 然後按下 **Return** 鍵進行搜尋。 選取相符的 NuGet 套件，然後按 [ **新增套件** ] 按鈕。
 
@@ -579,14 +587,14 @@ using Microsoft.EntityFrameworkCore;
 
 Visual Studio 會建立：
 
-* 電影控制器 ( *Controllers/MoviesController.cs* )
-* Razor 查看建立、刪除、詳細資料、編輯和索引頁面的檔案 ( *Views/電影/ \* cshtml* ) 
+* 電影控制器 (*Controllers/MoviesController.cs*)
+* Razor 查看建立、刪除、詳細資料、編輯和索引頁面的檔案 (*Views/電影/ \* cshtml*) 
 
-自動建立這些檔案的流程稱為 *scaffolding* 。
+自動建立這些檔案的流程稱為 *scaffolding*。
 
-### <a name="visual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code) 
+### <a name="visual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code) \(英文\) 
 
-* 在專案目錄 (包含 *Program.cs* 、 *Startup.cs* 和 *.csproj* 檔案的目錄) 中開啟一個命令視窗。
+* 在專案目錄 (包含 *Program.cs*、*Startup.cs* 和 *.csproj* 檔案的目錄) 中開啟一個命令視窗。
 
 * 在 Linux 上，匯出 scaffold 工具路徑：
 
@@ -594,7 +602,7 @@ Visual Studio 會建立：
   export PATH=$HOME/.dotnet/tools:$PATH
   ```
 
-* 執行以下命令：
+* 執行下列命令：
 
   ```dotnetcli
   dotnet aspnet-codegenerator controller -name MoviesController -m Movie -dc MvcMovieContext --relativeFolderPath Controllers --useDefaultLayout --referenceScriptLibraries
@@ -604,9 +612,9 @@ Visual Studio 會建立：
 
 ### <a name="visual-studio-for-mac"></a>[Visual Studio for Mac](#tab/visual-studio-mac)
 
-* 在專案目錄 (包含 *Program.cs* 、 *Startup.cs* 和 *.csproj* 檔案的目錄) 中開啟一個命令視窗。
+* 在專案目錄 (包含 *Program.cs*、*Startup.cs* 和 *.csproj* 檔案的目錄) 中開啟一個命令視窗。
 
-* 執行以下命令：
+* 執行下列命令：
 
   ```dotnetcli
   dotnet aspnet-codegenerator controller -name MoviesController -m Movie -dc MvcMovieContext --relativeFolderPath Controllers --useDefaultLayout --referenceScriptLibraries
@@ -628,7 +636,7 @@ Visual Studio 會建立：
 
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
-從 [工具] 功能表中，選取 [NuGet 套件管理員] **[套件管理器主控台]** >  (PMC)。
+從 [工具] 功能表中，選取 [NuGet 套件管理員]**[套件管理器主控台]** >  (PMC)。
 
 在 PMC 中，輸入下列命令：
 
@@ -702,7 +710,7 @@ dotnet ef database update
   > [!NOTE]
   > 您可能無法在 `Price` 欄位中輸入小數逗號。 若要對使用逗號 (",") 作為小數點的非英文地區設定和非英文日期格式支援 [jQuery 驗證](https://jqueryvalidation.org/)，則必須將應用程式全球化。 如需全球化指示，請參閱[此 GitHub 問題](https://github.com/dotnet/AspNetCore.Docs/issues/4076#issuecomment-326590420) \(英文\)。
 
-* 測試 **Edit** 、 **Details** 和 **Delete** 頁面。
+* 測試 **Edit**、**Details** 和 **Delete** 頁面。
 
 ## <a name="dependency-injection-in-the-controller"></a>控制器中的相依性插入
 
@@ -814,7 +822,7 @@ return View(movie);
 
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
-以滑鼠右鍵按一下 *Models* 資料夾 > [新增] > [類別]。 將類別命名為 **Movie** 。
+以滑鼠右鍵按一下 *Models* 資料夾 > [新增] > [類別]。 將類別命名為 **Movie**。
 
 [!INCLUDE [model 1b](~/includes/mvc-intro/model1b.md)]
 
@@ -856,18 +864,18 @@ return View(movie);
 
 Visual Studio 會建立：
 
-* Entity Framework Core [資料庫內容類別](xref:data/ef-mvc/intro#create-the-database-context) ( *Data/MvcMovieContext.cs* )
-* 電影控制器 ( *Controllers/MoviesController.cs* )
-* Razor 查看建立、刪除、詳細資料、編輯和索引頁面的檔案 ( *Views/電影/ \* cshtml* ) 
+* Entity Framework Core [資料庫內容類別](xref:data/ef-mvc/intro#create-the-database-context) (*Data/MvcMovieContext.cs*)
+* 電影控制器 (*Controllers/MoviesController.cs*)
+* Razor 查看建立、刪除、詳細資料、編輯和索引頁面的檔案 (*Views/電影/ \* cshtml*) 
 
-自動建立資料庫內容與 [CRUD](https://wikipedia.org/wiki/Create,_read,_update_and_delete) (建立、讀取、更新和刪除) 動作方法和檢視稱為 *Scaffolding* 。
+自動建立資料庫內容與 [CRUD](https://wikipedia.org/wiki/Create,_read,_update_and_delete) (建立、讀取、更新和刪除) 動作方法和檢視稱為 *Scaffolding*。
 
-# <a name="visual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code)
+# <a name="visual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code) \(英文\)
 
 <!--  Until https://github.com/aspnet/Scaffolding/issues/582 is fixed windows needs backslash or the namespace is namespace RazorPagesMovie.Pages_Movies rather than namespace RazorPagesMovie.Pages.Movies
 -->
 
-* 在專案目錄 (包含 *Program.cs* 、 *Startup.cs* 和 *.csproj* 檔案的目錄) 中開啟一個命令視窗。
+* 在專案目錄 (包含 *Program.cs*、*Startup.cs* 和 *.csproj* 檔案的目錄) 中開啟一個命令視窗。
 * 安裝 Scaffolding 工具：
 
   ```dotnetcli
@@ -880,7 +888,7 @@ Visual Studio 會建立：
     export PATH=$HOME/.dotnet/tools:$PATH
   ```
 
-* 執行以下命令：
+* 執行下列命令：
 
   ```dotnetcli
    dotnet aspnet-codegenerator controller -name MoviesController -m Movie -dc MvcMovieContext --relativeFolderPath Controllers --useDefaultLayout --referenceScriptLibraries
@@ -892,14 +900,14 @@ Visual Studio 會建立：
 
 # <a name="visual-studio-for-mac"></a>[Visual Studio for Mac](#tab/visual-studio-mac)
 
-* 在專案目錄 (包含 *Program.cs* 、 *Startup.cs* 和 *.csproj* 檔案的目錄) 中開啟一個命令視窗。
+* 在專案目錄 (包含 *Program.cs*、*Startup.cs* 和 *.csproj* 檔案的目錄) 中開啟一個命令視窗。
 * 安裝 Scaffolding 工具：
 
   ```dotnetcli
    dotnet tool install --global dotnet-aspnet-codegenerator
    ```
 
-* 執行以下命令：
+* 執行下列命令：
 
   ```dotnetcli
    dotnet aspnet-codegenerator controller -name MoviesController -m Movie -dc MvcMovieContext --relativeFolderPath Controllers --useDefaultLayout --referenceScriptLibraries
@@ -948,7 +956,7 @@ Microsoft.Data.Sqlite.SqliteException.ThrowExceptionForRC(int rc, sqlite3 db)
 
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
-1. 從 [工具] 功能表中，選取 [NuGet 套件管理員] **[套件管理器主控台]** >  (PMC)。
+1. 從 [工具] 功能表中，選取 [NuGet 套件管理員]**[套件管理器主控台]** >  (PMC)。
 
    ![PMC 功能表](~/tutorials/first-mvc-app/adding-model/_static/pmc.png)
 
@@ -1082,7 +1090,7 @@ return View(movie);
 
 [!code-cshtml[](~/tutorials/first-mvc-app/start-mvc/sample/MvcMovie22/Views/Movies/DetailsOriginal.cshtml)]
 
-藉由在檢視檔案的最上方包含 `@model` 陳述式，您可以指定檢視預期要有的物件類型。 當您建立電影控制器時， *Details.cshtml* 檔案的最上方會自動包含下列 `@model` 陳述式：
+藉由在檢視檔案的最上方包含 `@model` 陳述式，您可以指定檢視預期要有的物件類型。 當您建立電影控制器時，*Details.cshtml* 檔案的最上方會自動包含下列 `@model` 陳述式：
 
 ```cshtml
 @model MvcMovie.Models.Movie

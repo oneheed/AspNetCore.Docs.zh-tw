@@ -3,7 +3,7 @@ title: 第3部分：將視圖新增至 ASP.NET Core MVC 應用程式
 author: rick-anderson
 description: ASP.NET Core MVC 之教學課程系列的第3部分。
 ms.author: riande
-ms.date: 8/04/2019
+ms.date: 11/16/2019
 no-loc:
 - appsettings.json
 - ASP.NET Core Identity
@@ -17,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: tutorials/first-mvc-app/adding-view
-ms.openlocfilehash: 56f39643ccd69c6508148374033208eb3b2f25ab
-ms.sourcegitcommit: 91e14f1e2a25c98a57c2217fe91b172e0ff2958c
+ms.openlocfilehash: ce2754d22b61578bdbe5e78a69e08bdc1e83190d
+ms.sourcegitcommit: fb208f907249cc7aab029afff941a0266c187050
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 11/10/2020
-ms.locfileid: "94422713"
+ms.lasthandoff: 11/17/2020
+ms.locfileid: "94688344"
 ---
 # <a name="part-3-add-a-view-to-an-aspnet-core-mvc-app"></a>第3部分：將視圖新增至 ASP.NET Core MVC 應用程式
 
@@ -44,7 +44,7 @@ ms.locfileid: "94422713"
 
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
-* 依序以滑鼠右鍵按一下 *Views* 資料夾、[新增] > [新增資料夾]，然後將資料夾命名為 *HelloWorld* 。
+* 依序以滑鼠右鍵按一下 *Views* 資料夾、[新增] > [新增資料夾]，然後將資料夾命名為 *HelloWorld*。
 
 * 依序以滑鼠右鍵按一下 *Views/HelloWorld* 資料夾、[新增] > [新增項目]。
 
@@ -54,31 +54,31 @@ ms.locfileid: "94422713"
 
   * 選取 **Razor 視圖**
 
-  * 保留 [名稱] 方塊值 *Index.cshtml* 。
+  * 保留 [名稱] 方塊值 *Index.cshtml*。
 
   * 選取 [新增]
 
 ![[新增項目] 對話方塊](adding-view/_static/add_view.png)
 
-# <a name="visual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code)
+# <a name="visual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code) \(英文\)
 
 為 `HelloWorldController` 新增 `Index` 檢視。
 
-* 新增資料夾，並命名為 *Views/HelloWorld* 。
-* 將檔案新增至 *Views/HelloWorld* 資料夾，並命名為 *Index.cshtml* 。
+* 新增資料夾，並命名為 *Views/HelloWorld*。
+* 將檔案新增至 *Views/HelloWorld* 資料夾，並命名為 *Index.cshtml*。
 
 # <a name="visual-studio-for-mac"></a>[Visual Studio for Mac](#tab/visual-studio-mac)
 
-* 依序以滑鼠右鍵按一下 *Views* 資料夾、[新增] > [新增資料夾]，然後將資料夾命名為 *HelloWorld* 。
+* 依序以滑鼠右鍵按一下 *Views* 資料夾、[新增] > [新增資料夾]，然後將資料夾命名為 *HelloWorld*。
 * 依序以滑鼠右鍵按一下 *Views/HelloWorld* 資料夾、[新增] > [新增檔案]。
 * 在 [新增檔案] 對話方塊中：
 
   * 選取左窗格中的 [ **ASP .Net Core** ]。
-  * 選取中央窗格中的 [ **MVC 視圖] 頁面** 。
-  * 在 [ **名稱** ] 方塊中輸入 *索引* 。
+  * 選取中央窗格中的 [ **Razor View** ]。
+  * 在 [**名稱**] 方塊中輸入 *索引*。
   * 選取 [新增]。
 
-![[新增項目] 對話方塊](adding-view/_static/add_view_mac.png)
+![[新增項目] 對話方塊](adding-view/_static/add_view_macVSM8.9.png)
 
 ---
 
@@ -92,9 +92,9 @@ ms.locfileid: "94422713"
 
 ## <a name="change-views-and-layout-pages"></a>變更檢視和版面配置頁
 
-選取功能表連結 ( **MvcMovie** 、 **Home** 和 **Privacy** )。 每個頁面會顯示相同的功能表配置。 功能表配置是在 *Views/Shared/_Layout.cshtml* 檔案中實作。 開啟 *Views/Shared/_Layout.cshtml* 檔案。
+選取功能表連結 (**MvcMovie**、**Home** 和 **Privacy**)。 每個頁面會顯示相同的功能表配置。 功能表配置是在 *Views/Shared/_Layout.cshtml* 檔案中實作。 開啟 *Views/Shared/_Layout.cshtml* 檔案。
 
-[版面配置](xref:mvc/views/layout)範本可讓您在某個位置指定網站的 HTML 容器配置，然後將它套用到網站中的多個頁面。 找到 `@RenderBody()` 這行。 `RenderBody` 是顯示您建立之所有檢視特定頁面的預留位置，「包裝」在版面配置頁中。 例如，如果您選取 **Privacy** 連結， **Views/Home/Privacy.cshtml** 檢視就會呈現在 `RenderBody` 方法內。
+[版面配置](xref:mvc/views/layout)範本可讓您在某個位置指定網站的 HTML 容器配置，然後將它套用到網站中的多個頁面。 找到 `@RenderBody()` 這行。 `RenderBody` 是顯示您建立之所有檢視特定頁面的預留位置，「包裝」在版面配置頁中。 例如，如果您選取 **Privacy** 連結，**Views/Home/Privacy.cshtml** 檢視就會呈現在 `RenderBody` 方法內。
 
 ## <a name="change-the-title-footer-and-menu-link-in-the-layout-file"></a>變更配置檔案中的標題、頁尾及功能表連結
 
@@ -121,13 +121,13 @@ ms.locfileid: "94422713"
 
 在上述標記中，由於此應用程式未使用[區域](xref:mvc/controllers/areas)，因此省略了 `asp-area=""` [錨點標籤協助程式屬性](xref:mvc/views/tag-helpers/builtin-th/anchor-tag-helper)和屬性值。
 
-**注意** ：尚未 `Movies` 執行控制器。 此時，`Movie App` 連結無法運作。
+**注意**：尚未 `Movies` 執行控制器。 此時，`Movie App` 連結無法運作。
 
-儲存您的變更並選取 **Privacy** 連結。 請注意，瀏覽器索引標籤上的標題會顯示 **Privacy Policy - Movie App** ，而不是 **Privacy Policy - Mvc Movie** ：
+儲存您的變更並選取 **Privacy** 連結。 請注意，瀏覽器索引標籤上的標題會顯示 **Privacy Policy - Movie App**，而不是 **Privacy Policy - Mvc Movie**：
 
 ![Privacy 索引標籤](~/tutorials/first-mvc-app/adding-view/_static/about2.png)
 
-選取 **Home** 連結，並注意標題和錨點文字也要顯示 **Movie App** 。 我們能夠在版面配置範本中一次進行變更，並讓網站上的所有頁面反映新的連結文字和新的標題。
+選取 **Home** 連結，並注意標題和錨點文字也要顯示 **Movie App**。 我們能夠在版面配置範本中一次進行變更，並讓網站上的所有頁面反映新的連結文字和新的標題。
 
 檢查 *Views/_ViewStart.cshtml* 檔案：
 
@@ -213,7 +213,7 @@ ms.locfileid: "94422713"
 
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
-* 依序以滑鼠右鍵按一下 *Views* 資料夾、[新增] > [新增資料夾]，然後將資料夾命名為 *HelloWorld* 。
+* 依序以滑鼠右鍵按一下 *Views* 資料夾、[新增] > [新增資料夾]，然後將資料夾命名為 *HelloWorld*。
 
 * 依序以滑鼠右鍵按一下 *Views/HelloWorld* 資料夾、[新增] > [新增項目]。
 
@@ -223,28 +223,28 @@ ms.locfileid: "94422713"
 
   * 選取 **Razor 視圖**
 
-  * 保留 [名稱] 方塊值 *Index.cshtml* 。
+  * 保留 [名稱] 方塊值 *Index.cshtml*。
 
   * 選取 [新增]
 
 ![[新增項目] 對話方塊](adding-view/_static/add_view.png)
 
-# <a name="visual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code)
+# <a name="visual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code) \(英文\)
 
 為 `HelloWorldController` 新增 `Index` 檢視。
 
-* 新增資料夾，並命名為 *Views/HelloWorld* 。
-* 將檔案新增至 *Views/HelloWorld* 資料夾，並命名為 *Index.cshtml* 。
+* 新增資料夾，並命名為 *Views/HelloWorld*。
+* 將檔案新增至 *Views/HelloWorld* 資料夾，並命名為 *Index.cshtml*。
 
 # <a name="visual-studio-for-mac"></a>[Visual Studio for Mac](#tab/visual-studio-mac)
 
-* 依序以滑鼠右鍵按一下 *Views* 資料夾、[新增] > [新增資料夾]，然後將資料夾命名為 *HelloWorld* 。
+* 依序以滑鼠右鍵按一下 *Views* 資料夾、[新增] > [新增資料夾]，然後將資料夾命名為 *HelloWorld*。
 * 依序以滑鼠右鍵按一下 *Views/HelloWorld* 資料夾、[新增] > [新增檔案]。
 * 在 [新增檔案] 對話方塊中：
 
   * 選取左窗格的 [Web]。
   * 選取中間窗格的 [空的 HTML 檔案]。
-  * 在 [名稱] 方塊中，鍵入 **Index.cshtml** 。
+  * 在 [名稱] 方塊中，鍵入 **Index.cshtml**。
   * 選取 [新增]。
 
 ![[新增項目] 對話方塊](adding-view/_static/add_view_mac.png)
@@ -261,9 +261,9 @@ ms.locfileid: "94422713"
 
 ## <a name="change-views-and-layout-pages"></a>變更檢視和版面配置頁
 
-選取功能表連結 ( **MvcMovie** 、 **Home** 和 **Privacy** )。 每個頁面會顯示相同的功能表配置。 功能表配置是在 *Views/Shared/_Layout.cshtml* 檔案中實作。 開啟 *Views/Shared/_Layout.cshtml* 檔案。
+選取功能表連結 (**MvcMovie**、**Home** 和 **Privacy**)。 每個頁面會顯示相同的功能表配置。 功能表配置是在 *Views/Shared/_Layout.cshtml* 檔案中實作。 開啟 *Views/Shared/_Layout.cshtml* 檔案。
 
-[版面配置](xref:mvc/views/layout)範本可讓您在某個位置指定網站的 HTML 容器配置，然後將它套用到網站中的多個頁面。 找到 `@RenderBody()` 這行。 `RenderBody` 是顯示您建立之所有檢視特定頁面的預留位置，「包裝」在版面配置頁中。 例如，如果您選取 **Privacy** 連結， **Views/Home/Privacy.cshtml** 檢視就會呈現在 `RenderBody` 方法內。
+[版面配置](xref:mvc/views/layout)範本可讓您在某個位置指定網站的 HTML 容器配置，然後將它套用到網站中的多個頁面。 找到 `@RenderBody()` 這行。 `RenderBody` 是顯示您建立之所有檢視特定頁面的預留位置，「包裝」在版面配置頁中。 例如，如果您選取 **Privacy** 連結，**Views/Home/Privacy.cshtml** 檢視就會呈現在 `RenderBody` 方法內。
 
 ## <a name="change-the-title-footer-and-menu-link-in-the-layout-file"></a>變更配置檔案中的標題、頁尾及功能表連結
 
@@ -281,13 +281,13 @@ ms.locfileid: "94422713"
 > We haven't implemented the `Movies` controller yet, so if you click the `Movie App` link, you get a 404 (Not found) error.
 -->
 
-**注意** ：尚未 `Movies` 執行控制器。 此時，`Movie App` 連結無法運作。
+**注意**：尚未 `Movies` 執行控制器。 此時，`Movie App` 連結無法運作。
 
-儲存您的變更並選取 **Privacy** 連結。 請注意，瀏覽器索引標籤上的標題會顯示 **Privacy Policy - Movie App** ，而不是 **Privacy Policy - Mvc Movie** ：
+儲存您的變更並選取 **Privacy** 連結。 請注意，瀏覽器索引標籤上的標題會顯示 **Privacy Policy - Movie App**，而不是 **Privacy Policy - Mvc Movie**：
 
 ![Privacy 索引標籤](~/tutorials/first-mvc-app/adding-view/_static/about2.png)
 
-選取 **Home** 連結，並注意標題和錨點文字也要顯示 **Movie App** 。 我們能夠在版面配置範本中一次進行變更，並讓網站上的所有頁面反映新的連結文字和新的標題。
+選取 **Home** 連結，並注意標題和錨點文字也要顯示 **Movie App**。 我們能夠在版面配置範本中一次進行變更，並讓網站上的所有頁面反映新的連結文字和新的標題。
 
 檢查 *Views/_ViewStart.cshtml* 檔案：
 
@@ -313,7 +313,7 @@ ms.locfileid: "94422713"
 
 儲存變更並巡覽至 `https://localhost:{PORT}/HelloWorld`。 請注意，瀏覽器標題、主要標題和次要標題已變更 (如果您在瀏覽器中沒有看到變更，可能檢視的是快取的內容。 在您的瀏覽器中按 Ctrl + F5，以強制載入來自伺服器的回應。 ) 瀏覽器標題是使用 `ViewData["Title"]` 我們在 *Index. cshtml* view 範本中設定的，以及在版面配置檔案中新增的其他 "-Movie App" 所建立。
 
-同時也請注意， *Index.cshtml* 檢視範本中的內容如何與 *Views/Shared/_Layout.cshtml* 檢視範本和已傳送至瀏覽器的單一 HTML 回應合併。 版面配置範本可讓您輕鬆進行會套用到應用程式之所有頁面的變更。 若要深入瞭解，請參閱 [版面](xref:mvc/views/layout)配置。
+同時也請注意，*Index.cshtml* 檢視範本中的內容如何與 *Views/Shared/_Layout.cshtml* 檢視範本和已傳送至瀏覽器的單一 HTML 回應合併。 版面配置範本可讓您輕鬆進行會套用到應用程式之所有頁面的變更。 若要深入瞭解，請參閱 [版面](xref:mvc/views/layout)配置。
 
 ![電影清單檢視](~/tutorials/first-mvc-app/adding-view/_static/hell3.png)
 

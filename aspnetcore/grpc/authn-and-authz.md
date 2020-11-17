@@ -18,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: grpc/authn-and-authz
-ms.openlocfilehash: 2efed6b76228227f032482346a36f528b3448de2
-ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
+ms.openlocfilehash: 833114a12c8c1ac67097b3592cf410d7a69bb628
+ms.sourcegitcommit: bce62ceaac7782e22d185814f2e8532c84efa472
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 10/30/2020
-ms.locfileid: "93053562"
+ms.lasthandoff: 11/17/2020
+ms.locfileid: "94673974"
 ---
 # <a name="authentication-and-authorization-in-grpc-for-aspnet-core"></a>GRPC 中的驗證和授權 ASP.NET Core
 
@@ -76,7 +76,7 @@ public override Task<BuyTicketsResponse> BuyTickets(
 
 在伺服器上，會使用 [JWT 持有人中介軟體](/dotnet/api/microsoft.extensions.dependencyinjection.jwtbearerextensions.addjwtbearer)來設定持有人權杖驗證。
 
-在 .NET gRPC 用戶端中，您可以使用呼叫來傳送權杖作為標頭：
+在 .NET gRPC 用戶端中，您可以使用集合以呼叫傳送權杖 `Metadata` 。 集合中的專案 `Metadata` 會以 gRPC 呼叫作為 HTTP 標頭來傳送：
 
 ```csharp
 public bool DoAuthenticatedCall(
@@ -92,7 +92,9 @@ public bool DoAuthenticatedCall(
 }
 ```
 
-`ChannelCredentials`在通道上設定是使用 gRPC 呼叫將權杖傳送給服務的另一種方式。 每次進行 gRPC 呼叫時，都會執行此認證，這樣可避免需要在多個位置撰寫程式碼來自行傳遞權杖。
+`ChannelCredentials`在通道上設定是使用 gRPC 呼叫將權杖傳送給服務的另一種方式。 `ChannelCredentials`可以包含 `CallCredentials` ，以提供自動設定的方式 `Metadata` 。
+
+`CallCredentials` 會在每次進行 gRPC 呼叫時執行，這樣可避免需要在多個位置撰寫程式碼來自行傳遞權杖。 請注意， `CallCredentials` 只有在使用 TLS 保護通道時，才會套用。 `CallCredentials` 不會套用到不安全的非 TLS 通道。
 
 下列範例中的認證會設定通道，以使用每個 gRPC 呼叫來傳送權杖：
 

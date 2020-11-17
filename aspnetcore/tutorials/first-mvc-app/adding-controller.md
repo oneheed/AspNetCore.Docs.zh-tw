@@ -3,7 +3,7 @@ title: 第2部分：將控制器新增至 ASP.NET Core MVC 應用程式
 author: rick-anderson
 description: ASP.NET Core MVC 之教學課程系列的第2部分。
 ms.author: riande
-ms.date: 08/05/2017
+ms.date: 11/12/2020
 no-loc:
 - appsettings.json
 - ASP.NET Core Identity
@@ -17,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: tutorials/first-mvc-app/adding-controller
-ms.openlocfilehash: 1851a61441ed351442f86939022319ad59d10006
-ms.sourcegitcommit: 91e14f1e2a25c98a57c2217fe91b172e0ff2958c
+ms.openlocfilehash: e51edc15b14a5bdd1d53e547e0b469ad608f46d0
+ms.sourcegitcommit: fb208f907249cc7aab029afff941a0266c187050
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 11/10/2020
-ms.locfileid: "94422613"
+ms.lasthandoff: 11/17/2020
+ms.locfileid: "94688399"
 ---
 # <a name="part-2-add-a-controller-to-an-aspnet-core-mvc-app"></a>第2部分：將控制器新增至 ASP.NET Core MVC 應用程式
 
@@ -30,13 +30,13 @@ ms.locfileid: "94422613"
 
 ::: moniker range=">= aspnetcore-3.0"
 
-模型檢視控制器 (MVC) 架構模式可將一個應用程式劃分成三個主要元件：模型 ( **M** )、檢視 ( **V** ) 和控制器 ( **C** )。 MVC 模式可協助您建立比傳統整合型應用程式更可測試且更易於更新的應用程式。 MVC 架構的應用程式包含：
+模型檢視控制器 (MVC) 架構模式可將一個應用程式劃分成三個主要元件：模型 (**M**)、檢視 (**V**) 和控制器 (**C**)。 MVC 模式可協助您建立比傳統整合型應用程式更可測試且更易於更新的應用程式。 MVC 架構的應用程式包含：
 
-* 模型 ( **M** )：代表應用程式資料的類別。 模型類別使用驗證邏輯對該資料強制執行商務規則。 通常，模型物件會在資料庫中擷取並儲存模型狀態。 在本教學課程中，`Movie` 模型會從資料庫擷取電影資料，將其提供給檢視或更新它。 更新的資料會寫入資料庫。
+* 模型 (**M**)：代表應用程式資料的類別。 模型類別使用驗證邏輯對該資料強制執行商務規則。 通常，模型物件會在資料庫中擷取並儲存模型狀態。 在本教學課程中，`Movie` 模型會從資料庫擷取電影資料，將其提供給檢視或更新它。 更新的資料會寫入資料庫。
 
-* 檢視 ( **V** )：檢視是顯示應用程式之使用者介面 (UI) 的元件。 一般而言，此 UI 會顯示模型資料。
+* 檢視 (**V**)：檢視是顯示應用程式之使用者介面 (UI) 的元件。 一般而言，此 UI 會顯示模型資料。
 
-* 控制器 ( **C** )：處理瀏覽器要求的類別。 它們會擷取模型資料，並呼叫傳回回應的檢視範本。 在 MVC 應用程式中，檢視只能顯示資訊；控制器則會處理和回應使用者輸入和互動。 例如，控制器會處理路由資料和查詢字串值，並將這些值傳遞至模型。 此模型可能會使用這些值來查詢資料庫。 例如，`https://localhost:5001/Home/Privacy` 具有 `Home` (控制器) 和 `Privacy` (在首頁控制器上呼叫的動作方法) 的路由資料。 `https://localhost:5001/Movies/Edit/5` 是要使用電影控制器編輯識別碼 = 5 之電影的要求。 本教學課程稍後會說明路由資料。
+* 控制器 (**C**)：處理瀏覽器要求的類別。 它們會擷取模型資料，並呼叫傳回回應的檢視範本。 在 MVC 應用程式中，檢視只能顯示資訊；控制器則會處理和回應使用者輸入和互動。 例如，控制器會處理路由資料和查詢字串值，並將這些值傳遞至模型。 此模型可能會使用這些值來查詢資料庫。 例如，`https://localhost:5001/Home/Privacy` 具有 `Home` (控制器) 和 `Privacy` (在首頁控制器上呼叫的動作方法) 的路由資料。 `https://localhost:5001/Movies/Edit/5` 是要使用電影控制器編輯識別碼 = 5 之電影的要求。 本教學課程稍後會說明路由資料。
 
 MVC 模式可協助您建立應用程式，用來隔離應用程的不同層面 (輸入邏輯、商務邏輯和 UI 邏輯)，同時提供這些項目之間的鬆散結合。 此模式指定每一種邏輯應該位於應用程式中的位置。 UI 邏輯位於檢視。 輸入邏輯位於控制器。 商務邏輯則位於模型。 這項隔離可協助您管理建置應用程式時的複雜度，因為它可讓您一次處理實作的其中一個層面，而不影響另一個層面的程式碼。 例如，您可以處理檢視程式碼，而不需要根據商務邏輯程式碼。
 
@@ -46,29 +46,29 @@ MVC 模式可協助您建立應用程式，用來隔離應用程的不同層面 
 
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
-* 在 **方案總管** 中，以滑鼠右鍵按一下 [ **控制器] > 新增 > 控制器** 
-   ![ 方案總管，以滑鼠右鍵按一下 [控制器] > 新增 > 控制器](~/tutorials/first-mvc-app/adding-controller/_static/add_controllerCopy.png)
+* 在 **方案總管** 中，以滑鼠右鍵按一下 [**控制器] > 新增 > 控制器** 
+   ![ 方案總管，以滑鼠右鍵按一下 [控制器] > 新增 > 控制器](~/tutorials/first-mvc-app/adding-controller/_static/add_controllercopyVS19v16.9.png)
 
 * 在 [新增 Scaffold] 對話方塊中，選取 [MVC 控制器 - 空白]
 
-  ![新增 MVC 控制器並將其命名](~/tutorials/first-mvc-app/adding-controller/_static/acCopy.png)
+  ![新增 MVC 控制器並將其命名](~/tutorials/first-mvc-app/adding-controller/_static/acCopyVS19v16.9.png)
 
-* 在 [Add Empty MVC Controller] \(新增空白 MVC 控制器\) 對話方塊中，輸入 **HelloWorldController** ，然後選取 [新增]。
+* 在 [ **加入新專案-MvcMovie] 對話方塊** 中，輸入 **HelloWorldController.cs** ，然後選取 [ **加入**]。
 
-# <a name="visual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code)
+# <a name="visual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code) \(英文\)
 
-選取 **總管** 圖示，然後 Control+按一下 (按一下滑鼠右鍵) [控制器] > [新增檔案]，將新檔案命名為 *HelloWorldController.cs* 。
+選取 **總管** 圖示，然後 Control+按一下 (按一下滑鼠右鍵) [控制器] > [新增檔案]，將新檔案命名為 *HelloWorldController.cs*。
 
-  ![操作功能表](~/tutorials/first-mvc-app-xplat/adding-controller/_static/new_file.png)
+  ![操作功能表](~/tutorials/first-mvc-app-xplat/adding-controller/_static/new_fileVSC1.51.png)
 
 # <a name="visual-studio-for-mac"></a>[Visual Studio for Mac](#tab/visual-studio-mac)
 
 在方案總管中，以滑鼠右鍵按一下 [控制器] > [新增] > [新增檔案]。
 ![操作功能表](~/tutorials/first-mvc-app-mac/adding-controller/_static/add_controller.png)
 
-選取 **ASP.NET Core** 和 **控制器類別** 。
+選取 **ASP.NET Core** 和 **控制器類別**。
 
-將控制器命名為 **HelloWorldController** 。
+將控制器命名為 **HelloWorldController**。
 
 ![新增 MVC 控制器並將其命名](~/tutorials/first-mvc-app-mac/adding-controller/_static/ac.png)
 
@@ -104,7 +104,7 @@ MVC 會根據傳入 URL 叫用控制器類別 (和其中的動作方法)。 MVC 
 
 ![顯示應用程式回應 "This is the Welcome action method" 的瀏覽器視窗](~/tutorials/first-mvc-app/adding-controller/_static/welcome.png)
 
-修改程式碼 ，將 URL 中的某些參數資訊傳遞到控制器。 例如：`/HelloWorld/Welcome?name=Rick&numtimes=4`。 變更 `Welcome` 方法以包含兩個參數，如下列程式碼所示。
+修改程式碼 ，將 URL 中的某些參數資訊傳遞到控制器。 例如 `/HelloWorld/Welcome?name=Rick&numtimes=4`。 變更 `Welcome` 方法以包含兩個參數，如下列程式碼所示。
 
 [!code-csharp[](~/tutorials/first-mvc-app/start-mvc/sample/MvcMovie/Controllers/HelloWorldController.cs?name=snippet_2)]
 
@@ -144,13 +144,13 @@ MVC 會根據傳入 URL 叫用控制器類別 (和其中的動作方法)。 MVC 
 
 ::: moniker range="< aspnetcore-3.0"
 
-模型檢視控制器 (MVC) 架構模式可將一個應用程式劃分成三個主要元件：模型 ( **M** )、檢視 ( **V** ) 和控制器 ( **C** )。 MVC 模式可協助您建立比傳統整合型應用程式更可測試且更易於更新的應用程式。 MVC 架構的應用程式包含：
+模型檢視控制器 (MVC) 架構模式可將一個應用程式劃分成三個主要元件：模型 (**M**)、檢視 (**V**) 和控制器 (**C**)。 MVC 模式可協助您建立比傳統整合型應用程式更可測試且更易於更新的應用程式。 MVC 架構的應用程式包含：
 
-* 模型 ( **M** )：代表應用程式資料的類別。 模型類別使用驗證邏輯對該資料強制執行商務規則。 通常，模型物件會在資料庫中擷取並儲存模型狀態。 在本教學課程中，`Movie` 模型會從資料庫擷取電影資料，將其提供給檢視或更新它。 更新的資料會寫入資料庫。
+* 模型 (**M**)：代表應用程式資料的類別。 模型類別使用驗證邏輯對該資料強制執行商務規則。 通常，模型物件會在資料庫中擷取並儲存模型狀態。 在本教學課程中，`Movie` 模型會從資料庫擷取電影資料，將其提供給檢視或更新它。 更新的資料會寫入資料庫。
 
-* 檢視 ( **V** )：檢視是顯示應用程式之使用者介面 (UI) 的元件。 一般而言，此 UI 會顯示模型資料。
+* 檢視 (**V**)：檢視是顯示應用程式之使用者介面 (UI) 的元件。 一般而言，此 UI 會顯示模型資料。
 
-* 控制器 ( **C** )：處理瀏覽器要求的類別。 它們會擷取模型資料，並呼叫傳回回應的檢視範本。 在 MVC 應用程式中，檢視只能顯示資訊；控制器則會處理和回應使用者輸入和互動。 例如，控制器會處理路由資料和查詢字串值，並將這些值傳遞至模型。 此模型可能會使用這些值來查詢資料庫。 例如，`https://localhost:5001/Home/About` 具有 `Home` (控制器) 和 `About` (在首頁控制器上呼叫的動作方法) 的路由資料。 `https://localhost:5001/Movies/Edit/5` 是要使用電影控制器編輯識別碼 = 5 之電影的要求。 本教學課程稍後會說明路由資料。
+* 控制器 (**C**)：處理瀏覽器要求的類別。 它們會擷取模型資料，並呼叫傳回回應的檢視範本。 在 MVC 應用程式中，檢視只能顯示資訊；控制器則會處理和回應使用者輸入和互動。 例如，控制器會處理路由資料和查詢字串值，並將這些值傳遞至模型。 此模型可能會使用這些值來查詢資料庫。 例如，`https://localhost:5001/Home/About` 具有 `Home` (控制器) 和 `About` (在首頁控制器上呼叫的動作方法) 的路由資料。 `https://localhost:5001/Movies/Edit/5` 是要使用電影控制器編輯識別碼 = 5 之電影的要求。 本教學課程稍後會說明路由資料。
 
 MVC 模式可協助您建立應用程式，用來隔離應用程的不同層面 (輸入邏輯、商務邏輯和 UI 邏輯)，同時提供這些項目之間的鬆散結合。 此模式指定每一種邏輯應該位於應用程式中的位置。 UI 邏輯位於檢視。 輸入邏輯位於控制器。 商務邏輯則位於模型。 這項隔離可協助您管理建置應用程式時的複雜度，因為它可讓您一次處理實作的其中一個層面，而不影響另一個層面的程式碼。 例如，您可以處理檢視程式碼，而不需要根據商務邏輯程式碼。
 
@@ -160,18 +160,18 @@ MVC 模式可協助您建立應用程式，用來隔離應用程的不同層面 
 
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
-* 在 **方案總管** 中，以滑鼠右鍵按一下 [ **控制器] > 新增 > 控制器** 操作 
+* 在 **方案總管** 中，以滑鼠右鍵按一下 [**控制器] > 新增 > 控制器** 操作 
    ![ 功能表](~/tutorials/first-mvc-app/adding-controller/_static/add_controller.png)
 
 * 在 [新增 Scaffold] 對話方塊中，選取 [MVC 控制器 - 空白]
 
   ![新增 MVC 控制器並將其命名](~/tutorials/first-mvc-app/adding-controller/_static/ac.png)
 
-* 在 [Add Empty MVC Controller] \(新增空白 MVC 控制器\) 對話方塊中，輸入 **HelloWorldController** ，然後選取 [新增]。
+* 在 [Add Empty MVC Controller] \(新增空白 MVC 控制器\) 對話方塊中，輸入 **HelloWorldController**，然後選取 [新增]。
 
-# <a name="visual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code)
+# <a name="visual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code) \(英文\)
 
-選取 **總管** 圖示，然後 Control+按一下 (按一下滑鼠右鍵) [控制器] > [新增檔案]，將新檔案命名為 *HelloWorldController.cs* 。
+選取 **總管** 圖示，然後 Control+按一下 (按一下滑鼠右鍵) [控制器] > [新增檔案]，將新檔案命名為 *HelloWorldController.cs*。
 
   ![操作功能表](~/tutorials/first-mvc-app-xplat/adding-controller/_static/new_file.png)
 
@@ -182,7 +182,7 @@ MVC 模式可協助您建立應用程式，用來隔離應用程的不同層面 
 
 選取 [ASP.NET Core] 和 [MVC 控制器類別]。
 
-將控制器命名為 **HelloWorldController** 。
+將控制器命名為 **HelloWorldController**。
 
 ![新增 MVC 控制器並將其命名](~/tutorials/first-mvc-app-mac/adding-controller/_static/ac.png)
 
@@ -223,7 +223,7 @@ Remove link for simplified tutorial.
 
 ![顯示應用程式回應 "This is the Welcome action method" 的瀏覽器視窗](~/tutorials/first-mvc-app/adding-controller/_static/welcome.png)
 
-修改程式碼 ，將 URL 中的某些參數資訊傳遞到控制器。 例如：`/HelloWorld/Welcome?name=Rick&numtimes=4`。 變更 `Welcome` 方法以包含兩個參數，如下列程式碼所示。
+修改程式碼 ，將 URL 中的某些參數資訊傳遞到控制器。 例如 `/HelloWorld/Welcome?name=Rick&numtimes=4`。 變更 `Welcome` 方法以包含兩個參數，如下列程式碼所示。
 
 [!code-csharp[](~/tutorials/first-mvc-app/start-mvc/sample/MvcMovie/Controllers/HelloWorldController.cs?name=snippet_2)]
 

@@ -19,12 +19,12 @@ no-loc:
 - SignalR
 ms.date: 10/27/2020
 uid: blazor/file-uploads
-ms.openlocfilehash: ca49564136e030fdaf86eefac56146fcb79f7bad
-ms.sourcegitcommit: bce62ceaac7782e22d185814f2e8532c84efa472
+ms.openlocfilehash: 77c2874eef788b8083758c087913a7a04c55fa2b
+ms.sourcegitcommit: 54fdca99f30b18d69cf0753ca3c84c7dab8f2b0e
 ms.translationtype: MT
 ms.contentlocale: zh-TW
 ms.lasthandoff: 11/17/2020
-ms.locfileid: "94673948"
+ms.locfileid: "94691166"
 ---
 # <a name="aspnet-core-no-locblazor-file-uploads"></a>ASP.NET Core 檔案上 Blazor 傳
 
@@ -53,6 +53,9 @@ ms.locfileid: "94673948"
 
 下列範例示範如何在元件中上傳多個影像檔案。 `InputFileChangeEventArgs.GetMultipleFiles` 允許讀取多個檔案。 指定您預期要讀取的檔案數目上限，以防止惡意使用者上傳超過應用程式所預期的檔案數目。 `InputFileChangeEventArgs.File` 如果檔案上傳不支援多個檔案，則允許讀取第一個和唯一的檔案。
 
+> [!NOTE]
+> <xref:Microsoft.AspNetCore.Components.Forms.InputFileChangeEventArgs> 位於 <xref:Microsoft.AspNetCore.Components.Forms?displayProperty=fullName> 命名空間中，這通常是應用程式檔案中的其中一個命名空間 `_Imports.razor` 。
+
 ```razor
 <h3>Upload PNG images</h3>
 
@@ -75,7 +78,7 @@ ms.locfileid: "94673948"
 }
 
 @code {
-    IList<string> imageDataUrls = new List<string>();
+    private IList<string> imageDataUrls = new List<string>();
 
     private async Task OnInputFileChange(InputFileChangeEventArgs e)
     {

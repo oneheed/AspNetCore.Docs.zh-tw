@@ -5,7 +5,7 @@ description: 瞭解如何在應用程式和 NavLink 元件之間路由傳送要�
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 09/02/2020
+ms.date: 11/17/2020
 no-loc:
 - appsettings.json
 - ASP.NET Core Identity
@@ -19,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/fundamentals/routing
-ms.openlocfilehash: 585b697aedf31bce2305df0ec5f84824c4019156
-ms.sourcegitcommit: e087b6a38e3d38625ebb567a973e75b4d79547b9
+ms.openlocfilehash: c4da8bf8447618c9a7a2d0f690164fe48a7ed006
+ms.sourcegitcommit: 8b867c4cb0c3b39bbc4d2d87815610d2ef858ae7
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 11/15/2020
-ms.locfileid: "94637687"
+ms.lasthandoff: 11/17/2020
+ms.locfileid: "94703692"
 ---
 # <a name="aspnet-core-no-locblazor-routing"></a>ASP.NET Core Blazor 路由
 
@@ -159,6 +159,15 @@ Blazor Server 已整合至 [ASP.NET Core 端點路由](xref:fundamentals/routing
 
 ::: moniker-end
 
+使用 on [`OnParametersSet`](xref:blazor/components/lifecycle#after-parameters-are-set) （而不是） [`OnInitialized`](xref:blazor/components/lifecycle#component-initialization-methods) 允許使用不同的選擇性參數值，將應用程式流覽至相同的元件。 根據上述範例， `OnParametersSet` 當使用者應該要能夠從移至或移至時，請使用 `/RouteParameter` `/RouteParameter/awesome` `/RouteParameter/awesome` `/RouteParameter` ：
+
+```csharp
+protected override void OnParametersSet()
+{
+    Text = Text ?? "fantastic";
+}
+```
+
 ## <a name="route-constraints"></a>路由條件約束
 
 路由條件約束會強制將路由區段上的類型比對至元件。
@@ -264,7 +273,7 @@ ASP.NET Core 5.0 或更新版本中支援 Catch-all 路由參數。
 有兩個 <xref:Microsoft.AspNetCore.Components.Routing.NavLinkMatch> 選項可供您指派給 `Match` 元素的屬性 `<NavLink>` ：
 
 * <xref:Microsoft.AspNetCore.Components.Routing.NavLinkMatch.All?displayProperty=nameWithType>： <xref:Microsoft.AspNetCore.Components.Routing.NavLink> 當符合整個目前的 URL 時，會處於作用中狀態。
-* <xref:Microsoft.AspNetCore.Components.Routing.NavLinkMatch.Prefix?displayProperty=nameWithType> ( *預設* ) ： <xref:Microsoft.AspNetCore.Components.Routing.NavLink> 當它符合目前 URL 的任何前置詞時，就會處於作用中狀態。
+* <xref:Microsoft.AspNetCore.Components.Routing.NavLinkMatch.Prefix?displayProperty=nameWithType> (*預設*) ： <xref:Microsoft.AspNetCore.Components.Routing.NavLink> 當它符合目前 URL 的任何前置詞時，就會處於作用中狀態。
 
 在上述範例中，Home 會 <xref:Microsoft.AspNetCore.Components.Routing.NavLink> `href=""` 符合 home URL，而且只會 `active` 在應用程式的預設基底路徑 URL 上接收 CSS 類別 (例如 `https://localhost:5001/`) 。 第二個會在 <xref:Microsoft.AspNetCore.Components.Routing.NavLink> `active` 使用者造訪具有前置詞 (的任何 URL 時收到類別 `MyComponent` ，例如， `https://localhost:5001/MyComponent` 以及 `https://localhost:5001/MyComponent/AnotherSegment`) 。
 

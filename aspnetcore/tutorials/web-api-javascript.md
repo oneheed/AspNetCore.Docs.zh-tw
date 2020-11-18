@@ -18,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: tutorials/web-api-javascript
-ms.openlocfilehash: 4a80e3e82a18e0066c7628c8f40401155538e32b
-ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
+ms.openlocfilehash: c32c5befe0be3b1ad4bd87649d3cc74b0296a134
+ms.sourcegitcommit: 8b867c4cb0c3b39bbc4d2d87815610d2ef858ae7
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 10/30/2020
-ms.locfileid: "93061193"
+ms.lasthandoff: 11/17/2020
+ms.locfileid: "94703705"
 ---
 # <a name="tutorial-call-an-aspnet-core-web-api-with-javascript"></a>教學課程：使用 JavaScript 呼叫 ASP.NET Core web API
 
@@ -39,7 +39,7 @@ ms.locfileid: "93061193"
 
 ::: moniker range=">= aspnetcore-3.0"
 
-## <a name="prerequisites"></a>必要條件
+## <a name="prerequisites"></a>先決條件
 
 * 完成 [教學課程：建立 WEB API](xref:tutorials/first-web-api)
 * 熟悉 CSS、HTML 和 JavaScript
@@ -64,13 +64,17 @@ ms.locfileid: "93061193"
 
     [!code-html[](first-web-api/samples/3.0/TodoApi/wwwroot/index.html)]
 
+1. 將名為 *site .css* 的 css 檔案新增至 *wwwroot/CSS* 資料夾。 以下列樣式取代 *網站* 的內容：
+
+    [!code-css[](first-web-api/samples/3.0/TodoApi/wwwroot/css/site.css)]
+
 1. 將名為 *site.js* 的 JavaScript 檔案新增至 *wwwroot/js* 資料夾。 以下列程式碼取代 *site.js* 的內容：
 
     [!code-javascript[](first-web-api/samples/3.0/TodoApi/wwwroot/js/site.js?name=snippet_SiteJs)]
 
 若要在本機測試 HTML 網頁，可能需要變更 ASP.NET Core 專案的啟動設定：
 
-1. 開啟 *Properties\launchSettings.json* 。
+1. 開啟 *Properties\launchSettings.json*。
 1. 移除 `launchUrl` 屬性，以強制在專案的預設檔案 *index.html* 開啟應用程式 &mdash; 。
 
 此範例會呼叫 Web API 的所有 CRUD 方法。 以下是關於 Web API 要求的說明。
@@ -81,7 +85,7 @@ ms.locfileid: "93061193"
 
 [!code-javascript[](first-web-api/samples/3.0/TodoApi/wwwroot/js/site.js?name=snippet_GetItems)]
 
-當 Web API 傳回成功狀態碼時，會叫用 `_displayItems` 函式。 `_displayItems` 所接受之陣列參數中的每個待辦事項，都會加入具有 [編輯]  和 [刪除]  按鈕的表格。 如果 Web API 要求失敗，則會在瀏覽器的主控台中記錄錯誤。
+當 Web API 傳回成功狀態碼時，會叫用 `_displayItems` 函式。 `_displayItems` 所接受之陣列參數中的每個待辦事項，都會加入具有 [編輯] 和 [刪除] 按鈕的表格。 如果 Web API 要求失敗，則會在瀏覽器的主控台中記錄錯誤。
 
 ### <a name="add-a-to-do-item"></a>新增待辦事項
 
@@ -102,7 +106,7 @@ ms.locfileid: "93061193"
 
 更新待辦事項類似於新增待辦事項；不過，有兩個重大差異：
 
-* 路由的尾碼為要更新之項目的唯一識別碼。 例如， *api/TodoItems/1* 。
+* 路由的尾碼為要更新之項目的唯一識別碼。 例如，*api/TodoItems/1*。
 * HTTP 動作動詞命令是 PUT，如 `method` 選項所指示。
 
 [!code-javascript[](first-web-api/samples/3.0/TodoApi/wwwroot/js/site.js?name=snippet_UpdateItem)]

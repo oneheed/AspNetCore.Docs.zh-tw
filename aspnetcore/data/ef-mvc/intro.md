@@ -19,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: data/ef-mvc/intro
-ms.openlocfilehash: 428320f9d706b0dd16ced68d183ec4b331451965
-ms.sourcegitcommit: 202144092067ea81be1dbb229329518d781dbdfb
+ms.openlocfilehash: c0623de3c8031b6dbb518a6d25623b55a6500af5
+ms.sourcegitcommit: 8b867c4cb0c3b39bbc4d2d87815610d2ef858ae7
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 11/12/2020
-ms.locfileid: "94550643"
+ms.lasthandoff: 11/17/2020
+ms.locfileid: "94703731"
 ---
 # <a name="tutorial-get-started-with-ef-core-in-an-aspnet-mvc-web-app"></a>教學課程：開始使用 ASP.NET MVC web 應用程式中的 EF Core
 
@@ -38,7 +38,7 @@ Contoso 大學範例 web 應用程式示範如何使用 Entity Framework (EF) Co
 
 這個範例應用程式是虛構的 Contoso 大學網站。 其中包括的功能有學生入學許可、課程建立、教師指派。 這是一系列教學課程中的第一篇，說明如何建立 Contoso 大學範例應用程式。
 
-## <a name="prerequisites"></a>Prerequisites
+## <a name="prerequisites"></a>先決條件
 
 * 如果您是 ASP.NET Core MVC 的新手，請先完成 [ASP.NET CORE mvc](xref:tutorials/first-mvc-app/start-mvc) 教學課程系列的「開始使用」，再開始這一系列。
 
@@ -74,12 +74,12 @@ If you choose to use SQLite, download and install a third-party tool for managin
 ## <a name="create-web-app"></a>建立 Web 應用程式
 
 1. 啟動 Visual Studio，然後選取 [建立新專案]。
-1. 在 [ **建立新專案** ] 對話方塊中，選取 [ **ASP.NET Core Web 應用程式** > **]** 。
-1. 在 [ **設定您的新專案** ] 對話方塊中，輸入 [ `ContosoUniversity` **專案名稱** ]。 請務必使用此完整名稱（包括大小寫），以便 `namespace` 在複製程式碼時使用每個相符專案。
+1. 在 [ **建立新專案** ] 對話方塊中，選取 [ **ASP.NET Core Web 應用程式** > **]**。
+1. 在 [ **設定您的新專案** ] 對話方塊中，輸入 [ `ContosoUniversity` **專案名稱**]。 請務必使用此完整名稱（包括大小寫），以便 `namespace` 在複製程式碼時使用每個相符專案。
 1. 選取 [建立]。
 1. 在 [ **建立新的 ASP.NET Core web 應用程式** ] 對話方塊中，選取：
     1. 下拉式清單中的 **.Net Core** 和 **ASP.NET Core 5.0** 。
-    1. **ASP.NET Core Web 應用程式 (模型-視圖控制器)** 。
+    1. **ASP.NET Core Web 應用程式 (模型-視圖控制器)**。
     1. **Create** 
        建立 ![新增 ASP.NET Core 專案對話方塊](~/data/ef-mvc/intro/_static/new-aspnet5.png)
 
@@ -90,7 +90,7 @@ If you choose to use SQLite, download and install a third-party tool for managin
 開啟 *Views/Shared/_Layout.cshtml* 並進行下列變更：
 
 * 將每個出現的變更 `ContosoUniversity` 為 `Contoso University` 。 共有三個發生次數。
-* 為 **About** 、 **Students** 、 **Courses** 、 **Instructors** 及 **Departments** 新增功能表項目，並刪除 **Privacy** 功能表項目。
+* 為 **About**、**Students**、**Courses**、**Instructors** 及 **Departments** 新增功能表項目，並刪除 **Privacy** 功能表項目。
 
 上述變更會在下列程式碼中反白顯示：
 
@@ -110,7 +110,7 @@ If you choose to use SQLite, download and install a third-party tool for managin
 
 EF SQL Server 套件及其相依性， `Microsoft.EntityFrameworkCore` 以及 `Microsoft.EntityFrameworkCore.Relational` 提供 ef 的執行時間支援。
 
-新增 [AspNetCore Microsoft.entityframeworkcore](https://www.nuget.org/packages/Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore) nuget 套件和 [AspNetCore. microsoft.entityframeworkcore](https://www.nuget.org/packages/Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore) nuget 套件中的程式。 在 [Program Manager 主控台] (PMC) 中，輸入下列命令以新增 NuGet 套件：
+新增 [AspNetCore Microsoft.entityframeworkcore](https://www.nuget.org/packages/Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore) nuget 套件和 [AspNetCore. microsoft.entityframeworkcore](https://www.nuget.org/packages/Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore) nuget 套件中的程式。 在封裝管理員主控台中 (PMC) 上，輸入下列命令以新增 NuGet 套件：
 
 ```powershell
 Install-Package Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore
@@ -142,7 +142,7 @@ Install-Package Microsoft.EntityFrameworkCore.SqlServer
 
 [!code-csharp[](intro/samples/cu/Models/Student.cs?name=snippet_Intro)]
 
-`ID`屬性（property）是對應至這個類別的資料庫資料表中， ( **PK** ) 資料行的主鍵。 根據預設，EF 會將名為或的 `ID` 屬性 `classnameID` 視為主要索引鍵。 例如，PK 可以命名為， `StudentID` 而不是 `ID` 。
+`ID`屬性（property）是對應至這個類別的資料庫資料表中， (**PK**) 資料行的主鍵。 根據預設，EF 會將名為或的 `ID` 屬性 `classnameID` 視為主要索引鍵。 例如，PK 可以命名為， `StudentID` 而不是 `ID` 。
 
 `Enrollments` 屬性為[導覽屬性](/ef/core/modeling/relationships)。 導覽屬性會保留與此實體相關的其他實體。 `Enrollments`實體的屬性 `Student` ：
 
@@ -150,7 +150,7 @@ Install-Package Microsoft.EntityFrameworkCore.SqlServer
 * 如果 `Student` 資料庫中的特定資料列有兩個相關的資料 `Enrollment` 列：
   * 該 `Student` 實體的 `Enrollments` 導覽屬性包含這兩個 `Enrollment` 實體。
   
-`Enrollment` 資料列會在 `StudentID` 外鍵 ( **FK** ) 資料行中包含學生的 PK 值。
+`Enrollment` 資料列會在 `StudentID` 外鍵 (**FK**) 資料行中包含學生的 PK 值。
 
 如果導覽屬性可以保存多個實體：
 
@@ -217,7 +217,7 @@ Entity Framework 會將屬性（property）解讀為 FK 屬性（property），�
 
 ASP.NET Core 包含了[相依性插入](../../fundamentals/dependency-injection.md)。 服務（例如 EF 資料庫內容）會在應用程式啟動期間以相依性插入來註冊。 需要這些服務的元件（例如 MVC 控制器）是透過函式參數提供這些服務。 本教學課程稍後會顯示取得內容實例的控制器程式碼。
 
-若要將 `SchoolContext` 註冊為服務，請開啟 *Startup.cs* ，並將醒目標示的程式碼新增至 `ConfigureServices` 方法。
+若要將 `SchoolContext` 註冊為服務，請開啟 *Startup.cs*，並將醒目標示的程式碼新增至 `ConfigureServices` 方法。
 
 [!code-csharp[](intro/samples/5cu-snap/Startup.cs?name=snippet&highlight=1-2,22-23)]
 
@@ -231,7 +231,7 @@ ASP.NET Core 包含了[相依性插入](../../fundamentals/dependency-injection.
 
 將加入 <xref:Microsoft.Extensions.DependencyInjection.DatabaseDeveloperPageExceptionFilterServiceExtensions.AddDatabaseDeveloperPageExceptionFilter%2A> 至， `ConfigureServices` 如下列程式碼所示：
 
-[!code-csharp[](intro/samples/5cu/Startup.cs?name=snippet&highlight=1=2,22-23)]
+[!code-csharp[](intro/samples/5cu/Startup.cs?name=snippet&highlight=6)]
 
 會 `AddDatabaseDeveloperPageExceptionFilter` 在 [開發環境](xref:fundamentals/environments)中提供有用的錯誤資訊。
 
@@ -280,12 +280,12 @@ EF 會建立空的資料庫。 在本節中，會加入在建立資料庫之後�
 
 自動建立 [CRUD](https://wikipedia.org/wiki/Create,_read,_update_and_delete) 動作方法和視圖稱為「樣板」。
 
-* 在 **方案總管** 中，以滑鼠右鍵按一下 `Controllers` 資料夾，然後選取 [ **加入 > 新的 scaffold 專案** ]。
+* 在 **方案總管** 中，以滑鼠右鍵按一下 `Controllers` 資料夾，然後選取 [ **加入 > 新的 scaffold 專案**]。
 * 在 [新增 Scaffold] 對話方塊中：
   * 選取 [使用 Entity Framework 執行檢視的 MVC 控制器]。
   * 按一下 [新增] 。 [ **Entity Framework 使用 Scaffold 新增 MVC 控制器** ] 對話方塊隨即出現： ![ Student](intro/_static/scaffold-student2.png)
-  * 在 [ **模型類別** ] 中選取 [ **Student** ]。
-  * 在 [ **資料內容類別** ] 中，選取 [ **SchoolCoNtext** ]。
+  * 在 [ **模型類別**] 中選取 [ **Student**]。
+  * 在 [ **資料內容類別**] 中，選取 [ **SchoolCoNtext**]。
   * 接受預設的 **StudentsController** 作為名稱。
   * 按一下 [新增] 。
 
@@ -324,8 +324,8 @@ ASP.NET Core 相依性插入會負責傳遞 `SchoolContext` 的執行個體給�
 
 使用 **SQL Server 物件總管** (SSOX) 來查看 Visual Studio 中的資料庫：
 
-* 從 Visual Studio 的 [ **View** ] 功能表中選取 [ **SQL Server 物件總管** ]。
-* 在 SSOX 中，選取 **(localdb) \mssqllocaldb > 資料庫** 。
+* 從 Visual Studio 的 [ **View** ] 功能表中選取 [ **SQL Server 物件總管**]。
+* 在 SSOX 中，選取 **(localdb) \mssqllocaldb > 資料庫**。
 * 在檔案的 `ContosoUniversity1` 連接字串中，選取資料庫名稱的專案 *appsettings.json* 。
 * 展開 [ **資料表]** 節點，查看資料庫中的資料表。
 
@@ -402,7 +402,7 @@ Contoso 大學範例 Web 應用程式示範如何使用 Entity Framework (EF) Co
 
 這個範例應用程式是虛構的 Contoso 大學網站。 其中包括的功能有學生入學許可、課程建立、教師指派。 這是說明如何從零開始建立 Contoso 大學範例應用程式教學課程系列中的第一頁。
 
-## <a name="prerequisites"></a>Prerequisites
+## <a name="prerequisites"></a>先決條件
 
 * [.NET Core SDK 2.2](https://dotnet.microsoft.com/download)
 * 包含下列工作負載的 [Visual Studio 2019](https://visualstudio.microsoft.com/downloads/?utm_medium=microsoft&utm_source=docs.microsoft.com&utm_campaign=inline+link&utm_content=download+vs2019)：
@@ -444,7 +444,7 @@ Contoso 大學範例 Web 應用程式示範如何使用 Entity Framework (EF) Co
 
 * 選取 [.NET Core]、[ASP.NET Core 2.2] 和 [Web 應用程式 (Model-View-Controller)] 範本。
 
-* 確定 [ **驗證** ] 設定為 [ **無驗證** ]。
+* 確定 [ **驗證** ] 設定為 [ **無驗證**]。
 
 * 選取 [確定]
 
@@ -458,7 +458,7 @@ Contoso 大學範例 Web 應用程式示範如何使用 Entity Framework (EF) Co
 
 * 將每個出現的 "ContosoUniversity" 都變更為 "Contoso University"。 共有三個發生次數。
 
-* 為 **About** 、 **Students** 、 **Courses** 、 **Instructors** 及 **Departments** 新增功能表項目，並刪除 **Privacy** 功能表項目。
+* 為 **About**、**Students**、**Courses**、**Instructors** 及 **Departments** 新增功能表項目，並刪除 **Privacy** 功能表項目。
 
 所做的變更已醒目提示。
 
@@ -508,7 +508,7 @@ EF SQL Server 套件及其相依性 (`Microsoft.EntityFrameworkCore` 及 `Micros
 
 ![Enrollment 實體圖表](intro/_static/enrollment-entity.png)
 
-在 *Models* 資料夾中，建立 *Enrollment.cs* ，然後使用下列程式碼取代現有的程式碼：
+在 *Models* 資料夾中，建立 *Enrollment.cs*，然後使用下列程式碼取代現有的程式碼：
 
 [!code-csharp[](intro/samples/cu/Models/Enrollment.cs?name=snippet_Intro)]
 
@@ -526,7 +526,7 @@ Entity Framework 會將名為 `<navigation property name><primary key property n
 
 ![Course 實體圖表](intro/_static/course-entity.png)
 
-在 *Models* 資料夾中，建立 *Course.cs* ，然後使用下列程式碼取代現有的程式碼：
+在 *Models* 資料夾中，建立 *Course.cs*，然後使用下列程式碼取代現有的程式碼：
 
 [!code-csharp[](intro/samples/cu/Models/Course.cs?name=snippet_Intro)]
 
@@ -558,7 +558,7 @@ Entity Framework 會將名為 `<navigation property name><primary key property n
 
 根據預設，ASP.NET Core 會實作[相依性插入](../../fundamentals/dependency-injection.md)。 服務 (例如 EF 資料庫內容) 是在應用程式啟動期間使用相依性插入來註冊。 接著，會透過建構函式參數，針對需要這些服務的元件 (例如 MVC 控制器) 來提供服務。 您會在此教學課程的稍後看到取得內容執行個體的控制器建構函式。
 
-若要將 `SchoolContext` 註冊為服務，請開啟 *Startup.cs* ，並將醒目標示的程式碼新增至 `ConfigureServices` 方法。
+若要將 `SchoolContext` 註冊為服務，請開啟 *Startup.cs*，並將醒目標示的程式碼新增至 `ConfigureServices` 方法。
 
 [!code-csharp[](intro/samples/cu/Startup.cs?name=snippet_SchoolContext&highlight=9-10)]
 
@@ -652,7 +652,7 @@ ASP.NET Core 相依性插入會負責傳遞 `SchoolContext` 的執行個體給�
 
 若 SSOX 視窗尚未開啟，請從 Visual Studio 中的 [檢視] 功能表選取它。
 
-在 [SSOX] 中，按一下 **(localdb) \mssqllocaldb > 資料庫** ]，然後在檔案中的連接字串中，按一下資料庫名稱的專案 *appsettings.json* 。
+在 [SSOX] 中，按一下 **(localdb) \mssqllocaldb > 資料庫**]，然後在檔案中的連接字串中，按一下資料庫名稱的專案 *appsettings.json* 。
 
 展開 [ **資料表]** 節點，查看資料庫中的資料表。
 
@@ -702,7 +702,7 @@ ASP.NET Core 相依性插入會負責傳遞 `SchoolContext` 的執行個體給�
 
 如需在 .NET 中非同步程式設計的詳細資訊，請參閱[非同步總覽](/dotnet/articles/standard/async)。
 
-## <a name="next-steps"></a>下一步
+## <a name="next-steps"></a>後續步驟
 
 若要了解如何執行基本的 CRUD (建立、讀取、更新、刪除) 作業，請前往下一個教學課程。
 

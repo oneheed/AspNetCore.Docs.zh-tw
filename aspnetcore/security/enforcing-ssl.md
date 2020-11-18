@@ -18,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: security/enforcing-ssl
-ms.openlocfilehash: e473da9a7cbd91a601ad4af0c7c02c7f576f348c
-ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
+ms.openlocfilehash: aa109aaa89003fd7566e7dc219ecc9799b077355
+ms.sourcegitcommit: 8b867c4cb0c3b39bbc4d2d87815610d2ef858ae7
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 10/30/2020
-ms.locfileid: "93051118"
+ms.lasthandoff: 11/17/2020
+ms.locfileid: "94703666"
 ---
 # <a name="enforce-https-in-aspnet-core"></a>在 ASP.NET Core 中強制使用 HTTPS
 
@@ -289,7 +289,7 @@ ASP.NET Core 2.1 和更新版本會使用擴充方法來執行 HSTS `UseHsts` �
 ::: moniker-end
 
 
-* 設定標頭的預先載入參數 `Strict-Transport-Security` 。 預先載入不是 [RFC HSTS 規格](https://tools.ietf.org/html/rfc6797)的一部分，但是網頁瀏覽器支援在全新安裝時預先載入 HSTS 網站。 如需詳細資訊，請參閱 [https://hstspreload.org/](https://hstspreload.org/)。
+* 設定標頭的預先載入參數 `Strict-Transport-Security` 。 預先載入不是 [RFC HSTS 規格](https://tools.ietf.org/html/rfc6797)的一部分，但是網頁瀏覽器支援在全新安裝時預先載入 HSTS 網站。 如需詳細資訊，請參閱 [https://hstspreload.org/](https://hstspreload.org/) \(英文\)。
 * 啟用 [includeSubDomain](https://tools.ietf.org/html/rfc6797#section-6.1.2)，這會將 HSTS 原則套用至主機子域。
 * 將 `max-age` 標頭的參數明確設定 `Strict-Transport-Security` 為60天。 如果未設定，則預設為30天。 如需詳細資訊，請參閱 [最大壽命](https://tools.ietf.org/html/rfc6797#section-6.1.1)指示詞。
 * 新增 `example.com` 至要排除的主機清單。
@@ -413,7 +413,7 @@ dotnet dev-certs https --trust
 ### <a name="docker---certificate-not-trusted"></a>Docker-憑證不受信任
 
 * 刪除 *C:\Users \{ USER} \AppData\Roaming\ASP.NET\Https* 資料夾。
-* 清除方案。 刪除 [bin]  和 [obj]  資料夾。
+* 清除方案。 刪除 [bin] 和 [obj] 資料夾。
 * 重新開機開發工具。 例如，Visual Studio、Visual Studio Code 或 Visual Studio for Mac。
 
 ### <a name="windows---certificate-not-trusted"></a>Windows-憑證不受信任
@@ -450,6 +450,20 @@ dotnet dev-certs https --trust
 ### <a name="iis-express-ssl-certificate-used-with-visual-studio"></a>IIS Express 與 Visual Studio 搭配使用的 SSL 憑證
 
 若要修正 IIS Express 憑證的問題，請選取 Visual Studio 安裝程式中的 [ **修復** ]。 如需詳細資訊，請參閱 [此 GitHub 問題](https://github.com/dotnet/aspnetcore/issues/16892)。
+
+<a name="trust-ff"></a>
+
+### <a name="firefox-sec_error_inadequate_key_usage-certificate-error"></a>Firefox SEC_ERROR_INADEQUATE_KEY_USAGE 憑證錯誤
+
+Firefox 瀏覽器會使用它自己的憑證存放區，因此不信任 [IIS Express](/iis/extensions/introduction-to-iis-express/iis-express-overview) 或 [Kestrel](xref:fundamentals/servers/kestrel) 開發人員憑證。
+
+若要搭配 IIS Express 或 Kestrel 使用 Firefox，請設定  `security.enterprise_roots.enabled` = `true`
+
+1. `about:config`在 FireFox 瀏覽器中輸入。
+1. 如果您接受風險，請選取 **[接受風險並繼續** ]。
+1. 選取 **全部顯示**
+1. 設置 `security.enterprise_roots.enabled` = `true`
+1. 結束並重新啟動 Firefox
 
 ## <a name="additional-information"></a>其他資訊
 

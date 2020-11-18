@@ -5,7 +5,7 @@ description: 瞭解 ASP.NET Core Blazor 應用程式範本和 Blazor 專案結�
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 08/04/2020
+ms.date: 11/17/2020
 no-loc:
 - appsettings.json
 - ASP.NET Core Identity
@@ -19,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/templates
-ms.openlocfilehash: fc2e81cf130732d515fb871227031493e297cf9f
-ms.sourcegitcommit: 1be547564381873fe9e84812df8d2088514c622a
+ms.openlocfilehash: 602ad2908d607703a3b77b2047d51d912645b043
+ms.sourcegitcommit: 8b867c4cb0c3b39bbc4d2d87815610d2ef858ae7
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 11/11/2020
-ms.locfileid: "94507768"
+ms.lasthandoff: 11/17/2020
+ms.locfileid: "94703718"
 ---
 # <a name="aspnet-core-no-locblazor-templates"></a>ASP.NET Core Blazor 範本
 
@@ -91,16 +91,30 @@ dotnet new blazorserver --help
     * 最初要求應用程式的任何頁面時，會轉譯此頁面，並在回應中傳回。
     * `_framework/blazor.server.js`JavaScript 檔案會載入，這會設定 SignalR 瀏覽器與伺服器之間的即時連接。
     * [主機] 頁面 `App` 會指定呈現根元件 () 的位置 `App.razor` 。
-  * `Counter` (`Pages/Counter.razor`) ：實行計數器頁面。
-  * `Error` (`Error.razor` ， Blazor Server 僅限應用程式) ：當應用程式中發生未處理的例外狀況時轉譯。
-  * `FetchData` (`Pages/FetchData.razor`) ：實行提取資料頁面。
-  * `Index` (`Pages/Index.razor`) ：實行首頁。
+  * `Counter` 元件 (`Pages/Counter.razor`) ：實行計數器頁面。
+  * `Error` 元件 (`Error.razor` ， Blazor Server 僅限應用程式) ：當應用程式中發生未處理的例外狀況時轉譯。
+  * `FetchData` 元件 (`Pages/FetchData.razor`) ：實行提取資料頁面。
+  * `Index` 元件 (`Pages/Index.razor`) ：實行首頁。
   
 * `Properties/launchSettings.json`：保留 [開發環境](xref:fundamentals/environments#development-and-launchsettingsjson)設定。
 
+::: moniker range=">= aspnetcore-5.0"
+
 * `Shared` 資料夾：包含 `.razor` 應用程式所使用 () 的其他 UI 元件：
-  * `MainLayout` (`MainLayout.razor`) ：應用程式的 [版面配置元件](xref:blazor/layouts)。
-  * `NavMenu` (`NavMenu.razor`) ：實行提要欄位導覽。 包含 () 的[ `NavLink` 元件](xref:blazor/fundamentals/routing#navlink-component) <xref:Microsoft.AspNetCore.Components.Routing.NavLink> ，其會呈現其他元件的導覽連結 Razor 。 元件會在 <xref:Microsoft.AspNetCore.Components.Routing.NavLink> 載入元件時自動表示選取的狀態，這可協助使用者瞭解目前顯示的元件。
+  * `MainLayout` 元件 (`MainLayout.razor`) ：應用程式的 [版面配置元件](xref:blazor/layouts)。
+  * `MainLayout.razor.css`：應用程式主要版面配置的樣式表單。
+  * `NavMenu` 元件 (`NavMenu.razor`) ：實行提要欄位導覽。 包含 () 的[ `NavLink` 元件](xref:blazor/fundamentals/routing#navlink-component) <xref:Microsoft.AspNetCore.Components.Routing.NavLink> ，其會呈現其他元件的導覽連結 Razor 。 元件會在 <xref:Microsoft.AspNetCore.Components.Routing.NavLink> 載入元件時自動表示選取的狀態，這可協助使用者瞭解目前顯示的元件。
+  * `NavMenu.razor.css`：應用程式導覽功能表的樣式表單。
+
+::: moniker-end
+
+::: moniker range="< aspnetcore-5.0"
+
+* `Shared` 資料夾：包含 `.razor` 應用程式所使用 () 的其他 UI 元件：
+  * `MainLayout` 元件 (`MainLayout.razor`) ：應用程式的 [版面配置元件](xref:blazor/layouts)。
+  * `NavMenu` 元件 (`NavMenu.razor`) ：實行提要欄位導覽。 包含 () 的[ `NavLink` 元件](xref:blazor/fundamentals/routing#navlink-component) <xref:Microsoft.AspNetCore.Components.Routing.NavLink> ，其會呈現其他元件的導覽連結 Razor 。 元件會在 <xref:Microsoft.AspNetCore.Components.Routing.NavLink> 載入元件時自動表示選取的狀態，這可協助使用者瞭解目前顯示的元件。
+  
+::: moniker-end
 
 * `_Imports.razor`：包含 Razor 要包含在應用程式元件 () 的一般指示詞 `.razor` ，例如 [`@using`](xref:mvc/views/razor#using) 命名空間的指示詞。
 

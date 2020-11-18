@@ -18,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: tutorials/first-mvc-app/new-field
-ms.openlocfilehash: 84e344aabc9171020c0117d55eaf1a95e6b768db
-ms.sourcegitcommit: 91e14f1e2a25c98a57c2217fe91b172e0ff2958c
+ms.openlocfilehash: ce119d79bc96f01803b63c715332ec3d287473ff
+ms.sourcegitcommit: df808efa68574dd674f1985aa9d03f4f5fab883f
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 11/10/2020
-ms.locfileid: "94422531"
+ms.lasthandoff: 11/18/2020
+ms.locfileid: "94851178"
 ---
 # <a name="part-8-add-a-new-field-to-an-aspnet-core-mvc-app"></a>第8部分：將新欄位新增至 ASP.NET Core MVC 應用程式
 
@@ -41,7 +41,7 @@ ms.locfileid: "94422531"
 
 ## <a name="add-a-rating-property-to-the-movie-model"></a>將 Rating 屬性新增至電影模型
 
-將 `Rating` 屬性新增至 *Models/Movie.cs* ：
+將 `Rating` 屬性新增至 *Models/Movie.cs*：
 
 [!code-csharp[](~/tutorials/first-mvc-app/start-mvc/sample/MvcMovie22/Models/MovieDateRating.cs?name=snippet)]
 
@@ -75,17 +75,17 @@ Command ⌘ + B
 
 ::: moniker range=">= aspnetcore-3.0 < aspnetcore-5.0"
 
-[!code-cshtml[](~/tutorials/first-mvc-app/start-mvc/sample/MvcMovie22/Views/Movies/IndexGenreRating.cshtml?highlight=16,38&range=24-64)]
+[!code-cshtml[](~/tutorials/first-mvc-app/start-mvc/sample/MvcMovie3/Views/Movies/IndexGenreRating.cshtml?highlight=16,38&range=24-63)]
 
 ::: moniker-end
 
 ::: moniker range=">= aspnetcore-5.0"
 
-[!code-cshtml[](~/tutorials/first-mvc-app/start-mvc/sample/MvcMovie5/Views/Movies/Index.cshtml?highlight=28-49&range=12-51)]
+[!code-cshtml[](~/tutorials/first-mvc-app/start-mvc/sample/MvcMovie5/Views/Movies/IndexGenreRating.cshtml?highlight=16,38&range=24-63)]
 
 ::: moniker-end
 
-使用 `Rating` 欄位更新 */Views/Movies/Create.cshtml* 。
+使用 `Rating` 欄位更新 */Views/Movies/Create.cshtml*。
 
 # <a name="visual-studio--visual-studio-for-mac"></a>[Visual Studio / Visual Studio for Mac](#tab/visual-studio+visual-studio-mac)
 

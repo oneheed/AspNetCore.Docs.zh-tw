@@ -4,7 +4,7 @@ author: rick-anderson
 description: dotnet aspnet-codegenerator 命令會架起 ASP.NET Core 專案。
 monikerRange: '>= aspnetcore-2.1'
 ms.author: riande
-ms.date: 07/04/2019
+ms.date: 11/16/2020
 no-loc:
 - appsettings.json
 - ASP.NET Core Identity
@@ -18,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: fundamentals/tools/dotnet-aspnet-codegenerator
-ms.openlocfilehash: 88d761b09833a14de5af9f9610753174867aa09a
-ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
+ms.openlocfilehash: 8844b0014cac58f414d79df4c64bc0efac75bfe1
+ms.sourcegitcommit: d29535ea0b4197443fd884aaa6e5b4b763d04fc7
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 10/30/2020
-ms.locfileid: "93059984"
+ms.lasthandoff: 11/19/2020
+ms.locfileid: "94920699"
 ---
 # <a name="dotnet-aspnet-codegenerator"></a>dotnet aspnet-codegenerator
 
@@ -31,9 +31,9 @@ ms.locfileid: "93059984"
 
 `dotnet aspnet-codegenerator` - 執行 ASP.NET Core Scaffolding 引擎。 從命令列進行 Scaffolding 時才需要 `dotnet aspnet-codegenerator`，在 Visual Studio 中不需要進行 Scaffolding。
 
-本文適用於 [.NET Core 2.1 SDK](https://dotnet.microsoft.com/download/dotnet-core/2.1) 與更新版本。
+## <a name="install-and-update-aspnet-codegenerator"></a>安裝及更新 aspnet-codegenerator
 
-## <a name="installing-aspnet-codegenerator"></a>Installing aspnet-codegenerator
+安裝 [.NET SDK](https://dotnet.microsoft.com/download)。
 
 `dotnet-aspnet-codegenerator` 是必須安裝的[全域工具](/dotnet/core/tools/global-tools)。 下列命令會安裝 `dotnet-aspnet-codegenerator` 工具的最新穩定版本：
 
@@ -45,6 +45,17 @@ dotnet tool install -g dotnet-aspnet-codegenerator
 
 ```dotnetcli
 dotnet tool update -g dotnet-aspnet-codegenerator
+```
+
+## <a name="uninstall-aspnet-codegenerator"></a>卸載 aspnet-codegenerator
+
+可能需要卸載 `aspnet-codegenerator` 才能解決問題。 例如，如果您已安裝的預覽版本 `aspnet-codegenerator` ，請先將其卸載，再安裝發行版本。
+
+下列命令會卸載 `dotnet-aspnet-codegenerator` 工具並安裝最新穩定版本：
+
+```dotnetcli
+dotnet tool uninstall -g dotnet-aspnet-codegenerator
+dotnet tool install -g dotnet-aspnet-codegenerator
 ```
 
 ## <a name="synopsis"></a>概要
@@ -168,7 +179,7 @@ Razor 您可以藉由指定新頁面的名稱和要使用的範本來個別 scaf
 * `Details`
 * `List`
 
-例如，下列命令會使用「編輯」範本來產生 *MyEdit.cshtml* 與 *MyEdit.cshtml.cs* ：
+例如，下列命令會使用「編輯」範本來產生 *MyEdit.cshtml* 與 *MyEdit.cshtml.cs*：
 
 ```dotnetcli
 dotnet aspnet-codegenerator razorpage MyEdit Edit -m Movie -dc RazorPagesMovieContext -outDir Pages/Movies

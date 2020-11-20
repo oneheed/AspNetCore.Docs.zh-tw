@@ -19,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/components/lifecycle
-ms.openlocfilehash: f435870e1e73fdb1296699ed62052b72b3b78abf
-ms.sourcegitcommit: e087b6a38e3d38625ebb567a973e75b4d79547b9
+ms.openlocfilehash: 8a2dc802a1d05ead7445e350e3aef0ce7dfb2bb8
+ms.sourcegitcommit: 8363e44f630fcc6433ccd2a85f7aa9567cd274ed
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 11/15/2020
-ms.locfileid: "94637713"
+ms.lasthandoff: 11/20/2020
+ms.locfileid: "94981917"
 ---
 # <a name="aspnet-core-no-locblazor-lifecycle"></a>ASP.NET Core Blazor 生命週期
 
@@ -39,7 +39,7 @@ ms.locfileid: "94637713"
 1. 如果第一次在要求時轉譯元件：
    * 建立元件的實例。
    * 執行屬性插入。 執行 [`SetParametersAsync`](#before-parameters-are-set) 。
-   * 呼叫 [`OnInitialized{Async}`](#component-initialization-methods) 。 如果 <xref:System.Threading.Tasks.Task> 傳回，則 <xref:System.Threading.Tasks.Task> 會等待，然後轉譯元件。 如果 <xref:System.Threading.Tasks.Task> 未傳回，則會轉譯元件。
+   * 呼叫 [`OnInitialized{Async}`](#component-initialization-methods) 。 如果 <xref:System.Threading.Tasks.Task> 傳回，則會等候， <xref:System.Threading.Tasks.Task> 並且呈現元件。 如果 <xref:System.Threading.Tasks.Task> 未傳回，則會轉譯元件。
 1. 呼叫 [`OnParametersSet{Async}`](#after-parameters-are-set) 並呈現元件。 如果 <xref:System.Threading.Tasks.Task> 從傳回，則 `OnParametersSetAsync` <xref:System.Threading.Tasks.Task> 會等待，然後元件會保存。
 
 ![：：： No loc (Razor) ：：： component in：：： no-loc (Blazor) ：：：的元件生命週期事件](lifecycle/_static/lifecycle1.png)
@@ -182,7 +182,7 @@ protected override void OnAfterRender(bool firstRender)
 }
 ```
 
-<xref:Microsoft.AspNetCore.Components.ComponentBase.OnAfterRender%2A> 而且不會在 <xref:Microsoft.AspNetCore.Components.ComponentBase.OnAfterRenderAsync%2A> *伺服器上的未處理常式期間呼叫* 。 當預先轉譯完成之後，以互動方式轉譯元件時，就會呼叫方法。 當應用程式 prerenders 時：
+<xref:Microsoft.AspNetCore.Components.ComponentBase.OnAfterRender%2A> 而且不會在 <xref:Microsoft.AspNetCore.Components.ComponentBase.OnAfterRenderAsync%2A> *伺服器上的未處理常式期間呼叫*。 當預先轉譯完成之後，以互動方式轉譯元件時，就會呼叫方法。 當應用程式 prerenders 時：
 
 1. 元件會在伺服器上執行，以在 HTTP 回應中產生一些靜態 HTML 標籤。 在這個階段中 <xref:Microsoft.AspNetCore.Components.ComponentBase.OnAfterRender%2A> ， <xref:Microsoft.AspNetCore.Components.ComponentBase.OnAfterRenderAsync%2A> 不會呼叫。
 1. 當 `blazor.server.js` 您 `blazor.webassembly.js` 在瀏覽器中啟動或啟動時，元件會以互動式轉譯模式重新開機。 重新開機元件之後， <xref:Microsoft.AspNetCore.Components.ComponentBase.OnAfterRender%2A> <xref:Microsoft.AspNetCore.Components.ComponentBase.OnAfterRenderAsync%2A> **會** 呼叫，因為應用程式不會再于未進入的階段內。
@@ -230,7 +230,7 @@ protected override bool ShouldRender()
 
 ## <a name="stateful-reconnection-after-prerendering"></a>以具狀態重新連接後重新連線
 
-在 Blazor Server 應用程式中 <xref:Microsoft.AspNetCore.Mvc.TagHelpers.ComponentTagHelper.RenderMode> ，當為時 <xref:Microsoft.AspNetCore.Mvc.Rendering.RenderMode.ServerPrerendered> ，元件最初會以靜態方式轉譯為頁面的一部分。 當瀏覽器將連接重新建立回伺服器之後，元件會 *再次* 轉譯，而元件現在是互動式的。 如果 [`OnInitialized{Async}`](#component-initialization-methods) 有初始化元件的生命週期方法，方法會執行 *兩次* ：
+在 Blazor Server 應用程式中 <xref:Microsoft.AspNetCore.Mvc.TagHelpers.ComponentTagHelper.RenderMode> ，當為時 <xref:Microsoft.AspNetCore.Mvc.Rendering.RenderMode.ServerPrerendered> ，元件最初會以靜態方式轉譯為頁面的一部分。 當瀏覽器將連接重新建立回伺服器之後，元件會 *再次* 轉譯，而元件現在是互動式的。 如果 [`OnInitialized{Async}`](#component-initialization-methods) 有初始化元件的生命週期方法，方法會執行 *兩次*：
 
 * 以靜態方式資源清單元件時。
 * 建立伺服器連接之後。

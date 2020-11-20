@@ -18,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: security/enforcing-ssl
-ms.openlocfilehash: aa109aaa89003fd7566e7dc219ecc9799b077355
-ms.sourcegitcommit: 8b867c4cb0c3b39bbc4d2d87815610d2ef858ae7
+ms.openlocfilehash: 209d055f6205eceb9efb5434427c303345791809
+ms.sourcegitcommit: 8363e44f630fcc6433ccd2a85f7aa9567cd274ed
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 11/17/2020
-ms.locfileid: "94703666"
+ms.lasthandoff: 11/20/2020
+ms.locfileid: "94981956"
 ---
 # <a name="enforce-https-in-aspnet-core"></a>在 ASP.NET Core 中強制使用 HTTPS
 
@@ -464,6 +464,8 @@ Firefox 瀏覽器會使用它自己的憑證存放區，因此不信任 [IIS Exp
 1. 選取 **全部顯示**
 1. 設置 `security.enterprise_roots.enabled` = `true`
 1. 結束並重新啟動 Firefox
+
+如需詳細資訊，請參閱 [在 Firefox 中設定 (CAs) 的憑證授權單位單位](https://support.mozilla.org/kb/setting-certificate-authorities-firefox)。
 
 ## <a name="additional-information"></a>其他資訊
 

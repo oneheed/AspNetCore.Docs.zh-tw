@@ -19,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/components/data-binding
-ms.openlocfilehash: 004a15bf63c34144049a45f9d5fca8852fa36a3f
-ms.sourcegitcommit: fbd5427293d9ecccc388bd5fd305c2eb8ada7281
+ms.openlocfilehash: 7def253a0676e65f8f96209b3f3b7f7a700c4ebe
+ms.sourcegitcommit: 8363e44f630fcc6433ccd2a85f7aa9567cd274ed
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 11/10/2020
-ms.locfileid: "94463817"
+ms.lasthandoff: 11/20/2020
+ms.locfileid: "94981904"
 ---
 # <a name="aspnet-core-no-locblazor-data-binding"></a>ASP.NET Core Blazor 資料系結
 
@@ -146,7 +146,7 @@ Razor 元件會透過以 [`@bind`](xref:mvc/views/razor#bind) 欄位、屬性或
 
 常見的案例是將子元件中的屬性系結至其父系中的屬性。 此案例稱為 *連鎖* 系結，因為有多個層級的系結同時發生。
 
-元件參數允許父元件的系結屬性和欄位具有 `@bind-{PROPERTY OR FIELD}` 語法。
+[元件參數](xref:blazor/components/index#component-parameters) 允許父元件的系結屬性和欄位具有 `@bind-{PROPERTY OR FIELD}` 語法。
 
 連結系結無法使用 [`@bind`](xref:mvc/views/razor#bind) 子元件中的語法來執行。 必須個別指定事件處理常式和值，以支援從子元件的父系更新屬性。
 
@@ -332,8 +332,8 @@ Password:
 
 您可以透過任意數目的嵌套元件進行系結，但您必須遵守單向的資料流程：
 
-* 變更通知會在階層中 *往上流動* 。
-* 新的參數值會在階層中 *往下流動* 。
+* 變更通知會在階層中 *往上流動*。
+* 新的參數值會在階層中 *往下流動*。
 
 常見和建議的方法是只將基礎資料儲存在父元件中，以避免任何必須更新狀態的混淆。
 

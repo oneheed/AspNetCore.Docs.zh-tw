@@ -18,12 +18,12 @@ no-loc:
 - SignalR
 - Kestrel
 uid: aspnetcore-5.0
-ms.openlocfilehash: 84747e2d13275a23e83dc2dc0f666cb0c8d001b1
-ms.sourcegitcommit: 827e8be18cebbcc09b467c089e17fa6f5e430cb2
+ms.openlocfilehash: 7f90e4c424aa4bb76be7c226acd2f16261e0dfe6
+ms.sourcegitcommit: 8363e44f630fcc6433ccd2a85f7aa9567cd274ed
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 11/15/2020
-ms.locfileid: "94634622"
+ms.lasthandoff: 11/20/2020
+ms.locfileid: "94981943"
 ---
 # <a name="whats-new-in-aspnet-core-50"></a>ASP.NET Core 5.0 的新功能
 
@@ -93,7 +93,7 @@ see https://docs.microsoft.com/aspnet/core/mvc/models/validation?view=aspnetcore
     ```dotnetcli
     dotnet new webapi --no-openapi true
     ```
-* 從 Visual Studio：取消核取 [ **啟用 OpenAPI 支援** ]。
+* 從 Visual Studio：取消核取 [ **啟用 OpenAPI 支援**]。
 
 針對 web API 專案所建立的所有 *.csproj* 檔案都包含 [Swashbuckle. AspNetCore](https://www.nuget.org/packages/Swashbuckle.AspNetCore/) NuGet 套件參考。
 
@@ -148,7 +148,7 @@ Blazor 具有內建 `InputRadio` 和 `InputRadioGroup` 元件，可簡化資料�
 
 ### <a name="component-virtualization"></a>元件虛擬化
 
-使用 Blazor 架構內建的虛擬化支援，改善元件轉譯的認知效能。 如需詳細資訊，請參閱<xref:blazor/forms-validation#radio-buttons>。
+使用 Blazor 架構內建的虛擬化支援，改善元件轉譯的認知效能。 如需詳細資訊，請參閱<xref:blazor/components/virtualization>。
 
 ### <a name="ontoggle-event-support"></a>`ontoggle` 事件支援
 
@@ -357,7 +357,7 @@ See [Update SignalR code](xref:migration/31-to-50#signalr) for migration instruc
 
 在 .NET 5.0 之前，為 ASP.NET Core 應用程式建立和發佈 *Dockerfile* 需要提取整個 .NET Core SDK 和 ASP.NET Core 映射。 在此版本中，會減少提取 SDK 映射位元組，並大幅消除 ASP.NET Core 映射提取的位元組。 如需詳細資訊，請參閱 [此 GitHub 問題批註](https://github.com/dotnet/dotnet-docker/issues/1814#issuecomment-625294750)。
 
-## <a name="authentication-and-authorization"></a>驗證和授權
+## <a name="authentication-and-authorization"></a>驗證與授權
 
 ### <a name="azure-active-directory-authentication-with-microsoftno-locidentityweb"></a>使用 Microsoft 驗證 Identity Azure Active Directory。Web
 
@@ -390,7 +390,7 @@ ASP.NET Core 的專案範本現在會與整合， <xref:Microsoft.Identity.Web?d
 
 您可以從 `HttpRequest` 和 `HttpResponse` 使用新的 <xref:System.Net.Http.Json.HttpContentJsonExtensions.ReadFromJsonAsync%2A> 和 `WriteAsJsonAsync` 擴充方法，讀取和寫入 JSON 資料。 這些擴充方法會使用序列化程式 [ 上的System.Text.Js](xref:System.Text.Json) 來處理 JSON 資料。 新的 `HasJsonContentType` 擴充方法也可以檢查要求是否有 JSON 內容類型。
 
-JSON 擴充方法可以與 [端點路由](xref:fundamentals/routing) 結合，以我們呼叫 * **route 至 code** _ 的程式設計風格來建立 JSON api。 如果開發人員想要以輕量方式建立基本的 JSON Api，這是新的選項。 例如，只有少數幾個端點的 web 應用程式，可能會選擇使用路由傳送至程式碼，而不是 ASP.NET Core MVC 的完整功能：
+JSON 擴充方法可以與 [端點路由](xref:fundamentals/routing) 結合，以我們呼叫 ***route 至 code** _ 的程式設計風格來建立 JSON api。 如果開發人員想要以輕量方式建立基本的 JSON Api，這是新的選項。 例如，只有少數幾個端點的 web 應用程式，可能會選擇使用路由傳送至程式碼，而不是 ASP.NET Core MVC 的完整功能：
 
 ```csharp
 endpoints.MapGet("/weather/{city:alpha}", async context =>

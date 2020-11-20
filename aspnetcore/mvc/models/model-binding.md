@@ -18,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: mvc/models/model-binding
-ms.openlocfilehash: 49300d32096e577db9b13a0510cc310b91ddb51d
-ms.sourcegitcommit: 33f631a4427b9a422755601ac9119953db0b4a3e
+ms.openlocfilehash: 4de34a75da932b41190caa8434ac5be8cc0710fd
+ms.sourcegitcommit: 8363e44f630fcc6433ccd2a85f7aa9567cd274ed
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 11/05/2020
-ms.locfileid: "93365349"
+ms.lasthandoff: 11/20/2020
+ms.locfileid: "94981930"
 ---
 # <a name="model-binding-in-aspnet-core"></a>ASP.NET Core 中的資料繫結
 
@@ -211,7 +211,7 @@ public class Pet
 * [DateTimeOffset](xref:System.ComponentModel.DateTimeOffsetConverter)
 * [十進位](xref:System.ComponentModel.DecimalConverter)
 * [Double](xref:System.ComponentModel.DoubleConverter)
-* [列舉](xref:System.ComponentModel.EnumConverter)
+* [枚舉](xref:System.ComponentModel.EnumConverter)
 * [Guid](xref:System.ComponentModel.GuidConverter)
 * [Int16](xref:System.ComponentModel.Int16Converter)、[Int32](xref:System.ComponentModel.Int32Converter)、[Int64](xref:System.ComponentModel.Int64Converter)
 * [Single](xref:System.ComponentModel.SingleConverter)
@@ -224,7 +224,7 @@ public class Pet
 
 複雜型別必須具有公用預設的函式和可系結的公用可寫入屬性。 發生模型繫結時，類別會使用公用預設建構函式具現化。 
 
-針對複雜類型的每個屬性，模型繫結會查看名稱模式 *prefix.property_name* 的來源。 如果找不到，它會只尋找沒有前置詞的 *property_name* 。
+針對複雜類型的每個屬性，模型繫結會查看名稱模式 *prefix.property_name* 的來源。 如果找不到，它會只尋找沒有前置詞的 *property_name*。
 
 若要繫結至參數，則前置詞是參數名稱。 若要繫結至 `PageModel` 公用屬性，則前置詞為公用屬性名稱。 某些屬性 (Attribute) 具有 `Prefix` 屬性 (Property)，其可讓您覆寫參數或屬性名稱的預設使用方法。
 
@@ -488,7 +488,7 @@ HTTP 要求包含上傳的檔案。  也支援多個檔案的 `IEnumerable<IForm
 
 ### <a name="cancellationtoken"></a>CancellationToken
 
-用來取消非同步控制器中的活動。
+動作可以選擇性地系結 `CancellationToken` 做為參數。 <xref:Microsoft.AspNetCore.Http.HttpContext.RequestAborted>當 HTTP 要求的基礎連接中止時，此系結會發出信號。 動作可以使用此參數來取消長時間執行的非同步作業，而這些作業會做為控制器動作的一部分執行。
 
 ### <a name="formcollection"></a>FormCollection
 
@@ -760,7 +760,7 @@ public class Pet
 * [DateTimeOffset](xref:System.ComponentModel.DateTimeOffsetConverter)
 * [十進位](xref:System.ComponentModel.DecimalConverter)
 * [Double](xref:System.ComponentModel.DoubleConverter)
-* [列舉](xref:System.ComponentModel.EnumConverter)
+* [枚舉](xref:System.ComponentModel.EnumConverter)
 * [Guid](xref:System.ComponentModel.GuidConverter)
 * [Int16](xref:System.ComponentModel.Int16Converter)、[Int32](xref:System.ComponentModel.Int32Converter)、[Int64](xref:System.ComponentModel.Int64Converter)
 * [Single](xref:System.ComponentModel.SingleConverter)
@@ -773,7 +773,7 @@ public class Pet
 
 複雜型別必須具有公用預設的函式和可系結的公用可寫入屬性。 發生模型繫結時，類別會使用公用預設建構函式具現化。 
 
-針對複雜類型的每個屬性，模型繫結會查看名稱模式 *prefix.property_name* 的來源。 如果找不到，它會只尋找沒有前置詞的 *property_name* 。
+針對複雜類型的每個屬性，模型繫結會查看名稱模式 *prefix.property_name* 的來源。 如果找不到，它會只尋找沒有前置詞的 *property_name*。
 
 若要繫結至參數，則前置詞是參數名稱。 若要繫結至 `PageModel` 公用屬性，則前置詞為公用屬性名稱。 某些屬性 (Attribute) 具有 `Prefix` 屬性 (Property)，其可讓您覆寫參數或屬性名稱的預設使用方法。
 

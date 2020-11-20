@@ -19,16 +19,19 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/security/webassembly/aad-groups-roles
-ms.openlocfilehash: 680b44a705b66be0aab824487119cdb118b44d0f
-ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
+ms.openlocfilehash: ded70f028b3021574ba260838837d9b23abd72f1
+ms.sourcegitcommit: 8363e44f630fcc6433ccd2a85f7aa9567cd274ed
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 10/30/2020
-ms.locfileid: "93055304"
+ms.lasthandoff: 11/20/2020
+ms.locfileid: "94981878"
 ---
 # <a name="azure-active-directory-aad-groups-administrator-roles-and-user-defined-roles"></a>Azure Active Directory (AAD) 群組、系統管理員角色和使用者定義的角色
 
 [Luke Latham](https://github.com/guardrex) And [Javier Calvarro Nelson](https://github.com/javiercn)
+
+> [!NOTE]
+> 本文適用于 Blazor 使用 Microsoft v1.0 的 ASP.NET Core apps 3.1 版 Identity ，並已排程為使用 v2.0 更新至 5.0 Identity 。 如需詳細資訊，請參閱[ Blazor WASM 中的 AAD/B2C 群組和角色 (dotnet/AspNetCore.Docs #17683) ](https://github.com/dotnet/AspNetCore.Docs/issues/17683)。
 
 Azure Active Directory (AAD) 提供數個可結合的授權方法 ASP.NET Core Identity ：
 

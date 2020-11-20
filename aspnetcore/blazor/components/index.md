@@ -19,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/components/index
-ms.openlocfilehash: d8838a458943599890420adec4551ad87e43d328
-ms.sourcegitcommit: e087b6a38e3d38625ebb567a973e75b4d79547b9
+ms.openlocfilehash: cc4604f7f67a6648c96e099572ff27bfed838916
+ms.sourcegitcommit: 8363e44f630fcc6433ccd2a85f7aa9567cd274ed
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 11/15/2020
-ms.locfileid: "94637700"
+ms.lasthandoff: 11/20/2020
+ms.locfileid: "94981865"
 ---
 # <a name="create-and-use-aspnet-core-no-locrazor-components"></a>建立和使用 ASP.NET Core Razor 元件
 
@@ -36,7 +36,7 @@ Blazor 應用程式是使用 *元件* 建立的。 元件是獨立的使用者�
 
 ## <a name="component-classes"></a>元件類別
 
-元件會 [Razor](xref:mvc/views/razor) `.razor` 使用 c # 和 HTML 標籤的組合，在元件檔 () 中實作為元件。 中的元件 Blazor 正式參考為 *Razor 元件* 。
+元件會 [Razor](xref:mvc/views/razor) `.razor` 使用 c # 和 HTML 標籤的組合，在元件檔 () 中實作為元件。 中的元件 Blazor 正式參考為 *Razor 元件*。
 
 ### <a name="no-locrazor-syntax"></a>Razor 語法
 
@@ -268,7 +268,7 @@ namespace BlazorSample
 
 ### <a name="component-parameters"></a>元件參數
 
-元件可以有 *元件參數* ，這些參數是使用元件類別上的公用屬性（attribute）來定義的 [`[Parameter]`](xref:Microsoft.AspNetCore.Components.ParameterAttribute) 。 使用這些屬性來指定標記中元件的引數。
+元件可以有 *元件參數*，這些參數是使用元件類別上的公用簡單或複雜屬性（attribute）來定義的 [`[Parameter]`](xref:Microsoft.AspNetCore.Components.ParameterAttribute) 。 使用這些屬性來指定標記中元件的引數。
 
 `Components/ChildComponent.razor`:
 

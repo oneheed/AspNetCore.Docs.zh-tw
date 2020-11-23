@@ -18,12 +18,12 @@ no-loc:
 - SignalR
 - Kestrel
 uid: aspnetcore-5.0
-ms.openlocfilehash: 7f90e4c424aa4bb76be7c226acd2f16261e0dfe6
-ms.sourcegitcommit: 8363e44f630fcc6433ccd2a85f7aa9567cd274ed
+ms.openlocfilehash: 8e848ef57a9164501fd3c4f29f47ad7c72118507
+ms.sourcegitcommit: aa85f2911792a1e4783bcabf0da3b3e7e218f63a
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 11/20/2020
-ms.locfileid: "94981943"
+ms.lasthandoff: 11/23/2020
+ms.locfileid: "95417548"
 ---
 # <a name="whats-new-in-aspnet-core-50"></a>ASP.NET Core 5.0 的新功能
 
@@ -361,7 +361,7 @@ See [Update SignalR code](xref:migration/31-to-50#signalr) for migration instruc
 
 ### <a name="azure-active-directory-authentication-with-microsoftno-locidentityweb"></a>使用 Microsoft 驗證 Identity Azure Active Directory。Web
 
-ASP.NET Core 的專案範本現在會與整合， <xref:Microsoft.Identity.Web?displayProperty=fullName> 以處理 [Azure 活動目錄](/azure/active-directory/fundamentals/active-directory-whatis) 的驗證， (Azure AD) 。 [Microsoft ... IdentityWeb 套件](https://www.nuget.org/packages/Microsoft.Identity.Web/)提供：
+ASP.NET Core 專案範本現在會與整合， <xref:Microsoft.Identity.Web?displayProperty=fullName> 以使用 [Azure Active Directory](/azure/active-directory/fundamentals/active-directory-whatis) (Azure AD) 來處理驗證。 [Microsoft ... IdentityWeb 套件](https://www.nuget.org/packages/Microsoft.Identity.Web/)提供：
 
 * 透過 Azure AD 進行驗證的更佳體驗。
 * 代表您的使用者輕鬆存取 Azure 資源的方式，包括 [Microsoft Graph](/graph/overview)。 請參閱 [Microsoft ... IdentityWeb 範例](https://github.com/Azure-Samples/active-directory-aspnetcore-webapp-openidconnect-v2)，使用 Azure api、使用 Microsoft Graph 和保護您自己的 api，從基本登入開始，並透過多租使用者前進。 `Microsoft.Identity.Web` 可與 .NET 5 一起使用。

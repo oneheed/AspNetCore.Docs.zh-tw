@@ -18,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: grpc/httpapi
-ms.openlocfilehash: 45e2a1a5e6a9f00294147db769454b78c5b866e5
-ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
+ms.openlocfilehash: 64d18114e2fe9ee10edb902a98a281c3cd9f3393
+ms.sourcegitcommit: aa85f2911792a1e4783bcabf0da3b3e7e218f63a
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 10/30/2020
-ms.locfileid: "93059932"
+ms.lasthandoff: 11/23/2020
+ms.locfileid: "95417574"
 ---
 # <a name="create-json-web-apis-from-grpc"></a>從 gRPC 建立 JSON Web API
 
@@ -39,7 +39,7 @@ ms.locfileid: "93059932"
 
 gRPC 是在應用程式之間進行通訊的新式方法。 gRPC 使用 HTTP/2、串流、Protobuf 和訊息合約來建立高效能的即時服務。
 
-GRPC 的其中一項限制不是每個平臺都可以使用它。 瀏覽器不完全支援 HTTP/2，讓 REST 和 JSON 成為將資料帶入瀏覽器應用程式的主要方式。 即使有 gRPC 帶來的好處，REST 和 JSON 在新式應用程式中都有一個重要的地方。 建立 gRPC * **和** _ JSON Web api 會在應用程式開發中增加不必要的額外負荷。
+GRPC 的其中一項限制不是每個平臺都可以使用它。 瀏覽器不完全支援 HTTP/2，讓 REST 和 JSON 成為將資料帶入瀏覽器應用程式的主要方式。 即使有 gRPC 帶來的好處，REST 和 JSON 在新式應用程式中都有一個重要的地方。 建立 gRPC ***和** _ JSON Web api 會在應用程式開發中增加不必要的額外負荷。
 
 本檔討論如何使用 gRPC 服務來建立 JSON Web Api。
 
@@ -137,7 +137,7 @@ gRPC HTTP API 是一項實驗。 它並不完整，而且不受支援。 我們�
 
 Grpc-閘道和 gRPC HTTP API 之間的最大差異是 grpc-閘道會使用程式碼產生來建立反向 proxy 伺服器。 反向 proxy 會將 RESTful 呼叫轉譯為 gRPC，然後將它們傳送至 gRPC 服務。
 
-如需 grpc 閘道的安裝和使用方式，請參閱 [grpc-閘道檔](https://grpc-ecosystem.github.io/grpc-gateway/docs/usage.html)。
+如需 grpc 閘道的安裝和使用方式，請參閱 [grpc-閘道讀我檔案](https://github.com/grpc-ecosystem/grpc-gateway/#grpc-gateway)。
 
 ## <a name="additional-resources"></a>其他資源
 

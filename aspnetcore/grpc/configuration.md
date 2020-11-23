@@ -5,7 +5,7 @@ description: 瞭解如何設定 .NET 應用程式的 gRPC。
 monikerRange: '>= aspnetcore-3.0'
 ms.author: jamesnk
 ms.custom: mvc
-ms.date: 05/26/2020
+ms.date: 11/23/2020
 no-loc:
 - appsettings.json
 - ASP.NET Core Identity
@@ -19,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: grpc/configuration
-ms.openlocfilehash: e0b782a254cafc440638ca77a3b9ac885dc3575e
-ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
+ms.openlocfilehash: 617c042c628dc431391f39c2ecb2d2f9c9463fa5
+ms.sourcegitcommit: aa85f2911792a1e4783bcabf0da3b3e7e218f63a
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 10/30/2020
-ms.locfileid: "93059958"
+ms.lasthandoff: 11/23/2020
+ms.locfileid: "95417587"
 ---
 # <a name="grpc-for-net-configuration"></a>適用于 .NET 設定的 gRPC
 
@@ -40,7 +40,7 @@ gRPC 服務是 `AddGrpc` 在 *Startup.cs* 中設定。 下表描述設定 gRPC s
 | CompressionProviders | gzip | 壓縮提供者的集合，用來壓縮和解壓縮訊息。 您可以建立自訂壓縮提供者，並將其加入至集合。 預設設定的提供者支援 **gzip** 壓縮。 |
 | <span style="word-break:normal;word-wrap:normal">ResponseCompressionAlgorithm</span> | `null` | 壓縮演算法，用來壓縮從伺服器傳送的訊息。 演算法必須符合中的壓縮提供者 `CompressionProviders` 。 若要讓演算法壓縮回應，用戶端必須透過在 **grpc 接受編碼** 標頭中傳送來指出其支援演算法。 |
 | ResponseCompressionLevel | `null` | 壓縮層級，用來壓縮從伺服器傳送的訊息。 |
-| 攔截器 | None | 在每個 gRPC 呼叫中執行的攔截器集合。 攔截器會依註冊的循序執行。 全域設定的攔截器會在針對單一服務設定攔截器之前執行。 如需 gRPC 攔截器的詳細資訊，請參閱 [GRPC 攔截器與中介軟體](xref:grpc/migration#grpc-interceptors-vs-middleware)。 |
+| 攔截器 | 無 | 在每個 gRPC 呼叫中執行的攔截器集合。 攔截器會依註冊的循序執行。 全域設定的攔截器會在針對單一服務設定攔截器之前執行。 如需 gRPC 攔截器的詳細資訊，請參閱 [GRPC 攔截器與中介軟體](xref:grpc/migration#grpc-interceptors-vs-middleware)。 |
 | IgnoreUnknownServices | `false` | 如果 `true` 為，則對未知服務和方法的呼叫 **UNIMPLEMENTED** 不會傳回未產生的狀態，且要求會傳遞至 ASP.NET Core 中的下一個已註冊中介軟體。 |
 
 您可以針對所有服務設定選項，方法是提供選項委派給 `AddGrpc` 中的呼叫 `Startup.ConfigureServices` ：
@@ -65,6 +65,7 @@ gRPC 用戶端設定設為開啟 `GrpcChannelOptions` 。 下表描述設定 gRP
 | <span style="word-break:normal;word-wrap:normal">MaxReceiveMessageSize</span> | 4 MB | 用戶端可以接收的訊息大小上限（以位元組為單位）。 如果用戶端收到超過此限制的訊息，則會擲回例外狀況。 提高此值可讓用戶端接收較大的訊息，但可能會對記憶體耗用量造成負面影響。 當設定為時 `null` ，訊息大小是無限制的。 |
 | 認證 | `null` | `ChannelCredentials` 執行個體。 認證是用來將驗證中繼資料新增至 gRPC 呼叫。 |
 | CompressionProviders | gzip | 壓縮提供者的集合，用來壓縮和解壓縮訊息。 您可以建立自訂壓縮提供者，並將其加入至集合。 預設設定的提供者支援 **gzip** 壓縮。 |
+| ThrowOperationCanceledOnCancellation | `false` | 如果設定為 `true` ，用戶端 <xref:System.OperationCanceledException> 會在呼叫取消或超過期限時擲回。 |
 
 下列程式碼：
 

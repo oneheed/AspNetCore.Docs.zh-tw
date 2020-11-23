@@ -19,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/forms-validation
-ms.openlocfilehash: fe232b40a2255732dd375cc266937576d5b2d5d9
-ms.sourcegitcommit: 1be547564381873fe9e84812df8d2088514c622a
+ms.openlocfilehash: 827045775d3bca3cd2c467b12172c53f5f9b0625
+ms.sourcegitcommit: aa85f2911792a1e4783bcabf0da3b3e7e218f63a
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 11/11/2020
-ms.locfileid: "94507820"
+ms.lasthandoff: 11/23/2020
+ms.locfileid: "95417392"
 ---
 # <a name="aspnet-core-no-locblazor-forms-and-validation"></a>ASP.NET Core Blazor 表單和驗證
 
@@ -225,7 +225,7 @@ public class Starship
 
 <xref:Microsoft.AspNetCore.Components.Forms.EditForm> <xref:Microsoft.AspNetCore.Components.Forms.EditContext> 會建立做為階層式[值](xref:blazor/components/cascading-values-and-parameters)，以追蹤編輯程式的相關中繼資料，包括已修改的欄位和目前的驗證訊息。
 
-將 **either** <xref:Microsoft.AspNetCore.Components.Forms.EditContext> **或** 指派給 <xref:Microsoft.AspNetCore.Components.Forms.EditForm.Model?displayProperty=nameWithType> <xref:Microsoft.AspNetCore.Components.Forms.EditForm> 。 不支援同時指派，且會產生 **執行階段錯誤** 。
+將 **either** <xref:Microsoft.AspNetCore.Components.Forms.EditContext> **或** 指派給 <xref:Microsoft.AspNetCore.Components.Forms.EditForm.Model?displayProperty=nameWithType> <xref:Microsoft.AspNetCore.Components.Forms.EditForm> 。 不支援同時指派，且會產生 **執行階段錯誤**。
 
 <xref:Microsoft.AspNetCore.Components.Forms.EditForm>提供方便的事件，以進行有效和不正確表單提交：
 
@@ -337,49 +337,46 @@ using System.Collections.Generic;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Forms;
 
-namespace BlazorSample.Client
+public class CustomValidator : ComponentBase
 {
-    public class CustomValidator : ComponentBase
+    private ValidationMessageStore messageStore;
+
+    [CascadingParameter]
+    private EditContext CurrentEditContext { get; set; }
+
+    protected override void OnInitialized()
     {
-        private ValidationMessageStore messageStore;
-
-        [CascadingParameter]
-        private EditContext CurrentEditContext { get; set; }
-
-        protected override void OnInitialized()
+        if (CurrentEditContext == null)
         {
-            if (CurrentEditContext == null)
-            {
-                throw new InvalidOperationException(
-                    $"{nameof(CustomValidator)} requires a cascading " +
-                    $"parameter of type {nameof(EditContext)}. " +
-                    $"For example, you can use {nameof(CustomValidator)} " +
-                    $"inside an {nameof(EditForm)}.");
-            }
-
-            messageStore = new ValidationMessageStore(CurrentEditContext);
-
-            CurrentEditContext.OnValidationRequested += (s, e) => 
-                messageStore.Clear();
-            CurrentEditContext.OnFieldChanged += (s, e) => 
-                messageStore.Clear(e.FieldIdentifier);
+            throw new InvalidOperationException(
+                $"{nameof(CustomValidator)} requires a cascading " +
+                $"parameter of type {nameof(EditContext)}. " +
+                $"For example, you can use {nameof(CustomValidator)} " +
+                $"inside an {nameof(EditForm)}.");
         }
 
-        public void DisplayErrors(Dictionary<string, List<string>> errors)
-        {
-            foreach (var err in errors)
-            {
-                messageStore.Add(CurrentEditContext.Field(err.Key), err.Value);
-            }
+        messageStore = new ValidationMessageStore(CurrentEditContext);
 
-            CurrentEditContext.NotifyValidationStateChanged();
-        }
-
-        public void ClearErrors()
-        {
+        CurrentEditContext.OnValidationRequested += (s, e) => 
             messageStore.Clear();
-            CurrentEditContext.NotifyValidationStateChanged();
+        CurrentEditContext.OnFieldChanged += (s, e) => 
+            messageStore.Clear(e.FieldIdentifier);
+    }
+
+    public void DisplayErrors(Dictionary<string, List<string>> errors)
+    {
+        foreach (var err in errors)
+        {
+            messageStore.Add(CurrentEditContext.Field(err.Key), err.Value);
         }
+
+        CurrentEditContext.NotifyValidationStateChanged();
+    }
+
+    public void ClearErrors()
+    {
+        messageStore.Clear();
+        CurrentEditContext.NotifyValidationStateChanged();
     }
 }
 ```
@@ -451,7 +448,7 @@ namespace BlazorSample.Client
 * 使用元件，處理表單中的用戶端驗證 <xref:Microsoft.AspNetCore.Components.Forms.DataAnnotationsValidator> 。
 * 當表單通過用戶端驗證時 <xref:Microsoft.AspNetCore.Components.Forms.EditForm.OnValidSubmit> ， (稱為) ，請將傳送 <xref:Microsoft.AspNetCore.Components.Forms.EditContext.Model?displayProperty=nameWithType> 至後端伺服器 API 以進行表單處理。
 * 伺服器上的進程模型驗證。
-* 伺服器 API 包含內建的架構資料批註驗證，以及開發人員所提供的自訂驗證邏輯。 如果驗證是在伺服器上通過，請處理表單並將成功狀態碼傳回 ( *200-確定* ) 。 如果驗證失敗，會傳回失敗狀態碼 ( *400-錯誤的要求* ) 和欄位驗證錯誤。
+* 伺服器 API 包含內建的架構資料批註驗證，以及開發人員所提供的自訂驗證邏輯。 如果驗證是在伺服器上通過，請處理表單並將成功狀態碼傳回 (*200-確定*) 。 如果驗證失敗，會傳回失敗狀態碼 (*400-錯誤的要求*) 和欄位驗證錯誤。
 * 請停用成功的表單，或顯示錯誤。
 
 下列範例是根據：
@@ -483,7 +480,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using BlazorSample.Shared;
 
-namespace BlazorSample.Server.Controllers
+namespace {ASSEMBLY NAME}.Controllers
 {
     [Authorize]
     [ApiController]
@@ -528,6 +525,8 @@ namespace BlazorSample.Server.Controllers
     }
 }
 ```
+
+在上述範例中，預留位置 `{ASSEMBLY NAME}` 是應用程式的元件名稱 (例如 `BlazorSample.Server`) 。
 
 當伺服器上發生模型系結驗證錯誤時， [`ApiController`](xref:web-api/index) (<xref:Microsoft.AspNetCore.Mvc.ApiControllerAttribute>) 通常會傳回 [預設錯誤的要求回應](xref:web-api/index#default-badrequest-response) <xref:Microsoft.AspNetCore.Mvc.ValidationProblemDetails> 。 回應所包含的資料超過驗證錯誤，如下列範例所示，當 *Starfleet Starship 資料庫* 表單的所有欄位都未送出，而且表單驗證失敗時：
 
@@ -976,7 +975,7 @@ Blazor嘗試雙向系結至值時，架構不會自動處理 `null` 空字串轉
 Blazor 會執行兩種類型的驗證：
 
 * *欄位驗證* 是在使用者索引標籤離開欄位時執行。 在欄位驗證期間， <xref:Microsoft.AspNetCore.Components.Forms.DataAnnotationsValidator> 元件會將所有報告的驗證結果與欄位相關聯。
-* 當使用者提交表單時，會執行 *模型驗證* 。 在模型驗證期間， <xref:Microsoft.AspNetCore.Components.Forms.DataAnnotationsValidator> 元件會嘗試根據驗證結果報告的成員名稱來決定欄位。 未與個別成員相關聯的驗證結果會與模型相關聯，而不是與欄位相關聯。
+* 當使用者提交表單時，會執行 *模型驗證*。 在模型驗證期間， <xref:Microsoft.AspNetCore.Components.Forms.DataAnnotationsValidator> 元件會嘗試根據驗證結果報告的成員名稱來決定欄位。 未與個別成員相關聯的驗證結果會與模型相關聯，而不是與欄位相關聯。
 
 ### <a name="validation-summary-and-validation-message-components"></a>驗證摘要和驗證訊息元件
 
@@ -1063,7 +1062,7 @@ private class MyFieldClassProvider : FieldCssClassProvider
 [`Microsoft.AspNetCore.Components.DataAnnotations.Validation`](https://www.nuget.org/packages/Microsoft.AspNetCore.Components.DataAnnotations.Validation)是使用元件填滿驗證體驗間距的封裝 <xref:Microsoft.AspNetCore.Components.Forms.DataAnnotationsValidator> 。 封裝目前為 *實驗* 性。
 
 > [!NOTE]
-> [`Microsoft.AspNetCore.Components.DataAnnotations.Validation`](https://www.nuget.org/packages/Microsoft.AspNetCore.Components.DataAnnotations.Validation)套件在 [Nuget.org](https://www.nuget.org/packages/Microsoft.AspNetCore.Components.DataAnnotations.Validation)有最新版本的 *候選版* 。請繼續使用 *實驗* 性發行候選套件。 封裝的元件可能會在未來的版本中移至架構或執行時間。 觀看 [公告 github 存放庫](https://github.com/aspnet/Announcements)、 [Dotnet/aspnetcore GitHub 存放庫](https://github.com/dotnet/aspnetcore)，或本主題一節以取得進一步的更新。
+> [`Microsoft.AspNetCore.Components.DataAnnotations.Validation`](https://www.nuget.org/packages/Microsoft.AspNetCore.Components.DataAnnotations.Validation)套件在 [Nuget.org](https://www.nuget.org/packages/Microsoft.AspNetCore.Components.DataAnnotations.Validation)有最新版本的 *候選版*。請繼續使用 *實驗* 性發行候選套件。 封裝的元件可能會在未來的版本中移至架構或執行時間。 觀看 [公告 github 存放庫](https://github.com/aspnet/Announcements)、 [Dotnet/aspnetcore GitHub 存放庫](https://github.com/dotnet/aspnetcore)，或本主題一節以取得進一步的更新。
 
 ### <a name="compareproperty-attribute"></a>[CompareProperty] 屬性
 

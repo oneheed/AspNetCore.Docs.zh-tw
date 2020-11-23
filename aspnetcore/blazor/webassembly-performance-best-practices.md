@@ -19,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/webassembly-performance-best-practices
-ms.openlocfilehash: 423745d734d8da2b8f3f974f9b4dd1a0265d4877
-ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
+ms.openlocfilehash: cc090b4e56745e6b010e4a7ee17332b0d3a95560
+ms.sourcegitcommit: aa85f2911792a1e4783bcabf0da3b3e7e218f63a
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 10/30/2020
-ms.locfileid: "93054732"
+ms.lasthandoff: 11/23/2020
+ms.locfileid: "95417379"
 ---
 # <a name="aspnet-core-no-locblazor-webassembly-performance-best-practices"></a>ASP.NET Core Blazor WebAssembly 效能最佳做法
 
@@ -32,8 +32,8 @@ ms.locfileid: "93054732"
 
 Blazor WebAssembly 經過仔細設計和優化，可在最實際的應用程式 UI 案例中啟用高效能。 不過，產生最佳結果取決於使用正確模式和功能的開發人員。 請考慮下列層面：
 
-* **執行時間輸送量** ： .net 程式碼會在 WebAssembly 執行時間內的解譯器上執行，因此 CPU 輸送量受限。 在要求的案例中，應用程式受益于 [優化轉譯速度](#optimize-rendering-speed)。
-* **啟動時間** ：應用程式將 .net 執行時間傳送到瀏覽器，因此請務必使用 [最小化應用程式下載大小](#minimize-app-download-size)的功能。
+* **執行時間輸送量**： .net 程式碼會在 WebAssembly 執行時間內的解譯器上執行，因此 CPU 輸送量受限。 在要求的案例中，應用程式受益于 [優化轉譯速度](#optimize-rendering-speed)。
+* **啟動時間**：應用程式將 .net 執行時間傳送到瀏覽器，因此請務必使用 [最小化應用程式下載大小](#minimize-app-download-size)的功能。
 
 ## <a name="optimize-rendering-speed"></a>優化轉譯速度
 
@@ -297,7 +297,7 @@ public static RenderFragment SayHello = __builder =>
 
 `<CascadingValue>`元件有一個稱為的選擇性參數 `IsFixed` 。
 
- * 如果 `IsFixed` 值 `false` (預設的) ，則串聯值的每個收件者都會設定要接收變更通知的訂用帳戶。 在此情況下，因為訂用帳戶追蹤的緣故，每個都 `[CascadingParameter]` 有 **相當高的成本** `[Parameter]` 。
+ * 如果 `IsFixed` 值 `false` (預設的) ，則串聯值的每個收件者都會設定要接收變更通知的訂用帳戶。 在這種情況下，因為訂用帳戶追蹤的緣故，每個服務的 `[CascadingParameter]` **成本都相當高** `[Parameter]` 。
  * 如果 `IsFixed` 值是 `true` (例如 `<CascadingValue Value="@someValue" IsFixed="true">`) ，則收件者會收到初始值，但 *不* 會設定任何訂用帳戶來接收更新。 在此情況下，每個 `[CascadingParameter]` 都是輕量的，而且不會比一般標準 **更昂貴** `[Parameter]` 。
 
 因此，您應該盡可能 `IsFixed="true"` 在串聯的值上使用。 只要所提供的值不會隨著時間而變更，您就可以這麼做。 在元件以串聯值形式傳遞的一般模式 `this` 下，您應該使用 `IsFixed="true"` ：

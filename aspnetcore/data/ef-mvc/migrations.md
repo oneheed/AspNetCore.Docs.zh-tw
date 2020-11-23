@@ -19,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: data/ef-mvc/migrations
-ms.openlocfilehash: ab5be222416e61fcff90c5130ca91ad4a2a5c9b0
-ms.sourcegitcommit: bce62ceaac7782e22d185814f2e8532c84efa472
+ms.openlocfilehash: 25ada6e3a210ed830514e69da7d5212264b4b91e
+ms.sourcegitcommit: aa85f2911792a1e4783bcabf0da3b3e7e218f63a
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 11/17/2020
-ms.locfileid: "94674000"
+ms.lasthandoff: 11/23/2020
+ms.locfileid: "95417561"
 ---
 # <a name="tutorial-part-5-apply-migrations-to-the-contoso-university-sample"></a>教學課程：第5部分：將遷移套用至 Contoso 大學範例
 
@@ -39,7 +39,7 @@ ms.locfileid: "94674000"
 > * 了解資料模型快照集
 > * 套用移轉
 
-## <a name="prerequisites"></a>先決條件
+## <a name="prerequisites"></a>必要條件
 
 * [排序、篩選和分頁](sort-filter-page.md)
 
@@ -53,9 +53,10 @@ ms.locfileid: "94674000"
 
 ## <a name="drop-the-database"></a>卸除資料庫
 
-刪除資料庫。 使用 [SQL Server 物件總管] (SSOX) 或 `database drop` CLI 命令：
+以 [通用工具](/ef/core/miscellaneous/cli/dotnet) 的形式安裝 EF Core 工具，然後刪除資料庫：
 
  ```dotnetcli
+ dotnet tool install --global dotnet-ef
  dotnet ef database drop
  ```
 
@@ -76,11 +77,8 @@ ms.locfileid: "94674000"
 在命令視窗中輸入下列命令：
 
 ```dotnetcli
-dotnet tool install --global dotnet-ef
 dotnet ef migrations add InitialCreate
 ```
-
-`dotnet tool install --global dotnet-ef` 安裝 `dotnet ef` 為 [全域工具](/ef/core/miscellaneous/cli/dotnet)。
 
 在上述命令中，會顯示類似下列的輸出：
 

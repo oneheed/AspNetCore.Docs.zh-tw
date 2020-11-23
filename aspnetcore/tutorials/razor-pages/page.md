@@ -20,12 +20,12 @@ no-loc:
 - Razor
 - SignalR
 uid: tutorials/razor-pages/page
-ms.openlocfilehash: a9494feacbe783b20a9f5eb98ef9e481f2c713fa
-ms.sourcegitcommit: 342588e10ae0054a6d6dc0fd11dae481006be099
+ms.openlocfilehash: d655be26a794f87a0be07046ae1d6415256d592c
+ms.sourcegitcommit: aa85f2911792a1e4783bcabf0da3b3e7e218f63a
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 11/07/2020
-ms.locfileid: "94360888"
+ms.lasthandoff: 11/23/2020
+ms.locfileid: "95417626"
 ---
 # <a name="part-3-scaffolded-no-locrazor-pages-in-aspnet-core"></a>第3部分： Razor ASP.NET Core 中的 scaffold 頁面
 
@@ -98,7 +98,7 @@ Razor 可以從 HTML 轉換成 c # 或 Razor 特定標記。 當 `@` 符號後�
 
 ### <a name="the-layout-page"></a>版面配置頁
 
-選取功能表連結 **Razor PagesMovie** 、 **首頁** 和 **隱私權** 。 每個頁面會顯示相同的功能表配置。 功能表配置會在 *Pages/Shared/_Layout.cshtml* 檔案中實作。
+選取功能表連結 **Razor PagesMovie**、**首頁** 和 **隱私權**。 每個頁面會顯示相同的功能表配置。 功能表配置會在 *Pages/Shared/_Layout.cshtml* 檔案中實作。
 
 開啟並檢查 *Pages/Shared/_Layout 的 cshtml* 檔案。
 
@@ -131,7 +131,7 @@ Razor 可以從 HTML 轉換成 c # 或 Razor 特定標記。 當 `@` 符號後�
 
 ### <a name="update-the-layout"></a>更新配置
 
-1. 變更 `<title>` *Pages/Shared/_Layout cshtml* 檔案中的專案，以顯示 **電影** ，而不是 **Razor PagesMovie** 。
+1. 變更 `<title>` *Pages/Shared/_Layout cshtml* 檔案中的專案，以顯示 **電影**，而不是 **Razor PagesMovie**。
 
    [!code-cshtml[](razor-pages-start/sample/RazorPagesMovie30/Pages/Shared/_Layout.cshtml?range=1-6&highlight=6)]
 
@@ -151,7 +151,7 @@ Razor 可以從 HTML 轉換成 c # 或 Razor 特定標記。 當 `@` 符號後�
 
 1. 儲存變更，然後選取 [ **>rpmovie** ] 連結來測試應用程式。 如有任何問題，請參閱 GitHub 中的 [_Layout.cshtml](https://github.com/dotnet/AspNetCore.Docs/blob/master/aspnetcore/tutorials/razor-pages/razor-pages-start/sample/RazorPagesMovie30/Pages/Shared/_Layout.cshtml) 檔案。
 
-1. 測試 **首頁** 、 **>rpmovie** 、 **Create** **編輯** 和 **Delete** 連結。 每個頁面都會設定標題，您可以在 [瀏覽器] 索引標籤中看到此標題。當您將頁面加入書簽時，此標題會用於書簽。
+1. 測試 **首頁**、 **>rpmovie**、 **Create** **編輯** 和 **Delete** 連結。 每個頁面都會設定標題，您可以在 [瀏覽器] 索引標籤中看到此標題。當您將頁面加入書簽時，此標題會用於書簽。
 
 > [!NOTE]
 > 您可能無法在 `Price` 欄位中輸入小數逗號。 若要針對使用逗號 ( "，" ) 作為小數點的非英文地區設定和非 US-English 日期格式支援 [jQuery 驗證](https://jqueryvalidation.org/) ，您必須採取步驟來全球化應用程式。 請參閱此 [GitHub 問題 4076](https://github.com/dotnet/AspNetCore.Docs/issues/4076#issuecomment-326590420) \(英文\)，以取得加入十進位逗號的指示。
@@ -237,12 +237,6 @@ Visual Studio 會以用於標籤協助程式的特殊粗體字型顯示下列標
 
 ::: moniker range="< aspnetcore-3.0"
 
-作者：[Rick Anderson](https://twitter.com/RickAndMSFT)
-
-本教學課程會檢查 Razor [先前教學](xref:tutorials/razor-pages/model)課程中的樣板所建立的頁面。
-
-[檢視或下載](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/tutorials/razor-pages/razor-pages-start/sample/RazorPagesMovie22)範例。
-
 ## <a name="the-no-loccreate-no-locdelete-details-and-edit-pages"></a>[、]、[ Create Delete 詳細資料] 和 [編輯] 頁面
 
 檢查 *Pages/電影/ Index Cshtml.cs* 頁面模型：
@@ -284,7 +278,7 @@ Razor 可以從 HTML 轉換成 c # 或 Razor 特定標記。 當 `@` 符號後�
 <xref:System.Web.Mvc.Html.DisplayNameExtensions.DisplayNameFor%2A?displayProperty=nameWithType> HTML 協助程式會檢查 Lambda 運算式中參考的 `Title` 屬性來判斷顯示名稱。 Lambda 運算式是進行檢查而不是評估。 這表示當 `model`、`model.Movie` 或 `model.Movie[0]` 是 `null` 或空白時，不會有任何存取違規。 例如，在評估 lambda 運算式時（例如）， `@Html.DisplayFor(modelItem => item.Title)` 會評估模型的屬性值。
 ### <a name="the-layout-page"></a>版面配置頁
 
-選取功能表連結 **Razor PagesMovie** 、 **首頁** 和 **隱私權** 。 每個頁面會顯示相同的功能表配置。 功能表配置會在 *Pages/Shared/_Layout.cshtml* 檔案中實作。
+選取功能表連結 **Razor PagesMovie**、**首頁** 和 **隱私權**。 每個頁面會顯示相同的功能表配置。 功能表配置會在 *Pages/Shared/_Layout.cshtml* 檔案中實作。
 
 開啟並檢查 *Pages/Shared/_Layout 的 cshtml* 檔案。
 
@@ -312,7 +306,7 @@ Razor 可以從 HTML 轉換成 c # 或 Razor 特定標記。 當 `@` 符號後�
 
 ### <a name="update-the-layout"></a>更新配置
 
-變更 `<title>` *Pages/Shared/_Layout cshtml* 檔案中的專案，以顯示 **電影** ，而不是 **Razor PagesMovie** 。
+變更 `<title>` *Pages/Shared/_Layout cshtml* 檔案中的專案，以顯示 **電影**，而不是 **Razor PagesMovie**。
 
 [!code-cshtml[](razor-pages-start/sample/RazorPagesMovie22/Pages/Shared/_Layout.cshtml?range=1-6&highlight=6)]
 
@@ -332,7 +326,7 @@ Razor 可以從 HTML 轉換成 c # 或 Razor 特定標記。 當 `@` 符號後�
 
 儲存變更，並按一下 **RpMovie** 連結來測試應用程式。 如有任何問題，請參閱 GitHub 中的 [_Layout.cshtml](https://github.com/dotnet/AspNetCore.Docs/blob/master/aspnetcore/tutorials/razor-pages/razor-pages-start/sample/RazorPagesMovie22/Pages/Shared/_Layout.cshtml) 檔案。
 
-測試其他連結 ( **Home** 、 **>rpmovie** 、 **Create** 、 **Edit** 和 **Delete** ) 。 每個頁面都會設定標題，您可以在 [瀏覽器] 索引標籤中看到此標題。當您將頁面加入書簽時，此標題會用於書簽。
+測試其他連結 (**Home**、 **>rpmovie**、 **Create** 、 **Edit** 和 **Delete**) 。 每個頁面都會設定標題，您可以在 [瀏覽器] 索引標籤中看到此標題。當您將頁面加入書簽時，此標題會用於書簽。
 
 > [!NOTE]
 > 您可能無法在 `Price` 欄位中輸入小數逗號。 若要針對使用逗號 ( "，" ) 作為小數點的非英文地區設定和非 US-English 日期格式支援 [jQuery 驗證](https://jqueryvalidation.org/) ，您必須採取步驟來全球化應用程式。 這個 [GitHub 問題 4076](https://github.com/dotnet/AspNetCore.Docs/issues/4076#issuecomment-326590420) 有加入小數逗號的指示。

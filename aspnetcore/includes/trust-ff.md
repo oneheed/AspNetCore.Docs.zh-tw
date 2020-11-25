@@ -1,0 +1,1 @@
+<span data-ttu-id="8d917-101">如需有關信任 Firefox 瀏覽器的詳細資訊，請參閱 [firefox SEC_ERROR_INADEQUATE_KEY_USAGE 憑證錯誤](xref:security/enforcing-ssl#trust-ff)。</span><span class="sxs-lookup"><span data-stu-id="8d917-101">For information on trusting the Firefox browser, see [Firefox SEC_ERROR_INADEQUATE_KEY_USAGE certificate error](xref:security/enforcing-ssl#trust-ff).</span></span>

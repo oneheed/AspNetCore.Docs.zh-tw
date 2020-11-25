@@ -1,7 +1,7 @@
-<span data-ttu-id="bdffd-101">`RedirectToLogin`元件 (`Shared/RedirectToLogin.razor`) ：</span><span class="sxs-lookup"><span data-stu-id="bdffd-101">The `RedirectToLogin` component (`Shared/RedirectToLogin.razor`):</span></span>
+<span data-ttu-id="6c8ad-101">`RedirectToLogin`元件 (`Shared/RedirectToLogin.razor`) ：</span><span class="sxs-lookup"><span data-stu-id="6c8ad-101">The `RedirectToLogin` component (`Shared/RedirectToLogin.razor`):</span></span>
 
-* <span data-ttu-id="bdffd-102">管理將未經授權的使用者重新導向至登入頁面。</span><span class="sxs-lookup"><span data-stu-id="bdffd-102">Manages redirecting unauthorized users to the login page.</span></span>
-* <span data-ttu-id="bdffd-103">保留使用者嘗試存取的目前 URL，以便在驗證成功時，將其傳回至該頁面。</span><span class="sxs-lookup"><span data-stu-id="bdffd-103">Preserves the current URL that the user is attempting to access so that they can be returned to that page if authentication is successful.</span></span>
+* <span data-ttu-id="6c8ad-102">管理將未經授權的使用者重新導向至登入頁面。</span><span class="sxs-lookup"><span data-stu-id="6c8ad-102">Manages redirecting unauthorized users to the login page.</span></span>
+* <span data-ttu-id="6c8ad-103">保留使用者嘗試存取的目前 URL，以便在驗證成功時，將其傳回至該頁面。</span><span class="sxs-lookup"><span data-stu-id="6c8ad-103">Preserves the current URL that the user is attempting to access so that they can be returned to that page if authentication is successful.</span></span>
 
 ```razor
 @inject NavigationManager Navigation

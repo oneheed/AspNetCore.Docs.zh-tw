@@ -34,7 +34,7 @@ Cookie 和網站資料可以跨應用程式更新保存，並干擾測試和疑�
   * 使用瀏覽器進行測試，您可以設定在每次關閉瀏覽器時刪除所有 cookie 和網站資料。
   * 請確定已手動關閉瀏覽器，或透過 IDE 來變更應用程式、測試使用者或提供者設定。
 * 在 Visual Studio 中使用自訂命令以 incognito 或私用模式開啟瀏覽器：
-  * 從 Visual Studio 的 [ **執行** ] 按鈕開啟 **[流覽方式** ] 對話方塊。
+  * 從 Visual Studio 的 [**執行**] 按鈕開啟 **[流覽方式**] 對話方塊。
   * 選取 [新增] 按鈕。
   * 在 [ **程式** ] 欄位中提供瀏覽器的路徑。 下列可執行檔路徑是 Windows 10 的一般安裝位置。 如果您的瀏覽器安裝在不同的位置，或您未使用 Windows 10，請提供瀏覽器可執行檔的路徑。
     * Microsoft Edge： `C:\Program Files (x86)\Microsoft\Edge\Application\msedge.exe`
@@ -44,7 +44,7 @@ Cookie 和網站資料可以跨應用程式更新保存，並干擾測試和疑�
     * Microsoft Edge：使用 `-inprivate` 。
     * Google Chrome：使用 `--incognito --new-window {URL}` ，其中預留位置 `{URL}` 是要開啟的 URL (例如 `https://localhost:5001`) 。
     * Mozilla Firefox：使用 `-private -url {URL}` ，其中預留位置 `{URL}` 是要開啟的 URL (例如 `https://localhost:5001`) 。
-  * 在 [ **易記名稱** ] 欄位中提供名稱。 例如 `Firefox Auth Testing`。
+  * 在 [ **易記名稱** ] 欄位中提供名稱。 例如： `Firefox Auth Testing` 。
   * 選取 [ **確定]** 按鈕。
   * 若要避免需要針對使用應用程式測試的每個反復專案選取瀏覽器設定檔，請將設定檔設定為預設值，並將 [ **設定為預設值** ] 按鈕。
   * 確定 IDE 已關閉瀏覽器，以進行應用程式、測試使用者或提供者設定的任何變更。
@@ -54,7 +54,7 @@ Cookie 和網站資料可以跨應用程式更新保存，並干擾測試和疑�
 測試及疑難排解託管 Blazor 應用程式時，請確定您是從專案執行應用程式 **`Server`** 。 例如，在 Visual Studio 中，請在使用下列任何一種方法啟動應用程式之前，先確認 **方案總管** 中的伺服器專案已反白顯示：
 
 * 選取 [執行] 按鈕。
-* 從功能表使用 **Debug**  >  **開始調試** 。
+* 從功能表使用 **Debug**  >  **開始調試**。
 * 按 <kbd>F5</kbd>。
 
 ### <a name="inspect-the-content-of-a-json-web-token-jwt"></a>檢查 JSON Web 權杖的內容 (JWT) 

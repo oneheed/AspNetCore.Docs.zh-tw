@@ -1,9 +1,9 @@
-`LoginDisplay`元件 (`Shared/LoginDisplay.razor`) 會在 `MainLayout` 元件 () 中呈現 `Shared/MainLayout.razor` ，並管理下列行為：
+`LoginDisplay`元件 (`Shared/LoginDisplay.razor`) 會轉譯在 `MainLayout` 元件 (`Shared/MainLayout.razor`) 並管理下列行為：
 
 * 針對已驗證的使用者：
   * 顯示目前的使用者名稱。
   * 提供用來登出應用程式的按鈕。
-* 若為匿名使用者，則提供登入的選項。
+* 若為匿名使用者，會提供登入的選項。
 
 ```razor
 @using Microsoft.AspNetCore.Components.Authorization

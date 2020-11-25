@@ -1,4 +1,4 @@
-架構預設為快顯登入模式，如果無法開啟快顯，則會回復為重新導向登入模式。 藉由將的屬性設為，將 MSAL 設定為使用重新導向登入模式 `LoginMode` <xref:Microsoft.Authentication.WebAssembly.Msal.Models.MsalProviderOptions> `redirect` ：
+如果無法開啟快顯視窗，架構會預設為快顯登入模式，並切換回重新導向登入模式。 將的屬性設定為，將 MSAL 設定為使用重新導向登入模式 `LoginMode` <xref:Microsoft.Authentication.WebAssembly.Msal.Models.MsalProviderOptions> `redirect` ：
 
 ```csharp
 builder.Services.AddMsalAuthentication(options =>
@@ -8,4 +8,4 @@ builder.Services.AddMsalAuthentication(options =>
 });
 ```
 
-預設設定為 `popup` ，且字串值不區分大小寫。
+預設設定為 `popup` ，字串值不區分大小寫。

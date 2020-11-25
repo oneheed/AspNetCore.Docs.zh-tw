@@ -1,4 +1,4 @@
-元件所產生的頁面 `Authentication` (`Pages/Authentication.razor`) 會定義處理不同驗證階段所需的路由。
+元件 () 所產生的頁面會 `Authentication` `Pages/Authentication.razor` 定義處理不同驗證階段所需的路由。
 
 <xref:Microsoft.AspNetCore.Components.WebAssembly.Authentication.RemoteAuthenticatorView>元件：
 

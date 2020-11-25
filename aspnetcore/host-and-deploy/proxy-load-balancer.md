@@ -20,11 +20,11 @@ no-loc:
 - SignalR
 uid: host-and-deploy/proxy-load-balancer
 ms.openlocfilehash: 461f6d2105d38c5dbea2f8cf479e027c2edede14
-ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
+ms.sourcegitcommit: 59d95a9106301d5ec5c9f612600903a69c4580ef
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 10/30/2020
-ms.locfileid: "93057618"
+ms.lasthandoff: 11/25/2020
+ms.locfileid: "96024938"
 ---
 # <a name="configure-aspnet-core-to-work-with-proxy-servers-and-load-balancers"></a>設定 ASP.NET Core 以與 Proxy 伺服器和負載平衡器搭配運作
 
@@ -59,7 +59,7 @@ ms.locfileid: "93057618"
 
 您可以設定「轉送的標頭中介軟體」的[預設設定](#forwarded-headers-middleware-options)。 預設設定值為：
 
-* 在應用程式與要求的來源之間只有「一個 Proxy」  。
+* 在應用程式與要求的來源之間只有「一個 Proxy」。
 * 針對已知的 Proxy 和已知的網路，只會設定回送位址。
 * 轉送標頭名稱為 `X-Forwarded-For` 和 `X-Forwarded-Proto`。
 
@@ -417,7 +417,7 @@ services.Configure<ForwardedHeadersOptions>(options =>
 
 您可以設定「轉送的標頭中介軟體」的[預設設定](#forwarded-headers-middleware-options)。 預設設定值為：
 
-* 在應用程式與要求的來源之間只有「一個 Proxy」  。
+* 在應用程式與要求的來源之間只有「一個 Proxy」。
 * 針對已知的 Proxy 和已知的網路，只會設定回送位址。
 * 轉送標頭名稱為 `X-Forwarded-For` 和 `X-Forwarded-Proto`。
 

@@ -19,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/security/webassembly/standalone-with-azure-active-directory
-ms.openlocfilehash: 4e8c22c56b7023301499fd273a9194b8c7b58f3d
-ms.sourcegitcommit: 45aa1c24c3fdeb939121e856282b00bdcf00ea55
+ms.openlocfilehash: 4f203e57fe69c3a14dc267c0693094fcefa3dd80
+ms.sourcegitcommit: 59d95a9106301d5ec5c9f612600903a69c4580ef
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 11/04/2020
-ms.locfileid: "93343702"
+ms.lasthandoff: 11/25/2020
+ms.locfileid: "96024668"
 ---
 # <a name="secure-an-aspnet-core-no-locblazor-webassembly-standalone-app-with-azure-active-directory"></a>使用 Azure Active Directory 保護 ASP.NET Core 的 Blazor WebAssembly 獨立應用程式
 
@@ -35,12 +35,16 @@ ms.locfileid: "93343702"
 ::: moniker range=">= aspnetcore-5.0"
 
 > [!NOTE]
-> 針對 Blazor WebAssembly 在 Visual Studio 中建立的應用程式，這些應用程式設定為支援 AAD 組織目錄中的帳戶，Visual Studio 不會在產生專案時正確設定應用程式。 未來的 Visual Studio 版本將會解決此問題。 本文說明如何使用 .NET Core CLI 的命令來建立應用程式 `dotnet new` 。 如果您想要在 IDE 更新 ASP.NET Core 5.0 中的最新範本之前使用 Visual Studio 建立應用程式 Blazor ，請參閱本文的每一節，然後在 Visual Studio 建立應用程式之後，確認或更新應用程式的設定。
+> 針對 Blazor WebAssembly 在 Visual Studio 中建立的應用程式，這些應用程式設定為支援 AAD 組織目錄中的帳戶，Visual Studio 目前未在產生專案時正確設定 Azure 入口網站應用程式註冊。 未來的 Visual Studio 版本將會解決此問題。
+>
+> 本文說明如何使用 .NET CLI 命令建立解決方案和 Azure 應用程式入口網站註冊 `dotnet new` ，並在 Azure 入口網站中手動建立應用程式註冊。
+>
+> 如果您想要在更新 IDE 之前，使用 Visual Studio 建立解決方案和 Azure 應用程式註冊，請參閱本文 **_的每一節_** ，並確認或更新應用程式的設定，以及在 Visual Studio 建立解決方案之後，應用程式的註冊。
 
 在 Azure 入口網站的 **Azure Active Directory** > **應用程式註冊** 區域中註冊 AAD 應用程式：
 
-1. 提供應用程式的 **名稱** (例如 **Blazor 獨立 AAD** ) 。
-1. 選擇 **支援的帳戶類型** 。 您可以 **只在此體驗中選取此組織目錄中的帳戶** 。
+1. 提供應用程式的 **名稱** (例如 **Blazor 獨立 AAD**) 。
+1. 選擇 **支援的帳戶類型**。 您可以 **只在此體驗中選取此組織目錄中的帳戶** 。
 1. 將 [重新 **導向 uri** ] 下拉式清單設定為 **單一頁面應用程式 (SPA)** 並提供下列重新導向 uri： `https://localhost:{PORT}/authentication/login-callback` 。 在 Kestrel 上執行應用程式的預設連接埠是 5001。 如果應用程式是在不同的 Kestrel 埠上執行，請使用應用程式的埠。 針對 IIS Express，可在 [ **調試** 程式] 面板的應用程式屬性中找到應用程式隨機產生的埠。 由於應用程式目前不存在，且 IIS Express 埠未知，因此在建立應用程式之後，請返回此步驟，並更新重新導向 URI。 本主題稍後會出現一個批註，提醒 IIS Express 使用者更新重新導向 URI。
 1. 清除 [授 **與系統** > **管理員同意 openid 和 offline_access 許可權** ] 核取方塊。
 1. 選取 [註冊]。
@@ -50,7 +54,7 @@ ms.locfileid: "93343702"
 * 應用程式 (用戶端) 識別碼 (例如 `41451fa7-82d9-4673-8fa5-69eff5a761fd`) 
 * 目錄 (租使用者) 識別碼 (例如 `e86c78e2-8bb4-4c41-aefd-918e0565a45e`) 
 
-在「 **驗證** 平臺設定」的 > **Platform configurations** > **單一頁面應用程式中， (SPA)** ：
+在「**驗證** 平臺設定」的 > **Platform configurations** > **單一頁面應用程式中， (SPA)**：
 
 1. 確認的重新 **導向 URI** `https://localhost:{PORT}/authentication/login-callback` 存在。
 1. 針對 **隱含授** 與，請確定 **未** 選取 **存取權杖** 和 **識別碼權杖** 的核取方塊。
@@ -63,8 +67,8 @@ ms.locfileid: "93343702"
 
 在 Azure 入口網站的 **Azure Active Directory** > **應用程式註冊** 區域中註冊 AAD 應用程式：
 
-1. 提供應用程式的 **名稱** (例如 **Blazor 獨立 AAD** ) 。
-1. 選擇 **支援的帳戶類型** 。 您可以 **只在此體驗中選取此組織目錄中的帳戶** 。
+1. 提供應用程式的 **名稱** (例如 **Blazor 獨立 AAD**) 。
+1. 選擇 **支援的帳戶類型**。 您可以 **只在此體驗中選取此組織目錄中的帳戶** 。
 1. 將 [重新 **導向 URI** ] 下拉式清單保持設定為 [ **Web** ]，並提供下列重新導向 uri： `https://localhost:{PORT}/authentication/login-callback` 。 在 Kestrel 上執行應用程式的預設連接埠是 5001。 如果應用程式是在不同的 Kestrel 埠上執行，請使用應用程式的埠。 針對 IIS Express，可在 [ **調試** 程式] 面板的應用程式屬性中找到應用程式隨機產生的埠。 由於應用程式目前不存在，且 IIS Express 埠未知，因此在建立應用程式之後，請返回此步驟，並更新重新導向 URI。 本主題稍後會出現一個批註，提醒 IIS Express 使用者更新重新導向 URI。
 1. 清除 [授 **與系統** > **管理員同意 openid 和 offline_access 許可權** ] 核取方塊。
 1. 選取 [註冊]。
@@ -74,7 +78,7 @@ ms.locfileid: "93343702"
 * 應用程式 (用戶端) 識別碼 (例如 `41451fa7-82d9-4673-8fa5-69eff5a761fd`) 
 * 目錄 (租使用者) 識別碼 (例如 `e86c78e2-8bb4-4c41-aefd-918e0565a45e`) 
 
-在 [ **驗證** > **平臺** 設定] > **Web** ：
+在 [ **驗證** > **平臺** 設定] > **Web**：
 
 1. 確認的重新 **導向 URI** `https://localhost:{PORT}/authentication/login-callback` 存在。
 1. 針對 **[隱含授** 與]，選取 **存取權杖** 和 **識別碼權杖** 的核取方塊。
@@ -113,7 +117,7 @@ dotnet new blazorwasm -au SingleOrg --client-id "{CLIENT ID}" -o {APP NAME} --te
 建立應用程式之後，您應該能夠：
 
 * 使用 AAD 使用者帳戶登入應用程式。
-* 要求 Microsoft Api 的存取權杖。 如需詳細資訊，請參閱：
+* 要求 Microsoft Api 的存取權杖。 如需詳細資訊，請參閱
   * [存取權杖範圍](#access-token-scopes)
   * [快速入門：設定應用程式以公開 Web api](/azure/active-directory/develop/quickstart-configure-app-expose-web-apis)。
 

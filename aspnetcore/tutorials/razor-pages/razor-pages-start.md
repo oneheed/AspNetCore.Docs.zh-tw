@@ -20,12 +20,12 @@ no-loc:
 - Razor
 - SignalR
 uid: tutorials/razor-pages/razor-pages-start
-ms.openlocfilehash: b4dcbe9536107cdc5b0342782abc4bad0b89a8dc
-ms.sourcegitcommit: 342588e10ae0054a6d6dc0fd11dae481006be099
+ms.openlocfilehash: fa113a3e0a2a69fb4aa1318056dcfc6e261490f6
+ms.sourcegitcommit: 8b867c4cb0c3b39bbc4d2d87815610d2ef858ae7
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 11/07/2020
-ms.locfileid: "94360914"
+ms.lasthandoff: 11/17/2020
+ms.locfileid: "96025018"
 ---
 # <a name="tutorial-get-started-with-no-locrazor-pages-in-aspnet-core"></a>教學課程：開始使用 Razor ASP.NET Core 中的頁面
 
@@ -71,23 +71,23 @@ ms.locfileid: "94360914"
 
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
-1. 開始 Visual Studio，然後選取 **Create 新專案** 。 如需詳細資訊，請參閱[ Create Visual Studio 中的新專案](/visualstudio/ide/create-new-project)。
+1. 開始 Visual Studio，然後選取 **Create 新專案**。 如需詳細資訊，請參閱[ Create Visual Studio 中的新專案](/visualstudio/ide/create-new-project)。
 
    ![：：：非 loc (從開始視窗建立) ：：：新專案](razor-pages-start/_static/5/start-window-create-new-project.png)
 
-1. 在 [ **Create 新增專案** ] 對話方塊中，選取 [ **ASP.NET Core Web 應用程式** ]，然後選取 **[下一步]** 。
+1. 在 [ **Create 新增專案**] 對話方塊中，選取 [ **ASP.NET Core Web 應用程式**]，然後選取 **[下一步]**。
 
     ![新增 ASP.NET Core Web 應用程式](razor-pages-start/_static/5/np.png)
     
-1. 在 [ **設定您的新專案** ] 對話方塊中，輸入 [ `RazorPagesMovie` **專案名稱** ]。 請務必將專案命名為 *Razor PagesMovie* ，包括符合大小寫，如此一來，當您複製並貼上範例程式碼時，命名空間會相符。
+1. 在 [ **設定您的新專案** ] 對話方塊中，輸入 [ `RazorPagesMovie` **專案名稱**]。 請務必將專案命名為 *Razor PagesMovie*，包括符合大小寫，如此一來，當您複製並貼上範例程式碼時，命名空間會相符。
 
 1. 選取 [Create]。
 
     ![新增 ASP.NET Core Web 應用程式](razor-pages-start/_static/config.png)
 
-1. 在 **Create 新的 ASP.NET Core web 應用程式** ] 對話方塊中，選取：
+1. 在 **Create 新的 ASP.NET Core web 應用程式**] 對話方塊中，選取：
     1. 下拉式清單中的 **.Net Core** 和 **ASP.NET Core 5.0** 。
-    1. **Web 應用程式** 。
+    1. **Web 應用程式**。
     1. **Create**.
 
      ![新增 ASP.NET Core Web 應用程式](razor-pages-start/_static/5/npx.png)
@@ -114,17 +114,17 @@ ms.locfileid: "94360914"
 
 # <a name="visual-studio-for-mac"></a>[Visual Studio for Mac](#tab/visual-studio-mac)
 
-1. 選取 [檔案] **[新增解決方案]** > 。
+1. 選取 [檔案]**[新增解決方案]** > 。
 
     ![macOS 新增方案](../first-mvc-app/start-mvc/_static/new_project_vsmac.png)
 
-1. 在8.6 版之前的 Visual Studio for Mac 中，請選取 [ **.net Core**  >  **應用**  >  **程式 Web 應用程式**  >  **]** 。 在8.6 版或更新版本中，請選取 [ **web] 和 [主控台**  >  **應用**  >  **程式 web 應用程式**  >  **]** 。
+1. 在8.6 版之前的 Visual Studio for Mac 中，請選取 [ **.net Core**  >  **應用**  >  **程式 Web 應用程式**  >  **]**。 在8.6 版或更新版本中，請選取 [ **web] 和 [主控台**  >  **應用**  >  **程式 web 應用程式**  >  **]**。
 
     ![macOS web 應用程式範本選取專案](razor-pages-start/_static/web_app_template_vsmac.png)
 
 1. 在 [ **設定新的 Web 應用程式** ] 對話方塊中：
 
-    1. 確認 [ **驗證** ] 設定為 [ **無驗證** ]。
+    1. 確認 [ **驗證** ] 設定為 [ **無驗證**]。
     1. 如果有選取 **目標 Framework** 的選項，請選取最新的 .net 5.x 版本。
     1. 選取 [下一步]。
 
@@ -219,13 +219,13 @@ ms.locfileid: "94360914"
 
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
-* 從 Visual Studio 的 [檔案] 功能表中，選取 [新增] **[專案]** >  。
-* Create 新的 ASP.NET Core Web 應用程式，然後選取 **[下一步]** 。
+* 從 Visual Studio 的 [檔案] 功能表中，選取 [新增]**[專案]** >  。
+* Create 新的 ASP.NET Core Web 應用程式，然後選取 **[下一步]**。
   ![新增 ASP.NET Core Web 應用程式](razor-pages-start/_static/np_2.1.png)
-* 將專案命名為 **Razor PagesMovie** 。 請務必將專案命名為 *Razor PagesMovie* ，如此一來，當您複製並貼上程式碼時，命名空間才會相符。
+* 將專案命名為 **Razor PagesMovie**。 請務必將專案命名為 *Razor PagesMovie* ，如此一來，當您複製並貼上程式碼時，命名空間才會相符。
   ![新增 ASP.NET Core Web 應用程式](razor-pages-start/_static/config.png)
 
-* 在 [ **Web 應用程式** ] 下拉式清單中選取 **ASP.NET Core 3.1** ，然後選取 [] **Create** 。
+* 在 [ **Web 應用程式**] 下拉式清單中選取 **ASP.NET Core 3.1** ，然後選取 [] **Create** 。
 
 ![新增 ASP.NET Core Web 應用程式](razor-pages-start/_static/3/npx.png)
 
@@ -255,22 +255,22 @@ ms.locfileid: "94360914"
 
 # <a name="visual-studio-for-mac"></a>[Visual Studio for Mac](#tab/visual-studio-mac)
 
-* 選取 [檔案] **[新增解決方案]** > 。
+* 選取 [檔案]**[新增解決方案]** > 。
 
   ![macOS 新增方案](../first-mvc-app/start-mvc/_static/new_project_vsmac.png)
 
-* 在8.6 版之前的 Visual Studio for Mac 中，請選取 [ **.net Core**  >  **應用**  >  **程式 Web 應用程式**  >  **]** 。 在8.6 版或更新版本中，請選取 [ **web] 和 [主控台**  >  **應用**  >  **程式 web 應用程式**  >  **]** 。
+* 在8.6 版之前的 Visual Studio for Mac 中，請選取 [ **.net Core**  >  **應用**  >  **程式 Web 應用程式**  >  **]**。 在8.6 版或更新版本中，請選取 [ **web] 和 [主控台**  >  **應用**  >  **程式 web 應用程式**  >  **]**。
 
   ![macOS web 應用程式範本選取專案](razor-pages-start/_static/web_app_template_vsmac.png)
 
 * 在 [ **設定新的 Web 應用程式** ] 對話方塊中：
 
-  * 確認 [ **驗證** ] 設定為 [ **無驗證** ]。
+  * 確認 [ **驗證** ] 設定為 [ **無驗證**]。
   * 如果有選取 **目標 Framework** 的選項，請選取最新的3.x 版。
 
   選取 [下一步]。
 
-* 將專案命名為 **Razor PagesMovie** ，然後選取 **Create** 。
+* 將專案命名為 **Razor PagesMovie**，然後選取 **Create** 。
 
   ![macOS 為專案命名](razor-pages-start/_static/RazorPagesMovie.png)
 
@@ -361,17 +361,17 @@ ms.locfileid: "94360914"
 
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
-* 從 Visual Studio 的 [檔案] 功能表中，選取 [新增] **[專案]** >  。
+* 從 Visual Studio 的 [檔案] 功能表中，選取 [新增]**[專案]** >  。
 
-* Create 新的 ASP.NET Core Web 應用程式，然後選取 **[下一步]** 。
+* Create 新的 ASP.NET Core Web 應用程式，然後選取 **[下一步]**。
 
   ![新增 ASP.NET Core Web 應用程式](razor-pages-start/_static/np_2.1.png)
 
-* 將專案命名為 **Razor PagesMovie** 。 請務必將專案命名為 *Razor PagesMovie* ，如此一來，當您複製並貼上程式碼時，命名空間才會相符。
+* 將專案命名為 **Razor PagesMovie**。 請務必將專案命名為 *Razor PagesMovie* ，如此一來，當您複製並貼上程式碼時，命名空間才會相符。
 
   ![新增 ASP.NET Core Web 應用程式](razor-pages-start/_static/config.png)
 
-* 在 [ **Web 應用程式** ] 下拉式清單中選取 **ASP.NET Core 2.2** ，然後選取 [] **Create** 。
+* 在 [ **Web 應用程式**] 下拉式清單中選取 **ASP.NET Core 2.2** ，然後選取 [] **Create** 。
 
 ![新增 ASP.NET Core Web 應用程式](razor-pages-start/_static/np_2_2.2.png)
 
@@ -401,20 +401,20 @@ ms.locfileid: "94360914"
 
 # <a name="visual-studio-for-mac"></a>[Visual Studio for Mac](#tab/visual-studio-mac)
 
-* 選取 [檔案] **[新增解決方案]** > 。
+* 選取 [檔案]**[新增解決方案]** > 。
 
 ![macOS 新增方案](../first-mvc-app/start-mvc/_static/new_project_vsmac.png)
 
-* 在8.6 版之前的 Visual Studio for Mac 中，請選取 [ **.net Core**  >  **應用**  >  **程式 Web 應用程式**  >  **]** 。 在8.6 版或更新版本中，請選取 [ **web] 和 [主控台**  >  **應用**  >  **程式 web 應用程式**  >  **]** 。
+* 在8.6 版之前的 Visual Studio for Mac 中，請選取 [ **.net Core**  >  **應用**  >  **程式 Web 應用程式**  >  **]**。 在8.6 版或更新版本中，請選取 [ **web] 和 [主控台**  >  **應用**  >  **程式 web 應用程式**  >  **]**。
 
 * 在 [ **設定新的 Web 應用程式** ] 對話方塊中：
 
-  * 確認 [ **驗證** ] 設定為 [ **無驗證** ]。
+  * 確認 [ **驗證** ] 設定為 [ **無驗證**]。
   * 如果有選取 **目標 Framework** 的選項，請選取最新的2.x 版本。
 
   選取 [下一步]。
 
-* 將專案命名為 **Razor PagesMovie** ，然後選取 **Create** 。
+* 將專案命名為 **Razor PagesMovie**，然後選取 **Create** 。
 
   ![nameproj](razor-pages-start/_static/RazorPagesMovie.png)
 
@@ -429,7 +429,6 @@ ms.locfileid: "94360914"
 * 按 Ctrl+F5 即可執行而不使用偵錯工具。
 
   使用 <kbd>Ctrl + F5</kbd> 啟動應用程式 (非 debug 模式) 可讓您進行程式碼變更、儲存檔案、重新整理瀏覽器，以及查看程式碼變更。 許多開發人員偏好使用非偵錯模式來快速啟動應用程式並檢視變更。
-
 
   [!INCLUDE[](~/includes/trustCertVS.md)]
 

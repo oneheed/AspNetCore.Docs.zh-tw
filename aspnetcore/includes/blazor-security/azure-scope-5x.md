@@ -18,7 +18,7 @@ options.ProviderOptions.DefaultAccessTokenScopes
 }
 ```
 
-在上述設定中，值的結尾不 `Audience` 包含預設**not**範圍 `/{DEFAULT SCOPE}` 。
+在上述設定中，值的結尾不 `Audience` 包含預設 **not** 範圍 `/{DEFAULT SCOPE}` 。
 
 範例：
 

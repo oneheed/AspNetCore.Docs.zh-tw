@@ -19,12 +19,12 @@ no-loc:
 - SignalR
 - Models
 uid: tutorials/first-web-api
-ms.openlocfilehash: 569744b2cbec062ec9abab9db1c94960f1f912e7
-ms.sourcegitcommit: 1ea3f23bec63e96ffc3a927992f30a5fc0de3ff9
+ms.openlocfilehash: 9299ba685c95ced522fc725854a66252e67fc799
+ms.sourcegitcommit: aa85f2911792a1e4783bcabf0da3b3e7e218f63a
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 11/12/2020
-ms.locfileid: "94570246"
+ms.lasthandoff: 11/23/2020
+ms.locfileid: "96024960"
 ---
 # <a name="tutorial-create-a-web-api-with-aspnet-core"></a>教學課程：使用 ASP.NET Core 建立 web API
 
@@ -51,11 +51,11 @@ ms.locfileid: "94570246"
 
 |API | 描述 | Request body | 回應本文 |
 |--- | ---- | ---- | ---- |
-|`GET /api/TodoItems` | 取得所有待辦事項 | 無 | 待辦事項的陣列|
-|`GET /api/TodoItems/{id}` | 依識別碼取得項目 | 無 | 待辦事項|
+|`GET /api/TodoItems` | 取得所有待辦事項 | None | 待辦事項的陣列|
+|`GET /api/TodoItems/{id}` | 依識別碼取得項目 | None | 待辦事項|
 |`POST /api/TodoItems` | 新增記錄 | 待辦事項 | 待辦事項 |
-|`PUT /api/TodoItems/{id}` | 更新現有的項目 &nbsp; | 待辦事項 | 無 |
-|`DELETE /api/TodoItems/{id}` &nbsp; &nbsp; | 刪除專案 &nbsp;&nbsp; | 無 | 無|
+|`PUT /api/TodoItems/{id}` | 更新現有的項目 &nbsp; | 待辦事項 | None |
+|`DELETE /api/TodoItems/{id}` &nbsp; &nbsp; | 刪除專案 &nbsp;&nbsp; | None | None|
 
 下圖顯示應用程式的設計。
 
@@ -81,9 +81,9 @@ ms.locfileid: "94570246"
 
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
-* 從 [ **檔案** ] 功能表選取 [ **新增** > **專案** ]。
+* 從 [ **檔案** ] 功能表選取 [ **新增** > **專案**]。
 * 選取 **ASP.NET Core Web 應用程式** 範本，然後按一下 [下一步]。
-* 將專案命名為 *TodoApi* ，然後按一下 [建立]。
+* 將專案命名為 *TodoApi*，然後按一下 [建立]。
 * 在 [ **建立新的 ASP.NET Core Web 應用程式** ] 對話方塊中，確認已選取 [ **.net Core** ] 和 [ **ASP.NET Core 5.0** ]。 選取 **API** 範本，然後按一下 [建立]。
 
 ![VS 新增專案對話方塊](first-web-api/_static/5/vs.png)
@@ -111,17 +111,17 @@ ms.locfileid: "94570246"
 
 # <a name="visual-studio-for-mac"></a>[Visual Studio for Mac](#tab/visual-studio-mac)
 
-* 選取 [檔案] **[新增解決方案]** > 。
+* 選取 [檔案]**[新增解決方案]** > 。
 
   ![macOS 新增方案](first-web-api-mac/_static/sln.png)
 
-* 在8.6 版之前的 Visual Studio for Mac 中，選取 [ **.net Core**  >  **應用程式**  >  **API**  >  **]** 。 在8.6 版或更新版本中，選取 [ **Web] 和 [主控台**  >  **應用程式**  >  **API**  >  **]** 。
+* 在8.6 版之前的 Visual Studio for Mac 中，選取 [ **.net Core**  >  **應用程式**  >  **API**  >  **]**。 在8.6 版或更新版本中，選取 [ **Web] 和 [主控台**  >  **應用程式**  >  **API**  >  **]**。
 
   ![macOS API 範本選取專案](first-web-api-mac/_static/api_template.png)
 
-* 在 [ **設定新的 ASP.NET Core WEB API** ] 對話方塊中，選取最新的 .net Core 5.X **目標 Framework** 。 選取 [下一步]。
+* 在 [ **設定新的 ASP.NET Core WEB API** ] 對話方塊中，選取最新的 .net Core 5.X **目標 Framework**。 選取 [下一步]。
 
-* 針對 [專案名稱] 輸入 *TodoApi* ，然後選取 [建立]。
+* 針對 [專案名稱] 輸入 *TodoApi*，然後選取 [建立]。
 
   ![設定對話方塊](first-web-api-mac/_static/2.png)
 
@@ -149,7 +149,7 @@ ms.locfileid: "94570246"
   Visual Studio 啟動：
 
 * IIS Express web 伺服器。
-* 預設瀏覽器並流覽至 `https://localhost:<port>/https://localhost:5001/swagger/index.html` ，其中 `<port>` 是隨機播放的埠號碼。
+* 預設瀏覽器並流覽至 `https://localhost:<port>/swagger/index.html` ，其中 `<port>` 是隨機播放的埠號碼。
 
 # <a name="visual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code)
 
@@ -159,11 +159,11 @@ ms.locfileid: "94570246"
 
 # <a name="visual-studio-for-mac"></a>[Visual Studio for Mac](#tab/visual-studio-mac)
 
-選取 [ **執行**  >  **開始調試** 程式] 以啟動應用程式。 Visual Studio for Mac 會啟動瀏覽器並巡覽至 `https://localhost:<port>`，其中 `<port>` 是隨機選擇的連接埠號碼。 傳回 HTTP 404 (找不到) 錯誤。 將 `/swagger` 附加至 URL (將 URL 變更為 `https://localhost:<port>/swagger`)。
+選取 [**執行**  >  **開始調試** 程式] 以啟動應用程式。 Visual Studio for Mac 會啟動瀏覽器並巡覽至 `https://localhost:<port>`，其中 `<port>` 是隨機選擇的連接埠號碼。 傳回 HTTP 404 (找不到) 錯誤。 將 `/swagger` 附加至 URL (將 URL 變更為 `https://localhost:<port>/swagger`)。
 
 ---
 
-Swagger 頁面隨即 `/swagger/index.html` 顯示。 選取 [ **立即**  >  **試用** ]  >  **執行** 。 頁面會顯示：
+Swagger 頁面隨即 `/swagger/index.html` 顯示。 選取 [**立即**  >  **試用**]  >  **執行**。 頁面會顯示：
 
 * 用來測試 WeatherForecast API 的 [捲曲](https://curl.haxx.se/) 命令。
 * 用來測試 WeatherForecast API 的 URL。
@@ -215,7 +215,7 @@ Swagger 可用來產生 web Api 的實用檔和說明頁面。 本教學課程�
 
 ### <a name="update-the-launchurl"></a>更新 launchUrl
 
-在 *Properties\launchSettings.js開啟* ，請 `launchUrl` 從更新 `"swagger"` 為 `"api/TodoItems"` ：
+在 *Properties\launchSettings.js開啟*，請 `launchUrl` 從更新 `"swagger"` 為 `"api/TodoItems"` ：
 
 ```json
 "launchUrl": "api/TodoItems",
@@ -229,9 +229,9 @@ Swagger 可用來產生 web Api 的實用檔和說明頁面。 本教學課程�
 
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
-* 在 **方案總管** 中，以滑鼠右鍵按一下專案。 選取 **[**  >  **新增資料夾** ]。 為資料夾命名 *Models* 。
+* 在 **方案總管** 中，以滑鼠右鍵按一下專案。 選取 **[**  >  **新增資料夾**]。 為資料夾命名 *Models* 。
 
-* 以滑鼠右鍵按一下 *Models* 資料夾，然後選取 [ **加入**  >  **類別** ]。 將類別命名為 *TodoItem* ，然後選取 [新增]。
+* 以滑鼠右鍵按一下 *Models* 資料夾，然後選取 [**加入**  >  **類別**]。 將類別命名為 *TodoItem*，然後選取 [新增]。
 
 * 以下列程式碼取代範本程式碼：
 
@@ -243,13 +243,13 @@ Swagger 可用來產生 web Api 的實用檔和說明頁面。 本教學課程�
 
 # <a name="visual-studio-for-mac"></a>[Visual Studio for Mac](#tab/visual-studio-mac)
 
-* 以滑鼠右鍵按一下專案。 選取 **[**  >  **新增資料夾** ]。 為資料夾命名 *Models* 。
+* 以滑鼠右鍵按一下專案。 選取 **[**  >  **新增資料夾**]。 為資料夾命名 *Models* 。
 
   ![新增資料夾](first-web-api-mac/_static/folder.png)
 
-* 以滑鼠右鍵按一下 *Models* 資料夾，然後選取 **Add** > [ **新增** 檔案 > **一般** ] > **空白類別** 。
+* 以滑鼠右鍵按一下 *Models* 資料夾，然後選取 **Add** > [**新增** 檔案 > **一般**] > **空白類別**。
 
-* 將類別命名為 *TodoItem* ，然後按一下 [新增]。
+* 將類別命名為 *TodoItem*，然後按一下 [新增]。
 
 * 以下列程式碼取代範本程式碼：
 
@@ -270,10 +270,8 @@ Swagger 可用來產生 web Api 的實用檔和說明頁面。 本教學課程�
 ### <a name="add-nuget-packages"></a>新增 NuGet 套件
 
 * 在 [工具] 功能表上，選取 [NuGet 套件管理員] > [管理解決方案的 NuGet 套件]。
-* 選取 [ **流覽** ] 索引標籤，然後輸入 * * Microsoft。
-**Microsoft.entityframeworkcore** 在搜尋方塊中。
+* 選取 [瀏覽] 索引標籤，然後在搜尋方塊中輸入 **Microsoft.EntityFrameworkCore.SqlServer**。
 <!-- https://github.com/dotnet/AspNetCore.Docs/issues/19782 Delete this line at RTM -->
-* 選取 [ **包含發行** 前版本] 核取方塊，讓 5.0 RC 版本可供使用。 
 * 選取左窗格中的 [ **microsoft.entityframeworkcore** ]。
 * 選取右窗格中的 [專案] 核取方塊，然後選取 [安裝]。
 * 使用上述指示來新增 **Microsoft.entityframeworkcore InMemory** NuGet 套件。
@@ -283,7 +281,7 @@ Swagger 可用來產生 web Api 的實用檔和說明頁面。 本教學課程�
 
 ## <a name="add-the-todocontext-database-context"></a>新增 TodoCoNtext 資料庫內容
 
-* 以滑鼠右鍵按一下 *Models* 資料夾，然後選取 [ **加入**  >  **類別** ]。 將類別命名為 *TodoContext* ，然後按一下 [新增]。
+* 以滑鼠右鍵按一下 *Models* 資料夾，然後選取 [**加入**  >  **類別**]。 將類別命名為 *TodoContext*，然後按一下 [新增]。
 
 # <a name="visual-studio-code--visual-studio-for-mac"></a>[Visual Studio Code / Visual Studio for Mac](#tab/visual-studio-code+visual-studio-mac)
 
@@ -315,7 +313,7 @@ Swagger 可用來產生 web Api 的實用檔和說明頁面。 本教學課程�
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
 * 以滑鼠右鍵按一下 *Controllers* 資料夾。
-* 選取 [新增] **[新增 Scaffold 項目]** > 。
+* 選取 [新增]**[新增 Scaffold 項目]** > 。
 * 選取 [使用 Entity Framework 執行動作的 API 控制器]，然後選取 [新增]。
 * 在 [使用 Entity Framework 執行動作的 API 控制器] 對話方塊中：
 
@@ -330,8 +328,8 @@ Swagger 可用來產生 web Api 的實用檔和說明頁面。 本教學課程�
 ```dotnetcli
 dotnet add package Microsoft.VisualStudio.Web.CodeGeneration.Design
 dotnet add package Microsoft.EntityFrameworkCore.Design
-dotnet tool install --global dotnet-aspnet-codegenerator
-dotnet tool update -g Dotnet-aspnet-codegenerator
+dotnet tool install -g dotnet-aspnet-codegenerator
+dotnet tool update -g dotnet-aspnet-codegenerator
 dotnet aspnet-codegenerator controller -name TodoItemsController -async -api -m TodoItem -dc TodoContext -outDir Controllers
 ```
 
@@ -379,7 +377,7 @@ dotnet aspnet-codegenerator controller -name TodoItemsController -async -api -m 
 * 啟動 Web 應用程式。
 * 啟動 Postman。
 * 停用 [SSL certificate verification] \(SSL 憑證驗證\)
-  * 從 [檔案] **[設定]** >  ([一般] 索引標籤)，停用 [SSL 憑證驗證]。
+  * 從 [檔案]**[設定]** >  ([一般] 索引標籤)，停用 [SSL 憑證驗證]。
     > [!WARNING]
     > 在測試控制器之後，請重新啟用 [SSL certificate verification] \(SSL 憑證驗證\)。
 
@@ -389,10 +387,10 @@ dotnet aspnet-codegenerator controller -name TodoItemsController -async -api -m 
 
 * 建立新的要求。
 * 將 HTTP 方法設為 `POST`。
-* 將 URI 設定為 `https://localhost:<port>/api/TodoItems` 。 例如，`https://localhost:5001/api/TodoItems`。
+* 將 URI 設定為 `https://localhost:<port>/api/TodoItems` 。 例如： `https://localhost:5001/api/TodoItems` 。
 * 選取 [Body] \(本文\) 索引標籤。
 * 選取 [原始] 選項按鈕。
-* 將類型設定為 **JSON (application/json)** 。
+* 將類型設定為 **JSON (application/json)**。
 * 在要求本文中，針對待辦項目輸入 JSON：
 
     ```json
@@ -418,7 +416,7 @@ dotnet aspnet-codegenerator controller -name TodoItemsController -async -api -m 
   ![Postman 主控台的 [標頭] 索引標籤](first-web-api/_static/3/create.png)
 
 * 將 HTTP 方法設為 `GET`。
-* 將 URI 設定為 `https://localhost:<port>/api/TodoItems/1` 。 例如，`https://localhost:5001/api/TodoItems/1`。
+* 將 URI 設定為 `https://localhost:<port>/api/TodoItems/1` 。 例如： `https://localhost:5001/api/TodoItems/1` 。
 * 選取 [傳送]  。
 
 ## <a name="examine-the-get-methods"></a>檢查 GET 方法
@@ -448,8 +446,8 @@ dotnet aspnet-codegenerator controller -name TodoItemsController -async -api -m 
 ### <a name="test-get-with-postman"></a>使用 Postman 測試 Get
 
 * 建立新的要求。
-* 將 HTTP 方法設定為 **GET** 。
-* 將要求 URI 設定為 `https://localhost:<port>/api/TodoItems` 。 例如，`https://localhost:5001/api/TodoItems`。
+* 將 HTTP 方法設定為 **GET**。
+* 將要求 URI 設定為 `https://localhost:<port>/api/TodoItems` 。 例如： `https://localhost:5001/api/TodoItems` 。
 * 在 Postman 中，設定 [Two pane view] \(雙窗格檢視\)。
 * 選取 [傳送]  。
 
@@ -577,11 +575,11 @@ DTO 可以用來：
 
 |API | 描述 | Request body | 回應本文 |
 |--- | ---- | ---- | ---- |
-|`GET /api/TodoItems` | 取得所有待辦事項 | 無 | 待辦事項的陣列|
-|`GET /api/TodoItems/{id}` | 依識別碼取得項目 | 無 | 待辦事項|
+|`GET /api/TodoItems` | 取得所有待辦事項 | None | 待辦事項的陣列|
+|`GET /api/TodoItems/{id}` | 依識別碼取得項目 | None | 待辦事項|
 |`POST /api/TodoItems` | 新增記錄 | 待辦事項 | 待辦事項 |
-|`PUT /api/TodoItems/{id}` | 更新現有的項目 &nbsp; | 待辦事項 | 無 |
-|`DELETE /api/TodoItems/{id}` &nbsp; &nbsp; | 刪除專案 &nbsp;&nbsp; | 無 | 無|
+|`PUT /api/TodoItems/{id}` | 更新現有的項目 &nbsp; | 待辦事項 | None |
+|`DELETE /api/TodoItems/{id}` &nbsp; &nbsp; | 刪除專案 &nbsp;&nbsp; | None | None|
 
 下圖顯示應用程式的設計。
 
@@ -607,9 +605,9 @@ DTO 可以用來：
 
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
-* 從 [ **檔案** ] 功能表選取 [ **新增** > **專案** ]。
+* 從 [ **檔案** ] 功能表選取 [ **新增** > **專案**]。
 * 選取 **ASP.NET Core Web 應用程式** 範本，然後按一下 [下一步]。
-* 將專案命名為 *TodoApi* ，然後按一下 [建立]。
+* 將專案命名為 *TodoApi*，然後按一下 [建立]。
 * 在 [ **建立新的 ASP.NET Core Web 應用程式** ] 對話方塊中，確認已選取 [ **.net Core** ] 和 [ **ASP.NET Core 3.1** ]。 選取 **API** 範本，然後按一下 [建立]。
 
 ![VS 新增專案對話方塊](first-web-api/_static/vs3.png)
@@ -637,17 +635,17 @@ DTO 可以用來：
 
 # <a name="visual-studio-for-mac"></a>[Visual Studio for Mac](#tab/visual-studio-mac)
 
-* 選取 [檔案] **[新增解決方案]** > 。
+* 選取 [檔案]**[新增解決方案]** > 。
 
   ![macOS 新增方案](first-web-api-mac/_static/sln.png)
 
-* 在8.6 版之前的 Visual Studio for Mac 中，選取 [ **.net Core**  >  **應用程式**  >  **API**  >  **]** 。 在8.6 版或更新版本中，選取 [ **Web] 和 [主控台**  >  **應用程式**  >  **API**  >  **]** 。
+* 在8.6 版之前的 Visual Studio for Mac 中，選取 [ **.net Core**  >  **應用程式**  >  **API**  >  **]**。 在8.6 版或更新版本中，選取 [ **Web] 和 [主控台**  >  **應用程式**  >  **API**  >  **]**。
 
   ![macOS API 範本選取專案](first-web-api-mac/_static/api_template.png)
 
-* 在 [ **設定新的 ASP.NET Core WEB API** ] 對話方塊中，選取最新的 .net Core 3.X **目標 Framework** 。 選取 [下一步]。
+* 在 [ **設定新的 ASP.NET Core WEB API** ] 對話方塊中，選取最新的 .net Core 3.X **目標 Framework**。 選取 [下一步]。
 
-* 針對 [專案名稱] 輸入 *TodoApi* ，然後選取 [建立]。
+* 針對 [專案名稱] 輸入 *TodoApi*，然後選取 [建立]。
 
   ![設定對話方塊](first-web-api-mac/_static/2.png)
 
@@ -678,7 +676,7 @@ DTO 可以用來：
 
 # <a name="visual-studio-for-mac"></a>[Visual Studio for Mac](#tab/visual-studio-mac)
 
-選取 [ **執行**  >  **開始調試** 程式] 以啟動應用程式。 Visual Studio for Mac 會啟動瀏覽器並巡覽至 `https://localhost:<port>`，其中 `<port>` 是隨機選擇的連接埠號碼。 傳回 HTTP 404 (找不到) 錯誤。 將 `/WeatherForecast` 附加至 URL (將 URL 變更為 `https://localhost:<port>/WeatherForecast`)。
+選取 [**執行**  >  **開始調試** 程式] 以啟動應用程式。 Visual Studio for Mac 會啟動瀏覽器並巡覽至 `https://localhost:<port>`，其中 `<port>` 是隨機選擇的連接埠號碼。 傳回 HTTP 404 (找不到) 錯誤。 將 `/WeatherForecast` 附加至 URL (將 URL 變更為 `https://localhost:<port>/WeatherForecast`)。
 
 ---
 
@@ -725,9 +723,9 @@ DTO 可以用來：
 
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
-* 在 **方案總管** 中，以滑鼠右鍵按一下專案。 選取 **[**  >  **新增資料夾** ]。 為資料夾命名 *Models* 。
+* 在 **方案總管** 中，以滑鼠右鍵按一下專案。 選取 **[**  >  **新增資料夾**]。 為資料夾命名 *Models* 。
 
-* 以滑鼠右鍵按一下 *Models* 資料夾，然後選取 [ **加入**  >  **類別** ]。 將類別命名為 *TodoItem* ，然後選取 [新增]。
+* 以滑鼠右鍵按一下 *Models* 資料夾，然後選取 [**加入**  >  **類別**]。 將類別命名為 *TodoItem*，然後選取 [新增]。
 
 * 使用下列程式碼取代範本程式碼：
 
@@ -739,13 +737,13 @@ DTO 可以用來：
 
 # <a name="visual-studio-for-mac"></a>[Visual Studio for Mac](#tab/visual-studio-mac)
 
-* 以滑鼠右鍵按一下專案。 選取 **[**  >  **新增資料夾** ]。 為資料夾命名 *Models* 。
+* 以滑鼠右鍵按一下專案。 選取 **[**  >  **新增資料夾**]。 為資料夾命名 *Models* 。
 
   ![新增資料夾](first-web-api-mac/_static/folder.png)
 
-* 以滑鼠右鍵按一下 *Models* 資料夾，然後選取 **Add** > [ **新增** 檔案 > **一般** ] > **空白類別** 。
+* 以滑鼠右鍵按一下 *Models* 資料夾，然後選取 **Add** > [**新增** 檔案 > **一般**] > **空白類別**。
 
-* 將類別命名為 *TodoItem* ，然後按一下 [新增]。
+* 將類別命名為 *TodoItem*，然後按一下 [新增]。
 
 * 使用下列程式碼取代範本程式碼：
 
@@ -766,7 +764,7 @@ DTO 可以用來：
 ### <a name="add-nuget-packages"></a>新增 NuGet 套件
 
 * 在 [工具] 功能表上，選取 [NuGet 套件管理員] > [管理解決方案的 NuGet 套件]。
-* 選取 [瀏覽] 索引標籤，然後在搜尋方塊中輸入 **Microsoft.EntityFrameworkCore.SqlServer** 。
+* 選取 [瀏覽] 索引標籤，然後在搜尋方塊中輸入 **Microsoft.EntityFrameworkCore.SqlServer**。
 * 選取左窗格中的 [ **microsoft.entityframeworkcore** ]。
 * 選取右窗格中的 [專案] 核取方塊，然後選取 [安裝]。
 * 使用上述指示來新增 **Microsoft.entityframeworkcore InMemory** NuGet 套件。
@@ -775,7 +773,7 @@ DTO 可以用來：
 
 ## <a name="add-the-todocontext-database-context"></a>新增 TodoCoNtext 資料庫內容
 
-* 以滑鼠右鍵按一下 *Models* 資料夾，然後選取 [ **加入**  >  **類別** ]。 將類別命名為 *TodoContext* ，然後按一下 [新增]。
+* 以滑鼠右鍵按一下 *Models* 資料夾，然後選取 [**加入**  >  **類別**]。 將類別命名為 *TodoContext*，然後按一下 [新增]。
 
 # <a name="visual-studio-code--visual-studio-for-mac"></a>[Visual Studio Code / Visual Studio for Mac](#tab/visual-studio-code+visual-studio-mac)
 
@@ -791,7 +789,7 @@ DTO 可以用來：
 
 在 ASP.NET Core 中，資料庫內容等服務必須向[相依性插入 (DI)](xref:fundamentals/dependency-injection) 容器註冊。 此容器會將服務提供給控制器。
 
-使用下列醒目提示的程式碼更新 *Startup.cs* ：
+使用下列醒目提示的程式碼更新 *Startup.cs*：
 
 [!code-csharp[](first-web-api/samples/3.0/TodoApi/Startup.cs?highlight=7-8,23-24&name=snippet_all)]
 
@@ -806,7 +804,7 @@ DTO 可以用來：
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
 * 以滑鼠右鍵按一下 *Controllers* 資料夾。
-* 選取 [新增] **[新增 Scaffold 項目]** > 。
+* 選取 [新增]**[新增 Scaffold 項目]** > 。
 * 選取 [使用 Entity Framework 執行動作的 API 控制器]，然後選取 [新增]。
 * 在 [使用 Entity Framework 執行動作的 API 控制器] 對話方塊中：
 
@@ -870,7 +868,7 @@ dotnet aspnet-codegenerator controller -name TodoItemsController -async -api -m 
 * 啟動 Web 應用程式。
 * 啟動 Postman。
 * 停用 [SSL certificate verification] \(SSL 憑證驗證\)
-  * 從 [檔案] **[設定]** >  ([一般] 索引標籤)，停用 [SSL 憑證驗證]。
+  * 從 [檔案]**[設定]** >  ([一般] 索引標籤)，停用 [SSL 憑證驗證]。
     > [!WARNING]
     > 在測試控制器之後，請重新啟用 [SSL certificate verification] \(SSL 憑證驗證\)。
 
@@ -880,10 +878,10 @@ dotnet aspnet-codegenerator controller -name TodoItemsController -async -api -m 
 
 * 建立新的要求。
 * 將 HTTP 方法設為 `POST`。
-* 將 URI 設定為 `https://localhost:<port>/api/TodoItems` 。 例如，`https://localhost:5001/api/TodoItems`。
+* 將 URI 設定為 `https://localhost:<port>/api/TodoItems` 。 例如： `https://localhost:5001/api/TodoItems` 。
 * 選取 [Body] \(本文\) 索引標籤。
 * 選取 [原始] 選項按鈕。
-* 將類型設定為 **JSON (application/json)** 。
+* 將類型設定為 **JSON (application/json)**。
 * 在要求本文中，針對待辦項目輸入 JSON：
 
     ```json
@@ -905,7 +903,7 @@ dotnet aspnet-codegenerator controller -name TodoItemsController -async -api -m 
   ![Postman 主控台的 [標頭] 索引標籤](first-web-api/_static/3/create.png)
 
 * 將 HTTP 方法設為 `GET`。
-* 將 URI 設定為 `https://localhost:<port>/api/TodoItems/1` 。 例如，`https://localhost:5001/api/TodoItems/1`。
+* 將 URI 設定為 `https://localhost:<port>/api/TodoItems/1` 。 例如： `https://localhost:5001/api/TodoItems/1` 。
 * 選取 [傳送]  。
 
 ## <a name="examine-the-get-methods"></a>檢查 GET 方法
@@ -935,8 +933,8 @@ dotnet aspnet-codegenerator controller -name TodoItemsController -async -api -m 
 ### <a name="test-get-with-postman"></a>使用 Postman 測試 Get
 
 * 建立新的要求。
-* 將 HTTP 方法設定為 **GET** 。
-* 將要求 URI 設定為 `https://localhost:<port>/api/TodoItems` 。 例如，`https://localhost:5001/api/TodoItems`。
+* 將 HTTP 方法設定為 **GET**。
+* 將要求 URI 設定為 `https://localhost:<port>/api/TodoItems` 。 例如： `https://localhost:5001/api/TodoItems` 。
 * 在 Postman 中，設定 [Two pane view] \(雙窗格檢視\)。
 * 選取 [傳送]  。
 
@@ -1068,11 +1066,11 @@ DTO 可以用來：
 
 |API | 描述 | Request body | 回應本文 |
 |--- | ---- | ---- | ---- |
-|GET /api/TodoItems | 取得所有待辦事項 | 無 | 待辦事項的陣列|
-|GET /api/TodoItems/{識別碼} | 依識別碼取得項目 | 無 | 待辦事項|
+|GET /api/TodoItems | 取得所有待辦事項 | None | 待辦事項的陣列|
+|GET /api/TodoItems/{識別碼} | 依識別碼取得項目 | None | 待辦事項|
 |POST /api/TodoItems | 新增記錄 | 待辦事項 | 待辦事項 |
-|PUT /api/TodoItems/{識別碼} | 更新現有的項目 &nbsp; | 待辦事項 | 無 |
-|刪除/Api/todoitems/{識別碼} &nbsp;&nbsp; | 刪除專案 &nbsp;&nbsp; | 無 | 無|
+|PUT /api/TodoItems/{識別碼} | 更新現有的項目 &nbsp; | 待辦事項 | None |
+|刪除/Api/todoitems/{識別碼} &nbsp;&nbsp; | 刪除專案 &nbsp;&nbsp; | None | None|
 
 下圖顯示應用程式的設計。
 
@@ -1098,9 +1096,9 @@ DTO 可以用來：
 
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
-* 從 [ **檔案** ] 功能表選取 [ **新增** > **專案** ]。
+* 從 [ **檔案** ] 功能表選取 [ **新增** > **專案**]。
 * 選取 **ASP.NET Core Web 應用程式** 範本，然後按一下 [下一步]。
-* 將專案命名為 *TodoApi* ，然後按一下 [建立]。
+* 將專案命名為 *TodoApi*，然後按一下 [建立]。
 * 在 [建立新的 ASP.NET Core Web 應用程式] 對話方塊中，確認選取 [.NET Core] 和 [ASP.NET Core 2.2]。 選取 **API** 範本，然後按一下 [建立]。 請 **勿** 選取 [Enable Docker Support] \(啟用 Docker 支援\)。
 
 ![VS 新增專案對話方塊](first-web-api/_static/vs.png)
@@ -1122,15 +1120,15 @@ DTO 可以用來：
 
 # <a name="visual-studio-for-mac"></a>[Visual Studio for Mac](#tab/visual-studio-mac)
 
-* 選取 [檔案] **[新增解決方案]** > 。
+* 選取 [檔案]**[新增解決方案]** > 。
 
   ![macOS 新增方案](first-web-api-mac/_static/sln.png)
 
-* 在8.6 版之前的 Visual Studio for Mac 中，選取 [ **.net Core**  >  **應用程式**  >  **API**  >  **]** 。 在8.6 版或更新版本中，選取 [ **Web] 和 [主控台**  >  **應用程式**  >  **API**  >  **]** 。
+* 在8.6 版之前的 Visual Studio for Mac 中，選取 [ **.net Core**  >  **應用程式**  >  **API**  >  **]**。 在8.6 版或更新版本中，選取 [ **Web] 和 [主控台**  >  **應用程式**  >  **API**  >  **]**。
   
-* 在 [ **設定新的 ASP.NET Core WEB API** ] 對話方塊中，選取最新的 .net Core 2.X **目標 Framework** 。 選取 [下一步]。
+* 在 [ **設定新的 ASP.NET Core WEB API** ] 對話方塊中，選取最新的 .net Core 2.X **目標 Framework**。 選取 [下一步]。
 
-* 針對 [專案名稱] 輸入 *TodoApi* ，然後選取 [建立]。
+* 針對 [專案名稱] 輸入 *TodoApi*，然後選取 [建立]。
 
   ![設定對話方塊](first-web-api-mac/_static/2.png)
 
@@ -1152,7 +1150,7 @@ DTO 可以用來：
 
 # <a name="visual-studio-for-mac"></a>[Visual Studio for Mac](#tab/visual-studio-mac)
 
-選取 [ **執行**  >  **開始調試** 程式] 以啟動應用程式。 Visual Studio for Mac 會啟動瀏覽器並巡覽至 `https://localhost:<port>`，其中 `<port>` 是隨機選擇的連接埠號碼。 傳回 HTTP 404 (找不到) 錯誤。 將 `/api/values` 附加至 URL (將 URL 變更為 `https://localhost:<port>/api/values`)。
+選取 [**執行**  >  **開始調試** 程式] 以啟動應用程式。 Visual Studio for Mac 會啟動瀏覽器並巡覽至 `https://localhost:<port>`，其中 `<port>` 是隨機選擇的連接埠號碼。 傳回 HTTP 404 (找不到) 錯誤。 將 `/api/values` 附加至 URL (將 URL 變更為 `https://localhost:<port>/api/values`)。
 
 ---
 
@@ -1168,9 +1166,9 @@ DTO 可以用來：
 
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
-* 在 **方案總管** 中，以滑鼠右鍵按一下專案。 選取 **[**  >  **新增資料夾** ]。 為資料夾命名 *Models* 。
+* 在 **方案總管** 中，以滑鼠右鍵按一下專案。 選取 **[**  >  **新增資料夾**]。 為資料夾命名 *Models* 。
 
-* 以滑鼠右鍵按一下 *Models* 資料夾，然後選取 [ **加入**  >  **類別** ]。 將類別命名為 *TodoItem* ，然後選取 [新增]。
+* 以滑鼠右鍵按一下 *Models* 資料夾，然後選取 [**加入**  >  **類別**]。 將類別命名為 *TodoItem*，然後選取 [新增]。
 
 * 使用下列程式碼取代範本程式碼：
 
@@ -1182,13 +1180,13 @@ DTO 可以用來：
 
 # <a name="visual-studio-for-mac"></a>[Visual Studio for Mac](#tab/visual-studio-mac)
 
-* 以滑鼠右鍵按一下專案。 選取 **[**  >  **新增資料夾** ]。 為資料夾命名 *Models* 。
+* 以滑鼠右鍵按一下專案。 選取 **[**  >  **新增資料夾**]。 為資料夾命名 *Models* 。
 
   ![新增資料夾](first-web-api-mac/_static/folder.png)
 
-* 以滑鼠右鍵按一下 *Models* 資料夾，然後選取 **Add** > [ **新增** 檔案 > **一般** ] > **空白類別** 。
+* 以滑鼠右鍵按一下 *Models* 資料夾，然後選取 **Add** > [**新增** 檔案 > **一般**] > **空白類別**。
 
-* 將類別命名為 *TodoItem* ，然後按一下 [新增]。
+* 將類別命名為 *TodoItem*，然後按一下 [新增]。
 
 * 使用下列程式碼取代範本程式碼：
 
@@ -1206,7 +1204,7 @@ DTO 可以用來：
 
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
-* 以滑鼠右鍵按一下 *Models* 資料夾，然後選取 [ **加入**  >  **類別** ]。 將類別命名為 *TodoContext* ，然後按一下 [新增]。
+* 以滑鼠右鍵按一下 *Models* 資料夾，然後選取 [**加入**  >  **類別**]。 將類別命名為 *TodoContext*，然後按一下 [新增]。
 
 # <a name="visual-studio-code--visual-studio-for-mac"></a>[Visual Studio Code / Visual Studio for Mac](#tab/visual-studio-code+visual-studio-mac)
 
@@ -1222,7 +1220,7 @@ DTO 可以用來：
 
 在 ASP.NET Core 中，資料庫內容等服務必須向[相依性插入 (DI)](xref:fundamentals/dependency-injection) 容器註冊。 此容器會將服務提供給控制器。
 
-使用下列醒目提示的程式碼更新 *Startup.cs* ：
+使用下列醒目提示的程式碼更新 *Startup.cs*：
 
 [!code-csharp[](first-web-api/samples/2.2/TodoApi/Startup1.cs?highlight=5,8,25-26&name=snippet_all)]
 
@@ -1237,9 +1235,9 @@ DTO 可以用來：
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
 * 以滑鼠右鍵按一下 *Controllers* 資料夾。
-* 選取 [ **加入** > **新專案** ]。
+* 選取 [ **加入** > **新專案**]。
 * 在 [新增項目] 對話方塊中，選取 [API 控制器類別] 範本。
-* 將類別命名為 *TodoController* ，然後選取 [新增]。
+* 將類別命名為 *TodoController*，然後選取 [新增]。
 
   ![在搜尋方塊中輸入 controller 且已選取 Web API 控制器的 [新增項目] 對話方塊](first-web-api/_static/new_controller.png)
 
@@ -1321,15 +1319,15 @@ DTO 可以用來：
 * 安裝 [Postman](https://www.getpostman.com/downloads/)。
 * 啟動 Web 應用程式。
 * 啟動 Postman。
-* 停用 **SSL 憑證驗證** 。
+* 停用 **SSL 憑證驗證**。
 
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
-* 從 [檔案] **[設定]** >  ([一般] 索引標籤)，停用 [SSL 憑證驗證]。
+* 從 [檔案]**[設定]** >  ([一般] 索引標籤)，停用 [SSL 憑證驗證]。
 
 # <a name="visual-studio-code--visual-studio-for-mac"></a>[Visual Studio Code / Visual Studio for Mac](#tab/visual-studio-code+visual-studio-mac)
 
-* 從 **Postman**  >  **喜好** 設定 ( **一般** ] 索引標籤) ，停用 **SSL 憑證驗證** 。 或者，選取扳手並選取 [設定]，然後停用 [SSL 憑證驗證]。
+* 從 **Postman**  >  **喜好** 設定 (**一般**] 索引標籤) ，停用 **SSL 憑證驗證**。 或者，選取扳手並選取 [設定]，然後停用 [SSL 憑證驗證]。
 
 ---
   
@@ -1337,8 +1335,8 @@ DTO 可以用來：
 > 在測試控制器之後，請重新啟用 [SSL certificate verification] \(SSL 憑證驗證\)。
 
 * 建立新的要求。
-  * 將 HTTP 方法設定為 **GET** 。
-  * 將要求 URI 設定為 `https://localhost:<port>/api/todo` 。 例如，`https://localhost:5001/api/todo`。
+  * 將 HTTP 方法設定為 **GET**。
+  * 將要求 URI 設定為 `https://localhost:<port>/api/todo` 。 例如： `https://localhost:5001/api/todo` 。
 * 在 Postman 中，設定 [Two pane view] \(雙窗格檢視\)。
 * 選取 [傳送]  。
 
@@ -1364,10 +1362,10 @@ DTO 可以用來：
 
 * 建置專案。
 * 在 Postman 中，將 HTTP 方法設定為 `POST`。
-* 將 URI 設定為 `https://localhost:<port>/api/Todo` 。 例如，`https://localhost:5001/api/Todo`。
+* 將 URI 設定為 `https://localhost:<port>/api/Todo` 。 例如： `https://localhost:5001/api/Todo` 。
 * 選取 [Body] \(本文\) 索引標籤。
 * 選取 [原始] 選項按鈕。
-* 將類型設定為 **JSON (application/json)** 。
+* 將類型設定為 **JSON (application/json)**。
 * 在要求本文中，針對待辦項目輸入 JSON：
 
     ```json
@@ -1391,7 +1389,7 @@ DTO 可以用來：
   ![Postman 主控台的 [標頭] 索引標籤](first-web-api/_static/pmc2.png)
 
 * 將方法設定為 GET。
-* 將 URI 設定為 `https://localhost:<port>/api/TodoItems/2` 。 例如，`https://localhost:5001/api/TodoItems/2`。
+* 將 URI 設定為 `https://localhost:<port>/api/TodoItems/2` 。 例如： `https://localhost:5001/api/TodoItems/2` 。
 * 選取 [傳送]  。
 
 ## <a name="add-a-puttodoitem-method-21"></a>新增 PutTodoItem 方法2。1
@@ -1444,7 +1442,7 @@ DTO 可以用來：
 
 在此節中，將會新增 HTML 網頁，以使用 JavaScript 來呼叫 Web API。 jQuery 會起始要求。 JavaScript 會使用來自 Web API 回應的詳細資料來更新頁面。
 
-藉由使用下列反白顯示的程式碼更新 *Startup.cs* ，來設定應用程式 [提供靜態檔案](xref:Microsoft.AspNetCore.Builder.StaticFileExtensions.UseStaticFiles%2A)並 [啟用預設檔案對應](xref:Microsoft.AspNetCore.Builder.DefaultFilesExtensions.UseDefaultFiles%2A)：
+藉由使用下列反白顯示的程式碼更新 *Startup.cs*，來設定應用程式 [提供靜態檔案](xref:Microsoft.AspNetCore.Builder.StaticFileExtensions.UseStaticFiles%2A)並 [啟用預設檔案對應](xref:Microsoft.AspNetCore.Builder.DefaultFilesExtensions.UseDefaultFiles%2A)：
 
 [!code-csharp[](first-web-api/samples/2.2/TodoApi/Startup.cs?highlight=14-15&name=snippet_configure)]
 
@@ -1460,7 +1458,7 @@ DTO 可以用來：
 
 若要在本機測試 HTML 網頁，可能需要變更 ASP.NET Core 專案的啟動設定：
 
-* 開啟 *Properties\launchSettings.json* 。
+* 開啟 *Properties\launchSettings.json*。
 * 移除 `launchUrl` 屬性，以強制在專案的預設檔案 *index.html* 開啟應用程式 &mdash; 。
 
 此範例會呼叫 Web API 的所有 CRUD 方法。 以下是關於呼叫 API 的說明。

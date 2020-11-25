@@ -18,18 +18,18 @@ no-loc:
 - Razor
 - SignalR
 uid: fundamentals/request-features
-ms.openlocfilehash: d906474b0fd291cc4a68390f390b2bf538e21eff
-ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
+ms.openlocfilehash: 88e97d88341789a76a79da8d92098c2e00396fe7
+ms.sourcegitcommit: 59d95a9106301d5ec5c9f612600903a69c4580ef
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 10/30/2020
-ms.locfileid: "93053705"
+ms.lasthandoff: 11/25/2020
+ms.locfileid: "95870421"
 ---
 # <a name="request-features-in-aspnet-core"></a>ASP.NET Core 中的要求功能
 
 作者：[Steve Smith](https://ardalis.com/)
 
-`HttpContext`應用程式和中介軟體用來處理要求的 API 有一個抽象層 undernieth 它稱為 *功能介面* 。 每個功能介面都會提供所公開之功能的詳細子集 `HttpContext` 。 這些介面可以加入、修改、包裝、取代，或甚至由伺服器或中介軟體移除，因為要求會經過處理，而不需要重新執行整個 `HttpContext` 。 它們也可以用來模擬測試時的功能。
+`HttpContext`應用程式和中介軟體用來處理要求的 API，在其下稱為 *功能介面* 的抽象層。 每個功能介面都會提供所公開之功能的詳細子集 `HttpContext` 。 這些介面可以加入、修改、包裝、取代，或甚至由伺服器或中介軟體移除，因為要求會經過處理，而不需要重新執行整個 `HttpContext` 。 它們也可以用來模擬測試時的功能。
 
 ## <a name="feature-collections"></a>功能集合
 

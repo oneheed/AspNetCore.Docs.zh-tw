@@ -19,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/forms-validation
-ms.openlocfilehash: 827045775d3bca3cd2c467b12172c53f5f9b0625
-ms.sourcegitcommit: aa85f2911792a1e4783bcabf0da3b3e7e218f63a
+ms.openlocfilehash: a8bbcbd6ac13ec064350a5b885423835baa4c4cc
+ms.sourcegitcommit: 59d95a9106301d5ec5c9f612600903a69c4580ef
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 11/23/2020
-ms.locfileid: "95417392"
+ms.lasthandoff: 11/25/2020
+ms.locfileid: "95870369"
 ---
 # <a name="aspnet-core-no-locblazor-forms-and-validation"></a>ASP.NET Core Blazor 表單和驗證
 
@@ -1064,9 +1064,13 @@ private class MyFieldClassProvider : FieldCssClassProvider
 > [!NOTE]
 > [`Microsoft.AspNetCore.Components.DataAnnotations.Validation`](https://www.nuget.org/packages/Microsoft.AspNetCore.Components.DataAnnotations.Validation)套件在 [Nuget.org](https://www.nuget.org/packages/Microsoft.AspNetCore.Components.DataAnnotations.Validation)有最新版本的 *候選版*。請繼續使用 *實驗* 性發行候選套件。 封裝的元件可能會在未來的版本中移至架構或執行時間。 觀看 [公告 github 存放庫](https://github.com/aspnet/Announcements)、 [Dotnet/aspnetcore GitHub 存放庫](https://github.com/dotnet/aspnetcore)，或本主題一節以取得進一步的更新。
 
-### <a name="compareproperty-attribute"></a>[CompareProperty] 屬性
+::: moniker range="< aspnetcore-5.0"
+
+### <a name="compareproperty-attribute"></a>`[CompareProperty]` 屬性
 
 <xref:System.ComponentModel.DataAnnotations.CompareAttribute>無法與元件搭配使用， <xref:Microsoft.AspNetCore.Components.Forms.DataAnnotationsValidator> 因為它不會將驗證結果與特定成員產生關聯。 這可能會導致欄位層級驗證與在提交時驗證整個模型的行為不一致。 [`Microsoft.AspNetCore.Components.DataAnnotations.Validation`](https://www.nuget.org/packages/Microsoft.AspNetCore.Components.DataAnnotations.Validation)*實驗* 性封裝引進了一個額外的驗證屬性， `ComparePropertyAttribute` 它可以解決這些限制。 在 Blazor 應用程式中， `[CompareProperty]` 是屬性的直接取代 [`[Compare]`](xref:System.ComponentModel.DataAnnotations.CompareAttribute) 。
+
+::: moniker-end
 
 ### <a name="nested-models-collection-types-and-complex-types"></a>嵌套模型、集合類型和複雜類型
 

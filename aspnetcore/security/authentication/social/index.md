@@ -18,18 +18,18 @@ no-loc:
 - Razor
 - SignalR
 uid: security/authentication/social/index
-ms.openlocfilehash: 1f7c8cd0716f1ada3517add0d37a09e419f38774
-ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
+ms.openlocfilehash: ca5fd8f746e759d1994dde9a2a0d5b5fd6c88d1a
+ms.sourcegitcommit: 59d95a9106301d5ec5c9f612600903a69c4580ef
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 10/30/2020
-ms.locfileid: "93053302"
+ms.lasthandoff: 11/25/2020
+ms.locfileid: "95870447"
 ---
 # <a name="facebook-google-and-external-provider-authentication-in-aspnet-core"></a>ASP.NET Core 中的 Facebook、Google 及外部提供者驗證
 
 作者：[Valeriy Novytskyy](https://github.com/01binary) 和 [Rick Anderson](https://twitter.com/RickAndMSFT)
 
-本教學課程示範如何建立 ASP.NET Core 3.0 應用程式，讓使用者能夠使用 OAuth 2.0 搭配外部驗證提供者的認證進行登入。
+本教學課程示範如何建立 ASP.NET Core 應用程式，讓使用者能夠使用 OAuth 2.0 搭配外部驗證提供者的認證進行登入。
 
 [Facebook](xref:security/authentication/facebook-logins)、 [Twitter](xref:security/authentication/twitter-logins)、 [Google](xref:security/authentication/google-logins)和 [Microsoft](xref:security/authentication/microsoft-logins) 提供者會在下列各節中討論，並使用本文中建立的入門專案。 您可透過 [AspNet.Security.OAuth.Providers](https://github.com/aspnet-contrib/AspNet.Security.OAuth.Providers) 和 [AspNet.Security.OpenId.Providers](https://github.com/aspnet-contrib/AspNet.Security.OpenId.Providers) 這類協力廠商套件，取得其他提供者。
 
@@ -45,11 +45,11 @@ ms.locfileid: "93053302"
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
 * 建立新專案。
-* 選取 [ASP.NET Core Web 應用程式]  和 [下一步]  。
-* 提供 **專案名稱** 並確認或變更 **位置** 。 選取 [建立]。
-* 在下拉式 ( **ASP.NET Core {X. Y}** ) 中選取最新版本的 ASP.NET Core，然後選取 [ **Web 應用程式** ]。
-* 選取 [驗證]  下的 [變更]  ，並將驗證設定為 [個別使用者帳戶]  。 選取 [確定]  。
-* 在 [建立新的 ASP.NET Core Web 應用程式]  視窗中選取 [建立]  。
+* 選取 [ASP.NET Core Web 應用程式] 和 [下一步]。
+* 提供 **專案名稱** 並確認或變更 **位置**。 選取 [建立]。
+* 在下拉式 (**ASP.NET Core {X. Y}**) 中選取最新版本的 ASP.NET Core，然後選取 [ **Web 應用程式**]。
+* 選取 [驗證] 下的 [變更]，並將驗證設定為 [個別使用者帳戶]。 選取 [確定]。
+* 在 [建立新的 ASP.NET Core Web 應用程式] 視窗中選取 [建立]。
 
 # <a name="visual-studio-code--visual-studio-for-mac"></a>[Visual Studio Code / Visual Studio for Mac](#tab/visual-studio-code+visual-studio-mac)
 
@@ -72,14 +72,14 @@ ms.locfileid: "93053302"
   * 此 `dotnet new` 命令會 Razor 在 *WebApp1* 資料夾中建立新的頁面專案。
   * `-au Individual` 會建立程式碼以進行個別驗證。
   * `-uld` 使用 LocalDB，此為適用于 Windows 的 SQL Server Express 輕量版本。 省略 `-uld` 以使用 SQLite。
-  * `code` 命令會在新的 Visual Studio Code 執行個體中開啟 [WebApp1]  資料夾。
+  * `code` 命令會在新的 Visual Studio Code 執行個體中開啟 [WebApp1] 資料夾。
 
 ---
 
 ## <a name="apply-migrations"></a>套用移轉
 
-* 執行應用程式並選取 [登錄]  連結。
-* 輸入新帳戶的電子郵件和密碼，然後選取 [註冊]  。
+* 執行應用程式並選取 [登錄] 連結。
+* 輸入新帳戶的電子郵件和密碼，然後選取 [註冊]。
 * 遵循指示以套用移轉。
 
 [!INCLUDE[Forward request information when behind a proxy or load balancer section](includes/forwarded-headers-middleware.md)]
@@ -111,7 +111,7 @@ ms.locfileid: "93053302"
 
 若要建立密碼，並使用您在外部提供者登入程序期間所設的電子郵件進行登入：
 
-* 選取右上角的 [Hello &lt;電子郵件別名&gt;]  連結以瀏覽至 [管理]  檢視。
+* 選取右上角的 [Hello &lt;電子郵件別名&gt;] 連結以瀏覽至 [管理] 檢視。
 
 ![Web 應用程式的 [管理] 檢視](index/_static/pass1a.png)
 

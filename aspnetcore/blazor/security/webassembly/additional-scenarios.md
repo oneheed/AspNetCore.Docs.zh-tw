@@ -19,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/security/webassembly/additional-scenarios
-ms.openlocfilehash: baed18df2d127b592f420aac0432e0b28f076d46
-ms.sourcegitcommit: 1be547564381873fe9e84812df8d2088514c622a
+ms.openlocfilehash: bb502533bca24e82792db8814b75b16407f20339
+ms.sourcegitcommit: 59d95a9106301d5ec5c9f612600903a69c4580ef
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 11/11/2020
-ms.locfileid: "94508041"
+ms.lasthandoff: 11/25/2020
+ms.locfileid: "95870382"
 ---
 # <a name="aspnet-core-no-locblazor-webassembly-additional-security-scenarios"></a>ASP.NET Core Blazor WebAssembly 額外的安全性案例
 
@@ -34,7 +34,7 @@ ms.locfileid: "94508041"
 
 <xref:Microsoft.AspNetCore.Components.WebAssembly.Authentication.AuthorizationMessageHandler> 是 <xref:System.Net.Http.DelegatingHandler> 用來將存取權杖附加至外寄 <xref:System.Net.Http.HttpResponseMessage> 實例。 您可以使用 <xref:Microsoft.AspNetCore.Components.WebAssembly.Authentication.IAccessTokenProvider> 由架構註冊的服務來取得權杖。 如果無法取得權杖， <xref:Microsoft.AspNetCore.Components.WebAssembly.Authentication.AccessTokenNotAvailableException> 就會擲回。 <xref:Microsoft.AspNetCore.Components.WebAssembly.Authentication.AccessTokenNotAvailableException> 具有 <xref:Microsoft.AspNetCore.Components.WebAssembly.Authentication.AccessTokenNotAvailableException.Redirect%2A> 方法，可用來將使用者流覽至身分識別提供者，以取得新的權杖。
 
-為了方便起見，架構會提供 <xref:Microsoft.AspNetCore.Components.WebAssembly.Authentication.BaseAddressAuthorizationMessageHandler> 預先設定的應用程式基底位址作為授權的 URL。 **只有當要求 URI 在應用程式的基底 URI 內時，才會新增存取權杖。** 當外寄要求 Uri 不在應用程式的基底 URI 內時，請使用 [自訂 `AuthorizationMessageHandler` 類別 ( *建議*](#custom-authorizationmessagehandler-class) [的 `AuthorizationMessageHandler`](#configure-authorizationmessagehandler)) 或設定。
+為了方便起見，架構會提供 <xref:Microsoft.AspNetCore.Components.WebAssembly.Authentication.BaseAddressAuthorizationMessageHandler> 預先設定的應用程式基底位址作為授權的 URL。 **只有當要求 URI 在應用程式的基底 URI 內時，才會新增存取權杖。** 當外寄要求 Uri 不在應用程式的基底 URI 內時，請使用 [自訂 `AuthorizationMessageHandler` 類別 (*建議*](#custom-authorizationmessagehandler-class) [的 `AuthorizationMessageHandler`](#configure-authorizationmessagehandler)) 或設定。
 
 > [!NOTE]
 > 除了用於伺服器 API 存取的用戶端應用程式設定之外，當用戶端和伺服器不在相同的基底位址時，伺服器 API 也必須允許跨原始來源的要求 (CORS) 。 如需伺服器端 CORS 設定的詳細資訊，請參閱本文稍後的「 [跨原始資源分享 (CORS) ](#cross-origin-resource-sharing-cors) 一節。
@@ -884,6 +884,31 @@ app.UseEndpoints(endpoints =>
 
 在伺服器應用程式中， `Pages` 如果資料夾不存在，請加以建立。 在 `_Host.cshtml` 伺服器應用程式的資料夾內建立頁面 `Pages` 。 將應用程式檔案中的內容貼到檔案中 *`Client`* `wwwroot/index.html` `Pages/_Host.cshtml` 。 更新檔案的內容：
 
+::: moniker range=">= aspnetcore-5.0"
+
+* 將 `@page "_Host"` 新增到檔案的頂端。
+* `<div id="app">Loading...</div>`以下列內容取代標記：
+
+  ```cshtml
+  <div id="app">
+      @if (!HttpContext.Request.Path.StartsWithSegments("/authentication"))
+      {
+          <component type="typeof({CLIENT APP ASSEMBLY NAME}.App)" 
+              render-mode="Static" />
+      }
+      else
+      {
+          <text>Loading...</text>
+      }
+  </div>
+  ```
+  
+  在上述範例中，預留位置 `{CLIENT APP ASSEMBLY NAME}` 是用戶端應用程式的元件名稱 (例如 `BlazorSample.Client`) 。
+
+::: moniker-end
+
+::: moniker range="< aspnetcore-5.0"
+
 * 將 `@page "_Host"` 新增到檔案的頂端。
 * `<app>Loading...</app>`以下列內容取代標記：
 
@@ -891,7 +916,7 @@ app.UseEndpoints(endpoints =>
   <app>
       @if (!HttpContext.Request.Path.StartsWithSegments("/authentication"))
       {
-          <component type="typeof(Wasm.Authentication.Client.App)" 
+          <component type="typeof({CLIENT APP ASSEMBLY NAME}.App)" 
               render-mode="Static" />
       }
       else
@@ -900,6 +925,10 @@ app.UseEndpoints(endpoints =>
       }
   </app>
   ```
+  
+  在上述範例中，預留位置 `{CLIENT APP ASSEMBLY NAME}` 是用戶端應用程式的元件名稱 (例如 `BlazorSample.Client`) 。
+
+::: moniker-end
   
 ## <a name="options-for-hosted-apps-and-third-party-login-providers"></a>託管應用程式和協力廠商登入提供者的選項
 

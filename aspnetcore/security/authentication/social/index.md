@@ -18,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: security/authentication/social/index
-ms.openlocfilehash: ca5fd8f746e759d1994dde9a2a0d5b5fd6c88d1a
-ms.sourcegitcommit: 59d95a9106301d5ec5c9f612600903a69c4580ef
+ms.openlocfilehash: f7bc7c6a14d014f8c3c283fb09718b9191b7b478
+ms.sourcegitcommit: 3f0ad1e513296ede1bff39a05be6c278e879afed
 ms.translationtype: MT
 ms.contentlocale: zh-TW
 ms.lasthandoff: 11/25/2020
-ms.locfileid: "95870447"
+ms.locfileid: "96035823"
 ---
 # <a name="facebook-google-and-external-provider-authentication-in-aspnet-core"></a>ASP.NET Core 中的 Facebook、Google 及外部提供者驗證
 
@@ -86,7 +86,7 @@ ms.locfileid: "95870447"
 
 ## <a name="use-secretmanager-to-store-tokens-assigned-by-login-providers"></a>使用 SecretManager 來儲存登入提供者指派的權杖
 
-社交登入提供者會在註冊程序期間指派 **應用程式識別碼** 和 **應用程式密碼** 權杖。 確切權杖名稱會依提供者而有所不同。 這些權杖代表您的應用程式用來存取其 API 的認證。 這些權杖會組成「祕密」，在[祕密管理員](xref:security/app-secrets#secret-manager)的協助下連結到您的應用程式設定。 秘密管理員是將權杖儲存在設定檔中的更安全替代方法，例如 *appsettings.json* 。
+社交登入提供者會在註冊程序期間指派 **應用程式識別碼** 和 **應用程式密碼** 權杖。 確切權杖名稱會依提供者而有所不同。 這些權杖代表您的應用程式用來存取其 API 的認證。 這些權杖構成「使用者秘密」，可透過 [秘密管理員](xref:security/app-secrets#secret-manager)的協助連結至您的應用程式設定。 使用者密碼是在設定檔中儲存權杖（例如）的更安全替代方法 *appsettings.json* 。
 
 > [!IMPORTANT]
 > 祕密管理員僅供用於開發用途。 您可以透過 [Azure Key Vault 設定提供者](xref:security/key-vault-configuration)儲存及保護 Azure 測試與生產祕密。

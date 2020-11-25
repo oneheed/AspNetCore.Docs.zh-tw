@@ -17,18 +17,18 @@ no-loc:
 - Razor
 - SignalR
 uid: mvc/views/razor
-ms.openlocfilehash: c1278b0cd3e58814b1c06dca81efd662c3de0c54
-ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
+ms.openlocfilehash: 91e35a7cbd97e2bd6e77566362f02409915de7d7
+ms.sourcegitcommit: 3f0ad1e513296ede1bff39a05be6c278e879afed
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 10/30/2020
-ms.locfileid: "93059191"
+ms.lasthandoff: 11/25/2020
+ms.locfileid: "96035706"
 ---
 # <a name="no-locrazor-syntax-reference-for-aspnet-core"></a>Razor ASP.NET Core 的語法參考
 
 由 [Rick Anderson](https://twitter.com/RickAndMSFT)、 [Taylor Mullen](https://twitter.com/ntaylormullen)和 [Dan Vicarel](https://github.com/Rabadash8820)
 
-Razor 是將伺服器程式碼內嵌到網頁中的標記語法。 Razor語法包含 Razor 標記、c # 和 HTML。 通常包含 Razor 的檔案副檔名為 *cshtml* 。 Razor也可在 ( *razor* ) 的 [ Razor 元件](xref:blazor/components/index)檔案中找到。
+Razor 是將伺服器程式碼內嵌到網頁中的標記語法。 Razor語法包含 Razor 標記、c # 和 HTML。 通常包含 Razor 的檔案副檔名為 *cshtml* 。 Razor也可在 (*razor*) 的 [ Razor 元件](xref:blazor/components/index)檔案中找到。
 
 ## <a name="rendering-html"></a>轉譯 HTML
 
@@ -73,7 +73,7 @@ HTML 屬性及含有電子郵件地址的內容不會將 `@` 符號視為轉換�
 <p>@await DoSomething("hello", "world")</p>
 ```
 
-隱含運算式「不能」  包含 C# 泛型，因為括弧 (`<>`) 內的字元會解譯為 HTML 標籤。 下列程式碼 **無效** ：
+隱含運算式「不能」包含 C# 泛型，因為括弧 (`<>`) 內的字元會解譯為 HTML 標籤。 下列程式碼 **無效**：
 
 ```cshtml
 <p>@GenericMethod<int>()</p>
@@ -658,7 +658,7 @@ Razor 公開 `Model` 屬性，以存取傳遞給視圖的模型：
 
 針對 Razor 下表所示的頁面範例：
 
-* 每個頁面都會匯入 *Pages/_ViewImports.cshtml* 。
+* 每個頁面都會匯入 *Pages/_ViewImports.cshtml*。
 * *Pages/_ViewImports.cshtml* 包含 `@namespace Hello.World`。
 * 每個頁面都有 `Hello.World` 作為其命名空間的根目錄。
 
@@ -694,6 +694,20 @@ Razor 公開 `Model` 屬性，以存取傳遞給視圖的模型：
 ::: moniker range="< aspnetcore-3.0"
 
 `@page` *Cshtml* 檔案第一行的指示詞指出檔案是 Razor 頁面。 如需詳細資訊，請參閱<xref:razor-pages/index>。
+
+::: moniker-end
+
+::: moniker range=">= aspnetcore-5.0"
+
+### `@preservewhitespace`
+
+*此案例僅適用于 Razor)  (元件 `.razor` 。*
+
+當設定為 `false` (預設) 時，如果有下列情況，則 Razor 會移除從元件 () 之轉譯標記中的空白字元 `.razor` ：
+
+* 元素內的前置或尾端。
+* 參數內的前置或尾端 `RenderFragment` 。 例如，傳遞至另一個元件的子內容。
+* 它在 c # 程式碼區塊之前或之後，例如 `@if` 或 `@foreach` 。
 
 ::: moniker-end
 
@@ -969,7 +983,7 @@ C # Razor 關鍵字必須以 (進行雙重換用 `@(@C# Razor Keyword)` ，例�
            Index.g.cshtml.cs
 ```
 
-若要查看針對 *Pages/Index* 所產生的類別，請開啟 *obj/Debug/netcoreapp 2.1/ Razor /Pages/Index.g.cshtml.cs* 。
+若要查看針對 *Pages/Index* 所產生的類別，請開啟 *obj/Debug/netcoreapp 2.1/ Razor /Pages/Index.g.cshtml.cs*。
 
 ::: moniker-end
 
@@ -995,7 +1009,7 @@ RazorView engine 會針對視圖執行區分大小寫的查閱。 不過，實�
 
 * 檔案式來源：
   * 在具有不區分大小寫之檔案系統的作業系統上 (例如 Windows)，實體檔案提供者查閱不會區分大小寫。 例如，`return View("Test")` 針對 */Views/Home/Test.cshtml* 和 */Views/home/test.cshtml* (以及任何其他大小寫變體) 會有相符的結果。
-  * 在區分大小寫的檔案系統上 (例如 Linux、OSX 及使用 `EmbeddedFileProvider`)，查閱會區分大小寫。 例如，`return View("Test")` 會明確符合 */Views/Home/Test.cshtml* 。
+  * 在區分大小寫的檔案系統上 (例如 Linux、OSX 及使用 `EmbeddedFileProvider`)，查閱會區分大小寫。 例如，`return View("Test")` 會明確符合 */Views/Home/Test.cshtml*。
 * 先行編譯的檢視：在 ASP.NET Core 2.0 和更新版本中，在所有作業系統上查閱先行編譯的檢視不會區分大小寫。 此行為與 Windows 上之實體檔案提供者的行為相同。 如果兩個先行編譯的檢視只有大小寫不同，查閱的結果不會由此決定。
 
 建議開發人員比對檔案和目錄的大小寫以及下列項目的大小寫：

@@ -5,7 +5,7 @@ description: 瞭解如何建立和使用 Razor 元件，包括如何系結至資
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 11/09/2020
+ms.date: 11/25/2020
 no-loc:
 - appsettings.json
 - ASP.NET Core Identity
@@ -19,16 +19,16 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/components/index
-ms.openlocfilehash: cc4604f7f67a6648c96e099572ff27bfed838916
-ms.sourcegitcommit: 8363e44f630fcc6433ccd2a85f7aa9567cd274ed
+ms.openlocfilehash: b87986442bb8127f03df1f7ecff8167cafa27fdf
+ms.sourcegitcommit: 3f0ad1e513296ede1bff39a05be6c278e879afed
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 11/20/2020
-ms.locfileid: "94981865"
+ms.lasthandoff: 11/25/2020
+ms.locfileid: "96035680"
 ---
 # <a name="create-and-use-aspnet-core-no-locrazor-components"></a>建立和使用 ASP.NET Core Razor 元件
 
-[Luke Latham](https://github.com/guardrex)、 [Daniel Roth](https://github.com/danroth27)和[Tobias Bartsch](https://www.aveo-solutions.com/)
+[Luke Latham](https://github.com/guardrex)、 [Daniel Roth](https://github.com/danroth27)、 [Scott Addie](https://github.com/scottaddie)和[Tobias Bartsch](https://www.aveo-solutions.com/)
 
 [查看或下載範例程式碼](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/blazor/common/samples/) ([如何下載](xref:index#how-to-download-a-sample)) 
 
@@ -886,6 +886,64 @@ Razor 元件 () **不** 支援波狀符號斜線標記法 `~/` 。
 ```
 
 不過，並非所有案例都支援內嵌 SVG 標記。 如果您將 `<svg>` 標記直接放入元件檔 (`.razor`) ，則支援基本映射轉譯，但目前尚不支援許多先進的案例。 例如， `<use>` 目前未遵守標記，且 [`@bind`][10] 無法與某些 SVG 標記一起使用。 如需詳細資訊，請參閱 [ Blazor (dotnet/aspnetcore 中的 SVG 支援 #18271) ](https://github.com/dotnet/aspnetcore/issues/18271)。
+
+## <a name="whitespace-rendering-behavior"></a>空白轉譯行為
+
+::: moniker range=">= aspnetcore-5.0"
+
+除非使用指示詞搭配的 [`@preservewhitespace`](xref:mvc/views/razor#preservewhitespace) 值，否則 `true` 如果有下列情況，則預設會移除額外的空格：
+
+* 元素內的前置或尾端。
+* 參數內的前置或尾端 `RenderFragment` 。 例如，傳遞至另一個元件的子內容。
+* 它在 c # 程式碼區塊之前或之後，例如 `@if` 或 `@foreach` 。
+
+使用 CSS 規則（例如）時，移除空白可能會影響轉譯的輸出 `white-space: pre` 。 若要停用此效能優化並保留空白字元，請採取下列其中一項動作：
+
+* 將指示詞新增至檔案 `@preservewhitespace true` 頂端 `.razor` ，以將喜好設定套用至特定元件。
+* 在檔案內加入指示詞 `@preservewhitespace true` `_Imports.razor` ，以將喜好設定套用至整個子目錄或整個專案。
+
+在大部分情況下，不需要採取任何動作，因為應用程式通常會繼續正常運作 (但) 更快。 如果移除空白字元會造成特定元件的任何問題，請 `@preservewhitespace true` 在該元件中使用，以停用這項優化。
+
+::: moniker-end
+
+::: moniker range="< aspnetcore-5.0"
+
+空白會保留在元件的原始程式碼中。 即使沒有視覺效果，也會在瀏覽器的檔物件模型 (DOM) 中呈現僅限空白字元的文字。
+
+請考慮下列 Razor 元件程式碼：
+
+```razor
+<ul>
+    @foreach (var item in Items)
+    {
+        <li>
+            @item.Text
+        </li>
+    }
+</ul>
+```
+
+上述範例會轉譯下列不必要的空格：
+
+* 在程式 `@foreach` 代碼區塊之外。
+* 在 `<li>` 元素周圍。
+* 在 `@item.Text` 輸出周圍。
+
+包含100專案的清單會導致402個空白區域，而且沒有任何額外的空白字元會以視覺化方式影響轉譯的輸出。
+
+為元件呈現靜態 HTML 時，不會保留標記內的空白字元。 例如，在轉譯的輸出中查看下列元件的來源：
+
+```razor
+<img     alt="My image"   src="img.png"     />
+```
+
+空白字元不會保留在上述 Razor 標記中：
+
+```razor
+<img alt="My image" src="img.png" />
+```
+
+::: moniker-end
 
 ## <a name="additional-resources"></a>其他資源
 

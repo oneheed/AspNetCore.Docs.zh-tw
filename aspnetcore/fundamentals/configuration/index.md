@@ -5,7 +5,7 @@ description: 了解如何使用組態 API 設定 ASP.NET Core 應用程式。
 monikerRange: '>= aspnetcore-2.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 11/23/2020
+ms.date: 11/24/2020
 no-loc:
 - appsettings.json
 - ASP.NET Core Identity
@@ -19,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: fundamentals/configuration/index
-ms.openlocfilehash: c04dcc65f7518d2d8b32cdce7a7fbb756dd8ec3a
-ms.sourcegitcommit: aa85f2911792a1e4783bcabf0da3b3e7e218f63a
+ms.openlocfilehash: 97ee00dd37ed4eef1c013e0f45b598a79f3f260c
+ms.sourcegitcommit: 3f0ad1e513296ede1bff39a05be6c278e879afed
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 11/23/2020
-ms.locfileid: "95417535"
+ms.lasthandoff: 11/25/2020
+ms.locfileid: "96035862"
 ---
 # <a name="configuration-in-aspnet-core"></a>ASP.NET Core 的設定
 
@@ -108,20 +108,20 @@ ASP.NET Core 使用 [dotnet new](/dotnet/core/tools/dotnet-new) 或 Visual Studi
 
 <a name="security"></a>
 
-## <a name="security-and-secret-manager"></a>安全性與秘密管理員
+## <a name="security-and-user-secrets"></a>安全性與使用者秘密
 
 設定資料指導方針：
 
-_ 絕對不要將密碼或其他敏感性資料儲存在設定提供者程式碼或純文字設定檔中。 [秘密管理員](xref:security/app-secrets)可以用來在開發中儲存秘密。
+_ 絕對不要將密碼或其他敏感性資料儲存在設定提供者程式碼或純文字設定檔中。 [秘密管理員](xref:security/app-secrets)工具可以用來在開發中儲存秘密。
 * 不要在開發或測試環境中使用生產環境祕密。
 * 請在專案外部指定祕密，以防止其意外認可至開放原始碼存放庫。
 
-根據 [預設](#default)，[秘密管理員](xref:security/app-secrets)會在和 appsettings 之後讀取設定設定 *appsettings.json* *。* `Environment`*. json*。
+根據 [預設](#default)，使用者秘密設定來源會在 JSON 設定來源之後註冊。 因此，使用者秘密金鑰優先于和 appsettings 中的金鑰 *appsettings.json* *。* `Environment`*. json*。
 
 如需有關儲存密碼或其他敏感性資料的詳細資訊：
 
 * <xref:fundamentals/environments>
-* <xref:security/app-secrets>：包含使用環境變數來儲存敏感性資料的建議。 秘密管理員會使用檔案設定 [提供者](#fcp) ，將使用者秘密儲存在本機系統上的 JSON 檔案中。
+* <xref:security/app-secrets>：包含使用環境變數來儲存敏感性資料的建議。 秘密管理員工具會使用檔案設定 [提供者](#fcp) ，將使用者秘密儲存在本機系統上的 JSON 檔案中。
 
 [Azure Key Vault](https://azure.microsoft.com/services/key-vault/) 可安全地儲存 ASP.NET Core 應用程式的應用程式祕密。 如需詳細資訊，請參閱<xref:security/key-vault-configuration>。
 
@@ -129,7 +129,7 @@ _ 絕對不要將密碼或其他敏感性資料儲存在設定提供者程式碼
 
 ## <a name="environment-variables"></a>環境變數
 
-使用 [預設](#default)設定時，會在 <xref:Microsoft.Extensions.Configuration.EnvironmentVariables.EnvironmentVariablesConfigurationProvider> 讀取之後從環境變數機碼值組載入設定 *appsettings.json* （ *appsettings）。* `Environment`*. json* 和 [秘密管理員](xref:security/app-secrets)。 因此，從環境讀取的索引鍵值會覆寫 appsettings 中讀取的值 *appsettings.json* *。* `Environment`*. json* 和秘密管理員。
+使用 [預設](#default)設定時，會在 <xref:Microsoft.Extensions.Configuration.EnvironmentVariables.EnvironmentVariablesConfigurationProvider> 讀取之後從環境變數機碼值組載入設定 *appsettings.json* （ *appsettings）。* `Environment`*. json* 和 [使用者秘密](xref:security/app-secrets)。 因此，從環境讀取的索引鍵值會覆寫 appsettings 中讀取的值 *appsettings.json* *。* `Environment`*. json* 和使用者秘密。
 
 [!INCLUDE[](~/includes/environmentVarableColon.md)]
 
@@ -243,7 +243,7 @@ setx Logging__1__Level=Information
 使用 [預設](#default) 設定時，會 <xref:Microsoft.Extensions.Configuration.CommandLine.CommandLineConfigurationProvider> 從命令列引數索引鍵/值組在下列設定來源之後載入設定：
 
 * *appsettings.json* 和 *appsettings*。 `Environment`*json* 檔案。
-* [應用程式秘密 (秘密管理員 ](xref:security/app-secrets) 在開發環境中) 。
+* 開發環境中的[應用程式秘密](xref:security/app-secrets)。
 * 環境變數。
 
 根據 [預設](#default)，在命令列覆寫設定值設定的設定值會與所有其他設定提供者一起設定。
@@ -271,7 +271,7 @@ dotnet run --MyKey "Using --" --Position:Title=Cmd-- --Position:Name=Cmd--Rick
 索引鍵值：
 
 * 必須遵循 `=` ，或者 `--` `/` 當值在空格後面時，索引鍵必須有或的前置詞。
-* 如果 `=` 使用，則不需要。 例如： `MySetting=` 。
+* 如果 `=` 使用，則不需要。 例如 `MySetting=`。
 
 在相同的命令中，不要混用 `=` 與使用空格的索引鍵/值組搭配使用的命令列引數索引鍵/值配對。
 
@@ -355,7 +355,7 @@ dotnet run -k1 value1 -k2 value2 --alt3=value2 /alt4=value3 --alt5 value5 /alt6 
 | [檔案設定提供者](#file-configuration-provider) | INI、JSON 和 XML 檔案 |
 | [每個檔案的金鑰配置提供者](#key-per-file-configuration-provider) | 目錄檔案 |
 | [記憶體設定提供者](#memory-configuration-provider) | 記憶體內集合 |
-| [秘密管理員](xref:security/app-secrets)  | 使用者設定檔目錄中的檔案 |
+| [使用者秘密](xref:security/app-secrets) | 使用者設定檔目錄中的檔案 |
 
 設定來源會依照其設定提供者的指定順序讀取。 在程式碼中訂購設定提供者，以符合應用程式所需之基礎設定來源的優先順序。
 
@@ -363,7 +363,7 @@ dotnet run -k1 value1 -k2 value2 --alt3=value2 /alt4=value3 --alt5 value5 /alt6 
 
 1. *appsettings.json*
 1. *appsettings*... `Environment`*json*
-1. [秘密管理員](xref:security/app-secrets)
+1. [使用者秘密](xref:security/app-secrets)
 1. 使用 [環境變數設定提供者](#evcp)的環境變數。
 1. 使用 [命令列設定提供者](#command-line-configuration-provider)的命令列引數。
 
@@ -865,7 +865,7 @@ using Microsoft.Extensions.Configuration;
 * 應用程式設定的提供來源：
   * *appsettings.json* 使用檔案設定 [提供者](#file-configuration-provider)。
   * 使用 [檔案組態提供者](#file-configuration-provider)的 *appsettings.{Environment}.json*。
-  * 應用程式在使用項目組件之 `Development` 環境中執行時的[秘密管理員](xref:security/app-secrets)。
+  * 應用程式在使用輸入組件的 `Development` 環境中執行時的[使用者密碼](xref:security/app-secrets)。
   * 使用[環境變數組態提供者](#environment-variables-configuration-provider)的環境變數。
   * 使用[命令列組態提供者](#command-line-configuration-provider)的命令列引數。
 
@@ -880,7 +880,7 @@ using Microsoft.Extensions.Configuration;
 如需詳細資訊，請參閱下列主題：
 
 * <xref:fundamentals/environments>
-* <xref:security/app-secrets>：包含使用環境變數來儲存敏感性資料的建議。 「祕密管理員」使用「檔案設定提供者」以 JSON 檔案在本機系統上存放使用者祕密。 此主題稍後將說明「檔案設定提供者」。
+* <xref:security/app-secrets>：包含使用環境變數來儲存敏感性資料的建議。 秘密管理員工具會使用檔案設定提供者，將使用者秘密儲存在本機系統上的 JSON 檔案中。 此主題稍後將說明「檔案設定提供者」。
 
 [Azure Key Vault](https://azure.microsoft.com/services/key-vault/) 可安全地儲存 ASP.NET Core 應用程式的應用程式祕密。 如需詳細資訊，請參閱<xref:security/key-vault-configuration>。
 
@@ -983,15 +983,15 @@ public class HomeController : Controller
 | [檔案設定提供者](#file-configuration-provider) | 檔案 (INI、JSON、XML) |
 | [每個檔案機碼的設定提供者](#key-per-file-configuration-provider) | 目錄檔案 |
 | [記憶體設定提供者](#memory-configuration-provider) | 記憶體內集合 |
-| [使用者祕密 (祕密管理員)](xref:security/app-secrets) (*安全性* 主題) | 使用者設定檔目錄中的檔案 |
+|  (*安全性* 主題的 [使用者密碼](xref:security/app-secrets))  | 使用者設定檔目錄中的檔案 |
 
 在啟動時，會依照設定來源的設定提供者的指定順序讀入設定來源。 本主題所描述的設定提供者會依字母順序描述，而不是依照程式碼排列順序。 在程式碼中訂購設定提供者，以符合應用程式所需之基礎設定來源的優先順序。
 
 典型的設定提供者順序是：
 
 1. 檔案 (*appsettings.json* ， *appsettings. {環境} json*，其中 `{Environment}` 是應用程式目前的裝載環境) 
-1. [Azure Key Vault](xref:security/key-vault-configuration)
-1. [使用者祕密 (祕密管理員)](xref:security/app-secrets) (僅限開發環境)
+1. [Azure 金鑰保存庫](xref:security/key-vault-configuration)
+1. 僅)  (開發環境的[使用者秘密](xref:security/app-secrets)
 1. 環境變數
 1. 命令列引數
 
@@ -1067,7 +1067,7 @@ public static IWebHostBuilder CreateWebHostBuilder(string[] args)
 `CreateDefaultBuilder` 也會載入：
 
 * 自和 appsettings 的選擇性設定 *appsettings.json* *。環境}. json* 檔案。
-* 開發環境中的[使用者祕密 (祕密管理員)](xref:security/app-secrets)。
+* 開發環境中的[使用者秘密](xref:security/app-secrets)。
 * 環境變數。
 
 `CreateDefaultBuilder` 會最後才新增命令列設定提供者。 在執行階段傳遞的命令列引數會覆寫由其它提供者所設定的設定。
@@ -1182,7 +1182,7 @@ dotnet run -CLKey1=value1 -CLKey2=value2
 
 * 來自無首碼之環境變數的應用程式組態 (在未提供首碼的情況下呼叫 `AddEnvironmentVariables`)。
 * 自和 appsettings 的選擇性設定 *appsettings.json* *。環境}. json* 檔案。
-* 開發環境中的[使用者祕密 (祕密管理員)](xref:security/app-secrets)。
+* 開發環境中的[使用者秘密](xref:security/app-secrets)。
 * 命令列引數。
 
 從使用者祕密與 *appsettings* 檔案建立設定之後，會呼叫「環境變數設定提供者」。 在此位置呼叫提供者可讓系統在執行階段讀取環境變數，以覆寫由使用者祕密與 *appsettings* 檔案所設定的設定。
@@ -1342,7 +1342,7 @@ key=value
 `CreateDefaultBuilder` 也會載入：
 
 * 環境變數。
-* 開發環境中的[使用者祕密 (祕密管理員)](xref:security/app-secrets)。
+* 開發環境中的[使用者秘密](xref:security/app-secrets)。
 * 命令列引數。
 
 會先建立 JSON 設定提供者。 因此，使用者祕密、環境變數與命令列引數會覆寫由 *appsettings* 檔案設定的設定。

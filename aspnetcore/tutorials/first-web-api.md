@@ -19,12 +19,12 @@ no-loc:
 - SignalR
 - Models
 uid: tutorials/first-web-api
-ms.openlocfilehash: 9299ba685c95ced522fc725854a66252e67fc799
-ms.sourcegitcommit: aa85f2911792a1e4783bcabf0da3b3e7e218f63a
+ms.openlocfilehash: ccbfc27eb89e23938a69f0ab4cb306d6a4136889
+ms.sourcegitcommit: fe2e3174c34bee1e425c6e52dd8f663fe52b8756
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 11/23/2020
-ms.locfileid: "96024960"
+ms.lasthandoff: 11/26/2020
+ms.locfileid: "96175048"
 ---
 # <a name="tutorial-create-a-web-api-with-aspnet-core"></a>教學課程：使用 ASP.NET Core 建立 web API
 
@@ -45,7 +45,7 @@ ms.locfileid: "96024960"
 
 結束時，您會有一個 Web API，可以管理儲存在資料庫中的「待辦事項」。
 
-## <a name="overview"></a>概觀
+## <a name="overview"></a>總覽
 
 本教學課程會建立以下 API：
 
@@ -119,7 +119,7 @@ ms.locfileid: "96024960"
 
   ![macOS API 範本選取專案](first-web-api-mac/_static/api_template.png)
 
-* 在 [ **設定新的 ASP.NET Core WEB API** ] 對話方塊中，選取最新的 .net Core 5.X **目標 Framework**。 選取 [下一步]。
+* 在 [ **設定新的 ASP.NET Core WEB API** ] 對話方塊中，選取最新的 .net Core 5.X **目標 Framework**。 選取 [下一步] 。
 
 * 針對 [專案名稱] 輸入 *TodoApi*，然後選取 [建立]。
 
@@ -174,7 +174,7 @@ Swagger 頁面隨即 `/swagger/index.html` 顯示。 選取 [**立即**  >  **�
 -->
 Swagger 可用來產生 web Api 的實用檔和說明頁面。 本教學課程著重于建立 web API。 如需 Swagger 的詳細資訊，請參閱 <xref:tutorials/web-api-help-pages-using-swagger> 。
 
-複製並超過瀏覽器中的 **要求 URL** ：  `https://localhost:<port>/WeatherForecast`
+將 **要求 URL** 複製並貼入瀏覽器中：  `https://localhost:<port>/WeatherForecast`
 
 系統會傳回與下列類似的 JSON：
 
@@ -319,7 +319,7 @@ Swagger 可用來產生 web Api 的實用檔和說明頁面。 本教學課程�
 
   * 選取 **模型類別** 中的 [ **TodoItem (TodoApi] Models) 。**
   * 選取 **資料內容類別** 中的 **TodoCoNtext (TodoApi Models) 。**
-  * 選取 [新增]  。
+  * 選取 [新增]。
 
 # <a name="visual-studio-code--visual-studio-for-mac"></a>[Visual Studio Code / Visual Studio for Mac](#tab/visual-studio-code+visual-studio-mac)
 
@@ -387,7 +387,7 @@ dotnet aspnet-codegenerator controller -name TodoItemsController -async -api -m 
 
 * 建立新的要求。
 * 將 HTTP 方法設為 `POST`。
-* 將 URI 設定為 `https://localhost:<port>/api/TodoItems` 。 例如： `https://localhost:5001/api/TodoItems` 。
+* 將 URI 設定為 `https://localhost:<port>/api/TodoItems` 。 例如 `https://localhost:5001/api/TodoItems`。
 * 選取 [Body] \(本文\) 索引標籤。
 * 選取 [原始] 選項按鈕。
 * 將類型設定為 **JSON (application/json)**。
@@ -416,7 +416,7 @@ dotnet aspnet-codegenerator controller -name TodoItemsController -async -api -m 
   ![Postman 主控台的 [標頭] 索引標籤](first-web-api/_static/3/create.png)
 
 * 將 HTTP 方法設為 `GET`。
-* 將 URI 設定為 `https://localhost:<port>/api/TodoItems/1` 。 例如： `https://localhost:5001/api/TodoItems/1` 。
+* 將 URI 設定為 `https://localhost:<port>/api/TodoItems/1` 。 例如 `https://localhost:5001/api/TodoItems/1`。
 * 選取 [傳送]  。
 
 ## <a name="examine-the-get-methods"></a>檢查 GET 方法
@@ -447,7 +447,7 @@ dotnet aspnet-codegenerator controller -name TodoItemsController -async -api -m 
 
 * 建立新的要求。
 * 將 HTTP 方法設定為 **GET**。
-* 將要求 URI 設定為 `https://localhost:<port>/api/TodoItems` 。 例如： `https://localhost:5001/api/TodoItems` 。
+* 將要求 URI 設定為 `https://localhost:<port>/api/TodoItems` 。 例如 `https://localhost:5001/api/TodoItems`。
 * 在 Postman 中，設定 [Two pane view] \(雙窗格檢視\)。
 * 選取 [傳送]  。
 
@@ -569,7 +569,7 @@ DTO 可以用來：
 
 結束時，您會有一個 Web API，可以管理儲存在資料庫中的「待辦事項」。
 
-## <a name="overview"></a>概觀
+## <a name="overview"></a>總覽
 
 本教學課程會建立以下 API：
 
@@ -643,7 +643,7 @@ DTO 可以用來：
 
   ![macOS API 範本選取專案](first-web-api-mac/_static/api_template.png)
 
-* 在 [ **設定新的 ASP.NET Core WEB API** ] 對話方塊中，選取最新的 .net Core 3.X **目標 Framework**。 選取 [下一步]。
+* 在 [ **設定新的 ASP.NET Core WEB API** ] 對話方塊中，選取最新的 .net Core 3.X **目標 Framework**。 選取 [下一步] 。
 
 * 針對 [專案名稱] 輸入 *TodoApi*，然後選取 [建立]。
 
@@ -810,7 +810,7 @@ DTO 可以用來：
 
   * 選取 **模型類別** 中的 [ **TodoItem (TodoApi] Models) 。**
   * 選取 **資料內容類別** 中的 **TodoCoNtext (TodoApi Models) 。**
-  * 選取 [新增]  。
+  * 選取 [新增]。
 
 # <a name="visual-studio-code--visual-studio-for-mac"></a>[Visual Studio Code / Visual Studio for Mac](#tab/visual-studio-code+visual-studio-mac)
 
@@ -878,7 +878,7 @@ dotnet aspnet-codegenerator controller -name TodoItemsController -async -api -m 
 
 * 建立新的要求。
 * 將 HTTP 方法設為 `POST`。
-* 將 URI 設定為 `https://localhost:<port>/api/TodoItems` 。 例如： `https://localhost:5001/api/TodoItems` 。
+* 將 URI 設定為 `https://localhost:<port>/api/TodoItems` 。 例如 `https://localhost:5001/api/TodoItems`。
 * 選取 [Body] \(本文\) 索引標籤。
 * 選取 [原始] 選項按鈕。
 * 將類型設定為 **JSON (application/json)**。
@@ -903,7 +903,7 @@ dotnet aspnet-codegenerator controller -name TodoItemsController -async -api -m 
   ![Postman 主控台的 [標頭] 索引標籤](first-web-api/_static/3/create.png)
 
 * 將 HTTP 方法設為 `GET`。
-* 將 URI 設定為 `https://localhost:<port>/api/TodoItems/1` 。 例如： `https://localhost:5001/api/TodoItems/1` 。
+* 將 URI 設定為 `https://localhost:<port>/api/TodoItems/1` 。 例如 `https://localhost:5001/api/TodoItems/1`。
 * 選取 [傳送]  。
 
 ## <a name="examine-the-get-methods"></a>檢查 GET 方法
@@ -934,7 +934,7 @@ dotnet aspnet-codegenerator controller -name TodoItemsController -async -api -m 
 
 * 建立新的要求。
 * 將 HTTP 方法設定為 **GET**。
-* 將要求 URI 設定為 `https://localhost:<port>/api/TodoItems` 。 例如： `https://localhost:5001/api/TodoItems` 。
+* 將要求 URI 設定為 `https://localhost:<port>/api/TodoItems` 。 例如 `https://localhost:5001/api/TodoItems`。
 * 在 Postman 中，設定 [Two pane view] \(雙窗格檢視\)。
 * 選取 [傳送]  。
 
@@ -1126,7 +1126,7 @@ DTO 可以用來：
 
 * 在8.6 版之前的 Visual Studio for Mac 中，選取 [ **.net Core**  >  **應用程式**  >  **API**  >  **]**。 在8.6 版或更新版本中，選取 [ **Web] 和 [主控台**  >  **應用程式**  >  **API**  >  **]**。
   
-* 在 [ **設定新的 ASP.NET Core WEB API** ] 對話方塊中，選取最新的 .net Core 2.X **目標 Framework**。 選取 [下一步]。
+* 在 [ **設定新的 ASP.NET Core WEB API** ] 對話方塊中，選取最新的 .net Core 2.X **目標 Framework**。 選取 [下一步] 。
 
 * 針對 [專案名稱] 輸入 *TodoApi*，然後選取 [建立]。
 
@@ -1336,7 +1336,7 @@ DTO 可以用來：
 
 * 建立新的要求。
   * 將 HTTP 方法設定為 **GET**。
-  * 將要求 URI 設定為 `https://localhost:<port>/api/todo` 。 例如： `https://localhost:5001/api/todo` 。
+  * 將要求 URI 設定為 `https://localhost:<port>/api/todo` 。 例如 `https://localhost:5001/api/todo`。
 * 在 Postman 中，設定 [Two pane view] \(雙窗格檢視\)。
 * 選取 [傳送]  。
 
@@ -1362,7 +1362,7 @@ DTO 可以用來：
 
 * 建置專案。
 * 在 Postman 中，將 HTTP 方法設定為 `POST`。
-* 將 URI 設定為 `https://localhost:<port>/api/Todo` 。 例如： `https://localhost:5001/api/Todo` 。
+* 將 URI 設定為 `https://localhost:<port>/api/Todo` 。 例如 `https://localhost:5001/api/Todo`。
 * 選取 [Body] \(本文\) 索引標籤。
 * 選取 [原始] 選項按鈕。
 * 將類型設定為 **JSON (application/json)**。
@@ -1389,7 +1389,7 @@ DTO 可以用來：
   ![Postman 主控台的 [標頭] 索引標籤](first-web-api/_static/pmc2.png)
 
 * 將方法設定為 GET。
-* 將 URI 設定為 `https://localhost:<port>/api/TodoItems/2` 。 例如： `https://localhost:5001/api/TodoItems/2` 。
+* 將 URI 設定為 `https://localhost:<port>/api/TodoItems/2` 。 例如 `https://localhost:5001/api/TodoItems/2`。
 * 選取 [傳送]  。
 
 ## <a name="add-a-puttodoitem-method-21"></a>新增 PutTodoItem 方法2。1

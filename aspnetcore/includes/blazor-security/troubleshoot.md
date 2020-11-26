@@ -44,7 +44,7 @@ Cookie 和網站資料可以跨應用程式更新保存，並干擾測試和疑�
     * Microsoft Edge：使用 `-inprivate` 。
     * Google Chrome：使用 `--incognito --new-window {URL}` ，其中預留位置 `{URL}` 是要開啟的 URL (例如 `https://localhost:5001`) 。
     * Mozilla Firefox：使用 `-private -url {URL}` ，其中預留位置 `{URL}` 是要開啟的 URL (例如 `https://localhost:5001`) 。
-  * 在 [ **易記名稱** ] 欄位中提供名稱。 例如： `Firefox Auth Testing` 。
+  * 在 [ **易記名稱** ] 欄位中提供名稱。 例如 `Firefox Auth Testing`。
   * 選取 [ **確定]** 按鈕。
   * 若要避免需要針對使用應用程式測試的每個反復專案選取瀏覽器設定檔，請將設定檔設定為預設值，並將 [ **設定為預設值** ] 按鈕。
   * 確定 IDE 已關閉瀏覽器，以進行應用程式、測試使用者或提供者設定的任何變更。

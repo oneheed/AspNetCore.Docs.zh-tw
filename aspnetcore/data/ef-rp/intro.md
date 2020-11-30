@@ -18,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: data/ef-rp/intro
-ms.openlocfilehash: 7323cf11ad4556443def4068873e6805b449058a
-ms.sourcegitcommit: bce62ceaac7782e22d185814f2e8532c84efa472
+ms.openlocfilehash: 9dcb1c4a19e50a57f1a1918cfcf775b49fa89b11
+ms.sourcegitcommit: 43a540e703b9096921de27abc6b66bc0783fe905
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 11/17/2020
-ms.locfileid: "94674013"
+ms.lasthandoff: 11/30/2020
+ms.locfileid: "96320144"
 ---
 # <a name="no-locrazor-pages-with-entity-framework-core-in-aspnet-core---tutorial-1-of-8"></a>Razor ASP.NET Core 中有 Entity Framework Core 的頁面-教學課程 1/8
 
@@ -35,7 +35,7 @@ ms.locfileid: "94674013"
 
 [下載或檢視已完成的應用程式。](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/data/ef-rp/intro/samples) [下載指示](xref:index#how-to-download-a-sample)。
 
-## <a name="prerequisites"></a>先決條件
+## <a name="prerequisites"></a>必要條件
 
 * 如果您還不熟悉 Razor 頁面，請先流覽「開始 [使用 Razor 頁面](xref:tutorials/razor-pages/razor-pages-start) 」教學課程系列，再開始此課程。
 
@@ -43,7 +43,7 @@ ms.locfileid: "94674013"
 
 [!INCLUDE[VS prereqs](~/includes/net-core-prereqs-vs-5.0.md)]
 
-# <a name="visual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code) \(英文\)
+# <a name="visual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code)
 
 [!INCLUDE[VS Code prereqs](~/includes/net-core-prereqs-vsc-5.0.md)]
 
@@ -125,11 +125,11 @@ To run the app after downloading the completed project:
 1. 選取 [建立]  。
 1. 在 [ **建立新的 ASP.NET Core web 應用程式** ] 對話方塊中，選取：
     1. 下拉式清單中的 **.Net Core** 和 **ASP.NET Core 5.0** 。
-    1. **ASP.NET Core Web 應用程式 (模型-視圖控制器)**。
+    1. **ASP.NET Core Web 應用程式**。
     1. **Create** 
        建立 ![新增 ASP.NET Core 專案對話方塊](~/data/ef-mvc/intro/_static/new-aspnet5.png)
     
-# <a name="visual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code) \(英文\)
+# <a name="visual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code)
 
 * 在終端機中，巡覽至應建立專案資料夾的資料夾。
 * 執行下列命令，以建立 Razor 頁面專案並 `cd` 加入至新的專案資料夾：
@@ -237,7 +237,7 @@ To run the app after downloading the completed project:
   * 在 [模型類別] 下拉式清單中，選取 [學生 (ContosoUniversity.Models)]。
   * 在 [資料內容類別] 資料列中，選取 **+** (加號)。
     * 將資料內容名稱變更為 end， `SchoolContext` 而不是 `ContosoUniversityContext` 。 更新的內容名稱： `ContosoUniversity.Data.SchoolContext`
-   * 選取 [加入]  。
+   * 選取 [新增]。
 
 會自動安裝下列套件：
 
@@ -245,7 +245,7 @@ To run the app after downloading the completed project:
 * `Microsoft.EntityFrameworkCore.Tools`
 * `Microsoft.VisualStudio.Web.CodeGeneration.Design`
 
-# <a name="visual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code) \(英文\)
+# <a name="visual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code)
 
 * 執行下列 .NET Core CLI 命令來安裝必要的 NuGet 套件：
 
@@ -311,7 +311,7 @@ Scaffolding 流程：
 
 LocalDB 是輕量版的 SQL Server Express Database Engine，旨在用於應用程序開發，而不是生產用途。 根據預設，LocalDB 會在 `C:/Users/<user>` 目錄中建立 *.mdf* 檔案。
 
-# <a name="visual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code) \(英文\)
+# <a name="visual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code)
 
 將 SQLite 連接字串縮短為 *CU. db*：
 
@@ -358,7 +358,7 @@ Scaffolder 已新增下列醒目提示的行：
 
 [!code-csharp[Main](intro/samples/cu30/Startup.cs?name=snippet_ConfigureServices&highlight=5-6)]
 
-# <a name="visual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code) \(英文\)
+# <a name="visual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code)
 
 確認 scaffolder 呼叫所加入的程式碼 `UseSqlite` 。
 
@@ -386,7 +386,7 @@ Scaffolder 已新增下列醒目提示的行：
 Install-Package Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore -Version 5.0.0-rc.2.20475.17
 ```
 
-# <a name="visual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code) \(英文\)
+# <a name="visual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code)
 
 [!code-csharp[Main](intro/samples/cu50/StartupSQLite.cs?name=snippet_ConfigureServices&highlight=8)]
 
@@ -446,7 +446,7 @@ Drop-Database -Confirm
 
 回應 `Y` 以刪除資料庫。
 
-# <a name="visual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code) \(英文\)
+# <a name="visual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code)
 
 * 若應用程式正在執行中，請停止它，然後刪除 *CU.db* 檔案。
 
@@ -465,7 +465,7 @@ Drop-Database -Confirm
 * 以滑鼠右鍵按一下 **Students** 資料表，並按一下 [檢視資料] 查看建立的資料行、插入資料表中的資料列。
 * 以滑鼠右鍵按一下 **Student** 資料表然後按一下 [檢視程式碼] 來查看 `Student` 模型對應到 `Student` 資料表結構描述的方式。
 
-# <a name="visual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code) \(英文\)
+# <a name="visual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code)
 
 使用 SQLite 工具來檢視資料庫結構描述和植入的資料。 資料庫檔案名為 *CU.db* 且位於專案資料夾中。
 
@@ -531,7 +531,7 @@ public async Task OnGetAsync()
 
 [下載或檢視已完成的應用程式。](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/data/ef-rp/intro/samples) [下載指示](xref:index#how-to-download-a-sample)。
 
-## <a name="prerequisites"></a>先決條件
+## <a name="prerequisites"></a>必要條件
 
 * 如果您還不熟悉 Razor 頁面，請先流覽「開始 [使用 Razor 頁面](xref:tutorials/razor-pages/razor-pages-start) 」教學課程系列，再開始此課程。
 
@@ -539,7 +539,7 @@ public async Task OnGetAsync()
 
 [!INCLUDE[VS prereqs](~/includes/net-core-prereqs-vs-3.0.md)]
 
-# <a name="visual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code) \(英文\)
+# <a name="visual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code)
 
 [!INCLUDE[VS Code prereqs](~/includes/net-core-prereqs-vsc-3.0.md)]
 
@@ -582,7 +582,7 @@ Visual Studio Code 說明則會使用 [SQLite](https://www.sqlite.org/)，它是
 
 * 執行專案來植入資料庫。
 
-# <a name="visual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code) \(英文\)
+# <a name="visual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code)
 
 在下載已完成的專案後執行應用程式：
 
@@ -619,7 +619,7 @@ Visual Studio Code 說明則會使用 [SQLite](https://www.sqlite.org/)，它是
 * 將專案命名為 *ContosoUniversity*。 使用與此名稱完全相符的名稱非常重要 (包括大寫)，這樣做可以讓命名空間在您複製和貼上程式碼時相符。
 * 在下拉式清單中選取 [.NET Core] 及 [ASP.NET Core 3.0]，然後選取 [Web 應用程式]。
 
-# <a name="visual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code) \(英文\)
+# <a name="visual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code)
 
 * 在終端機中，巡覽至應建立專案資料夾的資料夾。
 
@@ -723,7 +723,7 @@ Visual Studio Code 說明則會使用 [SQLite](https://www.sqlite.org/)，它是
   * 在 [模型類別] 下拉式清單中，選取 [學生 (ContosoUniversity.Models)]。
   * 在 [資料內容類別] 資料列中，選取 **+** (加號)。
   * 將資料內容的名稱從 *ContosoUniversity.Models.ContosoUniversityContext* 變更為 *ContosoUniversity.Data.SchoolContext*。
-  * 選取 [加入]  。
+  * 選取 [新增]。
 
 會自動安裝下列套件：
 
@@ -732,7 +732,7 @@ Visual Studio Code 說明則會使用 [SQLite](https://www.sqlite.org/)，它是
 * `Microsoft.Extensions.Logging.Debug`
 * `Microsoft.EntityFrameworkCore.Tools`
 
-# <a name="visual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code) \(英文\)
+# <a name="visual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code)
 
 * 執行下列 .NET Core CLI 命令來安裝必要的 NuGet 套件：
 <!-- TO DO  After testing, Replace with
@@ -798,7 +798,7 @@ Scaffolding 流程：
 
 LocalDB 是輕量版的 SQL Server Express Database Engine，旨在用於應用程序開發，而不是生產用途。 根據預設，LocalDB 會在 `C:/Users/<user>` 目錄中建立 *.mdf* 檔案。
 
-# <a name="visual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code) \(英文\)
+# <a name="visual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code)
 
 將連接字串變更為指向名為 *CU.db* 的 SQLite 資料庫檔案：
 
@@ -837,7 +837,7 @@ Scaffolding 工具會自動對相依性插入容器註冊內容類別。
 
   [!code-csharp[Main](intro/samples/cu30/Startup.cs?name=snippet_ConfigureServices&highlight=5-6)]
 
-# <a name="visual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code) \(英文\)
+# <a name="visual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code)
 
 * 在 `ConfigureServices` 中，確認 Scaffolder 新增的程式碼會呼叫 `UseSqlite`。
 
@@ -895,7 +895,7 @@ Scaffolding 工具會自動對相依性插入容器註冊內容類別。
 Drop-Database
 ```
 
-# <a name="visual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code) \(英文\)
+# <a name="visual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code)
 
 * 若應用程式正在執行中，請停止它，然後刪除 *CU.db* 檔案。
 
@@ -915,7 +915,7 @@ Drop-Database
 * 以滑鼠右鍵按一下 **Students** 資料表，並按一下 [檢視資料] 查看建立的資料行、插入資料表中的資料列。
 * 以滑鼠右鍵按一下 **Student** 資料表然後按一下 [檢視程式碼] 來查看 `Student` 模型對應到 `Student` 資料表結構描述的方式。
 
-# <a name="visual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code) \(英文\)
+# <a name="visual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code)
 
 使用 SQLite 工具來檢視資料庫結構描述和植入的資料。 資料庫檔案名為 *CU.db* 且位於專案資料夾中。
 
@@ -974,7 +974,7 @@ Contoso 大學範例 web 應用程式示範如何 Razor 使用 Entity Framework 
 
 [!INCLUDE [](~/includes/net-core-prereqs-windows.md)]
 
-# <a name="visual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code) \(英文\)
+# <a name="visual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code)
 
 [!INCLUDE [](~/includes/2.1-SDK.md)]
 
@@ -1009,7 +1009,7 @@ Contoso 大學範例 web 應用程式示範如何 Razor 使用 Entity Framework 
 如需上述步驟的影像，請參閱 [建立 Razor web 應用程式](xref:tutorials/razor-pages/razor-pages-start#create-a-razor-pages-web-app)。
 執行應用程式。
 
-# <a name="visual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code) \(英文\)
+# <a name="visual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code)
 
 ```dotnetcli
 dotnet new webapp -o ContosoUniversity
@@ -1106,13 +1106,13 @@ dotnet run
 * 在 [模型類別] 下拉式清單中，選取 [學生 (ContosoUniversity.Models)]。
 * 在 [資料內容類別] 列中，選取 **+** (加號) 符號，並將產生的名稱變更為 **ContosoUniversity.Models.SchoolContext**。
 * 在 [資料內容類別] 下拉式清單中，選取 **ContosoUniversity.Models.SchoolContext**
-* 選取 [加入]  。
+* 選取 [新增]。
 
 ![CRUD 對話方塊](intro/_static/s1.png)
 
 如果您有上一個步驟的問題，請參閱 [Scaffold 影片模型](xref:tutorials/razor-pages/model#scaffold-the-movie-model)。
 
-# <a name="visual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code) \(英文\)
+# <a name="visual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code)
 
 執行下列命令來 Scaffold 學生模型。
 
@@ -1223,7 +1223,7 @@ EF Core 會建立空白資料庫。 在本節中，會寫入 `Initialize` 方法
 Drop-Database
 ```
 
-# <a name="visual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code) \(英文\)
+# <a name="visual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code)
 
 * 若應用程式正在執行中，請停止它，然後刪除 *CU.db* 檔案。
 

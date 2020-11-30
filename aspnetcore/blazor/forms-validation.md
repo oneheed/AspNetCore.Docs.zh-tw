@@ -19,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/forms-validation
-ms.openlocfilehash: a8bbcbd6ac13ec064350a5b885423835baa4c4cc
-ms.sourcegitcommit: 59d95a9106301d5ec5c9f612600903a69c4580ef
+ms.openlocfilehash: 979e2615080a4f07b6091f0498fc7efa62ea1563
+ms.sourcegitcommit: 43a540e703b9096921de27abc6b66bc0783fe905
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 11/25/2020
-ms.locfileid: "95870369"
+ms.lasthandoff: 11/30/2020
+ms.locfileid: "96320066"
 ---
 # <a name="aspnet-core-no-locblazor-forms-and-validation"></a>ASP.NET Core Blazor 表單和驗證
 
@@ -729,20 +729,15 @@ services.AddControllersWithViews()
 
 使用 <xref:Microsoft.AspNetCore.Components.Forms.InputText> 元件建立使用事件的自訂群組件， `input` 而不是 `change` 事件。
 
-在下列範例中， `CustomInputText` 元件會繼承架構的 `InputText` 元件，並將事件系結 (<xref:Microsoft.AspNetCore.Components.EventCallbackFactoryBinderExtensions.CreateBinder%2A>) 設定至 `oninput` 事件。
+在下列範例中， `CustomInputText` 元件會繼承架構的 `InputText` 元件，並將事件系結設定到 `oninput` 事件。
 
 `Shared/CustomInputText.razor`:
 
 ```razor
 @inherits InputText
 
-<input 
-    @attributes="AdditionalAttributes" 
-    class="@CssClass" 
-    value="@CurrentValue"
-    @oninput="EventCallback.Factory.CreateBinder<string>(
-         this, __value => CurrentValueAsString = __value, 
-         CurrentValueAsString)" />
+<input @attributes="AdditionalAttributes" class="@CssClass" 
+    @bind="CurrentValueAsString" @bind:event="oninput" />
 ```
 
 `CustomInputText`元件可以使用於任何位置 <xref:Microsoft.AspNetCore.Components.Forms.InputText> ：

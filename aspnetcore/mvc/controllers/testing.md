@@ -19,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: mvc/controllers/testing
-ms.openlocfilehash: 962c1cf0be0f80ecd6c3adda7d22db7f16519a2a
-ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
+ms.openlocfilehash: 348b0fe4da6037933aabdb5b400d36ca073a146a
+ms.sourcegitcommit: 43a540e703b9096921de27abc6b66bc0783fe905
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 10/30/2020
-ms.locfileid: "93060348"
+ms.lasthandoff: 11/30/2020
+ms.locfileid: "96320092"
 ---
 # <a name="unit-test-controller-logic-in-aspnet-core"></a>ASP.NET Core 中的單元測試控制器邏輯
 
@@ -50,9 +50,9 @@ ms.locfileid: "93060348"
 
 上述控制器會：
 
-* 遵循[明確相依性準則](/dotnet/standard/modern-web-apps-azure-architecture/architectural-principles#explicit-dependencies)。
+* 遵循[明確相依性準則](/dotnet/architecture/modern-web-apps-azure/architectural-principles#explicit-dependencies)。
 * 預期[相依性插入 (DI)](xref:fundamentals/dependency-injection) 以提供 `IBrainstormSessionRepository` 的執行個體。
-* 可以使用模擬物件架構 (例如 [Moq](https://www.nuget.org/packages/Moq/)) 透過模擬 `IBrainstormSessionRepository` 服務進行測試。 「模擬物件」  是製作出來的物件，具有一組用於測試的預定屬性和方法行為。 如需詳細資訊，請參閱[整合測試簡介](xref:test/integration-tests#introduction-to-integration-tests)。
+* 可以使用模擬物件架構 (例如 [Moq](https://www.nuget.org/packages/Moq/)) 透過模擬 `IBrainstormSessionRepository` 服務進行測試。 「模擬物件」是製作出來的物件，具有一組用於測試的預定屬性和方法行為。 如需詳細資訊，請參閱[整合測試簡介](xref:test/integration-tests#introduction-to-integration-tests)。
 
 `HTTP GET Index` 方法有沒有迴圈或分支，而且只會呼叫一個方法。 此動作的單元測試：
 
@@ -90,7 +90,7 @@ ms.locfileid: "93060348"
 > [!NOTE]
 > 此範例中所使用的 Moq 程式庫，可讓您混合可驗證 (或「嚴格」) 的模擬，以及無法驗證的模擬 (也稱為「鬆散」的模擬或虛設常式)。 如需詳細資訊，請參閱 [Customizing Mock Behavior with Moq](https://github.com/Moq/moq4/wiki/Quickstart#customizing-mock-behavior) (使用 Moq 自訂模擬行為)。
 
-範例應用程式中的 [SessionController](https://github.com/dotnet/AspNetCore.Docs/blob/master/aspnetcore/mvc/controllers/testing/samples/3.x/TestingControllersSample/src/TestingControllersSample/Controllers/SessionController.cs)會顯示與特定腦力激盪工作階段相關的資訊。 控制器包含處理無效 `id` 值的邏輯 (下列範例中有兩個 `return` 案例來說明這些案例)。 最後的 `return` 陳述式會將新的 `StormSessionViewModel` 傳回至檢視 ( *Controllers/SessionController.cs* )：
+範例應用程式中的 [SessionController](https://github.com/dotnet/AspNetCore.Docs/blob/master/aspnetcore/mvc/controllers/testing/samples/3.x/TestingControllersSample/src/TestingControllersSample/Controllers/SessionController.cs)會顯示與特定腦力激盪工作階段相關的資訊。 控制器包含處理無效 `id` 值的邏輯 (下列範例中有兩個 `return` 案例來說明這些案例)。 最後的 `return` 陳述式會將新的 `StormSessionViewModel` 傳回至檢視 (*Controllers/SessionController.cs*)：
 
 [!code-csharp[](testing/samples/3.x/TestingControllersSample/src/TestingControllersSample/Controllers/SessionController.cs?name=snippet_SessionController&highlight=12-16,18-22,31)]
 
@@ -183,7 +183,7 @@ ms.locfileid: "93060348"
 針對有效的工作階段 `id`，最終測試會確認：
 
 * 此方法會以 `BrainstormSession` 類型傳回 `ActionResult`。
-* [ActionResult \<T> 。結果](xref:Microsoft.AspNetCore.Mvc.ActionResult%601.Result*)是 <xref:Microsoft.AspNetCore.Mvc.CreatedAtActionResult> 。 `CreatedAtActionResult` 類似於具有 `Location` 標頭尸的「201 已建立」  回應。
+* [ActionResult \<T> 。結果](xref:Microsoft.AspNetCore.Mvc.ActionResult%601.Result*)是 <xref:Microsoft.AspNetCore.Mvc.CreatedAtActionResult> 。 `CreatedAtActionResult` 類似於具有 `Location` 標頭尸的「201 已建立」回應。
 * [ActionResult \<T> 。值](xref:Microsoft.AspNetCore.Mvc.ActionResult%601.Value*)是一 `BrainstormSession` 種類型。
 * 已叫用更新工作階段 (`UpdateAsync(testSession)`) 的模擬呼叫。 `Verifiable` 方法呼叫會透過在判斷提示中執行 `mockRepo.Verify()` 來檢查。
 * 會為工作階段傳回兩個 `Idea` 物件。
@@ -215,7 +215,7 @@ ms.locfileid: "93060348"
 
 * 遵循[明確相依性準則](/dotnet/standard/modern-web-apps-azure-architecture/architectural-principles#explicit-dependencies)。
 * 預期[相依性插入 (DI)](xref:fundamentals/dependency-injection) 以提供 `IBrainstormSessionRepository` 的執行個體。
-* 可以使用模擬物件架構 (例如 [Moq](https://www.nuget.org/packages/Moq/)) 透過模擬 `IBrainstormSessionRepository` 服務進行測試。 「模擬物件」  是製作出來的物件，具有一組用於測試的預定屬性和方法行為。 如需詳細資訊，請參閱[整合測試簡介](xref:test/integration-tests#introduction-to-integration-tests)。
+* 可以使用模擬物件架構 (例如 [Moq](https://www.nuget.org/packages/Moq/)) 透過模擬 `IBrainstormSessionRepository` 服務進行測試。 「模擬物件」是製作出來的物件，具有一組用於測試的預定屬性和方法行為。 如需詳細資訊，請參閱[整合測試簡介](xref:test/integration-tests#introduction-to-integration-tests)。
 
 `HTTP GET Index` 方法有沒有迴圈或分支，而且只會呼叫一個方法。 此動作的單元測試：
 
@@ -253,7 +253,7 @@ ms.locfileid: "93060348"
 > [!NOTE]
 > 此範例中所使用的 Moq 程式庫，可讓您混合可驗證 (或「嚴格」) 的模擬，以及無法驗證的模擬 (也稱為「鬆散」的模擬或虛設常式)。 如需詳細資訊，請參閱 [Customizing Mock Behavior with Moq](https://github.com/Moq/moq4/wiki/Quickstart#customizing-mock-behavior) (使用 Moq 自訂模擬行為)。
 
-範例應用程式中的 [SessionController](https://github.com/dotnet/AspNetCore.Docs/blob/master/aspnetcore/mvc/controllers/testing/samples/2.x/TestingControllersSample/src/TestingControllersSample/Controllers/SessionController.cs)會顯示與特定腦力激盪工作階段相關的資訊。 控制器包含處理無效 `id` 值的邏輯 (下列範例中有兩個 `return` 案例來說明這些案例)。 最後的 `return` 陳述式會將新的 `StormSessionViewModel` 傳回至檢視 ( *Controllers/SessionController.cs* )：
+範例應用程式中的 [SessionController](https://github.com/dotnet/AspNetCore.Docs/blob/master/aspnetcore/mvc/controllers/testing/samples/2.x/TestingControllersSample/src/TestingControllersSample/Controllers/SessionController.cs)會顯示與特定腦力激盪工作階段相關的資訊。 控制器包含處理無效 `id` 值的邏輯 (下列範例中有兩個 `return` 案例來說明這些案例)。 最後的 `return` 陳述式會將新的 `StormSessionViewModel` 傳回至檢視 (*Controllers/SessionController.cs*)：
 
 [!code-csharp[](testing/samples/2.x/TestingControllersSample/src/TestingControllersSample/Controllers/SessionController.cs?name=snippet_SessionController&highlight=12-16,18-22,31)]
 
@@ -346,7 +346,7 @@ ms.locfileid: "93060348"
 針對有效的工作階段 `id`，最終測試會確認：
 
 * 此方法會以 `BrainstormSession` 類型傳回 `ActionResult`。
-* [ActionResult \<T> 。結果](xref:Microsoft.AspNetCore.Mvc.ActionResult%601.Result*)是 <xref:Microsoft.AspNetCore.Mvc.CreatedAtActionResult> 。 `CreatedAtActionResult` 類似於具有 `Location` 標頭尸的「201 已建立」  回應。
+* [ActionResult \<T> 。結果](xref:Microsoft.AspNetCore.Mvc.ActionResult%601.Result*)是 <xref:Microsoft.AspNetCore.Mvc.CreatedAtActionResult> 。 `CreatedAtActionResult` 類似於具有 `Location` 標頭尸的「201 已建立」回應。
 * [ActionResult \<T> 。值](xref:Microsoft.AspNetCore.Mvc.ActionResult%601.Value*)是一 `BrainstormSession` 種類型。
 * 已叫用更新工作階段 (`UpdateAsync(testSession)`) 的模擬呼叫。 `Verifiable` 方法呼叫會透過在判斷提示中執行 `mockRepo.Verify()` 來檢查。
 * 會為工作階段傳回兩個 `Idea` 物件。
@@ -360,6 +360,6 @@ ms.locfileid: "93060348"
 
 * <xref:test/integration-tests>
 * [使用 Visual Studio 建立和執行單元測試](/visualstudio/test/unit-test-your-code)
-* [MyTested. AspNetCore：適用于 ASP.NET CORE mvc](https://github.com/ivaylokenov/MyTested.AspNetCore.Mvc)：強型別單元測試程式庫的，提供流暢的介面來測試 mvc 和 web API 應用程式。  ( *不會受到 Microsoft 的維護或支援* ) 
-* [JustMockLite](https://github.com/telerik/JustMockLite)：適用于 .net 開發人員的模擬架構。  ( *不會受到 Microsoft 的維護或支援* ) 
+* [MyTested. AspNetCore：適用于 ASP.NET CORE mvc](https://github.com/ivaylokenov/MyTested.AspNetCore.Mvc)：強型別單元測試程式庫的，提供流暢的介面來測試 mvc 和 web API 應用程式。  (*不會受到 Microsoft 的維護或支援*) 
+* [JustMockLite](https://github.com/telerik/JustMockLite)：適用于 .net 開發人員的模擬架構。  (*不會受到 Microsoft 的維護或支援*) 
 

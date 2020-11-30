@@ -4,14 +4,14 @@ author: codemillmatt
 description: 瞭解如何使用 Visual Studio 將 ASP.NET Core web API 發佈至 Azure API 管理。
 ms.author: masoucou
 ms.custom: devx-track-csharp, mvc
-ms.date: 08/26/2020
+ms.date: 11/22/2020
 uid: tutorials/publish-to-azure-api-management-using-vs
-ms.openlocfilehash: 3cc6b8c0bd93f133151e1c8ad18a55b11975a9be
-ms.sourcegitcommit: 47c9a59ff8a359baa6bca2637d3af87ddca1245b
+ms.openlocfilehash: 395b5981a3018486235c38f032893f985ab71383
+ms.sourcegitcommit: 619200f2981656ede6d89adb6a22ad1a0e16da22
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 08/27/2020
-ms.locfileid: "88945665"
+ms.lasthandoff: 11/30/2020
+ms.locfileid: "96332199"
 ---
 # <a name="publish-an-aspnet-core-web-api-to-azure-api-management-with-visual-studio"></a>使用 Visual Studio 將 ASP.NET Core web API 發佈至 Azure API 管理
 
@@ -77,7 +77,7 @@ ms.locfileid: "88945665"
 
 請完成下列步驟，將 ASP.NET Core web API 發佈至 Azure API 管理：
 
-1. 在 **方案總管**中，以滑鼠右鍵按一下專案，然後選取 [ **發行**]：
+1. 在 **方案總管** 中，以滑鼠右鍵按一下專案，然後選取 [ **發行**]：
 
     ![反白顯示 [發行] 連結的已開啟操作功能表](publish-to-azure-api-management-using-vs/_static/publish_menu.png)
 
@@ -85,7 +85,7 @@ ms.locfileid: "88945665"
 
     ![發佈對話方塊](publish-to-azure-api-management-using-vs/_static/publish_dialog.png)
 
-1. 選取 **Azure App Service (Windows) ** ，然後選取 [ **下一步]** 按鈕：
+1. 選取 **Azure App Service (Windows)** ，然後選取 [ **下一步]** 按鈕：
 
     ![發佈對話方塊：選取 App Service](publish-to-azure-api-management-using-vs/_static/publish_dialog_app_svc.png)
 
@@ -93,8 +93,8 @@ ms.locfileid: "88945665"
 
     ![發佈對話方塊：選取 Azure 服務實例](publish-to-azure-api-management-using-vs/_static/publish_dialog_create_new_app_svc.png)
 
-    [建立 App Service]**** 對話方塊隨即出現。 會填入 [應用程式名稱]****、[資源群組]**** 和 [App Service 方案]**** 輸入欄位。 您可以保留這些名稱，或變更它們。
-1. 選取 [建立]**** 按鈕。
+    [建立 App Service] 對話方塊隨即出現。 會填入 [應用程式名稱]、[資源群組] 和 [App Service 方案] 輸入欄位。 您可以保留這些名稱，或變更它們。
+1. 選取 [建立] 按鈕。
 
     ![建立 App Service 對話方塊](publish-to-azure-api-management-using-vs/_static/publish_dialog_app_svc_attributes.png)
 
@@ -108,11 +108,15 @@ ms.locfileid: "88945665"
 
 1. 開啟先前在 Azure 入口網站中建立的 API 管理服務實例。 選取 [ **api** ] 分頁：
 
-    ![從 API 管理服務實例選取的 Api blade](publish-to-azure-api-management-using-vs/_static/portal_api_overview.png)
+  ![從 API 管理服務實例選取的 Api blade](publish-to-azure-api-management-using-vs/_static/portal_api_overview.png)
+
+1. 選取 [ **ECHO API** ] 旁邊的3個點，然後從快顯功能表中選取 [ **刪除** ]，將它移除。
+
+  ![從 API 管理服務實例刪除 echo API](publish-to-azure-api-management-using-vs/_static/portal_delete_echo.png)
 
 1. 從 [ **新增 api** ] 面板中，選取 [ **空白 api** ] 磚：
 
-    ![顯示醒目提示空白 API 磚的畫面](publish-to-azure-api-management-using-vs/_static/portal_api_create_blank.png)
+  ![顯示醒目提示空白 API 磚的畫面](publish-to-azure-api-management-using-vs/_static/portal_api_create_blank.png)
 
 1. 在 [ **建立空白 API** ] 對話方塊中輸入下列值：    
 
@@ -121,7 +125,7 @@ ms.locfileid: "88945665"
     - **API Url 尾碼**： *v1*
     - 將 [ **Web 服務 URL** ] 欄位保留空白。
 
-1. 選取 [建立]**** 按鈕。
+1. 選取 [建立] 按鈕。
 
     ![[已完成的建立空白 api] 對話方塊的螢幕擷取畫面](publish-to-azure-api-management-using-vs/_static/portal_api_blank_complete.png)
 
@@ -179,7 +183,7 @@ ms.locfileid: "88945665"
     });
     ```
 
-1. 開啟新建立的發行設定檔。 您可以在*Properties/PublishProfiles*資料夾的**方案總管**中找到它。
+1. 開啟新建立的發行設定檔。 您可以在 *Properties/PublishProfiles* 資料夾的 **方案總管** 中找到它。
 
     ![顯示反白顯示發行設定檔位置的螢幕擷取畫面](publish-to-azure-api-management-using-vs/_static/vs_publish_profile_highlighted.png)
 
@@ -196,9 +200,9 @@ ms.locfileid: "88945665"
 
 您可以使用下列步驟，從 Azure 入口網站在 Azure API 管理中測試已部署的 ASP.NET Core web API：
 
-1. 開啟 [測試]**** 索引標籤。
+1. 開啟 [測試] 索引標籤。
 1. 選取 **/** 或 **取得** 作業。
-1. 選取 [傳送]。
+1. 選取 [傳送]  。
 
     ![測試前的入口網站螢幕擷取畫面](publish-to-azure-api-management-using-vs/_static/portal_pre_test.png)
 
@@ -206,15 +210,15 @@ ms.locfileid: "88945665"
 
 ![API 管理成功回應的螢幕擷取畫面](publish-to-azure-api-management-using-vs/_static/portal_successful_response.png)
 
-## <a name="clean-up"></a>清理
+## <a name="clean-up"></a>清除
 
 當您完成測試應用程式時，請移至 [Azure 入口網站](https://portal.azure.com/) 並刪除應用程式。
 
-1. 選取 [資源群組]****，然後選取您建立的資源群組。
+1. 選取 [資源群組]，然後選取您建立的資源群組。
 
     ![Azure 入口網站：資訊看板功能表中的 [資源群組]](publish-to-azure-api-management-using-vs/_static/portalrg.png)
 
-1. 在 [資源群組]**** 頁面中，選取 [刪除]****。
+1. 在 [資源群組] 頁面中，選取 [刪除]。
 
     ![Azure 入口網站：[資源群組] 頁面](publish-to-azure-api-management-using-vs/_static/rgd.png)
 

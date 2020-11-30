@@ -7,7 +7,6 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 07/05/2019
 no-loc:
-- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -19,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: security/docker-https
-ms.openlocfilehash: 63d6e220c0f28e552207039c1649041bfdf4a0d4
-ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
+ms.openlocfilehash: a4aac2ce06fee20bdef157efc361f3099a217b1a
+ms.sourcegitcommit: 619200f2981656ede6d89adb6a22ad1a0e16da22
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 10/30/2020
-ms.locfileid: "93059672"
+ms.lasthandoff: 11/30/2020
+ms.locfileid: "96332150"
 ---
 # <a name="hosting-aspnet-core-images-with-docker-over-https"></a>使用 Docker over HTTPS 裝載 ASP.NET Core 映射
 
@@ -47,6 +46,8 @@ ASP.NET Core 預設會使用 [HTTPS](./enforcing-ssl.md)。 [HTTPS](https://en.w
 網域的[生產環境裝載](https://blogs.msdn.microsoft.com/webdev/2017/11/29/configuring-https-in-asp-net-core-across-different-platforms/)需要證書[頒發機構](https://wikipedia.org/wiki/Certificate_authority)單位的憑證。 [Let's Encrypt](https://letsencrypt.org/) 是提供免費憑證的憑證授權單位單位。
 
 本檔使用 [自我簽署的開發憑證](https://en.wikipedia.org/wiki/Self-signed_certificate) 來裝載預先建立的映射 `localhost` 。 這些指示與使用生產憑證類似。
+
+使用 [dotnet dev](/dotnet/core/additional-tools/self-signed-certificates-guide) 憑證來建立自我簽署憑證，以進行開發和測試。
 
 針對生產憑證：
 
@@ -84,6 +85,9 @@ docker run --rm -it -p 8000:80 -p 8001:443 -e ASPNETCORE_URLS="https://+;http://
 使用 [PowerShell](/powershell/scripting/overview)時，請將取代 `%USERPROFILE%` 為 `$env:USERPROFILE` 。
 
 密碼必須符合憑證所用的密碼。
+
+
+注意：此案例中的憑證必須是檔案 `.pfx` 。  `.crt` `.key` 範例容器不支援利用或不含密碼的檔案。  例如，在指定檔案時 `.crt` ，容器可能會傳回錯誤訊息，例如「伺服器模式 SSL 必須使用具有相關私密金鑰的憑證」。 使用 [WSL](/windows/wsl/about)時，請驗證掛接路徑以確保憑證正確載入。
 
 ### <a name="macos-or-linux"></a>macOS 或 Linux
 

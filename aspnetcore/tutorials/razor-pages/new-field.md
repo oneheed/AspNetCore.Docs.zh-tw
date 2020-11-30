@@ -21,12 +21,12 @@ no-loc:
 - Razor
 - SignalR
 uid: tutorials/razor-pages/new-field
-ms.openlocfilehash: 2dca5a9552dd2800212f8cd78ace0578b3d38cdb
-ms.sourcegitcommit: 342588e10ae0054a6d6dc0fd11dae481006be099
+ms.openlocfilehash: 5263063d82d79dbeeca3e4cec007d240ca8a452a
+ms.sourcegitcommit: 619200f2981656ede6d89adb6a22ad1a0e16da22
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 11/07/2020
-ms.locfileid: "94360875"
+ms.lasthandoff: 11/30/2020
+ms.locfileid: "96332176"
 ---
 # <a name="part-7-add-a-new-field-to-a-no-locrazor-page-in-aspnet-core"></a>第7部分： Razor 在頁面中新增欄位，ASP.NET Core
 
@@ -56,7 +56,7 @@ ms.locfileid: "94360875"
 
 1. 建置應用程式。
 
-1. 編輯 *Pages/電影/ Index cshtml* ，然後新增 `Rating` 欄位：
+1. 編輯 *Pages/電影/ Index cshtml*，然後新增 `Rating` 欄位：
 
    <a name="addrat"></a>
 
@@ -122,7 +122,7 @@ ms.locfileid: "94360875"
 
 1. 在 SSOX 中選取資料庫。
 1. 以滑鼠右鍵按一下資料庫，然後選取 [] **Delete** 。
-1. 勾選 [ **關閉現有的連接** ]。
+1. 勾選 [ **關閉現有的連接**]。
 1. 選取 [確定]。
 1. 在 [PMC](xref:tutorials/razor-pages/new-field#pmc)中，更新資料庫：
 
@@ -197,7 +197,7 @@ ms.locfileid: "94360875"
 
 1. 建置應用程式。
 
-1. 編輯 *Pages/電影/ Index cshtml* ，然後新增 `Rating` 欄位：
+1. 編輯 *Pages/電影/ Index cshtml*，然後新增 `Rating` 欄位：
 
    <a name="addrat"></a>
 
@@ -263,7 +263,7 @@ ms.locfileid: "94360875"
 
 * 在 SSOX 中選取資料庫。
 * 以滑鼠右鍵按一下資料庫，然後選取 [] **Delete** 。
-* 勾選 [ **關閉現有的連接** ]。
+* 勾選 [ **關閉現有的連接**]。
 * 選取 [確定]。
 * 在 [PMC](xref:tutorials/razor-pages/new-field#pmc)中，更新資料庫：
 
@@ -338,7 +338,7 @@ ms.locfileid: "94360875"
 
 建置應用程式。
 
-編輯 *Pages/電影/ Index cshtml* ，然後新增 `Rating` 欄位：
+編輯 *Pages/電影/ Index cshtml*，然後新增 `Rating` 欄位：
 
 [!code-cshtml[](razor-pages-start/sample/RazorPagesMovie22/Pages/Movies/IndexRating.cshtml?highlight=40-42,61-63)]
 
@@ -397,13 +397,13 @@ Update-Database
 
 <a name="ssox"></a>
 
-如果您刪除 DdatabaseB 中的所有記錄，初始化運算式將會植入 DdatabaseB 並包含 `Rating` 欄位。 您可以使用瀏覽器或 [Sql Server 物件總管](xref:tutorials/razor-pages/sql#ssox) (SSOX) 的刪除連結來執行這項操作。
+如果您刪除資料庫中的所有記錄，初始化運算式將會植入資料庫，並包含 `Rating` 欄位。 您可以使用瀏覽器或 [Sql Server 物件總管](xref:tutorials/razor-pages/sql#ssox) (SSOX) 的刪除連結來執行這項操作。
 
 另一個選擇是刪除資料庫並使用移轉重新建立資料庫。 若要在 SSOX 中刪除資料庫：
 
 * 在 SSOX 中選取資料庫。
 * 以滑鼠右鍵按一下資料庫，然後選取 [] **Delete** 。
-* 勾選 [ **關閉現有的連接** ]。
+* 勾選 [ **關閉現有的連接**]。
 * 選取 [確定]。
 * 在 [PMC](xref:tutorials/razor-pages/new-field#pmc)中，更新資料庫：
 
@@ -432,7 +432,7 @@ Update-Database
 > * [資料植入](/ef/core/modeling/data-seeding)
 > * [SQLite ALTER TABLE 陳述式](https://sqlite.org/lang_altertable.html) \(英文\)
 
-Delete 資料庫，並使用遷移來重新建立資料庫。 若要刪除資料庫，請刪除資料庫檔案 ( *MvcMovie.db* )。 然後執行 `ef database update` 命令：
+Delete 資料庫，並使用遷移來重新建立資料庫。 若要刪除資料庫，請刪除資料庫檔案 (*MvcMovie.db*)。 然後執行 `ef database update` 命令：
 
 ```dotnetcli
 dotnet ef database update

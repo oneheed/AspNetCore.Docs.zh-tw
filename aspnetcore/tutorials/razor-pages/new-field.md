@@ -7,8 +7,6 @@ ms.custom: mvc
 ms.date: 09/28/2020
 no-loc:
 - Index
-- Create
-- Delete
 - appsettings.json
 - ASP.NET Core Identity
 - cookie
@@ -21,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: tutorials/razor-pages/new-field
-ms.openlocfilehash: 5263063d82d79dbeeca3e4cec007d240ca8a452a
-ms.sourcegitcommit: 619200f2981656ede6d89adb6a22ad1a0e16da22
+ms.openlocfilehash: 6b6856731c61957a9e23f76e2bc15befe56ea57d
+ms.sourcegitcommit: db0a6eb0be7bd7f22810a71fe9bf30e957fd116a
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 11/30/2020
-ms.locfileid: "96332176"
+ms.lasthandoff: 12/01/2020
+ms.locfileid: "96420002"
 ---
 # <a name="part-7-add-a-new-field-to-a-no-locrazor-page-in-aspnet-core"></a>第7部分： Razor 在頁面中新增欄位，ASP.NET Core
 
@@ -63,8 +61,8 @@ ms.locfileid: "96332176"
    [!code-cshtml[](razor-pages-start/sample/RazorPagesMovie50/SnapShots/IndexRating.cshtml?highlight=40-42,62-64)]
 
 1. 更新下列頁面：
-   1. 將 `Rating` 欄位加入至 Delete 和詳細資料頁面。
-   1. 以欄位更新[ Create . cshtml](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/tutorials/razor-pages/razor-pages-start/sample/RazorPagesMovie50/Pages/Movies/Create.cshtml) 。 `Rating`
+   1. 將 `Rating` 欄位新增至 Delete 和 Details 頁面。
+   1. 使用 `Rating` 欄位更新 [Create.cshtml](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/tutorials/razor-pages/razor-pages-start/sample/RazorPagesMovie50/Pages/Movies/Create.cshtml)。
    1. 將 `Rating` 欄位新增至 Edit 頁面。
 
 在資料庫更新為包含新欄位之前，應用程式將無法運作。 在沒有資料庫更新的情況下執行應用程式，會擲回 `SqlException` ：
@@ -108,7 +106,7 @@ ms.locfileid: "96332176"
 `Add-Migration` 命令會告知架構，以便：
 
 * 比較 `Movie` 模型與 `Movie` 資料庫架構。
-* Create 將資料庫架構遷移至新模型的程式碼。
+* 建立程式碼，將資料庫架構遷移至新的模型。
 
 "Rating" 是用來命名移轉檔案的任意名稱。 建議您針對移轉檔案使用有意義的名稱，這更加實用。
 
@@ -121,7 +119,7 @@ ms.locfileid: "96332176"
 另一個選擇是刪除資料庫並使用移轉重新建立資料庫。 若要在 SSOX 中刪除資料庫：
 
 1. 在 SSOX 中選取資料庫。
-1. 以滑鼠右鍵按一下資料庫，然後選取 [] **Delete** 。
+1. 以滑鼠右鍵按一下資料庫，然後選取 [ **刪除**]。
 1. 勾選 [ **關閉現有的連接**]。
 1. 選取 [確定]。
 1. 在 [PMC](xref:tutorials/razor-pages/new-field#pmc)中，更新資料庫：
@@ -151,7 +149,7 @@ ms.locfileid: "96332176"
 > * [資料植入](/ef/core/modeling/data-seeding)
 > * [SQLite ALTER TABLE 陳述式](https://sqlite.org/lang_altertable.html) \(英文\)
 
-1. Delete 遷移資料夾。  
+1. 刪除移轉資料夾。  
 
 1. 使用下列命令重新建立資料庫。
 
@@ -204,8 +202,8 @@ ms.locfileid: "96332176"
    [!code-cshtml[](razor-pages-start/sample/RazorPagesMovie30/SnapShots/IndexRating.cshtml?highlight=40-42,62-64)]
 
 1. 更新下列頁面：
-   1. 將 `Rating` 欄位加入至 Delete 和詳細資料頁面。
-   1. 以欄位更新[ Create . cshtml](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/tutorials/razor-pages/razor-pages-start/sample/RazorPagesMovie30/Pages/Movies/Create.cshtml) 。 `Rating`
+   1. 將 `Rating` 欄位新增至 Delete 和 Details 頁面。
+   1. 使用 `Rating` 欄位更新 [Create.cshtml](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/tutorials/razor-pages/razor-pages-start/sample/RazorPagesMovie30/Pages/Movies/Create.cshtml)。
    1. 將 `Rating` 欄位新增至 Edit 頁面。
 
 在資料庫更新為包含新欄位之前，應用程式將無法運作。 在沒有資料庫更新的情況下執行應用程式，會擲回 `SqlException` ：
@@ -249,7 +247,7 @@ ms.locfileid: "96332176"
 `Add-Migration` 命令會告知架構，以便：
 
 * 比較 `Movie` 模型與 `Movie` 資料庫架構。
-* Create 將資料庫架構遷移至新模型的程式碼。
+* 建立程式碼，將資料庫架構遷移至新的模型。
 
 "Rating" 是用來命名移轉檔案的任意名稱。 建議您針對移轉檔案使用有意義的名稱，這更加實用。
 
@@ -262,7 +260,7 @@ ms.locfileid: "96332176"
 另一個選擇是刪除資料庫並使用移轉重新建立資料庫。 若要在 SSOX 中刪除資料庫：
 
 * 在 SSOX 中選取資料庫。
-* 以滑鼠右鍵按一下資料庫，然後選取 [] **Delete** 。
+* 以滑鼠右鍵按一下資料庫，然後選取 [ **刪除**]。
 * 勾選 [ **關閉現有的連接**]。
 * 選取 [確定]。
 * 在 [PMC](xref:tutorials/razor-pages/new-field#pmc)中，更新資料庫：
@@ -292,7 +290,7 @@ ms.locfileid: "96332176"
 > * [資料植入](/ef/core/modeling/data-seeding)
 > * [SQLite ALTER TABLE 陳述式](https://sqlite.org/lang_altertable.html) \(英文\)
 
-1. Delete 遷移資料夾。  
+1. 刪除移轉資料夾。  
 
 1. 使用下列命令重新建立資料庫。
 
@@ -344,8 +342,8 @@ ms.locfileid: "96332176"
 
 更新下列頁面：
 
-* 將 `Rating` 欄位加入至 Delete 和詳細資料頁面。
-* 以欄位更新[ Create . cshtml](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/tutorials/razor-pages/razor-pages-start/sample/RazorPagesMovie22/Pages/Movies/Create.cshtml) 。 `Rating`
+* 將 `Rating` 欄位新增至 Delete 和 Details 頁面。
+* 使用 `Rating` 欄位更新 [Create.cshtml](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/tutorials/razor-pages/razor-pages-start/sample/RazorPagesMovie22/Pages/Movies/Create.cshtml)。
 * 將 `Rating` 欄位新增至 Edit 頁面。
 
 在資料庫更新為包含新欄位之前，應用程式將無法運作。 如果立即執行應用程式，應用程式會擲回 `SqlException` ：
@@ -389,7 +387,7 @@ Update-Database
 `Add-Migration` 命令會告知架構，以便：
 
 * 比較 `Movie` 模型與 `Movie` 資料庫架構。
-* Create 將資料庫架構遷移至新模型的程式碼。
+* 建立程式碼，將資料庫架構遷移至新的模型。
 
 "Rating" 是用來命名移轉檔案的任意名稱。 建議您針對移轉檔案使用有意義的名稱，這更加實用。
 
@@ -402,7 +400,7 @@ Update-Database
 另一個選擇是刪除資料庫並使用移轉重新建立資料庫。 若要在 SSOX 中刪除資料庫：
 
 * 在 SSOX 中選取資料庫。
-* 以滑鼠右鍵按一下資料庫，然後選取 [] **Delete** 。
+* 以滑鼠右鍵按一下資料庫，然後選取 [ **刪除**]。
 * 勾選 [ **關閉現有的連接**]。
 * 選取 [確定]。
 * 在 [PMC](xref:tutorials/razor-pages/new-field#pmc)中，更新資料庫：
@@ -432,7 +430,7 @@ Update-Database
 > * [資料植入](/ef/core/modeling/data-seeding)
 > * [SQLite ALTER TABLE 陳述式](https://sqlite.org/lang_altertable.html) \(英文\)
 
-Delete 資料庫，並使用遷移來重新建立資料庫。 若要刪除資料庫，請刪除資料庫檔案 (*MvcMovie.db*)。 然後執行 `ef database update` 命令：
+刪除資料庫並使用移轉重新建立資料庫。 若要刪除資料庫，請刪除資料庫檔案 (*MvcMovie.db*)。 然後執行 `ef database update` 命令：
 
 ```dotnetcli
 dotnet ef database update

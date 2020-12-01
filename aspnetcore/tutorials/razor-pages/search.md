@@ -6,8 +6,6 @@ ms.author: riande
 ms.date: 12/05/2019
 no-loc:
 - Index
-- Create
-- Delete
 - appsettings.json
 - ASP.NET Core Identity
 - cookie
@@ -20,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: tutorials/razor-pages/search
-ms.openlocfilehash: 00c1be2704d92c7d4f868e6eaa346bd8e9901dbf
-ms.sourcegitcommit: 342588e10ae0054a6d6dc0fd11dae481006be099
+ms.openlocfilehash: 3b95fe117895555ebcd44f971e7bb9d1173e1697
+ms.sourcegitcommit: db0a6eb0be7bd7f22810a71fe9bf30e957fd116a
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 11/07/2020
-ms.locfileid: "94360829"
+ms.lasthandoff: 12/01/2020
+ms.locfileid: "96419976"
 ---
 # <a name="part-6-add-search-to-aspnet-core-no-locrazor-pages"></a>第6部分：將搜尋新增至 ASP.NET Core Razor 頁面
 
@@ -47,7 +45,7 @@ ms.locfileid: "94360829"
 
 在下列各節中，會新增依「內容類型」或「名稱」搜尋電影。
 
-將下列反白顯示的 using 語句和屬性新增至 *Pages/電影/ Index . cshtml.cs* ：
+將下列反白顯示的 using 語句和屬性新增至 *Pages/電影/ Index . cshtml.cs*：
 
 [!code-csharp[](razor-pages-start/sample/RazorPagesMovie30/Pages/Movies/Index.cshtml.cs?name=snippet_newProps&highlight=3,23,24,25,26,27)]
 
@@ -83,11 +81,11 @@ var movies = from m in _context.Movie
 > [!NOTE]
 > [Contains](/dotnet/api/system.data.objects.dataclasses.entitycollection-1.contains) 方法是在資料庫上執行，而不是在 C# 程式碼中執行。 查詢是否區分大小寫取決於資料庫和定序。 在 SQL Server 上，`Contains` 對應至 [SQL LIKE](/sql/t-sql/language-elements/like-transact-sql)，因此不區分大小寫。 而在 SQLlite 中，由於使用預設定序，因此會區分大小寫。
 
-流覽至 [電影] 頁面，並將查詢字串（例如）附加 `?searchString=Ghost` 至 URL。 例如 `https://localhost:5001/Movies?searchString=Ghost`。 隨即顯示篩選過的電影。
+流覽至 [電影] 頁面，並將查詢字串（例如）附加 `?searchString=Ghost` 至 URL。 例如： `https://localhost:5001/Movies?searchString=Ghost` 。 隨即顯示篩選過的電影。
 
 ![：：：非 loc (索引) ：：： view](search/_static/ghost.png)
 
-如果將下列路由範本新增至 Index 頁面，則可以將搜尋字串作為 URL 區段傳遞。 例如 `https://localhost:5001/Movies/Ghost`。
+如果將下列路由範本新增至 Index 頁面，則可以將搜尋字串作為 URL 區段傳遞。 例如： `https://localhost:5001/Movies/Ghost` 。
 
 ```cshtml
 @page "{searchString?}"
@@ -150,7 +148,7 @@ Index以下列程式碼更新頁面的 `OnGetAsync` 方法：
 
 在下列各節中，會新增依「內容類型」或「名稱」搜尋電影。
 
-將下列反白顯示的屬性新增至 *Pages/電影/ Index . cshtml.cs* ：
+將下列反白顯示的屬性新增至 *Pages/電影/ Index . cshtml.cs*：
 
 [!code-csharp[](razor-pages-start/sample/RazorPagesMovie22/Pages/Movies/Index.cshtml.cs?name=snippet_newProps&highlight=11-999)]
 
@@ -183,11 +181,11 @@ var movies = from m in _context.Movie
 
 **注意：**[Contains](/dotnet/api/system.data.objects.dataclasses.entitycollection-1.contains) 方法是在資料庫上執行，而不是在 C# 程式碼中執行。 查詢是否區分大小寫取決於資料庫和定序。 在 SQL Server 上，`Contains` 對應至 [SQL LIKE](/sql/t-sql/language-elements/like-transact-sql)，因此不區分大小寫。 而在 SQLlite 中，由於使用預設定序，因此會區分大小寫。
 
-流覽至 [電影] 頁面，並將查詢字串（例如）附加 `?searchString=Ghost` 至 URL。 例如 `https://localhost:5001/Movies?searchString=Ghost`。 隨即顯示篩選過的電影。
+流覽至 [電影] 頁面，並將查詢字串（例如）附加 `?searchString=Ghost` 至 URL。 例如： `https://localhost:5001/Movies?searchString=Ghost` 。 隨即顯示篩選過的電影。
 
 ![：：：非 loc (索引) ：：： view](search/_static/ghost.png)
 
-如果將下列路由範本新增至 Index 頁面，則可以將搜尋字串作為 URL 區段傳遞。 例如 `https://localhost:5001/Movies/Ghost`。
+如果將下列路由範本新增至 Index 頁面，則可以將搜尋字串作為 URL 區段傳遞。 例如： `https://localhost:5001/Movies/Ghost` 。
 
 ```cshtml
 @page "{searchString?}"

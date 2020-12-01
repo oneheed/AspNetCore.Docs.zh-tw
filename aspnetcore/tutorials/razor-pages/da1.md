@@ -6,8 +6,6 @@ ms.author: riande
 ms.date: 09/20/2020
 no-loc:
 - Index
-- Create
-- Delete
 - appsettings.json
 - ASP.NET Core Identity
 - cookie
@@ -20,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: tutorials/razor-pages/da1
-ms.openlocfilehash: 7146c1955a578502a63578de4f1abce932cb8b32
-ms.sourcegitcommit: 342588e10ae0054a6d6dc0fd11dae481006be099
+ms.openlocfilehash: 460950413d1dd2d3539c1d62b0eb11f6bb5144a9
+ms.sourcegitcommit: db0a6eb0be7bd7f22810a71fe9bf30e957fd116a
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 11/07/2020
-ms.locfileid: "94360595"
+ms.lasthandoff: 12/01/2020
+ms.locfileid: "96419963"
 ---
 # <a name="part-5-update-the-generated-pages-in-an-aspnet-core-app"></a>第5部分：在 ASP.NET Core 應用程式中更新產生的頁面
 
@@ -33,7 +31,7 @@ ms.locfileid: "94360595"
 
 ::: moniker range=">= aspnetcore-3.0"
 
-Scaffolded 電影應用程式是一個不錯的起點，但其呈現效果卻不理想。 **ReleaseDate** 應該是兩個單字，也就是 **發行日期** 。
+Scaffolded 電影應用程式是一個不錯的起點，但其呈現效果卻不理想。 **ReleaseDate** 應該是兩個單字，也就是 **發行日期**。
 
 ![在 Chrome 中開啟的電影應用程式](sql/_static/5/m55.png)
 
@@ -55,7 +53,7 @@ Scaffolded 電影應用程式是一個不錯的起點，但其呈現效果卻不
 
 ![滑鼠停留在 Edit 連結並顯示 https://localhost:1234/Movies/Edit/5 的 Url 的瀏覽器視窗](~/tutorials/razor-pages/da1/edit7.png)
 
-[ **編輯** ]、[ **詳細資料** ] 和 **Delete** [連結] 是由 *Pages/電影/ Index cshtml* 檔案中的 [錨點標記](xref:mvc/views/tag-helpers/builtin-th/anchor-tag-helper)協助程式所產生。
+[**編輯**]、[**詳細資料**] 和 [**刪除**] 連結是由 *Pages/電影/ Index cshtml* 檔案中的 [錨點標記](xref:mvc/views/tag-helpers/builtin-th/anchor-tag-helper)協助程式所產生。
 
 [!code-cshtml[](~/tutorials/razor-pages/razor-pages-start/snapshot_sample/RazorPagesMovie/Pages/Movies/Index.cshtml?highlight=16-18&range=32-)]
 
@@ -77,7 +75,7 @@ Scaffolded 電影應用程式是一個不錯的起點，但其呈現效果卻不
 
 ### <a name="add-route-template"></a>新增路由範本
 
-更新 [編輯]、[詳細資料] 和 Delete Razor [頁面] 以使用 `{id:int}` 路由範本。 將這些頁面每一頁的頁面指示詞從 `@page` 變更為 `@page "{id:int}"`。 執行應用程式，然後檢視原始檔。
+更新 [編輯]、[詳細資料] 和 [刪除] Razor 頁面，以使用 `{id:int}` 路由範本。 將這些頁面每一頁的頁面指示詞從 `@page` 變更為 `@page "{id:int}"`。 執行應用程式，然後檢視原始檔。
 
 產生的 HTML 將識別碼新增至 URL 的路徑部分：
 
@@ -98,7 +96,7 @@ Scaffolded 電影應用程式是一個不錯的起點，但其呈現效果卻不
 測試 `@page "{id:int?}"` 下列行為：
 
 1. 將 *Pages/Movies/Details.cshtml* 中的頁面指示詞設定為 `@page "{id:int?}"`。
-1. 在 [ `public async Task<IActionResult> OnGetAsync(int? id)` *頁面/電影/詳細資料* ] 中，設定中斷點。
+1. 在 [ `public async Task<IActionResult> OnGetAsync(int? id)` *頁面/電影/詳細資料*] 中，設定中斷點。
 1. 瀏覽至 `https://localhost:5001/Movies/Details/`。
 
 使用 `@page "{id:int}"` 指示詞，永遠不會叫用中斷點。 路由引擎會傳回 HTTP 404。 使用時 `@page "{id:int?}"` ，此方法會傳回 `OnGetAsync` `NotFound` HTTP 404)  (：
@@ -117,7 +115,7 @@ Scaffolded 電影應用程式是一個不錯的起點，但其呈現效果卻不
 
 1. 在上設定中斷點 `catch (DbUpdateConcurrencyException)` 。
 1. 針對電影選取 [編輯]，進行變更，但不要輸入 [儲存]。
-1. 在另一個瀏覽器視窗中，選取 **Delete** 相同電影的連結，然後刪除電影。
+1. 在另一個瀏覽器視窗中，選取相同電影的 **Delete** 連結，然後刪除電影。
 1. 在先前的瀏覽器視窗中，發佈對電影的變更。
 
 實際執行程式碼可能需要偵測並行存取衝突。 如需詳細資訊，請參閱[處理並行存取衝突](xref:data/ef-rp/concurrency)。
@@ -146,7 +144,7 @@ Scaffolded 電影應用程式是一個不錯的起點，但其呈現效果卻不
 * 如果模型狀態中有錯誤（例如， `ReleaseDate` 無法轉換為日期），則會以提交的值重新顯示表單。
 * 如果沒有任何模型錯誤，則會儲存電影。
 
-、和頁面中的 HTTP GET 方法會 Index Create Delete Razor 遵循類似的模式。 頁面中的 HTTP POST `OnPostAsync` 方法會 Create Razor 遵循 `OnPostAsync` [編輯] 頁面中方法的類似模式 Razor 。
+Index、Create 和 Delete 頁面中的 HTTP GET 方法會 Razor 遵循類似的模式。 在 [建立] 頁面中的 HTTP POST 方法，會 `OnPostAsync` Razor 遵循 `OnPostAsync` [編輯] 頁面中方法的類似模式 Razor 。
 
 ## <a name="additional-resources"></a>其他資源
 
@@ -158,7 +156,7 @@ Scaffolded 電影應用程式是一個不錯的起點，但其呈現效果卻不
 
 ::: moniker range="< aspnetcore-3.0"
 
-Scaffolded 電影應用程式是一個不錯的起點，但其呈現效果卻不理想。 **ReleaseDate** 應該是兩個單字，也就是 **發行日期** 。
+Scaffolded 電影應用程式是一個不錯的起點，但其呈現效果卻不理想。 **ReleaseDate** 應該是兩個單字，也就是 **發行日期**。
 
 ![在 Chrome 中開啟的電影應用程式](sql/_static/m55https.png)
 
@@ -176,7 +174,7 @@ Scaffolded 電影應用程式是一個不錯的起點，但其呈現效果卻不
 
 ![滑鼠停留在 Edit 連結並顯示 http://localhost:1234/Movies/Edit/5 的 Url 的瀏覽器視窗](~/tutorials/razor-pages/da1/edit7.png)
 
-[ **編輯** ]、[ **詳細資料** ] 和 **Delete** [連結] 是由 *Pages/電影/ Index cshtml* 檔案中的 [錨點標記](xref:mvc/views/tag-helpers/builtin-th/anchor-tag-helper)協助程式所產生。
+[**編輯**]、[**詳細資料**] 和 [**刪除**] 連結是由 *Pages/電影/ Index cshtml* 檔案中的 [錨點標記](xref:mvc/views/tag-helpers/builtin-th/anchor-tag-helper)協助程式所產生。
 
 [!code-cshtml[](~/tutorials/razor-pages/razor-pages-start/snapshot_sample/RazorPagesMovie/Pages/Movies/Index.cshtml?highlight=16-18&range=32-)]
 
@@ -194,7 +192,7 @@ Scaffolded 電影應用程式是一個不錯的起點，但其呈現效果卻不
 
 動態產生的連結會傳遞含有查詢字串的電影識別碼。 例如， `?id=1` 在中  `https://localhost:5001/Movies/Details?id=1` 。
 
-更新 [編輯]、[詳細資料 Delete Razor ] 和 [頁面]，以使用 "{id： int}" 路由範本。 將這些頁面每一頁的頁面指示詞從 `@page` 變更為 `@page "{id:int}"`。 執行應用程式，然後檢視原始檔。 產生的 HTML 將識別碼新增至 URL 的路徑部分：
+更新 [編輯]、[詳細資料] 和 [刪除] Razor 頁面，以使用 "{id： int}" 路由範本。 將這些頁面每一頁的頁面指示詞從 `@page` 變更為 `@page "{id:int}"`。 執行應用程式，然後檢視原始檔。 產生的 HTML 將識別碼新增至 URL 的路徑部分：
 
 ```html
 <td>
@@ -213,7 +211,7 @@ Scaffolded 電影應用程式是一個不錯的起點，但其呈現效果卻不
 若要測試 `@page "{id:int?}"` 的行為：
 
 * 將 *Pages/Movies/Details.cshtml* 中的頁面指示詞設定為 `@page "{id:int?}"`。
-* 在 [ `public async Task<IActionResult> OnGetAsync(int? id)` *頁面/電影/詳細資料* ] 中，設定中斷點。
+* 在 [ `public async Task<IActionResult> OnGetAsync(int? id)` *頁面/電影/詳細資料*] 中，設定中斷點。
 * 瀏覽至 `https://localhost:5001/Movies/Details/`。
 
 使用 `@page "{id:int}"` 指示詞，永遠不會叫用中斷點。 路由引擎會傳回 HTTP 404。 使用時 `@page "{id:int?}"` ，此方法會傳回 `OnGetAsync` `NotFound` HTTP 404)  (：
@@ -232,7 +230,7 @@ Scaffolded 電影應用程式是一個不錯的起點，但其呈現效果卻不
 
 * 在 `catch (DbUpdateConcurrencyException)`上設定中斷點
 * 針對電影選取 [編輯]，進行變更，但不要輸入 [儲存]。
-* 在另一個瀏覽器視窗中，選取 **Delete** 相同電影的連結，然後刪除電影。
+* 在另一個瀏覽器視窗中，選取相同電影的 **Delete** 連結，然後刪除電影。
 * 在先前的瀏覽器視窗中，發佈對電影的變更。
 
 實際執行程式碼可能需要偵測並行存取衝突。 如需詳細資訊，請參閱[處理並行存取衝突](xref:data/ef-rp/concurrency)。
@@ -261,7 +259,7 @@ Scaffolded 電影應用程式是一個不錯的起點，但其呈現效果卻不
 * 如果模型狀態中有錯誤（例如， `ReleaseDate` 無法轉換為日期），則會以提交的值來顯示表單。
 * 如果沒有任何模型錯誤，則會儲存電影。
 
-、和頁面中的 HTTP GET 方法會 Index Create Delete Razor 遵循類似的模式。 頁面中的 HTTP POST `OnPostAsync` 方法會 Create Razor 遵循 `OnPostAsync` [編輯] 頁面中方法的類似模式 Razor 。
+Index、Create 和 Delete 頁面中的 HTTP GET 方法會 Razor 遵循類似的模式。 在 [建立] 頁面中的 HTTP POST 方法，會 `OnPostAsync` Razor 遵循 `OnPostAsync` [編輯] 頁面中方法的類似模式 Razor 。
 
 搜尋會在接下來的教學課程中新增。
 

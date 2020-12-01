@@ -7,8 +7,6 @@ ms.custom: mvc
 ms.date: 09/29/2020
 no-loc:
 - Index
-- Create
-- Delete
 - appsettings.json
 - ASP.NET Core Identity
 - cookie
@@ -21,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: tutorials/razor-pages/validation
-ms.openlocfilehash: d69ab3452f4f15e916049e5c772a20fe9f9fac65
-ms.sourcegitcommit: 1ea3f23bec63e96ffc3a927992f30a5fc0de3ff9
+ms.openlocfilehash: f155922c9cb5ea7fdbad0963221ceddd19f4fe60
+ms.sourcegitcommit: db0a6eb0be7bd7f22810a71fe9bf30e957fd116a
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 11/12/2020
-ms.locfileid: "94570220"
+ms.lasthandoff: 12/01/2020
+ms.locfileid: "96419950"
 ---
 # <a name="part-8-of-tutorial-series-on-no-locrazor-pages"></a>頁面上的第8部分教學課程系列 Razor 。
 
@@ -36,7 +34,7 @@ ms.locfileid: "94570220"
 
 ## <a name="validation"></a>驗證
 
-軟體開發的核心原則稱為 [DRY](https://wikipedia.org/wiki/Don%27t_repeat_yourself)(" **D** on't **R** epeat **Y** ourself", 不重複原則)。 Razor 頁面會鼓勵開發環境指定一次，而且會反映在整個應用程式中。 DRY 有助於：
+軟體開發的核心原則稱為 [DRY](https://wikipedia.org/wiki/Don%27t_repeat_yourself)("**D** on't **R** epeat **Y** ourself", 不重複原則)。 Razor 頁面會鼓勵開發環境指定一次，而且會反映在整個應用程式中。 DRY 有助於：
 
 * 降低應用程式中的程式碼數量。
 * 使程式碼較少出現錯誤，而且更容易進行測試和維護。
@@ -85,7 +83,7 @@ ms.locfileid: "94570220"
 
 執行應用程式，並巡覽至 Pages/Movies。
 
-選取 **Create 新** 的連結。 使用某些無效值完成表單。 當 jQuery 用戶端驗證偵測到錯誤時，它會顯示錯誤訊息。
+選取 **Create New** 連結。 使用某些無效值完成表單。 當 jQuery 用戶端驗證偵測到錯誤時，它會顯示錯誤訊息。
 
 ![有多個 jQuery 用戶端驗證錯誤的電影檢視表單](validation/_static/val.png)
 
@@ -93,11 +91,11 @@ ms.locfileid: "94570220"
 
 請注意表單在包含無效值的每個欄位中自動呈現驗證錯誤訊息的方式。 當使用者已停用 JavaScript 時，用戶端、使用 JavaScript 和 jQuery 以及伺服器端都會強制執行這些錯誤。
 
-重要的優點是，或編輯頁面中 **不** 需要變更程式碼 Create 。 一旦將資料批註套用至模型之後，就會啟用驗證 UI。 Razor在本教學課程中建立的頁面，會在模型類別的屬性上使用驗證屬性，自動挑選驗證規則 `Movie` 。 使用 Edit 頁面測試驗證，會套用相同的驗證。
+最大的好處是在 [建立] 或 [編輯] 頁面中不需要變更 **任何** 程式碼。 一旦將資料批註套用至模型之後，就會啟用驗證 UI。 Razor在本教學課程中建立的頁面，會在模型類別的屬性上使用驗證屬性，自動挑選驗證規則 `Movie` 。 使用 Edit 頁面測試驗證，會套用相同的驗證。
 
 要一直到沒有任何用戶端驗證錯誤之後，才會將表單資料發佈到伺服器。 請確認表單資料不會經由下列一或多種方式發佈：
 
-* 將中斷點放置在 `OnPostAsync` 方法中。 選取或儲存來提交表單 **Create** 。 **Save** 永遠不會叫用中斷點。
+* 將中斷點放置在 `OnPostAsync` 方法中。 選取 [ **建立** ] 或 [ **儲存**] 來提交表單。 永遠不會叫用中斷點。
 * 使用 [Fiddler 工具](https://www.telerik.com/fiddler)。
 * 使用瀏覽器開發人員工具來監視網路流量。
 
@@ -108,7 +106,7 @@ ms.locfileid: "94570220"
 選擇性地測試伺服器端驗證：
 
 1. 在瀏覽器中停用 JavaScript。 您可以使用瀏覽器的開發人員工具來停用 JavaScript。 如果無法在瀏覽器中停用 JavaScript，請嘗試另一個瀏覽器。
-1. 在或 [編輯] 頁面的方法中設定中斷點 `OnPostAsync` Create 。
+1. 在 Create 或 Edit 頁面的 `OnPostAsync` 方法中設定中斷點。
 1. 提交含有無效資料的表單。
 1. 確認模型狀態無效：
 
@@ -121,7 +119,7 @@ ms.locfileid: "94570220"
   
 或者， [在伺服器上停用用戶端驗證](xref:mvc/models/validation#disable-client-side-validation)。
 
-下列程式碼顯示稍早在本教學課程中 scaffold 的部分 *Create . cshtml* 頁面。 和 [編輯] 頁面會使用它 Create 來：
+下列程式碼顯示稍早在此教學課程中包含 Scaffold 的部分 *Create.cshtml* 頁面。 Create 和 Edit 頁面會使用它來：
 
 * 顯示初始表單。
 * 發生錯誤時重新顯示表單。
@@ -130,7 +128,7 @@ ms.locfileid: "94570220"
 
 [輸入標記協助程式](xref:mvc/views/working-with-forms)會使用 [DataAnnotations](/aspnet/mvc/overview/older-versions/mvc-music-store/mvc-music-store-part-6) 屬性，並產生在用戶端上進行 jQuery 驗證所需的 HTML 屬性。 [驗證標記協助程式](xref:mvc/views/working-with-forms#the-validation-tag-helpers)會顯示驗證錯誤。 如需詳細資訊，請參閱[驗證](xref:mvc/models/validation)。
 
-Create和編輯頁面中沒有任何驗證規則。 只有在 `Movie` 類別中才能指定驗證規則和錯誤字串。 這些驗證規則會自動套用至 Razor 編輯模型的頁面 `Movie` 。
+Create 和 Edit 頁面中沒有任何驗證規則。 只有在 `Movie` 類別中才能指定驗證規則和錯誤字串。 這些驗證規則會自動套用至 Razor 編輯模型的頁面 `Movie` 。
 
 當驗證邏輯需要變更時，它只會在模型中進行。 驗證會一致地套用到整個應用程式中，而驗證邏輯則定義于一個位置。 位於一個位置的驗證有助於讓程式碼保持整潔，並可讓您更容易進行維護和更新。
 

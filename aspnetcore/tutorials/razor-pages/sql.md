@@ -6,8 +6,6 @@ ms.author: riande
 ms.date: 09/26/2020
 no-loc:
 - Index
-- Create
-- Delete
 - appsettings.json
 - ASP.NET Core Identity
 - cookie
@@ -20,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: tutorials/razor-pages/sql
-ms.openlocfilehash: 2c5bc221901d9e41984fb591755a8ad94e7e1420
-ms.sourcegitcommit: 1ea3f23bec63e96ffc3a927992f30a5fc0de3ff9
+ms.openlocfilehash: 6627825239d815d2c8bcad98e22340f07f921ab9
+ms.sourcegitcommit: db0a6eb0be7bd7f22810a71fe9bf30e957fd116a
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 11/12/2020
-ms.locfileid: "94570233"
+ms.lasthandoff: 12/01/2020
+ms.locfileid: "96420015"
 ---
 # <a name="part-4-of-tutorial-series-on-no-locrazor-pages"></a>頁面上教學課程系列的第4部分 Razor
 
@@ -74,7 +72,7 @@ LocalDB 為輕量版的 SQL Server Express 資料庫引擎，鎖定程式開發�
 
    ![檢視功能表](sql/_static/5/ssox.png)
 
-1. 以滑鼠右鍵按一下 `Movie` 資料表，然後選取 [ **View Designer** ]：
+1. 以滑鼠右鍵按一下 `Movie` 資料表，然後選取 [ **View Designer**]：
 
    ![在 Movie 資料表上開啟的操作功能表](sql/_static/5/design.png)
 
@@ -82,7 +80,7 @@ LocalDB 為輕量版的 SQL Server Express 資料庫引擎，鎖定程式開發�
 
    請注意 `ID` 旁的索引鍵圖示。 根據預設，EF 會為主索引鍵建立名為 `ID` 的屬性。
 
-1. 以滑鼠右鍵按一下 `Movie` 資料表，然後選取 [ **View Data** ：
+1. 以滑鼠右鍵按一下 `Movie` 資料表，然後選取 [ **View Data**：
 
    ![開啟的電影資料表顯示資料表資料](sql/_static/vd22.png)
 
@@ -118,7 +116,7 @@ LocalDB 為輕量版的 SQL Server Express 資料庫引擎，鎖定程式開發�
 
 ## <a name="seed-the-database"></a>植入資料庫
 
-Create 在 `SeedData` [ *模型* ] 資料夾中，以下列程式碼命名的新類別：
+使用下列程式碼，在 *Models* 資料夾中建立名為 `SeedData` 的新類別：
 
 [!code-csharp[](razor-pages-start/sample/RazorPagesMovie30/Models/SeedData.cs?name=snippet_1)]
 
@@ -154,11 +152,11 @@ if (context.Movie.Any())
 
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
-1. Delete 資料庫中的所有記錄。 使用瀏覽器或[SSOX](xref:tutorials/razor-pages/new-field#ssox)中的刪除連結
+1. 刪除資料庫中的所有記錄。 使用瀏覽器或[SSOX](xref:tutorials/razor-pages/new-field#ssox)中的刪除連結
 
 1. 藉由呼叫類別中的方法來強制讓應用程式初始化 `Startup` ，以執行種子方法。 若要強制初始化，IIS Express 必須停止並重新啟動。 使用下列任一方法停止並重新啟動 IIS：
 
-   1. 以滑鼠右鍵按一下通知區域中的 IIS Express 系統匣圖示，然後 **選取** [ **結束或停止網站** ：
+   1. 以滑鼠右鍵按一下通知區域中的 IIS Express 系統匣圖示，然後 **選取** [ **結束或停止網站**：
 
       ![IIS Express 系統匣圖示](../first-mvc-app/working-with-sql/_static/iisExIcon.png)
 
@@ -169,7 +167,7 @@ if (context.Movie.Any())
 
 # <a name="visual-studio-code--visual-studio-for-mac"></a>[Visual Studio Code / Visual Studio for Mac](#tab/visual-studio-code+visual-studio-mac)
 
-Delete 資料庫中的所有記錄，因此會執行種子方法。 停止並啟動應用程式來植入資料庫。
+刪除資料庫中的所有記錄，因此會執行種子方法。 停止並啟動應用程式來植入資料庫。
 
 ---
 
@@ -228,7 +226,7 @@ LocalDB 為輕量版的 SQL Server Express 資料庫引擎，鎖定程式開發�
 
   ![檢視功能表](sql/_static/ssox.png)
 
-* 以滑鼠右鍵按一下 `Movie` 資料表，然後選取 [ **View Designer** ]：
+* 以滑鼠右鍵按一下 `Movie` 資料表，然後選取 [ **View Designer**]：
 
   ![在 Movie 資料表上開啟的操作功能表](sql/_static/design.png)
 
@@ -236,7 +234,7 @@ LocalDB 為輕量版的 SQL Server Express 資料庫引擎，鎖定程式開發�
 
 請注意 `ID` 旁的索引鍵圖示。 根據預設，EF 會為主索引鍵建立名為 `ID` 的屬性。
 
-* 以滑鼠右鍵按一下 `Movie` 資料表，然後選取 [ **View Data** ：
+* 以滑鼠右鍵按一下 `Movie` 資料表，然後選取 [ **View Data**：
 
   ![開啟的電影資料表顯示資料表資料](sql/_static/vd22.png)
 
@@ -272,7 +270,7 @@ LocalDB 為輕量版的 SQL Server Express 資料庫引擎，鎖定程式開發�
 
 ## <a name="seed-the-database"></a>植入資料庫
 
-Create 在 `SeedData` [ *模型* ] 資料夾中，以下列程式碼命名的新類別：
+使用下列程式碼，在 *Models* 資料夾中建立名為 `SeedData` 的新類別：
 
 [!code-csharp[](razor-pages-start/sample/RazorPagesMovie30/Models/SeedData.cs?name=snippet_1)]
 
@@ -308,7 +306,7 @@ if (context.Movie.Any())
 
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
-* Delete 資料庫中的所有記錄。 使用瀏覽器或 [SSOX](xref:tutorials/razor-pages/new-field#ssox)中的 [刪除] 連結。
+* 刪除資料庫中的所有記錄。 使用瀏覽器或 [SSOX](xref:tutorials/razor-pages/new-field#ssox)中的 [刪除] 連結。
 * 藉由呼叫類別中的方法來強制讓應用程式初始化 `Startup` ，以執行種子方法。 若要強制初始化，IIS Express 必須停止並重新啟動。 使用下列任一方法停止並重新啟動 IIS：
 
   * 以滑鼠右鍵按一下通知區域中的 IIS Express 系統匣圖示，然後點選 [結束] 或 [停止站台]：
@@ -322,7 +320,7 @@ if (context.Movie.Any())
 
 # <a name="visual-studio-code--visual-studio-for-mac"></a>[Visual Studio Code / Visual Studio for Mac](#tab/visual-studio-code+visual-studio-mac)
 
-Delete 資料庫中的所有記錄，因此會執行種子方法。 停止並啟動應用程式來植入資料庫。
+刪除資料庫中的所有記錄，因此會執行種子方法。 停止並啟動應用程式來植入資料庫。
 
 ---
 
@@ -390,7 +388,7 @@ LocalDB 為輕量版的 SQL Server Express 資料庫引擎，鎖定程式開發�
 
   ![檢視功能表](sql/_static/ssox.png)
 
-* 以滑鼠右鍵按一下 `Movie` 資料表，然後選取 [ **View Designer** ]：
+* 以滑鼠右鍵按一下 `Movie` 資料表，然後選取 [ **View Designer**]：
 
   ![在電影資料表上開啟操作功能表](sql/_static/design.png)
 
@@ -398,7 +396,7 @@ LocalDB 為輕量版的 SQL Server Express 資料庫引擎，鎖定程式開發�
 
 請注意 `ID` 旁的索引鍵圖示。 根據預設，EF 會為主索引鍵建立名為 `ID` 的屬性。
 
-* 以滑鼠右鍵按一下 `Movie` 資料表，然後選取 [ **View Data** ：
+* 以滑鼠右鍵按一下 `Movie` 資料表，然後選取 [ **View Data**：
 
   ![開啟的電影資料表顯示資料表資料](sql/_static/vd22.png)
 
@@ -416,7 +414,7 @@ LocalDB 為輕量版的 SQL Server Express 資料庫引擎，鎖定程式開發�
 
 ## <a name="seed-the-database"></a>植入資料庫
 
-Create 在 `SeedData` [ *模型* ] 資料夾中，以下列程式碼命名的新類別：
+使用下列程式碼，在 *Models* 資料夾中建立名為 `SeedData` 的新類別：
 
 [!code-csharp[](razor-pages-start/sample/RazorPagesMovie22/Models/SeedData.cs?name=snippet_1)]
 
@@ -452,7 +450,7 @@ SqlException：無法開啟 Razor 登入所要求的資料庫 "PagesMovieCoNtext
 
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
-* Delete 資料庫中的所有記錄。 您可以使用瀏覽器或 [SSOX](xref:tutorials/razor-pages/new-field#ssox) 的刪除連結來執行這項操作
+* 刪除資料庫中的所有記錄。 您可以使用瀏覽器或 [SSOX](xref:tutorials/razor-pages/new-field#ssox) 的刪除連結來執行這項操作
 * 藉由呼叫類別中的方法來強制讓應用程式初始化 `Startup` ，以執行種子方法。 若要強制初始化，IIS Express 必須停止並重新啟動。 您可以使用下列其中一個方法來執行此工作：
 
   * 以滑鼠右鍵按一下通知區域中的 IIS Express 系統匣圖示，然後點選 [結束] 或 [停止站台]：
@@ -466,11 +464,11 @@ SqlException：無法開啟 Razor 登入所要求的資料庫 "PagesMovieCoNtext
 
 # <a name="visual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code)
 
-Delete 資料庫中的所有記錄，因此會執行種子方法。 停止並啟動應用程式來植入資料庫。
+刪除資料庫中的所有記錄，因此會執行種子方法。 停止並啟動應用程式來植入資料庫。
 
 # <a name="visual-studio-for-mac"></a>[Visual Studio for Mac](#tab/visual-studio-mac)
 
-Delete 資料庫中的所有記錄，因此會執行種子方法。 停止並啟動應用程式來植入資料庫。
+刪除資料庫中的所有記錄，因此會執行種子方法。 停止並啟動應用程式來植入資料庫。
 
 ---
 

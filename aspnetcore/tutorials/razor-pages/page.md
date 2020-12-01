@@ -6,8 +6,6 @@ ms.author: riande
 ms.date: 09/25/2020
 no-loc:
 - Index
-- Create
-- Delete
 - appsettings.json
 - ASP.NET Core Identity
 - cookie
@@ -20,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: tutorials/razor-pages/page
-ms.openlocfilehash: d655be26a794f87a0be07046ae1d6415256d592c
-ms.sourcegitcommit: aa85f2911792a1e4783bcabf0da3b3e7e218f63a
+ms.openlocfilehash: 4a5369b9e40de89ac9a1895466e7bdd7afb9d32e
+ms.sourcegitcommit: db0a6eb0be7bd7f22810a71fe9bf30e957fd116a
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 11/23/2020
-ms.locfileid: "95417626"
+ms.lasthandoff: 12/01/2020
+ms.locfileid: "96420028"
 ---
 # <a name="part-3-scaffolded-no-locrazor-pages-in-aspnet-core"></a>第3部分： Razor ASP.NET Core 中的 scaffold 頁面
 
@@ -47,7 +45,7 @@ ms.locfileid: "95417626"
 
 ::: moniker range=">= aspnetcore-3.0"
 
-## <a name="the-no-loccreate-no-locdelete-details-and-edit-pages"></a>[、]、[ Create Delete 詳細資料] 和 [編輯] 頁面
+## <a name="the-create-delete-details-and-edit-pages"></a>Create、Delete、Details 和 Edit 頁面
 
 檢查 *Pages/電影/ Index Cshtml.cs* 頁面模型：
 
@@ -65,7 +63,7 @@ Razor 頁面衍生自 `PageModel` 。 依照慣例， `PageModel` 衍生的類�
 
 [!code-csharp[](razor-pages-start/sample/RazorPagesMovie30/Pages/Privacy.cshtml.cs?name=snippet)]
 
-當傳回型別是 `IActionResult` 或 `Task<IActionResult>` 時，必須提供傳回陳述式。 例如， *Pages/電影/ Create . cshtml.cs* `OnPostAsync` 方法：
+當傳回型別是 `IActionResult` 或 `Task<IActionResult>` 時，必須提供傳回陳述式。 例如，*Pages/Movies/Create.cshtml.cs* `OnPostAsync` 方法：
 
 [!code-csharp[](razor-pages-start/sample/RazorPagesMovie30/Pages/Movies/Create.cshtml.cs?name=snippet)]
 
@@ -151,7 +149,7 @@ Razor 可以從 HTML 轉換成 c # 或 Razor 特定標記。 當 `@` 符號後�
 
 1. 儲存變更，然後選取 [ **>rpmovie** ] 連結來測試應用程式。 如有任何問題，請參閱 GitHub 中的 [_Layout.cshtml](https://github.com/dotnet/AspNetCore.Docs/blob/master/aspnetcore/tutorials/razor-pages/razor-pages-start/sample/RazorPagesMovie30/Pages/Shared/_Layout.cshtml) 檔案。
 
-1. 測試 **首頁**、 **>rpmovie**、 **Create** **編輯** 和 **Delete** 連結。 每個頁面都會設定標題，您可以在 [瀏覽器] 索引標籤中看到此標題。當您將頁面加入書簽時，此標題會用於書簽。
+1. 測試 **首頁**、 **>rpmovie**、 **建立**、 **編輯** 和 **刪除** 連結。 每個頁面都會設定標題，您可以在 [瀏覽器] 索引標籤中看到此標題。當您將頁面加入書簽時，此標題會用於書簽。
 
 > [!NOTE]
 > 您可能無法在 `Price` 欄位中輸入小數逗號。 若要針對使用逗號 ( "，" ) 作為小數點的非英文地區設定和非 US-English 日期格式支援 [jQuery 驗證](https://jqueryvalidation.org/) ，您必須採取步驟來全球化應用程式。 請參閱此 [GitHub 問題 4076](https://github.com/dotnet/AspNetCore.Docs/issues/4076#issuecomment-326590420) \(英文\)，以取得加入十進位逗號的指示。
@@ -162,15 +160,15 @@ Razor 可以從 HTML 轉換成 c # 或 Razor 特定標記。 當 `@` 符號後�
 
 上述標記會將 Pages 資料夾下的所有檔案的版面配置檔案設定為 *pages/Shared/_Layout。* Razor *Pages* 如需詳細資訊，請參閱 [Layout](xref:razor-pages/index#layout)。
 
-### <a name="the-no-loccreate-page-model"></a>Create頁面模型
+### <a name="the-create-page-model"></a>Create 頁面模型
 
-檢查 *Pages/電影/ Create cshtml.cs* 頁面模型：
+檢查 *Pages/Movies/Create.cshtml.cs* 頁面模型：
 
 [!code-csharp[](razor-pages-start/snapshot_sample3/RazorPagesMovie30/Pages/Movies/Create.cshtml.cs?name=snippetALL)]
 
-`OnGet` 方法會初始化頁面所需的任何狀態。 Create頁面沒有任何要初始化的狀態，因此 `Page` 會傳回。 稍後在此教學課程中，會顯示 `OnGet` 初始化狀態的範例。 `Page`方法 `PageResult` 會建立可轉譯 *Create cshtml* 頁面的物件。
+`OnGet` 方法會初始化頁面所需的任何狀態。 建立頁面沒有任何要初始化的狀態，所以傳回 `Page`。 稍後在此教學課程中，會顯示 `OnGet` 初始化狀態的範例。 `Page` 方法會建立 `PageResult` 物件，用以呈現 *Create.cshtml* 頁面。
 
-`Movie`屬性使用[[BindProperty]](xref:Microsoft.AspNetCore.Mvc.BindPropertyAttribute)屬性加入[模型](xref:mvc/models/model-binding)系結。 當 Create 表單張貼表單值時，ASP.NET Core 執行時間會將張貼的值系結至 `Movie` 模型。
+`Movie`屬性使用[[BindProperty]](xref:Microsoft.AspNetCore.Mvc.BindPropertyAttribute)屬性加入[模型](xref:mvc/models/model-binding)系結。 當 Create 表單發佈表單值時，ASP.NET Core 執行階段會將發佈的值繫結至 `Movie` 模型。
 
 當頁面發佈表單資料時，即會執行 `OnPostAsync` 方法：
 
@@ -183,9 +181,9 @@ Razor 可以從 HTML 轉換成 c # 或 Razor 特定標記。 當 `@` 符號後�
 * 儲存資料。
 * 瀏覽器會重新導向至該 Index 頁面。
 
-### <a name="the-no-loccreate-no-locrazor-page"></a>Create Razor 頁面
+### <a name="the-create-no-locrazor-page"></a>[建立] Razor 頁面
 
-檢查 *Pages/電影/ Create cshtml* Razor 分頁檔案：
+檢查 *Pages/電影/Create. cshtml* Razor 分頁檔案：
 
 [!code-cshtml[](razor-pages-start/snapshot_sample3/RazorPagesMovie30/Pages/Movies/Create.cshtml)]
 
@@ -199,7 +197,7 @@ Visual Studio 會以用於標籤協助程式的特殊粗體字型顯示下列標
 * `<input asp-for="Movie.Title" class="form-control" />`
 * `<span asp-validation-for="Movie.Title" class="text-danger"></span>`
 
-![VS17 view of：：：非 loc (Create) ：：：. cshtml 頁面](page/_static/th3.png)
+![Create.cshtml 頁面的 VS17 檢視](page/_static/th3.png)
 
 # <a name="visual-studio-code--visual-studio-for-mac"></a>[Visual Studio Code / Visual Studio for Mac](#tab/visual-studio-code+visual-studio-mac)
 
@@ -237,7 +235,7 @@ Visual Studio 會以用於標籤協助程式的特殊粗體字型顯示下列標
 
 ::: moniker range="< aspnetcore-3.0"
 
-## <a name="the-no-loccreate-no-locdelete-details-and-edit-pages"></a>[、]、[ Create Delete 詳細資料] 和 [編輯] 頁面
+## <a name="the-create-delete-details-and-edit-pages"></a>Create、Delete、Details 和 Edit 頁面
 
 檢查 *Pages/電影/ Index Cshtml.cs* 頁面模型：
 
@@ -247,7 +245,7 @@ Razor 頁面衍生自 `PageModel` 。 依照慣例， `PageModel` 衍生的類�
 
 當對頁面提出要求時，方法會將 `OnGetAsync` 電影清單傳回 Razor 頁面。 `OnGetAsync` 或 `OnGet` 在頁面上呼叫， Razor 以初始化頁面的狀態。 在此情況下，`OnGetAsync` 會取得電影清單並加以顯示。
 
-當傳回或傳回時 `OnGet` `void` `OnGetAsync` `Task` ，不會使用傳回方法。 當傳回型別是 `IActionResult` 或 `Task<IActionResult>` 時，必須提供傳回陳述式。 例如， *Pages/電影/ Create . cshtml.cs* `OnPostAsync` 方法：
+當傳回或傳回時 `OnGet` `void` `OnGetAsync` `Task` ，不會使用傳回方法。 當傳回型別是 `IActionResult` 或 `Task<IActionResult>` 時，必須提供傳回陳述式。 例如，*Pages/Movies/Create.cshtml.cs* `OnPostAsync` 方法：
 
 [!code-csharp[](razor-pages-start/sample/RazorPagesMovie22/Pages/Movies/Create.cshtml.cs?name=snippet)]
 
@@ -326,7 +324,7 @@ Razor 可以從 HTML 轉換成 c # 或 Razor 特定標記。 當 `@` 符號後�
 
 儲存變更，並按一下 **RpMovie** 連結來測試應用程式。 如有任何問題，請參閱 GitHub 中的 [_Layout.cshtml](https://github.com/dotnet/AspNetCore.Docs/blob/master/aspnetcore/tutorials/razor-pages/razor-pages-start/sample/RazorPagesMovie22/Pages/Shared/_Layout.cshtml) 檔案。
 
-測試其他連結 (**Home**、 **>rpmovie**、 **Create** 、 **Edit** 和 **Delete**) 。 每個頁面都會設定標題，您可以在 [瀏覽器] 索引標籤中看到此標題。當您將頁面加入書簽時，此標題會用於書簽。
+測試其他連結 (**Home**、**RpMovie**、**Create**、**Edit** 和 **Delete**)。 每個頁面都會設定標題，您可以在 [瀏覽器] 索引標籤中看到此標題。當您將頁面加入書簽時，此標題會用於書簽。
 
 > [!NOTE]
 > 您可能無法在 `Price` 欄位中輸入小數逗號。 若要針對使用逗號 ( "，" ) 作為小數點的非英文地區設定和非 US-English 日期格式支援 [jQuery 驗證](https://jqueryvalidation.org/) ，您必須採取步驟來全球化應用程式。 這個 [GitHub 問題 4076](https://github.com/dotnet/AspNetCore.Docs/issues/4076#issuecomment-326590420) 有加入小數逗號的指示。
@@ -337,15 +335,15 @@ Razor 可以從 HTML 轉換成 c # 或 Razor 特定標記。 當 `@` 符號後�
 
 上述標記會將 Pages 資料夾下的所有檔案的版面配置檔案設定為 *pages/Shared/_Layout。* Razor *Pages* 如需詳細資訊，請參閱 [Layout](xref:razor-pages/index#layout)。
 
-### <a name="the-no-loccreate-page-model"></a>Create頁面模型
+### <a name="the-create-page-model"></a>Create 頁面模型
 
-檢查 *Pages/電影/ Create cshtml.cs* 頁面模型：
+檢查 *Pages/Movies/Create.cshtml.cs* 頁面模型：
 
 [!code-csharp[](razor-pages-start/snapshot_sample/RazorPagesMovie/Pages/Movies/Create.cshtml.cs?name=snippetALL)]
 
-`OnGet` 方法會初始化頁面所需的任何狀態。 Create頁面沒有任何要初始化的狀態，因此 `Page` 會傳回。 稍後在本教學課程中您會看到 `OnGet` 方法初始化狀態。 `Page`方法 `PageResult` 會建立可轉譯 *Create cshtml* 頁面的物件。
+`OnGet` 方法會初始化頁面所需的任何狀態。 建立頁面沒有任何要初始化的狀態，所以傳回 `Page`。 稍後在本教學課程中您會看到 `OnGet` 方法初始化狀態。 `Page` 方法會建立 `PageResult` 物件，用以呈現 *Create.cshtml* 頁面。
 
-`Movie`屬性使用 [[BindProperty]] <xref:Microsoft.AspNetCore.Mvc.BindPropertyAttribute> 屬性加入[模型](xref:mvc/models/model-binding)系結。 當 Create 表單張貼表單值時，ASP.NET Core 執行時間會將張貼的值系結至 `Movie` 模型。
+`Movie`屬性使用 [[BindProperty]] <xref:Microsoft.AspNetCore.Mvc.BindPropertyAttribute> 屬性加入[模型](xref:mvc/models/model-binding)系結。 當 Create 表單發佈表單值時，ASP.NET Core 執行階段會將發佈的值繫結至 `Movie` 模型。
 
 當頁面發佈表單資料時，即會執行 `OnPostAsync` 方法：
 
@@ -355,9 +353,9 @@ Razor 可以從 HTML 轉換成 c # 或 Razor 特定標記。 當 `@` 符號後�
 
 如果沒有任何模型錯誤，則會儲存資料，並將瀏覽器重新導向至 Index 頁面。
 
-### <a name="the-no-loccreate-no-locrazor-page"></a>Create Razor 頁面
+### <a name="the-create-no-locrazor-page"></a>[建立] Razor 頁面
 
-檢查 *Pages/電影/ Create cshtml* Razor 分頁檔案：
+檢查 *Pages/電影/Create. cshtml* Razor 分頁檔案：
 
 [!code-cshtml[](razor-pages-start/snapshot_sample/RazorPagesMovie/Pages/Movies/Create.cshtml)]
 
@@ -365,7 +363,7 @@ Razor 可以從 HTML 轉換成 c # 或 Razor 特定標記。 當 `@` 符號後�
 
 Visual Studio 會以特別的粗體字型顯示 `<form method="post">` 標籤，用於標籤協助程式：
 
-![VS17 view of：：：非 loc (Create) ：：：. cshtml 頁面](page/_static/th.png)
+![Create.cshtml 頁面的 VS17 檢視](page/_static/th.png)
 
 # <a name="visual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code)
 

@@ -19,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: tutorials/signalr-blazor-webassembly
-ms.openlocfilehash: 2975ee699a2535cdf63ef2f5af5790f178a09f93
-ms.sourcegitcommit: e087b6a38e3d38625ebb567a973e75b4d79547b9
+ms.openlocfilehash: 89aeb20d5566447ff86581dfa1d7946d20b9ed2d
+ms.sourcegitcommit: 94c8cc1a8ce2bdba0ebdd9d37c155bf42d3cc62b
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 11/15/2020
-ms.locfileid: "94637726"
+ms.lasthandoff: 12/01/2020
+ms.locfileid: "96473712"
 ---
 # <a name="use-aspnet-core-no-locsignalr-with-a-hosted-no-locblazor-webassembly-app"></a>搭配使用 ASP.NET Core SignalR 與託管 Blazor WebAssembly 應用程式
 
@@ -115,13 +115,13 @@ ms.locfileid: "94637726"
 
 1. 建立新專案。
 
-1. 選取 **Blazor 應用程式** ，然後選取 **[下一步]** 。
+1. 選取 **Blazor 應用程式**，然後選取 **[下一步]**。
 
 1. 輸入 `BlazorSignalRApp` [ **專案名稱** ] 欄位。 確認 **位置** 專案是正確的，或提供專案的位置。 選取 [建立]。
 
 1. 選擇 **Blazor WebAssembly 應用程式** 範本。
 
-1. 在 [ **Advanced** ] 底下，選取 [ **hosted ASP.NET Core** ] 核取方塊。
+1. 在 [ **Advanced**] 底下，選取 [ **hosted ASP.NET Core** ] 核取方塊。
 
 1. 選取 [建立]。
 
@@ -135,19 +135,19 @@ ms.locfileid: "94637726"
 
 1. 在 Visual Studio Code 中，開啟應用程式的專案資料夾。
 
-1. 當對話方塊出現時，若要新增資產以建立和偵測應用程式，請選取 [ **是** ]。 Visual Studio Code 會自動加入 `.vscode` 具有所產生檔案和檔案的資料夾 `launch.json` `tasks.json` 。
+1. 當對話方塊出現時，若要新增資產以建立和偵測應用程式，請選取 [ **是**]。 Visual Studio Code 會自動加入 `.vscode` 具有所產生檔案和檔案的資料夾 `launch.json` `tasks.json` 。
 
 # <a name="visual-studio-for-mac"></a>[Visual Studio for Mac](#tab/visual-studio-mac)
 
 1. 安裝最新版本的 [Visual Studio for Mac](https://visualstudio.microsoft.com/vs/mac/) ，然後執行下列步驟：
 
-1. 選取 **File**  >  [檔案 **新方案** ] 或 [ **開始] 視窗** 中的 [建立 **新** 專案]。
+1. 選取 **File**  >  [檔案 **新方案**] 或 [**開始] 視窗** 中的 [建立 **新** 專案]。
 
-1. 在側邊欄中，選取 [ **Web] 和 [主控台**  >  **應用程式** ]。
+1. 在側邊欄中，選取 [ **Web] 和 [主控台**  >  **應用程式**]。
 
-1. 選擇 **Blazor WebAssembly 應用程式** 範本。 選取 [下一步]。
+1. 選擇 **Blazor WebAssembly 應用程式** 範本。 選取 [下一步] 。
 
-1. 確認 [ **驗證** ] 設定為 [ **無驗證** ]。 選取 [ **主控 ASP.NET Core** ] 核取方塊。 選取 [下一步]。
+1. 確認 [ **驗證** ] 設定為 [ **無驗證**]。 選取 [ **主控 ASP.NET Core** ] 核取方塊。 選取 [下一步] 。
 
 1. 在 [ **專案名稱** ] 欄位中，為應用程式命名 `BlazorSignalRApp` 。 選取 [建立]。
 
@@ -169,15 +169,15 @@ dotnet new blazorwasm --hosted --output BlazorSignalRApp
 
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio/)
 
-1. 在 **方案總管** 中，以滑鼠右鍵按一下 `BlazorSignalRApp.Client` 專案，然後選取 [ **管理 NuGet 套件** ]。
+1. 在 **方案總管** 中，以滑鼠右鍵按一下 `BlazorSignalRApp.Client` 專案，然後選取 [ **管理 NuGet 套件**]。
 
 1. 在 [ **管理 NuGet 封裝** ] 對話方塊中，確認 [ **封裝來源** ] 設定為 `nuget.org` 。
 
 1. 選取 **[流覽]** 之後， `Microsoft.AspNetCore.SignalR.Client` 在 [搜尋] 方塊中輸入。
 
-1. 在搜尋結果中選取封裝， [`Microsoft.AspNetCore.SignalR.Client`](https://www.nuget.org/packages/Microsoft.AspNetCore.SignalR.Client) 然後選取 [ **安裝** ]。
+1. 在搜尋結果中選取封裝， [`Microsoft.AspNetCore.SignalR.Client`](https://www.nuget.org/packages/Microsoft.AspNetCore.SignalR.Client) 然後選取 [ **安裝**]。
 
-1. 如果出現 [ **預覽變更** ] 對話方塊，請選取 **[確定]** 。
+1. 如果出現 [ **預覽變更** ] 對話方塊，請選取 **[確定]**。
 
 1. 如果出現 [ **接受授權** ] 對話方塊，請選取 [如果您同意授權條款即 **接受** ]。
 
@@ -191,13 +191,13 @@ dotnet add Client package Microsoft.AspNetCore.SignalR.Client
 
 # <a name="visual-studio-for-mac"></a>[Visual Studio for Mac](#tab/visual-studio-mac)
 
-1. 在 [ **方案** ] 提要欄位中，以滑鼠右鍵按一下 `BlazorSignalRApp.Client` 專案，然後選取 [ **管理 NuGet 套件** ]。
+1. 在 [ **方案** ] 提要欄位中，以滑鼠右鍵按一下 `BlazorSignalRApp.Client` 專案，然後選取 [ **管理 NuGet 套件**]。
 
 1. 在 [ **管理 NuGet 封裝** ] 對話方塊中，確認 [來源] 下拉式清單設定為 `nuget.org` 。
 
 1. 選取 **[流覽]** 之後， `Microsoft.AspNetCore.SignalR.Client` 在 [搜尋] 方塊中輸入。
 
-1. 在搜尋結果中，選取套件旁的核取方塊 [`Microsoft.AspNetCore.SignalR.Client`](https://www.nuget.org/packages/Microsoft.AspNetCore.SignalR.Client) ，然後選取 [ **新增套件** ]。
+1. 在搜尋結果中，選取套件旁的核取方塊 [`Microsoft.AspNetCore.SignalR.Client`](https://www.nuget.org/packages/Microsoft.AspNetCore.SignalR.Client) ，然後選取 [ **新增套件**]。
 
 1. 如果出現 [ **接受授權** ] 對話方塊，請在您同意授權條款時選取 [ **接受** ]。
 
@@ -242,7 +242,7 @@ dotnet add Client package Microsoft.AspNetCore.SignalR.Client
 
 ::: moniker range=">= aspnetcore-5.0"
 
-   [!code-csharp[](signalr-blazor-webassembly/samples/5.x/BlazorSignalRApp/Server/Startup.cs?name=snippet_ConfigureServices&highlight=3,5-9)]
+   [!code-csharp[](signalr-blazor-webassembly/samples/5.x/BlazorSignalRApp/Server/Startup.cs?name=snippet_ConfigureServices&highlight=3,6-10)]
 
 ::: moniker-end
 
@@ -259,7 +259,7 @@ dotnet add Client package Microsoft.AspNetCore.SignalR.Client
 
 ::: moniker range=">= aspnetcore-5.0"
 
-   [!code-csharp[](signalr-blazor-webassembly/samples/5.x/BlazorSignalRApp/Server/Startup.cs?name=snippet_Configure&highlight=3,25)]
+   [!code-csharp[](signalr-blazor-webassembly/samples/5.x/BlazorSignalRApp/Server/Startup.cs?name=snippet_Configure&highlight=3,26)]
 
 ::: moniker-end
 

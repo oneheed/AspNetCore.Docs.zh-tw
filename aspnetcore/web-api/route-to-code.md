@@ -20,12 +20,12 @@ no-loc:
 - SignalR
 - Route-to-code
 uid: web-api/route-to-code
-ms.openlocfilehash: 49eaa3ceb47c41226b7a50782436ec270e6e1b7b
-ms.sourcegitcommit: 619200f2981656ede6d89adb6a22ad1a0e16da22
+ms.openlocfilehash: 1f5f532053f8f5ca7f73df8c1a910a484e2488d9
+ms.sourcegitcommit: 0bcc0d6df3145a0727da7c4be2f4bda8f27eeaa3
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 11/30/2020
-ms.locfileid: "96335606"
+ms.lasthandoff: 12/02/2020
+ms.locfileid: "96513092"
 ---
 # <a name="basic-json-apis-with-no-locroute-to-code-in-aspnet-core"></a>ASP.NET Core 中的基本 JSON Api Route-to-code
 
@@ -81,7 +81,7 @@ ASP.NET Core 提供協助程式方法，可輕鬆建立 JSON web Api：
 
 [!code-csharp[](route-to-code/sample/Startup6.cs?name=snippet)]
 
-## <a name="authentication-and-authorization"></a>驗證與授權
+## <a name="authentication-and-authorization"></a>驗證和授權
 
 Route-to-code 支援驗證和授權。 屬性（例如 `[Authorize]` 和 `[AllowAnonymous]` ）無法放在對應至要求委派的端點上。 相反地，會使用 `RequireAuthorization` 和擴充方法來新增授權中繼資料 `AllowAnonymous` 。
 
@@ -111,6 +111,21 @@ Route-to-code 支援驗證和授權。 屬性（例如 `[Authorize]` 和 `[Allow
 在 `Startup.Configure` 方法中， `Map` 會在中呼叫方法和其他類別的靜態方法 `UseEndpoints` ：
 
 [!code-csharp[](route-to-code/sample/Startup5.cs?name=snippet)]
+
+## <a name="notable-missing-features-compared-to-web-api"></a>相較于 Web API，值得注意的遺漏功能
+
+Route-to-code 是針對基本 JSON Api 所設計。 它並不支援 ASP.NET Core Web API 提供的許多先進功能。
+
+未提供的功能 Route-to-code 包括：
+
+* 模型繫結
+* 模型驗證
+* OpenAPI/Swagger
+* 內容協商
+* 函數相依性插入
+* `ProblemDetails` ([https://tools.ietf.org/html/rfc7807](RFC 7807))
+
+如果需要上述清單中的某些功能，請考慮使用 [ASP.NET Core WEB API](xref:web-api/index) 來建立 api。
 
 ## <a name="additional-resources"></a>其他資源
 

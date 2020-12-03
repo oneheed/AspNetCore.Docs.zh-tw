@@ -19,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/fundamentals/dependency-injection
-ms.openlocfilehash: 0cec9a1ea6f6df52103ab190c85518ddc42a573f
-ms.sourcegitcommit: 1be547564381873fe9e84812df8d2088514c622a
+ms.openlocfilehash: c68deb5237754872e11bfd9c83275b9a3b147319
+ms.sourcegitcommit: 92439194682dc788b8b5b3a08bd2184dc00e200b
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 11/11/2020
-ms.locfileid: "94507924"
+ms.lasthandoff: 12/03/2020
+ms.locfileid: "96556511"
 ---
 # <a name="aspnet-core-no-locblazor-dependency-injection"></a>ASP.NET Core 相依性 Blazor 插入
 
@@ -41,7 +41,7 @@ DI 是存取中央位置中設定之服務的一種技術。 這在應用程式�
 
 預設服務會自動加入至應用程式的服務集合。
 
-| 服務 | 存留期 | 描述 |
+| Service | 存留期 | 描述 |
 | ------- | -------- | ----------- |
 | <xref:System.Net.Http.HttpClient> | 具範圍 | 提供方法來傳送 HTTP 要求，以及從 URI 所識別的資源接收 HTTP 回應。<br><br><xref:System.Net.Http.HttpClient>應用程式中的實例會 Blazor WebAssembly 使用瀏覽器來處理背景中的 HTTP 流量。<br><br>Blazor Server 依預設，應用程式不會包含 <xref:System.Net.Http.HttpClient> 已設定為服務的服務。 提供 <xref:System.Net.Http.HttpClient> 給 Blazor Server 應用程式。<br><br>如需詳細資訊，請參閱<xref:blazor/call-web-api>。<br><br><xref:System.Net.Http.HttpClient>註冊為範圍服務，而非 singleton。 如需詳細資訊，請參閱 [服務存留期](#service-lifetime) 一節。 |
 | <xref:Microsoft.JSInterop.IJSRuntime> | 單一 (Blazor WebAssembly) <br>限域 (Blazor Server)  | 代表 javascript 呼叫會分派至其中的 JavaScript 執行時間實例。 如需詳細資訊，請參閱<xref:blazor/call-javascript-from-dotnet>。 |
@@ -154,7 +154,7 @@ public void ConfigureServices(IServiceCollection services)
 
 | 存留期 | 描述 |
 | -------- | ----------- |
-| <xref:Microsoft.Extensions.DependencyInjection.ServiceDescriptor.Scoped%2A> | Blazor WebAssembly 應用程式目前不具有 DI 範圍的概念。 `Scoped`-註冊的服務行為類似 `Singleton` 服務。 不過， Blazor Server 裝載模型支援 `Scoped` 存留期。 在 Blazor Server 應用程式中，範圍服務註冊的範圍為 *連接* 。 基於這個理由，即使目前的意圖是要在應用程式的瀏覽器中執行用戶端，也最好使用範圍服務來作為應範圍為目前使用者的服務 Blazor WebAssembly 。 |
+| <xref:Microsoft.Extensions.DependencyInjection.ServiceDescriptor.Scoped%2A> | <p>Blazor WebAssembly 應用程式目前不具有 DI 範圍的概念。 `Scoped`-註冊的服務行為類似 `Singleton` 服務。</p><p>裝載 Blazor Server 模型支援 `Scoped` 跨 HTTP 要求的存留期，但在用戶端上載入的元件之間，不會跨 SingalR 連接/線路訊息。 Razor應用程式的頁面或 MVC 部分會以一般方式來處理已設定範圍的服務，並在頁面或視圖之間流覽，或從頁面或視圖切換至元件時，在 *每個 HTTP 要求* 上重新建立服務。 在用戶端上流覽元件時，不會重建已設定範圍的服務，而伺服器的通訊會透過使用者的線路連線來進行， SignalR 而不是透過 HTTP 要求。 在用戶端上的下列元件案例中，會重建範圍服務，因為系統會為使用者建立新的線路：</p><ul><li>使用者關閉瀏覽器視窗。 使用者會開啟新視窗，並流覽回應用程式。</li><li>使用者會在瀏覽器視窗中關閉應用程式的最後一個索引標籤。 使用者會開啟新的索引標籤，並流覽回應用程式。</li><li>使用者選取瀏覽器的 [重載/重新整理] 按鈕。</li></ul><p>如需在應用程式中跨範圍服務保留使用者狀態的詳細資訊 Blazor Server ，請參閱 <xref:blazor/hosting-models?pivots=server> 。</p> |
 | <xref:Microsoft.Extensions.DependencyInjection.ServiceDescriptor.Singleton%2A> | DI 會建立服務的 *單一實例* 。 所有需要服務的元件 `Singleton` 都會收到相同服務的實例。 |
 | <xref:Microsoft.Extensions.DependencyInjection.ServiceDescriptor.Transient%2A> | 每當元件 `Transient` 從服務容器取得服務的實例時，就會收到服務的 *新實例* 。 |
 
@@ -200,7 +200,7 @@ public class ComponentBase : IComponent
 
 ## <a name="use-di-in-services"></a>使用服務中的 DI
 
-複雜的服務可能需要其他服務。 在先前的範例中， `DataAccess` 可能需要 <xref:System.Net.Http.HttpClient> 預設服務。 [`@inject`](xref:mvc/views/razor#inject) (或 [`[Inject]`](xref:Microsoft.AspNetCore.Components.InjectAttribute) 屬性) 無法在服務中使用。 必須改為使用函式 *插入* 。 將參數加入至服務的函式，即可新增必要的服務。 當 DI 建立服務時，它會辨識其在函式中所需的服務，並據以提供它們。 在下列範例中，此函式會接收 <xref:System.Net.Http.HttpClient> VIA DI 的。 <xref:System.Net.Http.HttpClient> 是預設服務。
+複雜的服務可能需要其他服務。 在先前的範例中， `DataAccess` 可能需要 <xref:System.Net.Http.HttpClient> 預設服務。 [`@inject`](xref:mvc/views/razor#inject) (或 [`[Inject]`](xref:Microsoft.AspNetCore.Components.InjectAttribute) 屬性) 無法在服務中使用。 必須改為使用函式 *插入*。 將參數加入至服務的函式，即可新增必要的服務。 當 DI 建立服務時，它會辨識其在函式中所需的服務，並據以提供它們。 在下列範例中，此函式會接收 <xref:System.Net.Http.HttpClient> VIA DI 的。 <xref:System.Net.Http.HttpClient> 是預設服務。
 
 ```csharp
 public class DataAccess : IDataAccess

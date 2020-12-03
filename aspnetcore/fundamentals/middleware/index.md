@@ -19,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: fundamentals/middleware/index
-ms.openlocfilehash: aa51e53284bc25629b3975ff0e6de967b9a2b866
-ms.sourcegitcommit: 0bcc0d6df3145a0727da7c4be2f4bda8f27eeaa3
+ms.openlocfilehash: bdeccf81a3bb620c2e1fe15a798d5a83375842c8
+ms.sourcegitcommit: 92439194682dc788b8b5b3a08bd2184dc00e200b
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 12/02/2020
-ms.locfileid: "96513118"
+ms.lasthandoff: 12/03/2020
+ms.locfileid: "96556537"
 ---
 # <a name="aspnet-core-middleware"></a>ASP.NET Core 中介軟體
 
@@ -97,11 +97,11 @@ ASP.NET Core 要求管線由要求委派序列組成，並會一個接著一個�
 在上述程式碼中：
 
 * 以 [個別使用者帳戶](xref:security/authentication/identity) 建立新的 web 應用程式時，未新增的中介軟體會以批註方式出現。
-* 並非每個中介軟體都必須以這種確切的順序進行，但有很多。 例如︰
+* 並非每個中介軟體都必須以這種確切的順序進行，但有很多。 例如：
   * `UseCors`、 `UseAuthentication` 和 `UseAuthorization` 必須依照顯示的順序進行。
   * `UseCors` 目前必須在 `UseResponseCaching` [此 bug](https://github.com/dotnet/aspnetcore/issues/23218)之前執行。
 
-在某些案例中，中介軟體會有不同的順序。 例如，快取和壓縮順序是特定案例，而且有多個有效的排序。 例如︰
+在某些案例中，中介軟體會有不同的順序。 例如，快取和壓縮順序是特定案例，而且有多個有效的排序。 例如：
 
 ```csharp
 app.UseResponseCaching();
@@ -113,9 +113,9 @@ app.UseResponseCompression();
 下列順序會結合靜態檔案，以允許快取壓縮的靜態檔案：
 
 ```csharp
-app.UseResponseCaching
-app.UseResponseCompression
-app.UseStaticFiles
+app.UseResponseCaching();
+app.UseResponseCompression();
+app.UseStaticFiles();
 ```
 
 下列 `Startup.Configure` 方法會新增適用於一般應用程式案例的中介軟體元件：
@@ -193,6 +193,8 @@ public void Configure(IApplicationBuilder app)
     // Static files aren't compressed by Static File Middleware.
     app.UseStaticFiles();
 
+    app.UseRouting();
+
     app.UseResponseCompression();
 
     app.UseEndpoints(endpoints =>
@@ -260,7 +262,7 @@ app.Map("/level1", level1App => {
 
 <xref:Microsoft.AspNetCore.Builder.UseWhenExtensions.UseWhen%2A> 也會根據指定述詞的結果來分支要求管線。 與不同的 `MapWhen` 是，此分支會重新加入至主要管線（如果它不是短路或包含終端中介軟體）：
 
-[!code-csharp[](index/snapshot/Chain/StartupUseWhen.cs?highlight=25-26)]
+[!code-csharp[](index/snapshot/Chain/StartupUseWhen.cs?highlight=18-19)]
 
 在上述範例中，回應為「來自主要管線的 Hello」。 是針對所有要求所撰寫。 如果要求包含查詢字串變數，則 `branch` 會在重新加入主要管線之前記錄其值。
 
@@ -268,7 +270,7 @@ app.Map("/level1", level1App => {
 
 ASP.NET Core 隨附下列中介軟體元件。 「順序」欄說明 中介軟體在要求處理管線中的位置，以及中介軟體可終止要求處理的情況。 當中介軟體將要求處理管線短路並防止接下來的下游中介軟體處理要求時，這就是所謂的「終端中介軟體」。 如需詳細資訊，請參閱[使用 IApplicationBuilder 建立中介軟體管線](#create-a-middleware-pipeline-with-iapplicationbuilder)。
 
-| 中介軟體 | 說明 | 順序 |
+| 中介軟體 | 描述 | 順序 |
 | ---------- | ----------- | ----- |
 | [驗證](xref:security/authentication/identity) | 提供驗證支援。 | 在需要 `HttpContext.User` 之前。 OAuth 回呼的終端機。 |
 | [授權](xref:Microsoft.AspNetCore.Builder.AuthorizationAppBuilderExtensions.UseAuthorization%2A) | 提供授權支援。 | 緊接在驗證中介軟體之後。 |
@@ -476,7 +478,7 @@ app.Map("/level1", level1App => {
 
 ASP.NET Core 隨附下列中介軟體元件。 「順序」欄說明 中介軟體在要求處理管線中的位置，以及中介軟體可終止要求處理的情況。 當中介軟體將要求處理管線短路並防止接下來的下游中介軟體處理要求時，這就是所謂的「終端中介軟體」。 如需詳細資訊，請參閱[使用 IApplicationBuilder 建立中介軟體管線](#create-a-middleware-pipeline-with-iapplicationbuilder)。
 
-| 中介軟體 | 說明 | 順序 |
+| 中介軟體 | 描述 | 順序 |
 | ---------- | ----------- | ----- |
 | [驗證](xref:security/authentication/identity) | 提供驗證支援。 | 在需要 `HttpContext.User` 之前。 OAuth 回呼的終端機。 |
 | [Cookie 政策](xref:security/gdpr) | 追蹤使用者同意以儲存個人資訊，並強制執列欄位的最小標準 cookie ，例如 `secure` 和 `SameSite` 。 | 在發出的中介軟體之前 cookie 。 範例：驗證、工作階段、MVC (TempData)。 |

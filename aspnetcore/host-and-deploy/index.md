@@ -19,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: host-and-deploy/index
-ms.openlocfilehash: 19e888859cea35624491a516404c57e30aa9db05
-ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
+ms.openlocfilehash: 4f3d4c29a189cf6aa14eb10f570f0b35d8ff9abc
+ms.sourcegitcommit: 92439194682dc788b8b5b3a08bd2184dc00e200b
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 10/30/2020
-ms.locfileid: "93057215"
+ms.lasthandoff: 12/03/2020
+ms.locfileid: "96556615"
 ---
 # <a name="host-and-deploy-aspnet-core"></a>裝載及部署 ASP.NET Core
 
@@ -40,11 +40,22 @@ ms.locfileid: "93057215"
 
 [dotnet publish](/dotnet/core/tools/dotnet-publish) 命令會編譯應用程式程式碼，並將執行應用程式所需的檔案複製到 *publish* 資料夾。 從 Visual Studio 部署時，`dotnet publish` 步驟會在檔案複製到部署目的地之前自動執行。
 
+## <a name="publish-settings-files"></a>發佈設定檔案
+
+`*.json` 預設會發佈檔案。 若要發佈其他設定檔案，請在 [`<ItemGroup><Content Include= ... />`](/visualstudio/msbuild/common-msbuild-project-items#content) 專案檔的專案中指定它們。 下列範例會發佈 XML 檔案：
+
+```xml
+<ItemGroup>
+  <Content Include="**\*.xml" Exclude="bin\**\*;obj\**\*"
+    CopyToOutputDirectory="PreserveNewest" />
+</ItemGroup>
+```
+
 ### <a name="folder-contents"></a>資料夾內容
 
 *publish* 資料夾包含一或多個應用程式組件檔、相依性，也可能會有 .NET 執行階段。
 
-.NET Core 應用程式可以發行為「自主式部署」  或「相依於架構的部署」  。 如果應用程式是自主式，包含 .NET 執行階段的組件檔會包含在 *publish* 資料夾中。 如果應用程式是與 Framework 相依的應用程式，則不會包含 .NET 執行階段檔案，因為應用程式具有對伺服器上已安裝之 .NET 版本的參考。 預設部署模式是與 Framework 相依。 如需詳細資訊，請參閱 [.NET Core 應用程式部署](/dotnet/core/deploying/)。
+.NET Core 應用程式可以發行為「自主式部署」或「相依於架構的部署」。 如果應用程式是自主式，包含 .NET 執行階段的組件檔會包含在 *publish* 資料夾中。 如果應用程式是與 Framework 相依的應用程式，則不會包含 .NET 執行階段檔案，因為應用程式具有對伺服器上已安裝之 .NET 版本的參考。 預設部署模式是與 Framework 相依。 如需詳細資訊，請參閱 [.NET Core 應用程式部署](/dotnet/core/deploying/)。
 
 除了 *.exe* 和 *.dll* 檔案之外，ASP.NET Core 應用程式的 *publish* 資料夾通常還包含組態檔、靜態資產和 MVC 檢視。 如需詳細資訊，請參閱<xref:host-and-deploy/directory-structure>。
 
@@ -71,7 +82,7 @@ Proxy 伺服器和負載平衡器後方託管的應用程式可能需要其他�
 
 ## <a name="use-visual-studio-and-msbuild-to-automate-deployments"></a>使用 Visual Studio 和 MSBuild 來自動化部署
 
-除了從 [dotnet publish](/dotnet/core/tools/dotnet-publish) 將輸出複製到伺服器之外，部署通常還需要額外的工作。 例如， *publish* 資料夾可能需要或排除額外的檔案。 Visual Studio 將 [msbuild](/visualstudio/msbuild/msbuild) 用於 web 部署，而且可以自訂 msbuild，在部署期間執行許多其他工作。 如需詳細資訊，請參閱 <xref:host-and-deploy/visual-studio-publish-profiles>和[使用 MSBuild 和 Team Foundation Build](http://msbuildbook.com/) 書籍。
+除了從 [dotnet publish](/dotnet/core/tools/dotnet-publish) 將輸出複製到伺服器之外，部署通常還需要額外的工作。 例如，*publish* 資料夾可能需要或排除額外的檔案。 Visual Studio 將 [msbuild](/visualstudio/msbuild/msbuild) 用於 web 部署，而且可以自訂 msbuild，在部署期間執行許多其他工作。 如需詳細資訊，請參閱 <xref:host-and-deploy/visual-studio-publish-profiles>和[使用 MSBuild 和 Team Foundation Build](http://msbuildbook.com/) 書籍。
 
 使用[發行 Web 功能](xref:tutorials/publish-to-azure-webapp-using-vs)或使用[內建的 Git 支援](xref:host-and-deploy/azure-apps/azure-continuous-deployment)，應用程式可以直接從 Visual Studio 部署至 Azure App Service。 Azure DevOps Services 支援[持續部署至 Azure App Service](/azure/devops/pipelines/targets/webapp)。 如需詳細資訊，請參閱 [ASP.NET Core 與 Azure 的 DevOps](xref:azure/devops/index)。
 
@@ -122,7 +133,7 @@ Proxy 伺服器和負載平衡器後方託管的應用程式可能需要其他�
 
 *publish* 資料夾包含一或多個應用程式組件檔、相依性，也可能會有 .NET 執行階段。
 
-.NET Core 應用程式可以發行為「自主式部署」  或「相依於架構的部署」  。 如果應用程式是自主式，包含 .NET 執行階段的組件檔會包含在 *publish* 資料夾中。 如果應用程式是與 Framework 相依的應用程式，則不會包含 .NET 執行階段檔案，因為應用程式具有對伺服器上已安裝之 .NET 版本的參考。 預設部署模式是與 Framework 相依。 如需詳細資訊，請參閱 [.NET Core 應用程式部署](/dotnet/core/deploying/)。
+.NET Core 應用程式可以發行為「自主式部署」或「相依於架構的部署」。 如果應用程式是自主式，包含 .NET 執行階段的組件檔會包含在 *publish* 資料夾中。 如果應用程式是與 Framework 相依的應用程式，則不會包含 .NET 執行階段檔案，因為應用程式具有對伺服器上已安裝之 .NET 版本的參考。 預設部署模式是與 Framework 相依。 如需詳細資訊，請參閱 [.NET Core 應用程式部署](/dotnet/core/deploying/)。
 
 除了 *.exe* 和 *.dll* 檔案之外，ASP.NET Core 應用程式的 *publish* 資料夾通常還包含組態檔、靜態資產和 MVC 檢視。 如需詳細資訊，請參閱<xref:host-and-deploy/directory-structure>。
 
@@ -149,7 +160,7 @@ Proxy 伺服器和負載平衡器後方託管的應用程式可能需要其他�
 
 ## <a name="use-visual-studio-and-msbuild-to-automate-deployments"></a>使用 Visual Studio 和 MSBuild 來自動化部署
 
-除了從 [dotnet publish](/dotnet/core/tools/dotnet-publish) 將輸出複製到伺服器之外，部署通常還需要額外的工作。 例如， *publish* 資料夾可能需要或排除額外的檔案。 Visual Studio 會將 MSBuild 用於 Web 部署，而且您可以自訂 MSBuild 在部署期間執行許多其他工作。 如需詳細資訊，請參閱 <xref:host-and-deploy/visual-studio-publish-profiles>和[使用 MSBuild 和 Team Foundation Build](http://msbuildbook.com/) 書籍。
+除了從 [dotnet publish](/dotnet/core/tools/dotnet-publish) 將輸出複製到伺服器之外，部署通常還需要額外的工作。 例如，*publish* 資料夾可能需要或排除額外的檔案。 Visual Studio 會將 MSBuild 用於 Web 部署，而且您可以自訂 MSBuild 在部署期間執行許多其他工作。 如需詳細資訊，請參閱 <xref:host-and-deploy/visual-studio-publish-profiles>和[使用 MSBuild 和 Team Foundation Build](http://msbuildbook.com/) 書籍。
 
 使用[發行 Web 功能](xref:tutorials/publish-to-azure-webapp-using-vs)或使用[內建的 Git 支援](xref:host-and-deploy/azure-apps/azure-continuous-deployment)，應用程式可以直接從 Visual Studio 部署至 Azure App Service。 Azure DevOps Services 支援[持續部署至 Azure App Service](/azure/devops/pipelines/targets/webapp)。 如需詳細資訊，請參閱 [ASP.NET Core 與 Azure 的 DevOps](xref:azure/devops/index)。
 

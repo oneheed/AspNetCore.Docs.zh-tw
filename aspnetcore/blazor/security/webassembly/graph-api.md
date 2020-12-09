@@ -19,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/security/webassembly/graph-api
-ms.openlocfilehash: 6464b80d52837e7fe35efe5daac2193b77e21c84
-ms.sourcegitcommit: e087b6a38e3d38625ebb567a973e75b4d79547b9
+ms.openlocfilehash: 128ba34b1e2a9f8cc2986a8f1cb3fb8beba83b21
+ms.sourcegitcommit: a71bb61f7add06acb949c9258fe506914dfe0c08
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 11/15/2020
-ms.locfileid: "94637648"
+ms.lasthandoff: 12/08/2020
+ms.locfileid: "96855387"
 ---
 # <a name="use-graph-api-with-aspnet-core-no-locblazor-webassembly"></a>搭配使用圖形 API 與 ASP.NET Core Blazor WebAssembly
 
@@ -351,7 +351,6 @@ builder.Services.AddHttpClient("GraphAPI",
 @inject IAccessTokenProvider TokenProvider
 @inject IHttpClientFactory ClientFactory
 @inject ILogger<CallUser> Logger
-@inject ICallProcessor CallProcessor
 
 <h3>Call User</h3>
 
@@ -393,7 +392,7 @@ builder.Services.AddHttpClient("GraphAPI",
 
             if (userInfo != null)
             {
-                CallProcessor.Send(userInfo.MobilePhone, callInfo.Message);
+                // Use userInfo.MobilePhone and callInfo.Message to make a call
 
                 formStatus = "Form successfully processed.";
                 Logger.LogInformation(
@@ -422,9 +421,6 @@ builder.Services.AddHttpClient("GraphAPI",
     }
 }
 ```
-
-> [!NOTE]
-> 在上述範例中，開發人員會將自訂 `ICallProcessor` (`CallProcessor`) 排入佇列，然後放置自動化的呼叫。
 
 ### <a name="customize-user-claims-with-graph-api-and-a-named-client"></a>使用圖形 API 和命名用戶端自訂使用者宣告
 

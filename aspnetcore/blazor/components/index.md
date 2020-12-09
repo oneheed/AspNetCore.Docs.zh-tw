@@ -19,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/components/index
-ms.openlocfilehash: b87986442bb8127f03df1f7ecff8167cafa27fdf
-ms.sourcegitcommit: 3f0ad1e513296ede1bff39a05be6c278e879afed
+ms.openlocfilehash: a2738ab40e2a463a0166ce8916ed6f1b05ea1d08
+ms.sourcegitcommit: a71bb61f7add06acb949c9258fe506914dfe0c08
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 11/25/2020
-ms.locfileid: "96035680"
+ms.lasthandoff: 12/08/2020
+ms.locfileid: "96855374"
 ---
 # <a name="create-and-use-aspnet-core-no-locrazor-components"></a>建立和使用 ASP.NET Core Razor 元件
 
@@ -274,6 +274,13 @@ namespace BlazorSample
 
 [!code-razor[](../common/samples/5.x/BlazorWebAssemblySample/Components/ChildComponent.razor?highlight=2,11-12)]
 
+您可以將預設值指派給元件參數：
+
+```csharp
+[Parameter]
+public string Title { get; set; } = "Panel Title from Child";
+```
+
 在範例應用程式的下列範例中，會 `ParentComponent` 設定的 `Title` 屬性值 `ChildComponent` 。
 
 `Pages/ParentComponent.razor`:
@@ -461,7 +468,7 @@ public IDictionary<string, object> AdditionalAttributes { get; set; }
 }
 ```
 
-轉譯元件時，此 `loginDialog` 欄位會填入 `MyLoginDialog` 子元件實例。 然後，您可以在元件實例上叫用 .NET 方法。
+轉譯元件時，此 `loginDialog` 欄位會填入 `CustomLoginDialog` 子元件實例。 然後，您可以在元件實例上叫用 .NET 方法。
 
 > [!IMPORTANT]
 > `loginDialog`變數只會在呈現元件之後填入，且其輸出會包含 `MyLoginDialog` 元素。 在呈現元件之前，不需要參考任何專案。

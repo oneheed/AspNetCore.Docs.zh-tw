@@ -14,7 +14,7 @@
 
 ### <a name="add-a-database-connection-string"></a>新增資料庫連線字串
 
-將連接字串新增到*appsettings.json*檔:
+將連接字串新增至檔案 *上的appsettings.js* ：
 
 [!code-json[](~/tutorials/first-mvc-app/start-mvc/sample/MvcMovie3/appsettings_SQLite.json?highlight=10-12)]
 
@@ -53,7 +53,7 @@ using Microsoft.EntityFrameworkCore;
 
 ### <a name="add-a-database-connection-string"></a>新增資料庫連線字串
 
-將連接字串新增到*appsettings.json*檔:
+將連接字串新增至檔案 *上的appsettings.js* ：
 
 [!code-json[](~/tutorials/razor-pages/razor-pages-start/sample/RazorPagesMovie/appsettings_SQLite.json?highlight=8-10)]
 

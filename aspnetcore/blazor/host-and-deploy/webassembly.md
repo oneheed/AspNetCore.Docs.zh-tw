@@ -19,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/host-and-deploy/webassembly
-ms.openlocfilehash: 7ae462ff9abd06fe4ab4b3e00a71515b76b0ee7d
-ms.sourcegitcommit: bb475e69cb647f22cf6d2c6f93d0836c160080d7
+ms.openlocfilehash: 7edba338716a0545390ec53775f69eaef141d389
+ms.sourcegitcommit: a71bb61f7add06acb949c9258fe506914dfe0c08
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 11/06/2020
-ms.locfileid: "94339980"
+ms.lasthandoff: 12/08/2020
+ms.locfileid: "96855283"
 ---
 # <a name="host-and-deploy-aspnet-core-no-locblazor-webassembly"></a>裝載和部署 ASP.NET Core Blazor WebAssembly
 
@@ -133,7 +133,7 @@ dotnet publish -p:BlazorEnableCompression=false
 
 ## <a name="hosted-deployment-with-multiple-no-locblazor-webassembly-apps"></a>具有多個應用程式的託管部署 Blazor WebAssembly
 
-### <a name="app-configuration"></a>應用程式設定
+### <a name="app-configuration"></a>應用程式組態
 
 若要設定託管 Blazor 解決方案來提供多個 Blazor WebAssembly 應用程式服務：
 
@@ -547,7 +547,7 @@ Blazor發行專案時， `web.config` 會使用下列 IIS 設定來建立檔案�
 當 Blob 服務針對儲存體帳戶上的靜態網站裝載啟用時：
 
 * 將 [索引文件名稱] 設定為 `index.html`。
-* 將 [錯誤文件路徑] 設定為 `index.html`。 Razor 元件和其他非檔案端點不會位於 blob 服務所儲存之靜態內容中的實體路徑。 當收到路由器應處理之其中一個資源的要求時 Blazor ，blob 服務所產生的 *404-找不* 到錯誤會將要求路由傳送至 **錯誤檔路徑** 。 `index.html`會傳回 blob，而且路由器會 Blazor 載入並處理路徑。
+* 將 [錯誤文件路徑] 設定為 `index.html`。 Razor 元件和其他非檔案端點不會位於 blob 服務所儲存之靜態內容中的實體路徑。 當收到路由器應處理之其中一個資源的要求時 Blazor ，blob 服務所產生的 *404-找不* 到錯誤會將要求路由傳送至 **錯誤檔路徑**。 `index.html`會傳回 blob，而且路由器會 Blazor 載入並處理路徑。
 
 如果檔案的標頭中有不適當的 MIME 類型，則不會在執行時間載入檔案 `Content-Type` ，請採取下列其中一項動作：
 
@@ -556,7 +556,7 @@ Blazor發行專案時， `web.config` 會使用下列 IIS 設定來建立檔案�
 
   在儲存體總管 (Azure 入口網站每個檔案的) ：
   
-  1. 以滑鼠右鍵按一下檔案，然後選取 [ **屬性** ]。
+  1. 以滑鼠右鍵按一下檔案，然後選取 [ **屬性**]。
   1. 設定 **ContentType** ，然後選取 [ **儲存** ] 按鈕。
 
 如需詳細資訊，請參閱 [Azure 儲存體中的靜態網站裝載](/azure/storage/blobs/storage-blob-static-website)。
@@ -691,7 +691,7 @@ COPY nginx.conf /etc/nginx/nginx.conf
   "commandLineArgs": "--contentroot=/content-root-path"
   ```
 
-* 在 Visual Studio 中，于 [ **屬性** ]  >  **調試**  >  **程式引數** 中指定引數。 在 [Visual Studio] 屬性頁中設定引數，會將引數新增至檔案 `launchSettings.json` 。
+* 在 Visual Studio 中，于 [**屬性**]  >  **調試**  >  **程式引數** 中指定引數。 在 [Visual Studio] 屬性頁中設定引數，會將引數新增至檔案 `launchSettings.json` 。
 
   ```console
   --contentroot=/content-root-path
@@ -716,7 +716,7 @@ COPY nginx.conf /etc/nginx/nginx.conf
   "commandLineArgs": "--pathbase=/relative-URL-path"
   ```
 
-* 在 Visual Studio 中，于 [ **屬性** ]  >  **調試**  >  **程式引數** 中指定引數。 在 [Visual Studio] 屬性頁中設定引數，會將引數新增至檔案 `launchSettings.json` 。
+* 在 Visual Studio 中，于 [**屬性**]  >  **調試**  >  **程式引數** 中指定引數。 在 [Visual Studio] 屬性頁中設定引數，會將引數新增至檔案 `launchSettings.json` 。
 
   ```console
   --pathbase=/relative-URL-path
@@ -738,7 +738,7 @@ COPY nginx.conf /etc/nginx/nginx.conf
   "commandLineArgs": "--urls=http://127.0.0.1:0"
   ```
 
-* 在 Visual Studio 中，于 [ **屬性** ]  >  **調試**  >  **程式引數** 中指定引數。 在 [Visual Studio] 屬性頁中設定引數，會將引數新增至檔案 `launchSettings.json` 。
+* 在 Visual Studio 中，于 [**屬性**]  >  **調試**  >  **程式引數** 中指定引數。 在 [Visual Studio] 屬性頁中設定引數，會將引數新增至檔案 `launchSettings.json` 。
 
   ```console
   --urls=http://127.0.0.1:0
@@ -770,7 +770,7 @@ Blazor 在每個發行組建上執行中繼語言 (IL) 連結，以從輸出元�
 
 `loadBootResource` 參數會出現在下表中。
 
-| 參數    | 說明 |
+| 參數    | 描述 |
 | ------------ | ----------- |
 | `type`       | 資源類型。 運算子類型： `assembly` 、 `pdb` 、 `dotnetjs` 、 `dotnetwasm` 、 `timezonedata` |
 | `name`       | 資源名稱。 |
@@ -922,7 +922,7 @@ Failed to find a valid digest in the 'integrity' attribute for resource 'https:/
 
 這種失敗的常見原因如下：
 
- * Web 服務器的回應是錯誤 (例如， *找不到 404* 或 *500-Internal server 錯誤* ) ，而不是瀏覽器要求的檔案。 瀏覽器會將此報告為完整性檢查失敗，而不是回應失敗。
+ * Web 服務器的回應是錯誤 (例如， *找不到 404* 或 *500-Internal server 錯誤*) ，而不是瀏覽器要求的檔案。 瀏覽器會將此報告為完整性檢查失敗，而不是回應失敗。
  * 在檔案的組建和傳遞之間，檔案的內容已變更至瀏覽器。 這可能會發生：
    * 如果您或組建工具手動修改組建輸出。
    * 如果部署程式的某些層面修改了檔案。 例如，如果您使用以 Git 為基礎的部署機制，請記住，如果您在 Windows 上認可檔案並在 Linux 上查看檔案，則 Git 會以透明的方式將 Windows 樣式的行尾結束符號轉換為 Unix 樣式的行尾結束符號。 變更檔案行尾結束符號會變更 256 SHA-1 雜湊。 若要避免這個問題，請考慮 [使用 `.gitattributes` 將組建構件 `binary` 視為](https://git-scm.com/book/en/v2/Customizing-Git-Git-Attributes)檔案。
@@ -933,12 +933,34 @@ Failed to find a valid digest in the 'integrity' attribute for resource 'https:/
  1. 注意哪個檔案會藉由讀取錯誤訊息來觸發錯誤。
  1. 開啟瀏覽器的開發人員工具，並查看 [ *網路* ] 索引標籤。如有必要，請重載頁面以查看要求和回應的清單。 尋找在該清單中觸發錯誤的檔案。
  1. 檢查回應中的 HTTP 狀態碼。 如果伺服器傳回 *200-OK* (或另一個2xx 狀態碼) 以外的任何一個，則表示您有伺服器端的問題要進行診斷。 例如，狀態碼403表示有授權問題，而狀態碼500表示伺服器以未指定的方式失敗。 請參閱伺服器端記錄來診斷並修正應用程式。
- 1. 如果資源的狀態碼是 *200-確定* ，請查看瀏覽器開發人員工具中的回應內容，並檢查內容是否 matchs 預期的資料。 例如，常見的問題是 jeffv 路由，讓要求即使是其他檔案也會傳回您的 `index.html` 資料。 請確定要求的回應 `.wasm` 是 WebAssembly 二進位檔，而要求的回應 `.dll` 是 .net 元件二進位檔。 如果沒有，您就有伺服器端路由問題需要進行診斷。
+ 1. 如果資源的狀態碼是 *200-確定* ，請查看瀏覽器開發人員工具中的回應內容，並檢查內容是否符合預期的資料。 例如，常見的問題是 jeffv 路由，讓要求即使是其他檔案也會傳回您的 `index.html` 資料。 請確定要求的回應 `.wasm` 是 WebAssembly 二進位檔，而要求的回應 `.dll` 是 .net 元件二進位檔。 如果沒有，您就有伺服器端路由問題需要進行診斷。
+ 1. 搜尋以使用 [疑難排解完整性 PowerShell 腳本](#troubleshoot-integrity-powershell-script)來驗證應用程式的已發佈和已部署輸出。
 
 如果您確認伺服器傳回義正辭嚴正確的資料，就必須在檔案的組建和傳遞之間修改內容。 若要調查這一點：
 
  * 檢查組建工具鏈和部署機制，以防在建立檔案之後修改檔案。 例如，如先前所述，Git 會轉換檔案行尾結束符號。
  * 檢查 web 伺服器或 CDN 設定，以防它們設定為動態修改回應 (例如，嘗試縮短 HTML) 。 Web 服務器可正常執行 HTTP 壓縮 (例如，傳回 `content-encoding: br` 或 `content-encoding: gzip`) ，因為這不會影響解壓縮之後的結果。 不過，網頁伺服器 *不* 能修改未壓縮的資料。
+
+### <a name="troubleshoot-integrity-powershell-script"></a>針對完整性 PowerShell 腳本進行疑難排解
+
+使用 [`integrity.ps1`](https://github.com/dotnet/AspNetCore.Docs/blob/master/aspnetcore/blazor/host-and-deploy/webassembly/_samples/integrity.ps1?raw=true) PowerShell 腳本來驗證已發佈和已部署的 Blazor 應用程式。 當應用程式有架構無法識別的完整性問題時，就會提供此腳本作為起點 Blazor 。 您的應用程式可能需要自訂腳本。
+
+腳本會檢查資料夾中的檔案 `publish` ，並從已部署的應用程式下載，以偵測包含完整性雜湊之不同資訊清單中的問題。 這些檢查應該會偵測到最常見的問題：
+
+* 您已在已發行的輸出中修改檔案，但未加以察覺。
+* 應用程式未正確部署至部署目標，或部署目標環境內的某個變更。
+* 已部署的應用程式和發行應用程式的輸出之間有一些差異。
+
+在 PowerShell 命令 shell 中使用下列命令叫用腳本：
+
+```powershell
+.\integrity.ps1 {BASE URL} {PUBLISH OUTPUT FOLDER}
+```
+
+占 位 符：
+
+* `{BASE URL}`：已部署應用程式的 URL。
+* `{PUBLISH OUTPUT FOLDER}`：應用程式用來 `publish` 部署應用程式的資料夾或位置的路徑。
 
 ### <a name="disable-integrity-checking-for-non-pwa-apps"></a>停用非 PWA 應用程式的完整性檢查
 

@@ -18,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: tutorials/razor-pages/search
-ms.openlocfilehash: 3b95fe117895555ebcd44f971e7bb9d1173e1697
-ms.sourcegitcommit: db0a6eb0be7bd7f22810a71fe9bf30e957fd116a
+ms.openlocfilehash: 1e571966b78f93e29e7901dd9648fbe3aca52726
+ms.sourcegitcommit: a71bb61f7add06acb949c9258fe506914dfe0c08
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 12/01/2020
-ms.locfileid: "96419976"
+ms.lasthandoff: 12/08/2020
+ms.locfileid: "96855478"
 ---
 # <a name="part-6-add-search-to-aspnet-core-no-locrazor-pages"></a>第6部分：將搜尋新增至 ASP.NET Core Razor 頁面
 
@@ -70,7 +70,7 @@ var movies = from m in _context.Movie
              select m;
 ```
 
-這時候，系統只會「定義」查詢，而尚 **未** 對資料庫執行查詢。
+此查詢僅限 ***定義** _， _*_此時尚未針對_*_ 資料庫執行。
 
 如果 `SearchString` 屬性不是 Null 或空白，則會修改電影查詢來篩選搜尋字串：
 
@@ -95,7 +95,7 @@ var movies = from m in _context.Movie
 
 ![：：：非 loc (索引) ：：： view 加上自動加到 Url 的字組和傳回的電影清單（Ghostbusters 和 Ghostbusters 2）](search/_static/g2.png)
 
-ASP.NET Core 執行階段使用[模型繫結](xref:mvc/models/model-binding)來設定查詢字串 (`?searchString=Ghost`) 中的 `SearchString` 屬性值或路由傳送資料 (`https://localhost:5001/Movies/Ghost`)。 模型系 *_結不是_* 區分大小寫。
+ASP.NET Core 執行階段使用[模型繫結](xref:mvc/models/model-binding)來設定查詢字串 (`?searchString=Ghost`) 中的 `SearchString` 屬性值或路由傳送資料 (`https://localhost:5001/Movies/Ghost`)。 模型系結 _*_不_*_ 區分大小寫。
 
 但是，使用者無法修改 URL 來搜尋電影。 在此步驟中，會新增用來篩選電影的 UI。 如果您已新增路由條件約束 `"{searchString?}"`，請將它移除。
 

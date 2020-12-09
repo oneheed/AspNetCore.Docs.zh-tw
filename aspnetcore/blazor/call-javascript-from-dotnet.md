@@ -19,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/call-javascript-from-dotnet
-ms.openlocfilehash: c73de0e30b7b564915f30d75f754f89fecccdc78
-ms.sourcegitcommit: 3f0ad1e513296ede1bff39a05be6c278e879afed
+ms.openlocfilehash: a98537f53229d098328f5b14bf1d5060001ebd80
+ms.sourcegitcommit: a71bb61f7add06acb949c9258fe506914dfe0c08
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 11/25/2020
-ms.locfileid: "96035719"
+ms.lasthandoff: 12/08/2020
+ms.locfileid: "96855233"
 ---
 # <a name="call-javascript-functions-from-net-methods-in-aspnet-core-no-locblazor"></a>從 ASP.NET Core 中的 .NET 方法呼叫 JavaScript 函式 Blazor
 
@@ -501,10 +501,7 @@ JS interop 可能因為網路錯誤而失敗，應該視為不可靠。 根據�
 * .NET 方法呼叫。
 * 當傳回型別有迴圈參考時，來自 c # 的 JavaScript 方法呼叫。
 
-如需詳細資訊，請參閱下列問題：
-
-* [不支援迴圈參考，請採用兩個 (dotnet/aspnetcore #20525) ](https://github.com/dotnet/aspnetcore/issues/20525)
-* [提案：在將 (dotnet/執行時間 #30820 序列化時，新增處理迴圈參考的機制) ](https://github.com/dotnet/runtime/issues/30820)
+如需詳細資訊，請參閱 [不支援的迴圈參考， (的 dotnet/aspnetcore #20525) ](https://github.com/dotnet/aspnetcore/issues/20525)。
 
 ::: moniker range=">= aspnetcore-5.0"
 

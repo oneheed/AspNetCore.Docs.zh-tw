@@ -18,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: data/ef-rp/intro
-ms.openlocfilehash: 9dcb1c4a19e50a57f1a1918cfcf775b49fa89b11
-ms.sourcegitcommit: 43a540e703b9096921de27abc6b66bc0783fe905
+ms.openlocfilehash: 0e81397d210518854939c6941e7f6da43ed48389
+ms.sourcegitcommit: a71bb61f7add06acb949c9258fe506914dfe0c08
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 11/30/2020
-ms.locfileid: "96320144"
+ms.lasthandoff: 12/08/2020
+ms.locfileid: "96855504"
 ---
 # <a name="no-locrazor-pages-with-entity-framework-core-in-aspnet-core---tutorial-1-of-8"></a>Razor ASP.NET Core 中有 Entity Framework Core 的頁面-教學課程 1/8
 
@@ -35,7 +35,7 @@ ms.locfileid: "96320144"
 
 [下載或檢視已完成的應用程式。](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/data/ef-rp/intro/samples) [下載指示](xref:index#how-to-download-a-sample)。
 
-## <a name="prerequisites"></a>必要條件
+## <a name="prerequisites"></a>先決條件
 
 * 如果您還不熟悉 Razor 頁面，請先流覽「開始 [使用 Razor 頁面](xref:tutorials/razor-pages/razor-pages-start) 」教學課程系列，再開始此課程。
 
@@ -122,7 +122,7 @@ To run the app after downloading the completed project:
 1. 啟動 Visual Studio，然後選取 [建立新專案]。
 1. 在 [ **建立新專案** ] 對話方塊中，選取 [ **ASP.NET Core Web 應用程式** > **]**。
 1. 在 [ **設定您的新專案** ] 對話方塊中，輸入 [ `ContosoUniversity` **專案名稱**]。 請務必使用此完整名稱（包括大小寫），以便 `namespace` 在複製程式碼時使用每個相符專案。
-1. 選取 [建立]  。
+1. 選取 [建立]。
 1. 在 [ **建立新的 ASP.NET Core web 應用程式** ] 對話方塊中，選取：
     1. 下拉式清單中的 **.Net Core** 和 **ASP.NET Core 5.0** 。
     1. **ASP.NET Core Web 應用程式**。
@@ -479,7 +479,7 @@ Drop-Database -Confirm
 
 非同步程式碼會在執行階段導致少量的額外負荷。 在低流量情況下，對效能的衝擊非常微小；在高流量情況下，潛在的效能改善則相當大。
 
-在下列程式碼中，[async](/dotnet/csharp/language-reference/keywords/async) 關鍵字、`Task<T>` 傳回值、`await` 關鍵字和 `ToListAsync` 方法會使程式碼以非同步方式執行。
+在下列程式碼中，[async](/dotnet/csharp/language-reference/keywords/async) 關鍵字、`Task` 傳回值、`await` 關鍵字和 `ToListAsync` 方法會使程式碼以非同步方式執行。
 
 ```csharp
 public async Task OnGetAsync()
@@ -491,7 +491,7 @@ public async Task OnGetAsync()
 * `async` 關鍵字會指示編譯器：
   * 為方法主體的組件產生回呼。
   * 建立傳回的 [Task](/dotnet/csharp/programming-guide/concepts/async/async-return-types#BKMK_TaskReturnType) 物件。
-* `Task<T>` 傳回型別代表正在進行的工作。
+* `Task` 傳回型別代表正在進行的工作。
 * `await` 關鍵字會使編譯器將方法分割為兩部分。 第一個部分會與非同步啟動的作業一同結束。 第二個部分則會放入作業完成時呼叫的回呼方法中。
 * `ToListAsync` 是 `ToList` 擴充方法的非同步版本。
 
@@ -531,7 +531,7 @@ public async Task OnGetAsync()
 
 [下載或檢視已完成的應用程式。](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/data/ef-rp/intro/samples) [下載指示](xref:index#how-to-download-a-sample)。
 
-## <a name="prerequisites"></a>必要條件
+## <a name="prerequisites"></a>先決條件
 
 * 如果您還不熟悉 Razor 頁面，請先流覽「開始 [使用 Razor 頁面](xref:tutorials/razor-pages/razor-pages-start) 」教學課程系列，再開始此課程。
 

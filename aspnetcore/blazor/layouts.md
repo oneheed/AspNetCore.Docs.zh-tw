@@ -19,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/layouts
-ms.openlocfilehash: 9462b73ad67394e79de08e7d2b13bf6a3145a04e
-ms.sourcegitcommit: 1be547564381873fe9e84812df8d2088514c622a
+ms.openlocfilehash: c6f9815f473380f96092d663cdd785fd19109701
+ms.sourcegitcommit: a71bb61f7add06acb949c9258fe506914dfe0c08
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 11/11/2020
-ms.locfileid: "94507963"
+ms.lasthandoff: 12/08/2020
+ms.locfileid: "96855296"
 ---
 # <a name="aspnet-core-no-locblazor-layouts"></a>ASP.NET Core Blazor 版面配置
 
@@ -34,10 +34,10 @@ ms.locfileid: "94507963"
 
 技術上來說，版面配置只是另一個元件。 版面配置是在 Razor 範本或 c # 程式碼中定義，而且可以使用 [資料](xref:blazor/components/data-binding)系結、相依性 [插入](xref:blazor/fundamentals/dependency-injection)和其他元件案例。
 
-若要將 *元件* 變成配置 *，元件* ：
+若要將元件轉換成版面配置：
 
-* 繼承自 <xref:Microsoft.AspNetCore.Components.LayoutComponentBase> ，定義配置 <xref:Microsoft.AspNetCore.Components.LayoutComponentBase.Body> 內轉譯內容的屬性。
-* 使用 Razor 語法 `@Body` 來指定配置標記中呈現內容的位置。
+* 從繼承元件 <xref:Microsoft.AspNetCore.Components.LayoutComponentBase> 。 會 <xref:Microsoft.AspNetCore.Components.LayoutComponentBase> 定義配置 <xref:Microsoft.AspNetCore.Components.LayoutComponentBase.Body> 內所呈現內容的屬性。
+* 使用 Razor 語法 `@Body` 來指定版面配置標記中轉譯內容的位置。
 
 下列程式碼範例會顯示 Razor 版面配置元件的範本 `MainLayout.razor` 。 版面配置會繼承 <xref:Microsoft.AspNetCore.Components.LayoutComponentBase> 並設定 `@Body` 導覽列和頁尾之間的：
 

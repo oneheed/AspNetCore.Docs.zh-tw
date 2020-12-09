@@ -19,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/progressive-web-app
-ms.openlocfilehash: c8ff2fc0f2f4d4e75f535f379ec94ea9de2e3ecb
-ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
+ms.openlocfilehash: f400319ef81b3d7768bdbdab84f46d3f9c50bb46
+ms.sourcegitcommit: a71bb61f7add06acb949c9258fe506914dfe0c08
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 10/30/2020
-ms.locfileid: "93055694"
+ms.lasthandoff: 12/08/2020
+ms.locfileid: "96855439"
 ---
 # <a name="build-progressive-web-applications-with-aspnet-core-no-locblazor-webassembly"></a>使用 ASP.NET Core 建立漸進式 Web 應用程式 Blazor WebAssembly
 
@@ -47,7 +47,7 @@ ms.locfileid: "93055694"
 
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
-在 [ **建立新專案** ] 對話方塊中建立新的 **Blazor WebAssembly 應用** 程式時，選取 [ **漸進式 Web 應用程式** ] 核取方塊：
+在 [**建立新專案**] 對話方塊中建立新的 **Blazor WebAssembly 應用** 程式時，選取 [**漸進式 Web 應用程式**] 核取方塊：
 
 ![在 Visual Studio [新增專案] 對話方塊中，已選取 [漸進式 Web 應用程式] 核取方塊。](progressive-web-app/_static/image1.png)
 
@@ -75,7 +75,7 @@ dotnet new blazorwasm -o MyNewProject --pwa
 
 ![Google Chrome 中的確認對話方塊會向使用者顯示 [My：：： no- (Blazor) ：：:P wa] 應用程式的 [安裝] 按鈕。](progressive-web-app/_static/image2.png)
 
-在 iOS 上，訪客可以使用 Safari 的 [ **共用** ] 按鈕和 [ **新增至 Homescreen** ] 選項來安裝 PWA。 在適用于 Android 的 Chrome 上，使用者應選取右上角的 **功能表** 按鈕，然後選取 [ **新增至主畫面** ]。
+在 iOS 上，訪客可以使用 Safari 的 [ **共用** ] 按鈕和 [ **新增至 Homescreen** ] 選項來安裝 PWA。 在適用于 Android 的 Chrome 上，使用者應選取右上角的 **功能表** 按鈕，然後選取 [ **新增至主畫面**]。
 
 一旦安裝之後，應用程式就會出現在其本身的視窗中，而不使用網址列：
 
@@ -97,7 +97,7 @@ dotnet new blazorwasm -o MyNewProject --pwa
 
 1. 發行應用程式。 如需詳細資訊，請參閱<xref:blazor/host-and-deploy/index#publish-the-app>。
 1. 將應用程式部署至支援 HTTPS 的伺服器，並在瀏覽器中以其安全的 HTTPS 位址存取應用程式。
-1. 開啟瀏覽器的開發工具，並確認已在 [ **應用程式** ] 索引標籤上註冊主機的 *服務工作者* ：
+1. 開啟瀏覽器的開發工具，並確認已在 [**應用程式**] 索引標籤上註冊主機的 *服務工作者*：
 
    ![Google Chrome 開發人員工具的 [應用程式] 索引標籤會顯示已啟動且正在執行的服務工作者。](progressive-web-app/_static/image4.png)
 
@@ -145,7 +145,7 @@ Blazor的 PWA 範本會產生兩個服務工作者檔案：
 
 BlazorPWA 範本會產生應用程式，每當使用者造訪並具有運作中的網路連線時，就會自動嘗試在背景中自行更新。 其運作方式如下所示：
 
-* 在編譯期間，專案會產生 *服務工作者資產資訊清單* 。 根據預設，會呼叫此方法 `service-worker-assets.js` 。 資訊清單會列出應用程式離線運作所需的所有靜態資源，例如 .NET 元件、JavaScript 檔案和 CSS，包括其內容雜湊。 資源清單是由服務工作者載入，因此它知道要快取哪些資源。
+* 在編譯期間，專案會產生 *服務工作者資產資訊清單*。 根據預設，會呼叫此方法 `service-worker-assets.js` 。 資訊清單會列出應用程式離線運作所需的所有靜態資源，例如 .NET 元件、JavaScript 檔案和 CSS，包括其內容雜湊。 資源清單是由服務工作者載入，因此它知道要快取哪些資源。
 * 每次使用者造訪應用程式時，瀏覽器會 `service-worker.js` `service-worker-assets.js` 在背景中重新要求和。 這些檔案會與現有已安裝的服務工作者進行位元組的位元組比較。 如果伺服器傳回任何這些檔案的變更內容，服務工作者會嘗試安裝新版的。
 * 當您安裝新的版本時，服務背景工作會為離線資源建立新的個別快取，並開始使用中所列的資源來填入快取 `service-worker-assets.js` 。 此邏輯會在內部的函式中執行 `onInstall` `service-worker.published.js` 。
 * 當所有資源都已載入且沒有錯誤，且所有內容雜湊相符時，此程式就會順利完成。 如果成功，新的服務工作者會進入 *等待啟用* 狀態。 一旦使用者關閉應用程式 (沒有剩餘的應用程式索引標籤或 windows) ，新的服務工作者就會變成使用中 *狀態* ，並用於後續的應用程式造訪。 舊的服務工作者及其快取會被刪除。
@@ -301,4 +301,5 @@ PWA 範本可以與驗證搭配使用。 當使用者具有初始網路連線能
 
 ## <a name="additional-resources"></a>其他資源
 
+* [針對完整性 PowerShell 腳本進行疑難排解](xref:blazor/host-and-deploy/webassembly#troubleshoot-integrity-powershell-script)
 * [SignalR 驗證的跨原始來源協商](xref:blazor/fundamentals/additional-scenarios#signalr-cross-origin-negotiation-for-authentication)

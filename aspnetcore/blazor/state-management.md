@@ -20,12 +20,12 @@ no-loc:
 - SignalR
 uid: blazor/state-management
 zone_pivot_groups: blazor-hosting-models
-ms.openlocfilehash: 7e79836e3dd1da175a62a84e11dfd30fee7b2f1b
-ms.sourcegitcommit: 1ea3f23bec63e96ffc3a927992f30a5fc0de3ff9
+ms.openlocfilehash: 24f845bc1d98331f2ee54710d17beb6ffa95ad88
+ms.sourcegitcommit: a71bb61f7add06acb949c9258fe506914dfe0c08
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 11/12/2020
-ms.locfileid: "94570142"
+ms.lasthandoff: 12/08/2020
+ms.locfileid: "96855413"
 ---
 # <a name="aspnet-core-no-locblazor-state-management"></a>ASP.NET Core Blazor 狀態管理
 
@@ -44,6 +44,9 @@ ms.locfileid: "94570142"
 
 當使用者關閉並重新開啟其瀏覽器或重載網頁時，瀏覽器記憶體中保留的使用者狀態將會遺失。
 
+> [!NOTE]
+> [受保護的瀏覽器儲存體](xref:blazor/state-management?pivots=server#aspnet-core-protected-browser-storage) (<xref:Microsoft.AspNetCore.Components.Server.ProtectedBrowserStorage?displayProperty=fullName> 命名空間) 依賴 ASP.NET Core 資料保護，且僅支援 Blazor Server 應用程式。
+
 ## <a name="persist-state-across-browser-sessions"></a>跨瀏覽器會話保存狀態
 
 一般而言，在使用者主動建立資料的瀏覽器會話中維護狀態，而不只是讀取已經存在的資料。
@@ -55,7 +58,7 @@ ms.locfileid: "94570142"
 * 多重步驟的 web 表單：當使用者的狀態遺失時，使用者重新輸入多步驟 web 表單的幾個已完成步驟的資料相當耗時。 如果使用者離開表單並在稍後返回，則會在此案例中失去狀態。
 * 購物車：應用程式中任何代表潛在收益的商業重要元件都可以維護。 如果使用者遺失其狀態，而使用者的購物車可能會在稍後返回網站時購買較少的產品或服務。
 
-應用程式只能保存 *應用程式狀態* 。 Ui 無法保存，例如元件實例和其轉譯樹狀結構。 元件和轉譯樹狀結構通常不是可序列化的。 若要保存 UI 狀態，例如樹狀檢視控制項的展開節點，應用程式必須使用自訂程式碼，將 UI 狀態的行為模型化為可序列化的應用程式狀態。
+應用程式只能保存 *應用程式狀態*。 Ui 無法保存，例如元件實例和其轉譯樹狀結構。 元件和轉譯樹狀結構通常不是可序列化的。 若要保存 UI 狀態，例如樹狀檢視控制項的展開節點，應用程式必須使用自訂程式碼，將 UI 狀態的行為模型化為可序列化的應用程式狀態。
 
 ## <a name="where-to-persist-state"></a>保存狀態的位置
 
@@ -73,7 +76,7 @@ ms.locfileid: "94570142"
 * Blob 儲存體
 * 機碼值儲存體
 * 關聯式資料庫
-* 資料表儲存體
+* 表格儲存體
 
 儲存資料之後，會保留使用者的狀態，並可在任何新的瀏覽器會話中使用。
 
@@ -164,7 +167,7 @@ Blazor Server 是具狀態的應用程式架構。 大部分的情況下，應�
 * 多重步驟的 web 表單：當使用者的狀態遺失時，使用者重新輸入多步驟 web 表單的幾個已完成步驟的資料相當耗時。 如果使用者離開表單並在稍後返回，則會在此案例中失去狀態。
 * 購物車：應用程式中任何代表潛在收益的商業重要元件都可以維護。 如果使用者遺失其狀態，而使用者的購物車可能會在稍後返回網站時購買較少的產品或服務。
 
-應用程式只能保存 *應用程式狀態* 。 Ui 無法保存，例如元件實例和其轉譯樹狀結構。 元件和轉譯樹狀結構通常不是可序列化的。 若要保存 UI 狀態，例如樹狀檢視控制項的展開節點，應用程式必須使用自訂程式碼，將 UI 狀態的行為模型化為可序列化的應用程式狀態。
+應用程式只能保存 *應用程式狀態*。 Ui 無法保存，例如元件實例和其轉譯樹狀結構。 元件和轉譯樹狀結構通常不是可序列化的。 若要保存 UI 狀態，例如樹狀檢視控制項的展開節點，應用程式必須使用自訂程式碼，將 UI 狀態的行為模型化為可序列化的應用程式狀態。
 
 ## <a name="where-to-persist-state"></a>保存狀態的位置
 
@@ -182,7 +185,7 @@ Blazor Server 是具狀態的應用程式架構。 大部分的情況下，應�
 * Blob 儲存體
 * 機碼值儲存體
 * 關聯式資料庫
-* 資料表儲存體
+* 表格儲存體
 
 儲存資料之後，會保留使用者的狀態，並可在任何新的線路中使用。
 
@@ -226,7 +229,7 @@ Blazor Server 是具狀態的應用程式架構。 大部分的情況下，應�
 * 儲存幾 kb 的資料可合理保存 Blazor Server 應用程式。 除了幾 kb 以外，您還必須考慮效能影響，因為資料是在網路上載入和儲存。
 * 使用者可能會看到或篡改資料。 [ASP.NET Core 資料保護](xref:security/data-protection/introduction) 可減輕風險。 例如， [ASP.NET Core 受保護的瀏覽器儲存體](#aspnet-core-protected-browser-storage) 使用 ASP.NET Core 資料保護。
 
-協力廠商 NuGet 套件提供使用和的 Api `localStorage` `sessionStorage` 。 值得考慮選擇明確使用 [ASP.NET Core 資料保護](xref:security/data-protection/introduction)的封裝。 資料保護會加密儲存的資料，並減少篡改儲存資料的潛在風險。 如果以純文字儲存 JSON 序列化資料，使用者就可以使用瀏覽器開發人員工具來查看資料，也可以修改儲存的資料。 保護資料並不一定會造成問題，因為資料在本質上可能很簡單。 例如，讀取或修改 UI 元素的預存色彩，對於使用者或組織而言並不是重大的安全性風險。 避免讓使用者檢查或篡改 *機密資料* 。
+協力廠商 NuGet 套件提供使用和的 Api `localStorage` `sessionStorage` 。 值得考慮選擇明確使用 [ASP.NET Core 資料保護](xref:security/data-protection/introduction)的封裝。 資料保護會加密儲存的資料，並減少篡改儲存資料的潛在風險。 如果以純文字儲存 JSON 序列化資料，使用者就可以使用瀏覽器開發人員工具來查看資料，也可以修改儲存的資料。 保護資料並不一定會造成問題，因為資料在本質上可能很簡單。 例如，讀取或修改 UI 元素的預存色彩，對於使用者或組織而言並不是重大的安全性風險。 避免讓使用者檢查或篡改 *機密資料*。
 
 ::: moniker range=">= aspnetcore-5.0"
 

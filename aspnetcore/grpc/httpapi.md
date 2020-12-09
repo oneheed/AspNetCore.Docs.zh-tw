@@ -18,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: grpc/httpapi
-ms.openlocfilehash: 64d18114e2fe9ee10edb902a98a281c3cd9f3393
-ms.sourcegitcommit: aa85f2911792a1e4783bcabf0da3b3e7e218f63a
+ms.openlocfilehash: cb2855f0293a6bc800bb5758cd1a8400d4434a24
+ms.sourcegitcommit: a71bb61f7add06acb949c9258fe506914dfe0c08
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 11/23/2020
-ms.locfileid: "95417574"
+ms.lasthandoff: 12/08/2020
+ms.locfileid: "96855454"
 ---
 # <a name="create-json-web-apis-from-grpc"></a>從 gRPC 建立 JSON Web API
 
@@ -53,7 +53,7 @@ _ HTTP 動詞命令
 
 gRPC 仍然可以用來呼叫服務。
 
-### <a name="usage"></a>使用方式
+### <a name="usage"></a>使用量
 
 1. 將套件參考新增至 [AspNetCore. Grpc. HTTPapi.dll](https://www.nuget.org/packages/Microsoft.AspNetCore.Grpc.HttpApi)。
 1. 在 *Startup.cs* 中註冊服務 `AddGrpcHttpApi` 。
@@ -105,6 +105,21 @@ info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
 ```
 
 這是基本的範例。 如需更多自訂選項，請參閱 [HttpRule](https://cloud.google.com/service-infrastructure/docs/service-management/reference/rpc/google.api#google.api.HttpRule) 。
+
+### <a name="enable-swaggeropenapi-support"></a>啟用 Swagger/OpenAPI 支援
+
+Swagger (OpenAPI) 是描述 REST Api 的語言無關規格。 gRPC HTTP API 可以與 [Swashbuckle](https://github.com/domaindrivendev/Swashbuckle.AspNetCore) 整合，以產生 RESTful gRPC 服務的 Swagger 端點。 Swagger 端點接著可以與 [SWAGGER UI](https://swagger.io/swagger-ui/) 和其他工具搭配使用。
+
+若要使用 gRPC HTTP API 啟用 Swagger：
+
+1. 將套件參考新增至 [AspNetCore. Grpc](https://www.nuget.org/packages/Microsoft.AspNetCore.Grpc.Swagger)。
+2. 在 *Startup.cs* 中設定 Swashbuckle。 方法會將 `AddGrpcSwagger` Swashbuckle 設定為包含 GRPC HTTP API 端點。
+
+[!code-csharp[](~/grpc/httpapi/Startup.cs?name=snippet_1&highlight=6-10,15-19)]
+
+若要確認 Swashbuckle 正在產生 RESTful gRPC 服務的 Swagger，請啟動應用程式並流覽至 Swagger UI 頁面：
+
+![Swagger UI](~/grpc/httpapi/static/swaggerui.png)
 
 ### <a name="grpc-http-api-vs-grpc-web"></a>gRPC HTTP API vs gRPC-Web
 

@@ -19,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/fundamentals/routing
-ms.openlocfilehash: a83637bb2690407dac5994bb63c765fcfa97462f
-ms.sourcegitcommit: 8363e44f630fcc6433ccd2a85f7aa9567cd274ed
+ms.openlocfilehash: 3bfd623a206f260d24e2c9009acdb3b205b7ab2d
+ms.sourcegitcommit: a71bb61f7add06acb949c9258fe506914dfe0c08
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 11/20/2020
-ms.locfileid: "94981891"
+ms.lasthandoff: 12/08/2020
+ms.locfileid: "96855400"
 ---
 # <a name="aspnet-core-no-locblazor-routing"></a>ASP.NET Core Blazor 路由
 
@@ -57,7 +57,7 @@ Blazor Server 已整合至 [ASP.NET Core 端點路由](xref:fundamentals/routing
 </Router>
 ```
 
-當編譯具有指示詞的檔案時 `.razor` `@page` ，系統會提供所產生的類別來 <xref:Microsoft.AspNetCore.Components.RouteAttribute> 指定路由範本。
+當編譯具有指示詞的檔案時 `.razor` `@page` ，系統會提供所產生的類別來 <xref:Microsoft.AspNetCore.Components.RouteAttribute> 指定路由範本。 當應用程式啟動時，會掃描指定為的元件， `AppAssembly` 以收集具有的所有元件的相關資訊 <xref:Microsoft.AspNetCore.Components.RouteAttribute> 。
 
 在執行時間， <xref:Microsoft.AspNetCore.Components.RouteView> 元件：
 

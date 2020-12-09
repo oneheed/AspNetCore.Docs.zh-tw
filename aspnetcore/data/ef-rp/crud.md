@@ -17,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: data/ef-rp/crud
-ms.openlocfilehash: c5b9be64ea30cce7a3178bfbb244ef893e9639d2
-ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
+ms.openlocfilehash: 4a48fb094888d51aa6f881c82e4f20ffbc84c8e2
+ms.sourcegitcommit: 6af9016d1ffc2dffbb2454c7da29c880034cefcd
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 10/30/2020
-ms.locfileid: "93053861"
+ms.lasthandoff: 12/08/2020
+ms.locfileid: "96901167"
 ---
 # <a name="part-2-no-locrazor-pages-with-ef-core-in-aspnet-core---crud"></a>第2部分： Razor ASP.NET Core 中有 EF Core 的頁面-CRUD
 
@@ -52,7 +52,7 @@ Students 頁面的 Scaffold 程式碼不包含註冊資料。 在本節中，您
 
 [!code-csharp[Main](intro/samples/cu30/Pages/Students/Details.cshtml.cs?name=snippet_OnGetAsync&highlight=8-12)]
 
-[Include](/dotnet/api/microsoft.entityframeworkcore.entityframeworkqueryableextensions.include) 及 [ThenInclude](/dotnet/api/microsoft.entityframeworkcore.entityframeworkqueryableextensions.theninclude#Microsoft_EntityFrameworkCore_EntityFrameworkQueryableExtensions_ThenInclude__3_Microsoft_EntityFrameworkCore_Query_IIncludableQueryable___0_System_Collections_Generic_IEnumerable___1___System_Linq_Expressions_Expression_System_Func___1___2___) 方法會使內容載入 `Student.Enrollments` 導覽屬性，以及位於每一個註冊中的 `Enrollment.Course` 導覽屬性。 您可在[讀取相關資料](xref:data/ef-rp/read-related-data)教學課程中詳細檢視這些方法。
+[Include](/dotnet/api/microsoft.entityframeworkcore.entityframeworkqueryableextensions.include) 及 [ThenInclude](/dotnet/api/microsoft.entityframeworkcore.entityframeworkqueryableextensions.theninclude#Microsoft_EntityFrameworkCore_EntityFrameworkQueryableExtensions_ThenInclude__3_Microsoft_EntityFrameworkCore_Query_IIncludableQueryable___0_System_Collections_Generic_IEnumerable___1___System_Linq_Expressions_Expression_System_Func___1___2___) 方法會使內容載入 `Student.Enrollments` 導覽屬性，以及位於每一個註冊中的 `Enrollment.Course` 導覽屬性。 這些方法會在「 [讀取相關資料](xref:data/ef-rp/read-related-data) 」教學課程中詳細檢查。
 
 [AsNoTracking](/dotnet/api/microsoft.entityframeworkcore.entityframeworkqueryableextensions.asnotracking#Microsoft_EntityFrameworkCore_EntityFrameworkQueryableExtensions_AsNoTracking__1_System_Linq_IQueryable___0__) 方法在傳回實體未在目前內容中更新的情況下可改善效能。 `AsNoTracking` 稍後在本教學課程中將會討論。
 
@@ -64,7 +64,7 @@ Students 頁面的 Scaffold 程式碼不包含註冊資料。 在本節中，您
 
 上述程式碼會以迴圈逐一巡覽 `Enrollments` 導覽屬性中的實體。 針對每個註冊，會顯示課程標題及成績。 課程標題會從儲存於 Enrollments 實體之 `Course` 導覽屬性中的課程 (Course) 實體擷取。
 
-執行應用程式，選取 [Students]  索引標籤，然後按一下學生的 [詳細資料]  連結。 將會顯示所選取學生的課程及成績清單。
+執行應用程式，選取 [Students] 索引標籤，然後按一下學生的 [詳細資料] 連結。 將會顯示所選取學生的課程及成績清單。
 
 ### <a name="ways-to-read-one-entity"></a>讀取單一實體的方式
 
@@ -184,7 +184,7 @@ Students 頁面的 Scaffold 程式碼不包含註冊資料。 在本節中，您
 * 攔截到資料庫例外狀況。
 * [刪除] 頁面的 `OnGetAsync` 方法會以 `saveChangesError=true` 呼叫。
 
-將錯誤訊息加入至 *Pages/student/Delete。 cshtml* ：
+將錯誤訊息加入至 *Pages/student/Delete。 cshtml*：
 
 [!code-cshtml[Main](intro/samples/cu30/Pages/Students/Delete.cshtml?highlight=10)]
 
@@ -232,7 +232,7 @@ Students 頁面的 Scaffold 程式碼不包含註冊資料。 在本節中，會
 
 上述程式碼會以迴圈逐一巡覽 `Enrollments` 導覽屬性中的實體。 針對每個註冊，會顯示課程標題及成績。 課程標題會從儲存於 Enrollments 實體之 `Course` 導覽屬性中的課程 (Course) 實體擷取。
 
-執行應用程式，選取 [Students]  索引標籤，然後按一下學生的 [詳細資料]  連結。 將會顯示所選取學生的課程及成績清單。
+執行應用程式，選取 [Students] 索引標籤，然後按一下學生的 [詳細資料] 連結。 將會顯示所選取學生的課程及成績清單。
 
 ### <a name="ways-to-read-one-entity"></a>讀取單一實體的方式
 
@@ -345,9 +345,9 @@ Students 頁面的 Scaffold 程式碼不包含註冊資料。 在本節中，會
 `OnPostAsync` 方法會擷取選取的實體，然後呼叫 [Remove](/dotnet/api/microsoft.entityframeworkcore.dbcontext.remove#Microsoft_EntityFrameworkCore_DbContext_Remove_System_Object_) 方法來將實體的狀態設定為 `Deleted`。 當呼叫 `SaveChanges` 時，便會產生 SQL DELETE 命令。 如果 `Remove` 失敗：
 
 * 攔截到資料庫例外狀況。
-* [刪除] 頁面的 `OnGetAsync` 方法會以 `saveChangesError=true` 呼叫。
+* 刪除頁面的 `OnGetAsync` 方法是使用來呼叫 `saveChangesError=true` 。
 
-將錯誤訊息加入至 [刪除] Razor 頁面， ( *Pages/Student/Delete. cshtml* ) ：
+將錯誤訊息加入至 [刪除] Razor 頁面， (*Pages/Student/Delete. cshtml*) ：
 
 [!code-cshtml[Main](intro/samples/cu30/Pages/Students/Delete.cshtml?highlight=10)]
 
@@ -405,11 +405,11 @@ Scaffold 程式碼會為 [建立]、[編輯]、[刪除] 頁面使用下列模式
 
 ## <a name="customize-the-details-page"></a>自訂 [詳細資料] 頁面
 
-瀏覽至 `Pages/Students` 頁面。 在 *Pages/Students/Index.cshtml* 檔案中， **編輯** 、 **詳細資料** 、 **刪除** 連結是由 [錨點標籤協助程式](xref:mvc/views/tag-helpers/builtin-th/anchor-tag-helper)所產生。
+瀏覽至 `Pages/Students` 頁面。 在 *Pages/Students/Index.cshtml* 檔案中，**編輯**、**詳細資料**、**刪除** 連結是由 [錨點標籤協助程式](xref:mvc/views/tag-helpers/builtin-th/anchor-tag-helper)所產生。
 
 [!code-cshtml[](intro/samples/cu21/Pages/Students/Index1.cshtml?name=snippet)]
 
-執行應用程式並選取 [詳細資料]  連結。 URL 的格式為 `http://localhost:5000/Students/Details?id=2`。 使用 (`?id=2`) 查詢字串來傳遞 Student ID。
+執行應用程式並選取 [詳細資料] 連結。 URL 的格式為 `http://localhost:5000/Students/Details?id=2`。 使用 (`?id=2`) 查詢字串來傳遞 Student ID。
 
 更新 [編輯]、[詳細資料] 和 [刪除] Razor 頁面，以使用 `"{id:int}"` 路由範本。 將這些頁面每一頁的頁面指示詞從 `@page` 變更為 `@page "{id:int}"`。
 
@@ -439,7 +439,7 @@ Students [索引] 頁面的 Scaffold 程式碼不包含 `Enrollments` 屬性。 
 
 ### <a name="display-related-enrollments-on-the-details-page"></a>在 [詳細資料] 頁面上顯示相關的註冊
 
-開啟 *Pages/Students/Details.cshtml* 。 請新增下列醒目顯示的程式碼，以顯示一份註冊清單：
+開啟 *Pages/Students/Details.cshtml*。 請新增下列醒目顯示的程式碼，以顯示一份註冊清單：
 
 [!code-cshtml[](intro/samples/cu21/Pages/Students/Details.cshtml?highlight=32-53)]
 
@@ -447,7 +447,7 @@ Students [索引] 頁面的 Scaffold 程式碼不包含 `Enrollments` 屬性。 
 
 上述程式碼會以迴圈逐一巡覽 `Enrollments` 導覽屬性中的實體。 針對每個註冊，會顯示課程標題及成績。 課程標題會從儲存於 Enrollments 實體之 `Course` 導覽屬性中的課程 (Course) 實體擷取。
 
-執行應用程式，選取 [Students]  索引標籤，然後按一下學生的 [詳細資料]  連結。 將會顯示所選取學生的課程及成績清單。
+執行應用程式，選取 [Students] 索引標籤，然後按一下學生的 [詳細資料] 連結。 將會顯示所選取學生的課程及成績清單。
 
 ## <a name="update-the-create-page"></a>更新 [建立] 頁面
 

@@ -18,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: performance/caching/memory
-ms.openlocfilehash: 4d5f459d54a3c74a2eb23a50db6537eeaf8596b3
-ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
+ms.openlocfilehash: 9b19c782d1d42ddaba590f05bab31899402f681a
+ms.sourcegitcommit: 6af9016d1ffc2dffbb2454c7da29c880034cefcd
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 10/30/2020
-ms.locfileid: "93061440"
+ms.lasthandoff: 12/08/2020
+ms.locfileid: "96901219"
 ---
 # <a name="cache-in-memory-in-aspnet-core"></a>ASP.NET Core 中的快取記憶體
 
@@ -70,7 +70,7 @@ Web 伺服陣列中的非粘滯話需要 [分散式](distributed.md) 快取，�
 > 使用 `SetSize` 、或來限制快取時，請建立快取 `Size` `SizeLimit` singleton 以進行快取。 如需詳細資訊和範例，請參閱 [使用 SetSize、大小和 SizeLimit 來限制](#use-setsize-size-and-sizelimit-to-limit-cache-size)快取大小。
 > 共用快取是由其他架構或程式庫共用。 例如，EF Core 會使用共用快取，且不會指定大小。 
 
-記憶體內部快取是從使用相依性 [插入](xref:fundamentals/dependency-injection)的應用程式所參考的 *服務* 。 在函式 `IMemoryCache` 中要求實例：
+記憶體內部快取是從使用相依性 [插入](xref:fundamentals/dependency-injection)的應用程式所參考的 *服務*。 在函式 `IMemoryCache` 中要求實例：
 
 [!code-csharp[](memory/3.0sample/WebCacheSample/Controllers/HomeController.cs?name=snippet_ctor)]
 
@@ -83,6 +83,9 @@ Web 伺服陣列中的非粘滯話需要 [分散式](distributed.md) 快取，�
 此時會顯示目前的時間和快取的時間：
 
 [!code-cshtml[](memory/3.0sample/WebCacheSample/Views/Home/Cache.cshtml)]
+
+下列程式碼會使用 [Set](/dotnet/api/microsoft.extensions.caching.memory.cacheextensions.set#Microsoft_Extensions_Caching_Memory_CacheExtensions_Set__1_Microsoft_Extensions_Caching_Memory_IMemoryCache_System_Object___0_System_TimeSpan_) 擴充方法來快取相對時間的資料，而不需要建立 `MemoryCacheEntryOptions` 物件。
+[!code-csharp[](memory/3.0sample/WebCacheSample/Controllers/HomeController.cs?name=snippet_set)]
 
 快取的 `DateTime` 值會保留在快取中，而在此時間內有要求。
 
@@ -250,7 +253,7 @@ Web 伺服陣列中的非粘滯話需要 [分散式](distributed.md) 快取，�
 > 使用來自相依性 [插入](xref:fundamentals/dependency-injection)的 *共用* 記憶體快取，以及呼叫 `SetSize` 、 `Size` 或 `SizeLimit` 來限制快取大小，可能會導致應用程式失敗。 在快取上設定大小限制時，所有專案都必須在新增時指定大小。 這可能會導致問題，因為開發人員可能無法完全掌控使用共用快取的內容。 例如，Entity Framework Core 會使用共用快取，且不會指定大小。 如果應用程式設定快取大小限制並使用 EF Core，應用程式會擲回 `InvalidOperationException` 。
 > 使用 `SetSize` 、或來限制快取時，請建立快取 `Size` `SizeLimit` singleton 以進行快取。 如需詳細資訊和範例，請參閱 [使用 SetSize、大小和 SizeLimit 來限制](#use-setsize-size-and-sizelimit-to-limit-cache-size)快取大小。
 
-記憶體內部快取是使用相依性 [插入](../../fundamentals/dependency-injection.md)從您的應用程式參考的 *服務* 。 呼叫 `AddMemoryCache` 于 `ConfigureServices` ：
+記憶體內部快取是使用相依性 [插入](../../fundamentals/dependency-injection.md)從您的應用程式參考的 *服務*。 呼叫 `AddMemoryCache` 于 `ConfigureServices` ：
 
 [!code-csharp[](memory/sample/WebCache/Startup.cs?highlight=9)]
 

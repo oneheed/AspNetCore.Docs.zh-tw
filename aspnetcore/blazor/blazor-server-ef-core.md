@@ -19,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/blazor-server-ef-core
-ms.openlocfilehash: 6a74b8c5668a37082f648ae74210d90684c4559c
-ms.sourcegitcommit: 43a540e703b9096921de27abc6b66bc0783fe905
+ms.openlocfilehash: 10fc0afe84065f2c226d1e9c2f4314142369613a
+ms.sourcegitcommit: c321518bfe367280ef262aecaada287f17fe1bc5
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 11/30/2020
-ms.locfileid: "96320105"
+ms.lasthandoff: 12/10/2020
+ms.locfileid: "97011880"
 ---
 # <a name="aspnet-core-no-locblazor-server-with-entity-framework-core-efcore"></a>ASP.NET Core Blazor Server 與 Entity Framework Core (EFCore) 
 
@@ -111,7 +111,7 @@ Factory 會插入元件，並用來建立新的實例。 例如，在 `Pages/Ind
 > [!NOTE]
 > `Wrapper` 是元件的 [元件參考](xref:blazor/components/index#capture-references-to-components) `GridWrapper` 。 請參閱 `Index` `Pages/Index.razor` [範例應用程式](https://github.com/dotnet/AspNetCore.Docs/blob/master/aspnetcore/blazor/common/samples/5.x/BlazorServerEFCoreSample/BlazorServerDbContextExample/Pages/Index.razor)中的 () 元件。
 
-您 <xref:Microsoft.EntityFrameworkCore.DbContext> 可以使用處理站建立新的實例，以讓您設定每個連接字串 `DbContext` ，例如當您使用 [ASP.NET Core 的 Identity 模型] 時 ) # B1 x：安全性/驗證/customize_identity_model) ：
+<xref:Microsoft.EntityFrameworkCore.DbContext>您可以使用 factory 來建立新的實例，讓您設定每個的連接字串 `DbContext` ，例如當您使用[ASP.NET Core 的 Identity 模型](xref:security/authentication/customize_identity_model)時：
 
 ```csharp
 services.AddDbContextFactory<ApplicationDbContext>(options =>

@@ -19,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/host-and-deploy/webassembly
-ms.openlocfilehash: 7edba338716a0545390ec53775f69eaef141d389
-ms.sourcegitcommit: a71bb61f7add06acb949c9258fe506914dfe0c08
+ms.openlocfilehash: 5983cbc1e0256f7cf8e85fb07f9ba1bbc1bf08db
+ms.sourcegitcommit: c321518bfe367280ef262aecaada287f17fe1bc5
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 12/08/2020
-ms.locfileid: "96855283"
+ms.lasthandoff: 12/10/2020
+ms.locfileid: "97011867"
 ---
 # <a name="host-and-deploy-aspnet-core-no-locblazor-webassembly"></a>裝載和部署 ASP.NET Core Blazor WebAssembly
 
@@ -910,9 +910,7 @@ Remove-Item $filepath\bin\Release\$tfm\wwwroot\_framework\blazor.boot.json.gz
 
 如果您的 web 伺服器傳回的回應不符合預期的 256 SHA-1 雜湊，您將會在瀏覽器的開發人員主控台中看到類似下面的錯誤：
 
-```
-Failed to find a valid digest in the 'integrity' attribute for resource 'https://myapp.example.com/_framework/MyBlazorApp.dll' with computed SHA-256 integrity 'IIa70iwvmEg5WiDV17OpQ5eCztNYqL186J56852RpJY='. The resource has been blocked.
-```
+> 在 https://myapp.example.com/\_framework/My Blazor 計算 SHA-256 完整性 ' IIa70iwvmEg5WiDV17OpQ5eCztNYqL186J56852RpJY = ' 的資源 'App.dll ' 的 ' 完整性 ' 屬性中找不到有效的摘要。 資源已被封鎖。
 
 在大部分的情況下，這 *不* 是完整性檢查本身的問題。 相反地，這表示有其他問題，而完整性檢查則會警告您有關該其他問題。
 
@@ -961,6 +959,13 @@ Failed to find a valid digest in the 'integrity' attribute for resource 'https:/
 
 * `{BASE URL}`：已部署應用程式的 URL。
 * `{PUBLISH OUTPUT FOLDER}`：應用程式用來 `publish` 部署應用程式的資料夾或位置的路徑。
+
+> [!NOTE]
+> 若要將 `dotnet/AspNetCore.Docs` GitHub 存放庫複製到使用 [Bitdefender](https://www.bitdefender.com) 病毒掃描程式的系統，請將例外狀況新增至 `integrity.ps1` 腳本的 Bitdefender。 在複製存放庫之前，將例外狀況新增至 Bitdefender，以避免病毒掃描程式隔離腳本。 下列範例是 Windows 系統上複製之存放庫的腳本一般路徑。 視需要調整路徑。 預留位置 `{USER}` 是使用者的路徑區段。
+>
+> ```
+> C:\Users\{USER}\Documents\GitHub\AspNetCore.Docs\aspnetcore\blazor\host-and-deploy\webassembly\_samples\integrity.ps1
+> ```
 
 ### <a name="disable-integrity-checking-for-non-pwa-apps"></a>停用非 PWA 應用程式的完整性檢查
 

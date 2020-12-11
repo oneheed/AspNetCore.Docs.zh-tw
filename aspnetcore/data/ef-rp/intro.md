@@ -18,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: data/ef-rp/intro
-ms.openlocfilehash: 0e81397d210518854939c6941e7f6da43ed48389
-ms.sourcegitcommit: 6af9016d1ffc2dffbb2454c7da29c880034cefcd
+ms.openlocfilehash: 86b57a9cad27673b72ad174a18741f5528f9f78a
+ms.sourcegitcommit: c321518bfe367280ef262aecaada287f17fe1bc5
 ms.translationtype: MT
 ms.contentlocale: zh-TW
 ms.lasthandoff: 12/10/2020
-ms.locfileid: "96855504"
+ms.locfileid: "97011854"
 ---
 # <a name="no-locrazor-pages-with-entity-framework-core-in-aspnet-core---tutorial-1-of-8"></a>Razor ASP.NET Core 中有 Entity Framework Core 的頁面-教學課程 1/8
 
@@ -237,7 +237,8 @@ To run the app after downloading the completed project:
   * 在 [模型類別] 下拉式清單中，選取 [學生 (ContosoUniversity.Models)]。
   * 在 [資料內容類別] 資料列中，選取 **+** (加號)。
     * 將資料內容名稱變更為 end， `SchoolContext` 而不是 `ContosoUniversityContext` 。 更新的內容名稱： `ContosoUniversity.Data.SchoolContext`
-   * 選取 [新增]。
+    * 選取 [ **加入** ] 以完成新增資料內容類別。
+   * 選取 [ **新增** ] 以完成 [ **新增 Razor 頁面** ] 對話方塊。
 
 會自動安裝下列套件：
 

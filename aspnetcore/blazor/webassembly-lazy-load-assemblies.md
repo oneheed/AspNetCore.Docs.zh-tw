@@ -19,18 +19,18 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/webassembly-lazy-load-assemblies
-ms.openlocfilehash: 6a1feffb5341d432d6d1949a9e26b9537b85ba03
-ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
+ms.openlocfilehash: 6e7fa6e231e97793fbf7e1ac1d208bf3013c6fce
+ms.sourcegitcommit: 6b87f2e064cea02e65dacd206394b44f5c604282
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 10/30/2020
-ms.locfileid: "93054784"
+ms.lasthandoff: 12/15/2020
+ms.locfileid: "97506564"
 ---
 # <a name="lazy-load-assemblies-in-aspnet-core-no-locblazor-webassembly"></a>ASP.NET Core 中的延遲載入元件 Blazor WebAssembly
 
 依 [Safia Abdalla](https://safia.rocks) 和 [Luke Latham](https://github.com/guardrex)
 
-Blazor WebAssembly 應用程式啟動效能可透過延後載入部分應用程式元件來改善，直到需要它們為止，這稱為「消極式 *載入* 」。 例如，只有在使用者流覽至該元件時，才可以設定僅用來呈現單一元件的元件。 載入之後，元件會快取用戶端，並可供所有未來的導覽使用。
+Blazor WebAssembly 應用程式啟動效能可透過延後載入部分應用程式元件來改善，直到需要它們為止，這稱為「消極式 *載入*」。 例如，只有在使用者流覽至該元件時，才可以設定僅用來呈現單一元件的元件。 載入之後，元件會快取用戶端，並可供所有未來的導覽使用。
 
 Blazor的消極式載入功能可讓您將應用程式元件標記為消極式載入，這會在使用者流覽至特定路由時，于執行時間載入元件。 此功能包含對專案檔的變更，以及對應用程式路由器的變更。
 
@@ -75,6 +75,8 @@ Blazor的 `Router` 元件會指定哪些元件會 Blazor 搜尋可路由傳送�
 }
 ```
 
+[!INCLUDE[](~/blazor/includes/prefer-exact-matches.md)]
+
 如果 `OnNavigateAsync` 回呼擲回未處理的例外狀況，則會叫用[ Blazor 錯誤 UI](xref:blazor/fundamentals/handle-errors#detailed-errors-during-development) 。
 
 ### <a name="assembly-load-logic-in-onnavigateasync"></a>中的元件載入邏輯 `OnNavigateAsync`
@@ -84,7 +86,7 @@ Blazor的 `Router` 元件會指定哪些元件會 Blazor 搜尋可路由傳送�
 * `Path`屬性是相對於應用程式基底路徑的使用者目的地路徑，例如 `/robot` 。
 * `CancellationToken`可以用來觀察非同步工作的取消。 `OnNavigateAsync` 當使用者流覽至另一個頁面時，會自動取消目前正在執行的流覽工作。
 
-在內部 `OnNavigateAsync` ，會執行邏輯來判斷要載入的元件。 這些選項包括：
+在內部 `OnNavigateAsync` ，會執行邏輯來判斷要載入的元件。 選項包括：
 
 * 方法內的條件式檢查 `OnNavigateAsync` 。
 * 對應至元件名稱之路由的查閱資料表，可插入元件或在區塊內執行 [`@code`](xref:mvc/views/razor#code) 。
@@ -133,6 +135,8 @@ services.AddScoped<LazyAssemblyLoader>();
 ...
 ```
 
+[!INCLUDE[](~/blazor/includes/prefer-exact-matches.md)]
+
 ### <a name="handle-cancellations-in-onnavigateasync"></a>處理取消 `OnNavigateAsync`
 
 `NavigationContext`傳遞至回呼的物件 `OnNavigateAsync` 包含新的 `CancellationToken` 流覽事件發生時所設定的。 `OnNavigateAsync`回呼必須在設定此解除標記時擲回，以避免 `OnNavigateAsync` 在過期的導覽上繼續執行回呼。
@@ -169,6 +173,8 @@ services.AddScoped<LazyAssemblyLoader>();
     }
 }
 ```
+
+[!INCLUDE[](~/blazor/includes/prefer-exact-matches.md)]
 
 > [!NOTE]
 > 如果取消中的解除標記 `NavigationContext` 可能會導致非預期的行為，例如從先前的導覽呈現元件，則不會擲回。
@@ -230,6 +236,8 @@ services.AddScoped<LazyAssemblyLoader>();
     }
 }
 ```
+
+[!INCLUDE[](~/blazor/includes/prefer-exact-matches.md)]
 
 ## <a name="troubleshoot"></a>疑難排解
 

@@ -19,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/layouts
-ms.openlocfilehash: c6f9815f473380f96092d663cdd785fd19109701
-ms.sourcegitcommit: a71bb61f7add06acb949c9258fe506914dfe0c08
+ms.openlocfilehash: 3cb7c6184c13a003b4f4294f887d8938caa42f97
+ms.sourcegitcommit: 6b87f2e064cea02e65dacd206394b44f5c604282
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 12/08/2020
-ms.locfileid: "96855296"
+ms.lasthandoff: 12/15/2020
+ms.locfileid: "97506899"
 ---
 # <a name="aspnet-core-no-locblazor-layouts"></a>ASP.NET Core Blazor 版面配置
 
@@ -65,9 +65,13 @@ ms.locfileid: "96855296"
 
 [!code-razor[](layouts/sample_snapshot/3.x/App1.razor?highlight=3)]
 
+[!INCLUDE[](~/blazor/includes/prefer-exact-matches.md)]
+
 若要為內容提供預設版面配置 <xref:Microsoft.AspNetCore.Components.Routing.Router.NotFound> ，請 <xref:Microsoft.AspNetCore.Components.LayoutView> 指定 <xref:Microsoft.AspNetCore.Components.Routing.Router.NotFound> 內容的：
 
 [!code-razor[](layouts/sample_snapshot/3.x/App2.razor?highlight=6-9)]
+
+[!INCLUDE[](~/blazor/includes/prefer-exact-matches.md)]
 
 如需元件的詳細資訊 <xref:Microsoft.AspNetCore.Components.Routing.Router> ，請參閱 <xref:blazor/fundamentals/routing> 。
 
@@ -100,7 +104,7 @@ ms.locfileid: "96855296"
 在中指定配置會 `_Imports.razor` 覆寫指定為路由器 *預設版面* 配置的版面配置。
 
 > [!WARNING]
-> 請勿 **not** 將指示詞新增 Razor `@layout` 至根檔案 `_Imports.razor` ，這會導致應用程式中的版面配置無限迴圈。 若要控制預設的應用程式版面配置，請在元件中指定版面配置 `Router` 。 如需詳細資訊，請參閱 [預設版面](#default-layout) 配置區段。
+> 請勿將指示詞新增 Razor `@layout` 至根檔案 `_Imports.razor` ，這會導致應用程式中的版面配置無限迴圈。 若要控制預設的應用程式版面配置，請在元件中指定版面配置 `Router` 。 如需詳細資訊，請參閱 [預設版面](#default-layout) 配置區段。
 
 ## <a name="nested-layouts"></a>嵌套版面配置
 

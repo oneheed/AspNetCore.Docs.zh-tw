@@ -5,7 +5,7 @@ description: 瞭解中的環境 Blazor ，包括如何設定 Blazor WebAssembly 
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 06/10/2020
+ms.date: 12/11/2020
 no-loc:
 - appsettings.json
 - ASP.NET Core Identity
@@ -19,25 +19,25 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/fundamentals/environments
-ms.openlocfilehash: 61d46e0bd83d8bd82bf7faaf9d8f2fecbacc2ffa
-ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
+ms.openlocfilehash: 9ba23753df1726ee4c8a9802e1a1260ef7cf6fa5
+ms.sourcegitcommit: 6b87f2e064cea02e65dacd206394b44f5c604282
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 10/30/2020
-ms.locfileid: "93056032"
+ms.lasthandoff: 12/15/2020
+ms.locfileid: "97506951"
 ---
 # <a name="aspnet-core-no-locblazor-environments"></a>ASP.NET Core Blazor 環境
 
 > [!NOTE]
-> 本主題適用于 Blazor WebAssembly 。 如需 ASP.NET Core 應用程式設定的一般指引，請參閱 <xref:fundamentals/environments> 。
+> 本主題適用于 Blazor WebAssembly 。 如需有關 ASP.NET Core 應用程式設定的一般指引，以說明應用程式的使用方法 Blazor Server ，請參閱 <xref:fundamentals/environments> 。
 
 在本機執行應用程式時，環境會預設為開發環境。 當應用程式發佈時，環境會預設為生產環境。
 
-裝載的 Blazor WebAssembly 應用程式會透過可透過新增標頭將環境傳達給瀏覽器的中介軟體，從伺服器挑選環境 `blazor-environment` 。 標頭的值是環境。 託管 Blazor 應用程式和伺服器應用程式會共用相同的環境。 如需詳細資訊，包括如何設定環境的詳細資訊，請參閱 <xref:fundamentals/environments> 。
+裝載解決方案的用戶端 Blazor 應用程式 (*`Client`*) 會透過將 Blazor WebAssembly *`Server`* 環境傳達給瀏覽器的中介軟體，從解決方案的應用程式決定環境。 *`Server`* 應用程式會新增名為的標頭， `blazor-environment` 並以環境作為標頭的值。 *`Client`* 應用程式會讀取標頭。 解決方案的 *`Server`* 應用程式是 ASP.NET Core 的應用程式，因此您可以在中找到有關如何設定環境的詳細資訊 <xref:fundamentals/environments> 。
 
-針對在本機執行的獨立應用程式，程式開發伺服器會新增 `blazor-environment` 標頭以指定開發環境。 若要指定其他裝載環境的環境，請新增 `blazor-environment` 標頭。
+針對在本機執行的獨立 Blazor WebAssembly 應用程式，程式開發伺服器會新增 `blazor-environment` 標頭以指定開發環境。 若要指定其他裝載環境的環境，請新增 `blazor-environment` 標頭。
 
-在 IIS 的下列範例中，將自訂標頭加入至已發佈的檔案 `web.config` 。 檔案 `web.config` 位於 `bin/Release/{TARGET FRAMEWORK}/publish` 下列資料夾：
+在 IIS 的下列範例中，會將自訂標頭 (`blazor-environment`) 新增至已發佈的檔案 `web.config` 。 檔案 `web.config` 位於 `bin/Release/{TARGET FRAMEWORK}/publish` 資料夾中，其中預留位置 `{TARGET FRAMEWORK}` 是目標 framework：
 
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>
@@ -58,19 +58,15 @@ ms.locfileid: "93056032"
 > [!NOTE]
 > 若要使用 `web.config` 應用程式發佈至資料夾時不會覆寫之 IIS 的自訂檔案 `publish` ，請參閱 <xref:blazor/host-and-deploy/webassembly#use-a-custom-webconfig> 。
 
-藉由插入和讀取屬性，取得應用程式在元件中的環境 <xref:Microsoft.AspNetCore.Components.WebAssembly.Hosting.IWebAssemblyHostEnvironment> <xref:Microsoft.AspNetCore.Components.WebAssembly.Hosting.IWebAssemblyHostEnvironment.Environment> ：
+藉由插入和讀取屬性，在元件中取得應用程式的環境 <xref:Microsoft.AspNetCore.Components.WebAssembly.Hosting.IWebAssemblyHostEnvironment> <xref:Microsoft.AspNetCore.Components.WebAssembly.Hosting.IWebAssemblyHostEnvironment.Environment> 。
 
-```razor
-@page "/"
-@using Microsoft.AspNetCore.Components.WebAssembly.Hosting
-@inject IWebAssemblyHostEnvironment HostEnvironment
+`Pages/ReadEnvironment.razor`:
 
-<h1>Environment example</h1>
+[!code-razor[](environments/samples_snapshot/ReadEnvironment.razor?highlight=3,7)]
 
-<p>Environment: @HostEnvironment.Environment</p>
-```
+在啟動期間，會 <xref:Microsoft.AspNetCore.Components.WebAssembly.Hosting.WebAssemblyHostBuilder> <xref:Microsoft.AspNetCore.Components.WebAssembly.Hosting.IWebAssemblyHostEnvironment> 透過屬性公開，以在主機產生器程式 <xref:Microsoft.AspNetCore.Components.WebAssembly.Hosting.WebAssemblyHostBuilder.HostEnvironment> 代碼中啟用環境特定的邏輯。
 
-在啟動期間， <xref:Microsoft.AspNetCore.Components.WebAssembly.Hosting.WebAssemblyHostBuilder> <xref:Microsoft.AspNetCore.Components.WebAssembly.Hosting.IWebAssemblyHostEnvironment> 會透過屬性公開， <xref:Microsoft.AspNetCore.Components.WebAssembly.Hosting.WebAssemblyHostBuilder.HostEnvironment> 讓開發人員可以在其程式碼中擁有環境特定的邏輯：
+`Program.Main` `Program.cs` ：
 
 ```csharp
 if (builder.HostEnvironment.Environment == "Custom")
@@ -79,12 +75,14 @@ if (builder.HostEnvironment.Environment == "Custom")
 };
 ```
 
-下列便利的擴充方法可讓您檢查目前的環境中的開發、生產、預備和自訂環境名稱：
+提供的下列便利擴充方法可 <xref:Microsoft.AspNetCore.Components.WebAssembly.Hosting.WebAssemblyHostEnvironmentExtensions> 讓您檢查目前的環境，以進行開發、生產、預備和自訂環境名稱：
 
-* `IsDevelopment()`
-* `IsProduction()`
-* `IsStaging()`
-* `IsEnvironment("{ENVIRONMENT NAME}")`
+* <xref:Microsoft.AspNetCore.Components.WebAssembly.Hosting.WebAssemblyHostEnvironmentExtensions.IsDevelopment%2A>
+* <xref:Microsoft.AspNetCore.Components.WebAssembly.Hosting.WebAssemblyHostEnvironmentExtensions.IsProduction%2A>
+* <xref:Microsoft.AspNetCore.Components.WebAssembly.Hosting.WebAssemblyHostEnvironmentExtensions.IsStaging%2A>
+* <xref:Microsoft.AspNetCore.Components.WebAssembly.Hosting.WebAssemblyHostEnvironmentExtensions.IsEnvironment%2A>
+
+`Program.Main` `Program.cs` ：
 
 ```csharp
 if (builder.HostEnvironment.IsStaging())

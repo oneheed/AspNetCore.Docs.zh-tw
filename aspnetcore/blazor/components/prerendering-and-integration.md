@@ -20,12 +20,12 @@ no-loc:
 - SignalR
 uid: blazor/components/prerendering-and-integration
 zone_pivot_groups: blazor-hosting-models
-ms.openlocfilehash: affca6c9b585b91787f94a13144d07bedfefdd37
-ms.sourcegitcommit: fe5a287fa6b9477b130aa39728f82cdad57611ee
+ms.openlocfilehash: 3402117334548f9d90880d4f536e8baa288e7bc9
+ms.sourcegitcommit: 6b87f2e064cea02e65dacd206394b44f5c604282
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 11/10/2020
-ms.locfileid: "94431700"
+ms.lasthandoff: 12/15/2020
+ms.locfileid: "97506977"
 ---
 # <a name="prerender-and-integrate-aspnet-core-no-locrazor-components"></a>ASP.NET Core 元件的已呈現和整合 Razor
 
@@ -37,7 +37,7 @@ ms.locfileid: "94431700"
 
 Razor 元件可以整合到 Razor 託管解決方案中的頁面和 MVC 應用程式 Blazor WebAssembly 。 轉譯頁面或視圖時，可同時資源清單元件。
 
-## <a name="configuration"></a>設定
+## <a name="configuration"></a>組態
 
 若要設定應用程式的預先安裝 Blazor WebAssembly ：
 
@@ -229,7 +229,7 @@ Razor 元件可以整合至 Razor 應用程式中的頁面和 MVC 應用程式 B
   * [在 MVC 應用程式中使用可路由的元件](#use-routable-components-in-an-mvc-app)
 * [從頁面或視圖呈現元件](#render-components-from-a-page-or-view)：適用于無法直接從使用者要求路由傳送的元件。 當應用程式使用元件標籤協助程式將元件內嵌至現有的頁面和流覽 [器](xref:mvc/views/tag-helpers/builtin-th/component-tag-helper)時，請遵循此指引。
 
-## <a name="configuration"></a>設定
+## <a name="configuration"></a>組態
 
 現有的 Razor 頁面或 MVC 應用程式可以將 Razor 元件整合至頁面和流覽中：
 
@@ -241,7 +241,7 @@ Razor 元件可以整合至 Razor 應用程式中的頁面和 MVC 應用程式 B
      <base href="~/" />
      ```
 
-     `href`上述範例中的 *應用程式基底路徑* )  (值假設應用程式位於根 URL 路徑 (`/`) 。 如果應用程式是子應用程式，請遵循本文的「 *應用程式基底路徑* 」一節中的指導方針 <xref:blazor/host-and-deploy/index#app-base-path> 。
+     `href`上述範例中的 *應用程式基底路徑*)  (值假設應用程式位於根 URL 路徑 (`/`) 。 如果應用程式是子應用程式，請遵循本文的「 *應用程式基底路徑* 」一節中的指導方針 <xref:blazor/host-and-deploy/index#app-base-path> 。
 
      檔案 `_Layout.cshtml` 位於 MVC 應用程式中 `Pages/Shared` Razor 頁面應用程式或資料夾的資料夾中 `Views/Shared` 。
 
@@ -308,6 +308,8 @@ Razor 元件可以整合至 Razor 應用程式中的頁面和 MVC 應用程式 B
    </Router>
    ```
 
+   [!INCLUDE[](~/blazor/includes/prefer-exact-matches.md)]
+
 1. 將檔案新增 `_Host.cshtml` 至 `Pages` 具有下列內容的資料夾：
 
    ```cshtml
@@ -341,7 +343,7 @@ Razor 元件可以整合至 Razor 應用程式中的頁面和 MVC 應用程式 B
    });
    ```
 
-1. 將可路由傳送的元件新增至應用程式。 例如：
+1. 將可路由傳送的元件新增至應用程式。 例如︰
 
    ```razor
    @page "/counter"
@@ -376,6 +378,8 @@ Razor 元件可以整合至 Razor 應用程式中的頁面和 MVC 應用程式 B
        </NotFound>
    </Router>
    ```
+
+   [!INCLUDE[](~/blazor/includes/prefer-exact-matches.md)]
 
 1. 將檔案新增 `_Host.cshtml` 至 `Views/Home` 具有下列內容的資料夾：
 
@@ -418,7 +422,7 @@ Razor 元件可以整合至 Razor 應用程式中的頁面和 MVC 應用程式 B
    });
    ```
 
-1. 建立 `Pages` 資料夾，並將可路由傳送的元件新增至應用程式。 例如：
+1. 建立 `Pages` 資料夾，並將可路由傳送的元件新增至應用程式。 例如︰
 
    ```razor
    @page "/counter"

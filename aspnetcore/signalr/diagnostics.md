@@ -19,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: signalr/diagnostics
-ms.openlocfilehash: 6e5e9d866a1e03e69856cc63dcfe30284048dd6d
-ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
+ms.openlocfilehash: 49029bbd53b98425a05bdb82517238e3aa2e3b1f
+ms.sourcegitcommit: 6b87f2e064cea02e65dacd206394b44f5c604282
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 10/30/2020
-ms.locfileid: "93061310"
+ms.lasthandoff: 12/15/2020
+ms.locfileid: "97506626"
 ---
 # <a name="logging-and-diagnostics-in-aspnet-core-no-locsignalr"></a>ASP.NET Core 中的記錄和診斷 SignalR
 
@@ -75,7 +75,7 @@ Visual Studio 會在 [ **輸出** ] 視窗中顯示記錄輸出。 選取 [ **AS
 
 ### <a name="azure-app-service"></a>Azure App Service
 
-在 Azure App Service 入口網站的 [ **診斷記錄** ] 區段中，啟用 **(Filesystem) 選項的應用程式記錄** ，並將 **層級** 設定為 `Verbose` 。 記錄應該可從 **記錄串流** 服務和 App Service 檔案系統的記錄中取得。 如需詳細資訊，請參閱 [Azure 記錄資料流程](xref:fundamentals/logging/index#azure-log-streaming)。
+在 Azure App Service 入口網站的 [**診斷記錄**] 區段中，啟用 **(Filesystem) 選項的應用程式記錄**，並將 **層級** 設定為 `Verbose` 。 記錄應該可從 **記錄串流** 服務和 App Service 檔案系統的記錄中取得。 如需詳細資訊，請參閱 [Azure 記錄資料流程](xref:fundamentals/logging/index#azure-log-streaming)。
 
 ### <a name="other-environments"></a>其他環境
 
@@ -106,7 +106,7 @@ Visual Studio 會在 [ **輸出** ] 視窗中顯示記錄輸出。 選取 [ **AS
 
 設定詳細資訊之後，記錄會寫入至瀏覽器主控台 (或 NodeJS 應用程式) 中的標準輸出。
 
-如果您想要將記錄傳送至自訂記錄系統，您可以提供執行介面的 JavaScript 物件 `ILogger` 。 唯一需要執行的方法是 `log` ，它會採用事件的層級以及與事件相關聯的訊息。 例如：
+如果您想要將記錄傳送至自訂記錄系統，您可以提供執行介面的 JavaScript 物件 `ILogger` 。 唯一需要執行的方法是 `log` ，它會採用事件的層級以及與事件相關聯的訊息。 例如︰
 
 [!code-typescript[](diagnostics/custom-logger.ts?highlight=3-7,13)]
 
@@ -117,7 +117,7 @@ Visual Studio 會在 [ **輸出** ] 視窗中顯示記錄輸出。 選取 [ **AS
 
 若要從 .NET 用戶端取得記錄，您可以 `ConfigureLogging` 在上使用方法 `HubConnectionBuilder` 。 其運作方式與與上的 `ConfigureLogging` 方法相同 `WebHostBuilder` `HostBuilder` 。 您可以設定 ASP.NET Core 中所使用的相同記錄提供者。 不過，您必須手動安裝和啟用個別記錄提供者的 NuGet 套件。
 
-若要將 .NET 用戶端記錄新增至 Blazor WebAssembly 應用程式，請參閱 <xref:blazor/fundamentals/logging#blazor-webassembly-signalr-net-client-logging> 。
+若要將 .NET 用戶端記錄新增至 Blazor WebAssembly 應用程式，請參閱 <xref:blazor/fundamentals/logging#signalr-net-client-logging> 。
 
 ### <a name="console-logging"></a>主控台記錄
 
@@ -158,7 +158,7 @@ Fiddler 是一個非常強大的工具，可用於收集 HTTP 追蹤。 從 [tel
 
 如果您使用 HTTPS 進行連線，則有一些額外的步驟可確保 Fiddler 可將 HTTPS 流量解密。 如需詳細資訊，請參閱 [Fiddler 檔](https://docs.telerik.com/fiddler/Configure-Fiddler/Tasks/DecryptHTTPS)。
 
-收集追蹤之後，您可以從功能表列 **選擇 [** 檔案  >  **儲存**  >  **所有會話** ] 來匯出追蹤。
+收集追蹤之後，您可以從功能表列 **選擇 [** 檔案  >  **儲存**  >  **所有會話**] 來匯出追蹤。
 
 ![從 Fiddler 匯出所有會話](diagnostics/fiddler-export.png)
 
@@ -226,7 +226,7 @@ tcpdump -i [interface] -w trace.pcap
 
 SignalR 系統會報告事件來源的伺服器計量 <xref:Microsoft.AspNetCore.Http.Connections> 。
 
-| 名稱                    | 描述                 |
+| 名稱                    | 說明                 |
 |-------------------------|-----------------------------|
 | `connections-started`   | 已啟動的連接總數   |
 | `connections-stopped`   | 已停止的連接總數   |

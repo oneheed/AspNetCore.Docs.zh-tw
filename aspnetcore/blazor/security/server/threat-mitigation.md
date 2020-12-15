@@ -19,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/security/server/threat-mitigation
-ms.openlocfilehash: 0e8b26110a970526b5f6306da236a92f52e64604
-ms.sourcegitcommit: fe5a287fa6b9477b130aa39728f82cdad57611ee
+ms.openlocfilehash: d0ed36731d78d3e98aa294aca50492f0a3ac8174
+ms.sourcegitcommit: 6b87f2e064cea02e65dacd206394b44f5c604282
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 11/10/2020
-ms.locfileid: "94430949"
+ms.lasthandoff: 12/15/2020
+ms.locfileid: "97506691"
 ---
 # <a name="threat-mitigation-guidance-for-aspnet-core-no-locblazor-server"></a>ASP.NET Core 的威脅風險降低指導方針 Blazor Server
 
@@ -43,7 +43,7 @@ Blazor Server 應用程式採用具 *狀態* 的資料處理模型，其中伺�
 
 ## <a name="no-locblazor-and-shared-state"></a>Blazor 和共用狀態
 
-[!INCLUDE[](~/includes/blazor-security/blazor-shared-state.md)]
+[!INCLUDE[](~/blazor/includes/security/blazor-shared-state.md)]
 
 ## <a name="resource-exhaustion"></a>資源耗盡
 
@@ -61,7 +61,7 @@ Blazor Server 應用程式採用具 *狀態* 的資料處理模型，其中伺�
 
 當一或多個用戶端強制服務器執行密集的 CPU 工作時，可能會發生 CPU 耗盡。
 
-例如，假設有一個 Blazor Server 應用程式會計算 *Fibonnacci 數位* 。 Fibonnacci 數位是從 Fibonnacci 序列產生的，其中序列中的每個數位都是上述兩個數字的總和。 到達答案所需的工作量取決於序列的長度和初始值的大小。 如果應用程式未對用戶端的要求進行限制，則需要大量 CPU 的計算可能會讓 CPU 的時間降低，並降低其他工作的效能。 過度耗用資源是安全性考慮，會影響可用性。
+例如，假設有一個 Blazor Server 應用程式會計算 *Fibonnacci 數位*。 Fibonnacci 數位是從 Fibonnacci 序列產生的，其中序列中的每個數位都是上述兩個數字的總和。 到達答案所需的工作量取決於序列的長度和初始值的大小。 如果應用程式未對用戶端的要求進行限制，則需要大量 CPU 的計算可能會讓 CPU 的時間降低，並降低其他工作的效能。 過度耗用資源是安全性考慮，會影響可用性。
 
 CPU 耗盡是所有公開應用程式的考慮。 在一般 web 應用程式中，要求和連接會以安全的形式 Blazor Server 提供，但應用程式不會提供相同的保護。 Blazor Server 應用程式必須包含適當的檢查和限制，才能執行可能需要大量 CPU 的工作。
 
@@ -165,7 +165,7 @@ Blazor 用戶端會針對每個會話建立單一連線，只要開啟瀏覽器�
 
 事件會提供應用程式的進入點 Blazor Server 。 在 web 應用程式中保護端點的相同規則適用于應用程式中的事件處理 Blazor Server 。 惡意用戶端可以傳送任何想要傳送的資料做為事件的承載。
 
-例如：
+例如︰
 
 * 的變更事件 `<select>` 可能會傳送不在應用程式呈現給用戶端之選項中的值。
 * 可 `<input>` 將任何文字資料傳送至伺服器，略過用戶端驗證。

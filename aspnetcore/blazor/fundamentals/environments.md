@@ -1,43 +1,43 @@
 ---
-title: 'ASP.NET Core Blazor 環境'
+title: ASP.NET Core Blazor 環境
 author: guardrex
-description: '瞭解中的環境 Blazor ，包括如何設定 Blazor WebAssembly 應用程式的環境。'
+description: 瞭解中的環境 Blazor ，包括如何設定 Blazor WebAssembly 應用程式的環境。
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 06/10/2020
+ms.date: 12/11/2020
 no-loc:
-- 'appsettings.json'
-- 'ASP.NET Core Identity'
-- 'cookie'
-- 'Cookie'
-- 'Blazor'
-- 'Blazor Server'
-- 'Blazor WebAssembly'
-- 'Identity'
-- "Let's Encrypt"
-- 'Razor'
-- 'SignalR'
+- appsettings.json
+- ASP.NET Core Identity
+- cookie
+- Cookie
+- Blazor
+- Blazor Server
+- Blazor WebAssembly
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
 uid: blazor/fundamentals/environments
-ms.openlocfilehash: 61d46e0bd83d8bd82bf7faaf9d8f2fecbacc2ffa
-ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
+ms.openlocfilehash: 9ba23753df1726ee4c8a9802e1a1260ef7cf6fa5
+ms.sourcegitcommit: 6b87f2e064cea02e65dacd206394b44f5c604282
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 10/30/2020
-ms.locfileid: "93056032"
+ms.lasthandoff: 12/15/2020
+ms.locfileid: "97506951"
 ---
-# <a name="aspnet-core-no-locblazor-environments"></a><span data-ttu-id="6491f-103">ASP.NET Core Blazor 環境</span><span class="sxs-lookup"><span data-stu-id="6491f-103">ASP.NET Core Blazor environments</span></span>
+# <a name="aspnet-core-no-locblazor-environments"></a><span data-ttu-id="e9804-103">ASP.NET Core Blazor 環境</span><span class="sxs-lookup"><span data-stu-id="e9804-103">ASP.NET Core Blazor environments</span></span>
 
 > [!NOTE]
-> <span data-ttu-id="6491f-104">本主題適用于 Blazor WebAssembly 。</span><span class="sxs-lookup"><span data-stu-id="6491f-104">This topic applies to Blazor WebAssembly.</span></span> <span data-ttu-id="6491f-105">如需 ASP.NET Core 應用程式設定的一般指引，請參閱 <xref:fundamentals/environments> 。</span><span class="sxs-lookup"><span data-stu-id="6491f-105">For general guidance on ASP.NET Core app configuration, see <xref:fundamentals/environments>.</span></span>
+> <span data-ttu-id="e9804-104">本主題適用于 Blazor WebAssembly 。</span><span class="sxs-lookup"><span data-stu-id="e9804-104">This topic applies to Blazor WebAssembly.</span></span> <span data-ttu-id="e9804-105">如需有關 ASP.NET Core 應用程式設定的一般指引，以說明應用程式的使用方法 Blazor Server ，請參閱 <xref:fundamentals/environments> 。</span><span class="sxs-lookup"><span data-stu-id="e9804-105">For general guidance on ASP.NET Core app configuration, which describes the approaches to use for Blazor Server apps, see <xref:fundamentals/environments>.</span></span>
 
-<span data-ttu-id="6491f-106">在本機執行應用程式時，環境會預設為開發環境。</span><span class="sxs-lookup"><span data-stu-id="6491f-106">When running an app locally, the environment defaults to Development.</span></span> <span data-ttu-id="6491f-107">當應用程式發佈時，環境會預設為生產環境。</span><span class="sxs-lookup"><span data-stu-id="6491f-107">When the app is published, the environment defaults to Production.</span></span>
+<span data-ttu-id="e9804-106">在本機執行應用程式時，環境會預設為開發環境。</span><span class="sxs-lookup"><span data-stu-id="e9804-106">When running an app locally, the environment defaults to Development.</span></span> <span data-ttu-id="e9804-107">當應用程式發佈時，環境會預設為生產環境。</span><span class="sxs-lookup"><span data-stu-id="e9804-107">When the app is published, the environment defaults to Production.</span></span>
 
-<span data-ttu-id="6491f-108">裝載的 Blazor WebAssembly 應用程式會透過可透過新增標頭將環境傳達給瀏覽器的中介軟體，從伺服器挑選環境 `blazor-environment` 。</span><span class="sxs-lookup"><span data-stu-id="6491f-108">A hosted Blazor WebAssembly app picks up the environment from the server via a middleware that communicates the environment to the browser by adding the `blazor-environment` header.</span></span> <span data-ttu-id="6491f-109">標頭的值是環境。</span><span class="sxs-lookup"><span data-stu-id="6491f-109">The value of the header is the environment.</span></span> <span data-ttu-id="6491f-110">託管 Blazor 應用程式和伺服器應用程式會共用相同的環境。</span><span class="sxs-lookup"><span data-stu-id="6491f-110">The hosted Blazor app and the server app share the same environment.</span></span> <span data-ttu-id="6491f-111">如需詳細資訊，包括如何設定環境的詳細資訊，請參閱 <xref:fundamentals/environments> 。</span><span class="sxs-lookup"><span data-stu-id="6491f-111">For more information, including how to configure the environment, see <xref:fundamentals/environments>.</span></span>
+<span data-ttu-id="e9804-108">裝載解決方案的用戶端 Blazor 應用程式 (*`Client`*) 會透過將 Blazor WebAssembly *`Server`* 環境傳達給瀏覽器的中介軟體，從解決方案的應用程式決定環境。</span><span class="sxs-lookup"><span data-stu-id="e9804-108">The client-side Blazor app (*`Client`*) of a hosted Blazor WebAssembly solution determines the environment from the *`Server`* app of the solution via a middleware that communicates the environment to the browser.</span></span> <span data-ttu-id="e9804-109">*`Server`* 應用程式會新增名為的標頭， `blazor-environment` 並以環境作為標頭的值。</span><span class="sxs-lookup"><span data-stu-id="e9804-109">The *`Server`* app adds a header named `blazor-environment` with the environment as the value of the header.</span></span> <span data-ttu-id="e9804-110">*`Client`* 應用程式會讀取標頭。</span><span class="sxs-lookup"><span data-stu-id="e9804-110">The *`Client`* app reads the header.</span></span> <span data-ttu-id="e9804-111">解決方案的 *`Server`* 應用程式是 ASP.NET Core 的應用程式，因此您可以在中找到有關如何設定環境的詳細資訊 <xref:fundamentals/environments> 。</span><span class="sxs-lookup"><span data-stu-id="e9804-111">The the *`Server`* app of the solution is an ASP.NET Core app, so more information on how to configure the environment is found in <xref:fundamentals/environments>.</span></span>
 
-<span data-ttu-id="6491f-112">針對在本機執行的獨立應用程式，程式開發伺服器會新增 `blazor-environment` 標頭以指定開發環境。</span><span class="sxs-lookup"><span data-stu-id="6491f-112">For a standalone app running locally, the development server adds the `blazor-environment` header to specify the Development environment.</span></span> <span data-ttu-id="6491f-113">若要指定其他裝載環境的環境，請新增 `blazor-environment` 標頭。</span><span class="sxs-lookup"><span data-stu-id="6491f-113">To specify the environment for other hosting environments, add the `blazor-environment` header.</span></span>
+<span data-ttu-id="e9804-112">針對在本機執行的獨立 Blazor WebAssembly 應用程式，程式開發伺服器會新增 `blazor-environment` 標頭以指定開發環境。</span><span class="sxs-lookup"><span data-stu-id="e9804-112">For a standalone Blazor WebAssembly app running locally, the development server adds the `blazor-environment` header to specify the Development environment.</span></span> <span data-ttu-id="e9804-113">若要指定其他裝載環境的環境，請新增 `blazor-environment` 標頭。</span><span class="sxs-lookup"><span data-stu-id="e9804-113">To specify the environment for other hosting environments, add the `blazor-environment` header.</span></span>
 
-<span data-ttu-id="6491f-114">在 IIS 的下列範例中，將自訂標頭加入至已發佈的檔案 `web.config` 。</span><span class="sxs-lookup"><span data-stu-id="6491f-114">In the following example for IIS, add the custom header to the published `web.config` file.</span></span> <span data-ttu-id="6491f-115">檔案 `web.config` 位於 `bin/Release/{TARGET FRAMEWORK}/publish` 下列資料夾：</span><span class="sxs-lookup"><span data-stu-id="6491f-115">The `web.config` file is located in the `bin/Release/{TARGET FRAMEWORK}/publish` folder:</span></span>
+<span data-ttu-id="e9804-114">在 IIS 的下列範例中，會將自訂標頭 (`blazor-environment`) 新增至已發佈的檔案 `web.config` 。</span><span class="sxs-lookup"><span data-stu-id="e9804-114">In the following example for IIS, the custom header (`blazor-environment`) is added to the published `web.config` file.</span></span> <span data-ttu-id="e9804-115">檔案 `web.config` 位於 `bin/Release/{TARGET FRAMEWORK}/publish` 資料夾中，其中預留位置 `{TARGET FRAMEWORK}` 是目標 framework：</span><span class="sxs-lookup"><span data-stu-id="e9804-115">The `web.config` file is located in the `bin/Release/{TARGET FRAMEWORK}/publish` folder, where the placeholder `{TARGET FRAMEWORK}` is the target framework:</span></span>
 
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>
@@ -56,21 +56,17 @@ ms.locfileid: "93056032"
 ```
 
 > [!NOTE]
-> <span data-ttu-id="6491f-116">若要使用 `web.config` 應用程式發佈至資料夾時不會覆寫之 IIS 的自訂檔案 `publish` ，請參閱 <xref:blazor/host-and-deploy/webassembly#use-a-custom-webconfig> 。</span><span class="sxs-lookup"><span data-stu-id="6491f-116">To use a custom `web.config` file for IIS that isn't overwritten when the app is published to the `publish` folder, see <xref:blazor/host-and-deploy/webassembly#use-a-custom-webconfig>.</span></span>
+> <span data-ttu-id="e9804-116">若要使用 `web.config` 應用程式發佈至資料夾時不會覆寫之 IIS 的自訂檔案 `publish` ，請參閱 <xref:blazor/host-and-deploy/webassembly#use-a-custom-webconfig> 。</span><span class="sxs-lookup"><span data-stu-id="e9804-116">To use a custom `web.config` file for IIS that isn't overwritten when the app is published to the `publish` folder, see <xref:blazor/host-and-deploy/webassembly#use-a-custom-webconfig>.</span></span>
 
-<span data-ttu-id="6491f-117">藉由插入和讀取屬性，取得應用程式在元件中的環境 <xref:Microsoft.AspNetCore.Components.WebAssembly.Hosting.IWebAssemblyHostEnvironment> <xref:Microsoft.AspNetCore.Components.WebAssembly.Hosting.IWebAssemblyHostEnvironment.Environment> ：</span><span class="sxs-lookup"><span data-stu-id="6491f-117">Obtain the app's environment in a component by injecting <xref:Microsoft.AspNetCore.Components.WebAssembly.Hosting.IWebAssemblyHostEnvironment> and reading the <xref:Microsoft.AspNetCore.Components.WebAssembly.Hosting.IWebAssemblyHostEnvironment.Environment> property:</span></span>
+<span data-ttu-id="e9804-117">藉由插入和讀取屬性，在元件中取得應用程式的環境 <xref:Microsoft.AspNetCore.Components.WebAssembly.Hosting.IWebAssemblyHostEnvironment> <xref:Microsoft.AspNetCore.Components.WebAssembly.Hosting.IWebAssemblyHostEnvironment.Environment> 。</span><span class="sxs-lookup"><span data-stu-id="e9804-117">Obtain the app's environment in a component by injecting <xref:Microsoft.AspNetCore.Components.WebAssembly.Hosting.IWebAssemblyHostEnvironment> and reading the <xref:Microsoft.AspNetCore.Components.WebAssembly.Hosting.IWebAssemblyHostEnvironment.Environment> property.</span></span>
 
-```razor
-@page "/"
-@using Microsoft.AspNetCore.Components.WebAssembly.Hosting
-@inject IWebAssemblyHostEnvironment HostEnvironment
+<span data-ttu-id="e9804-118">`Pages/ReadEnvironment.razor`:</span><span class="sxs-lookup"><span data-stu-id="e9804-118">`Pages/ReadEnvironment.razor`:</span></span>
 
-<h1>Environment example</h1>
+[!code-razor[](environments/samples_snapshot/ReadEnvironment.razor?highlight=3,7)]
 
-<p>Environment: @HostEnvironment.Environment</p>
-```
+<span data-ttu-id="e9804-119">在啟動期間，會 <xref:Microsoft.AspNetCore.Components.WebAssembly.Hosting.WebAssemblyHostBuilder> <xref:Microsoft.AspNetCore.Components.WebAssembly.Hosting.IWebAssemblyHostEnvironment> 透過屬性公開，以在主機產生器程式 <xref:Microsoft.AspNetCore.Components.WebAssembly.Hosting.WebAssemblyHostBuilder.HostEnvironment> 代碼中啟用環境特定的邏輯。</span><span class="sxs-lookup"><span data-stu-id="e9804-119">During startup, the <xref:Microsoft.AspNetCore.Components.WebAssembly.Hosting.WebAssemblyHostBuilder> exposes the <xref:Microsoft.AspNetCore.Components.WebAssembly.Hosting.IWebAssemblyHostEnvironment> through the <xref:Microsoft.AspNetCore.Components.WebAssembly.Hosting.WebAssemblyHostBuilder.HostEnvironment> property, which enables environment-specific logic in host builder code.</span></span>
 
-<span data-ttu-id="6491f-118">在啟動期間， <xref:Microsoft.AspNetCore.Components.WebAssembly.Hosting.WebAssemblyHostBuilder> <xref:Microsoft.AspNetCore.Components.WebAssembly.Hosting.IWebAssemblyHostEnvironment> 會透過屬性公開， <xref:Microsoft.AspNetCore.Components.WebAssembly.Hosting.WebAssemblyHostBuilder.HostEnvironment> 讓開發人員可以在其程式碼中擁有環境特定的邏輯：</span><span class="sxs-lookup"><span data-stu-id="6491f-118">During startup, the <xref:Microsoft.AspNetCore.Components.WebAssembly.Hosting.WebAssemblyHostBuilder> exposes the <xref:Microsoft.AspNetCore.Components.WebAssembly.Hosting.IWebAssemblyHostEnvironment> through the <xref:Microsoft.AspNetCore.Components.WebAssembly.Hosting.WebAssemblyHostBuilder.HostEnvironment> property, which enables developers to have environment-specific logic in their code:</span></span>
+<span data-ttu-id="e9804-120">`Program.Main` `Program.cs` ：</span><span class="sxs-lookup"><span data-stu-id="e9804-120">In `Program.Main` of `Program.cs`:</span></span>
 
 ```csharp
 if (builder.HostEnvironment.Environment == "Custom")
@@ -79,12 +75,14 @@ if (builder.HostEnvironment.Environment == "Custom")
 };
 ```
 
-<span data-ttu-id="6491f-119">下列便利的擴充方法可讓您檢查目前的環境中的開發、生產、預備和自訂環境名稱：</span><span class="sxs-lookup"><span data-stu-id="6491f-119">The following convenience extension methods permit checking the current environment for Development, Production, Staging, and custom environment names:</span></span>
+<span data-ttu-id="e9804-121">提供的下列便利擴充方法可 <xref:Microsoft.AspNetCore.Components.WebAssembly.Hosting.WebAssemblyHostEnvironmentExtensions> 讓您檢查目前的環境，以進行開發、生產、預備和自訂環境名稱：</span><span class="sxs-lookup"><span data-stu-id="e9804-121">The following convenience extension methods provided through <xref:Microsoft.AspNetCore.Components.WebAssembly.Hosting.WebAssemblyHostEnvironmentExtensions> permit checking the current environment for Development, Production, Staging, and custom environment names:</span></span>
 
-* `IsDevelopment()`
-* `IsProduction()`
-* `IsStaging()`
-* `IsEnvironment("{ENVIRONMENT NAME}")`
+* <xref:Microsoft.AspNetCore.Components.WebAssembly.Hosting.WebAssemblyHostEnvironmentExtensions.IsDevelopment%2A>
+* <xref:Microsoft.AspNetCore.Components.WebAssembly.Hosting.WebAssemblyHostEnvironmentExtensions.IsProduction%2A>
+* <xref:Microsoft.AspNetCore.Components.WebAssembly.Hosting.WebAssemblyHostEnvironmentExtensions.IsStaging%2A>
+* <xref:Microsoft.AspNetCore.Components.WebAssembly.Hosting.WebAssemblyHostEnvironmentExtensions.IsEnvironment%2A>
+
+<span data-ttu-id="e9804-122">`Program.Main` `Program.cs` ：</span><span class="sxs-lookup"><span data-stu-id="e9804-122">In `Program.Main` of `Program.cs`:</span></span>
 
 ```csharp
 if (builder.HostEnvironment.IsStaging())
@@ -98,8 +96,8 @@ if (builder.HostEnvironment.IsEnvironment("Custom"))
 };
 ```
 
-<span data-ttu-id="6491f-120"><xref:Microsoft.AspNetCore.Components.WebAssembly.Hosting.IWebAssemblyHostEnvironment.BaseAddress?displayProperty=nameWithType>當服務無法使用時，可以在啟動期間使用此屬性 <xref:Microsoft.AspNetCore.Components.NavigationManager> 。</span><span class="sxs-lookup"><span data-stu-id="6491f-120">The <xref:Microsoft.AspNetCore.Components.WebAssembly.Hosting.IWebAssemblyHostEnvironment.BaseAddress?displayProperty=nameWithType> property can be used during startup when the <xref:Microsoft.AspNetCore.Components.NavigationManager> service isn't available.</span></span>
+<span data-ttu-id="e9804-123"><xref:Microsoft.AspNetCore.Components.WebAssembly.Hosting.IWebAssemblyHostEnvironment.BaseAddress?displayProperty=nameWithType>當服務無法使用時，可以在啟動期間使用此屬性 <xref:Microsoft.AspNetCore.Components.NavigationManager> 。</span><span class="sxs-lookup"><span data-stu-id="e9804-123">The <xref:Microsoft.AspNetCore.Components.WebAssembly.Hosting.IWebAssemblyHostEnvironment.BaseAddress?displayProperty=nameWithType> property can be used during startup when the <xref:Microsoft.AspNetCore.Components.NavigationManager> service isn't available.</span></span>
 
-## <a name="additional-resources"></a><span data-ttu-id="6491f-121">其他資源</span><span class="sxs-lookup"><span data-stu-id="6491f-121">Additional resources</span></span>
+## <a name="additional-resources"></a><span data-ttu-id="e9804-124">其他資源</span><span class="sxs-lookup"><span data-stu-id="e9804-124">Additional resources</span></span>
 
 * <xref:fundamentals/environments>

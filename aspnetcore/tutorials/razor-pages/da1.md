@@ -4,6 +4,7 @@ author: rick-anderson
 description: 頁面上教學課程系列的第5部分 Razor 。
 ms.author: riande
 ms.date: 09/20/2020
+ms.custom: contperf-fy21q2
 no-loc:
 - Index
 - appsettings.json
@@ -18,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: tutorials/razor-pages/da1
-ms.openlocfilehash: 460950413d1dd2d3539c1d62b0eb11f6bb5144a9
-ms.sourcegitcommit: db0a6eb0be7bd7f22810a71fe9bf30e957fd116a
+ms.openlocfilehash: 46fbfb50afd03f918f9e02bcc8c1dbde9a080ca4
+ms.sourcegitcommit: 6299f08aed5b7f0496001d093aae617559d73240
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 12/01/2020
-ms.locfileid: "96419963"
+ms.lasthandoff: 12/14/2020
+ms.locfileid: "97485936"
 ---
 # <a name="part-5-update-the-generated-pages-in-an-aspnet-core-app"></a>第5部分：在 ASP.NET Core 應用程式中更新產生的頁面
 
@@ -87,7 +88,7 @@ Scaffolded 電影應用程式是一個不錯的起點，但其呈現效果卻不
 </td>
 ```
 
-具有不 `{id:int}` 包含整數之路由範本的頁面要求， **not** 將會傳回 HTTP 404 (找不到) 錯誤。 例如，`https://localhost:5001/Movies/Details` 會傳回 404 錯誤。 若要使識別碼成為選擇性，請將 `?` 附加至路由條件約束：
+具有不 `{id:int}` 包含整數之路由範本的頁面要求， 將會傳回 HTTP 404 (找不到) 錯誤。 例如，`https://localhost:5001/Movies/Details` 會傳回 404 錯誤。 若要使識別碼成為選擇性，請將 `?` 附加至路由條件約束：
 
 ```cshtml
 @page "{id:int?}"

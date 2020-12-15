@@ -18,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: mvc/controllers/filters
-ms.openlocfilehash: d075faa951a34fb3856b54eb9e21593b6616b4f1
-ms.sourcegitcommit: bce62ceaac7782e22d185814f2e8532c84efa472
+ms.openlocfilehash: 72ee8f5dfdf8ffd6cfcb74b13fa0738893d8e214
+ms.sourcegitcommit: 6299f08aed5b7f0496001d093aae617559d73240
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 11/17/2020
-ms.locfileid: "94673961"
+ms.lasthandoff: 12/14/2020
+ms.locfileid: "97486131"
 ---
 # <a name="filters-in-aspnet-core"></a>ASP.NET Core 中的篩選條件
 
@@ -146,7 +146,7 @@ ASP.NET Core 包含內建的屬性型篩選條件，可對其進行子類別化�
 
 [!code-csharp[](./filters/3.1sample/FiltersSample/Controllers/SampleController.cs?name=snippet2&highlight=9)]
 
-**Response Headers** `author: Rick Anderson` `Editor: Joe Smith` 當呼叫端點時，會顯示回應標頭、和 `Sample/Index2` 。
+ `author: Rick Anderson` `Editor: Joe Smith` 當呼叫端點時，會顯示回應標頭、和 `Sample/Index2` 。
 
 下列程式碼會將 `MyActionFilterAttribute` 和加入 `AddHeaderAttribute` 至 Razor 頁面：
 
@@ -192,12 +192,12 @@ ASP.NET Core 包含內建的屬性型篩選條件，可對其進行子類別化�
 
 | 順序 | 篩選條件範圍 | 篩選條件方法 |
 |:--------:|:------------:|:-------------:|
-| 1 | 全球 | `OnActionExecuting` |
+| 1 | 全域 | `OnActionExecuting` |
 | 2 | 控制器或 Razor 頁面| `OnActionExecuting` |
 | 3 | 方法 | `OnActionExecuting` |
 | 4 | 方法 | `OnActionExecuted` |
 | 5 | 控制器或 Razor 頁面 | `OnActionExecuted` |
-| 6 | 全球 | `OnActionExecuted` |
+| 6 | 全域 | `OnActionExecuted` |
 
 ### <a name="controller-level-filters"></a>控制器層級篩選
 
@@ -290,7 +290,7 @@ ASP.NET Core 包含內建的屬性型篩選條件，可對其進行子類別化�
 
 因此，`SomeResource` 動作的 `AddHeader` 篩選條件永遠不會執行。 如果這兩個篩選條件都套用在動作方法層級，此行為也會相同，假設 `ShortCircuitingResourceFilter` 先執行的話。 `ShortCircuitingResourceFilter` 會因為其篩選器類型而先執行，或藉由明確使用 `Order` 屬性而先執行。
 
-[!code-csharp[](./filters/3.1sample/FiltersSample/Controllers/SampleController.cs?name=snippet_AddHeader&highlight=1)]
+[!code-csharp[](./filters/3.1sample/FiltersSample/Controllers/SampleController.cs?name=snippet3&highlight=1,15)]
 
 ## <a name="dependency-injection"></a>相依性插入
 
@@ -750,12 +750,12 @@ ASP.NET Core 包含內建的屬性型篩選條件，可對其進行子類別化�
 
 | 順序 | 篩選條件範圍 | 篩選條件方法 |
 |:--------:|:------------:|:-------------:|
-| 1 | 全球 | `OnActionExecuting` |
+| 1 | 全域 | `OnActionExecuting` |
 | 2 | 控制器 | `OnActionExecuting` |
 | 3 | 方法 | `OnActionExecuting` |
 | 4 | 方法 | `OnActionExecuted` |
 | 5 | 控制器 | `OnActionExecuted` |
-| 6 | 全球 | `OnActionExecuted` |
+| 6 | 全域 | `OnActionExecuted` |
 
 此順序顯示：
 
@@ -812,8 +812,8 @@ ASP.NET Core 包含內建的屬性型篩選條件，可對其進行子類別化�
 |:--------:|:------------:|:-----------------:|:-------------:|
 | 1 | 方法 | 0 | `OnActionExecuting` |
 | 2 | 控制器 | 1  | `OnActionExecuting` |
-| 3 | 全球 | 2  | `OnActionExecuting` |
-| 4 | 全球 | 2  | `OnActionExecuted` |
+| 3 | 全域 | 2  | `OnActionExecuting` |
+| 4 | 全域 | 2  | `OnActionExecuted` |
 | 5 | 控制器 | 1  | `OnActionExecuted` |
 | 6 | 方法 | 0  | `OnActionExecuted` |
 

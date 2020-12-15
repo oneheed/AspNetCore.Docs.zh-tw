@@ -3,7 +3,7 @@ title: 教學課程第5部分：將遷移套用至 Contoso 大學範例
 description: Contoso 大學教學課程系列的第5部分。 使用 EF Core 的遷移功能來管理 ASP.NET Core MVC 應用程式中的資料模型變更。
 author: rick-anderson
 ms.author: riande
-ms.custom: contperfq2
+ms.custom: contperf-fy21q2
 ms.date: 11/13/2020
 ms.topic: tutorial
 no-loc:
@@ -19,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: data/ef-mvc/migrations
-ms.openlocfilehash: 25ada6e3a210ed830514e69da7d5212264b4b91e
-ms.sourcegitcommit: aa85f2911792a1e4783bcabf0da3b3e7e218f63a
+ms.openlocfilehash: 7c8f562bcf0b7e2672f2f1ac244e0d9278e4c204
+ms.sourcegitcommit: 6299f08aed5b7f0496001d093aae617559d73240
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 11/23/2020
-ms.locfileid: "95417561"
+ms.lasthandoff: 12/14/2020
+ms.locfileid: "97485923"
 ---
 # <a name="tutorial-part-5-apply-migrations-to-the-contoso-university-sample"></a>教學課程：第5部分：將遷移套用至 Contoso 大學範例
 
@@ -39,7 +39,7 @@ ms.locfileid: "95417561"
 > * 了解資料模型快照集
 > * 套用移轉
 
-## <a name="prerequisites"></a>必要條件
+## <a name="prerequisites"></a>Prerequisites
 
 * [排序、篩選和分頁](sort-filter-page.md)
 

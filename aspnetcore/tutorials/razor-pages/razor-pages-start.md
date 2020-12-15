@@ -4,6 +4,7 @@ author: rick-anderson
 description: 這是一個系列的第一個教學課程，教您建立 ASP.NET Core Razor 頁面 web 應用程式的基本概念。
 ms.author: riande
 ms.date: 09/15/2020
+ms.custom: contperf-fy21q2
 no-loc:
 - Index
 - appsettings.json
@@ -18,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: tutorials/razor-pages/razor-pages-start
-ms.openlocfilehash: 4b8bd9c886e615add6b0d3e372843a8ddb33ae18
-ms.sourcegitcommit: db0a6eb0be7bd7f22810a71fe9bf30e957fd116a
+ms.openlocfilehash: 4d4e50f8acea73859f5e839616f13f90a42291c4
+ms.sourcegitcommit: 6299f08aed5b7f0496001d093aae617559d73240
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 12/01/2020
-ms.locfileid: "96420041"
+ms.lasthandoff: 12/14/2020
+ms.locfileid: "97486222"
 ---
 # <a name="tutorial-get-started-with-no-locrazor-pages-in-aspnet-core"></a>教學課程：開始使用 Razor ASP.NET Core 中的頁面
 
@@ -79,7 +80,7 @@ ms.locfileid: "96420041"
     
 1. 在 [ **設定您的新專案** ] 對話方塊中，輸入 [ `RazorPagesMovie` **專案名稱**]。 請務必將專案命名為 *Razor PagesMovie*，包括符合大小寫，如此一來，當您複製並貼上範例程式碼時，命名空間會相符。
 
-1. 選取 [建立]  。
+1. 選取 [建立]。
 
     ![新增 ASP.NET Core Web 應用程式](razor-pages-start/_static/config.png)
 
@@ -124,7 +125,7 @@ ms.locfileid: "96420041"
 
     1. 確認 [ **驗證** ] 設定為 [ **無驗證**]。
     1. 如果有選取 **目標 Framework** 的選項，請選取最新的 .net 5.x 版本。
-    1. 選取 [下一步] 。
+    1. 選取 [下一步]  。
 
 1. 將專案命名為 *Razor PagesMovie* ，然後選取 [**建立**]。
 
@@ -266,7 +267,7 @@ ms.locfileid: "96420041"
   * 確認 [ **驗證** ] 設定為 [ **無驗證**]。
   * 如果有選取 **目標 Framework** 的選項，請選取最新的3.x 版。
 
-  選取 [下一步] 。
+  選取 [下一步]  。
 
 * 將專案命名為 **Razor PagesMovie**，然後選取 [**建立**]。
 
@@ -410,7 +411,7 @@ ms.locfileid: "96420041"
   * 確認 [ **驗證** ] 設定為 [ **無驗證**]。
   * 如果有選取 **目標 Framework** 的選項，請選取最新的2.x 版本。
 
-  選取 [下一步] 。
+  選取 [下一步]  。
 
 * 將專案命名為 **Razor PagesMovie**，然後選取 [**建立**]。
 

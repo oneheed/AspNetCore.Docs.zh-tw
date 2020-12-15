@@ -4,6 +4,7 @@ author: rick-anderson
 description: 頁面上教學課程系列的第2部分 Razor 。 在本節中，會加入模型類別。
 ms.author: riande
 ms.date: 11/11/2020
+ms.custom: contperf-fy21q2
 no-loc:
 - Index
 - appsettings.json
@@ -18,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: tutorials/razor-pages/model
-ms.openlocfilehash: b2e840e20d034b42b2dc4a525b1dd76e44bbe3a8
-ms.sourcegitcommit: db0a6eb0be7bd7f22810a71fe9bf30e957fd116a
+ms.openlocfilehash: 7ea28e0ecad410335c37c603c8ec1eb5e6e41d33
+ms.sourcegitcommit: 6299f08aed5b7f0496001d093aae617559d73240
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 12/01/2020
-ms.locfileid: "96420054"
+ms.lasthandoff: 12/14/2020
+ms.locfileid: "97485988"
 ---
 # <a name="part-2-add-a-model-to-a-no-locrazor-pages-app-in-aspnet-core"></a>第2部分：在 ASP.NET Core 中將模型新增至 Razor 頁面應用程式
 
@@ -161,7 +162,7 @@ ms.locfileid: "96420054"
    1. 在 [ **模型類別** ] 下拉式清單中，選取 [ **Movie (Razor PagesMovie])**。
    1. 在 [資料內容類別] 資料列中，選取 **+** (加號)。
       1. 在 [**加入資料內容**] 對話方塊中，類別名稱 *Razor PagesMovie。 Razor產生 PagesMovieCoNtext* 。
-   1. 選取 [新增]。
+   1. 選取 [新增]  。
 
    ![前述指示中的圖片。](model/_static/3/arp.png)
 
@@ -188,7 +189,7 @@ ms.locfileid: "96420054"
 
 <a name="codegenerator"></a> 下表詳細說明 ASP.NET Core 程式碼產生器選項。
 
-| 選項               | 說明|
+| 選項               | 描述|
 | ----------------- | ------------ |
 | `-m`  | 模型的名稱。 |
 | `-dc`  | 要使用的 `DbContext` 類別。 |
@@ -528,7 +529,7 @@ using Microsoft.EntityFrameworkCore;
 
 * 在 [ **模型類別** ] 下拉式清單中，選取 [ **Movie (Razor PagesMovie])**。
 * 在 [ **資料內容類別] 資料** 列中，選取 **+** (加號，) 簽署並變更 PagesMovie 所產生的名稱 Razor 。**模型**。 RazorPagesMovieCoNtext 至 Razor PagesMovie。**資料**。 RazorPagesMovieCoNtext. 這不是必要的[變更](https://developercommunity.visualstudio.com/content/problem/652166/aspnet-core-ef-scaffolder-uses-incorrect-namespace.html) \(英文\)。 它會使用正確的命名空間來建立資料庫內容類別。
-* 選取 [新增]。
+* 選取 [新增]  。
 
 ![前述指示中的圖片。](model/_static/3/arp.png)
 
@@ -555,7 +556,7 @@ using Microsoft.EntityFrameworkCore;
 
 <a name="codegenerator"></a> 下表詳細說明 ASP.NET Core 程式碼產生器選項：
 
-| 選項               | 說明|
+| 選項               | 描述|
 | ----------------- | ------------ |
 | `-m`  | 模型的名稱。 |
 | `-dc`  | 要使用的 `DbContext` 類別。 |
@@ -596,7 +597,7 @@ dotnet-aspnet-codegenerator razorpage -h
 
 * 在 [ **模型類別** ] 下拉式清單中，選取或輸入 **Movie (Razor PagesMovie) 模型**。
 * 在 [ **資料內容類別** ] 列中，輸入新類別的名稱 Razor PagesMovie。**資料**。 RazorPagesMovieCoNtext. 這不是必要的[變更](https://developercommunity.visualstudio.com/content/problem/652166/aspnet-core-ef-scaffolder-uses-incorrect-namespace.html) \(英文\)。 它會使用正確的命名空間來建立資料庫內容類別。
-* 選取 [新增]。
+* 選取 [新增]  。
 
 ![前述指示中的圖片。](model/_static/arpMac.png)
 
@@ -918,7 +919,7 @@ to use Data, it should not use models. That will make the namespace the same for
 
 * 在 [ **模型類別** ] 下拉式清單中，選取 [ **Movie (Razor PagesMovie])**。
 * 在 [**資料內容類別] 資料** 列中，選取 **+** (加上) 號，然後接受產生的名稱 **Razor PagesMovie。 RazorPagesMovieCoNtext**。
-* 選取 [新增]。
+* 選取 [新增]  。
 
 ![前述指示中的圖片。](model/_static/arp.png)
 
@@ -945,7 +946,7 @@ to use Data, it should not use models. That will make the namespace the same for
 
 <a name="codegenerator"></a> 下表詳細說明 ASP.NET Core 程式碼產生器選項：
 
-| 選項               | 說明|
+| 選項               | 描述|
 | ----------------- | ------------ |
 | `-m`  | 模型的名稱。 |
 | `-dc`  | 要使用的 `DbContext` 類別。 |
@@ -980,7 +981,7 @@ dotnet-aspnet-codegenerator razorpage -h
 
 * 在 [ **模型類別** ] 下拉式清單中，選取或輸入 **Movie**。
 * 在 [**資料內容類別] 資料** 列中，輸入 select **Razor PagesMovieCoNtext** ，這會使用正確的命名空間來建立新的資料庫內容類別。 在此情況下，它將會是 **Razor PagesMovie 模型。 RazorPagesMovieCoNtext**。
-* 選取 [新增]。
+* 選取 [新增]  。
 
 ![前述指示中的圖片。](model/_static/arpMac.png)
 

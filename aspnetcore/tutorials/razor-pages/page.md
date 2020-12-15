@@ -4,6 +4,7 @@ author: rick-anderson
 description: 頁面上教學課程系列的第3部分 Razor 。
 ms.author: riande
 ms.date: 09/25/2020
+ms.custom: contperf-fy21q2
 no-loc:
 - Index
 - appsettings.json
@@ -18,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: tutorials/razor-pages/page
-ms.openlocfilehash: 4a5369b9e40de89ac9a1895466e7bdd7afb9d32e
-ms.sourcegitcommit: db0a6eb0be7bd7f22810a71fe9bf30e957fd116a
+ms.openlocfilehash: a6efbb22f8b6280bd636cd1575d8a4a2bca0bb06
+ms.sourcegitcommit: 6299f08aed5b7f0496001d093aae617559d73240
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 12/01/2020
-ms.locfileid: "96420028"
+ms.lasthandoff: 12/14/2020
+ms.locfileid: "97486170"
 ---
 # <a name="part-3-scaffolded-no-locrazor-pages-in-aspnet-core"></a>第3部分： Razor ASP.NET Core 中的 scaffold 頁面
 
@@ -158,7 +159,7 @@ Razor 可以從 HTML 轉換成 c # 或 Razor 特定標記。 當 `@` 符號後�
 
 [!code-cshtml[](razor-pages-start/sample/RazorPagesMovie30/Pages/_ViewStart.cshtml)]
 
-上述標記會將 Pages 資料夾下的所有檔案的版面配置檔案設定為 *pages/Shared/_Layout。* Razor *Pages* 如需詳細資訊，請參閱 [Layout](xref:razor-pages/index#layout)。
+上述標記會將 Pages 資料夾下的所有檔案的版面配置檔案設定為 *pages/Shared/_Layout。* Razor  如需詳細資訊，請參閱 [Layout](xref:razor-pages/index#layout)。
 
 ### <a name="the-create-page-model"></a>Create 頁面模型
 
@@ -333,7 +334,7 @@ Razor 可以從 HTML 轉換成 c # 或 Razor 特定標記。 當 `@` 符號後�
 
 [!code-cshtml[](razor-pages-start/sample/RazorPagesMovie22/Pages/_ViewStart.cshtml)]
 
-上述標記會將 Pages 資料夾下的所有檔案的版面配置檔案設定為 *pages/Shared/_Layout。* Razor *Pages* 如需詳細資訊，請參閱 [Layout](xref:razor-pages/index#layout)。
+上述標記會將 Pages 資料夾下的所有檔案的版面配置檔案設定為 *pages/Shared/_Layout。* Razor  如需詳細資訊，請參閱 [Layout](xref:razor-pages/index#layout)。
 
 ### <a name="the-create-page-model"></a>Create 頁面模型
 

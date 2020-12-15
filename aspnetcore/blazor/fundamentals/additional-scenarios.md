@@ -19,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/fundamentals/additional-scenarios
-ms.openlocfilehash: ef37c539d377f14a2744c3ead28234d8497df700
-ms.sourcegitcommit: e087b6a38e3d38625ebb567a973e75b4d79547b9
+ms.openlocfilehash: b7fc3710fe5ad1efba907edf98f590a42e2a83ae
+ms.sourcegitcommit: 6299f08aed5b7f0496001d093aae617559d73240
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 11/15/2020
-ms.locfileid: "94637674"
+ms.lasthandoff: 12/14/2020
+ms.locfileid: "97485871"
 ---
 # <a name="aspnet-core-no-locblazor-hosting-model-configuration"></a>ASP.NET Core Blazor 裝載模型設定
 
@@ -212,8 +212,8 @@ Blazor當檔準備就緒時，將應用程式初始化：
     <script>
       Blazor.start({
         reconnectionHandler: {
-          onConnectionDown: (options, error) => console.error(error);
-          onConnectionUp: () => console.log("Up, up, and away!");
+          onConnectionDown: (options, error) => console.error(error),
+          onConnectionUp: () => console.log("Up, up, and away!")
         }
       });
     </script>

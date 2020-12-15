@@ -19,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/templates
-ms.openlocfilehash: 602ad2908d607703a3b77b2047d51d912645b043
-ms.sourcegitcommit: 8b867c4cb0c3b39bbc4d2d87815610d2ef858ae7
+ms.openlocfilehash: 6d24e65acd44f98540575a3f3880fb137bfc822f
+ms.sourcegitcommit: 6299f08aed5b7f0496001d093aae617559d73240
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 11/17/2020
-ms.locfileid: "94703718"
+ms.lasthandoff: 12/14/2020
+ms.locfileid: "97485910"
 ---
 # <a name="aspnet-core-no-locblazor-templates"></a>ASP.NET Core Blazor 範本
 
@@ -54,7 +54,7 @@ dotnet new blazorserver --help
 
   * ASP.NET Core [主機](xref:fundamentals/host/generic-host) (Blazor Server) 
   * WebAssembly 主機 (Blazor WebAssembly) ：此檔案中的程式碼對從 () 的範本建立的應用程式而言是唯一的 Blazor WebAssembly `blazorwasm` 。
-    * `App`元件是應用程式的根元件。 `App`元件會指定為 `app` DOM 元素， (`<div id="app">Loading...</div>` 在 `wwwroot/index.html`)  () 的根元件集合中 `builder.RootComponents.Add<App>("#app")` 。
+    * `App`元件是應用程式的根元件。 `App`元件會指定為 `div` DOM 元素，其中 `id` `app` (的 `<div id="app">Loading...</div>` `wwwroot/index.html`)  () 的根元件集合 `builder.RootComponents.Add<App>("#app")` 。
     * 系統會新增並設定[服務](xref:blazor/fundamentals/dependency-injection) (例如 `builder.Services.AddSingleton<IMyDependency, MyDependency>()`) 。
 
 ::: moniker-end
@@ -77,12 +77,27 @@ dotnet new blazorserver --help
     * <xref:Microsoft.AspNetCore.Builder.ComponentEndpointRouteBuilderExtensions.MapBlazorHub%2A> 呼叫以設定與瀏覽器的即時連線端點。 使用建立連線 [SignalR](xref:signalr/introduction) ，這是將即時 web 功能新增至應用程式的架構。
     * [`MapFallbackToPage("/_Host")`](xref:Microsoft.AspNetCore.Builder.RazorPagesEndpointRouteBuilderExtensions.MapFallbackToPage*) 呼叫以設定應用程式的根頁面 (`Pages/_Host.cshtml`) 並啟用導覽。
 
+::: moniker range=">= aspnetcore-5.0"
+
 * `wwwroot/index.html` (Blazor WebAssembly) ：實作為 HTML 網頁的應用程式根頁面：
   * 最初要求應用程式的任何頁面時，會轉譯此頁面，並在回應中傳回。
-  * 頁面會指定呈現根元件的位置 `App` 。 元件會轉譯在 `app` DOM 元素 () 的位置 `<app>...</app>` 。
+  * 頁面會指定呈現根元件的位置 `App` 。 元件是以 `div` `id` () 的 DOM 元素位置轉譯 `app` `<div id="app">Loading...</div>` 。
   * `_framework/blazor.webassembly.js`載入 JavaScript 檔案，其：
     * 下載 .NET 執行時間、應用程式和應用程式的相依性。
     * 初始化執行時間以執行應用程式。
+
+::: moniker-end
+
+::: moniker range="< aspnetcore-5.0"
+
+* `wwwroot/index.html` (Blazor WebAssembly) ：實作為 HTML 網頁的應用程式根頁面：
+  * 最初要求應用程式的任何頁面時，會轉譯此頁面，並在回應中傳回。
+  * 頁面會指定呈現根元件的位置 `App` 。 元件會轉譯在 `app` DOM 元素 () 的位置 `<app>Loading...</app>` 。
+  * `_framework/blazor.webassembly.js`載入 JavaScript 檔案，其：
+    * 下載 .NET 執行時間、應用程式和應用程式的相依性。
+    * 初始化執行時間以執行應用程式。
+    
+::: moniker-end
 
 * `App.razor`：應用程式的根元件，它會使用元件來設定用戶端路由 <xref:Microsoft.AspNetCore.Components.Routing.Router> 。 <xref:Microsoft.AspNetCore.Components.Routing.Router>元件會攔截瀏覽器導覽，並轉譯符合所要求位址的頁面。
 

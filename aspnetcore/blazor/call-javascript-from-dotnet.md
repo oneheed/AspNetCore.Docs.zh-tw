@@ -19,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/call-javascript-from-dotnet
-ms.openlocfilehash: a98537f53229d098328f5b14bf1d5060001ebd80
-ms.sourcegitcommit: a71bb61f7add06acb949c9258fe506914dfe0c08
+ms.openlocfilehash: 11312a34dc62dd3bace791819f62379bffbb1c49
+ms.sourcegitcommit: 6b87f2e064cea02e65dacd206394b44f5c604282
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 12/08/2020
-ms.locfileid: "96855233"
+ms.lasthandoff: 12/15/2020
+ms.locfileid: "97592828"
 ---
 # <a name="call-javascript-functions-from-net-methods-in-aspnet-core-no-locblazor"></a>從 ASP.NET Core 中的 .NET 方法呼叫 JavaScript 函式 Blazor
 
@@ -172,7 +172,7 @@ JavaScript 程式碼（例如上述範例中所示的程式碼）也可以從 Ja
 
 ## <a name="detect-when-a-no-locblazor-server-app-is-prerendering"></a>偵測 Blazor Server 應用程式何時進行呈現
  
-[!INCLUDE[](~/includes/blazor-prerendering.md)]
+[!INCLUDE[](~/blazor/includes/prerendering.md)]
 
 ## <a name="capture-references-to-elements"></a>捕捉元素的參考
 
@@ -492,7 +492,7 @@ JS interop 可能因為網路錯誤而失敗，應該視為不可靠。 根據�
 
 如需資源耗盡的詳細資訊，請參閱 <xref:blazor/security/server/threat-mitigation> 。
 
-[!INCLUDE[](~/includes/blazor-share-interop-code.md)]
+[!INCLUDE[](~/blazor/includes/share-interop-code.md)]
 
 ## <a name="avoid-circular-object-references"></a>避免迴圈物件參考
 

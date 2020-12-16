@@ -18,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: security/enforcing-ssl
-ms.openlocfilehash: 209d055f6205eceb9efb5434427c303345791809
-ms.sourcegitcommit: 8363e44f630fcc6433ccd2a85f7aa9567cd274ed
+ms.openlocfilehash: 3277fda0d1dcb5121a2172b3fc1e4869ed6f8430
+ms.sourcegitcommit: fc4cce2767e34f81079510f34bd54e9d0aa86497
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 11/20/2020
-ms.locfileid: "94981956"
+ms.lasthandoff: 12/16/2020
+ms.locfileid: "97592865"
 ---
 # <a name="enforce-https-in-aspnet-core"></a>在 ASP.NET Core 中強制使用 HTTPS
 
@@ -93,7 +93,7 @@ ms.locfileid: "94981956"
 上述反白顯示的程式碼：
 
 * 使用預設的 [HttpsRedirectionOptions. RedirectStatusCode](/dotnet/api/microsoft.aspnetcore.httpspolicy.httpsredirectionoptions.redirectstatuscode) ([Status307TemporaryRedirect](/dotnet/api/microsoft.aspnetcore.http.statuscodes.status307temporaryredirect)) 。
-* 除非由環境變數或 >iserveraddressesfeature 覆寫，否則會使用預設的[HttpsRedirectionOptions. HttpsPort](/dotnet/api/microsoft.aspnetcore.httpspolicy.httpsredirectionoptions.httpsport) (null) 。 `ASPNETCORE_HTTPS_PORT` [IServerAddressesFeature](/dotnet/api/microsoft.aspnetcore.hosting.server.features.iserveraddressesfeature)
+* 除非由環境變數或 >iserveraddressesfeature 覆寫，否則會使用預設的[HttpsRedirectionOptions. HttpsPort](/dotnet/api/microsoft.aspnetcore.httpspolicy.httpsredirectionoptions.httpsport) (null) 。 `ASPNETCORE_HTTPS_PORT` [](/dotnet/api/microsoft.aspnetcore.hosting.server.features.iserveraddressesfeature)
 
 我們建議使用暫時重新導向，而不是永久重新導向。 連結快取可能會在開發環境中造成不穩定的行為。 如果您想要在應用程式處於非開發環境時傳送永久的重新導向狀態碼，請參閱「 [在生產環境中設定永久重新導向](#configure-permanent-redirects-in-production) 」一節。 建議您使用 [HSTS](#http-strict-transport-security-protocol-hsts) 來通知用戶端，只將安全的資源要求傳送至應用程式 (只能在生產) 中傳送給應用程式。
 
@@ -396,6 +396,8 @@ Windows 子系統 Linux 版 (WSL) 會產生 HTTPS 自我簽署憑證。若要設
 ## <a name="troubleshoot-certificate-problems"></a>針對憑證問題進行疑難排解
 
 本節提供 [安裝和信任](#trust)ASP.NET Core HTTPS 開發憑證時的說明，但您仍有不信任憑證的瀏覽器警告。 [Kestrel](xref:fundamentals/servers/kestrel)會使用 ASP.NET Core HTTPS 開發憑證。
+
+若要修復 IIS Express 憑證，請參閱 [此 Stackoverflow](https://stackoverflow.com/a/20048613/502537) 問題。
 
 ### <a name="all-platforms---certificate-not-trusted"></a>所有平臺-憑證不受信任
 

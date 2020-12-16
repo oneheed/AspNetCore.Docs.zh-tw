@@ -314,8 +314,8 @@
               uid: tutorials/build-a-blazor-app
             - name: 搭配 Blazor WebAssembly 的 SignalR
               uid: tutorials/signalr-blazor-webassembly
-        - name: 範本
-          uid: blazor/templates
+        - name: 專案結構
+          uid: blazor/project-structure
         - name: 基礎
           items:
             - name: 路由
@@ -437,7 +437,7 @@
         - name: 內建元件
           items:
             - name: 應用程式
-              href: blazor/templates.md#blazor-project-structure
+              uid: blazor/project-structure
             - name: 驗證
               href: blazor/security/webassembly/index.md#authentication-component
             - name: AuthorizeView

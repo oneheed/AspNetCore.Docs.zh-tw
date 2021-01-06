@@ -6,6 +6,7 @@ ms.author: scaddie
 ms.custom: mvc
 ms.date: 06/26/2020
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -17,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: tutorials/get-started-with-swashbuckle
-ms.openlocfilehash: 84094dce306e10470ec7b7be3efe6da024470330
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: 9fbd4bc5e91d8f05afc99a4f04c706399f83a518
+ms.sourcegitcommit: 3593c4efa707edeaaceffbfa544f99f41fc62535
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88628842"
+ms.lasthandoff: 01/04/2021
+ms.locfileid: "93057605"
 ---
 # <a name="get-started-with-swashbuckle-and-aspnet-core"></a>Swashbuckle 與 ASP.NET Core 使用者入門
 
@@ -44,7 +45,7 @@ Swashbuckle 有三個主要元件：
 
 ### <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
-* 從 [套件管理員主控台]**** 視窗中：
+* 從 [套件管理員主控台] 視窗中：
   * 移至 [**查看**  >  **其他 Windows**  >  **封裝管理員主控台**]
   * 巡覽至 *TodoApi.csproj* 檔案所在目錄
   * 執行以下命令：
@@ -53,24 +54,24 @@ Swashbuckle 有三個主要元件：
     Install-Package Swashbuckle.AspNetCore -Version 5.5.0
     ```
 
-* 從 [管理 NuGet 套件]**** 對話方塊中：
-  * 在**方案總管**  >  **管理 NuGet 套件**] 中的專案上按一下滑鼠右鍵
-  * 將 [套件來源]**** 設定為 "nuget.org"
+* 從 [管理 NuGet 套件] 對話方塊中：
+  * 在 **方案總管**  >  **管理 NuGet 套件**] 中的專案上按一下滑鼠右鍵
+  * 將 [套件來源] 設定為 "nuget.org"
   * 請確定已啟用 [包含發行前版本] 選項
   * 在搜尋方塊中輸入 "Swashbuckle.AspNetCore"
-  * 從 [瀏覽]**** 索引標籤中選取最新的 "Swashbuckle.AspNetCore" 套件，並按一下 [安裝]****
+  * 從 [瀏覽] 索引標籤中選取最新的 "Swashbuckle.AspNetCore" 套件，並按一下 [安裝]
 
 ### <a name="visual-studio-for-mac"></a>[Visual Studio for Mac](#tab/visual-studio-mac)
 
-* 在 [Solution Pad]**** > [新增套件...]**** 中，以滑鼠右鍵按一下 *Packages* 資料夾
-* 將 [新增套件]**** 視窗的 [來源]**** 下拉式清單設定為 "nuget.org"
+* 在 [Solution Pad] > [新增套件...] 中，以滑鼠右鍵按一下 *Packages* 資料夾
+* 將 [新增套件] 視窗的 [來源] 下拉式清單設定為 "nuget.org"
 * 請確定已啟用 [選定發行前版本的套件] 選項
 * 在搜尋方塊中輸入 "Swashbuckle.AspNetCore"
-* 從結果窗格中選取最新的 "Swashbuckle.AspNetCore" 套件，並按一下 [新增套件]****
+* 從結果窗格中選取最新的 "Swashbuckle.AspNetCore" 套件，並按一下 [新增套件]
 
 ### <a name="visual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code)
 
-從 [整合式終端機]**** 執行下列命令：
+從 [整合式終端機] 執行下列命令：
 
 ```dotnetcli
 dotnet add TodoApi.csproj package Swashbuckle.AspNetCore -v 5.5.0
@@ -179,7 +180,7 @@ XML 註解可以使用下列方式啟用：
 
 ::: moniker range=">= aspnetcore-2.0"
 
-* 以滑鼠右鍵按一下 [方案總管]**** 中的專案，然後選取 [編輯 <專案名稱>.csproj]****。
+* 以滑鼠右鍵按一下 [方案總管] 中的專案，然後選取 [編輯 <專案名稱>.csproj]。
 * 將醒目提示的程式碼行手動新增至 *.csproj* 檔案：
 
 [!code-xml[](../tutorials/web-api-help-pages-using-swagger/samples/2.1/TodoApi.Swashbuckle/TodoApi.csproj?name=snippet_SuppressWarnings&highlight=1-2,4)]
@@ -189,7 +190,7 @@ XML 註解可以使用下列方式啟用：
 ::: moniker range="<= aspnetcore-1.1"
 
 * 以滑鼠右鍵按一下 **方案總管** 中的專案，然後選取 [ **屬性**]。
-* 在 [**組建**] 索引標籤的 [**輸出**] 區段下，選取 [ **XML 檔**檔案] 方塊。
+* 在 [**組建**] 索引標籤的 [**輸出**] 區段下，選取 [ **XML 檔** 檔案] 方塊。
 
 ::: moniker-end
 
@@ -197,7 +198,7 @@ XML 註解可以使用下列方式啟用：
 
 ::: moniker range=">= aspnetcore-2.0"
 
-* 從 [Solution Pad]** 中，按下 [控制項]****，然後按一下專案名稱。 流覽至 [**工具**  >  **編輯**檔案]。
+* 從 [Solution Pad] 中，按下 [控制項]，然後按一下專案名稱。 流覽至 [**工具**  >  **編輯** 檔案]。
 * 將醒目提示的程式碼行手動新增至 *.csproj* 檔案：
 
 [!code-xml[](../tutorials/web-api-help-pages-using-swagger/samples/2.1/TodoApi.Swashbuckle/TodoApi.csproj?name=snippet_SuppressWarnings&highlight=1-2,4)]
@@ -206,7 +207,7 @@ XML 註解可以使用下列方式啟用：
 
 ::: moniker range="<= aspnetcore-1.1"
 
-* 開啟 [專案選項]**** 對話方塊 > [組建]**[編譯器]** > ****
+* 開啟 [專案選項] 對話方塊 > [組建]**[編譯器]** > 
 * 勾選 [**一般選項**] 區段底下的 [**產生 xml 檔**] 方塊
 
 ::: moniker-end
@@ -464,7 +465,7 @@ UI 是由產生的 JSON 結構描述所驅動：
 
 ::: moniker range=">= aspnetcore-2.2"
 
-在 ASP.NET Core 2.2 或更新版本中，慣例可作為使用 `[ProducesResponseType]` 明確裝飾個別動作的替代方案。 如需詳細資訊，請參閱<xref:web-api/advanced/conventions>。
+在 ASP.NET Core 2.2 或更新版本中，慣例可作為使用 `[ProducesResponseType]` 明確裝飾個別動作的替代方案。 如需詳細資訊，請參閱 <xref:web-api/advanced/conventions> 。
 
 為了支援 `[ProducesResponseType]` 裝飾， [Swashbuckle. AspNetCore](https://github.com/domaindrivendev/Swashbuckle.AspNetCore/blob/master/README.md#swashbuckleaspnetcoreannotations) 會提供延伸模組，以啟用及擴充回應、架構和參數中繼資料。
 

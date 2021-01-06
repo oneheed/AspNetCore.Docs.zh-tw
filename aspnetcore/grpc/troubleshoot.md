@@ -20,10 +20,10 @@ no-loc:
 - SignalR
 uid: grpc/troubleshoot
 ms.openlocfilehash: cbce85caf7ba792253ba62c6be084c8905acd00f
-ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
+ms.sourcegitcommit: 3593c4efa707edeaaceffbfa544f99f41fc62535
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 10/30/2020
+ms.lasthandoff: 01/04/2021
 ms.locfileid: "93058710"
 ---
 # <a name="troubleshoot-grpc-on-net-core"></a>針對 .NET Core 上的 gRPC 進行疑難排解
@@ -160,7 +160,7 @@ GRPC 用戶端也必須設定為不使用 TLS。 如需詳細資訊，請參閱 
 
 ## <a name="wpf-projects-unable-to-generate-grpc-c-assets-from-proto-files"></a>WPF 專案無法從 proto 檔案產生 gRPC c # 資產
 
-WPF 專案有 [已知的問題](https://github.com/dotnet/wpf/issues/810) ，導致 gRPC 程式碼產生無法正常運作。 藉由參考和 proto 檔案，在 WPF 專案中產生的任何 gRPC 類型 `Grpc.Tools` 都會在使用時建立編譯錯誤： *.proto*
+WPF 專案有 [已知的問題](https://github.com/dotnet/wpf/issues/810) ，導致 gRPC 程式碼產生無法正常運作。 藉由參考和 proto 檔案，在 WPF 專案中產生的任何 gRPC 類型 `Grpc.Tools` 都會在使用時建立編譯錯誤： 
 
 > 錯誤 CS0246：找不到類型或命名空間名稱 ' MyGrpcServices ' (您是否遺漏 using 指示詞或元件參考？ ) 
 

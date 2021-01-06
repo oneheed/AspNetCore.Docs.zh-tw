@@ -20,10 +20,10 @@ no-loc:
 - SignalR
 uid: blazor/advanced-scenarios
 ms.openlocfilehash: 95714b3c0d21d3b348a9a8a984e2a42e7708499e
-ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
+ms.sourcegitcommit: 3593c4efa707edeaaceffbfa544f99f41fc62535
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 10/30/2020
+ms.lasthandoff: 01/04/2021
 ms.locfileid: "93056552"
 ---
 # <a name="aspnet-core-no-locblazor-advanced-scenarios"></a>ASP.NET Core 的 Blazor advanced 案例
@@ -32,7 +32,7 @@ ms.locfileid: "93056552"
 
 ## <a name="no-locblazor-server-circuit-handler"></a>Blazor Server 電路處理常式
 
-Blazor Server 允許程式碼定義迴圈 *處理常式* ，以允許在使用者的線路狀態變更時執行程式碼。 在 `CircuitHandler` 應用程式的服務容器中衍生類別並將其註冊，會實作為電路處理常式。 下列的電路處理常式範例會追蹤開啟的 SignalR 連接：
+Blazor Server 允許程式碼定義迴圈 *處理常式*，以允許在使用者的線路狀態變更時執行程式碼。 在 `CircuitHandler` 應用程式的服務容器中衍生類別並將其註冊，會實作為電路處理常式。 下列的電路處理常式範例會追蹤開啟的 SignalR 連接：
 
 ```csharp
 using System.Collections.Generic;
@@ -141,7 +141,7 @@ public void ConfigureServices(IServiceCollection services)
 
 Razor 元件檔 (`.razor`) 一律會進行編譯。 相較于解讀程式碼，編譯是可能的優勢，因為編譯步驟可以用來插入可在執行時間改善應用程式效能的資訊。
 
-這些改進的主要範例包含 *序號* 。 序號會向執行時間指出輸出來自哪些不同和已排序的程式程式碼。 執行時間會使用這項資訊，以線性時間產生有效率的樹狀結構差異，這遠比一般樹狀結構差異演算法一般可能更快。
+這些改進的主要範例包含 *序號*。 序號會向執行時間指出輸出來自哪些不同和已排序的程式程式碼。 執行時間會使用這項資訊，以線性時間產生有效率的樹狀結構差異，這遠比一般樹狀結構差異演算法一般可能更快。
 
 請考慮下列 Razor 元件 (`.razor`) 檔：
 
@@ -178,7 +178,7 @@ builder.AddContent(1, "Second");
 | :------: | ---------- | :----: |
 | 1        | Text node  | Second |
 
-當執行時間執行差異時，會看到順序中的專案 `0` 已移除，因此它會產生下列簡單的 *編輯腳本* ：
+當執行時間執行差異時，會看到順序中的專案 `0` 已移除，因此它會產生下列簡單的 *編輯腳本*：
 
 * 移除第一個文位元組點。
 

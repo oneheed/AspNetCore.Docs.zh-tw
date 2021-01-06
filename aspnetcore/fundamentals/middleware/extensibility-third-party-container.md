@@ -20,10 +20,10 @@ no-loc:
 - SignalR
 uid: fundamentals/middleware/extensibility-third-party-container
 ms.openlocfilehash: d322b1b3dda161c9948359253c3f7fee64a1f9ce
-ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
+ms.sourcegitcommit: 3593c4efa707edeaaceffbfa544f99f41fc62535
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 10/30/2020
+ms.lasthandoff: 01/04/2021
 ms.locfileid: "93057761"
 ---
 # <a name="middleware-activation-with-a-third-party-container-in-aspnet-core"></a>在 ASP.NET Core 中以協力廠商容器啟用中介軟體
@@ -53,11 +53,11 @@ ms.locfileid: "93057761"
 
 <xref:Microsoft.AspNetCore.Http.IMiddleware> 可定義應用程式要求管線的中介軟體。
 
-由 `IMiddlewareFactory` 實作啟動的中介軟體 ( *Middleware/SimpleInjectorActivatedMiddleware.cs* )：
+由 `IMiddlewareFactory` 實作啟動的中介軟體 (*Middleware/SimpleInjectorActivatedMiddleware.cs*)：
 
 [!code-csharp[](extensibility-third-party-container/samples/3.x/SampleApp/Middleware/SimpleInjectorActivatedMiddleware.cs?name=snippet1)]
 
-將會針對此中介軟體建立延伸模組 ( *Middleware/MiddlewareExtensions.cs* )：
+將會針對此中介軟體建立延伸模組 (*Middleware/MiddlewareExtensions.cs*)：
 
 [!code-csharp[](extensibility-third-party-container/samples/3.x/SampleApp/Middleware/MiddlewareExtensions.cs?name=snippet1)]
 
@@ -100,11 +100,11 @@ ms.locfileid: "93057761"
 
 <xref:Microsoft.AspNetCore.Http.IMiddleware> 可定義應用程式要求管線的中介軟體。
 
-由 `IMiddlewareFactory` 實作啟動的中介軟體 ( *Middleware/SimpleInjectorActivatedMiddleware.cs* )：
+由 `IMiddlewareFactory` 實作啟動的中介軟體 (*Middleware/SimpleInjectorActivatedMiddleware.cs*)：
 
 [!code-csharp[](extensibility-third-party-container/samples/2.x/SampleApp/Middleware/SimpleInjectorActivatedMiddleware.cs?name=snippet1)]
 
-將會針對此中介軟體建立延伸模組 ( *Middleware/MiddlewareExtensions.cs* )：
+將會針對此中介軟體建立延伸模組 (*Middleware/MiddlewareExtensions.cs*)：
 
 [!code-csharp[](extensibility-third-party-container/samples/2.x/SampleApp/Middleware/MiddlewareExtensions.cs?name=snippet1)]
 

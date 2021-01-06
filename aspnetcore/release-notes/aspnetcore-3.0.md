@@ -19,10 +19,10 @@ no-loc:
 - SignalR
 uid: aspnetcore-3.0
 ms.openlocfilehash: 235daac5c08248ca2052de6b44e66a8162ce23ad
-ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
+ms.sourcegitcommit: 3593c4efa707edeaaceffbfa544f99f41fc62535
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 10/30/2020
+ms.lasthandoff: 01/04/2021
 ms.locfileid: "93051235"
 ---
 # <a name="whats-new-in-aspnet-core-30"></a>ASP.NET Core 3.0 的新功能
@@ -47,7 +47,7 @@ Blazor 架構支援的案例：
 * 使用類別庫建立元件程式庫 Razor
 * JavaScript Interop
 
-如需詳細資訊，請參閱<xref:blazor/index>。
+如需詳細資訊，請參閱 <xref:blazor/index> 。
 
 ### Blazor Server
 
@@ -86,7 +86,7 @@ ASP.NET Core 3.0 中的 gRPC 功能包括：
 * [Grpc .net. 用戶端](https://www.nuget.org/packages/Grpc.Net.Client)：適用于 .net Core 的 Grpc 用戶端，以熟悉的為基礎 `HttpClient` 。
 * [Grpc .net. ClientFactory](https://www.nuget.org/packages/Grpc.Net.ClientFactory)： Grpc 用戶端與的整合 `HttpClientFactory` 。
 
-如需詳細資訊，請參閱<xref:grpc/index>。
+如需詳細資訊，請參閱 <xref:grpc/index> 。
 
 ## SignalR
 
@@ -374,7 +374,7 @@ public void Configure(IApplicationBuilder app, IHostingEnvironment env)
 * 檢查憑證撤銷。
 * 檢查推出憑證是否有正確的使用方式旗標。
 
-預設使用者主體是從憑證屬性所構成。 使用者主體包含可補充或取代主體的事件。 如需詳細資訊，請參閱<xref:security/authentication/certauth>。
+預設使用者主體是從憑證屬性所構成。 使用者主體包含可補充或取代主體的事件。 如需詳細資訊，請參閱 <xref:security/authentication/certauth> 。
 
 [Windows 驗證](/windows-server/security/windows-authentication/windows-authentication-overview) 已延伸至 Linux 和 macOS。 在先前的版本中，Windows 驗證僅限於 [IIS](xref:host-and-deploy/iis/index) 和 [HttpSys](xref:fundamentals/servers/httpsys)。 在 ASP.NET Core 3.0 中， [Kestrel](xref:fundamentals/servers/kestrel) 能夠在 windows、Linux 和 macOS 上針對已加入網域的 windows 主機使用 Negotiate、 [Kerberos](/windows-server/security/kerberos/kerberos-authentication-overview)和 [NTLM](/windows-server/security/kerberos/ntlm-overview)。 這些驗證配置的 Kestrel 支援是由 AspNetCore 提供。 [Negotiate NuGet](https://www.nuget.org/packages/Microsoft.AspNetCore.Authentication.Negotiate) 套件。 如同其他驗證服務，請設定驗證應用程式範圍，然後設定服務：
 
@@ -400,7 +400,7 @@ public void Configure(IApplicationBuilder app, IHostingEnvironment env)
   * 必須為 web 進程建立 Spn。
   * 您必須在主機電腦上產生並設定[Keytab](/archive/blogs/pie/all-you-need-to-know-about-keytab-files)檔案。
 
-如需詳細資訊，請參閱<xref:security/authentication/windowsauth>。
+如需詳細資訊，請參閱 <xref:security/authentication/windowsauth> 。
 
 ## <a name="template-changes"></a>範本變更
 
@@ -439,7 +439,7 @@ ASP.NET Core 3.0 範本使用 <xref:fundamentals/host/generic-host> 。 使用�
 * 將尾端標頭移至新的集合，可解決標頭和結尾之間的不明確的問題。
 * 同步 i/o Api （例如 `HttpRequest.Body.Read` ）是造成應用程式當機的執行緒耗盡的常見來源。 在3.0 中， `AllowSynchronousIO` 預設為停用。
 
-如需詳細資訊，請參閱<xref:migration/22-to-30#kestrel>。
+如需詳細資訊，請參閱 <xref:migration/22-to-30#kestrel> 。
 
 ## <a name="http2-enabled-by-default"></a>預設啟用的 HTTP/2
 
@@ -463,7 +463,7 @@ HTTPS 端點的 Kestrel 預設會啟用 HTTP/2。 當作業系統支援時，會
 * 端點可以在中介軟體和 MVC 中執行原則，例如 CORS 或授權。
 * 篩選和屬性可以放在控制器中的方法上。
 
-如需詳細資訊，請參閱<xref:fundamentals/routing#routing-basics>。
+如需詳細資訊，請參閱 <xref:fundamentals/routing#routing-basics> 。
 
 ## <a name="health-checks"></a>健康情況檢查
 
@@ -513,7 +513,7 @@ app.UseEndpoints(endpoints =>
 
 此案例已在 ASP.NET Core 3.0 中修正。 當環境變數設定為時，主機會啟用 [轉送的標頭中介軟體](xref:host-and-deploy/proxy-load-balancer#forwarded-headers-middleware-options) `ASPNETCORE_FORWARDEDHEADERS_ENABLED` `true` 。 `ASPNETCORE_FORWARDEDHEADERS_ENABLED``true`在容器映射中設定為。
 
-## <a name="performance-improvements"></a>效能改進
+## <a name="performance-improvements"></a>效能改善
 
 ASP.NET Core 3.0 包含許多改進，可減少記憶體使用量並提升輸送量：
 

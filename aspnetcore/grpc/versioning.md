@@ -19,10 +19,10 @@ no-loc:
 - SignalR
 uid: grpc/versioning
 ms.openlocfilehash: 38204b16d041f21221862c566b90a6a9571d26a1
-ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
+ms.sourcegitcommit: 3593c4efa707edeaaceffbfa544f99f41fc62535
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 10/30/2020
+ms.lasthandoff: 01/04/2021
 ms.locfileid: "93058697"
 ---
 # <a name="versioning-grpc-services"></a>Versioning gRPC 服務
@@ -66,7 +66,7 @@ GRPC 通訊協定是設計來支援隨時間變化的服務。 一般而言，gR
 
 下列專案是通訊協定和二進位中斷性變更：
 
-* 重新 **命名欄位** -使用 Protobuf 內容時，功能變數名稱只會在產生的程式碼中使用。 欄位號用來識別網路上的欄位。 重新命名欄位不是 Protobuf 的通訊協定重大變更。 但是，如果伺服器使用 JSON 內容，則重新命名欄位是一項重大變更。
+* 重新 **命名欄位**-使用 Protobuf 內容時，功能變數名稱只會在產生的程式碼中使用。 欄位號用來識別網路上的欄位。 重新命名欄位不是 Protobuf 的通訊協定重大變更。 但是，如果伺服器使用 JSON 內容，則重新命名欄位是一項重大變更。
 * **變更欄位資料類型** -將欄位的資料類型變更為 [不相容的類型](https://developers.google.com/protocol-buffers/docs/proto3#updating) 時，將會在還原序列化訊息時發生錯誤。 即使新的資料類型相容，如果用戶端升級至最新的合約，則可能需要更新用戶端，以支援新的類型。
 * **變更欄位編號** -使用 Protobuf 承載時，會使用欄位編號來識別網路上的欄位。
 * 重新 **命名封裝、服務或方法** gRPC 時，會使用封裝名稱、服務名稱和方法名稱來建立 URL。 用戶端會從伺服器取得未 *實現* 的狀態。
@@ -94,7 +94,7 @@ gRPC 支援選擇性的 [封裝](https://developers.google.com/protocol-buffers/
 * `greet.v1.Greeter`
 * `greet.v2.Greeter`
 
-已建立版本之服務的實 *Startup.cs* ：
+已建立版本之服務的實 *Startup.cs*：
 
 ```csharp
 app.UseEndpoints(endpoints =>
@@ -117,7 +117,7 @@ app.UseEndpoints(endpoints =>
 
 [!code-csharp[](versioning/sample/GreeterServiceV1.cs?highlight=10,19)]
 
-使用不同封裝名稱產生的服務和訊息是 **不同的 .net 類型** 。 將商務邏輯移至中央位置需要將訊息對應至一般類型。
+使用不同封裝名稱產生的服務和訊息是 **不同的 .net 類型**。 將商務邏輯移至中央位置需要將訊息對應至一般類型。
 
 ## <a name="additional-resources"></a>其他資源
 

@@ -20,10 +20,10 @@ no-loc:
 - SignalR
 uid: blazor/globalization-localization
 ms.openlocfilehash: f8f261f25d854a9bf36ad3299f4af392d5c4fafd
-ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
+ms.sourcegitcommit: 3593c4efa707edeaaceffbfa544f99f41fc62535
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 10/30/2020
+ms.lasthandoff: 01/04/2021
 ms.locfileid: "93055876"
 ---
 # <a name="aspnet-core-no-locblazor-globalization-and-localization"></a>ASP.NET Core Blazor 全球化和當地語系化
@@ -40,7 +40,7 @@ Razor 有多種文化特性和語言的使用者可以存取元件。 以下是�
 * <xref:Microsoft.Extensions.Localization.IStringLocalizer> 和 <xref:Microsoft.Extensions.Localization.IStringLocalizer%601> 在應用程式中受到 *支援* Blazor 。
 * <xref:Microsoft.AspNetCore.Mvc.Localization.IHtmlLocalizer>、 <xref:Microsoft.AspNetCore.Mvc.Localization.IViewLocalizer> 和資料批註當地語系化是 ASP.NET CORE MVC 案例，而且 **不支援** Blazor 應用程式。
 
-如需詳細資訊，請參閱<xref:fundamentals/localization>。
+如需詳細資訊，請參閱 <xref:fundamentals/localization> 。
 
 ## <a name="globalization"></a>全球化
 
@@ -110,7 +110,7 @@ Blazor WebAssembly 也可以使用傳遞至的選項，設定為使用特定應�
 
 ::: moniker range="< aspnetcore-5.0"
 
-根據預設，應用程式的中繼語言 (IL) 連結器 Blazor WebAssembly 設定會去除國際化資訊（明確要求的地區設定除外）。 如需詳細資訊，請參閱<xref:blazor/host-and-deploy/configure-linker#configure-the-linker-for-internationalization>。
+根據預設，應用程式的中繼語言 (IL) 連結器 Blazor WebAssembly 設定會去除國際化資訊（明確要求的地區設定除外）。 如需詳細資訊，請參閱 <xref:blazor/host-and-deploy/configure-linker#configure-the-linker-for-internationalization> 。
 
 ::: moniker-end
 
@@ -122,7 +122,7 @@ Blazor Server 應用程式會使用 [當地語系化中介軟體](xref:fundament
 
 您可以使用下列其中一種方法來設定文化特性：
 
-* [Cookies](#cookies)
+* [Cookie！](#cookies)
 * [提供 UI 以選擇文化特性](#provide-ui-to-choose-the-culture)
 
 如需詳細資訊和範例，請參閱 <xref:fundamentals/localization>。
@@ -207,7 +207,7 @@ public class CultureController : Controller
 ```
 
 > [!WARNING]
-> 使用 <xref:Microsoft.AspNetCore.Mvc.ControllerBase.LocalRedirect%2A> 動作結果來防止開啟重新導向攻擊。 如需詳細資訊，請參閱<xref:security/preventing-open-redirects>。
+> 使用 <xref:Microsoft.AspNetCore.Mvc.ControllerBase.LocalRedirect%2A> 動作結果來防止開啟重新導向攻擊。 如需詳細資訊，請參閱 <xref:security/preventing-open-redirects> 。
 
 如果應用程式未設定為處理控制器動作：
 

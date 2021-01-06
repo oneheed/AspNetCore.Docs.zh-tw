@@ -1,8 +1,8 @@
-# <a name="aspnet-core-integration-testing-sample"></a>ASP.NET核心整合測試範例
+# <a name="aspnet-core-integration-testing-sample"></a>ASP.NET Core 整合測試範例
 
-此示例說明瞭[ASP.NET核心剃刀頁面應用](https://docs.microsoft.com/aspnet/core/mvc/razor-pages)的整合測試。 此示例演示了 ASP.NET 核心主題[中的集成測試中描述的](https://docs.microsoft.com/aspnet/core/test/integration-tests)功能。
+此範例說明 [ASP.NET Core Razor Pages](https://docs.microsoft.com/aspnet/core/mvc/razor-pages) 應用程式的整合測試。 這個範例會示範 ASP.NET Core 主題的 [整合測試](https://docs.microsoft.com/aspnet/core/test/integration-tests) 中所述的功能。
 
-如果您不使用具有內建測試功能的 IDE,請根據*測試/RazorPagesProject.測試*資料夾中的指令提示執行以下指令:
+如果您未使用具有內建測試功能的 IDE，請在 [ *測試/RazorPagesProject* ] 資料夾的命令提示字元中執行下列命令：
 
 ```console
 dotnet test

@@ -18,10 +18,10 @@ no-loc:
 - SignalR
 uid: tutorials/first-mvc-app/controller-methods-views
 ms.openlocfilehash: b4850821317b6907452793ef09194844c90c0137
-ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
+ms.sourcegitcommit: 3593c4efa707edeaaceffbfa544f99f41fc62535
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 10/30/2020
+ms.lasthandoff: 01/04/2021
 ms.locfileid: "93050767"
 ---
 # <a name="part-6-controller-methods-and-views-in-aspnet-core"></a>ASP.NET Core 中的第6部分、控制器方法和觀點
@@ -44,7 +44,7 @@ ms.locfileid: "93050767"
 
 ![滑鼠停留在 Edit 連結並顯示 https://localhost:5001/Movies/Edit/5 的 Url 的瀏覽器視窗](~/tutorials/first-mvc-app/controller-methods-views/_static/edit7.png)
 
-在 *Views/Movies/Index.cshtml* 檔案中， **Edit** 、 **Details** 和 **Delete** 連結是由 Core MVC 錨點標記協助程式所產生。
+在 *Views/Movies/Index.cshtml* 檔案中，**Edit**、**Details** 和 **Delete** 連結是由 Core MVC 錨點標記協助程式所產生。
 
 [!code-cshtml[](~/tutorials/first-mvc-app/start-mvc/sample/MvcMovie/Views/Movies/IndexOriginal.cshtml?highlight=1-3&range=46-50)]
 
@@ -106,13 +106,13 @@ ASP.NET Core 會將 `https://localhost:5001/Movies/Edit/4` 轉譯成對 `Movies`
 
 ::: moniker-end
 
-`HttpPost` 屬性指定「只」  能為 `POST` 要求叫用這個 `Edit` 方法。 您可以將 `[HttpGet]` 屬性套用至第一個編輯方法，但不需要執行此動作，因為 `[HttpGet]` 是預設值。
+`HttpPost` 屬性指定「只」能為 `POST` 要求叫用這個 `Edit` 方法。 您可以將 `[HttpGet]` 屬性套用至第一個編輯方法，但不需要執行此動作，因為 `[HttpGet]` 是預設值。
 
-`ValidateAntiForgeryToken` 屬性是用來 [防範要求偽造](xref:security/anti-request-forgery)，並與編輯檢視檔案 ( *Views/Movies/Edit.cshtml* ) 所產生的防偽語彙基元成對。 編輯檢視檔案使用[表單標記協助程式](xref:mvc/views/working-with-forms)產生防偽語彙基元。
+`ValidateAntiForgeryToken` 屬性是用來 [防範要求偽造](xref:security/anti-request-forgery)，並與編輯檢視檔案 (*Views/Movies/Edit.cshtml*) 所產生的防偽語彙基元成對。 編輯檢視檔案使用[表單標記協助程式](xref:mvc/views/working-with-forms)產生防偽語彙基元。
 
 [!code-cshtml[](~/tutorials/first-mvc-app/start-mvc/sample/MvcMovie/Views/Movies/Edit.cshtml?range=9)]
 
-[表單標記協助程式](xref:mvc/views/working-with-forms)會產生隱藏的防偽語彙基元，其必須符合電影控制器的 `Edit` 方法中 `[ValidateAntiForgeryToken]` 產生的防偽語彙基元。 如需詳細資訊，請參閱<xref:security/anti-request-forgery>。
+[表單標記協助程式](xref:mvc/views/working-with-forms)會產生隱藏的防偽語彙基元，其必須符合電影控制器的 `Edit` 方法中 `[ValidateAntiForgeryToken]` 產生的防偽語彙基元。 如需詳細資訊，請參閱 <xref:security/anti-request-forgery> 。
 
 `HttpGet Edit` 方法會採用電影 `ID` 參數，使用 Entity Framework `FindAsync` 方法查詢電影，並將選取的電影傳回 Edit 檢視。 如果找不到電影，會傳回 `NotFound` (HTTP 404)。
 

@@ -9,10 +9,10 @@ products:
 - vs
 urlFragment: aspnetcore-webapi-mongodb
 ms.openlocfilehash: 95a2a6fcda0a4f7148183981f7dbacd06388329d
-ms.sourcegitcommit: 58722eb309767e462bdbf3082bd38737a4ef168f
+ms.sourcegitcommit: 3593c4efa707edeaaceffbfa544f99f41fc62535
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 05/27/2020
+ms.lasthandoff: 01/04/2021
 ms.locfileid: "84106516"
 ---
 # <a name="create-a-web-api-with-aspnet-core-and-mongodb"></a>使用 ASP.NET Core 與 MongoDB 建立 Web API
@@ -27,15 +27,15 @@ ms.locfileid: "84106516"
 * 從 Web API 執行 MongoDB CRUD 作業
 * 自訂 JSON 序列化
 
-## <a name="prerequisites"></a>必要條件
+## <a name="prerequisites"></a>先決條件
 
 * [.NET Core SDK 3.0 或更新版本](https://dotnet.microsoft.com/download/dotnet-core)
-* [Visual Studio 2019 預覽版](https://visualstudio.microsoft.com/thank-you-downloading-visual-studio/?sku=community&ch=pre&rel=16&utm_medium=microsoft&utm_source=docs.microsoft.com&utm_campaign=inline+link&utm_content=download+vs2019preview)以及 **ASP.NET 與 Web 開發**工作負載
-* [MongoDB](https://docs.mongodb.com/manual/tutorial/install-mongodb-on-windows/)
+* [Visual Studio 2019 預覽版](https://visualstudio.microsoft.com/thank-you-downloading-visual-studio/?sku=community&ch=pre&rel=16&utm_medium=microsoft&utm_source=docs.microsoft.com&utm_campaign=inline+link&utm_content=download+vs2019preview)以及 **ASP.NET 與 Web 開發** 工作負載
+* [MongoDB](https://docs.mongodb.com/manual/tutorial/install-mongodb-on-windows/) \(英文\)
 
 ## <a name="configure-mongodb"></a>設定 MongoDB
 
-若使用 Windows，MongoDB 預設會安裝在 *C:\\Program Files\\MongoDB*。 將*C： \\ Program Files \\ MongoDB \\ 伺服器 \\ \<version_number> \\ bin*新增至 `Path` 環境變數。 此變更會啟用從您開發機器上的任意位置存取 MongoDB 的功能。
+若使用 Windows，MongoDB 預設會安裝在 *C:\\Program Files\\MongoDB*。 將 *C： \\ Program Files \\ MongoDB \\ 伺服器 \\ \<version_number> \\ bin* 新增至 `Path` 環境變數。 此變更會啟用從您開發機器上的任意位置存取 MongoDB 的功能。
 
 在下列步驟中使用 mongo 殼層來建立資料庫、建立集合及存放文件。 如需有關 mongo 殼層命令的詳細資訊，請參閱[使用 mongo 殼層](https://docs.mongodb.com/manual/mongo/#working-with-the-mongo-shell)。
 
@@ -124,11 +124,11 @@ ms.locfileid: "84106516"
 
 ## <a name="create-the-aspnet-core-web-api-project"></a>建立 ASP.NET Core Web API 專案
 
-1. 移至 **[** 檔案] [  >  **新增**  >  **專案**]。
-1. 選取 [ASP.NET Core Web 應用程式]**** 專案類型，然後選取 [下一步]****。
-1. 將專案命名為 *BooksApi*，然後選取 [建立]****。
-1. 選取 [.NET Core]**** 目標架構與 [ASP.NET Core 3.0]****。 選取 [API]**** 專案範本，然後選取 [確定]****。
-1. 請造訪[NuGet 資源庫： MongoDB 驅動程式](https://www.nuget.org/packages/MongoDB.Driver/)，以判斷最新穩定版本的 .net Driver for MongoDB。 在 [套件管理員主控台]**** 視窗中，瀏覽到專案根目錄。 執行下列命令以安裝適用於 MongoDB 的 .NET 驅動程式：
+1. 移至 **[**  >  **新增**  >  **專案**]。
+1. 選取 [ASP.NET Core Web 應用程式] 專案類型，然後選取 [下一步]。
+1. 將專案命名為 *BooksApi*，然後選取 [建立]。
+1. 選取 [.NET Core] 目標架構與 [ASP.NET Core 3.0]。 選取 [API] 專案範本，然後選取 [確定]。
+1. 流覽 [NuGet 資源庫： mongodb](https://www.nuget.org/packages/MongoDB.Driver/) ，以判斷 .net Driver for mongodb 的最新穩定版本。 在 [套件管理員主控台] 視窗中，瀏覽到專案根目錄。 執行下列命令以安裝適用於 MongoDB 的 .NET 驅動程式：
 
     ```powershell
     Install-Package MongoDB.Driver -Version {VERSION}
@@ -166,10 +166,10 @@ ms.locfileid: "84106516"
     在上面的類別中，需要 `Id` 屬性：
 
     * 才能將通用語言執行平台 (CLR) 物件對應到 MongoDB 集合。
-    * 已標注， [`[BsonId]`](https://api.mongodb.com/csharp/current/html/T_MongoDB_Bson_Serialization_Attributes_BsonIdAttribute.htm) 可將此屬性指定為檔的主要金鑰。
-    * 會以標注， [`[BsonRepresentation(BsonType.ObjectId)]`](https://api.mongodb.com/csharp/current/html/T_MongoDB_Bson_Serialization_Attributes_BsonRepresentationAttribute.htm) 允許以類型 `string` （而非[ObjectId](https://api.mongodb.com/csharp/current/html/T_MongoDB_Bson_ObjectId.htm)結構）傳遞參數。 Mongo 會處理從 `string` 轉換到 `ObjectId` 的作業。
+    * 已標注， [`[BsonId]`](https://api.mongodb.com/csharp/current/html/T_MongoDB_Bson_Serialization_Attributes_BsonIdAttribute.htm) 以將此屬性指定為檔的主鍵。
+    * 的批註為， [`[BsonRepresentation(BsonType.ObjectId)]`](https://api.mongodb.com/csharp/current/html/T_MongoDB_Bson_Serialization_Attributes_BsonRepresentationAttribute.htm) 以允許將參數傳遞為類型， `string` 而不是 [ObjectId](https://api.mongodb.com/csharp/current/html/T_MongoDB_Bson_ObjectId.htm) 結構。 Mongo 會處理從 `string` 轉換到 `ObjectId` 的作業。
 
-    `BookName`屬性會以 [`[BsonElement]`](https://api.mongodb.com/csharp/current/html/T_MongoDB_Bson_Serialization_Attributes_BsonElementAttribute.htm) 屬性標注。 `Name` 的屬性值代表 MongoDB 集合中的屬性名稱。
+    `BookName`屬性是以屬性（attribute）標注 [`[BsonElement]`](https://api.mongodb.com/csharp/current/html/T_MongoDB_Bson_Serialization_Attributes_BsonElementAttribute.htm) 。 `Name` 的屬性值代表 MongoDB 集合中的屬性名稱。
 
 ## <a name="add-a-configuration-model"></a>新增組態模型
 
@@ -283,7 +283,7 @@ ms.locfileid: "84106516"
     }
     ```
 
-    在上述程式碼中，透過建構函式插入從 DI 擷取 `IBookstoreDatabaseSettings` 執行個體。 這項技術可讓您存取[新增組態模型](#add-a-configuration-model)一節中已新增的 *appsettings.json* 組態值。
+    在上述程式碼中，透過建構函式插入從 DI 擷取 `IBookstoreDatabaseSettings` 執行個體。 這項技術可讓您存取 [新增組態模型](#add-a-configuration-model)一節中已新增的 *appsettings.json* 組態值。
 
 1. 將下列醒目提示的程式碼新增至 `Startup.ConfigureServices`：
 
@@ -302,7 +302,7 @@ ms.locfileid: "84106516"
     }
     ```
 
-    在上述程式碼中，`BookService` 類別要向 DI 註冊才能在取用類別中支援建構函式插入。 因為 `BookService` 直接依存於 `MongoClient`，所以 Singleton 服務存留期最適合。 根據官方的[Mongo 用戶端重複使用方針](https://mongodb.github.io/mongo-csharp-driver/2.8/reference/driver/connecting/#re-use)， `MongoClient` 應該在 DI 中註冊單一服務存留期。
+    在上述程式碼中，`BookService` 類別要向 DI 註冊才能在取用類別中支援建構函式插入。 因為 `BookService` 直接依存於 `MongoClient`，所以 Singleton 服務存留期最適合。 根據官方 [Mongo 用戶端重複使用指導方針](https://mongodb.github.io/mongo-csharp-driver/2.8/reference/driver/connecting/#re-use)， `MongoClient` 應該在具有單一服務存留期的 DI 中註冊。
 
 1. 在 *Startup.cs* 的頂端新增下列程式碼，以解析 `BookService` 參考：
 
@@ -313,7 +313,7 @@ ms.locfileid: "84106516"
 
 `BookService` 類別使用下列 `MongoDB.Driver` 成員來對資料庫執行 CRUD 作業：
 
-* [MongoClient](https://api.mongodb.com/csharp/current/html/T_MongoDB_Driver_MongoClient.htm)：讀取用來執行資料庫作業的伺服器實例。 此類別的建構函式是使用 MongoDB 連接字串提供：
+* [MongoClient](https://api.mongodb.com/csharp/current/html/T_MongoDB_Driver_MongoClient.htm)：讀取用於執行資料庫作業的伺服器實例。 此類別的建構函式是使用 MongoDB 連接字串提供：
 
     ```csharp
     public BookService(IBookstoreDatabaseSettings settings)
@@ -325,16 +325,16 @@ ms.locfileid: "84106516"
     }
     ```
 
-* [IMongoDatabase](https://api.mongodb.com/csharp/current/html/T_MongoDB_Driver_IMongoDatabase.htm)：代表用於執行作業的 Mongo 資料庫。 本教學課程在介面中使用一般的 [GetCollection\<TDocument>(collection)](https://api.mongodb.com/csharp/current/html/M_MongoDB_Driver_IMongoDatabase_GetCollection__1.htm) 方法來存取特定集合中的資料。 呼叫此方法之後，針對集合執行 CRUD 作業。 在 `GetCollection<TDocument>(collection)` 方法呼叫中：
+* [IMongoDatabase](https://api.mongodb.com/csharp/current/html/T_MongoDB_Driver_IMongoDatabase.htm)：代表用來執行作業的 Mongo 資料庫。 本教學課程在介面中使用一般的 [GetCollection\<TDocument>(collection)](https://api.mongodb.com/csharp/current/html/M_MongoDB_Driver_IMongoDatabase_GetCollection__1.htm) 方法來存取特定集合中的資料。 呼叫此方法之後，針對集合執行 CRUD 作業。 在 `GetCollection<TDocument>(collection)` 方法呼叫中：
   * `collection` 代表集合名稱。
   * `TDocument` 代表儲存在集合中的 CLR 物件類型。
 
 `GetCollection<TDocument>(collection)` 傳回代表集合的 [MongoCollection](https://api.mongodb.com/csharp/current/html/T_MongoDB_Driver_MongoCollection.htm) 物件。 在此教學課程中，會在集合上叫用下列方法：
 
-* [Collection.deleteone](https://api.mongodb.com/csharp/current/html/M_MongoDB_Driver_IMongoCollection_1_DeleteOne.htm)：刪除符合所提供搜尋條件的單一檔。
-* [尋找 \<TDocument> ](https://api.mongodb.com/csharp/current/html/M_MongoDB_Driver_IMongoCollectionExtensions_Find__1_1.htm)：傳回集合中符合所提供搜尋條件的所有檔。
-* [InsertOne](https://api.mongodb.com/csharp/current/html/M_MongoDB_Driver_IMongoCollection_1_InsertOne.htm)：將提供的物件插入為集合中的新檔。
-* [ReplaceOne](https://api.mongodb.com/csharp/current/html/M_MongoDB_Driver_IMongoCollection_1_ReplaceOne.htm)：使用提供的物件取代符合所提供搜尋條件的單一檔。
+* [DeleteOne](https://api.mongodb.com/csharp/current/html/M_MongoDB_Driver_IMongoCollection_1_DeleteOne.htm)：刪除符合所提供搜尋條件的單一檔。
+* [Find \<TDocument> ](https://api.mongodb.com/csharp/current/html/M_MongoDB_Driver_IMongoCollectionExtensions_Find__1_1.htm)：傳回集合中符合所提供搜尋條件的所有檔。
+* [InsertOne](https://api.mongodb.com/csharp/current/html/M_MongoDB_Driver_IMongoCollection_1_InsertOne.htm)：將提供的物件插入至集合中的新檔。
+* [ReplaceOne](https://api.mongodb.com/csharp/current/html/M_MongoDB_Driver_IMongoCollection_1_ReplaceOne.htm)：以提供的物件取代符合所提供搜尋條件的單一檔。
 
 ## <a name="add-a-controller"></a>新增控制器
 
@@ -469,7 +469,7 @@ namespace BooksApi.Controllers
 
 為滿足上述需求，請進行下列變更：
 
-1. 已從 ASP.NET 共用架構移除 JSON.NET。 將套件參考新增至 [`Microsoft.AspNetCore.Mvc.NewtonsoftJson`](https://nuget.org/packages/Microsoft.AspNetCore.Mvc.NewtonsoftJson) 。
+1. 已從 ASP.NET 共用架構移除 JSON.NET。 將封裝參考加入至 [`Microsoft.AspNetCore.Mvc.NewtonsoftJson`](https://nuget.org/packages/Microsoft.AspNetCore.Mvc.NewtonsoftJson) 。
 
 1. 在 `Startup.ConfigureServices` 中，將下列醒目提示的程式碼鏈結至 `AddMvc` 方法呼叫：
 
@@ -491,7 +491,7 @@ namespace BooksApi.Controllers
 
     完成前述變更後，Web API 序列化 JSON 回應中屬性名稱即符合其對應的 CLR 物件類型屬性名稱。 例如，`Book` 類別的 `Author` 屬性會序列化為 `Author`。
 
-1. 在*模型/Book .cs*中， `BookName` 使用下列屬性標注屬性 [`[JsonProperty]`](https://www.newtonsoft.com/json/help/html/T_Newtonsoft_Json_JsonPropertyAttribute.htm) ：
+1. 在 *模型/Book* 中，以 `BookName` 下列屬性標注屬性 [`[JsonProperty]`](https://www.newtonsoft.com/json/help/html/T_Newtonsoft_Json_JsonPropertyAttribute.htm) ：
 
     ```csharp
     [BsonElement("Name")]
@@ -513,5 +513,5 @@ namespace BooksApi.Controllers
 
 如需有關建置 ASP.NET Core Web API 的詳細資訊，請參閱下列資源：
 
-* [這篇文章的 YouTube 版本](https://www.youtube.com/watch?v=7uJt_sOenyo&feature=youtu.be)
+* [本文的 YouTube 版本](https://www.youtube.com/watch?v=7uJt_sOenyo&feature=youtu.be)
 * [使用 ASP.NET Core 建立 Web API](https://docs.microsoft.com/aspnet/core/web-api/index?view=aspnetcore-3.0)

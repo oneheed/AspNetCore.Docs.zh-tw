@@ -20,10 +20,10 @@ no-loc:
 - SignalR
 uid: test/razor-pages-tests
 ms.openlocfilehash: 2486eb8c9fd0fc33ea77b0fedd99795218d7f4ca
-ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
+ms.sourcegitcommit: 3593c4efa707edeaaceffbfa544f99f41fc62535
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 10/30/2020
+ms.lasthandoff: 01/04/2021
 ms.locfileid: "93058034"
 ---
 # <a name="no-locrazor-pages-unit-tests-in-aspnet-core"></a>Razor ASP.NET Core 中的頁面單元測試
@@ -62,10 +62,10 @@ dotnet test
 
 訊息應用程式是 Razor 具有下列特性的頁面訊息系統：
 
-* 應用程式的 [索引] 頁面 ( *Pages/index. cshtml* 和 *pages/index. CSHTML* ) 提供 UI 和頁面模型方法來控制訊息的新增、刪除和分析， (尋找每個訊息) 的平均單字數。
-* 訊息是由 `Message` 類別 ( *Data/message .cs* ) 所描述，其中包含兩個屬性： `Id` (索引鍵) 和 `Text` (訊息) 。 `Text`屬性是必要的，且限制為200個字元。
+* 應用程式的 [索引] 頁面 (*Pages/index. cshtml* 和 *pages/index. CSHTML*) 提供 UI 和頁面模型方法來控制訊息的新增、刪除和分析， (尋找每個訊息) 的平均單字數。
+* 訊息是由 `Message` 類別 (*Data/message .cs*) 所描述，其中包含兩個屬性： `Id` (索引鍵) 和 `Text` (訊息) 。 `Text`屬性是必要的，且限制為200個字元。
 * 訊息是使用 [Entity Framework 的記憶體內部資料庫](/ef/core/providers/in-memory/)&#8224; 來儲存。
-* 應用程式在其資料庫內容類別中包含 DAL， `AppDbContext` ( *Data/AppDbCoNtext .cs* ) 。 DAL 方法會標示為 `virtual` ，可讓您模擬要在測試中使用的方法。
+* 應用程式在其資料庫內容類別中包含 DAL， `AppDbContext` (*Data/AppDbCoNtext .cs*) 。 DAL 方法會標示為 `virtual` ，可讓您模擬要在測試中使用的方法。
 * 如果應用程式啟動時資料庫是空的，則會使用三個訊息來初始化訊息存放區。 這些 *植* 入的訊息也會在測試中使用。
 
 &#8224;EF 主題、 [使用 InMemory 進行測試](/ef/core/miscellaneous/testing/in-memory)，說明如何使用記憶體內部資料庫來搭配 MSTest 進行測試。 本主題使用 [xUnit](https://xunit.github.io/) 測試架構。 跨不同測試架構的測試概念和測試的執行方式類似，但不完全相同。
@@ -85,9 +85,9 @@ dotnet test
 
 ## <a name="unit-tests-of-the-data-access-layer-dal"></a>資料存取層 (DAL 的單元測試) 
 
-訊息應用程式具有具有四個包含在類別中的方法 `AppDbContext` ( *src/ Razor PagesTestSample/Data/AppDbCoNtext* ) 。 每個方法在測試應用程式中都有一個或兩個單元測試。
+訊息應用程式具有具有四個包含在類別中的方法 `AppDbContext` (*src/ Razor PagesTestSample/Data/AppDbCoNtext*) 。 每個方法在測試應用程式中都有一個或兩個單元測試。
 
-| DAL 方法               | 函式                                                                   |
+| DAL 方法               | 函數                                                                   |
 | ------------------------ | -------------------------------------------------------------------------- |
 | `GetMessagesAsync`       | 從資料庫取得，並 `List<Message>` 依屬性排序 `Text` 。 |
 | `AddMessageAsync`        | 將加入 `Message` 至資料庫。                                          |
@@ -106,7 +106,7 @@ using (var db = new AppDbContext(optionsBuilder.Options))
 }
 ```
 
-這種方法的問題在於，每個測試都會以先前測試所用的任何狀態來接收資料庫。 當您嘗試撰寫不會干擾彼此的不可部分完成單元測試時，這可能會造成問題。 若要強制將 `AppDbContext` 新的資料庫內容用於每個測試，請提供以 `DbContextOptions` 新的服務提供者為基礎的實例。 測試應用程式會示範如何使用其 `Utilities` class 方法 (test `TestDbContextOptions` */ Razor PagesTestSample. 測試/公用事業/utilities* ) ：
+這種方法的問題在於，每個測試都會以先前測試所用的任何狀態來接收資料庫。 當您嘗試撰寫不會干擾彼此的不可部分完成單元測試時，這可能會造成問題。 若要強制將 `AppDbContext` 新的資料庫內容用於每個測試，請提供以 `DbContextOptions` 新的服務提供者為基礎的實例。 測試應用程式會示範如何使用其 `Utilities` class 方法 (test `TestDbContextOptions` */ Razor PagesTestSample. 測試/公用事業/utilities*) ：
 
 [!code-csharp[](razor-pages-tests/samples/3.x/tests/RazorPagesTestSample.Tests/Utilities/Utilities.cs?name=snippet1)]
 
@@ -119,13 +119,13 @@ using (var db = new AppDbContext(Utilities.TestDbContextOptions()))
 }
 ```
 
-類別中的每個測試方法 `DataAccessLayerTest` ( *>--run-unittests/DataAccessLayerTest* ) 遵循類似的排列-Act 判斷提示模式：
+類別中的每個測試方法 `DataAccessLayerTest` (*>--run-unittests/DataAccessLayerTest*) 遵循類似的排列-Act 判斷提示模式：
 
 1. 排列：資料庫設定為測試及/或定義預期的結果。
 1. Act：執行測試。
 1. 判斷提示：判斷測試結果是否成功的判斷提示。
 
-例如， `DeleteMessageAsync` 方法會負責移除其 `Id` ( *src/ Razor PagesTestSample/Data/AppDbCoNtext* ) 所識別的單一訊息：
+例如， `DeleteMessageAsync` 方法會負責移除其 `Id` (*src/ Razor PagesTestSample/Data/AppDbCoNtext*) 所識別的單一訊息：
 
 [!code-csharp[](razor-pages-tests/samples/3.x/src/RazorPagesTestSample/Data/AppDbContext.cs?name=snippet4)]
 
@@ -158,7 +158,7 @@ using (var db = new AppDbContext(Utilities.TestDbContextOptions()))
 
 另一組單元測試負責測試頁面模型方法。 在訊息應用程式中，索引頁面模型可在 `IndexModel` *src/ Razor PagesTestSample/Pages/Index. .cs* 的類別中找到。
 
-| 頁面模型方法 | 函式 |
+| 頁面模型方法 | 函數 |
 | ----------------- | -------- |
 | `OnGetAsync` | 使用方法，從 DAL 取得適用于 UI 的訊息 `GetMessagesAsync` 。 |
 | `OnPostAddMessageAsync` | 如果 [ModelState](xref:Microsoft.AspNetCore.Mvc.ModelBinding.ModelStateDictionary) 有效，則呼叫會 `AddMessageAsync` 將訊息加入至資料庫。 |
@@ -166,7 +166,7 @@ using (var db = new AppDbContext(Utilities.TestDbContextOptions()))
 | `OnPostDeleteMessageAsync` | 執行 `DeleteMessageAsync` 以刪除具有指定之的訊息 `Id` 。 |
 | `OnPostAnalyzeMessagesAsync` | 如果資料庫中有一或多個訊息，則會計算每個訊息的平均單字數。 |
 
-頁面模型方法會使用類別中的七個測試進行測試 `IndexPageTests` ( *測試/ Razor PagesTestSample. 測試/>--run-unittests/IndexPageTests .cs* ) 。 測試會使用熟悉的「排列-判斷提示-Act」模式。 這些測試著重于：
+頁面模型方法會使用類別中的七個測試進行測試 `IndexPageTests` (*測試/ Razor PagesTestSample. 測試/>--run-unittests/IndexPageTests .cs*) 。 測試會使用熟悉的「排列-判斷提示-Act」模式。 這些測試著重于：
 
 * 判斷在 [ModelState](xref:Microsoft.AspNetCore.Mvc.ModelBinding.ModelStateDictionary) 無效時，方法是否遵循正確的行為。
 * 確認方法會產生正確的 <xref:Microsoft.AspNetCore.Mvc.IActionResult> 。
@@ -180,11 +180,11 @@ using (var db = new AppDbContext(Utilities.TestDbContextOptions()))
 
 當 `OnGetAsync` 方法在 Act 步驟中執行時，它會呼叫頁面模型的 `GetMessagesAsync` 方法。
 
-單元測試動作步驟 ( *測試/ Razor PagesTestSample. 測試/>--run-unittests/IndexPageTests .cs* ) ：
+單元測試動作步驟 (*測試/ Razor PagesTestSample. 測試/>--run-unittests/IndexPageTests .cs*) ：
 
 [!code-csharp[](razor-pages-tests/samples/3.x/tests/RazorPagesTestSample.Tests/UnitTests/IndexPageTests.cs?name=snippet2)]
 
-`IndexPage` 頁面模型的 `OnGetAsync` 方法 ( *src/ Razor PagesTestSample/Pages/Index. cshtml* ) ：
+`IndexPage` 頁面模型的 `OnGetAsync` 方法 (*src/ Razor PagesTestSample/Pages/Index. cshtml*) ：
 
 [!code-csharp[](razor-pages-tests/samples/3.x/src/RazorPagesTestSample/Pages/Index.cshtml.cs?name=snippet1&highlight=3)]
 
@@ -246,10 +246,10 @@ dotnet test
 
 訊息應用程式是 Razor 具有下列特性的頁面訊息系統：
 
-* 應用程式的 [索引] 頁面 ( *Pages/index. cshtml* 和 *pages/index. CSHTML* ) 提供 UI 和頁面模型方法來控制訊息的新增、刪除和分析， (尋找每個訊息) 的平均單字數。
-* 訊息是由 `Message` 類別 ( *Data/message .cs* ) 所描述，其中包含兩個屬性： `Id` (索引鍵) 和 `Text` (訊息) 。 `Text`屬性是必要的，且限制為200個字元。
+* 應用程式的 [索引] 頁面 (*Pages/index. cshtml* 和 *pages/index. CSHTML*) 提供 UI 和頁面模型方法來控制訊息的新增、刪除和分析， (尋找每個訊息) 的平均單字數。
+* 訊息是由 `Message` 類別 (*Data/message .cs*) 所描述，其中包含兩個屬性： `Id` (索引鍵) 和 `Text` (訊息) 。 `Text`屬性是必要的，且限制為200個字元。
 * 訊息是使用 [Entity Framework 的記憶體內部資料庫](/ef/core/providers/in-memory/)&#8224; 來儲存。
-* 應用程式在其資料庫內容類別中包含 DAL， `AppDbContext` ( *Data/AppDbCoNtext .cs* ) 。 DAL 方法會標示為 `virtual` ，可讓您模擬要在測試中使用的方法。
+* 應用程式在其資料庫內容類別中包含 DAL， `AppDbContext` (*Data/AppDbCoNtext .cs*) 。 DAL 方法會標示為 `virtual` ，可讓您模擬要在測試中使用的方法。
 * 如果應用程式啟動時資料庫是空的，則會使用三個訊息來初始化訊息存放區。 這些 *植* 入的訊息也會在測試中使用。
 
 &#8224;EF 主題、 [使用 InMemory 進行測試](/ef/core/miscellaneous/testing/in-memory)，說明如何使用記憶體內部資料庫來搭配 MSTest 進行測試。 本主題使用 [xUnit](https://xunit.github.io/) 測試架構。 跨不同測試架構的測試概念和測試的執行方式類似，但不完全相同。
@@ -269,9 +269,9 @@ dotnet test
 
 ## <a name="unit-tests-of-the-data-access-layer-dal"></a>資料存取層 (DAL 的單元測試) 
 
-訊息應用程式具有具有四個包含在類別中的方法 `AppDbContext` ( *src/ Razor PagesTestSample/Data/AppDbCoNtext* ) 。 每個方法在測試應用程式中都有一個或兩個單元測試。
+訊息應用程式具有具有四個包含在類別中的方法 `AppDbContext` (*src/ Razor PagesTestSample/Data/AppDbCoNtext*) 。 每個方法在測試應用程式中都有一個或兩個單元測試。
 
-| DAL 方法               | 函式                                                                   |
+| DAL 方法               | 函數                                                                   |
 | ------------------------ | -------------------------------------------------------------------------- |
 | `GetMessagesAsync`       | 從資料庫取得，並 `List<Message>` 依屬性排序 `Text` 。 |
 | `AddMessageAsync`        | 將加入 `Message` 至資料庫。                                          |
@@ -290,7 +290,7 @@ using (var db = new AppDbContext(optionsBuilder.Options))
 }
 ```
 
-這種方法的問題在於，每個測試都會以先前測試所用的任何狀態來接收資料庫。 當您嘗試撰寫不會干擾彼此的不可部分完成單元測試時，這可能會造成問題。 若要強制將 `AppDbContext` 新的資料庫內容用於每個測試，請提供以 `DbContextOptions` 新的服務提供者為基礎的實例。 測試應用程式會示範如何使用其 `Utilities` class 方法 (test `TestDbContextOptions` */ Razor PagesTestSample. 測試/公用事業/utilities* ) ：
+這種方法的問題在於，每個測試都會以先前測試所用的任何狀態來接收資料庫。 當您嘗試撰寫不會干擾彼此的不可部分完成單元測試時，這可能會造成問題。 若要強制將 `AppDbContext` 新的資料庫內容用於每個測試，請提供以 `DbContextOptions` 新的服務提供者為基礎的實例。 測試應用程式會示範如何使用其 `Utilities` class 方法 (test `TestDbContextOptions` */ Razor PagesTestSample. 測試/公用事業/utilities*) ：
 
 [!code-csharp[](razor-pages-tests/samples/2.x/tests/RazorPagesTestSample.Tests/Utilities/Utilities.cs?name=snippet1)]
 
@@ -303,13 +303,13 @@ using (var db = new AppDbContext(Utilities.TestDbContextOptions()))
 }
 ```
 
-類別中的每個測試方法 `DataAccessLayerTest` ( *>--run-unittests/DataAccessLayerTest* ) 遵循類似的排列-Act 判斷提示模式：
+類別中的每個測試方法 `DataAccessLayerTest` (*>--run-unittests/DataAccessLayerTest*) 遵循類似的排列-Act 判斷提示模式：
 
 1. 排列：資料庫設定為測試及/或定義預期的結果。
 1. Act：執行測試。
 1. 判斷提示：判斷測試結果是否成功的判斷提示。
 
-例如， `DeleteMessageAsync` 方法會負責移除其 `Id` ( *src/ Razor PagesTestSample/Data/AppDbCoNtext* ) 所識別的單一訊息：
+例如， `DeleteMessageAsync` 方法會負責移除其 `Id` (*src/ Razor PagesTestSample/Data/AppDbCoNtext*) 所識別的單一訊息：
 
 [!code-csharp[](razor-pages-tests/samples/2.x/src/RazorPagesTestSample/Data/AppDbContext.cs?name=snippet4)]
 
@@ -342,7 +342,7 @@ using (var db = new AppDbContext(Utilities.TestDbContextOptions()))
 
 另一組單元測試負責測試頁面模型方法。 在訊息應用程式中，索引頁面模型可在 `IndexModel` *src/ Razor PagesTestSample/Pages/Index. .cs* 的類別中找到。
 
-| 頁面模型方法 | 函式 |
+| 頁面模型方法 | 函數 |
 | ----------------- | -------- |
 | `OnGetAsync` | 使用方法，從 DAL 取得適用于 UI 的訊息 `GetMessagesAsync` 。 |
 | `OnPostAddMessageAsync` | 如果 [ModelState](xref:Microsoft.AspNetCore.Mvc.ModelBinding.ModelStateDictionary) 有效，則呼叫會 `AddMessageAsync` 將訊息加入至資料庫。 |
@@ -350,7 +350,7 @@ using (var db = new AppDbContext(Utilities.TestDbContextOptions()))
 | `OnPostDeleteMessageAsync` | 執行 `DeleteMessageAsync` 以刪除具有指定之的訊息 `Id` 。 |
 | `OnPostAnalyzeMessagesAsync` | 如果資料庫中有一或多個訊息，則會計算每個訊息的平均單字數。 |
 
-頁面模型方法會使用類別中的七個測試進行測試 `IndexPageTests` ( *測試/ Razor PagesTestSample. 測試/>--run-unittests/IndexPageTests .cs* ) 。 測試會使用熟悉的「排列-判斷提示-Act」模式。 這些測試著重于：
+頁面模型方法會使用類別中的七個測試進行測試 `IndexPageTests` (*測試/ Razor PagesTestSample. 測試/>--run-unittests/IndexPageTests .cs*) 。 測試會使用熟悉的「排列-判斷提示-Act」模式。 這些測試著重于：
 
 * 判斷在 [ModelState](xref:Microsoft.AspNetCore.Mvc.ModelBinding.ModelStateDictionary) 無效時，方法是否遵循正確的行為。
 * 確認方法會產生正確的 <xref:Microsoft.AspNetCore.Mvc.IActionResult> 。
@@ -364,11 +364,11 @@ using (var db = new AppDbContext(Utilities.TestDbContextOptions()))
 
 當 `OnGetAsync` 方法在 Act 步驟中執行時，它會呼叫頁面模型的 `GetMessagesAsync` 方法。
 
-單元測試動作步驟 ( *測試/ Razor PagesTestSample. 測試/>--run-unittests/IndexPageTests .cs* ) ：
+單元測試動作步驟 (*測試/ Razor PagesTestSample. 測試/>--run-unittests/IndexPageTests .cs*) ：
 
 [!code-csharp[](razor-pages-tests/samples/2.x/tests/RazorPagesTestSample.Tests/UnitTests/IndexPageTests.cs?name=snippet2)]
 
-`IndexPage` 頁面模型的 `OnGetAsync` 方法 ( *src/ Razor PagesTestSample/Pages/Index. cshtml* ) ：
+`IndexPage` 頁面模型的 `OnGetAsync` 方法 (*src/ Razor PagesTestSample/Pages/Index. cshtml*) ：
 
 [!code-csharp[](razor-pages-tests/samples/2.x/src/RazorPagesTestSample/Pages/Index.cshtml.cs?name=snippet1&highlight=3)]
 
@@ -393,6 +393,6 @@ using (var db = new AppDbContext(Utilities.TestDbContextOptions()))
 * [開始使用 xUnit.net：搭配使用 .NET Core 與 .NET SDK 命令列](https://xunit.github.io/docs/getting-started-dotnet-core)
 * [Moq](https://github.com/moq/moq4)
 * [Moq 快速入門](https://github.com/Moq/moq4/wiki/Quickstart)
-* [JustMockLite](https://github.com/telerik/JustMockLite)：適用于 .net 開發人員的模擬架構。  ( *不會受到 Microsoft 的維護或支援* ) 
+* [JustMockLite](https://github.com/telerik/JustMockLite)：適用于 .net 開發人員的模擬架構。  (*不會受到 Microsoft 的維護或支援*) 
 
 ::: moniker-end

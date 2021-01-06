@@ -19,10 +19,10 @@ no-loc:
 - SignalR
 uid: aspnetcore-2.2
 ms.openlocfilehash: 67581904c686b0f8b6736b751c8e3f1545f6a286
-ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
+ms.sourcegitcommit: 3593c4efa707edeaaceffbfa544f99f41fc62535
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 10/30/2020
+ms.lasthandoff: 01/04/2021
 ms.locfileid: "93059698"
 ---
 # <a name="whats-new-in-aspnet-core-22"></a>ASP.NET Core 2.2 的新功能
@@ -45,12 +45,12 @@ OpenAPI (之前稱為 Swagger) 是用來描述 REST API 的語言無關規格。
 
 ## <a name="endpoint-routing"></a>端點路由
 
-ASP.NET Core 2.2 使用新的「端點路由」  系統來改善要求的分派。 其變更包括新的連結產生 API 成員和路由參數轉換器。
+ASP.NET Core 2.2 使用新的「端點路由」系統來改善要求的分派。 其變更包括新的連結產生 API 成員和路由參數轉換器。
 
 如需詳細資訊，請參閱下列資源：
 
 * [Endpoint routing in 2.2](https://blogs.msdn.microsoft.com/webdev/2018/08/27/asp-net-core-2-2-0-preview1-endpoint-routing/) (2.2 中的端點路由)
-*  一節)
+* [路由參數轉換器](https://www.hanselman.com/blog/ASPNETCore22ParameterTransformersForCleanURLGenerationAndSlugsInRazorPagesOrMVC.aspx) (請參閱＜Routing＞(路由) 一節)
 * [IRouter 路由與端點路由之間的差異](xref:fundamentals/routing?view=aspnetcore-2.2#differences-from-earlier-versions-of-routing)
 
 ## <a name="health-checks"></a>健康狀態檢查
@@ -87,7 +87,7 @@ HTTP/2 是 HTTP 通訊協定的主要版本。 HTTP/2 的值得注意的功能�
 
 ## <a name="iis-in-process-hosting"></a>IIS 同處理序裝載
 
-在舊版的 ASP.NET Core 中，IIS 是作為反向 Proxy。 在 2.2 中，ASP.NET Core 模組可啟動 CoreCLR，並在 IIS 背景工作處理序 ( *w3wp.exe* ) 內裝載應用程式。 同處理序裝載以 IIS 執行時可改善效能和診斷。
+在舊版的 ASP.NET Core 中，IIS 是作為反向 Proxy。 在 2.2 中，ASP.NET Core 模組可啟動 CoreCLR，並在 IIS 背景工作處理序 (*w3wp.exe*) 內裝載應用程式。 同處理序裝載以 IIS 執行時可改善效能和診斷。
 
 如需詳細資訊，請參閱 [IIS 的同處理序裝載](xref:host-and-deploy/aspnet-core-module?view=aspnetcore-2.2#in-process-hosting-model)。
 

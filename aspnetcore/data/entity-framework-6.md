@@ -17,10 +17,10 @@ no-loc:
 - SignalR
 uid: data/entity-framework-6
 ms.openlocfilehash: 086418c161677f585b08ed360555c93d8575e701
-ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
+ms.sourcegitcommit: 3593c4efa707edeaaceffbfa544f99f41fc62535
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 10/30/2020
+ms.lasthandoff: 01/04/2021
 ms.locfileid: "93059451"
 ---
 # <a name="aspnet-core-and-entity-framework-6"></a>ASP.NET Core 和 Entity Framework 6
@@ -44,13 +44,13 @@ ms.locfileid: "93059451"
 
 本文示範如何在 ASP.NET Core 應用程式中使用 Entity Framework 6。    
 
-## <a name="overview"></a>概觀 
+## <a name="overview"></a>總覽 
 
 若要使用 Entity Framework 6，您的專案必須針對 .NET Framework 進行編譯，因為 Entity Framework 6 不支援 .NET Core。 如果您需要跨平台功能，則必須升級至 [Entity Framework Core](/ef/)。  
 
 在 ASP.NET Core 應用程式中使用 Entity Framework 6 的建議方式，是將 EF6 內容和模型類別放在以 .NET Framework 為目標的類別庫專案中。 從 ASP.NET Core 專案新增類別庫的參考。 請參閱[使用 EF6 和 ASP.NET Core 專案的 Visual Studio 方案](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/data/entity-framework-6/sample/)範例。  
 
-您無法將 EF6 內容置於 ASP.NET Core 專案中，因為 .NET Core 專案不支援 EF6 命令 (例如 *Enable-Migrations* ) 需要的所有功能。    
+您無法將 EF6 內容置於 ASP.NET Core 專案中，因為 .NET Core 專案不支援 EF6 命令 (例如 *Enable-Migrations*) 需要的所有功能。    
 
 不論您放置 EF6 內容的專案類型為何，只有 EF6 命令列工具才適用於 EF6 內容。 例如，`Scaffold-DbContext` 僅可用於 Entity Framework Core。 如果您需要對資料庫進行反向工程以 EF6 模型，請參閱 <https://docs.microsoft.com/ef/ef6/modeling/code-first/workflows/existing-database> 。    
 
@@ -92,12 +92,12 @@ ms.locfileid: "93059451"
 
 * 建立方案。    
 
-* [新增]     
+* [新增]**[新專案]** > **[Web]** > **[ASP.NET Core Web 應用程式]** >     
   * 在專案範本選取項目對話方塊中，選取下拉式清單中的 API 和.NET Framework 
 
-* [新增]   
+* [新增]**[新增專案]** > **[Windows Desktop]** > **[類別庫 (.NET Framework)]** >   
 
-* 在這兩個專案的 [套件管理員主控台]  (PMC) 中，執行 `Install-Package Entityframework` 命令。    
+* 在這兩個專案的 [套件管理員主控台] (PMC) 中，執行 `Install-Package Entityframework` 命令。    
 
 * 在類別庫專案中，建立資料模型類別和內容類別，以及 `IDbContextFactory` 的實作。    
 

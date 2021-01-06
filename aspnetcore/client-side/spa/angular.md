@@ -20,10 +20,10 @@ no-loc:
 - SignalR
 uid: spa/angular
 ms.openlocfilehash: 2fff0d60b71bbbab9347dbe74cad023264247388
-ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
+ms.sourcegitcommit: 3593c4efa707edeaaceffbfa544f99f41fc62535
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 10/30/2020
+ms.lasthandoff: 01/04/2021
 ms.locfileid: "93054563"
 ---
 # <a name="use-the-angular-project-template-with-aspnet-core"></a>搭配 ASP.NET Core 使用 Angular 專案範本
@@ -66,7 +66,7 @@ Now listening on: http://localhost:<port>
 在瀏覽器中開啟這個 URL。
 
 > [!WARNING]
-> 應用程式會在背景啟動 Angular CLI 伺服器的執行個體。 記錄類似下面的訊息： *NG Live 程式開發伺服器正在接聽 localhost： &lt; otherport &gt; ，請開啟瀏覽器以 http://localhost:&lt otherport &gt; /* 。 請忽略此訊息&mdash;這 **不是** ASP.NET Core 與 Angular CLI 應用程式的合併 URL。
+> 應用程式會在背景啟動 Angular CLI 伺服器的執行個體。 記錄類似下面的訊息： *NG Live 程式開發伺服器正在接聽 localhost： &lt; otherport &gt; ，請開啟瀏覽器以 http://localhost:&lt otherport &gt; /*。 請忽略此訊息&mdash;這 **不是** ASP.NET Core 與 Angular CLI 應用程式的合併 URL。
 
 ---
 

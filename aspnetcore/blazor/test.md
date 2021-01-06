@@ -20,10 +20,10 @@ no-loc:
 - SignalR
 uid: blazor/test
 ms.openlocfilehash: cd4aee66fd6df6cc0ce520d8ca66e0a2cf130eff
-ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
+ms.sourcegitcommit: 3593c4efa707edeaaceffbfa544f99f41fc62535
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 10/30/2020
+ms.lasthandoff: 01/04/2021
 ms.locfileid: "93054862"
 ---
 # <a name="test-components-in-aspnet-core-no-locblazor"></a>ASP.NET Core 中的測試元件 Blazor
@@ -32,7 +32,7 @@ ms.locfileid: "93054862"
 
 測試是建立穩定和可維護軟體的重要層面。
 
-若要測試 Blazor 元件，受測的元件 (剪 *下* ) 為：
+若要測試 Blazor 元件，受測的元件 (剪 *下*) 為：
 
 * 以測試的相關輸入來呈現。
 * 視執行的測試類型而定，可能會受互動或修改。 例如，事件處理常式可以觸發，例如 `onclick` 按鈕的事件。
@@ -42,7 +42,7 @@ ms.locfileid: "93054862"
 
 測試元件的兩個常見方法 Blazor 是端對端 (E2E) 測試和單元測試：
 
-* **單元測試** ： [單元](/dotnet/core/testing/) 測試會使用提供下列提供的單元測試程式庫撰寫：
+* **單元測試**： [單元](/dotnet/core/testing/) 測試會使用提供下列提供的單元測試程式庫撰寫：
   * 元件呈現。
   * 檢查元件輸出和狀態。
   * 觸發事件處理常式和生命週期方法。
@@ -50,7 +50,7 @@ ms.locfileid: "93054862"
 
   [bUnit](https://github.com/egil/bUnit) 是可啟用元件單元測試的程式庫範例 Razor 。
 
-* **E2E 測試** ：測試執行器會執行 Blazor 包含剪下的應用程式，並將瀏覽器實例自動化。 測試控管會檢查並透過瀏覽器與剪下互動。 [Selenium](https://github.com/SeleniumHQ/selenium) 是可搭配應用程式使用的 E2E 測試架構範例 Blazor 。
+* **E2E 測試**：測試執行器會執行 Blazor 包含剪下的應用程式，並將瀏覽器實例自動化。 測試控管會檢查並透過瀏覽器與剪下互動。 [Selenium](https://github.com/SeleniumHQ/selenium) 是可搭配應用程式使用的 E2E 測試架構範例 Blazor 。
 
 在單元測試中，只 Blazor 涉及 (Razor /c # ) 元件。 外部相依性（例如服務和 JS interop）必須是模擬。 在 E2E 測試中， Blazor 元件和其所有輔助基礎結構都是測試的一部分，包括 CSS、JS 以及 DOM 和瀏覽器 api。
 
@@ -143,11 +143,11 @@ public void CounterShouldIncrementWhenSelected()
 
 下列動作會在測試的每個步驟進行：
 
-* *排列* ：此 `Counter` 元件是使用 bUnit 的呈現 `TestContext` 。 會找到剪下的段落專案 (`<p>`) ，並將其指派給 `paraElm` 。
+* *排列*：此 `Counter` 元件是使用 bUnit 的呈現 `TestContext` 。 會找到剪下的段落專案 (`<p>`) ，並將其指派給 `paraElm` 。
 
-* *Act* ：按鈕的元素 (`<button>`) ，然後藉由呼叫來選取 `Click` ，這應該會遞增計數器，並將段落標記的內容更新 (`<p>`) 。 您可以藉由呼叫來取得段落元素文字內容 `TextContent` 。
+* *Act*：按鈕的元素 (`<button>`) ，然後藉由呼叫來選取 `Click` ，這應該會遞增計數器，並將段落標記的內容更新 (`<p>`) 。 您可以藉由呼叫來取得段落元素文字內容 `TextContent` 。
 
-* *Assert* ： `MarkupMatches` 會在文字內容上呼叫，以確認它符合預期的字串，也就是 `Current count: 1` 。
+* *Assert*： `MarkupMatches` 會在文字內容上呼叫，以確認它符合預期的字串，也就是 `Current count: 1` 。
 
 > [!NOTE]
 > `MarkupMatches`Assert 方法與一般字串比較判斷提示不同 (例如，) 會 `Assert.Equal("Current count: 1", paraElmText);` `MarkupMatches` 執行輸入和預期 HTML 標籤的語法比較。 語義比較可感知 HTML 語義，這表示會忽略不必要的空白字元。 這會導致更穩定的測試。 如需詳細資訊，請參閱 [自訂語義 HTML 比較](https://bunit.egilhansen.com/docs/verification/semantic-html-comparison)。

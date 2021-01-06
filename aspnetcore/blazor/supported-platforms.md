@@ -20,10 +20,10 @@ no-loc:
 - SignalR
 uid: blazor/supported-platforms
 ms.openlocfilehash: fe0734dbf6eb2647fa6c9b6f336063b9ec091139
-ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
+ms.sourcegitcommit: 3593c4efa707edeaaceffbfa544f99f41fc62535
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 10/30/2020
+ms.lasthandoff: 01/04/2021
 ms.locfileid: "93054953"
 ---
 # <a name="aspnet-core-no-locblazor-supported-platforms"></a>ASP.NET Core Blazor 支援的平臺
@@ -36,10 +36,10 @@ Blazor WebAssemblyBlazor Server下表所示的瀏覽器支援和。
 
 | 瀏覽器                          | 版本         |
 | -------------------------------- | --------------- |
-| Apple Safari，包括 iOS      | 目前&dagger; |
-| Google Chrome （包括 Android） | 目前&dagger; |
-| Microsoft Edge                   | 目前&dagger; |
-| Mozilla Firefox                  | 目前&dagger; |  
+| Apple Safari，包括 iOS      | 當前&dagger; |
+| Google Chrome （包括 Android） | 當前&dagger; |
+| Microsoft Edge                   | 當前&dagger; |
+| Mozilla Firefox                  | 當前&dagger; |  
 
 &dagger;*Current* 指的是最新版的瀏覽器。  
 
@@ -51,11 +51,11 @@ Blazor WebAssemblyBlazor Server下表所示的瀏覽器支援和。
 
 | 瀏覽器                          | 版本               |
 | -------------------------------- | --------------------- |
-| Apple Safari，包括 iOS      | 目前&dagger;       |
-| Google Chrome （包括 Android） | 目前&dagger;       |
-| Microsoft Edge                   | 目前&dagger;       |
+| Apple Safari，包括 iOS      | 當前&dagger;       |
+| Google Chrome （包括 Android） | 當前&dagger;       |
+| Microsoft Edge                   | 當前&dagger;       |
 | Microsoft Internet Explorer      | 不支援&Dagger; |
-| Mozilla Firefox                  | 目前&dagger;       |  
+| Mozilla Firefox                  | 當前&dagger;       |  
 
 &dagger;*Current* 指的是最新版的瀏覽器。  
 &Dagger;Microsoft Internet Explorer 不支援 [WebAssembly](https://webassembly.org)。
@@ -64,11 +64,11 @@ Blazor WebAssemblyBlazor Server下表所示的瀏覽器支援和。
 
 | 瀏覽器                          | 版本         |
 | -------------------------------- | --------------- |
-| Apple Safari，包括 iOS      | 目前&dagger; |
-| Google Chrome （包括 Android） | 目前&dagger; |
-| Microsoft Edge                   | 目前&dagger; |
+| Apple Safari，包括 iOS      | 當前&dagger; |
+| Google Chrome （包括 Android） | 當前&dagger; |
+| Microsoft Edge                   | 當前&dagger; |
 | Microsoft Internet Explorer      | rj-11&Dagger;      |
-| Mozilla Firefox                  | 目前&dagger; |
+| Mozilla Firefox                  | 當前&dagger; |
 
 &dagger;*Current* 指的是最新版的瀏覽器。  
 &Dagger;需要其他 polyfill。 例如，您可以透過組合來加入承諾 [`Polyfill.io`](https://polyfill.io/v3/) 。

@@ -20,10 +20,10 @@ no-loc:
 - SignalR
 uid: data/ef-mvc/concurrency
 ms.openlocfilehash: d476c836e8d497ca1291992dda38da1fc9f59ed2
-ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
+ms.sourcegitcommit: 3593c4efa707edeaaceffbfa544f99f41fc62535
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 10/30/2020
+ms.lasthandoff: 01/04/2021
 ms.locfileid: "93054368"
 ---
 # <a name="tutorial-handle-concurrency---aspnet-mvc-with-ef-core"></a>教學課程：使用 EF Core 處理並行 ASP.NET MVC
@@ -49,7 +49,7 @@ ms.locfileid: "93054368"
 > * 更新 [刪除] 頁面
 > * 更新 [詳細資料] 及 [建立] 檢視
 
-## <a name="prerequisites"></a>必要條件
+## <a name="prerequisites"></a>先決條件
 
 * [更新相關資料](update-related-data.md)
 
@@ -218,7 +218,7 @@ _context.Entry(departmentToUpdate).Property("RowVersion").OriginalValue = rowVer
 
 ![變更之後的 Department [編輯] 頁面 2](concurrency/_static/edit-after-change-2.png)
 
-按一下 [檔案]  。 您會看到一個錯誤訊息：
+按一下 [儲存]。 您會看到一個錯誤訊息：
 
 ![Department [編輯] 頁面錯誤訊息](concurrency/_static/edit-error.png)
 

@@ -19,10 +19,10 @@ no-loc:
 - SignalR
 uid: azure/devops/monitor
 ms.openlocfilehash: 74e789828bf5d54e3457f235657f8ed7086df80d
-ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
+ms.sourcegitcommit: 3593c4efa707edeaaceffbfa544f99f41fc62535
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 10/30/2020
+ms.lasthandoff: 01/04/2021
 ms.locfileid: "93056747"
 ---
 # <a name="monitor-and-debug"></a>監視和調試
@@ -49,11 +49,11 @@ App Service 的 web 應用程式可即時輕鬆監視。 Azure 入口網站會�
 
     ![顯示總覽面板的螢幕擷取畫面](./media/monitoring/overview.png)
 
-    * **Http 5xx** ：伺服器端錯誤的計數，通常是 ASP.NET Core 程式碼中的例外狀況。
+    * **Http 5xx**：伺服器端錯誤的計數，通常是 ASP.NET Core 程式碼中的例外狀況。
     * **資料** 輸入：進入您 web 應用程式的資料輸入。
-    * **資料輸出** ：從 web 應用程式到用戶端的資料輸出。
-    * **要求** ： HTTP 要求的計數。
-    * **平均回應時間** ： web 應用程式回應 HTTP 要求的平均時間。
+    * **資料輸出**：從 web 應用程式到用戶端的資料輸出。
+    * **要求**： HTTP 要求的計數。
+    * **平均回應時間**： web 應用程式回應 HTTP 要求的平均時間。
 
     您也可以在此頁面上找到數個用於疑難排解和優化的自助工具。
 
@@ -80,8 +80,8 @@ App Service 的 web 應用程式可即時輕鬆監視。 Azure 入口網站會�
 
     ![Application Insights 設定](./media/monitoring/new-app-insights.png)
 
-1. 針對 **執行時間/架構** ，請選取 [ **ASP.NET Core** ]。 接受預設設定。
-1. 選取 [確定]  。 如果系統提示您確認，請選取 [ **繼續** ]。
+1. 針對 **執行時間/架構**，請選取 [ **ASP.NET Core**]。 接受預設設定。
+1. 選取 [確定]。 如果系統提示您確認，請選取 [ **繼續**]。
 1. 建立資源之後，請按一下 Application Insights 資源的名稱，直接流覽至 Application Insights 頁面。
 
     ![已備妥新的 Application Insights 資源](./media/monitoring/new-app-insights-done.png)
@@ -97,12 +97,12 @@ Application Insights 提供有用的伺服器端資訊，不需額外設定。 �
 在 Azure App Service 中，預設會停用 Web 服務器和應用程式記錄檔。 使用下列步驟啟用記錄：
 
 1. 開啟 [Azure 入口網站](https://portal.azure.com)，然後流覽至 *mywebapp \<unique_number\>* App Service。
-1. 在左側功能表中，向下滾動至 [ **監視** ] 區段。 選取 [ **診斷記錄** ]。
+1. 在左側功能表中，向下滾動至 [ **監視** ] 區段。 選取 [ **診斷記錄**]。
 
     ![診斷記錄連結](./media/monitoring/logging.png)
 
-1. 開啟 **應用程式記錄 (檔案系統)** 。 如果出現提示，請按一下方塊以安裝延伸模組，以在 web 應用程式中啟用應用程式記錄。
-1. 將 **網頁伺服器記錄** 設定為 **檔案系統** 。
+1. 開啟 **應用程式記錄 (檔案系統)**。 如果出現提示，請按一下方塊以安裝延伸模組，以在 web 應用程式中啟用應用程式記錄。
+1. 將 **網頁伺服器記錄** 設定為 **檔案系統**。
 1. 輸入 **保留期限** （以天為單位）。 例如30。
 1. 按一下 [儲存]。
 
@@ -113,7 +113,7 @@ Web 應用程式會產生 ASP.NET Core 和 web 伺服器 (App Service) 記錄。
 您可以透過入口網站即時串流應用程式和 web 伺服器記錄。
 
 1. 開啟 [Azure 入口網站](https://portal.azure.com)，然後流覽至 *mywebapp \<unique_number\>* App Service。
-1. 在左側功能表中，向下移至 [ **監視** ] 區段，然後選取 [ **記錄資料流程** ]。
+1. 在左側功能表中，向下移至 [ **監視** ] 區段，然後選取 [ **記錄資料流程**]。
 
     ![顯示記錄資料流程連結的螢幕擷取畫面](./media/monitoring/log-stream.png)
 
@@ -125,7 +125,7 @@ Azure 監視器也會根據計量、系統管理事件和其他準則來提供 [
 
 > *注意： web 應用程式計量目前的警示僅適用于 (傳統) 服務的警示。*
 
-您可以在 Azure 監視器或在 App Service 設定的 [ **監視** ] 區段下，找到 [ (傳統) 服務的警示](/azure/monitoring-and-diagnostics/monitor-quick-resource-metric-alert-portal)。
+您可以在 Azure 監視器或在 App Service 設定的 [**監視**] 區段下，找到 [ (傳統) 服務的警示](/azure/monitoring-and-diagnostics/monitor-quick-resource-metric-alert-portal)。
 
 ![ (傳統) 連結的警示](./media/monitoring/alerts.png)
 

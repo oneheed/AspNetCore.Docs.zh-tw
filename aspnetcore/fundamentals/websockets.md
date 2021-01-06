@@ -20,10 +20,10 @@ no-loc:
 - SignalR
 uid: fundamentals/websockets
 ms.openlocfilehash: 83a41d503b2d56bca3f1bac14eeb9d54a8257642
-ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
+ms.sourcegitcommit: 3593c4efa707edeaaceffbfa544f99f41fc62535
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 10/30/2020
+ms.lasthandoff: 01/04/2021
 ms.locfileid: "93057774"
 ---
 # <a name="websockets-support-in-aspnet-core"></a>ASP.NET Core 中的 WebSockets 支援
@@ -42,7 +42,7 @@ ms.locfileid: "93057774"
 
 針對某些應用程式， [gRPC on .net](xref:grpc/index) 提供 websocket 的替代方案。
 
-## <a name="prerequisites"></a>必要條件
+## <a name="prerequisites"></a>先決條件
 
 * 支援 ASP.NET Core 的任何作業系統：  
   * Windows 7/Windows Server 2008 或更新版本
@@ -159,10 +159,10 @@ CORS 所提供的保護不套用至 WebSocket。 瀏覽器 **不** 會：
 > 使用 IIS Express 時，不需要這些步驟
 
 1. 使用來自 [管理] 功能表的 [新增角色及功能] 精靈，或是 [伺服器管理員] 中的連結。
-1. 選取 [角色型或功能型安裝]。 選取 [下一步] 。
-1. 選取適當的伺服器 (預設會選取本機伺服器)。 選取 [下一步] 。
+1. 選取 [角色型或功能型安裝]。 選取 [下一步]  。
+1. 選取適當的伺服器 (預設會選取本機伺服器)。 選取 [下一步]  。
 1. 展開 [角色] 樹狀目錄中的 [網頁伺服器 (IIS)]，展開 [網頁伺服器]，然後展開 [應用程式開發]。
-1. 選取 [WebSocket 通訊協定]。 選取 [下一步] 。
+1. 選取 [WebSocket 通訊協定]。 選取 [下一步]  。
 1. 如果不需要額外的功能，請選取 [下一步]。
 1. 選取 [安裝]。
 1. 當安裝完成時，選取 [關閉] 來結束精靈。
@@ -173,7 +173,7 @@ CORS 所提供的保護不套用至 WebSocket。 瀏覽器 **不** 會：
 > 使用 IIS Express 時，不需要這些步驟
 
 1. 流覽至 **主控台**  >  **程式** 的 [  >  **程式和功能]，**  >  **開啟或關閉** 畫面) 左側 (的 [Windows 功能]。
-1. 開啟下列節點： **Internet Information Services**  >  **World Wide Web 服務**  >  **應用程式開發功能** 。
+1. 開啟下列節點： **Internet Information Services**  >  **World Wide Web 服務**  >  **應用程式開發功能**。
 1. 選取 [WebSocket 通訊協定] 功能。 選取 [確定]。
 
 ### <a name="disable-websocket-when-using-socketio-on-nodejs"></a>在 Node.js 上使用 socket.io 時停用 WebSocket

@@ -20,10 +20,10 @@ no-loc:
 - SignalR
 uid: client-side/spa-services
 ms.openlocfilehash: 1b9f5b4b4e066cdd3dd5fbfa666c7a087949979f
-ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
+ms.sourcegitcommit: 3593c4efa707edeaaceffbfa544f99f41fc62535
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 10/30/2020
+ms.lasthandoff: 01/04/2021
 ms.locfileid: "93054641"
 ---
 # <a name="use-javascript-services-to-create-single-page-applications-in-aspnet-core"></a>使用 JavaScript 服務在 ASP.NET Core 中建立單一頁面應用程式
@@ -243,7 +243,7 @@ dotnet new --install Microsoft.AspNetCore.SpaTemplates::*
 | 使用 React.js 的 MVC ASP.NET Core            | react      | [C#]     | Web/MVC/SPA |
 | 使用 React.js 和 Redux 的 MVC ASP.NET Core  | reactredux | [C#]     | Web/MVC/SPA |
 
-若要使用其中一個 SPA 範本建立新的專案，請在 [dotnet new](/dotnet/core/tools/dotnet-new)命令中包含範本的 **簡短名稱** 。 下列命令會建立一個具有針對伺服器端設定 ASP.NET Core MVC 的「角」應用程式：
+若要使用其中一個 SPA 範本建立新的專案，請在 [dotnet new](/dotnet/core/tools/dotnet-new)命令中包含範本的 **簡短名稱**。 下列命令會建立一個具有針對伺服器端設定 ASP.NET Core MVC 的「角」應用程式：
 
 ```dotnetcli
 dotnet new angular
@@ -253,10 +253,10 @@ dotnet new angular
 
 有兩個主要執行時間設定模式：
 
-* **開發** ：
+* **開發**：
   * 包含來源對應以簡化調試。
   * 不會優化用戶端程式代碼的效能。
-* **生產環境** ：
+* **生產環境**：
   * 排除來源對應。
   * 透過組合和縮制優化用戶端程式代碼。
 
@@ -286,11 +286,11 @@ dotnet run
 
 SpaServices 範本已預先設定為使用 [Karma](https://karma-runner.github.io/1.0/index.html) 和 [Jasmine](https://jasmine.github.io/)執行用戶端測試。 Jasmine 是適用于 JavaScript 的熱門單元測試架構，而 Karma 則是適用于這些測試的測試執行器。 Karma 已設定為使用 [Webpack Dev 中介軟體](#webpack-dev-middleware) ，因此開發人員不需要在每次進行變更時停止和執行測試。 無論是針對測試案例或測試案例本身執行的程式碼，測試都會自動執行。
 
-使用「角度」應用程式做為範例中，已為 Jasmine 測試案例提供的範例檔案中有兩個 `CounterComponent` ： *counter.component.spec.ts*
+使用「角度」應用程式做為範例中，已為 Jasmine 測試案例提供的範例檔案中有兩個 `CounterComponent` ： 
 
 [!code-typescript[](../client-side/spa-services/sample/SpaServicesSampleApp/ClientApp/app/components/counter/counter.component.spec.ts?range=15-28)]
 
-在 *ClientApp* 目錄中開啟命令提示字元。 執行下列命令：
+在 *ClientApp* 目錄中開啟命令提示字元。 執行以下命令：
 
 ```console
 npm test

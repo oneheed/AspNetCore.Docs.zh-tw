@@ -20,10 +20,10 @@ no-loc:
 - SignalR
 uid: data/ef-mvc/update-related-data
 ms.openlocfilehash: f41d0b1d7ba46ef4867e0d160dc61f21042ce403
-ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
+ms.sourcegitcommit: 3593c4efa707edeaaceffbfa544f99f41fc62535
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 10/30/2020
+ms.lasthandoff: 01/04/2021
 ms.locfileid: "93053939"
 ---
 # <a name="tutorial-update-related-data---aspnet-mvc-with-ef-core"></a>教學課程：使用 EF Core 更新相關資料-ASP.NET MVC
@@ -45,7 +45,7 @@ ms.locfileid: "93053939"
 > * 更新 [刪除] 頁面
 > * 將辦公室位置和課程新增至 [建立] 頁面
 
-## <a name="prerequisites"></a>必要條件
+## <a name="prerequisites"></a>先決條件
 
 * [讀取相關資料](read-related-data.md)
 
@@ -89,7 +89,7 @@ HttpGet `Edit` 方法會根據已指派給正在編輯之課程的部門識別�
 
 ### <a name="modify-the-course-views"></a>修改 Course 檢視
 
-在 *Views/Courses/Create.cshtml* 中，將一個「選取部門」選項新增至 [部門] 下拉式清單，將標題從 **DepartmentID** 變更為 **Department** ，然後新增一個驗證訊息。
+在 *Views/Courses/Create.cshtml* 中，將一個「選取部門」選項新增至 [部門] 下拉式清單，將標題從 **DepartmentID** 變更為 **Department**，然後新增一個驗證訊息。
 
 [!code-cshtml[](intro/samples/cu/Views/Courses/Create.cshtml?highlight=2-6&range=29-34)]
 
@@ -113,7 +113,7 @@ HttpGet `Edit` 方法會根據已指派給正在編輯之課程的部門識別�
 
 ![Course [建立] 頁面](update-related-data/_static/course-create.png)
 
-按一下頁面底部的 [新增]  。 Courses [索引] 頁面便會顯示，並且清單中已有新建立的課程。 [索引] 頁面中的部門名稱來自於導覽屬性，顯示關聯性已正確建立。
+按一下 [建立]。 Courses [索引] 頁面便會顯示，並且清單中已有新建立的課程。 [索引] 頁面中的部門名稱來自於導覽屬性，顯示關聯性已正確建立。
 
 按一下 Courses [索引] 頁面中課程的 [編輯]。
 
@@ -195,7 +195,7 @@ Course 與 Instructor 實體的關係為多對多。 若要新增和移除關聯
 
 若要針對核取方塊清單提供資料給檢視，您必須使用一個檢視模型類別。
 
-在 *SchoolViewModels* 資料夾中建立 *AssignedCourseData.cs* ，然後以下列程式碼取代現有的程式碼：
+在 *SchoolViewModels* 資料夾中建立 *AssignedCourseData.cs*，然後以下列程式碼取代現有的程式碼：
 
 [!code-csharp[](intro/samples/cu/Models/SchoolViewModels/AssignedCourseData.cs)]
 

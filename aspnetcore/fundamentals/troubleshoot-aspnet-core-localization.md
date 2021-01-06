@@ -18,10 +18,10 @@ no-loc:
 - SignalR
 uid: fundamentals/troubleshoot-aspnet-core-localization
 ms.openlocfilehash: 995db4c8c9d0c0f1f77b1fd3665e707975406a7f
-ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
+ms.sourcegitcommit: 3593c4efa707edeaaceffbfa544f99f41fc62535
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 10/30/2020
+ms.lasthandoff: 01/04/2021
 ms.locfileid: "93053614"
 ---
 # <a name="troubleshoot-aspnet-core-localization"></a>針對 ASP.NET Core 當地語系化進行疑難排解
@@ -118,4 +118,4 @@ options.AddInitialRequestCultureProvider(new CustomRequestCultureProvider(async 
 
 ## <a name="resources--build-action"></a>資源與建置動作
 
-如果您使用資源檔進行當地語系化，務必讓他們有適當的建置動作。 它們必須是 **內嵌資源** ，否則 `ResourceStringLocalizer` 找不到這些資源。
+如果您使用資源檔進行當地語系化，務必讓他們有適當的建置動作。 它們必須是 **內嵌資源**，否則 `ResourceStringLocalizer` 找不到這些資源。

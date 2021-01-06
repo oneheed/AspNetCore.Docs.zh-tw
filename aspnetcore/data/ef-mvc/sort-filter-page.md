@@ -19,10 +19,10 @@ no-loc:
 - SignalR
 uid: data/ef-mvc/sort-filter-page
 ms.openlocfilehash: 8e425d413471912c763c4892a90e9d12039efec4
-ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
+ms.sourcegitcommit: 3593c4efa707edeaaceffbfa544f99f41fc62535
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 10/30/2020
+ms.lasthandoff: 01/04/2021
 ms.locfileid: "93053978"
 ---
 # <a name="tutorial-add-sorting-filtering-and-paging---aspnet-mvc-with-ef-core"></a>教學課程：使用 EF Core 新增排序、篩選和分頁 ASP.NET MVC
@@ -43,7 +43,7 @@ ms.locfileid: "93053978"
 > * 新增分頁連結
 > * 建立 [關於] 頁面
 
-## <a name="prerequisites"></a>必要條件
+## <a name="prerequisites"></a>先決條件
 
 * [實作 CRUD 功能](crud.md)
 
@@ -86,7 +86,7 @@ ms.locfileid: "93053978"
 
 此程式碼使用 `ViewData` 屬性中的資訊，以適當的查詢字串值設定超連結。
 
-執行應用程式，選取 [Students]  索引標籤，然後按一下 [姓氏]  和 [註冊日期]  資料行標題，以確認排序的運作正常。
+執行應用程式，選取 [Students] 索引標籤，然後按一下 [姓氏] 和 [註冊日期] 資料行標題，以確認排序的運作正常。
 
 ![以姓名順序排列的 Students [索引] 頁面](sort-filter-page/_static/name-order.png)
 
@@ -105,17 +105,17 @@ ms.locfileid: "93053978"
 > [!NOTE]
 > 在這裡，您可以在 `IQueryable` 物件上呼叫 `Where` 方法，而篩選將會在伺服器上處理。 在某些情況下，您可能會呼叫 `Where` 方法在記憶體內部集合上作為擴充方法。  (例如，假設您將的參考變更為， `_context.Students` 而不是使用 EF，它會參考會傳回集合的存放 `DbSet` 庫方法 `IEnumerable` 。 ) 結果通常是相同的，但在某些情況下可能會不同。
 >
->例如，.NET Framework 實作的 `Contains` 方法預設會執行區分大小寫的比較，但在 SQL Server 中，這取決於 SQL Server 執行個體的定序設定。 該設定預設為不區分大小寫。 您可以呼叫 `ToUpper` 方法，使測試明確地不區分大小寫： *Where(s => s.LastName.ToUpper().Contains(searchString.ToUpper())* 。 如果您稍後變更程式碼，以使用傳回 `IEnumerable` 集合 (而不是 `IQueryable` 物件) 的存放庫，這會確保結果保持不變。  (當您在 `Contains` 集合上呼叫方法時 `IEnumerable` ，會取得 .NET Framework 的實值; 當您在物件上呼叫它時 `IQueryable` ，您會取得資料庫提供者的執行 ) 。不過，這種解決方案的效能會受到負面影響。 `ToUpper` 程式碼會將一個函式置於 TSQL SELECT 陳述式的 WHERE 子句中。 這會防止最佳化工具使用索引。 假設 SQL 大部分安裝為不區分大小寫，最好避免使用 `ToUpper` 程式碼，直到您移轉至區分大小寫的資料存放區為止。
+>例如，.NET Framework 實作的 `Contains` 方法預設會執行區分大小寫的比較，但在 SQL Server 中，這取決於 SQL Server 執行個體的定序設定。 該設定預設為不區分大小寫。 您可以呼叫 `ToUpper` 方法，使測試明確地不區分大小寫：*Where(s => s.LastName.ToUpper().Contains(searchString.ToUpper())*。 如果您稍後變更程式碼，以使用傳回 `IEnumerable` 集合 (而不是 `IQueryable` 物件) 的存放庫，這會確保結果保持不變。  (當您在 `Contains` 集合上呼叫方法時 `IEnumerable` ，會取得 .NET Framework 的實值; 當您在物件上呼叫它時 `IQueryable` ，您會取得資料庫提供者的執行 ) 。不過，這種解決方案的效能會受到負面影響。 `ToUpper` 程式碼會將一個函式置於 TSQL SELECT 陳述式的 WHERE 子句中。 這會防止最佳化工具使用索引。 假設 SQL 大部分安裝為不區分大小寫，最好避免使用 `ToUpper` 程式碼，直到您移轉至區分大小寫的資料存放區為止。
 
 ### <a name="add-a-search-box-to-the-student-index-view"></a>將搜尋方塊新增至學生的 [索引] 檢視
 
-在  按鈕。
+在 *Views/Student/Index.cshtml* 中，於開始表格標記之前立即新增醒目提示的程式碼，以建立標題、文字方塊及 [搜尋]  按鈕。
 
 [!code-cshtml[](intro/samples/cu/Views/Students/Index3.cshtml?range=9-23&highlight=5-13)]
 
 此程式碼會使用 `<form>` [標籤協助程式](xref:mvc/views/tag-helpers/intro) 來新增搜尋文字方塊和按鈕。 `<form>` 標籤協助程式預設會使用 POST 提交表單資料，這表示參數會以 HTTP 訊息本文傳遞，而不是以 URL 作為查詢字串傳遞。 當您指定 HTTP GET 時，表單資料會以 URL 中作為查詢字串傳遞，這可讓使用者為該 URL 加上書籤。 W3C 指導方針建議，只有在動作不會產生更新時才應使用 GET。
 
-執行應用程式，選取 [Students]  索引標籤，輸入搜尋字串，然後按一下 [搜尋] 以確認篩選可以運作。
+執行應用程式，選取 [Students] 索引標籤，輸入搜尋字串，然後按一下 [搜尋] 以確認篩選可以運作。
 
 ![含篩選的 Students [索引] 頁面](sort-filter-page/_static/filtering.png)
 
@@ -127,7 +127,7 @@ http://localhost:5813/Students?SearchString=an
 
 如果您為此頁面加上書籤，則會在使用書籤時取得篩選的清單。 將 `method="get"` 新增至 `form` 標籤會導致查詢字串的產生。
 
-在這個階段，如果您按一下資料行標題排序連結，將會遺失您在 [搜尋]  方塊中輸入的篩選值。 您將在下節修正該問題。
+在這個階段，如果您按一下資料行標題排序連結，將會遺失您在 [搜尋] 方塊中輸入的篩選值。 您將在下節修正該問題。
 
 ## <a name="add-paging-to-students-index"></a>為 Students 索引新增分頁
 
@@ -139,7 +139,7 @@ http://localhost:5813/Students?SearchString=an
 
 [!code-csharp[](intro/samples/cu/PaginatedList.cs)]
 
-此程式碼中的 `CreateAsync` 方法會採用頁面大小和頁面數，並會將適當的 `Skip` 和 `Take` 陳述式套用至 `IQueryable`。 在 `IQueryable` 上呼叫 `ToListAsync` 時，會傳回僅包含所要求頁面的清單。 `HasPreviousPage` 和 `HasNextPage` 屬性可用來啟用或停用 [上一頁]  和 [下一頁]  分頁按鈕。
+此程式碼中的 `CreateAsync` 方法會採用頁面大小和頁面數，並會將適當的 `Skip` 和 `Take` 陳述式套用至 `IQueryable`。 在 `IQueryable` 上呼叫 `ToListAsync` 時，會傳回僅包含所要求頁面的清單。 `HasPreviousPage` 和 `HasNextPage` 屬性可用來啟用或停用 [上一頁]  和 [下一頁] 分頁按鈕。
 
 `CreateAsync` 方法用來建立 `PaginatedList<T>` 物件而不是建構函式，因為建構函式無法執行非同步程式碼。
 
@@ -230,7 +230,7 @@ return View(await PaginatedList<Student>.CreateAsync(students.AsNoTracking(), pa
 
 在 *Models* 資料夾中建立 *SchoolViewModels* 資料夾。
 
-在新的資料夾中，新增類別檔案 *EnrollmentDateGroup.cs* ，並以下列程式碼取代範本程式碼：
+在新的資料夾中，新增類別檔案 *EnrollmentDateGroup.cs*，並以下列程式碼取代範本程式碼：
 
 [!code-csharp[](intro/samples/cu/Models/SchoolViewModels/EnrollmentDateGroup.cs)]
 

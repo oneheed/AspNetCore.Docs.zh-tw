@@ -7,6 +7,7 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 04/06/2020
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -18,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: fundamentals/file-providers
-ms.openlocfilehash: 30c28e7bd4cd9c926b157f5a7b9e6688bd5b9b9a
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: 16e5ead9898125c804da4d60322510474201d897
+ms.sourcegitcommit: 3593c4efa707edeaaceffbfa544f99f41fc62535
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88634601"
+ms.lasthandoff: 01/04/2021
+ms.locfileid: "93059438"
 ---
 # <a name="file-providers-in-aspnet-core"></a>ASP.NET Core 中的檔案提供者
 
@@ -58,7 +59,7 @@ ASP.NET Core 透過使用檔案提供者，將檔案系統存取抽象化。 檔
 
 您可以使用方法從檔案讀取 <xref:Microsoft.Extensions.FileProviders.IFileInfo.CreateReadStream*?displayProperty=nameWithType> 。
 
-*FileProviderSample*範例應用程式示範如何設定中的檔案提供者 `Startup.ConfigureServices` ，以透過相依性[插入](xref:fundamentals/dependency-injection)在整個應用程式中使用。
+*FileProviderSample* 範例應用程式示範如何設定中的檔案提供者 `Startup.ConfigureServices` ，以透過相依性 [插入](xref:fundamentals/dependency-injection)在整個應用程式中使用。
 
 ## <a name="file-provider-implementations"></a>檔案提供者實作
 
@@ -93,7 +94,7 @@ var fileInfo = provider.GetFileInfo(filePath);
 
 「檔案提供者」可用來逐一查看由 `applicationRoot` o所指定的目錄或呼叫 `GetFileInfo` 以取得檔案的資訊。 Glob 模式無法傳遞給 `GetFileInfo` 方法。 「檔案提供者」沒有 `applicationRoot` 外部之項目的存取權。
 
-*FileProviderSample*範例應用程式會 `Startup.ConfigureServices` 使用下列方法，在方法中建立提供者 <xref:Microsoft.Extensions.Hosting.IHostingEnvironment.ContentRootFileProvider?displayProperty=nameWithType> ：
+*FileProviderSample* 範例應用程式會 `Startup.ConfigureServices` 使用下列方法，在方法中建立提供者 <xref:Microsoft.Extensions.Hosting.IHostingEnvironment.ContentRootFileProvider?displayProperty=nameWithType> ：
 
 ```csharp
 var physicalProvider = _env.ContentRootFileProvider;
@@ -112,7 +113,7 @@ var physicalProvider = _env.ContentRootFileProvider;
 
 使用 [Glob 模式](#glob-patterns)來指定一或多個要內嵌到組件中的檔案。
 
-*FileProviderSample*範例應用程式會建立 `ManifestEmbeddedFileProvider` ，並將目前執行的元件傳遞至它的函式。
+*FileProviderSample* 範例應用程式會建立 `ManifestEmbeddedFileProvider` ，並將目前執行的元件傳遞至它的函式。
 
 *Startup.cs*：
 
@@ -153,7 +154,7 @@ var manifestEmbeddedProvider =
 * <xref:Microsoft.Extensions.Primitives.IChangeToken.HasChanged>：可以檢查以判斷是否發生變更的屬性。
 * <xref:Microsoft.Extensions.Primitives.IChangeToken.RegisterChangeCallback*>：當偵測到所指定路徑字串的變更時呼叫。 每個變更權杖都只會呼叫其相關聯的回呼，以回應單一變更。 若要啟用持續監視，請使用 <xref:System.Threading.Tasks.TaskCompletionSource`1> (如下所示) 或重新建立 `IChangeToken` 執行個體以回應變更。
 
-*WatchConsole*範例應用程式會在*TextFiles*目錄中的 *.txt*檔案遭到修改時，寫入訊息：
+*WatchConsole* 範例應用程式會在 *TextFiles* 目錄中的 *.txt* 檔案遭到修改時，寫入訊息：
 
 [!code-csharp[](file-providers/samples/3.x/WatchConsole/Program.cs?name=snippet1)]
 
@@ -161,7 +162,7 @@ var manifestEmbeddedProvider =
 
 ### <a name="glob-patterns"></a>Glob 模式
 
-檔案系統路徑使用稱為 *Glob (或 Glob 處理) 模式*的萬用字元模式。 使用這些模式指定檔案群組。 兩種萬用字元為 `*` 與 `**`：
+檔案系統路徑使用稱為 *Glob (或 Glob 處理) 模式* 的萬用字元模式。 使用這些模式指定檔案群組。 兩種萬用字元為 `*` 與 `**`：
 
 **`*`**  
 符合目前資料夾層級、任何檔案名稱或任何副檔名的任何項目。 相符項是以檔案路徑中的 `/` 和 `.` 字元終止。
@@ -175,8 +176,8 @@ var manifestEmbeddedProvider =
 |---------|---------|
 |`directory/file.txt`|符合特定目錄中的特定檔案。|
 |`directory/*.txt`|符合特定目錄中具有 *.txt* 副檔名的所有檔案。|
-|`directory/*/appsettings.json`|會比 * 對* 目錄中檔案的所有appsettings.js，完全符合 *目錄* 資料夾底下的一個層級。|
-|`directory/**/*.txt`|比對副檔名為 .txt 的所有檔案，其位於*目錄*資料夾底下的任何位置 *。*|
+|`directory/*/appsettings.json`|比對目錄中的所有檔案與 *appsettings.json* *目錄* 資料夾底下的一個層級。|
+|`directory/**/*.txt`|比對副檔名為 .txt 的所有檔案，其位於 *目錄* 資料夾底下的任何位置 *。*|
 
 ::: moniker-end
 
@@ -303,7 +304,7 @@ var manifestEmbeddedProvider =
 
 ## <a name="glob-patterns"></a>Glob 模式
 
-檔案系統路徑使用稱為 *Glob (或 Glob 處理) 模式*的萬用字元模式。 使用這些模式指定檔案群組。 兩種萬用字元為 `*` 與 `**`：
+檔案系統路徑使用稱為 *Glob (或 Glob 處理) 模式* 的萬用字元模式。 使用這些模式指定檔案群組。 兩種萬用字元為 `*` 與 `**`：
 
 **`*`**  
 符合目前資料夾層級、任何檔案名稱或任何副檔名的任何項目。 相符項是以檔案路徑中的 `/` 和 `.` 字元終止。
@@ -320,9 +321,9 @@ var manifestEmbeddedProvider =
 符合特定目錄中具有 *.txt* 副檔名的所有檔案。
 
 **`directory/*/appsettings.json`**  
-符合「目錄」** 資料夾下一層級之目錄中的所有 `appsettings.json` 檔案。
+符合「目錄」資料夾下一層級之目錄中的所有 `appsettings.json` 檔案。
 
 **`directory/**/*.txt`**  
-符合在「目錄」** 資料夾下之任何地方所找到的具有 *.txt* 副檔名的所有檔案。
+符合在「目錄」資料夾下之任何地方所找到的具有 *.txt* 副檔名的所有檔案。
 
 ::: moniker-end

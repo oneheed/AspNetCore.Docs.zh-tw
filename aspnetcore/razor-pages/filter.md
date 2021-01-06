@@ -19,10 +19,10 @@ no-loc:
 - SignalR
 uid: razor-pages/filter
 ms.openlocfilehash: a6d25c1b88e09560c1aad9aefd9148f7fe293909
-ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
+ms.sourcegitcommit: 3593c4efa707edeaaceffbfa544f99f41fc62535
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 10/30/2020
+ms.lasthandoff: 01/04/2021
 ms.locfileid: "93056825"
 ---
 # <a name="filter-methods-for-no-locrazor-pages-in-aspnet-core"></a>RazorASP.NET Core 中頁面的篩選方法
@@ -103,7 +103,7 @@ Razor 頁面篩選器提供下列方法，可在全域或在頁面層級套用�
 
 [!code-csharp[Main](filter/3.1sample/PageFilter/Pages/Movies/Test.cshtml.cs)]
 
-使用瀏覽器開發人員工具之類的工具來檢查標頭。 在 [ **回應標頭** ] 底下 `author: Rick` 顯示。
+使用瀏覽器開發人員工具之類的工具來檢查標頭。 在 [ **回應標頭**] 底下 `author: Rick` 顯示。
 
 如需覆寫順序的指示，請參閱[覆寫預設順序](xref:mvc/controllers/filters#overriding-the-default-order)。
 

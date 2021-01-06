@@ -20,10 +20,10 @@ no-loc:
 - SignalR
 uid: test/integration-tests
 ms.openlocfilehash: f1ce6a209ef3ca85abe0a6f1ac61d85bec52d17a
-ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
+ms.sourcegitcommit: 3593c4efa707edeaaceffbfa544f99f41fc62535
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 10/30/2020
+ms.lasthandoff: 01/04/2021
 ms.locfileid: "93050819"
 ---
 # <a name="integration-tests-in-aspnet-core"></a>ASP.NET Core 中的整合測試
@@ -58,7 +58,7 @@ ms.locfileid: "93050819"
 * 網路設備
 * 要求-回應管線
 
-單元測試使用製造的元件（稱為 *fakes* 或 *mock 物件* ）來取代基礎結構元件。
+單元測試使用製造的元件（稱為 *fakes* 或 *mock 物件*）來取代基礎結構元件。
 
 相對於單元測試，整合測試：
 
@@ -72,7 +72,7 @@ ms.locfileid: "93050819"
 > 請勿針對每個可能的資料和檔案存取，使用資料庫和檔案系統來撰寫整合測試。 無論應用程式之間有多少位置與資料庫和檔案系統互動，一組專注的讀取、寫入、更新和刪除整合測試，通常都能充分測試資料庫和檔案系統元件。 針對與這些元件互動的方法邏輯，使用單元測試進行常式測試。 在單元測試中，使用基礎結構 fakes/模擬會導致更快速的測試執行。
 
 > [!NOTE]
-> 在整合測試的討論中，測試過的專案通常稱為 *受測試的系統* ，或簡稱為「SUT」。
+> 在整合測試的討論中，測試過的專案通常稱為 *受測試的系統*，或簡稱為「SUT」。
 >
 > *本主題中使用 "SUT" 來參考經過測試的 ASP.NET Core 應用程式。*
 
@@ -84,13 +84,13 @@ ASP.NET Core 中的整合測試需要下列各項：
 * 測試專案會建立適用于該 SUT 的測試 web 主機，並使用測試伺服器用戶端來處理與該 SUT 的要求和回應。
 * 測試執行器會用來執行測試並報告測試結果。
 
-整合測試會遵循一連串的事件，其中包含一般的 *排列* 、 *Act* 和 *Assert* 測試步驟：
+整合測試會遵循一連串的事件，其中包含一般的 *排列*、 *Act* 和 *Assert* 測試步驟：
 
 1. 已設定 SUT 的 web 主機。
 1. 建立測試伺服器用戶端以將要求提交給應用程式。
 1. 執行「 *排列* 測試」步驟：測試應用程式準備要求。
 1. 執行 *Act* 測試步驟：用戶端會提交要求並接收回應。
-1. 執行 *Assert* 測試步驟： *實際* 的回應會根據 *預期* 的回應，驗證為 *通過* 或 *失敗* 。
+1. 執行 *Assert* 測試步驟：*實際* 的回應會根據 *預期* 的回應，驗證為 *通過* 或 *失敗*。
 1. 此程式會繼續執行，直到執行所有測試為止。
 1. 系統會報告測試結果。
 
@@ -100,7 +100,7 @@ ASP.NET Core 中的整合測試需要下列各項：
 
 `Microsoft.AspNetCore.Mvc.Testing`封裝會處理下列工作：
 
-* 從 d)  (將相依性檔案從 *.deps* 複製到測試專案的 *bin* 目錄。
+* 從 d)  (將相依性檔案從複製到測試專案的 *bin* 目錄。
 * 將 [內容根目錄](xref:fundamentals/index#content-root) 設定為 SUT 的專案根目錄，以便在執行測試時找到靜態檔案和頁面/瀏覽器。
 * 提供 [WebApplicationFactory](/dotnet/api/microsoft.aspnetcore.mvc.testing.webapplicationfactory-1) 類別，以簡化使用來啟動載入的工作 `TestServer` 。
 
@@ -140,7 +140,7 @@ Razor頁面應用程式和 MVC 應用程式的測試設定幾乎沒有任何差�
 
 [WebApplicationFactory \<TEntryPoint> ](/dotnet/api/microsoft.aspnetcore.mvc.testing.webapplicationfactory-1)用來建立整合測試的[TestServer](/dotnet/api/microsoft.aspnetcore.testhost.testserver) 。 `TEntryPoint` 是此 SUT 的進入點類別，通常是 `Startup` 類別。
 
-測試類別會將 *類別裝置* 介面 ( [IClassFixture](https://xunit.github.io/docs/shared-context#class-fixture)) 來指出類別包含測試，並在類別中的測試之間提供共用物件實例。
+測試類別會將 *類別裝置* 介面 ([IClassFixture](https://xunit.github.io/docs/shared-context#class-fixture)) 來指出類別包含測試，並在類別中的測試之間提供共用物件實例。
 
 下列測試類別會 `BasicTests` 使用 `WebApplicationFactory` 來啟動載入並提供測試方法的 [HttpClient](/dotnet/api/system.net.http.httpclient) `Get_EndpointsReturnSuccessAndCorrectContentType` 。 方法會檢查回應狀態碼是否成功 (狀態碼在 200-299) 範圍內，且 `Content-Type` 標頭 `text/html; charset=utf-8` 適用于數個應用程式頁面。
 
@@ -160,7 +160,7 @@ Razor頁面應用程式和 MVC 應用程式的測試設定幾乎沒有任何差�
 
    [範例應用程式](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/test/integration-tests/samples)中的資料庫植入是由 `InitializeDbForTests` 方法執行。 [整合測試範例：測試應用程式組織](#test-app-organization)一節中會說明方法。
 
-   已在其方法中註冊的 SUT 資料庫內容 `Startup.ConfigureServices` 。 測試應用程式的 `builder.ConfigureServices` 回呼會在 *after* 應用程式的程式 `Startup.ConfigureServices` 代碼執行之後執行。 執行順序是 ASP.NET Core 3.0 版本之 [泛型主機](xref:fundamentals/host/generic-host) 的重大變更。 若要針對測試使用與應用程式資料庫不同的資料庫，則必須在中取代應用程式的資料庫內容 `builder.ConfigureServices` 。
+   已在其方法中註冊的 SUT 資料庫內容 `Startup.ConfigureServices` 。 測試應用程式的 `builder.ConfigureServices` 回呼會在應用程式的程式 `Startup.ConfigureServices` 代碼執行之後執行。 執行順序是 ASP.NET Core 3.0 版本之 [泛型主機](xref:fundamentals/host/generic-host) 的重大變更。 若要針對測試使用與應用程式資料庫不同的資料庫，則必須在中取代應用程式的資料庫內容 `builder.ConfigureServices` 。
 
    對於仍在使用 [Web 主機](xref:fundamentals/host/web-host)的 SUTs，測試應用程式的 `builder.ConfigureServices` 回呼會在 SUT 的程式碼 *之前* 執行 `Startup.ConfigureServices` 。 測試應用程式的 `builder.ConfigureTestServices` 回呼會 *在之後* 執行。
 
@@ -246,23 +246,23 @@ _client = _factory.CreateClient(clientOptions);
 
 範例 SUT 包含會傳回報價的範圍服務。 當要求索引頁面時，引號會內嵌在索引頁面的隱藏欄位中。
 
-*Services/IQuoteService .cs* ：
+*Services/IQuoteService .cs*：
 
 [!code-csharp[](integration-tests/samples/3.x/IntegrationTestsSample/src/RazorPagesProject/Services/IQuoteService.cs?name=snippet1)]
 
-*Services/QuoteService .cs* ：
+*Services/QuoteService .cs*：
 
 [!code-csharp[](integration-tests/samples/3.x/IntegrationTestsSample/src/RazorPagesProject/Services/QuoteService.cs?name=snippet1)]
 
-*Startup.cs* ：
+*Startup.cs*：
 
 [!code-csharp[](integration-tests/samples/3.x/IntegrationTestsSample/src/RazorPagesProject/Startup.cs?name=snippet2)]
 
-*Pages/Index.cshtml.cs* ：
+*Pages/Index.cshtml.cs*：
 
 [!code-csharp[](integration-tests/samples/3.x/IntegrationTestsSample/src/RazorPagesProject/Pages/Index.cshtml.cs?name=snippet1&highlight=4,9,20,26)]
 
-*Pages/Index .cs* ：
+*Pages/Index .cs*：
 
 [!code-cshtml[](integration-tests/samples/3.x/IntegrationTestsSample/src/RazorPagesProject/Pages/Index.cshtml?name=snippet_Quote)]
 
@@ -275,7 +275,7 @@ _client = _factory.CreateClient(clientOptions);
 
 若要在整合測試中測試服務和報價插入，模擬服務會由測試插入至 SUT。 模擬服務會將應用程式取代為 `QuoteService` 測試應用程式所提供的服務，稱為 `TestQuoteService` ：
 
-*IntegrationTests.IndexPageTests.cs* ：
+*IntegrationTests.IndexPageTests.cs*：
 
 [!code-csharp[](integration-tests/samples/3.x/IntegrationTestsSample/tests/RazorPagesProject.Tests/IntegrationTests/IndexPageTests.cs?name=snippet4)]
 
@@ -343,7 +343,7 @@ protected override IWebHostBuilder CreateWebHostBuilder() =>
 
 ## <a name="how-the-test-infrastructure-infers-the-app-content-root-path"></a>測試基礎結構如何推斷應用程式內容根路徑
 
-此函式會藉 `WebApplicationFactory` 由在包含整合測試與元件相等的元件上搜尋[WebApplicationFactoryContentRootAttribute](/dotnet/api/microsoft.aspnetcore.mvc.testing.webapplicationfactorycontentrootattribute) ，來推斷應用程式[內容的根](xref:fundamentals/index#content-root)路徑 `TEntryPoint` `System.Reflection.Assembly.FullName` 。 如果找不到具有正確索引鍵的屬性，則會 `WebApplicationFactory` 切換回以搜尋方案檔 ( *.Sln* ) 並將 `TEntryPoint` 元件名稱附加至方案目錄。 應用程式根目錄 (內容根路徑) 用來探索視圖和內容檔案。
+此函式會藉 `WebApplicationFactory` 由在包含整合測試與元件相等的元件上搜尋[WebApplicationFactoryContentRootAttribute](/dotnet/api/microsoft.aspnetcore.mvc.testing.webapplicationfactorycontentrootattribute) ，來推斷應用程式[內容的根](xref:fundamentals/index#content-root)路徑 `TEntryPoint` `System.Reflection.Assembly.FullName` 。 如果找不到具有正確索引鍵的屬性，則會 `WebApplicationFactory` 切換回以搜尋方案檔 (*.Sln*) 並將 `TEntryPoint` 元件名稱附加至方案目錄。 應用程式根目錄 (內容根路徑) 用來探索視圖和內容檔案。
 
 ## <a name="disable-shadow-copying"></a>停用陰影複製
 
@@ -380,10 +380,10 @@ dotnet test
 
 SUT 是 Razor 具有下列特性的頁面訊息系統：
 
-* 應用程式的 [索引] 頁面 ( *pages/index. cshtml* 和 *pages/index. CSHTML* ) 提供 UI 和頁面模型方法，可控制訊息的新增、刪除和分析 (每個訊息) 的平均單字。
-* 訊息是由 `Message` 類別 ( *Data/message .cs* ) 所描述，其中包含兩個屬性： `Id` (索引鍵) 和 `Text` (訊息) 。 `Text`屬性是必要的，且限制為200個字元。
+* 應用程式的 [索引] 頁面 (*pages/index. cshtml* 和 *pages/index. CSHTML*) 提供 UI 和頁面模型方法，可控制訊息的新增、刪除和分析 (每個訊息) 的平均單字。
+* 訊息是由 `Message` 類別 (*Data/message .cs*) 所描述，其中包含兩個屬性： `Id` (索引鍵) 和 `Text` (訊息) 。 `Text`屬性是必要的，且限制為200個字元。
 * 訊息是使用 [Entity Framework 的記憶體內部資料庫](/ef/core/providers/in-memory/)&#8224; 來儲存。
-* 應用程式在其資料庫內容類別中包含 (DAL) 的資料存取層， `AppDbContext` ( *Data/AppDbCoNtext .cs* ) 。
+* 應用程式在其資料庫內容類別中包含 (DAL) 的資料存取層， `AppDbContext` (*Data/AppDbCoNtext .cs*) 。
 * 如果應用程式啟動時資料庫是空的，則會使用三個訊息來初始化訊息存放區。
 * 應用程式包含 `/SecurePage` 只能由已驗證的使用者存取的。
 
@@ -412,7 +412,7 @@ SUT 是 Razor 具有下列特性的頁面訊息系統：
 
 [!code-csharp[](integration-tests/samples/3.x/IntegrationTestsSample/tests/RazorPagesProject.Tests/Helpers/Utilities.cs?name=snippet1)]
 
-已在其方法中註冊的 SUT 資料庫內容 `Startup.ConfigureServices` 。 測試應用程式的 `builder.ConfigureServices` 回呼會在 *after* 應用程式的程式 `Startup.ConfigureServices` 代碼執行之後執行。 若要使用不同的資料庫進行測試，必須在中取代應用程式的資料庫內容 `builder.ConfigureServices` 。 如需詳細資訊，請參閱 [自訂 WebApplicationFactory](#customize-webapplicationfactory) 一節。
+已在其方法中註冊的 SUT 資料庫內容 `Startup.ConfigureServices` 。 測試應用程式的 `builder.ConfigureServices` 回呼會在應用程式的程式 `Startup.ConfigureServices` 代碼執行之後執行。 若要使用不同的資料庫進行測試，必須在中取代應用程式的資料庫內容 `builder.ConfigureServices` 。 如需詳細資訊，請參閱 [自訂 WebApplicationFactory](#customize-webapplicationfactory) 一節。
 
 對於仍在使用 [Web 主機](xref:fundamentals/host/web-host)的 SUTs，測試應用程式的 `builder.ConfigureServices` 回呼會在 SUT 的程式碼 *之前* 執行 `Startup.ConfigureServices` 。 測試應用程式的 `builder.ConfigureTestServices` 回呼會 *在之後* 執行。
 
@@ -446,7 +446,7 @@ SUT 是 Razor 具有下列特性的頁面訊息系統：
 * 網路設備
 * 要求-回應管線
 
-單元測試使用製造的元件（稱為 *fakes* 或 *mock 物件* ）來取代基礎結構元件。
+單元測試使用製造的元件（稱為 *fakes* 或 *mock 物件*）來取代基礎結構元件。
 
 相對於單元測試，整合測試：
 
@@ -460,7 +460,7 @@ SUT 是 Razor 具有下列特性的頁面訊息系統：
 > 請勿針對每個可能的資料和檔案存取，使用資料庫和檔案系統來撰寫整合測試。 無論應用程式之間有多少位置與資料庫和檔案系統互動，一組專注的讀取、寫入、更新和刪除整合測試，通常都能充分測試資料庫和檔案系統元件。 針對與這些元件互動的方法邏輯，使用單元測試進行常式測試。 在單元測試中，使用基礎結構 fakes/模擬會導致更快速的測試執行。
 
 > [!NOTE]
-> 在整合測試的討論中，測試過的專案通常稱為 *受測試的系統* ，或簡稱為「SUT」。
+> 在整合測試的討論中，測試過的專案通常稱為 *受測試的系統*，或簡稱為「SUT」。
 >
 > *本主題中使用 "SUT" 來參考經過測試的 ASP.NET Core 應用程式。*
 
@@ -472,13 +472,13 @@ ASP.NET Core 中的整合測試需要下列各項：
 * 測試專案會建立適用于該 SUT 的測試 web 主機，並使用測試伺服器用戶端來處理與該 SUT 的要求和回應。
 * 測試執行器會用來執行測試並報告測試結果。
 
-整合測試會遵循一連串的事件，其中包含一般的 *排列* 、 *Act* 和 *Assert* 測試步驟：
+整合測試會遵循一連串的事件，其中包含一般的 *排列*、 *Act* 和 *Assert* 測試步驟：
 
 1. 已設定 SUT 的 web 主機。
 1. 建立測試伺服器用戶端以將要求提交給應用程式。
 1. 執行「 *排列* 測試」步驟：測試應用程式準備要求。
 1. 執行 *Act* 測試步驟：用戶端會提交要求並接收回應。
-1. 執行 *Assert* 測試步驟： *實際* 的回應會根據 *預期* 的回應，驗證為 *通過* 或 *失敗* 。
+1. 執行 *Assert* 測試步驟：*實際* 的回應會根據 *預期* 的回應，驗證為 *通過* 或 *失敗*。
 1. 此程式會繼續執行，直到執行所有測試為止。
 1. 系統會報告測試結果。
 
@@ -488,7 +488,7 @@ ASP.NET Core 中的整合測試需要下列各項：
 
 `Microsoft.AspNetCore.Mvc.Testing`封裝會處理下列工作：
 
-* 從 d)  (將相依性檔案從 *.deps* 複製到測試專案的 *bin* 目錄。
+* 從 d)  (將相依性檔案從複製到測試專案的 *bin* 目錄。
 * 將 [內容根目錄](xref:fundamentals/index#content-root) 設定為 SUT 的專案根目錄，以便在執行測試時找到靜態檔案和頁面/瀏覽器。
 * 提供 [WebApplicationFactory](/dotnet/api/microsoft.aspnetcore.mvc.testing.webapplicationfactory-1) 類別，以簡化使用來啟動載入的工作 `TestServer` 。
 
@@ -522,7 +522,7 @@ Razor頁面應用程式和 MVC 應用程式的測試設定幾乎沒有任何差�
 
 [WebApplicationFactory \<TEntryPoint> ](/dotnet/api/microsoft.aspnetcore.mvc.testing.webapplicationfactory-1)用來建立整合測試的[TestServer](/dotnet/api/microsoft.aspnetcore.testhost.testserver) 。 `TEntryPoint` 是此 SUT 的進入點類別，通常是 `Startup` 類別。
 
-測試類別會將 *類別裝置* 介面 ( [IClassFixture](https://xunit.github.io/docs/shared-context#class-fixture)) 來指出類別包含測試，並在類別中的測試之間提供共用物件實例。
+測試類別會將 *類別裝置* 介面 ([IClassFixture](https://xunit.github.io/docs/shared-context#class-fixture)) 來指出類別包含測試，並在類別中的測試之間提供共用物件實例。
 
 下列測試類別會 `BasicTests` 使用 `WebApplicationFactory` 來啟動載入並提供測試方法的 [HttpClient](/dotnet/api/system.net.http.httpclient) `Get_EndpointsReturnSuccessAndCorrectContentType` 。 方法會檢查回應狀態碼是否成功 (狀態碼在 200-299) 範圍內，且 `Content-Type` 標頭 `text/html; charset=utf-8` 適用于數個應用程式頁面。
 
@@ -609,23 +609,23 @@ _client = _factory.CreateClient(clientOptions);
 
 範例 SUT 包含會傳回報價的範圍服務。 當要求索引頁面時，引號會內嵌在索引頁面的隱藏欄位中。
 
-*Services/IQuoteService .cs* ：
+*Services/IQuoteService .cs*：
 
 [!code-csharp[](integration-tests/samples/2.x/IntegrationTestsSample/src/RazorPagesProject/Services/IQuoteService.cs?name=snippet1)]
 
-*Services/QuoteService .cs* ：
+*Services/QuoteService .cs*：
 
 [!code-csharp[](integration-tests/samples/2.x/IntegrationTestsSample/src/RazorPagesProject/Services/QuoteService.cs?name=snippet1)]
 
-*Startup.cs* ：
+*Startup.cs*：
 
 [!code-csharp[](integration-tests/samples/2.x/IntegrationTestsSample/src/RazorPagesProject/Startup.cs?name=snippet2)]
 
-*Pages/Index.cshtml.cs* ：
+*Pages/Index.cshtml.cs*：
 
 [!code-csharp[](integration-tests/samples/2.x/IntegrationTestsSample/src/RazorPagesProject/Pages/Index.cshtml.cs?name=snippet1&highlight=4,9,20,26)]
 
-*Pages/Index .cs* ：
+*Pages/Index .cs*：
 
 [!code-cshtml[](integration-tests/samples/2.x/IntegrationTestsSample/src/RazorPagesProject/Pages/Index.cshtml?name=snippet_Quote)]
 
@@ -638,7 +638,7 @@ _client = _factory.CreateClient(clientOptions);
 
 若要在整合測試中測試服務和報價插入，模擬服務會由測試插入至 SUT。 模擬服務會將應用程式取代為 `QuoteService` 測試應用程式所提供的服務，稱為 `TestQuoteService` ：
 
-*IntegrationTests.IndexPageTests.cs* ：
+*IntegrationTests.IndexPageTests.cs*：
 
 [!code-csharp[](integration-tests/samples/2.x/IntegrationTestsSample/tests/RazorPagesProject.Tests/IntegrationTests/IndexPageTests.cs?name=snippet4)]
 
@@ -724,7 +724,7 @@ public class CustomWebApplicationFactory<TStartup>
 
 ## <a name="how-the-test-infrastructure-infers-the-app-content-root-path"></a>測試基礎結構如何推斷應用程式內容根路徑
 
-此函式會藉 `WebApplicationFactory` 由在包含整合測試與元件相等的元件上搜尋[WebApplicationFactoryContentRootAttribute](/dotnet/api/microsoft.aspnetcore.mvc.testing.webapplicationfactorycontentrootattribute) ，來推斷應用程式[內容的根](xref:fundamentals/index#content-root)路徑 `TEntryPoint` `System.Reflection.Assembly.FullName` 。 如果找不到具有正確索引鍵的屬性，則會 `WebApplicationFactory` 切換回以搜尋方案檔 ( *.Sln* ) 並將 `TEntryPoint` 元件名稱附加至方案目錄。 應用程式根目錄 (內容根路徑) 用來探索視圖和內容檔案。
+此函式會藉 `WebApplicationFactory` 由在包含整合測試與元件相等的元件上搜尋[WebApplicationFactoryContentRootAttribute](/dotnet/api/microsoft.aspnetcore.mvc.testing.webapplicationfactorycontentrootattribute) ，來推斷應用程式[內容的根](xref:fundamentals/index#content-root)路徑 `TEntryPoint` `System.Reflection.Assembly.FullName` 。 如果找不到具有正確索引鍵的屬性，則會 `WebApplicationFactory` 切換回以搜尋方案檔 (*.Sln*) 並將 `TEntryPoint` 元件名稱附加至方案目錄。 應用程式根目錄 (內容根路徑) 用來探索視圖和內容檔案。
 
 ## <a name="disable-shadow-copying"></a>停用陰影複製
 
@@ -738,7 +738,7 @@ public class CustomWebApplicationFactory<TStartup>
 }
 ```
 
-如果使用 Visual Studio，請將檔案的 [ **複製到輸出目錄** ] 屬性設定為 [ **永遠複製** ]。 如果未使用 Visual Studio，請將 `Content` 目標新增至測試應用程式的專案檔：
+如果使用 Visual Studio，請將檔案的 [ **複製到輸出目錄** ] 屬性設定為 [ **永遠複製**]。 如果未使用 Visual Studio，請將 `Content` 目標新增至測試應用程式的專案檔：
 
 ```xml
 <ItemGroup>
@@ -771,10 +771,10 @@ dotnet test
 
 SUT 是 Razor 具有下列特性的頁面訊息系統：
 
-* 應用程式的 [索引] 頁面 ( *pages/index. cshtml* 和 *pages/index. CSHTML* ) 提供 UI 和頁面模型方法，可控制訊息的新增、刪除和分析 (每個訊息) 的平均單字。
-* 訊息是由 `Message` 類別 ( *Data/message .cs* ) 所描述，其中包含兩個屬性： `Id` (索引鍵) 和 `Text` (訊息) 。 `Text`屬性是必要的，且限制為200個字元。
+* 應用程式的 [索引] 頁面 (*pages/index. cshtml* 和 *pages/index. CSHTML*) 提供 UI 和頁面模型方法，可控制訊息的新增、刪除和分析 (每個訊息) 的平均單字。
+* 訊息是由 `Message` 類別 (*Data/message .cs*) 所描述，其中包含兩個屬性： `Id` (索引鍵) 和 `Text` (訊息) 。 `Text`屬性是必要的，且限制為200個字元。
 * 訊息是使用 [Entity Framework 的記憶體內部資料庫](/ef/core/providers/in-memory/)&#8224; 來儲存。
-* 應用程式在其資料庫內容類別中包含 (DAL) 的資料存取層， `AppDbContext` ( *Data/AppDbCoNtext .cs* ) 。
+* 應用程式在其資料庫內容類別中包含 (DAL) 的資料存取層， `AppDbContext` (*Data/AppDbCoNtext .cs*) 。
 * 如果應用程式啟動時資料庫是空的，則會使用三個訊息來初始化訊息存放區。
 * 應用程式包含 `/SecurePage` 只能由已驗證的使用者存取的。
 

@@ -1,2 +1,2 @@
 > [!NOTE]
-> 在ASP.NET Core 3.0 Web`LogLevel.Warning`應用程式編寫每個 請求的一個類型日誌(如果請求的區域性不受支援)。 每個請求`LogLevel.Warning`記錄一個可以使具有冗餘資訊的大型日誌檔。 此行為已在ASP.NET 3.0 中更改。 寫入`RequestLocalizationMiddleware`類型`LogLevel.Debug`的 日誌,這減小了生產日誌的大小。
+> 在 ASP.NET Core 3.0 之前，web 應用程式 `LogLevel.Warning` 會在不支援所要求的文化特性時，為每個要求撰寫一個類型的記錄。 `LogLevel.Warning`每個要求記錄一個會產生具有重複資訊的大型記錄檔。 此行為已在 ASP.NET 3.0 中變更。 會 `RequestLocalizationMiddleware` 寫入類型的記錄檔 `LogLevel.Debug` ，以減少生產記錄的大小。

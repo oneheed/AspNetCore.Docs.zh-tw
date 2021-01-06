@@ -10,6 +10,6 @@ Visual Studio for Mac 會顯示下列快顯視窗：
 
 輸入您的密碼，然後選取 **[確定]**
 
-若您同意信任開發憑證，請選取 [是]  。
+若您同意信任開發憑證，請選取 [是]。
 
 如需詳細資訊，請參閱[信任 ASP.NET CORE HTTPS 開發憑證](xref:security/enforcing-ssl#trust-the-aspnet-core-https-development-certificate-on-windows-and-macos)

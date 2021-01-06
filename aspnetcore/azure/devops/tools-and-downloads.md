@@ -19,17 +19,17 @@ no-loc:
 - SignalR
 uid: azure/devops/tools-and-downloads
 ms.openlocfilehash: 8c7f10a6b6f8504efaba6054533aba034982820c
-ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
+ms.sourcegitcommit: 3593c4efa707edeaaceffbfa544f99f41fc62535
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 10/30/2020
+ms.lasthandoff: 01/04/2021
 ms.locfileid: "93056565"
 ---
 # <a name="tools-and-downloads"></a>工具及下載
 
 Azure 提供數種介面來布建和管理資源，例如 [Azure 入口網站](https://portal.azure.com)、 [Azure CLI](/cli/azure/)、 [Azure PowerShell](/powershell/azure/overview)、 [Azure Cloud Shell](https://shell.azure.com/bash)和 Visual Studio。 本指南採用極簡方法，並盡可能使用 Azure Cloud Shell，以減少所需的步驟。 不過，Azure 入口網站必須用於某些部分。
 
-## <a name="prerequisites"></a>必要條件
+## <a name="prerequisites"></a>先決條件
 
 需要下列訂用帳戶：
 

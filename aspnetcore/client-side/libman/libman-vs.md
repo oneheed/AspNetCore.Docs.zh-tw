@@ -19,10 +19,10 @@ no-loc:
 - SignalR
 uid: client-side/libman/libman-vs
 ms.openlocfilehash: 1c97f5d7fbf64c5043e6d2277091b9a477833bf1
-ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
+ms.sourcegitcommit: 3593c4efa707edeaaceffbfa544f99f41fc62535
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 10/30/2020
+ms.lasthandoff: 01/04/2021
 ms.locfileid: "93054706"
 ---
 # <a name="use-libman-with-aspnet-core-in-visual-studio"></a>在 Visual Studio 中使用 LibMan 搭配 ASP.NET Core
@@ -38,7 +38,7 @@ Visual Studio 在 ASP.NET Core 專案中有內建的 [LibMan](xref:client-side/l
 
 [查看或下載範例程式碼](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/client-side/libman/samples/) [ (如何下載) ](xref:index#how-to-download-a-sample)
 
-## <a name="prerequisites"></a>必要條件
+## <a name="prerequisites"></a>先決條件
 
 * **ASP.NET 和 網頁程式開發** 工作負載的 [Visual Studio 2019](https://visualstudio.microsoft.com/downloads/?utm_medium=microsoft&utm_source=docs.microsoft.com&utm_campaign=inline+link&utm_content=download+vs2019)
 
@@ -53,7 +53,7 @@ Visual Studio 在 ASP.NET Core 專案中有內建的 [LibMan](xref:client-side/l
 
 請依照下列步驟安裝用戶端程式庫：
 
-* 在 **方案總管** 中，以滑鼠右鍵按一下要加入檔案的專案資料夾。 選擇 [ **新增**  >  **客戶** 端程式庫]。 [ **新增 Client-Side 程式庫** ] 對話方塊隨即出現：
+* 在 **方案總管** 中，以滑鼠右鍵按一下要加入檔案的專案資料夾。 選擇 [**新增**  >  **客戶** 端程式庫]。 [ **新增 Client-Side 程式庫** ] 對話方塊隨即出現：
 
   ![新增 Client-Side 程式庫對話方塊](_static/add-library-dialog.png)
 
@@ -81,7 +81,7 @@ Visual Studio 在 ASP.NET Core 專案中有內建的 [LibMan](xref:client-side/l
   |Project 中的 *Pages* 資料夾                 |*Pages/jquery/*       |
 
 * 按一下 [ **安裝** ] 按鈕，根據 *libman.js* 中的設定下載檔案。
-* 請參閱 [ **輸出** ] 視窗的 [連結 **庫管理員** 摘要]，以取得安裝詳細資料。 例如：
+* 請參閱 [**輸出**] 視窗的 [連結 **庫管理員** 摘要]，以取得安裝詳細資料。 例如：
 
   ```console
   Restore operation started...
@@ -101,8 +101,8 @@ Visual Studio 中的所有 LibMan 作業都是以專案根目錄 LibMan 資訊�
 若要開啟 *libman.json* 進行編輯，有下列選項：
 
 * 在 **方案總管** 中，按兩下檔案 *libman.js* 。
-* 以滑鼠右鍵按一下 **方案總管** 中的專案，然後選取 [ **管理 Client-Side 程式庫** ]。 **&#8224;**
-* 從 Visual Studio 的 [ **專案** ] 功能表中選取 [ **管理 Client-Side 程式庫** ]。 **&#8224;**
+* 以滑鼠右鍵按一下 **方案總管** 中的專案，然後選取 [ **管理 Client-Side 程式庫**]。 **&#8224;**
+* 從 Visual Studio 的 [**專案**] 功能表中選取 [**管理 Client-Side 程式庫**]。 **&#8224;**
 
 **&#8224;** 如果專案根目錄中還沒有 *libman.js* 的檔案，則會以預設專案範本內容建立。
 
@@ -110,9 +110,9 @@ Visual Studio 提供豐富的 JSON 編輯支援，例如顏色標示、格式化
 
 使用下列資訊清單檔時，LibMan 會根據屬性中定義的設定來抓取檔案 `libraries` 。 以下是中定義的物件常值的說明 `libraries` ：
 
-* 從 CDNJS 提供者取出 [jQuery](https://jquery.com/) 版本3.3.1 的子集。 子集定義于 `files` 屬性 &mdash; *jquery.min.js* 、 *jquery.js* 和 *jquery. 對應* 中。 檔案會放在專案的 *wwwroot/lib/jquery* 資料夾中。
+* 從 CDNJS 提供者取出 [jQuery](https://jquery.com/) 版本3.3.1 的子集。 子集定義于 `files` 屬性 &mdash; *jquery.min.js*、 *jquery.js* 和 *jquery. 對應* 中。 檔案會放在專案的 *wwwroot/lib/jquery* 資料夾中。
 * 完整的 [啟動](https://getbootstrap.com/) 程式版本4.1.3 會被抓取並放在 *wwwroot/lib/啟動* 程式資料夾中。 物件常值的 `provider` 屬性會覆寫 `defaultProvider` 屬性值。 LibMan 會從 unpkg 提供者抓取啟動載入器檔案。
-* 組織內的管理主體已核准 [lodash 所](https://lodash.com/) 的子集。 *lodash.js* 和 *lodash.min.js* 的檔案會從本機檔案系統中取出，位於 *C \\ ： \\ temp \\ lodash 所* 。 這些檔案會複製到專案的 *wwwroot/lib/lodash 所* 資料夾。
+* 組織內的管理主體已核准 [lodash 所](https://lodash.com/) 的子集。 *lodash.js* 和 *lodash.min.js* 的檔案會從本機檔案系統中取出，位於 *C \\ ： \\ temp \\ lodash 所*。 這些檔案會複製到專案的 *wwwroot/lib/lodash 所* 資料夾。
 
 [!code-json[](samples/LibManSample/libman.json)]
 
@@ -134,7 +134,7 @@ LibMan 可將定義的程式庫檔案還原為組建程式的一部分。 依預
 
 若要啟用並測試還原的組建行為：
 
-* 以滑鼠右鍵按一下 **方案總管** 中的 [ *libman.js* ]，然後從內容功能表中選取 [從 **組建還原 Client-Side 程式庫** ]。
+* 以滑鼠右鍵按一下 **方案總管** 中的 [ *libman.js* ]，然後從內容功能表中選取 [從 **組建還原 Client-Side 程式庫**]。
 * 當系統提示您安裝 NuGet 套件時，請按一下 [ **是]** 按鈕。 LibraryManager 會將 [組建](https://www.nuget.org/packages/Microsoft.Web.LibraryManager.Build/) NuGet 套件新增至專案：
 
   [!code-xml[](samples/LibManSample/LibManSample.csproj?name=snippet_RestoreOnBuildPackage)]
@@ -172,7 +172,7 @@ LibMan 可將定義的程式庫檔案還原為組建程式的一部分。 依預
 當還原作業正在執行時：
 
 * Visual Studio 狀態列上的工作狀態中心 (TSC) 圖示將會進行動畫處理，並會 *開始讀取還原* 作業。 按一下圖示會開啟工具提示，其中列出已知的背景工作。
-* 訊息將會傳送至 [ **輸出** ] 視窗的狀態列和連結 **庫管理員** 摘要。 例如：
+* 訊息將會傳送至 [**輸出**] 視窗的狀態列和連結 **庫管理員** 摘要。 例如：
 
   ```console
   Restore operation started...
@@ -197,7 +197,7 @@ LibMan 可將定義的程式庫檔案還原為組建程式的一部分。 依預
 清除作業正在執行時：
 
 * Visual Studio 狀態列上的 TSC 圖示將會進行動畫處理，並會 *開始讀取用戶端程式庫* 作業。 按一下圖示會開啟工具提示，其中列出已知的背景工作。
-* 訊息會傳送至 [ **輸出** ] 視窗的狀態列和連結 **庫管理員** 摘要。 例如：
+* 訊息會傳送至 [**輸出**] 視窗的狀態列和連結 **庫管理員** 摘要。 例如：
 
 ```console
 Clean libraries operation started...
@@ -211,9 +211,9 @@ Clean libraries operation completed
 
 卸載程式庫檔案：
 
-* 開啟 *libman.js開啟* ]。
+* 開啟 *libman.js開啟*]。
 * 將插入號放在對應的 `libraries` 物件常值內。
-* 按一下出現在左邊界的燈泡圖示，然後選取 [ **卸載 \<library_name> @ \<library_version>** ]：
+* 按一下出現在左邊界的燈泡圖示，然後選取 [**卸載 \<library_name> @ \<library_version>**]：
 
   ![卸載程式庫內容功能表選項](_static/uninstall-menu-option.png)
 
@@ -223,7 +223,7 @@ Clean libraries operation completed
 
 若要檢查更新的程式庫版本：
 
-* 開啟 *libman.js開啟* ]。
+* 開啟 *libman.js開啟*]。
 * 將插入號放在對應的 `libraries` 物件常值內。
 * 按一下出現在左邊界中的燈泡圖示。 將滑鼠停留在 **檢查更新的** 上方。
 

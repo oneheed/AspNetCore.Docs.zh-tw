@@ -19,10 +19,10 @@ no-loc:
 - SignalR
 uid: tutorials/signalr-typescript-webpack
 ms.openlocfilehash: 949276bf4aae33c3af3fd1b8219a83868095f378
-ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
+ms.sourcegitcommit: 3593c4efa707edeaaceffbfa544f99f41fc62535
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 10/30/2020
+ms.lasthandoff: 01/04/2021
 ms.locfileid: "93056838"
 ---
 # <a name="use-aspnet-core-no-locsignalr-with-typescript-and-webpack"></a>使用 ASP.NET Core 搭配 SignalR TypeScript 和 Webpack
@@ -68,26 +68,26 @@ ms.locfileid: "93056838"
 設定 Visual Studio 以在 *PATH* 環境變數中尋找 npm。 根據預設，Visual Studio 會使用在其安裝目錄中找到的 npm 版本。 請遵循 Visual Studio 中的下列指示：
 
 1. 啟動 Visual Studio。 在 [開始] 視窗中，選取 [ **繼續但不** 撰寫程式碼]。
-1. 流覽至 [ **工具** > **選項** > **專案和方案** ] > **web 套件管理** > **外部 web 工具** 。
-1. 從清單中選取 *$(PATH)* 項目。 按一下向上箭號可將專案移到清單中的第二個位置，然後選取 **[確定]** 。
+1. 流覽至 [ **工具** > **選項** > **專案和方案**] > **web 套件管理** > **外部 web 工具**。
+1. 從清單中選取 *$(PATH)* 項目。 按一下向上箭號可將專案移到清單中的第二個位置，然後選取 **[確定]**。
 
     ![Visual Studio 設定](signalr-typescript-webpack/_static/signalr-configure-path-visual-studio.png)
 
 Visual Studio 設定已完成。
 
-1. 使用 [ **檔案**  >  **新增**  >  **專案** ] 功能表選項，然後選擇 [ **ASP.NET Core Web 應用程式** ] 範本。 選取 [下一步]  。
-1. 將專案命名為 *SignalR WebPack* ，然後選取 [ **建立** ]。
-1. 從 [目標 framework] 下拉式清單中選取 [ *.Net Core* ]，然後從 [framework 選取器] 下拉式清單中選取 [ *ASP.NET Core 3.1* ]。 選取 **空白** 範本，然後選取 [ **建立** ]。
+1. 使用 [**檔案**  >  **新增**  >  **專案**] 功能表選項，然後選擇 [ **ASP.NET Core Web 應用程式**] 範本。 選取 [下一步]  。
+1. 將專案命名為 *SignalR WebPack*，然後選取 [**建立**]。
+1. 從 [目標 framework] 下拉式清單中選取 [ *.Net Core* ]，然後從 [framework 選取器] 下拉式清單中選取 [ *ASP.NET Core 3.1* ]。 選取 **空白** 範本，然後選取 [ **建立**]。
 
 將 `Microsoft.TypeScript.MSBuild` 套件新增至專案：
 
-1. 在 **方案總管** (右窗格) 中，以滑鼠右鍵按一下專案節點，然後選取 [ **管理 NuGet 套件** ]。 在 [ **流覽** ] 索引標籤中，搜尋 `Microsoft.TypeScript.MSBuild` ，然後按一下右邊的 [ **安裝** ] 以安裝套件。
+1. 在 **方案總管** (右窗格) 中，以滑鼠右鍵按一下專案節點，然後選取 [ **管理 NuGet 套件**]。 在 [ **流覽** ] 索引標籤中，搜尋 `Microsoft.TypeScript.MSBuild` ，然後按一下右邊的 [ **安裝** ] 以安裝套件。
 
 Visual Studio 會在 **方案總管** 的 [相依性 **]** 節點下新增 NuGet 套件，在專案中啟用 TypeScript 編譯。
 
 # <a name="visual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code)
 
-在 [整合式終端機]  中執行下列命令：
+在 [整合式終端機] 中執行下列命令：
 
 ```dotnetcli
 dotnet new web -o SignalRWebPack
@@ -190,7 +190,7 @@ dotnet add package Microsoft.TypeScript.MSBuild
     上述的 TypeScript 會擷取 DOM 項目的參考，並將附加兩個事件處理常式：
 
     * `keyup`：當使用者在文字方塊中輸入時，就會引發此事件 `tbMessage` 。 當使用者按下 **Enter** 鍵時，即會呼叫 `send` 函式。
-    * `click`：當使用者按一下 [傳送]  按鈕時，就會引發此事件。 系統會呼叫 `send` 函式。
+    * `click`：當使用者按一下 [傳送] 按鈕時，就會引發此事件。 系統會呼叫 `send` 函式。
 
 ## <a name="configure-the-app"></a>設定應用程式
 
@@ -208,9 +208,9 @@ dotnet add package Microsoft.TypeScript.MSBuild
 
    [!code-csharp[Startup](signalr-typescript-webpack/sample/3.x/Startup.cs?name=snippet_AddSignalR)]
 
-1. 在專案根目錄 *SignalR WebPack* 中建立名為「 *中樞* 」的新目錄，以儲存 SignalR 中樞。
+1. 在專案根目錄 *SignalR WebPack* 中建立名為「*中樞*」的新目錄，以儲存 SignalR 中樞。
 
-1. 使用下列程式碼建立中樞 *Hubs/ChatHub.cs* ：
+1. 使用下列程式碼建立中樞 *Hubs/ChatHub.cs*：
 
     [!code-csharp[ChatHub](signalr-typescript-webpack/sample/3.x/snippets/ChatHub.cs?name=snippet_ChatHubStubClass)]
 
@@ -265,13 +265,13 @@ dotnet add package Microsoft.TypeScript.MSBuild
 
     [!INCLUDE [npm-run-release](../includes/signalr-typescript-webpack/npm-run-release.md)]
 
-1. 選取 **Debug**  >  [在不進行偵錯工具的 **情況下啟動** ]，即可在瀏覽器中啟動應用程式，而不需附加 隨即會在 `http://localhost:<port_number>` 處提供 *wwwroot/index.html* 檔案。
+1. 選取  >  [在不進行偵錯工具的 **情況下啟動**]，即可在瀏覽器中啟動應用程式，而不需附加 隨即會在 `http://localhost:<port_number>` 處提供 *wwwroot/index.html* 檔案。
 
    如果您收到編譯錯誤，請嘗試關閉並重新開啟方案。 
 
 1. 開啟另一個瀏覽器執行個體 (任何瀏覽器)。 在網址列中貼上 URL。
 
-1. 選擇其中一個瀏覽器，在 [訊息]  文字方塊中鍵入某些內容，然後按一下 [傳送]  按鈕。 唯一使用者名稱和訊息會立即顯示在這兩個頁面上。
+1. 選擇其中一個瀏覽器，在 [訊息] 文字方塊中鍵入某些內容，然後按一下 [傳送] 按鈕。 唯一使用者名稱和訊息會立即顯示在這兩個頁面上。
 
 # <a name="visual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code)
 
@@ -291,7 +291,7 @@ dotnet add package Microsoft.TypeScript.MSBuild
 
 1. 開啟另一個瀏覽器執行個體 (任何瀏覽器)。 在網址列中貼上 URL。
 
-1. 選擇其中一個瀏覽器，在 [訊息]  文字方塊中鍵入某些內容，然後按一下 [傳送]  按鈕。 唯一使用者名稱和訊息會立即顯示在這兩個頁面上。
+1. 選擇其中一個瀏覽器，在 [訊息] 文字方塊中鍵入某些內容，然後按一下 [傳送] 按鈕。 唯一使用者名稱和訊息會立即顯示在這兩個頁面上。
 
 ---
 
@@ -324,20 +324,20 @@ dotnet add package Microsoft.TypeScript.MSBuild
 
 設定 Visual Studio 以在 *PATH* 環境變數中尋找 npm。 根據預設，Visual Studio 會使用在其安裝目錄中找到的 npm 版本。 請遵循 Visual Studio 中的下列指示：
 
-1. 流覽至 [ **工具** > **選項** > **專案和方案** ] > **web 套件管理** > **外部 web 工具** 。
+1. 流覽至 [ **工具** > **選項** > **專案和方案**] > **web 套件管理** > **外部 web 工具**。
 1. 從清單中選取 *$(PATH)* 項目。 按一下向上箭號，將此項目移至清單中的第二個位置。
 
     ![Visual Studio 設定](signalr-typescript-webpack/_static/signalr-configure-path-visual-studio.png)
 
 Visual Studio 組態已完成。 現在即可開始建立專案。
 
-1. 使用 [檔案]  功能表選項，然後選擇 [ASP.NET Core Web 應用程式]  範本。
-1. 將專案命名為 *SignalR WebPack* ，然後選取 [ **建立** ]。
-1. 從目標 Framework 下拉式清單中選取 [.NET Core]  ，然後從 Framework 選取器下拉式清單中選取 [ASP.NET Core 2.2]  。 選取 **空白** 範本，然後選取 [ **建立** ]。
+1. 使用 [檔案]**[新增]** > **[專案]** >  功能表選項，然後選擇 [ASP.NET Core Web 應用程式] 範本。
+1. 將專案命名為 *SignalR WebPack*，然後選取 [**建立**]。
+1. 從目標 Framework 下拉式清單中選取 [.NET Core]，然後從 Framework 選取器下拉式清單中選取 [ASP.NET Core 2.2]。 選取 **空白** 範本，然後選取 [ **建立**]。
 
 # <a name="visual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code)
 
-在 [整合式終端機]  中執行下列命令：
+在 [整合式終端機] 中執行下列命令：
 
 ```dotnetcli
 dotnet new web -o SignalRWebPack
@@ -430,11 +430,11 @@ dotnet new web -o SignalRWebPack
     上述的 TypeScript 會擷取 DOM 項目的參考，並將附加兩個事件處理常式：
 
     * `keyup`：當使用者在文字方塊中輸入時，就會引發此事件 `tbMessage` 。 當使用者按下 **Enter** 鍵時，即會呼叫 `send` 函式。
-    * `click`：當使用者按一下 [傳送]  按鈕時，就會引發此事件。 系統會呼叫 `send` 函式。
+    * `click`：當使用者按一下 [傳送] 按鈕時，就會引發此事件。 系統會呼叫 `send` 函式。
 
 ## <a name="configure-the-aspnet-core-app"></a>設定 ASP.NET Core 應用程式
 
-1. `Startup.Configure` 方法中提供的程式碼會顯示 *Hello World!* 。 請以 [UseDefaultFiles](/dotnet/api/microsoft.aspnetcore.builder.defaultfilesextensions.usedefaultfiles#Microsoft_AspNetCore_Builder_DefaultFilesExtensions_UseDefaultFiles_Microsoft_AspNetCore_Builder_IApplicationBuilder_) 和 [UseStaticFiles](/dotnet/api/microsoft.aspnetcore.builder.staticfileextensions.usestaticfiles#Microsoft_AspNetCore_Builder_StaticFileExtensions_UseStaticFiles_Microsoft_AspNetCore_Builder_IApplicationBuilder_) 的呼叫取代 `app.Run` 方法呼叫。
+1. `Startup.Configure` 方法中提供的程式碼會顯示 *Hello World!*。 請以 [UseDefaultFiles](/dotnet/api/microsoft.aspnetcore.builder.defaultfilesextensions.usedefaultfiles#Microsoft_AspNetCore_Builder_DefaultFilesExtensions_UseDefaultFiles_Microsoft_AspNetCore_Builder_IApplicationBuilder_) 和 [UseStaticFiles](/dotnet/api/microsoft.aspnetcore.builder.staticfileextensions.usestaticfiles#Microsoft_AspNetCore_Builder_StaticFileExtensions_UseStaticFiles_Microsoft_AspNetCore_Builder_IApplicationBuilder_) 的呼叫取代 `app.Run` 方法呼叫。
 
     [!code-csharp[Startup](signalr-typescript-webpack/sample/2.x/Startup.cs?name=snippet_UseStaticDefaultFiles)]
 
@@ -450,7 +450,7 @@ dotnet new web -o SignalRWebPack
 
 1. 在專案根目錄中建立名為 *Hubs* 的新目錄。 其目的是要儲存在 SignalR 下一個步驟中建立的中樞。
 
-1. 使用下列程式碼建立中樞 *Hubs/ChatHub.cs* ：
+1. 使用下列程式碼建立中樞 *Hubs/ChatHub.cs*：
 
     [!code-csharp[ChatHub](signalr-typescript-webpack/sample/2.x/snippets/ChatHub.cs?name=snippet_ChatHubStubClass)]
 
@@ -502,11 +502,11 @@ dotnet new web -o SignalRWebPack
 
     [!INCLUDE [npm-run-release](../includes/signalr-typescript-webpack/npm-run-release.md)]
 
-1. 選取 **Debug**  >  [在不進行偵錯工具的 **情況下啟動** ]，即可在瀏覽器中啟動應用程式，而不需附加 隨即會在 `http://localhost:<port_number>` 處提供 *wwwroot/index.html* 檔案。
+1. 選取  >  [在不進行偵錯工具的 **情況下啟動**]，即可在瀏覽器中啟動應用程式，而不需附加 隨即會在 `http://localhost:<port_number>` 處提供 *wwwroot/index.html* 檔案。
 
 1. 開啟另一個瀏覽器執行個體 (任何瀏覽器)。 在網址列中貼上 URL。
 
-1. 選擇其中一個瀏覽器，在 [訊息]  文字方塊中鍵入某些內容，然後按一下 [傳送]  按鈕。 唯一使用者名稱和訊息會立即顯示在這兩個頁面上。
+1. 選擇其中一個瀏覽器，在 [訊息] 文字方塊中鍵入某些內容，然後按一下 [傳送] 按鈕。 唯一使用者名稱和訊息會立即顯示在這兩個頁面上。
 
 # <a name="visual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code)
 
@@ -526,7 +526,7 @@ dotnet new web -o SignalRWebPack
 
 1. 開啟另一個瀏覽器執行個體 (任何瀏覽器)。 在網址列中貼上 URL。
 
-1. 選擇其中一個瀏覽器，在 [訊息]  文字方塊中鍵入某些內容，然後按一下 [傳送]  按鈕。 唯一使用者名稱和訊息會立即顯示在這兩個頁面上。
+1. 選擇其中一個瀏覽器，在 [訊息] 文字方塊中鍵入某些內容，然後按一下 [傳送] 按鈕。 唯一使用者名稱和訊息會立即顯示在這兩個頁面上。
 
 ---
 

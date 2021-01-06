@@ -19,10 +19,10 @@ no-loc:
 - SignalR
 uid: grpc/services
 ms.openlocfilehash: cc9fc50871cbad1f2ddf63d3c13c3253f24a995b
-ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
+ms.sourcegitcommit: 3593c4efa707edeaaceffbfa544f99f41fc62535
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 10/30/2020
+ms.lasthandoff: 01/04/2021
 ms.locfileid: "93058736"
 ---
 # <a name="create-grpc-services-and-methods"></a>建立 gRPC 服務和方法
@@ -104,18 +104,18 @@ app.UseEndpoints(endpoints =>
 });
 ```
 
-如需詳細資訊，請參閱 <xref:grpc/aspnetcore>。
+如需相關資訊，請參閱 <xref:grpc/aspnetcore> 。
 
 ## <a name="implement-grpc-methods"></a>執行 gRPC 方法
 
 GRPC 服務可以有不同類型的方法。 服務傳送和接收訊息的方式取決於定義的方法類型。 GRPC 方法類型為：
 
-* 一元
+* 一元 (Unary)
 * 伺服器串流
 * 用戶端串流
 * 雙向串流
 
-使用 proto 檔中的關鍵字來指定資料流程呼叫 `stream` 。 *.proto* `stream` 可以放在呼叫的要求訊息、回應訊息或兩者上。
+使用 proto 檔中的關鍵字來指定資料流程呼叫 `stream` 。  `stream` 可以放在呼叫的要求訊息、回應訊息或兩者上。
 
 ```protobuf
 syntax = "proto3";

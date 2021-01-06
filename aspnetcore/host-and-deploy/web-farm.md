@@ -20,22 +20,22 @@ no-loc:
 - SignalR
 uid: host-and-deploy/web-farm
 ms.openlocfilehash: ee78e80a4eda3089943765700aa6bb62c6c1e07d
-ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
+ms.sourcegitcommit: 3593c4efa707edeaaceffbfa544f99f41fc62535
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 10/30/2020
+ms.lasthandoff: 01/04/2021
 ms.locfileid: "93057514"
 ---
 # <a name="host-aspnet-core-in-a-web-farm"></a>在 Web 伺服陣列上裝載 ASP.NET Core
 
 由 [Chris Ross](https://github.com/Tratcher)
 
- )，用於裝載應用程式的多個執行個體。 當使用者的要求抵達 Web 伺服陣列時，「負載平衡器」  會將要求分散到 Web 伺服陣列的節點。 Web 伺服陣列改善：
+*Web 伺服陣列* 是一組兩個或多個 Web 伺服器 (或稱為「節點」)，用於裝載應用程式的多個執行個體。 當使用者的要求抵達 Web 伺服陣列時，「負載平衡器」會將要求分散到 Web 伺服陣列的節點。 Web 伺服陣列改善：
 
-* **可靠性/可用性** ：當一或多個節點失敗時，負載平衡器可以將要求路由至其他正常運作的節點，以繼續處理要求。
-* **容量/效能** ：多個節點可以處理比單一伺服器更多的要求。 負載平衡器可以將要求分散到節點，藉以平衡工作負載。
-* 擴充 **性** ：需要更多或更少的容量時，可以增加或減少作用中節點的數目以符合工作負載。 Web 伺服陣列的平台技術 (例如 [Azure App Service](https://azure.microsoft.com/services/app-service/)) 可以依系統管理員的要求自動新增或移除節點，也可以在沒有人為介入的情況下自動新增或移除節點。
-* 可 **維護性** ： web 伺服陣列的節點可以依賴一組共用服務，這會使得系統管理更容易。 例如，Web 伺服陣列的節點可以依賴單一資料庫伺服器和靜態資源的通用網路位置，例如影像和可下載檔案。
+* **可靠性/可用性**：當一或多個節點失敗時，負載平衡器可以將要求路由至其他正常運作的節點，以繼續處理要求。
+* **容量/效能**：多個節點可以處理比單一伺服器更多的要求。 負載平衡器可以將要求分散到節點，藉以平衡工作負載。
+* 擴充 **性**：需要更多或更少的容量時，可以增加或減少作用中節點的數目以符合工作負載。 Web 伺服陣列的平台技術 (例如 [Azure App Service](https://azure.microsoft.com/services/app-service/)) 可以依系統管理員的要求自動新增或移除節點，也可以在沒有人為介入的情況下自動新增或移除節點。
+* 可 **維護性**： web 伺服陣列的節點可以依賴一組共用服務，這會使得系統管理更容易。 例如，Web 伺服陣列的節點可以依賴單一資料庫伺服器和靜態資源的通用網路位置，例如影像和可下載檔案。
 
 本主題針對依賴共用資源的 Web 伺服陣列，說明其中所裝載 ASP.NET Core 應用程式的設定和相依性。
 
@@ -64,7 +64,7 @@ ms.locfileid: "93057514"
 
 ### <a name="caching"></a>Caching
 
-在 Web 伺服陣列環境中，快取機制必須跨 Web 伺服陣列節點共用快取項目。 快取必須依賴於通用 Redis 快取、共用的 SQL Server 資料庫，或跨 Web 伺服陣列共用快取項目的自訂快取實作。 如需詳細資訊，請參閱<xref:performance/caching/distributed>。
+在 Web 伺服陣列環境中，快取機制必須跨 Web 伺服陣列節點共用快取項目。 快取必須依賴於通用 Redis 快取、共用的 SQL Server 資料庫，或跨 Web 伺服陣列共用快取項目的自訂快取實作。 如需詳細資訊，請參閱 <xref:performance/caching/distributed> 。
 
 ## <a name="dependent-components"></a>相依元件
 
@@ -73,10 +73,10 @@ ms.locfileid: "93057514"
 | 案例 | 相依於 &hellip; |
 | -------- | ------------------- |
 | 驗證 | 資料保護 (請參閱 <xref:security/data-protection/configuration/overview>)。<br><br>如需詳細資訊，請參閱 <xref:security/authentication/cookie> 和 <xref:security/cookie-sharing>。 |
-| Identity | 驗證及資料庫設定。<br><br>如需詳細資訊，請參閱<xref:security/authentication/identity>。 |
+| Identity | 驗證及資料庫設定。<br><br>如需詳細資訊，請參閱 <xref:security/authentication/identity> 。 |
 | 工作階段 | 資料保護 (加密 cookie 的)  (查看 <xref:security/data-protection/configuration/overview>) 和快取 (請參閱 <xref:performance/caching/distributed>) 。<br><br>如需詳細資訊，請參閱 [會話和狀態管理：會話狀態](xref:fundamentals/app-state#session-state)。 |
 | TempData |  (加密的資料保護 cookie)  (查看 <xref:security/data-protection/configuration/overview>) 或會話 (查看 [會話和狀態管理：會話狀態](xref:fundamentals/app-state#session-state)) 。<br><br>如需詳細資訊，請參閱 [會話和狀態管理： TempData](xref:fundamentals/app-state#tempdata)。 |
-| 防偽 | 資料保護 (請參閱 <xref:security/data-protection/configuration/overview>)。<br><br>如需詳細資訊，請參閱<xref:security/anti-request-forgery>。 |
+| 防偽 | 資料保護 (請參閱 <xref:security/data-protection/configuration/overview>)。<br><br>如需詳細資訊，請參閱 <xref:security/anti-request-forgery> 。 |
 
 ## <a name="troubleshoot"></a>疑難排解
 

@@ -19,10 +19,10 @@ no-loc:
 - SignalR
 uid: client-side/bundling-and-minification
 ms.openlocfilehash: 7dd11ceb7a7c01ce1042f50595013b7fe7f1cd5c
-ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
+ms.sourcegitcommit: 3593c4efa707edeaaceffbfa544f99f41fc62535
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 10/30/2020
+ms.lasthandoff: 01/04/2021
 ms.locfileid: "93054836"
 ---
 # <a name="bundle-and-minify-static-assets-in-aspnet-core"></a>在 ASP.NET Core 中組合和縮短靜態資產
@@ -96,19 +96,19 @@ MVC 和 Razor Pages 專案範本提供了由 JSON 設定檔群組成的組合和
 
 [!code-json[](../client-side/bundling-and-minification/samples/BuildBundlerMinifierApp/bundleconfig.json)]
 
-檔案 *上的bundleconfig.js* 會定義每個組合的選項。 在上述範例中，會為自訂 JavaScript ( *wwwroot/js/site.js* ) 和樣式表單定義單一套件組合， ( *wwwroot/css/網站 .css* ) 檔案。
+檔案 *上的bundleconfig.js* 會定義每個組合的選項。 在上述範例中，會為自訂 JavaScript (*wwwroot/js/site.js*) 和樣式表單定義單一套件組合， (*wwwroot/css/網站 .css*) 檔案。
 
 設定選項包括：
 
 * `outputFileName`：要輸出的組合檔案名稱。 可以包含檔案 *bundleconfig.js* 的相對路徑。 **必填**
-* `inputFiles`：要一起組合的檔案陣列。 這些是設定檔的相對路徑。 （ **選擇性** ） * 空白值會產生空白的輸出檔。 支援[萬用字元模式。](https://www.tldp.org/LDP/abs/html/globbingref.html)
-* `minify`：輸出型別的縮制選項。 **選用** ， *預設值 `minify: { enabled: true }` -*
+* `inputFiles`：要一起組合的檔案陣列。 這些是設定檔的相對路徑。 （**選擇性**） * 空白值會產生空白的輸出檔。 支援[萬用字元模式。](https://www.tldp.org/LDP/abs/html/globbingref.html)
+* `minify`：輸出型別的縮制選項。 **選用**，*預設值 `minify: { enabled: true }` -*
   * 每個輸出檔案類型都可以使用設定選項。
     * [CSS Minifier](https://github.com/madskristensen/BundlerMinifier/wiki/cssminifier)
     * [JavaScript Minifier](https://github.com/madskristensen/BundlerMinifier/wiki/JavaScript-Minifier-settings)
     * [HTML Minifier](https://github.com/madskristensen/BundlerMinifier/wiki)
-* `includeInProject`：旗標，指出是否要將產生的檔案加入至專案檔。 **選用** ， *預設值-false*
-* `sourceMap`：旗標，指出是否要產生配套檔案的來源對應。 **選用** ， *預設值-false*
+* `includeInProject`：旗標，指出是否要將產生的檔案加入至專案檔。 **選用**， *預設值-false*
+* `sourceMap`：旗標，指出是否要產生配套檔案的來源對應。 **選用**， *預設值-false*
 * `sourceMapRootPath`：用來儲存所產生之來源對應檔的根路徑。
 
 ## <a name="add-files-to-workflow"></a>將檔案新增至工作流程

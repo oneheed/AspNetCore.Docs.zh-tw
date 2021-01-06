@@ -4,7 +4,7 @@
 
 ## <a name="how-to-make-a-simple-correction-or-suggestion"></a>如何提出簡單的修正或建議
 
-文章會以 Markdown 檔案形式儲存在存放庫中。 您可以在瀏覽器中，選取瀏覽器視窗右上角的 [編輯]**** 連結，對 Markdown 檔案內容進行簡易變更。 (在狹窄的瀏覽器視窗中,展開**選項**列以查看 **"編輯"** 連結。按照說明創建拉取請求 (PR)。 我們將檢閱 PR 並接受它，或建議變更。
+文章會以 Markdown 檔案形式儲存在存放庫中。 您可以在瀏覽器中，選取瀏覽器視窗右上角的 [編輯] 連結，對 Markdown 檔案內容進行簡易變更。  (在較窄的瀏覽器視窗中，展開 [ **選項** ] 列以查看 [ **編輯** ] 連結。 ) 依照指示建立提取要求 (PR) 。 我們將檢閱 PR 並接受它，或建議變更。
 
 ## <a name="how-to-make-a-more-complex-submission"></a>如何進行更複雜的提交
 
@@ -147,7 +147,7 @@ DocFX 需要：
 
 * 在瀏覽器中，巡覽至 `http://localhost:8080/group1-dest/`。
 
-## <a name="voice-and-tone"></a>語態和語氣
+## <a name="voice-and-tone"></a>語氣和語調
 
 我們撰寫文件的目標是盡可能讓越多使用者輕鬆了解越好。 為此，我們制定了書寫樣式方針，並要求參與者務必遵循。 如需詳細資訊，請參閱 .NET 存放庫中的 [Voice and tone guidelines](https://github.com/dotnet/docs/blob/master/styleguide/voice-tone.md) (語態和語氣方針)。
 
@@ -157,4 +157,4 @@ DocFX 需要：
 
 ## <a name="redirects"></a>重新導向
 
-如果您刪除文章、變更其檔案名稱，或把文章移至其他資料夾，請建立重新導向，確保將文章加入書籤的人員不會收到 *404 找不到*錯誤。 將重新導向新增至[主要重新導向檔案](https://github.com/dotnet/AspNetCore.Docs/blob/master/.openpublishing.redirection.json)。
+如果您刪除文章、變更其檔案名稱，或把文章移至其他資料夾，請建立重新導向，確保將文章加入書籤的人員不會收到 *404 找不到* 錯誤。 將重新導向新增至[主要重新導向檔案](https://github.com/dotnet/AspNetCore.Docs/blob/master/.openpublishing.redirection.json)。

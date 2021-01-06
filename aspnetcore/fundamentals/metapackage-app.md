@@ -19,17 +19,17 @@ no-loc:
 - SignalR
 uid: fundamentals/metapackage-app
 ms.openlocfilehash: 225bb1f55c099a476319191726c5a661f9a4893a
-ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
+ms.sourcegitcommit: 3593c4efa707edeaaceffbfa544f99f41fc62535
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 10/30/2020
+ms.lasthandoff: 01/04/2021
 ms.locfileid: "93057800"
 ---
 # <a name="microsoftaspnetcoreapp-for-aspnet-core"></a>ASP.NET Core 的 AspNetCore 應用程式
 
 ::: moniker range=">= aspnetcore-3.0"
 
- ASP.NET Core 共用架構 (`Microsoft.AspNetCore.App`) 包含由 Microsoft 開發及支援的元件。 `Microsoft.AspNetCore.App` 會在安裝 [.Net Core 3.0 或更新版本的 SDK](https://dotnet.microsoft.com/download/dotnet-core/3.0) 時安裝。 *共用架構* 是安裝在電腦上的一組元件 ( *.dll* 檔案) ，其中包含執行時間元件和目標套件。 如需詳細資訊，請參閱[共用的架構](https://natemcmaster.com/blog/2018/08/29/netcore-primitives-2/) \(英文\)。
+ ASP.NET Core 共用架構 (`Microsoft.AspNetCore.App`) 包含由 Microsoft 開發及支援的元件。 `Microsoft.AspNetCore.App` 會在安裝 [.Net Core 3.0 或更新版本的 SDK](https://dotnet.microsoft.com/download/dotnet-core/3.0) 時安裝。 *共用架構* 是安裝在電腦上的一組元件 (*.dll* 檔案) ，其中包含執行時間元件和目標套件。 如需詳細資訊，請參閱[共用的架構](https://natemcmaster.com/blog/2018/08/29/netcore-primitives-2/) \(英文\)。
 
 * 以 SDK 為目標的專案會 `Microsoft.NET.Sdk.Web` 隱含地參考 `Microsoft.AspNetCore.App` 架構。
 
@@ -71,7 +71,7 @@ ASP.NET Core 的 [Microsoft.AspNetCore.App](https://www.nuget.org/packages/Micro
 * 其他新增至您應用程式的套件無法變更 `Microsoft.AspNetCore.App` 中包含的套件版本。
 * 版本一致性有助於確保可靠的體驗。 `Microsoft.AspNetCore.App` 的設計目的是為了防止相關位元之未經測試的版本組合在同一個應用程式中搭配使用。
 
-使用 `Microsoft.AspNetCore.App` 中繼套件的應用程式會自動利用 ASP.NET Core 共用架構。 當您使用 `Microsoft.AspNetCore.App` 中繼套件時， **不會** 在應用程式中部署所參考之 ASP.NET Core NuGet 套件的任何資產 &mdash; ASP.NET Core 共用架構包含這些資產。 共用架構中的資產會先行編譯，以改善應用程式啟動時間。 如需詳細資訊，請參閱[共用的架構](https://natemcmaster.com/blog/2018/08/29/netcore-primitives-2/) \(英文\)。
+使用 `Microsoft.AspNetCore.App` 中繼套件的應用程式會自動利用 ASP.NET Core 共用架構。 當您使用 `Microsoft.AspNetCore.App` 中繼套件時，**不會** 在應用程式中部署所參考之 ASP.NET Core NuGet 套件的任何資產 &mdash; ASP.NET Core 共用架構包含這些資產。 共用架構中的資產會先行編譯，以改善應用程式啟動時間。 如需詳細資訊，請參閱[共用的架構](https://natemcmaster.com/blog/2018/08/29/netcore-primitives-2/) \(英文\)。
 
 下列專案檔會參考 `Microsoft.AspNetCore.App` ASP.NET Core 的中繼套件，並代表典型的 ASP.NET Core 2.2 範本：
 

@@ -5,6 +5,7 @@ description: ASP.NET Core MVC 之教學課程系列的第7部分。
 ms.author: riande
 ms.date: 12/13/2018
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -16,18 +17,18 @@ no-loc:
 - Razor
 - SignalR
 uid: tutorials/first-mvc-app/search
-ms.openlocfilehash: fcb96300c08d9f985cbfe4d3bf055036be7d2eb0
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: 657072803f59feb99de8b31ddb3a6433d832aa30
+ms.sourcegitcommit: 3593c4efa707edeaaceffbfa544f99f41fc62535
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88629570"
+ms.lasthandoff: 01/04/2021
+ms.locfileid: "93059620"
 ---
 # <a name="part-7-add-search-to-an-aspnet-core-mvc-app"></a>第7部分：將搜尋新增至 ASP.NET Core MVC 應用程式
 
 作者：[Rick Anderson](https://twitter.com/RickAndMSFT)
 
-在本節中，您會將搜尋功能新增至 `Index` 動作方法，讓您依據「內容類型」** 或「名稱」** 搜尋電影。
+在本節中，您會將搜尋功能新增至 `Index` 動作方法，讓您依據「內容類型」或「名稱」搜尋電影。
 
 使用下列程式碼更新在 *Controllers/MoviesController.cs* 中找到的 `Index` 方法：
 
@@ -40,7 +41,7 @@ var movies = from m in _context.Movie
              select m;
 ```
 
-這時候，系統只會「定義」查詢**，而尚**未**對資料庫執行查詢。
+這時候，系統只會「定義」查詢，而尚 **未** 對資料庫執行查詢。
 
 如果 `searchString` 參數包含字串，則會修改電影查詢來篩選搜尋字串的值：
 

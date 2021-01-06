@@ -20,10 +20,10 @@ no-loc:
 - SignalR
 uid: test/middleware
 ms.openlocfilehash: 2dd5fa127af4432c612bb654d50eb4147aea6868
-ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
+ms.sourcegitcommit: 3593c4efa707edeaaceffbfa544f99f41fc62535
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 10/30/2020
+ms.lasthandoff: 01/04/2021
 ms.locfileid: "93051430"
 ---
 # <a name="test-aspnet-core-middleware"></a>測試 ASP.NET Core 中介軟體
@@ -68,7 +68,7 @@ ms.locfileid: "93051430"
 
 判斷提示結果。 首先，讓判斷提示的結果與您預期的結果相反。 具有 false 正數判斷提示的初始回合，可確認當中間件正常執行時，測試會失敗。 執行測試，並確認測試失敗。
 
-在下列範例中，中介軟體應該會傳回404狀態碼 (當要求根端點時， *找不到* ) 。 執行第一個測試 `Assert.NotEqual( ... );` ，這應該會失敗：
+在下列範例中，中介軟體應該會傳回404狀態碼 (當要求根端點時， *找不到*) 。 執行第一個測試 `Assert.NotEqual( ... );` ，這應該會失敗：
 
 [!code-csharp[](middleware/samples_snapshot/3.x/false-failure-check.cs?highlight=22)]
 
@@ -136,7 +136,7 @@ public async Task TestMiddleware_ExpectedResponse()
 TestServer
 
 * 是為了將伺服器行為複寫到測試中介軟體所建立。
-* * **Not** _ 會嘗試複寫所有 <xref:System.Net.Http.HttpClient> 行為。
+* ***Not** _ 會嘗試複寫所有 <xref:System.Net.Http.HttpClient> 行為。
 _ 會盡可能讓用戶端存取伺服器的存取權限，而且可以盡可能看到伺服器上發生的狀況。 例如，它可能會擲回通常未擲回的例外 `HttpClient` 狀況，以便直接傳達伺服器狀態。
 * 預設不會設定某些傳輸特定標頭，因為這些標頭通常與中介軟體無關。 如需詳細資訊，請參閱下一節。
 

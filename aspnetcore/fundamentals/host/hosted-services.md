@@ -20,10 +20,10 @@ no-loc:
 - SignalR
 uid: fundamentals/host/hosted-services
 ms.openlocfilehash: b8d6ec079ed39fb3a2c314816ebae6cea0847a36
-ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
+ms.sourcegitcommit: 3593c4efa707edeaaceffbfa544f99f41fc62535
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 10/30/2020
+ms.lasthandoff: 01/04/2021
 ms.locfileid: "93061076"
 ---
 # <a name="background-tasks-with-hosted-services-in-aspnet-core"></a>在 ASP.NET Core 中使用託管服務的背景工作
@@ -32,7 +32,7 @@ ms.locfileid: "93061076"
 
 ::: moniker range=">= aspnetcore-3.0"
 
-在 ASP.NET Core 中，背景工作可實作為「託管服務」  。 託管服務是具有背景工作邏輯的類別，可實作 <xref:Microsoft.Extensions.Hosting.IHostedService> 介面。 本主題提供三個託管服務範例：
+在 ASP.NET Core 中，背景工作可實作為「託管服務」。 託管服務是具有背景工作邏輯的類別，可實作 <xref:Microsoft.Extensions.Hosting.IHostedService> 介面。 本主題提供三個託管服務範例：
 
 * 在計時器上執行的背景工作。
 * 啟用 [範圍服務](xref:fundamentals/dependency-injection#service-lifetimes)的託管服務。 已設定範圍的服務可以使用 [ (DI) ](xref:fundamentals/dependency-injection)的相依性插入。
@@ -52,9 +52,9 @@ ASP.NET Core 背景工作服務範本提供撰寫長期執行服務應用程式�
 
 [!INCLUDE[](~/includes/worker-template-instructions.md)]
 
-## <a name="package"></a>套件
+## <a name="package"></a>Package
 
-以背景工作角色服務範本為基礎的應用程式會使用 `Microsoft.NET.Sdk.Worker` SDK，而且會有明確的套件參考，可參考至 [裝載](https://www.nuget.org/packages/Microsoft.Extensions.Hosting) 套件。 例如，請參閱範例應用程式的專案檔 ( *BackgroundTasksSample .csproj* ) 。
+以背景工作角色服務範本為基礎的應用程式會使用 `Microsoft.NET.Sdk.Worker` SDK，而且會有明確的套件參考，可參考至 [裝載](https://www.nuget.org/packages/Microsoft.Extensions.Hosting) 套件。 例如，請參閱範例應用程式的專案檔 (*BackgroundTasksSample .csproj*) 。
 
 針對使用 SDK 的 web 應用程式 `Microsoft.NET.Sdk.Web` ，會以隱含方式從共用架構參考 [裝載](https://www.nuget.org/packages/Microsoft.Extensions.Hosting) 套件。 應用程式專案檔中不需要明確的套件參考。
 
@@ -107,8 +107,8 @@ ASP.NET Core 背景工作服務範本提供撰寫長期執行服務應用程式�
 
   若要延長預設的五秒鐘關機逾時，請設定：
 
-  * <xref:Microsoft.Extensions.Hosting.HostOptions.ShutdownTimeout*> (使用泛型主機時)。 如需詳細資訊，請參閱<xref:fundamentals/host/generic-host#shutdown-timeout>。
-  * 使用 Web 主機時，關機逾時會裝載組態設定。 如需詳細資訊，請參閱<xref:fundamentals/host/web-host#shutdown-timeout>。
+  * <xref:Microsoft.Extensions.Hosting.HostOptions.ShutdownTimeout*> (使用泛型主機時)。 如需詳細資訊，請參閱 <xref:fundamentals/host/generic-host#shutdown-timeout> 。
+  * 使用 Web 主機時，關機逾時會裝載組態設定。 如需詳細資訊，請參閱 <xref:fundamentals/host/web-host#shutdown-timeout> 。
 
 託管服務會在應用程式啟動時隨即啟動，然後在應用程式關閉時正常關閉。 如果在背景工作執行期間擲回錯誤，即使未呼叫 `StopAsync`，也應該呼叫 `Dispose`。
 
@@ -128,7 +128,7 @@ ASP.NET Core 背景工作服務範本提供撰寫長期執行服務應用程式�
 
 <xref:System.Threading.Timer>不會等候先前的執行 `DoWork` 完成，因此所顯示的方法可能不適合每種案例。 [連鎖。遞增](xref:System.Threading.Interlocked.Increment*) 是用來將執行計數器遞增為不可部分完成的作業，以確保多個執行緒不會 `executionCount` 同時更新。
 
-服務會在 `IHostBuilder.ConfigureServices` ( *Program.cs* ) 中註冊 `AddHostedService` 擴充方法：
+服務會在 `IHostBuilder.ConfigureServices` (*Program.cs*) 中註冊 `AddHostedService` 擴充方法：
 
 [!code-csharp[](hosted-services/samples/3.x/BackgroundTasksSample/Program.cs?name=snippet1)]
 
@@ -147,7 +147,7 @@ ASP.NET Core 背景工作服務範本提供撰寫長期執行服務應用程式�
 
 [!code-csharp[](hosted-services/samples/3.x/BackgroundTasksSample/Services/ConsumeScopedServiceHostedService.cs?name=snippet1&highlight=19,22-35)]
 
-這些服務會在 `IHostBuilder.ConfigureServices` ( *Program.cs* ) 中註冊。 託管服務是使用 `AddHostedService` 擴充方法來註冊：
+這些服務會在 `IHostBuilder.ConfigureServices` (*Program.cs*) 中註冊。 託管服務是使用 `AddHostedService` 擴充方法來註冊：
 
 [!code-csharp[](hosted-services/samples/3.x/BackgroundTasksSample/Program.cs?name=snippet2)]
 
@@ -175,7 +175,7 @@ ASP.NET Core 背景工作服務範本提供撰寫長期執行服務應用程式�
 
 [!code-csharp[](hosted-services/samples/3.x/BackgroundTasksSample/Services/MonitorLoop.cs?name=snippet_Monitor&highlight=7,33)]
 
-這些服務會在 `IHostBuilder.ConfigureServices` ( *Program.cs* ) 中註冊。 託管服務是使用 `AddHostedService` 擴充方法來註冊：
+這些服務會在 `IHostBuilder.ConfigureServices` (*Program.cs*) 中註冊。 託管服務是使用 `AddHostedService` 擴充方法來註冊：
 
 [!code-csharp[](hosted-services/samples/3.x/BackgroundTasksSample/Program.cs?name=snippet3)]
 
@@ -187,7 +187,7 @@ ASP.NET Core 背景工作服務範本提供撰寫長期執行服務應用程式�
 
 ::: moniker range="< aspnetcore-3.0"
 
-在 ASP.NET Core 中，背景工作可實作為「託管服務」  。 託管服務是具有背景工作邏輯的類別，可實作 <xref:Microsoft.Extensions.Hosting.IHostedService> 介面。 本主題提供三個託管服務範例：
+在 ASP.NET Core 中，背景工作可實作為「託管服務」。 託管服務是具有背景工作邏輯的類別，可實作 <xref:Microsoft.Extensions.Hosting.IHostedService> 介面。 本主題提供三個託管服務範例：
 
 * 在計時器上執行的背景工作。
 * 啟用 [範圍服務](xref:fundamentals/dependency-injection#service-lifetimes)的託管服務。 已設定範圍的服務可以使用相依性 [插入 (DI) ](xref:fundamentals/dependency-injection)
@@ -195,7 +195,7 @@ ASP.NET Core 背景工作服務範本提供撰寫長期執行服務應用程式�
 
 [查看或下載範例程式碼](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/host/hosted-services/samples/) ([如何下載](xref:index#how-to-download-a-sample)) 
 
-## <a name="package"></a>套件
+## <a name="package"></a>Package
 
 參考 [Microsoft.AspNetCore.App 中繼套件](xref:fundamentals/metapackage-app)，或新增 [Microsoft.Extensions.Hosting](https://www.nuget.org/packages/Microsoft.Extensions.Hosting) 套件的套件參考。
 
@@ -218,8 +218,8 @@ ASP.NET Core 背景工作服務範本提供撰寫長期執行服務應用程式�
 
   若要延長預設的五秒鐘關機逾時，請設定：
 
-  * <xref:Microsoft.Extensions.Hosting.HostOptions.ShutdownTimeout*> (使用泛型主機時)。 如需詳細資訊，請參閱<xref:fundamentals/host/generic-host#shutdown-timeout>。
-  * 使用 Web 主機時，關機逾時會裝載組態設定。 如需詳細資訊，請參閱<xref:fundamentals/host/web-host#shutdown-timeout>。
+  * <xref:Microsoft.Extensions.Hosting.HostOptions.ShutdownTimeout*> (使用泛型主機時)。 如需詳細資訊，請參閱 <xref:fundamentals/host/generic-host#shutdown-timeout> 。
+  * 使用 Web 主機時，關機逾時會裝載組態設定。 如需詳細資訊，請參閱 <xref:fundamentals/host/web-host#shutdown-timeout> 。
 
 託管服務會在應用程式啟動時隨即啟動，然後在應用程式關閉時正常關閉。 如果在背景工作執行期間擲回錯誤，即使未呼叫 `StopAsync`，也應該呼叫 `Dispose`。
 
@@ -272,7 +272,7 @@ ASP.NET Core 背景工作服務範本提供撰寫長期執行服務應用程式�
 
 [!code-csharp[](hosted-services/samples/2.x/BackgroundTasksSample/Pages/Index.cshtml.cs?name=snippet1)]
 
-在索引頁面上選取 [新增工作]  按鈕時，就會執行 `OnPostAddTask` 方法。 `QueueBackgroundWorkItem` 呼叫以將工作專案排入佇列：
+在索引頁面上選取 [新增工作] 按鈕時，就會執行 `OnPostAddTask` 方法。 `QueueBackgroundWorkItem` 呼叫以將工作專案排入佇列：
 
 [!code-csharp[](hosted-services/samples/2.x/BackgroundTasksSample/Pages/Index.cshtml.cs?name=snippet2)]
 

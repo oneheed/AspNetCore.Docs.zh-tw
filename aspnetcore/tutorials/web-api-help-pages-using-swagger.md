@@ -19,10 +19,10 @@ no-loc:
 - SignalR
 uid: tutorials/web-api-help-pages-using-swagger
 ms.openlocfilehash: e5442c88048cf41e289fb476b4082cb6029b1b75
-ms.sourcegitcommit: 0d40fc4932531ce13fc4ee9432144584e03c2f1c
+ms.sourcegitcommit: 3593c4efa707edeaaceffbfa544f99f41fc62535
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 10/30/2020
+ms.lasthandoff: 01/04/2021
 ms.locfileid: "93062450"
 ---
 # <a name="aspnet-core-web-api-documentation-with-swagger--openapi"></a>使用 Swagger/OpenAPI ASP.NET Core web API 檔
@@ -50,7 +50,7 @@ Swagger 專案已在2015中捐贈給 OpenAPI 方案，而且自稱為 OpenAPI。
 
 ## <a name="openapi-specification-openapijson"></a>) 上的 OpenAPI 規格 ( # B0
 
-OpenAPI 規格是描述 API 功能的檔。 檔是以控制器和模型內的 XML 和屬性注釋為基礎。 它是 OpenAPI 流程的核心部分，用來推動像是 Swashbuckle.aspnetcore.swaggerui 之類的工具。 預設會將其命名為 *openapi.js開啟* 。 以下是 OpenAPI 規格的範例，為了簡潔起見，已縮減：
+OpenAPI 規格是描述 API 功能的檔。 檔是以控制器和模型內的 XML 和屬性注釋為基礎。 它是 OpenAPI 流程的核心部分，用來推動像是 Swashbuckle.aspnetcore.swaggerui 之類的工具。 預設會將其命名為 *openapi.js開啟*。 以下是 OpenAPI 規格的範例，為了簡潔起見，已縮減：
 
 ```json
 {
@@ -144,14 +144,14 @@ OpenAPI 規格是描述 API 功能的檔。 檔是以控制器和模型內的 XM
 
 ![Swagger UI](web-api-help-pages-using-swagger/_static/swagger-ui.png)
 
-控制器中的每個公用動作方法都可以從 UI 進行測試。 選取方法名稱以展開區段。 新增任何必要的參數，然後選取 [立即 **試用]！** 。
+控制器中的每個公用動作方法都可以從 UI 進行測試。 選取方法名稱以展開區段。 新增任何必要的參數，然後選取 [立即 **試用]！**。
 
 ![範例 Swagger GET 測試](web-api-help-pages-using-swagger/_static/get-try-it-out.png)
 
 > [!NOTE]
 > 用於螢幕擷取畫面的 Swagger UI 版本為第 2 版。 如需第 3 版的範例，請參閱 [Petstore 範例](https://petstore.swagger.io/)。
 
-## <a name="next-steps"></a>下一步
+## <a name="next-steps"></a>後續步驟
 
 * [開始使用 Swashbuckle](xref:tutorials/get-started-with-swashbuckle)
 * [開始使用 NSwag](xref:tutorials/get-started-with-nswag)

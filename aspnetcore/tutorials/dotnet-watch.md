@@ -18,10 +18,10 @@ no-loc:
 - SignalR
 uid: tutorials/dotnet-watch
 ms.openlocfilehash: 27420fe00ba6375e15b67fb359be06df055eff1f
-ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
+ms.sourcegitcommit: 3593c4efa707edeaaceffbfa544f99f41fc62535
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 10/30/2020
+ms.lasthandoff: 01/04/2021
 ms.locfileid: "93060036"
 ---
 # <a name="develop-aspnet-core-apps-using-a-file-watcher"></a>使用檔案監看員開發 ASP.NET Core 應用程式
@@ -32,9 +32,9 @@ ms.locfileid: "93060036"
 
 本教學課程使用現有的 Web API 與兩個端點：一個傳回加總，另一個傳回產品。 本教學課程已修正產品方法的 Bug。
 
-下載 [範例應用程式](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/tutorials/dotnet-watch/sample)。 它包含兩個專案： *WebApp* (ASP.NET Core Web API) 和 *WebAppTests* (Web API 的單元測試)。
+下載 [範例應用程式](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/tutorials/dotnet-watch/sample)。 它包含兩個專案：*WebApp* (ASP.NET Core Web API) 和 *WebAppTests* (Web API 的單元測試)。
 
-在命令殼層中，巡覽至 *WebApp* 資料夾。 執行下列命令：
+在命令殼層中，巡覽至 *WebApp* 資料夾。 執行以下命令：
 
 ```dotnetcli
 dotnet run
@@ -83,7 +83,7 @@ Application started. Press Ctrl+C to shut down.
 
 任何 [.NET Core CLI 命令](/dotnet/core/tools#cli-commands)都可以使用 `dotnet watch` 執行。 例如：
 
-| Command | 使用監看式的命令 |
+| 命令 | 使用監看式的命令 |
 | ---- | ----- |
 | dotnet run | dotnet watch run |
 | dotnet run-f netcoreapp 3。1 | dotnet watch run-f netcoreapp 3。1 |

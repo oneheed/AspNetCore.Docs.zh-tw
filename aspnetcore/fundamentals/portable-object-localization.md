@@ -17,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: fundamentals/portable-object-localization
-ms.openlocfilehash: 2e28ebaf1962ebd834c43f1cfbc28929b1937c40
-ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
+ms.openlocfilehash: f9c0ecd32f0e5c05782c2db76eff92bb64845db7
+ms.sourcegitcommit: 53e01d6e9b70a18a05618f0011cf115a16633c21
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 10/30/2020
-ms.locfileid: "93053718"
+ms.lasthandoff: 01/05/2021
+ms.locfileid: "97878395"
 ---
 # <a name="configure-portable-object-localization-in-aspnet-core"></a>使用 ASP.NET Core 設定可攜式物件當地語系化
 
@@ -38,8 +38,8 @@ ms.locfileid: "93053718"
 
 ## <a name="what-is-a-po-file"></a>什麼是 PO 檔案？
 
-PO 檔案以文字檔的形式散發，其中包含給定語言的翻譯字串。 使用 PO 檔案而不是使用 *.resx* 檔案的一些優點包括：
-- PO 檔案支援複數表示； *.resx* 檔案不支援複數表示。
+PO 檔案以文字檔的形式散發，其中包含給定語言的翻譯字串。 使用 PO 檔案而非 *.resx* 檔的一些優點包括：
+- PO 檔案支援複數表示；*.resx* 檔案不支援複數表示。
 - PO 檔案不會像 *.resx* 檔案一樣進行編譯。 因此，不需要特殊化工具與建置步驟。
 - PO 檔案適用於共同作業的線上編輯工具。
 
@@ -97,7 +97,7 @@ msgstr[1] "Les adresses email sont \"{0}\""
 
 [!code-csharp[](localization/sample/3.x/POLocalization/Startup.cs?name=snippet_Configure&highlight=15)]
 
-將下列程式碼新增至您 Razor 選擇的觀點。 此範例中使用 *About.cshtml* 。
+將下列程式碼新增至您 Razor 選擇的觀點。 此範例中使用 *About.cshtml*。
 
 [!code-cshtml[](localization/sample/3.x/POLocalization/Views/Home/About.cshtml)]
 
@@ -105,7 +105,7 @@ msgstr[1] "Les adresses email sont \"{0}\""
 
 ### <a name="creating-a-po-file"></a>建立 PO 檔案
 
-在您的應用程式根資料夾中，建立名為 po 的檔案 *\<culture code> 。* 在此範例中，檔案名稱是 *fr.po* ，因為使用法文語言：
+在您的應用程式根資料夾中，建立名為 po 的檔案 *\<culture code> 。* 在此範例中，檔案名稱是 *fr.po*，因為使用法文語言：
 
 [!code-text[](localization/sample/3.x/POLocalization/fr.po)]
 
@@ -254,7 +254,7 @@ services.AddPortableObjectLocalization(options => options.ResourcesPath = "Local
 ## <a name="what-is-a-po-file"></a>什麼是 PO 檔案？
 
 PO 檔案以文字檔的形式散發，其中包含給定語言的翻譯字串。 使用 PO 檔案而不是使用 *.resx* 檔案的一些優點包括：
-- PO 檔案支援複數表示； *.resx* 檔案不支援複數表示。
+- PO 檔案支援複數表示；*.resx* 檔案不支援複數表示。
 - PO 檔案不會像 *.resx* 檔案一樣進行編譯。 因此，不需要特殊化工具與建置步驟。
 - PO 檔案適用於共同作業的線上編輯工具。
 
@@ -312,7 +312,7 @@ msgstr[1] "Les adresses email sont \"{0}\""
 
 [!code-csharp[](localization/sample/2.x/POLocalization/Startup.cs?name=snippet_Configure&highlight=15)]
 
-將下列程式碼新增至您 Razor 選擇的觀點。 此範例中使用 *About.cshtml* 。
+將下列程式碼新增至您 Razor 選擇的觀點。 此範例中使用 *About.cshtml*。
 
 [!code-cshtml[](localization/sample/2.x/POLocalization/Views/Home/About.cshtml)]
 
@@ -320,7 +320,7 @@ msgstr[1] "Les adresses email sont \"{0}\""
 
 ### <a name="creating-a-po-file"></a>建立 PO 檔案
 
-在您的應用程式根資料夾中，建立名為 po 的檔案 *\<culture code> 。* 在此範例中，檔案名稱是 *fr.po* ，因為使用法文語言：
+在您的應用程式根資料夾中，建立名為 po 的檔案 *\<culture code> 。* 在此範例中，檔案名稱是 *fr.po*，因為使用法文語言：
 
 [!code-text[](localization/sample/2.x/POLocalization/fr.po)]
 

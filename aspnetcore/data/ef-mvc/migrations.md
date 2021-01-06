@@ -20,10 +20,10 @@ no-loc:
 - SignalR
 uid: data/ef-mvc/migrations
 ms.openlocfilehash: 7c8f562bcf0b7e2672f2f1ac244e0d9278e4c204
-ms.sourcegitcommit: 6299f08aed5b7f0496001d093aae617559d73240
+ms.sourcegitcommit: 3593c4efa707edeaaceffbfa544f99f41fc62535
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 12/14/2020
+ms.lasthandoff: 01/04/2021
 ms.locfileid: "97485923"
 ---
 # <a name="tutorial-part-5-apply-migrations-to-the-contoso-university-sample"></a>教學課程：第5部分：將遷移套用至 Contoso 大學範例
@@ -39,7 +39,7 @@ ms.locfileid: "97485923"
 > * 了解資料模型快照集
 > * 套用移轉
 
-## <a name="prerequisites"></a>Prerequisites
+## <a name="prerequisites"></a>先決條件
 
 * [排序、篩選和分頁](sort-filter-page.md)
 
@@ -118,7 +118,7 @@ Migrations 會呼叫 `Up` 方法，以實作移轉所需的資料模型變更。
 dotnet ef database update
 ```
 
-此命令的輸出類似於 `migrations add` 命令，不同之處在於其會顯示設定資料庫之 SQL 命令的記錄。 下列範例輸出中省略了大部分的記錄。 如果您不想看到這麼詳細的記錄訊息，可以變更 *appsettings.Development.json* 檔案中的記錄層級。 如需詳細資訊，請參閱<xref:fundamentals/logging/index>。
+此命令的輸出類似於 `migrations add` 命令，不同之處在於其會顯示設定資料庫之 SQL 命令的記錄。 下列範例輸出中省略了大部分的記錄。 如果您不想看到這麼詳細的記錄訊息，可以變更 *appsettings.Development.json* 檔案中的記錄層級。 如需詳細資訊，請參閱 <xref:fundamentals/logging/index> 。
 
 ```text
 info: Microsoft.EntityFrameworkCore.Infrastructure[10403]

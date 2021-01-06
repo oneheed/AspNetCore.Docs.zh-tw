@@ -20,10 +20,10 @@ no-loc:
 - SignalR
 uid: tutorials/first-mongo-app
 ms.openlocfilehash: 350df417886fe1ea5fef89dc221c217d596768b3
-ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
+ms.sourcegitcommit: 3593c4efa707edeaaceffbfa544f99f41fc62535
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 10/30/2020
+ms.lasthandoff: 01/04/2021
 ms.locfileid: "93060738"
 ---
 # <a name="create-a-web-api-with-aspnet-core-and-mongodb"></a>使用 ASP.NET Core 與 MongoDB 建立 Web API
@@ -51,30 +51,30 @@ ms.locfileid: "93060738"
 
 * [.NET Core SDK 3.0 或更新版本](https://dotnet.microsoft.com/download/dotnet-core)
 * **ASP.NET 和 網頁程式開發** 工作負載的 [Visual Studio 2019](https://visualstudio.microsoft.com/downloads/?utm_medium=microsoft&utm_source=docs.microsoft.com&utm_campaign=inline+link&utm_content=download+vs2019)
-* [MongoDB](https://docs.mongodb.com/manual/tutorial/install-mongodb-on-windows/)
+* [MongoDB](https://docs.mongodb.com/manual/tutorial/install-mongodb-on-windows/) \(英文\)
 
 # <a name="visual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code)
 
 * [.NET Core SDK 3.0 或更新版本](https://dotnet.microsoft.com/download/dotnet-core)
 * [Visual Studio Code](https://code.visualstudio.com/download)
 * [C# for Visual Studio Code](https://marketplace.visualstudio.com/items?itemName=ms-dotnettools.csharp)
-* [MongoDB](https://docs.mongodb.com/manual/administration/install-community/)
+* [MongoDB](https://docs.mongodb.com/manual/administration/install-community/) \(英文\)
 
 # <a name="visual-studio-for-mac"></a>[Visual Studio for Mac](#tab/visual-studio-mac)
 
 * [.NET Core SDK 3.0 或更新版本](https://dotnet.microsoft.com/download/dotnet-core)
 * [Visual Studio for Mac 7.7 版或更新版本](https://visualstudio.microsoft.com/downloads/)
-* [MongoDB](https://docs.mongodb.com/manual/tutorial/install-mongodb-on-os-x/)
+* [MongoDB](https://docs.mongodb.com/manual/tutorial/install-mongodb-on-os-x/) \(英文\)
 
 ---
 
 ## <a name="configure-mongodb"></a>設定 MongoDB
 
-若使用 Windows，MongoDB 預設會安裝在 *C:\\Program Files\\MongoDB* 。 將 *C： \\ Program Files \\ MongoDB \\ 伺服器 \\ \<version_number> \\ bin* 新增至 `Path` 環境變數。 此變更會啟用從您開發機器上的任意位置存取 MongoDB 的功能。
+若使用 Windows，MongoDB 預設會安裝在 *C:\\Program Files\\MongoDB*。 將 *C： \\ Program Files \\ MongoDB \\ 伺服器 \\ \<version_number> \\ bin* 新增至 `Path` 環境變數。 此變更會啟用從您開發機器上的任意位置存取 MongoDB 的功能。
 
 在下列步驟中使用 mongo 殼層來建立資料庫、建立集合及存放文件。 如需有關 mongo 殼層命令的詳細資訊，請參閱[使用 mongo 殼層](https://docs.mongodb.com/manual/mongo/#working-with-the-mongo-shell)。
 
-1. 選擇您開發機器上的目錄來存放資料。 例如， Windows 上的 *C:\\BooksData* 。 若該目錄不存在，請建立它。 mongo 殼層不會建立新目錄。
+1. 選擇您開發機器上的目錄來存放資料。 例如， Windows 上的 *C:\\BooksData*。 若該目錄不存在，請建立它。 mongo 殼層不會建立新目錄。
 1. 開啟命令殼層。 執行下列命令以連線到預設連接埠 27017 上的 MongoDB。 請記得將 `<data_directory_path>` 取代為您在上一個步驟中選擇的目錄。
 
    ```console
@@ -161,11 +161,11 @@ ms.locfileid: "93060738"
 
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
-1. 移至 **[** > **新增** > **專案** ]。
-1. 選取 [ASP.NET Core Web 應用程式]  專案類型，然後選取 [下一步]  。
-1. 將專案命名為  。
-1. 選取 [.NET Core]  目標架構與 [ASP.NET Core 3.0]  。 選取 [API]  專案範本，然後選取 [確定]  。
-1. 流覽 [NuGet 資源庫： mongodb](https://www.nuget.org/packages/MongoDB.Driver/) ，以判斷 .net Driver for mongodb 的最新穩定版本。 在 [套件管理員主控台]  視窗中，瀏覽到專案根目錄。 執行下列命令以安裝適用於 MongoDB 的 .NET 驅動程式：
+1. 移至 **[** > **新增** > **專案**]。
+1. 選取 [ASP.NET Core Web 應用程式] 專案類型，然後選取 [下一步]。
+1. 將專案命名為 *BooksApi*，然後選取 [建立]。
+1. 選取 [.NET Core] 目標架構與 [ASP.NET Core 3.0]。 選取 [API] 專案範本，然後選取 [確定]。
+1. 流覽 [NuGet 資源庫： mongodb](https://www.nuget.org/packages/MongoDB.Driver/) ，以判斷 .net Driver for mongodb 的最新穩定版本。 在 [套件管理員主控台] 視窗中，瀏覽到專案根目錄。 執行下列命令以安裝適用於 MongoDB 的 .NET 驅動程式：
 
    ```powershell
    Install-Package MongoDB.Driver -Version {VERSION}
@@ -182,8 +182,8 @@ ms.locfileid: "93060738"
 
    會產生以 .NET Core 為目標的新 ASP.NET Core Web API 專案，並在 Visual Studio Code 中開啟。
 
-1. 在狀態列的 OmniSharp 火焰圖示變成綠色之後，會有一個對話方塊要求 **從 ' >booksapi ' 中找不到建立和偵測所需的資產。加入它們？** 。 選取 [是]。
-1. 流覽 [NuGet 資源庫： mongodb](https://www.nuget.org/packages/MongoDB.Driver/) ，以判斷 .net Driver for mongodb 的最新穩定版本。 開啟 [整合式終端機]  並瀏覽到專案根目錄。 執行下列命令以安裝適用於 MongoDB 的 .NET 驅動程式：
+1. 在狀態列的 OmniSharp 火焰圖示變成綠色之後，會有一個對話方塊要求 **從 ' >booksapi ' 中找不到建立和偵測所需的資產。加入它們？**。 選取 [是]  。
+1. 流覽 [NuGet 資源庫： mongodb](https://www.nuget.org/packages/MongoDB.Driver/) ，以判斷 .net Driver for mongodb 的最新穩定版本。 開啟 [整合式終端機] 並瀏覽到專案根目錄。 執行下列命令以安裝適用於 MongoDB 的 .NET 驅動程式：
 
    ```dotnetcli
    dotnet add BooksApi.csproj package MongoDB.Driver -v {VERSION}
@@ -191,13 +191,13 @@ ms.locfileid: "93060738"
 
 # <a name="visual-studio-for-mac"></a>[Visual Studio for Mac](#tab/visual-studio-mac)
 
-1. 在8.6 版之前的 Visual Studio for Mac 中， **File**  >  **New Solution**  >  從側邊欄選取 [將新的解決方案 **.net Core**  >  **應用程式** 新增]。 在8.6 版或更新版本中 **File** ，  >  **New Solution**  >  從側邊欄選取 [檔案新的方案 **Web] 和 [主控台**  >  **應用程式** ]。
-1. 選取 [ **ASP.NET Core** > **API** c #] 專案範本，然後選取 **[下一步]** 。
-1. 從 [ **目標 Framework** ] 下拉式清單中選取 [ **.Net Core 3.1** ]，然後選取 **[下一步]** 。
-1. 在 [專案名稱]  中輸入  。
-1. 在 [方案]  台中，以滑鼠右鍵按一下專案的 [相依性]  節點並選取 [新增封裝]  。
-1. 在搜尋方塊中輸入  。
-1. 選取 [授權接受]  對話方塊中的 [接受]  按鈕。
+1. 在8.6 版之前的 Visual Studio for Mac 中，   >    >  從側邊欄選取 [將新的解決方案 **.net Core**  >  **應用程式** 新增]。 在8.6 版或更新版本中，  >    >  從側邊欄選取 [檔案新的方案 **Web] 和 [主控台**  >  **應用程式**]。
+1. 選取 [ **ASP.NET Core** > **API** c #] 專案範本，然後選取 **[下一步]**。
+1. 從 [**目標 Framework** ] 下拉式清單中選取 [ **.Net Core 3.1** ]，然後選取 **[下一步]**。
+1. 在 [專案名稱] 中輸入 *BooksApi*，然後選取 [建立]。
+1. 在 [方案] 台中，以滑鼠右鍵按一下專案的 [相依性] 節點並選取 [新增封裝]。
+1. 在搜尋方塊中輸入 *MongoDB.Driver*，然後依序選取 *MongoDB.Driver* 套件和 [新增套件]。
+1. 選取 [授權接受] 對話方塊中的 [接受] 按鈕。
 
 ---
 
@@ -401,30 +401,30 @@ ms.locfileid: "93060738"
 
 * [.NET Core SDK 2.2](https://dotnet.microsoft.com/download/dotnet-core)
 * **ASP.NET 和 網頁程式開發** 工作負載的 [Visual Studio 2019](https://visualstudio.microsoft.com/downloads/?utm_medium=microsoft&utm_source=docs.microsoft.com&utm_campaign=inline+link&utm_content=download+vs2019)
-* [MongoDB](https://docs.mongodb.com/manual/tutorial/install-mongodb-on-windows/)
+* [MongoDB](https://docs.mongodb.com/manual/tutorial/install-mongodb-on-windows/) \(英文\)
 
 # <a name="visual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code)
 
 * [.NET Core SDK 2.2](https://dotnet.microsoft.com/download/dotnet-core)
 * [Visual Studio Code](https://code.visualstudio.com/download)
 * [C# for Visual Studio Code](https://marketplace.visualstudio.com/items?itemName=ms-dotnettools.csharp)
-* [MongoDB](https://docs.mongodb.com/manual/administration/install-community/)
+* [MongoDB](https://docs.mongodb.com/manual/administration/install-community/) \(英文\)
 
 # <a name="visual-studio-for-mac"></a>[Visual Studio for Mac](#tab/visual-studio-mac)
 
 * [.NET Core SDK 2.2](https://dotnet.microsoft.com/download/dotnet-core)
 * [Visual Studio for Mac 7.7 版或更新版本](https://visualstudio.microsoft.com/downloads/)
-* [MongoDB](https://docs.mongodb.com/manual/tutorial/install-mongodb-on-os-x/)
+* [MongoDB](https://docs.mongodb.com/manual/tutorial/install-mongodb-on-os-x/) \(英文\)
 
 ---
 
 ## <a name="configure-mongodb"></a>設定 MongoDB
 
-若使用 Windows，MongoDB 預設會安裝在 *C:\\Program Files\\MongoDB* 。 將 *C： \\ Program Files \\ MongoDB \\ 伺服器 \\ \<version_number> \\ bin* 新增至 `Path` 環境變數。 此變更會啟用從您開發機器上的任意位置存取 MongoDB 的功能。
+若使用 Windows，MongoDB 預設會安裝在 *C:\\Program Files\\MongoDB*。 將 *C： \\ Program Files \\ MongoDB \\ 伺服器 \\ \<version_number> \\ bin* 新增至 `Path` 環境變數。 此變更會啟用從您開發機器上的任意位置存取 MongoDB 的功能。
 
 在下列步驟中使用 mongo 殼層來建立資料庫、建立集合及存放文件。 如需有關 mongo 殼層命令的詳細資訊，請參閱[使用 mongo 殼層](https://docs.mongodb.com/manual/mongo/#working-with-the-mongo-shell)。
 
-1. 選擇您開發機器上的目錄來存放資料。 例如， Windows 上的 *C:\\BooksData* 。 若該目錄不存在，請建立它。 mongo 殼層不會建立新目錄。
+1. 選擇您開發機器上的目錄來存放資料。 例如， Windows 上的 *C:\\BooksData*。 若該目錄不存在，請建立它。 mongo 殼層不會建立新目錄。
 1. 開啟命令殼層。 執行下列命令以連線到預設連接埠 27017 上的 MongoDB。 請記得將 `<data_directory_path>` 取代為您在上一個步驟中選擇的目錄。
 
    ```console
@@ -511,11 +511,11 @@ ms.locfileid: "93060738"
 
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
-1. 移至 **[** > **新增** > **專案** ]。
-1. 選取 [ASP.NET Core Web 應用程式]  專案類型，然後選取 [下一步]  。
-1. 將專案命名為  。
-1. 選取 [.NET Core]  目標架構與 [ASP.NET Core 2.2]  。 選取 [API]  專案範本，然後選取 [確定]  。
-1. 流覽 [NuGet 資源庫： mongodb](https://www.nuget.org/packages/MongoDB.Driver/) ，以判斷 .net Driver for mongodb 的最新穩定版本。 在 [套件管理員主控台]  視窗中，瀏覽到專案根目錄。 執行下列命令以安裝適用於 MongoDB 的 .NET 驅動程式：
+1. 移至 **[** > **新增** > **專案**]。
+1. 選取 [ASP.NET Core Web 應用程式] 專案類型，然後選取 [下一步]。
+1. 將專案命名為 *BooksApi*，然後選取 [建立]。
+1. 選取 [.NET Core] 目標架構與 [ASP.NET Core 2.2]。 選取 [API] 專案範本，然後選取 [確定]。
+1. 流覽 [NuGet 資源庫： mongodb](https://www.nuget.org/packages/MongoDB.Driver/) ，以判斷 .net Driver for mongodb 的最新穩定版本。 在 [套件管理員主控台] 視窗中，瀏覽到專案根目錄。 執行下列命令以安裝適用於 MongoDB 的 .NET 驅動程式：
 
    ```powershell
    Install-Package MongoDB.Driver -Version {VERSION}
@@ -532,8 +532,8 @@ ms.locfileid: "93060738"
 
    會產生以 .NET Core 為目標的新 ASP.NET Core Web API 專案，並在 Visual Studio Code 中開啟。
 
-1. 在狀態列的 OmniSharp 火焰圖示變成綠色之後，會有一個對話方塊要求 **從 ' >booksapi ' 中找不到建立和偵測所需的資產。加入它們？** 。 選取 [是]。
-1. 流覽 [NuGet 資源庫： mongodb](https://www.nuget.org/packages/MongoDB.Driver/) ，以判斷 .net Driver for mongodb 的最新穩定版本。 開啟 [整合式終端機]  並瀏覽到專案根目錄。 執行下列命令以安裝適用於 MongoDB 的 .NET 驅動程式：
+1. 在狀態列的 OmniSharp 火焰圖示變成綠色之後，會有一個對話方塊要求 **從 ' >booksapi ' 中找不到建立和偵測所需的資產。加入它們？**。 選取 [是]  。
+1. 流覽 [NuGet 資源庫： mongodb](https://www.nuget.org/packages/MongoDB.Driver/) ，以判斷 .net Driver for mongodb 的最新穩定版本。 開啟 [整合式終端機] 並瀏覽到專案根目錄。 執行下列命令以安裝適用於 MongoDB 的 .NET 驅動程式：
 
    ```dotnetcli
    dotnet add BooksApi.csproj package MongoDB.Driver -v {VERSION}
@@ -541,13 +541,13 @@ ms.locfileid: "93060738"
 
 # <a name="visual-studio-for-mac"></a>[Visual Studio for Mac](#tab/visual-studio-mac)
 
-1. 在8.6 版之前的 Visual Studio for Mac 中， **File**  >  **New Solution**  >  從側邊欄選取 [將新的解決方案 **.net Core**  >  **應用程式** 新增]。 在8.6 版或更新版本中 **File** ，  >  **New Solution**  >  從側邊欄選取 [檔案新的方案 **Web] 和 [主控台**  >  **應用程式** ]。
-1. 選取 [ASP.NET Core Web API]  C# 專案範本，然後選取 [下一步]  。
-1. 從 [目標 Framework]  下拉式清單選取 [.NET Core 2.2]  ，然後選取 [下一步]  。
-1. 在 [專案名稱]  中輸入  。
-1. 在 [方案]  台中，以滑鼠右鍵按一下專案的 [相依性]  節點並選取 [新增封裝]  。
-1. 在搜尋方塊中輸入  。
-1. 選取 [授權接受]  對話方塊中的 [接受]  按鈕。
+1. 在8.6 版之前的 Visual Studio for Mac 中，   >    >  從側邊欄選取 [將新的解決方案 **.net Core**  >  **應用程式** 新增]。 在8.6 版或更新版本中，  >    >  從側邊欄選取 [檔案新的方案 **Web] 和 [主控台**  >  **應用程式**]。
+1. 選取 [ASP.NET Core Web API] C# 專案範本，然後選取 [下一步]。
+1. 從 [目標 Framework] 下拉式清單選取 [.NET Core 2.2]，然後選取 [下一步]。
+1. 在 [專案名稱] 中輸入 *BooksApi*，然後選取 [建立]。
+1. 在 [方案] 台中，以滑鼠右鍵按一下專案的 [相依性] 節點並選取 [新增封裝]。
+1. 在搜尋方塊中輸入 *MongoDB.Driver*，然後依序選取 *MongoDB.Driver* 套件和 [新增套件]。
+1. 選取 [授權接受] 對話方塊中的 [接受] 按鈕。
 
 ---
 

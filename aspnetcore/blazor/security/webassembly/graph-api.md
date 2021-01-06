@@ -19,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/security/webassembly/graph-api
-ms.openlocfilehash: 128ba34b1e2a9f8cc2986a8f1cb3fb8beba83b21
-ms.sourcegitcommit: a71bb61f7add06acb949c9258fe506914dfe0c08
+ms.openlocfilehash: 58c201d6d1172c1ff82521589f988e33d5c984ae
+ms.sourcegitcommit: 3593c4efa707edeaaceffbfa544f99f41fc62535
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 12/08/2020
-ms.locfileid: "96855387"
+ms.lasthandoff: 01/04/2021
+ms.locfileid: "97854492"
 ---
 # <a name="use-graph-api-with-aspnet-core-no-locblazor-webassembly"></a>搭配使用圖形 API 與 ASP.NET Core Blazor WebAssembly
 
@@ -107,7 +107,7 @@ internal static class GraphClientExtensions
             var result = await TokenProvider.RequestAccessToken(
                 new AccessTokenRequestOptions()
                 {
-                    Scopes = {STRING ARRAY OF SCOPES}
+                    Scopes = new[] { "{SCOPE 1}", "{SCOPE 2}", ... "{SCOPE X}" }
                 });
 
             if (result.TryGetToken(out var token))
@@ -150,7 +150,7 @@ internal static class GraphClientExtensions
 }
 ```
 
-`{STRING ARRAY OF SCOPES}`上述程式碼中的預留位置是允許範圍的字串陣列。 例如，在本文的 `Scopes` `User.Read` 下列各節中，設定為範例的範圍：
+上述程式碼中的範圍預留位置 `"{SCOPE 1}", "{SCOPE 2}", ... "{SCOPE X}"` 代表一或多個允許的範圍。 例如，針對本文的 `Scopes` `User.Read` 下列各節中的範例，將設定為一個範圍的字串陣列：
 
 ```csharp
 Scopes = new[] { "https://graph.microsoft.com/User.Read" }
@@ -159,10 +159,10 @@ Scopes = new[] { "https://graph.microsoft.com/User.Read" }
 在 `Program.Main` (`Program.cs`) 中，使用擴充方法新增圖形用戶端服務和設定 `AddGraphClient` ：
 
 ```csharp
-builder.Services.AddGraphClient({STRING ARRAY OF SCOPES});
+builder.Services.AddGraphClient("{SCOPE 1}", "{SCOPE 2}", ... "{SCOPE X}");
 ```
 
-`{STRING ARRAY OF SCOPES}`上述程式碼中的預留位置是允許範圍的字串陣列。 例如，將範圍傳遞 `User.Read` 給 `AddGraphClient` 本文的下列各節中的範例：
+上述程式碼中的範圍預留位置 `"{SCOPE 1}", "{SCOPE 2}", ... "{SCOPE X}"` 代表一或多個允許的範圍。 例如，將範圍傳遞 `User.Read` 給 `AddGraphClient` 本文的下列各節中的範例：
 
 ```csharp
 builder.Services.AddGraphClient("https://graph.microsoft.com/User.Read");

@@ -18,10 +18,10 @@ no-loc:
 - SignalR
 uid: data/ef-rp/migrations
 ms.openlocfilehash: e6d1b9f041e892aaa37840c28fdb3153bf098b0d
-ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
+ms.sourcegitcommit: 3593c4efa707edeaaceffbfa544f99f41fc62535
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 10/30/2020
+ms.lasthandoff: 01/04/2021
 ms.locfileid: "93061102"
 ---
 # <a name="part-4-no-locrazor-pages-with-ef-core-migrations-in-aspnet-core"></a>第4部分： Razor ASP.NET Core 中有 EF Core 遷移的頁面
@@ -114,7 +114,7 @@ EF Core `migrations add` 命令已產生用來建立資料庫的程式碼。 此
 
 ## <a name="the-data-model-snapshot"></a>資料模型快照集
 
-移轉會在  。 當您新增移轉時，EF 會比較目前資料模型與快照集檔案，以判斷變更的內容。
+移轉會在 *Migrations/SchoolContextModelSnapshot.cs* 中建立目前資料模型的「快照集」。 當您新增移轉時，EF 會比較目前資料模型與快照集檔案，以判斷變更的內容。
 
 由於快照集檔案會追蹤資料模型的狀態，您無法藉由刪除 `<timestamp>_<migrationname>.cs` 檔案來刪除移轉。 若要退出最新的移轉，您必須使用 `migrations remove` 命令。 該命令會刪除移轉，並確保能正確地重設快照集。 如需詳細資訊，請參閱 [dotnet ef 遷移移除](/ef/core/miscellaneous/cli/dotnet#dotnet-ef-migrations-remove)。
 
@@ -186,11 +186,11 @@ https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/data/ef-rp/intr
 
 ## <a name="drop-the-database"></a>卸除資料庫
 
-使用 [SQL Server 物件總管]  (SSOX) 或 `database drop` 命令：
+使用 [SQL Server 物件總管] (SSOX) 或 `database drop` 命令：
 
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
-在 [套件管理員主控台]  (PMC) 中，執行下列命令：
+在 [套件管理員主控台] (PMC) 中，執行下列命令：
 
 ```powershell
 Drop-Database
@@ -251,7 +251,7 @@ Migrations 會呼叫 `Up` 方法，以實作移轉所需的資料模型變更。
 
 ### <a name="the-data-model-snapshot"></a>資料模型快照集
 
-移轉會在  。 當您新增移轉時，EF 會比較資料模型與快照集檔案，以判斷變更的內容。
+移轉會在 *Migrations/SchoolContextModelSnapshot.cs* 中建立目前資料庫結構描述的「快照」。 當您新增移轉時，EF 會比較資料模型與快照集檔案，以判斷變更的內容。
 
 若要刪除移轉，請使用下列命令：
 
@@ -277,7 +277,7 @@ remove migrations 命令會刪除移轉，並確保正確地重設快照集。
 
 * 略過移轉，並建立資料庫和結構描述。
 * 不會建立移轉資料表。
-* 「無法」  與移轉搭配使用。
+* 「無法」與移轉搭配使用。
 * 設計用來測試或快速原型化經常卸除並重新建立資料庫的位置。
 
 移除 `EnsureCreated`：

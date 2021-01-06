@@ -20,10 +20,10 @@ no-loc:
 - SignalR
 uid: blazor/fundamentals/routing
 ms.openlocfilehash: ec183f4aadc6bafd8e77f9d97291ba3d47bd92f5
-ms.sourcegitcommit: 6b87f2e064cea02e65dacd206394b44f5c604282
+ms.sourcegitcommit: 3593c4efa707edeaaceffbfa544f99f41fc62535
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 12/15/2020
+ms.lasthandoff: 01/04/2021
 ms.locfileid: "97506925"
 ---
 # <a name="aspnet-core-no-locblazor-routing"></a>ASP.NET Core Blazor 路由
@@ -80,7 +80,7 @@ ms.locfileid: "97506925"
 ::: moniker-end
 
 > [!IMPORTANT]
-> 若要正確解析 Url，應用程式必須在其檔案中包含標籤 `<base>` `wwwroot/index.html` (Blazor WebAssembly) 或檔案 `Pages/_Host.cshtml` (Blazor Server) 以及屬性中指定的應用程式基底路徑 `href` 。 如需詳細資訊，請參閱<xref:blazor/host-and-deploy/index#app-base-path>。
+> 若要正確解析 Url，應用程式必須在其檔案中包含標籤 `<base>` `wwwroot/index.html` (Blazor WebAssembly) 或檔案 `Pages/_Host.cshtml` (Blazor Server) 以及屬性中指定的應用程式基底路徑 `href` 。 如需詳細資訊，請參閱 <xref:blazor/host-and-deploy/index#app-base-path> 。
 
 ## <a name="provide-custom-content-when-content-isnt-found"></a>在找不到內容時提供自訂內容
 
@@ -248,7 +248,7 @@ endpoints.MapFallbackToFile("/example/{param?}", "index.html");
 endpoints.MapFallbackToPage("/example/{param?}", "/_Host");
 ```
 
-如需詳細資訊，請參閱<xref:fundamentals/routing>。
+如需詳細資訊，請參閱 <xref:fundamentals/routing> 。
 
 ## <a name="catch-all-route-parameters"></a>Catch-all 路由參數
 

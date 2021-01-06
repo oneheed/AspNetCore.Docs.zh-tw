@@ -18,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: aspnetcore-2.1
-ms.openlocfilehash: 62fc9d866adcf05ff024501db68cce8bb8b11a98
-ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
+ms.openlocfilehash: 199ca62f71df5c0ee5ca2f78caf53ad8d6be1179
+ms.sourcegitcommit: 3593c4efa707edeaaceffbfa544f99f41fc62535
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 10/30/2020
-ms.locfileid: "93059711"
+ms.lasthandoff: 01/04/2021
+ms.locfileid: "97854557"
 ---
 # <a name="whats-new-in-aspnet-core-21"></a>ASP.NET Core 2.1 的新功能
 
@@ -93,7 +93,7 @@ ASP.NET Core 提供 API 和範本以利符合某些 [EU General Data Protection 
 
 引進新套件簡化測試的建立和執行。 [Microsoft.AspNetCore.Mvc.Testing](https://www.nuget.org/packages/Microsoft.AspNetCore.Mvc.Testing/) 套件處理下列工作：
 
-* 從已測試的應用程式將相依性檔案 ( *\* d* ) 複製到測試專案的 *bin* 資料夾中。
+* 從已測試的應用程式將相依性檔案 (*\* d*) 複製到測試專案的 *bin* 資料夾中。
 * 將內容的根目錄設定為經過測試之應用程式的專案根目錄，以便在執行測試時找到靜態檔案和頁面/檢視。
 * 提供 [WebApplicationFactory](/dotnet/api/microsoft.aspnetcore.mvc.testing.webapplicationfactory-1) 類別來簡化以 [TestServer](/dotnet/api/microsoft.aspnetcore.testhost.testserver) 啟動載入經過測試的應用程式。
 
@@ -141,9 +141,9 @@ ASP.NET Core 2.1 包含新的 `IHttpClientFactory` 服務，讓您在應用程�
 
 如需詳細資訊，請參閱[初始化 HTTP 要求](xref:fundamentals/http-requests)。
 
-## <a name="kestrel-transport-configuration"></a>Kestrel 傳輸組態
+## <a name="kestrel-libuv-transport-configuration"></a>Kestrel libuv 傳輸設定
 
-隨著 ASP.NET Core 2.1 的發行，Kestrel 的預設傳輸不再根據 Libuv，而是改為根據受控通訊端。 如需詳細資訊，請參閱[實作 Kestrel 網頁伺服器：傳輸組態](xref:fundamentals/servers/kestrel#transport-configuration)。
+隨著 ASP.NET Core 2.1 的發行，Kestrel 的預設傳輸不再根據 Libuv，而是改為根據受控通訊端。 如需詳細資訊，請參閱 [Kestrel web 伺服器執行： Libuv 傳輸](xref:fundamentals/servers/kestrel#libuv-transport-configuration)設定。
 
 ## <a name="generic-host-builder"></a>泛型主機建立器
 
@@ -173,13 +173,13 @@ Angular 範本以 Angular CLI 為基礎，React 範本以 create-react-app 為�
 
 ## <a name="no-locrazor-pages-in-an-area"></a>Razor 區域中的頁面
 
-Razor 頁面現在支援 [區域](xref:mvc/controllers/areas)。 若要查看區域範例，請 Razor 使用個別的使用者帳戶建立新的頁面 web 應用程式。 Razor具有個別使用者帳戶的頁面 web 應用程式包含 */Areas/ Identity /Pages* 。
+Razor 頁面現在支援 [區域](xref:mvc/controllers/areas)。 若要查看區域範例，請 Razor 使用個別的使用者帳戶建立新的頁面 web 應用程式。 Razor具有個別使用者帳戶的頁面 web 應用程式包含 */Areas/ Identity /Pages*。
 
 ## <a name="mvc-compatibility-version"></a>MVC 相容性版本
 
 <xref:Microsoft.Extensions.DependencyInjection.MvcCoreMvcBuilderExtensions.SetCompatibilityVersion*> 方法可讓應用程式加入或退出 ASP.NET Core MVC 2.1 或更新版本所引入的可能重大行為變更。
 
-如需詳細資訊，請參閱<xref:mvc/compatibility-version>。
+如需詳細資訊，請參閱 <xref:mvc/compatibility-version> 。
 
 ## <a name="migrate-from-20-to-21"></a>從 2.0 遷移至 2.1
 

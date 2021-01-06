@@ -19,10 +19,10 @@ no-loc:
 - SignalR
 uid: data/ef-rp/intro
 ms.openlocfilehash: 86b57a9cad27673b72ad174a18741f5528f9f78a
-ms.sourcegitcommit: c321518bfe367280ef262aecaada287f17fe1bc5
+ms.sourcegitcommit: 3593c4efa707edeaaceffbfa544f99f41fc62535
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 12/10/2020
+ms.lasthandoff: 01/04/2021
 ms.locfileid: "97011854"
 ---
 # <a name="no-locrazor-pages-with-entity-framework-core-in-aspnet-core---tutorial-1-of-8"></a>Razor ASP.NET Core 中有 Entity Framework Core 的頁面-教學課程 1/8
@@ -35,7 +35,7 @@ ms.locfileid: "97011854"
 
 [下載或檢視已完成的應用程式。](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/data/ef-rp/intro/samples) [下載指示](xref:index#how-to-download-a-sample)。
 
-## <a name="prerequisites"></a>必要條件
+## <a name="prerequisites"></a>先決條件
 
 * 如果您還不熟悉 Razor 頁面，請先流覽「開始 [使用 Razor 頁面](xref:tutorials/razor-pages/razor-pages-start) 」教學課程系列，再開始此課程。
 
@@ -532,7 +532,7 @@ public async Task OnGetAsync()
 
 [下載或檢視已完成的應用程式。](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/data/ef-rp/intro/samples) [下載指示](xref:index#how-to-download-a-sample)。
 
-## <a name="prerequisites"></a>必要條件
+## <a name="prerequisites"></a>先決條件
 
 * 如果您還不熟悉 Razor 頁面，請先流覽「開始 [使用 Razor 頁面](xref:tutorials/razor-pages/razor-pages-start) 」教學課程系列，再開始此課程。
 

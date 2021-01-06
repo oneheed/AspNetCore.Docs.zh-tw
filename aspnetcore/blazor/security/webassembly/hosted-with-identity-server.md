@@ -19,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/security/webassembly/hosted-with-identity-server
-ms.openlocfilehash: 147f1d6cdea0b9992b8be333db4cb06e30c7feaf
-ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
+ms.openlocfilehash: 80196945bc6891d5517d7da0e07ca1b0debddd28
+ms.sourcegitcommit: 3593c4efa707edeaaceffbfa544f99f41fc62535
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 10/30/2020
-ms.locfileid: "93055213"
+ms.lasthandoff: 01/04/2021
+ms.locfileid: "97854677"
 ---
 # <a name="secure-an-aspnet-core-no-locblazor-webassembly-hosted-app-with-no-locidentity-server"></a>Blazor WebAssembly使用伺服器保護 ASP.NET Core 託管應用 Identity 程式
 
@@ -39,9 +39,9 @@ ms.locfileid: "93055213"
 
 若要建立 Blazor WebAssembly 具有驗證機制的新專案：
 
-1. 在 [ **建立新的 ASP.NET Core Web 應用程式** ] 對話方塊中選擇 **Blazor WebAssembly 應用程式** 範本之後，請選取 [ **驗證** ] 下的 [ **變更** ]。
+1. 在 [**建立新的 ASP.NET Core Web 應用程式**] 對話方塊中選擇 **Blazor WebAssembly 應用程式** 範本之後，請選取 [**驗證**] 下的 [**變更**]。
 
-1. 使用「 **儲存使用者帳戶應用程式內** 」選項選取 **個別使用者帳戶** ，以使用 ASP.NET Core 的系統將使用者儲存在應用程式內 [Identity](xref:security/authentication/identity) 。
+1. 使用「**儲存使用者帳戶應用程式內**」選項選取 **個別使用者帳戶**，以使用 ASP.NET Core 的系統將使用者儲存在應用程式內 [Identity](xref:security/authentication/identity) 。
 
 1. 在 [ **Advanced** ] 區段中，選取 [裝載 **ASP.NET Core** ] 核取方塊。
 
@@ -65,7 +65,7 @@ dotnet new blazorwasm -au Individual -ho -o {APP NAME}
 
 若要建立 Blazor WebAssembly 具有驗證機制的新專案：
 
-1. 在 [ **設定新的 Blazor WebAssembly 應用程式** ] 步驟中，從 [ **驗證** ] 下拉式清單中選取 [ **應用程式內) 的個別驗證 (** 。
+1. 在 [**設定新的 Blazor WebAssembly 應用程式**] 步驟中，從 [**驗證**] 下拉式清單中選取 [**應用程式內) 的個別驗證 (** 。
 
 1. 應用程式會針對使用 ASP.NET Core 儲存在應用程式中的個別使用者建立 [Identity](xref:security/authentication/identity) 。
 
@@ -215,19 +215,19 @@ builder.Services.AddApiAuthorization();
 
 ### <a name="imports-file"></a>匯入檔案
 
-[!INCLUDE[](~/includes/blazor-security/imports-file-hosted.md)]
+[!INCLUDE[](~/blazor/includes/security/imports-file-hosted.md)]
 
 ### <a name="index-page"></a>索引頁面
 
-[!INCLUDE[](~/includes/blazor-security/index-page-authentication.md)]
+[!INCLUDE[](~/blazor/includes/security/index-page-authentication.md)]
 
 ### <a name="app-component"></a>應用程式元件
 
-[!INCLUDE[](~/includes/blazor-security/app-component.md)]
+[!INCLUDE[](~/blazor/includes/security/app-component.md)]
 
 ### <a name="redirecttologin-component"></a>RedirectToLogin 元件
 
-[!INCLUDE[](~/includes/blazor-security/redirecttologin-component.md)]
+[!INCLUDE[](~/blazor/includes/security/redirecttologin-component.md)]
 
 ### <a name="logindisplay-component"></a>LoginDisplay 元件
 
@@ -271,11 +271,11 @@ builder.Services.AddApiAuthorization();
 
 ### <a name="authentication-component"></a>驗證元件
 
-[!INCLUDE[](~/includes/blazor-security/authentication-component.md)]
+[!INCLUDE[](~/blazor/includes/security/authentication-component.md)]
 
 ### <a name="fetchdata-component"></a>FetchData 元件
 
-[!INCLUDE[](~/includes/blazor-security/fetchdata-component.md)]
+[!INCLUDE[](~/blazor/includes/security/fetchdata-component.md)]
 
 ## <a name="run-the-app"></a>執行應用程式
 
@@ -466,17 +466,17 @@ services.AddTransient<IProfileService, ProfileService>();
 
 `User.Identity.Name` 會在 *`Client`* 應用程式中填入使用者的使用者名稱，通常是他們的登入電子郵件地址。
 
-[!INCLUDE[](~/includes/blazor-security/usermanager-signinmanager.md)]
+[!INCLUDE[](~/blazor/includes/security/usermanager-signinmanager.md)]
 
 ## <a name="host-in-azure-app-service-with-a-custom-domain"></a>使用自訂網域 Azure App Service 中的主機
 
 下列指導方針說明如何 Blazor WebAssembly 使用伺服器將託管應用程式部署 Identity 至與自訂網域 [Azure App Service](https://azure.microsoft.com/services/app-service/) 。
 
-在此裝載案例中， **請不要將** 相同的憑證用於 [ Identity 伺服器的權杖簽署金鑰](https://docs.identityserver.io/en/latest/topics/crypto.html#token-signing-and-validation)和網站與瀏覽器的 HTTPS 安全通訊：
+在此裝載案例中，**請不要將** 相同的憑證用於 [ Identity 伺服器的權杖簽署金鑰](https://docs.identityserver.io/en/latest/topics/crypto.html#token-signing-and-validation)和網站與瀏覽器的 HTTPS 安全通訊：
 
 * 針對這兩個需求使用不同的憑證是很好的安全性作法，因為它會為每個用途隔離私密金鑰。
 * 與瀏覽器通訊的 TLS 憑證會獨立管理，而不會影響 Identity 伺服器的權杖簽署。
-* 當 [Azure Key Vault](https://azure.microsoft.com/services/key-vault/) 提供憑證給自訂網域系結的 App Service 應用程式時， Identity 伺服器無法從 Azure Key Vault 取得權杖簽署的相同憑證。 雖然 Identity 可能會將伺服器設定為使用來自實體路徑的相同 TLS 憑證，但將安全性憑證放入原始檔控制是一種不 **佳的作法，因此在大部分情況下都應該避免** 。
+* 當 [Azure Key Vault](https://azure.microsoft.com/services/key-vault/) 提供憑證給自訂網域系結的 App Service 應用程式時， Identity 伺服器無法從 Azure Key Vault 取得權杖簽署的相同憑證。 雖然 Identity 可能會將伺服器設定為使用來自實體路徑的相同 TLS 憑證，但將安全性憑證放入原始檔控制是一種不 **佳的作法，因此在大部分情況下都應該避免**。
 
 在下列指引中，只會在 Azure Key Vault 中建立自我簽署憑證，以用於 Identity 伺服器權杖簽署。 伺服器設定會透過 Identity 應用程式的 `My`  >  `CurrentUser` 憑證存放區使用金鑰保存庫憑證。 使用自訂網域的 HTTPS 流量所使用的其他憑證，會與伺服器簽署憑證分開建立和設定 Identity 。
 
@@ -493,7 +493,7 @@ services.AddTransient<IProfileService, ProfileService>();
 
    若要建立憑證，請使用下列其中一種方法或任何其他適合的工具或線上服務：
 
-   * [Azure 金鑰保存庫](/azure/key-vault/certificates/quick-create-portal#add-a-certificate-to-key-vault)
+   * [Azure Key Vault](/azure/key-vault/certificates/quick-create-portal#add-a-certificate-to-key-vault)
    * [Windows 上的 MakeCert](/windows/desktop/seccrypto/makecert)
    * [Openssl](https://www.openssl.org)
 
@@ -502,27 +502,27 @@ services.AddTransient<IProfileService, ProfileService>();
    如需 Azure Key Vault 憑證的詳細資訊，請參閱 [Azure Key Vault：憑證](/azure/key-vault/certificates/)。
 1. 建立新的 Azure Key Vault，或在您的 Azure 訂用帳戶中使用現有的金鑰保存庫。
 1. 在金鑰保存庫的 [ **憑證** ] 區域中，匯入 PFX 網站憑證。 記錄憑證的憑證指紋，稍後會在應用程式的設定中使用。
-1. 在 Azure Key Vault 中，為伺服器權杖簽署產生新的自我簽署憑證 Identity 。 提供憑證的 **憑證名稱** 和 **主體** 。 **主體** 會指定為 `CN={COMMON NAME}` ，其中 `{COMMON NAME}` 預留位置是憑證的一般名稱。 一般名稱可以是任何英數位元字串。 例如， `CN=IdentityServerSigning` 是有效的憑證 **主體** 。 使用預設的 [ **Advanced Policy Configuration** ] 設定。 記錄憑證的憑證指紋，稍後會在應用程式的設定中使用。
+1. 在 Azure Key Vault 中，為伺服器權杖簽署產生新的自我簽署憑證 Identity 。 提供憑證的 **憑證名稱** 和 **主體**。 **主體** 會指定為 `CN={COMMON NAME}` ，其中 `{COMMON NAME}` 預留位置是憑證的一般名稱。 一般名稱可以是任何英數位元字串。 例如， `CN=IdentityServerSigning` 是有效的憑證 **主體**。 使用預設的 [ **Advanced Policy Configuration** ] 設定。 記錄憑證的憑證指紋，稍後會在應用程式的設定中使用。
 1. 流覽至 Azure 入口網站中的 Azure App Service，並使用下列設定建立新的 App Service：
    * **發行** 設定為 `Code` 。
    * **執行時間堆疊** 設定為應用程式的執行時間。
-   * 針對 **Sku 和大小** ，確認 App Service 層是 `Basic B1` 或更高。  App Service 需要 `Basic B1` 或更高的服務層級才能使用自訂網域。
+   * 針對 **Sku 和大小**，確認 App Service 層是 `Basic B1` 或更高。  App Service 需要 `Basic B1` 或更高的服務層級才能使用自訂網域。
 1. 在 Azure 建立 App Service 之後，開啟應用程式的設定 **，並新增** 指定先前記錄之憑證指紋的新應用程式設定。 應用程式設定機碼為 `WEBSITE_LOAD_CERTIFICATES` 。 以逗號分隔應用程式設定值中的憑證指紋，如下列範例所示：
    * 索引鍵︰`WEBSITE_LOAD_CERTIFICATES`
    * 值：`57443A552A46DB...D55E28D412B943565,29F43A772CB6AF...1D04F0C67F85FB0B1`
 
    在 Azure 入口網站中，儲存應用程式設定有兩個步驟：儲存機 `WEBSITE_LOAD_CERTIFICATES` 碼-值設定，然後選取分頁頂端的 [ **儲存** ] 按鈕。
-1. 選取應用程式的 **TLS/SSL 設定** 。 選取 **私密金鑰憑證 ( .pfx)** 。 使用匯 **入 Key Vault 憑證** 程式兩次，以匯入網站憑證以進行 HTTPS 通訊和網站的自我簽署 Identity 伺服器權杖簽署憑證。
+1. 選取應用程式的 **TLS/SSL 設定**。 選取 **私密金鑰憑證 ( .pfx)**。 使用匯 **入 Key Vault 憑證** 程式兩次，以匯入網站憑證以進行 HTTPS 通訊和網站的自我簽署 Identity 伺服器權杖簽署憑證。
 1. 流覽至 [ **自訂網域** ] 分頁。 在網域註冊機構的網站上，使用 **IP 位址** 和 **自訂網域驗證識別碼** 來設定網域。 一般的網域設定包括：
    * 具有 **主機** 的 **a 記錄** `@` ，以及來自 Azure 入口網站之 IP 位址的值。
    * 具有 **主機** 的 **TXT 記錄** `asuid` ，以及由 Azure 產生並由 Azure 入口網站提供的驗證識別碼值。
 
    請確定您已正確地在網域註冊機構的網站上儲存變更。 某些註冊機構網站需要兩個步驟的程式來儲存網域記錄：一或多筆記錄會個別儲存，然後以個別的按鈕更新網域的註冊。
-1. 返回 Azure 入口網站中的 [ **自訂網域** ] 分頁。 選取 [新增自訂網域]  。 選取 [ **記錄** ] 選項。 提供網域，然後選取 [ **驗證** ]。 如果網域記錄正確並傳播到網際網路，入口網站可讓您選取 [ **新增自訂網域** ] 按鈕。
+1. 返回 Azure 入口網站中的 [ **自訂網域** ] 分頁。 選取 [新增自訂網域]。 選取 [ **記錄** ] 選項。 提供網域，然後選取 [ **驗證**]。 如果網域記錄正確並傳播到網際網路，入口網站可讓您選取 [ **新增自訂網域** ] 按鈕。
 
    網域註冊變更可能需要幾天的時間，才能在您的網域註冊機構處理 (DNS) 的網際網路功能變數名稱伺服器。 如果未在三個工作天內更新網域記錄，請確認已使用網域註冊機構正確設定記錄，並與客戶支援人員聯繫。
 1. 在 [ **自訂網域** ] 分頁中，會標示網域的 **SSL 狀態** `Not Secure` 。 選取 [ **新增** 系結] 連結。 從自訂網域系結的金鑰保存庫中，選取網站 HTTPS 憑證。
-1. 在 Visual Studio 中，開啟 *伺服器* 專案的應用程式佈建檔 (`appsettings.json` 或 `appsettings.Production.json`) 。 在 [伺服器設定] 中 Identity ，新增下列 `Key` 區段。 指定金鑰的自我簽署憑證 **主體** `Name` 。 在下列範例中，在金鑰保存庫中指派的憑證一般名稱是 `IdentityServerSigning` ，它會產生 **Subject** 的主體 `CN=IdentityServerSigning` ：
+1. 在 Visual Studio 中，開啟 *伺服器* 專案的應用程式佈建檔 (`appsettings.json` 或 `appsettings.Production.json`) 。 在 [伺服器設定] 中 Identity ，新增下列 `Key` 區段。 指定金鑰的自我簽署憑證 **主體** `Name` 。 在下列範例中，在金鑰保存庫中指派的憑證一般名稱是 `IdentityServerSigning` ，它會產生的主體 `CN=IdentityServerSigning` ：
 
    ```json
    "IdentityServer": {
@@ -538,7 +538,7 @@ services.AddTransient<IProfileService, ProfileService>();
    },
    ```
 
-1. 在 Visual Studio 中，建立 *伺服器* 專案的 Azure App Service [發行設定檔](xref:host-and-deploy/visual-studio-publish-profiles#publish-profiles)。 從功能表列中，選取： **Build**  >  **發佈**  >  **新** 的  >  **Azure**  >  **Azure App Service** (Windows 或 Linux) 。 當 Visual Studio 連接至 Azure 訂用帳戶時，您可以依 **資源類型** 設定 azure 資源的 **觀點** 。 在 **Web 應用程式** 清單中流覽，以找出應用程式的 App Service，然後選取它。 選取 [完成]。
+1. 在 Visual Studio 中，建立 *伺服器* 專案的 Azure App Service [發行設定檔](xref:host-and-deploy/visual-studio-publish-profiles#publish-profiles)。 從功能表列中，選取： **Build**  >  **發佈**  >  **新** 的  >  **Azure**  >  **Azure App Service** (Windows 或 Linux) 。 當 Visual Studio 連接至 Azure 訂用帳戶時，您可以依 **資源類型** 設定 azure 資源的 **觀點**。 在 **Web 應用程式** 清單中流覽，以找出應用程式的 App Service，然後選取它。 選取 [完成]。
 1. 當 Visual Studio 返回 [ **發佈** ] 視窗時，系統會自動偵測金鑰保存庫和 SQL Server 資料庫服務相依性。
 
    Key vault 服務不需要對預設設定進行任何設定變更。
@@ -552,10 +552,10 @@ services.AddTransient<IProfileService, ProfileService>();
 
 Azure 檔包含在 App Service 中使用 Azure 服務和自訂網域搭配 TLS 系結的其他詳細資料，包括使用 CNAME 記錄而非記錄的相關資訊。 如需詳細資訊，請參閱下列資源：
 
-* [App Service 檔](/azure/app-service/)
+* [App Service 文件](/azure/app-service/)
 * [教學課程：將現有的自訂 DNS 名稱對應至 Azure App Service](/azure/app-service/app-service-web-tutorial-custom-domain)
 * [在 Azure App Service 中使用 TLS/SSL 繫結保護自訂 DNS 名稱](/azure/app-service/configure-ssl-bindings)
-* [Azure 金鑰保存庫](/azure/key-vault/)
+* [Azure Key Vault](/azure/key-vault/)
 
 建議您在變更應用程式、應用程式設定或 Azure 入口網站中的 Azure 服務之後，針對每個應用程式測試回合使用新的私用或 incognito 瀏覽器視窗。 先前測試回合的延遲 cookie 時間可能會導致在測試網站時驗證或授權失敗，即使網站的設定正確也一樣。 如需如何設定 Visual Studio 以針對每個測試回合開啟新的私用或 incognito 瀏覽器視窗的詳細資訊，請參閱[ Cookie s 和網站資料](#cookies-and-site-data)一節。
 
@@ -567,7 +567,7 @@ Azure 檔包含在 App Service 中使用 Azure 服務和自訂網域搭配 TLS �
 Get-ChildItem -path Cert:\CurrentUser\My -Recurse | Format-List DnsNameList, Subject, Thumbprint, EnhancedKeyUsageList
 ```
 
-[!INCLUDE[](~/includes/blazor-security/troubleshoot.md)]
+[!INCLUDE[](~/blazor/includes/security/troubleshoot.md)]
 
 ## <a name="additional-resources"></a>其他資源
 

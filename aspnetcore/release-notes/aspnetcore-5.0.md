@@ -19,10 +19,10 @@ no-loc:
 - Kestrel
 uid: aspnetcore-5.0
 ms.openlocfilehash: d7ffcb67637593ab2909885a9e1f6de74a78361b
-ms.sourcegitcommit: a71bb61f7add06acb949c9258fe506914dfe0c08
+ms.sourcegitcommit: 3593c4efa707edeaaceffbfa544f99f41fc62535
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 12/08/2020
+ms.lasthandoff: 01/04/2021
 ms.locfileid: "96855491"
 ---
 # <a name="whats-new-in-aspnet-core-50"></a>ASP.NET Core 5.0 的新功能
@@ -136,31 +136,31 @@ OpenAPI 預設為啟用，web API 開發人員的應用程式啟動體驗 (F5) �
 
 ### <a name="css-isolation"></a>CSS 隔離
 
-Blazor 現在支援定義範圍設定為特定元件的 CSS 樣式。 元件專屬的 CSS 樣式可讓您更輕鬆地瞭解應用程式中的樣式，並避免全域樣式的意外副作用。 如需詳細資訊，請參閱<xref:blazor/components/css-isolation>。
+Blazor 現在支援定義範圍設定為特定元件的 CSS 樣式。 元件專屬的 CSS 樣式可讓您更輕鬆地瞭解應用程式中的樣式，並避免全域樣式的意外副作用。 如需詳細資訊，請參閱 <xref:blazor/components/css-isolation> 。
 
 ### <a name="new-inputfile-component"></a>新增 `InputFile` 元件
 
-`InputFile`元件允許讀取使用者所選取的一或多個檔案進行上傳。 如需詳細資訊，請參閱<xref:blazor/file-uploads>。
+`InputFile`元件允許讀取使用者所選取的一或多個檔案進行上傳。 如需詳細資訊，請參閱 <xref:blazor/file-uploads> 。
 
 ### <a name="new-inputradio-and-inputradiogroup-components"></a>新 `InputRadio` 的和 `InputRadioGroup` 元件
 
-Blazor 具有內建 `InputRadio` 和 `InputRadioGroup` 元件，可簡化資料系結至具有整合式驗證的選項按鈕群組。 如需詳細資訊，請參閱<xref:blazor/forms-validation>。
+Blazor 具有內建 `InputRadio` 和 `InputRadioGroup` 元件，可簡化資料系結至具有整合式驗證的選項按鈕群組。 如需詳細資訊，請參閱 <xref:blazor/forms-validation> 。
 
 ### <a name="component-virtualization"></a>元件虛擬化
 
-使用 Blazor 架構內建的虛擬化支援，改善元件轉譯的認知效能。 如需詳細資訊，請參閱<xref:blazor/components/virtualization>。
+使用 Blazor 架構內建的虛擬化支援，改善元件轉譯的認知效能。 如需詳細資訊，請參閱 <xref:blazor/components/virtualization> 。
 
 ### <a name="ontoggle-event-support"></a>`ontoggle` 事件支援
 
-Blazor 事件現在支援 `ontoggle` DOM 事件。 如需詳細資訊，請參閱<xref:blazor/components/event-handling#event-argument-types>。
+Blazor 事件現在支援 `ontoggle` DOM 事件。 如需詳細資訊，請參閱 <xref:blazor/components/event-handling#event-argument-types> 。
 
 ### <a name="set-ui-focus-in-no-locblazor-apps"></a>在應用程式中設定 UI 焦點 Blazor
 
-`FocusAsync`在元素參考上使用便利方法，以將 UI 焦點設定為該專案。 如需詳細資訊，請參閱<xref:blazor/components/event-handling#focus-an-element>。
+`FocusAsync`在元素參考上使用便利方法，以將 UI 焦點設定為該專案。 如需詳細資訊，請參閱 <xref:blazor/components/event-handling#focus-an-element> 。
 
 ### <a name="custom-validation-class-attributes"></a>自訂驗證類別屬性
 
-在與 CSS 架構（例如啟動程式）整合時，自訂驗證類別名稱很有用。 如需詳細資訊，請參閱<xref:blazor/forms-validation#custom-validation-class-attributes>。
+在與 CSS 架構（例如啟動程式）整合時，自訂驗證類別名稱很有用。 如需詳細資訊，請參閱 <xref:blazor/forms-validation#custom-validation-class-attributes> 。
 
 ### <a name="iasyncdisposable-support"></a>System.iasyncdisposable 支援
 
@@ -168,7 +168,7 @@ Blazor 元件現在支援已配置 <xref:System.IAsyncDisposable> 資源之非�
 
 ### <a name="javascript-isolation-and-object-references"></a>JavaScript 隔離和物件參考
 
-Blazor 啟用標準 [javascript 模組](https://developer.mozilla.org/docs/Web/JavaScript/Guide/Modules)中的 JavaScript 隔離。 如需詳細資訊，請參閱<xref:blazor/call-javascript-from-dotnet#blazor-javascript-isolation-and-object-references>。
+Blazor 啟用標準 [javascript 模組](https://developer.mozilla.org/docs/Web/JavaScript/Guide/Modules)中的 JavaScript 隔離。 如需詳細資訊，請參閱 <xref:blazor/call-javascript-from-dotnet#blazor-javascript-isolation-and-object-references> 。
 
 ### <a name="form-components-support-display-name"></a>表單元件支援顯示名稱
 
@@ -178,15 +178,15 @@ Blazor 啟用標準 [javascript 模組](https://developer.mozilla.org/docs/Web/J
 * `InputNumber`
 * `InputSelect`
 
-如需詳細資訊，請參閱<xref:blazor/forms-validation#display-name-support>。
+如需詳細資訊，請參閱 <xref:blazor/forms-validation#display-name-support> 。
 
 ### <a name="catch-all-route-parameters"></a>Catch-all 路由參數
 
-元件中支援攔截所有路由參數，這些參數會跨多個資料夾界限來捕捉路徑。 如需詳細資訊，請參閱<xref:blazor/fundamentals/routing#catch-all-route-parameters>。
+元件中支援攔截所有路由參數，這些參數會跨多個資料夾界限來捕捉路徑。 如需詳細資訊，請參閱 <xref:blazor/fundamentals/routing#catch-all-route-parameters> 。
 
 ### <a name="debugging-improvements"></a>偵錯改進
 
-Blazor WebAssemblyASP.NET Core 5.0 中已改善偵錯工具的功能。 此外，Visual Studio for Mac 上現在支援偵錯工具。 如需詳細資訊，請參閱<xref:blazor/debug>。
+Blazor WebAssemblyASP.NET Core 5.0 中已改善偵錯工具的功能。 此外，Visual Studio for Mac 上現在支援偵錯工具。 如需詳細資訊，請參閱 <xref:blazor/debug> 。
 
 ### <a name="microsoft-no-locidentity-v20-and-msal-v20"></a>Microsoft v2.0 Identity 和 MSAL 2.0 版
 
@@ -194,7 +194,7 @@ Blazor 安全性現在使用 Microsoft v2.0 Identity ([`Microsoft.Identity.Web`]
 
 ### <a name="protected-browser-storage-for-no-locblazor-server"></a>受保護的瀏覽器存放裝置 Blazor Server
 
-Blazor Server 應用程式現在可以使用內建的支援，在瀏覽器中儲存應用程式狀態，以防止使用 ASP.NET Core 資料保護進行篡改。 資料可以儲存在本機瀏覽器儲存體或會話儲存體中。 如需詳細資訊，請參閱<xref:blazor/state-management>。
+Blazor Server 應用程式現在可以使用內建的支援，在瀏覽器中儲存應用程式狀態，以防止使用 ASP.NET Core 資料保護進行篡改。 資料可以儲存在本機瀏覽器儲存體或會話儲存體中。 如需詳細資訊，請參閱 <xref:blazor/state-management> 。
 
 ### <a name="no-locblazor-webassembly-prerendering"></a>Blazor WebAssembly 預
 
@@ -206,15 +206,15 @@ Blazor WebAssembly 在組建期間執行中繼語言 (IL) 修剪/連結，以從
 
 ### <a name="browser-compatibility-analyzer"></a>瀏覽器相容性分析器
 
-Blazor WebAssembly 應用程式會以完整的 .NET API 介面區為目標，但由於瀏覽器沙箱條件約束，WebAssembly 並不支援所有的 .NET Api。 <xref:System.PlatformNotSupportedException>在 WebAssembly 上執行時，不支援的 api 會擲回。 當應用程式使用應用程式的目標平臺不支援的 Api 時，平臺相容性分析器會警告開發人員。 如需詳細資訊，請參閱<xref:blazor/components/class-libraries#browser-compatibility-analyzer-for-blazor-webassembly>。
+Blazor WebAssembly 應用程式會以完整的 .NET API 介面區為目標，但由於瀏覽器沙箱條件約束，WebAssembly 並不支援所有的 .NET Api。 <xref:System.PlatformNotSupportedException>在 WebAssembly 上執行時，不支援的 api 會擲回。 當應用程式使用應用程式的目標平臺不支援的 Api 時，平臺相容性分析器會警告開發人員。 如需詳細資訊，請參閱 <xref:blazor/components/class-libraries#browser-compatibility-analyzer-for-blazor-webassembly> 。
 
 ### <a name="lazy-load-assemblies"></a>延遲載入元件
 
-Blazor WebAssembly 應用程式啟動效能可透過延後載入部分應用程式元件來改善，直到需要它們為止。 如需詳細資訊，請參閱<xref:blazor/webassembly-lazy-load-assemblies>。
+Blazor WebAssembly 應用程式啟動效能可透過延後載入部分應用程式元件來改善，直到需要它們為止。 如需詳細資訊，請參閱 <xref:blazor/webassembly-lazy-load-assemblies> 。
 
 ### <a name="updated-globalization-support"></a>更新的全球化支援
 
-全球化支援可 Blazor WebAssembly 根據 Unicode (ICU) 的國際元件來提供。 如需詳細資訊，請參閱<xref:blazor/globalization-localization>。
+全球化支援可 Blazor WebAssembly 根據 Unicode (ICU) 的國際元件來提供。 如需詳細資訊，請參閱 <xref:blazor/globalization-localization> 。
 
 ## <a name="grpc"></a>gRPC
 
@@ -280,7 +280,7 @@ See [Update SignalR code](xref:migration/31-to-50#signalr) for migration instruc
 
 ### <a name="no-lockestrel-endpoint-specific-options-via-configuration"></a>Kestrel 透過設定的端點特定選項
 
-已新增支援，可透過設定來設定 Kestrel 的端點特定[configuration](xref:fundamentals/configuration/index)選項。 端點特定的設定包括：
+已新增支援，可透過設定來設定 Kestrel 的端點特定[](xref:fundamentals/configuration/index)選項。 端點特定的設定包括：
 
 * 使用的 HTTP 通訊協定
 * 使用的 TLS 通訊協定

@@ -20,10 +20,10 @@ no-loc:
 - SignalR
 uid: host-and-deploy/directory-structure
 ms.openlocfilehash: 918bc11e06b8f2bea5506d3b61f462e15998efa0
-ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
+ms.sourcegitcommit: 3593c4efa707edeaaceffbfa544f99f41fc62535
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 10/30/2020
+ms.lasthandoff: 01/04/2021
 ms.locfileid: "93059854"
 ---
 # <a name="aspnet-core-directory-structure"></a>ASP.NET Core 目錄結構
@@ -45,7 +45,7 @@ ms.locfileid: "93059854"
 
 &dagger;表示是目錄
 
- (也稱為「應用程式基底路徑」  )。 不論給予伺服器上所部署應用程式的 *publish* 目錄什麼名稱，其位置都會作為所裝載應用程式的伺服器實體路徑。
+*publish* 目錄代表部署的「內容根目錄路徑」(也稱為「應用程式基底路徑」)。 不論給予伺服器上所部署應用程式的 *publish* 目錄什麼名稱，其位置都會作為所裝載應用程式的伺服器實體路徑。
 
 *wwwroot* 目錄 (如果存在) 只包含靜態資產。
 
@@ -75,7 +75,7 @@ ms.locfileid: "93059854"
 
 &dagger;表示是目錄
 
- (也稱為「應用程式基底路徑」  )。 不論給予伺服器上所部署應用程式的 *publish* 目錄什麼名稱，其位置都會作為所裝載應用程式的伺服器實體路徑。
+*publish* 目錄代表部署的「內容根目錄路徑」(也稱為「應用程式基底路徑」)。 不論給予伺服器上所部署應用程式的 *publish* 目錄什麼名稱，其位置都會作為所裝載應用程式的伺服器實體路徑。
 
 *wwwroot* 目錄 (如果存在) 只包含靜態資產。
 
@@ -96,7 +96,7 @@ ms.locfileid: "93059854"
    </Target>
    ```
 
-   `<MakeDir>` 元素會在所發佈的輸出中建立一個空的 [Logs]  資料夾。 此元素會使用 `PublishDir` 屬性來判斷用於建立資料夾的目標位置。 數個部署方法 (例如 Web Deploy) 在部署期間都會略過空的資料夾。 `<WriteLinesToFile>` 元素會在 [Logs]  資料夾中產生檔案，用以確保將資料夾部署至伺服器。 如果背景工作處理序沒有目標資料夾的寫入權限，則使用此方法建立資料夾時會失敗。
+   `<MakeDir>` 元素會在所發佈的輸出中建立一個空的 [Logs] 資料夾。 此元素會使用 `PublishDir` 屬性來判斷用於建立資料夾的目標位置。 數個部署方法 (例如 Web Deploy) 在部署期間都會略過空的資料夾。 `<WriteLinesToFile>` 元素會在 [Logs] 資料夾中產生檔案，用以確保將資料夾部署至伺服器。 如果背景工作處理序沒有目標資料夾的寫入權限，則使用此方法建立資料夾時會失敗。
 
 * 在部署中的伺服器上實體建立 *Logs* 目錄。
 

@@ -20,10 +20,10 @@ no-loc:
 - SignalR
 uid: blazor/security/webassembly/additional-scenarios
 ms.openlocfilehash: bb502533bca24e82792db8814b75b16407f20339
-ms.sourcegitcommit: 59d95a9106301d5ec5c9f612600903a69c4580ef
+ms.sourcegitcommit: 3593c4efa707edeaaceffbfa544f99f41fc62535
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 11/25/2020
+ms.lasthandoff: 01/04/2021
 ms.locfileid: "95870382"
 ---
 # <a name="aspnet-core-no-locblazor-webassembly-additional-security-scenarios"></a>ASP.NET Core Blazor WebAssembly 額外的安全性案例
@@ -714,7 +714,7 @@ builder.Services.AddApiAuthorization(options => {
 
 ### <a name="customize-the-user-with-a-payload-claim"></a>使用承載宣告自訂使用者
 
-在下列範例中，應用程式的已驗證使用者會收到 `amr` 每個使用者驗證方法的宣告。 `amr`宣告會識別如何在 Microsoft Platform v1.0 承載宣告中驗證權杖的主體 Identity 。 [payload claims](/azure/active-directory/develop/access-tokens#the-amr-claim) 此範例使用根據的自訂使用者帳戶類別 <xref:Microsoft.AspNetCore.Components.WebAssembly.Authentication.RemoteUserAccount> 。
+在下列範例中，應用程式的已驗證使用者會收到 `amr` 每個使用者驗證方法的宣告。 `amr`宣告會識別如何在 Microsoft Platform v1.0 承載宣告中驗證權杖的主體 Identity 。 [](/azure/active-directory/develop/access-tokens#the-amr-claim) 此範例使用根據的自訂使用者帳戶類別 <xref:Microsoft.AspNetCore.Components.WebAssembly.Authentication.RemoteUserAccount> 。
 
 建立擴充類別的類別 <xref:Microsoft.AspNetCore.Components.WebAssembly.Authentication.RemoteUserAccount> 。 下列範例會將 `AuthenticationMethod` 屬性設定為使用者的 `amr` JSON 屬性值陣列。 `AuthenticationMethod` 當使用者經過驗證時，架構會自動填入。
 
@@ -934,7 +934,7 @@ app.UseEndpoints(endpoints =>
 
 Blazor WebAssembly使用協力廠商提供者驗證及授權託管應用程式時，有數個選項可用來驗證使用者。 您選擇哪一個取決於您的案例。
 
-如需詳細資訊，請參閱<xref:security/authentication/social/additional-claims>。
+如需詳細資訊，請參閱 <xref:security/authentication/social/additional-claims> 。
 
 ### <a name="authenticate-users-to-only-call-protected-third-party-apis"></a>驗證使用者只呼叫受保護的協力廠商 Api
 
@@ -1006,7 +1006,7 @@ V2.0 端點的識別碼權杖中宣告的清單會變更。 如需詳細資訊�
 
 若要將 Blazor WebAssembly 應用程式設定為使用 [ASP.NET Core gRPC 架構](xref:grpc/index)：
 
-* 在伺服器上啟用 gRPC Web。 如需詳細資訊，請參閱<xref:grpc/browser>。
+* 在伺服器上啟用 gRPC Web。 如需詳細資訊，請參閱 <xref:grpc/browser> 。
 * 註冊應用程式訊息處理常式的 gRPC 服務。 下列範例會設定應用程式的授權訊息處理常式，以使用[ `GreeterClient` gRPC 教學](xref:tutorials/grpc/grpc-start#create-a-grpc-service)課程 () 中的服務 `Program.Main` ：
 
 ```csharp
@@ -1076,7 +1076,7 @@ Server response: <strong>@serverResponse</strong>
 
 預留位置 `{APP ASSEMBLY}` 是應用程式的元件名稱 (例如 `BlazorSample`) 。 若要使用 `Status.DebugException` 屬性，請使用 [Grpc .Net. Client](https://www.nuget.org/packages/Grpc.Net.Client) version 2.30.0 或更新版本。
 
-如需詳細資訊，請參閱<xref:grpc/browser>。
+如需詳細資訊，請參閱 <xref:grpc/browser> 。
 
 ## <a name="additional-resources"></a>其他資源
 

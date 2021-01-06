@@ -19,10 +19,10 @@ no-loc:
 - SignalR
 uid: tutorials/signalr
 ms.openlocfilehash: 1dad2264250bf43ec6c1df679b8754a82a5addfd
-ms.sourcegitcommit: aa85f2911792a1e4783bcabf0da3b3e7e218f63a
+ms.sourcegitcommit: 3593c4efa707edeaaceffbfa544f99f41fc62535
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 11/23/2020
+ms.lasthandoff: 01/04/2021
 ms.locfileid: "95417665"
 ---
 # <a name="tutorial-get-started-with-aspnet-core-no-locsignalr"></a>教學課程：開始使用 ASP.NET Core SignalR
@@ -323,7 +323,7 @@ SignalR伺服器必須設定為將要求傳遞 SignalR 至 SignalR 。
 
 * 選取 [.NET Core] > [應用程式] > [ASP.NET Core Web 應用程式] (不要選取 [ASP.NET Core Web 應用程式 (MVC)])。  
 
-* 選取 [下一步]。  
+* 選取 [下一步]  。  
 
 * 為專案 *SignalR 聊天* 命名，然後選取 [**建立**]。 
 

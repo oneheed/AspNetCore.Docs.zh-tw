@@ -20,10 +20,10 @@ no-loc:
 - SignalR
 uid: blazor/layouts
 ms.openlocfilehash: 3cb7c6184c13a003b4f4294f887d8938caa42f97
-ms.sourcegitcommit: 6b87f2e064cea02e65dacd206394b44f5c604282
+ms.sourcegitcommit: 3593c4efa707edeaaceffbfa544f99f41fc62535
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 12/15/2020
+ms.lasthandoff: 01/04/2021
 ms.locfileid: "97506899"
 ---
 # <a name="aspnet-core-no-locblazor-layouts"></a>ASP.NET Core Blazor 版面配置
@@ -124,7 +124,7 @@ ms.locfileid: "97506899"
 
 ## <a name="share-a-no-locrazor-pages-layout-with-integrated-components"></a>Razor使用整合元件共用頁面配置
 
-當可路由的元件整合到 Razor 頁面應用程式時，應用程式的共用配置可以與元件一起使用。 如需詳細資訊，請參閱<xref:blazor/components/prerendering-and-integration>。
+當可路由的元件整合到 Razor 頁面應用程式時，應用程式的共用配置可以與元件一起使用。 如需詳細資訊，請參閱 <xref:blazor/components/prerendering-and-integration> 。
 
 ## <a name="additional-resources"></a>其他資源
 

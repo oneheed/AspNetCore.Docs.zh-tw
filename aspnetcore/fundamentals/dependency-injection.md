@@ -18,10 +18,10 @@ no-loc:
 - SignalR
 uid: fundamentals/dependency-injection
 ms.openlocfilehash: 3f7cce475b5c7b0fcbb93644b2c39acd637a6f9d
-ms.sourcegitcommit: 98f92d766d4f343d7e717b542c1b08da29e789c1
+ms.sourcegitcommit: 3593c4efa707edeaaceffbfa544f99f41fc62535
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 11/13/2020
+ms.lasthandoff: 01/04/2021
 ms.locfileid: "94595476"
 ---
 # <a name="dependency-injection-in-aspnet-core"></a>.NET Core 中的相依性插入
@@ -168,7 +168,7 @@ ASP.NET Core 架構使用註冊一組相關服務的慣例。 慣例是使用單
 * 將服務插入中介軟體的 `Invoke` 或 `InvokeAsync` 方法。 使用函式 [插入](xref:mvc/controllers/dependency-injection#constructor-injection) 會擲回執行時間例外狀況，因為它會強制範圍服務的行為就像 singleton 一樣。 [ [存留期和註冊選項](#lifetime-and-registration-options) ] 區段中的範例會示範 `InvokeAsync` 方法。
 * 使用以 [Factory 為基礎的中介軟體](xref:fundamentals/middleware/extensibility)。 使用此方法註冊的中介軟體會根據用戶端要求啟動 (連接) ，可讓範圍服務插入中介軟體的 `InvokeAsync` 方法。
 
-如需詳細資訊，請參閱<xref:fundamentals/middleware/write#per-request-middleware-dependencies>。
+如需詳細資訊，請參閱 <xref:fundamentals/middleware/write#per-request-middleware-dependencies> 。
 
 ## <a name="service-registration-methods"></a>服務註冊方法
 
@@ -328,7 +328,7 @@ Service1.Dispose
 
     ![不正確的程式碼](dependency-injection/_static/bad.png)
 
-  **正確** ：
+  **正確**：
 
   ```csharp
   public class MyClass
@@ -544,7 +544,7 @@ public void Configure(IApplicationBuilder app, IOptions<MyOptions> options)
 }
 ```
 
-如需詳細資訊，請參閱<xref:fundamentals/startup>。
+如需詳細資訊，請參閱 <xref:fundamentals/startup> 。
 
 ## <a name="framework-provided-services"></a>架構提供的服務
 
@@ -606,7 +606,7 @@ public void ConfigureServices(IServiceCollection services)
 在處理要求的應用程式中，會在要求結束時處置範圍服務。
 
 > [!WARNING]
-> 在中介軟體中使用具範圍服務時，請將該服務插入 `Invoke` 或 `InvokeAsync` 方法中。 不要插入 via 函式 [插入](xref:mvc/controllers/dependency-injection#constructor-injection) ，因為它會強制服務的行為就像 singleton 一樣。 如需詳細資訊，請參閱<xref:fundamentals/middleware/write#per-request-middleware-dependencies>。
+> 在中介軟體中使用具範圍服務時，請將該服務插入 `Invoke` 或 `InvokeAsync` 方法中。 不要插入 via 函式 [插入](xref:mvc/controllers/dependency-injection#constructor-injection) ，因為它會強制服務的行為就像 singleton 一樣。 如需詳細資訊，請參閱 <xref:fundamentals/middleware/write#per-request-middleware-dependencies> 。
 
 ### <a name="singleton"></a>單一
 
@@ -835,7 +835,7 @@ public class Program
 
 範圍服務會由建立這些服務的容器處置。 若是在根容器中建立範圍服務，因為當應用程式/伺服器關機時，服務只會由根容器處理，所以服務的存留期會提升為單一服務等級。 當呼叫 `BuildServiceProvider` 時，驗證服務範圍會攔截到這些情況。
 
-如需詳細資訊，請參閱<xref:fundamentals/host/web-host#scope-validation>。   
+如需詳細資訊，請參閱 <xref:fundamentals/host/web-host#scope-validation> 。   
 
 ## <a name="request-services"></a>要求服務
 
@@ -909,7 +909,7 @@ public void ConfigureServices(IServiceCollection services)
 * 此實例會在根範圍中解析。
 * 實例應該在範圍結束之前處置。
 
-**方案**
+**解決方案**
 
 使用 factory 模式，在父範圍之外建立實例。 在這種情況下，應用程式通常會有 `Create` 方法可直接呼叫最終型別的函式。 如果最終類型有其他相依性，factory 可以：
 
@@ -922,7 +922,7 @@ public void ConfigureServices(IServiceCollection services)
 
 應用程式需要 <xref:System.IDisposable> 跨多個服務的共用實例，但是 <xref:System.IDisposable> 存留期應受限。
 
-**方案**
+**解決方案**
 
 註冊具有範圍存留期的實例。 使用 <xref:Microsoft.Extensions.DependencyInjection.IServiceScopeFactory.CreateScope%2A?displayProperty=nameWithType> 啟動並建立新的 <xref:Microsoft.Extensions.DependencyInjection.IServiceScope> 。 使用範圍 <xref:System.IServiceProvider> 來取得所需的服務。 在存留期結束時處置範圍。
 
@@ -967,7 +967,7 @@ public void ConfigureServices(IServiceCollection services)
 * 避免直接在服務容器中儲存資料與設定。 例如，使用者的購物車通常不應該新增至服務容器。 組態應該使用[選項模式](xref:fundamentals/configuration/options)。 同樣地，請避免只存在以允許存取某個其他物件的「資料持有者」物件。 最好是透過 DI 要求實際項目。
 * 避免靜態存取服務。 例如，請避免以靜態方式輸入 [IApplicationBuilder >iapplicationbuilder.applicationservices](xref:Microsoft.AspNetCore.Builder.IApplicationBuilder.ApplicationServices) ，以便在其他地方使用。
 
-* 請避免使用 *服務定位器模式* ，其混合 [了控制策略的反轉](/dotnet/standard/modern-web-apps-azure-architecture/architectural-principles#dependency-inversion) 。
+* 請避免使用 *服務定位器模式*，其混合 [了控制策略的反轉](/dotnet/standard/modern-web-apps-azure-architecture/architectural-principles#dependency-inversion) 。
   * <xref:System.IServiceProvider.GetService*>當您可以改用 DI 時，請勿叫用來取得服務實例：
 
     **不正確：**
@@ -985,7 +985,7 @@ public void ConfigureServices(IServiceCollection services)
       }
       ```
    
-    **正確** ：
+    **正確**：
 
     ```csharp
     public class MyClass

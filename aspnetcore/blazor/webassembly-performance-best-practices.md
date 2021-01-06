@@ -20,10 +20,10 @@ no-loc:
 - SignalR
 uid: blazor/webassembly-performance-best-practices
 ms.openlocfilehash: cc090b4e56745e6b010e4a7ee17332b0d3a95560
-ms.sourcegitcommit: aa85f2911792a1e4783bcabf0da3b3e7e218f63a
+ms.sourcegitcommit: 3593c4efa707edeaaceffbfa544f99f41fc62535
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 11/23/2020
+ms.lasthandoff: 01/04/2021
 ms.locfileid: "95417379"
 ---
 # <a name="aspnet-core-no-locblazor-webassembly-performance-best-practices"></a>ASP.NET Core Blazor WebAssembly 效能最佳做法
@@ -101,7 +101,7 @@ Blazor WebAssembly 經過仔細設計和優化，可在最實際的應用程式 
 
 大部分的元件都不需要這種手動控制層級。 如果這些子樹在轉譯時特別耗費資源，而且會造成 UI 延隔，您應該只在意略過轉譯子樹。
 
-如需詳細資訊，請參閱<xref:blazor/components/lifecycle>。
+如需詳細資訊，請參閱 <xref:blazor/components/lifecycle> 。
 
 ::: moniker range=">= aspnetcore-5.0"
 
@@ -142,7 +142,7 @@ Blazor WebAssembly 經過仔細設計和優化，可在最實際的應用程式 
 
 `<Virtualize>` 也有其他優點。 例如，當元件從外部 API 要求資料時， `<Virtualize>` 會允許元件只提取對應到目前可見區域之記錄的配量，而不是從集合中下載所有資料。
 
-如需詳細資訊，請參閱<xref:blazor/components/virtualization>。
+如需詳細資訊，請參閱 <xref:blazor/components/virtualization> 。
 
 ::: moniker-end
 
@@ -308,7 +308,7 @@ public static RenderFragment SayHello = __builder =>
 </CascadingValue>
 ```
 
-如果有大量的其他元件會收到串聯的值，這就會有很大的差異。 如需詳細資訊，請參閱<xref:blazor/components/cascading-values-and-parameters>。
+如果有大量的其他元件會收到串聯的值，這就會有很大的差異。 如需詳細資訊，請參閱 <xref:blazor/components/cascading-values-and-parameters> 。
 
 #### <a name="avoid-attribute-splatting-with-captureunmatchedvalues"></a>避免使用屬性展開 `CaptureUnmatchedValues`
 
@@ -330,7 +330,7 @@ public static RenderFragment SayHello = __builder =>
 
 您可以隨意使用 <xref:Microsoft.AspNetCore.Components.ParameterAttribute.CaptureUnmatchedValues> 非效能關鍵的元件，例如不會經常重複的元件。 但是針對大規模轉譯的元件（例如大型清單中的每個專案或方格中的資料格），請嘗試避免屬性展開。
 
-如需詳細資訊，請參閱<xref:blazor/components/index#attribute-splatting-and-arbitrary-parameters>。
+如需詳細資訊，請參閱 <xref:blazor/components/index#attribute-splatting-and-arbitrary-parameters> 。
 
 #### <a name="implement-setparametersasync-manually"></a>`SetParametersAsync`手動執行
 
@@ -528,7 +528,7 @@ function storeAllInLocalStorage(items) {
 * 應用程式正在執行 Blazor WebAssembly ，而不是 Blazor Server 。
 * 呼叫的函式會以同步方式傳回值 (它不是 `async` 方法，也不會傳回 .net <xref:System.Threading.Tasks.Task> 或 JavaScript `Promise`) 。
 
-如需詳細資訊，請參閱<xref:blazor/call-javascript-from-dotnet>。
+如需詳細資訊，請參閱 <xref:blazor/call-javascript-from-dotnet> 。
 
 ::: moniker range=">= aspnetcore-5.0"
  
@@ -589,7 +589,7 @@ Blazor的 JS interop 實行相依于 <xref:System.Text.Json> ，這是具有低�
 
 ### <a name="lazy-load-assemblies"></a>延遲載入元件
 
-當路由需要元件時，于執行時間載入元件。 如需詳細資訊，請參閱<xref:blazor/webassembly-lazy-load-assemblies>。
+當路由需要元件時，于執行時間載入元件。 如需詳細資訊，請參閱 <xref:blazor/webassembly-lazy-load-assemblies> 。
 
 ### <a name="compression"></a>壓縮
 

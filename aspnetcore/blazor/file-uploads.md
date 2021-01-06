@@ -20,10 +20,10 @@ no-loc:
 ms.date: 10/27/2020
 uid: blazor/file-uploads
 ms.openlocfilehash: 77c2874eef788b8083758c087913a7a04c55fa2b
-ms.sourcegitcommit: 54fdca99f30b18d69cf0753ca3c84c7dab8f2b0e
+ms.sourcegitcommit: 3593c4efa707edeaaceffbfa544f99f41fc62535
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 11/17/2020
+ms.lasthandoff: 01/04/2021
 ms.locfileid: "94691166"
 ---
 # <a name="aspnet-core-no-locblazor-file-uploads"></a>ASP.NET Core 檔案上 Blazor 傳
@@ -35,7 +35,7 @@ ms.locfileid: "94691166"
 使用 `InputFile` 元件可將瀏覽器檔案資料讀取至 .net 程式碼，包括檔案上傳。
 
 > [!WARNING]
-> 一律遵循檔案上傳安全性最佳作法。 如需詳細資訊，請參閱<xref:mvc/models/file-uploads#security-considerations>。
+> 一律遵循檔案上傳安全性最佳作法。 如需詳細資訊，請參閱 <xref:mvc/models/file-uploads#security-considerations> 。
 
 ## <a name="inputfile-component"></a>`InputFile` 元件
 

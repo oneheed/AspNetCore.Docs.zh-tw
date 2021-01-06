@@ -20,10 +20,10 @@ no-loc:
 - SignalR
 uid: blazor/progressive-web-app
 ms.openlocfilehash: f400319ef81b3d7768bdbdab84f46d3f9c50bb46
-ms.sourcegitcommit: a71bb61f7add06acb949c9258fe506914dfe0c08
+ms.sourcegitcommit: 3593c4efa707edeaaceffbfa544f99f41fc62535
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 12/08/2020
+ms.lasthandoff: 01/04/2021
 ms.locfileid: "96855439"
 ---
 # <a name="build-progressive-web-applications-with-aspnet-core-no-locblazor-webassembly"></a>使用 ASP.NET Core 建立漸進式 Web 應用程式 Blazor WebAssembly
@@ -95,7 +95,7 @@ dotnet new blazorwasm -o MyNewProject --pwa
 
 若要查看離線支援的運作方式：
 
-1. 發行應用程式。 如需詳細資訊，請參閱<xref:blazor/host-and-deploy/index#publish-the-app>。
+1. 發行應用程式。 如需詳細資訊，請參閱 <xref:blazor/host-and-deploy/index#publish-the-app> 。
 1. 將應用程式部署至支援 HTTPS 的伺服器，並在瀏覽器中以其安全的 HTTPS 位址存取應用程式。
 1. 開啟瀏覽器的開發工具，並確認已在 [**應用程式**] 索引標籤上註冊主機的 *服務工作者*：
 
@@ -228,7 +228,7 @@ Pwa 與其他任何 PWA 一樣， Blazor WebAssembly 都可以接收來自後端
 
 離線支援通常僅適用于：
 
-* 如果主要資料存放區是瀏覽器的本機資料存放區。 例如，此方法與應用程式相關，該應用程式具有可將資料儲存在或 IndexedDB 之[IoT](https://en.wikipedia.org/wiki/Internet_of_things)裝置的 UI `localStorage` 。 [IndexedDB](https://developer.mozilla.org/docs/Web/API/IndexedDB_API)
+* 如果主要資料存放區是瀏覽器的本機資料存放區。 例如，此方法與應用程式相關，該應用程式具有可將資料儲存在或 IndexedDB 之[IoT](https://en.wikipedia.org/wiki/Internet_of_things)裝置的 UI `localStorage` 。 [](https://developer.mozilla.org/docs/Web/API/IndexedDB_API)
 * 如果應用程式執行大量的工作來提取和快取與每個使用者相關的後端 API 資料，讓他們可以離線流覽資料。 如果應用程式必須支援編輯，則必須建立用來追蹤變更的系統，並將資料與後端同步處理。
 * 如果目標是要保證應用程式會立即載入，而不考慮網路狀況。 針對後端 API 要求執行適當的使用者體驗，以顯示要求的進度，並在要求因網路無法使用而失敗時正常運作。
 

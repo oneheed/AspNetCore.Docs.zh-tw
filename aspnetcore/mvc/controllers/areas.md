@@ -17,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: mvc/controllers/areas
-ms.openlocfilehash: 42eec406813adce4d7edbc1ab66a1f689c4aca0e
-ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
+ms.openlocfilehash: f3d76f612e67aeabf1f7fef694199332c732c593
+ms.sourcegitcommit: 53e01d6e9b70a18a05618f0011cf115a16633c21
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 10/30/2020
-ms.locfileid: "93053523"
+ms.lasthandoff: 01/05/2021
+ms.locfileid: "97878408"
 ---
 # <a name="areas-in-aspnet-core"></a>ASP.NET Core 中的區域
 
@@ -63,10 +63,10 @@ ms.locfileid: "93053523"
 
 ### <a name="area-folder-structure"></a>區域資料夾結構
 
-假設應用程式具有兩個邏輯群組：「產品」  和「服務」  。 使用區域，資料夾結構應該如下：
+假設應用程式具有兩個邏輯群組：「產品」和「服務」。 使用區域，資料夾結構應該如下：
 
 * 專案名稱
-  * 區域
+  * 區
     * 產品
       * 控制器
         * HomeController.cs
@@ -149,7 +149,7 @@ ms.locfileid: "93053523"
 
 ### <a name="_viewimportscshtml"></a>_ViewImports.cshtml
 
- */Views/_ViewImports cshtml* 、適用于 MVC 的 */Pages/_ViewImports* 和頁面的 Razor ，不會匯入區域中的 Views。 您可以使用下列其中一種方法，提供所有視圖的 view imports：
+ */Views/_ViewImports cshtml*、適用于 MVC 的 */Pages/_ViewImports* 和頁面的 Razor ，不會匯入區域中的 Views。 您可以使用下列其中一種方法，提供所有視圖的 view imports：
 
 * 將 *_ViewImports 的 cshtml* 加入至 [應用程式根資料夾](#arf)。 應用程式根資料夾中的 *_ViewImports* 會套用至應用程式中的所有 views。
 * 將 *_ViewImports 的 cshtml* 檔案複製到 [區域] 底下的適當 [view] 資料夾中。
@@ -171,7 +171,7 @@ ms.locfileid: "93053523"
 具有頁面的區域 Razor 需要 `Areas/<area name>/Pages` 應用程式根目錄中的資料夾。 下列資料夾結構搭配[範例應用程式](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/mvc/controllers/areas/31samples)一起使用：
 
 * 專案名稱
-  * 區域
+  * 區
     * 產品
       * Pages
         * _ViewImports
@@ -191,7 +191,7 @@ ms.locfileid: "93053523"
 
 範例下載包括[部分檢視](xref:mvc/views/partial)，其中可在未指定區域的情況下包含上述連結和相同連結。 部分檢視會在[配置檔案](xref:mvc/views/layout)中進行參考，因此，應用程式中的每個頁面都會顯示產生的連結。 在未指定區域的情況下產生的連結，只有在從相同區域中的頁面進行參考時才有效。
 
-未指定區域時，路由即會取決於「環境」  值。 目前要求的目前路由值被視為用於連結產生的環境值。 在許多適用於範例應用程式的案例中，使用環境值會產生不正確的連結。 例如，試想從下列程式碼產生的連結：
+未指定區域時，路由即會取決於「環境」值。 目前要求的目前路由值被視為用於連結產生的環境值。 在許多適用於範例應用程式的案例中，使用環境值會產生不正確的連結。 例如，試想從下列程式碼產生的連結：
 
 [!code-cshtml[](areas/31samples/RPareas/Pages/Shared/_testLinksPartial.cshtml?name=snippet2)]
 
@@ -211,7 +211,7 @@ ms.locfileid: "93053523"
 
 在上述標記中：
 
-* 必須使用完整的網域名稱來指定此模型 (`@model RPareas.Areas.Services.Pages.Manage.AboutModel`)。
+* 您必須使用完整的類別名稱來指定模型 (`@model RPareas.Areas.Services.Pages.Manage.AboutModel`) 。
 * [標記協助程式](xref:mvc/views/tag-helpers/intro)由 `@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers` 啟用
 
 在範例下載中，Products 區域包含下列 *_ViewImports.cshtml* 檔案：
@@ -265,10 +265,10 @@ ms.locfileid: "93053523"
 
 ### <a name="area-folder-structure"></a>區域資料夾結構
 
-假設應用程式具有兩個邏輯群組：「產品」  和「服務」  。 使用區域，資料夾結構應該如下：
+假設應用程式具有兩個邏輯群組：「產品」和「服務」。 使用區域，資料夾結構應該如下：
 
 * 專案名稱
-  * 區域
+  * 區
     * 產品
       * 控制器
         * HomeController.cs
@@ -331,7 +331,7 @@ ms.locfileid: "93053523"
 
 範例下載包括[部分檢視](xref:mvc/views/partial)，其中可在未指定區域的情況下包含上述連結和相同連結。 部分檢視會在[配置檔案](xref:mvc/views/layout)中進行參考，因此，應用程式中的每個頁面都會顯示產生的連結。 在未指定區域的情況下產生的連結，只有在從相同區域與控制器中的頁面進行參考時才有效。
 
-未指定區域或控制站時，路由即會取決於「環境」  值。 目前要求的目前路由值被視為用於連結產生的環境值。 在許多適用於範例應用程式的案例中，使用環境值會產生不正確的連結。
+未指定區域或控制站時，路由即會取決於「環境」值。 目前要求的目前路由值被視為用於連結產生的環境值。 在許多適用於範例應用程式的案例中，使用環境值會產生不正確的連結。
 
 如需詳細資訊，請參閱[路由至控制器動作](xref:mvc/controllers/routing)。
 
@@ -341,7 +341,7 @@ ms.locfileid: "93053523"
 
 ### <a name="_viewimportscshtml"></a>_ViewImports.cshtml
 
-在其標準位置中， */Views/_ViewImports.cshtml* 不適用於區域。 若要在您的區域中 [使用一般卷](xref:mvc/views/tag-helpers/intro)標協助程式、或，請 `@using` `@inject` 確定適當的 *_ViewImports cshtml* 檔案 [適用于您的區域查看](xref:mvc/views/layout#importing-shared-directives)。 如果您希望在所有檢視中都有相同的行為，請將 */Views/_ViewImports.cshtml* 移至應用程式根目錄。
+在其標準位置中，*/Views/_ViewImports.cshtml* 不適用於區域。 若要在您的區域中 [使用一般卷](xref:mvc/views/tag-helpers/intro)標協助程式、或，請 `@using` `@inject` 確定適當的 *_ViewImports cshtml* 檔案 [適用于您的區域查看](xref:mvc/views/layout#importing-shared-directives)。 如果您希望在所有檢視中都有相同的行為，請將 */Views/_ViewImports.cshtml* 移至應用程式根目錄。
 
 <a name="rename"></a>
 
@@ -358,7 +358,7 @@ ms.locfileid: "93053523"
 具有頁面的區域 Razor 需要 `Areas/<area name>/Pages` 應用程式根目錄中的資料夾。 下列資料夾結構搭配[範例應用程式](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/mvc/controllers/areas/samples)一起使用：
 
 * 專案名稱
-  * 區域
+  * 區
     * 產品
       * Pages
         * _ViewImports
@@ -380,7 +380,7 @@ ms.locfileid: "93053523"
 
 範例下載包括[部分檢視](xref:mvc/views/partial)，其中可在未指定區域的情況下包含上述連結和相同連結。 部分檢視會在[配置檔案](xref:mvc/views/layout)中進行參考，因此，應用程式中的每個頁面都會顯示產生的連結。 在未指定區域的情況下產生的連結，只有在從相同區域中的頁面進行參考時才有效。
 
-未指定區域時，路由即會取決於「環境」  值。 目前要求的目前路由值被視為用於連結產生的環境值。 在許多適用於範例應用程式的案例中，使用環境值會產生不正確的連結。 例如，試想從下列程式碼產生的連結：
+未指定區域時，路由即會取決於「環境」值。 目前要求的目前路由值被視為用於連結產生的環境值。 在許多適用於範例應用程式的案例中，使用環境值會產生不正確的連結。 例如，試想從下列程式碼產生的連結：
 
 [!code-cshtml[](areas/samples/RPareas/Pages/Shared/_testLinksPartial.cshtml?name=snippet2)]
 

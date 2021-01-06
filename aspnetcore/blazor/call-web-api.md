@@ -20,10 +20,10 @@ no-loc:
 - SignalR
 uid: blazor/call-web-api
 ms.openlocfilehash: 85b3ded6ec25310a573e99cbedf0df005d92bdbe
-ms.sourcegitcommit: d64bf0cbe763beda22a7728c7f10d07fc5e19262
+ms.sourcegitcommit: 3593c4efa707edeaaceffbfa544f99f41fc62535
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 11/03/2020
+ms.lasthandoff: 01/04/2021
 ms.locfileid: "93234409"
 ---
 # <a name="call-a-web-api-from-aspnet-core-no-locblazor"></a>從 ASP.NET Core 呼叫 web API Blazor
@@ -397,11 +397,11 @@ protected override async Task OnInitializedAsync()
 > [!NOTE]
 > 上述範例僅供示範之用。 Web API 伺服器應用程式可以設定為傳回 JSON，即使端點不存在，或伺服器上發生未處理的例外狀況。
 
-如需詳細資訊，請參閱<xref:blazor/fundamentals/handle-errors>。
+如需詳細資訊，請參閱 <xref:blazor/fundamentals/handle-errors> 。
 
 ## <a name="cross-origin-resource-sharing-cors"></a>跨原始來源資源分享 (CORS)
 
-瀏覽器安全性可防止網頁向與提供網頁的不同網域提出要求。 這項限制稱為 *相同原始來源原則* 。 相同來源原則可防止惡意網站從另一個網站讀取敏感性資料。 若要從瀏覽器向具有不同來源的端點提出要求， *端點* 必須啟用 [跨原始來源資源分享 (CORS)](https://www.w3.org/TR/cors/)。
+瀏覽器安全性可防止網頁向與提供網頁的不同網域提出要求。 這項限制稱為 *相同原始來源原則*。 相同來源原則可防止惡意網站從另一個網站讀取敏感性資料。 若要從瀏覽器向具有不同來源的端點提出要求， *端點* 必須啟用 [跨原始來源資源分享 (CORS)](https://www.w3.org/TR/cors/)。
 
 [ Blazor WebAssembly (Blazor WebAssemblySample) 範例應用程式](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/blazor/common/samples/)會示範如何在呼叫 Web API 元件中使用 CORS (`Pages/CallWebAPI.razor`) 。
 

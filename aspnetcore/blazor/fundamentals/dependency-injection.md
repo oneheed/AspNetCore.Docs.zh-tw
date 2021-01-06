@@ -5,7 +5,7 @@ description: 瞭解 Blazor 應用程式如何將服務插入至元件。
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 12/11/2020
+ms.date: 12/19/2020
 no-loc:
 - appsettings.json
 - ASP.NET Core Identity
@@ -20,12 +20,12 @@ no-loc:
 - SignalR
 uid: blazor/fundamentals/dependency-injection
 zone_pivot_groups: blazor-hosting-models
-ms.openlocfilehash: af6b645fc3c398414c85c78e1cfeb213e538c2a6
-ms.sourcegitcommit: 6b87f2e064cea02e65dacd206394b44f5c604282
+ms.openlocfilehash: 3f2b4eff5422acbec80b2fd9b801101271cc3f75
+ms.sourcegitcommit: 3593c4efa707edeaaceffbfa544f99f41fc62535
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 12/15/2020
-ms.locfileid: "97506795"
+ms.lasthandoff: 01/04/2021
+ms.locfileid: "97808721"
 ---
 # <a name="aspnet-core-no-locblazor-dependency-injection"></a>ASP.NET Core 相依性 Blazor 插入
 
@@ -42,8 +42,8 @@ ms.locfileid: "97506795"
 
 | 服務 | 存留期 | 描述 |
 | ------- | -------- | ----------- |
-| <xref:System.Net.Http.HttpClient> | 具範圍 | <p>提供方法來傳送 HTTP 要求，以及從 URI 所識別的資源接收 HTTP 回應。</p><p><xref:System.Net.Http.HttpClient>應用程式中的實例會 Blazor WebAssembly 使用瀏覽器來處理背景中的 HTTP 流量。</p><p>Blazor Server 依預設，應用程式不會包含 <xref:System.Net.Http.HttpClient> 已設定為服務的服務。 提供 <xref:System.Net.Http.HttpClient> 給 Blazor Server 應用程式。</p><p>如需詳細資訊，請參閱<xref:blazor/call-web-api>。</p><p><xref:System.Net.Http.HttpClient>註冊為範圍服務，而非 singleton。 如需詳細資訊，請參閱 [服務存留期](#service-lifetime) 一節。</p> |
-| <xref:Microsoft.JSInterop.IJSRuntime> | <p>**Blazor WebAssembly**： Singleton</p><p>**Blazor Server**：限域</p> | 代表 javascript 呼叫會分派至其中的 JavaScript 執行時間實例。 如需詳細資訊，請參閱<xref:blazor/call-javascript-from-dotnet>。 |
+| <xref:System.Net.Http.HttpClient> | 具範圍 | <p>提供方法來傳送 HTTP 要求，以及從 URI 所識別的資源接收 HTTP 回應。</p><p><xref:System.Net.Http.HttpClient>應用程式中的實例會 Blazor WebAssembly 使用瀏覽器來處理背景中的 HTTP 流量。</p><p>Blazor Server 依預設，應用程式不會包含 <xref:System.Net.Http.HttpClient> 已設定為服務的服務。 提供 <xref:System.Net.Http.HttpClient> 給 Blazor Server 應用程式。</p><p>如需詳細資訊，請參閱 <xref:blazor/call-web-api> 。</p><p><xref:System.Net.Http.HttpClient>註冊為範圍服務，而非 singleton。 如需詳細資訊，請參閱 [服務存留期](#service-lifetime) 一節。</p> |
+| <xref:Microsoft.JSInterop.IJSRuntime> | <p>**Blazor WebAssembly**： Singleton</p><p>**Blazor Server**：限域</p> | 代表 javascript 呼叫會分派至其中的 JavaScript 執行時間實例。 如需詳細資訊，請參閱 <xref:blazor/call-javascript-from-dotnet> 。 |
 | <xref:Microsoft.AspNetCore.Components.NavigationManager> | <p>**Blazor WebAssembly**： Singleton</p><p>**Blazor Server**：限域</p> | 包含使用 Uri 和流覽狀態的協助程式。 如需詳細資訊，請參閱 [URI 和流覽狀態](xref:blazor/fundamentals/routing#uri-and-navigation-state-helpers)協助程式。 |
 
 自訂服務提供者不會自動提供表格中所列的預設服務。 如果您使用自訂服務提供者，而且需要表格中所顯示的任何服務，請將所需的服務加入至新的服務提供者。
@@ -98,20 +98,20 @@ public void ConfigureServices(IServiceCollection services)
 
 | 存留期 | 描述 |
 | -------- | ----------- |
-| <xref:Microsoft.Extensions.DependencyInjection.ServiceDescriptor.Scoped%2A> | <p>Blazor WebAssembly 應用程式目前不具有 DI 範圍的概念。 `Scoped`-註冊的服務行為類似 `Singleton` 服務。</p><p>裝載 Blazor Server 模型支援 `Scoped` 跨 HTTP 要求的存留期，但在用戶端上載入的元件之間，不會跨 SingalR 連接/線路訊息。 Razor應用程式的頁面或 MVC 部分會以一般方式來處理已設定範圍的服務，並在頁面或視圖之間流覽，或從頁面或視圖切換至元件時，在 *每個 HTTP 要求* 上重新建立服務。 在用戶端上流覽元件時，不會重建已設定範圍的服務，而伺服器的通訊會透過使用者的線路連線來進行， SignalR 而不是透過 HTTP 要求。 在用戶端上的下列元件案例中，會重建範圍服務，因為系統會為使用者建立新的線路：</p><ul><li>使用者關閉瀏覽器視窗。 使用者會開啟新視窗，並流覽回應用程式。</li><li>使用者會在瀏覽器視窗中關閉應用程式的最後一個索引標籤。 使用者會開啟新的索引標籤，並流覽回應用程式。</li><li>使用者選取瀏覽器的 [重載/重新整理] 按鈕。</li></ul><p>如需在應用程式中跨範圍服務保留使用者狀態的詳細資訊 Blazor Server ，請參閱 <xref:blazor/hosting-models?pivots=server> 。</p> |
+| <xref:Microsoft.Extensions.DependencyInjection.ServiceDescriptor.Scoped%2A> | <p>Blazor WebAssembly 應用程式目前不具有 DI 範圍的概念。 `Scoped`-註冊的服務行為類似 `Singleton` 服務。</p><p>裝載 Blazor Server 模型支援 `Scoped` 跨 HTTP 要求的存留期，而不 SignalR 是在用戶端上載入的元件之間的連接/線路訊息之間的存留期。 Razor應用程式的頁面或 MVC 部分會以一般方式來處理已設定範圍的服務，並在頁面或視圖之間流覽，或從頁面或視圖切換至元件時，在 *每個 HTTP 要求* 上重新建立服務。 在用戶端上流覽元件時，不會重建已設定範圍的服務，而伺服器的通訊會透過使用者的線路連線來進行， SignalR 而不是透過 HTTP 要求。 在用戶端上的下列元件案例中，會重建範圍服務，因為系統會為使用者建立新的線路：</p><ul><li>使用者關閉瀏覽器視窗。 使用者會開啟新視窗，並流覽回應用程式。</li><li>使用者會在瀏覽器視窗中關閉應用程式的最後一個索引標籤。 使用者會開啟新的索引標籤，並流覽回應用程式。</li><li>使用者選取瀏覽器的 [重載/重新整理] 按鈕。</li></ul><p>如需在應用程式中跨範圍服務保留使用者狀態的詳細資訊 Blazor Server ，請參閱 <xref:blazor/hosting-models?pivots=server> 。</p> |
 | <xref:Microsoft.Extensions.DependencyInjection.ServiceDescriptor.Singleton%2A> | DI 會建立服務的 *單一實例* 。 所有需要服務的元件 `Singleton` 都會收到相同服務的實例。 |
 | <xref:Microsoft.Extensions.DependencyInjection.ServiceDescriptor.Transient%2A> | 每當元件 `Transient` 從服務容器取得服務的實例時，就會收到服務的 *新實例* 。 |
 
-DI 系統是以 ASP.NET Core 中的 DI 系統為基礎。 如需詳細資訊，請參閱<xref:fundamentals/dependency-injection>。
+DI 系統是以 ASP.NET Core 中的 DI 系統為基礎。 如需詳細資訊，請參閱 <xref:fundamentals/dependency-injection> 。
 
 ## <a name="request-a-service-in-a-component"></a>要求元件中的服務
 
-將服務加入至服務集合之後，請使用[ \@ 插入](xref:mvc/views/razor#inject)指示詞將服務插入至元件 Razor 。 [`@inject`](xref:mvc/views/razor#inject) 有兩個參數：
+將服務加入至服務集合之後，請使用指示詞將服務插入元件中 [`@inject`](xref:mvc/views/razor#inject) Razor ，其中有兩個參數：
 
 * 類型：要插入的服務類型。
 * 屬性：接收插入的 app service 之屬性的名稱。 屬性不需要手動建立。 編譯器會建立屬性。
 
-如需詳細資訊，請參閱<xref:mvc/views/dependency-injection>。
+如需詳細資訊，請參閱 <xref:mvc/views/dependency-injection> 。
 
 使用多個 [`@inject`](xref:mvc/views/razor#inject) 語句插入不同的服務。
 
@@ -190,9 +190,7 @@ public class DataAccess : IDataAccess
 
 ## <a name="use-of-an-entity-framework-core-ef-core-dbcontext-from-di"></a>從 DI 使用 Entity Framework Core (EF Core) DbCoNtext
 
-如需詳細資訊，請參閱<xref:blazor/blazor-server-ef-core>。
-
-::: moniker range="< aspnetcore-5.0"
+如需詳細資訊，請參閱 <xref:blazor/blazor-server-ef-core> 。
 
 ## <a name="detect-transient-disposables"></a>偵測暫時性可處置專案
 
@@ -206,17 +204,17 @@ public class DataAccess : IDataAccess
 
 `TransientDisposable` () 偵測到下列範例中的 `Program.cs` ：
 
-<!-- moniker range=">= aspnetcore-5.0"
+::: moniker range=">= aspnetcore-5.0"
 
 [!code-csharp[](dependency-injection/samples_snapshot/5.x/transient-disposables/DetectIncorrectUsagesOfTransientDisposables-wasm-program.cs?highlight=6,9,17,22-25)]
 
-moniker-end 
+::: moniker-end 
 
-moniker range="< aspnetcore-5.0" -->
+::: moniker range="< aspnetcore-5.0"
 
 [!code-csharp[](dependency-injection/samples_snapshot/3.x/transient-disposables/DetectIncorrectUsagesOfTransientDisposables-wasm-program.cs?highlight=6,9,17,22-25)]
 
-<!-- moniker-end -->
+::: moniker-end
 
 ::: zone-end
 
@@ -242,7 +240,20 @@ using Microsoft.Extensions.DependencyInjection;
 
 ::: zone-end
 
-::: moniker-end
+應用程式可以在不擲回例外狀況的情況下註冊暫時性可處置專案。 不過，嘗試在中解析暫時性可處置的結果 <xref:System.InvalidOperationException> ，如下列範例所示。
+
+`Pages/TransientDisposable.razor`:
+
+```razor
+@page "/transient-disposable"
+@inject TransientDisposable TransientDisposable
+
+<h1>Transient Disposable Detection</h1>
+```
+
+流覽至中的 `TransientDisposable` 元件 `/transient-disposable` ， <xref:System.InvalidOperationException> 當架構嘗試建立的實例時，就會擲回 `TransientDisposable` 。
+
+> InvalidOperationException：嘗試在錯誤的範圍內解析暫時性可處置的服務 TransientDisposable。 \<T>針對您嘗試解析的服務 ' t '，請使用 ' OwningComponentBase ' 元件基底類別。
 
 ## <a name="additional-resources"></a>其他資源
 

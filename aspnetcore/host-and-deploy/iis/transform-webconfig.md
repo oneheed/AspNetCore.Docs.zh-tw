@@ -19,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: host-and-deploy/iis/transform-webconfig
-ms.openlocfilehash: 259b5bf9bf2a6de987494b5771897355e3ea67db
-ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
+ms.openlocfilehash: d264aaee7889ec1c8ee0fe6b1f52ccc4cf355745
+ms.sourcegitcommit: 3593c4efa707edeaaceffbfa544f99f41fc62535
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 10/30/2020
-ms.locfileid: "93057308"
+ms.lasthandoff: 01/04/2021
+ms.locfileid: "97854622"
 ---
 # <a name="transform-webconfig"></a>轉換 web.config
 
@@ -32,10 +32,10 @@ ms.locfileid: "93057308"
 
 對 *web.config* 檔案的轉換可在發佈應用程式時，根據下列條件進行套用：
 
-* [組建設定](#build-configuration)
+* [建置組態](#build-configuration)
 * [設定檔](#profile)
 * [環境](#environment)
-* [Custom](#custom)
+* [自訂](#custom)
 
 這些轉換會針對下列任一 *web.config* 產生案例進行：
 
@@ -110,7 +110,7 @@ dotnet publish --configuration Release /p:PublishProfile=FolderProfile
 
 設定檔名稱的 MSBuild 屬性為 `$(PublishProfile)`。
 
-如果未傳遞任何設定檔，則預設的設定檔名稱為 **FileSystem** ，而如果檔案存在於應用程式的內容根目錄中，就會套用 *web.FileSystem.config* 。
+如果未傳遞任何設定檔，則預設的設定檔名稱為 **FileSystem**，而如果檔案存在於應用程式的內容根目錄中，就會套用 *web.FileSystem.config*。
 
 ## <a name="environment"></a>環境
 
@@ -118,7 +118,7 @@ dotnet publish --configuration Release /p:PublishProfile=FolderProfile
 
 請為每個需要進行 *web.config* 轉換的 [環境](xref:fundamentals/environments)包含一個 *web.{ENVIRONMENT}.config* 檔案。
 
-在下列範例中，會在生產環境的 *web.Production.config* 中設定一個環境特定的環境變數：
+在下列範例中，環境特定環境變數是在生產環境的 *web.Production.config* 中設定：
 
 ```xml
 <?xml version="1.0"?>

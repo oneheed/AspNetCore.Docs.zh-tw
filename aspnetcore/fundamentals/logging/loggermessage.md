@@ -20,10 +20,10 @@ no-loc:
 - SignalR
 uid: fundamentals/logging/loggermessage
 ms.openlocfilehash: 0224e768bd0e016eac5165dc4d9745f4b0867094
-ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
+ms.sourcegitcommit: 3593c4efa707edeaaceffbfa544f99f41fc62535
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 10/30/2020
+ms.lasthandoff: 01/04/2021
 ms.locfileid: "93060452"
 ---
 # <a name="high-performance-logging-with-loggermessage-in-aspnet-core"></a>在 ASP.NET Core 中使用 LoggerMessage 進行高效能記錄
@@ -47,7 +47,7 @@ ms.locfileid: "93060452"
 
 提供給 <xref:Microsoft.Extensions.Logging.LoggerMessage.Define*> 方法的字串是範本，而不是內插字串。 預留位置會依照指定類型的順序填入。 範本中的預留位置名稱應該是描述性名稱，而且在範本之間應該保持一致。 它們將作為結構化記錄資料內的屬性名稱。 建議您針對預留位置名稱使用 [Pascal 大小寫](/dotnet/standard/design-guidelines/capitalization-conventions)。 例如，`{Count}`、`{FirstName}`。
 
-每個記錄訊息都是 [LoggerMessage.Define](xref:Microsoft.Extensions.Logging.LoggerMessage.Define*) 所建立之靜態欄位中保存的 <xref:System.Action>。 例如，範例應用程式會建立一個欄位來描述 Index 頁面之 GET 要求的記錄訊息 ( *Internal/LoggerExtensions.cs* )：
+每個記錄訊息都是 [LoggerMessage.Define](xref:Microsoft.Extensions.Logging.LoggerMessage.Define*) 所建立之靜態欄位中保存的 <xref:System.Action>。 例如，範例應用程式會建立一個欄位來描述 Index 頁面之 GET 要求的記錄訊息 (*Internal/LoggerExtensions.cs*)：
 
 [!code-csharp[](loggermessage/samples/3.x/LoggerMessageSample/Internal/LoggerExtensions.cs?name=snippet1)]
 
@@ -95,7 +95,7 @@ info: LoggerMessageSample.Pages.IndexModel[1]
 
 [!code-csharp[](loggermessage/samples/3.x/LoggerMessageSample/Internal/LoggerExtensions.cs?name=snippet10)]
 
-在索引頁面的頁面模型中 (會呼叫 *Pages/Index. cshtml* ) ， `QuoteAdded` 以記錄訊息：
+在索引頁面的頁面模型中 (會呼叫 *Pages/Index. cshtml*) ， `QuoteAdded` 以記錄訊息：
 
 [!code-csharp[](loggermessage/samples/3.x/LoggerMessageSample/Pages/Index.cshtml.cs?name=snippet3&highlight=6)]
 
@@ -108,7 +108,7 @@ info: LoggerMessageSample.Pages.IndexModel[2]
           consequences of avoiding reality. - Ayn Rand')
 ```
 
-範例應用程式會針對報價刪除來實行 [try-catch](/dotnet/csharp/language-reference/keywords/try-catch) 模式。 成功的刪除作業會記錄告知性訊息。 如果擲回例外狀況，則會針對刪除作業記錄一則錯誤訊息。 失敗刪除作業的記錄訊息包含例外狀況堆疊追蹤 ( *Internal/LoggerExtensions.cs* )：
+範例應用程式會針對報價刪除來實行 [try-catch](/dotnet/csharp/language-reference/keywords/try-catch) 模式。 成功的刪除作業會記錄告知性訊息。 如果擲回例外狀況，則會針對刪除作業記錄一則錯誤訊息。 失敗刪除作業的記錄訊息包含例外狀況堆疊追蹤 (*Internal/LoggerExtensions.cs*)：
 
 [!code-csharp[](loggermessage/samples/3.x/LoggerMessageSample/Internal/LoggerExtensions.cs?name=snippet3)]
 
@@ -118,7 +118,7 @@ info: LoggerMessageSample.Pages.IndexModel[2]
 
 [!code-csharp[](loggermessage/samples/3.x/LoggerMessageSample/Internal/LoggerExtensions.cs?name=snippet11)]
 
-在 Index 頁面的頁面模型中，成功的引述刪除會在記錄器上呼叫 `QuoteDeleted` 方法。 找不到要刪除的引述時，就會擲回 <xref:System.ArgumentNullException>。 [Try-catch 語句會](/dotnet/csharp/language-reference/keywords/try-catch)攔截例外狀況，並藉由在 `QuoteDeleteFailed` [catch](/dotnet/csharp/language-reference/keywords/try-catch)區塊中的記錄器上呼叫方法來記錄， ( *Pages/Index. .cs* ) ：
+在 Index 頁面的頁面模型中，成功的引述刪除會在記錄器上呼叫 `QuoteDeleted` 方法。 找不到要刪除的引述時，就會擲回 <xref:System.ArgumentNullException>。 [Try-catch 語句會](/dotnet/csharp/language-reference/keywords/try-catch)攔截例外狀況，並藉由在 `QuoteDeleteFailed` [catch](/dotnet/csharp/language-reference/keywords/try-catch)區塊中的記錄器上呼叫方法來記錄， (*Pages/Index. .cs*) ：
 
 [!code-csharp[](loggermessage/samples/3.x/LoggerMessageSample/Pages/Index.cshtml.cs?name=snippet5&highlight=9,13)]
 
@@ -153,13 +153,13 @@ System.NullReferenceException: Object reference not set to an instance of an obj
 
 使用 <xref:Microsoft.Extensions.Logging.LoggerMessage.DefineScope*> 方法，定義要套用至一系列記錄訊息的[記錄範圍](xref:fundamentals/logging/index#log-scopes)。
 
-範例應用程式具有 [全部清除]  按鈕，可用來刪除資料庫中的所有引述。 也可透過逐一移除引述來刪除它們。 每次刪除引述時，就會在記錄器上呼叫 `QuoteDeleted` 方法。 記錄範圍會新增至這些記錄訊息。
+範例應用程式具有 [全部清除] 按鈕，可用來刪除資料庫中的所有引述。 也可透過逐一移除引述來刪除它們。 每次刪除引述時，就會在記錄器上呼叫 `QuoteDeleted` 方法。 記錄範圍會新增至這些記錄訊息。
 
 `IncludeScopes`在的主控台記錄器區段中啟用 *appsettings.json* ：
 
 [!code-json[](loggermessage/samples/3.x/LoggerMessageSample/appsettings.json?highlight=3-5)]
 
-若要建立記錄範圍，請新增欄位以保留該範圍的 <xref:System.Func%601> 委派。 範例應用程式會建立稱為 `_allQuotesDeletedScope` ( *Internal/LoggerExtensions.cs* ) 的欄位：
+若要建立記錄範圍，請新增欄位以保留該範圍的 <xref:System.Func%601> 委派。 範例應用程式會建立稱為 `_allQuotesDeletedScope` (*Internal/LoggerExtensions.cs*) 的欄位：
 
 [!code-csharp[](loggermessage/samples/3.x/LoggerMessageSample/Internal/LoggerExtensions.cs?name=snippet4)]
 
@@ -213,7 +213,7 @@ info: LoggerMessageSample.Pages.IndexModel[4]
 
 提供給 <xref:Microsoft.Extensions.Logging.LoggerMessage.Define*> 方法的字串是範本，而不是內插字串。 預留位置會依照指定類型的順序填入。 範本中的預留位置名稱應該是描述性名稱，而且在範本之間應該保持一致。 它們將作為結構化記錄資料內的屬性名稱。 建議您針對預留位置名稱使用 [Pascal 大小寫](/dotnet/standard/design-guidelines/capitalization-conventions)。 例如，`{Count}`、`{FirstName}`。
 
-每個記錄訊息都是 [LoggerMessage.Define](xref:Microsoft.Extensions.Logging.LoggerMessage.Define*) 所建立之靜態欄位中保存的 <xref:System.Action>。 例如，範例應用程式會建立一個欄位來描述 Index 頁面之 GET 要求的記錄訊息 ( *Internal/LoggerExtensions.cs* )：
+每個記錄訊息都是 [LoggerMessage.Define](xref:Microsoft.Extensions.Logging.LoggerMessage.Define*) 所建立之靜態欄位中保存的 <xref:System.Action>。 例如，範例應用程式會建立一個欄位來描述 Index 頁面之 GET 要求的記錄訊息 (*Internal/LoggerExtensions.cs*)：
 
 [!code-csharp[](loggermessage/samples/2.x/LoggerMessageSample/Internal/LoggerExtensions.cs?name=snippet1)]
 
@@ -261,7 +261,7 @@ info: LoggerMessageSample.Pages.IndexModel[1]
 
 [!code-csharp[](loggermessage/samples/2.x/LoggerMessageSample/Internal/LoggerExtensions.cs?name=snippet10)]
 
-在索引頁面的頁面模型中 (會呼叫 *Pages/Index. cshtml* ) ， `QuoteAdded` 以記錄訊息：
+在索引頁面的頁面模型中 (會呼叫 *Pages/Index. cshtml*) ， `QuoteAdded` 以記錄訊息：
 
 [!code-csharp[](loggermessage/samples/2.x/LoggerMessageSample/Pages/Index.cshtml.cs?name=snippet3&highlight=6)]
 
@@ -274,7 +274,7 @@ info: LoggerMessageSample.Pages.IndexModel[2]
           consequences of avoiding reality. - Ayn Rand')
 ```
 
-範例應用程式會針對報價刪除來實行 [try-catch](/dotnet/csharp/language-reference/keywords/try-catch) 模式。 成功的刪除作業會記錄告知性訊息。 如果擲回例外狀況，則會針對刪除作業記錄一則錯誤訊息。 失敗刪除作業的記錄訊息包含例外狀況堆疊追蹤 ( *Internal/LoggerExtensions.cs* )：
+範例應用程式會針對報價刪除來實行 [try-catch](/dotnet/csharp/language-reference/keywords/try-catch) 模式。 成功的刪除作業會記錄告知性訊息。 如果擲回例外狀況，則會針對刪除作業記錄一則錯誤訊息。 失敗刪除作業的記錄訊息包含例外狀況堆疊追蹤 (*Internal/LoggerExtensions.cs*)：
 
 [!code-csharp[](loggermessage/samples/2.x/LoggerMessageSample/Internal/LoggerExtensions.cs?name=snippet3)]
 
@@ -284,7 +284,7 @@ info: LoggerMessageSample.Pages.IndexModel[2]
 
 [!code-csharp[](loggermessage/samples/2.x/LoggerMessageSample/Internal/LoggerExtensions.cs?name=snippet11)]
 
-在 Index 頁面的頁面模型中，成功的引述刪除會在記錄器上呼叫 `QuoteDeleted` 方法。 找不到要刪除的引述時，就會擲回 <xref:System.ArgumentNullException>。 [Try-catch 語句會](/dotnet/csharp/language-reference/keywords/try-catch)攔截例外狀況，並藉由在 `QuoteDeleteFailed` [catch](/dotnet/csharp/language-reference/keywords/try-catch)區塊中的記錄器上呼叫方法來記錄， ( *Pages/Index. .cs* ) ：
+在 Index 頁面的頁面模型中，成功的引述刪除會在記錄器上呼叫 `QuoteDeleted` 方法。 找不到要刪除的引述時，就會擲回 <xref:System.ArgumentNullException>。 [Try-catch 語句會](/dotnet/csharp/language-reference/keywords/try-catch)攔截例外狀況，並藉由在 `QuoteDeleteFailed` [catch](/dotnet/csharp/language-reference/keywords/try-catch)區塊中的記錄器上呼叫方法來記錄， (*Pages/Index. .cs*) ：
 
 [!code-csharp[](loggermessage/samples/2.x/LoggerMessageSample/Pages/Index.cshtml.cs?name=snippet5&highlight=14,18)]
 
@@ -321,13 +321,13 @@ Parameter name: entity
 
 使用 <xref:Microsoft.Extensions.Logging.LoggerMessage.DefineScope*> 方法，定義要套用至一系列記錄訊息的[記錄範圍](xref:fundamentals/logging/index#log-scopes)。
 
-範例應用程式具有 [全部清除]  按鈕，可用來刪除資料庫中的所有引述。 也可透過逐一移除引述來刪除它們。 每次刪除引述時，就會在記錄器上呼叫 `QuoteDeleted` 方法。 記錄範圍會新增至這些記錄訊息。
+範例應用程式具有 [全部清除] 按鈕，可用來刪除資料庫中的所有引述。 也可透過逐一移除引述來刪除它們。 每次刪除引述時，就會在記錄器上呼叫 `QuoteDeleted` 方法。 記錄範圍會新增至這些記錄訊息。
 
 `IncludeScopes`在的主控台記錄器區段中啟用 *appsettings.json* ：
 
 [!code-json[](loggermessage/samples/2.x/LoggerMessageSample/appsettings.json?highlight=3-5)]
 
-若要建立記錄範圍，請新增欄位以保留該範圍的 <xref:System.Func%601> 委派。 範例應用程式會建立稱為 `_allQuotesDeletedScope` ( *Internal/LoggerExtensions.cs* ) 的欄位：
+若要建立記錄範圍，請新增欄位以保留該範圍的 <xref:System.Func%601> 委派。 範例應用程式會建立稱為 `_allQuotesDeletedScope` (*Internal/LoggerExtensions.cs*) 的欄位：
 
 [!code-csharp[](loggermessage/samples/2.x/LoggerMessageSample/Internal/LoggerExtensions.cs?name=snippet4)]
 
@@ -364,4 +364,4 @@ info: LoggerMessageSample.Pages.IndexModel[4]
 
 ## <a name="additional-resources"></a>其他資源
 
-* [Logging](xref:fundamentals/logging/index)
+* [記錄](xref:fundamentals/logging/index)

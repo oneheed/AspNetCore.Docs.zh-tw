@@ -20,10 +20,10 @@ no-loc:
 - SignalR
 uid: blazor/components/lifecycle
 ms.openlocfilehash: b01b1c70be010ba0ad9bbd2c1114e5d8341b3261
-ms.sourcegitcommit: 6b87f2e064cea02e65dacd206394b44f5c604282
+ms.sourcegitcommit: 3593c4efa707edeaaceffbfa544f99f41fc62535
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 12/15/2020
+ms.lasthandoff: 01/04/2021
 ms.locfileid: "97506860"
 ---
 # <a name="aspnet-core-no-locblazor-lifecycle"></a>ASP.NET Core Blazor 生命週期
@@ -206,13 +206,13 @@ protected override bool ShouldRender()
 
 即使覆 <xref:Microsoft.AspNetCore.Components.ComponentBase.ShouldRender%2A> 寫，仍一律會呈現元件。
 
-如需詳細資訊，請參閱<xref:blazor/webassembly-performance-best-practices#avoid-unnecessary-rendering-of-component-subtrees>。
+如需詳細資訊，請參閱 <xref:blazor/webassembly-performance-best-practices#avoid-unnecessary-rendering-of-component-subtrees> 。
 
 ## <a name="state-changes"></a>狀態變更
 
 <xref:Microsoft.AspNetCore.Components.ComponentBase.StateHasChanged%2A> 通知元件其狀態已變更。 當適用時，呼叫 <xref:Microsoft.AspNetCore.Components.ComponentBase.StateHasChanged%2A> 會導致元件保存。
 
-<xref:Microsoft.AspNetCore.Components.ComponentBase.StateHasChanged%2A> 會自動針對 <xref:Microsoft.AspNetCore.Components.EventCallback> 方法呼叫。 如需詳細資訊，請參閱<xref:blazor/components/event-handling#eventcallback>。
+<xref:Microsoft.AspNetCore.Components.ComponentBase.StateHasChanged%2A> 會自動針對 <xref:Microsoft.AspNetCore.Components.EventCallback> 方法呼叫。 如需詳細資訊，請參閱 <xref:blazor/components/event-handling#eventcallback> 。
 
 ## <a name="handle-incomplete-async-actions-at-render"></a>在轉譯時處理未完成的非同步動作
 

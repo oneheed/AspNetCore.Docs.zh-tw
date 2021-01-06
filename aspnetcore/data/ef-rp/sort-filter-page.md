@@ -19,10 +19,10 @@ no-loc:
 - SignalR
 uid: data/ef-rp/sort-filter-page
 ms.openlocfilehash: 51a1e2a90259898262ac655b7a0e8a55d766f0c7
-ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
+ms.sourcegitcommit: 3593c4efa707edeaaceffbfa544f99f41fc62535
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 10/30/2020
+ms.lasthandoff: 01/04/2021
 ms.locfileid: "93061037"
 ---
 # <a name="part-3-no-locrazor-pages-with-ef-core-in-aspnet-core---sort-filter-paging"></a>第3部分： Razor 有 EF Core 在 ASP.NET Core 排序、篩選、分頁中的頁面
@@ -62,7 +62,7 @@ ms.locfileid: "93061037"
 
 [!code-csharp[Main](intro/samples/cu30snapshots/3-sorting/Pages/Students/Index1.cshtml.cs?name=snippet_Ternary)]
 
-程式碼會使用 c # [條件運算子？：](/dotnet/csharp/language-reference/operators/conditional-operator)。 `?:`運算子是三元運算子，它會採用三個運算元。 第一行指定當 `sortOrder` 是 null 或空白時， `NameSort` 會設定為 `name_desc` 。 如果 `sortOrder` 為 * *_not_* _ null 或空白， `NameSort` 則會設為空字串。
+程式碼會使用 c # [條件運算子？：](/dotnet/csharp/language-reference/operators/conditional-operator)。 `?:`運算子是三元運算子，它會採用三個運算元。 第一行指定當 `sortOrder` 是 null 或空白時， `NameSort` 會設定為 `name_desc` 。 如果 `sortOrder` 為 **_not_* _ null 或空白， `NameSort` 則會設為空字串。
 
 這兩個陳述式讓頁面能夠設定資料行標題超連結，如下所示：
 
@@ -98,7 +98,7 @@ ms.locfileid: "93061037"
 
 若要確認該排序運作正常：
 
-* 執行應用程式並選取 [Students]  索引標籤。
+* 執行應用程式並選取 [Students] 索引標籤。
 * 按一下資料行標題。
 
 ## <a name="add-filtering"></a>新增篩選
@@ -149,7 +149,7 @@ Where(s => s.LastName.ToUpper().Contains(searchString.ToUpper())`
 
 測試應用程式：
 
-* 選取 [Students]  索引標籤並輸入搜尋字串。 如果您使用 SQLite，則只有在您實作先前示範的選擇性 `ToUpper` 程式碼時，篩選才會不區分大小寫。
+* 選取 [Students] 索引標籤並輸入搜尋字串。 如果您使用 SQLite，則只有在您實作先前示範的選擇性 `ToUpper` 程式碼時，篩選才會不區分大小寫。
 
 * 選取 [搜尋]。
 
@@ -161,7 +161,7 @@ https://localhost:5001/Students?SearchString=an
 
 如果頁面已加上書籤，那麼書籤會包含該頁面的 URL 和 `SearchString` 查詢字串。 `form` 中的 `method="get"` 導致查詢字串的產生。
 
-目前，選取資料行標題排序連結時，[搜尋]  方塊中的篩選值將會遺失。 遺失的篩選值會在下一節修正。
+目前，選取資料行標題排序連結時，[搜尋] 方塊中的篩選值將會遺失。 遺失的篩選值會在下一節修正。
 
 ## <a name="add-paging"></a>新增分頁
 
@@ -249,7 +249,7 @@ https://localhost:5001/Students?SearchString=an
 
 建立 *Models/SchoolViewModels* 資料夾。
 
-使用下列程式碼建立 *SchoolViewModels/EnrollmentDateGroup.cs* ：
+使用下列程式碼建立 *SchoolViewModels/EnrollmentDateGroup.cs*：
 
 [!code-csharp[Main](intro/samples/cu30/Models/SchoolViewModels/EnrollmentDateGroup.cs)]
 
@@ -352,9 +352,9 @@ LINQ 陳述式會依註冊日期將學生實體組成群組、計算每個群組
 
 若要確認該排序運作正常：
 
-* 執行應用程式並選取 [Students]  索引標籤。
-* 按一下 [姓氏]  。
-* 按一下 [註冊日期]  。
+* 執行應用程式並選取 [Students] 索引標籤。
+* 按一下 [姓氏]。
+* 按一下 [註冊日期]。
 
 若要更深入了解這個程式碼：
 
@@ -405,7 +405,7 @@ LINQ 陳述式會依註冊日期將學生實體組成群組、計算每個群組
 
 測試應用程式：
 
-* 選取 [Students]  索引標籤並輸入搜尋字串。
+* 選取 [Students] 索引標籤並輸入搜尋字串。
 * 選取 [搜尋]。
 
 請注意，URL 中包含了搜尋字串。
@@ -416,7 +416,7 @@ http://localhost:5000/Students?SearchString=an
 
 如果頁面已加上書籤，那麼書籤會包含該頁面的 URL 和 `SearchString` 查詢字串。 `form` 中的 `method="get"` 導致查詢字串的產生。
 
-目前，選取資料行標題排序連結時，[搜尋]  方塊中的篩選值將會遺失。 遺失的篩選值會在下一節修正。
+目前，選取資料行標題排序連結時，[搜尋] 方塊中的篩選值將會遺失。 遺失的篩選值會在下一節修正。
 
 ## <a name="add-paging-functionality-to-the-students-index-page"></a>將分頁功能新增至 Students 的 [索引] 頁面
 
@@ -504,7 +504,7 @@ http://localhost:5000/Students?SearchString=an
 
 ## <a name="update-the-about-page-to-show-student-statistics"></a>更新 About 頁面以顯示學生統計資料
 
-在此步驟中， *Pages/About.cshtml* 會更新為顯示在每一個註冊日期中，共有多少學生註冊。 此更新會使用群組，並包含下列步驟：
+在此步驟中，*Pages/About.cshtml* 會更新為顯示在每一個註冊日期中，共有多少學生註冊。 此更新會使用群組，並包含下列步驟：
 
 * 為 **About** 頁面所使用的資料，建立檢視模型。
 * 更新 About 頁面以使用檢視模型。
@@ -513,7 +513,7 @@ http://localhost:5000/Students?SearchString=an
 
 在 *Models* 資料夾中建立 *SchoolViewModels* 資料夾。
 
-在 *SchoolViewModels* 資料夾中，以下列程式碼新增 *EnrollmentDateGroup.cs* ：
+在 *SchoolViewModels* 資料夾中，以下列程式碼新增 *EnrollmentDateGroup.cs*：
 
 [!code-csharp[](intro/samples/cu21/Models/SchoolViewModels/EnrollmentDateGroup.cs)]
 

@@ -20,10 +20,10 @@ no-loc:
 - SignalR
 uid: blazor/security/content-security-policy
 ms.openlocfilehash: 744449240fabc3dae317d0d7bc9090311521c224
-ms.sourcegitcommit: 1ea3f23bec63e96ffc3a927992f30a5fc0de3ff9
+ms.sourcegitcommit: 3593c4efa707edeaaceffbfa544f99f41fc62535
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 11/12/2020
+ms.lasthandoff: 01/04/2021
 ms.locfileid: "94570116"
 ---
 # <a name="enforce-a-content-security-policy-for-aspnet-core-no-locblazor"></a>針對 ASP.NET Core 強制執行內容安全性原則 Blazor
@@ -88,7 +88,7 @@ ms.locfileid: "94570116"
 
 ### Blazor WebAssembly
 
-在 [主機] 頁面的 [內容] 中，套用 [原則指示詞] `<head>` `wwwroot/index.html` 區段中所述的指示詞： [Policy directives](#policy-directives)
+在 [主機] 頁面的 [內容] 中，套用 [原則指示詞] `<head>` `wwwroot/index.html` 區段中所述的指示詞： [](#policy-directives)
 
 ::: moniker range=">= aspnetcore-5.0"
 
@@ -142,7 +142,7 @@ ms.locfileid: "94570116"
 
 ### Blazor Server
 
-在 [主機] 頁面的 [內容] 中，套用 [原則指示詞] `<head>` `Pages/_Host.cshtml` 區段中所述的指示詞： [Policy directives](#policy-directives)
+在 [主機] 頁面的 [內容] 中，套用 [原則指示詞] `<head>` `Pages/_Host.cshtml` 區段中所述的指示詞： [](#policy-directives)
 
 ::: moniker range=">= aspnetcore-5.0"
 
@@ -211,7 +211,7 @@ ms.locfileid: "94570116"
 * [報表至](https://developer.mozilla.org/docs/Web/HTTP/Headers/Content-Security-Policy/report-to)
 * [報告-uri](https://developer.mozilla.org/docs/Web/HTTP/Headers/Content-Security-Policy/report-uri)
 
-雖然不再 `report-uri` 建議使用，但 `report-to` 在所有主要瀏覽器都支援之前，都應該使用這兩個指示詞。 請勿單獨使用 `report-uri` ，因為的支援隨時 `report-uri` 都可從 *at any time* 瀏覽器卸載。 `report-uri`當完全受支援時，請移除原則中的支援 `report-to` 。 若要追蹤的採用 `report-to` ，請參閱 [我可以使用： report to](https://caniuse.com/#feat=mdn-http_headers_csp_content-security-policy_report-to)。
+雖然不再 `report-uri` 建議使用，但 `report-to` 在所有主要瀏覽器都支援之前，都應該使用這兩個指示詞。 請勿單獨使用 `report-uri` ，因為的支援隨時 `report-uri` 都可從瀏覽器卸載。 `report-uri`當完全受支援時，請移除原則中的支援 `report-to` 。 若要追蹤的採用 `report-to` ，請參閱 [我可以使用： report to](https://caniuse.com/#feat=mdn-http_headers_csp_content-security-policy_report-to)。
 
 每次發行時測試並更新應用程式的原則。
 

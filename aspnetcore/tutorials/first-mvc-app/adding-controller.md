@@ -18,10 +18,10 @@ no-loc:
 - SignalR
 uid: tutorials/first-mvc-app/adding-controller
 ms.openlocfilehash: e51edc15b14a5bdd1d53e547e0b469ad608f46d0
-ms.sourcegitcommit: fb208f907249cc7aab029afff941a0266c187050
+ms.sourcegitcommit: 3593c4efa707edeaaceffbfa544f99f41fc62535
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 11/17/2020
+ms.lasthandoff: 01/04/2021
 ms.locfileid: "94688399"
 ---
 # <a name="part-2-add-a-controller-to-an-aspnet-core-mvc-app"></a>第2部分：將控制器新增至 ASP.NET Core MVC 應用程式
@@ -55,7 +55,7 @@ MVC 模式可協助您建立應用程式，用來隔離應用程的不同層面 
 
 * 在 [ **加入新專案-MvcMovie] 對話方塊** 中，輸入 **HelloWorldController.cs** ，然後選取 [ **加入**]。
 
-# <a name="visual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code) \(英文\)
+# <a name="visual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code)
 
 選取 **總管** 圖示，然後 Control+按一下 (按一下滑鼠右鍵) [控制器] > [新增檔案]，將新檔案命名為 *HelloWorldController.cs*。
 
@@ -104,7 +104,7 @@ MVC 會根據傳入 URL 叫用控制器類別 (和其中的動作方法)。 MVC 
 
 ![顯示應用程式回應 "This is the Welcome action method" 的瀏覽器視窗](~/tutorials/first-mvc-app/adding-controller/_static/welcome.png)
 
-修改程式碼 ，將 URL 中的某些參數資訊傳遞到控制器。 例如 `/HelloWorld/Welcome?name=Rick&numtimes=4`。 變更 `Welcome` 方法以包含兩個參數，如下列程式碼所示。
+修改程式碼 ，將 URL 中的某些參數資訊傳遞到控制器。 例如： `/HelloWorld/Welcome?name=Rick&numtimes=4` 。 變更 `Welcome` 方法以包含兩個參數，如下列程式碼所示。
 
 [!code-csharp[](~/tutorials/first-mvc-app/start-mvc/sample/MvcMovie/Controllers/HelloWorldController.cs?name=snippet_2)]
 
@@ -169,7 +169,7 @@ MVC 模式可協助您建立應用程式，用來隔離應用程的不同層面 
 
 * 在 [Add Empty MVC Controller] \(新增空白 MVC 控制器\) 對話方塊中，輸入 **HelloWorldController**，然後選取 [新增]。
 
-# <a name="visual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code) \(英文\)
+# <a name="visual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code)
 
 選取 **總管** 圖示，然後 Control+按一下 (按一下滑鼠右鍵) [控制器] > [新增檔案]，將新檔案命名為 *HelloWorldController.cs*。
 
@@ -223,7 +223,7 @@ Remove link for simplified tutorial.
 
 ![顯示應用程式回應 "This is the Welcome action method" 的瀏覽器視窗](~/tutorials/first-mvc-app/adding-controller/_static/welcome.png)
 
-修改程式碼 ，將 URL 中的某些參數資訊傳遞到控制器。 例如 `/HelloWorld/Welcome?name=Rick&numtimes=4`。 變更 `Welcome` 方法以包含兩個參數，如下列程式碼所示。
+修改程式碼 ，將 URL 中的某些參數資訊傳遞到控制器。 例如： `/HelloWorld/Welcome?name=Rick&numtimes=4` 。 變更 `Welcome` 方法以包含兩個參數，如下列程式碼所示。
 
 [!code-csharp[](~/tutorials/first-mvc-app/start-mvc/sample/MvcMovie/Controllers/HelloWorldController.cs?name=snippet_2)]
 

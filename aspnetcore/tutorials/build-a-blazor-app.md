@@ -19,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: tutorials/build-a-blazor-app
-ms.openlocfilehash: 87626ff30589de82a04c95634fc0dcbcf2eeac18
-ms.sourcegitcommit: 6b87f2e064cea02e65dacd206394b44f5c604282
+ms.openlocfilehash: 6659b075f54292d9546466919f6842b920e6ece1
+ms.sourcegitcommit: 3593c4efa707edeaaceffbfa544f99f41fc62535
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 12/15/2020
-ms.locfileid: "97507003"
+ms.lasthandoff: 01/04/2021
+ms.locfileid: "97808734"
 ---
 # <a name="build-a-no-locblazor-todo-list-app"></a>建立 Blazor 待辦事項清單應用程式
 
@@ -40,7 +40,7 @@ ms.locfileid: "97507003"
 
 在本教學課程結尾處，您將會有一個工作 todo 清單應用程式。
 
-## <a name="prerequisites"></a>Prerequisites
+## <a name="prerequisites"></a>先決條件
 
 ::: moniker range=">= aspnetcore-5.0"
 
@@ -83,7 +83,7 @@ ms.locfileid: "97507003"
 
    `Pages/Todo.razor`:
 
-   [!code-razor[](build-a-blazor-app/samples_snapshot/ToDo0.razor?highlight=1)]
+   [!code-razor[](build-a-blazor-app/samples_snapshot/Todo0.razor?highlight=1)]
 
    儲存 `Pages/Todo.razor` 檔案。
 
@@ -116,11 +116,11 @@ ms.locfileid: "97507003"
 
    `Pages/Todo.razor`:
 
-   [!code-razor[](build-a-blazor-app/samples_snapshot/ToDo2.razor?highlight=5-10,13)]
+   [!code-razor[](build-a-blazor-app/samples_snapshot/Todo2.razor?highlight=5-10,13)]
 
 1. 應用程式需要 UI 元素，才能將待辦事項新增至清單。 在未排序清單 (`<ul>...</ul>`) 下方新增文字輸出 (`<input>`) 與按鈕 (`<button>`)：
 
-   [!code-razor[](build-a-blazor-app/samples_snapshot/ToDo3.razor?highlight=12-13)]
+   [!code-razor[](build-a-blazor-app/samples_snapshot/Todo3.razor?highlight=12-13)]
 
 1. 儲存檔案 `TodoItem.cs` 和更新的檔案 `Pages/Todo.razor` 。 在命令列介面中，應用程式會在儲存檔案時自動重建。 瀏覽器會暫時失去其與應用程式的連線，然後在重新建立連接時重載頁面。
 
@@ -128,11 +128,11 @@ ms.locfileid: "97507003"
 
 1. 將 `AddTodo` 方法新增至 `Todo` 元件，並使用屬性註冊按鈕的方法 `@onclick` 。 當選取按鈕時，就會呼叫 `AddTodo` C# 方法：
 
-   [!code-razor[](build-a-blazor-app/samples_snapshot/ToDo4.razor?highlight=2,7-10)]
+   [!code-razor[](build-a-blazor-app/samples_snapshot/Todo4.razor?highlight=2,7-10)]
 
 1. 若要取得新待辦事項的標題，請 `newTodo` 在區塊頂端加入字串欄位 `@code` ：
 
-   [!code-razor[](build-a-blazor-app/samples_snapshot/ToDo5.razor?highlight=3)]
+   [!code-razor[](build-a-blazor-app/samples_snapshot/Todo5.razor?highlight=3)]
 
    修改要與屬性系結的 text `<input>` 元素 `newTodo` `@bind` ：
 
@@ -142,13 +142,13 @@ ms.locfileid: "97507003"
 
 1. 更新 `AddTodo` 方法，將 `TodoItem` 與指定的標題新增至清單。 請將 `newTodo` 設定為空字串，以清除文字輸入的值：
 
-   [!code-razor[](build-a-blazor-app/samples_snapshot/ToDo6.razor?highlight=19-26)]
+   [!code-razor[](build-a-blazor-app/samples_snapshot/Todo6.razor?highlight=19-26)]
 
-1. 儲存 `Pages/ToDo.razor` 檔案。 應用程式會在命令 shell 中自動重建。 當瀏覽器重新連接至應用程式之後，瀏覽器中的頁面會重載。
+1. 儲存 `Pages/Todo.razor` 檔案。 應用程式會在命令 shell 中自動重建。 當瀏覽器重新連接至應用程式之後，瀏覽器中的頁面會重載。
 
 1. 每個待辦事項的標題文字都可設定為可編輯，而核取方塊則可協助使用者記錄已完成的項目。 請為每個待辦事項新增核取方塊輸入，然後將其值繫結至 `IsDone` 屬性。 變更 `@todo.Title` 為系結 `<input>` 至 `todo.Title` 的元素 `@bind` ：
 
-   [!code-razor[](build-a-blazor-app/samples_snapshot/ToDo7.razor?highlight=4-7)]
+   [!code-razor[](build-a-blazor-app/samples_snapshot/Todo7.razor?highlight=4-7)]
 
 1. 更新 `<h3>` 標頭，以顯示未)  (完成的待辦事項數目計數 `IsDone` `false` 。
 
@@ -160,7 +160,7 @@ ms.locfileid: "97507003"
 
    [!code-razor[](build-a-blazor-app/samples_snapshot/Todo1.razor)]
 
-1. 儲存 `Pages/ToDo.razor` 檔案。 應用程式會在命令 shell 中自動重建。 當瀏覽器重新連接至應用程式之後，瀏覽器中的頁面會重載。
+1. 儲存 `Pages/Todo.razor` 檔案。 應用程式會在命令 shell 中自動重建。 當瀏覽器重新連接至應用程式之後，瀏覽器中的頁面會重載。
 
 1. 加入專案、編輯專案，以及標記完成的待辦事項以測試元件。
 

@@ -19,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/host-and-deploy/webassembly
-ms.openlocfilehash: 5983cbc1e0256f7cf8e85fb07f9ba1bbc1bf08db
-ms.sourcegitcommit: c321518bfe367280ef262aecaada287f17fe1bc5
+ms.openlocfilehash: 55289dd7048c08ac61432c7cc062e74d2e69ee24
+ms.sourcegitcommit: 3593c4efa707edeaaceffbfa544f99f41fc62535
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 12/10/2020
-ms.locfileid: "97011867"
+ms.lasthandoff: 01/04/2021
+ms.locfileid: "97753123"
 ---
 # <a name="host-and-deploy-aspnet-core-no-locblazor-webassembly"></a>裝載和部署 ASP.NET Core Blazor WebAssembly
 
@@ -135,9 +135,17 @@ dotnet publish -p:BlazorEnableCompression=false
 
 ### <a name="app-configuration"></a>應用程式組態
 
-若要設定託管 Blazor 解決方案來提供多個 Blazor WebAssembly 應用程式服務：
+託管 Blazor 解決方案可提供多個 Blazor WebAssembly 應用程式。
 
-* 使用現有的主控 Blazor 方案，或從裝載的專案範本建立新的方案 Blazor 。
+> [!NOTE]
+> 本章節中的範例會參考 Visual Studio *解決方案* 的使用方式，但不需要使用 Visual Studio 和 Visual Studio 解決方案來處理託管應用程式案例中的多個用戶端應用程式 Blazor WebAssembly 。 如果您未使用 Visual Studio，請略過檔案 `{SOLUTION NAME}.sln` 和針對 Visual Studio 所建立的任何其他檔案。
+
+在下例中︰
+
+* 初始 (第一個) 用戶端應用程式是從專案範本建立之方案的預設用戶端專案 Blazor WebAssembly 。 第一個用戶端應用程式可以在瀏覽器中從 `/FirstApp` 埠5001或主機上的 URL 存取 `firstapp.com` 。
+* 第二個用戶端應用程式會加入至方案中 `SecondBlazorApp.Client` 。 第二個用戶端應用程式可以在瀏覽器中從 `/SecondApp` 埠5002或主機上的 URL 存取 `secondapp.com` 。
+
+使用現有的主控 Blazor 方案，或從裝載的專案範本建立新的方案 Blazor ：
 
 * 在用戶端應用程式的專案檔中，將屬性新增至，並以的 `<StaticWebAssetBasePath>` `<PropertyGroup>` 值 `FirstApp` 設定專案靜態資產的基底路徑：
 
@@ -150,9 +158,19 @@ dotnet publish -p:BlazorEnableCompression=false
 
 * 將第二個用戶端應用程式新增至解決方案：
 
-  * 將名為的資料夾加入 `SecondClient` 方案的資料夾中。
+  * 將名為的資料夾加入 `SecondClient` 方案的資料夾中。 在新增資料夾後，從專案範本建立的方案資料夾會包含下列方案檔和資料夾 `SecondClient` ：
+  
+    * `Client` (資料夾) 
+    * `SecondClient` (資料夾) 
+    * `Server` (資料夾) 
+    * `Shared` (資料夾) 
+    * `{SOLUTION NAME}.sln` (檔案) 
+    
+    預留位置 `{SOLUTION NAME}` 是解決方案的名稱。
+
   * 在 Blazor WebAssembly `SecondBlazorApp.Client` 專案範本的資料夾中，建立名為的應用程式 `SecondClient` Blazor WebAssembly 。
-  * 在應用程式的專案檔中：
+
+  * 在 `SecondBlazorApp.Client` 應用程式的專案檔中：
 
     * 將屬性新增至，其 `<StaticWebAssetBasePath>` 值為 `<PropertyGroup>` `SecondApp` ：
 
@@ -173,14 +191,17 @@ dotnet publish -p:BlazorEnableCompression=false
 
       預留位置 `{SOLUTION NAME}` 是解決方案的名稱。
 
-* 在伺服器應用程式的專案檔中，為新增的用戶端應用程式建立專案參考：
+* 在伺服器應用程式的專案檔中，為新增的 `SecondBlazorApp.Client` 用戶端應用程式建立專案參考：
 
   ```xml
   <ItemGroup>
-    ...
+    <ProjectReference Include="..\Client\{SOLUTION NAME}.Client.csproj" />
     <ProjectReference Include="..\SecondClient\SecondBlazorApp.Client.csproj" />
+    <ProjectReference Include="..\Shared\{SOLUTION NAME}.Shared.csproj" />
   </ItemGroup>
   ```
+  
+  預留位置 `{SOLUTION NAME}` 是解決方案的名稱。
 
 * 在伺服器應用程式的 `Properties/launchSettings.json` 檔案中，設定 `applicationUrl` Kestrel 設定檔 () 的， `{SOLUTION NAME}.Server` 以存取埠5001和5002上的用戶端應用程式：
 
@@ -748,7 +769,7 @@ COPY nginx.conf /etc/nginx/nginx.conf
 
 ## <a name="configure-the-trimmer"></a>設定修剪器
 
-Blazor 在每個發行組建上執行中繼語言 (IL) 修剪，以從輸出元件中移除不必要的 IL。 如需詳細資訊，請參閱<xref:blazor/host-and-deploy/configure-trimmer>。
+Blazor 在每個發行組建上執行中繼語言 (IL) 修剪，以從輸出元件中移除不必要的 IL。 如需詳細資訊，請參閱 <xref:blazor/host-and-deploy/configure-trimmer> 。
 
 ::: moniker-end
 
@@ -756,7 +777,7 @@ Blazor 在每個發行組建上執行中繼語言 (IL) 修剪，以從輸出元�
 
 ## <a name="configure-the-linker"></a>設定連結器
 
-Blazor 在每個發行組建上執行中繼語言 (IL) 連結，以從輸出元件中移除不必要的 IL。 如需詳細資訊，請參閱<xref:blazor/host-and-deploy/configure-linker>。
+Blazor 在每個發行組建上執行中繼語言 (IL) 連結，以從輸出元件中移除不必要的 IL。 如需詳細資訊，請參閱 <xref:blazor/host-and-deploy/configure-linker> 。
 
 ::: moniker-end
 

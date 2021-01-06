@@ -20,10 +20,10 @@ no-loc:
 - SignalR
 uid: blazor/components/class-libraries
 ms.openlocfilehash: 24a5b93a18cfe36c50d9739ba56d12aca41615c0
-ms.sourcegitcommit: 1ea3f23bec63e96ffc3a927992f30a5fc0de3ff9
+ms.sourcegitcommit: 3593c4efa707edeaaceffbfa544f99f41fc62535
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 11/12/2020
+ms.lasthandoff: 01/04/2021
 ms.locfileid: "94570155"
 ---
 # <a name="aspnet-core-no-locrazor-components-class-libraries"></a>ASP.NET Core Razor 元件類別庫
@@ -43,15 +43,15 @@ ms.locfileid: "94570155"
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
 1. 建立新專案。
-1. 選取 [ **Razor 類別庫** ]。 選取 [下一步]。
-1. 在 [ **建立新的 Razor 類別庫** ] 對話方塊中，選取 [ **建立** ]。
+1. 選取 [ **Razor 類別庫**]。 選取 [下一步]  。
+1. 在 [ **建立新的 Razor 類別庫** ] 對話方塊中，選取 [ **建立**]。
 1. 在 [專案名稱] 欄位中提供專案名稱，或接受預設專案名稱。 本主題中的範例會使用專案名稱 `ComponentLibrary` 。 選取 [建立]。
 1. 將 RCL 新增至方案：
-   1. 以滑鼠右鍵按一下方案。 選取 [ **加入**  >  **現有專案** ]。
+   1. 以滑鼠右鍵按一下方案。 選取 [**加入**  >  **現有專案**]。
    1. 流覽至 RCL 的專案檔。
    1. 選取 RCL 的專案檔 (`.csproj`) 。
 1. 從應用程式新增參考 RCL：
-   1. 以滑鼠右鍵按一下應用程式專案。 選取 [ **加入**  >  **參考** ]。
+   1. 以滑鼠右鍵按一下應用程式專案。 選取 [**加入**  >  **參考**]。
    1. 選取 RCL 專案。 選取 [確定]。
 
 > [!NOTE]
@@ -65,7 +65,7 @@ ms.locfileid: "94570155"
 
 # <a name="net-core-cli"></a>[.NET Core CLI](#tab/netcore-cli)
 
-1. 使用 [ **Razor 類別庫** ] 範本 (`razorclasslib`) 搭配 [`dotnet new`](/dotnet/core/tools/dotnet-new) 命令 shell 中的命令。 在下列範例中，會建立名為的 RCL `ComponentLibrary` 。 `ComponentLibrary`執行命令時，會自動建立保存的資料夾：
+1. 使用 [ **Razor 類別庫**] 範本 (`razorclasslib`) 搭配 [`dotnet new`](/dotnet/core/tools/dotnet-new) 命令 shell 中的命令。 在下列範例中，會建立名為的 RCL `ComponentLibrary` 。 `ComponentLibrary`執行命令時，會自動建立保存的資料夾：
 
    ```dotnetcli
    dotnet new razorclasslib -o ComponentLibrary
@@ -174,11 +174,11 @@ When the `Link` component is used in a child component, the linked asset is also
 
 ## <a name="create-a-no-locrazor-components-class-library-with-static-assets"></a>建立 Razor 具有靜態資產的元件類別庫
 
-RCL 可以包含靜態資產。 靜態資產可供任何使用程式庫的應用程式使用。 如需詳細資訊，請參閱<xref:razor-pages/ui-class#create-an-rcl-with-static-assets>。
+RCL 可以包含靜態資產。 靜態資產可供任何使用程式庫的應用程式使用。 如需詳細資訊，請參閱 <xref:razor-pages/ui-class#create-an-rcl-with-static-assets> 。
 
 ## <a name="supply-components-and-static-assets-to-multiple-hosted-no-locblazor-apps"></a>將元件和靜態資產提供給多個託管 Blazor 應用程式
 
-如需詳細資訊，請參閱<xref:blazor/host-and-deploy/webassembly#static-assets-and-class-libraries>。
+如需詳細資訊，請參閱 <xref:blazor/host-and-deploy/webassembly#static-assets-and-class-libraries> 。
 
 ::: moniker range=">= aspnetcore-5.0"
 
@@ -213,7 +213,7 @@ Blazor 啟用標準 [javascript 模組](https://developer.mozilla.org/docs/Web/J
 * 匯入的 JavaScript 不再干擾全域命名空間。
 * 不需要程式庫和元件的取用者手動匯入相關的 JavaScript。
 
-如需詳細資訊，請參閱<xref:blazor/call-javascript-from-dotnet#blazor-javascript-isolation-and-object-references>。
+如需詳細資訊，請參閱 <xref:blazor/call-javascript-from-dotnet#blazor-javascript-isolation-and-object-references> 。
 
 ::: moniker-end
 

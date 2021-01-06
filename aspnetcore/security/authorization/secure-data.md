@@ -18,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: security/authorization/secure-data
-ms.openlocfilehash: accfd46fa72c33976f8af2a39267c993447e036e
-ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
+ms.openlocfilehash: dc70cfe7cb0c0f044f5f1e7ee68a293b3ea7507f
+ms.sourcegitcommit: 04a404a9655c59ad1ea02aff5d399ae1b833ad6a
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 10/30/2020
-ms.locfileid: "93051937"
+ms.lasthandoff: 01/03/2021
+ms.locfileid: "97854648"
 ---
 # <a name="create-an-aspnet-core-web-app-with-user-data-protected-by-authorization"></a>使用受授權保護的使用者資料建立 ASP.NET Core web 應用程式
 
@@ -75,7 +75,7 @@ ms.locfileid: "93051937"
 * `ContactManagerAuthorizationHandler`：可讓管理員核准或拒絕連絡人。
 * `ContactAdministratorsAuthorizationHandler`：可讓系統管理員核准或拒絕連絡人，以及編輯/刪除連絡人。
 
-## <a name="prerequisites"></a>必要條件
+## <a name="prerequisites"></a>先決條件
 
 本教學課程是 advanced。 您應該熟悉：
 
@@ -93,7 +93,7 @@ ms.locfileid: "93051937"
 
 [下載](xref:index#how-to-download-a-sample)[入門](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/security/authorization/secure-data/samples/)應用程式。
 
-執行應用程式，並按一下 [ **ContactManager** ] 連結，然後確認您可以建立、編輯和刪除連絡人。
+執行應用程式，並按一下 [ **ContactManager** ] 連結，然後確認您可以建立、編輯和刪除連絡人。 若要建立入門應用程式，請參閱 [建立入門應用程式](#create-the-starter-app)。
 
 ## <a name="secure-user-data"></a>保護使用者資料
 
@@ -128,7 +128,7 @@ dotnet ef database update
 
 [!code-csharp[](secure-data/samples/final3/Startup.cs?name=snippet&highlight=13-99)]
 
-上述反白顯示的程式碼會設定回溯 [驗證原則](xref:Microsoft.AspNetCore.Authorization.AuthorizationOptions.FallbackPolicy)。 除了具有驗證屬性的頁面、控制器或動作方法之外，fallback 驗證原則需要驗證 * *_all_* _ 使用者 Razor 。 例如，使用 Razor 或的頁面、控制器或動作方法，會 `[AllowAnonymous]` `[Authorize(PolicyName="MyPolicy")]` 使用套用的驗證屬性，而不是回溯驗證原則。
+上述反白顯示的程式碼會設定回溯 [驗證原則](xref:Microsoft.AspNetCore.Authorization.AuthorizationOptions.FallbackPolicy)。 除了具有驗證屬性的頁面、控制器或動作方法之外，fallback 驗證原則需要驗證 **_all_* _ 使用者 Razor 。 例如，使用 Razor 或的頁面、控制器或動作方法，會 `[AllowAnonymous]` `[Authorize(PolicyName="MyPolicy")]` 使用套用的驗證屬性，而不是回溯驗證原則。
 
 回退驗證原則：
 
@@ -152,7 +152,7 @@ MVC 控制器和 Razor 頁面需要驗證所有使用者的另一種方法是新
 
 ### <a name="configure-the-test-account"></a>設定測試帳戶
 
-`SeedData`類別會建立兩個帳戶：系統管理員和管理員。 使用 [Secret Manager 工具](xref:security/app-secrets) 來設定這些帳戶的密碼。 將專案目錄中的密碼設定 (包含 *Program.cs* ) 的目錄：
+`SeedData`類別會建立兩個帳戶：系統管理員和管理員。 使用 [Secret Manager 工具](xref:security/app-secrets) 來設定這些帳戶的密碼。 將專案目錄中的密碼設定 (包含 *Program.cs*) 的目錄：
 
 ```dotnetcli
 dotnet user-secrets set SeedUserPW <PW>
@@ -203,7 +203,7 @@ dotnet user-secrets set SeedUserPW <PW>
 
 ## <a name="register-the-authorization-handlers"></a>註冊授權處理常式
 
-使用 Entity Framework Core 的服務必須使用[AddScoped](/dotnet/api/microsoft.extensions.dependencyinjection.servicecollectionserviceextensions)註冊相依性[插入](xref:fundamentals/dependency-injection)。 `ContactIsOwnerAuthorizationHandler`使用 ASP.NET Core [Identity](xref:security/authentication/identity) ，以 Entity Framework Core 為基礎。 使用服務集合註冊處理常式，以便透過相依性插入來使用它們 `ContactsController` 。 [dependency injection](xref:fundamentals/dependency-injection) 將下列程式碼加入至結尾 `ConfigureServices` ：
+使用 Entity Framework Core 的服務必須使用[AddScoped](/dotnet/api/microsoft.extensions.dependencyinjection.servicecollectionserviceextensions)註冊相依性[插入](xref:fundamentals/dependency-injection)。 `ContactIsOwnerAuthorizationHandler`使用 ASP.NET Core [Identity](xref:security/authentication/identity) ，以 Entity Framework Core 為基礎。 使用服務集合註冊處理常式，以便透過相依性插入來使用它們 `ContactsController` 。 [](xref:fundamentals/dependency-injection) 將下列程式碼加入至結尾 `ConfigureServices` ：
 
 [!code-csharp[](secure-data/samples/final3/Startup.cs?name=snippet_defaultPolicy&highlight=23-99)]
 
@@ -272,7 +272,7 @@ dotnet user-secrets set SeedUserPW <PW>
 
 上述標記會新增數個 `using` 語句。
 
-更新 *Pages/Contacts/Index* 中的 [ **編輯** ] 和 [ **刪除** ] 連結，以便只針對具有適當許可權的使用者轉譯這些連結：
+更新 *Pages/Contacts/Index* 中的 [**編輯**] 和 [**刪除**] 連結，以便只針對具有適當許可權的使用者轉譯這些連結：
 
 [!code-cshtml[](secure-data/samples/final3/Pages/Contacts/Index.cshtml?highlight=34-36,62-999)]
 
@@ -351,7 +351,7 @@ dotnet user-secrets set SeedUserPW <PW>
   dotnet new webapp -o ContactManager -au Individual -uld
   ```
 
-* 新增 *模型/連絡人 .cs* ：
+* 新增 *模型/連絡人 .cs*：
 
   [!code-csharp[](secure-data/samples/starter2.1/Models/Contact.cs?name=snippet1)]
 
@@ -429,7 +429,7 @@ dotnet ef database update
 * `ContactManagerAuthorizationHandler`：可讓管理員核准或拒絕連絡人。
 * `ContactAdministratorsAuthorizationHandler`：可讓系統管理員核准或拒絕連絡人，以及編輯/刪除連絡人。
 
-## <a name="prerequisites"></a>必要條件
+## <a name="prerequisites"></a>先決條件
 
 本教學課程是 advanced。 您應該熟悉：
 
@@ -488,7 +488,7 @@ dotnet ef database update
 
 ### <a name="configure-the-test-account"></a>設定測試帳戶
 
-`SeedData`類別會建立兩個帳戶：系統管理員和管理員。 使用 [Secret Manager 工具](xref:security/app-secrets) 來設定這些帳戶的密碼。 將專案目錄中的密碼設定 (包含 *Program.cs* ) 的目錄：
+`SeedData`類別會建立兩個帳戶：系統管理員和管理員。 使用 [Secret Manager 工具](xref:security/app-secrets) 來設定這些帳戶的密碼。 將專案目錄中的密碼設定 (包含 *Program.cs*) 的目錄：
 
 ```dotnetcli
 dotnet user-secrets set SeedUserPW <PW>
@@ -539,7 +539,7 @@ dotnet user-secrets set SeedUserPW <PW>
 
 ## <a name="register-the-authorization-handlers"></a>註冊授權處理常式
 
-使用 Entity Framework Core 的服務必須使用[AddScoped](/dotnet/api/microsoft.extensions.dependencyinjection.servicecollectionserviceextensions)註冊相依性[插入](xref:fundamentals/dependency-injection)。 `ContactIsOwnerAuthorizationHandler`使用 ASP.NET Core [Identity](xref:security/authentication/identity) ，以 Entity Framework Core 為基礎。 使用服務集合註冊處理常式，以便透過相依性插入來使用它們 `ContactsController` 。 [dependency injection](xref:fundamentals/dependency-injection) 將下列程式碼加入至結尾 `ConfigureServices` ：
+使用 Entity Framework Core 的服務必須使用[AddScoped](/dotnet/api/microsoft.extensions.dependencyinjection.servicecollectionserviceextensions)註冊相依性[插入](xref:fundamentals/dependency-injection)。 `ContactIsOwnerAuthorizationHandler`使用 ASP.NET Core [Identity](xref:security/authentication/identity) ，以 Entity Framework Core 為基礎。 使用服務集合註冊處理常式，以便透過相依性插入來使用它們 `ContactsController` 。 [](xref:fundamentals/dependency-injection) 將下列程式碼加入至結尾 `ConfigureServices` ：
 
 [!code-csharp[](secure-data/samples/final2.1/Startup.cs?name=snippet_defaultPolicy&highlight=27-99)]
 
@@ -608,7 +608,7 @@ dotnet user-secrets set SeedUserPW <PW>
 
 上述標記會新增數個 `using` 語句。
 
-更新 *Pages/Contacts/Index* 中的 [ **編輯** ] 和 [ **刪除** ] 連結，以便只針對具有適當許可權的使用者轉譯這些連結：
+更新 *Pages/Contacts/Index* 中的 [**編輯**] 和 [**刪除**] 連結，以便只針對具有適當許可權的使用者轉譯這些連結：
 
 [!code-cshtml[](secure-data/samples/final2.1/Pages/Contacts/Index.cshtml?highlight=34-36,62-999)]
 
@@ -678,7 +678,7 @@ dotnet user-secrets set SeedUserPW <PW>
   dotnet new webapp -o ContactManager -au Individual -uld
   ```
 
-* 新增 *模型/連絡人 .cs* ：
+* 新增 *模型/連絡人 .cs*：
 
   [!code-csharp[](secure-data/samples/starter2.1/Models/Contact.cs?name=snippet1)]
 

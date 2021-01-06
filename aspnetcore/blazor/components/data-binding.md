@@ -20,10 +20,10 @@ no-loc:
 - SignalR
 uid: blazor/components/data-binding
 ms.openlocfilehash: 1f22468c2c9bfb5c3c184e8686f1a8d1b486536d
-ms.sourcegitcommit: 6299f08aed5b7f0496001d093aae617559d73240
+ms.sourcegitcommit: 3593c4efa707edeaaceffbfa544f99f41fc62535
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 12/14/2020
+ms.lasthandoff: 01/04/2021
 ms.locfileid: "97486066"
 ---
 # <a name="aspnet-core-no-locblazor-data-binding"></a>ASP.NET Core Blazor 資料系結
@@ -111,7 +111,7 @@ Razor 元件會透過以 [`@bind`](xref:mvc/views/razor#bind) 欄位、屬性或
 
 * 請勿使用 `oninput` 事件。 使用預設 `onchange` 事件 (只指定 `@bind="{PROPERTY OR FIELD}"`) ，其中不會還原無效值，直到元素失去焦點為止。
 * 系結至可為 null 的型別（例如或）， `int?` `string` 並提供自訂邏輯來處理不正確專案。
-* 使用 [表單驗證元件](xref:blazor/forms-validation)，例如 <xref:Microsoft.AspNetCore.Components.Forms.InputNumber%601> 或 <xref:Microsoft.AspNetCore.Components.Forms.InputDate%601> 。 表單驗證元件具有內建的支援，可管理不正確輸入。 如需詳細資訊，請參閱<xref:blazor/forms-validation>。 表單驗證元件：
+* 使用 [表單驗證元件](xref:blazor/forms-validation)，例如 <xref:Microsoft.AspNetCore.Components.Forms.InputNumber%601> 或 <xref:Microsoft.AspNetCore.Components.Forms.InputDate%601> 。 表單驗證元件具有內建的支援，可管理不正確輸入。 如需詳細資訊，請參閱 <xref:blazor/forms-validation> 。 表單驗證元件：
   * 允許使用者提供不正確輸入，並在相關聯的上接收驗證錯誤 <xref:Microsoft.AspNetCore.Components.Forms.EditContext> 。
   * 在 UI 中顯示驗證錯誤，而不會干擾使用者輸入其他 webform 資料。
 
@@ -218,7 +218,7 @@ Razor 元件會透過以 [`@bind`](xref:mvc/views/razor#bind) 欄位、屬性或
 
 * 將 `<input>` 元素的值設定為 `password` 欄位。
 * 將屬性的變更公開 `Password` 至父代元件 [`EventCallback`](xref:blazor/components/event-handling#eventcallback) ，該元件會傳入子系欄位的目前值 `password` 做為其引數。
-* 使用 `onclick` 事件來觸發 `ToggleShowPassword` 方法。 如需詳細資訊，請參閱<xref:blazor/components/event-handling>。
+* 使用 `onclick` 事件來觸發 `ToggleShowPassword` 方法。 如需詳細資訊，請參閱 <xref:blazor/components/event-handling> 。
 
 ```razor
 <h1>Provide your password</h1>

@@ -21,10 +21,10 @@ no-loc:
 uid: blazor/components/prerendering-and-integration
 zone_pivot_groups: blazor-hosting-models
 ms.openlocfilehash: 3402117334548f9d90880d4f536e8baa288e7bc9
-ms.sourcegitcommit: 6b87f2e064cea02e65dacd206394b44f5c604282
+ms.sourcegitcommit: 3593c4efa707edeaaceffbfa544f99f41fc62535
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 12/15/2020
+ms.lasthandoff: 01/04/2021
 ms.locfileid: "97506977"
 ---
 # <a name="prerender-and-integrate-aspnet-core-no-locrazor-components"></a>ASP.NET Core 元件的已呈現和整合 Razor
@@ -343,7 +343,7 @@ Razor 元件可以整合至 Razor 應用程式中的頁面和 MVC 應用程式 B
    });
    ```
 
-1. 將可路由傳送的元件新增至應用程式。 例如︰
+1. 將可路由傳送的元件新增至應用程式。 例如：
 
    ```razor
    @page "/counter"
@@ -422,7 +422,7 @@ Razor 元件可以整合至 Razor 應用程式中的頁面和 MVC 應用程式 B
    });
    ```
 
-1. 建立 `Pages` 資料夾，並將可路由傳送的元件新增至應用程式。 例如︰
+1. 建立 `Pages` 資料夾，並將可路由傳送的元件新增至應用程式。 例如：
 
    ```razor
    @page "/counter"
@@ -464,7 +464,7 @@ Razor 元件可以整合至 Razor 應用程式中的頁面和 MVC 應用程式 B
 }
 ```
 
-如需詳細資訊，請參閱<xref:mvc/views/tag-helpers/builtin-th/component-tag-helper>。
+如需詳細資訊，請參閱 <xref:mvc/views/tag-helpers/builtin-th/component-tag-helper> 。
 
 ### <a name="render-noninteractive-components"></a>轉譯非互動式元件
 
@@ -487,7 +487,7 @@ Razor 元件可以整合至 Razor 應用程式中的頁面和 MVC 應用程式 B
 }
 ```
 
-如需詳細資訊，請參閱<xref:mvc/views/tag-helpers/builtin-th/component-tag-helper>。
+如需詳細資訊，請參閱 <xref:mvc/views/tag-helpers/builtin-th/component-tag-helper> 。
 
 ## <a name="component-namespaces"></a>元件命名空間
 

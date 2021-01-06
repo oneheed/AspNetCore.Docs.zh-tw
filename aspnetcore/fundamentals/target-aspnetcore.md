@@ -19,10 +19,10 @@ no-loc:
 - SignalR
 uid: fundamentals/target-aspnetcore
 ms.openlocfilehash: c012658a6f48247af60c8bfd56a7d987f6aa8a68
-ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
+ms.sourcegitcommit: 3593c4efa707edeaaceffbfa544f99f41fc62535
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 10/30/2020
+ms.lasthandoff: 01/04/2021
 ms.locfileid: "93061505"
 ---
 # <a name="use-aspnet-core-apis-in-a-class-library"></a>在類別庫中使用 ASP.NET Core Api
@@ -62,7 +62,7 @@ Blazor 支援 WebAssembly (WASM) 和伺服器 [裝載模型](xref:blazor/hosting
 
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
-使用 [ **Razor 類別庫** ] 專案範本。 範本的 **支援頁面和 [視圖** ] 核取方塊應取消選取。
+使用 [ **Razor 類別庫**] 專案範本。 範本的 **支援頁面和 [視圖** ] 核取方塊應取消選取。
 
 # <a name="visual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code)
 
@@ -74,7 +74,7 @@ dotnet new razorclasslib
 
 # <a name="visual-studio-for-mac"></a>[Visual Studio for Mac](#tab/visual-studio-mac)
 
-使用 [ **Razor 類別庫** ] 專案範本。
+使用 [ **Razor 類別庫**] 專案範本。
 
 ---
 
@@ -126,7 +126,7 @@ dotnet new razorclasslib
 
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
-使用 [ **Razor 類別庫** ] 專案範本。 應選取範本的 [ **支援頁面和流覽** 器] 核取方塊。
+使用 [ **Razor 類別庫**] 專案範本。 應選取範本的 [ **支援頁面和流覽** 器] 核取方塊。
 
 # <a name="visual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code)
 

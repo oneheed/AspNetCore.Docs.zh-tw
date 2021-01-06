@@ -19,10 +19,10 @@ no-loc:
 - SignalR
 uid: grpc/comparison
 ms.openlocfilehash: 0fb50f07153f5f9953b667fe32062ad24b2bd66d
-ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
+ms.sourcegitcommit: 3593c4efa707edeaaceffbfa544f99f41fc62535
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 10/30/2020
+ms.lasthandoff: 01/04/2021
 ms.locfileid: "93059945"
 ---
 # <a name="compare-grpc-services-with-http-apis"></a>比較 gRPC 服務與 HTTP API
@@ -37,7 +37,7 @@ ms.locfileid: "93059945"
 
 | 功能          | gRPC                                               | HTTP Api 與 JSON           |
 | ---------------- | -------------------------------------------------- | ----------------------------- |
-| 合約         | 必要 ( *。 proto* )                                 | 選擇性的 (OpenAPI)             |
+| 合約         | 必要 (*。 proto*)                                 | 選擇性的 (OpenAPI)             |
 | 通訊協定         | HTTP/2                                             | HTTP                          |
 | Payload          | [Protobuf (small、binary) ](#performance)           | JSON (大型、人類看得懂的)   |
 | Prescriptiveness | [嚴格規格](#strict-specification)      | 鬆散。 任何 HTTP 都有效。     |
@@ -92,11 +92,11 @@ gRPC 可讓用戶端指定他們願意等待 RPC 完成的時間長度。 [期�
 
 gRPC 適用于下列案例：
 
-* **微服務** ： gRPC 是針對低延遲和高輸送量的通訊所設計。 gRPC 非常適合於高效率的輕量微服務。
-* **點對點即時通訊** ： gRPC 有絕佳的雙向串流支援。 gRPC services 可以即時推播訊息，而不會進行輪詢。
-* **多語言環境** ： gRPC 工具支援所有熱門的開發語言，讓 gRPC 成為多國語言環境的理想選擇。
-* **網路受限的環境** ： gRPC 訊息會以 Protobuf （輕量訊息格式）進行序列化。 GRPC 訊息一律小於相等的 JSON 訊息。
-* **處理序間通訊 (ipc)** ：如 Unix 網域通訊端和具名管道等 ipc 傳輸，可與 gRPC 搭配使用，以在同一部電腦上的應用程式之間進行通訊。 如需詳細資訊，請參閱<xref:grpc/interprocess>。
+* **微服務**： gRPC 是針對低延遲和高輸送量的通訊所設計。 gRPC 非常適合於高效率的輕量微服務。
+* **點對點即時通訊**： gRPC 有絕佳的雙向串流支援。 gRPC services 可以即時推播訊息，而不會進行輪詢。
+* **多語言環境**： gRPC 工具支援所有熱門的開發語言，讓 gRPC 成為多國語言環境的理想選擇。
+* **網路受限的環境**： gRPC 訊息會以 Protobuf （輕量訊息格式）進行序列化。 GRPC 訊息一律小於相等的 JSON 訊息。
+* **處理序間通訊 (ipc)**：如 Unix 網域通訊端和具名管道等 ipc 傳輸，可與 gRPC 搭配使用，以在同一部電腦上的應用程式之間進行通訊。 如需詳細資訊，請參閱 <xref:grpc/interprocess> 。
 
 ## <a name="grpc-weaknesses"></a>gRPC 弱點
 
@@ -108,11 +108,11 @@ gRPC 適用于下列案例：
 
 * [gRPC-Web](https://grpc.io/docs/tutorials/basic/web.html) 是 gRPC 小組提供的額外技術，可在瀏覽器中提供 gRPC 支援。 gRPC Web 可讓瀏覽器應用程式受益于 gRPC 的高效能和低網路使用。 並非所有 gRPC 的功能都受 gRPC Web 支援。 用戶端和雙向串流不受支援，而且伺服器串流的支援有限。
 
-  .NET Core 支援 gRPC Web。 如需詳細資訊，請參閱<xref:grpc/browser>。
+  .NET Core 支援 gRPC Web。 如需詳細資訊，請參閱 <xref:grpc/browser> 。
 
 * RESTful JSON Web Api 可以從 gRPC 服務自動建立，方法是使用 [HTTP 中繼資料](https://cloud.google.com/service-infrastructure/docs/service-management/reference/rpc/google.api#google.api.HttpRule)來標注該 *proto* 檔。 這可讓應用程式同時支援 gRPC 和 JSON web Api，而不需要為兩者重複建立個別服務的工作。
 
-  .NET Core 具有從 gRPC 服務建立 JSON web Api 的實驗性支援。 如需詳細資訊，請參閱<xref:grpc/httpapi>。
+  .NET Core 具有從 gRPC 服務建立 JSON web Api 的實驗性支援。 如需詳細資訊，請參閱 <xref:grpc/httpapi> 。
 
 ### <a name="not-human-readable"></a>不是人類看得懂的
 
@@ -126,8 +126,8 @@ gRPC 訊息預設會以 Protobuf 編碼。 雖然 Protobuf 的傳送和接收效
 
 在下列案例中，建議使用其他架構，而不是 gRPC：
 
-* **瀏覽器可存取的 api** ： gRPC 在瀏覽器中未受到完整支援。 gRPC-Web 可以提供瀏覽器支援，但它有一些限制，並引進伺服器 proxy。
-* **廣播即時通訊** ： gRPC 透過串流支援即時通訊，但廣播訊息到已註冊連接的概念不存在。 例如，在應該將新的聊天訊息傳送到聊天室中所有用戶端的聊天室案例中，每個 gRPC 呼叫都需要個別將新的聊天訊息串流至用戶端。 [SignalR](xref:signalr/introduction) 是適用于此案例的實用架構。 SignalR 具有持續性連接的概念，以及廣播訊息的內建支援。
+* **瀏覽器可存取的 api**： gRPC 在瀏覽器中未受到完整支援。 gRPC-Web 可以提供瀏覽器支援，但它有一些限制，並引進伺服器 proxy。
+* **廣播即時通訊**： gRPC 透過串流支援即時通訊，但廣播訊息到已註冊連接的概念不存在。 例如，在應該將新的聊天訊息傳送到聊天室中所有用戶端的聊天室案例中，每個 gRPC 呼叫都需要個別將新的聊天訊息串流至用戶端。 [SignalR](xref:signalr/introduction) 是適用于此案例的實用架構。 SignalR 具有持續性連接的概念，以及廣播訊息的內建支援。
 
 ## <a name="additional-resources"></a>其他資源
 

@@ -20,10 +20,10 @@ no-loc:
 - SignalR
 uid: blazor/host-and-deploy/server
 ms.openlocfilehash: a209109210ef5e335734a974ceb0c2af7cb8e1a1
-ms.sourcegitcommit: 98f92d766d4f343d7e717b542c1b08da29e789c1
+ms.sourcegitcommit: 3593c4efa707edeaaceffbfa544f99f41fc62535
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 11/13/2020
+ms.lasthandoff: 01/04/2021
 ms.locfileid: "94595437"
 ---
 # <a name="host-and-deploy-no-locblazor-server"></a>裝載和部署 Blazor Server
@@ -78,9 +78,9 @@ Blazor 使用 Websocket 作為傳輸的最佳方式 SignalR ，是因為延遲�
 > * [什麼是 Azure SignalR 服務？](/azure/azure-signalr/signalr-overview)
 > * [Azure 服務的效能指南 SignalR](/azure-signalr/signalr-concept-performance#performance-factors)
 
-### <a name="configuration"></a>設定
+### <a name="configuration"></a>組態
 
-若要設定 Azure 服務的應用程式 SignalR ，應用程式必須支援「 *粘滯話* 」，其中用戶端會在進行預導 [時重新導向回相同的伺服器](xref:blazor/hosting-models#connection-to-the-server)。 `ServerStickyMode`選項或設定值設定為 `Required` 。 一般而言，應用程式會使用下列 **_其中一_** 種方法來建立設定：
+若要設定 Azure 服務的應用程式 SignalR ，應用程式必須支援「 *粘滯話*」，其中用戶端會在進行預導 [時重新導向回相同的伺服器](xref:blazor/hosting-models#connection-to-the-server)。 `ServerStickyMode`選項或設定值設定為 `Required` 。 一般而言，應用程式會使用下列 **_其中一_** 種方法來建立設定：
 
    * `Startup.ConfigureServices`:
   
@@ -100,7 +100,7 @@ Blazor 使用 Websocket 作為傳輸的最佳方式 SignalR ，是因為延遲�
        "Azure:SignalR:StickyServerMode": "Required"
        ```
 
-     * Azure 入口網站中 **的 app** service  >  **設定應用程式設定** ( **名稱** ： `Azure__SignalR__StickyServerMode` ， **值** ： `Required`) 。 如果您布建 [Azure SignalR 服務](#provision-the-azure-signalr-service)，則會自動為應用程式採用此方法。
+     * Azure 入口網站中 **的 app** service  >  **設定應用程式設定** (**名稱**： `Azure__SignalR__StickyServerMode` ，**值**： `Required`) 。 如果您布建 [Azure SignalR 服務](#provision-the-azure-signalr-service)，則會自動為應用程式採用此方法。
 
 ### <a name="provision-the-azure-no-locsignalr-service"></a>布建 Azure SignalR 服務
 

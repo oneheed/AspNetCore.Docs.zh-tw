@@ -18,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: signalr/version-differences
-ms.openlocfilehash: c4c0ff83cb789e9aa35085496daa461404615726
-ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
+ms.openlocfilehash: c37f0a3c528b6285fbf35f41eed781fb76c68de4
+ms.sourcegitcommit: 04a404a9655c59ad1ea02aff5d399ae1b833ad6a
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 10/30/2020
-ms.locfileid: "93061206"
+ms.lasthandoff: 01/03/2021
+ms.locfileid: "97854596"
 ---
 # <a name="differences-between-aspnet-no-locsignalr-and-aspnet-core-no-locsignalr"></a>ASP.NET SignalR 與 ASP.NET Core 之間的差異 SignalR
 
@@ -151,7 +151,7 @@ app.UseSignalR(routes =>
 
 ASP.NET Core SignalR 現在支援從中樞將 [資料串流](xref:signalr/streaming) 至用戶端。
 
-### <a name="state"></a>狀態
+### <a name="state"></a>州
 
 在用戶端與中樞 (之間傳遞任意狀態的能力通常稱為 `HubState`) 已移除，以及支援進度訊息。 目前沒有任何對應的中樞 proxy。
 
@@ -203,8 +203,8 @@ npm install @aspnet/signalr
 
 ### <a name="internet-explorer-support"></a>Internet Explorer 支援
 
-ASP.NET Core SignalR 支援 microsoft Internet Explorer 11 或更新版本，而 ASP.NET SignalR 支援 microsoft Internet Explorer 8 或更新版本。
-如需瀏覽器支援的詳細資訊，請參閱 [支援的平臺](xref:signalr/supported-platforms#javascript-client)。
+ASP.NET Core SignalR 不支援 microsoft Internet Explorer，而 ASP.NET SignalR 支援 microsoft Internet Explorer 8 或更新版本。
+如需詳細資訊，請參閱 <xref:signalr/supported-platforms#javascript-client> 。
 
 ### <a name="javascript-client-method-syntax"></a>JavaScript 用戶端方法語法
 
@@ -293,7 +293,7 @@ ASP.NET SignalR 支援 SQL Server 和 Redis。 ASP.NET Core SignalR 支援 Azure
 
 ## <a name="additional-resources"></a>其他資源
 
-* [中樞](xref:signalr/hubs)
+* [集線器](xref:signalr/hubs)
 * [JavaScript 用戶端](xref:signalr/javascript-client)
 * [.NET 用戶端](xref:signalr/dotnet-client)
 * [支援的平台](xref:signalr/supported-platforms)

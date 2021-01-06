@@ -20,10 +20,10 @@ no-loc:
 - SignalR
 uid: blazor/security/webassembly/aad-groups-roles
 ms.openlocfilehash: ded70f028b3021574ba260838837d9b23abd72f1
-ms.sourcegitcommit: 8363e44f630fcc6433ccd2a85f7aa9567cd274ed
+ms.sourcegitcommit: 3593c4efa707edeaaceffbfa544f99f41fc62535
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 11/20/2020
+ms.lasthandoff: 01/04/2021
 ms.locfileid: "94981878"
 ---
 # <a name="azure-active-directory-aad-groups-administrator-roles-and-user-defined-roles"></a>Azure Active Directory (AAD) 群組、系統管理員角色和使用者定義的角色
@@ -583,13 +583,13 @@ builder.Services.AddAuthorizationCore(options =>
 > > [!NOTE]
 > > 如果 `Audience` 應用程式的發行者網域具有以架構為基礎的 API 範圍，則通常 **不** 需要明確地設定 `api://` 。
 >
-> 如需詳細資訊，請參閱<xref:blazor/security/webassembly/hosted-with-azure-active-directory#app-settings>。
+> 如需詳細資訊，請參閱 <xref:blazor/security/webassembly/hosted-with-azure-active-directory#app-settings> 。
 
 ::: moniker-end
 
 ### <a name="authorization-policies"></a>在命名空間層級設定的授權原則
 
-*Server* [authorization policies](xref:security/authorization/policies) `Startup.ConfigureServices` `Startup.cs` 根據群組物件識別碼和 [aad 系統管理員角色物件識別碼](#aad-administrator-role-object-ids)，在伺服器應用程式的 () 中建立 aad 安全性群組和 aad 系統管理員角色的授權原則。
+ [](xref:security/authorization/policies) `Startup.ConfigureServices` `Startup.cs` 根據群組物件識別碼和[aad 系統管理員角色物件識別碼](#aad-administrator-role-object-ids)，在伺服器應用程式的 () 中建立 aad 安全性群組和 aad 系統管理員角色的授權原則。
 
 例如，Azure 計費管理員角色原則具有下列設定：
 
@@ -601,7 +601,7 @@ services.AddAuthorization(options =>
 });
 ```
 
-如需詳細資訊，請參閱<xref:security/authorization/policies>。
+如需詳細資訊，請參閱 <xref:security/authorization/policies> 。
 
 ### <a name="controller-access"></a>控制器存取
 
@@ -987,7 +987,7 @@ builder.Services.AddMsalAuthentication(options =>
 
 ## <a name="aad-administrator-role-object-ids"></a>AAD 系統管理員角色物件識別碼
 
-下表中提供的物件識別碼是用來建立宣告[policies](xref:security/authorization/policies)的原則 `group` 。 原則可讓應用程式在應用程式中授權使用者使用各種活動。 如需詳細資訊，請參閱 [使用者定義的群組和 AAD 系統管理員角色](#user-defined-groups-and-administrator-roles) 一節。
+下表中提供的物件識別碼是用來建立宣告[](xref:security/authorization/policies)的原則 `group` 。 原則可讓應用程式在應用程式中授權使用者使用各種活動。 如需詳細資訊，請參閱 [使用者定義的群組和 AAD 系統管理員角色](#user-defined-groups-and-administrator-roles) 一節。
 
 AAD 系統管理員角色 | 物件識別碼
 --- | ---

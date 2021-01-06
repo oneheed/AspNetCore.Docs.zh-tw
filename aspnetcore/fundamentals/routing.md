@@ -20,10 +20,10 @@ no-loc:
 - SignalR
 uid: fundamentals/routing
 ms.openlocfilehash: e134832ad00b10bb01239afa06acc74d86707af1
-ms.sourcegitcommit: 91e14f1e2a25c98a57c2217fe91b172e0ff2958c
+ms.sourcegitcommit: 3593c4efa707edeaaceffbfa544f99f41fc62535
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 11/10/2020
+ms.lasthandoff: 01/04/2021
 ms.locfileid: "94422557"
 ---
 # <a name="routing-in-aspnet-core"></a>ASP.NET Core 中的路由
@@ -81,7 +81,7 @@ ms.locfileid: "94422557"
 
 <a name="endpoint"></a>
 
-`MapGet`方法是用來定義 **端點** 。 端點可以是：
+`MapGet`方法是用來定義 **端點**。 端點可以是：
 
 * 選取此選項，藉由比對 URL 和 HTTP 方法。
 * 執行委派。
@@ -97,7 +97,7 @@ ms.locfileid: "94422557"
 
 [!code-csharp[](routing/samples/3.x/RoutingSample/RouteTemplateStartup.cs?name=snippet)]
 
-字串 `/hello/{name:alpha}` 是 **路由範本** 。 它是用來設定端點的相符方式。 在此情況下，範本會符合：
+字串 `/hello/{name:alpha}` 是 **路由範本**。 它是用來設定端點的相符方式。 在此情況下，範本會符合：
 
 * 如下的 URL： `/hello/Ryan`
 * 開頭為字母字元序列的任何 URL 路徑 `/hello/` 。  `:alpha` 套用僅符合字母字元的路由條件約束。 本檔稍後會說明[路由條件約束](#route-constraint-reference)。
@@ -131,7 +131,7 @@ URL 路徑的第二個區段 `{name:alpha}` ：
 
 ### <a name="endpoint-metadata"></a>端點中繼資料
 
-在上述範例中，有兩個端點，但只有健康情況檢查端點已附加授權原則。 如果要求符合健康狀態檢查端點， `/healthz` 則會執行授權檢查。 這會示範端點可以附加額外的資料。 這項額外的資料稱為端點 **中繼資料** ：
+在上述範例中，有兩個端點，但只有健康情況檢查端點已附加授權原則。 如果要求符合健康狀態檢查端點， `/healthz` 則會執行授權檢查。 這會示範端點可以附加額外的資料。 這項額外的資料稱為端點 **中繼資料**：
 
 * 中繼資料可以由路由感知中介軟體處理。
 * 中繼資料可以是任何 .NET 型別。
@@ -149,7 +149,7 @@ ASP.NET Core 端點為：
 * 可執行檔：有 <xref:Microsoft.AspNetCore.Http.Endpoint.RequestDelegate> 。
 * 可擴充：具有 [中繼資料](xref:Microsoft.AspNetCore.Http.Endpoint.Metadata*) 集合。
 * 可選取：有 [路由資訊](xref:Microsoft.AspNetCore.Routing.RouteEndpoint.RoutePattern*)。
-* 可列舉：透過從 DI 抓取來列出端點的集合 <xref:Microsoft.AspNetCore.Routing.EndpointDataSource> 。 [DI](xref:fundamentals/dependency-injection)
+* 可列舉：透過從 DI 抓取來列出端點的集合 <xref:Microsoft.AspNetCore.Routing.EndpointDataSource> 。 [](xref:fundamentals/dependency-injection)
 
 下列程式碼示範如何取出和檢查符合目前要求的端點：
 
@@ -210,7 +210,7 @@ ASP.NET Core 端點為：
 
 上述程式碼顯示支援每個端點原則的自訂中介軟體範例。 中介軟體會將敏感性資料的存取權 *審核記錄* 寫入主控台。 中介軟體可以設定為使用中繼資料來 *審核* 端點 `AuditPolicyAttribute` 。 這個範例會示範 *選擇性* 模式，其中只會審核標示為機密的端點。 例如，您可以反向定義此邏輯，並針對未標示為安全的所有專案進行審核。 端點中繼資料系統很有彈性。 您可以使用任何符合使用案例的方式來設計這個邏輯。
 
-上述範例程式碼旨在示範端點的基本概念。 **此範例不適合用于生產用途** 。 更完整的 *audit 記錄* 中介軟體版本將會：
+上述範例程式碼旨在示範端點的基本概念。 **此範例不適合用于生產用途**。 更完整的 *audit 記錄* 中介軟體版本將會：
 
 * 記錄到檔案或資料庫。
 * 包含詳細資料，例如使用者、IP 位址、機密端點的名稱等。
@@ -230,7 +230,7 @@ ASP.NET Core 端點為：
 
 [!code-csharp[](routing/samples/3.x/RoutingSample/TerminalMiddlewareStartup.cs?name=snippet)]
 
-顯示的中介軟體樣式 `Approach 1:` 為 **終端中介軟體** 。 它稱為「終端中介軟體」，因為它會執行相符的作業：
+顯示的中介軟體樣式 `Approach 1:` 為 **終端中介軟體**。 它稱為「終端中介軟體」，因為它會執行相符的作業：
 
 * 上述範例中的比對作業 `Path == "/"` 適用于中介軟體和 `Path == "/Movie"` 路由。
 * 當相符成功時，它會執行一些功能並傳回，而不是叫用 `next` 中介軟體。
@@ -358,7 +358,7 @@ URL 比對會在一組可設定的階段中運作。 在每個階段中，輸出
 * 具有常值文字的區段會被視為比參數區段更明確的部分。
 * 具有條件約束的參數區段會被視為更明確的參數區段，而不會有。
 * 複雜區段會被視為具有條件約束的參數區段。
-* Catch-all 參數是最不明確的參數。 請參閱 [路由範本參考](#rtr)中的 **全部攔截** ，以取得有關 catch 所有路由的重要資訊。
+* Catch-all 參數是最不明確的參數。 請參閱 [路由範本參考](#rtr)中的 **全部攔截**，以取得有關 catch 所有路由的重要資訊。
 
 如需確切值的參考，請參閱 [GitHub 上的原始程式碼](https://github.com/dotnet/aspnetcore/blob/master/src/Http/Routing/src/Template/RoutePrecedence.cs#L189) 。
 
@@ -371,7 +371,7 @@ URL 產生：
 * 這是路由可以根據一組路由值來建立 URL 路徑的進程。
 * 允許端點和存取它們的 Url 之間的邏輯分隔。
 
-端點路由包含 <xref:Microsoft.AspNetCore.Routing.LinkGenerator> API。 `LinkGenerator` 是可從 [DI](xref:fundamentals/dependency-injection)取得的單一服務。 `LinkGenerator`API 可以在執行要求的內容之外使用。 [IUrlHelper](xref:Microsoft.AspNetCore.Mvc.IUrlHelper)和依賴的案例（例如標籤協助程式 <xref:Microsoft.AspNetCore.Mvc.IUrlHelper> 、HTML 協助程式和[動作結果](xref:mvc/controllers/actions)）會在[Tag Helpers](xref:mvc/views/tag-helpers/intro)內部使用 `LinkGenerator` API 來提供連結產生功能。
+端點路由包含 <xref:Microsoft.AspNetCore.Routing.LinkGenerator> API。 `LinkGenerator` 是可從 [DI](xref:fundamentals/dependency-injection)取得的單一服務。 `LinkGenerator`API 可以在執行要求的內容之外使用。 [IUrlHelper](xref:Microsoft.AspNetCore.Mvc.IUrlHelper)和依賴的案例（例如標籤協助程式 <xref:Microsoft.AspNetCore.Mvc.IUrlHelper> 、HTML 協助程式和[動作結果](xref:mvc/controllers/actions)）會在[](xref:mvc/views/tag-helpers/intro)內部使用 `LinkGenerator` API 來提供連結產生功能。
 
 連結產生器背後支援的概念為「位址」和「位址配置」。 位址配置可讓您判斷應考慮用於連結產生的端點。 例如，許多使用者都熟悉的路由名稱和路由值案例，會將控制器和 Razor 頁面實作為位址配置。
 
@@ -393,7 +393,7 @@ URL 產生：
 
 <xref:Microsoft.AspNetCore.Routing.LinkGenerator> 提供的方法支援適用於任何位址類型的標準連結產生功能。 使用連結產生器最方便的方式，是透過執行特定網址類別型作業的擴充方法：
 
-| 擴充方法 | Description |
+| 擴充方法 | 描述 |
 | ---------------- | ----------- |
 | <xref:Microsoft.AspNetCore.Routing.LinkGenerator.GetPathByAddress*> | 根據提供的值產生具有絕對路徑的 URI。 |
 | <xref:Microsoft.AspNetCore.Routing.LinkGenerator.GetUriByAddress*> | 根據提供的值產生絕對 URI。             |
@@ -437,7 +437,7 @@ URL 模式嘗試擷取具有選擇性副檔名的檔案名稱時，具有其他�
 * `/files/myFile.txt`
 * `/files/myFile`
 
-路由參數可能有「預設值」，指定方法是在參數名稱之後指定預設值，並以等號 (`=`) 分隔。 例如，`{controller=Home}` 定義 `Home` 作為 `controller` 的預設值。 如果 URL 中沒有用於參數的任何值，則會使用預設值。 路由參數是選擇性的，方法是將問號 (`?`) 附加到參數名稱的結尾。 例如：`id?`。 選擇性值與預設路由參數之間的差異如下：
+路由參數可能有「預設值」，指定方法是在參數名稱之後指定預設值，並以等號 (`=`) 分隔。 例如，`{controller=Home}` 定義 `Home` 作為 `controller` 的預設值。 如果 URL 中沒有用於參數的任何值，則會使用預設值。 路由參數是選擇性的，方法是將問號 (`?`) 附加到參數名稱的結尾。 例如： `id?` 。 選擇性值與預設路由參數之間的差異如下：
 
 * 具有預設值的路由參數一定會產生值。
 * 選擇性參數只有在要求 URL 提供值時才會有值。
@@ -504,7 +504,7 @@ URL 模式嘗試擷取具有選擇性副檔名的檔案名稱時，具有其他�
 
 下表示范範例路由條件約束及其預期行為：
 
-| constraint (條件約束) | 範例 | 範例相符項目 | 備註 |
+| constraint (條件約束) | 範例 | 範例相符項目 | 注意 |
 | ---------- | ------- | --------------- | ----- |
 | `int` | `{id:int}` | `123456789`, `-123456789` | 符合任何整數 |
 | `bool` | `{active:bool}` | `true`, `FALSE` | 符合 `true` 或 `false` 。 不區分大小寫 |
@@ -567,14 +567,14 @@ ASP.NET Core 架構將 `RegexOptions.IgnoreCase | RegexOptions.Compiled | RegexO
 
 路由中使用的正則運算式通常以 `^` 字元開頭，並符合字串的開始位置。 運算式的結尾通常是 `$` 字元，並符合字串的結尾。 `^`和 `$` 字元可確保正則運算式符合整個路由參數值。 如果沒有 `^` 和 `$` 字元，正則運算式會比對字串內的任何子字串，這通常是不必要的。 下表提供範例，並說明它們符合或無法符合的原因：
 
-| 運算是   | String    | 相符項目 | 註解               |
+| 運算是   | String    | 比對 | 註解               |
 | ------------ | --------- | :---: |  -------------------- |
-| `[a-z]{2}`   | hello     | Yes   | 子字串相符項目     |
-| `[a-z]{2}`   | 123abc456 | Yes   | 子字串相符項目     |
-| `[a-z]{2}`   | mz        | Yes   | 符合運算式    |
-| `[a-z]{2}`   | MZ        | Yes   | 不區分大小寫    |
-| `^[a-z]{2}$` | hello     | No    | 請參閱上述的 `^` 和 `$` |
-| `^[a-z]{2}$` | 123abc456 | No    | 請參閱上述的 `^` 和 `$` |
+| `[a-z]{2}`   | hello     | 是   | 子字串相符項目     |
+| `[a-z]{2}`   | 123abc456 | 是   | 子字串相符項目     |
+| `[a-z]{2}`   | mz        | 是   | 符合運算式    |
+| `[a-z]{2}`   | MZ        | 是   | 不區分大小寫    |
+| `^[a-z]{2}$` | hello     | 否    | 請參閱上述的 `^` 和 `$` |
+| `^[a-z]{2}$` | 123abc456 | 否    | 請參閱上述的 `^` 和 `$` |
 
 如需規則運算式語法的詳細資訊，請參閱 [.NET Framework 規則運算式](/dotnet/standard/base-types/regular-expression-language-quick-reference)。
 
@@ -697,7 +697,7 @@ URL 產生進程的開頭是呼叫 [LinkGenerator. GetPathByAddress](xref:Micros
 
 ### <a name="ambient-values-and-explicit-values"></a>環境值和明確值
 
-從目前的要求中，路由會存取目前要求的路由值 `HttpContext.Request.RouteValues` 。 與目前要求相關聯的值稱為 **環境值** 。 為了清楚起見，檔是指將傳入方法的路由值視為 **明確值** 。
+從目前的要求中，路由會存取目前要求的路由值 `HttpContext.Request.RouteValues` 。 與目前要求相關聯的值稱為 **環境值**。 為了清楚起見，檔是指將傳入方法的路由值視為 **明確值**。
 
 下列範例會顯示環境值和明確值。 它會從目前的要求和明確的值提供環境 `{ id = 17, }` 值：
 
@@ -757,7 +757,7 @@ URL 產生進程的開頭是呼叫 [LinkGenerator. GetPathByAddress](xref:Micros
 * 反復處理端點。
 * 傳回第一個成功的結果。
 
-此程式中的第一個步驟是呼叫 **路由值失效** 。  路由值失效是路由用來決定應該使用環境值的路由值，以及應忽略哪些路由值的處理常式。 會考慮每個環境的值，並結合明確的值，或忽略此值。
+此程式中的第一個步驟是呼叫 **路由值失效**。  路由值失效是路由用來決定應該使用環境值的路由值，以及應忽略哪些路由值的處理常式。 會考慮每個環境的值，並結合明確的值，或忽略此值。
 
 考慮環境值角色的最佳方式，就是在某些常見的情況下，他們會嘗試儲存應用程式開發人員的輸入。 傳統上，環境值很有説明的情況與 MVC 相關：
 
@@ -973,7 +973,7 @@ app.UseEndpoints(endpoints =>
 
 [!code-csharp[](routing/samples/3.x/RoutingSample/ICoolMetadata.cs?name=snippet)]
 
-遵循這些指導方針的最佳方式是避免定義 **標記中繼資料** ：
+遵循這些指導方針的最佳方式是避免定義 **標記中繼資料**：
 
 * 請不要只尋找元資料類型是否存在。
 * 在中繼資料上定義屬性，並檢查屬性。
@@ -1080,7 +1080,7 @@ URL 比對是路由用來將傳入要求分派給「端點」的處理序。 這
 
 [RouteData.Values](xref:Microsoft.AspNetCore.Routing.RouteData.Values*) 是「路由值」的字典，而路由值產生自路由。 這些值通常是透過將 URL 語彙基元化來決定，可以用來接受使用者輸入，或在應用程式內做出進一步的分派決策。
 
-[RouteData.DataTokens](xref:Microsoft.AspNetCore.Routing.RouteData.DataTokens*) 是其他資料的屬性包，而這些資料與相符路由相關。 提供了 <xref:Microsoft.AspNetCore.Routing.RouteData.DataTokens*> 來支援與每個路由建立關聯的狀態資料，因此應用程式可以依據符合哪一個路由來制定決策。 這些是開發人員定義的值， **不會** 以任何方式影響路由的行為。 此外，儲藏在 [RouteData.DataTokens](xref:Microsoft.AspNetCore.Routing.RouteData.DataTokens*) 中的值可以是任何類型，對比之下，[RouteData.Values](xref:Microsoft.AspNetCore.Routing.RouteData.Values) 則必須可轉換成字串或可從字串轉換。
+[RouteData.DataTokens](xref:Microsoft.AspNetCore.Routing.RouteData.DataTokens*) 是其他資料的屬性包，而這些資料與相符路由相關。 提供了 <xref:Microsoft.AspNetCore.Routing.RouteData.DataTokens*> 來支援與每個路由建立關聯的狀態資料，因此應用程式可以依據符合哪一個路由來制定決策。 這些是開發人員定義的值，**不會** 以任何方式影響路由的行為。 此外，儲藏在 [RouteData.DataTokens](xref:Microsoft.AspNetCore.Routing.RouteData.DataTokens*) 中的值可以是任何類型，對比之下，[RouteData.Values](xref:Microsoft.AspNetCore.Routing.RouteData.Values) 則必須可轉換成字串或可從字串轉換。
 
 [RouteData.Routers](xref:Microsoft.AspNetCore.Routing.RouteData.Routers) 是成功符合要求的參與路由清單。 路由可以用巢狀方式置於彼此內部。 <xref:Microsoft.AspNetCore.Routing.RouteData.Routers> 屬性會透過導致產生相符項目的路由邏輯樹狀結構反映路徑。 一般而言，<xref:Microsoft.AspNetCore.Routing.RouteData.Routers> 中的第一個項目是路由集合，應該用於產生 URL。 <xref:Microsoft.AspNetCore.Routing.RouteData.Routers> 中的最後一個項目是相符的路由處理常式。
 
@@ -1112,7 +1112,7 @@ URL 產生是路由可用來依據一組路由值建立 URL 路徑的處理序�
 
 <xref:Microsoft.AspNetCore.Routing.LinkGenerator> 提供的方法支援適用於任何位址類型的標準連結產生功能。 使用連結產生器的最便利方式是透過執行特定位址類型作業的擴充方法。
 
-| 擴充方法   | Description                                                         |
+| 擴充方法   | 描述                                                         |
 | ------------------ | ------------------------------------------------------------------- |
 | <xref:Microsoft.AspNetCore.Routing.LinkGenerator.GetPathByAddress*> | 根據提供的值產生具有絕對路徑的 URI。 |
 | <xref:Microsoft.AspNetCore.Routing.LinkGenerator.GetUriByAddress*> | 根據提供的值產生絕對 URI。             |
@@ -1292,7 +1292,7 @@ routes.MapRoute(
     defaults: new { controller = "Blog", action = "ReadArticle" });
 ```
 
-上述範本會比對 `/Blog/All-About-Routing/Introduction` 等 URL 路徑，並擷取值 `{ controller = Blog, action = ReadArticle, article = All-About-Routing/Introduction }`。 即使範本中沒有任何對應的路由參數，路由也會產生 `controller` 和 `action` 的預設路由值。 預設值可以在路由範本中指定。 `article` 路由參數透過在路由參數名稱之前加上雙星號 (`**`) 來定義為 *catch-all* 。 全部擷取路由參數會擷取 URL 路徑的其餘部分，而且也可以符合空字串。
+上述範本會比對 `/Blog/All-About-Routing/Introduction` 等 URL 路徑，並擷取值 `{ controller = Blog, action = ReadArticle, article = All-About-Routing/Introduction }`。 即使範本中沒有任何對應的路由參數，路由也會產生 `controller` 和 `action` 的預設路由值。 預設值可以在路由範本中指定。 `article` 路由參數透過在路由參數名稱之前加上雙星號 (`**`) 來定義為 *catch-all*。 全部擷取路由參數會擷取 URL 路徑的其餘部分，而且也可以符合空字串。
 
 下列範例會新增路由條件約束和資料語彙基元：
 
@@ -1438,7 +1438,7 @@ URL 模式嘗試擷取具有選擇性副檔名的檔案名稱時，具有其他�
 
 下表示範範例路由條件約束及其預期行為。
 
-| 條件約束 | 範例 | 範例相符項目 | 備註 |
+| 條件約束 | 範例 | 範例相符項目 | 注意 |
 |------------|---------|-----------------|-------|
 | `int` | `{id:int}` | `123456789`, `-123456789` | 符合任何整數。|
 | `bool` | `{active:bool}` | `true`, `FALSE` | 符合 `true` 或 `false` 。 不區分大小寫。|
@@ -1488,14 +1488,14 @@ ASP.NET Core 架構將 `RegexOptions.IgnoreCase | RegexOptions.Compiled | RegexO
 
 路由中使用的正則運算式通常會以插入 `^` 號字元開頭，並符合字串的開始位置。 運算式通常以貨幣符號 `$` 字元結尾，且字串的結尾相符。 `^` 和 `$` 字元可確保規則運算式符合整個路由參數值。 若不使用 `^` 與 `$` 字元，規則運算式會比對字串內的所有部分字串，這通常不是您想要的結果。 下表提供範例，並說明它們符合或無法符合的原因。
 
-| 運算是   | String    | 相符項目 | 註解               |
+| 運算是   | String    | 比對 | 註解               |
 | ------------ | --------- | :---: |  -------------------- |
-| `[a-z]{2}`   | hello     | Yes   | 子字串相符項目     |
-| `[a-z]{2}`   | 123abc456 | Yes   | 子字串相符項目     |
-| `[a-z]{2}`   | mz        | Yes   | 符合運算式    |
-| `[a-z]{2}`   | MZ        | Yes   | 不區分大小寫    |
-| `^[a-z]{2}$` | hello     | No    | 請參閱上述的 `^` 和 `$` |
-| `^[a-z]{2}$` | 123abc456 | No    | 請參閱上述的 `^` 和 `$` |
+| `[a-z]{2}`   | hello     | 是   | 子字串相符項目     |
+| `[a-z]{2}`   | 123abc456 | 是   | 子字串相符項目     |
+| `[a-z]{2}`   | mz        | 是   | 符合運算式    |
+| `[a-z]{2}`   | MZ        | 是   | 不區分大小寫    |
+| `^[a-z]{2}$` | hello     | 否    | 請參閱上述的 `^` 和 `$` |
+| `^[a-z]{2}$` | 123abc456 | 否    | 請參閱上述的 `^` 和 `$` |
 
 如需規則運算式語法的詳細資訊，請參閱 [.NET Framework 規則運算式](/dotnet/standard/base-types/regular-expression-language-quick-reference)。
 
@@ -1658,7 +1658,7 @@ URL 比對是路由用來將傳入要求分派給「處理常式」的處理序�
 
 [RouteData.Values](xref:Microsoft.AspNetCore.Routing.RouteData.Values*) 是「路由值」的字典，而路由值產生自路由。 這些值通常是透過將 URL 語彙基元化來決定，可以用來接受使用者輸入，或在應用程式內做出進一步的分派決策。
 
-[RouteData.DataTokens](xref:Microsoft.AspNetCore.Routing.RouteData.DataTokens*) 是其他資料的屬性包，而這些資料與相符路由相關。 提供了 <xref:Microsoft.AspNetCore.Routing.RouteData.DataTokens*> 來支援與每個路由建立關聯的狀態資料，因此應用程式可以依據符合哪一個路由來制定決策。 這些是開發人員定義的值， **不會** 以任何方式影響路由的行為。 此外，儲藏在 [RouteData.DataTokens](xref:Microsoft.AspNetCore.Routing.RouteData.DataTokens*) 中的值可以是任何類型，對比之下，[RouteData.Values](xref:Microsoft.AspNetCore.Routing.RouteData.Values) 則必須可轉換成字串或可從字串轉換。
+[RouteData.DataTokens](xref:Microsoft.AspNetCore.Routing.RouteData.DataTokens*) 是其他資料的屬性包，而這些資料與相符路由相關。 提供了 <xref:Microsoft.AspNetCore.Routing.RouteData.DataTokens*> 來支援與每個路由建立關聯的狀態資料，因此應用程式可以依據符合哪一個路由來制定決策。 這些是開發人員定義的值，**不會** 以任何方式影響路由的行為。 此外，儲藏在 [RouteData.DataTokens](xref:Microsoft.AspNetCore.Routing.RouteData.DataTokens*) 中的值可以是任何類型，對比之下，[RouteData.Values](xref:Microsoft.AspNetCore.Routing.RouteData.Values) 則必須可轉換成字串或可從字串轉換。
 
 [RouteData.Routers](xref:Microsoft.AspNetCore.Routing.RouteData.Routers) 是成功符合要求的參與路由清單。 路由可以用巢狀方式置於彼此內部。 <xref:Microsoft.AspNetCore.Routing.RouteData.Routers> 屬性會透過導致產生相符項目的路由邏輯樹狀結構反映路徑。 一般而言，<xref:Microsoft.AspNetCore.Routing.RouteData.Routers> 中的第一個項目是路由集合，應該用於產生 URL。 <xref:Microsoft.AspNetCore.Routing.RouteData.Routers> 中的最後一個項目是相符的路由處理常式。
 
@@ -1750,7 +1750,7 @@ routes.MapRoute(
     defaults: new { controller = "Blog", action = "ReadArticle" });
 ```
 
-上述範本會比對 `/Blog/All-About-Routing/Introduction` 等 URL 路徑，並擷取值 `{ controller = Blog, action = ReadArticle, article = All-About-Routing/Introduction }`。 即使範本中沒有任何對應的路由參數，路由也會產生 `controller` 和 `action` 的預設路由值。 預設值可以在路由範本中指定。 `article` 路由參數透過在路由參數名稱之前加上一個星號 (`*`) 來定義為 *catch-all* 。 全部擷取路由參數會擷取 URL 路徑的其餘部分，而且也可以符合空字串。
+上述範本會比對 `/Blog/All-About-Routing/Introduction` 等 URL 路徑，並擷取值 `{ controller = Blog, action = ReadArticle, article = All-About-Routing/Introduction }`。 即使範本中沒有任何對應的路由參數，路由也會產生 `controller` 和 `action` 的預設路由值。 預設值可以在路由範本中指定。 `article` 路由參數透過在路由參數名稱之前加上一個星號 (`*`) 來定義為 *catch-all*。 全部擷取路由參數會擷取 URL 路徑的其餘部分，而且也可以符合空字串。
 
 下列範例會新增路由條件約束和資料語彙基元：
 
@@ -1888,7 +1888,7 @@ URL 模式嘗試擷取具有選擇性副檔名的檔案名稱時，具有其他�
 
 下表示範範例路由條件約束及其預期行為。
 
-| constraint (條件約束) | 範例 | 範例相符項目 | 備註 |
+| constraint (條件約束) | 範例 | 範例相符項目 | 注意 |
 | ---------- | ------- | --------------- | ----- |
 | `int` | `{id:int}` | `123456789`, `-123456789` | 符合任何整數 |
 | `bool` | `{active:bool}` | `true`, `FALSE` | 符合 `true` 或 `false` (不區分大小寫) |
@@ -1932,14 +1932,14 @@ ASP.NET Core 架構將 `RegexOptions.IgnoreCase | RegexOptions.Compiled | RegexO
 
 路由中所使用的規則運算式通常以插入號 (`^`) 字元開頭，並符合字串的開始位置。 運算式通常以貨幣符號 (`$`) 字元結尾，並符合字串的結尾。 `^` 和 `$` 字元可確保規則運算式符合整個路由參數值。 若不使用 `^` 與 `$` 字元，規則運算式會比對字串內的所有部分字串，這通常不是您想要的結果。 下表提供範例，並說明它們符合或無法符合的原因。
 
-| 運算是   | String    | 相符項目 | 註解               |
+| 運算是   | String    | 比對 | 註解               |
 | ------------ | --------- | :---: |  -------------------- |
-| `[a-z]{2}`   | hello     | Yes   | 子字串相符項目     |
-| `[a-z]{2}`   | 123abc456 | Yes   | 子字串相符項目     |
-| `[a-z]{2}`   | mz        | Yes   | 符合運算式    |
-| `[a-z]{2}`   | MZ        | Yes   | 不區分大小寫    |
-| `^[a-z]{2}$` | hello     | No    | 請參閱上述的 `^` 和 `$` |
-| `^[a-z]{2}$` | 123abc456 | No    | 請參閱上述的 `^` 和 `$` |
+| `[a-z]{2}`   | hello     | 是   | 子字串相符項目     |
+| `[a-z]{2}`   | 123abc456 | 是   | 子字串相符項目     |
+| `[a-z]{2}`   | mz        | 是   | 符合運算式    |
+| `[a-z]{2}`   | MZ        | 是   | 不區分大小寫    |
+| `^[a-z]{2}$` | hello     | 否    | 請參閱上述的 `^` 和 `$` |
+| `^[a-z]{2}$` | 123abc456 | 否    | 請參閱上述的 `^` 和 `$` |
 
 如需規則運算式語法的詳細資訊，請參閱 [.NET Framework 規則運算式](/dotnet/standard/base-types/regular-expression-language-quick-reference)。
 

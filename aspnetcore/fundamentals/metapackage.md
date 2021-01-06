@@ -7,6 +7,7 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 10/25/2018
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -18,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: fundamentals/metapackage
-ms.openlocfilehash: 133eee71fcd85a95ac53684c3c6e475a54592967
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: b739398c2a440f21c8bdfdc1f4d8e25412358a6a
+ms.sourcegitcommit: 3593c4efa707edeaaceffbfa544f99f41fc62535
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88634562"
+ms.lasthandoff: 01/04/2021
+ms.locfileid: "93060686"
 ---
 # <a name="microsoftaspnetcoreall-metapackage-for-aspnet-core-20"></a>ASP.NET Core 2.0 的 Microsoft.AspNetCore.All 中繼套件
 
@@ -38,7 +39,7 @@ ms.locfileid: "88634562"
 
 這項功能需要以 .NET Core 2.x 為目標的 ASP.NET Core 2.x。
 
-[Microsoft.AspNetCore.All](https://www.nuget.org/packages/Microsoft.AspNetCore.All) \(英文\) 是參考共用架構的中繼套件。 「共用的架構」** 是一組不在應用程式資料夾內的組件 (*.dll* 檔案)。 共用的架構必須安裝於要執行應用程式的機器上。 如需詳細資訊，請參閱[共用的架構](https://natemcmaster.com/blog/2018/08/29/netcore-primitives-2/) \(英文\)。
+[Microsoft.AspNetCore.All](https://www.nuget.org/packages/Microsoft.AspNetCore.All) \(英文\) 是參考共用架構的中繼套件。 「共用的架構」是一組不在應用程式資料夾內的組件 (*.dll* 檔案)。 共用的架構必須安裝於要執行應用程式的機器上。 如需詳細資訊，請參閱[共用的架構](https://natemcmaster.com/blog/2018/08/29/netcore-primitives-2/) \(英文\)。
 
 `Microsoft.AspNetCore.All` 所參考的共用架構包含：
 
@@ -62,7 +63,7 @@ ms.locfileid: "88634562"
 
 可攜式應用程式的隱含版本會設定為 `major.minor.0`。 共用架構向前復原機制會在已安裝共用架構中的最新相容版本上，執行應用程式。 為了保證開發、測試和生產均使用相同版本，請務必在所有環境中安裝相同版本的共用架構。 針對獨立應用程式，隱含版本號碼會設定為已安裝 SDK 隨附共用架構的 `major.minor.patch`。
 
-在 `Microsoft.AspNetCore.All` 套件參考上指定版本號碼**不**保證會選擇該版本的共用架構。 例如，假設指定版本 "2.1.1"，但安裝 "2.1.3"。 在此情況下，應用程式會使用 "2.1.3"。 您可以停用向前復原 (修補及/或次要)，但不建議這樣做。 如需 dotnet 主機向前復原及如何設定其行為的詳細資訊，請參閱 [dotnet 主機向前復原](https://github.com/dotnet/core-setup/blob/master/Documentation/design-docs/roll-forward-on-no-candidate-fx.md)。
+在 `Microsoft.AspNetCore.All` 套件參考上指定版本號碼 **不** 保證會選擇該版本的共用架構。 例如，假設指定版本 "2.1.1"，但安裝 "2.1.3"。 在此情況下，應用程式會使用 "2.1.3"。 您可以停用向前復原 (修補及/或次要)，但不建議這樣做。 如需 dotnet 主機向前復原及如何設定其行為的詳細資訊，請參閱 [dotnet 主機向前復原](https://github.com/dotnet/core-setup/blob/master/Documentation/design-docs/roll-forward-on-no-candidate-fx.md)。
 
 在專案檔中，專案的 SDK 必須設定為 `Microsoft.NET.Sdk.Web`，才能使用 `Microsoft.AspNetCore.All` 的隱含版本。 當指定 `Microsoft.NET.Sdk` SDK 時 (專案檔頂端的 `<Project Sdk="Microsoft.NET.Sdk">`)，就會產生以下警告：
 

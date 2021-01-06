@@ -19,10 +19,10 @@ no-loc:
 - SignalR
 uid: grpc/performance
 ms.openlocfilehash: 622c6ba042c5832f99bba379fadd9aba7d7163f2
-ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
+ms.sourcegitcommit: 3593c4efa707edeaaceffbfa544f99f41fc62535
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 10/30/2020
+ms.lasthandoff: 01/04/2021
 ms.locfileid: "93060400"
 ---
 # <a name="performance-best-practices-with-grpc"></a>使用 gRPC 的效能最佳作法
@@ -50,7 +50,7 @@ gRPC 是專為高效能服務所設計。 本檔說明如何從 gRPC 獲得最�
 * 通道和從通道建立的用戶端可以安全地由多個執行緒使用。
 * 從通道建立的用戶端可能會進行多個同時呼叫。
 
-gRPC 用戶端 factory 提供集中的方式來設定通道。 它會自動重複使用基礎通道。 如需詳細資訊，請參閱<xref:grpc/clientfactory>。
+gRPC 用戶端 factory 提供集中的方式來設定通道。 它會自動重複使用基礎通道。 如需詳細資訊，請參閱 <xref:grpc/clientfactory> 。
 
 ## <a name="connection-concurrency"></a>並行連接
 
@@ -127,7 +127,7 @@ L7 (應用程式) proxy 的運作層級高於 L4 (傳輸) proxy。 L7 proxy 瞭�
 
 用戶端與服務之間的 gRPC 呼叫通常會透過 TCP 通訊端來傳送。 TCP 很適合用來在網路上進行通訊，但是當用戶端與服務位於相同電腦上時， [ (IPC) 的處理序間通訊 ](https://wikipedia.org/wiki/Inter-process_communication) 會更有效率。
 
-請考慮使用類似 Unix 網域通訊端或具名管道的傳輸，在同一部電腦上的進程之間進行 gRPC 呼叫。 如需詳細資訊，請參閱<xref:grpc/interprocess>。
+請考慮使用類似 Unix 網域通訊端或具名管道的傳輸，在同一部電腦上的進程之間進行 gRPC 呼叫。 如需詳細資訊，請參閱 <xref:grpc/interprocess> 。
 
 ## <a name="keep-alive-pings"></a>保持作用中的 ping
 

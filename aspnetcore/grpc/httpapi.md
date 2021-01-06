@@ -19,10 +19,10 @@ no-loc:
 - SignalR
 uid: grpc/httpapi
 ms.openlocfilehash: cb2855f0293a6bc800bb5758cd1a8400d4434a24
-ms.sourcegitcommit: a71bb61f7add06acb949c9258fe506914dfe0c08
+ms.sourcegitcommit: 3593c4efa707edeaaceffbfa544f99f41fc62535
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 12/08/2020
+ms.lasthandoff: 01/04/2021
 ms.locfileid: "96855454"
 ---
 # <a name="create-json-web-apis-from-grpc"></a>從 gRPC 建立 JSON Web API
@@ -53,7 +53,7 @@ _ HTTP 動詞命令
 
 gRPC 仍然可以用來呼叫服務。
 
-### <a name="usage"></a>使用量
+### <a name="usage"></a>使用方式
 
 1. 將套件參考新增至 [AspNetCore. Grpc. HTTPapi.dll](https://www.nuget.org/packages/Microsoft.AspNetCore.Grpc.HttpApi)。
 1. 在 *Startup.cs* 中註冊服務 `AddGrpcHttpApi` 。

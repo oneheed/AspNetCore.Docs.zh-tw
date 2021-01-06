@@ -18,10 +18,10 @@ no-loc:
 - SignalR
 uid: tutorials/first-mvc-app/adding-view
 ms.openlocfilehash: ce2754d22b61578bdbe5e78a69e08bdc1e83190d
-ms.sourcegitcommit: fb208f907249cc7aab029afff941a0266c187050
+ms.sourcegitcommit: 3593c4efa707edeaaceffbfa544f99f41fc62535
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 11/17/2020
+ms.lasthandoff: 01/04/2021
 ms.locfileid: "94688344"
 ---
 # <a name="part-3-add-a-view-to-an-aspnet-core-mvc-app"></a>第3部分：將視圖新增至 ASP.NET Core MVC 應用程式
@@ -60,7 +60,7 @@ ms.locfileid: "94688344"
 
 ![[新增項目] 對話方塊](adding-view/_static/add_view.png)
 
-# <a name="visual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code) \(英文\)
+# <a name="visual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code)
 
 為 `HelloWorldController` 新增 `Index` 檢視。
 
@@ -76,7 +76,7 @@ ms.locfileid: "94688344"
   * 選取左窗格中的 [ **ASP .Net Core** ]。
   * 選取中央窗格中的 [ **Razor View** ]。
   * 在 [**名稱**] 方塊中輸入 *索引*。
-  * 選取 [新增]。
+  * 選取 [ **新增**]。
 
 ![[新增項目] 對話方塊](adding-view/_static/add_view_macVSM8.9.png)
 
@@ -229,7 +229,7 @@ ms.locfileid: "94688344"
 
 ![[新增項目] 對話方塊](adding-view/_static/add_view.png)
 
-# <a name="visual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code) \(英文\)
+# <a name="visual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code)
 
 為 `HelloWorldController` 新增 `Index` 檢視。
 
@@ -245,7 +245,7 @@ ms.locfileid: "94688344"
   * 選取左窗格的 [Web]。
   * 選取中間窗格的 [空的 HTML 檔案]。
   * 在 [名稱] 方塊中，鍵入 **Index.cshtml**。
-  * 選取 [新增]。
+  * 選取 [ **新增**]。
 
 ![[新增項目] 對話方塊](adding-view/_static/add_view_mac.png)
 

@@ -7,6 +7,7 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 02/07/2020
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -18,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: host-and-deploy/azure-iis-errors-reference
-ms.openlocfilehash: 46fa3138e3fbcc4ed5e4497ec017a5873a4cdb13
-ms.sourcegitcommit: d60bfd52bfb559e805abd654b87a2a0c7eb69cf8
+ms.openlocfilehash: b009cc61a94e618a48d96ecbd770ef6371308f6a
+ms.sourcegitcommit: 3593c4efa707edeaaceffbfa544f99f41fc62535
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 10/06/2020
-ms.locfileid: "91754654"
+ms.lasthandoff: 01/04/2021
+ms.locfileid: "93059841"
 ---
 # <a name="common-errors-reference-for-azure-app-service-and-iis-with-aspnet-core"></a>Azure App Service 與 IIS 搭配 ASP.NET Core 時的常見錯誤參考
 
@@ -39,15 +40,15 @@ ms.locfileid: "91754654"
 * 應用程式事件記錄檔項目
   * Azure App Service：請參閱 <xref:test/troubleshoot-azure-iis> 。
   * IIS
-    1. 在 [Windows]**** 功能表中選取 [開始]****，鍵入「事件檢視器」**，然後按 **Enter** 鍵。
-    1. 在 [事件檢視器]**** 開啟之後，展開提要欄位中的 [Windows 記錄檔]**[應用程式]** > ****。
+    1. 在 [Windows] 功能表中選取 [開始]，鍵入「事件檢視器」，然後按 **Enter** 鍵。
+    1. 在 [事件檢視器] 開啟之後，展開提要欄位中的 [Windows 記錄檔]**[應用程式]** > 。
 * ASP.NET Core 模組 stdout 和偵錯記錄項目
   * Azure App Service：請參閱 <xref:test/troubleshoot-azure-iis> 。
   * IIS：遵循 ASP.NET Core 課程模組主題的 [記錄檔建立和](xref:host-and-deploy/aspnet-core-module#log-creation-and-redirection) 重新導向和 [增強的診斷記錄](xref:host-and-deploy/aspnet-core-module#enhanced-diagnostic-logs) 章節中的指示。
 
 將錯誤資訊與下列常見錯誤進行比較。 如果找到相符情況，請依照疑難排解建議進行操作。
 
-本主題中的錯誤清單並不完整。 如果您遇到這裡未列出的錯誤，請使用本主題底部的 [內容意見反應]**** 按鈕來開啟新的問題，並提供如何重現錯誤的詳細指示。
+本主題中的錯誤清單並不完整。 如果您遇到這裡未列出的錯誤，請使用本主題底部的 [內容意見反應] 按鈕來開啟新的問題，並提供如何重現錯誤的詳細指示。
 
 [!INCLUDE[Azure App Service Preview Notice](../includes/azure-apps-preview-notice.md)]
 
@@ -57,13 +58,13 @@ ms.locfileid: "91754654"
 
 疑難排解：
 
-作業系統升級時不會保留 **C:\Windows\SysWOW64\inetsrv** 目錄中的非作業系統檔案。 如果先安裝 ASP.NET Core 模組再升級 OS，然後在 OS 升級之後以 32 位元模式執行任何應用程式集區，就會發生此問題。 作業系統升級之後，請修復 ASP.NET Core 模組。 請參閱 [安裝 .Net Core 裝載](xref:host-and-deploy/iis/index#install-the-net-core-hosting-bundle)套件組合。 執行安裝程式時，請選取 [修復]****。
+作業系統升級時不會保留 **C:\Windows\SysWOW64\inetsrv** 目錄中的非作業系統檔案。 如果先安裝 ASP.NET Core 模組再升級 OS，然後在 OS 升級之後以 32 位元模式執行任何應用程式集區，就會發生此問題。 作業系統升級之後，請修復 ASP.NET Core 模組。 請參閱 [安裝 .Net Core 裝載](xref:host-and-deploy/iis/index#install-the-net-core-hosting-bundle)套件組合。 執行安裝程式時，請選取 [修復]。
 
 ## <a name="missing-site-extension-32-bit-x86-and-64-bit-x64-site-extensions-installed-or-wrong-process-bitness-set"></a>遺失網站延伸模組、已安裝 32 位元 (x86) 和 64 位元 (x64) 網站延伸模組，或錯誤的處理序位元集合
 
 *適用於 Azure 應用程式服務所裝載的應用程式。*
 
-* **Browser：** HTTP 錯誤 500.0-ANCM 同進程處理常式載入失敗
+* **Browser：** HTTP 錯誤 500.0-ANCM In-Process 處理常式載入失敗
 
 * **應用程式記錄檔：** 叫用 hostfxr 以找出原生要求處理常式失敗，但未找出任何原生相依性。 找不到同處理序要求處理常式。 從叫用 hostfxr 所捕獲的輸出：找不到任何相容的 framework 版本。 找不到指定的架構 'Microsoft.AspNetCore.App' 版本 '{VERSION}-preview-\*'。 無法啟動應用程式 '/LM/W3SVC/1416782824/ROOT', ErrorCode '0x8000ffff'。
 
@@ -82,15 +83,15 @@ ms.locfileid: "91754654"
 
 * 如果在預覽執行階段中執行應用程式，而且已經安裝 32 位元 (x86) 和 64 位元 (x64) [網站延伸模組](xref:host-and-deploy/azure-apps/index#install-the-preview-site-extension)，請將與應用程式位元不符的網站延伸模組解除安裝。 移除網站延伸模組之後，請重新啟動應用程式。 請等候數秒，讓應用程式重新啟動。
 
-* 如果在預覽執行階段中執行應用程式，且網站延伸模組位元與應用程式相符，請確認預覽網站延伸模組的「執行階段版本」** 是否與應用程式相符。
+* 如果在預覽執行階段中執行應用程式，且網站延伸模組位元與應用程式相符，請確認預覽網站延伸模組的「執行階段版本」是否與應用程式相符。
 
-* 確認**應用程式設定**中應用程式的**平台**與應用程式位元相符。
+* 確認 **應用程式設定** 中應用程式的 **平台** 與應用程式位元相符。
 
-如需詳細資訊，請參閱<xref:host-and-deploy/azure-apps/index#install-the-preview-site-extension>。
+如需詳細資訊，請參閱 <xref:host-and-deploy/azure-apps/index#install-the-preview-site-extension> 。
 
 ## <a name="an-x86-app-is-deployed-but-the-app-pool-isnt-enabled-for-32-bit-apps"></a>已部署 x86 應用程式，但未啟用 32 位元應用程式的應用程式集區
 
-* **Browser：** HTTP 錯誤 500.30-ANCM 同進程啟動失敗
+* **Browser：** HTTP 錯誤 500.30-ANCM In-Process 啟動失敗
 
 * **應用程式記錄檔：** 實體根目錄為 ' {PATH} ' 的應用程式 '/LM/W3SVC/5/ROOT ' 遇到未預期的 managed 例外狀況，例外狀況代碼 = ' 0xe0434352 '。 如需詳細資訊，請檢查 stderr 記錄檔。 實體根目錄為 '{PATH}' 的應用程式 '/LM/W3SVC/5/ROOT' 無法載入 CLR 和受控應用程式。 CLR 背景工作執行緒不當結束
 
@@ -102,7 +103,7 @@ SDK 會在發行獨立應用程式時攔截到此案例。 如果 RID 不符合�
 
 疑難排解：
 
-針對 x86 架構相依部署 (`<PlatformTarget>x86</PlatformTarget>`)，請啟用 32 位元應用程式的 IIS 應用程式集區。 在 [IIS 管理員] 中，開啟應用程式集區的 [進階設定]****，然後將 [啟用 32 位元應用程式]**** 設定為 [True]****。
+針對 x86 架構相依部署 (`<PlatformTarget>x86</PlatformTarget>`)，請啟用 32 位元應用程式的 IIS 應用程式集區。 在 [IIS 管理員] 中，開啟應用程式集區的 [進階設定]，然後將 [啟用 32 位元應用程式] 設定為 [True]。
 
 ## <a name="platform-conflicts-with-rid"></a>平台發生 RID 衝突
 
@@ -114,7 +115,7 @@ SDK 會在發行獨立應用程式時攔截到此案例。 如果 RID 不符合�
 
 疑難排解：
 
-* 確認應用程式在 Kestrel 本機上執行。 處理序失敗，可能是因為應用程式發生問題。 如需詳細資訊，請參閱<xref:test/troubleshoot-azure-iis>。
+* 確認應用程式在 Kestrel 本機上執行。 處理序失敗，可能是因為應用程式發生問題。 如需詳細資訊，請參閱 <xref:test/troubleshoot-azure-iis> 。
 
 * 如果在升級應用程式和部署更新的組件時，Azure 應用程式部署發生這個例外狀況，請手動刪除來自先前部署的所有檔案。 部署升級的應用程式時，延遲不相容的組件會導致 `System.BadImageFormatException` 例外狀況。
 
@@ -132,7 +133,7 @@ SDK 會在發行獨立應用程式時攔截到此案例。 如果 RID 不符合�
 
 * 確認使用對應用程式正確的 URI 端點。 檢查繫結。
 
-* 確認 IIS 網站不是處於「已停止」** 狀態。
+* 確認 IIS 網站不是處於「已停止」狀態。
 
 ## <a name="corewebengine-or-w3svc-server-features-disabled"></a>已停用 CoreWebEngine 或 W3SVC 伺服器功能
 
@@ -154,7 +155,7 @@ SDK 會在發行獨立應用程式時攔截到此案例。 如果 RID 不符合�
 
 疑難排解：
 
-檢查 IIS 網站的 [基本設定]**** 和實體的應用程式資料夾。 確認應用程式位於 IIS 網站**實體路徑**的資料夾中。
+檢查 IIS 網站的 [基本設定] 和實體的應用程式資料夾。 確認應用程式位於 IIS 網站 **實體路徑** 的資料夾中。
 
 ## <a name="incorrect-role-aspnet-core-module-not-installed-or-incorrect-permissions"></a>角色不正確、ASP.NET Core 模組未安裝，或權限不正確
 
@@ -170,13 +171,13 @@ SDK 會在發行獨立應用程式時攔截到此案例。 如果 RID 不符合�
 
 * 確認已啟用適當的角色。 請參閱 [IIS 組態](xref:host-and-deploy/iis/index#iis-configuration)。
 
-* 開啟 [程式和功能]**** 或 [應用程式與功能]****，並確認已安裝 **Windows Server Hosting**。 如果已安裝的程式清單中沒有 **Windows Server Hosting**，請下載並安裝 .NET Core 裝載套件組合。
+* 開啟 [程式和功能] 或 [應用程式與功能]，並確認已安裝 **Windows Server Hosting**。 如果已安裝的程式清單中沒有 **Windows Server Hosting**，請下載並安裝 .NET Core 裝載套件組合。
 
   [目前的 .NET Core 裝載套件組合安裝程式 (直接下載)](https://dotnet.microsoft.com/permalink/dotnetcore-current-windows-runtime-bundle-installer)
 
   如需詳細資訊，請參閱[安裝 .NET Core 裝載套件組合](xref:host-and-deploy/iis/index#install-the-net-core-hosting-bundle)。
 
-* 請確定**應用程式**集區 > **進程模型** > **Identity** 設定為** Identity ApplicationPool** ，或自訂身分識別具有正確的許可權，可存取應用程式的部署資料夾。
+* 請確定 **應用程式** 集區 > **進程模型** > **Identity** 設定為 **Identity ApplicationPool** ，或自訂身分識別具有正確的許可權，可存取應用程式的部署資料夾。
 
 * 若解除安裝 ASP.NET Core Hosting Bundle 並安裝舊版裝載套件組合，*applicationHost.config* 檔案不會包括 ASP.NET Core Module 的區段。 開啟位於 *%windir%/System32/inetsrv/config* 的 *applicationHost.config*，然後尋找 `<configuration><configSections><sectionGroup name="system.webServer">` 區段群組。 若區段群組中沒有 ASP.NET Core Module 的區段，請新增區段元素：
 
@@ -188,7 +189,7 @@ SDK 會在發行獨立應用程式時攔截到此案例。 如果 RID 不符合�
 
 ## <a name="incorrect-processpath-missing-path-variable-hosting-bundle-not-installed-systemiis-not-restarted-vc-redistributable-not-installed-or-dotnetexe-access-violation"></a>不正確的 processPath、遺失 PATH 變數、未安裝裝載套件組合、未重新啟動系統/IIS、未安裝 VC++ 可轉散發套件或 dotnet.exe 存取違規
 
-* **Browser：** HTTP 錯誤 500.0-ANCM 同進程處理常式載入失敗
+* **Browser：** HTTP 錯誤 500.0-ANCM In-Process 處理常式載入失敗
 
 * **應用程式記錄檔：** 實體根目錄為 ' C： PATH} 的應用程式 ' MACHINE/WEBROOT/APPHOST/{ASSEMBLY} ' \{ \' 無法以命令列 ' "{...}" 啟動進程 '，ErrorCode = ' 0x80070002：0。 應用程式 '{PATH}' 無法啟動。 在 '{PATH}' 找不到可執行檔。 無法啟動應用程式 '/LM/W3SVC/2/ROOT'，ErrorCode '0x8007023e'。
 
@@ -198,17 +199,17 @@ SDK 會在發行獨立應用程式時攔截到此案例。 如果 RID 不符合�
 
 疑難排解：
 
-* 確認應用程式在 Kestrel 本機上執行。 處理序失敗，可能是因為應用程式發生問題。 如需詳細資訊，請參閱<xref:test/troubleshoot-azure-iis>。
+* 確認應用程式在 Kestrel 本機上執行。 處理序失敗，可能是因為應用程式發生問題。 如需詳細資訊，請參閱 <xref:test/troubleshoot-azure-iis> 。
 
-* 檢查 *web.config* 中 `<aspNetCore>` 元素上的 *processPath* 屬性，以確認它是 `dotnet` (適用於架構相依部署 (FDD)) 或 `.\{ASSEMBLY}.exe` (適用於[自封式部署 (SCD)](/dotnet/core/deploying/#self-contained-deployments-scd))。
+* 檢查 *web.config* 中 `<aspNetCore>` 元素上的 *processPath* 屬性，以確認它是 `dotnet` (適用於架構相依部署 (FDD)) 或 `.\{ASSEMBLY}.exe` (適用於 [自封式部署 (SCD)](/dotnet/core/deploying/#self-contained-deployments-scd))。
 
-* 若為 FDD，可能無法透過路徑設定存取 *dotnet.exe*。 確認*C:\Program Files\dotnet \\ *存在於 [系統路徑] 設定中。
+* 若為 FDD，可能無法透過路徑設定存取 *dotnet.exe*。 確認 *C:\Program Files\dotnet \\* 存在於 [系統路徑] 設定中。
 
 * 若為 FDD，應用程式集區的使用者身分識別可能無法存取 *dotnet.exe*。 確認應用程式集區使用者身分識別可以存取 *C:\Program Files\dotnet* 目錄。 確認 *C:\Program Files\dotnet* 和應用程式目錄上未針對應用程式集區使用者身分識別設定任何拒絕規則。
 
 * 可能已部署 FDD 並安裝 .NET Core，但未重新啟動 IIS。 從命令提示字元依序執行 **net stop was /y** 和 **net start w3svc**，重新啟動伺服器或重新啟動 IIS。
 
-* 可能已部署 FDD，但未在主控系統上安裝 .NET Core 執行階段。 如果尚未安裝 .NET Core 執行階段，請在系統上執行「.NET Core 裝載套件組合安裝程式」****。
+* 可能已部署 FDD，但未在主控系統上安裝 .NET Core 執行階段。 如果尚未安裝 .NET Core 執行階段，請在系統上執行「.NET Core 裝載套件組合安裝程式」。
 
   [目前的 .NET Core 裝載套件組合安裝程式 (直接下載)](https://dotnet.microsoft.com/permalink/dotnetcore-current-windows-runtime-bundle-installer)
 
@@ -218,7 +219,7 @@ SDK 會在發行獨立應用程式時攔截到此案例。 如果 RID 不符合�
 
 ## <a name="incorrect-arguments-of-aspnetcore-element"></a>元素的引數不正確 \<aspNetCore>
 
-* **Browser：** HTTP 錯誤 500.0-ANCM 同進程處理常式載入失敗
+* **Browser：** HTTP 錯誤 500.0-ANCM In-Process 處理常式載入失敗
 
 * **應用程式記錄檔：** 叫用 hostfxr 以找出原生要求處理常式失敗，但未找出任何原生相依性。 這最有可能表示應用程式設定不正確，請檢查應用程式設為目標的 Microsoft.NetCore.App 和 Microsoft.AspNetCore.App 版本，並確定已安裝在電腦上。 找不到同處理序要求處理常式。 從叫用 hostfxr 所捕獲的輸出：執行 dotnet SDK 命令的意思是什麼？ 請從下列安裝 dotnet SDK： https://go.microsoft.com/fwlink/?LinkID=798306&clcid=0x409 無法啟動應用程式 '/LM/W3SVC/3/ROOT '，ErrorCode ' 0x8000ffff '。
 
@@ -228,13 +229,13 @@ SDK 會在發行獨立應用程式時攔截到此案例。 如果 RID 不符合�
 
 疑難排解：
 
-* 確認應用程式在 Kestrel 本機上執行。 處理序失敗，可能是因為應用程式發生問題。 如需詳細資訊，請參閱<xref:test/troubleshoot-azure-iis>。
+* 確認應用程式在 Kestrel 本機上執行。 處理序失敗，可能是因為應用程式發生問題。 如需詳細資訊，請參閱 <xref:test/troubleshoot-azure-iis> 。
 
 * 檢查 *web.config* 中 `<aspNetCore>` 元素上的 *arguments* 屬性，以確認它是 (a) `.\{ASSEMBLY}.dll` (適用於架構相依部署 (FDD))；或 (b) 不存在、空字串 (`arguments=""`)，或是應用程式的引數清單 (`arguments="{ARGUMENT_1}, {ARGUMENT_2}, ... {ARGUMENT_X}"`，適用於自封式部署 (SCD))。
 
 ## <a name="missing-net-core-shared-framework"></a>遺失 .NET Core 共用架構
 
-* **Browser：** HTTP 錯誤 500.0-ANCM 同進程處理常式載入失敗
+* **Browser：** HTTP 錯誤 500.0-ANCM In-Process 處理常式載入失敗
 
 * **應用程式記錄檔：** 叫用 hostfxr 以找出原生要求處理常式失敗，但未找出任何原生相依性。 這最有可能表示應用程式設定不正確，請檢查應用程式設為目標的 Microsoft.NetCore.App 和 Microsoft.AspNetCore.App 版本，並確定已安裝在電腦上。 找不到同處理序要求處理常式。 從叫用 hostfxr 所捕獲的輸出：找不到任何相容的 framework 版本。 找不到指定的架構 'Microsoft.AspNetCore.App' 版本 '{VERSION}'。
 
@@ -260,7 +261,7 @@ SDK 會在發行獨立應用程式時攔截到此案例。 如果 RID 不符合�
 
 疑難排解：
 
-確認「應用程式集區」不是處於「已停止」** 狀態。
+確認「應用程式集區」不是處於「已停止」狀態。
 
 ## <a name="sub-application-includes-a-handlers-section"></a>子應用程式包含 \<handlers> 區段
 
@@ -276,7 +277,7 @@ SDK 會在發行獨立應用程式時攔截到此案例。 如果 RID 不符合�
 
 請確認子應用程式的 *web.config* 檔案不包含 `<handlers>` 區段，或子應用程式未繼承父應用程式的處理常式。
 
-父應用程式 *web.config* 的 `<system.webServer>` 區段位於 `<location>` 元素內。 <xref:System.Configuration.SectionInformation.InheritInChildApplications*>屬性設定為， `false` 表示在元素內指定的設定不會 [\<location>](/iis/manage/managing-your-configuration-settings/understanding-iis-configuration-delegation#the-concept-of-location) 由位於父應用程式子目錄中的應用程式所繼承。 如需詳細資訊，請參閱<xref:host-and-deploy/aspnet-core-module>。
+父應用程式 *web.config* 的 `<system.webServer>` 區段位於 `<location>` 元素內。 <xref:System.Configuration.SectionInformation.InheritInChildApplications*>屬性設定為， `false` 表示在元素內指定的設定不會 [\<location>](/iis/manage/managing-your-configuration-settings/understanding-iis-configuration-delegation#the-concept-of-location) 由位於父應用程式子目錄中的應用程式所繼承。 如需詳細資訊，請參閱 <xref:host-and-deploy/aspnet-core-module> 。
 
 ## <a name="stdout-log-path-incorrect"></a>stdout 記錄檔路徑不正確
 
@@ -296,7 +297,7 @@ SDK 會在發行獨立應用程式時攔截到此案例。 如果 RID 不符合�
 
 ## <a name="application-configuration-general-issue"></a>應用程式組態一般問題
 
-* **Browser：** HTTP 錯誤 500.0-ANCM 同進程處理常式載入失敗 **--或--** HTTP 錯誤 500.30-ANCM 同進程啟動失敗
+* **Browser：** HTTP 錯誤 500.0-ANCM In-Process 處理常式載入失敗 **--或--** HTTP 錯誤 500.30-ANCM In-Process 啟動失敗
 
 * **應用程式記錄檔：** 變數
 
@@ -327,15 +328,15 @@ SDK 會在發行獨立應用程式時攔截到此案例。 如果 RID 不符合�
 * 應用程式事件記錄檔項目
   * Azure App Service：請參閱 <xref:test/troubleshoot-azure-iis> 。
   * IIS
-    1. 在 [Windows]**** 功能表中選取 [開始]****，鍵入「事件檢視器」**，然後按 **Enter** 鍵。
-    1. 在 [事件檢視器]**** 開啟之後，展開提要欄位中的 [Windows 記錄檔]**[應用程式]** > ****。
+    1. 在 [Windows] 功能表中選取 [開始]，鍵入「事件檢視器」，然後按 **Enter** 鍵。
+    1. 在 [事件檢視器] 開啟之後，展開提要欄位中的 [Windows 記錄檔]**[應用程式]** > 。
 * ASP.NET Core 模組 stdout 和偵錯記錄項目
   * Azure App Service：請參閱 <xref:test/troubleshoot-azure-iis> 。
   * IIS：遵循 ASP.NET Core 課程模組主題的 [記錄檔建立和](xref:host-and-deploy/aspnet-core-module#log-creation-and-redirection) 重新導向和 [增強的診斷記錄](xref:host-and-deploy/aspnet-core-module#enhanced-diagnostic-logs) 章節中的指示。
 
 將錯誤資訊與下列常見錯誤進行比較。 如果找到相符情況，請依照疑難排解建議進行操作。
 
-本主題中的錯誤清單並不完整。 如果您遇到這裡未列出的錯誤，請使用本主題底部的 [內容意見反應]**** 按鈕來開啟新的問題，並提供如何重現錯誤的詳細指示。
+本主題中的錯誤清單並不完整。 如果您遇到這裡未列出的錯誤，請使用本主題底部的 [內容意見反應] 按鈕來開啟新的問題，並提供如何重現錯誤的詳細指示。
 
 [!INCLUDE[Azure App Service Preview Notice](../includes/azure-apps-preview-notice.md)]
 
@@ -345,13 +346,13 @@ SDK 會在發行獨立應用程式時攔截到此案例。 如果 RID 不符合�
 
 疑難排解：
 
-作業系統升級時不會保留 **C:\Windows\SysWOW64\inetsrv** 目錄中的非作業系統檔案。 如果先安裝 ASP.NET Core 模組再升級 OS，然後在 OS 升級之後以 32 位元模式執行任何應用程式集區，就會發生此問題。 作業系統升級之後，請修復 ASP.NET Core 模組。 請參閱 [安裝 .Net Core 裝載](xref:host-and-deploy/iis/index#install-the-net-core-hosting-bundle)套件組合。 執行安裝程式時，請選取 [修復]****。
+作業系統升級時不會保留 **C:\Windows\SysWOW64\inetsrv** 目錄中的非作業系統檔案。 如果先安裝 ASP.NET Core 模組再升級 OS，然後在 OS 升級之後以 32 位元模式執行任何應用程式集區，就會發生此問題。 作業系統升級之後，請修復 ASP.NET Core 模組。 請參閱 [安裝 .Net Core 裝載](xref:host-and-deploy/iis/index#install-the-net-core-hosting-bundle)套件組合。 執行安裝程式時，請選取 [修復]。
 
 ## <a name="missing-site-extension-32-bit-x86-and-64-bit-x64-site-extensions-installed-or-wrong-process-bitness-set"></a>遺失網站延伸模組、已安裝 32 位元 (x86) 和 64 位元 (x64) 網站延伸模組，或錯誤的處理序位元集合
 
 *適用於 Azure 應用程式服務所裝載的應用程式。*
 
-* **Browser：** HTTP 錯誤 500.0-ANCM 同進程處理常式載入失敗
+* **Browser：** HTTP 錯誤 500.0-ANCM In-Process 處理常式載入失敗
 
 * **應用程式記錄檔：** 叫用 hostfxr 以找出原生要求處理常式失敗，但未找出任何原生相依性。 找不到同處理序要求處理常式。 從叫用 hostfxr 所捕獲的輸出：找不到任何相容的 framework 版本。 找不到指定的架構 'Microsoft.AspNetCore.App' 版本 '{VERSION}-preview-\*'。 無法啟動應用程式 '/LM/W3SVC/1416782824/ROOT', ErrorCode '0x8000ffff'。
 
@@ -368,15 +369,15 @@ SDK 會在發行獨立應用程式時攔截到此案例。 如果 RID 不符合�
 
 * 如果在預覽執行階段中執行應用程式，而且已經安裝 32 位元 (x86) 和 64 位元 (x64) [網站延伸模組](xref:host-and-deploy/azure-apps/index#install-the-preview-site-extension)，請將與應用程式位元不符的網站延伸模組解除安裝。 移除網站延伸模組之後，請重新啟動應用程式。 請等候數秒，讓應用程式重新啟動。
 
-* 如果在預覽執行階段中執行應用程式，且網站延伸模組位元與應用程式相符，請確認預覽網站延伸模組的「執行階段版本」** 是否與應用程式相符。
+* 如果在預覽執行階段中執行應用程式，且網站延伸模組位元與應用程式相符，請確認預覽網站延伸模組的「執行階段版本」是否與應用程式相符。
 
-* 確認**應用程式設定**中應用程式的**平台**與應用程式位元相符。
+* 確認 **應用程式設定** 中應用程式的 **平台** 與應用程式位元相符。
 
-如需詳細資訊，請參閱<xref:host-and-deploy/azure-apps/index#install-the-preview-site-extension>。
+如需詳細資訊，請參閱 <xref:host-and-deploy/azure-apps/index#install-the-preview-site-extension> 。
 
 ## <a name="an-x86-app-is-deployed-but-the-app-pool-isnt-enabled-for-32-bit-apps"></a>已部署 x86 應用程式，但未啟用 32 位元應用程式的應用程式集區
 
-* **Browser：** HTTP 錯誤 500.30-ANCM 同進程啟動失敗
+* **Browser：** HTTP 錯誤 500.30-ANCM In-Process 啟動失敗
 
 * **應用程式記錄檔：** 實體根目錄為 ' {PATH} ' 的應用程式 '/LM/W3SVC/5/ROOT ' 遇到未預期的 managed 例外狀況，例外狀況代碼 = ' 0xe0434352 '。 如需詳細資訊，請檢查 stderr 記錄檔。 實體根目錄為 '{PATH}' 的應用程式 '/LM/W3SVC/5/ROOT' 無法載入 CLR 和受控應用程式。 CLR 背景工作執行緒不當結束
 
@@ -386,7 +387,7 @@ SDK 會在發行獨立應用程式時攔截到此案例。 如果 RID 不符合�
 
 疑難排解：
 
-針對 x86 架構相依部署 (`<PlatformTarget>x86</PlatformTarget>`)，請啟用 32 位元應用程式的 IIS 應用程式集區。 在 [IIS 管理員] 中，開啟應用程式集區的 [進階設定]****，然後將 [啟用 32 位元應用程式]**** 設定為 [True]****。
+針對 x86 架構相依部署 (`<PlatformTarget>x86</PlatformTarget>`)，請啟用 32 位元應用程式的 IIS 應用程式集區。 在 [IIS 管理員] 中，開啟應用程式集區的 [進階設定]，然後將 [啟用 32 位元應用程式] 設定為 [True]。
 
 ## <a name="platform-conflicts-with-rid"></a>平台發生 RID 衝突
 
@@ -398,7 +399,7 @@ SDK 會在發行獨立應用程式時攔截到此案例。 如果 RID 不符合�
 
 疑難排解：
 
-* 確認應用程式在 Kestrel 本機上執行。 處理序失敗，可能是因為應用程式發生問題。 如需詳細資訊，請參閱<xref:test/troubleshoot-azure-iis>。
+* 確認應用程式在 Kestrel 本機上執行。 處理序失敗，可能是因為應用程式發生問題。 如需詳細資訊，請參閱 <xref:test/troubleshoot-azure-iis> 。
 
 * 如果在升級應用程式和部署更新的組件時，Azure 應用程式部署發生這個例外狀況，請手動刪除來自先前部署的所有檔案。 部署升級的應用程式時，延遲不相容的組件會導致 `System.BadImageFormatException` 例外狀況。
 
@@ -414,7 +415,7 @@ SDK 會在發行獨立應用程式時攔截到此案例。 如果 RID 不符合�
 
 * 確認使用對應用程式正確的 URI 端點。 檢查繫結。
 
-* 確認 IIS 網站不是處於「已停止」** 狀態。
+* 確認 IIS 網站不是處於「已停止」狀態。
 
 ## <a name="corewebengine-or-w3svc-server-features-disabled"></a>已停用 CoreWebEngine 或 W3SVC 伺服器功能
 
@@ -434,7 +435,7 @@ SDK 會在發行獨立應用程式時攔截到此案例。 如果 RID 不符合�
 
 疑難排解：
 
-檢查 IIS 網站的 [基本設定]**** 和實體的應用程式資料夾。 確認應用程式位於 IIS 網站**實體路徑**的資料夾中。
+檢查 IIS 網站的 [基本設定] 和實體的應用程式資料夾。 確認應用程式位於 IIS 網站 **實體路徑** 的資料夾中。
 
 ## <a name="incorrect-role-aspnet-core-module-not-installed-or-incorrect-permissions"></a>角色不正確、ASP.NET Core 模組未安裝，或權限不正確
 
@@ -448,13 +449,13 @@ SDK 會在發行獨立應用程式時攔截到此案例。 如果 RID 不符合�
 
 * 確認已啟用適當的角色。 請參閱 [IIS 組態](xref:host-and-deploy/iis/index#iis-configuration)。
 
-* 開啟 [程式和功能]**** 或 [應用程式與功能]****，並確認已安裝 **Windows Server Hosting**。 如果已安裝的程式清單中沒有 **Windows Server Hosting**，請下載並安裝 .NET Core 裝載套件組合。
+* 開啟 [程式和功能] 或 [應用程式與功能]，並確認已安裝 **Windows Server Hosting**。 如果已安裝的程式清單中沒有 **Windows Server Hosting**，請下載並安裝 .NET Core 裝載套件組合。
 
   [目前的 .NET Core 裝載套件組合安裝程式 (直接下載)](https://dotnet.microsoft.com/permalink/dotnetcore-current-windows-runtime-bundle-installer)
 
   如需詳細資訊，請參閱[安裝 .NET Core 裝載套件組合](xref:host-and-deploy/iis/index#install-the-net-core-hosting-bundle)。
 
-* 請確定**應用程式**集區 > **進程模型** > **Identity** 設定為** Identity ApplicationPool** ，或自訂身分識別具有正確的許可權，可存取應用程式的部署資料夾。
+* 請確定 **應用程式** 集區 > **進程模型** > **Identity** 設定為 **Identity ApplicationPool** ，或自訂身分識別具有正確的許可權，可存取應用程式的部署資料夾。
 
 * 若解除安裝 ASP.NET Core Hosting Bundle 並安裝舊版裝載套件組合，*applicationHost.config* 檔案不會包括 ASP.NET Core Module 的區段。 開啟位於 *%windir%/System32/inetsrv/config* 的 *applicationHost.config*，然後尋找 `<configuration><configSections><sectionGroup name="system.webServer">` 區段群組。 若區段群組中沒有 ASP.NET Core Module 的區段，請新增區段元素：
 
@@ -474,17 +475,17 @@ SDK 會在發行獨立應用程式時攔截到此案例。 如果 RID 不符合�
 
 疑難排解：
 
-* 確認應用程式在 Kestrel 本機上執行。 處理序失敗，可能是因為應用程式發生問題。 如需詳細資訊，請參閱<xref:test/troubleshoot-azure-iis>。
+* 確認應用程式在 Kestrel 本機上執行。 處理序失敗，可能是因為應用程式發生問題。 如需詳細資訊，請參閱 <xref:test/troubleshoot-azure-iis> 。
 
-* 檢查 *web.config* 中 `<aspNetCore>` 元素上的 *processPath* 屬性，以確認它是 `dotnet` (適用於架構相依部署 (FDD)) 或 `.\{ASSEMBLY}.exe` (適用於[自封式部署 (SCD)](/dotnet/core/deploying/#self-contained-deployments-scd))。
+* 檢查 *web.config* 中 `<aspNetCore>` 元素上的 *processPath* 屬性，以確認它是 `dotnet` (適用於架構相依部署 (FDD)) 或 `.\{ASSEMBLY}.exe` (適用於 [自封式部署 (SCD)](/dotnet/core/deploying/#self-contained-deployments-scd))。
 
-* 若為 FDD，可能無法透過路徑設定存取 *dotnet.exe*。 確認*C:\Program Files\dotnet \\ *存在於 [系統路徑] 設定中。
+* 若為 FDD，可能無法透過路徑設定存取 *dotnet.exe*。 確認 *C:\Program Files\dotnet \\* 存在於 [系統路徑] 設定中。
 
 * 若為 FDD，應用程式集區的使用者身分識別可能無法存取 *dotnet.exe*。 確認應用程式集區使用者身分識別可以存取 *C:\Program Files\dotnet* 目錄。 確認 *C:\Program Files\dotnet* 和應用程式目錄上未針對應用程式集區使用者身分識別設定任何拒絕規則。
 
 * 可能已部署 FDD 並安裝 .NET Core，但未重新啟動 IIS。 從命令提示字元依序執行 **net stop was /y** 和 **net start w3svc**，重新啟動伺服器或重新啟動 IIS。
 
-* 可能已部署 FDD，但未在主控系統上安裝 .NET Core 執行階段。 如果尚未安裝 .NET Core 執行階段，請在系統上執行「.NET Core 裝載套件組合安裝程式」****。
+* 可能已部署 FDD，但未在主控系統上安裝 .NET Core 執行階段。 如果尚未安裝 .NET Core 執行階段，請在系統上執行「.NET Core 裝載套件組合安裝程式」。
 
   [目前的 .NET Core 裝載套件組合安裝程式 (直接下載)](https://dotnet.microsoft.com/permalink/dotnetcore-current-windows-runtime-bundle-installer)
 
@@ -502,7 +503,7 @@ SDK 會在發行獨立應用程式時攔截到此案例。 如果 RID 不符合�
 
 疑難排解：
 
-* 確認應用程式在 Kestrel 本機上執行。 處理序失敗，可能是因為應用程式發生問題。 如需詳細資訊，請參閱<xref:test/troubleshoot-azure-iis>。
+* 確認應用程式在 Kestrel 本機上執行。 處理序失敗，可能是因為應用程式發生問題。 如需詳細資訊，請參閱 <xref:test/troubleshoot-azure-iis> 。
 
 * 檢查 *web.config* 中 `<aspNetCore>` 元素上的 *arguments* 屬性，以確認它是 (a) `.\{ASSEMBLY}.dll` (適用於架構相依部署 (FDD))；或 (b) 不存在、空字串 (`arguments=""`)，或是應用程式的引數清單 (`arguments="{ARGUMENT_1}, {ARGUMENT_2}, ... {ARGUMENT_X}"`，適用於自封式部署 (SCD))。
 
@@ -520,7 +521,7 @@ SDK 會在發行獨立應用程式時攔截到此案例。 如果 RID 不符合�
 
 疑難排解：
 
-確認「應用程式集區」不是處於「已停止」** 狀態。
+確認「應用程式集區」不是處於「已停止」狀態。
 
 ## <a name="sub-application-includes-a-handlers-section"></a>子應用程式包含 \<handlers> 區段
 

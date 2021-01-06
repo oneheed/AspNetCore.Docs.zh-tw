@@ -20,10 +20,10 @@ no-loc:
 - SignalR
 uid: grpc/configuration
 ms.openlocfilehash: 617c042c628dc431391f39c2ecb2d2f9c9463fa5
-ms.sourcegitcommit: aa85f2911792a1e4783bcabf0da3b3e7e218f63a
+ms.sourcegitcommit: 3593c4efa707edeaaceffbfa544f99f41fc62535
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 11/23/2020
+ms.lasthandoff: 01/04/2021
 ms.locfileid: "95417587"
 ---
 # <a name="grpc-for-net-configuration"></a>適用于 .NET 設定的 gRPC
@@ -41,7 +41,7 @@ gRPC 服務是 `AddGrpc` 在 *Startup.cs* 中設定。 下表描述設定 gRPC s
 | <span style="word-break:normal;word-wrap:normal">ResponseCompressionAlgorithm</span> | `null` | 壓縮演算法，用來壓縮從伺服器傳送的訊息。 演算法必須符合中的壓縮提供者 `CompressionProviders` 。 若要讓演算法壓縮回應，用戶端必須透過在 **grpc 接受編碼** 標頭中傳送來指出其支援演算法。 |
 | ResponseCompressionLevel | `null` | 壓縮層級，用來壓縮從伺服器傳送的訊息。 |
 | 攔截器 | 無 | 在每個 gRPC 呼叫中執行的攔截器集合。 攔截器會依註冊的循序執行。 全域設定的攔截器會在針對單一服務設定攔截器之前執行。 如需 gRPC 攔截器的詳細資訊，請參閱 [GRPC 攔截器與中介軟體](xref:grpc/migration#grpc-interceptors-vs-middleware)。 |
-| IgnoreUnknownServices | `false` | 如果 `true` 為，則對未知服務和方法的呼叫 **UNIMPLEMENTED** 不會傳回未產生的狀態，且要求會傳遞至 ASP.NET Core 中的下一個已註冊中介軟體。 |
+| IgnoreUnknownServices | `false` | 如果 `true` 為，則對未知服務和方法的呼叫不會傳回未產生的狀態，且要求會傳遞至 ASP.NET Core 中的下一個已註冊中介軟體。 |
 
 您可以針對所有服務設定選項，方法是提供選項委派給 `AddGrpc` 中的呼叫 `Startup.ConfigureServices` ：
 

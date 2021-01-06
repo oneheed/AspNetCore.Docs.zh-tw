@@ -20,10 +20,10 @@ no-loc:
 - SignalR
 uid: host-and-deploy/linux-nginx
 ms.openlocfilehash: c4e0d70b41221f272bb4b1fe82cfa531ec6fcf15
-ms.sourcegitcommit: fe5a287fa6b9477b130aa39728f82cdad57611ee
+ms.sourcegitcommit: 3593c4efa707edeaaceffbfa544f99f41fc62535
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 11/10/2020
+ms.lasthandoff: 01/04/2021
 ms.locfileid: "94431058"
 ---
 # <a name="host-aspnet-core-on-linux-with-nginx"></a>在 Linux 上使用 Nginx 裝載 ASP.NET Core
@@ -127,7 +127,7 @@ services.Configure<ForwardedHeadersOptions>(options =>
 });
 ```
 
-如需詳細資訊，請參閱<xref:host-and-deploy/proxy-load-balancer>。
+如需詳細資訊，請參閱 <xref:host-and-deploy/proxy-load-balancer> 。
 
 ### <a name="install-nginx"></a>安裝 Nginx
 
@@ -409,7 +409,7 @@ static char ngx_http_server_full_string[] = "Server: Web Server" CRLF;
 [!code-nginx[](linux-nginx/nginx.conf?highlight=2)]
 
 > [!NOTE]
-> Blazor WebAssembly 應用程式需要較大的 `burst` 參數值，以容納應用程式所提出的大量要求。 如需詳細資訊，請參閱<xref:blazor/host-and-deploy/webassembly#nginx>。
+> Blazor WebAssembly 應用程式需要較大的 `burst` 參數值，以容納應用程式所提出的大量要求。 如需詳細資訊，請參閱 <xref:blazor/host-and-deploy/webassembly#nginx> 。
 
 #### <a name="secure-nginx-from-clickjacking"></a>保護 Nginx 免於點閱綁架
 

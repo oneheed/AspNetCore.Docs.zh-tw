@@ -20,10 +20,10 @@ no-loc:
 - SignalR
 uid: tutorials/razor-pages/razor-pages-start
 ms.openlocfilehash: 4d4e50f8acea73859f5e839616f13f90a42291c4
-ms.sourcegitcommit: 6299f08aed5b7f0496001d093aae617559d73240
+ms.sourcegitcommit: 3593c4efa707edeaaceffbfa544f99f41fc62535
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 12/14/2020
+ms.lasthandoff: 01/04/2021
 ms.locfileid: "97486222"
 ---
 # <a name="tutorial-get-started-with-no-locrazor-pages-in-aspnet-core"></a>教學課程：開始使用 Razor ASP.NET Core 中的頁面
@@ -150,23 +150,23 @@ ms.locfileid: "97486222"
 * 使用語法以 c # 程式碼撰寫 HTML 標籤的 *cshtml 檔案。* Razor
 * 具有處理頁面事件之 c # 程式碼的 *cshtml.cs 檔案。*
 
-支援檔案的名稱以底線開頭。 例如， *_Layout cshtml* 檔案會設定所有頁面通用的 UI 元素。 此檔案會設定頁面頂端的導覽功能表和頁面底部的著作權標示。 如需詳細資訊，請參閱<xref:mvc/views/layout>。
+支援檔案的名稱以底線開頭。 例如， *_Layout cshtml* 檔案會設定所有頁面通用的 UI 元素。 此檔案會設定頁面頂端的導覽功能表和頁面底部的著作權標示。 如需詳細資訊，請參閱 <xref:mvc/views/layout> 。
 
 ### <a name="wwwroot-folder"></a>wwwroot 資料夾
 
-包含靜態資產，例如 HTML 檔案、JavaScript 檔案和 CSS 檔案。 如需詳細資訊，請參閱<xref:fundamentals/static-files>。
+包含靜態資產，例如 HTML 檔案、JavaScript 檔案和 CSS 檔案。 如需詳細資訊，請參閱 <xref:fundamentals/static-files> 。
 
 ### appsettings.json
 
-包含設定資料，例如連接字串。 如需詳細資訊，請參閱<xref:fundamentals/configuration/index>。
+包含設定資料，例如連接字串。 如需詳細資訊，請參閱 <xref:fundamentals/configuration/index> 。
 
 ### <a name="programcs"></a>Program.cs
 
-包含應用程式的進入點。 如需詳細資訊，請參閱<xref:fundamentals/host/generic-host>。
+包含應用程式的進入點。 如需詳細資訊，請參閱 <xref:fundamentals/host/generic-host> 。
 
 ### <a name="startupcs"></a>Startup.cs
 
-包含設定應用程式行為的程式碼。 如需詳細資訊，請參閱<xref:fundamentals/startup>。
+包含設定應用程式行為的程式碼。 如需詳細資訊，請參閱 <xref:fundamentals/startup> 。
 
 ## <a name="next-steps"></a>後續步驟
 
@@ -248,7 +248,7 @@ ms.locfileid: "97486222"
   * 此 `dotnet new` 命令會 Razor 在 *Razor PagesMovie* 資料夾中建立新的頁面專案。
   * 此 `code` 命令會在 Visual Studio Code 的目前實例中開啟 [ *Razor PagesMovie* ] 資料夾。
 
-* 在狀態列的 OmniSharp 火焰圖示變成綠色之後，會有一個對話方塊要求 **從 ' PagesMovie ' 中找不到建立和偵測所需的資產 Razor 。要新增它們嗎？** 選取 [是]。
+* 在狀態列的 OmniSharp 火焰圖示變成綠色之後，會有一個對話方塊要求 **從 ' PagesMovie ' 中找不到建立和偵測所需的資產 Razor 。要新增它們嗎？** 選取 [是]  。
 
   *.vscode* 目錄 (其中包含 *launch.json* 和 *tasks.json* 檔案) 會被新增至專案的根目錄。
 
@@ -292,23 +292,23 @@ ms.locfileid: "97486222"
 * 使用語法以 c # 程式碼撰寫 HTML 標籤的 *cshtml 檔案。* Razor
 * 具有處理頁面事件之 c # 程式碼的 *cshtml.cs 檔案。*
 
-支援檔案的名稱以底線開頭。 例如， *_Layout cshtml* 檔案會設定所有頁面通用的 UI 元素。 此檔案會設定頁面頂端的導覽功能表和頁面底部的著作權標示。 如需詳細資訊，請參閱<xref:mvc/views/layout>。
+支援檔案的名稱以底線開頭。 例如， *_Layout cshtml* 檔案會設定所有頁面通用的 UI 元素。 此檔案會設定頁面頂端的導覽功能表和頁面底部的著作權標示。 如需詳細資訊，請參閱 <xref:mvc/views/layout> 。
 
 ### <a name="wwwroot-folder"></a>wwwroot 資料夾
 
-包含靜態檔案，例如 HTML 檔案、JavaScript 檔案和 CSS 檔案。 如需詳細資訊，請參閱<xref:fundamentals/static-files>。
+包含靜態檔案，例如 HTML 檔案、JavaScript 檔案和 CSS 檔案。 如需詳細資訊，請參閱 <xref:fundamentals/static-files> 。
 
 ### <a name="appsettingsjson"></a>appSettings.json
 
-包含設定資料，例如連接字串。 如需詳細資訊，請參閱<xref:fundamentals/configuration/index>。
+包含設定資料，例如連接字串。 如需詳細資訊，請參閱 <xref:fundamentals/configuration/index> 。
 
 ### <a name="programcs"></a>Program.cs
 
-包含程式的進入點。 如需詳細資訊，請參閱<xref:fundamentals/host/generic-host>。
+包含程式的進入點。 如需詳細資訊，請參閱 <xref:fundamentals/host/generic-host> 。
 
 ### <a name="startupcs"></a>Startup.cs
 
-包含設定應用程式行為的程式碼。 如需詳細資訊，請參閱<xref:fundamentals/startup>。
+包含設定應用程式行為的程式碼。 如需詳細資訊，請參閱 <xref:fundamentals/startup> 。
 
 ## <a name="next-steps"></a>後續步驟
 
@@ -394,7 +394,7 @@ ms.locfileid: "97486222"
   * 此 `dotnet new` 命令會 Razor 在 *Razor PagesMovie* 資料夾中建立新的頁面專案。
   * 此 `code` 命令會在 Visual Studio Code 的目前實例中開啟 [ *Razor PagesMovie* ] 資料夾。
 
-* 在狀態列的 OmniSharp 火焰圖示變成綠色之後，會有一個對話方塊要求 **從 ' PagesMovie ' 中找不到建立和偵測所需的資產 Razor 。要新增它們嗎？** 選取 [是]。
+* 在狀態列的 OmniSharp 火焰圖示變成綠色之後，會有一個對話方塊要求 **從 ' PagesMovie ' 中找不到建立和偵測所需的資產 Razor 。要新增它們嗎？** 選取 [是]  。
 
   *.vscode* 目錄 (其中包含 *launch.json* 和 *tasks.json* 檔案) 會被新增至專案的根目錄。
 
@@ -498,25 +498,25 @@ ms.locfileid: "97486222"
 * 使用語法以 c # 程式碼撰寫 HTML 標籤的 *cshtml 檔案。* Razor
 * 具有處理頁面事件之 c # 程式碼的 *cshtml.cs 檔案。*
 
-支援檔案的名稱以底線開頭。 例如， *_Layout cshtml* 檔案會設定所有頁面通用的 UI 元素。 此檔案會設定頁面頂端的導覽功能表和頁面底部的著作權標示。 如需詳細資訊，請參閱<xref:mvc/views/layout>。
+支援檔案的名稱以底線開頭。 例如， *_Layout cshtml* 檔案會設定所有頁面通用的 UI 元素。 此檔案會設定頁面頂端的導覽功能表和頁面底部的著作權標示。 如需詳細資訊，請參閱 <xref:mvc/views/layout> 。
 
 Razor 頁面衍生自 `PageModel` 。 依照慣例， `PageModel` 衍生的類別會命名為 `<PageName>Model` 。
 
 ### <a name="wwwroot-folder"></a>wwwroot 資料夾
 
-包含靜態檔案，例如 HTML 檔案、JavaScript 檔案和 CSS 檔案。 如需詳細資訊，請參閱<xref:fundamentals/static-files>。
+包含靜態檔案，例如 HTML 檔案、JavaScript 檔案和 CSS 檔案。 如需詳細資訊，請參閱 <xref:fundamentals/static-files> 。
 
 ### <a name="appsettingsjson"></a>appSettings.json
 
-包含設定資料，例如連接字串。 如需詳細資訊，請參閱<xref:fundamentals/configuration/index>。
+包含設定資料，例如連接字串。 如需詳細資訊，請參閱 <xref:fundamentals/configuration/index> 。
 
 ### <a name="programcs"></a>Program.cs
 
-包含程式的進入點。 如需詳細資訊，請參閱<xref:fundamentals/host/generic-host>。
+包含程式的進入點。 如需詳細資訊，請參閱 <xref:fundamentals/host/generic-host> 。
 
 ### <a name="startupcs"></a>Startup.cs
 
-包含設定應用程式行為的程式碼，例如是否需要的同意 cookie 。 如需詳細資訊，請參閱<xref:fundamentals/startup>。
+包含設定應用程式行為的程式碼，例如是否需要的同意 cookie 。 如需詳細資訊，請參閱 <xref:fundamentals/startup> 。
 
 ## <a name="additional-resources"></a>其他資源
 

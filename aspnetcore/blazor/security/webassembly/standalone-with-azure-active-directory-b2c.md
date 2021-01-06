@@ -19,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/security/webassembly/standalone-with-azure-active-directory-b2c
-ms.openlocfilehash: 14eda03419e22538e17b7b4d6fa697d61cb384c8
-ms.sourcegitcommit: 45aa1c24c3fdeb939121e856282b00bdcf00ea55
+ms.openlocfilehash: 679f14642f4a611a5e65a7f472c68663fc1fb16b
+ms.sourcegitcommit: 3593c4efa707edeaaceffbfa544f99f41fc62535
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 11/04/2020
-ms.locfileid: "93343699"
+ms.lasthandoff: 01/04/2021
+ms.locfileid: "97764684"
 ---
 # <a name="secure-an-aspnet-core-no-locblazor-webassembly-standalone-app-with-azure-active-directory-b2c"></a>使用 Azure Active Directory B2C 保護 ASP.NET Core 的 Blazor WebAssembly 獨立應用程式
 
@@ -32,27 +32,27 @@ ms.locfileid: "93343699"
 
 本文涵蓋如何建立使用[Azure Active Directory (AAD) B2C](/azure/active-directory-b2c/overview)進行驗證的[獨立 Blazor WebAssembly 應用程式](xref:blazor/hosting-models#blazor-webassembly)。
 
-遵循《 [建立 AAD B2C 租使用者 (Azure 檔) ](/azure/active-directory-b2c/tutorial-create-tenant) 一文中的指導方針，為應用程式建立租使用者或識別現有的 B2C 租使用者，以便在 Azure 入口網站中使用。
+遵循《 [建立 AAD B2C 租使用者 (Azure 檔) ](/azure/active-directory-b2c/tutorial-create-tenant) 一文中的指導方針，為應用程式建立租使用者或識別現有的 B2C 租使用者，以便在 Azure 入口網站中使用。 建立或識別要使用的租使用者之後，請立即返回此文章。
 
 記錄下列資訊：
 
-* AAD B2C 實例 (例如， `https://contoso.b2clogin.com/` 其中包含尾端的斜線) ：實例是 AZURE B2C 應用程式註冊的配置和主機，您可以從 Azure 入口網站的 **應用程式註冊** 頁面開啟 [ **端點** ] 視窗來找到此實例。
-* AAD B2C 主要/發行者/租使用者網域 (例如 `contoso.onmicrosoft.com`) ：網域可作為已註冊應用程式之 Azure 入口網站的 [ **商標** ] 分頁中的 **發行者網域** 。
+* AAD B2C 實例 (例如， `https://contoso.b2clogin.com/` 其中包含尾端的斜線) ：實例是 AZURE B2C 應用程式註冊的配置和主機，您可以從 Azure 入口網站的 **應用程式註冊** 頁面開啟 [**端點**] 視窗來找到此實例。
+* AAD B2C 主要/發行者/租使用者網域 (例如 `contoso.onmicrosoft.com`) ：網域可作為已註冊應用程式之 Azure 入口網站的 [**商標**] 分頁中的 **發行者網域**。
 
-在 Azure 檔中註冊 AAD B2C 應用程式 (相關指引： [教學課程：在 Azure Active Directory B2C 中註冊應用程式](/azure/active-directory-b2c/tutorial-register-applications)) ：
+註冊 AAD B2C 的應用程式：
 
 ::: moniker range=">= aspnetcore-5.0"
 
-1. 在 **Azure Active Directory** > **應用程式註冊** 中，選取 [ **新增註冊** ]。
-1. 提供應用程式的 **名稱** (例如 **Blazor 獨立 AAD B2C** ) 。
-1. 針對 **支援的帳戶類型** ，請選取 [多租使用者] 選項： **任何組織目錄中的帳戶或任何身分識別提供者。用於驗證具有 Azure AD B2C 的使用者。**
+1. 在 **Azure Active Directory** > **應用程式註冊** 中，選取 [ **新增註冊**]。
+1. 提供應用程式的 **名稱** (例如 **Blazor 獨立 AAD B2C**) 。
+1. 針對 **支援的帳戶類型**，請選取 [多租使用者] 選項： **任何組織目錄中的帳戶或任何身分識別提供者。用於驗證具有 Azure AD B2C 的使用者。**
 1. 將 [重新 **導向 uri** ] 下拉式清單設定為 **單一頁面應用程式 (SPA)** 並提供下列重新導向 uri： `https://localhost:{PORT}/authentication/login-callback` 。 在 Kestrel 上執行應用程式的預設連接埠是 5001。 如果應用程式是在不同的 Kestrel 埠上執行，請使用應用程式的埠。 針對 IIS Express，可在 [ **調試** 程式] 面板的應用程式屬性中找到應用程式隨機產生的埠。 由於應用程式目前不存在，且 IIS Express 埠未知，因此在建立應用程式之後，請返回此步驟，並更新重新導向 URI。 本主題稍後會出現一個批註，提醒 IIS Express 使用者更新重新導向 URI。
-1. 確認 **Permissions** > 已選取 [將系統 **管理員同意授與 openid] 和 [offline_access] 許可權** 。
+1. 確認 > 已選取 [將系統 **管理員同意授與 openid] 和 [offline_access] 許可權**。
 1. 選取 [註冊]。
 
 記錄應用程式 (用戶端) 識別碼 (例如 `41451fa7-82d9-4673-8fa5-69eff5a761fd`) 。
 
-在「 **驗證** 平臺設定」的 > **Platform configurations** > **單一頁面應用程式中， (SPA)** ：
+在「**驗證** 平臺設定」的 >  > **單一頁面應用程式中， (SPA)**：
 
 1. 確認的重新 **導向 URI** `https://localhost:{PORT}/authentication/login-callback` 存在。
 1. 針對 **隱含授** 與，請確定 **未** 選取 **存取權杖** 和 **識別碼權杖** 的核取方塊。
@@ -63,16 +63,16 @@ ms.locfileid: "93343699"
 
 ::: moniker range="< aspnetcore-5.0"
 
-1. 在 **Azure Active Directory** > **應用程式註冊** 中，選取 [ **新增註冊** ]。
-1. 提供應用程式的 **名稱** (例如 **Blazor 獨立 AAD B2C** ) 。
-1. 針對 **支援的帳戶類型** ，請選取 [多租使用者] 選項： **任何組織目錄中的帳戶或任何身分識別提供者。用於驗證具有 Azure AD B2C 的使用者。**
+1. 在 **Azure Active Directory** > **應用程式註冊** 中，選取 [ **新增註冊**]。
+1. 提供應用程式的 **名稱** (例如 **Blazor 獨立 AAD B2C**) 。
+1. 針對 **支援的帳戶類型**，請選取 [多租使用者] 選項： **任何組織目錄中的帳戶或任何身分識別提供者。用於驗證具有 Azure AD B2C 的使用者。**
 1. 將 [重新 **導向 URI** ] 下拉式清單保持設定為 [ **Web** ]，並提供下列重新導向 uri： `https://localhost:{PORT}/authentication/login-callback` 。 在 Kestrel 上執行應用程式的預設連接埠是 5001。 如果應用程式是在不同的 Kestrel 埠上執行，請使用應用程式的埠。 針對 IIS Express，可在 [ **調試** 程式] 面板的應用程式屬性中找到應用程式隨機產生的埠。 由於應用程式目前不存在，且 IIS Express 埠未知，因此在建立應用程式之後，請返回此步驟，並更新重新導向 URI。 本主題稍後會出現一個批註，提醒 IIS Express 使用者更新重新導向 URI。
-1. 確認 **Permissions** > 已選取 [將系統 **管理員同意授與 openid] 和 [offline_access] 許可權** 。
+1. 確認 > 已選取 [將系統 **管理員同意授與 openid] 和 [offline_access] 許可權**。
 1. 選取 [註冊]。
 
 記錄應用程式 (用戶端) 識別碼 (例如 `41451fa7-82d9-4673-8fa5-69eff5a761fd`) 。
 
-在 [ **驗證** > **平臺** 設定] > **Web** ：
+在 [ **驗證** > **平臺** 設定] > **Web**：
 
 1. 確認的重新 **導向 URI** `https://localhost:{PORT}/authentication/login-callback` 存在。
 1. 針對 **[隱含授** 與]，選取 **存取權杖** 和 **識別碼權杖** 的核取方塊。
@@ -81,11 +81,11 @@ ms.locfileid: "93343699"
 
 ::: moniker-end
 
-在 **Home**  >  **Azure AD B2C**  >  **使用者流程** ：
+在 **Home**  >  **Azure AD B2C**  >  **使用者流程**：
 
 [建立註冊和登入使用者流程](/azure/active-directory-b2c/tutorial-create-user-flows)
 
-至少選取 [ **應用程式宣告**  >  **顯示名稱** ] 使用者屬性，以填入 `context.User.Identity.Name` `LoginDisplay` 元件 () 中的 `Shared/LoginDisplay.razor` 。
+至少選取 [**應用程式宣告**  >  **顯示名稱**] 使用者屬性，以填入 `context.User.Identity.Name` `LoginDisplay` 元件 () 中的 `Shared/LoginDisplay.razor` 。
 
 記錄為應用程式建立的註冊和登入使用者流程名稱 (例如 `B2C_1_signupsignin`) 。
 
@@ -114,14 +114,14 @@ dotnet new blazorwasm -au IndividualB2C --aad-b2c-instance "{AAD B2C INSTANCE}" 
 
 ::: moniker range=">= aspnetcore-5.0"
 
-[!INCLUDE[](~/includes/blazor-security/additional-scopes-standalone-nonAAD.md)]
+[!INCLUDE[](~/blazor/includes/security/additional-scopes-standalone-nonAAD.md)]
 
 ::: moniker-end
 
 建立應用程式之後，您應該能夠：
 
 * 使用 AAD 使用者帳戶登入應用程式。
-* 要求 Microsoft Api 的存取權杖。 如需詳細資訊，請參閱：
+* 要求 Microsoft Api 的存取權杖。 如需詳細資訊，請參閱
   * [存取權杖範圍](#access-token-scopes)
   * [快速入門：設定應用程式以公開 Web api](/azure/active-directory/develop/quickstart-configure-app-expose-web-apis)。
 
@@ -206,37 +206,37 @@ options.ProviderOptions.AdditionalScopesToConsent.Add("{ADDITIONAL SCOPE URI}");
 
 ## <a name="login-mode"></a>登入模式
 
-[!INCLUDE[](~/includes/blazor-security/msal-login-mode.md)]
+[!INCLUDE[](~/blazor/includes/security/msal-login-mode.md)]
 
 ::: moniker-end
 
 ## <a name="imports-file"></a>匯入檔案
 
-[!INCLUDE[](~/includes/blazor-security/imports-file-standalone.md)]
+[!INCLUDE[](~/blazor/includes/security/imports-file-standalone.md)]
 
 ## <a name="index-page"></a>索引頁面
 
-[!INCLUDE[](~/includes/blazor-security/index-page-msal.md)]
+[!INCLUDE[](~/blazor/includes/security/index-page-msal.md)]
 
 ## <a name="app-component"></a>應用程式元件
 
-[!INCLUDE[](~/includes/blazor-security/app-component.md)]
+[!INCLUDE[](~/blazor/includes/security/app-component.md)]
 
 ## <a name="redirecttologin-component"></a>RedirectToLogin 元件
 
-[!INCLUDE[](~/includes/blazor-security/redirecttologin-component.md)]
+[!INCLUDE[](~/blazor/includes/security/redirecttologin-component.md)]
 
 ## <a name="logindisplay-component"></a>LoginDisplay 元件
 
-[!INCLUDE[](~/includes/blazor-security/logindisplay-component.md)]
+[!INCLUDE[](~/blazor/includes/security/logindisplay-component.md)]
 
 ## <a name="authentication-component"></a>驗證元件
 
-[!INCLUDE[](~/includes/blazor-security/authentication-component.md)]
+[!INCLUDE[](~/blazor/includes/security/authentication-component.md)]
 
-[!INCLUDE[](~/includes/blazor-security/wasm-aad-b2c-userflows.md)]
+[!INCLUDE[](~/blazor/includes/security/wasm-aad-b2c-userflows.md)]
 
-[!INCLUDE[](~/includes/blazor-security/troubleshoot.md)]
+[!INCLUDE[](~/blazor/includes/security/troubleshoot.md)]
 
 ## <a name="additional-resources"></a>其他資源
 
@@ -244,4 +244,5 @@ options.ProviderOptions.AdditionalScopesToConsent.Add("{ADDITIONAL SCOPE URI}");
 * [具有安全預設用戶端之應用程式中未經驗證或未經授權的 web API 要求](xref:blazor/security/webassembly/additional-scenarios#unauthenticated-or-unauthorized-web-api-requests-in-an-app-with-a-secure-default-client)
 * <xref:security/authentication/azure-ad-b2c>
 * [教學課程：建立 Azure Active Directory B2C 租用戶](/azure/active-directory-b2c/tutorial-create-tenant) \(部分機器翻譯\)
+* [教學課程：在 Azure Active Directory B2C 中註冊應用程式](/azure/active-directory-b2c/tutorial-register-applications)
 * [Microsoft 身分識別平台文件](/azure/active-directory/develop/)

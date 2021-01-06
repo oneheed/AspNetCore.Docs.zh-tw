@@ -20,12 +20,12 @@ no-loc:
 - SignalR
 uid: blazor/tooling
 zone_pivot_groups: operating-systems
-ms.openlocfilehash: 29f1a1f211688a1edcd31c7230e7216df7c89eef
-ms.sourcegitcommit: 6b87f2e064cea02e65dacd206394b44f5c604282
+ms.openlocfilehash: 4813668f5278473fbaae36d572e69700b3fe771a
+ms.sourcegitcommit: 3593c4efa707edeaaceffbfa544f99f41fc62535
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 12/15/2020
-ms.locfileid: "97506808"
+ms.lasthandoff: 01/04/2021
+ms.locfileid: "97764233"
 ---
 # <a name="tooling-for-aspnet-core-no-locblazor"></a>ASP.NET Core 的工具 Blazor
 
@@ -37,7 +37,7 @@ ms.locfileid: "97506808"
 
 1. 建立新專案。
 
-1. 選取 [ **Blazor 應用程式**]。 選取 [下一步]。
+1. 選取 [ **Blazor 應用程式**]。 選取 [下一步]  。
 
 1. 在 [專案名稱] 欄位中提供專案名稱，或接受預設專案名稱。 確認 **位置** 專案是正確的，或提供專案的位置。 選取 [建立]。
 
@@ -111,11 +111,11 @@ ms.locfileid: "97506808"
 
 1. 在側邊欄中，選取 [ **Web] 和 [主控台**  >  **應用程式**]。
 
-   如需 Blazor WebAssembly 體驗，請選擇 **Blazor WebAssembly 應用程式** 範本。 如需 Blazor Server 體驗，請選擇 **Blazor Server 應用程式** 範本。 選取 [下一步]。
+   如需 Blazor WebAssembly 體驗，請選擇 **Blazor WebAssembly 應用程式** 範本。 如需 Blazor Server 體驗，請選擇 **Blazor Server 應用程式** 範本。 選取 [下一步]  。
 
    如需這兩個 Blazor 裝載模型的相關資訊， *Blazor WebAssembly* (獨立和裝載) 和 *Blazor Server* ，請參閱 <xref:blazor/hosting-models> 。
 
-1. 確認 [ **驗證** ] 設定為 [ **無驗證**]。 選取 [下一步]。
+1. 確認 [ **驗證** ] 設定為 [ **無驗證**]。 選取 [下一步]  。
 
 1. 針對裝載 Blazor WebAssembly 體驗，請選取 [裝載 **ASP.NET Core** ] 核取方塊。
 
@@ -143,6 +143,6 @@ Blazor架構會提供範本，以針對兩個裝載模型建立新的應用程�
 您可以藉由將 [說明] 選項 (`-h` 或 `--help`) 傳送至 [`dotnet new`](/dotnet/core/tools/dotnet-new) 命令 shell 中的 CLI 命令，來取得範本選項：
 
 ```dotnetcli
-dotnet new blazorwasm --h
-dotnet new blazorserver --h
+dotnet new blazorwasm -h
+dotnet new blazorserver -h
 ```

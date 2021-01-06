@@ -20,10 +20,10 @@ no-loc:
 - SignalR
 uid: tutorials/razor-pages/search
 ms.openlocfilehash: d852766c9706941a1a5f4f3af2c9293ffc4e6a26
-ms.sourcegitcommit: 6299f08aed5b7f0496001d093aae617559d73240
+ms.sourcegitcommit: 3593c4efa707edeaaceffbfa544f99f41fc62535
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 12/14/2020
+ms.lasthandoff: 01/04/2021
 ms.locfileid: "97486209"
 ---
 # <a name="part-6-add-search-to-aspnet-core-no-locrazor-pages"></a>第6部分：將搜尋新增至 ASP.NET Core Razor 頁面
@@ -82,11 +82,11 @@ var movies = from m in _context.Movie
 > [!NOTE]
 > [Contains](/dotnet/api/system.data.objects.dataclasses.entitycollection-1.contains) 方法是在資料庫上執行，而不是在 C# 程式碼中執行。 查詢是否區分大小寫取決於資料庫和定序。 在 SQL Server 上，`Contains` 對應至 [SQL LIKE](/sql/t-sql/language-elements/like-transact-sql)，因此不區分大小寫。 而在 SQLlite 中，由於使用預設定序，因此會區分大小寫。
 
-流覽至 [電影] 頁面，並將查詢字串（例如）附加 `?searchString=Ghost` 至 URL。 例如，`https://localhost:5001/Movies?searchString=Ghost`。 隨即顯示篩選過的電影。
+流覽至 [電影] 頁面，並將查詢字串（例如）附加 `?searchString=Ghost` 至 URL。 例如： `https://localhost:5001/Movies?searchString=Ghost` 。 隨即顯示篩選過的電影。
 
 ![：：：非 loc (索引) ：：： view](search/_static/ghost.png)
 
-如果將下列路由範本新增至 Index 頁面，則可以將搜尋字串作為 URL 區段傳遞。 例如，`https://localhost:5001/Movies/Ghost`。
+如果將下列路由範本新增至 Index 頁面，則可以將搜尋字串作為 URL 區段傳遞。 例如： `https://localhost:5001/Movies/Ghost` 。
 
 ```cshtml
 @page "{searchString?}"
@@ -182,11 +182,11 @@ var movies = from m in _context.Movie
 
 **注意：**[Contains](/dotnet/api/system.data.objects.dataclasses.entitycollection-1.contains) 方法是在資料庫上執行，而不是在 C# 程式碼中執行。 查詢是否區分大小寫取決於資料庫和定序。 在 SQL Server 上，`Contains` 對應至 [SQL LIKE](/sql/t-sql/language-elements/like-transact-sql)，因此不區分大小寫。 而在 SQLlite 中，由於使用預設定序，因此會區分大小寫。
 
-流覽至 [電影] 頁面，並將查詢字串（例如）附加 `?searchString=Ghost` 至 URL。 例如，`https://localhost:5001/Movies?searchString=Ghost`。 隨即顯示篩選過的電影。
+流覽至 [電影] 頁面，並將查詢字串（例如）附加 `?searchString=Ghost` 至 URL。 例如： `https://localhost:5001/Movies?searchString=Ghost` 。 隨即顯示篩選過的電影。
 
 ![：：：非 loc (索引) ：：： view](search/_static/ghost.png)
 
-如果將下列路由範本新增至 Index 頁面，則可以將搜尋字串作為 URL 區段傳遞。 例如，`https://localhost:5001/Movies/Ghost`。
+如果將下列路由範本新增至 Index 頁面，則可以將搜尋字串作為 URL 區段傳遞。 例如： `https://localhost:5001/Movies/Ghost` 。
 
 ```cshtml
 @page "{searchString?}"

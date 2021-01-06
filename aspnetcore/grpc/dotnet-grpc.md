@@ -19,17 +19,17 @@ no-loc:
 - SignalR
 uid: grpc/dotnet-grpc
 ms.openlocfilehash: f34e1543d9695e138a85db3b79e013cf5fb6d138
-ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
+ms.sourcegitcommit: 3593c4efa707edeaaceffbfa544f99f41fc62535
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 10/30/2020
+ms.lasthandoff: 01/04/2021
 ms.locfileid: "93059906"
 ---
 # <a name="manage-protobuf-references-with-dotnet-grpc"></a>使用 dotnet-grpc 管理 Protobuf 參考
 
 作者：[John Luo](https://github.com/juntaoluo)
 
-`dotnet-grpc` 是一種 .NET Core 通用工具，可用於管理 [Protobuf ( *proto* )](xref:grpc/basics#proto-file) .net gRPC 專案中的參考。 您可以使用此工具來新增、重新整理、移除及列出 Protobuf 參考。
+`dotnet-grpc` 是一種 .NET Core 通用工具，可用於管理 [Protobuf (*proto*)](xref:grpc/basics#proto-file) .net gRPC 專案中的參考。 您可以使用此工具來新增、重新整理、移除及列出 Protobuf 參考。
 
 ## <a name="installation"></a>安裝
 
@@ -136,7 +136,7 @@ dotnet-grpc remove [options] <references>...
 |-|-|-|
 | -p | --project | 要操作之專案檔的路徑。 如果未指定檔案，此命令會在目前的目錄中搜尋其中一個檔案。
 
-## <a name="refresh"></a>重新整理
+## <a name="refresh"></a>Refresh
 
 此 `refresh` 命令可用來從來源 URL 的最新內容更新遠端參考。 下載檔案路徑和來源 URL 都可以用來指定要更新的參考。 附註：
 

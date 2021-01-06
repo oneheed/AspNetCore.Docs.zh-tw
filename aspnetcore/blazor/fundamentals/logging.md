@@ -21,10 +21,10 @@ no-loc:
 uid: blazor/fundamentals/logging
 zone_pivot_groups: blazor-hosting-models
 ms.openlocfilehash: 10c96bd2d0cc64f3bd035e7079b0996eb5768595
-ms.sourcegitcommit: e9b8835a02f75b6378b766edb8bab23b14a4192b
+ms.sourcegitcommit: 3593c4efa707edeaaceffbfa544f99f41fc62535
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 12/18/2020
+ms.lasthandoff: 01/04/2021
 ms.locfileid: "97666829"
 ---
 # <a name="aspnet-core-no-locblazor-logging"></a>ASP.NET Core Blazor 記錄
@@ -50,7 +50,7 @@ builder.Logging.AddProvider(new CustomLoggingProvider());
 
 `Logging`屬性的型別為 <xref:Microsoft.Extensions.Logging.ILoggingBuilder> ，因此也可在上使用所有可用的擴充方法 <xref:Microsoft.Extensions.Logging.ILoggingBuilder> `Logging` 。
 
-您可以從應用程式佈建檔載入記錄設定。 如需詳細資訊，請參閱<xref:blazor/fundamentals/configuration#logging-configuration>。
+您可以從應用程式佈建檔載入記錄設定。 如需詳細資訊，請參閱 <xref:blazor/fundamentals/configuration#logging-configuration> 。
 
 ## <a name="no-locsignalr-net-client-logging"></a>SignalR .NET 用戶端記錄
 

@@ -19,10 +19,10 @@ no-loc:
 - SignalR
 uid: azure/devops/cicd
 ms.openlocfilehash: 2ac7a130d223b21330d0a797c1d460fc0cf467d7
-ms.sourcegitcommit: 6af9016d1ffc2dffbb2454c7da29c880034cefcd
+ms.sourcegitcommit: 3593c4efa707edeaaceffbfa544f99f41fc62535
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 12/08/2020
+ms.lasthandoff: 01/04/2021
 ms.locfileid: "96901206"
 ---
 # <a name="continuous-integration-and-deployment"></a>持續整合與部署
@@ -177,7 +177,7 @@ ms.locfileid: "96901206"
     啟用此選項後，每次有新的組建時，就會進行部署。
 1. [ **持續部署觸發** 程式] 面板會顯示在右側。 按一下切換按鈕以啟用此功能。 不需要啟用 **提取要求觸發** 程式。
 1. 在 [**組建分支篩選**] 區段中，按一下 [**新增**] 下拉式清單。 選擇 [ **組建定義** ] 的 [預設分支] 選項。 此篩選器只會對 GitHub 存放庫預設分支中的組建（ (*主要*) ）觸發發行。
-1. 按一下 [儲存] 按鈕。 在產生的 [**儲存** 模式] 對話方塊中，按一下 [**確定]** 按鈕。
+1. 按一下 [儲存]  按鈕。 在產生的 [**儲存** 模式] 對話方塊中，按一下 [**確定]** 按鈕。
 1. 按一下 [ **環境 1** ] 方塊。 **環境** 面板會顯示在右側。 將 [**環境名稱**] 文字方塊中的 *環境 1* 文字變更為 [*生產*]。
 
    ![發行管線-環境名稱文字方塊](media/cicd/vsts-environment-name-textbox.png)
@@ -193,12 +193,12 @@ ms.locfileid: "96901206"
 1. 從 [**應用程式服務名稱**] 下拉式清單中，選取 [ *mywebapp]/[<] unique_number/>* 。
 1. 從 [**資源群組**] 下拉式清單中選取 [ *AzureTutorial* ]。
 1. 從 **[位置**] 下拉式清單中選取 [*預備*]。
-1. 按一下 [儲存] 按鈕。
+1. 按一下 [儲存]  按鈕。
 1. 將滑鼠停留在預設發行管線名稱上方。 按一下鉛筆圖示來編輯它。 使用 *MyFirstProject-ASP.NET Core-CD* 作為名稱。
 
     ![發行管線名稱](media/cicd/vsts-release-definition-name.png)
 
-1. 按一下 [儲存] 按鈕。
+1. 按一下 [儲存]  按鈕。
 
 ## <a name="commit-changes-to-github-and-automatically-deploy-to-azure"></a>將變更認可至 GitHub 並自動部署至 Azure
 
@@ -225,7 +225,7 @@ ms.locfileid: "96901206"
 
     ![啟用持續整合](media/cicd/enable-ci.png)
 
-1. 在 Azure DevOps Services 中，流覽至 [ **Azure Pipelines** 組建] 頁面的 [已 **佇列**] 索引標籤  >  **Builds** 。 已排入佇列的組建會顯示觸發組建的分支和認可：
+1. 在 Azure DevOps Services 中，流覽至 [ **Azure Pipelines** 組建] 頁面的 [已 **佇列**] 索引標籤  >   。 已排入佇列的組建會顯示觸發組建的分支和認可：
 
     ![排入佇列的組建](media/cicd/build-queued.png)
 

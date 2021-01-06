@@ -1,5 +1,5 @@
 ---
-title: 教學課程：使用 ASP.NET Core 建立 web API
+title: 教學課程：使用 ASP.NET Core 建立 Web API
 author: rick-anderson
 description: 了解如何使用 ASP.NET Core 建置 Web API。
 ms.author: riande
@@ -20,13 +20,13 @@ no-loc:
 - Models
 uid: tutorials/first-web-api
 ms.openlocfilehash: ccbfc27eb89e23938a69f0ab4cb306d6a4136889
-ms.sourcegitcommit: fe2e3174c34bee1e425c6e52dd8f663fe52b8756
+ms.sourcegitcommit: 3593c4efa707edeaaceffbfa544f99f41fc62535
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 11/26/2020
+ms.lasthandoff: 01/04/2021
 ms.locfileid: "96175048"
 ---
-# <a name="tutorial-create-a-web-api-with-aspnet-core"></a>教學課程：使用 ASP.NET Core 建立 web API
+# <a name="tutorial-create-a-web-api-with-aspnet-core"></a>教學課程：使用 ASP.NET Core 建立 Web API
 
 由 [Rick Anderson](https://twitter.com/RickAndMSFT)、 [Kirk Larkin](https://twitter.com/serpent5)和 [Mike Wasson](https://github.com/mikewasson)
 
@@ -49,13 +49,13 @@ ms.locfileid: "96175048"
 
 本教學課程會建立以下 API：
 
-|API | 描述 | Request body | 回應本文 |
+|API | 描述 | 要求本文 | 回應本文 |
 |--- | ---- | ---- | ---- |
-|`GET /api/TodoItems` | 取得所有待辦事項 | None | 待辦事項的陣列|
-|`GET /api/TodoItems/{id}` | 依識別碼取得項目 | None | 待辦事項|
+|`GET /api/TodoItems` | 取得所有待辦事項 | 無 | 待辦事項的陣列|
+|`GET /api/TodoItems/{id}` | 依識別碼取得項目 | 無 | 待辦事項|
 |`POST /api/TodoItems` | 新增記錄 | 待辦事項 | 待辦事項 |
-|`PUT /api/TodoItems/{id}` | 更新現有的項目 &nbsp; | 待辦事項 | None |
-|`DELETE /api/TodoItems/{id}` &nbsp; &nbsp; | 刪除專案 &nbsp;&nbsp; | None | None|
+|`PUT /api/TodoItems/{id}` | 更新現有的項目 &nbsp; | 待辦事項 | 無 |
+|`DELETE /api/TodoItems/{id}` &nbsp; &nbsp; | 刪除專案 &nbsp;&nbsp; | 無 | 無|
 
 下圖顯示應用程式的設計。
 
@@ -119,7 +119,7 @@ ms.locfileid: "96175048"
 
   ![macOS API 範本選取專案](first-web-api-mac/_static/api_template.png)
 
-* 在 [ **設定新的 ASP.NET Core WEB API** ] 對話方塊中，選取最新的 .net Core 5.X **目標 Framework**。 選取 [下一步] 。
+* 在 [ **設定新的 ASP.NET Core WEB API** ] 對話方塊中，選取最新的 .net Core 5.X **目標 Framework**。 選取 [下一步]  。
 
 * 針對 [專案名稱] 輸入 *TodoApi*，然後選取 [建立]。
 
@@ -247,7 +247,7 @@ Swagger 可用來產生 web Api 的實用檔和說明頁面。 本教學課程�
 
   ![新增資料夾](first-web-api-mac/_static/folder.png)
 
-* 以滑鼠右鍵按一下 *Models* 資料夾，然後選取 **Add** > [**新增** 檔案 > **一般**] > **空白類別**。
+* 以滑鼠右鍵按一下 *Models* 資料夾，然後選取 > [**新增** 檔案 > **一般**] > **空白類別**。
 
 * 將類別命名為 *TodoItem*，然後按一下 [新增]。
 
@@ -387,7 +387,7 @@ dotnet aspnet-codegenerator controller -name TodoItemsController -async -api -m 
 
 * 建立新的要求。
 * 將 HTTP 方法設為 `POST`。
-* 將 URI 設定為 `https://localhost:<port>/api/TodoItems` 。 例如 `https://localhost:5001/api/TodoItems`。
+* 將 URI 設定為 `https://localhost:<port>/api/TodoItems` 。 例如： `https://localhost:5001/api/TodoItems` 。
 * 選取 [Body] \(本文\) 索引標籤。
 * 選取 [原始] 選項按鈕。
 * 將類型設定為 **JSON (application/json)**。
@@ -400,7 +400,7 @@ dotnet aspnet-codegenerator controller -name TodoItemsController -async -api -m 
     }
     ```
 
-* 選取 [傳送]  。
+* 選取 [傳送]。
 
   ![Postman 與建立要求](first-web-api/_static/3/create.png)
 
@@ -416,8 +416,8 @@ dotnet aspnet-codegenerator controller -name TodoItemsController -async -api -m 
   ![Postman 主控台的 [標頭] 索引標籤](first-web-api/_static/3/create.png)
 
 * 將 HTTP 方法設為 `GET`。
-* 將 URI 設定為 `https://localhost:<port>/api/TodoItems/1` 。 例如 `https://localhost:5001/api/TodoItems/1`。
-* 選取 [傳送]  。
+* 將 URI 設定為 `https://localhost:<port>/api/TodoItems/1` 。 例如： `https://localhost:5001/api/TodoItems/1` 。
+* 選取 [傳送]。
 
 ## <a name="examine-the-get-methods"></a>檢查 GET 方法
 
@@ -447,9 +447,9 @@ dotnet aspnet-codegenerator controller -name TodoItemsController -async -api -m 
 
 * 建立新的要求。
 * 將 HTTP 方法設定為 **GET**。
-* 將要求 URI 設定為 `https://localhost:<port>/api/TodoItems` 。 例如 `https://localhost:5001/api/TodoItems`。
+* 將要求 URI 設定為 `https://localhost:<port>/api/TodoItems` 。 例如： `https://localhost:5001/api/TodoItems` 。
 * 在 Postman 中，設定 [Two pane view] \(雙窗格檢視\)。
-* 選取 [傳送]  。
+* 選取 [傳送]。
 
 這個應用程式會使用記憶體內部資料庫。 如果應用程式在停止後再啟動，上述 GET 要求將不會傳回任何資料。 如果沒有傳回任何資料，請將資料 [POST](#post) 到應用程式。
 
@@ -517,7 +517,7 @@ dotnet aspnet-codegenerator controller -name TodoItemsController -async -api -m 
 
 * 將方法設定為 `DELETE`。
 * 設定要刪除之物件的 URI (例如 `https://localhost:5001/api/TodoItems/1`) 。
-* 選取 [傳送]  。
+* 選取 [傳送]。
 
 <a name="over-post-v5"></a>
 
@@ -573,13 +573,13 @@ DTO 可以用來：
 
 本教學課程會建立以下 API：
 
-|API | 描述 | Request body | 回應本文 |
+|API | 描述 | 要求本文 | 回應本文 |
 |--- | ---- | ---- | ---- |
-|`GET /api/TodoItems` | 取得所有待辦事項 | None | 待辦事項的陣列|
-|`GET /api/TodoItems/{id}` | 依識別碼取得項目 | None | 待辦事項|
+|`GET /api/TodoItems` | 取得所有待辦事項 | 無 | 待辦事項的陣列|
+|`GET /api/TodoItems/{id}` | 依識別碼取得項目 | 無 | 待辦事項|
 |`POST /api/TodoItems` | 新增記錄 | 待辦事項 | 待辦事項 |
-|`PUT /api/TodoItems/{id}` | 更新現有的項目 &nbsp; | 待辦事項 | None |
-|`DELETE /api/TodoItems/{id}` &nbsp; &nbsp; | 刪除專案 &nbsp;&nbsp; | None | None|
+|`PUT /api/TodoItems/{id}` | 更新現有的項目 &nbsp; | 待辦事項 | 無 |
+|`DELETE /api/TodoItems/{id}` &nbsp; &nbsp; | 刪除專案 &nbsp;&nbsp; | 無 | 無|
 
 下圖顯示應用程式的設計。
 
@@ -643,7 +643,7 @@ DTO 可以用來：
 
   ![macOS API 範本選取專案](first-web-api-mac/_static/api_template.png)
 
-* 在 [ **設定新的 ASP.NET Core WEB API** ] 對話方塊中，選取最新的 .net Core 3.X **目標 Framework**。 選取 [下一步] 。
+* 在 [ **設定新的 ASP.NET Core WEB API** ] 對話方塊中，選取最新的 .net Core 3.X **目標 Framework**。 選取 [下一步]  。
 
 * 針對 [專案名稱] 輸入 *TodoApi*，然後選取 [建立]。
 
@@ -741,7 +741,7 @@ DTO 可以用來：
 
   ![新增資料夾](first-web-api-mac/_static/folder.png)
 
-* 以滑鼠右鍵按一下 *Models* 資料夾，然後選取 **Add** > [**新增** 檔案 > **一般**] > **空白類別**。
+* 以滑鼠右鍵按一下 *Models* 資料夾，然後選取 > [**新增** 檔案 > **一般**] > **空白類別**。
 
 * 將類別命名為 *TodoItem*，然後按一下 [新增]。
 
@@ -878,7 +878,7 @@ dotnet aspnet-codegenerator controller -name TodoItemsController -async -api -m 
 
 * 建立新的要求。
 * 將 HTTP 方法設為 `POST`。
-* 將 URI 設定為 `https://localhost:<port>/api/TodoItems` 。 例如 `https://localhost:5001/api/TodoItems`。
+* 將 URI 設定為 `https://localhost:<port>/api/TodoItems` 。 例如： `https://localhost:5001/api/TodoItems` 。
 * 選取 [Body] \(本文\) 索引標籤。
 * 選取 [原始] 選項按鈕。
 * 將類型設定為 **JSON (application/json)**。
@@ -891,7 +891,7 @@ dotnet aspnet-codegenerator controller -name TodoItemsController -async -api -m 
     }
     ```
 
-* 選取 [傳送]  。
+* 選取 [傳送]。
 
   ![Postman 與建立要求](first-web-api/_static/3/create.png)
 
@@ -903,8 +903,8 @@ dotnet aspnet-codegenerator controller -name TodoItemsController -async -api -m 
   ![Postman 主控台的 [標頭] 索引標籤](first-web-api/_static/3/create.png)
 
 * 將 HTTP 方法設為 `GET`。
-* 將 URI 設定為 `https://localhost:<port>/api/TodoItems/1` 。 例如 `https://localhost:5001/api/TodoItems/1`。
-* 選取 [傳送]  。
+* 將 URI 設定為 `https://localhost:<port>/api/TodoItems/1` 。 例如： `https://localhost:5001/api/TodoItems/1` 。
+* 選取 [傳送]。
 
 ## <a name="examine-the-get-methods"></a>檢查 GET 方法
 
@@ -934,9 +934,9 @@ dotnet aspnet-codegenerator controller -name TodoItemsController -async -api -m 
 
 * 建立新的要求。
 * 將 HTTP 方法設定為 **GET**。
-* 將要求 URI 設定為 `https://localhost:<port>/api/TodoItems` 。 例如 `https://localhost:5001/api/TodoItems`。
+* 將要求 URI 設定為 `https://localhost:<port>/api/TodoItems` 。 例如： `https://localhost:5001/api/TodoItems` 。
 * 在 Postman 中，設定 [Two pane view] \(雙窗格檢視\)。
-* 選取 [傳送]  。
+* 選取 [傳送]。
 
 這個應用程式會使用記憶體內部資料庫。 如果應用程式在停止後再啟動，上述 GET 要求將不會傳回任何資料。 如果沒有傳回任何資料，請將資料 [POST](#post) 到應用程式。
 
@@ -1004,7 +1004,7 @@ dotnet aspnet-codegenerator controller -name TodoItemsController -async -api -m 
 
 * 將方法設定為 `DELETE`。
 * 設定要刪除之物件的 URI (例如 `https://localhost:5001/api/TodoItems/1`) 。
-* 選取 [傳送]  。
+* 選取 [傳送]。
 
 <a name="over-post"></a>
 <a name="over-post-v3"></a>
@@ -1064,13 +1064,13 @@ DTO 可以用來：
 
 本教學課程會建立以下 API：
 
-|API | 描述 | Request body | 回應本文 |
+|API | 描述 | 要求本文 | 回應本文 |
 |--- | ---- | ---- | ---- |
-|GET /api/TodoItems | 取得所有待辦事項 | None | 待辦事項的陣列|
-|GET /api/TodoItems/{識別碼} | 依識別碼取得項目 | None | 待辦事項|
+|GET /api/TodoItems | 取得所有待辦事項 | 無 | 待辦事項的陣列|
+|GET /api/TodoItems/{識別碼} | 依識別碼取得項目 | 無 | 待辦事項|
 |POST /api/TodoItems | 新增記錄 | 待辦事項 | 待辦事項 |
-|PUT /api/TodoItems/{識別碼} | 更新現有的項目 &nbsp; | 待辦事項 | None |
-|刪除/Api/todoitems/{識別碼} &nbsp;&nbsp; | 刪除專案 &nbsp;&nbsp; | None | None|
+|PUT /api/TodoItems/{識別碼} | 更新現有的項目 &nbsp; | 待辦事項 | 無 |
+|刪除/Api/todoitems/{識別碼} &nbsp;&nbsp; | 刪除專案 &nbsp;&nbsp; | 無 | 無|
 
 下圖顯示應用程式的設計。
 
@@ -1126,7 +1126,7 @@ DTO 可以用來：
 
 * 在8.6 版之前的 Visual Studio for Mac 中，選取 [ **.net Core**  >  **應用程式**  >  **API**  >  **]**。 在8.6 版或更新版本中，選取 [ **Web] 和 [主控台**  >  **應用程式**  >  **API**  >  **]**。
   
-* 在 [ **設定新的 ASP.NET Core WEB API** ] 對話方塊中，選取最新的 .net Core 2.X **目標 Framework**。 選取 [下一步] 。
+* 在 [ **設定新的 ASP.NET Core WEB API** ] 對話方塊中，選取最新的 .net Core 2.X **目標 Framework**。 選取 [下一步]  。
 
 * 針對 [專案名稱] 輸入 *TodoApi*，然後選取 [建立]。
 
@@ -1184,7 +1184,7 @@ DTO 可以用來：
 
   ![新增資料夾](first-web-api-mac/_static/folder.png)
 
-* 以滑鼠右鍵按一下 *Models* 資料夾，然後選取 **Add** > [**新增** 檔案 > **一般**] > **空白類別**。
+* 以滑鼠右鍵按一下 *Models* 資料夾，然後選取 > [**新增** 檔案 > **一般**] > **空白類別**。
 
 * 將類別命名為 *TodoItem*，然後按一下 [新增]。
 
@@ -1336,9 +1336,9 @@ DTO 可以用來：
 
 * 建立新的要求。
   * 將 HTTP 方法設定為 **GET**。
-  * 將要求 URI 設定為 `https://localhost:<port>/api/todo` 。 例如 `https://localhost:5001/api/todo`。
+  * 將要求 URI 設定為 `https://localhost:<port>/api/todo` 。 例如： `https://localhost:5001/api/todo` 。
 * 在 Postman 中，設定 [Two pane view] \(雙窗格檢視\)。
-* 選取 [傳送]  。
+* 選取 [傳送]。
 
 ![Postman 與 GET 要求](first-web-api/_static/2pv.png)
 
@@ -1362,7 +1362,7 @@ DTO 可以用來：
 
 * 建置專案。
 * 在 Postman 中，將 HTTP 方法設定為 `POST`。
-* 將 URI 設定為 `https://localhost:<port>/api/Todo` 。 例如 `https://localhost:5001/api/Todo`。
+* 將 URI 設定為 `https://localhost:<port>/api/Todo` 。 例如： `https://localhost:5001/api/Todo` 。
 * 選取 [Body] \(本文\) 索引標籤。
 * 選取 [原始] 選項按鈕。
 * 將類型設定為 **JSON (application/json)**。
@@ -1375,7 +1375,7 @@ DTO 可以用來：
     }
     ```
 
-* 選取 [傳送]  。
+* 選取 [傳送]。
 
   ![Postman 與建立要求](first-web-api/_static/create.png)
 
@@ -1389,8 +1389,8 @@ DTO 可以用來：
   ![Postman 主控台的 [標頭] 索引標籤](first-web-api/_static/pmc2.png)
 
 * 將方法設定為 GET。
-* 將 URI 設定為 `https://localhost:<port>/api/TodoItems/2` 。 例如 `https://localhost:5001/api/TodoItems/2`。
-* 選取 [傳送]  。
+* 將 URI 設定為 `https://localhost:<port>/api/TodoItems/2` 。 例如： `https://localhost:5001/api/TodoItems/2` 。
+* 選取 [傳送]。
 
 ## <a name="add-a-puttodoitem-method-21"></a>新增 PutTodoItem 方法2。1
 
@@ -1434,7 +1434,7 @@ DTO 可以用來：
 
 * 將方法設定為 `DELETE`。
 * 設定要刪除之物件的 URI (例如 `https://localhost:5001/api/todo/1`) 。
-* 選取 [傳送]  。
+* 選取 [傳送]。
 
 範例應用程式可讓您刪除所有項目。 但刪除最後一個項目之後，模型類別建構函式會在下次呼叫 API 時建立新的項目。
 

@@ -19,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/security/index
-ms.openlocfilehash: 8a61472da556db48a8572b0a59075beb7737a547
-ms.sourcegitcommit: 6b87f2e064cea02e65dacd206394b44f5c604282
+ms.openlocfilehash: fcd4569c72fd33e5135a8469155f470b73c2ff57
+ms.sourcegitcommit: 04a404a9655c59ad1ea02aff5d399ae1b833ad6a
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 12/15/2020
-ms.locfileid: "97506821"
+ms.lasthandoff: 01/03/2021
+ms.locfileid: "97854518"
 ---
 # <a name="aspnet-core-no-locblazor-authentication-and-authorization"></a>ASP.NET Core Blazor 驗證與授權
 
@@ -313,7 +313,7 @@ builder.Services.AddAuthorizationCore();
 </AuthorizeView>
 ```
 
-如需詳細資訊，請參閱<xref:security/authorization/roles>。
+如需詳細資訊，請參閱 <xref:security/authorization/roles> 。
 
 針對原則型授權，請使用 <xref:Microsoft.AspNetCore.Components.Authorization.AuthorizeView.Policy> 參數：
 
@@ -323,7 +323,7 @@ builder.Services.AddAuthorizationCore();
 </AuthorizeView>
 ```
 
-宣告型授權是特殊案例的原則型授權。 例如，您可以定義要求使用者具備特定宣告的原則。 如需詳細資訊，請參閱<xref:security/authorization/policies>。
+宣告型授權是特殊案例的原則型授權。 例如，您可以定義要求使用者具備特定宣告的原則。 如需詳細資訊，請參閱 <xref:security/authorization/policies> 。
 
 這些 Api 可以在 Blazor Server 或 Blazor WebAssembly 應用程式中使用。
 
@@ -498,7 +498,7 @@ Not authorized.
 
 ```razor
 <CascadingAuthenticationState>
-    <Router AppAssembly="typeof(Startup).Assembly">
+    <Router AppAssembly="@typeof(Program).Assembly">
         ...
     </Router>
 </CascadingAuthenticationState>

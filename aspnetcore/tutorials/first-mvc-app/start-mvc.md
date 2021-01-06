@@ -18,10 +18,10 @@ no-loc:
 - SignalR
 uid: tutorials/first-mvc-app/start-mvc
 ms.openlocfilehash: c96e7107c85bf36f55f6571c71c20d09bc94ddb3
-ms.sourcegitcommit: fb208f907249cc7aab029afff941a0266c187050
+ms.sourcegitcommit: 3593c4efa707edeaaceffbfa544f99f41fc62535
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 11/17/2020
+ms.lasthandoff: 01/04/2021
 ms.locfileid: "94688496"
 ---
 # <a name="get-started-with-aspnet-core-mvc"></a>ASP.NET Core MVC 使用者入門
@@ -52,7 +52,7 @@ ms.locfileid: "94688496"
 
 [!INCLUDE[](~/includes/net-core-prereqs-vs-5.0.md)]
 
-# <a name="visual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code) \(英文\)
+# <a name="visual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code)
 
 [!INCLUDE[](~/includes/net-core-prereqs-vsc-5.0.md)]
 
@@ -81,13 +81,13 @@ ms.locfileid: "94688496"
 
 Visual Studio 在您剛才建立的 MVC 專案中使用了預設範本。 您只要輸入專案名稱，然後選取幾個選項，就立刻會有工作中的應用程式。 這是基本的入門專案。
 
-# <a name="visual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code) \(英文\)
+# <a name="visual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code)
 
 本教學課程假設您已熟悉 VS Code。 如需詳細資訊，請參閱 [VS Code 使用者入門](https://code.visualstudio.com/docs)和 [Visual Studio Code 說明](#visual-studio-code-help)。
 
 * 開啟 [整合式終端](https://code.visualstudio.com/docs/editor/integrated-terminal)機。
 * 將目錄 (`cd`) 變更為其中包含專案的資料夾。
-* 執行下列命令：
+* 執行以下命令：
 
    ```dotnetcli
    dotnet new mvc -o MvcMovie
@@ -114,7 +114,7 @@ Visual Studio 在您剛才建立的 MVC 專案中使用了預設範本。 您只
   * 確認 [ **驗證** ] 設定為 [ **無驗證**]。
   * 如果有選取 **目標 Framework** 的選項，請選取最新的5.x 版。
 
-  選取 [下一步]。
+  選取 [下一步]  。
 
 * 將專案命名為 **MvcMovie**，然後選取 [建立]。
 
@@ -144,7 +144,7 @@ Visual Studio 在您剛才建立的 MVC 專案中使用了預設範本。 您只
 
   ![Home 或 Index 頁面](start-mvc/_static/home50-vs.png)
 
-# <a name="visual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code) \(英文\)
+# <a name="visual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code)
 
 按 Ctrl+F5 即可執行而不使用偵錯工具。
 
@@ -204,7 +204,7 @@ Visual Studio 在您剛才建立的 MVC 專案中使用了預設範本。 您只
 
 [!INCLUDE[](~/includes/net-core-prereqs-vs-3.1.md)]
 
-# <a name="visual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code) \(英文\)
+# <a name="visual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code)
 
 [!INCLUDE[](~/includes/net-core-prereqs-vsc-3.1.md)]
 
@@ -220,7 +220,7 @@ Visual Studio 在您剛才建立的 MVC 專案中使用了預設範本。 您只
 
 * 從 Visual Studio 中，選取 [建立新專案]。
 
-* 選取 **ASP.NET Core Web Application** > **[下一步]** ASP.NET Core Web 應用程式。
+* 選取 > **[下一步]** ASP.NET Core Web 應用程式。
 
 ![新增 ASP.NET Core Web 應用程式](start-mvc/_static/np_2.1.png)
 
@@ -234,13 +234,13 @@ Visual Studio 在您剛才建立的 MVC 專案中使用了預設範本。 您只
 
 Visual Studio 在您剛才建立的 MVC 專案中使用了預設範本。 您只要輸入專案名稱，然後選取幾個選項，就立刻會有工作中的應用程式。 這是基本的入門專案。
 
-# <a name="visual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code) \(英文\)
+# <a name="visual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code)
 
 本教學課程假設您熟悉 VS Code。 如需詳細資訊，請參閱 [VS Code 使用者入門](https://code.visualstudio.com/docs)和 [Visual Studio Code 說明](#visual-studio-code-help)。
 
 * 開啟 [整合式終端](https://code.visualstudio.com/docs/editor/integrated-terminal)機。
 * 將目錄 (`cd`) 變更為其中包含專案的資料夾。
-* 執行下列命令：
+* 執行以下命令：
 
    ```dotnetcli
    dotnet new mvc -o MvcMovie
@@ -267,7 +267,7 @@ Visual Studio 在您剛才建立的 MVC 專案中使用了預設範本。 您只
   * 確認 [ **驗證** ] 設定為 [ **無驗證**]。
   * 如果有選取 **目標 Framework** 的選項，請選取最新的3.x 版。
 
-  選取 [下一步]。
+  選取 [下一步]  。
 
 * 將專案命名為 **MvcMovie**，然後選取 [建立]。
 
@@ -297,7 +297,7 @@ Visual Studio 在您剛才建立的 MVC 專案中使用了預設範本。 您只
 
   ![Home 或 Index 頁面](start-mvc/_static/home2.2.png)
 
-# <a name="visual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code) \(英文\)
+# <a name="visual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code)
 
 按 Ctrl+F5 即可執行而不使用偵錯工具。
 
@@ -357,7 +357,7 @@ Visual Studio 在您剛才建立的 MVC 專案中使用了預設範本。 您只
 
 [!INCLUDE[](~/includes/net-core-prereqs-vs2019-2.2.md)]
 
-# <a name="visual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code) \(英文\)
+# <a name="visual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code)
 
 [!INCLUDE[](~/includes/net-core-prereqs-vsc-2.2.md)]
 
@@ -387,13 +387,13 @@ Visual Studio 在您剛才建立的 MVC 專案中使用了預設範本。 您只
 
 Visual Studio 在您剛才建立的 MVC 專案中使用了預設範本。 您只要輸入專案名稱，然後選取幾個選項，就立刻會有工作中的應用程式。 這是基本的入門專案，讓我們從這裡開始吧。
 
-# <a name="visual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code) \(英文\)
+# <a name="visual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code)
 
 本教學課程假設您熟悉 VS Code。 如需詳細資訊，請參閱 [VS Code 使用者入門](https://code.visualstudio.com/docs)和 [Visual Studio Code 說明](#visual-studio-code-help)。
 
 * 開啟 [整合式終端](https://code.visualstudio.com/docs/editor/integrated-terminal)機。
 * 將目錄 (`cd`) 變更為其中包含專案的資料夾。
-* 執行下列命令：
+* 執行以下命令：
 
    ```dotnetcli
    dotnet new mvc -o MvcMovie
@@ -418,7 +418,7 @@ Visual Studio 在您剛才建立的 MVC 專案中使用了預設範本。 您只
   * 確認 [ **驗證** ] 設定為 [ **無驗證**]。
   * 如果有選取 **目標 Framework** 的選項，請選取最新的2.x 版本。
 
-  選取 [下一步]。
+  選取 [下一步]  。
 
 * 將專案命名為 **MvcMovie**，然後選取 [建立]。
 
@@ -450,7 +450,7 @@ Visual Studio 在您剛才建立的 MVC 專案中使用了預設範本。 您只
 
   ![Home 或 Index 頁面](start-mvc/_static/home2.2.png)
 
-# <a name="visual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code) \(英文\)
+# <a name="visual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code)
 
 按 Ctrl+F5 即可執行而不使用偵錯工具。
 

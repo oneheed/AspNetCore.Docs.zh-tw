@@ -4,7 +4,7 @@ author: jamesnk
 description: 瞭解如何使用 .NET gRPC 用戶端呼叫 gRPC 服務。
 monikerRange: '>= aspnetcore-3.0'
 ms.author: jamesnk
-ms.date: 07/27/2020
+ms.date: 12/18/2020
 no-loc:
 - appsettings.json
 - ASP.NET Core Identity
@@ -18,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: grpc/client
-ms.openlocfilehash: 9322020083ce25b00b2979633ae8a692cfd4da4a
-ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
+ms.openlocfilehash: 39f9b3fde19e31ca970668552e5829308705f513
+ms.sourcegitcommit: 3593c4efa707edeaaceffbfa544f99f41fc62535
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 10/30/2020
-ms.locfileid: "93060959"
+ms.lasthandoff: 01/04/2021
+ms.locfileid: "97699130"
 ---
 # <a name="call-grpc-services-with-the-net-client"></a>利用 .NET 用戶端呼叫 gRPC 服務
 
@@ -86,7 +86,7 @@ GRPC 用戶端必須使用與所呼叫服務相同的連接層級安全性。 �
 
 gRPC 具有不同類型的方法。 用戶端如何用來進行 gRPC 呼叫，取決於呼叫的方法類型。 GRPC 方法類型為：
 
-* 一元
+* 一元 (Unary)
 * 伺服器串流
 * 用戶端串流
 * 雙向串流
@@ -201,11 +201,33 @@ await readTask;
 
 在雙向串流呼叫期間，用戶端和服務可以隨時傳送訊息給彼此。 與雙向呼叫互動的最佳用戶端邏輯會根據服務邏輯而有所不同。
 
+## <a name="access-grpc-headers"></a>存取權 gRPC 標頭
+
+gRPC 呼叫會傳迴響應標頭。 HTTP 回應標頭傳遞有關呼叫的名稱/值中繼資料，而該呼叫與傳回的訊息無關。
+
+您可以使用來存取標頭 `ResponseHeadersAsync` ，這會傳回中繼資料的集合。 標頭通常會隨回應訊息傳回;因此，您必須等待它們。
+
+```csharp
+var client = new Greet.GreeterClient(channel);
+using var call = client.SayHelloAsync(new HelloRequest { Name = "World" });
+
+var headers = await call.ResponseHeadersAsync;
+var myValue = headers.GetValue("my-trailer-name");
+
+var response = await call.ResponseAsync;
+```
+
+`ResponseHeadersAsync` 使用：
+
+* 必須等待的結果 `ResponseHeadersAsync` 才能取得標頭集合。
+* 在串流處理) 時，不需要先存取 `ResponseAsync` (或回應資料流程。 如果已傳迴響應，則會 `ResponseHeadersAsync` 立即傳回標頭。
+* 如果發生連接或伺服器錯誤，而且沒有針對 gRPC 呼叫傳回標頭，則會擲回例外狀況。
+
 ## <a name="access-grpc-trailers"></a>存取權 gRPC 尾端
 
-gRPC 呼叫可能會傳回 gRPC 尾端。 gRPC 尾端用來提供關於呼叫的名稱/值中繼資料。 尾端提供類似于 HTTP 標頭的功能，但會在通話結束時收到。
+gRPC 呼叫可能會傳迴響應尾端。 尾端用來提供關於呼叫的名稱/值中繼資料。 尾端提供類似于 HTTP 標頭的功能，但會在通話結束時收到。
 
-您可以使用來存取 gRPC `GetTrailers()` 結尾，後者會傳回中繼資料的集合。 當回應完成之後，就會傳回尾端，因此，您必須先等候所有回應訊息，才能存取尾端。
+您可以使用來存取尾端 `GetTrailers()` ，以傳回中繼資料的集合。 完成回應後會傳回尾端。 因此，您必須先等候所有回應訊息，才能存取尾端。
 
 一元和用戶端串流呼叫必須等待， `ResponseAsync` 才能呼叫 `GetTrailers()` ：
 
@@ -237,7 +259,7 @@ var trailers = call.GetTrailers();
 var myValue = trailers.GetValue("my-trailer-name");
 ```
 
-您也可以從存取 gRPC 尾端 `RpcException` 。 服務可能會傳回尾端的 gRPC 狀態，並將其設定為不確定。 在此情況下，會從 gRPC 用戶端擲回的例外狀況中取出尾端：
+也可以從存取尾端 `RpcException` 。 服務可能會傳回尾端的 gRPC 狀態，並將其設定為不確定。 在此情況下，會從 gRPC 用戶端擲回的例外狀況中取出尾端：
 
 ```csharp
 var client = new Greet.GreeterClient(channel);
@@ -269,7 +291,7 @@ catch (RpcException ex)
 
 [!code-csharp[](~/grpc/deadlines-cancellation/deadline-client.cs?highlight=7,12)]
 
-如需詳細資訊，請參閱<xref:grpc/deadlines-cancellation#deadlines>。
+如需詳細資訊，請參閱 <xref:grpc/deadlines-cancellation#deadlines> 。
 
 ## <a name="additional-resources"></a>其他資源
 

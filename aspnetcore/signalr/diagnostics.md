@@ -1,9 +1,9 @@
 ---
 title: ASP.NET Core 中的記錄和診斷 SignalR
-author: anurse
+author: bradygaster
 description: 瞭解如何從您的 ASP.NET Core 應用程式收集診斷資訊 SignalR 。
 monikerRange: '>= aspnetcore-2.1'
-ms.author: anurse
+ms.author: bradyg
 ms.custom: devx-track-csharp, signalr, devx-track-js
 ms.date: 06/12/2020
 no-loc:
@@ -19,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: signalr/diagnostics
-ms.openlocfilehash: 49029bbd53b98425a05bdb82517238e3aa2e3b1f
-ms.sourcegitcommit: 6b87f2e064cea02e65dacd206394b44f5c604282
+ms.openlocfilehash: 23ebd61d9931f9cd83afbdcc5a718e42cc565317
+ms.sourcegitcommit: b23fed8c1a1d2aec2f9b5e09041442ecfafedd56
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 12/15/2020
-ms.locfileid: "97506626"
+ms.lasthandoff: 12/28/2020
+ms.locfileid: "97797336"
 ---
 # <a name="logging-and-diagnostics-in-aspnet-core-no-locsignalr"></a>ASP.NET Core 中的記錄和診斷 SignalR
 
@@ -106,9 +106,19 @@ Visual Studio 會在 [ **輸出** ] 視窗中顯示記錄輸出。 選取 [ **AS
 
 設定詳細資訊之後，記錄會寫入至瀏覽器主控台 (或 NodeJS 應用程式) 中的標準輸出。
 
-如果您想要將記錄傳送至自訂記錄系統，您可以提供執行介面的 JavaScript 物件 `ILogger` 。 唯一需要執行的方法是 `log` ，它會採用事件的層級以及與事件相關聯的訊息。 例如︰
+如果您想要將記錄傳送至自訂記錄系統，您可以提供執行介面的 JavaScript 物件 `ILogger` 。 唯一需要執行的方法是 `log` ，它會採用事件的層級以及與事件相關聯的訊息。 例如：
 
-[!code-typescript[](diagnostics/custom-logger.ts?highlight=3-7,13)]
+::: moniker range=">= aspnetcore-3.0"
+
+[!code-typescript[](diagnostics/3.x/custom-logger.ts?highlight=3-7,13)]
+
+::: moniker-end
+
+::: moniker range="< aspnetcore-3.0"
+
+[!code-typescript[](diagnostics/2.x/custom-logger.ts?highlight=3-7,13)]
+
+::: moniker-end
 
 ## <a name="net-client-logging"></a>.NET 用戶端記錄
 
@@ -226,7 +236,7 @@ tcpdump -i [interface] -w trace.pcap
 
 SignalR 系統會報告事件來源的伺服器計量 <xref:Microsoft.AspNetCore.Http.Connections> 。
 
-| 名稱                    | 說明                 |
+| 名稱                    | 描述                 |
 |-------------------------|-----------------------------|
 | `connections-started`   | 已啟動的連接總數   |
 | `connections-stopped`   | 已停止的連接總數   |

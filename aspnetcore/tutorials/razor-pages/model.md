@@ -20,10 +20,10 @@ no-loc:
 - SignalR
 uid: tutorials/razor-pages/model
 ms.openlocfilehash: 7ea28e0ecad410335c37c603c8ec1eb5e6e41d33
-ms.sourcegitcommit: 6299f08aed5b7f0496001d093aae617559d73240
+ms.sourcegitcommit: 3593c4efa707edeaaceffbfa544f99f41fc62535
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 12/14/2020
+ms.lasthandoff: 01/04/2021
 ms.locfileid: "97485988"
 ---
 # <a name="part-2-add-a-model-to-a-no-locrazor-pages-app-in-aspnet-core"></a>第2部分：在 ASP.NET Core 中將模型新增至 Razor 頁面應用程式
@@ -162,7 +162,7 @@ ms.locfileid: "97485988"
    1. 在 [ **模型類別** ] 下拉式清單中，選取 [ **Movie (Razor PagesMovie])**。
    1. 在 [資料內容類別] 資料列中，選取 **+** (加號)。
       1. 在 [**加入資料內容**] 對話方塊中，類別名稱 *Razor PagesMovie。 Razor產生 PagesMovieCoNtext* 。
-   1. 選取 [新增]  。
+   1. 選取 [新增]。
 
    ![前述指示中的圖片。](model/_static/3/arp.png)
 
@@ -529,7 +529,7 @@ using Microsoft.EntityFrameworkCore;
 
 * 在 [ **模型類別** ] 下拉式清單中，選取 [ **Movie (Razor PagesMovie])**。
 * 在 [ **資料內容類別] 資料** 列中，選取 **+** (加號，) 簽署並變更 PagesMovie 所產生的名稱 Razor 。**模型**。 RazorPagesMovieCoNtext 至 Razor PagesMovie。**資料**。 RazorPagesMovieCoNtext. 這不是必要的[變更](https://developercommunity.visualstudio.com/content/problem/652166/aspnet-core-ef-scaffolder-uses-incorrect-namespace.html) \(英文\)。 它會使用正確的命名空間來建立資料庫內容類別。
-* 選取 [新增]  。
+* 選取 [新增]。
 
 ![前述指示中的圖片。](model/_static/3/arp.png)
 
@@ -597,7 +597,7 @@ dotnet-aspnet-codegenerator razorpage -h
 
 * 在 [ **模型類別** ] 下拉式清單中，選取或輸入 **Movie (Razor PagesMovie) 模型**。
 * 在 [ **資料內容類別** ] 列中，輸入新類別的名稱 Razor PagesMovie。**資料**。 RazorPagesMovieCoNtext. 這不是必要的[變更](https://developercommunity.visualstudio.com/content/problem/652166/aspnet-core-ef-scaffolder-uses-incorrect-namespace.html) \(英文\)。 它會使用正確的命名空間來建立資料庫內容類別。
-* 選取 [新增]  。
+* 選取 [新增]。
 
 ![前述指示中的圖片。](model/_static/arpMac.png)
 
@@ -919,7 +919,7 @@ to use Data, it should not use models. That will make the namespace the same for
 
 * 在 [ **模型類別** ] 下拉式清單中，選取 [ **Movie (Razor PagesMovie])**。
 * 在 [**資料內容類別] 資料** 列中，選取 **+** (加上) 號，然後接受產生的名稱 **Razor PagesMovie。 RazorPagesMovieCoNtext**。
-* 選取 [新增]  。
+* 選取 [新增]。
 
 ![前述指示中的圖片。](model/_static/arp.png)
 
@@ -981,7 +981,7 @@ dotnet-aspnet-codegenerator razorpage -h
 
 * 在 [ **模型類別** ] 下拉式清單中，選取或輸入 **Movie**。
 * 在 [**資料內容類別] 資料** 列中，輸入 select **Razor PagesMovieCoNtext** ，這會使用正確的命名空間來建立新的資料庫內容類別。 在此情況下，它將會是 **Razor PagesMovie 模型。 RazorPagesMovieCoNtext**。
-* 選取 [新增]  。
+* 選取 [新增]。
 
 ![前述指示中的圖片。](model/_static/arpMac.png)
 
@@ -1024,7 +1024,7 @@ Add-Migration Initial
 Update-Database
 ```
 
-`Add-Migration` 命令會產生程式碼來建立初始資料庫結構描述。 架構是以 PagesMovieCoNtext.cs 檔案中指定的模型為基礎 `DbContext` 。 *Razor* `InitialCreate`引數是用來命名遷移。 您可以使用任何名稱，但依照慣例，會使用描述移轉的名稱。 如需詳細資訊，請參閱<xref:data/ef-mvc/migrations>。
+`Add-Migration` 命令會產生程式碼來建立初始資料庫結構描述。 架構是以 PagesMovieCoNtext.cs 檔案中指定的模型為基礎 `DbContext` 。 *Razor* `InitialCreate`引數是用來命名遷移。 您可以使用任何名稱，但依照慣例，會使用描述移轉的名稱。 如需詳細資訊，請參閱 <xref:data/ef-mvc/migrations> 。
 
 此 `Update-Database` 命令會 `Up` 在 *遷移/ \<time-stamp> _InitialCreate .cs* 檔案中執行方法。 `Up` 方法會建立資料庫。
 

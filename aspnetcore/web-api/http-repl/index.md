@@ -4,7 +4,7 @@ author: scottaddie
 description: 瞭解如何使用 HttpRepl .NET Core 通用工具來流覽和測試 ASP.NET Core web API。
 monikerRange: '>= aspnetcore-2.1'
 ms.author: scaddie
-ms.custom: mvc, devx-track-azurecli
+ms.custom: mvc
 ms.date: 11/12/2020
 no-loc:
 - appsettings.json
@@ -19,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: web-api/http-repl
-ms.openlocfilehash: c661141c1bec93c0f7b6404964dc0bca2319b529
-ms.sourcegitcommit: 827e8be18cebbcc09b467c089e17fa6f5e430cb2
+ms.openlocfilehash: 1027887738740d50c30e24e800c0402b1ce4ad02
+ms.sourcegitcommit: 04a404a9655c59ad1ea02aff5d399ae1b833ad6a
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 11/15/2020
-ms.locfileid: "94634609"
+ms.lasthandoff: 01/03/2021
+ms.locfileid: "97854661"
 ---
 # <a name="test-web-apis-with-the-httprepl"></a>使用 HttpRepl 測試 web Api
 
@@ -604,7 +604,7 @@ put <PARAMETER> [-c|--content] [-f|--file] [-h|--header] [--no-body] [-F|--no-fo
 
 若要發出 HTTP PUT 要求：
 
-1. *選擇性* ：執行 `get` 命令以在修改資料之前加以查看：
+1. *選擇性*：執行 `get` 命令以在修改資料之前加以查看：
 
     ```console
     https://localhost:5001/fruits> get
@@ -666,7 +666,7 @@ put <PARAMETER> [-c|--content] [-f|--file] [-h|--header] [--no-body] [-F|--no-fo
     Server: Kestrel
     ```
 
-1. *選擇性* ：發出 `get` 命令以查看修改。 例如，如果您在文字編輯器中輸入 "揀選"，則會傳回 `get` 下列輸出：
+1. *選擇性*：發出 `get` 命令以查看修改。 例如，如果您在文字編輯器中輸入 "揀選"，則會傳回 `get` 下列輸出：
 
     ```console
     https://localhost:5001/fruits> get
@@ -717,7 +717,7 @@ delete <PARAMETER> [-F|--no-formatting] [-h|--header] [--response] [--response:b
 
 若要發出 HTTP DELETE 要求：
 
-1. *選擇性* ：執行 `get` 命令以在修改資料之前加以查看：
+1. *選擇性*：執行 `get` 命令以在修改資料之前加以查看：
 
     ```console
     https://localhost:5001/fruits> get
@@ -757,7 +757,7 @@ delete <PARAMETER> [-F|--no-formatting] [-h|--header] [--response] [--response:b
     Server: Kestrel
     ```
 
-1. *選擇性* ：發出 `get` 命令以查看修改。 在此範例中，會傳回 `get` 下列輸出：
+1. *選擇性*：發出 `get` 命令以查看修改。 在此範例中，會傳回 `get` 下列輸出：
 
     ```console
     https://localhost:5001/fruits> get

@@ -20,10 +20,10 @@ no-loc:
 - SignalR
 uid: blazor/forms-validation
 ms.openlocfilehash: 979e2615080a4f07b6091f0498fc7efa62ea1563
-ms.sourcegitcommit: 43a540e703b9096921de27abc6b66bc0783fe905
+ms.sourcegitcommit: 3593c4efa707edeaaceffbfa544f99f41fc62535
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 11/30/2020
+ms.lasthandoff: 01/04/2021
 ms.locfileid: "96320066"
 ---
 # <a name="aspnet-core-no-locblazor-forms-and-validation"></a>ASP.NET Core Blazor 表單和驗證
@@ -225,7 +225,7 @@ public class Starship
 
 <xref:Microsoft.AspNetCore.Components.Forms.EditForm> <xref:Microsoft.AspNetCore.Components.Forms.EditContext> 會建立做為階層式[值](xref:blazor/components/cascading-values-and-parameters)，以追蹤編輯程式的相關中繼資料，包括已修改的欄位和目前的驗證訊息。
 
-將 **either** <xref:Microsoft.AspNetCore.Components.Forms.EditContext> **或** 指派給 <xref:Microsoft.AspNetCore.Components.Forms.EditForm.Model?displayProperty=nameWithType> <xref:Microsoft.AspNetCore.Components.Forms.EditForm> 。 不支援同時指派，且會產生 **執行階段錯誤**。
+將 <xref:Microsoft.AspNetCore.Components.Forms.EditContext> **或** 指派給 <xref:Microsoft.AspNetCore.Components.Forms.EditForm.Model?displayProperty=nameWithType> <xref:Microsoft.AspNetCore.Components.Forms.EditForm> 。 不支援同時指派，且會產生 **執行階段錯誤**。
 
 <xref:Microsoft.AspNetCore.Components.Forms.EditForm>提供方便的事件，以進行有效和不正確表單提交：
 
@@ -319,7 +319,7 @@ Blazor架構會提供 <xref:Microsoft.AspNetCore.Components.Forms.DataAnnotation
 * [伺服器驗證](#server-validation)
 
 > [!NOTE]
-> 在許多情況下，您可以使用自訂資料批註驗證屬性來取代自訂驗證程式元件。 套用至表單模型的自訂屬性會使用元件來啟用 <xref:Microsoft.AspNetCore.Components.Forms.DataAnnotationsValidator> 。 與伺服器端驗證搭配使用時，套用至模型的任何自訂屬性都必須是伺服器上的可執行檔。 如需詳細資訊，請參閱<xref:mvc/models/validation#alternatives-to-built-in-attributes>。
+> 在許多情況下，您可以使用自訂資料批註驗證屬性來取代自訂驗證程式元件。 套用至表單模型的自訂屬性會使用元件來啟用 <xref:Microsoft.AspNetCore.Components.Forms.DataAnnotationsValidator> 。 與伺服器端驗證搭配使用時，套用至模型的任何自訂屬性都必須是伺服器上的可執行檔。 如需詳細資訊，請參閱 <xref:mvc/models/validation#alternatives-to-built-in-attributes> 。
 
 從下列程式建立驗證程式元件 <xref:Microsoft.AspNetCore.Components.ComponentBase> ：
 
@@ -439,7 +439,7 @@ public class CustomValidator : ComponentBase
 ```
 
 > [!NOTE]
-> 除了使用 [驗證元件](#validator-components)之外，也可以使用資料批註驗證屬性。 套用至表單模型的自訂屬性會使用元件來啟用 <xref:Microsoft.AspNetCore.Components.Forms.DataAnnotationsValidator> 。 與伺服器端驗證搭配使用時，屬性必須是伺服器上的可執行檔。 如需詳細資訊，請參閱<xref:mvc/models/validation#alternatives-to-built-in-attributes>。
+> 除了使用 [驗證元件](#validator-components)之外，也可以使用資料批註驗證屬性。 套用至表單模型的自訂屬性會使用元件來啟用 <xref:Microsoft.AspNetCore.Components.Forms.DataAnnotationsValidator> 。 與伺服器端驗證搭配使用時，屬性必須是伺服器上的可執行檔。 如需詳細資訊，請參閱 <xref:mvc/models/validation#alternatives-to-built-in-attributes> 。
 
 ## <a name="server-validation"></a>伺服器驗證
 
@@ -579,7 +579,7 @@ services.AddControllersWithViews()
     });
 ```
 
-如需詳細資訊，請參閱<xref:web-api/handle-errors#validation-failure-error-response>。
+如需詳細資訊，請參閱 <xref:web-api/handle-errors#validation-failure-error-response> 。
 
 在用戶端專案中，加入 [ [驗證程式元件](#validator-components) ] 區段中顯示的驗證程式元件。
 
@@ -716,7 +716,7 @@ services.AddControllersWithViews()
 ```
 
 > [!NOTE]
-> 您可以使用資料批註驗證屬性作為 [驗證元件](#validator-components)的替代方案。 套用至表單模型的自訂屬性會使用元件來啟用 <xref:Microsoft.AspNetCore.Components.Forms.DataAnnotationsValidator> 。 與伺服器端驗證搭配使用時，屬性必須是伺服器上的可執行檔。 如需詳細資訊，請參閱<xref:mvc/models/validation#alternatives-to-built-in-attributes>。
+> 您可以使用資料批註驗證屬性作為 [驗證元件](#validator-components)的替代方案。 套用至表單模型的自訂屬性會使用元件來啟用 <xref:Microsoft.AspNetCore.Components.Forms.DataAnnotationsValidator> 。 與伺服器端驗證搭配使用時，屬性必須是伺服器上的可執行檔。 如需詳細資訊，請參閱 <xref:mvc/models/validation#alternatives-to-built-in-attributes> 。
 
 > [!NOTE]
 > 本節中的伺服器端驗證方法適用于此檔集中的任何裝載 Blazor WebAssembly 解決方案範例：
@@ -1124,7 +1124,7 @@ public class ShipDescription
 
 * 您可以使用表單，在 <xref:Microsoft.AspNetCore.Components.Forms.EditContext> 元件初始化時指派模型。
 * 驗證內容回呼中的表單， <xref:Microsoft.AspNetCore.Components.Forms.EditContext.OnFieldChanged> 以啟用和停用 [提交] 按鈕。
-* 解除與方法中的事件處理常式的掛鉤 `Dispose` 。 如需詳細資訊，請參閱<xref:blazor/components/lifecycle#component-disposal-with-idisposable>。
+* 解除與方法中的事件處理常式的掛鉤 `Dispose` 。 如需詳細資訊，請參閱 <xref:blazor/components/lifecycle#component-disposal-with-idisposable> 。
 
 > [!NOTE]
 > 使用時 <xref:Microsoft.AspNetCore.Components.Forms.EditContext> ，也請勿將指派給 <xref:Microsoft.AspNetCore.Components.Forms.EditForm.Model> <xref:Microsoft.AspNetCore.Components.Forms.EditForm> 。

@@ -20,10 +20,10 @@ no-loc:
 - SignalR
 uid: data/ef-mvc/intro
 ms.openlocfilehash: c0623de3c8031b6dbb518a6d25623b55a6500af5
-ms.sourcegitcommit: 8b867c4cb0c3b39bbc4d2d87815610d2ef858ae7
+ms.sourcegitcommit: 3593c4efa707edeaaceffbfa544f99f41fc62535
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 11/17/2020
+ms.lasthandoff: 01/04/2021
 ms.locfileid: "94703731"
 ---
 # <a name="tutorial-get-started-with-ef-core-in-an-aspnet-mvc-web-app"></a>教學課程：開始使用 ASP.NET MVC web 應用程式中的 EF Core
@@ -80,7 +80,7 @@ If you choose to use SQLite, download and install a third-party tool for managin
 1. 在 [ **建立新的 ASP.NET Core web 應用程式** ] 對話方塊中，選取：
     1. 下拉式清單中的 **.Net Core** 和 **ASP.NET Core 5.0** 。
     1. **ASP.NET Core Web 應用程式 (模型-視圖控制器)**。
-    1. **Create** 
+    1.  
        建立 ![新增 ASP.NET Core 專案對話方塊](~/data/ef-mvc/intro/_static/new-aspnet5.png)
 
 ## <a name="set-up-the-site-style"></a>設定網站樣式

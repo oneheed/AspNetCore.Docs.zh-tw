@@ -20,12 +20,12 @@ no-loc:
 - SignalR
 uid: blazor/state-management
 zone_pivot_groups: blazor-hosting-models
-ms.openlocfilehash: 6e6f3047da30490caff4f820003a3018e8c26aaa
-ms.sourcegitcommit: 6b87f2e064cea02e65dacd206394b44f5c604282
+ms.openlocfilehash: 5b7a6fefd13d7255fbe3ae7010df48c6211fa755
+ms.sourcegitcommit: 3593c4efa707edeaaceffbfa544f99f41fc62535
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 12/15/2020
-ms.locfileid: "97506603"
+ms.lasthandoff: 01/04/2021
+ms.locfileid: "97854319"
 ---
 # <a name="aspnet-core-no-locblazor-state-management"></a>ASP.NET Core Blazor 狀態管理
 
@@ -280,7 +280,7 @@ protected override async Task OnInitializedAsync()
 }
 ```
 
-如果元件的參數包含流覽狀態，請呼叫 `ProtectedSessionStore.GetAsync` 並指派非 `null` 結果中的 <xref:Microsoft.AspNetCore.Components.ComponentBase.OnParametersSetAsync%2A> ，而不是 <xref:Microsoft.AspNetCore.Components.ComponentBase.OnInitializedAsync%2A> 。 <xref:Microsoft.AspNetCore.Components.ComponentBase.OnInitializedAsync%2A> 只有在第一次具現化元件時，才會呼叫一次。 <xref:Microsoft.AspNetCore.Components.ComponentBase.OnInitializedAsync%2A> 如果使用者流覽至不同的 URL，並在相同頁面上剩餘，則不會再次呼叫。 如需詳細資訊，請參閱<xref:blazor/components/lifecycle>。
+如果元件的參數包含流覽狀態，請呼叫 `ProtectedSessionStore.GetAsync` 並指派非 `null` 結果中的 <xref:Microsoft.AspNetCore.Components.ComponentBase.OnParametersSetAsync%2A> ，而不是 <xref:Microsoft.AspNetCore.Components.ComponentBase.OnInitializedAsync%2A> 。 <xref:Microsoft.AspNetCore.Components.ComponentBase.OnInitializedAsync%2A> 只有在第一次具現化元件時，才會呼叫一次。 <xref:Microsoft.AspNetCore.Components.ComponentBase.OnInitializedAsync%2A> 如果使用者流覽至不同的 URL，並在相同頁面上剩餘，則不會再次呼叫。 如需詳細資訊，請參閱 <xref:blazor/components/lifecycle> 。
 
 > [!WARNING]
 > 此區段中的範例只適用于伺服器未啟用可呈現的情況。 啟用自動呈現之後，會產生錯誤，說明因為正在資源清單元件，所以無法發出 JavaScript interop 呼叫。
@@ -421,7 +421,7 @@ else
 
 ```razor
 <CounterStateProvider>
-    <Router AppAssembly="typeof(Startup).Assembly">
+    <Router AppAssembly="@typeof(Program).Assembly">
         ...
     </Router>
 </CounterStateProvider>
@@ -527,7 +527,7 @@ protected override async Task OnInitializedAsync()
 }
 ```
 
-如果元件的參數包含導覽狀態，請呼叫 `ProtectedSessionStore.GetAsync` 並指派中的結果 <xref:Microsoft.AspNetCore.Components.ComponentBase.OnParametersSetAsync%2A> ，而不是 <xref:Microsoft.AspNetCore.Components.ComponentBase.OnInitializedAsync%2A> 。 <xref:Microsoft.AspNetCore.Components.ComponentBase.OnInitializedAsync%2A> 只有在第一次具現化元件時，才會呼叫一次。 <xref:Microsoft.AspNetCore.Components.ComponentBase.OnInitializedAsync%2A> 如果使用者流覽至不同的 URL，並在相同頁面上剩餘，則不會再次呼叫。 如需詳細資訊，請參閱<xref:blazor/components/lifecycle>。
+如果元件的參數包含導覽狀態，請呼叫 `ProtectedSessionStore.GetAsync` 並指派中的結果 <xref:Microsoft.AspNetCore.Components.ComponentBase.OnParametersSetAsync%2A> ，而不是 <xref:Microsoft.AspNetCore.Components.ComponentBase.OnInitializedAsync%2A> 。 <xref:Microsoft.AspNetCore.Components.ComponentBase.OnInitializedAsync%2A> 只有在第一次具現化元件時，才會呼叫一次。 <xref:Microsoft.AspNetCore.Components.ComponentBase.OnInitializedAsync%2A> 如果使用者流覽至不同的 URL，並在相同頁面上剩餘，則不會再次呼叫。 如需詳細資訊，請參閱 <xref:blazor/components/lifecycle> 。
 
 > [!WARNING]
 > 此區段中的範例只適用于伺服器未啟用可呈現的情況。 啟用自動呈現之後，會產生錯誤，說明因為正在資源清單元件，所以無法發出 JavaScript interop 呼叫。
@@ -666,7 +666,7 @@ else
 
 ```razor
 <CounterStateProvider>
-    <Router AppAssembly="typeof(Startup).Assembly">
+    <Router AppAssembly="@typeof(Program).Assembly">
         ...
     </Router>
 </CounterStateProvider>

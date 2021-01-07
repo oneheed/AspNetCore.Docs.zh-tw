@@ -57,7 +57,7 @@
         - name: MVC
           displayName: tutorial
           items:
-            - name: 概觀
+            - name: 總覽
               uid: tutorials/first-mvc-app/index
             - name: 開始使用
               uid: tutorials/first-mvc-app/start-mvc
@@ -258,7 +258,7 @@
           uid: razor-pages/razor-pages-conventions
     - name: MVC
       items:
-        - name: 概觀
+        - name: 總覽
           uid: mvc/overview
         - name: 教學課程
           items:
@@ -732,7 +732,7 @@
           uid: tutorials/grpc/grpc-start
     - name: 搭配 C# 的 gRPC 服務
       items:
-        - name: 概觀
+        - name: 總覽
           uid: grpc/basics
         - name: 建立 gRPC 服務
           uid: grpc/services
@@ -766,6 +766,8 @@
       uid: grpc/interprocess
     - name: 從 gRPC 建立 JSON Web API
       uid: grpc/httpapi
+    - name: 程式碼優先 gRPC 服務與用戶端
+      uid: grpc/code-first
     - name: 使用 dotnet-grpc 管理 Protobuf 參考
       uid: grpc/dotnet-grpc
     - name: 使用 gRPCurl 測試 gRPC 服務

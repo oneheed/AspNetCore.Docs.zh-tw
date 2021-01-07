@@ -19,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: signalr/java-client
-ms.openlocfilehash: 638333176ae31b088bdf5ebefe97e87bde6c0d32
-ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
+ms.openlocfilehash: da6876e0540579dac5fb9e92362b38a398bca4d5
+ms.sourcegitcommit: b64c44ba5e3abb4ad4d50de93b7e282bf0f251e4
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 10/30/2020
-ms.locfileid: "93051456"
+ms.lasthandoff: 01/07/2021
+ms.locfileid: "97972076"
 ---
 # <a name="aspnet-core-no-locsignalr-java-client"></a>ASP.NET Core SignalR JAVA 用戶端
 
@@ -98,7 +98,7 @@ SLF4J: See http://www.slf4j.org/codes.html#StaticLoggerBinder for further detail
 
 ## <a name="configure-bearer-token-authentication"></a>設定持有人權杖驗證
 
-在 SignalR JAVA 用戶端中，您可以將「存取權杖處理站」提供給 [HttpHubConnectionBuilder](/java/api/com.microsoft.signalr._http_hub_connection_builder?view=aspnet-signalr-java)，以設定用於驗證的持有人權杖。 使用[withAccessTokenFactory](/java/api/com.microsoft.signalr._http_hub_connection_builder.withaccesstokenprovider?view=aspnet-signalr-java#com_microsoft_signalr__http_hub_connection_builder_withAccessTokenProvider_Single_String__)來提供[RxJAVA](https://github.com/ReactiveX/RxJava) [單一 \<String> ](https://reactivex.io/documentation/single.html)。 只要呼叫 [Single. 延遲](https://reactivex.io/RxJava/javadoc/io/reactivex/Single.html#defer-java.util.concurrent.Callable-)，您就可以撰寫邏輯來產生用戶端的存取權杖。
+在 SignalR JAVA 用戶端中，您可以將「存取權杖處理站」提供給 [HttpHubConnectionBuilder](/java/api/com.microsoft.signalr.httphubconnectionbuilder?view=aspnet-signalr-java)，以設定用於驗證的持有人權杖。 使用[withAccessTokenFactory](/java/api/com.microsoft.signalr.httphubconnectionbuilder.withaccesstokenprovider?view=aspnet-signalr-java#com_microsoft_signalr__http_hub_connection_builder_withAccessTokenProvider_Single_String__)來提供[RxJAVA](https://github.com/ReactiveX/RxJava) [單一 \<String> ](https://reactivex.io/documentation/single.html)。 只要呼叫 [Single. 延遲](https://reactivex.io/RxJava/javadoc/io/reactivex/Single.html#defer-java.util.concurrent.Callable-)，您就可以撰寫邏輯來產生用戶端的存取權杖。
 
 ```java
 HubConnection hubConnection = HubConnectionBuilder.create("YOUR HUB URL HERE")
@@ -108,7 +108,7 @@ HubConnection hubConnection = HubConnectionBuilder.create("YOUR HUB URL HERE")
     })).build();
 ```
 
-## <a name="known-limitations"></a>已知的限制
+## <a name="known-limitations"></a>已知限制
 
 ::: moniker range=">= aspnetcore-3.0"
 

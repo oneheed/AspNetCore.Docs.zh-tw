@@ -19,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: signalr/configuration
-ms.openlocfilehash: 7dac8c84683553a52e07ecc61c8bcf8616e77dc6
-ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
+ms.openlocfilehash: cef05b32731e0930d7a3cfc6fe4502236b07a236
+ms.sourcegitcommit: b64c44ba5e3abb4ad4d50de93b7e282bf0f251e4
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 10/30/2020
-ms.locfileid: "93061232"
+ms.lasthandoff: 01/07/2021
+ms.locfileid: "97972063"
 ---
 # <a name="aspnet-core-no-locsignalr-configuration"></a>ASP.NET Core SignalR 設定
 
@@ -197,7 +197,7 @@ let connection = new signalR.HubConnectionBuilder()
     .build();
 ```
 
-下表列出可用的記錄層級。 您所提供的值， `configureLogging` 用來設定將記錄的 **最小** 記錄層級。 記錄在此層級的訊息， **或是在資料表中所列的層級** ，將會被記錄下來。
+下表列出可用的記錄層級。 您所提供的值， `configureLogging` 用來設定將記錄的 **最小** 記錄層級。 記錄在此層級的訊息， **或是在資料表中所列的層級**，將會被記錄下來。
 
 | String                      | LogLevel               |
 | --------------------------- | ---------------------- |
@@ -293,7 +293,7 @@ let connection = new signalR.HubConnectionBuilder()
     .build();
 ```
 
-在 SignalR JAVA 用戶端中，您可以提供存取權杖 factory 給 [HttpHubConnectionBuilder](/java/api/com.microsoft.signalr._http_hub_connection_builder?view=aspnet-signalr-java)，以設定用於驗證的持有人權杖。 使用[withAccessTokenFactory](/java/api/com.microsoft.signalr._http_hub_connection_builder.withaccesstokenprovider?view=aspnet-signalr-java#com_microsoft_signalr__http_hub_connection_builder_withAccessTokenProvider_Single_String__)來提供[RxJAVA](https://github.com/ReactiveX/RxJava) [單一 \<String> ](https://reactivex.io/documentation/single.html)。 只要呼叫 [Single. 延遲](https://reactivex.io/RxJava/javadoc/io/reactivex/Single.html#defer-java.util.concurrent.Callable-)，您就可以撰寫邏輯來產生用戶端的存取權杖。
+在 SignalR JAVA 用戶端中，您可以提供存取權杖 factory 給 [HttpHubConnectionBuilder](/java/api/com.microsoft.signalr.httphubconnectionbuilder?view=aspnet-signalr-java)，以設定用於驗證的持有人權杖。 使用[withAccessTokenFactory](/java/api/com.microsoft.signalr.httphubconnectionbuilder.withaccesstokenprovider?view=aspnet-signalr-java#com_microsoft_signalr__http_hub_connection_builder_withAccessTokenProvider_Single_String__)來提供[RxJAVA](https://github.com/ReactiveX/RxJava) [單一 \<String> ](https://reactivex.io/documentation/single.html)。 只要呼叫 [Single. 延遲](https://reactivex.io/RxJava/javadoc/io/reactivex/Single.html#defer-java.util.concurrent.Callable-)，您就可以撰寫邏輯來產生用戶端的存取權杖。
 
 ```java
 HubConnection hubConnection = HubConnectionBuilder.create("https://example.com/chathub")
@@ -343,12 +343,12 @@ HubConnection hubConnection = HubConnectionBuilder.create("https://example.com/c
 | .NET 選項 |  預設值 | 描述 |
 | ----------- | -------------- | ----------- |
 | `AccessTokenProvider` | `null` | 傳回字串的函式，在 HTTP 要求中以持有人驗證權杖的形式提供。 |
-| `SkipNegotiation` | `false` | 將此設定為， `true` 以略過協商步驟。 **只有當 websocket 傳輸是唯一啟用的傳輸時才支援** 。 使用 Azure 服務時，無法啟用此設定 SignalR 。 |
-| `ClientCertificates` | Empty | 要傳送以驗證要求的 TLS 憑證集合。 |
-| `Cookies` | Empty | cookie要與每個 HTTP 要求一起傳送的 HTTP 集合。 |
-| `Credentials` | Empty | 每個 HTTP 要求所要傳送的認證。 |
+| `SkipNegotiation` | `false` | 將此設定為， `true` 以略過協商步驟。 **只有當 websocket 傳輸是唯一啟用的傳輸時才支援**。 使用 Azure 服務時，無法啟用此設定 SignalR 。 |
+| `ClientCertificates` | 空白 | 要傳送以驗證要求的 TLS 憑證集合。 |
+| `Cookies` | 空白 | cookie要與每個 HTTP 要求一起傳送的 HTTP 集合。 |
+| `Credentials` | 空白 | 每個 HTTP 要求所要傳送的認證。 |
 | `CloseTimeout` | 5 秒 | 僅限 Websocket。 用戶端在關閉以確認關閉要求後等待的最大時間量。 如果伺服器未在這段時間內確認關閉，用戶端就會中斷連線。 |
-| `Headers` | Empty | 要與每個 HTTP 要求一起傳送的其他 HTTP 標頭對應。 |
+| `Headers` | 空白 | 要與每個 HTTP 要求一起傳送的其他 HTTP 標頭對應。 |
 | `HttpMessageHandlerFactory` | `null` | 可以用來設定或取代 `HttpMessageHandler` 用來傳送 HTTP 要求的委派。 不用於 WebSocket 連接。 此委派必須傳回非 null 值，且會接收預設值做為參數。 請修改該預設值的設定並傳回，或傳回新的 `HttpMessageHandler` 實例。 **取代處理常式時，請務必從提供的處理常式複製您想要保留的設定，否則設定的選項 (例如 Cookie s 和標頭) 不會套用至新的處理常式。** |
 | `Proxy` | `null` | 傳送 HTTP 要求時要使用的 HTTP proxy。 |
 | `UseDefaultCredentials` | `false` | 設定此布林值，以傳送 HTTP 和 Websocket 要求的預設認證。 這樣就可以使用 Windows 驗證。 |
@@ -362,7 +362,7 @@ HubConnection hubConnection = HubConnectionBuilder.create("https://example.com/c
 | `transport` | `null` | <xref:Microsoft.AspNetCore.Http.Connections.HttpTransportType>值，指定要用於連接的傳輸。 |
 | `headers` | `null` | 每個 HTTP 要求傳送的標頭字典。 在瀏覽器中傳送標頭不適用於 Websocket 或 <xref:Microsoft.AspNetCore.Http.Connections.HttpTransportType.ServerSentEvents> 串流。 |
 | `logMessageContent` | `null` | 設定為， `true` 以記錄用戶端所傳送和接收之訊息的位元組/字元。 |
-| `skipNegotiation` | `false` | 將此設定為， `true` 以略過協商步驟。 **只有當 websocket 傳輸是唯一啟用的傳輸時才支援** 。 使用 Azure 服務時，無法啟用此設定 SignalR 。 |
+| `skipNegotiation` | `false` | 將此設定為， `true` 以略過協商步驟。 **只有當 websocket 傳輸是唯一啟用的傳輸時才支援**。 使用 Azure 服務時，無法啟用此設定 SignalR 。 |
 | `withCredentials` | `true` | 指定是否將使用 CORS 要求傳送認證。 Azure App Service 會使用 cookie 來進行粘滯話，且必須啟用此選項才能正確運作。 如需 CORS 與的詳細資訊 SignalR ，請參閱 <xref:signalr/security#cross-origin-resource-sharing> 。 |
 
 # <a name="java"></a>[Java](#tab/java)
@@ -370,8 +370,8 @@ HubConnection hubConnection = HubConnectionBuilder.create("https://example.com/c
 | JAVA 選項 | 預設值 | 描述 |
 | ----------- | ------------- | ----------- |
 | `withAccessTokenProvider` | `null` | 傳回字串的函式，在 HTTP 要求中以持有人驗證權杖的形式提供。 |
-| `shouldSkipNegotiate` | `false` | 將此設定為， `true` 以略過協商步驟。 **只有當 websocket 傳輸是唯一啟用的傳輸時才支援** 。 使用 Azure 服務時，無法啟用此設定 SignalR 。 |
-| `withHeader` `withHeaders` | Empty | 要與每個 HTTP 要求一起傳送的其他 HTTP 標頭對應。 |
+| `shouldSkipNegotiate` | `false` | 將此設定為， `true` 以略過協商步驟。 **只有當 websocket 傳輸是唯一啟用的傳輸時才支援**。 使用 Azure 服務時，無法啟用此設定 SignalR 。 |
+| `withHeader` `withHeaders` | 空白 | 要與每個 HTTP 要求一起傳送的其他 HTTP 標頭對應。 |
 
 ---
 
@@ -589,7 +589,7 @@ let connection = new signalR.HubConnectionBuilder()
     .build();
 ```
 
-下表列出可用的記錄層級。 您所提供的值， `configureLogging` 用來設定將記錄的 **最小** 記錄層級。 記錄在此層級的訊息， **或是在資料表中所列的層級** ，將會被記錄下來。
+下表列出可用的記錄層級。 您所提供的值， `configureLogging` 用來設定將記錄的 **最小** 記錄層級。 記錄在此層級的訊息， **或是在資料表中所列的層級**，將會被記錄下來。
 
 | String                      | LogLevel               |
 | --------------------------- | ---------------------- |
@@ -685,7 +685,7 @@ let connection = new signalR.HubConnectionBuilder()
     .build();
 ```
 
-在 SignalR JAVA 用戶端中，您可以提供存取權杖 factory 給 [HttpHubConnectionBuilder](/java/api/com.microsoft.signalr._http_hub_connection_builder?view=aspnet-signalr-java)，以設定用於驗證的持有人權杖。 使用[withAccessTokenFactory](/java/api/com.microsoft.signalr._http_hub_connection_builder.withaccesstokenprovider?view=aspnet-signalr-java#com_microsoft_signalr__http_hub_connection_builder_withAccessTokenProvider_Single_String__)來提供[RxJAVA](https://github.com/ReactiveX/RxJava) [單一 \<String> ](https://reactivex.io/documentation/single.html)。 只要呼叫 [Single. 延遲](https://reactivex.io/RxJava/javadoc/io/reactivex/Single.html#defer-java.util.concurrent.Callable-)，您就可以撰寫邏輯來產生用戶端的存取權杖。
+在 SignalR JAVA 用戶端中，您可以提供存取權杖 factory 給 [HttpHubConnectionBuilder](/java/api/com.microsoft.signalr.httphubconnectionbuilder?view=aspnet-signalr-java)，以設定用於驗證的持有人權杖。 使用[withAccessTokenFactory](/java/api/com.microsoft.signalr.httphubconnectionbuilder.withaccesstokenprovider?view=aspnet-signalr-java#com_microsoft_signalr__http_hub_connection_builder_withAccessTokenProvider_Single_String__)來提供[RxJAVA](https://github.com/ReactiveX/RxJava) [單一 \<String> ](https://reactivex.io/documentation/single.html)。 只要呼叫 [Single. 延遲](https://reactivex.io/RxJava/javadoc/io/reactivex/Single.html#defer-java.util.concurrent.Callable-)，您就可以撰寫邏輯來產生用戶端的存取權杖。
 
 ```java
 HubConnection hubConnection = HubConnectionBuilder.create("https://example.com/chathub")
@@ -735,12 +735,12 @@ HubConnection hubConnection = HubConnectionBuilder.create("https://example.com/c
 | .NET 選項 |  預設值 | 描述 |
 | ----------- | -------------- | ----------- |
 | `AccessTokenProvider` | `null` | 傳回字串的函式，在 HTTP 要求中以持有人驗證權杖的形式提供。 |
-| `SkipNegotiation` | `false` | 將此設定為， `true` 以略過協商步驟。 **只有當 websocket 傳輸是唯一啟用的傳輸時才支援** 。 使用 Azure 服務時，無法啟用此設定 SignalR 。 |
-| `ClientCertificates` | Empty | 要傳送以驗證要求的 TLS 憑證集合。 |
-| `Cookies` | Empty | cookie要與每個 HTTP 要求一起傳送的 HTTP 集合。 |
-| `Credentials` | Empty | 每個 HTTP 要求所要傳送的認證。 |
+| `SkipNegotiation` | `false` | 將此設定為， `true` 以略過協商步驟。 **只有當 websocket 傳輸是唯一啟用的傳輸時才支援**。 使用 Azure 服務時，無法啟用此設定 SignalR 。 |
+| `ClientCertificates` | 空白 | 要傳送以驗證要求的 TLS 憑證集合。 |
+| `Cookies` | 空白 | cookie要與每個 HTTP 要求一起傳送的 HTTP 集合。 |
+| `Credentials` | 空白 | 每個 HTTP 要求所要傳送的認證。 |
 | `CloseTimeout` | 5 秒 | 僅限 Websocket。 用戶端在關閉以確認關閉要求後等待的最大時間量。 如果伺服器未在這段時間內確認關閉，用戶端就會中斷連線。 |
-| `Headers` | Empty | 要與每個 HTTP 要求一起傳送的其他 HTTP 標頭對應。 |
+| `Headers` | 空白 | 要與每個 HTTP 要求一起傳送的其他 HTTP 標頭對應。 |
 | `HttpMessageHandlerFactory` | `null` | 可以用來設定或取代 `HttpMessageHandler` 用來傳送 HTTP 要求的委派。 不用於 WebSocket 連接。 此委派必須傳回非 null 值，且會接收預設值做為參數。 請修改該預設值的設定並傳回，或傳回新的 `HttpMessageHandler` 實例。 **取代處理常式時，請務必從提供的處理常式複製您想要保留的設定，否則設定的選項 (例如 Cookie s 和標頭) 不會套用至新的處理常式。** |
 | `Proxy` | `null` | 傳送 HTTP 要求時要使用的 HTTP proxy。 |
 | `UseDefaultCredentials` | `false` | 設定此布林值，以傳送 HTTP 和 Websocket 要求的預設認證。 這樣就可以使用 Windows 驗證。 |
@@ -753,15 +753,15 @@ HubConnection hubConnection = HubConnectionBuilder.create("https://example.com/c
 | `accessTokenFactory` | `null` | 傳回字串的函式，在 HTTP 要求中以持有人驗證權杖的形式提供。 |
 | `transport` | `null` | <xref:Microsoft.AspNetCore.Http.Connections.HttpTransportType>值，指定要用於連接的傳輸。 |
 | `logMessageContent` | `null` | 設定為， `true` 以記錄用戶端所傳送和接收之訊息的位元組/字元。 |
-| `skipNegotiation` | `false` | 將此設定為， `true` 以略過協商步驟。 **只有當 websocket 傳輸是唯一啟用的傳輸時才支援** 。 使用 Azure 服務時，無法啟用此設定 SignalR 。 |
+| `skipNegotiation` | `false` | 將此設定為， `true` 以略過協商步驟。 **只有當 websocket 傳輸是唯一啟用的傳輸時才支援**。 使用 Azure 服務時，無法啟用此設定 SignalR 。 |
 
 # <a name="java"></a>[Java](#tab/java)
 
 | JAVA 選項 | 預設值 | 描述 |
 | ----------- | ------------- | ----------- |
 | `withAccessTokenProvider` | `null` | 傳回字串的函式，在 HTTP 要求中以持有人驗證權杖的形式提供。 |
-| `shouldSkipNegotiate` | `false` | 將此設定為， `true` 以略過協商步驟。 **只有當 websocket 傳輸是唯一啟用的傳輸時才支援** 。 使用 Azure 服務時，無法啟用此設定 SignalR 。 |
-| `withHeader` `withHeaders` | Empty | 要與每個 HTTP 要求一起傳送的其他 HTTP 標頭對應。 |
+| `shouldSkipNegotiate` | `false` | 將此設定為， `true` 以略過協商步驟。 **只有當 websocket 傳輸是唯一啟用的傳輸時才支援**。 使用 Azure 服務時，無法啟用此設定 SignalR 。 |
+| `withHeader` `withHeaders` | 空白 | 要與每個 HTTP 要求一起傳送的其他 HTTP 標頭對應。 |
 
 ---
 
@@ -975,7 +975,7 @@ let connection = new signalR.HubConnectionBuilder()
     .build();
 ```
 
-下表列出可用的記錄層級。 您所提供的值， `configureLogging` 用來設定將記錄的 **最小** 記錄層級。 記錄在此層級的訊息， **或是在資料表中所列的層級** ，將會被記錄下來。
+下表列出可用的記錄層級。 您所提供的值， `configureLogging` 用來設定將記錄的 **最小** 記錄層級。 記錄在此層級的訊息， **或是在資料表中所列的層級**，將會被記錄下來。
 
 | String                      | LogLevel               |
 | --------------------------- | ---------------------- |
@@ -1071,7 +1071,7 @@ let connection = new signalR.HubConnectionBuilder()
     .build();
 ```
 
-在 SignalR JAVA 用戶端中，您可以提供存取權杖 factory 給 [HttpHubConnectionBuilder](/java/api/com.microsoft.signalr._http_hub_connection_builder?view=aspnet-signalr-java)，以設定用於驗證的持有人權杖。 使用[withAccessTokenFactory](/java/api/com.microsoft.signalr._http_hub_connection_builder.withaccesstokenprovider?view=aspnet-signalr-java#com_microsoft_signalr__http_hub_connection_builder_withAccessTokenProvider_Single_String__)來提供[RxJAVA](https://github.com/ReactiveX/RxJava) [單一 \<String> ](https://reactivex.io/documentation/single.html)。 只要呼叫 [Single. 延遲](https://reactivex.io/RxJava/javadoc/io/reactivex/Single.html#defer-java.util.concurrent.Callable-)，您就可以撰寫邏輯來產生用戶端的存取權杖。
+在 SignalR JAVA 用戶端中，您可以提供存取權杖 factory 給 [HttpHubConnectionBuilder](/java/api/com.microsoft.signalr.httphubconnectionbuilder?view=aspnet-signalr-java)，以設定用於驗證的持有人權杖。 使用[withAccessTokenFactory](/java/api/com.microsoft.signalr.httphubconnectionbuilder.withaccesstokenprovider?view=aspnet-signalr-java#com_microsoft_signalr__http_hub_connection_builder_withAccessTokenProvider_Single_String__)來提供[RxJAVA](https://github.com/ReactiveX/RxJava) [單一 \<String> ](https://reactivex.io/documentation/single.html)。 只要呼叫 [Single. 延遲](https://reactivex.io/RxJava/javadoc/io/reactivex/Single.html#defer-java.util.concurrent.Callable-)，您就可以撰寫邏輯來產生用戶端的存取權杖。
 
 ```java
 HubConnection hubConnection = HubConnectionBuilder.create("https://example.com/chathub")
@@ -1121,12 +1121,12 @@ HubConnection hubConnection = HubConnectionBuilder.create("https://example.com/c
 | .NET 選項 |  預設值 | 描述 |
 | ----------- | -------------- | ----------- |
 | `AccessTokenProvider` | `null` | 傳回字串的函式，在 HTTP 要求中以持有人驗證權杖的形式提供。 |
-| `SkipNegotiation` | `false` | 將此設定為， `true` 以略過協商步驟。 **只有當 websocket 傳輸是唯一啟用的傳輸時才支援** 。 使用 Azure 服務時，無法啟用此設定 SignalR 。 |
-| `ClientCertificates` | Empty | 要傳送以驗證要求的 TLS 憑證集合。 |
-| `Cookies` | Empty | cookie要與每個 HTTP 要求一起傳送的 HTTP 集合。 |
-| `Credentials` | Empty | 每個 HTTP 要求所要傳送的認證。 |
+| `SkipNegotiation` | `false` | 將此設定為， `true` 以略過協商步驟。 **只有當 websocket 傳輸是唯一啟用的傳輸時才支援**。 使用 Azure 服務時，無法啟用此設定 SignalR 。 |
+| `ClientCertificates` | 空白 | 要傳送以驗證要求的 TLS 憑證集合。 |
+| `Cookies` | 空白 | cookie要與每個 HTTP 要求一起傳送的 HTTP 集合。 |
+| `Credentials` | 空白 | 每個 HTTP 要求所要傳送的認證。 |
 | `CloseTimeout` | 5 秒 | 僅限 Websocket。 用戶端在關閉以確認關閉要求後等待的最大時間量。 如果伺服器未在這段時間內確認關閉，用戶端就會中斷連線。 |
-| `Headers` | Empty | 要與每個 HTTP 要求一起傳送的其他 HTTP 標頭對應。 |
+| `Headers` | 空白 | 要與每個 HTTP 要求一起傳送的其他 HTTP 標頭對應。 |
 | `HttpMessageHandlerFactory` | `null` | 可以用來設定或取代 `HttpMessageHandler` 用來傳送 HTTP 要求的委派。 不用於 WebSocket 連接。 此委派必須傳回非 null 值，且會接收預設值做為參數。 請修改該預設值的設定並傳回，或傳回新的 `HttpMessageHandler` 實例。 **取代處理常式時，請務必從提供的處理常式複製您想要保留的設定，否則設定的選項 (例如 Cookie s 和標頭) 不會套用至新的處理常式。** |
 | `Proxy` | `null` | 傳送 HTTP 要求時要使用的 HTTP proxy。 |
 | `UseDefaultCredentials` | `false` | 設定此布林值，以傳送 HTTP 和 Websocket 要求的預設認證。 這樣就可以使用 Windows 驗證。 |
@@ -1139,15 +1139,15 @@ HubConnection hubConnection = HubConnectionBuilder.create("https://example.com/c
 | `accessTokenFactory` | `null` | 傳回字串的函式，在 HTTP 要求中以持有人驗證權杖的形式提供。 |
 | `transport` | `null` | <xref:Microsoft.AspNetCore.Http.Connections.HttpTransportType>值，指定要用於連接的傳輸。 |
 | `logMessageContent` | `null` | 設定為， `true` 以記錄用戶端所傳送和接收之訊息的位元組/字元。 |
-| `skipNegotiation` | `false` | 將此設定為， `true` 以略過協商步驟。 **只有當 websocket 傳輸是唯一啟用的傳輸時才支援** 。 使用 Azure 服務時，無法啟用此設定 SignalR 。 |
+| `skipNegotiation` | `false` | 將此設定為， `true` 以略過協商步驟。 **只有當 websocket 傳輸是唯一啟用的傳輸時才支援**。 使用 Azure 服務時，無法啟用此設定 SignalR 。 |
 
 # <a name="java"></a>[Java](#tab/java)
 
 | JAVA 選項 | 預設值 | 描述 |
 | ----------- | ------------- | ----------- |
 | `withAccessTokenProvider` | `null` | 傳回字串的函式，在 HTTP 要求中以持有人驗證權杖的形式提供。 |
-| `shouldSkipNegotiate` | `false` | 將此設定為， `true` 以略過協商步驟。 **只有當 websocket 傳輸是唯一啟用的傳輸時才支援** 。 使用 Azure 服務時，無法啟用此設定 SignalR 。 |
-| `withHeader` `withHeaders` | Empty | 要與每個 HTTP 要求一起傳送的其他 HTTP 標頭對應。 |
+| `shouldSkipNegotiate` | `false` | 將此設定為， `true` 以略過協商步驟。 **只有當 websocket 傳輸是唯一啟用的傳輸時才支援**。 使用 Azure 服務時，無法啟用此設定 SignalR 。 |
+| `withHeader` `withHeaders` | 空白 | 要與每個 HTTP 要求一起傳送的其他 HTTP 標頭對應。 |
 
 ---
 
@@ -1421,7 +1421,7 @@ let connection = new signalR.HubConnectionBuilder()
     .build();
 ```
 
-在 SignalR JAVA 用戶端中，您可以提供存取權杖 factory 給 [HttpHubConnectionBuilder](/java/api/com.microsoft.signalr._http_hub_connection_builder?view=aspnet-signalr-java)，以設定用於驗證的持有人權杖。 使用[withAccessTokenFactory](/java/api/com.microsoft.signalr._http_hub_connection_builder.withaccesstokenprovider?view=aspnet-signalr-java#com_microsoft_signalr__http_hub_connection_builder_withAccessTokenProvider_Single_String__)來提供[RxJAVA](https://github.com/ReactiveX/RxJava) [單一 \<String> ](https://reactivex.io/documentation/single.html)。 只要呼叫 [Single. 延遲](https://reactivex.io/RxJava/javadoc/io/reactivex/Single.html#defer-java.util.concurrent.Callable-)，您就可以撰寫邏輯來產生用戶端的存取權杖。
+在 SignalR JAVA 用戶端中，您可以提供存取權杖 factory 給 [HttpHubConnectionBuilder](/java/api/com.microsoft.signalr.httphubconnectionbuilder?view=aspnet-signalr-java)，以設定用於驗證的持有人權杖。 使用[withAccessTokenFactory](/java/api/com.microsoft.signalr.httphubconnectionbuilder.withaccesstokenprovider?view=aspnet-signalr-java#com_microsoft_signalr__http_hub_connection_builder_withAccessTokenProvider_Single_String__)來提供[RxJAVA](https://github.com/ReactiveX/RxJava) [單一 \<String> ](https://reactivex.io/documentation/single.html)。 只要呼叫 [Single. 延遲](https://reactivex.io/RxJava/javadoc/io/reactivex/Single.html#defer-java.util.concurrent.Callable-)，您就可以撰寫邏輯來產生用戶端的存取權杖。
 
 ```java
 HubConnection hubConnection = HubConnectionBuilder.create("https://example.com/chathub")
@@ -1471,12 +1471,12 @@ HubConnection hubConnection = HubConnectionBuilder.create("https://example.com/c
 | .NET 選項 |  預設值 | 描述 |
 | ----------- | -------------- | ----------- |
 | `AccessTokenProvider` | `null` | 傳回字串的函式，在 HTTP 要求中以持有人驗證權杖的形式提供。 |
-| `SkipNegotiation` | `false` | 將此設定為， `true` 以略過協商步驟。 **只有當 websocket 傳輸是唯一啟用的傳輸時才支援** 。 使用 Azure 服務時，無法啟用此設定 SignalR 。 |
-| `ClientCertificates` | Empty | 要傳送以驗證要求的 TLS 憑證集合。 |
-| `Cookies` | Empty | cookie要與每個 HTTP 要求一起傳送的 HTTP 集合。 |
-| `Credentials` | Empty | 每個 HTTP 要求所要傳送的認證。 |
+| `SkipNegotiation` | `false` | 將此設定為， `true` 以略過協商步驟。 **只有當 websocket 傳輸是唯一啟用的傳輸時才支援**。 使用 Azure 服務時，無法啟用此設定 SignalR 。 |
+| `ClientCertificates` | 空白 | 要傳送以驗證要求的 TLS 憑證集合。 |
+| `Cookies` | 空白 | cookie要與每個 HTTP 要求一起傳送的 HTTP 集合。 |
+| `Credentials` | 空白 | 每個 HTTP 要求所要傳送的認證。 |
 | `CloseTimeout` | 5 秒 | 僅限 Websocket。 用戶端在關閉以確認關閉要求後等待的最大時間量。 如果伺服器未在這段時間內確認關閉，用戶端就會中斷連線。 |
-| `Headers` | Empty | 要與每個 HTTP 要求一起傳送的其他 HTTP 標頭對應。 |
+| `Headers` | 空白 | 要與每個 HTTP 要求一起傳送的其他 HTTP 標頭對應。 |
 | `HttpMessageHandlerFactory` | `null` | 可以用來設定或取代 `HttpMessageHandler` 用來傳送 HTTP 要求的委派。 不用於 WebSocket 連接。 此委派必須傳回非 null 值，且會接收預設值做為參數。 請修改該預設值的設定並傳回，或傳回新的 `HttpMessageHandler` 實例。 **取代處理常式時，請務必從提供的處理常式複製您想要保留的設定，否則設定的選項 (例如 Cookie s 和標頭) 不會套用至新的處理常式。** |
 | `Proxy` | `null` | 傳送 HTTP 要求時要使用的 HTTP proxy。 |
 | `UseDefaultCredentials` | `false` | 設定此布林值，以傳送 HTTP 和 Websocket 要求的預設認證。 這樣就可以使用 Windows 驗證。 |
@@ -1489,15 +1489,15 @@ HubConnection hubConnection = HubConnectionBuilder.create("https://example.com/c
 | `accessTokenFactory` | `null` | 傳回字串的函式，在 HTTP 要求中以持有人驗證權杖的形式提供。 |
 | `transport` | `null` | <xref:Microsoft.AspNetCore.Http.Connections.HttpTransportType>值，指定要用於連接的傳輸。 |
 | `logMessageContent` | `null` | 設定為， `true` 以記錄用戶端所傳送和接收之訊息的位元組/字元。 |
-| `skipNegotiation` | `false` | 將此設定為， `true` 以略過協商步驟。 **只有當 websocket 傳輸是唯一啟用的傳輸時才支援** 。 使用 Azure 服務時，無法啟用此設定 SignalR 。 |
+| `skipNegotiation` | `false` | 將此設定為， `true` 以略過協商步驟。 **只有當 websocket 傳輸是唯一啟用的傳輸時才支援**。 使用 Azure 服務時，無法啟用此設定 SignalR 。 |
 
 # <a name="java"></a>[Java](#tab/java)
 
 | JAVA 選項 | 預設值 | 描述 |
 | ----------- | ------------- | ----------- |
 | `withAccessTokenProvider` | `null` | 傳回字串的函式，在 HTTP 要求中以持有人驗證權杖的形式提供。 |
-| `shouldSkipNegotiate` | `false` | 將此設定為， `true` 以略過協商步驟。 **只有當 websocket 傳輸是唯一啟用的傳輸時才支援** 。 使用 Azure 服務時，無法啟用此設定 SignalR 。 |
-| `withHeader` `withHeaders` | Empty | 要與每個 HTTP 要求一起傳送的其他 HTTP 標頭對應。 |
+| `shouldSkipNegotiate` | `false` | 將此設定為， `true` 以略過協商步驟。 **只有當 websocket 傳輸是唯一啟用的傳輸時才支援**。 使用 Azure 服務時，無法啟用此設定 SignalR 。 |
+| `withHeader` `withHeaders` | 空白 | 要與每個 HTTP 要求一起傳送的其他 HTTP 標頭對應。 |
 
 ---
 
@@ -1768,7 +1768,7 @@ let connection = new signalR.HubConnectionBuilder()
     .build();
 ```
 
-在 SignalR JAVA 用戶端中，您可以提供存取權杖 factory 給 [HttpHubConnectionBuilder](/java/api/com.microsoft.signalr._http_hub_connection_builder?view=aspnet-signalr-java)，以設定用於驗證的持有人權杖。 使用[withAccessTokenFactory](/java/api/com.microsoft.signalr._http_hub_connection_builder.withaccesstokenprovider?view=aspnet-signalr-java#com_microsoft_signalr__http_hub_connection_builder_withAccessTokenProvider_Single_String__)來提供[RxJAVA](https://github.com/ReactiveX/RxJava) [單一 \<String> ](https://reactivex.io/documentation/single.html)。 只要呼叫 [Single. 延遲](https://reactivex.io/RxJava/javadoc/io/reactivex/Single.html#defer-java.util.concurrent.Callable-)，您就可以撰寫邏輯來產生用戶端的存取權杖。
+在 SignalR JAVA 用戶端中，您可以提供存取權杖 factory 給 [HttpHubConnectionBuilder](/java/api/com.microsoft.signalr.httphubconnectionbuilder?view=aspnet-signalr-java)，以設定用於驗證的持有人權杖。 使用[withAccessTokenFactory](/java/api/com.microsoft.signalr.httphubconnectionbuilder.withaccesstokenprovider?view=aspnet-signalr-java#com_microsoft_signalr__http_hub_connection_builder_withAccessTokenProvider_Single_String__)來提供[RxJAVA](https://github.com/ReactiveX/RxJava) [單一 \<String> ](https://reactivex.io/documentation/single.html)。 只要呼叫 [Single. 延遲](https://reactivex.io/RxJava/javadoc/io/reactivex/Single.html#defer-java.util.concurrent.Callable-)，您就可以撰寫邏輯來產生用戶端的存取權杖。
 
 ```java
 HubConnection hubConnection = HubConnectionBuilder.create("https://example.com/chathub")
@@ -1815,12 +1815,12 @@ HubConnection hubConnection = HubConnectionBuilder.create("https://example.com/c
 | .NET 選項 |  預設值 | 描述 |
 | ----------- | -------------- | ----------- |
 | `AccessTokenProvider` | `null` | 傳回字串的函式，在 HTTP 要求中以持有人驗證權杖的形式提供。 |
-| `SkipNegotiation` | `false` | 將此設定為， `true` 以略過協商步驟。 **只有當 websocket 傳輸是唯一啟用的傳輸時才支援** 。 使用 Azure 服務時，無法啟用此設定 SignalR 。 |
-| `ClientCertificates` | Empty | 要傳送以驗證要求的 TLS 憑證集合。 |
-| `Cookies` | Empty | cookie要與每個 HTTP 要求一起傳送的 HTTP 集合。 |
-| `Credentials` | Empty | 每個 HTTP 要求所要傳送的認證。 |
+| `SkipNegotiation` | `false` | 將此設定為， `true` 以略過協商步驟。 **只有當 websocket 傳輸是唯一啟用的傳輸時才支援**。 使用 Azure 服務時，無法啟用此設定 SignalR 。 |
+| `ClientCertificates` | 空白 | 要傳送以驗證要求的 TLS 憑證集合。 |
+| `Cookies` | 空白 | cookie要與每個 HTTP 要求一起傳送的 HTTP 集合。 |
+| `Credentials` | 空白 | 每個 HTTP 要求所要傳送的認證。 |
 | `CloseTimeout` | 5 秒 | 僅限 Websocket。 用戶端在關閉以確認關閉要求後等待的最大時間量。 如果伺服器未在這段時間內確認關閉，用戶端就會中斷連線。 |
-| `Headers` | Empty | 要與每個 HTTP 要求一起傳送的其他 HTTP 標頭對應。 |
+| `Headers` | 空白 | 要與每個 HTTP 要求一起傳送的其他 HTTP 標頭對應。 |
 | `HttpMessageHandlerFactory` | `null` | 可以用來設定或取代 `HttpMessageHandler` 用來傳送 HTTP 要求的委派。 不用於 WebSocket 連接。 此委派必須傳回非 null 值，且會接收預設值做為參數。 請修改該預設值的設定並傳回，或傳回新的 `HttpMessageHandler` 實例。 **取代處理常式時，請務必從提供的處理常式複製您想要保留的設定，否則設定的選項 (例如 Cookie s 和標頭) 不會套用至新的處理常式。** |
 | `Proxy` | `null` | 傳送 HTTP 要求時要使用的 HTTP proxy。 |
 | `UseDefaultCredentials` | `false` | 設定此布林值，以傳送 HTTP 和 Websocket 要求的預設認證。 這樣就可以使用 Windows 驗證。 |
@@ -1833,15 +1833,15 @@ HubConnection hubConnection = HubConnectionBuilder.create("https://example.com/c
 | `accessTokenFactory` | `null` | 傳回字串的函式，在 HTTP 要求中以持有人驗證權杖的形式提供。 |
 | `transport` | `null` | <xref:Microsoft.AspNetCore.Http.Connections.HttpTransportType>值，指定要用於連接的傳輸。 |
 | `logMessageContent` | `null` | 設定為， `true` 以記錄用戶端所傳送和接收之訊息的位元組/字元。 |
-| `skipNegotiation` | `false` | 將此設定為， `true` 以略過協商步驟。 **只有當 websocket 傳輸是唯一啟用的傳輸時才支援** 。 使用 Azure 服務時，無法啟用此設定 SignalR 。 |
+| `skipNegotiation` | `false` | 將此設定為， `true` 以略過協商步驟。 **只有當 websocket 傳輸是唯一啟用的傳輸時才支援**。 使用 Azure 服務時，無法啟用此設定 SignalR 。 |
 
 # <a name="java"></a>[Java](#tab/java)
 
 | JAVA 選項 | 預設值 | 描述 |
 | ----------- | ------------- | ----------- |
 | `withAccessTokenProvider` | `null` | 傳回字串的函式，在 HTTP 要求中以持有人驗證權杖的形式提供。 |
-| `shouldSkipNegotiate` | `false` | 將此設定為， `true` 以略過協商步驟。 **只有當 websocket 傳輸是唯一啟用的傳輸時才支援** 。 使用 Azure 服務時，無法啟用此設定 SignalR 。 |
-| `withHeader` `withHeaders` | Empty | 要與每個 HTTP 要求一起傳送的其他 HTTP 標頭對應。 |
+| `shouldSkipNegotiate` | `false` | 將此設定為， `true` 以略過協商步驟。 **只有當 websocket 傳輸是唯一啟用的傳輸時才支援**。 使用 Azure 服務時，無法啟用此設定 SignalR 。 |
+| `withHeader` `withHeaders` | 空白 | 要與每個 HTTP 要求一起傳送的其他 HTTP 標頭對應。 |
 
 ---
 

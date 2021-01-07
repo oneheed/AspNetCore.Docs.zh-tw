@@ -18,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: web-api/Microsoft.dotnet-openapi
-ms.openlocfilehash: 28a71c7040667c7544cc17c1184c09b5b39959b9
-ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
+ms.openlocfilehash: 5d9f1684aa333c38c73673138a703b04d318c6df
+ms.sourcegitcommit: b64c44ba5e3abb4ad4d50de93b7e282bf0f251e4
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 10/30/2020
-ms.locfileid: "93052548"
+ms.lasthandoff: 01/07/2021
+ms.locfileid: "97972024"
 ---
 # <a name="develop-aspnet-core-apps-using-openapi-tools"></a>使用 OpenAPI 工具開發 ASP.NET Core 應用程式
 
@@ -88,7 +88,7 @@ dotnet tool install -g Microsoft.dotnet-openapi
 |-------|------|-------------|---------|
 | -p|--updateProject | 要操作的專案。 |dotnet openapi 新增 url *--updateProject .\Ref.csproj*`https://contoso.com/openapi.json` |
 | -o|--output-file | 要在何處放置 OpenAPI 檔案的本機複本。 |dotnet openapi 新增 url `https://contoso.com/openapi.json` *--output-file myclient.json* |
-| -c|--程式碼產生器| 要套用至參考的程式碼產生器。 選項為 `NSwagCSharp` 和 `NSwagTypeScript` 。 |dotnet openapi 將檔案新增 .\OpenApi.js于程式碼產生器
+| -c|--程式碼產生器| 要套用至參考的程式碼產生器。 選項為 `NSwagCSharp` 和 `NSwagTypeScript` 。 |dotnet openapi 新增 url `https://contoso.com/openapi.json` --程式碼產生器
 | -H|--help|顯示說明資訊|dotnet openapi 新增 url--說明|
 
 #### <a name="arguments"></a>引數
@@ -114,7 +114,7 @@ dotnet tool install -g Microsoft.dotnet-openapi
 | ------------|------------|---------|
 | 來源檔案 | 要移除參考的來源。 |dotnet openapi 移除 *.\OpenAPI.js開啟* |
 
-## <a name="refresh"></a>重新整理
+## <a name="refresh"></a>Refresh
 
 重新整理使用下載 URL 的最新內容所下載之檔案的本機版本。
 

@@ -19,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/security/webassembly/index
-ms.openlocfilehash: fc6fa075faa4fed1c2bf938d82c4dbfe631c31d3
-ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
+ms.openlocfilehash: c4d1095d3c3b457ca4d94cb1a573c3dc49548ff3
+ms.sourcegitcommit: 8b0e9a72c1599ce21830c843558a661ba908ce32
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 10/30/2020
-ms.locfileid: "93055063"
+ms.lasthandoff: 01/08/2021
+ms.locfileid: "98024635"
 ---
 # <a name="secure-aspnet-core-no-locblazor-webassembly"></a>安全 ASP.NET Core Blazor WebAssembly
 
@@ -92,7 +92,7 @@ Blazor WebAssembly 支援透過程式庫使用 OIDC 來驗證和授權應用程�
 * 將屬性新增至 Razor 資料夾中的每個元件 `Pages` 。
 
 > [!NOTE]
-> <xref:Microsoft.AspNetCore.Authorization.AuthorizationOptions.FallbackPolicy?displayProperty=nameWithType>不支援使用將設定為 <xref:Microsoft.AspNetCore.Authorization.AuthorizationPolicyBuilder.RequireAuthenticatedUser%2A> 原則 **not** 。
+> <xref:Microsoft.AspNetCore.Authorization.AuthorizationOptions.FallbackPolicy?displayProperty=nameWithType>不支援使用將設定為 <xref:Microsoft.AspNetCore.Authorization.AuthorizationPolicyBuilder.RequireAuthenticatedUser%2A> 原則 。
 
 ## <a name="refresh-tokens"></a>重新整理權杖
 
@@ -138,3 +138,9 @@ Blazor WebAssembly 支援透過程式庫使用 OIDC 來驗證和授權應用程�
 如需進一步的設定指引，請參閱 <xref:blazor/security/webassembly/additional-scenarios> 。
 
 ::: moniker-end
+
+## <a name="additional-resources"></a>其他資源
+
+* <xref:host-and-deploy/proxy-load-balancer>：包含下列相關指引：
+  * 使用轉送的標頭中介軟體，在 proxy 伺服器和內部網路之間保留 HTTPS 配置資訊。
+  * 其他案例和使用案例，包括手動設定設定、正確要求路由的要求路徑變更，以及轉送 Linux 和非 IIS 反向 proxy 的要求配置。

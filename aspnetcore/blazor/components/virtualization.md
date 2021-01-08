@@ -19,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/components/virtualization
-ms.openlocfilehash: 051721b62397b582f1ffdaba08ffefe5d0c9ae03
-ms.sourcegitcommit: b64c44ba5e3abb4ad4d50de93b7e282bf0f251e4
+ms.openlocfilehash: 706564bb8607d0bb25c092c31a72e5790c825ee4
+ms.sourcegitcommit: 8b0e9a72c1599ce21830c843558a661ba908ce32
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 01/07/2021
-ms.locfileid: "97972011"
+ms.lasthandoff: 01/08/2021
+ms.locfileid: "98024674"
 ---
 # <a name="aspnet-core-no-locblazor-component-virtualization"></a>ASP.NET Core Blazor 元件虛擬化
 
@@ -32,16 +32,21 @@ ms.locfileid: "97972011"
 
 使用 Blazor 架構內建的虛擬化支援，改善元件轉譯的認知效能。 虛擬化是一項技術，可將 UI 轉譯限制為只顯示目前可見的部分。 例如，當應用程式必須轉譯長清單的專案，而且在任何指定的時間都只需要顯示專案的子集時，虛擬化就很有説明。 Blazor提供可用於將虛擬化新增至應用程式元件的[ `Virtualize` 元件](xref:Microsoft.AspNetCore.Components.Web.Virtualization.Virtualize%601)。
 
+`Virtualize`元件可用於下列情況：
+
+* 在迴圈中呈現一組資料項目。
+* 大部分的專案都因為滾動而無法顯示。
+* 轉譯的專案大小完全相同。 當使用者滾動至任意點時，元件可以計算要顯示的可見專案。
+
 如果沒有虛擬化，一般清單可能會使用 c # [`foreach`](/dotnet/csharp/language-reference/keywords/foreach-in) 迴圈來轉譯清單中的每個專案：
 
 ```razor
-@foreach (var employee in employees)
-{
-    <p>
-        @employee.FirstName @employee.LastName has the 
-        job title of @employee.JobTitle.
-    </p>
-}
+<div class="all-flights" style="height:500px;overflow-y:scroll">
+    @foreach (var flight in allFlights)
+    {
+        <FlightSummary @key="flight.FlightId" Flight="@flight" />
+    }
+</div>
 ```
 
 如果清單包含上千個專案，則轉譯清單可能需要很長的時間。 使用者可能會遇到明顯的 UI 延遲。
@@ -49,26 +54,36 @@ ms.locfileid: "97972011"
 請將迴圈取代為 [`foreach`](/dotnet/csharp/language-reference/keywords/foreach-in) `Virtualize` 元件，並使用指定固定專案來源，而不是一次轉譯清單中的每個專案 <xref:Microsoft.AspNetCore.Components.Web.Virtualization.Virtualize%601.Items%2A?displayProperty=nameWithType> 。 只有目前可見的專案會呈現：
 
 ```razor
-<Virtualize Context="employee" Items="@employees">
-    <p>
-        @employee.FirstName @employee.LastName has the 
-        job title of @employee.JobTitle.
-    </p>
-</Virtualize>
+<div class="all-flights" style="height:500px;overflow-y:scroll">
+    <Virtualize Items="@allFlights" Context="flight">
+        <FlightSummary @key="flight.FlightId" Details="@flight.Summary" />
+    </Virtualize>
+</div>
 ```
 
-如果未使用來指定元件的 `Context` 內容，請使用 `context` `@context.{PROPERTY}` 專案內容範本中 () 值：
+如果未使用來指定元件的 `Context` 內容，請使用 `context` `context.{PROPERTY}` / `@context.{PROPERTY}` 專案內容範本中 () 值：
 
 ```razor
-<Virtualize Items="@employees">
-    <p>
-        @context.FirstName @context.LastName has the 
-        job title of @context.JobTitle.
-    </p>
-</Virtualize>
+<div class="all-flights" style="height:500px;overflow-y:scroll">
+    <Virtualize Items="@allFlights">
+        <FlightSummary @key="context.FlightId" Details="@context.Summary" />
+    </Virtualize>
+</div>
 ```
 
-`Virtualize`元件會根據容器的高度和轉譯專案的大小，計算要轉譯的專案數目。
+> [!NOTE]
+> 您可以使用 [ `@key` ] [x： mvc/views/razor # key] 指示詞屬性來控制模型物件與元素和元件的對應程式。 `@key` 使比較演算法保證根據索引鍵的值來保留元素或元件。
+>
+> 如需詳細資訊，請參閱下列文章：
+>
+> <xref:blazor/components/index#use-key-to-control-the-preservation-of-elements-and-components>
+> <xref:mvc/views/razor#key>
+
+`Virtualize`元件：
+
+* 根據容器的高度和轉譯專案的大小，計算要轉譯的專案數目。
+* 在使用者滾動時重新計算和轉譯中專案。
+* 只會從對應到目前可見區域的外部 API 提取記錄的配量，而不是從集合中下載所有資料。
 
 元件的專案內容 `Virtualize` 可以包括：
 

@@ -19,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: signalr/messagepackhubprotocol
-ms.openlocfilehash: e7d19a42e48048d2be4b87d6b0ac1ba6b2596ff1
-ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
+ms.openlocfilehash: 7c3640e9cd2c5d392400a115813584861f789554
+ms.sourcegitcommit: 8b0e9a72c1599ce21830c843558a661ba908ce32
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 10/30/2020
-ms.locfileid: "93058164"
+ms.lasthandoff: 01/08/2021
+ms.locfileid: "98024687"
 ---
 # <a name="use-messagepack-hub-protocol-in-no-locsignalr-for-aspnet-core"></a>使用中的 MessagePack Hub 通訊協定 SignalR 進行 ASP.NET Core
 
@@ -120,6 +120,26 @@ const connection = new signalR.HubConnectionBuilder()
 > [!NOTE]
 > 目前，JavaScript 用戶端上沒有 MessagePack 通訊協定的設定選項。
 
+### <a name="java-client"></a>Java 用戶端
+
+若要使用 JAVA 啟用 MessagePack，請安裝 `com.microsoft.signalr.messagepack` 套件。 使用 Gradle 時，請將下列這一行新增至 `dependencies` *Gradle* 檔案的區段：
+
+```gradle
+implementation 'com.microsoft.signalr.messagepack:signalr-messagepack:5.0.0'
+```
+
+使用 Maven 時，請將下列幾行新增至 `<dependencies>` *pom.xml* 檔案的元素內：
+
+[!code-xml[pom.xml dependency element messagePack](java-client/sample/pom.xml?name=snippet_dependencyElement_messagePack)]
+
+`withHubProtocol(new MessagePackHubProtocol())`在上呼叫 `HubConnectionBuilder` 。
+
+```java
+HubConnection messagePackConnection = HubConnectionBuilder.create("YOUR HUB URL HERE")
+    .withHubProtocol(new MessagePackHubProtocol())
+    .build();
+```
+
 ## <a name="messagepack-quirks"></a>MessagePack 的不相容
 
 使用 MessagePack 中樞通訊協定時，有幾個要注意的問題。
@@ -187,6 +207,10 @@ InvalidDataException: Error binding arguments. Make sure that the types of the p
 ```
 
 如需這項限制的詳細資訊，請參閱 GitHub 問題 [aspnet/ SignalR #2937](https://github.com/aspnet/SignalR/issues/2937)。
+
+### <a name="chars-and-strings-in-java"></a>JAVA 中的字元和字串
+
+在 java 用戶端中， `char` 物件會序列化為一個字元的 `String` 物件。 這與 c # 和 JavaScript 用戶端相反，它會將它們序列化為 `short` 物件。 MessagePack 規格本身不會定義物件的行為 `char` ，因此可由程式庫作者決定如何將其序列化。 用戶端之間的行為差異是我們用於執行的程式庫結果。
 
 ## <a name="related-resources"></a>相關資源
 

@@ -19,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/webassembly-performance-best-practices
-ms.openlocfilehash: cc090b4e56745e6b010e4a7ee17332b0d3a95560
-ms.sourcegitcommit: 3593c4efa707edeaaceffbfa544f99f41fc62535
+ms.openlocfilehash: 0753ef0f1cde7bbb45ecc09b97fecb5ce364811c
+ms.sourcegitcommit: 8b0e9a72c1599ce21830c843558a661ba908ce32
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 01/04/2021
-ms.locfileid: "95417379"
+ms.lasthandoff: 01/08/2021
+ms.locfileid: "98024648"
 ---
 # <a name="aspnet-core-no-locblazor-webassembly-performance-best-practices"></a>ASP.NET Core Blazor WebAssembly 效能最佳做法
 
@@ -43,16 +43,16 @@ Blazor WebAssembly 經過仔細設計和優化，可在最實際的應用程式 
 
 在執行時間，元件會以階層形式存在。 根元件具有子元件。 接著，根的子系有自己的子元件，依此類推。 當事件發生時（例如使用者選取按鈕），這會 Blazor 決定要 rerender 的元件：
 
- 1. 事件本身會分派到轉譯事件處理常式的任何元件。 執行事件處理常式之後，該元件就會保存。
- 1. 每當保存任何元件時，它就會將參數值的新複本提供給其子元件。
- 1. 當接收一組新的參數值時，每個元件都會選擇是否要 rerender。 根據預設，元件 rerender 如果參數值可能已變更 (例如，如果它們是可變動的物件) 。
+1. 事件本身會分派到轉譯事件處理常式的任何元件。 執行事件處理常式之後，該元件就會保存。
+1. 每當保存任何元件時，它就會將參數值的新複本提供給其子元件。
+1. 當接收一組新的參數值時，每個元件都會選擇是否要 rerender。 根據預設，元件 rerender 如果參數值可能已變更 (例如，如果它們是可變動的物件) 。
 
 此序列的最後兩個步驟會以遞迴方式從元件階層中繼續進行。 在許多情況下，會保存整個子樹。 這表示以高階元件為目標的事件可能會造成昂貴的轉譯資料流程程式，因為該點下的所有內容都必須保存。
 
 如果您想要中斷此程式，並防止將遞迴轉譯成特定的子樹狀結構，您可以執行下列其中一項：
 
- * 確定特定元件的所有參數都是基本的不可變類型 (例如、、 `string` 、 `int` `bool` `DateTime` 和其他) 。 如果未變更這些參數值，則偵測變更的內建邏輯會自動略過轉譯資料流程。 如果您以轉譯子元件 `<Customer CustomerId="@item.CustomerId" />` ，其中 `CustomerId` 是一個 `int` 值，則除非變更，否則不會保存 `item.CustomerId` 。
- * 如果您需要接受 nonprimitive 參數值（例如自訂模型類型、事件回呼或 <xref:Microsoft.AspNetCore.Components.RenderFragment> 值），則可以覆寫 <xref:Microsoft.AspNetCore.Components.ComponentBase.ShouldRender%2A> 來控制是否要轉譯的決策，這在[ `ShouldRender` 使用](#use-of-shouldrender)一節中有說明。
+* 確定特定元件的所有參數都是基本的不可變類型 (例如、、 `string` 、 `int` `bool` `DateTime` 和其他) 。 如果未變更這些參數值，則偵測變更的內建邏輯會自動略過轉譯資料流程。 如果您以轉譯子元件 `<Customer CustomerId="@item.CustomerId" />` ，其中 `CustomerId` 是一個 `int` 值，則除非變更，否則不會保存 `item.CustomerId` 。
+* 如果您需要接受 nonprimitive 參數值（例如自訂模型類型、事件回呼或 <xref:Microsoft.AspNetCore.Components.RenderFragment> 值），則可以覆寫 <xref:Microsoft.AspNetCore.Components.ComponentBase.ShouldRender%2A> 來控制是否要轉譯的決策，這在[ `ShouldRender` 使用](#use-of-shouldrender)一節中有說明。
 
 藉由略過整個子樹的轉譯資料流程，您可以在事件發生時移除大部分的轉譯成本。
 
@@ -101,7 +101,7 @@ Blazor WebAssembly 經過仔細設計和優化，可在最實際的應用程式 
 
 大部分的元件都不需要這種手動控制層級。 如果這些子樹在轉譯時特別耗費資源，而且會造成 UI 延隔，您應該只在意略過轉譯子樹。
 
-如需詳細資訊，請參閱 <xref:blazor/components/lifecycle> 。
+如需詳細資訊，請參閱<xref:blazor/components/lifecycle>。
 
 ::: moniker range=">= aspnetcore-5.0"
 
@@ -109,40 +109,9 @@ Blazor WebAssembly 經過仔細設計和優化，可在最實際的應用程式 
 
 在迴圈內轉譯大量的 UI （例如具有上千個專案的清單或方格）時，大量的轉譯作業可能會導致 UI 轉譯延遲，因而導致使用者體驗不佳。 假設使用者一次只能看到少量的元素，而不需要滾動，那麼花太多時間轉譯專案目前看起來很浪費。
 
-為了解決這個問題， Blazor 提供了內建[ `<Virtualize>` 元件](xref:blazor/components/virtualization)，可建立任意大型清單的外觀和滾動行為，但實際上只會轉譯目前滾動塊區內的清單專案。 例如，這表示應用程式可以有一份包含100000個專案的清單，但只需支付20個專案的轉譯成本。 使用 `<Virtualize>` 元件可以依大小的順序擴大 UI 效能。
+若要解決這個問題，請 Blazor 提供 `Virtualize` 元件來建立任意大型清單的外觀和滾動行為，但只會轉譯目前滾動塊區內的清單專案。 例如，這表示應用程式可以有一份包含100000個專案的清單，但只需支付20個專案的轉譯成本。 使用 `Virtualize` 元件可以依大小的順序擴大 UI 效能。
 
-`<Virtualize>` 可以在下列情況使用：
-
- * 在迴圈中呈現一組資料項目。
- * 大部分的專案都因為滾動而無法顯示。
- * 轉譯的專案大小完全相同。 當使用者滾動至任意點時，元件可以計算要顯示的可見專案。
-
-以下顯示非虛擬化清單的範例：
-
-```razor
-<div class="all-flights" style="height:500px;overflow-y:scroll">
-    @foreach (var flight in allFlights)
-    {
-        <FlightSummary @key="flight.FlightId" Flight="@flight" />
-    }
-</div>
-```
-
-如果 `allFlights` 集合包含10000個專案，它會具現化並轉譯 10000 `<FlightSummary>` 元件實例。 相較之下，下列顯示虛擬化清單的範例：
-
-```razor
-<div class="all-flights" style="height:500px;overflow-y:scroll">
-    <Virtualize Items="@allFlights" Context="flight">
-        <FlightSummary @key="flight.FlightId" Flight="@flight" />
-    </Virtualize>
-</div>
-```
-
-雖然產生的 UI 看起來與使用者相同，但是幕後的元件只會具現化，並轉譯為 `<FlightSummary>` 填滿可捲動區域所需的實例數量。 `<FlightSummary>`當使用者滾動時，會重新計算和轉譯所顯示的實例集合。
-
-`<Virtualize>` 也有其他優點。 例如，當元件從外部 API 要求資料時， `<Virtualize>` 會允許元件只提取對應到目前可見區域之記錄的配量，而不是從集合中下載所有資料。
-
-如需詳細資訊，請參閱 <xref:blazor/components/virtualization> 。
+如需詳細資訊，請參閱<xref:blazor/components/virtualization>。
 
 ::: moniker-end
 
@@ -152,9 +121,9 @@ Blazor WebAssembly 經過仔細設計和優化，可在最實際的應用程式 
 
 不過，在某些情況下，您也會建立需要大規模重複的元件。 例如：
 
- * 大型的嵌套表單可能會有數百個個別的輸入、標籤和其他元素。
- * 方格可能有數千個數據格。
- * 散佈圖可能有數百萬個資料點。
+* 大型的嵌套表單可能會有數百個個別的輸入、標籤和其他元素。
+* 方格可能有數千個數據格。
+* 散佈圖可能有數百萬個資料點。
 
 如果以個別的元件實例為每個單位進行模型化，則它們的轉譯效能會很重要。 本節提供讓這類元件變得輕量的建議，讓 UI 保持快速且迅速回應。
 
@@ -162,8 +131,8 @@ Blazor WebAssembly 經過仔細設計和優化，可在最實際的應用程式 
 
 每個元件都是個別的島，可獨立于其父代和子系之外轉譯。 藉由選擇如何將 UI 分割為元件的階層，您可以控制 UI 轉譯的資料細微性。 這可能是良好或不良的效能。
 
- * 藉由將 UI 分割成更多元件，當事件發生時，您可以在 UI rerender 中有較小的部分。 例如，當使用者按一下資料表資料列中的按鈕時，您可能只會有該單一資料列 rerender，而不是整個頁面或資料表。
- * 不過，每個額外的元件都牽涉到額外的記憶體和 CPU 額外負荷，以處理其獨立的狀態和轉譯生命週期。
+* 藉由將 UI 分割成更多元件，當事件發生時，您可以在 UI rerender 中有較小的部分。 例如，當使用者按一下資料表資料列中的按鈕時，您可能只會有該單一資料列 rerender，而不是整個頁面或資料表。
+* 不過，每個額外的元件都牽涉到額外的記憶體和 CPU 額外負荷，以處理其獨立的狀態和轉譯生命週期。
 
 在調整 .NET 5 的效能時 Blazor WebAssembly ，我們測量出每個元件實例大約0.06 毫秒的轉譯負擔。 這是以簡單的元件為基礎，接受一般膝上型電腦上執行的三個參數。 就內部而言，此額外負荷主要是因為從字典中取出每個元件的狀態，以及傳遞和接收參數。 藉由乘法，您可以看到加入2000額外元件實例會在轉譯時間增加0.12 秒，而 UI 會開始感覺到使用者的速度變慢。
 
@@ -297,8 +266,8 @@ public static RenderFragment SayHello = __builder =>
 
 `<CascadingValue>`元件有一個稱為的選擇性參數 `IsFixed` 。
 
- * 如果 `IsFixed` 值 `false` (預設的) ，則串聯值的每個收件者都會設定要接收變更通知的訂用帳戶。 在這種情況下，因為訂用帳戶追蹤的緣故，每個服務的 `[CascadingParameter]` **成本都相當高** `[Parameter]` 。
- * 如果 `IsFixed` 值是 `true` (例如 `<CascadingValue Value="@someValue" IsFixed="true">`) ，則收件者會收到初始值，但 *不* 會設定任何訂用帳戶來接收更新。 在此情況下，每個 `[CascadingParameter]` 都是輕量的，而且不會比一般標準 **更昂貴** `[Parameter]` 。
+* 如果 `IsFixed` 值 `false` (預設的) ，則串聯值的每個收件者都會設定要接收變更通知的訂用帳戶。 在這種情況下，因為訂用帳戶追蹤的緣故，每個服務的 `[CascadingParameter]` **成本都相當高** `[Parameter]` 。
+* 如果 `IsFixed` 值是 `true` (例如 `<CascadingValue Value="@someValue" IsFixed="true">`) ，則收件者會收到初始值，但 *不* 會設定任何訂用帳戶來接收更新。 在此情況下，每個 `[CascadingParameter]` 都是輕量的，而且不會比一般標準 **更昂貴** `[Parameter]` 。
 
 因此，您應該盡可能 `IsFixed="true"` 在串聯的值上使用。 只要所提供的值不會隨著時間而變更，您就可以這麼做。 在元件以串聯值形式傳遞的一般模式 `this` 下，您應該使用 `IsFixed="true"` ：
 
@@ -308,7 +277,7 @@ public static RenderFragment SayHello = __builder =>
 </CascadingValue>
 ```
 
-如果有大量的其他元件會收到串聯的值，這就會有很大的差異。 如需詳細資訊，請參閱 <xref:blazor/components/cascading-values-and-parameters> 。
+如果有大量的其他元件會收到串聯的值，這就會有很大的差異。 如需詳細資訊，請參閱<xref:blazor/components/cascading-values-and-parameters>。
 
 #### <a name="avoid-attribute-splatting-with-captureunmatchedvalues"></a>避免使用屬性展開 `CaptureUnmatchedValues`
 
@@ -330,7 +299,7 @@ public static RenderFragment SayHello = __builder =>
 
 您可以隨意使用 <xref:Microsoft.AspNetCore.Components.ParameterAttribute.CaptureUnmatchedValues> 非效能關鍵的元件，例如不會經常重複的元件。 但是針對大規模轉譯的元件（例如大型清單中的每個專案或方格中的資料格），請嘗試避免屬性展開。
 
-如需詳細資訊，請參閱 <xref:blazor/components/index#attribute-splatting-and-arbitrary-parameters> 。
+如需詳細資訊，請參閱<xref:blazor/components/index#attribute-splatting-and-arbitrary-parameters>。
 
 #### <a name="implement-setparametersasync-manually"></a>`SetParametersAsync`手動執行
 
@@ -338,9 +307,9 @@ public static RenderFragment SayHello = __builder =>
 
 在某些極端的情況下，您可能會想要避免反映並手動執行您自己的參數設定邏輯。 這可能適用于：
 
- * 您的元件通常會轉譯 (例如，UI) 中有數百個或數千個複本。
- * 它接受許多參數。
- * 您發現接收參數的額外負荷會對 UI 回應性產生明顯的影響。
+* 您的元件通常會轉譯 (例如，UI) 中有數百個或數千個複本。
+* 它接受許多參數。
+* 您發現接收參數的額外負荷會對 UI 回應性產生明顯的影響。
 
 在這些情況下，您可以覆寫元件的虛擬 <xref:Microsoft.AspNetCore.Components.ComponentBase.SetParametersAsync%2A> 方法，並執行您自己的元件特定邏輯。 下列範例故意避免任何字典查閱：
 
@@ -452,8 +421,8 @@ public static RenderFragment SayHello = __builder =>
 
 .NET 和 JavaScript 之間的呼叫牽涉到一些額外的額外負荷，因為：
 
- * 依預設，呼叫是非同步。
- * 根據預設，參數和傳回值為 JSON 序列化。 這是為了在 .NET 與 JavaScript 類型之間提供容易瞭解的轉換機制。
+* 依預設，呼叫是非同步。
+* 根據預設，參數和傳回值為 JSON 序列化。 這是為了在 .NET 與 JavaScript 類型之間提供容易瞭解的轉換機制。
 
 此外 Blazor Server ，這些呼叫會跨網路傳遞。
 
@@ -528,7 +497,7 @@ function storeAllInLocalStorage(items) {
 * 應用程式正在執行 Blazor WebAssembly ，而不是 Blazor Server 。
 * 呼叫的函式會以同步方式傳回值 (它不是 `async` 方法，也不會傳回 .net <xref:System.Threading.Tasks.Task> 或 JavaScript `Promise`) 。
 
-如需詳細資訊，請參閱 <xref:blazor/call-javascript-from-dotnet> 。
+如需詳細資訊，請參閱<xref:blazor/call-javascript-from-dotnet>。
 
 ::: moniker range=">= aspnetcore-5.0"
  
@@ -589,7 +558,7 @@ Blazor的 JS interop 實行相依于 <xref:System.Text.Json> ，這是具有低�
 
 ### <a name="lazy-load-assemblies"></a>延遲載入元件
 
-當路由需要元件時，于執行時間載入元件。 如需詳細資訊，請參閱 <xref:blazor/webassembly-lazy-load-assemblies> 。
+當路由需要元件時，于執行時間載入元件。 如需詳細資訊，請參閱<xref:blazor/webassembly-lazy-load-assemblies>。
 
 ### <a name="compression"></a>壓縮
 

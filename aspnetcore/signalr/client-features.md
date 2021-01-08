@@ -18,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: signalr/client-features
-ms.openlocfilehash: 1d1778f95c53179ca05eaced3d1913f208220df4
-ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
+ms.openlocfilehash: 65ad619bb943a0e5ffbaec7ec80243972dafc49f
+ms.sourcegitcommit: 8b0e9a72c1599ce21830c843558a661ba908ce32
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 10/30/2020
-ms.locfileid: "93050975"
+ms.lasthandoff: 01/08/2021
+ms.locfileid: "98024661"
 ---
 # <a name="aspnet-core-no-locsignalr-clients"></a>ASP.NET Core SignalR 用戶端
 
@@ -57,7 +57,7 @@ SignalR用戶端隨附于伺服器元件，並已建立版本以符合。 任何
 | Server-Sent 事件傳輸 |2.1.0|1.0.0|1.0.0|❌|
 | 長時間輪詢傳輸 |2.1.0|1.0.0|1.0.0|3.0.0|
 | JSON 中樞通訊協定 |2.1.0|1.0.0|1.0.0|1.0.0|
-| MessagePack 中樞通訊協定 |2.1.0|1.0.0|1.0.0|❌|
+| MessagePack 中樞通訊協定 |2.1.0|1.0.0|1.0.0|5.0.0|
 
 [我們的問題追蹤](https://github.com/dotnet/AspNetCore/issues)程式會追蹤啟用其他用戶端功能的支援。
 

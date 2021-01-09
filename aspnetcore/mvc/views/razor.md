@@ -17,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: mvc/views/razor
-ms.openlocfilehash: 91e35a7cbd97e2bd6e77566362f02409915de7d7
-ms.sourcegitcommit: 3f0ad1e513296ede1bff39a05be6c278e879afed
+ms.openlocfilehash: cb9ffab19062bf726dd519c782d502f76e372073
+ms.sourcegitcommit: 97243663fd46c721660e77ef652fe2190a461f81
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 11/25/2020
-ms.locfileid: "96035706"
+ms.lasthandoff: 01/09/2021
+ms.locfileid: "98058281"
 ---
 # <a name="no-locrazor-syntax-reference-for-aspnet-core"></a>Razor ASP.NET Core 的語法參考
 
@@ -399,7 +399,7 @@ Razor 具有使用 lock 語句保護重要區段的功能：
 }
 ```
 
-### <a name="comments"></a>註解
+### <a name="comments"></a>評價
 
 Razor 支援 c # 和 HTML 批註：
 
@@ -611,7 +611,7 @@ public class _Views_Something_cshtml : RazorPage<dynamic>
 
 *此案例僅適用于 Razor)  ( razor 元件。*
 
-指示詞會 `@layout` 指定元件的版面配置 Razor 。 版面配置元件可用來避免程式碼重複和不一致。 如需詳細資訊，請參閱<xref:blazor/layouts>。
+`@layout`指示詞會針對具有指示詞的可路由元件指定版面配置 Razor [`@page`](#page) 。 版面配置元件可用來避免程式碼重複和不一致。 如需詳細資訊，請參閱<xref:blazor/layouts>。
 
 ::: moniker-end
 

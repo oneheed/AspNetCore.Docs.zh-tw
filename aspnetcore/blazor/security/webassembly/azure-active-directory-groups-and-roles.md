@@ -19,19 +19,22 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/security/webassembly/aad-groups-roles
-ms.openlocfilehash: ded70f028b3021574ba260838837d9b23abd72f1
-ms.sourcegitcommit: 3593c4efa707edeaaceffbfa544f99f41fc62535
+ms.openlocfilehash: 96a7dde9a5a756e40125ffda4c54fbf24fdc616a
+ms.sourcegitcommit: 97243663fd46c721660e77ef652fe2190a461f81
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 01/04/2021
-ms.locfileid: "94981878"
+ms.lasthandoff: 01/09/2021
+ms.locfileid: "98058255"
 ---
 # <a name="azure-active-directory-aad-groups-administrator-roles-and-user-defined-roles"></a>Azure Active Directory (AAD) 群組、系統管理員角色和使用者定義的角色
 
 [Luke Latham](https://github.com/guardrex) And [Javier Calvarro Nelson](https://github.com/javiercn)
 
 > [!NOTE]
-> 本文適用于 Blazor 使用 Microsoft v1.0 的 ASP.NET Core apps 3.1 版 Identity ，並已排程為使用 v2.0 更新至 5.0 Identity 。 如需詳細資訊，請參閱[ Blazor WASM 中的 AAD/B2C 群組和角色 (dotnet/AspNetCore.Docs #17683) ](https://github.com/dotnet/AspNetCore.Docs/issues/17683)。
+> 本文適用于 Blazor 使用 Microsoft 1.0 的 ASP.NET Core apps 3.1 版 Identity ，並將于不久後更新為 5.0 Identity 2.0。 如需詳細資訊，請參閱下列 GitHub 問題和提取要求。 提取要求的 [檔案 **變更** ] 索引標籤包含發行項更新的草稿文字和範例。 審核和最終更新之後，提取要求將會合並到即時檔集。
+>
+> * 問題： [ Blazor 使用 AAD 群組和角色進行 WASM， (dotnet/AspNetCore.Docs #17683) ](https://github.com/dotnet/AspNetCore.Docs/issues/17683)
+> * 提取要求： [ Blazor AAD 群組和角色主題 5.0 (dotnet/AspNetCore.Docs #20856) ](https://github.com/dotnet/AspNetCore.Docs/pull/20856)
 
 Azure Active Directory (AAD) 提供數個可結合的授權方法 ASP.NET Core Identity ：
 
@@ -583,7 +586,7 @@ builder.Services.AddAuthorizationCore(options =>
 > > [!NOTE]
 > > 如果 `Audience` 應用程式的發行者網域具有以架構為基礎的 API 範圍，則通常 **不** 需要明確地設定 `api://` 。
 >
-> 如需詳細資訊，請參閱 <xref:blazor/security/webassembly/hosted-with-azure-active-directory#app-settings> 。
+> 如需詳細資訊，請參閱<xref:blazor/security/webassembly/hosted-with-azure-active-directory#app-settings>。
 
 ::: moniker-end
 
@@ -601,7 +604,7 @@ services.AddAuthorization(options =>
 });
 ```
 
-如需詳細資訊，請參閱 <xref:security/authorization/policies> 。
+如需詳細資訊，請參閱<xref:security/authorization/policies>。
 
 ### <a name="controller-access"></a>控制器存取
 

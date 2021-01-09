@@ -18,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: data/ef-mvc/read-related-data
-ms.openlocfilehash: 610a9e9b0007fb468ea9cdae6fadd2e756de4290
-ms.sourcegitcommit: 3593c4efa707edeaaceffbfa544f99f41fc62535
+ms.openlocfilehash: b1adca435b48db22a176d33a216c07d6647a6695
+ms.sourcegitcommit: 97243663fd46c721660e77ef652fe2190a461f81
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 01/04/2021
-ms.locfileid: "93054050"
+ms.lasthandoff: 01/09/2021
+ms.locfileid: "98058307"
 ---
 # <a name="tutorial-read-related-data---aspnet-mvc-with-ef-core"></a>教學課程：使用 EF Core 讀取相關資料-ASP.NET MVC
 
@@ -183,7 +183,17 @@ Instructors 頁面會顯示下列三個不同資料表的資料。 因此，您�
 
 在 *Views/Instructors/Index.cshtml* 中，以下列程式碼取代範本程式碼。 所做的變更已醒目提示。
 
-[!code-cshtml[](intro/samples/cu/Views/Instructors/Index1.cshtml?range=1-64&highlight=1,3-7,15-19,24,26-31,41-54,56)]
+::: moniker range=">= aspnetcore-2.2"
+
+[!code-cshtml[](intro/samples/5cu-snap/Views/Instructors/Index.cshtml?range=1-62&highlight=1,3-7,15-19,24,26-31,41-52,54)]
+
+::: moniker-end
+
+::: moniker range="<= aspnetcore-2.1"
+
+[!code-cshtml[](intro/samples/cu/Views/Instructors/Index1.cshtml?range=1-62&highlight=1,3-7,15-19,24,26-31,41-52,54)]
+
+::: moniker-end
 
 您已對現有程式碼進行下列變更：
 
@@ -193,7 +203,7 @@ Instructors 頁面會顯示下列三個不同資料表的資料。 因此，您�
 
 * 新增 [辦公室] 資料行，該資料行只有在 `item.OfficeAssignment` 不是 Null 時才會顯示 `item.OfficeAssignment.Location`。 (因為這是一對零或一關聯性，所有可能沒有相關的 OfficeAssignment 實體。)
 
-  ```html
+  ```cshtml
   @if (item.OfficeAssignment != null)
   {
       @item.OfficeAssignment.Location
@@ -202,20 +212,11 @@ Instructors 頁面會顯示下列三個不同資料表的資料。 因此，您�
 
 * 新增 [課程] 資料行，以顯示每位講師所教授的課程。 如需詳細資訊，請參閱語法文章的 [明確行轉換](xref:mvc/views/razor#explicit-line-transition) 一節 Razor 。
 
-* 新增程式碼，將 `class="success"` 動態新增至所選取講師的 `tr` 項目。 這會使用啟動程序類別設定所選取資料列的背景色彩。
-
-  ```html
-  string selectedRow = "";
-  if (item.ID == (int?)ViewData["InstructorID"])
-  {
-      selectedRow = "success";
-  }
-  <tr class="@selectedRow">
-  ```
+* 加入程式碼，有條件地將啟動程式 CSS 類別加入至所 `tr` 選講師的元素中。 這個類別會設定所選取資料列的背景色彩。
 
 * 在每個資料列的其他連結之前，立即新增標示為 **選取** 的超連結，這會使得選取的講師識別碼傳送到 `Index` 方法。
 
-  ```html
+  ```cshtml
   <a asp-action="Index" asp-route-id="@item.ID">Select</a> |
   ```
 

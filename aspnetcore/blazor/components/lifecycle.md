@@ -19,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/components/lifecycle
-ms.openlocfilehash: b01b1c70be010ba0ad9bbd2c1114e5d8341b3261
-ms.sourcegitcommit: 3593c4efa707edeaaceffbfa544f99f41fc62535
+ms.openlocfilehash: e5f9a07db742ce2e26f03c0b6e1caa1904e4e0d9
+ms.sourcegitcommit: 97243663fd46c721660e77ef652fe2190a461f81
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 01/04/2021
-ms.locfileid: "97506860"
+ms.lasthandoff: 01/09/2021
+ms.locfileid: "98058229"
 ---
 # <a name="aspnet-core-no-locblazor-lifecycle"></a>ASP.NET Core Blazor 生命週期
 
@@ -53,7 +53,9 @@ ms.locfileid: "97506860"
 
 `Render`生命週期：
 
-1. 如果這不是元件的第一次轉譯或 [`ShouldRender`](#suppress-ui-refreshing) 評估為 `false` ，請勿在元件上執行進一步的作業。
+1. 停止元件上的進一步轉譯作業：
+   * 在第一次呈現之後。
+   * 當 [`ShouldRender`](#suppress-ui-refreshing) 為時 `false` 。
 1. 建立轉譯樹狀結構差異 (差異) 並呈現元件。
 1. 等待 DOM 進行更新。
 1. 呼叫 [`OnAfterRender{Async}`](#after-component-render) 。
@@ -206,13 +208,13 @@ protected override bool ShouldRender()
 
 即使覆 <xref:Microsoft.AspNetCore.Components.ComponentBase.ShouldRender%2A> 寫，仍一律會呈現元件。
 
-如需詳細資訊，請參閱 <xref:blazor/webassembly-performance-best-practices#avoid-unnecessary-rendering-of-component-subtrees> 。
+如需詳細資訊，請參閱<xref:blazor/webassembly-performance-best-practices#avoid-unnecessary-rendering-of-component-subtrees>。
 
 ## <a name="state-changes"></a>狀態變更
 
 <xref:Microsoft.AspNetCore.Components.ComponentBase.StateHasChanged%2A> 通知元件其狀態已變更。 當適用時，呼叫 <xref:Microsoft.AspNetCore.Components.ComponentBase.StateHasChanged%2A> 會導致元件保存。
 
-<xref:Microsoft.AspNetCore.Components.ComponentBase.StateHasChanged%2A> 會自動針對 <xref:Microsoft.AspNetCore.Components.EventCallback> 方法呼叫。 如需詳細資訊，請參閱 <xref:blazor/components/event-handling#eventcallback> 。
+<xref:Microsoft.AspNetCore.Components.ComponentBase.StateHasChanged%2A> 會自動針對 <xref:Microsoft.AspNetCore.Components.EventCallback> 方法呼叫。 如需詳細資訊，請參閱<xref:blazor/components/event-handling#eventcallback>。
 
 ## <a name="handle-incomplete-async-actions-at-render"></a>在轉譯時處理未完成的非同步動作
 

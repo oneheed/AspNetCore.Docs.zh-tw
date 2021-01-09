@@ -19,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: fundamentals/websockets
-ms.openlocfilehash: 83a41d503b2d56bca3f1bac14eeb9d54a8257642
-ms.sourcegitcommit: 3593c4efa707edeaaceffbfa544f99f41fc62535
+ms.openlocfilehash: 6edf2017cc889321cfb484e643b75711fd66004d
+ms.sourcegitcommit: 97243663fd46c721660e77ef652fe2190a461f81
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 01/04/2021
-ms.locfileid: "93057774"
+ms.lasthandoff: 01/09/2021
+ms.locfileid: "98058346"
 ---
 # <a name="websockets-support-in-aspnet-core"></a>ASP.NET Core 中的 WebSockets 支援
 
@@ -67,7 +67,6 @@ ms.locfileid: "93057774"
 您可以設定下列設定：
 
 * `KeepAliveInterval` - 要將 "ping" 框架傳送到用戶端，以確保 Proxy 保持連線開啟的頻率。 預設為兩分鐘。
-* `ReceiveBufferSize` - 用來接收資料的緩衝區大小。 進階使用者可能需要變更此設定，以便根據資料的大小進行效能調整。 預設為 4 KB。
 
 ::: moniker-end
 
@@ -76,7 +75,6 @@ ms.locfileid: "93057774"
 您可以設定下列設定：
 
 * `KeepAliveInterval` - 要將 "ping" 框架傳送到用戶端，以確保 Proxy 保持連線開啟的頻率。 預設為兩分鐘。
-* <xref:Microsoft.AspNetCore.Builder.WebSocketOptions.ReceiveBufferSize> - 用來接收資料的緩衝區大小。 進階使用者可能需要變更此設定，以便根據資料的大小進行效能調整。 預設為 4 KB。
 * `AllowedOrigins` - WebSocket 要求之允許 Origin 標頭值的清單。 根據預設，會允許所有來源。 如需詳細資訊，請參閱下方的 "WebSocket origin restriction" (WebSocket 來源限制)。
 
 ::: moniker-end
@@ -159,10 +157,10 @@ CORS 所提供的保護不套用至 WebSocket。 瀏覽器 **不** 會：
 > 使用 IIS Express 時，不需要這些步驟
 
 1. 使用來自 [管理] 功能表的 [新增角色及功能] 精靈，或是 [伺服器管理員] 中的連結。
-1. 選取 [角色型或功能型安裝]。 選取 [下一步]  。
-1. 選取適當的伺服器 (預設會選取本機伺服器)。 選取 [下一步]  。
+1. 選取 [角色型或功能型安裝]。 選取 [下一步] 。
+1. 選取適當的伺服器 (預設會選取本機伺服器)。 選取 [下一步] 。
 1. 展開 [角色] 樹狀目錄中的 [網頁伺服器 (IIS)]，展開 [網頁伺服器]，然後展開 [應用程式開發]。
-1. 選取 [WebSocket 通訊協定]。 選取 [下一步]  。
+1. 選取 [WebSocket 通訊協定]。 選取 [下一步] 。
 1. 如果不需要額外的功能，請選取 [下一步]。
 1. 選取 [安裝]。
 1. 當安裝完成時，選取 [關閉] 來結束精靈。
@@ -188,11 +186,10 @@ CORS 所提供的保護不套用至 WebSocket。 瀏覽器 **不** 會：
 
 ## <a name="sample-app"></a>範例應用程式
 
-本文附帶的[範例應用程式](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/websockets/samples)是回應應用程式。 其具有一個進行 WebSocket 連線的網頁，而伺服器會將其接收的任何訊息重新傳送回用戶端。 請從命令提示字元執行應用程式 (它未設定為從 Visual Studio 搭配 IIS Express 執行)，並巡覽至 http://localhost:5000。 網頁會在左上方顯示連線狀態：
+本文附帶的[範例應用程式](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/websockets/samples)是回應應用程式。 它有一個可進行 WebSocket 連線的網頁，而伺服器會將其接收的任何訊息重新傳送回用戶端。 範例應用程式未設定為從具有 IIS Express 的 Visual Studio 執行，因此請在的命令 shell 中執行應用程式， [`dotnet run`](/dotnet/core/tools/dotnet-run) 並在瀏覽器中流覽至 `http://localhost:5000` 。 網頁會顯示連接狀態：
 
-![網頁的初始狀態](websockets/_static/start.png)
+![在 Websocket 連接之前網頁的初始狀態](websockets/_static/start.png)
 
 選取 [連線] 將 WebSocket 要求傳送到顯示的 URL。 輸入測試訊息，然後選取 [傳送]。 完成後，請選取 [關閉通訊端]。 [通訊記錄檔] 區段會報告每次進行的開啟、傳送和關閉動作。
 
-![網頁的初始狀態](websockets/_static/end.png)
-
+![傳送和接收 Websocket 連接和測試訊息之後的網頁最終狀態](websockets/_static/end.png)

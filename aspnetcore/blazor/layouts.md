@@ -19,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/layouts
-ms.openlocfilehash: 3cb7c6184c13a003b4f4294f887d8938caa42f97
-ms.sourcegitcommit: 3593c4efa707edeaaceffbfa544f99f41fc62535
+ms.openlocfilehash: 417f69e797296cdcd01fc4ce326388512a406368
+ms.sourcegitcommit: 97243663fd46c721660e77ef652fe2190a461f81
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 01/04/2021
-ms.locfileid: "97506899"
+ms.lasthandoff: 01/09/2021
+ms.locfileid: "98058268"
 ---
 # <a name="aspnet-core-no-locblazor-layouts"></a>ASP.NET Core Blazor 版面配置
 
@@ -32,7 +32,7 @@ ms.locfileid: "97506899"
 
 某些應用程式專案（例如功能表、著作權訊息和公司標誌）通常是應用程式整體版面配置的一部分，且應用程式中的每個元件都會使用這些元素。 將這些專案的程式碼複製到應用程式的所有元件，並不是有效的方法。 每次其中一個元素需要更新時，都必須更新每個元件。 這類複製很難維護，而且可能會在一段時間後產生不一致的內容。 *版面* 配置會解決此問題。
 
-技術上來說，版面配置只是另一個元件。 版面配置是在 Razor 範本或 c # 程式碼中定義，而且可以使用 [資料](xref:blazor/components/data-binding)系結、相依性 [插入](xref:blazor/fundamentals/dependency-injection)和其他元件案例。
+技術上來說，版面配置只是另一個元件。 版面配置是在 Razor 範本或 c # 程式碼中定義，而且可以使用 [資料](xref:blazor/components/data-binding)系結、相依性 [插入](xref:blazor/fundamentals/dependency-injection)和其他元件案例。 版面配置僅適用于 Razor 具有指示詞的可路由元件 [`@page`](xref:mvc/views/razor#page) 。
 
 若要將元件轉換成版面配置：
 
@@ -79,7 +79,7 @@ ms.locfileid: "97506899"
 
 ## <a name="specify-a-layout-in-a-component"></a>指定元件中的版面配置
 
-使用指示詞將版面配置套用 Razor `@layout` 至元件。 編譯器會將套用 `@layout` <xref:Microsoft.AspNetCore.Components.LayoutAttribute> 至元件類別的轉換成。
+使用指示詞將配置套用 [`@layout`](xref:mvc/views/razor#layout) Razor 至也有指示詞的可路由 Razor 元件 [`@page`](xref:mvc/views/razor#page) 。 編譯器會將套用 `@layout` <xref:Microsoft.AspNetCore.Components.LayoutAttribute> 至元件類別的轉換成。
 
 下列元件的內容 `MasterList` 會插入到的 `MasterLayout` 位置 `@Body` ：
 
@@ -106,6 +106,9 @@ ms.locfileid: "97506899"
 > [!WARNING]
 > 請勿將指示詞新增 Razor `@layout` 至根檔案 `_Imports.razor` ，這會導致應用程式中的版面配置無限迴圈。 若要控制預設的應用程式版面配置，請在元件中指定版面配置 `Router` 。 如需詳細資訊，請參閱 [預設版面](#default-layout) 配置區段。
 
+> [!NOTE]
+> 指示詞 [`@layout`](xref:mvc/views/razor#layout) Razor 只會將版面配置套用至具有指示詞的可路由 Razor 元件 [`@page`](xref:mvc/views/razor#page) 。
+
 ## <a name="nested-layouts"></a>嵌套版面配置
 
 應用程式可由嵌套配置組成。 元件可以參考配置，進而參考另一個版面配置。 例如，使用嵌套配置來建立多層式功能表結構。
@@ -124,7 +127,7 @@ ms.locfileid: "97506899"
 
 ## <a name="share-a-no-locrazor-pages-layout-with-integrated-components"></a>Razor使用整合元件共用頁面配置
 
-當可路由的元件整合到 Razor 頁面應用程式時，應用程式的共用配置可以與元件一起使用。 如需詳細資訊，請參閱 <xref:blazor/components/prerendering-and-integration> 。
+當可路由的元件整合到 Razor 頁面應用程式時，應用程式的共用配置可以與元件一起使用。 如需詳細資訊，請參閱<xref:blazor/components/prerendering-and-integration>。
 
 ## <a name="additional-resources"></a>其他資源
 

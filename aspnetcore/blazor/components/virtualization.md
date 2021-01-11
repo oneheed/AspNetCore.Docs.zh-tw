@@ -19,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/components/virtualization
-ms.openlocfilehash: 706564bb8607d0bb25c092c31a72e5790c825ee4
-ms.sourcegitcommit: 8b0e9a72c1599ce21830c843558a661ba908ce32
+ms.openlocfilehash: afd2da19641b41871f06426934c39348daa54b1f
+ms.sourcegitcommit: 2fea9bfe6127bbbdbb438406c82529b2bc331944
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 01/08/2021
-ms.locfileid: "98024674"
+ms.lasthandoff: 01/11/2021
+ms.locfileid: "98065528"
 ---
 # <a name="aspnet-core-no-locblazor-component-virtualization"></a>ASP.NET Core Blazor 元件虛擬化
 
@@ -41,10 +41,10 @@ ms.locfileid: "98024674"
 如果沒有虛擬化，一般清單可能會使用 c # [`foreach`](/dotnet/csharp/language-reference/keywords/foreach-in) 迴圈來轉譯清單中的每個專案：
 
 ```razor
-<div class="all-flights" style="height:500px;overflow-y:scroll">
+<div style="height:500px;overflow-y:scroll">
     @foreach (var flight in allFlights)
     {
-        <FlightSummary @key="flight.FlightId" Flight="@flight" />
+        <FlightSummary @key="flight.FlightId" Details="@flight.Summary" />
     }
 </div>
 ```
@@ -54,17 +54,17 @@ ms.locfileid: "98024674"
 請將迴圈取代為 [`foreach`](/dotnet/csharp/language-reference/keywords/foreach-in) `Virtualize` 元件，並使用指定固定專案來源，而不是一次轉譯清單中的每個專案 <xref:Microsoft.AspNetCore.Components.Web.Virtualization.Virtualize%601.Items%2A?displayProperty=nameWithType> 。 只有目前可見的專案會呈現：
 
 ```razor
-<div class="all-flights" style="height:500px;overflow-y:scroll">
+<div style="height:500px;overflow-y:scroll">
     <Virtualize Items="@allFlights" Context="flight">
         <FlightSummary @key="flight.FlightId" Details="@flight.Summary" />
     </Virtualize>
 </div>
 ```
 
-如果未使用來指定元件的 `Context` 內容，請使用 `context` `context.{PROPERTY}` / `@context.{PROPERTY}` 專案內容範本中 () 值：
+如果未使用指定元件的 `Context` 內容，請使用 `context` 專案內容範本中的值：
 
 ```razor
-<div class="all-flights" style="height:500px;overflow-y:scroll">
+<div style="height:500px;overflow-y:scroll">
     <Virtualize Items="@allFlights">
         <FlightSummary @key="context.FlightId" Details="@context.Summary" />
     </Virtualize>
@@ -72,12 +72,12 @@ ms.locfileid: "98024674"
 ```
 
 > [!NOTE]
-> 您可以使用 [ `@key` ] [x： mvc/views/razor # key] 指示詞屬性來控制模型物件與元素和元件的對應程式。 `@key` 使比較演算法保證根據索引鍵的值來保留元素或元件。
+> 您可以使用指示詞屬性來控制模型物件到專案和元件的對應處理 [`@key`](xref:mvc/views/razor#key) 。 `@key` 使比較演算法保證根據索引鍵的值來保留元素或元件。
 >
 > 如需詳細資訊，請參閱下列文章：
 >
-> <xref:blazor/components/index#use-key-to-control-the-preservation-of-elements-and-components>
-> <xref:mvc/views/razor#key>
+> * <xref:blazor/components/index#use-key-to-control-the-preservation-of-elements-and-components>
+> * <xref:mvc/views/razor#key>
 
 `Virtualize`元件：
 
@@ -93,7 +93,7 @@ ms.locfileid: "98024674"
 
 ## <a name="item-provider-delegate"></a>專案提供者委派
 
-如果您不想要將所有專案載入記憶體中，可以將專案提供者委派方法指定給元件的 <xref:Microsoft.AspNetCore.Components.Web.Virtualization.Virtualize%601.ItemsProvider%2A?displayProperty=nameWithType> 參數，以根據需求非同步地抓取要求的專案：
+如果您不想要將所有專案載入記憶體中，可以將專案提供者委派方法指定給元件的 <xref:Microsoft.AspNetCore.Components.Web.Virtualization.Virtualize%601.ItemsProvider%2A?displayProperty=nameWithType> 參數，以根據需求非同步地抓取要求的專案。 在下列範例中，方法會將 `LoadEmployees` 專案提供給 `Virtualize` 元件：
 
 ```razor
 <Virtualize Context="employee" ItemsProvider="@LoadEmployees">
@@ -108,7 +108,7 @@ ms.locfileid: "98024674"
 
 `Virtualize`元件只能接受 **一個專案來源** 的參數，因此請勿嘗試同時使用專案提供者，並將集合指派給 `Items` 。 如果兩者都被指派， <xref:System.InvalidOperationException> 當元件的參數在執行時間設定時，就會擲回。
 
-下列範例會從載入員工 `EmployeeService` ：
+下列 `LoadEmployees` 方法範例 `EmployeeService` 會從未顯示)  (載入員工：
 
 ```csharp
 private async ValueTask<ItemsProviderResult<Employee>> LoadEmployees(
@@ -149,7 +149,7 @@ private async ValueTask<ItemsProviderResult<Employee>> LoadEmployees(
 
 ## <a name="item-size"></a>項目大小
 
-您可以使用 (預設值來設定每個專案的大小（以圖元為單位）： <xref:Microsoft.AspNetCore.Components.Web.Virtualization.Virtualize%601.ItemSize%2A?displayProperty=nameWithType> 50px) ：
+您可以設定每個專案的大小（以圖元為單位） <xref:Microsoft.AspNetCore.Components.Web.Virtualization.Virtualize%601.ItemSize%2A?displayProperty=nameWithType> (預設值： 50) ：
 
 ```razor
 <Virtualize Context="employee" Items="@employees" ItemSize="25">

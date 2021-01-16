@@ -5,7 +5,7 @@ description: 瞭解如何 Blazor 使用 ASP.NET Core、內容傳遞網路 (CDN) 
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 10/09/2020
+ms.date: 01/12/2021
 no-loc:
 - appsettings.json
 - ASP.NET Core Identity
@@ -19,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/host-and-deploy/webassembly
-ms.openlocfilehash: 55289dd7048c08ac61432c7cc062e74d2e69ee24
-ms.sourcegitcommit: 3593c4efa707edeaaceffbfa544f99f41fc62535
+ms.openlocfilehash: 77e4efe0ac2e87458558dabc78d47099b5698edc
+ms.sourcegitcommit: 063a06b644d3ade3c15ce00e72a758ec1187dd06
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 01/04/2021
-ms.locfileid: "97753123"
+ms.lasthandoff: 01/16/2021
+ms.locfileid: "98252444"
 ---
 # <a name="host-and-deploy-aspnet-core-no-locblazor-webassembly"></a>裝載和部署 ASP.NET Core Blazor WebAssembly
 
@@ -620,18 +620,6 @@ http {
 
 如需生產環境 Nginx 網頁伺服器組態的詳細資訊，請參閱[建立 NGINX Plus 和 NGINX 組態檔](https://docs.nginx.com/nginx/admin-guide/basic-functionality/managing-configuration-files/)。
 
-### <a name="nginx-in-docker"></a>Docker 中的 Nginx
-
-若要 Blazor 使用 Nginx 在 Docker 中裝載，請設定 Dockerfile 以使用以 Alpine 為基礎的 Nginx 映射。 更新 Dockerfile，以將檔案複製 `nginx.config` 到容器中。
-
-如下列範例所示，新增一行至 Dockerfile：
-
-```dockerfile
-FROM nginx:alpine
-COPY ./bin/Release/netstandard2.0/publish /usr/share/nginx/html/
-COPY nginx.conf /etc/nginx/nginx.conf
-```
-
 ### <a name="apache"></a>Apache
 
 若要將 Blazor WebAssembly 應用程式部署至 CentOS 7 或更新版本：
@@ -769,7 +757,7 @@ COPY nginx.conf /etc/nginx/nginx.conf
 
 ## <a name="configure-the-trimmer"></a>設定修剪器
 
-Blazor 在每個發行組建上執行中繼語言 (IL) 修剪，以從輸出元件中移除不必要的 IL。 如需詳細資訊，請參閱 <xref:blazor/host-and-deploy/configure-trimmer> 。
+Blazor 在每個發行組建上執行中繼語言 (IL) 修剪，以從輸出元件中移除不必要的 IL。 如需詳細資訊，請參閱<xref:blazor/host-and-deploy/configure-trimmer>。
 
 ::: moniker-end
 
@@ -777,7 +765,7 @@ Blazor 在每個發行組建上執行中繼語言 (IL) 修剪，以從輸出元�
 
 ## <a name="configure-the-linker"></a>設定連結器
 
-Blazor 在每個發行組建上執行中繼語言 (IL) 連結，以從輸出元件中移除不必要的 IL。 如需詳細資訊，請參閱 <xref:blazor/host-and-deploy/configure-linker> 。
+Blazor 在每個發行組建上執行中繼語言 (IL) 連結，以從輸出元件中移除不必要的 IL。 如需詳細資訊，請參閱<xref:blazor/host-and-deploy/configure-linker>。
 
 ::: moniker-end
 
@@ -791,7 +779,7 @@ Blazor 在每個發行組建上執行中繼語言 (IL) 連結，以從輸出元�
 
 `loadBootResource` 參數會出現在下表中。
 
-| 參數    | 描述 |
+| 參數    | 說明 |
 | ------------ | ----------- |
 | `type`       | 資源類型。 運算子類型： `assembly` 、 `pdb` 、 `dotnetjs` 、 `dotnetwasm` 、 `timezonedata` |
 | `name`       | 資源名稱。 |
@@ -874,7 +862,7 @@ dir .\_framework\_bin | rename-item -NewName { $_.name -replace ".dll\b",".bin" 
 在 Linux 或 macOS 上：
 
 ```console
-for f in _framework/_bin/*; do mv "$f" "`echo $f | sed -e 's/\.dll\b/.bin/g'`"; done
+for f in _framework/_bin/*; do mv "$f" "`echo $f | sed -e 's/\.dll/.bin/g'`"; done
 sed -i 's/\.dll"/.bin"/g' _framework/blazor.boot.json
 ```
 

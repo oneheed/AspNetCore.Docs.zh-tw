@@ -19,18 +19,66 @@ no-loc:
 - Razor
 - SignalR
 uid: fundamentals/servers/kestrel
-ms.openlocfilehash: 5c9e1717ad603687343f015826a113e6945e4a41
-ms.sourcegitcommit: 3593c4efa707edeaaceffbfa544f99f41fc62535
+ms.openlocfilehash: 268a6e71d3bd290ed614e70d963d653924cdcc43
+ms.sourcegitcommit: 063a06b644d3ade3c15ce00e72a758ec1187dd06
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 01/04/2021
-ms.locfileid: "97854609"
+ms.lasthandoff: 01/16/2021
+ms.locfileid: "98252730"
 ---
 # <a name="kestrel-web-server-implementation-in-aspnet-core"></a>ASP.NET Core 中的 Kestrel 網頁伺服器實作
 
 作者：[Tom Dykstra](https://github.com/tdykstra)、[Chris Ross](https://github.com/Tratcher) 和 [Stephen Halter](https://twitter.com/halter73)
 
-::: moniker range=">= aspnetcore-3.0"
+::: moniker range=">= aspnetcore-5.0"
+
+Kestrel 是 [ASP.NET Core 的跨平台網頁伺服器](xref:fundamentals/servers/index)。 Kestrel 是 ASP.NET Core 專案範本中預設包含和啟用的網頁伺服器。
+
+Kestrel 支援下列案例：
+
+* HTTPS
+* 除了 macOS) 之外， [HTTP/2](xref:fundamentals/servers/kestrel/http2) (&dagger;
+* 用來啟用 [WebSockets](xref:fundamentals/websockets) 的不透明升級
+* Nginx 背後的高效能 Unix 通訊端
+
+&dagger;未來版本的 macOS 上將會支援 HTTP/2。
+
+.NET Core 支援的所有平台和版本都支援 Kestrel。
+
+[查看或下載範例程式碼](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/servers/kestrel/samples/5.x) ([如何下載](xref:index#how-to-download-a-sample)) 
+
+## <a name="get-started"></a>開始使用
+
+ASP.NET Core 專案範本預設會使用 Kestrel。 在 *Program.cs* 中，此 <xref:Microsoft.Extensions.Hosting.GenericHostBuilderExtensions.ConfigureWebHostDefaults*> 方法會呼叫 <xref:Microsoft.AspNetCore.Hosting.WebHostBuilderKestrelExtensions.UseKestrel*> ：
+
+[!code-csharp[](kestrel/samples/5.x/KestrelSample/Program.cs?name=snippet_DefaultBuilder&highlight=8)]
+
+如需建立主機的詳細資訊，請參閱的 *設定主* 控制項和 *預設* 建立器設定一節 <xref:fundamentals/host/generic-host#set-up-a-host> 。
+
+## <a name="additional-resournces"></a>其他資源
+
+<a name="endpoint-configuration"></a>
+* <xref:fundamentals/servers/kestrel/endpoints>
+<a name="kestrel-options"></a>
+* <xref:fundamentals/servers/kestrel/options>
+<a name="http2-support"></a>
+* <xref:fundamentals/servers/kestrel/http2>
+<a name="when-to-use-kestrel-with-a-reverse-proxy"></a>
+* <xref:fundamentals/servers/kestrel/when-to-use-a-reverse-proxy>
+<a name="host-filtering"></a>
+* <xref:fundamentals/servers/kestrel/host-filtering>
+* <xref:test/troubleshoot>
+* <xref:security/enforcing-ssl>
+* <xref:host-and-deploy/proxy-load-balancer>
+* [RFC 7230：訊息語法和路由 (第 5.4 節：主機)](https://tools.ietf.org/html/rfc7230#section-5.4)
+* 在 Linux 上使用 UNIX 通訊端時，通訊端不會在應用程式關閉時自動刪除。 如需詳細資訊，請參閱 [此 GitHub 問題](https://github.com/dotnet/aspnetcore/issues/14134)。
+
+> [!NOTE]
+> 從 ASP.NET Core 5.0，Kestrel 的 libuv 傳輸已淘汰。 Libuv 傳輸不會接收更新來支援新的 OS 平臺（例如 Windows ARM64），並將在未來的版本中移除。 移除任何對已淘汰方法的呼叫 <xref:Microsoft.AspNetCore.Hosting.WebHostBuilderLibuvExtensions.UseLibuv%2A> ，並改為使用 Kestrel 的預設通訊端傳輸。
+
+::: moniker-end
+
+::: moniker range=">= aspnetcore-3.0 < aspnetcore-5.0"
 
 Kestrel 是 [ASP.NET Core 的跨平台網頁伺服器](xref:fundamentals/servers/index)。 Kestrel 是 ASP.NET Core 專案範本中預設隨附的網頁伺服器。
 
@@ -45,7 +93,7 @@ Kestrel 支援下列案例：
 
 .NET Core 支援的所有平台和版本都支援 Kestrel。
 
-[查看或下載範例程式碼](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/servers/kestrel/samples) ([如何下載](xref:index#how-to-download-a-sample)) 
+[查看或下載範例程式碼](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/servers/kestrel/samples/3.x) ([如何下載](xref:index#how-to-download-a-sample)) 
 
 ## <a name="http2-support"></a>HTTP/2 支援
 
@@ -63,7 +111,7 @@ Kestrel 支援下列案例：
 
 如果已建立 HTTP/2 連線，[HttpRequest.Protocol](xref:Microsoft.AspNetCore.Http.HttpRequest.Protocol*) 會報告 `HTTP/2`。
 
-預設會停用 HTTP/2。 如需組態的詳細資訊，請參閱 [Kestrel 選項](#kestrel-options)和 [ListenOptions. 通訊協定](#listenoptionsprotocols)一節。
+從 .NET Core 3.0 開始，預設會啟用 HTTP/2。 如需組態的詳細資訊，請參閱 [Kestrel 選項](#kestrel-options)和 [ListenOptions. 通訊協定](#listenoptionsprotocols)一節。
 
 ## <a name="when-to-use-kestrel-with-a-reverse-proxy"></a>何時搭配使用 Kestrel 與反向 Proxy
 
@@ -355,34 +403,6 @@ webBuilder.ConfigureKestrel(serverOptions =>
 ```
 
 預設值為 96 KB (98,304)。
-
-::: moniker-end
-
-::: moniker range=">= aspnetcore-5.0"
-
-### <a name="http2-keep-alive-ping-configuration"></a>HTTP/2 保持運作 ping 設定
-
-Kestrel 可以設定為將 HTTP/2 ping 傳送至連線的用戶端。 HTTP/2 ping 的服務有多個用途：
-
-* 保持閒置連接保持運作。 某些用戶端和 proxy 伺服器會關閉閒置的連線。 HTTP/2 ping 會視為連線上的活動，並防止連接關閉為閒置。
-* 關閉狀況不良的連接。 在設定的時間內，用戶端沒有回應「保持運作」偵測的連接會由伺服器關閉。
-
-有兩個與 HTTP/2 保持運作 ping 相關的設定選項：
-
-* `Http2.KeepAlivePingInterval` 是設定 `TimeSpan` 偵測內部的。 如果伺服器在這段時間內未收到任何框架，則伺服器會將保持運作的偵測傳送至用戶端。 當此選項設定為時，會停用 [保持作用中的 ping] `TimeSpan.MaxValue` 。 預設值是 `TimeSpan.MaxValue`。
-* `Http2.KeepAlivePingTimeout` 是 `TimeSpan` 設定 ping timeout 的。 如果伺服器未在此時間內接收任何框架，例如回應偵測，則連接會關閉。 當此選項設定為時，會停用 [保持作用中] 超時 `TimeSpan.MaxValue` 。 預設值為 20 秒。
-
-```csharp
-webBuilder.ConfigureKestrel(serverOptions =>
-{
-    serverOptions.Limits.Http2.KeepAlivePingInterval = TimeSpan.FromSeconds(30);
-    serverOptions.Limits.Http2.KeepAlivePingTimeout = TimeSpan.FromSeconds(60);
-});
-```
-
-::: moniker-end
-
-::: moniker range=">= aspnetcore-3.0"
 
 ### <a name="trailers"></a>預告片
 
@@ -986,18 +1006,6 @@ webBuilder.ConfigureKestrel(serverOptions =>
 >
 > 如需轉送標頭中介軟體的詳細資訊，請參閱<xref:host-and-deploy/proxy-load-balancer>。
 
-::: moniker-end
-
-::: moniker range=">= aspnetcore-5.0"
-
-## <a name="libuv-transport-configuration"></a>Libuv 傳輸設定
-
-從 ASP.NET Core 5.0，Kestrel 的 Libuv 傳輸已淘汰。 Libuv 傳輸不會接收更新來支援新的 OS 平臺（例如 Windows ARM64），並將在未來的版本中移除。 移除任何對已淘汰方法的呼叫 <xref:Microsoft.AspNetCore.Hosting.WebHostBuilderLibuvExtensions.UseLibuv%2A> ，並改為使用 Kestrel 的預設通訊端傳輸。
-
-::: moniker-end
-
-::: moniker range=">= aspnetcore-3.0 < aspnetcore-5.0"
-
 ## <a name="libuv-transport-configuration"></a>Libuv 傳輸設定
 
 對於需要使用 Libuv () 的專案 <xref:Microsoft.AspNetCore.Hosting.WebHostBuilderLibuvExtensions.UseLibuv%2A> ：
@@ -1029,6 +1037,44 @@ webBuilder.ConfigureKestrel(serverOptions =>
   }
   ```
 
+## <a name="http11-request-draining"></a>HTTP/1.1 要求清空
+
+開啟 HTTP 連接相當耗時。 若是 HTTPS，也需要大量資源。 因此，Kestrel 會嘗試針對每個 HTTP/1.1 通訊協定重複使用連接。 要求主體必須完全取用，才能重複使用連線。 應用程式不一定會取用要求主體，例如伺服器傳回重新 `POST` 導向或404回應的要求。 在 `POST` -重新導向案例中：
+
+* 用戶端可能已經傳送部分 `POST` 資料。
+* 伺服器會寫入301回應。
+* 連線無法用於新的要求，直到 `POST` 前一個要求主體的資料已完全讀取為止。
+* Kestrel 會嘗試清空要求主體。 清空要求主體表示在不處理資料的情況下讀取和捨棄資料。
+
+清空程式可讓您在允許連線重複使用時，以及清空任何剩餘資料所需的時間之間進行 tradoff：
+
+* 清空有五秒的時間，無法設定。
+* 如果或標頭所指定的所有資料在 `Content-Length` `Transfer-Encoding` 此時間之前未被讀取，則連接會關閉。
+
+有時您可能會想要在寫入回應之前或之後立即終止要求。 例如，用戶端可能會有限制性的資料上限，因此限制上傳的資料可能是優先考慮。 在這種情況下，若要終止要求，請從控制器、頁面或中介軟體呼叫[HttpCoNtext. Abort](xref:Microsoft.AspNetCore.Http.HttpContext.Abort%2A) 。 Razor
+
+呼叫時有一些注意事項 `Abort` ：
+
+* 建立新的連接可能很慢且昂貴。
+* 在連接關閉之前，不保證用戶端已讀取回應。
+* 呼叫 `Abort` 應該很罕見，而且會保留給嚴重的錯誤案例，而不是常見的錯誤。
+  * 只有 `Abort` 在需要解決特定問題時才呼叫。 例如， `Abort` 如果惡意用戶端嘗試 `POST` 資料或用戶端程式代碼中有錯誤，而導致大量或許多要求，請呼叫。
+  * 請勿呼叫 `Abort` 常見的錯誤狀況，例如 HTTP 404 (找不到) 。
+
+在呼叫之前呼叫 [HttpResponse](xref:Microsoft.AspNetCore.Http.HttpResponse.CompleteAsync%2A) ， `Abort` 可確保伺服器已完成寫入回應。 不過，用戶端行為不是可預測的，而且在中斷連接之前，可能不會讀取回應。
+
+HTTP/2 的這個程式不同，因為通訊協定支援中止個別要求資料流程，而不需要關閉連接。 五秒的清空超時時間不適用。 如果在完成回應之後有任何未讀取的要求主體資料，則伺服器會傳送 HTTP/2 RST 框架。 系統會忽略其他要求主體資料框架。
+
+可能的話，最好是讓用戶端利用預期的 [： 100-continue](https://developer.mozilla.org/docs/Web/HTTP/Status/100) 要求標頭，並等待伺服器回應，然後再開始傳送要求本文。 這可讓用戶端有機會檢查回應，並在傳送不需要的資料之前中止。
+
+## <a name="additional-resources"></a>其他資源
+
+* 在 Linux 上使用 UNIX 通訊端時，通訊端不會在應用程式關閉時自動刪除。 如需詳細資訊，請參閱 [此 GitHub 問題](https://github.com/dotnet/aspnetcore/issues/14134)。
+* <xref:test/troubleshoot>
+* <xref:security/enforcing-ssl>
+* <xref:host-and-deploy/proxy-load-balancer>
+* [RFC 7230：訊息語法和路由 (第 5.4 節：主機)](https://tools.ietf.org/html/rfc7230#section-5.4)
+
 ::: moniker-end
 
 ::: moniker range="= aspnetcore-2.2"
@@ -1046,7 +1092,7 @@ Kestrel 支援下列案例：
 
 .NET Core 支援的所有平台和版本都支援 Kestrel。
 
-[查看或下載範例程式碼](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/servers/kestrel/samples) ([如何下載](xref:index#how-to-download-a-sample)) 
+[查看或下載範例程式碼](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/servers/kestrel/samples/2.x) ([如何下載](xref:index#how-to-download-a-sample)) 
 
 ## <a name="http2-support"></a>HTTP/2 支援
 
@@ -1980,6 +2026,44 @@ private class TlsFilterAdapter : IConnectionAdapter
 >
 > 如需轉送標頭中介軟體的詳細資訊，請參閱<xref:host-and-deploy/proxy-load-balancer>。
 
+## <a name="http11-request-draining"></a>HTTP/1.1 要求清空
+
+開啟 HTTP 連接相當耗時。 若是 HTTPS，也需要大量資源。 因此，Kestrel 會嘗試針對每個 HTTP/1.1 通訊協定重複使用連接。 要求主體必須完全取用，才能重複使用連線。 應用程式不一定會取用要求主體，例如伺服器傳回重新 `POST` 導向或404回應的要求。 在 `POST` -重新導向案例中：
+
+* 用戶端可能已經傳送部分 `POST` 資料。
+* 伺服器會寫入301回應。
+* 連線無法用於新的要求，直到 `POST` 前一個要求主體的資料已完全讀取為止。
+* Kestrel 會嘗試清空要求主體。 清空要求主體表示在不處理資料的情況下讀取和捨棄資料。
+
+清空程式可讓您在允許連線重複使用時，以及清空任何剩餘資料所需的時間之間進行 tradoff：
+
+* 清空有五秒的時間，無法設定。
+* 如果或標頭所指定的所有資料在 `Content-Length` `Transfer-Encoding` 此時間之前未被讀取，則連接會關閉。
+
+有時您可能會想要在寫入回應之前或之後立即終止要求。 例如，用戶端可能會有限制性的資料上限，因此限制上傳的資料可能是優先考慮。 在這種情況下，若要終止要求，請從控制器、頁面或中介軟體呼叫[HttpCoNtext. Abort](xref:Microsoft.AspNetCore.Http.HttpContext.Abort%2A) 。 Razor
+
+呼叫時有一些注意事項 `Abort` ：
+
+* 建立新的連接可能很慢且昂貴。
+* 在連接關閉之前，不保證用戶端已讀取回應。
+* 呼叫 `Abort` 應該很罕見，而且會保留給嚴重的錯誤案例，而不是常見的錯誤。
+  * 只有 `Abort` 在需要解決特定問題時才呼叫。 例如， `Abort` 如果惡意用戶端嘗試 `POST` 資料或用戶端程式代碼中有錯誤，而導致大量或許多要求，請呼叫。
+  * 請勿呼叫 `Abort` 常見的錯誤狀況，例如 HTTP 404 (找不到) 。
+
+在呼叫之前呼叫 [HttpResponse](xref:Microsoft.AspNetCore.Http.HttpResponse.CompleteAsync%2A) ， `Abort` 可確保伺服器已完成寫入回應。 不過，用戶端行為不是可預測的，而且在中斷連接之前，可能不會讀取回應。
+
+HTTP/2 的這個程式不同，因為通訊協定支援中止個別要求資料流程，而不需要關閉連接。 五秒的清空超時時間不適用。 如果在完成回應之後有任何未讀取的要求主體資料，則伺服器會傳送 HTTP/2 RST 框架。 系統會忽略其他要求主體資料框架。
+
+可能的話，最好是讓用戶端利用預期的 [： 100-continue](https://developer.mozilla.org/docs/Web/HTTP/Status/100) 要求標頭，並等待伺服器回應，然後再開始傳送要求本文。 這可讓用戶端有機會檢查回應，並在傳送不需要的資料之前中止。
+
+## <a name="additional-resources"></a>其他資源
+
+* 在 Linux 上使用 UNIX 通訊端時，通訊端不會在應用程式關閉時自動刪除。 如需詳細資訊，請參閱 [此 GitHub 問題](https://github.com/dotnet/aspnetcore/issues/14134)。
+* <xref:test/troubleshoot>
+* <xref:security/enforcing-ssl>
+* <xref:host-and-deploy/proxy-load-balancer>
+* [RFC 7230：訊息語法和路由 (第 5.4 節：主機)](https://tools.ietf.org/html/rfc7230#section-5.4)
+
 ::: moniker-end
 
 ::: moniker range="= aspnetcore-2.1"
@@ -1994,7 +2078,7 @@ Kestrel 支援下列案例：
 
 .NET Core 支援的所有平台和版本都支援 Kestrel。
 
-[查看或下載範例程式碼](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/servers/kestrel/samples) ([如何下載](xref:index#how-to-download-a-sample)) 
+[查看或下載範例程式碼](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/servers/kestrel/samples/2.x) ([如何下載](xref:index#how-to-download-a-sample)) 
 
 ## <a name="when-to-use-kestrel-with-a-reverse-proxy"></a>何時搭配使用 Kestrel 與反向 Proxy
 
@@ -2770,8 +2854,6 @@ Listening on the following addresses: http://127.0.0.1:48508
 >
 > 如需轉送標頭中介軟體的詳細資訊，請參閱<xref:host-and-deploy/proxy-load-balancer>。
 
-::: moniker-end
-
 ## <a name="http11-request-draining"></a>HTTP/1.1 要求清空
 
 開啟 HTTP 連接相當耗時。 若是 HTTPS，也需要大量資源。 因此，Kestrel 會嘗試針對每個 HTTP/1.1 通訊協定重複使用連接。 要求主體必須完全取用，才能重複使用連線。 應用程式不一定會取用要求主體，例如伺服器傳回重新 `POST` 導向或404回應的要求。 在 `POST` -重新導向案例中：
@@ -2809,3 +2891,5 @@ HTTP/2 的這個程式不同，因為通訊協定支援中止個別要求資料�
 * <xref:security/enforcing-ssl>
 * <xref:host-and-deploy/proxy-load-balancer>
 * [RFC 7230：訊息語法和路由 (第 5.4 節：主機)](https://tools.ietf.org/html/rfc7230#section-5.4)
+
+::: moniker-end

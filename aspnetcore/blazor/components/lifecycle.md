@@ -19,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/components/lifecycle
-ms.openlocfilehash: e5f9a07db742ce2e26f03c0b6e1caa1904e4e0d9
-ms.sourcegitcommit: 97243663fd46c721660e77ef652fe2190a461f81
+ms.openlocfilehash: acaa276efda9fb4d09a5c1b1ca59c6abde1b64ec
+ms.sourcegitcommit: 063a06b644d3ade3c15ce00e72a758ec1187dd06
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 01/09/2021
-ms.locfileid: "98058229"
+ms.lasthandoff: 01/16/2021
+ms.locfileid: "98252382"
 ---
 # <a name="aspnet-core-no-locblazor-lifecycle"></a>ASP.NET Core Blazor 生命週期
 
@@ -53,7 +53,7 @@ ms.locfileid: "98058229"
 
 `Render`生命週期：
 
-1. 停止元件上的進一步轉譯作業：
+1. 避免元件上的進一步轉譯作業：
    * 在第一次呈現之後。
    * 當 [`ShouldRender`](#suppress-ui-refreshing) 為時 `false` 。
 1. 建立轉譯樹狀結構差異 (差異) 並呈現元件。
@@ -62,7 +62,7 @@ ms.locfileid: "98058229"
 
 ![轉譯生命週期](lifecycle/_static/lifecycle3.png)
 
-開發人員呼叫以 [`StateHasChanged`](#state-changes) 產生轉譯。
+開發人員呼叫以 [`StateHasChanged`](#state-changes) 產生轉譯。 如需詳細資訊，請參閱<xref:blazor/components/rendering>。
 
 ## <a name="lifecycle-methods"></a>生命週期方法
 
@@ -215,6 +215,8 @@ protected override bool ShouldRender()
 <xref:Microsoft.AspNetCore.Components.ComponentBase.StateHasChanged%2A> 通知元件其狀態已變更。 當適用時，呼叫 <xref:Microsoft.AspNetCore.Components.ComponentBase.StateHasChanged%2A> 會導致元件保存。
 
 <xref:Microsoft.AspNetCore.Components.ComponentBase.StateHasChanged%2A> 會自動針對 <xref:Microsoft.AspNetCore.Components.EventCallback> 方法呼叫。 如需詳細資訊，請參閱<xref:blazor/components/event-handling#eventcallback>。
+
+如需詳細資訊，請參閱<xref:blazor/components/rendering>。
 
 ## <a name="handle-incomplete-async-actions-at-render"></a>在轉譯時處理未完成的非同步動作
 

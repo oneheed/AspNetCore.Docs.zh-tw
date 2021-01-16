@@ -17,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: mvc/controllers/routing
-ms.openlocfilehash: a163c87fdb9a02c1b074ab32c19c11932c66cfd4
-ms.sourcegitcommit: 04a404a9655c59ad1ea02aff5d399ae1b833ad6a
+ms.openlocfilehash: 44c507fb5e0ff4477a84bfc1e4d0c62180c8dd37
+ms.sourcegitcommit: 063a06b644d3ade3c15ce00e72a758ec1187dd06
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 01/03/2021
-ms.locfileid: "97854531"
+ms.lasthandoff: 01/16/2021
+ms.locfileid: "98252834"
 ---
 # <a name="routing-to-controller-actions-in-aspnet-core"></a>ASP.NET Core 中的路由至控制器動作
 
@@ -43,7 +43,7 @@ ASP.NET Core 控制器會使用路由 [中介軟體](xref:fundamentals/middlewar
 * 說明 MVC 與路由之間的互動：
   * 一般 MVC 應用程式如何利用路由功能。
   * 涵蓋兩者：
-    * 一般[路由](#cr)通常會搭配控制器和 views 使用。
+    * 一般[路由](#cr)通常會搭配控制器和視圖使用。
     * 搭配 REST Api 使用的 *屬性路由*。 如果您主要對 REST Api 的路由有興趣，請跳至 [Rest api 的屬性路由](#ar) 區段。
   * 請參閱 [路由](xref:fundamentals/routing) 以取得 advanced routing 詳細資料。
 * 是指在 ASP.NET Core 3.0 （稱為端點路由）中新增的預設路由系統。 基於相容性的目的，您可以針對舊版路由使用控制器。 如需相關指示，請參閱 [2.2-3.0 的遷移指南](xref:migration/22-to-30) 。 請參閱 [本檔的2.2 版本](xref:mvc/controllers/routing?view=aspnetcore-2.2) ，以取得舊版路由系統上的參考資料。
@@ -435,7 +435,7 @@ REST Api 應該使用屬性路由，將應用程式的功能模型為一組資�
 | `[Route("")]` | 是 | `"Home"` |
 | `[Route("Index")]` | 是 | `"Home/Index"` |
 | `[Route("/")]` | **否** | `""` |
-| `[Route("About")]` | 是 | `"Home/About"` |
+| `[Route("About")]` | Yes | `"Home/About"` |
 
 <a name="routing-ordering-ref-label"></a>
 <a name="oar"></a>
@@ -570,7 +570,7 @@ AmbiguousMatchException: The request matched multiple endpoints. Matches:
 
 [!code-csharp[](routing/samples/3.x/main/Controllers/ProductsController.cs?name=snippet8&highlight=3)]
 
-在上述程式碼中， `[HttpPost("product/{id:int}")]` 套用路由條件約束。 `ProductsController.ShowProduct`動作只會與類似的 URL 路徑相符 `/product/3` 。 路由範本部分 `{id:int}` 會將該區段限制為只有整數。
+在上述程式碼中， `[HttpPost("product14/{id:int}")]` 套用路由條件約束。 `Products14Controller.ShowProduct`動作只會與類似的 URL 路徑相符 `/product14/3` 。 路由範本部分 `{id:int}` 會將該區段限制為只有整數。
 
 如需路由範本語法的詳細描述，請參閱[路由範本參考](xref:fundamentals/routing#route-template-reference)。
 
@@ -791,7 +791,7 @@ TagHelper 透過 `form` TagHelper 和 `<a>` TagHelper 產生 URL。 這兩者使
 
 <a name="routing-areas-ref-label"></a>
 
-## <a name="areas"></a>區
+## <a name="areas"></a>區域
 
 [區域](xref:mvc/controllers/areas) 是用來將相關功能組織成個別群組的 MVC 功能：
 
@@ -1522,7 +1522,7 @@ app.UseMvc(routes =>
 
 <a name="routing-areas-ref-label"></a>
 
-## <a name="areas"></a>區
+## <a name="areas"></a>區域
 
 [區域](areas.md)是 MVC 功能，可將相關功能組織成群組，作為個別路由命名空間 (適用於控制器動作) 和資料夾結構 (適用於檢視)。 使用區域可讓應用程式具有多個同名的控制器 (只要這些控制器具有不同的「區域」即可)。 使用區域可建立用於路由的階層，方法是將另一個路由參數 `area` 新增至 `controller` 和 `action`。 本節將討論路由如何與區域互動；如需區域如何與檢視搭配使用的詳細資料，請參閱[區域](areas.md)。
 

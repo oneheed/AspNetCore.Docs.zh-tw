@@ -5,7 +5,7 @@ description: 探索元件如何包含在 Blazor 外部元件程式庫的應用�
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 07/27/2020
+ms.date: 01/12/2021
 no-loc:
 - appsettings.json
 - ASP.NET Core Identity
@@ -19,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/components/class-libraries
-ms.openlocfilehash: 24a5b93a18cfe36c50d9739ba56d12aca41615c0
-ms.sourcegitcommit: 3593c4efa707edeaaceffbfa544f99f41fc62535
+ms.openlocfilehash: 14370f9bbf45079fd3654d3e55af4178691cf4f5
+ms.sourcegitcommit: 063a06b644d3ade3c15ce00e72a758ec1187dd06
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 01/04/2021
-ms.locfileid: "94570155"
+ms.lasthandoff: 01/16/2021
+ms.locfileid: "98252548"
 ---
 # <a name="aspnet-core-no-locrazor-components-class-libraries"></a>ASP.NET Core Razor 元件類別庫
 
@@ -50,7 +50,7 @@ ms.locfileid: "94570155"
    1. 以滑鼠右鍵按一下方案。 選取 [**加入**  >  **現有專案**]。
    1. 流覽至 RCL 的專案檔。
    1. 選取 RCL 的專案檔 (`.csproj`) 。
-1. 從應用程式新增參考 RCL：
+1. 從應用程式新增 RCL 的參考：
    1. 以滑鼠右鍵按一下應用程式專案。 選取 [**加入**  >  **參考**]。
    1. 選取 RCL 專案。 選取 [確定]。
 
@@ -121,11 +121,13 @@ Welcome to your new app.
 
 （選擇性）在最上層檔案中加入指示詞， `@using ComponentLibrary` `_Import.razor` 讓程式庫的元件可供整個專案使用。 將指示詞加入至 `_Import.razor` 任何層級的檔案，以將命名空間套用至資料夾內的單一元件或元件集。
 
-<!-- HOLD for reactivation at 5.x
-
 ::: moniker range=">= aspnetcore-5.0"
 
-To provide `Component1`'s `my-component` CSS class to the component, link to the library's stylesheet using the framework's [`Link` component](xref:blazor/fundamentals/additional-scenarios#influence-html-head-tag-elements) in `Component1.razor`:
+若為使用 [CSS 隔離](xref:blazor/components/css-isolation)的程式庫元件，則不需要在使用程式庫的應用程式中明確連結程式庫的個別元件樣式表單。 元件樣式會自動提供給取用應用程式使用。
+
+<!-- REACTIVATE WHEN HEAD COMPONENTS COME BACK AT 6.0
+
+To provide additional library component styles from stylesheets in the library's `wwwroot` folder, link the stylesheets using the framework's [`Link` component](xref:blazor/fundamentals/additional-scenarios#influence-html-head-tag-elements) in `Component1.razor`:
 
 ```razor
 <div class="my-component">
@@ -137,25 +139,31 @@ To provide `Component1`'s `my-component` CSS class to the component, link to the
 </div>
 ```
 
-To provide the stylesheet across the app, you can alternatively link to the library's stylesheet in the app's `wwwroot/index.html` file (Blazor WebAssembly) or `Pages/_Host.cshtml` file (Blazor Server):
+NEXT PARAGRAPH: RECAST TO 'CAN ALSO ADOPT ...'
+
+-->
+
+若要從程式庫資料夾的樣式表單中提供其他程式庫元件樣式 `wwwroot` ，請將取用應用程式檔案中的樣式表單連結 `wwwroot/index.html` (Blazor WebAssembly) 或 `Pages/_Host.cshtml` 檔 (Blazor Server) ：
 
 ```html
 <head>
     ...
-    <link href="_content/ComponentLibrary/styles.css" rel="stylesheet" />
+    <link href="_content/ComponentLibrary/additionalStyles.css" rel="stylesheet" />
 </head>
 ```
+
+<!-- REACTIVATE WHEN HEAD COMPONENTS COME BACK AT 6.0
 
 When the `Link` component is used in a child component, the linked asset is also available to any other child component of the parent component as long as the child with the `Link` component is rendered. The distinction between using the `Link` component in a child component and placing a `<link>` HTML tag in `wwwroot/index.html` or `Pages/_Host.cshtml` is that a framework component's rendered HTML tag:
 
 * Can be modified by application state. A hard-coded `<link>` HTML tag can't be modified by application state.
 * Is removed from the HTML `<head>` when the parent component is no longer rendered.
 
+-->
+
 ::: moniker-end
 
 ::: moniker range="< aspnetcore-5.0"
-
--->
 
 若要提供 `Component1` 的 `my-component` CSS 類別，請連結至應用程式檔案中程式庫的樣式表單 `wwwroot/index.html` (Blazor WebAssembly) 或 `Pages/_Host.cshtml` 檔 (Blazor Server) ：
 
@@ -166,19 +174,15 @@ When the `Link` component is used in a child component, the linked asset is also
 </head>
 ```
 
-<!-- HOLD for reactivation at 5.x
-
 ::: moniker-end
-
--->
 
 ## <a name="create-a-no-locrazor-components-class-library-with-static-assets"></a>建立 Razor 具有靜態資產的元件類別庫
 
-RCL 可以包含靜態資產。 靜態資產可供任何使用程式庫的應用程式使用。 如需詳細資訊，請參閱 <xref:razor-pages/ui-class#create-an-rcl-with-static-assets> 。
+RCL 可以包含靜態資產。 靜態資產可供任何使用程式庫的應用程式使用。 如需詳細資訊，請參閱<xref:razor-pages/ui-class#create-an-rcl-with-static-assets>。
 
 ## <a name="supply-components-and-static-assets-to-multiple-hosted-no-locblazor-apps"></a>將元件和靜態資產提供給多個託管 Blazor 應用程式
 
-如需詳細資訊，請參閱 <xref:blazor/host-and-deploy/webassembly#static-assets-and-class-libraries> 。
+如需詳細資訊，請參閱<xref:blazor/host-and-deploy/webassembly#static-assets-and-class-libraries>。
 
 ::: moniker range=">= aspnetcore-5.0"
 
@@ -213,7 +217,7 @@ Blazor 啟用標準 [javascript 模組](https://developer.mozilla.org/docs/Web/J
 * 匯入的 JavaScript 不再干擾全域命名空間。
 * 不需要程式庫和元件的取用者手動匯入相關的 JavaScript。
 
-如需詳細資訊，請參閱 <xref:blazor/call-javascript-from-dotnet#blazor-javascript-isolation-and-object-references> 。
+如需詳細資訊，請參閱<xref:blazor/call-javascript-from-dotnet#blazor-javascript-isolation-and-object-references>。
 
 ::: moniker-end
 

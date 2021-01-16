@@ -19,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: fundamentals/routing
-ms.openlocfilehash: e134832ad00b10bb01239afa06acc74d86707af1
-ms.sourcegitcommit: 3593c4efa707edeaaceffbfa544f99f41fc62535
+ms.openlocfilehash: 1355fdaeae58b6f4e0cf8d41a74b1c28aee0e8fe
+ms.sourcegitcommit: 063a06b644d3ade3c15ce00e72a758ec1187dd06
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 01/04/2021
-ms.locfileid: "94422557"
+ms.lasthandoff: 01/16/2021
+ms.locfileid: "98253081"
 ---
 # <a name="routing-in-aspnet-core"></a>ASP.NET Core 中的路由
 
@@ -393,7 +393,7 @@ URL 產生：
 
 <xref:Microsoft.AspNetCore.Routing.LinkGenerator> 提供的方法支援適用於任何位址類型的標準連結產生功能。 使用連結產生器最方便的方式，是透過執行特定網址類別型作業的擴充方法：
 
-| 擴充方法 | 描述 |
+| 擴充方法 | 說明 |
 | ---------------- | ----------- |
 | <xref:Microsoft.AspNetCore.Routing.LinkGenerator.GetPathByAddress*> | 根據提供的值產生具有絕對路徑的 URI。 |
 | <xref:Microsoft.AspNetCore.Routing.LinkGenerator.GetUriByAddress*> | 根據提供的值產生絕對 URI。             |
@@ -504,7 +504,7 @@ URL 模式嘗試擷取具有選擇性副檔名的檔案名稱時，具有其他�
 
 下表示范範例路由條件約束及其預期行為：
 
-| constraint (條件約束) | 範例 | 範例相符項目 | 注意 |
+| constraint (條件約束) | 範例 | 範例相符項目 | 備註 |
 | ---------- | ------- | --------------- | ----- |
 | `int` | `{id:int}` | `123456789`, `-123456789` | 符合任何整數 |
 | `bool` | `{active:bool}` | `true`, `FALSE` | 符合 `true` 或 `false` 。 不區分大小寫 |
@@ -569,12 +569,12 @@ ASP.NET Core 架構將 `RegexOptions.IgnoreCase | RegexOptions.Compiled | RegexO
 
 | 運算是   | String    | 比對 | 註解               |
 | ------------ | --------- | :---: |  -------------------- |
-| `[a-z]{2}`   | hello     | 是   | 子字串相符項目     |
-| `[a-z]{2}`   | 123abc456 | 是   | 子字串相符項目     |
-| `[a-z]{2}`   | mz        | 是   | 符合運算式    |
-| `[a-z]{2}`   | MZ        | 是   | 不區分大小寫    |
-| `^[a-z]{2}$` | hello     | 否    | 請參閱上述的 `^` 和 `$` |
-| `^[a-z]{2}$` | 123abc456 | 否    | 請參閱上述的 `^` 和 `$` |
+| `[a-z]{2}`   | hello     | Yes   | 子字串相符項目     |
+| `[a-z]{2}`   | 123abc456 | Yes   | 子字串相符項目     |
+| `[a-z]{2}`   | mz        | Yes   | 符合運算式    |
+| `[a-z]{2}`   | MZ        | Yes   | 不區分大小寫    |
+| `^[a-z]{2}$` | hello     | No    | 請參閱上述的 `^` 和 `$` |
+| `^[a-z]{2}$` | 123abc456 | No    | 請參閱上述的 `^` 和 `$` |
 
 如需規則運算式語法的詳細資訊，請參閱 [.NET Framework 規則運算式](/dotnet/standard/base-types/regular-expression-language-quick-reference)。
 
@@ -1112,7 +1112,7 @@ URL 產生是路由可用來依據一組路由值建立 URL 路徑的處理序�
 
 <xref:Microsoft.AspNetCore.Routing.LinkGenerator> 提供的方法支援適用於任何位址類型的標準連結產生功能。 使用連結產生器的最便利方式是透過執行特定位址類型作業的擴充方法。
 
-| 擴充方法   | 描述                                                         |
+| 擴充方法   | 說明                                                         |
 | ------------------ | ------------------------------------------------------------------- |
 | <xref:Microsoft.AspNetCore.Routing.LinkGenerator.GetPathByAddress*> | 根據提供的值產生具有絕對路徑的 URI。 |
 | <xref:Microsoft.AspNetCore.Routing.LinkGenerator.GetUriByAddress*> | 根據提供的值產生絕對 URI。             |
@@ -1438,7 +1438,7 @@ URL 模式嘗試擷取具有選擇性副檔名的檔案名稱時，具有其他�
 
 下表示範範例路由條件約束及其預期行為。
 
-| 條件約束 | 範例 | 範例相符項目 | 注意 |
+| 條件約束 | 範例 | 範例相符項目 | 備註 |
 |------------|---------|-----------------|-------|
 | `int` | `{id:int}` | `123456789`, `-123456789` | 符合任何整數。|
 | `bool` | `{active:bool}` | `true`, `FALSE` | 符合 `true` 或 `false` 。 不區分大小寫。|
@@ -1490,12 +1490,12 @@ ASP.NET Core 架構將 `RegexOptions.IgnoreCase | RegexOptions.Compiled | RegexO
 
 | 運算是   | String    | 比對 | 註解               |
 | ------------ | --------- | :---: |  -------------------- |
-| `[a-z]{2}`   | hello     | 是   | 子字串相符項目     |
-| `[a-z]{2}`   | 123abc456 | 是   | 子字串相符項目     |
-| `[a-z]{2}`   | mz        | 是   | 符合運算式    |
-| `[a-z]{2}`   | MZ        | 是   | 不區分大小寫    |
-| `^[a-z]{2}$` | hello     | 否    | 請參閱上述的 `^` 和 `$` |
-| `^[a-z]{2}$` | 123abc456 | 否    | 請參閱上述的 `^` 和 `$` |
+| `[a-z]{2}`   | hello     | Yes   | 子字串相符項目     |
+| `[a-z]{2}`   | 123abc456 | Yes   | 子字串相符項目     |
+| `[a-z]{2}`   | mz        | Yes   | 符合運算式    |
+| `[a-z]{2}`   | MZ        | Yes   | 不區分大小寫    |
+| `^[a-z]{2}$` | hello     | No    | 請參閱上述的 `^` 和 `$` |
+| `^[a-z]{2}$` | 123abc456 | No    | 請參閱上述的 `^` 和 `$` |
 
 如需規則運算式語法的詳細資訊，請參閱 [.NET Framework 規則運算式](/dotnet/standard/base-types/regular-expression-language-quick-reference)。
 
@@ -1888,7 +1888,7 @@ URL 模式嘗試擷取具有選擇性副檔名的檔案名稱時，具有其他�
 
 下表示範範例路由條件約束及其預期行為。
 
-| constraint (條件約束) | 範例 | 範例相符項目 | 注意 |
+| constraint (條件約束) | 範例 | 範例相符項目 | 備註 |
 | ---------- | ------- | --------------- | ----- |
 | `int` | `{id:int}` | `123456789`, `-123456789` | 符合任何整數 |
 | `bool` | `{active:bool}` | `true`, `FALSE` | 符合 `true` 或 `false` (不區分大小寫) |
@@ -1934,12 +1934,12 @@ ASP.NET Core 架構將 `RegexOptions.IgnoreCase | RegexOptions.Compiled | RegexO
 
 | 運算是   | String    | 比對 | 註解               |
 | ------------ | --------- | :---: |  -------------------- |
-| `[a-z]{2}`   | hello     | 是   | 子字串相符項目     |
-| `[a-z]{2}`   | 123abc456 | 是   | 子字串相符項目     |
-| `[a-z]{2}`   | mz        | 是   | 符合運算式    |
-| `[a-z]{2}`   | MZ        | 是   | 不區分大小寫    |
-| `^[a-z]{2}$` | hello     | 否    | 請參閱上述的 `^` 和 `$` |
-| `^[a-z]{2}$` | 123abc456 | 否    | 請參閱上述的 `^` 和 `$` |
+| `[a-z]{2}`   | hello     | Yes   | 子字串相符項目     |
+| `[a-z]{2}`   | 123abc456 | Yes   | 子字串相符項目     |
+| `[a-z]{2}`   | mz        | Yes   | 符合運算式    |
+| `[a-z]{2}`   | MZ        | Yes   | 不區分大小寫    |
+| `^[a-z]{2}$` | hello     | No    | 請參閱上述的 `^` 和 `$` |
+| `^[a-z]{2}$` | 123abc456 | No    | 請參閱上述的 `^` 和 `$` |
 
 如需規則運算式語法的詳細資訊，請參閱 [.NET Framework 規則運算式](/dotnet/standard/base-types/regular-expression-language-quick-reference)。
 

@@ -18,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: security/authentication/certauth
-ms.openlocfilehash: 83525a4c1e87a60b57130c1bba14360c7d03f552
-ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
+ms.openlocfilehash: 71f05163c075a2ef88d5c606814925cdcef879d2
+ms.sourcegitcommit: 063a06b644d3ade3c15ce00e72a758ec1187dd06
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 10/30/2020
-ms.locfileid: "93061375"
+ms.lasthandoff: 01/16/2021
+ms.locfileid: "98253042"
 ---
 # <a name="configure-certificate-authentication-in-aspnet-core"></a>在 ASP.NET Core 中設定憑證驗證
 
@@ -152,37 +152,37 @@ public void Configure(IApplicationBuilder app, IHostingEnvironment env)
   * 判斷您的服務是否知道憑證。
   * 建立您自己的主體。 請考慮 `Startup.ConfigureServices` 中的下列範例：
 
-```csharp
-services.AddAuthentication(
-    CertificateAuthenticationDefaults.AuthenticationScheme)
-    .AddCertificate(options =>
-    {
-        options.Events = new CertificateAuthenticationEvents
+    ```csharp
+    services.AddAuthentication(
+        CertificateAuthenticationDefaults.AuthenticationScheme)
+        .AddCertificate(options =>
         {
-            OnCertificateValidated = context =>
+            options.Events = new CertificateAuthenticationEvents
             {
-                var claims = new[]
+                OnCertificateValidated = context =>
                 {
-                    new Claim(
-                        ClaimTypes.NameIdentifier, 
-                        context.ClientCertificate.Subject,
-                        ClaimValueTypes.String, 
-                        context.Options.ClaimsIssuer),
-                    new Claim(ClaimTypes.Name,
-                        context.ClientCertificate.Subject,
-                        ClaimValueTypes.String, 
-                        context.Options.ClaimsIssuer)
-                };
-
-                context.Principal = new ClaimsPrincipal(
-                    new ClaimsIdentity(claims, context.Scheme.Name));
-                context.Success();
-
-                return Task.CompletedTask;
-            }
-        };
-    });
-```
+                    var claims = new[]
+                    {
+                        new Claim(
+                            ClaimTypes.NameIdentifier, 
+                            context.ClientCertificate.Subject,
+                            ClaimValueTypes.String, 
+                            context.Options.ClaimsIssuer),
+                        new Claim(ClaimTypes.Name,
+                            context.ClientCertificate.Subject,
+                            ClaimValueTypes.String, 
+                            context.Options.ClaimsIssuer)
+                    };
+    
+                    context.Principal = new ClaimsPrincipal(
+                        new ClaimsIdentity(claims, context.Scheme.Name));
+                    context.Success();
+    
+                    return Task.CompletedTask;
+                }
+            };
+        });
+    ```
 
 如果您發現輸入憑證不符合額外的驗證，請呼叫 `context.Fail("failure reason")` 失敗原因。
 
@@ -260,15 +260,15 @@ public static IHostBuilder CreateHostBuilder(string[] args)
 ```
 
 > [!NOTE]
-> 在呼叫之前呼叫所建立的端點 <xref:Microsoft.AspNetCore.Server.Kestrel.Core.KestrelServerOptions.Listen*> **before** <xref:Microsoft.AspNetCore.Server.Kestrel.Core.KestrelServerOptions.ConfigureHttpsDefaults*> ，將不會套用預設值。
+> 在呼叫之前呼叫所建立的端點 <xref:Microsoft.AspNetCore.Server.Kestrel.Core.KestrelServerOptions.Listen*>  <xref:Microsoft.AspNetCore.Server.Kestrel.Core.KestrelServerOptions.ConfigureHttpsDefaults*> ，將不會套用預設值。
 
 ### <a name="iis"></a>IIS
 
 在 IIS 管理員中完成下列步驟：
 
 1. 從 [ **連接** ] 索引標籤中選取您的網站。
-1. 在 [ **功能] 視圖** 視窗中，按兩下 [ **SSL 設定** ] 選項。
-1. 選取 [ **需要 SSL** ] 核取方塊，然後在 [ **用戶端憑證** ] 區段中選取 [ **需要** ] 選項按鈕。
+1. 在 [**功能] 視圖** 視窗中，按兩下 [ **SSL 設定**] 選項。
+1. 選取 [**需要 SSL** ] 核取方塊，然後在 [**用戶端憑證**] 區段中選取 [**需要**] 選項按鈕。
 
 ![IIS 中的用戶端憑證設定](README-IISConfig.png)
 
@@ -301,7 +301,7 @@ public void ConfigureServices(IServiceCollection services)
         options.HeaderConverter = (headerValue) =>
         {
             X509Certificate2 clientCertificate = null;
-        
+
             if(!string.IsNullOrWhiteSpace(headerValue))
             {
                 byte[] bytes = StringToByteArray(headerValue);
@@ -638,6 +638,24 @@ ASP.NET Core 5 preview 7 和更新版本為選用用戶端憑證新增更便利�
 
 下列方法支援選用用戶端憑證：
 
+::: moniker range=">= aspnetcore-5.0"
+
+* 設定網域和子域的系結：
+  * 例如，在和上設定系 `contoso.com` 結 `myClient.contoso.com` 。 `contoso.com`主機不需要用戶端憑證，而是 `myClient.contoso.com` 。
+  * 如需詳細資訊，請參閱
+    * [Kestrel](/fundamentals/servers/kestrel)：
+      * [ListenOptions.UseHttps](xref:fundamentals/servers/kestrel/endpoints#listenoptionsusehttps)
+      * <xref:Microsoft.AspNetCore.Server.Kestrel.Https.HttpsConnectionAdapterOptions.ClientCertificateMode>
+      * 注意 Kestrel 目前不支援一個系結上的多個 TLS 設定，您需要兩個具有唯一 Ip 或埠的系結。 請參閱https://github.com/dotnet/runtime/issues/31097
+    * IIS
+      * [裝載 IIS](xref:host-and-deploy/iis/index#create-the-iis-site)
+      * [在 IIS 上設定安全性](/iis/manage/configuring-security/how-to-set-up-ssl-on-iis#configure-ssl-settings-2)
+    * Http.Sys： [設定 Windows Server](xref:fundamentals/servers/httpsys#configure-windows-server)
+
+::: moniker-end
+
+::: moniker range="< aspnetcore-5.0"
+
 * 設定網域和子域的系結：
   * 例如，在和上設定系 `contoso.com` 結 `myClient.contoso.com` 。 `contoso.com`主機不需要用戶端憑證，而是 `myClient.contoso.com` 。
   * 如需詳細資訊，請參閱
@@ -649,6 +667,9 @@ ASP.NET Core 5 preview 7 和更新版本為選用用戶端憑證新增更便利�
       * [裝載 IIS](xref:host-and-deploy/iis/index#create-the-iis-site)
       * [在 IIS 上設定安全性](/iis/manage/configuring-security/how-to-set-up-ssl-on-iis#configure-ssl-settings-2)
     * Http.Sys： [設定 Windows Server](xref:fundamentals/servers/httpsys#configure-windows-server)
+
+::: moniker-end
+
 * 針對需要用戶端憑證且沒有用戶端憑證的 web 應用程式要求：
   * 使用受用戶端憑證保護的子域重新導向至相同的頁面。
   * 例如，重新導向至 `myClient.contoso.com/requestedPage` 。 因為的要求與 `myClient.contoso.com/requestedPage` 不同的主機名稱 `contoso.com/requestedPage` ，用戶端會建立不同的連線，並提供用戶端憑證。

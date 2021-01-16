@@ -5,7 +5,7 @@ description: 瞭解如何建立 Blazor (PWA) 的漸進式 Web 應用程式，該
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 06/10/2020
+ms.date: 01/11/2020
 no-loc:
 - appsettings.json
 - ASP.NET Core Identity
@@ -19,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/progressive-web-app
-ms.openlocfilehash: f400319ef81b3d7768bdbdab84f46d3f9c50bb46
-ms.sourcegitcommit: 3593c4efa707edeaaceffbfa544f99f41fc62535
+ms.openlocfilehash: 196e19528341e98ac06cefb08ba92f9e47d265ea
+ms.sourcegitcommit: 063a06b644d3ade3c15ce00e72a758ec1187dd06
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 01/04/2021
-ms.locfileid: "96855439"
+ms.lasthandoff: 01/16/2021
+ms.locfileid: "98252470"
 ---
 # <a name="build-progressive-web-applications-with-aspnet-core-no-locblazor-webassembly"></a>使用 ASP.NET Core 建立漸進式 Web 應用程式 Blazor WebAssembly
 
@@ -59,15 +59,109 @@ ms.locfileid: "96855439"
 
 # <a name="visual-studio-code--net-core-cli"></a>[Visual Studio Code / .NET Core CLI](#tab/visual-studio-code+netcore-cli)
 
-在命令列介面中使用參數建立 PWA 專案 `--pwa` ：
+使用下列命令，在命令列中使用參數建立 PWA 專案 `--pwa` ：
 
 ```dotnetcli
-dotnet new blazorwasm -o MyNewProject --pwa
+dotnet new blazorwasm -o MyBlazorPwa --pwa
 ```
+
+在上述命令中，選項會為 `-o|--output` 應用程式建立名為的新資料夾 `MyBlazorPwa` 。
 
 ---
 
 （選擇性）您可以針對從 ASP.NET Core 裝載的範本建立的應用程式設定 PWA。 PWA 案例與裝載模型無關。
+
+## <a name="convert-an-existing-no-locblazor-webassembly-app-into-a-pwa"></a>將現有的 Blazor WebAssembly 應用程式轉換為 PWA
+
+Blazor WebAssembly遵循本節中的指導方針，將現有的應用程式轉換為 PWA。
+
+在應用程式的專案檔中：
+
+* 將下列 `ServiceWorkerAssetsManifest` 屬性新增至 `PropertyGroup` ：
+
+  ```xml
+    ...
+    <ServiceWorkerAssetsManifest>service-worker-assets.js</ServiceWorkerAssetsManifest>
+  </PropertyGroup>
+   ```
+
+* 將下列 `ServiceWorker` 專案加入至 `ItemGroup` ：
+
+  ```xml
+  <ItemGroup>
+    <ServiceWorker Include="wwwroot\service-worker.js" 
+      PublishedContent="wwwroot\service-worker.published.js" />
+  </ItemGroup>
+  ```
+
+若要取得靜態資產，請使用下列 **其中一** 種方法：
+
+::: moniker range=">= aspnetcore-5.0"
+
+* 使用命令 shell 中的命令，建立個別的新 PWA 專案 [`dotnet new`](/dotnet/core/tools/dotnet-new) ：
+
+  ```dotnetcli
+  dotnet new blazorwasm -o MyBlazorPwa --pwa
+  ```
+  
+  在上述命令中，選項會為 `-o|--output` 應用程式建立名為的新資料夾 `MyBlazorPwa` 。
+  
+  如果您未將應用程式轉換為最新版本，請傳遞 `-f|--framework` 選項。 下列範例會建立適用于 ASP.NET Core 3.1 版的應用程式：
+  
+  ```dotnetcli
+  dotnet new blazorwasm -o MyBlazorPwa --pwa -f netcoreapp3.1
+  ```
+
+* 流覽至位於下列 URL 的 ASP.NET Core GitHub 存放庫，其連結至5.0 版本參考來源和資產。 如果您未轉換5.0 版的應用程式，請從適用于您應用程式的 [ **切換分支或標記** ] 下拉式清單中，選取您正在使用的版本。
+
+  [dotnet/aspnetcore (版本 5.0) Blazor WebAssembly 專案範本 `wwwroot` 資料夾](https://github.com/dotnet/aspnetcore/tree/release/5.0/src/ProjectTemplates/Web.ProjectTemplates/content/ComponentsWebAssembly-CSharp/Client/wwwroot)
+
+::: moniker-end
+
+::: moniker range="< aspnetcore-5.0"
+
+* 使用命令 shell 中的命令，建立個別的新 PWA 專案 [`dotnet new`](/dotnet/core/tools/dotnet-new) 。 傳遞 `-f|--framework` 選項以選取版本。 下列範例會建立適用于 ASP.NET Core 3.1 版的應用程式：
+  
+  ```dotnetcli
+  dotnet new blazorwasm -o MyBlazorPwa --pwa -f netcoreapp3.1
+  ```
+  
+  在上述命令中，選項會為 `-o|--output` 應用程式建立名為的新資料夾 `MyBlazorPwa` 。
+
+* 流覽至位於下列 URL 的 ASP.NET Core GitHub 存放庫，其連結至3.1 版本參考來源和資產：
+
+  [dotnet/aspnetcore (版本 3.1) Blazor WebAssembly 專案範本 `wwwroot` 資料夾](https://github.com/dotnet/aspnetcore/tree/release/3.1/src/ProjectTemplates/ComponentsWebAssembly.ProjectTemplates/content/ComponentsWebAssembly-CSharp/Client/wwwroot)
+
+  > [!NOTE]
+  > 專案範本的 URL 會在 Blazor WebAssembly 發行 ASP.NET Core 3.1 之後變更。 您可以從下列 URL 取得5.0 或更新版本的參考資產：
+  >
+  > [dotnet/aspnetcore (版本 5.0) Blazor WebAssembly 專案範本 `wwwroot` 資料夾](https://github.com/dotnet/aspnetcore/tree/release/5.0/src/ProjectTemplates/Web.ProjectTemplates/content/ComponentsWebAssembly-CSharp/Client/wwwroot)
+
+::: moniker-end
+
+從 `wwwroot` 您建立的應用程式中或從 GitHub 存放庫中的參考資產的源資料夾 `dotnet/aspnetcore` ，將下列檔案複製到應用程式的 `wwwroot` 資料夾中：
+
+* `icon-512.png`
+* `manifest.json`
+* `service-worker.js`
+* `service-worker.published.js`
+
+在應用程式的檔案中 `wwwroot/index.html` ：
+
+* 新增 `<link>` 資訊清單和應用程式圖示的元素：
+
+  ```html
+  <link href="manifest.json" rel="manifest" />
+  <link rel="apple-touch-icon" sizes="512x512" href="icon-512.png" />
+  ```
+
+* 在 `<script>` `</body>` 腳本標記後面緊接著結束記號內新增下列標記 `blazor.webassembly.js` ：
+
+  ```html
+      ...
+      <script>navigator.serviceWorker.register('service-worker.js');</script>
+  </body>
+  ```
 
 ## <a name="installation-and-app-manifest"></a>安裝和應用程式資訊清單
 
@@ -95,7 +189,7 @@ dotnet new blazorwasm -o MyNewProject --pwa
 
 若要查看離線支援的運作方式：
 
-1. 發行應用程式。 如需詳細資訊，請參閱 <xref:blazor/host-and-deploy/index#publish-the-app> 。
+1. 發行應用程式。 如需詳細資訊，請參閱<xref:blazor/host-and-deploy/index#publish-the-app>。
 1. 將應用程式部署至支援 HTTPS 的伺服器，並在瀏覽器中以其安全的 HTTPS 位址存取應用程式。
 1. 開啟瀏覽器的開發工具，並確認已在 [**應用程式**] 索引標籤上註冊主機的 *服務工作者*：
 

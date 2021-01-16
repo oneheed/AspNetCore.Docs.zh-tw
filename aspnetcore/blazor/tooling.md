@@ -20,12 +20,12 @@ no-loc:
 - SignalR
 uid: blazor/tooling
 zone_pivot_groups: operating-systems
-ms.openlocfilehash: 4813668f5278473fbaae36d572e69700b3fe771a
-ms.sourcegitcommit: 3593c4efa707edeaaceffbfa544f99f41fc62535
+ms.openlocfilehash: 5901a1cb693dfe8e34e62ce2a28456bcf584221c
+ms.sourcegitcommit: 063a06b644d3ade3c15ce00e72a758ec1187dd06
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 01/04/2021
-ms.locfileid: "97764233"
+ms.lasthandoff: 01/16/2021
+ms.locfileid: "98252262"
 ---
 # <a name="tooling-for-aspnet-core-no-locblazor"></a>ASP.NET Core 的工具 Blazor
 
@@ -129,7 +129,7 @@ ms.locfileid: "97764233"
 
 ## <a name="use-visual-studio-code-for-cross-platform-no-locblazor-development"></a>使用 Visual Studio Code 進行跨平臺 Blazor 開發
 
-[Visual Studio Code](https://code.visualstudio.com/) 是一種開放原始碼、跨平臺的整合式開發環境， (可用來開發應用程式的 IDE) Blazor 。 使用 .NET CLI 來建立新的 Blazor 應用程式，以 Visual Studio Code 的開發。 如需詳細資訊，請參閱本文的 [Linux 版本](/aspnet/core/blazor/tooling?pivots=linux)。
+[Visual Studio Code](https://code.visualstudio.com/) 是一種開放原始碼、跨平臺的整合式開發環境， (可用來開發應用程式的 IDE) Blazor 。 使用 .NET CLI 來建立新的 Blazor 應用程式，以 Visual Studio Code 的開發。 如需詳細資訊，請參閱本文的 [Linux 版本](?pivots=linux)。
 
 ## <a name="no-locblazor-template-options"></a>Blazor 範本選項
 

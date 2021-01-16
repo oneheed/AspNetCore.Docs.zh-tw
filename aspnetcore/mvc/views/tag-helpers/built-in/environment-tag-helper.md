@@ -18,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: mvc/views/tag-helpers/builtin-th/environment-tag-helper
-ms.openlocfilehash: 4f8330521bb9114f6639c1889cc15ebd18adc0ed
-ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
+ms.openlocfilehash: d63364b0c052ba7f9e745e1ad829b8d1ca9122d2
+ms.sourcegitcommit: 063a06b644d3ade3c15ce00e72a758ec1187dd06
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 10/30/2020
-ms.locfileid: "93061128"
+ms.lasthandoff: 01/16/2021
+ms.locfileid: "98253120"
 ---
 # <a name="environment-tag-helper-in-aspnet-core"></a>ASP.NET Core 中的環境標籤協助程式
 
@@ -39,13 +39,13 @@ ms.locfileid: "93061128"
 
 `names` 會接受單一主控環境名稱或以逗號分隔的主控環境名稱清單，這些名稱會觸發轉譯含括的內容。
 
-環境值會與 [IHostingEnvironment.EnvironmentName](xref:Microsoft.AspNetCore.Hosting.IHostingEnvironment.EnvironmentName*) 所傳回的目前值比較。 比較會忽略大小寫。
+環境值會與 [IWebHostEnvironment. EnvironmentName](xref:Microsoft.AspNetCore.Hosting.IHostingEnvironment.EnvironmentName*)所傳回的目前值進行比較。 比較會忽略大小寫。
 
 下列範例使用環境標籤協助程式。 如果主控環境為「暫存」或「生產」，將會轉譯內容：
 
 ```cshtml
 <environment names="Staging,Production">
-    <strong>HostingEnvironment.EnvironmentName is Staging or Production</strong>
+    <strong>IWebHostEnvironment.EnvironmentName is Staging or Production</strong>
 </environment>
 ```
 
@@ -57,11 +57,11 @@ ms.locfileid: "93061128"
 
 ### <a name="include"></a>include
 
-`include` 屬性會表現出類似 `names` 屬性的行為。 `include` 屬性值中列出的環境，必須與應用程式的主控環境 ([IHostingEnvironment.EnvironmentName](xref:Microsoft.AspNetCore.Hosting.IHostingEnvironment.EnvironmentName*)) 相符，才能轉譯 `<environment>` 標籤的內容。
+`include` 屬性會表現出類似 `names` 屬性的行為。 屬性值中所列的環境 `include` 必須符合應用程式的裝載環境 ([IWebHostEnvironment EnvironmentName](xref:Microsoft.AspNetCore.Hosting.IHostingEnvironment.EnvironmentName*)) ，才能轉譯標記的內容 `<environment>` 。
 
 ```cshtml
 <environment include="Staging,Production">
-    <strong>HostingEnvironment.EnvironmentName is Staging or Production</strong>
+    <strong>IWebHostEnvironment.EnvironmentName is Staging or Production</strong>
 </environment>
 ```
 
@@ -71,7 +71,7 @@ ms.locfileid: "93061128"
 
 ```cshtml
 <environment exclude="Development">
-    <strong>HostingEnvironment.EnvironmentName is not Development</strong>
+    <strong>IWebHostEnvironment.EnvironmentName is not Development</strong>
 </environment>
 ```
 

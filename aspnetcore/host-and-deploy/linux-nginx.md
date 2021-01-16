@@ -1,7 +1,7 @@
 ---
 title: 在 Linux 上使用 Nginx 裝載 ASP.NET Core
 author: rick-anderson
-description: 了解如何在 Ubuntu 16.04 上將 Nginx 設定為反向 Proxy，以將 HTTP 流量轉送至在 Kestrel 上執行的 ASP.NET Core Web 應用程式。
+description: 瞭解如何在 Ubuntu 16.04 上將 Nginx 設定為反向 proxy，以將 HTTP 流量轉送至在 Kestrel 上執行的 ASP.NET Core web 應用程式。
 monikerRange: '>= aspnetcore-2.1'
 ms.author: riande
 ms.custom: mvc
@@ -19,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: host-and-deploy/linux-nginx
-ms.openlocfilehash: c4e0d70b41221f272bb4b1fe82cfa531ec6fcf15
-ms.sourcegitcommit: 3593c4efa707edeaaceffbfa544f99f41fc62535
+ms.openlocfilehash: 6a8fd8e3498dda9b7c10834791e64df6276e2823
+ms.sourcegitcommit: 063a06b644d3ade3c15ce00e72a758ec1187dd06
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 01/04/2021
-ms.locfileid: "94431058"
+ms.lasthandoff: 01/16/2021
+ms.locfileid: "98253016"
 ---
 # <a name="host-aspnet-core-on-linux-with-nginx"></a>在 Linux 上使用 Nginx 裝載 ASP.NET Core
 
@@ -44,7 +44,7 @@ ms.locfileid: "94431058"
 * 確保 Web 應用程式在啟動時以精靈的形式執行。
 * 設定程序管理工具以協助重新啟動 Web 應用程式。
 
-## <a name="prerequisites"></a>先決條件
+## <a name="prerequisites"></a>必要條件
 
 1. 以 sudo 權限使用標準使用者帳戶存取 Ubuntu 16.04 伺服器。
 1. 在伺服器上安裝 .NET Core 執行階段。
@@ -97,7 +97,7 @@ Kestrel 非常適用於從 ASP.NET Core 提供動態內容。 不過，Web 服�
 
 [!INCLUDE[](~/includes/ForwardedHeaders.md)]
 
-<xref:Microsoft.AspNetCore.Builder.ForwardedHeadersExtensions.UseForwardedHeaders*>在 `Startup.Configure` 呼叫其他中介軟體之前，先在頂端叫用方法。 請設定中介軟體來轉送 `X-Forwarded-For` 和 `X-Forwarded-Proto` 標頭：
+<xref:Microsoft.AspNetCore.Builder.ForwardedHeadersExtensions.UseForwardedHeaders%2A>在 `Startup.Configure` 呼叫其他中介軟體之前，先在頂端叫用方法。 請設定中介軟體來轉送 `X-Forwarded-For` 和 `X-Forwarded-Proto` 標頭：
 
 ```csharp
 using Microsoft.AspNetCore.HttpOverrides;
@@ -114,7 +114,7 @@ app.UseAuthentication();
 
 如果未將任何 <xref:Microsoft.AspNetCore.Builder.ForwardedHeadersOptions> 指定給中介軟體，則要轉送的預設標頭會是 `None`。
 
-預設會信任在回送位址上執行的 proxy (`127.0.0.0/8` 、 `[::1]`) （包括標準 localhost 位址 (`127.0.0.1`) ）。 如果組織內有其他受信任的 Proxy 或網路處理網際網路與網頁伺服器之間的要求，請使用 <xref:Microsoft.AspNetCore.Builder.ForwardedHeadersOptions>，將其新增至 <xref:Microsoft.AspNetCore.Builder.ForwardedHeadersOptions.KnownProxies*> 或 <xref:Microsoft.AspNetCore.Builder.ForwardedHeadersOptions.KnownNetworks*> 清單。 下列範例會將 IP 位址 10.0.0.100 的受信任 Proxy 伺服器新增至 `Startup.ConfigureServices` 中「轉送的標頭中介軟體」的 `KnownProxies`：
+預設會信任在回送位址上執行的 proxy (`127.0.0.0/8` 、 `[::1]`) （包括標準 localhost 位址 (`127.0.0.1`) ）。 如果組織內有其他受信任的 Proxy 或網路處理網際網路與網頁伺服器之間的要求，請使用 <xref:Microsoft.AspNetCore.Builder.ForwardedHeadersOptions>，將其新增至 <xref:Microsoft.AspNetCore.Builder.ForwardedHeadersOptions.KnownProxies%2A> 或 <xref:Microsoft.AspNetCore.Builder.ForwardedHeadersOptions.KnownNetworks%2A> 清單。 下列範例會將 IP 位址 10.0.0.100 的受信任 Proxy 伺服器新增至 `Startup.ConfigureServices` 中「轉送的標頭中介軟體」的 `KnownProxies`：
 
 ```csharp
 using System.Net;
@@ -127,7 +127,7 @@ services.Configure<ForwardedHeadersOptions>(options =>
 });
 ```
 
-如需詳細資訊，請參閱 <xref:host-and-deploy/proxy-load-balancer> 。
+如需詳細資訊，請參閱<xref:host-and-deploy/proxy-load-balancer>。
 
 ### <a name="install-nginx"></a>安裝 Nginx
 
@@ -146,7 +146,7 @@ sudo service nginx start
 
 ### <a name="configure-nginx"></a>設定 Nginx
 
-若要將 Nginx 設定為反向 proxy，以將 HTTP 要求轉送至 ASP.NET Core 應用程式，請修改 `/etc/nginx/sites-available/default` 。 以文字編輯器開啟它，並以下列項目取代內容：
+若要將 Nginx 設定為反向 proxy，以將 HTTP 要求轉送至 ASP.NET Core 應用程式，請修改 `/etc/nginx/sites-available/default` 。 在文字編輯器中開啟它，並將內容取代為下列程式碼片段：
 
 ```nginx
 server {
@@ -165,9 +165,9 @@ server {
 }
 ```
 
-如果應用程式是 SignalR 或應用程式， Blazor Server 請 <xref:signalr/scale#linux-with-nginx> 分別參閱和， <xref:blazor/host-and-deploy/server#linux-with-nginx> 以取得詳細資訊。
+如果應用程式是 SignalR 或 Blazor Server 應用程式，請 <xref:signalr/scale#linux-with-nginx> 分別參閱和， <xref:blazor/host-and-deploy/server#linux-with-nginx> 以取得詳細資訊。
 
-當沒有任何與 `server_name` 相符的項目時，Nginx 會使用預設伺服器。 如果未定義任何預設伺服器，則設定檔中的第一個伺服器就是預設伺服器。 最佳做法是，在您的設定檔中新增一個會傳回狀態碼 444 的特定預設伺服器。 預設伺服器設定範例如下：
+當沒有任何與 `server_name` 相符的項目時，Nginx 會使用預設伺服器。 如果未定義任何預設伺服器，則設定檔中的第一個伺服器就是預設伺服器。 最佳做法是在您的設定檔中新增會傳回狀態碼444的特定預設伺服器。 預設伺服器設定範例如下：
 
 ```nginx
 server {
@@ -177,10 +177,20 @@ server {
 }
 ```
 
-使用上述設定檔和預設伺服器時，Nginx 會在連接埠 80 接受主機標頭為 `example.com` 或 `*.example.com` 的公用流量。 不符合這些主機的要求將不會轉送至 Kestrel。 Nginx 會將相符的要求轉送至位於 `http://localhost:5000` 的 Kestrel。 如需詳細資訊，請參閱 [nginx 如何處理要求](https://nginx.org/docs/http/request_processing.html) \(英文\)。 若要變更 Kestrel 的 IP/連接埠，請參閱 [Kestrel：端點組態](xref:fundamentals/servers/kestrel#endpoint-configuration)。
+::: moniker range=">= aspnetcore-5.0"
+
+使用上述設定檔和預設伺服器時，Nginx 會在連接埠 80 接受主機標頭為 `example.com` 或 `*.example.com` 的公用流量。 不符合這些主機的要求將不會轉送至 Kestrel。 Nginx 會將相符的要求轉送至位於 `http://localhost:5000` 的 Kestrel。 如需詳細資訊，請參閱 [nginx 處理要求的方式](https://nginx.org/docs/http/request_processing.html)。 若要變更 Kestrel 的 IP/連接埠，請參閱 [Kestrel：端點組態](xref:fundamentals/servers/kestrel/endpoints)。
+
+::: moniker-end
+
+::: moniker range="< aspnetcore-5.0"
+
+使用上述設定檔和預設伺服器時，Nginx 會在連接埠 80 接受主機標頭為 `example.com` 或 `*.example.com` 的公用流量。 不符合這些主機的要求將不會轉送至 Kestrel。 Nginx 會將相符的要求轉送至位於 `http://localhost:5000` 的 Kestrel。 如需詳細資訊，請參閱 [nginx 處理要求的方式](https://nginx.org/docs/http/request_processing.html)。 若要變更 Kestrel 的 IP/連接埠，請參閱 [Kestrel：端點組態](xref:fundamentals/servers/kestrel#endpoint-configuration)。
+
+::: moniker-end
 
 > [!WARNING]
-> 如果無法指定適當的 [server_name 指示詞](https://nginx.org/docs/http/server_names.html)，就會讓應用程式暴露在安全性弱點的風險下。 若您擁有整個父網域 (相對於易受攻擊的 `*.com`) 的控制權，子網域萬用字元繫結 (例如 `*.example.com`) 就沒有此安全性風險。 如需詳細資訊，請參閱 [rfc7230 5.4 節](https://tools.ietf.org/html/rfc7230#section-5.4)。
+> 如果無法指定適當的 [server_name 指示詞](https://nginx.org/docs/http/server_names.html)，就會讓應用程式暴露在安全性弱點的風險下。 若您擁有整個父網域 (相對於易受攻擊的 `*.com`) 的控制權，子網域萬用字元繫結 (例如 `*.example.com`) 就沒有此安全性風險。 如需詳細資訊，請參閱 [rfc7230 章節-5.4](https://tools.ietf.org/html/rfc7230#section-5.4)。
 
 建立 Nginx 設定之後，請執行 `sudo nginx -t` 來確認設定檔的語法。 如果設定檔測試成功，請執行 `sudo nginx -s reload` 來強制 Nginx 套用這些變更。
 
@@ -189,13 +199,13 @@ server {
 1. 巡覽至應用程式目錄。
 1. 執行應用程式：`dotnet <app_assembly.dll>`，其中 `app_assembly.dll` 是應用程式的組件檔名稱。
 
-如果應用程式在伺服器上執行，但無法透過網際網路回應，請檢查伺服器的防火牆，確認連接埠 80 已開啟。 如果使用的是 Azure Ubuntu VM，請新增啓用輸入連接埠 80 流量的網路安全性群組 (NSG) 規則。 沒有必要啟用輸出連接埠 80 規則，因為啓用輸入規則時會自動授與輸出流量。
+如果應用程式在伺服器上執行，但無法透過網際網路回應，請檢查伺服器的防火牆，並確認埠80已開啟。 如果使用的是 Azure Ubuntu VM，請新增啓用輸入連接埠 80 流量的網路安全性群組 (NSG) 規則。 沒有必要啟用輸出連接埠 80 規則，因為啓用輸入規則時會自動授與輸出流量。
 
-應用程式測試完成後，請在命令提示字元以 `Ctrl+C` 關閉應用程式。
+完成測試應用程式時，請在命令提示字元下使用<kbd>Ctrl +</kbd>關閉應用程式  +  <kbd></kbd> 。
 
 ## <a name="monitor-the-app"></a>監視應用程式
 
-伺服器已設定完成，可將對 `http://<serveraddress>:80` 發出的要求轉送給在位於 `http://127.0.0.1:5000` 的 Kestrel 上執行的 ASP.NET Core 應用程式。 不過，並未設定 Nginx 來管理 Kestrel 處理序。 `systemd` 可以用來建立服務檔案，以啟動並監視基礎 web 應用程式。 `systemd` 是 init 系統，提供許多強大的功能來啟動、停止及管理進程。 
+伺服器會設定為將對執行的要求轉寄至在 `http://<serveraddress>:80` Kestrel 上執行的 ASP.NET Core 應用程式 `http://127.0.0.1:5000` 。 不過，並未設定 Nginx 來管理 Kestrel 處理序。 `systemd` 可以用來建立服務檔案，以啟動並監視基礎 web 應用程式。 `systemd` 是 init 系統，提供許多強大的功能來啟動、停止及管理進程。 
 
 ### <a name="create-the-service-file"></a>建立服務檔
 
@@ -205,7 +215,7 @@ server {
 sudo nano /etc/systemd/system/kestrel-helloapp.service
 ```
 
-以下是一個應用程式範例服務檔：
+下列範例是應用程式的服務檔：
 
 ```ini
 [Unit]
@@ -298,7 +308,7 @@ Transfer-Encoding: chunked
 sudo journalctl -fu kestrel-helloapp.service
 ```
 
-如需進一步篩選，例如 `--since today`、`--until 1 hour ago` 或這些項目的組合等時間選項，可以減少傳回的項目數量。
+如需進一步的篩選，時間選項（例如 `--since today` 、 `--until 1 hour ago` 或）的組合可以減少傳回的專案數。
 
 ```bash
 sudo journalctl -fu kestrel-helloapp.service --since "2016-10-18" --until "2016-10-18 04:00"
@@ -335,11 +345,11 @@ Proxy 伺服器預設設定通常會將要求標頭欄位限制為 4 K 或 8 K �
 
 ### <a name="enable-apparmor"></a>啟用 AppArmor
 
-Linux 安全性模組 (LSM) 是 Linux 2.6 之後 Linux 核心所包含的一個架構。 LSM 支援不同的安全性模組實作。 [AppArmor](https://wiki.ubuntu.com/AppArmor) 是 LSM，它實作的必要存取控制系統，可將程式限定在有限的資源集中。 確定已啟用並正確設定 AppArmor。
+Linux 安全性模組 (LSM) 是 Linux 2.6 之後 Linux 核心所包含的一個架構。 LSM 支援不同的安全性模組實作。 [AppArmor](https://wiki.ubuntu.com/AppArmor) 是一個 LSM，可執行強制存取控制系統，讓您將程式將到一組有限的資源。 確定已啟用並正確設定 AppArmor。
 
 ### <a name="configure-the-firewall"></a>設定防火牆
 
-關閉所有不在使用中的外部連接埠。 簡單的防火牆 (ufw) 提供可設定防火牆的 CLI 來提供前端 `iptables` 。
+關閉所有未使用的外部埠。 簡單的防火牆 (ufw) 提供可設定防火牆的 CLI 來提供前端 `iptables` 。
 
 > [!WARNING]
 > 如未正確設定，防火牆會禁止存取整個系統。 未指定正確的 SSH 連接埠，將會導致您無法存取系統 (若您使用 SSH 連線至該連接埠)。 預設連接埠為 22。 如需詳細資訊，請參閱 [ufw 簡介](https://help.ubuntu.com/community/UFW)與[手冊](https://manpages.ubuntu.com/manpages/bionic/man8/ufw.8.html)。
@@ -375,18 +385,29 @@ static char ngx_http_server_full_string[] = "Server: Web Server" CRLF;
 
 **設定應用程式以進行安全的本機連線 (HTTPS)**
 
-[Dotnet run](/dotnet/core/tools/dotnet-run)命令使用應用程式的檔案 `Properties/launchSettings.json` ，其會將應用程式設定為在屬性提供的 url 上接聽 `applicationUrl` (例如 `https://localhost:5001;http://localhost:5000`) 。
+[Dotnet run](/dotnet/core/tools/dotnet-run)命令使用應用程式的 *Properties/launchSettings.json* 檔案，其會將應用程式設定為在屬性提供的 url 上接聽 `applicationUrl` 。 例如： `https://localhost:5001;http://localhost:5000` 。
 
 使用下列其中一種方法，將應用程式設定為在 `dotnet run` 命令或開發環境的開發環境中使用憑證 (<kbd>F5</kbd>或<kbd>Ctrl</kbd> + <kbd>F5</kbd> Visual Studio Code) ：
+
+::: moniker range=">= aspnetcore-5.0"
+
+* [取代組態中的預設憑證](xref:fundamentals/servers/kestrel/endpoints#configuration) (建議使用)
+* [KestrelServerOptions.ConfigureHttpsDefaults](xref:fundamentals/servers/kestrel/endpoints#configurehttpsdefaultsactionhttpsconnectionadapteroptions)
+
+::: moniker-end
+
+::: moniker range="< aspnetcore-5.0"
 
 * [取代組態中的預設憑證](xref:fundamentals/servers/kestrel#configuration) (建議使用)
 * [KestrelServerOptions.ConfigureHttpsDefaults](xref:fundamentals/servers/kestrel#configurehttpsdefaultsactionhttpsconnectionadapteroptions)
 
+::: moniker-end
+
 **設定反向 Prooxy 以進行安全的用戶端連線 (HTTPS)**
 
-* 藉由指定由受信任憑證授權單位 (CA) 核發的有效憑證，將伺服器設定成在連接埠 `443` 上接聽 HTTPS 流量。
+* 藉由指定由受信任的憑證授權單位單位所簽發的有效憑證 (CA) ，將伺服器設定為接聽埠443上的 HTTPS 流量。
 
-* 採用下列檔案中所述的一些作法，強化安全性 `/etc/nginx/nginx.conf` 。 範例包括選擇更強的加密，重新導向 HTTPS 到 HTTP 的所有流量。
+* 採用以下 */etc/nginx/nginx.conf* 檔案所述的一些做法來強化安全性。 範例包括選擇更強的加密，重新導向 HTTPS 到 HTTP 的所有流量。
 
   > [!NOTE]
   > 針對開發環境，我們建議使用暫時性重新導向 (302) 而不是永久重新導向 (301) 。 連結快取可能會在開發環境中造成不穩定的行為。
@@ -400,16 +421,16 @@ static char ngx_http_server_full_string[] = "Server: Web Server" CRLF;
   * 請勿新增 HSTS 標頭。
   * 選擇簡短 `max-age` 值。
 
-新增 `/etc/nginx/proxy.conf` 設定檔：
+新增 */etc/nginx/Proxy.conf* 組態檔：
 
 [!code-nginx[](linux-nginx/proxy.conf)]
 
-將設定檔的內容 **取代** 為 `/etc/nginx/nginx.conf` 下列檔案。 此範例在一個組態檔中同時包含 `http` 和 `server` 區段。
+將 */etc/nginx/nginx.conf* 設定檔的內容 **取代** 為下列檔案。 此範例在一個組態檔中同時包含 `http` 和 `server` 區段。
 
 [!code-nginx[](linux-nginx/nginx.conf?highlight=2)]
 
 > [!NOTE]
-> Blazor WebAssembly 應用程式需要較大的 `burst` 參數值，以容納應用程式所提出的大量要求。 如需詳細資訊，請參閱 <xref:blazor/host-and-deploy/webassembly#nginx> 。
+> Blazor WebAssembly 應用程式需要較大的 `burst` 參數值，以容納應用程式所提出的大量要求。 如需詳細資訊，請參閱<xref:blazor/host-and-deploy/webassembly#nginx>。
 
 #### <a name="secure-nginx-from-clickjacking"></a>保護 Nginx 免於點閱綁架
 
@@ -417,7 +438,7 @@ static char ngx_http_server_full_string[] = "Server: Web Server" CRLF;
 
 減輕點擊劫持攻擊：
 
-1. 編輯檔案 `nginx.conf` ：
+1. 編輯 *nginx.conf* 檔案：
 
    ```bash
    sudo nano /etc/nginx/nginx.conf
@@ -432,7 +453,7 @@ static char ngx_http_server_full_string[] = "Server: Web Server" CRLF;
 
 此標頭會防止大部分的瀏覽器對遠離宣告內容類型的回應進行 MIME 探查，因為標頭會指示瀏覽器不要覆寫回應內容類型。 使用 `nosniff` 選項時，如果伺服器顯示的內容是 `text/html` ，則瀏覽器會將它轉譯為 `text/html` 。
 
-1. 編輯檔案 `nginx.conf` ：
+1. 編輯 *nginx.conf* 檔案：
 
    ```bash
    sudo nano /etc/nginx/nginx.conf

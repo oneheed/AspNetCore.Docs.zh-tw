@@ -19,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/components/index
-ms.openlocfilehash: a2738ab40e2a463a0166ce8916ed6f1b05ea1d08
-ms.sourcegitcommit: a71bb61f7add06acb949c9258fe506914dfe0c08
+ms.openlocfilehash: 12a1f528bdff0230bbf17075284d27de654a423e
+ms.sourcegitcommit: 063a06b644d3ade3c15ce00e72a758ec1187dd06
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 12/08/2020
-ms.locfileid: "96855374"
+ms.lasthandoff: 01/16/2021
+ms.locfileid: "98252418"
 ---
 # <a name="create-and-use-aspnet-core-no-locrazor-components"></a>建立和使用 ASP.NET Core Razor 元件
 
@@ -40,12 +40,12 @@ Blazor 應用程式是使用 *元件* 建立的。 元件是獨立的使用者�
 
 ### <a name="no-locrazor-syntax"></a>Razor 語法
 
-Razor 應用程式中的元件會 Blazor 廣泛使用 Razor 語法。 如果您不熟悉 Razor 標記語言，建議您 <xref:mvc/views/razor> 在繼續之前先閱讀。
+Razor 應用程式中的元件會 Blazor 廣泛使用 Razor 語法。 如果您不熟悉 Razor 標記語言，建議您先閱讀[ Razor ASP.NET Core 的語法參考](xref:mvc/views/razor)，再繼續進行。
 
 存取語法上的內容時 Razor ，請特別注意下列各節：
 
-* [Directives](xref:mvc/views/razor#directives) `@` 指示詞：前置詞保留關鍵字，通常會變更元件標記的剖析或運作方式。
-* [Directive attributes](xref:mvc/views/razor#directive-attributes) `@` 指示詞屬性：-前置詞，通常會變更元件元素剖析或運作的方式。
+* [](xref:mvc/views/razor#directives) `@` 指示詞：前置詞保留關鍵字，通常會變更元件標記的剖析或運作方式。
+* [](xref:mvc/views/razor#directive-attributes) `@` 指示詞屬性：-前置詞，通常會變更元件元素剖析或運作的方式。
 
 ### <a name="names"></a>名稱
 
@@ -81,7 +81,7 @@ Razor 應用程式中的元件會 Blazor 廣泛使用 Razor 語法。 如果您�
 }
 ```
 
-在元件一開始呈現之後，元件會重新產生其轉譯樹狀結構，以回應事件。 Blazor 然後比較新的轉譯樹狀結構與上一個樹狀結構，並將任何修改套用至瀏覽器的檔物件模型 (DOM) 。
+在元件一開始呈現之後，元件會重新產生其轉譯樹狀結構，以回應事件。 Blazor 然後比較新的轉譯樹狀結構與上一個樹狀結構，並將任何修改套用至瀏覽器的檔物件模型 (DOM) 。 提供其他詳細資料 <xref:blazor/components/rendering> 。
 
 元件是一般的 c # 類別，可放在專案內的任何位置。 產生網頁的元件通常位於資料夾中 `Pages` 。 非頁面元件通常會放在資料夾中， `Shared` 或加入至專案的自訂資料夾中。
 
@@ -293,7 +293,7 @@ public string Title { get; set; } = "Panel Title from Child";
 * 方法的結果： `Title="@{METHOD}"` ，其中預留位置 `{METHOD}` 是父元件的 c # 方法。
 * [隱含或明確運算式](xref:mvc/views/razor#implicit-razor-expressions)： `Title="@({EXPRESSION})"` ，其中預留位置 `{EXPRESSION}` 是 c # 運算式。
   
-如需詳細資訊，請參閱<xref:mvc/views/razor>。
+如需詳細資訊，請參閱[ Razor ASP.NET Core 的語法參考](xref:mvc/views/razor)。
 
 > [!WARNING]
 > 請勿建立會寫入其本身 *元件參數* 的元件，而是改用私用欄位。 如需詳細資訊，請參閱 [覆寫的參數](#overwritten-parameters) 一節。
@@ -579,7 +579,7 @@ public class NotifierService
 }
 ```
 
-在上述範例中，會在的 `NotifierService` 同步處理內容之外叫用元件的 `OnNotify` 方法 Blazor 。 `InvokeAsync` 用來切換至正確的內容，並將轉譯排入佇列。
+在上述範例中，會在的 `NotifierService` 同步處理內容之外叫用元件的 `OnNotify` 方法 Blazor 。 `InvokeAsync` 用來切換至正確的內容，並將轉譯排入佇列。 如需詳細資訊，請參閱<xref:blazor/components/rendering>。
 
 ## <a name="use-key-to-control-the-preservation-of-elements-and-components"></a>使用 \@ 金鑰來控制元素和元件的保留
 
@@ -727,7 +727,7 @@ Blazor架構通常會施加安全的父系對子參數指派：
 下列修訂的 `Expander` 元件：
 
 * 接受 `Expanded` 來自父系的元件參數值。
-* 將元件參數值指派給 *private field* `expanded` [OnInitialized 事件](xref:blazor/components/lifecycle#component-initialization-methods)中 () 的私用欄位。
+* 將元件參數值指派給 `expanded` [OnInitialized 事件](xref:blazor/components/lifecycle#component-initialization-methods)中 () 的私用欄位。
 * 使用私用欄位來維護其內部切換狀態，以示範如何避免直接寫入參數。
 
 ```razor
@@ -801,7 +801,7 @@ HTML 元素屬性是根據 .NET 值以有條件的形式呈現。 如果值為 `
 <input type="checkbox" />
 ```
 
-如需詳細資訊，請參閱<xref:mvc/views/razor>。
+如需詳細資訊，請參閱[ Razor ASP.NET Core 的語法參考](xref:mvc/views/razor)。
 
 > [!WARNING]
 > 當 .NET 類型為時，某些 HTML 屬性（例如 [`aria-pressed`](https://developer.mozilla.org/docs/Web/Accessibility/ARIA/Roles/button_role#Toggle_buttons) ）無法正常運作 `bool` 。 在這些情況下，請使用型別， `string` 而不是 `bool` 。
@@ -957,13 +957,13 @@ Razor 元件 () **不** 支援波狀符號斜線標記法 `~/` 。
 * <xref:blazor/security/server/threat-mitigation>：包含建立 Blazor Server 必須與資源耗盡相關之應用程式的指引。
 
 <!--Reference links in article-->
-[1]: <xref:mvc/views/razor#code>
-[2]: <xref:mvc/views/razor#using>
-[3]: <xref:mvc/views/razor#attributes>
-[4]: <xref:mvc/views/razor#ref>
-[5]: <xref:mvc/views/razor#key>
-[6]: <xref:mvc/views/razor#inherits>
-[7]: <xref:mvc/views/razor#attribute>
-[8]: <xref:mvc/views/razor#namespace>
-[9]: <xref:mvc/views/razor#page>
-[10]: <xref:mvc/views/razor#bind>
+[1]: [Razor syntax reference for ASP.NET Core](xref:mvc/views/razor#code)
+[2]: [Razor syntax reference for ASP.NET Core](xref:mvc/views/razor#using)
+[3]: [Razor syntax reference for ASP.NET Core](xref:mvc/views/razor#attributes)
+[4]: [Razor syntax reference for ASP.NET Core](xref:mvc/views/razor#ref)
+[5]: [Razor syntax reference for ASP.NET Core](xref:mvc/views/razor#key)
+[6]: [Razor syntax reference for ASP.NET Core](xref:mvc/views/razor#inherits)
+[7]: [Razor syntax reference for ASP.NET Core](xref:mvc/views/razor#attribute)
+[8]: [Razor syntax reference for ASP.NET Core](xref:mvc/views/razor#namespace)
+[9]: [Razor syntax reference for ASP.NET Core](xref:mvc/views/razor#page)
+[10]: [Razor syntax reference for ASP.NET Core](xref:mvc/views/razor#bind)

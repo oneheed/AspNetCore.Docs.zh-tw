@@ -19,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: grpc/troubleshoot
-ms.openlocfilehash: cbce85caf7ba792253ba62c6be084c8905acd00f
-ms.sourcegitcommit: 3593c4efa707edeaaceffbfa544f99f41fc62535
+ms.openlocfilehash: 61d4d2204886f26b4ff55bc876825012809f1dfa
+ms.sourcegitcommit: 063a06b644d3ade3c15ce00e72a758ec1187dd06
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 01/04/2021
-ms.locfileid: "93058710"
+ms.lasthandoff: 01/16/2021
+ms.locfileid: "98253094"
 ---
 # <a name="troubleshoot-grpc-on-net-core"></a>針對 .NET Core 上的 gRPC 進行疑難排解
 
@@ -126,7 +126,13 @@ public static IHostBuilder CreateHostBuilder(string[] args) =>
         });
 ```
 
+::: moniker range=">= aspnetcore-5.0"
+當 HTTP/2 端點設定為沒有 TLS 時，端點的 [>listenoptions](xref:fundamentals/servers/kestrel/endpoints#listenoptionsprotocols) 必須設定為 `HttpProtocols.Http2` 。 `HttpProtocols.Http1AndHttp2` 因為必須有 TLS 才能協商 HTTP/2，所以無法使用。 如果沒有 TLS，端點的所有連接都會預設為 HTTP/1.1，而 gRPC 呼叫會失敗。
+::: moniker-end
+
+::: moniker range="< aspnetcore-5.0"
 當 HTTP/2 端點設定為沒有 TLS 時，端點的 [>listenoptions](xref:fundamentals/servers/kestrel#listenoptionsprotocols) 必須設定為 `HttpProtocols.Http2` 。 `HttpProtocols.Http1AndHttp2` 因為必須有 TLS 才能協商 HTTP/2，所以無法使用。 如果沒有 TLS，端點的所有連接都會預設為 HTTP/1.1，而 gRPC 呼叫會失敗。
+::: moniker-end
 
 GRPC 用戶端也必須設定為不使用 TLS。 如需詳細資訊，請參閱 [使用 .Net Core 用戶端呼叫不安全的 gRPC 服務](#call-insecure-grpc-services-with-net-core-client)。
 

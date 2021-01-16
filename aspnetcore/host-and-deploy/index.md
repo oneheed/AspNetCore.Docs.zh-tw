@@ -19,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: host-and-deploy/index
-ms.openlocfilehash: 4f3d4c29a189cf6aa14eb10f570f0b35d8ff9abc
-ms.sourcegitcommit: 92439194682dc788b8b5b3a08bd2184dc00e200b
+ms.openlocfilehash: 05d04a9c95910c805ea28578aba21a0658dd779a
+ms.sourcegitcommit: 063a06b644d3ade3c15ce00e72a758ec1187dd06
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 12/03/2020
-ms.locfileid: "96556615"
+ms.lasthandoff: 01/16/2021
+ms.locfileid: "98252964"
 ---
 # <a name="host-and-deploy-aspnet-core"></a>裝載及部署 ASP.NET Core
 
@@ -74,7 +74,17 @@ ASP.NET Core 應用程式是一種主控台應用程式，必須在伺服器開�
 
 如果應用程式使用 [Kestrel](xref:fundamentals/servers/kestrel) 伺服器，反向 Proxy 伺服器可用 [Nginx](xref:host-and-deploy/linux-nginx)、[Apache](xref:host-and-deploy/linux-apache) 或 [IIS](xref:host-and-deploy/iis/index)。 反向 Proxy 伺服器會從網際網路接收 HTTP 要求，然後轉送到 Kestrel。
 
+::: moniker-end 
+
+::: moniker range=">= aspnetcore-5.0"
+不論設定是否具有反向 Proxy 伺服器，任一設定都是支援的裝載設定。 如需詳細資訊，請參閱[何時搭配使用 Kestrel 與反向 Proxy](xref:fundamentals/servers/kestrel/when-to-use-a-reverse-proxy)。
+::: moniker-end
+
+::: moniker range=">= aspnetcore-2.2 < aspnetcore-5.0"
 不論設定是否具有反向 Proxy 伺服器，任一設定都是支援的裝載設定。 如需詳細資訊，請參閱[何時搭配使用 Kestrel 與反向 Proxy](xref:fundamentals/servers/kestrel#when-to-use-kestrel-with-a-reverse-proxy)。
+::: moniker-end
+
+::: moniker range=">= aspnetcore-2.2"
 
 ## <a name="proxy-server-and-load-balancer-scenarios"></a>Proxy 伺服器和負載平衡器案例
 

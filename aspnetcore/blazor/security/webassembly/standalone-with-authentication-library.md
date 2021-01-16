@@ -19,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/security/webassembly/standalone-with-authentication-library
-ms.openlocfilehash: a4f3234aa4b4b02244d17615a9033db3094d3580
-ms.sourcegitcommit: 8b0e9a72c1599ce21830c843558a661ba908ce32
+ms.openlocfilehash: 3da9ea045de996602ead052f6f13ffc999273a50
+ms.sourcegitcommit: 063a06b644d3ade3c15ce00e72a758ec1187dd06
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 01/08/2021
-ms.locfileid: "98024778"
+ms.lasthandoff: 01/16/2021
+ms.locfileid: "98252483"
 ---
 # <a name="secure-an-aspnet-core-no-locblazor-webassembly-standalone-app-with-the-authentication-library"></a>使用驗證程式庫保護 ASP.NET Core 的 Blazor WebAssembly 獨立應用程式
 
@@ -33,6 +33,9 @@ ms.locfileid: "98024778"
 *針對 Azure Active Directory (AAD) 和 Azure Active Directory B2C (AAD B2C) ，請不要依照本主題中的指導方針進行。請參閱此目錄節點中的 AAD 和 AAD B2C 主題。*
 
 若要建立使用程式庫的 [獨立 Blazor WebAssembly 應用程式](xref:blazor/hosting-models#blazor-webassembly) [`Microsoft.AspNetCore.Components.WebAssembly.Authentication`](https://www.nuget.org/packages/Microsoft.AspNetCore.Components.WebAssembly.Authentication) ，請遵循您選擇的工具指導方針。
+
+> [!NOTE]
+> Identity提供者 (IP) 必須使用[OPENID CONNECT (OIDC) ](https://openid.net/connect/)。 例如，Facebook 的 IP 不是符合 OIDC 規範的提供者，因此本主題中的指導方針無法使用 Facebook IP。 如需詳細資訊，請參閱<xref:blazor/security/webassembly/index#authentication-library>。
 
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
@@ -99,12 +102,28 @@ builder.Services.AddOidcAuthentication(options =>
 
 ```json
 {
-    "Local": {
-        "Authority": "{AUTHORITY}",
-        "ClientId": "{CLIENT ID}"
-    }
+  "Local": {
+    "Authority": "{AUTHORITY}",
+    "ClientId": "{CLIENT ID}"
+  }
 }
 ```
+
+Google OAuth 2.0 OIDC 範例：
+
+```json
+{
+  "Local": {
+    "Authority": "https://accounts.google.com/",
+    "ClientId": "2.......7-e.....................q.apps.googleusercontent.com",
+    "PostLogoutRedirectUri": "https://localhost:5001/authentication/logout-callback",
+    "RedirectUri": "https://localhost:5001/authentication/login-callback",
+    "ResponseType": "id_token"
+  }
+}
+```
+
+重新導向 uri (`https://localhost:5001/authentication/login-callback`) 是在授權重新導向 uri **認證** 的 [google api 主控台](https://console.developers.google.com/apis/dashboard)中註冊  >  **`{NAME}`**  >  ****，其中 `{NAME}` 是應用程式在 google api 主控台的 **OAuth 2.0 用戶端識別碼** 應用程式清單中的用戶端名稱。
 
 獨立應用程式的驗證支援是使用 OpenID Connect (OIDC) 提供。 <xref:Microsoft.Extensions.DependencyInjection.WebAssemblyAuthenticationServiceCollectionExtensions.AddOidcAuthentication%2A>方法會接受回呼，以使用 OIDC 來設定驗證應用程式所需的參數。 設定應用程式所需的值可以從符合 OIDC 規範的 IP 取得。 當您註冊應用程式時取得值，這通常會發生在其線上入口網站中。
 

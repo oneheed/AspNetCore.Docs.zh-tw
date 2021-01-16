@@ -19,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/index
-ms.openlocfilehash: 79c225a0714562a01afe67bf8e59f3b3f98a6265
-ms.sourcegitcommit: e9b8835a02f75b6378b766edb8bab23b14a4192b
+ms.openlocfilehash: 840cc87103447db2b4686994701a0e4543d11fde
+ms.sourcegitcommit: 063a06b644d3ade3c15ce00e72a758ec1187dd06
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 12/18/2020
-ms.locfileid: "97666855"
+ms.lasthandoff: 01/16/2021
+ms.locfileid: "98252457"
 ---
 # <a name="introduction-to-aspnet-core-no-locblazor"></a>ASP.NET Core 簡介 Blazor
 
@@ -48,7 +48,7 @@ Blazor 是使用 [.net](/dotnet/standard/tour)建立互動式用戶端 web UI �
 * 利用 Windows、Linux 和 macOS 上的 [Visual Studio](https://visualstudio.microsoft.com) 保持生產力。
 * 以常用的語言、架構和工具建置，不僅穩定、功能豐富，而且容易使用。
 
-## <a name="components"></a>元件
+## <a name="components"></a>單元
 
 Blazor 應用程式是以 *元件* 為基礎。 中的元件 Blazor 是 UI 的元素，例如頁面、對話方塊或資料輸入表單。
 
@@ -175,6 +175,6 @@ Blazor 會執行 [.NET Standard](/dotnet/standard/net-standard)，讓 Blazor 專
 * <xref:blazor/call-javascript-from-dotnet>
 * <xref:blazor/call-dotnet-from-javascript>
 * [C# 指南](/dotnet/csharp/)
-* <xref:mvc/views/razor>
+* [Razor ASP.NET Core 的語法參考](xref:mvc/views/razor)
 * [HTML](https://www.w3.org/html/)
 * [很 Blazor 棒](https://github.com/AdrienTorris/awesome-blazor)社區連結

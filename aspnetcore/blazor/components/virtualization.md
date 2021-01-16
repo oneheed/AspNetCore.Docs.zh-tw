@@ -19,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/components/virtualization
-ms.openlocfilehash: afd2da19641b41871f06426934c39348daa54b1f
-ms.sourcegitcommit: 2fea9bfe6127bbbdbb438406c82529b2bc331944
+ms.openlocfilehash: c2b16f4bc8e69265b1d59082c3f029541f277d8b
+ms.sourcegitcommit: 063a06b644d3ade3c15ce00e72a758ec1187dd06
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 01/11/2021
-ms.locfileid: "98065528"
+ms.lasthandoff: 01/16/2021
+ms.locfileid: "98252285"
 ---
 # <a name="aspnet-core-no-locblazor-component-virtualization"></a>ASP.NET Core Blazor 元件虛擬化
 
@@ -77,7 +77,7 @@ ms.locfileid: "98065528"
 > 如需詳細資訊，請參閱下列文章：
 >
 > * <xref:blazor/components/index#use-key-to-control-the-preservation-of-elements-and-components>
-> * <xref:mvc/views/razor#key>
+> * [Razor ASP.NET Core 的語法參考](xref:mvc/views/razor#key)
 
 `Virtualize`元件：
 
@@ -169,4 +169,4 @@ private async ValueTask<ItemsProviderResult<Employee>> LoadEmployees(
 
 ## <a name="state-changes"></a>狀態變更
 
-對元件所轉譯的專案進行變更時 `Virtualize` ，請呼叫 <xref:Microsoft.AspNetCore.Components.ComponentBase.StateHasChanged%2A> 以強制重新評估和轉譯資料流程元件。
+對元件所轉譯的專案進行變更時 `Virtualize` ，請呼叫 <xref:Microsoft.AspNetCore.Components.ComponentBase.StateHasChanged%2A> 以強制重新評估和轉譯資料流程元件。 如需詳細資訊，請參閱<xref:blazor/components/rendering>。

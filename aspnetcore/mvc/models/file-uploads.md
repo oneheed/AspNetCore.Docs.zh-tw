@@ -19,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: mvc/models/file-uploads
-ms.openlocfilehash: 14561bace565c104d0a9c926cad3105c4865e72a
-ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
+ms.openlocfilehash: c32d20d4616650db004c78fb4d8ea9a4d5a3beab
+ms.sourcegitcommit: 063a06b644d3ade3c15ce00e72a758ec1187dd06
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 10/30/2020
-ms.locfileid: "93061167"
+ms.lasthandoff: 01/16/2021
+ms.locfileid: "98252795"
 ---
 # <a name="upload-files-in-aspnet-core"></a>在 ASP.NET Core 上傳檔案
 
@@ -125,7 +125,7 @@ ASP.NET Core 支援針對較小的檔案使用緩衝的模型系結上傳一或�
 
 若要上傳小型檔案，請使用多部分形式的表單，或使用 JavaScript 來建立 POST 要求。
 
-下列範例將示範 Razor 如何使用頁面表單，在範例應用程式) 中上傳單一檔案 ( *Pages/BufferedSingleFileUploadPhysical. cshtml* ：
+下列範例將示範 Razor 如何使用頁面表單，在範例應用程式) 中上傳單一檔案 (*Pages/BufferedSingleFileUploadPhysical. cshtml* ：
 
 ```cshtml
 <form enctype="multipart/form-data" method="post">
@@ -436,7 +436,7 @@ public async Task<IActionResult> OnPostUploadAsync()
 
 [!code-csharp[](file-uploads/samples/3.x/SampleApp/Controllers/StreamingController.cs?name=snippet_UploadDatabase)]
 
-`MultipartRequestHelper` ( *公用程式/MultipartRequestHelper .cs* ) ：
+`MultipartRequestHelper` (*公用程式/MultipartRequestHelper .cs*) ：
 
 [!code-csharp[](file-uploads/samples/3.x/SampleApp/Utilities/MultipartRequestHelper.cs)]
 
@@ -622,7 +622,7 @@ public void ConfigureServices(IServiceCollection services)
 
 <xref:Microsoft.AspNetCore.Mvc.RequestFormLimitsAttribute> 用來設定 <xref:Microsoft.AspNetCore.Http.Features.FormOptions.MultipartBodyLengthLimit> 單一頁面或動作的。
 
-在 Razor 頁面應用程式中，將篩選套用至[convention](xref:razor-pages/razor-pages-conventions)下列慣例 `Startup.ConfigureServices` ：
+在 Razor 頁面應用程式中，將篩選套用至[](xref:razor-pages/razor-pages-conventions)下列慣例 `Startup.ConfigureServices` ：
 
 ```csharp
 services.AddRazorPages(options =>
@@ -651,7 +651,7 @@ public class BufferedSingleFileUploadPhysicalModel : PageModel
 
 ### <a name="kestrel-maximum-request-body-size"></a>Kestrel 要求主體大小上限
 
-針對 Kestrel 所裝載的應用程式，預設的要求主體大小上限為30000000個位元組，大約是 28.6 MB。 使用 [>limits.maxrequestbodysize](xref:fundamentals/servers/kestrel#maximum-request-body-size) Kestrel 伺服器選項自訂限制：
+針對 Kestrel 所裝載的應用程式，預設的要求主體大小上限為30000000個位元組，大約是 28.6 MB。 使用 [>limits.maxrequestbodysize](xref:fundamentals/servers/kestrel/options#maximum-request-body-size) Kestrel 伺服器選項自訂限制：
 
 ```csharp
 public static IHostBuilder CreateHostBuilder(string[] args) =>
@@ -667,9 +667,9 @@ public static IHostBuilder CreateHostBuilder(string[] args) =>
         });
 ```
 
-<xref:Microsoft.AspNetCore.Mvc.RequestSizeLimitAttribute> 用來設定單一頁面或動作的 [>limits.maxrequestbodysize](xref:fundamentals/servers/kestrel#maximum-request-body-size) 。
+<xref:Microsoft.AspNetCore.Mvc.RequestSizeLimitAttribute> 用來設定單一頁面或動作的 [>limits.maxrequestbodysize](xref:fundamentals/servers/kestrel/options#maximum-request-body-size) 。
 
-在 Razor 頁面應用程式中，將篩選套用至[convention](xref:razor-pages/razor-pages-conventions)下列慣例 `Startup.ConfigureServices` ：
+在 Razor 頁面應用程式中，將篩選套用至[](xref:razor-pages/razor-pages-conventions)下列慣例 `Startup.ConfigureServices` ：
 
 ```csharp
 services.AddRazorPages(options =>
@@ -706,8 +706,8 @@ public class BufferedSingleFileUploadPhysicalModel : PageModel
 
 其他 Kestrel 限制可能適用于 Kestrel 所裝載的應用程式：
 
-* [用戶端連線數目上限](xref:fundamentals/servers/kestrel#maximum-client-connections)
-* [要求和回應資料速率](xref:fundamentals/servers/kestrel#minimum-request-body-data-rate)
+* [用戶端連線數目上限](xref:fundamentals/servers/kestrel/options#maximum-client-connections)
+* [要求和回應資料速率](xref:fundamentals/servers/kestrel/options#minimum-request-body-data-rate)
 
 ### <a name="iis"></a>IIS
 
@@ -849,7 +849,7 @@ ASP.NET Core 支援針對較小的檔案使用緩衝的模型系結上傳一或�
 
 若要上傳小型檔案，請使用多部分形式的表單，或使用 JavaScript 來建立 POST 要求。
 
-下列範例將示範 Razor 如何使用頁面表單，在範例應用程式) 中上傳單一檔案 ( *Pages/BufferedSingleFileUploadPhysical. cshtml* ：
+下列範例將示範 Razor 如何使用頁面表單，在範例應用程式) 中上傳單一檔案 (*Pages/BufferedSingleFileUploadPhysical. cshtml* ：
 
 ```cshtml
 <form enctype="multipart/form-data" method="post">
@@ -1160,7 +1160,7 @@ public async Task<IActionResult> OnPostUploadAsync()
 
 [!code-csharp[](file-uploads/samples/3.x/SampleApp/Controllers/StreamingController.cs?name=snippet_UploadDatabase)]
 
-`MultipartRequestHelper` ( *公用程式/MultipartRequestHelper .cs* ) ：
+`MultipartRequestHelper` (*公用程式/MultipartRequestHelper .cs*) ：
 
 [!code-csharp[](file-uploads/samples/3.x/SampleApp/Utilities/MultipartRequestHelper.cs)]
 
@@ -1346,7 +1346,7 @@ public void ConfigureServices(IServiceCollection services)
 
 <xref:Microsoft.AspNetCore.Mvc.RequestFormLimitsAttribute> 用來設定 <xref:Microsoft.AspNetCore.Http.Features.FormOptions.MultipartBodyLengthLimit> 單一頁面或動作的。
 
-在 Razor 頁面應用程式中，將篩選套用至[convention](xref:razor-pages/razor-pages-conventions)下列慣例 `Startup.ConfigureServices` ：
+在 Razor 頁面應用程式中，將篩選套用至[](xref:razor-pages/razor-pages-conventions)下列慣例 `Startup.ConfigureServices` ：
 
 ```csharp
 services.AddRazorPages(options =>
@@ -1393,7 +1393,7 @@ public static IHostBuilder CreateHostBuilder(string[] args) =>
 
 <xref:Microsoft.AspNetCore.Mvc.RequestSizeLimitAttribute> 用來設定單一頁面或動作的 [>limits.maxrequestbodysize](xref:fundamentals/servers/kestrel#maximum-request-body-size) 。
 
-在 Razor 頁面應用程式中，將篩選套用至[convention](xref:razor-pages/razor-pages-conventions)下列慣例 `Startup.ConfigureServices` ：
+在 Razor 頁面應用程式中，將篩選套用至[](xref:razor-pages/razor-pages-conventions)下列慣例 `Startup.ConfigureServices` ：
 
 ```csharp
 services.AddRazorPages(options =>
@@ -1584,7 +1584,7 @@ ASP.NET Core 支援針對較小的檔案使用緩衝的模型系結上傳一或�
 
 若要上傳小型檔案，請使用多部分形式的表單，或使用 JavaScript 來建立 POST 要求。
 
-下列範例將示範 Razor 如何使用頁面表單，在範例應用程式) 中上傳單一檔案 ( *Pages/BufferedSingleFileUploadPhysical. cshtml* ：
+下列範例將示範 Razor 如何使用頁面表單，在範例應用程式) 中上傳單一檔案 (*Pages/BufferedSingleFileUploadPhysical. cshtml* ：
 
 ```cshtml
 <form enctype="multipart/form-data" method="post">
@@ -1895,7 +1895,7 @@ public async Task<IActionResult> OnPostUploadAsync()
 
 [!code-csharp[](file-uploads/samples/2.x/SampleApp/Controllers/StreamingController.cs?name=snippet_UploadDatabase)]
 
-`MultipartRequestHelper` ( *公用程式/MultipartRequestHelper .cs* ) ：
+`MultipartRequestHelper` (*公用程式/MultipartRequestHelper .cs*) ：
 
 [!code-csharp[](file-uploads/samples/2.x/SampleApp/Utilities/MultipartRequestHelper.cs)]
 
@@ -2081,7 +2081,7 @@ public void ConfigureServices(IServiceCollection services)
 
 <xref:Microsoft.AspNetCore.Mvc.RequestFormLimitsAttribute> 用來設定 <xref:Microsoft.AspNetCore.Http.Features.FormOptions.MultipartBodyLengthLimit> 單一頁面或動作的。
 
-在 Razor 頁面應用程式中，將篩選套用至[convention](xref:razor-pages/razor-pages-conventions)下列慣例 `Startup.ConfigureServices` ：
+在 Razor 頁面應用程式中，將篩選套用至[](xref:razor-pages/razor-pages-conventions)下列慣例 `Startup.ConfigureServices` ：
 
 ```csharp
 services.AddMvc()
@@ -2127,7 +2127,7 @@ public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
 
 <xref:Microsoft.AspNetCore.Mvc.RequestSizeLimitAttribute> 用來設定單一頁面或動作的 [>limits.maxrequestbodysize](xref:fundamentals/servers/kestrel#maximum-request-body-size) 。
 
-在 Razor 頁面應用程式中，將篩選套用至[convention](xref:razor-pages/razor-pages-conventions)下列慣例 `Startup.ConfigureServices` ：
+在 Razor 頁面應用程式中，將篩選套用至[](xref:razor-pages/razor-pages-conventions)下列慣例 `Startup.ConfigureServices` ：
 
 ```csharp
 services.AddMvc()
@@ -2222,7 +2222,13 @@ The request filtering module is configured to deny a request that exceeds the re
 
 ## <a name="additional-resources"></a>其他資源
 
+::: moniker range="< aspnetcore-5.0"
 * [HTTP 連接要求清空](xref:fundamentals/servers/kestrel#http11-request-draining)
+::: moniker-end
+::: moniker range=">= aspnetcore-5.0"
+* [HTTP 連接要求清空](xref:fundamentals/servers/kestrel/request-draining)
+::: moniker-end
+
 * [不受限制的檔案上傳](https://owasp.org/www-community/vulnerabilities/Unrestricted_File_Upload)
 * [Azure 安全性：安全性框架：輸入驗證 |措施](/azure/security/azure-security-threat-modeling-tool-input-validation)
 * [Azure 雲端設計模式： Valet 金鑰模式](/azure/architecture/patterns/valet-key)

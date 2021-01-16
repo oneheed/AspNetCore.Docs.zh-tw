@@ -19,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: security/cookie-sharing
-ms.openlocfilehash: 8f54f2e4894328f8471d5f80c8184839ce47add6
-ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
+ms.openlocfilehash: 0d43bbbc44015aff040b12dfacb260fe50492e54
+ms.sourcegitcommit: 063a06b644d3ade3c15ce00e72a758ec1187dd06
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 10/30/2020
-ms.locfileid: "93059685"
+ms.lasthandoff: 01/16/2021
+ms.locfileid: "98252990"
 ---
 # <a name="share-authentication-no-loccookies-among-aspnet-apps"></a>cookie在 ASP.NET apps 之間共用驗證
 
@@ -65,6 +65,8 @@ services.ConfigureApplicationCookie(options => {
     options.Cookie.Name = ".AspNet.SharedCookie";
 });
 ```
+
+**注意：** 上述指示不適用於 `ITicketStore` (`CookieAuthenticationOptions.SessionStore`) 。  如需詳細資訊，請參閱 [此 GitHub 問題](https://github.com/dotnet/AspNetCore.Docs/issues/21163)。
 
 ## <a name="share-authentication-no-loccookies-without-no-locaspnet-core-identity"></a>cookie無需共用驗證ASP.NET Core Identity
 
@@ -135,7 +137,7 @@ ASP.NET 4.x 應用程式必須以 .NET Framework 4.5.1 或更新版本為目標�
 
 如果未設定 `http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier` 和 `http://schemas.microsoft.com/accesscontrolservice/2010/07/claims/identityprovider` ，請將設定 <xref:System.Web.Helpers.AntiForgeryConfig.UniqueClaimTypeIdentifier> 為可區別唯一使用者的宣告。
 
-*App_Start/startup.auth.cs* ：
+*App_Start/startup.auth.cs*：
 
 ```csharp
 app.UseCookieAuthentication(new CookieAuthenticationOptions
@@ -170,7 +172,7 @@ System.Web.Helpers.AntiForgeryConfig.UniqueClaimTypeIdentifier =
 
 當產生使用者識別時，驗證類型 (`Identity.Application`) 必須符合 `AuthenticationType` `UseCookieAuthentication` *App_Start/startup.auth.cs* 中的 set with 所定義的類型。
 
-*模型/ IdentityModels.cs* ：
+*模型/ IdentityModels.cs*：
 
 ```csharp
 public class ApplicationUser : IdentityUser

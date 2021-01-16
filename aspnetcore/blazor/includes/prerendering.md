@@ -37,7 +37,7 @@
 
 在 <xref:Microsoft.JSInterop.JSRuntime.InvokeAsync%2A?displayProperty=nameWithType> 中呼叫的位置， `ElementRef` 只會用於中， <xref:Microsoft.AspNetCore.Components.ComponentBase.OnAfterRenderAsync%2A> 而不會用於任何較早的生命週期方法，因為在轉譯元件之後，才會有 JavaScript 元素。
 
-呼叫[StateHasChanged](xref:blazor/components/lifecycle#state-changes)時，會使用從 JavaScript interop 呼叫取得的新狀態來 rerender 元件。 程式碼不會建立無限迴圈，因為 `StateHasChanged` 只有在是時才會呼叫 `infoFromJs` `null` 。
+呼叫[StateHasChanged](xref:blazor/components/lifecycle#state-changes)來 rerender 元件，並以從 JavaScript interop 呼叫取得的新狀態 (如需詳細資訊，請參閱 <xref:blazor/components/rendering>) 。 程式碼不會建立無限迴圈，因為 `StateHasChanged` 只有在是時才會呼叫 `infoFromJs` `null` 。
 
 ```cshtml
 @page "/prerendered-interop"

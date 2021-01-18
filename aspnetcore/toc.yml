@@ -57,7 +57,7 @@
         - name: MVC
           displayName: tutorial
           items:
-            - name: 總覽
+            - name: 概觀
               uid: tutorials/first-mvc-app/index
             - name: 開始使用
               uid: tutorials/first-mvc-app/start-mvc
@@ -258,7 +258,7 @@
           uid: razor-pages/razor-pages-conventions
     - name: MVC
       items:
-        - name: 總覽
+        - name: 概觀
           uid: mvc/overview
         - name: 教學課程
           items:
@@ -344,6 +344,8 @@
               uid: blazor/components/event-handling
             - name: 生命週期
               uid: blazor/components/lifecycle
+            - name: 轉譯
+              uid: blazor/components/rendering
             - name: 元件虛擬化
               uid: blazor/components/virtualization
             - name: 樣板化元件
@@ -732,7 +734,7 @@
           uid: tutorials/grpc/grpc-start
     - name: 搭配 C# 的 gRPC 服務
       items:
-        - name: 總覽
+        - name: 概觀
           uid: grpc/basics
         - name: 建立 gRPC 服務
           uid: grpc/services
@@ -970,8 +972,29 @@
           displayName: 'deploy, publish'
           uid: host-and-deploy/iis/protocols
     - name: Kestrel
-      uid: fundamentals/servers/kestrel
       displayName: 'deploy, publish, server'
+      items:
+        - name: 概觀
+          displayName: 'deploy, publish, server'
+          uid: fundamentals/servers/kestrel
+        - name: 端點
+          displayName: 'deploy, publish, server'
+          uid: fundamentals/servers/kestrel/endpoints
+        - name: 選項
+          displayName: 'deploy, publish, server'
+          uid: fundamentals/servers/kestrel/options
+        - name: HTTP/2
+          displayName: 'deploy, publish, server'
+          uid: fundamentals/servers/kestrel/http2
+        - name: 使用反向 Proxy 的時機
+          displayName: 'deploy, publish, server'
+          uid: fundamentals/servers/kestrel/when-to-use-a-reverse-proxy
+        - name: 主機篩選
+          displayName: 'deploy, publish, server'
+          uid: fundamentals/servers/kestrel/host-filtering
+        - name: 要求清空
+          displayName: 'deploy, publish, server'
+          uid: fundamentals/servers/kestrel/request-draining
     - name: HTTP.sys
       displayName: 'deploy, publish, server'
       uid: fundamentals/servers/httpsys

@@ -19,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/security/webassembly/hosted-with-identity-server
-ms.openlocfilehash: fdd7eb3c4a3b07022760a43cbde80838bfaf7c84
-ms.sourcegitcommit: 8b0e9a72c1599ce21830c843558a661ba908ce32
+ms.openlocfilehash: d35dd0acf626a6305f00e295e7918c82c7d6a912
+ms.sourcegitcommit: cc405f20537484744423ddaf87bd1e7d82b6bdf0
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 01/08/2021
-ms.locfileid: "98024791"
+ms.lasthandoff: 01/21/2021
+ms.locfileid: "98658699"
 ---
 # <a name="secure-an-aspnet-core-no-locblazor-webassembly-hosted-app-with-no-locidentity-server"></a>Blazor WebAssembly使用伺服器保護 ASP.NET Core 託管應用 Identity 程式
 
@@ -129,6 +129,10 @@ dotnet new blazorwasm -au Individual -ho -o {APP NAME}
     app.UseAuthentication();
     app.UseAuthorization();
     ```
+
+### <a name="azure-app-service-on-linux"></a>Linux 上的 Azure App Service
+
+部署至 Linux 上的 Azure App Service 時，請明確指定簽發者。 如需詳細資訊，請參閱<xref:security/authentication/identity/spa#azure-app-service-on-linux>。
 
 ### <a name="addapiauthorization"></a>AddApiAuthorization
 
@@ -468,9 +472,12 @@ services.AddTransient<IProfileService, ProfileService>();
 
 [!INCLUDE[](~/blazor/includes/security/usermanager-signinmanager.md)]
 
-## <a name="host-in-azure-app-service-with-a-custom-domain"></a>使用自訂網域 Azure App Service 中的主機
+## <a name="host-in-azure-app-service-with-a-custom-domain-and-certificate"></a>使用自訂網域和憑證的 Azure App Service 中的主機
 
-下列指導方針說明如何 Blazor WebAssembly 使用伺服器將託管應用程式部署 Identity 至與自訂網域 [Azure App Service](https://azure.microsoft.com/services/app-service/) 。
+下列指導方針說明：
+
+* 如何使用 Blazor WebAssembly 伺服器將託管應用程式部署 Identity 至與自訂網域 [Azure App Service](https://azure.microsoft.com/services/app-service/) 。
+* 如何建立和使用 TLS 憑證來與瀏覽器進行 HTTPS 通訊協定通訊。 雖然本指南著重于將憑證與自訂網域搭配使用，但本指南同樣適用于使用預設的 Azure 應用程式網域（例如） `contoso.azurewebsites.net` 。
 
 在此裝載案例中，**請不要將** 相同的憑證用於 [ Identity 伺服器的權杖簽署金鑰](https://docs.identityserver.io/en/latest/topics/crypto.html#token-signing-and-validation)和網站與瀏覽器的 HTTPS 安全通訊：
 

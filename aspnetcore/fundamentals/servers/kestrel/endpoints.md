@@ -19,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: fundamentals/servers/kestrel/endpoints
-ms.openlocfilehash: 780250feab456fa3eedee4e023c9bc774e748291
-ms.sourcegitcommit: 063a06b644d3ade3c15ce00e72a758ec1187dd06
+ms.openlocfilehash: 5fec573013da5bcb5039b7a189fd84d964349b3a
+ms.sourcegitcommit: cc405f20537484744423ddaf87bd1e7d82b6bdf0
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 01/16/2021
-ms.locfileid: "98253932"
+ms.lasthandoff: 01/21/2021
+ms.locfileid: "98658738"
 ---
 # <a name="configure-endpoints-for-the-aspnet-core-kestrel-web-server"></a>設定 ASP.NET Core Kestrel web 伺服器的端點
 
@@ -169,7 +169,7 @@ Kestrel 可以使用預設的 HTTPS 應用程式設定組態結構描述。 設�
 在下列 *appsettings.json* 範例中：
 
 * 將設定 `AllowInvalid` 為 `true` 可允許使用不正確憑證 (例如，自我簽署的憑證) 。
-* 在下列範例中，未指定憑證 (的任何 HTTPS 端點， `HttpsDefaultCert`) 回復至所定義的憑證 `Certificates`  >  `Default` 或開發憑證。
+* 在下列範例中，未指定憑證 (的任何 HTTPS 端點， `HttpsDefaultCert`) 回復至所定義的憑證 `Certificates:Default` 或開發憑證。
 
 ```json
 {
@@ -185,8 +185,16 @@ Kestrel 可以使用預設的 HTTPS 應用程式設定組態結構描述。 設�
           "Password": "<certificate password>"
         }
       },
-      "HttpsInlineCertStore": {
+      "HttpsInlineCertAndKeyFile": {
         "Url": "https://localhost:5002",
+        "Certificate": {
+          "Path": "<path to .pem/.crt file>",
+          "KeyPath": "<path to .key file>",
+          "Password": "<certificate password>"
+        }
+      },
+      "HttpsInlineCertStore": {
+        "Url": "https://localhost:5003",
         "Certificate": {
           "Subject": "<subject; required>",
           "Store": "<certificate store; required>",
@@ -195,14 +203,7 @@ Kestrel 可以使用預設的 HTTPS 應用程式設定組態結構描述。 設�
         }
       },
       "HttpsDefaultCert": {
-        "Url": "https://localhost:5003"
-      },
-      "Https": {
-        "Url": "https://*:5004",
-        "Certificate": {
-          "Path": "<path to .pfx file>",
-          "Password": "<certificate password>"
-        }
+        "Url": "https://localhost:5004"
       }
     },
     "Certificates": {
@@ -215,7 +216,24 @@ Kestrel 可以使用預設的 HTTPS 應用程式設定組態結構描述。 設�
 }
 ```
 
-`Path`針對任何憑證節點使用和的替代方法 `Password` 是使用 [憑證存放區] 欄位來指定憑證。 例如，您 `Certificates`  >  `Default` 可以將憑證指定為：
+結構描述附註：
+
+* 端點名稱不區分 [大小寫](xref:fundamentals/configuration/index#configuration-keys-and-values)。 例如， `HTTPS` and `Https` 是相等的。
+* `Url` 參數對每個端點而言都是必要的。 此參數的格式等同於最上層 `Urls` 組態參數，但是它限制為單一值。
+* 這些端點會取代最上層 `Urls` 組態中定義的端點，而不是新增至其中。 透過 `Listen` 在程式碼中定義的端點，會與組態區段中定義的端點累計。
+* `Certificate` 區段是選擇性的。 如果 `Certificate` 未指定區段，則會使用中定義的預設值 `Certificates:Default` 。 如果沒有可用的預設值，則會使用開發憑證。 如果沒有預設值，而且沒有開發憑證存在，伺服器就會擲回例外狀況，而且無法啟動。
+* `Certificate`區段支援多個[憑證來源](#certificate-sources)。
+* 您可以在設定中定義任意數目的 [端點，只要](xref:fundamentals/configuration/index) 它們不會造成埠衝突。
+
+#### <a name="certificate-sources"></a>憑證來源
+
+您可以將憑證節點設定為從數個來源載入憑證：
+
+* `Path` 和 `Password` 載入 *.pfx* 檔案。
+* `Path``KeyPath`和 `Password` 載入 *pem* / 和 *..*
+* `Subject` 以及 `Store` 從憑證存放區載入。
+
+例如，您 `Certificates:Default` 可以將憑證指定為：
 
 ```json
 "Default": {
@@ -226,15 +244,9 @@ Kestrel 可以使用預設的 HTTPS 應用程式設定組態結構描述。 設�
 }
 ```
 
-結構描述附註：
+#### <a name="configurationloader"></a>ConfigurationLoader
 
-* 端點名稱不區分大小寫。 例如，`HTTPS` 和 `Https` 都有效。
-* `Url` 參數對每個端點而言都是必要的。 此參數的格式等同於最上層 `Urls` 組態參數，但是它限制為單一值。
-* 這些端點會取代最上層 `Urls` 組態中定義的端點，而不是新增至其中。 透過 `Listen` 在程式碼中定義的端點，會與組態區段中定義的端點累計。
-* `Certificate` 區段是選擇性的。 如果未指定 `Certificate` 區段，則會使用先前案例中所定義的預設值。 如果沒有預設值可供使用，伺服器就會擲回例外狀況，且無法啟動。
-* `Certificate`區段同時支援 `Path` &ndash; `Password` 和 `Subject` &ndash; `Store` 憑證。
-* 可以用這種方式定義任何數目的端點，只要它們不會導致連接埠衝突即可。
-* `options.Configure(context.Configuration.GetSection("{SECTION}"))` 會傳回 `KestrelConfigurationLoader` 與 `.Endpoint(string name, listenOptions => { })` 方法，此方法可用來補充已設定的端點設定：
+`options.Configure(context.Configuration.GetSection("{SECTION}"))` 會傳回 <xref:Microsoft.AspNetCore.Server.Kestrel.KestrelConfigurationLoader> 與 `.Endpoint(string name, listenOptions => { })` 方法，此方法可用來補充已設定的端點設定：
 
 ```csharp
 webBuilder.UseKestrel((context, serverOptions) =>

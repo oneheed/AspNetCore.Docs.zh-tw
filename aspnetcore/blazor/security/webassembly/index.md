@@ -19,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/security/webassembly/index
-ms.openlocfilehash: c4d1095d3c3b457ca4d94cb1a573c3dc49548ff3
-ms.sourcegitcommit: 8b0e9a72c1599ce21830c843558a661ba908ce32
+ms.openlocfilehash: 2df938f3ace47472536020f9848e954fc4446f15
+ms.sourcegitcommit: cc405f20537484744423ddaf87bd1e7d82b6bdf0
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 01/08/2021
-ms.locfileid: "98024635"
+ms.lasthandoff: 01/21/2021
+ms.locfileid: "98658582"
 ---
 # <a name="secure-aspnet-core-no-locblazor-webassembly"></a>安全 ASP.NET Core Blazor WebAssembly
 
@@ -106,6 +106,10 @@ Blazor WebAssembly 支援透過程式庫使用 OIDC 來驗證和授權應用程�
 
 * [其他案例：自訂使用者](xref:blazor/security/webassembly/additional-scenarios#customize-the-user)
 * <xref:blazor/security/webassembly/aad-groups-roles>
+
+## <a name="azure-app-service-on-linux-with-no-locidentity-server"></a>使用 Identity 伺服器 Linux 上的 Azure App Service
+
+當部署至與伺服器 Linux 上的 Azure App Service 時，請明確指定簽發者 Identity 。 如需詳細資訊，請參閱<xref:security/authentication/identity/spa#azure-app-service-on-linux>。
 
 ## <a name="implementation-guidance"></a>實作指引
 

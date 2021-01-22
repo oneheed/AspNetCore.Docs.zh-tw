@@ -19,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: fundamentals/startup
-ms.openlocfilehash: 747b13abb0ce3fed2d1dc018c6dbf82db1ae7130
-ms.sourcegitcommit: 3593c4efa707edeaaceffbfa544f99f41fc62535
+ms.openlocfilehash: e2825476c5fe36571b365ac5ee3c57ff4db61b87
+ms.sourcegitcommit: cc405f20537484744423ddaf87bd1e7d82b6bdf0
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 01/04/2021
-ms.locfileid: "93052236"
+ms.lasthandoff: 01/21/2021
+ms.locfileid: "98658673"
 ---
 # <a name="app-startup-in-aspnet-core"></a>ASP.NET Core 中的應用程式啟動
 
@@ -124,7 +124,7 @@ ASP.NET Core 應用程式使用 `Startup` 類別，其依慣例命名為 `Startu
 
 使用 <xref:Microsoft.AspNetCore.Hosting.IStartupFilter> ：
 
-* 在應用程式 [設定](#the-configure-method) 中介軟體管線的開頭或結尾設定中介軟體，而不需要明確呼叫 `Use{Middleware}` 。 `IStartupFilter` ASP.NET Core 用來將預設值新增至管線的開頭，而不需要讓應用程式作者明確地註冊預設中介軟體。 `IStartupFilter` 允許代表應用程式作者進行不同的元件呼叫 `Use{Middleware}` 。
+* 在應用程式 [設定](#the-configure-method) 中介軟體管線的開頭或結尾設定中介軟體，而不需要明確呼叫 `Use{Middleware}` 。 `IStartupFilter` ASP.NET Core 用來將預設值新增至管線的開頭，而不需要讓應用程式作者明確地註冊預設中介軟體。 `IStartupFilter` 允許 `Use{Middleware}` 代表應用程式作者呼叫不同的元件。
 * 建立方法的管線 `Configure` 。 [IStartupFilter.Configure](xref:Microsoft.AspNetCore.Hosting.IStartupFilter.Configure*) 可以將中介軟體設為在程式庫新增中介軟體之前或之後執行。
 
 `IStartupFilter` 會實作 <xref:Microsoft.AspNetCore.Hosting.StartupBase.Configure*>，其會接收並傳回 `Action<IApplicationBuilder>`。 <xref:Microsoft.AspNetCore.Builder.IApplicationBuilder> 會定義類別，以設定應用程式的要求管線。 如需詳細資訊，請參閱[使用 IApplicationBuilder 建立中介軟體管線](xref:fundamentals/middleware/index#create-a-middleware-pipeline-with-iapplicationbuilder)。
@@ -155,7 +155,7 @@ ASP.NET Core 應用程式使用 `Startup` 類別，其依慣例命名為 `Startu
 
 ## <a name="add-configuration-at-startup-from-an-external-assembly"></a>在啟動時從外部組件新增組態
 
-<xref:Microsoft.AspNetCore.Hosting.IHostingStartup> 實作允許在啟動時從應用程式 `Startup` 類別外部的外部組件，針對應用程式新增增強功能。 如需詳細資訊，請參閱 <xref:fundamentals/configuration/platform-specific-configuration> 。
+<xref:Microsoft.AspNetCore.Hosting.IHostingStartup> 實作允許在啟動時從應用程式 `Startup` 類別外部的外部組件，針對應用程式新增增強功能。 如需詳細資訊，請參閱<xref:fundamentals/configuration/platform-specific-configuration>。
 
 ## <a name="additional-resources"></a>其他資源
 
@@ -287,7 +287,7 @@ ASP.NET Core 應用程式使用 `Startup` 類別，其依慣例命名為 `Startu
 
 ## <a name="add-configuration-at-startup-from-an-external-assembly"></a>在啟動時從外部組件新增組態
 
-<xref:Microsoft.AspNetCore.Hosting.IHostingStartup> 實作允許在啟動時從應用程式 `Startup` 類別外部的外部組件，針對應用程式新增增強功能。 如需詳細資訊，請參閱 <xref:fundamentals/configuration/platform-specific-configuration> 。
+<xref:Microsoft.AspNetCore.Hosting.IHostingStartup> 實作允許在啟動時從應用程式 `Startup` 類別外部的外部組件，針對應用程式新增增強功能。 如需詳細資訊，請參閱<xref:fundamentals/configuration/platform-specific-configuration>。
 
 ## <a name="additional-resources"></a>其他資源
 

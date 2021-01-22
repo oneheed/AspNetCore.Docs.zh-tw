@@ -18,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: grpc/comparison
-ms.openlocfilehash: 0fb50f07153f5f9953b667fe32062ad24b2bd66d
-ms.sourcegitcommit: 3593c4efa707edeaaceffbfa544f99f41fc62535
+ms.openlocfilehash: 1ec553d54a9cad170cb322bc186bb67ac8bbded4
+ms.sourcegitcommit: cc405f20537484744423ddaf87bd1e7d82b6bdf0
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 01/04/2021
-ms.locfileid: "93059945"
+ms.lasthandoff: 01/21/2021
+ms.locfileid: "98658725"
 ---
 # <a name="compare-grpc-services-with-http-apis"></a>比較 gRPC 服務與 HTTP API
 
@@ -42,7 +42,7 @@ ms.locfileid: "93059945"
 | Payload          | [Protobuf (small、binary) ](#performance)           | JSON (大型、人類看得懂的)   |
 | Prescriptiveness | [嚴格規格](#strict-specification)      | 鬆散。 任何 HTTP 都有效。     |
 | 串流        | [用戶端、伺服器、雙向](#streaming)       | 用戶端、伺服器                |
-| 瀏覽器支援  | [無 (需要 grpc-web) ](#limited-browser-support) | 是                           |
+| 瀏覽器支援  | [無 (需要 grpc-web) ](#limited-browser-support) | Yes                           |
 | 安全性         | 傳輸 (TLS)                                     | 傳輸 (TLS)                |
 | 用戶端程式代碼產生 | [是](#code-generation)                      | OpenAPI + 協力廠商工具 |
 
@@ -61,7 +61,7 @@ HTTP/2 不是 gRPC 專屬的。 許多要求類型（包括具有 JSON 的 HTTP 
 
 ### <a name="code-generation"></a>程式碼產生
 
-所有 gRPC 架構都提供最先進的程式碼產生支援。 GRPC 開發的核心檔案是定義 gRPC 服務和訊息合約的[proto 檔。](https://developers.google.com/protocol-buffers/docs/proto3) 從這個檔案 gRPC 架構會產生服務基類、訊息和完整用戶端的程式碼。
+所有 gRPC 架構都提供最先進的程式碼產生支援。 GRPC 開發的核心檔案是[ `.proto` 檔案，它](https://developers.google.com/protocol-buffers/docs/proto3)會定義 gRPC 服務和訊息的合約。 從這個檔案中，gRPC 架構會產生服務基類、訊息和完整的用戶端。
 
 藉由共用伺服器和用戶端之間的 *proto* 檔案，就可以從端對端產生訊息和用戶端程式代碼。 用戶端的程式碼產生會在用戶端和伺服器上消除重複的訊息，並為您建立強型別的用戶端。 不需要撰寫用戶端就能將大量開發時間節省在具有許多服務的應用程式中。
 
@@ -96,7 +96,7 @@ gRPC 適用于下列案例：
 * **點對點即時通訊**： gRPC 有絕佳的雙向串流支援。 gRPC services 可以即時推播訊息，而不會進行輪詢。
 * **多語言環境**： gRPC 工具支援所有熱門的開發語言，讓 gRPC 成為多國語言環境的理想選擇。
 * **網路受限的環境**： gRPC 訊息會以 Protobuf （輕量訊息格式）進行序列化。 GRPC 訊息一律小於相等的 JSON 訊息。
-* **處理序間通訊 (ipc)**：如 Unix 網域通訊端和具名管道等 ipc 傳輸，可與 gRPC 搭配使用，以在同一部電腦上的應用程式之間進行通訊。 如需詳細資訊，請參閱 <xref:grpc/interprocess> 。
+* **處理序間通訊 (ipc)**：如 Unix 網域通訊端和具名管道等 ipc 傳輸，可與 gRPC 搭配使用，以在同一部電腦上的應用程式之間進行通訊。 如需詳細資訊，請參閱<xref:grpc/interprocess>。
 
 ## <a name="grpc-weaknesses"></a>gRPC 弱點
 
@@ -108,11 +108,11 @@ gRPC 適用于下列案例：
 
 * [gRPC-Web](https://grpc.io/docs/tutorials/basic/web.html) 是 gRPC 小組提供的額外技術，可在瀏覽器中提供 gRPC 支援。 gRPC Web 可讓瀏覽器應用程式受益于 gRPC 的高效能和低網路使用。 並非所有 gRPC 的功能都受 gRPC Web 支援。 用戶端和雙向串流不受支援，而且伺服器串流的支援有限。
 
-  .NET Core 支援 gRPC Web。 如需詳細資訊，請參閱 <xref:grpc/browser> 。
+  .NET Core 支援 gRPC Web。 如需詳細資訊，請參閱<xref:grpc/browser>。
 
 * RESTful JSON Web Api 可以從 gRPC 服務自動建立，方法是使用 [HTTP 中繼資料](https://cloud.google.com/service-infrastructure/docs/service-management/reference/rpc/google.api#google.api.HttpRule)來標注該 *proto* 檔。 這可讓應用程式同時支援 gRPC 和 JSON web Api，而不需要為兩者重複建立個別服務的工作。
 
-  .NET Core 具有從 gRPC 服務建立 JSON web Api 的實驗性支援。 如需詳細資訊，請參閱 <xref:grpc/httpapi> 。
+  .NET Core 具有從 gRPC 服務建立 JSON web Api 的實驗性支援。 如需詳細資訊，請參閱<xref:grpc/httpapi>。
 
 ### <a name="not-human-readable"></a>不是人類看得懂的
 

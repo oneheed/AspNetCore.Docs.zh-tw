@@ -19,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/progressive-web-app
-ms.openlocfilehash: 196e19528341e98ac06cefb08ba92f9e47d265ea
-ms.sourcegitcommit: 063a06b644d3ade3c15ce00e72a758ec1187dd06
+ms.openlocfilehash: 1706d3502dc68f1c25e0c35ba8f5dd44b55ce690
+ms.sourcegitcommit: cc405f20537484744423ddaf87bd1e7d82b6bdf0
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 01/16/2021
-ms.locfileid: "98252470"
+ms.lasthandoff: 01/21/2021
+ms.locfileid: "98658647"
 ---
 # <a name="build-progressive-web-applications-with-aspnet-core-no-locblazor-webassembly"></a>使用 ASP.NET Core 建立漸進式 Web 應用程式 Blazor WebAssembly
 
@@ -272,10 +272,20 @@ const shouldServeIndexHtml = event.request.mode === 'navigate';
 
 ```javascript
 const shouldServeIndexHtml = event.request.mode === 'navigate'
-    && !event.request.url.includes('/Identity/');
+  && !event.request.url.includes('/Identity/');
 ```
 
 如果您沒有這麼做，則無論網路連線為何，服務工作者都會攔截這類 Url 的要求，並使用加以解析 `/index.html` 。
+
+將外部驗證提供者的其他端點新增至檢查。 在下列範例中， `/signin-google` 會在檢查中新增 Google 驗證：
+
+```javascript
+const shouldServeIndexHtml = event.request.mode === 'navigate'
+  && !event.request.url.includes('/Identity/')
+  && !event.request.url.includes('/signin-google');
+```
+
+開發環境不需要採取任何動作，因為一律會從網路提取內容。
 
 ### <a name="control-asset-caching"></a>控制資產快取
 

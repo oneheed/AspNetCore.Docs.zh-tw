@@ -17,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: fundamentals/portable-object-localization
-ms.openlocfilehash: f9c0ecd32f0e5c05782c2db76eff92bb64845db7
-ms.sourcegitcommit: 53e01d6e9b70a18a05618f0011cf115a16633c21
+ms.openlocfilehash: 175614c426c564ce91068e18035ce05311432698
+ms.sourcegitcommit: ebc5beccba5f3f7619de20baa58ad727d2a3d18c
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 01/05/2021
-ms.locfileid: "97878395"
+ms.lasthandoff: 01/22/2021
+ms.locfileid: "98689236"
 ---
 # <a name="configure-portable-object-localization-in-aspnet-core"></a>使用 ASP.NET Core 設定可攜式物件當地語系化
 
@@ -81,7 +81,7 @@ msgstr[1] "Les adresses email sont \"{0}\""
 
 ### <a name="referencing-the-package"></a>參考套件
 
-將參考新增至 `OrchardCore.Localization.Core` NuGet 套件。 它可在 [MyGet](https://www.myget.org/) 的下列套件來源中取得： https://www.myget.org/F/orchardcore-preview/api/v3/index.json
+將參考新增至 `OrchardCore.Localization.Core` NuGet 套件。
 
 *.csproj* 檔案現在包含與下列內容類似的一行 (版本號碼可能不同)：
 
@@ -296,7 +296,7 @@ msgstr[1] "Les adresses email sont \"{0}\""
 
 ### <a name="referencing-the-package"></a>參考套件
 
-將參考新增至 `OrchardCore.Localization.Core` NuGet 套件。 它可在 [MyGet](https://www.myget.org/) 的下列套件來源中取得： https://www.myget.org/F/orchardcore-preview/api/v3/index.json
+將參考新增至 `OrchardCore.Localization.Core` NuGet 套件。
 
 *.csproj* 檔案現在包含與下列內容類似的一行 (版本號碼可能不同)：
 

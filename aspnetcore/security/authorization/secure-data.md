@@ -18,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: security/authorization/secure-data
-ms.openlocfilehash: dc70cfe7cb0c0f044f5f1e7ee68a293b3ea7507f
-ms.sourcegitcommit: 04a404a9655c59ad1ea02aff5d399ae1b833ad6a
+ms.openlocfilehash: ebd3c0dc9baa63b30f142773d7a3d621ce4082d9
+ms.sourcegitcommit: ebc5beccba5f3f7619de20baa58ad727d2a3d18c
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 01/03/2021
-ms.locfileid: "97854648"
+ms.lasthandoff: 01/22/2021
+ms.locfileid: "98689301"
 ---
 # <a name="create-an-aspnet-core-web-app-with-user-data-protected-by-authorization"></a>使用受授權保護的使用者資料建立 ASP.NET Core web 應用程式
 
@@ -75,7 +75,7 @@ ms.locfileid: "97854648"
 * `ContactManagerAuthorizationHandler`：可讓管理員核准或拒絕連絡人。
 * `ContactAdministratorsAuthorizationHandler`：可讓系統管理員核准或拒絕連絡人，以及編輯/刪除連絡人。
 
-## <a name="prerequisites"></a>先決條件
+## <a name="prerequisites"></a>必要條件
 
 本教學課程是 advanced。 您應該熟悉：
 
@@ -129,6 +129,8 @@ dotnet ef database update
 [!code-csharp[](secure-data/samples/final3/Startup.cs?name=snippet&highlight=13-99)]
 
 上述反白顯示的程式碼會設定回溯 [驗證原則](xref:Microsoft.AspNetCore.Authorization.AuthorizationOptions.FallbackPolicy)。 除了具有驗證屬性的頁面、控制器或動作方法之外，fallback 驗證原則需要驗證 **_all_* _ 使用者 Razor 。 例如，使用 Razor 或的頁面、控制器或動作方法，會 `[AllowAnonymous]` `[Authorize(PolicyName="MyPolicy")]` 使用套用的驗證屬性，而不是回溯驗證原則。
+
+<xref:Microsoft.AspNetCore.Authorization.AuthorizationPolicyBuilder.RequireAuthenticatedUser%2A> 加入 <xref:Microsoft.AspNetCore.Authorization.Infrastructure.DenyAnonymousAuthorizationRequirement> 目前的實例，這會強制驗證目前的使用者。
 
 回退驗證原則：
 
@@ -332,11 +334,11 @@ dotnet user-secrets set SeedUserPW <PW>
 * 管理員可以核准/拒絕連絡人資料。 此 `Details` 視圖會顯示 [ **核准** ] 和 [ **拒絕** ] 按鈕。
 * 系統管理員可以核准/拒絕和編輯/刪除所有資料。
 
-| User                | 由應用程式植入 | 選項                                  |
+| 使用者                | 由應用程式植入 | 選項                                  |
 | ------------------- | :---------------: | ---------------------------------------- |
-| test@example.com    | 否                | 編輯/刪除自己的資料。                |
-| manager@contoso.com | 是               | 核准/拒絕和編輯/刪除自己的資料。 |
-| admin@contoso.com   | 是               | 核准/拒絕和編輯/刪除所有資料。 |
+| test@example.com    | No                | 編輯/刪除自己的資料。                |
+| manager@contoso.com | Yes               | 核准/拒絕和編輯/刪除自己的資料。 |
+| admin@contoso.com   | Yes               | 核准/拒絕和編輯/刪除所有資料。 |
 
 在系統管理員的瀏覽器中建立連絡人。 從系統管理員連絡人複製 [刪除] 和 [編輯] 的 URL。 將這些連結貼到測試使用者的瀏覽器中，以確認測試使用者無法執行這些作業。
 
@@ -429,7 +431,7 @@ dotnet ef database update
 * `ContactManagerAuthorizationHandler`：可讓管理員核准或拒絕連絡人。
 * `ContactAdministratorsAuthorizationHandler`：可讓系統管理員核准或拒絕連絡人，以及編輯/刪除連絡人。
 
-## <a name="prerequisites"></a>先決條件
+## <a name="prerequisites"></a>必要條件
 
 本教學課程是 advanced。 您應該熟悉：
 
@@ -659,11 +661,11 @@ dotnet user-secrets set SeedUserPW <PW>
 * 管理員可以核准/拒絕連絡人資料。 此 `Details` 視圖會顯示 [ **核准** ] 和 [ **拒絕** ] 按鈕。
 * 系統管理員可以核准/拒絕和編輯/刪除所有資料。
 
-| User                | 由應用程式植入 | 選項                                  |
+| 使用者                | 由應用程式植入 | 選項                                  |
 | ------------------- | :---------------: | ---------------------------------------- |
-| test@example.com    | 否                | 編輯/刪除自己的資料。                |
-| manager@contoso.com | 是               | 核准/拒絕和編輯/刪除自己的資料。 |
-| admin@contoso.com   | 是               | 核准/拒絕和編輯/刪除所有資料。 |
+| test@example.com    | No                | 編輯/刪除自己的資料。                |
+| manager@contoso.com | Yes               | 核准/拒絕和編輯/刪除自己的資料。 |
+| admin@contoso.com   | Yes               | 核准/拒絕和編輯/刪除所有資料。 |
 
 在系統管理員的瀏覽器中建立連絡人。 從系統管理員連絡人複製 [刪除] 和 [編輯] 的 URL。 將這些連結貼到測試使用者的瀏覽器中，以確認測試使用者無法執行這些作業。
 

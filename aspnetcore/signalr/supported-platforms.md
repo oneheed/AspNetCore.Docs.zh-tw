@@ -5,7 +5,7 @@ description: 瞭解 ASP.NET Core 支援的平臺 SignalR 。
 monikerRange: '>= aspnetcore-2.1'
 ms.author: bradyg
 ms.custom: mvc, devx-track-js
-ms.date: 01/16/2020
+ms.date: 01/21/2021
 no-loc:
 - appsettings.json
 - ASP.NET Core Identity
@@ -19,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: signalr/supported-platforms
-ms.openlocfilehash: ee6e263fb5bef7bfb84587c3b0f04175eb8073cd
-ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
+ms.openlocfilehash: 0a858de44f4a87b182a43a776154b782c7e96288
+ms.sourcegitcommit: ebc5beccba5f3f7619de20baa58ad727d2a3d18c
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 10/30/2020
-ms.locfileid: "93051014"
+ms.lasthandoff: 01/22/2021
+ms.locfileid: "98689223"
 ---
 # <a name="aspnet-core-no-locsignalr-supported-platforms"></a>ASP.NET Core SignalR 支援的平臺
 
@@ -38,12 +38,14 @@ SignalR 針對 ASP.NET Core 支援 ASP.NET Core 支援的任何伺服器平臺�
 
 | 瀏覽器                          | 版本         |
 | -------------------------------- | --------------- |
-| Apple Safari，包括 iOS      | 目前&dagger; |
-| Google Chrome （包括 Android） | 目前&dagger; |
-| Microsoft Edge                   | 目前&dagger; |
-| Mozilla Firefox                  | 目前&dagger; |
+| Apple Safari，包括 iOS      | 當前&dagger; |
+| Google Chrome （包括 Android） | 當前&dagger; |
+| Microsoft Edge                   | 當前&dagger; |
+| Mozilla Firefox                  | 當前&dagger; |
 
 &dagger;*Current* 指的是最新版的瀏覽器。
+
+JavaScript 用戶端不支援 Internet Explorer 和其他較舊的瀏覽器。 用戶端在不支援的瀏覽器上可能會有非預期的行為和錯誤。
 
 ## <a name="net-client"></a>.NET 用戶端
 

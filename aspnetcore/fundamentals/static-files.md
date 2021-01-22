@@ -16,12 +16,12 @@ no-loc:
 - Razor
 - SignalR
 uid: fundamentals/static-files
-ms.openlocfilehash: 2e25af03a8a6aaff5b343885711c6ebb68340fac
-ms.sourcegitcommit: 3593c4efa707edeaaceffbfa544f99f41fc62535
+ms.openlocfilehash: d97caeffc6e8beebddb01a5bd126d61ba988de65
+ms.sourcegitcommit: ebc5beccba5f3f7619de20baa58ad727d2a3d18c
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 01/04/2021
-ms.locfileid: "93057852"
+ms.lasthandoff: 01/22/2021
+ms.locfileid: "98689288"
 ---
 # <a name="static-files-in-aspnet-core"></a>ASP.NET Core 中的靜態檔案
 
@@ -54,7 +54,7 @@ ms.locfileid: "93057852"
 
 ### <a name="serve-files-in-web-root"></a>在 web 根目錄中提供檔案
 
-預設的 web 應用程式範本 <xref:Owin.StaticFileExtensions.UseStaticFiles%2A> 會在中呼叫方法 `Startup.Configure` ，以啟用靜態檔案的服務：
+預設的 web 應用程式範本 <xref:Microsoft.AspNetCore.Builder.StaticFileExtensions.UseStaticFiles%2A> 會在中呼叫方法 `Startup.Configure` ，以啟用靜態檔案的服務：
 
 [!code-csharp[](~/fundamentals/static-files/samples/3.x/StaticFilesSample/Startup.cs?name=snippet_Configure&highlight=15)]
 
@@ -104,23 +104,31 @@ ms.locfileid: "93057852"
 
 ## <a name="static-file-authorization"></a>靜態檔案授權
 
-靜態檔案中介軟體不提供授權檢查。 由 it 提供的任何檔案（包括下的檔案） `wwwroot` 都可以公開存取。 若要依據授權來提供檔案：
+ASP.NET Core 範本會 <xref:Microsoft.AspNetCore.Builder.StaticFileExtensions.UseStaticFiles%2A> 在呼叫之前呼叫 <xref:Microsoft.AspNetCore.Builder.AuthorizationAppBuilderExtensions.UseAuthorization%2A> 。 大部分的應用程式會遵循此模式。 在授權中介軟體之前呼叫靜態檔案中介軟體：
 
-* 將它們儲存 `wwwroot` 在預設靜態檔案中介軟體的外部，以及任何可存取的目錄。
-* `UseStaticFiles`在之後呼叫 `UseAuthorization` 並指定路徑：
-
-  [!code-csharp[](static-files/samples/3.x/StaticFileAuth/Startup.cs?name=snippet2)]
+  * 靜態檔案不會執行任何授權檢查。
+  * 靜態檔案中介軟體所提供的靜態檔案（例如這些檔案中介軟體）可 `wwwroot` 公開存取。
   
-  上述方法需要驗證使用者：
+若要根據授權提供靜態檔案：
 
-  [!code-csharp[](static-files/samples/3.x/StaticFileAuth/Startup.cs?name=snippet1&highlight=20-99)]
+  * 將它們儲存在之外 `wwwroot` 。
+  * 呼叫 `UseStaticFiles` 之後，指定路徑 `UseAuthorization` 。
+  * 設定 [fallback 授權原則](xref:Microsoft.AspNetCore.Authorization.AuthorizationOptions.FallbackPolicy)。
 
-   [!INCLUDE[](~/includes/requireAuth.md)]
+  [!code-csharp[](static-files/samples/3.x/StaticFileAuth/Startup.cs?name=snippet2&highlight=24-29)]
+  
+  [!code-csharp[](static-files/samples/3.x/StaticFileAuth/Startup.cs?name=snippet1&highlight=20-25)]
 
-根據授權提供檔案的替代方法：
+  在上述程式碼中，fallback 授權原則會要求 ***all** _ 使用者進行驗證。 指定自己的授權需求的端點（例如控制器、頁面等） Razor 不會使用 fallback 授權原則。 例如，使用 Razor 或的頁面、控制器或動作方法，會使用已套用 `[AllowAnonymous]` `[Authorize(PolicyName="MyPolicy")]` 的授權屬性，而非 fallback 授權原則。
 
-* 將它們儲存 `wwwroot` 在靜態檔案中介軟體的外部，以及任何可存取的目錄。
-* 透過套用授權的動作方法來提供服務，並傳回 <xref:Microsoft.AspNetCore.Mvc.FileResult> 物件：
+  <xref:Microsoft.AspNetCore.Authorization.AuthorizationPolicyBuilder.RequireAuthenticatedUser%2A> 加入 <xref:Microsoft.AspNetCore.Authorization.Infrastructure.DenyAnonymousAuthorizationRequirement> 目前的實例，這會強制驗證目前的使用者。
+
+  下的靜態資產可 `wwwroot` 公開存取，因為預設靜態檔案中介軟體 (`app.UseStaticFiles();`) 會先呼叫 `UseAuthentication` 。 _MyStaticFiles * 資料夾中的靜態資產需要驗證。 [範例程式碼](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/static-files/samples)會示範這一點。
+
+根據授權提供檔案的替代方法是：
+
+  * 將它們儲存 `wwwroot` 在靜態檔案中介軟體的外部，以及任何可存取的目錄。
+  * 透過套用授權的動作方法來提供服務，並傳回 <xref:Microsoft.AspNetCore.Mvc.FileResult> 物件：
 
   [!code-csharp[](static-files/samples/3.x/StaticFilesSample/Controllers/HomeController.cs?name=snippet_BannerImage)]
 

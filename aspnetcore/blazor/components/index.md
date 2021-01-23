@@ -19,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/components/index
-ms.openlocfilehash: 12a1f528bdff0230bbf17075284d27de654a423e
-ms.sourcegitcommit: 063a06b644d3ade3c15ce00e72a758ec1187dd06
+ms.openlocfilehash: fe30c3b3be92c30dea6d0cb97e642eec1da6328b
+ms.sourcegitcommit: 72c8ada9b9644ee4751ed6869e892a8558dd8e66
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 01/16/2021
-ms.locfileid: "98252418"
+ms.lasthandoff: 01/23/2021
+ms.locfileid: "98723508"
 ---
 # <a name="create-and-use-aspnet-core-no-locrazor-components"></a>建立和使用 ASP.NET Core Razor 元件
 
@@ -957,13 +957,13 @@ Razor 元件 () **不** 支援波狀符號斜線標記法 `~/` 。
 * <xref:blazor/security/server/threat-mitigation>：包含建立 Blazor Server 必須與資源耗盡相關之應用程式的指引。
 
 <!--Reference links in article-->
-[1]: [Razor syntax reference for ASP.NET Core](xref:mvc/views/razor#code)
-[2]: [Razor syntax reference for ASP.NET Core](xref:mvc/views/razor#using)
-[3]: [Razor syntax reference for ASP.NET Core](xref:mvc/views/razor#attributes)
-[4]: [Razor syntax reference for ASP.NET Core](xref:mvc/views/razor#ref)
-[5]: [Razor syntax reference for ASP.NET Core](xref:mvc/views/razor#key)
-[6]: [Razor syntax reference for ASP.NET Core](xref:mvc/views/razor#inherits)
-[7]: [Razor syntax reference for ASP.NET Core](xref:mvc/views/razor#attribute)
-[8]: [Razor syntax reference for ASP.NET Core](xref:mvc/views/razor#namespace)
-[9]: [Razor syntax reference for ASP.NET Core](xref:mvc/views/razor#page)
-[10]: [Razor syntax reference for ASP.NET Core](xref:mvc/views/razor#bind)
+[1]: <xref:mvc/views/razor#code> "：：：非 loc (Razor) ：：： ASP.NET Core 的語法參考"
+[2]: <xref:mvc/views/razor#using> "：：：非 loc (Razor) ：：： ASP.NET Core 的語法參考"
+[3]: <xref:mvc/views/razor#attributes> "：：：非 loc (Razor) ：：： ASP.NET Core 的語法參考"
+[4]: <xref:mvc/views/razor#ref> "：：：非 loc (Razor) ：：： ASP.NET Core 的語法參考"
+[5]: <xref:mvc/views/razor#key> "：：：非 loc (Razor) ：：： ASP.NET Core 的語法參考"
+[6]: <xref:mvc/views/razor#inherits> "：：：非 loc (Razor) ：：： ASP.NET Core 的語法參考"
+[7]: <xref:mvc/views/razor#attribute> "：：：非 loc (Razor) ：：： ASP.NET Core 的語法參考"
+[8]: <xref:mvc/views/razor#namespace> "：：：非 loc (Razor) ：：： ASP.NET Core 的語法參考"
+[9]: <xref:mvc/views/razor#page> "：：：非 loc (Razor) ：：： ASP.NET Core 的語法參考"
+[10]: <xref:mvc/views/razor#bind> "：：：非 loc (Razor) ：：： ASP.NET Core 的語法參考"

@@ -1,5 +1,5 @@
 ---
-title: ASP.NET Core web API 中的控制器動作傳回類型
+title: ASP.NET Core Web API 中的控制器動作傳回類型
 author: scottaddie
 description: 瞭解如何在 ASP.NET Core web API 中使用各種控制器動作方法的傳回類型。
 ms.author: scaddie
@@ -18,14 +18,14 @@ no-loc:
 - Razor
 - SignalR
 uid: web-api/action-return-types
-ms.openlocfilehash: a2866970a20785ae8fa306d484972697817b7f92
-ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
+ms.openlocfilehash: 62c8227ca770a3a9adbe780685b140bc0e86841e
+ms.sourcegitcommit: da5a5bed5718a9f8db59356ef8890b4b60ced6e9
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 10/30/2020
-ms.locfileid: "93058944"
+ms.lasthandoff: 01/22/2021
+ms.locfileid: "98710694"
 ---
-# <a name="controller-action-return-types-in-aspnet-core-web-api"></a>ASP.NET Core web API 中的控制器動作傳回類型
+# <a name="controller-action-return-types-in-aspnet-core-web-api"></a>ASP.NET Core Web API 中的控制器動作傳回類型
 
 作者：[Scott Addie](https://github.com/scottaddie)
 
@@ -92,11 +92,11 @@ public IEnumerable<Product> GetOnSaleProducts() =>
 
 請考慮下列動作，此動作會傳回銷售定價的產品記錄，如下所示 `IEnumerable<Product>` ：
 
-[!code-csharp[](../web-api/action-return-types/samples/3x/WebApiSample.Api.30/Controllers/ProductsController.cs?name=snippet_GetOnSaleProducts)]
+[!code-csharp[](../web-api/action-return-types/samples/3x/WebApiSample.Api.31/Controllers/ProductsController.cs?name=snippet_GetOnSaleProducts)]
 
 `IAsyncEnumerable<Product>`上述動作的對等專案為：
 
-[!code-csharp[](../web-api/action-return-types/samples/3x/WebApiSample.Api.30/Controllers/ProductsController.cs?name=snippet_GetOnSaleProductsAsync)]
+[!code-csharp[](../web-api/action-return-types/samples/3x/WebApiSample.Api.31/Controllers/ProductsController.cs?name=snippet_GetOnSaleProductsAsync)]
 
 從 ASP.NET Core 3.0 起，上述兩個動作都不會封鎖。
 

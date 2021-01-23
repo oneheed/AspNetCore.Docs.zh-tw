@@ -19,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/security/webassembly/additional-scenarios
-ms.openlocfilehash: bb502533bca24e82792db8814b75b16407f20339
-ms.sourcegitcommit: 3593c4efa707edeaaceffbfa544f99f41fc62535
+ms.openlocfilehash: fb5b6f75959d9933e228b0288e70498ef05efc4a
+ms.sourcegitcommit: da5a5bed5718a9f8db59356ef8890b4b60ced6e9
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 01/04/2021
-ms.locfileid: "95870382"
+ms.lasthandoff: 01/22/2021
+ms.locfileid: "98710629"
 ---
 # <a name="aspnet-core-no-locblazor-webassembly-additional-security-scenarios"></a>ASP.NET Core Blazor WebAssembly 額外的安全性案例
 
@@ -934,7 +934,7 @@ app.UseEndpoints(endpoints =>
 
 Blazor WebAssembly使用協力廠商提供者驗證及授權託管應用程式時，有數個選項可用來驗證使用者。 您選擇哪一個取決於您的案例。
 
-如需詳細資訊，請參閱 <xref:security/authentication/social/additional-claims> 。
+如需詳細資訊，請參閱<xref:security/authentication/social/additional-claims>。
 
 ### <a name="authenticate-users-to-only-call-protected-third-party-apis"></a>驗證使用者只呼叫受保護的協力廠商 Api
 
@@ -1006,7 +1006,7 @@ V2.0 端點的識別碼權杖中宣告的清單會變更。 如需詳細資訊�
 
 若要將 Blazor WebAssembly 應用程式設定為使用 [ASP.NET Core gRPC 架構](xref:grpc/index)：
 
-* 在伺服器上啟用 gRPC Web。 如需詳細資訊，請參閱 <xref:grpc/browser> 。
+* 在伺服器上啟用 gRPC Web。 如需詳細資訊，請參閱<xref:grpc/browser>。
 * 註冊應用程式訊息處理常式的 gRPC 服務。 下列範例會設定應用程式的授權訊息處理常式，以使用[ `GreeterClient` gRPC 教學](xref:tutorials/grpc/grpc-start#create-a-grpc-service)課程 () 中的服務 `Program.Main` ：
 
 ```csharp
@@ -1076,7 +1076,18 @@ Server response: <strong>@serverResponse</strong>
 
 預留位置 `{APP ASSEMBLY}` 是應用程式的元件名稱 (例如 `BlazorSample`) 。 若要使用 `Status.DebugException` 屬性，請使用 [Grpc .Net. Client](https://www.nuget.org/packages/Grpc.Net.Client) version 2.30.0 或更新版本。
 
-如需詳細資訊，請參閱 <xref:grpc/browser> 。
+如需詳細資訊，請參閱<xref:grpc/browser>。
+
+## <a name="build-a-custom-version-of-the-authenticationmsal-javascript-library"></a>建立驗證的自訂版本 MSAL JavaScript 程式庫
+
+如果應用程式需要 [適用于 JavaScript 的 Microsoft 驗證程式庫自訂版本 ( # A0) ](https://www.npmjs.com/package/@azure/msal-browser)，請執行下列步驟：
+
+1. 確認系統具有最新的開發人員 .NET SDK，或從 [.NET Core SDK：安裝程式和二進位](https://github.com/dotnet/installer#installers-and-binaries)檔取得並安裝最新的開發人員 SDK。 此案例不需要設定內部 NuGet 摘要。
+1. 設定 GitHub 存放 `dotnet/aspnetcore` 庫，以根據 [組建 ASP.NET Core 來源](https://github.com/dotnet/aspnetcore/blob/main/docs/BuildFromSource.md)的檔進行開發。 分叉和複製或下載 [dotnet/Aspnetcore GitHub 存放庫](https://github.com/dotnet/aspnetcore)的 ZIP 封存。
+1. 開啟檔案 `src/Components/WebAssembly/Authentication.Msal/src/Interop/package.json` ，並設定所需的版本 `@azure/msal-browser` 。 如需已發行的版本清單，請造訪 [ `@azure/msal-browser` npm 網站](https://www.npmjs.com/package/@azure/msal-browser)，然後選取 [**版本**] 索引標籤。
+1. `Authentication.Msal` `src/Components/WebAssembly/Authentication.Msal/src` 使用命令 shell 中的命令，在資料夾中建立專案 `yarn build` 。
+1. 如果應用程式使用 [壓縮的資產 (Brotli/Gzip) ](xref:blazor/host-and-deploy/webassembly#compression)，請壓縮 `Interop/dist/Release/AuthenticationService.js` 檔案。
+1. `AuthenticationService.js`從資料夾將檔案和壓縮版本 (`.br` / `.gz`) 複製到應用 `Interop/dist/Release` 程式的 `publish/wwwroot/_content/Microsoft.Authentication.WebAssembly.Msal` 已發佈資產中的應用程式資料夾。
 
 ## <a name="additional-resources"></a>其他資源
 

@@ -19,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/components/lifecycle
-ms.openlocfilehash: acaa276efda9fb4d09a5c1b1ca59c6abde1b64ec
-ms.sourcegitcommit: 063a06b644d3ade3c15ce00e72a758ec1187dd06
+ms.openlocfilehash: 7152f45cd799128b668ec5002fb20b4f30e69585
+ms.sourcegitcommit: da5a5bed5718a9f8db59356ef8890b4b60ced6e9
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 01/16/2021
-ms.locfileid: "98252382"
+ms.lasthandoff: 01/22/2021
+ms.locfileid: "98710655"
 ---
 # <a name="aspnet-core-no-locblazor-lifecycle"></a>ASP.NET Core Blazor 生命週期
 
@@ -296,9 +296,9 @@ public class WeatherForecastService
 
 [!INCLUDE[](~/blazor/includes/prerendering.md)]
 
-## <a name="component-disposal-with-idisposable"></a>使用 IDisposable 的元件處置
+## <a name="component-disposal-with-idisposable"></a>元件處置方式 `IDisposable`
 
-如果元件已 <xref:System.IDisposable> 完成，則會在從 UI 中移除元件時呼叫此[ `Dispose` 方法](/dotnet/standard/garbage-collection/implementing-dispose)。 處置可以在任何時間進行，包括 [元件初始化](#component-initialization-methods)期間。 下列元件會使用 `@implements IDisposable` 和 `Dispose` 方法：
+如果元件已執行 <xref:System.IDisposable> ，則在從 UI 中移除元件時，架構會呼叫 [處置方法](/dotnet/standard/garbage-collection/implementing-dispose) ，而無法釋放非受控資源。 處置可以在任何時間進行，包括 [元件初始化](#component-initialization-methods)期間。 下列元件會使用指示詞來 <xref:System.IDisposable> [`@implements`](xref:mvc/views/razor#implements) Razor 執行：
 
 ```razor
 @using System
@@ -314,6 +314,15 @@ public class WeatherForecastService
 }
 ```
 
+針對非同步處置工作，請使用 `DisposeAsync` `Dispose` 上述範例中的取代：
+
+```csharp
+public async ValueTask DisposeAsync()
+{
+    ...
+}
+```
+
 > [!NOTE]
 > <xref:Microsoft.AspNetCore.Components.ComponentBase.StateHasChanged%2A>不支援在中呼叫 `Dispose` 。 <xref:Microsoft.AspNetCore.Components.ComponentBase.StateHasChanged%2A> 可能會在卸載轉譯器的過程中叫用，因此不支援在該時間點要求 UI 更新。
 
@@ -326,6 +335,8 @@ public class WeatherForecastService
 * 私用方法方法
 
   [!code-razor[](lifecycle/samples_snapshot/event-handler-disposal-2.razor?highlight=16,26)]
+  
+如需詳細資訊，請參閱在執行和方法時 [清除非受控資源](/dotnet/standard/garbage-collection/unmanaged) 和後續的主題 `Dispose` `DisposeAsync` 。
 
 ## <a name="cancelable-background-work"></a>可取消的背景工作
 

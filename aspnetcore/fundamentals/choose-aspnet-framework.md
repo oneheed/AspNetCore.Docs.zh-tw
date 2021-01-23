@@ -18,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: fundamentals/choose-between-aspnet-and-aspnetcore
-ms.openlocfilehash: 95ac4784634d38add5e28644d42b0182e15c6de9
-ms.sourcegitcommit: 3593c4efa707edeaaceffbfa544f99f41fc62535
+ms.openlocfilehash: 192784b4f2cb3b80511814de4f777c4a49fc594b
+ms.sourcegitcommit: da5a5bed5718a9f8db59356ef8890b4b60ced6e9
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 01/04/2021
-ms.locfileid: "93060023"
+ms.lasthandoff: 01/22/2021
+ms.locfileid: "98710733"
 ---
 # <a name="choose-between-aspnet-4x-and-aspnet-core"></a>在 ASP.NET 4.x 和 ASP.NET Core 之間進行選擇
 
@@ -56,7 +56,7 @@ ASP.NET 4.x 是一個成熟的架構，其提供在 Windows 上建置企業級�
 
 ## <a name="aspnet-core-scenarios"></a>ASP.NET Core 案例
 
-* [網站](xref:tutorials/first-mvc-app/index)
+* [網站](xref:tutorials/first-mvc-app/start-mvc)
 * [API](xref:tutorials/first-web-api)
 * [即時](xref:signalr/introduction)
 * [將 ASP.NET Core 應用程式部署到 Azure](/azure/app-service/app-service-web-get-started-dotnet)

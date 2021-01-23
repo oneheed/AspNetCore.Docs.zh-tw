@@ -57,8 +57,6 @@
         - name: MVC
           displayName: tutorial
           items:
-            - name: 概觀
-              uid: tutorials/first-mvc-app/index
             - name: 開始使用
               uid: tutorials/first-mvc-app/start-mvc
             - name: 新增控制器
@@ -262,8 +260,6 @@
           uid: mvc/overview
         - name: 教學課程
           items:
-            - name: 總覽
-              uid: tutorials/first-mvc-app/index
             - name: 開始使用
               uid: tutorials/first-mvc-app/start-mvc
             - name: 新增控制器

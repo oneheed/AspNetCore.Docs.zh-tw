@@ -19,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/fundamentals/handle-errors
-ms.openlocfilehash: c789928252417ef1cf95c60deb7edef24d58126e
-ms.sourcegitcommit: 3593c4efa707edeaaceffbfa544f99f41fc62535
+ms.openlocfilehash: 5a255c2d3535311cecd6b7219447e80d1ae78877
+ms.sourcegitcommit: d4836f9b7c508f51c6c4ee6d0cc719b38c1729c4
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 01/04/2021
-ms.locfileid: "93055993"
+ms.lasthandoff: 01/25/2021
+ms.locfileid: "98758257"
 ---
 # <a name="handle-errors-in-aspnet-core-no-locblazor-apps"></a>處理 ASP.NET Core 應用程式中的錯誤 Blazor
 
@@ -89,6 +89,35 @@ ms.locfileid: "93055993"
 }
 ```
 
+## <a name="no-locblazor-server-detailed-circuit-errors"></a>Blazor Server 詳細線路錯誤
+
+用戶端錯誤不包含呼叫堆疊，也不會提供錯誤原因的詳細資料，但伺服器記錄檔包含這類資訊。 基於開發目的，可透過啟用詳細錯誤，讓用戶端可以使用敏感性電路錯誤資訊。
+
+Blazor Server使用下列方法啟用詳細錯誤：
+
+* <xref:Microsoft.AspNetCore.Components.Server.CircuitOptions.DetailedErrors?displayProperty=nameWithType>.
+* `DetailedErrors`設定金鑰設定為 `true` ，可以在應用程式的開發設定檔案 () 中設定 `appsettings.Development.json` 。 您也可以使用 `ASPNETCORE_DETAILEDERRORS` 具有值的環境變數來設定索引鍵 `true` 。
+* [ SignalR 伺服器端記錄](xref:signalr/diagnostics#server-side-logging) (`Microsoft.AspNetCore.SignalR`) 可以設定為[Debug](xref:Microsoft.Extensions.Logging.LogLevel)或[Trace](xref:Microsoft.Extensions.Logging.LogLevel)以進行詳細 SignalR 記錄。
+
+`appsettings.Development.json`:
+
+```json
+{
+  "DetailedErrors": true,
+  "Logging": {
+    "LogLevel": {
+      "Default": "Information",
+      "Microsoft": "Warning",
+      "Microsoft.Hosting.Lifetime": "Information",
+      "Microsoft.AspNetCore.SignalR": "Debug"
+    }
+  }
+}
+```
+
+> [!WARNING]
+> 將錯誤資訊公開給網際網路上的用戶端，應該一律避免使用安全性風險。
+
 ## <a name="how-a-no-locblazor-server-app-reacts-to-unhandled-exceptions"></a>Blazor Server應用程式如何回應未處理的例外狀況
 
 Blazor Server 是具狀態的架構。 當使用者與應用程式互動時，它們會維持與伺服器的連線，稱為 *線路*。 線路會保存作用中的元件實例，再加上許多其他狀態的層面，例如：
@@ -117,13 +146,13 @@ Blazor 將大部分未處理的例外狀況視為嚴重的重大例外狀況。 
 
 ## <a name="log-errors-with-a-persistent-provider"></a>使用持續性提供者記錄錯誤
 
-如果發生未處理的例外狀況，則會將例外狀況記錄到 <xref:Microsoft.Extensions.Logging.ILogger> 服務容器中設定的實例。 根據預設， Blazor 應用程式會使用主控台記錄提供者來記錄主控台輸出。 請考慮使用記錄管理檔大小和記錄檔迴圈的提供者，記錄至更永久的位置。 如需詳細資訊，請參閱 <xref:fundamentals/logging/index> 。
+如果發生未處理的例外狀況，則會將例外狀況記錄到 <xref:Microsoft.Extensions.Logging.ILogger> 服務容器中設定的實例。 根據預設， Blazor 應用程式會使用主控台記錄提供者來記錄主控台輸出。 請考慮使用記錄管理檔大小和記錄檔迴圈的提供者，記錄至更永久的位置。 如需詳細資訊，請參閱<xref:fundamentals/logging/index>。
 
-在開發期間， Blazor 通常會將例外狀況的完整詳細資料傳送至瀏覽器的主控台，以協助進行偵錯工具。 在生產環境中，預設會停用瀏覽器主控台中的詳細錯誤，這表示不會將錯誤傳送到用戶端，但例外狀況的完整詳細資料仍會記錄在伺服器端。 如需詳細資訊，請參閱 <xref:fundamentals/error-handling> 。
+在開發期間， Blazor 通常會將例外狀況的完整詳細資料傳送至瀏覽器的主控台，以協助進行偵錯工具。 在生產環境中，預設會停用瀏覽器主控台中的詳細錯誤，這表示不會將錯誤傳送到用戶端，但例外狀況的完整詳細資料仍會記錄在伺服器端。 如需詳細資訊，請參閱<xref:fundamentals/error-handling>。
 
 您必須決定要記錄哪些事件，以及記錄事件的嚴重性層級。 惡意使用者可能可以刻意觸發錯誤。 例如，請勿從 `ProductId` 顯示產品詳細資料的元件 URL 中提供未知的錯誤記錄事件。 並非所有錯誤都應該視為記錄的高嚴重性事件。
 
-如需詳細資訊，請參閱 <xref:blazor/fundamentals/logging> 。
+如需詳細資訊，請參閱<xref:blazor/fundamentals/logging>。
 
 ## <a name="places-where-errors-may-occur"></a>可能發生錯誤的位置
 
@@ -268,7 +297,7 @@ Blazor 您可以使用 [元件標記](xref:mvc/views/tag-helpers/builtin-th/comp
 
 ### <a name="custom-render-tree-logic"></a>自訂呈現樹狀結構邏輯
 
-大部分 Blazor 的元件會實作為檔案 `.razor` ，並進行編譯以產生可在上操作的邏輯， <xref:Microsoft.AspNetCore.Components.Rendering.RenderTreeBuilder> 以轉譯其輸出。 開發人員可以使用程式 <xref:Microsoft.AspNetCore.Components.Rendering.RenderTreeBuilder> c # 程式碼手動執行邏輯。 如需詳細資訊，請參閱 <xref:blazor/advanced-scenarios#manual-rendertreebuilder-logic> 。
+大部分 Blazor 的元件會實作為檔案 `.razor` ，並進行編譯以產生可在上操作的邏輯， <xref:Microsoft.AspNetCore.Components.Rendering.RenderTreeBuilder> 以轉譯其輸出。 開發人員可以使用程式 <xref:Microsoft.AspNetCore.Components.Rendering.RenderTreeBuilder> c # 程式碼手動執行邏輯。 如需詳細資訊，請參閱<xref:blazor/advanced-scenarios#manual-rendertreebuilder-logic>。
 
 > [!WARNING]
 > 手動轉譯樹狀結構產生器邏輯的使用會被視為 advanced 和 unsafe 案例，不建議用於一般元件開發。

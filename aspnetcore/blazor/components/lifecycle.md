@@ -19,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/components/lifecycle
-ms.openlocfilehash: 7152f45cd799128b668ec5002fb20b4f30e69585
-ms.sourcegitcommit: da5a5bed5718a9f8db59356ef8890b4b60ced6e9
+ms.openlocfilehash: 3591ba18351b89e2d5dfaef796777273c97ce98b
+ms.sourcegitcommit: 610936e4d3507f7f3d467ed7859ab9354ec158ba
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 01/22/2021
-ms.locfileid: "98710655"
+ms.lasthandoff: 01/25/2021
+ms.locfileid: "98751626"
 ---
 # <a name="aspnet-core-no-locblazor-lifecycle"></a>ASP.NET Core Blazor 生命週期
 
@@ -68,14 +68,38 @@ ms.locfileid: "98710655"
 
 ### <a name="before-parameters-are-set"></a>設定參數之前
 
-<xref:Microsoft.AspNetCore.Components.ComponentBase.SetParametersAsync%2A> 在轉譯樹狀結構中設定元件父系所提供的參數：
+<xref:Microsoft.AspNetCore.Components.ComponentBase.SetParametersAsync%2A> 在轉譯樹狀結構中或從路由參數，設定元件的父系所提供的參數。 藉由覆寫方法，開發人員程式碼就可以直接與 <xref:Microsoft.AspNetCore.Components.ParameterView> 的參數互動。
 
-```csharp
-public override async Task SetParametersAsync(ParameterView parameters)
-{
-    await ...
+在下列範例中， <xref:Microsoft.AspNetCore.Components.ParameterView.TryGetValue%2A?displayProperty=nameWithType> 如果剖析的路由參數為成功，則將 `Param` 參數的值指派給 `value` `Param` 。 如果 `value` 沒有 `null` ，此值就會由 `SetParametersAsyncExample` 元件顯示。
 
-    await base.SetParametersAsync(parameters);
+`Pages/SetParametersAsyncExample.razor`:
+
+```razor
+@page "/setparametersasync-example/{Param?}"
+
+<h1>SetParametersAsync Example</h1>
+
+<p>@message</p>
+
+@code {
+    private string message;
+
+    [Parameter]
+    public string Param { get; set; }
+
+    public override async Task SetParametersAsync(ParameterView parameters)
+    {
+        if (parameters.TryGetValue<string>(nameof(Param), out var value))
+        {
+            message = $"The value of 'Param' is {value}.";
+        }
+        else 
+        {
+            message = "The value of 'Param' is null.";
+        }
+
+        await base.SetParametersAsync(parameters);
+    }
 }
 ```
 

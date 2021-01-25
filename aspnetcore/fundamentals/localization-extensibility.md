@@ -19,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: fundamentals/localization-extensibility
-ms.openlocfilehash: a6ef5a547e6ccba6771cdf892a9636f83d6796b1
-ms.sourcegitcommit: 3593c4efa707edeaaceffbfa544f99f41fc62535
+ms.openlocfilehash: c41ebc0506a565666963d9b4c70ed73df389c826
+ms.sourcegitcommit: 610936e4d3507f7f3d467ed7859ab9354ec158ba
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 01/04/2021
-ms.locfileid: "93053731"
+ms.lasthandoff: 01/25/2021
+ms.locfileid: "98751664"
 ---
 # <a name="localization-extensibility"></a>當地語系化擴充性
 
@@ -151,7 +151,7 @@ public class AppSettingsRequestCultureProvider : RequestCultureProvider
 
 ASP.NET Core 當地語系化會提供 <xref:Microsoft.Extensions.Localization.ResourceManagerStringLocalizer>。 <xref:Microsoft.Extensions.Localization.ResourceManagerStringLocalizer> 是使用 `resx` 來儲存當地語系化資源的 <xref:Microsoft.Extensions.Localization.IStringLocalizer> 實作。
 
-您不一定要使用 `resx` 檔案。 藉由實作 `IStringLocalized`，即可使用任何資料來源。
+您不一定要使用 `resx` 檔案。 藉由實作 `IStringLocalizer`，即可使用任何資料來源。
 
 下列範例專案會實作 <xref:Microsoft.Extensions.Localization.IStringLocalizer>： 
 

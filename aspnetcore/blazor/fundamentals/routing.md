@@ -19,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/fundamentals/routing
-ms.openlocfilehash: ec183f4aadc6bafd8e77f9d97291ba3d47bd92f5
-ms.sourcegitcommit: 3593c4efa707edeaaceffbfa544f99f41fc62535
+ms.openlocfilehash: 74886eae7431045e56de535b5221040bd56cdc2d
+ms.sourcegitcommit: 610936e4d3507f7f3d467ed7859ab9354ec158ba
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 01/04/2021
-ms.locfileid: "97506925"
+ms.lasthandoff: 01/25/2021
+ms.locfileid: "98751564"
 ---
 # <a name="aspnet-core-no-locblazor-routing"></a>ASP.NET Core Blazor 路由
 
@@ -80,7 +80,7 @@ ms.locfileid: "97506925"
 ::: moniker-end
 
 > [!IMPORTANT]
-> 若要正確解析 Url，應用程式必須在其檔案中包含標籤 `<base>` `wwwroot/index.html` (Blazor WebAssembly) 或檔案 `Pages/_Host.cshtml` (Blazor Server) 以及屬性中指定的應用程式基底路徑 `href` 。 如需詳細資訊，請參閱 <xref:blazor/host-and-deploy/index#app-base-path> 。
+> 若要正確解析 Url，應用程式必須在其檔案中包含標籤 `<base>` `wwwroot/index.html` (Blazor WebAssembly) 或檔案 `Pages/_Host.cshtml` (Blazor Server) 以及屬性中指定的應用程式基底路徑 `href` 。 如需詳細資訊，請參閱<xref:blazor/host-and-deploy/index#app-base-path>。
 
 ## <a name="provide-custom-content-when-content-isnt-found"></a>在找不到內容時提供自訂內容
 
@@ -248,7 +248,7 @@ endpoints.MapFallbackToFile("/example/{param?}", "index.html");
 endpoints.MapFallbackToPage("/example/{param?}", "/_Host");
 ```
 
-如需詳細資訊，請參閱 <xref:fundamentals/routing> 。
+如需詳細資訊，請參閱<xref:fundamentals/routing>。
 
 ## <a name="catch-all-route-parameters"></a>Catch-all 路由參數
 
@@ -326,11 +326,11 @@ ASP.NET Core 5.0 或更新版本中支援 Catch-all 路由參數。 如需詳細
 您可以從屬性取得要求的查詢字串 <xref:Microsoft.AspNetCore.Components.NavigationManager.Uri?displayProperty=nameWithType> ：
 
 ```razor
-@inject NavigationManager Navigation
+@inject NavigationManager NavigationManager
 
 ...
 
-var query = new Uri(Navigation.Uri).Query;
+var query = new Uri(NavigationManager.Uri).Query;
 ```
 
 剖析查詢字串的參數：
@@ -354,7 +354,7 @@ var query = new Uri(Navigation.Uri).Query;
 
 ::: moniker-end
 
-## <a name="navlink-component"></a>`NavLink` 元件
+## <a name="navlink-and-navmenu-components"></a>`NavLink` 和 `NavMenu` 元件
 
 <xref:Microsoft.AspNetCore.Components.Routing.NavLink>建立導覽連結時，請使用元件來取代 HTML 超連結元素 (`<a>`) 。 <xref:Microsoft.AspNetCore.Components.Routing.NavLink>元件的行為類似專案 `<a>` ，但它會 `active` 根據其是否 `href` 符合目前的 URL 來切換 CSS 類別。 `active`類別可協助使用者瞭解在顯示的導覽連結中，哪個頁面是使用中的頁面。 （選擇性）將 CSS 類別名稱指派為， <xref:Microsoft.AspNetCore.Components.Routing.NavLink.ActiveClass?displayProperty=nameWithType> 以便在目前的路由符合時將自訂 css 類別套用至轉譯的連結 `href` 。
 

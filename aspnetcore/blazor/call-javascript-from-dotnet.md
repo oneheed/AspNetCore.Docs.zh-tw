@@ -19,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/call-javascript-from-dotnet
-ms.openlocfilehash: 2502f43f4eaf245996827f704462ec340bbb8e07
-ms.sourcegitcommit: 063a06b644d3ade3c15ce00e72a758ec1187dd06
+ms.openlocfilehash: 53b702cddca778e06e617df3798bffb21677d36b
+ms.sourcegitcommit: 610936e4d3507f7f3d467ed7859ab9354ec158ba
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 01/16/2021
-ms.locfileid: "98252535"
+ms.lasthandoff: 01/25/2021
+ms.locfileid: "98751651"
 ---
 # <a name="call-javascript-functions-from-net-methods-in-aspnet-core-no-locblazor"></a>從 ASP.NET Core 中的 .NET 方法呼叫 JavaScript 函式 Blazor
 
@@ -35,6 +35,9 @@ Blazor應用程式可以從 javascript 函式的 .net 方法和 .net 方法中�
 本文涵蓋從 .NET 叫用 JavaScript 函式的功能。 如需如何從 JavaScript 呼叫 .NET 方法的詳細資訊，請參閱 <xref:blazor/call-dotnet-from-javascript> 。
 
 [查看或下載範例程式碼](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/blazor/common/samples/) ([如何下載](xref:index#how-to-download-a-sample)) 
+
+> [!NOTE]
+> 在檔案 `<script>` `</body>` `wwwroot/index.html` (Blazor WebAssembly) 或檔案 `Pages/_Host.cshtml` () 中的結束記號之前，將 JS 檔案新增 (標記) Blazor Server 。 確定具有 JS interop 方法的 JS 檔案包含在 Blazor FRAMEWORK JS 檔案之前。
 
 若要從 .NET 呼叫 JavaScript，請使用 <xref:Microsoft.JSInterop.IJSRuntime> 抽象概念。 若要發出 JS interop 呼叫，請 <xref:Microsoft.JSInterop.IJSRuntime> 在您的元件中插入抽象概念。 <xref:Microsoft.JSInterop.IJSRuntime.InvokeAsync%2A> 取得您想要叫用之 JavaScript 函式的識別碼，以及任何數目的 JSON 可序列化引數。 函數識別碼是相對於全域範圍 (`window`) 。 如果您想要呼叫 `window.someScope.someFunction` ，則識別碼為 `someScope.someFunction` 。 在呼叫函式之前，不需要先註冊函式。 傳回型別 `T` 也必須是 JSON 可序列化。 `T` 應符合最適合對應至所傳回 JSON 型別的 .NET 型別。
 

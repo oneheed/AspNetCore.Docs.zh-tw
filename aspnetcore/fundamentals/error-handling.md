@@ -19,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: fundamentals/error-handling
-ms.openlocfilehash: ad9920ccd830b93d083f3c5ede03702164842b6e
-ms.sourcegitcommit: 3593c4efa707edeaaceffbfa544f99f41fc62535
+ms.openlocfilehash: e65983fb1a440057283111ea5a79a79b765607b7
+ms.sourcegitcommit: 610936e4d3507f7f3d467ed7859ab9354ec158ba
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 01/04/2021
-ms.locfileid: "97753110"
+ms.lasthandoff: 01/25/2021
+ms.locfileid: "98751687"
 ---
 # <a name="handle-errors-in-aspnet-core"></a>處理 ASP.NET Core 中的錯誤
 
@@ -68,7 +68,14 @@ _ 堆疊追蹤
 
 RazorPages 應用程式範本會 <xref:Microsoft.AspNetCore.Mvc.RazorPages.PageModel> `ErrorModel` 在 [ *pages* ] 資料夾中提供錯誤頁面 () 和類別 () 。 在 MVC 應用程式中，專案範本包含 `Error` 動作方法和首頁控制器的錯誤視圖。
 
-請勿將錯誤處理常式動作方法標記為 HTTP 方法屬性，例如 `HttpGet` 。 明確動詞命令會防止某些要求到達動作方法。 如果未經驗證的使用者應該會看到錯誤視圖，則允許匿名存取方法。
+例外狀況處理中介軟體會使用 *原始* HTTP 方法重新執行要求。 如果錯誤處理常式端點受限於一組特定的 HTTP 方法，則只會針對這些 HTTP 方法執行。 例如，使用屬性的 MVC 控制器動作只會 `[HttpGet]` 執行 GET 要求。 為了確保 *所有要求都* 到達自訂錯誤處理頁面，請不要將它們限制為一組特定的 HTTP 方法。
+
+若要根據原始的 HTTP 方法，以不同的方式處理例外狀況：
+
+* 若為 Razor 頁面，請建立多個處理常式方法。 例如，使用 `OnGet` 來處理 GET 例外狀況，並使用 `OnPost` 來處理 POST 例外狀況。
+* 針對 MVC，將 HTTP 動詞屬性套用至多個動作。 例如，使用 `[HttpGet]` 來處理 GET 例外狀況，並使用 `[HttpPost]` 來處理 POST 例外狀況。
+
+若要允許未經驗證的使用者查看自訂錯誤處理頁面，請確定它支援匿名存取。
 
 ### <a name="access-the-exception"></a>存取例外狀況
 
@@ -246,7 +253,7 @@ When using a placeholder in the path, confirm that the endpoint can process the 
 * Dotnet 會處理損毀狀況。
 * 當 HTTP 伺服器是 [Kestrel](xref:fundamentals/servers/kestrel) 時，不會顯示任何錯誤頁面。
 
-在 [IIS](/iis) (或 Azure App Service) 或 [IIS Express](/iis/extensions/introduction-to-iis-express/iis-express-overview) 上執行時，如果無法啟動處理序，[模組](xref:host-and-deploy/aspnet-core-module)會傳回 *502.5 - 處理序失敗*。 如需詳細資訊，請參閱 <xref:test/troubleshoot-azure-iis> 。
+在 [IIS](/iis) (或 Azure App Service) 或 [IIS Express](/iis/extensions/introduction-to-iis-express/iis-express-overview) 上執行時，如果無法啟動處理序，[模組](xref:host-and-deploy/aspnet-core-module)會傳回 *502.5 - 處理序失敗*。 如需詳細資訊，請參閱<xref:test/troubleshoot-azure-iis>。
 
 ## <a name="database-error-page"></a>資料庫錯誤頁面
 
@@ -256,7 +263,7 @@ When using a placeholder in the path, confirm that the endpoint can process the 
 
 ## <a name="exception-filters"></a>例外狀況篩選條件
 
-在 MVC 應用程式中，您能以全域設定例外狀況篩選條件，或是以每個控制器或每個動作為基礎的方式設定。 在 Razor 頁面應用程式中，可以設定全域或依頁面的模型。 這些篩選器會處理在控制器動作或其他篩選準則執行期間發生的任何未處理例外狀況。 如需詳細資訊，請參閱 <xref:mvc/controllers/filters#exception-filters> 。
+在 MVC 應用程式中，您能以全域設定例外狀況篩選條件，或是以每個控制器或每個動作為基礎的方式設定。 在 Razor 頁面應用程式中，可以設定全域或依頁面的模型。 這些篩選器會處理在控制器動作或其他篩選準則執行期間發生的任何未處理例外狀況。 如需詳細資訊，請參閱<xref:mvc/controllers/filters#exception-filters>。
 
 例外狀況篩選準則適用于捕捉 MVC 動作內發生的例外狀況，但是它們並不像內建的 [例外狀況處理中介軟體](https://github.com/dotnet/aspnetcore/blob/master/src/Middleware/Diagnostics/src/ExceptionHandler/ExceptionHandlerMiddleware.cs)那麼有彈性 `UseExceptionHandler` 。 `UseExceptionHandler`除非您需要根據選擇的 MVC 動作，以不同的方式執行錯誤處理，否則建議使用。
 
@@ -453,7 +460,7 @@ if (statusCodePagesFeature != null)
 * Dotnet 會處理損毀狀況。
 * 當 HTTP 伺服器是 [Kestrel](xref:fundamentals/servers/kestrel) 時，不會顯示任何錯誤頁面。
 
-在 [IIS](/iis) (或 Azure App Service) 或 [IIS Express](/iis/extensions/introduction-to-iis-express/iis-express-overview) 上執行時，如果無法啟動處理序，[模組](xref:host-and-deploy/aspnet-core-module)會傳回 *502.5 - 處理序失敗*。 如需詳細資訊，請參閱 <xref:test/troubleshoot-azure-iis> 。
+在 [IIS](/iis) (或 Azure App Service) 或 [IIS Express](/iis/extensions/introduction-to-iis-express/iis-express-overview) 上執行時，如果無法啟動處理序，[模組](xref:host-and-deploy/aspnet-core-module)會傳回 *502.5 - 處理序失敗*。 如需詳細資訊，請參閱<xref:test/troubleshoot-azure-iis>。
 
 ## <a name="database-error-page"></a>資料庫錯誤頁面
 
@@ -472,7 +479,7 @@ if (env.IsDevelopment())
 
 ## <a name="exception-filters"></a>例外狀況篩選條件
 
-在 MVC 應用程式中，您能以全域設定例外狀況篩選條件，或是以每個控制器或每個動作為基礎的方式設定。 在 Razor 頁面應用程式中，可以設定全域或依頁面的模型。 這些篩選會處理在控制器動作或其他篩選條件執行期間發生但的任何未處理例外狀況。 如需詳細資訊，請參閱 <xref:mvc/controllers/filters#exception-filters> 。
+在 MVC 應用程式中，您能以全域設定例外狀況篩選條件，或是以每個控制器或每個動作為基礎的方式設定。 在 Razor 頁面應用程式中，可以設定全域或依頁面的模型。 這些篩選會處理在控制器動作或其他篩選條件執行期間發生但的任何未處理例外狀況。 如需詳細資訊，請參閱<xref:mvc/controllers/filters#exception-filters>。
 
 > [!TIP]
 > 例外狀況篩選條件適合用來截獲 MVC 動作中發生的例外狀況，但是它們並不像例外狀況處理中介軟體那麼有彈性。 我們建議使用中介軟體。 請只在需要根據已選擇的 MVC 動作執行不同的錯誤處理時，才使用篩選條件。

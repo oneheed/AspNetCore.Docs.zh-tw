@@ -19,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/security/index
-ms.openlocfilehash: f8b31c617ef71003042d31690de49d48946ac3d5
-ms.sourcegitcommit: da5a5bed5718a9f8db59356ef8890b4b60ced6e9
+ms.openlocfilehash: 35620299b1138ca45a6ebf1d789a9f4aa9b29518
+ms.sourcegitcommit: 610936e4d3507f7f3d467ed7859ab9354ec158ba
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 01/22/2021
-ms.locfileid: "98710642"
+ms.lasthandoff: 01/25/2021
+ms.locfileid: "98751601"
 ---
 # <a name="aspnet-core-no-locblazor-authentication-and-authorization"></a>ASP.NET Core Blazor 驗證與授權
 
@@ -299,7 +299,7 @@ builder.Services.AddAuthorizationCore();
 * 已驗證 (已登入) 的使用者視為已授權。
 * 未驗證 (已登出) 的使用者視為未經授權。
 
-元件 <xref:Microsoft.AspNetCore.Components.Authorization.AuthorizeView> 可以用在 `NavMenu` 元件 (`Shared/NavMenu.razor`) ，以 (`<li>...</li>`) 為[ `NavLink` 元件](xref:blazor/fundamentals/routing#navlink-component) () 顯示清單專案 <xref:Microsoft.AspNetCore.Components.Routing.NavLink> ，但請注意，此方法只會從轉譯的輸出中移除清單專案。 它不會防止使用者流覽至元件。
+元件 <xref:Microsoft.AspNetCore.Components.Authorization.AuthorizeView> 可以用在 `NavMenu` 元件 (`Shared/NavMenu.razor`) ，以 (`<li>...</li>`) 為[ `NavLink` 元件](xref:blazor/fundamentals/routing#navlink-and-navmenu-components) () 顯示清單專案 <xref:Microsoft.AspNetCore.Components.Routing.NavLink> ，但請注意，此方法只會從轉譯的輸出中移除清單專案。 它不會防止使用者流覽至元件。
 
 ### <a name="role-based-and-policy-based-authorization"></a>角色型和原則型授權
 

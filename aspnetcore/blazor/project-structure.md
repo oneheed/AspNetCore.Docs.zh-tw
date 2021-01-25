@@ -19,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/project-structure
-ms.openlocfilehash: ae41d096c50d350b7fcde52da59382614e62c109
-ms.sourcegitcommit: cc405f20537484744423ddaf87bd1e7d82b6bdf0
+ms.openlocfilehash: 958fa23a1befac3696d850d5409d4021dd109c22
+ms.sourcegitcommit: 610936e4d3507f7f3d467ed7859ab9354ec158ba
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 01/21/2021
-ms.locfileid: "98658621"
+ms.lasthandoff: 01/25/2021
+ms.locfileid: "98751538"
 ---
 # <a name="aspnet-core-no-locblazor-project-structure"></a>ASP.NET Core Blazor 專案結構
 
@@ -48,7 +48,7 @@ Blazor WebAssembly範本 (`blazorwasm`) 會建立應用程式的初始檔案和�
 * `Shared` 資料夾：包含下列共用元件和樣式表單：
   * `MainLayout` 元件 (`MainLayout.razor`) ：應用程式的 [版面配置元件](xref:blazor/layouts)。
   * `MainLayout.razor.css`：應用程式主要版面配置的樣式表單。
-  * `NavMenu` 元件 (`NavMenu.razor`) ：實行提要欄位導覽。 包含 () 的[ `NavLink` 元件](xref:blazor/fundamentals/routing#navlink-component) <xref:Microsoft.AspNetCore.Components.Routing.NavLink> ，其會呈現其他元件的導覽連結 Razor 。 元件會在 <xref:Microsoft.AspNetCore.Components.Routing.NavLink> 載入元件時自動表示選取的狀態，這可協助使用者瞭解目前顯示的元件。
+  * `NavMenu` 元件 (`NavMenu.razor`) ：實行提要欄位導覽。 包含 () 的[ `NavLink` 元件](xref:blazor/fundamentals/routing#navlink-and-navmenu-components) <xref:Microsoft.AspNetCore.Components.Routing.NavLink> ，其會呈現其他元件的導覽連結 Razor 。 元件會在 <xref:Microsoft.AspNetCore.Components.Routing.NavLink> 載入元件時自動表示選取的狀態，這可協助使用者瞭解目前顯示的元件。
   * `NavMenu.razor.css`：應用程式導覽功能表的樣式表單。
   * `SurveyPrompt` 元件 (`SurveyPrompt.razor`) ： Blazor 問卷元件。
 
@@ -58,7 +58,7 @@ Blazor WebAssembly範本 (`blazorwasm`) 會建立應用程式的初始檔案和�
 
 * `Shared` 資料夾：包含下列共用元件：
   * `MainLayout` 元件 (`MainLayout.razor`) ：應用程式的 [版面配置元件](xref:blazor/layouts)。
-  * `NavMenu` 元件 (`NavMenu.razor`) ：實行提要欄位導覽。 包含 () 的[ `NavLink` 元件](xref:blazor/fundamentals/routing#navlink-component) <xref:Microsoft.AspNetCore.Components.Routing.NavLink> ，其會呈現其他元件的導覽連結 Razor 。 元件會在 <xref:Microsoft.AspNetCore.Components.Routing.NavLink> 載入元件時自動表示選取的狀態，這可協助使用者瞭解目前顯示的元件。
+  * `NavMenu` 元件 (`NavMenu.razor`) ：實行提要欄位導覽。 包含 () 的[ `NavLink` 元件](xref:blazor/fundamentals/routing#navlink-and-navmenu-components) <xref:Microsoft.AspNetCore.Components.Routing.NavLink> ，其會呈現其他元件的導覽連結 Razor 。 元件會在 <xref:Microsoft.AspNetCore.Components.Routing.NavLink> 載入元件時自動表示選取的狀態，這可協助使用者瞭解目前顯示的元件。
   * `SurveyPrompt` 元件 (`SurveyPrompt.razor`) ： Blazor 問卷元件。
   
 ::: moniker-end
@@ -78,6 +78,9 @@ Blazor WebAssembly範本 (`blazorwasm`) 會建立應用程式的初始檔案和�
   * 頁面會指定呈現根元件的位置 `App` 。 元件會轉譯在 `app` DOM 元素 () 的位置 `<app>Loading...</app>` 。
 
 ::: moniker-end
+
+> [!NOTE]
+> 新增至檔案的 JavaScript (JS) 檔案 `wwwroot/index.html` 應該會出現在結尾 `</body>` 標記之前。 在某些情況下，從 JS 檔案載入自訂 JS 程式碼的順序很重要。 例如，請確定具有 interop 方法的 JS 檔案包含在 Blazor FRAMEWORK JS 檔案之前。
 
 * `_Imports.razor`：包含 Razor 要包含在應用程式元件 () 的一般指示詞 `.razor` ，例如 [`@using`](xref:mvc/views/razor#using) 命名空間的指示詞。
 
@@ -115,7 +118,10 @@ Blazor Server範本 (`blazorserver`) 會建立應用程式的初始檔案和目�
   * `Error` 元件 (`Error.razor`) ：當應用程式中發生未處理的例外狀況時，即會呈現。
   * `FetchData` 元件 (`FetchData.razor`) ：實行提取資料頁面。
   * `Index` 元件 (`Index.razor`) ：實行首頁。
-  
+
+> [!NOTE]
+> 新增至檔案的 JavaScript (JS) 檔案 `Pages/_Host.cshtml` 應該會出現在結尾 `</body>` 標記之前。 在某些情況下，從 JS 檔案載入自訂 JS 程式碼的順序很重要。 例如，請確定具有 interop 方法的 JS 檔案包含在 Blazor FRAMEWORK JS 檔案之前。
+
 * `Properties/launchSettings.json`：保留 [開發環境](xref:fundamentals/environments#development-and-launchsettingsjson)設定。
 
 ::: moniker range=">= aspnetcore-5.0"
@@ -123,7 +129,7 @@ Blazor Server範本 (`blazorserver`) 會建立應用程式的初始檔案和目�
 * `Shared` 資料夾：包含下列共用元件和樣式表單：
   * `MainLayout` 元件 (`MainLayout.razor`) ：應用程式的 [版面配置元件](xref:blazor/layouts)。
   * `MainLayout.razor.css`：應用程式主要版面配置的樣式表單。
-  * `NavMenu` 元件 (`NavMenu.razor`) ：實行提要欄位導覽。 包含 () 的[ `NavLink` 元件](xref:blazor/fundamentals/routing#navlink-component) <xref:Microsoft.AspNetCore.Components.Routing.NavLink> ，其會呈現其他元件的導覽連結 Razor 。 元件會在 <xref:Microsoft.AspNetCore.Components.Routing.NavLink> 載入元件時自動表示選取的狀態，這可協助使用者瞭解目前顯示的元件。
+  * `NavMenu` 元件 (`NavMenu.razor`) ：實行提要欄位導覽。 包含 () 的[ `NavLink` 元件](xref:blazor/fundamentals/routing#navlink-and-navmenu-components) <xref:Microsoft.AspNetCore.Components.Routing.NavLink> ，其會呈現其他元件的導覽連結 Razor 。 元件會在 <xref:Microsoft.AspNetCore.Components.Routing.NavLink> 載入元件時自動表示選取的狀態，這可協助使用者瞭解目前顯示的元件。
   * `NavMenu.razor.css`：應用程式導覽功能表的樣式表單。
   * `SurveyPrompt` 元件 (`SurveyPrompt.razor`) ： Blazor 問卷元件。
 
@@ -133,7 +139,7 @@ Blazor Server範本 (`blazorserver`) 會建立應用程式的初始檔案和目�
 
 * `Shared` 資料夾：包含下列共用元件：
   * `MainLayout` 元件 (`MainLayout.razor`) ：應用程式的 [版面配置元件](xref:blazor/layouts)。
-  * `NavMenu` 元件 (`NavMenu.razor`) ：實行提要欄位導覽。 包含 () 的[ `NavLink` 元件](xref:blazor/fundamentals/routing#navlink-component) <xref:Microsoft.AspNetCore.Components.Routing.NavLink> ，其會呈現其他元件的導覽連結 Razor 。 元件會在 <xref:Microsoft.AspNetCore.Components.Routing.NavLink> 載入元件時自動表示選取的狀態，這可協助使用者瞭解目前顯示的元件。
+  * `NavMenu` 元件 (`NavMenu.razor`) ：實行提要欄位導覽。 包含 () 的[ `NavLink` 元件](xref:blazor/fundamentals/routing#navlink-and-navmenu-components) <xref:Microsoft.AspNetCore.Components.Routing.NavLink> ，其會呈現其他元件的導覽連結 Razor 。 元件會在 <xref:Microsoft.AspNetCore.Components.Routing.NavLink> 載入元件時自動表示選取的狀態，這可協助使用者瞭解目前顯示的元件。
   * `SurveyPrompt` 元件 (`SurveyPrompt.razor`) ： Blazor 問卷元件。
   
 ::: moniker-end

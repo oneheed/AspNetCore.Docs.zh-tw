@@ -19,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/security/webassembly/index
-ms.openlocfilehash: 2df938f3ace47472536020f9848e954fc4446f15
-ms.sourcegitcommit: cc405f20537484744423ddaf87bd1e7d82b6bdf0
+ms.openlocfilehash: 0b555ad7befe882c4ffd06e2505a9edc1263eee2
+ms.sourcegitcommit: 83524f739dd25fbfa95ee34e95342afb383b49fe
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 01/21/2021
-ms.locfileid: "98658582"
+ms.lasthandoff: 01/29/2021
+ms.locfileid: "99057079"
 ---
 # <a name="secure-aspnet-core-no-locblazor-webassembly"></a>安全 ASP.NET Core Blazor WebAssembly
 
@@ -110,6 +110,14 @@ Blazor WebAssembly 支援透過程式庫使用 OIDC 來驗證和授權應用程�
 ## <a name="azure-app-service-on-linux-with-no-locidentity-server"></a>使用 Identity 伺服器 Linux 上的 Azure App Service
 
 當部署至與伺服器 Linux 上的 Azure App Service 時，請明確指定簽發者 Identity 。 如需詳細資訊，請參閱<xref:security/authentication/identity/spa#azure-app-service-on-linux>。
+
+## <a name="windows-authentication"></a>Windows 驗證
+
+我們不建議使用 Windows 驗證搭配 Blazor Webassembly 或其他任何 SPA 架構。 建議使用以權杖為基礎的通訊協定，而不是使用 Windows 驗證，例如搭配 Active Directory 同盟服務 (ADFS) 的 OIDC。
+
+如果 Windows 驗證與 Webassembly 搭配使用 Blazor ，或與任何其他 SPA 架構搭配使用，則需要額外的量值，以保護應用程式免于受到跨網站要求偽造 (CSRF) 權杖。 適用于的相同考慮也 cookie 適用于 Windows 驗證，因為 Windows 驗證不提供任何機制來防止跨原始來源共用驗證內容。 使用 Windows 驗證的應用程式若沒有額外的 CSRF 防護，則至少應限制為組織的內部網路，而不會在網際網路上使用。
+
+如需詳細資訊，請參閱 <xref:security/anti-request-forgery> 。
 
 ## <a name="implementation-guidance"></a>實作指引
 

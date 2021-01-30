@@ -4,7 +4,7 @@ author: mjrousos
 description: 瞭解 ASP.NET Core 中的驗證。
 ms.author: riande
 ms.custom: mvc
-ms.date: 03/03/2020
+ms.date: 1/24/2021
 no-loc:
 - appsettings.json
 - ASP.NET Core Identity
@@ -18,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: security/authentication/index
-ms.openlocfilehash: e9e4ca11d20557666c75b84e56af825d002df0f1
-ms.sourcegitcommit: fbd5427293d9ecccc388bd5fd305c2eb8ada7281
+ms.openlocfilehash: 72036e9c4c92ee5dd82ac4a67e766fb0e5c8f924
+ms.sourcegitcommit: 83524f739dd25fbfa95ee34e95342afb383b49fe
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 11/10/2020
-ms.locfileid: "94463999"
+ms.lasthandoff: 01/29/2021
+ms.locfileid: "99057287"
 ---
 # <a name="overview-of-aspnet-core-authentication"></a>ASP.NET Core 驗證的總覽
 
@@ -62,7 +62,19 @@ services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
 
 ## <a name="authentication-concepts"></a>驗證概念
 
+驗證負責提供 <xref:System.Security.Claims.ClaimsPrincipal> 授權以進行許可權決策。 有多個驗證配置方法可選取哪一個驗證處理常式負責產生一組正確的宣告：
+
+  * [驗證配置](xref:security/authorization/limitingidentitybyscheme)，也將在下一節中討論。
+  * 預設的驗證配置，在下一節中討論。
+  * 直接設定 [HttpCoNtext. 使用者](xref:Microsoft.AspNetCore.Http.HttpContext.User)。
+
+不會自動探查架構。 如果未指定預設配置，則必須在授權屬性中指定配置，否則會擲回下列錯誤：
+
+  InvalidOperationException：未指定 authenticationScheme，而且找不到 DefaultAuthenticateScheme。 您可以使用 AddAuthentication (string defaultScheme) 或 AddAuthentication (Action &lt; AuthenticationOptions configureOptions) 來設定預設配置 &gt; 。
+
 ### <a name="authentication-scheme"></a>驗證配置
+
+[驗證配置](xref:security/authorization/limitingidentitybyscheme)可以選取哪些驗證處理常式負責產生正確的宣告集。 如需詳細資訊，請參閱 [使用特定配置進行授權](xref:security/authorization/limitingidentitybyscheme)。
 
 驗證配置是對應至的名稱：
 
@@ -92,14 +104,14 @@ services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
 
 ### <a name="authenticate"></a>Authenticate
 
-驗證配置的驗證動作會負責根據要求內容來建立使用者的身分識別。 它會傳回 <xref:Microsoft.AspNetCore.Authentication.AuthenticateResult> ，指出驗證是否成功，以及使用者在驗證票證中的身分識別。 請參閱<xref:Microsoft.AspNetCore.Authentication.AuthenticationHttpContextExtensions.AuthenticateAsync%2A>。 驗證範例包括：
+驗證配置的驗證動作會負責根據要求內容來建立使用者的身分識別。 它會傳回 <xref:Microsoft.AspNetCore.Authentication.AuthenticateResult> ，指出驗證是否成功，以及使用者在驗證票證中的身分識別。 請參閱 <xref:Microsoft.AspNetCore.Authentication.AuthenticationHttpContextExtensions.AuthenticateAsync%2A>。 驗證範例包括：
 
 * cookie從建立使用者身分識別的驗證配置 cookie 。
 * JWT 持有人配置還原序列化和驗證 JWT 持有人權杖，以建立使用者的身分識別。
 
 ### <a name="challenge"></a>挑戰
 
-當未驗證的使用者要求需要驗證的端點時，會在授權中叫用驗證挑戰。 例如，當匿名使用者要求受限的資源，或按一下登入連結時，就會發出驗證挑戰。 授權會使用指定的驗證配置 (s) 來叫用挑戰，如果未指定，則會使用預設值。 請參閱<xref:Microsoft.AspNetCore.Authentication.AuthenticationHttpContextExtensions.ChallengeAsync%2A>。 驗證挑戰範例包括：
+當未驗證的使用者要求需要驗證的端點時，會在授權中叫用驗證挑戰。 例如，當匿名使用者要求受限的資源，或按一下登入連結時，就會發出驗證挑戰。 授權會使用指定的驗證配置 (s) 來叫用挑戰，如果未指定，則會使用預設值。 請參閱 <xref:Microsoft.AspNetCore.Authentication.AuthenticationHttpContextExtensions.ChallengeAsync%2A>。 驗證挑戰範例包括：
 
 * 將 cookie 使用者重新導向至登入頁面的驗證配置。
 * JWT 持有人配置傳回401結果與 `www-authenticate: bearer` 標頭。
@@ -108,7 +120,7 @@ services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
 
 ### <a name="forbid"></a>禁止
 
-當已驗證的使用者嘗試存取不允許存取的資源時，授權會呼叫驗證配置的禁止動作。 請參閱<xref:Microsoft.AspNetCore.Authentication.AuthenticationHttpContextExtensions.ForbidAsync%2A>。 驗證禁止的範例包括：
+當已驗證的使用者嘗試存取不允許存取的資源時，授權會呼叫驗證配置的禁止動作。 請參閱 <xref:Microsoft.AspNetCore.Authentication.AuthenticationHttpContextExtensions.ForbidAsync%2A>。 驗證禁止的範例包括：
 * 將 cookie 使用者重新導向至表示禁止存取之頁面的驗證配置。
 * JWT 持有人配置傳回403結果。
 * 重新導向至使用者可要求存取資源之頁面的自訂驗證配置。

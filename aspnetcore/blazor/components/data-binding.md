@@ -19,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/components/data-binding
-ms.openlocfilehash: e873fdd201cf0cdc809030fde30c6a8da2899861
-ms.sourcegitcommit: 610936e4d3507f7f3d467ed7859ab9354ec158ba
+ms.openlocfilehash: 67a63f1b4f705a4857dea2e6d1a942d4f21469f5
+ms.sourcegitcommit: 83524f739dd25fbfa95ee34e95342afb383b49fe
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 01/25/2021
-ms.locfileid: "98751551"
+ms.lasthandoff: 01/29/2021
+ms.locfileid: "99057092"
 ---
 # <a name="aspnet-core-no-locblazor-data-binding"></a>ASP.NET Core Blazor 資料系結
 
@@ -146,7 +146,7 @@ Razor 元件會透過以 [`@bind`](xref:mvc/views/razor#bind) 欄位、屬性或
 
 常見的案例是將子元件中的屬性系結至其父系中的屬性。 此案例稱為 *連鎖* 系結，因為有多個層級的系結同時發生。
 
-[元件參數](xref:blazor/components/index#component-parameters) 允許父元件的系結屬性和欄位具有 `@bind-{PROPERTY OR FIELD}` 語法。
+[元件參數](xref:blazor/components/index#component-parameters) 允許使用語法來系結父元件的屬性 `@bind-{PROPERTY}` 。
 
 連結系結無法使用 [`@bind`](xref:mvc/views/razor#bind) 子元件中的語法來執行。 必須個別指定事件處理常式和值，以支援從子元件的父系更新屬性。
 

@@ -4,7 +4,7 @@ author: juntaoluo
 description: 瞭解使用 ASP.NET Core 撰寫 gRPC 服務時的基本概念。
 monikerRange: '>= aspnetcore-3.0'
 ms.author: johluo
-ms.date: 01/14/2021
+ms.date: 01/29/2021
 no-loc:
 - appsettings.json
 - ASP.NET Core Identity
@@ -18,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: grpc/aspnetcore
-ms.openlocfilehash: 44a6f1d2a25314460fa4bce469f697a2fa4c0825
-ms.sourcegitcommit: 063a06b644d3ade3c15ce00e72a758ec1187dd06
+ms.openlocfilehash: 57edfa31079cb3fca6e9e8d0fa55bcbb8bbfefca
+ms.sourcegitcommit: 83524f739dd25fbfa95ee34e95342afb383b49fe
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 01/16/2021
-ms.locfileid: "98252847"
+ms.lasthandoff: 01/29/2021
+ms.locfileid: "99057472"
 ---
 # <a name="grpc-services-with-aspnet-core"></a>搭配 ASP.NET Core 的 gRPC 服務
 
@@ -77,22 +77,39 @@ gRPC 需要 [gRPC. AspNetCore](https://www.nuget.org/packages/Grpc.AspNetCore) �
 
 ASP.NET Core 中介軟體和功能共用路由管線，因此可以將應用程式設定為可提供額外的要求處理常式。 其他的要求處理常式（例如 MVC 控制器）會與已設定的 gRPC 服務平行運作。
 
+## <a name="server-options"></a>伺服器選項
+
+gRPC 服務可以由所有內建的 ASP.NET Core 伺服器主控。
+
+> [!div class="checklist"]
+>
+> * Kestrel
+> * TestServer
+> * IIS&dagger;
+> * HTTP.sys&dagger;
+
+&dagger;IIS 和 HTTP.sys 需要 .NET 5 和 Windows 10 組建20241或更新版本。
+
+如需為 ASP.NET Core 應用程式選擇正確伺服器的詳細資訊，請參閱 <xref:fundamentals/servers/index> 。
+
 ::: moniker range=">= aspnetcore-5.0"
 
-### <a name="configure-kestrel"></a>設定 Kestrel
+## <a name="kestrel"></a>Kestrel
+
+[Kestrel](xref:fundamentals/servers/kestrel) 是 ASP.NET Core 的跨平臺 web 伺服器。 Kestrel 可提供最佳的效能和記憶體使用率，但它沒有一些 HTTP.sys 的 advanced 功能，例如埠共用。
 
 Kestrel gRPC 端點：
 
 * 需要 HTTP/2。
 * 應透過 [傳輸層安全性 (TLS) ](https://tools.ietf.org/html/rfc5246)來保護。
 
-#### <a name="http2"></a>HTTP/2
+### <a name="http2"></a>HTTP/2
 
 gRPC 需要 HTTP/2。 ASP.NET Core 的 gRPC 會驗證[HttpRequest。](xref:Microsoft.AspNetCore.Http.HttpRequest.Protocol%2A) `HTTP/2`
 
 Kestrel 支援大部分新式作業系統上的 [HTTP/2](xref:fundamentals/servers/kestrel/http2) 。 預設會將 Kestrel 端點設定為支援 HTTP/1.1 和 HTTP/2 連接。
 
-#### <a name="tls"></a>TLS
+### <a name="tls"></a>TLS
 
 用於 gRPC 的 Kestrel 端點應使用 TLS 來保護。 在開發期間，會在 `https://localhost:5001` ASP.NET Core 開發憑證存在時自動建立以 TLS 保護的端點。 不需要組態。 `https`前置詞會驗證 Kestrel 端點是否使用 TLS。
 
@@ -104,7 +121,7 @@ Kestrel 支援大部分新式作業系統上的 [HTTP/2](xref:fundamentals/serve
 
 [!code-csharp[](~/grpc/aspnetcore/sample/Program.cs?highlight=7&name=snippet)]
 
-#### <a name="protocol-negotiation"></a>通訊協定交涉
+### <a name="protocol-negotiation"></a>通訊協定交涉
 
 TLS 是用來保護通訊安全。 當端點支援多個通訊協定時，會使用 TLS [應用層通訊協定協商 (ALPN) ](https://tools.ietf.org/html/rfc7301#section-3) 交握來協調用戶端與伺服器之間的連接通訊協定。 此協商會判斷連接使用的是 HTTP/1.1 或 HTTP/2。
 
@@ -115,24 +132,38 @@ TLS 是用來保護通訊安全。 當端點支援多個通訊協定時，會使
 > [!NOTE]
 > macOS 不支援具有 TLS 的 ASP.NET Core gRPC。 您需要額外的組態才能在 macOS 上成功執行 gRPC 服務。 如需詳細資訊，請參閱[無法在 macOS 上啟動 ASP.NET Core gRPC 應用程式](xref:grpc/troubleshoot#unable-to-start-aspnet-core-grpc-app-on-macos)。
 
+## <a name="iis"></a>IIS
+
+[Internet Information Services (IIS) ](xref:host-and-deploy/iis/index) 是可裝載 web 應用程式（包括 ASP.NET Core）的彈性、安全且可管理的 web 伺服器。 需要 .NET 5 和 Windows 10 組建20241或更新版本，才能使用 IIS 裝載 gRPC services。
+
+IIS 必須設定為使用 TLS 和 HTTP/2。 如需詳細資訊，請參閱<xref:host-and-deploy/iis/protocols>。
+
+## <a name="httpsys"></a>HTTP.sys
+
+[HTTP.sys](xref:fundamentals/servers/httpsys) 是只在 Windows 上執行的 ASP.NET Core 網頁伺服器。 需要 .NET 5 和 Windows 10 組建20241或更新版本，才能裝載具有 HTTP.sys 的 gRPC 服務。
+
+HTTP.sys 必須設定為使用 TLS 和 HTTP/2。 如需詳細資訊，請參閱  [HTTP.sys 網頁伺服器 HTTP/2 支援](xref:fundamentals/servers/httpsys#http2-support)。
+
 ::: moniker-end
 
 ::: moniker range="< aspnetcore-5.0"
 
-### <a name="configure-kestrel"></a>設定 Kestrel
+## <a name="kestrel"></a>Kestrel
+
+[Kestrel](xref:fundamentals/servers/kestrel) 是 ASP.NET Core 的跨平臺 web 伺服器。 Kestrel 可提供最佳的效能和記憶體使用率，但它沒有一些 HTTP.sys 的 advanced 功能，例如埠共用。
 
 Kestrel gRPC 端點：
 
 * 需要 HTTP/2。
 * 應透過 [傳輸層安全性 (TLS) ](https://tools.ietf.org/html/rfc5246)來保護。
 
-#### <a name="http2"></a>HTTP/2
+### <a name="http2"></a>HTTP/2
 
 gRPC 需要 HTTP/2。 ASP.NET Core 的 gRPC 會驗證[HttpRequest。](xref:Microsoft.AspNetCore.Http.HttpRequest.Protocol%2A) `HTTP/2`
 
 Kestrel 支援大部分新式作業系統上的 [HTTP/2](xref:fundamentals/servers/kestrel#http2-support) 。 預設會將 Kestrel 端點設定為支援 HTTP/1.1 和 HTTP/2 連接。
 
-#### <a name="tls"></a>TLS
+### <a name="tls"></a>TLS
 
 用於 gRPC 的 Kestrel 端點應使用 TLS 來保護。 在開發期間，會在 `https://localhost:5001` ASP.NET Core 開發憑證存在時自動建立以 TLS 保護的端點。 不需要組態。 `https`前置詞會驗證 Kestrel 端點是否使用 TLS。
 
@@ -144,7 +175,7 @@ Kestrel 支援大部分新式作業系統上的 [HTTP/2](xref:fundamentals/serve
 
 [!code-csharp[](~/grpc/aspnetcore/sample/Program.cs?highlight=7&name=snippet)]
 
-#### <a name="protocol-negotiation"></a>通訊協定交涉
+### <a name="protocol-negotiation"></a>通訊協定交涉
 
 TLS 是用來保護通訊安全。 當端點支援多個通訊協定時，會使用 TLS [應用層通訊協定協商 (ALPN) ](https://tools.ietf.org/html/rfc7301#section-3) 交握來協調用戶端與伺服器之間的連接通訊協定。 此協商會判斷連接使用的是 HTTP/1.1 或 HTTP/2。
 

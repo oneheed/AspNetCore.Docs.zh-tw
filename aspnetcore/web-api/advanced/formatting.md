@@ -1,10 +1,10 @@
 ---
 title: 在 ASP.NET Core Web API 中格式化回應資料
-author: ardalis
+author: rick-anderson
 description: 了解如何在 ASP.NET Core Web API 中格式化回應資料。
 ms.author: riande
 ms.custom: H1Hack27Feb2017
-ms.date: 04/17/2020
+ms.date: 1/28/2021
 no-loc:
 - appsettings.json
 - ASP.NET Core Identity
@@ -18,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: web-api/advanced/formatting
-ms.openlocfilehash: 89e3e51373db5f7cff974b7a8c69d06bedf856ca
-ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
+ms.openlocfilehash: 5d228af00ee34e7f8ca60a5085872fdb93842367
+ms.sourcegitcommit: 83524f739dd25fbfa95ee34e95342afb383b49fe
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 10/30/2020
-ms.locfileid: "93052509"
+ms.lasthandoff: 01/29/2021
+ms.locfileid: "99057495"
 ---
 # <a name="format-response-data-in-aspnet-core-web-api"></a>在 ASP.NET Core Web API 中格式化回應資料
 
@@ -81,14 +81,14 @@ ASP.NET Core MVC 支援格式化回應資料。 您可以使用特定格式或�
 
 ### <a name="the-accept-header"></a>Accept 標頭
 
-當 *negotiation* `Accept` 要求中出現標頭時，會發生內容協商。 當要求包含 accept 標頭時，ASP.NET Core：
+當 `Accept` 要求中出現標頭時，會發生內容協商。 當要求包含 accept 標頭時，ASP.NET Core：
 
 * 依喜好設定順序列舉 accept 標頭中的媒體類型。
 * 嘗試尋找可以使用其中一個指定的格式產生回應的格式器。
 
 如果找不到可滿足用戶端要求的格式器，ASP.NET Core：
 
-* `406 Not Acceptable`如果 <xref:Microsoft.AspNetCore.Mvc.MvcOptions> 已設定，則傳回，否則會傳回-
+* `406 Not Acceptable`如果 <xref:Microsoft.AspNetCore.Mvc.MvcOptions.ReturnHttpNotAcceptable?displayProperty=nameWithType> 設定為，則傳回 `true` ，否則會傳回-
 * 嘗試尋找可產生回應的第一個格式器。
 
 如果未針對要求的格式設定格式器，則會使用可以格式化物件的第一個格式器。 如果 `Accept` 要求中未出現標頭：
@@ -132,9 +132,22 @@ ASP.NET Core MVC 支援格式化回應資料。 您可以使用特定格式或�
 
 使用上述程式碼時，控制器方法會根據要求的標頭傳回適當的格式 `Accept` 。
 
-### <a name="configure-systemtextjson-based-formatters"></a>設定 System.Text.Json-based 格式器
+### <a name="configure-systemtextjson-based-formatters"></a>設定以 System.Text.Js為基礎的格式器
 
-`System.Text.Json` 型格式器可以使用 `Microsoft.AspNetCore.Mvc.JsonOptions.SerializerOptions` 來設定。
+您 `System.Text.Json` 可以使用設定基礎格式器的功能 <xref:Microsoft.AspNetCore.Mvc.JsonOptions.JsonSerializerOptions?displayProperty=fullName> 。 預設格式為 camelCase。 下列反白顯示的程式碼會設定 PascalCase 格式：
+
+[!code-csharp[](./formatting/5.0samples/WebAPI5PascalCase/Startup.cs?name=snippet&highlight=4-5)]
+
+下列動作方法會呼叫 [ControllerBase](xref:Microsoft.AspNetCore.Mvc.ControllerBase.Problem%2A) 來建立 <xref:Microsoft.AspNetCore.Mvc.ProblemDetails> 回應：
+
+[!code-csharp[](formatting/5.0samples/WebAPI5PascalCase/Controllers/WeatherForecastController.cs?name=snippet&highlight=4)]
+
+使用上述程式碼：
+
+  * `https://localhost:5001/WeatherForecast/temperature` 傳回 PascalCase。
+  * `https://localhost:5001/WeatherForecast/error` 傳回 camelCase。 錯誤回應一律是 camelCase，即使應用程式將格式設定為 PascalCase。 `ProblemDetails` 遵循 [RFC 7807](https://tools.ietf.org/html/rfc7807#appendix-A)，指定小寫
+
+下列程式碼會設定 PascalCase 並加入自訂轉換器：
 
 ```csharp
 services.AddControllers().AddJsonOptions(options =>
@@ -239,7 +252,7 @@ XML 格式需要 [Microsoft.AspNetCore.Mvc.Formatters.Xml](https://www.nuget.org
 
 ### <a name="special-case-formatters"></a>特殊案例格式器
 
-有些特殊案例是使用內建格式器所實作。 根據預設， `string` 如果透過標頭) 要求，傳回類型會格式化為 *text/純* ( *text/html* `Accept` 。 您可以藉由移除來刪除此行為 <xref:Microsoft.AspNetCore.Mvc.Formatters.StringOutputFormatter> 。 方法中會移除格式器 `ConfigureServices` 。 傳回時，具有模型物件傳回型別的動作 `204 No Content` `null` 。 您可以藉由移除來刪除此行為 <xref:Microsoft.AspNetCore.Mvc.Formatters.HttpNoContentOutputFormatter> 。 下列程式碼會移除 `StringOutputFormatter` 和 `HttpNoContentOutputFormatter`。
+有些特殊案例是使用內建格式器所實作。 根據預設， `string` 如果透過標頭) 要求，傳回類型會格式化為 *text/純* (*text/html* `Accept` 。 您可以藉由移除來刪除此行為 <xref:Microsoft.AspNetCore.Mvc.Formatters.StringOutputFormatter> 。 方法中會移除格式器 `ConfigureServices` 。 傳回時，具有模型物件傳回型別的動作 `204 No Content` `null` 。 您可以藉由移除來刪除此行為 <xref:Microsoft.AspNetCore.Mvc.Formatters.HttpNoContentOutputFormatter> 。 下列程式碼會移除 `StringOutputFormatter` 和 `HttpNoContentOutputFormatter`。
 
 ::: moniker range=">= aspnetcore-3.0"
 [!code-csharp[](./formatting/3.0sample/StartupStringOutputFormatter.cs?name=snippet)]

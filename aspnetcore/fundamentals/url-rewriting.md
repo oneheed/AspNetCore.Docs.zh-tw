@@ -19,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: fundamentals/url-rewriting
-ms.openlocfilehash: e7bd5f4d61661dd23eb0907f896d0d32b7799aac
-ms.sourcegitcommit: 3593c4efa707edeaaceffbfa544f99f41fc62535
+ms.openlocfilehash: 55993f951bfe910fb179fdb25b8d04f81d4ee2c9
+ms.sourcegitcommit: 83524f739dd25fbfa95ee34e95342afb383b49fe
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 01/04/2021
-ms.locfileid: "93061297"
+ms.lasthandoff: 01/29/2021
+ms.locfileid: "99057456"
 ---
 # <a name="url-rewriting-middleware-in-aspnet-core"></a>ASP.NET Core 的 URL 重寫中介軟體
 
@@ -98,7 +98,7 @@ URL 重寫是指根據一或多個預先定義的規則來修改要求 URL 的�
 
   如果要確實得知哪種方法會降低最多效能，或是降低的效能可以忽略的話，進行效能評定是唯一方法。
 
-## <a name="package"></a>Package
+## <a name="package"></a>套件
 
 URL 重寫中介軟體由 [Microsoft.AspNetCore.Rewrite](https://www.nuget.org/packages/Microsoft.AspNetCore.Rewrite) 套件所提供，其會以隱含方式包含在 ASP.NET Core 應用程式中。
 
@@ -290,7 +290,7 @@ public void Configure(IApplicationBuilder app)
 
 #### <a name="unsupported-features"></a>不支援的功能
 
-與 ASP.NET Core 2.x 一起發行的中介軟體不支援下列 IIS URL Rewrite Module 功能：
+中介軟體不支援下列 IIS URL 重寫模組功能：
 
 * 輸出規則
 * 自訂伺服器變數
@@ -450,7 +450,7 @@ URL 重寫是指根據一或多個預先定義的規則來修改要求 URL 的�
 
   如果要確實得知哪種方法會降低最多效能，或是降低的效能可以忽略的話，進行效能評定是唯一方法。
 
-## <a name="package"></a>Package
+## <a name="package"></a>套件
 
 若要在您的專案中包含中介軟體，請在包含 [Microsoft.AspNetCore.Rewrite](https://www.nuget.org/packages/Microsoft.AspNetCore.Rewrite) 套件的專案檔中，將套件參考新增至 [Microsoft.AspNetCore.App 中繼套件](xref:fundamentals/metapackage-app)。
 

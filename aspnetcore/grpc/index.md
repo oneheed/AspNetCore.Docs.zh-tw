@@ -1,5 +1,5 @@
 ---
-title: .NET Core 上的 gRPC 簡介
+title: .NET 上的 gRPC 簡介
 author: juntaoluo
 description: 了解搭配 Kestrel 伺服器及 ASP.NET Core 堆疊的 gRPC 服務。
 monikerRange: '>= aspnetcore-3.0'
@@ -18,14 +18,14 @@ no-loc:
 - Razor
 - SignalR
 uid: grpc/index
-ms.openlocfilehash: 80f44e3845cc1e3c87d5d657807a318eb65e6c6f
-ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
+ms.openlocfilehash: 5820049aba90a2fbd06a23756b12ac9656c3b2c4
+ms.sourcegitcommit: 83524f739dd25fbfa95ee34e95342afb383b49fe
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 10/30/2020
-ms.locfileid: "93059893"
+ms.lasthandoff: 01/29/2021
+ms.locfileid: "99057508"
 ---
-# <a name="introduction-to-grpc-on-net-core"></a>.NET Core 上的 gRPC 簡介
+# <a name="introduction-to-grpc-on-net"></a>.NET 上的 gRPC 簡介
 
 由 [John Luo](https://github.com/juntaoluo) 和 [James 牛頓](https://twitter.com/jamesnk)
 

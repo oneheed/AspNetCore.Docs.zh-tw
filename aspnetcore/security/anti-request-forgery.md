@@ -18,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: security/anti-request-forgery
-ms.openlocfilehash: 197954965ee57b2a44ad0217d79ba142114e7df6
-ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
+ms.openlocfilehash: 3bb3c059eafa8e948fe2e719207927c009902e59
+ms.sourcegitcommit: 83524f739dd25fbfa95ee34e95342afb383b49fe
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 10/30/2020
-ms.locfileid: "93060842"
+ms.lasthandoff: 01/29/2021
+ms.locfileid: "99057443"
 ---
 # <a name="prevent-cross-site-request-forgery-xsrfcsrf-attacks-in-aspnet-core"></a>防止跨網站偽造要求 (XSRF/CSRF) 攻擊 ASP.NET Core
 
@@ -91,7 +91,7 @@ Cookie以驗證為基礎的驗證是一種常見的驗證形式。 以權杖為�
 
 ### <a name="token-based-authentication"></a>權杖式驗證
 
-當使用者經過驗證時，就會發出權杖， (不是 antiforgery 權杖) 。 權杖包含 [宣告](/dotnet/framework/security/claims-based-identity-model) 形式的使用者資訊，或將應用程式指向應用程式中維護之使用者狀態的參考權杖。 當使用者嘗試存取需要驗證的資源時，權杖會以持有人權杖形式以其他授權標頭的形式傳送至應用程式。 這會讓應用程式成為無狀態。 在每個後續要求中，權杖會在伺服器端驗證的要求中傳遞。 此權杖未 *加密* ;它經過 *編碼* 。 在伺服器上，權杖會解碼以存取其資訊。 若要在後續要求時傳送權杖，請將權杖儲存在瀏覽器的本機儲存體中。 如果權杖儲存在瀏覽器的本機儲存體中，請不要擔心 CSRF 弱點。 當令牌儲存在中時，CSRF 是一項考慮 cookie 。 如需詳細資訊，請參閱 GitHub 問題 [SPA 程式碼範例 cookie 會新增兩個](https://github.com/dotnet/AspNetCore.Docs/issues/13369)。
+當使用者經過驗證時，就會發出權杖， (不是 antiforgery 權杖) 。 權杖包含 [宣告](/dotnet/framework/security/claims-based-identity-model) 形式的使用者資訊，或將應用程式指向應用程式中維護之使用者狀態的參考權杖。 當使用者嘗試存取需要驗證的資源時，權杖會以持有人權杖形式以其他授權標頭的形式傳送至應用程式。 這會讓應用程式成為無狀態。 在每個後續要求中，權杖會在伺服器端驗證的要求中傳遞。 此權杖未 *加密*;它經過 *編碼*。 在伺服器上，權杖會解碼以存取其資訊。 若要在後續要求時傳送權杖，請將權杖儲存在瀏覽器的本機儲存體中。 如果權杖儲存在瀏覽器的本機儲存體中，請不要擔心 CSRF 弱點。 當令牌儲存在中時，CSRF 是一項考慮 cookie 。 如需詳細資訊，請參閱 GitHub 問題 [SPA 程式碼範例 cookie 會新增兩個](https://github.com/dotnet/AspNetCore.Docs/issues/13369)。
 
 ### <a name="multiple-apps-hosted-at-one-domain"></a>裝載于一個網域的多個應用程式
 
@@ -250,8 +250,8 @@ services.AddAntiforgery(options =>
 | ------ | ----------- |
 | [Cookie](/dotnet/api/microsoft.aspnetcore.antiforgery.antiforgeryoptions.cookie) | 決定用來建立 antiforgery 的設定 cookie 。 |
 | [Cookie網域](/dotnet/api/microsoft.aspnetcore.antiforgery.antiforgeryoptions.cookiedomain) | 的網域 cookie 。 預設值為 `null`。 這個屬性已過時，將在未來的版本中移除。 建議的替代方式是 Cookie 。域。 |
-| [Cookie名稱](/dotnet/api/microsoft.aspnetcore.antiforgery.antiforgeryoptions.cookiename) | cookie 的名稱。 如果未設定，系統會產生以 [預設 Cookie 前置](/dotnet/api/microsoft.aspnetcore.antiforgery.antiforgeryoptions.defaultcookieprefix) 詞 ( "開頭的唯一名稱。AspNetCore. Antiforgery. ") 。 這個屬性已過時，將在未來的版本中移除。 建議的替代方式是 Cookie 。名字。 |
-| [CookiePath](/dotnet/api/microsoft.aspnetcore.antiforgery.antiforgeryoptions.cookiepath) | 在上設定的路徑 cookie 。 這個屬性已過時，將在未來的版本中移除。 建議的替代方式是 Cookie 。路徑。 |
+| [CookieName](/dotnet/api/microsoft.aspnetcore.antiforgery.antiforgeryoptions.cookiename) | cookie 的名稱。 如果未設定，系統會產生以 [預設 Cookie 前置](/dotnet/api/microsoft.aspnetcore.antiforgery.antiforgeryoptions.defaultcookieprefix) 詞 ( "開頭的唯一名稱。AspNetCore. Antiforgery. ") 。 這個屬性已過時，將在未來的版本中移除。 建議的替代方式是 Cookie 。名字。 |
+| [Cookie路徑](/dotnet/api/microsoft.aspnetcore.antiforgery.antiforgeryoptions.cookiepath) | 在上設定的路徑 cookie 。 這個屬性已過時，將在未來的版本中移除。 建議的替代方式是 Cookie 。路徑。 |
 | [FormFieldName](/dotnet/api/microsoft.aspnetcore.antiforgery.antiforgeryoptions.formfieldname) | Antiforgery 系統用來在 views 中轉譯 antiforgery token 之隱藏表單欄位的名稱。 |
 | [HeaderName](/dotnet/api/microsoft.aspnetcore.antiforgery.antiforgeryoptions.headername) | Antiforgery 系統所使用的標頭名稱。 如果 `null` 為，則系統只會考慮表單資料。 |
 | [RequireSsl](/dotnet/api/microsoft.aspnetcore.antiforgery.antiforgeryoptions.requiressl) | 指定 antiforgery 系統是否需要 HTTPS。 如果 `true` 為，則非 HTTPS 要求會失敗。 預設值為 `false`。 這個屬性已過時，將在未來的版本中移除。 建議的替代方式是設定 Cookie 。SecurePolicy. |
@@ -488,6 +488,10 @@ public void ConfigureServices(IServiceCollection services)
 ```
 
 [查看或下載範例程式碼](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/security/anti-request-forgery/sample/AngularSample) ([如何下載](xref:index#how-to-download-a-sample)) 
+
+## <a name="windows-authentication-and-antiforgery-no-loccookies"></a>Windows 驗證和 antiforgery cookie s
+
+使用 Windows 驗證時，必須以對進行的相同方式，保護應用程式端點免于 CSRF 的攻擊 cookie 。  瀏覽器會以隱含方式將驗證內容傳送到伺服器，因此必須保護端點免于遭受 CSRF 攻擊。
 
 ## <a name="extend-antiforgery"></a>擴充 antiforgery
 

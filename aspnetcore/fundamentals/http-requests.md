@@ -5,7 +5,7 @@ description: 深入了解在 ASP.NET Core 中使用 IHttpClientFactory 介面來
 monikerRange: '>= aspnetcore-2.1'
 ms.author: scaddie
 ms.custom: mvc
-ms.date: 02/09/2020
+ms.date: 1/21/2021
 no-loc:
 - appsettings.json
 - ASP.NET Core Identity
@@ -19,18 +19,18 @@ no-loc:
 - Razor
 - SignalR
 uid: fundamentals/http-requests
-ms.openlocfilehash: 34c35daac3da845bac9156fe96078df7902a4cd0
-ms.sourcegitcommit: 3593c4efa707edeaaceffbfa544f99f41fc62535
+ms.openlocfilehash: 1cf3029452f87a396847f969f0f3136a75874752
+ms.sourcegitcommit: 83524f739dd25fbfa95ee34e95342afb383b49fe
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 01/04/2021
-ms.locfileid: "93059490"
+ms.lasthandoff: 01/29/2021
+ms.locfileid: "99057326"
 ---
 # <a name="make-http-requests-using-ihttpclientfactory-in-aspnet-core"></a>在 ASP.NET Core 中使用 IHttpClientFactory 發出 HTTP 要求
 
 ::: moniker range=">= aspnetcore-3.0"
 
-[Glenn Condron](https://github.com/glennc)、 [Ryan Nowak](https://github.com/rynowak)、 [Steve Gordon](https://github.com/stevejgordon)、 [Rick Anderson](https://twitter.com/RickAndMSFT)及[Kirk Larkin](https://github.com/serpent5)
+[Kirk Larkin](https://github.com/serpent5)、 [Steve Gordon](https://github.com/stevejgordon)、 [Glenn Condron](https://github.com/glennc)和[Ryan Nowak](https://github.com/rynowak)。
 
 <xref:System.Net.Http.IHttpClientFactory> 可以註冊及用來在應用程式中設定和建立 <xref:System.Net.Http.HttpClient> 執行個體。 `IHttpClientFactory` 提供下列優點：
 
@@ -58,7 +58,7 @@ ms.locfileid: "93059490"
 
 `IHttpClientFactory` 可以透過呼叫來註冊 `AddHttpClient` ：
 
-[!code-csharp[](http-requests/samples/3.x/HttpClientFactorySample/Startup.cs?name=snippet1)]
+[!code-csharp[](http-requests/samples/3.x/HttpClientFactorySample/Startup.cs?name=snippet1&highlight=13)]
 
 `IHttpClientFactory`可以使用相依性[插入 (DI) ](xref:fundamentals/dependency-injection)來要求。 下列程式碼會使用 `IHttpClientFactory` 來建立 `HttpClient` 實例：
 
@@ -238,16 +238,15 @@ public class ValuesController : ControllerBase
 
 `HttpClient` 具有委派處理常式的概念，這些處理常式可以連結在一起以用於傳出的 HTTP 要求。 `IHttpClientFactory`:
 
-* 簡化定義要套用至每個已命名用戶端的處理常式。
-* 支援多個處理常式的註冊和連結，以建立外寄要求中介軟體管線。 這些處理常式每個都可以在外寄要求之前和之後執行工作。 此模式：
-
-  * 類似于 ASP.NET Core 中的輸入中介軟體管線。
-  * 提供一種機制來管理 HTTP 要求的跨領域考慮，例如：
-
-    * 快取
-    * 錯誤處理
-    * 序列化
-    * logging
+  * 簡化定義要套用至每個已命名用戶端的處理常式。
+  * 支援多個處理常式的註冊和連結，以建立外寄要求中介軟體管線。 這些處理常式都可以在傳出要求前後執行工作。 此模式：
+  
+    * 類似于 ASP.NET Core 中的輸入中介軟體管線。
+    * 提供一種機制來管理 HTTP 要求的跨領域考慮，例如：
+      * 快取
+      * 錯誤處理
+      * 序列化
+      * logging
 
 若要建立委派處理常式：
 
@@ -262,13 +261,31 @@ public class ValuesController : ControllerBase
 
 [!code-csharp[](http-requests/samples/3.x/HttpClientFactorySample/Startup2.cs?name=snippet1)]
 
-在上述程式碼，`ValidateHeaderHandler` 已向 DI 註冊。 `IHttpClientFactory` 會為每個處理常式建立個別的 DI 範圍。 處理常式可以視任何範圍的服務而定。 處置處理常式時，會處置處理常式所相依的服務。
-
-註冊之後，便可以呼叫 <xref:Microsoft.Extensions.DependencyInjection.HttpClientBuilderExtensions.AddHttpMessageHandler*>，並傳入處理常式的類型。
+在上述程式碼，`ValidateHeaderHandler` 已向 DI 註冊。 註冊之後，便可以呼叫 <xref:Microsoft.Extensions.DependencyInjection.HttpClientBuilderExtensions.AddHttpMessageHandler*>，並傳入處理常式的類型。
 
 可以遵循應該執行的順序來註冊多個處理常式。 每個處理常式會包裝下一個處理常式，直到最終 `HttpClientHandler` 執行要求：
 
 [!code-csharp[](http-requests/samples/3.x/HttpClientFactorySample/Startup.cs?name=snippet6)]
+
+### <a name="use-di-in-outgoing-request-middleware"></a>在傳出要求中介軟體中使用 DI
+
+當 `IHttpClientFactory` 建立新的委派處理常式時，它會使用 DI 來完成處理常式的函式參數。 `IHttpClientFactory` 為每個處理常式建立 **個別** 的 DI 範圍，當處理常式取用 *範圍* 服務時，可能會導致令人驚訝的行為。
+
+例如，請考慮下列介面及其實作為作業（具有識別碼） `OperationId` ：
+
+[!code-csharp[](http-requests/samples/3.x/HttpRequestsSample/Models/OperationScoped.cs?name=snippet_Types)]
+
+如其名所示， `IOperationScoped` 使用 *範圍* 存留期在 DI 註冊：
+
+[!code-csharp[](http-requests/samples/3.x/HttpRequestsSample/Startup.cs?name=snippet_IOperationScoped&highlight=18,26)]
+
+下列委派處理常式會使用和使用 `IOperationScoped` 來設定 `X-OPERATION-ID` 傳出要求的標頭：
+
+[!code-csharp[](http-requests/samples/3.x/HttpRequestsSample/Handlers/OperationHandler.cs?name=snippet_Class&highlight=13)]
+
+在 [ [ `HttpRequestsSample` 下載](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/http-requests/samples/3.x/HttpRequestsSample)] 中，流覽 `/Operation` 並重新整理頁面。 每個要求的要求範圍值都有所變更，但處理常式範圍值只會每隔5秒變更一次。
+
+處理常式可以視任何範圍的服務而定。 處置處理常式時，會處置處理常式所相依的服務。
 
 使用下列其中一種方式來與訊息處理常式共用個別要求狀態：
 
@@ -748,7 +765,7 @@ public class ValuesController : ControllerBase
 
 [查看或下載範例程式碼](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/http-requests/samples) ([如何下載](xref:index#how-to-download-a-sample)) 
 
-## <a name="prerequisites"></a>先決條件
+## <a name="prerequisites"></a>必要條件
 
 以 .NET Framework 為目標的專案，需要安裝 [Microsoft.Extensions.Http](https://www.nuget.org/packages/Microsoft.Extensions.Http/) NuGet 套件。 以 .NET Core 為目標且參考 [Microsoft.AspNetCore.App metapackage](xref:fundamentals/metapackage-app) 的專案，已包含 `Microsoft.Extensions.Http` 套件。
 

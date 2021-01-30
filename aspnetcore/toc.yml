@@ -748,6 +748,8 @@
           uid: grpc/deadlines-cancellation
     - name: 搭配 ASP.NET Core 的 gRPC 服務
       uid: grpc/aspnetcore
+    - name: 支援的平台
+      uid: grpc/supported-platforms
     - name: 在瀏覽器應用程式中使用 gRPC
       uid: grpc/browser
     - name: 設定

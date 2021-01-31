@@ -19,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: fundamentals/servers/index
-ms.openlocfilehash: 91d1373d764644820d1fac6064ee503e1ef4455c
-ms.sourcegitcommit: 83524f739dd25fbfa95ee34e95342afb383b49fe
+ms.openlocfilehash: 2acddd212639ac0a82b3c46f2225ff66d0999dd0
+ms.sourcegitcommit: 7e394a8527c9818caebb940f692ae4fcf2f1b277
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 01/29/2021
-ms.locfileid: "99057339"
+ms.lasthandoff: 01/31/2021
+ms.locfileid: "99217553"
 ---
 # <a name="web-server-implementations-in-aspnet-core"></a>ASP.NET Core 中的網頁伺服器實作
 
@@ -38,7 +38,7 @@ ASP.NET Core 應用程式執行時，需使用內含式 HTTP 伺服器實作。 
 
 ASP.NET Core 隨附下列項目：
 
-* [Kestrel 伺服器](xref:fundamentals/servers/kestrel)是預設、跨平台的 HTTP 伺服器實作。 Kestrel 可提供最佳的效能和記憶體使用量，但是它沒有一些像 `Http.Sys` 是埠共用的先進功能。
+* [Kestrel 伺服器](xref:fundamentals/servers/kestrel)是預設、跨平台的 HTTP 伺服器實作。 Kestrel 可提供最佳的效能和記憶體使用率，但 HTTP.sys 中並沒有一些先進的功能。 如需詳細資訊，請參閱本檔中的 [Kestrel 與 HTTP.sys](#korh) 。
 * IIS HTTP 伺服器是 IIS 的[同處理序伺服器](#hosting-models)。
 * [HTTP.sys 伺服器](xref:fundamentals/servers/httpsys)是以 [HTTP.sys 核心驅動程式與 HTTP 伺服器 API](/windows/desktop/Http/http-api-start-page) 為基礎的僅限 Windows HTTP 伺服器。
 
@@ -48,6 +48,26 @@ ASP.NET Core 隨附下列項目：
 * 從 IIS 背景工作處理序中分離出的處理序 ([跨處理序裝載模型](#hosting-models))，並搭配 [Kestrel 伺服器](#kestrel)。
 
 [ASP.NET Core 模組](xref:host-and-deploy/aspnet-core-module)是一種原生 IIS 模組，可處理 IIS 與同處理序 IIS HTTP 伺服器或 Kestrel 之間的原生 IIS 要求。 如需詳細資訊，請參閱<xref:host-and-deploy/aspnet-core-module>。
+
+<a name="korh"></a>
+
+## <a name="kestrel-vs-httpsys"></a>Kestrel 與 HTTP.sys
+
+Kestrel 具有下列優於 HTTP.sys 的優點：
+
+  * 更佳的效能和記憶體使用率。
+  * 跨平台
+  * 彈性，它是與作業系統無關的開發和修補。
+  * 程式設計埠和 TLS 設定
+  * 允許 [PPv2](https://github.com/aspnet/AspLabs/blob/master/src/ProxyProtocol/ProxyProtocol.Sample/ProxyProtocol.cs) 和替代傳輸等通訊協定的擴充性。
+
+Http.Sys 會以共用核心模式元件的形式運作，kestrel 沒有下列功能：
+
+  * 連接埠共用
+  * 核心模式 windows 驗證。 [Kestrel 只支援使用者模式驗證](xref:security/authentication/windowsauth#kestrel)。
+  * 透過佇列傳送快速 proxy
+  * 直接檔案傳輸
+  * 回應快取
 
 ## <a name="hosting-models"></a>裝載模型
 
@@ -74,8 +94,8 @@ ASP.NET Core 隨附 [Kestrel 伺服器](xref:fundamentals/servers/kestrel)，這
 
 ## <a name="kestrel"></a>Kestrel
 
- [Kestrel 伺服器](xref:fundamentals/servers/kestrel)是預設、跨平台的 HTTP 伺服器實作。 Kestrel 可提供最佳的效能和記憶體使用量，但是它沒有一些像 `Http.Sys` 是埠共用的先進功能。
- 
+ [Kestrel 伺服器](xref:fundamentals/servers/kestrel)是預設、跨平台的 HTTP 伺服器實作。 Kestrel 可提供最佳的效能和記憶體使用率，但 HTTP.sys 中並沒有一些先進的功能。 如需詳細資訊，請參閱本檔中的 [Kestrel 與 HTTP.sys](#korh) 。
+
 使用 Kestrel：
 
 * 供本身當作直接從網路 (包括網際網路) 處理要求的邊緣伺服器。

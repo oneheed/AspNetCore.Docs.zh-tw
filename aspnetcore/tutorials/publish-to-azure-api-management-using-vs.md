@@ -6,12 +6,12 @@ ms.author: masoucou
 ms.custom: devx-track-csharp, mvc
 ms.date: 11/22/2020
 uid: tutorials/publish-to-azure-api-management-using-vs
-ms.openlocfilehash: 395b5981a3018486235c38f032893f985ab71383
-ms.sourcegitcommit: 3593c4efa707edeaaceffbfa544f99f41fc62535
+ms.openlocfilehash: ddff54bbd146c98cf83a865910401df26e7ac4ec
+ms.sourcegitcommit: 7e394a8527c9818caebb940f692ae4fcf2f1b277
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 01/04/2021
-ms.locfileid: "96332199"
+ms.lasthandoff: 01/31/2021
+ms.locfileid: "99217579"
 ---
 # <a name="publish-an-aspnet-core-web-api-to-azure-api-management-with-visual-studio"></a>使用 Visual Studio 將 ASP.NET Core web API 發佈至 Azure API 管理
 
@@ -175,9 +175,9 @@ ms.locfileid: "96332199"
     ```csharp
     services.AddSwaggerGen(config =>
     {
-        config.SwaggerDoc("WeatherForecasts", new Microsoft.OpenApi.Models.OpenApiInfo
+        config.SwaggerDoc("v1", new Microsoft.OpenApi.Models.OpenApiInfo
         {
-            Title = "Weather Forecasts",
+            Title = "WeatherForecasts",
             Version = "v1"
         });
     });
@@ -224,7 +224,7 @@ ms.locfileid: "96332199"
 
 1. 輸入資源群組的名稱，然後選取 [ **刪除**]。 您在本教學課程中建立的應用程式和其他所有資源都會立即從 Azure 中刪除。
 
-## <a name="next-steps"></a>後續步驟
+## <a name="next-steps"></a>下一步
 
 <xref:host-and-deploy/azure-apps/azure-continuous-deployment>
 

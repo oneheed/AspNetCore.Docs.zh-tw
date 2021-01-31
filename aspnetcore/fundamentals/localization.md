@@ -17,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: fundamentals/localization
-ms.openlocfilehash: 07e2f561b0e9db58780d6e8a271e32b00132b1b5
-ms.sourcegitcommit: 3593c4efa707edeaaceffbfa544f99f41fc62535
+ms.openlocfilehash: 67f245b7f4e4aa97b30c5318c73732617aea44c7
+ms.sourcegitcommit: 7e394a8527c9818caebb940f692ae4fcf2f1b277
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 01/04/2021
-ms.locfileid: "93059516"
+ms.lasthandoff: 01/31/2021
+ms.locfileid: "99217566"
 ---
 # <a name="globalization-and-localization-in-aspnet-core"></a>ASP.NET Core 全球化和當地語系化
 
@@ -134,7 +134,7 @@ public void ConfigureServices(IServiceCollection services)
 
 ### <a name="supportedcultures-and-supporteduicultures"></a>SupportedCultures 和 SupportedUICultures
 
-ASP.NET Core 可讓您指定 `SupportedCultures` 和 `SupportedUICultures` 這兩個文化特性值。 `SupportedCultures` 的 [CultureInfo](/dotnet/api/system.globalization.cultureinfo) 物件可決定文化特性相依函式的結果，例如日期、時間、數字及貨幣格式。 `SupportedCultures` 也可決定文字排列順序、大小寫慣例和字串比較。 如需伺服器如何取得文化特性的詳細資訊，請參閱 [CultureInfo.CurrentCulture](/dotnet/api/system.stringcomparer.currentculture#System_StringComparer_CurrentCulture)。 `SupportedUICultures`會判斷 [ResourceManager](/dotnet/api/system.resources.resourcemanager) (從 *.resx* 檔) 的翻譯字串。 `ResourceManager` 僅會查閱 `CurrentUICulture` 所決定之文化特性特有的字串。 .NET 中的每個執行緒都有 `CurrentCulture` 和 `CurrentUICulture` 物件。 ASP.NET Core 會在轉譯文化特性相依函式時檢查這些值。 比方說，如果目前執行緒的文化特性設定為 "en-US" (英文 - 美國)，`DateTime.Now.ToLongDateString()` 會顯示 "Thursday, February 18, 2016"，但如果 `CurrentCulture` 設定為 "es-ES" (西班牙文 - 西班牙)，則輸出會是 "jueves, 18 de febrero de 2016"。
+ASP.NET Core 可讓您指定 <xref:Microsoft.AspNetCore.Builder.RequestLocalizationOptions.SupportedCultures> 和 <xref:Microsoft.AspNetCore.Builder.RequestLocalizationOptions.SupportedUICultures> 這兩個文化特性值。 的 <xref:System.Globalization.CultureInfo> 物件可 `SupportedCultures` 決定文化特性相依函數的結果，例如日期、時間、數位和貨幣格式。 `SupportedCultures` 也可決定文字排列順序、大小寫慣例和字串比較。 如需有關伺服器如何取得文化特性的詳細資訊，請參閱 <xref:System.Globalization.CultureInfo.CurrentCulture?displayProperty=nameWithType> 和 <xref:System.Globalization.CultureInfo.CurrentUICulture?displayProperty=nameWithType> 。 `SupportedUICultures` `.resx` 會決定所查閱) 所 (的翻譯字串 <xref:System.Resources.ResourceManager> 。 `ResourceManager`會查閱由所決定的文化特性特定字串 `CurrentUICulture` 。 .NET 中的每個執行緒都有 `CurrentCulture` 和 `CurrentUICulture` 物件。 架構會在轉譯與文化特性相依的函式時，檢查這些值。 如果目前線程的文化特性設定為 `en-US` (英文、美國) ，則會 `DateTime.Now.ToLongDateString()` 顯示 `Thursday, February 18, 2016` ; 但是，如果 `CurrentCulture` 設為 `es-ES` (西班牙文（西班牙）) ，則輸出為 `jueves, 18 de febrero de 2016` 。
 
 ## <a name="resource-files"></a>資源檔
 
@@ -177,7 +177,7 @@ ASP.NET Core 可讓您指定 `SupportedCultures` 和 `SupportedUICultures` 這�
 
 ### <a name="rootnamespaceattribute"></a>RootNamespaceAttribute 
 
-[RootNamespace](/dotnet/api/microsoft.extensions.localization.rootnamespaceattribute?view=aspnetcore-2.1) 屬性會在組件的根命名空間與組件名稱不同時，提供組件的根命名空間。 
+<xref:Microsoft.Extensions.Localization.RootNamespaceAttribute>當元件的根命名空間與元件名稱不同時，屬性會提供元件的根命名空間。 
 
 > [!WARNING]
 > 當專案的名稱不是有效的 .NET 識別碼時，就會發生這種情況。 例如， `my-project-name.csproj` 會使用根命名空間 `my_project_name` 和 `my-project-name` 導致此錯誤的元件名稱。 
@@ -285,7 +285,7 @@ c=en-UK|uic=en-US
 
 1. 點選 [語言]。
 
-   ![，](localization/_static/lang.png)
+   ![網際網路選項](localization/_static/lang.png)
 
 1. 點選 [設定語言喜好設定]。
 
@@ -531,7 +531,7 @@ ASP.NET Core 可讓您指定 `SupportedCultures` 和 `SupportedUICultures` 這�
 
 ### <a name="rootnamespaceattribute"></a>RootNamespaceAttribute 
 
-[RootNamespace](/dotnet/api/microsoft.extensions.localization.rootnamespaceattribute?view=aspnetcore-2.1) 屬性會在組件的根命名空間與組件名稱不同時，提供組件的根命名空間。 
+<xref:Microsoft.Extensions.Localization.RootNamespaceAttribute>當元件的根命名空間與元件名稱不同時，屬性會提供元件的根命名空間。 
 
 > [!WARNING]
 > 當專案的名稱不是有效的 .NET 識別碼時，就會發生這種情況。 例如， `my-project-name.csproj` 會使用根命名空間 `my_project_name` 和 `my-project-name` 導致此錯誤的元件名稱。 
@@ -641,7 +641,7 @@ c=en-UK|uic=en-US
 
 1. 點選 [語言]。
 
-   ![，](localization/_static/lang.png)
+   ![網際網路選項](localization/_static/lang.png)
 
 1. 點選 [設定語言喜好設定]。
 
@@ -886,7 +886,7 @@ ASP.NET Core 可讓您指定 `SupportedCultures` 和 `SupportedUICultures` 這�
 
 ### <a name="rootnamespaceattribute"></a>RootNamespaceAttribute 
 
-[RootNamespace](/dotnet/api/microsoft.extensions.localization.rootnamespaceattribute?view=aspnetcore-2.1) 屬性會在組件的根命名空間與組件名稱不同時，提供組件的根命名空間。 
+<xref:Microsoft.Extensions.Localization.RootNamespaceAttribute>當元件的根命名空間與元件名稱不同時，屬性會提供元件的根命名空間。 
 
 > [!WARNING]
 > 當專案的名稱不是有效的 .NET 識別碼時，就會發生這種情況。 例如， `my-project-name.csproj` 會使用根命名空間 `my_project_name` 和 `my-project-name` 導致此錯誤的元件名稱。 
@@ -996,7 +996,7 @@ c=en-UK|uic=en-US
 
 1. 點選 [語言]。
 
-   ![，](localization/_static/lang.png)
+   ![網際網路選項](localization/_static/lang.png)
 
 1. 點選 [設定語言喜好設定]。
 

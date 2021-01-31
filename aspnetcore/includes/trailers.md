@@ -1,4 +1,4 @@
-HTTP 結尾與 HTTP 標頭類似，不同之處在于它們會在傳送回應主體之後傳送。 針對 IIS 和 HTTP.SYS，只支援 HTTP/2 回應尾端。
+HTTP 結尾與 HTTP 標頭類似，不同之處在于它們會在傳送回應主體之後傳送。 針對 IIS 和 HTTP.sys，只支援 HTTP/2 回應尾端。
 
 ```csharp
 if (httpContext.Response.SupportsTrailers())

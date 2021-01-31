@@ -18,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: grpc/httpapi
-ms.openlocfilehash: cb2855f0293a6bc800bb5758cd1a8400d4434a24
-ms.sourcegitcommit: 3593c4efa707edeaaceffbfa544f99f41fc62535
+ms.openlocfilehash: 78247a9b775ec8c9a3bc4a58209f09e5b714c07d
+ms.sourcegitcommit: 7e394a8527c9818caebb940f692ae4fcf2f1b277
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 01/04/2021
-ms.locfileid: "96855454"
+ms.lasthandoff: 01/31/2021
+ms.locfileid: "99217514"
 ---
 # <a name="create-json-web-apis-from-grpc"></a>從 gRPC 建立 JSON Web API
 
@@ -60,29 +60,7 @@ gRPC 仍然可以用來呼叫服務。
 1. 將 [google/api/HTTP.sys](https://github.com/aspnet/AspLabs/blob/c1e59cacf7b9606650d6ec38e54fa3a82377f360/src/GrpcHttpApi/sample/Proto/google/api/http.proto) 和 [google/api/注釋. proto](https://github.com/aspnet/AspLabs/blob/c1e59cacf7b9606650d6ec38e54fa3a82377f360/src/GrpcHttpApi/sample/Proto/google/api/annotations.proto) 檔案新增至您的專案。
 1. 在您的 *proto* 檔案中使用 HTTP 系結和路由標注 gRPC 方法：
 
-```protobuf
-syntax = "proto3";
-
-import "google/api/annotations.proto";
-
-package greet;
-
-service Greeter {
-  rpc SayHello (HelloRequest) returns (HelloReply) {
-    option (google.api.http) = {
-      get: "/v1/greeter/{name}"
-    };
-  }
-}
-
-message HelloRequest {
-  string name = 1;
-}
-
-message HelloReply {
-  string message = 1;
-}
-```
+[!code-protobuf[](~/grpc/httpapi/greet.proto?highlight=3,9-11)]
 
 `SayHello`現在可將 gRPC 方法叫用為 gRPC + Protobuf 和 HTTP API：
 

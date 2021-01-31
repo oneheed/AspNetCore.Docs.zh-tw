@@ -18,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: grpc/interprocess
-ms.openlocfilehash: d806a340d8540fce8af6ccc6ff68325e4b733922
-ms.sourcegitcommit: 3593c4efa707edeaaceffbfa544f99f41fc62535
+ms.openlocfilehash: 8c0f8fb1468e61d5aa2e7f42cb5da33c01819124
+ms.sourcegitcommit: 7e394a8527c9818caebb940f692ae4fcf2f1b277
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 01/04/2021
-ms.locfileid: "93059880"
+ms.lasthandoff: 01/31/2021
+ms.locfileid: "99217462"
 ---
 # <a name="inter-process-communication-with-grpc"></a>與 gRPC 的處理程序間通訊
 
@@ -64,9 +64,6 @@ Kestrel 具有 ud 端點的內建支援。 在 Linux、macOS 和 [新式版本�
 ## <a name="client-configuration"></a>用戶端組態
 
 `GrpcChannel` 支援透過自訂傳輸進行 gRPC 呼叫。 建立通道時，您可以使用 `SocketsHttpHandler` 具有自訂的來設定它 `ConnectCallback` 。 回呼可讓用戶端透過自訂傳輸進行連接，然後透過該傳輸傳送 HTTP 要求。
-
-> [!IMPORTANT]
-> `SocketsHttpHandler.ConnectCallback` 是 .NET 5 候選版2中的新 API。
 
 Unix 網域通訊端連接 factory 範例：
 

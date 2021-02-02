@@ -5,18 +5,20 @@ metadata:
   title: ASP.NET Core 檔-新功能？
   description: 瞭解 ASP.NET Core 檔中的新內容與更新內容。
   ms.topic: landing-page
-  ms.date: 01/04/2020
-  ms.openlocfilehash: a052e6dcd1439d85df5c31409a427c7df4a16216
-  ms.sourcegitcommit: 3593c4efa707edeaaceffbfa544f99f41fc62535
+  ms.date: 02/01/2021
+  ms.openlocfilehash: 0b7f3ab27f31417b3e6b17bf9d4c31ec96129f1e
+  ms.sourcegitcommit: 75db2f684a9302b0be7925eab586aa091c6bd19f
   ms.translationtype: MT
   ms.contentlocale: zh-TW
-  ms.lasthandoff: 01/04/2021
-  ms.locfileid: "97865586"
+  ms.lasthandoff: 02/01/2021
+  ms.locfileid: "99238289"
 landingContent:
 - title: 尋找 ASP.NET Core 檔更新
   linkLists:
   - linkListType: whats-new
     links:
+    - text: 2021 年 1 月
+      url: 2021-01.md
     - text: 2020 年 12 月
       url: 2020-12.md
     - text: 2020 年 11 月
@@ -27,8 +29,6 @@ landingContent:
       url: 2020-09.md
     - text: 2020 年 8 月
       url: 2020-08.md
-    - text: 2020 年 7 月
-      url: 2020-07.md
 - title: 取得相關-參與 ASP.NET Core 檔
   linkLists:
   - linkListType: overview

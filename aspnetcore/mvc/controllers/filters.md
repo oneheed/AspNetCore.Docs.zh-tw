@@ -18,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: mvc/controllers/filters
-ms.openlocfilehash: 72ee8f5dfdf8ffd6cfcb74b13fa0738893d8e214
-ms.sourcegitcommit: 6299f08aed5b7f0496001d093aae617559d73240
+ms.openlocfilehash: ee30ef89c5d7aeae83f23a81eb02235397c89ac2
+ms.sourcegitcommit: 75db2f684a9302b0be7925eab586aa091c6bd19f
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 12/14/2020
-ms.locfileid: "97486131"
+ms.lasthandoff: 02/01/2021
+ms.locfileid: "99238320"
 ---
 # <a name="filters-in-aspnet-core"></a>ASP.NET Core 中的篩選條件
 
@@ -192,12 +192,12 @@ ASP.NET Core 包含內建的屬性型篩選條件，可對其進行子類別化�
 
 | 順序 | 篩選條件範圍 | 篩選條件方法 |
 |:--------:|:------------:|:-------------:|
-| 1 | 全域 | `OnActionExecuting` |
+| 1 | 全球 | `OnActionExecuting` |
 | 2 | 控制器或 Razor 頁面| `OnActionExecuting` |
 | 3 | 方法 | `OnActionExecuting` |
 | 4 | 方法 | `OnActionExecuted` |
 | 5 | 控制器或 Razor 頁面 | `OnActionExecuted` |
-| 6 | 全域 | `OnActionExecuted` |
+| 6 | 全球 | `OnActionExecuted` |
 
 ### <a name="controller-level-filters"></a>控制器層級篩選
 
@@ -565,7 +565,8 @@ ASP.NET Core 執行階段並不保證：
 _ 將建立篩選準則的單一實例。
 * 將不會於稍後的時間從 DI 容器重新要求篩選條件。
 
-[!WARNING] 只有 `IFilterFactory.IsReusable` `true` 當篩選準則的來源是明確的、篩選準則為無狀態，而且可以安全地在多個 HTTP 要求中使用時，才設定為傳回。 比方說，如果傳回，則不會從 DI 傳回已註冊為範圍或暫時性的篩選器 `IFilterFactory.IsReusable``true`
+> [!WARNING] 
+> 只有 <xref:Microsoft.AspNetCore.Mvc.Filters.IFilterFactory.IsReusable?displayProperty=nameWithType> `true` 當篩選準則的來源是明確的、篩選準則為無狀態，而且可以在多個 HTTP 要求中安全地使用篩選時，才設定為傳回。 例如，如果傳回，則不會從 DI 傳回已註冊為範圍或暫時性的篩選準則 `IFilterFactory.IsReusable` `true` 。
 
 可以使用自訂屬性實作作為另一種建立篩選條件的方法，來實作 `IFilterFactory`：
 
@@ -750,12 +751,12 @@ ASP.NET Core 包含內建的屬性型篩選條件，可對其進行子類別化�
 
 | 順序 | 篩選條件範圍 | 篩選條件方法 |
 |:--------:|:------------:|:-------------:|
-| 1 | 全域 | `OnActionExecuting` |
+| 1 | 全球 | `OnActionExecuting` |
 | 2 | 控制器 | `OnActionExecuting` |
 | 3 | 方法 | `OnActionExecuting` |
 | 4 | 方法 | `OnActionExecuted` |
 | 5 | 控制器 | `OnActionExecuted` |
-| 6 | 全域 | `OnActionExecuted` |
+| 6 | 全球 | `OnActionExecuted` |
 
 此順序顯示：
 
@@ -812,8 +813,8 @@ ASP.NET Core 包含內建的屬性型篩選條件，可對其進行子類別化�
 |:--------:|:------------:|:-----------------:|:-------------:|
 | 1 | 方法 | 0 | `OnActionExecuting` |
 | 2 | 控制器 | 1  | `OnActionExecuting` |
-| 3 | 全域 | 2  | `OnActionExecuting` |
-| 4 | 全域 | 2  | `OnActionExecuted` |
+| 3 | 全球 | 2  | `OnActionExecuting` |
+| 4 | 全球 | 2  | `OnActionExecuted` |
 | 5 | 控制器 | 1  | `OnActionExecuted` |
 | 6 | 方法 | 0  | `OnActionExecuted` |
 

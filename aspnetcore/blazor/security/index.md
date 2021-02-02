@@ -19,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/security/index
-ms.openlocfilehash: 35620299b1138ca45a6ebf1d789a9f4aa9b29518
-ms.sourcegitcommit: 610936e4d3507f7f3d467ed7859ab9354ec158ba
+ms.openlocfilehash: 0a271b2e306e2969530248fe820ed8aab2fa45e0
+ms.sourcegitcommit: 75db2f684a9302b0be7925eab586aa091c6bd19f
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 01/25/2021
-ms.locfileid: "98751601"
+ms.lasthandoff: 02/01/2021
+ms.locfileid: "99238191"
 ---
 # <a name="aspnet-core-no-locblazor-authentication-and-authorization"></a>ASP.NET Core Blazor 驗證與授權
 
@@ -391,9 +391,9 @@ You can only see this if you're signed in.
 
 <xref:Microsoft.AspNetCore.Components.Routing.Router>元件與元件搭配使用 <xref:Microsoft.AspNetCore.Components.Authorization.AuthorizeRouteView> ，可讓應用程式在下列情況下指定自訂內容：
 
-* 找不到內容。
-* 使用者無法通過套用 [`[Authorize]`](xref:Microsoft.AspNetCore.Authorization.AuthorizeAttribute) 至元件的條件。 屬性 [`[Authorize]`](xref:Microsoft.AspNetCore.Authorization.AuthorizeAttribute) 區段中包含屬性。 [ `[Authorize]` ](#authorize-attribute)
-* 正在進行非同步驗證。
+* 使用者無法通過套用 [`[Authorize]`](xref:Microsoft.AspNetCore.Authorization.AuthorizeAttribute) 至元件的條件。 元素的標記隨即 [`<NotAuthorized>`](xref:Microsoft.AspNetCore.Components.Authorization.AuthorizeRouteView.NotAuthorized?displayProperty=nameWithType) 顯示。 屬性 [`[Authorize]`](xref:Microsoft.AspNetCore.Authorization.AuthorizeAttribute) 區段中包含屬性。 [ `[Authorize]` ](#authorize-attribute)
+* 非同步授權正在進行中，這通常表示正在驗證使用者的程式正在進行中。 元素的標記隨即 [`<Authorizing>`](xref:Microsoft.AspNetCore.Components.Authorization.AuthorizeRouteView.Authorizing?displayProperty=nameWithType) 顯示。
+* 找不到內容。 元素的標記隨即 [`<NotFound>`](xref:Microsoft.AspNetCore.Components.Routing.Router.NotFound?displayProperty=nameWithType) 顯示。
 
 在預設 Blazor Server 專案範本中， `App`) 的元件 (會 `App.razor` 示範如何設定自訂內容：
 
@@ -409,8 +409,8 @@ You can only see this if you're signed in.
                     <p>You may need to log in as a different user.</p>
                 </NotAuthorized>
                 <Authorizing>
-                    <h1>Authentication in progress</h1>
-                    <p>Only visible while authentication is in progress.</p>
+                    <h1>Authorization in progress</h1>
+                    <p>Only visible while authorization is in progress.</p>
                 </Authorizing>
             </AuthorizeRouteView>
         </Found>

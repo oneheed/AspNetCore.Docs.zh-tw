@@ -17,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: mobile/native-mobile-backend
-ms.openlocfilehash: 0bbf740cb49b77b476e7e015afee311110bbe5ea
-ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
+ms.openlocfilehash: 4e86241771e884ba9079bcdf9a09eebc6acd62c8
+ms.sourcegitcommit: e311cfb77f26a0a23681019bd334929d1aaeda20
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 10/30/2020
-ms.locfileid: "93060985"
+ms.lasthandoff: 02/03/2021
+ms.locfileid: "99530212"
 ---
 # <a name="create-backend-services-for-native-mobile-apps-with-aspnet-core"></a>使用 ASP.NET Core 建立原生行動應用程式的後端服務
 
@@ -38,7 +38,7 @@ ms.locfileid: "93060985"
 
 ![To Do Rest 應用程式在 Android 智慧型手機上執行](native-mobile-backend/_static/todo-android.png)
 
-### <a name="features"></a>功能
+### <a name="features"></a>特性
 
 ToDoRest 應用程式支援列出、新增、刪除和更新待辦項目。 每個項目都有識別碼、名稱、記事和標示其是否已完成的屬性。
 
@@ -64,11 +64,11 @@ public static string RestUrl = "http://192.168.1.207:5000/api/todoitems/{0}";
 
 ## <a name="creating-the-aspnet-core-project"></a>建立 ASP.NET Core 專案
 
-在 Visual Studio 中建立新的 ASP.NET Core Web 應用程式。 選擇 [Web API template] (Web API 範本) 及 [No Authentication] (無驗證)。 將專案命名為 *ToDoApi* 。
+在 Visual Studio 中建立新的 ASP.NET Core Web 應用程式。 選擇 [Web API template] (Web API 範本) 及 [No Authentication] (無驗證)。 將專案命名為 *ToDoApi*。
 
 ![新的 ASP.NET Web 應用程式對話方塊，當中已選取了 Web API 專案範本](native-mobile-backend/_static/web-api-template.png)
 
-應用程式現在應該會回應所有傳送到連接埠 5000 的要求。 更新 *Program.cs* ，使其包含 `.UseUrls("http://*:5000")`。若要完成這項操作：
+應用程式現在應該會回應所有傳送到連接埠 5000 的要求。 更新 *Program.cs*，使其包含 `.UseUrls("http://*:5000")`。若要完成這項操作：
 
 [!code-csharp[](native-mobile-backend/sample/ToDoApi/src/ToDoApi/Program.cs?range=10-16&highlight=3)]
 
@@ -91,14 +91,14 @@ API 方法需要一些方式才能操作資料。 使用原始 Xamarin 範本使
 
 [!code-csharp[](native-mobile-backend/sample/ToDoApi/src/ToDoApi/Startup.cs?highlight=6&range=29-35)]
 
-此時，您已準備就緒可建立 *ToDoItemsController* 。
+此時，您已準備就緒可建立 *ToDoItemsController*。
 
 > [!TIP]
 > 在[使用 ASP.NET Core MVC 及 Visual Studio 建置第一個 Web API](../tutorials/first-web-api.md) 中深入了解如何建立 Web API。
 
 ## <a name="creating-the-controller"></a>建立控制器
 
-將新的控制器新增到專案， *ToDoItemsController* 。 它應該繼承自 Microsoft.AspNetCore.Mvc.Controller。 新增一個 `Route` 屬性來表示控制器將會處理所有傳送到以 `api/todoitems` 開頭之路徑的要求。 路由中的 `[controller]` 權杖會由控制器的名稱取代 (省略 `Controller` 尾碼)，特別在全域路由時將會非常有幫助。 深入了解[路由](../fundamentals/routing.md)。
+將新的控制器新增到專案，*ToDoItemsController*。 它應該繼承自 Microsoft.AspNetCore.Mvc.Controller。 新增一個 `Route` 屬性來表示控制器將會處理所有傳送到以 `api/todoitems` 開頭之路徑的要求。 路由中的 `[controller]` 權杖會由控制器的名稱取代 (省略 `Controller` 尾碼)，特別在全域路由時將會非常有幫助。 深入了解[路由](../fundamentals/routing.md)。
 
 控制器需要一個 `IToDoRepository` 才能發揮功能，請在控制器的建構函式中要求此類型的執行個體。 在執行階段，這個執行個體會使用架構的[相依性插入](../fundamentals/dependency-injection.md)支援提供。
 
@@ -166,4 +166,7 @@ API 方法需要一些方式才能操作資料。 使用原始 Xamarin 範本使
 
 ## <a name="additional-resources"></a>其他資源
 
-* [驗證和授權](/xamarin/xamarin-forms/enterprise-application-patterns/authentication-and-authorization)
+- [Xamarin： Web 服務驗證](/xamarin/xamarin-forms/data-cloud/authentication/)
+- [Xamarin：使用 RESTful Web 服務](/xamarin/xamarin-forms/data-cloud/web-services/rest)
+- [Microsoft Learn：在 Xamarin 應用程式中取用 REST web 服務](/learn/modules/consume-rest-services/)
+- [Microsoft Learn：使用 ASP.NET Core 建立 web API](/learn/modules/build-web-api-aspnet-core/)

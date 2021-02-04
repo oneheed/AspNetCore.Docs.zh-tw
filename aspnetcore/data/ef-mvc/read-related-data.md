@@ -18,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: data/ef-mvc/read-related-data
-ms.openlocfilehash: b1adca435b48db22a176d33a216c07d6647a6695
-ms.sourcegitcommit: 97243663fd46c721660e77ef652fe2190a461f81
+ms.openlocfilehash: 5f0e8efdf57e0a8ba5483680224d33ea5d60f06a
+ms.sourcegitcommit: e311cfb77f26a0a23681019bd334929d1aaeda20
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 01/09/2021
-ms.locfileid: "98058307"
+ms.lasthandoff: 02/03/2021
+ms.locfileid: "99530147"
 ---
 # <a name="tutorial-read-related-data---aspnet-mvc-with-ef-core"></a>教學課程：使用 EF Core 讀取相關資料-ASP.NET MVC
 
@@ -43,7 +43,7 @@ ms.locfileid: "98058307"
 > * 建立 Instructors 頁面
 > * 了解明確載入
 
-## <a name="prerequisites"></a>先決條件
+## <a name="prerequisites"></a>必要條件
 
 * [建立複雜的資料模型](complex-data-model.md)
 
@@ -226,7 +226,7 @@ Instructors 頁面會顯示下列三個不同資料表的資料。 因此，您�
 
 在 *Views/Instructors/Index.cshtml* 檔案的結束資料表項目 (在檔案的結尾) 之後，新增下列程式碼。 當選取講師時，此程式碼會顯示與講師相關的課程。
 
-[!code-cshtml[](intro/samples/cu/Views/Instructors/Index1.cshtml?range=66-101)]
+[!code-cshtml[](intro/samples/cu/Views/Instructors/Index1.cshtml?range=63-98)]
 
 此程式碼會讀取檢視模型的 `Courses` 屬性以顯示課程清單。 它也會提供 **選取** 超連結，將所選取課程的識別碼傳送至 `Index` 動作方法。
 

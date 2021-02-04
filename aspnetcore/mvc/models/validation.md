@@ -18,14 +18,14 @@ no-loc:
 - Razor
 - SignalR
 uid: mvc/models/validation
-ms.openlocfilehash: 77d49710b9d69f6fbbe92970f1c455de32489444
-ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
+ms.openlocfilehash: d6fa7e4524a8afdc23d4ad46354d9d8b395656a3
+ms.sourcegitcommit: e311cfb77f26a0a23681019bd334929d1aaeda20
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 10/30/2020
-ms.locfileid: "93056955"
+ms.lasthandoff: 02/03/2021
+ms.locfileid: "99530186"
 ---
-# <a name="model-validation-in-aspnet-core-mvc-and-no-locrazor-pages"></a>ASP.NET Core MVC 和頁面中的模型驗證 Razor
+# <a name="model-validation-in-aspnet-core-mvc-and-razor-pages"></a>ASP.NET Core MVC 和頁面中的模型驗證 Razor
 
 ::: moniker range=">= aspnetcore-3.0"
 
@@ -92,9 +92,27 @@ ms.locfileid: "93056955"
 
 若要找出哪些參數傳遞給 `String.Format` 以取得特定屬性的錯誤訊息，請參閱 [DataAnnotations 原始程式碼](https://github.com/dotnet/runtime/tree/master/src/libraries/System.ComponentModel.Annotations/src/System/ComponentModel/DataAnnotations)。
 
-## <a name="required-attribute"></a>[必要] 屬性
+## <a name="non-nullable-reference-types-and-required-attribute"></a>不可為 null 的參考型別和 [必要] 屬性
 
-.NET Core 3.0 和更新版本中的驗證系統會將不可為 null 的參數或系結屬性視為有 `[Required]` 屬性。 例如 `decimal` 和 `int` 的[實值型別](/dotnet/csharp/language-reference/keywords/value-types)不可為 Null。 您可以在下列設定中停用此行為 <xref:Microsoft.AspNetCore.Mvc.MvcOptions.SuppressImplicitRequiredAttributeForNonNullableReferenceTypes> `Startup.ConfigureServices` ：
+驗證系統會將不可為 null 的參數或系結屬性視為有 `[Required]` 屬性。 藉由啟用內容，MVC 會以隱含方式開始驗證不可為 null 的屬性或參數，如同它們已使用屬性來進行屬性 [ `Nullable` ](/dotnet/csharp/nullable-references#nullable-contexts) `[Required]` 。 請考慮下列程式碼：
+
+```csharp
+public class Person
+{
+    public string Name { get; set; }
+}
+```
+
+如果已使用建立應用程式 `<Nullable>enable</Nullable>` ，則 `Name` JSON 或表單 post 中的遺漏值會導致驗證錯誤。 使用可為 null 的參考型別，以允許為屬性指定 null 或遺漏值 `Name` ：
+
+```csharp
+public class Person
+{
+    public string? Name { get; set; }
+}
+```
+
+. 您可以在下列設定中停用此行為 <xref:Microsoft.AspNetCore.Mvc.MvcOptions.SuppressImplicitRequiredAttributeForNonNullableReferenceTypes> `Startup.ConfigureServices` ：
 
 ```csharp
 services.AddControllers(options => options.SuppressImplicitRequiredAttributeForNonNullableReferenceTypes = true);
@@ -210,7 +228,7 @@ public string MiddleName { get; set; }
 
 [!code-csharp[](validation/samples/3.x/ValidationSample/Controllers/UsersController.cs?name=snippet_CheckAgeSignature)]
 
-在 [檢查年齡] 頁面 ( *CheckAge.cshtml* ) 中，有兩個表單。 第一個表單會將 `Age` 的值提交 `99` 為查詢字串參數： `https://localhost:5001/Users/CheckAge?Age=99` 。
+在 [檢查年齡] 頁面 (*CheckAge.cshtml*) 中，有兩個表單。 第一個表單會將 `Age` 的值提交 `99` 為查詢字串參數： `https://localhost:5001/Users/CheckAge?Age=99` 。
 
 從查詢字串提交正確格式化的 `age` 時，即會驗證表單。
 
@@ -357,7 +375,7 @@ $.get({
 
 這種在 HTML 中轉譯 `data-` 屬性的方法，由範例應用程式中的 `ClassicMovie` 屬性使用。 使用此方法來新增用戶端驗證：
 
-1. 建立自訂驗證屬性的屬性配接器類別。 從[AttributeAdapterBase \<T> ](/dotnet/api/microsoft.aspnetcore.mvc.dataannotations.attributeadapterbase-1?view=aspnetcore-2.2)衍生類別。 建立會將 `data-` 屬性新增至轉譯輸出的 `AddValidation` 方法，如下列範例所示：
+1. 建立自訂驗證屬性的屬性配接器類別。 從 <xref:Microsoft.AspNetCore.Mvc.DataAnnotations.AttributeAdapterBase%601>衍生類別。 建立會將 `data-` 屬性新增至轉譯輸出的 `AddValidation` 方法，如下列範例所示：
 
    [!code-csharp[](validation/samples/3.x/ValidationSample/Validation/ClassicMovieAttributeAdapter.cs?name=snippet_Class)]
 
@@ -573,7 +591,7 @@ public string MiddleName { get; set; }
 
 [!code-csharp[](validation/samples/2.x/ValidationSample/Controllers/UsersController.cs?name=snippet_CheckAge)]
 
-在 [檢查年齡] 頁面 ( *CheckAge.cshtml* ) 中，有兩個表單。 第一個表單會提交 `Age` 值 `99` 作為查詢字串：`https://localhost:5001/Users/CheckAge?Age=99`。
+在 [檢查年齡] 頁面 (*CheckAge.cshtml*) 中，有兩個表單。 第一個表單會提交 `Age` 值 `99` 作為查詢字串：`https://localhost:5001/Users/CheckAge?Age=99`。
 
 從查詢字串提交正確格式化的 `age` 時，即會驗證表單。
 
@@ -728,7 +746,7 @@ $.get({
 
 這種在 HTML 中轉譯 `data-` 屬性的方法，由範例應用程式中的 `ClassicMovie` 屬性使用。 使用此方法來新增用戶端驗證：
 
-1. 建立自訂驗證屬性的屬性配接器類別。 從[AttributeAdapterBase \<T> ](/dotnet/api/microsoft.aspnetcore.mvc.dataannotations.attributeadapterbase-1?view=aspnetcore-2.2)衍生類別。 建立會將 `data-` 屬性新增至轉譯輸出的 `AddValidation` 方法，如下列範例所示：
+1. 建立自訂驗證屬性的屬性配接器類別。 從 <xref:Microsoft.AspNetCore.Mvc.DataAnnotations.AttributeAdapterBase%601>衍生類別。 建立會將 `data-` 屬性新增至轉譯輸出的 `AddValidation` 方法，如下列範例所示：
 
    [!code-csharp[](validation/samples/2.x/ValidationSample/Attributes/ClassicMovieAttributeAdapter.cs?name=snippet_ClassicMovieAttributeAdapter)]
 

@@ -18,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: grpc/supported-platforms
-ms.openlocfilehash: 88d371f460839261b618a32564a723c257b0b119
-ms.sourcegitcommit: 7e394a8527c9818caebb940f692ae4fcf2f1b277
+ms.openlocfilehash: 6e48a19027f79b75edeebde9c584419871fba533
+ms.sourcegitcommit: e311cfb77f26a0a23681019bd334929d1aaeda20
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 01/31/2021
-ms.locfileid: "99217488"
+ms.lasthandoff: 02/03/2021
+ms.locfileid: "99530160"
 ---
 # <a name="grpc-on-net-supported-platforms"></a>.NET 支援平臺上的 gRPC
 
@@ -62,11 +62,13 @@ gRPC 服務可以裝載在所有內建的 ASP.NET Core 伺服器上。
 > * Kestrel
 > * TestServer
 > * IIS&dagger;
-> * HTTP.sys&dagger;
+> * HTTP.sys&Dagger;
 
-&dagger;IIS 和 HTTP.sys 需要 .NET 5 和 Windows 10 組建20241或更新版本。
+&dagger;IIS 需要 .NET 5 和 Windows 10 組建20241或更新版本。
 
-如需詳細資訊，請參閱<xref:grpc/aspnetcore>。
+&Dagger;HTTP.sys 需要 .NET 5 和 Windows 10 組建19529或更新版本。
+
+如需設定 ASP.NET Core 伺服器來執行 gRPC 的相關資訊，請參閱 <xref:grpc/aspnetcore#server-options> 。
 
 ## <a name="net-version-requirements"></a>.NET 版本需求
 

@@ -19,14 +19,14 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/components/css-isolation
-ms.openlocfilehash: 92545eab4004f6b67080f79d64b94bb424d5a102
-ms.sourcegitcommit: 3593c4efa707edeaaceffbfa544f99f41fc62535
+ms.openlocfilehash: 0748f606314963788e6733ca2ae2ca2123d839b3
+ms.sourcegitcommit: e311cfb77f26a0a23681019bd334929d1aaeda20
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 01/04/2021
-ms.locfileid: "96320079"
+ms.lasthandoff: 02/03/2021
+ms.locfileid: "99529978"
 ---
-# <a name="aspnet-core-no-locblazor-css-isolation"></a>ASP.NET Core Blazor CSS 隔離
+# <a name="aspnet-core-blazor-css-isolation"></a>ASP.NET Core Blazor CSS 隔離
 
 依 [Dave Brock](https://twitter.com/daveabrock)
 
@@ -34,11 +34,19 @@ CSS 隔離會防止全域樣式的相依性，並協助避免元件和程式庫�
 
 ## <a name="enable-css-isolation"></a>啟用 CSS 隔離 
 
-若要定義元件特定樣式，請建立 `.razor.css` 符合元件檔案名的檔案 `.razor` 。 這個檔案 `.razor.css` 是限 *域的 CSS* 檔案。 
+若要定義元件特定樣式，請建立 `.razor.css` 符合 `.razor` 相同資料夾中元件之檔案名的檔案。 檔案 `.razor.css` 是限 *域的 CSS* 檔案。 
 
-若為 `MyComponent` 具有檔案的元件 `MyComponent.razor` ，請建立檔案與名為的元件 `MyComponent.razor.css` 。 `MyComponent`檔案名中的值 `.razor.css` **不** 區分大小寫。
+針對檔案 `Example` 中的元件 `Example.razor` ，建立與名為的元件一起的檔案 `Example.razor.css` 。 檔案 `Example.razor.css` 必須位於與元件 () 相同的資料夾中 `Example` `Example.razor` 。 檔案的 " `Example` " 基底名稱 **不** 區分大小寫。
 
-例如，若要 `Counter` 在預設專案範本中將 CSS 隔離新增至元件，請在檔案中 Blazor 加入名為的新檔案 `Counter.razor.css` `Counter.razor` ，然後新增下列 CSS：
+`Pages/Example.razor`:
+
+```razor
+@page "/example"
+
+<h1>Scoped CSS Example</h1>
+```
+
+`Pages/Example.razor.css`:
 
 ```css
 h1 { 
@@ -47,10 +55,10 @@ h1 {
 }
 ```
 
-中定義的樣式 `Counter.razor.css` 只會套用至元件的呈現輸出 `Counter` 。 在 `h1` 應用程式中其他位置定義的任何 CSS 宣告都不會與 `Counter` 樣式衝突。
+**中定義的樣式 `Example.razor.css` 只會套用至元件的呈現輸出 `Example` 。** CSS 隔離適用于相符檔案中的 HTML 元素 Razor 。 在 `h1` 應用程式中其他位置定義的任何 CSS 宣告，都不會與 `Example` 元件的樣式相衝突。
 
 > [!NOTE]
-> 為了確保在進行組合時進行樣式隔離， `@import` Razor 範圍的 CSS 檔案不支援區塊。
+> 為了在發生組合時保證樣式隔離，不支援在程式碼區塊中匯入 CSS Razor 。
 
 ## <a name="css-isolation-bundling"></a>CSS 隔離組合
 
@@ -59,7 +67,7 @@ h1 {
 根據預設，會從應用程式的根路徑參考這些靜態檔案。 在應用程式中，檢查 `<head>` 所產生之 HTML 標籤內的參考，以參考配套的檔案：
 
 ```html
-<link href="MyProjectName.styles.css" rel="stylesheet">
+<link href="ProjectName.styles.css" rel="stylesheet">
 ```
 
 在配套的檔案中，每個元件都與一個範圍識別碼相關聯。 針對每個已設定樣式的元件，會附加格式的 HTML 屬性 `b-<10-character-string>` 。 每個應用程式的識別碼都是唯一的，而且不同。 在轉譯的 `Counter` 元件中，將 Blazor 範圍識別碼附加至 `h1` 元素：
@@ -68,7 +76,7 @@ h1 {
 <h1 b-3xxtam6d07>
 ```
 
-檔案會 `MyProjectName.styles.css` 使用範圍識別碼將樣式宣告與其元件組成群組。 下列範例提供上述元素的樣式 `<h1>` ：
+檔案會 `ProjectName.styles.css` 使用範圍識別碼將樣式宣告與其元件組成群組。 下列範例提供上述元素的樣式 `<h1>` ：
 
 ```css
 /* /Pages/Counter.razor.rz.scp.css */
@@ -77,7 +85,7 @@ h1[b-3xxtam6d07] {
 }
 ```
 
-在組建期間，會使用慣例建立專案組合 `{STATIC WEB ASSETS BASE PATH}/MyProject.lib.scp.css` ，其中預留位置 `{STATIC WEB ASSETS BASE PATH}` 是靜態 web 資產基底路徑。
+在組建期間，會使用慣例建立專案組合 `{STATIC WEB ASSETS BASE PATH}/Project.lib.scp.css` ，其中預留位置 `{STATIC WEB ASSETS BASE PATH}` 是靜態 web 資產基底路徑。
 
 如果使用其他專案（例如 NuGet 套件或[ Razor 類別庫](xref:blazor/components/class-libraries)），則配套的檔案如下：
 
@@ -90,7 +98,7 @@ CSS 隔離預設僅適用于您與格式相關聯的元件 `{COMPONENT NAME}.raz
 
 下列範例顯示使用稱為的子元件呼叫的父元件 `Parent` `Child` 。
 
-`Parent.razor`:
+`Pages/Parent.razor`:
 
 ```razor
 @page "/parent"
@@ -102,13 +110,15 @@ CSS 隔離預設僅適用于您與格式相關聯的元件 `{COMPONENT NAME}.raz
 </div>
 ```
 
-`Child.razor`:
+`Shared/Child.razor`:
 
 ```razor
 <h1>Child Component</h1>
 ```
 
-`h1`使用組合器更新中的宣告 `Parent.razor.css` `::deep` ，以表示 `h1` 樣式宣告必須套用至父元件和其子系：
+`h1`使用組合器更新中的宣告 `Parent.razor.css` `::deep` ，以表示 `h1` 樣式宣告必須套用至父元件及其子系。
+
+`Pages/Parent.razor.css`:
 
 ```css
 ::deep h1 { 
@@ -118,26 +128,27 @@ CSS 隔離預設僅適用于您與格式相關聯的元件 `{COMPONENT NAME}.raz
 
 `h1`樣式現在適用于 `Parent` 和元件， `Child` 而不需要為子元件建立不同範圍的 CSS 檔案。
 
-> [!NOTE]
-> `::deep`組合器僅適用于子代元素。 下列 HTML 結構會 `h1` 如預期般將樣式套用至元件：
-> 
-> ```razor
-> <div>
->     <h1>Parent</h1>
->
->     <Child />
-> </div>
-> ```
->
-> 在此案例中，ASP.NET Core 會將父元件的範圍識別碼套用至專案 `div` ，讓瀏覽器知道要繼承父元件的樣式。
->
-> 不過，排除專案 `div` 會移除子系關聯性，且樣式 **不** 會套用至子元件：
->
-> ```razor
-> <h1>Parent</h1>
->
-> <Child />
-> ```
+`::deep`組合器僅適用于子代元素。 下列標記會 `h1` 如預期般將樣式套用至元件。 父元件的範圍識別碼會套用至 `div` 元素，因此瀏覽器會知道要繼承父元件的樣式。
+
+`Pages/Parent.razor`:
+
+```razor
+<div>
+    <h1>Parent</h1>
+
+    <Child />
+</div>
+```
+
+不過，排除元素會移除下階 `div` 關聯性。 在下列範例中， **不** 會將樣式套用至子元件。
+
+`Pages/Parent.razor`:
+
+```razor
+<h1>Parent</h1>
+
+<Child />
+```
 
 ## <a name="css-preprocessor-support"></a>CSS 預處理器支援
 
@@ -155,11 +166,28 @@ CSS 隔離的設計是為了現成可用，但會提供一些 advanced 案例的
 
 ```xml
 <ItemGroup>
-    <None Update="MyComponent.razor.css" CssScope="my-custom-scope-identifier" />
+  <None Update="Pages/Example.razor.css" CssScope="my-custom-scope-identifier" />
 </ItemGroup>
 ```
 
-在上述範例中，所產生的 CSS 會將 `MyComponent.Razor.css` 其範圍識別碼從變更 `b-<10-character-string>` 為 `my-custom-scope-identifier` 。
+在上述範例中，所產生的 CSS 會將 `Example.Razor.css` 其範圍識別碼從變更 `b-<10-character-string>` 為 `my-custom-scope-identifier` 。
+
+使用範圍識別碼來達成範圍 CSS 檔案的繼承。 在下列專案檔範例中，檔案 `BaseComponent.razor.css` 包含跨元件的通用樣式。 檔案會 `DerivedComponent.razor.css` 繼承這些樣式。
+
+```xml
+<ItemGroup>
+  <None Update="Pages/BaseComponent.razor.css" CssScope="my-custom-scope-identifier" />
+  <None Update="Pages/DerivedComponent.razor.css" CssScope="my-custom-scope-identifier" />
+</ItemGroup>
+```
+
+使用萬用字元 (`*`) 運算子來跨多個檔案共用範圍識別碼：
+
+```xml
+<ItemGroup>
+  <None Update="Pages/*.razor.css" CssScope="my-custom-scope-identifier" />
+</ItemGroup>
+```
 
 ### <a name="change-base-path-for-static-web-assets"></a>變更靜態 web 資產的基底路徑
 
@@ -181,7 +209,7 @@ CSS 隔離的設計是為了現成可用，但會提供一些 advanced 案例的
 </PropertyGroup>
 ```
 
-## <a name="no-locrazor-class-library-rcl-support"></a>Razor 類別庫 (RCL) 支援
+## <a name="razor-class-library-rcl-support"></a>Razor 類別庫 (RCL) 支援
 
 當[ Razor 類別庫 (RCL) ](xref:razor-pages/ui-class)提供隔離的樣式時， `<link>` 標記的 `href` 屬性會指向 `{STATIC WEB ASSET BASE PATH}/{ASSEMBLY NAME}.bundle.scp.css` ，其中預留位置為：
 
@@ -192,6 +220,8 @@ CSS 隔離的設計是為了現成可用，但會提供一些 advanced 案例的
 
 * 靜態 web 資產基底路徑為 `_content/ClassLib` 。
 * 類別庫的元件名稱為 `ClassLib` 。
+
+`wwwroot/index.html` (Blazor WebAssembly) 或 `Pages_Host.cshtml` (Blazor Server) ：
 
 ```html
 <link href="_content/ClassLib/ClassLib.bundle.scp.css" rel="stylesheet">

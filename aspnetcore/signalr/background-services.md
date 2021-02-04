@@ -19,14 +19,14 @@ no-loc:
 - Razor
 - SignalR
 uid: signalr/background-services
-ms.openlocfilehash: 810eff7ccb08ecc22ea255bf0a9fe3d22637179f
-ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
+ms.openlocfilehash: 4b877c64a881fec15ac9e9bd74ffdde0b5fa60f9
+ms.sourcegitcommit: e311cfb77f26a0a23681019bd334929d1aaeda20
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 10/30/2020
-ms.locfileid: "93060101"
+ms.lasthandoff: 02/03/2021
+ms.locfileid: "99530173"
 ---
-# <a name="host-aspnet-core-no-locsignalr-in-background-services"></a>SignalR背景服務中的主機 ASP.NET Core
+# <a name="host-aspnet-core-signalr-in-background-services"></a>SignalR背景服務中的主機 ASP.NET Core
 
 依 [Brady Gaster](https://twitter.com/bradygaster)
 
@@ -46,7 +46,7 @@ ms.locfileid: "93060101"
 
 ::: moniker-end
 
-## <a name="enable-no-locsignalr-in-startup"></a>SignalR在啟動時啟用
+## <a name="enable-signalr-in-startup"></a>SignalR在啟動時啟用
 
 ::: moniker range=">= aspnetcore-3.0"
 
@@ -94,7 +94,7 @@ SignalR在背景工作進程的環境中裝載 ASP.NET Core 中樞，與在 ASP.
 
 ::: moniker-end
 
-## <a name="call-a-no-locsignalr-hub-from-a-background-service"></a>SignalR從背景服務呼叫中樞
+## <a name="call-a-signalr-hub-from-a-background-service"></a>SignalR從背景服務呼叫中樞
 
 在啟動期間， `Worker` `BackgroundService` 會使用來啟用類別（） `AddHostedService` 。
 
@@ -117,9 +117,9 @@ services.AddHostedService<Worker>();
 
 在 `ExecuteAsync` 背景服務中反復呼叫方法時，會使用將伺服器的目前日期和時間傳送到連接的用戶端 `ClockHub` 。
 
-## <a name="react-to-no-locsignalr-events-with-background-services"></a>SignalR使用背景服務回應事件
+## <a name="react-to-signalr-events-with-background-services"></a>SignalR使用背景服務回應事件
 
-如同使用的 JavaScript 用戶端或 .NET 傳統型應用程式的單一頁面應用程式 SignalR ，也可以使用 <xref:signalr/dotnet-client> 來執行， `BackgroundService` 或者， `IHostedService` 也可以使用或執行來連接至 SignalR 中樞並回應事件。
+如同使用的 JavaScript 用戶端的單一頁面應用程式 SignalR ，或使用的 .net 桌面應用程式 <xref:signalr/dotnet-client> ， `BackgroundService` 或 `IHostedService` 執行也可以用來連接到 SignalR 中樞並回應事件。
 
 `ClockHubClient`類別會同時執行 `IClock` 介面和 `IHostedService` 介面。 如此一來，就可以在中 `Startup` 持續執行，並從伺服器回應中樞事件。
 

@@ -19,14 +19,14 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/call-javascript-from-dotnet
-ms.openlocfilehash: 53b702cddca778e06e617df3798bffb21677d36b
-ms.sourcegitcommit: 610936e4d3507f7f3d467ed7859ab9354ec158ba
+ms.openlocfilehash: ca42b611a61fc394655e396f914e8e050c578e6a
+ms.sourcegitcommit: e311cfb77f26a0a23681019bd334929d1aaeda20
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 01/25/2021
-ms.locfileid: "98751651"
+ms.lasthandoff: 02/03/2021
+ms.locfileid: "99530082"
 ---
-# <a name="call-javascript-functions-from-net-methods-in-aspnet-core-no-locblazor"></a>從 ASP.NET Core 中的 .NET 方法呼叫 JavaScript 函式 Blazor
+# <a name="call-javascript-functions-from-net-methods-in-aspnet-core-blazor"></a>從 ASP.NET Core 中的 .NET 方法呼叫 JavaScript 函式 Blazor
 
 [Javier Calvarro Nelson](https://github.com/javiercn)、 [Daniel Roth](https://github.com/danroth27)、 [Pranav Krishnamoorthy](https://github.com/pranavkm)和[Luke Latham](https://github.com/guardrex)
 
@@ -173,7 +173,7 @@ JavaScript 程式碼（例如上述範例中所示的程式碼）也可以從 Ja
 * 傳回 [void (0) /void 0](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Operators/void) 或 [未定義](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/undefined)的 JavaScript 函數。
 * 如果不需要 .NET 就能讀取 JavaScript 呼叫的結果。
 
-## <a name="detect-when-a-no-locblazor-server-app-is-prerendering"></a>偵測 Blazor Server 應用程式何時進行呈現
+## <a name="detect-when-a-blazor-server-app-is-prerendering"></a>偵測 Blazor Server 應用程式何時進行呈現
  
 [!INCLUDE[](~/blazor/includes/prerendering.md)]
 
@@ -508,7 +508,7 @@ JS interop 可能因為網路錯誤而失敗，應該視為不可靠。 根據�
 
 ::: moniker range=">= aspnetcore-5.0"
 
-## <a name="no-locblazor-javascript-isolation-and-object-references"></a>Blazor JavaScript 隔離和物件參考
+## <a name="blazor-javascript-isolation-and-object-references"></a>Blazor JavaScript 隔離和物件參考
 
 Blazor 啟用標準 [javascript 模組](https://developer.mozilla.org/docs/Web/JavaScript/Guide/Modules)中的 JavaScript 隔離。 JavaScript 隔離提供下列優點：
 
@@ -523,14 +523,14 @@ export function showPrompt(message) {
 }
 ```
 
-將上述 JavaScript 模組新增至 .NET 程式庫作為靜態 web 資產 (`wwwroot/exampleJsInterop.js`) 然後使用服務將模組匯入至 .net 程式碼 <xref:Microsoft.JSInterop.IJSRuntime> 。 服務會插入為 `js` 下列範例中未顯示的 () ：
+將上述 JavaScript 模組新增至 .NET 程式庫作為靜態 web 資產 (`wwwroot/exampleJsInterop.js`) ，然後 <xref:Microsoft.JSInterop.IJSRuntime.InvokeAsync%2A> 在服務上呼叫，將模組匯入至 .net 程式碼 <xref:Microsoft.JSInterop.IJSRuntime> 。 服務會插入為 `js` 下列範例中未顯示的 () ：
 
 ```csharp
 var module = await js.InvokeAsync<IJSObjectReference>(
     "import", "./_content/MyComponents/exampleJsInterop.js");
 ```
 
-`import`上述範例中的識別碼是專門用來匯入 JavaScript 模組的特殊識別碼。 使用其穩定靜態 web 資產路徑來指定模組： `./_content/{LIBRARY NAME}/{PATH UNDER WWWROOT}` 。 需要 () 的路徑區段，才能 `./` 建立 JavaScript 檔案的正確靜態資產路徑。 預留位置 `{LIBRARY NAME}` 是程式庫名稱。 預留位置 `{PATH UNDER WWWROOT}` 是下腳本的路徑 `wwwroot` 。
+`import`上述範例中的識別碼是專門用來匯入 JavaScript 模組的特殊識別碼。 使用其穩定靜態 web 資產路徑來指定模組： `./_content/{LIBRARY NAME}/{PATH UNDER WWWROOT}` 。 需要 () 的路徑區段，才能 `./` 建立 JavaScript 檔案的正確靜態資產路徑。 以動態方式匯入模組需要網路要求，因此只能藉由呼叫來以非同步方式完成 <xref:Microsoft.JSInterop.IJSRuntime.InvokeAsync%2A> 。 `{LIBRARY NAME}`預留位置是程式庫名稱。 `{PATH UNDER WWWROOT}`預留位置是下腳本的路徑 `wwwroot` 。
 
 <xref:Microsoft.JSInterop.IJSRuntime> 將模組匯入為 `IJSObjectReference` ，表示從 .net 程式碼到 JavaScript 物件的參考。 使用來叫用 `IJSObjectReference` 模組中匯出的 JavaScript 函式：
 

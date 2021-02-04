@@ -19,14 +19,14 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/components/index
-ms.openlocfilehash: fe30c3b3be92c30dea6d0cb97e642eec1da6328b
-ms.sourcegitcommit: 72c8ada9b9644ee4751ed6869e892a8558dd8e66
+ms.openlocfilehash: efc73022d0bd8c29595f9bed1c06fe07002eb54a
+ms.sourcegitcommit: e311cfb77f26a0a23681019bd334929d1aaeda20
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 01/23/2021
-ms.locfileid: "98723508"
+ms.lasthandoff: 02/03/2021
+ms.locfileid: "99530095"
 ---
-# <a name="create-and-use-aspnet-core-no-locrazor-components"></a>建立和使用 ASP.NET Core Razor 元件
+# <a name="create-and-use-aspnet-core-razor-components"></a>建立和使用 ASP.NET Core Razor 元件
 
 [Luke Latham](https://github.com/guardrex)、 [Daniel Roth](https://github.com/danroth27)、 [Scott Addie](https://github.com/scottaddie)和[Tobias Bartsch](https://www.aveo-solutions.com/)
 
@@ -38,7 +38,7 @@ Blazor 應用程式是使用 *元件* 建立的。 元件是獨立的使用者�
 
 元件會 [Razor](xref:mvc/views/razor) `.razor` 使用 c # 和 HTML 標籤的組合，在元件檔 () 中實作為元件。 中的元件 Blazor 正式參考為 *Razor 元件*。
 
-### <a name="no-locrazor-syntax"></a>Razor 語法
+### <a name="razor-syntax"></a>Razor 語法
 
 Razor 應用程式中的元件會 Blazor 廣泛使用 Razor 語法。 如果您不熟悉 Razor 標記語言，建議您先閱讀[ Razor ASP.NET Core 的語法參考](xref:mvc/views/razor)，再繼續進行。
 
@@ -339,6 +339,11 @@ public string Title { get; set; } = "Panel Title from Child";
 >     </ChildComponent>
 > }
 > ```
+
+如需如何 <xref:Microsoft.AspNetCore.Components.RenderFragment> 使用做為元件 UI 範本的詳細資訊 Razor ，請參閱下列文章：
+
+* <xref:blazor/components/templated-components>
+* <xref:blazor/webassembly-performance-best-practices#define-reusable-renderfragments-in-code>
 
 ## <a name="attribute-splatting-and-arbitrary-parameters"></a>屬性展開和任意參數
 
@@ -824,7 +829,7 @@ HTML 元素屬性是根據 .NET 值以有條件的形式呈現。 如果值為 `
 }
 ```
 
-## <a name="no-locrazor-templates"></a>Razor 範本
+## <a name="razor-templates"></a>Razor 範本
 
 您可以使用範本語法來定義轉譯片段 Razor 。 Razor 範本是定義 UI 程式碼片段的方式，並採用下列格式：
 

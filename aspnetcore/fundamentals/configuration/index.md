@@ -19,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: fundamentals/configuration/index
-ms.openlocfilehash: 97ee00dd37ed4eef1c013e0f45b598a79f3f260c
-ms.sourcegitcommit: 3f0ad1e513296ede1bff39a05be6c278e879afed
+ms.openlocfilehash: 62c9d1a58e0f771d91e2bc57f39ec5ebb25baaed
+ms.sourcegitcommit: 37186f76e4a50d7fb7389026dd0e5e234b51ebb2
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 11/25/2020
-ms.locfileid: "96035862"
+ms.lasthandoff: 02/04/2021
+ms.locfileid: "99541364"
 ---
 # <a name="configuration-in-aspnet-core"></a>ASP.NET Core 的設定
 
@@ -98,7 +98,7 @@ ASP.NET Core 使用 [dotnet new](/dotnet/core/tools/dotnet-new) 或 Visual Studi
 
 [!INCLUDE[](~/includes/bind.md)]
 
-使用 [預設](#default)設定， *appsettings.json* 以及 *appsettings。* `Environment`已啟用 [reloadOnChange： true](https://github.com/dotnet/extensions/blob/release/3.1/src/Hosting/Hosting/src/Host.cs#L74-L75)的 *json* 檔案。 對和 appsettings 進行的變更 *appsettings.json* *。* `Environment`*json* 檔案 * 在 _ **之後**， [json 設定提供者](#jcp)會讀取應用程式啟動。
+使用 [預設](#default)設定， *appsettings.json* 以及 *appsettings。* `Environment`已啟用 [reloadOnChange： true](https://github.com/dotnet/extensions/blob/release/3.1/src/Hosting/Hosting/src/Host.cs#L74-L75)的 *json* 檔案。 對和 appsettings 進行的變更 *appsettings.json* *。* `Environment`json 設定 [提供者](#jcp)會讀取應用程式啟動 ***後*** 的 *json* 檔案。
 
 如需新增其他 JSON 設定檔的相關資訊，請參閱本檔中的 [json 設定提供者](#jcp) 。
 
@@ -112,7 +112,7 @@ ASP.NET Core 使用 [dotnet new](/dotnet/core/tools/dotnet-new) 或 Visual Studi
 
 設定資料指導方針：
 
-_ 絕對不要將密碼或其他敏感性資料儲存在設定提供者程式碼或純文字設定檔中。 [秘密管理員](xref:security/app-secrets)工具可以用來在開發中儲存秘密。
+* 永遠不要將密碼或其他敏感性資料儲存在設定提供者程式碼或純文字設定檔中。 [秘密管理員](xref:security/app-secrets)工具可以用來在開發中儲存秘密。
 * 不要在開發或測試環境中使用生產環境祕密。
 * 請在專案外部指定祕密，以防止其意外認可至開放原始碼存放庫。
 
@@ -271,7 +271,7 @@ dotnet run --MyKey "Using --" --Position:Title=Cmd-- --Position:Name=Cmd--Rick
 索引鍵值：
 
 * 必須遵循 `=` ，或者 `--` `/` 當值在空格後面時，索引鍵必須有或的前置詞。
-* 如果 `=` 使用，則不需要。 例如 `MySetting=`。
+* 如果 `=` 使用，則不需要。 例如： `MySetting=` 。
 
 在相同的命令中，不要混用 `=` 與使用空格的索引鍵/值組搭配使用的命令列引數索引鍵/值配對。
 
@@ -331,7 +331,7 @@ dotnet run -k1 value1 -k2 value2 --alt3=value2 /alt4=value3 --alt5 value5 /alt6 
 * 階層式機碼
   * 在設定 API 內，冒號分隔字元 (`:`) 可在所有平台上運作。
   * 在環境變數中，冒號分隔字元可能無法在所有平台上運作。 所有平臺都支援雙底線、 `__` ，而且會自動轉換為冒號 `:` 。
-  * 在 Azure Key Vault 中，階層式索引鍵會使用 `--` 做為分隔符號。 [Azure Key Vault configuration provider](xref:security/key-vault-configuration) `--` `:` 當秘密載入至應用程式的設定時，Azure Key Vault 設定提供者會自動取代為。
+  * 在 Azure Key Vault 中，階層式索引鍵會使用 `--` 做為分隔符號。 [](xref:security/key-vault-configuration) `--` `:` 當秘密載入至應用程式的設定時，Azure Key Vault 設定提供者會自動取代為。
 * <xref:Microsoft.Extensions.Configuration.ConfigurationBinder> 支援在設定機碼中使用陣列索引將陣列繫結到物件。 [將陣列繫結到類別](#boa)一節說明陣列繫結。
 
 設定值：
@@ -355,7 +355,7 @@ dotnet run -k1 value1 -k2 value2 --alt3=value2 /alt4=value3 --alt5 value5 /alt6 
 | [檔案設定提供者](#file-configuration-provider) | INI、JSON 和 XML 檔案 |
 | [每個檔案的金鑰配置提供者](#key-per-file-configuration-provider) | 目錄檔案 |
 | [記憶體設定提供者](#memory-configuration-provider) | 記憶體內集合 |
-| [使用者秘密](xref:security/app-secrets) | 使用者設定檔目錄中的檔案 |
+| [使用者祕密](xref:security/app-secrets) | 使用者設定檔目錄中的檔案 |
 
 設定來源會依照其設定提供者的指定順序讀取。 在程式碼中訂購設定提供者，以符合應用程式所需之基礎設定來源的優先順序。
 
@@ -363,7 +363,7 @@ dotnet run -k1 value1 -k2 value2 --alt3=value2 /alt4=value3 --alt5 value5 /alt6 
 
 1. *appsettings.json*
 1. *appsettings*... `Environment`*json*
-1. [使用者秘密](xref:security/app-secrets)
+1. [使用者祕密](xref:security/app-secrets)
 1. 使用 [環境變數設定提供者](#evcp)的環境變數。
 1. 使用 [命令列設定提供者](#command-line-configuration-provider)的命令列引數。
 
@@ -449,13 +449,13 @@ dotnet run -k1 value1 -k2 value2 --alt3=value2 /alt4=value3 --alt5 value5 /alt6 
   * `reloadOnChange: true` ：儲存變更時，會重載該檔案。
 * 在 *MyConfig.json* 檔案之前讀取 [預設設定提供者](#default)。 預設設定提供者中的 [檔案覆寫] *MyConfig.js* 設定，包括 [環境變數設定提供者](#evcp) 和 [命令列設定提供者](#clcp)。
 
-您通常 **不** 需要使用自訂 JSON 檔案來覆寫 [環境變數設定提供者](#evcp) 和 [命令列設定提供者](#clcp)中所設定的值。
+您通常 ***不*** 希望自訂 JSON 檔案覆寫 [環境變數設定提供者](#evcp) 和 [命令列設定提供者](#clcp)中所設定的值。
 
 下列程式碼會清除所有設定提供者，並新增數個設定提供者：
 
 [!code-csharp[](index/samples/3.x/ConfigSample/ProgramJSON2.cs?name=snippet)]
 
-在上述程式碼中，_MyConfig.js中的設定為 *  ** and myconfig.xml `Environment` 。*json* 檔案：
+在上述程式碼中， *MyConfig.js* 中的設定和 *myconfig.xml*。 `Environment`*json* 檔案：
 
 * 覆寫 *appsettings.json* 和 *appsettings* `Environment` 中的設定。*json* 檔案。
 * 由 [環境變數設定提供者](#evcp) 和 [命令列設定提供者](#clcp)中的設定覆寫。
@@ -727,7 +727,7 @@ Index: 5  Value: value5
 
 如需使用啟動方便方法來存取設定的範例，請參閱[應用程式啟動：方便方法](xref:fundamentals/startup#convenience-methods)。
 
-## <a name="access-configuration-in-no-locrazor-pages"></a>存取頁面中的設定 Razor
+## <a name="access-configuration-in-razor-pages"></a>存取頁面中的設定 Razor
 
 下列程式碼會在頁面中顯示設定資料 Razor ：
 
@@ -805,7 +805,7 @@ Index: 5  Value: value5
 
 ## <a name="additional-resources"></a>其他資源
 
-* [設定來源程式碼](https://github.com/dotnet/extensions/tree/master/src/Configuration)
+* [設定來源程式碼](https://github.com/dotnet/runtime/tree/master/src/libraries/Microsoft.Extensions.Configuration)
 * <xref:fundamentals/configuration/options>
 * <xref:blazor/fundamentals/configuration>
 
@@ -990,7 +990,7 @@ public class HomeController : Controller
 典型的設定提供者順序是：
 
 1. 檔案 (*appsettings.json* ， *appsettings. {環境} json*，其中 `{Environment}` 是應用程式目前的裝載環境) 
-1. [Azure 金鑰保存庫](xref:security/key-vault-configuration)
+1. [Azure Key Vault](xref:security/key-vault-configuration)
 1. 僅)  (開發環境的[使用者秘密](xref:security/app-secrets)
 1. 環境變數
 1. 命令列引數
@@ -1148,7 +1148,7 @@ public static readonly Dictionary<string, string> _switchMappings =
 
 建立切換對應字典之後，它會包含下表中所示的資料。
 
-| 機碼       | 值             |
+| Key       | 值             |
 | --------- | ----------------- |
 | `-CLKey1` | `CommandLineKey1` |
 | `-CLKey2` | `CommandLineKey2` |
@@ -1161,7 +1161,7 @@ dotnet run -CLKey1=value1 -CLKey2=value2
 
 執行上述命令之後，設定包含下表中顯示的值。
 
-| 機碼               | 值    |
+| Key               | 值    |
 | ----------------- | -------- |
 | `CommandLineKey1` | `value1` |
 | `CommandLineKey2` | `value2` |
@@ -1665,7 +1665,7 @@ TvShow = tvShow;
 
 考慮下表中顯示的設定機碼與值。
 
-| 機碼             | 值  |
+| Key             | 值  |
 | :-------------: | :----: |
 | array:entries:0 | value0 |
 | array:entries:1 | value1 |
@@ -1725,7 +1725,7 @@ config.AddJsonFile(
 
 表格中顯示的機碼值組會載入到設定中。
 
-| 機碼             | 值  |
+| Key             | 值  |
 | :-------------: | :----: |
 | array:entries:3 | value3 |
 
@@ -1748,7 +1748,7 @@ config.AddJsonFile(
 
 「JSON 設定提供者」會將設定資料讀入到下列機碼值組：
 
-| 機碼                     | 值  |
+| Key                     | 值  |
 | ----------------------- | :----: |
 | json_array:key          | valueA |
 | json_array:subsection:0 | valueB |
@@ -1839,7 +1839,7 @@ public class Startup
 
 如需使用啟動方便方法來存取設定的範例，請參閱[應用程式啟動：方便方法](xref:fundamentals/startup#convenience-methods)。
 
-## <a name="access-configuration-in-a-no-locrazor-pages-page-or-mvc-view"></a>存取 Razor 頁面頁面或 MVC 視圖中的設定
+## <a name="access-configuration-in-a-razor-pages-page-or-mvc-view"></a>存取 Razor 頁面頁面或 MVC 視圖中的設定
 
 若要存取 Razor 頁面頁面或 MVC 視圖中的設定設定，請新增 [using](xref:mvc/views/razor#using) 指示詞 ([c # 參考：使用](/dotnet/csharp/language-reference/keywords/using-directive) [Microsoft.Extensions.Configuration 命名空間](xref:Microsoft.Extensions.Configuration) 的指示詞) ，然後插入 <xref:Microsoft.Extensions.Configuration.IConfiguration> 頁面或視圖中。
 

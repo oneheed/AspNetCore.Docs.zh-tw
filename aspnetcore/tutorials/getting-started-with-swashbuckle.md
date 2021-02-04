@@ -18,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: tutorials/get-started-with-swashbuckle
-ms.openlocfilehash: 7a6ceea09bde8999b9e64796c0ba5fc6f3f45a2d
-ms.sourcegitcommit: e311cfb77f26a0a23681019bd334929d1aaeda20
+ms.openlocfilehash: 68601333cbd49a1d667337021de246a73f536600
+ms.sourcegitcommit: c1839f2992b003c92cd958244a2e0771ae928786
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 02/03/2021
-ms.locfileid: "99530225"
+ms.lasthandoff: 02/04/2021
+ms.locfileid: "99551646"
 ---
 # <a name="get-started-with-swashbuckle-and-aspnet-core"></a>Swashbuckle 與 ASP.NET Core 使用者入門
 
@@ -505,3 +505,7 @@ app.UseSwaggerUI(c =>
      c.InjectStylesheet("/swagger-ui/custom.css");
 }
 ```
+
+## <a name="additional-resources"></a>其他資源
+
+* [Microsoft Learn：使用 Swagger 檔改善 API 的開發人員體驗](/learn/modules/improve-api-developer-experience-with-swagger/)

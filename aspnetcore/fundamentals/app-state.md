@@ -19,10 +19,10 @@ no-loc:
 - SignalR
 uid: fundamentals/app-state
 ms.openlocfilehash: c11b748f9d79235b14c9541019da6e1fb3428af6
-ms.sourcegitcommit: 3593c4efa707edeaaceffbfa544f99f41fc62535
+ms.sourcegitcommit: c1839f2992b003c92cd958244a2e0771ae928786
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 01/04/2021
+ms.lasthandoff: 02/05/2021
 ms.locfileid: "93051404"
 ---
 # <a name="session-and-state-management-in-aspnet-core"></a>ASP.NET Core 中的工作階段和狀態管理 (機器翻譯)
@@ -49,7 +49,7 @@ HTTP 是無狀態的通訊協定。 根據預設，HTTP 要求是獨立的訊息
 | [HttpContext.Items](#httpcontextitems) | 伺服器端應用程式程式碼 |
 | [Cache](#cache) | 伺服器端應用程式程式碼 |
 
-## <a name="no-loccookies"></a>Cookie
+## <a name="cookies"></a>Cookie
 
 Cookie會跨要求儲存資料。 因為 cookie 會隨每個要求一起傳送，所以其大小應保持最小值。 在理想情況下，只有識別碼應該儲存在中， cookie 並包含應用程式所儲存的資料。 大部分的瀏覽器會 cookie 將大小限制為4096個位元組。 cookie每個網域只能使用有限數目的。
 
@@ -81,14 +81,14 @@ ASP.NET Core 藉由提供 cookie 給包含會話識別碼的用戶端來維護�
   * 資料不需要在會話之間永久儲存。
 * 當 <xref:Microsoft.AspNetCore.Http.ISession.Clear%2A?displayProperty=nameWithType> 呼叫執行時或會話過期時，就會刪除會話資料。
 * 沒有任何預設機制可通知應用程式程式碼用戶端瀏覽器已關閉，或是在 cookie 用戶端上的會話遭到刪除或過期。
-* 依預設，會話狀態 cookie s 未標示為「基本」。 除非網站訪客允許追蹤，否則會話狀態無法運作。 如需詳細資訊，請參閱 <xref:security/gdpr#tempdata-provider-and-session-state-cookies-arent-essential> 。
+* 依預設，會話狀態 cookie s 未標示為「基本」。 除非網站訪客允許追蹤，否則會話狀態無法運作。 如需詳細資訊，請參閱<xref:security/gdpr#tempdata-provider-and-session-state-cookies-arent-essential>。
 
 > [!WARNING]
 > 請勿將敏感性資料存放在工作階段狀態。 使用者可能不會關閉瀏覽器並清除會話 cookie 。 某些流覽 cookie 器會跨瀏覽器視窗維護有效的會話。 會話可能無法限制為單一使用者。 下一使用者可能會繼續使用相同的會話流覽應用程式 cookie 。
 
 記憶體中快取提供者會將工作階段資料存放在應用程式所在伺服器的記憶體中。 在伺服器陣列案例中：
 
-* 使用「黏性工作階段」將每個工作階段繫結至個別伺服器上的特定應用程式執行個體。 [Azure App Service](https://azure.microsoft.com/services/app-service/) 預設會使用[應用程式要求路由 (ARR)](/iis/extensions/planning-for-arr/using-the-application-request-routing-module) 來強制執行自黏工作階段。 不過，黏性工作階段可能會影響延展性，並使 Web 應用程式更新複雜化。 較好的方法是使用 Redis 或 SQL Server 分散式快取，這不需要黏性工作階段。 如需詳細資訊，請參閱 <xref:performance/caching/distributed> 。
+* 使用「黏性工作階段」將每個工作階段繫結至個別伺服器上的特定應用程式執行個體。 [Azure App Service](https://azure.microsoft.com/services/app-service/) 預設會使用[應用程式要求路由 (ARR)](/iis/extensions/planning-for-arr/using-the-application-request-routing-module) 來強制執行自黏工作階段。 不過，黏性工作階段可能會影響延展性，並使 Web 應用程式更新複雜化。 較好的方法是使用 Redis 或 SQL Server 分散式快取，這不需要黏性工作階段。 如需詳細資訊，請參閱<xref:performance/caching/distributed>。
 * 此會話 cookie 會透過進行加密 <xref:Microsoft.AspNetCore.DataProtection.IDataProtector> 。 必須正確設定資料保護，才能讀取每部 cookie 電腦上的會話。 如需詳細資訊，請參閱 <xref:security/data-protection/introduction>與[金鑰儲存提供者](xref:security/data-protection/implementation/key-storage-providers)。
 
 ### <a name="configure-session-state"></a>設定工作階段狀態
@@ -100,7 +100,7 @@ ASP.NET Core 藉由提供 cookie 給包含會話識別碼的用戶端來維護�
 
 若要啟用工作階段中介軟體，`Startup` 必須包含：
 
-* 任何記憶體快取 <xref:Microsoft.Extensions.Caching.Distributed.IDistributedCache> 。 `IDistributedCache` 實作會作為工作階段的支援存放區。 如需詳細資訊，請參閱 <xref:performance/caching/distributed> 。
+* 任何記憶體快取 <xref:Microsoft.Extensions.Caching.Distributed.IDistributedCache> 。 `IDistributedCache` 實作會作為工作階段的支援存放區。 如需詳細資訊，請參閱<xref:performance/caching/distributed>。
 * <xref:Microsoft.Extensions.DependencyInjection.SessionServiceCollectionExtensions.AddSession%2A>在中的呼叫 `ConfigureServices` 。
 * <xref:Microsoft.AspNetCore.Builder.SessionMiddlewareExtensions.UseSession%2A>在中的呼叫 `Configure` 。
 
@@ -128,7 +128,7 @@ ASP.NET Core 中的預設會話提供者 <xref:Microsoft.Extensions.Caching.Dist
 
 若要覆寫會話的預設值，請使用 <xref:Microsoft.AspNetCore.Builder.SessionOptions> 。
 
-| 選項 | 描述 |
+| 選項 | Description |
 | ------ | ----------- |
 | <xref:Microsoft.AspNetCore.Builder.SessionOptions.Cookie> | 決定用來建立的設定 cookie 。 <xref:Microsoft.AspNetCore.Http.CookieBuilder.Name> 預設為 <xref:Microsoft.AspNetCore.Session.SessionDefaults.CookieName?displayProperty=nameWithType> (`.AspNetCore.Session`) 。 <xref:Microsoft.AspNetCore.Http.CookieBuilder.Path> 預設為 <xref:Microsoft.AspNetCore.Session.SessionDefaults.CookiePath?displayProperty=nameWithType> (`/`) 。 <xref:Microsoft.AspNetCore.Http.CookieBuilder.SameSite> 預設為 <xref:Microsoft.AspNetCore.Http.SameSiteMode.Lax?displayProperty=nameWithType> (`1`) 。 <xref:Microsoft.AspNetCore.Http.CookieBuilder.HttpOnly> 預設為 `true` 。 <xref:Microsoft.AspNetCore.Http.CookieBuilder.IsEssential> 預設為 `false` 。 |
 | <xref:Microsoft.AspNetCore.Builder.SessionOptions.IdleTimeout> | `IdleTimeout` 指出工作階段可以閒置多久，之後才會放棄它的內容。 每個工作階段存取都會重設逾時。 這項設定只適用于會話的內容，而不會套用至 cookie 。 預設值是 20 分鐘。 |
@@ -241,7 +241,7 @@ cookie預設會啟用以 TempData 提供者為基礎的提供者。
 
 可以將數量有限的資料從某個要求傳遞到另一個要求，方法是將其新增至新要求的查詢字串。 這對於以持續方式擷取狀態很有用，可讓內嵌狀態的連結透過電子郵件或社交網路共用。 因為 URL 查詢字串為公用，所以請絕對不要使用查詢字串來處理敏感性資料。
 
-除了非預期的共用之外，在查詢字串中包含資料，也可以將應用程式公開給 [跨網站偽造要求 (CSRF) ](https://www.owasp.org/index.php/Cross-Site_Request_Forgery_(CSRF)) 攻擊。 任何保留的會話狀態都必須防範 CSRF 攻擊。 如需詳細資訊，請參閱 <xref:security/anti-request-forgery> 。
+除了非預期的共用之外，在查詢字串中包含資料，也可以將應用程式公開給 [跨網站偽造要求 (CSRF) ](https://www.owasp.org/index.php/Cross-Site_Request_Forgery_(CSRF)) 攻擊。 任何保留的會話狀態都必須防範 CSRF 攻擊。 如需詳細資訊，請參閱<xref:security/anti-request-forgery>。
 
 ## <a name="hidden-fields"></a>隱藏欄位
 
@@ -267,7 +267,7 @@ cookie預設會啟用以 TempData 提供者為基礎的提供者。
 
 ## <a name="cache"></a>快取
 
-快取是儲存和擷取資料的有效方式。 應用程式可以控制快取項目的存留期。 如需詳細資訊，請參閱 <xref:performance/caching/response> 。
+快取是儲存和擷取資料的有效方式。 應用程式可以控制快取項目的存留期。 如需詳細資訊，請參閱<xref:performance/caching/response>。
 
 快取的資料未與特定要求、使用者或工作階段建立關聯。 **請勿快取其他使用者要求可能抓取的使用者特定資料。**
 
@@ -288,7 +288,7 @@ cookie預設會啟用以 TempData 提供者為基礎的提供者。
 
 檢查錯誤的建議方法是在 `await feature.Session.CommitAsync` 應用程式完成寫入會話時呼叫。 備份存放區無法使用時，<xref:Microsoft.AspNetCore.Http.ISession.CommitAsync*> 會擲回例外狀況。 如果 `CommitAsync` 失敗，應用程式可以處理例外狀況。 <xref:Microsoft.AspNetCore.Http.ISession.LoadAsync*> 當資料存放區無法使用時，會在相同的情況下擲回。
   
-## <a name="no-locsignalr-and-session-state"></a>SignalR 和會話狀態
+## <a name="signalr-and-session-state"></a>SignalR 和會話狀態
 
 SignalR 應用程式不應使用會話狀態來儲存資訊。 SignalR 應用程式可以將每個連接狀態儲存在 `Context.Items` 中樞內。 <!-- https://github.com/aspnet/SignalR/issues/2139 -->
 
@@ -320,7 +320,7 @@ HTTP 是無狀態的通訊協定。 若不採取其他步驟，HTTP 要求是獨
 | [Cache](#cache) | 伺服器端應用程式程式碼 |
 | [相依性插入](#dependency-injection) | 伺服器端應用程式程式碼 |
 
-## <a name="no-loccookies"></a>Cookie
+## <a name="cookies"></a>Cookie
 
 Cookie會跨要求儲存資料。 因為 cookie 會隨每個要求一起傳送，所以其大小應保持最小值。 在理想情況下，只有識別碼應該儲存在中， cookie 並包含應用程式所儲存的資料。 大部分的瀏覽器會 cookie 將大小限制為4096個位元組。 cookie每個網域只能使用有限數目的。
 
@@ -348,21 +348,21 @@ ASP.NET Core 藉由提供 cookie 給包含會話識別碼的用戶端來維護�
 * 應用程式會在最後一個要求之後，保留工作階段一段有限的時間。 應用程式會設定工作階段逾時或使用預設值 20 分鐘。 工作階段狀態適合用來儲存特定工作階段特定的使用者資料，但資料不需要在工作階段之間永久儲存的情況。
 * 當 <xref:Microsoft.AspNetCore.Http.ISession.Clear%2A?displayProperty=nameWithType> 呼叫執行時或會話過期時，就會刪除會話資料。
 * 沒有任何預設機制可通知應用程式程式碼用戶端瀏覽器已關閉，或是在 cookie 用戶端上的會話遭到刪除或過期。
-* ASP.NET Core MVC 和 Razor pages 範本包含一般資料保護規定 (GDPR) 的支援。 cookie依預設，會話狀態不會標示為「基本」，因此除非網站訪客允許追蹤，否則會話狀態無法運作。 如需詳細資訊，請參閱 <xref:security/gdpr#tempdata-provider-and-session-state-cookies-arent-essential> 。
+* ASP.NET Core MVC 和 Razor pages 範本包含一般資料保護規定 (GDPR) 的支援。 cookie依預設，會話狀態不會標示為「基本」，因此除非網站訪客允許追蹤，否則會話狀態無法運作。 如需詳細資訊，請參閱<xref:security/gdpr#tempdata-provider-and-session-state-cookies-arent-essential>。
 
 > [!WARNING]
 > 請勿將敏感性資料存放在工作階段狀態。 使用者可能不會關閉瀏覽器並清除會話 cookie 。 某些流覽 cookie 器會跨瀏覽器視窗維護有效的會話。 會話可能無法限制為單一使用者 &mdash; ，下一使用者可能會繼續使用相同的會話流覽應用程式 cookie 。
 
 記憶體中快取提供者會將工作階段資料存放在應用程式所在伺服器的記憶體中。 在伺服器陣列案例中：
 
-* 使用「黏性工作階段」將每個工作階段繫結至個別伺服器上的特定應用程式執行個體。 [Azure App Service](https://azure.microsoft.com/services/app-service/) 預設會使用[應用程式要求路由 (ARR)](/iis/extensions/planning-for-arr/using-the-application-request-routing-module) 來強制執行自黏工作階段。 不過，黏性工作階段可能會影響延展性，並使 Web 應用程式更新複雜化。 較好的方法是使用 Redis 或 SQL Server 分散式快取，這不需要黏性工作階段。 如需詳細資訊，請參閱 <xref:performance/caching/distributed> 。
+* 使用「黏性工作階段」將每個工作階段繫結至個別伺服器上的特定應用程式執行個體。 [Azure App Service](https://azure.microsoft.com/services/app-service/) 預設會使用[應用程式要求路由 (ARR)](/iis/extensions/planning-for-arr/using-the-application-request-routing-module) 來強制執行自黏工作階段。 不過，黏性工作階段可能會影響延展性，並使 Web 應用程式更新複雜化。 較好的方法是使用 Redis 或 SQL Server 分散式快取，這不需要黏性工作階段。 如需詳細資訊，請參閱<xref:performance/caching/distributed>。
 * 此會話 cookie 會透過進行加密 <xref:Microsoft.AspNetCore.DataProtection.IDataProtector> 。 必須正確設定資料保護，才能讀取每部 cookie 電腦上的會話。 如需詳細資訊，請參閱 <xref:security/data-protection/introduction>與[金鑰儲存提供者](xref:security/data-protection/implementation/key-storage-providers)。
 
 ### <a name="configure-session-state"></a>設定工作階段狀態
 
 [Microsoft.AspNetCore.Session](https://www.nuget.org/packages/Microsoft.AspNetCore.Session/) 套件隨附於 [Microsoft.AspNetCore.App metapackage](xref:fundamentals/metapackage-app)，提供用來管理工作階段狀態的中介軟體。 若要啟用工作階段中介軟體，`Startup` 必須包含：
 
-* 任何記憶體快取 <xref:Microsoft.Extensions.Caching.Distributed.IDistributedCache> 。 `IDistributedCache` 實作會作為工作階段的支援存放區。 如需詳細資訊，請參閱 <xref:performance/caching/distributed> 。
+* 任何記憶體快取 <xref:Microsoft.Extensions.Caching.Distributed.IDistributedCache> 。 `IDistributedCache` 實作會作為工作階段的支援存放區。 如需詳細資訊，請參閱<xref:performance/caching/distributed>。
 * <xref:Microsoft.Extensions.DependencyInjection.SessionServiceCollectionExtensions.AddSession%2A>在中的呼叫 `ConfigureServices` 。
 * <xref:Microsoft.AspNetCore.Builder.SessionMiddlewareExtensions.UseSession%2A>在中的呼叫 `Configure` 。
 
@@ -388,7 +388,7 @@ ASP.NET Core 中的預設會話提供者 <xref:Microsoft.Extensions.Caching.Dist
 
 若要覆寫會話的預設值，請使用 <xref:Microsoft.AspNetCore.Builder.SessionOptions> 。
 
-| 選項 | 描述 |
+| 選項 | Description |
 | ------ | ----------- |
 | <xref:Microsoft.AspNetCore.Builder.SessionOptions.Cookie> | 決定用來建立的設定 cookie 。 <xref:Microsoft.AspNetCore.Http.CookieBuilder.Name> 預設為 <xref:Microsoft.AspNetCore.Session.SessionDefaults.CookieName?displayProperty=nameWithType> (`.AspNetCore.Session`) 。 <xref:Microsoft.AspNetCore.Http.CookieBuilder.Path> 預設為 <xref:Microsoft.AspNetCore.Session.SessionDefaults.CookiePath?displayProperty=nameWithType> (`/`) 。 <xref:Microsoft.AspNetCore.Http.CookieBuilder.SameSite> 預設為 <xref:Microsoft.AspNetCore.Http.SameSiteMode.Lax?displayProperty=nameWithType> (`1`) 。 <xref:Microsoft.AspNetCore.Http.CookieBuilder.HttpOnly> 預設為 `true` 。 <xref:Microsoft.AspNetCore.Http.CookieBuilder.IsEssential> 預設為 `false` 。 |
 | <xref:Microsoft.AspNetCore.Builder.SessionOptions.IdleTimeout> | `IdleTimeout` 指出工作階段可以閒置多久，之後才會放棄它的內容。 每個工作階段存取都會重設逾時。 這項設定只適用于會話的內容，而不會套用至 cookie 。 預設值是 20 分鐘。 |
@@ -504,7 +504,7 @@ cookie預設會啟用以 TempData 提供者為基礎的提供者。
 
 可以將數量有限的資料從某個要求傳遞到另一個要求，方法是將其新增至新要求的查詢字串。 這對於以持續方式擷取狀態很有用，可讓內嵌狀態的連結透過電子郵件或社交網路共用。 因為 URL 查詢字串為公用，所以請絕對不要使用查詢字串來處理敏感性資料。
 
-除了非預期的共用之外，在查詢字串中包括資料還可能會為[跨網站偽造要求 (CSRF)](https://www.owasp.org/index.php/Cross-Site_Request_Forgery_(CSRF)) 攻擊創造機會，這些攻擊可能會誘騙使用者在驗證時瀏覽惡意網站。 然後，攻擊者可能會竊取應用程式中的使用者資料，或代表使用者採取惡意動作。 任何保留的應用程式或工作階段狀態必須防範 CSRF 攻擊。 如需詳細資訊，請參閱 <xref:security/anti-request-forgery> 。
+除了非預期的共用之外，在查詢字串中包括資料還可能會為[跨網站偽造要求 (CSRF)](https://www.owasp.org/index.php/Cross-Site_Request_Forgery_(CSRF)) 攻擊創造機會，這些攻擊可能會誘騙使用者在驗證時瀏覽惡意網站。 然後，攻擊者可能會竊取應用程式中的使用者資料，或代表使用者採取惡意動作。 任何保留的應用程式或工作階段狀態必須防範 CSRF 攻擊。 如需詳細資訊，請參閱<xref:security/anti-request-forgery>。
 
 ## <a name="hidden-fields"></a>隱藏欄位
 
@@ -550,7 +550,7 @@ app.Run(async (context) =>
 
 快取的資料未與特定要求、使用者或工作階段建立關聯。 **請小心不要快取可能由其他使用者要求所擷取的特定使用者資料。**
 
-如需詳細資訊，請參閱 <xref:performance/caching/response> 。
+如需詳細資訊，請參閱<xref:performance/caching/response>。
 
 ## <a name="dependency-injection"></a>相依性插入
 
@@ -599,7 +599,7 @@ app.Run(async (context) =>
 
   檢查是否有錯誤的建議方法是，當應用程式完成寫入至工作階段後，從應用程式程式碼呼叫 `await feature.Session.CommitAsync();`。 備份存放區無法使用時，`CommitAsync` 會擲回例外狀況。 如果 `CommitAsync` 失敗，應用程式可以處理例外狀況。 `LoadAsync` 在無法使用資料存放區的相同情況下會擲回。
   
-## <a name="no-locsignalr-and-session-state"></a>SignalR 和會話狀態
+## <a name="signalr-and-session-state"></a>SignalR 和會話狀態
 
 SignalR 應用程式不應使用會話狀態來儲存資訊。 SignalR 應用程式可以將每個連接狀態儲存在 `Context.Items` 中樞內。 <!-- https://github.com/aspnet/SignalR/issues/2139 -->
 

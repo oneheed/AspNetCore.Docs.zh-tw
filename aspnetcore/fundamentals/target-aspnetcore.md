@@ -19,10 +19,10 @@ no-loc:
 - SignalR
 uid: fundamentals/target-aspnetcore
 ms.openlocfilehash: c012658a6f48247af60c8bfd56a7d987f6aa8a68
-ms.sourcegitcommit: 3593c4efa707edeaaceffbfa544f99f41fc62535
+ms.sourcegitcommit: c1839f2992b003c92cd958244a2e0771ae928786
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 01/04/2021
+ms.lasthandoff: 02/05/2021
 ms.locfileid: "93061505"
 ---
 # <a name="use-aspnet-core-apis-in-a-class-library"></a>在類別庫中使用 ASP.NET Core Api
@@ -52,7 +52,7 @@ ASP.NET Core 遵守 [.Net Core 支援原則](https://dotnet.microsoft.com/platfo
 
 以這種方式參考 ASP.NET Core 僅支援以 .NET Core 3.x 為目標的專案。
 
-## <a name="include-no-locblazor-extensibility"></a>包含 Blazor 擴充性
+## <a name="include-blazor-extensibility"></a>包含 Blazor 擴充性
 
 Blazor 支援 WebAssembly (WASM) 和伺服器 [裝載模型](xref:blazor/hosting-models)。 除非有特定的原因不是，否則[ Razor 元件](xref:blazor/components/index)程式庫應同時支援這兩種裝載模型。 Razor元件程式庫必須使用[Microsoft .Net. Sdk Razor 。SDK](xref:razor-pages/sdk)。
 
@@ -113,7 +113,7 @@ dotnet new razorclasslib
 
 本節不會討論多目標，以支援多個版本的 MVC。 如需支援多個 ASP.NET Core 版本的指引，請參閱 [支援多個 ASP.NET Core 版本](#support-multiple-aspnet-core-versions)。
 
-### <a name="no-locrazor-views-or-no-locrazor-pages"></a>Razor views 或 Razor Pages
+### <a name="razor-views-or-razor-pages"></a>Razor views 或 Razor Pages
 
 包含[ Razor 視圖](xref:mvc/views/overview)或[ Razor 頁面](xref:razor-pages/index)的專案必須使用[Microsoft .net Sdk Razor 。SDK](xref:razor-pages/sdk)。
 

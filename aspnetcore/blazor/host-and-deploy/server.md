@@ -20,13 +20,13 @@ no-loc:
 - SignalR
 uid: blazor/host-and-deploy/server
 ms.openlocfilehash: a209109210ef5e335734a974ceb0c2af7cb8e1a1
-ms.sourcegitcommit: 3593c4efa707edeaaceffbfa544f99f41fc62535
+ms.sourcegitcommit: c1839f2992b003c92cd958244a2e0771ae928786
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 01/04/2021
+ms.lasthandoff: 02/05/2021
 ms.locfileid: "94595437"
 ---
-# <a name="host-and-deploy-no-locblazor-server"></a>裝載和部署 Blazor Server
+# <a name="host-and-deploy-blazor-server"></a>裝載和部署 Blazor Server
 
 作者：[Luke Latham](https://github.com/guardrex)、[Rainer Stropek](https://www.timecockpit.com) 和 [Daniel Roth](https://github.com/danroth27)
 
@@ -58,13 +58,13 @@ ms.locfileid: "94595437"
 
 針對基本的 *Hello World* 樣式應用程式，每個線路會使用大約 250 KB 的記憶體。 電路的大小取決於應用程式的程式碼，以及與每個元件相關聯的狀態維護需求。 建議您在開發期間測量應用程式和基礎結構的資源需求，但下列基準可作為規劃部署目標的起點：如果您希望應用程式支援5000的並行使用者，請考慮將至少 1.3 GB 的伺服器記憶體預算為應用程式 (或 ~ 每位使用者) ~ 273 KB。
 
-### <a name="no-locsignalr-configuration"></a>SignalR 配置
+### <a name="signalr-configuration"></a>SignalR 配置
 
 Blazor Server 應用程式會使用 ASP.NET Core SignalR 與瀏覽器進行通訊。 [ SignalR 的裝載和調整條件](xref:signalr/publish-to-azure-web-app)適用于 Blazor Server 應用程式。
 
 Blazor 使用 Websocket 作為傳輸的最佳方式 SignalR ，是因為延遲、可靠性和 [安全性](xref:signalr/security)較低。 SignalR當 websocket 無法使用時，或當應用程式明確設定為使用長時間輪詢時，就會使用長時間輪詢。 部署至 Azure App Service 時，請將應用程式設定為在服務的 Azure 入口網站設定中使用 Websocket。 如需設定應用程式以進行 Azure App Service 的詳細資訊，請參閱[ SignalR 發佈指導方針](xref:signalr/publish-to-azure-web-app)。
 
-#### <a name="azure-no-locsignalr-service"></a>Azure SignalR 服務
+#### <a name="azure-signalr-service"></a>Azure SignalR 服務
 
 我們建議使用 [Azure SignalR Service](xref:signalr/scale#azure-signalr-service) for Blazor Server apps。 服務可讓您將 Blazor Server 應用程式相應增加為大量的並行 SignalR 連接。 此外， SignalR 服務的全球接觸和高效能資料中心大幅有助於降低因地理位置而造成的延遲。
 
@@ -102,7 +102,7 @@ Blazor 使用 Websocket 作為傳輸的最佳方式 SignalR ，是因為延遲�
 
      * Azure 入口網站中 **的 app** service  >  **設定應用程式設定** (**名稱**： `Azure__SignalR__StickyServerMode` ，**值**： `Required`) 。 如果您布建 [Azure SignalR 服務](#provision-the-azure-signalr-service)，則會自動為應用程式採用此方法。
 
-### <a name="provision-the-azure-no-locsignalr-service"></a>布建 Azure SignalR 服務
+### <a name="provision-the-azure-signalr-service"></a>布建 Azure SignalR 服務
 
 若要 SignalR 在 Visual Studio 中布建應用程式的 Azure 服務：
 

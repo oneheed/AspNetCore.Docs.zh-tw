@@ -4,7 +4,7 @@ author: rick-anderson
 description: 了解如何使用 ASP.NET Core 建置 Web API。
 ms.author: riande
 ms.custom: mvc, devx-track-js
-ms.date: 08/13/2020
+ms.date: 02/04/2021
 no-loc:
 - appsettings.json
 - ASP.NET Core Identity
@@ -19,12 +19,12 @@ no-loc:
 - SignalR
 - Models
 uid: tutorials/first-web-api
-ms.openlocfilehash: ccbfc27eb89e23938a69f0ab4cb306d6a4136889
-ms.sourcegitcommit: 3593c4efa707edeaaceffbfa544f99f41fc62535
+ms.openlocfilehash: bef6efab3e5e84908a36c2c70f019cdd3b3e059e
+ms.sourcegitcommit: 20a41c8e40a2e69e99291e2fe18caa04c02e7109
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 01/04/2021
-ms.locfileid: "96175048"
+ms.lasthandoff: 02/05/2021
+ms.locfileid: "99578398"
 ---
 # <a name="tutorial-create-a-web-api-with-aspnet-core"></a>教學課程：使用 ASP.NET Core 建立 Web API
 
@@ -45,7 +45,7 @@ ms.locfileid: "96175048"
 
 結束時，您會有一個 Web API，可以管理儲存在資料庫中的「待辦事項」。
 
-## <a name="overview"></a>總覽
+## <a name="overview"></a>概觀
 
 本教學課程會建立以下 API：
 
@@ -97,7 +97,6 @@ ms.locfileid: "96175048"
    ```dotnetcli
    dotnet new webapi -o TodoApi
    cd TodoApi
-   dotnet add package Microsoft.EntityFrameworkCore.SqlServer
    dotnet add package Microsoft.EntityFrameworkCore.InMemory
    code -r ../TodoApi
    ```
@@ -119,7 +118,7 @@ ms.locfileid: "96175048"
 
   ![macOS API 範本選取專案](first-web-api-mac/_static/api_template.png)
 
-* 在 [ **設定新的 ASP.NET Core WEB API** ] 對話方塊中，選取最新的 .net Core 5.X **目標 Framework**。 選取 [下一步]  。
+* 在 [ **設定新的 ASP.NET Core WEB API** ] 對話方塊中，選取最新的 .net Core 5.X **目標 Framework**。 選取 [下一步] 。
 
 * 針對 [專案名稱] 輸入 *TodoApi*，然後選取 [建立]。
 
@@ -130,7 +129,6 @@ ms.locfileid: "96175048"
 在專案資料夾中開啟命令終端機，然後執行下列命令：
 
    ```dotnetcli
-   dotnet add package Microsoft.EntityFrameworkCore.SqlServer
    dotnet add package Microsoft.EntityFrameworkCore.InMemory
    ```
 
@@ -270,14 +268,11 @@ Swagger 可用來產生 web Api 的實用檔和說明頁面。 本教學課程�
 ### <a name="add-nuget-packages"></a>新增 NuGet 套件
 
 * 在 [工具] 功能表上，選取 [NuGet 套件管理員] > [管理解決方案的 NuGet 套件]。
-* 選取 [瀏覽] 索引標籤，然後在搜尋方塊中輸入 **Microsoft.EntityFrameworkCore.SqlServer**。
-<!-- https://github.com/dotnet/AspNetCore.Docs/issues/19782 Delete this line at RTM -->
+* 選取 [**流覽**] 索引標籤，然後在 [搜尋] 方塊中輸入 **microsoft.entityframeworkcore。**
 * 選取左窗格中的 [ **microsoft.entityframeworkcore** ]。
 * 選取右窗格中的 [專案] 核取方塊，然後選取 [安裝]。
-* 使用上述指示來新增 **Microsoft.entityframeworkcore InMemory** NuGet 套件。
 
-<!-- https://github.com/dotnet/AspNetCore.Docs/issues/19782 Update this image at RTM -->
-![NuGet 套件管理員](first-web-api/_static/5/vsNuGet.png) (英文)
+![NuGet 套件管理員](first-web-api/_static/5/vsNuGet.png)
 
 ## <a name="add-the-todocontext-database-context"></a>新增 TodoCoNtext 資料庫內容
 
@@ -569,7 +564,7 @@ DTO 可以用來：
 
 結束時，您會有一個 Web API，可以管理儲存在資料庫中的「待辦事項」。
 
-## <a name="overview"></a>總覽
+## <a name="overview"></a>概觀
 
 本教學課程會建立以下 API：
 
@@ -621,7 +616,6 @@ DTO 可以用來：
    ```dotnetcli
    dotnet new webapi -o TodoApi
    cd TodoApi
-   dotnet add package Microsoft.EntityFrameworkCore.SqlServer
    dotnet add package Microsoft.EntityFrameworkCore.InMemory
    code -r ../TodoApi
    ```
@@ -643,7 +637,7 @@ DTO 可以用來：
 
   ![macOS API 範本選取專案](first-web-api-mac/_static/api_template.png)
 
-* 在 [ **設定新的 ASP.NET Core WEB API** ] 對話方塊中，選取最新的 .net Core 3.X **目標 Framework**。 選取 [下一步]  。
+* 在 [ **設定新的 ASP.NET Core WEB API** ] 對話方塊中，選取最新的 .net Core 3.X **目標 Framework**。 選取 [下一步] 。
 
 * 針對 [專案名稱] 輸入 *TodoApi*，然後選取 [建立]。
 
@@ -654,7 +648,6 @@ DTO 可以用來：
 在專案資料夾中開啟命令終端機，然後執行下列命令：
 
    ```dotnetcli
-   dotnet add package Microsoft.EntityFrameworkCore.SqlServer
    dotnet add package Microsoft.EntityFrameworkCore.InMemory
    ```
 
@@ -764,10 +757,9 @@ DTO 可以用來：
 ### <a name="add-nuget-packages"></a>新增 NuGet 套件
 
 * 在 [工具] 功能表上，選取 [NuGet 套件管理員] > [管理解決方案的 NuGet 套件]。
-* 選取 [瀏覽] 索引標籤，然後在搜尋方塊中輸入 **Microsoft.EntityFrameworkCore.SqlServer**。
+* 選取 [**流覽**] 索引標籤，然後在 [搜尋] 方塊中輸入 **microsoft.entityframeworkcore。**
 * 選取左窗格中的 [ **microsoft.entityframeworkcore** ]。
 * 選取右窗格中的 [專案] 核取方塊，然後選取 [安裝]。
-* 使用上述指示來新增 **Microsoft.entityframeworkcore InMemory** NuGet 套件。
 
 ![NuGet 套件管理員](first-web-api/_static/vs3NuGet.png)
 
@@ -1126,7 +1118,7 @@ DTO 可以用來：
 
 * 在8.6 版之前的 Visual Studio for Mac 中，選取 [ **.net Core**  >  **應用程式**  >  **API**  >  **]**。 在8.6 版或更新版本中，選取 [ **Web] 和 [主控台**  >  **應用程式**  >  **API**  >  **]**。
   
-* 在 [ **設定新的 ASP.NET Core WEB API** ] 對話方塊中，選取最新的 .net Core 2.X **目標 Framework**。 選取 [下一步]  。
+* 在 [ **設定新的 ASP.NET Core WEB API** ] 對話方塊中，選取最新的 .net Core 2.X **目標 Framework**。 選取 [下一步] 。
 
 * 針對 [專案名稱] 輸入 *TodoApi*，然後選取 [建立]。
 

@@ -19,14 +19,14 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/hosting-models
-ms.openlocfilehash: a6f1c88b8e93c0d8ccfebca482895ebab8d18a81
-ms.sourcegitcommit: 3593c4efa707edeaaceffbfa544f99f41fc62535
+ms.openlocfilehash: c60191cc8822dd875db613fb70516beb08a659d8
+ms.sourcegitcommit: 20a41c8e40a2e69e99291e2fe18caa04c02e7109
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 01/04/2021
-ms.locfileid: "97506912"
+ms.lasthandoff: 02/05/2021
+ms.locfileid: "99578278"
 ---
-# <a name="aspnet-core-no-locblazor-hosting-models"></a>ASP.NET Core Blazor 裝載模型
+# <a name="aspnet-core-blazor-hosting-models"></a>ASP.NET Core Blazor 裝載模型
 
 依 [Daniel Roth](https://github.com/danroth27)
 
@@ -38,7 +38,7 @@ Blazor 是設計用來在瀏覽器中以 [WebAssembly](https://webassembly.org/)
 
 ![：：：非 loc (Blazor WebAssembly) ：：：：：：：非 loc (Blazor) ：：：應用程式會在瀏覽器內的 UI 執行緒上執行。](hosting-models/_static/blazor-webassembly.png)
 
-Blazor WebAssembly建立應用程式以進行部署，而不使用後端 ASP.NET Core 應用程式來提供其檔案時，應用程式稱為 *獨立* Blazor WebAssembly 應用程式。 建立應用程式以供使用後端應用程式進行部署以提供其檔案時，應用程式稱為 *託管* Blazor WebAssembly 應用程式。 託管 Blazor WebAssembly 應用程式通常會使用 WEB API 呼叫或 () ，透過網路與伺服器互動 [SignalR](xref:signalr/introduction) <xref:tutorials/signalr-blazor-webassembly> 。
+Blazor WebAssembly建立應用程式以進行部署，而不使用後端 ASP.NET Core 應用程式來提供其檔案時，應用程式稱為 *獨立* Blazor WebAssembly 應用程式。 建立應用程式以供使用後端應用程式進行部署以提供其檔案時，應用程式稱為 *託管* Blazor WebAssembly 應用程式。 託管 Blazor WebAssembly 應用程式通常會使用 WEB API 呼叫或 () ，透過網路與伺服器互動 [SignalR](xref:signalr/introduction) <xref:tutorials/signalr-blazor> 。
 
 `blazor.webassembly.js`腳本是由架構所提供，並處理：
 
@@ -131,7 +131,7 @@ Blazor Server應用程式是以[ASP.NET Core SignalR ](xref:signalr/introduction
 
 Blazor 考慮關閉瀏覽器索引標籤，或流覽至外部 URL 的 *正常* 終止。 當正常終止時，會立即釋出電路和相關聯的資源。 用戶端也可能會因為網路中斷而無法正常地中斷連線。 Blazor Server 儲存已中斷連線的線路以進行可設定的間隔，以允許用戶端重新連線。
 
-Blazor Server 允許程式碼定義迴圈 *處理常式*，以允許在使用者的線路狀態變更時執行程式碼。 如需詳細資訊，請參閱 <xref:blazor/advanced-scenarios#blazor-server-circuit-handler> 。
+Blazor Server 允許程式碼定義迴圈 *處理常式*，以允許在使用者的線路狀態變更時執行程式碼。 如需詳細資訊，請參閱<xref:blazor/advanced-scenarios#blazor-server-circuit-handler>。
 
 ### <a name="ui-latency"></a>UI 延遲
 
@@ -152,7 +152,7 @@ Blazor Server 應用程式需要使用中 SignalR 的伺服器連接。 如果�
 
 Blazor Server應用程式會 prerenders 以回應第一個用戶端要求，這會在伺服器上建立 UI 狀態。 當用戶端嘗試建立連接時 SignalR ，用戶端必須重新連接到相同的伺服器。 Blazor Server 使用多部後端伺服器的應用程式應該執行連線的「 *粘滯話」會話* SignalR 。
 
-我們建議使用 [Azure SignalR Service](/azure/azure-signalr) for Blazor Server apps。 服務可讓您將 Blazor Server 應用程式相應增加為大量的並行 SignalR 連接。 您 SignalR 可以將服務的選項或設定值設定為，以啟用 Azure 服務的「粘滯話」 `ServerStickyMode` `Required` 。 如需詳細資訊，請參閱 <xref:blazor/host-and-deploy/server#signalr-configuration> 。
+我們建議使用 [Azure SignalR Service](/azure/azure-signalr) for Blazor Server apps。 服務可讓您將 Blazor Server 應用程式相應增加為大量的並行 SignalR 連接。 您 SignalR 可以將服務的選項或設定值設定為，以啟用 Azure 服務的「粘滯話」 `ServerStickyMode` `Required` 。 如需詳細資訊，請參閱<xref:blazor/host-and-deploy/server#signalr-configuration>。
 
 使用 IIS 時，會使用 *應用程式要求路由* 來啟用「粘滯話」。 如需詳細資訊，請參閱 [使用應用程式要求路由的 HTTP 負載平衡](/iis/extensions/configuring-application-request-routing-arr/http-load-balancing-using-application-request-routing)。
 
@@ -161,4 +161,4 @@ Blazor Server應用程式會 prerenders 以回應第一個用戶端要求，這�
 * <xref:blazor/tooling>
 * <xref:signalr/introduction>
 * <xref:blazor/fundamentals/additional-scenarios>
-* <xref:tutorials/signalr-blazor-webassembly>
+* <xref:tutorials/signalr-blazor>

@@ -19,14 +19,14 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/components/lifecycle
-ms.openlocfilehash: 3591ba18351b89e2d5dfaef796777273c97ce98b
-ms.sourcegitcommit: 610936e4d3507f7f3d467ed7859ab9354ec158ba
+ms.openlocfilehash: f19d25006009723a8e69f24af92155f65c2195fe
+ms.sourcegitcommit: 19a004ff2be73876a9ef0f1ac44d0331849ad159
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 01/25/2021
-ms.locfileid: "98751626"
+ms.lasthandoff: 02/07/2021
+ms.locfileid: "99804457"
 ---
-# <a name="aspnet-core-no-locblazor-lifecycle"></a>ASP.NET Core Blazor 生命週期
+# <a name="aspnet-core-blazor-lifecycle"></a>ASP.NET Core Blazor 生命週期
 
 依 [Luke Latham](https://github.com/guardrex) 和 [Daniel Roth](https://github.com/danroth27)
 
@@ -70,7 +70,9 @@ ms.locfileid: "98751626"
 
 <xref:Microsoft.AspNetCore.Components.ComponentBase.SetParametersAsync%2A> 在轉譯樹狀結構中或從路由參數，設定元件的父系所提供的參數。 藉由覆寫方法，開發人員程式碼就可以直接與 <xref:Microsoft.AspNetCore.Components.ParameterView> 的參數互動。
 
-在下列範例中， <xref:Microsoft.AspNetCore.Components.ParameterView.TryGetValue%2A?displayProperty=nameWithType> 如果剖析的路由參數為成功，則將 `Param` 參數的值指派給 `value` `Param` 。 如果 `value` 沒有 `null` ，此值就會由 `SetParametersAsyncExample` 元件顯示。
+在下列範例中， <xref:Microsoft.AspNetCore.Components.ParameterView.TryGetValue%2A?displayProperty=nameWithType> 如果剖析的路由參數為成功，則將 `Param` 參數的值指派給 `value` `Param` 。 如果 `value` 沒有 `null` ，此值就會由元件顯示。
+
+雖然 [路由參數比對不區分大小寫](xref:blazor/fundamentals/routing#route-parameters)，但 <xref:Microsoft.AspNetCore.Components.ParameterView.TryGetValue%2A> 僅符合路由範本中區分大小寫的參數名稱。 下列範例需要使用 `/{Param?}` ，而不是以 `/{param?}` 取得值。 如果 `/{param?}` 在此案例中使用，則會傳回， <xref:Microsoft.AspNetCore.Components.ParameterView.TryGetValue%2A> `false` 而且 `message` 不會設定為任何一個字串。
 
 `Pages/SetParametersAsyncExample.razor`:
 
@@ -91,11 +93,14 @@ ms.locfileid: "98751626"
     {
         if (parameters.TryGetValue<string>(nameof(Param), out var value))
         {
-            message = $"The value of 'Param' is {value}.";
-        }
-        else 
-        {
-            message = "The value of 'Param' is null.";
+            if (value is null)
+            {
+                message = "The value of 'Param' is null.";
+            }
+            else
+            {
+                message = $"The value of 'Param' is {value}.";
+            }
         }
 
         await base.SetParametersAsync(parameters);
@@ -432,6 +437,6 @@ public async ValueTask DisposeAsync()
 }
 ```
 
-## <a name="no-locblazor-server-reconnection-events"></a>Blazor Server 重新連接事件
+## <a name="blazor-server-reconnection-events"></a>Blazor Server 重新連接事件
 
 本文所涵蓋的元件生命週期事件，與重新[ Blazor Server 連接事件處理常式](xref:blazor/fundamentals/additional-scenarios#reflect-the-connection-state-in-the-ui)分開運作。 當 Blazor Server 應用程式失去其 SignalR 與用戶端的連線時，只會中斷 UI 更新。 重新建立連接時，會繼續 UI 更新。 如需線路處理程式事件和設定的詳細資訊，請參閱 <xref:blazor/fundamentals/additional-scenarios> 。

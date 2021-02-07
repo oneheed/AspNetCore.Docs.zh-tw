@@ -19,14 +19,14 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/host-and-deploy/webassembly
-ms.openlocfilehash: 2b464c2b6ca434ce4c3b559480da69945266ff69
-ms.sourcegitcommit: cb984e0d7dc23a88c3a4121f23acfaea0acbfe1e
+ms.openlocfilehash: 67d7ed9656b2236ffe4f6b65899b807c0ba46ebb
+ms.sourcegitcommit: 19a004ff2be73876a9ef0f1ac44d0331849ad159
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 01/19/2021
-ms.locfileid: "98570969"
+ms.lasthandoff: 02/07/2021
+ms.locfileid: "99804522"
 ---
-# <a name="host-and-deploy-aspnet-core-no-locblazor-webassembly"></a>裝載和部署 ASP.NET Core Blazor WebAssembly
+# <a name="host-and-deploy-aspnet-core-blazor-webassembly"></a>裝載和部署 ASP.NET Core Blazor WebAssembly
 
 [Luke Latham](https://github.com/guardrex)、 [Rainer Stropek](https://www.timecockpit.com)、 [Daniel Roth](https://github.com/danroth27)、 [Ben Adams](https://twitter.com/ben_a_adams)及[Safia Abdalla](https://safia.rocks)
 
@@ -52,12 +52,15 @@ Blazor 依賴主機提供適當的壓縮檔案。 使用 ASP.NET Core 裝載的�
 * 如需 IIS `web.config` 壓縮設定，請參閱 [Iis： Brotli 和 Gzip 壓縮](#brotli-and-gzip-compression) 一節。 
 * 裝載在不支援靜態壓縮的檔案內容協商的靜態裝載方案（例如 GitHub 頁面）時，請考慮將應用程式設定為提取和解碼 Brotli 壓縮檔案：
 
-  * 從 [google/Brotli GitHub 存放庫](https://github.com/google/brotli)取得 JavaScript Brotli 解碼器。 `decode.min.js`系統會在存放庫的[ `js` 資料夾](https://github.com/google/brotli/tree/master/js)中命名並找到該解碼器檔案。
+  * 從 [google/Brotli GitHub 存放庫](https://github.com/google/brotli)取得 JavaScript Brotli 解碼器。 `decode.js`系統會在存放庫的[ `js` 資料夾](https://github.com/google/brotli/tree/master/js)中命名並找到該解碼器檔案。
+  
+    > [!NOTE]
+    > 縮減版本的 `decode.js` 腳本 (`decode.min.js`) [Google/brotli GitHub 存放庫](https://github.com/google/brotli)中有回歸。 您可以自行縮短腳本，或使用 [npm 套件](https://www.npmjs.com/package/brotli) ，直到 [decode.min.js 中的問題 TypeError (google/brotli #881) ](https://github.com/google/brotli/issues/881) 解決為止。 本節中的範例程式碼會使用腳本的 **unminified** 版本。
 
   * 更新應用程式以使用此解碼器。 將結束記號內的標記變更 `<body>` `wwwroot/index.html` 為下列內容：
   
     ```html
-    <script src="decode.min.js"></script>
+    <script src="decode.js"></script>
     <script src="_framework/blazor.webassembly.js" autostart="false"></script>
     <script>
       Blazor.start({
@@ -128,7 +131,7 @@ dotnet publish -p:BlazorEnableCompression=false
 
 如需部署至 Azure App Service 的相關資訊，請參閱 <xref:tutorials/publish-to-azure-webapp-using-vs>。
 
-## <a name="hosted-deployment-with-multiple-no-locblazor-webassembly-apps"></a>具有多個應用程式的託管部署 Blazor WebAssembly
+## <a name="hosted-deployment-with-multiple-blazor-webassembly-apps"></a>具有多個應用程式的託管部署 Blazor WebAssembly
 
 ### <a name="app-configuration"></a>應用程式組態
 
@@ -776,7 +779,7 @@ Blazor 在每個發行組建上執行中繼語言 (IL) 連結，以從輸出元�
 
 `loadBootResource` 參數會出現在下表中。
 
-| 參數    | 說明 |
+| 參數    | Description |
 | ------------ | ----------- |
 | `type`       | 資源類型。 運算子類型： `assembly` 、 `pdb` 、 `dotnetjs` 、 `dotnetwasm` 、 `timezonedata` |
 | `name`       | 資源名稱。 |

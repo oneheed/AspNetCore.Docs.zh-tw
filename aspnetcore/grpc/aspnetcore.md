@@ -18,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: grpc/aspnetcore
-ms.openlocfilehash: f17ba247747f906cf026fc0f7bc04d51f4c8cb2a
-ms.sourcegitcommit: e311cfb77f26a0a23681019bd334929d1aaeda20
+ms.openlocfilehash: 1a5510364ee46165e275d07073ab087d79d65313
+ms.sourcegitcommit: 50d3e939a90c5480df480f651dda032901468dd5
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 02/03/2021
-ms.locfileid: "99530199"
+ms.lasthandoff: 02/08/2021
+ms.locfileid: "99819038"
 ---
 # <a name="grpc-services-with-aspnet-core"></a>搭配 ASP.NET Core 的 gRPC 服務
 
@@ -142,7 +142,7 @@ IIS 必須設定為使用 TLS 和 HTTP/2。 如需詳細資訊，請參閱<xref:
 
 ## <a name="httpsys"></a>HTTP.sys
 
-[HTTP.sys](xref:fundamentals/servers/httpsys) 是只在 Windows 上執行的 ASP.NET Core 網頁伺服器。 需要 .NET 5 和 Windows 10 組建20241或更新版本，才能裝載具有 HTTP.sys 的 gRPC 服務。
+[HTTP.sys](xref:fundamentals/servers/httpsys) 是只在 Windows 上執行的 ASP.NET Core 網頁伺服器。 需要 .NET 5 和 Windows 10 組建19529或更新版本，才能裝載具有 HTTP.sys 的 gRPC 服務。
 
 HTTP.sys 必須設定為使用 TLS 和 HTTP/2。 如需詳細資訊，請參閱  [HTTP.sys 網頁伺服器 HTTP/2 支援](xref:fundamentals/servers/httpsys#http2-support)。
 

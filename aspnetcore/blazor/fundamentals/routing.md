@@ -19,14 +19,14 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/fundamentals/routing
-ms.openlocfilehash: 74886eae7431045e56de535b5221040bd56cdc2d
-ms.sourcegitcommit: 610936e4d3507f7f3d467ed7859ab9354ec158ba
+ms.openlocfilehash: c53263ea48bc2900fd811f6e159aca97cdff26f7
+ms.sourcegitcommit: 50d3e939a90c5480df480f651dda032901468dd5
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 01/25/2021
-ms.locfileid: "98751564"
+ms.lasthandoff: 02/08/2021
+ms.locfileid: "99819025"
 ---
-# <a name="aspnet-core-no-locblazor-routing"></a>ASP.NET Core Blazor 路由
+# <a name="aspnet-core-blazor-routing"></a>ASP.NET Core Blazor 路由
 
 作者：[Luke Latham](https://github.com/guardrex)
 
@@ -164,7 +164,7 @@ ms.locfileid: "98751564"
 
 ::: moniker-end
 
-使用 on [`OnParametersSet`](xref:blazor/components/lifecycle#after-parameters-are-set) （而不是） [`OnInitialized`](xref:blazor/components/lifecycle#component-initialization-methods) 允許使用不同的選擇性參數值，將應用程式流覽至相同的元件。 根據上述範例， `OnParametersSet` 當使用者應該要能夠從移至或移至時，請使用 `/RouteParameter` `/RouteParameter/amazing` `/RouteParameter/amazing` `/RouteParameter` ：
+使用 [`OnParametersSet`](xref:blazor/components/lifecycle#after-parameters-are-set) 取代 [`OnInitialized`](xref:blazor/components/lifecycle#component-initialization-methods) 來允許使用不同的選擇性參數值，將應用程式流覽至相同的元件。 根據上述範例， `OnParametersSet` 當使用者應該要能夠從移至或移至時，請使用 `/RouteParameter` `/RouteParameter/amazing` `/RouteParameter/amazing` `/RouteParameter` ：
 
 ```csharp
 protected override void OnParametersSet()

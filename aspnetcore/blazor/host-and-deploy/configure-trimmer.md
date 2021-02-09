@@ -5,7 +5,7 @@ description: 瞭解如何在建立應用程式時，控制 (IL) 連結器 (修�
 monikerRange: '>= aspnetcore-5.0'
 ms.author: riande
 ms.custom: mvc
-ms.date: 09/14/2020
+ms.date: 02/08/2021
 no-loc:
 - appsettings.json
 - ASP.NET Core Identity
@@ -19,33 +19,30 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/host-and-deploy/configure-trimmer
-ms.openlocfilehash: 337b188d3c0aeac9c5c635ebca265b9a35c6904d
-ms.sourcegitcommit: 3593c4efa707edeaaceffbfa544f99f41fc62535
+ms.openlocfilehash: 41887638f13a08d375075e8377da19d1d0098c4b
+ms.sourcegitcommit: ef8d8c79993a6608bf597ad036edcf30b231843f
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 01/04/2021
-ms.locfileid: "93055798"
+ms.lasthandoff: 02/09/2021
+ms.locfileid: "99975207"
 ---
-# <a name="configure-the-trimmer-for-aspnet-core-no-locblazor"></a><span data-ttu-id="932c3-103">設定 ASP.NET Core 的修剪器 Blazor</span><span class="sxs-lookup"><span data-stu-id="932c3-103">Configure the Trimmer for ASP.NET Core Blazor</span></span>
+# <a name="configure-the-trimmer-for-aspnet-core-blazor"></a><span data-ttu-id="2a0c1-103">設定 ASP.NET Core 的修剪器 Blazor</span><span class="sxs-lookup"><span data-stu-id="2a0c1-103">Configure the Trimmer for ASP.NET Core Blazor</span></span>
 
-<span data-ttu-id="932c3-104">依 [Pranav Krishnamoorthy](https://github.com/pranavkm)</span><span class="sxs-lookup"><span data-stu-id="932c3-104">By [Pranav Krishnamoorthy](https://github.com/pranavkm)</span></span>
+<span data-ttu-id="2a0c1-104">Blazor WebAssembly 執行 [ (IL) 修剪的中繼語言 ](/dotnet/standard/managed-code#intermediate-language--execution) ，以縮減已發行輸出的大小。</span><span class="sxs-lookup"><span data-stu-id="2a0c1-104">Blazor WebAssembly performs [Intermediate Language (IL)](/dotnet/standard/managed-code#intermediate-language--execution) trimming to reduce the size of the published output.</span></span> <span data-ttu-id="2a0c1-105">依預設，會在發佈應用程式時進行修剪。</span><span class="sxs-lookup"><span data-stu-id="2a0c1-105">By default, trimming occurs when publishing an app.</span></span>
 
-<span data-ttu-id="932c3-105">Blazor WebAssembly 執行 [ (IL) 修剪的中繼語言 ](/dotnet/standard/managed-code#intermediate-language--execution) ，以縮減已發行輸出的大小。</span><span class="sxs-lookup"><span data-stu-id="932c3-105">Blazor WebAssembly performs [Intermediate Language (IL)](/dotnet/standard/managed-code#intermediate-language--execution) trimming to reduce the size of the published output.</span></span>
+<span data-ttu-id="2a0c1-106">修剪可能會產生不利的影響。</span><span class="sxs-lookup"><span data-stu-id="2a0c1-106">Trimming may have detrimental effects.</span></span> <span data-ttu-id="2a0c1-107">在使用反映的應用程式中，修剪器通常無法判斷執行時間所需的反映類型。</span><span class="sxs-lookup"><span data-stu-id="2a0c1-107">In apps that use reflection, the Trimmer often can't determine the required types for reflection at runtime.</span></span> <span data-ttu-id="2a0c1-108">若要修剪使用反映的應用程式，必須在應用程式的程式碼和應用程式所相依的封裝或架構中，針對反映的必要類型通知修剪器。</span><span class="sxs-lookup"><span data-stu-id="2a0c1-108">To trim apps that use reflection, the Trimmer must be informed about required types for reflection in both the app's code and in the packages or frameworks that the app depends on.</span></span> <span data-ttu-id="2a0c1-109">修剪器在執行時間也無法回應應用程式的動態行為。</span><span class="sxs-lookup"><span data-stu-id="2a0c1-109">The Trimmer is also unable to react to an app's dynamic behavior at runtime.</span></span> <span data-ttu-id="2a0c1-110">若要確保已修剪的應用程式在部署後可以正常運作，請在開發期間經常測試已發佈的輸出。</span><span class="sxs-lookup"><span data-stu-id="2a0c1-110">To ensure the trimmed app works correctly once deployed, test published output frequently while developing.</span></span>
 
-<span data-ttu-id="932c3-106">調整應用程式的大小會優化，但可能會產生不利的影響。</span><span class="sxs-lookup"><span data-stu-id="932c3-106">Trimming an app optimizes for size but may have detrimental effects.</span></span> <span data-ttu-id="932c3-107">使用反映或相關動態功能的應用程式可能會在修剪時中斷，因為修剪器不知道動態行為，而且無法判斷在執行時間的反映需要哪些類型。</span><span class="sxs-lookup"><span data-stu-id="932c3-107">Apps that use reflection or related dynamic features may break when trimmed because the trimmer doesn't know about dynamic behavior and can't determine in general which types are required for reflection at runtime.</span></span> <span data-ttu-id="932c3-108">若要修剪這類應用程式，必須在程式碼中和應用程式相依的封裝或架構中，通知修剪器所需的任何類型。</span><span class="sxs-lookup"><span data-stu-id="932c3-108">To trim such apps, the trimmer must be informed about any types required by reflection in the code and in packages or frameworks that the app depends on.</span></span>
+<span data-ttu-id="2a0c1-111">若要設定修剪器，請參閱 .NET 基本概念檔中的 [修剪選項](/dotnet/core/deploying/trimming-options) 一文，其中包含下列主題的指引：</span><span class="sxs-lookup"><span data-stu-id="2a0c1-111">To configure the Trimmer, see the [Trimming options](/dotnet/core/deploying/trimming-options) article in the .NET Fundamentals documentation, which includes guidance on the following subjects:</span></span>
 
-<span data-ttu-id="932c3-109">若要確保已修剪的應用程式在部署後可以正常運作，請務必在開發期間經常測試已發佈的輸出。</span><span class="sxs-lookup"><span data-stu-id="932c3-109">To ensure the trimmed app works correctly once deployed, it's important to test published output frequently while developing.</span></span>
+* <span data-ttu-id="2a0c1-112">使用專案檔中的屬性來停用整個應用程式的修剪 `<PublishTrimmed>` 。</span><span class="sxs-lookup"><span data-stu-id="2a0c1-112">Disable trimming for the entire app with the `<PublishTrimmed>` property in the project file.</span></span>
+* <span data-ttu-id="2a0c1-113">控制修剪器捨棄未使用 IL 的程度。</span><span class="sxs-lookup"><span data-stu-id="2a0c1-113">Control how aggressively unused IL is discarded by the Trimmer.</span></span>
+* <span data-ttu-id="2a0c1-114">停止修剪器，使其無法修剪特定的元件。</span><span class="sxs-lookup"><span data-stu-id="2a0c1-114">Stop the Trimmer from trimming specific assemblies.</span></span>
+* <span data-ttu-id="2a0c1-115">用於修剪的「根」元件。</span><span class="sxs-lookup"><span data-stu-id="2a0c1-115">"Root" assemblies for trimming.</span></span>
+* <span data-ttu-id="2a0c1-116">藉由在專案檔中將屬性設為，以呈現反映類型的警告 `<SuppressTrimAnalysisWarnings>` `false` 。</span><span class="sxs-lookup"><span data-stu-id="2a0c1-116">Surface warnings for reflected types by setting the `<SuppressTrimAnalysisWarnings>` property to `false` in the project file.</span></span>
+* <span data-ttu-id="2a0c1-117">控制符號修剪和 degugger 支援。</span><span class="sxs-lookup"><span data-stu-id="2a0c1-117">Control symbol trimming and degugger support.</span></span>
+* <span data-ttu-id="2a0c1-118">設定修剪架構程式庫功能的修剪器功能。</span><span class="sxs-lookup"><span data-stu-id="2a0c1-118">Set Trimmer features for trimming framework library features.</span></span>
 
-<span data-ttu-id="932c3-110">您可以 `PublishTrimmed` `false` 在應用程式的專案檔中，將 MSBuild 屬性設定為，以停用 .net 應用程式的修剪：</span><span class="sxs-lookup"><span data-stu-id="932c3-110">Trimming for .NET apps can be disabled by setting the `PublishTrimmed` MSBuild property to `false` in the app's project file:</span></span>
+## <a name="additional-resources"></a><span data-ttu-id="2a0c1-119">其他資源</span><span class="sxs-lookup"><span data-stu-id="2a0c1-119">Additional resources</span></span>
 
-```xml
-<PropertyGroup>
-  <PublishTrimmed>false</PublishTrimmed>
-</PropertyGroup>
-```
-<span data-ttu-id="932c3-111">您可以在 [修剪選項](/dotnet/core/deploying/trimming-options)中找到設定修剪器的其他選項。</span><span class="sxs-lookup"><span data-stu-id="932c3-111">Additional options to configure the trimmer can be found at [Trimming options](/dotnet/core/deploying/trimming-options).</span></span>
-
-## <a name="additional-resources"></a><span data-ttu-id="932c3-112">其他資源</span><span class="sxs-lookup"><span data-stu-id="932c3-112">Additional resources</span></span>
-
-* [<span data-ttu-id="932c3-113">修剪獨立式部署及可執行檔</span><span class="sxs-lookup"><span data-stu-id="932c3-113">Trim self-contained deployments and executables</span></span>](/dotnet/core/deploying/trim-self-contained)
+* [<span data-ttu-id="2a0c1-120">修剪獨立式部署及可執行檔</span><span class="sxs-lookup"><span data-stu-id="2a0c1-120">Trim self-contained deployments and executables</span></span>](/dotnet/core/deploying/trim-self-contained)
 * <xref:blazor/webassembly-performance-best-practices#intermediate-language-il-trimming>

@@ -4,7 +4,7 @@ author: ardalis
 description: 探索 ASP.NET Core 如何支援 Open Web Interface for .NET (OWIN)，這可讓 Web 應用程式與網頁伺服器分離。
 ms.author: riande
 ms.custom: H1Hack27Feb2017
-ms.date: 12/18/2018
+ms.date: 2/8/2021
 no-loc:
 - appsettings.json
 - ASP.NET Core Identity
@@ -18,18 +18,23 @@ no-loc:
 - Razor
 - SignalR
 uid: fundamentals/owin
-ms.openlocfilehash: 6085abc45137223d7a676107cf06dc2cf97a5c19
-ms.sourcegitcommit: 3593c4efa707edeaaceffbfa544f99f41fc62535
+ms.openlocfilehash: c44803c6f67d8e03759a01f7aa71d82088be9a11
+ms.sourcegitcommit: ef8d8c79993a6608bf597ad036edcf30b231843f
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 01/04/2021
-ms.locfileid: "93060673"
+ms.lasthandoff: 02/09/2021
+ms.locfileid: "99975270"
 ---
 # <a name="open-web-interface-for-net-owin-with-aspnet-core"></a>具有 ASP.NET Core 的 Open Web Interface for .NET (OWIN)
 
 作者：[Steve Smith](https://ardalis.com/) 和 [Rick Anderson](https://twitter.com/RickAndMSFT)
 
-ASP.NET Core 支援Open Web Interface for .NET (OWIN)。 OWIN 可讓 Web 應用程式獨立於網頁伺服器。 它會定義中介軟體要在管線中用來處理要求和相關聯回應的標準方式。 ASP.NET Core 應用程式和中介軟體可以與以 OWIN 為基礎的應用程式、伺服器及中介軟體進行交互操作。
+ASP.NET Core：
+
+* 支援 Open Web Interface for .NET (OWIN) 。
+* 針對 `Microsoft.Owin.*` ([Katana](/aspnet/aspnet/overview/owin-and-katana/)) 程式庫具有 .net Core 相容的取代。
+
+OWIN 可讓 Web 應用程式獨立於網頁伺服器。 它會定義中介軟體要在管線中用來處理要求和相關聯回應的標準方式。 ASP.NET Core 應用程式和中介軟體可以與以 OWIN 為基礎的應用程式、伺服器及中介軟體進行交互操作。
 
 OWIN 提供分離層，可讓兩個利用不同物件模型的架構一起使用。 `Microsoft.AspNetCore.Owin` 套件提供兩個配接器實作：
 
@@ -171,7 +176,7 @@ OWIN 仰賴 `IDictionary<string,object>` 物件在 HTTP 要求/回應交換中�
 
 ### <a name="request-data-owin-v100"></a>要求資料 (OWIN 1.0.0 版)
 
-| 答案               | 值 (類型) | 描述 |
+| 答案               | 值 (類型) | Description |
 | ----------------- | ------------ | ----------- |
 | owin.RequestScheme | `String` |  |
 | owin.RequestMethod  | `String` | |    
@@ -184,13 +189,13 @@ OWIN 仰賴 `IDictionary<string,object>` 物件在 HTTP 要求/回應交換中�
 
 ### <a name="request-data-owin-v110"></a>要求資料 (OWIN 1.1.0 版)
 
-| 答案               | 值 (類型) | 描述 |
+| 答案               | 值 (類型) | Description |
 | ----------------- | ------------ | ----------- |
 | owin.RequestId | `String` | 選擇性 |
 
 ### <a name="response-data-owin-v100"></a>回應資料 (OWIN 1.0.0 版)
 
-| 答案               | 值 (類型) | 描述 |
+| 答案               | 值 (類型) | Description |
 | ----------------- | ------------ | ----------- |
 | owin.ResponseStatusCode | `int` | 選擇性 |
 | owin.ResponseReasonPhrase | `String` | 選擇性 |
@@ -199,14 +204,14 @@ OWIN 仰賴 `IDictionary<string,object>` 物件在 HTTP 要求/回應交換中�
 
 ### <a name="other-data-owin-v100"></a>其他資料 (OWIN 1.0.0 版)
 
-| 答案               | 值 (類型) | 描述 |
+| 答案               | 值 (類型) | Description |
 | ----------------- | ------------ | ----------- |
 | owin.CallCancelled | `CancellationToken` |  |
 | owin.Version  | `String` | |   
 
 ### <a name="common-keys"></a>共同索引鍵
 
-| 答案               | 值 (類型) | 描述 |
+| 答案               | 值 (類型) | Description |
 | ----------------- | ------------ | ----------- |
 | ssl.ClientCertificate | `X509Certificate` |  |
 | ssl.LoadClientCertAsync  | `Func<Task>` | |    
@@ -219,13 +224,13 @@ OWIN 仰賴 `IDictionary<string,object>` 物件在 HTTP 要求/回應交換中�
 
 ### <a name="sendfiles-v030"></a>SendFiles 0.3.0 版
 
-| 答案               | 值 (類型) | 描述 |
+| 答案               | 值 (類型) | Description |
 | ----------------- | ------------ | ----------- |
 | sendfile.SendAsync | 請參閱[委派簽章](https://owin.org/spec/extensions/owin-SendFile-Extension-v0.3.0.htm) | 每個要求 |
 
 ### <a name="opaque-v030"></a>Opaque 0.3.0 版
 
-| 答案               | 值 (類型) | 描述 |
+| 答案               | 值 (類型) | Description |
 | ----------------- | ------------ | ----------- |
 | opaque.Version | `String` |  |
 | opaque.Upgrade | `OpaqueUpgrade` | 請參閱[委派簽章](https://owin.org/spec/extensions/owin-SendFile-Extension-v0.3.0.htm) |
@@ -234,7 +239,7 @@ OWIN 仰賴 `IDictionary<string,object>` 物件在 HTTP 要求/回應交換中�
 
 ### <a name="websocket-v030"></a>WebSocket 0.3.0 版
 
-| 答案               | 值 (類型) | 描述 |
+| 答案               | 值 (類型) | Description |
 | ----------------- | ------------ | ----------- |
 | websocket.Version | `String` |  |
 | websocket.Accept | `WebSocketAccept` | 請參閱[委派簽章](https://owin.org/spec/extensions/owin-SendFile-Extension-v0.3.0.htm) |

@@ -19,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/webassembly-performance-best-practices
-ms.openlocfilehash: 28fe6a114f767246f49ac275d02c28f4572ce4e4
-ms.sourcegitcommit: 19a004ff2be73876a9ef0f1ac44d0331849ad159
+ms.openlocfilehash: 64eb69ba597b1e48489733275ac3bed96c6c3241
+ms.sourcegitcommit: ef8d8c79993a6608bf597ad036edcf30b231843f
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 02/07/2021
-ms.locfileid: "99804509"
+ms.lasthandoff: 02/09/2021
+ms.locfileid: "99975231"
 ---
 # <a name="aspnet-core-blazor-webassembly-performance-best-practices"></a>ASP.NET Core Blazor WebAssembly 效能最佳做法
 
@@ -545,7 +545,7 @@ function jsInteropCall() {
 
 ### <a name="intermediate-language-il-trimming"></a>中繼語言 (IL) 修剪
 
-[從 Blazor WebAssembly 應用程式修剪未使用的元件](xref:blazor/host-and-deploy/configure-trimmer) ，會移除應用程式二進位檔中未使用的程式碼，以減少應用程式的大小。 預設會在發行應用程式時執行修剪器。 若要從修剪中獲益，請使用 [`dotnet publish`](/dotnet/core/tools/dotnet-publish) 命令並將 [-c |--configuration](/dotnet/core/tools/dotnet-publish#options) 選項設為，以發佈應用程式進行部署 `Release` ：
+從應用程式修剪未使用的元件，會移除應用程式 Blazor WebAssembly 二進位檔中未使用的程式碼，以減少應用程式的大小。 如需詳細資訊，請參閱<xref:blazor/host-and-deploy/configure-trimmer>。
 
 ::: moniker-end
 
@@ -555,11 +555,11 @@ function jsInteropCall() {
 
 [連結 Blazor WebAssembly 應用程式](xref:blazor/host-and-deploy/configure-linker) 會藉由在應用程式的二進位檔中修剪未使用的程式碼，來減少應用程式的大小。 依預設，只有在設定中建立時，才會啟用中繼語言 (IL) 連結器 `Release` 。 若要從中獲益，請使用 [`dotnet publish`](/dotnet/core/tools/dotnet-publish) 命令並將 [-c |--configuration](/dotnet/core/tools/dotnet-publish#options) 選項設為，以發行應用程式進行部署 `Release` ：
 
-::: moniker-end
-
 ```dotnetcli
 dotnet publish -c Release
 ```
+
+::: moniker-end
 
 ### <a name="use-systemtextjson"></a>使用 System.Text.Js于
 

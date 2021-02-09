@@ -5,7 +5,7 @@ description: 瞭解如何在建立應用程式時，控制 (IL) 連結器 (修�
 monikerRange: '>= aspnetcore-5.0'
 ms.author: riande
 ms.custom: mvc
-ms.date: 09/14/2020
+ms.date: 02/08/2021
 no-loc:
 - appsettings.json
 - ASP.NET Core Identity
@@ -19,31 +19,28 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/host-and-deploy/configure-trimmer
-ms.openlocfilehash: 337b188d3c0aeac9c5c635ebca265b9a35c6904d
-ms.sourcegitcommit: 3593c4efa707edeaaceffbfa544f99f41fc62535
+ms.openlocfilehash: 41887638f13a08d375075e8377da19d1d0098c4b
+ms.sourcegitcommit: ef8d8c79993a6608bf597ad036edcf30b231843f
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 01/04/2021
-ms.locfileid: "93055798"
+ms.lasthandoff: 02/09/2021
+ms.locfileid: "99975207"
 ---
-# <a name="configure-the-trimmer-for-aspnet-core-no-locblazor"></a>設定 ASP.NET Core 的修剪器 Blazor
+# <a name="configure-the-trimmer-for-aspnet-core-blazor"></a>設定 ASP.NET Core 的修剪器 Blazor
 
-依 [Pranav Krishnamoorthy](https://github.com/pranavkm)
+Blazor WebAssembly 執行 [ (IL) 修剪的中繼語言 ](/dotnet/standard/managed-code#intermediate-language--execution) ，以縮減已發行輸出的大小。 依預設，會在發佈應用程式時進行修剪。
 
-Blazor WebAssembly 執行 [ (IL) 修剪的中繼語言 ](/dotnet/standard/managed-code#intermediate-language--execution) ，以縮減已發行輸出的大小。
+修剪可能會產生不利的影響。 在使用反映的應用程式中，修剪器通常無法判斷執行時間所需的反映類型。 若要修剪使用反映的應用程式，必須在應用程式的程式碼和應用程式所相依的封裝或架構中，針對反映的必要類型通知修剪器。 修剪器在執行時間也無法回應應用程式的動態行為。 若要確保已修剪的應用程式在部署後可以正常運作，請在開發期間經常測試已發佈的輸出。
 
-調整應用程式的大小會優化，但可能會產生不利的影響。 使用反映或相關動態功能的應用程式可能會在修剪時中斷，因為修剪器不知道動態行為，而且無法判斷在執行時間的反映需要哪些類型。 若要修剪這類應用程式，必須在程式碼中和應用程式相依的封裝或架構中，通知修剪器所需的任何類型。
+若要設定修剪器，請參閱 .NET 基本概念檔中的 [修剪選項](/dotnet/core/deploying/trimming-options) 一文，其中包含下列主題的指引：
 
-若要確保已修剪的應用程式在部署後可以正常運作，請務必在開發期間經常測試已發佈的輸出。
-
-您可以 `PublishTrimmed` `false` 在應用程式的專案檔中，將 MSBuild 屬性設定為，以停用 .net 應用程式的修剪：
-
-```xml
-<PropertyGroup>
-  <PublishTrimmed>false</PublishTrimmed>
-</PropertyGroup>
-```
-您可以在 [修剪選項](/dotnet/core/deploying/trimming-options)中找到設定修剪器的其他選項。
+* 使用專案檔中的屬性來停用整個應用程式的修剪 `<PublishTrimmed>` 。
+* 控制修剪器捨棄未使用 IL 的程度。
+* 停止修剪器，使其無法修剪特定的元件。
+* 用於修剪的「根」元件。
+* 藉由在專案檔中將屬性設為，以呈現反映類型的警告 `<SuppressTrimAnalysisWarnings>` `false` 。
+* 控制符號修剪和 degugger 支援。
+* 設定修剪架構程式庫功能的修剪器功能。
 
 ## <a name="additional-resources"></a>其他資源
 

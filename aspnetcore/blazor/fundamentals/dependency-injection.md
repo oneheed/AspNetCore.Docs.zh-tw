@@ -20,14 +20,14 @@ no-loc:
 - SignalR
 uid: blazor/fundamentals/dependency-injection
 zone_pivot_groups: blazor-hosting-models
-ms.openlocfilehash: 3f2b4eff5422acbec80b2fd9b801101271cc3f75
-ms.sourcegitcommit: 3593c4efa707edeaaceffbfa544f99f41fc62535
+ms.openlocfilehash: 6f41cc102411377f144dd8e12f7942031c59619a
+ms.sourcegitcommit: ef8d8c79993a6608bf597ad036edcf30b231843f
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 01/04/2021
-ms.locfileid: "97808721"
+ms.lasthandoff: 02/09/2021
+ms.locfileid: "99975208"
 ---
-# <a name="aspnet-core-no-locblazor-dependency-injection"></a>ASP.NET Core 相依性 Blazor 插入
+# <a name="aspnet-core-blazor-dependency-injection"></a>ASP.NET Core 相依性 Blazor 插入
 
 依 [Rainer Stropek](https://www.timecockpit.com) 和 [Mike Rousos](https://github.com/mjrousos)
 
@@ -38,12 +38,12 @@ ms.locfileid: "97808721"
 
 ## <a name="default-services"></a>預設服務
 
-下表所顯示的服務通常用於 Blazor 應用程式。
+下表所示的服務通常用於 Blazor 應用程式。
 
 | 服務 | 存留期 | 描述 |
 | ------- | -------- | ----------- |
-| <xref:System.Net.Http.HttpClient> | 具範圍 | <p>提供方法來傳送 HTTP 要求，以及從 URI 所識別的資源接收 HTTP 回應。</p><p><xref:System.Net.Http.HttpClient>應用程式中的實例會 Blazor WebAssembly 使用瀏覽器來處理背景中的 HTTP 流量。</p><p>Blazor Server 依預設，應用程式不會包含 <xref:System.Net.Http.HttpClient> 已設定為服務的服務。 提供 <xref:System.Net.Http.HttpClient> 給 Blazor Server 應用程式。</p><p>如需詳細資訊，請參閱 <xref:blazor/call-web-api> 。</p><p><xref:System.Net.Http.HttpClient>註冊為範圍服務，而非 singleton。 如需詳細資訊，請參閱 [服務存留期](#service-lifetime) 一節。</p> |
-| <xref:Microsoft.JSInterop.IJSRuntime> | <p>**Blazor WebAssembly**： Singleton</p><p>**Blazor Server**：限域</p> | 代表 javascript 呼叫會分派至其中的 JavaScript 執行時間實例。 如需詳細資訊，請參閱 <xref:blazor/call-javascript-from-dotnet> 。 |
+| <xref:System.Net.Http.HttpClient> | 具範圍 | <p>提供方法來傳送 HTTP 要求，以及從 URI 所識別的資源接收 HTTP 回應。</p><p><xref:System.Net.Http.HttpClient>應用程式中的實例會 Blazor WebAssembly 使用瀏覽器來處理背景中的 HTTP 流量。</p><p>Blazor Server 依預設，應用程式不會包含 <xref:System.Net.Http.HttpClient> 已設定為服務的服務。 提供 <xref:System.Net.Http.HttpClient> 給 Blazor Server 應用程式。</p><p>如需詳細資訊，請參閱<xref:blazor/call-web-api>。</p><p><xref:System.Net.Http.HttpClient>註冊為範圍服務，而非 singleton。 如需詳細資訊，請參閱 [服務存留期](#service-lifetime) 一節。</p> |
+| <xref:Microsoft.JSInterop.IJSRuntime> | <p>**Blazor WebAssembly**： Singleton</p><p>**Blazor Server**：限域</p> | 代表 javascript 呼叫會分派至其中的 JavaScript 執行時間實例。 如需詳細資訊，請參閱<xref:blazor/call-javascript-from-dotnet>。 |
 | <xref:Microsoft.AspNetCore.Components.NavigationManager> | <p>**Blazor WebAssembly**： Singleton</p><p>**Blazor Server**：限域</p> | 包含使用 Uri 和流覽狀態的協助程式。 如需詳細資訊，請參閱 [URI 和流覽狀態](xref:blazor/fundamentals/routing#uri-and-navigation-state-helpers)協助程式。 |
 
 自訂服務提供者不會自動提供表格中所列的預設服務。 如果您使用自訂服務提供者，而且需要表格中所顯示的任何服務，請將所需的服務加入至新的服務提供者。
@@ -102,7 +102,7 @@ public void ConfigureServices(IServiceCollection services)
 | <xref:Microsoft.Extensions.DependencyInjection.ServiceDescriptor.Singleton%2A> | DI 會建立服務的 *單一實例* 。 所有需要服務的元件 `Singleton` 都會收到相同服務的實例。 |
 | <xref:Microsoft.Extensions.DependencyInjection.ServiceDescriptor.Transient%2A> | 每當元件 `Transient` 從服務容器取得服務的實例時，就會收到服務的 *新實例* 。 |
 
-DI 系統是以 ASP.NET Core 中的 DI 系統為基礎。 如需詳細資訊，請參閱 <xref:fundamentals/dependency-injection> 。
+DI 系統是以 ASP.NET Core 中的 DI 系統為基礎。 如需詳細資訊，請參閱<xref:fundamentals/dependency-injection>。
 
 ## <a name="request-a-service-in-a-component"></a>要求元件中的服務
 
@@ -111,7 +111,7 @@ DI 系統是以 ASP.NET Core 中的 DI 系統為基礎。 如需詳細資訊，�
 * 類型：要插入的服務類型。
 * 屬性：接收插入的 app service 之屬性的名稱。 屬性不需要手動建立。 編譯器會建立屬性。
 
-如需詳細資訊，請參閱 <xref:mvc/views/dependency-injection> 。
+如需詳細資訊，請參閱<xref:mvc/views/dependency-injection>。
 
 使用多個 [`@inject`](xref:mvc/views/razor#inject) 語句插入不同的服務。
 
@@ -190,7 +190,7 @@ public class DataAccess : IDataAccess
 
 ## <a name="use-of-an-entity-framework-core-ef-core-dbcontext-from-di"></a>從 DI 使用 Entity Framework Core (EF Core) DbCoNtext
 
-如需詳細資訊，請參閱 <xref:blazor/blazor-server-ef-core> 。
+如需詳細資訊，請參閱<xref:blazor/blazor-server-ef-core>。
 
 ## <a name="detect-transient-disposables"></a>偵測暫時性可處置專案
 

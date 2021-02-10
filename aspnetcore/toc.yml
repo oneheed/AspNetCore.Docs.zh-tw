@@ -2,7 +2,7 @@
   href: index.yml
 - name: ASP.NET Core 的新功能文件
   href: whats-new/index.yml
-- name: 總覽
+- name: 概觀
   items:
     - name: 關於 ASP.NET Core
       uid: index
@@ -105,9 +105,9 @@
         - name: 使用 TypeScript 的 SignalR
           displayName: tutorial
           uid: tutorials/signalr-typescript-webpack
-        - name: 搭配 Blazor WebAssembly 的 SignalR
+        - name: 使用 Blazor 的 SignalR
           displayName: tutorial
-          uid: tutorials/signalr-blazor-webassembly
+          uid: tutorials/signalr-blazor
     - name: 遠端程序呼叫應用程式
       items:
         - name: 開始使用 gRPC 服務
@@ -308,8 +308,8 @@
           items:
             - name: 建置 Blazor 待辦事項清單應用程式
               uid: tutorials/build-a-blazor-app
-            - name: 搭配 Blazor WebAssembly 的 SignalR
-              uid: tutorials/signalr-blazor-webassembly
+            - name: 使用 Blazor 的 SignalR
+              uid: tutorials/signalr-blazor
         - name: 專案結構
           uid: blazor/project-structure
         - name: 基礎
@@ -368,7 +368,7 @@
           uid: blazor/call-web-api
         - name: 安全性及身分識別
           items:
-            - name: 總覽
+            - name: 概觀
               uid: blazor/security/index
             - name: Blazor WebAssembly
               items:
@@ -505,7 +505,7 @@
     - name: 標籤協助程式
       uid: mvc/views/tag-helpers/builtin-th/Index
       items:
-        - name: 總覽
+        - name: 概觀
           uid: mvc/views/tag-helpers/intro
         - name: 建立標記協助程式
           uid: mvc/views/tag-helpers/authoring
@@ -625,8 +625,8 @@
           uid: tutorials/signalr
         - name: 使用 TypeScript 的 SignalR
           uid: tutorials/signalr-typescript-webpack
-        - name: 搭配 Blazor WebAssembly 的 SignalR
-          uid: tutorials/signalr-blazor-webassembly
+        - name: 使用 Blazor 的 SignalR
+          uid: tutorials/signalr-blazor
     - name: 範例
       href: 'https://github.com/aspnet/SignalR-samples'
       displayName: signalr

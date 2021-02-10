@@ -19,14 +19,14 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/fundamentals/handle-errors
-ms.openlocfilehash: 5a255c2d3535311cecd6b7219447e80d1ae78877
-ms.sourcegitcommit: d4836f9b7c508f51c6c4ee6d0cc719b38c1729c4
+ms.openlocfilehash: cb3c64ab7340a67a6730d98af8a91c4e9837acf1
+ms.sourcegitcommit: 04ad9cd26fcaa8bd11e261d3661f375f5f343cdc
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 01/25/2021
-ms.locfileid: "98758257"
+ms.lasthandoff: 02/10/2021
+ms.locfileid: "100106943"
 ---
-# <a name="handle-errors-in-aspnet-core-no-locblazor-apps"></a>處理 ASP.NET Core 應用程式中的錯誤 Blazor
+# <a name="handle-errors-in-aspnet-core-blazor-apps"></a>處理 ASP.NET Core 應用程式中的錯誤 Blazor
 
 作者：[Steve Sanderson](https://github.com/SteveSandersonMS)
 
@@ -89,7 +89,7 @@ ms.locfileid: "98758257"
 }
 ```
 
-## <a name="no-locblazor-server-detailed-circuit-errors"></a>Blazor Server 詳細線路錯誤
+## <a name="blazor-server-detailed-circuit-errors"></a>Blazor Server 詳細線路錯誤
 
 用戶端錯誤不包含呼叫堆疊，也不會提供錯誤原因的詳細資料，但伺服器記錄檔包含這類資訊。 基於開發目的，可透過啟用詳細錯誤，讓用戶端可以使用敏感性電路錯誤資訊。
 
@@ -118,7 +118,7 @@ Blazor Server使用下列方法啟用詳細錯誤：
 > [!WARNING]
 > 將錯誤資訊公開給網際網路上的用戶端，應該一律避免使用安全性風險。
 
-## <a name="how-a-no-locblazor-server-app-reacts-to-unhandled-exceptions"></a>Blazor Server應用程式如何回應未處理的例外狀況
+## <a name="how-a-blazor-server-app-reacts-to-unhandled-exceptions"></a>Blazor Server應用程式如何回應未處理的例外狀況
 
 Blazor Server 是具狀態的架構。 當使用者與應用程式互動時，它們會維持與伺服器的連線，稱為 *線路*。 線路會保存作用中的元件實例，再加上許多其他狀態的層面，例如：
 
@@ -173,7 +173,7 @@ Blazor 將大部分未處理的例外狀況視為嚴重的重大例外狀況。 
 當 Blazor 建立元件的實例時：
 
 * 會叫用元件的函式。
-* 系統會叫用透過指示詞或屬性提供給元件之函式之任何非 singleton DI 服務的函式 [`@inject`](xref:mvc/views/razor#inject) [`[Inject]`](xref:blazor/fundamentals/dependency-injection#request-a-service-in-a-component) 。
+* 系統會叫用透過指示詞 [`@inject`](xref:mvc/views/razor#inject) 或[ `[Inject]` 屬性](xref:blazor/fundamentals/dependency-injection#request-a-service-in-a-component)提供給元件之函式之任何非 singleton DI 服務的函式。
 
 Blazor Server當任何已執行的函式或任何屬性的 setter 擲回 `[Inject]` 未處理的例外狀況時，電路會失敗。 例外狀況是嚴重的，因為架構無法將元件具現化。 如果函式邏輯可能會擲回例外狀況，則應用程式應該使用 [`try-catch`](/dotnet/csharp/language-reference/keywords/try-catch) 具有錯誤處理和記錄的語句來攔截例外狀況。
 
@@ -242,7 +242,7 @@ Blazor Server當任何已執行的函式或任何屬性的 setter 擲回 `[Injec
 * 如果 <xref:Microsoft.JSInterop.IJSRuntime.InvokeAsync%2A> 非同步呼叫失敗，則 .net <xref:System.Threading.Tasks.Task> 會失敗。 <xref:Microsoft.JSInterop.IJSRuntime.InvokeAsync%2A>例如，的呼叫可能會失敗，因為 JavaScript 端程式碼會擲回例外狀況，或傳回 `Promise` 做為完成的 `rejected` 。 開發人員程式碼必須攔截例外狀況。 如果使用 [`await`](/dotnet/csharp/language-reference/keywords/await) 運算子，請考慮使用錯誤處理和記錄，將方法呼叫包裝在 [`try-catch`](/dotnet/csharp/language-reference/keywords/try-catch) 語句中。 否則，失敗的程式碼會導致未處理的例外狀況對線路而言是嚴重的 Blazor Server 。
 * 依預設，對的呼叫 <xref:Microsoft.JSInterop.IJSRuntime.InvokeAsync%2A> 必須在特定期間內完成，否則會呼叫超時。預設的超時時間是一分鐘。 此超時會防止程式碼遺失網路連線或永遠不會傳回完成訊息的 JavaScript 程式碼。 如果呼叫超時，則產生的 <xref:System.Threading.Tasks> 會失敗，並出現 <xref:System.OperationCanceledException> 。 使用記錄來攔截和處理例外狀況。
 
-同樣地，JavaScript 程式碼可能會起始對屬性所表示之 .NET 方法的呼叫 [`[JSInvokable]`](xref:blazor/call-dotnet-from-javascript) 。 如果這些 .NET 方法擲回未處理的例外狀況：
+同樣地，JavaScript 程式碼可能會起始對[ `[JSInvokable]` 屬性](xref:blazor/call-dotnet-from-javascript)所表示之 .net 方法的呼叫。 如果這些 .NET 方法擲回未處理的例外狀況：
 
 * 例外狀況不會被視為線路的嚴重例外狀況 Blazor Server 。
 * JavaScript 端 `Promise` 遭到拒絕。
@@ -254,7 +254,7 @@ Blazor Server當任何已執行的函式或任何屬性的 setter 擲回 `[Injec
 * <xref:blazor/call-javascript-from-dotnet>
 * <xref:blazor/call-dotnet-from-javascript>
 
-### <a name="no-locblazor-server-prerendering"></a>Blazor Server 預
+### <a name="blazor-server-prerendering"></a>Blazor Server 預
 
 Blazor 您可以使用 [元件標記](xref:mvc/views/tag-helpers/builtin-th/component-tag-helper) 協助程式來資源清單元件，以便在使用者的初始 HTTP 要求中傳回其轉譯的 HTML 標籤。 其運作方式如下：
 

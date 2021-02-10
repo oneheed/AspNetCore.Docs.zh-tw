@@ -16,7 +16,7 @@
 * 如果您的 PR 被分派到 'cla-required' 標籤，請[完成貢獻授權合約 (CLA)](https://cla.dotnetfoundation.org/)。
 * 回應 PR 意見。
 
-如需此程序進展至發行新文章的範例，請參閱 .NET Docs 存放庫中的[議題&num;67](https://github.com/dotnet/docs/issues/67) 和[提取要求&num;798](https://github.com/dotnet/docs/pull/798)。 新文章為[記錄您的程式碼](https://docs.microsoft.com/dotnet/articles/csharp/codedoc)。
+如需此程式會導致發行新文章的範例，請參閱 .NET 檔存放庫中的 [問題 1477](https://github.com/dotnet/docs/issues/1477) 和 [提取要求 18955](https://github.com/dotnet/docs/pull/18955) 。 新文章是 [使用程式碼涵蓋範圍進行單元測試](/dotnet/core/testing/unit-testing-code-coverage)。
 
 ## <a name="docs-authoring-pack-extension-in-visual-studio-code"></a>Visual Studio Code 中的 Docs Authoring Pack 延伸模組
 

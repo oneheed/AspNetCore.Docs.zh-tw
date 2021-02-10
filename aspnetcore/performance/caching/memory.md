@@ -18,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: performance/caching/memory
-ms.openlocfilehash: 9b19c782d1d42ddaba590f05bab31899402f681a
-ms.sourcegitcommit: 6af9016d1ffc2dffbb2454c7da29c880034cefcd
+ms.openlocfilehash: 19e8dc0ae4d5f8fd28d03d5be87c0b1bbf32d940
+ms.sourcegitcommit: 04ad9cd26fcaa8bd11e261d3661f375f5f343cdc
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 12/08/2020
-ms.locfileid: "96901219"
+ms.lasthandoff: 02/10/2021
+ms.locfileid: "100107216"
 ---
 # <a name="cache-in-memory-in-aspnet-core"></a>ASP.NET Core 中的快取記憶體
 
@@ -51,7 +51,7 @@ Web 伺服陣列中的非粘滯話需要 [分散式](distributed.md) 快取，�
 * 任何以 .NET Standard 2.0 或更新版本為目標的 [.net 執行](/dotnet/standard/net-standard#net-implementation-support) 。 例如，ASP.NET Core 2.0 或更新版本。
 * .NET Framework 4.5 或更新版本。
 
-[Microsoft.Extensions.Caching.Memory](https://www.nuget.org/packages/Microsoft.Extensions.Caching.Memory/) / `IMemoryCache` 建議您不要使用本文所述的 (， `System.Runtime.Caching` / `MemoryCache` 因為它已更緊密地整合到 ASP.NET Core) 中。 例如，以原生 `IMemoryCache` 方式使用 ASP.NET Core 相依性 [插入](xref:fundamentals/dependency-injection)。
+[](https://www.nuget.org/packages/Microsoft.Extensions.Caching.Memory/) / `IMemoryCache` 建議您不要使用本文所述的 (， `System.Runtime.Caching` / `MemoryCache` 因為它已更緊密地整合到 ASP.NET Core) 中。 例如，以原生 `IMemoryCache` 方式使用 ASP.NET Core 相依性 [插入](xref:fundamentals/dependency-injection)。
 
 將 `System.Runtime.Caching` / `MemoryCache` ASP.NET 4.x 的程式碼移植到 ASP.NET Core 時，請使用做為相容性橋樑。
 
@@ -235,7 +235,7 @@ Web 伺服陣列中的非粘滯話需要 [分散式](distributed.md) 快取，�
 * 任何以 .NET Standard 2.0 或更新版本為目標的 [.net 執行](/dotnet/standard/net-standard#net-implementation-support) 。 例如，ASP.NET Core 2.0 或更新版本。
 * .NET Framework 4.5 或更新版本。
 
-[Microsoft.Extensions.Caching.Memory](https://www.nuget.org/packages/Microsoft.Extensions.Caching.Memory/) / `IMemoryCache` 建議您不要使用本文所述的 (， `System.Runtime.Caching` / `MemoryCache` 因為它已更緊密地整合到 ASP.NET Core) 中。 例如，以原生 `IMemoryCache` 方式使用 ASP.NET Core 相依性 [插入](xref:fundamentals/dependency-injection)。
+[](https://www.nuget.org/packages/Microsoft.Extensions.Caching.Memory/) / `IMemoryCache` 建議您不要使用本文所述的 (， `System.Runtime.Caching` / `MemoryCache` 因為它已更緊密地整合到 ASP.NET Core) 中。 例如，以原生 `IMemoryCache` 方式使用 ASP.NET Core 相依性 [插入](xref:fundamentals/dependency-injection)。
 
 將 `System.Runtime.Caching` / `MemoryCache` ASP.NET 4.x 的程式碼移植到 ASP.NET Core 時，請使用做為相容性橋樑。
 

@@ -19,14 +19,14 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/security/webassembly/additional-scenarios
-ms.openlocfilehash: fb5b6f75959d9933e228b0288e70498ef05efc4a
-ms.sourcegitcommit: da5a5bed5718a9f8db59356ef8890b4b60ced6e9
+ms.openlocfilehash: 964f72e4611798d30e15112297730b98608f608f
+ms.sourcegitcommit: 04ad9cd26fcaa8bd11e261d3661f375f5f343cdc
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 01/22/2021
-ms.locfileid: "98710629"
+ms.lasthandoff: 02/10/2021
+ms.locfileid: "100106722"
 ---
-# <a name="aspnet-core-no-locblazor-webassembly-additional-security-scenarios"></a>ASP.NET Core Blazor WebAssembly 額外的安全性案例
+# <a name="aspnet-core-blazor-webassembly-additional-security-scenarios"></a>ASP.NET Core Blazor WebAssembly 額外的安全性案例
 
 由 [Javier Calvarro Nelson](https://github.com/javiercn) 和 [Luke Latham](https://github.com/guardrex)
 
@@ -303,7 +303,7 @@ builder.Services.AddHttpClient("ServerAPI.NoAuthenticationClient",
 ```
 
 > [!NOTE]
-> 伺服器 API 中的控制器在 `WeatherForecastNoAuthenticationController` 上述範例中，不會以 [`[Authorize]`](xref:Microsoft.AspNetCore.Authorization.AuthorizeAttribute) 屬性標記。
+> 伺服器 API 中的控制器在 `WeatherForecastNoAuthenticationController` 上述範例中，不會以[ `[Authorize]` 屬性](xref:Microsoft.AspNetCore.Authorization.AuthorizeAttribute)標記。
 
 決定是否要使用安全用戶端或不安全的用戶端做為預設 <xref:System.Net.Http.HttpClient> 實例，取決於開發人員。 做出這項決定的其中一種方式，是考慮應用程式所聯繫的已驗證和未驗證端點數目。 如果應用程式的大部分要求都是保護 API 端點，請使用已驗證的 <xref:System.Net.Http.HttpClient> 實例作為預設值。 否則，請將未驗證的 <xref:System.Net.Http.HttpClient> 實例註冊為預設值。
 

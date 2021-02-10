@@ -19,14 +19,14 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/components/rendering
-ms.openlocfilehash: 1a4d4116b8a6d9266bbacbbdd8f20dc49b4e1db0
-ms.sourcegitcommit: 063a06b644d3ade3c15ce00e72a758ec1187dd06
+ms.openlocfilehash: 27701d175c86cdf4b74a9e6332b30b4d55806650
+ms.sourcegitcommit: 04ad9cd26fcaa8bd11e261d3661f375f5f343cdc
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 01/16/2021
-ms.locfileid: "98253927"
+ms.lasthandoff: 02/10/2021
+ms.locfileid: "100107034"
 ---
-# <a name="aspnet-core-no-locblazor-component-rendering"></a>ASP.NET Core Blazor 元件轉譯
+# <a name="aspnet-core-blazor-component-rendering"></a>ASP.NET Core Blazor 元件轉譯
 
 作者：[Steve Sanderson](https://github.com/SteveSandersonMS)
 
@@ -109,18 +109,20 @@ ms.locfileid: "98253927"
 
 由於在 .NET 中定義工作的方式，的接收者 <xref:System.Threading.Tasks.Task> 只能觀察其最終完成，而非中繼非同步狀態。 因此， <xref:Microsoft.AspNetCore.Components.ComponentBase> 只有在 <xref:System.Threading.Tasks.Task> 第一次傳回時以及最後完成時，才可以觸發轉譯資料流程 <xref:System.Threading.Tasks.Task> 。 它無法知道要在其他中繼點 rerender。 如果您想要在中繼點 rerender，請使用 <xref:Microsoft.AspNetCore.Components.ComponentBase.StateHasChanged%2A> 。
 
-### <a name="receiving-a-call-from-something-external-to-the-no-locblazor-rendering-and-event-handling-system"></a>從轉譯 Blazor 和事件處理系統外部的某個專案接收呼叫
+### <a name="receiving-a-call-from-something-external-to-the-blazor-rendering-and-event-handling-system"></a>從轉譯 Blazor 和事件處理系統外部的某個專案接收呼叫
 
 <xref:Microsoft.AspNetCore.Components.ComponentBase> 只知道自己的生命週期方法和 Blazor 觸發的事件。 <xref:Microsoft.AspNetCore.Components.ComponentBase> 不知道程式碼中可能發生的其他事件。 例如，自訂資料存放區所引發的任何 c # 事件都是未知的 Blazor 。 為了讓這類事件觸發轉譯資料流程，以在 UI 中顯示更新的值，請使用 <xref:Microsoft.AspNetCore.Components.ComponentBase.StateHasChanged%2A> 。
 
 在另一個使用案例中，請考慮使用的下列 `Counter` 元件， <xref:System.Timers.Timer?displayProperty=fullName> 以定期更新計數和呼叫 <xref:Microsoft.AspNetCore.Components.ComponentBase.StateHasChanged%2A> 來更新 UI。
 
-`Pages/Counter.razor`:
+`Pages/CounterWithTimerDisposal.razor`:
 
 ```razor
-@page "/counter"
+@page "/counter-with-timer-disposal"
 @using System.Timers
 @implements IDisposable
+
+<h1>Counter with <code>Timer</code> disposal</h1>
 
 <p>Current count: @currentCount</p>
 
@@ -134,7 +136,7 @@ ms.locfileid: "98253927"
         timer.Start();
     }
 
-    void OnTimerCallback()
+    private void OnTimerCallback()
     {
         _ = InvokeAsync(() =>
         {
@@ -143,11 +145,14 @@ ms.locfileid: "98253927"
         });
     }
 
-    void IDisposable.Dispose() => timer.Dispose();
+    public void IDisposable.Dispose() => timer.Dispose();
 }
 ```
 
-在上述範例中， `OnTimerCallback` 必須呼叫， <xref:Microsoft.AspNetCore.Components.ComponentBase.StateHasChanged%2A> 因為 Blazor 不知道 `currentCount` 回呼中的變更。 `OnTimerCallback` 在任何 managed 轉譯 Blazor 流程或事件通知之外執行。
+在上述範例中：
+
+* `OnTimerCallback` 必須呼叫， <xref:Microsoft.AspNetCore.Components.ComponentBase.StateHasChanged%2A> 因為 Blazor 不知道 `currentCount` 回呼中的變更。 `OnTimerCallback` 在任何 managed 轉譯 Blazor 流程或事件通知之外執行。
+* 元件會執行 <xref:System.IDisposable> ，其中 <xref:System.Timers.Timer> 會在架構呼叫方法時處置 `Dispose` 。 如需詳細資訊，請參閱<xref:blazor/components/lifecycle#component-disposal-with-idisposable>。
 
 同樣地，因為回呼是 Blazor 在同步處理內容之外叫用，所以必須將邏輯包裝在中， <xref:Microsoft.AspNetCore.Components.ComponentBase.InvokeAsync%2A?displayProperty=nameWithType> 才能將它移到轉譯器的同步處理內容。 <xref:Microsoft.AspNetCore.Components.ComponentBase.StateHasChanged%2A> 只能從轉譯器的同步處理內容呼叫，否則會擲回例外狀況。 這相當於將其他 UI 架構中的 UI 執行緒封送處理。
 

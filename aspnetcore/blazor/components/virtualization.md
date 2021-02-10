@@ -19,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/components/virtualization
-ms.openlocfilehash: 72b33bc3c2861380551915b1e8caab49122e8fab
-ms.sourcegitcommit: e311cfb77f26a0a23681019bd334929d1aaeda20
+ms.openlocfilehash: 5e058c33dcf52faf722b27e361491dd8dbc47dc1
+ms.sourcegitcommit: 04ad9cd26fcaa8bd11e261d3661f375f5f343cdc
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 02/03/2021
-ms.locfileid: "99529913"
+ms.lasthandoff: 02/10/2021
+ms.locfileid: "100107021"
 ---
 # <a name="aspnet-core-blazor-component-virtualization"></a>ASP.NET Core Blazor 元件虛擬化
 
@@ -156,6 +156,8 @@ private async ValueTask<ItemsProviderResult<Employee>> LoadEmployees(
     ...
 </Virtualize>
 ```
+
+根據預設， `Virtualize` 元件會在初始轉譯發生 *之後* 測量實際轉譯大小。 您 <xref:Microsoft.AspNetCore.Components.Web.Virtualization.Virtualize%601.ItemSize%2A> 可以使用，事先提供確切的專案大小來協助精確的初始轉譯效能，以及確保頁面重載的正確滾動位置。 如果預設值 <xref:Microsoft.AspNetCore.Components.Web.Virtualization.Virtualize%601.ItemSize%2A> 導致某些專案在目前可見的視圖之外轉譯，則會觸發第二次重呈現。 若要在虛擬化清單中正確維護瀏覽器的滾動位置，初始轉譯必須是正確的。 如果不是，使用者可能會看到錯誤的專案。 
 
 ## <a name="overscan-count"></a>Overscan 計數
 

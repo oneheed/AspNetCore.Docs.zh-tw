@@ -19,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/index
-ms.openlocfilehash: bd42ba41c6f599d7c0308febbbde71e0d060cc84
-ms.sourcegitcommit: 20a41c8e40a2e69e99291e2fe18caa04c02e7109
+ms.openlocfilehash: d42136de00ccc9b7565c5ae088e1ecf4560a63c5
+ms.sourcegitcommit: 04ad9cd26fcaa8bd11e261d3661f375f5f343cdc
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 02/05/2021
-ms.locfileid: "99578291"
+ms.lasthandoff: 02/10/2021
+ms.locfileid: "100106878"
 ---
 # <a name="introduction-to-aspnet-core-blazor"></a>ASP.NET Core 簡介 Blazor
 
@@ -148,8 +148,9 @@ WebAssembly 程式碼可以透過 JavaScript 存取瀏覽器的完整功能，�
 
 Blazor 將元件轉譯邏輯與應用程式 UI 更新的套用方式分離出來。 *Blazor Server* 提供在 Razor ASP.NET Core 應用程式的伺服器上裝載元件的支援。 UI 更新會透過連接來處理 [SignalR](xref:signalr/introduction) 。
 
-執行時間會處理：
+執行時間會保留在伺服器上，並處理：
 
+* 執行應用程式的 c # 程式碼。
 * 從瀏覽器傳送 UI 事件至伺服器。
 * 將 UI 更新套用至已轉譯的元件，該元件會由伺服器傳回。
 

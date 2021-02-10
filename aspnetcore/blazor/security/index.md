@@ -19,14 +19,14 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/security/index
-ms.openlocfilehash: 0a271b2e306e2969530248fe820ed8aab2fa45e0
-ms.sourcegitcommit: 75db2f684a9302b0be7925eab586aa091c6bd19f
+ms.openlocfilehash: c786c00892772f9f0ce80c903bde495d4f2523f2
+ms.sourcegitcommit: 04ad9cd26fcaa8bd11e261d3661f375f5f343cdc
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 02/01/2021
-ms.locfileid: "99238191"
+ms.lasthandoff: 02/10/2021
+ms.locfileid: "100106735"
 ---
-# <a name="aspnet-core-no-locblazor-authentication-and-authorization"></a>ASP.NET Core Blazor 驗證與授權
+# <a name="aspnet-core-blazor-authentication-and-authorization"></a>ASP.NET Core Blazor 驗證與授權
 
 由 [Steve Sanderson](https://github.com/SteveSandersonMS) 和 [Luke Latham](https://github.com/guardrex)
 
@@ -48,7 +48,7 @@ Blazor WebAssembly 應用程式會在用戶端上執行。 授權「僅」會被
 
 Blazor 使用現有的 ASP.NET Core 驗證機制來建立使用者的身分識別。 確切的機制取決於應用程式的裝載方式 Blazor Blazor WebAssembly 或 Blazor Server 。
 
-### <a name="no-locblazor-webassembly-authentication"></a>Blazor WebAssembly 驗證
+### <a name="blazor-webassembly-authentication"></a>Blazor WebAssembly 驗證
 
 在 Blazor WebAssembly 應用程式中，可以略過驗證檢查，因為使用者可以修改所有用戶端程式代碼。 這同樣也適用於所有的用戶端應用程式技術，包括 JavaScript SPA 架構或任何作業系統的原生應用程式。
 
@@ -61,7 +61,7 @@ Blazor 使用現有的 ASP.NET Core 驗證機制來建立使用者的身分識�
 
 如需建立應用程式和設定的詳細資訊，請參閱 <xref:blazor/security/webassembly/index> 。
 
-### <a name="no-locblazor-server-authentication"></a>Blazor Server 驗證
+### <a name="blazor-server-authentication"></a>Blazor Server 驗證
 
 Blazor Server 應用程式會透過使用建立的即時連接來運作 SignalR 。 建立連線時，會處理[以 SignalR 應用程式為基礎的驗證](xref:signalr/authn-and-authz)。 驗證可以根據 cookie 或其他某些持有人權杖。
 
@@ -352,7 +352,7 @@ Blazor 允許以 *非同步方式* 判斷驗證狀態。 這種方法的主要�
 
 ## <a name="authorize-attribute"></a>[Authorize] 屬性
 
-[`[Authorize]`](xref:Microsoft.AspNetCore.Authorization.AuthorizeAttribute)屬性可用於 Razor 元件中：
+[ `[Authorize]` 屬性](xref:Microsoft.AspNetCore.Authorization.AuthorizeAttribute)可用於 Razor 元件中：
 
 ```razor
 @page "/"
@@ -364,7 +364,7 @@ You can only see this if you're signed in.
 > [!IMPORTANT]
 > 僅 [`[Authorize]`](xref:Microsoft.AspNetCore.Authorization.AuthorizeAttribute) 在透過 `@page` 路由器達成的元件上使用 Blazor 。 授權僅會以路由的層面執行，且「不」適用於在頁面內轉譯的子元件。 若要授權在頁面內顯示特定組件，請改為使用 <xref:Microsoft.AspNetCore.Components.Authorization.AuthorizeView>。
 
-[`[Authorize]`](xref:Microsoft.AspNetCore.Authorization.AuthorizeAttribute)屬性也支援以角色為基礎或以原則為基礎的授權。 針對角色型授權，請使用 <xref:Microsoft.AspNetCore.Authorization.AuthorizeAttribute.Roles> 參數：
+[ `[Authorize]` 屬性](xref:Microsoft.AspNetCore.Authorization.AuthorizeAttribute)也支援以角色為基礎或以原則為基礎的授權。 針對角色型授權，請使用 <xref:Microsoft.AspNetCore.Authorization.AuthorizeAttribute.Roles> 參數：
 
 ```razor
 @page "/"

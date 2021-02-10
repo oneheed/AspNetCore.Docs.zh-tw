@@ -20,12 +20,12 @@ no-loc:
 - SignalR
 uid: blazor/fundamentals/dependency-injection
 zone_pivot_groups: blazor-hosting-models
-ms.openlocfilehash: 6f41cc102411377f144dd8e12f7942031c59619a
-ms.sourcegitcommit: ef8d8c79993a6608bf597ad036edcf30b231843f
+ms.openlocfilehash: 30edffedf1faf96ed54d5380762c8558e478966c
+ms.sourcegitcommit: 04ad9cd26fcaa8bd11e261d3661f375f5f343cdc
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 02/09/2021
-ms.locfileid: "99975208"
+ms.lasthandoff: 02/10/2021
+ms.locfileid: "100106917"
 ---
 # <a name="aspnet-core-blazor-dependency-injection"></a>ASP.NET Core 相依性 Blazor 插入
 
@@ -119,7 +119,7 @@ DI 系統是以 ASP.NET Core 中的 DI 系統為基礎。 如需詳細資訊，�
 
 [!code-razor[](dependency-injection/samples_snapshot/CustomerList.razor?highlight=2-3,20)]
 
-就內部而言，產生的屬性 (`DataRepository`) 會使用 [`[Inject]`](xref:Microsoft.AspNetCore.Components.InjectAttribute) 屬性。 一般而言，不會直接使用此屬性。 如果基類是元件的必要項，而且基類也需要插入的屬性，請手動加入 [`[Inject]`](xref:Microsoft.AspNetCore.Components.InjectAttribute) 屬性：
+就內部而言，產生的屬性 (`DataRepository`) 會使用[ `[Inject]` 屬性](xref:Microsoft.AspNetCore.Components.InjectAttribute)。 一般而言，不會直接使用此屬性。 如果基類是元件的必要項，而且基類也需要插入的屬性，請手動加入[ `[Inject]` 屬性](xref:Microsoft.AspNetCore.Components.InjectAttribute)：
 
 ```csharp
 using Microsoft.AspNetCore.Components;
@@ -144,7 +144,7 @@ public class ComponentBase : IComponent
 
 ## <a name="use-di-in-services"></a>使用服務中的 DI
 
-複雜的服務可能需要其他服務。 在下列範例中， `DataAccess` 需要 <xref:System.Net.Http.HttpClient> 預設服務。 [`@inject`](xref:mvc/views/razor#inject) (或 [`[Inject]`](xref:Microsoft.AspNetCore.Components.InjectAttribute) 屬性) 無法在服務中使用。 必須改為使用函式 *插入*。 將參數加入至服務的函式，即可新增必要的服務。 當 DI 建立服務時，它會辨識其在函式中所需的服務，並據以提供它們。 在下列範例中，此函式會接收 <xref:System.Net.Http.HttpClient> VIA DI 的。 <xref:System.Net.Http.HttpClient> 是預設服務。
+複雜的服務可能需要其他服務。 在下列範例中， `DataAccess` 需要 <xref:System.Net.Http.HttpClient> 預設服務。 [`@inject`](xref:mvc/views/razor#inject) (或[ `[Inject]` 屬性](xref:Microsoft.AspNetCore.Components.InjectAttribute)) 無法在服務中使用。 必須改為使用函式 *插入*。 將參數加入至服務的函式，即可新增必要的服務。 當 DI 建立服務時，它會辨識其在函式中所需的服務，並據以提供它們。 在下列範例中，此函式會接收 <xref:System.Net.Http.HttpClient> VIA DI 的。 <xref:System.Net.Http.HttpClient> 是預設服務。
 
 ```csharp
 using System.Net.Http;
@@ -180,7 +180,7 @@ public class DataAccess : IDataAccess
 
 * <xref:Microsoft.AspNetCore.Components.OwningComponentBase> 這是 <xref:Microsoft.AspNetCore.Components.ComponentBase> 具有 <xref:Microsoft.AspNetCore.Components.OwningComponentBase.ScopedServices> 類型之 protected 屬性之類型的抽象、可處置的子系 <xref:System.IServiceProvider> 。 您可以使用此提供者來解析範圍為元件存留期的服務。
 
-  使用插入至元件的 DI 服務， [`@inject`](xref:mvc/views/razor#inject) 或 [`[Inject]`](xref:Microsoft.AspNetCore.Components.InjectAttribute) 不在元件的範圍中建立屬性。 若要使用元件的範圍，必須使用或來解析 <xref:Microsoft.Extensions.DependencyInjection.ServiceProviderServiceExtensions.GetRequiredService%2A> 服務 <xref:System.IServiceProvider.GetService%2A> 。 使用提供者解析的任何服務 <xref:Microsoft.AspNetCore.Components.OwningComponentBase.ScopedServices> 都有從相同範圍提供的相依性。
+  使用插入至元件的 DI 服務， [`@inject`](xref:mvc/views/razor#inject) 或不在元件的範圍中建立[ `[Inject]` 屬性](xref:Microsoft.AspNetCore.Components.InjectAttribute)。 若要使用元件的範圍，必須使用或來解析 <xref:Microsoft.Extensions.DependencyInjection.ServiceProviderServiceExtensions.GetRequiredService%2A> 服務 <xref:System.IServiceProvider.GetService%2A> 。 使用提供者解析的任何服務 <xref:Microsoft.AspNetCore.Components.OwningComponentBase.ScopedServices> 都有從相同範圍提供的相依性。
 
   [!code-razor[](dependency-injection/samples_snapshot/Preferences.razor?highlight=3,20-21)]
 

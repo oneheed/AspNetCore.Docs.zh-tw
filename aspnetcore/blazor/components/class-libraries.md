@@ -19,14 +19,14 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/components/class-libraries
-ms.openlocfilehash: 14370f9bbf45079fd3654d3e55af4178691cf4f5
-ms.sourcegitcommit: 063a06b644d3ade3c15ce00e72a758ec1187dd06
+ms.openlocfilehash: 9562d06cbb8c60cd5a3b01f7c382b70c50038363
+ms.sourcegitcommit: 04ad9cd26fcaa8bd11e261d3661f375f5f343cdc
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 01/16/2021
-ms.locfileid: "98252548"
+ms.lasthandoff: 02/10/2021
+ms.locfileid: "100107060"
 ---
-# <a name="aspnet-core-no-locrazor-components-class-libraries"></a>ASP.NET Core Razor 元件類別庫
+# <a name="aspnet-core-razor-components-class-libraries"></a>ASP.NET Core Razor 元件類別庫
 
 依 [Simon Timms](https://github.com/stimms)
 
@@ -43,9 +43,9 @@ ms.locfileid: "98252548"
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
 1. 建立新專案。
-1. 選取 [ **Razor 類別庫**]。 選取 [下一步]  。
+1. 選取 [ **Razor 類別庫**]。 選取 [下一步] 。
 1. 在 [ **建立新的 Razor 類別庫** ] 對話方塊中，選取 [ **建立**]。
-1. 在 [專案名稱] 欄位中提供專案名稱，或接受預設專案名稱。 本主題中的範例會使用專案名稱 `ComponentLibrary` 。 選取 [建立]。
+1. 在 [專案名稱] 欄位中提供專案名稱，或接受預設專案名稱。 本主題中的範例會使用專案名稱 `ComponentLibrary` 。 選取 [建立]  。
 1. 將 RCL 新增至方案：
    1. 以滑鼠右鍵按一下方案。 選取 [**加入**  >  **現有專案**]。
    1. 流覽至 RCL 的專案檔。
@@ -127,7 +127,7 @@ Welcome to your new app.
 
 <!-- REACTIVATE WHEN HEAD COMPONENTS COME BACK AT 6.0
 
-To provide additional library component styles from stylesheets in the library's `wwwroot` folder, link the stylesheets using the framework's [`Link` component](xref:blazor/fundamentals/additional-scenarios#influence-html-head-tag-elements) in `Component1.razor`:
+To provide additional library component styles from stylesheets in the library's `wwwroot` folder, link the stylesheets using the framework's [`Link` component](xref:blazor/fundamentals/signalr#influence-html-head-tag-elements) in `Component1.razor`:
 
 ```razor
 <div class="my-component">
@@ -176,17 +176,17 @@ When the `Link` component is used in a child component, the linked asset is also
 
 ::: moniker-end
 
-## <a name="create-a-no-locrazor-components-class-library-with-static-assets"></a>建立 Razor 具有靜態資產的元件類別庫
+## <a name="create-a-razor-components-class-library-with-static-assets"></a>建立 Razor 具有靜態資產的元件類別庫
 
 RCL 可以包含靜態資產。 靜態資產可供任何使用程式庫的應用程式使用。 如需詳細資訊，請參閱<xref:razor-pages/ui-class#create-an-rcl-with-static-assets>。
 
-## <a name="supply-components-and-static-assets-to-multiple-hosted-no-locblazor-apps"></a>將元件和靜態資產提供給多個託管 Blazor 應用程式
+## <a name="supply-components-and-static-assets-to-multiple-hosted-blazor-apps"></a>將元件和靜態資產提供給多個託管 Blazor 應用程式
 
 如需詳細資訊，請參閱<xref:blazor/host-and-deploy/webassembly#static-assets-and-class-libraries>。
 
 ::: moniker range=">= aspnetcore-5.0"
 
-## <a name="browser-compatibility-analyzer-for-no-locblazor-webassembly"></a>的瀏覽器相容性分析器 Blazor WebAssembly
+## <a name="browser-compatibility-analyzer-for-blazor-webassembly"></a>的瀏覽器相容性分析器 Blazor WebAssembly
 
 Blazor WebAssembly 應用程式會以完整的 .NET API 介面區為目標，但由於瀏覽器沙箱條件約束，WebAssembly 並不支援所有的 .NET Api。 <xref:System.PlatformNotSupportedException>在 WebAssembly 上執行時，不支援的 api 會擲回。 當應用程式使用應用程式的目標平臺不支援的 Api 時，平臺相容性分析器會警告開發人員。 針對 Blazor WebAssembly 應用程式，這表示檢查瀏覽器中是否支援 api。 針對相容性分析器標注 .NET framework Api 是一項持續進行的程式，所以並非所有的 .NET framework API 目前都有批註。
 
@@ -210,7 +210,7 @@ private static string GetLoggingDirectory()
 
 如需詳細資訊，請參閱將 [Api 標注為特定平臺上不支援 (dotnet/設計 GitHub 存放庫](https://github.com/dotnet/designs/blob/main/accepted/2020/platform-exclusion/platform-exclusion.md#build-configuration-for-platforms)。
 
-## <a name="no-locblazor-javascript-isolation-and-object-references"></a>Blazor JavaScript 隔離和物件參考
+## <a name="blazor-javascript-isolation-and-object-references"></a>Blazor JavaScript 隔離和物件參考
 
 Blazor 啟用標準 [javascript 模組](https://developer.mozilla.org/docs/Web/JavaScript/Guide/Modules)中的 JavaScript 隔離。 JavaScript 隔離提供下列優點：
 

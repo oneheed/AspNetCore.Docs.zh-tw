@@ -20,12 +20,12 @@ no-loc:
 - SignalR
 uid: tutorials/signalr-blazor
 zone_pivot_groups: blazor-hosting-models
-ms.openlocfilehash: 5bf80bd9147b6210fd2b115f7c009cc518f6f5cb
-ms.sourcegitcommit: 20a41c8e40a2e69e99291e2fe18caa04c02e7109
+ms.openlocfilehash: 226813f3b975e207a51eba24d6cbb57f00464073
+ms.sourcegitcommit: 04ad9cd26fcaa8bd11e261d3661f375f5f343cdc
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 02/05/2021
-ms.locfileid: "99579102"
+ms.lasthandoff: 02/10/2021
+ms.locfileid: "100107203"
 ---
 # <a name="use-aspnet-core-signalr-with-blazor"></a>搭配使用 SignalR ASP.NET Core Blazor
 
@@ -766,6 +766,6 @@ dotnet add package System.Text.Encodings.Web
 ## <a name="additional-resources"></a>其他資源
 
 * <xref:signalr/introduction>
-* [SignalR 驗證的跨原始來源協商](xref:blazor/fundamentals/additional-scenarios#signalr-cross-origin-negotiation-for-authentication)
+* [SignalR 驗證的跨原始來源協商](xref:blazor/fundamentals/signalr#signalr-cross-origin-negotiation-for-authentication)
 * <xref:blazor/debug>
 * <xref:blazor/security/server/threat-mitigation>

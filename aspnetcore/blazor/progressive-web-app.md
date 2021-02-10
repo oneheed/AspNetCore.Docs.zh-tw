@@ -19,14 +19,14 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/progressive-web-app
-ms.openlocfilehash: fcf06295deb41f304b92caa82535a1197c909898
-ms.sourcegitcommit: 75db2f684a9302b0be7925eab586aa091c6bd19f
+ms.openlocfilehash: 63e6fc49283aec567f6a9d5bc05b7445fb38c33c
+ms.sourcegitcommit: 04ad9cd26fcaa8bd11e261d3661f375f5f343cdc
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 02/01/2021
-ms.locfileid: "99238232"
+ms.lasthandoff: 02/10/2021
+ms.locfileid: "100106839"
 ---
-# <a name="build-progressive-web-applications-with-aspnet-core-no-locblazor-webassembly"></a>使用 ASP.NET Core 建立漸進式 Web 應用程式 Blazor WebAssembly
+# <a name="build-progressive-web-applications-with-aspnet-core-blazor-webassembly"></a>使用 ASP.NET Core 建立漸進式 Web 應用程式 Blazor WebAssembly
 
 作者：[Steve Sanderson](https://github.com/SteveSandersonMS)
 
@@ -71,7 +71,7 @@ dotnet new blazorwasm -o MyBlazorPwa --pwa
 
 （選擇性）您可以針對從 ASP.NET Core 裝載的範本建立的應用程式設定 PWA。 PWA 案例與裝載模型無關。
 
-## <a name="convert-an-existing-no-locblazor-webassembly-app-into-a-pwa"></a>將現有的 Blazor WebAssembly 應用程式轉換為 PWA
+## <a name="convert-an-existing-blazor-webassembly-app-into-a-pwa"></a>將現有的 Blazor WebAssembly 應用程式轉換為 PWA
 
 Blazor WebAssembly遵循本節中的指導方針，將現有的應用程式轉換為 PWA。
 
@@ -406,4 +406,4 @@ PWA 範本可以與驗證搭配使用。 當使用者具有初始網路連線能
 ## <a name="additional-resources"></a>其他資源
 
 * [針對完整性 PowerShell 腳本進行疑難排解](xref:blazor/host-and-deploy/webassembly#troubleshoot-integrity-powershell-script)
-* [SignalR 驗證的跨原始來源協商](xref:blazor/fundamentals/additional-scenarios#signalr-cross-origin-negotiation-for-authentication)
+* [SignalR 驗證的跨原始來源協商](xref:blazor/fundamentals/signalr#signalr-cross-origin-negotiation-for-authentication)

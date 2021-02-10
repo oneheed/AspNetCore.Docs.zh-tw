@@ -18,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: mvc/controllers/filters
-ms.openlocfilehash: ee30ef89c5d7aeae83f23a81eb02235397c89ac2
-ms.sourcegitcommit: 75db2f684a9302b0be7925eab586aa091c6bd19f
+ms.openlocfilehash: 79457d55e0dcda342bc0017bb386c23525666657
+ms.sourcegitcommit: 04ad9cd26fcaa8bd11e261d3661f375f5f343cdc
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 02/01/2021
-ms.locfileid: "99238320"
+ms.lasthandoff: 02/10/2021
+ms.locfileid: "100107190"
 ---
 # <a name="filters-in-aspnet-core"></a>ASP.NET Core 中的篩選條件
 
@@ -403,7 +403,7 @@ FiltersSample.Filters.LogConstantFilter:Information: Method 'Hi' called
 資源篩選條件範例：
 
 * 先前所示的[縮短資源篩選條件](#short-circuiting-resource-filter)。
-* [DisableFormValueModelBindingAttribute](https://github.com/aspnet/Entropy/blob/rel/2.0.0-preview2/samples/Mvc.FileUpload/Filters/DisableFormValueModelBindingAttribute.cs) \(英文\)：
+* [DisableFormValueModelBindingAttribute](https://github.com/aspnet/Entropy/blob/master/samples/Mvc.FileUpload/Filters/DisableFormValueModelBindingAttribute.cs) \(英文\)：
 
   * 防止模型繫結存取表單資料。
   * 用於大型檔案上傳，以避免將表單資料讀入記憶體。
@@ -558,11 +558,11 @@ FiltersSample.Filters.LogConstantFilter:Information: Method 'Hi' called
 `IFilterFactory.IsReusable`:
 
 * 是由 factory 所建立的篩選準則實例，可在其建立所在的要求範圍之外重複使用的提示。
-* ***不** 應搭配相依于非 singleton 存留期之服務的篩選準則使用。
+* ***不*** 應搭配相依于非 singleton 存留期之服務的篩選準則使用。
 
 ASP.NET Core 執行階段並不保證：
 
-_ 將建立篩選準則的單一實例。
+* 將會建立篩選條件的單一執行個體。
 * 將不會於稍後的時間從 DI 容器重新要求篩選條件。
 
 > [!WARNING] 
@@ -763,7 +763,7 @@ ASP.NET Core 包含內建的屬性型篩選條件，可對其進行子類別化�
 * 方法篩選條件巢狀位於控制器篩選條件內。
 * 控制器篩選條件巢狀位於全域篩選條件內。
 
-### <a name="controller-and-no-locrazor-page-level-filters"></a>控制器和 Razor 頁面層級篩選
+### <a name="controller-and-razor-page-level-filters"></a>控制器和 Razor 頁面層級篩選
 
 繼承自 <xref:Microsoft.AspNetCore.Mvc.Controller> 基底類別的每個控制器都會包含 [Controller.OnActionExecuting](xref:Microsoft.AspNetCore.Mvc.Controller.OnActionExecuting*)、[Controller.OnActionExecutionAsync](xref:Microsoft.AspNetCore.Mvc.Controller.OnActionExecutionAsync*)，以及 [Controller.OnActionExecuted](xref:Microsoft.AspNetCore.Mvc.Controller.OnActionExecuted*)
 `OnActionExecuted` 方法。 這些方法會：

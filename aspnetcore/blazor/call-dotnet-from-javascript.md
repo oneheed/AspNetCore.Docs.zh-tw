@@ -19,14 +19,14 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/call-dotnet-from-javascript
-ms.openlocfilehash: e602f29e6932280f4625ade64201ff232e02150d
-ms.sourcegitcommit: 610936e4d3507f7f3d467ed7859ab9354ec158ba
+ms.openlocfilehash: 645bbb33b5a0a43e630095e375526b0686f86277
+ms.sourcegitcommit: 04ad9cd26fcaa8bd11e261d3661f375f5f343cdc
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 01/25/2021
-ms.locfileid: "98751637"
+ms.lasthandoff: 02/10/2021
+ms.locfileid: "100106579"
 ---
-# <a name="call-net-methods-from-javascript-functions-in-aspnet-core-no-locblazor"></a>從 ASP.NET Core 中的 JavaScript 函式呼叫 .NET 方法 Blazor
+# <a name="call-net-methods-from-javascript-functions-in-aspnet-core-blazor"></a>從 ASP.NET Core 中的 JavaScript 函式呼叫 .NET 方法 Blazor
 
 [Javier Calvarro Nelson](https://github.com/javiercn)、 [Daniel Roth](https://github.com/danroth27)、 [Shashikant Rudrawadi](http://wisne.co)和[Luke Latham](https://github.com/guardrex)
 
@@ -41,9 +41,9 @@ Blazor應用程式可以從 javascript 函式的 .net 方法和 .net 方法中�
 
 ## <a name="static-net-method-call"></a>靜態 .NET 方法呼叫
 
-若要從 JavaScript 叫用靜態 .NET 方法，請使用 `DotNet.invokeMethod` 或 `DotNet.invokeMethodAsync` 函數。 傳入您想要呼叫之靜態方法的識別碼、包含函數的元件名稱，以及任何引數。 非同步版本是支援案例的首選 Blazor Server 。 .NET 方法必須是公用、靜態，且具有 [`[JSInvokable]`](xref:Microsoft.JSInterop.JSInvokableAttribute) 屬性。 目前不支援呼叫開放式泛型方法。
+若要從 JavaScript 叫用靜態 .NET 方法，請使用 `DotNet.invokeMethod` 或 `DotNet.invokeMethodAsync` 函數。 傳入您想要呼叫之靜態方法的識別碼、包含函數的元件名稱，以及任何引數。 非同步版本是支援案例的首選 Blazor Server 。 .NET 方法必須是公用、靜態，且具有[ `[JSInvokable]` 屬性](xref:Microsoft.JSInterop.JSInvokableAttribute)。 目前不支援呼叫開放式泛型方法。
 
-範例應用程式包含可傳回陣列的 c # 方法 `int` 。 [`[JSInvokable]`](xref:Microsoft.JSInterop.JSInvokableAttribute)屬性會套用至方法。
+範例應用程式包含可傳回陣列的 c # 方法 `int` 。 [ `[JSInvokable]` 屬性](xref:Microsoft.JSInterop.JSInvokableAttribute)會套用至方法。
 
 `Pages/JsInterop.razor`:
 
@@ -78,7 +78,7 @@ Array(4) [ 1, 2, 3, 4 ]
 
 第四個數組值會被推送至所傳回的陣列 (`data.push(4);`) `ReturnArrayAsync` 。
 
-根據預設，方法識別碼是方法名稱，但您可以使用屬性函式來指定不同的識別碼 [`[JSInvokable]`](xref:Microsoft.JSInterop.JSInvokableAttribute) ：
+根據預設，方法識別碼是方法名稱，但您可以使用[ `[JSInvokable]` 屬性](xref:Microsoft.JSInterop.JSInvokableAttribute)函式來指定不同的識別碼：
 
 ```csharp
 @code {

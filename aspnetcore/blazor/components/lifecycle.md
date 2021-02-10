@@ -19,16 +19,14 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/components/lifecycle
-ms.openlocfilehash: f19d25006009723a8e69f24af92155f65c2195fe
-ms.sourcegitcommit: 19a004ff2be73876a9ef0f1ac44d0331849ad159
+ms.openlocfilehash: 03a49c827a1f70e6b721adf293857bb33475ed36
+ms.sourcegitcommit: 04ad9cd26fcaa8bd11e261d3661f375f5f343cdc
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 02/07/2021
-ms.locfileid: "99804457"
+ms.lasthandoff: 02/10/2021
+ms.locfileid: "100107073"
 ---
 # <a name="aspnet-core-blazor-lifecycle"></a>ASP.NET Core Blazor 生命週期
-
-依 [Luke Latham](https://github.com/guardrex) 和 [Daniel Roth](https://github.com/danroth27)
 
 此 Blazor 架構包含同步和非同步生命週期方法。 覆寫生命週期方法，以在元件初始化和轉譯期間對元件執行額外的作業。
 
@@ -110,7 +108,7 @@ ms.locfileid: "99804457"
 
 <xref:Microsoft.AspNetCore.Components.ParameterView> 每次呼叫時，包含元件的參數值集 <xref:Microsoft.AspNetCore.Components.ComponentBase.SetParametersAsync%2A> 。
 
-的預設實 <xref:Microsoft.AspNetCore.Components.ComponentBase.SetParametersAsync%2A> 值會設定每個屬性的值，其具有的 [`[Parameter]`](xref:Microsoft.AspNetCore.Components.ParameterAttribute) 或 [`[CascadingParameter]`](xref:Microsoft.AspNetCore.Components.CascadingParameterAttribute) 屬性在中具有對應的值 <xref:Microsoft.AspNetCore.Components.ParameterView> 。 在中沒有對應值的參數 <xref:Microsoft.AspNetCore.Components.ParameterView> 會保持不變。
+的預設實 <xref:Microsoft.AspNetCore.Components.ComponentBase.SetParametersAsync%2A> 值會設定每個屬性的值，其具有的 [`[Parameter]`](xref:Microsoft.AspNetCore.Components.ParameterAttribute) 或[ `[CascadingParameter]` 屬性](xref:Microsoft.AspNetCore.Components.CascadingParameterAttribute)在中具有對應的值 <xref:Microsoft.AspNetCore.Components.ParameterView> 。 在中沒有對應值的參數 <xref:Microsoft.AspNetCore.Components.ParameterView> 會保持不變。
 
 如果 [`base.SetParametersAsync`](xref:Microsoft.AspNetCore.Components.ComponentBase.SetParametersAsync%2A) 未叫用，自訂程式碼就能以任何需要的方式解讀傳入的參數值。 例如，不需要將傳入參數指派給類別上的屬性。
 
@@ -140,7 +138,7 @@ protected override async Task OnInitializedAsync()
 }
 ```
 
-Blazor Server 將 [其內容呼叫呈現](xref:blazor/fundamentals/additional-scenarios#render-mode) <xref:Microsoft.AspNetCore.Components.ComponentBase.OnInitializedAsync%2A> *兩次* 的應用程式：
+Blazor Server 將 [其內容呼叫呈現](xref:blazor/fundamentals/signalr#render-mode) <xref:Microsoft.AspNetCore.Components.ComponentBase.OnInitializedAsync%2A> *兩次* 的應用程式：
 
 * 一開始是以靜態方式將元件轉譯為頁面的一部分。
 * 第二次當瀏覽器重新建立與伺服器的連接時。
@@ -319,7 +317,7 @@ public class WeatherForecastService
 }
 ```
 
-如需的詳細資訊 <xref:Microsoft.AspNetCore.Mvc.TagHelpers.ComponentTagHelper.RenderMode> ，請參閱 <xref:blazor/fundamentals/additional-scenarios#render-mode> 。
+如需的詳細資訊 <xref:Microsoft.AspNetCore.Mvc.TagHelpers.ComponentTagHelper.RenderMode> ，請參閱 <xref:blazor/fundamentals/signalr#render-mode> 。
 
 ## <a name="detect-when-the-app-is-prerendering"></a>偵測應用程式何時進行呈現
 
@@ -343,7 +341,45 @@ public class WeatherForecastService
 }
 ```
 
-針對非同步處置工作，請使用 `DisposeAsync` `Dispose` 上述範例中的取代：
+如果物件需要處置，當呼叫時，可以使用 lambda 來處置物件 <xref:System.IDisposable.Dispose%2A?displayProperty=nameWithType> ：
+
+`Pages/CounterWithTimerDisposal.razor`:
+
+```razor
+@page "/counter-with-timer-disposal"
+@using System.Timers
+@implements IDisposable
+
+<h1>Counter with <code>Timer</code> disposal</h1>
+
+<p>Current count: @currentCount</p>
+
+@code {
+    private int currentCount = 0;
+    private Timer timer = new Timer(1000);
+
+    protected override void OnInitialized()
+    {
+        timer.Elapsed += (sender, eventArgs) => OnTimerCallback();
+        timer.Start();
+    }
+
+    private void OnTimerCallback()
+    {
+        _ = InvokeAsync(() =>
+        {
+            currentCount++;
+            StateHasChanged();
+        });
+    }
+
+    public void IDisposable.Dispose() => timer.Dispose();
+}
+```
+
+上述範例會出現在中 <xref:blazor/components/rendering#receiving-a-call-from-something-external-to-the-blazor-rendering-and-event-handling-system> 。
+
+針對非同步處置工作，請使用 `DisposeAsync` 取代 <xref:System.IDisposable.Dispose> ：
 
 ```csharp
 public async ValueTask DisposeAsync()
@@ -355,7 +391,7 @@ public async ValueTask DisposeAsync()
 > [!NOTE]
 > <xref:Microsoft.AspNetCore.Components.ComponentBase.StateHasChanged%2A>不支援在中呼叫 `Dispose` 。 <xref:Microsoft.AspNetCore.Components.ComponentBase.StateHasChanged%2A> 可能會在卸載轉譯器的過程中叫用，因此不支援在該時間點要求 UI 更新。
 
-取消訂閱來自 .NET 事件的事件處理常式。 下列[ Blazor 表單](xref:blazor/forms-validation)範例示範如何在方法中解除程式事件處理常式的掛鉤 `Dispose` ：
+取消訂閱來自 .NET 事件的事件處理常式。 下列[ Blazor 表單](xref:blazor/forms-validation)範例示範如何在方法中取消訂閱事件處理常式 `Dispose` ：
 
 * 私用欄位和 lambda 方法
 
@@ -364,7 +400,47 @@ public async ValueTask DisposeAsync()
 * 私用方法方法
 
   [!code-razor[](lifecycle/samples_snapshot/event-handler-disposal-2.razor?highlight=16,26)]
-  
+
+使用 [匿名](/dotnet/csharp/programming-guide/statements-expressions-operators/anonymous-functions)函式、方法或運算式時，不需要執行 <xref:System.IDisposable> 和取消訂閱委派。 不過， **當公開事件的物件存留時間超過註冊委派之元件的存留期時**，無法取消訂閱委派會是一個問題。 發生這種情況時，會造成記憶體流失的結果，因為已註冊的委派會讓原始物件保持運作。 因此，當您知道事件委派會快速處置時，請使用下列方法。 如果不確定需要處置的物件存留期，請訂閱委派方法並適當地處置委派，如先前的範例所示。
+
+* 匿名 lambda 方法方法 (不需要明確處置) 
+
+  ```csharp
+  private void HandleFieldChanged(object sender, FieldChangedEventArgs e)
+  {
+      formInvalid = !editContext.Validate();
+      StateHasChanged();
+  }
+
+  protected override void OnInitialized()
+  {
+      editContext = new EditContext(starship);
+      editContext.OnFieldChanged += (s, e) => HandleFieldChanged((editContext)s, e);
+  }
+  ```
+
+* 匿名 lambda 運算式方法 (不需要明確處置) 
+
+  ```csharp
+  private ValidationMessageStore messageStore;
+
+  [CascadingParameter]
+  private EditContext CurrentEditContext { get; set; }
+
+  protected override void OnInitialized()
+  {
+      ...
+
+      messageStore = new ValidationMessageStore(CurrentEditContext);
+
+      CurrentEditContext.OnValidationRequested += (s, e) => messageStore.Clear();
+      CurrentEditContext.OnFieldChanged += (s, e) => 
+          messageStore.Clear(e.FieldIdentifier);
+  }
+  ```
+
+  上述具有匿名 lambda 運算式的程式碼完整範例會出現在中 <xref:blazor/forms-validation#validator-components> 。
+
 如需詳細資訊，請參閱在執行和方法時 [清除非受控資源](/dotnet/standard/garbage-collection/unmanaged) 和後續的主題 `Dispose` `DisposeAsync` 。
 
 ## <a name="cancelable-background-work"></a>可取消的背景工作
@@ -439,4 +515,4 @@ public async ValueTask DisposeAsync()
 
 ## <a name="blazor-server-reconnection-events"></a>Blazor Server 重新連接事件
 
-本文所涵蓋的元件生命週期事件，與重新[ Blazor Server 連接事件處理常式](xref:blazor/fundamentals/additional-scenarios#reflect-the-connection-state-in-the-ui)分開運作。 當 Blazor Server 應用程式失去其 SignalR 與用戶端的連線時，只會中斷 UI 更新。 重新建立連接時，會繼續 UI 更新。 如需線路處理程式事件和設定的詳細資訊，請參閱 <xref:blazor/fundamentals/additional-scenarios> 。
+本文所涵蓋的元件生命週期事件，與重新[ Blazor Server 連接事件處理常式](xref:blazor/fundamentals/signalr#reflect-the-connection-state-in-the-ui)分開運作。 當 Blazor Server 應用程式失去其 SignalR 與用戶端的連線時，只會中斷 UI 更新。 重新建立連接時，會繼續 UI 更新。 如需線路處理程式事件和設定的詳細資訊，請參閱 <xref:blazor/fundamentals/signalr> 。

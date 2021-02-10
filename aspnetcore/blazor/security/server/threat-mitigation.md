@@ -19,14 +19,14 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/security/server/threat-mitigation
-ms.openlocfilehash: 4256e90ca5f185992a73d1e43460ca5d27159d6f
-ms.sourcegitcommit: d4836f9b7c508f51c6c4ee6d0cc719b38c1729c4
+ms.openlocfilehash: 270589b1effc8d82f54d2760b315fa2686699f67
+ms.sourcegitcommit: 04ad9cd26fcaa8bd11e261d3661f375f5f343cdc
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 01/25/2021
-ms.locfileid: "98758275"
+ms.lasthandoff: 02/10/2021
+ms.locfileid: "100106748"
 ---
-# <a name="threat-mitigation-guidance-for-aspnet-core-no-locblazor-server"></a>ASP.NET Core 的威脅風險降低指導方針 Blazor Server
+# <a name="threat-mitigation-guidance-for-aspnet-core-blazor-server"></a>ASP.NET Core 的威脅風險降低指導方針 Blazor Server
 
 [Javier Calvarro Nelson](https://github.com/javiercn)
 
@@ -41,7 +41,7 @@ Blazor Server 應用程式採用具 *狀態* 的資料處理模型，其中伺�
 * 不適用於受限的環境。
 * 由於安全性風險在受限的環境中很低，因此不值得實行成本。
 
-## <a name="no-locblazor-and-shared-state"></a>Blazor 和共用狀態
+## <a name="blazor-and-shared-state"></a>Blazor 和共用狀態
 
 [!INCLUDE[](~/blazor/includes/security/blazor-shared-state.md)]
 
@@ -108,20 +108,18 @@ Blazor 用戶端會針對每個會話建立單一連線，只要開啟瀏覽器�
 
 ## <a name="denial-of-service-dos-attacks"></a>拒絕服務 (DoS) 的攻擊
 
-阻絕服務 (DoS) 攻擊涉及用戶端，導致伺服器耗盡其一或多個資源，使應用程式無法使用。 Blazor Server 應用程式包含一些預設限制，並且依賴其他 ASP.NET Core 和 SignalR 限制來防止設定為的 DoS 攻擊 <xref:Microsoft.AspNetCore.Components.Server.CircuitOptions> 。
+阻絕服務 (DoS) 攻擊涉及用戶端，導致伺服器耗盡其一或多個資源，使應用程式無法使用。 Blazor Server 應用程式包含預設限制，並且依賴其他 ASP.NET Core 和 SignalR 限制，以防止在上設定的 DoS 攻擊 <xref:Microsoft.AspNetCore.Components.Server.CircuitOptions> ：
 
-| Blazor Server 應用程式限制 | 描述 | 預設 |
-| --- | --- | --- |
-| <xref:Microsoft.AspNetCore.Components.Server.CircuitOptions.DisconnectedCircuitMaxRetained> | 指定伺服器一次保存在記憶體中的中斷連接電路數目上限。 | 100 |
-| <xref:Microsoft.AspNetCore.Components.Server.CircuitOptions.DisconnectedCircuitRetentionPeriod> | 中斷連接的電路在中斷之前保留在記憶體中的最大時間量。 | 3 分鐘 |
-| <xref:Microsoft.AspNetCore.Components.Server.CircuitOptions.JSInteropDefaultCallTimeout> | 在將非同步 JavaScript 函式呼叫計時之前，伺服器所等待的最大時間量。 | 1 分鐘 |
-| <xref:Microsoft.AspNetCore.Components.Server.CircuitOptions.MaxBufferedUnacknowledgedRenderBatches> | 伺服器在指定時間為每個迴圈保留記憶體中的未認可轉譯批次數目上限，以支援健全的重新連接。 達到此限制之後，伺服器會停止產生新的轉譯批次，直到用戶端認可一或多個批次為止。 | 10 |
+* <xref:Microsoft.AspNetCore.Components.Server.CircuitOptions.DisconnectedCircuitMaxRetained?displayProperty=nameWithType>
+* <xref:Microsoft.AspNetCore.Components.Server.CircuitOptions.DisconnectedCircuitRetentionPeriod?displayProperty=nameWithType>
+* <xref:Microsoft.AspNetCore.Components.Server.CircuitOptions.JSInteropDefaultCallTimeout?displayProperty=nameWithType>
+* <xref:Microsoft.AspNetCore.Components.Server.CircuitOptions.MaxBufferedUnacknowledgedRenderBatches?displayProperty=nameWithType>
+* <xref:Microsoft.AspNetCore.SignalR.HubConnectionContextOptions.MaximumReceiveMessageSize?displayProperty=nameWithType>
 
-使用設定單一內送中樞訊息的最大訊息大小 <xref:Microsoft.AspNetCore.SignalR.HubConnectionContextOptions> 。
+如需詳細資訊和設定程式碼撰寫範例，請參閱下列文章：
 
-| SignalR 和 ASP.NET Core 限制 | 描述 | 預設 |
-| --- | --- | --- |
-| <xref:Microsoft.AspNetCore.SignalR.HubConnectionContextOptions.MaximumReceiveMessageSize?displayProperty=nameWithType> | 個別訊息的訊息大小。 | 32 KB |
+* <xref:blazor/fundamentals/signalr>
+* <xref:signalr/configuration>
 
 ## <a name="interactions-with-the-browser-client"></a>與瀏覽器 (用戶端) 的互動
 

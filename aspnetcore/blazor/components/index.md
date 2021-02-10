@@ -19,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/components/index
-ms.openlocfilehash: efc73022d0bd8c29595f9bed1c06fe07002eb54a
-ms.sourcegitcommit: e311cfb77f26a0a23681019bd334929d1aaeda20
+ms.openlocfilehash: 111512916cb7f0a4fc1f17648e2f9c69e366dff3
+ms.sourcegitcommit: 04ad9cd26fcaa8bd11e261d3661f375f5f343cdc
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 02/03/2021
-ms.locfileid: "99530095"
+ms.lasthandoff: 02/10/2021
+ms.locfileid: "100107047"
 ---
 # <a name="create-and-use-aspnet-core-razor-components"></a>建立和使用 ASP.NET Core Razor 元件
 
@@ -268,7 +268,7 @@ namespace BlazorSample
 
 ### <a name="component-parameters"></a>元件參數
 
-元件可以有 *元件參數*，這些參數是使用元件類別上的公用簡單或複雜屬性（attribute）來定義的 [`[Parameter]`](xref:Microsoft.AspNetCore.Components.ParameterAttribute) 。 使用這些屬性來指定標記中元件的引數。
+元件可以有 *元件參數*，這些參數是使用元件類別上的公用簡單或複雜屬性（ [ `[Parameter]` attribute](xref:Microsoft.AspNetCore.Components.ParameterAttribute)）來定義的。 使用這些屬性來指定標記中元件的引數。
 
 `Components/ChildComponent.razor`:
 
@@ -396,7 +396,7 @@ public string Title { get; set; } = "Panel Title from Child";
        size="50">
 ```
 
-若要接受任意屬性，請使用 [`[Parameter]`](xref:Microsoft.AspNetCore.Components.ParameterAttribute) <xref:Microsoft.AspNetCore.Components.ParameterAttribute.CaptureUnmatchedValues> 屬性設定為的屬性來定義元件參數 `true` ：
+若要接受任意屬性，請使用屬性設定為[ `[Parameter]` 的屬性](xref:Microsoft.AspNetCore.Components.ParameterAttribute)來定義元件參數 <xref:Microsoft.AspNetCore.Components.ParameterAttribute.CaptureUnmatchedValues> `true` ：
 
 ```razor
 @code {
@@ -584,7 +584,10 @@ public class NotifierService
 }
 ```
 
-在上述範例中，會在的 `NotifierService` 同步處理內容之外叫用元件的 `OnNotify` 方法 Blazor 。 `InvokeAsync` 用來切換至正確的內容，並將轉譯排入佇列。 如需詳細資訊，請參閱<xref:blazor/components/rendering>。
+在上述範例中：
+
+* `NotifierService` 在的同步處理內容之外叫用元件的 `OnNotify` 方法 Blazor 。 `InvokeAsync` 用來切換至正確的內容，並將轉譯排入佇列。 如需詳細資訊，請參閱<xref:blazor/components/rendering>。
+* 元件會執行 <xref:System.IDisposable> ，而且 `OnNotify` 委派會在方法中取消訂閱，而此 `Dispose` 方法會在處置元件時由架構呼叫。 如需詳細資訊，請參閱<xref:blazor/components/lifecycle#component-disposal-with-idisposable>。
 
 ## <a name="use-key-to-control-the-preservation-of-elements-and-components"></a>使用 \@ 金鑰來控制元素和元件的保留
 
@@ -772,7 +775,7 @@ Blazor架構通常會施加安全的父系對子參數指派：
 
 ## <a name="apply-an-attribute"></a>套用屬性
 
-您可以使用指示詞將屬性套用至 Razor 元件 [`@attribute`][7] 。 下列範例會將 [`[Authorize]`](xref:Microsoft.AspNetCore.Authorization.AuthorizeAttribute) 屬性套用至元件類別：
+您可以使用指示詞將屬性套用至 Razor 元件 [`@attribute`][7] 。 下列範例會將[ `[Authorize]` 屬性](xref:Microsoft.AspNetCore.Authorization.AuthorizeAttribute)套用至元件類別：
 
 ```razor
 @page "/"

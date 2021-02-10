@@ -16,12 +16,12 @@ no-loc:
 - Razor
 - SignalR
 uid: fundamentals/static-files
-ms.openlocfilehash: d97caeffc6e8beebddb01a5bd126d61ba988de65
-ms.sourcegitcommit: ebc5beccba5f3f7619de20baa58ad727d2a3d18c
+ms.openlocfilehash: fad569ab06735600299d8051a258651e329db8ce
+ms.sourcegitcommit: 04ad9cd26fcaa8bd11e261d3661f375f5f343cdc
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 01/22/2021
-ms.locfileid: "98689288"
+ms.lasthandoff: 02/10/2021
+ms.locfileid: "100107177"
 ---
 # <a name="static-files-in-aspnet-core"></a>ASP.NET Core 中的靜態檔案
 
@@ -119,11 +119,11 @@ ASP.NET Core 範本會 <xref:Microsoft.AspNetCore.Builder.StaticFileExtensions.U
   
   [!code-csharp[](static-files/samples/3.x/StaticFileAuth/Startup.cs?name=snippet1&highlight=20-25)]
 
-  在上述程式碼中，fallback 授權原則會要求 ***all** _ 使用者進行驗證。 指定自己的授權需求的端點（例如控制器、頁面等） Razor 不會使用 fallback 授權原則。 例如，使用 Razor 或的頁面、控制器或動作方法，會使用已套用 `[AllowAnonymous]` `[Authorize(PolicyName="MyPolicy")]` 的授權屬性，而非 fallback 授權原則。
+  在上述程式碼中，fallback 授權原則會要求 ***所有*** 使用者進行驗證。 指定自己的授權需求的端點（例如控制器、頁面等） Razor 不會使用 fallback 授權原則。 例如，使用 Razor 或的頁面、控制器或動作方法，會使用已套用 `[AllowAnonymous]` `[Authorize(PolicyName="MyPolicy")]` 的授權屬性，而非 fallback 授權原則。
 
   <xref:Microsoft.AspNetCore.Authorization.AuthorizationPolicyBuilder.RequireAuthenticatedUser%2A> 加入 <xref:Microsoft.AspNetCore.Authorization.Infrastructure.DenyAnonymousAuthorizationRequirement> 目前的實例，這會強制驗證目前的使用者。
 
-  下的靜態資產可 `wwwroot` 公開存取，因為預設靜態檔案中介軟體 (`app.UseStaticFiles();`) 會先呼叫 `UseAuthentication` 。 _MyStaticFiles * 資料夾中的靜態資產需要驗證。 [範例程式碼](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/static-files/samples)會示範這一點。
+  下的靜態資產可 `wwwroot` 公開存取，因為預設靜態檔案中介軟體 (`app.UseStaticFiles();`) 會先呼叫 `UseAuthentication` 。 *>mystaticfiles* 資料夾中的靜態資產需要驗證。 [範例程式碼](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/static-files/samples)會示範這一點。
 
 根據授權提供檔案的替代方法是：
 
@@ -469,7 +469,7 @@ app.UseFileServer(enableDirectoryBrowsing: true);
 
 請參閱 [MIME 內容類型](https://www.iana.org/assignments/media-types/media-types.xhtml)。
 
-如需在 <xref:Microsoft.AspNetCore.StaticFiles.FileExtensionContentTypeProvider> 伺服器應用程式中使用自訂或設定其他的詳細資訊 <xref:Microsoft.AspNetCore.Builder.StaticFileOptions> Blazor ，請參閱 <xref:blazor/fundamentals/additional-scenarios#static-files> 。
+如需在 <xref:Microsoft.AspNetCore.StaticFiles.FileExtensionContentTypeProvider> 伺服器應用程式中使用自訂或設定其他的詳細資訊 <xref:Microsoft.AspNetCore.Builder.StaticFileOptions> Blazor ，請參閱 <xref:blazor/fundamentals/static-files> 。
 
 ## <a name="non-standard-content-types"></a>非標準的內容類型
 

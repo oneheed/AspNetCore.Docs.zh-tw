@@ -19,14 +19,14 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/security/webassembly/index
-ms.openlocfilehash: 0b555ad7befe882c4ffd06e2505a9edc1263eee2
-ms.sourcegitcommit: 83524f739dd25fbfa95ee34e95342afb383b49fe
+ms.openlocfilehash: fc2ebae6e88e312aafec790229f978c3130e64de
+ms.sourcegitcommit: 04ad9cd26fcaa8bd11e261d3661f375f5f343cdc
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 01/29/2021
-ms.locfileid: "99057079"
+ms.lasthandoff: 02/10/2021
+ms.locfileid: "100106683"
 ---
-# <a name="secure-aspnet-core-no-locblazor-webassembly"></a>安全 ASP.NET Core Blazor WebAssembly
+# <a name="secure-aspnet-core-blazor-webassembly"></a>安全 ASP.NET Core Blazor WebAssembly
 
 [Javier Calvarro Nelson](https://github.com/javiercn)
 
@@ -52,7 +52,7 @@ Blazor WebAssembly 支援透過程式庫使用 OIDC 來驗證和授權應用程�
 
 此連結 [`Microsoft.AspNetCore.Components.WebAssembly.Authentication`](https://www.nuget.org/packages/Microsoft.AspNetCore.Components.WebAssembly.Authentication) 庫提供數個基本專案，以使用 OIDC 來執行驗證和授權。 大致來說，驗證的運作方式如下：
 
-* 當匿名使用者選取登入按鈕或要求套用屬性的頁面時 [`[Authorize]`](xref:Microsoft.AspNetCore.Authorization.AuthorizeAttribute) ，系統會將使用者重新導向至應用程式的登入頁面， (`/authentication/login`) 。
+* 當匿名使用者選取登入按鈕或要求套用[ `[Authorize]` 屬性](xref:Microsoft.AspNetCore.Authorization.AuthorizeAttribute)的頁面時，系統會將使用者重新導向至應用程式的登入頁面， (`/authentication/login`) 。
 * 在 [登入] 頁面中，驗證程式庫會準備重新導向至授權端點。 授權端點位於 Blazor WebAssembly 應用程式之外，而且可以裝載于不同的來源。 端點負責判斷使用者是否已通過驗證，並在回應中發出一或多個權杖。 驗證程式庫會提供登入回呼，以接收驗證回應。
   * 如果使用者未經過驗證，系統會將使用者重新導向至基礎驗證系統，這通常是 ASP.NET Core Identity 。
   * 如果使用者已通過驗證，授權端點會產生適當的權杖，並將瀏覽器重新導向回登入回呼端點 (`/authentication/login-callback`) 。
@@ -107,7 +107,7 @@ Blazor WebAssembly 支援透過程式庫使用 OIDC 來驗證和授權應用程�
 * [其他案例：自訂使用者](xref:blazor/security/webassembly/additional-scenarios#customize-the-user)
 * <xref:blazor/security/webassembly/aad-groups-roles>
 
-## <a name="azure-app-service-on-linux-with-no-locidentity-server"></a>使用 Identity 伺服器 Linux 上的 Azure App Service
+## <a name="azure-app-service-on-linux-with-identity-server"></a>使用 Identity 伺服器 Linux 上的 Azure App Service
 
 當部署至與伺服器 Linux 上的 Azure App Service 時，請明確指定簽發者 Identity 。 如需詳細資訊，請參閱<xref:security/authentication/identity/spa#azure-app-service-on-linux>。
 

@@ -2,7 +2,7 @@
   href: index.yml
 - name: ASP.NET Core 的新功能文件
   href: whats-new/index.yml
-- name: 概觀
+- name: 總覽
   items:
     - name: 關於 ASP.NET Core
       uid: index
@@ -326,8 +326,10 @@
               uid: blazor/fundamentals/logging
             - name: 處理錯誤
               uid: blazor/fundamentals/handle-errors
-            - name: 其他案例
-              uid: blazor/fundamentals/additional-scenarios
+            - name: SignalR
+              uid: blazor/fundamentals/signalr
+            - name: 靜態檔案
+              uid: blazor/fundamentals/static-files
         - name: 元件
           items:
             - name: 總覽
@@ -368,7 +370,7 @@
           uid: blazor/call-web-api
         - name: 安全性及身分識別
           items:
-            - name: 概觀
+            - name: 總覽
               uid: blazor/security/index
             - name: Blazor WebAssembly
               items:
@@ -440,6 +442,8 @@
               href: blazor/security/webassembly/index.md#authentication-component
             - name: AuthorizeView
               href: blazor/security/index.md#authorizeview-component
+            - name: CascadingValue
+              href: blazor/components/cascading-values-and-parameters.md#cascadingvalue-component
             - name: InputCheckbox
               href: blazor/forms-validation.md#built-in-forms-components
             - name: InputDate
@@ -505,7 +509,7 @@
     - name: 標籤協助程式
       uid: mvc/views/tag-helpers/builtin-th/Index
       items:
-        - name: 概觀
+        - name: 總覽
           uid: mvc/views/tag-helpers/intro
         - name: 建立標記協助程式
           uid: mvc/views/tag-helpers/authoring

@@ -16,7 +16,7 @@
   若要解決此錯誤：
 
   1. 在 Azure 入口網站中，存取 [應用程式的資訊清單](/azure/active-directory/develop/reference-app-manifest)。
-  1. 將 [`allowPublicClient`](/azure/active-directory/develop/reference-app-manifest#allowpublicclient-attribute) 屬性設為 `null` 或 `true` 。
+  1. 將[ `allowPublicClient` 屬性](/azure/active-directory/develop/reference-app-manifest#allowpublicclient-attribute)設為 `null` 或 `true` 。
 
 ::: moniker-end
 

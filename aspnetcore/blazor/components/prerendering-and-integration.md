@@ -20,16 +20,14 @@ no-loc:
 - SignalR
 uid: blazor/components/prerendering-and-integration
 zone_pivot_groups: blazor-hosting-models
-ms.openlocfilehash: 3402117334548f9d90880d4f536e8baa288e7bc9
-ms.sourcegitcommit: 3593c4efa707edeaaceffbfa544f99f41fc62535
+ms.openlocfilehash: d120440c292d15b7741260ed31af92d60db2261c
+ms.sourcegitcommit: 1166b0ff3828418559510c661e8240e5c5717bb7
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 01/04/2021
-ms.locfileid: "97506977"
+ms.lasthandoff: 02/12/2021
+ms.locfileid: "100280071"
 ---
-# <a name="prerender-and-integrate-aspnet-core-no-locrazor-components"></a>ASP.NET Core 元件的已呈現和整合 Razor
-
-依 [Luke Latham](https://github.com/guardrex) 和 [Daniel Roth](https://github.com/danroth27)
+# <a name="prerender-and-integrate-aspnet-core-razor-components"></a>ASP.NET Core 元件的已呈現和整合 Razor
 
 ::: zone pivot="webassembly"
 
@@ -284,7 +282,7 @@ Razor 元件可以整合至 Razor 應用程式中的頁面和 MVC 應用程式 B
 
 1. 將元件整合至任何頁面或視圖中。 如需詳細資訊，請參閱 [從頁面或視圖區段呈現元件](#render-components-from-a-page-or-view) 。
 
-## <a name="use-routable-components-in-a-no-locrazor-pages-app"></a>在頁面應用程式中使用可路由的元件 Razor
+## <a name="use-routable-components-in-a-razor-pages-app"></a>在頁面應用程式中使用可路由的元件 Razor
 
 *本節適用于新增直接可從使用者要求路由傳送的元件。*
 
@@ -464,7 +462,7 @@ Razor 元件可以整合至 Razor 應用程式中的頁面和 MVC 應用程式 B
 }
 ```
 
-如需詳細資訊，請參閱 <xref:mvc/views/tag-helpers/builtin-th/component-tag-helper> 。
+如需詳細資訊，請參閱<xref:mvc/views/tag-helpers/builtin-th/component-tag-helper>。
 
 ### <a name="render-noninteractive-components"></a>轉譯非互動式元件
 
@@ -487,7 +485,7 @@ Razor 元件可以整合至 Razor 應用程式中的頁面和 MVC 應用程式 B
 }
 ```
 
-如需詳細資訊，請參閱 <xref:mvc/views/tag-helpers/builtin-th/component-tag-helper> 。
+如需詳細資訊，請參閱<xref:mvc/views/tag-helpers/builtin-th/component-tag-helper>。
 
 ## <a name="component-namespaces"></a>元件命名空間
 

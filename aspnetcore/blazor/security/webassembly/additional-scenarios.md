@@ -19,16 +19,14 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/security/webassembly/additional-scenarios
-ms.openlocfilehash: 964f72e4611798d30e15112297730b98608f608f
-ms.sourcegitcommit: 04ad9cd26fcaa8bd11e261d3661f375f5f343cdc
+ms.openlocfilehash: 6c3d2f93e43cf3660a12f1c8cef1d381b587f5ea
+ms.sourcegitcommit: 1166b0ff3828418559510c661e8240e5c5717bb7
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 02/10/2021
-ms.locfileid: "100106722"
+ms.lasthandoff: 02/12/2021
+ms.locfileid: "100280531"
 ---
 # <a name="aspnet-core-blazor-webassembly-additional-security-scenarios"></a>ASP.NET Core Blazor WebAssembly 額外的安全性案例
-
-由 [Javier Calvarro Nelson](https://github.com/javiercn) 和 [Luke Latham](https://github.com/guardrex)
 
 ## <a name="attach-tokens-to-outgoing-requests"></a>將權杖附加至傳出要求
 
@@ -1080,7 +1078,7 @@ Server response: <strong>@serverResponse</strong>
 
 ## <a name="build-a-custom-version-of-the-authenticationmsal-javascript-library"></a>建立驗證的自訂版本 MSAL JavaScript 程式庫
 
-如果應用程式需要 [適用于 JavaScript 的 Microsoft 驗證程式庫自訂版本 ( # A0) ](https://www.npmjs.com/package/@azure/msal-browser)，請執行下列步驟：
+如果應用程式需要 [適用于 JavaScript 的 Microsoft 驗證程式庫 ](https://www.npmjs.com/package/@azure/msal-browser)自訂版本 (MSAL.js) ，請執行下列步驟：
 
 1. 確認系統具有最新的開發人員 .NET SDK，或從 [.NET Core SDK：安裝程式和二進位](https://github.com/dotnet/installer#installers-and-binaries)檔取得並安裝最新的開發人員 SDK。 此案例不需要設定內部 NuGet 摘要。
 1. 設定 GitHub 存放 `dotnet/aspnetcore` 庫，以根據 [組建 ASP.NET Core 來源](https://github.com/dotnet/aspnetcore/blob/main/docs/BuildFromSource.md)的檔進行開發。 分叉和複製或下載 [dotnet/Aspnetcore GitHub 存放庫](https://github.com/dotnet/aspnetcore)的 ZIP 封存。

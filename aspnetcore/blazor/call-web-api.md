@@ -19,16 +19,14 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/call-web-api
-ms.openlocfilehash: 18afa7faa254f89ef664e0188be357a85c790523
-ms.sourcegitcommit: 063a06b644d3ade3c15ce00e72a758ec1187dd06
+ms.openlocfilehash: b3c783623252512621a0cee7a3607c69cb6d09bb
+ms.sourcegitcommit: 1166b0ff3828418559510c661e8240e5c5717bb7
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 01/16/2021
-ms.locfileid: "98252431"
+ms.lasthandoff: 02/12/2021
+ms.locfileid: "100280275"
 ---
-# <a name="call-a-web-api-from-aspnet-core-no-locblazor"></a>從 ASP.NET Core 呼叫 web API Blazor
-
-[Luke Latham](https://github.com/guardrex)、 [Daniel Roth](https://github.com/danroth27)和[Juan De la cruz 一起探討](https://github.com/juandelacruz23)
+# <a name="call-a-web-api-from-aspnet-core-blazor"></a>從 ASP.NET Core 呼叫 web API Blazor
 
 > [!NOTE]
 > 本主題適用于 Blazor WebAssembly 。 [Blazor Server](xref:blazor/hosting-models#blazor-server) 應用程式會使用 <xref:System.Net.Http.HttpClient> 實例（通常是使用建立）來呼叫 Web api <xref:System.Net.Http.IHttpClientFactory> 。 如需適用于的指引 Blazor Server ，請參閱 <xref:fundamentals/http-requests> 。
@@ -346,7 +344,7 @@ builder.Services.AddHttpClient<WeatherForecastHttpClient>(client =>
 }
 ```
 
-.NET WebAssembly 的執行會 <xref:System.Net.Http.HttpClient> 使用 [WindowOrWorkerGlobalScope ( # B1 ](https://developer.mozilla.org/docs/Web/API/WindowOrWorkerGlobalScope/fetch)。 Fetch 可讓您設定數個 [要求特定的選項](https://developer.mozilla.org/docs/Web/API/WindowOrWorkerGlobalScope/fetch#Parameters)。 
+.NET WebAssembly 的執行會 <xref:System.Net.Http.HttpClient> 使用 [WindowOrWorkerGlobalScope () ](https://developer.mozilla.org/docs/Web/API/WindowOrWorkerGlobalScope/fetch)。 Fetch 可讓您設定數個 [要求特定的選項](https://developer.mozilla.org/docs/Web/API/WindowOrWorkerGlobalScope/fetch#Parameters)。 
 
 您可以使用 <xref:System.Net.Http.HttpRequestMessage> 下表所示的擴充方法來設定 HTTP 提取要求選項。
 
@@ -367,7 +365,7 @@ HTTP 回應通常會在 Blazor WebAssembly 應用程式中進行緩衝處理，�
 requestMessage.SetBrowserRequestCredentials(BrowserRequestCredentials.Include);
 ```
 
-如需有關 Fetch API 選項的詳細資訊，請參閱 [MDN web 檔： WindowOrWorkerGlobalScope。提取 ( # A1：參數](https://developer.mozilla.org/docs/Web/API/WindowOrWorkerGlobalScope/fetch#Parameters)。
+如需有關 Fetch API 選項的詳細資訊，請參閱 [MDN web 檔： WindowOrWorkerGlobalScope () :P arameters](https://developer.mozilla.org/docs/Web/API/WindowOrWorkerGlobalScope/fetch#Parameters)。
 
 ## <a name="handle-errors"></a>處理錯誤
 

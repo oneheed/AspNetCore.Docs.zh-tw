@@ -19,16 +19,14 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/progressive-web-app
-ms.openlocfilehash: 63e6fc49283aec567f6a9d5bc05b7445fb38c33c
-ms.sourcegitcommit: 04ad9cd26fcaa8bd11e261d3661f375f5f343cdc
+ms.openlocfilehash: 515da543fc6b6cca0b90968b154d91b611ea3345
+ms.sourcegitcommit: 1166b0ff3828418559510c661e8240e5c5717bb7
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 02/10/2021
-ms.locfileid: "100106839"
+ms.lasthandoff: 02/12/2021
+ms.locfileid: "100280552"
 ---
 # <a name="build-progressive-web-applications-with-aspnet-core-blazor-webassembly"></a>使用 ASP.NET Core 建立漸進式 Web 應用程式 Blazor WebAssembly
-
-作者：[Steve Sanderson](https://github.com/SteveSandersonMS)
 
  (PWA) 的漸進式 Web 應用程式通常是使用新式瀏覽器 Api 和功能的單一頁面應用)  (程式，其行為就像桌面應用程式一樣。 Blazor WebAssembly 是以標準為基礎的用戶端 web 應用程式平臺，因此它可以使用任何瀏覽器 API，包括下列功能所需的 PWA Api：
 

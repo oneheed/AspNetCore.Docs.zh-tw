@@ -19,16 +19,14 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/webassembly-lazy-load-assemblies
-ms.openlocfilehash: 6e7fa6e231e97793fbf7e1ac1d208bf3013c6fce
-ms.sourcegitcommit: 3593c4efa707edeaaceffbfa544f99f41fc62535
+ms.openlocfilehash: e8589a1e288c39b487673fafc04c59fa07916335
+ms.sourcegitcommit: 1166b0ff3828418559510c661e8240e5c5717bb7
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 01/04/2021
-ms.locfileid: "97506564"
+ms.lasthandoff: 02/12/2021
+ms.locfileid: "100280667"
 ---
-# <a name="lazy-load-assemblies-in-aspnet-core-no-locblazor-webassembly"></a>ASP.NET Core 中的延遲載入元件 Blazor WebAssembly
-
-依 [Safia Abdalla](https://safia.rocks) 和 [Luke Latham](https://github.com/guardrex)
+# <a name="lazy-load-assemblies-in-aspnet-core-blazor-webassembly"></a>ASP.NET Core 中的延遲載入元件 Blazor WebAssembly
 
 Blazor WebAssembly 應用程式啟動效能可透過延後載入部分應用程式元件來改善，直到需要它們為止，這稱為「消極式 *載入*」。 例如，只有在使用者流覽至該元件時，才可以設定僅用來呈現單一元件的元件。 載入之後，元件會快取用戶端，並可供所有未來的導覽使用。
 
@@ -86,7 +84,7 @@ Blazor的 `Router` 元件會指定哪些元件會 Blazor 搜尋可路由傳送�
 * `Path`屬性是相對於應用程式基底路徑的使用者目的地路徑，例如 `/robot` 。
 * `CancellationToken`可以用來觀察非同步工作的取消。 `OnNavigateAsync` 當使用者流覽至另一個頁面時，會自動取消目前正在執行的流覽工作。
 
-在內部 `OnNavigateAsync` ，會執行邏輯來判斷要載入的元件。 選項包括：
+在內部 `OnNavigateAsync` ，會執行邏輯來判斷要載入的元件。 這些選項包括：
 
 * 方法內的條件式檢查 `OnNavigateAsync` 。
 * 對應至元件名稱之路由的查閱資料表，可插入元件或在區塊內執行 [`@code`](xref:mvc/views/razor#code) 。

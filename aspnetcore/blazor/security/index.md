@@ -19,16 +19,14 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/security/index
-ms.openlocfilehash: c786c00892772f9f0ce80c903bde495d4f2523f2
-ms.sourcegitcommit: 04ad9cd26fcaa8bd11e261d3661f375f5f343cdc
+ms.openlocfilehash: 9a14a8e16d8e50b47c479cf4d973459fbf61cec7
+ms.sourcegitcommit: 1166b0ff3828418559510c661e8240e5c5717bb7
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 02/10/2021
-ms.locfileid: "100106735"
+ms.lasthandoff: 02/12/2021
+ms.locfileid: "100280370"
 ---
 # <a name="aspnet-core-blazor-authentication-and-authorization"></a>ASP.NET Core Blazor 驗證與授權
-
-由 [Steve Sanderson](https://github.com/SteveSandersonMS) 和 [Luke Latham](https://github.com/guardrex)
 
 ASP.NET Core 支援在應用程式中設定和管理安全性 Blazor 。
 
@@ -300,6 +298,55 @@ builder.Services.AddAuthorizationCore();
 * 未驗證 (已登出) 的使用者視為未經授權。
 
 元件 <xref:Microsoft.AspNetCore.Components.Authorization.AuthorizeView> 可以用在 `NavMenu` 元件 (`Shared/NavMenu.razor`) ，以 (`<li>...</li>`) 為[ `NavLink` 元件](xref:blazor/fundamentals/routing#navlink-and-navmenu-components) () 顯示清單專案 <xref:Microsoft.AspNetCore.Components.Routing.NavLink> ，但請注意，此方法只會從轉譯的輸出中移除清單專案。 它不會防止使用者流覽至元件。
+
+從 Blazor 包含驗證的專案範本建立的應用程式會使用 `LoginDisplay` 相依于元件的元件 `AuthorizeView` 。 `AuthorizeView`元件會選擇性地向使用者顯示 Identity 相關工作的內容。 下列範例是來自 Blazor WebAssembly 專案範本。
+
+`Shared/LoginDisplay.razor`:
+
+```razor
+@using Microsoft.AspNetCore.Components.Authorization
+@using Microsoft.AspNetCore.Components.WebAssembly.Authentication
+
+@inject NavigationManager Navigation
+@inject SignOutSessionStateManager SignOutManager
+
+<AuthorizeView>
+    <Authorized>
+        Hello, @context.User.Identity.Name!
+        <button class="nav-link btn btn-link" @onclick="BeginLogout">Log out</button>
+    </Authorized>
+    <NotAuthorized>
+        <a href="authentication/login">Log in</a>
+    </NotAuthorized>
+</AuthorizeView>
+
+@code{
+    private async Task BeginLogout(MouseEventArgs args)
+    {
+        await SignOutManager.SetSignOutState();
+        Navigation.NavigateTo("authentication/logout");
+    }
+}
+```
+
+下列範例是來自 Blazor Server 專案範本，並使用 ASP.NET Core Identity `Identity` 應用程式區域中的端點來處理 Identity 相關的工作。
+
+`Shared/LoginDisplay.razor`:
+
+```razor
+<AuthorizeView>
+    <Authorized>
+        <a href="Identity/Account/Manage">Hello, @context.User.Identity.Name!</a>
+        <form method="post" action="Identity/Account/LogOut">
+            <button type="submit" class="nav-link btn btn-link">Log out</button>
+        </form>
+    </Authorized>
+    <NotAuthorized>
+        <a href="Identity/Account/Register">Register</a>
+        <a href="Identity/Account/Login">Log in</a>
+    </NotAuthorized>
+</AuthorizeView>
+```
 
 ### <a name="role-based-and-policy-based-authorization"></a>角色型和原則型授權
 

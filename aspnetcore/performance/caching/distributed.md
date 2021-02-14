@@ -19,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: performance/caching/distributed
-ms.openlocfilehash: 6d87c8de66bf5600189465b96dee903841106b6f
-ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
+ms.openlocfilehash: 6f89046f2e1805111dd81b3282253a72a7c6ea09
+ms.sourcegitcommit: 1166b0ff3828418559510c661e8240e5c5717bb7
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 10/30/2020
-ms.locfileid: "93061141"
+ms.lasthandoff: 02/12/2021
+ms.locfileid: "100281023"
 ---
 # <a name="distributed-caching-in-aspnet-core"></a>ASP.NET Core 中的分散式快取
 
@@ -129,12 +129,12 @@ Table and index were created successfully.
 
 [NCache](https://github.com/Alachisoft/NCache) 是一種開放原始碼的記憶體內部分散式快取，以原生方式在 .NET 和 .net Core 中開發。 NCache 可在本機運作，並設定為分散式快取叢集，適用于在 Azure 或其他裝載平臺上執行的 ASP.NET Core 應用程式。
 
-若要在本機電腦上安裝和設定 NCache，請參閱 [適用于 Windows 的 NCache 消費者入門指南](https://www.alachisoft.com/resources/docs/ncache-oss/getting-started-guide-windows/)。
+若要在本機電腦上安裝和設定 NCache，請參閱 [Windows ( .net 和 .Net Core) 的開始使用指南 ](https://www.alachisoft.com/resources/docs/ncache/getting-started-guide-windows/)。
 
 若要設定 NCache：
 
 1. 安裝 [NCache 開放原始碼 NuGet](https://www.nuget.org/packages/Alachisoft.NCache.OpenSource.SDK/)。
-1. 在 [ncconf](https://www.alachisoft.com/resources/docs/ncache-oss/admin-guide/client-config.html)中設定快取叢集。
+1. 在 [ncconf](https://www.alachisoft.com/resources/docs/ncache/admin-guide/client-config.html)中設定快取叢集。
 1. 將下列程式碼新增至 `Startup.ConfigureServices`：
 
    ```csharp
@@ -156,7 +156,7 @@ Table and index were created successfully.
 
 範例應用程式會插入到中供 <xref:Microsoft.Extensions.Caching.Distributed.IDistributedCache> `IndexModel` 索引頁面使用。
 
-每次載入 [索引] 頁面時，都會檢查快取中的快取時間 `OnGetAsync` 。 如果快取的時間尚未過期，則會顯示時間。 如果自上一次存取快取時間以來已經過了20秒 (上次載入此頁面的時間) ，則頁面會顯示快取的 *時間已過期* 。
+每次載入 [索引] 頁面時，都會檢查快取中的快取時間 `OnGetAsync` 。 如果快取的時間尚未過期，則會顯示時間。 如果自上一次存取快取時間以來已經過了20秒 (上次載入此頁面的時間) ，則頁面會顯示快取的 *時間已過期*。
 
 選取 [ **重設** 快取時間] 按鈕，立即將快取的時間更新為目前時間。 按鈕會觸發 `OnPostResetCachedTime` 處理常式方法。
 
@@ -299,12 +299,12 @@ Table and index were created successfully.
 
 [NCache](https://github.com/Alachisoft/NCache) 是一種開放原始碼的記憶體內部分散式快取，以原生方式在 .NET 和 .net Core 中開發。 NCache 可在本機運作，並設定為分散式快取叢集，適用于在 Azure 或其他裝載平臺上執行的 ASP.NET Core 應用程式。
 
-若要在本機電腦上安裝和設定 NCache，請參閱 [適用于 Windows 的 NCache 消費者入門指南](https://www.alachisoft.com/resources/docs/ncache-oss/getting-started-guide-windows/)。
+若要在本機電腦上安裝和設定 NCache，請參閱 [Windows ( .net 和 .Net Core) 的開始使用指南 ](https://www.alachisoft.com/resources/docs/ncache/getting-started-guide-windows/)。
 
 若要設定 NCache：
 
 1. 安裝 [NCache 開放原始碼 NuGet](https://www.nuget.org/packages/Alachisoft.NCache.OpenSource.SDK/)。
-1. 在 [ncconf](https://www.alachisoft.com/resources/docs/ncache-oss/admin-guide/client-config.html)中設定快取叢集。
+1. 在 [ncconf](https://www.alachisoft.com/resources/docs/ncache/admin-guide/client-config.html)中設定快取叢集。
 1. 將下列程式碼新增至 `Startup.ConfigureServices`：
 
    ```csharp
@@ -326,7 +326,7 @@ Table and index were created successfully.
 
 範例應用程式會插入到中供 <xref:Microsoft.Extensions.Caching.Distributed.IDistributedCache> `IndexModel` 索引頁面使用。
 
-每次載入 [索引] 頁面時，都會檢查快取中的快取時間 `OnGetAsync` 。 如果快取的時間尚未過期，則會顯示時間。 如果自上一次存取快取時間以來已經過了20秒 (上次載入此頁面的時間) ，則頁面會顯示快取的 *時間已過期* 。
+每次載入 [索引] 頁面時，都會檢查快取中的快取時間 `OnGetAsync` 。 如果快取的時間尚未過期，則會顯示時間。 如果自上一次存取快取時間以來已經過了20秒 (上次載入此頁面的時間) ，則頁面會顯示快取的 *時間已過期*。
 
 選取 [ **重設** 快取時間] 按鈕，立即將快取的時間更新為目前時間。 按鈕會觸發 `OnPostResetCachedTime` 處理常式方法。
 
@@ -475,12 +475,12 @@ services.AddDistributedRedisCache(options =>
 
 [NCache](https://github.com/Alachisoft/NCache) 是一種開放原始碼的記憶體內部分散式快取，以原生方式在 .NET 和 .net Core 中開發。 NCache 可在本機運作，並設定為分散式快取叢集，適用于在 Azure 或其他裝載平臺上執行的 ASP.NET Core 應用程式。
 
-若要在本機電腦上安裝和設定 NCache，請參閱 [適用于 Windows 的 NCache 消費者入門指南](https://www.alachisoft.com/resources/docs/ncache-oss/getting-started-guide-windows/)。
+若要在本機電腦上安裝和設定 NCache，請參閱 [Windows ( .net 和 .Net Core) 的開始使用指南 ](https://www.alachisoft.com/resources/docs/ncache/getting-started-guide-windows/)。
 
 若要設定 NCache：
 
 1. 安裝 [NCache 開放原始碼 NuGet](https://www.nuget.org/packages/Alachisoft.NCache.OpenSource.SDK/)。
-1. 在 [ncconf](https://www.alachisoft.com/resources/docs/ncache-oss/admin-guide/client-config.html)中設定快取叢集。
+1. 在 [ncconf](https://www.alachisoft.com/resources/docs/ncache/admin-guide/client-config.html)中設定快取叢集。
 1. 將下列程式碼新增至 `Startup.ConfigureServices`：
 
    ```csharp
@@ -502,7 +502,7 @@ services.AddDistributedRedisCache(options =>
 
 範例應用程式會插入到中供 <xref:Microsoft.Extensions.Caching.Distributed.IDistributedCache> `IndexModel` 索引頁面使用。
 
-每次載入 [索引] 頁面時，都會檢查快取中的快取時間 `OnGetAsync` 。 如果快取的時間尚未過期，則會顯示時間。 如果自上一次存取快取時間以來已經過了20秒 (上次載入此頁面的時間) ，則頁面會顯示快取的 *時間已過期* 。
+每次載入 [索引] 頁面時，都會檢查快取中的快取時間 `OnGetAsync` 。 如果快取的時間尚未過期，則會顯示時間。 如果自上一次存取快取時間以來已經過了20秒 (上次載入此頁面的時間) ，則頁面會顯示快取的 *時間已過期*。
 
 選取 [ **重設** 快取時間] 按鈕，立即將快取的時間更新為目前時間。 按鈕會觸發 `OnPostResetCachedTime` 處理常式方法。
 

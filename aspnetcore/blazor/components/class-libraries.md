@@ -19,16 +19,14 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/components/class-libraries
-ms.openlocfilehash: 9562d06cbb8c60cd5a3b01f7c382b70c50038363
-ms.sourcegitcommit: 04ad9cd26fcaa8bd11e261d3661f375f5f343cdc
+ms.openlocfilehash: fed5d26ecd73a4710ee794c413fd51e0b4cb4913
+ms.sourcegitcommit: 1166b0ff3828418559510c661e8240e5c5717bb7
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 02/10/2021
-ms.locfileid: "100107060"
+ms.lasthandoff: 02/12/2021
+ms.locfileid: "100280201"
 ---
 # <a name="aspnet-core-razor-components-class-libraries"></a>ASP.NET Core Razor 元件類別庫
-
-依 [Simon Timms](https://github.com/stimms)
 
 您可以在類別庫中共用元件， [ Razor (RCL](xref:razor-pages/ui-class)跨專案) 。 *Razor 元件類別庫* 可以包含在：
 

@@ -19,16 +19,14 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/security/webassembly/hosted-with-azure-active-directory-b2c
-ms.openlocfilehash: 1c87330dec069e05f274206d2d35f50f489f9623
-ms.sourcegitcommit: da5a5bed5718a9f8db59356ef8890b4b60ced6e9
+ms.openlocfilehash: c67f8e8d81fbdbd8a1f103dd1bd258212efe014f
+ms.sourcegitcommit: 1166b0ff3828418559510c661e8240e5c5717bb7
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 01/22/2021
-ms.locfileid: "98710616"
+ms.lasthandoff: 02/12/2021
+ms.locfileid: "100280950"
 ---
-# <a name="secure-an-aspnet-core-no-locblazor-webassembly-hosted-app-with-azure-active-directory-b2c"></a>Blazor WebAssembly使用 Azure Active Directory B2C 保護 ASP.NET Core 託管應用程式
-
-由 [Javier Calvarro Nelson](https://github.com/javiercn) 和 [Luke Latham](https://github.com/guardrex)
+# <a name="secure-an-aspnet-core-blazor-webassembly-hosted-app-with-azure-active-directory-b2c"></a>Blazor WebAssembly使用 Azure Active Directory B2C 保護 ASP.NET Core 託管應用程式
 
 本文說明如何建立使用[Azure Active Directory (AAD) B2C](/azure/active-directory-b2c/overview)進行驗證的[託管 Blazor WebAssembly 應用程式](xref:blazor/hosting-models#blazor-webassembly)。
 
@@ -234,7 +232,7 @@ app.UseAuthentication();
 app.UseAuthorization();
 ```
 
-### <a name="userno-locidentityname"></a>使用者 ... Identity名字
+### <a name="useridentityname"></a>使用者 ... Identity名字
 
 依預設， `User.Identity.Name` 不會填入。
 
@@ -304,10 +302,10 @@ app.UseAuthorization();
 
 ### <a name="weatherforecast-controller"></a>WeatherForecast 控制器
 
-WeatherForecast 控制器 (*控制器/WeatherForecastController*) 會公開受保護的 API，並將 [`[Authorize]`](xref:Microsoft.AspNetCore.Authorization.AuthorizeAttribute) 屬性套用至控制器。 請 **務必** 瞭解：
+WeatherForecast 控制器 (*控制器/WeatherForecastController*) 會公開受保護的 API，並將 [ `[Authorize]` 屬性](xref:Microsoft.AspNetCore.Authorization.AuthorizeAttribute)套用至控制器。 請 **務必** 瞭解：
 
-* [`[Authorize]`](xref:Microsoft.AspNetCore.Authorization.AuthorizeAttribute)此 api 控制器中的屬性是保護此 api 不會遭到未經授權存取的唯一做法。
-* [`[Authorize]`](xref:Microsoft.AspNetCore.Authorization.AuthorizeAttribute)應用程式中使用的屬性 Blazor WebAssembly 僅做為應用程式的提示，使用者應獲得授權才能讓應用程式正常運作。
+* 此 API 控制器中的[ `[Authorize]` 屬性](xref:Microsoft.AspNetCore.Authorization.AuthorizeAttribute)是保護此 api 不會遭到未經授權存取的唯一做法。
+* 應用程式中使用的[ `[Authorize]` 屬性](xref:Microsoft.AspNetCore.Authorization.AuthorizeAttribute) Blazor WebAssembly 僅做為應用程式的提示，使用者應獲得授權才能讓應用程式正常運作。
 
 ```csharp
 [Authorize]

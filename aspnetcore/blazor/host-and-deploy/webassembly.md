@@ -19,16 +19,14 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/host-and-deploy/webassembly
-ms.openlocfilehash: b849cbfe803ef51cbb845566b4d5d27b2761e00c
-ms.sourcegitcommit: 04ad9cd26fcaa8bd11e261d3661f375f5f343cdc
+ms.openlocfilehash: 04eba2e004e920e9ca799b316781857f0b0b4ca3
+ms.sourcegitcommit: 1166b0ff3828418559510c661e8240e5c5717bb7
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 02/10/2021
-ms.locfileid: "100106865"
+ms.lasthandoff: 02/12/2021
+ms.locfileid: "100279787"
 ---
 # <a name="host-and-deploy-aspnet-core-blazor-webassembly"></a>裝載和部署 ASP.NET Core Blazor WebAssembly
-
-[Luke Latham](https://github.com/guardrex)、 [Rainer Stropek](https://www.timecockpit.com)、 [Daniel Roth](https://github.com/danroth27)、 [Ben Adams](https://twitter.com/ben_a_adams)及[Safia Abdalla](https://safia.rocks)
 
 使用[ Blazor WebAssembly 裝載模型](xref:blazor/hosting-models#blazor-webassembly)：
 
@@ -55,7 +53,7 @@ Blazor 依賴主機提供適當的壓縮檔案。 使用 ASP.NET Core 裝載的�
   * 從 [google/Brotli GitHub 存放庫](https://github.com/google/brotli)取得 JavaScript Brotli 解碼器。 `decode.js`系統會在存放庫的[ `js` 資料夾](https://github.com/google/brotli/tree/master/js)中命名並找到該解碼器檔案。
   
     > [!NOTE]
-    > 縮減版本的 `decode.js` 腳本 (`decode.min.js`) [Google/brotli GitHub 存放庫](https://github.com/google/brotli)中有回歸。 您可以自行縮短腳本，或使用 [npm 套件](https://www.npmjs.com/package/brotli) ，直到 [decode.min.js 中的問題 TypeError (google/brotli #881) ](https://github.com/google/brotli/issues/881) 解決為止。 本節中的範例程式碼會使用腳本的 **unminified** 版本。
+    > 縮減版本的 `decode.js` 腳本 (`decode.min.js`) [Google/brotli GitHub 存放庫](https://github.com/google/brotli)中有回歸。 例如，您可以在自己的 (上縮短腳本，請參閱 BuildBundlerMinifier 的組合 [和縮制](xref:client-side/bundling-and-minification#configure-bundling-and-minification)) 或使用 [npm 套件](https://www.npmjs.com/package/brotli) ，直到 [decode.min.js (google/TypeError #881) 中 ](https://github.com/google/brotli/issues/881) 的問題解決為止。 本節中的範例程式碼會使用腳本的 **unminified** 版本。
 
   * 更新應用程式以使用此解碼器。 將結束記號內的標記變更 `<body>` `wwwroot/index.html` 為下列內容：
   

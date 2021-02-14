@@ -19,16 +19,14 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/fundamentals/routing
-ms.openlocfilehash: c53263ea48bc2900fd811f6e159aca97cdff26f7
-ms.sourcegitcommit: 50d3e939a90c5480df480f651dda032901468dd5
+ms.openlocfilehash: 55e2cbc01af7352facad7121c05c754e9d438ae3
+ms.sourcegitcommit: 1166b0ff3828418559510c661e8240e5c5717bb7
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 02/08/2021
-ms.locfileid: "99819025"
+ms.lasthandoff: 02/12/2021
+ms.locfileid: "100279881"
 ---
 # <a name="aspnet-core-blazor-routing"></a>ASP.NET Core Blazor 路由
-
-作者：[Luke Latham](https://github.com/guardrex)
 
 在本文中，您將瞭解如何管理要求路由，以及如何使用 <xref:Microsoft.AspNetCore.Components.Routing.NavLink> 元件在應用程式中建立流覽連結 Blazor 。
 
@@ -40,7 +38,7 @@ ms.locfileid: "99819025"
 
 ::: moniker range=">= aspnetcore-5.0"
 
-[!code-razor[](routing/samples_snapshot/5.x/App1.razor)]
+[!code-razor[](~/blazor/common/samples/5.x/BlazorSample_WebAssembly/routing/App1.razor)]
 
 ::: moniker-end
 
@@ -48,7 +46,7 @@ ms.locfileid: "99819025"
 
 ::: moniker range="< aspnetcore-5.0"
 
-[!code-razor[](routing/samples_snapshot/3.x/App1.razor)]
+[!code-razor[](~/blazor/common/samples/3.x/BlazorSample_WebAssembly/routing/App1.razor)]
 
 ::: moniker-end
 
@@ -69,13 +67,13 @@ ms.locfileid: "99819025"
 
 ::: moniker range=">= aspnetcore-5.0"
 
-[!code-razor[](routing/samples_snapshot/5.x/BlazorRoute.razor?highlight=1-2)]
+[!code-razor[](~/blazor/common/samples/5.x/BlazorSample_WebAssembly/Pages/routing/BlazorRoute.razor?highlight=1-2)]
 
 ::: moniker-end
 
 ::: moniker range="< aspnetcore-5.0"
 
-[!code-razor[](routing/samples_snapshot/3.x/BlazorRoute.razor?highlight=1-2)]
+[!code-razor[](~/blazor/common/samples/3.x/BlazorSample_WebAssembly/Pages/routing/BlazorRoute.razor?highlight=1-2)]
 
 ::: moniker-end
 
@@ -92,7 +90,7 @@ ms.locfileid: "99819025"
 
 ::: moniker range=">= aspnetcore-5.0"
 
-[!code-razor[](routing/samples_snapshot/5.x/App2.razor?highlight=5-8)]
+[!code-razor[](~/blazor/common/samples/5.x/BlazorSample_WebAssembly/routing/App2.razor?highlight=5-8)]
 
 ::: moniker-end
 
@@ -100,7 +98,7 @@ ms.locfileid: "99819025"
 
 ::: moniker range="< aspnetcore-5.0"
 
-[!code-razor[](routing/samples_snapshot/3.x/App2.razor?highlight=5-8)]
+[!code-razor[](~/blazor/common/samples/3.x/BlazorSample_WebAssembly/routing/App2.razor?highlight=5-8)]
 
 ::: moniker-end
 
@@ -114,7 +112,7 @@ ms.locfileid: "99819025"
 
 ::: moniker range=">= aspnetcore-5.0"
 
-[!code-razor[](routing/samples_snapshot/5.x/App3.razor)]
+[!code-razor[](~/blazor/common/samples/5.x/BlazorSample_WebAssembly/routing/App3.razor?name=snippet)]
 
 ::: moniker-end
 
@@ -122,7 +120,7 @@ ms.locfileid: "99819025"
 
 ::: moniker range="< aspnetcore-5.0"
 
-[!code-razor[](routing/samples_snapshot/3.x/App3.razor)]
+[!code-razor[](~/blazor/common/samples/3.x/BlazorSample_WebAssembly/routing/App3.razor?name=snippet)]
 
 ::: moniker-end
 
@@ -134,13 +132,13 @@ ms.locfileid: "99819025"
 
 ::: moniker range=">= aspnetcore-5.0"
 
-[!code-razor[](routing/samples_snapshot/5.x/RouteParameter1.razor?highlight=1)]
+[!code-razor[](~/blazor/common/samples/5.x/BlazorSample_WebAssembly/Pages/routing/RouteParameter1.razor?highlight=1)]
 
 ::: moniker-end
 
 ::: moniker range="< aspnetcore-5.0"
 
-[!code-razor[](routing/samples_snapshot/3.x/RouteParameter1.razor?highlight=1)]
+[!code-razor[](~/blazor/common/samples/3.x/BlazorSample_WebAssembly/Pages/routing/RouteParameter1.razor?highlight=1)]
 
 ::: moniker-end
 
@@ -150,7 +148,7 @@ ms.locfileid: "99819025"
 
 `Pages/RouteParameter.razor`:
 
-[!code-razor[](routing/samples_snapshot/5.x/RouteParameter2.razor?highlight=1)]
+[!code-razor[](~/blazor/common/samples/5.x/BlazorSample_WebAssembly/Pages/routing/RouteParameter2.razor?highlight=1)]
 
 ::: moniker-end
 
@@ -160,7 +158,7 @@ ms.locfileid: "99819025"
 
 `Pages/RouteParameter.razor`:
 
-[!code-razor[](routing/samples_snapshot/3.x/RouteParameter2.razor?highlight=2)]
+[!code-razor[](~/blazor/common/samples/3.x/BlazorSample_WebAssembly/Pages/routing/RouteParameter2.razor?highlight=2)]
 
 ::: moniker-end
 
@@ -186,13 +184,13 @@ protected override void OnParametersSet()
 
 ::: moniker range=">= aspnetcore-5.0"
 
-[!code-razor[](routing/samples_snapshot/5.x/User.razor?highlight=1)]
+[!code-razor[](~/blazor/common/samples/5.x/BlazorSample_WebAssembly/Pages/routing/User.razor?highlight=1)]
 
 ::: moniker-end
 
 ::: moniker range="< aspnetcore-5.0"
 
-[!code-razor[](routing/samples_snapshot/3.x/User.razor?highlight=1)]
+[!code-razor[](~/blazor/common/samples/3.x/BlazorSample_WebAssembly/Pages/routing/User.razor?highlight=1)]
 
 ::: moniker-end
 
@@ -200,14 +198,14 @@ protected override void OnParametersSet()
 
 | 條件約束 | 範例           | 範例相符項目                                                                  | 非變異值<br>culture<br>比對 |
 | ---------- | ----------------- | -------------------------------------------------------------------------------- | :------------------------------: |
-| `bool`     | `{active:bool}`   | `true`, `FALSE`                                                                  | 否                               |
-| `datetime` | `{dob:datetime}`  | `2016-12-31`, `2016-12-31 7:32pm`                                                | 是                              |
-| `decimal`  | `{price:decimal}` | `49.99`, `-1,000.01`                                                             | 是                              |
-| `double`   | `{weight:double}` | `1.234`, `-1,001.01e8`                                                           | 是                              |
-| `float`    | `{weight:float}`  | `1.234`, `-1,001.01e8`                                                           | 是                              |
-| `guid`     | `{id:guid}`       | `CD2C1638-1638-72D5-1638-DEADBEEF1638`, `{CD2C1638-1638-72D5-1638-DEADBEEF1638}` | 否                               |
-| `int`      | `{id:int}`        | `123456789`, `-123456789`                                                        | 是                              |
-| `long`     | `{ticks:long}`    | `123456789`, `-123456789`                                                        | 是                              |
+| `bool`     | `{active:bool}`   | `true`, `FALSE`                                                                  | No                               |
+| `datetime` | `{dob:datetime}`  | `2016-12-31`, `2016-12-31 7:32pm`                                                | Yes                              |
+| `decimal`  | `{price:decimal}` | `49.99`, `-1,000.01`                                                             | Yes                              |
+| `double`   | `{weight:double}` | `1.234`, `-1,001.01e8`                                                           | Yes                              |
+| `float`    | `{weight:float}`  | `1.234`, `-1,001.01e8`                                                           | Yes                              |
+| `guid`     | `{id:guid}`       | `CD2C1638-1638-72D5-1638-DEADBEEF1638`, `{CD2C1638-1638-72D5-1638-DEADBEEF1638}` | No                               |
+| `int`      | `{id:int}`        | `123456789`, `-123456789`                                                        | Yes                              |
+| `long`     | `{ticks:long}`    | `123456789`, `-123456789`                                                        | Yes                              |
 
 > [!WARNING]
 > 確認 URL 可以轉換成 CLR 類型的路由條件約束 (例如 `int` 或 <xref:System.DateTime>) 一律使用不因國別而異的文化特性。 這些條件約束假設 URL 不可當地語系化。
@@ -222,13 +220,13 @@ protected override void OnParametersSet()
 
 ::: moniker range=">= aspnetcore-5.0"
 
-[!code-razor[](routing/samples_snapshot/5.x/Example.razor?highlight=1)]
+[!code-razor[](~/blazor/common/samples/5.x/BlazorSample_WebAssembly/Pages/routing/Example.razor?highlight=1)]
 
 ::: moniker-end
 
 ::: moniker range="< aspnetcore-5.0"
 
-[!code-razor[](routing/samples_snapshot/3.x/Example.razor?highlight=2)]
+[!code-razor[](~/blazor/common/samples/3.x/BlazorSample_WebAssembly/Pages/routing/Example.razor?highlight=2)]
 
 ::: moniker-end
 
@@ -264,7 +262,7 @@ Catch-all 路由參數為：
 
 `Pages/CatchAll.razor`:
 
-[!code-razor[](routing/samples_snapshot/5.x/CatchAll.razor)]
+[!code-razor[](~/blazor/common/samples/5.x/BlazorSample_WebAssembly/Pages/routing/CatchAll.razor)]
 
 `/catch-all/this/is/a/test`若為具有路由範本的 URL `/catch-all/{*pageRoute}` ，的值 `PageRoute` 會設定為 `this/is/a/test` 。
 
@@ -309,13 +307,13 @@ ASP.NET Core 5.0 或更新版本中支援 Catch-all 路由參數。 如需詳細
 
 ::: moniker range=">= aspnetcore-5.0"
 
-[!code-razor[](routing/samples_snapshot/5.x/Navigate.razor)]
+[!code-razor[](~/blazor/common/samples/5.x/BlazorSample_WebAssembly/Pages/routing/Navigate.razor)]
 
 ::: moniker-end
 
 ::: moniker range="< aspnetcore-5.0"
 
-[!code-razor[](routing/samples_snapshot/3.x/Navigate.razor)]
+[!code-razor[](~/blazor/common/samples/3.x/BlazorSample_WebAssembly/Pages/routing/Navigate.razor)]
 
 ::: moniker-end
 
@@ -344,13 +342,13 @@ var query = new Uri(NavigationManager.Uri).Query;
 
 ::: moniker range=">= aspnetcore-5.0"
 
-[!code-razor[](routing/samples_snapshot/5.x/ParseQueryString.razor)]
+[!code-razor[](~/blazor/common/samples/5.x/BlazorSample_WebAssembly/Pages/routing/ParseQueryString.razor)]
 
 ::: moniker-end
 
 ::: moniker range="< aspnetcore-5.0"
 
-[!code-razor[](routing/samples_snapshot/3.x/ParseQueryString.razor)]
+[!code-razor[](~/blazor/common/samples/3.x/BlazorSample_WebAssembly/Pages/routing/ParseQueryString.razor)]
 
 ::: moniker-end
 
@@ -362,13 +360,13 @@ var query = new Uri(NavigationManager.Uri).Query;
 
 ::: moniker range=">= aspnetcore-5.0"
 
-[!code-razor[](routing/samples_snapshot/5.x/NavMenu.razor?highlight=4,9)]
+[!code-razor[](~/blazor/common/samples/5.x/BlazorSample_WebAssembly/Shared/routing/NavMenu.razor?name=snippet&highlight=4,9)]
 
 ::: moniker-end
 
 ::: moniker range="< aspnetcore-5.0"
 
-[!code-razor[](routing/samples_snapshot/3.x/NavMenu.razor?highlight=4,9)]
+[!code-razor[](~/blazor/common/samples/3.x/BlazorSample_WebAssembly/Shared/routing/NavMenu.razor?name=snippet&highlight=4,9)]
 
 ::: moniker-end
 
@@ -434,13 +432,13 @@ Blazor Server 已整合至 [ASP.NET Core 端點路由](xref:fundamentals/routing
 
 ::: moniker range=">= aspnetcore-5.0"
 
-[!code-csharp[](routing/samples_snapshot/5.x/Startup.cs?highlight=5)]
+[!code-csharp[](~/blazor/common/samples/5.x/BlazorSample_Server/routing/Startup.cs?name=snippet&highlight=5)]
 
 ::: moniker-end
 
 ::: moniker range="< aspnetcore-5.0"
 
-[!code-csharp[](routing/samples_snapshot/3.x/Startup.cs?highlight=5)]
+[!code-csharp[](~/blazor/common/samples/3.x/BlazorSample_Server/routing/Startup.cs?name=snippet&highlight=5)]
 
 ::: moniker-end
 

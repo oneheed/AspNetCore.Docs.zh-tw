@@ -19,16 +19,14 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/fundamentals/handle-errors
-ms.openlocfilehash: cb3c64ab7340a67a6730d98af8a91c4e9837acf1
-ms.sourcegitcommit: 04ad9cd26fcaa8bd11e261d3661f375f5f343cdc
+ms.openlocfilehash: c1f859e0113d5bff65c7075ad1eb03088429174e
+ms.sourcegitcommit: 1166b0ff3828418559510c661e8240e5c5717bb7
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 02/10/2021
-ms.locfileid: "100106943"
+ms.lasthandoff: 02/12/2021
+ms.locfileid: "100279962"
 ---
 # <a name="handle-errors-in-aspnet-core-blazor-apps"></a>處理 ASP.NET Core 應用程式中的錯誤 Blazor
-
-作者：[Steve Sanderson](https://github.com/SteveSandersonMS)
 
 本文說明如何 Blazor 管理未處理的例外狀況，以及如何開發偵測和處理錯誤的應用程式。
 

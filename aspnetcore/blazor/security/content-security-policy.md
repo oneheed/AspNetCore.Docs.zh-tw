@@ -19,16 +19,14 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/security/content-security-policy
-ms.openlocfilehash: 744449240fabc3dae317d0d7bc9090311521c224
-ms.sourcegitcommit: 3593c4efa707edeaaceffbfa544f99f41fc62535
+ms.openlocfilehash: f44f348947e31864f5d0d44c9caf1a3aa9c3b1d4
+ms.sourcegitcommit: 1166b0ff3828418559510c661e8240e5c5717bb7
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 01/04/2021
-ms.locfileid: "94570116"
+ms.lasthandoff: 02/12/2021
+ms.locfileid: "100280347"
 ---
-# <a name="enforce-a-content-security-policy-for-aspnet-core-no-locblazor"></a>針對 ASP.NET Core 強制執行內容安全性原則 Blazor
-
-由 [Javier Calvarro Nelson](https://github.com/javiercn) 和 [Luke Latham](https://github.com/guardrex)
+# <a name="enforce-a-content-security-policy-for-aspnet-core-blazor"></a>針對 ASP.NET Core 強制執行內容安全性原則 Blazor
 
 [跨網站腳本 (XSS) ](xref:security/cross-site-scripting) 是一種安全性弱點，攻擊者會將一或多個惡意的用戶端腳本放入應用程式的轉譯內容中。  (CSP) 的內容安全性原則，可通知瀏覽器有效，以防止 XSS 攻擊：
 

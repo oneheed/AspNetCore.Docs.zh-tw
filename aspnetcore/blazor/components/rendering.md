@@ -19,16 +19,14 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/components/rendering
-ms.openlocfilehash: 27701d175c86cdf4b74a9e6332b30b4d55806650
-ms.sourcegitcommit: 04ad9cd26fcaa8bd11e261d3661f375f5f343cdc
+ms.openlocfilehash: e1222981d4af3f4e233cdc0c57bb96a71972af15
+ms.sourcegitcommit: 1166b0ff3828418559510c661e8240e5c5717bb7
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 02/10/2021
-ms.locfileid: "100107034"
+ms.lasthandoff: 02/12/2021
+ms.locfileid: "100280048"
 ---
 # <a name="aspnet-core-blazor-component-rendering"></a>ASP.NET Core Blazor 元件轉譯
-
-作者：[Steve Sanderson](https://github.com/SteveSandersonMS)
 
 元件第一次依其父元件新增至元件階層時， *必須* 呈現。 這是元件嚴格必須呈現的唯一時間。
 

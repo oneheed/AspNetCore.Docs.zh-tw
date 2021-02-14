@@ -20,16 +20,14 @@ no-loc:
 - SignalR
 uid: blazor/tooling
 zone_pivot_groups: operating-systems
-ms.openlocfilehash: 5901a1cb693dfe8e34e62ce2a28456bcf584221c
-ms.sourcegitcommit: 063a06b644d3ade3c15ce00e72a758ec1187dd06
+ms.openlocfilehash: a17b16563ac12d634e6bdc32638991f45e2a66d5
+ms.sourcegitcommit: 1166b0ff3828418559510c661e8240e5c5717bb7
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 01/16/2021
-ms.locfileid: "98252262"
+ms.lasthandoff: 02/12/2021
+ms.locfileid: "100280685"
 ---
-# <a name="tooling-for-aspnet-core-no-locblazor"></a>ASP.NET Core 的工具 Blazor
-
-作者：[Daniel Roth](https://github.com/danroth27) 和 [Luke Latham](https://github.com/guardrex)
+# <a name="tooling-for-aspnet-core-blazor"></a>ASP.NET Core 的工具 Blazor
 
 ::: zone pivot="windows"
 
@@ -37,11 +35,11 @@ ms.locfileid: "98252262"
 
 1. 建立新專案。
 
-1. 選取 [ **Blazor 應用程式**]。 選取 [下一步]  。
+1. 選取 [ **Blazor 應用程式**]。 選取 [下一步] 。
 
-1. 在 [專案名稱] 欄位中提供專案名稱，或接受預設專案名稱。 確認 **位置** 專案是正確的，或提供專案的位置。 選取 [建立]。
+1. 在 [專案名稱] 欄位中提供專案名稱，或接受預設專案名稱。 確認 **位置** 專案是正確的，或提供專案的位置。 選取 [建立]  。
 
-1. 如需 Blazor WebAssembly 體驗，請選擇 **Blazor WebAssembly 應用程式** 範本。 如需 Blazor Server 體驗，請選擇 **Blazor Server 應用程式** 範本。 選取 [建立]。
+1. 如需 Blazor WebAssembly 體驗，請選擇 **Blazor WebAssembly 應用程式** 範本。 如需 Blazor Server 體驗，請選擇 **Blazor Server 應用程式** 範本。 選取 [建立]  。
 
    針對裝載 Blazor WebAssembly 體驗，請選取 [裝載 **ASP.NET Core** ] 核取方塊。
 
@@ -111,27 +109,27 @@ ms.locfileid: "98252262"
 
 1. 在側邊欄中，選取 [ **Web] 和 [主控台**  >  **應用程式**]。
 
-   如需 Blazor WebAssembly 體驗，請選擇 **Blazor WebAssembly 應用程式** 範本。 如需 Blazor Server 體驗，請選擇 **Blazor Server 應用程式** 範本。 選取 [下一步]  。
+   如需 Blazor WebAssembly 體驗，請選擇 **Blazor WebAssembly 應用程式** 範本。 如需 Blazor Server 體驗，請選擇 **Blazor Server 應用程式** 範本。 選取 [下一步] 。
 
    如需這兩個 Blazor 裝載模型的相關資訊， *Blazor WebAssembly* (獨立和裝載) 和 *Blazor Server* ，請參閱 <xref:blazor/hosting-models> 。
 
-1. 確認 [ **驗證** ] 設定為 [ **無驗證**]。 選取 [下一步]  。
+1. 確認 [ **驗證** ] 設定為 [ **無驗證**]。 選取 [下一步] 。
 
 1. 針對裝載 Blazor WebAssembly 體驗，請選取 [裝載 **ASP.NET Core** ] 核取方塊。
 
-1. 在 [ **專案名稱** ] 欄位中，為應用程式命名 `WebApplication1` 。 選取 [建立]。
+1. 在 [ **專案名稱** ] 欄位中，為應用程式命名 `WebApplication1` 。 選取 [建立]  。
 
-1. 選取  >  [在不進行偵錯工具的 **情況下** 執行] 以執行應用程式 *而不需偵錯工具* 使用 [**執行**  >  **開始調試** 程式] 或 [執行 ( # A0) ] 按鈕執行應用程式，以 *使用調試* 程式來執行應用程式。
+1. 選取  >  [在不進行偵錯工具的 **情況下** 執行] 以執行應用程式 *而不需偵錯工具* 使用 [**執行**  >  **開始調試** 程式] 或 [執行 (&#9654;]) 按鈕來執行應用程式，以 *使用調試* 程式來執行應用程式。
 
 如果出現提示信任開發憑證，請信任憑證並繼續。 需要使用者和 keychain 密碼才能信任憑證。 如需信任 ASP.NET Core HTTPS 開發憑證的詳細資訊，請參閱 <xref:security/enforcing-ssl#trust-the-aspnet-core-https-development-certificate-on-windows-and-macos> 。
 
 ::: zone-end
 
-## <a name="use-visual-studio-code-for-cross-platform-no-locblazor-development"></a>使用 Visual Studio Code 進行跨平臺 Blazor 開發
+## <a name="use-visual-studio-code-for-cross-platform-blazor-development"></a>使用 Visual Studio Code 進行跨平臺 Blazor 開發
 
 [Visual Studio Code](https://code.visualstudio.com/) 是一種開放原始碼、跨平臺的整合式開發環境， (可用來開發應用程式的 IDE) Blazor 。 使用 .NET CLI 來建立新的 Blazor 應用程式，以 Visual Studio Code 的開發。 如需詳細資訊，請參閱本文的 [Linux 版本](?pivots=linux)。
 
-## <a name="no-locblazor-template-options"></a>Blazor 範本選項
+## <a name="blazor-template-options"></a>Blazor 範本選項
 
 Blazor架構會提供範本，以針對兩個裝載模型建立新的應用程式 Blazor 。 範本可用來建立新的 Blazor 專案和方案，不論您為 Blazor 開發 (Visual Studio、Visual Studio for Mac、Visual Studio Code 或 .net CLI) 選取的工具為何：
 

@@ -19,16 +19,14 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/components/templated-components
-ms.openlocfilehash: 28f98596046877672b2935cb1f0feb508548398d
-ms.sourcegitcommit: e311cfb77f26a0a23681019bd334929d1aaeda20
+ms.openlocfilehash: 579cabd9e6b7141ec6af4c6e221b805272a2fe40
+ms.sourcegitcommit: 1166b0ff3828418559510c661e8240e5c5717bb7
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 02/03/2021
-ms.locfileid: "99529926"
+ms.lasthandoff: 02/12/2021
+ms.locfileid: "100280036"
 ---
 # <a name="aspnet-core-blazor-templated-components"></a>ASP.NET Core 樣板 Blazor 化元件
-
-依 [Luke Latham](https://github.com/guardrex) 和 [Daniel Roth](https://github.com/danroth27)
 
 樣板化元件是接受一或多個 UI 範本作為參數的元件，可接著用來作為元件轉譯邏輯的一部分。 樣板化元件可讓您撰寫比一般元件更容易重複使用的較高層級元件。 其中一些範例包括：
 

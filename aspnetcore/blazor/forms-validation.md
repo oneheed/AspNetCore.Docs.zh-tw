@@ -19,16 +19,14 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/forms-validation
-ms.openlocfilehash: c0c672167680cbe2490c7e5b6ff028ca1893d5aa
-ms.sourcegitcommit: 04ad9cd26fcaa8bd11e261d3661f375f5f343cdc
+ms.openlocfilehash: 012c8794b3d239ce93ac942000c7ec4f71d06cbf
+ms.sourcegitcommit: 1166b0ff3828418559510c661e8240e5c5717bb7
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 02/10/2021
-ms.locfileid: "100106956"
+ms.lasthandoff: 02/12/2021
+ms.locfileid: "100280004"
 ---
 # <a name="aspnet-core-blazor-forms-and-validation"></a>ASP.NET Core Blazor 表單和驗證
-
-[Daniel Roth](https://github.com/danroth27)、 [Rémi Bourgarel](https://remibou.github.io/)和[Luke Latham](https://github.com/guardrex)
 
 Blazor使用[資料批註](xref:mvc/models/validation)可支援表單和驗證。
 

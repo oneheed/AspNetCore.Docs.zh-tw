@@ -19,16 +19,14 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/project-structure
-ms.openlocfilehash: 958fa23a1befac3696d850d5409d4021dd109c22
-ms.sourcegitcommit: 610936e4d3507f7f3d467ed7859ab9354ec158ba
+ms.openlocfilehash: 94b5a3d8c0f5b94ecac32e6fc5f94efeb8337f37
+ms.sourcegitcommit: 1166b0ff3828418559510c661e8240e5c5717bb7
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 01/25/2021
-ms.locfileid: "98751538"
+ms.lasthandoff: 02/12/2021
+ms.locfileid: "100280349"
 ---
-# <a name="aspnet-core-no-locblazor-project-structure"></a>ASP.NET Core Blazor 專案結構
-
-作者：[Daniel Roth](https://github.com/danroth27) 和 [Luke Latham](https://github.com/guardrex)
+# <a name="aspnet-core-blazor-project-structure"></a>ASP.NET Core Blazor 專案結構
 
 本文說明組成專案範本所產生之應用程式的檔案和資料夾 Blazor Blazor 。
 

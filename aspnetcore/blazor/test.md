@@ -19,16 +19,16 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/test
-ms.openlocfilehash: cd4aee66fd6df6cc0ce520d8ca66e0a2cf130eff
-ms.sourcegitcommit: 3593c4efa707edeaaceffbfa544f99f41fc62535
+ms.openlocfilehash: 67ebfcd322ae08acf2fddae9bd6101f13fa77e7e
+ms.sourcegitcommit: 1166b0ff3828418559510c661e8240e5c5717bb7
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 01/04/2021
-ms.locfileid: "93054862"
+ms.lasthandoff: 02/12/2021
+ms.locfileid: "100280700"
 ---
-# <a name="test-components-in-aspnet-core-no-locblazor"></a>ASP.NET Core 中的測試元件 Blazor
+# <a name="test-components-in-aspnet-core-blazor"></a>ASP.NET Core 中的測試元件 Blazor
 
-[Egil Hansen](https://egilhansen.com/)
+依據： [Egil Hansen](https://egilhansen.com/)
 
 測試是建立穩定和可維護軟體的重要層面。
 
@@ -76,7 +76,7 @@ E2E 測試牽涉到啟動多個進程、網路和磁片 i/o，以及通常會導
 
 選擇要執行的測試類型時，請考慮這個案例。 下表說明一些考慮。
 
-| 案例 | 建議的方法 | 備註 |
+| 狀況 | 建議的方法 | 備註 |
 | -------- | ------------------ | ------- |
 | 沒有 JS interop 邏輯的元件 | 單元測試 | 當元件中沒有 JS interop 的相依性時 Blazor ，可以測試元件，而不需要存取 js 或 DOM API。 在此案例中，選擇單元測試沒有缺點。 |
 | 具有簡單 JS interop 邏輯的元件 | 單元測試 | 元件通常是透過 JS interop 來查詢 DOM 或觸發動畫。 在此案例中，通常偏好單元測試，因為它可以直接透過介面模擬 JS 互動 <xref:Microsoft.JSInterop.IJSRuntime> 。 |
@@ -154,4 +154,4 @@ public void CounterShouldIncrementWhenSelected()
 
 ## <a name="additional-resources"></a>其他資源
 
-* [使用 bUnit 的消費者入門](https://bunit.egilhansen.com/docs/getting-started/)： bUnit 指示包括建立測試專案、參考測試架構封裝，以及建立和執行測試的指引。
+* [使用 bUnit 的開始使用](https://bunit.egilhansen.com/docs/getting-started/)： bUnit 指示包括建立測試專案、參考測試架構封裝，以及建立和執行測試的指引。

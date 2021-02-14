@@ -19,16 +19,14 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/globalization-localization
-ms.openlocfilehash: f8f261f25d854a9bf36ad3299f4af392d5c4fafd
-ms.sourcegitcommit: c1839f2992b003c92cd958244a2e0771ae928786
+ms.openlocfilehash: 8baee9bc0a8e569174f33dac6a406b2162d09552
+ms.sourcegitcommit: 1166b0ff3828418559510c661e8240e5c5717bb7
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 02/05/2021
-ms.locfileid: "93055876"
+ms.lasthandoff: 02/12/2021
+ms.locfileid: "100279914"
 ---
 # <a name="aspnet-core-blazor-globalization-and-localization"></a>ASP.NET Core Blazor 全球化和當地語系化
-
-依 [Luke Latham](https://github.com/guardrex) 和 [Daniel Roth](https://github.com/danroth27)
 
 Razor 有多種文化特性和語言的使用者可以存取元件。 以下是可用的 .NET 全球化和當地語系化案例：
 

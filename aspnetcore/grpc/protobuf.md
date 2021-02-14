@@ -4,7 +4,7 @@ author: jamesnk
 description: 瞭解如何建立 .NET 應用程式的 Protobuf 訊息。
 monikerRange: '>= aspnetcore-3.0'
 ms.author: jamesnk
-ms.date: 08/23/2020
+ms.date: 02/12/2021
 no-loc:
 - appsettings.json
 - ASP.NET Core Identity
@@ -18,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: grpc/protobuf
-ms.openlocfilehash: b70a5ee00405eecfce900b86dc631a54682dce1a
-ms.sourcegitcommit: 3593c4efa707edeaaceffbfa544f99f41fc62535
+ms.openlocfilehash: adb048c9b20e172ef8a7bc13f9b56928b1d4bf77
+ms.sourcegitcommit: 1166b0ff3828418559510c661e8240e5c5717bb7
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 01/04/2021
-ms.locfileid: "93058892"
+ms.lasthandoff: 02/12/2021
+ms.locfileid: "100280289"
 ---
 # <a name="create-protobuf-messages-for-net-apps"></a>建立 .NET 應用程式的 Protobuf 訊息
 
@@ -48,6 +48,8 @@ message Person {
 ```
 
 上述訊息定義將三個欄位指定為名稱/值配對。 如同 .NET 類型上的屬性，每個欄位都有名稱和類型。 欄位類型可以是 Protobuf 純量實 [數值型別](#scalar-value-types)，例如 `int32` 或其他訊息。
+
+[Protobuf 樣式指南](https://developers.google.com/protocol-buffers/docs/style)建議使用 `underscore_separated_names` 來做為功能變數名稱。 針對 .NET 應用程式所建立的新 Protobuf 訊息應遵循 Protobuf 樣式指導方針。 .NET 工具會自動產生使用 .NET 命名標準的 .NET 類型。 例如， `first_name` Protobuf 欄位會產生 `FirstName` .net 屬性。
 
 除了名稱之外，訊息定義中的每個欄位都有唯一的數位。 當訊息序列化為 Protobuf 時，會使用欄位號碼來識別欄位。 將小數位序列化比序列化整個功能變數名稱更快。 因為欄位編號可識別欄位，所以變更時請務必小心。 如需變更 Protobuf 訊息的詳細資訊，請參閱 <xref:grpc/versioning> 。
 

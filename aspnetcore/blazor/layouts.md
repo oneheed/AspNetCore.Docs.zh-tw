@@ -19,16 +19,14 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/layouts
-ms.openlocfilehash: 417f69e797296cdcd01fc4ce326388512a406368
-ms.sourcegitcommit: 97243663fd46c721660e77ef652fe2190a461f81
+ms.openlocfilehash: d1f3e2028ca120b5901aca0b24802d872ae52597
+ms.sourcegitcommit: 1166b0ff3828418559510c661e8240e5c5717bb7
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 01/09/2021
-ms.locfileid: "98058268"
+ms.lasthandoff: 02/12/2021
+ms.locfileid: "100279730"
 ---
-# <a name="aspnet-core-no-locblazor-layouts"></a>ASP.NET Core Blazor 版面配置
-
-依 [Rainer Stropek](https://www.timecockpit.com) 和 [Luke Latham](https://github.com/guardrex)
+# <a name="aspnet-core-blazor-layouts"></a>ASP.NET Core Blazor 版面配置
 
 某些應用程式專案（例如功能表、著作權訊息和公司標誌）通常是應用程式整體版面配置的一部分，且應用程式中的每個元件都會使用這些元素。 將這些專案的程式碼複製到應用程式的所有元件，並不是有效的方法。 每次其中一個元素需要更新時，都必須更新每個元件。 這類複製很難維護，而且可能會在一段時間後產生不一致的內容。 *版面* 配置會解決此問題。
 
@@ -125,7 +123,7 @@ ms.locfileid: "98058268"
 
 [!code-razor[](layouts/sample_snapshot/3.x/MasterLayout.razor?highlight=6)]
 
-## <a name="share-a-no-locrazor-pages-layout-with-integrated-components"></a>Razor使用整合元件共用頁面配置
+## <a name="share-a-razor-pages-layout-with-integrated-components"></a>Razor使用整合元件共用頁面配置
 
 當可路由的元件整合到 Razor 頁面應用程式時，應用程式的共用配置可以與元件一起使用。 如需詳細資訊，請參閱<xref:blazor/components/prerendering-and-integration>。
 

@@ -19,16 +19,14 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/security/webassembly/hosted-with-identity-server
-ms.openlocfilehash: d35dd0acf626a6305f00e295e7918c82c7d6a912
-ms.sourcegitcommit: cc405f20537484744423ddaf87bd1e7d82b6bdf0
+ms.openlocfilehash: c74711c10fe399718600f879c3d9151bfb1abd42
+ms.sourcegitcommit: 1166b0ff3828418559510c661e8240e5c5717bb7
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 01/21/2021
-ms.locfileid: "98658699"
+ms.lasthandoff: 02/12/2021
+ms.locfileid: "100280999"
 ---
-# <a name="secure-an-aspnet-core-no-locblazor-webassembly-hosted-app-with-no-locidentity-server"></a>Blazor WebAssembly使用伺服器保護 ASP.NET Core 託管應用 Identity 程式
-
-由 [Javier Calvarro Nelson](https://github.com/javiercn) 和 [Luke Latham](https://github.com/guardrex)
+# <a name="secure-an-aspnet-core-blazor-webassembly-hosted-app-with-identity-server"></a>Blazor WebAssembly使用伺服器保護 ASP.NET Core 託管應用 Identity 程式
 
 本文說明如何建立使用[ Identity 伺服器](https://identityserver.io/)來驗證使用者和 API 呼叫的[託管 Blazor WebAssembly 應用程式](xref:blazor/hosting-models#blazor-webassembly)。
 
@@ -126,7 +124,6 @@ dotnet new blazorwasm -au Individual -ho -o {APP NAME}
   * 授權中介軟體可啟用授權功能：
 
     ```csharp
-    app.UseAuthentication();
     app.UseAuthorization();
     ```
 
@@ -138,7 +135,7 @@ dotnet new blazorwasm -au Individual -ho -o {APP NAME}
 
 <xref:Microsoft.Extensions.DependencyInjection.IdentityServerBuilderConfigurationExtensions.AddApiAuthorization%2A>Helper 方法會設定 ASP.NET Core 案例的[ Identity 伺服器](https://identityserver.io/)。 Identity伺服器是一種功能強大且可擴充的架構，可處理應用程式安全性的考慮。 Identity針對最常見的情況，伺服器會公開不必要的複雜性。 因此，我們假設有一組慣例和設定選項，我們考慮的是很好的起點。 一旦您的驗證需要變更， Identity 就可以使用伺服器的完整功能來自訂驗證，以符合應用程式的需求。
 
-### <a name="addno-locidentityserverjwt"></a>新增 Identity ServerJwt
+### <a name="addidentityserverjwt"></a>新增 Identity ServerJwt
 
 <xref:Microsoft.AspNetCore.Authentication.AuthenticationBuilderExtensions.AddIdentityServerJwt%2A>Helper 方法會設定應用程式的原則配置作為預設驗證處理常式。 原則設定為允許 Identity 處理所有路由至 URL 空間中之子路徑的要求 Identity `/Identity` 。 會 <xref:Microsoft.AspNetCore.Authentication.JwtBearer.JwtBearerHandler> 處理所有其他要求。 此外，這個方法：
 
@@ -147,7 +144,7 @@ dotnet new blazorwasm -au Individual -ho -o {APP NAME}
 
 ### <a name="weatherforecastcontroller"></a>WeatherForecastController
 
-在 `WeatherForecastController` (`Controllers/WeatherForecastController.cs`) 中，會將屬性套用 [`[Authorize]`](xref:Microsoft.AspNetCore.Authorization.AuthorizeAttribute) 至類別。 屬性（attribute）會指出使用者必須根據預設原則來取得存取資源的授權。 預設授權原則會設定為使用預設的驗證配置，此配置是由設定 <xref:Microsoft.AspNetCore.Authentication.AuthenticationBuilderExtensions.AddIdentityServerJwt%2A> 。 Helper 方法會將 <xref:Microsoft.AspNetCore.Authentication.JwtBearer.JwtBearerHandler> 要求設定為應用程式要求的預設處理常式。
+在 `WeatherForecastController` (`Controllers/WeatherForecastController.cs`) 中，會將[ `[Authorize]` 屬性](xref:Microsoft.AspNetCore.Authorization.AuthorizeAttribute)套用至類別。 屬性（attribute）會指出使用者必須根據預設原則來取得存取資源的授權。 預設授權原則會設定為使用預設的驗證配置，此配置是由設定 <xref:Microsoft.AspNetCore.Authentication.AuthenticationBuilderExtensions.AddIdentityServerJwt%2A> 。 Helper 方法會將 <xref:Microsoft.AspNetCore.Authentication.JwtBearer.JwtBearerHandler> 要求設定為應用程式要求的預設處理常式。
 
 ### <a name="applicationdbcontext"></a>[ApplicationdbcoNtext
 
@@ -374,7 +371,7 @@ services.AddDefaultIdentity<ApplicationUser>(options =>
     .AddEntityFrameworkStores<ApplicationDbContext>();
 ```
 
-### <a name="configure-no-locidentity-server"></a>設定 Identity 伺服器
+### <a name="configure-identity-server"></a>設定 Identity 伺服器
 
 使用下列 **其中一** 種方法：
 

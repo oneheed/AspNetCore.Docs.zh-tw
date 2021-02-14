@@ -19,18 +19,16 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/advanced-scenarios
-ms.openlocfilehash: 95714b3c0d21d3b348a9a8a984e2a42e7708499e
-ms.sourcegitcommit: 3593c4efa707edeaaceffbfa544f99f41fc62535
+ms.openlocfilehash: ba2bf91f3318225383ec9d164c34be9124aa311b
+ms.sourcegitcommit: 1166b0ff3828418559510c661e8240e5c5717bb7
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 01/04/2021
-ms.locfileid: "93056552"
+ms.lasthandoff: 02/12/2021
+ms.locfileid: "100280849"
 ---
-# <a name="aspnet-core-no-locblazor-advanced-scenarios"></a>ASP.NET Core 的 Blazor advanced 案例
+# <a name="aspnet-core-blazor-advanced-scenarios"></a>ASP.NET Core 的 Blazor advanced 案例
 
-依 [Luke Latham](https://github.com/guardrex) 和 [Daniel Roth](https://github.com/danroth27)
-
-## <a name="no-locblazor-server-circuit-handler"></a>Blazor Server 電路處理常式
+## <a name="blazor-server-circuit-handler"></a>Blazor Server 電路處理常式
 
 Blazor Server 允許程式碼定義迴圈 *處理常式*，以允許在使用者的線路狀態變更時執行程式碼。 在 `CircuitHandler` 應用程式的服務容器中衍生類別並將其註冊，會實作為電路處理常式。 下列的電路處理常式範例會追蹤開啟的 SignalR 連接：
 

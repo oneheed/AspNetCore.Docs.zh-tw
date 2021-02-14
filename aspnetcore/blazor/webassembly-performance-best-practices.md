@@ -19,16 +19,14 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/webassembly-performance-best-practices
-ms.openlocfilehash: 64eb69ba597b1e48489733275ac3bed96c6c3241
-ms.sourcegitcommit: ef8d8c79993a6608bf597ad036edcf30b231843f
+ms.openlocfilehash: 1860a36ba4122fb39ca92797da9a44b282afa793
+ms.sourcegitcommit: 1166b0ff3828418559510c661e8240e5c5717bb7
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 02/09/2021
-ms.locfileid: "99975231"
+ms.lasthandoff: 02/12/2021
+ms.locfileid: "100280656"
 ---
 # <a name="aspnet-core-blazor-webassembly-performance-best-practices"></a>ASP.NET Core Blazor WebAssembly 效能最佳做法
-
-[Pranav Krishnamoorthy](https://github.com/pranavkm)和[Steve Sanderson](https://github.com/SteveSandersonMS)
 
 Blazor WebAssembly 經過仔細設計和優化，可在最實際的應用程式 UI 案例中啟用高效能。 不過，產生最佳結果取決於使用正確模式和功能的開發人員。 請考慮下列層面：
 

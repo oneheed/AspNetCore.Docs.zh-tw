@@ -19,16 +19,14 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/host-and-deploy/configure-linker
-ms.openlocfilehash: 0c99056053356133e901d6cf468fec8034dfb845
-ms.sourcegitcommit: 3593c4efa707edeaaceffbfa544f99f41fc62535
+ms.openlocfilehash: c720747983da4ef6997d95d77c3f5305cfd7d3c0
+ms.sourcegitcommit: 1166b0ff3828418559510c661e8240e5c5717bb7
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 01/04/2021
-ms.locfileid: "93055824"
+ms.lasthandoff: 02/12/2021
+ms.locfileid: "100279928"
 ---
-# <a name="configure-the-linker-for-aspnet-core-no-locblazor"></a>設定 ASP.NET Core 的連結器 Blazor
-
-作者：[Luke Latham](https://github.com/guardrex)
+# <a name="configure-the-linker-for-aspnet-core-blazor"></a>設定 ASP.NET Core 的連結器 Blazor
 
 Blazor WebAssembly 在組建期間執行 [中繼語言 (IL) ](/dotnet/standard/managed-code#intermediate-language--execution) 連結，以從應用程式的輸出元件中修剪不必要的 IL。 在偵錯工具中建立時，連結器會停用。 應用程式必須在發行設定中建立，才能啟用連結器。 我們建議您在部署應用程式時，建立版本 Blazor WebAssembly 。 
 

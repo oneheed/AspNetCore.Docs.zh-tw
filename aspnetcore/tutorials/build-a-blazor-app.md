@@ -5,7 +5,7 @@ description: 逐步建立 Blazor 應用程式。
 monikerRange: '>= aspnetcore-3.0'
 ms.author: riande
 ms.custom: mvc
-ms.date: 12/14/2020
+ms.date: 02/12/2021
 no-loc:
 - appsettings.json
 - ASP.NET Core Identity
@@ -19,16 +19,14 @@ no-loc:
 - Razor
 - SignalR
 uid: tutorials/build-a-blazor-app
-ms.openlocfilehash: 106e1119db777074b5eae24f5d7e216e6127ca13
-ms.sourcegitcommit: 75db2f684a9302b0be7925eab586aa091c6bd19f
+ms.openlocfilehash: 939841ca7214e212a2f197ea1e00b0f6152c471e
+ms.sourcegitcommit: 1166b0ff3828418559510c661e8240e5c5717bb7
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 02/01/2021
-ms.locfileid: "99238297"
+ms.lasthandoff: 02/12/2021
+ms.locfileid: "100280507"
 ---
-# <a name="build-a-no-locblazor-todo-list-app"></a>建立 Blazor 待辦事項清單應用程式
-
-作者：[Daniel Roth](https://github.com/danroth27) 和 [Luke Latham](https://github.com/guardrex)
+# <a name="build-a-blazor-todo-list-app"></a>建立 Blazor 待辦事項清單應用程式
 
 本教學課程說明如何建立和修改 Blazor 應用程式。 您會了解如何：
 
@@ -54,7 +52,7 @@ ms.locfileid: "99238297"
 
 ::: moniker-end
 
-## <a name="create-a-todo-list-no-locblazor-app"></a>建立 todo 清單 Blazor 應用程式
+## <a name="create-a-todo-list-blazor-app"></a>建立 todo 清單 Blazor 應用程式
 
 1. Blazor在命令列介面中建立名為的新應用程式 `TodoList` ：
 
@@ -83,7 +81,17 @@ ms.locfileid: "99238297"
 
    `Pages/Todo.razor`:
 
-   [!code-razor[](build-a-blazor-app/samples_snapshot/Todo0.razor?highlight=1)]
+   ::: moniker range=">= aspnetcore-5.0"
+
+   [!code-razor[](~/blazor/common/samples/5.x/BlazorSample_WebAssembly/Pages/build-a-blazor-app/Todo0.razor?highlight=1)]
+
+   ::: moniker-end
+
+   ::: moniker range="< aspnetcore-5.0"
+
+   [!code-razor[](~/blazor/common/samples/3.x/BlazorSample_WebAssembly/Pages/build-a-blazor-app/Todo0.razor?highlight=1)]
+
+   ::: moniker-end
 
    儲存 `Pages/Todo.razor` 檔案。
 
@@ -95,7 +103,17 @@ ms.locfileid: "99238297"
 
    在 `Shared/NavMenu.razor` 中：
 
-   [!code-razor[](build-a-blazor-app/samples_snapshot/NavMenu.razor?highlight=5-9)]
+   ::: moniker range=">= aspnetcore-5.0"
+
+   [!code-razor[](~/blazor/common/samples/5.x/BlazorSample_WebAssembly/Shared/build-a-blazor-app/NavMenu.razor?highlight=5-9)]
+
+   ::: moniker-end
+
+   ::: moniker range="< aspnetcore-5.0"
+
+   [!code-razor[](~/blazor/common/samples/3.x/BlazorSample_WebAssembly/Shared/build-a-blazor-app/NavMenu.razor?highlight=5-9)]
+
+   ::: moniker-end
 
    儲存 `Shared/NavMenu.razor` 檔案。
 
@@ -107,8 +125,18 @@ ms.locfileid: "99238297"
 
    `TodoItem.cs`:
 
-   [!code-csharp[](build-a-blazor-app/samples_snapshot/TodoItem.cs)]
-   
+   ::: moniker range=">= aspnetcore-5.0"
+
+   [!code-csharp[](~/blazor/common/samples/5.x/BlazorSample_WebAssembly/build-a-blazor-app/TodoItem.cs)]
+
+   ::: moniker-end
+
+   ::: moniker range="< aspnetcore-5.0"
+
+   [!code-csharp[](~/blazor/common/samples/3.x/BlazorSample_WebAssembly/build-a-blazor-app/TodoItem.cs)]
+
+   ::: moniker-end
+
    > [!NOTE]
    > 如果使用 Visual Studio 建立檔案 `ToDoItem.cs` 和 `ToDoItem` 類別，請使用下列其中一種方法：
    >
@@ -122,11 +150,31 @@ ms.locfileid: "99238297"
 
    `Pages/Todo.razor`:
 
-   [!code-razor[](build-a-blazor-app/samples_snapshot/Todo2.razor?highlight=5-10,13)]
+   ::: moniker range=">= aspnetcore-5.0"
+
+   [!code-razor[](~/blazor/common/samples/5.x/BlazorSample_WebAssembly/Pages/build-a-blazor-app/Todo2.razor?highlight=5-10,13)]
+
+   ::: moniker-end
+
+   ::: moniker range="< aspnetcore-5.0"
+
+   [!code-razor[](~/blazor/common/samples/3.x/BlazorSample_WebAssembly/Pages/build-a-blazor-app/Todo2.razor?highlight=5-10,13)]
+
+   ::: moniker-end
 
 1. 應用程式需要 UI 元素，才能將待辦事項新增至清單。 在未排序清單 (`<ul>...</ul>`) 下方新增文字輸出 (`<input>`) 與按鈕 (`<button>`)：
 
-   [!code-razor[](build-a-blazor-app/samples_snapshot/Todo3.razor?highlight=12-13)]
+   ::: moniker range=">= aspnetcore-5.0"
+
+   [!code-razor[](~/blazor/common/samples/5.x/BlazorSample_WebAssembly/Pages/build-a-blazor-app/Todo3.razor?highlight=12-13)]
+
+   ::: moniker-end
+
+   ::: moniker range="< aspnetcore-5.0"
+
+   [!code-razor[](~/blazor/common/samples/3.x/BlazorSample_WebAssembly/Pages/build-a-blazor-app/Todo3.razor?highlight=12-13)]
+
+   ::: moniker-end
 
 1. 儲存檔案 `TodoItem.cs` 和更新的檔案 `Pages/Todo.razor` 。 在命令列介面中，應用程式會在儲存檔案時自動重建。 瀏覽器會暫時失去其與應用程式的連線，然後在重新建立連接時重載頁面。
 
@@ -134,11 +182,31 @@ ms.locfileid: "99238297"
 
 1. 將 `AddTodo` 方法新增至 `Todo` 元件，並使用屬性註冊按鈕的方法 `@onclick` 。 當選取按鈕時，就會呼叫 `AddTodo` C# 方法：
 
-   [!code-razor[](build-a-blazor-app/samples_snapshot/Todo4.razor?highlight=2,7-10)]
+   ::: moniker range=">= aspnetcore-5.0"
+
+   [!code-razor[](~/blazor/common/samples/5.x/BlazorSample_WebAssembly/Pages/build-a-blazor-app/Todo4.razor?highlight=2,7-10)]
+
+   ::: moniker-end
+
+   ::: moniker range="< aspnetcore-5.0"
+
+   [!code-razor[](~/blazor/common/samples/3.x/BlazorSample_WebAssembly/Pages/build-a-blazor-app/Todo4.razor?highlight=2,7-10)]
+
+   ::: moniker-end
 
 1. 若要取得新待辦事項的標題，請 `newTodo` 在區塊頂端加入字串欄位 `@code` ：
 
-   [!code-razor[](build-a-blazor-app/samples_snapshot/Todo5.razor?highlight=3)]
+   ::: moniker range=">= aspnetcore-5.0"
+
+   [!code-razor[](~/blazor/common/samples/5.x/BlazorSample_WebAssembly/Pages/build-a-blazor-app/Todo5.razor?highlight=3)]
+
+   ::: moniker-end
+
+   ::: moniker range="< aspnetcore-5.0"
+
+   [!code-razor[](~/blazor/common/samples/3.x/BlazorSample_WebAssembly/Pages/build-a-blazor-app/Todo5.razor?highlight=3)]
+
+   ::: moniker-end
 
    修改要與屬性系結的 text `<input>` 元素 `newTodo` `@bind` ：
 
@@ -148,13 +216,33 @@ ms.locfileid: "99238297"
 
 1. 更新 `AddTodo` 方法，將 `TodoItem` 與指定的標題新增至清單。 請將 `newTodo` 設定為空字串，以清除文字輸入的值：
 
-   [!code-razor[](build-a-blazor-app/samples_snapshot/Todo6.razor?highlight=19-26)]
+   ::: moniker range=">= aspnetcore-5.0"
+
+   [!code-razor[](~/blazor/common/samples/5.x/BlazorSample_WebAssembly/Pages/build-a-blazor-app/Todo6.razor?highlight=19-26)]
+
+   ::: moniker-end
+
+   ::: moniker range="< aspnetcore-5.0"
+
+   [!code-razor[](~/blazor/common/samples/3.x/BlazorSample_WebAssembly/Pages/build-a-blazor-app/Todo6.razor?highlight=19-26)]
+
+   ::: moniker-end
 
 1. 儲存 `Pages/Todo.razor` 檔案。 應用程式會在命令 shell 中自動重建。 當瀏覽器重新連接至應用程式之後，瀏覽器中的頁面會重載。
 
 1. 每個待辦事項的標題文字都可設定為可編輯，而核取方塊則可協助使用者記錄已完成的項目。 請為每個待辦事項新增核取方塊輸入，然後將其值繫結至 `IsDone` 屬性。 變更 `@todo.Title` 為系結 `<input>` 至 `todo.Title` 的元素 `@bind` ：
 
-   [!code-razor[](build-a-blazor-app/samples_snapshot/Todo7.razor?highlight=4-7)]
+   ::: moniker range=">= aspnetcore-5.0"
+
+   [!code-razor[](~/blazor/common/samples/5.x/BlazorSample_WebAssembly/Pages/build-a-blazor-app/Todo7.razor?name=snippet&highlight=4-7)]
+
+   ::: moniker-end
+
+   ::: moniker range="< aspnetcore-5.0"
+
+   [!code-razor[](~/blazor/common/samples/3.x/BlazorSample_WebAssembly/Pages/build-a-blazor-app/Todo7.razor?name=snippet&highlight=4-7)]
+
+   ::: moniker-end
 
 1. 更新 `<h3>` 標頭，以顯示未)  (完成的待辦事項數目計數 `IsDone` `false` 。
 
@@ -164,7 +252,17 @@ ms.locfileid: "99238297"
 
 1. 完成的 `Todo` 元件 (`Pages/Todo.razor`) ：
 
-   [!code-razor[](build-a-blazor-app/samples_snapshot/Todo1.razor)]
+   ::: moniker range=">= aspnetcore-5.0"
+
+   [!code-razor[](~/blazor/common/samples/5.x/BlazorSample_WebAssembly/Pages/build-a-blazor-app/Todo1.razor)]
+
+   ::: moniker-end
+
+   ::: moniker range="< aspnetcore-5.0"
+
+   [!code-razor[](~/blazor/common/samples/3.x/BlazorSample_WebAssembly/Pages/build-a-blazor-app/Todo1.razor)]
+
+   ::: moniker-end
 
 1. 儲存 `Pages/Todo.razor` 檔案。 應用程式會在命令 shell 中自動重建。 當瀏覽器重新連接至應用程式之後，瀏覽器中的頁面會重載。
 

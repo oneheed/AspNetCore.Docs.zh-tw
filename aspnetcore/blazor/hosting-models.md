@@ -19,16 +19,14 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/hosting-models
-ms.openlocfilehash: adc3b7b1b33438f2d0024bf78830e412a330ad45
-ms.sourcegitcommit: 04ad9cd26fcaa8bd11e261d3661f375f5f343cdc
+ms.openlocfilehash: 780161090d376f08b849fadb47127810d6661d0c
+ms.sourcegitcommit: 1166b0ff3828418559510c661e8240e5c5717bb7
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 02/10/2021
-ms.locfileid: "100106852"
+ms.lasthandoff: 02/12/2021
+ms.locfileid: "100279756"
 ---
 # <a name="aspnet-core-blazor-hosting-models"></a>ASP.NET Core Blazor 裝載模型
-
-依 [Daniel Roth](https://github.com/danroth27)
 
 Blazor 是設計用來在瀏覽器中以 [WebAssembly](https://webassembly.org/)為基礎的 .net 執行時間執行用戶端的 web 架構， (*Blazor WebAssembly*) 或 ASP.NET Core () 中的伺服器端 *Blazor Server* 。 無論裝載模型為何，應用程式和元件模型 *都相同*。
 

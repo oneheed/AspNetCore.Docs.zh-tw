@@ -19,16 +19,14 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/components/virtualization
-ms.openlocfilehash: 5e058c33dcf52faf722b27e361491dd8dbc47dc1
-ms.sourcegitcommit: 04ad9cd26fcaa8bd11e261d3661f375f5f343cdc
+ms.openlocfilehash: d9fc767a4b5160c616053b075ba92194bcffa275
+ms.sourcegitcommit: 1166b0ff3828418559510c661e8240e5c5717bb7
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 02/10/2021
-ms.locfileid: "100107021"
+ms.lasthandoff: 02/12/2021
+ms.locfileid: "100280019"
 ---
 # <a name="aspnet-core-blazor-component-virtualization"></a>ASP.NET Core Blazor 元件虛擬化
-
-依 [Daniel Roth](https://github.com/danroth27)
 
 使用 Blazor 架構內建的虛擬化支援，改善元件轉譯的認知效能。 虛擬化是一項技術，可將 UI 轉譯限制為只顯示目前可見的部分。 例如，當應用程式必須轉譯長清單的專案，而且在任何指定的時間都只需要顯示專案的子集時，虛擬化就很有説明。 Blazor提供可用於將虛擬化新增至應用程式元件的[ `Virtualize` 元件](xref:Microsoft.AspNetCore.Components.Web.Virtualization.Virtualize%601)。
 

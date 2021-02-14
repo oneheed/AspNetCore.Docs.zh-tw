@@ -19,16 +19,14 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/security/server/threat-mitigation
-ms.openlocfilehash: 270589b1effc8d82f54d2760b315fa2686699f67
-ms.sourcegitcommit: 04ad9cd26fcaa8bd11e261d3661f375f5f343cdc
+ms.openlocfilehash: 524a1f85838d083ed2f01afd96601bcd5e6ce12b
+ms.sourcegitcommit: 1166b0ff3828418559510c661e8240e5c5717bb7
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 02/10/2021
-ms.locfileid: "100106748"
+ms.lasthandoff: 02/12/2021
+ms.locfileid: "100280973"
 ---
 # <a name="threat-mitigation-guidance-for-aspnet-core-blazor-server"></a>ASP.NET Core 的威脅風險降低指導方針 Blazor Server
-
-[Javier Calvarro Nelson](https://github.com/javiercn)
 
 Blazor Server 應用程式採用具 *狀態* 的資料處理模型，其中伺服器和用戶端會維持長期的關聯性。 持續性狀態是由 [電路](xref:blazor/state-management)維護，它可以跨越也可能長期存在的連接。
 

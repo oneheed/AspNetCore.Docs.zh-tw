@@ -19,16 +19,14 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/fundamentals/signalr
-ms.openlocfilehash: 31cd68baa0fbc773f09fe3a1b37091b2dfc0b0a0
-ms.sourcegitcommit: 04ad9cd26fcaa8bd11e261d3661f375f5f343cdc
+ms.openlocfilehash: 3198f45819020ca551617aa12a146f2b8a9a9f8e
+ms.sourcegitcommit: 1166b0ff3828418559510c661e8240e5c5717bb7
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 02/10/2021
-ms.locfileid: "100110009"
+ms.lasthandoff: 02/12/2021
+ms.locfileid: "100279857"
 ---
 # <a name="aspnet-core-blazor-signalr-guidance"></a>ASP.NET Core Blazor SignalR 指導方針
-
-[Daniel Roth](https://github.com/danroth27)、 [Mackinnon Buck](https://github.com/MackinnonBuck)和[Luke Latham](https://github.com/guardrex)
 
 如需 ASP.NET Core 設定的一般指引 SignalR ，請參閱檔區域中的主題 <xref:signalr/introduction> 。 若要設定 SignalR [加入至裝載的 Blazor WebAssembly 解決方案](xref:tutorials/signalr-blazor)，請參閱 <xref:signalr/configuration#configure-server-options> 。
 

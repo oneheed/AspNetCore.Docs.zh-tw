@@ -20,16 +20,14 @@ no-loc:
 - SignalR
 uid: blazor/state-management
 zone_pivot_groups: blazor-hosting-models
-ms.openlocfilehash: 5b7a6fefd13d7255fbe3ae7010df48c6211fa755
-ms.sourcegitcommit: 3593c4efa707edeaaceffbfa544f99f41fc62535
+ms.openlocfilehash: 811ec08eb457fcf0697a64dc4990d29082454f73
+ms.sourcegitcommit: 1166b0ff3828418559510c661e8240e5c5717bb7
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 01/04/2021
-ms.locfileid: "97854319"
+ms.lasthandoff: 02/12/2021
+ms.locfileid: "100280863"
 ---
-# <a name="aspnet-core-no-locblazor-state-management"></a>ASP.NET Core Blazor 狀態管理
-
-由 [Steve Sanderson](https://github.com/SteveSandersonMS) 和 [Luke Latham](https://github.com/guardrex)
+# <a name="aspnet-core-blazor-state-management"></a>ASP.NET Core Blazor 狀態管理
 
 ::: zone pivot="webassembly"
 
@@ -71,12 +69,12 @@ ms.locfileid: "97854319"
 
 <h2 id="server-side-storage-wasm">伺服器端儲存空間</h2>
 
-針對跨越多個使用者和裝置的永久資料持續性，應用程式可以使用透過 web API 存取的獨立伺服器端儲存體。 選項包括：
+針對跨越多個使用者和裝置的永久資料持續性，應用程式可以使用透過 web API 存取的獨立伺服器端儲存體。 這些選項包括：
 
 * Blob 儲存體
 * 機碼值儲存體
 * 關聯式資料庫
-* 表格儲存體
+* 資料表儲存體
 
 儲存資料之後，會保留使用者的狀態，並可在任何新的瀏覽器會話中使用。
 
@@ -180,12 +178,12 @@ Blazor Server 是具狀態的應用程式架構。 大部分的情況下，應�
 
 <h2 id="server-side-storage-server">伺服器端儲存空間</h2>
 
-針對跨越多個使用者和裝置的永久資料持續性，應用程式可以使用伺服器端儲存體。 選項包括：
+針對跨越多個使用者和裝置的永久資料持續性，應用程式可以使用伺服器端儲存體。 這些選項包括：
 
 * Blob 儲存體
 * 機碼值儲存體
 * 關聯式資料庫
-* 表格儲存體
+* 資料表儲存體
 
 儲存資料之後，會保留使用者的狀態，並可在任何新的線路中使用。
 
@@ -280,7 +278,7 @@ protected override async Task OnInitializedAsync()
 }
 ```
 
-如果元件的參數包含流覽狀態，請呼叫 `ProtectedSessionStore.GetAsync` 並指派非 `null` 結果中的 <xref:Microsoft.AspNetCore.Components.ComponentBase.OnParametersSetAsync%2A> ，而不是 <xref:Microsoft.AspNetCore.Components.ComponentBase.OnInitializedAsync%2A> 。 <xref:Microsoft.AspNetCore.Components.ComponentBase.OnInitializedAsync%2A> 只有在第一次具現化元件時，才會呼叫一次。 <xref:Microsoft.AspNetCore.Components.ComponentBase.OnInitializedAsync%2A> 如果使用者流覽至不同的 URL，並在相同頁面上剩餘，則不會再次呼叫。 如需詳細資訊，請參閱 <xref:blazor/components/lifecycle> 。
+如果元件的參數包含流覽狀態，請呼叫 `ProtectedSessionStore.GetAsync` 並指派非 `null` 結果中的 <xref:Microsoft.AspNetCore.Components.ComponentBase.OnParametersSetAsync%2A> ，而不是 <xref:Microsoft.AspNetCore.Components.ComponentBase.OnInitializedAsync%2A> 。 <xref:Microsoft.AspNetCore.Components.ComponentBase.OnInitializedAsync%2A> 只有在第一次具現化元件時，才會呼叫一次。 <xref:Microsoft.AspNetCore.Components.ComponentBase.OnInitializedAsync%2A> 如果使用者流覽至不同的 URL，並在相同頁面上剩餘，則不會再次呼叫。 如需詳細資訊，請參閱<xref:blazor/components/lifecycle>。
 
 > [!WARNING]
 > 此區段中的範例只適用于伺服器未啟用可呈現的情況。 啟用自動呈現之後，會產生錯誤，說明因為正在資源清單元件，所以無法發出 JavaScript interop 呼叫。
@@ -527,7 +525,7 @@ protected override async Task OnInitializedAsync()
 }
 ```
 
-如果元件的參數包含導覽狀態，請呼叫 `ProtectedSessionStore.GetAsync` 並指派中的結果 <xref:Microsoft.AspNetCore.Components.ComponentBase.OnParametersSetAsync%2A> ，而不是 <xref:Microsoft.AspNetCore.Components.ComponentBase.OnInitializedAsync%2A> 。 <xref:Microsoft.AspNetCore.Components.ComponentBase.OnInitializedAsync%2A> 只有在第一次具現化元件時，才會呼叫一次。 <xref:Microsoft.AspNetCore.Components.ComponentBase.OnInitializedAsync%2A> 如果使用者流覽至不同的 URL，並在相同頁面上剩餘，則不會再次呼叫。 如需詳細資訊，請參閱 <xref:blazor/components/lifecycle> 。
+如果元件的參數包含導覽狀態，請呼叫 `ProtectedSessionStore.GetAsync` 並指派中的結果 <xref:Microsoft.AspNetCore.Components.ComponentBase.OnParametersSetAsync%2A> ，而不是 <xref:Microsoft.AspNetCore.Components.ComponentBase.OnInitializedAsync%2A> 。 <xref:Microsoft.AspNetCore.Components.ComponentBase.OnInitializedAsync%2A> 只有在第一次具現化元件時，才會呼叫一次。 <xref:Microsoft.AspNetCore.Components.ComponentBase.OnInitializedAsync%2A> 如果使用者流覽至不同的 URL，並在相同頁面上剩餘，則不會再次呼叫。 如需詳細資訊，請參閱<xref:blazor/components/lifecycle>。
 
 > [!WARNING]
 > 此區段中的範例只適用于伺服器未啟用可呈現的情況。 啟用自動呈現之後，會產生錯誤，說明因為正在資源清單元件，所以無法發出 JavaScript interop 呼叫。

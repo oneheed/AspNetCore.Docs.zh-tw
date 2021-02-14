@@ -19,16 +19,14 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/components/data-binding
-ms.openlocfilehash: 67a63f1b4f705a4857dea2e6d1a942d4f21469f5
-ms.sourcegitcommit: 83524f739dd25fbfa95ee34e95342afb383b49fe
+ms.openlocfilehash: 76cc0ddc46dd08a5b8b88cf6045b84beab57c295
+ms.sourcegitcommit: 1166b0ff3828418559510c661e8240e5c5717bb7
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 01/29/2021
-ms.locfileid: "99057092"
+ms.lasthandoff: 02/12/2021
+ms.locfileid: "100280130"
 ---
-# <a name="aspnet-core-no-locblazor-data-binding"></a>ASP.NET Core Blazor 資料系結
-
-[Luke Latham](https://github.com/guardrex)、 [Daniel Roth](https://github.com/danroth27)和[Steve Sanderson](https://github.com/SteveSandersonMS)
+# <a name="aspnet-core-blazor-data-binding"></a>ASP.NET Core Blazor 資料系結
 
 Razor 元件會透過以 [`@bind`](xref:mvc/views/razor#bind) 欄位、屬性或運算式值命名的 HTML 元素屬性，提供資料系結功能 Razor 。
 

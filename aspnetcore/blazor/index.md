@@ -19,16 +19,14 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/index
-ms.openlocfilehash: d42136de00ccc9b7565c5ae088e1ecf4560a63c5
-ms.sourcegitcommit: 04ad9cd26fcaa8bd11e261d3661f375f5f343cdc
+ms.openlocfilehash: 560fead9868bab9888c0d6a69cf09f135bbf39cc
+ms.sourcegitcommit: 1166b0ff3828418559510c661e8240e5c5717bb7
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 02/10/2021
-ms.locfileid: "100106878"
+ms.lasthandoff: 02/12/2021
+ms.locfileid: "100279746"
 ---
 # <a name="introduction-to-aspnet-core-blazor"></a>ASP.NET Core 簡介 Blazor
-
-作者：[Daniel Roth](https://github.com/danroth27) 和 [Luke Latham](https://github.com/guardrex)
 
 *歡迎使用 Blazor ！*
 

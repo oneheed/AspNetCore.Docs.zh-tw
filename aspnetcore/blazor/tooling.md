@@ -5,7 +5,7 @@ description: 瞭解可用來建立 Blazor 應用程式的工具。
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 09/28/2020
+ms.date: 02/11/2021
 no-loc:
 - appsettings.json
 - ASP.NET Core Identity
@@ -20,12 +20,12 @@ no-loc:
 - SignalR
 uid: blazor/tooling
 zone_pivot_groups: operating-systems
-ms.openlocfilehash: a17b16563ac12d634e6bdc32638991f45e2a66d5
-ms.sourcegitcommit: 1166b0ff3828418559510c661e8240e5c5717bb7
+ms.openlocfilehash: 6b61d9a4645d273b0c78fae0388d569771c43a2d
+ms.sourcegitcommit: a49c47d5a573379effee5c6b6e36f5c302aa756b
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 02/12/2021
-ms.locfileid: "100280685"
+ms.lasthandoff: 02/16/2021
+ms.locfileid: "100536242"
 ---
 # <a name="tooling-for-aspnet-core-blazor"></a>ASP.NET Core 的工具 Blazor
 
@@ -49,6 +49,8 @@ ms.locfileid: "100280685"
 
 如需信任 ASP.NET Core HTTPS 開發憑證的詳細資訊，請參閱 <xref:security/enforcing-ssl#trust-the-aspnet-core-https-development-certificate-on-windows-and-macos> 。
 
+執行託管 Blazor WebAssembly 應用程式時，請從解決方案的專案執行應用程式 **`Server`** 。
+
 ::: zone-end
 
 ::: zone pivot="linux"
@@ -70,11 +72,11 @@ ms.locfileid: "100280685"
    ```
 
    針對託管 Blazor WebAssembly 體驗，請在命令中加入 hosted 選項 (`-ho` 或 `--hosted`) 選項：
-   
+
    ```dotnetcli
    dotnet new blazorwasm -o WebApplication1 -ho
    ```
-   
+
    如需 Blazor Server 體驗，請在命令介面中執行下列命令：
 
    ```dotnetcli
@@ -86,6 +88,57 @@ ms.locfileid: "100280685"
 1. 在 Visual Studio Code 中開啟 `WebApplication1` 資料夾。
 
 1. IDE 要求您新增資產來建立和偵測專案。 選取 [是]  。
+
+   **託管 Blazor WebAssembly 啟動和工作設定**
+
+   若為裝載的 Blazor WebAssembly 方案，請將 (或移動) `.vscode` 資料夾與和檔案移 `launch.json` `tasks.json` 至方案的父資料夾，也就是包含、和的一般專案資料夾名稱的資料夾 `Client` `Server` `Shared` 。 更新或確認和檔案中的設定 `launch.json` 會 `tasks.json` 從專案執行託管 Blazor WebAssembly 應用程式 **`Server`** 。
+
+   **`.vscode/launch.json`** (設定 `launch`) ：
+
+   ```json
+   ...
+   "cwd": "${workspaceFolder}/{SERVER APP FOLDER}",
+   ...
+   ```
+
+   在先前設定中， () 的目前工作目錄 `cwd` ， `{SERVER APP FOLDER}` 預留位置是 **`Server`** 專案的資料夾，通常是 " `Server` "。
+
+   如果使用 Microsoft Edge，且系統上未安裝 Google Chrome，請在設定中新增的其他屬性 `"browser": "edge"` 。
+
+   適用于和的專案資料夾範例 `Server` ，會將 Microsoft Edge 作為瀏覽器執行，而不是使用預設的瀏覽器 Google Chrome：
+
+   ```json
+   ...
+   "cwd": "${workspaceFolder}/Server",
+   "browser": "edge"
+   ...
+   ```
+
+   **`.vscode/tasks.json`** ([ `dotnet` 命令](/dotnet/core/tools/dotnet)引數) ：
+
+   ```json
+   ...
+   "${workspaceFolder}/{SERVER APP FOLDER}/{PROJECT NAME}.csproj",
+   ...
+   ```
+
+   在前面的引數中：
+
+   * `{SERVER APP FOLDER}`預留位置是 **`Server`** 專案的資料夾，通常是 " `Server` "。
+   * `{PROJECT NAME}`預留位置是應用程式的名稱，通常是根據解決方案的名稱，然後是根據 `.Server` 專案範本所產生之應用程式中的 "" Blazor 。
+
+   下列教學課程中 [使用的 SignalR Blazor WebAssembly 應用程式](xref:tutorials/signalr-blazor) 範例會使用的專案資料夾名稱 `Server` 和專案名稱 `BlazorWebAssemblySignalRApp.Server` ：
+
+   ```json
+   ...
+   "args": [
+     "build",
+       "${workspaceFolder}/Server/BlazorWebAssemblySignalRApp.Server.csproj",
+       "/property:GenerateFullPaths=true",
+       "/consoleloggerparameters:NoSummary"
+   ],
+   ...
+   ```
 
 1. 按下<kbd>Ctrl</kbd> + <kbd>F5</kbd>以執行應用程式。
 
@@ -122,6 +175,8 @@ ms.locfileid: "100280685"
 1. 選取  >  [在不進行偵錯工具的 **情況下** 執行] 以執行應用程式 *而不需偵錯工具* 使用 [**執行**  >  **開始調試** 程式] 或 [執行 (&#9654;]) 按鈕來執行應用程式，以 *使用調試* 程式來執行應用程式。
 
 如果出現提示信任開發憑證，請信任憑證並繼續。 需要使用者和 keychain 密碼才能信任憑證。 如需信任 ASP.NET Core HTTPS 開發憑證的詳細資訊，請參閱 <xref:security/enforcing-ssl#trust-the-aspnet-core-https-development-certificate-on-windows-and-macos> 。
+
+執行託管 Blazor WebAssembly 應用程式時，請從解決方案的專案執行應用程式 **`Server`** 。
 
 ::: zone-end
 

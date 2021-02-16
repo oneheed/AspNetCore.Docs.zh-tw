@@ -1,3 +1,23 @@
+---
+no-loc:
+- appsettings.json
+- ASP.NET Core Identity
+- cookie
+- Cookie
+- Blazor
+- Blazor Server
+- Blazor WebAssembly
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
+ms.openlocfilehash: 30baab0649268f4abf0dbd6c99dfeef3f43d0054
+ms.sourcegitcommit: a49c47d5a573379effee5c6b6e36f5c302aa756b
+ms.translationtype: MT
+ms.contentlocale: zh-TW
+ms.lasthandoff: 02/16/2021
+ms.locfileid: "100536278"
+---
 讀取相關設定值的慣用方式是使用 [選項模式](xref:fundamentals/configuration/options)。 例如，若要讀取下列設定值：
 
 ```json
@@ -15,11 +35,11 @@ Options 類別：
 
 * 必須是具有公用無參數的函式的非抽象。
 * 型別的所有公用讀寫屬性都會系結。
-* 欄位為 ***not** _ 系結。 在上述程式碼中，未系結 `Position` 。 使用屬性，因此在將類別系結 `Position` `"Position"` 至設定提供者時，不需要在應用程式中硬式編碼字串。
+* 欄位 ***未*** 系結。 在上述程式碼中，未系結 `Position` 。 使用屬性，因此在將類別系結 `Position` `"Position"` 至設定提供者時，不需要在應用程式中硬式編碼字串。
 
 下列程式碼：
 
-_ 呼叫 [ConfigurationBinder](xref:Microsoft.Extensions.Configuration.ConfigurationBinder.Bind*) ，將類別系結至 `PositionOptions` `Position` 區段。
+* 呼叫 [ConfigurationBinder](xref:Microsoft.Extensions.Configuration.ConfigurationBinder.Bind*) ，將類別系結至 `PositionOptions` `Position` 區段。
 * 顯示 `Position` 設置資料。
 
 [!code-csharp[](~/fundamentals/configuration/index/samples/3.x/ConfigSample/Pages/Test22.cshtml.cs?name=snippet)]

@@ -5,7 +5,7 @@ description: 了解如何使用組態 API 設定 ASP.NET Core 應用程式。
 monikerRange: '>= aspnetcore-2.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 11/24/2020
+ms.date: 1/29/2021
 no-loc:
 - appsettings.json
 - ASP.NET Core Identity
@@ -19,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: fundamentals/configuration/index
-ms.openlocfilehash: 62c9d1a58e0f771d91e2bc57f39ec5ebb25baaed
-ms.sourcegitcommit: 37186f76e4a50d7fb7389026dd0e5e234b51ebb2
+ms.openlocfilehash: 0f069b049889f7caade493e238ac7a23db5e79af
+ms.sourcegitcommit: a49c47d5a573379effee5c6b6e36f5c302aa756b
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 02/04/2021
-ms.locfileid: "99541364"
+ms.lasthandoff: 02/16/2021
+ms.locfileid: "100536280"
 ---
 # <a name="configuration-in-aspnet-core"></a>ASP.NET Core 的設定
 
@@ -232,9 +232,30 @@ setx Logging__1__Name=ToConsole
 setx Logging__1__Level=Information
 ```
 
-### <a name="environment-variables-set-in-launchsettingsjson"></a>在 launchSettings.js中設定的環境變數
+### <a name="environment-variables-set-in-generated-launchsettingsjson"></a>在產生的 launchSettings.js中設定的環境變數
 
-在 *launchSettings.js* 中設定的環境變數會覆寫系統內容中所設定的環境變數。
+在 *launchSettings.js* 中設定的環境變數會覆寫系統內容中所設定的環境變數。 例如，ASP.NET Core web 範本會在將端點設定設定為的檔案 *上產生launchSettings.js* ：
+
+```json
+"applicationUrl": "https://localhost:5001;http://localhost:5000"
+```
+
+設定會 `applicationUrl` 設定 `ASPNETCORE_URLS` 環境變數，並覆寫環境中設定的值。
+
+### <a name="escape-environment-variables-on-linux"></a>在 Linux 上的 Escape 環境變數
+
+在 Linux 上，必須將 URL 環境變數的值換成 `systemd` 可加以剖析。 使用產生的 linux 工具 `systemd-escape``http:--localhost:5001`
+ 
+ ```cmd
+ groot@terminus:~$ systemd-escape http://localhost:5001
+ http:--localhost:5001
+ ```
+
+### <a name="display-environment-variables"></a>顯示環境變數
+
+下列程式碼會顯示應用程式啟動時的環境變數和值，這在進行環境設定的偵錯工具時很有用：
+
+[!code-csharp[](~/fundamentals/configuration/index/samples_snippets/5.x/Program.cs?name=snippet)]
 
 <a name="clcp"></a>
 
@@ -556,6 +577,38 @@ dotnet run -k1 value1 -k2 value2 --alt3=value2 /alt4=value3 --alt5 value5 /alt6 
 
 請參閱使用 [將陣列](#boa) 系結到另一個範例 `MemoryConfigurationProvider` 。
 
+::: moniker-end
+::: moniker range=">= aspnetcore-5.0"
+
+<a name="kestrel"></a>
+
+## <a name="kestrel-endpoint-configuration"></a>Kestrel 端點組態
+
+Kestrel 特定的端點設定會覆寫所有 [跨伺服器](xref:fundamentals/servers/index) 端點設定。 跨伺服器端點設定包括：
+
+  * [UseUrls](xref:fundamentals/host/web-host#server-urls)
+  * `--urls`在[命令列](xref:fundamentals/configuration/index#command-line)上
+  * [環境變數](xref:fundamentals/configuration/index#environment-variables)`ASPNETCORE_URLS`
+
+請考慮 *appsettings.json* ASP.NET Core web 應用程式中使用的下列檔案：
+
+[!code-json[](~/fundamentals/configuration/index/samples_snippets/5.x/appsettings.json?highlight=2-8)]
+
+當先前反白顯示的標記用於 ASP.NET Core web 應用程式 ***，並*** 在命令列上啟動應用程式時，會使用下列跨伺服器端點設定：
+
+`dotnet run --urls="https://localhost:7777"`
+
+Kestrel 會系結至) 中為檔案 (設定的端點 *appsettings.json* `https://localhost:9999` ，而不是 `https://localhost:7777` 。
+
+請考慮設定為環境變數的 Kestrel 特定端點：
+
+`set Kestrel__Endpoints__Https__Url=https://localhost:8888`
+
+在上述的環境變數中， `Https` 是 Kestrel 特定端點的名稱。 上述檔案 *appsettings.json* 也會定義名為的 Kestrel 特定端點 `Https` 。 依 [預設](#default-configuration)，在 appsettings 之後，會讀取使用 [環境變數設定提供者](#evcp)的環境變數 *。* `Environment`因此 *，先前* 的環境變數會用於 `Https` 端點。
+
+::: moniker-end
+::: moniker range=">= aspnetcore-3.0"
+
 ## <a name="getvalue"></a>GetValue
 
 [`ConfigurationBinder.GetValue<T>`](xref:Microsoft.Extensions.Configuration.ConfigurationBinder.GetValue*) 從具有指定索引鍵的設定中解壓縮單一值，並將其轉換為指定的類型：
@@ -773,7 +826,7 @@ Index: 5  Value: value5
 
 ## <a name="default-host-configuration"></a>預設主機設定
 
-如需使用 [Web 主機](xref:fundamentals/host/web-host)時預設組態的詳細資料，請參閱[本主題的 ASP.NET Core 2.2 版本](?view=aspnetcore-2.2)。
+如需使用 [Web 主機](xref:fundamentals/host/web-host)時預設組態的詳細資料，請參閱[本主題的 ASP.NET Core 2.2 版本](?view=aspnetcore-2.2&preserve-view=true)。
 
 * 主機組態的提供來源：
   * 前面加 `DOTNET_` 上 (的環境變數，例如， `DOTNET_ENVIRONMENT` 使用 [環境變數設定提供者](#environment-variables)) 。 載入設定機碼值組時，會移除前置詞 (`DOTNET_`)。

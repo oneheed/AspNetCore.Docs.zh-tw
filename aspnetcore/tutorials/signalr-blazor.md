@@ -20,12 +20,12 @@ no-loc:
 - SignalR
 uid: tutorials/signalr-blazor
 zone_pivot_groups: blazor-hosting-models
-ms.openlocfilehash: 355db5ad5462747be0058096bc0132ed1071f290
-ms.sourcegitcommit: 1166b0ff3828418559510c661e8240e5c5717bb7
+ms.openlocfilehash: f4e51b39c4c3b0c444b08025e9bd74eec0747541
+ms.sourcegitcommit: a49c47d5a573379effee5c6b6e36f5c302aa756b
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 02/12/2021
-ms.locfileid: "100280996"
+ms.lasthandoff: 02/16/2021
+ms.locfileid: "100536358"
 ---
 # <a name="use-aspnet-core-signalr-with-blazor"></a>搭配使用 SignalR ASP.NET Core Blazor
 
@@ -134,7 +134,7 @@ ms.locfileid: "100280996"
    dotnet new blazorwasm -ho -o BlazorWebAssemblySignalRApp
    ```
 
-   `-ho|--hosted`選項會建立託管 Blazor WebAssembly 方案。
+   `-ho|--hosted`選項會建立託管 Blazor WebAssembly 方案。 如需有關在資料夾中設定 VS Code 資產的詳細資訊 `.vscode` ，請參閱中的 **Linux** 作業系統指引 <xref:blazor/tooling> 。
 
    `-o|--output`選項會建立解決方案的資料夾。 如果您已建立解決方案的資料夾，並在該資料夾中開啟命令 shell，請省略 `-o|--output` 選項和值以建立解決方案。
 
@@ -378,6 +378,8 @@ dotnet add Server package System.Text.Encodings.Web
 
 # <a name="visual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code)
 
+如需有關在資料夾中設定 VS Code 資產的詳細資訊 `.vscode` ，請參閱中的 **Linux** 作業系統指引 <xref:blazor/tooling> 。
+
 1. 按下<kbd>f5</kbd>鍵以執行應用程式的偵錯工具，或按<kbd>Ctrl</kbd> + <kbd>F5</kbd>執行應用程式，而不進行偵錯工具。
 
 1. 從網址列複製 URL，開啟另一個瀏覽器執行個體或索引標籤，然後將 URL 貼入網址列。
@@ -465,7 +467,7 @@ dotnet add Server package System.Text.Encodings.Web
 
 1. 在 Visual Studio Code 中，開啟應用程式的專案資料夾。
 
-1. 當對話方塊出現時，若要新增資產以建立和偵測應用程式，請選取 [ **是**]。 Visual Studio Code 會自動加入 `.vscode` 具有所產生檔案和檔案的資料夾 `launch.json` `tasks.json` 。
+1. 當對話方塊出現時，若要新增資產以建立和偵測應用程式，請選取 [ **是**]。 Visual Studio Code 會自動加入 `.vscode` 具有所產生檔案和檔案的資料夾 `launch.json` `tasks.json` 。 如需有關在資料夾中設定 VS Code 資產的詳細資訊 `.vscode` ，請參閱中的 **Linux** 作業系統指引 <xref:blazor/tooling> 。
 
 # <a name="visual-studio-for-mac"></a>[Visual Studio for Mac](#tab/visual-studio-mac)
 

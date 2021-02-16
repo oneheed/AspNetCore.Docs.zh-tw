@@ -19,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/components/index
-ms.openlocfilehash: 823c24620b369874fdbc3e314b5b08952df83c8b
-ms.sourcegitcommit: 1166b0ff3828418559510c661e8240e5c5717bb7
+ms.openlocfilehash: 7b4438b4003916488c17d389b9817b5e09d1086c
+ms.sourcegitcommit: a49c47d5a573379effee5c6b6e36f5c302aa756b
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 02/12/2021
-ms.locfileid: "100280107"
+ms.lasthandoff: 02/16/2021
+ms.locfileid: "100536216"
 ---
 # <a name="create-and-use-aspnet-core-razor-components"></a>建立和使用 ASP.NET Core Razor 元件
 
@@ -285,16 +285,168 @@ public string Title { get; set; } = "Panel Title from Child";
 
 [!code-razor[](index/samples_snapshot/ParentComponent.razor?highlight=5-6)]
 
-依照慣例，由 c # 程式碼所組成的屬性值會使用[ Razor 的保留 `@` 符號](xref:mvc/views/razor#razor-syntax)指派給參數：
+使用[ Razor 的保留 `@` 符號](xref:mvc/views/razor#razor-syntax)，將 c # 欄位、屬性和方法指派給元件參數，做為 HTML 屬性值：
 
-* 父欄位或屬性： `Title="@{FIELD OR PROPERTY}` ，其中預留位置 `{FIELD OR PROPERTY}` 是父元件的 c # 欄位或屬性。
-* 方法的結果： `Title="@{METHOD}"` ，其中預留位置 `{METHOD}` 是父元件的 c # 方法。
-* [隱含或明確運算式](xref:mvc/views/razor#implicit-razor-expressions)： `Title="@({EXPRESSION})"` ，其中預留位置 `{EXPRESSION}` 是 c # 運算式。
+* 若要將父元件的欄位、屬性或方法指派給子元件的參數，請在欄位、屬性或方法名稱前面加上 `@` 符號。 若要將 [隱含 c # 運算式](xref:mvc/views/razor#implicit-razor-expressions) 的結果指派給參數，請在隱含運算式前面加上 `@` 符號。
+
+  下列父元件會顯示上述元件的四個實例 `ChildComponent` ，並將其 `Title` 參數值設定為：
+
+  * 欄位的值 `title` 。
+  * `GetTitle`C # 方法的結果。
+  * 使用完整格式的目前本機日期 <xref:System.DateTime.ToLongDateString%2A> 。
+  * `person`物件的 `Name` 屬性。
+
+  `Pages/ParentComponent.razor`:
+  
+  ```razor
+  <ChildComponent Title="@title">
+      Title from field.
+  </ChildComponent>
+  
+  <ChildComponent Title="@GetTitle()">
+      Title from method.
+  </ChildComponent>
+  
+  <ChildComponent Title="@DateTime.Now.ToLongDateString()">
+      Title from implicit Razor expression.
+  </ChildComponent>
+  
+  <ChildComponent Title="@person.Name">
+      Title from implicit Razor expression.
+  </ChildComponent>
+  
+  @code {
+      private string title = "Panel Title from Parent";
+      private Person person = new Person();
+      
+      private string GetTitle()
+      {
+          return "Panel Title from Parent";
+      }
+      
+      private class Person
+      {
+          public string Name { get; set; } = "Dr. Who";
+      }
+  }
+  ```
+  
+  不同于 Razor () 的頁面 `.cshtml` ，轉譯 Blazor 元件時無法在運算式中執行非同步工作 Razor 。 這是因為 Blazor 是針對呈現互動式 ui 所設計。 在互動式 UI 中，畫面必須一律顯示一些東西，因此封鎖轉譯流程沒有意義。 相反地，非同步工作是在其中一個 [非同步生命週期事件](xref:blazor/components/lifecycle)中執行。 在每個非同步生命週期事件之後，元件可能會再次轉譯。 Razor**不** 支援下列語法：
+  
+  ```razor
+  <ChildComponent Title="@await ...">
+      ...
+  </ChildComponent>
+  ```
+  
+  如果已建立應用程式，上述範例中的程式碼會產生 *編譯器錯誤* ：
+  
+  > ' Await ' 運算子只能在非同步方法中使用。 請考慮以 ' async ' 修飾元標記此方法，並將其傳回類型變更為 ' Task '。
+
+  為了取得 `Title` 上述範例 asychronously 中的參數值，元件可以使用[ `OnInitializedAsync` 生命週期事件](xref:blazor/components/lifecycle#component-initialization-methods)，如下列範例所示：
+  
+  ```razor
+  <ChildComponent Title="@title">
+      Title from implicit Razor expression.
+  </ChildComponent>
+  
+  @code {
+      private string title;
+      
+      protected override async Task OnInitializedAsync()
+      {
+          title = await ...;
+      }
+  }
+  ```
+  
+* 若要將父元件中 [明確 c # 運算式](xref:mvc/views/razor#explicit-razor-expressions) 的結果指派給子元件的參數，請使用符號前置詞將運算式括在括弧中 `@` 。
+
+  下列子元件具有 <xref:System.DateTime> 元件參數： `ShowItemsSinceDate` 。
+  
+  `Shared/ChildComponent.razor`:
+  
+  ```razor
+  <div class="panel panel-default">
+      <div class="panel-heading">Explicit DateTime Expression Example</div>
+      <div class="panel-body">
+          <p>@ChildContent</p>
+          <p>One week ago date: @ShowItemsSinceDate</p>
+      </div>
+  </div>
+
+  @code {
+      [Parameter]
+      public DateTime ShowItemsSinceDate { get; set; }
+
+      [Parameter]
+      public RenderFragment ChildContent { get; set; }
+  }
+  ```
+  
+  下列父元件會使用明確的 c # 運算式來計算日期，該運算式在過去一周內會指派給子系的 `ShowItemsSinceDate` 參數。
+  
+  `Pages/ParentComponent.razor`:
+
+  ```razor
+  <ChildComponent ShowItemsSinceDate="@(DateTime.Now - TimeSpan.FromDays(7))">
+      Title from explicit Razor expression.
+  </ChildComponent>
+  ```
+
+  **不** 支援使用明確的運算式來串連文字和運算式結果，以指派給參數。 下列範例會搜尋將文字 "SKU-" 與產品股票數位串連 (屬性「 `SKU` 庫存單位」 ) 由父元件的 `product` 物件提供。 雖然在 () 的頁面中支援這個語法 Razor `.cshtml` ，但它對於指派給子系的參數而言是不正確 `Title` 。
+  
+  ```razor
+  <ChildComponent Title="SKU-@(product.SKU)">
+      Title from composed Razor expression. This doesn't compile.
+  </ChildComponent>
+  ```
+  
+  如果已建立應用程式，上述範例中的程式碼會產生 *編譯器錯誤* ：
+  
+  > 元件屬性不支援複雜的內容 (混合的 c # 和標記) 。
+  
+  若要支援所組成值的指派，請使用方法、欄位或屬性。 下列範例會在 c # 方法中執行 "SKU-" 的 concatination 和產品的存貨編號 `GetTitle` ：
+  
+  ```razor
+  <ChildComponent Title="@GetTitle()">
+      Composed title from method.
+  </ChildComponent>
+  
+  @code {
+      private Product product = new Product();
+
+      private string GetTitle() => $"SKU-{product.SKU}";
+      
+      private class Product
+      {
+          public string SKU { get; set; } = "12345";
+      }
+  }
+  ```
   
 如需詳細資訊，請參閱[ Razor ASP.NET Core 的語法參考](xref:mvc/views/razor)。
 
 > [!WARNING]
 > 請勿建立會寫入其本身 *元件參數* 的元件，而是改用私用欄位。 如需詳細資訊，請參閱 [覆寫的參數](#overwritten-parameters) 一節。
+
+#### <a name="component-parameters-should-be-auto-properties"></a>元件參數應為 auto 屬性
+
+元件參數應宣告為 *自動屬性*，表示它們不應在 getter 或 setter 中包含自訂邏輯。 例如，下列 `StartData` 屬性是自動屬性：
+
+```csharp
+[Parameter]
+public DateTime StartData { get; set; }
+```
+
+請勿在或存取子中放置自訂邏輯， `get` `set` 因為元件參數純粹是用來做為父元件的通道，以將資訊傳送至子元件。 如果子元件屬性的 setter 包含造成父元件轉譯資料流程的邏輯，則會產生無限的轉譯迴圈結果。
+
+如果您需要轉換接收的參數值：
+
+* 將參數屬性保留為純自動屬性，以代表提供的原始資料。
+* 建立其他屬性或方法，以根據參數屬性提供已轉換的資料。
+
+`OnParametersSetAsync`如果您想要在每次收到新資料時轉換接收的參數，您可以覆寫。
 
 ## <a name="child-content"></a>子內容
 

@@ -1,9 +1,29 @@
+---
+no-loc:
+- appsettings.json
+- ASP.NET Core Identity
+- cookie
+- Cookie
+- Blazor
+- Blazor Server
+- Blazor WebAssembly
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
+ms.openlocfilehash: 5c7412028a81233a0aedacfbe451014eeca4adc1
+ms.sourcegitcommit: a49c47d5a573379effee5c6b6e36f5c302aa756b
+ms.translationtype: MT
+ms.contentlocale: zh-TW
+ms.lasthandoff: 02/16/2021
+ms.locfileid: "100552712"
+---
 ASP.NET Core 提供下列優點：
 
 * 用於建置 Web UI 和 Web API 的統一劇本。
 * 可測試性架構。
-* [Razor Pages](xref:razor-pages/index) 更容易撰寫以頁面為焦點的案例程式碼，也更具生產力。
-* [Blazor](xref:blazor/index) 可讓您在瀏覽器中使用 C# 與 JavaScript。 共用伺服器端與用戶端應用程式邏輯都是以 .NET 撰寫。
+* [ Razor 頁面](xref:razor-pages/index)讓編碼頁面導向的案例更容易且更具生產力。
+* [Blazor](xref:blazor/index) 可讓您在瀏覽器中使用 c # 與 JavaScript。 共用伺服器端與用戶端應用程式邏輯都是以 .NET 撰寫。
 * 能夠在 Windows、macOS 和 Linux 上開發並執行。
 * 開放原始碼和以 [社區為焦點的](https://live.asp.net/)。
 * 整合 [新式客戶](xref:blazor/index) 端架構和開發工作流程。

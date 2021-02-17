@@ -19,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: test/troubleshoot-azure-iis
-ms.openlocfilehash: d51a4a43f585b0a0b7e3aab2c5de1b2d215de494
-ms.sourcegitcommit: 3593c4efa707edeaaceffbfa544f99f41fc62535
+ms.openlocfilehash: a8bb659a72e8370c31cc9c213689399e74f11b5c
+ms.sourcegitcommit: f77a7467651bab61b24261da9dc5c1dd75fc1fa9
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 01/04/2021
-ms.locfileid: "93059594"
+ms.lasthandoff: 02/17/2021
+ms.locfileid: "100564059"
 ---
 # <a name="troubleshoot-aspnet-core-on-azure-app-service-and-iis"></a>針對 Azure App Service 和 IIS 上的 ASP.NET Core 進行疑難排解
 
@@ -67,7 +67,7 @@ The Web server is configured to not list the contents of this directory.
 * 部署程式無法將所有應用程式的檔案和資料夾移至裝載系統上的部署資料夾。
 * 部署中缺少 *web.config* 檔案，或 *web.config* 的檔案內容格式不正確。
 
-請執行以下步驟：
+執行下列步驟：
 
 1. 從裝載系統上的 [部署] 資料夾中刪除所有檔案和資料夾。
 1. 使用您的一般部署方法（例如 Visual Studio、PowerShell 或手動部署），將應用程式的 *發行* 資料夾內容重新部署至主機系統：
@@ -320,7 +320,9 @@ ASP.NET Core 模組 stdout 記錄檔通常會記錄「應用程式事件記錄�
 
 藉由設定完成疑難排解時，請停用 stdout 記錄 `stdoutLogEnabled="false"` 。
 
-如需詳細資訊，請參閱 <xref:host-and-deploy/aspnet-core-module#log-creation-and-redirection> 。
+如需詳細資訊，請參閱<xref:host-and-deploy/aspnet-core-module#log-creation-and-redirection>。
+
+<a name="enhanced-diagnostic-logs"></a>
 
 ### <a name="aspnet-core-module-debug-log-azure-app-service"></a>ASP.NET Core 模組 debug log (Azure App Service) 
 
@@ -344,7 +346,7 @@ ASP.NET Core 模組偵錯記錄提供 ASP.NET Core 模組中其他且更深入�
 * 從 *web.config* 檔案本機移除 `<handlerSettings>` 並重新部署應用程式。
 * 使用 Kudu 主控台來編輯 *web.config* 檔案並移除 `<handlerSettings>` 區段。 儲存檔案。
 
-如需詳細資訊，請參閱 <xref:host-and-deploy/aspnet-core-module#enhanced-diagnostic-logs> 。
+如需詳細資訊，請參閱<xref:host-and-deploy/aspnet-core-module#enhanced-diagnostic-logs>。
 
 > [!WARNING]
 > 無法停用偵錯記錄，可能會造成應用程式或伺服器發生失敗。 記錄檔大小沒有任何限制。 請只在針對應用程式啟動問題進行疑難排解時，才使用偵錯記錄。
@@ -456,7 +458,7 @@ ASP.NET Core 模組偵錯記錄提供 ASP.NET Core 模組中其他且更深入�
 1. 將 **stdoutLogEnabled** 設定為 `false`。
 1. 儲存檔案。
 
-如需詳細資訊，請參閱 <xref:host-and-deploy/aspnet-core-module#log-creation-and-redirection> 。
+如需詳細資訊，請參閱<xref:host-and-deploy/aspnet-core-module#log-creation-and-redirection>。
 
 > [!WARNING]
 > 如果無法停用 stdout 記錄檔，可能會造成應用程式或伺服器發生失敗。 因為它並沒有記錄檔大小或數量上的限制。
@@ -478,7 +480,7 @@ ASP.NET Core 模組偵錯記錄提供 ASP.NET Core 模組中其他且更深入�
 
 確認為記錄指定的路徑存在，而且應用程式集區的身分識別具有該位置的寫入權限。
 
-如需詳細資訊，請參閱 <xref:host-and-deploy/aspnet-core-module#enhanced-diagnostic-logs> 。
+如需詳細資訊，請參閱<xref:host-and-deploy/aspnet-core-module#enhanced-diagnostic-logs>。
 
 ### <a name="enable-the-developer-exception-page"></a>啟用開發人員例外頁面
 
@@ -632,7 +634,7 @@ The Web server is configured to not list the contents of this directory.
 * 部署程式無法將所有應用程式的檔案和資料夾移至裝載系統上的部署資料夾。
 * 部署中缺少 *web.config* 檔案，或 *web.config* 的檔案內容格式不正確。
 
-請執行以下步驟：
+執行下列步驟：
 
 1. 從裝載系統上的 [部署] 資料夾中刪除所有檔案和資料夾。
 1. 使用您的一般部署方法（例如 Visual Studio、PowerShell 或手動部署），將應用程式的 *發行* 資料夾內容重新部署至主機系統：
@@ -808,7 +810,7 @@ ASP.NET Core 模組 stdout 記錄檔通常會記錄「應用程式事件記錄�
 1. 將 **stdoutLogEnabled** 設定為 `false`。
 1. 選取 [儲存] 以儲存檔案。
 
-如需詳細資訊，請參閱 <xref:host-and-deploy/aspnet-core-module#log-creation-and-redirection> 。
+如需詳細資訊，請參閱<xref:host-and-deploy/aspnet-core-module#log-creation-and-redirection>。
 
 > [!WARNING]
 > 如果無法停用 stdout 記錄檔，可能會造成應用程式或伺服器發生失敗。 因為它並沒有記錄檔大小或數量上的限制。 請只在針對應用程式啟動問題進行疑難排解時，才使用 stdout 記錄。
@@ -837,7 +839,7 @@ ASP.NET Core 模組偵錯記錄提供 ASP.NET Core 模組中其他且更深入�
 * 從 *web.config* 檔案本機移除 `<handlerSettings>` 並重新部署應用程式。
 * 使用 Kudu 主控台來編輯 *web.config* 檔案並移除 `<handlerSettings>` 區段。 儲存檔案。
 
-如需詳細資訊，請參閱 <xref:host-and-deploy/aspnet-core-module#enhanced-diagnostic-logs> 。
+如需詳細資訊，請參閱<xref:host-and-deploy/aspnet-core-module#enhanced-diagnostic-logs>。
 
 > [!WARNING]
 > 無法停用偵錯記錄，可能會造成應用程式或伺服器發生失敗。 記錄檔大小沒有任何限制。 請只在針對應用程式啟動問題進行疑難排解時，才使用偵錯記錄。
@@ -949,7 +951,7 @@ ASP.NET Core 模組偵錯記錄提供 ASP.NET Core 模組中其他且更深入�
 1. 將 **stdoutLogEnabled** 設定為 `false`。
 1. 儲存檔案。
 
-如需詳細資訊，請參閱 <xref:host-and-deploy/aspnet-core-module#log-creation-and-redirection> 。
+如需詳細資訊，請參閱<xref:host-and-deploy/aspnet-core-module#log-creation-and-redirection>。
 
 > [!WARNING]
 > 如果無法停用 stdout 記錄檔，可能會造成應用程式或伺服器發生失敗。 因為它並沒有記錄檔大小或數量上的限制。
@@ -971,7 +973,7 @@ ASP.NET Core 模組偵錯記錄提供 ASP.NET Core 模組中其他且更深入�
 
 確認為記錄指定的路徑存在，而且應用程式集區的身分識別具有該位置的寫入權限。
 
-如需詳細資訊，請參閱 <xref:host-and-deploy/aspnet-core-module#enhanced-diagnostic-logs> 。
+如需詳細資訊，請參閱<xref:host-and-deploy/aspnet-core-module#enhanced-diagnostic-logs>。
 
 ### <a name="enable-the-developer-exception-page"></a>啟用開發人員例外頁面
 
@@ -1125,7 +1127,7 @@ The Web server is configured to not list the contents of this directory.
 * 部署程式無法將所有應用程式的檔案和資料夾移至裝載系統上的部署資料夾。
 * 部署中缺少 *web.config* 檔案，或 *web.config* 的檔案內容格式不正確。
 
-請執行以下步驟：
+執行下列步驟：
 
 1. 從裝載系統上的 [部署] 資料夾中刪除所有檔案和資料夾。
 1. 使用您的一般部署方法（例如 Visual Studio、PowerShell 或手動部署），將應用程式的 *發行* 資料夾內容重新部署至主機系統：
@@ -1286,7 +1288,7 @@ ASP.NET Core 模組 stdout 記錄檔通常會記錄「應用程式事件記錄�
 1. 將 **stdoutLogEnabled** 設定為 `false`。
 1. 選取 [儲存] 以儲存檔案。
 
-如需詳細資訊，請參閱 <xref:host-and-deploy/aspnet-core-module#log-creation-and-redirection> 。
+如需詳細資訊，請參閱<xref:host-and-deploy/aspnet-core-module#log-creation-and-redirection>。
 
 > [!WARNING]
 > 如果無法停用 stdout 記錄檔，可能會造成應用程式或伺服器發生失敗。 因為它並沒有記錄檔大小或數量上的限制。 請只在針對應用程式啟動問題進行疑難排解時，才使用 stdout 記錄。
@@ -1398,7 +1400,7 @@ ASP.NET Core 模組 stdout 記錄檔通常會記錄「應用程式事件記錄�
 1. 將 **stdoutLogEnabled** 設定為 `false`。
 1. 儲存檔案。
 
-如需詳細資訊，請參閱 <xref:host-and-deploy/aspnet-core-module#log-creation-and-redirection> 。
+如需詳細資訊，請參閱<xref:host-and-deploy/aspnet-core-module#log-creation-and-redirection>。
 
 > [!WARNING]
 > 如果無法停用 stdout 記錄檔，可能會造成應用程式或伺服器發生失敗。 因為它並沒有記錄檔大小或數量上的限制。

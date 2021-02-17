@@ -1,3 +1,23 @@
+---
+no-loc:
+- appsettings.json
+- ASP.NET Core Identity
+- cookie
+- Cookie
+- Blazor
+- Blazor Server
+- Blazor WebAssembly
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
+ms.openlocfilehash: d5e1630d6a9e412c40831aa3a66aaed7524ff501
+ms.sourcegitcommit: a49c47d5a573379effee5c6b6e36f5c302aa756b
+ms.translationtype: MT
+ms.contentlocale: zh-TW
+ms.lasthandoff: 02/16/2021
+ms.locfileid: "100551398"
+---
 HTTP 結尾與 HTTP 標頭類似，不同之處在于它們會在傳送回應主體之後傳送。 針對 IIS 和 HTTP.sys，只支援 HTTP/2 回應尾端。
 
 ```csharp

@@ -1,3 +1,23 @@
+---
+no-loc:
+- appsettings.json
+- ASP.NET Core Identity
+- cookie
+- Cookie
+- Blazor
+- Blazor Server
+- Blazor WebAssembly
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
+ms.openlocfilehash: 5964554c36e2242b70faee390374828acd2bd860
+ms.sourcegitcommit: a49c47d5a573379effee5c6b6e36f5c302aa756b
+ms.translationtype: MT
+ms.contentlocale: zh-TW
+ms.lasthandoff: 02/16/2021
+ms.locfileid: "100551587"
+---
 使用已向 AAD 註冊的伺服器 API，而應用程式的 AAD 註冊在依賴未 [驗證發行者網域](/azure/active-directory/develop/howto-configure-publisher-domain)的租使用者中時，您的伺服器 api 應用程式的應用程式識別碼 URI 不是， `api://{SERVER API APP CLIENT ID OR CUSTOM VALUE}` 而是採用格式 `https://{TENANT}.onmicrosoft.com/{SERVER API APP CLIENT ID OR CUSTOM VALUE}` 。 如果是這種情況， `Program.Main` 應用程式 () 中的預設存取權杖範圍 `Program.cs` *`Client`* 會如下所示：
 
 ```csharp

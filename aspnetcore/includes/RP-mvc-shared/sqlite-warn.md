@@ -1,4 +1,23 @@
-
+---
+no-loc:
+- appsettings.json
+- ASP.NET Core Identity
+- cookie
+- Cookie
+- Blazor
+- Blazor Server
+- Blazor WebAssembly
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
+ms.openlocfilehash: e8c5bd00178aefb91ab0e7066c5490ceba315530
+ms.sourcegitcommit: a49c47d5a573379effee5c6b6e36f5c302aa756b
+ms.translationtype: MT
+ms.contentlocale: zh-TW
+ms.lasthandoff: 02/16/2021
+ms.locfileid: "100552619"
+---
 > [!NOTE]
 > 在本教學課程中，請盡可能使用 Entity Framework Core「移轉」功能。 移轉可更新資料庫結構描述，以符合資料模型中的變更。 不過，移轉只能進行 EF Core 提供者支援的變更類型，SQLite 提供者的功能則有限制。 例如，其支援新增資料行，但不支援移除或變更資料行。 如果您建立移轉來移除或變更資料行，`ef migrations add` 命令會成功，但 `ef database update` 命令會失敗。 由於這些限制，本教學課程不會將移轉用於 SQLite 結構描述變更。 反之，當結構描述變更時，請您卸除並重新建立資料庫。
 >

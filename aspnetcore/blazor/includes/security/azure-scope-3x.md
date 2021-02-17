@@ -1,3 +1,23 @@
+---
+no-loc:
+- appsettings.json
+- ASP.NET Core Identity
+- cookie
+- Cookie
+- Blazor
+- Blazor Server
+- Blazor WebAssembly
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
+ms.openlocfilehash: ae5d8cf64c0db9402a5457cec1df8402f4db103c
+ms.sourcegitcommit: a49c47d5a573379effee5c6b6e36f5c302aa756b
+ms.translationtype: MT
+ms.contentlocale: zh-TW
+ms.lasthandoff: 02/16/2021
+ms.locfileid: "100551668"
+---
 Azure 入口網站根據 AAD 租使用者是否有已 [驗證或未驗證的發行者網域](/azure/active-directory/develop/howto-configure-publisher-domain)，提供下列其中一個應用程式識別碼 URI 格式：
 
 * `api://{SERVER API APP CLIENT ID OR CUSTOM VALUE}`

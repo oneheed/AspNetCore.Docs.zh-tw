@@ -1,4 +1,24 @@
-雖然 Blazor 伺服器應用程式是預先處理的，但無法執行某些動作（例如呼叫 JavaScript），因為尚未建立與瀏覽器的連接。 元件在資源清單時可能需要以不同的方式呈現。
+---
+no-loc:
+- appsettings.json
+- ASP.NET Core Identity
+- cookie
+- Cookie
+- Blazor
+- Blazor Server
+- Blazor WebAssembly
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
+ms.openlocfilehash: c152524e0acd3803bd3b8078f667cce01180e25d
+ms.sourcegitcommit: a49c47d5a573379effee5c6b6e36f5c302aa756b
+ms.translationtype: MT
+ms.contentlocale: zh-TW
+ms.lasthandoff: 02/16/2021
+ms.locfileid: "100551494"
+---
+當 Blazor Server 應用程式進行預先處理時，無法執行某些動作（例如呼叫 JavaScript），因為尚未建立與瀏覽器的連接。 元件在資源清單時可能需要以不同的方式呈現。
 
 您可以使用 [OnAfterRenderAsync 元件生命週期事件](xref:blazor/components/lifecycle#after-component-render)，來延遲 JavaScript interop 呼叫，直到建立與瀏覽器的連線為止。 只有在完全轉譯應用程式並建立用戶端連接之後，才會呼叫此事件。
 
@@ -22,7 +42,7 @@
 }
 ```
 
-針對上述的範例程式碼，請在 `setElementText` `<head>` `wwwroot/index.html` (Blazor WebAssembly) 或 `Pages/_Host.cshtml` (Blazor Server) 的元素內提供 JavaScript 函式。 呼叫函式時，會傳回 <xref:Microsoft.JSInterop.JSRuntimeExtensions.InvokeVoidAsync%2A?displayProperty=nameWithType> ，而且不會傳回值：
+針對上述的範例程式碼，請在 `setElementText` `<head>` `wwwroot/index.html` (Blazor WebAssembly) 或 `Pages/_Host.cshtml` () 的元素內提供 JavaScript 函式 Blazor Server 。 呼叫函式時，會傳回 <xref:Microsoft.JSInterop.JSRuntimeExtensions.InvokeVoidAsync%2A?displayProperty=nameWithType> ，而且不會傳回值：
 
 ```html
 <script>
@@ -31,7 +51,7 @@
 ```
 
 > [!WARNING]
-> 上述範例僅針對示範目的，直接修改檔物件模型 (DOM) 。 在大部分的情況下，不建議直接修改具有 JavaScript 的 DOM，因為 JavaScript 可能會干擾 Blazor 的變更追蹤。
+> 上述範例僅針對示範目的，直接修改檔物件模型 (DOM) 。 在大部分的情況下，不建議直接修改具有 JavaScript 的 DOM，因為 JavaScript 可能會干擾 Blazor 變更追蹤。
 
 下列元件示範如何使用 JavaScript interop 做為元件初始化邏輯的一部分，而這種方式與可呈現的方式相容。 元件顯示可以從內部觸發轉譯更新 <xref:Microsoft.AspNetCore.Components.ComponentBase.OnAfterRenderAsync%2A> 。 開發人員必須避免在此案例中建立無限迴圈。
 
@@ -70,7 +90,7 @@ Set value via JS interop call:
 }
 ```
 
-針對上述的範例程式碼，請在 `setElementText` `<head>` `wwwroot/index.html` (Blazor WebAssembly) 或 `Pages/_Host.cshtml` (Blazor Server) 的元素內提供 JavaScript 函式。 呼叫函式時，會傳回 <xref:Microsoft.JSInterop.IJSRuntime.InvokeAsync%2A?displayProperty=nameWithType> 值：
+針對上述的範例程式碼，請在 `setElementText` `<head>` `wwwroot/index.html` (Blazor WebAssembly) 或 `Pages/_Host.cshtml` () 的元素內提供 JavaScript 函式 Blazor Server 。 呼叫函式時，會傳回 <xref:Microsoft.JSInterop.IJSRuntime.InvokeAsync%2A?displayProperty=nameWithType> 值：
 
 ```html
 <script>
@@ -82,4 +102,4 @@ Set value via JS interop call:
 ```
 
 > [!WARNING]
-> 上述範例僅針對示範目的，直接修改檔物件模型 (DOM) 。 在大部分的情況下，不建議直接修改具有 JavaScript 的 DOM，因為 JavaScript 可能會干擾 Blazor 的變更追蹤。
+> 上述範例僅針對示範目的，直接修改檔物件模型 (DOM) 。 在大部分的情況下，不建議直接修改具有 JavaScript 的 DOM，因為 JavaScript 可能會干擾 Blazor 變更追蹤。

@@ -19,14 +19,14 @@ no-loc:
 - Razor
 - SignalR
 uid: signalr/scale
-ms.openlocfilehash: d3e9cd23a55702bcf9b002dcce556428683afeca
-ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
+ms.openlocfilehash: e70f3143159a1817e326a95b30e7369a5c9ab025
+ms.sourcegitcommit: f77a7467651bab61b24261da9dc5c1dd75fc1fa9
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 10/30/2020
-ms.locfileid: "93052769"
+ms.lasthandoff: 02/17/2021
+ms.locfileid: "100564010"
 ---
-# <a name="aspnet-core-no-locsignalr-hosting-and-scaling"></a>ASP.NET Core SignalR 裝載和調整
+# <a name="aspnet-core-signalr-hosting-and-scaling"></a>ASP.NET Core SignalR 裝載和調整
 
 [Andrew Stanton-護士](https://twitter.com/anurse)、 [Brady Gaster](https://twitter.com/bradygaster)和[Tom Dykstra](https://github.com/tdykstra)
 
@@ -70,7 +70,7 @@ An attempt was made to access a socket in a way forbidden by its access permissi
 
 解決此問題的選項是 [Azure SignalR 服務](#azure-signalr-service) 和 [Redis 背板](#redis-backplane)。
 
-## <a name="azure-no-locsignalr-service"></a>Azure SignalR 服務
+## <a name="azure-signalr-service"></a>Azure SignalR 服務
 
 Azure SignalR 服務是 proxy，而不是背板。 每次用戶端啟動伺服器的連線時，就會將用戶端重新導向以連接至服務。 下圖說明該流程：
 
@@ -112,7 +112,7 @@ Azure SignalR 服務是 proxy，而不是背板。 每次用戶端啟動伺服�
 Windows 10 和 Windows 8. x 是用戶端作業系統。 用戶端作業系統上的 IIS 有10個並行連接的限制。 SignalR的連接包括：
 
 * 暫時性且經常重新建立。
-* 不再使用時， **不會** 立即處置。
+* 不再使用時，**不會** 立即處置。
 
 上述條件讓它有可能達到用戶端作業系統上的10個連接限制。 當用戶端作業系統用於開發時，建議您：
 
@@ -201,10 +201,11 @@ http {
 如需有關 Nginx ASP.NET Core 的詳細資訊，請參閱下列文章：
 * <xref:host-and-deploy/linux-nginx>
 
-## <a name="third-party-no-locsignalr-backplane-providers"></a>協力廠商 SignalR 背板提供者
+## <a name="third-party-signalr-backplane-providers"></a>協力廠商 SignalR 背板提供者
 
 * [NCache](https://www.alachisoft.com/ncache/asp-net-core-signalr.html)
 * [新奧爾良](https://github.com/OrleansContrib/SignalR.Orleans)
+* [Rebus](https://github.com/rebus-org/Rebus.SignalR)
 
 ## <a name="next-steps"></a>後續步驟
 

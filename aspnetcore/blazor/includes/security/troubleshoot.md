@@ -1,3 +1,23 @@
+---
+no-loc:
+- appsettings.json
+- ASP.NET Core Identity
+- cookie
+- Cookie
+- Blazor
+- Blazor Server
+- Blazor WebAssembly
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
+ms.openlocfilehash: 4e7c0e9b0a164e0181af5d6baaedf0669c1c06aa
+ms.sourcegitcommit: a49c47d5a573379effee5c6b6e36f5c302aa756b
+ms.translationtype: MT
+ms.contentlocale: zh-TW
+ms.lasthandoff: 02/16/2021
+ms.locfileid: "100551831"
+---
 ## <a name="troubleshoot"></a>疑難排解
 
 ::: moniker range=">= aspnetcore-5.0"
@@ -20,18 +40,18 @@
 
 ::: moniker-end
 
-### <a name="cookies-and-site-data"></a>Cookie 和網站資料
+### <a name="cookies-and-site-data"></a>Cookies 和網站資料
 
-Cookie 和網站資料可以跨應用程式更新保存，並干擾測試和疑難排解。 進行應用程式程式碼變更、與提供者的使用者帳戶變更或提供者應用程式設定變更時，請清除下列各項：
+Cookie和網站資料可以跨應用程式更新保存，並干擾測試和疑難排解。 進行應用程式程式碼變更、與提供者的使用者帳戶變更或提供者應用程式設定變更時，請清除下列各項：
 
-* 使用者登入 cookie
-* 應用程式 cookie
+* 使用者 cookie 登入
+* 應用 cookie 程式
 * 快取和儲存的網站資料
 
 防止延遲 cookie 和網站資料干擾測試和疑難排解的其中一種方法是：
 
 * 設定瀏覽器
-  * 使用瀏覽器進行測試，您可以設定在每次關閉瀏覽器時刪除所有 cookie 和網站資料。
+  * 使用瀏覽器進行測試，您可以設定在 cookie 每次關閉瀏覽器時刪除所有和網站資料。
   * 請確定已手動關閉瀏覽器，或透過 IDE 來變更應用程式、測試使用者或提供者設定。
 * 在 Visual Studio 中使用自訂命令以 incognito 或私用模式開啟瀏覽器：
   * 從 Visual Studio 的 [**執行**] 按鈕開啟 **[流覽方式**] 對話方塊。

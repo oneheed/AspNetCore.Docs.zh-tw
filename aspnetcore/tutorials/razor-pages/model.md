@@ -19,14 +19,14 @@ no-loc:
 - Razor
 - SignalR
 uid: tutorials/razor-pages/model
-ms.openlocfilehash: 7ea28e0ecad410335c37c603c8ec1eb5e6e41d33
-ms.sourcegitcommit: 3593c4efa707edeaaceffbfa544f99f41fc62535
+ms.openlocfilehash: 92bfda330399b43871b3ae0e6b609726f7ad4a91
+ms.sourcegitcommit: f77a7467651bab61b24261da9dc5c1dd75fc1fa9
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 01/04/2021
-ms.locfileid: "97485988"
+ms.lasthandoff: 02/17/2021
+ms.locfileid: "100564051"
 ---
-# <a name="part-2-add-a-model-to-a-no-locrazor-pages-app-in-aspnet-core"></a>第2部分：在 ASP.NET Core 中將模型新增至 Razor 頁面應用程式
+# <a name="part-2-add-a-model-to-a-razor-pages-app-in-aspnet-core"></a>第2部分：在 ASP.NET Core 中將模型新增至 Razor 頁面應用程式
 
 作者：[Rick Anderson](https://twitter.com/RickAndMSFT)
 
@@ -161,7 +161,7 @@ ms.locfileid: "97485988"
 1. **Razor 使用 ENTITY FRAMEWORK (CRUD) 對話方塊來完成 [新增頁面**]：
    1. 在 [ **模型類別** ] 下拉式清單中，選取 [ **Movie (Razor PagesMovie])**。
    1. 在 [資料內容類別] 資料列中，選取 **+** (加號)。
-      1. 在 [**加入資料內容**] 對話方塊中，類別名稱 *Razor PagesMovie。 Razor產生 PagesMovieCoNtext* 。
+      1. 在 [ **加入資料內容** ] 對話方塊中， `RazorPagesMovie.Data.RazorPagesMovieContext` 會產生類別名稱。
    1. 選取 [新增]。
 
    ![前述指示中的圖片。](model/_static/3/arp.png)
@@ -226,7 +226,7 @@ dotnet-aspnet-codegenerator razorpage -h
    ![前述指示中的圖片。](model/_static/add_scaffoldMac.png)
 
 1. **Razor 使用 ENTITY FRAMEWORK (CRUD) 對話方塊來完成 [新增頁面**]：
-   1. 在 **要使用的 DbCoNtext 類別中：** row，將類別命名為 *Razor PagesMovie。 RazorPagesMovieCoNtext*。
+   1. 在 **要使用的 DbCoNtext 類別中：** row，將類別命名為 `RazorPagesMovie.Data.RazorPagesMovieContext` 。
    1. 選取 [完成]。
 
    ![前述指示中的圖片。](model/_static/5/arpMac.png)
@@ -1024,7 +1024,7 @@ Add-Migration Initial
 Update-Database
 ```
 
-`Add-Migration` 命令會產生程式碼來建立初始資料庫結構描述。 架構是以 PagesMovieCoNtext.cs 檔案中指定的模型為基礎 `DbContext` 。 *Razor* `InitialCreate`引數是用來命名遷移。 您可以使用任何名稱，但依照慣例，會使用描述移轉的名稱。 如需詳細資訊，請參閱 <xref:data/ef-mvc/migrations> 。
+`Add-Migration` 命令會產生程式碼來建立初始資料庫結構描述。 架構是以 PagesMovieCoNtext.cs 檔案中指定的模型為基礎 `DbContext` 。 *Razor* `InitialCreate`引數是用來命名遷移。 您可以使用任何名稱，但依照慣例，會使用描述移轉的名稱。 如需詳細資訊，請參閱<xref:data/ef-mvc/migrations>。
 
 此 `Update-Database` 命令會 `Up` 在 *遷移/ \<time-stamp> _InitialCreate .cs* 檔案中執行方法。 `Up` 方法會建立資料庫。
 

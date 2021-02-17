@@ -1,8 +1,28 @@
-<span data-ttu-id="6eebb-101">`App`元件 (`App.razor`) 類似于 `App` Blazor Server apps 中找到的元件：</span><span class="sxs-lookup"><span data-stu-id="6eebb-101">The `App` component (`App.razor`) is similar to the `App` component found in Blazor Server apps:</span></span>
+---
+no-loc:
+- appsettings.json
+- ASP.NET Core Identity
+- cookie
+- Cookie
+- Blazor
+- Blazor Server
+- Blazor WebAssembly
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
+ms.openlocfilehash: d632ab0604f81f7b6067d4535b0f5da0afe2e0ad
+ms.sourcegitcommit: a49c47d5a573379effee5c6b6e36f5c302aa756b
+ms.translationtype: MT
+ms.contentlocale: zh-TW
+ms.lasthandoff: 02/16/2021
+ms.locfileid: "100552242"
+---
+<span data-ttu-id="fa8a1-101">`App`元件 (`App.razor`) 類似于 `App` 在應用程式中找到的元件 Blazor Server ：</span><span class="sxs-lookup"><span data-stu-id="fa8a1-101">The `App` component (`App.razor`) is similar to the `App` component found in Blazor Server apps:</span></span>
 
-* <span data-ttu-id="6eebb-102"><xref:Microsoft.AspNetCore.Components.Authorization.CascadingAuthenticationState>元件會管理將公開 <xref:Microsoft.AspNetCore.Components.Authorization.AuthenticationState> 給應用程式的其餘部分。</span><span class="sxs-lookup"><span data-stu-id="6eebb-102">The <xref:Microsoft.AspNetCore.Components.Authorization.CascadingAuthenticationState> component manages exposing the <xref:Microsoft.AspNetCore.Components.Authorization.AuthenticationState> to the rest of the app.</span></span>
-* <span data-ttu-id="6eebb-103"><xref:Microsoft.AspNetCore.Components.Authorization.AuthorizeRouteView>元件可確保目前的使用者已獲授權可存取指定的頁面或轉譯 `RedirectToLogin` 元件。</span><span class="sxs-lookup"><span data-stu-id="6eebb-103">The <xref:Microsoft.AspNetCore.Components.Authorization.AuthorizeRouteView> component makes sure that the current user is authorized to access a given page or otherwise renders the `RedirectToLogin` component.</span></span>
-* <span data-ttu-id="6eebb-104">`RedirectToLogin`元件會管理將未經授權的使用者重新導向至登入頁面。</span><span class="sxs-lookup"><span data-stu-id="6eebb-104">The `RedirectToLogin` component manages redirecting unauthorized users to the login page.</span></span>
+* <span data-ttu-id="fa8a1-102"><xref:Microsoft.AspNetCore.Components.Authorization.CascadingAuthenticationState>元件會管理將公開 <xref:Microsoft.AspNetCore.Components.Authorization.AuthenticationState> 給應用程式的其餘部分。</span><span class="sxs-lookup"><span data-stu-id="fa8a1-102">The <xref:Microsoft.AspNetCore.Components.Authorization.CascadingAuthenticationState> component manages exposing the <xref:Microsoft.AspNetCore.Components.Authorization.AuthenticationState> to the rest of the app.</span></span>
+* <span data-ttu-id="fa8a1-103"><xref:Microsoft.AspNetCore.Components.Authorization.AuthorizeRouteView>元件可確保目前的使用者已獲授權可存取指定的頁面或轉譯 `RedirectToLogin` 元件。</span><span class="sxs-lookup"><span data-stu-id="fa8a1-103">The <xref:Microsoft.AspNetCore.Components.Authorization.AuthorizeRouteView> component makes sure that the current user is authorized to access a given page or otherwise renders the `RedirectToLogin` component.</span></span>
+* <span data-ttu-id="fa8a1-104">`RedirectToLogin`元件會管理將未經授權的使用者重新導向至登入頁面。</span><span class="sxs-lookup"><span data-stu-id="fa8a1-104">The `RedirectToLogin` component manages redirecting unauthorized users to the login page.</span></span>
 
 ```razor
 <CascadingAuthenticationState>

@@ -19,14 +19,14 @@ no-loc:
 - Razor
 - SignalR
 uid: tutorials/razor-pages/new-field
-ms.openlocfilehash: 2961fcaa8bbb93527eb80f5aa7b18ef04761fb50
-ms.sourcegitcommit: 3593c4efa707edeaaceffbfa544f99f41fc62535
+ms.openlocfilehash: 852c26f89b229d89797d9ce6fce2983319defe9c
+ms.sourcegitcommit: 422e8444b9f5cedc373be5efe8032822db54fcaf
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 01/04/2021
-ms.locfileid: "97486157"
+ms.lasthandoff: 02/18/2021
+ms.locfileid: "101101142"
 ---
-# <a name="part-7-add-a-new-field-to-a-no-locrazor-page-in-aspnet-core"></a>第7部分： Razor 在頁面中新增欄位，ASP.NET Core
+# <a name="part-7-add-a-new-field-to-a-razor-page-in-aspnet-core"></a>第7部分： Razor 在頁面中新增欄位，ASP.NET Core
 
 作者：[Rick Anderson](https://twitter.com/RickAndMSFT)
 
@@ -41,7 +41,7 @@ ms.locfileid: "97486157"
 
 使用 EF Code First 自動建立資料庫時，Code First 會：
 
-* 將 [`__EFMigrationsHistory`](https://docs.microsoft.com/ef/core/managing-schemas/migrations/history-table) 資料表加入至資料庫，以追蹤資料庫的架構是否與其產生的模型類別同步。
+* 將 [`__EFMigrationsHistory`](/ef/core/managing-schemas/migrations/history-table) 資料表加入至資料庫，以追蹤資料庫的架構是否與其產生的模型類別同步。
 * 如果模型類別未與資料庫同步，EF 會擲回例外狀況。
 
 架構和模型同步的自動驗證，可讓您更輕鬆地找到不一致的資料庫程式碼問題。
@@ -182,7 +182,7 @@ ms.locfileid: "97486157"
 
 使用 EF Code First 自動建立資料庫時，Code First 會：
 
-* 將 [`__EFMigrationsHistory`](https://docs.microsoft.com/ef/core/managing-schemas/migrations/history-table) 資料表加入至資料庫，以追蹤資料庫的架構是否與其產生的模型類別同步。
+* 將 [`__EFMigrationsHistory`](/ef/core/managing-schemas/migrations/history-table) 資料表加入至資料庫，以追蹤資料庫的架構是否與其產生的模型類別同步。
 * 如果模型類別未與資料庫同步，EF 會擲回例外狀況。
 
 架構和模型同步的自動驗證，可讓您更輕鬆地找到不一致的資料庫程式碼問題。
@@ -323,7 +323,7 @@ ms.locfileid: "97486157"
 
 使用 EF Code First 自動建立資料庫時，Code First 會：
 
-* 將 [`__EFMigrationsHistory`](https://docs.microsoft.com/ef/core/managing-schemas/migrations/history-table) 資料表加入至資料庫，以追蹤資料庫的架構是否與其產生的模型類別同步。
+* 將 [`__EFMigrationsHistory`](/ef/core/managing-schemas/migrations/history-table) 資料表加入至資料庫，以追蹤資料庫的架構是否與其產生的模型類別同步。
 * 如果模型類別未與資料庫同步，EF 會擲回例外狀況。
 
 架構和模型同步的自動驗證，可讓您更輕鬆地找到不一致的資料庫程式碼問題。

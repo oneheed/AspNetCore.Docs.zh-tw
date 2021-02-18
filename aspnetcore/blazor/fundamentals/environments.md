@@ -19,14 +19,14 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/fundamentals/environments
-ms.openlocfilehash: 3d9b0cab42a826c7a5868324d891e597cd9ed986
-ms.sourcegitcommit: 3593c4efa707edeaaceffbfa544f99f41fc62535
+ms.openlocfilehash: a5ead59e467da331b585e8daefb1d7d259c7edba
+ms.sourcegitcommit: 422e8444b9f5cedc373be5efe8032822db54fcaf
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 01/04/2021
-ms.locfileid: "97678287"
+ms.lasthandoff: 02/18/2021
+ms.locfileid: "101101044"
 ---
-# <a name="aspnet-core-no-locblazor-environments"></a>ASP.NET Core Blazor 環境
+# <a name="aspnet-core-blazor-environments"></a>ASP.NET Core Blazor 環境
 
 > [!NOTE]
 > 本主題適用于 Blazor WebAssembly 。 如需有關 ASP.NET Core 應用程式設定的一般指引，以說明應用程式的使用方法 Blazor Server ，請參閱 <xref:fundamentals/environments> 。
@@ -62,7 +62,17 @@ ms.locfileid: "97678287"
 
 `Pages/ReadEnvironment.razor`:
 
-[!code-razor[](environments/samples_snapshot/ReadEnvironment.razor?highlight=3,7)]
+::: moniker range=">= aspnetcore-5.0"
+
+[!code-razor[](~/blazor/common/samples/5.x/BlazorSample_WebAssembly/Pages/environments/ReadEnvironment.razor?highlight=3,7)]
+
+::: moniker-end
+
+::: moniker range="< aspnetcore-5.0"
+
+[!code-razor[](~/blazor/common/samples/3.x/BlazorSample_WebAssembly/Pages/environments/ReadEnvironment.razor?highlight=3,7)]
+
+::: moniker-end
 
 在啟動期間，會 <xref:Microsoft.AspNetCore.Components.WebAssembly.Hosting.WebAssemblyHostBuilder> <xref:Microsoft.AspNetCore.Components.WebAssembly.Hosting.IWebAssemblyHostEnvironment> 透過屬性公開，以在主機產生器程式 <xref:Microsoft.AspNetCore.Components.WebAssembly.Hosting.WebAssemblyHostBuilder.HostEnvironment> 代碼中啟用環境特定的邏輯。
 

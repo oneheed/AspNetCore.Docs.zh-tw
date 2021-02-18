@@ -19,14 +19,14 @@ no-loc:
 - Razor
 - SignalR
 uid: tutorials/razor-pages/sql
-ms.openlocfilehash: 8c9d0d9c24e0ce81925ccde463bcf085531b665e
-ms.sourcegitcommit: 8b0e9a72c1599ce21830c843558a661ba908ce32
+ms.openlocfilehash: fa1060ae1a046a40d55e9fef4a094aa9e51a18af
+ms.sourcegitcommit: 422e8444b9f5cedc373be5efe8032822db54fcaf
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 01/08/2021
-ms.locfileid: "98024728"
+ms.lasthandoff: 02/18/2021
+ms.locfileid: "101101167"
 ---
-# <a name="part-4-of-tutorial-series-on-no-locrazor-pages"></a>頁面上教學課程系列的第4部分 Razor
+# <a name="part-4-of-tutorial-series-on-razor-pages"></a>頁面上教學課程系列的第4部分 Razor
 
 作者：[Rick Anderson](https://twitter.com/RickAndMSFT) 與 [Joe Audette](https://twitter.com/joeaudette)
 
@@ -142,7 +142,7 @@ if (context.Movie.Any())
 
 * 從相依性插入容器中取得資料庫內容執行個體。
 * 呼叫 `seedData.Initialize` 方法，並將它傳遞至資料庫內容實例。
-* 種子方法完成時處理內容。 [Using 語句](https://docs.microsoft.com/dotnet/csharp/language-reference/keywords/using-statement)可確保會處置內容。
+* 種子方法完成時處理內容。 [Using 語句](/dotnet/csharp/language-reference/keywords/using-statement)可確保會處置內容。
 
 未執行時，會發生下列例外狀況 `Update-Database` ：
 
@@ -296,7 +296,7 @@ if (context.Movie.Any())
 
 * 從相依性插入容器中取得資料庫內容執行個體。
 * 呼叫 `seedData.Initialize` 方法，並將它傳遞至資料庫內容實例。
-* 種子方法完成時處理內容。 [Using 語句](https://docs.microsoft.com/dotnet/csharp/language-reference/keywords/using-statement)可確保會處置內容。
+* 種子方法完成時處理內容。 [Using 語句](/dotnet/csharp/language-reference/keywords/using-statement)可確保會處置內容。
 
 未執行時，會發生下列例外狀況 `Update-Database` ：
 
@@ -440,7 +440,7 @@ if (context.Movie.Any())
 
 * 從相依性插入容器中取得資料庫內容執行個體。
 * 呼叫 `seedData.Initialize` 方法，並將它傳遞至資料庫內容實例。
-* 種子方法完成時處理內容。 [Using 語句](https://docs.microsoft.com/dotnet/csharp/language-reference/keywords/using-statement)可確保會處置內容。
+* 種子方法完成時處理內容。 [Using 語句](/dotnet/csharp/language-reference/keywords/using-statement)可確保會處置內容。
 
 生產環境應用程式不會呼叫 `Database.Migrate`。 它會新增至前面的程式碼以免在尚未執行 `Update-Database` 時發生下列例外狀況：
 

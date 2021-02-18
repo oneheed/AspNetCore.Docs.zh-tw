@@ -19,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/fundamentals/handle-errors
-ms.openlocfilehash: c1f859e0113d5bff65c7075ad1eb03088429174e
-ms.sourcegitcommit: 1166b0ff3828418559510c661e8240e5c5717bb7
+ms.openlocfilehash: f7cac477e2c5bca54e24ae3faeadff9b51bdcd0f
+ms.sourcegitcommit: 422e8444b9f5cedc373be5efe8032822db54fcaf
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 02/12/2021
-ms.locfileid: "100279962"
+ms.lasthandoff: 02/18/2021
+ms.locfileid: "101101057"
 ---
 # <a name="handle-errors-in-aspnet-core-blazor-apps"></a>處理 ASP.NET Core 應用程式中的錯誤 Blazor
 
@@ -193,7 +193,17 @@ Blazor Server當任何已執行的函式或任何屬性的 setter 擲回 `[Injec
   * `loadFailed` 設定為 `true` ，用來向使用者顯示錯誤訊息。
   * 會記錄錯誤。
 
-[!code-razor[](handle-errors/samples_snapshot/3.x/product-details.razor?highlight=11,27-39)]
+::: moniker range=">= aspnetcore-5.0"
+
+[!code-razor[](~/blazor/common/samples/5.x/BlazorSample_WebAssembly/Pages/handle-errors/ProductDetails.razor?name=snippet&highlight=11,27-39)]
+
+::: moniker-end
+
+::: moniker range="< aspnetcore-5.0"
+
+[!code-razor[](~/blazor/common/samples/3.x/BlazorSample_WebAssembly/Pages/handle-errors/ProductDetails.razor?name=snippet&highlight=11,27-39)]
+
+::: moniker-end
 
 ### <a name="rendering-logic"></a>轉譯邏輯
 
@@ -203,7 +213,17 @@ Blazor Server當任何已執行的函式或任何屬性的 setter 擲回 `[Injec
 
 若要避免轉譯邏輯中有 null 參考例外狀況，請 `null` 先檢查物件，再存取其成員。 在下列範例中， `person.Address` 如果是，則不會存取屬性 `person.Address` `null` ：
 
-[!code-razor[](handle-errors/samples_snapshot/3.x/person-example.razor?highlight=1)]
+::: moniker range=">= aspnetcore-5.0"
+
+[!code-razor[](~/blazor/common/samples/5.x/BlazorSample_WebAssembly/Pages/handle-errors/PersonExample.razor?name=snippet&highlight=1)]
+
+::: moniker-end
+
+::: moniker range="< aspnetcore-5.0"
+
+[!code-razor[](~/blazor/common/samples/3.x/BlazorSample_WebAssembly/Pages/handle-errors/PersonExample.razor?name=snippet&highlight=1)]
+
+::: moniker-end
 
 上述程式碼假設 `person` 不是 `null` 。 程式碼的結構通常會保證物件存在於轉譯元件時。 在這些情況下，不需要檢查轉譯 `null` 邏輯。 在先前的範例中， `person` 可能保證存在，因為 `person` 會在元件具現化時建立。
 

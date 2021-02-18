@@ -19,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: tutorials/build-a-blazor-app
-ms.openlocfilehash: 939841ca7214e212a2f197ea1e00b0f6152c471e
-ms.sourcegitcommit: 1166b0ff3828418559510c661e8240e5c5717bb7
+ms.openlocfilehash: d984023a1c46c5383d47a1634c54e61747b83d60
+ms.sourcegitcommit: 422e8444b9f5cedc373be5efe8032822db54fcaf
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 02/12/2021
-ms.locfileid: "100280507"
+ms.lasthandoff: 02/18/2021
+ms.locfileid: "101101206"
 ---
 # <a name="build-a-blazor-todo-list-app"></a>建立 Blazor 待辦事項清單應用程式
 
@@ -117,7 +117,7 @@ ms.locfileid: "100280507"
 
    儲存 `Shared/NavMenu.razor` 檔案。
 
-1. [`dotnet watch run`](/aspnet/core/tutorials/dotnet-watch)從資料夾的命令 shell 中執行命令，以建立並執行應用程式 `TodoList` 。 應用程式執行之後，請流覽新的 [待辦事項] 頁面，方法是選取 **`Todo`** 應用程式巡覽列中的連結，此連結會將頁面載入至 `/todo` 。
+1. [`dotnet watch run`](xref:tutorials/dotnet-watch)從資料夾的命令 shell 中執行命令，以建立並執行應用程式 `TodoList` 。 應用程式執行之後，請流覽新的 [待辦事項] 頁面，方法是選取 **`Todo`** 應用程式巡覽列中的連結，此連結會將頁面載入至 `/todo` 。
 
    讓應用程式繼續執行命令 shell。 每次儲存檔案時，即會自動重建應用程式。 在編譯和重新開機時，瀏覽器會暫時失去其應用程式的連接。 重新建立連接時，會自動重載瀏覽器中的頁面。
 

@@ -1,5 +1,5 @@
 ---
-title: ASP.NET Core 的威脅風險降低指導方針 Blazor Server
+title: 適用于 ASP.NET Core 的威脅緩和指導方針 Blazor Server
 author: guardrex
 description: 瞭解如何降低應用程式的安全性威脅 Blazor Server 。
 monikerRange: '>= aspnetcore-3.1'
@@ -19,14 +19,14 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/security/server/threat-mitigation
-ms.openlocfilehash: 524a1f85838d083ed2f01afd96601bcd5e6ce12b
-ms.sourcegitcommit: 1166b0ff3828418559510c661e8240e5c5717bb7
+ms.openlocfilehash: 2a5add79d60ddcbb1afdb9489fa16da692a7d6bd
+ms.sourcegitcommit: a1db01b4d3bd8c57d7a9c94ce122a6db68002d66
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 02/12/2021
-ms.locfileid: "100280973"
+ms.lasthandoff: 03/04/2021
+ms.locfileid: "102109659"
 ---
-# <a name="threat-mitigation-guidance-for-aspnet-core-blazor-server"></a>ASP.NET Core 的威脅風險降低指導方針 Blazor Server
+# <a name="threat-mitigation-guidance-for-aspnet-core-blazor-server"></a>適用于 ASP.NET Core 的威脅緩和指導方針 Blazor Server
 
 Blazor Server 應用程式採用具 *狀態* 的資料處理模型，其中伺服器和用戶端會維持長期的關聯性。 持續性狀態是由 [電路](xref:blazor/state-management)維護，它可以跨越也可能長期存在的連接。
 
@@ -77,7 +77,7 @@ CPU 耗盡是所有公開應用程式的考慮。 在一般 web 應用程式中�
   * 只顯示前100至1000個專案，並且要求使用者輸入搜尋準則，以在顯示的專案之外尋找專案。
   * 如需更先進的轉譯案例，請執行支援 *虛擬化* 的清單或格線。 使用虛擬化時，清單只會呈現使用者目前可見的專案子集。 當使用者與 UI 中的捲軸互動時，元件只會轉譯顯示所需的專案。 目前不需要顯示的專案可以保留在次要儲存體中，這是理想的方法。 Undisplayed 專案也可以保留在記憶體中，這比較不理想。
 
-Blazor Server 應用程式會提供類似的程式設計模型給具狀態應用程式的其他 UI 架構，例如 WPF、Windows Forms 或 Blazor WebAssembly 。 主要的差異在於，應用程式所耗用的記憶體屬於用戶端，而且只會影響該個別用戶端的幾個 UI 架構。 例如， Blazor WebAssembly 應用程式會完全在用戶端上執行，而且只會使用用戶端記憶體資源。 在此 Blazor Server 案例中，應用程式所耗用的記憶體屬於伺服器，並在伺服器實例上的用戶端間共用。
+Blazor Server 應用程式會針對具狀態應用程式（例如 WPF、Windows form 或）的其他 UI 架構，提供類似的程式設計模型 Blazor WebAssembly 。 主要的差異在於，應用程式所耗用的記憶體屬於用戶端，而且只會影響該個別用戶端的幾個 UI 架構。 例如， Blazor WebAssembly 應用程式會完全在用戶端上執行，而且只會使用用戶端記憶體資源。 在此 Blazor Server 案例中，應用程式所耗用的記憶體屬於伺服器，並在伺服器實例上的用戶端間共用。
 
 伺服器端記憶體需求是所有應用程式的考慮 Blazor Server 。 不過，大部分的 web 應用程式都是無狀態的，而且在處理要求時使用的記憶體會在傳迴響應時釋放。 作為一般建議，請不要讓用戶端配置未系結的記憶體數量，就像在任何其他可保存用戶端連接的伺服器端應用程式中一樣。 應用程式所耗用的記憶體會 Blazor Server 保存超過單一要求的時間。
 
@@ -99,14 +99,14 @@ Blazor 用戶端會針對每個會話建立單一連線，只要開啟瀏覽器�
     * 需要驗證才能連線到應用程式，並追蹤每位使用者的作用中會話。
     * 在達到限制時拒絕新的會話。
     * Proxy WebSocket 透過使用 proxy 連線到應用程式，例如將分離信號從用戶端連線到應用程式的 [Azure SignalR 服務](/azure/azure-signalr/signalr-overview) 。 這會提供比單一用戶端可以建立的連接容量更大的應用程式，以防止用戶端耗盡與伺服器的連線。
-  * 在伺服器層級：在應用程式前面使用 proxy/閘道。 例如， [Azure Front Door](/azure/frontdoor/front-door-overview) 可讓您定義、管理及監視應用程式之 web 流量的全域路由，並在 Blazor Server 應用程式設定為使用長時間輪詢時運作。
+  * 在伺服器層級：在應用程式前面使用 proxy/閘道。 例如， [Azure 前端](/azure/frontdoor/front-door-overview) 可讓您定義、管理及監視應用程式之 web 流量的全域路由，並在 Blazor Server 應用程式設定為使用長時間輪詢時運作。
   
     > [!NOTE]
-    > 雖然應用程式支援長時間輪詢 Blazor Server ，但 [websocket 是建議的傳輸通訊協定](xref:blazor/host-and-deploy/server#azure-signalr-service)。 [Azure Front Door](/azure/frontdoor/front-door-overview) 目前不支援 websocket，但在未來的服務版本中，會針對 websocket 的支援進行考慮。
+    > 雖然應用程式支援長時間輪詢 Blazor Server ，但 [websocket 是建議的傳輸通訊協定](xref:blazor/host-and-deploy/server#azure-signalr-service)。 [Azure Front 大門](/azure/frontdoor/front-door-overview) 目前不支援 websocket，但在未來的服務版本中，會針對 websocket 的支援進行考慮。
 
 ## <a name="denial-of-service-dos-attacks"></a>拒絕服務 (DoS) 的攻擊
 
-阻絕服務 (DoS) 攻擊涉及用戶端，導致伺服器耗盡其一或多個資源，使應用程式無法使用。 Blazor Server 應用程式包含預設限制，並且依賴其他 ASP.NET Core 和 SignalR 限制，以防止在上設定的 DoS 攻擊 <xref:Microsoft.AspNetCore.Components.Server.CircuitOptions> ：
+阻絕服務 (DoS) 攻擊涉及用戶端，導致伺服器耗盡其一或多個資源，使應用程式無法使用。 Blazor Server 應用程式包含預設限制，並且依賴其他 ASP.NET 核心和 SignalR 限制來防止設定為的 DoS 攻擊 <xref:Microsoft.AspNetCore.Components.Server.CircuitOptions> ：
 
 * <xref:Microsoft.AspNetCore.Components.Server.CircuitOptions.DisconnectedCircuitMaxRetained?displayProperty=nameWithType>
 * <xref:Microsoft.AspNetCore.Components.Server.CircuitOptions.DisconnectedCircuitRetentionPeriod?displayProperty=nameWithType>
@@ -139,7 +139,7 @@ Blazor 用戶端會針對每個會話建立單一連線，只要開啟瀏覽器�
 
 請採取下列預防措施來防範上述案例：
 
-* 將 JS interop 呼叫包裝在 [`try-catch`](/dotnet/csharp/language-reference/keywords/try-catch) 語句中，以考慮在調用期間可能發生的錯誤。 如需詳細資訊，請參閱<xref:blazor/fundamentals/handle-errors#javascript-interop>。
+* 將 JS interop 呼叫包裝在 [`try-catch`](/dotnet/csharp/language-reference/keywords/try-catch) 語句中，以考慮在調用期間可能發生的錯誤。 如需詳細資訊，請參閱<xref:blazor/fundamentals/handle-errors?pivots=server#javascript-interop-server>。
 * 在採取任何動作之前，請先驗證從 JS interop 調用傳回的資料（包括錯誤訊息）。
 
 ### <a name="net-methods-invoked-from-the-browser"></a>從瀏覽器叫用的 .NET 方法
@@ -154,7 +154,7 @@ Blazor 用戶端會針對每個會話建立單一連線，只要開啟瀏覽器�
   * 請考慮靜態和實例方法可以公開給 JavaScript 用戶端。 除非設計呼叫具有適當條件約束的共用狀態，否則請避免在會話之間共用狀態。
     * 針對透過相依性插入 (DI) 所公開的物件所公開的實例方法 `DotNetReference` ，物件應該註冊為已設定範圍的物件。 這適用于應用程式使用的任何 DI 服務 Blazor Server 。
     * 針對靜態方法，除非應用程式在伺服器實例上的所有使用者之間明確共用狀態，否則請避免建立無法範圍設定為用戶端的狀態。
-  * 避免將使用者提供的資料在參數中傳遞給 JavaScript 呼叫。 如果在參數中傳遞資料是絕對必要的，請確定 JavaScript 程式碼會處理資料的傳遞，而不會引進 [跨網站腳本 (XSS) ](#cross-site-scripting-xss) 弱點。 例如，請不要藉由設定專案的屬性，將使用者提供的資料寫入檔物件模型 (DOM) `innerHTML` 。 請考慮使用 [ (CSP) 的內容安全性原則 ](https://developer.mozilla.org/docs/Web/HTTP/CSP) 來停用 `eval` 和其他不安全的 JavaScript 基本專案。
+  * 避免將使用者提供的資料在參數中傳遞給 JavaScript 呼叫。 如果在參數中傳遞資料是絕對必要的，請確定 JavaScript 程式碼會處理資料的傳遞，而不會引進 [跨網站腳本 (XSS) ](#cross-site-scripting-xss) 弱點。 例如，藉由設定專案的屬性，不要將使用者提供的資料寫入檔物件模型 (DOM) `innerHTML` 。 請考慮使用 [ (CSP) 的內容安全性原則 ](https://developer.mozilla.org/docs/Web/HTTP/CSP) 來停用 `eval` 和其他不安全的 JavaScript 基本專案。
 * 避免在架構的分派實行之上，執行 .NET 調用的自訂分派。 將 .NET 方法公開給瀏覽器是一種 advanced 案例，不建議用於一般 Blazor 開發。
 
 ### <a name="events"></a>事件
@@ -287,7 +287,7 @@ Blazor Server 事件是非同步，因此，您可以在應用程式有時間產
 
 ## <a name="additional-security-guidance"></a>其他安全性指引
 
-適用于保護 ASP.NET Core apps 的指導方針適用于應用 Blazor Server 程式，並在下列各節中討論：
+適用于保護 ASP.NET Core 應用程式的指導方針會套用至 Blazor Server 應用程式，並在下列各節中討論：
 
 * [記錄和敏感性資料](#logging-and-sensitive-data)
 * [使用 HTTPS 保護傳輸中的資訊](#protect-information-in-transit-with-https)
@@ -302,7 +302,7 @@ Blazor Server 事件是非同步，因此，您可以在應用程式有時間產
 
 當伺服器上發生錯誤時，架構會通知用戶端，並向下眼淚會話。 根據預設，用戶端會收到一般錯誤訊息，可以在瀏覽器的開發人員工具中看到。
 
-用戶端錯誤不包含呼叫堆疊，也不會提供錯誤原因的詳細資料，但伺服器記錄檔包含這類資訊。 基於開發目的，可透過 [啟用詳細錯誤](xref:blazor/fundamentals/handle-errors#blazor-server-detailed-circuit-errors)，讓用戶端可以使用敏感性錯誤資訊。
+用戶端錯誤不包含呼叫堆疊，也不會提供錯誤原因的詳細資料，但伺服器記錄檔會包含這類資訊。 基於開發目的，可透過 [啟用詳細錯誤](xref:blazor/fundamentals/handle-errors#blazor-server-detailed-circuit-errors)，讓用戶端可以使用敏感性錯誤資訊。
 
 > [!WARNING]
 > 將錯誤資訊公開給網際網路上的用戶端，應該一律避免使用安全性風險。

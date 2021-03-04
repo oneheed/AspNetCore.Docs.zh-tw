@@ -1,5 +1,5 @@
 ---
-title: 建立和使用 ASP.NET Core Razor 元件
+title: 建立和使用 ASP.NET 核心 Razor 元件
 author: guardrex
 description: 瞭解如何建立和使用 Razor 元件，包括如何系結至資料、處理事件，以及管理元件生命週期。
 monikerRange: '>= aspnetcore-3.1'
@@ -19,14 +19,14 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/components/index
-ms.openlocfilehash: 7b4438b4003916488c17d389b9817b5e09d1086c
-ms.sourcegitcommit: a49c47d5a573379effee5c6b6e36f5c302aa756b
+ms.openlocfilehash: a308d11ba80090a2a34880f04bc339aa90550946
+ms.sourcegitcommit: a1db01b4d3bd8c57d7a9c94ce122a6db68002d66
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 02/16/2021
-ms.locfileid: "100536216"
+ms.lasthandoff: 03/04/2021
+ms.locfileid: "102109828"
 ---
-# <a name="create-and-use-aspnet-core-razor-components"></a>建立和使用 ASP.NET Core Razor 元件
+# <a name="create-and-use-aspnet-core-razor-components"></a>建立和使用 ASP.NET 核心 Razor 元件
 
 [查看或下載範例程式碼](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/blazor/common/samples/) ([如何下載](xref:index#how-to-download-a-sample)) 
 
@@ -230,9 +230,19 @@ namespace BlazorSample
 <HeadingComponent />
 ```
 
-`Components/HeadingComponent.razor`:
+`Shared/HeadingComponent.razor`:
 
-[!code-razor[](index/samples_snapshot/HeadingComponent.razor)]
+::: moniker range=">= aspnetcore-5.0"
+
+[!code-razor[](~/blazor/common/samples/5.x/BlazorSample_WebAssembly/Pages/components-index/HeadingComponent.razor)]
+
+::: moniker-end
+
+::: moniker range="< aspnetcore-5.0"
+
+[!code-razor[](~/blazor/common/samples/3.x/BlazorSample_WebAssembly/Pages/components-index/HeadingComponent.razor)]
+
+::: moniker-end
 
 如果元件包含的 HTML 元素具有不符合元件名稱的大寫第一個字母，則會發出警告，指出元素有未預期的名稱。 新增 [`@using`][2] 元件命名空間的指示詞會讓元件可供使用，以解決警告。
 
@@ -248,7 +258,7 @@ namespace BlazorSample
 
 `Pages/RouteParameter.razor`:
 
-[!code-razor[](index/samples_snapshot/RouteParameter-5x.razor?highlight=1,6-7)]
+[!code-razor[](~/blazor/common/samples/5.x/BlazorSample_WebAssembly/Pages/components-index/RouteParameter.razor?highlight=1,6-7)]
 
 ::: moniker-end
 
@@ -256,7 +266,7 @@ namespace BlazorSample
 
 `Pages/RouteParameter.razor`:
 
-[!code-razor[](index/samples_snapshot/RouteParameter-3x.razor?highlight=2,7-8)]
+[!code-razor[](~/blazor/common/samples/3.x/BlazorSample_WebAssembly/Pages/components-index/RouteParameter.razor?highlight=2,7-8)]
 
 不支援選擇性參數，因此 [`@page`][9] 在上述範例中會套用兩個指示詞。 第一個可讓您在不使用參數的情況下流覽至元件。 第二個指示詞會 [`@page`][9] 接收 `{text}` route 參數，並將值指派給 `Text` 屬性。
 
@@ -268,9 +278,29 @@ namespace BlazorSample
 
 元件可以有 *元件參數*，這些參數是使用元件類別上的公用簡單或複雜屬性（ [ `[Parameter]` attribute](xref:Microsoft.AspNetCore.Components.ParameterAttribute)）來定義的。 使用這些屬性來指定標記中元件的引數。
 
-`Components/ChildComponent.razor`:
+`Shared/ChildComponent.razor`:
 
-[!code-razor[](../common/samples/5.x/BlazorWebAssemblySample/Components/ChildComponent.razor?highlight=2,11-12)]
+```razor
+<div class="panel panel-default">
+    <div class="panel-heading">@Title</div>
+    <div class="panel-body">@ChildContent</div>
+
+    <button class="btn btn-primary" @onclick="OnClickCallback">
+        Trigger a Parent component method
+    </button>
+</div>
+
+@code {
+    [Parameter]
+    public string Title { get; set; }
+
+    [Parameter]
+    public RenderFragment ChildContent { get; set; }
+
+    [Parameter]
+    public EventCallback<MouseEventArgs> OnClickCallback { get; set; }
+}
+```
 
 您可以將預設值指派給元件參數：
 
@@ -283,7 +313,17 @@ public string Title { get; set; } = "Panel Title from Child";
 
 `Pages/ParentComponent.razor`:
 
-[!code-razor[](index/samples_snapshot/ParentComponent.razor?highlight=5-6)]
+```razor
+@page "/ParentComponent"
+
+<h1>Parent-child example</h1>
+
+<ChildComponent Title="Panel Title from Parent"
+                OnClickCallback="@ShowMessage">
+    Content of the child component is supplied
+    by the parent component.
+</ChildComponent>
+```
 
 使用[ Razor 的保留 `@` 符號](xref:mvc/views/razor#razor-syntax)，將 c # 欄位、屬性和方法指派給元件參數，做為 HTML 屬性值：
 
@@ -454,9 +494,29 @@ public DateTime StartData { get; set; }
 
 在下列範例中， `ChildComponent` 有一個 `ChildContent` 代表的屬性 <xref:Microsoft.AspNetCore.Components.RenderFragment> ，代表要轉譯的 UI 區段。 的值位於 `ChildContent` 應呈現內容的元件標記中。 的值 `ChildContent` 是從父元件接收，並在啟動程式面板內轉譯 `panel-body` 。
 
-`Components/ChildComponent.razor`:
+`Shared/ChildComponent.razor`:
 
-[!code-razor[](../common/samples/5.x/BlazorWebAssemblySample/Components/ChildComponent.razor?highlight=3,14-15)]
+```razor
+<div class="panel panel-default">
+    <div class="panel-heading">@Title</div>
+    <div class="panel-body">@ChildContent</div>
+
+    <button class="btn btn-primary" @onclick="OnClickCallback">
+        Trigger a Parent component method
+    </button>
+</div>
+
+@code {
+    [Parameter]
+    public string Title { get; set; }
+
+    [Parameter]
+    public RenderFragment ChildContent { get; set; }
+
+    [Parameter]
+    public EventCallback<MouseEventArgs> OnClickCallback { get; set; }
+}
+```
 
 > [!NOTE]
 > 接收內容的屬性 <xref:Microsoft.AspNetCore.Components.RenderFragment> 必須依照慣例命名 `ChildContent` 。
@@ -465,7 +525,17 @@ public DateTime StartData { get; set; }
 
 `Pages/ParentComponent.razor`:
 
-[!code-razor[](index/samples_snapshot/ParentComponent.razor?highlight=7-8)]
+```razor
+@page "/ParentComponent"
+
+<h1>Parent-child example</h1>
+
+<ChildComponent Title="Panel Title from Parent"
+                OnClickCallback="@ShowMessage">
+    Content of the child component is supplied
+    by the parent component.
+</ChildComponent>
+```
 
 由於轉譯 Blazor 子內容的方式， `for` 如果在子元件的內容中使用遞增迴圈變數，則在迴圈內轉譯元件需要本機索引變數：
 >
@@ -820,13 +890,13 @@ Blazor架構通常會施加安全的父系對子參數指派：
 * 未預期地覆寫參數。
 * 最小化副作用。 例如，會避免其他轉譯，因為它們可能會建立無限的轉譯迴圈。
 
-當父元件轉譯中時，子元件會收到可能覆寫現有值的新參數值。 在使用一或多個資料系結參數開發元件時，通常會發生不小心覆寫子元件中的參數值，而開發人員則會直接寫入子系中的參數：
+當父元件轉譯中時，子元件會收到可能覆寫現有值的新參數值。 在使用一或多個資料系結參數開發元件時，通常會發生意外覆寫子元件中的參數值，而開發人員則會直接寫入子系中的參數：
 
 * 子元件會以父元件中的一或多個參數值來呈現。
 * 子系直接寫入參數的值。
 * 父元件會轉譯中並覆寫子系參數的值。
 
-覆寫辨識值的可能也會延伸至子元件的屬性 setter。
+覆寫參數值的可能也會延伸至子元件的屬性 setter。
 
 **我們的一般指引是不要建立直接寫入其本身參數的元件。**
 
@@ -1018,7 +1088,7 @@ HTML 元素屬性是根據 .NET 值以有條件的形式呈現。 如果值為 `
 
 ## <a name="static-assets"></a>靜態資產
 
-Blazor遵循 ASP.NET Core 應用程式將靜態資產放置於專案[ `web root (wwwroot)` 資料夾](xref:fundamentals/index#web-root)底下的慣例。
+Blazor遵循將靜態資產放置於專案[ `web root (wwwroot)` 資料夾](xref:fundamentals/index#web-root)底下的 ASP.NET Core 應用程式慣例。
 
 使用基底相對路徑 (`/`) 參考靜態資產的 web 根目錄。 在下列範例中， `logo.png` 實際上是位於資料夾中 `{PROJECT ROOT}/wwwroot/images` ：
 
@@ -1073,7 +1143,7 @@ Razor 元件 () **不** 支援波狀符號斜線標記法 `~/` 。
 
 ::: moniker range="< aspnetcore-5.0"
 
-空白會保留在元件的原始程式碼中。 即使沒有視覺效果，也會在瀏覽器的檔物件模型 (DOM) 中呈現僅限空白字元的文字。
+空白會保留在元件的原始程式碼中。 即使沒有視覺效果，也會在瀏覽器的檔物件模型中，將純空白字元轉譯 (DOM) 。
 
 請考慮下列 Razor 元件程式碼：
 

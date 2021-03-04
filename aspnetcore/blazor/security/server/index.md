@@ -1,7 +1,7 @@
 ---
-title: 保護 ASP.NET Core Blazor Server 應用程式的安全
+title: 保護 ASP.NET Core Blazor Server 應用程式
 author: guardrex
-description: 瞭解如何 Blazor Server ASP.NET Core 應用程式保護應用程式。
+description: 瞭解如何將應用程式保護 Blazor Server 為 ASP.NET Core 應用程式。
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
@@ -19,14 +19,14 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/security/server/index
-ms.openlocfilehash: 5a3d3c6e06653de7f0d01565444d37013f347a5b
-ms.sourcegitcommit: 1166b0ff3828418559510c661e8240e5c5717bb7
+ms.openlocfilehash: 41b588acdef3eedd9fc081f50040d160147bab4b
+ms.sourcegitcommit: a1db01b4d3bd8c57d7a9c94ce122a6db68002d66
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 02/12/2021
-ms.locfileid: "100280310"
+ms.lasthandoff: 03/04/2021
+ms.locfileid: "102109646"
 ---
-# <a name="secure-aspnet-core-blazor-server-apps"></a>保護 ASP.NET Core Blazor Server 應用程式的安全
+# <a name="secure-aspnet-core-blazor-server-apps"></a>保護 ASP.NET Core Blazor Server 應用程式
 
 Blazor Server 應用程式會以與 ASP.NET Core 應用程式相同的方式來設定安全性。 如需詳細資訊，請參閱底下的文章 <xref:security/index> 。 本總覽下的主題特別適用于 Blazor Server 。
 
@@ -44,7 +44,7 @@ Blazor Server 應用程式會以與 ASP.NET Core 應用程式相同的方式來�
 
 * **無驗證**
 * **個別使用者帳戶**：可儲存使用者帳戶：
-  * 在使用 ASP.NET Core 系統的應用程式內 [Identity](xref:security/authentication/identity) 。
+  * 使用 ASP.NET Core 的系統在應用程式內 [Identity](xref:security/authentication/identity) 。
   * 使用 [Azure AD B2C](xref:security/authentication/azure-ad-b2c) 儲存。
 * **公司或學校帳戶**
 * **Windows 驗證**
@@ -63,7 +63,7 @@ dotnet new blazorserver -o {APP NAME} -au {AUTHENTICATION}
 | ------------------------ | ----------- |
 | `None` (預設)         | 不需要驗證 |
 | `Individual`             | 儲存在應用程式中的使用者 ASP.NET Core Identity |
-| `IndividualB2C`          | 儲存在[Azure AD B2C](xref:security/authentication/azure-ad-b2c)中的使用者 |
+| `IndividualB2C`          | [AZURE AD B2C](xref:security/authentication/azure-ad-b2c)中儲存的使用者 |
 | `SingleOrg`              | 單一租使用者的組織驗證 |
 | `MultiOrg`               | 多個租使用者的組織驗證 |
 | `Windows`                | Windows 驗證 |
@@ -77,7 +77,7 @@ dotnet new blazorserver -o {APP NAME} -au {AUTHENTICATION}
 
 # <a name="visual-studio-for-mac"></a>[Visual Studio for Mac](#tab/visual-studio-mac)
 
-1. 遵循中的 Visual Studio for Mac 指導方針 <xref:blazor/tooling> 。
+1. 遵循中的 Visual Studio for Mac 指南 <xref:blazor/tooling> 。
 
 1. 在 [**設定新的 Blazor Server 應用程式**] 步驟中，從 [**驗證**] 下拉式清單中選取 [**應用程式內) 的個別驗證 (** 。
 
@@ -97,7 +97,7 @@ dotnet new blazorserver -o {APP NAME} -au {AUTHENTICATION}
 | ------------------------ | ----------- |
 | `None` (預設)         | 不需要驗證 |
 | `Individual`             | 儲存在應用程式中的使用者 ASP.NET Core Identity |
-| `IndividualB2C`          | 儲存在[Azure AD B2C](xref:security/authentication/azure-ad-b2c)中的使用者 |
+| `IndividualB2C`          | [AZURE AD B2C](xref:security/authentication/azure-ad-b2c)中儲存的使用者 |
 | `SingleOrg`              | 單一租使用者的組織驗證 |
 | `MultiOrg`               | 多個租使用者的組織驗證 |
 | `Windows`                | Windows 驗證 |
@@ -125,9 +125,13 @@ Scaffold Identity 至 Blazor Server 專案：
 * [沒有現有的授權](xref:security/authentication/scaffold-identity#scaffold-identity-into-a-blazor-server-project-without-existing-authorization)。
 * [具有授權](xref:security/authentication/scaffold-identity#scaffold-identity-into-a-blazor-server-project-with-authorization)。
 
-## <a name="azure-app-service-on-linux-with-identity-server"></a>使用 Identity 伺服器 Linux 上的 Azure App Service
+## <a name="additional-claims-and-tokens-from-external-providers"></a>來自外部提供者的其他宣告和權杖
 
-當部署至與伺服器 Linux 上的 Azure App Service 時，請明確指定簽發者 Identity 。 如需詳細資訊，請參閱<xref:security/authentication/identity/spa#azure-app-service-on-linux>。
+若要儲存外部提供者的其他宣告，請參閱 <xref:security/authentication/social/additional-claims> 。
+
+## <a name="azure-app-service-on-linux-with-identity-server"></a>Linux 上的 Azure App Service 與 Identity 伺服器
+
+使用伺服器部署至 Linux 上的 Azure App Service 時，請明確指定簽發者 Identity 。 如需詳細資訊，請參閱<xref:security/authentication/identity/spa#azure-app-service-on-linux>。
 
 ## <a name="additional-resources"></a>其他資源
 

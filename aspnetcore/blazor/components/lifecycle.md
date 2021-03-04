@@ -1,7 +1,7 @@
 ---
-title: ASP.NET Core Blazor 生命週期
+title: ASP.NET 核心 Blazor 生命週期
 author: guardrex
-description: 瞭解如何 Razor 在 ASP.NET Core apps 中使用元件生命週期方法 Blazor 。
+description: 瞭解如何 Razor 在 ASP.NET Core 應用程式中使用元件生命週期方法 Blazor 。
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
@@ -19,14 +19,14 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/components/lifecycle
-ms.openlocfilehash: 03a49c827a1f70e6b721adf293857bb33475ed36
-ms.sourcegitcommit: 04ad9cd26fcaa8bd11e261d3661f375f5f343cdc
+ms.openlocfilehash: 6e9d2c3180fb9e4c3e5ccc0b6d8e17183f78d698
+ms.sourcegitcommit: a1db01b4d3bd8c57d7a9c94ce122a6db68002d66
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 02/10/2021
-ms.locfileid: "100107073"
+ms.lasthandoff: 03/04/2021
+ms.locfileid: "102109841"
 ---
-# <a name="aspnet-core-blazor-lifecycle"></a>ASP.NET Core Blazor 生命週期
+# <a name="aspnet-core-blazor-lifecycle"></a>ASP.NET 核心 Blazor 生命週期
 
 此 Blazor 架構包含同步和非同步生命週期方法。 覆寫生命週期方法，以在元件初始化和轉譯期間對元件執行額外的作業。
 
@@ -253,11 +253,21 @@ protected override bool ShouldRender()
 
 `Pages/FetchData.razor` 在 Blazor Server 範本中：
 
-[!code-razor[](lifecycle/samples_snapshot/FetchData.razor?highlight=9,21,25)]
+::: moniker range=">= aspnetcore-5.0"
+
+[!code-razor[](~/blazor/common/samples/5.x/BlazorSample_Server/Pages/components-lifecycle/FetchData.razor?name=snippet&highlight=9,21,25)]
+
+::: moniker-end
+
+::: moniker range="< aspnetcore-5.0"
+
+[!code-razor[](~/blazor/common/samples/3.x/BlazorSample_Server/Pages/components-lifecycle/FetchData.razor?name=snippet&highlight=9,21,25)]
+
+::: moniker-end
 
 ## <a name="handle-errors"></a>處理錯誤
 
-如需在生命週期方法執行期間處理錯誤的詳細資訊，請參閱 <xref:blazor/fundamentals/handle-errors#lifecycle-methods> 。
+如需在生命週期方法執行期間處理錯誤的詳細資訊，請參閱 <xref:blazor/fundamentals/handle-errors> 。
 
 ## <a name="stateful-reconnection-after-prerendering"></a>以具狀態重新連接後重新連線
 
@@ -395,11 +405,31 @@ public async ValueTask DisposeAsync()
 
 * 私用欄位和 lambda 方法
 
-  [!code-razor[](lifecycle/samples_snapshot/event-handler-disposal-1.razor?highlight=23,28)]
+  ::: moniker range=">= aspnetcore-5.0"
+
+  [!code-razor[](~/blazor/common/samples/5.x/BlazorSample_WebAssembly/Pages/components-lifecycle/EventHandlerDisposal1.razor?name=snippet&highlight=24,29)]
+
+  ::: moniker-end
+
+  ::: moniker range="< aspnetcore-5.0"
+
+  [!code-razor[](~/blazor/common/samples/3.x/BlazorSample_WebAssembly/Pages/components-lifecycle/EventHandlerDisposal1.razor?name=snippet&highlight=24,29)]
+
+  ::: moniker-end
 
 * 私用方法方法
 
-  [!code-razor[](lifecycle/samples_snapshot/event-handler-disposal-2.razor?highlight=16,26)]
+  ::: moniker range=">= aspnetcore-5.0"
+
+  [!code-razor[](~/blazor/common/samples/5.x/BlazorSample_WebAssembly/Pages/components-lifecycle/EventHandlerDisposal2.razor?name=snippet&highlight=16,26)]
+
+  ::: moniker-end
+
+  ::: moniker range="< aspnetcore-5.0"
+
+  [!code-razor[](~/blazor/common/samples/3.x/BlazorSample_WebAssembly/Pages/components-lifecycle/EventHandlerDisposal2.razor?name=snippet&highlight=16,26)]
+
+  ::: moniker-end
 
 使用 [匿名](/dotnet/csharp/programming-guide/statements-expressions-operators/anonymous-functions)函式、方法或運算式時，不需要執行 <xref:System.IDisposable> 和取消訂閱委派。 不過， **當公開事件的物件存留時間超過註冊委派之元件的存留期時**，無法取消訂閱委派會是一個問題。 發生這種情況時，會造成記憶體流失的結果，因為已註冊的委派會讓原始物件保持運作。 因此，當您知道事件委派會快速處置時，請使用下列方法。 如果不確定需要處置的物件存留期，請訂閱委派方法並適當地處置委派，如先前的範例所示。
 

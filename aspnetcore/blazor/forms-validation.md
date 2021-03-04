@@ -1,5 +1,5 @@
 ---
-title: ASP.NET Core Blazor 表單和驗證
+title: ASP.NET 核心 Blazor 表單和驗證
 author: guardrex
 description: 瞭解如何在中使用表單和欄位驗證案例 Blazor 。
 monikerRange: '>= aspnetcore-3.1'
@@ -19,14 +19,14 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/forms-validation
-ms.openlocfilehash: 012c8794b3d239ce93ac942000c7ec4f71d06cbf
-ms.sourcegitcommit: 1166b0ff3828418559510c661e8240e5c5717bb7
+ms.openlocfilehash: a942c7848c77444d185ff73338a98a4205451992
+ms.sourcegitcommit: a1db01b4d3bd8c57d7a9c94ce122a6db68002d66
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 02/12/2021
-ms.locfileid: "100280004"
+ms.lasthandoff: 03/04/2021
+ms.locfileid: "102109724"
 ---
-# <a name="aspnet-core-blazor-forms-and-validation"></a>ASP.NET Core Blazor 表單和驗證
+# <a name="aspnet-core-blazor-forms-and-validation"></a>ASP.NET 核心 Blazor 表單和驗證
 
 Blazor使用[資料批註](xref:mvc/models/validation)可支援表單和驗證。
 
@@ -966,7 +966,7 @@ Blazor嘗試雙向系結至值時，架構不會自動處理 `null` 空字串轉
 
 ## <a name="validation-support"></a>驗證支援
 
-元件會將 <xref:Microsoft.AspNetCore.Components.Forms.DataAnnotationsValidator> 使用資料批註的驗證支援附加至串聯的 <xref:Microsoft.AspNetCore.Components.Forms.EditContext> 。 使用資料批註啟用驗證支援需要此明確手勢。 若要使用與資料批註不同的驗證系統，請將取代為 <xref:Microsoft.AspNetCore.Components.Forms.DataAnnotationsValidator> 自訂的執行。 ASP.NET Core 的執行可在參考來源中進行檢查： [`DataAnnotationsValidator`](https://github.com/dotnet/AspNetCore/blob/master/src/Components/Forms/src/DataAnnotationsValidator.cs) / [`AddDataAnnotationsValidation`](https://github.com/dotnet/AspNetCore/blob/master/src/Components/Forms/src/EditContextDataAnnotationsExtensions.cs) 。 先前的參考來源連結會提供存放庫分支的程式碼 `master` ，代表下一版 ASP.NET Core 的產品單位目前的開發。 若要選取不同版本的分支，請使用 GitHub 分支選取器 (例如 `release/3.1`) 。
+元件會將 <xref:Microsoft.AspNetCore.Components.Forms.DataAnnotationsValidator> 使用資料批註的驗證支援附加至串聯的 <xref:Microsoft.AspNetCore.Components.Forms.EditContext> 。 使用資料批註啟用驗證支援需要此明確手勢。 若要使用與資料批註不同的驗證系統，請將取代為 <xref:Microsoft.AspNetCore.Components.Forms.DataAnnotationsValidator> 自訂的執行。 ASP.NET 核心實作為參考來源的檢查： [`DataAnnotationsValidator`](https://github.com/dotnet/AspNetCore/blob/master/src/Components/Forms/src/DataAnnotationsValidator.cs) / [`AddDataAnnotationsValidation`](https://github.com/dotnet/AspNetCore/blob/master/src/Components/Forms/src/EditContextDataAnnotationsExtensions.cs) 。 先前的參考來源連結會提供存放庫分支的程式碼 `master` ，代表下一版 ASP.NET Core 的產品單位目前的開發。 若要選取不同版本的分支，請使用 GitHub 分支選取器 (例如 `release/3.1`) 。
 
 Blazor 會執行兩種類型的驗證：
 
@@ -1011,7 +1011,7 @@ Blazor 會執行兩種類型的驗證：
 using System;
 using System.ComponentModel.DataAnnotations;
 
-private class CustomValidator : ValidationAttribute
+public class CustomValidator : ValidationAttribute
 {
     protected override ValidationResult IsValid(object value, 
         ValidationContext validationContext)
@@ -1031,22 +1031,84 @@ private class CustomValidator : ValidationAttribute
 
 ## <a name="custom-validation-class-attributes"></a>自訂驗證類別屬性
 
-在與 CSS 架構（例如 [啟動](https://getbootstrap.com/)程式）整合時，自訂驗證類別名稱很有用。 若要指定自訂驗證類別名稱，請建立衍生自的類別， `FieldCssClassProvider` 並設定實例上的類別 <xref:Microsoft.AspNetCore.Components.Forms.EditContext> ：
+在與 CSS 架構（例如 [啟動](https://getbootstrap.com/)程式）整合時，自訂驗證類別名稱很有用。
+
+若要指定自訂驗證類別名稱：
+
+* 提供自訂驗證的 CSS 樣式。 在下列範例中，指定了有效和不正確樣式：
+
+```css
+.validField {
+    border-color: lawngreen;
+}
+
+.invalidField {
+    background-color: tomato;
+}
+```
+
+* 建立衍生自的類別 `FieldCssClassProvider` ，該類別會檢查欄位驗證訊息並套用適當的有效或無效樣式：
 
 ```csharp
-var editContext = new EditContext(model);
-editContext.SetFieldCssClassProvider(new MyFieldClassProvider());
+using System.Linq;
+using Microsoft.AspNetCore.Components.Forms;
 
-...
-
-private class MyFieldClassProvider : FieldCssClassProvider
+public class MyFieldClassProvider : FieldCssClassProvider
 {
     public override string GetFieldCssClass(EditContext editContext, 
         in FieldIdentifier fieldIdentifier)
     {
         var isValid = !editContext.GetValidationMessages(fieldIdentifier).Any();
 
-        return isValid ? "good field" : "bad field";
+        return isValid ? "validField" : "invalidField";
+    }
+}
+```
+
+* 在表單的實例上設定類別 <xref:Microsoft.AspNetCore.Components.Forms.EditContext> ：
+
+```razor
+...
+
+<EditForm EditContext="@editContext" OnValidSubmit="@HandleValidSubmit">
+    ...
+</EditForm>
+
+...
+
+@code {
+    private EditContext editContext;
+    private Model model = new Model();
+
+    protected override void OnInitialized()
+    {
+        editContext = new EditContext(model);
+        editContext.SetFieldCssClassProvider(new MyFieldClassProvider());
+    }
+
+    private void HandleValidSubmit()
+    {
+        ...
+    }
+}
+```
+
+上述範例會檢查所有表單欄位的有效性，並將樣式套用到每個欄位。 如果表單應該只將自訂樣式套用至欄位的子集，請依 `MyFieldClassProvider` 條件套用樣式。 下列範例只會將樣式套用至 `Identifier` 欄位：
+
+```csharp
+public class MyFieldClassProvider : FieldCssClassProvider
+{
+    public override string GetFieldCssClass(EditContext editContext,
+        in FieldIdentifier fieldIdentifier)
+    {
+        if (fieldIdentifier.FieldName == "Identifier")
+        {
+            var isValid = !editContext.GetValidationMessages(fieldIdentifier).Any();
+
+            return isValid ? "validField" : "invalidField";
+        }
+
+        return string.Empty;
     }
 }
 ```

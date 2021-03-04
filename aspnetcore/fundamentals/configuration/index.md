@@ -19,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: fundamentals/configuration/index
-ms.openlocfilehash: 0f069b049889f7caade493e238ac7a23db5e79af
-ms.sourcegitcommit: a49c47d5a573379effee5c6b6e36f5c302aa756b
+ms.openlocfilehash: 24b4d5fc11d21dce4d9e0fd2f8f0dd2d45e82baa
+ms.sourcegitcommit: a1db01b4d3bd8c57d7a9c94ce122a6db68002d66
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 02/16/2021
-ms.locfileid: "100536280"
+ms.lasthandoff: 03/04/2021
+ms.locfileid: "102110075"
 ---
 # <a name="configuration-in-aspnet-core"></a>ASP.NET Core 的設定
 
@@ -43,7 +43,7 @@ ASP.NET Core 中的設定是使用一或多個設定 [提供者](#cp)來執行�
 * 目錄檔案
 * 記憶體內部 .NET 物件
 
-本主題提供 ASP.NET Core 中設定的相關資訊。 如需在主控台應用程式中使用設定的詳細資訊，請參閱 [.net](/dotnet/core/extensions/configuration)設定。
+本主題提供 ASP.NET Core 中的設定相關資訊。 如需在主控台應用程式中使用設定的詳細資訊，請參閱 [.net](/dotnet/core/extensions/configuration)設定。
 
 [查看或下載範例程式碼](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/configuration/index/samples) ([如何下載](xref:index#how-to-download-a-sample)) 
 
@@ -51,7 +51,7 @@ ASP.NET Core 中的設定是使用一或多個設定 [提供者](#cp)來執行�
 
 ## <a name="default-configuration"></a>預設組態
 
-ASP.NET Core 使用 [dotnet new](/dotnet/core/tools/dotnet-new) 或 Visual Studio 建立的 web 應用程式會產生下列程式碼：
+使用 [dotnet new](/dotnet/core/tools/dotnet-new) 或 Visual Studio 建立的 ASP.NET Core web 應用程式會產生下列程式碼：
 
 [!code-csharp[](index/samples/3.x/ConfigSample/Program.cs?name=snippet&highlight=9)]
 
@@ -91,6 +91,8 @@ ASP.NET Core 使用 [dotnet new](/dotnet/core/tools/dotnet-new) 或 Visual Studi
 
 * 在開發期間， *appsettings*. ***開發** _._json * 設定會覆寫在中找到的值 *appsettings.json* 。
 * 在生產環境中， *appsettings*. ***生產** _._json * 設定會覆寫在中找到的值 *appsettings.json* 。 例如，將應用程式部署至 Azure 時。
+
+如果必須保證設定值，請參閱 [GetValue](#getvalue)。 上述範例只會讀取字串，且不支援預設值
 
 <a name="optpat"></a>
 
@@ -148,7 +150,7 @@ dotnet run
 先前的環境設定：
 
 * 只會在從其設定的命令視窗啟動的進程中設定。
-* 使用 Visual Studio 啟動的瀏覽器將無法讀取。
+* 使用 Visual Studio 啟動的瀏覽器不會讀取。
 
 您可以使用下列的 [setx](/windows-server/administration/windows-commands/setx) 命令，在 Windows 上設定環境機碼和值。 與不同 `set` 的 `setx` 是，設定會持續保存。 `/M` 設定系統內容中的變數。 如果 `/M` 未使用此參數，則會設定使用者環境變數。
 
@@ -160,7 +162,7 @@ setx Position__Name Environment_Rick /M
 
 若要測試上述命令是否覆寫 *appsettings.json* 並 *appsettings。* `Environment`*. json*：
 
-* 使用 Visual Studio： Exit 並重新啟動 Visual Studio。
+* 使用 Visual Studio：結束並重新啟動 Visual Studio。
 * 使用 CLI：啟動新的命令視窗，然後輸入 `dotnet run` 。
 
 <xref:Microsoft.Extensions.Configuration.EnvironmentVariablesExtensions.AddEnvironmentVariables*>使用字串呼叫以指定環境變數的前置詞：
@@ -183,9 +185,9 @@ set MyCustomPrefix_Position__Name=Environment_Rick_cp
 dotnet run
 ```
 
-[預設](#default)設定會載入前面加上和的環境變數和命令列引數 `DOTNET_` `ASPNETCORE_` 。 和前置詞 `DOTNET_` `ASPNETCORE_` 是由 ASP.NET Core 用於 [主機和應用程式](xref:fundamentals/host/generic-host#host-configuration)設定，但不適用於使用者設定。 如需有關主機和應用程式設定的詳細資訊，請參閱 [.Net 泛型主機](xref:fundamentals/host/generic-host)。
+[預設](#default)設定會載入前面加上和的環境變數和命令列引數 `DOTNET_` `ASPNETCORE_` 。 `DOTNET_` `ASPNETCORE_` ASP.NET Core 會使用和首碼來進行[主機和應用程式](xref:fundamentals/host/generic-host#host-configuration)設定，但不會用於使用者設定。 如需有關主機和應用程式設定的詳細資訊，請參閱 [.Net 泛型主機](xref:fundamentals/host/generic-host)。
 
-在 [Azure App Service](https://azure.microsoft.com/services/app-service/)上，選取 [**設定 > 設定**] 頁面上的 [**新增應用程式設定**]。 Azure App Service 的應用程式設定如下：
+在 [Azure App Service](https://azure.microsoft.com/services/app-service/)的 [**設定] > 設定**] 頁面上，選取 [**新增應用程式設定**]。 Azure App Service 應用程式設定如下：
 
 * 靜態加密，並透過加密通道傳輸。
 * 公開為環境變數。
@@ -352,7 +354,7 @@ dotnet run -k1 value1 -k2 value2 --alt3=value2 /alt4=value3 --alt5 value5 /alt6 
 * 階層式機碼
   * 在設定 API 內，冒號分隔字元 (`:`) 可在所有平台上運作。
   * 在環境變數中，冒號分隔字元可能無法在所有平台上運作。 所有平臺都支援雙底線、 `__` ，而且會自動轉換為冒號 `:` 。
-  * 在 Azure Key Vault 中，階層式索引鍵會使用 `--` 做為分隔符號。 [](xref:security/key-vault-configuration) `--` `:` 當秘密載入至應用程式的設定時，Azure Key Vault 設定提供者會自動取代為。
+  * 在 Azure Key Vault 中，階層式索引鍵會使用 `--` 做為分隔符號。 [](xref:security/key-vault-configuration) `--` `:` 當秘密載入至應用程式的設定時，Azure Key Vault 設定提供者會自動以取代。
 * <xref:Microsoft.Extensions.Configuration.ConfigurationBinder> 支援在設定機碼中使用陣列索引將陣列繫結到物件。 [將陣列繫結到類別](#boa)一節說明陣列繫結。
 
 設定值：
@@ -369,7 +371,7 @@ dotnet run -k1 value1 -k2 value2 --alt3=value2 /alt4=value3 --alt5 value5 /alt6 
 | 提供者 | 從提供設定 |
 | -------- | ----------------------------------- |
 | [Azure Key Vault 設定提供者](xref:security/key-vault-configuration) | Azure 金鑰保存庫 |
-| [Azure App 設定提供者](/azure/azure-app-configuration/quickstart-aspnet-core-app) | Azure 應用程式組態 |
+| [Azure 應用程式設定提供者](/azure/azure-app-configuration/quickstart-aspnet-core-app) | Azure 應用程式組態 |
 | [命令列設定提供者](#clcp) | 命令列參數 |
 | [自訂設定提供者](#custom-configuration-provider) | 自訂來源 |
 | [環境變數設定提供者](#evcp) | 環境變數 |
@@ -594,7 +596,7 @@ Kestrel 特定的端點設定會覆寫所有 [跨伺服器](xref:fundamentals/se
 
 [!code-json[](~/fundamentals/configuration/index/samples_snippets/5.x/appsettings.json?highlight=2-8)]
 
-當先前反白顯示的標記用於 ASP.NET Core web 應用程式 ***，並*** 在命令列上啟動應用程式時，會使用下列跨伺服器端點設定：
+在 ASP.NET Core web 應用程式中使用上述反白顯示的標記 ***，並*** 在命令列上啟動應用程式時，會使用下列跨伺服器端點設定：
 
 `dotnet run --urls="https://localhost:7777"`
 
@@ -839,11 +841,11 @@ Index: 5  Value: value5
 
 ## <a name="other-configuration"></a>其他設定
 
-本主題僅適用于 *應用程式* 設定。 執行和主控 ASP.NET Core 應用程式的其他層面，是使用本主題未涵蓋的設定檔來設定：
+本主題僅適用于 *應用程式* 設定。 執行和裝載 ASP.NET Core 應用程式的其他層面，是使用本主題未涵蓋的設定檔來設定：
 
 * *launch.js開啟* /*launchSettings.js* 為開發環境的工具設定檔，如下所述：
   * 在中 <xref:fundamentals/environments#development> 。
-  * 在檔集中，用來設定開發案例 ASP.NET Core 應用程式的檔案。
+  * 在檔集中，用來為開發案例設定 ASP.NET Core 應用程式的檔案。
 * *web.config* 是伺服器設定檔，如下列主題所述：
   * <xref:host-and-deploy/iis/index>
   * <xref:host-and-deploy/aspnet-core-module>
@@ -895,11 +897,11 @@ using Microsoft.Extensions.Configuration;
 
 ## <a name="other-configuration"></a>其他設定
 
-本主題僅適用于 *應用程式* 設定。 執行和主控 ASP.NET Core 應用程式的其他層面，是使用本主題未涵蓋的設定檔來設定：
+本主題僅適用于 *應用程式* 設定。 執行和裝載 ASP.NET Core 應用程式的其他層面，是使用本主題未涵蓋的設定檔來設定：
 
 * *launch.js開啟* /*launchSettings.js* 為開發環境的工具設定檔，如下所述：
   * 在中 <xref:fundamentals/environments#development> 。
-  * 在檔集中，用來設定開發案例 ASP.NET Core 應用程式的檔案。
+  * 在檔集中，用來為開發案例設定 ASP.NET Core 應用程式的檔案。
 * *web.config* 是伺服器設定檔，如下列主題所述：
   * <xref:host-and-deploy/iis/index>
   * <xref:host-and-deploy/aspnet-core-module>
@@ -1227,7 +1229,7 @@ dotnet run -CLKey1=value1 -CLKey2=value2
 
 [!INCLUDE[](~/includes/environmentVarableColon.md)]
 
-[Azure App Service](https://azure.microsoft.com/services/app-service/) 允許在 Azure 入口網站中設定可使用環境變數設定提供者覆寫應用程式設定的環境變數。 如需詳細資訊，請參閱 [Azure App：使用 Azure 入口網站覆寫應用程式設定](xref:host-and-deploy/azure-apps/index#override-app-configuration-using-the-azure-portal)。
+[Azure App Service](https://azure.microsoft.com/services/app-service/) 可讓您在 Azure 入口網站中設定環境變數，以使用環境變數設定提供者覆寫應用程式設定。 如需詳細資訊，請參閱 [Azure App：使用 Azure 入口網站覆寫應用程式設定](xref:host-and-deploy/azure-apps/index#override-app-configuration-using-the-azure-portal)。
 
 使用 [Web 主機](xref:fundamentals/host/web-host)初始化新的主機建立器並呼叫 `CreateDefaultBuilder` 時，可使用 `AddEnvironmentVariables` 為[主機組態](#host-versus-app-configuration)載入字首為 `ASPNETCORE_` 的環境變數。 如需詳細資訊，請參閱[＜預設組態＞](#default-configuration)一節。
 

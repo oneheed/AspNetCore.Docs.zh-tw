@@ -1,5 +1,5 @@
 ---
-title: cookie在 ASP.NET Core 中使用 SameSite
+title: cookie在 ASP.NET Core 中使用 SameSite s
 author: rick-anderson
 description: 瞭解如何 cookie 在 ASP.NET Core 中使用 SameSite s
 ms.author: riande
@@ -19,14 +19,14 @@ no-loc:
 - SignalR
 - Electron
 uid: security/samesite
-ms.openlocfilehash: f1aa388015bd540a6fda263eac53753ada63bf79
-ms.sourcegitcommit: bce62ceaac7782e22d185814f2e8532c84efa472
+ms.openlocfilehash: e06c73edfc999053e0aa37f05d984a2b428f69a9
+ms.sourcegitcommit: a1db01b4d3bd8c57d7a9c94ce122a6db68002d66
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 11/17/2020
-ms.locfileid: "94673987"
+ms.lasthandoff: 03/04/2021
+ms.locfileid: "102109932"
 ---
-# <a name="work-with-samesite-no-loccookies-in-aspnet-core"></a>cookie在 ASP.NET Core 中使用 SameSite
+# <a name="work-with-samesite-cookies-in-aspnet-core"></a>cookie在 ASP.NET Core 中使用 SameSite s
 
 作者：[Rick Anderson](https://twitter.com/RickAndMSFT)
 
@@ -38,17 +38,17 @@ SameSite 是一項 [IETF](https://ietf.org/about/) 草稿標準，其設計目�
 * 使用的應用程式 [`<iframe>`](https://developer.mozilla.org/docs/Web/HTML/Element/iframe) 可能會遇到或的問題， `sameSite=Lax` `sameSite=Strict` cookie 因為 `<iframe>` 會被視為跨網站案例。
 * `SameSite=None` [2016 標準](https://tools.ietf.org/html/draft-west-first-party-cookies-07)不允許此值，而且會導致某些執行將這類視為 cookie `SameSite=Strict` 。 請參閱本檔中的 [支援舊版瀏覽器](#sob) 。
 
-此 `SameSite=Lax` 設定適用于大部分的應用程式 cookie 。 某些形式的驗證，例如 [OpenID Connect](https://openid.net/connect/) (OIDC) 和 [WS-同盟](https://auth0.com/docs/protocols/ws-fed) 預設為以 POST 為基礎的重新導向。 以 POST 為基礎的重新導向會觸發 SameSite 瀏覽器保護，因此這些元件會停用 SameSite。 由於要求流程的差異，大部分的 [OAuth](https://oauth.net/) 登入不會受到影響。
+此 `SameSite=Lax` 設定適用于大部分的應用程式 cookie 。 某些形式的驗證，例如 [OpenID connect](https://openid.net/connect/) (OIDC) 和 [WS-同盟](https://auth0.com/docs/protocols/ws-fed) 預設為以 POST 為基礎的重新導向。 以 POST 為基礎的重新導向會觸發 SameSite 瀏覽器保護，因此這些元件會停用 SameSite。 由於要求流程的差異，大部分的 [OAuth](https://oauth.net/) 登入不會受到影響。
 
-每個發出的 ASP.NET Core 元件都 cookie 需要決定 SameSite 是否適當。
+發出的每個 ASP.NET 核心元件都 cookie 需要決定是否適合 SameSite。
 
-## <a name="samesite-and-no-locidentity"></a>SameSite 和 Identity
+## <a name="samesite-and-identity"></a>SameSite 和 Identity
 
 [!INCLUDE[](~/includes/SameSiteIdentity.md)]
 
 ## <a name="samesite-test-sample-code"></a>SameSite 測試範例程式碼
 
- ::: moniker range=">= aspnetcore-2.1 < aspnetcore-3.0"
+::: moniker range=">= aspnetcore-2.1 < aspnetcore-3.0"
 
 您可以下載並測試下列範例：
 
@@ -62,7 +62,6 @@ SameSite 是一項 [IETF](https://ietf.org/about/) 草稿標準，其設計目�
 ::: moniker range=">= aspnetcore-3.0"
 
 您可以下載並測試下列範例：
-
 
 | 範例               | 文件 |
 | ----------------- | ------------ |
@@ -99,7 +98,7 @@ SameSite 是一項 [IETF](https://ietf.org/about/) 草稿標準，其設計目�
 
 [!code-csharp[](samesite/sample/Pages/Index.cshtml.cs?name=snippet)]
 
-發出的所有 ASP.NET Core 元件都會 cookie 以適用于其案例的設定覆寫先前的預設值。 覆寫的先前預設值尚未變更。
+發出的所有 ASP.NET 核心元件都會 cookie 以適用于其案例的設定覆寫先前的預設值。 覆寫的先前預設值尚未變更。
 
 | 元件 | cookie | 預設 |
 | ------------- | ------------- |
@@ -135,7 +134,7 @@ ASP.NET Core 3.1 和更新版本提供下列 SameSite 支援：
 
 ## <a name="history-and-changes"></a>歷程記錄和變更
 
-SameSite 支援首次使用 [2016 draft 標準](https://tools.ietf.org/html/draft-west-first-party-cookies-07#section-4.1)在2.0 的 ASP.NET Core 中執行。 2016標準為加入宣告。 依預設，將數個設定 cookie 為，ASP.NET Core 加入宣告 `Lax` 。 在遇到幾個驗證 [問題](https://github.com/aspnet/Announcements/issues/318) 之後，就會 [停用](https://github.com/aspnet/Announcements/issues/348)大部分的 SameSite 使用量。
+SameSite 支援已在2.0 中第一次使用 [2016 draft 標準](https://tools.ietf.org/html/draft-west-first-party-cookies-07#section-4.1)實作為 ASP.NET Core。 2016標準為加入宣告。 依預設，將數個設為，以 ASP.NET 核心加入宣告 cookie `Lax` 。 在遇到幾個驗證 [問題](https://github.com/aspnet/Announcements/issues/318) 之後，就會 [停用](https://github.com/aspnet/Announcements/issues/348)大部分的 SameSite 使用量。
 
 [修補程式](https://devblogs.microsoft.com/dotnet/net-core-November-2019/) 于2019年11月發行，以從2016標準更新為2019標準。 [SameSite 規格的2019草稿](https://github.com/aspnet/Announcements/issues/390)：
 
@@ -227,7 +226,7 @@ Edge 支援舊的 SameSite 標準。 Edge 版本44沒有任何已知的新標準
 
 SameSite 旗標是在頁面上設定的 `edge://flags/#same-site-by-default-cookies` 。 Edge Chromium 未發現任何相容性問題。
 
-### <a name="test-with-no-locelectron"></a>測試方式 Electron
+### <a name="test-with-electron"></a>測試方式 Electron
 
 的版本 Electron 包括較舊版本的 Chromium。 例如，小組所使用的版本 Electron 是 Chromium 66，這會展示較舊的行為。 您必須使用您的產品版本來執行您自己的相容性測試 Electron 。 請參閱下一節中的 [支援舊版瀏覽器](#sob) 。
 

@@ -19,16 +19,16 @@ no-loc:
 - Razor
 - SignalR
 uid: security/samesite/mvc21
-ms.openlocfilehash: 61878af0f9af72284b43ffd46cca42b0cf043326
-ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
+ms.openlocfilehash: 8f819d283e136a63ad9f82d6432a93866210b36b
+ms.sourcegitcommit: a1db01b4d3bd8c57d7a9c94ce122a6db68002d66
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 10/30/2020
-ms.locfileid: "93051547"
+ms.lasthandoff: 03/04/2021
+ms.locfileid: "102110101"
 ---
-# <a name="aspnet-core-21-mvc-samesite-no-loccookie-sample"></a>ASP.NET Core 2.1 MVC SameSite cookie 範例
+# <a name="aspnet-core-21-mvc-samesite-cookie-sample"></a>ASP.NET Core 2.1 MVC SameSite cookie 範例
 
-ASP.NET Core 2.1 內建 [SameSite](https://www.owasp.org/index.php/SameSite) 屬性的支援，但它已寫入原始的標準。 修補後的 [行為](https://github.com/dotnet/aspnetcore/issues/8212) 會變更的意義 `SameSite.None` ，以發出 sameSite 屬性的值 `None` ，而不是完全不發出值。 如果您不想發出值，您可以將屬性設定 `SameSite` cookie 為-1。
+ASP.NET Core 2.1 具有 [SameSite](https://www.owasp.org/index.php/SameSite) 屬性的內建支援，但它已寫入原始的標準。 修補後的 [行為](https://github.com/dotnet/aspnetcore/issues/8212) 會變更的意義 `SameSite.None` ，以發出 sameSite 屬性的值 `None` ，而不是完全不發出值。 如果您不想發出值，您可以將屬性設定 `SameSite` cookie 為-1。
 
 [!INCLUDE[](~/includes/SameSiteIdentity.md)]
 
@@ -36,7 +36,7 @@ ASP.NET Core 2.1 內建 [SameSite](https://www.owasp.org/index.php/SameSite) 屬
 
 以下是如何在上撰寫 SameSite 屬性的範例 cookie ：
 
-```c#
+```csharp
 var cookieOptions = new CookieOptions
 {
     // Set the secure flag, which Chrome's changes will require for SameSite none.
@@ -56,11 +56,11 @@ var cookieOptions = new CookieOptions
 Response.Cookies.Append(CookieName, "cookieValue", cookieOptions);
 ```
 
-## <a name="setting-no-loccookie-authentication-and-session-state-no-loccookies"></a>設定 Cookie 驗證和會話狀態 cookie s
+## <a name="setting-cookie-authentication-and-session-state-cookies"></a>設定 Cookie 驗證和會話狀態 cookie s
 
 Cookie 驗證、會話狀態和 [各種其他元件](../samesite.md?view=aspnetcore-2.1) 會透過選項設定其 sameSite 選項 Cookie ，例如
 
-```c#
+```csharp
 services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
     .AddCookie(options =>
     {
@@ -87,13 +87,13 @@ services.AddSession(options =>
 
 您可以在上方的影像中看到 cookie ，當您按一下 [建立 SameSite] 按鈕時，範例所建立的 Cookie SameSite 屬性值，與 `Lax` [範例程式碼](#sampleCode)中所設定的值相符。
 
-## <a name="intercepting-no-loccookies"></a><a name="interception"></a>攔截 cookie s
+## <a name="intercepting-cookies"></a><a name="interception"></a>攔截 cookie s
 
 為了攔截 cookie s，若要根據使用者的瀏覽器代理程式中的支援來調整無值，您必須使用 `CookiePolicy` 中介軟體。 這必須放入 HTTP 要求管線中， **才能** 在 cookie 中寫入及設定的任何元件 `ConfigureServices()` 。
 
-若要將它插入管線中，請使用 `app.UseCookiePolicy()` Startup.cs 中的 `Configure(IApplicationBuilder, IHostingEnvironment)` 方法。 [Startup.cs](https://github.com/blowdart/AspNetSameSiteSamples/blob/master/AspNetCore21MVC/Startup.cs) 例如：
+若要將它插入管線中，請使用 `app.UseCookiePolicy()` Startup.cs 中的 `Configure(IApplicationBuilder, IHostingEnvironment)` 方法。 [](https://github.com/blowdart/AspNetSameSiteSamples/blob/master/AspNetCore21MVC/Startup.cs) 例如：
 
-```c#
+```csharp
 public void Configure(IApplicationBuilder app, IHostingEnvironment env)
 {
     if (env.IsDevelopment())
@@ -123,7 +123,7 @@ public void Configure(IApplicationBuilder app, IHostingEnvironment env)
 
 然後在中 `ConfigureServices(IServiceCollection services)` 設定 cookie 原則，以在 cookie 附加或刪除時呼叫 helper 類別。 例如：
 
-```c#
+```csharp
 public void ConfigureServices(IServiceCollection services)
 {
     services.Configure<CookiePolicyOptions>(options =>
@@ -157,13 +157,13 @@ Helper 函數 `CheckSameSite(HttpContext, CookieOptions)` ：
 * 如果 `SameSite` 設定為 `None` ，且目前的使用者代理程式已知不支援 none 屬性值，則為。 檢查是使用 [SameSiteSupport](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/security/samesite/sample/snippets/SameSiteSupport.cs) 類別來完成：
   * 藉 `SameSite` 由將屬性設定為，將設定為不發出值 `(SameSiteMode)(-1)`
 
-## <a name="targeting-net-framework"></a>目標 .NET Framework
+## <a name="targeting-net-framework"></a>以 .NET Framework 為目標
 
-ASP.NET Core 和 System. Web (ASP.NET 傳統) 具有獨立的 SameSite 執行。 如果使用 ASP.NET Core 也不需要 SameSite KB 修補程式， ( .NET 4.7.2) 套用至 ASP.NET Core，就不需要進行 .NET Framework 的 KB 修補程式。
+ASP.NET Core 和 System.object (ASP.NET 4.x) 具有 SameSite 的獨立。 如果使用 ASP.NET Core ( 或 SameSite 不需要 .net framework 4.7.2) 適用于 ASP.NET Core 的 KB 修補程式，則不需要 .NET Framework 的 KB 修補程式。
 
-.NET 上的 ASP.NET Core 需要更新 nuget 套件相依性，才能取得適當的修正程式。
+.NET 上的 ASP.NET Core 需要更新 NuGet 套件相依性，才能取得適當的修正程式。
 
-若要取得 .NET Framework 的 ASP.NET Core 變更，請確定您有 (2.1.14 或更新版本2.1 版本) 的已修補套件和版本的直接參考。
+若要取得 .NET Framework 的 ASP.NET Core 變更，請確定您有修補套件和版本的直接參考 (2.1.14 或更新版本的2.1 版本) 。
 
 ```xml
 <PackageReference Include="Microsoft.Net.Http.Headers" Version="2.1.14" />

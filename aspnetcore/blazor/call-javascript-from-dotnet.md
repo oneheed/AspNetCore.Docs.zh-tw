@@ -1,5 +1,5 @@
 ---
-title: 從 ASP.NET Core 中的 .NET 方法呼叫 JavaScript 函式 Blazor
+title: 從 ASP.NET Core 中的 .NET 方法呼叫 JavaScript 函數 Blazor
 author: guardrex
 description: 瞭解如何在應用程式中叫用 .NET 方法的 JavaScript 函式 Blazor 。
 monikerRange: '>= aspnetcore-3.1'
@@ -19,14 +19,14 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/call-javascript-from-dotnet
-ms.openlocfilehash: 5b28ad594567e7bfc87e15eed419bea520125654
-ms.sourcegitcommit: 1166b0ff3828418559510c661e8240e5c5717bb7
+ms.openlocfilehash: ee1e4eb8e682f77273370c707306bf9f267fa676
+ms.sourcegitcommit: a1db01b4d3bd8c57d7a9c94ce122a6db68002d66
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 02/12/2021
-ms.locfileid: "100280302"
+ms.lasthandoff: 03/04/2021
+ms.locfileid: "102109503"
 ---
-# <a name="call-javascript-functions-from-net-methods-in-aspnet-core-blazor"></a>從 ASP.NET Core 中的 .NET 方法呼叫 JavaScript 函式 Blazor
+# <a name="call-javascript-functions-from-net-methods-in-aspnet-core-blazor"></a>從 ASP.NET Core 中的 .NET 方法呼叫 JavaScript 函數 Blazor
 
 Blazor應用程式可以從 javascript 函式的 .net 方法和 .net 方法中叫用 javascript 函式。 這些案例稱為 *JavaScript 互通性* (*JS interop*) 。
 
@@ -102,11 +102,11 @@ JavaScript 程式碼（例如上述範例中所示的程式碼）也可以從 Ja
 
 `wwwroot/index.html` (Blazor WebAssembly):
 
-[!code-html[](./common/samples/5.x/BlazorWebAssemblySample/wwwroot/index.html?highlight=23)]
+[!code-html[](./common/samples/5.x/BlazorWebAssemblySample/wwwroot/index.html?highlight=22)]
 
 `Pages/_Host.cshtml` (Blazor Server):
 
-[!code-cshtml[](./common/samples/5.x/BlazorServerSample/Pages/_Host.cshtml?highlight=34)]
+[!code-cshtml[](./common/samples/5.x/BlazorServerSample/Pages/_Host.cshtml?highlight=33)]
 
 請勿將 `<script>` 標記放在元件檔中，因為 `<script>` 無法動態更新標記。
 

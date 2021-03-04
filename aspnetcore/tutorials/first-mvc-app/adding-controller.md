@@ -18,12 +18,12 @@ no-loc:
 - SignalR
 uid: tutorials/first-mvc-app/adding-controller
 ms.custom: contperf-fy21q3
-ms.openlocfilehash: 47bb9b96bd5565a3a67f3cbdf9a4b6bc1f987447
-ms.sourcegitcommit: ef8d8c79993a6608bf597ad036edcf30b231843f
+ms.openlocfilehash: 1a13fe31859b9ed41edc746ba450f552bc07f344
+ms.sourcegitcommit: a1db01b4d3bd8c57d7a9c94ce122a6db68002d66
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 02/09/2021
-ms.locfileid: "99975257"
+ms.lasthandoff: 03/04/2021
+ms.locfileid: "102110205"
 ---
 # <a name="part-2-add-a-controller-to-an-aspnet-core-mvc-app"></a>第2部分：將控制器新增至 ASP.NET Core MVC 應用程式
 
@@ -44,8 +44,8 @@ MVC 架構的應用程式包含：
 
 在 MVC 應用程式中，視圖只會顯示資訊。 控制器會處理和回應使用者輸入和互動。 例如，控制器會處理 URL 區段和查詢字串值，並將這些值傳遞至模型。 此模型可能會使用這些值來查詢資料庫。 例如：
 
-* `Https://localhost:5001/Home/Privacy`：指定 `Home`  控制器和 `Privacy` 動作。
-* `Https://localhost:5001/Movies/Edit/5`：這是使用 `Movies` 控制器和 `Edit` 動作（稍後在本教學課程中詳述）來編輯識別碼 = 5 之電影的要求。
+* `https://localhost:5001/Home/Privacy`：指定 `Home` 控制器和 `Privacy` 動作。
+* `https://localhost:5001/Movies/Edit/5`：這是使用 `Movies` 控制器和 `Edit` 動作（稍後在本教學課程中詳述）來編輯識別碼 = 5 之電影的要求。
 
 本教學課程稍後會說明路由資料。
 
@@ -57,9 +57,9 @@ MVC 架構模式會將應用程式分成三個主要的元件群組：模型、�
 
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
-在 **方案總管** 中，以滑鼠右鍵按一下 [ **控制器] > 新增 > 控制器**。
+在 [ **Solution Explorer**] 中，以滑鼠右鍵按一下 [ **控制器] > 新增 > 控制器**。
 
-![方案總管中，以滑鼠右鍵按一下 [控制器] > 新增 > 控制器](~/tutorials/first-mvc-app/adding-controller/_static/add_controllercopyVS19v16.9.png)
+![方案 Explorer 中，以滑鼠右鍵按一下控制器 > 新增 > 控制器](~/tutorials/first-mvc-app/adding-controller/_static/add_controllercopyVS19v16.9.png)
 
 在 [ **新增 Scaffold** ] 對話方塊中，選取 [ **MVC 控制器-空白**]。
 
@@ -79,7 +79,7 @@ MVC 架構模式會將應用程式分成三個主要的元件群組：模型、�
 
 ![操作功能表](~/tutorials/first-mvc-app-mac/adding-controller/_static/add_controller.png)
 
-選取 **ASP.NET Core** 和 **控制器類別**。
+選取 [ **ASP.NET 核心** 和 **控制器類別**]。
 
 將控制器命名為 **HelloWorldController**。
 
@@ -178,7 +178,7 @@ MVC 會根據傳入的 URL，叫用控制器類別以及它們內的動作方法
 
 > [!div class="step-by-step"]
 > [上一步：開始](start-mvc.md) 
-> [下一步：新增視圖](adding-view.md)
+>  使用[下一步：新增視圖](adding-view.md)
 
 ::: moniker-end
 
@@ -200,7 +200,7 @@ MVC 模式可協助您建立應用程式，用來隔離應用程的不同層面 
 
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
-* 在 **方案總管** 中，以滑鼠右鍵按一下 [ **控制器] > 新增 > 控制器**
+* 在 [ **方案 Explorer**] 中，以滑鼠右鍵按一下 [ **控制器] > 新增 > 控制器**
 
   ![操作功能表](~/tutorials/first-mvc-app/adding-controller/_static/add_controller.png)
 

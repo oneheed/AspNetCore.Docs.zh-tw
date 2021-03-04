@@ -1,11 +1,11 @@
 ---
-title: 在 ASP.NET Core 中保存外部提供者的其他宣告和權杖
+title: 從 ASP.NET Core 中的外部提供者保存其他宣告和權杖
 author: rick-anderson
 description: 瞭解如何從外部提供者建立其他宣告和權杖。
 monikerRange: '>= aspnetcore-2.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 10/30/2020
+ms.date: 02/18/2021
 no-loc:
 - appsettings.json
 - ASP.NET Core Identity
@@ -19,22 +19,22 @@ no-loc:
 - Razor
 - SignalR
 uid: security/authentication/social/additional-claims
-ms.openlocfilehash: 4503291ff887f79b1ad6eacd4e56943ce23335bc
-ms.sourcegitcommit: 5156eab2118584405eb663e1fcd82f8bd7764504
+ms.openlocfilehash: 9c04ca466566e956b5e6dfec8131096c3995bc14
+ms.sourcegitcommit: a1db01b4d3bd8c57d7a9c94ce122a6db68002d66
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 10/31/2020
-ms.locfileid: "93141504"
+ms.lasthandoff: 03/04/2021
+ms.locfileid: "102110140"
 ---
-# <a name="persist-additional-claims-and-tokens-from-external-providers-in-aspnet-core"></a>在 ASP.NET Core 中保存外部提供者的其他宣告和權杖
+# <a name="persist-additional-claims-and-tokens-from-external-providers-in-aspnet-core"></a>從 ASP.NET Core 中的外部提供者保存其他宣告和權杖
 
 ::: moniker range=">= aspnetcore-3.0"
 
-ASP.NET Core 的應用程式可以從外部驗證提供者（例如 Facebook、Google、Microsoft 和 Twitter）建立額外的宣告和權杖。 每個提供者都會顯示其平臺上使用者的不同資訊，但是接收和轉換使用者資料到其他宣告的模式相同。
+ASP.NET Core 應用程式可以從外部驗證提供者（例如 Facebook、Google、Microsoft 和 Twitter）建立額外的宣告和權杖。 每個提供者都會顯示其平臺上使用者的不同資訊，但是接收和轉換使用者資料到其他宣告的模式相同。
 
 [查看或下載範例程式碼](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/security/authentication/social/additional-claims/samples) ([如何下載](xref:index#how-to-download-a-sample)) 
 
-## <a name="prerequisites"></a>Prerequisites
+## <a name="prerequisites"></a>必要條件
 
 決定要在應用程式中支援的外部驗證提供者。 針對每個提供者，註冊應用程式並取得用戶端識別碼和用戶端密碼。 如需詳細資訊，請參閱<xref:security/authentication/social/index>。 範例應用程式會使用 [Google 驗證提供者](xref:security/authentication/google-logins)。
 
@@ -80,7 +80,7 @@ options.Scope.Add("https://www.googleapis.com/auth/user.birthday.read");
 
 在中 `Microsoft.AspNetCore.Identity.UI.Pages.Account.Internal.ExternalLoginModel.OnPostConfirmationAsync` ， <xref:Microsoft.AspNetCore.Identity.IdentityUser> (`ApplicationUser`) 會使用來登入應用程式 <xref:Microsoft.AspNetCore.Identity.SignInManager%601.SignInAsync*> 。 在登入程式中， <xref:Microsoft.AspNetCore.Identity.UserManager%601> 可以 `ApplicationUser` 為提供的使用者資料儲存宣告 <xref:Microsoft.AspNetCore.Identity.ExternalLoginInfo.Principal*> 。
 
-在範例應用程式中， `OnPostConfirmationAsync` ( *Account/ExternalLogin* ]) 會 `urn:google:locale` 為已登入 () 和圖片 () 宣告建立地區設定 `urn:google:picture` `ApplicationUser` ，包括下列的宣告 <xref:System.Security.Claims.ClaimTypes.GivenName> ：
+在範例應用程式中， `OnPostConfirmationAsync` (*Account/ExternalLogin* ]) 會 `urn:google:locale` 為已登入 () 和圖片 () 宣告建立地區設定 `urn:google:picture` `ApplicationUser` ，包括下列的宣告 <xref:System.Security.Claims.ClaimTypes.GivenName> ：
 
 [!code-csharp[](additional-claims/samples/3.x/ClaimsSample/Areas/Identity/Pages/Account/ExternalLogin.cshtml.cs?name=snippet_OnPostConfirmationAsync&highlight=35-51)]
 
@@ -108,6 +108,9 @@ options.Scope.Add("https://www.googleapis.com/auth/user.birthday.read");
 
 [!code-csharp[](additional-claims/samples/3.x/ClaimsSample/Areas/Identity/Pages/Account/ExternalLogin.cshtml.cs?name=snippet_OnPostConfirmationAsync&highlight=54-56)]
 
+> [!NOTE]
+> 如需將權杖傳遞至 Razor 應用程式元件的詳細資訊 Blazor Server ，請參閱 <xref:blazor/security/server/additional-scenarios#pass-tokens-to-a-blazor-server-app> 。
+
 ## <a name="how-to-add-additional-custom-tokens"></a>如何新增其他自訂權杖
 
 為了示範如何新增作為一部分儲存的自訂權杖， `SaveTokens` 範例應用程式會將 <xref:Microsoft.AspNetCore.Authentication.AuthenticationToken> 包含目前的 <xref:System.DateTime> [AuthenticationToken.Name](xref:Microsoft.AspNetCore.Authentication.AuthenticationToken.Name*) 加入至 `TicketCreated` ：
@@ -122,9 +125,134 @@ options.Scope.Add("https://www.googleapis.com/auth/user.birthday.read");
 
 如需詳細資訊，請參閱<xref:Microsoft.AspNetCore.Authentication.OAuth.Claims>。
 
+## <a name="add-and-update-user-claims"></a>新增和更新使用者宣告
+
+宣告會在第一次註冊時從外部提供者複製到使用者資料庫，而不是在登入時複製。 如果在使用者註冊以使用應用程式之後，在應用程式中啟用其他宣告，請在使用者上呼叫 [使用 RefreshSignInAsync](xref:Microsoft.AspNetCore.Identity.SignInManager%601) ，以強制產生新的驗證 cookie 。
+
+在使用測試使用者帳戶的開發環境中，您可以直接刪除並重新建立使用者帳戶。 針對生產系統，加入至應用程式的新宣告可回填至使用者帳戶。 將 [ `ExternalLogin` 頁面的](xref:security/authentication/scaffold-identity) 程式碼放入應用程式 `Areas/Pages/Identity/Account/Manage` 中之後，將下列程式碼新增至檔案 `ExternalLoginModel` 中的 `ExternalLogin.cshtml.cs` 。
+
+新增已新增之宣告的字典。 使用字典索引鍵來保存宣告類型，並使用這些值來保留預設值。 將下列這一行加入至類別的頂端。 下列範例假設為使用者的 Google 圖片新增一個宣告，並將一般大頭照影像作為預設值：
+
+```csharp
+private readonly IReadOnlyDictionary<string, string> _claimsToSync = 
+    new Dictionary<string, string>()
+    {
+        { "urn:google:picture", "https://localhost:5001/headshot.png" },
+    };
+```
+
+以下列程式碼取代方法的預設程式碼 `OnGetCallbackAsync` 。 程式碼會在宣告字典中執行迴圈。 系統會為每個使用者新增宣告 (回填) 或更新。 新增或更新宣告時，會使用來重新整理使用者登入，並 <xref:Microsoft.AspNetCore.Identity.SignInManager%601> 保留現有的驗證屬性 (`AuthenticationProperties`) 。
+
+```csharp
+public async Task<IActionResult> OnGetCallbackAsync(
+    string returnUrl = null, string remoteError = null)
+{
+    returnUrl = returnUrl ?? Url.Content("~/");
+
+    if (remoteError != null)
+    {
+        ErrorMessage = $"Error from external provider: {remoteError}";
+
+        return RedirectToPage("./Login", new {ReturnUrl = returnUrl });
+    }
+
+    var info = await _signInManager.GetExternalLoginInfoAsync();
+
+    if (info == null)
+    {
+        ErrorMessage = "Error loading external login information.";
+        return RedirectToPage("./Login", new { ReturnUrl = returnUrl });
+    }
+
+    // Sign in the user with this external login provider if the user already has a 
+    // login.
+    var result = await _signInManager.ExternalLoginSignInAsync(info.LoginProvider, 
+        info.ProviderKey, isPersistent: false, bypassTwoFactor : true);
+
+    if (result.Succeeded)
+    {
+        _logger.LogInformation("{Name} logged in with {LoginProvider} provider.", 
+            info.Principal.Identity.Name, info.LoginProvider);
+
+        if (_claimsToSync.Count > 0)
+        {
+            var user = await _userManager.FindByLoginAsync(info.LoginProvider, 
+                info.ProviderKey);
+            var userClaims = await _userManager.GetClaimsAsync(user);
+            bool refreshSignIn = false;
+
+            foreach (var addedClaim in _claimsToSync)
+            {
+                var userClaim = userClaims
+                    .FirstOrDefault(c => c.Type == addedClaim.Key);
+
+                if (info.Principal.HasClaim(c => c.Type == addedClaim.Key))
+                {
+                    var externalClaim = info.Principal.FindFirst(addedClaim.Key);
+
+                    if (userClaim == null)
+                    {
+                        await _userManager.AddClaimAsync(user, 
+                            new Claim(addedClaim.Key, externalClaim.Value));
+                        refreshSignIn = true;
+                    }
+                    else if (userClaim.Value != externalClaim.Value)
+                    {
+                        await _userManager
+                            .ReplaceClaimAsync(user, userClaim, externalClaim);
+                        refreshSignIn = true;
+                    }
+                }
+                else if (userClaim == null)
+                {
+                    // Fill with a default value
+                    await _userManager.AddClaimAsync(user, new Claim(addedClaim.Key, 
+                        addedClaim.Value));
+                    refreshSignIn = true;
+                }
+            }
+
+            if (refreshSignIn)
+            {
+                await _signInManager.RefreshSignInAsync(user);
+            }
+        }
+
+        return LocalRedirect(returnUrl);
+    }
+
+    if (result.IsLockedOut)
+    {
+        return RedirectToPage("./Lockout");
+    }
+    else
+    {
+        // If the user does not have an account, then ask the user to create an 
+        // account.
+        ReturnUrl = returnUrl;
+        ProviderDisplayName = info.ProviderDisplayName;
+
+        if (info.Principal.HasClaim(c => c.Type == ClaimTypes.Email))
+        {
+            Input = new InputModel
+            {
+                Email = info.Principal.FindFirstValue(ClaimTypes.Email)
+            };
+        }
+
+        return Page();
+    }
+}
+```
+
+當使用者登入時宣告變更，但不需要回填步驟時，會採用類似的方法。 若要更新使用者的宣告，請在使用者上呼叫下列內容：
+
+* [UserManager：](xref:Microsoft.AspNetCore.Identity.UserManager%601) 在使用者上 ReplaceClaimAsync 儲存在身分識別資料庫中的宣告。
+* [使用](xref:Microsoft.AspNetCore.Identity.SignInManager%601) 在使用者上 RefreshSignInAsync，以強制產生新的驗證 cookie 。
+
 ## <a name="removal-of-claim-actions-and-claims"></a>移除宣告動作和宣告
 
-[ClaimActionCollection 移除 (字串) ](xref:Microsoft.AspNetCore.Authentication.OAuth.Claims.ClaimActionCollection.Remove*) 移除集合中指定的所有宣告動作 <xref:Microsoft.AspNetCore.Authentication.OAuth.Claims.ClaimAction.ClaimType> 。 [ClaimActionCollectionMapExtensions. DeleteClaim (ClaimActionCollection，String) ](xref:Microsoft.AspNetCore.Authentication.ClaimActionCollectionMapExtensions.DeleteClaim*) 會從身分識別中刪除指定的宣告 <xref:Microsoft.AspNetCore.Authentication.OAuth.Claims.ClaimAction.ClaimType> 。 <xref:Microsoft.AspNetCore.Authentication.ClaimActionCollectionMapExtensions.DeleteClaim*> 主要用於搭配 [OpenID Connect (OIDC) ](/azure/active-directory/develop/v2-protocols-oidc) 來移除通訊協定產生的宣告。
+[ClaimActionCollection 移除 (字串) ](xref:Microsoft.AspNetCore.Authentication.OAuth.Claims.ClaimActionCollection.Remove*) 移除集合中指定的所有宣告動作 <xref:Microsoft.AspNetCore.Authentication.OAuth.Claims.ClaimAction.ClaimType> 。 [ClaimActionCollectionMapExtensions. DeleteClaim (ClaimActionCollection，String) ](xref:Microsoft.AspNetCore.Authentication.ClaimActionCollectionMapExtensions.DeleteClaim*) 會從身分識別中刪除指定的宣告 <xref:Microsoft.AspNetCore.Authentication.OAuth.Claims.ClaimAction.ClaimType> 。 <xref:Microsoft.AspNetCore.Authentication.ClaimActionCollectionMapExtensions.DeleteClaim*> 主要與 [OpenID connect 搭配使用 (OIDC) ](/azure/active-directory/develop/v2-protocols-oidc) 移除通訊協定產生的宣告。
 
 ## <a name="sample-app-output"></a>範例應用程式輸出
 
@@ -170,11 +298,11 @@ Authentication Properties
 
 ::: moniker range="< aspnetcore-3.0"
 
-ASP.NET Core 的應用程式可以從外部驗證提供者（例如 Facebook、Google、Microsoft 和 Twitter）建立額外的宣告和權杖。 每個提供者都會顯示其平臺上使用者的不同資訊，但是接收和轉換使用者資料到其他宣告的模式相同。
+ASP.NET Core 應用程式可以從外部驗證提供者（例如 Facebook、Google、Microsoft 和 Twitter）建立額外的宣告和權杖。 每個提供者都會顯示其平臺上使用者的不同資訊，但是接收和轉換使用者資料到其他宣告的模式相同。
 
 [查看或下載範例程式碼](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/security/authentication/social/additional-claims/samples) ([如何下載](xref:index#how-to-download-a-sample)) 
 
-## <a name="prerequisites"></a>Prerequisites
+## <a name="prerequisites"></a>必要條件
 
 決定要在應用程式中支援的外部驗證提供者。 針對每個提供者，註冊應用程式並取得用戶端識別碼和用戶端密碼。 如需詳細資訊，請參閱<xref:security/authentication/social/index>。 範例應用程式會使用 [Google 驗證提供者](xref:security/authentication/google-logins)。
 
@@ -220,7 +348,7 @@ options.Scope.Add("https://www.googleapis.com/auth/user.birthday.read");
 
 在中 `Microsoft.AspNetCore.Identity.UI.Pages.Account.Internal.ExternalLoginModel.OnPostConfirmationAsync` ， <xref:Microsoft.AspNetCore.Identity.IdentityUser> (`ApplicationUser`) 會使用來登入應用程式 <xref:Microsoft.AspNetCore.Identity.SignInManager%601.SignInAsync*> 。 在登入程式中， <xref:Microsoft.AspNetCore.Identity.UserManager%601> 可以 `ApplicationUser` 為提供的使用者資料儲存宣告 <xref:Microsoft.AspNetCore.Identity.ExternalLoginInfo.Principal*> 。
 
-在範例應用程式中， `OnPostConfirmationAsync` ( *Account/ExternalLogin* ]) 會 `urn:google:locale` 為已登入 () 和圖片 () 宣告建立地區設定 `urn:google:picture` `ApplicationUser` ，包括下列的宣告 <xref:System.Security.Claims.ClaimTypes.GivenName> ：
+在範例應用程式中， `OnPostConfirmationAsync` (*Account/ExternalLogin* ]) 會 `urn:google:locale` 為已登入 () 和圖片 () 宣告建立地區設定 `urn:google:picture` `ApplicationUser` ，包括下列的宣告 <xref:System.Security.Claims.ClaimTypes.GivenName> ：
 
 [!code-csharp[](additional-claims/samples/2.x/ClaimsSample/Areas/Identity/Pages/Account/ExternalLogin.cshtml.cs?name=snippet_OnPostConfirmationAsync&highlight=35-51)]
 
@@ -264,7 +392,7 @@ options.Scope.Add("https://www.googleapis.com/auth/user.birthday.read");
 
 ## <a name="removal-of-claim-actions-and-claims"></a>移除宣告動作和宣告
 
-[ClaimActionCollection 移除 (字串) ](xref:Microsoft.AspNetCore.Authentication.OAuth.Claims.ClaimActionCollection.Remove*) 移除集合中指定的所有宣告動作 <xref:Microsoft.AspNetCore.Authentication.OAuth.Claims.ClaimAction.ClaimType> 。 [ClaimActionCollectionMapExtensions. DeleteClaim (ClaimActionCollection，String) ](xref:Microsoft.AspNetCore.Authentication.ClaimActionCollectionMapExtensions.DeleteClaim*) 會從身分識別中刪除指定的宣告 <xref:Microsoft.AspNetCore.Authentication.OAuth.Claims.ClaimAction.ClaimType> 。 <xref:Microsoft.AspNetCore.Authentication.ClaimActionCollectionMapExtensions.DeleteClaim*> 主要用於搭配 [OpenID Connect (OIDC) ](/azure/active-directory/develop/v2-protocols-oidc) 來移除通訊協定產生的宣告。
+[ClaimActionCollection 移除 (字串) ](xref:Microsoft.AspNetCore.Authentication.OAuth.Claims.ClaimActionCollection.Remove*) 移除集合中指定的所有宣告動作 <xref:Microsoft.AspNetCore.Authentication.OAuth.Claims.ClaimAction.ClaimType> 。 [ClaimActionCollectionMapExtensions. DeleteClaim (ClaimActionCollection，String) ](xref:Microsoft.AspNetCore.Authentication.ClaimActionCollectionMapExtensions.DeleteClaim*) 會從身分識別中刪除指定的宣告 <xref:Microsoft.AspNetCore.Authentication.OAuth.Claims.ClaimAction.ClaimType> 。 <xref:Microsoft.AspNetCore.Authentication.ClaimActionCollectionMapExtensions.DeleteClaim*> 主要與 [OpenID connect 搭配使用 (OIDC) ](/azure/active-directory/develop/v2-protocols-oidc) 移除通訊協定產生的宣告。
 
 ## <a name="sample-app-output"></a>範例應用程式輸出
 

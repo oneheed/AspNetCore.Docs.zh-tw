@@ -1,11 +1,11 @@
 ---
-title: ASP.NET Core Blazor 元件虛擬化
+title: ASP.NET 核心 Blazor 元件虛擬化
 author: guardrex
 description: 瞭解如何在 ASP.NET Core 應用程式中使用元件虛擬化 Blazor 。
 monikerRange: '>= aspnetcore-5.0'
 ms.author: riande
 ms.custom: mvc
-ms.date: 10/02/2020
+ms.date: 02/26/2021
 no-loc:
 - appsettings.json
 - ASP.NET Core Identity
@@ -19,24 +19,30 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/components/virtualization
-ms.openlocfilehash: d9fc767a4b5160c616053b075ba92194bcffa275
-ms.sourcegitcommit: 1166b0ff3828418559510c661e8240e5c5717bb7
+ms.openlocfilehash: c81732c29b262e9134a4ff7dab077a4f31db96af
+ms.sourcegitcommit: a1db01b4d3bd8c57d7a9c94ce122a6db68002d66
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 02/12/2021
-ms.locfileid: "100280019"
+ms.lasthandoff: 03/04/2021
+ms.locfileid: "102109815"
 ---
-# <a name="aspnet-core-blazor-component-virtualization"></a>ASP.NET Core Blazor 元件虛擬化
+# <a name="aspnet-core-blazor-component-virtualization"></a>ASP.NET 核心 Blazor 元件虛擬化
 
-使用 Blazor 架構內建的虛擬化支援，改善元件轉譯的認知效能。 虛擬化是一項技術，可將 UI 轉譯限制為只顯示目前可見的部分。 例如，當應用程式必須轉譯長清單的專案，而且在任何指定的時間都只需要顯示專案的子集時，虛擬化就很有説明。 Blazor提供可用於將虛擬化新增至應用程式元件的[ `Virtualize` 元件](xref:Microsoft.AspNetCore.Components.Web.Virtualization.Virtualize%601)。
+使用此 Blazor [ `Virtualize` 元件](xref:Microsoft.AspNetCore.Components.Web.Virtualization.Virtualize%601)的架構內建虛擬化支援，改善元件轉譯的認知效能。 虛擬化是一項技術，可將 UI 轉譯限制為只顯示目前可見的部分。 例如，當應用程式必須轉譯長清單的專案，而且在任何指定的時間都只需要顯示專案的子集時，虛擬化就很有説明。
 
-`Virtualize`元件可用於下列情況：
+使用元件的時機 `Virtualize` ：
 
 * 在迴圈中呈現一組資料項目。
 * 大部分的專案都因為滾動而無法顯示。
-* 轉譯的專案大小完全相同。 當使用者滾動至任意點時，元件可以計算要顯示的可見專案。
+* 轉譯的專案大小相同。
 
-如果沒有虛擬化，一般清單可能會使用 c # [`foreach`](/dotnet/csharp/language-reference/keywords/foreach-in) 迴圈來轉譯清單中的每個專案：
+當使用者滾動至元件的專案清單中的任意點時 `Virtualize` ，該元件會計算要顯示的可見專案。 未顯示的專案則不會呈現。
+
+如果沒有虛擬化，一般清單可能會使用 c # [`foreach`](/dotnet/csharp/language-reference/keywords/foreach-in) 迴圈來轉譯清單中的每個專案。 在下例中︰
+
+* `allFlights` 是飛機航班的集合。
+* `FlightSummary`元件會顯示每個航班的詳細資料。
+* 指示詞[ `@key` 屬性](xref:blazor/components/index#use-key-to-control-the-preservation-of-elements-and-components)會將每個元件的關聯性保留 `FlightSummary` 給航班的轉譯飛行 `FlightId` 。
 
 ```razor
 <div style="height:500px;overflow-y:scroll">
@@ -47,9 +53,12 @@ ms.locfileid: "100280019"
 </div>
 ```
 
-如果清單包含上千個專案，則轉譯清單可能需要很長的時間。 使用者可能會遇到明顯的 UI 延遲。
+如果集合包含上千個航班，則轉譯航班需要很長的時間，而且使用者會遇到明顯的 UI 延遲。 大部分航班都不會轉譯，因為它們落在元素的高度之外 `<div>` 。
 
-請將迴圈取代為 [`foreach`](/dotnet/csharp/language-reference/keywords/foreach-in) `Virtualize` 元件，並使用指定固定專案來源，而不是一次轉譯清單中的每個專案 <xref:Microsoft.AspNetCore.Components.Web.Virtualization.Virtualize%601.Items%2A?displayProperty=nameWithType> 。 只有目前可見的專案會呈現：
+請將上述範例中的迴圈取代為元件，而不是一次轉譯整個航班清單 [`foreach`](/dotnet/csharp/language-reference/keywords/foreach-in) `Virtualize` ：
+
+* `allFlights`將指定為的固定專案來源 <xref:Microsoft.AspNetCore.Components.Web.Virtualization.Virtualize%601.Items%2A?displayProperty=nameWithType> 。 只有目前可見的航班會由元件呈現 `Virtualize` 。
+* 使用參數指定每個航班的內容 `Context` 。 在下列範例中， `flight` 會使用做為內容，以提供每個航班成員的存取權。
 
 ```razor
 <div style="height:500px;overflow-y:scroll">
@@ -59,7 +68,7 @@ ms.locfileid: "100280019"
 </div>
 ```
 
-如果未使用指定元件的 `Context` 內容，請使用 `context` 專案內容範本中的值：
+如果未使用參數來指定內容 `Context` ，請使用 `context` 專案內容範本中的值來存取每個航班的成員：
 
 ```razor
 <div style="height:500px;overflow-y:scroll">
@@ -69,17 +78,9 @@ ms.locfileid: "100280019"
 </div>
 ```
 
-> [!NOTE]
-> 您可以使用指示詞屬性來控制模型物件到專案和元件的對應處理 [`@key`](xref:mvc/views/razor#key) 。 `@key` 使比較演算法保證根據索引鍵的值來保留元素或元件。
->
-> 如需詳細資訊，請參閱下列文章：
->
-> * <xref:blazor/components/index#use-key-to-control-the-preservation-of-elements-and-components>
-> * [Razor ASP.NET Core 的語法參考](xref:mvc/views/razor#key)
-
 `Virtualize`元件：
 
-* 根據容器的高度和轉譯專案的大小，計算要轉譯的專案數目。
+* 根據容器的高度和轉譯專案的大小，計算要呈現的專案數目。
 * 在使用者滾動時重新計算和轉譯中專案。
 * 只會從對應到目前可見區域的外部 API 提取記錄的配量，而不是從集合中下載所有資料。
 
@@ -120,7 +121,7 @@ private async ValueTask<ItemsProviderResult<Employee>> LoadEmployees(
 }
 ```
 
-<xref:Microsoft.AspNetCore.Components.Web.Virtualization.Virtualize%601.RefreshDataAsync%2A?displayProperty=nameWithType> 指示元件從其 rerequest 資料 <xref:Microsoft.AspNetCore.Components.Web.Virtualization.Virtualize%601.ItemsProvider%2A> 。 當外部資料變更時，這會很有用。 使用時，不需要呼叫此 <xref:Microsoft.AspNetCore.Components.Web.Virtualization.Virtualize%601.Items%2A> 。
+<xref:Microsoft.AspNetCore.Components.Web.Virtualization.Virtualize%601.RefreshDataAsync%2A?displayProperty=nameWithType> 指示元件從其 rerequest 資料 <xref:Microsoft.AspNetCore.Components.Web.Virtualization.Virtualize%601.ItemsProvider%2A> 。 當外部資料變更時，這會很有用。 使用時，不需要呼叫 <xref:Microsoft.AspNetCore.Components.Web.Virtualization.Virtualize%601.RefreshDataAsync%2A> <xref:Microsoft.AspNetCore.Components.Web.Virtualization.Virtualize%601.Items%2A> 。
 
 ## <a name="placeholder"></a>預留位置
 
@@ -147,7 +148,7 @@ private async ValueTask<ItemsProviderResult<Employee>> LoadEmployees(
 
 ## <a name="item-size"></a>項目大小
 
-每個專案的高度（以圖元為單位）可以設定為 <xref:Microsoft.AspNetCore.Components.Web.Virtualization.Virtualize%601.ItemSize%2A?displayProperty=nameWithType> (預設值： 50) ：
+每個專案的高度（以圖元為單位）可以使用 <xref:Microsoft.AspNetCore.Components.Web.Virtualization.Virtualize%601.ItemSize%2A?displayProperty=nameWithType> (預設值： 50) 來設定。 下列範例會將每個專案的高度從預設的50圖元變更為25圖元：
 
 ```razor
 <Virtualize Context="employee" Items="@employees" ItemSize="25">
@@ -155,11 +156,11 @@ private async ValueTask<ItemsProviderResult<Employee>> LoadEmployees(
 </Virtualize>
 ```
 
-根據預設， `Virtualize` 元件會在初始轉譯發生 *之後* 測量實際轉譯大小。 您 <xref:Microsoft.AspNetCore.Components.Web.Virtualization.Virtualize%601.ItemSize%2A> 可以使用，事先提供確切的專案大小來協助精確的初始轉譯效能，以及確保頁面重載的正確滾動位置。 如果預設值 <xref:Microsoft.AspNetCore.Components.Web.Virtualization.Virtualize%601.ItemSize%2A> 導致某些專案在目前可見的視圖之外轉譯，則會觸發第二次重呈現。 若要在虛擬化清單中正確維護瀏覽器的滾動位置，初始轉譯必須是正確的。 如果不是，使用者可能會看到錯誤的專案。 
+根據預設，此 `Virtualize` 元件會測量轉譯大小 (在初始轉譯 *之後* ，個別專案的高度) 。 您 <xref:Microsoft.AspNetCore.Components.Web.Virtualization.Virtualize%601.ItemSize%2A> 可以使用，事先提供確切的專案大小來協助精確的初始轉譯效能，以及確保頁面重載的正確滾動位置。 如果預設值 <xref:Microsoft.AspNetCore.Components.Web.Virtualization.Virtualize%601.ItemSize%2A> 導致某些專案在目前可見的視圖之外轉譯，則會觸發第二次重呈現。 若要在虛擬化清單中正確維護瀏覽器的滾動位置，初始轉譯必須是正確的。 如果不是，使用者可能會看到錯誤的專案。
 
 ## <a name="overscan-count"></a>Overscan 計數
 
-<xref:Microsoft.AspNetCore.Components.Web.Virtualization.Virtualize%601.OverscanCount%2A?displayProperty=nameWithType> 決定在可見區域之前和之後轉譯的額外專案數目。 這項設定有助於減少滾動期間轉譯的頻率。 不過，較高的值會導致在頁面中轉譯的元素越多 (預設值： 3) ：
+<xref:Microsoft.AspNetCore.Components.Web.Virtualization.Virtualize%601.OverscanCount%2A?displayProperty=nameWithType> 決定在可見區域之前和之後轉譯的額外專案數目。 這項設定有助於減少滾動期間轉譯的頻率。 不過，較高的值會導致在頁面中轉譯的元素越多 (預設值： 3) 。 下列範例會將 overscan 計數從預設的三個專案變更為四個專案：
 
 ```razor
 <Virtualize Context="employee" Items="@employees" OverscanCount="4">

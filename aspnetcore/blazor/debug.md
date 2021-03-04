@@ -19,16 +19,14 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/debug
-ms.openlocfilehash: 669ebaf6dcd05561340aefda4a75b6fe1068d207
-ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
+ms.openlocfilehash: 0421fd0509fbd89e4635dc7d80a584508627b52c
+ms.sourcegitcommit: a1db01b4d3bd8c57d7a9c94ce122a6db68002d66
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 10/30/2020
-ms.locfileid: "93056188"
+ms.lasthandoff: 03/04/2021
+ms.locfileid: "102109776"
 ---
-# <a name="debug-aspnet-core-no-locblazor-webassembly"></a>Debug ASP.NET Core Blazor WebAssembly
-
-[Daniel Roth](https://github.com/danroth27)
+# <a name="debug-aspnet-core-blazor-webassembly"></a>Debug ASP.NET Core Blazor WebAssembly
 
 Blazor WebAssembly 您可以使用以 Chromium 為基礎的瀏覽器中的瀏覽器開發工具來調試應用程式 (Edge/Chrome) 。 您也可以使用下列整合式開發環境 (Ide) 來對應用程式進行偵錯工具：
 
@@ -45,10 +43,12 @@ Blazor WebAssembly 您可以使用以 Chromium 為基礎的瀏覽器中的瀏覽
 * 在 [ *區域變數* ] 視窗中，觀察本機變數的值。
 * 請參閱呼叫堆疊，包括 JavaScript 和 .NET 之間的呼叫鏈。
 
-目前，您 *不能* ：
+目前，您 *不能*：
 
 * 中斷未處理的例外狀況。
 * 在應用程式啟動期間，在執行 debug proxy 之前叫用中斷點。 這包括 () 中的中斷點 `Program.Main` `Program.cs` ，以及應用程式所要求的第一個頁面所載入之元件[ `OnInitialized{Async}` 方法](xref:blazor/components/lifecycle#component-initialization-methods)中的中斷點。
+* 在非本機案例中進行 Debug (例如， [適用于 Linux 的 Windows 子系統 (WSL) ](/windows/wsl/) 或 [Visual Studio Codespaces](/visualstudio/codespaces/overview/what-is-vsonline)) 。
+* `*Server*`在偵錯工具期間自動重建託管解決方案的後端應用程式 Blazor ，例如藉由執行應用程式與 [`dotnet watch run`](xref:tutorials/dotnet-watch) 。
 
 ## <a name="prerequisites"></a>必要條件
 
@@ -57,10 +57,19 @@ Blazor WebAssembly 您可以使用以 Chromium 為基礎的瀏覽器中的瀏覽
 * Google Chrome (70 版或更新版本)  (預設) 
 * Microsoft Edge (80 版或更新版本) 
 
-Visual Studio for Mac 需要8.8 版 (組建 1532) 或更新版本：
+確定防火牆或 proxy 不會封鎖與 debug proxy (`NodeJS` 進程) 的通訊。 如需詳細資訊，請參閱 [防火牆](#firewall-configuration) 設定一節。
 
-1. 選取 Microsoft 上的 **下載 Visual Studio for Mac** 按鈕，以安裝最新版本的 Visual Studio for Mac [： Visual Studio for Mac](https://visualstudio.microsoft.com/vs/mac/)。
-1. 從 Visual Studio 中選取 *預覽* 頻道。 如需詳細資訊，請參閱 [安裝 Visual Studio for Mac 的預覽版本](/visualstudio/mac/install-preview)。
+Visual Studio Code 使用者需要下列擴充功能：
+
+* [C # for Visual Studio Code 擴充功能](https://marketplace.visualstudio.com/items?itemName=ms-dotnettools.csharp)
+* 使用 c # for Visual Studio Code 延伸模組版本1.23.9 或更新版本時， [ Blazor WASM 偵錯工具延伸](https://marketplace.visualstudio.com/items?itemName=ms-dotnettools.blazorwasm-companion)模組 () 
+
+在 VS Code 中開啟專案之後，您可能會收到通知，指出需要額外的設定才能啟用偵錯工具。 如果要求，請從 Visual Studio Marketplace 安裝必要的延伸模組。 若要檢查已安裝的擴充功能，請從功能表列開啟 [**視圖**  >  **擴充** 功能]，或選取 [**活動**] 提要欄位中的 **延伸** 模組圖示。
+
+Visual Studio for Mac 需要版本 8.8 (build 1532) 或更新版本：
+
+1. 選取 [Microsoft： Visual studio For mac](https://visualstudio.microsoft.com/vs/mac/)的 [**下載 Visual studio for mac** ] 按鈕，以安裝最新版本的 visual studio for mac。
+1. 從 Visual Studio 內選取 *預覽* 頻道。 如需詳細資訊，請參閱 [安裝 Visual Studio For Mac 的預覽版本](/visualstudio/mac/install-preview)。
 
 > [!NOTE]
 > 目前不支援 macOS 上的 Apple Safari。
@@ -86,17 +95,17 @@ Visual Studio for Mac 需要8.8 版 (組建 1532) 或更新版本：
 
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
-若要 Blazor WebAssembly 在 Visual Studio 中偵錯工具：
+若要 Blazor WebAssembly 在 Visual Studio 中對應用程式進行偵錯工具：
 
 1. 建立新的 ASP.NET Core 託管 Blazor WebAssembly 應用程式。
 1. 按 <kbd>F5</kbd> 以在偵錯工具中執行應用程式。
 
    > [!NOTE]
-   > 不支援 ( <kbd>Ctrl</kbd>F5) **啟動而不進行調試** + <kbd>F5</kbd> 。 當應用程式在偵錯工具設定中執行時，偵錯工具的額外負荷一律會降低效能。
+   > 不支援 (<kbd>Ctrl</kbd>F5) **啟動而不進行調試** + <kbd></kbd> 。 當應用程式在偵錯工具設定中執行時，偵錯工具的額外負荷一律會降低效能。
 
 1. 在 `*Client*` 應用程式中的行上設定中斷點 `currentCount++;` `Pages/Counter.razor` 。
 1. 在瀏覽器中，流覽至 `Counter` 頁面，然後選取 [按 **我** ] 按鈕以點擊中斷點。
-1. 在 [Visual Studio] 中，檢查 [ `currentCount` **區域變數** ] 視窗中的域值。
+1. 在 Visual Studio 中，檢查 `currentCount` [ **區域變數** ] 視窗中的域值。
 1. 按 <kbd>F5</kbd> 繼續執行。
 
 在對 Blazor WebAssembly 應用程式進行偵錯工具時，您也可以將伺服器程式碼進行偵錯工具：
@@ -142,7 +151,7 @@ Visual Studio for Mac 需要8.8 版 (組建 1532) 或更新版本：
 * `{INSECURE PORT}`：不安全的埠。 預設會提供隨機值，但允許自訂埠。
 * `{APP BASE PATH}`：應用程式的基底路徑。
 * `{SECURE PORT}`：安全埠。 預設會提供隨機值，但允許自訂埠。
-* `{PROFILE 1, 2, ... N}`：啟動設定設定檔。 通常，應用程式預設會指定多個設定檔 (例如，IIS Express 的設定檔以及 Kestrel 伺服器) 所使用的專案設定檔。
+* `{PROFILE 1, 2, ... N}`：啟動設定設定檔。 通常，應用程式預設會指定多個設定檔 (例如，IIS Express 的設定檔和 Kestrel 伺服器) 所使用的專案設定檔。
 
 在下列範例中，應用程式是 `/OAT` 使用中設定的應用程式基底路徑 `wwwroot/index.html` 來託管 `<base href="/OAT/">` ：
 
@@ -160,6 +169,8 @@ Visual Studio for Mac 需要8.8 版 (組建 1532) 或更新版本：
 
 <h2 id="vscode">獨立調試 Blazor WebAssembly</h2>
 
+如需在資料夾中設定 VS Code 資產的相關資訊 `.vscode` ，請參閱中的 **Linux** 作業系統指引 <xref:blazor/tooling> 。
+
 1. Blazor WebAssembly在 VS Code 中開啟獨立應用程式。
 
    您可能會收到通知，指出需要額外的設定才能啟用偵錯工具：
@@ -168,14 +179,15 @@ Visual Studio for Mac 需要8.8 版 (組建 1532) 或更新版本：
 
    如果您收到通知：
 
-   * 確認已安裝 [適用于 Visual Studio Code 擴充](https://marketplace.visualstudio.com/items?itemName=ms-dotnettools.csharp) 功能的最新 c #。 若要檢查已安裝的擴充功能，請從功能表列開啟 [ **視圖**  >  **擴充** 功能]，或選取 [ **活動** ] 提要欄位中的 **延伸** 模組圖示。
-   * 確認已啟用 JavaScript preview 的偵錯工具。 從功能表列開啟設定 **， (檔案**  >  **喜好**  >  **設定** ) 。 使用關鍵字搜尋 `debug preview` 。 在搜尋結果中，確認已核取 [ **Debug > JavaScript： Use Preview** ] 的核取方塊。 如果不存在啟用預覽偵錯工具的選項，請升級至最新版的 VS Code 或安裝 [JavaScript 偵錯工具擴充](https://marketplace.visualstudio.com/items?itemName=ms-vscode.js-debug-nightly) 功能 (VS Code 1.46 版或更早版本的) 。
+   * 確認已安裝最新的 [c # For Visual Studio Code 延伸](https://marketplace.visualstudio.com/items?itemName=ms-dotnettools.csharp) 模組。 若要檢查已安裝的擴充功能，請從功能表列開啟 [**視圖**  >  **擴充** 功能]，或選取 [**活動**] 提要欄位中的 **延伸** 模組圖示。
+   * 使用 [c # For Visual Studio Code 延伸](https://marketplace.visualstudio.com/items?itemName=ms-dotnettools.csharp)模組 **版本1.23.9 或更新** 版本時，請確認已安裝最新的 [ Blazor WASM 偵錯工具延伸](https://marketplace.visualstudio.com/items?itemName=ms-dotnettools.blazorwasm-companion)模組。 若要檢查已安裝的擴充功能，請從功能表列開啟 [**視圖**  >  **擴充** 功能]，或選取 [**活動**] 提要欄位中的 **延伸** 模組圖示。
+   * 確認已啟用 JavaScript preview 的偵錯工具。 從功能表列開啟設定 **， (檔案**  >  **喜好**  >  **設定**) 。 使用關鍵字搜尋 `debug preview` 。 在搜尋結果中，設定或確認 **Debug > [JavaScript： Use Preview** ] 的核取方塊已核取。 如果不存在啟用預覽偵錯工具的選項，請升級至最新版的 VS Code 或安裝 [JavaScript 偵錯工具擴充](https://marketplace.visualstudio.com/items?itemName=ms-vscode.js-debug-nightly) 功能 (vs code 1.46 或更早版本的) 。
    * 重載視窗。
 
 1. 使用 <kbd>F5</kbd> 鍵盤快速鍵或功能表項目來啟動調試。
 
    > [!NOTE]
-   > 不支援 ( <kbd>Ctrl</kbd>F5) **啟動而不進行調試** + <kbd>F5</kbd> 。 當應用程式在偵錯工具設定中執行時，偵錯工具的額外負荷一律會降低效能。
+   > 不支援 (<kbd>Ctrl</kbd>F5) **啟動而不進行調試** + <kbd></kbd> 。 當應用程式在偵錯工具設定中執行時，偵錯工具的額外負荷一律會降低效能。
 
 1. 出現提示時，請選取 [ **Blazor WebAssembly Debug** ] 選項以開始進行調試。
 
@@ -188,13 +200,15 @@ Visual Studio for Mac 需要8.8 版 (組建 1532) 或更新版本：
 > [!NOTE]
 > 在執行 debug proxy 之前， **不** 會在應用程式啟動期間叫用中斷點。 這包括 () 中的中斷點 `Program.Main` `Program.cs` ，以及應用程式所要求的第一個頁面所載入之元件[ `OnInitialized{Async}` 方法](xref:blazor/components/lifecycle#component-initialization-methods)中的中斷點。
 
-## <a name="debug-hosted-no-locblazor-webassembly"></a>主控的調試 Blazor WebAssembly
+## <a name="debug-hosted-blazor-webassembly"></a>主控的調試 Blazor WebAssembly
 
 1. Blazor WebAssembly在 VS Code 中開啟託管應用程式的方案資料夾。
 
-1. 如果未設定專案的啟動設定，則會出現下列通知。 選取 [是]。
+1. 如果未設定專案的啟動設定，則會出現下列通知。 選取 [是]  。
 
    > ' {APPLICATION NAME} ' 中缺少建立和偵測所需的資產。 新增它們嗎？
+
+   如需在資料夾中設定 VS Code 資產的相關資訊 `.vscode` ，請參閱中的 **Linux** 作業系統指引 <xref:blazor/tooling> 。
 
 1. 在視窗頂端的 [命令選擇區] 中，選取主控方案內的 *伺服器* 專案。
 
@@ -234,7 +248,7 @@ Visual Studio for Mac 需要8.8 版 (組建 1532) 或更新版本：
 
 ## <a name="example-launch-configurations"></a>啟動設定範例
 
-### <a name="launch-and-debug-a-standalone-no-locblazor-webassembly-app"></a>啟動獨立應用程式並進行調試 Blazor WebAssembly 程式
+### <a name="launch-and-debug-a-standalone-blazor-webassembly-app"></a>啟動獨立應用程式並進行調試 Blazor WebAssembly 程式
 
 ```json
 {
@@ -255,7 +269,7 @@ Visual Studio for Mac 需要8.8 版 (組建 1532) 或更新版本：
 }
 ```
 
-### <a name="launch-and-debug-a-hosted-no-locblazor-webassembly-app-with-microsoft-edge"></a>使用 Microsoft Edge 啟動及偵測託管 Blazor WebAssembly 應用程式
+### <a name="launch-and-debug-a-hosted-blazor-webassembly-app-with-microsoft-edge"></a>使用 Microsoft Edge 啟動及偵測託管 Blazor WebAssembly 應用程式
 
 瀏覽器設定預設為 Google Chrome。 使用 Microsoft Edge 進行偵錯工具時，請將設定 `browser` 為 `edge` 。 若要使用 Google Chrome，請不要設定 `browser` 選項，或將選項的值設為 `chrome` 。
 
@@ -275,20 +289,20 @@ Visual Studio for Mac 需要8.8 版 (組建 1532) 或更新版本：
 
 # <a name="visual-studio-for-mac"></a>[Visual Studio for Mac](#tab/visual-studio-mac)
 
-若要 Blazor WebAssembly 在 Visual Studio for Mac 中偵錯工具：
+若要 Blazor WebAssembly 在 Visual Studio For Mac 中對應用程式進行偵錯工具：
 
 1. 建立新的 ASP.NET Core 託管 Blazor WebAssembly 應用程式。
 1. 按<kbd>&#8984;</kbd> + <kbd>&#8617;</kbd> ，以在偵錯工具中執行應用程式。
 
    > [!NOTE]
-   > **啟動但不** ( <kbd>&#8997;</kbd> + <kbd>&#8984;</kbd> + <kbd>&#8617;</kbd>) 不受支援。 當應用程式在偵錯工具設定中執行時，偵錯工具的額外負荷一律會降低效能。
+   > **啟動但不** (<kbd>&#8997;</kbd> + <kbd>&#8984;</kbd> + <kbd>&#8617;</kbd>) 不受支援。 當應用程式在偵錯工具設定中執行時，偵錯工具的額外負荷一律會降低效能。
 
    > [!IMPORTANT]
    > Google Chrome 或 Microsoft Edge 必須是所選的瀏覽器，才能進行偵錯工具會話。
 
 1. 在 `*Client*` 應用程式中的行上設定中斷點 `currentCount++;` `Pages/Counter.razor` 。
 1. 在瀏覽器中，流覽至 `Counter` 頁面，然後選取 [按 **我** ] 按鈕以點擊中斷點：
-1. 在 [Visual Studio] 中，檢查 [ `currentCount` **區域變數** ] 視窗中的域值。
+1. 在 Visual Studio 中，檢查 `currentCount` [ **區域變數** ] 視窗中的域值。
 1. 按<kbd>&#8984;</kbd> + <kbd>&#8617;</kbd>以繼續執行。
 
 在對 Blazor WebAssembly 應用程式進行偵錯工具時，您也可以將伺服器程式碼進行偵錯工具：
@@ -302,13 +316,13 @@ Visual Studio for Mac 需要8.8 版 (組建 1532) 或更新版本：
 > [!NOTE]
 > 在執行 debug proxy 之前， **不** 會在應用程式啟動期間叫用中斷點。 這包括 () 中的中斷點 `Program.Main` `Program.cs` ，以及應用程式所要求的第一個頁面所載入之元件[ `OnInitialized{Async}` 方法](xref:blazor/components/lifecycle#component-initialization-methods)中的中斷點。
 
-如需詳細資訊，請參閱 [使用 Visual Studio for Mac 的調試](/visualstudio/mac/debugging)程式。
+如需詳細資訊，請參閱 [使用 Visual Studio For Mac](/visualstudio/mac/debugging)進行的偵錯工具。
 
 ---
 
 ## <a name="debug-in-the-browser"></a>瀏覽器中的 Debug
 
-*本節中的指導方針適用于 Google Chrome 以及在 Windows 上執行的 Microsoft Edge。*
+*本節中的指導方針適用于在 Windows 上執行的 Google Chrome 和 Microsoft Edge。*
 
 1. 在開發環境中執行應用程式的偵錯工具組建。
 
@@ -339,16 +353,34 @@ Blazor 提供可執行 [Chrome DevTools 通訊協定](https://chromedevtools.git
 
 瀏覽器來源對應可讓瀏覽器將已編譯的檔案對應回原始來源檔案，且通常用於用戶端的偵錯工具。 不過， Blazor 目前不會將 c # 直接對應至 JavaScript/WASM。 相反地， Blazor 會在瀏覽器中進行 IL 轉譯，因此來源對應不相關。
 
+## <a name="firewall-configuration"></a>防火牆設定
+
+如果防火牆封鎖與 debug proxy 的通訊，請建立防火牆例外規則，以允許瀏覽器與處理常式之間的通訊 `NodeJS` 。
+
+> [!WARNING]
+> 您必須小心修改防火牆設定，以避免建立安全性 vulnerablities。 請仔細套用安全性指導方針、遵循最佳安全性作法，以及尊重防火牆製造商發出的警告。
+>
+> 允許與進程進行開放式通訊 `NodeJS` ：
+>
+> * 會根據防火牆的功能和設定，將節點伺服器開啟至任何連接。
+> * 可能會有風險，視您的網路而定。
+> * **只有在開發人員電腦上才建議使用。**
+>
+> 可能的話，只允許 `NodeJS` **在受信任或私人網路上** 的進程開啟通訊。
+
+如需 [Windows 防火牆](/windows/security/threat-protection/windows-firewall/windows-firewall-with-advanced-security) 設定的指引，請參閱 [建立輸入程式或服務規則](/windows/security/threat-protection/windows-firewall/create-an-inbound-program-or-service-rule)。 如需詳細資訊，請參閱 Windows 防火牆檔集中的 [Windows Defender 防火牆與 Advanced Security](/windows/security/threat-protection/windows-firewall/windows-firewall-with-advanced-security) 和相關文章。
+
 ## <a name="troubleshoot"></a>疑難排解
 
 如果您遇到錯誤，下列秘訣可能會有説明：
 
 * 在 [ **偵錯工具** ] 索引標籤中，開啟瀏覽器中的開發人員工具。 在主控台中，執行 `localStorage.clear()` 以移除任何中斷點。
 * 確認您已安裝並信任 ASP.NET Core HTTPS 開發憑證。 如需詳細資訊，請參閱<xref:security/enforcing-ssl#troubleshoot-certificate-problems>。
-* Visual Studio 需要在 [  。 這是 Visual Studio 的預設設定。 如果偵錯工具無法運作，請確認已選取該選項。
+* Visual Studio 需要在 [**工具** 選項] 的 [一般] 選項中 **，啟用 ASP.NET (Chrome、Edge 和 IE) 選項的 JavaScript 偵錯工具**  >    >    >  ****。 這是 Visual Studio 的預設設定。 如果偵錯工具無法運作，請確認已選取該選項。
 * 如果您的環境使用 HTTP proxy，請確定 `localhost` 已包含在 proxy 略過設定中。 您可以 `NO_PROXY` 在下列其中一項設定環境變數來完成此動作：
   * 專案的檔案 `launchSettings.json` 。
   * 將其套用至所有應用程式的使用者或系統內容變數層級。 使用環境變數時，請重新開機 Visual Studio，變更才會生效。
+* 確定防火牆或 proxy 不會封鎖與 debug proxy (`NodeJS` 進程) 的通訊。 如需詳細資訊，請參閱 [防火牆](#firewall-configuration) 設定一節。
 
 ### <a name="breakpoints-in-oninitializedasync-not-hit"></a>`OnInitialized{Async}`未命中的中斷點
 

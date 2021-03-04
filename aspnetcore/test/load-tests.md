@@ -1,7 +1,7 @@
 ---
-title: ASP.NET Core 負載/壓力測試
+title: ASP.NET 核心負載/壓力測試
 author: Jeremy-Meng
-description: 瞭解 ASP.NET Core 應用程式的負載測試和壓力測試有幾個值得注意的工具和方法。
+description: 深入瞭解 ASP.NET Core apps 的負載測試和壓力測試有幾個值得注意的工具和方法。
 ms.author: riande
 ms.custom: mvc
 ms.date: 4/05/2019
@@ -18,14 +18,14 @@ no-loc:
 - Razor
 - SignalR
 uid: test/loadtests
-ms.openlocfilehash: 56f5a5caeea7581e26f8d8cec9662f439cd24b9e
-ms.sourcegitcommit: 3593c4efa707edeaaceffbfa544f99f41fc62535
+ms.openlocfilehash: 5a860fe398dff2e12671b6854a80bbab3120499b
+ms.sourcegitcommit: a1db01b4d3bd8c57d7a9c94ce122a6db68002d66
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 01/04/2021
-ms.locfileid: "93060712"
+ms.lasthandoff: 03/04/2021
+ms.locfileid: "102109477"
 ---
-# <a name="aspnet-core-loadstress-testing"></a>ASP.NET Core 負載/壓力測試
+# <a name="aspnet-core-loadstress-testing"></a>ASP.NET 核心負載/壓力測試
 
 負載測試和壓力測試很重要，可確保 web 應用程式的效能和可調整性。 雖然它們通常會共用類似的測試，但它們的目標是不同的。
 
@@ -49,3 +49,4 @@ Visual Studio 2019 宣佈計畫 [取代負載測試](https://devblogs.microsoft.
 * [West 風 WebSurge](https://websurge.west-wind.com/)
 * [Netling](https://github.com/hallatore/Netling)
 * [Vegeta](https://github.com/tsenart/vegeta)
+* [NBomber](https://github.com/PragmaticFlow/NBomber)

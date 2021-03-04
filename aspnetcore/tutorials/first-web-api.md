@@ -19,12 +19,12 @@ no-loc:
 - SignalR
 - Models
 uid: tutorials/first-web-api
-ms.openlocfilehash: 1f7c7db857090ff0a174d37b86e1265bab40b4fd
-ms.sourcegitcommit: f77a7467651bab61b24261da9dc5c1dd75fc1fa9
+ms.openlocfilehash: 43b243c946384be55019b39bf558182e1e95de90
+ms.sourcegitcommit: a1db01b4d3bd8c57d7a9c94ce122a6db68002d66
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 02/17/2021
-ms.locfileid: "100564087"
+ms.lasthandoff: 03/04/2021
+ms.locfileid: "102110192"
 ---
 # <a name="tutorial-create-a-web-api-with-aspnet-core"></a>教學課程：使用 ASP.NET Core 建立 Web API
 
@@ -144,7 +144,7 @@ ms.locfileid: "100564087"
 
 [!INCLUDE[](~/includes/trustCertVS.md)]
 
-  Visual Studio 啟動：
+  Visual Studio 會啟動：
 
 * IIS Express web 伺服器。
 * 預設瀏覽器並流覽至 `https://localhost:<port>/swagger/index.html` ，其中 `<port>` 是隨機播放的埠號碼。
@@ -227,7 +227,7 @@ Swagger 可用來產生 web Api 的實用檔和說明頁面。 本教學課程�
 
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
-* 在 **方案總管** 中，以滑鼠右鍵按一下專案。 選取 **[**  >  **新增資料夾**]。 為資料夾命名 *Models* 。
+* 在 [ **方案 Explorer**] 中，以滑鼠右鍵按一下專案。 選取 **[**  >  **新增資料夾**]。 為資料夾命名 *Models* 。
 
 * 以滑鼠右鍵按一下 *Models* 資料夾，然後選取 [**加入**  >  **類別**]。 將類別命名為 *TodoItem*，然後選取 [新增]。
 
@@ -268,8 +268,8 @@ Swagger 可用來產生 web Api 的實用檔和說明頁面。 本教學課程�
 ### <a name="add-nuget-packages"></a>新增 NuGet 套件
 
 * 在 [工具] 功能表上，選取 [NuGet 套件管理員] > [管理解決方案的 NuGet 套件]。
-* 選取 [**流覽**] 索引標籤，然後在 [搜尋] 方塊中輸入 **microsoft.entityframeworkcore。**
-* 選取左窗格中的 [ **microsoft.entityframeworkcore** ]。
+* 選取 [ **流覽** ] 索引標籤，然後 `Microsoft.EntityFrameworkCore.InMemory` 在 [搜尋] 方塊中輸入。
+* 選取 `Microsoft.EntityFrameworkCore.InMemory` 左窗格中的。
 * 選取右窗格中的 [專案] 核取方塊，然後選取 [安裝]。
 
 ![NuGet 套件管理員](first-web-api/_static/5/vsNuGet.png)
@@ -323,8 +323,8 @@ Swagger 可用來產生 web Api 的實用檔和說明頁面。 本教學課程�
 ```dotnetcli
 dotnet add package Microsoft.VisualStudio.Web.CodeGeneration.Design
 dotnet add package Microsoft.EntityFrameworkCore.Design
+dotnet add package Microsoft.EntityFrameworkCore.SqlServer
 dotnet tool install -g dotnet-aspnet-codegenerator
-dotnet tool update -g dotnet-aspnet-codegenerator
 dotnet aspnet-codegenerator controller -name TodoItemsController -async -api -m TodoItem -dc TodoContext -outDir Controllers
 ```
 
@@ -341,7 +341,7 @@ dotnet aspnet-codegenerator controller -name TodoItemsController -async -api -m 
 * 標記具有屬性的類別 [`[ApiController]`](xref:Microsoft.AspNetCore.Mvc.ApiControllerAttribute) 。 這個屬性表示控制器會回應 Web API 要求。 如需屬性所啟用之特定行為的相關資訊，請參閱 <xref:web-api/index>。
 * 使用 DI 將資料庫內容 (`TodoContext`) 插入到控制器中。 控制器中的每一個 [CRUD](https://wikipedia.org/wiki/Create,_read,_update_and_delete) 方法都會使用資料庫內容。
 
-的 ASP.NET Core 範本：
+的 ASP.NET 核心範本：
 
 * 具有 views 的控制器包含 `[action]` 在路由範本中。
 * API 控制器不包含 `[action]` 在路由範本中。
@@ -716,7 +716,7 @@ DTO 可以用來：
 
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
-* 在 **方案總管** 中，以滑鼠右鍵按一下專案。 選取 **[**  >  **新增資料夾**]。 為資料夾命名 *Models* 。
+* 在 [ **方案 Explorer**] 中，以滑鼠右鍵按一下專案。 選取 **[**  >  **新增資料夾**]。 為資料夾命名 *Models* 。
 
 * 以滑鼠右鍵按一下 *Models* 資料夾，然後選取 [**加入**  >  **類別**]。 將類別命名為 *TodoItem*，然後選取 [新增]。
 
@@ -829,7 +829,7 @@ dotnet aspnet-codegenerator controller -name TodoItemsController -async -api -m 
 * 標記具有屬性的類別 [`[ApiController]`](xref:Microsoft.AspNetCore.Mvc.ApiControllerAttribute) 。 這個屬性表示控制器會回應 Web API 要求。 如需屬性所啟用之特定行為的相關資訊，請參閱 <xref:web-api/index>。
 * 使用 DI 將資料庫內容 (`TodoContext`) 插入到控制器中。 控制器中的每一個 [CRUD](https://wikipedia.org/wiki/Create,_read,_update_and_delete) 方法都會使用資料庫內容。
 
-的 ASP.NET Core 範本：
+的 ASP.NET 核心範本：
 
 * 具有 views 的控制器包含 `[action]` 在路由範本中。
 * API 控制器不包含 `[action]` 在路由範本中。
@@ -1158,7 +1158,7 @@ DTO 可以用來：
 
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
-* 在 **方案總管** 中，以滑鼠右鍵按一下專案。 選取 **[**  >  **新增資料夾**]。 為資料夾命名 *Models* 。
+* 在 [ **方案 Explorer**] 中，以滑鼠右鍵按一下專案。 選取 **[**  >  **新增資料夾**]。 為資料夾命名 *Models* 。
 
 * 以滑鼠右鍵按一下 *Models* 資料夾，然後選取 [**加入**  >  **類別**]。 將類別命名為 *TodoItem*，然後選取 [新增]。
 
@@ -1501,3 +1501,4 @@ jQuery 會使用要求主體中的待辦事項來傳送 HTTP POST 要求。 `acc
 * <xref:host-and-deploy/azure-apps/index>
 * <xref:host-and-deploy/index>
 * [本教學課程的 YouTube 版本](https://www.youtube.com/watch?v=TTkhEyGBfAk)
+* [Microsoft 瞭解：使用 ASP.NET Core 建立 web API](/learn/modules/build-web-api-aspnet-core/)

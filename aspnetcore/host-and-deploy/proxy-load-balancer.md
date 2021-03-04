@@ -19,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: host-and-deploy/proxy-load-balancer
-ms.openlocfilehash: e63821743dad565b51d5c2360dcc2fbf0632754f
-ms.sourcegitcommit: e311cfb77f26a0a23681019bd334929d1aaeda20
+ms.openlocfilehash: 28a802414fd59f684a56e2b735140438d33be740
+ms.sourcegitcommit: a1db01b4d3bd8c57d7a9c94ce122a6db68002d66
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 02/03/2021
-ms.locfileid: "99530043"
+ms.lasthandoff: 03/04/2021
+ms.locfileid: "102109945"
 ---
 # <a name="configure-aspnet-core-to-work-with-proxy-servers-and-load-balancers"></a>設定 ASP.NET Core 以與 Proxy 伺服器和負載平衡器搭配運作
 
@@ -56,6 +56,8 @@ ms.locfileid: "99530043"
 * [Server.remoteipaddress](xref:Microsoft.AspNetCore.Http.ConnectionInfo.RemoteIpAddress)：使用 `X-Forwarded-For` 標頭值設定。 額外的設定會影響中介軟體設定 `RemoteIpAddress`的方式。 如需詳細資料，請參閱[轉送的標頭中介軟體選項](#forwarded-headers-middleware-options)。
 * [HttpCoNtext. 配置](xref:Microsoft.AspNetCore.Http.HttpRequest.Scheme)：使用 `X-Forwarded-Proto` 標頭值設定。
 * [HttpcoNtext.current](xref:Microsoft.AspNetCore.Http.HttpRequest.Host)：使用 `X-Forwarded-Host` 標頭值設定。
+
+如需上述的詳細資訊，請參閱 [此 GitHub 問題](https://github.com/dotnet/AspNetCore.Docs/issues/21615)。
 
 您可以設定「轉送的標頭中介軟體」的[預設設定](#forwarded-headers-middleware-options)。 預設設定值為：
 
@@ -224,7 +226,7 @@ if (string.Equals(
 
 ### <a name="azure"></a>Azure
 
-若要設定憑證轉送 Azure App Service，請參閱 [設定 Azure App Service 的 TLS 相互驗證](/azure/app-service/app-service-web-configure-tls-mutual-auth)。 下列指導方針適用于設定 ASP.NET Core 應用程式。
+若要設定 Azure App Service 以進行憑證轉送，請參閱 [設定 Azure App service 的 TLS 相互驗證](/azure/app-service/app-service-web-configure-tls-mutual-auth)。 下列指導方針適用于設定 ASP.NET Core 應用程式。
 
 在中 `Startup.Configure` ，在呼叫之前加入下列程式碼 `app.UseAuthentication();` ：
 
@@ -242,7 +244,7 @@ services.AddCertificateForwarding(options =>
 
 ### <a name="other-web-proxies"></a>其他 web proxy
 
-如果使用不是 IIS 或 Azure App Service 的應用程式要求路由 (ARR) 的 proxy，請將 proxy 設定為轉寄它在 HTTP 標頭中收到的憑證。 在中 `Startup.Configure` ，在呼叫之前加入下列程式碼 `app.UseAuthentication();` ：
+如果使用的 proxy 不是 IIS 或 Azure App Service 的應用程式要求路由 (ARR) ，請將 proxy 設定為轉寄它在 HTTP 標頭中收到的憑證。 在中 `Startup.Configure` ，在呼叫之前加入下列程式碼 `app.UseAuthentication();` ：
 
 ```csharp
 app.UseCertificateForwarding();

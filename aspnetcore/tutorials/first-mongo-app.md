@@ -19,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: tutorials/first-mongo-app
-ms.openlocfilehash: 350df417886fe1ea5fef89dc221c217d596768b3
-ms.sourcegitcommit: 3593c4efa707edeaaceffbfa544f99f41fc62535
+ms.openlocfilehash: 12f08d953fa9050d8f15243371955644f8dbd149
+ms.sourcegitcommit: a1db01b4d3bd8c57d7a9c94ce122a6db68002d66
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 01/04/2021
-ms.locfileid: "93060738"
+ms.lasthandoff: 03/04/2021
+ms.locfileid: "102109490"
 ---
 # <a name="create-a-web-api-with-aspnet-core-and-mongodb"></a>使用 ASP.NET Core 與 MongoDB 建立 Web API
 
@@ -50,21 +50,21 @@ ms.locfileid: "93060738"
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
 * [.NET Core SDK 3.0 或更新版本](https://dotnet.microsoft.com/download/dotnet-core)
-* **ASP.NET 和 網頁程式開發** 工作負載的 [Visual Studio 2019](https://visualstudio.microsoft.com/downloads/?utm_medium=microsoft&utm_source=docs.microsoft.com&utm_campaign=inline+link&utm_content=download+vs2019)
-* [MongoDB](https://docs.mongodb.com/manual/tutorial/install-mongodb-on-windows/) \(英文\)
+* [Visual Studio 2019](https://visualstudio.microsoft.com/downloads/?utm_medium=microsoft&utm_source=docs.microsoft.com&utm_campaign=inline+link&utm_content=download+vs2019) 與 **ASP.NET 和 網頁程式開發** 工作負載
+* [MongoDB](https://docs.mongodb.com/manual/tutorial/install-mongodb-on-windows/)
 
 # <a name="visual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code)
 
 * [.NET Core SDK 3.0 或更新版本](https://dotnet.microsoft.com/download/dotnet-core)
 * [Visual Studio Code](https://code.visualstudio.com/download)
 * [C# for Visual Studio Code](https://marketplace.visualstudio.com/items?itemName=ms-dotnettools.csharp)
-* [MongoDB](https://docs.mongodb.com/manual/administration/install-community/) \(英文\)
+* [MongoDB](https://docs.mongodb.com/manual/administration/install-community/)
 
 # <a name="visual-studio-for-mac"></a>[Visual Studio for Mac](#tab/visual-studio-mac)
 
 * [.NET Core SDK 3.0 或更新版本](https://dotnet.microsoft.com/download/dotnet-core)
 * [Visual Studio for Mac 7.7 版或更新版本](https://visualstudio.microsoft.com/downloads/)
-* [MongoDB](https://docs.mongodb.com/manual/tutorial/install-mongodb-on-os-x/) \(英文\)
+* [MongoDB](https://docs.mongodb.com/manual/tutorial/install-mongodb-on-os-x/)
 
 ---
 
@@ -191,7 +191,7 @@ ms.locfileid: "93060738"
 
 # <a name="visual-studio-for-mac"></a>[Visual Studio for Mac](#tab/visual-studio-mac)
 
-1. 在8.6 版之前的 Visual Studio for Mac 中，   >    >  從側邊欄選取 [將新的解決方案 **.net Core**  >  **應用程式** 新增]。 在8.6 版或更新版本中，  >    >  從側邊欄選取 [檔案新的方案 **Web] 和 [主控台**  >  **應用程式**]。
+1. 在8.6 版之前的 Visual Studio for Mac 中，   >    >  從側邊欄選取 [從新的解決方案 **.net Core**  >  **應用程式**]。 在8.6 版或更新版本中，  >    >  從側邊欄選取 [檔案新的方案 **Web] 和 [主控台**  >  **應用程式**]。
 1. 選取 [ **ASP.NET Core** > **API** c #] 專案範本，然後選取 **[下一步]**。
 1. 從 [**目標 Framework** ] 下拉式清單中選取 [ **.Net Core 3.1** ]，然後選取 **[下一步]**。
 1. 在 [專案名稱] 中輸入 *BooksApi*，然後選取 [建立]。
@@ -400,21 +400,21 @@ ms.locfileid: "93060738"
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
 * [.NET Core SDK 2.2](https://dotnet.microsoft.com/download/dotnet-core)
-* **ASP.NET 和 網頁程式開發** 工作負載的 [Visual Studio 2019](https://visualstudio.microsoft.com/downloads/?utm_medium=microsoft&utm_source=docs.microsoft.com&utm_campaign=inline+link&utm_content=download+vs2019)
-* [MongoDB](https://docs.mongodb.com/manual/tutorial/install-mongodb-on-windows/) \(英文\)
+* [Visual Studio 2019](https://visualstudio.microsoft.com/downloads/?utm_medium=microsoft&utm_source=docs.microsoft.com&utm_campaign=inline+link&utm_content=download+vs2019) 與 **ASP.NET 和 網頁程式開發** 工作負載
+* [MongoDB](https://docs.mongodb.com/manual/tutorial/install-mongodb-on-windows/)
 
 # <a name="visual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code)
 
 * [.NET Core SDK 2.2](https://dotnet.microsoft.com/download/dotnet-core)
 * [Visual Studio Code](https://code.visualstudio.com/download)
 * [C# for Visual Studio Code](https://marketplace.visualstudio.com/items?itemName=ms-dotnettools.csharp)
-* [MongoDB](https://docs.mongodb.com/manual/administration/install-community/) \(英文\)
+* [MongoDB](https://docs.mongodb.com/manual/administration/install-community/)
 
 # <a name="visual-studio-for-mac"></a>[Visual Studio for Mac](#tab/visual-studio-mac)
 
 * [.NET Core SDK 2.2](https://dotnet.microsoft.com/download/dotnet-core)
 * [Visual Studio for Mac 7.7 版或更新版本](https://visualstudio.microsoft.com/downloads/)
-* [MongoDB](https://docs.mongodb.com/manual/tutorial/install-mongodb-on-os-x/) \(英文\)
+* [MongoDB](https://docs.mongodb.com/manual/tutorial/install-mongodb-on-os-x/)
 
 ---
 
@@ -541,7 +541,7 @@ ms.locfileid: "93060738"
 
 # <a name="visual-studio-for-mac"></a>[Visual Studio for Mac](#tab/visual-studio-mac)
 
-1. 在8.6 版之前的 Visual Studio for Mac 中，   >    >  從側邊欄選取 [將新的解決方案 **.net Core**  >  **應用程式** 新增]。 在8.6 版或更新版本中，  >    >  從側邊欄選取 [檔案新的方案 **Web] 和 [主控台**  >  **應用程式**]。
+1. 在8.6 版之前的 Visual Studio for Mac 中，   >    >  從側邊欄選取 [從新的解決方案 **.net Core**  >  **應用程式**]。 在8.6 版或更新版本中，  >    >  從側邊欄選取 [檔案新的方案 **Web] 和 [主控台**  >  **應用程式**]。
 1. 選取 [ASP.NET Core Web API] C# 專案範本，然後選取 [下一步]。
 1. 從 [目標 Framework] 下拉式清單選取 [.NET Core 2.2]，然後選取 [下一步]。
 1. 在 [專案名稱] 中輸入 *BooksApi*，然後選取 [建立]。
@@ -732,10 +732,11 @@ ms.locfileid: "93060738"
 
 [!INCLUDE[](~/includes/IdentityServer4.md)]
 
-## <a name="next-steps"></a>後續步驟
+## <a name="next-steps"></a>下一步
 
 如需有關建置 ASP.NET Core Web API 的詳細資訊，請參閱下列資源：
 
 * [本文的 YouTube 版本](https://www.youtube.com/watch?v=7uJt_sOenyo&feature=youtu.be)
 * <xref:web-api/index>
 * <xref:web-api/action-return-types>
+* [Microsoft 瞭解：使用 ASP.NET Core 建立 web API](/learn/modules/build-web-api-aspnet-core/)

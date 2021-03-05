@@ -1,22 +1,24 @@
 ### YamlMime:Landing
-title: ASP.NET Core 檔-新功能？
+title: ASP.NET 核心檔-新功能
 summary: 歡迎使用 ASP.NET Core 檔中的新功能。使用此頁面快速尋找最新的變更。
 metadata:
-  title: ASP.NET Core 檔-新功能？
-  description: 瞭解 ASP.NET Core 檔中的新內容與更新內容。
+  title: ASP.NET 核心檔-新功能
+  description: 深入瞭解 ASP.NET Core 檔中的新內容與更新內容。
   ms.topic: landing-page
-  ms.date: 02/01/2021
-  ms.openlocfilehash: 0b7f3ab27f31417b3e6b17bf9d4c31ec96129f1e
-  ms.sourcegitcommit: 75db2f684a9302b0be7925eab586aa091c6bd19f
+  ms.date: 03/04/2021
+  ms.openlocfilehash: a4ef3edbf260c6f2ee34ac739884bd9a605bd396
+  ms.sourcegitcommit: 3982ff9dabb5b12aeb0a61cde2686b5253364f5d
   ms.translationtype: MT
   ms.contentlocale: zh-TW
-  ms.lasthandoff: 02/01/2021
-  ms.locfileid: "99238289"
+  ms.lasthandoff: 03/04/2021
+  ms.locfileid: "102119002"
 landingContent:
 - title: 尋找 ASP.NET Core 檔更新
   linkLists:
   - linkListType: whats-new
     links:
+    - text: 2021年2月
+      url: 2021-02.md
     - text: 2021 年 1 月
       url: 2021-01.md
     - text: 2020 年 12 月
@@ -27,13 +29,11 @@ landingContent:
       url: 2020-10.md
     - text: 2020 年 9 月
       url: 2020-09.md
-    - text: 2020 年 8 月
-      url: 2020-08.md
-- title: 取得相關-參與 ASP.NET Core 檔
+- title: 參與-參與 ASP.NET 核心檔
   linkLists:
   - linkListType: overview
     links:
-    - text: ASP.NET Core 檔存放庫
+    - text: ASP.NET 核心檔存放庫
       url: https://github.com/dotnet/AspNetCore.Docs/blob/master/README.md
     - text: 問題和提取要求的專案結構和標籤
       url: https://github.com/dotnet/docs/blob/master/styleguide/labels-projects.md
@@ -41,7 +41,7 @@ landingContent:
     links:
     - text: Microsoft 檔參與者指南
       url: /contribute
-    - text: ASP.NET Core 檔參與者指南
+    - text: ASP.NET 核心檔參與者指南
       url: https://github.com/dotnet/AspNetCore.Docs/blob/master/CONTRIBUTING.md
     - text: ASP.NET Core API 參考檔參與者指南
       url: https://github.com/dotnet/AspNetApiDocs/blob/master/CONTRIBUTING.md

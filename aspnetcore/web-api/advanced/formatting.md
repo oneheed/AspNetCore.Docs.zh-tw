@@ -18,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: web-api/advanced/formatting
-ms.openlocfilehash: 5d228af00ee34e7f8ca60a5085872fdb93842367
-ms.sourcegitcommit: 83524f739dd25fbfa95ee34e95342afb383b49fe
+ms.openlocfilehash: 5fa7bc15bac2609c89fea54f8a788aaf9f5ad055
+ms.sourcegitcommit: 3982ff9dabb5b12aeb0a61cde2686b5253364f5d
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 01/29/2021
-ms.locfileid: "99057495"
+ms.lasthandoff: 03/04/2021
+ms.locfileid: "102119028"
 ---
 # <a name="format-response-data-in-aspnet-core-web-api"></a>在 ASP.NET Core Web API 中格式化回應資料
 
@@ -58,7 +58,7 @@ ASP.NET Core MVC 支援格式化回應資料。 您可以使用特定格式或�
 
 ## <a name="content-negotiation"></a>內容協商
 
-當用戶端指定 [Accept 標頭](https://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html)時，會發生內容協商。 ASP.NET Core 使用的預設格式為 [JSON](https://json.org/)。 內容協商為：
+當用戶端指定 [Accept 標頭](https://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html)時，會發生內容協商。 ASP.NET Core 所使用的預設格式為 [JSON](https://json.org/)。 內容協商為：
 
 * 由實作為 <xref:Microsoft.AspNetCore.Mvc.ObjectResult> 。
 * 內建于從 helper 方法傳回的狀態碼特定動作結果。 動作結果 helper 方法是以為基礎 `ObjectResult` 。
@@ -86,7 +86,7 @@ ASP.NET Core MVC 支援格式化回應資料。 您可以使用特定格式或�
 * 依喜好設定順序列舉 accept 標頭中的媒體類型。
 * 嘗試尋找可以使用其中一個指定的格式產生回應的格式器。
 
-如果找不到可滿足用戶端要求的格式器，ASP.NET Core：
+如果找不到可滿足用戶端要求的格式器，請 ASP.NET Core：
 
 * `406 Not Acceptable`如果 <xref:Microsoft.AspNetCore.Mvc.MvcOptions.ReturnHttpNotAcceptable?displayProperty=nameWithType> 設定為，則傳回 `true` ，否則會傳回-
 * 嘗試尋找可產生回應的第一個格式器。
@@ -132,7 +132,7 @@ ASP.NET Core MVC 支援格式化回應資料。 您可以使用特定格式或�
 
 使用上述程式碼時，控制器方法會根據要求的標頭傳回適當的格式 `Accept` 。
 
-### <a name="configure-systemtextjson-based-formatters"></a>設定以 System.Text.Js為基礎的格式器
+### <a name="configure-systemtextjson-based-formatters"></a>設定 `System.Text.Json` 基礎格式器
 
 您 `System.Text.Json` 可以使用設定基礎格式器的功能 <xref:Microsoft.AspNetCore.Mvc.JsonOptions.JsonSerializerOptions?displayProperty=fullName> 。 預設格式為 camelCase。 下列反白顯示的程式碼會設定 PascalCase 格式：
 

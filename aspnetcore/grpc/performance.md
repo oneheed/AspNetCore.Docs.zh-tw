@@ -18,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: grpc/performance
-ms.openlocfilehash: 622c6ba042c5832f99bba379fadd9aba7d7163f2
-ms.sourcegitcommit: 3593c4efa707edeaaceffbfa544f99f41fc62535
+ms.openlocfilehash: 386359adfe0e876fa5c067dc82153fd3de0f3fba
+ms.sourcegitcommit: 3982ff9dabb5b12aeb0a61cde2686b5253364f5d
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 01/04/2021
-ms.locfileid: "93060400"
+ms.lasthandoff: 03/04/2021
+ms.locfileid: "102118937"
 ---
 # <a name="performance-best-practices-with-grpc"></a>使用 gRPC 的效能最佳作法
 
@@ -50,7 +50,7 @@ gRPC 是專為高效能服務所設計。 本檔說明如何從 gRPC 獲得最�
 * 通道和從通道建立的用戶端可以安全地由多個執行緒使用。
 * 從通道建立的用戶端可能會進行多個同時呼叫。
 
-gRPC 用戶端 factory 提供集中的方式來設定通道。 它會自動重複使用基礎通道。 如需詳細資訊，請參閱 <xref:grpc/clientfactory> 。
+gRPC 用戶端 factory 提供集中的方式來設定通道。 它會自動重複使用基礎通道。 如需詳細資訊，請參閱<xref:grpc/clientfactory>。
 
 ## <a name="connection-concurrency"></a>並行連接
 
@@ -105,7 +105,7 @@ var channel = GrpcChannel.ForAddress("https://localhost", new GrpcChannelOptions
 
 ### <a name="client-side-load-balancing"></a>用戶端負載平衡
 
-使用用戶端負載平衡時，用戶端會知道端點。 針對每個 gRPC 呼叫，它會選取不同的端點來傳送呼叫。 當延遲很重要時，用戶端負載平衡是不錯的選擇。 用戶端與服務之間沒有 proxy，所以會直接將呼叫傳送至服務。 用戶端負載平衡的缺點在於，每個用戶端都必須追蹤應使用的可用端點。
+使用用戶端負載平衡時，用戶端會知道端點。 針對每個 gRPC 呼叫，它會選取不同的端點來傳送呼叫。 當延遲很重要時，用戶端負載平衡是不錯的選擇。 用戶端與服務之間沒有 proxy，因此呼叫會直接傳送至服務。 用戶端負載平衡的缺點在於，每個用戶端都必須追蹤其應使用的可用端點。
 
 對應用戶端負載平衡是一種技術，可將負載平衡狀態儲存在中央位置。 用戶端會定期查詢中央位置，以取得負載平衡決策時要使用的資訊。
 
@@ -127,7 +127,7 @@ L7 (應用程式) proxy 的運作層級高於 L4 (傳輸) proxy。 L7 proxy 瞭�
 
 用戶端與服務之間的 gRPC 呼叫通常會透過 TCP 通訊端來傳送。 TCP 很適合用來在網路上進行通訊，但是當用戶端與服務位於相同電腦上時， [ (IPC) 的處理序間通訊 ](https://wikipedia.org/wiki/Inter-process_communication) 會更有效率。
 
-請考慮使用類似 Unix 網域通訊端或具名管道的傳輸，在同一部電腦上的進程之間進行 gRPC 呼叫。 如需詳細資訊，請參閱 <xref:grpc/interprocess> 。
+請考慮使用類似 Unix 網域通訊端或具名管道的傳輸，在同一部電腦上的進程之間進行 gRPC 呼叫。 如需詳細資訊，請參閱<xref:grpc/interprocess>。
 
 ## <a name="keep-alive-pings"></a>保持作用中的 ping
 

@@ -1,7 +1,7 @@
 ---
-title: 第2部分： Razor ASP.NET Core 中有 EF Core 的頁面-CRUD
+title: 第2部分： Razor ASP.NET core 中有 EF Core 的頁面-CRUD
 author: rick-anderson
-description: 頁面第2部分 Razor 和 Entity Framework 教學課程系列。
+description: 第2部分的 Razor 頁面和 Entity Framework 教學課程系列。
 ms.author: riande
 ms.date: 07/22/2019
 no-loc:
@@ -17,14 +17,14 @@ no-loc:
 - Razor
 - SignalR
 uid: data/ef-rp/crud
-ms.openlocfilehash: 4a48fb094888d51aa6f881c82e4f20ffbc84c8e2
-ms.sourcegitcommit: 3593c4efa707edeaaceffbfa544f99f41fc62535
+ms.openlocfilehash: c424f2a46fb62af6283ffa3a02c4134bbe35ffc9
+ms.sourcegitcommit: 3982ff9dabb5b12aeb0a61cde2686b5253364f5d
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 01/04/2021
-ms.locfileid: "96901167"
+ms.lasthandoff: 03/04/2021
+ms.locfileid: "102118924"
 ---
-# <a name="part-2-no-locrazor-pages-with-ef-core-in-aspnet-core---crud"></a>第2部分： Razor ASP.NET Core 中有 EF Core 的頁面-CRUD
+# <a name="part-2-razor-pages-with-ef-core-in-aspnet-core---crud"></a>第2部分： Razor ASP.NET core 中有 EF Core 的頁面-CRUD
 
 作者：[Tom Dykstra](https://github.com/tdykstra)、[Jon P Smith](https://twitter.com/thereformedprog)、[Rick Anderson](https://twitter.com/RickAndMSFT)
 
@@ -190,7 +190,7 @@ Students 頁面的 Scaffold 程式碼不包含註冊資料。 在本節中，您
 
 執行應用程式並刪除學生以測試 [刪除] 頁面。
 
-## <a name="next-steps"></a>後續步驟
+## <a name="next-steps"></a>下一步
 
 > [!div class="step-by-step"]
 > [上一個教學](xref:data/ef-rp/intro) 
@@ -353,7 +353,7 @@ Students 頁面的 Scaffold 程式碼不包含註冊資料。 在本節中，會
 
 執行應用程式並刪除學生以測試 [刪除] 頁面。
 
-## <a name="next-steps"></a>後續步驟
+## <a name="next-steps"></a>下一步
 
 > [!div class="step-by-step"]
 > [上一個教學](xref:data/ef-rp/intro) 
@@ -376,7 +376,7 @@ Scaffold 程式碼會為 [建立]、[編輯]、[刪除] 頁面使用下列模式
 
 [索引] 頁面和 [詳細資料] 頁面以 HTTP GET 方法 `OnGetAsync` 取得並顯示所要求的資料
 
-## <a name="singleordefaultasync-vs-firstordefaultasync"></a>SingleOrDefaultAsync 與 Singleordefaultasync 的比較
+## <a name="singleordefaultasync-vs-firstordefaultasync"></a>`SingleOrDefaultAsync` 對上 `FirstOrDefaultAsync`
 
 產生的程式碼會使用 [FirstOrDefaultAsync](/dotnet/api/microsoft.entityframeworkcore.entityframeworkqueryableextensions.firstordefaultasync#Microsoft_EntityFrameworkCore_EntityFrameworkQueryableExtensions_FirstOrDefaultAsync__1_System_Linq_IQueryable___0__System_Threading_CancellationToken_)，一般會偏好它而非 [SingleOrDefaultAsync](/dotnet/api/microsoft.entityframeworkcore.entityframeworkqueryableextensions.singleordefaultasync#Microsoft_EntityFrameworkCore_EntityFrameworkQueryableExtensions_SingleOrDefaultAsync__1_System_Linq_IQueryable___0__System_Linq_Expressions_Expression_System_Func___0_System_Boolean___System_Threading_CancellationToken_)。
 
@@ -565,7 +565,7 @@ Students [索引] 頁面的 Scaffold 程式碼不包含 `Enrollments` 屬性。 
 * 攔截到資料庫例外狀況。
 * [刪除] 頁面的 `OnGetAsync` 方法會以 `saveChangesError=true` 呼叫。
 
-### <a name="update-the-delete-no-locrazor-page"></a>更新 [刪除] Razor 頁面
+### <a name="update-the-delete-razor-page"></a>更新 [刪除] Razor 頁面
 
 將下列反白顯示的錯誤訊息新增至 [刪除] Razor 頁面。
 <!--

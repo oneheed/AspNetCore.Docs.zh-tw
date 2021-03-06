@@ -1,5 +1,5 @@
 ---
-title: 'ASP.NET Core Blazor Server 與 Entity Framework Core (EFCore) '
+title: 'ASP.NET Core Blazor Server 與 Entity Framework core (EFCore) '
 author: JeremyLikness
 description: 在應用程式中使用 EF Core 的指引 Blazor Server 。
 monikerRange: '>= aspnetcore-3.1'
@@ -19,31 +19,31 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/blazor-server-ef-core
-ms.openlocfilehash: 6fc8913640a0a8d506e2c00002912897edbfd826
-ms.sourcegitcommit: 1166b0ff3828418559510c661e8240e5c5717bb7
+ms.openlocfilehash: db70bafc85311f8ccbf87e123739ea99c8d8f3c5
+ms.sourcegitcommit: 1436bd4d70937d6ec3140da56d96caab33c4320b
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 02/12/2021
-ms.locfileid: "100280488"
+ms.lasthandoff: 03/06/2021
+ms.locfileid: "102394573"
 ---
-# <a name="aspnet-core-blazor-server-with-entity-framework-core-efcore"></a>ASP.NET Core Blazor Server 與 Entity Framework Core (EFCore) 
+# <a name="aspnet-core-blazor-server-with-entity-framework-core-efcore"></a>ASP.NET Core Blazor Server 與 Entity Framework core (EFCore) 
 
 :::moniker range=">= aspnetcore-5.0"
 
 Blazor Server 是具狀態的應用程式架構。 應用程式會維持與伺服器的持續連線，而且使用者的狀態會保留在 *伺服器的記憶體中。* 使用者狀態的其中一個範例是在相依性插入中保存的資料 [ (DI) ](xref:fundamentals/dependency-injection) 服務實例的範圍設定為線路。 提供的唯一應用程式模型 Blazor Server 需要使用 Entity Framework Core 的特殊方法。
 
 > [!NOTE]
-> 本文說明應用程式中的 EF Core Blazor Server 。 Blazor WebAssembly 應用程式會在 WebAssembly 沙箱中執行，以防止大部分的直接資料庫連接。 在中執行 EF Core Blazor WebAssembly 已超出本文的範圍。
+> 本文探討應用程式中的 EF Core Blazor Server 。 Blazor WebAssembly 應用程式會在 WebAssembly 沙箱中執行，以防止大部分的直接資料庫連接。 在中執行 EF Core Blazor WebAssembly 已超出本文的範圍。
 
 <h2 id="sample-app-5x">範例應用程式</h2>
 
-範例應用程式已建立為 Blazor Server 使用 EF Core 之應用程式的參考。 範例應用程式包含具有排序和篩選、刪除、新增和更新作業的方格。 此範例示範如何使用 EF Core 來處理開放式平行存取。
+範例應用程式已建立為 Blazor Server 使用 EF Core 的應用程式參考。 範例應用程式包含具有排序和篩選、刪除、新增和更新作業的方格。 此範例示範如何使用 EF Core 來處理開放式平行存取。
 
 [查看或下載範例程式碼](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/blazor/common/samples/5.x/BlazorServerEFCoreSample) ([如何下載](xref:index#how-to-download-a-sample)) 
 
 此範例會使用本機 [SQLite](https://www.sqlite.org/index.html) 資料庫，以便在任何平臺上使用。 此範例也會設定資料庫記錄，以顯示所產生的 SQL 查詢。 這是在中設定 `appsettings.Development.json` ：
 
-[!code-json[](./common/samples/5.x/BlazorServerEFCoreSample/BlazorServerDbContextExample/appsettings.Development.json?highlight=8)]
+[!code-json[](~/blazor/common/samples/5.x/BlazorServerEFCoreSample/BlazorServerDbContextExample/appsettings.Development.json?highlight=8)]
 
 Grid、add 和 view 元件會使用「每一作業的內容」模式，其中會為每個作業建立內容。 編輯元件會使用「每一元件的內容」模式，其中會為每個元件建立內容。
 
@@ -52,7 +52,7 @@ Grid、add 和 view 元件會使用「每一作業的內容」模式，其中會
 
 <h2 id="database-access-5x">資料庫存取</h2>
 
-EF Core 依賴 <xref:Microsoft.EntityFrameworkCore.DbContext> 作為 [設定資料庫存取](/ef/core/miscellaneous/configuring-dbcontext) 的方法，並作為 [*工作單位*](https://martinfowler.com/eaaCatalog/unitOfWork.html)。 EF Core 提供 <xref:Microsoft.Extensions.DependencyInjection.EntityFrameworkServiceCollectionExtensions.AddDbContext%2A> ASP.NET Core 應用程式的擴充功能，這些應用程式預設會將內容註冊為 *範圍* 服務。 在 Blazor Server 應用程式中，已設定範圍的服務註冊可能會有問題，因為該實例會在使用者的線路內跨元件共用。 <xref:Microsoft.EntityFrameworkCore.DbContext> 不是安全線程，而且不是為了並行使用而設計。 現有的存留期不適當，原因如下：
+EF Core 會依賴 <xref:Microsoft.EntityFrameworkCore.DbContext> 作為 [設定資料庫存取](/ef/core/miscellaneous/configuring-dbcontext) 的方法，並作為 [*工作單位*](https://martinfowler.com/eaaCatalog/unitOfWork.html)。 EF Core 提供 <xref:Microsoft.Extensions.DependencyInjection.EntityFrameworkServiceCollectionExtensions.AddDbContext%2A> ASP.NET Core 應用程式的擴充功能，這些應用程式預設會將內容註冊為 *範圍* 服務。 在 Blazor Server 應用程式中，已設定範圍的服務註冊可能會有問題，因為該實例會在使用者的線路內跨元件共用。 <xref:Microsoft.EntityFrameworkCore.DbContext> 不是安全線程，而且不是為了並行使用而設計。 現有的存留期不適當，原因如下：
 
 * 在應用程式的所有使用者之間 **單獨** 共用狀態，並導致不當的並行使用。
 * 限 **域** (預設) 在相同使用者的元件之間提出類似的問題。
@@ -90,26 +90,26 @@ EF Core 依賴 <xref:Microsoft.EntityFrameworkCore.DbContext> 作為 [設定資�
 
   將作業放 `Loading = true;` 在區塊中的行後面 `try` 。
 
-* 對於利用 EF Core [變更追蹤](/ef/core/querying/tracking) 或 [並行控制](/ef/core/saving/concurrency)的較長時間的作業，請將 [內容約制設為元件的存留期](#scope-to-the-component-lifetime-5x)。
+* 針對使用 EF Core 的 [變更追蹤](/ef/core/querying/tracking) 或 [並行控制](/ef/core/saving/concurrency)的較長存留作業，請將 [內容約制設為元件的存留期](#scope-to-the-component-lifetime-5x)。
 
 <h3 id="new-dbcontext-instances-5x">新的 DbCoNtext 實例</h3>
 
 建立新實例的最快速方式 <xref:Microsoft.EntityFrameworkCore.DbContext> 是使用 `new` 建立新的實例。 不過，有幾個案例可能需要解析其他相依性。 例如，您可能想要使用 [`DbContextOptions`](/ef/core/miscellaneous/configuring-dbcontext#configuring-dbcontextoptions) 設定內容。
 
-建立具有相依性之新的建議解決方案 <xref:Microsoft.EntityFrameworkCore.DbContext> 是使用 factory。 EF Core 5.0 或更新版本會提供內建的 factory 來建立新的內容。
+建立具有相依性之新的建議解決方案 <xref:Microsoft.EntityFrameworkCore.DbContext> 是使用 factory。 EF Core 5.0 或更新版本提供內建的 factory 來建立新的內容。
 
 下列範例會設定 [SQLite](https://www.sqlite.org/index.html) 並啟用資料記錄。 程式碼會使用 [擴充方法 (`AddDbContextFactory`) ](https://github.com/dotnet/AspNetCore.Docs/blob/master/aspnetcore/blazor/common/samples/3.x/BlazorServerEFCoreSample/BlazorServerDbContextExample/Data/FactoryExtensions.cs) 來設定 DI 的資料庫 factory，並提供預設選項：
 
-[!code-csharp[](./common/samples/5.x/BlazorServerEFCoreSample/BlazorServerDbContextExample/Startup.cs?name=snippet1)]
+[!code-csharp[](~/blazor/common/samples/5.x/BlazorServerEFCoreSample/BlazorServerDbContextExample/Startup.cs?name=snippet1)]
 
 Factory 會插入元件，並用來建立新的實例。 例如，在 `Pages/Index.razor` 中：
 
-[!code-csharp[](./common/samples/5.x/BlazorServerEFCoreSample/BlazorServerDbContextExample/Pages/Index.razor?name=snippet1)]
+[!code-csharp[](~/blazor/common/samples/5.x/BlazorServerEFCoreSample/BlazorServerDbContextExample/Pages/Index.razor?name=snippet1)]
 
 > [!NOTE]
 > `Wrapper` 是元件的 [元件參考](xref:blazor/components/index#capture-references-to-components) `GridWrapper` 。 請參閱 `Index` `Pages/Index.razor` [範例應用程式](https://github.com/dotnet/AspNetCore.Docs/blob/master/aspnetcore/blazor/common/samples/5.x/BlazorServerEFCoreSample/BlazorServerDbContextExample/Pages/Index.razor)中的 () 元件。
 
-<xref:Microsoft.EntityFrameworkCore.DbContext>您可以使用 factory 來建立新的實例，讓您設定每個的連接字串 `DbContext` ，例如當您使用[ASP.NET Core 的 Identity 模型](xref:security/authentication/customize_identity_model)時：
+<xref:Microsoft.EntityFrameworkCore.DbContext>您可以使用處理站建立新的實例，讓您設定每個的連接字串 `DbContext` ，例如當您使用[ASP.NET Core 的 Identity 模型](xref:security/authentication/customize_identity_model)時：
 
 ```csharp
 services.AddDbContextFactory<ApplicationDbContext>(options =>
@@ -134,11 +134,11 @@ services.AddScoped<ApplicationDbContext>(p =>
 
 範例應用程式可確保在元件處置時處置內容：
 
-[!code-csharp[](./common/samples/5.x/BlazorServerEFCoreSample/BlazorServerDbContextExample/Pages/EditContact.razor?name=snippet1)]
+[!code-csharp[](~/blazor/common/samples/5.x/BlazorServerEFCoreSample/BlazorServerDbContextExample/Pages/EditContact.razor?name=snippet1)]
 
 最後， [`OnInitializedAsync`](xref:blazor/components/lifecycle) 會覆寫以建立新的內容。 在範例應用程式中， [`OnInitializedAsync`](xref:blazor/components/lifecycle) 以相同的方法載入連絡人：
 
-[!code-csharp[](./common/samples/5.x/BlazorServerEFCoreSample/BlazorServerDbContextExample/Pages/EditContact.razor?name=snippet2)]
+[!code-csharp[](~/blazor/common/samples/5.x/BlazorServerEFCoreSample/BlazorServerDbContextExample/Pages/EditContact.razor?name=snippet2)]
 
 <h3 id="enable-sensitive-data-logging">啟用敏感資料記錄</h3>
 
@@ -164,17 +164,17 @@ services.AddScoped<ApplicationDbContext>(p =>
 Blazor Server 是具狀態的應用程式架構。 應用程式會維持與伺服器的持續連線，而且使用者的狀態會保留在 *伺服器的記憶體中。* 使用者狀態的其中一個範例是在相依性插入中保存的資料 [ (DI) ](xref:fundamentals/dependency-injection) 服務實例的範圍設定為線路。 提供的唯一應用程式模型 Blazor Server 需要使用 Entity Framework Core 的特殊方法。
 
 > [!NOTE]
-> 本文說明應用程式中的 EF Core Blazor Server 。 Blazor WebAssembly 應用程式會在 WebAssembly 沙箱中執行，以防止大部分的直接資料庫連接。 在中執行 EF Core Blazor WebAssembly 已超出本文的範圍。
+> 本文探討應用程式中的 EF Core Blazor Server 。 Blazor WebAssembly 應用程式會在 WebAssembly 沙箱中執行，以防止大部分的直接資料庫連接。 在中執行 EF Core Blazor WebAssembly 已超出本文的範圍。
 
 <h2 id="sample-app-3x">範例應用程式</h2>
 
-範例應用程式已建立為 Blazor Server 使用 EF Core 之應用程式的參考。 範例應用程式包含具有排序和篩選、刪除、新增和更新作業的方格。 此範例示範如何使用 EF Core 來處理開放式平行存取。
+範例應用程式已建立為 Blazor Server 使用 EF Core 的應用程式參考。 範例應用程式包含具有排序和篩選、刪除、新增和更新作業的方格。 此範例示範如何使用 EF Core 來處理開放式平行存取。
 
 [查看或下載範例程式碼](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/blazor/common/samples/3.x/BlazorServerEFCoreSample) ([如何下載](xref:index#how-to-download-a-sample)) 
 
 此範例會使用本機 [SQLite](https://www.sqlite.org/index.html) 資料庫，以便在任何平臺上使用。 此範例也會設定資料庫記錄，以顯示所產生的 SQL 查詢。 這是在中設定 `appsettings.Development.json` ：
 
-[!code-json[](./common/samples/3.x/BlazorServerEFCoreSample/BlazorServerDbContextExample/appsettings.Development.json?highlight=8)]
+[!code-json[](~/blazor/common/samples/3.x/BlazorServerEFCoreSample/BlazorServerDbContextExample/appsettings.Development.json?highlight=8)]
 
 Grid、add 和 view 元件會使用「每一作業的內容」模式，其中會為每個作業建立內容。 編輯元件會使用「每一元件的內容」模式，其中會為每個元件建立內容。
 
@@ -183,7 +183,7 @@ Grid、add 和 view 元件會使用「每一作業的內容」模式，其中會
 
 <h2 id="database-access-3x">資料庫存取</h2>
 
-EF Core 依賴 <xref:Microsoft.EntityFrameworkCore.DbContext> 作為 [設定資料庫存取](/ef/core/miscellaneous/configuring-dbcontext) 的方法，並作為 [*工作單位*](https://martinfowler.com/eaaCatalog/unitOfWork.html)。 EF Core 提供 <xref:Microsoft.Extensions.DependencyInjection.EntityFrameworkServiceCollectionExtensions.AddDbContext%2A> ASP.NET Core 應用程式的擴充功能，這些應用程式預設會將內容註冊為 *範圍* 服務。 在 Blazor Server 應用程式中，這可能會造成問題，因為該實例會在使用者的線路內跨元件共用。 <xref:Microsoft.EntityFrameworkCore.DbContext> 不是安全線程，而且不是為了並行使用而設計。 現有的存留期不適當，原因如下：
+EF Core 會依賴 <xref:Microsoft.EntityFrameworkCore.DbContext> 作為 [設定資料庫存取](/ef/core/miscellaneous/configuring-dbcontext) 的方法，並作為 [*工作單位*](https://martinfowler.com/eaaCatalog/unitOfWork.html)。 EF Core 提供 <xref:Microsoft.Extensions.DependencyInjection.EntityFrameworkServiceCollectionExtensions.AddDbContext%2A> ASP.NET Core 應用程式的擴充功能，這些應用程式預設會將內容註冊為 *範圍* 服務。 在 Blazor Server 應用程式中，這可能會造成問題，因為該實例會在使用者的線路內跨元件共用。 <xref:Microsoft.EntityFrameworkCore.DbContext> 不是安全線程，而且不是為了並行使用而設計。 現有的存留期不適當，原因如下：
 
 * 在應用程式的所有使用者之間 **單獨** 共用狀態，並導致不當的並行使用。
 * 限 **域** (預設) 在相同使用者的元件之間提出類似的問題。
@@ -221,7 +221,7 @@ EF Core 依賴 <xref:Microsoft.EntityFrameworkCore.DbContext> 作為 [設定資�
 
   將作業放 `Loading = true;` 在區塊中的行後面 `try` 。
 
-* 對於利用 EF Core [變更追蹤](/ef/core/querying/tracking) 或 [並行控制](/ef/core/saving/concurrency)的較長時間的作業，請將 [內容約制設為元件的存留期](#scope-to-the-component-lifetime-3x)。
+* 針對使用 EF Core 的 [變更追蹤](/ef/core/querying/tracking) 或 [並行控制](/ef/core/saving/concurrency)的較長存留作業，請將 [內容約制設為元件的存留期](#scope-to-the-component-lifetime-3x)。
 
 <h3 id="new-dbcontext-instances-3x">新的 DbCoNtext 實例</h3>
 
@@ -229,25 +229,25 @@ EF Core 依賴 <xref:Microsoft.EntityFrameworkCore.DbContext> 作為 [設定資�
 
 建立具有相依性之新的建議解決方案 <xref:Microsoft.EntityFrameworkCore.DbContext> 是使用 factory。 範例應用程式會在中執行自己的 factory `Data/DbContextFactory.cs` 。
 
-[!code-csharp[](./common/samples/3.x/BlazorServerEFCoreSample/BlazorServerDbContextExample/Data/DbContextFactory.cs)]
+[!code-csharp[](~/blazor/common/samples/3.x/BlazorServerEFCoreSample/BlazorServerDbContextExample/Data/DbContextFactory.cs)]
 
 在先前的 factory 中：
 
 * <xref:Microsoft.Extensions.DependencyInjection.ActivatorUtilities.CreateInstance%2A?displayProperty=nameWithType> 透過服務提供者滿足任何相依性。
-* `IDbContextFactory` 可在 EF Core ASP.NET Core 5.0 或更新版本中使用，因此介面會 [在 ASP.NET Core 3.x 的範例應用程式中執行](https://github.com/dotnet/AspNetCore.Docs/blob/master/aspnetcore/blazor/common/samples/3.x/BlazorServerEFCoreSample/BlazorServerDbContextExample/Data/IDbContextFactory.cs)。
+* `IDbContextFactory` 適用于 EF Core ASP.NET Core 5.0 或更新版本，因此介面會 [在適用于 ASP.NET Core 3.x 的範例應用程式中執行](https://github.com/dotnet/AspNetCore.Docs/blob/master/aspnetcore/blazor/common/samples/3.x/BlazorServerEFCoreSample/BlazorServerDbContextExample/Data/IDbContextFactory.cs)。
 
 下列範例會設定 [SQLite](https://www.sqlite.org/index.html) 並啟用資料記錄。 程式碼會使用擴充方法來設定 DI 的資料庫 factory，並提供預設選項：
 
-[!code-csharp[](./common/samples/3.x/BlazorServerEFCoreSample/BlazorServerDbContextExample/Startup.cs?name=snippet1)]
+[!code-csharp[](~/blazor/common/samples/3.x/BlazorServerEFCoreSample/BlazorServerDbContextExample/Startup.cs?name=snippet1)]
 
 Factory 會插入元件，並用來建立新的實例。 例如，在 `Pages/Index.razor` 中：
 
-[!code-csharp[](./common/samples/3.x/BlazorServerEFCoreSample/BlazorServerDbContextExample/Pages/Index.razor?name=snippet1)]
+[!code-csharp[](~/blazor/common/samples/3.x/BlazorServerEFCoreSample/BlazorServerDbContextExample/Pages/Index.razor?name=snippet1)]
 
 > [!NOTE]
 > `Wrapper` 是元件的 [元件參考](xref:blazor/components/index#capture-references-to-components) `GridWrapper` 。 請參閱 `Index` `Pages/Index.razor` [範例應用程式](https://github.com/dotnet/AspNetCore.Docs/blob/master/aspnetcore/blazor/common/samples/3.x/BlazorServerEFCoreSample/BlazorServerDbContextExample/Pages/Index.razor)中的 () 元件。
 
-<xref:Microsoft.EntityFrameworkCore.DbContext>您可以使用處理站建立新的實例，以讓您設定每個連接字串 `DbContext` ，例如當您使用 [ASP.NET Core 的 Identity 模型] 時 )  (x：安全性/驗證/customize_identity_model) ：
+您 <xref:Microsoft.EntityFrameworkCore.DbContext> 可以使用處理站來建立新的實例，以讓您設定每個連接字串 `DbContext` ，例如當您使用 [ASP.NET Core 的 Identity 模型] )  (x： security/authentication/customize_identity_model) 時：
 
 ```csharp
 services.AddDbContextFactory<ApplicationDbContext>(options =>
@@ -272,11 +272,11 @@ services.AddScoped<ApplicationDbContext>(p =>
 
 範例應用程式可確保在元件處置時處置內容：
 
-[!code-csharp[](./common/samples/3.x/BlazorServerEFCoreSample/BlazorServerDbContextExample/Pages/EditContact.razor?name=snippet1)]
+[!code-csharp[](~/blazor/common/samples/3.x/BlazorServerEFCoreSample/BlazorServerDbContextExample/Pages/EditContact.razor?name=snippet1)]
 
 最後， [`OnInitializedAsync`](xref:blazor/components/lifecycle) 會覆寫以建立新的內容。 在範例應用程式中， [`OnInitializedAsync`](xref:blazor/components/lifecycle) 以相同的方法載入連絡人：
 
-[!code-csharp[](./common/samples/3.x/BlazorServerEFCoreSample/BlazorServerDbContextExample/Pages/EditContact.razor?name=snippet2)]
+[!code-csharp[](~/blazor/common/samples/3.x/BlazorServerEFCoreSample/BlazorServerDbContextExample/Pages/EditContact.razor?name=snippet2)]
 
 在上述範例中：
 

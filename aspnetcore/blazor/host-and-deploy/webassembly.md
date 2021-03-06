@@ -19,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/host-and-deploy/webassembly
-ms.openlocfilehash: c50cae5231abba7cf2a7aaf5806cab33c6434ec9
-ms.sourcegitcommit: a1db01b4d3bd8c57d7a9c94ce122a6db68002d66
+ms.openlocfilehash: fbd6698eeb65ef9ab6263d389f1f50ffcac8be79
+ms.sourcegitcommit: 1436bd4d70937d6ec3140da56d96caab33c4320b
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 03/04/2021
-ms.locfileid: "102109685"
+ms.lasthandoff: 03/06/2021
+ms.locfileid: "102394989"
 ---
 # <a name="host-and-deploy-aspnet-core-blazor-webassembly"></a>裝載和部署 ASP.NET Core Blazor WebAssembly
 
@@ -54,11 +54,11 @@ Blazor 依賴主機提供適當的壓縮檔案。 使用 ASP.NET Core 裝載的�
   
     > [!NOTE]
     > 縮減版本的 `decode.js` 腳本 (`decode.min.js`) [Google/brotli GitHub 存放庫](https://github.com/google/brotli)中有回歸。 [在 decode.min.js (google/brotli #881) 的 TypeError](https://github.com/google/brotli/issues/881)問題解決之前，請採取下列其中一種方法：
-    > 
+    >
     > * 暫時使用腳本的 unminified 版本。
     > * 使用與 ASP.NET Core 相容的協力廠商縮制工具，在組建階段自動縮短腳本。
     > * 使用 [npm 套件](https://www.npmjs.com/package/brotli)。
-    > 
+    >
     > 本節中的範例程式碼會使用 **unminified** 版本的腳本 (`decode.js`) 。
 
   * 更新應用程式以使用此解碼器。 將結束記號內的標記變更 `<body>` `wwwroot/index.html` 為下列內容：
@@ -131,9 +131,11 @@ dotnet publish -p:BlazorEnableCompression=false
 
 用戶端 Blazor WebAssembly 應用程式會 `/bin/Release/{TARGET FRAMEWORK}/publish/wwwroot` 與伺服器應用程式的任何其他靜態 web 資產一起發行至伺服器應用程式的資料夾中。 這兩個應用程式會一起部署。 需要有能夠裝載 ASP.NET Core 應用程式的網頁伺服器。 針對裝載的部署，當使用命令) **Blazor WebAssembly** 搭配使用命令 `blazorwasm` [`dotnet new`](/dotnet/core/tools/dotnet-new) **`Hosted`**) 時 (選取的選項時，Visual Studio 會包含應用程式專案範本 (範本 `-ho|--hosted` `dotnet new` 。
 
-如需 ASP.NET Core 應用程式裝載和部署的詳細資訊，請參閱 <xref:host-and-deploy/index>。
+如需詳細資訊，請參閱下列文章：
 
-如需部署至 Azure App Service 的相關資訊，請參閱 <xref:tutorials/publish-to-azure-webapp-using-vs>。
+* ASP.NET Core 應用程式裝載和部署： <xref:host-and-deploy/index>
+* 部署至 Azure App Service： <xref:tutorials/publish-to-azure-webapp-using-vs>
+* Blazor 專案範本： <xref:blazor/project-structure>
 
 ## <a name="hosted-deployment-with-multiple-blazor-webassembly-apps"></a>具有多個應用程式的託管部署 Blazor WebAssembly
 
@@ -169,7 +171,7 @@ dotnet publish -p:BlazorEnableCompression=false
     * `Server` (資料夾) 
     * `Shared` (資料夾) 
     * `{SOLUTION NAME}.sln` (檔案) 
-    
+
     預留位置 `{SOLUTION NAME}` 是解決方案的名稱。
 
   * 在 Blazor WebAssembly `SecondBlazorApp.Client` 專案範本的資料夾中，建立名為的應用程式 `SecondClient` Blazor WebAssembly 。

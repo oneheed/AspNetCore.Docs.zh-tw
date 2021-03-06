@@ -19,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/call-dotnet-from-javascript
-ms.openlocfilehash: 45ddcc9e006df2c5e86a7859efc76882b269a496
-ms.sourcegitcommit: 1166b0ff3828418559510c661e8240e5c5717bb7
+ms.openlocfilehash: 64268fc5e9f05bc3c8d912781b5ffdd3610cbf99
+ms.sourcegitcommit: 1436bd4d70937d6ec3140da56d96caab33c4320b
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 02/12/2021
-ms.locfileid: "100280392"
+ms.lasthandoff: 03/06/2021
+ms.locfileid: "102394560"
 ---
 # <a name="call-net-methods-from-javascript-functions-in-aspnet-core-blazor"></a>從 ASP.NET Core 中的 JavaScript 函式呼叫 .NET 方法 Blazor
 
@@ -64,7 +64,7 @@ Blazor應用程式可以從 javascript 函式的 .net 方法和 .net 方法中�
 
 `wwwroot/exampleJsInterop.js`:
 
-[!code-javascript[](./common/samples/5.x/BlazorWebAssemblySample/wwwroot/exampleJsInterop.js?highlight=8-14)]
+[!code-javascript[](~/blazor/common/samples/5.x/BlazorWebAssemblySample/wwwroot/exampleJsInterop.js?highlight=8-14)]
 
 當您 **`Trigger .NET static method ReturnArrayAsync`** 選取此按鈕時，請檢查瀏覽器的 網頁程式開發人員工具中的主控台輸出。
 
@@ -136,17 +136,17 @@ returnArrayAsyncJs: function () {
 
 `JsInteropClasses/ExampleJsInterop.cs`:
 
-[!code-csharp[](./common/samples/5.x/BlazorWebAssemblySample/JsInteropClasses/ExampleJsInterop.cs?name=snippet1&highlight=11-18)]
+[!code-csharp[](~/blazor/common/samples/5.x/BlazorWebAssemblySample/JsInteropClasses/ExampleJsInterop.cs?name=snippet1&highlight=11-18)]
 
 `wwwroot/exampleJsInterop.js`:
 
-[!code-javascript[](./common/samples/5.x/BlazorWebAssemblySample/wwwroot/exampleJsInterop.js?highlight=15-18)]
+[!code-javascript[](~/blazor/common/samples/5.x/BlazorWebAssemblySample/wwwroot/exampleJsInterop.js?highlight=15-18)]
 
 名稱會傳遞至的函式 `HelloHelper` ，以設定 `HelloHelper.Name` 屬性。 執行 JavaScript 函式時 `sayHello` ， `HelloHelper.SayHello` 會傳回 `Hello, {Name}!` 訊息，javascript 函式會將此訊息寫入主控台。
 
 `JsInteropClasses/HelloHelper.cs`:
 
-[!code-csharp[](./common/samples/5.x/BlazorWebAssemblySample/JsInteropClasses/HelloHelper.cs?name=snippet1&highlight=5,10-11)]
+[!code-csharp[](~/blazor/common/samples/5.x/BlazorWebAssemblySample/JsInteropClasses/HelloHelper.cs?name=snippet1&highlight=5,10-11)]
 
 瀏覽器的 網頁程式開發人員工具中的主控台輸出：
 
@@ -519,4 +519,4 @@ services.AddServerSideBlazor()
 ## <a name="additional-resources"></a>其他資源
 
 * <xref:blazor/call-javascript-from-dotnet>
-* [`InteropComponent.razor` 範例 (dotnet/AspNetCore GitHub 存放庫，3.1 版本分支) ](https://github.com/dotnet/AspNetCore/blob/release/3.1/src/Components/test/testassets/BasicTestApp/InteropComponent.razor)
+* [ `InteropComponent.razor` 範例 (Dotnet/AspNetCore GitHub 存放庫 `main` 分支) ](https://github.com/dotnet/AspNetCore/blob/main/src/Components/test/testassets/BasicTestApp/InteropComponent.razor)： `main` 分支代表下一版 ASP.NET Core 的產品單位目前開發。 若要選取不同版本的分支 (例如 `release/5.0`) ，請使用 [ **切換分支或標記** ] 下拉式清單來選取分支。

@@ -19,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/test
-ms.openlocfilehash: 67ebfcd322ae08acf2fddae9bd6101f13fa77e7e
-ms.sourcegitcommit: 1166b0ff3828418559510c661e8240e5c5717bb7
+ms.openlocfilehash: 1a7b1114934f4fe7006d60bdbd0f06792d2c6935
+ms.sourcegitcommit: 1436bd4d70937d6ec3140da56d96caab33c4320b
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 02/12/2021
-ms.locfileid: "100280700"
+ms.lasthandoff: 03/06/2021
+ms.locfileid: "102394547"
 ---
 # <a name="test-components-in-aspnet-core-blazor"></a>ASP.NET Core 中的測試元件 Blazor
 
@@ -100,7 +100,7 @@ bUnit 適用于一般用途的測試架構，例如 [MSTest](/dotnet/core/testin
 > [!NOTE]
 > 跨不同測試架構的測試概念和測試的執行方式類似，但不完全相同。 請參閱測試架構的檔以取得指導方針。
 
-以下示範以 `Counter` 專案範本為基礎之應用程式中元件的 bUnit 測試結構 Blazor 。 `Counter`元件會根據使用者選取頁面中的按鈕，顯示並遞增計數器：
+以下示範以 `Counter` [ Blazor 專案範本](xref:blazor/project-structure)為基礎之應用程式中元件的 bUnit 測試結構。 `Counter`元件會根據使用者選取頁面中的按鈕，顯示並遞增計數器：
 
 ```razor
 @page "/counter"
@@ -154,4 +154,4 @@ public void CounterShouldIncrementWhenSelected()
 
 ## <a name="additional-resources"></a>其他資源
 
-* [使用 bUnit 的開始使用](https://bunit.egilhansen.com/docs/getting-started/)： bUnit 指示包括建立測試專案、參考測試架構封裝，以及建立和執行測試的指引。
+* [開始使用 bUnit](https://bunit.egilhansen.com/docs/getting-started/)： bUnit 指示包含有關建立測試專案、參考測試架構封裝，以及建立和執行測試的指引。

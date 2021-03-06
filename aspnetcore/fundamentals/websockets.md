@@ -19,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: fundamentals/websockets
-ms.openlocfilehash: 6edf2017cc889321cfb484e643b75711fd66004d
-ms.sourcegitcommit: 97243663fd46c721660e77ef652fe2190a461f81
+ms.openlocfilehash: 2864d98c1e3cff4474ce38d05c47f7cd0e8b3cc5
+ms.sourcegitcommit: 1436bd4d70937d6ec3140da56d96caab33c4320b
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 01/09/2021
-ms.locfileid: "98058346"
+ms.lasthandoff: 03/06/2021
+ms.locfileid: "102395236"
 ---
 # <a name="websockets-support-in-aspnet-core"></a>ASP.NET Core 中的 WebSockets 支援
 
@@ -36,13 +36,13 @@ ms.locfileid: "98058346"
 
 ## SignalR
 
-[ASP.NET Core SignalR ](xref:signalr/introduction)是可簡化將即時 web 功能新增至應用程式的程式庫。 它會盡可能使用 WebSockets。
+[ASP.NET 核心 SignalR ](xref:signalr/introduction)是可簡化將即時 web 功能新增至應用程式的程式庫。 它會盡可能使用 WebSockets。
 
 針對大部分的應用程式，我們建議您不要透過 SignalR 原始 websocket。 SignalR 針對無法使用 Websocket 的環境提供傳輸回復。 它也會提供基本的遠端程序呼叫應用程式模型。 在大部分的情況下， SignalR 相較于使用原始 websocket，沒有顯著的效能缺點。
 
 針對某些應用程式， [gRPC on .net](xref:grpc/index) 提供 websocket 的替代方案。
 
-## <a name="prerequisites"></a>先決條件
+## <a name="prerequisites"></a>必要條件
 
 * 支援 ASP.NET Core 的任何作業系統：  
   * Windows 7/Windows Server 2008 或更新版本
@@ -51,7 +51,7 @@ ms.locfileid: "98058346"
 * 如果應用程式在 Windows 上與 IIS 搭配執行：
   * Windows 8 / Windows Server 2012 或更新版本
   * IIS 8 / IIS 8 Express
-  * 必須啟用 Websocket。 請參閱 [IIS/IIS Express 支援](#iisiis-express-support) 一節。  
+  * 必須啟用 Websocket。 請參閱 [iis/Iis Express 支援](#iisiis-express-support) 區段。  
 * 如果應用程式在 [HTTP.sys](xref:fundamentals/servers/httpsys) 上執行：
   * Windows 8 / Windows Server 2012 或更新版本
 * 如需支援的瀏覽器，請請參閱 https://caniuse.com/#feat=websockets。
@@ -61,6 +61,9 @@ ms.locfileid: "98058346"
 在 `Startup` 類別的 `Configure` 方法中新增 WebSocket 中介軟體：
 
 [!code-csharp[](websockets/samples/2.x/WebSocketsSample/Startup.cs?name=UseWebSockets)]
+
+> [!NOTE]
+> 如果您想要接受控制器中的 WebSocket 要求， `app.UseWebSockets` 必須先進行的呼叫 `app.UseEndpoints` 。
 
 ::: moniker range="< aspnetcore-2.2"
 
@@ -170,8 +173,8 @@ CORS 所提供的保護不套用至 WebSocket。 瀏覽器 **不** 會：
 > [!NOTE]
 > 使用 IIS Express 時，不需要這些步驟
 
-1. 流覽至 **主控台**  >  **程式** 的 [  >  **程式和功能]，**  >  **開啟或關閉** 畫面) 左側 (的 [Windows 功能]。
-1. 開啟下列節點： **Internet Information Services**  >  **World Wide Web 服務**  >  **應用程式開發功能**。
+1. 流覽至 [**控制台**] 的 [程式  >    >  **和功能]，**  >  **開啟或關閉** 畫面 (左側的 [Windows 功能]) 。
+1. 開啟下列節點： **Internet information Services**  >  **World Wide Web 服務**  >  **應用程式開發功能**。
 1. 選取 [WebSocket 通訊協定] 功能。 選取 [確定]。
 
 ### <a name="disable-websocket-when-using-socketio-on-nodejs"></a>在 Node.js 上使用 socket.io 時停用 WebSocket
@@ -186,7 +189,7 @@ CORS 所提供的保護不套用至 WebSocket。 瀏覽器 **不** 會：
 
 ## <a name="sample-app"></a>範例應用程式
 
-本文附帶的[範例應用程式](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/websockets/samples)是回應應用程式。 它有一個可進行 WebSocket 連線的網頁，而伺服器會將其接收的任何訊息重新傳送回用戶端。 範例應用程式未設定為從具有 IIS Express 的 Visual Studio 執行，因此請在的命令 shell 中執行應用程式， [`dotnet run`](/dotnet/core/tools/dotnet-run) 並在瀏覽器中流覽至 `http://localhost:5000` 。 網頁會顯示連接狀態：
+本文附帶的[範例應用程式](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/websockets/samples)是回應應用程式。 它有一個可進行 WebSocket 連線的網頁，而伺服器會將其接收的任何訊息重新傳送回用戶端。 範例應用程式未設定為從 Visual Studio 搭配 IIS Express 執行，因此請在的命令 shell 中執行應用程式， [`dotnet run`](/dotnet/core/tools/dotnet-run) 並在瀏覽器中流覽至 `http://localhost:5000` 。 網頁會顯示連接狀態：
 
 ![在 Websocket 連接之前網頁的初始狀態](websockets/_static/start.png)
 

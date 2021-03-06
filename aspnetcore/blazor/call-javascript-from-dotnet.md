@@ -19,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/call-javascript-from-dotnet
-ms.openlocfilehash: ee1e4eb8e682f77273370c707306bf9f267fa676
-ms.sourcegitcommit: a1db01b4d3bd8c57d7a9c94ce122a6db68002d66
+ms.openlocfilehash: b5447a55dfa9e4fa55e1a09a3cc00e1f1a965c6e
+ms.sourcegitcommit: 1436bd4d70937d6ec3140da56d96caab33c4320b
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 03/04/2021
-ms.locfileid: "102109503"
+ms.lasthandoff: 03/06/2021
+ms.locfileid: "102394514"
 ---
 # <a name="call-javascript-functions-from-net-methods-in-aspnet-core-blazor"></a>從 ASP.NET Core 中的 .NET 方法呼叫 JavaScript 函數 Blazor
 
@@ -96,17 +96,17 @@ JavaScript 程式碼（例如上述範例中所示的程式碼）也可以從 Ja
 
 `wwwroot/exampleJsInterop.js`:
 
-[!code-javascript[](./common/samples/5.x/BlazorWebAssemblySample/wwwroot/exampleJsInterop.js?highlight=2-7)]
+[!code-javascript[](~/blazor/common/samples/5.x/BlazorWebAssemblySample/wwwroot/exampleJsInterop.js?highlight=2-7)]
 
 將 `<script>` 參考 JavaScript 檔案的標記放置在檔案 `wwwroot/index.html` (Blazor WebAssembly) 或檔案 `Pages/_Host.cshtml` (Blazor Server) 。
 
 `wwwroot/index.html` (Blazor WebAssembly):
 
-[!code-html[](./common/samples/5.x/BlazorWebAssemblySample/wwwroot/index.html?highlight=22)]
+[!code-html[](~/blazor/common/samples/5.x/BlazorWebAssemblySample/wwwroot/index.html?highlight=22)]
 
 `Pages/_Host.cshtml` (Blazor Server):
 
-[!code-cshtml[](./common/samples/5.x/BlazorServerSample/Pages/_Host.cshtml?highlight=33)]
+[!code-cshtml[](~/blazor/common/samples/5.x/BlazorServerSample/Pages/_Host.cshtml?highlight=33)]
 
 請勿將 `<script>` 標記放在元件檔中，因為 `<script>` 無法動態更新標記。
 
@@ -819,4 +819,4 @@ window.exampleJSObjectReferenceNotDisposedInCSharp = () => {
 ## <a name="additional-resources"></a>其他資源
 
 * <xref:blazor/call-dotnet-from-javascript>
-* [InteropComponent razor 範例 (dotnet/AspNetCore GitHub 存放庫，3.1 版本分支) ](https://github.com/dotnet/AspNetCore/blob/release/3.1/src/Components/test/testassets/BasicTestApp/InteropComponent.razor)
+* [ `InteropComponent.razor` 範例 (Dotnet/AspNetCore GitHub 存放庫 `main` 分支) ](https://github.com/dotnet/AspNetCore/blob/main/src/Components/test/testassets/BasicTestApp/InteropComponent.razor)： `main` 分支代表下一版 ASP.NET Core 的產品單位目前開發。 若要選取不同版本的分支 (例如 `release/5.0`) ，請使用 [ **切換分支或標記** ] 下拉式清單來選取分支。

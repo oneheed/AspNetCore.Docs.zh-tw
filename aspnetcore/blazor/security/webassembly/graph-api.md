@@ -1,7 +1,7 @@
 ---
 title: 搭配使用圖形 API 與 ASP.NET Core Blazor WebAssembly
 author: guardrex
-description: 瞭解如何搭配使用圖形 API 與 Blazor WebAssemlby apps。
+description: 瞭解如何將圖形 API 與 Blazor WebAssemlby apps 搭配使用。
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
@@ -19,24 +19,24 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/security/webassembly/graph-api
-ms.openlocfilehash: 997d4dec05ddb6b9d0acb5ed36a6510c0836a4fb
-ms.sourcegitcommit: 1166b0ff3828418559510c661e8240e5c5717bb7
+ms.openlocfilehash: b9e95afc2ccff95c6acd215a70c8b0f92fb1b8c0
+ms.sourcegitcommit: 1436bd4d70937d6ec3140da56d96caab33c4320b
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 02/12/2021
-ms.locfileid: "100280501"
+ms.lasthandoff: 03/06/2021
+ms.locfileid: "102394729"
 ---
 # <a name="use-graph-api-with-aspnet-core-blazor-webassembly"></a>搭配使用圖形 API 與 ASP.NET Core Blazor WebAssembly
 
 ::: moniker range=">= aspnetcore-5.0"
 
-[MICROSOFT GRAPH API](/graph/use-the-api) 是一種 RESTFUL web API，可讓 Blazor 和其他 .NET Framework 應用程式存取 Microsoft 雲端服務資源。
+[Microsoft GRAPH api](/graph/use-the-api) 是一種 RESTful 的 web api，可讓 Blazor 和其他 .net Framework 應用程式存取 Microsoft 雲端服務資源。
 
 ## <a name="graph-sdk"></a>Graph SDK
 
-[Microsoft Graph sdk](/graph/sdks/sdks-overview) 的設計目的是要簡化可存取 Microsoft Graph 的高品質、有效率且可復原的應用程式。
+[Microsoft Graph sdk](/graph/sdks/sdks-overview) 的設計目的是要簡化可存取 Microsoft graph 的高品質、有效率且彈性的應用程式。
 
-本節中的範例需要獨立或應用程式專案檔的專案檔中，下列套件的套件參考 *`Client`* ：
+本節中的範例需要獨立或應用程式專案檔的專案檔中，下列套件的套件參考 **`Client`** ：
 
 * [`Microsoft.Extensions.Http`](https://www.nuget.org/packages/Microsoft.Extensions.Http)
 * [`Microsoft.Graph`](https://www.nuget.org/packages/Microsoft.Graph)
@@ -46,9 +46,9 @@ ms.locfileid: "100280501"
 * [使用 Graph SDK 從元件呼叫圖形 API](#call-graph-api-from-a-component-using-the-graph-sdk)
 * [使用 Graph SDK 自訂使用者宣告](#customize-user-claims-with-the-graph-sdk)
 
-將 Microsoft Graph API 範圍新增至 Azure 入口網站的 AAD 區域之後：
+在 Azure 入口網站的 AAD 區域中新增 Microsoft Graph API 範圍之後：
 
-* 將下列 `GraphClientExtensions.cs` 類別新增至裝載解決方案的獨立應用程式或 *`Client`* 應用程式 Blazor 。
+* 將下列 `GraphClientExtensions.cs` 類別新增至裝載解決方案的獨立應用程式或 **`Client`** 應用程式 Blazor 。
 * <xref:Microsoft.AspNetCore.Components.WebAssembly.Authentication.AccessTokenRequestOptions.Scopes>在方法的屬性中，提供必要的範圍 <xref:Microsoft.AspNetCore.Components.WebAssembly.Authentication.AccessTokenRequestOptions> `AuthenticateRequestAsync` 。 在下列範例中， `User.Read` 會指定範圍，以符合本文稍後章節中的範例。
 
 ```csharp
@@ -289,16 +289,16 @@ builder.Services.AddMsalAuthentication<RemoteAuthenticationState,
 
 ## <a name="named-client-with-graph-api"></a>使用圖形 API 命名用戶端
 
-本節中的範例會使用名 <xref:System.Net.Http.HttpClient> 為的圖形 API 來取得使用者的行動電話號碼來處理通話。
+本節中的範例會使用名 <xref:System.Net.Http.HttpClient> 為 For GRAPH API 的，來取得使用者的行動電話號碼來處理通話。
 
-本節中的範例需要 [`Microsoft.Extensions.Http`](https://www.nuget.org/packages/Microsoft.Extensions.Http) 獨立或應用程式專案檔的專案檔中的套件參考 *`Client`* 。
+本節中的範例需要 [`Microsoft.Extensions.Http`](https://www.nuget.org/packages/Microsoft.Extensions.Http) 獨立或應用程式專案檔的專案檔中的套件參考 **`Client`** 。
 
 建立下列類別和專案設定，以使用圖形 API。 本文的下列各節會使用下列類別和設定：
 
 * [從元件呼叫圖形 API](#call-graph-api-from-a-component)
 * [使用圖形 API 和命名用戶端自訂使用者宣告](#customize-user-claims-with-graph-api-and-a-named-client)
 
-在 Azure 入口網站的 AAD 區域中新增 Microsoft Graph API 範圍之後，請將所需的範圍提供給應用程式為圖形 API 設定的處理常式。 下列範例會設定範圍的處理常式 `User.Read` 。 您可以新增其他範圍。
+在 Azure 入口網站的 AAD 區域中新增 Microsoft Graph API 範圍之後，請將所需的範圍提供給應用程式針對圖形 API 所設定的處理常式。 下列範例會設定範圍的處理常式 `User.Read` 。 您可以新增其他範圍。
 
 `GraphAuthorizationMessageHandler.cs`:
 
@@ -319,7 +319,7 @@ public class GraphAPIAuthorizationMessageHandler : AuthorizationMessageHandler
 }
 ```
 
-在 `Program.Main` (`Program.cs`) 中，設定圖形 API 的命名 <xref:System.Net.Http.HttpClient> ：
+在 `Program.Main` (`Program.cs`) 中，設定名 <xref:System.Net.Http.HttpClient> 為 for Graph API：
 
 ```csharp
 builder.Services.AddScoped<GraphAPIAuthorizationMessageHandler>();
@@ -335,7 +335,7 @@ builder.Services.AddHttpClient("GraphAPI",
 
 在 Razor 元件中：
 
-* 建立 <xref:System.Net.Http.HttpClient> 圖形 API 的，併發出使用者設定檔資料的要求。
+* 建立 <xref:System.Net.Http.HttpClient> 適用于圖形 API 的，併發出使用者設定檔資料的要求。
 * `UserInfo.cs`類別會指定具有屬性的必要使用者設定檔屬性 <xref:System.Text.Json.Serialization.JsonPropertyNameAttribute> ，以及 AAD 針對這些屬性所使用的 JSON 名稱。
 
 `Pages/CallUser.razor`:

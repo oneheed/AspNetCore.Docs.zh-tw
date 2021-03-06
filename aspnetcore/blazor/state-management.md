@@ -1,5 +1,5 @@
 ---
-title: ASP.NET Core Blazor 狀態管理
+title: ASP.NET 核心 Blazor 狀態管理
 author: guardrex
 description: 瞭解如何在應用程式中保存狀態 Blazor Server 。
 monikerRange: '>= aspnetcore-3.1'
@@ -20,14 +20,14 @@ no-loc:
 - SignalR
 uid: blazor/state-management
 zone_pivot_groups: blazor-hosting-models
-ms.openlocfilehash: 811ec08eb457fcf0697a64dc4990d29082454f73
-ms.sourcegitcommit: 1166b0ff3828418559510c661e8240e5c5717bb7
+ms.openlocfilehash: fee4473aede3fd213314c51a18284b4e4ad95b2b
+ms.sourcegitcommit: 1436bd4d70937d6ec3140da56d96caab33c4320b
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 02/12/2021
-ms.locfileid: "100280863"
+ms.lasthandoff: 03/06/2021
+ms.locfileid: "102394664"
 ---
-# <a name="aspnet-core-blazor-state-management"></a>ASP.NET Core Blazor 狀態管理
+# <a name="aspnet-core-blazor-state-management"></a>ASP.NET 核心 Blazor 狀態管理
 
 ::: zone pivot="webassembly"
 
@@ -43,7 +43,7 @@ ms.locfileid: "100280863"
 當使用者關閉並重新開啟其瀏覽器或重載網頁時，瀏覽器記憶體中保留的使用者狀態將會遺失。
 
 > [!NOTE]
-> [受保護的瀏覽器儲存體](xref:blazor/state-management?pivots=server#aspnet-core-protected-browser-storage) (<xref:Microsoft.AspNetCore.Components.Server.ProtectedBrowserStorage?displayProperty=fullName> 命名空間) 依賴 ASP.NET Core 資料保護，且僅支援 Blazor Server 應用程式。
+> [受保護的瀏覽器儲存體](xref:blazor/state-management?pivots=server#aspnet-core-protected-browser-storage) (<xref:Microsoft.AspNetCore.Components.Server.ProtectedBrowserStorage?displayProperty=fullName> 命名空間) 依賴 ASP.NET 核心資料保護，且僅支援 Blazor Server 應用程式。
 
 ## <a name="persist-state-across-browser-sessions"></a>跨瀏覽器會話保存狀態
 
@@ -78,7 +78,7 @@ ms.locfileid: "100280863"
 
 儲存資料之後，會保留使用者的狀態，並可在任何新的瀏覽器會話中使用。
 
-由於 Blazor WebAssembly 應用程式完全是在使用者的瀏覽器中執行，因此需要額外的措施來存取安全的外部系統，例如儲存體服務和資料庫。 Blazor WebAssembly 應用程式的保護方式與單一頁面應用程式 (Spa) 相同。 一般而言，應用程式會透過[OAuth](https://oauth.net) / [OpenID Connect (OIDC) ](https://openid.net/connect/)來驗證使用者，然後透過 web API 呼叫，與伺服器端應用程式的服務和資料庫互動。 伺服器端應用程式會協調 Blazor WebAssembly 應用程式與儲存體服務或資料庫之間的資料傳輸。 Blazor WebAssembly應用程式會維護與伺服器端應用程式的暫時連線，而伺服器端應用程式會持續連線至儲存體。
+由於 Blazor WebAssembly 應用程式完全是在使用者的瀏覽器中執行，因此需要額外的措施來存取安全的外部系統，例如儲存體服務和資料庫。 Blazor WebAssembly 應用程式的保護方式與單一頁面應用程式 (Spa) 相同。 一般而言，應用程式會透過[OAuth](https://oauth.net) / [OpenID connect (OIDC) ](https://openid.net/connect/)驗證使用者，然後透過 web API 呼叫，與伺服器端應用程式的儲存體服務和資料庫互動。 伺服器端應用程式會協調 Blazor WebAssembly 應用程式與儲存體服務或資料庫之間的資料傳輸。 Blazor WebAssembly應用程式會維護與伺服器端應用程式的暫時連線，而伺服器端應用程式會持續連線至儲存體。
 
 如需詳細資訊，請參閱下列資源：
 
@@ -227,16 +227,16 @@ Blazor Server 是具狀態的應用程式架構。 大部分的情況下，應�
 * 儲存幾 kb 的資料可合理保存 Blazor Server 應用程式。 除了幾 kb 以外，您還必須考慮效能影響，因為資料是在網路上載入和儲存。
 * 使用者可能會看到或篡改資料。 [ASP.NET Core 資料保護](xref:security/data-protection/introduction) 可減輕風險。 例如， [ASP.NET Core 受保護的瀏覽器儲存體](#aspnet-core-protected-browser-storage) 使用 ASP.NET Core 資料保護。
 
-協力廠商 NuGet 套件提供使用和的 Api `localStorage` `sessionStorage` 。 值得考慮選擇明確使用 [ASP.NET Core 資料保護](xref:security/data-protection/introduction)的封裝。 資料保護會加密儲存的資料，並減少篡改儲存資料的潛在風險。 如果以純文字儲存 JSON 序列化資料，使用者就可以使用瀏覽器開發人員工具來查看資料，也可以修改儲存的資料。 保護資料並不一定會造成問題，因為資料在本質上可能很簡單。 例如，讀取或修改 UI 元素的預存色彩，對於使用者或組織而言並不是重大的安全性風險。 避免讓使用者檢查或篡改 *機密資料*。
+協力廠商 NuGet 套件提供使用和的 Api `localStorage` `sessionStorage` 。 值得考慮選擇明確使用 [ASP.NET Core 資料保護](xref:security/data-protection/introduction)的套件。 資料保護會加密儲存的資料，並減少篡改儲存資料的潛在風險。 如果以純文字儲存 JSON 序列化資料，使用者就可以使用瀏覽器開發人員工具來查看資料，也可以修改儲存的資料。 保護資料並不一定會造成問題，因為資料在本質上可能很簡單。 例如，讀取或修改 UI 元素的預存色彩，對於使用者或組織而言並不是重大的安全性風險。 避免讓使用者檢查或篡改 *機密資料*。
 
 ::: moniker range=">= aspnetcore-5.0"
 
-## <a name="aspnet-core-protected-browser-storage"></a>ASP.NET Core 受保護的瀏覽器儲存體
+## <a name="aspnet-core-protected-browser-storage"></a>ASP.NET 核心受保護的瀏覽器儲存體
 
-ASP.NET Core 受保護的瀏覽器儲存體會利用和的 [ASP.NET Core 資料保護](xref:security/data-protection/introduction) [`localStorage`](https://developer.mozilla.org/docs/Web/API/Window/localStorage) [`sessionStorage`](https://developer.mozilla.org/docs/Web/API/Window/sessionStorage) 。
+ASP.NET 核心受保護的瀏覽器儲存體可利用和的 [ASP.NET Core 資料保護](xref:security/data-protection/introduction) [`localStorage`](https://developer.mozilla.org/docs/Web/API/Window/localStorage) [`sessionStorage`](https://developer.mozilla.org/docs/Web/API/Window/sessionStorage) 。
 
 > [!NOTE]
-> 受保護的瀏覽器存放裝置依賴 ASP.NET Core 資料保護，且僅支援 Blazor Server 應用程式。
+> 受保護的瀏覽器存放裝置依賴 ASP.NET 核心資料保護，且僅支援 Blazor Server 應用程式。
 
 ### <a name="save-and-load-data-within-a-component"></a>儲存並載入元件中的資料
 
@@ -254,7 +254,7 @@ ASP.NET Core 受保護的瀏覽器儲存體會利用和的 [ASP.NET Core 資料�
 
 指示詞 `@using` 可以放在應用程式的檔案中，而不是放在 `_Imports.razor` 元件中。 使用檔案可 `_Imports.razor` 讓應用程式的較大區段或整個應用程式使用命名空間。
 
-若要在以 `currentCount` `Counter` 專案範本為基礎的應用程式元件中保存值 Blazor Server ，請修改 `IncrementCount` 要使用的方法 `ProtectedSessionStore.SetAsync` ：
+若要在以 `currentCount` `Counter` [ Blazor Server 專案範本](xref:blazor/project-structure)為基礎的應用程式元件中保存值，請修改 `IncrementCount` 要使用的方法 `ProtectedSessionStore.SetAsync` ：
 
 ```csharp
 private async Task IncrementCount()
@@ -266,7 +266,7 @@ private async Task IncrementCount()
 
 在更大、更實際的應用程式中，個別欄位的儲存是不太可能的情況。 應用程式更有可能儲存包含複雜狀態的整個模型物件。 `ProtectedSessionStore` 自動序列化和還原序列化 JSON 資料，以儲存複雜的狀態物件。
 
-在上述程式碼範例中， `currentCount` 資料會儲存 `sessionStorage['count']` 在使用者的瀏覽器中。 資料不會以純文字儲存，而是使用 ASP.NET Core 資料保護來保護。 如果 `sessionStorage['count']` 在瀏覽器的開發人員主控台中評估，則可以檢查加密的資料。
+在上述程式碼範例中， `currentCount` 資料會儲存 `sessionStorage['count']` 在使用者的瀏覽器中。 資料不會以純文字儲存，而是使用 ASP.NET 核心資料保護來保護。 如果 `sessionStorage['count']` 在瀏覽器的開發人員主控台中評估，則可以檢查加密的資料。
 
 若要在 `currentCount` 使用者稍後返回元件時復原資料 `Counter` ，包括使用者是否在新線路上，請使用 `ProtectedSessionStore.GetAsync` ：
 
@@ -464,7 +464,7 @@ else
 
 ## <a name="protected-browser-storage-experimental-nuget-package"></a>受保護的瀏覽器儲存體實驗性 NuGet 套件
 
-ASP.NET Core 受保護的瀏覽器儲存體會利用和的 [ASP.NET Core 資料保護](xref:security/data-protection/introduction) [`localStorage`](https://developer.mozilla.org/docs/Web/API/Window/localStorage) [`sessionStorage`](https://developer.mozilla.org/docs/Web/API/Window/sessionStorage) 。
+ASP.NET 核心受保護的瀏覽器儲存體可利用和的 [ASP.NET Core 資料保護](xref:security/data-protection/introduction) [`localStorage`](https://developer.mozilla.org/docs/Web/API/Window/localStorage) [`sessionStorage`](https://developer.mozilla.org/docs/Web/API/Window/sessionStorage) 。
 
 > [!WARNING]
 > `Microsoft.AspNetCore.ProtectedBrowserStorage` 是不受支援的實驗性套件，不適用於生產用途。
@@ -502,7 +502,7 @@ ASP.NET Core 受保護的瀏覽器儲存體會利用和的 [ASP.NET Core 資料�
 
 `@using`語句可以放入檔案中， `_Imports.razor` 而不是放在元件中。 使用檔案可 `_Imports.razor` 讓應用程式的較大區段或整個應用程式使用命名空間。
 
-若要在以 `currentCount` `Counter` 專案範本為基礎的應用程式元件中保存值 Blazor Server ，請修改 `IncrementCount` 要使用的方法 `ProtectedSessionStore.SetAsync` ：
+若要在以 `currentCount` `Counter` [ Blazor Server 專案範本](xref:blazor/project-structure)為基礎的應用程式元件中保存值，請修改 `IncrementCount` 要使用的方法 `ProtectedSessionStore.SetAsync` ：
 
 ```csharp
 private async Task IncrementCount()
@@ -514,7 +514,7 @@ private async Task IncrementCount()
 
 在更大、更實際的應用程式中，個別欄位的儲存是不太可能的情況。 應用程式更有可能儲存包含複雜狀態的整個模型物件。 `ProtectedSessionStore` 自動序列化和還原序列化 JSON 資料。
 
-在上述程式碼範例中， `currentCount` 資料會儲存 `sessionStorage['count']` 在使用者的瀏覽器中。 資料不會以純文字儲存，而是使用 ASP.NET Core 資料保護來保護。 如果 `sessionStorage['count']` 在瀏覽器的開發人員主控台中評估，則可以檢查加密的資料。
+在上述程式碼範例中， `currentCount` 資料會儲存 `sessionStorage['count']` 在使用者的瀏覽器中。 資料不會以純文字儲存，而是使用 ASP.NET 核心資料保護來保護。 如果 `sessionStorage['count']` 在瀏覽器的開發人員主控台中評估，則可以檢查加密的資料。
 
 若要在 `currentCount` 使用者稍後返回元件時復原資料 `Counter` ，包括是否在全新的線路上，請使用 `ProtectedSessionStore.GetAsync` ：
 

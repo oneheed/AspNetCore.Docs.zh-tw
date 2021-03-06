@@ -19,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/forms-validation
-ms.openlocfilehash: a942c7848c77444d185ff73338a98a4205451992
-ms.sourcegitcommit: a1db01b4d3bd8c57d7a9c94ce122a6db68002d66
+ms.openlocfilehash: eb72810a5b65232aa778daa556a9b2d406807e87
+ms.sourcegitcommit: 1436bd4d70937d6ec3140da56d96caab33c4320b
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 03/04/2021
-ms.locfileid: "102109724"
+ms.lasthandoff: 03/06/2021
+ms.locfileid: "102395132"
 ---
 # <a name="aspnet-core-blazor-forms-and-validation"></a>ASP.NET 核心 Blazor 表單和驗證
 
@@ -454,7 +454,7 @@ public class CustomValidator : ComponentBase
 
 下列範例是根據：
 
-* 主控 Blazor 的[ Blazor 專案範本](xref:blazor/hosting-models#blazor-webassembly)所建立的裝載方案。 此範例可以與 Blazor [安全性和 Identity 檔](xref:blazor/security/webassembly/index#implementation-guidance)中所述的任何安全託管解決方案搭配使用。
+* Blazor WebAssembly從[ Blazor WebAssembly 專案範本](xref:blazor/project-structure)建立的託管方案。 此範例可以與 Blazor [安全性和 Identity 檔](xref:blazor/security/webassembly/index#implementation-guidance)中所述的任何安全託管解決方案搭配使用。
 * 上述內 [建表單元件](#built-in-forms-components)區段中的 *Starfleet Starship 資料庫* 表單範例。
 * Blazor架構的 <xref:Microsoft.AspNetCore.Components.Forms.DataAnnotationsValidator> 元件。
 * 在 `CustomValidator` [ [驗證程式元件](#validator-components) ] 區段中顯示的元件。
@@ -966,7 +966,9 @@ Blazor嘗試雙向系結至值時，架構不會自動處理 `null` 空字串轉
 
 ## <a name="validation-support"></a>驗證支援
 
-元件會將 <xref:Microsoft.AspNetCore.Components.Forms.DataAnnotationsValidator> 使用資料批註的驗證支援附加至串聯的 <xref:Microsoft.AspNetCore.Components.Forms.EditContext> 。 使用資料批註啟用驗證支援需要此明確手勢。 若要使用與資料批註不同的驗證系統，請將取代為 <xref:Microsoft.AspNetCore.Components.Forms.DataAnnotationsValidator> 自訂的執行。 ASP.NET 核心實作為參考來源的檢查： [`DataAnnotationsValidator`](https://github.com/dotnet/AspNetCore/blob/master/src/Components/Forms/src/DataAnnotationsValidator.cs) / [`AddDataAnnotationsValidation`](https://github.com/dotnet/AspNetCore/blob/master/src/Components/Forms/src/EditContextDataAnnotationsExtensions.cs) 。 先前的參考來源連結會提供存放庫分支的程式碼 `master` ，代表下一版 ASP.NET Core 的產品單位目前的開發。 若要選取不同版本的分支，請使用 GitHub 分支選取器 (例如 `release/3.1`) 。
+元件會將 <xref:Microsoft.AspNetCore.Components.Forms.DataAnnotationsValidator> 使用資料批註的驗證支援附加至串聯的 <xref:Microsoft.AspNetCore.Components.Forms.EditContext> 。 使用資料批註啟用驗證支援需要此明確手勢。 若要使用與資料批註不同的驗證系統，請將取代為 <xref:Microsoft.AspNetCore.Components.Forms.DataAnnotationsValidator> 自訂的執行。 ASP.NET 核心可在參考來源中進行檢查： [`DataAnnotationsValidator`](https://github.com/dotnet/AspNetCore/blob/main/src/Components/Forms/src/DataAnnotationsValidator.cs) / [`AddDataAnnotationsValidation`](https://github.com/dotnet/AspNetCore/blob/main/src/Components/Forms/src/EditContextDataAnnotationsExtensions.cs) 。
+
+[!INCLUDE[](~/blazor/includes/aspnetcore-repo-ref-source-links.md)]
 
 Blazor 會執行兩種類型的驗證：
 

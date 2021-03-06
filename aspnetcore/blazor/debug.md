@@ -19,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/debug
-ms.openlocfilehash: 0421fd0509fbd89e4635dc7d80a584508627b52c
-ms.sourcegitcommit: a1db01b4d3bd8c57d7a9c94ce122a6db68002d66
+ms.openlocfilehash: adf22001e7d9b8ee4f36456cd4b07d2791a7331f
+ms.sourcegitcommit: 1436bd4d70937d6ec3140da56d96caab33c4320b
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 03/04/2021
-ms.locfileid: "102109776"
+ms.lasthandoff: 03/06/2021
+ms.locfileid: "102395146"
 ---
 # <a name="debug-aspnet-core-blazor-webassembly"></a>Debug ASP.NET Core Blazor WebAssembly
 
@@ -48,7 +48,7 @@ Blazor WebAssembly 您可以使用以 Chromium 為基礎的瀏覽器中的瀏覽
 * 中斷未處理的例外狀況。
 * 在應用程式啟動期間，在執行 debug proxy 之前叫用中斷點。 這包括 () 中的中斷點 `Program.Main` `Program.cs` ，以及應用程式所要求的第一個頁面所載入之元件[ `OnInitialized{Async}` 方法](xref:blazor/components/lifecycle#component-initialization-methods)中的中斷點。
 * 在非本機案例中進行 Debug (例如， [適用于 Linux 的 Windows 子系統 (WSL) ](/windows/wsl/) 或 [Visual Studio Codespaces](/visualstudio/codespaces/overview/what-is-vsonline)) 。
-* `*Server*`在偵錯工具期間自動重建託管解決方案的後端應用程式 Blazor ，例如藉由執行應用程式與 [`dotnet watch run`](xref:tutorials/dotnet-watch) 。
+* `*Server*`在偵錯工具期間自動重建託管解決方案的後端應用程式 Blazor WebAssembly ，例如藉由執行應用程式與 [`dotnet watch run`](xref:tutorials/dotnet-watch) 。
 
 ## <a name="prerequisites"></a>必要條件
 
@@ -97,7 +97,7 @@ Visual Studio for Mac 需要版本 8.8 (build 1532) 或更新版本：
 
 若要 Blazor WebAssembly 在 Visual Studio 中對應用程式進行偵錯工具：
 
-1. 建立新的 ASP.NET Core 託管 Blazor WebAssembly 應用程式。
+1. 建立新的託管 Blazor WebAssembly 方案。
 1. 按 <kbd>F5</kbd> 以在偵錯工具中執行應用程式。
 
    > [!NOTE]
@@ -202,7 +202,7 @@ Visual Studio for Mac 需要版本 8.8 (build 1532) 或更新版本：
 
 ## <a name="debug-hosted-blazor-webassembly"></a>主控的調試 Blazor WebAssembly
 
-1. Blazor WebAssembly在 VS Code 中開啟託管應用程式的方案資料夾。
+1. **`Client`** Blazor 在 VS Code 中開啟主控方案資料夾的專案資料夾。
 
 1. 如果未設定專案的啟動設定，則會出現下列通知。 選取 [是]  。
 

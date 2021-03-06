@@ -1,5 +1,5 @@
 ---
-title: ASP.NET Core 元件的已呈現和整合 Razor
+title: ASP.NET 核心元件的已呈現和整合 Razor
 author: guardrex
 description: 深入瞭解 Razor 應用程式的元件整合案例 Blazor ，包括伺服器上的元件的可呈現 Razor 。
 monikerRange: '>= aspnetcore-3.1'
@@ -20,14 +20,14 @@ no-loc:
 - SignalR
 uid: blazor/components/prerendering-and-integration
 zone_pivot_groups: blazor-hosting-models
-ms.openlocfilehash: d120440c292d15b7741260ed31af92d60db2261c
-ms.sourcegitcommit: 1166b0ff3828418559510c661e8240e5c5717bb7
+ms.openlocfilehash: a86b50abff9c5ec52aab2bdb7eb6d563a5197d1a
+ms.sourcegitcommit: 1436bd4d70937d6ec3140da56d96caab33c4320b
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 02/12/2021
-ms.locfileid: "100280071"
+ms.lasthandoff: 03/06/2021
+ms.locfileid: "102395171"
 ---
-# <a name="prerender-and-integrate-aspnet-core-razor-components"></a>ASP.NET Core 元件的已呈現和整合 Razor
+# <a name="prerender-and-integrate-aspnet-core-razor-components"></a>ASP.NET 核心元件的已呈現和整合 Razor
 
 ::: zone pivot="webassembly"
 
@@ -39,7 +39,7 @@ Razor 元件可以整合到 Razor 託管解決方案中的頁面和 MVC 應用�
 
 若要設定應用程式的預先安裝 Blazor WebAssembly ：
 
-1. Blazor WebAssembly在 ASP.NET Core 應用程式中裝載應用程式。 獨立 Blazor WebAssembly 應用程式可以新增至 ASP.NET Core 方案，或者您可以使用 Blazor WebAssembly 從裝載的專案範本建立的託管應用程式 Blazor 。
+1. Blazor WebAssembly在 ASP.NET Core 應用程式中裝載應用程式。 獨立 Blazor WebAssembly 應用程式可以新增至 ASP.NET Core 方案，或者您可以使用 Blazor WebAssembly 從[ Blazor WebAssembly 專案範本](xref:blazor/project-structure)建立的託管應用程式。
 
 1. `wwwroot/index.html`從用戶端專案中移除預設靜態檔案 Blazor WebAssembly 。
 
@@ -76,7 +76,7 @@ Razor 元件可以整合到 Razor 託管解決方案中的頁面和 MVC 應用�
 
    * 在 `UseDeveloperExceptionPage` 開發環境中呼叫應用程式建立器。
    * `UseBlazorFrameworkFiles`在 app builder 上呼叫。
-   * 將 `index.html` 頁面 () 的回復變更 `endpoints.MapFallbackToFile("index.html");` 為 `_Host.cshtml` 頁面。
+   * 將 () 的檔案切換回 `index.html` `endpoints.MapFallbackToFile("index.html");` `_Host.cshtml` 頁面： `endpoints.MapFallbackToPage("/_Host");` 。
 
    ```csharp
    public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
@@ -210,7 +210,7 @@ builder.RootComponents.Add<Counter>("#my-counter");
 
 ::: moniker range="< aspnetcore-5.0"
 
-在 Razor Razor Blazor WebAssembly .net 5 或更新版本的 ASP.NET Core 中，支援將元件整合至裝載方案中的頁面和 MVC 應用程式。 請選取此文章的 .NET 5 或更新版本。
+Razor Razor Blazor WebAssembly .Net 5 或更新版本的 ASP.NET Core 支援將元件整合至裝載方案中的頁面和 MVC 應用程式。 請選取此文章的 .NET 5 或更新版本。
 
 ::: moniker-end
 

@@ -1,7 +1,7 @@
 ---
-title: 搭配使用 SignalR ASP.NET Core Blazor
+title: SignalR使用 ASP.NET Core 搭配Blazor
 author: guardrex
-description: 建立搭配使用 ASP.NET Core 的聊天應用 SignalR 程式 Blazor 。
+description: 建立使用 ASP.NET Core 搭配的聊天應用 SignalR 程式 Blazor 。
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
@@ -20,14 +20,14 @@ no-loc:
 - SignalR
 uid: tutorials/signalr-blazor
 zone_pivot_groups: blazor-hosting-models
-ms.openlocfilehash: f4e51b39c4c3b0c444b08025e9bd74eec0747541
-ms.sourcegitcommit: a49c47d5a573379effee5c6b6e36f5c302aa756b
+ms.openlocfilehash: 50e5f2d5b1f9d0bf229bc57e6a1f599f9574b27c
+ms.sourcegitcommit: 1436bd4d70937d6ec3140da56d96caab33c4320b
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 02/16/2021
-ms.locfileid: "100536358"
+ms.lasthandoff: 03/06/2021
+ms.locfileid: "102395223"
 ---
-# <a name="use-aspnet-core-signalr-with-blazor"></a>搭配使用 SignalR ASP.NET Core Blazor
+# <a name="use-aspnet-core-signalr-with-blazor"></a>SignalR使用 ASP.NET Core 搭配Blazor
 
 本教學課程會教您使用與建立即時應用程式的基本概念 SignalR Blazor 。 您會了解如何：
 
@@ -48,7 +48,7 @@ ms.locfileid: "100536358"
 
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
-* 使用 **ASP.NET 和 網頁程式開發** 工作負載 [Visual Studio 2019 16.8 或更新版本](https://visualstudio.microsoft.com/downloads/?utm_medium=microsoft&utm_source=docs.microsoft.com&utm_campaign=inline+link&utm_content=download+vs2019)
+* 具有 **ASP.NET 和 網頁程式開發** 工作負載的 [Visual Studio 2019 16.8 或更新版本](https://visualstudio.microsoft.com/downloads/?utm_medium=microsoft&utm_source=docs.microsoft.com&utm_campaign=inline+link&utm_content=download+vs2019)
 * [!INCLUDE [.NET Core 5.0 SDK](~/includes/5.0-SDK.md)]
 
 # <a name="visual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code)
@@ -72,7 +72,7 @@ ms.locfileid: "100536358"
 
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
-* 使用 **ASP.NET 和 網頁程式開發** 工作負載 [Visual Studio 2019 16.6 或更新版本](https://visualstudio.microsoft.com/downloads/?utm_medium=microsoft&utm_source=docs.microsoft.com&utm_campaign=inline+link&utm_content=download+vs2019)
+* 具有 **ASP.NET 和 網頁程式開發** 工作負載的 [Visual Studio 2019 16.6 或更新版本](https://visualstudio.microsoft.com/downloads/?utm_medium=microsoft&utm_source=docs.microsoft.com&utm_campaign=inline+link&utm_content=download+vs2019)
 * [!INCLUDE [.NET Core 3.1 SDK](~/includes/3.1-SDK.md)]
 
 # <a name="visual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code)
@@ -122,7 +122,7 @@ ms.locfileid: "100536358"
 
 1. 選擇 **Blazor WebAssembly 應用程式** 範本。
 
-1. 在 [ **Advanced**] 底下，選取 [ **hosted ASP.NET Core** ] 核取方塊。
+1. 在 [ **Advanced**] 底下，選取 [ **ASP.NET Core hosted** ] 核取方塊。
 
 1. 選取 [建立]  。
 
@@ -134,7 +134,7 @@ ms.locfileid: "100536358"
    dotnet new blazorwasm -ho -o BlazorWebAssemblySignalRApp
    ```
 
-   `-ho|--hosted`選項會建立託管 Blazor WebAssembly 方案。 如需有關在資料夾中設定 VS Code 資產的詳細資訊 `.vscode` ，請參閱中的 **Linux** 作業系統指引 <xref:blazor/tooling> 。
+   `-ho|--hosted`選項會建立託管 Blazor WebAssembly 方案。 如需在資料夾中設定 VS Code 資產的相關資訊 `.vscode` ，請參閱中的 **Linux** 作業系統指引 <xref:blazor/tooling> 。
 
    `-o|--output`選項會建立解決方案的資料夾。 如果您已建立解決方案的資料夾，並在該資料夾中開啟命令 shell，請省略 `-o|--output` 選項和值以建立解決方案。
 
@@ -144,7 +144,7 @@ ms.locfileid: "100536358"
 
 # <a name="visual-studio-for-mac"></a>[Visual Studio for Mac](#tab/visual-studio-mac)
 
-1. 安裝最新版本的 [Visual Studio for Mac](https://visualstudio.microsoft.com/vs/mac/) ，然後執行下列步驟：
+1. 安裝最新版本的 [Visual Studio For Mac](https://visualstudio.microsoft.com/vs/mac/) ，然後執行下列步驟：
 
 1. 選取  >  [檔案 **新方案**] 或 [**開始] 視窗** 中的 [建立 **新** 專案]。
 
@@ -152,7 +152,7 @@ ms.locfileid: "100536358"
 
 1. 選擇 **Blazor WebAssembly 應用程式** 範本。 選取 [下一步] 。
 
-1. 確認 [ **驗證** ] 設定為 [ **無驗證**]。 選取 [ **主控 ASP.NET Core** ] 核取方塊。 選取 [下一步] 。
+1. 確認 [ **驗證** ] 設定為 [ **無驗證**]。 選取 [ **ASP.NET Core Hosted** ] 核取方塊。 選取 [下一步] 。
 
 1. 在 [ **專案名稱** ] 欄位中，為應用程式命名 `BlazorWebAssemblySignalRApp` 。 選取 [建立]  。
 
@@ -178,7 +178,7 @@ dotnet new blazorwasm -ho -o BlazorWebAssemblySignalRApp
 
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio/)
 
-1. 在 **方案總管** 中，以滑鼠右鍵按一下 `BlazorWebAssemblySignalRApp.Client` 專案，然後選取 [ **管理 NuGet 套件**]。
+1. 在 [ **方案 Explorer**] 中，以滑鼠右鍵按一下 `BlazorWebAssemblySignalRApp.Client` 專案，然後選取 [ **管理 NuGet 套件**]。
 
 1. 在 [ **管理 NuGet 封裝** ] 對話方塊中，確認 [ **封裝來源** ] 設定為 `nuget.org` 。
 
@@ -232,11 +232,11 @@ dotnet add Client package Microsoft.AspNetCore.SignalR.Client
 
 由於在 ASP.NET Core 3.x 應用程式中使用5.x 時發生套件解析問題 [`System.Text.Json`](https://www.nuget.org/packages/System.Text.Json) ，因此 `BlazorWebAssemblySignalRApp.Server` 專案需要的封裝參考 [`System.Text.Encodings.Web`](https://www.nuget.org/packages/System.Text.Encodings.Web) 。 在 .NET 5 的未來修補程式版本中，將會解決基礎問題。 如需詳細資訊，請參閱 [System.Text.Json 定義沒有相依性的 netcoreapp 3.0 (dotnet/runtime #45560) ](https://github.com/dotnet/runtime/issues/45560)。
 
-若要加入 [`System.Text.Encodings.Web`](https://www.nuget.org/packages/System.Text.Encodings.Web) `BlazorWebAssemblySignalRApp.Server` ASP.NET Core 3.1 裝載解決方案的專案 Blazor ，請遵循您選擇的工具指導方針：
+若要新增 [`System.Text.Encodings.Web`](https://www.nuget.org/packages/System.Text.Encodings.Web) 至 `BlazorWebAssemblySignalRApp.Server` ASP.NET Core 3.1 裝載解決方案的專案 Blazor ，請遵循您選擇的工具指導方針：
 
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio/)
 
-1. 在 **方案總管** 中，以滑鼠右鍵按一下 `BlazorWebAssemblySignalRApp.Server` 專案，然後選取 [ **管理 NuGet 套件**]。
+1. 在 [ **方案 Explorer**] 中，以滑鼠右鍵按一下 `BlazorWebAssemblySignalRApp.Server` 專案，然後選取 [ **管理 NuGet 套件**]。
 
 1. 在 [ **管理 NuGet 封裝** ] 對話方塊中，確認 [ **封裝來源** ] 設定為 `nuget.org` 。
 
@@ -290,13 +290,13 @@ dotnet add Server package System.Text.Encodings.Web
 
 ::: moniker range=">= aspnetcore-5.0"
 
-[!code-csharp[](signalr-blazor/samples/5.x/BlazorWebAssemblySignalRApp/Server/Hubs/ChatHub.cs)]
+[!code-csharp[](~/tutorials/signalr-blazor/samples/5.x/BlazorWebAssemblySignalRApp/Server/Hubs/ChatHub.cs)]
 
 ::: moniker-end
 
 ::: moniker range="< aspnetcore-5.0"
 
-[!code-csharp[](signalr-blazor/samples/3.x/BlazorWebAssemblySignalRApp/Server/Hubs/ChatHub.cs)]
+[!code-csharp[](~/tutorials/signalr-blazor/samples/3.x/BlazorWebAssemblySignalRApp/Server/Hubs/ChatHub.cs)]
 
 ::: moniker-end
 
@@ -314,14 +314,14 @@ dotnet add Server package System.Text.Encodings.Web
 
 1. 新增 SignalR 和回應壓縮中介軟體服務至 `Startup.ConfigureServices` ：
 
-   [!code-csharp[](signalr-blazor/samples/5.x/BlazorWebAssemblySignalRApp/Server/Startup.cs?name=snippet_ConfigureServices&highlight=3,6-10)]
+   [!code-csharp[](~/tutorials/signalr-blazor/samples/5.x/BlazorWebAssemblySignalRApp/Server/Startup.cs?name=snippet_ConfigureServices&highlight=3,6-10)]
 
 1. 在 `Startup.Configure` 中：
 
    * 在處理管線的設定頂端使用回應壓縮中介軟體。
    * 在控制器的端點和用戶端的回復之間，新增中樞的端點。
 
-   [!code-csharp[](signalr-blazor/samples/5.x/BlazorWebAssemblySignalRApp/Server/Startup.cs?name=snippet_Configure&highlight=3,26)]
+   [!code-csharp[](~/tutorials/signalr-blazor/samples/5.x/BlazorWebAssemblySignalRApp/Server/Startup.cs?name=snippet_Configure&highlight=3,26)]
 
 ::: moniker-end
 
@@ -329,14 +329,14 @@ dotnet add Server package System.Text.Encodings.Web
 
 1. 新增 SignalR 和回應壓縮中介軟體服務至 `Startup.ConfigureServices` ：
 
-   [!code-csharp[](signalr-blazor/samples/3.x/BlazorWebAssemblySignalRApp/Server/Startup.cs?name=snippet_ConfigureServices&highlight=3,5-9)]
+   [!code-csharp[](~/tutorials/signalr-blazor/samples/3.x/BlazorWebAssemblySignalRApp/Server/Startup.cs?name=snippet_ConfigureServices&highlight=3,5-9)]
 
 1. 在 `Startup.Configure` 中：
 
    * 在處理管線的設定頂端使用回應壓縮中介軟體。
    * 在控制器的端點和用戶端的回復之間，新增中樞的端點。
 
-   [!code-csharp[](signalr-blazor/samples/3.x/BlazorWebAssemblySignalRApp/Server/Startup.cs?name=snippet_Configure&highlight=3,25)]
+   [!code-csharp[](~/tutorials/signalr-blazor/samples/3.x/BlazorWebAssemblySignalRApp/Server/Startup.cs?name=snippet_Configure&highlight=3,25)]
 
 ::: moniker-end
 
@@ -348,7 +348,7 @@ dotnet add Server package System.Text.Encodings.Web
 
 1. 以下列程式碼取代標記：
 
-   [!code-razor[](signalr-blazor/samples/5.x/BlazorWebAssemblySignalRApp/Client/Pages/Index.razor)]
+   [!code-razor[](~/tutorials/signalr-blazor/samples/5.x/BlazorWebAssemblySignalRApp/Client/Pages/Index.razor)]
 
 ::: moniker-end
 
@@ -356,7 +356,7 @@ dotnet add Server package System.Text.Encodings.Web
 
 1. 以下列程式碼取代標記：
 
-   [!code-razor[](signalr-blazor/samples/3.x/BlazorWebAssemblySignalRApp/Client/Pages/Index.razor)]
+   [!code-razor[](~/tutorials/signalr-blazor/samples/3.x/BlazorWebAssemblySignalRApp/Client/Pages/Index.razor)]
 
 ::: moniker-end
 
@@ -366,7 +366,7 @@ dotnet add Server package System.Text.Encodings.Web
 
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
-1. 在 **方案總管** 中，選取 `BlazorWebAssemblySignalRApp.Server` 專案。 按下<kbd>f5</kbd>鍵以執行應用程式的偵錯工具，或按<kbd>Ctrl</kbd> + <kbd>F5</kbd>執行應用程式，而不進行偵錯工具。
+1. 在 [ **方案瀏覽器**] 中，選取 `BlazorWebAssemblySignalRApp.Server` 專案。 按下<kbd>f5</kbd>鍵以執行應用程式的偵錯工具，或按<kbd>Ctrl</kbd> + <kbd>F5</kbd>執行應用程式，而不進行偵錯工具。
 
 1. 從網址列複製 URL，開啟另一個瀏覽器執行個體或索引標籤，然後將 URL 貼入網址列。
 
@@ -378,7 +378,7 @@ dotnet add Server package System.Text.Encodings.Web
 
 # <a name="visual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code)
 
-如需有關在資料夾中設定 VS Code 資產的詳細資訊 `.vscode` ，請參閱中的 **Linux** 作業系統指引 <xref:blazor/tooling> 。
+如需在資料夾中設定 VS Code 資產的相關資訊 `.vscode` ，請參閱中的 **Linux** 作業系統指引 <xref:blazor/tooling> 。
 
 1. 按下<kbd>f5</kbd>鍵以執行應用程式的偵錯工具，或按<kbd>Ctrl</kbd> + <kbd>F5</kbd>執行應用程式，而不進行偵錯工具。
 
@@ -467,11 +467,11 @@ dotnet add Server package System.Text.Encodings.Web
 
 1. 在 Visual Studio Code 中，開啟應用程式的專案資料夾。
 
-1. 當對話方塊出現時，若要新增資產以建立和偵測應用程式，請選取 [ **是**]。 Visual Studio Code 會自動加入 `.vscode` 具有所產生檔案和檔案的資料夾 `launch.json` `tasks.json` 。 如需有關在資料夾中設定 VS Code 資產的詳細資訊 `.vscode` ，請參閱中的 **Linux** 作業系統指引 <xref:blazor/tooling> 。
+1. 當對話方塊出現時，若要新增資產以建立和偵測應用程式，請選取 [ **是**]。 Visual Studio Code 會自動加入 `.vscode` 具有所產生檔案和檔案的資料夾 `launch.json` `tasks.json` 。 如需在資料夾中設定 VS Code 資產的相關資訊 `.vscode` ，請參閱中的 **Linux** 作業系統指引 <xref:blazor/tooling> 。
 
 # <a name="visual-studio-for-mac"></a>[Visual Studio for Mac](#tab/visual-studio-mac)
 
-1. 安裝最新版本的 [Visual Studio for Mac](https://visualstudio.microsoft.com/vs/mac/) ，然後執行下列步驟：
+1. 安裝最新版本的 [Visual Studio For Mac](https://visualstudio.microsoft.com/vs/mac/) ，然後執行下列步驟：
 
 1. 選取  >  [檔案 **新方案**] 或 [**開始] 視窗** 中的 [建立 **新** 專案]。
 
@@ -503,7 +503,7 @@ dotnet new blazorserver -o BlazorServerSignalRApp
 
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio/)
 
-1. 在 **方案總管** 中，以滑鼠右鍵按一下 `BlazorServerSignalRApp` 專案，然後選取 [ **管理 NuGet 套件**]。
+1. 在 [ **方案 Explorer**] 中，以滑鼠右鍵按一下 `BlazorServerSignalRApp` 專案，然後選取 [ **管理 NuGet 套件**]。
 
 1. 在 [ **管理 NuGet 封裝** ] 對話方塊中，確認 [ **封裝來源** ] 設定為 `nuget.org` 。
 
@@ -561,7 +561,7 @@ dotnet add package Microsoft.AspNetCore.SignalR.Client
 
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio/)
 
-1. 在 **方案總管** 中，以滑鼠右鍵按一下 `BlazorServerSignalRApp` 專案，然後選取 [ **管理 NuGet 套件**]。
+1. 在 [ **方案 Explorer**] 中，以滑鼠右鍵按一下 `BlazorServerSignalRApp` 專案，然後選取 [ **管理 NuGet 套件**]。
 
 1. 在 [ **管理 NuGet 封裝** ] 對話方塊中，確認 [ **封裝來源** ] 設定為 `nuget.org` 。
 
@@ -615,13 +615,13 @@ dotnet add package System.Text.Encodings.Web
 
 ::: moniker range=">= aspnetcore-5.0"
 
-[!code-csharp[](signalr-blazor/samples/5.x/BlazorServerSignalRApp/Hubs/ChatHub.cs)]
+[!code-csharp[](~/tutorials/signalr-blazor/samples/5.x/BlazorServerSignalRApp/Hubs/ChatHub.cs)]
 
 ::: moniker-end
 
 ::: moniker range="< aspnetcore-5.0"
 
-[!code-csharp[](signalr-blazor/samples/3.x/BlazorServerSignalRApp/Hubs/ChatHub.cs)]
+[!code-csharp[](~/tutorials/signalr-blazor/samples/3.x/BlazorServerSignalRApp/Hubs/ChatHub.cs)]
 
 ::: moniker-end
 
@@ -640,14 +640,14 @@ dotnet add package System.Text.Encodings.Web
 
 1. 將回應壓縮中介軟體服務新增至 `Startup.ConfigureServices` ：
 
-   [!code-csharp[](signalr-blazor/samples/5.x/BlazorServerSignalRApp/Startup.cs?name=snippet_ConfigureServices&highlight=6-10)]
+   [!code-csharp[](~/tutorials/signalr-blazor/samples/5.x/BlazorServerSignalRApp/Startup.cs?name=snippet_ConfigureServices&highlight=6-10)]
 
 1. 在 `Startup.Configure` 中：
 
    * 在處理管線的設定頂端使用回應壓縮中介軟體。
    * 在對應中樞和用戶端回復的端點之間 Blazor ，新增中樞的端點。
 
-   [!code-csharp[](signalr-blazor/samples/5.x/BlazorServerSignalRApp/Startup.cs?name=snippet_Configure&highlight=3,23)]
+   [!code-csharp[](~/tutorials/signalr-blazor/samples/5.x/BlazorServerSignalRApp/Startup.cs?name=snippet_Configure&highlight=3,23)]
 
 ::: moniker-end
 
@@ -655,14 +655,14 @@ dotnet add package System.Text.Encodings.Web
 
 1. 將回應壓縮中介軟體服務新增至 `Startup.ConfigureServices` ：
 
-   [!code-csharp[](signalr-blazor/samples/3.x/BlazorServerSignalRApp/Startup.cs?name=snippet_ConfigureServices&highlight=6-10)]
+   [!code-csharp[](~/tutorials/signalr-blazor/samples/3.x/BlazorServerSignalRApp/Startup.cs?name=snippet_ConfigureServices&highlight=6-10)]
 
 1. 在 `Startup.Configure` 中：
 
    * 在處理管線的設定頂端使用回應壓縮中介軟體。
    * 在對應中樞和用戶端回復的端點之間 Blazor ，新增中樞的端點。
 
-   [!code-csharp[](signalr-blazor/samples/3.x/BlazorServerSignalRApp/Startup.cs?name=snippet_Configure&highlight=3,23)]
+   [!code-csharp[](~/tutorials/signalr-blazor/samples/3.x/BlazorServerSignalRApp/Startup.cs?name=snippet_Configure&highlight=3,23)]
 
 ::: moniker-end
 
@@ -674,7 +674,7 @@ dotnet add package System.Text.Encodings.Web
 
 1. 以下列程式碼取代標記：
 
-   [!code-razor[](signalr-blazor/samples/5.x/BlazorServerSignalRApp/Pages/Index.razor)]
+   [!code-razor[](~/tutorials/signalr-blazor/samples/5.x/BlazorServerSignalRApp/Pages/Index.razor)]
 
 ::: moniker-end
 
@@ -682,7 +682,7 @@ dotnet add package System.Text.Encodings.Web
 
 1. 以下列程式碼取代標記：
 
-   [!code-razor[](signalr-blazor/samples/3.x/BlazorServerSignalRApp/Pages/Index.razor)]
+   [!code-razor[](~/tutorials/signalr-blazor/samples/3.x/BlazorServerSignalRApp/Pages/Index.razor)]
 
 ::: moniker-end
 

@@ -1,5 +1,5 @@
 ---
-title: ASP.NET Core 的工具 Blazor
+title: 適用于 ASP.NET Core 的工具 Blazor
 author: guardrex
 description: 瞭解可用來建立 Blazor 應用程式的工具。
 monikerRange: '>= aspnetcore-3.1'
@@ -20,14 +20,14 @@ no-loc:
 - SignalR
 uid: blazor/tooling
 zone_pivot_groups: operating-systems
-ms.openlocfilehash: 6b61d9a4645d273b0c78fae0388d569771c43a2d
-ms.sourcegitcommit: a49c47d5a573379effee5c6b6e36f5c302aa756b
+ms.openlocfilehash: 19270bb74326dccfee9466b7c1fa61daeab805a2
+ms.sourcegitcommit: 1436bd4d70937d6ec3140da56d96caab33c4320b
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 02/16/2021
-ms.locfileid: "100536242"
+ms.lasthandoff: 03/06/2021
+ms.locfileid: "102394456"
 ---
-# <a name="tooling-for-aspnet-core-blazor"></a>ASP.NET Core 的工具 Blazor
+# <a name="tooling-for-aspnet-core-blazor"></a>適用于 ASP.NET Core 的工具 Blazor
 
 ::: zone pivot="windows"
 
@@ -41,7 +41,7 @@ ms.locfileid: "100536242"
 
 1. 如需 Blazor WebAssembly 體驗，請選擇 **Blazor WebAssembly 應用程式** 範本。 如需 Blazor Server 體驗，請選擇 **Blazor Server 應用程式** 範本。 選取 [建立]  。
 
-   針對裝載 Blazor WebAssembly 體驗，請選取 [裝載 **ASP.NET Core** ] 核取方塊。
+   如需託管 Blazor WebAssembly 體驗，請選取 [ **ASP.NET Core hosted** ] 核取方塊。
 
    如需這兩個 Blazor 裝載模型的相關資訊， *Blazor WebAssembly* (獨立和裝載) 和 *Blazor Server* ，請參閱 <xref:blazor/hosting-models> 。
 
@@ -55,7 +55,7 @@ ms.locfileid: "100536242"
 
 ::: zone pivot="linux"
 
-1. 安裝最新版本的 [.NET Core SDK](https://dotnet.microsoft.com/download)。 如果您先前已安裝 SDK，您可以在命令 shell 中執行下列命令來判斷已安裝的版本：
+1. 安裝最新版本的 [.Net CORE SDK](https://dotnet.microsoft.com/download)。 如果您先前已安裝 SDK，您可以在命令 shell 中執行下列命令來判斷已安裝的版本：
 
    ```dotnetcli
    dotnet --version
@@ -63,7 +63,7 @@ ms.locfileid: "100536242"
 
 1. 安裝最新版本的 [Visual Studio Code](https://code.visualstudio.com)。
 
-1. 安裝 Visual Studio Code 擴充功能的最新 [c #](https://marketplace.visualstudio.com/items?itemName=ms-dotnettools.csharp)。
+1. 安裝最新的 [c # For Visual Studio Code 延伸](https://marketplace.visualstudio.com/items?itemName=ms-dotnettools.csharp)模組。
 
 1. 如需 Blazor WebAssembly 體驗，請在命令介面中執行下列命令：
 
@@ -103,9 +103,9 @@ ms.locfileid: "100536242"
 
    在先前設定中， () 的目前工作目錄 `cwd` ， `{SERVER APP FOLDER}` 預留位置是 **`Server`** 專案的資料夾，通常是 " `Server` "。
 
-   如果使用 Microsoft Edge，且系統上未安裝 Google Chrome，請在設定中新增的其他屬性 `"browser": "edge"` 。
+   如果使用 Microsoft Edge，且系統上未安裝 Google Chrome，請在設定中新增的額外屬性 `"browser": "edge"` 。
 
-   適用于和的專案資料夾範例 `Server` ，會將 Microsoft Edge 作為瀏覽器執行，而不是使用預設的瀏覽器 Google Chrome：
+   的專案資料夾範例， `Server` 會將 Microsoft Edge 以瀏覽器的形式產生，以進行 debug，而不是使用預設的瀏覽器 Google Chrome：
 
    ```json
    ...
@@ -125,7 +125,7 @@ ms.locfileid: "100536242"
    在前面的引數中：
 
    * `{SERVER APP FOLDER}`預留位置是 **`Server`** 專案的資料夾，通常是 " `Server` "。
-   * `{PROJECT NAME}`預留位置是應用程式的名稱，通常是根據解決方案的名稱，然後是根據 `.Server` 專案範本所產生之應用程式中的 "" Blazor 。
+   * `{PROJECT NAME}`預留位置是應用程式的名稱，通常是根據解決方案的名稱，然後是根據 `.Server` [ Blazor 專案範本](xref:blazor/project-structure)所產生之應用程式中的 ""。
 
    下列教學課程中 [使用的 SignalR Blazor WebAssembly 應用程式](xref:tutorials/signalr-blazor) 範例會使用的專案資料夾名稱 `Server` 和專案名稱 `BlazorWebAssemblySignalRApp.Server` ：
 
@@ -156,7 +156,7 @@ ms.locfileid: "100536242"
 
 ::: zone pivot="macos"
 
-1. 安裝 [Visual Studio for Mac](https://visualstudio.microsoft.com/vs/mac/)。
+1. 安裝 [Visual Studio For Mac](https://visualstudio.microsoft.com/vs/mac/)。
 
 1. 選取  >  [檔案 **新方案**] 或 [**開始] 視窗** 中的 [建立 **新** 專案]。
 
@@ -168,7 +168,7 @@ ms.locfileid: "100536242"
 
 1. 確認 [ **驗證** ] 設定為 [ **無驗證**]。 選取 [下一步] 。
 
-1. 針對裝載 Blazor WebAssembly 體驗，請選取 [裝載 **ASP.NET Core** ] 核取方塊。
+1. 如需託管 Blazor WebAssembly 體驗，請選取 [ **ASP.NET Core hosted** ] 核取方塊。
 
 1. 在 [ **專案名稱** ] 欄位中，為應用程式命名 `WebApplication1` 。 選取 [建立]  。
 
@@ -182,16 +182,16 @@ ms.locfileid: "100536242"
 
 ## <a name="use-visual-studio-code-for-cross-platform-blazor-development"></a>使用 Visual Studio Code 進行跨平臺 Blazor 開發
 
-[Visual Studio Code](https://code.visualstudio.com/) 是一種開放原始碼、跨平臺的整合式開發環境， (可用來開發應用程式的 IDE) Blazor 。 使用 .NET CLI 來建立新的 Blazor 應用程式，以 Visual Studio Code 的開發。 如需詳細資訊，請參閱本文的 [Linux 版本](?pivots=linux)。
+[Visual Studio Code](https://code.visualstudio.com/) 是開放原始碼、跨平臺的整合式開發環境 (IDE) ，可用來開發 Blazor 應用程式。 使用 .NET CLI 來建立新的 Blazor 應用程式，以使用 Visual Studio Code 進行開發。 如需詳細資訊，請參閱本文的 [Linux 版本](?pivots=linux)。
 
 ## <a name="blazor-template-options"></a>Blazor 範本選項
 
-Blazor架構會提供範本，以針對兩個裝載模型建立新的應用程式 Blazor 。 範本可用來建立新的 Blazor 專案和方案，不論您為 Blazor 開發 (Visual Studio、Visual Studio for Mac、Visual Studio Code 或 .net CLI) 選取的工具為何：
+Blazor架構會提供範本，以針對兩個裝載模型建立新的應用程式 Blazor 。 Blazor無論您針對 Blazor 開發 (visual Studio、visual Studio for Mac、Visual studio Code 或 .net CLI) 所選取的工具為何，都可以使用這些範本來建立新的專案和方案：
 
 * Blazor WebAssembly 專案範本： `blazorwasm`
 * Blazor Server 專案範本： `blazorserver`
 
-如需裝載模型的詳細資訊 Blazor ，請參閱 <xref:blazor/hosting-models> 。
+如需裝載模型的詳細資訊 Blazor ，請參閱 <xref:blazor/hosting-models> 。 如需專案範本的詳細資訊 Blazor ，請參閱 <xref:blazor/project-structure> 。
 
 您可以藉由將 [說明] 選項 (`-h` 或 `--help`) 傳送至 [`dotnet new`](/dotnet/core/tools/dotnet-new) 命令 shell 中的 CLI 命令，來取得範本選項：
 
@@ -199,3 +199,8 @@ Blazor架構會提供範本，以針對兩個裝載模型建立新的應用程�
 dotnet new blazorwasm -h
 dotnet new blazorserver -h
 ```
+
+## <a name="additional-resources"></a>其他資源
+
+* <xref:blazor/hosting-models>
+* <xref:blazor/project-structure>

@@ -1,7 +1,7 @@
 ---
 title: 在 Linux 上使用 Nginx 裝載 ASP.NET Core
 author: rick-anderson
-description: 瞭解如何在 Ubuntu 16.04 上將 Nginx 設定為反向 proxy，以將 HTTP 流量轉送至在 Kestrel 上執行的 ASP.NET Core web 應用程式。
+description: 瞭解如何在 Ubuntu 16.04 上將 Nginx 設定為反向 proxy，以將 HTTP 流量轉送至 Kestrel 上執行的 ASP.NET Core web 應用程式。
 monikerRange: '>= aspnetcore-2.1'
 ms.author: riande
 ms.custom: mvc
@@ -19,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: host-and-deploy/linux-nginx
-ms.openlocfilehash: 6a8fd8e3498dda9b7c10834791e64df6276e2823
-ms.sourcegitcommit: 063a06b644d3ade3c15ce00e72a758ec1187dd06
+ms.openlocfilehash: 8a593654fa31e643e7c239f361f035589c75ce98
+ms.sourcegitcommit: 1436bd4d70937d6ec3140da56d96caab33c4320b
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 01/16/2021
-ms.locfileid: "98253016"
+ms.lasthandoff: 03/06/2021
+ms.locfileid: "102395249"
 ---
 # <a name="host-aspnet-core-on-linux-with-nginx"></a>在 Linux 上使用 Nginx 裝載 ASP.NET Core
 
@@ -46,15 +46,11 @@ ms.locfileid: "98253016"
 
 ## <a name="prerequisites"></a>必要條件
 
-1. 以 sudo 權限使用標準使用者帳戶存取 Ubuntu 16.04 伺服器。
-1. 在伺服器上安裝 .NET Core 執行階段。
-   1. 流覽 [ [下載 .Net Core] 頁面](https://dotnet.microsoft.com/download/dotnet-core)。
-   1. 選取最新的非預覽 .NET Core 版本。
-   1. 在 [ **執行應用程式-運行** 時間] 下的表格中下載最新的非預覽執行時間。
-   1. 選取 [Linux **套件管理員指示** ] 連結，然後依照您的 ubuntu 版本的 ubuntu 指示進行。
-1. 現有的 ASP.NET Core 應用程式。
+* 以 sudo 權限使用標準使用者帳戶存取 Ubuntu 16.04 伺服器。
+* 安裝在伺服器上的最新非預覽版 [.net 運行](/dotnet/core/install/linux) 時間。
+* 現有的 ASP.NET Core 應用程式。
 
-在升級共用架構之後的任何時間點，重新開機伺服器所裝載的 ASP.NET Core 應用程式。
+在升級共用架構之後的任何時間點，請重新開機伺服器所裝載的 ASP.NET Core 應用程式。
 
 ## <a name="publish-and-copy-over-the-app"></a>跨應用程式發佈與複製
 
@@ -65,7 +61,7 @@ ms.locfileid: "98253016"
 * 設定應用程式以處理安全的本機連線。 如需詳細資訊，請參閱 [HTTPS 組態](#https-configuration)一節。
 * `https://localhost:5001`從檔案的屬性中移除 (（如果有) 的話） `applicationUrl` `Properties/launchSettings.json` 。
 
-從開發環境執行 [dotnet publish](/dotnet/core/tools/dotnet-publish) ，以將應用程式封裝到目錄中 (例如， `bin/Release/{TARGET FRAMEWORK MONIKER}/publish` 其中預留位置 `{TARGET FRAMEWORK MONIKER}` 是可在伺服器上執行的目標 Framework 標記/TFM) ：
+執行 [dotnet](/dotnet/core/tools/dotnet-publish) 從開發環境發佈，將應用程式封裝至目錄 (例如， `bin/Release/{TARGET FRAMEWORK MONIKER}/publish` 其中預留位置 `{TARGET FRAMEWORK MONIKER}` 是可在伺服器上執行的目標 Framework 標記/TFM) ：
 
 ```dotnetcli
 dotnet publish --configuration Release
@@ -73,7 +69,7 @@ dotnet publish --configuration Release
 
 如果您不想在伺服器上維護 .NET Core 執行階段，應用程式也可以發佈為[獨立式部署](/dotnet/core/deploying/#self-contained-deployments-scd)。
 
-使用整合至組織工作流程的工具，將 ASP.NET Core 應用程式複製到伺服器 (例如， `SCP` `SFTP`) 。 通常會在目錄底下尋找 web 應用程式 `var` (例如 `var/www/helloapp`) 。
+使用整合至組織工作流程 (的工具，將 ASP.NET Core 應用程式複製到伺服器，例如 `SCP` `SFTP`) 。 通常會在目錄底下尋找 web 應用程式 `var` (例如 `var/www/helloapp`) 。
 
 > [!NOTE]
 > 在生產環境部署案例中，持續整合工作流程會執行發佈應用程式並將資產複製到伺服器的工作。
@@ -146,7 +142,7 @@ sudo service nginx start
 
 ### <a name="configure-nginx"></a>設定 Nginx
 
-若要將 Nginx 設定為反向 proxy，以將 HTTP 要求轉送至 ASP.NET Core 應用程式，請修改 `/etc/nginx/sites-available/default` 。 在文字編輯器中開啟它，並將內容取代為下列程式碼片段：
+若要將 Nginx 設定為反向 proxy，以將 HTTP 要求轉送至您的 ASP.NET Core 應用程式，請修改 `/etc/nginx/sites-available/default` 。 在文字編輯器中開啟它，並將內容取代為下列程式碼片段：
 
 ```nginx
 server {
@@ -205,7 +201,7 @@ server {
 
 ## <a name="monitor-the-app"></a>監視應用程式
 
-伺服器會設定為將對執行的要求轉寄至在 `http://<serveraddress>:80` Kestrel 上執行的 ASP.NET Core 應用程式 `http://127.0.0.1:5000` 。 不過，並未設定 Nginx 來管理 Kestrel 處理序。 `systemd` 可以用來建立服務檔案，以啟動並監視基礎 web 應用程式。 `systemd` 是 init 系統，提供許多強大的功能來啟動、停止及管理進程。 
+伺服器會設定為將對開啟的要求轉寄至在 Kestrel 上執行 `http://<serveraddress>:80` 的 ASP.NET Core 應用程式 `http://127.0.0.1:5000` 。 不過，並未設定 Nginx 來管理 Kestrel 處理序。 `systemd` 可以用來建立服務檔案，以啟動並監視基礎 web 應用程式。 `systemd` 是 init 系統，提供許多強大的功能來啟動、停止及管理進程。 
 
 ### <a name="create-the-service-file"></a>建立服務檔
 
@@ -316,13 +312,13 @@ sudo journalctl -fu kestrel-helloapp.service --since "2016-10-18" --until "2016-
 
 ## <a name="data-protection"></a>資料保護
 
-[ASP.NET Core 的資料保護堆疊](xref:security/data-protection/introduction)是由數個 ASP.NET Core[中介軟體](xref:fundamentals/middleware/index)所使用，包括驗證中介軟體 (例如， cookie 中介軟體) 和跨網站偽造要求 (CSRF) 保護。 即使資料保護 API 並非由使用者程式碼呼叫，仍應設定資料保護，以建立持續密碼編譯[金鑰存放區](xref:security/data-protection/implementation/key-management)。 如不設定資料保護，金鑰會保留在記憶體中，並於應用程式重新啟動時捨棄。
+[ASP.NET Core 資料保護堆疊](xref:security/data-protection/introduction)是由數個 ASP.NET Core[中介軟體](xref:fundamentals/middleware/index)所使用，包括驗證中介軟體 (例如， cookie 中介軟體) 和跨網站要求偽造 (CSRF) 保護。 即使資料保護 API 並非由使用者程式碼呼叫，仍應設定資料保護，以建立持續密碼編譯[金鑰存放區](xref:security/data-protection/implementation/key-management)。 如不設定資料保護，金鑰會保留在記憶體中，並於應用程式重新啟動時捨棄。
 
 如果 Keyring 儲存在記憶體中，則當應用程式重新啟動時：
 
 * 所有 cookie 的驗證權杖都會失效。
 * 當使用者提出下一個要求時，需要再次登入。
-* 所有以 Keyring 保護的資料都無法再解密。 這可能包括 [CSRF 權杖](xref:security/anti-request-forgery#aspnet-core-antiforgery-configuration) 和 [ASP.NET Core MVC TempData cookie s](xref:fundamentals/app-state#tempdata)。
+* 所有以 Keyring 保護的資料都無法再解密。 這可能包括 [CSRF 權杖](xref:security/anti-request-forgery#aspnet-core-antiforgery-configuration) 和 [ASP.NET Core MVC TempData cookie ](xref:fundamentals/app-state#tempdata)。
 
 若要設定資料保護來保存及加密金鑰環，請參閱：
 
@@ -387,7 +383,7 @@ static char ngx_http_server_full_string[] = "Server: Web Server" CRLF;
 
 [Dotnet run](/dotnet/core/tools/dotnet-run)命令使用應用程式的 *Properties/launchSettings.json* 檔案，其會將應用程式設定為在屬性提供的 url 上接聽 `applicationUrl` 。 例如： `https://localhost:5001;http://localhost:5000` 。
 
-使用下列其中一種方法，將應用程式設定為在 `dotnet run` 命令或開發環境的開發環境中使用憑證 (<kbd>F5</kbd>或<kbd>Ctrl</kbd> + <kbd>F5</kbd> Visual Studio Code) ：
+您可以使用下列其中一種方法，將應用程式設定為在命令或開發環境中使用憑證進行開發 `dotnet run` (<kbd>F5</kbd>或<kbd>Ctrl</kbd> + <kbd>F5</kbd>) ：
 
 ::: moniker range=">= aspnetcore-5.0"
 

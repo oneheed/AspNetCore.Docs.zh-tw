@@ -20,12 +20,12 @@ no-loc:
 - SignalR
 uid: blazor/fundamentals/handle-errors
 zone_pivot_groups: blazor-hosting-models
-ms.openlocfilehash: 96f4d7fcacf1f8eb03ffe83ba18b353e5588448e
-ms.sourcegitcommit: a1db01b4d3bd8c57d7a9c94ce122a6db68002d66
+ms.openlocfilehash: d4c8054afc3818d58bc2a047a0aa74613ae6047b
+ms.sourcegitcommit: 1436bd4d70937d6ec3140da56d96caab33c4320b
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 03/04/2021
-ms.locfileid: "102109700"
+ms.lasthandoff: 03/06/2021
+ms.locfileid: "102395093"
 ---
 # <a name="handle-errors-in-aspnet-core-blazor-apps"></a>處理 ASP.NET Core 應用程式中的錯誤 Blazor
 
@@ -40,7 +40,7 @@ ms.locfileid: "102109700"
 * 在開發期間，橫條會將您導向瀏覽器主控台，您可以在其中查看例外狀況。
 * 在生產環境中，橫條會通知使用者發生錯誤，建議您重新整理瀏覽器。
 
-此錯誤處理體驗的 UI 是專案範本的一部分 Blazor 。
+此錯誤處理體驗的 UI 是[ Blazor 專案範本](xref:blazor/project-structure)的一部分。
 
 在 Blazor WebAssembly 應用程式中，自訂檔案的體驗 `wwwroot/index.html` ：
 
@@ -257,7 +257,7 @@ ms.locfileid: "102109700"
 * 在開發期間，橫條會將您導向瀏覽器主控台，您可以在其中查看例外狀況。
 * 在生產環境中，橫條會通知使用者發生錯誤，建議您重新整理瀏覽器。
 
-此錯誤處理體驗的 UI 是專案範本的一部分 Blazor 。
+此錯誤處理體驗的 UI 是[ Blazor 專案範本](xref:blazor/project-structure)的一部分。
 
 在 Blazor Server 應用程式中，自訂檔案的體驗 `Pages/_Host.cshtml` ：
 

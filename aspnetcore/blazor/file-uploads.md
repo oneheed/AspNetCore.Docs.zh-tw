@@ -19,12 +19,12 @@ no-loc:
 - SignalR
 ms.date: 02/18/2021
 uid: blazor/file-uploads
-ms.openlocfilehash: 26dada3a749a114fc27da89897701076378eef11
-ms.sourcegitcommit: a1db01b4d3bd8c57d7a9c94ce122a6db68002d66
+ms.openlocfilehash: a31821f03efd39d774a4a3c61d027983a1783e2d
+ms.sourcegitcommit: 1436bd4d70937d6ec3140da56d96caab33c4320b
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 03/04/2021
-ms.locfileid: "102109763"
+ms.lasthandoff: 03/06/2021
+ms.locfileid: "102395119"
 ---
 # <a name="aspnet-core-blazor-file-uploads"></a>ASP.NET 核心檔案上 Blazor 傳
 
@@ -419,7 +419,7 @@ public class FilesaveController : ControllerBase
 
 在中 Blazor WebAssembly ，檔案資料會直接串流至瀏覽器中的 .net 程式碼。
 
-在中 Blazor Server ，檔案資料會透過 SignalR 連接串流至伺服器上的 .net 程式碼，因為該檔案是從資料流程讀取的。 [`Forms.RemoteBrowserFileStreamOptions`](https://github.com/dotnet/aspnetcore/blob/master/src/Components/Web/src/Forms/InputFile/RemoteBrowserFileStreamOptions.cs) 允許設定檔案上傳特性 Blazor Server 。
+在中 Blazor Server ，檔案資料會透過 SignalR 連接串流至伺服器上的 .net 程式碼，因為該檔案是從資料流程讀取的。 <xref:Microsoft.AspNetCore.Components.Forms.RemoteBrowserFileStreamOptions> 允許設定檔案上傳特性 Blazor Server 。
 
 ## <a name="additional-resources"></a>其他資源
 

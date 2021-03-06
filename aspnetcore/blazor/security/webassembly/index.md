@@ -1,5 +1,5 @@
 ---
-title: 安全 ASP.NET Core Blazor WebAssembly
+title: 安全 ASP.NET 核心 Blazor WebAssembly
 author: guardrex
 description: 瞭解如何將 Blazor WebAssemlby 應用程式保護為單一頁面應用程式， (spa) 。
 monikerRange: '>= aspnetcore-3.1'
@@ -19,16 +19,16 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/security/webassembly/index
-ms.openlocfilehash: 48a6227c30f025e118782b13e46fe0c7d6505851
-ms.sourcegitcommit: 1166b0ff3828418559510c661e8240e5c5717bb7
+ms.openlocfilehash: c7bedd0b6990ab9991c1cce14f603bcda06c22aa
+ms.sourcegitcommit: 1436bd4d70937d6ec3140da56d96caab33c4320b
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 02/12/2021
-ms.locfileid: "100280837"
+ms.lasthandoff: 03/06/2021
+ms.locfileid: "102394677"
 ---
-# <a name="secure-aspnet-core-blazor-webassembly"></a>安全 ASP.NET Core Blazor WebAssembly
+# <a name="secure-aspnet-core-blazor-webassembly"></a>安全 ASP.NET 核心 Blazor WebAssembly
 
-Blazor WebAssembly 應用程式的保護方式與單一頁面應用程式 (Spa) 相同。 有幾種方法可以驗證使用者的 Spa，但最常見且最完整的方法是使用以 [OAuth 2.0 通訊協定](https://oauth.net/)為基礎的執行，例如 [OpenID Connect (OIDC) ](https://openid.net/connect/)。
+Blazor WebAssembly 應用程式的保護方式與單一頁面應用程式 (Spa) 相同。 有幾種方法可以驗證使用者的 Spa，但最常見且最全面的方法是使用以 [OAuth 2.0 通訊協定](https://oauth.net/)為基礎的執行，例如 [OPENID connect (OIDC) ](https://openid.net/connect/)。
 
 ## <a name="authentication-library"></a>驗證程式庫
 
@@ -105,13 +105,13 @@ Blazor WebAssembly 支援透過程式庫使用 OIDC 來驗證和授權應用程�
 * [其他案例：自訂使用者](xref:blazor/security/webassembly/additional-scenarios#customize-the-user)
 * <xref:blazor/security/webassembly/aad-groups-roles>
 
-## <a name="azure-app-service-on-linux-with-identity-server"></a>使用 Identity 伺服器 Linux 上的 Azure App Service
+## <a name="azure-app-service-on-linux-with-identity-server"></a>Linux 上的 Azure App Service 與 Identity 伺服器
 
-當部署至與伺服器 Linux 上的 Azure App Service 時，請明確指定簽發者 Identity 。 如需詳細資訊，請參閱<xref:security/authentication/identity/spa#azure-app-service-on-linux>。
+使用伺服器部署至 Linux 上的 Azure App Service 時，請明確指定簽發者 Identity 。 如需詳細資訊，請參閱<xref:security/authentication/identity/spa#azure-app-service-on-linux>。
 
 ## <a name="windows-authentication"></a>Windows 驗證
 
-我們不建議使用 Windows 驗證搭配 Blazor Webassembly 或其他任何 SPA 架構。 建議使用以權杖為基礎的通訊協定，而不是使用 Windows 驗證，例如搭配 Active Directory 同盟服務 (ADFS) 的 OIDC。
+我們不建議使用 Windows 驗證搭配 Blazor Webassembly 或其他任何 SPA 架構。 我們建議使用以權杖為基礎的通訊協定，而非 Windows 驗證，例如使用 Active Directory Federation Services (ADFS) 的 OIDC。
 
 如果 Windows 驗證與 Webassembly 搭配使用 Blazor ，或與任何其他 SPA 架構搭配使用，則需要額外的量值，以保護應用程式免于受到跨網站要求偽造 (CSRF) 權杖。 適用于的相同考慮也 cookie 適用于 Windows 驗證，因為 Windows 驗證不提供任何機制來防止跨原始來源共用驗證內容。 使用 Windows 驗證的應用程式若沒有額外的 CSRF 防護，則至少應限制為組織的內部網路，而不會在網際網路上使用。
 

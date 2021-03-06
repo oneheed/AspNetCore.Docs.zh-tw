@@ -1,5 +1,5 @@
 ---
-title: ASP.NET Core Blazor 專案結構
+title: ASP.NET 核心 Blazor 專案結構
 author: guardrex
 description: 瞭解 ASP.NET Core Blazor 應用程式專案結構。
 monikerRange: '>= aspnetcore-3.1'
@@ -19,20 +19,22 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/project-structure
-ms.openlocfilehash: 94b5a3d8c0f5b94ecac32e6fc5f94efeb8337f37
-ms.sourcegitcommit: 1166b0ff3828418559510c661e8240e5c5717bb7
+ms.openlocfilehash: fe42c2d43b79ea959bb0ba8e5b96e6c865b2a416
+ms.sourcegitcommit: 1436bd4d70937d6ec3140da56d96caab33c4320b
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 02/12/2021
-ms.locfileid: "100280349"
+ms.lasthandoff: 03/06/2021
+ms.locfileid: "102394872"
 ---
-# <a name="aspnet-core-blazor-project-structure"></a>ASP.NET Core Blazor 專案結構
+# <a name="aspnet-core-blazor-project-structure"></a>ASP.NET 核心 Blazor 專案結構
 
-本文說明組成專案範本所產生之應用程式的檔案和資料夾 Blazor Blazor 。
+本文說明組成應用程式的檔案和資料夾，其中 Blazor 一個 Blazor 架構的專案範本會產生應用程式。 如需如何使用工具 Blazor 從專案範本建立應用程式的詳細資訊 Blazor ，請參閱 <xref:blazor/tooling> 。 如需裝載模型和的詳細資訊，請 Blazor Blazor WebAssembly Blazor Server 參閱 <xref:blazor/hosting-models> 。
 
 ## Blazor WebAssembly
 
-Blazor WebAssembly範本 (`blazorwasm`) 會建立應用程式的初始檔案和目錄結構 Blazor WebAssembly 。 應用程式會填入元件的示範程式碼 `FetchData` ，該元件會從靜態資產載入資料、以及 `weather.json` 使用者與元件的互動 `Counter` 。
+Blazor WebAssembly 專案範本： `blazorwasm`
+
+此 Blazor WebAssembly 範本會建立應用程式的初始檔案和目錄結構 Blazor WebAssembly 。 應用程式會填入元件的示範程式碼 `FetchData` ，該元件會從靜態資產載入資料、以及 `weather.json` 使用者與元件的互動 `Counter` 。
 
 * `Pages` 資料夾：包含 `.razor` 組成應用程式 () 的可路由元件/頁面 Blazor 。 每個頁面的路由都是使用指示詞來指定 [`@page`](xref:mvc/views/razor#page) 。 範本包含下列元件：
   * `Counter` 元件 (`Counter.razor`) ：實行計數器頁面。
@@ -104,7 +106,9 @@ Blazor WebAssembly範本 (`blazorwasm`) 會建立應用程式的初始檔案和�
 
 ## Blazor Server
 
-Blazor Server範本 (`blazorserver`) 會建立應用程式的初始檔案和目錄結構 Blazor Server 。 應用程式會填入元件的示範程式碼， `FetchData` 該元件會從已註冊的服務載入資料，以及 `WeatherForecastService` 使用者與 `Counter` 元件的互動。
+Blazor Server 專案範本： `blazorserver`
+
+此 Blazor Server 範本會建立應用程式的初始檔案和目錄結構 Blazor Server 。 應用程式會填入元件的示範程式碼， `FetchData` 該元件會從已註冊的服務載入資料，以及 `WeatherForecastService` 使用者與 `Counter` 元件的互動。
 
 * `Data` 資料夾：包含 `WeatherForecast` `WeatherForecastService` 提供範例天氣資料給應用程式元件的類別和執行 `FetchData` 。
 
@@ -150,7 +154,7 @@ Blazor Server範本 (`blazorserver`) 會建立應用程式的初始檔案和目�
 
 * `appsettings.json` 和環境應用程式佈建檔案：提供應用程式的 [設定](xref:blazor/fundamentals/configuration) 。
 
-* `Program.cs`：設定 ASP.NET Core [主機](xref:fundamentals/host/generic-host)的應用程式進入點。
+* `Program.cs`：設定 ASP.NET 核心 [主機](xref:fundamentals/host/generic-host)的應用程式進入點。
 
 * `Startup.cs`：包含應用程式的啟動邏輯。 `Startup`類別會定義兩種方法：
 
@@ -158,3 +162,8 @@ Blazor Server範本 (`blazorserver`) 會建立應用程式的初始檔案和目�
   * `Configure`：設定應用程式的要求處理管線：
     * <xref:Microsoft.AspNetCore.Builder.ComponentEndpointRouteBuilderExtensions.MapBlazorHub%2A> 呼叫以設定與瀏覽器的即時連線端點。 使用建立連線 [SignalR](xref:signalr/introduction) ，這是將即時 web 功能新增至應用程式的架構。
     * [`MapFallbackToPage("/_Host")`](xref:Microsoft.AspNetCore.Builder.RazorPagesEndpointRouteBuilderExtensions.MapFallbackToPage*) 呼叫以設定應用程式的根頁面 (`Pages/_Host.cshtml`) 並啟用導覽。
+
+## <a name="additional-resources"></a>其他資源
+
+* <xref:blazor/tooling>
+* <xref:blazor/hosting-models>

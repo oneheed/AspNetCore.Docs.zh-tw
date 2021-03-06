@@ -1,5 +1,5 @@
 ---
-title: ASP.NET Core Blazor 路由
+title: ASP.NET 核心 Blazor 路由
 author: guardrex
 description: 瞭解如何管理應用程式中的要求路由，以及如何在應用程式中使用 NavLink 元件 Blazor 進行導覽。
 monikerRange: '>= aspnetcore-3.1'
@@ -19,14 +19,14 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/fundamentals/routing
-ms.openlocfilehash: 55e2cbc01af7352facad7121c05c754e9d438ae3
-ms.sourcegitcommit: 1166b0ff3828418559510c661e8240e5c5717bb7
+ms.openlocfilehash: ee6de9a13a69154eef6b677663091667d391452f
+ms.sourcegitcommit: 1436bd4d70937d6ec3140da56d96caab33c4320b
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 02/12/2021
-ms.locfileid: "100279881"
+ms.lasthandoff: 03/06/2021
+ms.locfileid: "102395054"
 ---
-# <a name="aspnet-core-blazor-routing"></a>ASP.NET Core Blazor 路由
+# <a name="aspnet-core-blazor-routing"></a>ASP.NET 核心 Blazor 路由
 
 在本文中，您將瞭解如何管理要求路由，以及如何使用 <xref:Microsoft.AspNetCore.Components.Routing.NavLink> 元件在應用程式中建立流覽連結 Blazor 。
 
@@ -59,7 +59,7 @@ ms.locfileid: "100279881"
 * 從接收， <xref:Microsoft.AspNetCore.Components.RouteData> <xref:Microsoft.AspNetCore.Components.Routing.Router> 連同任何路由參數。
 * 以其配置呈現指定的元件，包括任何 [進一步的嵌套](xref:blazor/layouts)版面配置。
 
-選擇性地 <xref:Microsoft.AspNetCore.Components.RouteView.DefaultLayout> 針對未使用指示詞指定配置的元件，使用配置類別來指定[ `@layout` ](xref:blazor/layouts#specify-a-layout-in-a-component)參數。 架構的 Blazor 專案範本會將 `MainLayout` 元件 (`Shared/MainLayout.razor`) 指定為應用程式的預設版面配置。 如需版面配置的詳細資訊，請參閱 <xref:blazor/layouts> 。
+選擇性地 <xref:Microsoft.AspNetCore.Components.RouteView.DefaultLayout> 針對未使用指示詞指定配置的元件，使用配置類別來指定[ `@layout` ](xref:blazor/layouts#apply-a-layout-to-a-component)參數。 架構的[ Blazor 專案範本](xref:blazor/project-structure)會將 `MainLayout` 元件 (`Shared/MainLayout.razor`) 指定為應用程式的預設版面配置。 如需版面配置的詳細資訊，請參閱 <xref:blazor/layouts> 。
 
 元件支援使用多個指示詞[ `@page` 的多個路由](xref:mvc/views/razor#page)範本。 下列範例元件會載入和的要求 `/BlazorRoute` `/DifferentBlazorRoute` 。
 
@@ -102,7 +102,7 @@ ms.locfileid: "100279881"
 
 ::: moniker-end
 
-以標記的內容支援任意專案 `<NotFound>` ，例如其他互動式元件。 若要將預設版面配置套用至 <xref:Microsoft.AspNetCore.Components.Routing.Router.NotFound> 內容，請參閱 <xref:blazor/layouts#default-layout> 。
+以標記的內容支援任意專案 `<NotFound>` ，例如其他互動式元件。 若要將預設版面配置套用至 <xref:Microsoft.AspNetCore.Components.Routing.Router.NotFound> 內容，請參閱 <xref:blazor/layouts#apply-a-layout-to-arbitrary-content-layoutview-component> 。
 
 ## <a name="route-to-components-from-multiple-assemblies"></a>從多個元件路由至元件
 
@@ -198,14 +198,14 @@ protected override void OnParametersSet()
 
 | 條件約束 | 範例           | 範例相符項目                                                                  | 非變異值<br>culture<br>比對 |
 | ---------- | ----------------- | -------------------------------------------------------------------------------- | :------------------------------: |
-| `bool`     | `{active:bool}`   | `true`, `FALSE`                                                                  | No                               |
-| `datetime` | `{dob:datetime}`  | `2016-12-31`, `2016-12-31 7:32pm`                                                | Yes                              |
-| `decimal`  | `{price:decimal}` | `49.99`, `-1,000.01`                                                             | Yes                              |
-| `double`   | `{weight:double}` | `1.234`, `-1,001.01e8`                                                           | Yes                              |
-| `float`    | `{weight:float}`  | `1.234`, `-1,001.01e8`                                                           | Yes                              |
-| `guid`     | `{id:guid}`       | `CD2C1638-1638-72D5-1638-DEADBEEF1638`, `{CD2C1638-1638-72D5-1638-DEADBEEF1638}` | No                               |
-| `int`      | `{id:int}`        | `123456789`, `-123456789`                                                        | Yes                              |
-| `long`     | `{ticks:long}`    | `123456789`, `-123456789`                                                        | Yes                              |
+| `bool`     | `{active:bool}`   | `true`, `FALSE`                                                                  | 否                               |
+| `datetime` | `{dob:datetime}`  | `2016-12-31`, `2016-12-31 7:32pm`                                                | 是                              |
+| `decimal`  | `{price:decimal}` | `49.99`, `-1,000.01`                                                             | 是                              |
+| `double`   | `{weight:double}` | `1.234`, `-1,001.01e8`                                                           | 是                              |
+| `float`    | `{weight:float}`  | `1.234`, `-1,001.01e8`                                                           | 是                              |
+| `guid`     | `{id:guid}`       | `CD2C1638-1638-72D5-1638-DEADBEEF1638`, `{CD2C1638-1638-72D5-1638-DEADBEEF1638}` | 否                               |
+| `int`      | `{id:int}`        | `123456789`, `-123456789`                                                        | 是                              |
+| `long`     | `{ticks:long}`    | `123456789`, `-123456789`                                                        | 是                              |
 
 > [!WARNING]
 > 確認 URL 可以轉換成 CLR 類型的路由條件約束 (例如 `int` 或 <xref:System.DateTime>) 一律使用不因國別而異的文化特性。 這些條件約束假設 URL 不可當地語系化。
@@ -230,7 +230,7 @@ protected override void OnParametersSet()
 
 ::: moniker-end
 
-若要允許 *`Server`* 託管解決方案的應用程式 Blazor WebAssembly 使用 route 參數中的點來路由傳送要求 `param` ，請在中新增具有選擇性參數的回溯檔案路由範本 `Startup.Configure` 。
+若要允許 **`Server`** 託管解決方案的應用程式 Blazor WebAssembly 使用 route 參數中的點來路由傳送要求 `param` ，請在中新增具有選擇性參數的回溯檔案路由範本 `Startup.Configure` 。
 
 `Startup.cs`:
 
@@ -272,7 +272,7 @@ Catch-all 路由參數為：
 
 ::: moniker range="< aspnetcore-5.0"
 
-ASP.NET Core 5.0 或更新版本中支援 Catch-all 路由參數。 如需詳細資訊，請選取此文章的5.0 版本。
+ASP.NET Core 5.0 或更新版本支援攔截所有路由參數。 如需詳細資訊，請選取此文章的5.0 版本。
 
 ::: moniker-end
 
@@ -371,7 +371,7 @@ var query = new Uri(NavigationManager.Uri).Query;
 ::: moniker-end
 
 > [!NOTE]
-> `NavMenu`元件 (`NavMenu.razor`) 會提供在 `Shared` 專案範本所產生之應用程式的資料夾中 Blazor 。
+> `NavMenu`元件 (`NavMenu.razor`) 會提供在 `Shared` [ Blazor 專案範本](xref:blazor/project-structure)所產生之應用程式的資料夾中。
 
 有兩個 <xref:Microsoft.AspNetCore.Components.Routing.NavLinkMatch> 選項可供您指派給 `Match` 元素的屬性 `<NavLink>` ：
 
@@ -422,7 +422,7 @@ var query = new Uri(NavigationManager.Uri).Query;
 > }
 > ```
 
-## <a name="aspnet-core-endpoint-routing-integration"></a>ASP.NET Core 端點路由整合
+## <a name="aspnet-core-endpoint-routing-integration"></a>ASP.NET 核心端點路由整合
 
 *本節僅適用于 Blazor Server 應用程式。*
 

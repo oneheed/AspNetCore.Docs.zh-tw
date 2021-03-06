@@ -19,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/host-and-deploy/configure-linker
-ms.openlocfilehash: c720747983da4ef6997d95d77c3f5305cfd7d3c0
-ms.sourcegitcommit: 1166b0ff3828418559510c661e8240e5c5717bb7
+ms.openlocfilehash: af3c059e7192d6b0d2b0a902b6e3a6121fdf6709
+ms.sourcegitcommit: 1436bd4d70937d6ec3140da56d96caab33c4320b
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 02/12/2021
-ms.locfileid: "100279928"
+ms.lasthandoff: 03/06/2021
+ms.locfileid: "102395028"
 ---
 # <a name="configure-the-linker-for-aspnet-core-blazor"></a>設定 ASP.NET Core 的連結器 Blazor
 
@@ -91,7 +91,7 @@ Blazor WebAssembly 在組建期間執行 [中繼語言 (IL) ](/dotnet/standard/m
 </linker>
 ```
 
-如需詳細資訊和範例，請參閱 [ (mono/連結器 GitHub 存放庫) 的資料格式 ](https://github.com/mono/linker/blob/master/docs/data-formats.md)。
+如需詳細資訊和範例，請參閱 [ (mono/連結器 GitHub 存放庫) 的資料格式 ](https://github.com/mono/linker/blob/main/docs/data-formats.md)。
 
 ## <a name="add-an-xml-linker-configuration-file-to-a-library"></a>將 XML 連結器設定檔新增至程式庫
 

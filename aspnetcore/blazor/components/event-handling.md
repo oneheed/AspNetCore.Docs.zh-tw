@@ -1,5 +1,5 @@
 ---
-title: ASP.NET Core Blazor 事件處理
+title: ASP.NET 核心 Blazor 事件處理
 author: guardrex
 description: 瞭解 Blazor 的事件處理功能，包括事件引數類型、事件回呼，以及管理預設瀏覽器事件。
 monikerRange: '>= aspnetcore-3.1'
@@ -19,14 +19,14 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/components/event-handling
-ms.openlocfilehash: f6a93eb9d95182d29a60cc1a5c48122b9166aa84
-ms.sourcegitcommit: 1166b0ff3828418559510c661e8240e5c5717bb7
+ms.openlocfilehash: 4c574a630176010ab30006b53c42e5cad7f93a54
+ms.sourcegitcommit: 1436bd4d70937d6ec3140da56d96caab33c4320b
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 02/12/2021
-ms.locfileid: "100280145"
+ms.lasthandoff: 03/06/2021
+ms.locfileid: "102395184"
 ---
-# <a name="aspnet-core-blazor-event-handling"></a>ASP.NET Core Blazor 事件處理
+# <a name="aspnet-core-blazor-event-handling"></a>ASP.NET 核心 Blazor 事件處理
 
 Razor 元件提供事件處理功能。 針對名為 (的 HTML 元素屬性 [`@on{EVENT}`](xref:mvc/views/razor#onevent) ，例如， `@onclick`) 具有委派類型值的，元件會將 Razor 屬性的值視為事件處理常式。
 
@@ -128,7 +128,10 @@ private void ShowMessage(MouseEventArgs e)
 
 如需詳細資訊，請參閱下列資源：
 
-* [ `EventArgs` ASP.NET Core 參考來源 (dotnet/aspnetcore `master` 分支) 中的類別](https://github.com/dotnet/aspnetcore/tree/master/src/Components/Web/src/Web)。 在 `master` *下一個* ASP.NET Core 版本中，分支代表開發中的 API。 針對最新版本，請選取適當的 GitHub 存放庫分支 (例如 `release/3.1`) 。
+* [`EventArgs` ASP.NET Core 參考來源中的類別 (dotnet/aspnetcore `main` 分支) ](https://github.com/dotnet/aspnetcore/tree/main/src/Components/Web/src/Web)
+
+  [!INCLUDE[](~/blazor/includes/aspnetcore-repo-ref-source-links.md)]
+
 * [MDN web 檔： GlobalEventHandlers](https://developer.mozilla.org/docs/Web/API/GlobalEventHandlers)：包含哪些 HTML 元素支援每個 DOM 事件的資訊。
 
 ## <a name="lambda-expressions"></a>Lambda 運算式
@@ -174,7 +177,7 @@ private void ShowMessage(MouseEventArgs e)
 
 `ChildComponent`範例應用程式 (`Components/ChildComponent.razor`) 示範如何設定按鈕的 `onclick` 處理常式，以接收 <xref:Microsoft.AspNetCore.Components.EventCallback> 來自範例的委派 `ParentComponent` 。 的 <xref:Microsoft.AspNetCore.Components.EventCallback> 類型是 `MouseEventArgs` ，適用于來自周邊裝置的 `onclick` 事件：
 
-[!code-razor[](../common/samples/5.x/BlazorWebAssemblySample/Components/ChildComponent.razor?highlight=5-7,17-18)]
+[!code-razor[](~/blazor/common/samples/5.x/BlazorWebAssemblySample/Components/ChildComponent.razor?highlight=5-7,17-18)]
 
 會將 `ParentComponent` 子系的 <xref:Microsoft.AspNetCore.Components.EventCallback%601> (`OnClickCallback`) 設定為它的 `ShowMessage` 方法。
 

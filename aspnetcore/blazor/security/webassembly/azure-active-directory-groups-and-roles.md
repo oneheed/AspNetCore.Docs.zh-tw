@@ -19,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/security/webassembly/aad-groups-roles
-ms.openlocfilehash: c180580ec56313e444f2daf2b7d08c4d909b498a
-ms.sourcegitcommit: 1166b0ff3828418559510c661e8240e5c5717bb7
+ms.openlocfilehash: b725a60a310be23f7ceb626d4c543d0df6fadf62
+ms.sourcegitcommit: 1436bd4d70937d6ec3140da56d96caab33c4320b
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 02/12/2021
-ms.locfileid: "100280528"
+ms.lasthandoff: 03/06/2021
+ms.locfileid: "102394755"
 ---
 # <a name="azure-active-directory-aad-groups-administrator-roles-and-app-roles"></a>Azure Active Directory (AAD) 群組、系統管理員角色和應用程式角色
 
@@ -46,23 +46,23 @@ Azure Active Directory (AAD) 提供數個可結合的授權方法 ASP.NET Core I
 
 本文的指導方針提供用戶端和伺服器應用程式的指示：
 
-* **用戶端**：獨立 Blazor WebAssembly 應用程式或 *`Client`* 託管解決方案的應用程式 Blazor 。
-* **伺服器**：獨立 ASP.NET CORE server api/web api 應用程式或 *`Server`* 託管解決方案的應用程式 Blazor 。
+* **用戶端**：獨立 Blazor WebAssembly 應用程式或 **`Client`** 託管解決方案的應用程式 Blazor 。
+* **伺服器**：獨立 ASP.NET 核心伺服器 API/web API 應用程式或 **`Server`** 託管解決方案的應用程式 Blazor 。
 
 ## <a name="scopes"></a>範圍
 
-若要允許使用者設定檔、角色指派和群組成員資格資料的 [MICROSOFT GRAPH API](/graph/use-the-api) 呼叫， **用戶端** 會使用 `https://graph.microsoft.com/User.Read` (中的 () [圖形 API 許可權) 範圍](/graph/permissions-reference) 進行設定。
+若要允許使用者設定檔、角色指派和群組成員資格資料的 [Microsoft GRAPH api](/graph/use-the-api) 呼叫， **用戶端** 會使用 `https://graph.microsoft.com/User.Read` Azure 入口網站中) 的 () [Graph api 許可權 (範圍](/graph/permissions-reference) 進行設定。
 
-針對角色和群組成員資格資料呼叫圖形 API 的 **伺服器** 應用程式， `GroupMember.Read.All` (`https://graph.microsoft.com/GroupMember.Read.All`) [圖形 API](/graph/permissions-reference) () 範圍 Azure 入口網站範圍中提供的許可權。
+針對角色和群組成員資格資料呼叫圖形 API 的 **伺服器** 應用程式， `GroupMember.Read.All` 會 `https://graph.microsoft.com/GroupMember.Read.All` 在 Azure 入口網站中 () [Graph api 許可權 (範圍)](/graph/permissions-reference) 提供。
 
 除了本文第一節所列的主題所述的 AAD 部署案例中所需的範圍之外，還需要這些範圍。
 
 > [!NOTE]
-> 「許可權」和「範圍」兩字都是在 Azure 入口網站以及各種 Microsoft 和外部檔集中交替使用。 本文使用「範圍」一字，在 Azure 入口網站中指派給應用程式的許可權。
+> 「許可權」和「範圍」等單字可在 Azure 入口網站中與各種 Microsoft 和外部檔集中交替使用。 本文針對在 Azure 入口網站中指派給應用程式的許可權，使用「範圍」一字。
 
 ## <a name="group-membership-claims-attribute"></a>群組成員資格宣告屬性
 
-在 **用戶端** 和 **伺服器** 應用程式之 Azure 入口網站的應用程式資訊清單中，將 [ `groupMembershipClaims` 屬性](/azure/active-directory/develop/reference-app-manifest#groupmembershipclaims-attribute)設定為 `All` 。 的值 `All` 會取得已登入使用者所屬的所有安全性群組、通訊群組和角色。
+在適用于 **用戶端** 和 **伺服器** 應用程式的 Azure 入口網站中，于應用程式的資訊清單中，將 [ `groupMembershipClaims` 屬性](/azure/active-directory/develop/reference-app-manifest#groupmembershipclaims-attribute)設定為 `All` 。 的值 `All` 會取得已登入使用者所屬的所有安全性群組、通訊群組和角色。
 
 1. 開啟應用程式的 Azure 入口網站註冊。
 1. 選取提要欄位中的 [**管理**  >  **資訊清單**]。
@@ -365,7 +365,7 @@ public class BillingDataController : ControllerBase
 
 ## <a name="app-roles"></a>應用程式角色
 
-若要在 Azure 入口網站中設定應用程式以提供應用程式角色成員資格宣告，請參閱 [如何：在應用程式中新增應用程式角色，並在 Azure 檔中的權杖中接收這些角色](/azure/active-directory/develop/howto-add-app-roles-in-azure-ad-apps) 。
+若要在 Azure 入口網站中設定應用程式以提供應用程式角色成員資格宣告，請參閱 [如何：在應用程式中新增應用程式角色，並在 azure 檔中的權杖中接收這些角色](/azure/active-directory/develop/howto-add-app-roles-in-azure-ad-apps) 。
 
 下列範例假設 **用戶端** 和 **伺服器** 應用程式都是以兩個角色設定，而角色則指派給測試使用者：
 
@@ -373,7 +373,7 @@ public class BillingDataController : ControllerBase
 * `developer`
 
 > [!NOTE]
-> 開發託管 Blazor WebAssembly 應用程式或獨立應用程式的用戶端-伺服器組 (獨立 Blazor WebAssembly 應用程式和獨立 ASP.NET CORE server api/web api 應用程式) 時， `appRoles` 用戶端和伺服器 Azure 入口網站應用程式註冊的資訊清單屬性都必須包含相同設定的角色。 在用戶端應用程式的資訊清單中建立角色之後，請將它們完整複製到伺服器應用程式的資訊清單。 如果您未在 `appRoles` 用戶端與伺服器應用程式註冊之間建立資訊清單的鏡像，則不會針對伺服器 api/WEB API 的已驗證使用者建立角色宣告，即使其存取權杖具有正確的角色宣告也一樣。
+> 在開發託管 Blazor WebAssembly 應用程式或獨立應用程式的用戶端-伺服器組 (獨立 Blazor WebAssembly 應用程式和獨立的 ASP.NET CORE server api/web api 應用程式) 中， `appRoles` 用戶端和伺服器 Azure 入口網站應用程式註冊的資訊清單屬性必須包含相同設定的角色。 在用戶端應用程式的資訊清單中建立角色之後，請將它們完整複製到伺服器應用程式的資訊清單。 如果您未在 `appRoles` 用戶端與伺服器應用程式註冊之間建立資訊清單的鏡像，則不會針對伺服器 api/WEB API 的已驗證使用者建立角色宣告，即使其存取權杖具有正確的角色宣告也一樣。
 
 > [!NOTE]
 > 雖然您無法將角色指派給沒有 Azure AD Premium 帳戶的群組，但您可以將角色指派給使用者，並為具有標準 Azure 帳戶的使用者接收角色宣告。 本節中的指導方針不需要 AAD Premium 帳戶。

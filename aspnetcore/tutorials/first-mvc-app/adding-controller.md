@@ -18,12 +18,12 @@ no-loc:
 - SignalR
 uid: tutorials/first-mvc-app/adding-controller
 ms.custom: contperf-fy21q3
-ms.openlocfilehash: 1a13fe31859b9ed41edc746ba450f552bc07f344
-ms.sourcegitcommit: a1db01b4d3bd8c57d7a9c94ce122a6db68002d66
+ms.openlocfilehash: 4afee8c09a3eb1030bf68e7591e1686b18d5f7e9
+ms.sourcegitcommit: 1436bd4d70937d6ec3140da56d96caab33c4320b
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 03/04/2021
-ms.locfileid: "102110205"
+ms.lasthandoff: 03/06/2021
+ms.locfileid: "102394443"
 ---
 # <a name="part-2-add-a-controller-to-an-aspnet-core-mvc-app"></a>第2部分：將控制器新增至 ASP.NET Core MVC 應用程式
 
@@ -166,7 +166,7 @@ MVC 會根據傳入的 URL，叫用控制器類別以及它們內的動作方法
 
 * 第三個 URL 區段符合路由參數 `id` 。 
 * `Welcome` 方法包含符合 `MapControllerRoute` 方法中 URL 範本的 `id` 參數。
-* 結尾的 `?` (在 `id?` 中) 表示 `id` 是選擇性參數。
+* 尾端會 `?` 開始 [查詢字串](https://wikipedia.org/wiki/Query_string)。
 
 [!code-csharp[](~/tutorials/first-mvc-app/start-mvc/sample/MvcMovie5/Startup.cs?name=snippet_route&highlight=5)]
 

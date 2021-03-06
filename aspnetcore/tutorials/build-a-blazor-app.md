@@ -19,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: tutorials/build-a-blazor-app
-ms.openlocfilehash: d984023a1c46c5383d47a1634c54e61747b83d60
-ms.sourcegitcommit: 422e8444b9f5cedc373be5efe8032822db54fcaf
+ms.openlocfilehash: 260d921316d6fadecbd42db11048593b19a5ddee
+ms.sourcegitcommit: 1436bd4d70937d6ec3140da56d96caab33c4320b
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 02/18/2021
-ms.locfileid: "101101206"
+ms.lasthandoff: 03/06/2021
+ms.locfileid: "102394430"
 ---
 # <a name="build-a-blazor-todo-list-app"></a>建立 Blazor 待辦事項清單應用程式
 
@@ -138,10 +138,10 @@ ms.locfileid: "101101206"
    ::: moniker-end
 
    > [!NOTE]
-   > 如果使用 Visual Studio 建立檔案 `ToDoItem.cs` 和 `ToDoItem` 類別，請使用下列其中一種方法：
+   > 如果使用 Visual Studio 建立檔案 `TodoItem.cs` 和 `TodoItem` 類別，請使用下列其中一種方法：
    >
    > * 移除 Visual Studio 為類別產生的命名空間。
-   > * 使用上述程式碼區塊中的 [ **複製** ] 按鈕，並取代 Visual Studio 產生之檔案的整個內容。
+   > * 使用上述程式碼區塊中的 [ **複製** ] 按鈕，取代 Visual Studio 所產生之檔案的整個內容。
 
 1. 返回 `Todo` 元件，並執行下列工作：
 

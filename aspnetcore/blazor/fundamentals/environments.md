@@ -1,5 +1,5 @@
 ---
-title: ASP.NET Core Blazor 環境
+title: ASP.NET 核心 Blazor 環境
 author: guardrex
 description: 瞭解中的環境 Blazor ，包括如何設定 Blazor WebAssembly 應用程式的環境。
 monikerRange: '>= aspnetcore-3.1'
@@ -19,21 +19,21 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/fundamentals/environments
-ms.openlocfilehash: a5ead59e467da331b585e8daefb1d7d259c7edba
-ms.sourcegitcommit: 422e8444b9f5cedc373be5efe8032822db54fcaf
+ms.openlocfilehash: 86484fe2e2ce8e20e397a78f118d8b1bbe0cc88a
+ms.sourcegitcommit: 1436bd4d70937d6ec3140da56d96caab33c4320b
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 02/18/2021
-ms.locfileid: "101101044"
+ms.lasthandoff: 03/06/2021
+ms.locfileid: "102395106"
 ---
-# <a name="aspnet-core-blazor-environments"></a>ASP.NET Core Blazor 環境
+# <a name="aspnet-core-blazor-environments"></a>ASP.NET 核心 Blazor 環境
 
 > [!NOTE]
 > 本主題適用于 Blazor WebAssembly 。 如需有關 ASP.NET Core 應用程式設定的一般指引，以說明應用程式的使用方法 Blazor Server ，請參閱 <xref:fundamentals/environments> 。
 
 在本機執行應用程式時，環境會預設為開發環境。 當應用程式發佈時，環境會預設為生產環境。
 
-裝載解決方案的用戶端 Blazor 應用程式 (*`Client`*) 會透過將 Blazor WebAssembly *`Server`* 環境傳達給瀏覽器的中介軟體，從解決方案的應用程式決定環境。 *`Server`* 應用程式會新增名為的標頭， `blazor-environment` 並以環境作為標頭的值。 *`Client`* 應用程式會讀取標頭。 *`Server`* 解決方案的應用程式是 ASP.NET Core 的應用程式，因此您可以在中找到有關如何設定環境的詳細資訊 <xref:fundamentals/environments> 。
+裝載解決方案的用戶端 Blazor 應用程式 (**`Client`**) 會透過將 Blazor WebAssembly **`Server`** 環境傳達給瀏覽器的中介軟體，從解決方案的應用程式決定環境。 **`Server`** 應用程式會新增名為的標頭， `blazor-environment` 並以環境作為標頭的值。 **`Client`** 應用程式會讀取標頭。 **`Server`** 解決方案的應用程式是 ASP.NET Core 應用程式，因此您可以在中找到有關如何設定環境的詳細資訊 <xref:fundamentals/environments> 。
 
 針對在本機執行的獨立 Blazor WebAssembly 應用程式，程式開發伺服器會新增 `blazor-environment` 標頭以指定開發環境。 若要指定其他裝載環境的環境，請新增 `blazor-environment` 標頭。
 

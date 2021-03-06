@@ -19,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/progressive-web-app
-ms.openlocfilehash: 515da543fc6b6cca0b90968b154d91b611ea3345
-ms.sourcegitcommit: 1166b0ff3828418559510c661e8240e5c5717bb7
+ms.openlocfilehash: 9e7063297e124aabbdf1defd01ac90f735ef5321
+ms.sourcegitcommit: 1436bd4d70937d6ec3140da56d96caab33c4320b
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 02/12/2021
-ms.locfileid: "100280552"
+ms.lasthandoff: 03/06/2021
+ms.locfileid: "102395002"
 ---
 # <a name="build-progressive-web-applications-with-aspnet-core-blazor-webassembly"></a>使用 ASP.NET Core 建立漸進式 Web 應用程式 Blazor WebAssembly
 
@@ -47,7 +47,7 @@ ms.locfileid: "100280552"
 
 在 [**建立新專案**] 對話方塊中建立新的 **Blazor WebAssembly 應用** 程式時，選取 [**漸進式 Web 應用程式**] 核取方塊：
 
-![在 Visual Studio [新增專案] 對話方塊中，已選取 [漸進式 Web 應用程式] 核取方塊。](progressive-web-app/_static/image1.png)
+![Visual Studio [新增專案] 對話方塊中的 [漸進式 Web 應用程式] 核取方塊已選取。](progressive-web-app/_static/image1.png)
 
 <!--
 
@@ -67,7 +67,7 @@ dotnet new blazorwasm -o MyBlazorPwa --pwa
 
 ---
 
-（選擇性）您可以針對從 ASP.NET Core 裝載的範本建立的應用程式設定 PWA。 PWA 案例與裝載模型無關。
+（選擇性）您可以針對從 ASP.NET Core 裝載範本建立的應用程式設定 PWA。 PWA 案例與裝載模型無關。
 
 ## <a name="convert-an-existing-blazor-webassembly-app-into-a-pwa"></a>將現有的 Blazor WebAssembly 應用程式轉換為 PWA
 
@@ -104,15 +104,17 @@ Blazor WebAssembly遵循本節中的指導方針，將現有的應用程式轉�
   
   在上述命令中，選項會為 `-o|--output` 應用程式建立名為的新資料夾 `MyBlazorPwa` 。
   
-  如果您未將應用程式轉換為最新版本，請傳遞 `-f|--framework` 選項。 下列範例會建立適用于 ASP.NET Core 3.1 版的應用程式：
+  **如果您未將應用程式轉換為最新版本**，請傳遞 `-f|--framework` 選項。 下列範例會建立適用于 ASP.NET Core 3.1 版的應用程式：
   
   ```dotnetcli
   dotnet new blazorwasm -o MyBlazorPwa --pwa -f netcoreapp3.1
   ```
 
-* 流覽至位於下列 URL 的 ASP.NET Core GitHub 存放庫，其連結至5.0 版本參考來源和資產。 如果您未轉換5.0 版的應用程式，請從適用于您應用程式的 [ **切換分支或標記** ] 下拉式清單中，選取您正在使用的版本。
+* 流覽至位於下列 URL 的 ASP.NET Core GitHub 存放庫，其連結至 `main` 分支參考來源和資產。 從適用于您應用程式的 [ **切換分支或標記** ] 下拉式清單中，選取您要使用的版本。
 
-  [dotnet/aspnetcore (版本 5.0) Blazor WebAssembly 專案範本 `wwwroot` 資料夾](https://github.com/dotnet/aspnetcore/tree/release/5.0/src/ProjectTemplates/Web.ProjectTemplates/content/ComponentsWebAssembly-CSharp/Client/wwwroot)
+  [Blazor WebAssembly 專案範本 `wwwroot` 資料夾 (dotnet/Aspnetcore GitHub 存放庫 `main` 分支) ](https://github.com/dotnet/aspnetcore/tree/main/src/ProjectTemplates/Web.ProjectTemplates/content/ComponentsWebAssembly-CSharp/Client/wwwroot)
+
+  [!INCLUDE[](~/blazor/includes/aspnetcore-repo-ref-source-links.md)]
 
 ::: moniker-end
 
@@ -126,14 +128,16 @@ Blazor WebAssembly遵循本節中的指導方針，將現有的應用程式轉�
   
   在上述命令中，選項會為 `-o|--output` 應用程式建立名為的新資料夾 `MyBlazorPwa` 。
 
-* 流覽至位於下列 URL 的 ASP.NET Core GitHub 存放庫，其連結至3.1 版本參考來源和資產：
+* 流覽至下列 URL 的 ASP.NET Core GitHub 存放庫，其連結至3.1 版本參考來源和資產：
 
-  [dotnet/aspnetcore (版本 3.1) Blazor WebAssembly 專案範本 `wwwroot` 資料夾](https://github.com/dotnet/aspnetcore/tree/release/3.1/src/ProjectTemplates/ComponentsWebAssembly.ProjectTemplates/content/ComponentsWebAssembly-CSharp/Client/wwwroot)
+  [Blazor WebAssembly 專案範本 `wwwroot` 資料夾 (dotnet/Aspnetcore GitHub 存放庫 `release 3.1` 分支) ](https://github.com/dotnet/aspnetcore/tree/release/3.1/src/ProjectTemplates/ComponentsWebAssembly.ProjectTemplates/content/ComponentsWebAssembly-CSharp/Client/wwwroot)
 
   > [!NOTE]
-  > 專案範本的 URL 會在 Blazor WebAssembly 發行 ASP.NET Core 3.1 之後變更。 您可以從下列 URL 取得5.0 或更新版本的參考資產：
+  > 專案範本的 URL 會在 Blazor WebAssembly 發行 ASP.NET Core 3.1 之後變更。 任何版本的參考資產都可從 ASP.NET 核心參考來源取得。 從適用于您應用程式的 [ **切換分支或標記** ] 下拉式清單中，選取您要使用的版本。
   >
-  > [dotnet/aspnetcore (版本 5.0) Blazor WebAssembly 專案範本 `wwwroot` 資料夾](https://github.com/dotnet/aspnetcore/tree/release/5.0/src/ProjectTemplates/Web.ProjectTemplates/content/ComponentsWebAssembly-CSharp/Client/wwwroot)
+  > [Blazor WebAssembly 專案範本 `wwwroot` 資料夾 (dotnet/Aspnetcore GitHub 存放庫 `main` 分支) ](https://github.com/dotnet/aspnetcore/tree/main/src/ProjectTemplates/Web.ProjectTemplates/content/ComponentsWebAssembly-CSharp/Client/wwwroot)
+  >
+  > [!INCLUDE[](~/blazor/includes/aspnetcore-repo-ref-source-links.md)]
 
 ::: moniker-end
 
@@ -320,7 +324,7 @@ const shouldServeIndexHtml = event.request.mode === 'navigate'
 
 Pwa 與其他任何 PWA 一樣， Blazor WebAssembly 都可以接收來自後端伺服器的推播通知。 即使使用者未主動使用應用程式，伺服器也可以隨時傳送推播通知。 例如，您可以在不同的使用者執行相關動作時傳送推播通知。
 
-傳送推播通知的機制完全獨立于 Blazor WebAssembly ，因為它是由可以使用任何技術的後端伺服器所執行。 如果您想要從 ASP.NET Core 伺服器傳送推播通知，請考慮 [使用類似于「進比薩」研討會所採用的方法](https://github.com/dotnet-presentations/blazor-workshop/blob/master/docs/09-progressive-web-app.md#sending-push-notifications)。
+傳送推播通知的機制完全獨立于 Blazor WebAssembly ，因為它是由可以使用任何技術的後端伺服器所執行。 如果您想要從 ASP.NET 核心伺服器傳送推播通知，請考慮 [使用類似于「進比薩」研討會所採用的方法](https://github.com/dotnet-presentations/blazor-workshop/blob/master/docs/09-progressive-web-app.md#sending-push-notifications)。
 
 在用戶端上接收和顯示推播通知的機制也是獨立的 Blazor WebAssembly ，因為它是在服務工作者 JavaScript 檔案中執行。 如需範例，請參閱適用 [于「中比薩」研討會的方法](https://github.com/dotnet-presentations/blazor-workshop/blob/master/docs/09-progressive-web-app.md#displaying-notifications)。
 

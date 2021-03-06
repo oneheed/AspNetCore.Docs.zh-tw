@@ -1,5 +1,5 @@
 ---
-title: ASP.NET Core Blazor 驗證與授權
+title: ASP.NET 核心 Blazor 驗證與授權
 author: guardrex
 description: 瞭解 Blazor 驗證與授權案例。
 monikerRange: '>= aspnetcore-3.1'
@@ -19,14 +19,14 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/security/index
-ms.openlocfilehash: 9a14a8e16d8e50b47c479cf4d973459fbf61cec7
-ms.sourcegitcommit: 1166b0ff3828418559510c661e8240e5c5717bb7
+ms.openlocfilehash: a840e5d54d48441e10c2a58af591a530c8fd7de9
+ms.sourcegitcommit: 1436bd4d70937d6ec3140da56d96caab33c4320b
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 02/12/2021
-ms.locfileid: "100280370"
+ms.lasthandoff: 03/06/2021
+ms.locfileid: "102394885"
 ---
-# <a name="aspnet-core-blazor-authentication-and-authorization"></a>ASP.NET Core Blazor 驗證與授權
+# <a name="aspnet-core-blazor-authentication-and-authorization"></a>ASP.NET 核心 Blazor 驗證與授權
 
 ASP.NET Core 支援在應用程式中設定和管理安全性 Blazor 。
 
@@ -44,7 +44,7 @@ Blazor WebAssembly 應用程式會在用戶端上執行。 授權「僅」會被
 
 ## <a name="authentication"></a>驗證
 
-Blazor 使用現有的 ASP.NET Core 驗證機制來建立使用者的身分識別。 確切的機制取決於應用程式的裝載方式 Blazor Blazor WebAssembly 或 Blazor Server 。
+Blazor 使用現有的 ASP.NET 核心驗證機制來建立使用者的身分識別。 確切的機制取決於應用程式的裝載方式 Blazor Blazor WebAssembly 或 Blazor Server 。
 
 ### <a name="blazor-webassembly-authentication"></a>Blazor WebAssembly 驗證
 
@@ -63,7 +63,7 @@ Blazor 使用現有的 ASP.NET Core 驗證機制來建立使用者的身分識�
 
 Blazor Server 應用程式會透過使用建立的即時連接來運作 SignalR 。 建立連線時，會處理[以 SignalR 應用程式為基礎的驗證](xref:signalr/authn-and-authz)。 驗證可以根據 cookie 或其他某些持有人權杖。
 
-<xref:Microsoft.AspNetCore.Components.Authorization.AuthenticationStateProvider>適用于應用程式的內建服務會 Blazor Server 從 ASP.NET Core 取得驗證狀態資料 `HttpContext.User` 。 這是驗證狀態與現有 ASP.NET Core 驗證機制的整合方式。
+<xref:Microsoft.AspNetCore.Components.Authorization.AuthenticationStateProvider>適用于應用程式的內建服務會 Blazor Server 從 ASP.NET Core 取得驗證狀態資料 `HttpContext.User` 。 這是驗證狀態與現有 ASP.NET Core 驗證機制整合的方式。
 
 如需建立應用程式和設定的詳細資訊，請參閱 <xref:blazor/security/server/index> 。
 
@@ -251,7 +251,7 @@ builder.Services.AddAuthorizationCore();
 * 使用者具有「宣告」。
 * 已滿足某個「原則」。
 
-這些概念與 ASP.NET Core MVC 或 Pages 應用程式中的每個概念相同 Razor 。 如需 ASP.NET Core 安全性的詳細資訊，請參閱[ASP.NET Core 安全性和 Identity ](xref:security/index)的相關文章。
+這些概念與 ASP.NET Core MVC 或 Pages 應用程式中的每個概念相同 Razor 。 如需有關 ASP.NET Core 安全性的詳細資訊，請參閱[ASP.NET Core 安全性和 Identity ](xref:security/index)的文章。
 
 ## <a name="authorizeview-component"></a>AuthorizeView 元件
 
@@ -299,7 +299,7 @@ builder.Services.AddAuthorizationCore();
 
 元件 <xref:Microsoft.AspNetCore.Components.Authorization.AuthorizeView> 可以用在 `NavMenu` 元件 (`Shared/NavMenu.razor`) ，以 (`<li>...</li>`) 為[ `NavLink` 元件](xref:blazor/fundamentals/routing#navlink-and-navmenu-components) () 顯示清單專案 <xref:Microsoft.AspNetCore.Components.Routing.NavLink> ，但請注意，此方法只會從轉譯的輸出中移除清單專案。 它不會防止使用者流覽至元件。
 
-從 Blazor 包含驗證的專案範本建立的應用程式會使用 `LoginDisplay` 相依于元件的元件 `AuthorizeView` 。 `AuthorizeView`元件會選擇性地向使用者顯示 Identity 相關工作的內容。 下列範例是來自 Blazor WebAssembly 專案範本。
+從包含驗證的[ Blazor 專案範本](xref:blazor/project-structure)建立的應用程式會使用 `LoginDisplay` 相依于元件的元件 `AuthorizeView` 。 `AuthorizeView`元件會選擇性地向使用者顯示 Identity 相關工作的內容。 下列範例是來自[ Blazor WebAssembly 專案範本](xref:blazor/project-structure)。
 
 `Shared/LoginDisplay.razor`:
 
@@ -329,7 +329,7 @@ builder.Services.AddAuthorizationCore();
 }
 ```
 
-下列範例是來自 Blazor Server 專案範本，並使用 ASP.NET Core Identity `Identity` 應用程式區域中的端點來處理 Identity 相關的工作。
+下列範例是來自[ Blazor Server 專案範本](xref:blazor/project-structure)，並使用 ASP.NET Core Identity `Identity` 應用程式區域中的端點來處理 Identity 相關的工作。
 
 `Shared/LoginDisplay.razor`:
 
@@ -442,7 +442,7 @@ You can only see this if you're signed in.
 * 非同步授權正在進行中，這通常表示正在驗證使用者的程式正在進行中。 元素的標記隨即 [`<Authorizing>`](xref:Microsoft.AspNetCore.Components.Authorization.AuthorizeRouteView.Authorizing?displayProperty=nameWithType) 顯示。
 * 找不到內容。 元素的標記隨即 [`<NotFound>`](xref:Microsoft.AspNetCore.Components.Routing.Router.NotFound?displayProperty=nameWithType) 顯示。
 
-在預設 Blazor Server 專案範本中， `App`) 的元件 (會 `App.razor` 示範如何設定自訂內容：
+在預設[ Blazor Server 專案範本](xref:blazor/project-structure)中， `App`) 的元件 (會 `App.razor` 示範如何設定自訂內容：
 
 ```razor
 <CascadingAuthenticationState>

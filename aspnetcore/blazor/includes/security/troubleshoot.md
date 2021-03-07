@@ -11,12 +11,12 @@ no-loc:
 - Let's Encrypt
 - Razor
 - SignalR
-ms.openlocfilehash: eefd16dca126c9bce1efa2cdc90d4201bac09b91
-ms.sourcegitcommit: 3982ff9dabb5b12aeb0a61cde2686b5253364f5d
+ms.openlocfilehash: f58da78475d65cbb70b0b177e1b0443535e97d55
+ms.sourcegitcommit: 1436bd4d70937d6ec3140da56d96caab33c4320b
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 03/04/2021
-ms.locfileid: "102193604"
+ms.lasthandoff: 03/06/2021
+ms.locfileid: "102402301"
 ---
 ## <a name="troubleshoot"></a>疑難排解
 
@@ -29,6 +29,7 @@ ms.locfileid: "102193604"
   * 視案例的需求而定，遺失或不正確的授權單位、實例、租使用者識別碼、租使用者網域、用戶端識別碼或重新導向 URI 會防止應用程式驗證用戶端。
   * 不正確的存取權杖範圍會防止用戶端存取伺服器 web API 端點。
   * 不正確或遺失的伺服器 API 許可權會防止用戶端存取伺服器 web API 端點。
+  * 在與提供者應用程式註冊的重新導向 URI 中設定的不同埠上執行應用程式 Identity 。
   
   本文指導方針的設定章節會顯示正確設定的範例。 請仔細檢查文章的每一節，尋找應用程式和 IP 設定錯誤。
   
@@ -112,7 +113,7 @@ Cookie和網站資料可以跨應用程式更新保存，並干擾測試和疑�
 
 ### <a name="run-the-server-app"></a>執行伺服器應用程式
 
-測試及疑難排解託管 Blazor 應用程式時，請確定您是從專案執行應用程式 **`Server`** 。 例如，在 Visual Studio 中，使用下列任何方法來啟動應用程式之前，請先確認已在 [ **方案 Explorer** ] 中反白顯示伺服器專案：
+測試及疑難排解託管解決方案時 Blazor ，請確定您是從專案執行應用程式 **`Server`** 。 例如，在 Visual Studio 中，使用下列任何方法來啟動應用程式之前，請先確認已在 [ **方案 Explorer** ] 中反白顯示伺服器專案：
 
 * 選取 [執行] 按鈕。
 * 從功能表使用 **Debug**  >  **開始調試**。

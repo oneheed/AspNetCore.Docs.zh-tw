@@ -19,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: fundamentals/configuration/platform-specific-configuration
-ms.openlocfilehash: c12487875db69472ee328dfc7a611ee99974c770
-ms.sourcegitcommit: 3593c4efa707edeaaceffbfa544f99f41fc62535
+ms.openlocfilehash: b39215a70f990afeb7d3fe0a62981113b154354e
+ms.sourcegitcommit: 54fe1ae5e7d068e27376d562183ef9ddc7afc432
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 01/04/2021
-ms.locfileid: "93061050"
+ms.lasthandoff: 03/10/2021
+ms.locfileid: "102588239"
 ---
 # <a name="use-hosting-startup-assemblies-in-aspnet-core"></a>在 ASP.NET Core 中使用裝載啟動組件
 
@@ -34,7 +34,7 @@ ms.locfileid: "93061050"
 
 <xref:Microsoft.AspNetCore.Hosting.IHostingStartup>裝載啟動) 執行的 (，會在啟動時從外部元件新增應用程式的增強功能。 例如，外部程式庫可以使用裝載啟動實作，向應用程式提供額外的組態提供者或服務。
 
-[查看或下載範例程式碼](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/host/platform-specific-configuration/samples/) ([如何下載](xref:index#how-to-download-a-sample)) 
+[查看或下載範例程式碼](https://github.com/dotnet/AspNetCore.Docs/tree/main/aspnetcore/fundamentals/host/platform-specific-configuration/samples/) ([如何下載](xref:index#how-to-download-a-sample)) 
 
 ## <a name="hostingstartup-attribute"></a>HostingStartup 屬性
 
@@ -95,7 +95,7 @@ ms.locfileid: "93061050"
 
 使用主機設定或環境變數停用裝載啟動組件會停用全域的組件，並且可能會停用數項應用程式特性。
 
-## <a name="project"></a>專案
+## <a name="project"></a>Project
 
 以下列兩種專案類型的任一類型建立裝載啟動：
 
@@ -106,7 +106,7 @@ ms.locfileid: "93061050"
 
 類別庫可以提供裝載啟動的增強功能。 此程式庫包含 `HostingStartup` 屬性。
 
-[範例程式碼](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/host/platform-specific-configuration/samples/)包含 Razor 頁面應用程式、 *HostingStartupApp*，以及類別庫 *>hostingstartuplibrary*。 類別庫：
+[範例程式碼](https://github.com/dotnet/AspNetCore.Docs/tree/main/aspnetcore/fundamentals/host/platform-specific-configuration/samples/)包含 Razor 頁面應用程式、 *HostingStartupApp*，以及類別庫 *>hostingstartuplibrary*。 類別庫：
 
 * 包含主機啟動類別 `ServiceKeyInjection`，其會實作 `IHostingStartup`。 `ServiceKeyInjection` 使用記憶體內部組態提供者 ([AddInMemoryCollection](xref:Microsoft.Extensions.Configuration.MemoryConfigurationBuilderExtensions.AddInMemoryCollection*))，將成對的服務字串新增至應用程式的組態。
 * 包含 `HostingStartup` 屬性，可識別裝載啟動的命名空間和類別。
@@ -123,7 +123,7 @@ ms.locfileid: "93061050"
 
 [!code-csharp[](platform-specific-configuration/samples/3.x/HostingStartupApp/Pages/Index.cshtml.cs?name=snippet1&highlight=5-6,11-12)]
 
-[程式碼範例](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/host/platform-specific-configuration/samples/)也包含提供另一個主機啟動 (*HostingStartupPackage*) 的 NuGet 套件專案。 此套件特性與前文所述之類別庫相同。 套件：
+[程式碼範例](https://github.com/dotnet/AspNetCore.Docs/tree/main/aspnetcore/fundamentals/host/platform-specific-configuration/samples/)也包含提供另一個主機啟動 (*HostingStartupPackage*) 的 NuGet 套件專案。 此套件特性與前文所述之類別庫相同。 套件：
 
 * 包含主機啟動類別 `ServiceKeyInjection`，其會實作 `IHostingStartup`。 `ServiceKeyInjection` 將成對的服務字串新增到應用程式組態。
 * 包含 `HostingStartup` 屬性。
@@ -383,11 +383,11 @@ NuGet 套件可以提供裝載啟動的增強功能。 此套件具有 `HostingS
 * 裝載啟動的相依性檔案可提供增強應用程式使用，如[執行階段存放區](#runtime-store) 區段 (沒有編譯時間參考)。
 * 以 .NET Framework 為目標時，可在預設載入內容中載入組件，在 .NET Framework 上，這表示組件位於下列其中一個位置：
   * 應用程式基底路徑：應用程式可執行檔 (*.exe*) 所在的 *bin* 資料夾。
-  * 全域組件快取 (GAC) ： GAC 會儲存數個 .NET Framework apps 共用的元件。 如需詳細資訊，請參閱 .NET Framework 檔中的 [如何：將元件安裝到全域組件快取](/dotnet/framework/app-domains/how-to-install-an-assembly-into-the-gac) 。
+  * 全域組件快取 (GAC) ： GAC 會儲存數個 .NET Framework 應用程式共用的元件。 如需詳細資訊，請參閱 .NET Framework 檔中的 [如何：將元件安裝到全域組件快取](/dotnet/framework/app-domains/how-to-install-an-assembly-into-the-gac) 。
 
 ## <a name="sample-code"></a>範例程式碼
 
-[程式碼範例](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/host/platform-specific-configuration/samples/) ([如何下載](xref:index#how-to-download-a-sample)) 示範裝載啟動實作案例：
+[程式碼範例](https://github.com/dotnet/AspNetCore.Docs/tree/main/aspnetcore/fundamentals/host/platform-specific-configuration/samples/) ([如何下載](xref:index#how-to-download-a-sample)) 示範裝載啟動實作案例：
 
 * 兩個裝載啟動組件 (類別程式庫) 各設定一對記憶體內部組態索引鍵/值組：
   * NuGet 套件 (*HostingStartupPackage*)
@@ -460,7 +460,7 @@ dotnet nuget locals all --clear
 
 <xref:Microsoft.AspNetCore.Hosting.IHostingStartup>裝載啟動) 執行的 (，會在啟動時從外部元件新增應用程式的增強功能。 例如，外部程式庫可以使用裝載啟動實作，向應用程式提供額外的組態提供者或服務。
 
-[查看或下載範例程式碼](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/host/platform-specific-configuration/samples/) ([如何下載](xref:index#how-to-download-a-sample)) 
+[查看或下載範例程式碼](https://github.com/dotnet/AspNetCore.Docs/tree/main/aspnetcore/fundamentals/host/platform-specific-configuration/samples/) ([如何下載](xref:index#how-to-download-a-sample)) 
 
 ## <a name="hostingstartup-attribute"></a>HostingStartup 屬性
 
@@ -493,7 +493,7 @@ dotnet nuget locals all --clear
 
 使用主機設定或環境變數停用裝載啟動組件會停用全域的組件，並且可能會停用數項應用程式特性。
 
-## <a name="project"></a>專案
+## <a name="project"></a>Project
 
 以下列兩種專案類型的任一類型建立裝載啟動：
 
@@ -504,7 +504,7 @@ dotnet nuget locals all --clear
 
 類別庫可以提供裝載啟動的增強功能。 此程式庫包含 `HostingStartup` 屬性。
 
-[範例程式碼](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/host/platform-specific-configuration/samples/)包含 Razor 頁面應用程式、 *HostingStartupApp*，以及類別庫 *>hostingstartuplibrary*。 類別庫：
+[範例程式碼](https://github.com/dotnet/AspNetCore.Docs/tree/main/aspnetcore/fundamentals/host/platform-specific-configuration/samples/)包含 Razor 頁面應用程式、 *HostingStartupApp*，以及類別庫 *>hostingstartuplibrary*。 類別庫：
 
 * 包含主機啟動類別 `ServiceKeyInjection`，其會實作 `IHostingStartup`。 `ServiceKeyInjection` 使用記憶體內部組態提供者 ([AddInMemoryCollection](xref:Microsoft.Extensions.Configuration.MemoryConfigurationBuilderExtensions.AddInMemoryCollection*))，將成對的服務字串新增至應用程式的組態。
 * 包含 `HostingStartup` 屬性，可識別裝載啟動的命名空間和類別。
@@ -521,7 +521,7 @@ dotnet nuget locals all --clear
 
 [!code-csharp[](platform-specific-configuration/samples/2.x/HostingStartupApp/Pages/Index.cshtml.cs?name=snippet1&highlight=5-6,11-12)]
 
-[程式碼範例](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/host/platform-specific-configuration/samples/)也包含提供另一個主機啟動 (*HostingStartupPackage*) 的 NuGet 套件專案。 此套件特性與前文所述之類別庫相同。 套件：
+[程式碼範例](https://github.com/dotnet/AspNetCore.Docs/tree/main/aspnetcore/fundamentals/host/platform-specific-configuration/samples/)也包含提供另一個主機啟動 (*HostingStartupPackage*) 的 NuGet 套件專案。 此套件特性與前文所述之類別庫相同。 套件：
 
 * 包含主機啟動類別 `ServiceKeyInjection`，其會實作 `IHostingStartup`。 `ServiceKeyInjection` 將成對的服務字串新增到應用程式組態。
 * 包含 `HostingStartup` 屬性。
@@ -769,11 +769,11 @@ NuGet 套件可以提供裝載啟動的增強功能。 此套件具有 `HostingS
 * 裝載啟動的相依性檔案可提供增強應用程式使用，如[執行階段存放區](#runtime-store) 區段 (沒有編譯時間參考)。
 * 以 .NET Framework 為目標時，可在預設載入內容中載入組件，在 .NET Framework 上，這表示組件位於下列其中一個位置：
   * 應用程式基底路徑：應用程式可執行檔 (*.exe*) 所在的 *bin* 資料夾。
-  * 全域組件快取 (GAC) ： GAC 會儲存數個 .NET Framework apps 共用的元件。 如需詳細資訊，請參閱 .NET Framework 檔中的 [如何：將元件安裝到全域組件快取](/dotnet/framework/app-domains/how-to-install-an-assembly-into-the-gac) 。
+  * 全域組件快取 (GAC) ： GAC 會儲存數個 .NET Framework 應用程式共用的元件。 如需詳細資訊，請參閱 .NET Framework 檔中的 [如何：將元件安裝到全域組件快取](/dotnet/framework/app-domains/how-to-install-an-assembly-into-the-gac) 。
 
 ## <a name="sample-code"></a>範例程式碼
 
-[程式碼範例](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/host/platform-specific-configuration/samples/) ([如何下載](xref:index#how-to-download-a-sample)) 示範裝載啟動實作案例：
+[程式碼範例](https://github.com/dotnet/AspNetCore.Docs/tree/main/aspnetcore/fundamentals/host/platform-specific-configuration/samples/) ([如何下載](xref:index#how-to-download-a-sample)) 示範裝載啟動實作案例：
 
 * 兩個裝載啟動組件 (類別程式庫) 各設定一對記憶體內部組態索引鍵/值組：
   * NuGet 套件 (*HostingStartupPackage*)

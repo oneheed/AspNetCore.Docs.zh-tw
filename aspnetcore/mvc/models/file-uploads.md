@@ -1,5 +1,5 @@
 ---
-title: 在 ASP.NET Core 上傳檔案
+title: 在 ASP.NET Core 中上傳檔案
 author: rick-anderson
 description: 如何使用模型繫結和資料流在 ASP.NET Core MVC 上傳檔案。
 monikerRange: '>= aspnetcore-2.1'
@@ -19,22 +19,22 @@ no-loc:
 - Razor
 - SignalR
 uid: mvc/models/file-uploads
-ms.openlocfilehash: c32d20d4616650db004c78fb4d8ea9a4d5a3beab
-ms.sourcegitcommit: 063a06b644d3ade3c15ce00e72a758ec1187dd06
+ms.openlocfilehash: 90bde63ac94ba3fd29a067962989cf773ec613db
+ms.sourcegitcommit: 54fe1ae5e7d068e27376d562183ef9ddc7afc432
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 01/16/2021
-ms.locfileid: "98252795"
+ms.lasthandoff: 03/10/2021
+ms.locfileid: "102587228"
 ---
-# <a name="upload-files-in-aspnet-core"></a>在 ASP.NET Core 上傳檔案
+# <a name="upload-files-in-aspnet-core"></a>在 ASP.NET Core 中上傳檔案
 
 [Steve Smith](https://ardalis.com/)和[Rutger 風暴](https://github.com/rutix)
 
 ::: moniker range=">= aspnetcore-5.0"
 
-ASP.NET Core 支援針對較小的檔案使用緩衝的模型系結上傳一或多個檔案，並針對較大的檔案上傳未緩衝
+ASP.NET Core 支援針對較小的檔案上傳一或多個檔案，並針對較大的檔案使用未緩衝的串流。
 
-[查看或下載範例程式碼](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/mvc/models/file-uploads/samples/) ([如何下載](xref:index#how-to-download-a-sample)) 
+[查看或下載範例程式碼](https://github.com/dotnet/AspNetCore.Docs/tree/main/aspnetcore/mvc/models/file-uploads/samples/) ([如何下載](xref:index#how-to-download-a-sample)) 
 
 ## <a name="security-considerations"></a>安全性考量
 
@@ -238,7 +238,7 @@ ASP.NET Core 支援針對較小的檔案使用緩衝的模型系結上傳一或�
 > string untrustedFileName = Path.GetFileName(pathName);
 > ```
 >
-> 目前為止所提供的範例不考慮安全性考慮。 下列各節和 [範例應用程式](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/mvc/models/file-uploads/samples/)會提供其他資訊：
+> 目前為止所提供的範例不考慮安全性考慮。 下列各節和 [範例應用程式](https://github.com/dotnet/AspNetCore.Docs/tree/main/aspnetcore/mvc/models/file-uploads/samples/)會提供其他資訊：
 >
 > * [安全性考量](#security-considerations)
 > * [驗證](#validation)
@@ -409,7 +409,7 @@ public async Task<IActionResult> OnPostUploadAsync()
 >
 > 請勿依賴或信任 `FileName` <xref:Microsoft.AspNetCore.Http.IFormFile> 不含驗證的屬性。 `FileName`屬性只能用於顯示目的，而且只適用于 HTML 編碼。
 >
-> 提供的範例不會考慮安全性考慮。 下列各節和 [範例應用程式](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/mvc/models/file-uploads/samples/)會提供其他資訊：
+> 提供的範例不會考慮安全性考慮。 下列各節和 [範例應用程式](https://github.com/dotnet/AspNetCore.Docs/tree/main/aspnetcore/mvc/models/file-uploads/samples/)會提供其他資訊：
 >
 > * [安全性考量](#security-considerations)
 > * [驗證](#validation)
@@ -418,7 +418,7 @@ public async Task<IActionResult> OnPostUploadAsync()
 
 下列範例示範如何使用 JavaScript 將檔案串流至控制器動作。 檔案的 antiforgery token 是使用自訂篩選屬性所產生，並且傳遞至用戶端 HTTP 標頭，而不是在要求主體中。 因為動作方法會直接處理已上傳的資料，所以其他自訂篩選會停用表單模型系結。 在動作內，會使用 `MultipartReader` 來讀取表單內容，以讀取每個個別 `MultipartSection`、處理檔案，或視需要儲存內容。 讀取多部分區段之後，動作會執行它自己的模型系結。
 
-初始頁面回應會載入表單，並透過屬性) 將 antiforgery token 儲存在 cookie (中 `GenerateAntiforgeryTokenCookieAttribute` 。 屬性使用 ASP.NET Core 的內建 [antiforgery 支援](xref:security/anti-request-forgery) 來設定 cookie 具有要求權杖的。
+初始頁面回應會載入表單，並透過屬性) 將 antiforgery token 儲存在 cookie (中 `GenerateAntiforgeryTokenCookieAttribute` 。 屬性使用 ASP.NET Core 的內建 [antiforgery 支援](xref:security/anti-request-forgery) ，以要求權杖來設定 a cookie ：
 
 [!code-csharp[](file-uploads/samples/3.x/SampleApp/Filters/Antiforgery.cs?name=snippet_GenerateAntiforgeryTokenCookieAttribute)]
 
@@ -756,9 +756,9 @@ The request filtering module is configured to deny a request that exceeds the re
 
 ::: moniker range=">= aspnetcore-3.0 < aspnetcore-5.0"
 
-ASP.NET Core 支援針對較小的檔案使用緩衝的模型系結上傳一或多個檔案，並針對較大的檔案上傳未緩衝
+ASP.NET Core 支援針對較小的檔案上傳一或多個檔案，並針對較大的檔案使用未緩衝的串流。
 
-[查看或下載範例程式碼](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/mvc/models/file-uploads/samples/) ([如何下載](xref:index#how-to-download-a-sample)) 
+[查看或下載範例程式碼](https://github.com/dotnet/AspNetCore.Docs/tree/main/aspnetcore/mvc/models/file-uploads/samples/) ([如何下載](xref:index#how-to-download-a-sample)) 
 
 ## <a name="security-considerations"></a>安全性考量
 
@@ -962,7 +962,7 @@ ASP.NET Core 支援針對較小的檔案使用緩衝的模型系結上傳一或�
 > string untrustedFileName = Path.GetFileName(pathName);
 > ```
 >
-> 目前為止所提供的範例不考慮安全性考慮。 下列各節和 [範例應用程式](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/mvc/models/file-uploads/samples/)會提供其他資訊：
+> 目前為止所提供的範例不考慮安全性考慮。 下列各節和 [範例應用程式](https://github.com/dotnet/AspNetCore.Docs/tree/main/aspnetcore/mvc/models/file-uploads/samples/)會提供其他資訊：
 >
 > * [安全性考量](#security-considerations)
 > * [驗證](#validation)
@@ -1133,7 +1133,7 @@ public async Task<IActionResult> OnPostUploadAsync()
 >
 > 請勿依賴或信任 `FileName` <xref:Microsoft.AspNetCore.Http.IFormFile> 不含驗證的屬性。 `FileName`屬性只能用於顯示目的，而且只適用于 HTML 編碼。
 >
-> 提供的範例不會考慮安全性考慮。 下列各節和 [範例應用程式](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/mvc/models/file-uploads/samples/)會提供其他資訊：
+> 提供的範例不會考慮安全性考慮。 下列各節和 [範例應用程式](https://github.com/dotnet/AspNetCore.Docs/tree/main/aspnetcore/mvc/models/file-uploads/samples/)會提供其他資訊：
 >
 > * [安全性考量](#security-considerations)
 > * [驗證](#validation)
@@ -1142,7 +1142,7 @@ public async Task<IActionResult> OnPostUploadAsync()
 
 下列範例示範如何使用 JavaScript 將檔案串流至控制器動作。 檔案的 antiforgery token 是使用自訂篩選屬性所產生，並且傳遞至用戶端 HTTP 標頭，而不是在要求主體中。 因為動作方法會直接處理已上傳的資料，所以其他自訂篩選會停用表單模型系結。 在動作內，會使用 `MultipartReader` 來讀取表單內容，以讀取每個個別 `MultipartSection`、處理檔案，或視需要儲存內容。 讀取多部分區段之後，動作會執行它自己的模型系結。
 
-初始頁面回應會載入表單，並透過屬性) 將 antiforgery token 儲存在 cookie (中 `GenerateAntiforgeryTokenCookieAttribute` 。 屬性使用 ASP.NET Core 的內建 [antiforgery 支援](xref:security/anti-request-forgery) 來設定 cookie 具有要求權杖的。
+初始頁面回應會載入表單，並透過屬性) 將 antiforgery token 儲存在 cookie (中 `GenerateAntiforgeryTokenCookieAttribute` 。 屬性使用 ASP.NET Core 的內建 [antiforgery 支援](xref:security/anti-request-forgery) ，以要求權杖來設定 a cookie ：
 
 [!code-csharp[](file-uploads/samples/3.x/SampleApp/Filters/Antiforgery.cs?name=snippet_GenerateAntiforgeryTokenCookieAttribute)]
 
@@ -1491,9 +1491,9 @@ The request filtering module is configured to deny a request that exceeds the re
 
 ::: moniker range="< aspnetcore-3.0"
 
-ASP.NET Core 支援針對較小的檔案使用緩衝的模型系結上傳一或多個檔案，並針對較大的檔案上傳未緩衝
+ASP.NET Core 支援針對較小的檔案上傳一或多個檔案，並針對較大的檔案使用未緩衝的串流。
 
-[查看或下載範例程式碼](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/mvc/models/file-uploads/samples/) ([如何下載](xref:index#how-to-download-a-sample)) 
+[查看或下載範例程式碼](https://github.com/dotnet/AspNetCore.Docs/tree/main/aspnetcore/mvc/models/file-uploads/samples/) ([如何下載](xref:index#how-to-download-a-sample)) 
 
 ## <a name="security-considerations"></a>安全性考量
 
@@ -1697,7 +1697,7 @@ ASP.NET Core 支援針對較小的檔案使用緩衝的模型系結上傳一或�
 > string untrustedFileName = Path.GetFileName(pathName);
 > ```
 >
-> 目前為止所提供的範例不考慮安全性考慮。 下列各節和 [範例應用程式](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/mvc/models/file-uploads/samples/)會提供其他資訊：
+> 目前為止所提供的範例不考慮安全性考慮。 下列各節和 [範例應用程式](https://github.com/dotnet/AspNetCore.Docs/tree/main/aspnetcore/mvc/models/file-uploads/samples/)會提供其他資訊：
 >
 > * [安全性考量](#security-considerations)
 > * [驗證](#validation)
@@ -1868,7 +1868,7 @@ public async Task<IActionResult> OnPostUploadAsync()
 >
 > 請勿依賴或信任 `FileName` <xref:Microsoft.AspNetCore.Http.IFormFile> 不含驗證的屬性。 `FileName`屬性只能用於顯示目的，而且只適用于 HTML 編碼。
 >
-> 提供的範例不會考慮安全性考慮。 下列各節和 [範例應用程式](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/mvc/models/file-uploads/samples/)會提供其他資訊：
+> 提供的範例不會考慮安全性考慮。 下列各節和 [範例應用程式](https://github.com/dotnet/AspNetCore.Docs/tree/main/aspnetcore/mvc/models/file-uploads/samples/)會提供其他資訊：
 >
 > * [安全性考量](#security-considerations)
 > * [驗證](#validation)
@@ -1877,7 +1877,7 @@ public async Task<IActionResult> OnPostUploadAsync()
 
 下列範例示範如何使用 JavaScript 將檔案串流至控制器動作。 檔案的 antiforgery token 是使用自訂篩選屬性所產生，並且傳遞至用戶端 HTTP 標頭，而不是在要求主體中。 因為動作方法會直接處理已上傳的資料，所以其他自訂篩選會停用表單模型系結。 在動作內，會使用 `MultipartReader` 來讀取表單內容，以讀取每個個別 `MultipartSection`、處理檔案，或視需要儲存內容。 讀取多部分區段之後，動作會執行它自己的模型系結。
 
-初始頁面回應會載入表單，並透過屬性) 將 antiforgery token 儲存在 cookie (中 `GenerateAntiforgeryTokenCookieAttribute` 。 屬性使用 ASP.NET Core 的內建 [antiforgery 支援](xref:security/anti-request-forgery) 來設定 cookie 具有要求權杖的。
+初始頁面回應會載入表單，並透過屬性) 將 antiforgery token 儲存在 cookie (中 `GenerateAntiforgeryTokenCookieAttribute` 。 屬性使用 ASP.NET Core 的內建 [antiforgery 支援](xref:security/anti-request-forgery) ，以要求權杖來設定 a cookie ：
 
 [!code-csharp[](file-uploads/samples/2.x/SampleApp/Filters/Antiforgery.cs?name=snippet_GenerateAntiforgeryTokenCookieAttribute)]
 

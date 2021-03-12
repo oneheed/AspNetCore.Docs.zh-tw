@@ -1,5 +1,5 @@
 ---
-title: ASP.NET Core 的 razor 語法參考
+title: 適用于 ASP.NET Core 的 razor 語法參考
 author: rick-anderson
 description: 瞭解將 Razor 以伺服器為基礎的程式碼內嵌到網頁中的標記語法。
 ms.author: riande
@@ -17,14 +17,14 @@ no-loc:
 - Razor
 - SignalR
 uid: mvc/views/razor
-ms.openlocfilehash: cb9ffab19062bf726dd519c782d502f76e372073
-ms.sourcegitcommit: 97243663fd46c721660e77ef652fe2190a461f81
+ms.openlocfilehash: 60471232b3373039404b27c4afd1a1725d4d21eb
+ms.sourcegitcommit: 54fe1ae5e7d068e27376d562183ef9ddc7afc432
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 01/09/2021
-ms.locfileid: "98058281"
+ms.lasthandoff: 03/10/2021
+ms.locfileid: "102586861"
 ---
-# <a name="no-locrazor-syntax-reference-for-aspnet-core"></a>Razor ASP.NET Core 的語法參考
+# <a name="razor-syntax-reference-for-aspnet-core"></a>Razor ASP.NET Core 的語法參考
 
 由 [Rick Anderson](https://twitter.com/RickAndMSFT)、 [Taylor Mullen](https://twitter.com/ntaylormullen)和 [Dan Vicarel](https://github.com/Rabadash8820)
 
@@ -34,7 +34,7 @@ Razor 是將伺服器程式碼內嵌到網頁中的標記語法。 Razor語法�
 
 預設 Razor 語言為 HTML。 從標記呈現 HTML 與 Razor 從 html 檔案轉譯 html 並無不同。 *Cshtml* 檔案中的 HTML 標籤 Razor 是由伺服器轉譯，而不會變更。
 
-## <a name="no-locrazor-syntax"></a>Razor 語法
+## <a name="razor-syntax"></a>Razor 語法
 
 Razor 支援 c #，並使用 `@` 符號從 HTML 轉換成 c #。 Razor 評估 c # 運算式，並在 HTML 輸出中加以呈現。
 
@@ -58,7 +58,7 @@ HTML 屬性及含有電子郵件地址的內容不會將 `@` 符號視為轉換�
 <a href="mailto:Support@contoso.com">Support@contoso.com</a>
 ```
 
-## <a name="implicit-no-locrazor-expressions"></a>隱含 Razor 運算式
+## <a name="implicit-razor-expressions"></a>隱含 Razor 運算式
 
 隱含 Razor 運算式的開頭 `@` 是 c # 程式碼：
 
@@ -86,7 +86,7 @@ HTML 屬性及含有電子郵件地址的內容不會將 `@` 符號視為轉換�
 
 泛型方法呼叫必須包裝在明確的[ Razor 運算式](#explicit-razor-expressions)或程式[ Razor 代碼區塊](#razor-code-blocks)中。
 
-## <a name="explicit-no-locrazor-expressions"></a>明確 Razor 運算式
+## <a name="explicit-razor-expressions"></a>明確 Razor 運算式
 
 明確 Razor 運算式是由 `@` 具有對稱括弧的符號所組成。 若要轉譯上周的時間，請 Razor 使用下列標記：
 
@@ -140,7 +140,7 @@ HTML 屬性及含有電子郵件地址的內容不會將 `@` 符號視為轉換�
 
 HTML 會以純文字的形式顯示在瀏覽器中：
 
-&lt;&gt;/span 範圍 Hello World &lt;&gt;
+&lt;跨越 &gt; Hello World &lt; /span&gt;
 
 `HtmlHelper.Raw` 輸出不會經過編碼，而是轉譯為 HTML 標記。
 
@@ -157,7 +157,7 @@ HTML 會以純文字的形式顯示在瀏覽器中：
 <span>Hello World</span>
 ```
 
-## <a name="no-locrazor-code-blocks"></a>Razor 程式碼區塊
+## <a name="razor-code-blocks"></a>Razor 程式碼區塊
 
 Razor 程式碼區塊會以開頭 `@` ，並以括住 `{}` 。 不同於運算式，程式碼區塊內的 C# 程式碼不會轉譯。 一個檢視中的程式碼區塊和運算式會共用相同的範圍並依序定義：
 
@@ -399,7 +399,7 @@ Razor 具有使用 lock 語句保護重要區段的功能：
 }
 ```
 
-### <a name="comments"></a>評價
+### <a name="comments"></a>註解
 
 Razor 支援 c # 和 HTML 批註：
 
@@ -789,11 +789,11 @@ Razor 提供元件的事件處理功能。 如需詳細資訊，請參閱<xref:b
 
 *此案例僅適用于 Razor)  ( razor 元件。*
 
-指示詞會宣告 `@typeparam` 所產生元件類別的泛型型別參數。 如需詳細資訊，請參閱<xref:blazor/components/templated-components#generic-typed-components>。
+指示詞會宣告 `@typeparam` 所產生元件類別的泛型型別參數。 如需詳細資訊，請參閱<xref:blazor/components/templated-components>。
 
 ::: moniker-end
 
-## <a name="templated-no-locrazor-delegates"></a>樣板化 Razor 委派
+## <a name="templated-razor-delegates"></a>樣板化 Razor 委派
 
 Razor 範本可讓您使用下列格式來定義 UI 程式碼片段：
 
@@ -904,9 +904,9 @@ public class Pet
 | [`@removeTagHelper`](xref:mvc/views/tag-helpers/intro#remove-razor-directives-label) | 移除先前從檢視新增的標籤協助程式。 |
 | [`@tagHelperPrefix`](xref:mvc/views/tag-helpers/intro#prefix-razor-directives-label) | 指定標籤前置字元，以啟用標籤協助程式支援，並將標籤協助程式使用方式設為明確。 |
 
-## <a name="no-locrazor-reserved-keywords"></a>Razor 保留的關鍵字
+## <a name="razor-reserved-keywords"></a>Razor 保留的關鍵字
 
-### <a name="no-locrazor-keywords"></a>Razor 關鍵 字
+### <a name="razor-keywords"></a>Razor 關鍵 字
 
 * `page` (需要 ASP.NET Core 2.1 或更新版本) 
 * `namespace`
@@ -914,11 +914,11 @@ public class Pet
 * `inherits`
 * `model`
 * `section`
-* `helper` (目前 ASP.NET Core) 不支援
+* `helper` ASP.NET Core) 目前不支援 (
 
 Razor 關鍵字會使用 `@(Razor Keyword)` (來進行轉義，例如， `@(functions)`) 。
 
-### <a name="c-no-locrazor-keywords"></a>C # Razor 關鍵字
+### <a name="c-razor-keywords"></a>C # Razor 關鍵字
 
 * `case`
 * `do`
@@ -937,15 +937,15 @@ Razor 關鍵字會使用 `@(Razor Keyword)` (來進行轉義，例如， `@(func
 
 C # Razor 關鍵字必須以 (進行雙重換用 `@(@C# Razor Keyword)` ，例如 `@(@case)`) 。 第一次將剖析器 `@` 轉義 Razor 。 第二個 `@` 會將 C# 剖析器逸出。
 
-### <a name="reserved-keywords-not-used-by-no-locrazor"></a>未使用的保留關鍵字 Razor
+### <a name="reserved-keywords-not-used-by-razor"></a>未使用的保留關鍵字 Razor
 
 * `class`
 
-## <a name="inspect-the-no-locrazor-c-class-generated-for-a-view"></a>檢查 Razor 為視圖產生的 c # 類別
+## <a name="inspect-the-razor-c-class-generated-for-a-view"></a>檢查 Razor 為視圖產生的 c # 類別
 
 ::: moniker range=">= aspnetcore-2.1"
 
-在 .NET Core SDK 2.1 或更新版本中， [ Razor SDK](xref:razor-pages/sdk)會處理檔案的編譯 Razor 。 建立專案時，SDK 會 Razor 在專案根目錄中產生一個 *obj/<build_configuration>/<Razor target_framework_moniker>/* 目錄。 目錄中的目錄結構會 *Razor* 鏡像專案的目錄結構。
+使用 .NET Core SDK 2.1 或更新版本時， [ Razor SDK](xref:razor-pages/sdk)會處理檔案的編譯 Razor 。 建立專案時，SDK 會 Razor 在專案根目錄中產生一個 *obj/<build_configuration>/<Razor target_framework_moniker>/* 目錄。 目錄中的目錄結構會 *Razor* 鏡像專案的目錄結構。
 
 在以 .NET Core 2.1 為目標的 ASP.NET Core 2.1 頁面專案中，請考慮下列目錄結構 Razor ：
 

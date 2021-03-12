@@ -19,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: mvc/views/tag-helpers/builtin-th/partial-tag-helper
-ms.openlocfilehash: 124f23caa4a757f63a80dfea627304204ba2cdca
-ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
+ms.openlocfilehash: 184901ad0bb6188ed908d41dabf2433c5ca7c1ce
+ms.sourcegitcommit: 54fe1ae5e7d068e27376d562183ef9ddc7afc432
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 10/30/2020
-ms.locfileid: "93061427"
+ms.lasthandoff: 03/10/2021
+ms.locfileid: "102587160"
 ---
 # <a name="partial-tag-helper-in-aspnet-core"></a>ASP.NET Core 的部分標記協助程式
 
@@ -32,11 +32,11 @@ ms.locfileid: "93061427"
 
 如需標籤協助程式的概觀，請參閱 <xref:mvc/views/tag-helpers/intro>。
 
-[查看或下載範例程式碼](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/mvc/views/tag-helpers/built-in/samples) ([如何下載](xref:index#how-to-download-a-sample)) 
+[查看或下載範例程式碼](https://github.com/dotnet/AspNetCore.Docs/tree/main/aspnetcore/mvc/views/tag-helpers/built-in/samples) ([如何下載](xref:index#how-to-download-a-sample)) 
 
 ## <a name="overview"></a>概觀
 
-部分標籤協助程式是用來呈現[partial view](xref:mvc/views/partial) Razor 頁面和 MVC 應用程式中的部分視圖。 請考慮它：
+部分標籤協助程式是用來呈現[](xref:mvc/views/partial) Razor 頁面和 MVC 應用程式中的部分視圖。 請考慮它：
 
 * 需要 ASP.NET Core 2.1 或更新版本。
 * 是 [HTML 協助程式語法](xref:mvc/views/partial#reference-a-partial-view)的替代方法。
@@ -59,7 +59,7 @@ ms.locfileid: "93061427"
 
 `name` 屬性 (Attribute) 是必要項。 它會指出要呈現之部分檢視的名稱或路徑。 當提供部分檢視名稱時，就會起始[檢視探索](xref:mvc/views/overview#view-discovery)程序。 提供明確的路徑時，則會略過該程序。 如需了解所有可接受的 `name` 值，請參閱[部分檢視探索](xref:mvc/views/partial#partial-view-discovery)。
 
-下列標記會使用明確的路徑，指出將從 *Shared* 資料夾載入 *_ProductPartial.cshtml* 。 使用 [for](#for) 屬性，模型就會傳遞到部分檢視以進行繫結。
+下列標記會使用明確的路徑，指出將從 *Shared* 資料夾載入 *_ProductPartial.cshtml*。 使用 [for](#for) 屬性，模型就會傳遞到部分檢視以進行繫結。
 
 [!code-cshtml[](samples/TagHelpersBuiltIn/Pages/Product.cshtml?name=snippet_Name)]
 
@@ -67,7 +67,7 @@ ms.locfileid: "93061427"
 
 `for` 屬性會針對目前的模型指派一個要評估的 [ModelExpression](/dotnet/api/microsoft.aspnetcore.mvc.viewfeatures.modelexpression)。 `ModelExpression` 可推斷 `@Model.` 語法。 例如，可以使用 `for="Product"`，而不是 `for="@Model.Product"`。 使用 `@` 符號來定義內嵌運算式會覆寫這個預設的推斷行為。
 
-下列標記將載入 *_ProductPartial.cshtml* ：
+下列標記將載入 *_ProductPartial.cshtml*：
 
 [!code-cshtml[](samples/TagHelpersBuiltIn/Pages/Product.cshtml?name=snippet_For)]
 

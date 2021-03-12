@@ -17,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: fundamentals/localization
-ms.openlocfilehash: 67f245b7f4e4aa97b30c5318c73732617aea44c7
-ms.sourcegitcommit: 7e394a8527c9818caebb940f692ae4fcf2f1b277
+ms.openlocfilehash: 8212025bbf778334045b8fbe7a5dae312524b426
+ms.sourcegitcommit: 54fe1ae5e7d068e27376d562183ef9ddc7afc432
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 01/31/2021
-ms.locfileid: "99217566"
+ms.lasthandoff: 03/10/2021
+ms.locfileid: "102588018"
 ---
 # <a name="globalization-and-localization-in-aspnet-core"></a>ASP.NET Core 全球化和當地語系化
 
@@ -42,7 +42,7 @@ ms.locfileid: "99217566"
 1. 針對您支援的語言和文化特性提供當地語系化資源
 1. 實作可依據每項要求選取語言/文化特性的策略
 
-[查看或下載範例程式碼](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/localization/sample/3.x/Localization) ([如何下載](xref:index#how-to-download-a-sample)) 
+[查看或下載範例程式碼](https://github.com/dotnet/AspNetCore.Docs/tree/main/aspnetcore/fundamentals/localization/sample/3.x/Localization) ([如何下載](xref:index#how-to-download-a-sample)) 
 
 ## <a name="make-the-apps-content-localizable"></a>讓應用程式的內容可當地語系化
 
@@ -261,9 +261,9 @@ using Microsoft.Extensions.Localization;
 http://localhost:5000/?culture=es-MX
 ```
 
-### <a name="no-loccookierequestcultureprovider"></a>CookieRequestCultureProvider
+### <a name="cookierequestcultureprovider"></a>CookieRequestCultureProvider
 
-生產環境應用程式通常會提供一種機制，以 ASP.NET Core 文化特性設定文化特性 cookie 。 使用 `MakeCookieValue` 方法來建立 cookie 。
+生產環境應用程式通常會提供一種機制，以 ASP.NET 核心文化特性設定文化特性 cookie 。 使用 `MakeCookieValue` 方法來建立 cookie 。
 
 會傳回 `CookieRequestCultureProvider` `DefaultCookieName` cookie 用來追蹤使用者慣用文化特性資訊的預設名稱。 預設 cookie 名稱為 `.AspNetCore.Culture` 。
 
@@ -396,7 +396,7 @@ services.Configure<RequestLocalizationOptions>(options =>
 1. 針對您支援的語言和文化特性提供當地語系化資源
 1. 實作可依據每項要求選取語言/文化特性的策略
 
-[查看或下載範例程式碼](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/localization/sample/Localization) ([如何下載](xref:index#how-to-download-a-sample)) 
+[查看或下載範例程式碼](https://github.com/dotnet/AspNetCore.Docs/tree/main/aspnetcore/fundamentals/localization/sample/Localization) ([如何下載](xref:index#how-to-download-a-sample)) 
 
 ## <a name="make-the-apps-content-localizable"></a>讓應用程式的內容可當地語系化
 
@@ -617,9 +617,9 @@ http://localhost:5000/?culture=es-MX&ui-culture=es-MX
 http://localhost:5000/?culture=es-MX
 ```
 
-### <a name="no-loccookierequestcultureprovider"></a>CookieRequestCultureProvider
+### <a name="cookierequestcultureprovider"></a>CookieRequestCultureProvider
 
-生產環境應用程式通常會提供一種機制，以 ASP.NET Core 文化特性設定文化特性 cookie 。 使用 `MakeCookieValue` 方法來建立 cookie 。
+生產環境應用程式通常會提供一種機制，以 ASP.NET 核心文化特性設定文化特性 cookie 。 使用 `MakeCookieValue` 方法來建立 cookie 。
 
 會傳回 `CookieRequestCultureProvider` `DefaultCookieName` cookie 用來追蹤使用者慣用文化特性資訊的預設名稱。 預設 cookie 名稱為 `.AspNetCore.Culture` 。
 
@@ -751,7 +751,7 @@ services.Configure<RequestLocalizationOptions>(options =>
 1. 針對您支援的語言和文化特性提供當地語系化資源
 1. 實作可依據每項要求選取語言/文化特性的策略
 
-[查看或下載範例程式碼](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/localization/sample/2.x/) ([如何下載](xref:index#how-to-download-a-sample)) 
+[查看或下載範例程式碼](https://github.com/dotnet/AspNetCore.Docs/tree/main/aspnetcore/fundamentals/localization/sample/2.x/) ([如何下載](xref:index#how-to-download-a-sample)) 
 
 ## <a name="make-the-apps-content-localizable"></a>讓應用程式的內容可當地語系化
 
@@ -972,9 +972,9 @@ http://localhost:5000/?culture=es-MX&ui-culture=es-MX
 http://localhost:5000/?culture=es-MX
 ```
 
-### <a name="no-loccookierequestcultureprovider"></a>CookieRequestCultureProvider
+### <a name="cookierequestcultureprovider"></a>CookieRequestCultureProvider
 
-生產環境應用程式通常會提供一種機制，以 ASP.NET Core 文化特性設定文化特性 cookie 。 使用 `MakeCookieValue` 方法來建立 cookie 。
+生產環境應用程式通常會提供一種機制，以 ASP.NET 核心文化特性設定文化特性 cookie 。 使用 `MakeCookieValue` 方法來建立 cookie 。
 
 會傳回 `CookieRequestCultureProvider` `DefaultCookieName` cookie 用來追蹤使用者慣用文化特性資訊的預設名稱。 預設 cookie 名稱為 `.AspNetCore.Culture` 。
 

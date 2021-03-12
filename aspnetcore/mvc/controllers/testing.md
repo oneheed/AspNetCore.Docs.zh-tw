@@ -19,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: mvc/controllers/testing
-ms.openlocfilehash: 348b0fe4da6037933aabdb5b400d36ca073a146a
-ms.sourcegitcommit: 43a540e703b9096921de27abc6b66bc0783fe905
+ms.openlocfilehash: 0f4fcceefdef946a5f29633c069cbb64ec345a3d
+ms.sourcegitcommit: 54fe1ae5e7d068e27376d562183ef9ddc7afc432
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 11/30/2020
-ms.locfileid: "96320092"
+ms.lasthandoff: 03/10/2021
+ms.locfileid: "102586952"
 ---
 # <a name="unit-test-controller-logic-in-aspnet-core"></a>ASP.NET Core 中的單元測試控制器邏輯
 
@@ -42,7 +42,7 @@ ms.locfileid: "96320092"
 
 若要進行控制器單元測試，請檢閱下列範例應用程式中的控制器。 
 
-[查看或下載範例程式碼](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/mvc/controllers/testing/samples/) ([如何下載](xref:index#how-to-download-a-sample)) 
+[查看或下載範例程式碼](https://github.com/dotnet/AspNetCore.Docs/tree/main/aspnetcore/mvc/controllers/testing/samples/) ([如何下載](xref:index#how-to-download-a-sample)) 
 
 主控制器會顯示一份腦力激盪工作階段清單，並允許使用 POST 要求來建立新的腦力激盪工作階段：
 
@@ -90,7 +90,7 @@ ms.locfileid: "96320092"
 > [!NOTE]
 > 此範例中所使用的 Moq 程式庫，可讓您混合可驗證 (或「嚴格」) 的模擬，以及無法驗證的模擬 (也稱為「鬆散」的模擬或虛設常式)。 如需詳細資訊，請參閱 [Customizing Mock Behavior with Moq](https://github.com/Moq/moq4/wiki/Quickstart#customizing-mock-behavior) (使用 Moq 自訂模擬行為)。
 
-範例應用程式中的 [SessionController](https://github.com/dotnet/AspNetCore.Docs/blob/master/aspnetcore/mvc/controllers/testing/samples/3.x/TestingControllersSample/src/TestingControllersSample/Controllers/SessionController.cs)會顯示與特定腦力激盪工作階段相關的資訊。 控制器包含處理無效 `id` 值的邏輯 (下列範例中有兩個 `return` 案例來說明這些案例)。 最後的 `return` 陳述式會將新的 `StormSessionViewModel` 傳回至檢視 (*Controllers/SessionController.cs*)：
+範例應用程式中的 [SessionController](https://github.com/dotnet/AspNetCore.Docs/blob/main/aspnetcore/mvc/controllers/testing/samples/3.x/TestingControllersSample/src/TestingControllersSample/Controllers/SessionController.cs)會顯示與特定腦力激盪工作階段相關的資訊。 控制器包含處理無效 `id` 值的邏輯 (下列範例中有兩個 `return` 案例來說明這些案例)。 最後的 `return` 陳述式會將新的 `StormSessionViewModel` 傳回至檢視 (*Controllers/SessionController.cs*)：
 
 [!code-csharp[](testing/samples/3.x/TestingControllersSample/src/TestingControllersSample/Controllers/SessionController.cs?name=snippet_SessionController&highlight=12-16,18-22,31)]
 
@@ -139,7 +139,7 @@ ms.locfileid: "96320092"
 
 ## <a name="test-actionresultt"></a>測試 ActionResult\<T>
 
-在 ASP.NET Core 2.1 或更新版本中， [ActionResult \<T> ](xref:web-api/action-return-types#actionresultt-type) () 可讓您傳回衍生自的型別， <xref:Microsoft.AspNetCore.Mvc.ActionResult%601> 或傳回 `ActionResult` 特定型別。
+在 ASP.NET Core 2.1 或更新版本中， [ActionResult \<T> ](xref:web-api/action-return-types#actionresultt-type) (<xref:Microsoft.AspNetCore.Mvc.ActionResult%601>) 可讓您傳回衍生自 `ActionResult` 或傳回特定型別的型別。
 
 範例應用程式包含為指定工作階段 `id` 傳回 `List<IdeaDTO>` 的方法。 如果工作階段 `id` 不存在，則控制器會傳回 <xref:Microsoft.AspNetCore.Mvc.ControllerBase.NotFound*>：
 
@@ -197,7 +197,7 @@ ms.locfileid: "96320092"
 
 [控制器](xref:mvc/controllers/actions)在任何 ASP.NET Core MVC 應用程式中都扮演重要角色。 因此，您應該確信控制器的行為符合預期。 在將應用程式部署至生產環境前，自動化測試可以偵測錯誤。
 
-[查看或下載範例程式碼](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/mvc/controllers/testing/samples/) ([如何下載](xref:index#how-to-download-a-sample)) 
+[查看或下載範例程式碼](https://github.com/dotnet/AspNetCore.Docs/tree/main/aspnetcore/mvc/controllers/testing/samples/) ([如何下載](xref:index#how-to-download-a-sample)) 
 
 ## <a name="unit-tests-of-controller-logic"></a>控制器邏輯的單元測試
 
@@ -253,7 +253,7 @@ ms.locfileid: "96320092"
 > [!NOTE]
 > 此範例中所使用的 Moq 程式庫，可讓您混合可驗證 (或「嚴格」) 的模擬，以及無法驗證的模擬 (也稱為「鬆散」的模擬或虛設常式)。 如需詳細資訊，請參閱 [Customizing Mock Behavior with Moq](https://github.com/Moq/moq4/wiki/Quickstart#customizing-mock-behavior) (使用 Moq 自訂模擬行為)。
 
-範例應用程式中的 [SessionController](https://github.com/dotnet/AspNetCore.Docs/blob/master/aspnetcore/mvc/controllers/testing/samples/2.x/TestingControllersSample/src/TestingControllersSample/Controllers/SessionController.cs)會顯示與特定腦力激盪工作階段相關的資訊。 控制器包含處理無效 `id` 值的邏輯 (下列範例中有兩個 `return` 案例來說明這些案例)。 最後的 `return` 陳述式會將新的 `StormSessionViewModel` 傳回至檢視 (*Controllers/SessionController.cs*)：
+範例應用程式中的 [SessionController](https://github.com/dotnet/AspNetCore.Docs/blob/main/aspnetcore/mvc/controllers/testing/samples/2.x/TestingControllersSample/src/TestingControllersSample/Controllers/SessionController.cs)會顯示與特定腦力激盪工作階段相關的資訊。 控制器包含處理無效 `id` 值的邏輯 (下列範例中有兩個 `return` 案例來說明這些案例)。 最後的 `return` 陳述式會將新的 `StormSessionViewModel` 傳回至檢視 (*Controllers/SessionController.cs*)：
 
 [!code-csharp[](testing/samples/2.x/TestingControllersSample/src/TestingControllersSample/Controllers/SessionController.cs?name=snippet_SessionController&highlight=12-16,18-22,31)]
 
@@ -302,7 +302,7 @@ ms.locfileid: "96320092"
 
 ## <a name="test-actionresultt"></a>測試 ActionResult\<T>
 
-在 ASP.NET Core 2.1 或更新版本中， [ActionResult \<T> ](xref:web-api/action-return-types#actionresultt-type) () 可讓您傳回衍生自的型別， <xref:Microsoft.AspNetCore.Mvc.ActionResult%601> 或傳回 `ActionResult` 特定型別。
+在 ASP.NET Core 2.1 或更新版本中， [ActionResult \<T> ](xref:web-api/action-return-types#actionresultt-type) (<xref:Microsoft.AspNetCore.Mvc.ActionResult%601>) 可讓您傳回衍生自 `ActionResult` 或傳回特定型別的型別。
 
 範例應用程式包含為指定工作階段 `id` 傳回 `List<IdeaDTO>` 的方法。 如果工作階段 `id` 不存在，則控制器會傳回 <xref:Microsoft.AspNetCore.Mvc.ControllerBase.NotFound*>：
 
@@ -360,6 +360,6 @@ ms.locfileid: "96320092"
 
 * <xref:test/integration-tests>
 * [使用 Visual Studio 建立和執行單元測試](/visualstudio/test/unit-test-your-code)
-* [MyTested. AspNetCore：適用于 ASP.NET CORE mvc](https://github.com/ivaylokenov/MyTested.AspNetCore.Mvc)：強型別單元測試程式庫的，提供流暢的介面來測試 mvc 和 web API 應用程式。  (*不會受到 Microsoft 的維護或支援*) 
+* [MyTested. AspNetCore. ASP.NET Core mvc 的（Core mvc 的測試程式庫](https://github.com/ivaylokenov/MyTested.AspNetCore.Mvc)）：強型別單元測試程式庫，提供用於測試 Mvc 和 web API 應用程式的流暢介面。  (*不會受到 Microsoft 的維護或支援*) 
 * [JustMockLite](https://github.com/telerik/JustMockLite)：適用于 .net 開發人員的模擬架構。  (*不會受到 Microsoft 的維護或支援*) 
 

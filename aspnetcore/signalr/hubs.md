@@ -19,24 +19,24 @@ no-loc:
 - Razor
 - SignalR
 uid: signalr/hubs
-ms.openlocfilehash: 4a31c16eb44e2244574d0df49c30e7a44b2bba6e
-ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
+ms.openlocfilehash: 872b88cc3c87137365de8c50a37bf5dd5fd9fe10
+ms.sourcegitcommit: 54fe1ae5e7d068e27376d562183ef9ddc7afc432
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 10/30/2020
-ms.locfileid: "93050936"
+ms.lasthandoff: 03/10/2021
+ms.locfileid: "102587862"
 ---
-# <a name="use-hubs-in-no-locsignalr-for-aspnet-core"></a>使用中 SignalR 的中樞進行 ASP.NET Core
+# <a name="use-hubs-in-signalr-for-aspnet-core"></a>使用中 SignalR 的中樞進行 ASP.NET 核心
 
 [Rachel Appel](https://twitter.com/rachelappel)和[古柯 Griffin](https://twitter.com/1kevgriff)
 
-[查看或下載範例程式碼](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/signalr/hubs/sample/ ) [ (如何下載) ](xref:index#how-to-download-a-sample)
+[查看或下載範例程式碼](https://github.com/dotnet/AspNetCore.Docs/tree/main/aspnetcore/signalr/hubs/sample/ ) [ (如何下載) ](xref:index#how-to-download-a-sample)
 
-## <a name="what-is-a-no-locsignalr-hub"></a>什麼是 SignalR 中樞
+## <a name="what-is-a-signalr-hub"></a>什麼是 SignalR 中樞
 
 SignalR中樞 API 可讓您從伺服器呼叫連接用戶端上的方法。 在伺服器程式碼中，您可以定義用戶端所呼叫的方法。 在用戶端程式代碼中，您可以定義從伺服器呼叫的方法。 SignalR 會處理幕後的所有專案，讓用戶端對伺服器和伺服器對用戶端的通訊能夠正常運作。
 
-## <a name="configure-no-locsignalr-hubs"></a>設定 SignalR 中樞
+## <a name="configure-signalr-hubs"></a>設定 SignalR 中樞
 
 SignalR中介軟體需要一些透過呼叫所設定的服務 `services.AddSignalR` 。
 

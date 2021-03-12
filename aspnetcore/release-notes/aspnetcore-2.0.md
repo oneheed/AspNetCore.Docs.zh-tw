@@ -18,20 +18,20 @@ no-loc:
 - Razor
 - SignalR
 uid: aspnetcore-2.0
-ms.openlocfilehash: f9fad5a63c76a3b21341a12fd40baafcdf2c9dac
-ms.sourcegitcommit: 3593c4efa707edeaaceffbfa544f99f41fc62535
+ms.openlocfilehash: b7515bcd8b15199770a4245469d00d10da5566f8
+ms.sourcegitcommit: acfe51c35497a204f75c2a61125c9408c04493e6
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 01/04/2021
-ms.locfileid: "93059724"
+ms.lasthandoff: 03/10/2021
+ms.locfileid: "102605682"
 ---
 # <a name="whats-new-in-aspnet-core-20"></a>ASP.NET Core 2.0 的新功能
 
 本文會重點說明 ASP.NET Core 2.0 最重要的變更，附有相關文件的連結。
 
-## <a name="no-locrazor-pages"></a>Razor 頁面
+## <a name="razor-pages"></a>Razor 頁面
 
-Razor Pages 是 ASP.NET Core MVC 的新功能，可讓您更輕鬆且更有效率地撰寫以頁面為焦點的案常式序代碼。
+Razor 頁面是 ASP.NET Core MVC 的新功能，可讓您更輕鬆且更有效率地撰寫以頁面為焦點的案常式序代碼。
 
 如需詳細資訊，請參閱簡介與教學課程：
 
@@ -76,15 +76,15 @@ ASP.NET Core 2.0 套件以 .NET Standard 2.0 為目標。 套件可供其他 .NE
 
 如需已規劃文件狀態的資訊，請參閱 [GitHub 問題](https://github.com/dotnet/AspNetCore.Docs/issues/3054)。
 
-## <a name="no-locidentity-update"></a>Identity更新
+## <a name="identity-update"></a>Identity更新
 
-我們讓您更輕鬆地使用 Identity 在 ASP.NET Core 2.0 建立安全的 Web api。 您可以取得存取權杖來存取使用 [Microsoft 驗證程式庫 (MSAL)](https://www.nuget.org/packages/Microsoft.Identity.Client) 的 Web API。
+我們讓您更輕鬆地使用 Identity ASP.NET Core 2.0 建立安全的 Web api。 您可以取得存取權杖來存取使用 [Microsoft 驗證程式庫 (MSAL)](https://www.nuget.org/packages/Microsoft.Identity.Client) 的 Web API。
 
 如需 2.0 驗證變更的詳細資訊，請參閱下列資源：
 
 * [ASP.NET Core 中的帳戶確認和密碼復原](xref:security/authentication/accconfirm)
 * [允許為 ASP.NET Core 中的驗證器應用程式產生 QR 代碼](xref:security/authentication/identity-enable-qrcodes)
-* [將驗證遷移 Identity 至 ASP.NET Core 2。0](xref:migration/1x-to-2x/identity-2x)
+* [遷移驗證和 Identity ASP.NET Core 2。0](xref:migration/1x-to-2x/identity-2x)
 
 ## <a name="spa-templates"></a>SPA 範本
 
@@ -132,15 +132,15 @@ return File(data, "text/plain", "downloadName.txt", lastModified: DateTime.UtcNo
 
 根據預設，ASP.NET Core 一律協助以 HTML 編碼的內容，但在新版本中，會採用額外的步驟，協助防止跨網站要求偽造 (XSRF) 攻擊。 ASP.NET Core 現在預設會發出防偽權杖，並對表單 POST 動作和頁面驗證它們，不需要額外組態。
 
-如需詳細資訊，請參閱 <xref:security/anti-request-forgery> 。
+如需詳細資訊，請參閱<xref:security/anti-request-forgery>。
 
 ## <a name="automatic-precompilation"></a>自動先行編譯
 
 Razor 依預設，在發佈期間會啟用 [預先編譯]，以減少發行輸出大小和應用程式啟動時間。
 
-如需詳細資訊，請參閱[ Razor ASP.NET Core 中的 view 編譯和](xref:mvc/views/view-compilation)先行編譯。
+如需詳細資訊，請參閱[ Razor 在 ASP.NET Core 中查看編譯和](xref:mvc/views/view-compilation)先行編譯。
 
-## <a name="no-locrazor-support-for-c-71"></a>Razor c # 7.1 的支援
+## <a name="razor-support-for-c-71"></a>Razor c # 7.1 的支援
 
 Razor視圖引擎已更新為使用新的 Roslyn 編譯器。 這包括支援預設運算式、推斷 Tuple 名稱和使用泛型比對模式等 C# 7.1 功能。 若要在專案中使用 C# 7.1，請在專案檔中新增下列屬性，然後重新載入方案：
 
@@ -148,7 +148,7 @@ Razor視圖引擎已更新為使用新的 Roslyn 編譯器。 這包括支援預
 <LangVersion>latest</LangVersion>
 ```
 
-如需 C# 7.1 功能狀態的資訊，請參閱 [Roslyn GitHub 存放庫](https://github.com/dotnet/roslyn/blob/master/docs/Language%20Feature%20Status.md)。
+如需 C# 7.1 功能狀態的資訊，請參閱 [Roslyn GitHub 存放庫](https://github.com/dotnet/roslyn/blob/main/docs/Language%20Feature%20Status.md)。
 
 ## <a name="other-documentation-updates-for-20"></a>針對 2.0 的其他文件更新
 
@@ -164,7 +164,7 @@ Razor視圖引擎已更新為使用新的 Roslyn 編譯器。 這包括支援預
 如需如何將 ASP.NET Core 1.x 應用程式移轉至 ASP.NET Core 2.0的指引，請參閱下列資源：
 
 * [從 ASP.NET Core 1.x 移轉至 ASP.NET Core 2.0](xref:migration/1x-to-2x/index)
-* [將驗證遷移 Identity 至 ASP.NET Core 2。0](xref:migration/1x-to-2x/identity-2x)
+* [遷移驗證和 Identity ASP.NET Core 2。0](xref:migration/1x-to-2x/identity-2x)
 
 ## <a name="additional-information"></a>其他資訊
 

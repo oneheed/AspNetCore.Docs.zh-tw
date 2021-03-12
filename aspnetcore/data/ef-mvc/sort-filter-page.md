@@ -18,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: data/ef-mvc/sort-filter-page
-ms.openlocfilehash: 8e425d413471912c763c4892a90e9d12039efec4
-ms.sourcegitcommit: 3593c4efa707edeaaceffbfa544f99f41fc62535
+ms.openlocfilehash: ca4bce2274233f49e1c382dbd8d5c45615006b9c
+ms.sourcegitcommit: 54fe1ae5e7d068e27376d562183ef9ddc7afc432
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 01/04/2021
-ms.locfileid: "93053978"
+ms.lasthandoff: 03/10/2021
+ms.locfileid: "102587641"
 ---
 # <a name="tutorial-add-sorting-filtering-and-paging---aspnet-mvc-with-ef-core"></a>教學課程：使用 EF Core 新增排序、篩選和分頁 ASP.NET MVC
 
@@ -43,7 +43,7 @@ ms.locfileid: "93053978"
 > * 新增分頁連結
 > * 建立 [關於] 頁面
 
-## <a name="prerequisites"></a>先決條件
+## <a name="prerequisites"></a>必要條件
 
 * [實作 CRUD 功能](crud.md)
 
@@ -105,7 +105,7 @@ ms.locfileid: "93053978"
 > [!NOTE]
 > 在這裡，您可以在 `IQueryable` 物件上呼叫 `Where` 方法，而篩選將會在伺服器上處理。 在某些情況下，您可能會呼叫 `Where` 方法在記憶體內部集合上作為擴充方法。  (例如，假設您將的參考變更為， `_context.Students` 而不是使用 EF，它會參考會傳回集合的存放 `DbSet` 庫方法 `IEnumerable` 。 ) 結果通常是相同的，但在某些情況下可能會不同。
 >
->例如，.NET Framework 實作的 `Contains` 方法預設會執行區分大小寫的比較，但在 SQL Server 中，這取決於 SQL Server 執行個體的定序設定。 該設定預設為不區分大小寫。 您可以呼叫 `ToUpper` 方法，使測試明確地不區分大小寫：*Where(s => s.LastName.ToUpper().Contains(searchString.ToUpper())*。 如果您稍後變更程式碼，以使用傳回 `IEnumerable` 集合 (而不是 `IQueryable` 物件) 的存放庫，這會確保結果保持不變。  (當您在 `Contains` 集合上呼叫方法時 `IEnumerable` ，會取得 .NET Framework 的實值; 當您在物件上呼叫它時 `IQueryable` ，您會取得資料庫提供者的執行 ) 。不過，這種解決方案的效能會受到負面影響。 `ToUpper` 程式碼會將一個函式置於 TSQL SELECT 陳述式的 WHERE 子句中。 這會防止最佳化工具使用索引。 假設 SQL 大部分安裝為不區分大小寫，最好避免使用 `ToUpper` 程式碼，直到您移轉至區分大小寫的資料存放區為止。
+>例如，.NET Framework 實作的 `Contains` 方法預設會執行區分大小寫的比較，但在 SQL Server 中，這取決於 SQL Server 執行個體的定序設定。 該設定預設為不區分大小寫。 您可以呼叫 `ToUpper` 方法，使測試明確地不區分大小寫：*Where(s => s.LastName.ToUpper().Contains(searchString.ToUpper())*。 如果您稍後變更程式碼，以使用傳回 `IEnumerable` 集合 (而不是 `IQueryable` 物件) 的存放庫，這會確保結果保持不變。  (當您在 `Contains` 集合上呼叫方法時 `IEnumerable` ，您會取得 .net Framework 執行; 當您在物件上呼叫它時 `IQueryable` ，您會取得資料庫提供者的執行 ) 。不過，這種解決方案的效能會受到負面影響。 `ToUpper` 程式碼會將一個函式置於 TSQL SELECT 陳述式的 WHERE 子句中。 這會防止最佳化工具使用索引。 假設 SQL 大部分安裝為不區分大小寫，最好避免使用 `ToUpper` 程式碼，直到您移轉至區分大小寫的資料存放區為止。
 
 ### <a name="add-a-search-box-to-the-student-index-view"></a>將搜尋方塊新增至學生的 [索引] 檢視
 
@@ -260,7 +260,7 @@ LINQ 陳述式會依註冊日期將學生實體組成群組、計算每個群組
 
 ## <a name="get-the-code"></a>取得程式碼
 
-[下載或檢視已完成的應用程式。](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/data/ef-mvc/intro/samples/cu-final)
+[下載或檢視已完成的應用程式。](https://github.com/dotnet/AspNetCore.Docs/tree/main/aspnetcore/data/ef-mvc/intro/samples/cu-final)
 
 ## <a name="next-steps"></a>後續步驟
 

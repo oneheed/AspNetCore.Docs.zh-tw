@@ -19,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/call-javascript-from-dotnet
-ms.openlocfilehash: b5447a55dfa9e4fa55e1a09a3cc00e1f1a965c6e
-ms.sourcegitcommit: 1436bd4d70937d6ec3140da56d96caab33c4320b
+ms.openlocfilehash: ab342f6bdc5da68f2a2ee8d9aee29911a050056d
+ms.sourcegitcommit: 54fe1ae5e7d068e27376d562183ef9ddc7afc432
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 03/06/2021
-ms.locfileid: "102394514"
+ms.lasthandoff: 03/10/2021
+ms.locfileid: "102586614"
 ---
 # <a name="call-javascript-functions-from-net-methods-in-aspnet-core-blazor"></a>從 ASP.NET Core 中的 .NET 方法呼叫 JavaScript 函數 Blazor
 
@@ -32,7 +32,7 @@ Blazor應用程式可以從 javascript 函式的 .net 方法和 .net 方法中�
 
 本文涵蓋從 .NET 叫用 JavaScript 函式的功能。 如需如何從 JavaScript 呼叫 .NET 方法的詳細資訊，請參閱 <xref:blazor/call-dotnet-from-javascript> 。
 
-[查看或下載範例程式碼](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/blazor/common/samples/) ([如何下載](xref:index#how-to-download-a-sample)) 
+[查看或下載範例程式碼](https://github.com/dotnet/AspNetCore.Docs/tree/main/aspnetcore/blazor/common/samples/) ([如何下載](xref:index#how-to-download-a-sample)) 
 
 > [!NOTE]
 > 在檔案 `<script>` `</body>` `wwwroot/index.html` (Blazor WebAssembly) 或檔案 `Pages/_Host.cshtml` () 中的結束記號之前，將 JS 檔案新增 (標記) Blazor Server 。 確定具有 JS interop 方法的 JS 檔案包含在 Blazor FRAMEWORK JS 檔案之前。

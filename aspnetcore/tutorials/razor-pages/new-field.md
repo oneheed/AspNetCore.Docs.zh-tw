@@ -19,20 +19,20 @@ no-loc:
 - Razor
 - SignalR
 uid: tutorials/razor-pages/new-field
-ms.openlocfilehash: 852c26f89b229d89797d9ce6fce2983319defe9c
-ms.sourcegitcommit: 422e8444b9f5cedc373be5efe8032822db54fcaf
+ms.openlocfilehash: cd637507e19735f020b4c28e6f22de0e7e772040
+ms.sourcegitcommit: 54fe1ae5e7d068e27376d562183ef9ddc7afc432
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 02/18/2021
-ms.locfileid: "101101142"
+ms.lasthandoff: 03/10/2021
+ms.locfileid: "102588317"
 ---
-# <a name="part-7-add-a-new-field-to-a-razor-page-in-aspnet-core"></a>第7部分： Razor 在頁面中新增欄位，ASP.NET Core
+# <a name="part-7-add-a-new-field-to-a-razor-page-in-aspnet-core"></a>第7部分：將新欄位新增至 Razor ASP.NET Core 中的頁面
 
 作者：[Rick Anderson](https://twitter.com/RickAndMSFT)
 
 ::: moniker range=">= aspnetcore-5.0"
 
-[檢視或下載範例程式碼](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/tutorials/razor-pages/razor-pages-start/sample/RazorPagesMovie50) ([如何下載](xref:index#how-to-download-a-sample))。
+[檢視或下載範例程式碼](https://github.com/dotnet/AspNetCore.Docs/tree/main/aspnetcore/tutorials/razor-pages/razor-pages-start/sample/RazorPagesMovie50) ([如何下載](xref:index#how-to-download-a-sample))。
 
 在本節中，您會使用 [Entity Framework](/ef/core/get-started/aspnetcore/new-db) Code First 移轉：
 
@@ -62,7 +62,7 @@ ms.locfileid: "101101142"
 
 1. 更新下列頁面：
    1. 將 `Rating` 欄位新增至 Delete 和 Details 頁面。
-   1. 使用 `Rating` 欄位更新 [Create.cshtml](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/tutorials/razor-pages/razor-pages-start/sample/RazorPagesMovie50/Pages/Movies/Create.cshtml)。
+   1. 使用 `Rating` 欄位更新 [Create.cshtml](https://github.com/dotnet/AspNetCore.Docs/tree/main/aspnetcore/tutorials/razor-pages/razor-pages-start/sample/RazorPagesMovie50/Pages/Movies/Create.cshtml)。
    1. 將 `Rating` 欄位新增至 Edit 頁面。
 
 在資料庫更新為包含新欄位之前，應用程式將無法運作。 在沒有資料庫更新的情況下執行應用程式，會擲回 `SqlException` ：
@@ -85,7 +85,7 @@ ms.locfileid: "101101142"
 
 [!code-csharp[](razor-pages-start/sample/RazorPagesMovie50/Models/SeedDataRating.cs?name=snippet1&highlight=8)]
 
-請參閱[完整的 SeedData.cs 檔案](https://github.com/dotnet/AspNetCore.Docs/blob/master/aspnetcore/tutorials/razor-pages/razor-pages-start/sample/RazorPagesMovie50/Models/SeedDataRating.cs) (英文)。
+請參閱[完整的 SeedData.cs 檔案](https://github.com/dotnet/AspNetCore.Docs/blob/main/aspnetcore/tutorials/razor-pages/razor-pages-start/sample/RazorPagesMovie50/Models/SeedDataRating.cs) (英文)。
 
 建置方案。
 
@@ -133,7 +133,7 @@ ms.locfileid: "101101142"
 ### <a name="drop-and-re-create-the-database"></a>卸除並重新建立資料庫
 
 > [!NOTE]
-> 在本教學課程中，您會盡可能使用 Entity Framework Core 的 *遷移* 功能。 移轉可更新資料庫結構描述，以符合資料模型中的變更。 不過，移轉只能進行 EF Core 提供者支援的變更類型，SQLite 提供者的功能則有限制。 例如，其支援新增資料行，但不支援移除或變更資料行。 如果您建立移轉來移除或變更資料行，`ef migrations add` 命令會成功，但 `ef database update` 命令會失敗。 由於這些限制，本教學課程不會將移轉用於 SQLite 結構描述變更。 反之，當結構描述變更時，請您卸除並重新建立資料庫。
+> 在本教學課程中，您會盡可能使用 Entity Framework Core *遷移* 功能。 移轉可更新資料庫結構描述，以符合資料模型中的變更。 不過，移轉只能進行 EF Core 提供者支援的變更類型，SQLite 提供者的功能則有限制。 例如，其支援新增資料行，但不支援移除或變更資料行。 如果您建立移轉來移除或變更資料行，`ef migrations add` 命令會成功，但 `ef database update` 命令會失敗。 由於這些限制，本教學課程不會將移轉用於 SQLite 結構描述變更。 反之，當結構描述變更時，請您卸除並重新建立資料庫。
 >
 >SQLite 限制的因應措施是手動撰寫移轉程式碼，以在資料表有所變更時執行資料表重建。 重建資料表包含：
 >
@@ -173,7 +173,7 @@ ms.locfileid: "101101142"
 
 ::: moniker range="< aspnetcore-5.0 >= aspnetcore-3.0"
 
-[檢視或下載範例程式碼](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/tutorials/razor-pages/razor-pages-start/sample/RazorPagesMovie30) ([如何下載](xref:index#how-to-download-a-sample))。
+[檢視或下載範例程式碼](https://github.com/dotnet/AspNetCore.Docs/tree/main/aspnetcore/tutorials/razor-pages/razor-pages-start/sample/RazorPagesMovie30) ([如何下載](xref:index#how-to-download-a-sample))。
 
 在本節中，您會使用 [Entity Framework](/ef/core/get-started/aspnetcore/new-db) Code First 移轉：
 
@@ -203,7 +203,7 @@ ms.locfileid: "101101142"
 
 1. 更新下列頁面：
    1. 將 `Rating` 欄位新增至 Delete 和 Details 頁面。
-   1. 使用 `Rating` 欄位更新 [Create.cshtml](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/tutorials/razor-pages/razor-pages-start/sample/RazorPagesMovie30/Pages/Movies/Create.cshtml)。
+   1. 使用 `Rating` 欄位更新 [Create.cshtml](https://github.com/dotnet/AspNetCore.Docs/tree/main/aspnetcore/tutorials/razor-pages/razor-pages-start/sample/RazorPagesMovie30/Pages/Movies/Create.cshtml)。
    1. 將 `Rating` 欄位新增至 Edit 頁面。
 
 在資料庫更新為包含新欄位之前，應用程式將無法運作。 在沒有資料庫更新的情況下執行應用程式，會擲回 `SqlException` ：
@@ -226,7 +226,7 @@ ms.locfileid: "101101142"
 
 [!code-csharp[](razor-pages-start/sample/RazorPagesMovie30/Models/SeedDataRating.cs?name=snippet1&highlight=8)]
 
-請參閱[完整的 SeedData.cs 檔案](https://github.com/dotnet/AspNetCore.Docs/blob/master/aspnetcore/tutorials/razor-pages/razor-pages-start/sample/RazorPagesMovie50/Models/SeedDataRating.cs) (英文)。
+請參閱[完整的 SeedData.cs 檔案](https://github.com/dotnet/AspNetCore.Docs/blob/main/aspnetcore/tutorials/razor-pages/razor-pages-start/sample/RazorPagesMovie50/Models/SeedDataRating.cs) (英文)。
 
 建置方案。
 
@@ -274,7 +274,7 @@ ms.locfileid: "101101142"
 ### <a name="drop-and-re-create-the-database"></a>卸除並重新建立資料庫
 
 > [!NOTE]
-> 在本教學課程中，您可以盡可能使用 Entity Framework Core 的 *遷移* 功能。 移轉可更新資料庫結構描述，以符合資料模型中的變更。 不過，移轉只能進行 EF Core 提供者支援的變更類型，SQLite 提供者的功能則有限制。 例如，其支援新增資料行，但不支援移除或變更資料行。 如果您建立移轉來移除或變更資料行，`ef migrations add` 命令會成功，但 `ef database update` 命令會失敗。 由於這些限制，本教學課程不會將移轉用於 SQLite 結構描述變更。 反之，當結構描述變更時，請您卸除並重新建立資料庫。
+> 在本教學課程中，您可以盡可能使用 Entity Framework Core *遷移* 功能。 移轉可更新資料庫結構描述，以符合資料模型中的變更。 不過，移轉只能進行 EF Core 提供者支援的變更類型，SQLite 提供者的功能則有限制。 例如，其支援新增資料行，但不支援移除或變更資料行。 如果您建立移轉來移除或變更資料行，`ef migrations add` 命令會成功，但 `ef database update` 命令會失敗。 由於這些限制，本教學課程不會將移轉用於 SQLite 結構描述變更。 反之，當結構描述變更時，請您卸除並重新建立資料庫。
 >
 >SQLite 限制的因應措施是手動撰寫移轉程式碼，以在資料表有所變更時執行資料表重建。 重建資料表包含：
 >
@@ -314,7 +314,7 @@ ms.locfileid: "101101142"
 
 ::: moniker range="< aspnetcore-3.0"
 
-[檢視或下載範例程式碼](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/tutorials/razor-pages/razor-pages-start) ([如何下載](xref:index#how-to-download-a-sample))。
+[檢視或下載範例程式碼](https://github.com/dotnet/AspNetCore.Docs/tree/main/aspnetcore/tutorials/razor-pages/razor-pages-start) ([如何下載](xref:index#how-to-download-a-sample))。
 
 在本節中，您會使用 [Entity Framework](/ef/core/get-started/aspnetcore/new-db) Code First 移轉：
 
@@ -343,7 +343,7 @@ ms.locfileid: "101101142"
 更新下列頁面：
 
 * 將 `Rating` 欄位新增至 Delete 和 Details 頁面。
-* 使用 `Rating` 欄位更新 [Create.cshtml](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/tutorials/razor-pages/razor-pages-start/sample/RazorPagesMovie22/Pages/Movies/Create.cshtml)。
+* 使用 `Rating` 欄位更新 [Create.cshtml](https://github.com/dotnet/AspNetCore.Docs/tree/main/aspnetcore/tutorials/razor-pages/razor-pages-start/sample/RazorPagesMovie22/Pages/Movies/Create.cshtml)。
 * 將 `Rating` 欄位新增至 Edit 頁面。
 
 在資料庫更新為包含新欄位之前，應用程式將無法運作。 如果立即執行應用程式，應用程式會擲回 `SqlException` ：
@@ -366,7 +366,7 @@ ms.locfileid: "101101142"
 
 [!code-csharp[](razor-pages-start/sample/RazorPagesMovie22/Models/SeedDataRating.cs?name=snippet1&highlight=8)]
 
-請參閱[完整的 SeedData.cs 檔案](https://github.com/dotnet/AspNetCore.Docs/blob/master/aspnetcore/tutorials/razor-pages/razor-pages-start/sample/RazorPagesMovie22/Models/SeedDataRating.cs) (英文)。
+請參閱[完整的 SeedData.cs 檔案](https://github.com/dotnet/AspNetCore.Docs/blob/main/aspnetcore/tutorials/razor-pages/razor-pages-start/sample/RazorPagesMovie22/Models/SeedDataRating.cs) (英文)。
 
 建置方案。
 
@@ -414,7 +414,7 @@ Update-Database
 ### <a name="drop-and-re-create-the-database"></a>卸除並重新建立資料庫
 
 > [!NOTE]
-> 在本教學課程中，您可以盡可能使用 Entity Framework Core 的 *遷移* 功能。 移轉可更新資料庫結構描述，以符合資料模型中的變更。 不過，移轉只能進行 EF Core 提供者支援的變更類型，SQLite 提供者的功能則有限制。 例如，其支援新增資料行，但不支援移除或變更資料行。 如果您建立移轉來移除或變更資料行，`ef migrations add` 命令會成功，但 `ef database update` 命令會失敗。 由於這些限制，本教學課程不會將移轉用於 SQLite 結構描述變更。 反之，當結構描述變更時，請您卸除並重新建立資料庫。
+> 在本教學課程中，您可以盡可能使用 Entity Framework Core *遷移* 功能。 移轉可更新資料庫結構描述，以符合資料模型中的變更。 不過，移轉只能進行 EF Core 提供者支援的變更類型，SQLite 提供者的功能則有限制。 例如，其支援新增資料行，但不支援移除或變更資料行。 如果您建立移轉來移除或變更資料行，`ef migrations add` 命令會成功，但 `ef database update` 命令會失敗。 由於這些限制，本教學課程不會將移轉用於 SQLite 結構描述變更。 反之，當結構描述變更時，請您卸除並重新建立資料庫。
 >
 >SQLite 限制的因應措施是手動撰寫移轉程式碼，以在資料表有所變更時執行資料表重建。 重建資料表包含：
 >

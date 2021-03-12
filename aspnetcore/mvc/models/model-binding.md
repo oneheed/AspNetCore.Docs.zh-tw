@@ -18,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: mvc/models/model-binding
-ms.openlocfilehash: 4de34a75da932b41190caa8434ac5be8cc0710fd
-ms.sourcegitcommit: 8363e44f630fcc6433ccd2a85f7aa9567cd274ed
+ms.openlocfilehash: 5eaedf6dbe5df59848b9cf8a5bda67add48db2a6
+ms.sourcegitcommit: 54fe1ae5e7d068e27376d562183ef9ddc7afc432
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 11/20/2020
-ms.locfileid: "94981930"
+ms.lasthandoff: 03/10/2021
+ms.locfileid: "102586939"
 ---
 # <a name="model-binding-in-aspnet-core"></a>ASP.NET Core 中的資料繫結
 
@@ -31,7 +31,7 @@ ms.locfileid: "94981930"
 
 本文會說明何謂模型繫結、其運作方式，以及如何自訂其行為。
 
-[檢視或下載範例程式碼](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/mvc/models/model-binding/samples) ([如何下載](xref:index#how-to-download-a-sample))。
+[檢視或下載範例程式碼](https://github.com/dotnet/AspNetCore.Docs/tree/main/aspnetcore/mvc/models/model-binding/samples) ([如何下載](xref:index#how-to-download-a-sample))。
 
 ## <a name="what-is-model-binding"></a>何謂模型繫結
 
@@ -165,7 +165,7 @@ public class Pet
 * 建立會實作 `IValueProviderFactory` 的類別。
 * 在 `Startup.ConfigureServices` 中註冊 Factory 類別。
 
-範例應用程式包含 [值提供者](https://github.com/dotnet/AspNetCore.Docs/blob/master/aspnetcore/mvc/models/model-binding/samples/3.x/ModelBindingSample/CookieValueProvider.cs) 和 [factory](https://github.com/dotnet/AspNetCore.Docs/blob/master/aspnetcore/mvc/models/model-binding/samples/3.x/ModelBindingSample/CookieValueProviderFactory.cs) 範例，可取得 s 的值 cookie 。 以下是 `Startup.ConfigureServices` 中的註冊碼：
+範例應用程式包含 [值提供者](https://github.com/dotnet/AspNetCore.Docs/blob/main/aspnetcore/mvc/models/model-binding/samples/3.x/ModelBindingSample/CookieValueProvider.cs) 和 [factory](https://github.com/dotnet/AspNetCore.Docs/blob/main/aspnetcore/mvc/models/model-binding/samples/3.x/ModelBindingSample/CookieValueProviderFactory.cs) 範例，可取得 s 的值 cookie 。 以下是 `Startup.ConfigureServices` 中的註冊碼：
 
 [!code-csharp[](model-binding/samples/3.x/ModelBindingSample/Startup.cs?name=snippet_ValueProvider&highlight=4)]
 
@@ -206,12 +206,12 @@ public class Pet
 
 * [布林值](xref:System.ComponentModel.BooleanConverter)
 * [Byte](xref:System.ComponentModel.ByteConverter)、[SByte](xref:System.ComponentModel.SByteConverter)
-* [字元](xref:System.ComponentModel.CharConverter)
+* [Char](xref:System.ComponentModel.CharConverter)
 * [DateTime](xref:System.ComponentModel.DateTimeConverter)
 * [DateTimeOffset](xref:System.ComponentModel.DateTimeOffsetConverter)
 * [十進位](xref:System.ComponentModel.DecimalConverter)
 * [Double](xref:System.ComponentModel.DoubleConverter)
-* [枚舉](xref:System.ComponentModel.EnumConverter)
+* [列舉](xref:System.ComponentModel.EnumConverter)
 * [Guid](xref:System.ComponentModel.GuidConverter)
 * [Int16](xref:System.ComponentModel.Int16Converter)、[Int32](xref:System.ComponentModel.Int32Converter)、[Int64](xref:System.ComponentModel.Int64Converter)
 * [Single](xref:System.ComponentModel.SingleConverter)
@@ -280,11 +280,11 @@ public IActionResult OnPost(
 * `[BindNever]`
 
 > [!WARNING]
-> 當張貼的表單資料為值來源時，這些屬性會影響模型繫結。 它們 **會影響** 輸入格式子，以處理張貼的 JSON 和 XML 要求主體。 [本文稍後](#input-formatters)會說明輸入格式器。
+> 當張貼的表單資料為值來源時，這些屬性會影響模型繫結。 它們 ***不*** 會影響輸入格式器，其會處理張貼的 JSON 和 XML 要求主體。 [本文稍後](#input-formatters)會說明輸入格式器。
 
 ### <a name="bind-attribute"></a>[Bind] 屬性
 
-可以套用至類別或方法參數。 指定模型繫結應包含哪些模型屬性。 `[Bind]` 不 _*_會影響輸入_*_ 格式器。
+可以套用至類別或方法參數。 指定模型繫結應包含哪些模型屬性。 `[Bind]` 不 ***會影響輸入*** 格式器。
 
 在下列範例中，當呼叫任何處理常式或動作方法時，只會繫結 `Instructor` 模型的指定屬性：
 
@@ -300,7 +300,7 @@ public class Instructor
 public IActionResult OnPost([Bind("LastName,FirstMidName,HireDate")] Instructor instructor)
 ```
 
-`[Bind]`屬性可以用來防止 _create * 案例中的大量指派。 因為排除的屬性是設為 null 或預設值，而不是保持不變，所以在編輯案例中無法正常運作。 建議使用檢視模型而非 `[Bind]` 屬性來防禦大量指派。 如需詳細資訊，請參閱 [關於大量指派的安全性注意事項](xref:data/ef-mvc/crud#security-note-about-overposting)。
+`[Bind]` 屬性可用來防止「建立」案例中的大量指派。 因為排除的屬性是設為 null 或預設值，而不是保持不變，所以在編輯案例中無法正常運作。 建議使用檢視模型而非 `[Bind]` 屬性來防禦大量指派。 如需詳細資訊，請參閱 [關於大量指派的安全性注意事項](xref:data/ef-mvc/crud#security-note-about-overposting)。
 
 ### <a name="modelbinder-attribute"></a>[ModelBinder] 屬性
 
@@ -325,7 +325,7 @@ public class Instructor
 
 ### <a name="bindrequired-attribute"></a>[BindRequired] 屬性
 
-只能套用至模型屬性，不能套用到方法參數。 如果模型的屬性不能發生繫結，則會造成模型繫結新增模型狀態錯誤。 以下是範例：
+只能套用至模型屬性，不能套用到方法參數。 如果模型的屬性不能發生繫結，則會造成模型繫結新增模型狀態錯誤。 以下為範例：
 
 [!code-csharp[](model-binding/samples/3.x/ModelBindingSample/Models/InstructorWithCollection.cs?name=snippet_BindRequired&highlight=8-9)]
 
@@ -333,7 +333,7 @@ public class Instructor
 
 ### <a name="bindnever-attribute"></a>[BindNever] 屬性
 
-只能套用至模型屬性，不能套用到方法參數。 避免模型繫結設定模型的屬性。 以下是範例：
+只能套用至模型屬性，不能套用到方法參數。 避免模型繫結設定模型的屬性。 以下為範例：
 
 [!code-csharp[](model-binding/samples/3.x/ModelBindingSample/Models/InstructorWithDictionary.cs?name=snippet_BindNever&highlight=3-4)]
 
@@ -424,7 +424,7 @@ public class Instructor
 
 模型系結需要複雜類型具有無參數的函式。 和型輸入格式子都支援還原序列化 `System.Text.Json` `Newtonsoft.Json` 沒有無參數函式的類別。 
 
-C # 9 引進了一種記錄類型，這是在網路上簡潔表示資料的絕佳方式。 ASP.NET Core 使用單一的函式加入模型系結和驗證記錄類型的支援：
+C # 9 引進了一種記錄類型，這是在網路上簡潔表示資料的絕佳方式。 ASP.NET Core 新增了模型系結的支援，以及使用單一的函式驗證記錄類型：
 
 ```csharp
 public record Person([Required] string Name, [Range(0, 150)] int Age);
@@ -461,17 +461,17 @@ Age: <input asp-for="Age" />
 
 ## <a name="globalization-behavior-of-model-binding-route-data-and-query-strings"></a>模型系結路由資料和查詢字串的全球化行為
 
-ASP.NET Core 路由值提供者和查詢字串值提供者：
+ASP.NET 核心路由值提供者和查詢字串值提供者：
 
 * 將值視為不變的文化特性。
 * 預期 Url 的文化特性不變。
 
 相反地，來自表單資料的值會進行區分文化特性的轉換。 這是設計的，因此可以跨地區設定共用 Url。
 
-若要讓 ASP.NET Core 路由值提供者和查詢字串值提供者進行區分文化特性的轉換：
+讓 ASP.NET 核心路由值提供者和查詢字串值提供者進行區分文化特性的轉換：
 
 * 繼承自 <xref:Microsoft.AspNetCore.Mvc.ModelBinding.IValueProviderFactory>
-* 從[QueryStringValueProviderFactory](https://github.com/dotnet/AspNetCore/blob/master/src/Mvc/Mvc.Core/src/ModelBinding/QueryStringValueProviderFactory.cs)或[RouteValueValueProviderFactory](https://github.com/dotnet/AspNetCore/blob/master/src/Mvc/Mvc.Core/src/ModelBinding/RouteValueProviderFactory.cs)複製程式碼
+* 從[QueryStringValueProviderFactory](https://github.com/dotnet/AspNetCore/blob/main/src/Mvc/Mvc.Core/src/ModelBinding/QueryStringValueProviderFactory.cs)或[RouteValueValueProviderFactory](https://github.com/dotnet/AspNetCore/blob/main/src/Mvc/Mvc.Core/src/ModelBinding/RouteValueProviderFactory.cs)複製程式碼
 * 使用[CultureInfo CurrentCulture](xref:System.Globalization.CultureInfo.CurrentCulture)取代傳遞給值提供者函式的[文化特性值](https://github.com/dotnet/AspNetCore/blob/e625fe29b049c60242e8048b4ea743cca65aa7b5/src/Mvc/Mvc.Core/src/ModelBinding/QueryStringValueProviderFactory.cs#L30)。
 * 以您的新值取代 MVC 選項中的預設值提供者 factory：
 
@@ -496,7 +496,7 @@ HTTP 要求包含上傳的檔案。  也支援多個檔案的 `IEnumerable<IForm
 
 ## <a name="input-formatters"></a>輸入格式器
 
-要求主體中的資料可以是 JSON、XML 或其他格式。 模型繫結會使用設定處理特定內容類型的「輸入格式器」，來剖析此資料。 根據預設，ASP.NET Core 包含以 JSON 為基礎的輸入格式器，用來處理 JSON 資料。 您可以新增其他內容類型的格式器。
+要求主體中的資料可以是 JSON、XML 或其他格式。 模型繫結會使用設定處理特定內容類型的「輸入格式器」，來剖析此資料。 根據預設，ASP.NET Core 包含用來處理 JSON 資料的 JSON 型輸入格式器。 您可以新增其他內容類型的格式器。
 
 ASP.NET Core 選取以 [Consumes](xref:Microsoft.AspNetCore.Mvc.ConsumesAttribute) 屬性為基礎的輸入格式器。 若無任何屬性，則它會使用 [Content-Type 標頭](https://www.w3.org/Protocols/rfc1341/4_Content-Type.html)。
 
@@ -554,7 +554,7 @@ ASP.NET Core 選取以 [Consumes](xref:Microsoft.AspNetCore.Mvc.ConsumesAttribut
 
 ## <a name="manual-model-binding"></a>手動模型系結 
 
-使用 <xref:Microsoft.AspNetCore.Mvc.ControllerBase.TryUpdateModelAsync*> 方法即可手動叫用模型繫結。 此方法已於 `ControllerBase` 和 `PageModel` 類別中定義。 方法多載可讓您指定要使用的前置詞和值提供者。 如果模型繫結失敗，此方法會傳回 `false`。 以下是範例：
+使用 <xref:Microsoft.AspNetCore.Mvc.ControllerBase.TryUpdateModelAsync*> 方法即可手動叫用模型繫結。 此方法已於 `ControllerBase` 和 `PageModel` 類別中定義。 方法多載可讓您指定要使用的前置詞和值提供者。 如果模型繫結失敗，此方法會傳回 `false`。 以下為範例：
 
 [!code-csharp[](model-binding/samples/3.x/ModelBindingSample/Pages/InstructorsWithCollection/Create.cshtml.cs?name=snippet_TryUpdate&highlight=1-4)]
 
@@ -580,7 +580,7 @@ ASP.NET Core 選取以 [Consumes](xref:Microsoft.AspNetCore.Mvc.ConsumesAttribut
 
 本文會說明何謂模型繫結、其運作方式，以及如何自訂其行為。
 
-[檢視或下載範例程式碼](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/mvc/models/model-binding/samples) ([如何下載](xref:index#how-to-download-a-sample))。
+[檢視或下載範例程式碼](https://github.com/dotnet/AspNetCore.Docs/tree/main/aspnetcore/mvc/models/model-binding/samples) ([如何下載](xref:index#how-to-download-a-sample))。
 
 ## <a name="what-is-model-binding"></a>何謂模型繫結
 
@@ -714,7 +714,7 @@ public class Pet
 * 建立會實作 `IValueProviderFactory` 的類別。
 * 在 `Startup.ConfigureServices` 中註冊 Factory 類別。
 
-範例應用程式包含 [值提供者](https://github.com/dotnet/AspNetCore.Docs/blob/master/aspnetcore/mvc/models/model-binding/samples/2.x/ModelBindingSample/CookieValueProvider.cs) 和 [factory](https://github.com/dotnet/AspNetCore.Docs/blob/master/aspnetcore/mvc/models/model-binding/samples/2.x/ModelBindingSample/CookieValueProviderFactory.cs) 範例，可取得 s 的值 cookie 。 以下是 `Startup.ConfigureServices` 中的註冊碼：
+範例應用程式包含 [值提供者](https://github.com/dotnet/AspNetCore.Docs/blob/main/aspnetcore/mvc/models/model-binding/samples/2.x/ModelBindingSample/CookieValueProvider.cs) 和 [factory](https://github.com/dotnet/AspNetCore.Docs/blob/main/aspnetcore/mvc/models/model-binding/samples/2.x/ModelBindingSample/CookieValueProviderFactory.cs) 範例，可取得 s 的值 cookie 。 以下是 `Startup.ConfigureServices` 中的註冊碼：
 
 [!code-csharp[](model-binding/samples/2.x/ModelBindingSample/Startup.cs?name=snippet_ValueProvider&highlight=3)]
 
@@ -755,12 +755,12 @@ public class Pet
 
 * [布林值](xref:System.ComponentModel.BooleanConverter)
 * [Byte](xref:System.ComponentModel.ByteConverter)、[SByte](xref:System.ComponentModel.SByteConverter)
-* [字元](xref:System.ComponentModel.CharConverter)
+* [Char](xref:System.ComponentModel.CharConverter)
 * [DateTime](xref:System.ComponentModel.DateTimeConverter)
 * [DateTimeOffset](xref:System.ComponentModel.DateTimeOffsetConverter)
 * [十進位](xref:System.ComponentModel.DecimalConverter)
 * [Double](xref:System.ComponentModel.DoubleConverter)
-* [枚舉](xref:System.ComponentModel.EnumConverter)
+* [列舉](xref:System.ComponentModel.EnumConverter)
 * [Guid](xref:System.ComponentModel.GuidConverter)
 * [Int16](xref:System.ComponentModel.Int16Converter)、[Int32](xref:System.ComponentModel.Int32Converter)、[Int64](xref:System.ComponentModel.Int64Converter)
 * [Single](xref:System.ComponentModel.SingleConverter)
@@ -835,13 +835,13 @@ public IActionResult OnPost(
 
 ### <a name="bindrequired-attribute"></a>[BindRequired] 屬性
 
-只能套用至模型屬性，不能套用到方法參數。 如果模型的屬性不能發生繫結，則會造成模型繫結新增模型狀態錯誤。 以下是範例：
+只能套用至模型屬性，不能套用到方法參數。 如果模型的屬性不能發生繫結，則會造成模型繫結新增模型狀態錯誤。 以下為範例：
 
 [!code-csharp[](model-binding/samples/2.x/ModelBindingSample/Models/InstructorWithCollection.cs?name=snippet_BindRequired&highlight=8-9)]
 
 ### <a name="bindnever-attribute"></a>[BindNever] 屬性
 
-只能套用至模型屬性，不能套用到方法參數。 避免模型繫結設定模型的屬性。 以下是範例：
+只能套用至模型屬性，不能套用到方法參數。 避免模型繫結設定模型的屬性。 以下為範例：
 
 [!code-csharp[](model-binding/samples/2.x/ModelBindingSample/Models/InstructorWithDictionary.cs?name=snippet_BindNever&highlight=3-4)]
 
@@ -948,17 +948,17 @@ public IActionResult OnPost([Bind("LastName,FirstMidName,HireDate")] Instructor 
 
 ## <a name="globalization-behavior-of-model-binding-route-data-and-query-strings"></a>模型系結路由資料和查詢字串的全球化行為
 
-ASP.NET Core 路由值提供者和查詢字串值提供者：
+ASP.NET 核心路由值提供者和查詢字串值提供者：
 
 * 將值視為不變的文化特性。
 * 預期 Url 的文化特性不變。
 
 相反地，來自表單資料的值會進行區分文化特性的轉換。 這是設計的，因此可以跨地區設定共用 Url。
 
-若要讓 ASP.NET Core 路由值提供者和查詢字串值提供者進行區分文化特性的轉換：
+讓 ASP.NET 核心路由值提供者和查詢字串值提供者進行區分文化特性的轉換：
 
 * 繼承自 <xref:Microsoft.AspNetCore.Mvc.ModelBinding.IValueProviderFactory>
-* 從[QueryStringValueProviderFactory](https://github.com/dotnet/AspNetCore/blob/master/src/Mvc/Mvc.Core/src/ModelBinding/QueryStringValueProviderFactory.cs)或[RouteValueValueProviderFactory](https://github.com/dotnet/AspNetCore/blob/master/src/Mvc/Mvc.Core/src/ModelBinding/RouteValueProviderFactory.cs)複製程式碼
+* 從[QueryStringValueProviderFactory](https://github.com/dotnet/AspNetCore/blob/main/src/Mvc/Mvc.Core/src/ModelBinding/QueryStringValueProviderFactory.cs)或[RouteValueValueProviderFactory](https://github.com/dotnet/AspNetCore/blob/main/src/Mvc/Mvc.Core/src/ModelBinding/RouteValueProviderFactory.cs)複製程式碼
 * 使用[CultureInfo CurrentCulture](xref:System.Globalization.CultureInfo.CurrentCulture)取代傳遞給值提供者函式的[文化特性值](https://github.com/dotnet/AspNetCore/blob/e625fe29b049c60242e8048b4ea743cca65aa7b5/src/Mvc/Mvc.Core/src/ModelBinding/QueryStringValueProviderFactory.cs#L30)。
 * 以您的新值取代 MVC 選項中的預設值提供者 factory：
 
@@ -983,7 +983,7 @@ HTTP 要求包含上傳的檔案。  也支援多個檔案的 `IEnumerable<IForm
 
 ## <a name="input-formatters"></a>輸入格式器
 
-要求主體中的資料可以是 JSON、XML 或其他格式。 模型繫結會使用設定處理特定內容類型的「輸入格式器」，來剖析此資料。 根據預設，ASP.NET Core 包含以 JSON 為基礎的輸入格式器，用來處理 JSON 資料。 您可以新增其他內容類型的格式器。
+要求主體中的資料可以是 JSON、XML 或其他格式。 模型繫結會使用設定處理特定內容類型的「輸入格式器」，來剖析此資料。 根據預設，ASP.NET Core 包含用來處理 JSON 資料的 JSON 型輸入格式器。 您可以新增其他內容類型的格式器。
 
 ASP.NET Core 選取以 [Consumes](xref:Microsoft.AspNetCore.Mvc.ConsumesAttribute) 屬性為基礎的輸入格式器。 若無任何屬性，則它會使用 [Content-Type 標頭](https://www.w3.org/Protocols/rfc1341/4_Content-Type.html)。
 
@@ -1023,7 +1023,7 @@ ASP.NET Core 選取以 [Consumes](xref:Microsoft.AspNetCore.Mvc.ConsumesAttribut
 
 ## <a name="manual-model-binding"></a>手動模型系結
 
-使用 <xref:Microsoft.AspNetCore.Mvc.ControllerBase.TryUpdateModelAsync*> 方法即可手動叫用模型繫結。 此方法已於 `ControllerBase` 和 `PageModel` 類別中定義。 方法多載可讓您指定要使用的前置詞和值提供者。 如果模型繫結失敗，此方法會傳回 `false`。 以下是範例：
+使用 <xref:Microsoft.AspNetCore.Mvc.ControllerBase.TryUpdateModelAsync*> 方法即可手動叫用模型繫結。 此方法已於 `ControllerBase` 和 `PageModel` 類別中定義。 方法多載可讓您指定要使用的前置詞和值提供者。 如果模型繫結失敗，此方法會傳回 `false`。 以下為範例：
 
 [!code-csharp[](model-binding/samples/2.x/ModelBindingSample/Pages/InstructorsWithCollection/Create.cshtml.cs?name=snippet_TryUpdate&highlight=1-4)]
 

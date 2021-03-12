@@ -18,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: fundamentals/app-state
-ms.openlocfilehash: c11b748f9d79235b14c9541019da6e1fb3428af6
-ms.sourcegitcommit: c1839f2992b003c92cd958244a2e0771ae928786
+ms.openlocfilehash: ab09867a1b1aa73e423babbe295036e292fc733f
+ms.sourcegitcommit: 54fe1ae5e7d068e27376d562183ef9ddc7afc432
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 02/05/2021
-ms.locfileid: "93051404"
+ms.lasthandoff: 03/10/2021
+ms.locfileid: "102586575"
 ---
 # <a name="session-and-state-management-in-aspnet-core"></a>ASP.NET Core 中的工作階段和狀態管理 (機器翻譯)
 
@@ -33,7 +33,7 @@ ms.locfileid: "93051404"
 
 HTTP 是無狀態的通訊協定。 根據預設，HTTP 要求是獨立的訊息，不會保留使用者的值。 本文說明在要求之間保留使用者資料的數種方法。
 
-[查看或下載範例程式碼](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/app-state/samples) ([如何下載](xref:index#how-to-download-a-sample)) 
+[查看或下載範例程式碼](https://github.com/dotnet/AspNetCore.Docs/tree/main/aspnetcore/fundamentals/app-state/samples) ([如何下載](xref:index#how-to-download-a-sample)) 
 
 ## <a name="state-management"></a>狀態管理
 
@@ -65,7 +65,7 @@ Cookie通常用於個人化，其中內容是針對已知使用者自訂的。 �
 
 應用程式不支援會話， [SignalR](xref:signalr/index) 因為[ SignalR 中樞](xref:signalr/hubs)可以獨立于 HTTP 內容執行。 例如，當長時間輪詢要求由中樞維持開啟，超過要求的 HTTP 內容存留期時，便可能發生此情況。
 
-ASP.NET Core 藉由提供 cookie 給包含會話識別碼的用戶端來維護會話狀態。 cookie會話識別碼：
+ASP.NET Core 會藉由提供 cookie 給包含會話識別碼的用戶端來維護會話狀態。 cookie會話識別碼：
 
 * 會隨每個要求傳送至應用程式。
 * 應用程式會使用來提取會話資料。
@@ -186,7 +186,7 @@ Name: @HttpContext.Session.GetString(IndexModel.SessionKeyName)
 
 ## <a name="tempdata"></a>TempData
 
-ASP.NET Core 公開 Razor 頁面 [TempData](xref:Microsoft.AspNetCore.Mvc.RazorPages.PageModel.TempData) 或控制器 <xref:Microsoft.AspNetCore.Mvc.Controller.TempData> 。 這個屬性會儲存資料，直到讀取另一個要求為止。 [保留 (字串) ](xref:Microsoft.AspNetCore.Mvc.ViewFeatures.ITempDataDictionary.Keep*)和[查看 (字串) ](xref:Microsoft.AspNetCore.Mvc.ViewFeatures.ITempDataDictionary.Peek*)方法可以用來檢查資料，而不需要在要求結束時刪除。 [繼續](xref:Microsoft.AspNetCore.Mvc.ViewFeatures.ITempDataDictionary.Keep*) 將字典中的所有專案標示為保留。 `TempData` 是：
+ASP.NET Core 會公開 Razor [TempData](xref:Microsoft.AspNetCore.Mvc.RazorPages.PageModel.TempData) 或控制器頁面 <xref:Microsoft.AspNetCore.Mvc.Controller.TempData> 。 這個屬性會儲存資料，直到讀取另一個要求為止。 [保留 (字串) ](xref:Microsoft.AspNetCore.Mvc.ViewFeatures.ITempDataDictionary.Keep*)和[查看 (字串) ](xref:Microsoft.AspNetCore.Mvc.ViewFeatures.ITempDataDictionary.Peek*)方法可以用來檢查資料，而不需要在要求結束時刪除。 [繼續](xref:Microsoft.AspNetCore.Mvc.ViewFeatures.ITempDataDictionary.Keep*) 將字典中的所有專案標示為保留。 `TempData` 是：
 
 * 適用于需要多個單一要求的資料時重新導向。
 * 由 `TempData` 使用或會話狀態的提供者所執行 cookie 。
@@ -303,7 +303,7 @@ SignalR 應用程式不應使用會話狀態來儲存資訊。 SignalR 應用程
 
 HTTP 是無狀態的通訊協定。 若不採取其他步驟，HTTP 要求是獨立的訊息，不會保留使用者的值或應用程式狀態。 本文描述數種方法來在要求之間保留使用者資料和應用程式狀態。
 
-[查看或下載範例程式碼](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/app-state/samples) ([如何下載](xref:index#how-to-download-a-sample)) 
+[查看或下載範例程式碼](https://github.com/dotnet/AspNetCore.Docs/tree/main/aspnetcore/fundamentals/app-state/samples) ([如何下載](xref:index#how-to-download-a-sample)) 
 
 ## <a name="state-management"></a>狀態管理
 
@@ -337,7 +337,7 @@ Cookie通常用於個人化，其中內容是針對已知使用者自訂的。 �
 > [!NOTE]
 > 應用程式不支援會話， [SignalR](xref:signalr/index) 因為[ SignalR 中樞](xref:signalr/hubs)可以獨立于 HTTP 內容執行。 例如，當長時間輪詢要求由中樞維持開啟，超過要求的 HTTP 內容存留期時，便可能發生此情況。
 
-ASP.NET Core 藉由提供 cookie 給包含會話識別碼的用戶端來維護會話狀態，此識別碼會隨著每個要求傳送至應用程式。 應用程式則使用工作階段識別碼來擷取工作階段資料。
+ASP.NET Core 會維護會話狀態，方法是提供 cookie 包含會話識別碼的用戶端，此識別碼會隨著每個要求傳送至應用程式。 應用程式則使用工作階段識別碼來擷取工作階段資料。
 
 工作階段狀態表現下列行為：
 
@@ -348,7 +348,7 @@ ASP.NET Core 藉由提供 cookie 給包含會話識別碼的用戶端來維護�
 * 應用程式會在最後一個要求之後，保留工作階段一段有限的時間。 應用程式會設定工作階段逾時或使用預設值 20 分鐘。 工作階段狀態適合用來儲存特定工作階段特定的使用者資料，但資料不需要在工作階段之間永久儲存的情況。
 * 當 <xref:Microsoft.AspNetCore.Http.ISession.Clear%2A?displayProperty=nameWithType> 呼叫執行時或會話過期時，就會刪除會話資料。
 * 沒有任何預設機制可通知應用程式程式碼用戶端瀏覽器已關閉，或是在 cookie 用戶端上的會話遭到刪除或過期。
-* ASP.NET Core MVC 和 Razor pages 範本包含一般資料保護規定 (GDPR) 的支援。 cookie依預設，會話狀態不會標示為「基本」，因此除非網站訪客允許追蹤，否則會話狀態無法運作。 如需詳細資訊，請參閱<xref:security/gdpr#tempdata-provider-and-session-state-cookies-arent-essential>。
+* ASP.NET Core MVC 和 Razor pages 範本包含 (GDPR) 的一般資料保護規定支援。 cookie依預設，會話狀態不會標示為「基本」，因此除非網站訪客允許追蹤，否則會話狀態無法運作。 如需詳細資訊，請參閱<xref:security/gdpr#tempdata-provider-and-session-state-cookies-arent-essential>。
 
 > [!WARNING]
 > 請勿將敏感性資料存放在工作階段狀態。 使用者可能不會關閉瀏覽器並清除會話 cookie 。 某些流覽 cookie 器會跨瀏覽器視窗維護有效的會話。 會話可能無法限制為單一使用者 &mdash; ，下一使用者可能會繼續使用相同的會話流覽應用程式 cookie 。
@@ -446,7 +446,7 @@ Name: @HttpContext.Session.GetString(IndexModel.SessionKeyName)
 
 ## <a name="tempdata"></a>TempData
 
-ASP.NET Core 公開 Razor 頁面 [TempData](xref:Microsoft.AspNetCore.Mvc.RazorPages.PageModel.TempData) 或控制器 <xref:Microsoft.AspNetCore.Mvc.Controller.TempData> 。 這個屬性會儲存資料，直到讀取另一個要求為止。 [保留 (字串) ](xref:Microsoft.AspNetCore.Mvc.ViewFeatures.ITempDataDictionary.Keep*) 和 [查看 (字串) ](xref:Microsoft.AspNetCore.Mvc.ViewFeatures.ITempDataDictionary.Peek*) 方法可以用來檢查資料，而不需要在要求結束時刪除。 [保留 ( # B1 ](xref:Microsoft.AspNetCore.Mvc.ViewFeatures.ITempDataDictionary.Keep*) 會標示字典中的所有專案以進行保留。 `TempData` 在需要多個單一要求的資料時，特別適用于重新導向。 `TempData` 是由 `TempData` 使用或會話狀態的提供者所執行 cookie 。
+ASP.NET Core 會公開 Razor [TempData](xref:Microsoft.AspNetCore.Mvc.RazorPages.PageModel.TempData) 或控制器頁面 <xref:Microsoft.AspNetCore.Mvc.Controller.TempData> 。 這個屬性會儲存資料，直到讀取另一個要求為止。 [保留 (字串) ](xref:Microsoft.AspNetCore.Mvc.ViewFeatures.ITempDataDictionary.Keep*) 和 [查看 (字串) ](xref:Microsoft.AspNetCore.Mvc.ViewFeatures.ITempDataDictionary.Peek*) 方法可以用來檢查資料，而不需要在要求結束時刪除。 [保留 () ](xref:Microsoft.AspNetCore.Mvc.ViewFeatures.ITempDataDictionary.Keep*) 標示字典中的所有專案以進行保留。 `TempData` 在需要多個單一要求的資料時，特別適用于重新導向。 `TempData` 是由 `TempData` 使用或會話狀態的提供者所執行 cookie 。
 
 ## <a name="tempdata-samples"></a>TempData 範例
 
@@ -474,7 +474,7 @@ ASP.NET Core 公開 Razor 頁面 [TempData](xref:Microsoft.AspNetCore.Mvc.RazorP
 
 cookie依預設，會使用以 TempData 提供者將 TempData 儲存在 cookie s 中。
 
-cookie資料會使用加密 <xref:Microsoft.AspNetCore.DataProtection.IDataProtector> ，然後使用來進行 <xref:Microsoft.AspNetCore.WebUtilities.Base64UrlTextEncoder> 區塊編碼。 因為 cookie 是區塊，所以 ASP.NET Core 1.x cookie 中找到的單一大小限制並不適用。 cookie資料不會壓縮，因為壓縮加密資料可能會導致安全性問題，例如[犯罪](https://wikipedia.org/wiki/CRIME_(security_exploit))和[缺口](https://wikipedia.org/wiki/BREACH_(security_exploit))攻擊。 如需有關以 cookie TempData 提供者為基礎的詳細資訊，請參閱 <xref:Microsoft.AspNetCore.Mvc.ViewFeatures.CookieTempDataProvider> 。
+cookie資料會使用加密 <xref:Microsoft.AspNetCore.DataProtection.IDataProtector> ，然後使用來進行 <xref:Microsoft.AspNetCore.WebUtilities.Base64UrlTextEncoder> 區塊編碼。 因為 cookie 是區塊，所以 cookie 在 ASP.NET Core 1.x 中找到的單一大小限制不適用。 cookie資料不會壓縮，因為壓縮加密資料可能會導致安全性問題，例如[犯罪](https://wikipedia.org/wiki/CRIME_(security_exploit))和[缺口](https://wikipedia.org/wiki/BREACH_(security_exploit))攻擊。 如需有關以 cookie TempData 提供者為基礎的詳細資訊，請參閱 <xref:Microsoft.AspNetCore.Mvc.ViewFeatures.CookieTempDataProvider> 。
 
 ### <a name="choose-a-tempdata-provider"></a>選擇 TempData 提供者
 

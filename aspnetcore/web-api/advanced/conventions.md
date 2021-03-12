@@ -19,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: web-api/advanced/conventions
-ms.openlocfilehash: 0c5ea8ba69e4c6287afce1771ac9cee65bb188a8
-ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
+ms.openlocfilehash: 1e6526f46fbd177add3699fb5b667021b741c6a4
+ms.sourcegitcommit: 54fe1ae5e7d068e27376d562183ef9ddc7afc432
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 10/30/2020
-ms.locfileid: "93052535"
+ms.lasthandoff: 03/10/2021
+ms.locfileid: "102587836"
 ---
 # <a name="use-web-api-conventions"></a>使用 Web API 慣例
 
@@ -37,11 +37,11 @@ ASP.NET Core 2.2 和更新版本包含擷取常見 [API 文件](xref:tutorials/w
 * 定義從特定動作類型傳回的最常見傳回型別和狀態碼。
 * 識別偏離已定義標準的動作。
 
-ASP.NET Core MVC 2.2 和更新版本在 <xref:Microsoft.AspNetCore.Mvc.DefaultApiConventions?displayProperty=fullName> 中包含一組預設慣例。 這些慣例是以 ASP.NET Core **API** 專案範本中所提供的控制器 ( *ValuesController.cs* ) 為基礎。 若動作遵循範本中的模式，就應該可以成功使用預設慣例。 如果預設慣例不符合您的需求，請參閱[建立 Web API 慣例](#create-web-api-conventions)。
+ASP.NET Core MVC 2.2 和更新版本在 <xref:Microsoft.AspNetCore.Mvc.DefaultApiConventions?displayProperty=fullName> 中包含一組預設慣例。 這些慣例是以 ASP.NET Core **API** 專案範本中所提供的控制器 (*ValuesController.cs*) 為基礎。 若動作遵循範本中的模式，就應該可以成功使用預設慣例。 如果預設慣例不符合您的需求，請參閱[建立 Web API 慣例](#create-web-api-conventions)。
 
 在執行階段，<xref:Microsoft.AspNetCore.Mvc.ApiExplorer> 了解慣例。 `ApiExplorer` 是 MVC 與 [OpenAPI](https://www.openapis.org/) (也稱為 Swagger) 文件產生器通訊的抽象層。 來自套用慣例的屬性會與動作建立關聯，且包含在動作的 OpenAPI 文件中。 [API 分析器](xref:web-api/advanced/analyzers)也了解慣例。 若您的動作為非傳統的 (例如，其傳回未由套用慣例所記載的狀態碼)，就會出現警告，建議您記載狀態碼。
 
-[查看或下載範例程式碼](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/web-api/advanced/conventions/sample) ([如何下載](xref:index#how-to-download-a-sample)) 
+[查看或下載範例程式碼](https://github.com/dotnet/AspNetCore.Docs/tree/main/aspnetcore/web-api/advanced/conventions/sample) ([如何下載](xref:index#how-to-download-a-sample)) 
 
 ## <a name="apply-web-api-conventions"></a>套用 Web API 慣例
 

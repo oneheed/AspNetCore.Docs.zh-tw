@@ -18,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: mvc/views/tag-helpers/th-components
-ms.openlocfilehash: 15bddd8ce18546bef7ee7e6ec2e32e369d0858a3
-ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
+ms.openlocfilehash: fb0bda0cf8d225df4c58ae43f81ed0dce10c1adc
+ms.sourcegitcommit: 54fe1ae5e7d068e27376d562183ef9ddc7afc432
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 10/30/2020
-ms.locfileid: "93060556"
+ms.lasthandoff: 03/10/2021
+ms.locfileid: "102587147"
 ---
 # <a name="tag-helper-components-in-aspnet-core"></a>ASP.NET Core 中的標籤協助程式元件
 
@@ -33,7 +33,7 @@ ms.locfileid: "93060556"
 
 ASP.NET Core 包含兩個內建標籤協助程式元件：`head` 和 `body`。 它們位於 <xref:Microsoft.AspNetCore.Mvc.Razor.TagHelpers> 命名空間中，而且可以同時用於 MVC 和頁面中 Razor 。 標籤協助程式元件不需要在 *_ViewImports.cshtml* 中註冊應用程式。
 
-[查看或下載範例程式碼](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/mvc/views/tag-helpers/th-components/samples) ([如何下載](xref:index#how-to-download-a-sample)) 
+[查看或下載範例程式碼](https://github.com/dotnet/AspNetCore.Docs/tree/main/aspnetcore/mvc/views/tag-helpers/th-components/samples) ([如何下載](xref:index#how-to-download-a-sample)) 
 
 ## <a name="use-cases"></a>使用案例
 
@@ -84,7 +84,7 @@ ASP.NET Core 包含兩個內建標籤協助程式元件：`head` 和 `body`。 �
 
 [!code-csharp[](th-components/samples/RazorPagesSample/Startup.cs?name=snippet_ConfigureServices&highlight=12-15)]
 
-### <a name="registration-via-no-locrazor-file"></a>透過檔案註冊 Razor
+### <a name="registration-via-razor-file"></a>透過檔案註冊 Razor
 
 如果標籤協助程式元件未以 DI 註冊，就可以從 Razor 頁面頁面或 MVC 視圖註冊。 這項技術是用來從檔案控制插入的標記和元件執行順序 Razor 。
 
@@ -124,7 +124,7 @@ ASP.NET Core 包含兩個內建標籤協助程式元件：`head` 和 `body`。 �
 
 * 建立衍生自 <xref:Microsoft.AspNetCore.Mvc.Razor.TagHelpers.TagHelperComponentTagHelper> 的公用類別。
 * 將 [`[HtmlTargetElement]`](xref:Microsoft.AspNetCore.Razor.TagHelpers.HtmlTargetElementAttribute) 屬性套用至類別。 指定目標 HTML 項目的名稱。
-* *選擇性* ：將 [`[EditorBrowsable(EditorBrowsableState.Never)]`](xref:System.ComponentModel.EditorBrowsableAttribute) 屬性套用至類別，以隱藏 IntelliSense 中的類型顯示。
+* *選擇性*：將 [`[EditorBrowsable(EditorBrowsableState.Never)]`](xref:System.ComponentModel.EditorBrowsableAttribute) 屬性套用至類別，以隱藏 IntelliSense 中的類型顯示。
 
 下列程式碼會建立以 `<address>` HTML 項目為目標的自訂標籤協助程式元件：
 

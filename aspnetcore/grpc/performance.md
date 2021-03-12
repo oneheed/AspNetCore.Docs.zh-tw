@@ -18,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: grpc/performance
-ms.openlocfilehash: 386359adfe0e876fa5c067dc82153fd3de0f3fba
-ms.sourcegitcommit: 3982ff9dabb5b12aeb0a61cde2686b5253364f5d
+ms.openlocfilehash: 5d19ace2e844f2159c1ba0e8bc92960bcf00d54e
+ms.sourcegitcommit: 54fe1ae5e7d068e27376d562183ef9ddc7afc432
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 03/04/2021
-ms.locfileid: "102118937"
+ms.lasthandoff: 03/10/2021
+ms.locfileid: "102586991"
 ---
 # <a name="performance-best-practices-with-grpc"></a>使用 gRPC 的效能最佳作法
 
@@ -205,3 +205,30 @@ while (true)
 1. 資料流程可能會因服務或連接錯誤而中斷。 如果發生錯誤，則需要邏輯才能重新開機資料流程。
 2. `RequestStream.WriteAsync` 對多重執行緒而言不安全。 一次只能將一個訊息寫入資料流程。 從多個執行緒透過單一資料流程傳送訊息時，需要生產者/取用者佇列 <xref:System.Threading.Channels.Channel%601> ，例如整理訊息。
 3. GRPC 串流方法僅限於接收一種訊息類型，以及傳送一種訊息類型。 例如， `rpc StreamingCall(stream RequestMessage) returns (stream ResponseMessage)` 接收 `RequestMessage` 和傳送 `ResponseMessage` 。 Protobuf 支援使用和的未知或條件式訊息 `Any` ， `oneof` 可解決這項限制。
+
+## <a name="send-binary-payloads"></a>傳送二進位承載
+
+Protobuf 具有純量數值型別的支援二進位承載 `bytes` 。 C # 中產生的屬性會使用 `ByteString` 做為屬性類型。
+
+```protobuf
+syntax = "proto3";
+
+message PayloadResponse {
+    bytes data = 1;
+}  
+```
+
+`ByteString` 使用建立實例 `ByteString.CopyFrom(byte[] data)` 。 這個方法會配置新的 `ByteString` 和新的 `byte[]` 。 資料會複製到新的位元組陣列。
+
+使用建立實例可以避免額外的配置和複本 `UnsafeByteOperations.UnsafeWrap(ReadOnlyMemory<byte> bytes)` `ByteString` 。
+
+```csharp
+var data = await File.ReadAllBytesAsync(path);
+
+var payload = new PayloadResponse();
+payload.Data = UnsafeByteOperations.UnsafeWrap(data);
+```
+
+位元組不會隨一起複製， `UnsafeByteOperations.UnsafeWrap` 因此 `ByteString` 在使用中時不得修改它們。
+
+`UnsafeByteOperations.UnsafeWrap` 需要 [Google. Protobuf](https://www.nuget.org/packages/Google.Protobuf/) 版本3.15.0 或更新版本。

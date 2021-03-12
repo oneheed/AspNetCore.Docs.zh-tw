@@ -18,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: web-api/jsonpatch
-ms.openlocfilehash: da507974b88c21de22e2c7a56950943207565138
-ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
+ms.openlocfilehash: 4ed44a0fca9e0834a78e433cdd48cbd153c58666
+ms.sourcegitcommit: 54fe1ae5e7d068e27376d562183ef9ddc7afc432
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 10/30/2020
-ms.locfileid: "93060543"
+ms.lasthandoff: 03/10/2021
+ms.locfileid: "102587849"
 ---
 # <a name="jsonpatch-in-aspnet-core-web-api"></a>ASP.NET Core Web API 中的 JsonPatch
 
@@ -68,7 +68,7 @@ PUT 和 [PATCH](https://tools.ietf.org/html/rfc5789) \(英文\) 方法均用來�
 
 ## <a name="json-patch"></a>JSON Patch
 
-[JSON Patch](https://tools.ietf.org/html/rfc6902) \(英文\) 是一種格式，可用來指定要套用至資源的更新。 JSON Patch 文件具有一個「作業」  陣列。 每個作業都會識別特定的變更類型。 這類變更的範例包括新增陣列元素或取代屬性值。
+[JSON Patch](https://tools.ietf.org/html/rfc6902) \(英文\) 是一種格式，可用來指定要套用至資源的更新。 JSON Patch 文件具有一個「作業」陣列。 每個作業都會識別特定的變更類型。 這類變更的範例包括新增陣列元素或取代屬性值。
 
 例如，下列 JSON 檔代表資源、資源的 JSON 修補檔，以及套用修補作業的結果。
 
@@ -251,7 +251,7 @@ PUT 和 [PATCH](https://tools.ietf.org/html/rfc5789) \(英文\) 方法均用來�
 
 ## <a name="get-the-code"></a>取得程式碼
 
-[查看或下載範例程式碼](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/web-api/jsonpatch/samples)。 ([如何下載](xref:index#how-to-download-a-sample))。
+[查看或下載範例程式碼](https://github.com/dotnet/AspNetCore.Docs/tree/main/aspnetcore/web-api/jsonpatch/samples)。 ([如何下載](xref:index#how-to-download-a-sample))。
 
 若要測試範例，請執行應用程式，並使用下列設定來傳送 HTTP 要求：
 
@@ -266,7 +266,7 @@ PUT 和 [PATCH](https://tools.ietf.org/html/rfc5789) \(英文\) 方法均用來�
 * [IETF RFC 6902 JSON Patch 規格](https://tools.ietf.org/html/rfc6902) \(英文\)
 * [IETF RFC 6901 JSON Patch 路徑格式規格](https://tools.ietf.org/html/rfc6901) \(英文\)
 * [JSON Patch 文件](https://jsonpatch.com/) \(英文\)。 包含用於建立 JSON Patch 文件的資源連結。
-* [ASP.NET Core JSON Patch 原始程式碼](https://github.com/dotnet/AspNetCore/tree/master/src/Features/JsonPatch/src)
+* [ASP.NET Core JSON Patch 原始程式碼](https://github.com/dotnet/AspNetCore/tree/main/src/Features/JsonPatch/src)
 
 ::: moniker-end
 
@@ -280,7 +280,7 @@ PUT 和 [PATCH](https://tools.ietf.org/html/rfc5789) \(英文\) 方法均用來�
 
 ## <a name="json-patch"></a>JSON Patch
 
-[JSON Patch](https://tools.ietf.org/html/rfc6902) \(英文\) 是一種格式，可用來指定要套用至資源的更新。 JSON Patch 文件具有一個「作業」  陣列。 每個作業都會識別特定類型的變更，例如，加入陣列元素或取代屬性值。
+[JSON Patch](https://tools.ietf.org/html/rfc6902) \(英文\) 是一種格式，可用來指定要套用至資源的更新。 JSON Patch 文件具有一個「作業」陣列。 每個作業都會識別特定類型的變更，例如，加入陣列元素或取代屬性值。
 
 例如，下列 JSON 文件代表一個資源、一份適用於該資源的 JSON 修補文件，以及套用修補作業的結果。
 
@@ -463,7 +463,7 @@ PUT 和 [PATCH](https://tools.ietf.org/html/rfc5789) \(英文\) 方法均用來�
 
 ## <a name="get-the-code"></a>取得程式碼
 
-[查看或下載範例程式碼](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/web-api/jsonpatch/samples/2.2)。 ([如何下載](xref:index#how-to-download-a-sample))。
+[查看或下載範例程式碼](https://github.com/dotnet/AspNetCore.Docs/tree/main/aspnetcore/web-api/jsonpatch/samples/2.2)。 ([如何下載](xref:index#how-to-download-a-sample))。
 
 若要測試範例，請執行應用程式，並使用下列設定來傳送 HTTP 要求：
 
@@ -478,6 +478,6 @@ PUT 和 [PATCH](https://tools.ietf.org/html/rfc5789) \(英文\) 方法均用來�
 * [IETF RFC 6902 JSON Patch 規格](https://tools.ietf.org/html/rfc6902) \(英文\)
 * [IETF RFC 6901 JSON Patch 路徑格式規格](https://tools.ietf.org/html/rfc6901) \(英文\)
 * [JSON Patch 文件](https://jsonpatch.com/) \(英文\)。 包含用於建立 JSON Patch 文件的資源連結。
-* [ASP.NET Core JSON Patch 原始程式碼](https://github.com/dotnet/AspNetCore/tree/master/src/Features/JsonPatch/src)
+* [ASP.NET Core JSON Patch 原始程式碼](https://github.com/dotnet/AspNetCore/tree/main/src/Features/JsonPatch/src)
 
 ::: moniker-end

@@ -20,12 +20,12 @@ no-loc:
 - SignalR
 uid: blazor/components/prerendering-and-integration
 zone_pivot_groups: blazor-hosting-models
-ms.openlocfilehash: a86b50abff9c5ec52aab2bdb7eb6d563a5197d1a
-ms.sourcegitcommit: 1436bd4d70937d6ec3140da56d96caab33c4320b
+ms.openlocfilehash: a0c5cc0bdc78f2ea70b8c128616ad09328ccf87d
+ms.sourcegitcommit: 54fe1ae5e7d068e27376d562183ef9ddc7afc432
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 03/06/2021
-ms.locfileid: "102395171"
+ms.lasthandoff: 03/10/2021
+ms.locfileid: "102587381"
 ---
 # <a name="prerender-and-integrate-aspnet-core-razor-components"></a>ASP.NET 核心元件的已呈現和整合 Razor
 
@@ -205,6 +205,10 @@ builder.RootComponents.Add<Counter>("#my-counter");
     <link href="BlazorHosted.Client.styles.css" rel="stylesheet" />
 </head>
 ```
+
+## <a name="additional-resources"></a>其他資源
+
+* [支援使用驗證進行預進行](xref:blazor/security/webassembly/additional-scenarios#support-prerendering-with-authentication)
 
 ::: moniker-end
 

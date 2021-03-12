@@ -19,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: performance/caching/middleware
-ms.openlocfilehash: 3c28b6c736f07c0d0483152eeec4300a5a92224c
-ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
+ms.openlocfilehash: 0f1f5dfcb9595270a9659a02141f7d1eba5c44ef
+ms.sourcegitcommit: 54fe1ae5e7d068e27376d562183ef9ddc7afc432
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 10/30/2020
-ms.locfileid: "93052106"
+ms.lasthandoff: 03/10/2021
+ms.locfileid: "102587693"
 ---
 # <a name="response-caching-middleware-in-aspnet-core"></a>ASP.NET Core 中的回應快取中介軟體
 
@@ -32,13 +32,13 @@ ms.locfileid: "93052106"
 
 ::: moniker range=">= aspnetcore-3.0"
 
-本文說明如何在 ASP.NET Core 應用程式中設定回應快取中介軟體。 中介軟體會決定何時可快取回應、儲存回應，以及提供快取的回應。 如需 HTTP 快取和屬性的簡介 [`[ResponseCache]`](xref:Microsoft.AspNetCore.Mvc.ResponseCacheAttribute) ，請參閱 [回應](xref:performance/caching/response)快取。
+本文說明如何設定 ASP.NET Core 應用程式中的回應快取中介軟體。 中介軟體會決定何時可快取回應、儲存回應，以及提供快取的回應。 如需 HTTP 快取和屬性的簡介 [`[ResponseCache]`](xref:Microsoft.AspNetCore.Mvc.ResponseCacheAttribute) ，請參閱 [回應](xref:performance/caching/response)快取。
 
-[查看或下載範例程式碼](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/performance/caching/middleware/samples) ([如何下載](xref:index#how-to-download-a-sample)) 
+[查看或下載範例程式碼](https://github.com/dotnet/AspNetCore.Docs/tree/main/aspnetcore/performance/caching/middleware/samples) ([如何下載](xref:index#how-to-download-a-sample)) 
 
 ## <a name="configuration"></a>組態
 
-回應快取中介軟體可透過共用架構隱含地提供 ASP.NET Core 的應用程式使用。
+回應快取中介軟體可透過共用架構隱含地提供給 ASP.NET Core 應用程式使用。
 
 在中 `Startup.ConfigureServices` ，將回應快取中介軟體新增至服務集合：
 
@@ -71,7 +71,7 @@ ms.locfileid: "93052106"
 
 回應快取選項如下表所示。
 
-| 選項 | 描述 |
+| 選項 | Description |
 | ------ | ----------- |
 | <xref:Microsoft.AspNetCore.ResponseCaching.ResponseCachingOptions.MaximumBodySize> | 回應主體的最大可快取大小（以位元組為單位）。 預設值為 `64 * 1024 * 1024` (64 MB) 。 |
 | <xref:Microsoft.AspNetCore.ResponseCaching.ResponseCachingOptions.SizeLimit> | 回應快取中介軟體的大小限制（以位元組為單位）。 預設值為 `100 * 1024 * 1024` (100 MB) 。 |
@@ -179,9 +179,9 @@ if (responseCachingFeature != null)
 
 ::: moniker range="< aspnetcore-3.0"
 
-本文說明如何在 ASP.NET Core 應用程式中設定回應快取中介軟體。 中介軟體會決定何時可快取回應、儲存回應，以及提供快取的回應。 如需 HTTP 快取和屬性的簡介 [`[ResponseCache]`](xref:Microsoft.AspNetCore.Mvc.ResponseCacheAttribute) ，請參閱 [回應](xref:performance/caching/response)快取。
+本文說明如何設定 ASP.NET Core 應用程式中的回應快取中介軟體。 中介軟體會決定何時可快取回應、儲存回應，以及提供快取的回應。 如需 HTTP 快取和屬性的簡介 [`[ResponseCache]`](xref:Microsoft.AspNetCore.Mvc.ResponseCacheAttribute) ，請參閱 [回應](xref:performance/caching/response)快取。
 
-[查看或下載範例程式碼](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/performance/caching/middleware/samples) ([如何下載](xref:index#how-to-download-a-sample)) 
+[查看或下載範例程式碼](https://github.com/dotnet/AspNetCore.Docs/tree/main/aspnetcore/performance/caching/middleware/samples) ([如何下載](xref:index#how-to-download-a-sample)) 
 
 ## <a name="configuration"></a>組態
 
@@ -215,7 +215,7 @@ if (responseCachingFeature != null)
 
 回應快取選項如下表所示。
 
-| 選項 | 描述 |
+| 選項 | Description |
 | ------ | ----------- |
 | <xref:Microsoft.AspNetCore.ResponseCaching.ResponseCachingOptions.MaximumBodySize> | 回應主體的最大可快取大小（以位元組為單位）。 預設值為 `64 * 1024 * 1024` (64 MB) 。 |
 | <xref:Microsoft.AspNetCore.ResponseCaching.ResponseCachingOptions.SizeLimit> | 回應快取中介軟體的大小限制（以位元組為單位）。 預設值為 `100 * 1024 * 1024` (100 MB) 。 |

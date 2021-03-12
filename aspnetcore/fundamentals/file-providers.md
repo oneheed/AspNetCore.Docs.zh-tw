@@ -19,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: fundamentals/file-providers
-ms.openlocfilehash: 16e5ead9898125c804da4d60322510474201d897
-ms.sourcegitcommit: 3593c4efa707edeaaceffbfa544f99f41fc62535
+ms.openlocfilehash: c66c35e93991333229e367e9f371b125d8067131
+ms.sourcegitcommit: 54fe1ae5e7d068e27376d562183ef9ddc7afc432
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 01/04/2021
-ms.locfileid: "93059438"
+ms.lasthandoff: 03/10/2021
+ms.locfileid: "102588213"
 ---
 # <a name="file-providers-in-aspnet-core"></a>ASP.NET Core 中的檔案提供者
 
@@ -32,14 +32,14 @@ ms.locfileid: "93059438"
 
 ::: moniker range=">= aspnetcore-3.0"
 
-ASP.NET Core 透過使用檔案提供者，將檔案系統存取抽象化。 檔案提供者是在整個 ASP.NET Core framework 中使用。 例如：
+ASP.NET Core 透過使用檔案提供者，將檔案系統存取抽象化。 檔案提供者是在整個 ASP.NET 核心架構中使用。 例如：
 
 * <xref:Microsoft.AspNetCore.Hosting.IWebHostEnvironment> 將應用程式的 [內容根](xref:fundamentals/index#content-root) 和 [web 根目錄](xref:fundamentals/index#web-root) 公開為 `IFileProvider` 類型。
 * [靜態檔案中介軟體](xref:fundamentals/static-files)使用檔案提供者尋找靜態檔案。
 * [Razor](xref:mvc/views/razor) 使用檔案提供者來尋找頁面和瀏覽器。
 * .NET Core 工具使用「檔案提供者」與 Glob 模式來指定應該要發佈哪些檔案。
 
-[查看或下載範例程式碼](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/file-providers/samples) ([如何下載](xref:index#how-to-download-a-sample)) 
+[查看或下載範例程式碼](https://github.com/dotnet/AspNetCore.Docs/tree/main/aspnetcore/fundamentals/file-providers/samples) ([如何下載](xref:index#how-to-download-a-sample)) 
 
 ## <a name="file-provider-interfaces"></a>檔案提供者介面
 
@@ -128,7 +128,7 @@ var manifestEmbeddedProvider =
 * 將檔案限定為上次修改日期。
 * 為包內嵌檔案資訊清單的內嵌資源命名。
 
-| 多載 | 描述 |
+| 多載 | Description |
 | -------- | ----------- |
 | `ManifestEmbeddedFileProvider(Assembly, String)` | 接受選擇性的 `root` 相對路徑參數。 指定 `root` 以將對 <xref:Microsoft.Extensions.FileProviders.IFileProvider.GetDirectoryContents*> 的呼叫限定為所提供路徑下的那些資源。 |
 | `ManifestEmbeddedFileProvider(Assembly, String, DateTimeOffset)` | 接受選擇性的 `root` 相對路徑參數與 `lastModified` 日期 (<xref:System.DateTimeOffset>) 參數。 `lastModified` 日期會限定為 <xref:Microsoft.Extensions.FileProviders.IFileInfo> 執行個體 (由 <xref:Microsoft.Extensions.FileProviders.IFileProvider> 所傳回) 的上次修改日期。 |
@@ -190,7 +190,7 @@ ASP.NET Core 透過使用檔案提供者，將檔案系統存取抽象化。 「
 * [Razor](xref:mvc/views/razor) 使用檔案提供者來尋找頁面和瀏覽器。
 * .NET Core 工具使用「檔案提供者」與 Glob 模式來指定應該要發佈哪些檔案。
 
-[查看或下載範例程式碼](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/file-providers/samples) ([如何下載](xref:index#how-to-download-a-sample)) 
+[查看或下載範例程式碼](https://github.com/dotnet/AspNetCore.Docs/tree/main/aspnetcore/fundamentals/file-providers/samples) ([如何下載](xref:index#how-to-download-a-sample)) 
 
 ## <a name="file-provider-interfaces"></a>檔案提供者介面
 
@@ -275,7 +275,7 @@ var manifestEmbeddedProvider =
 * 將檔案限定為上次修改日期。
 * 為包內嵌檔案資訊清單的內嵌資源命名。
 
-| 多載 | 描述 |
+| 多載 | Description |
 | -------- | ----------- |
 | `ManifestEmbeddedFileProvider(Assembly, String)` | 接受選擇性的 `root` 相對路徑參數。 指定 `root` 以將對 <xref:Microsoft.Extensions.FileProviders.IFileProvider.GetDirectoryContents*> 的呼叫限定為所提供路徑下的那些資源。 |
 | `ManifestEmbeddedFileProvider(Assembly, String, DateTimeOffset)` | 接受選擇性的 `root` 相對路徑參數與 `lastModified` 日期 (<xref:System.DateTimeOffset>) 參數。 `lastModified` 日期會限定為 <xref:Microsoft.Extensions.FileProviders.IFileInfo> 執行個體 (由 <xref:Microsoft.Extensions.FileProviders.IFileProvider> 所傳回) 的上次修改日期。 |

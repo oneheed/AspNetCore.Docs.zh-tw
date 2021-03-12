@@ -19,24 +19,24 @@ no-loc:
 - Razor
 - SignalR
 uid: signalr/java-client
-ms.openlocfilehash: 92941d21820de90eb2ae8fb76c21c588ed9f1ffb
-ms.sourcegitcommit: 8b0e9a72c1599ce21830c843558a661ba908ce32
+ms.openlocfilehash: bdfaf50895612e739eb5ca068a76755f97cf24c2
+ms.sourcegitcommit: 54fe1ae5e7d068e27376d562183ef9ddc7afc432
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 01/08/2021
-ms.locfileid: "98024752"
+ms.lasthandoff: 03/10/2021
+ms.locfileid: "102588070"
 ---
-# <a name="aspnet-core-no-locsignalr-java-client"></a>ASP.NET Core SignalR JAVA 用戶端
+# <a name="aspnet-core-signalr-java-client"></a>ASP.NET Core SignalR JAVA 用戶端
 
 依 [Mikael Mengistu](https://twitter.com/MikaelM_12)
 
-JAVA 用戶端可 SignalR 從 java 程式碼（包括 Android 應用程式）連接到 ASP.NET Core 的伺服器。 JAVA 用戶端和 [JavaScript 客戶](xref:signalr/javascript-client) 端和 [.net 客戶](xref:signalr/dotnet-client)端一樣，可讓您即時接收和傳送訊息至中樞。 JAVA 用戶端可在 ASP.NET Core 2.2 和更新版本中使用。
+JAVA 用戶端可 SignalR 從 java 程式碼（包括 Android 應用程式）連接到 ASP.NET Core 伺服器。 JAVA 用戶端和 [JavaScript 客戶](xref:signalr/javascript-client) 端和 [.net 客戶](xref:signalr/dotnet-client)端一樣，可讓您即時接收和傳送訊息至中樞。 JAVA 用戶端可在 ASP.NET Core 2.2 和更新版本中使用。
 
 本文中參考的 JAVA 主控台應用程式範例會使用 SignalR java 用戶端。
 
-[查看或下載範例程式碼](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/signalr/java-client/sample) ([如何下載](xref:index#how-to-download-a-sample)) 
+[查看或下載範例程式碼](https://github.com/dotnet/AspNetCore.Docs/tree/main/aspnetcore/signalr/java-client/sample) ([如何下載](xref:index#how-to-download-a-sample)) 
 
-## <a name="install-the-no-locsignalr-java-client-package"></a>安裝 SignalR JAVA 用戶端套件
+## <a name="install-the-signalr-java-client-package"></a>安裝 SignalR JAVA 用戶端套件
 
 *Signalr 1.0.0* JAR 檔案可讓用戶端連接至 SignalR 中樞。 若要尋找最新的 JAR 檔案版本號碼，請參閱 [Maven 搜尋結果](https://search.maven.org/search?q=g:com.microsoft.signalr%20AND%20a:signalr)。
 
@@ -91,7 +91,7 @@ SLF4J: See http://www.slf4j.org/codes.html#StaticLoggerBinder for further detail
 
 ## <a name="android-development-notes"></a>Android 開發附注
 
-在 Android SDK 用戶端功能的相容性方面 SignalR ，指定目標 Android SDK 版本時，請考慮下列專案：
+關於 Android SDK 與 SignalR 用戶端功能的相容性，請在指定目標 ANDROID sdk 版本時，考慮下列專案：
 
 * SignalRJAVA 用戶端會在 ANDROID API 層級16和更新版本上執行。
 * 透過 Azure 服務連接 SignalR 將需要 ANDROID API 層級20和更新版本，因為 [azure SignalR 服務](/azure/azure-signalr/signalr-overview) 需要 TLS 1.2 且不支援 sha-1 型加密套件。 Android 在 API 層級20中 [新增了 SHA-256 (和以上) 加密套件的支援](https://developer.android.com/reference/javax/net/ssl/SSLSocket) 。

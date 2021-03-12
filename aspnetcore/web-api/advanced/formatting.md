@@ -18,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: web-api/advanced/formatting
-ms.openlocfilehash: 5fa7bc15bac2609c89fea54f8a788aaf9f5ad055
-ms.sourcegitcommit: 3982ff9dabb5b12aeb0a61cde2686b5253364f5d
+ms.openlocfilehash: e3e176072032494f94f120efabb95d6c127fb5e6
+ms.sourcegitcommit: 54fe1ae5e7d068e27376d562183ef9ddc7afc432
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 03/04/2021
-ms.locfileid: "102119028"
+ms.lasthandoff: 03/10/2021
+ms.locfileid: "102587810"
 ---
 # <a name="format-response-data-in-aspnet-core-web-api"></a>在 ASP.NET Core Web API 中格式化回應資料
 
@@ -31,7 +31,7 @@ ms.locfileid: "102119028"
 
 ASP.NET Core MVC 支援格式化回應資料。 您可以使用特定格式或回應用戶端要求的格式來格式化回應資料。
 
-[查看或下載範例程式碼](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/web-api/advanced/formatting) ([如何下載](xref:index#how-to-download-a-sample)) 
+[查看或下載範例程式碼](https://github.com/dotnet/AspNetCore.Docs/tree/main/aspnetcore/web-api/advanced/formatting) ([如何下載](xref:index#how-to-download-a-sample)) 
 
 ## <a name="format-specific-action-results"></a>格式特定的動作結果
 

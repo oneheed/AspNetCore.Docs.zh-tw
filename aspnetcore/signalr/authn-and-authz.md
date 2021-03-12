@@ -19,24 +19,24 @@ no-loc:
 - Razor
 - SignalR
 uid: signalr/authn-and-authz
-ms.openlocfilehash: 0e220d72fe9ef4ada402b449ef20e31324f7bcd2
-ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
+ms.openlocfilehash: 9a3102e4451bbc5cd9ff15e88bebd4e4f2c115f4
+ms.sourcegitcommit: 54fe1ae5e7d068e27376d562183ef9ddc7afc432
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 10/30/2020
-ms.locfileid: "93060114"
+ms.lasthandoff: 03/10/2021
+ms.locfileid: "102588096"
 ---
-# <a name="authentication-and-authorization-in-aspnet-core-no-locsignalr"></a>ASP.NET Core 中的驗證和授權 SignalR
+# <a name="authentication-and-authorization-in-aspnet-core-signalr"></a>ASP.NET Core 中的驗證和授權 SignalR
 
 [Andrew Stanton-護士](https://twitter.com/anurse)
 
-[查看或下載範例程式碼](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/signalr/authn-and-authz/sample/) [ (如何下載) ](xref:index#how-to-download-a-sample)
+[查看或下載範例程式碼](https://github.com/dotnet/AspNetCore.Docs/tree/main/aspnetcore/signalr/authn-and-authz/sample/) [ (如何下載) ](xref:index#how-to-download-a-sample)
 
-## <a name="authenticate-users-connecting-to-a-no-locsignalr-hub"></a>驗證連接至中樞的使用者 SignalR
+## <a name="authenticate-users-connecting-to-a-signalr-hub"></a>驗證連接至中樞的使用者 SignalR
 
-SignalR 可以搭配 [ASP.NET Core authentication](xref:security/authentication/identity) 使用，以將使用者與每個連接產生關聯。 在中樞中，可以從 HubConnectionCoNtext 存取驗證資料。 [使用者](/dotnet/api/microsoft.aspnetcore.signalr.hubconnectioncontext.user) 屬性。 驗證可讓中樞在與使用者相關聯的所有連接上呼叫方法。 如需詳細資訊，請參閱[中 SignalR 的管理使用者和群組](xref:signalr/groups)。 多個連接可能與單一使用者相關聯。
+SignalR 可以與 [ASP.NET Core 驗證](xref:security/authentication/identity) 搭配使用，以將使用者與每個連接產生關聯。 在中樞中，可以從 HubConnectionCoNtext 存取驗證資料。 [使用者](/dotnet/api/microsoft.aspnetcore.signalr.hubconnectioncontext.user) 屬性。 驗證可讓中樞在與使用者相關聯的所有連接上呼叫方法。 如需詳細資訊，請參閱[中 SignalR 的管理使用者和群組](xref:signalr/groups)。 多個連接可能與單一使用者相關聯。
 
-以下是 `Startup.Configure` 使用 SignalR 和 ASP.NET Core 驗證的範例：
+以下是 `Startup.Configure` 使用 SignalR 和 ASP.NET 核心驗證的範例：
 
 ::: moniker range=">= aspnetcore-3.0"
 
@@ -86,11 +86,11 @@ public void Configure(IApplicationBuilder app)
 ```
 
 > [!NOTE]
-> 註冊 SignalR 和 ASP.NET Core 驗證中介軟體重要的順序。 一律在 `UseAuthentication` 之前呼叫 `UseSignalR` ，在 SignalR 上有使用者 `HttpContext` 。
+> 您註冊 SignalR 和 ASP.NET 核心驗證中介軟體重要的順序。 一律在 `UseAuthentication` 之前呼叫 `UseSignalR` ，在 SignalR 上有使用者 `HttpContext` 。
 
 ::: moniker-end
 
-### <a name="no-loccookie-authentication"></a>Cookie 驗證
+### <a name="cookie-authentication"></a>Cookie 驗證
 
 在以瀏覽器為基礎的應用程式中， cookie 驗證可讓您現有的使用者認證自動流向連線 SignalR 。 使用瀏覽器用戶端時，不需要進行其他設定。 如果使用者已登入您的應用程式，則 SignalR 連接會自動繼承此驗證。
 
@@ -131,7 +131,7 @@ var connection = new HubConnectionBuilder()
 > [!NOTE]
 > 因為瀏覽器 API 的限制，使用 Websocket 和 Server-Sent 事件時，會在瀏覽器上使用查詢字串。 使用 HTTPS 時，查詢字串值是由 TLS 連接所保護。 但是，許多伺服器會記錄查詢字串值。 如需詳細資訊，請參閱[ASP.NET Core SignalR 中的安全性考慮](xref:signalr/security)。 SignalR 使用標頭在支援這些權杖的環境中傳輸權杖 (例如 .NET 和 JAVA 用戶端) 。
 
-#### <a name="no-locidentity-server-jwt-authentication"></a>Identity 伺服器 JWT 驗證
+#### <a name="identity-server-jwt-authentication"></a>Identity 伺服器 JWT 驗證
 
 使用 Identity 伺服器時，請將 <xref:Microsoft.Extensions.Options.PostConfigureOptions%601> 服務新增至專案：
 
@@ -173,13 +173,13 @@ services.TryAddEnumerable(
         ConfigureJwtBearerOptions>());
 ```
 
-### <a name="no-loccookies-vs-bearer-tokens"></a>Cookie和持有人權杖 
+### <a name="cookies-vs-bearer-tokens"></a>Cookie和持有人權杖 
 
 Cookie是瀏覽器專用的。 相較于傳送持有人權杖，從其他類型的用戶端傳送這些用戶端會增加複雜性。 因此， cookie 除非應用程式只需要從瀏覽器用戶端驗證使用者，否則不建議進行驗證。 使用瀏覽器用戶端以外的用戶端時，建議使用持有人權杖驗證。
 
 ### <a name="windows-authentication"></a>Windows 驗證
 
-如果您的應用程式中已設定 [Windows 驗證](xref:security/authentication/windowsauth) ，則 SignalR 可以使用該身分識別來保護中樞。 不過，若要將訊息傳送給個別使用者，您需要新增自訂使用者識別碼提供者。 Windows 驗證系統不會提供「名稱識別碼」宣告。 SignalR 使用宣告來判斷使用者名稱。
+如果您的應用程式中已設定 [Windows 驗證](xref:security/authentication/windowsauth) ，則 SignalR 可以使用該身分識別來保護中樞。 不過，若要將訊息傳送給個別使用者，您需要新增自訂使用者識別碼提供者。 Windows 驗證系統未提供「名稱識別碼」宣告。 SignalR 使用宣告來判斷使用者名稱。
 
 加入新的類別，此類別會實 `IUserIdProvider` 作為識別碼，並從使用者取得其中一個宣告。 例如，若要使用 "Name" 宣告 (是) 表單中的 Windows 使用者名稱 `[Domain]\[Username]` ，請建立下列類別：
 
@@ -213,7 +213,7 @@ var connection = new HubConnectionBuilder()
     .Build();
 ```
 
-Internet Explorer 和 Microsoft Edge 中支援 Windows 驗證，但並非所有瀏覽器都支援。 例如，在 Chrome 和 Safari 中，嘗試使用 Windows 驗證和 Websocket 會失敗。 當 Windows 驗證失敗時，用戶端會嘗試切換回可能會運作的其他傳輸。
+Internet Explorer 和 Microsoft Edge 都支援 Windows 驗證，但並非所有瀏覽器都支援。 例如，在 Chrome 和 Safari 中，嘗試使用 Windows 驗證和 Websocket 會失敗。 當 Windows 驗證失敗時，用戶端會嘗試切換回可能運作的其他傳輸。
 
 ### <a name="use-claims-to-customize-identity-handling"></a>使用宣告來自訂身分識別處理
 
@@ -276,7 +276,7 @@ public class ChatHub : Hub
 
 SignalR 當中樞方法需要授權時，提供自訂資源給授權處理常式。 資源是的實例 `HubInvocationContext` 。 包括、所叫用 `HubInvocationContext` `HubCallerContext` 中樞方法的名稱，以及中樞方法的引數。
 
-請考慮可讓多個組織透過 Azure Active Directory 進行登入的聊天室範例。 具有 Microsoft 帳戶的任何人都可以登入聊天，但只有擁有組織的成員才能禁止使用者或查看使用者的聊天記錄。 此外，我們可能會想要限制特定使用者的特定功能。 使用 ASP.NET Core 3.0 中更新的功能，這是完全可行的。 請注意如何 `DomainRestrictedRequirement` 作為自訂 `IAuthorizationRequirement` 。 現在 `HubInvocationContext` 已傳入資源參數，內部邏輯可以檢查正在呼叫中樞的內容，並決定是否要讓使用者執行個別的中樞方法。
+請考慮允許透過 Azure Active Directory 登入多個組織的聊天室範例。 具有 Microsoft 帳戶的任何人都可以登入聊天，但只有擁有組織的成員才能禁止使用者或查看使用者的聊天記錄。 此外，我們可能會想要限制特定使用者的特定功能。 使用 ASP.NET Core 3.0 中更新的功能，這是完全可行的。 請注意如何 `DomainRestrictedRequirement` 作為自訂 `IAuthorizationRequirement` 。 現在 `HubInvocationContext` 已傳入資源參數，內部邏輯可以檢查正在呼叫中樞的內容，並決定是否要讓使用者執行個別的中樞方法。
 
 ```csharp
 [Authorize]

@@ -18,14 +18,14 @@ no-loc:
 - Razor
 - SignalR
 uid: mvc/models/validation
-ms.openlocfilehash: d6fa7e4524a8afdc23d4ad46354d9d8b395656a3
-ms.sourcegitcommit: e311cfb77f26a0a23681019bd334929d1aaeda20
+ms.openlocfilehash: 412f95e67fa35e952a907db328395183f1698b9e
+ms.sourcegitcommit: 54fe1ae5e7d068e27376d562183ef9ddc7afc432
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 02/03/2021
-ms.locfileid: "99530186"
+ms.lasthandoff: 03/10/2021
+ms.locfileid: "102587212"
 ---
-# <a name="model-validation-in-aspnet-core-mvc-and-razor-pages"></a>ASP.NET Core MVC 和頁面中的模型驗證 Razor
+# <a name="model-validation-in-aspnet-core-mvc-and-razor-pages"></a>ASP.NET 核心 MVC 和頁面中的模型驗證 Razor
 
 ::: moniker range=">= aspnetcore-3.0"
 
@@ -33,7 +33,7 @@ ms.locfileid: "99530186"
 
 本文說明如何在 ASP.NET Core MVC 或 Pages 應用程式中驗證使用者輸入 Razor 。
 
-[檢視或下載範例程式碼](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/mvc/models/validation/samples) ([如何下載](xref:index#how-to-download-a-sample))。
+[檢視或下載範例程式碼](https://github.com/dotnet/AspNetCore.Docs/tree/main/aspnetcore/mvc/models/validation/samples) ([如何下載](xref:index#how-to-download-a-sample))。
 
 ## <a name="model-state"></a>模型狀態
 
@@ -289,7 +289,7 @@ public string MiddleName { get; set; }
 </div>
 ```
 
-請注意，HTML 輸出中的 `data-` 屬性 (attribute) 會對應至 `Movie.ReleaseDate` 屬性 (property) 的驗證屬性 (attribute)。 `data-val-required` 屬性包含使用者未填入發行日期欄位時所要顯示的錯誤訊息。 jQuery 不顯眼驗證會將此值傳遞給 [所需的 Jquery 驗證 ( # B1](https://jqueryvalidation.org/required-method/) 方法，然後在伴隨的元素中顯示該訊息 **\<span>** 。
+請注意，HTML 輸出中的 `data-` 屬性 (attribute) 會對應至 `Movie.ReleaseDate` 屬性 (property) 的驗證屬性 (attribute)。 `data-val-required` 屬性包含使用者未填入發行日期欄位時所要顯示的錯誤訊息。 jQuery 不顯眼驗證會將此值傳遞至 [所需](https://jqueryvalidation.org/required-method/) 的 jquery 驗證 () 方法，然後在伴隨的元素中顯示該訊息 **\<span>** 。
 
 資料型別驗證是根據屬性的 .NET 型別，除非是由 `[DataType]` 屬性覆寫。 瀏覽器具有自己的預設錯誤訊息，但 jQuery 驗證低調驗證套件可以覆寫這些訊息。 `[DataType]` 屬性和子類別 (例如 `[EmailAddress]`) 可讓您指定錯誤訊息。
 
@@ -419,7 +419,7 @@ $.get({
 
 本文說明如何在 ASP.NET Core MVC 或 Pages 應用程式中驗證使用者輸入 Razor 。
 
-[檢視或下載範例程式碼](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/mvc/models/validation/sample) ([如何下載](xref:index#how-to-download-a-sample))。
+[檢視或下載範例程式碼](https://github.com/dotnet/AspNetCore.Docs/tree/main/aspnetcore/mvc/models/validation/sample) ([如何下載](xref:index#how-to-download-a-sample))。
 
 ## <a name="model-state"></a>模型狀態
 
@@ -439,7 +439,7 @@ $.get({
 
 ## <a name="validation-attributes"></a>驗證屬性
 
-驗證屬性可讓您指定模型屬性的驗證規則。 下列來自[範例應用程式](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/mvc/models/validation/sample)的範例，顯示以驗證屬性標註的模型類別。 `[ClassicMovie]` 屬性是自訂驗證屬性，其他的則是內建。 未顯示的是 `[ClassicMovie2]` ，它會顯示執行自訂屬性的替代方法。
+驗證屬性可讓您指定模型屬性的驗證規則。 下列來自[範例應用程式](https://github.com/dotnet/AspNetCore.Docs/tree/main/aspnetcore/mvc/models/validation/sample)的範例，顯示以驗證屬性標註的模型類別。 `[ClassicMovie]` 屬性是自訂驗證屬性，其他的則是內建。 未顯示的是 `[ClassicMovie2]` ，它會顯示執行自訂屬性的替代方法。
 
 [!code-csharp[](validation/samples/2.x/ValidationSample/Models/Movie.cs?name=snippet_ModelClass)]
 
@@ -664,7 +664,7 @@ public string MiddleName { get; set; }
 </form>
 ```
 
-請注意，HTML 輸出中的 `data-` 屬性 (attribute) 會對應至 `ReleaseDate` 屬性 (property) 的驗證屬性 (attribute)。 `data-val-required` 屬性包含使用者未填入發行日期欄位時所要顯示的錯誤訊息。 jQuery 不顯眼驗證會將此值傳遞給 [ ( # B1 方法所需](https://jqueryvalidation.org/required-method/) 的 jquery 驗證，然後在伴隨的元素中顯示該訊息 **\<span>** 。
+請注意，HTML 輸出中的 `data-` 屬性 (attribute) 會對應至 `ReleaseDate` 屬性 (property) 的驗證屬性 (attribute)。 `data-val-required` 屬性包含使用者未填入發行日期欄位時所要顯示的錯誤訊息。 jQuery 不顯眼驗證會將此值傳遞給 jQuery Validate [ ()](https://jqueryvalidation.org/required-method/) 方法，然後在伴隨的元素中顯示該訊息 **\<span>** 。
 
 資料型別驗證是根據屬性的 .NET 型別，除非是由 `[DataType]` 屬性覆寫。 瀏覽器具有自己的預設錯誤訊息，但 jQuery 驗證低調驗證套件可以覆寫這些訊息。 `[DataType]` 屬性和子類別 (例如 `[EmailAddress]`) 可讓您指定錯誤訊息。
 

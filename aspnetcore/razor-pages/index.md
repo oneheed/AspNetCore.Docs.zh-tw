@@ -1,7 +1,7 @@
 ---
 title: RazorASP.NET Core 中的頁面簡介
 author: Rick-Anderson
-description: 說明 Razor ASP.NET Core 中的頁面如何讓撰寫以頁面為焦點的案例撰寫程式碼比使用 MVC 更簡單、更具生產力。
+description: 說明 Razor ASP.NET Core 中的頁面如何讓撰寫以頁面為焦點的案例撰寫程式碼比使用 MVC 更簡單且更具生產力。
 monikerRange: '>= aspnetcore-2.0'
 ms.author: riande
 ms.date: 02/12/2020
@@ -18,14 +18,14 @@ no-loc:
 - Razor
 - SignalR
 uid: razor-pages/index
-ms.openlocfilehash: f8cdbbffae9b291923a6d425fef5526b0ec88f61
-ms.sourcegitcommit: 063a06b644d3ade3c15ce00e72a758ec1187dd06
+ms.openlocfilehash: 78b192cb2240046d16b1b766954ed4ca5229d888
+ms.sourcegitcommit: 54fe1ae5e7d068e27376d562183ef9ddc7afc432
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 01/16/2021
-ms.locfileid: "98253185"
+ms.lasthandoff: 03/10/2021
+ms.locfileid: "102586705"
 ---
-# <a name="introduction-to-no-locrazor-pages-in-aspnet-core"></a>RazorASP.NET Core 中的頁面簡介
+# <a name="introduction-to-razor-pages-in-aspnet-core"></a>RazorASP.NET Core 中的頁面簡介
 
 
 作者：[Rick Anderson](https://twitter.com/RickAndMSFT) 與 [Ryan Nowak](https://github.com/rynowak)
@@ -78,7 +78,7 @@ Razor 頁面可讓撰寫以頁面為焦點的案常式序代碼比使用控制�
 
 <a name="rpvs17"></a>
 
-## <a name="create-a-no-locrazor-pages-project"></a>建立 Razor 頁面專案
+## <a name="create-a-razor-pages-project"></a>建立 Razor 頁面專案
 
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
@@ -94,7 +94,7 @@ Razor 頁面可讓撰寫以頁面為焦點的案常式序代碼比使用控制�
 
 ---
 
-## <a name="no-locrazor-pages"></a>Razor 頁面
+## <a name="razor-pages"></a>Razor 頁面
 
 Razor 頁面已在 *Startup.cs* 中啟用：
 
@@ -104,7 +104,7 @@ Razor 頁面已在 *Startup.cs* 中啟用：
 
 [!code-cshtml[](index/3.0sample/RazorPagesIntro/Pages/Index.cshtml?highlight=1)]
 
-上述程式碼看起來很像是在具有控制器和 views 的 ASP.NET Core 應用程式中使用的[ Razor 視圖](xref:tutorials/first-mvc-app/adding-view)檔案。 這會讓它不同的是指示詞 [`@page`](xref:mvc/views/razor#page) 。 `@page` 會將檔案轉換成 MVC 動作，這表示它會直接處理要求，不用透過控制器。 `@page` 必須是頁面上的第一個指示詞 Razor 。 `@page` 會影響其他結構的行為 [Razor](xref:mvc/views/razor) 。 Razor 分頁檔名的名稱必須是 *cshtml* 尾碼。
+上述程式碼看起來很像是 ASP.NET Core 應用程式中使用控制器和 views 的[ Razor 視圖](xref:tutorials/first-mvc-app/adding-view)檔案。 這會讓它不同的是指示詞 [`@page`](xref:mvc/views/razor#page) 。 `@page` 會將檔案轉換成 MVC 動作，這表示它會直接處理要求，不用透過控制器。 `@page` 必須是頁面上的第一個指示詞 Razor 。 `@page` 會影響其他結構的行為 [Razor](xref:mvc/views/razor) 。 Razor 分頁檔名的名稱必須是 *cshtml* 尾碼。
 
 使用`PageModel`類別的類似頁面，顯示於下列兩個檔案中。 *Pages/Index2.cshtml* 檔案：
 
@@ -134,7 +134,7 @@ Razor 頁面已在 *Startup.cs* 中啟用：
 
 Razor 頁面的設計目的是要讓搭配網頁瀏覽器使用的常見模式在建立應用程式時很容易執行。 [模型](xref:mvc/models/model-binding)系結 [、卷](xref:mvc/views/tag-helpers/intro)標協助程式和 HTML 協助程式全都 *是* 使用頁面類別中定義的屬性 Razor 。 `Contact` 模型請考慮實作基本的「與我們連絡」格式頁面：
 
-本文件中的範例，會在 [Startup.cs](https://github.com/dotnet/AspNetCore.Docs/blob/master/aspnetcore/razor-pages/index/3.0sample/RazorPagesContacts/Startup.cs#L23-L24) 檔案中初始化 `DbContext`。
+本文件中的範例，會在 [Startup.cs](https://github.com/dotnet/AspNetCore.Docs/blob/main/aspnetcore/razor-pages/index/3.0sample/RazorPagesContacts/Startup.cs#L23-L24) 檔案中初始化 `DbContext`。
 
 記憶體中的資料庫需要 `Microsoft.EntityFrameworkCore.InMemory` NuGet 套件。
 
@@ -369,13 +369,13 @@ Razor`OnGet`如果未 `OnHead` 定義任何處理程式，則頁面會切換回�
 
 <a name="xsrf"></a>
 
-## <a name="xsrfcsrf-and-no-locrazor-pages"></a>XSRF/CSRF 和 Razor Pages
+## <a name="xsrfcsrf-and-razor-pages"></a>XSRF/CSRF 和 Razor Pages
 
 Razor 頁面會受到 [Antiforgery 驗證](xref:security/anti-request-forgery)的保護。 [FormTagHelper](xref:mvc/views/working-with-forms#the-form-tag-helper)會將 antiforgery token 插入至 HTML 表單元素。
 
 <a name="layout"></a>
 
-## <a name="using-layouts-partials-templates-and-tag-helpers-with-no-locrazor-pages"></a>使用頁面的版面配置、部分、範本和標記協助程式 Razor
+## <a name="using-layouts-partials-templates-and-tag-helpers-with-razor-pages"></a>使用頁面的版面配置、部分、範本和標記協助程式 Razor
 
 頁面會使用 view engine 的所有功能 Razor 。 配置、部分、範本、標籤協助程式、 *_ViewStart cshtml* 和 *_ViewImports. cshtml* 的運作方式與傳統視圖的運作方式相同。 Razor
 
@@ -614,13 +614,13 @@ public string Message { get; set; }
 
 若要先行編譯視圖，請參閱[ Razor view 編譯](xref:mvc/views/view-compilation)。
 
-### <a name="specify-that-no-locrazor-pages-are-at-the-content-root"></a>指定 Razor 頁面位於內容根目錄
+### <a name="specify-that-razor-pages-are-at-the-content-root"></a>指定 Razor 頁面位於內容根目錄
 
 根據預設， Razor 頁面會根目錄在 */Pages* 目錄中。 加入 <xref:Microsoft.Extensions.DependencyInjection.MvcRazorPagesMvcBuilderExtensions.WithRazorPagesAtContentRoot*> ，以指定您的 Razor 頁面位於應用程式的 [內容根目錄](xref:fundamentals/index#content-root) (<xref:Microsoft.AspNetCore.Hosting.IHostingEnvironment.ContentRootPath>) ：
 
 [!code-csharp[](index/3.0sample/RazorPagesContacts/StartupWithRazorPagesAtContentRoot.cs?name=snippet)]
 
-### <a name="specify-that-no-locrazor-pages-are-at-a-custom-root-directory"></a>指定 Razor 頁面位於自訂根目錄
+### <a name="specify-that-razor-pages-are-at-a-custom-root-directory"></a>指定 Razor 頁面位於自訂根目錄
 
 新增 <xref:Microsoft.Extensions.DependencyInjection.MvcRazorPagesMvcCoreBuilderExtensions.WithRazorPagesRoot*> 以指定 Razor 頁面位於應用程式的自訂根目錄， (提供相對路徑) ：
 
@@ -630,7 +630,7 @@ public string Message { get; set; }
 
 * 請參閱這篇簡介中的 [開始使用 Razor 頁面](xref:tutorials/razor-pages/razor-pages-start)。
 * [授權屬性和 Razor 頁面](xref:security/authorization/simple#aarp)
-* [下載或查看範例程式碼](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/razor-pages/index/3.0sample)
+* [下載或查看範例程式碼](https://github.com/dotnet/AspNetCore.Docs/tree/main/aspnetcore/razor-pages/index/3.0sample)
 * <xref:index>
 * [Razor ASP.NET Core 的語法參考](xref:mvc/views/razor)
 * <xref:mvc/controllers/areas>
@@ -661,7 +661,7 @@ public string Message { get; set; }
 
 <a name="rpvs17"></a>
 
-## <a name="create-a-no-locrazor-pages-project"></a>建立 Razor 頁面專案
+## <a name="create-a-razor-pages-project"></a>建立 Razor 頁面專案
 
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
@@ -679,7 +679,7 @@ public string Message { get; set; }
 
 ---
 
-## <a name="no-locrazor-pages"></a>Razor 頁面
+## <a name="razor-pages"></a>Razor 頁面
 
 Razor 頁面已在 *Startup.cs* 中啟用：
 
@@ -689,7 +689,7 @@ Razor 頁面已在 *Startup.cs* 中啟用：
 
 [!code-cshtml[](index/sample/RazorPagesIntro/Pages/Index.cshtml)]
 
-上述程式碼看起來很像是在具有控制器和 views 的 ASP.NET Core 應用程式中使用的[ Razor 視圖](xref:tutorials/first-mvc-app/adding-view)檔案。 讓它不同的是 `@page` 指示詞。 `@page` 會將檔案轉換成 MVC 動作，這表示它會直接處理要求，不用透過控制器。 `@page` 必須是頁面上的第一個指示詞 Razor 。 `@page` 會影響其他結構的行為 Razor 。
+上述程式碼看起來很像是 ASP.NET Core 應用程式中使用控制器和 views 的[ Razor 視圖](xref:tutorials/first-mvc-app/adding-view)檔案。 讓它不同的是 `@page` 指示詞。 `@page` 會將檔案轉換成 MVC 動作，這表示它會直接處理要求，不用透過控制器。 `@page` 必須是頁面上的第一個指示詞 Razor 。 `@page` 會影響其他結構的行為 Razor 。
 
 使用`PageModel`類別的類似頁面，顯示於下列兩個檔案中。 *Pages/Index2.cshtml* 檔案：
 
@@ -719,7 +719,7 @@ Razor 頁面已在 *Startup.cs* 中啟用：
 
 Razor 頁面的設計目的是要讓搭配網頁瀏覽器使用的常見模式在建立應用程式時很容易執行。 [模型](xref:mvc/models/model-binding)系結 [、卷](xref:mvc/views/tag-helpers/intro)標協助程式和 HTML 協助程式全都 *是* 使用頁面類別中定義的屬性 Razor 。 `Contact` 模型請考慮實作基本的「與我們連絡」格式頁面：
 
-本文件中的範例，會在 [Startup.cs](https://github.com/dotnet/AspNetCore.Docs/blob/master/aspnetcore/razor-pages/index/sample/RazorPagesContacts/Startup.cs#L15-L16) 檔案中初始化 `DbContext`。
+本文件中的範例，會在 [Startup.cs](https://github.com/dotnet/AspNetCore.Docs/blob/main/aspnetcore/razor-pages/index/sample/RazorPagesContacts/Startup.cs#L15-L16) 檔案中初始化 `DbContext`。
 
 [!code-csharp[](index/sample/RazorPagesContacts/Startup.cs?highlight=15-16)]
 
@@ -858,7 +858,7 @@ public void OnHead()
 }
 ```
 
-在 ASP.NET Core 2.1 或更新版本中， Razor `OnGet` 如果未定義任何處理程式，頁面就會切換回呼叫處理常式 `OnHead` 。 這個行為藉由在 `Startup.ConfigureServices` 中呼叫 [SetCompatibilityVersion](xref:mvc/compatibility-version) 來啟用：
+在 ASP.NET Core 2.1 或更新版本中， Razor `OnGet` 如果沒有定義任何處理程式，頁面就會切換回呼叫處理常式 `OnHead` 。 這個行為藉由在 `Startup.ConfigureServices` 中呼叫 [SetCompatibilityVersion](xref:mvc/compatibility-version) 來啟用：
 
 ```csharp
 services.AddMvc()
@@ -879,13 +879,13 @@ services.AddMvc()
 
 <a name="xsrf"></a>
 
-## <a name="xsrfcsrf-and-no-locrazor-pages"></a>XSRF/CSRF 和 Razor Pages
+## <a name="xsrfcsrf-and-razor-pages"></a>XSRF/CSRF 和 Razor Pages
 
 您不必撰寫任何[防偽驗證](xref:security/anti-request-forgery)程式碼。 Antiforgery 權杖的產生和驗證會自動包含在 Razor 頁面中。
 
 <a name="layout"></a>
 
-## <a name="using-layouts-partials-templates-and-tag-helpers-with-no-locrazor-pages"></a>使用頁面的版面配置、部分、範本和標記協助程式 Razor
+## <a name="using-layouts-partials-templates-and-tag-helpers-with-razor-pages"></a>使用頁面的版面配置、部分、範本和標記協助程式 Razor
 
 頁面會使用 view engine 的所有功能 Razor 。 配置、部分、範本、標籤協助程式、 *_ViewStart cshtml*、 *_ViewImports. cshtml* 的運作方式與傳統視圖的運作方式相同。 Razor
 
@@ -1109,11 +1109,11 @@ public string Message { get; set; }
 
 若要先行編譯視圖，請參閱[ Razor view 編譯](xref:mvc/views/view-compilation)。
 
-[下載或檢視範例程式碼](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/razor-pages/index/sample)。
+[下載或檢視範例程式碼](https://github.com/dotnet/AspNetCore.Docs/tree/main/aspnetcore/razor-pages/index/sample)。
 
 請參閱這篇簡介中的 [開始使用 Razor 頁面](xref:tutorials/razor-pages/razor-pages-start)。
 
-### <a name="specify-that-no-locrazor-pages-are-at-the-content-root"></a>指定 Razor 頁面位於內容根目錄
+### <a name="specify-that-razor-pages-are-at-the-content-root"></a>指定 Razor 頁面位於內容根目錄
 
 根據預設， Razor 頁面會根目錄在 */Pages* 目錄中。 將 [ Razor PagesAtContentRoot](/dotnet/api/microsoft.extensions.dependencyinjection.mvcrazorpagesmvcbuilderextensions.withrazorpagesatcontentroot) 新增至 [>addmvc](/dotnet/api/microsoft.extensions.dependencyinjection.mvcservicecollectionextensions.addmvc#Microsoft_Extensions_DependencyInjection_MvcServiceCollectionExtensions_AddMvc_Microsoft_Extensions_DependencyInjection_IServiceCollection_) ，以指定您的 Razor 頁面位於應用程式的 [內容根目錄](xref:fundamentals/index#content-root) ([ContentRootPath](/dotnet/api/microsoft.aspnetcore.hosting.ihostingenvironment.contentrootpath)) ：
 
@@ -1126,7 +1126,7 @@ services.AddMvc()
     .WithRazorPagesAtContentRoot();
 ```
 
-### <a name="specify-that-no-locrazor-pages-are-at-a-custom-root-directory"></a>指定 Razor 頁面位於自訂根目錄
+### <a name="specify-that-razor-pages-are-at-a-custom-root-directory"></a>指定 Razor 頁面位於自訂根目錄
 
 將 [ Razor PagesRoot](/dotnet/api/microsoft.extensions.dependencyinjection.mvcrazorpagesmvccorebuilderextensions.withrazorpagesroot) 新增至 [>addmvc](/dotnet/api/microsoft.extensions.dependencyinjection.mvcservicecollectionextensions.addmvc#Microsoft_Extensions_DependencyInjection_MvcServiceCollectionExtensions_AddMvc_Microsoft_Extensions_DependencyInjection_IServiceCollection_) ，以指定您 Razor 的頁面位於應用程式中的自訂根目錄， (提供相對路徑) ：
 

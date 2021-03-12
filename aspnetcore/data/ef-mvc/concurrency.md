@@ -19,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: data/ef-mvc/concurrency
-ms.openlocfilehash: d476c836e8d497ca1291992dda38da1fc9f59ed2
-ms.sourcegitcommit: 3593c4efa707edeaaceffbfa544f99f41fc62535
+ms.openlocfilehash: cc93069899953d04d1df4e79a282c349a163b06e
+ms.sourcegitcommit: 54fe1ae5e7d068e27376d562183ef9ddc7afc432
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 01/04/2021
-ms.locfileid: "93054368"
+ms.lasthandoff: 03/10/2021
+ms.locfileid: "102586770"
 ---
 # <a name="tutorial-handle-concurrency---aspnet-mvc-with-ef-core"></a>教學課程：使用 EF Core 處理並行 ASP.NET MVC
 
@@ -49,7 +49,7 @@ ms.locfileid: "93054368"
 > * 更新 [刪除] 頁面
 > * 更新 [詳細資料] 及 [建立] 檢視
 
-## <a name="prerequisites"></a>先決條件
+## <a name="prerequisites"></a>必要條件
 
 * [更新相關資料](update-related-data.md)
 
@@ -300,7 +300,7 @@ public async Task<IActionResult> Delete(Department department)
 
 ## <a name="get-the-code"></a>取得程式碼
 
-[下載或檢視已完成的應用程式。](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/data/ef-mvc/intro/samples/cu-final)
+[下載或檢視已完成的應用程式。](https://github.com/dotnet/AspNetCore.Docs/tree/main/aspnetcore/data/ef-mvc/intro/samples/cu-final)
 
 ## <a name="additional-resources"></a>其他資源
 

@@ -19,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: tutorials/first-mongo-app
-ms.openlocfilehash: 12f08d953fa9050d8f15243371955644f8dbd149
-ms.sourcegitcommit: a1db01b4d3bd8c57d7a9c94ce122a6db68002d66
+ms.openlocfilehash: 489a15f2011e44ffd9f9bfe7d5410b7d79a10632
+ms.sourcegitcommit: 54fe1ae5e7d068e27376d562183ef9ddc7afc432
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 03/04/2021
-ms.locfileid: "102109490"
+ms.lasthandoff: 03/10/2021
+ms.locfileid: "102587602"
 ---
 # <a name="create-a-web-api-with-aspnet-core-and-mongodb"></a>使用 ASP.NET Core 與 MongoDB 建立 Web API
 
@@ -43,7 +43,7 @@ ms.locfileid: "102109490"
 > * 從 Web API 執行 MongoDB CRUD 作業
 > * 自訂 JSON 序列化
 
-[查看或下載範例程式碼](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/tutorials/first-mongo-app/samples) ([如何下載](xref:index#how-to-download-a-sample)) 
+[查看或下載範例程式碼](https://github.com/dotnet/AspNetCore.Docs/tree/main/aspnetcore/tutorials/first-mongo-app/samples) ([如何下載](xref:index#how-to-download-a-sample)) 
 
 ## <a name="prerequisites"></a>必要條件
 
@@ -393,7 +393,7 @@ ms.locfileid: "102109490"
 > * 從 Web API 執行 MongoDB CRUD 作業
 > * 自訂 JSON 序列化
 
-[查看或下載範例程式碼](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/tutorials/first-mongo-app/samples) ([如何下載](xref:index#how-to-download-a-sample)) 
+[查看或下載範例程式碼](https://github.com/dotnet/AspNetCore.Docs/tree/main/aspnetcore/tutorials/first-mongo-app/samples) ([如何下載](xref:index#how-to-download-a-sample)) 
 
 ## <a name="prerequisites"></a>必要條件
 

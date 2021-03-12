@@ -17,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: mvc/controllers/areas
-ms.openlocfilehash: f3d76f612e67aeabf1f7fef694199332c732c593
-ms.sourcegitcommit: 53e01d6e9b70a18a05618f0011cf115a16633c21
+ms.openlocfilehash: f3bd2d3eac97e0fd64d1e3a98a9d1750f7a607a8
+ms.sourcegitcommit: 54fe1ae5e7d068e27376d562183ef9ddc7afc432
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 01/05/2021
-ms.locfileid: "97878408"
+ms.lasthandoff: 03/10/2021
+ms.locfileid: "102588369"
 ---
 # <a name="areas-in-aspnet-core"></a>ASP.NET Core 中的區域
 
@@ -37,14 +37,14 @@ ms.locfileid: "97878408"
 
 使用區域會藉由將另一個路由參數、 `area` 、新增至 `controller` 和 `action` 或 Razor 頁面，來建立路由用途的階層 `page` 。
 
-區域提供一種方式，可將 ASP.NET Core Web 應用程式分割成較小的功能群組，每個都有自己的一組 Razor 頁面、控制器、視圖和模型。 一個區域基本上是應用程式內的一個結構。 在 ASP.NET Core Web 專案中，Pages、模型、控制器和檢視等邏輯元件都會保留在不同的資料夾中。 ASP.NET Core 執行階段會使用命名慣例來建立這些元件之間的關聯性。 針對大型應用程式，將應用程式分割成個別高功能層級區域可能較有利。 舉例來說，一個電子商務應用程式可具有多個業務單位，例如結帳、計費和搜尋。 每個單位都有自己的區域，以包含視圖、控制器、 Razor 頁面和模型。
+區域可讓您將 ASP.NET Core Web 應用程式分割成較小的功能群組，每個群組都有自己的一組 Razor 頁面、控制器、視圖和模型。 一個區域基本上是應用程式內的一個結構。 在 ASP.NET Core Web 專案中，Pages、模型、控制器和檢視等邏輯元件都會保留在不同的資料夾中。 ASP.NET Core 執行階段會使用命名慣例來建立這些元件之間的關聯性。 針對大型應用程式，將應用程式分割成個別高功能層級區域可能較有利。 舉例來說，一個電子商務應用程式可具有多個業務單位，例如結帳、計費和搜尋。 每個單位都有自己的區域，以包含視圖、控制器、 Razor 頁面和模型。
 
 處於下列情況時，請考慮在專案中使用區域：
 
 * 應用程式是由可以邏輯方式區隔的多個高階功能性元件所組成的。
 * 您想要分割應用程式，讓每個功能區域都可獨立運作。
 
-[檢視或下載範例程式碼](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/mvc/controllers/areas/31samples) ([如何下載](xref:index#how-to-download-a-sample))。 下載範例提供基本的應用程式來測試區域。
+[檢視或下載範例程式碼](https://github.com/dotnet/AspNetCore.Docs/tree/main/aspnetcore/mvc/controllers/areas/31samples) ([如何下載](xref:index#how-to-download-a-sample))。 下載範例提供基本的應用程式來測試區域。
 
 如果您使用的是 Razor 頁面，請參閱本檔中 [含有 Razor 頁面的區域](#areas-with-razor-pages) 。
 
@@ -122,7 +122,7 @@ ms.locfileid: "97878408"
 
 ### <a name="link-generation-with-mvc-areas"></a>使用 MVC 區域產生連結
 
-以下來自[範例下載](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/mvc/controllers/areas/31samples)的程式碼會顯示使用指定的區域來產生連結：
+以下來自[範例下載](https://github.com/dotnet/AspNetCore.Docs/tree/main/aspnetcore/mvc/controllers/areas/31samples)的程式碼會顯示使用指定的區域來產生連結：
 
 [!code-cshtml[](areas/31samples/MVCareas/Views/Shared/_testLinksPartial.cshtml?name=snippet)]
 
@@ -166,26 +166,26 @@ ms.locfileid: "97878408"
 
 <a name="arp"></a>
 
-## <a name="areas-with-no-locrazor-pages"></a>具有頁面的區域 Razor
+## <a name="areas-with-razor-pages"></a>具有頁面的區域 Razor
 
-具有頁面的區域 Razor 需要 `Areas/<area name>/Pages` 應用程式根目錄中的資料夾。 下列資料夾結構搭配[範例應用程式](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/mvc/controllers/areas/31samples)一起使用：
+具有頁面的區域 Razor 需要 `Areas/<area name>/Pages` 應用程式根目錄中的資料夾。 下列資料夾結構搭配[範例應用程式](https://github.com/dotnet/AspNetCore.Docs/tree/main/aspnetcore/mvc/controllers/areas/31samples)一起使用：
 
 * 專案名稱
   * 區
     * 產品
-      * Pages
+      * 頁面
         * _ViewImports
         * 關於
         * 索引
     * 服務
-      * Pages
+      * 頁面
         * 管理
           * 關於
           * 索引
 
-### <a name="link-generation-with-no-locrazor-pages-and-areas"></a>使用 Razor 頁面和區域產生連結
+### <a name="link-generation-with-razor-pages-and-areas"></a>使用 Razor 頁面和區域產生連結
 
-以下來自[範例下載](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/mvc/controllers/areas/samples/RPareas)的程式碼會顯示使用指定的區域 (例如 `asp-area="Products"`) 來產生連結：
+以下來自[範例下載](https://github.com/dotnet/AspNetCore.Docs/tree/main/aspnetcore/mvc/controllers/areas/samples/RPareas)的程式碼會顯示使用指定的區域 (例如 `asp-area="Products"`) 來產生連結：
 
 [!code-cshtml[](areas/31samples/RPareas/Pages/Shared/_testLinksPartial.cshtml?name=snippet)]
 
@@ -199,7 +199,7 @@ ms.locfileid: "97878408"
 
 * 僅當最後一個要求是針對 `Services` 區域中的頁面時，從 `<a asp-page="/Manage/About">` 產生的連結才是正確的。 例如，`/Services/Manage/`、`/Services/Manage/Index` 或 `/Services/Manage/About`。
 * 僅當最後一個要求是針對 `/Home` 中的頁面時，從 `<a asp-page="/About">` 產生的連結才是正確的。
-* 程式碼來自[下載範例](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/mvc/controllers/areas/31samples/RPareas)。
+* 程式碼來自[下載範例](https://github.com/dotnet/AspNetCore.Docs/tree/main/aspnetcore/mvc/controllers/areas/31samples/RPareas)。
 
 ### <a name="import-namespace-and-tag-helpers-with-_viewimports-file"></a>使用 _ViewImports 檔案匯入命名空間和標記協助程式
 
@@ -226,7 +226,7 @@ ms.locfileid: "97878408"
 
 如需詳細資訊，請參閱[管理標籤協助程式範圍](xref:mvc/views/tag-helpers/intro?view=aspnetcore-2.2#managing-tag-helper-scope)和[匯入共用指示詞](xref:mvc/views/layout#importing-shared-directives)。
 
-### <a name="shared-layout-for-no-locrazor-pages-areas"></a>頁面區域的共用版面配置 Razor
+### <a name="shared-layout-for-razor-pages-areas"></a>頁面區域的共用版面配置 Razor
 
 若要針對整個應用程式共用通用的配置，請將 *_ViewStart.cshtml* 移至應用程式根資料夾。
 
@@ -239,14 +239,14 @@ ms.locfileid: "97878408"
 
 區域是 ASP.NET 功能，可用來將相關功能組織為群組，以作為個別的命名空間 (適用於路由) 和資料夾結構 (適用於檢視)。 使用區域會藉由將另一個路由參數、 `area` 、新增至 `controller` 和 `action` 或 Razor 頁面，來建立路由用途的階層 `page` 。
 
-區域提供一種方式，可將 ASP.NET Core Web 應用程式分割成較小的功能群組，每個都有自己的一組 Razor 頁面、控制器、視圖和模型。 一個區域基本上是應用程式內的一個結構。 在 ASP.NET Core Web 專案中，Pages、模型、控制器和檢視等邏輯元件都會保留在不同的資料夾中。 ASP.NET Core 執行階段會使用命名慣例來建立這些元件之間的關聯性。 針對大型應用程式，將應用程式分割成個別高功能層級區域可能較有利。 舉例來說，一個電子商務應用程式可具有多個業務單位，例如結帳、計費和搜尋。 每個單位都有自己的區域，以包含視圖、控制器、 Razor 頁面和模型。
+區域可讓您將 ASP.NET Core Web 應用程式分割成較小的功能群組，每個群組都有自己的一組 Razor 頁面、控制器、視圖和模型。 一個區域基本上是應用程式內的一個結構。 在 ASP.NET Core Web 專案中，Pages、模型、控制器和檢視等邏輯元件都會保留在不同的資料夾中。 ASP.NET Core 執行階段會使用命名慣例來建立這些元件之間的關聯性。 針對大型應用程式，將應用程式分割成個別高功能層級區域可能較有利。 舉例來說，一個電子商務應用程式可具有多個業務單位，例如結帳、計費和搜尋。 每個單位都有自己的區域，以包含視圖、控制器、 Razor 頁面和模型。
 
 處於下列情況時，請考慮在專案中使用區域：
 
 * 應用程式是由可以邏輯方式區隔的多個高階功能性元件所組成的。
 * 您想要分割應用程式，讓每個功能區域都可獨立運作。
 
-[檢視或下載範例程式碼](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/mvc/controllers/areas/samples) ([如何下載](xref:index#how-to-download-a-sample))。 下載範例提供基本的應用程式來測試區域。
+[檢視或下載範例程式碼](https://github.com/dotnet/AspNetCore.Docs/tree/main/aspnetcore/mvc/controllers/areas/samples) ([如何下載](xref:index#how-to-download-a-sample))。 下載範例提供基本的應用程式來測試區域。
 
 如果您使用的是 Razor 頁面，請參閱本檔中 [含有 Razor 頁面的區域](#areas-with-razor-pages) 。
 
@@ -323,7 +323,7 @@ ms.locfileid: "97878408"
 
 ### <a name="link-generation-with-mvc-areas"></a>使用 MVC 區域產生連結
 
-以下來自[範例下載](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/mvc/controllers/areas/samples)的程式碼會顯示使用指定的區域來產生連結：
+以下來自[範例下載](https://github.com/dotnet/AspNetCore.Docs/tree/main/aspnetcore/mvc/controllers/areas/samples)的程式碼會顯示使用指定的區域來產生連結：
 
 [!code-cshtml[](areas/samples/MVCareas/Views/Shared/_testLinksPartial.cshtml?name=snippet)]
 
@@ -353,26 +353,26 @@ ms.locfileid: "97878408"
 
 <a name="arp"></a>
 
-## <a name="areas-with-no-locrazor-pages"></a>具有頁面的區域 Razor
+## <a name="areas-with-razor-pages"></a>具有頁面的區域 Razor
 
-具有頁面的區域 Razor 需要 `Areas/<area name>/Pages` 應用程式根目錄中的資料夾。 下列資料夾結構搭配[範例應用程式](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/mvc/controllers/areas/samples)一起使用：
+具有頁面的區域 Razor 需要 `Areas/<area name>/Pages` 應用程式根目錄中的資料夾。 下列資料夾結構搭配[範例應用程式](https://github.com/dotnet/AspNetCore.Docs/tree/main/aspnetcore/mvc/controllers/areas/samples)一起使用：
 
 * 專案名稱
   * 區
     * 產品
-      * Pages
+      * 頁面
         * _ViewImports
         * 關於
         * 索引
     * 服務
-      * Pages
+      * 頁面
         * 管理
           * 關於
           * 索引
 
-### <a name="link-generation-with-no-locrazor-pages-and-areas"></a>使用 Razor 頁面和區域產生連結
+### <a name="link-generation-with-razor-pages-and-areas"></a>使用 Razor 頁面和區域產生連結
 
-以下來自[範例下載](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/mvc/controllers/areas/samples/RPareas)的程式碼會顯示使用指定的區域 (例如 `asp-area="Products"`) 來產生連結：
+以下來自[範例下載](https://github.com/dotnet/AspNetCore.Docs/tree/main/aspnetcore/mvc/controllers/areas/samples/RPareas)的程式碼會顯示使用指定的區域 (例如 `asp-area="Products"`) 來產生連結：
 
 [!code-cshtml[](areas/samples/RPareas/Pages/Shared/_testLinksPartial.cshtml?name=snippet)]
 
@@ -388,7 +388,7 @@ ms.locfileid: "97878408"
 
 * 僅當最後一個要求是針對 `Services` 區域中的頁面時，從 `<a asp-page="/Manage/About">` 產生的連結才是正確的。 例如，`/Services/Manage/`、`/Services/Manage/Index` 或 `/Services/Manage/About`。
 * 僅當最後一個要求是針對 `/Home` 中的頁面時，從 `<a asp-page="/About">` 產生的連結才是正確的。
-* 程式碼來自[下載範例](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/mvc/controllers/areas/samples/RPareas)。
+* 程式碼來自[下載範例](https://github.com/dotnet/AspNetCore.Docs/tree/main/aspnetcore/mvc/controllers/areas/samples/RPareas)。
 
 ### <a name="import-namespace-and-tag-helpers-with-_viewimports-file"></a>使用 _ViewImports 檔案匯入命名空間和標記協助程式
 
@@ -415,7 +415,7 @@ ms.locfileid: "97878408"
 
 如需詳細資訊，請參閱[管理標籤協助程式範圍](xref:mvc/views/tag-helpers/intro?view=aspnetcore-2.2#managing-tag-helper-scope)和[匯入共用指示詞](xref:mvc/views/layout#importing-shared-directives)。
 
-### <a name="shared-layout-for-no-locrazor-pages-areas"></a>頁面區域的共用版面配置 Razor
+### <a name="shared-layout-for-razor-pages-areas"></a>頁面區域的共用版面配置 Razor
 
 若要針對整個應用程式共用通用的配置，請將 *_ViewStart.cshtml* 移至應用程式根資料夾。
 

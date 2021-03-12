@@ -17,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: security/data-protection/implementation/key-storage-providers
-ms.openlocfilehash: d2f3e9dc7445b59c677f917bbd6c466b5037390c
-ms.sourcegitcommit: 422e8444b9f5cedc373be5efe8032822db54fcaf
+ms.openlocfilehash: 137cdabc12b7cd01b82f7fe9921c17a5be957eb7
+ms.sourcegitcommit: acfe51c35497a204f75c2a61125c9408c04493e6
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 02/18/2021
-ms.locfileid: "101101193"
+ms.lasthandoff: 03/10/2021
+ms.locfileid: "102605525"
 ---
 # <a name="key-storage-providers-in-aspnet-core"></a>ASP.NET Core 中的金鑰儲存提供者
 
@@ -125,7 +125,7 @@ public void ConfigureServices(IServiceCollection services)
 
 如需詳細資訊，請參閱下列主題：
 
-* [>stackexchange.redis. Redis ConnectionMultiplexer](https://github.com/StackExchange/StackExchange.Redis/blob/master/docs/Basics.md)
+* [>stackexchange.redis. Redis ConnectionMultiplexer](https://github.com/StackExchange/StackExchange.Redis/blob/main/docs/Basics.md)
 * [Azure Redis 快取](/azure/redis-cache/cache-dotnet-how-to-use-azure-redis-cache#connect-to-the-cache)
 * [ASP.NET Core DataProtection 範例](https://github.com/dotnet/AspNetCore/tree/2.2.0/src/DataProtection/samples)
 
@@ -150,7 +150,7 @@ public void ConfigureServices(IServiceCollection services)
 
 ## <a name="entity-framework-core"></a>Entity Framework Core
 
-[AspNetCore. DataProtection. microsoft.entityframeworkcore](https://www.nuget.org/packages/Microsoft.AspNetCore.DataProtection.EntityFrameworkCore/)封裝提供使用 Entity Framework Core 將資料保護金鑰儲存至資料庫的機制。 `Microsoft.AspNetCore.DataProtection.EntityFrameworkCore`NuGet 套件必須新增至專案檔，它不是[AspNetCore 中繼套件](xref:fundamentals/metapackage-app)的一部分。
+[AspNetCore. DataProtection. microsoft.entityframeworkcore](https://www.nuget.org/packages/Microsoft.AspNetCore.DataProtection.EntityFrameworkCore/)套件提供使用 Entity Framework Core 將資料保護金鑰儲存至資料庫的機制。 `Microsoft.AspNetCore.DataProtection.EntityFrameworkCore`NuGet 套件必須新增至專案檔，它不是[AspNetCore 中繼套件](xref:fundamentals/metapackage-app)的一部分。
 
 透過此套件，您可以在 web 應用程式的多個實例之間共用金鑰。
 
@@ -168,7 +168,7 @@ public void ConfigureServices(IServiceCollection services)
 
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
-在 **封裝管理員主控台** (PMC) ] 視窗中執行下列命令：
+在 **套件管理員主控台** 中執行下列命令 (PMC) 視窗：
 
 ```powershell
 Add-Migration AddDataProtectionKeys -Context MyKeysContext

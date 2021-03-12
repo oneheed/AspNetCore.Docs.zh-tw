@@ -19,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: fundamentals/host/hosted-services
-ms.openlocfilehash: b8d6ec079ed39fb3a2c314816ebae6cea0847a36
-ms.sourcegitcommit: 3593c4efa707edeaaceffbfa544f99f41fc62535
+ms.openlocfilehash: c0492c0c5b660e1387b0d0a4f6be405ded49ee92
+ms.sourcegitcommit: 54fe1ae5e7d068e27376d562183ef9ddc7afc432
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 01/04/2021
-ms.locfileid: "93061076"
+ms.lasthandoff: 03/10/2021
+ms.locfileid: "102587472"
 ---
 # <a name="background-tasks-with-hosted-services-in-aspnet-core"></a>在 ASP.NET Core 中使用託管服務的背景工作
 
@@ -38,7 +38,7 @@ ms.locfileid: "93061076"
 * 啟用 [範圍服務](xref:fundamentals/dependency-injection#service-lifetimes)的託管服務。 已設定範圍的服務可以使用 [ (DI) ](xref:fundamentals/dependency-injection)的相依性插入。
 * 以循序方式執行的排入佇列背景工作。
 
-[查看或下載範例程式碼](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/host/hosted-services/samples/) ([如何下載](xref:index#how-to-download-a-sample)) 
+[查看或下載範例程式碼](https://github.com/dotnet/AspNetCore.Docs/tree/main/aspnetcore/fundamentals/host/hosted-services/samples/) ([如何下載](xref:index#how-to-download-a-sample)) 
 
 ## <a name="worker-service-template"></a>背景工作服務範本
 
@@ -52,7 +52,7 @@ ASP.NET Core 背景工作服務範本提供撰寫長期執行服務應用程式�
 
 [!INCLUDE[](~/includes/worker-template-instructions.md)]
 
-## <a name="package"></a>Package
+## <a name="package"></a>套件
 
 以背景工作角色服務範本為基礎的應用程式會使用 `Microsoft.NET.Sdk.Worker` SDK，而且會有明確的套件參考，可參考至 [裝載](https://www.nuget.org/packages/Microsoft.Extensions.Hosting) 套件。 例如，請參閱範例應用程式的專案檔 (*BackgroundTasksSample .csproj*) 。
 
@@ -107,8 +107,8 @@ ASP.NET Core 背景工作服務範本提供撰寫長期執行服務應用程式�
 
   若要延長預設的五秒鐘關機逾時，請設定：
 
-  * <xref:Microsoft.Extensions.Hosting.HostOptions.ShutdownTimeout*> (使用泛型主機時)。 如需詳細資訊，請參閱 <xref:fundamentals/host/generic-host#shutdown-timeout> 。
-  * 使用 Web 主機時，關機逾時會裝載組態設定。 如需詳細資訊，請參閱 <xref:fundamentals/host/web-host#shutdown-timeout> 。
+  * <xref:Microsoft.Extensions.Hosting.HostOptions.ShutdownTimeout*> (使用泛型主機時)。 如需詳細資訊，請參閱<xref:fundamentals/host/generic-host#shutdown-timeout>。
+  * 使用 Web 主機時，關機逾時會裝載組態設定。 如需詳細資訊，請參閱<xref:fundamentals/host/web-host#shutdown-timeout>。
 
 託管服務會在應用程式啟動時隨即啟動，然後在應用程式關閉時正常關閉。 如果在背景工作執行期間擲回錯誤，即使未呼叫 `StopAsync`，也應該呼叫 `Dispose`。
 
@@ -193,9 +193,9 @@ ASP.NET Core 背景工作服務範本提供撰寫長期執行服務應用程式�
 * 啟用 [範圍服務](xref:fundamentals/dependency-injection#service-lifetimes)的託管服務。 已設定範圍的服務可以使用相依性 [插入 (DI) ](xref:fundamentals/dependency-injection)
 * 以循序方式執行的排入佇列背景工作。
 
-[查看或下載範例程式碼](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/host/hosted-services/samples/) ([如何下載](xref:index#how-to-download-a-sample)) 
+[查看或下載範例程式碼](https://github.com/dotnet/AspNetCore.Docs/tree/main/aspnetcore/fundamentals/host/hosted-services/samples/) ([如何下載](xref:index#how-to-download-a-sample)) 
 
-## <a name="package"></a>Package
+## <a name="package"></a>套件
 
 參考 [Microsoft.AspNetCore.App 中繼套件](xref:fundamentals/metapackage-app)，或新增 [Microsoft.Extensions.Hosting](https://www.nuget.org/packages/Microsoft.Extensions.Hosting) 套件的套件參考。
 
@@ -218,8 +218,8 @@ ASP.NET Core 背景工作服務範本提供撰寫長期執行服務應用程式�
 
   若要延長預設的五秒鐘關機逾時，請設定：
 
-  * <xref:Microsoft.Extensions.Hosting.HostOptions.ShutdownTimeout*> (使用泛型主機時)。 如需詳細資訊，請參閱 <xref:fundamentals/host/generic-host#shutdown-timeout> 。
-  * 使用 Web 主機時，關機逾時會裝載組態設定。 如需詳細資訊，請參閱 <xref:fundamentals/host/web-host#shutdown-timeout> 。
+  * <xref:Microsoft.Extensions.Hosting.HostOptions.ShutdownTimeout*> (使用泛型主機時)。 如需詳細資訊，請參閱<xref:fundamentals/host/generic-host#shutdown-timeout>。
+  * 使用 Web 主機時，關機逾時會裝載組態設定。 如需詳細資訊，請參閱<xref:fundamentals/host/web-host#shutdown-timeout>。
 
 託管服務會在應用程式啟動時隨即啟動，然後在應用程式關閉時正常關閉。 如果在背景工作執行期間擲回錯誤，即使未呼叫 `StopAsync`，也應該呼叫 `Dispose`。
 
@@ -253,7 +253,7 @@ ASP.NET Core 背景工作服務範本提供撰寫長期執行服務應用程式�
 
 ## <a name="queued-background-tasks"></a>排入佇列背景工作
 
-背景工作佇列是根據 .NET Framework 4.x <xref:System.Web.Hosting.HostingEnvironment.QueueBackgroundWorkItem*> ([暫時排程為 ASP.NET Core) 的內建](https://github.com/aspnet/Hosting/issues/1280) ：
+背景工作佇列是以 .NET Framework 4.x <xref:System.Web.Hosting.HostingEnvironment.QueueBackgroundWorkItem*> ([暫時排定為內建 ASP.NET Core](https://github.com/aspnet/Hosting/issues/1280)) ：
 
 [!code-csharp[](hosted-services/samples/2.x/BackgroundTasksSample/Services/BackgroundTaskQueue.cs?name=snippet1)]
 

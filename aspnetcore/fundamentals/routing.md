@@ -19,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: fundamentals/routing
-ms.openlocfilehash: 1355fdaeae58b6f4e0cf8d41a74b1c28aee0e8fe
-ms.sourcegitcommit: 063a06b644d3ade3c15ce00e72a758ec1187dd06
+ms.openlocfilehash: 0ce89d2dee3fb2054655c003daddfda2ffa52696
+ms.sourcegitcommit: 54fe1ae5e7d068e27376d562183ef9ddc7afc432
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 01/16/2021
-ms.locfileid: "98253081"
+ms.lasthandoff: 03/10/2021
+ms.locfileid: "102587278"
 ---
 # <a name="routing-in-aspnet-core"></a>ASP.NET Core 中的路由
 
@@ -43,23 +43,23 @@ ms.locfileid: "98253081"
 - 啟用端點的 [中介軟體](xref:fundamentals/middleware/index) ，例如 [健康情況檢查](xref:host-and-deploy/health-checks)。
 - 使用路由註冊的委派和 lambda。
 
-本檔涵蓋 ASP.NET Core 路由的低層級詳細資料。 如需設定路由的相關資訊：
+本檔涵蓋 ASP.NET 核心路由的低層級詳細資料。 如需設定路由的相關資訊：
 
 * 若為控制器，請參閱 <xref:mvc/controllers/routing> 。
 * 如需 Razor 頁面慣例，請參閱 <xref:razor-pages/razor-pages-conventions> 。
 
-本檔中所述的端點路由系統適用于 ASP.NET Core 3.0 和更新版本。 如需以上一個路由系統為基礎的相關資訊 <xref:Microsoft.AspNetCore.Routing.IRouter> ，請使用下列其中一種方法來選取 ASP.NET Core 2.1 版本：
+本檔中所述的端點路由系統適用于 ASP.NET Core 3.0 和更新版本。 如需有關的上一個路由系統的詳細資訊 <xref:Microsoft.AspNetCore.Routing.IRouter> ，請使用下列其中一種方法來選取 ASP.NET Core 2.1 版本：
 
 * 先前版本的版本選取器。
 * 選取 [ [ASP.NET Core 2.1 路由](?view=aspnetcore-2.1)]。
 
-[查看或下載範例程式碼](https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/routing/samples/3.x) ([如何下載](xref:index#how-to-download-a-sample)) 
+[查看或下載範例程式碼](https://github.com/dotnet/AspNetCore.Docs/tree/main/aspnetcore/fundamentals/routing/samples/3.x) ([如何下載](xref:index#how-to-download-a-sample)) 
 
 這份檔的下載範例是由特定類別啟用 `Startup` 。 若要執行特定範例，請修改 *Program.cs* 以呼叫所需的 `Startup` 類別。
 
 ## <a name="routing-basics"></a>路由的基本概念
 
-所有 ASP.NET Core 範本都包含產生的程式碼中的路由。 路由是在的 [中介軟體](xref:fundamentals/middleware/index) 管線中註冊 `Startup.Configure` 。
+所有 ASP.NET 核心範本都包含產生的程式碼中的路由。 路由是在的 [中介軟體](xref:fundamentals/middleware/index) 管線中註冊 `Startup.Configure` 。
 
 下列程式碼顯示路由的基本範例：
 
@@ -107,7 +107,7 @@ URL 路徑的第二個區段 `{name:alpha}` ：
 * 系結至 `name` 參數。
 * 會被捕獲並儲存在 [HttpRequest. RouteValues](xref:Microsoft.AspNetCore.Http.HttpRequest.RouteValues*)中。
 
-本檔中所述的端點路由系統是 ASP.NET Core 3.0 的新功能。 不過，所有版本的 ASP.NET Core 都支援相同的一組路由範本功能和路由條件約束。
+本檔中所述的端點路由系統是 ASP.NET Core 3.0 的新功能。 不過，ASP.NET Core 的所有版本都支援相同的一組路由範本功能和路由條件約束。
 
 下列範例顯示使用健康情況 [檢查](xref:host-and-deploy/health-checks) 和授權的路由：
 
@@ -138,13 +138,13 @@ URL 路徑的第二個區段 `{name:alpha}` ：
 
 ## <a name="routing-concepts"></a>路由概念
 
-路由系統會藉由新增強大的 **端點** 概念，在中介軟體管線之上建立。 端點代表應用程式功能的單位，與路由、授權和任意數量的 ASP.NET Core 系統之間不同。
+路由系統會藉由新增強大的 **端點** 概念，在中介軟體管線之上建立。 端點代表應用程式功能的單位，在路由、授權和任何數量的 ASP.NET 核心系統中彼此不同。
 
 <a name="endpoint"></a>
 
-### <a name="aspnet-core-endpoint-definition"></a>ASP.NET Core 端點定義
+### <a name="aspnet-core-endpoint-definition"></a>ASP.NET 核心端點定義
 
-ASP.NET Core 端點為：
+ASP.NET 核心端點是：
 
 * 可執行檔：有 <xref:Microsoft.AspNetCore.Http.Endpoint.RequestDelegate> 。
 * 可擴充：具有 [中繼資料](xref:Microsoft.AspNetCore.Http.Endpoint.Metadata*) 集合。
@@ -261,7 +261,7 @@ ASP.NET Core 端點為：
 
 在撰寫終端中介軟體之前，請考慮與路由整合。
 
-現有的終端中介軟體與 [地圖](xref:fundamentals/middleware/index#branch-the-middleware-pipeline) 整合，或 <xref:Microsoft.AspNetCore.Builder.MapWhenExtensions.MapWhen*> 通常可以轉換成路由感知端點。 [MapHealthChecks](https://github.com/aspnet/AspNetCore/blob/master/src/Middleware/HealthChecks/src/Builder/HealthCheckEndpointRouteBuilderExtensions.cs#L16) 示範路由器的模式：
+現有的終端中介軟體與 [地圖](xref:fundamentals/middleware/index#branch-the-middleware-pipeline) 整合，或 <xref:Microsoft.AspNetCore.Builder.MapWhenExtensions.MapWhen*> 通常可以轉換成路由感知端點。 [MapHealthChecks](https://github.com/dotnet/AspNetCore/blob/main/src/Middleware/HealthChecks/src/Builder/HealthCheckEndpointRouteBuilderExtensions.cs#L16) 示範路由器的模式：
 * 在上撰寫擴充方法 <xref:Microsoft.AspNetCore.Routing.IEndpointRouteBuilder> 。
 * 使用建立內嵌中介軟體管線 <xref:Microsoft.AspNetCore.Routing.IEndpointRouteBuilder.CreateApplicationBuilder*> 。
 * 將中介軟體附加至新的管線。 在此案例中為 <xref:Microsoft.AspNetCore.Builder.HealthCheckApplicationBuilderExtensions.UseHealthChecks*>。
@@ -345,7 +345,7 @@ URL 比對會在一組可設定的階段中運作。 在每個階段中，輸出
 
 ### <a name="route-template-precedence-and-endpoint-selection-order"></a>路由範本優先順序和端點選取順序
 
-[路由範本優先順序](https://github.com/dotnet/aspnetcore/blob/master/src/Http/Routing/src/Template/RoutePrecedence.cs#L16) 是一種系統，會根據特定的方式將值指派給每個路由範本。 路由範本優先順序：
+[路由範本優先順序](https://github.com/dotnet/aspnetcore/blob/main/src/Http/Routing/src/Template/RoutePrecedence.cs#L16) 是一種系統，會根據特定的方式將值指派給每個路由範本。 路由範本優先順序：
 
 * 避免在常見案例中調整端點順序的需求。
 * 嘗試符合一般意義的路由行為預期。
@@ -360,7 +360,7 @@ URL 比對會在一組可設定的階段中運作。 在每個階段中，輸出
 * 複雜區段會被視為具有條件約束的參數區段。
 * Catch-all 參數是最不明確的參數。 請參閱 [路由範本參考](#rtr)中的 **全部攔截**，以取得有關 catch 所有路由的重要資訊。
 
-如需確切值的參考，請參閱 [GitHub 上的原始程式碼](https://github.com/dotnet/aspnetcore/blob/master/src/Http/Routing/src/Template/RoutePrecedence.cs#L189) 。
+如需確切值的參考，請參閱 [GitHub 上的原始程式碼](https://github.com/dotnet/aspnetcore/blob/main/src/Http/Routing/src/Template/RoutePrecedence.cs#L189) 。
 
 <a name="lg"></a>
 
@@ -393,7 +393,7 @@ URL 產生：
 
 <xref:Microsoft.AspNetCore.Routing.LinkGenerator> 提供的方法支援適用於任何位址類型的標準連結產生功能。 使用連結產生器最方便的方式，是透過執行特定網址類別型作業的擴充方法：
 
-| 擴充方法 | 說明 |
+| 擴充方法 | Description |
 | ---------------- | ----------- |
 | <xref:Microsoft.AspNetCore.Routing.LinkGenerator.GetPathByAddress*> | 根據提供的值產生具有絕對路徑的 URI。 |
 | <xref:Microsoft.AspNetCore.Routing.LinkGenerator.GetUriByAddress*> | 根據提供的值產生絕對 URI。             |
@@ -586,7 +586,7 @@ ASP.NET Core 架構將 `RegexOptions.IgnoreCase | RegexOptions.Compiled | RegexO
 
 自訂路由條件約束很少需要。 在執行自訂路由條件約束之前，請考慮使用替代方法，例如模型系結。
 
-ASP.NET Core [條件約束](https://github.com/dotnet/aspnetcore/tree/master/src/Http/Routing/src/Constraints) 資料夾提供建立條件約束的良好範例。 例如， [GuidRouteConstraint](https://github.com/dotnet/aspnetcore/blob/master/src/Http/Routing/src/Constraints/GuidRouteConstraint.cs#L18)。
+ASP.NET 核心 [限制](https://github.com/dotnet/aspnetcore/tree/main/src/Http/Routing/src/Constraints) 資料夾提供建立條件約束的良好範例。 例如， [GuidRouteConstraint](https://github.com/dotnet/aspnetcore/blob/main/src/Http/Routing/src/Constraints/GuidRouteConstraint.cs#L18)。
 
 若要使用自訂 `IRouteConstraint` ，必須向 <xref:Microsoft.AspNetCore.Routing.RouteOptions.ConstraintMap> 服務容器中的應用程式註冊路由條件約束類型。 `ConstraintMap` 是一個目錄，它將路由限制式機碼對應到可驗證那些限制式的 `IRouteConstraint` 實作。 更新應用程式的 `ConstraintMap` 時，可在 `Startup.ConfigureServices` 中於進行 [services.AddRouting](xref:Microsoft.Extensions.DependencyInjection.RoutingServiceCollectionExtensions.AddRouting*) 呼叫時更新，或透過使用 `services.Configure<RouteOptions>` 直接設定 <xref:Microsoft.AspNetCore.Routing.RouteOptions> 來更新。 例如：
 
@@ -648,7 +648,7 @@ routes.MapControllerRoute(
 
 使用上述的路由範本，此動作 `SubscriptionManagementController.GetAll` 會與 URI 相符 `/subscription-management/get-all` 。 參數轉換器不會變更用來產生連結的路由值。 例如，`Url.Action("GetAll", "SubscriptionManagement")` 會輸出 `/subscription-management/get-all`。
 
-ASP.NET Core 提供使用參數轉換器搭配產生之路由的 API 慣例：
+ASP.NET Core 提供將參數轉換器與產生的路由搭配使用的 API 慣例：
 
 * <xref:Microsoft.AspNetCore.Mvc.ApplicationModels.RouteTokenTransformerConvention?displayProperty=fullName>MVC 慣例會將指定的參數轉換程式套用至應用程式中的所有屬性路由。 參數轉換程式會在被取代時轉換屬性路由語彙基元。 如需詳細資訊，請參閱[使用參數轉換程式自訂語彙基元取代](xref:mvc/controllers/routing#use-a-parameter-transformer-to-customize-token-replacement)。
 * Razor 頁面會使用 <xref:Microsoft.AspNetCore.Mvc.ApplicationModels.PageRouteTransformerConvention> API 慣例。 此慣例會將指定的參數轉換器套用至所有自動探索到的 Razor 頁面。 參數轉換程式會轉換頁面路由的資料夾和檔案名區段 Razor 。 如需詳細資訊，請參閱[使用參數轉換程式自訂頁面路由](xref:razor-pages/razor-pages-conventions#use-a-parameter-transformer-to-customize-page-routes)。
@@ -817,7 +817,7 @@ URL 產生進程的開頭是呼叫 [LinkGenerator. GetPathByAddress](xref:Micros
 
 ### <a name="problems-with-route-value-invalidation"></a>路由值失效的問題
 
-從 ASP.NET Core 3.0 開始，舊版 ASP.NET Core 中使用的某些 URL 產生配置，不適用於 URL 產生。 ASP.NET Core 小組計畫在未來的版本中新增功能來解決這些需求。 現在，最好的解決方法是使用舊版路由。
+從 ASP.NET Core 3.0 開始，某些舊版 ASP.NET Core 中使用的 URL 產生配置，不適用於 URL 產生。 ASP.NET Core 小組計畫在未來的版本中新增功能來解決這些需求。 現在，最好的解決方法是使用舊版路由。
 
 下列程式碼顯示路由不支援的 URL 產生配置範例。
 
@@ -903,7 +903,7 @@ URL 產生進程的開頭是呼叫 [LinkGenerator. GetPathByAddress](xref:Micros
 *  () 的複雜區段 `{x}-{y}-{z}` ： 
   * 比剖析一般 URL 路徑區段更昂貴。
   * 會產生更多的子字串。
-  * ASP.NET Core 3.0 路由效能更新中未更新複雜區段邏輯。
+  * ASP.NET Core 3.0 路由效能更新未更新複雜區段邏輯。
 
 * 同步資料存取：許多複雜的應用程式在其路由中都有資料庫存取權。 ASP.NET Core 2.2 和較早的路由可能無法提供支援資料庫存取路由的適當擴充性點。 例如， <xref:Microsoft.AspNetCore.Routing.IRouteConstraint> 和 <xref:Microsoft.AspNetCore.Mvc.ActionConstraints.IActionConstraint> 是同步的。 和等擴充點 <xref:Microsoft.AspNetCore.Routing.MatcherPolicy> <xref:Microsoft.AspNetCore.Routing.EndpointSelectorContext> 都是非同步。
 
@@ -915,7 +915,7 @@ URL 產生進程的開頭是呼叫 [LinkGenerator. GetPathByAddress](xref:Micros
 
 若要建立使用路由進行 URL 比對的架構，請先定義以之上建立的使用者體驗 <xref:Microsoft.AspNetCore.Builder.EndpointRoutingApplicationBuilderExtensions.UseEndpoints*> 。
 
-在之上 **進行** build <xref:Microsoft.AspNetCore.Routing.IEndpointRouteBuilder> 。 這可讓使用者使用其他 ASP.NET Core 功能來撰寫您的架構，而不會造成混淆。 每個 ASP.NET Core 範本都包含路由。 假設路由存在且熟悉使用者。
+在之上 **進行** build <xref:Microsoft.AspNetCore.Routing.IEndpointRouteBuilder> 。 這可讓使用者使用其他 ASP.NET 的核心功能來撰寫您的架構，而不會有混淆。 每個 ASP.NET 核心範本都包含路由。 假設路由存在且熟悉使用者。
 
 ```csharp
 app.UseEndpoints(endpoints =>
@@ -947,7 +947,7 @@ app.UseEndpoints(endpoints =>
 
 **請考慮** 撰寫您自己 <xref:Microsoft.AspNetCore.Routing.EndpointDataSource> 的。 `EndpointDataSource` 這是用來宣告和更新端點集合的低層級基本類型。 `EndpointDataSource` 是控制器和頁面所使用的強大 API Razor 。
 
-路由測試有一個基本的不可更新資料來源 [範例](https://github.com/aspnet/AspNetCore/blob/master/src/Http/Routing/test/testassets/RoutingSandbox/Framework/FrameworkEndpointDataSource.cs#L17) 。
+路由測試有一個基本的不可更新資料來源 [範例](https://github.com/dotnet/AspNetCore/blob/main/src/Http/Routing/test/testassets/RoutingSandbox/Framework/FrameworkEndpointDataSource.cs#L17) 。
 
 預設 **不** 嘗試註冊 `EndpointDataSource` 。 要求使用者在中註冊您的架構 <xref:Microsoft.AspNetCore.Builder.EndpointRoutingApplicationBuilderExtensions.UseEndpoints*> 。 路由的原理是，預設不會包含任何專案，而且這 `UseEndpoints` 是註冊端點的位置。
 
@@ -1029,7 +1029,7 @@ services.AddMvc(options => options.EnableEndpointRouting = false)
 > [!IMPORTANT]
 > 本文件涵蓋低階的 ASP.NET Core 路由。 如需 ASP.NET Core MVC 路由的資訊，請參閱 <xref:mvc/controllers/routing>。 如需頁面中路由慣例的詳細資訊 Razor ，請參閱 <xref:razor-pages/razor-pages-conventions> 。
 
-[查看或下載範例程式碼](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/routing/samples) ([如何下載](xref:index#how-to-download-a-sample)) 
+[查看或下載範例程式碼](https://github.com/dotnet/AspNetCore.Docs/tree/main/aspnetcore/fundamentals/routing/samples) ([如何下載](xref:index#how-to-download-a-sample)) 
 
 ## <a name="routing-basics"></a>路由的基本概念
 
@@ -1066,9 +1066,9 @@ URL 產生支援允許在不需要硬式編碼的 URL 來連結應用程式的�
   * 如果無法透過 DI 使用連結產生器 API，<xref:Microsoft.AspNetCore.Mvc.IUrlHelper> 會提供方法來建立 URL。
 
 > [!NOTE]
-> 當 ASP.NET Core 2.2 中的端點路由發行時，端點連結僅限於 MVC/ Razor 頁面動作和頁面。 未來版本將規劃擴充端點連結功能。
+> 隨著 ASP.NET Core 2.2 中的端點路由發行，端點連結僅限於 MVC/ Razor 頁面動作和頁面。 未來版本將規劃擴充端點連結功能。
 
-路由會透過 <xref:Microsoft.AspNetCore.Builder.RouterMiddleware> 類別連線到[中介軟體](xref:fundamentals/middleware/index)管線。 [ASP.NET CORE mvc](xref:mvc/overview) 會將路由新增至中介軟體管線，作為其設定的一部分，並處理 MVC 和 Razor 頁面應用程式中的路由。 若要了解如何使用路由作為獨立元件，請參閱[使用路由中介軟體](#use-routing-middleware)一節。
+路由會透過 <xref:Microsoft.AspNetCore.Builder.RouterMiddleware> 類別連線到[中介軟體](xref:fundamentals/middleware/index)管線。 [ASP.NET CORE MVC](xref:mvc/overview) 會將路由新增至中介軟體管線，作為其設定的一部分，並處理 MVC 和 Razor 頁面應用程式中的路由。 若要了解如何使用路由作為獨立元件，請參閱[使用路由中介軟體](#use-routing-middleware)一節。
 
 ### <a name="url-matching"></a>URL 比對
 
@@ -1112,7 +1112,7 @@ URL 產生是路由可用來依據一組路由值建立 URL 路徑的處理序�
 
 <xref:Microsoft.AspNetCore.Routing.LinkGenerator> 提供的方法支援適用於任何位址類型的標準連結產生功能。 使用連結產生器的最便利方式是透過執行特定位址類型作業的擴充方法。
 
-| 擴充方法   | 說明                                                         |
+| 擴充方法   | Description                                                         |
 | ------------------ | ------------------------------------------------------------------- |
 | <xref:Microsoft.AspNetCore.Routing.LinkGenerator.GetPathByAddress*> | 根據提供的值產生具有絕對路徑的 URI。 |
 | <xref:Microsoft.AspNetCore.Routing.LinkGenerator.GetUriByAddress*> | 根據提供的值產生絕對 URI。             |
@@ -1565,7 +1565,7 @@ ASP.NET Core 針對搭配產生的路由使用參數轉換程式提供了 API �
 
 [!code-csharp[](routing/samples/2.x/RoutingSample/Startup.cs?name=snippet_Dictionary)]
 
-在上述範例的結尾產生的 <xref:Microsoft.AspNetCore.Routing.VirtualPathData.VirtualPath> 是 `/package/create/123`。 字典提供「追蹤套件路由」範本 `package/{operation}/{id}` 的 `operation` 和 `id` 路由值。 如需詳細資訊，請參閱[使用路由中介軟體](#use-routing-middleware)一節或[範例應用程式](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/routing/samples)中的範例程式碼。
+在上述範例的結尾產生的 <xref:Microsoft.AspNetCore.Routing.VirtualPathData.VirtualPath> 是 `/package/create/123`。 字典提供「追蹤套件路由」範本 `package/{operation}/{id}` 的 `operation` 和 `id` 路由值。 如需詳細資訊，請參閱[使用路由中介軟體](#use-routing-middleware)一節或[範例應用程式](https://github.com/dotnet/AspNetCore.Docs/tree/main/aspnetcore/fundamentals/routing/samples)中的範例程式碼。
 
 <xref:Microsoft.AspNetCore.Routing.VirtualPathContext> 建構函式的第二個參數是「環境值」的集合。 環境值便於使用，因為它們會限制開發人員必須在要求內容中指定的值數目。 目前要求的目前路由值被視為用於連結產生的環境值。 在 ASP.NET Core MVC 應用程式 `HomeController` 的 `About` 動作中，您不需要指定控制器路由值以連結到 `Index` 動作&mdash;會使用 `Home` 的環境值。
 
@@ -1611,7 +1611,7 @@ services.AddMvc()
 > [!IMPORTANT]
 > 本文件涵蓋低階的 ASP.NET Core 路由。 如需 ASP.NET Core MVC 路由的資訊，請參閱 <xref:mvc/controllers/routing>。 如需頁面中路由慣例的詳細資訊 Razor ，請參閱 <xref:razor-pages/razor-pages-conventions> 。
 
-[查看或下載範例程式碼](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/routing/samples) ([如何下載](xref:index#how-to-download-a-sample)) 
+[查看或下載範例程式碼](https://github.com/dotnet/AspNetCore.Docs/tree/main/aspnetcore/fundamentals/routing/samples) ([如何下載](xref:index#how-to-download-a-sample)) 
 
 ## <a name="routing-basics"></a>路由的基本概念
 
@@ -1644,7 +1644,7 @@ URL 產生支援允許在不需要硬式編碼的 URL 來連結應用程式的�
 * 回應可以根據路由資訊使用路由來產生 URL (例如，針對重新導向或連結)，因此避免硬式編碼的 URL，這有助於可維護性。
 * URL 是根據支援任意擴充性的路由所產生。 <xref:Microsoft.AspNetCore.Mvc.IUrlHelper> 提供方法來建立 URL。
 <!-- fix [middleware](xref:fundamentals/middleware/index) -->
-路由會透過 <xref:Microsoft.AspNetCore.Builder.RouterMiddleware> 類別連線到[中介軟體](xref:fundamentals/middleware/index)管線。 [ASP.NET CORE mvc](xref:mvc/overview) 會將路由新增至中介軟體管線，作為其設定的一部分，並處理 MVC 和 Razor 頁面應用程式中的路由。 若要了解如何使用路由作為獨立元件，請參閱[使用路由中介軟體](#use-routing-middleware)一節。
+路由會透過 <xref:Microsoft.AspNetCore.Builder.RouterMiddleware> 類別連線到[中介軟體](xref:fundamentals/middleware/index)管線。 [ASP.NET CORE MVC](xref:mvc/overview) 會將路由新增至中介軟體管線，作為其設定的一部分，並處理 MVC 和 Razor 頁面應用程式中的路由。 若要了解如何使用路由作為獨立元件，請參閱[使用路由中介軟體](#use-routing-middleware)一節。
 
 ### <a name="url-matching"></a>URL 比對
 
@@ -1971,7 +1971,7 @@ public ActionResult<string> Get(string id)
 
 [!code-csharp[](routing/samples/2.x/RoutingSample/Startup.cs?name=snippet_Dictionary)]
 
-在上述範例的結尾產生的 <xref:Microsoft.AspNetCore.Routing.VirtualPathData.VirtualPath> 是 `/package/create/123`。 字典提供「追蹤套件路由」範本 `package/{operation}/{id}` 的 `operation` 和 `id` 路由值。 如需詳細資訊，請參閱[使用路由中介軟體](#use-routing-middleware)一節或[範例應用程式](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/routing/samples)中的範例程式碼。
+在上述範例的結尾產生的 <xref:Microsoft.AspNetCore.Routing.VirtualPathData.VirtualPath> 是 `/package/create/123`。 字典提供「追蹤套件路由」範本 `package/{operation}/{id}` 的 `operation` 和 `id` 路由值。 如需詳細資訊，請參閱[使用路由中介軟體](#use-routing-middleware)一節或[範例應用程式](https://github.com/dotnet/AspNetCore.Docs/tree/main/aspnetcore/fundamentals/routing/samples)中的範例程式碼。
 
 <xref:Microsoft.AspNetCore.Routing.VirtualPathContext> 建構函式的第二個參數是「環境值」的集合。 環境值便於使用，因為它們會限制開發人員必須在要求內容中指定的值數目。 目前要求的目前路由值被視為用於連結產生的環境值。 在 ASP.NET Core MVC 應用程式 `HomeController` 的 `About` 動作中，您不需要指定控制器路由值以連結到 `Index` 動作&mdash;會使用 `Home` 的環境值。
 

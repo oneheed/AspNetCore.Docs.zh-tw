@@ -19,16 +19,16 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/components/index
-ms.openlocfilehash: a308d11ba80090a2a34880f04bc339aa90550946
-ms.sourcegitcommit: a1db01b4d3bd8c57d7a9c94ce122a6db68002d66
+ms.openlocfilehash: 7048fe7107fb71d632bf12df9d53e6f168d5a0db
+ms.sourcegitcommit: 54fe1ae5e7d068e27376d562183ef9ddc7afc432
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 03/04/2021
-ms.locfileid: "102109828"
+ms.lasthandoff: 03/10/2021
+ms.locfileid: "102587459"
 ---
 # <a name="create-and-use-aspnet-core-razor-components"></a>建立和使用 ASP.NET 核心 Razor 元件
 
-[查看或下載範例程式碼](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/blazor/common/samples/) ([如何下載](xref:index#how-to-download-a-sample)) 
+[查看或下載範例程式碼](https://github.com/dotnet/AspNetCore.Docs/tree/main/aspnetcore/blazor/common/samples/) ([如何下載](xref:index#how-to-download-a-sample)) 
 
 Blazor 應用程式是使用 *元件* 建立的。 元件是獨立的使用者介面區塊， (UI) ，例如頁面、對話方塊或表單。 元件包含 HTML 標籤以及插入資料或回應 UI 事件所需的處理邏輯。 元件具有彈性和輕量。 這些專案可以在專案之間進行嵌套、重複使用及共用。
 

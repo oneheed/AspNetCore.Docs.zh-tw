@@ -17,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: web-api/advanced/custom-formatters
-ms.openlocfilehash: e4d73fdc0db3faeace5d68b3d71718315e68cae3
-ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
+ms.openlocfilehash: 91c9c6513d7c8df671e283508ecc276768d79539
+ms.sourcegitcommit: 54fe1ae5e7d068e27376d562183ef9ddc7afc432
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 10/30/2020
-ms.locfileid: "93058918"
+ms.lasthandoff: 03/10/2021
+ms.locfileid: "102587823"
 ---
 # <a name="custom-formatters-in-aspnet-core-web-api"></a>ASP.NET Core Web API 中的自訂格式器
 
@@ -34,7 +34,7 @@ ASP.NET Core MVC 使用輸入和輸出格式器，支援 Web Api 中的資料交
 
 本文說明如何藉由建立自訂的格式器來新增對其他格式的支援。 如需自訂純文字輸入格式器的範例，請參閱 GitHub 上的 [TextPlainInputFormatter](https://github.com/aspnet/Entropy/blob/master/samples/Mvc.Formatters/TextPlainInputFormatter.cs) 。
 
-[查看或下載範例程式碼](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/web-api/advanced/custom-formatters/samples) ([如何下載](xref:index#how-to-download-a-sample)) 
+[查看或下載範例程式碼](https://github.com/dotnet/AspNetCore.Docs/tree/main/aspnetcore/web-api/advanced/custom-formatters/samples) ([如何下載](xref:index#how-to-download-a-sample)) 
 
 ## <a name="when-to-use-custom-formatters"></a>自訂格式器的使用時機
 
@@ -57,7 +57,7 @@ ASP.NET Core MVC 使用輸入和輸出格式器，支援 Web Api 中的資料交
 * 覆寫 <xref:Microsoft.AspNetCore.Mvc.Formatters.InputFormatter.CanReadType%2A> 和 <xref:Microsoft.AspNetCore.Mvc.Formatters.OutputFormatter.CanWriteType%2A> 方法。
 * 覆寫 <xref:Microsoft.AspNetCore.Mvc.Formatters.InputFormatter.ReadRequestBodyAsync%2A> 和 `WriteResponseBodyAsync` 方法。
 
-下列程式碼顯示 `VcardOutputFormatter` [範例](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/web-api/advanced/custom-formatters/samples)中的類別：
+下列程式碼顯示 `VcardOutputFormatter` [範例](https://github.com/dotnet/AspNetCore.Docs/tree/main/aspnetcore/web-api/advanced/custom-formatters/samples)中的類別：
 
 [!code-csharp[](custom-formatters/samples/3.x/CustomFormattersSample/Formatters/VcardOutputFormatter.cs?name=snippet_Class)]
   
@@ -75,7 +75,7 @@ ASP.NET Core MVC 使用輸入和輸出格式器，支援 Web Api 中的資料交
 
 [!code-csharp[](custom-formatters/samples/3.x/CustomFormattersSample/Formatters/VcardOutputFormatter.cs?name=snippet_ctor)]
 
-格式器類別 **不** 能針對其相依性使用函式插入。 例如， `ILogger<VcardOutputFormatter>` 無法將參數加入至函式的參數。 若要存取服務，請使用傳遞至方法的內容物件。 本文中的程式碼範例和 [範例](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/web-api/advanced/custom-formatters/samples) 示範如何進行這項作業。
+格式器類別 **不** 能針對其相依性使用函式插入。 例如， `ILogger<VcardOutputFormatter>` 無法將參數加入至函式的參數。 若要存取服務，請使用傳遞至方法的內容物件。 本文中的程式碼範例和 [範例](https://github.com/dotnet/AspNetCore.Docs/tree/main/aspnetcore/web-api/advanced/custom-formatters/samples) 示範如何進行這項作業。
 
 ### <a name="override-canreadtype-and-canwritetype"></a>覆寫 CanReadType 和 CanWriteType
 
@@ -129,13 +129,13 @@ ASP.NET Core MVC 使用輸入和輸出格式器，支援 Web Api 中的資料交
 
 ## <a name="the-complete-vcardinputformatter-class"></a>完整 `VcardInputFormatter` 類別
 
-下列程式碼顯示 `VcardInputFormatter` [範例](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/web-api/advanced/custom-formatters/samples)中的類別：
+下列程式碼顯示 `VcardInputFormatter` [範例](https://github.com/dotnet/AspNetCore.Docs/tree/main/aspnetcore/web-api/advanced/custom-formatters/samples)中的類別：
 
 [!code-csharp[](custom-formatters/samples/3.x/CustomFormattersSample/Formatters/VcardInputFormatter.cs?name=snippet_Class)]
 
 ## <a name="test-the-app"></a>測試應用程式
 
-[執行本文的範例應用程式](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/web-api/advanced/custom-formatters/samples)，它會執行基本的 vCard 輸入和輸出格式器。 應用程式會讀取並寫入 Vcard，如下所示：
+[執行本文的範例應用程式](https://github.com/dotnet/AspNetCore.Docs/tree/main/aspnetcore/web-api/advanced/custom-formatters/samples)，它會執行基本的 vCard 輸入和輸出格式器。 應用程式會讀取並寫入 Vcard，如下所示：
 
 ```
 BEGIN:VCARD

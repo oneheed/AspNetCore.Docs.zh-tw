@@ -19,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: grpc/troubleshoot
-ms.openlocfilehash: 61d4d2204886f26b4ff55bc876825012809f1dfa
-ms.sourcegitcommit: 063a06b644d3ade3c15ce00e72a758ec1187dd06
+ms.openlocfilehash: 1fd89059183300993c7fa78aa8dab1bda247a530
+ms.sourcegitcommit: 54fe1ae5e7d068e27376d562183ef9ddc7afc432
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 01/16/2021
-ms.locfileid: "98253094"
+ms.lasthandoff: 03/10/2021
+ms.locfileid: "102586978"
 ---
 # <a name="troubleshoot-grpc-on-net-core"></a>針對 .NET Core 上的 gRPC 進行疑難排解
 
@@ -87,23 +87,28 @@ var client = new Greet.GreeterClient(channel);
 
 ## <a name="call-insecure-grpc-services-with-net-core-client"></a>使用 .NET Core 用戶端呼叫不安全的 gRPC 服務
 
-當應用程式使用 .NET Core 3.x 時，需要進行其他設定，才能使用 .NET Core 用戶端呼叫不安全的 gRPC 服務。 GRPC 用戶端必須將 `System.Net.Http.SocketsHttpHandler.Http2UnencryptedSupport` 參數設定為 `true` ，並 `http` 在伺服器位址中使用：
+.NET gRPC 用戶端可以藉由 `http` 在伺服器位址中 specifing 來呼叫不安全的 gRPC 服務。 例如： `GrpcChannel.ForAddress("http://localhost:5000")` 。
 
-```csharp
-// This switch must be set before creating the GrpcChannel/HttpClient.
-AppContext.SetSwitch(
-    "System.Net.Http.SocketsHttpHandler.Http2UnencryptedSupport", true);
+根據應用程式所使用的 .NET 版本，呼叫不安全的 gRPC 服務有一些額外的需求：
 
-// The port number(5000) must match the port of the gRPC server.
-var channel = GrpcChannel.ForAddress("http://localhost:5000");
-var client = new Greet.GreeterClient(channel);
-```
+* .NET 5 或更新版本需要 [Grpc .net. Client](https://www.nuget.org/packages/Grpc.Net.Client) version 2.32.0 或更新版本。
+* .NET Core 3.x 需要額外的設定。 應用程式必須將 `System.Net.Http.SocketsHttpHandler.Http2UnencryptedSupport` 參數設定為 `true` ：
+    
+    ```csharp
+    // This switch must be set before creating the GrpcChannel/HttpClient.
+    AppContext.SetSwitch(
+        "System.Net.Http.SocketsHttpHandler.Http2UnencryptedSupport", true);
+    
+    // The port number(5000) must match the port of the gRPC server.
+    var channel = GrpcChannel.ForAddress("http://localhost:5000");
+    var client = new Greet.GreeterClient(channel);
+    ```
 
-.NET 5 應用程式不需要額外的設定，但若要呼叫不安全的 gRPC 服務，則必須使用 `Grpc.Net.Client` 版本2.32.0 或更新版本。
+`System.Net.Http.SocketsHttpHandler.Http2UnencryptedSupport`只有 .Net Core 3.x 才需要此參數。 它不會在 .NET 5 中執行任何動作，而且也不需要。
 
 ## <a name="unable-to-start-aspnet-core-grpc-app-on-macos"></a>無法在 macOS 上啟動 ASP.NET Core gRPC 應用程式
 
-Kestrel 在 macOS 和舊版 Windows （例如 Windows 7）上不支援具有 TLS 的 HTTP/2。 ASP.NET Core 的 gRPC 範本和範例預設會使用 TLS。 當您嘗試啟動 gRPC 伺服器時，將會看到下列錯誤訊息：
+Kestrel 在 macOS 和舊版 Windows （例如 Windows 7）上不支援具有 TLS 的 HTTP/2。 ASP.NET Core gRPC 範本和範例預設會使用 TLS。 當您嘗試啟動 gRPC 伺服器時，將會看到下列錯誤訊息：
 
 > 無法 https://localhost:5001 在 IPv4 回送介面上系結至： macOS 因為缺少 ALPN 支援，所以不支援透過 TLS 的 HTTP/2。
 
@@ -137,7 +142,7 @@ public static IHostBuilder CreateHostBuilder(string[] args) =>
 GRPC 用戶端也必須設定為不使用 TLS。 如需詳細資訊，請參閱 [使用 .Net Core 用戶端呼叫不安全的 gRPC 服務](#call-insecure-grpc-services-with-net-core-client)。
 
 > [!WARNING]
-> 只有在應用程式開發期間，才應該使用沒有 TLS 的 HTTP/2。 生產環境應用程式應該一律使用傳輸安全性。 如需詳細資訊，請參閱 [gRPC 中的安全性考慮，以瞭解 ASP.NET Core](xref:grpc/security#transport-security)。
+> 只有在應用程式開發期間，才應該使用沒有 TLS 的 HTTP/2。 生產環境應用程式應該一律使用傳輸安全性。 如需詳細資訊，請參閱 [gRPC for ASP.NET Core 中的安全性考慮](xref:grpc/security#transport-security)。
 
 ## <a name="grpc-c-assets-are-not-code-generated-from-proto-files"></a>gRPC c # 資產不是從 proto 檔案產生的程式碼
 

@@ -17,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: tutorials/dotnet-watch
-ms.openlocfilehash: 27420fe00ba6375e15b67fb359be06df055eff1f
-ms.sourcegitcommit: 3593c4efa707edeaaceffbfa544f99f41fc62535
+ms.openlocfilehash: 84cae3b3babe28c2ebf6dba50023b020112d1bb3
+ms.sourcegitcommit: 54fe1ae5e7d068e27376d562183ef9ddc7afc432
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 01/04/2021
-ms.locfileid: "93060036"
+ms.lasthandoff: 03/10/2021
+ms.locfileid: "102587576"
 ---
 # <a name="develop-aspnet-core-apps-using-a-file-watcher"></a>使用檔案監看員開發 ASP.NET Core 應用程式
 
@@ -32,7 +32,7 @@ ms.locfileid: "93060036"
 
 本教學課程使用現有的 Web API 與兩個端點：一個傳回加總，另一個傳回產品。 本教學課程已修正產品方法的 Bug。
 
-下載 [範例應用程式](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/tutorials/dotnet-watch/sample)。 它包含兩個專案：*WebApp* (ASP.NET Core Web API) 和 *WebAppTests* (Web API 的單元測試)。
+下載 [範例應用程式](https://github.com/dotnet/AspNetCore.Docs/tree/main/aspnetcore/tutorials/dotnet-watch/sample)。 它包含兩個專案：*WebApp* (ASP.NET Core Web API) 和 *WebAppTests* (Web API 的單元測試)。
 
 在命令殼層中，巡覽至 *WebApp* 資料夾。 執行以下命令：
 
@@ -213,13 +213,9 @@ dotnet watch msbuild /t:Test
 
 某些設定選項可以 `dotnet watch` 透過環境變數傳遞至。 可用的變數如下：
 
-| 設定  | 描述 |
+| 設定  | Description |
 | ------------- | ------------- |
 | `DOTNET_USE_POLLING_FILE_WATCHER`                | 如果設定為 "1" 或 "true"，則會使用輪詢檔案監看員， `dotnet watch` 而不是 CoreFx 的 `FileSystemWatcher` 。 用於監看網路共用上的檔案或 Docker 掛接的磁片區。                       |
 | `DOTNET_WATCH_SUPPRESS_MSBUILD_INCREMENTALISM`   | 根據預設，藉 `dotnet watch` 由避免某些作業（例如，在每個檔案變更時執行還原或重新評估監看的檔案集合）來優化組建。 如果設定為 "1" 或 "true"，則會停用這些優化。 |
 | `DOTNET_WATCH_SUPPRESS_LAUNCH_BROWSER`   | `dotnet watch run` 嘗試啟動 web 應用程式的瀏覽器，並在 `launchBrowser` *launchSettings.js* 中設定。 如果設定為 "1" 或 "true"，則會隱藏此行為。 |
 | `DOTNET_WATCH_SUPPRESS_BROWSER_REFRESH`   | `dotnet watch run` 嘗試在偵測到檔案變更時重新整理瀏覽器。 如果設定為 "1" 或 "true"，則會隱藏此行為。 如果設定，也會抑制此行為 `DOTNET_WATCH_SUPPRESS_LAUNCH_BROWSER` 。 |
-
-## <a name="dotnet-watch-in-github"></a>GitHub 中的 `dotnet-watch`
-
-`dotnet-watch` 是 GitHub [dotnet/AspNetCore 存放庫](https://github.com/dotnet/AspNetCore/tree/master/src/Tools/dotnet-watch)的一部分。

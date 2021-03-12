@@ -18,18 +18,18 @@ no-loc:
 - Razor
 - SignalR
 uid: mvc/views/tag-helpers/authoring
-ms.openlocfilehash: 306416db3d9ae0219f859c3cf459eb08a5b778cf
-ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
+ms.openlocfilehash: e0c9f450e4eded49694cbbb0e9fa2614a221ab14
+ms.sourcegitcommit: 54fe1ae5e7d068e27376d562183ef9ddc7afc432
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 10/30/2020
-ms.locfileid: "93060920"
+ms.lasthandoff: 03/10/2021
+ms.locfileid: "102586822"
 ---
 # <a name="author-tag-helpers-in-aspnet-core"></a>ASP.NET Core 中的編寫標籤協助程式
 
 作者：[Rick Anderson](https://twitter.com/RickAndMSFT)
 
-[查看或下載範例程式碼](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/mvc/views/tag-helpers/authoring/sample) ([如何下載](xref:index#how-to-download-a-sample)) 
+[查看或下載範例程式碼](https://github.com/dotnet/AspNetCore.Docs/tree/main/aspnetcore/mvc/views/tag-helpers/authoring/sample) ([如何下載](xref:index#how-to-download-a-sample)) 
 
 ## <a name="get-started-with-tag-helpers"></a>開始使用標籤協助程式
 
@@ -39,7 +39,7 @@ ms.locfileid: "93060920"
 
 1. 建立稱為 **AuthoringTagHelpers** 的新 ASP.NET Core 專案。 您不需要驗證此專案。
 
-1. 建立資料夾以保存稱為 *TagHelpers* 的標籤協助程式。  是必要的，但是為合理的慣例。 現在開始撰寫一些簡單的標籤協助程式。
+1. 建立資料夾以保存稱為 *TagHelpers* 的標籤協助程式。 *TagHelpers* 資料夾「不」是必要的，但是為合理的慣例。 現在開始撰寫一些簡單的標籤協助程式。
 
 ## <a name="a-minimal-tag-helper"></a>最精簡的標籤協助程式
 
@@ -61,7 +61,7 @@ ms.locfileid: "93060920"
 
    [!code-csharp[](authoring/sample/AuthoringTagHelpers/src/AuthoringTagHelpers/TagHelpers/z1EmailTagHelperCopy.cs)]
 
-   * 標籤協助程式使用以根類別名稱的項目為目標的命名慣例 (去掉類別名稱的 *TagHelper* 部分)。 在此範例中， **EmailTagHelper** 的根名稱是 *email* ，因此將會以 `<email>` 標籤為目標。 此命名慣例應該適用於大部分的標籤協助程式，稍後將示範如何行覆寫它。
+   * 標籤協助程式使用以根類別名稱的項目為目標的命名慣例 (去掉類別名稱的 *TagHelper* 部分)。 在此範例中，**EmailTagHelper** 的根名稱是 *email*，因此將會以 `<email>` 標籤為目標。 此命名慣例應該適用於大部分的標籤協助程式，稍後將示範如何行覆寫它。
 
    * `EmailTagHelper` 類別衍生自 `TagHelper`。 `TagHelper` 類別提供撰寫標籤協助程式的方法和屬性。
 
@@ -71,7 +71,7 @@ ms.locfileid: "93060920"
 
    * `Process` (和 `ProcessAsync`) 的輸出參數包含具狀態 HTML 項目，以呈現用來產生 HTML 標籤和內容的原始來源。
 
-   * 類別名稱的尾碼為  是必要的，但視為最佳做法慣例。 您可以將類別宣告為：
+   * 類別名稱的尾碼為 **TagHelper**，這「不」是必要的，但視為最佳做法慣例。 您可以將類別宣告為：
 
    ```csharp
    public class Email : TagHelper
@@ -81,7 +81,7 @@ ms.locfileid: "93060920"
 
    [!code-cshtml[](../../../mvc/views/tag-helpers/authoring/sample/AuthoringTagHelpers/src/AuthoringTagHelpers/Views/_ViewImportsCopyEmail.cshtml?highlight=2,3)]
 
-   上述程式碼使用萬用字元語法，指定將使用組件中的所有標籤協助程式。 `@addTagHelper` 後面的第一個字串指定要載入的標籤協助程式 (使用 "*" 表示所有標籤協助程式)，而第二個字串 "AuthoringTagHelpers" 指定標籤協助程式所在的組件。 另外也請注意，第二行則是使用萬用字元語法來 ASP.NET Core MVC 標記協助程式 (這些協助程式會在標籤協助程式的[簡介](intro.md)中討論。 ) 這是讓標籤協助 `@addTagHelper` 程式可供視圖使用的指示詞。 Razor 或者，您可以提供標籤協助程式的完整名稱 (FQN)，如下所示：
+   上述程式碼使用萬用字元語法，指定將使用組件中的所有標籤協助程式。 `@addTagHelper` 後面的第一個字串指定要載入的標籤協助程式 (使用 "*" 表示所有標籤協助程式)，而第二個字串 "AuthoringTagHelpers" 指定標籤協助程式所在的組件。 另請注意，第二行則是使用萬用字元語法來 ASP.NET 核心 MVC 標記協助程式 (這些協助程式會在標籤協助程式的[簡介](intro.md)中討論。 ) 這是讓標籤協助 `@addTagHelper` 程式可供視圖使用的指示詞。 Razor 或者，您可以提供標籤協助程式的完整名稱 (FQN)，如下所示：
 
 ```csharp
 @using AuthoringTagHelpers
@@ -94,7 +94,7 @@ the following snippet uses TagHelpers3 and should use TagHelpers (not the 3)
     [!code-cshtml[](../../../mvc/views/tag-helpers/authoring/sample/AuthoringTagHelpers/src/AuthoringTagHelpers/Views/_ViewImports.cshtml?highlight=3&range=1-3)]
 -->
 
-若要使用 FQN 將標籤協助程式新增至檢視，您需先新增 FQN (`AuthoringTagHelpers.TagHelpers.EmailTagHelper`)，再新增 **組件名稱** ( *AuthoringTagHelpers* ，不一定要是 `namespace`)。 大部分開發人員都會想要使用萬用字元語法。 [標籤協助程式簡介](intro.md)會詳述標籤協助程式新增、移除、階層和萬用字元語法。
+若要使用 FQN 將標籤協助程式新增至檢視，您需先新增 FQN (`AuthoringTagHelpers.TagHelpers.EmailTagHelper`)，再新增 **組件名稱** (*AuthoringTagHelpers*，不一定要是 `namespace`)。 大部分開發人員都會想要使用萬用字元語法。 [標籤協助程式簡介](intro.md)會詳述標籤協助程式新增、移除、階層和萬用字元語法。
 
 1. 使用下列變更來更新 *Views/Home/Contact.cshtml* 檔案中的標記：
 

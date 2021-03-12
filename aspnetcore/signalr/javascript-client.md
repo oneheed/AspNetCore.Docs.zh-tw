@@ -19,14 +19,14 @@ no-loc:
 - Razor
 - SignalR
 uid: signalr/javascript-client
-ms.openlocfilehash: b4b1bc6131a6676710adbf2503efe3f304d89a58
-ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
+ms.openlocfilehash: 1b5c89c1beaf36912766b3e08b9f16c4d33945f8
+ms.sourcegitcommit: 54fe1ae5e7d068e27376d562183ef9ddc7afc432
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 10/30/2020
-ms.locfileid: "93050845"
+ms.lasthandoff: 03/10/2021
+ms.locfileid: "102588057"
 ---
-# <a name="aspnet-core-no-locsignalr-javascript-client"></a>ASP.NET Core SignalR JavaScript 用戶端
+# <a name="aspnet-core-signalr-javascript-client"></a>ASP.NET Core SignalR JavaScript 用戶端
 
 ::: moniker range=">= aspnetcore-3.0"
 
@@ -34,15 +34,15 @@ ms.locfileid: "93050845"
 
 ASP.NET Core SignalR JavaScript 用戶端程式庫可讓開發人員呼叫伺服器端中樞程式碼。
 
-[查看或下載範例程式碼](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/signalr/javascript-client/samples) ([如何下載](xref:index#how-to-download-a-sample)) 
+[查看或下載範例程式碼](https://github.com/dotnet/AspNetCore.Docs/tree/main/aspnetcore/signalr/javascript-client/samples) ([如何下載](xref:index#how-to-download-a-sample)) 
 
-## <a name="install-the-no-locsignalr-client-package"></a>安裝 SignalR 用戶端套件
+## <a name="install-the-signalr-client-package"></a>安裝 SignalR 用戶端套件
 
 SignalRJavaScript 用戶端程式庫會以[npm](https://www.npmjs.com/)套件的形式傳遞。 下列各節概述安裝用戶端程式庫的不同方式。
 
 ### <a name="install-with-npm"></a>使用 npm 安裝
 
-針對 Visual Studio，請在根資料夾中從 **封裝管理員主控台** 執行下列命令。 針對 Visual Studio Code，請從 **整合式終端** 機執行下列命令。
+若為 Visual Studio，請在根資料夾中從 **封裝管理員主控台** 執行下列命令。 針對 Visual Studio Code，請從 **整合式終端** 機執行下列命令。
 
 ```bash
 npm init -y
@@ -302,9 +302,9 @@ const connection = new signalR.HubConnectionBuilder()
 
 ASP.NET Core SignalR JavaScript 用戶端程式庫可讓開發人員呼叫伺服器端中樞程式碼。
 
-[查看或下載範例程式碼](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/signalr/javascript-client/samples) ([如何下載](xref:index#how-to-download-a-sample)) 
+[查看或下載範例程式碼](https://github.com/dotnet/AspNetCore.Docs/tree/main/aspnetcore/signalr/javascript-client/samples) ([如何下載](xref:index#how-to-download-a-sample)) 
 
-## <a name="install-the-no-locsignalr-client-package"></a>安裝 SignalR 用戶端套件
+## <a name="install-the-signalr-client-package"></a>安裝 SignalR 用戶端套件
 
 SignalRJavaScript 用戶端程式庫會以[npm](https://www.npmjs.com/)套件的形式傳遞。 下列各節概述安裝用戶端程式庫的不同方式。
 
@@ -362,7 +362,7 @@ npm 會將套件內容安裝 *node_modules \\ @aspnet\signalr\dist\browser* 資�
 JavaScript 用戶端會透過[HubConnection](/javascript/api/%40aspnet/signalr/hubconnection)的[invoke](/javascript/api/%40aspnet/signalr/hubconnection#invoke)方法，呼叫中樞上的公用方法。 `invoke`方法會接受兩個引數：
 
 * 中樞方法的名稱。 在下列範例中，中樞上的方法名稱為 `SendMessage` 。
-* 中樞方法中定義的任何引數。 在下列範例中，引數名稱為 `message` 。 範例程式碼會使用箭號函式語法，此語法在所有主要瀏覽器的目前版本中受到支援，但 Internet Explorer 除外。
+* 中樞方法中定義的任何引數。 在下列範例中，引數名稱為 `message` 。 範例程式碼會使用箭號函式語法，在 Internet Explorer 以外的所有主要瀏覽器的目前版本中都受到支援。
 
   [!code-javascript[Call hub methods](javascript-client/samples/2.x/SignalRChat/wwwroot/js/chat.js?range=24)]
 

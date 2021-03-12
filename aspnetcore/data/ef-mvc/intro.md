@@ -1,5 +1,5 @@
 ---
-title: 教學課程：開始使用 ASP.NET MVC web 應用程式中的 EF Core
+title: 教學課程：開始在 ASP.NET MVC web 應用程式中使用 EF Core
 description: 此頁面是一系列教學課程中的第一個教學課程，說明如何建立 Contoso 大學範例 EF/MVC 應用程式」
 author: rick-anderson
 ms.author: riande
@@ -19,14 +19,14 @@ no-loc:
 - Razor
 - SignalR
 uid: data/ef-mvc/intro
-ms.openlocfilehash: c0623de3c8031b6dbb518a6d25623b55a6500af5
-ms.sourcegitcommit: 3593c4efa707edeaaceffbfa544f99f41fc62535
+ms.openlocfilehash: 5bb1a05f5e81730d0785c1d6a69a8cafb68f85ab
+ms.sourcegitcommit: 54fe1ae5e7d068e27376d562183ef9ddc7afc432
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 01/04/2021
-ms.locfileid: "94703731"
+ms.lasthandoff: 03/10/2021
+ms.locfileid: "102586679"
 ---
-# <a name="tutorial-get-started-with-ef-core-in-an-aspnet-mvc-web-app"></a>教學課程：開始使用 ASP.NET MVC web 應用程式中的 EF Core
+# <a name="tutorial-get-started-with-ef-core-in-an-aspnet-mvc-web-app"></a>教學課程：開始在 ASP.NET MVC web 應用程式中使用 EF Core
 
 作者：[Tom Dykstra](https://github.com/tdykstra) 和 [Rick Anderson](https://twitter.com/RickAndMSFT)
 
@@ -34,13 +34,13 @@ ms.locfileid: "94703731"
 
 [!INCLUDE [RP better than MVC](~/includes/RP-EF/rp-over-mvc.md)]
 
-Contoso 大學範例 web 應用程式示範如何使用 Entity Framework (EF) Core 和 Visual Studio 建立 ASP.NET Core MVC web 應用程式。
+Contoso 大學範例 web 應用程式示範如何使用 Entity Framework (EF) Core 和 Visual Studio 來建立 ASP.NET Core MVC web 應用程式。
 
 這個範例應用程式是虛構的 Contoso 大學網站。 其中包括的功能有學生入學許可、課程建立、教師指派。 這是一系列教學課程中的第一篇，說明如何建立 Contoso 大學範例應用程式。
 
-## <a name="prerequisites"></a>先決條件
+## <a name="prerequisites"></a>必要條件
 
-* 如果您是 ASP.NET Core MVC 的新手，請先完成 [ASP.NET CORE mvc](xref:tutorials/first-mvc-app/start-mvc) 教學課程系列的「開始使用」，再開始這一系列。
+* 如果您不熟悉 ASP.NET Core MVC，請先流覽開始 [使用 ASP.NET CORE mvc](xref:tutorials/first-mvc-app/start-mvc) 教學課程系列，再開始此系列。
 
 [!INCLUDE[VS prereqs](~/includes/net-core-prereqs-vs-5.0.md)]
 
@@ -56,7 +56,7 @@ If you choose to use SQLite, download and install a third-party tool for managin
 
 ## <a name="solve-problems-and-troubleshoot"></a>解決問題和疑難排解
 
-如果您執行您不能解決問題，您可以藉由比較您的程式碼通常找到方案[已完成的專案](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/data/ef-mvc/intro/samples)。 如需常見的錯誤以及如何解決這些問題的清單，請參閱[ 數列中的最後一個教學課程疑難排解 > 一節](advanced.md#common-errors)。 如果您找不到您需要那里，您可以張貼問題的 StackOverflow.com [ASP.NET Core](https://stackoverflow.com/questions/tagged/asp.net-core) 或 [EF Core](https://stackoverflow.com/questions/tagged/entity-framework-core)。
+如果您執行您不能解決問題，您可以藉由比較您的程式碼通常找到方案[已完成的專案](https://github.com/dotnet/AspNetCore.Docs/tree/main/aspnetcore/data/ef-mvc/intro/samples)。 如需常見的錯誤以及如何解決這些問題的清單，請參閱[ 數列中的最後一個教學課程疑難排解 > 一節](advanced.md#common-errors)。 如果您找不到您需要那里，您可以張貼問題的 StackOverflow.com [ASP.NET Core](https://stackoverflow.com/questions/tagged/asp.net-core) 或 [EF Core](https://stackoverflow.com/questions/tagged/entity-framework-core)。
 
 > [!TIP]
 > 這是 10 個教學的系列課程，當中的每一個課程都是建置於先前教學課程的成果上。 成功完成每一個教學課程後，請儲存專案的複本。 如果您遇到問題，您可以從上一個教學課程來重新開始，而不需從系列的一開始從頭來過。
@@ -74,11 +74,11 @@ If you choose to use SQLite, download and install a third-party tool for managin
 ## <a name="create-web-app"></a>建立 Web 應用程式
 
 1. 啟動 Visual Studio，然後選取 [建立新專案]。
-1. 在 [ **建立新專案** ] 對話方塊中，選取 [ **ASP.NET Core Web 應用程式** > **]**。
+1. 在 [ **建立新專案** ] 對話方塊中，選取 [下一步] **ASP.NET Core Web 應用程式** > ****。
 1. 在 [ **設定您的新專案** ] 對話方塊中，輸入 [ `ContosoUniversity` **專案名稱**]。 請務必使用此完整名稱（包括大小寫），以便 `namespace` 在複製程式碼時使用每個相符專案。
-1. 選取 [建立]。
+1. 選取 [建立]  。
 1. 在 [ **建立新的 ASP.NET Core web 應用程式** ] 對話方塊中，選取：
-    1. 下拉式清單中的 **.Net Core** 和 **ASP.NET Core 5.0** 。
+    1. 下拉式清單中的 **.Net core** 和 **ASP.NET core 5.0** 。
     1. **ASP.NET Core Web 應用程式 (模型-視圖控制器)**。
     1.  
        建立 ![新增 ASP.NET Core 專案對話方塊](~/data/ef-mvc/intro/_static/new-aspnet5.png)
@@ -108,18 +108,18 @@ If you choose to use SQLite, download and install a third-party tool for managin
 
 本教學課程使用 SQL Server，其提供者套件為 [Microsoft.EntityFrameworkCore.SqlServer](https://www.nuget.org/packages/Microsoft.EntityFrameworkCore.SqlServer/)。
 
-EF SQL Server 套件及其相依性， `Microsoft.EntityFrameworkCore` 以及 `Microsoft.EntityFrameworkCore.Relational` 提供 ef 的執行時間支援。
+EF SQL Server 封裝與其相依性， `Microsoft.EntityFrameworkCore` 以及 `Microsoft.EntityFrameworkCore.Relational` 提供 ef 的執行時間支援。
 
-新增 [AspNetCore Microsoft.entityframeworkcore](https://www.nuget.org/packages/Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore) nuget 套件和 [AspNetCore. microsoft.entityframeworkcore](https://www.nuget.org/packages/Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore) nuget 套件中的程式。 在封裝管理員主控台中 (PMC) 上，輸入下列命令以新增 NuGet 套件：
+新增 [AspNetCore Microsoft.entityframeworkcore](https://www.nuget.org/packages/Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore) nuget 套件和 [AspNetCore. microsoft.entityframeworkcore](https://www.nuget.org/packages/Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore) nuget 套件中的程式。 在 [套件管理員主控台] (PMC]) 中，輸入下列命令以新增 NuGet 套件：
 
 ```powershell
 Install-Package Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore
 Install-Package Microsoft.EntityFrameworkCore.SqlServer
 ```
 
-`Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore`NuGet 套件提供 EF Core 錯誤頁面 ASP.NET Core 中介軟體。 此中介軟體有助於偵測並診斷 EF Core 遷移的錯誤。
+`Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore`NuGet 套件提供 EF core 錯誤頁面的 ASP.NET 核心中介軟體。 此中介軟體有助於偵測和診斷 EF Core 遷移的錯誤。
 
-如需其他可用於 EF Core 之資料庫提供者的詳細資訊，請參閱 [資料庫提供者](/ef/core/providers/)。
+如需 EF Core 可用的其他資料庫提供者的詳細資訊，請參閱 [資料庫提供者](/ef/core/providers/)。
 
 ## <a name="create-the-data-model"></a>建立資料模型
 
@@ -175,7 +175,7 @@ Install-Package Microsoft.EntityFrameworkCore.SqlServer
 
 `CourseID`屬性是 FK，而對應的導覽屬性為 `Course` 。 一個 `Enrollment` 實體與一個 `Course` 實體建立關聯。
 
-Entity Framework 會將屬性（property）解讀為 FK 屬性（property），並將其命名為「 `<` 導覽屬性名稱 `><` 主鍵屬性名稱」 `>` 。 例如， `StudentID` `Student` 因為 `Student` 實體的 PK 是，所以針對導覽屬性 `ID` 。 FK 屬性也可以命名  `<` 為主鍵屬性名稱 `>` 。 例如， `CourseID` 因為 `Course` 實體的 PK 為 `CourseID` 。
+Entity Framework 會將屬性（property）作為 FK 屬性（property），並將其命名為「 `<` 導覽屬性名稱 `><` 主鍵屬性名稱」 `>` 。 例如， `StudentID` `Student` 因為 `Student` 實體的 PK 是，所以針對導覽屬性 `ID` 。 FK 屬性也可以命名  `<` 為主鍵屬性名稱 `>` 。 例如， `CourseID` 因為 `Course` 實體的 PK 為 `CourseID` 。
 
 ### <a name="the-course-entity"></a>Course 實體
 
@@ -243,7 +243,7 @@ ASP.NET Core 包含了[相依性插入](../../fundamentals/dependency-injection.
 
 EF 會建立空的資料庫。 在本節中，會加入在建立資料庫之後呼叫的方法，以便將測試資料填入。
 
-`EnsureCreated`方法是用來自動建立資料庫。 在 [稍後的教學](migrations.md)課程中，您將瞭解如何使用 Code First 移轉來變更資料庫架構，而不是卸載和重新建立資料庫，來處理模型變更。
+`EnsureCreated`方法是用來自動建立資料庫。 在 [稍後的教學](migrations.md)課程中，您將瞭解如何使用 Code First 遷移來變更資料庫架構，而不是卸載和重新建立資料庫，以處理模型變更。
 
 在 [ *資料* ] 資料夾中，使用下列程式碼來建立名為的新類別 `DbInitializer` ：
 
@@ -276,20 +276,20 @@ EF 會建立空的資料庫。 在本節中，會加入在建立資料庫之後�
 
 ## <a name="create-controller-and-views"></a>建立控制器和檢視
 
-使用 Visual Studio 中的「樣板」引擎來新增 MVC 控制器和將使用 EF 來查詢和儲存資料的視圖。
+使用 Visual Studio 中的 [程式] 引擎來新增 MVC 控制器和將使用 EF 來查詢和儲存資料的視圖。
 
 自動建立 [CRUD](https://wikipedia.org/wiki/Create,_read,_update_and_delete) 動作方法和視圖稱為「樣板」。
 
-* 在 **方案總管** 中，以滑鼠右鍵按一下 `Controllers` 資料夾，然後選取 [ **加入 > 新的 scaffold 專案**]。
+* 在 [ **方案 Explorer**] 中，以滑鼠右鍵按一下 `Controllers` 資料夾，然後選取 [ **加入 > 新的 scaffold 專案**]。
 * 在 [新增 Scaffold] 對話方塊中：
   * 選取 [使用 Entity Framework 執行檢視的 MVC 控制器]。
-  * 按一下 [新增] 。 [ **Entity Framework 使用 Scaffold 新增 MVC 控制器** ] 對話方塊隨即出現： ![ Student](intro/_static/scaffold-student2.png)
+  * 按一下 **[新增]** 。 **使用 Entity Framework 對話方塊的 [新增具有視圖的 MVC 控制器**] 對話方塊隨即出現： ![ Scaffold Student](intro/_static/scaffold-student2.png)
   * 在 [ **模型類別**] 中選取 [ **Student**]。
   * 在 [ **資料內容類別**] 中，選取 [ **SchoolCoNtext**]。
   * 接受預設的 **StudentsController** 作為名稱。
-  * 按一下 [新增] 。
+  * 按一下 **[新增]** 。
 
-Visual Studio 的樣板引擎會建立一個檔案 `StudentsController.cs` ，以及一組 `*.cshtml` 與控制器一起使用的 (檔案) 。
+Visual Studio 樣板引擎會建立一個檔案 `StudentsController.cs` ，以及一組 `*.cshtml` 與控制器一起 (檔案) 的視圖。
 
 請注意，控制器會採用作為函式 `SchoolContext` 參數。
 
@@ -322,9 +322,9 @@ ASP.NET Core 相依性插入會負責傳遞 `SchoolContext` 的執行個體給�
 * 所以它會建立一個資料庫。
 * `Initialize`方法程式碼會將資料填入資料庫。
 
-使用 **SQL Server 物件總管** (SSOX) 來查看 Visual Studio 中的資料庫：
+使用 **SQL Server 物件 Explorer** (SSOX) 在 Visual Studio 中查看資料庫：
 
-* 從 Visual Studio 的 [ **View** ] 功能表中選取 [ **SQL Server 物件總管**]。
+* 從 Visual Studio 的 [ **View** ] 功能表中選取 [ **SQL Server 物件瀏覽器**]。
 * 在 SSOX 中，選取 **(localdb) \mssqllocaldb > 資料庫**。
 * 在檔案的 `ContosoUniversity1` 連接字串中，選取資料庫名稱的專案 *appsettings.json* 。
 * 展開 [ **資料表]** 節點，查看資料庫中的資料表。
@@ -402,7 +402,7 @@ Contoso 大學範例 Web 應用程式示範如何使用 Entity Framework (EF) Co
 
 這個範例應用程式是虛構的 Contoso 大學網站。 其中包括的功能有學生入學許可、課程建立、教師指派。 這是說明如何從零開始建立 Contoso 大學範例應用程式教學課程系列中的第一頁。
 
-## <a name="prerequisites"></a>先決條件
+## <a name="prerequisites"></a>必要條件
 
 * [.NET Core SDK 2.2](https://dotnet.microsoft.com/download)
 * 包含下列工作負載的 [Visual Studio 2019](https://visualstudio.microsoft.com/downloads/?utm_medium=microsoft&utm_source=docs.microsoft.com&utm_campaign=inline+link&utm_content=download+vs2019)：
@@ -411,7 +411,7 @@ Contoso 大學範例 Web 應用程式示範如何使用 Entity Framework (EF) Co
 
 ## <a name="troubleshooting"></a>疑難排解
 
-如果您執行您不能解決問題，您可以藉由比較您的程式碼通常找到方案[已完成的專案](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/data/ef-mvc/intro/samples)。 如需常見的錯誤以及如何解決這些問題的清單，請參閱[ 數列中的最後一個教學課程疑難排解 > 一節](advanced.md#common-errors)。 如果您找不到您需要那里，您可以張貼問題的 StackOverflow.com [ASP.NET Core](https://stackoverflow.com/questions/tagged/asp.net-core) 或 [EF Core](https://stackoverflow.com/questions/tagged/entity-framework-core)。
+如果您執行您不能解決問題，您可以藉由比較您的程式碼通常找到方案[已完成的專案](https://github.com/dotnet/AspNetCore.Docs/tree/main/aspnetcore/data/ef-mvc/intro/samples)。 如需常見的錯誤以及如何解決這些問題的清單，請參閱[ 數列中的最後一個教學課程疑難排解 > 一節](advanced.md#common-errors)。 如果您找不到您需要那里，您可以張貼問題的 StackOverflow.com [ASP.NET Core](https://stackoverflow.com/questions/tagged/asp.net-core) 或 [EF Core](https://stackoverflow.com/questions/tagged/entity-framework-core)。
 
 > [!TIP]
 > 這是 10 個教學的系列課程，當中的每一個課程都是建置於先前教學課程的成果上。 成功完成每一個教學課程後，請儲存專案的複本。 如果您遇到問題，您可以從上一個教學課程來重新開始，而不需從系列的一開始從頭來過。
@@ -605,20 +605,20 @@ Entity Framework 會為您建立空白資料庫。 在本節中，您會撰寫�
 
 ## <a name="create-controller-and-views"></a>建立控制器和檢視
 
-在本節中，Visual Studio 中的樣板引擎會用來新增 MVC 控制器和將使用 EF 來查詢和儲存資料的視圖。
+在本節中，會使用 Visual Studio 中的樣板引擎來新增 MVC 控制器和將使用 EF 來查詢和儲存資料的視圖。
 
 自動建立 CRUD 動作方法和檢視稱為 Scaffolding。 Scaffolding 與產生程式碼不同。Scaffold 程式碼是一個開始點，使得您可以修改它以符合您的需求，然而您通常不會去修改產生的程式碼。 當您需要自訂產生的程式碼時，您會使用部分類別，或者您會在事務變更時重新產生程式碼。
 
 * 在方案總管中的 **Controllers** 資料夾上以滑鼠右鍵按一下，然後選取 [新增] > [新增 Scaffold 項目]。
 * 在 [新增 Scaffold] 對話方塊中：
   * 選取 [使用 Entity Framework 執行檢視的 MVC 控制器]。
-  * 按一下 [新增] 。 [ **Entity Framework 使用 Scaffold 新增 MVC 控制器** ] 對話方塊隨即出現： ![ Student](intro/_static/scaffold-student2.png)
+  * 按一下 **[新增]** 。 **使用 Entity Framework 對話方塊的 [新增具有視圖的 MVC 控制器**] 對話方塊隨即出現： ![ Scaffold Student](intro/_static/scaffold-student2.png)
   * 在 [模型類別] 中，選取 [Student]。
   * 在 [資料內容類別] 中，選取 [SchoolContext]。
   * 接受預設的 **StudentsController** 作為名稱。
-  * 按一下 [新增] 。
+  * 按一下 **[新增]** 。
 
-Visual Studio 的樣板引擎會建立一個 *StudentsController.cs* 檔案和一組與控制器 (的 *cshtml* 檔案) 的視圖。
+Visual Studio 樣板引擎會建立一個 *StudentsController.cs* 檔案和一組 (的 *cshtml* 檔案) 與控制器搭配使用。
 
 請注意，控制器會採用作為函式 `SchoolContext` 參數。
 
@@ -702,7 +702,7 @@ ASP.NET Core 相依性插入會負責傳遞 `SchoolContext` 的執行個體給�
 
 如需在 .NET 中非同步程式設計的詳細資訊，請參閱[非同步總覽](/dotnet/articles/standard/async)。
 
-## <a name="next-steps"></a>後續步驟
+## <a name="next-steps"></a>下一步
 
 若要了解如何執行基本的 CRUD (建立、讀取、更新、刪除) 作業，請前往下一個教學課程。
 

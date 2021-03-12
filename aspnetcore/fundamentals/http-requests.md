@@ -19,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: fundamentals/http-requests
-ms.openlocfilehash: 1cf3029452f87a396847f969f0f3136a75874752
-ms.sourcegitcommit: 83524f739dd25fbfa95ee34e95342afb383b49fe
+ms.openlocfilehash: 2bc093af63f305dd9808e37011223043646852d5
+ms.sourcegitcommit: 54fe1ae5e7d068e27376d562183ef9ddc7afc432
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 01/29/2021
-ms.locfileid: "99057326"
+ms.lasthandoff: 03/10/2021
+ms.locfileid: "102588044"
 ---
 # <a name="make-http-requests-using-ihttpclientfactory-in-aspnet-core"></a>在 ASP.NET Core 中使用 IHttpClientFactory 發出 HTTP 要求
 
@@ -39,7 +39,7 @@ ms.locfileid: "99057326"
 * 管理基礎實例的共用和存留期 `HttpClientMessageHandler` 。 自動管理可避免在手動管理存留期時發生的常見 DNS (網域名稱系統) 問題 `HttpClient` 。
 * 針對透過處理站所建立之用戶端傳送的所有要求，新增可設定的記錄體驗 (透過 `ILogger`)。
 
-[檢視或下載範例程式碼](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/http-requests/samples) ([如何下載](xref:index#how-to-download-a-sample))。
+[檢視或下載範例程式碼](https://github.com/dotnet/AspNetCore.Docs/tree/main/aspnetcore/fundamentals/http-requests/samples) ([如何下載](xref:index#how-to-download-a-sample))。
 
 本主題的範例程式碼會用 <xref:System.Text.Json> 來還原序列化 HTTP 回應中傳回的 JSON 內容。 如需使用和的範例 `Json.NET` `ReadAsAsync<T>` ，請使用版本選擇器選取此主題的2.x 版本。
 
@@ -218,7 +218,7 @@ public class ValuesController : ControllerBase
 * 呼叫 <xref:System.Net.Http.HttpClient.PostAsync%2A> 以將 JSON 內容傳送至指定的 URL。 這是新增至 [HttpClient. BaseAddress](xref:System.Net.Http.HttpClient.BaseAddress)的相對 URL。
 * <xref:System.Net.Http.HttpResponseMessage.EnsureSuccessStatusCode%2A>如果回應狀態碼未指出成功，則呼叫會擲回例外狀況。
 
-`HttpClient` 也支援其他類型的內容。 例如，<xref:System.Net.Http.MultipartContent> 與 <xref:System.Net.Http.StreamContent>。 如需支援之內容的完整清單，請參閱 <xref:System.Net.Http.HttpContent> 。
+`HttpClient` 也支援其他類型的內容。 例如 <xref:System.Net.Http.MultipartContent> 和 <xref:System.Net.Http.StreamContent>。 如需支援之內容的完整清單，請參閱 <xref:System.Net.Http.HttpContent> 。
 
 下列範例顯示 HTTP PUT 要求：
 
@@ -283,7 +283,7 @@ public class ValuesController : ControllerBase
 
 [!code-csharp[](http-requests/samples/3.x/HttpRequestsSample/Handlers/OperationHandler.cs?name=snippet_Class&highlight=13)]
 
-在 [ [ `HttpRequestsSample` 下載](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/http-requests/samples/3.x/HttpRequestsSample)] 中，流覽 `/Operation` 並重新整理頁面。 每個要求的要求範圍值都有所變更，但處理常式範圍值只會每隔5秒變更一次。
+在 [ [ `HttpRequestsSample` 下載](https://github.com/dotnet/AspNetCore.Docs/tree/main/aspnetcore/fundamentals/http-requests/samples/3.x/HttpRequestsSample)] 中，流覽 `/Operation` 並重新整理頁面。 每個要求的要求範圍值都有所變更，但處理常式範圍值只會每隔5秒變更一次。
 
 處理常式可以視任何範圍的服務而定。 處置處理常式時，會處置處理常式所相依的服務。
 
@@ -380,7 +380,7 @@ public class ValuesController : ControllerBase
 - `SocketsHttpHandler`共用實例之間的 `HttpClient` 連接。 這種共用可防止通訊端耗盡。
 - 會 `SocketsHttpHandler` 根據來迴圈連接 `PooledConnectionLifetime` ，以避免過時的 DNS 問題。
 
-### <a name="no-loccookies"></a>Cookie
+### <a name="cookies"></a>Cookie
 
 集區 `HttpMessageHandler` 實例會產生 `CookieContainer` 共用的物件。 非預期 `CookieContainer` 的物件共用通常會導致不正確的程式碼。 針對需要的應用程式 cookie ，請考慮下列其中一項：
 
@@ -428,7 +428,7 @@ public class ValuesController : ControllerBase
 
 ## <a name="header-propagation-middleware"></a>標頭傳播中介軟體
 
-標頭傳播是 ASP.NET Core 中介軟體，用來將傳入要求的 HTTP 標頭傳播至傳出 HTTP 用戶端要求。 若要使用標頭傳播：
+標頭傳播是 ASP.NET 核心中介軟體，可將來自傳入要求的 HTTP 標頭傳播至傳出 HTTP 用戶端要求。 若要使用標頭傳播：
 
 * 參考 [AspNetCore. HeaderPropagation](https://www.nuget.org/packages/Microsoft.AspNetCore.HeaderPropagation) 套件。
 * 設定中介軟體和 `HttpClient` `Startup` ：
@@ -462,7 +462,7 @@ public class ValuesController : ControllerBase
 * 管理基礎 `HttpClientMessageHandler` 執行個體的共用和存留期，以避免在手動管理 `HttpClient` 存留期時，發生的常見 DNS 問題。
 * 針對透過處理站所建立之用戶端傳送的所有要求，新增可設定的記錄體驗 (透過 `ILogger`)。
 
-[查看或下載範例程式碼](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/http-requests/samples) ([如何下載](xref:index#how-to-download-a-sample)) 
+[查看或下載範例程式碼](https://github.com/dotnet/AspNetCore.Docs/tree/main/aspnetcore/fundamentals/http-requests/samples) ([如何下載](xref:index#how-to-download-a-sample)) 
 
 ## <a name="consumption-patterns"></a>耗用量模式
 
@@ -698,7 +698,7 @@ public class ValuesController : ControllerBase
 - `SocketsHttpHandler`共用實例之間的 `HttpClient` 連接。 這種共用可防止通訊端耗盡。
 - 會 `SocketsHttpHandler` 根據來迴圈連接 `PooledConnectionLifetime` ，以避免過時的 DNS 問題。
 
-### <a name="no-loccookies"></a>Cookie
+### <a name="cookies"></a>Cookie
 
 集區 `HttpMessageHandler` 實例會產生 `CookieContainer` 共用的物件。 非預期 `CookieContainer` 的物件共用通常會導致不正確的程式碼。 針對需要的應用程式 cookie ，請考慮下列其中一項：
 
@@ -763,7 +763,7 @@ public class ValuesController : ControllerBase
 * 管理基礎 `HttpClientMessageHandler` 執行個體的共用和存留期，以避免在手動管理 `HttpClient` 存留期時，發生的常見 DNS 問題。
 * 針對透過處理站所建立之用戶端傳送的所有要求，新增可設定的記錄體驗 (透過 `ILogger`)。
 
-[查看或下載範例程式碼](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/http-requests/samples) ([如何下載](xref:index#how-to-download-a-sample)) 
+[查看或下載範例程式碼](https://github.com/dotnet/AspNetCore.Docs/tree/main/aspnetcore/fundamentals/http-requests/samples) ([如何下載](xref:index#how-to-download-a-sample)) 
 
 ## <a name="prerequisites"></a>必要條件
 
@@ -1006,7 +1006,7 @@ public class ValuesController : ControllerBase
 - `SocketsHttpHandler`共用實例之間的 `HttpClient` 連接。 這種共用可防止通訊端耗盡。
 - 會 `SocketsHttpHandler` 根據來迴圈連接 `PooledConnectionLifetime` ，以避免過時的 DNS 問題。
 
-### <a name="no-loccookies"></a>Cookie
+### <a name="cookies"></a>Cookie
 
 集區 `HttpMessageHandler` 實例會產生 `CookieContainer` 共用的物件。 非預期 `CookieContainer` 的物件共用通常會導致不正確的程式碼。 針對需要的應用程式 cookie ，請考慮下列其中一項：
 
@@ -1056,7 +1056,7 @@ public class ValuesController : ControllerBase
 
 標頭傳播是一個支援仲介的中介軟體，可將來自傳入要求的 HTTP 標頭傳播至連出的 HTTP 用戶端要求。 若要使用標頭傳播：
 
-* 參考封裝 [HeaderPropagation](https://www.nuget.org/packages/HeaderPropagation)的「支援的社區」埠。 ASP.NET Core 3.1 和更新版本支援 [AspNetCore. HeaderPropagation](https://www.nuget.org/packages/Microsoft.AspNetCore.HeaderPropagation)。
+* 參考封裝 [HeaderPropagation](https://www.nuget.org/packages/HeaderPropagation)的「支援的社區」埠。 ASP.NET Core 3.1 和更新版本支援 [AspNetCore HeaderPropagation](https://www.nuget.org/packages/Microsoft.AspNetCore.HeaderPropagation)。
 
 * 設定中介軟體和 `HttpClient` `Startup` ：
 

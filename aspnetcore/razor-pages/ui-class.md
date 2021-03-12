@@ -1,7 +1,7 @@
 ---
-title: Razor具有 ASP.NET Core 的類別庫中可重複使用的 UI
+title: Razor使用 ASP.NET Core 的類別庫中可重複使用的 UI
 author: Rick-Anderson
-description: 說明如何 Razor 在 ASP.NET Core 的類別庫中，使用部分視圖建立可重複使用的 UI。
+description: 說明如何在 Razor ASP.NET Core 的類別庫中使用部分視圖來建立可重複使用的 UI。
 ms.author: riande
 ms.date: 01/19/2021
 ms.custom: mvc, seodec18
@@ -18,14 +18,14 @@ no-loc:
 - Razor
 - SignalR
 uid: razor-pages/ui-class
-ms.openlocfilehash: a878a3485ecee0782b21ac69c5ec6ff832b9f06c
-ms.sourcegitcommit: cb984e0d7dc23a88c3a4121f23acfaea0acbfe1e
+ms.openlocfilehash: 88b3bae5d52e334dea7ffcfe245f49d2816047c3
+ms.sourcegitcommit: 54fe1ae5e7d068e27376d562183ef9ddc7afc432
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 01/19/2021
-ms.locfileid: "98571013"
+ms.lasthandoff: 03/10/2021
+ms.locfileid: "102588174"
 ---
-# <a name="create-reusable-ui-using-the-no-locrazor-class-library-project-in-aspnet-core"></a>使用 Razor ASP.NET Core 中的類別庫專案建立可重複使用的 UI
+# <a name="create-reusable-ui-using-the-razor-class-library-project-in-aspnet-core"></a>使用 Razor ASP.NET Core 中的類別庫專案建立可重複使用的 UI
 
 作者：[Rick Anderson](https://twitter.com/RickAndMSFT)
 
@@ -33,16 +33,16 @@ ms.locfileid: "98571013"
 
 Razor您可以將視圖、頁面、控制器、頁面模型、 [ Razor 元件](xref:blazor/components/class-libraries)、[視圖元件](xref:mvc/views/view-components)和資料模型內建至 Razor 類別庫 (RCL) 。 RCL 可以封裝和重複使用。 應用程式可以包括 RCL，以及覆寫它所包含的檢視和頁面。 當 web 應用程式和 RCL 中都有一個 view、partial view 或 Razor Page 時， Razor web 應用程式中) 的標記會優先使用 (的 *cshtml* 檔案。
 
-[查看或下載範例程式碼](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/razor-pages/ui-class/samples) ([如何下載](xref:index#how-to-download-a-sample)) 
+[查看或下載範例程式碼](https://github.com/dotnet/AspNetCore.Docs/tree/main/aspnetcore/razor-pages/ui-class/samples) ([如何下載](xref:index#how-to-download-a-sample)) 
 
-## <a name="create-a-class-library-containing-no-locrazor-ui"></a>建立包含 UI 的類別庫 Razor
+## <a name="create-a-class-library-containing-razor-ui"></a>建立包含 UI 的類別庫 Razor
 
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
 * 從 Visual Studio 選取 [ **建立新專案**]。
 * 選取 [ **Razor 類別庫** > **下一步]**。
 * 將程式庫命名 (例如，" Razor ClassLib" ) > **建立**]。 若要避免與產生的檢視程式庫發生檔案名稱衝突，程式庫名稱結尾請務必不要使用 `.Views`。
-* 如果您需要支援 views，請選取 [ **支援頁面和視圖** ]。 依預設，只 Razor 支援頁面。 選取 [建立]。
+* 如果您需要支援 views，請選取 [ **支援頁面和視圖** ]。 依預設，只 Razor 支援頁面。 選取 [建立]  。
 
 Razor依預設，類別庫 (RCL) 範本預設為 Razor 元件開發。 **支援頁面和 views** 選項支援頁面和視圖。
 
@@ -62,7 +62,7 @@ Razor依預設，類別庫 (RCL) 範本預設為 Razor 元件開發。 將 `--su
 
 將檔案新增 Razor 至 RCL。
 
-ASP.NET Core 範本會假設 RCL 內容位於 [ *區域* ] 資料夾中。 請參閱 [RCL 頁面版面](#rcl-pages-layout) 配置來建立可公開內容的 RCL， `~/Pages` 而不是 `~/Areas/Pages` 。
+ASP.NET 核心範本會假設 RCL 內容位於 [ *區域* ] 資料夾中。 請參閱 [RCL 頁面版面](#rcl-pages-layout) 配置來建立可公開內容的 RCL， `~/Pages` 而不是 `~/Areas/Pages` 。
 
 ## <a name="reference-rcl-content"></a>參考 RCL 內容
 
@@ -208,9 +208,9 @@ public class Program
 
 Razor您可以將視圖、頁面、控制器、頁面模型、 [ Razor 元件](xref:blazor/components/class-libraries)、[視圖元件](xref:mvc/views/view-components)和資料模型內建至 Razor 類別庫 (RCL) 。 RCL 可以封裝和重複使用。 應用程式可以包括 RCL，以及覆寫它所包含的檢視和頁面。 當 web 應用程式和 RCL 中都有一個 view、partial view 或 Razor Page 時， Razor web 應用程式中) 的標記會優先使用 (的 *cshtml* 檔案。
 
-[查看或下載範例程式碼](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/razor-pages/ui-class/samples) ([如何下載](xref:index#how-to-download-a-sample)) 
+[查看或下載範例程式碼](https://github.com/dotnet/AspNetCore.Docs/tree/main/aspnetcore/razor-pages/ui-class/samples) ([如何下載](xref:index#how-to-download-a-sample)) 
 
-## <a name="create-a-class-library-containing-no-locrazor-ui"></a>建立包含 UI 的類別庫 Razor
+## <a name="create-a-class-library-containing-razor-ui"></a>建立包含 UI 的類別庫 Razor
 
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
@@ -238,7 +238,7 @@ dotnet new razorclasslib -o RazorUIClassLib
 
 將檔案新增 Razor 至 RCL。
 
-ASP.NET Core 範本會假設 RCL 內容位於 [ *區域* ] 資料夾中。 請參閱 [RCL 頁面版面](#rcl-pages-layout) 配置來建立可公開內容的 RCL， `~/Pages` 而不是 `~/Areas/Pages` 。
+ASP.NET 核心範本會假設 RCL 內容位於 [ *區域* ] 資料夾中。 請參閱 [RCL 頁面版面](#rcl-pages-layout) 配置來建立可公開內容的 RCL， `~/Pages` 而不是 `~/Areas/Pages` 。
 
 ## <a name="reference-rcl-content"></a>參考 RCL 內容
 
@@ -247,9 +247,9 @@ RCL 可以由下列各項參考：
 * NuGet 套件。 請參閱[建立 NuGet 套件](/nuget/create-packages/creating-a-package)和 [dotnet add package](/dotnet/core/tools/dotnet-add-package) 和[建立和發佈 NuGet 套件](/nuget/quickstart/create-and-publish-a-package-using-visual-studio)。
 * *{ProjectName}.csproj*。 請參閱 [dotnet-add reference](/dotnet/core/tools/dotnet-add-reference)。
 
-## <a name="walkthrough-create-an-rcl-project-and-use-from-a-no-locrazor-pages-project"></a>逐步解說：建立 RCL 專案並使用於 Razor 頁面專案中
+## <a name="walkthrough-create-an-rcl-project-and-use-from-a-razor-pages-project"></a>逐步解說：建立 RCL 專案並使用於 Razor 頁面專案中
 
-您可以下載[完整專案](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/razor-pages/ui-class/samples)並測試它，而不是建立它。 下載範例包含額外的程式碼和連結，讓您輕鬆地測試專案。 您可以在[此 GitHub 問題](https://github.com/dotnet/AspNetCore.Docs/issues/6098)留下意見反應以及您對下載範例與逐步指示的評論。
+您可以下載[完整專案](https://github.com/dotnet/AspNetCore.Docs/tree/main/aspnetcore/razor-pages/ui-class/samples)並測試它，而不是建立它。 下載範例包含額外的程式碼和連結，讓您輕鬆地測試專案。 您可以在[此 GitHub 問題](https://github.com/dotnet/AspNetCore.Docs/issues/6098)留下意見反應以及您對下載範例與逐步指示的評論。
 
 ### <a name="test-the-download-app"></a>測試下載應用程式
 
@@ -312,7 +312,7 @@ dotnet new viewstart -o RazorUIClassLib/Areas/MyFeature/Pages
 
 ---
 
-### <a name="add-no-locrazor-files-and-folders-to-the-project"></a>將檔案 Razor 和資料夾加入至專案
+### <a name="add-razor-files-and-folders-to-the-project"></a>將檔案 Razor 和資料夾加入至專案
 
 * 將 *Razor UIClassLib/Areas/MyFeature/Pages/Shared/_Message* 中的標記取代為下列程式碼：
 
@@ -338,7 +338,7 @@ dotnet new viewstart -o RazorUIClassLib/Areas/MyFeature/Pages
 
 組建輸出包含 *RazorUIClassLib.dll* 和 *RazorUIClassLib.Views.dll*。 *RazorUIClassLib.Views.dll* 包含已編譯的 Razor 內容。
 
-### <a name="use-the-no-locrazor-ui-library-from-a-no-locrazor-pages-project"></a>使用 Razor 頁面專案的 UI 程式庫 Razor
+### <a name="use-the-razor-ui-library-from-a-razor-pages-project"></a>使用 Razor 頁面專案的 UI 程式庫 Razor
 
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 

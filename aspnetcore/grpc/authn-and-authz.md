@@ -1,7 +1,7 @@
 ---
-title: GRPC 中的驗證和授權 ASP.NET Core
+title: 適用于 ASP.NET Core 的 gRPC 中的驗證和授權
 author: jamesnk
-description: 瞭解如何在 gRPC 中針對 ASP.NET Core 使用驗證和授權。
+description: 瞭解如何在 gRPC for ASP.NET Core 中使用驗證和授權。
 monikerRange: '>= aspnetcore-3.0'
 ms.author: jamesnk
 ms.date: 05/26/2020
@@ -18,24 +18,24 @@ no-loc:
 - Razor
 - SignalR
 uid: grpc/authn-and-authz
-ms.openlocfilehash: 833114a12c8c1ac67097b3592cf410d7a69bb628
-ms.sourcegitcommit: 3593c4efa707edeaaceffbfa544f99f41fc62535
+ms.openlocfilehash: 5120964459a81ef2d668877bb08ecde512c2389d
+ms.sourcegitcommit: 54fe1ae5e7d068e27376d562183ef9ddc7afc432
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 01/04/2021
-ms.locfileid: "94673974"
+ms.lasthandoff: 03/10/2021
+ms.locfileid: "102587992"
 ---
-# <a name="authentication-and-authorization-in-grpc-for-aspnet-core"></a>GRPC 中的驗證和授權 ASP.NET Core
+# <a name="authentication-and-authorization-in-grpc-for-aspnet-core"></a>適用于 ASP.NET Core 的 gRPC 中的驗證和授權
 
 依 [James 牛頓](https://twitter.com/jamesnk)
 
-[查看或下載範例程式碼](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/grpc/authn-and-authz/sample/) [ (如何下載) ](xref:index#how-to-download-a-sample)
+[查看或下載範例程式碼](https://github.com/dotnet/AspNetCore.Docs/tree/main/aspnetcore/grpc/authn-and-authz/sample/) [ (如何下載) ](xref:index#how-to-download-a-sample)
 
 ## <a name="authenticate-users-calling-a-grpc-service"></a>驗證呼叫 gRPC 服務的使用者
 
-gRPC 可搭配 [ASP.NET Core authentication](xref:security/authentication/identity) 使用，以將使用者與每個呼叫產生關聯。
+gRPC 可與 [ASP.NET Core 驗證](xref:security/authentication/identity) 搭配使用，以將使用者與每個呼叫產生關聯。
 
-以下是 `Startup.Configure` 使用 gRPC 和 ASP.NET Core authentication 的範例：
+以下是 `Startup.Configure` 使用 gRPC 和 ASP.NET Core 驗證的範例：
 
 ```csharp
 public void Configure(IApplicationBuilder app)
@@ -53,7 +53,7 @@ public void Configure(IApplicationBuilder app)
 ```
 
 > [!NOTE]
-> 您註冊 ASP.NET Core authentication 中介軟體重要的順序。 一律 `UseAuthentication` 在前後 `UseAuthorization` 呼叫 `UseRouting` `UseEndpoints` 。
+> 您註冊 ASP.NET Core 驗證中介軟體重要的順序。 一律 `UseAuthentication` 在前後 `UseAuthorization` 呼叫 `UseRouting` `UseEndpoints` 。
 
 需要設定您的應用程式在呼叫期間使用的驗證機制。 會在中新增驗證設定 `Startup.ConfigureServices` ，並且會根據您的應用程式所使用的驗證機制而有所不同。 如需如何保護 ASP.NET Core 應用程式的範例，請參閱 [驗證範例](xref:security/authentication/samples)。
 
@@ -122,7 +122,7 @@ private static GrpcChannel CreateAuthenticatedChannel(string address)
 
 ### <a name="client-certificate-authentication"></a>用戶端憑證驗證
 
-用戶端也可以提供用戶端憑證來進行驗證。 [憑證驗證](https://tools.ietf.org/html/rfc5246#section-7.4.4) 會在 TLS 層級進行，但在達到 ASP.NET Core 之前也是如此。 當要求進入 ASP.NET Core 時， [用戶端憑證驗證封裝](xref:security/authentication/certauth) 可讓您將憑證解析為 `ClaimsPrincipal` 。
+用戶端也可以提供用戶端憑證來進行驗證。 [憑證驗證](https://tools.ietf.org/html/rfc5246#section-7.4.4) 會在 TLS 層級進行，但在到達 ASP.NET Core 之前也是如此。 當要求進入 ASP.NET Core 時， [用戶端憑證驗證封裝](xref:security/authentication/certauth) 可讓您將憑證解析為 `ClaimsPrincipal` 。
 
 > [!NOTE]
 > 將伺服器設定為接受用戶端憑證。 如需在 Kestrel、IIS 和 Azure 中接受用戶端憑證的相關資訊，請參閱 <xref:security/authentication/certauth#configure-your-server-to-require-certificates> 。
@@ -150,7 +150,7 @@ public Ticketer.TicketerClient CreateClientWithCert(
 
 ### <a name="other-authentication-mechanisms"></a>其他驗證機制
 
-許多 ASP.NET Core 支援的驗證機制可與 gRPC 搭配運作：
+許多 ASP.NET 核心支援的驗證機制可與 gRPC 搭配運作：
 
 * Azure Active Directory
 * 用戶端憑證

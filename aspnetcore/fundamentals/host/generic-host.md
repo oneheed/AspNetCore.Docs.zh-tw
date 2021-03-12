@@ -1,7 +1,7 @@
 ---
 title: ASP.NET Core 中的 .NET 泛型主機
 author: rick-anderson
-description: 在 ASP.NET Core apps 中使用 .NET Core 泛型主機。  一般主機負責應用程式啟動和存留期管理。
+description: 在 ASP.NET Core 應用程式中使用 .NET Core 泛型主機。  一般主機負責應用程式啟動和存留期管理。
 monikerRange: '>= aspnetcore-2.1'
 ms.author: riande
 ms.custom: mvc
@@ -19,18 +19,18 @@ no-loc:
 - Razor
 - SignalR
 uid: fundamentals/host/generic-host
-ms.openlocfilehash: b99b0f0ab6e67ac84bf1232ff6681c5edd54ffb9
-ms.sourcegitcommit: 063a06b644d3ade3c15ce00e72a758ec1187dd06
+ms.openlocfilehash: ceb766cae1f8a1735f5b578a44f0c481927e47a5
+ms.sourcegitcommit: 54fe1ae5e7d068e27376d562183ef9ddc7afc432
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 01/16/2021
-ms.locfileid: "98253172"
+ms.lasthandoff: 03/10/2021
+ms.locfileid: "102586744"
 ---
 # <a name="net-generic-host-in-aspnet-core"></a>ASP.NET Core 中的 .NET 泛型主機
 
 ::: moniker range=">= aspnetcore-5.0"
 
-ASP.NET Core 範本會建立 .NET Core 泛型主機 (<xref:Microsoft.Extensions.Hosting.HostBuilder>) 。
+ASP.NET 核心範本會建立 .NET Core 泛型主機 (<xref:Microsoft.Extensions.Hosting.HostBuilder>) 。
 
 本主題提供在 ASP.NET Core 中使用 .NET 泛型主機的相關資訊。 如需在主控台應用程式中使用 .NET 泛型主機的詳細資訊，請參閱 [.Net 泛型主機](/dotnet/core/extensions/generic-host)。
 
@@ -271,7 +271,7 @@ Host.CreateDefaultBuilder(args)
 
 ### <a name="disable-app-configuration-reload-on-change"></a>變更時停用應用程式設定重載
 
-依 [預設](xref:fundamentals/configuration/index#default)， *appsettings.json* 和 *appsettings。環境}。* 當檔案變更時，會重載 json。 若要在 ASP.NET Core 5.0 或更新版本中停用這個重載行為，請將索引 `hostBuilder:reloadConfigOnChange` 鍵設定為 `false` 。
+依 [預設](xref:fundamentals/configuration/index#default)， *appsettings.json* 和 *appsettings。環境}。* 當檔案變更時，會重載 json。 若要停用 ASP.NET Core 5.0 或更新版本中的重載行為，請將機 `hostBuilder:reloadConfigOnChange` 碼設定為 `false` 。
 
 **機碼**：`hostBuilder:reloadConfigOnChange`  
 **類型**： `bool` (`true` 或 `1`)   
@@ -531,7 +531,7 @@ public class Program
 
 ::: moniker range=">= aspnetcore-3.0 < aspnetcore-5.0"
 
-ASP.NET Core 範本會建立 .NET Core 泛型主機 (<xref:Microsoft.Extensions.Hosting.HostBuilder>) 。
+ASP.NET 核心範本會建立 .NET Core 泛型主機 (<xref:Microsoft.Extensions.Hosting.HostBuilder>) 。
 
 本主題提供在 ASP.NET Core 中使用 .NET 泛型主機的相關資訊。 如需在主控台應用程式中使用 .NET 泛型主機的詳細資訊，請參閱 [.Net 泛型主機](/dotnet/core/extensions/generic-host)。
 
@@ -1029,7 +1029,7 @@ ASP.NET Core 應用程式會設定並啟動主機。 主機負責應用程式啟
 
 泛型主機是 ASP.NET Core 2.1 的新功能，不適用於虛擬主機案例。 針對虛擬主機案例，請使用 [Web 主機](xref:fundamentals/host/web-host)。 泛型主機將在未來版本中取代 Web 主機，並成為 HTTP 和非 HTTP 案例中的主要主機 API。
 
-[查看或下載範例程式碼](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/host/generic-host/samples/) ([如何下載](xref:index#how-to-download-a-sample)) 
+[查看或下載範例程式碼](https://github.com/dotnet/AspNetCore.Docs/tree/main/aspnetcore/fundamentals/host/generic-host/samples/) ([如何下載](xref:index#how-to-download-a-sample)) 
 
 在 [Visual Studio Code](https://code.visualstudio.com/) 中執行範例應用程式時，請使用「外部或整合式終端機」。 請勿在 `internalConsole` 中執行範例。
 
@@ -1205,7 +1205,7 @@ var host = new HostBuilder()
 
 託管服務是具有背景工作邏輯的類別，可實作 <xref:Microsoft.Extensions.Hosting.IHostedService> 介面。 如需詳細資訊，請參閱<xref:fundamentals/host/hosted-services>。
 
-[範例應用程式](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/host/generic-host/samples/)使用 `AddHostedService` 擴充方法，將存留期事件 `LifetimeEventsHostedService` 和計時背景工作 `TimedHostedService` 等服務新增至應用程式：
+[範例應用程式](https://github.com/dotnet/AspNetCore.Docs/tree/main/aspnetcore/fundamentals/host/generic-host/samples/)使用 `AddHostedService` 擴充方法，將存留期事件 `LifetimeEventsHostedService` 和計時背景工作 `TimedHostedService` 等服務新增至應用程式：
 
 [!code-csharp[](generic-host/samples-snapshot/2.x/GenericHostSample/Program.cs?name=snippet_ConfigureServices)]
 
@@ -1481,7 +1481,7 @@ public class MyClass
 | <xref:Microsoft.Extensions.Hosting.IApplicationLifetime.ApplicationStopped*> | 主機正在完成正常關機程序。 應該處理所有要求。 關機封鎖，直到完成此事件。 |
 | <xref:Microsoft.Extensions.Hosting.IApplicationLifetime.ApplicationStopping*> | 主機正在執行正常關機程序。 可能仍在處理要求。 關機封鎖，直到完成此事件。 |
 
-建構函式將 <xref:Microsoft.Extensions.Hosting.IApplicationLifetime> 服務插入任何類別。 [範例應用程式](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/host/generic-host/samples/)使用建構函式插入 `LifetimeEventsHostedService` 類別 (<xref:Microsoft.Extensions.Hosting.IHostedService> 實作) 來註冊事件。
+建構函式將 <xref:Microsoft.Extensions.Hosting.IApplicationLifetime> 服務插入任何類別。 [範例應用程式](https://github.com/dotnet/AspNetCore.Docs/tree/main/aspnetcore/fundamentals/host/generic-host/samples/)使用建構函式插入 `LifetimeEventsHostedService` 類別 (<xref:Microsoft.Extensions.Hosting.IHostedService> 實作) 來註冊事件。
 
 *LifetimeEventsHostedService.cs*：
 

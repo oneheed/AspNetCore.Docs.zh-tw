@@ -19,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/call-web-api
-ms.openlocfilehash: b3c783623252512621a0cee7a3607c69cb6d09bb
-ms.sourcegitcommit: 1166b0ff3828418559510c661e8240e5c5717bb7
+ms.openlocfilehash: 9ac17e7c22b23ced7a8f12a6ef0d456f6244318b
+ms.sourcegitcommit: 54fe1ae5e7d068e27376d562183ef9ddc7afc432
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 02/12/2021
-ms.locfileid: "100280275"
+ms.lasthandoff: 03/10/2021
+ms.locfileid: "102586757"
 ---
 # <a name="call-a-web-api-from-aspnet-core-blazor"></a>從 ASP.NET Core 呼叫 web API Blazor
 
@@ -33,7 +33,7 @@ ms.locfileid: "100280275"
 
 [Blazor WebAssembly](xref:blazor/hosting-models#blazor-webassembly) 應用程式會使用預先設定的服務來呼叫 web Api <xref:System.Net.Http.HttpClient> 。 撰寫要求（可包含 JavaScript [提取 API](https://developer.mozilla.org/docs/Web/API/Fetch_API) 選項），使用 Blazor JSON 協助程式或搭配 <xref:System.Net.Http.HttpRequestMessage> 。 <xref:System.Net.Http.HttpClient>應用程式中的服務著重于將 Blazor WebAssembly 要求傳回給來源伺服器。 本主題中的指導方針僅適用于 Blazor WebAssembly 應用程式。
 
-[查看或下載範例程式碼](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/blazor/common/samples/) ([如何下載](xref:index#how-to-download-a-sample)) ：選取 `BlazorWebAssemblySample` 應用程式。
+[查看或下載範例程式碼](https://github.com/dotnet/AspNetCore.Docs/tree/main/aspnetcore/blazor/common/samples/) ([如何下載](xref:index#how-to-download-a-sample)) ：選取 `BlazorWebAssemblySample` 應用程式。
 
 請參閱範例應用程式中的下列元件 `BlazorWebAssemblySample` ：
 
@@ -153,7 +153,7 @@ JSON helper 方法會在下列範例中將要求傳送至 URI (web API) 並處�
       }
 
       private async Task SaveItem() =>
-          await Http.PutAsJsonAsync($"api/TodoItems/{editItem.Id}, editItem);
+          await Http.PutAsJsonAsync($"api/TodoItems/{editItem.Id}", editItem);
   }
   ```
   
@@ -401,11 +401,11 @@ protected override async Task OnInitializedAsync()
 
 瀏覽器安全性可防止網頁向與提供網頁的不同網域提出要求。 這項限制稱為 *相同原始來源原則*。 相同來源原則可防止惡意網站從另一個網站讀取敏感性資料。 若要從瀏覽器向具有不同來源的端點提出要求， *端點* 必須啟用 [跨原始來源資源分享 (CORS)](https://www.w3.org/TR/cors/)。
 
-[ Blazor WebAssembly (Blazor WebAssemblySample) 範例應用程式](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/blazor/common/samples/)會示範如何在呼叫 Web API 元件中使用 CORS (`Pages/CallWebAPI.razor`) 。
+[ Blazor WebAssembly (Blazor WebAssemblySample) 範例應用程式](https://github.com/dotnet/AspNetCore.Docs/tree/main/aspnetcore/blazor/common/samples/)會示範如何在呼叫 Web API 元件中使用 CORS (`Pages/CallWebAPI.razor`) 。
 
 如需在應用程式中使用安全要求進行 CORS 的詳細資訊 Blazor ，請參閱 <xref:blazor/security/webassembly/additional-scenarios#cross-origin-resource-sharing-cors> 。
 
-如需搭配 ASP.NET Core apps 之 CORS 的一般資訊，請參閱 <xref:security/cors> 。
+如需搭配 ASP.NET Core 應用程式之 CORS 的一般資訊，請參閱 <xref:security/cors> 。
 
 ## <a name="additional-resources"></a>其他資源
 

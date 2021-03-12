@@ -19,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: data/ef-mvc/update-related-data
-ms.openlocfilehash: 9ad0de9984b42c2b14dfaf48c74660915de93be1
-ms.sourcegitcommit: 97243663fd46c721660e77ef652fe2190a461f81
+ms.openlocfilehash: dadfceca2431ace558700ae06417f01c99751419
+ms.sourcegitcommit: 54fe1ae5e7d068e27376d562183ef9ddc7afc432
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 01/09/2021
-ms.locfileid: "98058320"
+ms.lasthandoff: 03/10/2021
+ms.locfileid: "102588278"
 ---
 # <a name="tutorial-update-related-data---aspnet-mvc-with-ef-core"></a>教學課程：使用 EF Core 更新相關資料-ASP.NET MVC
 
@@ -45,7 +45,7 @@ ms.locfileid: "98058320"
 > * 更新 [刪除] 頁面
 > * 將辦公室位置和課程新增至 [建立] 頁面
 
-## <a name="prerequisites"></a>先決條件
+## <a name="prerequisites"></a>必要條件
 
 * [讀取相關資料](read-related-data.md)
 
@@ -313,7 +313,7 @@ public ICollection<CourseAssignment> CourseAssignments
 
 ## <a name="get-the-code"></a>取得程式碼
 
-[下載或檢視已完成的應用程式。](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/data/ef-mvc/intro/samples/cu-final)
+[下載或檢視已完成的應用程式。](https://github.com/dotnet/AspNetCore.Docs/tree/main/aspnetcore/data/ef-mvc/intro/samples/cu-final)
 
 ## <a name="next-steps"></a>後續步驟
 

@@ -17,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: mvc/views/dependency-injection
-ms.openlocfilehash: a596d05e3d1d73d4faa2f84d97a40e4a2c1234e4
-ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
+ms.openlocfilehash: 9d4920a7b572163b048bfb06029d913cee3f9e5a
+ms.sourcegitcommit: 54fe1ae5e7d068e27376d562183ef9ddc7afc432
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 10/30/2020
-ms.locfileid: "93059282"
+ms.lasthandoff: 03/10/2021
+ms.locfileid: "102587249"
 ---
 # <a name="dependency-injection-into-views-in-aspnet-core"></a>ASP.NET Core 檢視中的相依性插入
 
@@ -30,7 +30,7 @@ ms.locfileid: "93059282"
 
 ASP.NET Core 支援檢視中的[相依性插入](xref:fundamentals/dependency-injection)。 這可用於檢視特定服務，例如僅適用於填入檢視項目所需的當地語系化或資料。 您應該嘗試維護控制器與檢視之間的 [Separation of Concerns](/dotnet/standard/modern-web-apps-azure-architecture/architectural-principles#separation-of-concerns) (關注點分離)。 您檢視所顯示的大部分資料應該都是從控制器傳入。
 
-[查看或下載範例程式碼](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/mvc/views/dependency-injection/sample) ([如何下載](xref:index#how-to-download-a-sample)) 
+[查看或下載範例程式碼](https://github.com/dotnet/AspNetCore.Docs/tree/main/aspnetcore/mvc/views/dependency-injection/sample) ([如何下載](xref:index#how-to-download-a-sample)) 
 
 ## <a name="configuration-injection"></a>插入組態
 

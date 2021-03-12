@@ -18,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: tutorials/get-started-with-nswag
-ms.openlocfilehash: 78d58d4d544c33862cf502ce63e83560e8009c65
-ms.sourcegitcommit: 3593c4efa707edeaaceffbfa544f99f41fc62535
+ms.openlocfilehash: 882bbe659990cb8ea66110fccb85b8c6197df3f7
+ms.sourcegitcommit: 54fe1ae5e7d068e27376d562183ef9ddc7afc432
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 01/04/2021
-ms.locfileid: "93060569"
+ms.lasthandoff: 03/10/2021
+ms.locfileid: "102588571"
 ---
 # <a name="get-started-with-nswag-and-aspnet-core"></a>NSwag 與 ASP.NET Core 使用者入門
 
@@ -31,13 +31,13 @@ ms.locfileid: "93060569"
 
 ::: moniker range=">= aspnetcore-2.1"
 
-[查看或下載範例程式碼](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/tutorials/web-api-help-pages-using-swagger/samples/2.1/TodoApi.NSwag) ([如何下載](xref:index#how-to-download-a-sample)) 
+[查看或下載範例程式碼](https://github.com/dotnet/AspNetCore.Docs/tree/main/aspnetcore/tutorials/web-api-help-pages-using-swagger/samples/2.1/TodoApi.NSwag) ([如何下載](xref:index#how-to-download-a-sample)) 
 
 ::: moniker-end
 
 ::: moniker range="<= aspnetcore-2.0"
 
-[查看或下載範例程式碼](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/tutorials/web-api-help-pages-using-swagger/samples/2.0/TodoApi.NSwag) ([如何下載](xref:index#how-to-download-a-sample)) 
+[查看或下載範例程式碼](https://github.com/dotnet/AspNetCore.Docs/tree/main/aspnetcore/tutorials/web-api-help-pages-using-swagger/samples/2.0/TodoApi.NSwag) ([如何下載](xref:index#how-to-download-a-sample)) 
 
 ::: moniker-end
 
@@ -62,7 +62,7 @@ NSwag 提供下列功能：
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
 * 從 [套件管理員主控台] 視窗中：
-  * 移至 [**查看**  >  **其他 Windows**  >  **封裝管理員主控台**]
+  * 移至 [**查看**  >  **其他 Windows**  >  **套件管理員主控台**]
   * 巡覽至 *TodoApi.csproj* 檔案所在目錄
   * 執行以下命令：
 
@@ -71,7 +71,7 @@ NSwag 提供下列功能：
     ```
 
 * 從 [管理 NuGet 套件] 對話方塊中：
-  * 在 **方案總管**  >  **管理 NuGet 套件**] 中的專案上按一下滑鼠右鍵
+  * 以滑鼠右鍵按一下 **方案 Explorer** 中的專案 [  >  **管理 NuGet 封裝**]
   * 將 [套件來源] 設定為 "nuget.org"
   * 在搜尋方塊中輸入 "NSwag.AspNetCore"
   * 從 [瀏覽] 索引標籤中選取 "NSwag.AspNetCore" 套件，並按一下 [安裝]
@@ -117,7 +117,7 @@ dotnet add TodoApi.csproj package NSwag.AspNetCore
 * 可在您專案內產生程式碼的 [NSwag.CodeGeneration.CSharp](https://www.nuget.org/packages/NSwag.CodeGeneration.CSharp/) 或 [NSwag.CodeGeneration.TypeScript](https://www.nuget.org/packages/NSwag.CodeGeneration.TypeScript/) NuGet 套件。
 * 從[命令列](https://github.com/RicoSuter/NSwag/wiki/CommandLine)使用 NSwag。
 * [NSwag.MSBuild](https://github.com/RicoSuter/NSwag/wiki/NSwag.MSBuild) NuGet 套件。
-* [Unchase OpenAPI (Swagger) 聯機服務](https://marketplace.visualstudio.com/items?itemName=Unchase.unchaseopenapiconnectedservice)： Visual Studio 連線的服務，以 c # 或 TYPESCRIPT 產生 API 用戶端程式代碼。 也會使用 NSwag 產生用於 OpenAPI 服務的 C# 控制器。
+* [Unchase OpenAPI (Swagger) 聯機服務](https://marketplace.visualstudio.com/items?itemName=Unchase.unchaseopenapiconnectedservice)：使用 Visual Studio 連線的服務，以 c # 或 TYPESCRIPT 產生 API 用戶端程式代碼。 也會使用 NSwag 產生用於 OpenAPI 服務的 C# 控制器。
 
 ### <a name="generate-code-with-nswagstudio"></a>使用 NSwagStudio 來產生程式碼
 
@@ -287,7 +287,7 @@ Swagger UI 會顯示版本資訊：
 
 [!code-csharp[](../tutorials/web-api-help-pages-using-swagger/samples/2.1/TodoApi.NSwag/Controllers/TodoController.cs?name=snippet_CreateActionAttributes)]
 
-在 ASP.NET Core 2.2 或更新版本中，您可以使用慣例，而不使用 `[ProducesResponseType]` 來明確地裝飾個別動作。 如需詳細資訊，請參閱 <xref:web-api/advanced/conventions> 。
+在 ASP.NET Core 2.2 或更新版本中，您可以使用慣例，而不使用 `[ProducesResponseType]` 來明確地裝飾個別動作。 如需詳細資訊，請參閱<xref:web-api/advanced/conventions>。
 
 ::: moniker-end
 

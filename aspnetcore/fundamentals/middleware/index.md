@@ -19,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: fundamentals/middleware/index
-ms.openlocfilehash: bdeccf81a3bb620c2e1fe15a798d5a83375842c8
-ms.sourcegitcommit: 92439194682dc788b8b5b3a08bd2184dc00e200b
+ms.openlocfilehash: 15d011e88ab291173668a0b6dc5f46e97fdfeff0
+ms.sourcegitcommit: acfe51c35497a204f75c2a61125c9408c04493e6
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 12/03/2020
-ms.locfileid: "96556537"
+ms.lasthandoff: 03/10/2021
+ms.locfileid: "102605707"
 ---
 # <a name="aspnet-core-middleware"></a>ASP.NET Core 中介軟體
 
@@ -82,11 +82,11 @@ ASP.NET Core 要求管線由要求委派序列組成，並會一個接著一個�
 
 下圖顯示 ASP.NET Core MVC 和 Pages 應用程式的完整要求處理管線 Razor 。 您可以在一般的應用程式中查看如何排序現有的中介軟體，以及新增自訂中介軟體的位置。 您可以完整控制如何重新排列現有的中介軟體，或在您的案例中插入新的自訂中介軟體。
 
-![ASP.NET Core 中介軟體管線](index/_static/middleware-pipeline.svg)
+![ASP.NET 核心中介軟體管線](index/_static/middleware-pipeline.svg)
 
 上圖中的 **端點** 中介軟體會針對對應的應用程式類型 &mdash; MVC 或頁面執行篩選準則管線 Razor 。
 
-![ASP.NET Core 篩選準則管線](index/_static/mvc-endpoint.svg)
+![ASP.NET Core 篩選管線](index/_static/mvc-endpoint.svg)
 
 `Startup.Configure` 方法內中介軟體元件的新增順序可定義在要求時叫用中介軟體元件的順序及回應的反向順序。 對安全性、效能和功能而言，順序是非常 **重要** 的。
 
@@ -129,7 +129,7 @@ app.UseStaticFiles();
      * HTTP 靜態傳輸安全性通訊協定 (HSTS) 中介軟體 (<xref:Microsoft.AspNetCore.Builder.HstsBuilderExtensions.UseHsts%2A>) 會新增 `Strict-Transport-Security` 標頭。
 1. HTTPS 重新導向中介軟體 (<xref:Microsoft.AspNetCore.Builder.HttpsPolicyBuilderExtensions.UseHttpsRedirection%2A>) 會將 HTTP 要求重新導向到 HTTPS。
 1. 靜態檔案中介軟體 (<xref:Microsoft.AspNetCore.Builder.StaticFileExtensions.UseStaticFiles%2A>) 會傳回靜態檔案並縮短進一步的要求處理時間。
-1. Cookie 原則中介軟體 (<xref:Microsoft.AspNetCore.Builder.CookiePolicyAppBuilderExtensions.UseCookiePolicy%2A>) 符合歐盟一般資料保護規定 (GDPR) 規定的應用程式。
+1. Cookie 原則中介軟體 (<xref:Microsoft.AspNetCore.Builder.CookiePolicyAppBuilderExtensions.UseCookiePolicy%2A>) 符合歐盟一般資料保護規定的應用程式 (GDPR) 規定。
 1. 路由中介軟體 (<xref:Microsoft.AspNetCore.Builder.EndpointRoutingApplicationBuilderExtensions.UseRouting%2A>) 來路由傳送要求。
 1. 驗證中介軟體 (<xref:Microsoft.AspNetCore.Builder.AuthAppBuilderExtensions.UseAuthentication%2A>) 會嘗試在允許使用者存取安全資源之前先驗證使用者。
 1. 授權中介軟體 (<xref:Microsoft.AspNetCore.Builder.AuthorizationAppBuilderExtensions.UseAuthorization%2A>) 會授權使用者存取安全資源。
@@ -258,7 +258,7 @@ app.Map("/level1", level1App => {
 | 要求                       | 回應                     |
 | ----------------------------- | ---------------------------- |
 | localhost:1234                | Hello from non-Map delegate. |
-| localhost:1234/?branch=master | Branch used = master         |
+| localhost： 1234/？分支 = main | 使用的分支 = main         |
 
 <xref:Microsoft.AspNetCore.Builder.UseWhenExtensions.UseWhen%2A> 也會根據指定述詞的結果來分支要求管線。 與不同的 `MapWhen` 是，此分支會重新加入至主要管線（如果它不是短路或包含終端中介軟體）：
 
@@ -270,7 +270,7 @@ app.Map("/level1", level1App => {
 
 ASP.NET Core 隨附下列中介軟體元件。 「順序」欄說明 中介軟體在要求處理管線中的位置，以及中介軟體可終止要求處理的情況。 當中介軟體將要求處理管線短路並防止接下來的下游中介軟體處理要求時，這就是所謂的「終端中介軟體」。 如需詳細資訊，請參閱[使用 IApplicationBuilder 建立中介軟體管線](#create-a-middleware-pipeline-with-iapplicationbuilder)。
 
-| 中介軟體 | 描述 | 順序 |
+| 中介軟體 | Description | 單 |
 | ---------- | ----------- | ----- |
 | [驗證](xref:security/authentication/identity) | 提供驗證支援。 | 在需要 `HttpContext.User` 之前。 OAuth 回呼的終端機。 |
 | [授權](xref:Microsoft.AspNetCore.Builder.AuthorizationAppBuilderExtensions.UseAuthorization%2A) | 提供授權支援。 | 緊接在驗證中介軟體之後。 |
@@ -377,7 +377,7 @@ ASP.NET Core 要求管線由要求委派序列組成，並會一個接著一個�
      * HTTP 靜態傳輸安全性通訊協定 (HSTS) 中介軟體 (<xref:Microsoft.AspNetCore.Builder.HstsBuilderExtensions.UseHsts%2A>) 會新增 `Strict-Transport-Security` 標頭。
 1. HTTPS 重新導向中介軟體 (<xref:Microsoft.AspNetCore.Builder.HttpsPolicyBuilderExtensions.UseHttpsRedirection%2A>) 會將 HTTP 要求重新導向到 HTTPS。
 1. 靜態檔案中介軟體 (<xref:Microsoft.AspNetCore.Builder.StaticFileExtensions.UseStaticFiles%2A>) 會傳回靜態檔案並縮短進一步的要求處理時間。
-1. Cookie 原則中介軟體 (<xref:Microsoft.AspNetCore.Builder.CookiePolicyAppBuilderExtensions.UseCookiePolicy%2A>) 符合歐盟一般資料保護規定 (GDPR) 規定的應用程式。
+1. Cookie 原則中介軟體 (<xref:Microsoft.AspNetCore.Builder.CookiePolicyAppBuilderExtensions.UseCookiePolicy%2A>) 符合歐盟一般資料保護規定的應用程式 (GDPR) 規定。
 1. 驗證中介軟體 (<xref:Microsoft.AspNetCore.Builder.AuthAppBuilderExtensions.UseAuthentication%2A>) 會嘗試在允許使用者存取安全資源之前先驗證使用者。
 1. 工作階段中介軟體 (<xref:Microsoft.AspNetCore.Builder.SessionMiddlewareExtensions.UseSession%2A>) 會建立並維護工作階段狀態。 如果應用程式使用會話狀態，請在 Cookie 原則中介軟體和 MVC 中介軟體之前呼叫會話中介軟體。
 1. MVC (<xref:Microsoft.AspNetCore.Builder.MvcApplicationBuilderExtensions.UseMvc%2A>) 以將 MVC 新增到要求管線。
@@ -455,7 +455,7 @@ public void Configure(IApplicationBuilder app)
 | 要求                       | 回應                     |
 | ----------------------------- | ---------------------------- |
 | localhost:1234                | Hello from non-Map delegate. |
-| localhost:1234/?branch=master | Branch used = master         |
+| localhost： 1234/？分支 = main | 使用的分支 = main         |
 
 `Map` 支援巢狀項目，例如：
 
@@ -478,7 +478,7 @@ app.Map("/level1", level1App => {
 
 ASP.NET Core 隨附下列中介軟體元件。 「順序」欄說明 中介軟體在要求處理管線中的位置，以及中介軟體可終止要求處理的情況。 當中介軟體將要求處理管線短路並防止接下來的下游中介軟體處理要求時，這就是所謂的「終端中介軟體」。 如需詳細資訊，請參閱[使用 IApplicationBuilder 建立中介軟體管線](#create-a-middleware-pipeline-with-iapplicationbuilder)。
 
-| 中介軟體 | 描述 | 順序 |
+| 中介軟體 | Description | 單 |
 | ---------- | ----------- | ----- |
 | [驗證](xref:security/authentication/identity) | 提供驗證支援。 | 在需要 `HttpContext.User` 之前。 OAuth 回呼的終端機。 |
 | [Cookie 政策](xref:security/gdpr) | 追蹤使用者同意以儲存個人資訊，並強制執列欄位的最小標準 cookie ，例如 `secure` 和 `SameSite` 。 | 在發出的中介軟體之前 cookie 。 範例：驗證、工作階段、MVC (TempData)。 |

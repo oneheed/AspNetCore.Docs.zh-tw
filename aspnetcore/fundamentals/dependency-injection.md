@@ -17,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: fundamentals/dependency-injection
-ms.openlocfilehash: 3f7cce475b5c7b0fcbb93644b2c39acd637a6f9d
-ms.sourcegitcommit: 3593c4efa707edeaaceffbfa544f99f41fc62535
+ms.openlocfilehash: ce6804a58c5b17b57732713acc3aeca15042da0a
+ms.sourcegitcommit: 54fe1ae5e7d068e27376d562183ef9ddc7afc432
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 01/04/2021
-ms.locfileid: "94595476"
+ms.lasthandoff: 03/10/2021
+ms.locfileid: "102589708"
 ---
 # <a name="dependency-injection-in-aspnet-core"></a>.NET Core 中的相依性插入
 
@@ -40,7 +40,7 @@ ASP.NET Core 支援相依性插入 (DI) 軟體設計模式，這是在類別及�
 
 本主題提供 ASP.NET Core 中的相依性插入的相關資訊。 使用相依性插入的主要檔包含在 .NET 的相依性 [插入](/dotnet/core/extensions/dependency-injection)中。
 
-[查看或下載範例程式碼](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/dependency-injection/samples) ([如何下載](xref:index#how-to-download-a-sample)) 
+[查看或下載範例程式碼](https://github.com/dotnet/AspNetCore.Docs/tree/main/aspnetcore/fundamentals/dependency-injection/samples) ([如何下載](xref:index#how-to-download-a-sample)) 
 
 ## <a name="overview-of-dependency-injection"></a>相依性插入概觀
 
@@ -82,7 +82,7 @@ public class IndexModel : PageModel
 * 在服務容器中註冊相依性。 ASP.NET Core 提供內建服務容器 <xref:System.IServiceProvider>。 服務通常會在應用程式的方法中註冊 `Startup.ConfigureServices` 。
 * 將服務「插入」到服務使用位置之類別的建構函式。 架構會負責建立相依性的執行個體，並在不再需要時將它捨棄。
 
-在 [範例應用程式](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/dependency-injection/samples)中， `IMyDependency` 介面會定義 `WriteMessage` 方法：
+在 [範例應用程式](https://github.com/dotnet/AspNetCore.Docs/tree/main/aspnetcore/fundamentals/dependency-injection/samples)中， `IMyDependency` 介面會定義 `WriteMessage` 方法：
 
 [!code-csharp[](dependency-injection/samples/3.x/DependencyInjectionSample/Interfaces/IMyDependency.cs?name=snippet1)]
 
@@ -151,7 +151,7 @@ public void Configure(IApplicationBuilder app, ILogger<Startup> logger)
 
 ## <a name="register-groups-of-services-with-extension-methods"></a>使用擴充方法來註冊服務群組
 
-ASP.NET Core 架構使用註冊一組相關服務的慣例。 慣例是使用單一 `Add{GROUP_NAME}` 擴充方法來註冊架構功能所需的所有服務。 例如， <xref:Microsoft.Extensions.DependencyInjection.MvcServiceCollectionExtensions.AddControllers%2A> 擴充方法會註冊 MVC 控制器所需的服務。
+ASP.NET Core framework 會使用註冊一組相關服務的慣例。 慣例是使用單一 `Add{GROUP_NAME}` 擴充方法來註冊架構功能所需的所有服務。 例如， <xref:Microsoft.Extensions.DependencyInjection.MvcServiceCollectionExtensions.AddControllers%2A> 擴充方法會註冊 MVC 控制器所需的服務。
 
 下列程式碼是由 Razor 使用個別使用者帳戶的 Pages 範本所產生，並示範如何使用擴充方法和來將其他服務新增至容器 <xref:Microsoft.Extensions.DependencyInjection.EntityFrameworkServiceCollectionExtensions.AddDbContext%2A> <xref:Microsoft.Extensions.DependencyInjection.IdentityServiceCollectionUIExtensions.AddDefaultIdentity%2A> ：
 
@@ -168,7 +168,7 @@ ASP.NET Core 架構使用註冊一組相關服務的慣例。 慣例是使用單
 * 將服務插入中介軟體的 `Invoke` 或 `InvokeAsync` 方法。 使用函式 [插入](xref:mvc/controllers/dependency-injection#constructor-injection) 會擲回執行時間例外狀況，因為它會強制範圍服務的行為就像 singleton 一樣。 [ [存留期和註冊選項](#lifetime-and-registration-options) ] 區段中的範例會示範 `InvokeAsync` 方法。
 * 使用以 [Factory 為基礎的中介軟體](xref:fundamentals/middleware/extensibility)。 使用此方法註冊的中介軟體會根據用戶端要求啟動 (連接) ，可讓範圍服務插入中介軟體的 `InvokeAsync` 方法。
 
-如需詳細資訊，請參閱 <xref:fundamentals/middleware/write#per-request-middleware-dependencies> 。
+如需詳細資訊，請參閱<xref:fundamentals/middleware/write#per-request-middleware-dependencies>。
 
 ## <a name="service-registration-methods"></a>服務註冊方法
 
@@ -204,7 +204,7 @@ public class MyService
 
 ## <a name="entity-framework-contexts"></a>Entity Framework 內容
 
-根據預設，Entity Framework 內容會使用限 [域存留期](#service-lifetimes) 新增至服務容器，因為 web 應用程式資料庫作業的範圍通常是用戶端要求。 若要使用不同的存留期，請使用多載來指定存留期 <xref:Microsoft.Extensions.DependencyInjection.EntityFrameworkServiceCollectionExtensions.AddDbContext%2A> 。 給定存留期的服務不應使用存留期短于服務存留期的資料庫內容。
+根據預設，會使用限 [域存留期](#service-lifetimes) 將 Entity Framework 內容新增至服務容器，因為 web 應用程式資料庫作業的範圍通常是用戶端要求。 若要使用不同的存留期，請使用多載來指定存留期 <xref:Microsoft.Extensions.DependencyInjection.EntityFrameworkServiceCollectionExtensions.AddDbContext%2A> 。 給定存留期的服務不應使用存留期短于服務存留期的資料庫內容。
 
 ## <a name="lifetime-and-registration-options"></a>留期和註冊選項
 
@@ -260,7 +260,7 @@ public class MyService
 
 ## <a name="request-services"></a>要求服務
 
-ASP.NET Core 要求內可用的服務會透過 [RequestServices](xref:Microsoft.AspNetCore.Http.HttpContext.RequestServices) 集合公開。 從要求內要求服務時，會從集合解析服務及其相依性 `RequestServices` 。
+ASP.NET 核心要求內可用的服務會透過 [RequestServices](xref:Microsoft.AspNetCore.Http.HttpContext.RequestServices) 集合公開。 從要求內要求服務時，會從集合解析服務及其相依性 `RequestServices` 。
 
 架構會為每個要求建立一個範圍，並 `RequestServices` 公開範圍服務提供者。 只要要求為作用中狀態，所有範圍的服務都有效。
 
@@ -375,7 +375,7 @@ DI 是靜態/全域物件存取模式的「替代」選項。 如果您將 DI �
 
 ## <a name="recommended-patterns-for-multi-tenancy-in-di"></a>DI 中多租使用者的建議模式
 
-[Orchard Core](https://github.com/OrchardCMS/OrchardCore) 是一種應用程式架構，可在 ASP.NET Core 上建立模組化、多租使用者應用程式。 如需詳細資訊，請參閱 [Orchard Core 檔](https://docs.orchardcore.net/en/dev/)。
+[Orchard core](https://github.com/OrchardCMS/OrchardCore) 是一種應用程式架構，可在 ASP.NET Core 上建立模組化、多租使用者應用程式。 如需詳細資訊，請參閱 [Orchard Core 檔](https://docs.orchardcore.net/en/dev/)。
 
 如需如何使用 Orchard Core Framework 來建立模組化和多租使用者應用程式的範例，請參閱 [Orchard core 範例](https://github.com/OrchardCMS/OrchardCore.Samples) ，而不需要任何 CMS 專屬的功能。
 
@@ -427,7 +427,7 @@ ASP.NET Core 支援相依性插入 (DI) 軟體設計模式，這是在類別及�
 
 如需有關 MVC 控制器內相依性插入的特定詳細資訊，請參閱 <xref:mvc/controllers/dependency-injection>。
 
-[查看或下載範例程式碼](https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/dependency-injection/samples) ([如何下載](xref:index#how-to-download-a-sample)) 
+[查看或下載範例程式碼](https://github.com/dotnet/AspNetCore.Docs/tree/main/aspnetcore/fundamentals/dependency-injection/samples) ([如何下載](xref:index#how-to-download-a-sample)) 
 
 ## <a name="overview-of-dependency-injection"></a>相依性插入概觀
 
@@ -477,7 +477,7 @@ public class IndexModel : PageModel
 * 在服務容器中註冊相依性。 ASP.NET Core 提供內建服務容器 <xref:System.IServiceProvider>。 服務會在應用程式的 `Startup.ConfigureServices` 方法中註冊。
 * 將服務「插入」到服務使用位置之類別的建構函式。 架構會負責建立相依性的執行個體，並在不再需要時將它捨棄。
 
-在[範例應用程式](https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/dependency-injection/samples)中，`IMyDependency` 介面定義了服務提供給應用程式的方法：
+在[範例應用程式](https://github.com/dotnet/AspNetCore.Docs/tree/main/aspnetcore/fundamentals/dependency-injection/samples)中，`IMyDependency` 介面定義了服務提供給應用程式的方法：
 
 [!code-csharp[](dependency-injection/samples/2.x/DependencyInjectionSample/Interfaces/IMyDependency.cs?name=snippet1)]
 
@@ -544,11 +544,11 @@ public void Configure(IApplicationBuilder app, IOptions<MyOptions> options)
 }
 ```
 
-如需詳細資訊，請參閱 <xref:fundamentals/startup> 。
+如需詳細資訊，請參閱<xref:fundamentals/startup>。
 
 ## <a name="framework-provided-services"></a>架構提供的服務
 
-`Startup.ConfigureServices`方法負責定義應用程式所使用的服務，包括平臺功能，例如 Entity Framework Core 和 ASP.NET CORE MVC。 一開始， `IServiceCollection` 提供給的是 `ConfigureServices` 由架構定義的服務，視 [主機的設定方式](xref:fundamentals/index#host)而定。 以 ASP.NET Core 範本為基礎的應用程式並不罕見，因為這是由架構所註冊的數百項服務。 下表列出架構註冊服務的小型範例。
+`Startup.ConfigureServices`方法負責定義應用程式所使用的服務，包括平臺功能，例如 Entity Framework Core 和 ASP.NET CORE MVC。 一開始， `IServiceCollection` 提供給的是 `ConfigureServices` 由架構定義的服務，視 [主機的設定方式](xref:fundamentals/index#host)而定。 以 ASP.NET Core 範本為基礎的應用程式在架構中註冊了數百項服務並不罕見。 下表列出架構註冊服務的小型範例。
 
 | 服務類型 | 存留期 |
 | ------------ | -------- |
@@ -606,7 +606,7 @@ public void ConfigureServices(IServiceCollection services)
 在處理要求的應用程式中，會在要求結束時處置範圍服務。
 
 > [!WARNING]
-> 在中介軟體中使用具範圍服務時，請將該服務插入 `Invoke` 或 `InvokeAsync` 方法中。 不要插入 via 函式 [插入](xref:mvc/controllers/dependency-injection#constructor-injection) ，因為它會強制服務的行為就像 singleton 一樣。 如需詳細資訊，請參閱 <xref:fundamentals/middleware/write#per-request-middleware-dependencies> 。
+> 在中介軟體中使用具範圍服務時，請將該服務插入 `Invoke` 或 `InvokeAsync` 方法中。 不要插入 via 函式 [插入](xref:mvc/controllers/dependency-injection#constructor-injection) ，因為它會強制服務的行為就像 singleton 一樣。 如需詳細資訊，請參閱<xref:fundamentals/middleware/write#per-request-middleware-dependencies>。
 
 ### <a name="singleton"></a>單一
 
@@ -835,7 +835,7 @@ public class Program
 
 範圍服務會由建立這些服務的容器處置。 若是在根容器中建立範圍服務，因為當應用程式/伺服器關機時，服務只會由根容器處理，所以服務的存留期會提升為單一服務等級。 當呼叫 `BuildServiceProvider` 時，驗證服務範圍會攔截到這些情況。
 
-如需詳細資訊，請參閱 <xref:fundamentals/host/web-host#scope-validation> 。   
+如需詳細資訊，請參閱<xref:fundamentals/host/web-host#scope-validation>。   
 
 ## <a name="request-services"></a>要求服務
 
@@ -909,7 +909,7 @@ public void ConfigureServices(IServiceCollection services)
 * 此實例會在根範圍中解析。
 * 實例應該在範圍結束之前處置。
 
-**解決方案**
+**方案**
 
 使用 factory 模式，在父範圍之外建立實例。 在這種情況下，應用程式通常會有 `Create` 方法可直接呼叫最終型別的函式。 如果最終類型有其他相依性，factory 可以：
 
@@ -922,7 +922,7 @@ public void ConfigureServices(IServiceCollection services)
 
 應用程式需要 <xref:System.IDisposable> 跨多個服務的共用實例，但是 <xref:System.IDisposable> 存留期應受限。
 
-**解決方案**
+**方案**
 
 註冊具有範圍存留期的實例。 使用 <xref:Microsoft.Extensions.DependencyInjection.IServiceScopeFactory.CreateScope%2A?displayProperty=nameWithType> 啟動並建立新的 <xref:Microsoft.Extensions.DependencyInjection.IServiceScope> 。 使用範圍 <xref:System.IServiceProvider> 來取得所需的服務。 在存留期結束時處置範圍。
 
@@ -944,7 +944,7 @@ public void ConfigureServices(IServiceCollection services)
 * `Func<T>` 支援延遲初始設定
 * 以慣例為基礎的註冊
 
-下列協力廠商容器可搭配 ASP.NET Core apps 使用：
+下列協力廠商容器可與 ASP.NET Core 應用程式搭配使用：
 
 * [Autofac](https://autofac.readthedocs.io/en/latest/integration/aspnetcore.html)
 * [DryIoc](https://www.nuget.org/packages/DryIoc.Microsoft.DependencyInjection)

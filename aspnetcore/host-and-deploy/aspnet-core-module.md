@@ -19,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: host-and-deploy/aspnet-core-module
-ms.openlocfilehash: ffa2a7c73e00ccfb5dd726a084352c0b80cc41b0
-ms.sourcegitcommit: 54fe1ae5e7d068e27376d562183ef9ddc7afc432
+ms.openlocfilehash: 8574bc06b7c27fbb8caf834754188dba67bcb4e3
+ms.sourcegitcommit: acfe51c35497a204f75c2a61125c9408c04493e6
 ms.translationtype: MT
 ms.contentlocale: zh-TW
 ms.lasthandoff: 03/10/2021
-ms.locfileid: "102586965"
+ms.locfileid: "102605691"
 ---
 # <a name="aspnet-core-module"></a>ASP.NET Core 模組
 
@@ -1078,5 +1078,5 @@ ASP.NET Core 模組安裝程式會以 **TrustedInstaller** 帳戶的權限執行
 
 * <xref:host-and-deploy/iis/index>
 * <xref:host-and-deploy/azure-apps/index>
-* [ASP.NET 核心模組參考來源 [預設分支 (主) ]](https://github.com/dotnet/aspnetcore/tree/main/src/Servers/IIS/AspNetCoreModuleV2)：使用 [ **分支** ] 下拉式清單來選取特定版本 (例如 `release/3.1`) 。
+* [ASP.NET 核心模組參考來源 [預設分支 (主要) ]](https://github.com/dotnet/aspnetcore/tree/main/src/Servers/IIS/AspNetCoreModuleV2)：使用 [ **分支** ] 下拉式清單來選取特定版本 (例如 `release/3.1`) 。
 * <xref:host-and-deploy/iis/modules>

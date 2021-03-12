@@ -1,7 +1,7 @@
 ---
 title: ASP.NET Core 中的分散式快取
 author: rick-anderson
-description: 瞭解如何使用 ASP.NET Core 分散式快取來改善應用程式效能和擴充性，尤其是在雲端或伺服器陣列環境中。
+description: 瞭解如何使用 ASP.NET 核心分散式快取來改善應用程式效能和擴充性，尤其是在雲端或伺服器陣列環境中。
 monikerRange: '>= aspnetcore-2.1'
 ms.author: riande
 ms.custom: mvc
@@ -19,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: performance/caching/distributed
-ms.openlocfilehash: 6f89046f2e1805111dd81b3282253a72a7c6ea09
-ms.sourcegitcommit: 1166b0ff3828418559510c661e8240e5c5717bb7
+ms.openlocfilehash: a4fd179772a26ffd20fa79cef4720cd5a4746ab3
+ms.sourcegitcommit: 54fe1ae5e7d068e27376d562183ef9ddc7afc432
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 02/12/2021
-ms.locfileid: "100281023"
+ms.lasthandoff: 03/10/2021
+ms.locfileid: "102588610"
 ---
 # <a name="distributed-caching-in-aspnet-core"></a>ASP.NET Core 中的分散式快取
 
@@ -44,11 +44,11 @@ ms.locfileid: "100281023"
 
 分散式快取設定是特定的執行。 本文說明如何設定 SQL Server 和 Redis 分散式快取。 此外也提供協力廠商的執行，例如[GitHub) 上](https://github.com/Alachisoft/NCache)的[NCache](http://www.alachisoft.com/ncache/aspnet-core-idistributedcache-ncache.html) (NCache。 無論選取哪一個執行，應用程式都會使用介面與快取互動 <xref:Microsoft.Extensions.Caching.Distributed.IDistributedCache> 。
 
-[查看或下載範例程式碼](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/performance/caching/distributed/samples/) ([如何下載](xref:index#how-to-download-a-sample)) 
+[查看或下載範例程式碼](https://github.com/dotnet/AspNetCore.Docs/tree/main/aspnetcore/performance/caching/distributed/samples/) ([如何下載](xref:index#how-to-download-a-sample)) 
 
 ## <a name="prerequisites"></a>必要條件
 
-若要使用 SQL Server 的分散式快取，請將封裝參考新增至[node.js 套件。](https://www.nuget.org/packages/Microsoft.Extensions.Caching.SqlServer)
+若要使用 SQL Server 分散式快取，請將封裝參考加入至[node.js 套件。](https://www.nuget.org/packages/Microsoft.Extensions.Caching.SqlServer)
 
 若要使用 Redis 分散式快取，請將套件參考新增至 [StackExchangeRedis](https://www.nuget.org/packages/Microsoft.Extensions.Caching.StackExchangeRedis) 套件。
 
@@ -87,7 +87,7 @@ ms.locfileid: "100281023"
 
 ### <a name="distributed-sql-server-cache"></a>分散式 SQL Server 快取
 
-分散式 SQL Server 快取的 (<xref:Microsoft.Extensions.DependencyInjection.SqlServerCachingServicesExtensions.AddDistributedSqlServerCache*>) 可讓分散式快取使用 SQL Server 資料庫做為其備份存放區。 若要在 SQL Server 實例中建立 SQL Server 快取的專案資料表，您可以使用此 `sql-cache` 工具。 此工具會使用您指定的名稱和架構來建立資料表。
+分散式 SQL Server 快取執行 (<xref:Microsoft.Extensions.DependencyInjection.SqlServerCachingServicesExtensions.AddDistributedSqlServerCache*>) 可讓分散式快取使用 SQL Server 資料庫做為其備份存放區。 若要在 SQL Server 實例中建立 SQL Server 快取專案資料表，您可以使用此 `sql-cache` 工具。 此工具會使用您指定的名稱和架構來建立資料表。
 
 藉由執行命令，在 SQL Server 中建立資料表 `sql-cache create` 。 提供 SQL Server 實例 (`Data Source`) 、資料庫 (`Initial Catalog`) 、架構 (例如) `dbo` 和資料表名稱 (例如， `TestCache`) ：
 
@@ -127,9 +127,9 @@ Table and index were created successfully.
 
 ### <a name="distributed-ncache-cache"></a>分散式 NCache 快取
 
-[NCache](https://github.com/Alachisoft/NCache) 是一種開放原始碼的記憶體內部分散式快取，以原生方式在 .NET 和 .net Core 中開發。 NCache 可在本機運作，並設定為分散式快取叢集，適用于在 Azure 或其他裝載平臺上執行的 ASP.NET Core 應用程式。
+[NCache](https://github.com/Alachisoft/NCache) 是一種開放原始碼的記憶體內部分散式快取，以原生方式在 .NET 和 .net Core 中開發。 NCache 可在本機運作，並設定為在 Azure 或其他裝載平臺上執行的 ASP.NET Core 應用程式的分散式快取叢集。
 
-若要在本機電腦上安裝和設定 NCache，請參閱 [Windows ( .net 和 .Net Core) 的開始使用指南 ](https://www.alachisoft.com/resources/docs/ncache/getting-started-guide-windows/)。
+若要在本機電腦上安裝和設定 NCache，請參閱 [Windows ( .net 和 .Net Core) 的 ](https://www.alachisoft.com/resources/docs/ncache/getting-started-guide-windows/)使用者入門指南。
 
 若要設定 NCache：
 
@@ -180,13 +180,13 @@ Table and index were created successfully.
 
 一般而言，Redis 快取提供比 SQL Server 快取更高的輸送量和較低的延遲。 不過，通常需要進行基準測試，以判斷快取策略的效能特性。
 
-當 SQL Server 當做分散式快取備份存放區使用時，使用相同的資料庫進行快取，而應用程式的一般資料儲存和抓取可能會對這兩者的效能產生負面影響。 我們建議針對分散式快取備份存放區使用專用的 SQL Server 實例。
+當 SQL Server 做為分散式快取備份存放區時，使用相同的資料庫進行快取，而應用程式的一般資料儲存和抓取可能會對這兩者的效能產生負面影響。 建議您針對分散式快取備份存放區使用專用的 SQL Server 實例。
 
 ## <a name="additional-resources"></a>其他資源
 
 * [Azure 上的 Redis 快取](/azure/azure-cache-for-redis/)
 * [Azure 上的 SQL Database](/azure/sql-database/)
-* 在[GitHub 上](https://github.com/Alachisoft/NCache)[的 Web 伺服陣列中的 NCache ASP.NET Core >idistributedcache 提供者](http://www.alachisoft.com/ncache/aspnet-core-idistributedcache-ncache.html) (NCache) 
+* [ASP.NET Core >idistributedcache Provider For NCache In Web](http://www.alachisoft.com/ncache/aspnet-core-idistributedcache-ncache.html) Farm ([NCache on GitHub](https://github.com/Alachisoft/NCache)) 
 * <xref:performance/caching/memory>
 * <xref:fundamentals/change-tokens>
 * <xref:performance/caching/response>
@@ -211,7 +211,7 @@ Table and index were created successfully.
 
 分散式快取設定是特定的執行。 本文說明如何設定 SQL Server 和 Redis 分散式快取。 此外也提供協力廠商的執行，例如[GitHub) 上](https://github.com/Alachisoft/NCache)的[NCache](http://www.alachisoft.com/ncache/aspnet-core-idistributedcache-ncache.html) (NCache。 無論選取哪一個執行，應用程式都會使用介面與快取互動 <xref:Microsoft.Extensions.Caching.Distributed.IDistributedCache> 。
 
-[查看或下載範例程式碼](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/performance/caching/distributed/samples/) ([如何下載](xref:index#how-to-download-a-sample)) 
+[查看或下載範例程式碼](https://github.com/dotnet/AspNetCore.Docs/tree/main/aspnetcore/performance/caching/distributed/samples/) ([如何下載](xref:index#how-to-download-a-sample)) 
 
 ## <a name="prerequisites"></a>必要條件
 
@@ -254,7 +254,7 @@ Table and index were created successfully.
 
 ### <a name="distributed-sql-server-cache"></a>分散式 SQL Server 快取
 
-分散式 SQL Server 快取的 (<xref:Microsoft.Extensions.DependencyInjection.SqlServerCachingServicesExtensions.AddDistributedSqlServerCache*>) 可讓分散式快取使用 SQL Server 資料庫做為其備份存放區。 若要在 SQL Server 實例中建立 SQL Server 快取的專案資料表，您可以使用此 `sql-cache` 工具。 此工具會使用您指定的名稱和架構來建立資料表。
+分散式 SQL Server 快取執行 (<xref:Microsoft.Extensions.DependencyInjection.SqlServerCachingServicesExtensions.AddDistributedSqlServerCache*>) 可讓分散式快取使用 SQL Server 資料庫做為其備份存放區。 若要在 SQL Server 實例中建立 SQL Server 快取專案資料表，您可以使用此 `sql-cache` 工具。 此工具會使用您指定的名稱和架構來建立資料表。
 
 藉由執行命令，在 SQL Server 中建立資料表 `sql-cache create` 。 提供 SQL Server 實例 (`Data Source`) 、資料庫 (`Initial Catalog`) 、架構 (例如) `dbo` 和資料表名稱 (例如， `TestCache`) ：
 
@@ -284,7 +284,7 @@ Table and index were created successfully.
 
 ### <a name="distributed-redis-cache"></a>分散式 Redis 快取
 
-[Redis](https://redis.io/) 是一種開放原始碼的記憶體內部資料存放區，通常用來做為分散式快取。 您可以在本機使用 Redis，也可以為 Azure 託管的 ASP.NET Core 應用程式設定 [Azure Redis](https://azure.microsoft.com/services/cache/) 快取。
+[Redis](https://redis.io/) 是一種開放原始碼的記憶體內部資料存放區，通常用來做為分散式快取。 您可以在本機使用 Redis，也可以為 Azure 託管的 ASP.NET 核心應用程式設定 [Azure Redis](https://azure.microsoft.com/services/cache/) 快取。
 
 應用程式會在 <xref:Microsoft.Extensions.Caching.StackExchangeRedis.RedisCache> 下列情況中，使用 <xref:Microsoft.Extensions.DependencyInjection.StackExchangeRedisCacheServiceCollectionExtensions.AddStackExchangeRedisCache*> 非開發環境中的實例 () 來設定快取執行 `Startup.ConfigureServices` ：
 
@@ -297,9 +297,9 @@ Table and index were created successfully.
 
 ### <a name="distributed-ncache-cache"></a>分散式 NCache 快取
 
-[NCache](https://github.com/Alachisoft/NCache) 是一種開放原始碼的記憶體內部分散式快取，以原生方式在 .NET 和 .net Core 中開發。 NCache 可在本機運作，並設定為分散式快取叢集，適用于在 Azure 或其他裝載平臺上執行的 ASP.NET Core 應用程式。
+[NCache](https://github.com/Alachisoft/NCache) 是一種開放原始碼的記憶體內部分散式快取，以原生方式在 .NET 和 .net Core 中開發。 NCache 可在本機運作，並設定為在 Azure 或其他裝載平臺上執行的 ASP.NET Core 應用程式的分散式快取叢集。
 
-若要在本機電腦上安裝和設定 NCache，請參閱 [Windows ( .net 和 .Net Core) 的開始使用指南 ](https://www.alachisoft.com/resources/docs/ncache/getting-started-guide-windows/)。
+若要在本機電腦上安裝和設定 NCache，請參閱 [Windows ( .net 和 .Net Core) 的 ](https://www.alachisoft.com/resources/docs/ncache/getting-started-guide-windows/)使用者入門指南。
 
 若要設定 NCache：
 
@@ -350,13 +350,13 @@ Table and index were created successfully.
 
 一般而言，Redis 快取提供比 SQL Server 快取更高的輸送量和較低的延遲。 不過，通常需要進行基準測試，以判斷快取策略的效能特性。
 
-當 SQL Server 當做分散式快取備份存放區使用時，使用相同的資料庫進行快取，而應用程式的一般資料儲存和抓取可能會對這兩者的效能產生負面影響。 我們建議針對分散式快取備份存放區使用專用的 SQL Server 實例。
+當 SQL Server 做為分散式快取備份存放區時，使用相同的資料庫進行快取，而應用程式的一般資料儲存和抓取可能會對這兩者的效能產生負面影響。 建議您針對分散式快取備份存放區使用專用的 SQL Server 實例。
 
 ## <a name="additional-resources"></a>其他資源
 
 * [Azure 上的 Redis 快取](/azure/azure-cache-for-redis/)
 * [Azure 上的 SQL Database](/azure/sql-database/)
-* 在[GitHub 上](https://github.com/Alachisoft/NCache)[的 Web 伺服陣列中的 NCache ASP.NET Core >idistributedcache 提供者](http://www.alachisoft.com/ncache/aspnet-core-idistributedcache-ncache.html) (NCache) 
+* [ASP.NET Core >idistributedcache Provider For NCache In Web](http://www.alachisoft.com/ncache/aspnet-core-idistributedcache-ncache.html) Farm ([NCache on GitHub](https://github.com/Alachisoft/NCache)) 
 * <xref:performance/caching/memory>
 * <xref:fundamentals/change-tokens>
 * <xref:performance/caching/response>
@@ -381,7 +381,7 @@ Table and index were created successfully.
 
 分散式快取設定是特定的執行。 本文說明如何設定 SQL Server 和 Redis 分散式快取。 此外也提供協力廠商的執行，例如[GitHub) 上](https://github.com/Alachisoft/NCache)的[NCache](http://www.alachisoft.com/ncache/aspnet-core-idistributedcache-ncache.html) (NCache。 無論選取哪一個執行，應用程式都會使用介面與快取互動 <xref:Microsoft.Extensions.Caching.Distributed.IDistributedCache> 。
 
-[查看或下載範例程式碼](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/performance/caching/distributed/samples/) ([如何下載](xref:index#how-to-download-a-sample)) 
+[查看或下載範例程式碼](https://github.com/dotnet/AspNetCore.Docs/tree/main/aspnetcore/performance/caching/distributed/samples/) ([如何下載](xref:index#how-to-download-a-sample)) 
 
 ## <a name="prerequisites"></a>必要條件
 
@@ -424,7 +424,7 @@ Table and index were created successfully.
 
 ### <a name="distributed-sql-server-cache"></a>分散式 SQL Server 快取
 
-分散式 SQL Server 快取的 (<xref:Microsoft.Extensions.DependencyInjection.SqlServerCachingServicesExtensions.AddDistributedSqlServerCache*>) 可讓分散式快取使用 SQL Server 資料庫做為其備份存放區。 若要在 SQL Server 實例中建立 SQL Server 快取的專案資料表，您可以使用此 `sql-cache` 工具。 此工具會使用您指定的名稱和架構來建立資料表。
+分散式 SQL Server 快取執行 (<xref:Microsoft.Extensions.DependencyInjection.SqlServerCachingServicesExtensions.AddDistributedSqlServerCache*>) 可讓分散式快取使用 SQL Server 資料庫做為其備份存放區。 若要在 SQL Server 實例中建立 SQL Server 快取專案資料表，您可以使用此 `sql-cache` 工具。 此工具會使用您指定的名稱和架構來建立資料表。
 
 藉由執行命令，在 SQL Server 中建立資料表 `sql-cache create` 。 提供 SQL Server 實例 (`Data Source`) 、資料庫 (`Initial Catalog`) 、架構 (例如) `dbo` 和資料表名稱 (例如， `TestCache`) ：
 
@@ -454,7 +454,7 @@ Table and index were created successfully.
 
 ### <a name="distributed-redis-cache"></a>分散式 Redis 快取
 
-[Redis](https://redis.io/) 是一種開放原始碼的記憶體內部資料存放區，通常用來做為分散式快取。 您可以在本機使用 Redis，也可以為 Azure 託管的 ASP.NET Core 應用程式設定 [Azure Redis](https://azure.microsoft.com/services/cache/) 快取。
+[Redis](https://redis.io/) 是一種開放原始碼的記憶體內部資料存放區，通常用來做為分散式快取。 您可以在本機使用 Redis，也可以為 Azure 託管的 ASP.NET 核心應用程式設定 [Azure Redis](https://azure.microsoft.com/services/cache/) 快取。
 
 應用程式會使用實例 () 來設定快取執行 <xref:Microsoft.Extensions.Caching.Redis.RedisCache> <xref:Microsoft.Extensions.DependencyInjection.RedisCacheServiceCollectionExtensions.AddDistributedRedisCache*> ：
 
@@ -473,9 +473,9 @@ services.AddDistributedRedisCache(options =>
 
 ### <a name="distributed-ncache-cache"></a>分散式 NCache 快取
 
-[NCache](https://github.com/Alachisoft/NCache) 是一種開放原始碼的記憶體內部分散式快取，以原生方式在 .NET 和 .net Core 中開發。 NCache 可在本機運作，並設定為分散式快取叢集，適用于在 Azure 或其他裝載平臺上執行的 ASP.NET Core 應用程式。
+[NCache](https://github.com/Alachisoft/NCache) 是一種開放原始碼的記憶體內部分散式快取，以原生方式在 .NET 和 .net Core 中開發。 NCache 可在本機運作，並設定為在 Azure 或其他裝載平臺上執行的 ASP.NET Core 應用程式的分散式快取叢集。
 
-若要在本機電腦上安裝和設定 NCache，請參閱 [Windows ( .net 和 .Net Core) 的開始使用指南 ](https://www.alachisoft.com/resources/docs/ncache/getting-started-guide-windows/)。
+若要在本機電腦上安裝和設定 NCache，請參閱 [Windows ( .net 和 .Net Core) 的 ](https://www.alachisoft.com/resources/docs/ncache/getting-started-guide-windows/)使用者入門指南。
 
 若要設定 NCache：
 
@@ -526,13 +526,13 @@ services.AddDistributedRedisCache(options =>
 
 一般而言，Redis 快取提供比 SQL Server 快取更高的輸送量和較低的延遲。 不過，通常需要進行基準測試，以判斷快取策略的效能特性。
 
-當 SQL Server 當做分散式快取備份存放區使用時，使用相同的資料庫進行快取，而應用程式的一般資料儲存和抓取可能會對這兩者的效能產生負面影響。 我們建議針對分散式快取備份存放區使用專用的 SQL Server 實例。
+當 SQL Server 做為分散式快取備份存放區時，使用相同的資料庫進行快取，而應用程式的一般資料儲存和抓取可能會對這兩者的效能產生負面影響。 建議您針對分散式快取備份存放區使用專用的 SQL Server 實例。
 
 ## <a name="additional-resources"></a>其他資源
 
 * [Azure 上的 Redis 快取](/azure/azure-cache-for-redis/)
 * [Azure 上的 SQL Database](/azure/sql-database/)
-* 在[GitHub 上](https://github.com/Alachisoft/NCache)[的 Web 伺服陣列中的 NCache ASP.NET Core >idistributedcache 提供者](http://www.alachisoft.com/ncache/aspnet-core-idistributedcache-ncache.html) (NCache) 
+* [ASP.NET Core >idistributedcache Provider For NCache In Web](http://www.alachisoft.com/ncache/aspnet-core-idistributedcache-ncache.html) Farm ([NCache on GitHub](https://github.com/Alachisoft/NCache)) 
 * <xref:performance/caching/memory>
 * <xref:fundamentals/change-tokens>
 * <xref:performance/caching/response>

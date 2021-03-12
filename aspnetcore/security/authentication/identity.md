@@ -17,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: security/authentication/identity
-ms.openlocfilehash: 4fa49f795b78b88e00bd32d04f74acd8689383b2
-ms.sourcegitcommit: 1436bd4d70937d6ec3140da56d96caab33c4320b
+ms.openlocfilehash: 7141808b3190db2c882d562d753cd68fe3f985ff
+ms.sourcegitcommit: 54fe1ae5e7d068e27376d562183ef9ddc7afc432
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 03/06/2021
-ms.locfileid: "102394469"
+ms.lasthandoff: 03/10/2021
+ms.locfileid: "102589734"
 ---
 # <a name="introduction-to-identity-on-aspnet-core"></a>IdentityASP.NET Core 簡介
 
@@ -52,7 +52,7 @@ Identity 通常會使用 SQL Server 資料庫來設定，以儲存使用者名�
 
 [!INCLUDE[](~/includes/IdentityServer4.md)]
 
-[請參閱或下載範例程式碼，](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/security/authentication/identity/sample) ([如何下載](xref:index#how-to-download-a-sample)) 。
+[請參閱或下載範例程式碼，](https://github.com/dotnet/AspNetCore.Docs/tree/main/aspnetcore/security/authentication/identity/sample) ([如何下載](xref:index#how-to-download-a-sample)) 。
 
 <a name="adi"></a>
 
@@ -183,7 +183,7 @@ PowerShell 使用分號做為命令分隔符號。 使用 PowerShell 時，請�
 [!code-csharp[](identity/sample/WebApp3/Areas/Identity/Pages/Account/Register.cshtml.cs?name=snippet&highlight=9)]
 
 <!-- .NET 5 fixes this, see
-https://github.com/dotnet/aspnetcore/blob/master/src/Identity/UI/src/Areas/Identity/Pages/V4/Account/RegisterConfirmation.cshtml.cs#L74-L77
+https://github.com/dotnet/aspnetcore/blob/main/src/Identity/UI/src/Areas/Identity/Pages/V4/Account/RegisterConfirmation.cshtml.cs#L74-L77
 -->
 [!INCLUDE[](~/includes/disableVer.md)]
 
@@ -273,7 +273,7 @@ Post 是在 *Pages/Shared/_LoginPartial 中指定。 cshtml*：
 
 ## <a name="next-steps"></a>後續步驟
 
-* [ASP.NET Core Identity 原始程式碼](https://github.com/dotnet/aspnetcore/tree/master/src/Identity)
+* [ASP.NET Core Identity 原始程式碼](https://github.com/dotnet/aspnetcore/tree/main/src/Identity)
 * 如需使用 SQLite 進行設定的相關資訊，請參閱 [此 GitHub 問題](https://github.com/dotnet/AspNetCore.Docs/issues/5131) Identity 。
 * [設定 Identity](xref:security/authentication/identity-configuration)
 * <xref:security/authorization/secure-data>
@@ -294,7 +294,7 @@ ASP.NET Core Identity 是將登入功能新增至 ASP.NET Core 應用程式的�
 
 Identity 可以使用 SQL Server 資料庫來設定，以儲存使用者名稱、密碼和設定檔資料。 或者，您也可以使用另一個持續性存放區，例如 Azure 表格儲存體。
 
-[請參閱或下載範例程式碼，](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/security/authentication/identity/sample/src/ASPNETCore-IdentityDemoComplete/) ([如何下載](xref:index#how-to-download-a-sample)) 。
+[請參閱或下載範例程式碼，](https://github.com/dotnet/AspNetCore.Docs/tree/main/aspnetcore/security/authentication/identity/sample/src/ASPNETCore-IdentityDemoComplete/) ([如何下載](xref:index#how-to-download-a-sample)) 。
 
 在本主題中，您將瞭解如何使用 Identity 註冊、登入和登出使用者。 For more detailed instructions about creating apps that use Identity, see the Next Steps section at the end of this article.
 

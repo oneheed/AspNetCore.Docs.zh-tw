@@ -1,5 +1,5 @@
 ---
-title: 使用 Docker over HTTPS 裝載 ASP.NET Core 映射
+title: 使用 Docker over HTTPS 裝載 ASP.NET 核心映射
 author: rick-anderson
 description: 瞭解如何使用 Docker 透過 HTTPS 裝載 ASP.NET Core 映射
 monikerRange: '>= aspnetcore-2.1'
@@ -18,14 +18,14 @@ no-loc:
 - Razor
 - SignalR
 uid: security/docker-https
-ms.openlocfilehash: a4aac2ce06fee20bdef157efc361f3099a217b1a
-ms.sourcegitcommit: 619200f2981656ede6d89adb6a22ad1a0e16da22
+ms.openlocfilehash: 3af2aff477604eb19ac211753f848d08d0c67c72
+ms.sourcegitcommit: 54fe1ae5e7d068e27376d562183ef9ddc7afc432
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 11/30/2020
-ms.locfileid: "96332150"
+ms.lasthandoff: 03/10/2021
+ms.locfileid: "102588636"
 ---
-# <a name="hosting-aspnet-core-images-with-docker-over-https"></a>使用 Docker over HTTPS 裝載 ASP.NET Core 映射
+# <a name="hosting-aspnet-core-images-with-docker-over-https"></a>使用 Docker over HTTPS 裝載 ASP.NET 核心映射
 
 作者：[Rick Anderson](https://twitter.com/RickAndMSFT)
 
@@ -33,7 +33,7 @@ ASP.NET Core 預設會使用 [HTTPS](./enforcing-ssl.md)。 [HTTPS](https://en.w
 
 本檔說明如何使用 HTTPS 執行預先建立的容器映射。
 
-請參閱 [使用 Docker OVER HTTPS 開發](https://github.com/dotnet/dotnet-docker/blob/master/samples/run-aspnetcore-https-development.md) 適用于開發案例的 ASP.NET Core 應用程式。
+請參閱 [使用 Docker OVER HTTPS 開發 ASP.NET Core 應用程式](https://github.com/dotnet/dotnet-docker/blob/main/samples/run-aspnetcore-https-development.md) ，以進行開發案例。
 
 此範例需要 docker [17.06](https://docs.docker.com/release-notes/docker-ce) 或更新版本的 [docker 用戶端](https://www.docker.com/products/docker)。
 
@@ -54,7 +54,7 @@ ASP.NET Core 預設會使用 [HTTPS](./enforcing-ssl.md)。 [HTTPS](https://en.w
 * `dotnet dev-certs`這是不必要的工具。
 * 憑證不需要儲存在指示中所使用的位置。 任何位置都應該可以運作，但不建議將憑證儲存在您的網站目錄中。
 
-下列章節中包含的指示會使用 Docker 的命令列選項，將憑證掛接到容器中 `-v` 。 您可以使用 Dockerfile 中的命令，將憑證新增至容器映射中 `COPY` ，但不建議這麼做。 *Dockerfile* 基於下列原因，不建議將憑證複製到映射：
+下列章節中包含的指示會使用 Docker 的命令列選項，將憑證掛接到容器中 `-v` 。 您可以使用 Dockerfile 中的命令，將憑證新增至容器映射中 `COPY` ，但不建議這麼做。  基於下列原因，不建議將憑證複製到映射：
 
 * 使用相同的映射測試開發人員憑證會很困難。
 * 使用相同的映射來裝載生產憑證會很困難。
@@ -75,7 +75,7 @@ dotnet dev-certs https --trust
 
 在上述命令中，以 `{ password here }` 密碼取代。
 
-使用命令 shell 中針對 HTTPS 設定的 ASP.NET Core 來執行容器映射：
+使用命令 shell 中為 HTTPS 設定的 ASP.NET Core 執行容器映射：
 
 ```console
 docker pull mcr.microsoft.com/dotnet/core/samples:aspnetapp
@@ -102,7 +102,7 @@ dotnet dev-certs https --trust
 
 在上述命令中，以 `{ password here }` 密碼取代。
 
-使用針對 HTTPS 設定的 ASP.NET Core 來執行容器映射：
+使用針對 HTTPS 設定的 ASP.NET Core 執行容器映射：
 
 ```console
 docker pull mcr.microsoft.com/dotnet/core/samples:aspnetapp
@@ -122,7 +122,7 @@ dotnet dev-certs https --trust
 
 在上述命令中，以 `{ password here }` 密碼取代。 使用 [PowerShell](/powershell/scripting/overview)時，請將取代 `%USERPROFILE%` 為 `$env:USERPROFILE` 。
 
-使用針對 HTTPS 設定的 ASP.NET Core 來執行容器映射：
+使用針對 HTTPS 設定的 ASP.NET Core 執行容器映射：
 
 ```console
 docker pull mcr.microsoft.com/dotnet/core/samples:aspnetapp

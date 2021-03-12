@@ -19,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: tutorials/razor-pages/sql
-ms.openlocfilehash: fa1060ae1a046a40d55e9fef4a094aa9e51a18af
-ms.sourcegitcommit: 422e8444b9f5cedc373be5efe8032822db54fcaf
+ms.openlocfilehash: 3133ff7a192f5e3bdec4f6f1e6e6d55f966d7e64
+ms.sourcegitcommit: 54fe1ae5e7d068e27376d562183ef9ddc7afc432
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 02/18/2021
-ms.locfileid: "101101167"
+ms.lasthandoff: 03/10/2021
+ms.locfileid: "102589760"
 ---
 # <a name="part-4-of-tutorial-series-on-razor-pages"></a>頁面上教學課程系列的第4部分 Razor
 
@@ -32,7 +32,7 @@ ms.locfileid: "101101167"
 
 ::: moniker range=">= aspnetcore-5.0"
 
-[檢視或下載範例程式碼](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/tutorials/razor-pages/razor-pages-start/sample/RazorPagesMovie50) ([如何下載](xref:index#how-to-download-a-sample))。
+[檢視或下載範例程式碼](https://github.com/dotnet/AspNetCore.Docs/tree/main/aspnetcore/tutorials/razor-pages/razor-pages-start/sample/RazorPagesMovie50) ([如何下載](xref:index#how-to-download-a-sample))。
 
 `RazorPagesMovieContext` 物件會處理連線到資料庫和將 `Movie` 物件對應至資料庫記錄的工作。 在 *Startup.cs* 的 `ConfigureServices` 方法中，以 [相依性插入](xref:fundamentals/dependency-injection)容器登錄資料庫內容：
 
@@ -46,7 +46,7 @@ ms.locfileid: "101101167"
 
 ---
 
-[ASP.NET Core 設定](xref:fundamentals/configuration/index)系統會讀取 `ConnectionString` 金鑰。 針對本機開發，設定會從檔案取得連接字串 *appsettings.json* 。
+ASP.NET [核心設定](xref:fundamentals/configuration/index) 系統會讀取 `ConnectionString` 金鑰。 針對本機開發，設定會從檔案取得連接字串 *appsettings.json* 。
 
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
@@ -98,7 +98,7 @@ LocalDB 為輕量版的 SQL Server Express 資料庫引擎，鎖定程式開發�
 ![顯示 movie 資料庫之 SQLite 的資料庫瀏覽器](~/tutorials/first-mvc-app-xplat/working-with-sql/_static/dbb.png)
 
 > [!NOTE]
-> 在本教學課程中，會盡可能使用 Entity Framework Core 的 *遷移* 功能。 移轉可更新資料庫結構描述，以符合資料模型中的變更。 不過，移轉只能進行 EF Core 提供者支援的變更類型，SQLite 提供者的功能則有限制。 例如，其支援新增資料行，但不支援移除或變更資料行。 如果您建立移轉來移除或變更資料行，`ef migrations add` 命令會成功，但 `ef database update` 命令會失敗。 由於這些限制，本教學課程不會將移轉用於 SQLite 結構描述變更。 相反地，當架構變更時，就會卸載並重新建立資料庫。
+> 在此教學課程中，會盡可能使用 Entity Framework Core *遷移* 功能。 移轉可更新資料庫結構描述，以符合資料模型中的變更。 不過，移轉只能進行 EF Core 提供者支援的變更類型，SQLite 提供者的功能則有限制。 例如，其支援新增資料行，但不支援移除或變更資料行。 如果您建立移轉來移除或變更資料行，`ef migrations add` 命令會成功，但 `ef database update` 命令會失敗。 由於這些限制，本教學課程不會將移轉用於 SQLite 結構描述變更。 相反地，當架構變更時，就會卸載並重新建立資料庫。
 >
 >SQLite 限制的因應措施是手動撰寫移轉程式碼，以在資料表有所變更時執行資料表重建。 重建資料表包含：
 >
@@ -186,7 +186,7 @@ if (context.Movie.Any())
 
 ::: moniker range="< aspnetcore-5.0 >= aspnetcore-3.0"
 
-[檢視或下載範例程式碼](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/tutorials/razor-pages/razor-pages-start/sample/RazorPagesMovie30) ([如何下載](xref:index#how-to-download-a-sample))。
+[檢視或下載範例程式碼](https://github.com/dotnet/AspNetCore.Docs/tree/main/aspnetcore/tutorials/razor-pages/razor-pages-start/sample/RazorPagesMovie30) ([如何下載](xref:index#how-to-download-a-sample))。
 
 `RazorPagesMovieContext` 物件會處理連線到資料庫和將 `Movie` 物件對應至資料庫記錄的工作。 在 *Startup.cs* 的 `ConfigureServices` 方法中，以 [相依性插入](xref:fundamentals/dependency-injection)容器登錄資料庫內容：
 
@@ -200,7 +200,7 @@ if (context.Movie.Any())
 
 ---
 
-[ASP.NET Core 設定](xref:fundamentals/configuration/index)系統會讀取 `ConnectionString` 金鑰。 針對本機開發，設定會從檔案取得連接字串 *appsettings.json* 。
+ASP.NET [核心設定](xref:fundamentals/configuration/index) 系統會讀取 `ConnectionString` 金鑰。 針對本機開發，設定會從檔案取得連接字串 *appsettings.json* 。
 
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
@@ -252,7 +252,7 @@ LocalDB 為輕量版的 SQL Server Express 資料庫引擎，鎖定程式開發�
 ![顯示 movie 資料庫之 SQLite 的資料庫瀏覽器](~/tutorials/first-mvc-app-xplat/working-with-sql/_static/dbb.png)
 
 > [!NOTE]
-> 在本教學課程中，會盡可能使用 Entity Framework Core 的 *遷移* 功能。 移轉可更新資料庫結構描述，以符合資料模型中的變更。 不過，移轉只能進行 EF Core 提供者支援的變更類型，SQLite 提供者的功能則有限制。 例如，其支援新增資料行，但不支援移除或變更資料行。 如果您建立移轉來移除或變更資料行，`ef migrations add` 命令會成功，但 `ef database update` 命令會失敗。 由於這些限制，本教學課程不會將移轉用於 SQLite 結構描述變更。 相反地，當架構變更時，就會卸載並重新建立資料庫。
+> 在此教學課程中，會盡可能使用 Entity Framework Core *遷移* 功能。 移轉可更新資料庫結構描述，以符合資料模型中的變更。 不過，移轉只能進行 EF Core 提供者支援的變更類型，SQLite 提供者的功能則有限制。 例如，其支援新增資料行，但不支援移除或變更資料行。 如果您建立移轉來移除或變更資料行，`ef migrations add` 命令會成功，但 `ef database update` 命令會失敗。 由於這些限制，本教學課程不會將移轉用於 SQLite 結構描述變更。 相反地，當架構變更時，就會卸載並重新建立資料庫。
 >
 >SQLite 限制的因應措施是手動撰寫移轉程式碼，以在資料表有所變更時執行資料表重建。 重建資料表包含：
 >
@@ -339,7 +339,7 @@ if (context.Movie.Any())
 
 ::: moniker range="< aspnetcore-3.0"
 
-[檢視或下載範例程式碼](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/tutorials/razor-pages/razor-pages-start) ([如何下載](xref:index#how-to-download-a-sample))。
+[檢視或下載範例程式碼](https://github.com/dotnet/AspNetCore.Docs/tree/main/aspnetcore/tutorials/razor-pages/razor-pages-start) ([如何下載](xref:index#how-to-download-a-sample))。
 
 `RazorPagesMovieContext` 物件會處理連線到資料庫和將 `Movie` 物件對應至資料庫記錄的工作。 在 *Startup.cs* 的 `ConfigureServices` 方法中，以 [相依性插入](xref:fundamentals/dependency-injection)容器登錄資料庫內容：
 
@@ -358,7 +358,7 @@ if (context.Movie.Any())
 * 適用於 `CookiePolicyOptions` 的 [ASP.NET Core 中的 EU 一般資料保護規定 (GDPR) 支援](xref:security/gdpr)。
 * [SetCompatibilityVersion](xref:mvc/compatibility-version)
 
-[ASP.NET Core 設定](xref:fundamentals/configuration/index)系統會讀取 `ConnectionString` 金鑰。 針對本機開發，設定會從檔案取得連接字串 *appsettings.json* 。
+ASP.NET [核心設定](xref:fundamentals/configuration/index) 系統會讀取 `ConnectionString` 金鑰。 針對本機開發，設定會從檔案取得連接字串 *appsettings.json* 。
 
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 

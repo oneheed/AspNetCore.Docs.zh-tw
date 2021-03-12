@@ -1,7 +1,7 @@
 ---
 title: 使用 ASP.NET Core 搭配 SignalR TypeScript 和 Webpack
 author: ssougnez
-description: 在本教學課程中，您會將 Webpack 設定為配套，並建立 SignalR 用戶端以 TypeScript 撰寫的 ASP.NET Core web 應用程式。
+description: 在本教學課程中，您會將 Webpack 設定為配套，並建立 SignalR 其用戶端以 TypeScript 撰寫的 ASP.NET Core web 應用程式。
 ms.author: bradyg
 ms.custom: mvc
 ms.date: 02/10/2020
@@ -18,29 +18,29 @@ no-loc:
 - Razor
 - SignalR
 uid: tutorials/signalr-typescript-webpack
-ms.openlocfilehash: 949276bf4aae33c3af3fd1b8219a83868095f378
-ms.sourcegitcommit: 3593c4efa707edeaaceffbfa544f99f41fc62535
+ms.openlocfilehash: 9d52b72c669a9345cc7c5386876db22af55a97c7
+ms.sourcegitcommit: 54fe1ae5e7d068e27376d562183ef9ddc7afc432
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 01/04/2021
-ms.locfileid: "93056838"
+ms.lasthandoff: 03/10/2021
+ms.locfileid: "102589747"
 ---
-# <a name="use-aspnet-core-no-locsignalr-with-typescript-and-webpack"></a>使用 ASP.NET Core 搭配 SignalR TypeScript 和 Webpack
+# <a name="use-aspnet-core-signalr-with-typescript-and-webpack"></a>使用 ASP.NET Core 搭配 SignalR TypeScript 和 Webpack
 
 作者：[Sébastien Sougnez](https://twitter.com/ssougnez) 和 [Scott Addie](https://twitter.com/Scott_Addie)
 
-[Webpack](https://webpack.js.org/) 可讓開發人員組合並建置 Web 應用程式的用戶端資源。 本教學課程示範如何在 ASP.NET Core SignalR web 應用程式中使用 Webpack，其用戶端是以 [TypeScript](https://www.typescriptlang.org/)撰寫的。
+[Webpack](https://webpack.js.org/) 可讓開發人員組合並建置 Web 應用程式的用戶端資源。 本教學課程示範如何在 SignalR 其用戶端以 [TypeScript](https://www.typescriptlang.org/)撰寫的 ASP.NET Core web 應用程式中使用 Webpack。
 
 在本教學課程中，您會了解如何：
 
 > [!div class="checklist"]
-> * Scaffold 入門 ASP.NET Core SignalR 應用程式
+> * Scaffold starter ASP.NET Core SignalR 應用程式
 > * 設定 SignalR TypeScript 用戶端
 > * 使用 Webpack 設定組建管線
 > * 設定 SignalR 伺服器
 > * 啟用用戶端與伺服器之間的通訊
 
-[查看或下載範例程式碼](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/tutorials/signalr-typescript-webpack/sample) ([如何下載](xref:index#how-to-download-a-sample)) 
+[查看或下載範例程式碼](https://github.com/dotnet/AspNetCore.Docs/tree/main/aspnetcore/tutorials/signalr-typescript-webpack/sample) ([如何下載](xref:index#how-to-download-a-sample)) 
 
 ::: moniker range=">= aspnetcore-3.0"
 
@@ -48,7 +48,7 @@ ms.locfileid: "93056838"
 
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
-* **ASP.NET 和 網頁程式開發** 工作負載的 [Visual Studio 2019](https://visualstudio.microsoft.com/downloads/?utm_medium=microsoft&utm_source=docs.microsoft.com&utm_campaign=inline+link&utm_content=download+vs2019)
+* [Visual Studio 2019](https://visualstudio.microsoft.com/downloads/?utm_medium=microsoft&utm_source=docs.microsoft.com&utm_campaign=inline+link&utm_content=download+vs2019) 與 **ASP.NET 和 網頁程式開發** 工作負載
 * [.NET Core SDK 3.0 或更新版本](https://dotnet.microsoft.com/download/dotnet-core)
 * 具有 [npm](https://www.npmjs.com/) 的 [Node.js](https://nodejs.org/)
 
@@ -68,22 +68,22 @@ ms.locfileid: "93056838"
 設定 Visual Studio 以在 *PATH* 環境變數中尋找 npm。 根據預設，Visual Studio 會使用在其安裝目錄中找到的 npm 版本。 請遵循 Visual Studio 中的下列指示：
 
 1. 啟動 Visual Studio。 在 [開始] 視窗中，選取 [ **繼續但不** 撰寫程式碼]。
-1. 流覽至 [ **工具** > **選項** > **專案和方案**] > **web 套件管理** > **外部 web 工具**。
+1. 流覽至 [ **工具** > **選項** > **專案] 和 [方案** > **web 封裝管理**] > **外部 web 工具**。
 1. 從清單中選取 *$(PATH)* 項目。 按一下向上箭號可將專案移到清單中的第二個位置，然後選取 **[確定]**。
 
     ![Visual Studio 設定](signalr-typescript-webpack/_static/signalr-configure-path-visual-studio.png)
 
 Visual Studio 設定已完成。
 
-1. 使用 [**檔案**  >  **新增**  >  **專案**] 功能表選項，然後選擇 [ **ASP.NET Core Web 應用程式**] 範本。 選取 [下一步]  。
+1. 使用 [**檔案**  >  **新增**  >  **專案**] 功能表選項，然後選擇 [ **ASP.NET Core Web 應用程式**] 範本。 選取 [下一步] 。
 1. 將專案命名為 *SignalR WebPack*，然後選取 [**建立**]。
-1. 從 [目標 framework] 下拉式清單中選取 [ *.Net Core* ]，然後從 [framework 選取器] 下拉式清單中選取 [ *ASP.NET Core 3.1* ]。 選取 **空白** 範本，然後選取 [ **建立**]。
+1. 從 [目標 framework] 下拉式清單中選取 [ *.Net core* ]，然後從 [framework 選取器] 下拉式清單中選取 [ *ASP.NET core 3.1* ]。 選取 **空白** 範本，然後選取 [ **建立**]。
 
 將 `Microsoft.TypeScript.MSBuild` 套件新增至專案：
 
-1. 在 **方案總管** (右窗格) 中，以滑鼠右鍵按一下專案節點，然後選取 [ **管理 NuGet 套件**]。 在 [ **流覽** ] 索引標籤中，搜尋 `Microsoft.TypeScript.MSBuild` ，然後按一下右邊的 [ **安裝** ] 以安裝套件。
+1. 在 [ **方案 Explorer** ] 中 (右窗格) ，以滑鼠右鍵按一下專案節點，然後選取 [ **管理 NuGet 套件**]。 在 [ **流覽** ] 索引標籤中，搜尋 `Microsoft.TypeScript.MSBuild` ，然後按一下右邊的 [ **安裝** ] 以安裝套件。
 
-Visual Studio 會在 **方案總管** 的 [相依性 **]** 節點下新增 NuGet 套件，在專案中啟用 TypeScript 編譯。
+Visual Studio 會在 [**方案瀏覽器**] 的 [相依性 **]** 節點下新增 NuGet 套件，在專案中啟用 TypeScript 編譯。
 
 # <a name="visual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code)
 
@@ -94,8 +94,8 @@ dotnet new web -o SignalRWebPack
 code -r SignalRWebPack
 ```
 
-* 此 `dotnet new` 命令會在 *SignalR WebPack* 目錄中建立空白 ASP.NET Core web 應用程式。
-* 此 `code` 命令會在 Visual Studio Code 的目前實例中開啟 [ *SignalR WebPack* ] 資料夾。
+* 此 `dotnet new` 命令會在 *SignalR WebPack* 目錄中建立空的 ASP.NET Core web 應用程式。
+* 此 `code` 命令會在目前的 Visual Studio Code 實例中開啟 *SignalR WebPack* 資料夾。
 
 在 **整合式終端** 機中執行下列 .NET Core CLI 命令：
 
@@ -200,7 +200,7 @@ dotnet add package Microsoft.TypeScript.MSBuild
 
    上述程式碼可讓伺服器找出並提供 *index.html* 檔案。  無論使用者輸入的是 web 應用程式的完整 URL 或根 URL，都會提供檔案。
 
-1. 在結尾，將 `Startup.Configure` */hub* 路由對應至 `ChatHub` 中樞。 取代顯示 Hello World 的程式碼 *！* 成為下列這行： 
+1. 在結尾，將 `Startup.Configure` */hub* 路由對應至 `ChatHub` 中樞。 取代顯示 *Hello World* 的程式碼！ 成為下列這行： 
 
    [!code-csharp[Startup](signalr-typescript-webpack/sample/3.x/Startup.cs?name=snippet_UseSignalR&highlight=3)]
 
@@ -261,7 +261,7 @@ dotnet add package Microsoft.TypeScript.MSBuild
 
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
-1. 在 *release* 模式下執行 Webpack。 使用 **封裝管理員主控台** 視窗，在專案根目錄中執行下列命令。 如果您不在專案根目錄中，請先輸入 `cd SignalRWebPack`，再輸入命令。
+1. 在 *release* 模式下執行 Webpack。 使用 [ **套件管理員主控台** ] 視窗，在專案根目錄中執行下列命令。 如果您不在專案根目錄中，請先輸入 `cd SignalRWebPack`，再輸入命令。
 
     [!INCLUDE [npm-run-release](../includes/signalr-typescript-webpack/npm-run-release.md)]
 
@@ -305,7 +305,7 @@ dotnet add package Microsoft.TypeScript.MSBuild
 
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
-* **ASP.NET 和 網頁程式開發** 工作負載的 [Visual Studio 2019](https://visualstudio.microsoft.com/downloads/?utm_medium=microsoft&utm_source=docs.microsoft.com&utm_campaign=inline+link&utm_content=download+vs2019)
+* [Visual Studio 2019](https://visualstudio.microsoft.com/downloads/?utm_medium=microsoft&utm_source=docs.microsoft.com&utm_campaign=inline+link&utm_content=download+vs2019) 與 **ASP.NET 和 網頁程式開發** 工作負載
 * [.NET Core SDK 2.2 或更新版本](https://dotnet.microsoft.com/download/dotnet-core)
 * 具有 [npm](https://www.npmjs.com/) 的 [Node.js](https://nodejs.org/)
 
@@ -324,7 +324,7 @@ dotnet add package Microsoft.TypeScript.MSBuild
 
 設定 Visual Studio 以在 *PATH* 環境變數中尋找 npm。 根據預設，Visual Studio 會使用在其安裝目錄中找到的 npm 版本。 請遵循 Visual Studio 中的下列指示：
 
-1. 流覽至 [ **工具** > **選項** > **專案和方案**] > **web 套件管理** > **外部 web 工具**。
+1. 流覽至 [ **工具** > **選項** > **專案] 和 [方案** > **web 封裝管理**] > **外部 web 工具**。
 1. 從清單中選取 *$(PATH)* 項目。 按一下向上箭號，將此項目移至清單中的第二個位置。
 
     ![Visual Studio 設定](signalr-typescript-webpack/_static/signalr-configure-path-visual-studio.png)
@@ -498,7 +498,7 @@ dotnet new web -o SignalRWebPack
 
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
-1. 在 *release* 模式下執行 Webpack。 使用 **封裝管理員主控台** 視窗，在專案根目錄中執行下列命令。 如果您不在專案根目錄中，請先輸入 `cd SignalRWebPack`，再輸入命令。
+1. 在 *release* 模式下執行 Webpack。 使用 [ **套件管理員主控台** ] 視窗，在專案根目錄中執行下列命令。 如果您不在專案根目錄中，請先輸入 `cd SignalRWebPack`，再輸入命令。
 
     [!INCLUDE [npm-run-release](../includes/signalr-typescript-webpack/npm-run-release.md)]
 

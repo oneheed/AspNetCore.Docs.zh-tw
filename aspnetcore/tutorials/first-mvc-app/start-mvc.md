@@ -18,12 +18,12 @@ no-loc:
 - SignalR
 uid: tutorials/first-mvc-app/start-mvc
 ms.custom: contperf-fy21q3
-ms.openlocfilehash: aaf930eee351ed757be60f648bce88b182d52799
-ms.sourcegitcommit: da5a5bed5718a9f8db59356ef8890b4b60ced6e9
+ms.openlocfilehash: 8e5f216a354b1ed7559b433d3a4867627bf60df3
+ms.sourcegitcommit: 54fe1ae5e7d068e27376d562183ef9ddc7afc432
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 01/22/2021
-ms.locfileid: "98710757"
+ms.lasthandoff: 03/10/2021
+ms.locfileid: "102589773"
 ---
 # <a name="get-started-with-aspnet-core-mvc"></a>ASP.NET Core MVC 使用者入門
 
@@ -33,7 +33,7 @@ ms.locfileid: "98710757"
 
 [!INCLUDE [consider RP](~/includes/razor.md)]
 
-這是一個系列的第一個教學課程，教您使用控制器和 views ASP.NET Core MVC 網頁程式開發。
+這是一個系列的第一個教學課程，教您使用控制器和 views ASP.NET 核心 MVC 網頁程式開發。
 
 在系列結束時，您將會有一個可管理及顯示電影資料的應用程式。 您會了解如何：
 
@@ -43,7 +43,7 @@ ms.locfileid: "98710757"
 > * 使用資料庫。
 > * 新增搜尋和驗證。
 
-[檢視或下載範例程式碼](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/tutorials/first-mvc-app/start-mvc/sample) ([如何下載](xref:index#how-to-download-a-sample))。
+[檢視或下載範例程式碼](https://github.com/dotnet/AspNetCore.Docs/tree/main/aspnetcore/tutorials/first-mvc-app/start-mvc/sample) ([如何下載](xref:index#how-to-download-a-sample))。
 
 ## <a name="prerequisites"></a>必要條件
 
@@ -66,11 +66,11 @@ ms.locfileid: "98710757"
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
 * 啟動 Visual Studio，然後選取 [建立新專案]。
-* 在 [ **建立新專案** ] 對話方塊中，選取 [ **ASP.NET Core Web 應用程式** > **]**。
+* 在 [ **建立新專案** ] 對話方塊中，選取 [下一步] **ASP.NET Core Web 應用程式** > ****。
 * 在 [ **設定您的新專案** ] 對話方塊中，輸入 [ `MvcMovie` **專案名稱**]。 請務必將專案命名為 *MvcMovie*。 複製程式碼時，大小寫必須符合每個 `namespace` 相符專案。
 * 選取 [建立]  。
 * 在 [ **建立新的 ASP.NET Core web 應用程式** ] 對話方塊中，選取：
-  * 下拉式清單中的 **.Net Core** 和 **ASP.NET Core 5.0** 。
+  * 下拉式清單中的 **.Net core** 和 **ASP.NET core 5.0** 。
   * **ASP.NET Core Web 應用程式 (模型-視圖控制器)**。
   * **Create**。
 
@@ -78,14 +78,14 @@ ms.locfileid: "98710757"
 
 如需建立專案的替代方法，請參閱 [在 Visual Studio 中建立新專案](/visualstudio/ide/create-new-project)。
 
-Visual Studio 使用所建立 MVC 專案的預設專案範本。 建立的專案：
+Visual Studio 已針對建立的 MVC 專案使用預設專案範本。 建立的專案：
 
 * 是正常運作的應用程式。
 * 是基本的入門專案。
 
 # <a name="visual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code)
 
-本教學課程假設您已熟悉 VS Code。 如需詳細資訊，請參閱 [開始使用 VS Code](https://code.visualstudio.com/docs) 及 [Visual Studio Code](#visual-studio-code-help)說明。
+本教學課程假設您已熟悉 VS Code。 如需詳細資訊，請參閱 [開始使用 VS Code](https://code.visualstudio.com/docs) 和 [Visual Studio Code](#visual-studio-code-help)說明。
 
 * 開啟 [整合式終端](https://code.visualstudio.com/docs/editor/integrated-terminal)機。
 * 變更至 `cd` 將包含專案的目錄 () 。
@@ -115,7 +115,7 @@ Visual Studio 使用所建立 MVC 專案的預設專案範本。 建立的專案
 
   * 確認 [ **驗證** ] 設定為 [ **無驗證**]。
   * 如果出現選取 **目標 Framework** 的選項，請選取最新的5.x 版。
-  * 選取 [下一步]  。
+  * 選取 [下一步] 。
 
 * 將專案命名為 **MvcMovie**，然後選取 [建立]。
 
@@ -213,7 +213,7 @@ Visual Studio 使用所建立 MVC 專案的預設專案範本。 建立的專案
 
 [!INCLUDE [consider RP](~/includes/razor.md)]
 
-這是一個系列的第一個教學課程，教您使用控制器和 views ASP.NET Core MVC 網頁程式開發。
+這是一個系列的第一個教學課程，教您使用控制器和 views ASP.NET 核心 MVC 網頁程式開發。
 
 在系列結束時，您將會有一個可管理及顯示電影資料的應用程式。 您會了解如何：
 
@@ -223,7 +223,7 @@ Visual Studio 使用所建立 MVC 專案的預設專案範本。 建立的專案
 > * 使用資料庫。
 > * 新增搜尋和驗證。
 
-[檢視或下載範例程式碼](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/tutorials/first-mvc-app/start-mvc/sample) ([如何下載](xref:index#how-to-download-a-sample))。
+[檢視或下載範例程式碼](https://github.com/dotnet/AspNetCore.Docs/tree/main/aspnetcore/tutorials/first-mvc-app/start-mvc/sample) ([如何下載](xref:index#how-to-download-a-sample))。
 
 ## <a name="prerequisites"></a>必要條件
 
@@ -245,9 +245,9 @@ Visual Studio 使用所建立 MVC 專案的預設專案範本。 建立的專案
 
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
-* 在 [Visual Studio 中，選取 [ **建立新專案**]。
+* 從 Visual Studio 中，選取 [ **建立新專案**]。
 
-* 選取 > **[下一步]** ASP.NET Core Web 應用程式。
+* 選取 [下一步 **ASP.NET Core Web 應用程式** > **]**。
 
   ![建立新的 ASP.NET Core Web 應用程式專案](start-mvc/_static/np_2.1.png)
 
@@ -255,18 +255,18 @@ Visual Studio 使用所建立 MVC 專案的預設專案範本。 建立的專案
 
   ![設定您的新專案](start-mvc/_static/config.png)
 
-* 選取 **Web 應用程式 (模型-視圖控制器)**。 從下拉式方塊中，選取 [ **.Net Core** ] 和 [ **ASP.NET Core 3.1**]，然後選取 [ **建立**]。
+* 選取 **Web 應用程式 (模型-視圖控制器)**。 從下拉式方塊中，選取 [ **.Net core** ] 和 [ **ASP.NET Core 3.1**]，然後選取 [ **建立**]。
 
   ![[新增專案] 對話方塊、左窗格中的 [.Net Core]、ASP.NET Core Web ](start-mvc/_static/new_project30.png)
 
-Visual Studio 使用所建立 MVC 專案的預設專案範本。 建立的專案：
+Visual Studio 已針對建立的 MVC 專案使用預設專案範本。 建立的專案：
 
 * 是正常運作的應用程式。
 * 是基本的入門專案。
 
 # <a name="visual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code)
 
-本教學課程假設您已熟悉 VS Code。 如需詳細資訊，請參閱 [開始使用 VS Code](https://code.visualstudio.com/docs) 及 [Visual Studio Code](#visual-studio-code-help)說明。
+本教學課程假設您已熟悉 VS Code。 如需詳細資訊，請參閱 [開始使用 VS Code](https://code.visualstudio.com/docs) 和 [Visual Studio Code](#visual-studio-code-help)說明。
 
 * 開啟 [整合式終端](https://code.visualstudio.com/docs/editor/integrated-terminal)機。
 * 將目錄 (`cd`) 變更為包含專案的資料夾。
@@ -296,7 +296,7 @@ Visual Studio 使用所建立 MVC 專案的預設專案範本。 建立的專案
 
   * 確認 [ **驗證** ] 設定為 [ **無驗證**]。
   * 如果出現選取 **目標 Framework** 的選項，請選取最新的3.x 版。
-  * 選取 [下一步]  。
+  * 選取 [下一步] 。
 
 * 將專案命名為 **MvcMovie**，然後選取 [建立]。
 
@@ -363,7 +363,7 @@ Visual Studio 使用所建立 MVC 專案的預設專案範本。 建立的專案
 
 * 選取 [執行]**[啟動但不偵錯]** >  來啟動應用程式。
 
-  Visual Studio for Mac：啟動 [Kestrel](xref:fundamentals/servers/index#kestrel) 伺服器、啟動瀏覽器，並流覽至 `http://localhost:port` ，其中 *port* 是隨機播放的埠號碼。
+  Visual Studio for Mac：啟動 [Kestrel](xref:fundamentals/servers/index#kestrel) 伺服器、啟動瀏覽器，然後流覽至 `http://localhost:port` ，其中 *埠* 是隨機播放的埠號碼。
 
 [!INCLUDE[](~/includes/trustCertMac.md)]
 

@@ -19,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: fundamentals/url-rewriting
-ms.openlocfilehash: 55993f951bfe910fb179fdb25b8d04f81d4ee2c9
-ms.sourcegitcommit: 83524f739dd25fbfa95ee34e95342afb383b49fe
+ms.openlocfilehash: 44e6570090de9c5f3550d18a30fcde758fb16f85
+ms.sourcegitcommit: 54fe1ae5e7d068e27376d562183ef9ddc7afc432
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 01/29/2021
-ms.locfileid: "99057456"
+ms.lasthandoff: 03/10/2021
+ms.locfileid: "102588519"
 ---
 # <a name="url-rewriting-middleware-in-aspnet-core"></a>ASP.NET Core 的 URL 重寫中介軟體
 
@@ -47,7 +47,7 @@ URL 重寫是指根據一或多個預先定義的規則來修改要求 URL 的�
 > [!NOTE]
 > URL 重寫可能會降低應用程式的效能。 如果可行的話，請限制規則的數目與複雜程度。
 
-[查看或下載範例程式碼](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/url-rewriting/samples/) ([如何下載](xref:index#how-to-download-a-sample)) 
+[查看或下載範例程式碼](https://github.com/dotnet/AspNetCore.Docs/tree/main/aspnetcore/fundamentals/url-rewriting/samples/) ([如何下載](xref:index#how-to-download-a-sample)) 
 
 ## <a name="url-redirect-and-url-rewrite"></a>URL 重新導向和 URL 重寫
 
@@ -77,7 +77,7 @@ URL 重寫是指根據一或多個預先定義的規則來修改要求 URL 的�
 
 ## <a name="url-rewriting-sample-app"></a>URL 重寫範例應用程式
 
-您可以利用[範例應用程式](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/url-rewriting/samples/)，來探索 URL 重寫中介軟體的功能。 範例應用程式會套用重新導向與重寫規則，還會示範多種情況下的重新導向或重寫 URL。
+您可以利用[範例應用程式](https://github.com/dotnet/AspNetCore.Docs/tree/main/aspnetcore/fundamentals/url-rewriting/samples/)，來探索 URL 重寫中介軟體的功能。 範例應用程式會套用重新導向與重寫規則，還會示範多種情況下的重新導向或重寫 URL。
 
 ## <a name="when-to-use-url-rewriting-middleware"></a>URL 重寫中介軟體的使用時機
 
@@ -399,7 +399,7 @@ URL 重寫是指根據一或多個預先定義的規則來修改要求 URL 的�
 > [!NOTE]
 > URL 重寫可能會降低應用程式的效能。 如果可行的話，請限制規則的數目與複雜程度。
 
-[查看或下載範例程式碼](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/url-rewriting/samples/) ([如何下載](xref:index#how-to-download-a-sample)) 
+[查看或下載範例程式碼](https://github.com/dotnet/AspNetCore.Docs/tree/main/aspnetcore/fundamentals/url-rewriting/samples/) ([如何下載](xref:index#how-to-download-a-sample)) 
 
 ## <a name="url-redirect-and-url-rewrite"></a>URL 重新導向和 URL 重寫
 
@@ -429,7 +429,7 @@ URL 重寫是指根據一或多個預先定義的規則來修改要求 URL 的�
 
 ## <a name="url-rewriting-sample-app"></a>URL 重寫範例應用程式
 
-您可以利用[範例應用程式](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/url-rewriting/samples/)，來探索 URL 重寫中介軟體的功能。 範例應用程式會套用重新導向與重寫規則，還會示範多種情況下的重新導向或重寫 URL。
+您可以利用[範例應用程式](https://github.com/dotnet/AspNetCore.Docs/tree/main/aspnetcore/fundamentals/url-rewriting/samples/)，來探索 URL 重寫中介軟體的功能。 範例應用程式會套用重新導向與重寫規則，還會示範多種情況下的重新導向或重寫 URL。
 
 ## <a name="when-to-use-url-rewriting-middleware"></a>URL 重寫中介軟體的使用時機
 

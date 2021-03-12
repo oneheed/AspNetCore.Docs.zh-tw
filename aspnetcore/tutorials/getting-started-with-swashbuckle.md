@@ -18,16 +18,16 @@ no-loc:
 - Razor
 - SignalR
 uid: tutorials/get-started-with-swashbuckle
-ms.openlocfilehash: df9c78770f3494b1ae9e0d3604926d77cb1e67bb
-ms.sourcegitcommit: 20a41c8e40a2e69e99291e2fe18caa04c02e7109
+ms.openlocfilehash: fdec03422f4a4517950ff6de2a0400df5307b40f
+ms.sourcegitcommit: 54fe1ae5e7d068e27376d562183ef9ddc7afc432
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 02/05/2021
-ms.locfileid: "99578317"
+ms.lasthandoff: 03/10/2021
+ms.locfileid: "102588532"
 ---
 # <a name="get-started-with-swashbuckle-and-aspnet-core"></a>Swashbuckle 與 ASP.NET Core 使用者入門
 
-[查看或下載範例程式碼](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/tutorials/web-api-help-pages-using-swagger/samples/) ([如何下載](xref:index#how-to-download-a-sample)) 
+[查看或下載範例程式碼](https://github.com/dotnet/AspNetCore.Docs/tree/main/aspnetcore/tutorials/web-api-help-pages-using-swagger/samples/) ([如何下載](xref:index#how-to-download-a-sample)) 
 
 Swashbuckle 有三個主要元件：
 
@@ -44,7 +44,7 @@ Swashbuckle 有三個主要元件：
 ### <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
 * 從 [套件管理員主控台] 視窗中：
-  * 移至 [**查看**  >  **其他 Windows**  >  **封裝管理員主控台**]
+  * 移至 [**查看**  >  **其他 Windows**  >  **套件管理員主控台**]
   * 巡覽至 *TodoApi.csproj* 檔案所在目錄
   * 執行以下命令：
 
@@ -53,7 +53,7 @@ Swashbuckle 有三個主要元件：
     ```
 
 * 從 [管理 NuGet 套件] 對話方塊中：
-  * 在 **方案總管**  >  **管理 NuGet 套件**] 中的專案上按一下滑鼠右鍵
+  * 以滑鼠右鍵按一下 **方案 Explorer** 中的專案 [  >  **管理 NuGet 封裝**]
   * 將 [套件來源] 設定為 "nuget.org"
   * 請確定已啟用 [包含發行前版本] 選項
   * 在搜尋方塊中輸入 "Swashbuckle.AspNetCore"
@@ -124,9 +124,9 @@ dotnet add TodoApi.csproj package Swashbuckle.AspNetCore -v 5.6.3
 > [!NOTE]
 > Swashbuckle 依賴 MVC <xref:Microsoft.AspNetCore.Mvc.ApiExplorer> 來探索路由和端點。 如果專案呼叫 <xref:Microsoft.Extensions.DependencyInjection.MvcServiceCollectionExtensions.AddMvc%2A> ，就會自動探索路由和端點。 呼叫時 <xref:Microsoft.Extensions.DependencyInjection.MvcCoreServiceCollectionExtensions.AddMvcCore%2A> ， <xref:Microsoft.Extensions.DependencyInjection.MvcApiExplorerMvcCoreBuilderExtensions.AddApiExplorer%2A> 必須明確呼叫方法。 如需詳細資訊，請參閱 [Swashbuckle、ApiExplorer 和 Routing](https://github.com/domaindrivendev/Swashbuckle.AspNetCore#swashbuckle-apiexplorer-and-routing)。
 
-上述 `UseSwaggerUI` 方法呼叫會啟用[靜態檔案中介軟體](xref:fundamentals/static-files)。 如果以 .NET Framework 或 .NET Core 1.x 為目標，請將 [AspNetCore. StaticFiles](https://www.nuget.org/packages/Microsoft.AspNetCore.StaticFiles/) NuGet 套件新增至專案。
+上述 `UseSwaggerUI` 方法呼叫會啟用[靜態檔案中介軟體](xref:fundamentals/static-files)。 如果以 .NET Framework 或 .NET Core 1.x 為目標，請將 [AspNetCore StaticFiles](https://www.nuget.org/packages/Microsoft.AspNetCore.StaticFiles/) NuGet 套件新增至專案。
 
-啟動應用程式，並巡覽至 `http://localhost:<port>/swagger/v1/swagger.json`。 描述端點的已產生檔隨即出現，如 [OpenAPI 規格中所示 ( # B0) ](xref:tutorials/web-api-help-pages-using-swagger#openapi-specification-openapijson)。
+啟動應用程式，並巡覽至 `http://localhost:<port>/swagger/v1/swagger.json`。 描述端點的已產生檔隨即出現，如 [) 的 OpenAPI 規格 (openapi.js](xref:tutorials/web-api-help-pages-using-swagger#openapi-specification-openapijson)所示。
 
 您可以在 `http://localhost:<port>/swagger` 找到 Swagger UI。 透過 Swagger UI 探索 API，並將其併入其他程式。
 
@@ -187,7 +187,7 @@ XML 註解可以使用下列方式啟用：
 
 ::: moniker range="<= aspnetcore-1.1"
 
-* 以滑鼠右鍵按一下 **方案總管** 中的專案，然後選取 [ **屬性**]。
+* 以滑鼠右鍵按一下 [ **方案瀏覽器** ] 中的專案，然後選取 [ **屬性**]。
 * 在 [**組建**] 索引標籤的 [**輸出**] 區段下，選取 [ **XML 檔** 檔案] 方塊。
 
 ::: moniker-end
@@ -506,4 +506,4 @@ app.UseSwaggerUI(c =>
 
 ## <a name="additional-resources"></a>其他資源
 
-* [Microsoft Learn：使用 Swagger 檔改善 API 的開發人員體驗](/learn/modules/improve-api-developer-experience-with-swagger/)
+* [Microsoft 瞭解：使用 Swagger 檔改善 API 的開發人員體驗](/learn/modules/improve-api-developer-experience-with-swagger/)

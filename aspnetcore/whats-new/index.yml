@@ -6,12 +6,12 @@ metadata:
   description: 深入瞭解 ASP.NET Core 檔中的新內容與更新內容。
   ms.topic: landing-page
   ms.date: 03/04/2021
-  ms.openlocfilehash: 514c66eb130ac2d32ce0c3b9a14f62263d54076d
-  ms.sourcegitcommit: 54fe1ae5e7d068e27376d562183ef9ddc7afc432
+  ms.openlocfilehash: 5982d49321739b637e8a7352145da18c69705c88
+  ms.sourcegitcommit: acfe51c35497a204f75c2a61125c9408c04493e6
   ms.translationtype: MT
   ms.contentlocale: zh-TW
   ms.lasthandoff: 03/10/2021
-  ms.locfileid: "102585704"
+  ms.locfileid: "102605655"
 landingContent:
 - title: 尋找 ASP.NET Core 檔更新
   linkLists:
@@ -62,7 +62,7 @@ landingContent:
     - text: ASP.NET Core 版本資訊
       url: ../release-notes/aspnetcore-3.1.md
     - text: 'C # 編譯器 (Roslyn) 版本資訊'
-      url: https://github.com/dotnet/roslyn/tree/master/docs/ide
+      url: https://github.com/dotnet/roslyn/tree/main/docs/ide
     - text: Visual Studio 版本資訊
       url: /visualstudio/releases/2019/release-notes
     - text: Visual Studio for Mac 版本資訊

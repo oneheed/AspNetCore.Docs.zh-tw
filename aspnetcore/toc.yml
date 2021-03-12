@@ -723,9 +723,9 @@
       displayName: 'signalr, specs'
       items:
         - name: 中樞通訊協定
-          href: 'https://github.com/aspnet/AspNetCore/blob/master/src/SignalR/docs/specs/HubProtocol.md'
+          href: 'https://github.com/aspnet/AspNetCore/blob/main/src/SignalR/docs/specs/HubProtocol.md'
         - name: 傳輸通訊協定
-          href: 'https://github.com/aspnet/AspNetCore/blob/master/src/SignalR/docs/specs/TransportProtocols.md'
+          href: 'https://github.com/aspnet/AspNetCore/blob/main/src/SignalR/docs/specs/TransportProtocols.md'
 - name: 遠端程序呼叫應用程式
   items:
     - name: gRPC 服務簡介
@@ -752,6 +752,8 @@
           uid: grpc/clientfactory
         - name: 期限及取消
           uid: grpc/deadlines-cancellation
+        - name: 暫時性錯誤處理
+          uid: grpc/retries
     - name: 搭配 ASP.NET Core 的 gRPC 服務
       uid: grpc/aspnetcore
     - name: 支援的平台
@@ -1028,7 +1030,7 @@
           href: /visualstudio/containers/vs-azure-tools-docker-hosting-web-apps-in-docker
         - name: 範例 Docker 映像
           displayName: 'deploy, publish, docker'
-          href: 'https://github.com/dotnet/dotnet-docker/blob/master/samples/aspnetapp/README.md'
+          href: 'https://github.com/dotnet/dotnet-docker/blob/main/samples/aspnetapp/README.md'
     - name: Proxy 和負載平衡器設定
       displayName: 'deploy, publish'
       uid: host-and-deploy/proxy-load-balancer
@@ -1418,4 +1420,4 @@
 - name: 應用程式開發介面參考
   href: /dotnet/api/?view=aspnetcore-2.2
 - name: 參與
-  href: 'https://github.com/dotnet/AspNetCore.Docs/blob/master/CONTRIBUTING.md'
+  href: 'https://github.com/dotnet/AspNetCore.Docs/blob/main/CONTRIBUTING.md'

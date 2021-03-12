@@ -1,7 +1,7 @@
 ---
 title: 持續整合和部署-使用 ASP.NET Core 和 Azure DevOps
 author: CamSoper
-description: 使用 ASP.NET Core 和 Azure 的 DevOps 持續整合和部署
+description: 使用 ASP.NET Core 和 Azure DevOps 中的持續整合和部署
 ms.author: scaddie
 ms.date: 10/24/2018
 ms.custom: devx-track-csharp, mvc, seodec18
@@ -18,16 +18,16 @@ no-loc:
 - Razor
 - SignalR
 uid: azure/devops/cicd
-ms.openlocfilehash: 2ac7a130d223b21330d0a797c1d460fc0cf467d7
-ms.sourcegitcommit: 3593c4efa707edeaaceffbfa544f99f41fc62535
+ms.openlocfilehash: 18b2c6ce27132844402f88b2817a07e3588d81c1
+ms.sourcegitcommit: 54fe1ae5e7d068e27376d562183ef9ddc7afc432
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 01/04/2021
-ms.locfileid: "96901206"
+ms.lasthandoff: 03/10/2021
+ms.locfileid: "102586263"
 ---
 # <a name="continuous-integration-and-deployment"></a>持續整合與部署
 
-在上一章中，您已建立簡單摘要讀取器應用程式的本機 Git 存放庫。 在本章中，您會將該程式碼發佈至 GitHub 存放庫，並使用 Azure Pipelines 來建立 Azure DevOps Services 管線。 管線可讓應用程式持續組建和部署。 任何對 GitHub 存放庫的認可都會觸發組建，以及部署至 Azure Web 應用程式的預備位置。
+在上一章中，您已建立簡單摘要讀取器應用程式的本機 Git 存放庫。 在本章中，您會將該程式碼發佈至 GitHub 存放庫，並使用 Azure 管線來建立 Azure DevOps Services 管線。 管線可讓應用程式持續組建和部署。 任何對 GitHub 存放庫的認可都會觸發組建，以及部署至 Azure Web 應用程式的預備位置。
 
 在本節中，您將完成下列工作：
 
@@ -38,7 +38,7 @@ ms.locfileid: "96901206"
 * 建立組建定義
 * 建立發行管線
 * 將變更認可至 GitHub 並自動部署至 Azure
-* 檢查 Azure Pipelines 管線
+* 檢查 Azure 管線管線
 
 ## <a name="publish-the-apps-code-to-github"></a>將應用程式的程式碼發佈至 GitHub
 
@@ -65,43 +65,43 @@ ms.locfileid: "96901206"
 1. 將您的本機 Git 存放庫發佈到新建立的 GitHub 存放庫。 執行以下命令：
 
     ```console
-    git push -u origin master
+    git push -u origin main
     ```
 
 1. 開啟瀏覽器視窗，並流覽至 `https://github.com/<GitHub_username>/simple-feed-reader/` 。 驗證您的程式碼出現在 GitHub 存放庫中。
 
 ## <a name="disconnect-local-git-deployment"></a>中斷本機 Git 部署的連線
 
-使用下列步驟移除本機 Git 部署。 Azure Pipelines (Azure DevOps 服務) 都能取代和擴充該功能。
+使用下列步驟移除本機 Git 部署。  (Azure DevOps 服務的 azure 管線) 都取代並擴充該功能。
 
-1. 開啟 [Azure 入口網站](https://portal.azure.com/)，然後流覽至 *暫存 (mywebapp \<unique_number\> /Staging)* Web 應用程式。 在入口網站的 [搜尋] 方塊中輸入 *預備* 環境，即可快速找出 Web 應用程式：
+1. 開啟 [Azure 入口網站](https://portal.azure.com/)，然後流覽至 *預備環境 (mywebapp \<unique_number\> /Staging)* Web 應用程式。 在入口網站的 [搜尋] 方塊中輸入 *預備* 環境，即可快速找出 Web 應用程式：
 
     ![預備 Web 應用程式搜尋詞彙](media/cicd/portal-search-box.png)
 
 1. 按一下 [ **部署中心**]。 新的面板隨即出現。 按一下 **[中斷連線]** ，移除上一章中新增的本機 Git 原始檔控制設定。 按一下 [ **是]** 按鈕，確認移除操作。
-1. 流覽至 [ *mywebapp<unique_number]>* App Service。 提醒您，入口網站的 [搜尋] 方塊可以用來快速找出 App Service。
+1. 流覽至 *mywebapp<unique_number>* App Service。 提醒您，入口網站的搜尋方塊可以用來快速找出 App Service。
 1. 按一下 [ **部署中心**]。 新的面板隨即出現。 按一下 **[中斷連線]** ，移除上一章中新增的本機 Git 原始檔控制設定。 按一下 [ **是]** 按鈕，確認移除操作。
 
 ## <a name="create-an-azure-devops-organization"></a>建立 Azure DevOps 組織
 
 1. 開啟瀏覽器，然後流覽至 [ [Azure DevOps 組織建立] 頁面](https://go.microsoft.com/fwlink/?LinkId=307137)。
-1. 在 [ **挑選易記名稱** ] 文字方塊中輸入唯一的名稱，以形成存取 Azure DevOps 組織的 URL。
+1. 在 [ **挑選易記名稱** ] 文字方塊中輸入唯一的名稱，以形成用來存取 Azure DevOps 組織的 URL。
 1. 選取 **Git** 選項按鈕，因為程式碼裝載于 GitHub 存放庫中。
 1. 按一下 [繼續] 按鈕。 短暫等候之後，就會建立名為 *MyFirstProject* 的帳戶和 team 專案。
 
     ![Azure DevOps 組織建立頁面](media/cicd/vsts-account-creation.png)
 
-1. 開啟確認電子郵件，指出 Azure DevOps 的組織和專案已準備好可供使用。 按一下 [ **啟動您的專案** ] 按鈕：
+1. 開啟確認電子郵件，指出 Azure DevOps 組織和專案已準備好可供使用。 按一下 [ **啟動您的專案** ] 按鈕：
 
     ![啟動專案按鈕](media/cicd/vsts-start-project.png)
 
 1. 瀏覽器會開啟 *\<account_name\> visualstudio.com*。 按一下 [ *MyFirstProject* ] 連結，開始設定專案的 DevOps 管線。
 
-## <a name="configure-the-azure-pipelines-pipeline"></a>設定 Azure Pipelines 管線
+## <a name="configure-the-azure-pipelines-pipeline"></a>設定 Azure 管線管線
 
 完成三個不同的步驟。 完成下列三個區段中的步驟，會導致操作 DevOps 管線。
 
-### <a name="grant-azure-devops-access-to-the-github-repository"></a>授與 GitHub 存放庫 Azure DevOps 存取權
+### <a name="grant-azure-devops-access-to-the-github-repository"></a>將 GitHub 存放庫的存取權授與 Azure DevOps
 
 1. 從外部存放庫的 [可折疊] 展開 **或建立程式碼** 。 按一下 [ **安裝組建** ] 按鈕：
 
@@ -111,24 +111,24 @@ ms.locfileid: "96901206"
 
     ![選取來源-GitHub](media/cicd/vsts-select-source.png)
 
-1. Azure DevOps 可以存取您的 GitHub 存放庫之前，需要授權。 在 [連線 **名稱**] 文字方塊中，輸入 *<GitHub_username> GitHub 連接*。 例如：
+1. 需要授權，Azure DevOps 才能存取您的 GitHub 存放庫。 在 [連線 **名稱**] 文字方塊中，輸入 *<GitHub_username> GitHub 連接*。 例如：
 
     ![GitHub 連接名稱](media/cicd/vsts-repo-authz.png)
 
 1. 如果您的 GitHub 帳戶已啟用雙因素驗證，則需要個人存取權杖。 在此情況下，請按一下 [ **使用 GitHub 個人存取權杖的授權** ] 連結。 如需協助，請參閱 [官方 GitHub 個人存取權杖的建立指示](https://help.github.com/articles/creating-a-personal-access-token-for-the-command-line/) 。 只需要許可權的存放 *庫範圍。* 否則，請按一下 [ **使用 OAuth 授權** ] 按鈕。
-1. 出現提示時，請登入您的 GitHub 帳戶。 然後選取 [授權]，將存取權授與您的 Azure DevOps 組織。 如果成功，就會建立新的服務端點。
+1. 出現提示時，請登入您的 GitHub 帳戶。 然後選取 [授權]，以授與 Azure DevOps 組織的存取權。 如果成功，就會建立新的服務端點。
 1. 按一下 [存放 **庫** ] 按鈕旁的省略號按鈕。 從清單中選取 *<GitHub_username>/simple-feed-reader* 存放庫。 按一下 [選取] 按鈕。
-1. 從 [**手動和排程的組建**] 下拉式清單中，選取預設分支 (*主*) 。 按一下 [繼續] 按鈕。 [範本選取] 頁面隨即出現。
+1. 從 [**手動和排程的組建**] 下拉式清單中，選取預設分支 (*主要*) 。 按一下 [繼續] 按鈕。 [範本選取] 頁面隨即出現。
 
 ### <a name="create-the-build-definition"></a>建立組建定義
 
 1. 在 [範本選擇] 頁面的 [搜尋] 方塊中，輸入 *ASP.NET Core* ：
 
-    ![在範本頁面上 ASP.NET Core 搜尋](media/cicd/vsts-template-selection.png)
+    ![在範本頁面上 ASP.NET 核心搜尋](media/cicd/vsts-template-selection.png)
 
 1. 範本搜尋結果隨即出現。 將滑鼠停留在 **ASP.NET Core** 範本上方，然後按一下 [套用 **] 按鈕。**
 1. 組建 **定義的 [工作]** 索引標籤隨即出現。 按一下 [ **觸發** 程式] 索引標籤。
-1. 勾選 [ **啟用持續整合** ] 方塊。 在 [ **分支篩選** ] 區段下，確認 [ **類型** ] 下拉式清單已設定為 [ *包含*]。 將 [ **分支規格** ] 下拉式清單設定為 [ *master*]。
+1. 勾選 [ **啟用持續整合** ] 方塊。 在 [ **分支篩選** ] 區段下，確認 [ **類型** ] 下拉式清單已設定為 [ *包含*]。 將 [ **分支規格** ] 下拉式清單設定為 [ *主要*]。
 
     ![啟用持續整合設定](media/cicd/vsts-enable-ci.png)
 
@@ -156,7 +156,7 @@ ms.locfileid: "96901206"
 
     ![發行管線範本搜尋方塊](media/cicd/vsts-release-template-search.png)
 
-1. 範本搜尋結果隨即出現。 將滑鼠停留在 [使用位置範本的 **Azure App Service 部署**] 上方，然後按一下 [套用 **] 按鈕。** 發行管線的 [ **管線** ] 索引標籤隨即出現。
+1. 範本搜尋結果隨即出現。 將滑鼠停留在具有位置範本的 **Azure App Service 部署** 上，然後按一下 [套用 **] 按鈕。** 發行管線的 [ **管線** ] 索引標籤隨即出現。
 
     ![發行管線管線索引標籤](media/cicd/vsts-release-definition-pipeline.png)
 
@@ -176,7 +176,7 @@ ms.locfileid: "96901206"
 
     啟用此選項後，每次有新的組建時，就會進行部署。
 1. [ **持續部署觸發** 程式] 面板會顯示在右側。 按一下切換按鈕以啟用此功能。 不需要啟用 **提取要求觸發** 程式。
-1. 在 [**組建分支篩選**] 區段中，按一下 [**新增**] 下拉式清單。 選擇 [ **組建定義** ] 的 [預設分支] 選項。 此篩選器只會對 GitHub 存放庫預設分支中的組建（ (*主要*) ）觸發發行。
+1. 在 [**組建分支篩選**] 區段中，按一下 [**新增**] 下拉式清單。 選擇 [ **組建定義** ] 的 [預設分支] 選項。 此篩選器只會對 GitHub 存放庫預設分支中的組建觸發發行， (*主要*) 。
 1. 按一下 [儲存]  按鈕。 在產生的 [**儲存** 模式] 對話方塊中，按一下 [**確定]** 按鈕。
 1. 按一下 [ **環境 1** ] 方塊。 **環境** 面板會顯示在右側。 將 [**環境名稱**] 文字方塊中的 *環境 1* 文字變更為 [*生產*]。
 
@@ -187,8 +187,8 @@ ms.locfileid: "96901206"
     ![發行管線-生產環境 link.png](media/cicd/vsts-production-link.png)
 
     環境的 **[工作]** 索引標籤隨即出現。
-1. 按一下 [將 **Azure App Service 部署到** 位置] 工作。 其設定會出現在右側面板中。
-1. 從 [ **azure 訂** 用帳戶] 下拉式清單中選取與 App Service 相關聯的 azure 訂用帳戶。 一旦選取之後，請按一下 [ **授權** ] 按鈕。
+1. 按一下 [將 **Azure App Service 部署至插槽** ] 工作。 其設定會出現在右側面板中。
+1. 從 [ **azure 訂** 用帳戶] 下拉式清單中，選取與 App Service 相關聯的 azure 訂用帳戶。 一旦選取之後，請按一下 [ **授權** ] 按鈕。
 1. 從 [**應用程式類型**] 下拉式清單中選取 [ *Web 應用程式*]。
 1. 從 [**應用程式服務名稱**] 下拉式清單中，選取 [ *mywebapp]/[<] unique_number/>* 。
 1. 從 [**資源群組**] 下拉式清單中選取 [ *AzureTutorial* ]。
@@ -203,29 +203,29 @@ ms.locfileid: "96901206"
 ## <a name="commit-changes-to-github-and-automatically-deploy-to-azure"></a>將變更認可至 GitHub 並自動部署至 Azure
 
 1. 在 Visual Studio 中開啟 *SimpleFeedReader .sln* 。
-1. 在方案總管中，開啟 *Pages\Index.cshtml*。 將 `<h2>Simple Feed Reader - V3</h2>` 變更為 `<h2>Simple Feed Reader - V4</h2>`。
+1. 在 [方案 Explorer] 中，開啟 *Pages\Index.cshtml*。 將 `<h2>Simple Feed Reader - V3</h2>` 變更為 `<h2>Simple Feed Reader - V4</h2>`。
 1. 按 **Ctrl** + **Shift** + **B** 來建立應用程式。
-1. 將檔案認可至 GitHub 存放庫。 使用 Visual Studio 的 *Team Explorer* ] 索引標籤中的 [**變更**] 頁面，或使用本機電腦的命令 shell 來執行下列命令：
+1. 將檔案認可至 GitHub 存放庫。 使用 Visual Studio *Team Explorer* 索引標籤中的 [**變更**] 頁面，或使用本機電腦的命令 shell 來執行下列命令：
 
     ```console
     git commit -a -m "upgraded to V4"
     ```
 
-1. 將預設分支 (*主要*) 中的變更推送至 GitHub 存放庫的 *原始* 遠端。 在下列命令中，將預留位置取代 `{BRANCH}` 為預設分支 (使用 `master`) ：
+1. 將預設分支 (*主要*) 中的變更推送至 GitHub 存放庫的 *原始* 遠端。 在下列命令中，將預留位置取代 `{BRANCH}` 為預設分支 (使用 `main`) ：
 
     ```console
     git push origin {BRANCH}
     ```
 
-    認可會出現在 GitHub 存放庫的預設分支 (*主要*) ：
+    認可會出現在 GitHub 存放庫的預設分支中 (*主要*) ：
 
-    ![預設分支中的 GitHub 認可 (master) ](media/cicd/github-commit.png)
+    ![預設分支中的 GitHub 認可 (主要) ](media/cicd/github-commit.png)
 
     因為已在組建定義的 [ **觸發** 程式] 索引標籤中啟用連續整合，所以會觸發組建：
 
     ![啟用持續整合](media/cicd/enable-ci.png)
 
-1. 在 Azure DevOps Services 中，流覽至 [ **Azure Pipelines** 組建] 頁面的 [已 **佇列**] 索引標籤  >   。 已排入佇列的組建會顯示觸發組建的分支和認可：
+1. 流覽至 azure DevOps Services 中 [ **azure 管線** 組建] 頁面的 [已 **佇列**] 索引標籤  >   。 已排入佇列的組建會顯示觸發組建的分支和認可：
 
     ![排入佇列的組建](media/cicd/build-queued.png)
 
@@ -233,7 +233,7 @@ ms.locfileid: "96901206"
 
     ![更新的應用程式](media/cicd/updated-app-v4.png)
 
-## <a name="examine-the-azure-pipelines-pipeline"></a>檢查 Azure Pipelines 管線
+## <a name="examine-the-azure-pipelines-pipeline"></a>檢查 Azure 管線管線
 
 ### <a name="build-definition"></a>組建定義
 
@@ -281,7 +281,7 @@ ms.locfileid: "96901206"
 
 ![顯示發行管線工作的螢幕擷取畫面](media/cicd/release-definition-tasks.png)
 
-發行管線包含兩項工作： *將 Azure App Service 部署至插槽* ，以及 *管理 Azure App Service 位置交換*。 按一下第一項工作會顯示下列工作設定：
+發行管線包含兩項工作： *將 Azure App Service 部署至插槽* ，以及 *管理 azure app Service-位置交換*。 按一下第一項工作會顯示下列工作設定：
 
 ![顯示發行管線部署工作的螢幕擷取畫面](media/cicd/release-definition-task1.png)
 
@@ -297,4 +297,4 @@ Azure 訂用帳戶、服務類型、web 應用程式名稱、資源群組和部�
 
 * [使用 Azure Pipelines 建立您的第一個管線](/azure/devops/pipelines/get-started-yaml)
 * [組建和 .NET Core 專案](/azure/devops/pipelines/languages/dotnet-core)
-* [使用 Azure Pipelines 部署 web 應用程式](/azure/devops/pipelines/targets/webapp)
+* [使用 Azure 管線部署 web 應用程式](/azure/devops/pipelines/targets/webapp)

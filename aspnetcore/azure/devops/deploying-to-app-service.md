@@ -1,7 +1,7 @@
 ---
 title: 使用 ASP.NET Core 和 Azure 將應用程式部署至 App Service-DevOps
 author: CamSoper
-description: 將 ASP.NET Core 應用程式部署到 Azure App Service，這是使用 ASP.NET Core 和 Azure DevOps 的第一個步驟。
+description: 將 ASP.NET Core 應用程式部署至 Azure App Service，這是使用 ASP.NET Core 和 Azure DevOps 的第一個步驟。
 ms.author: casoper
 ms.custom: devx-track-csharp, mvc, seodec18, devx-track-azurecli
 ms.date: 10/24/2018
@@ -18,16 +18,16 @@ no-loc:
 - Razor
 - SignalR
 uid: azure/devops/deploy-to-app-service
-ms.openlocfilehash: f1c7acba0b7fb7dc07da576b188e580328ff4b89
-ms.sourcegitcommit: 3593c4efa707edeaaceffbfa544f99f41fc62535
+ms.openlocfilehash: 6d82611eb2176126652d0d6c8db3779cde70dab5
+ms.sourcegitcommit: 54fe1ae5e7d068e27376d562183ef9ddc7afc432
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 01/04/2021
-ms.locfileid: "96901154"
+ms.lasthandoff: 03/10/2021
+ms.locfileid: "102586237"
 ---
 # <a name="deploy-an-app-to-app-service"></a>將應用程式部署至 App Service
 
-[Azure App Service](/azure/app-service/) 是 Azure 的 web 裝載平臺。 將 web 應用程式部署至 Azure App Service 可以手動方式或透過自動化程式來完成。 本指南的這一節會討論可以用手動方式或使用命令列的腳本觸發的部署方法，或是使用 Visual Studio 手動觸發的部署方法。
+[Azure App Service](/azure/app-service/) 是 azure 的 web 裝載平臺。 將 web 應用程式部署至 Azure App Service 可以手動方式或透過自動化程式來完成。 本指南的這一節會討論可以用手動方式或使用命令列的腳本觸發的部署方法，或使用 Visual Studio 手動觸發的部署方法。
 
 在本節中，您將完成下列工作：
 
@@ -41,7 +41,7 @@ ms.locfileid: "96901154"
 
 ## <a name="download-and-test-the-app"></a>下載並測試應用程式
 
-本指南中使用的應用程式是預先建立的 ASP.NET Core 應用程式、簡單的摘要 [讀取器](https://github.com/Azure-Samples/simple-feed-reader/)。 這是 Razor 頁面應用程式，會使用 `Microsoft.SyndicationFeed.ReaderWriter` API 來抓取 RSS/Atom 摘要，並在清單中顯示新聞專案。
+本指南中使用的應用程式是預先建立的 ASP.NET Core 應用程式，也就是簡單的摘要 [讀取](https://github.com/Azure-Samples/simple-feed-reader/)程式。 這是 Razor 頁面應用程式，會使用 `Microsoft.SyndicationFeed.ReaderWriter` API 來抓取 RSS/Atom 摘要，並在清單中顯示新聞專案。
 
 您可以隨意查看程式碼，但請務必瞭解此應用程式並沒有任何特殊之處。 這只是一個簡單的 ASP.NET Core 應用程式，以供說明之用。
 
@@ -141,35 +141,35 @@ ms.locfileid: "96901154"
     git remote add azure-prod GIT_DEPLOYMENT_URL
     ```
 
-    b. 將本機預設分支 (*主要*) 推送至 *azure 生產* 遠端的預設分支 (*主*) 。
+    b. 將本機預設分支 (*主要*) 推送至 *azure 生產* 遠端的預設分支 (*主要*) 。
 
     ```console
-    git push azure-prod master
+    git push azure-prod main
     ```
 
-    系統會提示您輸入稍早建立的部署認證。 觀察命令 shell 中的輸出。 Azure 會從遠端建立 ASP.NET Core 應用程式。
+    系統會提示您輸入稍早建立的部署認證。 觀察命令 shell 中的輸出。 Azure 會從遠端組建 ASP.NET Core 應用程式。
 
 4. 在瀏覽器中，流覽至 *Web 應用程式 URL* ，並注意已建立並部署應用程式。 您可以使用將其他變更認可至本機 Git 存放庫 `git commit` 。 使用上述命令將這些變更推送至 Azure `git push` 。
 
-## <a name="deployment-with-visual-studio"></a>使用 Visual Studio 部署
+## <a name="deployment-with-visual-studio"></a>使用 Visual Studio 進行部署
 
 > *注意：本節僅適用于 Windows。Linux 和 macOS 使用者應該進行下列步驟2所述的變更。儲存檔案，並使用將變更認可至本機存放庫 `git commit` 。最後，將變更推送至 `git push` ，如第一節所示。*
 
-應用程式已從命令 shell 部署。 讓我們使用 Visual Studio 的整合式工具，將更新部署到應用程式。 在幕後，Visual Studio 完成與命令列工具相同的工作，但是在 Visual Studio 的熟悉 UI 內。
+應用程式已從命令 shell 部署。 讓我們使用 Visual Studio 的整合式工具來部署應用程式的更新。 Visual Studio 會在幕後完成與命令列工具相同的作業，但會在 Visual Studio 熟悉的 UI 中完成。
 
 1. 在 Visual Studio 中開啟 *SimpleFeedReader .sln* 。
-2. 在方案總管中，開啟 *Pages\Index.cshtml*。 將 `<h2>Simple Feed Reader</h2>` 變更為 `<h2>Simple Feed Reader - V2</h2>`。
+2. 在 [方案 Explorer] 中，開啟 *Pages\Index.cshtml*。 將 `<h2>Simple Feed Reader</h2>` 變更為 `<h2>Simple Feed Reader - V2</h2>`。
 3. 按 **Ctrl** + **Shift** + **B** 來建立應用程式。
-4. 在方案總管中，以滑鼠右鍵按一下專案，然後按一下 [ **發佈**]。
+4. 在 [方案 Explorer] 中，以滑鼠右鍵按一下專案，然後按一下 [ **發行**]。
 
     ![顯示以滑鼠右鍵按一下、發佈的螢幕擷取畫面](./media/deploying-to-app-service/publish.png)
-5. Visual Studio 可以建立新的 App Service 資源，但此更新將會透過現有的部署發行。 在 [ **挑選發行目標** ] 對話方塊中，從左側清單中選取 **App Service** ，然後選取 [ **選取現有** 的]。 按一下 [發佈] 。
-6. 在 [ **App Service** ] 對話方塊中，確認用來建立 Azure 訂用帳戶的 Microsoft 或組織帳戶顯示在右上角。 如果不是，請按一下下拉式清單並加以新增。
-7. 確認已選取正確的 Azure **訂** 用帳戶。 若要 **查看**，請選取 **資源群組**。 展開 **AzureTutorial** 資源群組，然後選取現有的 web 應用程式。 按一下 [確定]。
+5. Visual Studio 可以建立新的 App Service 資源，但此更新將會透過現有的部署發行。 在 [ **挑選發佈目標** ] 對話方塊中，從左側清單中選取 [ **App Service** ]，然後選取 [ **選取現有** 的]。 按一下 [發佈] 。
+6. 在 [ **App Service** ] 對話方塊中，確認用來建立 Azure 訂用帳戶的 Microsoft 或組織帳戶會顯示在右上角。 如果不是，請按一下下拉式清單並加以新增。
+7. 確認已選取正確的 Azure **訂** 用帳戶。 若要 **查看**，請選取 **資源群組**。 展開 **AzureTutorial** 資源群組，然後選取現有的 web 應用程式。 按一下 [確定]  。
 
     ![顯示 [發佈 App Service] 對話方塊的螢幕擷取畫面](./media/deploying-to-app-service/publish-dialog.png)
 
-Visual Studio 建立應用程式，並將其部署到 Azure。 流覽至 web 應用程式 URL。 驗證 `<h2>` 元素修改是否為即時。
+Visual Studio 會建立應用程式，並將其部署到 Azure。 流覽至 web 應用程式 URL。 驗證 `<h2>` 元素修改是否為即時。
 
 ![具有已變更標題的應用程式](./media/deploying-to-app-service/app-v2.png)
 
@@ -177,7 +177,7 @@ Visual Studio 建立應用程式，並將其部署到 Azure。 流覽至 web 應
 
 部署位置支援暫存變更，而不會影響在生產環境中執行的應用程式。 當品質保證小組驗證應用程式的預備版本後，就可以交換生產和預備位置。 以這種方式將預備環境中的應用程式升級至生產環境。 下列步驟會建立預備位置、對其部署一些變更，並在驗證之後將預備位置交換到生產環境。
 
-1. 登入 [Azure Cloud Shell](https://shell.azure.com/bash)（如果尚未登入）。
+1. 如果尚未登入 [Azure Cloud Shell](https://shell.azure.com/bash)，請先登入。
 2. 建立預備位置。
 
     a. 建立具有名稱 *暫存* 的部署位置。
@@ -198,9 +198,9 @@ Visual Studio 建立應用程式，並將其部署到 Azure。 流覽至 web 應
     echo Staging web app URL: http://$webappname-staging.azurewebsites.net
     ```
 
-3. 在文字編輯器或 Visual Studio 中，再次修改 *Pages/Index. cshtml* ，讓 `<h2>` 元素讀取 `<h2>Simple Feed Reader - V3</h2>` 和儲存檔案。
+3. 在文字編輯器或 Visual Studio 中，再次修改 *Pages/Index. cshtml* ，讓 `<h2>` 元素讀取 `<h2>Simple Feed Reader - V3</h2>` 並儲存檔案。
 
-4. 使用 Visual Studio 的 *Team Explorer* ] 索引標籤中的 [**變更**] 頁面，或使用本機電腦的命令 shell 輸入下列命令，將檔案認可至本機 Git 存放庫：
+4. 使用 Visual Studio *Team Explorer* 索引標籤中的 [**變更**] 頁面，或使用本機電腦的命令 shell 輸入下列命令，將檔案認可至本機 Git 存放庫：
 
     ```console
     git commit -a -m "upgraded to V3"
@@ -214,10 +214,10 @@ Visual Studio 建立應用程式，並將其部署到 Azure。 流覽至 web 應
     git remote add azure-staging <Git_staging_deployment_URL>
     ```
 
-    b. 將本機預設分支 (*主要*) 推送至 *azure 預備* 環境的遠端預設分支 (*主*) 。
+    b. 將本機預設分支 (*主要*) 推送至 *azure 暫存* 的遠端預設分支 (*主要*) 。
 
     ```console
-    git push azure-staging master
+    git push azure-staging main
     ```
 
     等候 Azure 建立及部署應用程式。
@@ -248,7 +248,7 @@ Visual Studio 建立應用程式，並將其部署到 Azure。 流覽至 web 應
 * 已將更新部署至預備位置。
 * 交換預備和生產位置。
 
-在下一節中，您將瞭解如何使用 Azure Pipelines 建立 DevOps 管線。
+在下一節中，您將瞭解如何使用 Azure 管線建立 DevOps 管線。
 
 ## <a name="additional-reading"></a>延伸閱讀
 

@@ -1,5 +1,5 @@
 ---
-title: ASP.NET Core 中的回應快取
+title: ASP.NET 核心中的回應快取
 author: rick-anderson
 description: 了解如何使用回應快取來降低頻寬需求，並提升 ASP.NET Core 應用程式的效能。
 monikerRange: '>= aspnetcore-2.1'
@@ -18,18 +18,18 @@ no-loc:
 - Razor
 - SignalR
 uid: performance/caching/response
-ms.openlocfilehash: 2864de5b9931ed255569cb087c67c71004c4df92
-ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
+ms.openlocfilehash: 539ddb118279adb3a53394cdb0c2e5169092ebc0
+ms.sourcegitcommit: 54fe1ae5e7d068e27376d562183ef9ddc7afc432
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 10/30/2020
-ms.locfileid: "93059009"
+ms.lasthandoff: 03/10/2021
+ms.locfileid: "102589227"
 ---
-# <a name="response-caching-in-aspnet-core"></a>ASP.NET Core 中的回應快取
+# <a name="response-caching-in-aspnet-core"></a>ASP.NET 核心中的回應快取
 
 [John Luo](https://github.com/JunTaoLuo)、 [Rick Anderson](https://twitter.com/RickAndMSFT)和[Steve Smith](https://ardalis.com/)
 
-[查看或下載範例程式碼](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/performance/caching/response/samples) ([如何下載](xref:index#how-to-download-a-sample)) 
+[查看或下載範例程式碼](https://github.com/dotnet/AspNetCore.Docs/tree/main/aspnetcore/performance/caching/response/samples) ([如何下載](xref:index#how-to-download-a-sample)) 
 
 回應快取可減少用戶端或 proxy 對 web 伺服器發出的要求數目。 回應快取也會減少 web 伺服器產生回應所執行的工作量。 回應快取是由標頭所控制，這些標頭會指定您希望用戶端、proxy 和中介軟體快取回應的方式。
 
@@ -48,8 +48,8 @@ ms.locfileid: "93059009"
 | [public](https://tools.ietf.org/html/rfc7234#section-5.2.2.5)   | 快取可以儲存回應。 |
 | [私人](https://tools.ietf.org/html/rfc7234#section-5.2.2.6)  | 共用快取不得儲存回應。 私用快取可能會儲存並重複使用回應。 |
 | [最大壽命](https://tools.ietf.org/html/rfc7234#section-5.2.1.1)  | 用戶端不會接受其存留期大於指定秒數的回應。 範例： `max-age=60` (60 秒) ， `max-age=2592000` (1 個月)  |
-| [no-cache](https://tools.ietf.org/html/rfc7234#section-5.2.1.4) | **在要求上** ：快取不能使用預存回應來滿足要求。 源伺服器會重新產生用戶端的回應，中介軟體會更新其快取中的預存回應。<br><br>**回應時** ：回應不得用於後續要求，而不需要在源伺服器上進行驗證。 |
-| [無存放區](https://tools.ietf.org/html/rfc7234#section-5.2.1.5) | **要求時** ：快取不得儲存要求。<br><br>**回應時** ：快取不得儲存回應的任何部分。 |
+| [no-cache](https://tools.ietf.org/html/rfc7234#section-5.2.1.4) | **在要求上**：快取不能使用預存回應來滿足要求。 源伺服器會重新產生用戶端的回應，中介軟體會更新其快取中的預存回應。<br><br>**回應時**：回應不得用於後續要求，而不需要在源伺服器上進行驗證。 |
+| [無存放區](https://tools.ietf.org/html/rfc7234#section-5.2.1.5) | **要求時**：快取不得儲存要求。<br><br>**回應時**：快取不得儲存回應的任何部分。 |
 
 下表顯示在快取中扮演角色的其他快取標頭。
 
@@ -72,7 +72,7 @@ ms.locfileid: "93059009"
 
 ### <a name="in-memory-caching"></a>記憶體內部快取
 
-記憶體中的快取會使用伺服器記憶體來儲存快取的資料。 這種類型的快取適用于單一伺服器或使用「 *粘滯話* 」的多部伺服器。 「粘滯話」表示來自用戶端的要求一律會路由傳送至相同的伺服器進行處理。
+記憶體中的快取會使用伺服器記憶體來儲存快取的資料。 這種類型的快取適用于單一伺服器或使用「 *粘滯話*」的多部伺服器。 「粘滯話」表示來自用戶端的要求一律會路由傳送至相同的伺服器進行處理。
 
 如需詳細資訊，請參閱<xref:performance/caching/memory>。
 
@@ -211,7 +211,7 @@ Cache-Control: public,max-age=30
 ## <a name="additional-resources"></a>其他資源
 
 * [在快取中儲存回應](https://tools.ietf.org/html/rfc7234#section-3)
-* [快取-控制項](https://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.9)
+* [Cache-Control](https://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.9)
 * <xref:performance/caching/memory>
 * <xref:performance/caching/distributed>
 * <xref:fundamentals/change-tokens>

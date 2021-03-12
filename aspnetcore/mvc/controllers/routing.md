@@ -17,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: mvc/controllers/routing
-ms.openlocfilehash: 0863b5758f33b720636f3b927fcb9014cd106c21
-ms.sourcegitcommit: 7e394a8527c9818caebb940f692ae4fcf2f1b277
+ms.openlocfilehash: c90ac92cf0866b78bcdb11663e76c116d714ca5d
+ms.sourcegitcommit: 54fe1ae5e7d068e27376d562183ef9ddc7afc432
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 01/31/2021
-ms.locfileid: "99217540"
+ms.lasthandoff: 03/10/2021
+ms.locfileid: "102589058"
 ---
 # <a name="routing-to-controller-actions-in-aspnet-core"></a>ASP.NET Core 中的路由至控制器動作
 
@@ -30,7 +30,7 @@ ms.locfileid: "99217540"
 
 ::: moniker range=">= aspnetcore-3.0"
 
-ASP.NET Core 控制器會使用路由 [中介軟體](xref:fundamentals/middleware/index) 來比對連入要求的 url，並將其對應至 [動作](#action)。  路由範本：
+ASP.NET 核心控制器會使用路由 [中介軟體](xref:fundamentals/middleware/index) 來比對傳入要求的 url，並將其對應至 [動作](#action)。  路由範本：
 
 * 會在啟動程式碼或屬性中定義。
 * 描述如何將 URL 路徑與 [動作](#action)進行比對。
@@ -46,7 +46,7 @@ ASP.NET Core 控制器會使用路由 [中介軟體](xref:fundamentals/middlewar
     * 一般[路由](#cr)通常會搭配控制器和視圖使用。
     * 搭配 REST Api 使用的 *屬性路由*。 如果您主要對 REST Api 的路由有興趣，請跳至 [Rest api 的屬性路由](#ar) 區段。
   * 請參閱 [路由](xref:fundamentals/routing) 以取得 advanced routing 詳細資料。
-* 是指在 ASP.NET Core 3.0 （稱為端點路由）中新增的預設路由系統。 基於相容性的目的，您可以針對舊版路由使用控制器。 如需相關指示，請參閱 [2.2-3.0 的遷移指南](xref:migration/22-to-30) 。 請參閱 [本檔的2.2 版本](xref:mvc/controllers/routing?view=aspnetcore-2.2) ，以取得舊版路由系統上的參考資料。
+* 指的是 ASP.NET Core 3.0 中新增的預設路由系統，稱為端點路由。 基於相容性的目的，您可以針對舊版路由使用控制器。 如需相關指示，請參閱 [2.2-3.0 的遷移指南](xref:migration/22-to-30) 。 請參閱 [本檔的2.2 版本](xref:mvc/controllers/routing?view=aspnetcore-2.2) ，以取得舊版路由系統上的參考資料。
 
 <a name="cr"></a>
 
@@ -272,7 +272,7 @@ ASP.NET Core 3.0 和更新版本中的端點路由：
 
 REST Api 應該使用屬性路由，將應用程式的功能模型為一組資源，其中的作業會以 [HTTP 指令動詞](#verb)表示。
 
-屬性路由使用一組屬性，將動作直接對應至路由範本。 下列 `StartUp.Configure` 程式碼一般適用于 REST API，並在下一個範例中使用：
+屬性路由使用一組屬性，將動作直接對應至路由範本。 下列程式 `StartUp.Configure` 代碼一般適用于 REST API，並在下一個範例中使用：
 
 [!code-csharp[](routing/samples/3.x/main/StartupAPI.cs?name=snippet)]
 
@@ -435,7 +435,7 @@ REST Api 應該使用屬性路由，將應用程式的功能模型為一組資�
 | `[Route("")]` | 是 | `"Home"` |
 | `[Route("Index")]` | 是 | `"Home/Index"` |
 | `[Route("/")]` | **否** | `""` |
-| `[Route("About")]` | 是 | `"Home/About"` |
+| `[Route("About")]` | Yes | `"Home/About"` |
 
 <a name="routing-ordering-ref-label"></a>
 <a name="oar"></a>
@@ -642,7 +642,7 @@ AmbiguousMatchException: The request matched multiple endpoints. Matches:
 
 ## <a name="mixed-routing-attribute-routing-vs-conventional-routing"></a>混合路由：屬性路由與慣例路由
 
-ASP.NET Core apps 可以混用傳統路由和屬性路由。 控制器通常會使用慣例路由來提供 HTML 頁面給瀏覽器，並使用屬性路由來提供 REST API。
+ASP.NET Core 應用程式可以混合使用傳統路由和屬性路由。 控制器通常會使用慣例路由來提供 HTML 頁面給瀏覽器，並使用屬性路由來提供 REST API。
 
 動作可以使用慣例路由或屬性路由。 將路由放在控制器或動作上，即可讓它使用屬性路由。 定義屬性路由的動作無法透過慣例路由到達，反之亦然。 控制器上的 **任何** 路由屬性都會路由傳送控制器屬性中的 **所有** 動作。
 
@@ -692,7 +692,7 @@ result: /UrlGeneration/Destination
 
 `Source`上述程式碼中的動作會產生 `custom/url/to/destination` 。
 
-<xref:Microsoft.AspNetCore.Routing.LinkGenerator> 已在 ASP.NET Core 3.0 中新增為的替代方案 `IUrlHelper` 。 `LinkGenerator` 提供類似但更有彈性的功能。 上的每個方法 `IUrlHelper` 也都有對應的方法系列 `LinkGenerator` 。
+<xref:Microsoft.AspNetCore.Routing.LinkGenerator> 已新增至 ASP.NET Core 3.0 作為的替代方案 `IUrlHelper` 。 `LinkGenerator` 提供類似但更有彈性的功能。 上的每個方法 `IUrlHelper` 也都有對應的方法系列 `LinkGenerator` 。
 
 ### <a name="generating-urls-by-action-name"></a>由動作名稱產生 URL
 
@@ -757,7 +757,7 @@ Url 的數個多載[。 Action](xref:Microsoft.AspNetCore.Mvc.IUrlHelper.Action*
 
 <a name="routing-gen-urls-html-ref-label"></a>
 
-### <a name="generate-urls-in-html-and-no-locrazor"></a>在 HTML 和中產生 Url Razor
+### <a name="generate-urls-in-html-and-razor"></a>在 HTML 和中產生 Url Razor
 
 <xref:Microsoft.AspNetCore.Mvc.Rendering.IHtmlHelper> 提供 <xref:Microsoft.AspNetCore.Mvc.ViewFeatures.HtmlHelper> [Html.beginform](xref:Microsoft.AspNetCore.Mvc.Rendering.IHtmlHelper.BeginForm*) 和 [.html](xref:Microsoft.AspNetCore.Mvc.Rendering.IHtmlHelper.ActionLink*) `<form>` 分別產生和元素的方法 `<a>` 。 這些方法會使用 [url. Action](xref:Microsoft.AspNetCore.Mvc.IUrlHelper.Action*) 方法來產生 url，並接受類似的引數。 `HtmlHelper` 的成對 `Url.RouteUrl` 為 `Html.BeginRouteForm` 和 `Html.RouteLink`，這兩者的功能很類似。
 
@@ -853,7 +853,7 @@ TagHelper 透過 `form` TagHelper 和 `<a>` TagHelper 產生 URL。 這兩者使
 ## <a name="sample-code"></a>範例程式碼
 
 * [!INCLUDE[](~/includes/MyDisplayRouteInfo.md)]
-* [查看或下載範例程式碼](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/mvc/controllers/routing/samples/3.x) ([如何下載](xref:index#how-to-download-a-sample)) 
+* [查看或下載範例程式碼](https://github.com/dotnet/AspNetCore.Docs/tree/main/aspnetcore/mvc/controllers/routing/samples/3.x) ([如何下載](xref:index#how-to-download-a-sample)) 
 
 [!INCLUDE[](~/includes/dbg-route.md)]
 

@@ -18,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: fundamentals/change-tokens
-ms.openlocfilehash: f20d44c7767b284f727ce19a46224dae0cf6a5e1
-ms.sourcegitcommit: 3593c4efa707edeaaceffbfa544f99f41fc62535
+ms.openlocfilehash: df2be1b89ad9681ff70dd71cb3026786f59c8b2a
+ms.sourcegitcommit: 54fe1ae5e7d068e27376d562183ef9ddc7afc432
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 01/04/2021
-ms.locfileid: "93053770"
+ms.lasthandoff: 03/10/2021
+ms.locfileid: "102589383"
 ---
 # <a name="detect-changes-with-change-tokens-in-aspnet-core"></a>在 ASP.NET Core 中使用變更權杖來偵測變更
 
@@ -31,11 +31,11 @@ ms.locfileid: "93053770"
 
 「變更權杖」是用來追蹤狀態變更的一般用途低階建置組塊。
 
-[查看或下載範例程式碼](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/change-tokens/samples/) ([如何下載](xref:index#how-to-download-a-sample)) 
+[查看或下載範例程式碼](https://github.com/dotnet/AspNetCore.Docs/tree/main/aspnetcore/fundamentals/change-tokens/samples/) ([如何下載](xref:index#how-to-download-a-sample)) 
 
 ## <a name="ichangetoken-interface"></a>IChangeToken 介面
 
-<xref:Microsoft.Extensions.Primitives.IChangeToken> 會傳播已發生變更的通知。 `IChangeToken` 位於 <xref:Microsoft.Extensions.Primitives?displayProperty=fullName> 命名空間內。 這些 [基本](https://www.nuget.org/packages/Microsoft.Extensions.Primitives/) NuGet 套件會以隱含方式提供給 ASP.NET Core 應用程式。
+<xref:Microsoft.Extensions.Primitives.IChangeToken> 會傳播已發生變更的通知。 `IChangeToken` 位於 <xref:Microsoft.Extensions.Primitives?displayProperty=fullName> 命名空間內。 ASP.NET Core 應用程式會隱含地提供 [基本](https://www.nuget.org/packages/Microsoft.Extensions.Primitives/) 的 NuGet 套件。
 
 `IChangeToken` 有兩個屬性：
 
@@ -46,7 +46,7 @@ ms.locfileid: "93053770"
 
 ## <a name="changetoken-class"></a>ChangeToken 類別
 
-<xref:Microsoft.Extensions.Primitives.ChangeToken> 靜態類別用來傳播已發生變更的通知。 `ChangeToken` 位於 <xref:Microsoft.Extensions.Primitives?displayProperty=fullName> 命名空間內。 這些 [基本](https://www.nuget.org/packages/Microsoft.Extensions.Primitives/) NuGet 套件會以隱含方式提供給 ASP.NET Core 應用程式。
+<xref:Microsoft.Extensions.Primitives.ChangeToken> 靜態類別用來傳播已發生變更的通知。 `ChangeToken` 位於 <xref:Microsoft.Extensions.Primitives?displayProperty=fullName> 命名空間內。 ASP.NET Core 應用程式會隱含地提供 [基本](https://www.nuget.org/packages/Microsoft.Extensions.Primitives/) 的 NuGet 套件。
 
 [Changetoken.onchange (Func \<IChangeToken> ，Action) ](xref:Microsoft.Extensions.Primitives.ChangeToken.OnChange*)方法會 `Action` 在每次權杖變更時註冊以呼叫：
 
@@ -67,7 +67,7 @@ ms.locfileid: "93053770"
 
 ## <a name="monitor-for-configuration-changes"></a>監視設定變更
 
-根據預設，ASP.NET Core 範本會使用 [JSON 設定檔](xref:fundamentals/configuration/index#json-configuration-provider) (*appsettings.json* 、 *appsettings.Development.js開啟*，並 *在) 上appsettings.Production.js* 以載入應用程式設定。
+根據預設，ASP.NET Core 範本會使用 [JSON 設定檔](xref:fundamentals/configuration/index#json-configuration-provider) (*appsettings.json* 、 *appsettings.Development.js開啟*，並且 *在) 上appsettings.Production.js* 以載入應用程式設定。
 
 這些檔案是在接受 `reloadOnChange` 參數的 <xref:Microsoft.Extensions.Configuration.ConfigurationBuilder> 擴充方法上使用 [AddJsonFile(IConfigurationBuilder, String, Boolean, Boolean)](xref:Microsoft.Extensions.Configuration.JsonConfigurationExtensions.AddJsonFile*) 擴充方法來設定的。 `reloadOnChange` 指出組態是否應該在檔案變更時重新載入。 此設定會出在 <xref:Microsoft.Extensions.Hosting.Host> 便利方法 <xref:Microsoft.Extensions.Hosting.Host.CreateDefaultBuilder*> 中：
 
@@ -229,7 +229,7 @@ var compositeChangeToken =
 
 「變更權杖」是用來追蹤狀態變更的一般用途低階建置組塊。
 
-[查看或下載範例程式碼](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/change-tokens/samples/) ([如何下載](xref:index#how-to-download-a-sample)) 
+[查看或下載範例程式碼](https://github.com/dotnet/AspNetCore.Docs/tree/main/aspnetcore/fundamentals/change-tokens/samples/) ([如何下載](xref:index#how-to-download-a-sample)) 
 
 ## <a name="ichangetoken-interface"></a>IChangeToken 介面
 
@@ -265,7 +265,7 @@ var compositeChangeToken =
 
 ## <a name="monitor-for-configuration-changes"></a>監視設定變更
 
-根據預設，ASP.NET Core 範本會使用 [JSON 設定檔](xref:fundamentals/configuration/index#json-configuration-provider) (*appsettings.json* 、 *appsettings.Development.js開啟*，並 *在) 上appsettings.Production.js* 以載入應用程式設定。
+根據預設，ASP.NET Core 範本會使用 [JSON 設定檔](xref:fundamentals/configuration/index#json-configuration-provider) (*appsettings.json* 、 *appsettings.Development.js開啟*，並且 *在) 上appsettings.Production.js* 以載入應用程式設定。
 
 這些檔案是在接受 `reloadOnChange` 參數的 <xref:Microsoft.Extensions.Configuration.ConfigurationBuilder> 擴充方法上使用 [AddJsonFile(IConfigurationBuilder, String, Boolean, Boolean)](xref:Microsoft.Extensions.Configuration.JsonConfigurationExtensions.AddJsonFile*) 擴充方法來設定的。 `reloadOnChange` 指出組態是否應該在檔案變更時重新載入。 此設定會出在 <xref:Microsoft.AspNetCore.WebHost> 便利方法 <xref:Microsoft.AspNetCore.WebHost.CreateDefaultBuilder*> 中：
 

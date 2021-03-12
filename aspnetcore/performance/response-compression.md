@@ -1,5 +1,5 @@
 ---
-title: ASP.NET Core 中的回應壓縮
+title: ASP.NET 核心中的回應壓縮
 author: rick-anderson
 description: 了解回應壓縮及如何使用 ASP.NET Core 應用程式中的回應壓縮中介軟體。
 monikerRange: '>= aspnetcore-2.1'
@@ -19,20 +19,20 @@ no-loc:
 - Razor
 - SignalR
 uid: performance/response-compression
-ms.openlocfilehash: 9327c98c22a4d42d31ea8ba1eb8337153040b5b5
-ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
+ms.openlocfilehash: 239f9e84d068bfd75c84ccf16f0e74cdbbbebfb2
+ms.sourcegitcommit: 54fe1ae5e7d068e27376d562183ef9ddc7afc432
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 10/30/2020
-ms.locfileid: "93056968"
+ms.lasthandoff: 03/10/2021
+ms.locfileid: "102586315"
 ---
-# <a name="response-compression-in-aspnet-core"></a>ASP.NET Core 中的回應壓縮
+# <a name="response-compression-in-aspnet-core"></a>ASP.NET 核心中的回應壓縮
 
 ::: moniker range=">= aspnetcore-3.0"
 
 網路頻寬是有限的資源。 減少回應的大小通常會增加應用程式的回應能力，通常會大幅增加。 減少承載大小的其中一種方式是壓縮應用程式的回應。
 
-[查看或下載範例程式碼](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/performance/response-compression/samples) ([如何下載](xref:index#how-to-download-a-sample)) 
+[查看或下載範例程式碼](https://github.com/dotnet/AspNetCore.Docs/tree/main/aspnetcore/performance/response-compression/samples) ([如何下載](xref:index#how-to-download-a-sample)) 
 
 ## <a name="when-to-use-response-compression-middleware"></a>使用回應壓縮中介軟體的時機
 
@@ -54,15 +54,15 @@ ms.locfileid: "93056968"
 
 當用戶端可以處理壓縮的內容時，用戶端必須將 `Accept-Encoding` 標頭與要求一起傳送，以通知伺服器其功能。 當伺服器傳送壓縮的內容時，它必須在 `Content-Encoding` 標頭中包含壓縮回應編碼方式的資訊。 下表顯示中介軟體所支援的內容編碼方式。
 
-| `Accept-Encoding` 標頭值 | 支援中介軟體 | 描述 |
+| `Accept-Encoding` 標頭值 | 支援中介軟體 | Description |
 | ------------------------------- | :------------------: | ----------- |
 | `br`                            | 是 (預設)        | [Brotli 壓縮的資料格式](https://tools.ietf.org/html/rfc7932) |
-| `deflate`                       | 否                   | [DEFLATE 壓縮的資料格式](https://tools.ietf.org/html/rfc1951) |
-| `exi`                           | 否                   | [W3C 有效率的 XML 交換](https://tools.ietf.org/id/draft-varga-netconf-exi-capability-00.html) |
-| `gzip`                          | 是                  | [GZIP 檔案格式](https://tools.ietf.org/html/rfc1952) |
-| `identity`                      | 是                  | 「無編碼」識別碼：回應不得編碼。 |
-| `pack200-gzip`                  | 否                   | [JAVA 封存的網路傳輸格式](https://jcp.org/aboutJava/communityprocess/review/jsr200/index.html) |
-| `*`                             | 是                  | 未明確要求任何可用的內容編碼 |
+| `deflate`                       | No                   | [DEFLATE 壓縮的資料格式](https://tools.ietf.org/html/rfc1951) |
+| `exi`                           | No                   | [W3C 有效率的 XML 交換](https://tools.ietf.org/id/draft-varga-netconf-exi-capability-00.html) |
+| `gzip`                          | Yes                  | [GZIP 檔案格式](https://tools.ietf.org/html/rfc1952) |
+| `identity`                      | Yes                  | 「無編碼」識別碼：回應不得編碼。 |
+| `pack200-gzip`                  | No                   | [JAVA 封存的網路傳輸格式](https://jcp.org/aboutJava/communityprocess/review/jsr200/index.html) |
+| `*`                             | Yes                  | 未明確要求任何可用的內容編碼 |
 
 如需詳細資訊，請參閱 [IANA 官方內容編碼清單](https://www.iana.org/assignments/http-parameters/http-parameters.xml#http-content-coding-registry)。
 
@@ -83,14 +83,14 @@ ms.locfileid: "93056968"
 | `Content-Type`     | 指定內容的 MIME 類型。 每個回應都應指定其 `Content-Type` 。 中介軟體會檢查此值，以判斷是否應該壓縮回應。 中介軟體會指定一組可以編碼的 [預設 MIME 類型](#mime-types) ，但是您可以取代或加入 mime 類型。 |
 | `Vary`             | 當伺服器將值的傳 `Accept-Encoding` 給用戶端和 proxy 時， `Vary` 標頭會向用戶端或 proxy 指出它應該快取 (根據要求標頭的值來) 回應 `Accept-Encoding` 。 使用標頭傳回內容的結果， `Vary: Accept-Encoding` 是分開快取壓縮和未壓縮的回應。 |
 
-使用 [範例應用程式](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/performance/response-compression/samples)探索回應壓縮中介軟體的功能。 此範例說明：
+使用 [範例應用程式](https://github.com/dotnet/AspNetCore.Docs/tree/main/aspnetcore/performance/response-compression/samples)探索回應壓縮中介軟體的功能。 此範例說明：
 
 * 使用 Gzip 和自訂壓縮提供者壓縮應用程式回應。
 * 如何將 MIME 類型加入至預設的 MIME 類型清單以進行壓縮。
 
 ## <a name="package"></a>套件
 
-回應壓縮中介軟體是由 [AspNetCore ResponseCompression](https://www.nuget.org/packages/Microsoft.AspNetCore.ResponseCompression/) 封裝所提供，該封裝會隱含地包含在 ASP.NET Core apps 中。
+回應壓縮中介軟體是由 ASP.NET Core 應用程式中隱含包含的 [AspNetCore ResponseCompression](https://www.nuget.org/packages/Microsoft.AspNetCore.ResponseCompression/) 套件所提供。
 
 ## <a name="configuration"></a>組態
 
@@ -148,7 +148,7 @@ public void ConfigureServices(IServiceCollection services)
 
 使用設定壓縮等級 <xref:Microsoft.AspNetCore.ResponseCompression.BrotliCompressionProviderOptions> 。 Brotli 壓縮提供者預設為最快的壓縮層級 ([CompressionLevel。最快](xref:System.IO.Compression.CompressionLevel) 的) ，可能不會產生最有效率的壓縮。 如果需要最有效率的壓縮，請設定中介軟體以獲得最佳壓縮。
 
-| Compression Level | 描述 |
+| Compression Level | Description |
 | ----------------- | ----------- |
 | [CompressionLevel。最快](xref:System.IO.Compression.CompressionLevel) | 壓縮應該盡可能快速完成，即使產生的輸出未以最佳方式壓縮。 |
 | [CompressionLevel. NoCompression](xref:System.IO.Compression.CompressionLevel) | 不應執行任何壓縮。 |
@@ -188,7 +188,7 @@ public void ConfigureServices(IServiceCollection services)
 
 使用設定壓縮等級 <xref:Microsoft.AspNetCore.ResponseCompression.GzipCompressionProviderOptions> 。 Gzip 壓縮提供者預設為最快的壓縮層級 ([CompressionLevel。最快](xref:System.IO.Compression.CompressionLevel) 的) ，可能不會產生最有效率的壓縮。 如果需要最有效率的壓縮，請設定中介軟體以獲得最佳壓縮。
 
-| Compression Level | 描述 |
+| Compression Level | Description |
 | ----------------- | ----------- |
 | [CompressionLevel。最快](xref:System.IO.Compression.CompressionLevel) | 壓縮應該盡可能快速完成，即使產生的輸出未以最佳方式壓縮。 |
 | [CompressionLevel. NoCompression](xref:System.IO.Compression.CompressionLevel) | 不應執行任何壓縮。 |
@@ -234,7 +234,7 @@ public void ConfigureServices(IServiceCollection services)
 * `text/plain`
 * `text/xml`
 
-以回應壓縮中介軟體選項取代或附加 MIME 類型。 請注意，不支援萬用字元 MIME 類型（例如） `text/*` 。 範例應用程式會新增的 MIME 類型 `image/svg+xml` ，並壓縮並提供 ASP.NET Core 橫幅影像 (的橫幅 *。 svg* ) 。
+以回應壓縮中介軟體選項取代或附加 MIME 類型。 請注意，不支援萬用字元 MIME 類型（例如） `text/*` 。 範例應用程式會新增的 MIME 類型 `image/svg+xml` ，並壓縮並提供 ASP.NET 核心橫幅影像 (的) 。 *svg* 。
 
 [!code-csharp[](response-compression/samples/3.x/SampleApp/Startup.cs?name=snippet1&highlight=8-10)]
 
@@ -278,7 +278,7 @@ public void ConfigureServices(IServiceCollection services)
 
 網路頻寬是有限的資源。 減少回應的大小通常會增加應用程式的回應能力，通常會大幅增加。 減少承載大小的其中一種方式是壓縮應用程式的回應。
 
-[查看或下載範例程式碼](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/performance/response-compression/samples) ([如何下載](xref:index#how-to-download-a-sample)) 
+[查看或下載範例程式碼](https://github.com/dotnet/AspNetCore.Docs/tree/main/aspnetcore/performance/response-compression/samples) ([如何下載](xref:index#how-to-download-a-sample)) 
 
 ## <a name="when-to-use-response-compression-middleware"></a>使用回應壓縮中介軟體的時機
 
@@ -300,15 +300,15 @@ public void ConfigureServices(IServiceCollection services)
 
 當用戶端可以處理壓縮的內容時，用戶端必須將 `Accept-Encoding` 標頭與要求一起傳送，以通知伺服器其功能。 當伺服器傳送壓縮的內容時，它必須在 `Content-Encoding` 標頭中包含壓縮回應編碼方式的資訊。 下表顯示中介軟體所支援的內容編碼方式。
 
-| `Accept-Encoding` 標頭值 | 支援中介軟體 | 描述 |
+| `Accept-Encoding` 標頭值 | 支援中介軟體 | Description |
 | ------------------------------- | :------------------: | ----------- |
 | `br`                            | 是 (預設)        | [Brotli 壓縮的資料格式](https://tools.ietf.org/html/rfc7932) |
-| `deflate`                       | 否                   | [DEFLATE 壓縮的資料格式](https://tools.ietf.org/html/rfc1951) |
-| `exi`                           | 否                   | [W3C 有效率的 XML 交換](https://tools.ietf.org/id/draft-varga-netconf-exi-capability-00.html) |
-| `gzip`                          | 是                  | [GZIP 檔案格式](https://tools.ietf.org/html/rfc1952) |
-| `identity`                      | 是                  | 「無編碼」識別碼：回應不得編碼。 |
-| `pack200-gzip`                  | 否                   | [JAVA 封存的網路傳輸格式](https://jcp.org/aboutJava/communityprocess/review/jsr200/index.html) |
-| `*`                             | 是                  | 未明確要求任何可用的內容編碼 |
+| `deflate`                       | No                   | [DEFLATE 壓縮的資料格式](https://tools.ietf.org/html/rfc1951) |
+| `exi`                           | No                   | [W3C 有效率的 XML 交換](https://tools.ietf.org/id/draft-varga-netconf-exi-capability-00.html) |
+| `gzip`                          | Yes                  | [GZIP 檔案格式](https://tools.ietf.org/html/rfc1952) |
+| `identity`                      | Yes                  | 「無編碼」識別碼：回應不得編碼。 |
+| `pack200-gzip`                  | No                   | [JAVA 封存的網路傳輸格式](https://jcp.org/aboutJava/communityprocess/review/jsr200/index.html) |
+| `*`                             | Yes                  | 未明確要求任何可用的內容編碼 |
 
 如需詳細資訊，請參閱 [IANA 官方內容編碼清單](https://www.iana.org/assignments/http-parameters/http-parameters.xml#http-content-coding-registry)。
 
@@ -329,7 +329,7 @@ public void ConfigureServices(IServiceCollection services)
 | `Content-Type`     | 指定內容的 MIME 類型。 每個回應都應指定其 `Content-Type` 。 中介軟體會檢查此值，以判斷是否應該壓縮回應。 中介軟體會指定一組可以編碼的 [預設 MIME 類型](#mime-types) ，但是您可以取代或加入 mime 類型。 |
 | `Vary`             | 當伺服器將值的傳 `Accept-Encoding` 給用戶端和 proxy 時， `Vary` 標頭會向用戶端或 proxy 指出它應該快取 (根據要求標頭的值來) 回應 `Accept-Encoding` 。 使用標頭傳回內容的結果， `Vary: Accept-Encoding` 是分開快取壓縮和未壓縮的回應。 |
 
-使用 [範例應用程式](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/performance/response-compression/samples)探索回應壓縮中介軟體的功能。 此範例說明：
+使用 [範例應用程式](https://github.com/dotnet/AspNetCore.Docs/tree/main/aspnetcore/performance/response-compression/samples)探索回應壓縮中介軟體的功能。 此範例說明：
 
 * 使用 Gzip 和自訂壓縮提供者壓縮應用程式回應。
 * 如何將 MIME 類型加入至預設的 MIME 類型清單以進行壓縮。
@@ -394,7 +394,7 @@ public void ConfigureServices(IServiceCollection services)
 
 使用設定壓縮等級 <xref:Microsoft.AspNetCore.ResponseCompression.BrotliCompressionProviderOptions> 。 Brotli 壓縮提供者預設為最快的壓縮層級 ([CompressionLevel。最快](xref:System.IO.Compression.CompressionLevel) 的) ，可能不會產生最有效率的壓縮。 如果需要最有效率的壓縮，請設定中介軟體以獲得最佳壓縮。
 
-| Compression Level | 描述 |
+| Compression Level | Description |
 | ----------------- | ----------- |
 | [CompressionLevel。最快](xref:System.IO.Compression.CompressionLevel) | 壓縮應該盡可能快速完成，即使產生的輸出未以最佳方式壓縮。 |
 | [CompressionLevel. NoCompression](xref:System.IO.Compression.CompressionLevel) | 不應執行任何壓縮。 |
@@ -434,7 +434,7 @@ public void ConfigureServices(IServiceCollection services)
 
 使用設定壓縮等級 <xref:Microsoft.AspNetCore.ResponseCompression.GzipCompressionProviderOptions> 。 Gzip 壓縮提供者預設為最快的壓縮層級 ([CompressionLevel。最快](xref:System.IO.Compression.CompressionLevel) 的) ，可能不會產生最有效率的壓縮。 如果需要最有效率的壓縮，請設定中介軟體以獲得最佳壓縮。
 
-| Compression Level | 描述 |
+| Compression Level | Description |
 | ----------------- | ----------- |
 | [CompressionLevel。最快](xref:System.IO.Compression.CompressionLevel) | 壓縮應該盡可能快速完成，即使產生的輸出未以最佳方式壓縮。 |
 | [CompressionLevel. NoCompression](xref:System.IO.Compression.CompressionLevel) | 不應執行任何壓縮。 |
@@ -479,7 +479,7 @@ public void ConfigureServices(IServiceCollection services)
 * `text/plain`
 * `text/xml`
 
-以回應壓縮中介軟體選項取代或附加 MIME 類型。 請注意，不支援萬用字元 MIME 類型（例如） `text/*` 。 範例應用程式會新增的 MIME 類型 `image/svg+xml` ，並壓縮並提供 ASP.NET Core 橫幅影像 (的橫幅 *。 svg* ) 。
+以回應壓縮中介軟體選項取代或附加 MIME 類型。 請注意，不支援萬用字元 MIME 類型（例如） `text/*` 。 範例應用程式會新增的 MIME 類型 `image/svg+xml` ，並壓縮並提供 ASP.NET 核心橫幅影像 (的) 。 *svg* 。
 
 [!code-csharp[](response-compression/samples/2.x/SampleApp/Startup.cs?name=snippet1&highlight=8-10)]
 
@@ -523,7 +523,7 @@ public void ConfigureServices(IServiceCollection services)
 
 網路頻寬是有限的資源。 減少回應的大小通常會增加應用程式的回應能力，通常會大幅增加。 減少承載大小的其中一種方式是壓縮應用程式的回應。
 
-[查看或下載範例程式碼](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/performance/response-compression/samples) ([如何下載](xref:index#how-to-download-a-sample)) 
+[查看或下載範例程式碼](https://github.com/dotnet/AspNetCore.Docs/tree/main/aspnetcore/performance/response-compression/samples) ([如何下載](xref:index#how-to-download-a-sample)) 
 
 ## <a name="when-to-use-response-compression-middleware"></a>使用回應壓縮中介軟體的時機
 
@@ -548,12 +548,12 @@ public void ConfigureServices(IServiceCollection services)
 | `Accept-Encoding` 標頭值 | 支援中介軟體 | 描述 |
 | ------------------------------- | :------------------: | ----------- |
 | `br`                            | 否                   | [Brotli 壓縮的資料格式](https://tools.ietf.org/html/rfc7932) |
-| `deflate`                       | 否                   | [DEFLATE 壓縮的資料格式](https://tools.ietf.org/html/rfc1951) |
-| `exi`                           | 否                   | [W3C 有效率的 XML 交換](https://tools.ietf.org/id/draft-varga-netconf-exi-capability-00.html) |
+| `deflate`                       | No                   | [DEFLATE 壓縮的資料格式](https://tools.ietf.org/html/rfc1951) |
+| `exi`                           | No                   | [W3C 有效率的 XML 交換](https://tools.ietf.org/id/draft-varga-netconf-exi-capability-00.html) |
 | `gzip`                          | 是 (預設)        | [GZIP 檔案格式](https://tools.ietf.org/html/rfc1952) |
-| `identity`                      | 是                  | 「無編碼」識別碼：回應不得編碼。 |
-| `pack200-gzip`                  | 否                   | [JAVA 封存的網路傳輸格式](https://jcp.org/aboutJava/communityprocess/review/jsr200/index.html) |
-| `*`                             | 是                  | 未明確要求任何可用的內容編碼 |
+| `identity`                      | Yes                  | 「無編碼」識別碼：回應不得編碼。 |
+| `pack200-gzip`                  | No                   | [JAVA 封存的網路傳輸格式](https://jcp.org/aboutJava/communityprocess/review/jsr200/index.html) |
+| `*`                             | Yes                  | 未明確要求任何可用的內容編碼 |
 
 如需詳細資訊，請參閱 [IANA 官方內容編碼清單](https://www.iana.org/assignments/http-parameters/http-parameters.xml#http-content-coding-registry)。
 
@@ -574,7 +574,7 @@ public void ConfigureServices(IServiceCollection services)
 | `Content-Type`     | 指定內容的 MIME 類型。 每個回應都應指定其 `Content-Type` 。 中介軟體會檢查此值，以判斷是否應該壓縮回應。 中介軟體會指定一組可以編碼的 [預設 MIME 類型](#mime-types) ，但是您可以取代或加入 mime 類型。 |
 | `Vary`             | 當伺服器將值的傳 `Accept-Encoding` 給用戶端和 proxy 時， `Vary` 標頭會向用戶端或 proxy 指出它應該快取 (根據要求標頭的值來) 回應 `Accept-Encoding` 。 使用標頭傳回內容的結果， `Vary: Accept-Encoding` 是分開快取壓縮和未壓縮的回應。 |
 
-使用 [範例應用程式](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/performance/response-compression/samples)探索回應壓縮中介軟體的功能。 此範例說明：
+使用 [範例應用程式](https://github.com/dotnet/AspNetCore.Docs/tree/main/aspnetcore/performance/response-compression/samples)探索回應壓縮中介軟體的功能。 此範例說明：
 
 * 使用 Gzip 和自訂壓縮提供者壓縮應用程式回應。
 * 如何將 MIME 類型加入至預設的 MIME 類型清單以進行壓縮。
@@ -639,7 +639,7 @@ public void ConfigureServices(IServiceCollection services)
 
 使用設定壓縮等級 <xref:Microsoft.AspNetCore.ResponseCompression.GzipCompressionProviderOptions> 。 Gzip 壓縮提供者預設為最快的壓縮層級 ([CompressionLevel。最快](xref:System.IO.Compression.CompressionLevel) 的) ，可能不會產生最有效率的壓縮。 如果需要最有效率的壓縮，請設定中介軟體以獲得最佳壓縮。
 
-| Compression Level | 描述 |
+| Compression Level | Description |
 | ----------------- | ----------- |
 | [CompressionLevel。最快](xref:System.IO.Compression.CompressionLevel) | 壓縮應該盡可能快速完成，即使產生的輸出未以最佳方式壓縮。 |
 | [CompressionLevel. NoCompression](xref:System.IO.Compression.CompressionLevel) | 不應執行任何壓縮。 |
@@ -684,7 +684,7 @@ public void ConfigureServices(IServiceCollection services)
 * `text/plain`
 * `text/xml`
 
-以回應壓縮中介軟體選項取代或附加 MIME 類型。 請注意，不支援萬用字元 MIME 類型（例如） `text/*` 。 範例應用程式會新增的 MIME 類型 `image/svg+xml` ，並壓縮並提供 ASP.NET Core 橫幅影像 (的橫幅 *。 svg* ) 。
+以回應壓縮中介軟體選項取代或附加 MIME 類型。 請注意，不支援萬用字元 MIME 類型（例如） `text/*` 。 範例應用程式會新增的 MIME 類型 `image/svg+xml` ，並壓縮並提供 ASP.NET 核心橫幅影像 (的) 。 *svg* 。
 
 [!code-csharp[](response-compression/samples/2.x/SampleApp/Startup.cs?name=snippet1&highlight=8-10)]
 

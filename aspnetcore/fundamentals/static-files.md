@@ -16,12 +16,12 @@ no-loc:
 - Razor
 - SignalR
 uid: fundamentals/static-files
-ms.openlocfilehash: fad569ab06735600299d8051a258651e329db8ce
-ms.sourcegitcommit: 04ad9cd26fcaa8bd11e261d3661f375f5f343cdc
+ms.openlocfilehash: 807cffb2f9b3bf89ff06c62e76d51d4040b8d91a
+ms.sourcegitcommit: 54fe1ae5e7d068e27376d562183ef9ddc7afc432
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 02/10/2021
-ms.locfileid: "100107177"
+ms.lasthandoff: 03/10/2021
+ms.locfileid: "102589006"
 ---
 # <a name="static-files-in-aspnet-core"></a>ASP.NET Core 中的靜態檔案
 
@@ -31,7 +31,7 @@ ms.locfileid: "100107177"
 
 靜態檔案（例如 HTML、CSS、影像和 JavaScript）是 ASP.NET Core 應用程式預設會直接提供給用戶端的資產。
 
-[查看或下載範例程式碼](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/static-files/samples) ([如何下載](xref:index#how-to-download-a-sample)) 
+[查看或下載範例程式碼](https://github.com/dotnet/AspNetCore.Docs/tree/main/aspnetcore/fundamentals/static-files/samples) ([如何下載](xref:index#how-to-download-a-sample)) 
 
 ## <a name="serve-static-files"></a>提供靜態檔案
 
@@ -104,7 +104,7 @@ ms.locfileid: "100107177"
 
 ## <a name="static-file-authorization"></a>靜態檔案授權
 
-ASP.NET Core 範本會 <xref:Microsoft.AspNetCore.Builder.StaticFileExtensions.UseStaticFiles%2A> 在呼叫之前呼叫 <xref:Microsoft.AspNetCore.Builder.AuthorizationAppBuilderExtensions.UseAuthorization%2A> 。 大部分的應用程式會遵循此模式。 在授權中介軟體之前呼叫靜態檔案中介軟體：
+ASP.NET 核心範本會 <xref:Microsoft.AspNetCore.Builder.StaticFileExtensions.UseStaticFiles%2A> 在呼叫之前呼叫 <xref:Microsoft.AspNetCore.Builder.AuthorizationAppBuilderExtensions.UseAuthorization%2A> 。 大部分的應用程式會遵循此模式。 在授權中介軟體之前呼叫靜態檔案中介軟體：
 
   * 靜態檔案不會執行任何授權檢查。
   * 靜態檔案中介軟體所提供的靜態檔案（例如這些檔案中介軟體）可 `wwwroot` 公開存取。
@@ -123,7 +123,7 @@ ASP.NET Core 範本會 <xref:Microsoft.AspNetCore.Builder.StaticFileExtensions.U
 
   <xref:Microsoft.AspNetCore.Authorization.AuthorizationPolicyBuilder.RequireAuthenticatedUser%2A> 加入 <xref:Microsoft.AspNetCore.Authorization.Infrastructure.DenyAnonymousAuthorizationRequirement> 目前的實例，這會強制驗證目前的使用者。
 
-  下的靜態資產可 `wwwroot` 公開存取，因為預設靜態檔案中介軟體 (`app.UseStaticFiles();`) 會先呼叫 `UseAuthentication` 。 *>mystaticfiles* 資料夾中的靜態資產需要驗證。 [範例程式碼](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/static-files/samples)會示範這一點。
+  下的靜態資產可 `wwwroot` 公開存取，因為預設靜態檔案中介軟體 (`app.UseStaticFiles();`) 會先呼叫 `UseAuthentication` 。 *>mystaticfiles* 資料夾中的靜態資產需要驗證。 [範例程式碼](https://github.com/dotnet/AspNetCore.Docs/tree/main/aspnetcore/fundamentals/static-files/samples)會示範這一點。
 
 根據授權提供檔案的替代方法是：
 
@@ -289,7 +289,7 @@ app.UseFileServer(enableDirectoryBrowsing: true);
 
 HTML、CSS、影像和 JavaScript 這類靜態檔案都是 ASP.NET Core 應用程式直接提供給用戶端的資產。 您需要進行一些設定，才能提供這些檔案。
 
-[查看或下載範例程式碼](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/static-files/samples) ([如何下載](xref:index#how-to-download-a-sample)) 
+[查看或下載範例程式碼](https://github.com/dotnet/AspNetCore.Docs/tree/main/aspnetcore/fundamentals/static-files/samples) ([如何下載](xref:index#how-to-download-a-sample)) 
 
 ## <a name="serve-static-files"></a>提供靜態檔案
 

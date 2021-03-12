@@ -19,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: web-api/http-repl
-ms.openlocfilehash: 1027887738740d50c30e24e800c0402b1ce4ad02
-ms.sourcegitcommit: 04a404a9655c59ad1ea02aff5d399ae1b833ad6a
+ms.openlocfilehash: aeff3fd06719095660d1b3bb794ef74a8549f761
+ms.sourcegitcommit: 54fe1ae5e7d068e27376d562183ef9ddc7afc432
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 01/03/2021
-ms.locfileid: "97854661"
+ms.lasthandoff: 03/10/2021
+ms.locfileid: "102585756"
 ---
 # <a name="test-web-apis-with-the-httprepl"></a>使用 HttpRepl 測試 web Api
 
@@ -46,9 +46,9 @@ HTTP「讀取、求值、輸出」迴圈 (REPL) 是：
 * [POST](#test-http-post-requests)
 * [PUT](#test-http-put-requests)
 
-若要跟著做，[請檢視或下載範例 ASP.NET Core web API](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/web-api/http-repl/samples) ([如何下載](xref:index#how-to-download-a-sample))。
+若要跟著做，[請檢視或下載範例 ASP.NET Core web API](https://github.com/dotnet/AspNetCore.Docs/tree/main/aspnetcore/web-api/http-repl/samples) ([如何下載](xref:index#how-to-download-a-sample))。
 
-## <a name="prerequisites"></a>先決條件
+## <a name="prerequisites"></a>必要條件
 
 * [!INCLUDE [2.1-SDK](~/includes/2.1-SDK.md)]
 
@@ -393,7 +393,7 @@ pref set editor.command.default.arguments "--disable-extensions --new-window"
 ```
 
 > [!TIP]
-> 如果您的預設編輯器 Visual Studio Code，您通常會想要傳遞 `-w` 或 `--wait` 引數，以強制 Visual Studio Code 等待您在傳回之前關閉檔案。
+> 如果您的預設編輯器是 Visual Studio Code，您通常會想要傳遞 `-w` 或 `--wait` 引數，以強制 Visual studio Code 先等候您關閉檔案，然後再返回。
 
 ### <a name="set-the-openapi-description-search-paths"></a>設定 OpenAPI Description 搜尋路徑
 
@@ -871,7 +871,7 @@ HttpRepl 可透過下列方式支援保護端點的測試：
 
 ### <a name="default-credentials"></a>預設認證
 
-假設您要測試的 web API 是裝載在 IIS 中，並受到 Windows 驗證保護。 您希望執行工具之使用者的認證流經所測試的 HTTP 端點。 若要傳遞已登入使用者的預設認證：
+假設您要測試的 web API 是裝載在 IIS 中，並使用 Windows 驗證來保護。 您希望執行工具之使用者的認證流經所測試的 HTTP 端點。 若要傳遞已登入使用者的預設認證：
 
 1. 將喜好設定設 `httpClient.useDefaultCredentials` 為 `true` ：
 
@@ -907,7 +907,7 @@ HttpRepl 可透過下列方式支援保護端點的測試：
 set header Authorization "bearer <TOKEN VALUE>"
 ```
 
-若要存取 Azure 託管端點或使用 [azure REST API](/rest/api/azure/)，您需要持有人權杖。 使用下列步驟，透過 [Azure CLI](/cli/azure/)為您的 Azure 訂用帳戶取得持有人權杖。 HttpRepl 會在 HTTP 要求標頭中設定持有人權杖。 已抓取 Azure App Service Web Apps 清單。
+若要存取 Azure 託管端點或使用 [AZURE REST API](/rest/api/azure/)，您需要持有人權杖。 使用下列步驟，透過 [AZURE CLI](/cli/azure/)為您的 azure 訂用帳戶取得持有人權杖。 HttpRepl 會在 HTTP 要求標頭中設定持有人權杖。 已抓取 Azure App Service Web 應用程式的清單。
 
 1. 登入 Azure：
 
@@ -1129,4 +1129,4 @@ https://localhost:5001/>
 * [HttpRepl GitHub 存放庫](https://github.com/dotnet/HttpRepl)
 * [設定 Visual Studio 以啟動 HttpRepl](https://devblogs.microsoft.com/aspnet/httprepl-a-command-line-tool-for-interacting-with-restful-http-services/#configure-visual-studio-for-windows-to-launch-httprepl-on-f5)
 * [設定 Visual Studio Code 以啟動 HttpRepl](https://devblogs.microsoft.com/aspnet/httprepl-a-command-line-tool-for-interacting-with-restful-http-services/#configure-visual-studio-code-to-launch-httprepl-on-debug)
-* [設定 Visual Studio for Mac 以啟動 HttpRepl](https://devblogs.microsoft.com/aspnet/httprepl-a-command-line-tool-for-interacting-with-restful-http-services/#configure-visual-studio-for-mac-to-launch-httprepl-as-a-custom-tool)
+* [將 Visual Studio for Mac 設定為啟動 HttpRepl](https://devblogs.microsoft.com/aspnet/httprepl-a-command-line-tool-for-interacting-with-restful-http-services/#configure-visual-studio-for-mac-to-launch-httprepl-as-a-custom-tool)

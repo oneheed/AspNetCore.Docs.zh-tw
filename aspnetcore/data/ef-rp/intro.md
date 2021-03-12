@@ -1,5 +1,5 @@
 ---
-title: Razor ASP.NET Core 中有 Entity Framework Core 的頁面-教學課程 1/8
+title: Razor ASP.NET Core 中的頁面與 Entity Framework Core-教學課程 1/8
 author: rick-anderson
 description: 說明如何 Razor 使用 Entity Framework Core 建立頁面應用程式
 ms.author: riande
@@ -18,22 +18,22 @@ no-loc:
 - Razor
 - SignalR
 uid: data/ef-rp/intro
-ms.openlocfilehash: e797228d498ec9b269e718c099a0532bbb4504d3
-ms.sourcegitcommit: e311cfb77f26a0a23681019bd334929d1aaeda20
+ms.openlocfilehash: 55fcc2883dac31fc22bad1b5f9367e20879b6c43
+ms.sourcegitcommit: 54fe1ae5e7d068e27376d562183ef9ddc7afc432
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 02/03/2021
-ms.locfileid: "99530238"
+ms.lasthandoff: 03/10/2021
+ms.locfileid: "102586419"
 ---
-# <a name="razor-pages-with-entity-framework-core-in-aspnet-core---tutorial-1-of-8"></a>Razor ASP.NET Core 中有 Entity Framework Core 的頁面-教學課程 1/8
+# <a name="razor-pages-with-entity-framework-core-in-aspnet-core---tutorial-1-of-8"></a>Razor ASP.NET Core 中的頁面與 Entity Framework Core-教學課程 1/8
 
 作者：[Tom Dykstra](https://github.com/tdykstra) 和 [Rick Anderson](https://twitter.com/RickAndMSFT)
 
 ::: moniker range=">= aspnetcore-5.0"
 
-這是一系列教學課程中的第一個教學課程，示範如何在 [ASP.NET Core Razor Pages](xref:razor-pages/index) 應用程式中使用 Entity Framework (EF) Core。 教學課程會為虛構的 Contoso 大學建置網站。 網站包含學生入學許可、課程建立和講師指派等功能。 本教學課程使用 code first 方法。 如需使用 database first 方法來遵循本教學課程的詳細資訊，請參閱 [此 Github 問題](https://github.com/dotnet/AspNetCore.Docs/issues/16897)。
+這是一系列教學課程中的第一個教學課程，示範如何在 [ASP.NET core Razor Pages](xref:razor-pages/index) 應用程式中使用 ENTITY Framework (EF) Core。 教學課程會為虛構的 Contoso 大學建置網站。 網站包含學生入學許可、課程建立和講師指派等功能。 本教學課程使用 code first 方法。 如需使用 database first 方法來遵循本教學課程的詳細資訊，請參閱 [此 Github 問題](https://github.com/dotnet/AspNetCore.Docs/issues/16897)。
 
-[下載或檢視已完成的應用程式。](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/data/ef-rp/intro/samples) [下載指示](xref:index#how-to-download-a-sample)。
+[下載或檢視已完成的應用程式。](https://github.com/dotnet/AspNetCore.Docs/tree/main/aspnetcore/data/ef-rp/intro/samples) [下載指示](xref:index#how-to-download-a-sample)。
 
 ## <a name="prerequisites"></a>必要條件
 
@@ -59,7 +59,7 @@ Visual Studio Code 說明則會使用 [SQLite](https://www.sqlite.org/)，它是
 
 ## <a name="troubleshooting"></a>疑難排解
 
-若您遇到無法解決的問題，請將您的程式碼與[已完成的專案](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/data/ef-rp/intro/samples)進行比較。 取得協助的其中一種好方法是將問題張貼到 StackOverflow.com，並使用 [ASP.NET Core 標籤](https://stackoverflow.com/questions/tagged/asp.net-core)或 [EF Core 標籤](https://stackoverflow.com/questions/tagged/entity-framework-core)。
+若您遇到無法解決的問題，請將您的程式碼與[已完成的專案](https://github.com/dotnet/AspNetCore.Docs/tree/main/aspnetcore/data/ef-rp/intro/samples)進行比較。 取得協助的其中一種好方法是將問題張貼到 StackOverflow.com，並使用 [ASP.NET Core 標籤](https://stackoverflow.com/questions/tagged/asp.net-core)或 [EF Core 標籤](https://stackoverflow.com/questions/tagged/entity-framework-core)。
 
 ## <a name="the-sample-app"></a>範例應用程式
 
@@ -120,11 +120,11 @@ To run the app after downloading the completed project:
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
 1. 啟動 Visual Studio，然後選取 [建立新專案]。
-1. 在 [ **建立新專案** ] 對話方塊中，選取 [ **ASP.NET Core Web 應用程式** > **]**。
+1. 在 [ **建立新專案** ] 對話方塊中，選取 [下一步] **ASP.NET Core Web 應用程式** > ****。
 1. 在 [ **設定您的新專案** ] 對話方塊中，輸入 [ `ContosoUniversity` **專案名稱**]。 請務必使用此完整名稱（包括大小寫），以便 `namespace` 在複製程式碼時使用每個相符專案。
 1. 選取 [建立]  。
 1. 在 [ **建立新的 ASP.NET Core web 應用程式** ] 對話方塊中，選取：
-    1. 下拉式清單中的 **.Net Core** 和 **ASP.NET Core 5.0** 。
+    1. 下拉式清單中的 **.Net core** 和 **ASP.NET core 5.0** 。
     1. **ASP.NET Core Web 應用程式**。
     1.  
        建立 ![新增 ASP.NET Core 專案對話方塊](~/data/ef-rp/intro/_static/new-aspnet5.png)
@@ -179,7 +179,7 @@ To run the app after downloading the completed project:
 
   [!code-csharp[Main](intro/samples/cu30snapshots/1-intro/Models/Student.cs)]
 
-`ID` 屬性會成為對應到此類別資料庫資料表的主索引鍵資料行。 EF Core 預設會解譯名為 `ID` 或 `classnameID` 作為主索引鍵的屬性。 因此 `Student` 類別主索引鍵的替代自動識別名稱為 `StudentID`。 如需詳細資訊，請參閱 [EF Core 索引鍵](/ef/core/modeling/keys?tabs=data-annotations)。
+`ID` 屬性會成為對應到此類別資料庫資料表的主索引鍵資料行。 EF Core 預設會解譯名為 `ID` 或 `classnameID` 作為主索引鍵的屬性。 因此 `Student` 類別主索引鍵的替代自動識別名稱為 `StudentID`。 如需詳細資訊，請參閱 [EF Core-金鑰](/ef/core/modeling/keys?tabs=data-annotations)。
 
 `Enrollments` 屬性為[導覽屬性](/ef/core/modeling/relationships)。 導覽屬性會保留與此實體相關的其他實體。 在這種情況下，`Student` 實體的 `Enrollments` 屬性會保留所有與該 Student 相關的 `Enrollment` 實體。 例如，若資料庫中的 Student 資料列有兩個相關的 Enrollment 資料列，則 `Enrollments` 導覽屬性便會包含這兩個 Enrollment 項目。 
 
@@ -232,8 +232,8 @@ To run the app after downloading the completed project:
 * 在 [方案總管] 中，以滑鼠右鍵按一下 *Page/Students* 資料夾，然後選取 [新增]**[新增 Scaffold 項目]** > 。
 * 在 [ **加入新的 Scaffold 專案** ] 對話方塊中：
   * 在左側索引標籤中，選取 [**已安裝 > 一般 > Razor 頁面**]
-  * **Razor 使用 Entity Framework (CRUD)** 新增] 選取頁面 > ****。
-* 在 [ **Razor 使用 Entity Framework 加入頁面] (CRUD)** 對話方塊：
+  * **Razor 使用 Entity Framework (CRUD) 加入來選取頁面** > ****。
+* 在 [ **Razor 使用 Entity Framework 加入頁面 (CRUD)** ] 對話方塊中：
   * 在 [模型類別] 下拉式清單中，選取 [學生 (ContosoUniversity.Models)]。
   * 在 [資料內容類別] 資料列中，選取 **+** (加號)。
     * 將資料內容名稱變更為 end， `SchoolContext` 而不是 `ContosoUniversityContext` 。 更新的內容名稱： `ContosoUniversity.Data.SchoolContext`
@@ -393,7 +393,7 @@ Install-Package Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore
 
 ---
 
-`Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore`NuGet 套件提供 Entity Framework Core 錯誤頁面 ASP.NET Core 中介軟體。 此中介軟體有助於偵測並診斷 Entity Framework Core 遷移的錯誤。
+`Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore`NuGet 套件提供適用于 Entity Framework core 錯誤頁面的 ASP.NET 核心中介軟體。 此中介軟體有助於偵測和診斷 Entity Framework Core 遷移的錯誤。
 
 會 `AddDatabaseDeveloperPageExceptionFilter` 在 [開發環境](xref:fundamentals/environments)中提供有用的錯誤資訊。
 
@@ -528,9 +528,9 @@ public async Task OnGetAsync()
 
 ::: moniker range=">= aspnetcore-3.0 < aspnetcore-5.0"
 
-這是一系列教學課程中的第一個教學課程，示範如何在 [ASP.NET Core Razor Pages](xref:razor-pages/index) 應用程式中使用 Entity Framework (EF) Core。 教學課程會為虛構的 Contoso 大學建置網站。 網站包含學生入學許可、課程建立和講師指派等功能。 本教學課程使用 code first 方法。 如需使用 database first 方法來遵循本教學課程的詳細資訊，請參閱 [此 Github 問題](https://github.com/dotnet/AspNetCore.Docs/issues/16897)。
+這是一系列教學課程中的第一個教學課程，示範如何在 [ASP.NET core Razor Pages](xref:razor-pages/index) 應用程式中使用 ENTITY Framework (EF) Core。 教學課程會為虛構的 Contoso 大學建置網站。 網站包含學生入學許可、課程建立和講師指派等功能。 本教學課程使用 code first 方法。 如需使用 database first 方法來遵循本教學課程的詳細資訊，請參閱 [此 Github 問題](https://github.com/dotnet/AspNetCore.Docs/issues/16897)。
 
-[下載或檢視已完成的應用程式。](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/data/ef-rp/intro/samples) [下載指示](xref:index#how-to-download-a-sample)。
+[下載或檢視已完成的應用程式。](https://github.com/dotnet/AspNetCore.Docs/tree/main/aspnetcore/data/ef-rp/intro/samples) [下載指示](xref:index#how-to-download-a-sample)。
 
 ## <a name="prerequisites"></a>必要條件
 
@@ -556,7 +556,7 @@ Visual Studio Code 說明則會使用 [SQLite](https://www.sqlite.org/)，它是
 
 ## <a name="troubleshooting"></a>疑難排解
 
-若您遇到無法解決的問題，請將您的程式碼與[已完成的專案](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/data/ef-rp/intro/samples)進行比較。 取得協助的其中一種好方法是將問題張貼到 StackOverflow.com，並使用 [ASP.NET Core 標籤](https://stackoverflow.com/questions/tagged/asp.net-core)或 [EF Core 標籤](https://stackoverflow.com/questions/tagged/entity-framework-core)。
+若您遇到無法解決的問題，請將您的程式碼與[已完成的專案](https://github.com/dotnet/AspNetCore.Docs/tree/main/aspnetcore/data/ef-rp/intro/samples)進行比較。 取得協助的其中一種好方法是將問題張貼到 StackOverflow.com，並使用 [ASP.NET Core 標籤](https://stackoverflow.com/questions/tagged/asp.net-core)或 [EF Core 標籤](https://stackoverflow.com/questions/tagged/entity-framework-core)。
 
 ## <a name="the-sample-app"></a>範例應用程式
 
@@ -591,7 +591,7 @@ Visual Studio Code 說明則會使用 [SQLite](https://www.sqlite.org/)，它是
 * 在 *Program.cs* 中， `#define Startup` `StartupSQLite` 將會使用批註。
 * 刪除 *appSettings.json*，並將 *appSettingsSQLite.json* 重新命名為 *appSettings.json*。
 * 刪除 *Migrations* 資料夾，並將 *MigrationsSQL* 重新命名為 *Migrations*。
-* 進行 `#if SQLiteVersion` 和移除的全域搜尋 `#if SQLiteVersion` 以及相關聯的 `#endif` 語句。
+* 進行全域搜尋和 `#if SQLiteVersion` 移除 `#if SQLiteVersion` 以及相關聯的 `#endif` 語句。
 * 建置專案。
 * 在專案資料夾中的命令提示字元內，執行下列命令：
 
@@ -668,7 +668,7 @@ Visual Studio Code 說明則會使用 [SQLite](https://www.sqlite.org/)，它是
 
   [!code-csharp[Main](intro/samples/cu30snapshots/1-intro/Models/Student.cs)]
 
-`ID` 屬性會成為對應到此類別資料庫資料表的主索引鍵資料行。 EF Core 預設會解譯名為 `ID` 或 `classnameID` 作為主索引鍵的屬性。 因此 `Student` 類別主索引鍵的替代自動識別名稱為 `StudentID`。 如需詳細資訊，請參閱 [EF Core 索引鍵](/ef/core/modeling/keys?tabs=data-annotations)。
+`ID` 屬性會成為對應到此類別資料庫資料表的主索引鍵資料行。 EF Core 預設會解譯名為 `ID` 或 `classnameID` 作為主索引鍵的屬性。 因此 `Student` 類別主索引鍵的替代自動識別名稱為 `StudentID`。 如需詳細資訊，請參閱 [EF Core-金鑰](/ef/core/modeling/keys?tabs=data-annotations)。
 
 `Enrollments` 屬性為[導覽屬性](/ef/core/modeling/relationships)。 導覽屬性會保留與此實體相關的其他實體。 在這種情況下，`Student` 實體的 `Enrollments` 屬性會保留所有與該 Student 相關的 `Enrollment` 實體。 例如，若資料庫中的 Student 資料列有兩個相關的 Enrollment 資料列，則 `Enrollments` 導覽屬性便會包含這兩個 Enrollment 項目。 
 
@@ -719,8 +719,8 @@ Visual Studio Code 說明則會使用 [SQLite](https://www.sqlite.org/)，它是
 
 * 在 *Pages* 資料夾中建立 *Students* 資料夾。
 * 在 [方案總管] 中，以滑鼠右鍵按一下 *Page/Students* 資料夾，然後選取 [新增]**[新增 Scaffold 項目]** > 。
-* 在 [**新增 Scaffold** ] 對話方塊中， **Razor 使用 Entity Framework (CRUD)** 新增] 選取 [頁面] > ****。
-* 在 [ **Razor 使用 Entity Framework 加入頁面] (CRUD)** 對話方塊：
+* 在 [**新增 Scaffold** ] 對話方塊中，選取 [ **Razor 使用 Entity Framework (CRUD)** 加入的頁面] > ****。
+* 在 [ **Razor 使用 Entity Framework 加入頁面 (CRUD)** ] 對話方塊中：
   * 在 [模型類別] 下拉式清單中，選取 [學生 (ContosoUniversity.Models)]。
   * 在 [資料內容類別] 資料列中，選取 **+** (加號)。
   * 將資料內容的名稱從 *ContosoUniversity.Models.ContosoUniversityContext* 變更為 *ContosoUniversity.Data.SchoolContext*。
@@ -963,11 +963,11 @@ public async Task OnGetAsync()
 
 ::: moniker range="< aspnetcore-3.0"
 
-Contoso 大學範例 web 應用程式示範如何 Razor 使用 Entity Framework (EF) Core 來建立 ASP.NET Core 頁面應用程式。
+Contoso 大學範例 web 應用程式示範如何 Razor 使用 Entity Framework (EF) core 來建立 ASP.NET Core 頁面應用程式。
 
 這個範例應用程式是虛構的 Contoso 大學網站。 其中包括的功能有學生入學許可、課程建立、教師指派。 此頁面是說明如何建立 Contoso 大學範例應用程式教學課程系列中的第一頁。
 
-[下載或檢視已完成的應用程式。](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/data/ef-rp/intro/samples) [下載指示](xref:index#how-to-download-a-sample)。
+[下載或檢視已完成的應用程式。](https://github.com/dotnet/AspNetCore.Docs/tree/main/aspnetcore/data/ef-rp/intro/samples) [下載指示](xref:index#how-to-download-a-sample)。
 
 ## <a name="prerequisites"></a>必要條件
 
@@ -985,7 +985,7 @@ Contoso 大學範例 web 應用程式示範如何 Razor 使用 Entity Framework 
 
 ## <a name="troubleshooting"></a>疑難排解
 
-如果您執行您不能解決問題，您可以藉由比較您的程式碼通常找到方案[已完成的專案](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/data/ef-rp/intro/samples)。 取得協助的好方法是將問題公佈到 [StackOverflow.com](https://stackoverflow.com/questions/tagged/asp.net-core) 以詢問 [ASP.NET Core](https://stackoverflow.com/questions/tagged/asp.net-core) 或 [EF Core](https://stackoverflow.com/questions/tagged/entity-framework-core)。
+如果您執行您不能解決問題，您可以藉由比較您的程式碼通常找到方案[已完成的專案](https://github.com/dotnet/AspNetCore.Docs/tree/main/aspnetcore/data/ef-rp/intro/samples)。 取得協助的好方法是將問題公佈到 [StackOverflow.com](https://stackoverflow.com/questions/tagged/asp.net-core) 以詢問 [ASP.NET Core](https://stackoverflow.com/questions/tagged/asp.net-core) 或 [EF Core](https://stackoverflow.com/questions/tagged/entity-framework-core)。
 
 ## <a name="the-contoso-university-web-app"></a>Contoso 大學 Web 應用程式
 
@@ -997,7 +997,7 @@ Contoso 大學範例 web 應用程式示範如何 Razor 使用 Entity Framework 
 
 ![Students [編輯] 頁面](intro/_static/student-edit.png)
 
-此網站的 UI 樣式接近內建範本所產生的內容。 本教學課程著重于 EF Core Razor 頁面，而不是 UI。
+此網站的 UI 樣式接近內建範本所產生的內容。 本教學課程著重于 EF Core 與 Razor 頁面，而不是 UI。
 
 ## <a name="create-the-contosouniversity-razor-pages-web-app"></a>建立 ContosoUniversity Razor 頁面 web 應用程式
 
@@ -1100,9 +1100,9 @@ dotnet run
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
 * 在 [方案總管] 中，以滑鼠右鍵按一下 *Pages/Students* 資料夾 > [新增]**[新增 Scaffold 項目]** > 。
-* 在 [**新增 Scaffold** ] 對話方塊中， **Razor 使用 Entity Framework (CRUD)** 新增] 選取 [頁面] > ****。
+* 在 [**新增 Scaffold** ] 對話方塊中，選取 [ **Razor 使用 Entity Framework (CRUD)** 加入的頁面] > ****。
 
-**Razor 使用 ENTITY FRAMEWORK (CRUD) 對話方塊來完成 [新增頁面**]：
+**Razor 使用 Entity FRAMEWORK (CRUD) 對話方塊來完成加入頁面**：
 
 * 在 [模型類別] 下拉式清單中，選取 [學生 (ContosoUniversity.Models)]。
 * 在 [資料內容類別] 列中，選取 **+** (加號) 符號，並將產生的名稱變更為 **ContosoUniversity.Models.SchoolContext**。
@@ -1174,7 +1174,7 @@ Scaffolding 工具會自動建立資料庫內容，並向相依性插入容器�
 
 ### <a name="test-the-app"></a>測試應用程式
 
-執行應用程式並接受 cookie 原則。 此應用程式不會保留個人資訊。 您可以參閱 EU 的 cookie 原則 [一般資料保護規定 (GDPR) 支援人員](xref:security/gdpr)。
+執行應用程式並接受 cookie 原則。 此應用程式不會保留個人資訊。 您可以閱讀 cookie [歐盟一般資料保護規定的原則 (GDPR) 支援](xref:security/gdpr)。
 
 * 選取 [學生] 連結，然後選取 [新建]。
 * 測試 [編輯]、[詳細資料] 和 [刪除] 連結。

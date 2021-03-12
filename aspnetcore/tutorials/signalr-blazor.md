@@ -20,12 +20,12 @@ no-loc:
 - SignalR
 uid: tutorials/signalr-blazor
 zone_pivot_groups: blazor-hosting-models
-ms.openlocfilehash: 50e5f2d5b1f9d0bf229bc57e6a1f599f9574b27c
-ms.sourcegitcommit: 1436bd4d70937d6ec3140da56d96caab33c4320b
+ms.openlocfilehash: e9bb79eb5bd8f56fe8014981de76e210eb35c2de
+ms.sourcegitcommit: 54fe1ae5e7d068e27376d562183ef9ddc7afc432
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 03/06/2021
-ms.locfileid: "102395223"
+ms.lasthandoff: 03/10/2021
+ms.locfileid: "102589526"
 ---
 # <a name="use-aspnet-core-signalr-with-blazor"></a>SignalR使用 ASP.NET Core 搭配Blazor
 
@@ -40,7 +40,7 @@ ms.locfileid: "102395223"
 
 在本教學課程結尾，您將會有一個可運作的聊天應用程式。
 
-[查看或下載範例程式碼](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/tutorials/signalr-blazor/samples/) ([如何下載](xref:index#how-to-download-a-sample)) 
+[查看或下載範例程式碼](https://github.com/dotnet/AspNetCore.Docs/tree/main/aspnetcore/tutorials/signalr-blazor/samples/) ([如何下載](xref:index#how-to-download-a-sample)) 
 
 ## <a name="prerequisites"></a>必要條件
 

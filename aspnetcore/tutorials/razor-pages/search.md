@@ -19,26 +19,26 @@ no-loc:
 - Razor
 - SignalR
 uid: tutorials/razor-pages/search
-ms.openlocfilehash: d852766c9706941a1a5f4f3af2c9293ffc4e6a26
-ms.sourcegitcommit: 3593c4efa707edeaaceffbfa544f99f41fc62535
+ms.openlocfilehash: 0ffe4ed251eed551b2799c1a66424ba31137dc18
+ms.sourcegitcommit: 54fe1ae5e7d068e27376d562183ef9ddc7afc432
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 01/04/2021
-ms.locfileid: "97486209"
+ms.lasthandoff: 03/10/2021
+ms.locfileid: "102589513"
 ---
-# <a name="part-6-add-search-to-aspnet-core-no-locrazor-pages"></a>第6部分：將搜尋新增至 ASP.NET Core Razor 頁面
+# <a name="part-6-add-search-to-aspnet-core-razor-pages"></a>第6部分：將搜尋新增至 ASP.NET 核心 Razor 頁面
 
 作者：[Rick Anderson](https://twitter.com/RickAndMSFT)
 
 ::: moniker range=">= aspnetcore-5.0"
 
-[檢視或下載範例程式碼](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/tutorials/razor-pages/razor-pages-start/sample/RazorPagesMovie50) ([如何下載](xref:index#how-to-download-a-sample))。
+[檢視或下載範例程式碼](https://github.com/dotnet/AspNetCore.Docs/tree/main/aspnetcore/tutorials/razor-pages/razor-pages-start/sample/RazorPagesMovie50) ([如何下載](xref:index#how-to-download-a-sample))。
 
 ::: moniker-end
 
 ::: moniker range="< aspnetcore-5.0 >= aspnetcore-3.0"
 
-[檢視或下載範例程式碼](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/tutorials/razor-pages/razor-pages-start/sample/RazorPagesMovie30) ([如何下載](xref:index#how-to-download-a-sample))。
+[檢視或下載範例程式碼](https://github.com/dotnet/AspNetCore.Docs/tree/main/aspnetcore/tutorials/razor-pages/razor-pages-start/sample/RazorPagesMovie30) ([如何下載](xref:index#how-to-download-a-sample))。
 
 ::: moniker-end
 
@@ -71,7 +71,7 @@ var movies = from m in _context.Movie
              select m;
 ```
 
-此查詢僅限 ***定義** _， _*_此時尚未針對_*_ 資料庫執行。
+此查詢僅限 ***定義** _，此時會針對資料庫執行 _ *_not_**。
 
 如果 `SearchString` 屬性不是 Null 或空白，則會修改電影查詢來篩選搜尋字串：
 
@@ -96,11 +96,11 @@ var movies = from m in _context.Movie
 
 ![：：：非 loc (索引) ：：： view 加上自動加到 Url 的字組和傳回的電影清單（Ghostbusters 和 Ghostbusters 2）](search/_static/g2.png)
 
-ASP.NET Core 執行階段使用[模型繫結](xref:mvc/models/model-binding)來設定查詢字串 (`?searchString=Ghost`) 中的 `SearchString` 屬性值或路由傳送資料 (`https://localhost:5001/Movies/Ghost`)。 模型系結 _*_不_*_ 區分大小寫。
+ASP.NET Core 執行階段使用[模型繫結](xref:mvc/models/model-binding)來設定查詢字串 (`?searchString=Ghost`) 中的 `SearchString` 屬性值或路由傳送資料 (`https://localhost:5001/Movies/Ghost`)。 模型系結 ***不*** 區分大小寫。
 
 但是，使用者無法修改 URL 來搜尋電影。 在此步驟中，會新增用來篩選電影的 UI。 如果您已新增路由條件約束 `"{searchString?}"`，請將它移除。
 
-開啟 _Pages/Movies/] 檔案 Index ，並新增在下列程式碼中反白顯示的標記：
+開啟 *Pages/電影/ Index cshtml* 檔案，並新增下列程式碼中反白顯示的標記：
 
 [!code-cshtml[](razor-pages-start/sample/RazorPagesMovie30/SnapShots/Index2.cshtml?highlight=14-19&range=1-22)]
 
@@ -127,7 +127,7 @@ Index以下列程式碼更新頁面的 `OnGetAsync` 方法：
 
 [!code-csharp[](razor-pages-start/sample/RazorPagesMovie30/Pages/Movies/Index.cshtml.cs?name=snippet_SelectList)]
 
-### <a name="add-search-by-genre-to-the-no-locrazor-page"></a>將依內容類型搜尋新增至 Razor 頁面
+### <a name="add-search-by-genre-to-the-razor-page"></a>將依內容類型搜尋新增至 Razor 頁面
 
 1. 將 *Index cshtml* [ `<form>` element] (更新 https://developer.mozilla.org/docs/Web/HTML/Element/form) 為在下列標記中反白顯示：
 
@@ -145,7 +145,7 @@ Index以下列程式碼更新頁面的 `OnGetAsync` 方法：
 
 ::: moniker range="< aspnetcore-3.0"
 
-[檢視或下載範例程式碼](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/tutorials/razor-pages/razor-pages-start) ([如何下載](xref:index#how-to-download-a-sample))。
+[檢視或下載範例程式碼](https://github.com/dotnet/AspNetCore.Docs/tree/main/aspnetcore/tutorials/razor-pages/razor-pages-start) ([如何下載](xref:index#how-to-download-a-sample))。
 
 在下列各節中，會新增依「內容類型」或「名稱」搜尋電影。
 
@@ -196,11 +196,11 @@ var movies = from m in _context.Movie
 
 ![：：：非 loc (索引) ：：： view 加上自動加到 Url 的字組和傳回的電影清單（Ghostbusters 和 Ghostbusters 2）](search/_static/g2.png)
 
-ASP.NET Core 執行階段使用[模型繫結](xref:mvc/models/model-binding)來設定查詢字串 (`?searchString=Ghost`) 中的 `SearchString` 屬性值或路由傳送資料 (`https://localhost:5001/Movies/Ghost`)。 模型系 *_結不是_* 區分大小寫。
+ASP.NET Core 執行階段使用[模型繫結](xref:mvc/models/model-binding)來設定查詢字串 (`?searchString=Ghost`) 中的 `SearchString` 屬性值或路由傳送資料 (`https://localhost:5001/Movies/Ghost`)。 模型系結 ***不*** 區分大小寫。
 
 但是，使用者無法修改 URL 來搜尋電影。 在此步驟中，會新增用來篩選電影的 UI。 如果您已新增路由條件約束 `"{searchString?}"`，請將它移除。
 
-開啟 _Pages/Movies/] 檔案 Index ，並新增 `<form>` 在下列程式碼中反白顯示的標記：
+開啟 *Pages/電影/ Index cshtml* 檔案，並新增 `<form>` 下列程式碼中反白顯示的標記：
 
 [!code-cshtml[](razor-pages-start/sample/RazorPagesMovie22/Pages/Movies/Index2.cshtml?highlight=14-19&range=1-22)]
 
@@ -227,7 +227,7 @@ HTML `<form>` 標籤會使用下列[標籤協助程式](xref:mvc/views/tag-helpe
 
 [!code-csharp[](razor-pages-start/sample/RazorPagesMovie22/Pages/Movies/Index.cshtml.cs?name=snippet_SelectList)]
 
-### <a name="add-search-by-genre-to-the-no-locrazor-page"></a>將依內容類型搜尋新增至 Razor 頁面
+### <a name="add-search-by-genre-to-the-razor-page"></a>將依內容類型搜尋新增至 Razor 頁面
 
 將 *Index cshtml* [ `<form>` element] (更新 https://developer.mozilla.org/docs/Web/HTML/Element/form) 為在下列標記中反白顯示：
 

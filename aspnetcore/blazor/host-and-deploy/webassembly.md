@@ -19,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/host-and-deploy/webassembly
-ms.openlocfilehash: fbd6698eeb65ef9ab6263d389f1f50ffcac8be79
-ms.sourcegitcommit: 1436bd4d70937d6ec3140da56d96caab33c4320b
+ms.openlocfilehash: bb45b763fb24b5270c92b3ffd18f3fbc3ba1093b
+ms.sourcegitcommit: 54fe1ae5e7d068e27376d562183ef9ddc7afc432
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 03/06/2021
-ms.locfileid: "102394989"
+ms.lasthandoff: 03/10/2021
+ms.locfileid: "102589422"
 ---
 # <a name="host-and-deploy-aspnet-core-blazor-webassembly"></a>裝載和部署 ASP.NET Core Blazor WebAssembly
 
@@ -552,7 +552,7 @@ Blazor發行專案時， `web.config` 會使用下列 IIS 設定來建立檔案�
 
 *本節僅適用于獨立的 Blazor WebAssembly 應用程式。託管 Blazor 應用程式會使用預設的 ASP.NET Core 應用程式 `web.config` 檔，而不是本節所連結的檔案。*
 
-您可以透過設定 IIS `web.config` ，為獨立應用程式提供 Brotli 或 Gzip 壓縮 Blazor 的資產 Blazor WebAssembly 。 如需範例設定檔，請參閱 [`web.config`](https://github.com/dotnet/AspNetCore.Docs/blob/master/aspnetcore/blazor/host-and-deploy/webassembly/_samples/web.config?raw=true) 。
+您可以透過設定 IIS `web.config` ，為獨立應用程式提供 Brotli 或 Gzip 壓縮 Blazor 的資產 Blazor WebAssembly 。 如需範例設定檔，請參閱 [`web.config`](https://github.com/dotnet/AspNetCore.Docs/blob/main/aspnetcore/blazor/host-and-deploy/webassembly/_samples/web.config?raw=true) 。
 
 在下列情況下，可能需要額外的範例檔案設定 `web.config` ：
 
@@ -785,7 +785,7 @@ Blazor 在每個發行組建上執行中繼語言 (IL) 連結，以從輸出元�
 
 `loadBootResource` 參數會出現在下表中。
 
-| 參數    | 描述 |
+| 參數    | Description |
 | ------------ | ----------- |
 | `type`       | 資源類型。 運算子類型： `assembly` 、 `pdb` 、 `dotnetjs` 、 `dotnetwasm` 、 `timezonedata` |
 | `name`       | 資源名稱。 |
@@ -956,7 +956,7 @@ Remove-Item $filepath\bin\Release\$tfm\wwwroot\_framework\blazor.boot.json.gz
 
 ### <a name="troubleshoot-integrity-powershell-script"></a>針對完整性 PowerShell 腳本進行疑難排解
 
-使用 [`integrity.ps1`](https://github.com/dotnet/AspNetCore.Docs/blob/master/aspnetcore/blazor/host-and-deploy/webassembly/_samples/integrity.ps1?raw=true) PowerShell 腳本來驗證已發佈和已部署的 Blazor 應用程式。 當應用程式有架構無法識別的完整性問題時，就會提供此腳本作為起點 Blazor 。 您的應用程式可能需要自訂腳本。
+使用 [`integrity.ps1`](https://github.com/dotnet/AspNetCore.Docs/blob/main/aspnetcore/blazor/host-and-deploy/webassembly/_samples/integrity.ps1?raw=true) PowerShell 腳本來驗證已發佈和已部署的 Blazor 應用程式。 當應用程式有架構無法識別的完整性問題時，就會提供此腳本作為起點 Blazor 。 您的應用程式可能需要自訂腳本。
 
 腳本會檢查資料夾中的檔案 `publish` ，並從已部署的應用程式下載，以偵測包含完整性雜湊之不同資訊清單中的問題。 這些檢查應該會偵測到最常見的問題：
 

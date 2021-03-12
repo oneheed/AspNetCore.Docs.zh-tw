@@ -17,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: mvc/controllers/dependency-injection
-ms.openlocfilehash: 1282cd984584be423fba755e64e5d2f1afd2af89
-ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
+ms.openlocfilehash: f3654e008733c57b4cd4cd34a52b747af2258be1
+ms.sourcegitcommit: 54fe1ae5e7d068e27376d562183ef9ddc7afc432
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 10/30/2020
-ms.locfileid: "93060608"
+ms.lasthandoff: 03/10/2021
+ms.locfileid: "102589071"
 ---
 # <a name="dependency-injection-into-controllers-in-aspnet-core"></a>ASP.NET Core 控制器的相依性插入
 
@@ -32,7 +32,7 @@ ms.locfileid: "93060608"
 
 ASP.NET Core MVC 控制器會透過建構函式明確地要求相依性。 ASP.NET Core 內建[相依性插入 (DI)](xref:fundamentals/dependency-injection) 支援。 DI 可讓您更輕鬆地測試和維護應用程式。
 
-[查看或下載範例程式碼](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/mvc/controllers/dependency-injection/sample) ([如何下載](xref:index#how-to-download-a-sample)) 
+[查看或下載範例程式碼](https://github.com/dotnet/AspNetCore.Docs/tree/main/aspnetcore/mvc/controllers/dependency-injection/sample) ([如何下載](xref:index#how-to-download-a-sample)) 
 
 ## <a name="constructor-injection"></a>建構函式插入
 
@@ -64,7 +64,7 @@ ASP.NET Core MVC 控制器會透過建構函式明確地要求相依性。 ASP.N
 
 ## <a name="access-settings-from-a-controller"></a>從控制器存取設定
 
-從控制器存取應用程式或組態設定是常見的模式。 <xref:fundamentals/configuration/options> 中所述的「選項模式」  是管理設定的慣用方法。 一般而言，不要將 <xref:Microsoft.Extensions.Configuration.IConfiguration> 直接插入至控制器。
+從控制器存取應用程式或組態設定是常見的模式。 <xref:fundamentals/configuration/options> 中所述的「選項模式」是管理設定的慣用方法。 一般而言，不要將 <xref:Microsoft.Extensions.Configuration.IConfiguration> 直接插入至控制器。
 
 建立要代表選項的類別。 例如：
 
@@ -96,7 +96,7 @@ ASP.NET Core MVC 控制器會透過建構函式明確地要求相依性。 ASP.N
 
 ASP.NET Core MVC 控制器會透過建構函式明確地要求相依性。 ASP.NET Core 內建[相依性插入 (DI)](xref:fundamentals/dependency-injection) 支援。 DI 可讓您更輕鬆地測試和維護應用程式。
 
-[查看或下載範例程式碼](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/mvc/controllers/dependency-injection/sample) ([如何下載](xref:index#how-to-download-a-sample)) 
+[查看或下載範例程式碼](https://github.com/dotnet/AspNetCore.Docs/tree/main/aspnetcore/mvc/controllers/dependency-injection/sample) ([如何下載](xref:index#how-to-download-a-sample)) 
 
 ## <a name="constructor-injection"></a>建構函式插入
 
@@ -128,7 +128,7 @@ ASP.NET Core MVC 控制器會透過建構函式明確地要求相依性。 ASP.N
 
 ## <a name="access-settings-from-a-controller"></a>從控制器存取設定
 
-從控制器存取應用程式或組態設定是常見的模式。 <xref:fundamentals/configuration/options> 中所述的「選項模式」  是管理設定的慣用方法。 一般而言，不要將 <xref:Microsoft.Extensions.Configuration.IConfiguration> 直接插入至控制器。
+從控制器存取應用程式或組態設定是常見的模式。 <xref:fundamentals/configuration/options> 中所述的「選項模式」是管理設定的慣用方法。 一般而言，不要將 <xref:Microsoft.Extensions.Configuration.IConfiguration> 直接插入至控制器。
 
 建立要代表選項的類別。 例如：
 

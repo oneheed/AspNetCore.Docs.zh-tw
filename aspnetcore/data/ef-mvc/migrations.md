@@ -1,6 +1,6 @@
 ---
 title: 教學課程第5部分：將遷移套用至 Contoso 大學範例
-description: Contoso 大學教學課程系列的第5部分。 使用 EF Core 的遷移功能來管理 ASP.NET Core MVC 應用程式中的資料模型變更。
+description: Contoso 大學教學課程系列的第5部分。 使用 EF Core 遷移功能來管理 ASP.NET Core MVC 應用程式中的資料模型變更。
 author: rick-anderson
 ms.author: riande
 ms.custom: contperf-fy21q2
@@ -19,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: data/ef-mvc/migrations
-ms.openlocfilehash: 7c8f562bcf0b7e2672f2f1ac244e0d9278e4c204
-ms.sourcegitcommit: 3593c4efa707edeaaceffbfa544f99f41fc62535
+ms.openlocfilehash: aebbc3f29b0356c7993abd83869ab21d3613bf61
+ms.sourcegitcommit: 54fe1ae5e7d068e27376d562183ef9ddc7afc432
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 01/04/2021
-ms.locfileid: "97485923"
+ms.lasthandoff: 03/10/2021
+ms.locfileid: "102589344"
 ---
 # <a name="tutorial-part-5-apply-migrations-to-the-contoso-university-sample"></a>教學課程：第5部分：將遷移套用至 Contoso 大學範例
 
@@ -39,7 +39,7 @@ ms.locfileid: "97485923"
 > * 了解資料模型快照集
 > * 套用移轉
 
-## <a name="prerequisites"></a>先決條件
+## <a name="prerequisites"></a>必要條件
 
 * [排序、篩選和分頁](sort-filter-page.md)
 
@@ -49,11 +49,11 @@ ms.locfileid: "97485923"
 
 在您將應用程式部署到生產環境之前，都可以使用上述方法讓資料庫與資料模型保持同步。 但當應用程式在生產環境中執行時，通常會儲存您想要保留的資料，而您也不想在每次資料變更 (例如新增資料行) 時遺失任何項目。 為了解決上述問題，EF Core 移轉功能可讓 EF 更新資料庫結構描述，而不是建立新的資料庫。
 
-若要使用遷移，您可以使用 **封裝管理員主控台** (PMC) 或 CLI。  這些教學課程會示範如何使用 CLI 命令。 PMC 的資訊則位於[本教學課程結尾](#pmc)。
+若要使用遷移，您可以使用 **套件管理員主控台** (PMC) 或 CLI。  這些教學課程會示範如何使用 CLI 命令。 PMC 的資訊則位於[本教學課程結尾](#pmc)。
 
 ## <a name="drop-the-database"></a>卸除資料庫
 
-以 [通用工具](/ef/core/miscellaneous/cli/dotnet) 的形式安裝 EF Core 工具，然後刪除資料庫：
+將 EF Core tools 安裝為 [全域工具](/ef/core/miscellaneous/cli/dotnet) ，然後刪除資料庫：
 
  ```dotnetcli
  dotnet tool install --global dotnet-ef
@@ -88,7 +88,7 @@ info: Microsoft.EntityFrameworkCore.Infrastructure[10403]
 Done. To undo this action, use 'ef migrations remove'
 ```
 
-如果您看到錯誤訊息「*無法存取檔案 ... ContosoUniversity.dll，因為另一個進程正在使用它*。」，請在 Windows 系統匣中尋找 IIS Express 圖示，然後以滑鼠右鍵按一下它，再按一下 [ **ContosoUniversity > 停止網站**]。
+如果您看到錯誤訊息「*無法存取檔案 ... ContosoUniversity.dll，因為另一個進程正在使用* 該檔案。」，請在 Windows 系統匣中尋找 IIS Express 圖示，然後以滑鼠右鍵按一下它，再按一下 [ **ContosoUniversity > 停止網站**]。
 
 ## <a name="examine-up-and-down-methods"></a>檢查 Up 和 Down 方法
 
@@ -118,7 +118,7 @@ Migrations 會呼叫 `Up` 方法，以實作移轉所需的資料模型變更。
 dotnet ef database update
 ```
 
-此命令的輸出類似於 `migrations add` 命令，不同之處在於其會顯示設定資料庫之 SQL 命令的記錄。 下列範例輸出中省略了大部分的記錄。 如果您不想看到這麼詳細的記錄訊息，可以變更 *appsettings.Development.json* 檔案中的記錄層級。 如需詳細資訊，請參閱 <xref:fundamentals/logging/index> 。
+此命令的輸出類似於 `migrations add` 命令，不同之處在於其會顯示設定資料庫之 SQL 命令的記錄。 下列範例輸出中省略了大部分的記錄。 如果您不想看到這麼詳細的記錄訊息，可以變更 *appsettings.Development.json* 檔案中的記錄層級。 如需詳細資訊，請參閱<xref:fundamentals/logging/index>。
 
 ```text
 info: Microsoft.EntityFrameworkCore.Infrastructure[10403]
@@ -171,7 +171,7 @@ Done.
 
 ## <a name="get-the-code"></a>取得程式碼
 
-[下載或檢視已完成的應用程式。](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/data/ef-mvc/intro/samples)
+[下載或檢視已完成的應用程式。](https://github.com/dotnet/AspNetCore.Docs/tree/main/aspnetcore/data/ef-mvc/intro/samples)
 
 ## <a name="next-step"></a>後續步驟
 

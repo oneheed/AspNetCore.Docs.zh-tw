@@ -1,7 +1,7 @@
 ---
 title: ASP.NET Core 中的帳戶確認和密碼復原
 author: rick-anderson
-description: 瞭解如何建立具有電子郵件確認和密碼重設的 ASP.NET Core 應用程式。
+description: 瞭解如何使用電子郵件確認和密碼重設來建立 ASP.NET Core 應用程式。
 ms.author: riande
 ms.date: 03/11/2019
 no-loc:
@@ -17,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: security/authentication/accconfirm
-ms.openlocfilehash: 91148c67d5dc0bf97e2f926f50dcff5dd0708f4b
-ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
+ms.openlocfilehash: f71ae5e619b875c03401fa78320582c406875401
+ms.sourcegitcommit: 54fe1ae5e7d068e27376d562183ef9ddc7afc432
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 10/30/2020
-ms.locfileid: "93052314"
+ms.lasthandoff: 03/10/2021
+ms.locfileid: "102586107"
 ---
 # <a name="account-confirmation-and-password-recovery-in-aspnet-core"></a>ASP.NET Core 中的帳戶確認和密碼復原
 
@@ -57,7 +57,7 @@ dotnet run
 * 選取 `Click here to confirm your account` 連結。
 * 選取登入連結，並使用相同的認證 **登** 入。
 * 選取 `Hello YourEmail@provider.com!` 連結，此連結會將您重新導向至 `/Identity/Account/Manage/PersonalData` 頁面。
-* 選取左側的 [ **個人資料** ] 索引標籤，然後選取 [ **刪除** ]。
+* 選取左側的 [ **個人資料** ] 索引標籤，然後選取 [ **刪除**]。
 
 ### <a name="configure-an-email-provider"></a>設定電子郵件提供者
 
@@ -65,7 +65,7 @@ dotnet run
 
 SendGrid 帳戶可能需要 [新增寄件者](https://sendgrid.com/docs/ui/sending-email/senders/)。
 
-建立類別來提取安全的電子郵件金鑰。 針對此範例，請建立 *服務/AuthMessageSenderOptions .cs* ：
+建立類別來提取安全的電子郵件金鑰。 針對此範例，請建立 *服務/AuthMessageSenderOptions .cs*：
 
 [!code-csharp[](accconfirm/sample/WebPWrecover30/Services/AuthMessageSenderOptions.cs?name=snippet1)]
 
@@ -101,7 +101,7 @@ Successfully saved SendGridUser = RickAndMSFT to the secret store.
 
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
-從封裝管理員主控台中，輸入下列命令：
+從套件管理員主控台中，輸入下列命令：
 
 ```powershell
 Install-Package SendGrid
@@ -117,7 +117,7 @@ dotnet add package SendGrid
 
 ---
 
-若要免費註冊免費的 SendGrid 帳戶，請參閱 [使用 SendGrid 的開始](https://sendgrid.com/free/) 。
+請參閱 [開始使用 SendGrid 免費](https://sendgrid.com/free/) 註冊免費的 SendGrid 帳戶。
 
 ### <a name="implement-iemailsender"></a>執行 IEmailSender
 
@@ -139,7 +139,7 @@ dotnet add package SendGrid
 遵循[Scaffold Identity ](xref:security/authentication/scaffold-identity)和 Scaffold 的指示 `RegisterConfirmation` 。
 
 <!-- .NET 5 fixes this, see
-https://github.com/dotnet/aspnetcore/blob/master/src/Identity/UI/src/Areas/Identity/Pages/V4/Account/RegisterConfirmation.cshtml.cs#L74-L77
+https://github.com/dotnet/aspnetcore/blob/main/src/Identity/UI/src/Areas/Identity/Pages/V4/Account/RegisterConfirmation.cshtml.cs#L74-L77
 -->
 
 [!INCLUDE[](~/includes/disableVer.md)]
@@ -156,7 +156,7 @@ https://github.com/dotnet/aspnetcore/blob/master/src/Identity/UI/src/Areas/Ident
 
 ### <a name="test-password-reset"></a>測試密碼重設
 
-* 如果您已登入，請選取 [ **登出** ]。
+* 如果您已登入，請選取 [ **登出**]。
 * 選取 [ **登入** ] 連結，然後選取 [ **忘記密碼？** ] 連結。
 * 輸入您用來註冊帳戶的電子郵件。
 * 系統會傳送具有重設密碼連結的電子郵件。 檢查您的電子郵件，然後按一下連結來重設您的密碼。 成功重設您的密碼之後，您可以使用您的電子郵件和新密碼登入。
@@ -165,7 +165,7 @@ https://github.com/dotnet/aspnetcore/blob/master/src/Identity/UI/src/Areas/Ident
 
 ## <a name="resend-email-confirmation"></a>重新傳送電子郵件確認
 
-在 ASP.NET Core 5.0 和更新版本中，選取 [ **登** 入] 頁面上的 [ **重新傳送電子郵件確認** ] 連結。
+在 ASP.NET Core 5.0 和更新版本中，選取 **登** 入頁面上的 [**重新傳送電子郵件確認**] 連結。
 
 ### <a name="change-email-and-activity-timeout"></a>變更電子郵件和活動超時
 
@@ -241,7 +241,7 @@ https://github.com/dotnet/aspnetcore/blob/master/src/Identity/UI/src/Areas/Ident
 
 [.NET Core 2.2 SDK 或更新版本](https://dotnet.microsoft.com/download/dotnet-core)
 
-## <a name="create-a-web--app-and-scaffold-no-locidentity"></a>建立 web 應用程式和 scaffold Identity
+## <a name="create-a-web--app-and-scaffold-identity"></a>建立 web 應用程式和 scaffold Identity
 
 執行下列命令，以建立具有驗證的 web 應用程式。
 
@@ -267,7 +267,7 @@ dotnet run
 
 請注意，資料表的 `EmailConfirmed` 欄位是 `False` 。
 
-當應用程式傳送確認電子郵件時，您可能會想要在下一個步驟中再次使用此電子郵件。 以滑鼠右鍵按一下資料列，然後選取 [ **刪除** ]。 刪除電子郵件別名可讓您更輕鬆地進行下列步驟。
+當應用程式傳送確認電子郵件時，您可能會想要在下一個步驟中再次使用此電子郵件。 以滑鼠右鍵按一下資料列，然後選取 [ **刪除**]。 刪除電子郵件別名可讓您更輕鬆地進行下列步驟。
 
 <a name="prevent-login-at-registration"></a>
 
@@ -287,7 +287,7 @@ dotnet run
 
 在本教學課程中， [SendGrid](https://sendgrid.com) 是用來傳送電子郵件。 您需要 SendGrid 帳戶和金鑰才能傳送電子郵件。 您可以使用其他電子郵件提供者。 ASP.NET Core 2.x 包含，可 `System.Net.Mail` 讓您從應用程式傳送電子郵件。 建議您使用 SendGrid 或其他電子郵件服務傳送電子郵件。 SMTP 很難安全地進行保護和設定。
 
-建立類別來提取安全的電子郵件金鑰。 針對此範例，請建立 *服務/AuthMessageSenderOptions .cs* ：
+建立類別來提取安全的電子郵件金鑰。 針對此範例，請建立 *服務/AuthMessageSenderOptions .cs*：
 
 [!code-csharp[](accconfirm/sample/WebPWrecover22/Services/AuthMessageSenderOptions.cs?name=snippet1)]
 
@@ -321,7 +321,7 @@ info: Successfully saved SendGridUser = RickAndMSFT to the secret store.
 
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
-從封裝管理員主控台中，輸入下列命令：
+從套件管理員主控台中，輸入下列命令：
 
 ```powershell
 Install-Package SendGrid
@@ -337,7 +337,7 @@ dotnet add package SendGrid
 
 ---
 
-若要免費註冊免費的 SendGrid 帳戶，請參閱 [使用 SendGrid 的開始](https://sendgrid.com/free/) 。
+請參閱 [開始使用 SendGrid 免費](https://sendgrid.com/free/) 註冊免費的 SendGrid 帳戶。
 
 ### <a name="implement-iemailsender"></a>執行 IEmailSender
 
@@ -386,7 +386,7 @@ await _signInManager.SignInAsync(user, isPersistent: false);
 
 ### <a name="test-password-reset"></a>測試密碼重設
 
-* 如果您已登入，請選取 [ **登出** ]。
+* 如果您已登入，請選取 [ **登出**]。
 * 選取 [ **登入** ] 連結，然後選取 [ **忘記密碼？** ] 連結。
 * 輸入您用來註冊帳戶的電子郵件。
 * 系統會傳送具有重設密碼連結的電子郵件。 檢查您的電子郵件，然後按一下連結來重設您的密碼。 成功重設您的密碼之後，您可以使用您的電子郵件和新密碼登入。

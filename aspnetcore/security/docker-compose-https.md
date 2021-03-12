@@ -1,7 +1,7 @@
 ---
-title: 使用 docker 撰寫的 HTTPS 在容器中裝載 ASP.NET Core 映射
+title: 使用 docker 撰寫的 HTTPS 在容器中裝載 ASP.NET 核心映射
 author: ravipal
-description: 瞭解如何使用 Docker Compose 透過 HTTPS 裝載 ASP.NET Core 映射
+description: 瞭解如何使用 Docker 撰寫透過 HTTPS 來裝載 ASP.NET Core 映射
 monikerRange: '>= aspnetcore-2.1'
 ms.author: ravipal
 ms.custom: mvc
@@ -19,21 +19,21 @@ no-loc:
 - Razor
 - SignalR
 uid: security/docker-compose-https
-ms.openlocfilehash: 37a0142dac1e26afd26dbf2aad46bee20693652e
-ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
+ms.openlocfilehash: 69c449527a64ec928d436245e9e971ec49303489
+ms.sourcegitcommit: 54fe1ae5e7d068e27376d562183ef9ddc7afc432
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 10/30/2020
-ms.locfileid: "93051638"
+ms.lasthandoff: 03/10/2021
+ms.locfileid: "102588753"
 ---
-# <a name="hosting-aspnet-core-images-with-docker-compose-over-https"></a>使用 Docker Compose 透過 HTTPS 裝載 ASP.NET Core 映射
+# <a name="hosting-aspnet-core-images-with-docker-compose-over-https"></a>透過 HTTPS 使用 Docker 撰寫裝載 ASP.NET 核心映射
 
 
 ASP.NET Core 預設會使用 [HTTPS](./enforcing-ssl.md)。 [HTTPS](https://en.wikipedia.org/wiki/HTTPS) 依賴 [憑證](https://en.wikipedia.org/wiki/Public_key_certificate) 來進行信任、身分識別和加密。
 
 本檔說明如何使用 HTTPS 執行預先建立的容器映射。
 
-請參閱 [使用 Docker OVER HTTPS 開發](https://github.com/dotnet/dotnet-docker/blob/master/samples/run-aspnetcore-https-development.md) 適用于開發案例的 ASP.NET Core 應用程式。
+請參閱 [使用 Docker OVER HTTPS 開發 ASP.NET Core 應用程式](https://github.com/dotnet/dotnet-docker/blob/main/samples/run-aspnetcore-https-development.md) ，以進行開發案例。
 
 此範例需要 docker [17.06](https://docs.docker.com/release-notes/docker-ce) 或更新版本的 [docker 用戶端](https://www.docker.com/products/docker)。
 
@@ -52,7 +52,7 @@ ASP.NET Core 預設會使用 [HTTPS](./enforcing-ssl.md)。 [HTTPS](https://en.w
 * `dotnet dev-certs`這是不必要的工具。
 * 憑證不需要儲存在指示中所使用的位置。 將憑證儲存在網站目錄以外的任何位置。
 
-下列章節中包含的指示會使用 `volumes` *>docker-compose.yml. yml* 中的屬性，將憑證掛接到容器中。 您可以使用 Dockerfile 中的命令，將憑證新增至容器映射中 `COPY` ，但不建議這麼做。 *Dockerfile* 基於下列原因，不建議將憑證複製到映射：
+下列章節中包含的指示會使用 `volumes` *>docker-compose.yml. yml* 中的屬性，將憑證掛接到容器中。 您可以使用 Dockerfile 中的命令，將憑證新增至容器映射中 `COPY` ，但不建議這麼做。  基於下列原因，不建議將憑證複製到映射：
 
 * 這會讓您難以使用相同的映射來測試開發人員憑證。
 * 這使得使用相同的映射來裝載生產憑證很困難。
@@ -94,7 +94,7 @@ services:
 ```
 Docker 撰寫檔案中指定的密碼必須符合憑證所用的密碼。
 
-使用針對 HTTPS 設定 ASP.NET Core 來啟動容器：
+啟動已針對 HTTPS 設定 ASP.NET Core 的容器：
 
 ```console
 docker-compose -f "docker-compose.debug.yml" up -d
@@ -134,7 +134,7 @@ services:
 ```
 Docker 撰寫檔案中指定的密碼必須符合憑證所用的密碼。
 
-使用針對 HTTPS 設定 ASP.NET Core 來啟動容器：
+啟動已針對 HTTPS 設定 ASP.NET Core 的容器：
 
 ```console
 docker-compose -f "docker-compose.debug.yml" up -d
@@ -172,7 +172,7 @@ services:
 ```
 Docker 撰寫檔案中指定的密碼必須符合憑證所用的密碼。
 
-使用針對 HTTPS 設定 ASP.NET Core 來啟動容器：
+啟動已針對 HTTPS 設定 ASP.NET Core 的容器：
 
 ```console
 docker-compose -f "docker-compose.debug.yml" up -d

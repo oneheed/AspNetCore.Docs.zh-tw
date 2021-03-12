@@ -19,14 +19,14 @@ no-loc:
 - Razor
 - SignalR
 uid: razor-pages/razor-pages-conventions
-ms.openlocfilehash: 2947bf0b697ca01f17d260b9f31aa3cc79d457b6
-ms.sourcegitcommit: 3593c4efa707edeaaceffbfa544f99f41fc62535
+ms.openlocfilehash: c75e2f1de522f80f4d8e13cf3f60c99cc6b7196a
+ms.sourcegitcommit: 54fe1ae5e7d068e27376d562183ef9ddc7afc432
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 01/04/2021
-ms.locfileid: "93059867"
+ms.lasthandoff: 03/10/2021
+ms.locfileid: "102589409"
 ---
-# <a name="no-locrazor-pages-route-and-app-conventions-in-aspnet-core"></a>Razor ASP.NET Core 中的頁面路由和應用程式慣例
+# <a name="razor-pages-route-and-app-conventions-in-aspnet-core"></a>Razor ASP.NET Core 中的頁面路由和應用程式慣例
 
 ::: moniker range=">= aspnetcore-3.0"
 
@@ -38,9 +38,9 @@ ms.locfileid: "93059867"
 
 有保留字無法用作路由區段或參數名稱。 如需詳細資訊，請參閱 [路由：保留的路由名稱](xref:mvc/controllers/routing#reserved-routing-names)。
 
-[查看或下載範例程式碼](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/razor-pages/razor-pages-conventions/samples/) ([如何下載](xref:index#how-to-download-a-sample)) 
+[查看或下載範例程式碼](https://github.com/dotnet/AspNetCore.Docs/tree/main/aspnetcore/razor-pages/razor-pages-conventions/samples/) ([如何下載](xref:index#how-to-download-a-sample)) 
 
-| 案例 | 範例會示範 ... |
+| 狀況 | 範例會示範 ... |
 | -------- | --------------------------- |
 | [模型慣例](#model-conventions)<br><br>Conventions.Add<ul><li>IPageRouteModelConvention</li><li>IPageApplicationModelConvention</li><li>IPageHandlerModelConvention</li></ul> | 將路由範本和標頭新增至應用程式的頁面。 |
 | [頁面路由動作慣例](#page-route-action-conventions)<ul><li>AddFolderRouteModelConvention</li><li>AddPageRouteModelConvention</li><li>AddPageRoute</li></ul> | 將路由範本新增至資料夾中的頁面，以及新增至單一頁面。 |
@@ -110,7 +110,7 @@ Razor 頁面路由和 MVC 控制器路由會共用執行。 您可以在 [路由
 
 可能的話，請不要設定 `Order` ，這會導致 `Order = 0` 。 依賴路由選取正確的路由。
 
-Razor<xref:Microsoft.AspNetCore.Mvc.RazorPages.RazorPagesOptions.Conventions>當 Razor 頁面加入至中的服務集合時，會加入頁面選項，例如加入 `Startup.ConfigureServices` 。 如需範例，請參閱[範例應用程式](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/razor-pages/razor-pages-conventions/samples/)。
+Razor<xref:Microsoft.AspNetCore.Mvc.RazorPages.RazorPagesOptions.Conventions>當 Razor 頁面加入至中的服務集合時，會加入頁面選項，例如加入 `Startup.ConfigureServices` 。 如需範例，請參閱[範例應用程式](https://github.com/dotnet/AspNetCore.Docs/tree/main/aspnetcore/razor-pages/razor-pages-conventions/samples/)。
 
 [!code-csharp[](razor-pages-conventions/samples/3.x/SampleApp/Startup.cs?name=snippet1)]
 
@@ -184,7 +184,7 @@ Razor<xref:Microsoft.AspNetCore.Mvc.RazorPages.RazorPagesOptions.Conventions>當
 
 ## <a name="use-a-parameter-transformer-to-customize-page-routes"></a>使用參數轉換器自訂頁面路由
 
-您可以使用參數轉換程式自訂 ASP.NET Core 所產生的頁面路由。 參數轉換程式會實作 `IOutboundParameterTransformer` 並轉換參數值。 例如，自訂 `SlugifyParameterTransformer` 參數轉換器會將 `SubscriptionManagement` 路由值變更為 `subscription-management`。
+ASP.NET Core 產生的頁面路由可以使用參數轉換程式自訂。 參數轉換程式會實作 `IOutboundParameterTransformer` 並轉換參數值。 例如，自訂 `SlugifyParameterTransformer` 參數轉換器會將 `SubscriptionManagement` 路由值變更為 `subscription-management`。
 
 `PageRouteTransformerConvention`頁面路由模型慣例會將參數轉換器套用至應用程式中自動產生之頁面路由的資料夾和檔案名區段。 例如， Razor 在 */Pages/SubscriptionManagement/ViewAll.cshtml* 的頁面檔中，會將其路由從重寫 `/SubscriptionManagement/ViewAll` 到 `/subscription-management/view-all` 。
 
@@ -319,9 +319,9 @@ Contact 頁面也可以透過其預設路由在 `/Contact` 上連線。
 
 有保留字無法用作路由區段或參數名稱。 如需詳細資訊，請參閱 [路由：保留的路由名稱](xref:fundamentals/routing#reserved-routing-names)。
 
-[查看或下載範例程式碼](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/razor-pages/razor-pages-conventions/samples/) ([如何下載](xref:index#how-to-download-a-sample)) 
+[查看或下載範例程式碼](https://github.com/dotnet/AspNetCore.Docs/tree/main/aspnetcore/razor-pages/razor-pages-conventions/samples/) ([如何下載](xref:index#how-to-download-a-sample)) 
 
-| 案例 | 範例會示範 ... |
+| 狀況 | 範例會示範 ... |
 | -------- | --------------------------- |
 | [模型慣例](#model-conventions)<br><br>Conventions.Add<ul><li>IPageRouteModelConvention</li><li>IPageApplicationModelConvention</li><li>IPageHandlerModelConvention</li></ul> | 將路由範本和標頭新增至應用程式的頁面。 |
 | [頁面路由動作慣例](#page-route-action-conventions)<ul><li>AddFolderRouteModelConvention</li><li>AddPageRouteModelConvention</li><li>AddPageRoute</li></ul> | 將路由範本新增至資料夾中的頁面，以及新增至單一頁面。 |
@@ -392,7 +392,7 @@ Razor 頁面路由和 MVC 控制器路由會共用執行。 您可以在 [路由
 
 可能的話，請不要設定 `Order` ，這會導致 `Order = 0` 。 依賴路由選取正確的路由。
 
-Razor<xref:Microsoft.AspNetCore.Mvc.RazorPages.RazorPagesOptions.Conventions>當 MVC 新增至中的服務集合時，會加入頁面選項，例如加入 `Startup.ConfigureServices` 。 如需範例，請參閱[範例應用程式](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/razor-pages/razor-pages-conventions/samples/)。
+Razor<xref:Microsoft.AspNetCore.Mvc.RazorPages.RazorPagesOptions.Conventions>當 MVC 新增至中的服務集合時，會加入頁面選項，例如加入 `Startup.ConfigureServices` 。 如需範例，請參閱[範例應用程式](https://github.com/dotnet/AspNetCore.Docs/tree/main/aspnetcore/razor-pages/razor-pages-conventions/samples/)。
 
 [!code-csharp[](razor-pages-conventions/samples/2.x/SampleApp/Startup.cs?name=snippet1)]
 
@@ -466,7 +466,7 @@ Razor<xref:Microsoft.AspNetCore.Mvc.RazorPages.RazorPagesOptions.Conventions>當
 
 ## <a name="use-a-parameter-transformer-to-customize-page-routes"></a>使用參數轉換器自訂頁面路由
 
-您可以使用參數轉換程式自訂 ASP.NET Core 所產生的頁面路由。 參數轉換程式會實作 `IOutboundParameterTransformer` 並轉換參數值。 例如，自訂 `SlugifyParameterTransformer` 參數轉換器會將 `SubscriptionManagement` 路由值變更為 `subscription-management`。
+ASP.NET Core 產生的頁面路由可以使用參數轉換程式自訂。 參數轉換程式會實作 `IOutboundParameterTransformer` 並轉換參數值。 例如，自訂 `SlugifyParameterTransformer` 參數轉換器會將 `SubscriptionManagement` 路由值變更為 `subscription-management`。
 
 `PageRouteTransformerConvention`頁面路由模型慣例會將參數轉換器套用至應用程式中自動產生之頁面路由的資料夾和檔案名區段。 例如， Razor 在 */Pages/SubscriptionManagement/ViewAll.cshtml* 的頁面檔中，會將其路由從重寫 `/SubscriptionManagement/ViewAll` 到 `/subscription-management/view-all` 。
 
@@ -609,9 +609,9 @@ Contact 頁面也可以透過其預設路由在 `/Contact` 上連線。
 
 有保留字無法用作路由區段或參數名稱。 如需詳細資訊，請參閱 [路由：保留的路由名稱](xref:fundamentals/routing#reserved-routing-names)。
 
-[查看或下載範例程式碼](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/razor-pages/razor-pages-conventions/samples/) ([如何下載](xref:index#how-to-download-a-sample)) 
+[查看或下載範例程式碼](https://github.com/dotnet/AspNetCore.Docs/tree/main/aspnetcore/razor-pages/razor-pages-conventions/samples/) ([如何下載](xref:index#how-to-download-a-sample)) 
 
-| 案例 | 範例會示範 ... |
+| 狀況 | 範例會示範 ... |
 | -------- | --------------------------- |
 | [模型慣例](#model-conventions)<br><br>Conventions.Add<ul><li>IPageRouteModelConvention</li><li>IPageApplicationModelConvention</li><li>IPageHandlerModelConvention</li></ul> | 將路由範本和標頭新增至應用程式的頁面。 |
 | [頁面路由動作慣例](#page-route-action-conventions)<ul><li>AddFolderRouteModelConvention</li><li>AddPageRouteModelConvention</li><li>AddPageRoute</li></ul> | 將路由範本新增至資料夾中的頁面，以及新增至單一頁面。 |
@@ -682,7 +682,7 @@ Razor 頁面路由和 MVC 控制器路由會共用執行。 您可以在 [路由
 
 可能的話，請不要設定 `Order` ，這會導致 `Order = 0` 。 依賴路由選取正確的路由。
 
-Razor<xref:Microsoft.AspNetCore.Mvc.RazorPages.RazorPagesOptions.Conventions>當 MVC 新增至中的服務集合時，會加入頁面選項，例如加入 `Startup.ConfigureServices` 。 如需範例，請參閱[範例應用程式](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/razor-pages/razor-pages-conventions/samples/)。
+Razor<xref:Microsoft.AspNetCore.Mvc.RazorPages.RazorPagesOptions.Conventions>當 MVC 新增至中的服務集合時，會加入頁面選項，例如加入 `Startup.ConfigureServices` 。 如需範例，請參閱[範例應用程式](https://github.com/dotnet/AspNetCore.Docs/tree/main/aspnetcore/razor-pages/razor-pages-conventions/samples/)。
 
 [!code-csharp[](razor-pages-conventions/samples/2.x/SampleApp/Startup.cs?name=snippet1)]
 

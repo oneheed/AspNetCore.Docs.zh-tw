@@ -1,7 +1,7 @@
 ---
 title: ASP.NET Core 的 Docker 映像
 author: rick-anderson
-description: 瞭解如何使用 Docker 登錄中發佈的 ASP.NET Core Docker 映射。 提取並建立您自己的映射。
+description: 瞭解如何使用 Docker 登錄中已發佈的 ASP.NET Core Docker 映射。 提取並建立您自己的映射。
 ms.author: riande
 ms.custom: mvc
 ms.date: 01/04/2021
@@ -18,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: host-and-deploy/docker/building-net-docker-images
-ms.openlocfilehash: 2cd21722082af88e536bc1001b606ee96e7cf59b
-ms.sourcegitcommit: b64c44ba5e3abb4ad4d50de93b7e282bf0f251e4
+ms.openlocfilehash: b29ce03366e5c0e815de0874f5b96efb9ba5326c
+ms.sourcegitcommit: 54fe1ae5e7d068e27376d562183ef9ddc7afc432
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 01/07/2021
-ms.locfileid: "97972050"
+ms.lasthandoff: 03/10/2021
+ms.locfileid: "102585951"
 ---
 # <a name="docker-images-for-aspnet-core"></a>ASP.NET Core 的 Docker 映像
 
@@ -74,7 +74,7 @@ ms.locfileid: "97972050"
 
    範例會使用此映像來執行應用程式。 此映像包含 ASP.NET Core 執行階段和程式庫，並會進行最佳化，以在生產環境中執行應用程式。 專為部署和應用程式啟動速度而設計的映像相對較小，因此，已將從 Docker 登錄到 Docker 主機的網路效能最佳化。 只會將執行應用程式所需的程式庫和內容複製到容器中。 內容已準備好執行，可用最短的時間從 `docker run` 到應用程式啟動。 在 Docker 模型中，不需要動態程式碼編譯。
 
-## <a name="prerequisites"></a>先決條件
+## <a name="prerequisites"></a>必要條件
 
 ::: moniker range=">= aspnetcore-5.0"
 
@@ -100,7 +100,7 @@ ms.locfileid: "97972050"
     * [CentOS](https://docs.docker.com/install/linux/docker-ce/centos/)
     * [Debian](https://docs.docker.com/install/linux/docker-ce/debian/)
     * [Fedora](https://docs.docker.com/install/linux/docker-ce/fedora/)
-    * [Ubuntu](https://docs.docker.com/install/linux/docker-ce/ubuntu/)
+    * [Ubuntu](https://docs.docker.com/install/linux/docker-ce/ubuntu/) \(英文\)
   * [macOS](https://docs.docker.com/docker-for-mac/install/)
   * [Windows](https://docs.docker.com/docker-for-windows/install/)
 
@@ -339,9 +339,9 @@ ENTRYPOINT ["dotnet", "aspnetapp.dll"]
 * [使用 Visual Studio Code 偵錯](https://code.visualstudio.com/docs/nodejs/debugging-recipes#_debug-nodejs-in-docker-containers)
 * [使用 Docker 和小型容器的 GC](xref:performance/memory#sc)
 
-## <a name="next-steps"></a>後續步驟
+## <a name="next-steps"></a>下一步
 
-包含範例應用程式的 Git 存放庫也會包含文件。 如需存放庫中可用資源的概觀，請參閱[讀我檔案](https://github.com/dotnet/dotnet-docker/blob/master/samples/aspnetapp/README.md) \(英文\)。 特別是了解如何實作 HTTPS：
+包含範例應用程式的 Git 存放庫也會包含文件。 如需存放庫中可用資源的概觀，請參閱[讀我檔案](https://github.com/dotnet/dotnet-docker/blob/main/samples/aspnetapp/README.md) \(英文\)。 特別是了解如何實作 HTTPS：
 
 > [!div class="nextstepaction"]
-> [透過 HTTPS 使用 Docker 開發 ASP.NET Core 應用程式](https://github.com/dotnet/dotnet-docker/blob/master/samples/run-aspnetcore-https-development.md)
+> [透過 HTTPS 使用 Docker 開發 ASP.NET Core 應用程式](https://github.com/dotnet/dotnet-docker/blob/main/samples/run-aspnetcore-https-development.md)

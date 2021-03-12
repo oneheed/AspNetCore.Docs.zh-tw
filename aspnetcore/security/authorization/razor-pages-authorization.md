@@ -19,20 +19,20 @@ no-loc:
 - Razor
 - SignalR
 uid: security/authorization/razor-pages-authorization
-ms.openlocfilehash: 69e1d639aeb55ae64cc54b1cda402ed6bcbb04ab
-ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
+ms.openlocfilehash: ffcb16b626773da69c45b8ab5dbd7c3cdc84bb5f
+ms.sourcegitcommit: 54fe1ae5e7d068e27376d562183ef9ddc7afc432
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 10/30/2020
-ms.locfileid: "93060179"
+ms.lasthandoff: 03/10/2021
+ms.locfileid: "102589110"
 ---
-# <a name="no-locrazor-pages-authorization-conventions-in-aspnet-core"></a>Razor ASP.NET Core 中的頁面授權慣例
+# <a name="razor-pages-authorization-conventions-in-aspnet-core"></a>Razor ASP.NET Core 中的頁面授權慣例
 
 ::: moniker range=">= aspnetcore-3.0"
 
 在頁面應用程式中控制存取的其中一種方式 Razor ，是在啟動時使用授權慣例。 這些慣例可讓您授權使用者，並允許匿名使用者存取頁面的個別頁面或資料夾。 本主題所述的慣例會自動套用 [授權篩選器](xref:mvc/controllers/filters#authorization-filters) 來控制存取權。
 
-[查看或下載範例程式碼](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/security/authorization/razor-pages-authorization/samples) ([如何下載](xref:index#how-to-download-a-sample)) 
+[查看或下載範例程式碼](https://github.com/dotnet/AspNetCore.Docs/tree/main/aspnetcore/security/authorization/razor-pages-authorization/samples) ([如何下載](xref:index#how-to-download-a-sample)) 
 
 範例應用程式[ cookie 會使用驗證 ASP.NET Core Identity ，而不需要](xref:security/authentication/cookie)。 本主題所示的概念和範例同樣適用于使用的應用程式 ASP.NET Core Identity 。 若要使用 ASP.NET Core Identity ，請遵循中的指導方針 <xref:security/authentication/identity> 。
 
@@ -75,7 +75,7 @@ options.Conventions.AuthorizeFolder("/Private", "AtLeast21");
 options.Conventions.AuthorizeAreaPage("Identity", "/Manage/Accounts");
 ```
 
-頁面名稱是檔案的路徑，沒有相對於指定區域之頁面根目錄的副檔名。 例如，檔案 *區域/ Identity /Pages/Manage/Accounts.cshtml* 的頁面名稱為 */Manage/Accounts* 。
+頁面名稱是檔案的路徑，沒有相對於指定區域之頁面根目錄的副檔名。 例如，檔案 *區域/ Identity /Pages/Manage/Accounts.cshtml* 的頁面名稱為 */Manage/Accounts*。
 
 若要指定 [授權原則](xref:security/authorization/policies)，請使用 [AuthorizeAreaPage](xref:Microsoft.Extensions.DependencyInjection.PageConventionCollectionExtensions.AuthorizeAreaPage*)多載：
 
@@ -91,7 +91,7 @@ options.Conventions.AuthorizeAreaPage("Identity", "/Manage/Accounts", "AtLeast21
 options.Conventions.AuthorizeAreaFolder("Identity", "/Manage");
 ```
 
-資料夾路徑是相對於指定區域之頁面根目錄的資料夾路徑。 例如， *區域/ Identity /Pages/Manage/* 下檔案的資料夾路徑為 */Manage* 。
+資料夾路徑是相對於指定區域之頁面根目錄的資料夾路徑。 例如， *區域/ Identity /Pages/Manage/* 下檔案的資料夾路徑為 */Manage*。
 
 若要指定 [授權原則](xref:security/authorization/policies)，請使用 [AuthorizeAreaFolder](xref:Microsoft.Extensions.DependencyInjection.PageConventionCollectionExtensions.AuthorizeAreaFolder*)多載：
 
@@ -144,7 +144,7 @@ options.Conventions.AuthorizeAreaFolder("Identity", "/Manage", "AtLeast21");
 
 在頁面應用程式中控制存取的其中一種方式 Razor ，是在啟動時使用授權慣例。 這些慣例可讓您授權使用者，並允許匿名使用者存取頁面的個別頁面或資料夾。 本主題所述的慣例會自動套用 [授權篩選器](xref:mvc/controllers/filters#authorization-filters) 來控制存取權。
 
-[查看或下載範例程式碼](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/security/authorization/razor-pages-authorization/samples) ([如何下載](xref:index#how-to-download-a-sample)) 
+[查看或下載範例程式碼](https://github.com/dotnet/AspNetCore.Docs/tree/main/aspnetcore/security/authorization/razor-pages-authorization/samples) ([如何下載](xref:index#how-to-download-a-sample)) 
 
 範例應用程式[ cookie 會使用驗證 ASP.NET Core Identity ，而不需要](xref:security/authentication/cookie)。 本主題所示的概念和範例同樣適用于使用的應用程式 ASP.NET Core Identity 。 若要使用 ASP.NET Core Identity ，請遵循中的指導方針 <xref:security/authentication/identity> 。
 
@@ -187,7 +187,7 @@ options.Conventions.AuthorizeFolder("/Private", "AtLeast21");
 options.Conventions.AuthorizeAreaPage("Identity", "/Manage/Accounts");
 ```
 
-頁面名稱是檔案的路徑，沒有相對於指定區域之頁面根目錄的副檔名。 例如，檔案 *區域/ Identity /Pages/Manage/Accounts.cshtml* 的頁面名稱為 */Manage/Accounts* 。
+頁面名稱是檔案的路徑，沒有相對於指定區域之頁面根目錄的副檔名。 例如，檔案 *區域/ Identity /Pages/Manage/Accounts.cshtml* 的頁面名稱為 */Manage/Accounts*。
 
 若要指定 [授權原則](xref:security/authorization/policies)，請使用 [AuthorizeAreaPage](xref:Microsoft.Extensions.DependencyInjection.PageConventionCollectionExtensions.AuthorizeAreaPage*)多載：
 
@@ -203,7 +203,7 @@ options.Conventions.AuthorizeAreaPage("Identity", "/Manage/Accounts", "AtLeast21
 options.Conventions.AuthorizeAreaFolder("Identity", "/Manage");
 ```
 
-資料夾路徑是相對於指定區域之頁面根目錄的資料夾路徑。 例如， *區域/ Identity /Pages/Manage/* 下檔案的資料夾路徑為 */Manage* 。
+資料夾路徑是相對於指定區域之頁面根目錄的資料夾路徑。 例如， *區域/ Identity /Pages/Manage/* 下檔案的資料夾路徑為 */Manage*。
 
 若要指定 [授權原則](xref:security/authorization/policies)，請使用 [AuthorizeAreaFolder](xref:Microsoft.Extensions.DependencyInjection.PageConventionCollectionExtensions.AuthorizeAreaFolder*)多載：
 

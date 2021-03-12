@@ -6,12 +6,12 @@ metadata:
   description: 深入瞭解 ASP.NET Core 檔中的新內容與更新內容。
   ms.topic: landing-page
   ms.date: 03/04/2021
-  ms.openlocfilehash: a4ef3edbf260c6f2ee34ac739884bd9a605bd396
-  ms.sourcegitcommit: 3982ff9dabb5b12aeb0a61cde2686b5253364f5d
+  ms.openlocfilehash: 514c66eb130ac2d32ce0c3b9a14f62263d54076d
+  ms.sourcegitcommit: 54fe1ae5e7d068e27376d562183ef9ddc7afc432
   ms.translationtype: MT
   ms.contentlocale: zh-TW
-  ms.lasthandoff: 03/04/2021
-  ms.locfileid: "102119002"
+  ms.lasthandoff: 03/10/2021
+  ms.locfileid: "102585704"
 landingContent:
 - title: 尋找 ASP.NET Core 檔更新
   linkLists:
@@ -34,17 +34,17 @@ landingContent:
   - linkListType: overview
     links:
     - text: ASP.NET 核心檔存放庫
-      url: https://github.com/dotnet/AspNetCore.Docs/blob/master/README.md
+      url: https://github.com/dotnet/AspNetCore.Docs/blob/main/README.md
     - text: 問題和提取要求的專案結構和標籤
-      url: https://github.com/dotnet/docs/blob/master/styleguide/labels-projects.md
+      url: https://github.com/dotnet/docs/blob/main/styleguide/labels-projects.md
   - linkListType: concept
     links:
     - text: Microsoft 檔參與者指南
       url: /contribute
     - text: ASP.NET 核心檔參與者指南
-      url: https://github.com/dotnet/AspNetCore.Docs/blob/master/CONTRIBUTING.md
+      url: https://github.com/dotnet/AspNetCore.Docs/blob/main/CONTRIBUTING.md
     - text: ASP.NET Core API 參考檔參與者指南
-      url: https://github.com/dotnet/AspNetApiDocs/blob/master/CONTRIBUTING.md
+      url: https://github.com/dotnet/AspNetApiDocs/blob/main/CONTRIBUTING.md
 - title: 社群
   linkLists:
   - linkListType: whats-new
@@ -58,7 +58,7 @@ landingContent:
     - text: Xamarin 檔更新
       url: /xamarin/whats-new/
     - text: .NET Core 版本資訊
-      url: https://github.com/dotnet/core/blob/master/release-notes/README.md
+      url: https://github.com/dotnet/core/blob/main/release-notes/README.md
     - text: ASP.NET Core 版本資訊
       url: ../release-notes/aspnetcore-3.1.md
     - text: 'C # 編譯器 (Roslyn) 版本資訊'

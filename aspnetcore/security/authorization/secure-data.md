@@ -1,7 +1,7 @@
 ---
 title: 使用受授權保護的使用者資料建立 ASP.NET Core 應用程式
 author: rick-anderson
-description: 瞭解如何使用受授權保護的使用者資料來建立 ASP.NET Core web 應用程式。 包含 HTTPS、驗證、安全性 ASP.NET Core Identity 。
+description: 瞭解如何建立 ASP.NET Core web 應用程式，並以授權保護使用者資料。 包含 HTTPS、驗證、安全性 ASP.NET Core Identity 。
 ms.author: riande
 ms.date: 7/18/2020
 ms.custom: mvc, seodec18
@@ -18,14 +18,14 @@ no-loc:
 - Razor
 - SignalR
 uid: security/authorization/secure-data
-ms.openlocfilehash: ebd3c0dc9baa63b30f142773d7a3d621ce4082d9
-ms.sourcegitcommit: ebc5beccba5f3f7619de20baa58ad727d2a3d18c
+ms.openlocfilehash: 662456af59c453df66ca48139a6de40d0e2cbf0d
+ms.sourcegitcommit: 54fe1ae5e7d068e27376d562183ef9ddc7afc432
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 01/22/2021
-ms.locfileid: "98689301"
+ms.lasthandoff: 03/10/2021
+ms.locfileid: "102589188"
 ---
-# <a name="create-an-aspnet-core-web-app-with-user-data-protected-by-authorization"></a>使用受授權保護的使用者資料建立 ASP.NET Core web 應用程式
+# <a name="create-an-aspnet-core-web-app-with-user-data-protected-by-authorization"></a>建立 ASP.NET Core web 應用程式，並以授權保護使用者資料
 
 作者：[Rick Anderson](https://twitter.com/RickAndMSFT) 與 [Joe Audette](https://twitter.com/joeaudette)
 
@@ -37,7 +37,7 @@ ms.locfileid: "98689301"
 
 ::: moniker range=">= aspnetcore-3.0"
 
-本教學課程說明如何建立 ASP.NET Core 的 web 應用程式，並以授權保護使用者資料。 它會顯示已驗證 (註冊) 使用者建立的連絡人清單。 有三個安全性群組：
+本教學課程說明如何建立 ASP.NET Core web 應用程式，並以授權保護使用者資料。 它會顯示已驗證 (註冊) 使用者建立的連絡人清單。 有三個安全性群組：
 
 * **註冊的使用者** 可以查看所有核准的資料，並可編輯/刪除他們自己的資料。
 * **管理員** 可以核准或拒絕連絡人資料。 只有核准的連絡人可以看到使用者。
@@ -87,11 +87,11 @@ ms.locfileid: "98689301"
 
 ## <a name="the-starter-and-completed-app"></a>入門和完成的應用程式
 
-[下載](xref:index#how-to-download-a-sample)[已完成](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/security/authorization/secure-data/samples)的應用程式。 [測試](#test-the-completed-app) 完成的應用程式，讓您熟悉它的安全性功能。
+[下載](xref:index#how-to-download-a-sample)[已完成](https://github.com/dotnet/AspNetCore.Docs/tree/main/aspnetcore/security/authorization/secure-data/samples)的應用程式。 [測試](#test-the-completed-app) 完成的應用程式，讓您熟悉它的安全性功能。
 
 ### <a name="the-starter-app"></a>入門應用程式
 
-[下載](xref:index#how-to-download-a-sample)[入門](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/security/authorization/secure-data/samples/)應用程式。
+[下載](xref:index#how-to-download-a-sample)[入門](https://github.com/dotnet/AspNetCore.Docs/tree/main/aspnetcore/security/authorization/secure-data/samples/)應用程式。
 
 執行應用程式，並按一下 [ **ContactManager** ] 連結，然後確認您可以建立、編輯和刪除連絡人。 若要建立入門應用程式，請參閱 [建立入門應用程式](#create-the-starter-app)。
 
@@ -114,7 +114,7 @@ dotnet ef migrations add userID_Status
 dotnet ef database update
 ```
 
-### <a name="add-role-services-to-no-locidentity"></a>將角色服務新增至 Identity
+### <a name="add-role-services-to-identity"></a>將角色服務新增至 Identity
 
 附加 [AddRoles](/dotnet/api/microsoft.aspnetcore.identity.identitybuilder.addroles#Microsoft_AspNetCore_Identity_IdentityBuilder_AddRoles__1) 以新增角色服務：
 
@@ -128,13 +128,13 @@ dotnet ef database update
 
 [!code-csharp[](secure-data/samples/final3/Startup.cs?name=snippet&highlight=13-99)]
 
-上述反白顯示的程式碼會設定回溯 [驗證原則](xref:Microsoft.AspNetCore.Authorization.AuthorizationOptions.FallbackPolicy)。 除了具有驗證屬性的頁面、控制器或動作方法之外，fallback 驗證原則需要驗證 **_all_* _ 使用者 Razor 。 例如，使用 Razor 或的頁面、控制器或動作方法，會 `[AllowAnonymous]` `[Authorize(PolicyName="MyPolicy")]` 使用套用的驗證屬性，而不是回溯驗證原則。
+上述反白顯示的程式碼會設定回溯 [驗證原則](xref:Microsoft.AspNetCore.Authorization.AuthorizationOptions.FallbackPolicy)。 除了 Razor 具有驗證屬性的頁面、控制器或動作方法之外，fallback 驗證原則需要驗證所有使用者。 例如，使用 Razor 或的頁面、控制器或動作方法，會 `[AllowAnonymous]` `[Authorize(PolicyName="MyPolicy")]` 使用套用的驗證屬性，而不是回溯驗證原則。
 
 <xref:Microsoft.AspNetCore.Authorization.AuthorizationPolicyBuilder.RequireAuthenticatedUser%2A> 加入 <xref:Microsoft.AspNetCore.Authorization.Infrastructure.DenyAnonymousAuthorizationRequirement> 目前的實例，這會強制驗證目前的使用者。
 
 回退驗證原則：
 
-_ 會套用至未明確指定驗證原則的所有要求。 針對端點路由所提供的要求，這會包含未指定授權屬性的任何端點。 針對其他中介軟體在授權中介軟體之後所提供的要求（例如 [靜態](xref:fundamentals/static-files)檔案），這會將原則套用至所有要求。
+* 會套用至未明確指定驗證原則的所有要求。 針對端點路由所提供的要求，這會包含未指定授權屬性的任何端點。 針對其他中介軟體在授權中介軟體之後所提供的要求（例如 [靜態](xref:fundamentals/static-files)檔案），這會將原則套用至所有要求。
 
 將回溯驗證原則設定為要求使用者進行驗證，可保護新新增 Razor 的頁面和控制器。 預設需要驗證比依賴新控制器和 Razor 頁面來包含屬性更安全 `[Authorize]` 。
 
@@ -205,7 +205,7 @@ dotnet user-secrets set SeedUserPW <PW>
 
 ## <a name="register-the-authorization-handlers"></a>註冊授權處理常式
 
-使用 Entity Framework Core 的服務必須使用[AddScoped](/dotnet/api/microsoft.extensions.dependencyinjection.servicecollectionserviceextensions)註冊相依性[插入](xref:fundamentals/dependency-injection)。 `ContactIsOwnerAuthorizationHandler`使用 ASP.NET Core [Identity](xref:security/authentication/identity) ，以 Entity Framework Core 為基礎。 使用服務集合註冊處理常式，以便透過相依性插入來使用它們 `ContactsController` 。 [](xref:fundamentals/dependency-injection) 將下列程式碼加入至結尾 `ConfigureServices` ：
+使用 Entity Framework Core 的服務必須使用[AddScoped](/dotnet/api/microsoft.extensions.dependencyinjection.servicecollectionserviceextensions)註冊相依性[插入](xref:fundamentals/dependency-injection)。 `ContactIsOwnerAuthorizationHandler`使用 [Identity](xref:security/authentication/identity) 以 Entity Framework core 為基礎的 ASP.NET Core。 使用服務集合註冊處理常式，以便透過相依性插入來使用它們 `ContactsController` 。 [](xref:fundamentals/dependency-injection) 將下列程式碼加入至結尾 `ConfigureServices` ：
 
 [!code-csharp[](secure-data/samples/final3/Startup.cs?name=snippet_defaultPolicy&highlight=23-99)]
 
@@ -221,7 +221,7 @@ dotnet user-secrets set SeedUserPW <PW>
 
 [!code-csharp[](secure-data/samples/final3/Authorization/ContactOperations.cs)]
 
-### <a name="create-a-base-class-for-the-contacts-no-locrazor-pages"></a>建立連絡人頁面的基類 Razor
+### <a name="create-a-base-class-for-the-contacts-razor-pages"></a>建立連絡人頁面的基類 Razor
 
 建立包含 [連絡人] 頁面中所使用之服務的基類 Razor 。 基底類別會將初始化程式碼放在一個位置：
 
@@ -334,7 +334,7 @@ dotnet user-secrets set SeedUserPW <PW>
 * 管理員可以核准/拒絕連絡人資料。 此 `Details` 視圖會顯示 [ **核准** ] 和 [ **拒絕** ] 按鈕。
 * 系統管理員可以核准/拒絕和編輯/刪除所有資料。
 
-| 使用者                | 由應用程式植入 | 選項                                  |
+| User                | 由應用程式植入 | 選項                                  |
 | ------------------- | :---------------: | ---------------------------------------- |
 | test@example.com    | No                | 編輯/刪除自己的資料。                |
 | manager@contoso.com | Yes               | 核准/拒絕和編輯/刪除自己的資料。 |
@@ -381,7 +381,7 @@ dotnet ef database update
 
 ### <a name="seed-the-database"></a>植入資料庫
 
-將 [>seeddata.cs](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/security/authorization/secure-data/samples/starter3/Data/SeedData.cs) 類別新增至 [ *資料* ] 資料夾：
+將 [>seeddata.cs](https://github.com/dotnet/AspNetCore.Docs/tree/main/aspnetcore/security/authorization/secure-data/samples/starter3/Data/SeedData.cs) 類別新增至 [ *資料* ] 資料夾：
 
 [!code-csharp[](secure-data/samples/starter3/Data/SeedData.cs)]
 
@@ -395,7 +395,7 @@ dotnet ef database update
 
 ::: moniker range=">= aspnetcore-2.1 < aspnetcore-3.0"
 
-本教學課程說明如何建立 ASP.NET Core 的 web 應用程式，並以授權保護使用者資料。 它會顯示已驗證 (註冊) 使用者建立的連絡人清單。 有三個安全性群組：
+本教學課程說明如何建立 ASP.NET Core web 應用程式，並以授權保護使用者資料。 它會顯示已驗證 (註冊) 使用者建立的連絡人清單。 有三個安全性群組：
 
 * **註冊的使用者** 可以查看所有核准的資料，並可編輯/刪除他們自己的資料。
 * **管理員** 可以核准或拒絕連絡人資料。 只有核准的連絡人可以看到使用者。
@@ -443,11 +443,11 @@ dotnet ef database update
 
 ## <a name="the-starter-and-completed-app"></a>入門和完成的應用程式
 
-[下載](xref:index#how-to-download-a-sample)[已完成](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/security/authorization/secure-data/samples)的應用程式。 [測試](#test-the-completed-app) 完成的應用程式，讓您熟悉它的安全性功能。
+[下載](xref:index#how-to-download-a-sample)[已完成](https://github.com/dotnet/AspNetCore.Docs/tree/main/aspnetcore/security/authorization/secure-data/samples)的應用程式。 [測試](#test-the-completed-app) 完成的應用程式，讓您熟悉它的安全性功能。
 
 ### <a name="the-starter-app"></a>入門應用程式
 
-[下載](xref:index#how-to-download-a-sample)[入門](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/security/authorization/secure-data/samples/)應用程式。
+[下載](xref:index#how-to-download-a-sample)[入門](https://github.com/dotnet/AspNetCore.Docs/tree/main/aspnetcore/security/authorization/secure-data/samples/)應用程式。
 
 執行應用程式，並按一下 [ **ContactManager** ] 連結，然後確認您可以建立、編輯和刪除連絡人。
 
@@ -470,7 +470,7 @@ dotnet ef migrations add userID_Status
 dotnet ef database update
 ```
 
-### <a name="add-role-services-to-no-locidentity"></a>將角色服務新增至 Identity
+### <a name="add-role-services-to-identity"></a>將角色服務新增至 Identity
 
 附加 [AddRoles](/dotnet/api/microsoft.aspnetcore.identity.identitybuilder.addroles#Microsoft_AspNetCore_Identity_IdentityBuilder_AddRoles__1) 以新增角色服務：
 
@@ -541,7 +541,7 @@ dotnet user-secrets set SeedUserPW <PW>
 
 ## <a name="register-the-authorization-handlers"></a>註冊授權處理常式
 
-使用 Entity Framework Core 的服務必須使用[AddScoped](/dotnet/api/microsoft.extensions.dependencyinjection.servicecollectionserviceextensions)註冊相依性[插入](xref:fundamentals/dependency-injection)。 `ContactIsOwnerAuthorizationHandler`使用 ASP.NET Core [Identity](xref:security/authentication/identity) ，以 Entity Framework Core 為基礎。 使用服務集合註冊處理常式，以便透過相依性插入來使用它們 `ContactsController` 。 [](xref:fundamentals/dependency-injection) 將下列程式碼加入至結尾 `ConfigureServices` ：
+使用 Entity Framework Core 的服務必須使用[AddScoped](/dotnet/api/microsoft.extensions.dependencyinjection.servicecollectionserviceextensions)註冊相依性[插入](xref:fundamentals/dependency-injection)。 `ContactIsOwnerAuthorizationHandler`使用 [Identity](xref:security/authentication/identity) 以 Entity Framework core 為基礎的 ASP.NET Core。 使用服務集合註冊處理常式，以便透過相依性插入來使用它們 `ContactsController` 。 [](xref:fundamentals/dependency-injection) 將下列程式碼加入至結尾 `ConfigureServices` ：
 
 [!code-csharp[](secure-data/samples/final2.1/Startup.cs?name=snippet_defaultPolicy&highlight=27-99)]
 
@@ -557,7 +557,7 @@ dotnet user-secrets set SeedUserPW <PW>
 
 [!code-csharp[](secure-data/samples/final2.1/Authorization/ContactOperations.cs)]
 
-### <a name="create-a-base-class-for-the-contacts-no-locrazor-pages"></a>建立連絡人頁面的基類 Razor
+### <a name="create-a-base-class-for-the-contacts-razor-pages"></a>建立連絡人頁面的基類 Razor
 
 建立包含 [連絡人] 頁面中所使用之服務的基類 Razor 。 基底類別會將初始化程式碼放在一個位置：
 
@@ -661,7 +661,7 @@ dotnet user-secrets set SeedUserPW <PW>
 * 管理員可以核准/拒絕連絡人資料。 此 `Details` 視圖會顯示 [ **核准** ] 和 [ **拒絕** ] 按鈕。
 * 系統管理員可以核准/拒絕和編輯/刪除所有資料。
 
-| 使用者                | 由應用程式植入 | 選項                                  |
+| User                | 由應用程式植入 | 選項                                  |
 | ------------------- | :---------------: | ---------------------------------------- |
 | test@example.com    | No                | 編輯/刪除自己的資料。                |
 | manager@contoso.com | Yes               | 核准/拒絕和編輯/刪除自己的資料。 |
@@ -704,7 +704,7 @@ dotnet user-secrets set SeedUserPW <PW>
 
 ### <a name="seed-the-database"></a>植入資料庫
 
-將 [>seeddata.cs](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/security/authorization/secure-data/samples/starter2.1/Data/SeedData.cs) 類別加入至 [ *資料* ] 資料夾。
+將 [>seeddata.cs](https://github.com/dotnet/AspNetCore.Docs/tree/main/aspnetcore/security/authorization/secure-data/samples/starter2.1/Data/SeedData.cs) 類別加入至 [ *資料* ] 資料夾。
 
 呼叫 `SeedData.Initialize` 來源 `Main` ：
 
@@ -719,6 +719,6 @@ dotnet user-secrets set SeedUserPW <PW>
 ### <a name="additional-resources"></a>其他資源
 
 * [在 Azure App Service 中建置 .NET Core 和 SQL Database Web 應用程式](/azure/app-service/app-service-web-tutorial-dotnetcore-sqldb)
-* [ASP.NET Core 授權實驗室](https://github.com/blowdart/AspNetAuthorizationWorkshop)。 本教學課程會詳細說明本教學課程中所引進的安全性功能。
+* [ASP.NET 核心授權實驗室](https://github.com/blowdart/AspNetAuthorizationWorkshop)。 本教學課程會詳細說明本教學課程中所引進的安全性功能。
 * <xref:security/authorization/introduction>
 * [自訂以原則為基礎的授權](xref:security/authorization/policies)

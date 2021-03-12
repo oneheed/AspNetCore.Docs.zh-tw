@@ -1,7 +1,7 @@
 ---
 title: 進階組態
 author: rick-anderson
-description: 使用 ASP.NET Core 模組和 Internet Information Services (IIS) 的 Advanced configuration。
+description: ASP.NET 核心模組和 Internet Information Services 的 Advanced configuration (IIS) 。
 monikerRange: '>= aspnetcore-5.0'
 ms.author: riande
 ms.custom: mvc
@@ -19,16 +19,16 @@ no-loc:
 - Razor
 - SignalR
 uid: host-and-deploy/iis/advanced
-ms.openlocfilehash: 9f14929a7d298d6f4d66abcc88665db34fc072bf
-ms.sourcegitcommit: 3593c4efa707edeaaceffbfa544f99f41fc62535
+ms.openlocfilehash: de3abb7b5f89e3b84da38a8eabb183f9551cc1f9
+ms.sourcegitcommit: 54fe1ae5e7d068e27376d562183ef9ddc7afc432
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 01/04/2021
-ms.locfileid: "93058607"
+ms.lasthandoff: 03/10/2021
+ms.locfileid: "102588915"
 ---
-# <a name="advanced-configuration-of-the-aspnet-core-module-and-iis"></a>ASP.NET Core 模組和 IIS 的 Advanced configuration
+# <a name="advanced-configuration-of-the-aspnet-core-module-and-iis"></a>ASP.NET 核心模組和 IIS 的 Advanced configuration
 
-本文涵蓋 ASP.NET Core 模組和 IIS 的 advanced configuration 選項和案例。
+本文涵蓋 ASP.NET 核心模組和 IIS 的 advanced configuration options 和案例。
 
 ## <a name="modify-the-stack-size"></a>修改堆疊大小
 
@@ -81,17 +81,17 @@ dotnet-hosting-{VERSION}.exe OPT_NO_SHARED_CONFIG_CHECK=1
 
 * 所有 cookie 的驗證權杖都會失效。 
 * 當使用者提出下一個要求時，需要再次登入。 
-* 所有以 Keyring 保護的資料都無法再解密。 這可能包括 [CSRF 權杖](xref:security/anti-request-forgery#aspnet-core-antiforgery-configuration) 和 [ASP.NET Core MVC TempData cookie s](xref:fundamentals/app-state#tempdata)。
+* 所有以 Keyring 保護的資料都無法再解密。 這可能包括 [CSRF 權杖](xref:security/anti-request-forgery#aspnet-core-antiforgery-configuration) 和 [ASP.NET Core MVC TempData cookie ](xref:fundamentals/app-state#tempdata)。
 
 若要在 IIS 下設定資料保護以保存 Keyring，請使用下列其中 **一種** 方法：
 
 * **建立資料保護登錄機碼**
 
-  ASP.NET Core apps 使用的資料保護金鑰會儲存在應用程式外部的登錄中。 若要保存指定應用程式的金鑰，請為應用程式集區建立登錄機碼。
+  ASP.NET Core 應用程式所使用的資料保護金鑰會儲存在應用程式外部的登錄中。 若要保存指定應用程式的金鑰，請為應用程式集區建立登錄機碼。
 
-  若為獨立的非Web 伺服陣列 IIS 安裝，請針對搭配使用 ASP.NET Core 應用程式的每個應用程式集區，使用[資料保護 Provision-AutoGenKeys.ps1 PowerShell 指令碼](https://github.com/dotnet/AspNetCore/blob/master/src/DataProtection/Provision-AutoGenKeys.ps1)。 此腳本會在 HKLM 登錄中建立登錄機碼，只有應用程式的應用程式集區的背景工作進程帳戶才能存取。 在待用期間使用 DPAPI 和全電腦金鑰加密金鑰。
+  若為獨立的非Web 伺服陣列 IIS 安裝，請針對搭配使用 ASP.NET Core 應用程式的每個應用程式集區，使用[資料保護 Provision-AutoGenKeys.ps1 PowerShell 指令碼](https://github.com/dotnet/AspNetCore/blob/main/src/DataProtection/Provision-AutoGenKeys.ps1)。 此腳本會在 HKLM 登錄中建立登錄機碼，只有應用程式的應用程式集區的背景工作進程帳戶才能存取。 在待用期間使用 DPAPI 和全電腦金鑰加密金鑰。
 
-  在 web 伺服陣列案例中，您可以將應用程式設定為使用 UNC 路徑來儲存其資料保護金鑰環形。 依預設，金鑰不會加密。 確定網路共用的檔案許可權僅限於執行應用程式的 Windows 帳戶。 可以使用 X509 憑證來保護待用的金鑰。 請考慮允許使用者上傳憑證的機制。 將憑證放入使用者的受信任憑證存放區，並確保在執行使用者應用程式的所有電腦上都能使用這些憑證。 如需詳細資訊，請參閱 <xref:security/data-protection/configuration/overview> 。
+  在 web 伺服陣列案例中，您可以將應用程式設定為使用 UNC 路徑來儲存其資料保護金鑰環形。 依預設，金鑰不會加密。 確定網路共用的檔案許可權僅限於執行應用程式的 Windows 帳戶。 可以使用 X509 憑證來保護待用的金鑰。 請考慮允許使用者上傳憑證的機制。 將憑證放入使用者的受信任憑證存放區，並確保在執行使用者應用程式的所有電腦上都能使用這些憑證。 如需詳細資訊，請參閱<xref:security/data-protection/configuration/overview>。
 
 * **設定 IIS 應用程式集區載入使用者設定檔**
 
@@ -115,7 +115,7 @@ dotnet-hosting-{VERSION}.exe OPT_NO_SHARED_CONFIG_CHECK=1
 
 * **設定適用于資料保護的全電腦原則**
 
-  針對取用資料保護 Api 的所有應用程式，資料保護系統的支援有限，可設定預設的全 [電腦原則](xref:security/data-protection/configuration/machine-wide-policy) 。 如需詳細資訊，請參閱 <xref:security/data-protection/introduction> 。
+  針對取用資料保護 Api 的所有應用程式，資料保護系統的支援有限，可設定預設的全 [電腦原則](xref:security/data-protection/configuration/machine-wide-policy) 。 如需詳細資訊，請參閱<xref:security/data-protection/introduction>。
 
 ## <a name="iis-configuration"></a>IIS 設定
 
@@ -132,7 +132,7 @@ dotnet-hosting-{VERSION}.exe OPT_NO_SHARED_CONFIG_CHECK=1
    ![在選取角色服務步驟中，選取預設的角色服務。](index/_static/role-services-ws2016.png)
 
    **Windows 驗證 (選擇性)**  
-   若要啟用 Windows 驗證，請展開下列節點：**網頁伺服器**  >  **安全性**。 選取 [Windows 驗證] 功能。 如需詳細資訊，請參閱[Windows 驗證 `<windowsAuthentication>` ](/iis/configuration/system.webServer/security/authentication/windowsAuthentication/)和[設定 Windows 驗證](xref:security/authentication/windowsauth)。
+   若要啟用 Windows 驗證，請展開下列節點：**網頁伺服器**  >  **安全性**。 選取 [Windows 驗證] 功能。 如需詳細資訊，請參閱[Windows 驗證 `<windowsAuthentication>` ](/iis/configuration/system.webServer/security/authentication/windowsAuthentication/)和[設定 windows 驗證](xref:security/authentication/windowsauth)。
 
    **WebSocket (選擇性)**  
    WebSocket 由 ASP.NET Core 1.1 或更新版本所支援。 若要啟用 websocket，請展開下列節點：**網頁伺服器**  >  **應用程式開發**。 選取 [WebSocket 通訊協定] 功能。 如需詳細資訊，請參閱 [WebSockets](xref:fundamentals/websockets)。
@@ -143,7 +143,7 @@ dotnet-hosting-{VERSION}.exe OPT_NO_SHARED_CONFIG_CHECK=1
 
 啟用 [IIS 管理主控台] 和 [World Wide Web 服務]。
 
-1. 流覽至 **主控台**  >  **程式** 的 [  >  **程式和功能]，**  >  **開啟或關閉** 畫面) 左側 (的 [Windows 功能]。
+1. 流覽至 [**控制台**] 的 [程式  >    >  **和功能]，**  >  **開啟或關閉** 畫面 (左側的 [Windows 功能]) 。
 
 1. 開啟 [Internet Information Services] 節點。 開啟 [Web 管理工具] 節點。
 
@@ -154,7 +154,7 @@ dotnet-hosting-{VERSION}.exe OPT_NO_SHARED_CONFIG_CHECK=1
 1. 接受 **全球資訊網服務** 的預設功能，或自訂 IIS 功能。
 
    **Windows 驗證 (選擇性)**  
-   若要啟用 Windows 驗證，請展開下列節點： **World Wide Web 服務**  >  **安全性**。 選取 [Windows 驗證] 功能。 如需詳細資訊，請參閱[Windows 驗證 `<windowsAuthentication>` ](/iis/configuration/system.webServer/security/authentication/windowsAuthentication/)和[設定 Windows 驗證](xref:security/authentication/windowsauth)。
+   若要啟用 Windows 驗證，請展開下列節點： **World Wide Web 服務**  >  **安全性**。 選取 [Windows 驗證] 功能。 如需詳細資訊，請參閱[Windows 驗證 `<windowsAuthentication>` ](/iis/configuration/system.webServer/security/authentication/windowsAuthentication/)和[設定 windows 驗證](xref:security/authentication/windowsauth)。
 
    **WebSocket (選擇性)**  
    WebSocket 由 ASP.NET Core 1.1 或更新版本所支援。 若要啟用 websocket，請展開下列節點： **World Wide Web 服務**  >  **應用程式開發功能**。 選取 [WebSocket 通訊協定] 功能。 如需詳細資訊，請參閱 [WebSockets](xref:fundamentals/websockets)。
@@ -187,7 +187,7 @@ ASP.NET Core 應用程式能以 [IIS 子應用程式](/iis/get-started/planning-
 
 將不同的應用程式集區指派給子應用程式是使用同處理序裝載模型。
 
-如需有關同進程裝載模型和設定 ASP.NET Core 模組的詳細資訊，請參閱 <xref:host-and-deploy/aspnet-core-module> 。
+如需有關同進程裝載模型和設定 ASP.NET 核心模組的詳細資訊，請參閱 <xref:host-and-deploy/aspnet-core-module> 。
 
 ## <a name="application-pools"></a>應用程式集區
 
@@ -198,7 +198,7 @@ ASP.NET Core 應用程式能以 [IIS 子應用程式](/iis/get-started/planning-
 
 IIS [新增網站] 對話方塊預設每個應用程式皆為單一應用程式集區。 當提供 **網站名稱** 時，文字會自動轉移至 [應用程式集區] 文字方塊。 新增網站時，會使用該網站名稱建立新的應用程式集區。
 
-## <a name="application-pool-no-locidentity"></a>應用程式集區 Identity
+## <a name="application-pool-identity"></a>應用程式集區 Identity
 
 應用程式集區身分識別帳戶可讓應用程式在唯一的帳戶下執行，不必建立及管理網域或本機帳戶。 在 IIS 8.0 或更新版本中，IIS 管理背景工作處理序 (WAS) 會使用新的應用程式集區名稱建立虛擬帳戶，並預設在此帳戶下執行應用程式集區的背景工作處理序。 在 [IIS 管理主控台] 中，于應用程式集區的 [ **Advanced Settings** ] 底下，確定 **Identity** 已設定為 [使用 `ApplicationPoolIdentity` ：
 
@@ -256,7 +256,7 @@ HTTP/2 預設為啟用。 如果 HTTP/2 連線尚未建立，連線會退為 HTT
 
 *此節只適用於以 .NET Framework 為目標的 ASP.NET Core 應用程式。*
 
-針對以 .NET Framework 為目標的 ASP.NET Core 應用程式，在 IIS 中OPTIONS 要求預設不會傳遞到應用程式。 若要瞭解如何在中設定應用程式的 IIS 處理常式 `web.config` 來傳遞選項要求，請參閱 [在 ASP.NET Web API 2： CORS 的運作方式中啟用跨原始來源要求](/aspnet/web-api/overview/security/enabling-cross-origin-requests-in-web-api#how-cors-works)。
+針對以 .NET Framework 為目標的 ASP.NET Core 應用程式，在 IIS 中OPTIONS 要求預設不會傳遞到應用程式。 若要瞭解如何在中設定應用程式的 IIS 處理常式 `web.config` 來傳遞選項要求，請參閱 [在 ASP.NET Web API 2 中啟用跨原始來源要求： CORS 的運作方式](/aspnet/web-api/overview/security/enabling-cross-origin-requests-in-web-api#how-cors-works)。
 
 ## <a name="application-initialization-module-and-idle-timeout"></a>應用程式初始化模組與閒置逾時
 
@@ -275,8 +275,8 @@ HTTP/2 預設為啟用。 如果 HTTP/2 連線尚未建立，連線會退為 HTT
 
 在 Windows 7 或更新的電腦系統上，當在本機使用 IIS 時：
 
-1. 流覽至 **主控台**  >  **程式** 的 [  >  **程式和功能]，**  >  **開啟或關閉** 畫面) 左側 (的 [Windows 功能]。
-1. 開啟 **Internet Information Services**  >  **World Wide Web 服務**  >  **應用程式開發功能**。
+1. 流覽至 [**控制台**] 的 [程式  >    >  **和功能]，**  >  **開啟或關閉** 畫面 (左側的 [Windows 功能]) 。
+1. 開啟 **Internet information Services**  >  **World Wide Web 服務**  >  **應用程式開發功能**。
 1. 選取 [應用程式初始化]的核取方塊。
 
 在 Windows Server 2008 R2 或更新版本上：
@@ -377,7 +377,7 @@ HTTP/2 預設為啟用。 如果 HTTP/2 連線尚未建立，連線會退為 HTT
 
 **IIS Express**
 
-* Visual Studio： `{APPLICATION ROOT}\.vs\config\applicationHost.config`
+* Visualstudio： `{APPLICATION ROOT}\.vs\config\applicationHost.config`
 
 * *iisexpress.exe* Cli： `%USERPROFILE%\Documents\IISExpress\config\applicationhost.config`
 

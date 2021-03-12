@@ -18,14 +18,14 @@ no-loc:
 - Razor
 - SignalR
 uid: security/authentication/cookie
-ms.openlocfilehash: 04469e0e75c433b40b364873a7e72e30421936f4
-ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
+ms.openlocfilehash: 5b1f1bb3de7126c401a81b89b99a45c7e45f8f8d
+ms.sourcegitcommit: 54fe1ae5e7d068e27376d562183ef9ddc7afc432
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 10/30/2020
-ms.locfileid: "93061349"
+ms.lasthandoff: 03/10/2021
+ms.locfileid: "102586289"
 ---
-# <a name="use-no-loccookie-authentication-without-no-locaspnet-core-identity"></a>使用 cookie 驗證但不使用 ASP.NET Core Identity
+# <a name="use-cookie-authentication-without-aspnet-core-identity"></a>使用 cookie 驗證但不使用 ASP.NET Core Identity
 
 作者：[Rick Anderson](https://twitter.com/RickAndMSFT)
 
@@ -33,7 +33,7 @@ ms.locfileid: "93061349"
 
 ASP.NET Core Identity 是完整的完整功能驗證提供者，可用於建立和維護登入。 但是， cookie 不能使用不使用的驗證提供者 ASP.NET Core Identity 。 如需詳細資訊，請參閱<xref:security/authentication/identity>。
 
-[查看或下載範例程式碼](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/security/authentication/cookie/samples) ([如何下載](xref:index#how-to-download-a-sample)) 
+[查看或下載範例程式碼](https://github.com/dotnet/AspNetCore.Docs/tree/main/aspnetcore/security/authentication/cookie/samples) ([如何下載](xref:index#how-to-download-a-sample)) 
 
 為了示範範例應用程式中的目的，假設使用者的使用者帳戶（Maria Rodriguez）會硬式編碼到應用程式中。 使用 **電子郵件** 位址 `maria.rodriguez@contoso.com` 和任何密碼來登入使用者。 使用者會在 `AuthenticateUser` *頁面/帳戶/登入 .cs* 檔案的方法中進行驗證。 在真實世界的範例中，使用者會針對資料庫進行驗證。
 
@@ -65,7 +65,7 @@ services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
     });
 ```
 
-## <a name="no-loccookie-policy-middleware"></a>Cookie 原則中介軟體
+## <a name="cookie-policy-middleware"></a>Cookie 原則中介軟體
 
 [ Cookie 原則中介軟體](xref:Microsoft.AspNetCore.CookiePolicy.CookiePolicyMiddleware)可啟用 cookie 原則功能。 將中介軟體新增至應用程式處理管線的順序是機密的， &mdash; 它只會影響在管線中註冊的下游元件。
 
@@ -92,7 +92,7 @@ var cookiePolicyOptions = new CookiePolicyOptions
 | SameSiteMode 不嚴格      | SameSiteMode。無<br>SameSiteMode 不嚴格<br>SameSiteMode 嚴謹 | SameSiteMode 不嚴格<br>SameSiteMode 不嚴格<br>SameSiteMode 嚴謹 |
 | SameSiteMode 嚴謹   | SameSiteMode。無<br>SameSiteMode 不嚴格<br>SameSiteMode 嚴謹 | SameSiteMode 嚴謹<br>SameSiteMode 嚴謹<br>SameSiteMode 嚴謹 |
 
-## <a name="create-an-authentication-no-loccookie"></a>建立驗證 cookie
+## <a name="create-an-authentication-cookie"></a>建立驗證 cookie
 
 若要建立 cookie 保存使用者資訊，請建立 <xref:System.Security.Claims.ClaimsPrincipal> 。 使用者資訊會序列化並儲存在中 cookie 。 
 
@@ -209,7 +209,7 @@ services.AddScoped<CustomCookieAuthenticationEvents>();
 > [!WARNING]
 > 此處所述的方法會在每個要求上觸發。 針對 cookie 每個要求的所有使用者驗證驗證，可能會導致應用程式的效能大幅下降。
 
-## <a name="persistent-no-loccookies"></a>持續性 cookie s
+## <a name="persistent-cookies"></a>持續性 cookie s
 
 您可能想要在 cookie 瀏覽器會話之間保存。 只有在登入或類似的機制中，以明確的使用者同意來啟用此持續性，才能使用 [記住我] 核取方塊。 
 
@@ -229,7 +229,7 @@ await HttpContext.SignInAsync(
     });
 ```
 
-## <a name="absolute-no-loccookie-expiration"></a>絕對 cookie 到期
+## <a name="absolute-cookie-expiration"></a>絕對 cookie 到期
 
 您可以使用設定絕對到期時間 <xref:Microsoft.AspNetCore.Authentication.AuthenticationProperties.ExpiresUtc> 。 若要建立持續性 cookie ， `IsPersistent` 也必須設定。 否則， cookie 會以會話為基礎的存留期建立，而且可能會在其保留的驗證票證之前或之後過期。 當 `ExpiresUtc` 設定時，它會覆寫之 <xref:Microsoft.AspNetCore.Authentication.Cookies.CookieAuthenticationOptions.ExpireTimeSpan> 選項的值 <xref:Microsoft.AspNetCore.Authentication.Cookies.CookieAuthenticationOptions> （如果有設定的話）。
 
@@ -254,7 +254,7 @@ await HttpContext.SignInAsync(
 
 ASP.NET Core Identity 是完整的完整功能驗證提供者，可用於建立和維護登入。 但是， cookie 不能使用不使用的驗證提供者 ASP.NET Core Identity 。 如需詳細資訊，請參閱<xref:security/authentication/identity>。
 
-[查看或下載範例程式碼](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/security/authentication/cookie/samples) ([如何下載](xref:index#how-to-download-a-sample)) 
+[查看或下載範例程式碼](https://github.com/dotnet/AspNetCore.Docs/tree/main/aspnetcore/security/authentication/cookie/samples) ([如何下載](xref:index#how-to-download-a-sample)) 
 
 為了示範範例應用程式中的目的，假設使用者的使用者帳戶（Maria Rodriguez）會硬式編碼到應用程式中。 使用 **電子郵件** 位址 `maria.rodriguez@contoso.com` 和任何密碼來登入使用者。 使用者會在 `AuthenticateUser` *頁面/帳戶/登入 .cs* 檔案的方法中進行驗證。 在真實世界的範例中，使用者會針對資料庫進行驗證。
 
@@ -288,7 +288,7 @@ services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
     });
 ```
 
-## <a name="no-loccookie-policy-middleware"></a>Cookie 原則中介軟體
+## <a name="cookie-policy-middleware"></a>Cookie 原則中介軟體
 
 [ Cookie 原則中介軟體](xref:Microsoft.AspNetCore.CookiePolicy.CookiePolicyMiddleware)可啟用 cookie 原則功能。 將中介軟體新增至應用程式處理管線的順序是機密的， &mdash; 它只會影響在管線中註冊的下游元件。
 
@@ -315,7 +315,7 @@ var cookiePolicyOptions = new CookiePolicyOptions
 | SameSiteMode 不嚴格      | SameSiteMode。無<br>SameSiteMode 不嚴格<br>SameSiteMode 嚴謹 | SameSiteMode 不嚴格<br>SameSiteMode 不嚴格<br>SameSiteMode 嚴謹 |
 | SameSiteMode 嚴謹   | SameSiteMode。無<br>SameSiteMode 不嚴格<br>SameSiteMode 嚴謹 | SameSiteMode 嚴謹<br>SameSiteMode 嚴謹<br>SameSiteMode 嚴謹 |
 
-## <a name="create-an-authentication-no-loccookie"></a>建立驗證 cookie
+## <a name="create-an-authentication-cookie"></a>建立驗證 cookie
 
 若要建立 cookie 保存使用者資訊，請建立 <xref:System.Security.Claims.ClaimsPrincipal> 。 使用者資訊會序列化並儲存在中 cookie 。 
 
@@ -426,7 +426,7 @@ services.AddScoped<CustomCookieAuthenticationEvents>();
 > [!WARNING]
 > 此處所述的方法會在每個要求上觸發。 針對 cookie 每個要求的所有使用者驗證驗證，可能會導致應用程式的效能大幅下降。
 
-## <a name="persistent-no-loccookies"></a>持續性 cookie s
+## <a name="persistent-cookies"></a>持續性 cookie s
 
 您可能想要在 cookie 瀏覽器會話之間保存。 只有在登入或類似的機制中，以明確的使用者同意來啟用此持續性，才能使用 [記住我] 核取方塊。 
 
@@ -446,7 +446,7 @@ await HttpContext.SignInAsync(
     });
 ```
 
-## <a name="absolute-no-loccookie-expiration"></a>絕對 cookie 到期
+## <a name="absolute-cookie-expiration"></a>絕對 cookie 到期
 
 您可以使用設定絕對到期時間 <xref:Microsoft.AspNetCore.Authentication.AuthenticationProperties.ExpiresUtc> 。 若要建立持續性 cookie ， `IsPersistent` 也必須設定。 否則， cookie 會以會話為基礎的存留期建立，而且可能會在其保留的驗證票證之前或之後過期。 當 `ExpiresUtc` 設定時，它會覆寫之 <xref:Microsoft.AspNetCore.Builder.CookieAuthenticationOptions.ExpireTimeSpan> 選項的值 <xref:Microsoft.AspNetCore.Builder.CookieAuthenticationOptions> （如果有設定的話）。
 

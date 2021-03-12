@@ -18,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: security/app-secrets
-ms.openlocfilehash: 63032895ce45ad096612a8c39a2709628c12790f
-ms.sourcegitcommit: 6299f08aed5b7f0496001d093aae617559d73240
+ms.openlocfilehash: b309b834bc7156b901447c8697e6d2b0156a30f1
+ms.sourcegitcommit: 54fe1ae5e7d068e27376d562183ef9ddc7afc432
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 12/14/2020
-ms.locfileid: "97486196"
+ms.lasthandoff: 03/10/2021
+ms.locfileid: "102585808"
 ---
 # <a name="safe-storage-of-app-secrets-in-development-in-aspnet-core"></a>在 ASP.NET Core 的開發中安全儲存應用程式秘密
 
@@ -31,9 +31,9 @@ ms.locfileid: "97486196"
 
 由 [Rick Anderson](https://twitter.com/RickAndMSFT)、 [Kirk Larkin](https://twitter.com/serpent5)、 [Daniel Roth](https://github.com/danroth27)及 [Scott Addie](https://github.com/scottaddie)
 
-[查看或下載範例程式碼](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/security/app-secrets/samples) ([如何下載](xref:index#how-to-download-a-sample)) 
+[查看或下載範例程式碼](https://github.com/dotnet/AspNetCore.Docs/tree/main/aspnetcore/security/app-secrets/samples) ([如何下載](xref:index#how-to-download-a-sample)) 
 
-本檔說明如何管理開發電腦上 ASP.NET Core 應用程式的敏感性資料。 絕對不要將密碼或其他敏感性資料儲存在原始程式碼中。 生產秘密不應用於開發或測試。 秘密不應與應用程式一起部署。 相反地，您應該透過像環境變數或 Azure Key Vault 一樣的控制方式來存取生產秘密。 您可以透過 [Azure Key Vault 設定提供者](xref:security/key-vault-configuration)儲存及保護 Azure 測試與生產祕密。
+本檔說明如何管理開發電腦上 ASP.NET Core 應用程式的敏感性資料。 絕對不要將密碼或其他敏感性資料儲存在原始程式碼中。 生產秘密不應用於開發或測試。 秘密不應與應用程式一起部署。 相反地，您應該透過像是環境變數或 Azure 金鑰保存庫等受控方式來存取生產秘密。 您可以透過 [Azure Key Vault 設定提供者](xref:security/key-vault-configuration)儲存及保護 Azure 測試與生產祕密。
 
 ## <a name="environment-variables"></a>環境變數
 
@@ -48,7 +48,7 @@ ms.locfileid: "97486196"
 
 ## <a name="secret-manager"></a>秘密管理員
 
-在 ASP.NET Core 專案的開發期間，秘密管理員工具會儲存機密資料。 在此內容中，有一段機密資料是應用程式秘密。 應用程式秘密會儲存在專案樹狀結構中的不同位置。 應用程式秘密會與特定專案建立關聯，或在數個專案之間共用。 應用程式秘密不會簽入原始檔控制中。
+秘密管理員工具會在 ASP.NET Core 專案的開發期間儲存機密資料。 在此內容中，有一段機密資料是應用程式秘密。 應用程式秘密會儲存在專案樹狀結構中的不同位置。 應用程式秘密會與特定專案建立關聯，或在數個專案之間共用。 應用程式秘密不會簽入原始檔控制中。
 
 > [!WARNING]
 > 秘密管理員工具不會加密儲存的密碼，也不應將其視為受信任的存放區。 這僅適用于開發用途。 金鑰和值會儲存在使用者設定檔目錄的 JSON 設定檔中。
@@ -79,7 +79,7 @@ ms.locfileid: "97486196"
 
 秘密管理員工具會操作儲存在使用者設定檔中的專案特定設定。
 
-秘密管理員工具組含 `init` .NET Core SDK 3.0.100 或更新版本中的命令。 若要使用使用者密碼，請在專案目錄中執行下列命令：
+秘密管理員工具組含 `init` .Net CORE SDK 3.0.100 或更新版本中的命令。 若要使用使用者密碼，請在專案目錄中執行下列命令：
 
 ```dotnetcli
 dotnet user-secrets init
@@ -89,7 +89,7 @@ dotnet user-secrets init
 
 [!code-xml[](app-secrets/samples/3.x/UserSecrets/UserSecrets.csproj?name=snippet_PropertyGroup&highlight=3)]
 
-在 Visual Studio 中，以滑鼠右鍵按一下方案總管中的專案，然後從內容功能表中選取 [ **管理使用者密碼** ]。 這項手勢會將以 `UserSecretsId` GUID 填入的專案加入至專案檔。
+在 Visual Studio 中，以滑鼠右鍵按一下 [方案瀏覽器] 中的專案，然後從內容功能表中選取 [ **管理使用者密碼** ]。 這項手勢會將以 `UserSecretsId` GUID 填入的專案加入至專案檔。
 
 ## <a name="set-a-secret"></a>設定秘密
 
@@ -109,7 +109,7 @@ dotnet user-secrets set "Movies:ServiceApiKey" "12345" --project "C:\apps\WebApp
 
 ### <a name="json-structure-flattening-in-visual-studio"></a>Visual Studio 中的 JSON 結構壓平合併
 
-Visual Studio 的 [ **管理使用者密碼** ] 手勢會在文字編輯器中開啟檔案的 *secrets.js* 。 以要儲存的索引鍵/值組取代 *secrets.js* 的內容。 例如：
+Visual Studio 的 [ **管理使用者密碼** ] 手勢會在文字編輯器中開啟檔案 *secrets.js* 。 以要儲存的索引鍵/值組取代 *secrets.js* 的內容。 例如：
 
 ```json
 {
@@ -296,9 +296,9 @@ No secrets configured for this application.
 
 由 [Rick Anderson](https://twitter.com/RickAndMSFT)、 [Daniel Roth](https://github.com/danroth27)及 [Scott Addie](https://github.com/scottaddie)
 
-[查看或下載範例程式碼](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/security/app-secrets/samples) ([如何下載](xref:index#how-to-download-a-sample)) 
+[查看或下載範例程式碼](https://github.com/dotnet/AspNetCore.Docs/tree/main/aspnetcore/security/app-secrets/samples) ([如何下載](xref:index#how-to-download-a-sample)) 
 
-本檔說明如何管理開發電腦上 ASP.NET Core 應用程式的敏感性資料。 絕對不要將密碼或其他敏感性資料儲存在原始程式碼中。 生產秘密不應用於開發或測試。 秘密不應與應用程式一起部署。 相反地，您應該透過像環境變數或 Azure Key Vault 一樣的控制方式來存取生產秘密。 您可以透過 [Azure Key Vault 設定提供者](xref:security/key-vault-configuration)儲存及保護 Azure 測試與生產祕密。
+本檔說明如何管理開發電腦上 ASP.NET Core 應用程式的敏感性資料。 絕對不要將密碼或其他敏感性資料儲存在原始程式碼中。 生產秘密不應用於開發或測試。 秘密不應與應用程式一起部署。 相反地，您應該透過像是環境變數或 Azure 金鑰保存庫等受控方式來存取生產秘密。 您可以透過 [Azure Key Vault 設定提供者](xref:security/key-vault-configuration)儲存及保護 Azure 測試與生產祕密。
 
 ## <a name="environment-variables"></a>環境變數
 
@@ -313,7 +313,7 @@ No secrets configured for this application.
 
 ## <a name="secret-manager"></a>秘密管理員
 
-在 ASP.NET Core 專案的開發期間，秘密管理員工具會儲存機密資料。 在此內容中，有一段機密資料是應用程式秘密。 應用程式秘密會儲存在專案樹狀結構中的不同位置。 應用程式秘密會與特定專案建立關聯，或在數個專案之間共用。 應用程式秘密不會簽入原始檔控制中。
+秘密管理員工具會在 ASP.NET Core 專案的開發期間儲存機密資料。 在此內容中，有一段機密資料是應用程式秘密。 應用程式秘密會儲存在專案樹狀結構中的不同位置。 應用程式秘密會與特定專案建立關聯，或在數個專案之間共用。 應用程式秘密不會簽入原始檔控制中。
 
 > [!WARNING]
 > 秘密管理員工具不會加密儲存的密碼，也不應將其視為受信任的存放區。 這僅適用于開發用途。 金鑰和值會儲存在使用者設定檔目錄的 JSON 設定檔中。
@@ -349,7 +349,7 @@ No secrets configured for this application.
 [!code-xml[](app-secrets/samples/2.x/UserSecrets/UserSecrets.csproj?name=snippet_PropertyGroup&highlight=3)]
 
 > [!TIP]
-> 在 Visual Studio 中，以滑鼠右鍵按一下方案總管中的專案，然後從內容功能表中選取 [ **管理使用者密碼** ]。 這項手勢會將以 `UserSecretsId` GUID 填入的專案加入至專案檔。
+> 在 Visual Studio 中，以滑鼠右鍵按一下 [方案瀏覽器] 中的專案，然後從內容功能表中選取 [ **管理使用者密碼** ]。 這項手勢會將以 `UserSecretsId` GUID 填入的專案加入至專案檔。
 
 ## <a name="set-a-secret"></a>設定秘密
 
@@ -369,7 +369,7 @@ dotnet user-secrets set "Movies:ServiceApiKey" "12345" --project "C:\apps\WebApp
 
 ### <a name="json-structure-flattening-in-visual-studio"></a>Visual Studio 中的 JSON 結構壓平合併
 
-Visual Studio 的 [ **管理使用者密碼** ] 手勢會在文字編輯器中開啟檔案的 *secrets.js* 。 以要儲存的索引鍵/值組取代 *secrets.js* 的內容。 例如：
+Visual Studio 的 [ **管理使用者密碼** ] 手勢會在文字編輯器中開啟檔案 *secrets.js* 。 以要儲存的索引鍵/值組取代 *secrets.js* 的內容。 例如：
 
 ```json
 {
@@ -416,7 +416,7 @@ JSON 結構會在透過或修改之後進行壓平合併 `dotnet user-secrets re
 
 如果您的專案是以 .NET Framework 為目標，請安裝 [Microsoft.Extensions.Configuration。Usersecrets.xml](https://www.nuget.org/packages/Microsoft.Extensions.Configuration.UserSecrets) NuGet 套件。
 
-在 ASP.NET Core 2.0 或更新版本中，當專案呼叫時，使用者密碼設定來源會自動加入至開發模式 <xref:Microsoft.AspNetCore.WebHost.CreateDefaultBuilder%2A> 。 `CreateDefaultBuilder`<xref:Microsoft.Extensions.Configuration.UserSecretsConfigurationExtensions.AddUserSecrets%2A>當為時 <xref:Microsoft.AspNetCore.Hosting.IHostingEnvironment.EnvironmentName> 呼叫 <xref:Microsoft.AspNetCore.Hosting.EnvironmentName.Development> ：
+在 ASP.NET Core 2.0 或更新版本中，當專案呼叫時，使用者秘密設定來源會自動加入至開發模式 <xref:Microsoft.AspNetCore.WebHost.CreateDefaultBuilder%2A> 。 `CreateDefaultBuilder`<xref:Microsoft.Extensions.Configuration.UserSecretsConfigurationExtensions.AddUserSecrets%2A>當為時 <xref:Microsoft.AspNetCore.Hosting.IHostingEnvironment.EnvironmentName> 呼叫 <xref:Microsoft.AspNetCore.Hosting.EnvironmentName.Development> ：
 
 [!code-csharp[](app-secrets/samples/2.x/UserSecrets/Program.cs?name=snippet_CreateWebHostBuilder&highlight=2)]
 

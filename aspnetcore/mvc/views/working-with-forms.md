@@ -6,6 +6,7 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 12/05/2019
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -17,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: mvc/views/working-with-forms
-ms.openlocfilehash: c337e727a4683b0b3c67307af93ef8efa246e2ad
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: 51e5f2f74493e7f4c18273c8589ed0424a1f2cac
+ms.sourcegitcommit: 54fe1ae5e7d068e27376d562183ef9ddc7afc432
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88631013"
+ms.lasthandoff: 03/10/2021
+ms.locfileid: "102585977"
 ---
 # <a name="tag-helpers-in-forms-in-aspnet-core"></a>ASP.NET Core 表單中的標籤協助程式
 
@@ -67,7 +68,7 @@ MVC 執行階段會從表單標籤協助程式屬性 `asp-controller` 和 `asp-a
 
 [!code-cshtml[](../../mvc/views/working-with-forms/sample/final/Views/Demo/RegisterRoute.cshtml)]
 
-*Views/Account* 資料夾 (當您建立具有「個別使用者帳戶」** 的新 Web 應用程式時產生) 中的許多檢視表，包含 [asp-route-returnurl](xref:mvc/views/working-with-forms) 屬性：
+*Views/Account* 資料夾 (當您建立具有「個別使用者帳戶」的新 Web 應用程式時產生) 中的許多檢視表，包含 [asp-route-returnurl](xref:mvc/views/working-with-forms) 屬性：
 
 ```cshtml
 <form asp-controller="Account" asp-action="Login"
@@ -190,7 +191,7 @@ public class HomeController : Controller
 
 * 從套用至模型屬性的[資料註解](/dotnet/api/microsoft.aspnetcore.mvc.dataannotations.iattributeadapter)屬性產生 [HTML5](https://developer.mozilla.org/docs/Web/Guide/HTML/HTML5) 驗證屬性
 
-* `Html.TextBoxFor` 和 `Html.EditorFor` 具有 HTML 協助程式功能重疊。 如需詳細資訊，請參閱**輸入標籤協助程式的 HTML 協助程式替代**。
+* `Html.TextBoxFor` 和 `Html.EditorFor` 具有 HTML 協助程式功能重疊。 如需詳細資訊，請參閱 **輸入標籤協助程式的 HTML 協助程式替代**。
 
 * 提供強型別。 如果屬性的名稱變更，而您未更新標籤協助程式，則會出現如下所示的錯誤：
 
@@ -464,7 +465,7 @@ public IActionResult Edit(int id, int colorIndex)
 |asp-validation-summary|顯示的驗證訊息|
 |--- |--- |
 |ValidationSummary.All|屬性和模型層級|
-|ValidationSummary.ModelOnly|模型|
+|ValidationSummary.ModelOnly|型號|
 |ValidationSummary.None|無|
 
 ### <a name="sample"></a>範例
@@ -681,4 +682,4 @@ HTTP POST `Index` 方法會顯示選取項目：
 * <xref:mvc/models/model-binding>
 * <xref:mvc/models/validation>
 * [IAttributeAdapter 介面](/dotnet/api/Microsoft.AspNetCore.Mvc.DataAnnotations.IAttributeAdapter)
-* [此文件的程式碼片段](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/mvc/views/working-with-forms/sample/final)
+* [此文件的程式碼片段](https://github.com/dotnet/AspNetCore.Docs/tree/main/aspnetcore/mvc/views/working-with-forms/sample/final)

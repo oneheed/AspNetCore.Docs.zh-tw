@@ -19,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: host-and-deploy/windows-service
-ms.openlocfilehash: 63267bf938c6d16b8a1b13940a4b3f8a02d1a1e4
-ms.sourcegitcommit: 063a06b644d3ade3c15ce00e72a758ec1187dd06
+ms.openlocfilehash: e5c7dd0e52f1246d3ac6ad9622573db4c276654b
+ms.sourcegitcommit: 54fe1ae5e7d068e27376d562183ef9ddc7afc432
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 01/16/2021
-ms.locfileid: "98252743"
+ms.lasthandoff: 03/10/2021
+ms.locfileid: "102588811"
 ---
 # <a name="host-aspnet-core-in-a-windows-service"></a>在 Windows 服務上裝載 ASP.NET Core
 
@@ -32,7 +32,7 @@ ms.locfileid: "98252743"
 
 ASP.NET Core 應用程式可以裝載在 Windows 上作為 [Windows 服務](/dotnet/framework/windows-services/introduction-to-windows-service-applications)，不需要使用 IIS。 當裝載為 Windows 服務時，應用程式將會在伺服器重新開機後自動啟動。
 
-[查看或下載範例程式碼](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/host-and-deploy/windows-service/samples) ([如何下載](xref:index#how-to-download-a-sample)) 
+[查看或下載範例程式碼](https://github.com/dotnet/AspNetCore.Docs/tree/main/aspnetcore/host-and-deploy/windows-service/samples) ([如何下載](xref:index#how-to-download-a-sample)) 
 
 ## <a name="prerequisites"></a>必要條件
 
@@ -288,21 +288,21 @@ ASP.NET Core 預設會繫結至 `http://localhost:5000`。 藉由設定環境變
 ### <a name="common-errors"></a>常見錯誤
 
 * 舊版或發行前版本的 PowerShell 正在使用中。
-* 註冊的服務不會使用 [dotnet publish](/dotnet/core/tools/dotnet-publish)命令中的應用程式 **已發佈** 輸出。 應用程式部署不支援 [dotnet 組建](/dotnet/core/tools/dotnet-build) 命令的輸出。 根據部署類型，您可以在下列其中一個資料夾中找到已發佈的資產：
+* 註冊的服務不會使用來自 [dotnet publish](/dotnet/core/tools/dotnet-publish)命令的應用程式 **已發佈** 輸出。 應用程式部署不支援 [dotnet 組建](/dotnet/core/tools/dotnet-build) 命令的輸出。 根據部署類型，您可以在下列其中一個資料夾中找到已發佈的資產：
   * *bin/Release/{目標 FRAMEWORK}/publish* (FDD) 
   * *bin/Release/{目標 FRAMEWORK}/{RUNTIME 識別碼}/publish* (SCD) 
 * 服務未處於執行中狀態。
 * 應用程式使用的資源路徑 (例如，憑證) 不正確。 Windows 服務的基底路徑是 *c： \\ windows \\ System32*。
 * 使用者沒有 [ *以服務方式登* 入] 許可權。
 * 執行 PowerShell 命令時，使用者的密碼已過期或不正確地傳遞 `New-Service` 。
-* 應用程式需要 ASP.NET Core authentication，但未設定 (HTTPS) 的安全連線。
+* 應用程式需要 ASP.NET 核心驗證，但未設定 (HTTPS) 的安全連線。
 * 要求 URL 埠不正確，或在應用程式中未正確設定。
 
 ### <a name="system-and-application-event-logs"></a>系統和應用程式事件記錄檔
 
 存取系統和應用程式事件記錄：
 
-1. 開啟 [開始] 功能表、搜尋 *事件檢視器*，然後選取 **事件檢視器** 應用程式。
+1. 開啟 [開始] 功能表、搜尋 [ *事件檢視器]*，然後選取 [ **事件檢視器]** 應用程式。
 1. 在 [事件檢視器] 中，開啟 [Windows 記錄] 節點。
 1. 選取 [ **系統** ] 以開啟 [系統事件記錄檔]。 選取 [應用程式] 以開啟「應用程式事件記錄檔」。
 1. 搜尋與失敗應用程式相關的錯誤。
@@ -313,7 +313,7 @@ ASP.NET Core 預設會繫結至 `http://localhost:5000`。 藉由設定環境變
 
 ### <a name="clear-package-caches"></a>清除套件快取
 
-在升級開發電腦上的 .NET Core SDK 或變更應用程式內的套件版本之後，正常運作的應用程式可能會立即失敗。 在某些情況下，執行主要升級時，不一致的套件可能會中斷應用程式。 大多數這些問題都可依照下列指示來進行修正：
+在開發電腦上升級 .NET Core SDK 或變更應用程式內的套件版本之後，正常運作的應用程式可能會立即失敗。 在某些情況下，執行主要升級時，不一致的套件可能會中斷應用程式。 大多數這些問題都可依照下列指示來進行修正：
 
 1. 刪除 [bin] 和 [obj] 資料夾。
 1. 從命令列介面執行 [dotnet nuget 區域變數](/dotnet/core/tools/dotnet-nuget-locals) ，以清除套件快取。
@@ -332,14 +332,14 @@ ASP.NET Core 預設會繫結至 `http://localhost:5000`。 藉由設定環境變
 從 [Windows 錯誤報告 (WER)](/windows/desktop/wer/windows-error-reporting) 取得並分析傾印：
 
 1. 在 `c:\dumps` 中建立資料夾以保存損毀傾印檔案。
-1. 使用應用程式可執行檔名稱來執行 [EnableDumps PowerShell 腳本](https://github.com/dotnet/AspNetCore.Docs/blob/master/aspnetcore/host-and-deploy/windows-service/samples/scripts/EnableDumps.ps1) ：
+1. 使用應用程式可執行檔名稱來執行 [EnableDumps PowerShell 腳本](https://github.com/dotnet/AspNetCore.Docs/blob/main/aspnetcore/host-and-deploy/windows-service/samples/scripts/EnableDumps.ps1) ：
 
    ```powershell
    .\EnableDumps {APPLICATION EXE} c:\dumps
    ```
 
 1. 在會導致損毀的情況下，執行應用程式。
-1. 發生損毀之後，請執行 [DisableDumps PowerShell 指令碼](https://github.com/dotnet/AspNetCore.Docs/blob/master/aspnetcore/host-and-deploy/windows-service/samples/scripts/DisableDumps.ps1)：
+1. 發生損毀之後，請執行 [DisableDumps PowerShell 指令碼](https://github.com/dotnet/AspNetCore.Docs/blob/main/aspnetcore/host-and-deploy/windows-service/samples/scripts/DisableDumps.ps1)：
 
    ```powershell
    .\DisableDumps {APPLICATION EXE}
@@ -379,7 +379,7 @@ ASP.NET Core 預設會繫結至 `http://localhost:5000`。 藉由設定環境變
 
 ASP.NET Core 應用程式可以裝載在 Windows 上作為 [Windows 服務](/dotnet/framework/windows-services/introduction-to-windows-service-applications)，不需要使用 IIS。 當裝載為 Windows 服務時，應用程式將會在伺服器重新開機後自動啟動。
 
-[查看或下載範例程式碼](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/host-and-deploy/windows-service/samples) ([如何下載](xref:index#how-to-download-a-sample)) 
+[查看或下載範例程式碼](https://github.com/dotnet/AspNetCore.Docs/tree/main/aspnetcore/host-and-deploy/windows-service/samples) ([如何下載](xref:index#how-to-download-a-sample)) 
 
 ## <a name="prerequisites"></a>必要條件
 
@@ -631,21 +631,21 @@ CreateWebHostBuilder(args)
 ### <a name="common-errors"></a>常見錯誤
 
 * 舊版或發行前版本的 PowerShell 正在使用中。
-* 註冊的服務不會使用 [dotnet publish](/dotnet/core/tools/dotnet-publish)命令中的應用程式 **已發佈** 輸出。 應用程式部署不支援 [dotnet 組建](/dotnet/core/tools/dotnet-build) 命令的輸出。 根據部署類型，您可以在下列其中一個資料夾中找到已發佈的資產：
+* 註冊的服務不會使用來自 [dotnet publish](/dotnet/core/tools/dotnet-publish)命令的應用程式 **已發佈** 輸出。 應用程式部署不支援 [dotnet 組建](/dotnet/core/tools/dotnet-build) 命令的輸出。 根據部署類型，您可以在下列其中一個資料夾中找到已發佈的資產：
   * *bin/Release/{目標 FRAMEWORK}/publish* (FDD) 
   * *bin/Release/{目標 FRAMEWORK}/{RUNTIME 識別碼}/publish* (SCD) 
 * 服務未處於執行中狀態。
 * 應用程式使用的資源路徑 (例如，憑證) 不正確。 Windows 服務的基底路徑是 *c： \\ windows \\ System32*。
 * 使用者沒有 [ *以服務方式登* 入] 許可權。
 * 執行 PowerShell 命令時，使用者的密碼已過期或不正確地傳遞 `New-Service` 。
-* 應用程式需要 ASP.NET Core authentication，但未設定 (HTTPS) 的安全連線。
+* 應用程式需要 ASP.NET 核心驗證，但未設定 (HTTPS) 的安全連線。
 * 要求 URL 埠不正確，或在應用程式中未正確設定。
 
 ### <a name="system-and-application-event-logs"></a>系統和應用程式事件記錄檔
 
 存取系統和應用程式事件記錄：
 
-1. 開啟 [開始] 功能表、搜尋 *事件檢視器*，然後選取 **事件檢視器** 應用程式。
+1. 開啟 [開始] 功能表、搜尋 [ *事件檢視器]*，然後選取 [ **事件檢視器]** 應用程式。
 1. 在 [事件檢視器] 中，開啟 [Windows 記錄] 節點。
 1. 選取 [ **系統** ] 以開啟 [系統事件記錄檔]。 選取 [應用程式] 以開啟「應用程式事件記錄檔」。
 1. 搜尋與失敗應用程式相關的錯誤。
@@ -656,7 +656,7 @@ CreateWebHostBuilder(args)
 
 ### <a name="clear-package-caches"></a>清除套件快取
 
-在升級開發電腦上的 .NET Core SDK 或變更應用程式內的套件版本之後，正常運作的應用程式可能會立即失敗。 在某些情況下，執行主要升級時，不一致的套件可能會中斷應用程式。 大多數這些問題都可依照下列指示來進行修正：
+在開發電腦上升級 .NET Core SDK 或變更應用程式內的套件版本之後，正常運作的應用程式可能會立即失敗。 在某些情況下，執行主要升級時，不一致的套件可能會中斷應用程式。 大多數這些問題都可依照下列指示來進行修正：
 
 1. 刪除 [bin] 和 [obj] 資料夾。
 1. 從命令列介面執行 [dotnet nuget 區域變數](/dotnet/core/tools/dotnet-nuget-locals) ，以清除套件快取。
@@ -675,14 +675,14 @@ CreateWebHostBuilder(args)
 從 [Windows 錯誤報告 (WER)](/windows/desktop/wer/windows-error-reporting) 取得並分析傾印：
 
 1. 在 `c:\dumps` 中建立資料夾以保存損毀傾印檔案。
-1. 使用應用程式可執行檔名稱來執行 [EnableDumps PowerShell 腳本](https://github.com/dotnet/AspNetCore.Docs/blob/master/aspnetcore/host-and-deploy/windows-service/scripts/EnableDumps.ps1) ：
+1. 使用應用程式可執行檔名稱來執行 [EnableDumps PowerShell 腳本](https://github.com/dotnet/AspNetCore.Docs/blob/main/aspnetcore/host-and-deploy/windows-service/scripts/EnableDumps.ps1) ：
 
    ```console
    .\EnableDumps {APPLICATION EXE} c:\dumps
    ```
 
 1. 在會導致損毀的情況下，執行應用程式。
-1. 發生損毀之後，請執行 [DisableDumps PowerShell 指令碼](https://github.com/dotnet/AspNetCore.Docs/blob/master/aspnetcore/host-and-deploy/windows-service/scripts/DisableDumps.ps1)：
+1. 發生損毀之後，請執行 [DisableDumps PowerShell 指令碼](https://github.com/dotnet/AspNetCore.Docs/blob/main/aspnetcore/host-and-deploy/windows-service/scripts/DisableDumps.ps1)：
 
    ```console
    .\DisableDumps {APPLICATION EXE}
@@ -713,7 +713,7 @@ CreateWebHostBuilder(args)
 
 ASP.NET Core 應用程式可以裝載在 Windows 上作為 [Windows 服務](/dotnet/framework/windows-services/introduction-to-windows-service-applications)，不需要使用 IIS。 當裝載為 Windows 服務時，應用程式將會在伺服器重新開機後自動啟動。
 
-[查看或下載範例程式碼](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/host-and-deploy/windows-service/samples) ([如何下載](xref:index#how-to-download-a-sample)) 
+[查看或下載範例程式碼](https://github.com/dotnet/AspNetCore.Docs/tree/main/aspnetcore/host-and-deploy/windows-service/samples) ([如何下載](xref:index#how-to-download-a-sample)) 
 
 ## <a name="prerequisites"></a>必要條件
 
@@ -968,21 +968,21 @@ CreateWebHostBuilder(args)
 ### <a name="common-errors"></a>常見錯誤
 
 * 舊版或發行前版本的 PowerShell 正在使用中。
-* 註冊的服務不會使用 [dotnet publish](/dotnet/core/tools/dotnet-publish)命令中的應用程式 **已發佈** 輸出。 應用程式部署不支援 [dotnet 組建](/dotnet/core/tools/dotnet-build) 命令的輸出。 根據部署類型，您可以在下列其中一個資料夾中找到已發佈的資產：
+* 註冊的服務不會使用來自 [dotnet publish](/dotnet/core/tools/dotnet-publish)命令的應用程式 **已發佈** 輸出。 應用程式部署不支援 [dotnet 組建](/dotnet/core/tools/dotnet-build) 命令的輸出。 根據部署類型，您可以在下列其中一個資料夾中找到已發佈的資產：
   * *bin/Release/{目標 FRAMEWORK}/publish* (FDD) 
   * *bin/Release/{目標 FRAMEWORK}/{RUNTIME 識別碼}/publish* (SCD) 
 * 服務未處於執行中狀態。
 * 應用程式使用的資源路徑 (例如，憑證) 不正確。 Windows 服務的基底路徑是 *c： \\ windows \\ System32*。
 * 使用者沒有 [ *以服務方式登* 入] 許可權。
 * 執行 PowerShell 命令時，使用者的密碼已過期或不正確地傳遞 `New-Service` 。
-* 應用程式需要 ASP.NET Core authentication，但未設定 (HTTPS) 的安全連線。
+* 應用程式需要 ASP.NET 核心驗證，但未設定 (HTTPS) 的安全連線。
 * 要求 URL 埠不正確，或在應用程式中未正確設定。
 
 ### <a name="system-and-application-event-logs"></a>系統和應用程式事件記錄檔
 
 存取系統和應用程式事件記錄：
 
-1. 開啟 [開始] 功能表、搜尋 *事件檢視器*，然後選取 **事件檢視器** 應用程式。
+1. 開啟 [開始] 功能表、搜尋 [ *事件檢視器]*，然後選取 [ **事件檢視器]** 應用程式。
 1. 在 [事件檢視器] 中，開啟 [Windows 記錄] 節點。
 1. 選取 [ **系統** ] 以開啟 [系統事件記錄檔]。 選取 [應用程式] 以開啟「應用程式事件記錄檔」。
 1. 搜尋與失敗應用程式相關的錯誤。
@@ -993,7 +993,7 @@ CreateWebHostBuilder(args)
 
 ### <a name="clear-package-caches"></a>清除套件快取
 
-在升級開發電腦上的 .NET Core SDK 或變更應用程式內的套件版本之後，正常運作的應用程式可能會立即失敗。 在某些情況下，執行主要升級時，不一致的套件可能會中斷應用程式。 大多數這些問題都可依照下列指示來進行修正：
+在開發電腦上升級 .NET Core SDK 或變更應用程式內的套件版本之後，正常運作的應用程式可能會立即失敗。 在某些情況下，執行主要升級時，不一致的套件可能會中斷應用程式。 大多數這些問題都可依照下列指示來進行修正：
 
 1. 刪除 [bin] 和 [obj] 資料夾。
 1. 從命令列介面執行 [dotnet nuget 區域變數](/dotnet/core/tools/dotnet-nuget-locals) ，以清除套件快取。
@@ -1012,14 +1012,14 @@ CreateWebHostBuilder(args)
 從 [Windows 錯誤報告 (WER)](/windows/desktop/wer/windows-error-reporting) 取得並分析傾印：
 
 1. 在 `c:\dumps` 中建立資料夾以保存損毀傾印檔案。
-1. 使用應用程式可執行檔名稱來執行 [EnableDumps PowerShell 腳本](https://github.com/dotnet/AspNetCore.Docs/blob/master/aspnetcore/host-and-deploy/windows-service/scripts/EnableDumps.ps1) ：
+1. 使用應用程式可執行檔名稱來執行 [EnableDumps PowerShell 腳本](https://github.com/dotnet/AspNetCore.Docs/blob/main/aspnetcore/host-and-deploy/windows-service/scripts/EnableDumps.ps1) ：
 
    ```console
    .\EnableDumps {APPLICATION EXE} c:\dumps
    ```
 
 1. 在會導致損毀的情況下，執行應用程式。
-1. 發生損毀之後，請執行 [DisableDumps PowerShell 指令碼](https://github.com/dotnet/AspNetCore.Docs/blob/master/aspnetcore/host-and-deploy/windows-service/scripts/DisableDumps.ps1)：
+1. 發生損毀之後，請執行 [DisableDumps PowerShell 指令碼](https://github.com/dotnet/AspNetCore.Docs/blob/main/aspnetcore/host-and-deploy/windows-service/scripts/DisableDumps.ps1)：
 
    ```console
    .\DisableDumps {APPLICATION EXE}

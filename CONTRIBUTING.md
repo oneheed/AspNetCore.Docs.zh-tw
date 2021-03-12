@@ -12,7 +12,7 @@
 
 * 建立一則[議題](https://github.com/dotnet/AspNetCore.Docs/issues/new)描述您欲執行的動作，例如變更現有的文章或建立新的文章。 我們通常會要求新建議主題的大綱。 在您投入更多時間之前，請等候小組的核准。
 * 派生 [aspnet/Docs](https://github.com/dotnet/AspNetCore.Docs/) 存放庫，並針對您的變更建立分支。
-* 將內含變更的 PR 提交給管理員。
+* 使用您的變更提交 PR 至 *主要* 分支。
 * 如果您的 PR 被分派到 'cla-required' 標籤，請[完成貢獻授權合約 (CLA)](https://cla.dotnetfoundation.org/)。
 * 回應 PR 意見。
 
@@ -24,11 +24,11 @@
 
 ## <a name="markdown-syntax"></a>Markdown 語法
 
-文章是以 [DocFX Flavored Markdown](https://dotnet.github.io/docfx/spec/docfx_flavored_markdown.html) 撰寫，也就是 [GitHub Flavored Markdown (GFM)](https://guides.github.com/features/mastering-markdown/) 的超集。 如需 ASP.NET 文件中常用 UI 功能的 DFM 語法範例，請參閱 .NET Docs 存放庫樣式指南中的 [Metadata and Markdown Template](https://github.com/dotnet/docs/blob/master/styleguide/template.md) (中繼資料和 Markdown 範本)。 
+文章是以 [DocFX Flavored Markdown](https://dotnet.github.io/docfx/spec/docfx_flavored_markdown.html) 撰寫，也就是 [GitHub Flavored Markdown (GFM)](https://guides.github.com/features/mastering-markdown/) 的超集。 如需 ASP.NET 文件中常用 UI 功能的 DFM 語法範例，請參閱 .NET Docs 存放庫樣式指南中的 [Metadata and Markdown Template](https://github.com/dotnet/docs/blob/main/styleguide/template.md) (中繼資料和 Markdown 範本)。 
 
 ## <a name="folder-structure-conventions"></a>資料夾結構慣例
 
-在每個 Markdown 檔案中，可能存在一個影像資料夾和一個範例程式碼資料夾。 如果文章是 [fundamentals/configuration/index.md](https://github.com/dotnet/AspNetCore.Docs/blob/master/aspnetcore/fundamentals/configuration/index.md)，影像會位於 [fundamentals/configuration/index/\_static](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/configuration/index/_static) 中，而範例應用程式專案檔會位於 [fundamentals/configuration/index/sample](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/configuration/index/sample) 中。 *fundamentals/configuration/index.md* 檔案中的影像會由下列 Markdown 轉譯：
+在每個 Markdown 檔案中，可能存在一個影像資料夾和一個範例程式碼資料夾。 如果文章是 [fundamentals/configuration/index.md](https://github.com/dotnet/AspNetCore.Docs/blob/main/aspnetcore/fundamentals/configuration/index.md)，影像會位於 [fundamentals/configuration/index/\_static](https://github.com/dotnet/AspNetCore.Docs/tree/main/aspnetcore/fundamentals/configuration/index/_static) 中，而範例應用程式專案檔會位於 [fundamentals/configuration/index/sample](https://github.com/dotnet/AspNetCore.Docs/tree/main/aspnetcore/fundamentals/configuration/index/sample) 中。 *fundamentals/configuration/index.md* 檔案中的影像會由下列 Markdown 轉譯：
 
 ```md
 ![description of image for alt attribute](configuration/index/_static/imagename.png)
@@ -149,7 +149,7 @@ DocFX 需要：
 
 ## <a name="voice-and-tone"></a>語氣和語調
 
-我們撰寫文件的目標是盡可能讓越多使用者輕鬆了解越好。 為此，我們制定了書寫樣式方針，並要求參與者務必遵循。 如需詳細資訊，請參閱 .NET 存放庫中的 [Voice and tone guidelines](https://github.com/dotnet/docs/blob/master/styleguide/voice-tone.md) (語態和語氣方針)。
+我們撰寫文件的目標是盡可能讓越多使用者輕鬆了解越好。 為此，我們制定了書寫樣式方針，並要求參與者務必遵循。 如需詳細資訊，請參閱 .NET 存放庫中的 [Voice and tone guidelines](https://github.com/dotnet/docs/blob/main/styleguide/voice-tone.md) (語態和語氣方針)。
 
 ## <a name="microsoft-writing-style-guide"></a>Microsoft 書寫樣式指南
 
@@ -157,4 +157,4 @@ DocFX 需要：
 
 ## <a name="redirects"></a>重新導向
 
-如果您刪除文章、變更其檔案名稱，或把文章移至其他資料夾，請建立重新導向，確保將文章加入書籤的人員不會收到 *404 找不到* 錯誤。 將重新導向新增至[主要重新導向檔案](https://github.com/dotnet/AspNetCore.Docs/blob/master/.openpublishing.redirection.json)。
+如果您刪除文章、變更其檔案名稱，或把文章移至其他資料夾，請建立重新導向，確保將文章加入書籤的人員不會收到 *404 找不到* 錯誤。 將重新導向新增至 [主要重新導向](https://github.com/dotnet/AspNetCore.Docs/blob/main/.openpublishing.redirection.json)檔案。

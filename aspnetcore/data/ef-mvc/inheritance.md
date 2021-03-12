@@ -19,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: data/ef-mvc/inheritance
-ms.openlocfilehash: 581a31bad4069523699fbbac63862c9dff12034d
-ms.sourcegitcommit: 3593c4efa707edeaaceffbfa544f99f41fc62535
+ms.openlocfilehash: 299e00b223d287c4e2ece3d1e250581e2a7565e5
+ms.sourcegitcommit: 54fe1ae5e7d068e27376d562183ef9ddc7afc432
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 01/04/2021
-ms.locfileid: "93054212"
+ms.lasthandoff: 03/10/2021
+ms.locfileid: "102586367"
 ---
 # <a name="tutorial-implement-inheritance---aspnet-mvc-with-ef-core"></a>教學課程：執行繼承-使用 EF Core ASP.NET MVC
 
@@ -42,7 +42,7 @@ ms.locfileid: "93054212"
 > * 建立及更新移轉
 > * 測試實作
 
-## <a name="prerequisites"></a>先決條件
+## <a name="prerequisites"></a>必要條件
 
 * [處理並行](concurrency.md)
 
@@ -65,7 +65,7 @@ School 資料模型中的 `Instructor` 和 `Student` 類別有數個完全相同
 替代方法是讓資料庫看起來更像繼承結構。 比方說，您可以只在 Person 資料表中包含名稱欄位，而在個別的 Instructor 和 Student 資料表中包含日期欄位。
 
 > [!WARNING]
-> EF Core 3.x 不支援 (TPT) 的每個類型資料表，但已在 [EF Core 5.0](/ef/core/what-is-new/ef-core-5.0/plan)中執行。
+> EF Core 3.x 不支援 (TPT) 的每個類型資料表，但已在 [Ef core 5.0](/ef/core/what-is-new/ef-core-5.0/plan)中執行。
 
 ![一類一表 (Table-Per-Type) 繼承](inheritance/_static/tpt.png)
 
@@ -165,7 +165,7 @@ dotnet ef database update
 
 ## <a name="get-the-code"></a>取得程式碼
 
-[下載或檢視已完成的應用程式。](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/data/ef-mvc/intro/samples/cu-final)
+[下載或檢視已完成的應用程式。](https://github.com/dotnet/AspNetCore.Docs/tree/main/aspnetcore/data/ef-mvc/intro/samples/cu-final)
 
 ## <a name="additional-resources"></a>其他資源
 

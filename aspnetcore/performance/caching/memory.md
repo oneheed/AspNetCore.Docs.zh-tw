@@ -1,5 +1,5 @@
 ---
-title: ASP.NET Core 中的快取記憶體
+title: ASP.NET 核心中的快取記憶體
 author: rick-anderson
 description: 了解如何快取 ASP.NET Core 中的資料和記憶體。
 ms.author: riande
@@ -18,20 +18,20 @@ no-loc:
 - Razor
 - SignalR
 uid: performance/caching/memory
-ms.openlocfilehash: 19e8dc0ae4d5f8fd28d03d5be87c0b1bbf32d940
-ms.sourcegitcommit: 04ad9cd26fcaa8bd11e261d3661f375f5f343cdc
+ms.openlocfilehash: d71678aeee9b3fca717129a2fbed1f75b593e010
+ms.sourcegitcommit: 54fe1ae5e7d068e27376d562183ef9ddc7afc432
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 02/10/2021
-ms.locfileid: "100107216"
+ms.lasthandoff: 03/10/2021
+ms.locfileid: "102586302"
 ---
-# <a name="cache-in-memory-in-aspnet-core"></a>ASP.NET Core 中的快取記憶體
+# <a name="cache-in-memory-in-aspnet-core"></a>ASP.NET 核心中的快取記憶體
 
 ::: moniker range=">= aspnetcore-3.0"
 
 依 [Rick Anderson](https://twitter.com/RickAndMSFT)、 [John Luo](https://github.com/JunTaoLuo)和 [Steve Smith](https://ardalis.com/)
 
-[查看或下載範例程式碼](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/performance/caching/memory/3.0sample) ([如何下載](xref:index#how-to-download-a-sample)) 
+[查看或下載範例程式碼](https://github.com/dotnet/AspNetCore.Docs/tree/main/aspnetcore/performance/caching/memory/3.0sample) ([如何下載](xref:index#how-to-download-a-sample)) 
 
 ## <a name="caching-basics"></a>快取基本概念
 
@@ -48,12 +48,12 @@ Web 伺服陣列中的非粘滯話需要 [分散式](distributed.md) 快取，�
 <xref:System.Runtime.Caching>/<xref:System.Runtime.Caching.MemoryCache> ([NuGet 套件](https://www.nuget.org/packages/System.Runtime.Caching/)) 可搭配使用：
 
 * .NET Standard 2.0 或更新版本。
-* 任何以 .NET Standard 2.0 或更新版本為目標的 [.net 執行](/dotnet/standard/net-standard#net-implementation-support) 。 例如，ASP.NET Core 2.0 或更新版本。
+* 以 .NET Standard 2.0 或更新版本為目標的任何 [.net 執行](/dotnet/standard/net-standard#net-implementation-support) 。 例如，ASP.NET Core 2.0 或更新版本。
 * .NET Framework 4.5 或更新版本。
 
-[](https://www.nuget.org/packages/Microsoft.Extensions.Caching.Memory/) / `IMemoryCache` 建議您不要使用本文所述的 (， `System.Runtime.Caching` / `MemoryCache` 因為它已更緊密地整合到 ASP.NET Core) 中。 例如，以原生 `IMemoryCache` 方式使用 ASP.NET Core 相依性 [插入](xref:fundamentals/dependency-injection)。
+[](https://www.nuget.org/packages/Microsoft.Extensions.Caching.Memory/) / `IMemoryCache` 建議您不要使用本文) 中所述的 (，因為它已與 `System.Runtime.Caching` / `MemoryCache` ASP.NET Core 更緊密整合。 例如，以原生 `IMemoryCache` 方式使用 ASP.NET Core 相依性 [插入](xref:fundamentals/dependency-injection)。
 
-將 `System.Runtime.Caching` / `MemoryCache` ASP.NET 4.x 的程式碼移植到 ASP.NET Core 時，請使用做為相容性橋樑。
+將程式 `System.Runtime.Caching` / `MemoryCache` 代碼從 ASP.NET 4.x 移植到 ASP.NET Core 時，請使用做為相容性橋樑。
 
 ## <a name="cache-guidelines"></a>快取指導方針
 
@@ -61,12 +61,12 @@ Web 伺服陣列中的非粘滯話需要 [分散式](distributed.md) 快取，�
 * 快取會使用稀有資源，也就是記憶體。 限制快取成長：
   * 請勿 **使用外部輸入做為** 快取索引鍵。
   * 使用過期來限制快取成長。
-  * [使用 SetSize、Size 和 SizeLimit 來限制](#use-setsize-size-and-sizelimit-to-limit-cache-size)快取大小。 ASP.NET Core 執行時間不會根據記憶體 **壓力限制快** 取大小。 開發人員需要限制快取大小。
+  * [使用 SetSize、Size 和 SizeLimit 來限制](#use-setsize-size-and-sizelimit-to-limit-cache-size)快取大小。 ASP.NET Core 執行時間 **不** 會根據記憶體壓力來限制快取大小。 開發人員需要限制快取大小。
 
 ## <a name="use-imemorycache"></a>使用 IMemoryCache
 
 > [!WARNING]
-> 使用來自相依性 [插入](xref:fundamentals/dependency-injection)的 *共用* 記憶體快取，以及呼叫 `SetSize` 、 `Size` 或 `SizeLimit` 來限制快取大小，可能會導致應用程式失敗。 在快取上設定大小限制時，所有專案都必須在新增時指定大小。 這可能會導致問題，因為開發人員可能無法完全掌控使用共用快取的內容。 例如，Entity Framework Core 會使用共用快取，且不會指定大小。 如果應用程式設定快取大小限制並使用 EF Core，應用程式會擲回 `InvalidOperationException` 。
+> 使用來自相依性 [插入](xref:fundamentals/dependency-injection)的 *共用* 記憶體快取，以及呼叫 `SetSize` 、 `Size` 或 `SizeLimit` 來限制快取大小，可能會導致應用程式失敗。 在快取上設定大小限制時，所有專案都必須在新增時指定大小。 這可能會導致問題，因為開發人員可能無法完全掌控使用共用快取的內容。 例如，Entity Framework Core 會使用共用快取，且不會指定大小。 如果應用程式設定快取大小限制，並使用 EF Core，則應用程式會擲回 `InvalidOperationException` 。
 > 使用 `SetSize` 、或來限制快取時，請建立快取 `Size` `SizeLimit` singleton 以進行快取。 如需詳細資訊和範例，請參閱 [使用 SetSize、大小和 SizeLimit 來限制](#use-setsize-size-and-sizelimit-to-limit-cache-size)快取大小。
 > 共用快取是由其他架構或程式庫共用。 例如，EF Core 會使用共用快取，且不會指定大小。 
 
@@ -123,7 +123,7 @@ Web 伺服陣列中的非粘滯話需要 [分散式](distributed.md) 快取，�
 
 ## <a name="use-setsize-size-and-sizelimit-to-limit-cache-size"></a>使用 SetSize、Size 和 SizeLimit 來限制快取大小
 
-`MemoryCache`實例可以選擇性地指定並強制執行大小限制。 快取大小限制沒有已定義的測量單位，因為快取沒有任何機制可測量專案的大小。 如果已設定快取大小限制，則所有專案都必須指定大小。 ASP.NET Core 執行時間不會根據記憶體壓力限制快取大小。 開發人員需要限制快取大小。 指定的大小是以開發人員選擇的單位來計算。
+`MemoryCache`實例可以選擇性地指定並強制執行大小限制。 快取大小限制沒有已定義的測量單位，因為快取沒有任何機制可測量專案的大小。 如果已設定快取大小限制，則所有專案都必須指定大小。 ASP.NET Core 執行時間不會根據記憶體壓力來限制快取大小。 開發人員需要限制快取大小。 指定的大小是以開發人員選擇的單位來計算。
 
 例如：
 
@@ -215,7 +215,7 @@ Web 伺服陣列中的非粘滯話需要 [分散式](distributed.md) 快取，�
 <!-- This is the 2.1 version -->
 依 [Rick Anderson](https://twitter.com/RickAndMSFT)、 [John Luo](https://github.com/JunTaoLuo)和 [Steve Smith](https://ardalis.com/)
 
-[查看或下載範例程式碼](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/performance/caching/memory/sample) ([如何下載](xref:index#how-to-download-a-sample)) 
+[查看或下載範例程式碼](https://github.com/dotnet/AspNetCore.Docs/tree/main/aspnetcore/performance/caching/memory/sample) ([如何下載](xref:index#how-to-download-a-sample)) 
 
 ## <a name="caching-basics"></a>快取基本概念
 
@@ -232,12 +232,12 @@ Web 伺服陣列中的非粘滯話需要 [分散式](distributed.md) 快取，�
 <xref:System.Runtime.Caching>/<xref:System.Runtime.Caching.MemoryCache> ([NuGet 套件](https://www.nuget.org/packages/System.Runtime.Caching/)) 可搭配使用：
 
 * .NET Standard 2.0 或更新版本。
-* 任何以 .NET Standard 2.0 或更新版本為目標的 [.net 執行](/dotnet/standard/net-standard#net-implementation-support) 。 例如，ASP.NET Core 2.0 或更新版本。
+* 以 .NET Standard 2.0 或更新版本為目標的任何 [.net 執行](/dotnet/standard/net-standard#net-implementation-support) 。 例如，ASP.NET Core 2.0 或更新版本。
 * .NET Framework 4.5 或更新版本。
 
-[](https://www.nuget.org/packages/Microsoft.Extensions.Caching.Memory/) / `IMemoryCache` 建議您不要使用本文所述的 (， `System.Runtime.Caching` / `MemoryCache` 因為它已更緊密地整合到 ASP.NET Core) 中。 例如，以原生 `IMemoryCache` 方式使用 ASP.NET Core 相依性 [插入](xref:fundamentals/dependency-injection)。
+[](https://www.nuget.org/packages/Microsoft.Extensions.Caching.Memory/) / `IMemoryCache` 建議您不要使用本文) 中所述的 (，因為它已與 `System.Runtime.Caching` / `MemoryCache` ASP.NET Core 更緊密整合。 例如，以原生 `IMemoryCache` 方式使用 ASP.NET Core 相依性 [插入](xref:fundamentals/dependency-injection)。
 
-將 `System.Runtime.Caching` / `MemoryCache` ASP.NET 4.x 的程式碼移植到 ASP.NET Core 時，請使用做為相容性橋樑。
+將程式 `System.Runtime.Caching` / `MemoryCache` 代碼從 ASP.NET 4.x 移植到 ASP.NET Core 時，請使用做為相容性橋樑。
 
 ## <a name="cache-guidelines"></a>快取指導方針
 
@@ -245,12 +245,12 @@ Web 伺服陣列中的非粘滯話需要 [分散式](distributed.md) 快取，�
 * 快取會使用稀有資源，也就是記憶體。 限制快取成長：
   * 請勿 **使用外部輸入做為** 快取索引鍵。
   * 使用過期來限制快取成長。
-  * [使用 SetSize、Size 和 SizeLimit 來限制](#use-setsize-size-and-sizelimit-to-limit-cache-size)快取大小。 ASP.NET Core 執行時間不會根據記憶體壓力限制快取大小。 開發人員需要限制快取大小。
+  * [使用 SetSize、Size 和 SizeLimit 來限制](#use-setsize-size-and-sizelimit-to-limit-cache-size)快取大小。 ASP.NET Core 執行時間不會根據記憶體壓力來限制快取大小。 開發人員需要限制快取大小。
 
 ## <a name="using-imemorycache"></a>使用 IMemoryCache
 
 > [!WARNING]
-> 使用來自相依性 [插入](xref:fundamentals/dependency-injection)的 *共用* 記憶體快取，以及呼叫 `SetSize` 、 `Size` 或 `SizeLimit` 來限制快取大小，可能會導致應用程式失敗。 在快取上設定大小限制時，所有專案都必須在新增時指定大小。 這可能會導致問題，因為開發人員可能無法完全掌控使用共用快取的內容。 例如，Entity Framework Core 會使用共用快取，且不會指定大小。 如果應用程式設定快取大小限制並使用 EF Core，應用程式會擲回 `InvalidOperationException` 。
+> 使用來自相依性 [插入](xref:fundamentals/dependency-injection)的 *共用* 記憶體快取，以及呼叫 `SetSize` 、 `Size` 或 `SizeLimit` 來限制快取大小，可能會導致應用程式失敗。 在快取上設定大小限制時，所有專案都必須在新增時指定大小。 這可能會導致問題，因為開發人員可能無法完全掌控使用共用快取的內容。 例如，Entity Framework Core 會使用共用快取，且不會指定大小。 如果應用程式設定快取大小限制，並使用 EF Core，則應用程式會擲回 `InvalidOperationException` 。
 > 使用 `SetSize` 、或來限制快取時，請建立快取 `Size` `SizeLimit` singleton 以進行快取。 如需詳細資訊和範例，請參閱 [使用 SetSize、大小和 SizeLimit 來限制](#use-setsize-size-and-sizelimit-to-limit-cache-size)快取大小。
 
 記憶體內部快取是使用相依性 [插入](../../fundamentals/dependency-injection.md)從您的應用程式參考的 *服務*。 呼叫 `AddMemoryCache` 于 `ConfigureServices` ：
@@ -299,7 +299,7 @@ Web 伺服陣列中的非粘滯話需要 [分散式](distributed.md) 快取，�
 
 ## <a name="use-setsize-size-and-sizelimit-to-limit-cache-size"></a>使用 SetSize、Size 和 SizeLimit 來限制快取大小
 
-`MemoryCache`實例可以選擇性地指定並強制執行大小限制。 快取大小限制沒有已定義的測量單位，因為快取沒有任何機制可測量專案的大小。 如果已設定快取大小限制，則所有專案都必須指定大小。 ASP.NET Core 執行時間不會根據記憶體壓力限制快取大小。 開發人員需要限制快取大小。 指定的大小是以開發人員選擇的單位來計算。
+`MemoryCache`實例可以選擇性地指定並強制執行大小限制。 快取大小限制沒有已定義的測量單位，因為快取沒有任何機制可測量專案的大小。 如果已設定快取大小限制，則所有專案都必須指定大小。 ASP.NET Core 執行時間不會根據記憶體壓力來限制快取大小。 開發人員需要限制快取大小。 指定的大小是以開發人員選擇的單位來計算。
 
 例如：
 

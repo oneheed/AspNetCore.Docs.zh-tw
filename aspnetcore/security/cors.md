@@ -18,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: security/cors
-ms.openlocfilehash: 7afa8105e0ab007153d5c3e8238765d4e9f22641
-ms.sourcegitcommit: 54fe1ae5e7d068e27376d562183ef9ddc7afc432
+ms.openlocfilehash: b057e5e08b8a4d0f9bcd68f92102cad309655acc
+ms.sourcegitcommit: 07e7ee573fe4e12be93249a385db745d714ff6ae
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 03/10/2021
-ms.locfileid: "102586796"
+ms.lasthandoff: 03/12/2021
+ms.locfileid: "103413505"
 ---
 # <a name="enable-cross-origin-requests-cors-in-aspnet-core"></a>在 ASP.NET Core 中啟用 (CORS) 的跨原始來源要求
 
@@ -71,7 +71,7 @@ ms.locfileid: "102586796"
 使用具有命名原則的 [[EnableCors]](#attr) 屬性，可提供最精細的控制項來限制支援 CORS 的端點。
 
 > [!WARNING]
-> <xref:Owin.CorsExtensions.UseCors%2A> 使用時，必須先呼叫 <xref:Microsoft.AspNetCore.Builder.ResponseCachingExtensions.UseResponseCaching%2A> `UseResponseCaching` 。
+> <xref:Microsoft.AspNetCore.Builder.CorsMiddlewareExtensions.UseCors%2A> 必須以正確的順序呼叫。 如需詳細資訊，請參閱 [中介軟體順序](xref:fundamentals/middleware/index#middleware-order)。 例如， `UseCors` <xref:Microsoft.AspNetCore.Builder.ResponseCachingExtensions.UseResponseCaching%2A> 在使用時，必須先呼叫 `UseResponseCaching` 。
 
 下列各節將詳細說明每種方法。
 
@@ -89,7 +89,7 @@ CORS 中介軟體會處理跨原始來源的要求。 下列程式碼會將 CORS
 * 呼叫 <xref:Microsoft.AspNetCore.Builder.CorsMiddlewareExtensions.UseCors*> 擴充方法，並指定  `_myAllowSpecificOrigins` CORS 原則。 `UseCors` 新增 CORS 中介軟體。 的呼叫 `UseCors` 必須放在之後 `UseRouting` ，但在之前 `UseAuthorization` 。 如需詳細資訊，請參閱 [中介軟體順序](xref:fundamentals/middleware/index#middleware-order)。
 * <xref:Microsoft.Extensions.DependencyInjection.CorsServiceCollectionExtensions.AddCors*>使用[lambda 運算式](/dotnet/csharp/programming-guide/statements-expressions-operators/lambda-expressions)的呼叫。 Lambda 接受 <xref:Microsoft.AspNetCore.Cors.Infrastructure.CorsPolicyBuilder> 物件。 設定[選項](#cors-policy-options)（例如 `WithOrigins` ）將在本文稍後說明。
 * 啟用 `_myAllowSpecificOrigins` 所有控制器端點的 CORS 原則。 請參閱 [端點路由](#ecors) ，以將 CORS 原則套用至特定端點。
-* 使用回應快取 [中介軟體](xref:performance/caching/middleware)時，請 <xref:Owin.CorsExtensions.UseCors%2A> 先呼叫 <xref:Microsoft.AspNetCore.Builder.ResponseCachingExtensions.UseResponseCaching%2A> 。
+* 使用回應快取 [中介軟體](xref:performance/caching/middleware)時，請 <xref:Microsoft.AspNetCore.Builder.CorsMiddlewareExtensions.UseCors%2A> 先呼叫 <xref:Microsoft.AspNetCore.Builder.ResponseCachingExtensions.UseResponseCaching%2A> 。
 
 使用端點路由時，CORS 中介軟體 **必須** 設定為在對和的呼叫之間執行 `UseRouting` `UseEndpoints` 。
 

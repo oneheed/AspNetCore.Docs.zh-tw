@@ -3,7 +3,7 @@ title: 第2部分：加入模型
 author: rick-anderson
 description: 頁面上教學課程系列的第2部分 Razor 。 在本節中，會加入模型類別。
 ms.author: riande
-ms.date: 11/11/2020
+ms.date: 03/10/2021
 ms.custom: contperf-fy21q2
 no-loc:
 - Index
@@ -19,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: tutorials/razor-pages/model
-ms.openlocfilehash: 3677cd6fe5c2ff901a17c9dccdc749d8eb2709f2
-ms.sourcegitcommit: 54fe1ae5e7d068e27376d562183ef9ddc7afc432
+ms.openlocfilehash: defbc73d0c1d6aac30360cd7b83cc518a407bf98
+ms.sourcegitcommit: 07e7ee573fe4e12be93249a385db745d714ff6ae
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 03/10/2021
-ms.locfileid: "102588662"
+ms.lasthandoff: 03/12/2021
+ms.locfileid: "103413440"
 ---
 # <a name="part-2-add-a-model-to-a-razor-pages-app-in-aspnet-core"></a>第2部分：將模型新增至 Razor ASP.NET Core 中的頁面應用程式
 
@@ -80,38 +80,6 @@ ms.locfileid: "102588662"
 ### <a name="add-nuget-packages-and-ef-tools"></a>新增 NuGet 套件和 EF 工具
 
 [!INCLUDE[](~/includes/add-EF-NuGet-SQLite-CLI-5.md)]
-
-### <a name="add-a-database-context-class"></a>新增資料庫內容類別
-
-1. 在 *Razor PagesMovie* 專案中，建立一個名為 *Data* 的資料夾。
-1. 在 [*資料*] 資料夾中，使用下列程式碼加入名為 *Razor PagesMovieCoNtext.cs* 的檔案：
-
-   [!code-csharp[](~/tutorials/razor-pages/razor-pages-start/sample/RazorPagesMovie30/Data/RazorPagesMovieContext.cs)]
-
-   上述程式碼會建立實體集的 `DbSet` 屬性。 在 Entity Framework 詞彙中，實體集通常會對應至資料庫資料表，而實體則對應至資料表中的資料列。 在稍後的步驟中新增相依性之前，程式碼不會進行編譯。
-
-<a name="cs"></a>
-
-### <a name="add-a-database-connection-string"></a>新增資料庫連線字串
-
-將連接字串新增至檔案，如下列醒目提示的程式 *appsettings.json* 代碼所示：
-
-[!code-json[](~/tutorials/razor-pages/razor-pages-start/sample/RazorPagesMovie50/appsettings_SQLite.json?highlight=10-12)]
-
-<a name="reg"></a>
-
-### <a name="register-the-database-context"></a>登錄資料庫內容
-
-1. 在 *Startup.cs* 最上方新增下列 `using` 陳述式：
-
-   ```csharp
-   using RazorPagesMovie.Data;
-   using Microsoft.EntityFrameworkCore;
-   ```
-
-1. 使用中的相依性 [插入](xref:fundamentals/dependency-injection) 容器來註冊資料庫內容 `Startup.ConfigureServices` ：
-
-   [!code-csharp[](~/tutorials/razor-pages/razor-pages-start/sample/RazorPagesMovie50/Startup.cs?name=snippet_UseSqlite&highlight=5-6)]
 
 # <a name="visual-studio-for-mac"></a>[Visual Studio for Mac](#tab/visual-studio-mac)
 

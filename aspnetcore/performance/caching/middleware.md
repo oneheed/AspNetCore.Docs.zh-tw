@@ -19,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: performance/caching/middleware
-ms.openlocfilehash: 0f1f5dfcb9595270a9659a02141f7d1eba5c44ef
-ms.sourcegitcommit: 54fe1ae5e7d068e27376d562183ef9ddc7afc432
+ms.openlocfilehash: 11473bbf8b4e2d67d15798a5d87ee01761682f9a
+ms.sourcegitcommit: 07e7ee573fe4e12be93249a385db745d714ff6ae
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 03/10/2021
-ms.locfileid: "102587693"
+ms.lasthandoff: 03/12/2021
+ms.locfileid: "103413466"
 ---
 # <a name="response-caching-middleware-in-aspnet-core"></a>ASP.NET Core 中的回應快取中介軟體
 
@@ -49,7 +49,7 @@ ms.locfileid: "102587693"
 [!code-csharp[](middleware/samples/3.x/ResponseCachingMiddleware/Startup.cs?name=snippet2&highlight=17)]
 
 > [!WARNING]
-> <xref:Owin.CorsExtensions.UseCors%2A><xref:Microsoft.AspNetCore.Builder.ResponseCachingExtensions.UseResponseCaching%2A>使用[CORS 中介軟體](xref:security/cors)之前，必須先呼叫。
+> <xref:Microsoft.AspNetCore.Builder.CorsMiddlewareExtensions.UseCors%2A><xref:Microsoft.AspNetCore.Builder.ResponseCachingExtensions.UseResponseCaching%2A>使用[CORS 中介軟體](xref:security/cors)之前，必須先呼叫。
 
 範例應用程式會新增標頭，以控制後續要求的快取：
 

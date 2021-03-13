@@ -19,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: test/integration-tests
-ms.openlocfilehash: 47d204a0cde258fda8c9c9b78043046e719d8f18
-ms.sourcegitcommit: 54fe1ae5e7d068e27376d562183ef9ddc7afc432
+ms.openlocfilehash: 50c3f04c4add9d3dec032b5f2e95ce503466693e
+ms.sourcegitcommit: 07e7ee573fe4e12be93249a385db745d714ff6ae
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 03/10/2021
-ms.locfileid: "102588031"
+ms.lasthandoff: 03/12/2021
+ms.locfileid: "103413375"
 ---
 # <a name="integration-tests-in-aspnet-core"></a>ASP.NET Core 中的整合測試
 
@@ -347,7 +347,7 @@ protected override IWebHostBuilder CreateWebHostBuilder() =>
 
 ## <a name="disable-shadow-copying"></a>停用陰影複製
 
-陰影複製會導致測試在和輸出目錄不同的目錄中執行。 若要讓測試正常運作，必須停用陰影複製。 [範例應用程式](https://github.com/dotnet/AspNetCore.Docs/tree/main/aspnetcore/test/integration-tests/samples)會使用 xUnit 並停用 xUnit 的陰影複製，方法是在具有正確設定的檔案 *上包含xunit.runner.js* 。 如需詳細資訊，請參閱 [使用 JSON 設定 xUnit](https://xunit.github.io/docs/configuring-with-json.html)。
+陰影複製會導致測試在和輸出目錄不同的目錄中執行。 若要讓測試正常運作，必須停用陰影複製。 [範例應用程式](https://github.com/dotnet/AspNetCore.Docs/tree/main/aspnetcore/test/integration-tests/samples)會使用 xUnit 並停用 xUnit 的陰影複製，方法是在具有正確設定的檔案 *上包含xunit.runner.js* 。 如需詳細資訊，請參閱 [xUnit 檔](https://xunit.net/docs/configuration-files)。
 
 使用下列內容，將檔案 *上的xunit.runner.js* 新增至測試專案的根目錄：
 

@@ -17,20 +17,20 @@ no-loc:
 - Razor
 - SignalR
 uid: migration/proper-to-2x/index
-ms.openlocfilehash: 059ddc18d0c531efaba8aab916ddbb27b42b5e2c
-ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
+ms.openlocfilehash: 7961890becc8f4513e0750f28341c9d4cf94e7ad
+ms.sourcegitcommit: 07e7ee573fe4e12be93249a385db745d714ff6ae
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 10/30/2020
-ms.locfileid: "93053549"
+ms.lasthandoff: 03/12/2021
+ms.locfileid: "103413326"
 ---
 # <a name="migrate-from-aspnet-to-aspnet-core"></a>從 ASP.NET 移轉至 ASP.NET Core
 
 作者：[Isaac Levin](https://isaaclevin.com)
 
-這篇文章可作為將 ASP.NET 應用程式移轉至 ASP.NET Core 的參考指南。
+這篇文章可作為將 ASP.NET 應用程式移轉至 ASP.NET Core 的參考指南。 如需完整的移植指南，請參閱將 [現有的 ASP.NET 應用程式移植到 .Net Core](https://aka.ms/aspnet-porting-ebook) 的電子書。
 
-## <a name="prerequisites"></a>Prerequisites
+## <a name="prerequisites"></a>必要條件
 
 [.NET Core SDK 2.2 或更新版本](https://dotnet.microsoft.com/download)
 
@@ -155,7 +155,7 @@ services.Configure<AppConfiguration>(Configuration.GetSection("AppConfiguration"
 
 在 ASP.NET 中，靜態檔案會儲存在不同目錄中，於檢視中提供參考。
 
-在 ASP.NET Core 中，除非另有設定，否則靜態檔案會儲存在 [web 根目錄] ( *&lt; 內容根目錄 &gt; /wwwroot* ) 。 從 `Startup.Configure` 叫用 `UseStaticFiles` 擴充方法，將檔案載入至要求管線：
+在 ASP.NET Core 中，靜態檔案會儲存在「web 根目錄」 (*&lt; 內容根 &gt; /wwwroot*) ，除非另有設定。 從 `Startup.Configure` 叫用 `UseStaticFiles` 擴充方法，將檔案載入至要求管線：
 
 [!code-csharp[](../../fundamentals/static-files/samples/1.x/StaticFilesSample/StartupStaticFiles.cs?highlight=3&name=snippet_ConfigureMethod)]
 
@@ -167,9 +167,13 @@ services.Configure<AppConfiguration>(Configuration.GetSection("AppConfiguration"
 > [!NOTE]
 > 如需在 ASP.NET Core 中提供靜態檔案更深入的參考，請參閱[靜態檔案](xref:fundamentals/static-files)。
 
-## <a name="multi-value-no-loccookies"></a>多重值 cookie s
+## <a name="multi-value-cookies"></a>多重值 cookie s
 
-ASP.NET Core 中不支援[多值 cookie s](xref:System.Web.HttpCookie.Values) 。 cookie每個值建立一個。
+ASP.NET Core 不支援[多重值 cookie s](xref:System.Web.HttpCookie.Values) 。 cookie每個值建立一個。
+
+## <a name="authentication-cookies-are-not-compressed-in-aspnet-core"></a>cookie未在 ASP.NET Core 中壓縮驗證
+
+[!INCLUDE[](~/includes/cookies-not-compressed.md)]
 
 ## <a name="partial-app-migration"></a>部分應用程式遷移
 

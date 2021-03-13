@@ -18,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: host-and-deploy/docker/building-net-docker-images
-ms.openlocfilehash: b29ce03366e5c0e815de0874f5b96efb9ba5326c
-ms.sourcegitcommit: 54fe1ae5e7d068e27376d562183ef9ddc7afc432
+ms.openlocfilehash: 32e721035df8bd9e746ad4db6bb2753c358f3dac
+ms.sourcegitcommit: 07e7ee573fe4e12be93249a385db745d714ff6ae
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 03/10/2021
-ms.locfileid: "102585951"
+ms.lasthandoff: 03/12/2021
+ms.locfileid: "103413492"
 ---
 # <a name="docker-images-for-aspnet-core"></a>ASP.NET Core 的 Docker 映像
 
@@ -64,15 +64,17 @@ ms.locfileid: "102585951"
 
 * `dotnet/aspnet`
 
+   範例會使用此映像來執行應用程式。 此映像包含 ASP.NET Core 執行階段和程式庫，並會進行最佳化，以在生產環境中執行應用程式。 專為部署和應用程式啟動速度而設計的映像相對較小，因此，已將從 Docker 登錄到 Docker 主機的網路效能最佳化。 只會將執行應用程式所需的程式庫和內容複製到容器中。 內容已準備好執行，可用最短的時間從 `docker run` 到應用程式啟動。 在 Docker 模型中，不需要動態程式碼編譯。
+   
 ::: moniker-end
 
 ::: moniker range="< aspnetcore-5.0"
 
 * `dotnet/core/aspnet`
 
-::: moniker-end
-
    範例會使用此映像來執行應用程式。 此映像包含 ASP.NET Core 執行階段和程式庫，並會進行最佳化，以在生產環境中執行應用程式。 專為部署和應用程式啟動速度而設計的映像相對較小，因此，已將從 Docker 登錄到 Docker 主機的網路效能最佳化。 只會將執行應用程式所需的程式庫和內容複製到容器中。 內容已準備好執行，可用最短的時間從 `docker run` 到應用程式啟動。 在 Docker 模型中，不需要動態程式碼編譯。
+   
+::: moniker-end
 
 ## <a name="prerequisites"></a>必要條件
 
@@ -216,7 +218,7 @@ ms.locfileid: "102585951"
 
 * 瀏覽至 `http://localhost:5000` 以查看首頁。
 
-若要在 Docker 容器內使用手動發佈的應用程式，請建立新的 *Dockerfile* ，並使用 `docker build .` 命令來建立容器。
+若要在 Docker 容器內使用手動發佈的應用程式，請建立新的 *Dockerfile* ，並使用 `docker build .` 命令來建立映射。
 
 ::: moniker range=">= aspnetcore-5.0"
 
@@ -226,6 +228,8 @@ WORKDIR /app
 COPY published/aspnetapp.dll ./
 ENTRYPOINT ["dotnet", "aspnetapp.dll"]
 ```
+
+若要查看新的映射，請使用 `docker images` 命令。
 
 ### <a name="the-dockerfile"></a>Dockerfile
 

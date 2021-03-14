@@ -17,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: mvc/controllers/routing
-ms.openlocfilehash: c90ac92cf0866b78bcdb11663e76c116d714ca5d
-ms.sourcegitcommit: 54fe1ae5e7d068e27376d562183ef9ddc7afc432
+ms.openlocfilehash: eeae0ef44fc9b8a92da40481f5dbc7422ed8d43c
+ms.sourcegitcommit: d5fa39765959738eed4bcf5ee0b207cefddb4873
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 03/10/2021
-ms.locfileid: "102589058"
+ms.lasthandoff: 03/14/2021
+ms.locfileid: "103460439"
 ---
 # <a name="routing-to-controller-actions-in-aspnet-core"></a>ASP.NET Core 中的路由至控制器動作
 
@@ -509,10 +509,6 @@ AmbiguousMatchException: The request matched multiple endpoints. Matches:
 `[Route("[controller]/[action]", Name="[controller]_[action]")]`針對每個動作產生唯一的路由名稱：
 
 [!code-csharp[](routing/samples/3.x/main/Controllers/ProductsController.cs?name=snippet5)]
-
-語彙基元取代也適用於屬性路由所定義的路由名稱。
-`[Route("[controller]/[action]", Name="[controller]_[action]")]`
- 會針對每個動作產生唯一的路由名稱。
 
 若要比對常值語彙基元取代分隔符號 `[` 或 `]`，請重複字元 (`[[` 或 `]]`) 來將它逸出。
 

@@ -19,12 +19,12 @@ no-loc:
 - SignalR
 - Models
 uid: tutorials/first-web-api
-ms.openlocfilehash: 789cd1a867bc8c17401bbac5c02951b4bd2999b6
-ms.sourcegitcommit: 54fe1ae5e7d068e27376d562183ef9ddc7afc432
+ms.openlocfilehash: f80c574ddb85c50713e36c7a2cceb826863c7321
+ms.sourcegitcommit: 00368bb6a5420983beaced5b62dabc1f94abdeba
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 03/10/2021
-ms.locfileid: "102587654"
+ms.lasthandoff: 03/16/2021
+ms.locfileid: "103557838"
 ---
 # <a name="tutorial-create-a-web-api-with-aspnet-core"></a>教學課程：使用 ASP.NET Core 建立 Web API
 
@@ -82,7 +82,7 @@ ms.locfileid: "102587654"
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
 * 從 [ **檔案** ] 功能表選取 [ **新增** > **專案**]。
-* 選取 **ASP.NET Core Web 應用程式** 範本，然後按一下 [下一步]。
+* 選取 [ **ASP.NET Core WEB API** ] 範本，然後按 **[下一步]**。
 * 將專案命名為 *TodoApi*，然後按一下 [建立]。
 * 在 [ **建立新的 ASP.NET Core Web 應用程式** ] 對話方塊中，確認已選取 [ **.net Core** ] 和 [ **ASP.NET Core 5.0** ]。 選取 **API** 範本，然後按一下 [建立]。
 

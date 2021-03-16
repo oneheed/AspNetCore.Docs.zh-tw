@@ -19,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/call-web-api
-ms.openlocfilehash: 9ac17e7c22b23ced7a8f12a6ef0d456f6244318b
-ms.sourcegitcommit: 54fe1ae5e7d068e27376d562183ef9ddc7afc432
+ms.openlocfilehash: 451b6f60a1e5f560606adb4fbaf8596d9d57ec64
+ms.sourcegitcommit: 00368bb6a5420983beaced5b62dabc1f94abdeba
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 03/10/2021
-ms.locfileid: "102586757"
+ms.lasthandoff: 03/16/2021
+ms.locfileid: "103557811"
 ---
 # <a name="call-a-web-api-from-aspnet-core-blazor"></a>從 ASP.NET Core 呼叫 web API Blazor
 
@@ -129,7 +129,7 @@ JSON helper 方法會在下列範例中將要求傳送至 URI (web API) 並處�
   呼叫以傳回 <xref:System.Net.Http.Json.HttpClientJsonExtensions.PostAsJsonAsync%2A> <xref:System.Net.Http.HttpResponseMessage> 。 若要從回應訊息還原序列化 JSON 內容，請使用 `ReadFromJsonAsync<T>` 擴充方法：
   
   ```csharp
-  var content = response.Content.ReadFromJsonAsync<WeatherForecast>();
+  var content = await response.Content.ReadFromJsonAsync<WeatherForecast>();
   ```
 
 * <xref:System.Net.Http.Json.HttpClientJsonExtensions.PutAsJsonAsync%2A>：傳送 HTTP PUT 要求，包括 JSON 編碼的內容。
@@ -160,7 +160,7 @@ JSON helper 方法會在下列範例中將要求傳送至 URI (web API) 並處�
   呼叫以傳回 <xref:System.Net.Http.Json.HttpClientJsonExtensions.PutAsJsonAsync%2A> <xref:System.Net.Http.HttpResponseMessage> 。 若要從回應訊息還原序列化 JSON 內容，請使用 <xref:System.Net.Http.Json.HttpContentJsonExtensions.ReadFromJsonAsync%2A> 擴充方法：
   
   ```csharp
-  var content = response.Content.ReadFromJsonAsync<WeatherForecast>();
+  var content = await response.Content.ReadFromJsonAsync<WeatherForecast>();
   ```
 
 <xref:System.Net.Http> 包含用來傳送 HTTP 要求和接收 HTTP 回應的額外擴充方法。 <xref:System.Net.Http.HttpClient.DeleteAsync%2A?displayProperty=nameWithType> 用來將 HTTP DELETE 要求傳送至 web API。

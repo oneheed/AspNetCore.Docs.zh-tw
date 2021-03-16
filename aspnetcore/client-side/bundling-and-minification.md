@@ -4,7 +4,7 @@ author: scottaddie
 description: 瞭解如何藉由套用配套和縮制技術，將 ASP.NET Core web 應用程式中的靜態資源優化。
 ms.author: scaddie
 ms.custom: mvc
-ms.date: 09/02/2020
+ms.date: 03/14/2021
 no-loc:
 - appsettings.json
 - ASP.NET Core Identity
@@ -18,24 +18,24 @@ no-loc:
 - Razor
 - SignalR
 uid: client-side/bundling-and-minification
-ms.openlocfilehash: 7dd11ceb7a7c01ce1042f50595013b7fe7f1cd5c
-ms.sourcegitcommit: 3593c4efa707edeaaceffbfa544f99f41fc62535
+ms.openlocfilehash: d594bbf277907e22b0299b0451e480e9d533d506
+ms.sourcegitcommit: 00368bb6a5420983beaced5b62dabc1f94abdeba
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 01/04/2021
-ms.locfileid: "93054836"
+ms.lasthandoff: 03/16/2021
+ms.locfileid: "103557799"
 ---
 # <a name="bundle-and-minify-static-assets-in-aspnet-core"></a>在 ASP.NET Core 中組合和縮短靜態資產
 
 [Scott Addie](https://twitter.com/Scott_Addie)和[David 松樹](https://twitter.com/davidpine7)
 
-本文說明套用配套和縮制的優點，包括這些功能如何搭配 ASP.NET Core 的 web 應用程式來使用。
+本文說明套用配套和縮制的優點，包括如何搭配 ASP.NET Core web 應用程式使用這些功能。
 
 ## <a name="what-is-bundling-and-minification"></a>什麼是組合和縮制
 
 組合和縮制是您可以在 web 應用程式中套用的兩個不同的效能優化。 結合和縮制會藉由減少伺服器要求數目和減少要求的靜態資產的大小，來改善效能。
 
-組合和縮制主要會改善第一頁要求載入時間。 一旦要求網頁之後，瀏覽器會將靜態資產快取 (JavaScript、CSS 和影像) 。 因此，在要求相同資產的相同網站上要求相同頁面或頁面時，組合和縮制並不會改善效能。 如果資產上的 expires 標頭未正確設定，而且未使用組合和縮制，則瀏覽器的有效啟發學習會在幾天後標記為過時的資產。 此外，瀏覽器需要針對每個資產進行驗證要求。 在此情況下，即使在第一頁要求之後，組合和縮制也可提供效能改進。
+組合和縮制主要會改善第一頁要求載入時間。 一旦要求網頁之後，瀏覽器會將靜態資產快取 (JavaScript、CSS 和影像) 。 因此，在要求相同資產的相同網站上要求相同頁面或頁面時，組合和縮制不會改善效能。 如果資產上的 expires 標頭未正確設定，而且未使用組合和縮制，則瀏覽器的有效啟發學習會在幾天後標記為過時的資產。 此外，瀏覽器需要針對每個資產進行驗證要求。 在此情況下，即使在第一頁要求之後，組合和縮制也可提供效能改進。
 
 ### <a name="bundling"></a>捆綁
 
@@ -47,11 +47,24 @@ ms.locfileid: "93054836"
 
 請考慮下列 JavaScript 函數：
 
-[!code-javascript[](../client-side/bundling-and-minification/samples/BuildBundlerMinifierApp/wwwroot/js/site.js)]
+```javascript
+AddAltToImg = function (imageTagAndImageID, imageContext) {
+    ///<signature>
+    ///<summary> Adds an alt tab to the image
+    // </summary>
+    //<param name="imgElement" type="String">The image selector.</param>
+    //<param name="ContextForImage" type="String">The image context.</param>
+    ///</signature>
+    var imageElement = $(imageTagAndImageID, imageContext);
+    imageElement.attr('alt', imageElement.attr('id').replace(/ID/, ''));
+}
+```
 
 縮制會將函數縮減為下列內容：
 
-[!code-javascript[](../client-side/bundling-and-minification/samples/BuildBundlerMinifierApp/wwwroot/js/site.min.js)]
+```javascript
+AddAltToImg=function(t,a){var r=$(t,a);r.attr("alt",r.attr("id").replace(/ID/,""))};
+```
 
 除了移除批註和不必要的空白字元之外，下列參數和變數名稱已重新命名如下：
 
@@ -71,66 +84,13 @@ ms.locfileid: "93054836"
 已傳送 KB | 156 | 264.68 | 70%
 載入時間 (ms)  | 885 | 2360   | 167%
 
-對 HTTP 要求標頭而言，瀏覽器相當詳細。 「傳送的位元組總數」計量在組合時看到明顯的縮減。 載入時間顯示大幅改進，不過這個範例是在本機執行。 在透過網路傳輸的資產使用包裝和縮制時，可實現更佳的效能提升。
+瀏覽器對於 HTTP 要求標頭相當詳細。 「傳送的位元組總數」計量在組合時看到明顯的縮減。 載入時間顯示大幅改進，不過這個範例是在本機執行。 在透過網路傳輸的資產使用包裝和縮制時，可實現更佳的效能提升。
 
 ## <a name="choose-a-bundling-and-minification-strategy"></a>選擇捆綁和縮制策略
 
-MVC 和 Razor Pages 專案範本提供了由 JSON 設定檔群組成的組合和縮制解決方案。 協力廠商工具（例如 [Grunt](xref:client-side/using-grunt) 工作執行器）會稍微複雜一點，才能完成相同的工作。 當您的開發工作流程需要除了組合和縮制 &mdash; （例如 linting 和影像優化）之外的處理時，協力廠商工具相當適合。 藉由使用設計階段組合和縮制，縮減檔會在應用程式部署之前建立。 在部署之前進行包裝和縮小，可提供降低伺服器負載的優點。 不過，請務必瞭解設計階段組合和縮制會增加組建複雜性，而且只適用于靜態檔案。
+ASP.NET Core 與 WebOptimizer （開放原始碼包裝和縮制解決方案）相容。 如需安裝指示和範例專案，請參閱 [WebOptimizer](https://github.com/ligershark/WebOptimizer)。 ASP.NET Core 不提供原生包裝和縮制解決方案。
 
-## <a name="configure-bundling-and-minification"></a>設定捆綁和縮制
-
-> [!NOTE]
-> [BuildBundlerMinifier](https://www.nuget.org/packages/BuildBundlerMinifier) NuGet 套件必須新增至您的專案，才能運作。
-
-::: moniker range="<= aspnetcore-2.0"
-
-在 ASP.NET Core 2.0 或更早版本中，MVC 和 Razor Pages 專案範本會提供設定檔案的 *bundleconfig.js* ，以定義每個套件組合的選項：
-
-::: moniker-end
-
-::: moniker range=">= aspnetcore-2.1"
-
-在 ASP.NET Core 2.1 或更新版本中，將名為 *bundleconfig.js* 的新 JSON 檔案新增至 MVC 或 Razor Pages 專案根目錄。 在該檔案中包含下列 JSON 作為起點：
-
-::: moniker-end
-
-[!code-json[](../client-side/bundling-and-minification/samples/BuildBundlerMinifierApp/bundleconfig.json)]
-
-檔案 *上的bundleconfig.js* 會定義每個組合的選項。 在上述範例中，會為自訂 JavaScript (*wwwroot/js/site.js*) 和樣式表單定義單一套件組合， (*wwwroot/css/網站 .css*) 檔案。
-
-設定選項包括：
-
-* `outputFileName`：要輸出的組合檔案名稱。 可以包含檔案 *bundleconfig.js* 的相對路徑。 **必填**
-* `inputFiles`：要一起組合的檔案陣列。 這些是設定檔的相對路徑。 （**選擇性**） * 空白值會產生空白的輸出檔。 支援[萬用字元模式。](https://www.tldp.org/LDP/abs/html/globbingref.html)
-* `minify`：輸出型別的縮制選項。 **選用**，*預設值 `minify: { enabled: true }` -*
-  * 每個輸出檔案類型都可以使用設定選項。
-    * [CSS Minifier](https://github.com/madskristensen/BundlerMinifier/wiki/cssminifier)
-    * [JavaScript Minifier](https://github.com/madskristensen/BundlerMinifier/wiki/JavaScript-Minifier-settings)
-    * [HTML Minifier](https://github.com/madskristensen/BundlerMinifier/wiki)
-* `includeInProject`：旗標，指出是否要將產生的檔案加入至專案檔。 **選用**， *預設值-false*
-* `sourceMap`：旗標，指出是否要產生配套檔案的來源對應。 **選用**， *預設值-false*
-* `sourceMapRootPath`：用來儲存所產生之來源對應檔的根路徑。
-
-## <a name="add-files-to-workflow"></a>將檔案新增至工作流程
-
-假設有一個範例，其中加入了類似下列的其他 *自訂 .css* 檔案：
-
-[!code-css[](../client-side/bundling-and-minification/samples/BuildBundlerMinifierApp/wwwroot/css/custom.css)]
-
-若要縮短 *自訂 .css* ，並將 *其與 node.js* 配套到 *網站* .css 檔案中，請新增 *bundleconfig.js* 的相對路徑：
-
-[!code-json[](../client-side/bundling-and-minification/samples/BuildBundlerMinifierApp/bundleconfig2.json?highlight=6)]
-
-> [!NOTE]
-> 或者，您可以使用下列萬用字元模式：
->
-> ```json
-> "inputFiles": ["wwwroot/**/!(*.min).css" ]
-> ```
->
-> 此萬用字元模式會比對所有 CSS 檔案，並排除縮減檔案模式。
-
-建置應用程式。 開啟 [ *.css* ]，並注意 *自訂 .css* 的內容會附加至檔案結尾。
+協力廠商工具（例如 [Gulp](https://gulpjs.com) 和 [Webpack](https://webpack.js.org)）可為組合和縮制提供工作流程自動化，以及 linting 和映射優化。 藉由使用設計階段組合和縮制，縮減檔會在應用程式部署之前建立。 在部署之前進行包裝和縮小，可提供降低伺服器負載的優點。 不過，請務必瞭解設計階段組合和縮制會增加組建複雜性，而且只適用于靜態檔案。
 
 ## <a name="environment-based-bundling-and-minification"></a>以環境為基礎的組合和縮制
 
@@ -142,13 +102,25 @@ MVC 和 Razor Pages 專案範本提供了由 JSON 設定檔群組成的組合和
 
 ::: moniker range=">= aspnetcore-2.0"
 
-[!code-cshtml[](../client-side/bundling-and-minification/samples/BuildBundlerMinifierApp/Pages/_Layout.cshtml?highlight=3&range=21-24)]
+```cshtml
+<environment include="Development">
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
+    <link rel="stylesheet" href="~/css/site.css" />
+</environment>
+```
 
 ::: moniker-end
 
 ::: moniker range="<= aspnetcore-1.1"
 
-[!code-cshtml[](../client-side/bundling-and-minification/samples/BuildBundlerMinifierApp/Pages/_Layout.cshtml?highlight=3&range=9-12)]
+```cshtml
+<environment names="Staging,Production">
+    <link rel="stylesheet" href="https://ajax.aspnetcdn.com/ajax/bootstrap/3.3.7/css/bootstrap.min.css"
+          asp-fallback-href="~/lib/bootstrap/dist/css/bootstrap.min.css"
+          asp-fallback-test-class="sr-only" asp-fallback-test-property="position" asp-fallback-test-value="absolute" />
+    <link rel="stylesheet" href="~/css/site.min.css" asp-append-version="true" />
+</environment>
+```
 
 ::: moniker-end
 
@@ -156,70 +128,31 @@ MVC 和 Razor Pages 專案範本提供了由 JSON 設定檔群組成的組合和
 
 ::: moniker range=">= aspnetcore-2.0"
 
-[!code-cshtml[](../client-side/bundling-and-minification/samples/BuildBundlerMinifierApp/Pages/_Layout.cshtml?highlight=5&range=25-30)]
+```cshtml
+<environment exclude="Development">
+    <link rel="stylesheet" href="https://ajax.aspnetcdn.com/ajax/bootstrap/3.3.7/css/bootstrap.min.css"
+          asp-fallback-href="~/lib/bootstrap/dist/css/bootstrap.min.css"
+          asp-fallback-test-class="sr-only" asp-fallback-test-property="position" asp-fallback-test-value="absolute" />
+    <link rel="stylesheet" href="~/css/site.min.css" asp-append-version="true" />
+</environment>
+```
 
 ::: moniker-end
 
 ::: moniker range="<= aspnetcore-1.1"
 
-[!code-cshtml[](../client-side/bundling-and-minification/samples/BuildBundlerMinifierApp/Pages/_Layout.cshtml?highlight=3&range=13-18)]
+```cshtml
+<environment names="Staging,Production">
+    <link rel="stylesheet" href="https://ajax.aspnetcdn.com/ajax/bootstrap/3.3.7/css/bootstrap.min.css"
+          asp-fallback-href="~/lib/bootstrap/dist/css/bootstrap.min.css"
+          asp-fallback-test-class="sr-only" asp-fallback-test-property="position" asp-fallback-test-value="absolute" />
+    <link rel="stylesheet" href="~/css/site.min.css" asp-append-version="true" />
+</environment>
+```
 
 ::: moniker-end
 
-## <a name="consume-bundleconfigjson-from-gulp"></a>從 Gulp 使用 bundleconfig.js
-
-在某些情況下，應用程式的包裝和縮制工作流程需要額外的處理。 範例包括映射優化、快取破壞和 CDN 資產處理。 為了滿足這些需求，您可以將包裝和縮制工作流程轉換為使用 Gulp。
-
-### <a name="manually-convert-the-bundling-and-minification-workflow-to-use-gulp"></a>手動將組合和縮制工作流程轉換為使用 Gulp
-
-使用下列內容將 *package.js* 新增 `devDependencies` 至專案根目錄：
-
-> [!WARNING]
-> `gulp-uglify`模組不支援 ECMAScript (ES) 2015/ES6 和更新版本。 安裝 [gulp-terser](https://www.npmjs.com/package/gulp-terser) 而不是 `gulp-uglify` 使用 ES2015/ES6 或更新版本。
-
-[!code-json[](../client-side/bundling-and-minification/samples/BuildBundlerMinifierApp/package.json?range=5-13)]
-
-在與package.js的相同層級 *上* 執行下列命令，以安裝相依性：
-
-```bash
-npm i
-```
-
-將 Gulp CLI 安裝為全域相依性：
-
-```bash
-npm i -g gulp-cli
-```
-
-將以下的 *gulpfile.js* 檔案複製到專案根目錄：
-
-[!code-javascript[](../client-side/bundling-and-minification/samples/BuildBundlerMinifierApp/gulpfile.js?range=1-11,14-)]
-
-### <a name="run-gulp-tasks"></a>執行 Gulp 工作
-
-在 Visual Studio 中建立專案之前，觸發 Gulp 縮制工作：
-
-1. 安裝 [BuildBundlerMinifier](https://www.nuget.org/packages/BuildBundlerMinifier) NuGet 套件。
-1. 將下列 [MSBuild 目標](/visualstudio/msbuild/msbuild-targets) 新增至專案檔：
-
-    [!code-xml[](../client-side/bundling-and-minification/samples/BuildBundlerMinifierApp/BuildBundlerMinifierApp.csproj?range=14-16)]
-
-在此範例中，在目標內定義的所有工作都會在 `MyPreCompileTarget` 預先定義的目標之前執行 `Build` 。 Visual Studio 的輸出視窗中會出現類似下列的輸出：
-
-```console
-1>------ Build started: Project: BuildBundlerMinifierApp, Configuration: Debug Any CPU ------
-1>BuildBundlerMinifierApp -> C:\BuildBundlerMinifierApp\bin\Debug\netcoreapp2.0\BuildBundlerMinifierApp.dll
-1>[14:17:49] Using gulpfile C:\BuildBundlerMinifierApp\gulpfile.js
-1>[14:17:49] Starting 'min:js'...
-1>[14:17:49] Starting 'min:css'...
-1>[14:17:49] Starting 'min:html'...
-1>[14:17:49] Finished 'min:js' after 83 ms
-1>[14:17:49] Finished 'min:css' after 88 ms
-========== Build: 1 succeeded, 0 failed, 0 up-to-date, 0 skipped ==========
-```
-
 ## <a name="additional-resources"></a>其他資源
 
-* [使用 Grunt](xref:client-side/using-grunt)
 * [使用多重環境](xref:fundamentals/environments)
 * [標籤協助程式](xref:mvc/views/tag-helpers/intro)

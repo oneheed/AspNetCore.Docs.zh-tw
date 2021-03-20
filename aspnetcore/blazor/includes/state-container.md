@@ -11,12 +11,12 @@ no-loc:
 - Let's Encrypt
 - Razor
 - SignalR
-ms.openlocfilehash: 76dbf3cae1c264fa474101bc4398da28f45a1c10
-ms.sourcegitcommit: 1166b0ff3828418559510c661e8240e5c5717bb7
+ms.openlocfilehash: 342cbccc5f9a61c0695d501ea2376403bfd459ca
+ms.sourcegitcommit: 1f35de0ca9ba13ea63186c4dc387db4fb8e541e0
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 02/12/2021
-ms.locfileid: "100254387"
+ms.lasthandoff: 03/20/2021
+ms.locfileid: "104719985"
 ---
 嵌套元件通常會使用 *連結* 系結來系結資料，如中所述 <xref:blazor/components/data-binding> 。 嵌套和未嵌套的元件可以使用已註冊的記憶體內部狀態容器來共用資料的存取權。 自訂狀態容器類別可以使用可指派的 <xref:System.Action> ，在狀態變更應用程式的不同部分通知元件。 在下例中︰
 
@@ -51,7 +51,7 @@ builder.Services.AddSingleton<StateContainer>();
 在 `Startup.ConfigureServices` (Blazor Server) ：
 
 ```csharp
-services.AddSingleton<StateContainer>();
+services.AddScoped<StateContainer>();
 ```
 
 `Pages/Component1.razor`:

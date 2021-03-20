@@ -19,14 +19,14 @@ no-loc:
 - Razor
 - SignalR
 uid: tutorials/razor-pages/model
-ms.openlocfilehash: defbc73d0c1d6aac30360cd7b83cc518a407bf98
-ms.sourcegitcommit: 07e7ee573fe4e12be93249a385db745d714ff6ae
+ms.openlocfilehash: 1173113b8bb035212cb9b84e7763970b9d5092a3
+ms.sourcegitcommit: 1f35de0ca9ba13ea63186c4dc387db4fb8e541e0
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 03/12/2021
-ms.locfileid: "103413440"
+ms.lasthandoff: 03/20/2021
+ms.locfileid: "104711606"
 ---
-# <a name="part-2-add-a-model-to-a-razor-pages-app-in-aspnet-core"></a>第2部分：將模型新增至 Razor ASP.NET Core 中的頁面應用程式
+# <a name="part-2-add-a-model-to-a-razor-pages-app-in-aspnet-core"></a>第2部分：在 ASP.NET Core 中將模型新增至 Razor 頁面應用程式
 
 作者：[Rick Anderson](https://twitter.com/RickAndMSFT)
 
@@ -34,9 +34,9 @@ ms.locfileid: "103413440"
 
 <!-- In the next update on the CLI version, let the scaffolder do the same work the VS driven scaffolder does. That is, create the DB context, etc -->
 
-在本節中，您可以新增類別來管理資料庫中的電影。 應用程式的模型類別使用 [Entity Framework core (EF core) ](/ef/core) 來處理資料庫。 EF Core 是一種物件關聯式對應程式， (O/RM) 可簡化資料存取。 您會先撰寫模型類別，而 EF Core 會建立資料庫。
+在本節中，您可以新增類別來管理資料庫中的電影。 應用程式的模型類別會使用 [Entity Framework Core (EF Core) ](/ef/core) 來處理資料庫。 EF Core 是物件關聯式對應程式 (O/RM) 可簡化資料存取。 您會先撰寫模型類別，EF Core 建立資料庫。
 
-模型類別稱為 POCO 類別 (自 "**P**>lain-**O** ld **C** LR **O** Bjects" ) ，因為它們沒有 EF Core 的相依性。 它們會定義資料儲存在資料庫中的屬性。
+模型類別稱為 POCO 類別 (自 "**P**>lain-**O** ld **C** LR **O** bjects" ) ，因為它們沒有 EF Core 的相依性。 它們會定義資料儲存在資料庫中的屬性。
 
 [檢視或下載範例程式碼](https://github.com/dotnet/AspNetCore.Docs/tree/main/aspnetcore/tutorials/razor-pages/razor-pages-start/sample/RazorPagesMovie50) ([如何下載](xref:index#how-to-download-a-sample))。
 
@@ -44,7 +44,7 @@ ms.locfileid: "103413440"
 
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
-1. 在 [**方案 Explorer**] 中，以滑鼠右鍵按一下 *Razor PagesMovie* 專案，>**加入**  >  **新資料夾**]。 將資料夾命名為 *Models*。
+1. 在 **方案總管** 中，以滑鼠右鍵按一下 *Razor PagesMovie* 專案 **，> 新增**  >  **資料夾**]。 將資料夾命名為 *Models*。
 1. 以滑鼠右鍵按一下 [ *模型* ] 資料夾。 選取 [**新增**  >  **類別**]。 將類別命名為 *Movie*。
 1. 將下列屬性新增至 `Movie` 類別：
 
@@ -122,11 +122,11 @@ ms.locfileid: "103413440"
 
    ![前述指示中的圖片。](model/_static/5/sca.png)
 
-1. 在 [**新增 Scaffold** ] 對話方塊中，選取 [ **Razor 使用 Entity Framework (CRUD)** 加入的頁面] > ****。
+1. 在 [**新增 Scaffold** ] 對話方塊中， **Razor 使用 Entity Framework (CRUD)** 新增] 選取 [頁面] > ****。
 
    ![前述指示中的圖片。](model/_static/add_scaffold.png)
 
-1. **Razor 使用 Entity FRAMEWORK (CRUD) 對話方塊來完成加入頁面**：
+1. **Razor 使用 ENTITY FRAMEWORK (CRUD) 對話方塊來完成 [新增頁面**]：
    1. 在 [ **模型類別** ] 下拉式清單中，選取 [ **Movie (Razor PagesMovie])**。
    1. 在 [資料內容類別] 資料列中，選取 **+** (加號)。
       1. 在 [ **加入資料內容** ] 對話方塊中， `RazorPagesMovie.Data.RazorPagesMovieContext` 會產生類別名稱。
@@ -141,7 +141,7 @@ ms.locfileid: "103413440"
 <!--  Until https://github.com/aspnet/Scaffolding/issues/582 is fixed windows needs backslash or the namespace is namespace RazorPagesMovie.Pages_Movies rather than namespace RazorPagesMovie.Pages.Movies
 -->
 
-* 開啟包含 *Program.cs*、 *Startup.cs* 和 *.csproj* 檔案的命令 shell 至專案目錄。
+* 在專案目錄中開啟命令 shell，其中包含 *.cs*、 *Startup .cs* 和 *.csproj* 檔案。
 
 * 若 **為 Windows**：請執行下列命令：
 
@@ -173,11 +173,7 @@ dotnet-aspnet-codegenerator razorpage -h
 
 如需詳細資訊，請參閱 [dotnet-aspnet-codegenerator](xref:fundamentals/tools/dotnet-aspnet-codegenerator)。
 
-### <a name="use-sqlite-for-development-sql-server-for-production"></a>使用 SQLite 進行開發，SQL Server 用於生產環境
-
-選取 SQLite 時，範本產生的程式碼就可以開始開發。 下列程式碼將示範如何插入 <xref:Microsoft.AspNetCore.Hosting.IWebHostEnvironment> 至 `Startup` 。 `IWebHostEnvironment` 會插入，讓應用程式可以在開發環境中使用 SQLite，並在生產環境中使用 SQL Server。
-
-[!code-csharp[](~/includes/RP/code/StartupDevProd.cs?name=snippet&highlight=5,10,14)]
+[!INCLUDE[](~/includes/RP/sqlitedev.md)]
 
 # <a name="visual-studio-for-mac"></a>[Visual Studio for Mac](#tab/visual-studio-mac)
 
@@ -189,11 +185,11 @@ dotnet-aspnet-codegenerator razorpage -h
 
    ![前述指示中的圖片。](model/_static/scaMac.png)
 
-1. 在 [**新** 的樣板] 對話方塊中，選取 [ **Razor 使用 Entity Framework (CRUD 的頁面)** > **下一步**]。
+1. 在 [**新** 的樣板] 對話方塊中， **Razor 使用 Entity Framework (CRUD)** > **下一步**] 選取 [頁面]。
 
    ![前述指示中的圖片。](model/_static/add_scaffoldMac.png)
 
-1. **Razor 使用 Entity FRAMEWORK (CRUD) 對話方塊來完成加入頁面**：
+1. **Razor 使用 ENTITY FRAMEWORK (CRUD) 對話方塊來完成 [新增頁面**]：
    1. 在 **要使用的 DbCoNtext 類別中：** row，將類別命名為 `RazorPagesMovie.Data.RazorPagesMovieContext` 。
    1. 選取 [完成]。
 
@@ -201,11 +197,7 @@ dotnet-aspnet-codegenerator razorpage -h
 
 檔案 *appsettings.json* 會以用來連接到本機資料庫的連接字串進行更新。
 
-### <a name="use-sqlite-for-development-sql-server-for-production"></a>使用 SQLite 進行開發，SQL Server 用於生產環境
-
-選取 SQLite 時，範本產生的程式碼就可以開始開發。 下列程式碼將示範如何插入 <xref:Microsoft.AspNetCore.Hosting.IWebHostEnvironment> 至 `Startup` 。 `IWebHostEnvironment` 會插入，讓應用程式可以在開發環境中使用 SQLite，並在生產環境中使用 SQL Server。
-
-[!code-csharp[](~/includes/RP/code/StartupDevProd.cs?name=snippet&highlight=5,10,14)]
+[!INCLUDE[](~/includes/RP/sqlitedev.md)]
 
 ---
 
@@ -216,7 +208,7 @@ dotnet-aspnet-codegenerator razorpage -h
 隨即建立 Scaffold 處理序並更新下列檔案：
 
 * *Pages/電影*：建立、刪除、詳細資料、編輯和 Index 。
-* *Data/ Razor PagesMovieCoNtext.cs*
+* *Data/ Razor PagesMovieCoNtext .cs*
 
 ### <a name="updated"></a>已更新
 
@@ -237,7 +229,7 @@ Scaffold 處理序會建立下列檔案：
 隨即建立 Scaffold 處理序並更新下列檔案：
 
 * *Pages/電影*：建立、刪除、詳細資料、編輯和 Index 。
-* *Data/ Razor PagesMovieCoNtext.cs*
+* *Data/ Razor PagesMovieCoNtext .cs*
 
 ### <a name="updated"></a>已更新
 
@@ -258,7 +250,7 @@ Entity Framework Core 中的「遷移」功能提供了一種方法，可讓您�
 
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
-在本節中，會使用 **套件管理員主控台** (PMC) 視窗：
+在本節中，會使用 **封裝管理員主控台** (PMC) 視窗：
 
 * 新增初始移轉。
 * 以初始移轉更新資料庫。
@@ -307,7 +299,7 @@ ASP.NET Core 內建[相依性插入](xref:fundamentals/dependency-injection)。 
 
 [!code-csharp[](razor-pages-start/sample/RazorPagesMovie30/Startup.cs?name=snippet_ConfigureServices&highlight=5-6)]
 
-會 `RazorPagesMovieContext` 協調模型的 EF Core 功能，例如建立、讀取、更新和刪除 `Movie` 。 資料內容 (`RazorPagesMovieContext`) 衍生自 [Microsoft.EntityFrameworkCore.DbContext](xref:Microsoft.EntityFrameworkCore.DbContext)。 資料內容會指定資料模型包含哪些實體。
+`RazorPagesMovieContext`協調模型 EF Core 功能，例如建立、讀取、更新和刪除 `Movie` 。 資料內容 (`RazorPagesMovieContext`) 衍生自 [Microsoft.EntityFrameworkCore.DbContext](xref:Microsoft.EntityFrameworkCore.DbContext)。 資料內容會指定資料模型包含哪些實體。
 
 [!code-csharp[](~/tutorials/razor-pages/razor-pages-start/sample/RazorPagesMovie50/Data/RazorPagesMovieContext.cs)]
 
@@ -349,9 +341,10 @@ ASP.NET Core 內建[相依性插入](xref:fundamentals/dependency-injection)。 
 
 ## <a name="additional-resources"></a>其他資源
 
+
 > [!div class="step-by-step"]
 > [上一步：開始](xref:tutorials/razor-pages/razor-pages-start) 
->  使用[下一步： scaffold Razor頁面](xref:tutorials/razor-pages/page)
+> [下一步： scaffold Razor頁面](xref:tutorials/razor-pages/page)
 
 ::: moniker-end
 
@@ -361,7 +354,7 @@ ASP.NET Core 內建[相依性插入](xref:fundamentals/dependency-injection)。 
 
 <!-- In the next update on the CLI version, let the scaffolder do the same work the VS driven scaffolder does. That is, create the DB context, etc -->
 
-在本節中，會新增類別來管理電影。 應用程式的模型類別使用 [Entity Framework core (EF core) ](/ef/core) 來處理資料庫。 EF Core 是一種物件關聯式對應程式， (O/RM) 可簡化資料存取。
+在本節中，會新增類別來管理電影。 應用程式的模型類別會使用 [Entity Framework Core (EF Core) ](/ef/core) 來處理資料庫。 EF Core 是物件關聯式對應程式 (O/RM) 可簡化資料存取。
 
 模型類別稱為 POCO 類別 (來自「簡單的 CLR 物件」)，因為它們對 EF Core 沒有任何相依性。 它們會定義資料儲存在資料庫中的屬性。
 
@@ -489,11 +482,11 @@ using Microsoft.EntityFrameworkCore;
 
 ![前述指示中的圖片。](model/_static/sca.png)
 
-在 [**新增 Scaffold** ] 對話方塊中，選取 [ **Razor 使用 Entity Framework (CRUD)** 加入的頁面] > ****。
+在 [**新增 Scaffold** ] 對話方塊中， **Razor 使用 Entity Framework (CRUD)** 新增] 選取 [頁面] > ****。
 
 ![前述指示中的圖片。](model/_static/add_scaffold.png)
 
-**Razor 使用 Entity FRAMEWORK (CRUD) 對話方塊來完成加入頁面**：
+**Razor 使用 ENTITY FRAMEWORK (CRUD) 對話方塊來完成 [新增頁面**]：
 
 * 在 [ **模型類別** ] 下拉式清單中，選取 [ **Movie (Razor PagesMovie])**。
 * 在 [ **資料內容類別] 資料** 列中，選取 **+** (加號，) 簽署並變更 PagesMovie 所產生的名稱 Razor 。**模型**。 RazorPagesMovieCoNtext 至 Razor PagesMovie。**資料**。 RazorPagesMovieCoNtext. 這不是必要的[變更](https://developercommunity.visualstudio.com/content/problem/652166/aspnet-core-ef-scaffolder-uses-incorrect-namespace.html) \(英文\)。 它會使用正確的命名空間來建立資料庫內容類別。
@@ -508,7 +501,7 @@ using Microsoft.EntityFrameworkCore;
 <!--  Until https://github.com/aspnet/Scaffolding/issues/582 is fixed windows needs backslash or the namespace is namespace RazorPagesMovie.Pages_Movies rather than namespace RazorPagesMovie.Pages.Movies
 -->
 
-* 在專案目錄中開啟命令視窗，其中包含 *Program.cs*、 *Startup.cs* 和 *.csproj* 檔案。
+* 在專案目錄中開啟命令視窗，其中包含 *程式 .cs*、 *Startup .cs* 和 *.csproj* 檔案。
 
 * 若 **為 Windows**：請執行下列命令：
 
@@ -540,9 +533,9 @@ dotnet-aspnet-codegenerator razorpage -h
 
 如需詳細資訊，請參閱 [dotnet-aspnet-codegenerator](xref:fundamentals/tools/dotnet-aspnet-codegenerator)。
 
-### <a name="use-sqlite-for-development-sql-server-for-production"></a>使用 SQLite 進行開發，SQL Server 用於生產環境
+### <a name="use-sqlite-for-development-sql-server-for-production"></a>使用 SQLite 進行開發，SQL Server 生產環境
 
-選取 SQLite 時，範本產生的程式碼就可以開始開發。 下列程式碼示範如何插入 <xref:Microsoft.AspNetCore.Hosting.IWebHostEnvironment> 啟動。 `IWebHostEnvironment` 已插入，因此 `ConfigureServices` 可以在開發環境中使用 SQLite，並在生產環境中使用 SQL Server。
+選取 SQLite 時，範本產生的程式碼就可以開始開發。 下列程式碼示範如何插入 <xref:Microsoft.AspNetCore.Hosting.IWebHostEnvironment> 啟動。 `IWebHostEnvironment` 已插入，因此 `ConfigureServices` 可以在開發環境中使用 SQLite，並在生產環境中 SQL Server。
 
 [!code-csharp[](~/includes/RP/code/StartupDevProd.cs?name=snippet&highlight=5,10,14)]
 
@@ -557,11 +550,11 @@ dotnet-aspnet-codegenerator razorpage -h
 
 ![前述指示中的圖片。](model/_static/scaMac.png)
 
-在 [**新** 的樣板] 對話方塊中，選取 [ **Razor 使用 Entity Framework (CRUD 的頁面)** > **下一步**]。
+在 [**新** 的樣板] 對話方塊中， **Razor 使用 Entity Framework (CRUD)** > **下一步**] 選取 [頁面]。
 
 ![前述指示中的圖片。](model/_static/add_scaffoldMac.png)
 
-**Razor 使用 Entity FRAMEWORK (CRUD) 對話方塊來完成加入頁面**：
+**Razor 使用 ENTITY FRAMEWORK (CRUD) 對話方塊來完成 [新增頁面**]：
 
 * 在 [ **模型類別** ] 下拉式清單中，選取或輸入 **Movie (Razor PagesMovie) 模型**。
 * 在 [ **資料內容類別** ] 列中，輸入新類別的名稱 Razor PagesMovie。**資料**。 RazorPagesMovieCoNtext. 這不是必要的[變更](https://developercommunity.visualstudio.com/content/problem/652166/aspnet-core-ef-scaffolder-uses-incorrect-namespace.html) \(英文\)。 它會使用正確的命名空間來建立資料庫內容類別。
@@ -579,11 +572,11 @@ dotnet-aspnet-codegenerator razorpage -h
 dotnet tool install --global dotnet-ef
 ```
 
-上述命令會新增適用于 .NET Core CLI 的 Entity Framework Core Tools。 如需詳細資訊，請參閱 [Entity Framework Core 工具參考-.Net CORE CLI](/ef/core/miscellaneous/cli/dotnet)。
+上述命令會新增 .NET Core CLI 的 Entity Framework Core 工具。 如需詳細資訊，請參閱 [Entity Framework Core 工具參考-.NET Core CLI](/ef/core/miscellaneous/cli/dotnet)。
 
-### <a name="use-sqlite-for-development-sql-server-for-production"></a>使用 SQLite 進行開發，SQL Server 用於生產環境
+### <a name="use-sqlite-for-development-sql-server-for-production"></a>使用 SQLite 進行開發，SQL Server 生產環境
 
-選取 SQLite 時，範本產生的程式碼就可以開始開發。 下列程式碼示範如何插入 <xref:Microsoft.AspNetCore.Hosting.IWebHostEnvironment> 啟動。 `IWebHostEnvironment` 已插入，因此 `ConfigureServices` 可以在開發環境中使用 SQLite，並在生產環境中使用 SQL Server。
+選取 SQLite 時，範本產生的程式碼就可以開始開發。 下列程式碼示範如何插入 <xref:Microsoft.AspNetCore.Hosting.IWebHostEnvironment> 啟動。 `IWebHostEnvironment` 已插入，因此 `ConfigureServices` 可以在開發環境中使用 SQLite，並在生產環境中 SQL Server。
 
 [!code-csharp[](~/includes/RP/code/StartupDevProd.cs?name=snippet&highlight=5,10,14)]
 
@@ -596,7 +589,7 @@ dotnet tool install --global dotnet-ef
 隨即建立 Scaffold 處理序並更新下列檔案：
 
 * *Pages/電影*：建立、刪除、詳細資料、編輯和 Index 。
-* *Data/ Razor PagesMovieCoNtext.cs*
+* *Data/ Razor PagesMovieCoNtext .cs*
 
 ### <a name="updated"></a>已更新
 
@@ -609,7 +602,7 @@ dotnet tool install --global dotnet-ef
 隨即建立 Scaffold 處理序並更新下列檔案：
 
 * *Pages/電影*：建立、刪除、詳細資料、編輯和 Index 。
-* *Data/ Razor PagesMovieCoNtext.cs*
+* *Data/ Razor PagesMovieCoNtext .cs*
 
 ### <a name="updated"></a>已更新
 
@@ -682,7 +675,7 @@ ASP.NET Core 內建[相依性插入](xref:fundamentals/dependency-injection)。 
 
 [!code-csharp[](razor-pages-start/sample/RazorPagesMovie30/Startup.cs?name=snippet_ConfigureServices&highlight=5-6)]
 
-會 `RazorPagesMovieContext` 協調模型的 EF Core 功能，例如建立、讀取、更新和刪除 `Movie` 。 資料內容 (`RazorPagesMovieContext`) 衍生自 [Microsoft.EntityFrameworkCore.DbContext](xref:Microsoft.EntityFrameworkCore.DbContext)。 資料內容會指定資料模型包含哪些實體。
+`RazorPagesMovieContext`協調模型 EF Core 功能，例如建立、讀取、更新和刪除 `Movie` 。 資料內容 (`RazorPagesMovieContext`) 衍生自 [Microsoft.EntityFrameworkCore.DbContext](xref:Microsoft.EntityFrameworkCore.DbContext)。 資料內容會指定資料模型包含哪些實體。
 
 [!code-csharp[](~/tutorials/razor-pages/razor-pages-start/sample/RazorPagesMovie30/Data/RazorPagesMovieContext.cs)]
 
@@ -726,14 +719,14 @@ Login failed for user 'User-name'.
 
 > [!div class="step-by-step"]
 > [上一步：開始](xref:tutorials/razor-pages/razor-pages-start) 
->  使用[下一步： scaffold Razor頁面](xref:tutorials/razor-pages/page)
+> [下一步： scaffold Razor頁面](xref:tutorials/razor-pages/page)
 
 ::: moniker-end
 
 <!--  ::: moniker previous version   -->
 ::: moniker range="< aspnetcore-3.0"
 
-在本節中，會新增類別來管理跨平臺 [SQLite 資料庫](https://www.sqlite.org/index.html)中的電影。 從 ASP.NET Core 範本建立的應用程式會使用 SQLite 資料庫。 應用程式的模型類別與 [Entity Framework Core (EF core) ](/ef/core) ([SQLite EF Core 資料庫提供者](/ef/core/providers/sqlite)) 與資料庫搭配使用。 EF Core 是一種物件關聯式對應 (ORM) 架構，可簡化資料存取。
+在本節中，會新增類別來管理跨平臺 [SQLite 資料庫](https://www.sqlite.org/index.html)中的電影。 從 ASP.NET Core 範本建立的應用程式會使用 SQLite 資料庫。 應用程式的模型類別可搭配 [Entity Framework Core (EF Core) ](/ef/core) ([SQLite EF Core 資料庫提供者](/ef/core/providers/sqlite)) 使用資料庫。 EF Core 是一種物件關聯式對應 (ORM) 架構，可簡化資料存取。
 
 模型類別稱為 POCO 類別 (來自「簡單的 CLR 物件」)，因為它們對 EF Core 沒有任何相依性。 它們會定義資料儲存在資料庫中的屬性。
 
@@ -805,7 +798,7 @@ Login failed for user 'User-name'.
 
 ### <a name="add-required-nuget-packages"></a>新增必要的 NuGet 封裝
 
-執行下列 .NET Core CLI 命令，以將 SQLite 和 >nswag.codegeneration.csharp 新增至專案：
+執行下列 .NET Core CLI 命令，以將 SQLite 和 CodeGeneration.Design 新增至專案：
 
 ```dotnetcli
 dotnet add package Microsoft.EntityFrameworkCore.Sqlite --version 2.2.6
@@ -875,11 +868,11 @@ using Microsoft.EntityFrameworkCore;
 
 ![前述指示中的圖片。](model/_static/sca.png)
 
-在 [**新增 Scaffold** ] 對話方塊中，選取 [ **Razor 使用 Entity Framework (CRUD)** 加入的頁面] > ****。
+在 [**新增 Scaffold** ] 對話方塊中， **Razor 使用 Entity Framework (CRUD)** 新增] 選取 [頁面] > ****。
 
 ![前述指示中的圖片。](model/_static/add_scaffold.png)
 
-**Razor 使用 Entity FRAMEWORK (CRUD) 對話方塊來完成加入頁面**：
+**Razor 使用 ENTITY FRAMEWORK (CRUD) 對話方塊來完成 [新增頁面**]：
 <!-- In the next section, change 
 (plus) sign and accept the generated name 
 to use Data, it should not use models. That will make the namespace the same for the VS version and the CLI version
@@ -898,7 +891,7 @@ to use Data, it should not use models. That will make the namespace the same for
 <!--  Until https://github.com/aspnet/Scaffolding/issues/582 is fixed windows needs backslash or the namespace is namespace RazorPagesMovie.Pages_Movies rather than namespace RazorPagesMovie.Pages.Movies
 -->
 
-* 在專案目錄中開啟命令視窗，其中包含 *Program.cs*、 *Startup.cs* 和 *.csproj* 檔案。
+* 在專案目錄中開啟命令視窗，其中包含 *程式 .cs*、 *Startup .cs* 和 *.csproj* 檔案。
 
 * 若 **為 Windows**：請執行下列命令：
 
@@ -941,11 +934,11 @@ dotnet-aspnet-codegenerator razorpage -h
 
 ![前述指示中的圖片。](model/_static/scaMac.png)
 
-在 [**加入新** 的樣板] 對話方塊中，選取 [ **Razor 使用 Entity Framework (CRUD)** 加入的頁面] > ****。
+在 [**加入新** 的樣板] 對話方塊中， **Razor 使用 Entity Framework (CRUD)** 新增] 選取 [頁面] > ****。
 
 ![前述指示中的圖片。](model/_static/add_scaffoldMac.png)
 
-**Razor 使用 Entity FRAMEWORK (CRUD) 對話方塊來完成加入頁面**：
+**Razor 使用 ENTITY FRAMEWORK (CRUD) 對話方塊來完成 [新增頁面**]：
 
 * 在 [ **模型類別** ] 下拉式清單中，選取或輸入 **Movie**。
 * 在 [**資料內容類別] 資料** 列中，輸入 select **Razor PagesMovieCoNtext** ，這會使用正確的命名空間來建立新的資料庫內容類別。 在此情況下，它將會是 **Razor PagesMovie 模型。 RazorPagesMovieCoNtext**。
@@ -962,7 +955,7 @@ dotnet-aspnet-codegenerator razorpage -h
 ### <a name="files-created"></a>建立的檔案
 
 * *Pages/電影*：建立、刪除、詳細資料、編輯和 Index 。
-* *Data/ Razor PagesMovieCoNtext.cs*
+* *Data/ Razor PagesMovieCoNtext .cs*
 
 ### <a name="file-updated"></a>檔案已更新
 
@@ -992,7 +985,7 @@ Add-Migration Initial
 Update-Database
 ```
 
-`Add-Migration` 命令會產生程式碼來建立初始資料庫結構描述。 架構是以 PagesMovieCoNtext.cs 檔案中指定的模型為基礎 `DbContext` 。 *Razor* `InitialCreate`引數是用來命名遷移。 您可以使用任何名稱，但依照慣例，會使用描述移轉的名稱。 如需詳細資訊，請參閱<xref:data/ef-mvc/migrations>。
+`Add-Migration` 命令會產生程式碼來建立初始資料庫結構描述。 架構是以 `DbContext` *Razor PagesMovieCoNtext .cs* 檔案中指定的模型為基礎。 `InitialCreate`引數是用來命名遷移。 您可以使用任何名稱，但依照慣例，會使用描述移轉的名稱。 如需詳細資訊，請參閱<xref:data/ef-mvc/migrations>。
 
 此 `Update-Database` 命令會 `Up` 在 *遷移/ \<time-stamp> _InitialCreate .cs* 檔案中執行方法。 `Up` 方法會建立資料庫。
 
@@ -1025,7 +1018,7 @@ ASP.NET Core 內建[相依性插入](xref:fundamentals/dependency-injection)。 
 
 [!code-csharp[](razor-pages-start/sample/RazorPagesMovie22/Startup.cs?name=snippet_ConfigureServices&highlight=15-18)]
 
-會 `RazorPagesMovieContext` 協調模型的 EF Core 功能，例如建立、讀取、更新和刪除 `Movie` 。 資料內容 (`RazorPagesMovieContext`) 衍生自 [Microsoft.EntityFrameworkCore.DbContext](xref:Microsoft.EntityFrameworkCore.DbContext)。 資料內容會指定資料模型包含哪些實體。
+`RazorPagesMovieContext`座標 EF Core 的功能，例如建立、讀取、更新和刪除 `Movie` 模型。 資料內容 (`RazorPagesMovieContext`) 衍生自 [Microsoft.EntityFrameworkCore.DbContext](xref:Microsoft.EntityFrameworkCore.DbContext)。 資料內容會指定資料模型包含哪些實體。
 
 [!code-csharp[](~/tutorials/razor-pages/razor-pages-start/sample/RazorPagesMovie22/Data/RazorPagesMovieContext.cs)]
 
@@ -1069,6 +1062,6 @@ Login failed for user 'User-name'.
 
 > [!div class="step-by-step"]
 > [上一步：開始](xref:tutorials/razor-pages/razor-pages-start) 
->  使用[下一步： scaffold Razor頁面](xref:tutorials/razor-pages/page)
+> [下一步： scaffold Razor頁面](xref:tutorials/razor-pages/page)
 
 ::: moniker-end

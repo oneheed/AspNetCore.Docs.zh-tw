@@ -19,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: data/ef-mvc/advanced
-ms.openlocfilehash: 135881bfb4137bc81bd0f7250f1ce191cab13dcd
-ms.sourcegitcommit: 54fe1ae5e7d068e27376d562183ef9ddc7afc432
+ms.openlocfilehash: bfcce94f2ce25f2468cc5d1456c201e2f6bad094
+ms.sourcegitcommit: 1f35de0ca9ba13ea63186c4dc387db4fb8e541e0
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 03/10/2021
-ms.locfileid: "102586835"
+ms.lasthandoff: 03/20/2021
+ms.locfileid: "104711526"
 ---
 # <a name="tutorial-learn-about-advanced-scenarios---aspnet-mvc-with-ef-core"></a>教學課程：瞭解 advanced 案例-使用 EF Core ASP.NET MVC
 
@@ -43,7 +43,7 @@ ms.locfileid: "102586835"
 > * 了解 EF Core 原始程式碼和開發計劃
 > * 了解如何使用動態 LINQ 來簡化程式碼
 
-## <a name="prerequisites"></a>必要條件
+## <a name="prerequisites"></a>Prerequisites
 
 * [實作繼承](inheritance.md)
 
@@ -105,7 +105,7 @@ ms.locfileid: "102586835"
 
 在方案總管中，以滑鼠右鍵按一下 *Views/Courses* 資料夾，然後按一下 [新增] > [新增項目]。
 
-在 [**加入新專案**] 對話方塊中，按一下左窗格中 [**已安裝**] 下方的 [ **ASP.NET Core** ]，按一下 [ **Razor View**]，並將新的 view UpdateCourseCredits 命名為 *cshtml*。
+在 [**加入新專案**] 對話方塊中，按一下左窗格中 [**已安裝**] 下方的 **ASP.NET Core** ，按一下 [ **Razor View**]，然後將新的 view UpdateCourseCredits 命名為 *cshtml*。
 
 在 *Views/Courses/UpdateCourseCredits.cshtml* 中，以下列程式碼取代範本程式碼：
 
@@ -193,7 +193,7 @@ _context.ChangeTracker.AutoDetectChangesEnabled = false;
 
 ## <a name="ef-core-source-code-and-development-plans"></a>EF Core 原始程式碼和開發計劃
 
-Entity Framework Core 來源位於 [https://github.com/dotnet/efcore](https://github.com/dotnet/efcore) 。 EF Core 存放庫包含每夜組建、問題追蹤、功能規格、設計會議記錄和[未來開發藍圖](https://github.com/dotnet/efcore/wiki/Roadmap)。 您可以提交或尋找 Bug，並做出貢獻。
+Entity Framework Core 來源為 [https://github.com/dotnet/efcore](https://github.com/dotnet/efcore) 。 EF Core 存放庫包含每夜組建、問題追蹤、功能規格、設計會議記錄和[未來開發藍圖](https://github.com/dotnet/efcore/wiki/Roadmap)。 您可以提交或尋找 Bug，並做出貢獻。
 
 雖然原始程式碼是開放式程式碼，但 Entity Framework Core 也作為 Microsoft 產品完整支援。 Microsoft Entity Framework 小組將控制接受哪些貢獻，並測試所有的程式碼變更以確保每次發行的品質。
 
@@ -288,7 +288,7 @@ dotnet ef database drop
 > * 了解 EF Core 原始程式碼和開發計劃
 > * 了解如何使用動態 LINQ 來簡化程式碼
 
-如此即完成本系列中在 ASP.NET Core MVC 應用程式中使用 Entity Framework Core 的教學課程。 這一系列教學課程使用了新的資料庫，您也可以從現有的資料庫反向建構模型。
+如此即完成本系列中在 ASP.NET Core MVC 應用程式中使用 Entity Framework Core 的教學課程。 此系列適用于新的資料庫;替代方法是  [從現有的資料庫中對模型進行反向工程](/ef/core/managing-schemas/scaffolding)。
 
 > [!div class="nextstepaction"]
-> [教學課程：使用 MVC 的 EF Core，現有的資料庫](/ef/core/get-started/aspnetcore/existing-db?toc=/aspnet/core/toc.json&bc=/aspnet/core/breadcrumb/toc.json)
+> [教學課程：使用 MVC、現有資料庫 EF Core](/ef/core/get-started/aspnetcore/existing-db?toc=/aspnet/core/toc.json&bc=/aspnet/core/breadcrumb/toc.json)

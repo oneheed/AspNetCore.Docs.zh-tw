@@ -1,10 +1,10 @@
 ---
-title: .NET Core 中的 gRPC 用戶端工廠整合
+title: .NET 中的 gRPC 用戶端工廠整合
 author: jamesnk
 description: 瞭解如何使用用戶端 factory 建立 gRPC 用戶端。
 monikerRange: '>= aspnetcore-3.0'
 ms.author: jamesnk
-ms.date: 05/26/2020
+ms.date: 03/19/2021
 no-loc:
 - appsettings.json
 - ASP.NET Core Identity
@@ -18,14 +18,16 @@ no-loc:
 - Razor
 - SignalR
 uid: grpc/clientfactory
-ms.openlocfilehash: c63bf495f558237ed801881d378953119791b8ce
-ms.sourcegitcommit: 3593c4efa707edeaaceffbfa544f99f41fc62535
+ms.openlocfilehash: ea5181bd44a5deafdc6634b31b9efeda2884b58c
+ms.sourcegitcommit: 1f35de0ca9ba13ea63186c4dc387db4fb8e541e0
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 01/04/2021
-ms.locfileid: "93060946"
+ms.lasthandoff: 03/20/2021
+ms.locfileid: "104711499"
 ---
-# <a name="grpc-client-factory-integration-in-net-core"></a>.NET Core 中的 gRPC 用戶端工廠整合
+# <a name="grpc-client-factory-integration-in-net"></a>.NET 中的 gRPC 用戶端工廠整合
+
+依 [James 牛頓](https://twitter.com/jamesnk)
 
 gRPC 整合 `HttpClientFactory` 可提供集中的方式來建立 gRPC 用戶端。 可以用來做為設定 [獨立 gRPC 用戶端實例](xref:grpc/client)的替代方案。 [Grpc .net. ClientFactory](https://www.nuget.org/packages/Grpc.Net.ClientFactory) NuGet 套件中提供 Factory 整合。
 
@@ -73,9 +75,9 @@ public class AggregatorService : Aggregator.AggregatorBase
 }
 ```
 
-## <a name="configure-httpclient"></a>設定 HttpClient
+## <a name="configure-httphandler"></a>設定 HttpHandler
 
-`HttpClientFactory` 建立 `HttpClient` gRPC 用戶端使用的。 標準 `HttpClientFactory` 方法可以用來新增外寄要求中介軟體或設定的基礎 `HttpClientHandler` `HttpClient` ：
+`HttpClientFactory` 建立 `HttpMessageHandler` gRPC 用戶端使用的。 標準 `HttpClientFactory` 方法可以用來新增外寄要求中介軟體或設定的基礎 `HttpClientHandler` `HttpClient` ：
 
 ```csharp
 services
@@ -139,9 +141,10 @@ services
     .EnableCallContextPropagation(o => o.SuppressContextNotFoundErrors = true);
 ```
 
-如需期限和 RPC 取消的詳細資訊，請參閱 [rpc 生命週期](https://www.grpc.io/docs/guides/concepts/#rpc-life-cycle)。
+如需期限和 RPC 取消的詳細資訊，請參閱 <xref:grpc/deadlines-cancellation> 。
 
 ## <a name="additional-resources"></a>其他資源
 
 * <xref:grpc/client>
+* <xref:grpc/deadlines-cancellation>
 * <xref:fundamentals/http-requests>

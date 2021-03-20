@@ -5,7 +5,7 @@ description: 瞭解 Razor ASP.NET Core apps 中的元件轉譯 Blazor ，包括�
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 01/13/2021
+ms.date: 03/16/2021
 no-loc:
 - appsettings.json
 - ASP.NET Core Identity
@@ -19,31 +19,29 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/components/rendering
-ms.openlocfilehash: e1222981d4af3f4e233cdc0c57bb96a71972af15
-ms.sourcegitcommit: 1166b0ff3828418559510c661e8240e5c5717bb7
+ms.openlocfilehash: 1d244434cd3aa7e1a49839cc0c6cecb61abbcdff
+ms.sourcegitcommit: 1f35de0ca9ba13ea63186c4dc387db4fb8e541e0
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 02/12/2021
-ms.locfileid: "100280048"
+ms.lasthandoff: 03/20/2021
+ms.locfileid: "104711330"
 ---
 # <a name="aspnet-core-blazor-component-rendering"></a>ASP.NET Core Blazor 元件轉譯
 
-元件第一次依其父元件新增至元件階層時， *必須* 呈現。 這是元件嚴格必須呈現的唯一時間。
+當元件第一次由父元件新增至元件階層時， *必須* 呈現這些元件。 這是元件必須轉譯的唯一時間。 元件 *可能會* 根據自己的邏輯和慣例，在其他時間轉譯。
 
-元件 *可能會* 選擇根據自己的邏輯和慣例，在任何其他時間進行轉譯。
+## <a name="rendering-conventions-for-componentbase"></a>的呈現慣例 `ComponentBase`
 
-## <a name="conventions-for-componentbase"></a>的慣例 `ComponentBase`
+根據預設， Razor 元件會繼承自 <xref:Microsoft.AspNetCore.Components.ComponentBase> 基類，此類別包含在下列時間觸發轉譯資料流程的邏輯：
 
-根據預設， Razor 元件 (`.razor`) 會繼承自 <xref:Microsoft.AspNetCore.Components.ComponentBase> 基類，此類別包含在下列時間觸發轉譯資料流程的邏輯：
-
-* 從父元件套用一組更新的參數之後。
-* 套用串聯參數的更新值之後。
-* 在事件的通知之後，叫用它自己的其中一個事件處理常式。
-* 呼叫它自己的方法之後 <xref:Microsoft.AspNetCore.Components.ComponentBase.StateHasChanged%2A> 。
+* 從父元件套用一組更新的 [參數](xref:blazor/components/data-binding#binding-with-component-parameters) 之後。
+* 套用串聯 [參數](xref:blazor/components/cascading-values-and-parameters)的更新值之後。
+* 在事件的通知之後，叫用它自己的其中一個 [事件處理常式](xref:blazor/components/event-handling)。
+* 呼叫自己的 <xref:Microsoft.AspNetCore.Components.ComponentBase.StateHasChanged%2A> 方法之後 (請參閱[ Blazor 生命週期：狀態變更](xref:blazor/components/lifecycle#state-changes)) 。
 
 <xref:Microsoft.AspNetCore.Components.ComponentBase>如果下列任一條件成立，則繼承自 skip 轉譯中的元件，因為參數更新：
 
-* 所有的參數值都是已知的不可變基本類型 (例如， `int` 、 `string` 、 `DateTime`) ，而且自先前設定的參數集以來尚未變更。
+* 所有的參數值都是已知的不可變基本型別，例如 `int` ，、、 `string` `DateTime` 和在設定前一組參數之後尚未變更。
 * 元件的 <xref:Microsoft.AspNetCore.Components.ComponentBase.ShouldRender%2A> 方法會傳回 `false` 。
 
 如需 <xref:Microsoft.AspNetCore.Components.ComponentBase.ShouldRender%2A> 的詳細資訊，請參閱 <xref:blazor/webassembly-performance-best-practices#use-of-shouldrender>。
@@ -52,18 +50,18 @@ ms.locfileid: "100280048"
 
 在大部分的情況下， <xref:Microsoft.AspNetCore.Components.ComponentBase> 慣例會在事件發生後產生正確的元件轉譯中子集。 開發人員通常不需要提供手動邏輯來告訴架構要 rerender 的元件，以及 rerender 它們的時機。 架構慣例的整體效果是元件接收事件轉譯中本身，以遞迴方式觸發轉譯資料流程其子元件的參數值可能已變更。
 
-如需有關架構慣例的效能含意，以及如何將應用程式的元件階層優化的詳細資訊，請參閱 <xref:blazor/webassembly-performance-best-practices#optimize-rendering-speed> 。
+如需架構慣例的效能含意，以及如何將應用程式的元件階層優化以進行轉譯的詳細資訊，請參閱 <xref:blazor/webassembly-performance-best-practices#optimize-rendering-speed> 。
 
 ## <a name="when-to-call-statehaschanged"></a>呼叫時機 `StateHasChanged`
 
-<xref:Microsoft.AspNetCore.Components.ComponentBase.StateHasChanged%2A?displayProperty=nameWithType>方法可讓您在任何時間觸發轉譯。 不過，請小心不要呼叫不 <xref:Microsoft.AspNetCore.Components.ComponentBase.StateHasChanged%2A> 必要的，這是常見的錯誤，因為它會產生不必要的轉譯成本。
+呼叫可 <xref:Microsoft.AspNetCore.Components.ComponentBase.StateHasChanged%2A> 讓您隨時觸發轉譯。 不過，請小心不要呼叫不 <xref:Microsoft.AspNetCore.Components.ComponentBase.StateHasChanged%2A> 必要的，這是造成不必要轉譯成本的常見錯誤。
 
-在下列情況中，您應該 *不* 需要呼叫 <xref:Microsoft.AspNetCore.Components.ComponentBase.StateHasChanged%2A> ：
+程式碼不應該 <xref:Microsoft.AspNetCore.Components.ComponentBase.StateHasChanged%2A> 在下列情況呼叫：
 
 * 定期處理事件，無論是同步或非同步，因為都會 <xref:Microsoft.AspNetCore.Components.ComponentBase> 觸發大部分例行事件處理常式的轉譯。
 * 執行一般的生命週期邏輯（例如 [`OnInitialized`](xref:blazor/components/lifecycle#component-initialization-methods) 或），而 [`OnParametersSetAsync`](xref:blazor/components/lifecycle#after-parameters-are-set) 不論是 synchonrously 還是非同步，因為會 <xref:Microsoft.AspNetCore.Components.ComponentBase> 觸發一般生命週期事件的轉譯。
 
-不過， <xref:Microsoft.AspNetCore.Components.ComponentBase.StateHasChanged%2A> 在下列各節所述的案例中呼叫可能很合理：
+不過，在本文的 <xref:Microsoft.AspNetCore.Components.ComponentBase.StateHasChanged%2A> 下列各節所述的案例中，可能有意義：
 
 * [非同步處理常式牽涉到多個非同步階段](#an-asynchronous-handler-involves-multiple-asynchronous-phases)
 * [從轉譯 Blazor 和事件處理系統外部的某個專案接收呼叫](#receiving-a-call-from-something-external-to-the-blazor-rendering-and-event-handling-system)
@@ -71,95 +69,62 @@ ms.locfileid: "100280048"
 
 ### <a name="an-asynchronous-handler-involves-multiple-asynchronous-phases"></a>非同步處理常式牽涉到多個非同步階段
 
-請考慮下列 `Counter` 元件，這會在每次按一下時更新計數四次。
+由於在 .NET 中定義工作的方式，的接收者 <xref:System.Threading.Tasks.Task> 只能觀察其最終完成，而非中繼非同步狀態。 因此， <xref:Microsoft.AspNetCore.Components.ComponentBase> 只有在 <xref:System.Threading.Tasks.Task> 第一次傳回時以及最後完成時，才可以觸發轉譯資料流程 <xref:System.Threading.Tasks.Task> 。 架構不知道要在其他中繼點 rerender 元件。 如果您想要在中繼點上 rerender，請 <xref:Microsoft.AspNetCore.Components.ComponentBase.StateHasChanged%2A> 在這些點呼叫。
 
-`Pages/Counter.razor`:
+請考慮下列 `CounterState1` 元件，這會在每次按一下時更新計數四次：
 
-```razor
-@page "/counter"
+* 自動轉譯會在的第一個和最後一個增量之後發生 `currentCount` 。
+* <xref:Microsoft.AspNetCore.Components.ComponentBase.StateHasChanged%2A>當架構未在遞增的中繼處理點上自動觸發轉譯中時，呼叫會觸發手動呈現 `currentCount` 。
 
-<p>Current count: @currentCount</p>
+`Pages/CounterState1.razor`:
 
-<button class="btn btn-primary" @onclick="IncrementCount">Click me</button>
+::: moniker range=">= aspnetcore-5.0"
 
-@code {
-    private int currentCount = 0;
+[!code-razor[](~/blazor/common/samples/5.x/BlazorSample_WebAssembly/Pages/rendering/CounterState1.razor?highlight=17,21,25,29)]
 
-    private async Task IncrementCount()
-    {
-        currentCount++;
-        // Renders here automatically
+::: moniker-end
 
-        await Task.Delay(1000);
-        currentCount++;
-        StateHasChanged();
+::: moniker range="< aspnetcore-5.0"
 
-        await Task.Delay(1000);
-        currentCount++;
-        StateHasChanged();
+[!code-razor[](~/blazor/common/samples/3.x/BlazorSample_WebAssembly/Pages/rendering/CounterState1.razor?highlight=17,21,25,29)]
 
-        await Task.Delay(1000);
-        currentCount++;
-        // Renders here automatically
-    }
-}
-```
-
-由於在 .NET 中定義工作的方式，的接收者 <xref:System.Threading.Tasks.Task> 只能觀察其最終完成，而非中繼非同步狀態。 因此， <xref:Microsoft.AspNetCore.Components.ComponentBase> 只有在 <xref:System.Threading.Tasks.Task> 第一次傳回時以及最後完成時，才可以觸發轉譯資料流程 <xref:System.Threading.Tasks.Task> 。 它無法知道要在其他中繼點 rerender。 如果您想要在中繼點 rerender，請使用 <xref:Microsoft.AspNetCore.Components.ComponentBase.StateHasChanged%2A> 。
+::: moniker-end
 
 ### <a name="receiving-a-call-from-something-external-to-the-blazor-rendering-and-event-handling-system"></a>從轉譯 Blazor 和事件處理系統外部的某個專案接收呼叫
 
-<xref:Microsoft.AspNetCore.Components.ComponentBase> 只知道自己的生命週期方法和 Blazor 觸發的事件。 <xref:Microsoft.AspNetCore.Components.ComponentBase> 不知道程式碼中可能發生的其他事件。 例如，自訂資料存放區所引發的任何 c # 事件都是未知的 Blazor 。 為了讓這類事件觸發轉譯資料流程，以在 UI 中顯示更新的值，請使用 <xref:Microsoft.AspNetCore.Components.ComponentBase.StateHasChanged%2A> 。
+<xref:Microsoft.AspNetCore.Components.ComponentBase> 只知道自己的生命週期方法和 Blazor 觸發的事件。 <xref:Microsoft.AspNetCore.Components.ComponentBase> 不知道程式碼中可能發生的其他事件。 例如，自訂資料存放區所引發的任何 c # 事件都是未知的 Blazor 。 為了讓這類事件觸發轉譯資料流程，以在 UI 中顯示更新的值，請呼叫 <xref:Microsoft.AspNetCore.Components.ComponentBase.StateHasChanged%2A> 。
 
-在另一個使用案例中，請考慮使用的下列 `Counter` 元件， <xref:System.Timers.Timer?displayProperty=fullName> 以定期更新計數和呼叫 <xref:Microsoft.AspNetCore.Components.ComponentBase.StateHasChanged%2A> 來更新 UI。
+請考慮 `CounterState2` 使用下列元件， <xref:System.Timers.Timer?displayProperty=fullName> 以定期更新計數和呼叫 <xref:Microsoft.AspNetCore.Components.ComponentBase.StateHasChanged%2A> 來更新 UI：
 
-`Pages/CounterWithTimerDisposal.razor`:
-
-```razor
-@page "/counter-with-timer-disposal"
-@using System.Timers
-@implements IDisposable
-
-<h1>Counter with <code>Timer</code> disposal</h1>
-
-<p>Current count: @currentCount</p>
-
-@code {
-    private int currentCount = 0;
-    private Timer timer = new Timer(1000);
-
-    protected override void OnInitialized()
-    {
-        timer.Elapsed += (sender, eventArgs) => OnTimerCallback();
-        timer.Start();
-    }
-
-    private void OnTimerCallback()
-    {
-        _ = InvokeAsync(() =>
-        {
-            currentCount++;
-            StateHasChanged();
-        });
-    }
-
-    public void IDisposable.Dispose() => timer.Dispose();
-}
-```
-
-在上述範例中：
-
-* `OnTimerCallback` 必須呼叫， <xref:Microsoft.AspNetCore.Components.ComponentBase.StateHasChanged%2A> 因為 Blazor 不知道 `currentCount` 回呼中的變更。 `OnTimerCallback` 在任何 managed 轉譯 Blazor 流程或事件通知之外執行。
+* `OnTimerCallback` 在任何 managed 轉譯 Blazor 流程或事件通知之外執行。 因此， `OnTimerCallback` 必須呼叫， <xref:Microsoft.AspNetCore.Components.ComponentBase.StateHasChanged%2A> 因為 Blazor 不知道 `currentCount` 回呼中的變更。
 * 元件會執行 <xref:System.IDisposable> ，其中 <xref:System.Timers.Timer> 會在架構呼叫方法時處置 `Dispose` 。 如需詳細資訊，請參閱<xref:blazor/components/lifecycle#component-disposal-with-idisposable>。
 
-同樣地，因為回呼是 Blazor 在同步處理內容之外叫用，所以必須將邏輯包裝在中， <xref:Microsoft.AspNetCore.Components.ComponentBase.InvokeAsync%2A?displayProperty=nameWithType> 才能將它移到轉譯器的同步處理內容。 <xref:Microsoft.AspNetCore.Components.ComponentBase.StateHasChanged%2A> 只能從轉譯器的同步處理內容呼叫，否則會擲回例外狀況。 這相當於將其他 UI 架構中的 UI 執行緒封送處理。
+由於回呼是在的同步處理 Blazor 內容之外叫用，因此元件必須包裝中的邏輯， `OnTimerCallback` <xref:Microsoft.AspNetCore.Components.ComponentBase.InvokeAsync%2A?displayProperty=nameWithType> 才能將它移到轉譯器的同步處理內容。 <xref:Microsoft.AspNetCore.Components.ComponentBase.StateHasChanged%2A> 只能從轉譯器的同步處理內容呼叫，否則會擲回例外狀況。 這相當於將其他 UI 架構中的 UI 執行緒封送處理。
+
+`Pages/CounterState2.razor`:
+
+::: moniker range=">= aspnetcore-5.0"
+
+[!code-razor[](~/blazor/common/samples/5.x/BlazorSample_WebAssembly/Pages/rendering/CounterState2.razor?highlight=26)]
+
+::: moniker-end
+
+::: moniker range="< aspnetcore-5.0"
+
+[!code-razor[](~/blazor/common/samples/3.x/BlazorSample_WebAssembly/Pages/rendering/CounterState2.razor?highlight=26)]
+
+::: moniker-end
 
 ### <a name="to-render-a-component-outside-the-subtree-thats-rerendered-by-a-particular-event"></a>若要在特定事件所保存的子樹狀結構外呈現元件
 
-您的 UI 可能牽涉到將事件分派至一個元件、變更某些狀態，以及需要 rerender 完全不同的元件，而不是接收事件的子系。
+UI 可能包括：
 
-處理此案例的其中一種方式是將 *狀態管理* 類別（可能是 DI 服務）插入多個元件中。 當某個元件在狀態管理員上呼叫方法時，狀態管理員可以引發 c # 事件，然後由獨立元件接收該事件。
+1. 將事件分派至一個元件。
+1. 變更某些狀態。
+1. 轉譯資料流程完全不同的元件，而不是接收事件的元件的子系。
+
+處理此案例的其中一種方式，是提供 *狀態管理* 類別，通常是在插入多個元件 (DI) 服務的相依性插入。 當某個元件在狀態管理員上呼叫方法時，狀態管理員會引發 c # 事件，然後由獨立元件接收該事件。
 
 因為這些 c # 事件是在轉譯 Blazor 管線之外，所以請 <xref:Microsoft.AspNetCore.Components.ComponentBase.StateHasChanged%2A> 在您想要轉譯的其他元件上呼叫，以回應狀態管理員的事件。
 
-這與上一節的先前案例類似 <xref:System.Timers.Timer?displayProperty=fullName> 。 [](#receiving-a-call-from-something-external-to-the-blazor-rendering-and-event-handling-system) 由於執行呼叫堆疊通常會保留在轉譯器的同步處理內容上，因此 <xref:Microsoft.AspNetCore.Components.ComponentBase.InvokeAsync%2A> 通常不需要。 <xref:Microsoft.AspNetCore.Components.ComponentBase.InvokeAsync%2A> 只有當邏輯將同步處理內容（例如 <xref:System.Threading.Tasks.Task.ContinueWith%2A> 在上呼叫 <xref:System.Threading.Tasks.Task> 或等候進行呼叫）時，才需要 <xref:System.Threading.Tasks.Task> [`ConfigureAwait(false)`](xref:System.Threading.Tasks.Task.ConfigureAwait%2A) 。
+這與 <xref:System.Timers.Timer?displayProperty=fullName> [上一節](#receiving-a-call-from-something-external-to-the-blazor-rendering-and-event-handling-system)中的稍早案例類似。 由於執行呼叫堆疊通常會保留在轉譯器的同步處理內容中，因此 <xref:Microsoft.AspNetCore.Components.ComponentBase.InvokeAsync%2A> 通常不需要呼叫。 <xref:Microsoft.AspNetCore.Components.ComponentBase.InvokeAsync%2A>只有當邏輯將同步處理內容（例如 <xref:System.Threading.Tasks.Task.ContinueWith%2A> 在上呼叫 <xref:System.Threading.Tasks.Task> 或等候進行呼叫）時，才需要呼叫 <xref:System.Threading.Tasks.Task> [`ConfigureAwait(false)`](xref:System.Threading.Tasks.Task.ConfigureAwait%2A) 。

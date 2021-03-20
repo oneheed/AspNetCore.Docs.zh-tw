@@ -4,7 +4,7 @@ author: jamesnk
 description: 瞭解如何在 .NET 中使用重試來建立復原性、容錯的 gRPC 呼叫。
 monikerRange: '>= aspnetcore-3.0'
 ms.author: jamesnk
-ms.date: 02/25/2021
+ms.date: 03/18/2021
 no-loc:
 - appsettings.json
 - ASP.NET Core Identity
@@ -18,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: grpc/retries
-ms.openlocfilehash: 613386d1fedd8b1b04081e3240b8a3aaf7b37012
-ms.sourcegitcommit: 54fe1ae5e7d068e27376d562183ef9ddc7afc432
+ms.openlocfilehash: 18ffab896adb6c1c5737b1e73adf06b22ca1ccb2
+ms.sourcegitcommit: 1f35de0ca9ba13ea63186c4dc387db4fb8e541e0
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 03/10/2021
-ms.locfileid: "102589799"
+ms.lasthandoff: 03/20/2021
+ms.locfileid: "104711564"
 ---
 # <a name="transient-fault-handling-with-grpc-retries"></a>使用 gRPC 重試進行暫時性錯誤處理
 
@@ -31,7 +31,7 @@ ms.locfileid: "102589799"
 
 gRPC 重試是一項功能，可讓 gRPC 用戶端自動重試失敗的呼叫。 本文討論如何設定重試原則，以在 .NET 中建立具有復原能力的容錯 gRPC 應用程式。
 
-gRPC 重試需要 [gRPC .net。用戶端](https://www.nuget.org/packages/Grpc.Net.Client) 版本 2.36.0-pre1 或更新版本。
+gRPC 重試需要 [gRPC .net。用戶端](https://www.nuget.org/packages/Grpc.Net.Client) 版本2.36.0 或更新版本。
 
 ## <a name="transient-fault-handling"></a>暫時性錯誤處理
 

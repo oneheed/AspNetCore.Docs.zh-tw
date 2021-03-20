@@ -18,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: mvc/views/partial
-ms.openlocfilehash: 0a8e4a4fdecd657840c6c02424ffffa64d4ab473
-ms.sourcegitcommit: 54fe1ae5e7d068e27376d562183ef9ddc7afc432
+ms.openlocfilehash: fc87386a42e1806e0f877cf186ad3a36dc4b380c
+ms.sourcegitcommit: 1f35de0ca9ba13ea63186c4dc387db4fb8e541e0
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 03/10/2021
-ms.locfileid: "102586874"
+ms.lasthandoff: 03/20/2021
+ms.locfileid: "104711681"
 ---
 # <a name="partial-views-in-aspnet-core"></a>ASP.NET Core 中的部分檢視
 
@@ -86,7 +86,7 @@ ms.locfileid: "102586874"
 
 ### <a name="use-a-partial-view-in-a-razor-pages-pagemodel"></a>在頁面 PageModel 中使用部分視圖 Razor
 
-在 ASP.NET Core 2.0 或2.1 中，下列處理常式方法會將 *\_ AuthorPartialRP* 的部分觀點呈現給回應：
+在 ASP.NET Core 2.0 或2.1 中，下列處理常式方法會將 *\_ AuthorPartialRP* 的部分視圖呈現給回應：
 
 ```csharp
 public IActionResult OnGetPartial() =>
@@ -353,7 +353,7 @@ public IActionResult OnGetPartial() =>
 
 ::: moniker range=">= aspnetcore-2.1"
 
-* [Razor ASP.NET Core 的語法參考](xref:mvc/views/razor)
+* <xref:mvc/views/razor>
 * <xref:mvc/views/tag-helpers/intro>
 * <xref:mvc/views/tag-helpers/builtin-th/partial-tag-helper>
 * <xref:mvc/views/view-components>
@@ -363,7 +363,7 @@ public IActionResult OnGetPartial() =>
 
 ::: moniker range="< aspnetcore-2.1"
 
-* [Razor ASP.NET Core 的語法參考](xref:mvc/views/razor)
+* <xref:mvc/views/razor>
 * <xref:mvc/views/view-components>
 * <xref:mvc/controllers/areas>
 

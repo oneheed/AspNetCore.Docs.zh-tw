@@ -1,11 +1,11 @@
 ---
-title: ASP.NET 核心 Blazor SignalR 指引
+title: ASP.NET Core Blazor SignalR 指導方針
 author: guardrex
 description: 瞭解如何設定和管理 Blazor SignalR 連接。
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 02/25/2021
+ms.date: 03/12/2021
 no-loc:
 - appsettings.json
 - ASP.NET Core Identity
@@ -20,20 +20,20 @@ no-loc:
 - SignalR
 uid: blazor/fundamentals/signalr
 zone_pivot_groups: blazor-hosting-models
-ms.openlocfilehash: 63dfd93fbc42a869211bc5cd481a8dbee6eb6c91
-ms.sourcegitcommit: 3982ff9dabb5b12aeb0a61cde2686b5253364f5d
+ms.openlocfilehash: ecac21c1f6f7cea0a221e1a78161b915ee2c755f
+ms.sourcegitcommit: 1f35de0ca9ba13ea63186c4dc387db4fb8e541e0
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 03/04/2021
-ms.locfileid: "102118911"
+ms.lasthandoff: 03/20/2021
+ms.locfileid: "104711057"
 ---
-# <a name="aspnet-core-blazor-signalr-guidance"></a>ASP.NET 核心 Blazor SignalR 指引
+# <a name="aspnet-core-blazor-signalr-guidance"></a>ASP.NET Core Blazor SignalR 指導方針
 
 ::: zone pivot="webassembly"
 
 本文說明如何 SignalR 在應用程式中設定及管理連線 Blazor 。
 
-如需有關 ASP.NET Core 設定的一般指引 SignalR ，請參閱檔區域中的主題 <xref:signalr/introduction> 。 若要設定 SignalR [加入至裝載的 Blazor WebAssembly 解決方案](xref:tutorials/signalr-blazor)，請參閱 <xref:signalr/configuration#configure-server-options> 。
+如需 ASP.NET Core 設定的一般指引 SignalR ，請參閱檔區域中的主題 <xref:signalr/introduction> 。 若要設定 SignalR [加入至裝載的 Blazor WebAssembly 解決方案](xref:tutorials/signalr-blazor)，請參閱 <xref:signalr/configuration#configure-server-options> 。
 
 ## <a name="signalr-cross-origin-negotiation-for-authentication"></a>SignalR 驗證的跨原始來源協商
 
@@ -101,7 +101,7 @@ ms.locfileid: "102118911"
 
 本文說明如何 SignalR 在應用程式中設定及管理連線 Blazor 。
 
-如需有關 ASP.NET Core 設定的一般指引 SignalR ，請參閱檔區域中的主題 <xref:signalr/introduction> 。 若要設定 SignalR [加入至裝載的 Blazor WebAssembly 解決方案](xref:tutorials/signalr-blazor)，請參閱 <xref:signalr/configuration#configure-server-options> 。
+如需 ASP.NET Core 設定的一般指引 SignalR ，請參閱檔區域中的主題 <xref:signalr/introduction> 。 若要設定 SignalR [加入至裝載的 Blazor WebAssembly 解決方案](xref:tutorials/signalr-blazor)，請參閱 <xref:signalr/configuration#configure-server-options> 。
 
 ## <a name="circuit-handler-options"></a>線路處理常式選項
 
@@ -364,6 +364,40 @@ window.addEventListener('pagehide', () => {
 ```
 
 ::: moniker-end
+
+## <a name="blazor-server-circuit-handler"></a>Blazor Server 電路處理常式
+
+Blazor Server 允許程式碼定義迴圈 *處理常式*，以允許在使用者的線路狀態變更時執行程式碼。 在 <xref:Microsoft.AspNetCore.Components.Server.Circuits.CircuitHandler> 應用程式的服務容器中衍生類別並將其註冊，會實作為電路處理常式。 下列的電路處理常式範例會追蹤開啟 SignalR 的連接。
+
+`TrackingCircuitHandler.cs`:
+
+::: moniker range=">= aspnetcore-5.0"
+
+[!code-csharp[](~/blazor/common/samples/5.x/BlazorSample_Server/TrackingCircuitHandler.cs)]
+
+::: moniker-end
+
+::: moniker range="< aspnetcore-5.0"
+
+[!code-csharp[](~/blazor/common/samples/3.x/BlazorSample_Server/TrackingCircuitHandler.cs)]
+
+::: moniker-end
+
+線路處理常式是使用 DI 註冊的。 系統會為每個線路的實例建立範圍實例。 使用 `TrackingCircuitHandler` 上述範例中的，會建立單一服務，因為必須追蹤所有線路的狀態。
+
+`Startup.cs`:
+
+```csharp
+public void ConfigureServices(IServiceCollection services)
+{
+    ...
+    services.AddSingleton<CircuitHandler, TrackingCircuitHandler>();
+}
+```
+
+如果自訂電路處理常式的方法擲回未處理的例外狀況，則例外狀況對線路而言是嚴重的 Blazor Server 。 若要容忍處理常式程式碼或呼叫方法中的例外狀況，請將程式碼包裝在一或多個語句中， [`try-catch`](/dotnet/csharp/language-reference/keywords/try-catch) 並提供錯誤處理和記錄。
+
+當線路因為使用者已中斷連線而結束，且架構正在清除電路狀態時，架構會處置電路的 DI 範圍。 處置範圍會處置任何執行的線路範圍 DI 服務 <xref:System.IDisposable?displayProperty=fullName> 。 如果任何 DI 服務在處置期間擲回未處理的例外狀況，則架構會記錄例外狀況。
 
 ## <a name="additional-resources"></a>其他資源
 

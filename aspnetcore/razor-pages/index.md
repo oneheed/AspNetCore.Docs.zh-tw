@@ -1,7 +1,7 @@
 ---
 title: RazorASP.NET Core 中的頁面簡介
 author: Rick-Anderson
-description: 說明 Razor ASP.NET Core 中的頁面如何讓撰寫以頁面為焦點的案例撰寫程式碼比使用 MVC 更簡單且更具生產力。
+description: 說明 Razor ASP.NET Core 中的頁面如何讓撰寫以頁面為焦點的案例撰寫程式碼比使用 MVC 更簡單、更具生產力。
 monikerRange: '>= aspnetcore-2.0'
 ms.author: riande
 ms.date: 02/12/2020
@@ -18,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: razor-pages/index
-ms.openlocfilehash: 78b192cb2240046d16b1b766954ed4ca5229d888
-ms.sourcegitcommit: 54fe1ae5e7d068e27376d562183ef9ddc7afc432
+ms.openlocfilehash: bd22407862aa5b785a838d40e33c98743f0d810a
+ms.sourcegitcommit: 1f35de0ca9ba13ea63186c4dc387db4fb8e541e0
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 03/10/2021
-ms.locfileid: "102586705"
+ms.lasthandoff: 03/20/2021
+ms.locfileid: "104711512"
 ---
 # <a name="introduction-to-razor-pages-in-aspnet-core"></a>RazorASP.NET Core 中的頁面簡介
 
@@ -96,7 +96,7 @@ Razor 頁面可讓撰寫以頁面為焦點的案常式序代碼比使用控制�
 
 ## <a name="razor-pages"></a>Razor 頁面
 
-Razor 頁面已在 *Startup.cs* 中啟用：
+Razor 啟動時，會啟用頁面 *。 .cs*：
 
 [!code-csharp[](index/3.0sample/RazorPagesIntro/Startup.cs?name=snippet_Startup&highlight=12,36)]
 
@@ -104,7 +104,7 @@ Razor 頁面已在 *Startup.cs* 中啟用：
 
 [!code-cshtml[](index/3.0sample/RazorPagesIntro/Pages/Index.cshtml?highlight=1)]
 
-上述程式碼看起來很像是 ASP.NET Core 應用程式中使用控制器和 views 的[ Razor 視圖](xref:tutorials/first-mvc-app/adding-view)檔案。 這會讓它不同的是指示詞 [`@page`](xref:mvc/views/razor#page) 。 `@page` 會將檔案轉換成 MVC 動作，這表示它會直接處理要求，不用透過控制器。 `@page` 必須是頁面上的第一個指示詞 Razor 。 `@page` 會影響其他結構的行為 [Razor](xref:mvc/views/razor) 。 Razor 分頁檔名的名稱必須是 *cshtml* 尾碼。
+上述程式碼看起來很像是在具有控制器和 views 的 ASP.NET Core 應用程式中使用的[ Razor 視圖](xref:tutorials/first-mvc-app/adding-view)檔案。 這會讓它不同的是指示詞 [`@page`](xref:mvc/views/razor#page) 。 `@page` 會將檔案轉換成 MVC 動作，這表示它會直接處理要求，不用透過控制器。 `@page` 必須是頁面上的第一個指示詞 Razor 。 `@page` 會影響其他結構的行為 [Razor](xref:mvc/views/razor) 。 Razor 分頁檔名的名稱必須是 *cshtml* 尾碼。
 
 使用`PageModel`類別的類似頁面，顯示於下列兩個檔案中。 *Pages/Index2.cshtml* 檔案：
 
@@ -287,7 +287,7 @@ Razor 依預設，頁面只會系結具有非動詞命令的屬性 `GET` 。 系
 @page "{id:int?}"
 ```
 
-*Edit.cshtml.cs* 檔案：
+*編輯 cshtml .cs* 檔案：
 
 [!code-csharp[](index/3.0sample/RazorPagesContacts/Pages/Customers/Edit.cshtml.cs?name=snippet)]
 
@@ -632,7 +632,7 @@ public string Message { get; set; }
 * [授權屬性和 Razor 頁面](xref:security/authorization/simple#aarp)
 * [下載或查看範例程式碼](https://github.com/dotnet/AspNetCore.Docs/tree/main/aspnetcore/razor-pages/index/3.0sample)
 * <xref:index>
-* [Razor ASP.NET Core 的語法參考](xref:mvc/views/razor)
+* <xref:mvc/views/razor>
 * <xref:mvc/controllers/areas>
 * <xref:tutorials/razor-pages/razor-pages-start>
 * <xref:security/authorization/razor-pages-authorization>
@@ -681,7 +681,7 @@ public string Message { get; set; }
 
 ## <a name="razor-pages"></a>Razor 頁面
 
-Razor 頁面已在 *Startup.cs* 中啟用：
+Razor 啟動時，會啟用頁面 *。 .cs*：
 
 [!code-csharp[](index/sample/RazorPagesIntro/Startup.cs?name=snippet_Startup)]
 
@@ -689,7 +689,7 @@ Razor 頁面已在 *Startup.cs* 中啟用：
 
 [!code-cshtml[](index/sample/RazorPagesIntro/Pages/Index.cshtml)]
 
-上述程式碼看起來很像是 ASP.NET Core 應用程式中使用控制器和 views 的[ Razor 視圖](xref:tutorials/first-mvc-app/adding-view)檔案。 讓它不同的是 `@page` 指示詞。 `@page` 會將檔案轉換成 MVC 動作，這表示它會直接處理要求，不用透過控制器。 `@page` 必須是頁面上的第一個指示詞 Razor 。 `@page` 會影響其他結構的行為 Razor 。
+上述程式碼看起來很像是在具有控制器和 views 的 ASP.NET Core 應用程式中使用的[ Razor 視圖](xref:tutorials/first-mvc-app/adding-view)檔案。 讓它不同的是 `@page` 指示詞。 `@page` 會將檔案轉換成 MVC 動作，這表示它會直接處理要求，不用透過控制器。 `@page` 必須是頁面上的第一個指示詞 Razor 。 `@page` 會影響其他結構的行為 Razor 。
 
 使用`PageModel`類別的類似頁面，顯示於下列兩個檔案中。 *Pages/Index2.cshtml* 檔案：
 
@@ -858,7 +858,7 @@ public void OnHead()
 }
 ```
 
-在 ASP.NET Core 2.1 或更新版本中， Razor `OnGet` 如果沒有定義任何處理程式，頁面就會切換回呼叫處理常式 `OnHead` 。 這個行為藉由在 `Startup.ConfigureServices` 中呼叫 [SetCompatibilityVersion](xref:mvc/compatibility-version) 來啟用：
+在 ASP.NET Core 2.1 或更新版本中， Razor `OnGet` 如果未定義任何處理程式，頁面就會切換回呼叫處理常式 `OnHead` 。 這個行為藉由在 `Startup.ConfigureServices` 中呼叫 [SetCompatibilityVersion](xref:mvc/compatibility-version) 來啟用：
 
 ```csharp
 services.AddMvc()
@@ -1143,7 +1143,7 @@ services.AddMvc()
 
 * [授權屬性和 Razor 頁面](xref:security/authorization/simple#aarp)
 * <xref:index>
-* [Razor ASP.NET Core 的語法參考](xref:mvc/views/razor)
+* <xref:mvc/views/razor>
 * <xref:mvc/controllers/areas>
 * <xref:tutorials/razor-pages/razor-pages-start>
 * <xref:security/authorization/razor-pages-authorization>

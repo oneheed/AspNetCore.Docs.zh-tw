@@ -19,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: host-and-deploy/linux-apache
-ms.openlocfilehash: e81ad43e1c3b86900848671d9da377a5c04a2a82
-ms.sourcegitcommit: 063a06b644d3ade3c15ce00e72a758ec1187dd06
+ms.openlocfilehash: f7d47e26b429f31817b5e04f3104449c9748d94f
+ms.sourcegitcommit: 1f35de0ca9ba13ea63186c4dc387db4fb8e541e0
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 01/16/2021
-ms.locfileid: "98253003"
+ms.lasthandoff: 03/20/2021
+ms.locfileid: "104711278"
 ---
 # <a name="host-aspnet-core-on-linux-with-apache"></a>在 Linux 上使用 Apache 裝載 ASP.NET Core
 
@@ -32,7 +32,7 @@ ms.locfileid: "98253003"
 
 使用本指南來了解如何在 [CentOS 7](https://www.centos.org/) 上將 [Apache](https://httpd.apache.org/) 設定為反向 Proxy 伺服器，以將 HTTP 流量重新導向至在 [Kestrel](xref:fundamentals/servers/kestrel) 伺服器上執行的 ASP.NET Core Web 應用程式。 [mod_proxy 延伸模組](https://httpd.apache.org/docs/2.4/mod/mod_proxy.html)和相關的模組會建立伺服器的反向 Proxy。
 
-## <a name="prerequisites"></a>必要條件
+## <a name="prerequisites"></a>Prerequisites
 
 * 執行 CentOS 7 的伺服器搭配具有 sudo 權限的標準使用者帳戶。
 * 在伺服器上安裝 .NET Core 執行階段。
@@ -377,6 +377,12 @@ rich rules:
 
 **設定反向 Prooxy 以進行安全的用戶端連線 (HTTPS)**
 
+> [!WARNING]
+> 本節中的安全性設定是一般設定，可作為進一步自訂的起點。 我們無法提供協力廠商工具、伺服器和作業系統的支援。 *使用本節中的設定，以您自己的風險。* 如需詳細資訊，請存取下列資源：
+>
+* Apache 檔) 的[APACHE SSL/TLS 加密](https://httpd.apache.org/docs/trunk/ssl/) (
+* [mozilla.org SSL 設定產生器](https://ssl-config.mozilla.org/#server=apache)
+
 為了設定適用於 HTTPS 的 Apache，會使用 *mod_ssl* 模組。 安裝 *httpd* 模組時，已一併安裝 *mod_ssl* 模組。 如果未安裝該模組，請使用 `yum` 將它新增到設定中。
 
 ```bash
@@ -389,35 +395,45 @@ sudo yum install mod_ssl
 sudo yum install mod_rewrite
 ```
 
-修改 *helloapp.conf* 檔案以啟用 URL 重寫並保護連接埠 443 上的通訊：
+修改 *helloapp* 檔案，以在埠443上啟用安全通訊。
+
+下列範例不會將伺服器設定為重新導向不安全的要求。 建議使用 HTTPS 重新導向中介軟體。 如需詳細資訊，請參閱<xref:security/enforcing-ssl>。
+
+> [!NOTE]
+> 針對伺服器設定處理安全重新導向而非 HTTPS 重新導向中介軟體的開發環境，我們建議使用暫時性重新導向 (302) ，而不是永久重新導向 (301) 。 連結快取可能會在開發環境中造成不穩定的行為。
+
+新增 `Strict-Transport-Security` (HSTS) 標頭可確保用戶端提出的所有後續要求都是透過 HTTPS。 如需設定 `Strict-Transport-Security` 標頭的指引，請參閱 <xref:security/enforcing-ssl#http-strict-transport-security-protocol-hsts> 。
 
 ```
 <VirtualHost *:*>
     RequestHeader set "X-Forwarded-Proto" expr=%{REQUEST_SCHEME}
 </VirtualHost>
 
-<VirtualHost *:80>
-    RewriteEngine On
-    RewriteCond %{HTTPS} !=on
-    RewriteRule ^/?(.*) https://%{SERVER_NAME}/$1 [R,L]
-</VirtualHost>
-
 <VirtualHost *:443>
-    ProxyPreserveHost On
-    ProxyPass / http://127.0.0.1:5000/
-    ProxyPassReverse / http://127.0.0.1:5000/
-    ErrorLog /var/log/httpd/helloapp-error.log
-    CustomLog /var/log/httpd/helloapp-access.log common
-    SSLEngine on
-    SSLProtocol all -SSLv2
-    SSLCipherSuite ALL:!ADH:!EXPORT:!SSLv2:!RC4+RSA:+HIGH:+MEDIUM:!LOW:!RC4
-    SSLCertificateFile /etc/pki/tls/certs/localhost.crt
+    Protocols             h2 http/1.1
+    ProxyPreserveHost     On
+    ProxyPass             / http://127.0.0.1:5000/
+    ProxyPassReverse      / http://127.0.0.1:5000/
+    ErrorLog              /var/log/httpd/helloapp-error.log
+    CustomLog             /var/log/httpd/helloapp-access.log common
+    SSLEngine             on
+    SSLProtocol           all -SSLv3 -TLSv1 -TLSv1.1
+    SSLHonorCipherOrder   off
+    SSLCompression        off
+    SSLSessionTickets     on
+    SSLUseStapling        off
+    SSLCertificateFile    /etc/pki/tls/certs/localhost.crt
     SSLCertificateKeyFile /etc/pki/tls/private/localhost.key
+    SSLCipherSuite        ECDHE-ECDSA-AES128-GCM-SHA256:ECDHE-RSA-AES128-GCM-SHA256:ECDHE-ECDSA-AES256-GCM-SHA384:ECDHE-RSA-AES256-GCM-SHA384:ECDHE-ECDSA-CHACHA20-POLY1305:ECDHE-RSA-CHACHA20-POLY1305:DHE-RSA-AES128-GCM-SHA256:DHE-RSA-AES256-GCM-SHA384
 </VirtualHost>
 ```
 
 > [!NOTE]
 > 此範例使用本機產生的憑證。 **SSLCertificateFile** 應該是網域名稱的主要憑證檔案。 **SSLCertificateKeyFile** 應該是建立 CSR 時產生的金鑰檔。 **SSLCertificateChainFile** 應該是憑證授權單位所提供的中繼憑證檔案 (如果有的話)。
+>
+> 需要有 Apache HTTP 伺服器版本2.4.43 或更新版本，才能使用 OpenSSL 1.1.1 來操作 TLS 1.3 web 伺服器。
+
+> 記上述範例會停用 (OCSP) 裝訂的線上憑證狀態通訊協定。 如需啟用 OCSP 的詳細資訊和指引，請參閱 [ (Apache 檔) 的 Ocsp 裝訂 ](https://httpd.apache.org/docs/trunk/ssl/ssl_howto.html#ocspstapling)。
 
 儲存檔案並測試設定：
 

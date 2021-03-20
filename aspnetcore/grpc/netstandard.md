@@ -1,5 +1,5 @@
 ---
-title: 搭配使用 gRPC 用戶端與 .NET Standard 2。0
+title: 使用 gRPC 用戶端搭配 .NET Standard 2。0
 author: jamesnk
 description: 瞭解如何在支援 .NET Standard 2.0 的應用程式和程式庫中使用 .NET gRPC 用戶端。
 monikerRange: '>= aspnetcore-3.0'
@@ -18,18 +18,18 @@ no-loc:
 - Razor
 - SignalR
 uid: grpc/netstandard
-ms.openlocfilehash: a6b066979dcdcdf648b8b0326bef47fe0e466266
-ms.sourcegitcommit: 07e7ee573fe4e12be93249a385db745d714ff6ae
+ms.openlocfilehash: b3df1d3b5565dc5c03988c29d2befbe1ea164f54
+ms.sourcegitcommit: 1f35de0ca9ba13ea63186c4dc387db4fb8e541e0
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 03/12/2021
-ms.locfileid: "103422496"
+ms.lasthandoff: 03/20/2021
+ms.locfileid: "104711476"
 ---
-# <a name="use-grpc-client-with-net-standard-20"></a>搭配使用 gRPC 用戶端與 .NET Standard 2。0
+# <a name="use-grpc-client-with-net-standard-20"></a>使用 gRPC 用戶端搭配 .NET Standard 2。0
 
 依 [James 牛頓](https://twitter.com/jamesnk)
 
-本文討論如何使用 .NET gRPC 用戶端搭配支援 [.Net Standard 2.0](/dotnet/standard/net-standard)的 .net 執行。
+本文討論如何使用 .NET gRPC 用戶端搭配支援 [.NET Standard 2.0](/dotnet/standard/net-standard)的 .net 執行。
 
 ## <a name="net-implementations"></a>.NET 實作
 
@@ -63,11 +63,23 @@ var client = new Greeter.GreeterClient(channel);
 var response = await client.SayHelloAsync(new HelloRequest { Name = ".NET" });
 ```
 
+也可以使用 [gRPC 用戶端 factory](xref:grpc/clientfactory)來建立用戶端。 HTTP 提供者是使用 <xref:Microsoft.Extensions.DependencyInjection.HttpClientBuilderExtensions.ConfigurePrimaryHttpMessageHandler%2A> 擴充方法來設定。
+
+```csharp
+builder.Services
+    .AddGrpcClient<Greet.GreeterClient>(options =>
+    {
+        options.Address = new Uri("https://localhost:5001");
+    })
+    .ConfigurePrimaryHttpMessageHandler(
+        () => new GrpcWebHandler(new HttpClientHandler()));
+```
+
 如需詳細資訊，請參閱 [使用 .Net gRPC 用戶端設定 GRPC Web](xref:grpc/browser#configure-grpc-web-with-the-net-grpc-client)。
 
 ## <a name="net-framework"></a>.NET Framework
 
-.NET Framework 對 gRPC over HTTP/2 的支援有限。 若要在 .NET Framework 上啟用透過 HTTP/2 的 gRPC，請設定要使用的通道 <xref:System.Net.Http.WinHttpHandler> 。
+.NET Framework 對透過 HTTP/2 的 gRPC 有有限的支援。 若要在 .NET Framework 上啟用透過 HTTP/2 的 gRPC，請設定要使用的通道 <xref:System.Net.Http.WinHttpHandler> 。
 
 使用的需求和限制 `WinHttpHandler` ：
 
@@ -87,8 +99,8 @@ var response = await client.SayHelloAsync(new HelloRequest { Name = ".NET" });
 ```
 
 > [!NOTE]
-> .NET Framework 支援處於早期階段，需要使用發行前版本軟體。
-> * Windows 10 組建19622或更新版本是以 [windows](https://insider.windows.com/) 測試人員組建的形式提供。
+> .NET Framework 支援的初期階段，需要使用發行前版本的軟體。
+> * Windows 10 組建19622或更新版本是以 [Windows](https://insider.windows.com/) 測試人員組建的形式提供。
 > * `System.Net.Http.WinHttpHandler`NuGet.org 上目前無法使用所需的版本。您應使用[此 NuGet](https://pkgs.dev.azure.com/dnceng/public/_packaging/dotnet6/nuget/v3/index.json)摘要上提供的最新發行前版本。
 
 ## <a name="grpc-c-core-library"></a>gRPC c # 核心-程式庫

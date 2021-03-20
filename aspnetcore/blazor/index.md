@@ -19,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/index
-ms.openlocfilehash: 560fead9868bab9888c0d6a69cf09f135bbf39cc
-ms.sourcegitcommit: 1166b0ff3828418559510c661e8240e5c5717bb7
+ms.openlocfilehash: cf2768f2345470f2f4918761b45a1d75b4d5d65a
+ms.sourcegitcommit: 1f35de0ca9ba13ea63186c4dc387db4fb8e541e0
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 02/12/2021
-ms.locfileid: "100279746"
+ms.lasthandoff: 03/20/2021
+ms.locfileid: "104711317"
 ---
 # <a name="introduction-to-aspnet-core-blazor"></a>ASP.NET Core 簡介 Blazor
 
@@ -174,6 +174,6 @@ Blazor 會執行 [.NET Standard](/dotnet/standard/net-standard)，讓 Blazor 專
 * <xref:blazor/call-javascript-from-dotnet>
 * <xref:blazor/call-dotnet-from-javascript>
 * [C# 指南](/dotnet/csharp/)
-* [Razor ASP.NET Core 的語法參考](xref:mvc/views/razor)
+* <xref:mvc/views/razor>
 * [HTML](https://www.w3.org/html/)
 * [很 Blazor 棒](https://github.com/AdrienTorris/awesome-blazor)社區連結

@@ -1,5 +1,5 @@
 ---
-title: ASP.NET 核心 Blazor 裝載模型
+title: ASP.NET Core Blazor 裝載模型
 author: guardrex
 description: 瞭解 Blazor WebAssembly 和 Blazor Server 裝載模型。
 monikerRange: '>= aspnetcore-3.1'
@@ -19,16 +19,16 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/hosting-models
-ms.openlocfilehash: 8dd11251358bbeea444661970fadf19cb1390fd3
-ms.sourcegitcommit: 1436bd4d70937d6ec3140da56d96caab33c4320b
+ms.openlocfilehash: ea39235e51fc430dc2c67b4f2cf281c416705c0b
+ms.sourcegitcommit: 1f35de0ca9ba13ea63186c4dc387db4fb8e541e0
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 03/06/2021
-ms.locfileid: "102394924"
+ms.lasthandoff: 03/20/2021
+ms.locfileid: "104711070"
 ---
-# <a name="aspnet-core-blazor-hosting-models"></a>ASP.NET 核心 Blazor 裝載模型
+# <a name="aspnet-core-blazor-hosting-models"></a>ASP.NET Core Blazor 裝載模型
 
-Blazor 是一種 web 架構，設計用來在瀏覽器中以 [WebAssembly](https://webassembly.org/)為基礎的 .net 執行時間執行用戶端 (*Blazor WebAssembly*) 或 ASP.NET Core () 中的伺服器端 *Blazor Server* 。 無論裝載模型為何，應用程式和元件模型 *都相同*。
+Blazor 是設計用來在瀏覽器中以 [WebAssembly](https://webassembly.org/)為基礎的 .net 執行時間執行用戶端的 web 架構， (*Blazor WebAssembly*) 或 ASP.NET Core () 中的伺服器端 *Blazor Server* 。 無論裝載模型為何，應用程式和元件模型 *都相同*。
 
 ## Blazor WebAssembly
 
@@ -36,7 +36,7 @@ Blazor 是一種 web 架構，設計用來在瀏覽器中以 [WebAssembly](https
 
 ![：：：非 loc (Blazor WebAssembly) ：：：：：：：非 loc (Blazor) ：：：應用程式會在瀏覽器內的 UI 執行緒上執行。](hosting-models/_static/blazor-webassembly.png)
 
-Blazor WebAssembly建立應用程式以進行部署，而不使用後端 ASP.NET 核心應用程式來提供其檔案，則應用程式稱為 *獨立* Blazor WebAssembly 應用程式。 建立應用程式以供使用後端應用程式進行部署以提供其檔案時，應用程式稱為 *託管* Blazor WebAssembly 應用程式。 託管 Blazor WebAssembly **`Client`** 應用程式通常會 **`Server`** 使用 web API 呼叫或 () ，透過網路與後端應用程式互動 [SignalR](xref:signalr/introduction) <xref:tutorials/signalr-blazor> 。
+Blazor WebAssembly建立應用程式以進行部署，而不使用後端 ASP.NET Core 應用程式來提供其檔案時，應用程式稱為 *獨立* Blazor WebAssembly 應用程式。 建立應用程式以供使用後端應用程式進行部署以提供其檔案時，應用程式稱為 *託管* Blazor WebAssembly 應用程式。 託管 Blazor WebAssembly **`Client`** 應用程式通常會 **`Server`** 使用 web API 呼叫或 () ，透過網路與後端應用程式互動 [SignalR](xref:signalr/introduction) <xref:tutorials/signalr-blazor> 。
 
 `blazor.webassembly.js`腳本是由架構所提供，並處理：
 
@@ -48,14 +48,14 @@ Blazor WebAssembly裝載模型提供幾項優點：
 * 沒有 .NET 伺服器端相依性。 應用程式在下載至用戶端之後可完全正常運作。
 * 用戶端資源和功能已完全運用。
 * 工作會從伺服器卸載至用戶端。
-* 裝載應用程式不需要 ASP.NET 核心網頁伺服器。 無伺服器部署案例是可行的，例如，從內容傳遞網路提供應用程式 (CDN) 。
+* 不需要 ASP.NET Core web 伺服器來裝載應用程式。 無伺服器部署案例是可行的，例如，從內容傳遞網路提供應用程式 (CDN) 。
 
 Blazor WebAssembly裝載模型有下列限制：
 
 * 應用程式僅限於瀏覽器的功能。
 * 支援的用戶端硬體和軟體 (例如，需要 WebAssembly 支援) 。
 * 下載大小更大，而應用程式需要較長的時間才能載入。
-* .NET 執行時間和工具支援較不成熟。 例如，限制存在於 [.Net Standard](/dotnet/standard/net-standard) 支援和偵錯工具中。
+* .NET 執行時間和工具支援較不成熟。 例如， [.NET Standard](/dotnet/standard/net-standard) 支援和偵錯工具中有限制。
 
 若要建立 Blazor WebAssembly 應用程式，請參閱 <xref:blazor/tooling> 。
 
@@ -65,14 +65,14 @@ Blazor WebAssembly裝載模型有下列限制：
 
 使用 Blazor Server 裝載模型時，會在伺服器上從 ASP.NET Core 應用程式中執行應用程式。 UI 更新、事件處理及 JavaScript 呼叫會透過連接來處理 [SignalR](xref:signalr/introduction) 。
 
-![瀏覽器會與應用程式進行互動 (裝載在伺服器上的 ASP.NET Core 應用程式) 中，而不是透過：：：無 loc (SignalR) ：：： connection。](hosting-models/_static/blazor-server.png)
+![瀏覽器會與應用程式 (裝載在伺服器上 ASP.NET Core 應用程式) 的應用程式，而不是透過：：： no loc (SignalR) ：：： connection。](hosting-models/_static/blazor-server.png)
 
 ASP.NET Core 應用程式會參考要新增的應用程式 `Startup` 類別：
 
 * 伺服器端服務。
 * 要求處理管線的應用程式。
 
-在用戶端上， `blazor.server.js` 腳本會建立 SignalR 與伺服器之間的連接。 腳本是從 ASP.NET Core 共用架構中的內嵌資源提供給用戶端應用程式。 用戶端應用程式會視需要負責保存和還原應用程式狀態。 
+在用戶端上， `blazor.server.js` 腳本會建立 SignalR 與伺服器之間的連接。 從 ASP.NET Core 共用架構中的內嵌資源，將腳本提供給用戶端應用程式。 用戶端應用程式會視需要負責保存和還原應用程式狀態。 
 
 Blazor Server裝載模型提供幾項優點：
 
@@ -90,22 +90,22 @@ Blazor Server裝載模型有下列限制：
 * 通常會有較高的延遲。 每個使用者互動都牽涉到網路躍點。
 * 沒有離線支援。 如果用戶端連接失敗，應用程式就會停止運作。
 * 針對具有許多使用者的應用程式，擴充性相當困難。 伺服器必須管理多個用戶端連接並處理用戶端狀態。
-* 需要 ASP.NET 核心伺服器才能提供應用程式。 無法進行無伺服器部署案例，例如，從內容傳遞網路提供應用程式 (CDN) 。
+* 需要 ASP.NET Core 伺服器才能提供應用程式。 無法進行無伺服器部署案例，例如，從內容傳遞網路提供應用程式 (CDN) 。
 
 若要建立 Blazor Server 應用程式，請參閱 <xref:blazor/tooling> 。
 
-Blazor Server應用程式模型支援[Docker 容器](/dotnet/standard/microservices-architecture/container-docker-introduction/index)。 如需 visual studio 中的 Docker 支援，請在 visual studio 中的專案上按一下滑鼠右鍵，然後選取 [**新增**  >  **Docker 支援**]。
+Blazor Server應用程式模型支援[Docker 容器](/dotnet/standard/microservices-architecture/container-docker-introduction/index)。 如需 Visual Studio 中的 Docker 支援，請在 Visual Studio 中以滑鼠右鍵按一下專案，然後選取 [**新增**  >  **Docker 支援**]。
 
 ### <a name="comparison-to-server-rendered-ui"></a>與伺服器呈現的 UI 比較
 
-瞭解應用程式的其中一種方式 Blazor Server ，就是了解它與傳統模型之間的差異，以便在 ASP.NET Core 應用程式中使用 Razor 視圖或頁面呈現 UI Razor 。 這兩種模型都使用 [ Razor 語言](xref:mvc/views/razor)來描述要轉譯的 HTML 內容，但在轉譯標記的 *方式* 上會有很大的差異。
+瞭解應用程式的其中一種方式 Blazor Server ，就是了解它與傳統模型之間的差異，以使用 Razor 視圖或頁面在 ASP.NET Core 應用程式中呈現 UI Razor 。 這兩種模型都使用 [ Razor 語言](xref:mvc/views/razor)來描述要轉譯的 HTML 內容，但在轉譯標記的 *方式* 上會有很大的差異。
 
 轉譯 Razor 頁面或視圖時，每一行程式碼都會 Razor 以文字形式發出 HTML。 轉譯之後，伺服器會處置頁面或視圖實例，包括任何已產生的狀態。 當頁面出現另一個要求時，例如伺服器驗證失敗並顯示驗證摘要時：
 
 * 整個頁面會再次保存至 HTML 文字。
 * 頁面會傳送至用戶端。
 
-Blazor應用程式是由 UI 的可重複使用元素所組成，稱為「*元件*」。 元件包含 c # 程式碼、標記和其他元件。 轉譯元件時，會 Blazor 產生類似于 HTML 或 XML 檔物件模型的包含元件圖形 (DOM) 。 此圖表包含屬性和欄位中保留的元件狀態。 Blazor 評估元件圖形，以產生標記的二進位標記法。 二進位格式可以是：
+Blazor應用程式是由 UI 的可重複使用元素所組成，稱為「*元件*」。 元件包含 c # 程式碼、標記和其他元件。 轉譯元件時，會 Blazor 產生類似于 HTML 或 XML 檔物件模型 (DOM) 的包含元件圖形。 此圖表包含屬性和欄位中保留的元件狀態。 Blazor 評估元件圖形，以產生標記的二進位標記法。 二進位格式可以是：
 
 * 在倒轉) 期間轉換成 HTML 文字 (&dagger; 。
 * 用來在一般轉譯期間有效率地更新標記。
@@ -129,7 +129,7 @@ Blazor Server應用程式是以[ASP.NET Core SignalR ](xref:signalr/introduction
 
 Blazor 考慮關閉瀏覽器索引標籤，或流覽至外部 URL 的 *正常* 終止。 當正常終止時，會立即釋出電路和相關聯的資源。 用戶端也可能會因為網路中斷而無法正常地中斷連線。 Blazor Server 儲存已中斷連線的線路以進行可設定的間隔，以允許用戶端重新連線。
 
-Blazor Server 允許程式碼定義迴圈 *處理常式*，以允許在使用者的線路狀態變更時執行程式碼。 如需詳細資訊，請參閱<xref:blazor/advanced-scenarios#blazor-server-circuit-handler>。
+Blazor Server 允許程式碼定義迴圈 *處理常式*，以允許在使用者的線路狀態變更時執行程式碼。 如需詳細資訊，請參閱<xref:blazor/fundamentals/signalr?pivots=server#blazor-server-circuit-handler>。
 
 ### <a name="ui-latency"></a>UI 延遲
 

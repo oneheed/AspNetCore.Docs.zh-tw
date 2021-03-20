@@ -19,12 +19,12 @@ no-loc:
 - SignalR
 - Models
 uid: tutorials/first-web-api
-ms.openlocfilehash: f80c574ddb85c50713e36c7a2cceb826863c7321
-ms.sourcegitcommit: 00368bb6a5420983beaced5b62dabc1f94abdeba
+ms.openlocfilehash: 99b3b4af31683feb10c01d1a7297a3489b01c797
+ms.sourcegitcommit: 1f35de0ca9ba13ea63186c4dc387db4fb8e541e0
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 03/16/2021
-ms.locfileid: "103557838"
+ms.lasthandoff: 03/20/2021
+ms.locfileid: "104711694"
 ---
 # <a name="tutorial-create-a-web-api-with-aspnet-core"></a>教學課程：使用 ASP.NET Core 建立 Web API
 
@@ -82,7 +82,7 @@ ms.locfileid: "103557838"
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
 * 從 [ **檔案** ] 功能表選取 [ **新增** > **專案**]。
-* 選取 [ **ASP.NET Core WEB API** ] 範本，然後按 **[下一步]**。
+* 選取 **ASP.NET Core WEB API** 範本，然後按 **[下一步]**。
 * 將專案命名為 *TodoApi*，然後按一下 [建立]。
 * 在 [ **建立新的 ASP.NET Core Web 應用程式** ] 對話方塊中，確認已選取 [ **.net Core** ] 和 [ **ASP.NET Core 5.0** ]。 選取 **API** 範本，然後按一下 [建立]。
 
@@ -144,7 +144,7 @@ ms.locfileid: "103557838"
 
 [!INCLUDE[](~/includes/trustCertVS.md)]
 
-  Visual Studio 會啟動：
+  Visual Studio 啟動：
 
 * IIS Express web 伺服器。
 * 預設瀏覽器並流覽至 `https://localhost:<port>/swagger/index.html` ，其中 `<port>` 是隨機播放的埠號碼。
@@ -167,6 +167,8 @@ Swagger 頁面隨即 `/swagger/index.html` 顯示。 選取 [**立即**  >  **�
 * 用來測試 WeatherForecast API 的 URL。
 * 回應碼、主體和標頭。
 * 具有媒體類型的下拉式清單方塊，以及範例值和架構。
+
+如果 Swagger 頁面未出現，請參閱 [此 GitHub 問題](https://github.com/dotnet/AspNetCore.Docs/issues/21647)。
 
 <!-- Review: Do we care the IE generates several errors. It shows the data, but with  Unrecognized response type; displaying content as text.
 -->
@@ -227,7 +229,7 @@ Swagger 可用來產生 web Api 的實用檔和說明頁面。 本教學課程�
 
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
-* 在 [ **方案 Explorer**] 中，以滑鼠右鍵按一下專案。 選取 **[**  >  **新增資料夾**]。 為資料夾命名 *Models* 。
+* 在 **方案總管** 中，以滑鼠右鍵按一下專案。 選取 **[**  >  **新增資料夾**]。 為資料夾命名 *Models* 。
 
 * 以滑鼠右鍵按一下 *Models* 資料夾，然後選取 [**加入**  >  **類別**]。 將類別命名為 *TodoItem*，然後選取 [新增]。
 
@@ -292,7 +294,7 @@ Swagger 可用來產生 web Api 的實用檔和說明頁面。 本教學課程�
 
 在 ASP.NET Core 中，資料庫內容等服務必須向[相依性插入 (DI)](xref:fundamentals/dependency-injection) 容器註冊。 此容器會將服務提供給控制器。
 
-使用下列程式碼更新 *Startup.cs* ：
+使用下列程式碼來更新 *啟動 .cs* ：
 
 [!code-csharp[](first-web-api/samples/5.x/TodoApi/Startup.cs?highlight=7-8,23-24&name=snippet_all)]
 
@@ -341,7 +343,7 @@ dotnet aspnet-codegenerator controller -name TodoItemsController -async -api -m 
 * 標記具有屬性的類別 [`[ApiController]`](xref:Microsoft.AspNetCore.Mvc.ApiControllerAttribute) 。 這個屬性表示控制器會回應 Web API 要求。 如需屬性所啟用之特定行為的相關資訊，請參閱 <xref:web-api/index>。
 * 使用 DI 將資料庫內容 (`TodoContext`) 插入到控制器中。 控制器中的每一個 [CRUD](https://wikipedia.org/wiki/Create,_read,_update_and_delete) 方法都會使用資料庫內容。
 
-的 ASP.NET 核心範本：
+的 ASP.NET Core 範本：
 
 * 具有 views 的控制器包含 `[action]` 在路由範本中。
 * API 控制器不包含 `[action]` 在路由範本中。
@@ -716,7 +718,7 @@ DTO 可以用來：
 
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
-* 在 [ **方案 Explorer**] 中，以滑鼠右鍵按一下專案。 選取 **[**  >  **新增資料夾**]。 為資料夾命名 *Models* 。
+* 在 **方案總管** 中，以滑鼠右鍵按一下專案。 選取 **[**  >  **新增資料夾**]。 為資料夾命名 *Models* 。
 
 * 以滑鼠右鍵按一下 *Models* 資料夾，然後選取 [**加入**  >  **類別**]。 將類別命名為 *TodoItem*，然後選取 [新增]。
 
@@ -829,7 +831,7 @@ dotnet aspnet-codegenerator controller -name TodoItemsController -async -api -m 
 * 標記具有屬性的類別 [`[ApiController]`](xref:Microsoft.AspNetCore.Mvc.ApiControllerAttribute) 。 這個屬性表示控制器會回應 Web API 要求。 如需屬性所啟用之特定行為的相關資訊，請參閱 <xref:web-api/index>。
 * 使用 DI 將資料庫內容 (`TodoContext`) 插入到控制器中。 控制器中的每一個 [CRUD](https://wikipedia.org/wiki/Create,_read,_update_and_delete) 方法都會使用資料庫內容。
 
-的 ASP.NET 核心範本：
+的 ASP.NET Core 範本：
 
 * 具有 views 的控制器包含 `[action]` 在路由範本中。
 * API 控制器不包含 `[action]` 在路由範本中。
@@ -1158,7 +1160,7 @@ DTO 可以用來：
 
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
-* 在 [ **方案 Explorer**] 中，以滑鼠右鍵按一下專案。 選取 **[**  >  **新增資料夾**]。 為資料夾命名 *Models* 。
+* 在 **方案總管** 中，以滑鼠右鍵按一下專案。 選取 **[**  >  **新增資料夾**]。 為資料夾命名 *Models* 。
 
 * 以滑鼠右鍵按一下 *Models* 資料夾，然後選取 [**加入**  >  **類別**]。 將類別命名為 *TodoItem*，然後選取 [新增]。
 
@@ -1501,4 +1503,4 @@ jQuery 會使用要求主體中的待辦事項來傳送 HTTP POST 要求。 `acc
 * <xref:host-and-deploy/azure-apps/index>
 * <xref:host-and-deploy/index>
 * [本教學課程的 YouTube 版本](https://www.youtube.com/watch?v=TTkhEyGBfAk)
-* [Microsoft 瞭解：使用 ASP.NET Core 建立 web API](/learn/modules/build-web-api-aspnet-core/)
+* [Microsoft Learn：使用 ASP.NET Core 建立 web API](/learn/modules/build-web-api-aspnet-core/)

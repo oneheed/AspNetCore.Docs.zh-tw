@@ -18,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: grpc/browser
-ms.openlocfilehash: 0967a70b498156d9c4ea8818ee1c80b37d9f2d87
-ms.sourcegitcommit: 7e394a8527c9818caebb940f692ae4fcf2f1b277
+ms.openlocfilehash: 389915e17234d9e8bf0f03e83948daf83d479d8d
+ms.sourcegitcommit: 1f35de0ca9ba13ea63186c4dc387db4fb8e541e0
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 01/31/2021
-ms.locfileid: "99217475"
+ms.lasthandoff: 03/20/2021
+ms.locfileid: "104711265"
 ---
 # <a name="use-grpc-in-browser-apps"></a>在瀏覽器應用程式中使用 gRPC
 
@@ -52,7 +52,7 @@ ASP.NET Core 中裝載的 gRPC 服務可以設定為支援 gRPC Web 和 HTTP/2 g
 若要使用 ASP.NET Core gRPC 服務來啟用 gRPC-Web：
 
 * 將參考新增至 [Grpc. AspNetCore. Web](https://www.nuget.org/packages/Grpc.AspNetCore.Web) 封裝。
-* 將應用程式新增至 Startup.cs，以將應用程式設定為使用 gRPC-Web `UseGrpcWeb` `EnableGrpcWeb` ： 
+* 將應用程式新增至 Startup，以將應用程式設定為使用 gRPC Web `UseGrpcWeb` `EnableGrpcWeb` *。 .cs*：
 
 [!code-csharp[](~/grpc/browser/sample/Startup.cs?name=snippet_1&highlight=10,14)]
 
@@ -135,7 +135,7 @@ ASP.NET Core 中裝載的 gRPC 服務可以設定為支援 gRPC Web 和 HTTP/2 g
 
 ### <a name="use-grpc-client-factory-with-grpc-web"></a>使用 gRPC client factory 搭配 gRPC-Web
 
-您可以使用 gRPC 與 [HttpClientFactory](xref:System.Net.Http.IHttpClientFactory)的整合來建立 gRPC Web 相容的 .net 用戶端。
+您可以使用 [gRPC 用戶端 factory](xref:grpc/clientfactory)來建立 gRPC Web 相容的 .net 用戶端。
 
 若要使用 gRPC-Web 搭配用戶端 factory：
 
@@ -147,12 +147,12 @@ ASP.NET Core 中裝載的 gRPC 服務可以設定為支援 gRPC Web 和 HTTP/2 g
 
 ```csharp
 builder.Services
-    .AddGrpcClient<Greet.GreeterClient>((services, options) =>
+    .AddGrpcClient<Greet.GreeterClient>(options =>
     {
         options.Address = new Uri("https://localhost:5001");
     })
     .ConfigurePrimaryHttpMessageHandler(
-        () => new GrpcWebHandler(GrpcWebMode.GrpcWebText, new HttpClientHandler()));
+        () => new GrpcWebHandler(new HttpClientHandler()));
 ```
 
 如需詳細資訊，請參閱<xref:grpc/clientfactory>。

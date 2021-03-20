@@ -18,18 +18,18 @@ no-loc:
 - SignalR
 - Kestrel
 uid: aspnetcore-5.0
-ms.openlocfilehash: 64e068194744d6c5495d8ecaf31076c7a1c1f349
-ms.sourcegitcommit: 54fe1ae5e7d068e27376d562183ef9ddc7afc432
+ms.openlocfilehash: 75f4a49777f610a2486279c946968c300a740b52
+ms.sourcegitcommit: 1f35de0ca9ba13ea63186c4dc387db4fb8e541e0
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 03/10/2021
-ms.locfileid: "102585795"
+ms.lasthandoff: 03/20/2021
+ms.locfileid: "104711025"
 ---
 # <a name="whats-new-in-aspnet-core-50"></a>ASP.NET Core 5.0 的新功能
 
-本文強調 ASP.NET Core 5.0 中最重要的變更，以及相關檔的連結。
+本文將重點說明 ASP.NET Core 5.0 中最重要的變更，以及相關檔的連結。
 
-## <a name="aspnet-core-mvc-and-razor-improvements"></a>ASP.NET 核心 MVC 和 Razor 改進
+## <a name="aspnet-core-mvc-and-razor-improvements"></a>ASP.NET Core MVC 和 Razor 改進
 
 ### <a name="model-binding-datetime-as-utc"></a>模型系結日期時間（UTC）
 
@@ -118,13 +118,13 @@ see https://docs.microsoft.com/aspnet/core/mvc/models/validation?view=aspnetcore
 
 #### <a name="azure-api-management-import"></a>Azure API 管理匯入
 
-ASP.NET 核心 API 專案啟用 OpenAPI 時，Visual Studio 2019 16.8 版和更新版本的發行會自動在發佈流程中提供額外的步驟。 使用 [AZURE API 管理](xref:tutorials/publish-to-azure-api-management-using-vs) 的開發人員有機會在發佈流程期間，自動將 api 匯入至 Azure api 管理：
+ASP.NET Core API 專案啟用 OpenAPI 時，Visual Studio 2019 16.8 版和更新版本的發行會自動在發佈流程中提供額外的步驟。 使用 [AZURE API 管理](xref:tutorials/publish-to-azure-api-management-using-vs) 的開發人員有機會在發佈流程期間，自動將 api 匯入至 Azure api 管理：
 
 ![Azure API 管理匯入與發佈](~/release-notes/static/publish-to-apim.png)
 
 ### <a name="better-launch-experience-for-web-api-projects"></a>更好的 web API 專案啟動體驗
 
-OpenAPI 預設為啟用，web API 開發人員的應用程式啟動體驗 (F5) 可大幅改善。 使用 ASP.NET Core 5.0，web API 範本已預先設定為可載入 Swagger UI 頁面。 Swagger UI 頁面提供針對已發佈 API 新增的檔，並可讓您按一下就能測試 Api。
+OpenAPI 預設為啟用，web API 開發人員的應用程式啟動體驗 (F5) 可大幅改善。 使用 ASP.NET Core 5.0 時，會預先設定 web API 範本以載入 Swagger UI 頁面。 Swagger UI 頁面提供針對已發佈 API 新增的檔，並可讓您按一下就能測試 Api。
 
 ![swagger/index.html 視圖](~/release-notes/static/swagger-ui-page-rc1.png)
 
@@ -132,7 +132,7 @@ OpenAPI 預設為啟用，web API 開發人員的應用程式啟動體驗 (F5) �
 
 ### <a name="performance-improvements"></a>效能改善
 
-針對 .NET 5，我們對執行時間效能進行了大幅改善， Blazor WebAssembly 並將焦點放在複雜的 UI 轉譯和 JSON 序列化。 在我們的效能測試中， Blazor WebAssembly 在大部分情況下，.net 5 的速度會快二到三倍。 如需詳細資訊，請參閱 [ASP.NET Blog：在 .net 5 候選版1中 ASP.NET 核心更新](https://devblogs.microsoft.com/aspnet/asp-net-core-updates-in-net-5-release-candidate-1/#blazor-webassembly-performance-improvements)。
+針對 .NET 5，我們對執行時間效能進行了大幅改善， Blazor WebAssembly 並將焦點放在複雜的 UI 轉譯和 JSON 序列化。 在我們的效能測試中， Blazor WebAssembly 在大部分情況下，.net 5 的速度會快二到三倍。 如需詳細資訊，請參閱 [ASP.NET Blog： .net 5 候選版1中的 ASP.NET Core 更新](https://devblogs.microsoft.com/aspnet/asp-net-core-updates-in-net-5-release-candidate-1/#blazor-webassembly-performance-improvements)。
 
 ### <a name="css-isolation"></a>CSS 隔離
 
@@ -152,7 +152,7 @@ Blazor 具有內建 `InputRadio` 和 `InputRadioGroup` 元件，可簡化資料�
 
 ### <a name="ontoggle-event-support"></a>`ontoggle` 事件支援
 
-Blazor 事件現在支援 `ontoggle` DOM 事件。 如需詳細資訊，請參閱<xref:blazor/components/event-handling#event-argument-types>。
+Blazor 事件現在支援 `ontoggle` DOM 事件。 如需詳細資訊，請參閱<xref:blazor/components/event-handling#event-arguments>。
 
 ### <a name="set-ui-focus-in-blazor-apps"></a>在應用程式中設定 UI 焦點 Blazor
 
@@ -186,7 +186,7 @@ Blazor 啟用標準 [javascript 模組](https://developer.mozilla.org/docs/Web/J
 
 ### <a name="debugging-improvements"></a>偵錯改進
 
-Blazor WebAssemblyASP.NET Core 5.0 中的偵錯工具已獲得改善。 此外，Visual Studio for Mac 現在支援偵錯工具。 如需詳細資訊，請參閱<xref:blazor/debug>。
+Blazor WebAssemblyASP.NET Core 5.0 中已改善偵錯工具的功能。 此外，Visual Studio for Mac 上現在支援偵錯工具。 如需詳細資訊，請參閱<xref:blazor/debug>。
 
 ### <a name="microsoft-identity-v20-and-msal-v20"></a>Microsoft v2.0 Identity 和 MSAL 2.0 版
 
@@ -194,7 +194,7 @@ Blazor 安全性現在使用 Microsoft v2.0 Identity ([`Microsoft.Identity.Web`]
 
 ### <a name="protected-browser-storage-for-blazor-server"></a>受保護的瀏覽器存放裝置 Blazor Server
 
-Blazor Server 應用程式現在可以使用內建支援將應用程式狀態儲存在瀏覽器中，以防止使用 ASP.NET Core 資料保護進行篡改。 資料可以儲存在本機瀏覽器儲存體或會話儲存體中。 如需詳細資訊，請參閱<xref:blazor/state-management>。
+Blazor Server 應用程式現在可以使用內建的支援，在瀏覽器中儲存應用程式狀態，以防止使用 ASP.NET Core 資料保護進行篡改。 資料可以儲存在本機瀏覽器儲存體或會話儲存體中。 如需詳細資訊，請參閱<xref:blazor/state-management>。
 
 ### <a name="blazor-webassembly-prerendering"></a>Blazor WebAssembly 預
 
@@ -202,7 +202,7 @@ Blazor Server 應用程式現在可以使用內建支援將應用程式狀態儲
 
 ### <a name="trimminglinking-improvements"></a>修剪/連結改進
 
-Blazor WebAssembly 在組建期間執行中繼語言 (IL) 修剪/連結，以從應用程式的輸出元件中修剪不必要的 IL。 隨著 ASP.NET Core 5.0 的發行， Blazor WebAssembly 利用額外的設定選項來執行改良的修剪。 如需詳細資訊，請參閱 <xref:blazor/host-and-deploy/configure-trimmer> 和 [修剪選項](/dotnet/core/deploying/trimming-options)。
+Blazor WebAssembly 在組建期間執行中繼語言 (IL) 修剪/連結，以從應用程式的輸出元件中修剪不必要的 IL。 在 ASP.NET Core 5.0 的版本中，會 Blazor WebAssembly 使用其他設定選項來執行改良的修剪。 如需詳細資訊，請參閱 <xref:blazor/host-and-deploy/configure-trimmer> 和 [修剪選項](/dotnet/core/deploying/trimming-options)。
 
 ### <a name="browser-compatibility-analyzer"></a>瀏覽器相容性分析器
 
@@ -287,7 +287,7 @@ See [Update SignalR code](xref:migration/31-to-50#signalr) for migration instruc
 * 選取的憑證
 * 用戶端憑證模式
 
-設定可讓您根據指定的伺服器名稱來指定所選取的憑證。 伺服器名稱是伺服器名稱指示的一部分， (SNI) 擴充至 TLS 通訊協定（如用戶端所指示）。 Kestrel的設定也支援主機名稱中的萬用字元前置詞。
+設定可讓您根據指定的伺服器名稱來指定所選取的憑證。 伺服器名稱屬於 TLS 通訊協定伺服器名稱指示 (SNI) 擴充功能的一部分，如用戶端所指示。 Kestrel的設定也支援主機名稱中的萬用字元前置詞。
 
 下列範例示範如何使用設定檔來指定端點專用：
 
@@ -326,7 +326,7 @@ See [Update SignalR code](xref:migration/31-to-50#signalr) for migration instruc
 }
 ```
 
-伺服器名稱指示 (SNI) 是 TLS 延伸模組，可在 SSL 協調中包含虛擬網域。 這實際上是指虛擬功能變數名稱（或主機名稱）可以用來識別網路端點。
+伺服器名稱指示 (SNI) 是 TLS 延伸模組，可將虛擬網域納入 SSL 協商的一部分。 這實際上是指虛擬功能變數名稱（或主機名稱）可以用來識別網路端點。
 
 ## <a name="performance-improvements"></a>效能改善
 
@@ -355,16 +355,16 @@ See [Update SignalR code](xref:migration/31-to-50#signalr) for migration instruc
 
 ### <a name="containers"></a>容器
 
-在 .NET 5.0 之前，針對 ASP.NET Core 應用程式建立和發佈 *Dockerfile* 需要提取整個 .NET Core SDK 和 ASP.NET Core 映射。 在此版本中，將會減少提取 SDK 映射位元組，並大幅消除 ASP.NET 核心映射提取的位元組。 如需詳細資訊，請參閱 [此 GitHub 問題批註](https://github.com/dotnet/dotnet-docker/issues/1814#issuecomment-625294750)。
+在 .NET 5.0 之前，為 ASP.NET Core 應用程式建立和發佈 *Dockerfile* 需要提取整個 .NET Core SDK 和 ASP.NET Core 映射。 在此版本中，會減少提取 SDK 映射位元組，並大幅消除 ASP.NET Core 映射提取的位元組。 如需詳細資訊，請參閱 [此 GitHub 問題批註](https://github.com/dotnet/dotnet-docker/issues/1814#issuecomment-625294750)。
 
 ## <a name="authentication-and-authorization"></a>驗證與授權
 
-### <a name="azure-active-directory-authentication-with-microsoftidentityweb"></a>使用 Microsoft 的 Azure Active Directory 驗證 Identity 。Web
+### <a name="azure-active-directory-authentication-with-microsoftidentityweb"></a>使用 Microsoft 驗證 Identity Azure Active Directory。Web
 
-ASP.NET Core 專案範本現在會與整合， <xref:Microsoft.Identity.Web?displayProperty=fullName> 以使用 [Azure Active Directory](/azure/active-directory/fundamentals/active-directory-whatis) (azure AD) 來處理驗證。 [Microsoft ... IdentityWeb 套件](https://www.nuget.org/packages/Microsoft.Identity.Web/)提供：
+ASP.NET Core 專案範本現在會與整合， <xref:Microsoft.Identity.Web?displayProperty=fullName> 以使用 [Azure Active Directory](/azure/active-directory/fundamentals/active-directory-whatis) (Azure AD) 來處理驗證。 [Microsoft ... IdentityWeb 套件](https://www.nuget.org/packages/Microsoft.Identity.Web/)提供：
 
 * 透過 Azure AD 進行驗證的更佳體驗。
-* 代表您的使用者（包括 [Microsoft Graph](/graph/overview)）存取 Azure 資源的更簡單方法。 請參閱 [Microsoft ... IdentityWeb 範例](https://github.com/Azure-Samples/active-directory-aspnetcore-webapp-openidconnect-v2)，其開頭為基本登入，並透過多租使用者的進展、使用 Azure api、使用 Microsoft Graph，以及保護您自己的 api。 `Microsoft.Identity.Web` 可與 .NET 5 一起使用。
+* 代表您的使用者輕鬆存取 Azure 資源的方式，包括 [Microsoft Graph](/graph/overview)。 請參閱 [Microsoft ... IdentityWeb 範例](https://github.com/Azure-Samples/active-directory-aspnetcore-webapp-openidconnect-v2)，使用 Azure api、使用 Microsoft Graph 和保護您自己的 api，從基本登入開始，並透過多租使用者前進。 `Microsoft.Identity.Web` 可與 .NET 5 一起使用。
 
 ### <a name="allow-anonymous-access-to-an-endpoint"></a>允許匿名存取端點
 
@@ -390,7 +390,7 @@ ASP.NET Core 專案範本現在會與整合， <xref:Microsoft.Identity.Web?disp
 
 您可以從 `HttpRequest` 和 `HttpResponse` 使用新的 <xref:System.Net.Http.Json.HttpContentJsonExtensions.ReadFromJsonAsync%2A> 和 `WriteAsJsonAsync` 擴充方法，讀取和寫入 JSON 資料。 這些擴充方法會使用序列化程式 [ 上的System.Text.Js](xref:System.Text.Json) 來處理 JSON 資料。 新的 `HasJsonContentType` 擴充方法也可以檢查要求是否有 JSON 內容類型。
 
-JSON 擴充方法可以與 [端點路由](xref:fundamentals/routing) 結合，以程式設計的方式來建立 json api，我們會呼叫程式 ***代碼的路由***。 如果開發人員想要以輕量方式建立基本的 JSON Api，這是新的選項。 例如，只有少數端點的 web 應用程式，可能會選擇使用路由傳送至程式碼，而不是 ASP.NET 核心 MVC 的完整功能：
+JSON 擴充方法可以與 [端點路由](xref:fundamentals/routing) 結合，以程式設計的方式來建立 json api，我們會呼叫程式 ***代碼的路由***。 如果開發人員想要以輕量方式建立基本的 JSON Api，這是新的選項。 例如，只有少數幾個端點的 web 應用程式，可能會選擇使用路由傳送至程式碼，而不是 ASP.NET Core MVC 的完整功能：
 
 ```csharp
 endpoints.MapGet("/weather/{city:alpha}", async context =>
@@ -406,7 +406,7 @@ endpoints.MapGet("/weather/{city:alpha}", async context =>
 
 ### <a name="systemdiagnosticsactivity"></a>系統診斷。活動
 
-預設格式現在預設 <xref:System.Diagnostics.Activity?displayProperty=fullName> 為 W3C 格式。 這使得 ASP.NET Core 中的分散式追蹤支援在預設情況下可與更多架構互通。
+預設格式現在預設 <xref:System.Diagnostics.Activity?displayProperty=fullName> 為 W3C 格式。 這使得 ASP.NET Core 中的分散式追蹤支援，在預設情況下可與更多架構互通。
 
 ### <a name="frombodyattribute"></a>FromBodyAttribute
 
@@ -422,7 +422,7 @@ public IActionResult Post([FromBody(EmptyBodyBehavior = EmptyBodyBehavior.Allow)
 
 ## <a name="miscellaneous-improvements"></a>其他改進
 
-我們已開始將 [可為 null 的注釋](/dotnet/csharp/nullable-references#attributes-describe-apis) 套用至 ASP.NET 核心元件。 我們計畫對大部分的 .NET 5 framework 公用 API 介面加上批註。 <!-- Review: what's the impact of this? How does it work? Need more info.  Check the link I added -->
+我們已開始將 [可為 null 的注釋](/dotnet/csharp/nullable-references#attributes-describe-apis) 套用至 ASP.NET Core 元件。 我們計畫對大部分的 .NET 5 framework 公用 API 介面加上批註。 <!-- Review: what's the impact of this? How does it work? Need more info.  Check the link I added -->
 
 ### <a name="control-startup-class-activation"></a>控制啟動類別啟用
 
@@ -448,7 +448,7 @@ public class Program
 
 ### <a name="auto-refresh-with-dotnet-watch"></a>使用 dotnet 監看自動重新整理
 
-在 .NET 5 中，在 ASP.NET Core 專案上執行 [dotnet watch](xref:tutorials/dotnet-watch) 會啟動預設瀏覽器，並在對程式碼進行變更時自動重新整理瀏覽器。 這表示您可以：
+在 .NET 5 中，在 ASP.NET Core 專案上執行 [dotnet watch](xref:tutorials/dotnet-watch) 都會啟動預設的瀏覽器，並在對程式碼進行變更時自動重新整理瀏覽器。 這表示您可以：
 
 * 在文字編輯器中開啟 ASP.NET Core 專案。
 * 執行 `dotnet watch`。

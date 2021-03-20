@@ -1,5 +1,5 @@
 ---
-title: 適用于 ASP.NET Core 的 razor 語法參考
+title: Razor ASP.NET Core 的語法參考
 author: rick-anderson
 description: 瞭解將 Razor 以伺服器為基礎的程式碼內嵌到網頁中的標記語法。
 ms.author: riande
@@ -17,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: mvc/views/razor
-ms.openlocfilehash: 60471232b3373039404b27c4afd1a1725d4d21eb
-ms.sourcegitcommit: 54fe1ae5e7d068e27376d562183ef9ddc7afc432
+ms.openlocfilehash: 395d6b623cfd9310d8b92f822ddb82db8b38cdd8
+ms.sourcegitcommit: 1f35de0ca9ba13ea63186c4dc387db4fb8e541e0
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 03/10/2021
-ms.locfileid: "102586861"
+ms.lasthandoff: 03/20/2021
+ms.locfileid: "104711668"
 ---
 # <a name="razor-syntax-reference-for-aspnet-core"></a>Razor ASP.NET Core 的語法參考
 
@@ -140,7 +140,7 @@ HTML 屬性及含有電子郵件地址的內容不會將 `@` 符號視為轉換�
 
 HTML 會以純文字的形式顯示在瀏覽器中：
 
-&lt;跨越 &gt; Hello World &lt; /span&gt;
+&lt;&gt;/span 範圍 Hello World &lt;&gt;
 
 `HtmlHelper.Raw` 輸出不會經過編碼，而是轉譯為 HTML 標記。
 
@@ -914,7 +914,7 @@ public class Pet
 * `inherits`
 * `model`
 * `section`
-* `helper` ASP.NET Core) 目前不支援 (
+* `helper` (目前 ASP.NET Core) 不支援
 
 Razor 關鍵字會使用 `@(Razor Keyword)` (來進行轉義，例如， `@(functions)`) 。
 
@@ -945,7 +945,7 @@ C # Razor 關鍵字必須以 (進行雙重換用 `@(@C# Razor Keyword)` ，例�
 
 ::: moniker range=">= aspnetcore-2.1"
 
-使用 .NET Core SDK 2.1 或更新版本時， [ Razor SDK](xref:razor-pages/sdk)會處理檔案的編譯 Razor 。 建立專案時，SDK 會 Razor 在專案根目錄中產生一個 *obj/<build_configuration>/<Razor target_framework_moniker>/* 目錄。 目錄中的目錄結構會 *Razor* 鏡像專案的目錄結構。
+在 .NET Core SDK 2.1 或更新版本中， [ Razor SDK](xref:razor-pages/sdk)會處理檔案的編譯 Razor 。 建立專案時，SDK 會 Razor 在專案根目錄中產生一個 *obj/<build_configuration>/<Razor target_framework_moniker>/* 目錄。 目錄中的目錄結構會 *Razor* 鏡像專案的目錄結構。
 
 在以 .NET Core 2.1 為目標的 ASP.NET Core 2.1 頁面專案中，請考慮下列目錄結構 Razor ：
 

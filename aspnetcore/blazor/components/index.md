@@ -1,5 +1,5 @@
 ---
-title: 建立和使用 ASP.NET 核心 Razor 元件
+title: 建立和使用 ASP.NET Core Razor 元件
 author: guardrex
 description: 瞭解如何建立和使用 Razor 元件，包括如何系結至資料、處理事件，以及管理元件生命週期。
 monikerRange: '>= aspnetcore-3.1'
@@ -19,14 +19,14 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/components/index
-ms.openlocfilehash: 7048fe7107fb71d632bf12df9d53e6f168d5a0db
-ms.sourcegitcommit: 54fe1ae5e7d068e27376d562183ef9ddc7afc432
+ms.openlocfilehash: f44eef1ebf98958e6e6ab78b4a50b24b32e2ad1e
+ms.sourcegitcommit: 1f35de0ca9ba13ea63186c4dc387db4fb8e541e0
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 03/10/2021
-ms.locfileid: "102587459"
+ms.lasthandoff: 03/20/2021
+ms.locfileid: "104711343"
 ---
-# <a name="create-and-use-aspnet-core-razor-components"></a>建立和使用 ASP.NET 核心 Razor 元件
+# <a name="create-and-use-aspnet-core-razor-components"></a>建立和使用 ASP.NET Core Razor 元件
 
 [查看或下載範例程式碼](https://github.com/dotnet/AspNetCore.Docs/tree/main/aspnetcore/blazor/common/samples/) ([如何下載](xref:index#how-to-download-a-sample)) 
 
@@ -38,7 +38,7 @@ Blazor 應用程式是使用 *元件* 建立的。 元件是獨立的使用者�
 
 ### <a name="razor-syntax"></a>Razor 語法
 
-Razor 應用程式中的元件會 Blazor 廣泛使用 Razor 語法。 如果您不熟悉 Razor 標記語言，建議您先閱讀[ Razor ASP.NET Core 的語法參考](xref:mvc/views/razor)，再繼續進行。
+Razor 應用程式中的元件會 Blazor 廣泛使用 Razor 語法。 如果您不熟悉 Razor 標記語言，建議您 <xref:mvc/views/razor> 在繼續之前先閱讀。
 
 存取語法上的內容時 Razor ，請特別注意下列各節：
 
@@ -465,7 +465,7 @@ public string Title { get; set; } = "Panel Title from Child";
   }
   ```
   
-如需詳細資訊，請參閱[ Razor ASP.NET Core 的語法參考](xref:mvc/views/razor)。
+如需詳細資訊，請參閱<xref:mvc/views/razor>。
 
 > [!WARNING]
 > 請勿建立會寫入其本身 *元件參數* 的元件，而是改用私用欄位。 如需詳細資訊，請參閱 [覆寫的參數](#overwritten-parameters) 一節。
@@ -1029,7 +1029,7 @@ HTML 元素屬性是根據 .NET 值以有條件的形式呈現。 如果值為 `
 <input type="checkbox" />
 ```
 
-如需詳細資訊，請參閱[ Razor ASP.NET Core 的語法參考](xref:mvc/views/razor)。
+如需詳細資訊，請參閱<xref:mvc/views/razor>。
 
 > [!WARNING]
 > 當 .NET 類型為時，某些 HTML 屬性（例如 [`aria-pressed`](https://developer.mozilla.org/docs/Web/Accessibility/ARIA/Roles/button_role#Toggle_buttons) ）無法正常運作 `bool` 。 在這些情況下，請使用型別， `string` 而不是 `bool` 。
@@ -1088,7 +1088,7 @@ HTML 元素屬性是根據 .NET 值以有條件的形式呈現。 如果值為 `
 
 ## <a name="static-assets"></a>靜態資產
 
-Blazor遵循將靜態資產放置於專案[ `web root (wwwroot)` 資料夾](xref:fundamentals/index#web-root)底下的 ASP.NET Core 應用程式慣例。
+Blazor遵循 ASP.NET Core 應用程式將靜態資產放置於專案[ `web root (wwwroot)` 資料夾](xref:fundamentals/index#web-root)底下的慣例。
 
 使用基底相對路徑 (`/`) 參考靜態資產的 web 根目錄。 在下列範例中， `logo.png` 實際上是位於資料夾中 `{PROJECT ROOT}/wwwroot/images` ：
 
@@ -1143,7 +1143,7 @@ Razor 元件 () **不** 支援波狀符號斜線標記法 `~/` 。
 
 ::: moniker range="< aspnetcore-5.0"
 
-空白會保留在元件的原始程式碼中。 即使沒有視覺效果，也會在瀏覽器的檔物件模型中，將純空白字元轉譯 (DOM) 。
+空白會保留在元件的原始程式碼中。 即使沒有視覺效果，也會在瀏覽器的檔物件模型 (DOM) 中呈現僅限空白字元的文字。
 
 請考慮下列 Razor 元件程式碼：
 
@@ -1185,13 +1185,13 @@ Razor 元件 () **不** 支援波狀符號斜線標記法 `~/` 。
 * <xref:blazor/security/server/threat-mitigation>：包含建立 Blazor Server 必須與資源耗盡相關之應用程式的指引。
 
 <!--Reference links in article-->
-[1]: <xref:mvc/views/razor#code> "：：：非 loc (Razor) ：：： ASP.NET Core 的語法參考"
-[2]: <xref:mvc/views/razor#using> "：：：非 loc (Razor) ：：： ASP.NET Core 的語法參考"
-[3]: <xref:mvc/views/razor#attributes> "：：：非 loc (Razor) ：：： ASP.NET Core 的語法參考"
-[4]: <xref:mvc/views/razor#ref> "：：：非 loc (Razor) ：：： ASP.NET Core 的語法參考"
-[5]: <xref:mvc/views/razor#key> "：：：非 loc (Razor) ：：： ASP.NET Core 的語法參考"
-[6]: <xref:mvc/views/razor#inherits> "：：：非 loc (Razor) ：：： ASP.NET Core 的語法參考"
-[7]: <xref:mvc/views/razor#attribute> "：：：非 loc (Razor) ：：： ASP.NET Core 的語法參考"
-[8]: <xref:mvc/views/razor#namespace> "：：：非 loc (Razor) ：：： ASP.NET Core 的語法參考"
-[9]: <xref:mvc/views/razor#page> "：：：非 loc (Razor) ：：： ASP.NET Core 的語法參考"
-[10]: <xref:mvc/views/razor#bind> "：：：非 loc (Razor) ：：： ASP.NET Core 的語法參考"
+[1]: <xref:mvc/views/razor#code>
+[2]: <xref:mvc/views/razor#using>
+[3]: <xref:mvc/views/razor#attributes>
+[4]: <xref:mvc/views/razor#ref>
+[5]: <xref:mvc/views/razor#key>
+[6]: <xref:mvc/views/razor#inherits>
+[7]: <xref:mvc/views/razor#attribute>
+[8]: <xref:mvc/views/razor#namespace>
+[9]: <xref:mvc/views/razor#page>
+[10]: <xref:mvc/views/razor#bind>

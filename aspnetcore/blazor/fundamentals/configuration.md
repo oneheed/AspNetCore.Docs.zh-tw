@@ -1,5 +1,5 @@
 ---
-title: ASP.NET 核心 Blazor 設定
+title: ASP.NET Core Blazor 設定
 author: guardrex
 description: 深入瞭解 Blazor 應用程式的設定，包括應用程式設定、驗證和記錄設定。
 monikerRange: '>= aspnetcore-3.1'
@@ -19,14 +19,14 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/fundamentals/configuration
-ms.openlocfilehash: fd2a9784e92b132d679b2065b37cb37b7dd89cde
-ms.sourcegitcommit: 07e7ee573fe4e12be93249a385db745d714ff6ae
+ms.openlocfilehash: 9714cdd09e090bfc890561c8bbf8a720aa298812
+ms.sourcegitcommit: bc757e46ca6150a220aa29867fffd3845f4ad002
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 03/12/2021
-ms.locfileid: "103413401"
+ms.lasthandoff: 03/21/2021
+ms.locfileid: "104761313"
 ---
-# <a name="aspnet-core-blazor-configuration"></a>ASP.NET 核心 Blazor 設定
+# <a name="aspnet-core-blazor-configuration"></a>ASP.NET Core Blazor 設定
 
 > [!NOTE]
 > 本主題適用于 Blazor WebAssembly 。 如需 ASP.NET Core 應用程式設定的一般指引，請參閱 <xref:fundamentals/configuration/index> 。
@@ -38,8 +38,8 @@ Blazor WebAssembly 預設會從下列應用程式佈建檔載入設定：
 
 應用程式所註冊的其他設定提供者也可以提供設定，但並非所有提供者或提供者功能都適用于 Blazor WebAssembly 應用程式：
 
-* [Azure Key Vault 設定提供者](xref:security/key-vault-configuration)：提供者不支援受控識別和應用程式識別碼 (用戶端識別碼) 用戶端秘密案例。 對於任何 ASP.NET Core 應用程式（特別是應用程式），不建議使用用戶端秘密的應用程式識別碼， Blazor WebAssembly 因為用戶端密碼無法安全地用戶端存取 Azure Key Vault 服務。
-* [Azure 應用程式設定提供者](/azure/azure-app-configuration/quickstart-aspnet-core-app)：提供者不適合應用程式， Blazor WebAssembly 因為 Blazor WebAssembly 應用程式不會在 Azure 中的伺服器上執行。
+* [Azure Key Vault 設定提供者](xref:security/key-vault-configuration)：使用用戶端秘密案例時，提供者不支援受控識別和應用程式識別碼 (用戶端識別碼) 。 對於任何 ASP.NET Core 應用程式（特別是應用程式），不建議使用用戶端秘密的應用程式識別碼， Blazor WebAssembly 因為用戶端密碼無法安全地用戶端存取 Azure Key Vault 服務。
+* [Azure App 設定提供者](/azure/azure-app-configuration/quickstart-aspnet-core-app)：提供者不適用於 Blazor WebAssembly 應用程式，因為 Blazor WebAssembly 應用程式不會在 Azure 中的伺服器上執行。
 
 > [!WARNING]
 > Blazor WebAssembly使用者可以看到應用程式中的設定。 **請勿在應用程式的設定中儲存應用程式秘密、認證或任何其他敏感性資料 Blazor WebAssembly 。**
@@ -202,7 +202,7 @@ builder.Services.AddOidcAuthentication(options =>
 將的套件參考新增 [`Microsoft.Extensions.Logging.Configuration`](https://www.nuget.org/packages/Microsoft.Extensions.Logging.Configuration) 至應用程式的專案檔：
 
 ```xml
-<PackageReference Include="Microsoft.Extensions.Logging.Configuration" Version="{VERION}" />
+<PackageReference Include="Microsoft.Extensions.Logging.Configuration" Version="{VERSION}" />
 ```
 
 在上述範例中， `{VERSION}` 預留位置是套件的版本。 您可以在 [NuGet.org](https://www.nuget.org/packages/Microsoft.Extensions.Logging.Configuration)找到套件版本。

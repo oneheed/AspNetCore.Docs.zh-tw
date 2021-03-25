@@ -18,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: grpc/retries
-ms.openlocfilehash: 18ffab896adb6c1c5737b1e73adf06b22ca1ccb2
-ms.sourcegitcommit: 1f35de0ca9ba13ea63186c4dc387db4fb8e541e0
+ms.openlocfilehash: 4fda4968102740af8d1a7f37dcc588abd24ab70e
+ms.sourcegitcommit: b81327f1a62e9857d9e51fb34775f752261a88ae
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 03/20/2021
-ms.locfileid: "104711564"
+ms.lasthandoff: 03/25/2021
+ms.locfileid: "105050993"
 ---
 # <a name="transient-fault-handling-with-grpc-retries"></a>使用 gRPC 重試進行暫時性錯誤處理
 
@@ -100,6 +100,26 @@ var response = await client.SayHelloAsync(
 
 Console.WriteLine("From server: " + response.Message);
 ```
+
+### <a name="when-retries-are-valid"></a>當重試有效時
+
+如果失敗狀態碼符合已設定的狀態碼，且先前的嘗試次數小於最大嘗試次數，則會重試呼叫。 在某些情況下，重試 gRPC 呼叫是不正確。 這些案例會在已認可呼叫時發生。
+
+GRPC 呼叫會在兩個案例中認可：
+
+* 用戶端會接收回應標頭。 當 `ServerCallContext.WriteResponseHeadersAsync` 呼叫時，或當第一個訊息寫入伺服器回應資料流程時，伺服器會傳送回應標頭。
+* 如果串流) 超過用戶端的緩衝區大小上限，用戶端的外寄訊息 (或訊息。 `MaxRetryBufferSize` 和 `MaxRetryBufferPerCallSize` 會 [在通道上進行設定](xref:grpc/configuration#configure-client-options)。
+
+無論狀態碼或先前的嘗試次數為何，已認可的呼叫都不會重試。
+
+### <a name="streaming-calls"></a>串流呼叫
+
+串流呼叫可以與 gRPC 重試搭配使用，但同時使用時，有一些重要的考慮：
+
+* **伺服器串流**（ **雙向串流**：從伺服器傳回多個訊息的串流 rpc）將不會在收到第一則訊息之後重試。
+* **用戶端串流**（ **雙向串流**）：如果外寄訊息超過用戶端的緩衝區大小上限，則傳送多個訊息至伺服器的串流 rpc 將不會重試。
+
+如需詳細資訊，請參閱 [何時有效重試](#when-retries-are-valid)。
 
 ### <a name="grpc-retry-options"></a>gRPC 重試選項
 

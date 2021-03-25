@@ -1,5 +1,5 @@
 ---
-title: ASP.NET 核心 Blazor 路由
+title: ASP.NET Core Blazor 路由
 author: guardrex
 description: 瞭解如何管理應用程式中的要求路由，以及如何在應用程式中使用 NavLink 元件 Blazor 進行導覽。
 monikerRange: '>= aspnetcore-3.1'
@@ -19,14 +19,14 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/fundamentals/routing
-ms.openlocfilehash: ee6de9a13a69154eef6b677663091667d391452f
-ms.sourcegitcommit: 1436bd4d70937d6ec3140da56d96caab33c4320b
+ms.openlocfilehash: f3bc46da8e9b9ca1fe5afab7ccc1de9eaad16e8d
+ms.sourcegitcommit: b81327f1a62e9857d9e51fb34775f752261a88ae
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 03/06/2021
-ms.locfileid: "102395054"
+ms.lasthandoff: 03/25/2021
+ms.locfileid: "105051019"
 ---
-# <a name="aspnet-core-blazor-routing"></a>ASP.NET 核心 Blazor 路由
+# <a name="aspnet-core-blazor-routing"></a>ASP.NET Core Blazor 路由
 
 在本文中，您將瞭解如何管理要求路由，以及如何使用 <xref:Microsoft.AspNetCore.Components.Routing.NavLink> 元件在應用程式中建立流覽連結 Blazor 。
 
@@ -198,14 +198,14 @@ protected override void OnParametersSet()
 
 | 條件約束 | 範例           | 範例相符項目                                                                  | 非變異值<br>culture<br>比對 |
 | ---------- | ----------------- | -------------------------------------------------------------------------------- | :------------------------------: |
-| `bool`     | `{active:bool}`   | `true`, `FALSE`                                                                  | 否                               |
-| `datetime` | `{dob:datetime}`  | `2016-12-31`, `2016-12-31 7:32pm`                                                | 是                              |
-| `decimal`  | `{price:decimal}` | `49.99`, `-1,000.01`                                                             | 是                              |
-| `double`   | `{weight:double}` | `1.234`, `-1,001.01e8`                                                           | 是                              |
-| `float`    | `{weight:float}`  | `1.234`, `-1,001.01e8`                                                           | 是                              |
-| `guid`     | `{id:guid}`       | `CD2C1638-1638-72D5-1638-DEADBEEF1638`, `{CD2C1638-1638-72D5-1638-DEADBEEF1638}` | 否                               |
-| `int`      | `{id:int}`        | `123456789`, `-123456789`                                                        | 是                              |
-| `long`     | `{ticks:long}`    | `123456789`, `-123456789`                                                        | 是                              |
+| `bool`     | `{active:bool}`   | `true`, `FALSE`                                                                  | No                               |
+| `datetime` | `{dob:datetime}`  | `2016-12-31`, `2016-12-31 7:32pm`                                                | Yes                              |
+| `decimal`  | `{price:decimal}` | `49.99`, `-1,000.01`                                                             | Yes                              |
+| `double`   | `{weight:double}` | `1.234`, `-1,001.01e8`                                                           | Yes                              |
+| `float`    | `{weight:float}`  | `1.234`, `-1,001.01e8`                                                           | Yes                              |
+| `guid`     | `{id:guid}`       | `CD2C1638-1638-72D5-1638-DEADBEEF1638`, `{CD2C1638-1638-72D5-1638-DEADBEEF1638}` | No                               |
+| `int`      | `{id:int}`        | `123456789`, `-123456789`                                                        | Yes                              |
+| `long`     | `{ticks:long}`    | `123456789`, `-123456789`                                                        | Yes                              |
 
 > [!WARNING]
 > 確認 URL 可以轉換成 CLR 類型的路由條件約束 (例如 `int` 或 <xref:System.DateTime>) 一律使用不因國別而異的文化特性。 這些條件約束假設 URL 不可當地語系化。
@@ -272,7 +272,7 @@ Catch-all 路由參數為：
 
 ::: moniker range="< aspnetcore-5.0"
 
-ASP.NET Core 5.0 或更新版本支援攔截所有路由參數。 如需詳細資訊，請選取此文章的5.0 版本。
+ASP.NET Core 5.0 或更新版本中支援 Catch-all 路由參數。 如需詳細資訊，請選取此文章的5.0 版本。
 
 ::: moniker-end
 
@@ -331,26 +331,13 @@ ASP.NET Core 5.0 或更新版本支援攔截所有路由參數。 如需詳細�
 var query = new Uri(NavigationManager.Uri).Query;
 ```
 
-剖析查詢字串的參數：
+若要剖析查詢字串的參數，其中一個方法是搭配 [`URLSearchParams`](https://developer.mozilla.org/docs/Web/API/URLSearchParams) 使用 [JAVASCRIPT (JS) interop](xref:blazor/call-javascript-from-dotnet)：
 
-* 應用程式可以使用 <xref:Microsoft.AspNetCore.WebUtilities> API。 如果應用程式無法使用 API，請在應用程式的專案檔中新增 [AspNetCore. WebUtilities](https://www.nuget.org/packages/Microsoft.AspNetCore.WebUtilities)的套件參考。
-* 使用剖析查詢字串之後，取得值 <xref:Microsoft.AspNetCore.WebUtilities.QueryHelpers.ParseQuery%2A?displayProperty=nameWithType> 。
+```javascript
+export createQueryString = (string queryString) => new URLSearchParams(queryString);
+```
 
-下列 `ParseQueryString` 元件範例會剖析名為的查詢字串參數索引鍵 `ship` 。 例如，URL 查詢字串索引鍵/值組會 `?ship=Tardis` `Tardis` 在中捕捉值 `queryValue` 。 針對下列範例，請使用 URL 流覽至應用程式 `https://localhost:5001/parse-query-string?ship=Tardis` 。
-
-`Pages/ParseQueryString.razor`:
-
-::: moniker range=">= aspnetcore-5.0"
-
-[!code-razor[](~/blazor/common/samples/5.x/BlazorSample_WebAssembly/Pages/routing/ParseQueryString.razor)]
-
-::: moniker-end
-
-::: moniker range="< aspnetcore-5.0"
-
-[!code-razor[](~/blazor/common/samples/3.x/BlazorSample_WebAssembly/Pages/routing/ParseQueryString.razor)]
-
-::: moniker-end
+如需詳細資訊，請參閱[ Blazor JavaScript 隔離和物件參考](xref:blazor/call-javascript-from-dotnet#blazor-javascript-isolation-and-object-references)。
 
 ## <a name="navlink-and-navmenu-components"></a>`NavLink` 和 `NavMenu` 元件
 
@@ -422,7 +409,7 @@ var query = new Uri(NavigationManager.Uri).Query;
 > }
 > ```
 
-## <a name="aspnet-core-endpoint-routing-integration"></a>ASP.NET 核心端點路由整合
+## <a name="aspnet-core-endpoint-routing-integration"></a>ASP.NET Core 端點路由整合
 
 *本節僅適用于 Blazor Server 應用程式。*
 

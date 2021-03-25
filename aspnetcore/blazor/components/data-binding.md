@@ -1,11 +1,11 @@
 ---
 title: ASP.NET Core Blazor 資料系結
 author: guardrex
-description: 瞭解應用程式中元件和 DOM 元素的資料系結功能 Blazor 。
+description: 瞭解應用程式中的元件和檔物件模型 (DOM) 元素的資料系結功能 Blazor 。
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 10/22/2020
+ms.date: 03/15/2021
 no-loc:
 - appsettings.json
 - ASP.NET Core Identity
@@ -19,120 +19,135 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/components/data-binding
-ms.openlocfilehash: 76cc0ddc46dd08a5b8b88cf6045b84beab57c295
-ms.sourcegitcommit: 1166b0ff3828418559510c661e8240e5c5717bb7
+ms.openlocfilehash: 5f1e9963a7b62b90ee492bebe9bfc357a8090caf
+ms.sourcegitcommit: b81327f1a62e9857d9e51fb34775f752261a88ae
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 02/12/2021
-ms.locfileid: "100280130"
+ms.lasthandoff: 03/25/2021
+ms.locfileid: "105051032"
 ---
 # <a name="aspnet-core-blazor-data-binding"></a>ASP.NET Core Blazor 資料系結
 
-Razor 元件會透過以 [`@bind`](xref:mvc/views/razor#bind) 欄位、屬性或運算式值命名的 HTML 元素屬性，提供資料系結功能 Razor 。
+Razor 元件提供具有 [`@bind`](xref:mvc/views/razor#bind) Razor 欄位、屬性或運算式值之指示詞屬性的資料系結功能 Razor 。
 
-下列範例會將專案系結 `<input>` 至 `currentValue` 欄位，並將元素系結 `<input>` 至 `CurrentValue` 屬性：
+下列範例會系結：
 
-```razor
-<p>
-    <input @bind="currentValue" /> Current value: @currentValue
-</p>
+* `<input>`C # 欄位的元素值 `inputValue` 。
+* C # 屬性的第二個 `<input>` 元素值 `InputValue` 。
 
-<p>
-    <input @bind="CurrentValue" /> Current value: @CurrentValue
-</p>
+當 `<input>` 元素失去焦點時，就會更新其系結欄位或屬性。
 
-@code {
-    private string currentValue;
+`Pages/Bind.razor`:
 
-    private string CurrentValue { get; set; }
-}
-```
+::: moniker range=">= aspnetcore-5.0"
 
-當其中一個元素失去焦點時，就會更新其系結欄位或屬性。
+[!code-razor[](~/blazor/common/samples/5.x/BlazorSample_WebAssembly/Pages/data-binding/Bind.razor?highlight=4,8)]
 
-只有在轉譯元件時，才會更新 UI 中的文字方塊，而不是回應變更欄位或屬性的值。 由於元件會在事件處理常式程式碼執行之後自行轉譯，因此在觸發事件處理常式之後，欄位和屬性更新 *通常* 會立即反映在 UI 中。
+::: moniker-end
 
-使用 [`@bind`](xref:mvc/views/razor#bind) 與 `CurrentValue` 屬性 (`<input @bind="CurrentValue" />`) 基本上等同于下列專案：
+::: moniker range="< aspnetcore-5.0"
 
-```razor
-<input value="@CurrentValue"
-    @onchange="@((ChangeEventArgs __e) => CurrentValue = 
-        __e.Value.ToString())" />
+[!code-razor[](~/blazor/common/samples/3.x/BlazorSample_WebAssembly/Pages/data-binding/Bind.razor?highlight=4,8)]
 
-@code {
-    private string CurrentValue { get; set; }
-}
-```
+::: moniker-end
 
-轉譯元件時， `value` 輸入元素的會來自 `CurrentValue` 屬性。 當使用者在文字方塊中輸入並變更元素焦點時， `onchange` 就會引發事件，並將 `CurrentValue` 屬性設定為變更的值。 事實上，程式碼產生比起的複雜，因為它會 [`@bind`](xref:mvc/views/razor#bind) 處理型別轉換的執行情況。 在主體中，會將 [`@bind`](xref:mvc/views/razor#bind) 運算式的目前值與屬性產生關聯 `value` ，並使用已註冊的處理常式來處理變更。
+只有在轉譯元件時，才會更新 UI 中的文字方塊，而不是回應變更欄位或屬性的值。 由於元件會在事件處理常式程式碼執行之後自行轉譯，因此在觸發事件處理常式之後，欄位和屬性更新通常會立即反映在 UI 中。
 
-將屬性或欄位系結到其他事件，也可以包含 `@bind:event` 具有參數的屬性 `event` 。 下列範例會系結 `CurrentValue` 事件上的屬性 `oninput` ：
+下列範例示範如何在 HTML 中撰寫資料系結，並將屬性系結 `InputValue` 至第二個 `<input>` 元素的 `value` 和 [`onchange`](https://developer.mozilla.org/docs/Web/API/GlobalEventHandlers/onchange) 屬性。 *下列範例中的第二個 `<input>` 元素是概念示範，並非建議您如何在元件中系結資料 Razor 。*
 
-```razor
-<input @bind="CurrentValue" @bind:event="oninput" />
+`Pages/BindTheory.razor`:
 
-@code {
-    private string CurrentValue { get; set; }
-}
-```
+::: moniker range=">= aspnetcore-5.0"
 
-不同于 `onchange` 當專案失去焦點時引發的專案，會 `oninput` 在文字方塊的值變更時引發。
+[!code-razor[](~/blazor/common/samples/5.x/BlazorSample_WebAssembly/Pages/data-binding/BindTheory.razor?highlight=12-14)]
 
-<!-- Hold location for resolution of https://github.com/dotnet/AspNetCore.Docs/issues/19721 -->
+::: moniker-end
 
-屬性系結會區分大小寫：
+::: moniker range="< aspnetcore-5.0"
 
-* `@bind` 有效。
-* `@Bind` 和 `@BIND` 無效。
+[!code-razor[](~/blazor/common/samples/3.x/BlazorSample_WebAssembly/Pages/data-binding/BindTheory.razor?highlight=12-14)]
+
+::: moniker-end
+
+轉譯 `BindTheory` 元件時， `value` HTML 示範元素的會 `<input>` 來自 `InputValue` 屬性。 當使用者在文字方塊中輸入值並變更元素焦點時， `onchange` 就會引發事件，並將 `InputValue` 屬性設定為變更的值。 事實上，程式碼執行較複雜，因為它會 [`@bind`](xref:mvc/views/razor#bind) 處理型別轉換的執行情況。 一般來說，會將 [`@bind`](xref:mvc/views/razor#bind) 運算式的目前值與屬性產生關聯 `value` ，並使用已註冊的處理常式來處理變更。
+
+將屬性或欄位系結到其他 [檔物件模型 (dom) ](https://developer.mozilla.org/docs/Web/API/Document_Object_Model/Introduction) 事件，方法是包含 `@bind:event="{EVENT}"` 包含預留位置之 DOM 事件的屬性 `{EVENT}` 。 下列範例 `InputValue` `<input>` 會在觸發元素的[ `oninput` 事件](https://developer.mozilla.org/docs/Web/API/GlobalEventHandlers/oninput)時，將屬性系結至專案的值。 不同于元素失去焦點時所引發的[ `onchange` 事件](https://developer.mozilla.org/docs/Web/API/GlobalEventHandlers/onchange)， [`oninput`](https://developer.mozilla.org/docs/Web/API/GlobalEventHandlers/oninput) 當文字方塊的值變更時，就會引發。
+
+`Page/BindEvent.razor`:
+
+::: moniker range=">= aspnetcore-5.0"
+
+[!code-razor[](~/blazor/common/samples/5.x/BlazorSample_WebAssembly/Pages/data-binding/BindEvent.razor?highlight=4)]
+
+::: moniker-end
+
+::: moniker range="< aspnetcore-5.0"
+
+[!code-razor[](~/blazor/common/samples/3.x/BlazorSample_WebAssembly/Pages/data-binding/BindEvent.razor?highlight=4)]
+
+::: moniker-end
+
+Razor 屬性系結會區分大小寫：
+
+* `@bind` 和 `@bind:event` 都有效。
+* `@Bind`/`@Bind:Event` (大寫字母 `B` 和 `E`) 或 `@BIND` / `@BIND:EVENT` (所有大寫字母) **都無效**。
 
 ## <a name="unparsable-values"></a>無法剖析的值
 
 當使用者提供無法剖析的值給資料系結專案時，會在觸發 bind 事件時，將無法剖析的值自動還原為先前的值。
 
-考慮下列案例：
+請考慮下列元件，其中 `<input>` 元素會系結至 `int` 具有初始值的型別 `123` 。
 
-* 專案 `<input>` 會系結至 `int` 值為的類型 `123` ：
+`Pages/UnparsableValues.razor`:
 
-  ```razor
-  <input @bind="inputValue" />
+::: moniker range=">= aspnetcore-5.0"
 
-  @code {
-      private int inputValue = 123;
-  }
-  ```
+[!code-razor[](~/blazor/common/samples/5.x/BlazorSample_WebAssembly/Pages/data-binding/UnparsableValues.razor?highlight=4,12)]
 
-* 使用者會將專案的值更新為 `123.45` 頁面中的，並變更元素焦點。
+::: moniker-end
 
-在上述案例中，元素的值會還原為 `123` 。 當值 `123.45` 被拒絕時，若要改用的原始值 `123` ，使用者瞭解其值不會被接受。
+::: moniker range="< aspnetcore-5.0"
 
-根據預設，系結會套用至元素的 `onchange` 事件 (`@bind="{PROPERTY OR FIELD}"`) 。 用 `@bind="{PROPERTY OR FIELD}" @bind:event={EVENT}` 來觸發不同事件的系結。 針對 `oninput` () 的事件 `@bind:event="oninput"` ，回復會在引進未剖析值的任何按鍵之後進行。 以系結類型為目標的 `oninput` 事件時 `int` ，使用者無法輸入 `.` 字元。 `.`系統會立即移除字元，因此使用者會收到只允許整數的立即回應。 在某些情況下，還原事件的值 `oninput` 並不理想，例如，當使用者應該清除無法剖析的 `<input>` 值時。 替代方案包括：
+[!code-razor[](~/blazor/common/samples/3.x/BlazorSample_WebAssembly/Pages/data-binding/UnparsableValues.razor?highlight=4,12)]
 
-* 請勿使用 `oninput` 事件。 使用預設 `onchange` 事件 (只指定 `@bind="{PROPERTY OR FIELD}"`) ，其中不會還原無效值，直到元素失去焦點為止。
-* 系結至可為 null 的型別（例如或）， `int?` `string` 並提供自訂邏輯來處理不正確專案。
-* 使用 [表單驗證元件](xref:blazor/forms-validation)，例如 <xref:Microsoft.AspNetCore.Components.Forms.InputNumber%601> 或 <xref:Microsoft.AspNetCore.Components.Forms.InputDate%601> 。 表單驗證元件具有內建的支援，可管理不正確輸入。 如需詳細資訊，請參閱<xref:blazor/forms-validation>。 表單驗證元件：
+::: moniker-end
+
+根據預設，系結會套用至元素的 `onchange` 事件。 如果使用者將文字方塊的專案值更新為 `123.45` 並變更焦點，則在引發時，元素的值會還原為 `123` `onchange` 。 當值 `123.45` 被拒絕時，若要改用的原始值 `123` ，使用者瞭解其值不會被接受。
+
+針對 `oninput` () 的事件 `@bind:event="oninput"` ，回復值會在導入未剖析值的任何按鍵之後發生。 以具有系結類型的事件為目標時 `oninput` `int` ，使用者無法輸入點 (`.`) 字元。 `.`立即移除) 字元 (的點，讓使用者收到只允許整數的立即回應。 在某些情況下，還原事件的值 `oninput` 並不理想，例如，當使用者應該清除無法剖析的 `<input>` 值時。 替代方案包括：
+
+* 請勿使用 `oninput` 事件。 使用預設 `onchange` 事件，在此情況下，將不會還原無效值，直到專案失去焦點為止。
+* 系結至可為 null 的型別（例如或）， `int?` `string` 並提供 [自訂 `get` 和 `set` 存取子邏輯](#custom-binding-formats) 來處理不正確專案。
+* 使用 [表單驗證元件](xref:blazor/forms-validation)，例如 <xref:Microsoft.AspNetCore.Components.Forms.InputNumber%601> 或 <xref:Microsoft.AspNetCore.Components.Forms.InputDate%601> 。 表單驗證元件提供內建支援來管理不正確輸入。 表單驗證元件：
   * 允許使用者提供不正確輸入，並在相關聯的上接收驗證錯誤 <xref:Microsoft.AspNetCore.Components.Forms.EditContext> 。
   * 在 UI 中顯示驗證錯誤，而不會干擾使用者輸入其他 webform 資料。
 
 ## <a name="format-strings"></a>格式字串
 
-資料系結 <xref:System.DateTime> 使用的格式字串 `@bind:format` 。 現在無法使用其他格式運算式，例如貨幣或數位格式。
+資料系結 <xref:System.DateTime> 會使用單一格式字串 `@bind:format="{FORMAT STRING}"` ，其中 `{FORMAT STRING}` 預留位置是格式字串。 其他格式運算式（例如貨幣或數位格式）目前無法使用，但可能會在未來的版本中加入。
 
-```razor
-<input @bind="startDate" @bind:format="yyyy-MM-dd" />
+`Pages/DateBinding.razor`:
 
-@code {
-    private DateTime startDate = new DateTime(2020, 1, 1);
-}
+::: moniker range=">= aspnetcore-5.0"
+
+[!code-razor[](~/blazor/common/samples/5.x/BlazorSample_WebAssembly/Pages/data-binding/DateBinding.razor?highlight=6)]
+
+::: moniker-end
+
+::: moniker range="< aspnetcore-5.0"
+
+[!code-razor[](~/blazor/common/samples/3.x/BlazorSample_WebAssembly/Pages/data-binding/DateBinding.razor?highlight=6)]
+
+::: moniker-end
+
+在上述程式碼中， `<input>` 元素的欄位類型 (`type` 屬性) 預設為 `text` 。
+
+可為 null <xref:System.DateTime?displayProperty=fullName> 且 <xref:System.DateTimeOffset?displayProperty=fullName> 受支援：
+
+```csharp
+private DateTime? date;
+private DateTimeOffset? dateOffset;
 ```
-
-在上述程式碼中， `<input>` 元素的欄位類型 (`type`) 預設為 `text` 。 `@bind:format` 支援系結下列 .NET 類型：
-
-* <xref:System.DateTime?displayProperty=fullName>
-* <xref:System.DateTime?displayProperty=fullName>?
-* <xref:System.DateTimeOffset?displayProperty=fullName>
-* <xref:System.DateTimeOffset?displayProperty=fullName>?
-
-`@bind:format`屬性會指定要套用至元素之的日期格式 `value` `<input>` 。 當事件發生時，也會使用此格式來剖析該值 `onchange` 。
 
 `date`由於 Blazor 具有格式化日期的內建支援，因此不建議指定欄位類型的格式。 在建議的情況下， `yyyy-MM-dd` 如果格式是以欄位類型提供，只使用日期格式讓系結正常運作 `date` ：
 
@@ -140,293 +155,184 @@ Razor 元件會透過以 [`@bind`](xref:mvc/views/razor#bind) 欄位、屬性或
 <input type="date" @bind="startDate" @bind:format="yyyy-MM-dd">
 ```
 
+## <a name="custom-binding-formats"></a>自訂系結格式
+
+[C # `get` 和 `set` 存取](/dotnet/csharp/programming-guide/classes-and-structs/using-properties) 子可以用來建立自訂系結格式行為，如下列元件所示 `DecimalBinding` 。 元件 pesudo 會透過 `<input>` `string` 屬性 () ，將一個或多個小數位數的十進位或負數值系結至元素 `DecimalValue` 。
+
+`Pages/DecimalBinding.razor`:
+
+::: moniker range=">= aspnetcore-5.0"
+
+[!code-razor[](~/blazor/common/samples/5.x/BlazorSample_WebAssembly/Pages/data-binding/DecimalBinding.razor?highlight=7,21-31)]
+
+::: moniker-end
+
+::: moniker range="< aspnetcore-5.0"
+
+[!code-razor[](~/blazor/common/samples/3.x/BlazorSample_WebAssembly/Pages/data-binding/DecimalBinding.razor?highlight=7,21-31)]
+
+::: moniker-end
+
 ## <a name="binding-with-component-parameters"></a>使用元件參數進行系結
 
-常見的案例是將子元件中的屬性系結至其父系中的屬性。 此案例稱為 *連鎖* 系結，因為有多個層級的系結同時發生。
+常見的案例是將子元件的屬性系結至其父元件中的屬性。 此案例稱為 *連鎖* 系結，因為有多個層級的系結同時發生。
 
-[元件參數](xref:blazor/components/index#component-parameters) 允許使用語法來系結父元件的屬性 `@bind-{PROPERTY}` 。
+[元件參數](xref:blazor/components/index#component-parameters) 允許父元件的系結屬性與 `@bind-{PROPERTY}` 語法，其中 `{PROPERTY}` 預留位置是要系結的屬性。
 
-連結系結無法使用 [`@bind`](xref:mvc/views/razor#bind) 子元件中的語法來執行。 必須個別指定事件處理常式和值，以支援從子元件的父系更新屬性。
+您無法使用子元件中的語法來執行連結系結 [`@bind`](xref:mvc/views/razor#bind) 。 必須個別指定事件處理常式和值，以支援從子元件的父系更新屬性。
 
-父元件仍會利用 [`@bind`](xref:mvc/views/razor#bind) 語法來設定子元件的資料系結。
+父元件仍會利用 [`@bind`](xref:mvc/views/razor#bind) 語法來設定與子元件的資料系結。
 
-下列 `Child` 元件 (`Shared/Child.razor`) 具有 `Year` 元件參數和 `YearChanged` 回呼：
+下列 `ChildBind` 元件具有 `Year` 元件參數和 <xref:Microsoft.AspNetCore.Components.EventCallback%601> 。 依照慣例， <xref:Microsoft.AspNetCore.Components.EventCallback%601> 參數的必須以 "" 尾碼命名為元件參數名稱 `Changed` 。 命名語法是 `{PARAMETER NAME}Changed` ，其中 `{PARAMETER NAME}` 預留位置是參數名稱。 在下列範例中， <xref:Microsoft.AspNetCore.Components.EventCallback%601> 名為 `YearChanged` 。
 
-```razor
-<div class="card bg-light mt-3" style="width:18rem ">
-    <div class="card-body">
-        <h3 class="card-title">Child Component</h3>
-        <p class="card-text">Child <code>Year</code>: @Year</p>
-    </div>
-</div>
+<xref:Microsoft.AspNetCore.Components.EventCallback.InvokeAsync%2A?displayProperty=nameWithType> 使用提供的引數叫用與系結相關聯的委派，並分派已變更屬性的事件通知。
 
-<button @onclick="UpdateYearFromChild">Update Year from Child</button>
+`Shared/ChildBind.razor`:
 
-@code {
-    private Random r = new Random();
+::: moniker range=">= aspnetcore-5.0"
 
-    [Parameter]
-    public int Year { get; set; }
+[!code-razor[](~/blazor/common/samples/5.x/BlazorSample_WebAssembly/Shared/data-binding/ChildBind.razor?highlight=14-15,17-18,22)]
 
-    [Parameter]
-    public EventCallback<int> YearChanged { get; set; }
+::: moniker-end
 
-    private async Task UpdateYearFromChild()
-    {
-        await YearChanged.InvokeAsync(r.Next(1950, 2021));
-    }
-}
-```
+::: moniker range="< aspnetcore-5.0"
 
-回呼 (<xref:Microsoft.AspNetCore.Components.EventCallback%601>) 必須命名為元件參數名稱，後面接著 " `Changed` " 尾碼 (`{PARAMETER NAME}Changed`) 。 在上述範例中，回呼的名稱為 `YearChanged` 。 <xref:Microsoft.AspNetCore.Components.EventCallback.InvokeAsync%2A?displayProperty=nameWithType> 使用提供的引數叫用與系結相關聯的委派，並分派已變更屬性的事件通知。
+[!code-razor[](~/blazor/common/samples/3.x/BlazorSample_WebAssembly/Shared/data-binding/ChildBind.razor?highlight=14-15,17-18,22)]
 
-在下列 `Parent` 元件 (`Parent.razor`) 中，欄位會系結 `year` 至 `Year` 子元件的參數：
+::: moniker-end
 
-```razor
-@page "/Parent"
+如需事件和的詳細資訊 <xref:Microsoft.AspNetCore.Components.EventCallback%601> ，請參閱本文的 *>app >eventcallback* 一節 <xref:blazor/components/event-handling#eventcallback> 。
 
-<h1>Parent Component</h1>
+在下列 `Parent` 元件中， `year` 欄位會系結至 `Year` 子元件的參數。 `Year`參數是可系結的，因為它具有 `YearChanged` 符合參數類型的伴隨事件 `Year` 。
 
-<p>Parent <code>year</code>: @year</p>
+`Pages/Parent.razor`:
 
-<button @onclick="UpdateYear">Update Parent <code>year</code></button>
+::: moniker range=">= aspnetcore-5.0"
 
-<Child @bind-Year="year" />
+[!code-razor[](~/blazor/common/samples/5.x/BlazorSample_WebAssembly/Pages/data-binding/Parent1.razor?highlight=9)]
 
-@code {
-    private Random r = new Random();
-    private int year = 1979;
+::: moniker-end
 
-    private void UpdateYear()
-    {
-        year = r.Next(1950, 2021);
-    }
-}
-```
+::: moniker range="< aspnetcore-5.0"
 
-`Year`參數是可系結的，因為它具有 `YearChanged` 符合參數類型的伴隨事件 `Year` 。
+[!code-razor[](~/blazor/common/samples/3.x/BlazorSample_WebAssembly/Pages/data-binding/Parent1.razor?highlight=9)]
 
-依照慣例，屬性可以藉由包含指派給處理常式的屬性，系結至對應的事件處理常式 `@bind-{PROPERTY}:event` 。 `<Child @bind-Year="year" />` 相當於撰寫：
+::: moniker-end
+
+依照慣例，屬性可以系結至對應的事件處理常式，其方式 `@bind-{PROPERTY}:event` 是將指派給處理常式的屬性（attribute），其中 `{PROPERTY}` 預留位置是屬性（property）。 `<ChildBind @bind-Year="year" />` 相當於撰寫：
 
 ```razor
-<Child @bind-Year="year" @bind-Year:event="YearChanged" />
+<ChildBind @bind-Year="year" @bind-Year:event="YearChanged" />
 ```
 
-在更複雜的真實世界範例中，下列 `PasswordField` 元件 (`PasswordField.razor`) ：
+在更複雜的真實世界範例中，下列 `Password` 元件：
 
 * 將 `<input>` 元素的值設定為 `password` 欄位。
 * 將屬性的變更公開 `Password` 至父代元件 [`EventCallback`](xref:blazor/components/event-handling#eventcallback) ，該元件會傳入子系欄位的目前值 `password` 做為其引數。
 * 使用 `onclick` 事件來觸發 `ToggleShowPassword` 方法。 如需詳細資訊，請參閱<xref:blazor/components/event-handling>。
 
-```razor
-<h1>Provide your password</h1>
+`Shared/PasswordEntry.razor`:
 
-Password:
+::: moniker range=">= aspnetcore-5.0"
 
-<input @oninput="OnPasswordChanged" 
-       required 
-       type="@(showPassword ? "text" : "password")" 
-       value="@password" />
+[!code-razor[](~/blazor/common/samples/5.x/BlazorSample_WebAssembly/Shared/data-binding/PasswordEntry.razor?highlight=7-10,13,23-24,26-27,36-39)]
 
-<button class="btn btn-primary" @onclick="ToggleShowPassword">
-    Show password
-</button>
+::: moniker-end
 
-@code {
-    private bool showPassword;
-    private string password;
+::: moniker range="< aspnetcore-5.0"
 
-    [Parameter]
-    public string Password { get; set; }
+[!code-razor[](~/blazor/common/samples/3.x/BlazorSample_WebAssembly/Shared/data-binding/PasswordEntry.razor?highlight=7-10,13,23-24,26-27,36-39)]
 
-    [Parameter]
-    public EventCallback<string> PasswordChanged { get; set; }
+::: moniker-end
 
-    private async Task OnPasswordChanged(ChangeEventArgs e)
-    {
-        password = e.Value.ToString();
+`PasswordEntry`元件是在另一個元件中使用，例如下列 `PasswordBinding` 元件範例。
 
-        await PasswordChanged.InvokeAsync(password);
-    }
+`Pages/PasswordBinding.razor`:
 
-    private void ToggleShowPassword()
-    {
-        showPassword = !showPassword;
-    }
-}
-```
+::: moniker range=">= aspnetcore-5.0"
 
-`PasswordField`元件是在另一個元件中使用：
+[!code-razor[](~/blazor/common/samples/5.x/BlazorSample_WebAssembly/Pages/data-binding/PasswordBinding.razor?highlight=5)]
 
-```razor
-@page "/Parent"
+::: moniker-end
 
-<h1>Parent Component</h1>
+::: moniker range="< aspnetcore-5.0"
 
-<PasswordField @bind-Password="password" />
+[!code-razor[](~/blazor/common/samples/3.x/BlazorSample_WebAssembly/Pages/data-binding/PasswordBinding.razor?highlight=5)]
 
-@code {
-    private string password;
-}
-```
+::: moniker-end
 
-在叫用系結委派的方法中執行檢查或陷阱錯誤。 下列範例會在密碼值中使用空格時，為使用者提供立即的意見反應：
+在叫用系結委派的方法中執行檢查或陷阱錯誤。 下列修訂的 `PasswordEntry` 元件會在密碼的值中使用空格時，為使用者提供立即的意見反應。
 
-```razor
-<h1>Child Component</h1>
+`Shared/PasswordEntry.razor`:
 
-Password: 
+::: moniker range=">= aspnetcore-5.0"
 
-<input @oninput="OnPasswordChanged" 
-       required 
-       type="@(showPassword ? "text" : "password")" 
-       value="@password" />
+[!code-razor[](~/blazor/common/samples/5.x/BlazorSample_WebAssembly/Shared/data-binding/PasswordEntry2.razor?highlight=35-46)]
 
-<button class="btn btn-primary" @onclick="ToggleShowPassword">
-    Show password
-</button>
+::: moniker-end
 
-<span class="text-danger">@validationMessage</span>
+::: moniker range="< aspnetcore-5.0"
 
-@code {
-    private bool showPassword;
-    private string password;
-    private string validationMessage;
+[!code-razor[](~/blazor/common/samples/3.x/BlazorSample_WebAssembly/Shared/data-binding/PasswordEntry2.razor?highlight=35-46)]
 
-    [Parameter]
-    public string Password { get; set; }
-
-    [Parameter]
-    public EventCallback<string> PasswordChanged { get; set; }
-
-    private Task OnPasswordChanged(ChangeEventArgs e)
-    {
-        password = e.Value.ToString();
-
-        if (password.Contains(' '))
-        {
-            validationMessage = "Spaces not allowed!";
-
-            return Task.CompletedTask;
-        }
-        else
-        {
-            validationMessage = string.Empty;
-
-            return PasswordChanged.InvokeAsync(password);
-        }
-    }
-
-    private void ToggleShowPassword()
-    {
-        showPassword = !showPassword;
-    }
-}
-```
-
-如需 <xref:Microsoft.AspNetCore.Components.EventCallback%601> 的詳細資訊，請參閱 <xref:blazor/components/event-handling#eventcallback>。
+::: moniker-end
 
 ## <a name="bind-across-more-than-two-components"></a>跨兩個以上的元件進行系結
 
-您可以透過任意數目的嵌套元件進行系結，但您必須遵守單向的資料流程：
+您可以透過任意數目的嵌套元件來系結參數，但您必須遵循單向資料流程：
 
 * 變更通知會在階層中 *往上流動*。
 * 新的參數值會在階層中 *往下流動*。
 
-常見和建議的方法是只將基礎資料儲存在父元件中，以避免任何必須更新狀態的混淆。
+常見和建議的方法是只將基礎資料儲存在父元件中，以避免任何必須更新狀態的混淆，如下列範例所示。
 
-下列元件示範上述概念：
+`Pages/Parent.razor`:
 
-`ParentComponent.razor`:
+::: moniker range=">= aspnetcore-5.0"
 
-```razor
-<h1>Parent Component</h1>
+[!code-razor[](~/blazor/common/samples/5.x/BlazorSample_WebAssembly/Pages/data-binding/Parent2.razor)]
 
-<p>Parent Message: <b>@parentMessage</b></p>
+::: moniker-end
 
-<p>
-    <button @onclick="ChangeValue">Change from Parent</button>
-</p>
+::: moniker range="< aspnetcore-5.0"
 
-<ChildComponent @bind-ChildMessage="parentMessage" />
+[!code-razor[](~/blazor/common/samples/3.x/BlazorSample_WebAssembly/Pages/data-binding/Parent2.razor)]
 
-@code {
-    private string parentMessage = "Initial value set in Parent";
+::: moniker-end
 
-    private void ChangeValue()
-    {
-        parentMessage = $"Set in Parent {DateTime.Now}";
-    }
-}
-```
+`Shared/NestedChild.razor`:
 
-`ChildComponent.razor`:
+::: moniker range=">= aspnetcore-5.0"
 
-```razor
-<div class="border rounded m-1 p-1">
-    <h2>Child Component</h2>
+[!code-razor[](~/blazor/common/samples/5.x/BlazorSample_WebAssembly/Shared/data-binding/NestedChild.razor)]
 
-    <p>Child Message: <b>@ChildMessage</b></p>
+::: moniker-end
 
-    <p>
-        <button @onclick="ChangeValue">Change from Child</button>
-    </p>
+::: moniker range="< aspnetcore-5.0"
 
-    <GrandchildComponent @bind-GrandchildMessage="BoundValue" />
-</div>
+[!code-razor[](~/blazor/common/samples/3.x/BlazorSample_WebAssembly/Shared/data-binding/NestedChild.razor)]
 
-@code {
-    [Parameter]
-    public string ChildMessage { get; set; }
+::: moniker-end
 
-    [Parameter]
-    public EventCallback<string> ChildMessageChanged { get; set; }
+`Shared/NestedGrandchild.razor`:
 
-    private string BoundValue
-    {
-        get => ChildMessage;
-        set => ChildMessageChanged.InvokeAsync(value);
-    }
+::: moniker range=">= aspnetcore-5.0"
 
-    private async Task ChangeValue()
-    {
-        await ChildMessageChanged.InvokeAsync(
-            $"Set in Child {DateTime.Now}");
-    }
-}
-```
+[!code-razor[](~/blazor/common/samples/5.x/BlazorSample_WebAssembly/Shared/data-binding/NestedGrandchild.razor)]
 
-`GrandchildComponent.razor`:
+::: moniker-end
 
-```razor
-<div class="border rounded m-1 p-1">
-    <h3>Grandchild Component</h3>
+::: moniker range="< aspnetcore-5.0"
 
-    <p>Grandchild Message: <b>@GrandchildMessage</b></p>
+[!code-razor[](~/blazor/common/samples/3.x/BlazorSample_WebAssembly/Shared/data-binding/NestedGrandchild.razor)]
 
-    <p>
-        <button @onclick="ChangeValue">Change from Grandchild</button>
-    </p>
-</div>
+::: moniker-end
 
-@code {
-    [Parameter]
-    public string GrandchildMessage { get; set; }
-
-    [Parameter]
-    public EventCallback<string> GrandchildMessageChanged { get; set; }
-
-    private async Task ChangeValue()
-    {
-        await GrandchildMessageChanged.InvokeAsync(
-            $"Set in Grandchild {DateTime.Now}");
-    }
-}
-```
-
-如需適合在不需要嵌套的元件之間共用記憶體資料的替代方法，請參閱本文的 *記憶體內部狀態容器服務* 一節 <xref:blazor/state-management> 。
+如需適合用來在記憶體中共用資料的替代方法，以及跨不一定要進行嵌套的元件，請參閱 <xref:blazor/state-management> 。
 
 ## <a name="additional-resources"></a>其他資源
 
+* <xref:blazor/forms-validation>
 * [系結至表單中的選項按鈕](xref:blazor/forms-validation#radio-buttons)
 * [將 `<select>` 元件選項系結至 `null` 表單中的 c # 物件值](xref:blazor/forms-validation#binding-select-element-options-to-c-object-null-values)
+* [ASP.NET Core Blazor 事件處理： `EventCallback` 區段](xref:blazor/components/event-handling#eventcallback)

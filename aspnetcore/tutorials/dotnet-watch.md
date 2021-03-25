@@ -17,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: tutorials/dotnet-watch
-ms.openlocfilehash: 84cae3b3babe28c2ebf6dba50023b020112d1bb3
-ms.sourcegitcommit: 54fe1ae5e7d068e27376d562183ef9ddc7afc432
+ms.openlocfilehash: e16ca16efd2c4998f486d3fab6bfaaa38fbf6311
+ms.sourcegitcommit: b81327f1a62e9857d9e51fb34775f752261a88ae
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 03/10/2021
-ms.locfileid: "102587576"
+ms.lasthandoff: 03/25/2021
+ms.locfileid: "105051084"
 ---
 # <a name="develop-aspnet-core-apps-using-a-file-watcher"></a>使用檔案監看員開發 ASP.NET Core 應用程式
 
@@ -149,6 +149,7 @@ public static int Product(int a, int b)
 * `**/*.cs`
 * `*.csproj`
 * `**/*.resx`
+* 內容檔案： `wwwroot/**` 、 `**/*.config` 、 `**/*.json`
 
 編輯 *.csproj* 檔案可將更多的項目新增至監看清單。 項目可以個別或使用 Glob 模式指定。
 
@@ -173,6 +174,13 @@ public static int Product(int a, int b)
 
     <!-- exclude changes in this referenced project -->
     <ProjectReference Include="..\ClassLibrary1\ClassLibrary1.csproj" Watch="false" />
+</ItemGroup>
+```
+
+```xml
+<ItemGroup>
+     <!-- Exclude all Content items from being watched. -->
+    <Content Update="@(Content)" Watch="false" />
 </ItemGroup>
 ```
 

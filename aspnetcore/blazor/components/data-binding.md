@@ -1,11 +1,11 @@
 ---
 title: ASP.NET Core Blazor 資料系結
 author: guardrex
-description: 瞭解應用程式中元件和 DOM 元素的資料系結功能 Blazor 。
+description: 瞭解應用程式中的元件和檔物件模型 (DOM) 元素的資料系結功能 Blazor 。
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 10/22/2020
+ms.date: 03/15/2021
 no-loc:
 - appsettings.json
 - ASP.NET Core Identity
@@ -19,414 +19,320 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/components/data-binding
-ms.openlocfilehash: 76cc0ddc46dd08a5b8b88cf6045b84beab57c295
-ms.sourcegitcommit: 1166b0ff3828418559510c661e8240e5c5717bb7
+ms.openlocfilehash: 5f1e9963a7b62b90ee492bebe9bfc357a8090caf
+ms.sourcegitcommit: b81327f1a62e9857d9e51fb34775f752261a88ae
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 02/12/2021
-ms.locfileid: "100280130"
+ms.lasthandoff: 03/25/2021
+ms.locfileid: "105051032"
 ---
-# <a name="aspnet-core-blazor-data-binding"></a><span data-ttu-id="df08a-103">ASP.NET Core Blazor 資料系結</span><span class="sxs-lookup"><span data-stu-id="df08a-103">ASP.NET Core Blazor data binding</span></span>
+# <a name="aspnet-core-blazor-data-binding"></a><span data-ttu-id="a1454-103">ASP.NET Core Blazor 資料系結</span><span class="sxs-lookup"><span data-stu-id="a1454-103">ASP.NET Core Blazor data binding</span></span>
 
-<span data-ttu-id="df08a-104">Razor 元件會透過以 [`@bind`](xref:mvc/views/razor#bind) 欄位、屬性或運算式值命名的 HTML 元素屬性，提供資料系結功能 Razor 。</span><span class="sxs-lookup"><span data-stu-id="df08a-104">Razor components provide data binding features via an HTML element attribute named [`@bind`](xref:mvc/views/razor#bind) with a field, property, or Razor expression value.</span></span>
+<span data-ttu-id="a1454-104">Razor 元件提供具有 [`@bind`](xref:mvc/views/razor#bind) Razor 欄位、屬性或運算式值之指示詞屬性的資料系結功能 Razor 。</span><span class="sxs-lookup"><span data-stu-id="a1454-104">Razor components provide data binding features with the [`@bind`](xref:mvc/views/razor#bind) Razor directive attribute with a field, property, or Razor expression value.</span></span>
 
-<span data-ttu-id="df08a-105">下列範例會將專案系結 `<input>` 至 `currentValue` 欄位，並將元素系結 `<input>` 至 `CurrentValue` 屬性：</span><span class="sxs-lookup"><span data-stu-id="df08a-105">The following example binds an `<input>` element to the `currentValue` field and an `<input>` element to the `CurrentValue` property:</span></span>
+<span data-ttu-id="a1454-105">下列範例會系結：</span><span class="sxs-lookup"><span data-stu-id="a1454-105">The following example binds:</span></span>
 
-```razor
-<p>
-    <input @bind="currentValue" /> Current value: @currentValue
-</p>
+* <span data-ttu-id="a1454-106">`<input>`C # 欄位的元素值 `inputValue` 。</span><span class="sxs-lookup"><span data-stu-id="a1454-106">An `<input>` element value to the C# `inputValue` field.</span></span>
+* <span data-ttu-id="a1454-107">C # 屬性的第二個 `<input>` 元素值 `InputValue` 。</span><span class="sxs-lookup"><span data-stu-id="a1454-107">A second `<input>` element value to the C# `InputValue` property.</span></span>
 
-<p>
-    <input @bind="CurrentValue" /> Current value: @CurrentValue
-</p>
+<span data-ttu-id="a1454-108">當 `<input>` 元素失去焦點時，就會更新其系結欄位或屬性。</span><span class="sxs-lookup"><span data-stu-id="a1454-108">When an `<input>` element loses focus, its bound field or property is updated.</span></span>
 
-@code {
-    private string currentValue;
+<span data-ttu-id="a1454-109">`Pages/Bind.razor`:</span><span class="sxs-lookup"><span data-stu-id="a1454-109">`Pages/Bind.razor`:</span></span>
 
-    private string CurrentValue { get; set; }
-}
+::: moniker range=">= aspnetcore-5.0"
+
+[!code-razor[](~/blazor/common/samples/5.x/BlazorSample_WebAssembly/Pages/data-binding/Bind.razor?highlight=4,8)]
+
+::: moniker-end
+
+::: moniker range="< aspnetcore-5.0"
+
+[!code-razor[](~/blazor/common/samples/3.x/BlazorSample_WebAssembly/Pages/data-binding/Bind.razor?highlight=4,8)]
+
+::: moniker-end
+
+<span data-ttu-id="a1454-110">只有在轉譯元件時，才會更新 UI 中的文字方塊，而不是回應變更欄位或屬性的值。</span><span class="sxs-lookup"><span data-stu-id="a1454-110">The text box is updated in the UI only when the component is rendered, not in response to changing the field's or property's value.</span></span> <span data-ttu-id="a1454-111">由於元件會在事件處理常式程式碼執行之後自行轉譯，因此在觸發事件處理常式之後，欄位和屬性更新通常會立即反映在 UI 中。</span><span class="sxs-lookup"><span data-stu-id="a1454-111">Since components render themselves after event handler code executes, field and property updates are usually reflected in the UI immediately after an event handler is triggered.</span></span>
+
+<span data-ttu-id="a1454-112">下列範例示範如何在 HTML 中撰寫資料系結，並將屬性系結 `InputValue` 至第二個 `<input>` 元素的 `value` 和 [`onchange`](https://developer.mozilla.org/docs/Web/API/GlobalEventHandlers/onchange) 屬性。</span><span class="sxs-lookup"><span data-stu-id="a1454-112">As a demonstration of how data binding composes in HTML, the following example binds the `InputValue` property to the second `<input>` element's `value` and [`onchange`](https://developer.mozilla.org/docs/Web/API/GlobalEventHandlers/onchange) attributes.</span></span> <span data-ttu-id="a1454-113">*下列範例中的第二個 `<input>` 元素是概念示範，並非建議您如何在元件中系結資料 Razor 。*</span><span class="sxs-lookup"><span data-stu-id="a1454-113">*The second `<input>` element in the following example is a concept demonstration and isn't meant to suggest how you should bind data in Razor components.*</span></span>
+
+<span data-ttu-id="a1454-114">`Pages/BindTheory.razor`:</span><span class="sxs-lookup"><span data-stu-id="a1454-114">`Pages/BindTheory.razor`:</span></span>
+
+::: moniker range=">= aspnetcore-5.0"
+
+[!code-razor[](~/blazor/common/samples/5.x/BlazorSample_WebAssembly/Pages/data-binding/BindTheory.razor?highlight=12-14)]
+
+::: moniker-end
+
+::: moniker range="< aspnetcore-5.0"
+
+[!code-razor[](~/blazor/common/samples/3.x/BlazorSample_WebAssembly/Pages/data-binding/BindTheory.razor?highlight=12-14)]
+
+::: moniker-end
+
+<span data-ttu-id="a1454-115">轉譯 `BindTheory` 元件時， `value` HTML 示範元素的會 `<input>` 來自 `InputValue` 屬性。</span><span class="sxs-lookup"><span data-stu-id="a1454-115">When the `BindTheory` component is rendered, the `value` of the HTML demonstration `<input>` element comes from the `InputValue` property.</span></span> <span data-ttu-id="a1454-116">當使用者在文字方塊中輸入值並變更元素焦點時， `onchange` 就會引發事件，並將 `InputValue` 屬性設定為變更的值。</span><span class="sxs-lookup"><span data-stu-id="a1454-116">When the user enters a value in the text box and changes element focus, the `onchange` event is fired and the `InputValue` property is set to the changed value.</span></span> <span data-ttu-id="a1454-117">事實上，程式碼執行較複雜，因為它會 [`@bind`](xref:mvc/views/razor#bind) 處理型別轉換的執行情況。</span><span class="sxs-lookup"><span data-stu-id="a1454-117">In reality, code execution is more complex because [`@bind`](xref:mvc/views/razor#bind) handles cases where type conversions are performed.</span></span> <span data-ttu-id="a1454-118">一般來說，會將 [`@bind`](xref:mvc/views/razor#bind) 運算式的目前值與屬性產生關聯 `value` ，並使用已註冊的處理常式來處理變更。</span><span class="sxs-lookup"><span data-stu-id="a1454-118">In general, [`@bind`](xref:mvc/views/razor#bind) associates the current value of an expression with a `value` attribute and handles changes using the registered handler.</span></span>
+
+<span data-ttu-id="a1454-119">將屬性或欄位系結到其他 [檔物件模型 (dom) ](https://developer.mozilla.org/docs/Web/API/Document_Object_Model/Introduction) 事件，方法是包含 `@bind:event="{EVENT}"` 包含預留位置之 DOM 事件的屬性 `{EVENT}` 。</span><span class="sxs-lookup"><span data-stu-id="a1454-119">Bind a property or field on other [Document Object Model (DOM)](https://developer.mozilla.org/docs/Web/API/Document_Object_Model/Introduction) events by including an `@bind:event="{EVENT}"` attribute with a DOM event for the `{EVENT}` placeholder.</span></span> <span data-ttu-id="a1454-120">下列範例 `InputValue` `<input>` 會在觸發元素的[ `oninput` 事件](https://developer.mozilla.org/docs/Web/API/GlobalEventHandlers/oninput)時，將屬性系結至專案的值。</span><span class="sxs-lookup"><span data-stu-id="a1454-120">The following example binds the `InputValue` property to the `<input>` element's value when the element's [`oninput` event](https://developer.mozilla.org/docs/Web/API/GlobalEventHandlers/oninput) is triggered.</span></span> <span data-ttu-id="a1454-121">不同于元素失去焦點時所引發的[ `onchange` 事件](https://developer.mozilla.org/docs/Web/API/GlobalEventHandlers/onchange)， [`oninput`](https://developer.mozilla.org/docs/Web/API/GlobalEventHandlers/oninput) 當文字方塊的值變更時，就會引發。</span><span class="sxs-lookup"><span data-stu-id="a1454-121">Unlike the [`onchange` event](https://developer.mozilla.org/docs/Web/API/GlobalEventHandlers/onchange), which fires when the element loses focus, [`oninput`](https://developer.mozilla.org/docs/Web/API/GlobalEventHandlers/oninput) fires when the value of the text box changes.</span></span>
+
+<span data-ttu-id="a1454-122">`Page/BindEvent.razor`:</span><span class="sxs-lookup"><span data-stu-id="a1454-122">`Page/BindEvent.razor`:</span></span>
+
+::: moniker range=">= aspnetcore-5.0"
+
+[!code-razor[](~/blazor/common/samples/5.x/BlazorSample_WebAssembly/Pages/data-binding/BindEvent.razor?highlight=4)]
+
+::: moniker-end
+
+::: moniker range="< aspnetcore-5.0"
+
+[!code-razor[](~/blazor/common/samples/3.x/BlazorSample_WebAssembly/Pages/data-binding/BindEvent.razor?highlight=4)]
+
+::: moniker-end
+
+<span data-ttu-id="a1454-123">Razor 屬性系結會區分大小寫：</span><span class="sxs-lookup"><span data-stu-id="a1454-123">Razor attribute binding is case sensitive:</span></span>
+
+* <span data-ttu-id="a1454-124">`@bind` 和 `@bind:event` 都有效。</span><span class="sxs-lookup"><span data-stu-id="a1454-124">`@bind` and `@bind:event` are valid.</span></span>
+* <span data-ttu-id="a1454-125">`@Bind`/`@Bind:Event` (大寫字母 `B` 和 `E`) 或 `@BIND` / `@BIND:EVENT` (所有大寫字母) **都無效**。</span><span class="sxs-lookup"><span data-stu-id="a1454-125">`@Bind`/`@Bind:Event` (capital letters `B` and `E`) or `@BIND`/`@BIND:EVENT` (all capital letters) **are invalid**.</span></span>
+
+## <a name="unparsable-values"></a><span data-ttu-id="a1454-126">無法剖析的值</span><span class="sxs-lookup"><span data-stu-id="a1454-126">Unparsable values</span></span>
+
+<span data-ttu-id="a1454-127">當使用者提供無法剖析的值給資料系結專案時，會在觸發 bind 事件時，將無法剖析的值自動還原為先前的值。</span><span class="sxs-lookup"><span data-stu-id="a1454-127">When a user provides an unparsable value to a databound element, the unparsable value is automatically reverted to its previous value when the bind event is triggered.</span></span>
+
+<span data-ttu-id="a1454-128">請考慮下列元件，其中 `<input>` 元素會系結至 `int` 具有初始值的型別 `123` 。</span><span class="sxs-lookup"><span data-stu-id="a1454-128">Consider the following component, where an `<input>` element is bound to an `int` type with an initial value of `123`.</span></span>
+
+<span data-ttu-id="a1454-129">`Pages/UnparsableValues.razor`:</span><span class="sxs-lookup"><span data-stu-id="a1454-129">`Pages/UnparsableValues.razor`:</span></span>
+
+::: moniker range=">= aspnetcore-5.0"
+
+[!code-razor[](~/blazor/common/samples/5.x/BlazorSample_WebAssembly/Pages/data-binding/UnparsableValues.razor?highlight=4,12)]
+
+::: moniker-end
+
+::: moniker range="< aspnetcore-5.0"
+
+[!code-razor[](~/blazor/common/samples/3.x/BlazorSample_WebAssembly/Pages/data-binding/UnparsableValues.razor?highlight=4,12)]
+
+::: moniker-end
+
+<span data-ttu-id="a1454-130">根據預設，系結會套用至元素的 `onchange` 事件。</span><span class="sxs-lookup"><span data-stu-id="a1454-130">By default, binding applies to the element's `onchange` event.</span></span> <span data-ttu-id="a1454-131">如果使用者將文字方塊的專案值更新為 `123.45` 並變更焦點，則在引發時，元素的值會還原為 `123` `onchange` 。</span><span class="sxs-lookup"><span data-stu-id="a1454-131">If the user updates the value of the text box's entry to `123.45` and changes the focus, the element's value is reverted to `123` when `onchange` fires.</span></span> <span data-ttu-id="a1454-132">當值 `123.45` 被拒絕時，若要改用的原始值 `123` ，使用者瞭解其值不會被接受。</span><span class="sxs-lookup"><span data-stu-id="a1454-132">When the value `123.45` is rejected in favor of the original value of `123`, the user understands that their value wasn't accepted.</span></span>
+
+<span data-ttu-id="a1454-133">針對 `oninput` () 的事件 `@bind:event="oninput"` ，回復值會在導入未剖析值的任何按鍵之後發生。</span><span class="sxs-lookup"><span data-stu-id="a1454-133">For the `oninput` event (`@bind:event="oninput"`), a value reversion occurs after any keystroke that introduces an unparsable value.</span></span> <span data-ttu-id="a1454-134">以具有系結類型的事件為目標時 `oninput` `int` ，使用者無法輸入點 (`.`) 字元。</span><span class="sxs-lookup"><span data-stu-id="a1454-134">When targeting the `oninput` event with an `int`-bound type, a user is prevented from typing a dot (`.`) character.</span></span> <span data-ttu-id="a1454-135">`.`立即移除) 字元 (的點，讓使用者收到只允許整數的立即回應。</span><span class="sxs-lookup"><span data-stu-id="a1454-135">A dot (`.`) character is immediately removed, so the user receives immediate feedback that only whole numbers are permitted.</span></span> <span data-ttu-id="a1454-136">在某些情況下，還原事件的值 `oninput` 並不理想，例如，當使用者應該清除無法剖析的 `<input>` 值時。</span><span class="sxs-lookup"><span data-stu-id="a1454-136">There are scenarios where reverting the value on the `oninput` event isn't ideal, such as when the user should be allowed to clear an unparsable `<input>` value.</span></span> <span data-ttu-id="a1454-137">替代方案包括：</span><span class="sxs-lookup"><span data-stu-id="a1454-137">Alternatives include:</span></span>
+
+* <span data-ttu-id="a1454-138">請勿使用 `oninput` 事件。</span><span class="sxs-lookup"><span data-stu-id="a1454-138">Don't use the `oninput` event.</span></span> <span data-ttu-id="a1454-139">使用預設 `onchange` 事件，在此情況下，將不會還原無效值，直到專案失去焦點為止。</span><span class="sxs-lookup"><span data-stu-id="a1454-139">Use the default `onchange` event, where an invalid value isn't reverted until the element loses focus.</span></span>
+* <span data-ttu-id="a1454-140">系結至可為 null 的型別（例如或）， `int?` `string` 並提供 [自訂 `get` 和 `set` 存取子邏輯](#custom-binding-formats) 來處理不正確專案。</span><span class="sxs-lookup"><span data-stu-id="a1454-140">Bind to a nullable type, such as `int?` or `string` and provide [custom `get` and `set` accessor logic](#custom-binding-formats) to handle invalid entries.</span></span>
+* <span data-ttu-id="a1454-141">使用 [表單驗證元件](xref:blazor/forms-validation)，例如 <xref:Microsoft.AspNetCore.Components.Forms.InputNumber%601> 或 <xref:Microsoft.AspNetCore.Components.Forms.InputDate%601> 。</span><span class="sxs-lookup"><span data-stu-id="a1454-141">Use a [form validation component](xref:blazor/forms-validation), such as <xref:Microsoft.AspNetCore.Components.Forms.InputNumber%601> or <xref:Microsoft.AspNetCore.Components.Forms.InputDate%601>.</span></span> <span data-ttu-id="a1454-142">表單驗證元件提供內建支援來管理不正確輸入。</span><span class="sxs-lookup"><span data-stu-id="a1454-142">Form validation components provide built-in support to manage invalid inputs.</span></span> <span data-ttu-id="a1454-143">表單驗證元件：</span><span class="sxs-lookup"><span data-stu-id="a1454-143">Form validation components:</span></span>
+  * <span data-ttu-id="a1454-144">允許使用者提供不正確輸入，並在相關聯的上接收驗證錯誤 <xref:Microsoft.AspNetCore.Components.Forms.EditContext> 。</span><span class="sxs-lookup"><span data-stu-id="a1454-144">Permit the user to provide invalid input and receive validation errors on the associated <xref:Microsoft.AspNetCore.Components.Forms.EditContext>.</span></span>
+  * <span data-ttu-id="a1454-145">在 UI 中顯示驗證錯誤，而不會干擾使用者輸入其他 webform 資料。</span><span class="sxs-lookup"><span data-stu-id="a1454-145">Display validation errors in the UI without interfering with the user entering additional webform data.</span></span>
+
+## <a name="format-strings"></a><span data-ttu-id="a1454-146">格式字串</span><span class="sxs-lookup"><span data-stu-id="a1454-146">Format strings</span></span>
+
+<span data-ttu-id="a1454-147">資料系結 <xref:System.DateTime> 會使用單一格式字串 `@bind:format="{FORMAT STRING}"` ，其中 `{FORMAT STRING}` 預留位置是格式字串。</span><span class="sxs-lookup"><span data-stu-id="a1454-147">Data binding works with a single <xref:System.DateTime> format string using `@bind:format="{FORMAT STRING}"`, where the `{FORMAT STRING}` placeholder is the format string.</span></span> <span data-ttu-id="a1454-148">其他格式運算式（例如貨幣或數位格式）目前無法使用，但可能會在未來的版本中加入。</span><span class="sxs-lookup"><span data-stu-id="a1454-148">Other format expressions, such as currency or number formats, aren't available at this time but might be added in a future release.</span></span>
+
+<span data-ttu-id="a1454-149">`Pages/DateBinding.razor`:</span><span class="sxs-lookup"><span data-stu-id="a1454-149">`Pages/DateBinding.razor`:</span></span>
+
+::: moniker range=">= aspnetcore-5.0"
+
+[!code-razor[](~/blazor/common/samples/5.x/BlazorSample_WebAssembly/Pages/data-binding/DateBinding.razor?highlight=6)]
+
+::: moniker-end
+
+::: moniker range="< aspnetcore-5.0"
+
+[!code-razor[](~/blazor/common/samples/3.x/BlazorSample_WebAssembly/Pages/data-binding/DateBinding.razor?highlight=6)]
+
+::: moniker-end
+
+<span data-ttu-id="a1454-150">在上述程式碼中， `<input>` 元素的欄位類型 (`type` 屬性) 預設為 `text` 。</span><span class="sxs-lookup"><span data-stu-id="a1454-150">In the preceding code, the `<input>` element's field type (`type` attribute) defaults to `text`.</span></span>
+
+<span data-ttu-id="a1454-151">可為 null <xref:System.DateTime?displayProperty=fullName> 且 <xref:System.DateTimeOffset?displayProperty=fullName> 受支援：</span><span class="sxs-lookup"><span data-stu-id="a1454-151">Nullable <xref:System.DateTime?displayProperty=fullName> and <xref:System.DateTimeOffset?displayProperty=fullName> are supported:</span></span>
+
+```csharp
+private DateTime? date;
+private DateTimeOffset? dateOffset;
 ```
 
-<span data-ttu-id="df08a-106">當其中一個元素失去焦點時，就會更新其系結欄位或屬性。</span><span class="sxs-lookup"><span data-stu-id="df08a-106">When one of the elements loses focus, its bound field or property is updated.</span></span>
-
-<span data-ttu-id="df08a-107">只有在轉譯元件時，才會更新 UI 中的文字方塊，而不是回應變更欄位或屬性的值。</span><span class="sxs-lookup"><span data-stu-id="df08a-107">The text box is updated in the UI only when the component is rendered, not in response to changing the field's or property's value.</span></span> <span data-ttu-id="df08a-108">由於元件會在事件處理常式程式碼執行之後自行轉譯，因此在觸發事件處理常式之後，欄位和屬性更新 *通常* 會立即反映在 UI 中。</span><span class="sxs-lookup"><span data-stu-id="df08a-108">Since components render themselves after event handler code executes, field and property updates are *usually* reflected in the UI immediately after an event handler is triggered.</span></span>
-
-<span data-ttu-id="df08a-109">使用 [`@bind`](xref:mvc/views/razor#bind) 與 `CurrentValue` 屬性 (`<input @bind="CurrentValue" />`) 基本上等同于下列專案：</span><span class="sxs-lookup"><span data-stu-id="df08a-109">Using [`@bind`](xref:mvc/views/razor#bind) with the `CurrentValue` property (`<input @bind="CurrentValue" />`) is essentially equivalent to the following:</span></span>
-
-```razor
-<input value="@CurrentValue"
-    @onchange="@((ChangeEventArgs __e) => CurrentValue = 
-        __e.Value.ToString())" />
-
-@code {
-    private string CurrentValue { get; set; }
-}
-```
-
-<span data-ttu-id="df08a-110">轉譯元件時， `value` 輸入元素的會來自 `CurrentValue` 屬性。</span><span class="sxs-lookup"><span data-stu-id="df08a-110">When the component is rendered, the `value` of the input element comes from the `CurrentValue` property.</span></span> <span data-ttu-id="df08a-111">當使用者在文字方塊中輸入並變更元素焦點時， `onchange` 就會引發事件，並將 `CurrentValue` 屬性設定為變更的值。</span><span class="sxs-lookup"><span data-stu-id="df08a-111">When the user types in the text box and changes element focus, the `onchange` event is fired and the `CurrentValue` property is set to the changed value.</span></span> <span data-ttu-id="df08a-112">事實上，程式碼產生比起的複雜，因為它會 [`@bind`](xref:mvc/views/razor#bind) 處理型別轉換的執行情況。</span><span class="sxs-lookup"><span data-stu-id="df08a-112">In reality, the code generation is more complex than that because [`@bind`](xref:mvc/views/razor#bind) handles cases where type conversions are performed.</span></span> <span data-ttu-id="df08a-113">在主體中，會將 [`@bind`](xref:mvc/views/razor#bind) 運算式的目前值與屬性產生關聯 `value` ，並使用已註冊的處理常式來處理變更。</span><span class="sxs-lookup"><span data-stu-id="df08a-113">In principle, [`@bind`](xref:mvc/views/razor#bind) associates the current value of an expression with a `value` attribute and handles changes using the registered handler.</span></span>
-
-<span data-ttu-id="df08a-114">將屬性或欄位系結到其他事件，也可以包含 `@bind:event` 具有參數的屬性 `event` 。</span><span class="sxs-lookup"><span data-stu-id="df08a-114">Bind a property or field on other events by also including an `@bind:event` attribute with an `event` parameter.</span></span> <span data-ttu-id="df08a-115">下列範例會系結 `CurrentValue` 事件上的屬性 `oninput` ：</span><span class="sxs-lookup"><span data-stu-id="df08a-115">The following example binds the `CurrentValue` property on the `oninput` event:</span></span>
-
-```razor
-<input @bind="CurrentValue" @bind:event="oninput" />
-
-@code {
-    private string CurrentValue { get; set; }
-}
-```
-
-<span data-ttu-id="df08a-116">不同于 `onchange` 當專案失去焦點時引發的專案，會 `oninput` 在文字方塊的值變更時引發。</span><span class="sxs-lookup"><span data-stu-id="df08a-116">Unlike `onchange`, which fires when the element loses focus, `oninput` fires when the value of the text box changes.</span></span>
-
-<!-- Hold location for resolution of https://github.com/dotnet/AspNetCore.Docs/issues/19721 -->
-
-<span data-ttu-id="df08a-117">屬性系結會區分大小寫：</span><span class="sxs-lookup"><span data-stu-id="df08a-117">Attribute binding is case sensitive:</span></span>
-
-* <span data-ttu-id="df08a-118">`@bind` 有效。</span><span class="sxs-lookup"><span data-stu-id="df08a-118">`@bind` is valid.</span></span>
-* <span data-ttu-id="df08a-119">`@Bind` 和 `@BIND` 無效。</span><span class="sxs-lookup"><span data-stu-id="df08a-119">`@Bind` and `@BIND` are invalid.</span></span>
-
-## <a name="unparsable-values"></a><span data-ttu-id="df08a-120">無法剖析的值</span><span class="sxs-lookup"><span data-stu-id="df08a-120">Unparsable values</span></span>
-
-<span data-ttu-id="df08a-121">當使用者提供無法剖析的值給資料系結專案時，會在觸發 bind 事件時，將無法剖析的值自動還原為先前的值。</span><span class="sxs-lookup"><span data-stu-id="df08a-121">When a user provides an unparsable value to a databound element, the unparsable value is automatically reverted to its previous value when the bind event is triggered.</span></span>
-
-<span data-ttu-id="df08a-122">考慮下列案例：</span><span class="sxs-lookup"><span data-stu-id="df08a-122">Consider the following scenario:</span></span>
-
-* <span data-ttu-id="df08a-123">專案 `<input>` 會系結至 `int` 值為的類型 `123` ：</span><span class="sxs-lookup"><span data-stu-id="df08a-123">An `<input>` element is bound to an `int` type with an initial value of `123`:</span></span>
-
-  ```razor
-  <input @bind="inputValue" />
-
-  @code {
-      private int inputValue = 123;
-  }
-  ```
-
-* <span data-ttu-id="df08a-124">使用者會將專案的值更新為 `123.45` 頁面中的，並變更元素焦點。</span><span class="sxs-lookup"><span data-stu-id="df08a-124">The user updates the value of the element to `123.45` in the page and changes the element focus.</span></span>
-
-<span data-ttu-id="df08a-125">在上述案例中，元素的值會還原為 `123` 。</span><span class="sxs-lookup"><span data-stu-id="df08a-125">In the preceding scenario, the element's value is reverted to `123`.</span></span> <span data-ttu-id="df08a-126">當值 `123.45` 被拒絕時，若要改用的原始值 `123` ，使用者瞭解其值不會被接受。</span><span class="sxs-lookup"><span data-stu-id="df08a-126">When the value `123.45` is rejected in favor of the original value of `123`, the user understands that their value wasn't accepted.</span></span>
-
-<span data-ttu-id="df08a-127">根據預設，系結會套用至元素的 `onchange` 事件 (`@bind="{PROPERTY OR FIELD}"`) 。</span><span class="sxs-lookup"><span data-stu-id="df08a-127">By default, binding applies to the element's `onchange` event (`@bind="{PROPERTY OR FIELD}"`).</span></span> <span data-ttu-id="df08a-128">用 `@bind="{PROPERTY OR FIELD}" @bind:event={EVENT}` 來觸發不同事件的系結。</span><span class="sxs-lookup"><span data-stu-id="df08a-128">Use `@bind="{PROPERTY OR FIELD}" @bind:event={EVENT}` to trigger binding on a different event.</span></span> <span data-ttu-id="df08a-129">針對 `oninput` () 的事件 `@bind:event="oninput"` ，回復會在引進未剖析值的任何按鍵之後進行。</span><span class="sxs-lookup"><span data-stu-id="df08a-129">For the `oninput` event (`@bind:event="oninput"`), the reversion occurs after any keystroke that introduces an unparsable value.</span></span> <span data-ttu-id="df08a-130">以系結類型為目標的 `oninput` 事件時 `int` ，使用者無法輸入 `.` 字元。</span><span class="sxs-lookup"><span data-stu-id="df08a-130">When targeting the `oninput` event with an `int`-bound type, a user is prevented from typing a `.` character.</span></span> <span data-ttu-id="df08a-131">`.`系統會立即移除字元，因此使用者會收到只允許整數的立即回應。</span><span class="sxs-lookup"><span data-stu-id="df08a-131">A `.` character is immediately removed, so the user receives immediate feedback that only whole numbers are permitted.</span></span> <span data-ttu-id="df08a-132">在某些情況下，還原事件的值 `oninput` 並不理想，例如，當使用者應該清除無法剖析的 `<input>` 值時。</span><span class="sxs-lookup"><span data-stu-id="df08a-132">There are scenarios where reverting the value on the `oninput` event isn't ideal, such as when the user should be allowed to clear an unparsable `<input>` value.</span></span> <span data-ttu-id="df08a-133">替代方案包括：</span><span class="sxs-lookup"><span data-stu-id="df08a-133">Alternatives include:</span></span>
-
-* <span data-ttu-id="df08a-134">請勿使用 `oninput` 事件。</span><span class="sxs-lookup"><span data-stu-id="df08a-134">Don't use the `oninput` event.</span></span> <span data-ttu-id="df08a-135">使用預設 `onchange` 事件 (只指定 `@bind="{PROPERTY OR FIELD}"`) ，其中不會還原無效值，直到元素失去焦點為止。</span><span class="sxs-lookup"><span data-stu-id="df08a-135">Use the default `onchange` event (only specify `@bind="{PROPERTY OR FIELD}"`), where an invalid value isn't reverted until the element loses focus.</span></span>
-* <span data-ttu-id="df08a-136">系結至可為 null 的型別（例如或）， `int?` `string` 並提供自訂邏輯來處理不正確專案。</span><span class="sxs-lookup"><span data-stu-id="df08a-136">Bind to a nullable type, such as `int?` or `string` and provide custom logic to handle invalid entries.</span></span>
-* <span data-ttu-id="df08a-137">使用 [表單驗證元件](xref:blazor/forms-validation)，例如 <xref:Microsoft.AspNetCore.Components.Forms.InputNumber%601> 或 <xref:Microsoft.AspNetCore.Components.Forms.InputDate%601> 。</span><span class="sxs-lookup"><span data-stu-id="df08a-137">Use a [form validation component](xref:blazor/forms-validation), such as <xref:Microsoft.AspNetCore.Components.Forms.InputNumber%601> or <xref:Microsoft.AspNetCore.Components.Forms.InputDate%601>.</span></span> <span data-ttu-id="df08a-138">表單驗證元件具有內建的支援，可管理不正確輸入。</span><span class="sxs-lookup"><span data-stu-id="df08a-138">Form validation components have built-in support to manage invalid inputs.</span></span> <span data-ttu-id="df08a-139">如需詳細資訊，請參閱<xref:blazor/forms-validation>。</span><span class="sxs-lookup"><span data-stu-id="df08a-139">For more information, see <xref:blazor/forms-validation>.</span></span> <span data-ttu-id="df08a-140">表單驗證元件：</span><span class="sxs-lookup"><span data-stu-id="df08a-140">Form validation components:</span></span>
-  * <span data-ttu-id="df08a-141">允許使用者提供不正確輸入，並在相關聯的上接收驗證錯誤 <xref:Microsoft.AspNetCore.Components.Forms.EditContext> 。</span><span class="sxs-lookup"><span data-stu-id="df08a-141">Permit the user to provide invalid input and receive validation errors on the associated <xref:Microsoft.AspNetCore.Components.Forms.EditContext>.</span></span>
-  * <span data-ttu-id="df08a-142">在 UI 中顯示驗證錯誤，而不會干擾使用者輸入其他 webform 資料。</span><span class="sxs-lookup"><span data-stu-id="df08a-142">Display validation errors in the UI without interfering with the user entering additional webform data.</span></span>
-
-## <a name="format-strings"></a><span data-ttu-id="df08a-143">格式字串</span><span class="sxs-lookup"><span data-stu-id="df08a-143">Format strings</span></span>
-
-<span data-ttu-id="df08a-144">資料系結 <xref:System.DateTime> 使用的格式字串 `@bind:format` 。</span><span class="sxs-lookup"><span data-stu-id="df08a-144">Data binding works with <xref:System.DateTime> format strings using `@bind:format`.</span></span> <span data-ttu-id="df08a-145">現在無法使用其他格式運算式，例如貨幣或數位格式。</span><span class="sxs-lookup"><span data-stu-id="df08a-145">Other format expressions, such as currency or number formats, aren't available at this time.</span></span>
-
-```razor
-<input @bind="startDate" @bind:format="yyyy-MM-dd" />
-
-@code {
-    private DateTime startDate = new DateTime(2020, 1, 1);
-}
-```
-
-<span data-ttu-id="df08a-146">在上述程式碼中， `<input>` 元素的欄位類型 (`type`) 預設為 `text` 。</span><span class="sxs-lookup"><span data-stu-id="df08a-146">In the preceding code, the `<input>` element's field type (`type`) defaults to `text`.</span></span> <span data-ttu-id="df08a-147">`@bind:format` 支援系結下列 .NET 類型：</span><span class="sxs-lookup"><span data-stu-id="df08a-147">`@bind:format` is supported for binding the following .NET types:</span></span>
-
-* <xref:System.DateTime?displayProperty=fullName>
-* <span data-ttu-id="df08a-148"><xref:System.DateTime?displayProperty=fullName>?</span><span class="sxs-lookup"><span data-stu-id="df08a-148"><xref:System.DateTime?displayProperty=fullName>?</span></span>
-* <xref:System.DateTimeOffset?displayProperty=fullName>
-* <span data-ttu-id="df08a-149"><xref:System.DateTimeOffset?displayProperty=fullName>?</span><span class="sxs-lookup"><span data-stu-id="df08a-149"><xref:System.DateTimeOffset?displayProperty=fullName>?</span></span>
-
-<span data-ttu-id="df08a-150">`@bind:format`屬性會指定要套用至元素之的日期格式 `value` `<input>` 。</span><span class="sxs-lookup"><span data-stu-id="df08a-150">The `@bind:format` attribute specifies the date format to apply to the `value` of the `<input>` element.</span></span> <span data-ttu-id="df08a-151">當事件發生時，也會使用此格式來剖析該值 `onchange` 。</span><span class="sxs-lookup"><span data-stu-id="df08a-151">The format is also used to parse the value when an `onchange` event occurs.</span></span>
-
-<span data-ttu-id="df08a-152">`date`由於 Blazor 具有格式化日期的內建支援，因此不建議指定欄位類型的格式。</span><span class="sxs-lookup"><span data-stu-id="df08a-152">Specifying a format for the `date` field type isn't recommended because Blazor has built-in support to format dates.</span></span> <span data-ttu-id="df08a-153">在建議的情況下， `yyyy-MM-dd` 如果格式是以欄位類型提供，只使用日期格式讓系結正常運作 `date` ：</span><span class="sxs-lookup"><span data-stu-id="df08a-153">In spite of the recommendation, only use the `yyyy-MM-dd` date format for binding to function correctly if a format is supplied with the `date` field type:</span></span>
+<span data-ttu-id="a1454-152">`date`由於 Blazor 具有格式化日期的內建支援，因此不建議指定欄位類型的格式。</span><span class="sxs-lookup"><span data-stu-id="a1454-152">Specifying a format for the `date` field type isn't recommended because Blazor has built-in support to format dates.</span></span> <span data-ttu-id="a1454-153">在建議的情況下， `yyyy-MM-dd` 如果格式是以欄位類型提供，只使用日期格式讓系結正常運作 `date` ：</span><span class="sxs-lookup"><span data-stu-id="a1454-153">In spite of the recommendation, only use the `yyyy-MM-dd` date format for binding to function correctly if a format is supplied with the `date` field type:</span></span>
 
 ```razor
 <input type="date" @bind="startDate" @bind:format="yyyy-MM-dd">
 ```
 
-## <a name="binding-with-component-parameters"></a><span data-ttu-id="df08a-154">使用元件參數進行系結</span><span class="sxs-lookup"><span data-stu-id="df08a-154">Binding with component parameters</span></span>
+## <a name="custom-binding-formats"></a><span data-ttu-id="a1454-154">自訂系結格式</span><span class="sxs-lookup"><span data-stu-id="a1454-154">Custom binding formats</span></span>
 
-<span data-ttu-id="df08a-155">常見的案例是將子元件中的屬性系結至其父系中的屬性。</span><span class="sxs-lookup"><span data-stu-id="df08a-155">A common scenario is binding a property in a child component to a property in its parent.</span></span> <span data-ttu-id="df08a-156">此案例稱為 *連鎖* 系結，因為有多個層級的系結同時發生。</span><span class="sxs-lookup"><span data-stu-id="df08a-156">This scenario is called a *chained bind* because multiple levels of binding occur simultaneously.</span></span>
+<span data-ttu-id="a1454-155">[C # `get` 和 `set` 存取](/dotnet/csharp/programming-guide/classes-and-structs/using-properties) 子可以用來建立自訂系結格式行為，如下列元件所示 `DecimalBinding` 。</span><span class="sxs-lookup"><span data-stu-id="a1454-155">[C# `get` and `set` accessors](/dotnet/csharp/programming-guide/classes-and-structs/using-properties) can be used to create custom binding format behavior, as the following `DecimalBinding` component demonstrates.</span></span> <span data-ttu-id="a1454-156">元件 pesudo 會透過 `<input>` `string` 屬性 () ，將一個或多個小數位數的十進位或負數值系結至元素 `DecimalValue` 。</span><span class="sxs-lookup"><span data-stu-id="a1454-156">The component pesudo-binds a positive or negative decimal with up to three decimal places to an `<input>` element by way of a `string` property (`DecimalValue`).</span></span>
 
-<span data-ttu-id="df08a-157">[元件參數](xref:blazor/components/index#component-parameters) 允許使用語法來系結父元件的屬性 `@bind-{PROPERTY}` 。</span><span class="sxs-lookup"><span data-stu-id="df08a-157">[Component parameters](xref:blazor/components/index#component-parameters) permit binding properties of a parent component with `@bind-{PROPERTY}` syntax.</span></span>
+<span data-ttu-id="a1454-157">`Pages/DecimalBinding.razor`:</span><span class="sxs-lookup"><span data-stu-id="a1454-157">`Pages/DecimalBinding.razor`:</span></span>
 
-<span data-ttu-id="df08a-158">連結系結無法使用 [`@bind`](xref:mvc/views/razor#bind) 子元件中的語法來執行。</span><span class="sxs-lookup"><span data-stu-id="df08a-158">Chained binds can't be implemented with [`@bind`](xref:mvc/views/razor#bind) syntax in the child component.</span></span> <span data-ttu-id="df08a-159">必須個別指定事件處理常式和值，以支援從子元件的父系更新屬性。</span><span class="sxs-lookup"><span data-stu-id="df08a-159">An event handler and value must be specified separately to support updating the property in the parent from the child component.</span></span>
+::: moniker range=">= aspnetcore-5.0"
 
-<span data-ttu-id="df08a-160">父元件仍會利用 [`@bind`](xref:mvc/views/razor#bind) 語法來設定子元件的資料系結。</span><span class="sxs-lookup"><span data-stu-id="df08a-160">The parent component still leverages the [`@bind`](xref:mvc/views/razor#bind) syntax to set up the data-binding with the child component.</span></span>
+[!code-razor[](~/blazor/common/samples/5.x/BlazorSample_WebAssembly/Pages/data-binding/DecimalBinding.razor?highlight=7,21-31)]
 
-<span data-ttu-id="df08a-161">下列 `Child` 元件 (`Shared/Child.razor`) 具有 `Year` 元件參數和 `YearChanged` 回呼：</span><span class="sxs-lookup"><span data-stu-id="df08a-161">The following `Child` component (`Shared/Child.razor`) has a `Year` component parameter and `YearChanged` callback:</span></span>
+::: moniker-end
 
-```razor
-<div class="card bg-light mt-3" style="width:18rem ">
-    <div class="card-body">
-        <h3 class="card-title">Child Component</h3>
-        <p class="card-text">Child <code>Year</code>: @Year</p>
-    </div>
-</div>
+::: moniker range="< aspnetcore-5.0"
 
-<button @onclick="UpdateYearFromChild">Update Year from Child</button>
+[!code-razor[](~/blazor/common/samples/3.x/BlazorSample_WebAssembly/Pages/data-binding/DecimalBinding.razor?highlight=7,21-31)]
 
-@code {
-    private Random r = new Random();
+::: moniker-end
 
-    [Parameter]
-    public int Year { get; set; }
+## <a name="binding-with-component-parameters"></a><span data-ttu-id="a1454-158">使用元件參數進行系結</span><span class="sxs-lookup"><span data-stu-id="a1454-158">Binding with component parameters</span></span>
 
-    [Parameter]
-    public EventCallback<int> YearChanged { get; set; }
+<span data-ttu-id="a1454-159">常見的案例是將子元件的屬性系結至其父元件中的屬性。</span><span class="sxs-lookup"><span data-stu-id="a1454-159">A common scenario is binding a property of a child component to a property in its parent component.</span></span> <span data-ttu-id="a1454-160">此案例稱為 *連鎖* 系結，因為有多個層級的系結同時發生。</span><span class="sxs-lookup"><span data-stu-id="a1454-160">This scenario is called a *chained bind* because multiple levels of binding occur simultaneously.</span></span>
 
-    private async Task UpdateYearFromChild()
-    {
-        await YearChanged.InvokeAsync(r.Next(1950, 2021));
-    }
-}
-```
+<span data-ttu-id="a1454-161">[元件參數](xref:blazor/components/index#component-parameters) 允許父元件的系結屬性與 `@bind-{PROPERTY}` 語法，其中 `{PROPERTY}` 預留位置是要系結的屬性。</span><span class="sxs-lookup"><span data-stu-id="a1454-161">[Component parameters](xref:blazor/components/index#component-parameters) permit binding properties of a parent component with `@bind-{PROPERTY}` syntax, where the `{PROPERTY}` placeholder is the property to bind.</span></span>
 
-<span data-ttu-id="df08a-162">回呼 (<xref:Microsoft.AspNetCore.Components.EventCallback%601>) 必須命名為元件參數名稱，後面接著 " `Changed` " 尾碼 (`{PARAMETER NAME}Changed`) 。</span><span class="sxs-lookup"><span data-stu-id="df08a-162">The callback (<xref:Microsoft.AspNetCore.Components.EventCallback%601>) must be named as the component parameter name followed by the "`Changed`" suffix (`{PARAMETER NAME}Changed`).</span></span> <span data-ttu-id="df08a-163">在上述範例中，回呼的名稱為 `YearChanged` 。</span><span class="sxs-lookup"><span data-stu-id="df08a-163">In the preceding example, the callback is named `YearChanged`.</span></span> <span data-ttu-id="df08a-164"><xref:Microsoft.AspNetCore.Components.EventCallback.InvokeAsync%2A?displayProperty=nameWithType> 使用提供的引數叫用與系結相關聯的委派，並分派已變更屬性的事件通知。</span><span class="sxs-lookup"><span data-stu-id="df08a-164"><xref:Microsoft.AspNetCore.Components.EventCallback.InvokeAsync%2A?displayProperty=nameWithType> invokes the delegate associated with the binding with the provided argument and dispatches an event notification for the changed property.</span></span>
+<span data-ttu-id="a1454-162">您無法使用子元件中的語法來執行連結系結 [`@bind`](xref:mvc/views/razor#bind) 。</span><span class="sxs-lookup"><span data-stu-id="a1454-162">You can't implement chained binds with [`@bind`](xref:mvc/views/razor#bind) syntax in the child component.</span></span> <span data-ttu-id="a1454-163">必須個別指定事件處理常式和值，以支援從子元件的父系更新屬性。</span><span class="sxs-lookup"><span data-stu-id="a1454-163">An event handler and value must be specified separately to support updating the property in the parent from the child component.</span></span>
 
-<span data-ttu-id="df08a-165">在下列 `Parent` 元件 (`Parent.razor`) 中，欄位會系結 `year` 至 `Year` 子元件的參數：</span><span class="sxs-lookup"><span data-stu-id="df08a-165">In the following `Parent` component (`Parent.razor`), the `year` field is bound to the `Year` parameter of the child component:</span></span>
+<span data-ttu-id="a1454-164">父元件仍會利用 [`@bind`](xref:mvc/views/razor#bind) 語法來設定與子元件的資料系結。</span><span class="sxs-lookup"><span data-stu-id="a1454-164">The parent component still leverages the [`@bind`](xref:mvc/views/razor#bind) syntax to set up the databinding with the child component.</span></span>
 
-```razor
-@page "/Parent"
+<span data-ttu-id="a1454-165">下列 `ChildBind` 元件具有 `Year` 元件參數和 <xref:Microsoft.AspNetCore.Components.EventCallback%601> 。</span><span class="sxs-lookup"><span data-stu-id="a1454-165">The following `ChildBind` component has a `Year` component parameter and an <xref:Microsoft.AspNetCore.Components.EventCallback%601>.</span></span> <span data-ttu-id="a1454-166">依照慣例， <xref:Microsoft.AspNetCore.Components.EventCallback%601> 參數的必須以 "" 尾碼命名為元件參數名稱 `Changed` 。</span><span class="sxs-lookup"><span data-stu-id="a1454-166">By convention, the <xref:Microsoft.AspNetCore.Components.EventCallback%601> for the parameter must be named as the component parameter name with a "`Changed`" suffix.</span></span> <span data-ttu-id="a1454-167">命名語法是 `{PARAMETER NAME}Changed` ，其中 `{PARAMETER NAME}` 預留位置是參數名稱。</span><span class="sxs-lookup"><span data-stu-id="a1454-167">The naming syntax is `{PARAMETER NAME}Changed`, where the `{PARAMETER NAME}` placeholder is the parameter name.</span></span> <span data-ttu-id="a1454-168">在下列範例中， <xref:Microsoft.AspNetCore.Components.EventCallback%601> 名為 `YearChanged` 。</span><span class="sxs-lookup"><span data-stu-id="a1454-168">In the following example, the <xref:Microsoft.AspNetCore.Components.EventCallback%601> is named `YearChanged`.</span></span>
 
-<h1>Parent Component</h1>
+<span data-ttu-id="a1454-169"><xref:Microsoft.AspNetCore.Components.EventCallback.InvokeAsync%2A?displayProperty=nameWithType> 使用提供的引數叫用與系結相關聯的委派，並分派已變更屬性的事件通知。</span><span class="sxs-lookup"><span data-stu-id="a1454-169"><xref:Microsoft.AspNetCore.Components.EventCallback.InvokeAsync%2A?displayProperty=nameWithType> invokes the delegate associated with the binding with the provided argument and dispatches an event notification for the changed property.</span></span>
 
-<p>Parent <code>year</code>: @year</p>
+<span data-ttu-id="a1454-170">`Shared/ChildBind.razor`:</span><span class="sxs-lookup"><span data-stu-id="a1454-170">`Shared/ChildBind.razor`:</span></span>
 
-<button @onclick="UpdateYear">Update Parent <code>year</code></button>
+::: moniker range=">= aspnetcore-5.0"
 
-<Child @bind-Year="year" />
+[!code-razor[](~/blazor/common/samples/5.x/BlazorSample_WebAssembly/Shared/data-binding/ChildBind.razor?highlight=14-15,17-18,22)]
 
-@code {
-    private Random r = new Random();
-    private int year = 1979;
+::: moniker-end
 
-    private void UpdateYear()
-    {
-        year = r.Next(1950, 2021);
-    }
-}
-```
+::: moniker range="< aspnetcore-5.0"
 
-<span data-ttu-id="df08a-166">`Year`參數是可系結的，因為它具有 `YearChanged` 符合參數類型的伴隨事件 `Year` 。</span><span class="sxs-lookup"><span data-stu-id="df08a-166">The `Year` parameter is bindable because it has a companion `YearChanged` event that matches the type of the `Year` parameter.</span></span>
+[!code-razor[](~/blazor/common/samples/3.x/BlazorSample_WebAssembly/Shared/data-binding/ChildBind.razor?highlight=14-15,17-18,22)]
 
-<span data-ttu-id="df08a-167">依照慣例，屬性可以藉由包含指派給處理常式的屬性，系結至對應的事件處理常式 `@bind-{PROPERTY}:event` 。</span><span class="sxs-lookup"><span data-stu-id="df08a-167">By convention, a property can be bound to a corresponding event handler by including an `@bind-{PROPERTY}:event` attribute assigned to the handler.</span></span> <span data-ttu-id="df08a-168">`<Child @bind-Year="year" />` 相當於撰寫：</span><span class="sxs-lookup"><span data-stu-id="df08a-168">`<Child @bind-Year="year" />` is equivalent to writing:</span></span>
+::: moniker-end
+
+<span data-ttu-id="a1454-171">如需事件和的詳細資訊 <xref:Microsoft.AspNetCore.Components.EventCallback%601> ，請參閱本文的 *>app >eventcallback* 一節 <xref:blazor/components/event-handling#eventcallback> 。</span><span class="sxs-lookup"><span data-stu-id="a1454-171">For more information on events and <xref:Microsoft.AspNetCore.Components.EventCallback%601>, see the *EventCallback* section of the <xref:blazor/components/event-handling#eventcallback> article.</span></span>
+
+<span data-ttu-id="a1454-172">在下列 `Parent` 元件中， `year` 欄位會系結至 `Year` 子元件的參數。</span><span class="sxs-lookup"><span data-stu-id="a1454-172">In the following `Parent` component, the `year` field is bound to the `Year` parameter of the child component.</span></span> <span data-ttu-id="a1454-173">`Year`參數是可系結的，因為它具有 `YearChanged` 符合參數類型的伴隨事件 `Year` 。</span><span class="sxs-lookup"><span data-stu-id="a1454-173">The `Year` parameter is bindable because it has a companion `YearChanged` event that matches the type of the `Year` parameter.</span></span>
+
+<span data-ttu-id="a1454-174">`Pages/Parent.razor`:</span><span class="sxs-lookup"><span data-stu-id="a1454-174">`Pages/Parent.razor`:</span></span>
+
+::: moniker range=">= aspnetcore-5.0"
+
+[!code-razor[](~/blazor/common/samples/5.x/BlazorSample_WebAssembly/Pages/data-binding/Parent1.razor?highlight=9)]
+
+::: moniker-end
+
+::: moniker range="< aspnetcore-5.0"
+
+[!code-razor[](~/blazor/common/samples/3.x/BlazorSample_WebAssembly/Pages/data-binding/Parent1.razor?highlight=9)]
+
+::: moniker-end
+
+<span data-ttu-id="a1454-175">依照慣例，屬性可以系結至對應的事件處理常式，其方式 `@bind-{PROPERTY}:event` 是將指派給處理常式的屬性（attribute），其中 `{PROPERTY}` 預留位置是屬性（property）。</span><span class="sxs-lookup"><span data-stu-id="a1454-175">By convention, a property can be bound to a corresponding event handler by including an `@bind-{PROPERTY}:event` attribute assigned to the handler, where the `{PROPERTY}` placeholder is the property.</span></span> <span data-ttu-id="a1454-176">`<ChildBind @bind-Year="year" />` 相當於撰寫：</span><span class="sxs-lookup"><span data-stu-id="a1454-176">`<ChildBind @bind-Year="year" />` is equivalent to writing:</span></span>
 
 ```razor
-<Child @bind-Year="year" @bind-Year:event="YearChanged" />
+<ChildBind @bind-Year="year" @bind-Year:event="YearChanged" />
 ```
 
-<span data-ttu-id="df08a-169">在更複雜的真實世界範例中，下列 `PasswordField` 元件 (`PasswordField.razor`) ：</span><span class="sxs-lookup"><span data-stu-id="df08a-169">In a more sophisticated and real-world example, the following `PasswordField` component (`PasswordField.razor`):</span></span>
+<span data-ttu-id="a1454-177">在更複雜的真實世界範例中，下列 `Password` 元件：</span><span class="sxs-lookup"><span data-stu-id="a1454-177">In a more sophisticated and real-world example, the following `Password` component:</span></span>
 
-* <span data-ttu-id="df08a-170">將 `<input>` 元素的值設定為 `password` 欄位。</span><span class="sxs-lookup"><span data-stu-id="df08a-170">Sets an `<input>` element's value to a `password` field.</span></span>
-* <span data-ttu-id="df08a-171">將屬性的變更公開 `Password` 至父代元件 [`EventCallback`](xref:blazor/components/event-handling#eventcallback) ，該元件會傳入子系欄位的目前值 `password` 做為其引數。</span><span class="sxs-lookup"><span data-stu-id="df08a-171">Exposes changes of a `Password` property to a parent component with an [`EventCallback`](xref:blazor/components/event-handling#eventcallback) that passes in the current value of the child's `password` field as its argument.</span></span>
-* <span data-ttu-id="df08a-172">使用 `onclick` 事件來觸發 `ToggleShowPassword` 方法。</span><span class="sxs-lookup"><span data-stu-id="df08a-172">Uses the `onclick` event to trigger the `ToggleShowPassword` method.</span></span> <span data-ttu-id="df08a-173">如需詳細資訊，請參閱<xref:blazor/components/event-handling>。</span><span class="sxs-lookup"><span data-stu-id="df08a-173">For more information, see <xref:blazor/components/event-handling>.</span></span>
+* <span data-ttu-id="a1454-178">將 `<input>` 元素的值設定為 `password` 欄位。</span><span class="sxs-lookup"><span data-stu-id="a1454-178">Sets an `<input>` element's value to a `password` field.</span></span>
+* <span data-ttu-id="a1454-179">將屬性的變更公開 `Password` 至父代元件 [`EventCallback`](xref:blazor/components/event-handling#eventcallback) ，該元件會傳入子系欄位的目前值 `password` 做為其引數。</span><span class="sxs-lookup"><span data-stu-id="a1454-179">Exposes changes of a `Password` property to a parent component with an [`EventCallback`](xref:blazor/components/event-handling#eventcallback) that passes in the current value of the child's `password` field as its argument.</span></span>
+* <span data-ttu-id="a1454-180">使用 `onclick` 事件來觸發 `ToggleShowPassword` 方法。</span><span class="sxs-lookup"><span data-stu-id="a1454-180">Uses the `onclick` event to trigger the `ToggleShowPassword` method.</span></span> <span data-ttu-id="a1454-181">如需詳細資訊，請參閱<xref:blazor/components/event-handling>。</span><span class="sxs-lookup"><span data-stu-id="a1454-181">For more information, see <xref:blazor/components/event-handling>.</span></span>
 
-```razor
-<h1>Provide your password</h1>
+<span data-ttu-id="a1454-182">`Shared/PasswordEntry.razor`:</span><span class="sxs-lookup"><span data-stu-id="a1454-182">`Shared/PasswordEntry.razor`:</span></span>
 
-Password:
+::: moniker range=">= aspnetcore-5.0"
 
-<input @oninput="OnPasswordChanged" 
-       required 
-       type="@(showPassword ? "text" : "password")" 
-       value="@password" />
+[!code-razor[](~/blazor/common/samples/5.x/BlazorSample_WebAssembly/Shared/data-binding/PasswordEntry.razor?highlight=7-10,13,23-24,26-27,36-39)]
 
-<button class="btn btn-primary" @onclick="ToggleShowPassword">
-    Show password
-</button>
+::: moniker-end
 
-@code {
-    private bool showPassword;
-    private string password;
+::: moniker range="< aspnetcore-5.0"
 
-    [Parameter]
-    public string Password { get; set; }
+[!code-razor[](~/blazor/common/samples/3.x/BlazorSample_WebAssembly/Shared/data-binding/PasswordEntry.razor?highlight=7-10,13,23-24,26-27,36-39)]
 
-    [Parameter]
-    public EventCallback<string> PasswordChanged { get; set; }
+::: moniker-end
 
-    private async Task OnPasswordChanged(ChangeEventArgs e)
-    {
-        password = e.Value.ToString();
+<span data-ttu-id="a1454-183">`PasswordEntry`元件是在另一個元件中使用，例如下列 `PasswordBinding` 元件範例。</span><span class="sxs-lookup"><span data-stu-id="a1454-183">The `PasswordEntry` component is used in another component, such as the following `PasswordBinding` component example.</span></span>
 
-        await PasswordChanged.InvokeAsync(password);
-    }
+<span data-ttu-id="a1454-184">`Pages/PasswordBinding.razor`:</span><span class="sxs-lookup"><span data-stu-id="a1454-184">`Pages/PasswordBinding.razor`:</span></span>
 
-    private void ToggleShowPassword()
-    {
-        showPassword = !showPassword;
-    }
-}
-```
+::: moniker range=">= aspnetcore-5.0"
 
-<span data-ttu-id="df08a-174">`PasswordField`元件是在另一個元件中使用：</span><span class="sxs-lookup"><span data-stu-id="df08a-174">The `PasswordField` component is used in another component:</span></span>
+[!code-razor[](~/blazor/common/samples/5.x/BlazorSample_WebAssembly/Pages/data-binding/PasswordBinding.razor?highlight=5)]
 
-```razor
-@page "/Parent"
+::: moniker-end
 
-<h1>Parent Component</h1>
+::: moniker range="< aspnetcore-5.0"
 
-<PasswordField @bind-Password="password" />
+[!code-razor[](~/blazor/common/samples/3.x/BlazorSample_WebAssembly/Pages/data-binding/PasswordBinding.razor?highlight=5)]
 
-@code {
-    private string password;
-}
-```
+::: moniker-end
 
-<span data-ttu-id="df08a-175">在叫用系結委派的方法中執行檢查或陷阱錯誤。</span><span class="sxs-lookup"><span data-stu-id="df08a-175">Perform checks or trap errors in the method that invokes the binding's delegate.</span></span> <span data-ttu-id="df08a-176">下列範例會在密碼值中使用空格時，為使用者提供立即的意見反應：</span><span class="sxs-lookup"><span data-stu-id="df08a-176">The following example provides immediate feedback to the user if a space is used in the password's value:</span></span>
+<span data-ttu-id="a1454-185">在叫用系結委派的方法中執行檢查或陷阱錯誤。</span><span class="sxs-lookup"><span data-stu-id="a1454-185">Perform checks or trap errors in the method that invokes the binding's delegate.</span></span> <span data-ttu-id="a1454-186">下列修訂的 `PasswordEntry` 元件會在密碼的值中使用空格時，為使用者提供立即的意見反應。</span><span class="sxs-lookup"><span data-stu-id="a1454-186">The following revised `PasswordEntry` component provides immediate feedback to the user if a space is used in the password's value.</span></span>
 
-```razor
-<h1>Child Component</h1>
+<span data-ttu-id="a1454-187">`Shared/PasswordEntry.razor`:</span><span class="sxs-lookup"><span data-stu-id="a1454-187">`Shared/PasswordEntry.razor`:</span></span>
 
-Password: 
+::: moniker range=">= aspnetcore-5.0"
 
-<input @oninput="OnPasswordChanged" 
-       required 
-       type="@(showPassword ? "text" : "password")" 
-       value="@password" />
+[!code-razor[](~/blazor/common/samples/5.x/BlazorSample_WebAssembly/Shared/data-binding/PasswordEntry2.razor?highlight=35-46)]
 
-<button class="btn btn-primary" @onclick="ToggleShowPassword">
-    Show password
-</button>
+::: moniker-end
 
-<span class="text-danger">@validationMessage</span>
+::: moniker range="< aspnetcore-5.0"
 
-@code {
-    private bool showPassword;
-    private string password;
-    private string validationMessage;
+[!code-razor[](~/blazor/common/samples/3.x/BlazorSample_WebAssembly/Shared/data-binding/PasswordEntry2.razor?highlight=35-46)]
 
-    [Parameter]
-    public string Password { get; set; }
+::: moniker-end
 
-    [Parameter]
-    public EventCallback<string> PasswordChanged { get; set; }
+## <a name="bind-across-more-than-two-components"></a><span data-ttu-id="a1454-188">跨兩個以上的元件進行系結</span><span class="sxs-lookup"><span data-stu-id="a1454-188">Bind across more than two components</span></span>
 
-    private Task OnPasswordChanged(ChangeEventArgs e)
-    {
-        password = e.Value.ToString();
+<span data-ttu-id="a1454-189">您可以透過任意數目的嵌套元件來系結參數，但您必須遵循單向資料流程：</span><span class="sxs-lookup"><span data-stu-id="a1454-189">You can bind parameters through any number of nested components, but you must respect the one-way flow of data:</span></span>
 
-        if (password.Contains(' '))
-        {
-            validationMessage = "Spaces not allowed!";
+* <span data-ttu-id="a1454-190">變更通知會在階層中 *往上流動*。</span><span class="sxs-lookup"><span data-stu-id="a1454-190">Change notifications *flow up the hierarchy*.</span></span>
+* <span data-ttu-id="a1454-191">新的參數值會在階層中 *往下流動*。</span><span class="sxs-lookup"><span data-stu-id="a1454-191">New parameter values *flow down the hierarchy*.</span></span>
 
-            return Task.CompletedTask;
-        }
-        else
-        {
-            validationMessage = string.Empty;
+<span data-ttu-id="a1454-192">常見和建議的方法是只將基礎資料儲存在父元件中，以避免任何必須更新狀態的混淆，如下列範例所示。</span><span class="sxs-lookup"><span data-stu-id="a1454-192">A common and recommended approach is to only store the underlying data in the parent component to avoid any confusion about what state must be updated, as shown in the following example.</span></span>
 
-            return PasswordChanged.InvokeAsync(password);
-        }
-    }
+<span data-ttu-id="a1454-193">`Pages/Parent.razor`:</span><span class="sxs-lookup"><span data-stu-id="a1454-193">`Pages/Parent.razor`:</span></span>
 
-    private void ToggleShowPassword()
-    {
-        showPassword = !showPassword;
-    }
-}
-```
+::: moniker range=">= aspnetcore-5.0"
 
-<span data-ttu-id="df08a-177">如需 <xref:Microsoft.AspNetCore.Components.EventCallback%601> 的詳細資訊，請參閱 <xref:blazor/components/event-handling#eventcallback>。</span><span class="sxs-lookup"><span data-stu-id="df08a-177">For more information on <xref:Microsoft.AspNetCore.Components.EventCallback%601>, see <xref:blazor/components/event-handling#eventcallback>.</span></span>
+[!code-razor[](~/blazor/common/samples/5.x/BlazorSample_WebAssembly/Pages/data-binding/Parent2.razor)]
 
-## <a name="bind-across-more-than-two-components"></a><span data-ttu-id="df08a-178">跨兩個以上的元件進行系結</span><span class="sxs-lookup"><span data-stu-id="df08a-178">Bind across more than two components</span></span>
+::: moniker-end
 
-<span data-ttu-id="df08a-179">您可以透過任意數目的嵌套元件進行系結，但您必須遵守單向的資料流程：</span><span class="sxs-lookup"><span data-stu-id="df08a-179">You can bind through any number of nested components, but you must respect the one-way flow of data:</span></span>
+::: moniker range="< aspnetcore-5.0"
 
-* <span data-ttu-id="df08a-180">變更通知會在階層中 *往上流動*。</span><span class="sxs-lookup"><span data-stu-id="df08a-180">Change notifications *flow up the hierarchy*.</span></span>
-* <span data-ttu-id="df08a-181">新的參數值會在階層中 *往下流動*。</span><span class="sxs-lookup"><span data-stu-id="df08a-181">New parameter values *flow down the hierarchy*.</span></span>
+[!code-razor[](~/blazor/common/samples/3.x/BlazorSample_WebAssembly/Pages/data-binding/Parent2.razor)]
 
-<span data-ttu-id="df08a-182">常見和建議的方法是只將基礎資料儲存在父元件中，以避免任何必須更新狀態的混淆。</span><span class="sxs-lookup"><span data-stu-id="df08a-182">A common and recommended approach is to only store the underlying data in the parent component to avoid any confusion about what state must be updated.</span></span>
+::: moniker-end
 
-<span data-ttu-id="df08a-183">下列元件示範上述概念：</span><span class="sxs-lookup"><span data-stu-id="df08a-183">The following components demonstrate the preceding concepts:</span></span>
+<span data-ttu-id="a1454-194">`Shared/NestedChild.razor`:</span><span class="sxs-lookup"><span data-stu-id="a1454-194">`Shared/NestedChild.razor`:</span></span>
 
-<span data-ttu-id="df08a-184">`ParentComponent.razor`:</span><span class="sxs-lookup"><span data-stu-id="df08a-184">`ParentComponent.razor`:</span></span>
+::: moniker range=">= aspnetcore-5.0"
 
-```razor
-<h1>Parent Component</h1>
+[!code-razor[](~/blazor/common/samples/5.x/BlazorSample_WebAssembly/Shared/data-binding/NestedChild.razor)]
 
-<p>Parent Message: <b>@parentMessage</b></p>
+::: moniker-end
 
-<p>
-    <button @onclick="ChangeValue">Change from Parent</button>
-</p>
+::: moniker range="< aspnetcore-5.0"
 
-<ChildComponent @bind-ChildMessage="parentMessage" />
+[!code-razor[](~/blazor/common/samples/3.x/BlazorSample_WebAssembly/Shared/data-binding/NestedChild.razor)]
 
-@code {
-    private string parentMessage = "Initial value set in Parent";
+::: moniker-end
 
-    private void ChangeValue()
-    {
-        parentMessage = $"Set in Parent {DateTime.Now}";
-    }
-}
-```
+<span data-ttu-id="a1454-195">`Shared/NestedGrandchild.razor`:</span><span class="sxs-lookup"><span data-stu-id="a1454-195">`Shared/NestedGrandchild.razor`:</span></span>
 
-<span data-ttu-id="df08a-185">`ChildComponent.razor`:</span><span class="sxs-lookup"><span data-stu-id="df08a-185">`ChildComponent.razor`:</span></span>
+::: moniker range=">= aspnetcore-5.0"
 
-```razor
-<div class="border rounded m-1 p-1">
-    <h2>Child Component</h2>
+[!code-razor[](~/blazor/common/samples/5.x/BlazorSample_WebAssembly/Shared/data-binding/NestedGrandchild.razor)]
 
-    <p>Child Message: <b>@ChildMessage</b></p>
+::: moniker-end
 
-    <p>
-        <button @onclick="ChangeValue">Change from Child</button>
-    </p>
+::: moniker range="< aspnetcore-5.0"
 
-    <GrandchildComponent @bind-GrandchildMessage="BoundValue" />
-</div>
+[!code-razor[](~/blazor/common/samples/3.x/BlazorSample_WebAssembly/Shared/data-binding/NestedGrandchild.razor)]
 
-@code {
-    [Parameter]
-    public string ChildMessage { get; set; }
+::: moniker-end
 
-    [Parameter]
-    public EventCallback<string> ChildMessageChanged { get; set; }
+<span data-ttu-id="a1454-196">如需適合用來在記憶體中共用資料的替代方法，以及跨不一定要進行嵌套的元件，請參閱 <xref:blazor/state-management> 。</span><span class="sxs-lookup"><span data-stu-id="a1454-196">For an alternative approach suited to sharing data in memory and across components that aren't necessarily nested, see <xref:blazor/state-management>.</span></span>
 
-    private string BoundValue
-    {
-        get => ChildMessage;
-        set => ChildMessageChanged.InvokeAsync(value);
-    }
+## <a name="additional-resources"></a><span data-ttu-id="a1454-197">其他資源</span><span class="sxs-lookup"><span data-stu-id="a1454-197">Additional resources</span></span>
 
-    private async Task ChangeValue()
-    {
-        await ChildMessageChanged.InvokeAsync(
-            $"Set in Child {DateTime.Now}");
-    }
-}
-```
-
-<span data-ttu-id="df08a-186">`GrandchildComponent.razor`:</span><span class="sxs-lookup"><span data-stu-id="df08a-186">`GrandchildComponent.razor`:</span></span>
-
-```razor
-<div class="border rounded m-1 p-1">
-    <h3>Grandchild Component</h3>
-
-    <p>Grandchild Message: <b>@GrandchildMessage</b></p>
-
-    <p>
-        <button @onclick="ChangeValue">Change from Grandchild</button>
-    </p>
-</div>
-
-@code {
-    [Parameter]
-    public string GrandchildMessage { get; set; }
-
-    [Parameter]
-    public EventCallback<string> GrandchildMessageChanged { get; set; }
-
-    private async Task ChangeValue()
-    {
-        await GrandchildMessageChanged.InvokeAsync(
-            $"Set in Grandchild {DateTime.Now}");
-    }
-}
-```
-
-<span data-ttu-id="df08a-187">如需適合在不需要嵌套的元件之間共用記憶體資料的替代方法，請參閱本文的 *記憶體內部狀態容器服務* 一節 <xref:blazor/state-management> 。</span><span class="sxs-lookup"><span data-stu-id="df08a-187">For an alternative approach suited to sharing data in-memory across components that aren't necessarily nested, see the *In-memory state container service* section of the <xref:blazor/state-management> article.</span></span>
-
-## <a name="additional-resources"></a><span data-ttu-id="df08a-188">其他資源</span><span class="sxs-lookup"><span data-stu-id="df08a-188">Additional resources</span></span>
-
-* [<span data-ttu-id="df08a-189">系結至表單中的選項按鈕</span><span class="sxs-lookup"><span data-stu-id="df08a-189">Binding to radio buttons in a form</span></span>](xref:blazor/forms-validation#radio-buttons)
-* [<span data-ttu-id="df08a-190">將 `<select>` 元件選項系結至 `null` 表單中的 c # 物件值</span><span class="sxs-lookup"><span data-stu-id="df08a-190">Binding `<select>` element options to C# object `null` values in a form</span></span>](xref:blazor/forms-validation#binding-select-element-options-to-c-object-null-values)
+* <xref:blazor/forms-validation>
+* [<span data-ttu-id="a1454-198">系結至表單中的選項按鈕</span><span class="sxs-lookup"><span data-stu-id="a1454-198">Binding to radio buttons in a form</span></span>](xref:blazor/forms-validation#radio-buttons)
+* [<span data-ttu-id="a1454-199">將 `<select>` 元件選項系結至 `null` 表單中的 c # 物件值</span><span class="sxs-lookup"><span data-stu-id="a1454-199">Binding `<select>` element options to C# object `null` values in a form</span></span>](xref:blazor/forms-validation#binding-select-element-options-to-c-object-null-values)
+* [<span data-ttu-id="a1454-200">ASP.NET Core Blazor 事件處理： `EventCallback` 區段</span><span class="sxs-lookup"><span data-stu-id="a1454-200">ASP.NET Core Blazor event handling: `EventCallback` section</span></span>](xref:blazor/components/event-handling#eventcallback)

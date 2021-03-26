@@ -4,7 +4,7 @@ author: rick-anderson
 description: 瞭解如何使用 Azure Key Vault 設定提供者，使用在執行時間載入的名稱/值配對來設定應用程式。
 monikerRange: '>= aspnetcore-2.1'
 ms.author: riande
-ms.custom: mvc, devx-track-azurecli
+ms.custom: mvc, devx-track-azurecli, contperf-fy21q3
 ms.date: 03/17/2021
 no-loc:
 - appsettings.json
@@ -19,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: security/key-vault-configuration
-ms.openlocfilehash: 91b5afe65e69ab2a5ad92e803fa9626157b605f7
-ms.sourcegitcommit: 1f35de0ca9ba13ea63186c4dc387db4fb8e541e0
+ms.openlocfilehash: 940458147f1a03eb2964518dc0e1b042775d693e
+ms.sourcegitcommit: 9d185d06b343ec2fb91e7c01a4b14dd924f041c4
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 03/20/2021
-ms.locfileid: "104711252"
+ms.lasthandoff: 03/26/2021
+ms.locfileid: "105614909"
 ---
 # <a name="azure-key-vault-configuration-provider-in-aspnet-core"></a>ASP.NET Core 中的 Azure Key Vault 設定提供者
 

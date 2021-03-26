@@ -20,12 +20,12 @@ no-loc:
 - SignalR
 uid: blazor/fundamentals/logging
 zone_pivot_groups: blazor-hosting-models
-ms.openlocfilehash: e87b1a0dd54eb03dc1bdfdc7f2189a59df272026
-ms.sourcegitcommit: 422e8444b9f5cedc373be5efe8032822db54fcaf
+ms.openlocfilehash: f51efaa262e816bd9f70e254f2723c4a5abf9db5
+ms.sourcegitcommit: 4bbc69f51c59bed1a96aa46f9f5dca2f2a2634cb
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 02/18/2021
-ms.locfileid: "101101024"
+ms.lasthandoff: 03/25/2021
+ms.locfileid: "105554846"
 ---
 # <a name="aspnet-core-blazor-logging"></a>ASP.NET Core Blazor 記錄
 
@@ -66,7 +66,7 @@ builder.Logging.AddProvider(new CustomLoggingProvider());
 @inject ILoggerProvider LoggerProvider
 ```
 
-在元件的[ `OnInitializedAsync` 方法](xref:blazor/components/lifecycle#component-initialization-methods)中，使用 <xref:Microsoft.AspNetCore.SignalR.Client.HubConnectionBuilderExtensions.ConfigureLogging%2A?displayProperty=nameWithType> ：
+在元件的[ `OnInitializedAsync` 方法](xref:blazor/components/lifecycle#component-initialization-methods-oninitializedasync)中，使用 <xref:Microsoft.AspNetCore.SignalR.Client.HubConnectionBuilderExtensions.ConfigureLogging%2A?displayProperty=nameWithType> ：
 
 ```csharp
 var connection = new HubConnectionBuilder()

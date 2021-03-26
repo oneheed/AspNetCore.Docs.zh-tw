@@ -1,5 +1,5 @@
 ---
-title: 防止跨網站偽造要求 (XSRF/CSRF) 在 ASP.NET 核心中的攻擊
+title: 防止跨網站偽造要求 (XSRF/CSRF) 攻擊 ASP.NET Core
 author: steve-smith
 description: 探索如何防止惡意網站可能影響用戶端瀏覽器和應用程式之間互動的 web 應用程式遭受攻擊。
 ms.author: riande
@@ -18,14 +18,14 @@ no-loc:
 - Razor
 - SignalR
 uid: security/anti-request-forgery
-ms.openlocfilehash: 5d6f2915dd9b27142ac7d8ac55e68c6a26e41f81
-ms.sourcegitcommit: 54fe1ae5e7d068e27376d562183ef9ddc7afc432
+ms.openlocfilehash: 08414bb4c4d168b672eed2cb7e6a490511ec93d4
+ms.sourcegitcommit: 4bbc69f51c59bed1a96aa46f9f5dca2f2a2634cb
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 03/10/2021
-ms.locfileid: "102585782"
+ms.lasthandoff: 03/25/2021
+ms.locfileid: "105555054"
 ---
-# <a name="prevent-cross-site-request-forgery-xsrfcsrf-attacks-in-aspnet-core"></a>防止跨網站偽造要求 (XSRF/CSRF) 在 ASP.NET 核心中的攻擊
+# <a name="prevent-cross-site-request-forgery-xsrfcsrf-attacks-in-aspnet-core"></a>防止跨網站偽造要求 (XSRF/CSRF) 攻擊 ASP.NET Core
 
 依 [Rick Anderson](https://twitter.com/RickAndMSFT)、 [Fiyaz Hasan](https://twitter.com/FiyazBinHasan)和 [Steve Smith](https://ardalis.com/)
 
@@ -72,7 +72,7 @@ CSRF 攻擊的範例：
 
 不過，CSRF 攻擊並不限於利用 cookie 。 例如，基本和摘要式驗證也很容易受到攻擊。 使用者使用基本或摘要式驗證登入之後，瀏覽器會自動傳送認證，直到會話 &dagger; 結束為止。
 
-&dagger;在此內容中， *會話* 是指驗證使用者的用戶端會話。 它與伺服器端會話或 [ASP.NET 核心會話中介軟體](xref:fundamentals/app-state)無關。
+&dagger;在此內容中， *會話* 是指驗證使用者的用戶端會話。 它與伺服器端會話或 [ASP.NET Core 會話中介軟體](xref:fundamentals/app-state)無關。
 
 使用者可以採取預防措施來防止 CSRF 弱點：
 
@@ -101,7 +101,7 @@ Cookie以驗證為基礎的驗證是一種常見的驗證形式。 以權杖為�
 
 在相同網域上裝載的應用程式之間惡意探索受信任的攻擊，並 cookie 不會共用網域來防止攻擊。 當每個應用程式裝載于自己的網域時，不會有隱含的 cookie 信任關係可進行攻擊。
 
-## <a name="aspnet-core-antiforgery-configuration"></a>ASP.NET Core antiforgery configuration
+## <a name="aspnet-core-antiforgery-configuration"></a>ASP.NET Core antiforgery 設定
 
 > [!WARNING]
 > ASP.NET Core 使用 [ASP.NET Core 資料保護](xref:security/data-protection/introduction)來實行 antiforgery。 資料保護堆疊必須設定為可在伺服器陣列中運作。 如需詳細資訊，請參閱設定 [資料保護](xref:security/data-protection/configuration/overview) 。
@@ -123,7 +123,7 @@ Cookie以驗證為基礎的驗證是一種常見的驗證形式。 以權杖為�
 
 ::: moniker-end
 
-在 ASP.NET Core 2.0 或更新版本中， [FormTagHelper](xref:mvc/views/working-with-forms#the-form-tag-helper) 會將 antiforgery 權杖插入至 HTML 表單元素。 檔案中的下列標記 Razor 會自動產生 antiforgery 權杖：
+在 ASP.NET Core 2.0 或更新版本中， [FormTagHelper](xref:mvc/views/working-with-forms#the-form-tag-helper) 會將 antiforgery token 插入至 HTML 表單元素。 檔案中的下列標記 Razor 會自動產生 antiforgery 權杖：
 
 ```cshtml
 <form method="post">
@@ -171,14 +171,14 @@ Cookie以驗證為基礎的驗證是一種常見的驗證形式。 以權杖為�
 1. 用戶端會將權杖傳送回伺服器進行驗證。
 1. 如果伺服器收到的權杖不符合已驗證使用者的身分識別，則會拒絕該要求。
 
-權杖是唯一且無法預期的。 此權杖也可以用來確保一連串要求的正確排序 (例如，確定要求順序：頁面 1 > 第2頁 > 第3頁) 。 ASP.NET Core MVC 和 Pages 範本中的所有表單都會 Razor 產生 antiforgery token。 下列對等的 view 範例會產生 antiforgery 權杖：
+權杖是唯一且無法預期的。 此權杖也可以用來確保一連串要求的正確排序 (例如，確定要求順序：頁面 1 > 第2頁 > 第3頁) 。 ASP.NET Core MVC 和 Pages 範本中的所有表單都會 Razor 產生 antiforgery 權杖。 下列對等的 view 範例會產生 antiforgery 權杖：
 
 ```cshtml
-<form asp-controller="Manage" asp-action="ChangePassword" method="post">
+<form asp-controller="Manage" asp-action="ChangeCode" method="post">
     ...
 </form>
 
-@using (Html.BeginForm("ChangePassword", "Manage"))
+@using (Html.BeginForm("ChangeCode", "Manage"))
 {
     ...
 }
@@ -192,13 +192,13 @@ Cookie以驗證為基礎的驗證是一種常見的驗證形式。 以權杖為�
 </form>
 ```
 
-在上述每個案例中，ASP.NET Core 會加入隱藏的表單欄位，如下所示：
+在上述每個案例中，ASP.NET Core 加入隱藏的表單欄位，如下所示：
 
 ```cshtml
 <input name="__RequestVerificationToken" type="hidden" value="CfDJ8NrAkS ... s2-m9Yw">
 ```
 
-ASP.NET Core 包含使用 antiforgery token 的三個 [篩選](xref:mvc/controllers/filters) 條件：
+ASP.NET Core 包含使用 antiforgery 權杖的三個 [篩選](xref:mvc/controllers/filters) 條件：
 
 * [ValidateAntiForgeryToken](/dotnet/api/microsoft.aspnetcore.mvc.validateantiforgerytokenattribute)
 * [AutoValidateAntiforgeryToken](/dotnet/api/microsoft.aspnetcore.mvc.autovalidateantiforgerytokenattribute)
@@ -324,7 +324,7 @@ public async Task<IActionResult> RemoveLogin(RemoveLoginViewModel account)
 
 ### <a name="automatically-validate-antiforgery-tokens-for-unsafe-http-methods-only"></a>只自動驗證不安全 HTTP 方法的 antiforgery 權杖
 
-ASP.NET Core 應用程式不會產生安全 HTTP 方法的 antiforgery token (GET、HEAD、OPTIONS 和 TRACE) 。 您 `ValidateAntiForgeryToken` `IgnoreAntiforgeryToken` 可以使用 [AutoValidateAntiforgeryToken](/dotnet/api/microsoft.aspnetcore.mvc.autovalidateantiforgerytokenattribute) 屬性，而不是廣泛地套用屬性，然後以屬性覆寫它。 這個屬性與屬性的運作方式完全相同 `ValidateAntiForgeryToken` ，不同之處在于，它不需要權杖來處理使用下列 HTTP 方法所提出的要求：
+ASP.NET Core 的應用程式不會產生安全 HTTP 方法的 antiforgery 權杖， (GET、HEAD、OPTIONS 和 TRACE) 。 您 `ValidateAntiForgeryToken` `IgnoreAntiforgeryToken` 可以使用 [AutoValidateAntiforgeryToken](/dotnet/api/microsoft.aspnetcore.mvc.autovalidateantiforgerytokenattribute) 屬性，而不是廣泛地套用屬性，然後以屬性覆寫它。 這個屬性與屬性的運作方式完全相同 `ValidateAntiForgeryToken` ，不同之處在于，它不需要權杖來處理使用下列 HTTP 方法所提出的要求：
 
 * GET
 * HEAD
@@ -443,17 +443,17 @@ xhttp.onreadystatechange = function() {
         }
     }
 };
-xhttp.open('POST', '/api/password/changepassword', true);
+xhttp.open('POST', '/api/token/changeCode', true);
 xhttp.setRequestHeader("Content-type", "application/json");
 xhttp.setRequestHeader("X-CSRF-TOKEN", csrfToken);
-xhttp.send(JSON.stringify({ "newPassword": "ReallySecurePassword999$$$" }));
+xhttp.send(JSON.stringify({ "newCode": $CREDENTIAL_PLACEHOLDER$ }));
 ```
 
 ### <a name="angularjs"></a>AngularJS
 
 AngularJS 使用慣例來處理 CSRF。 如果伺服器以名稱傳送 cookie `XSRF-TOKEN` ，AngularJS `$http` 服務 cookie 會在將要求傳送至伺服器時，將值加入至標頭。 此程式為自動。 不需要在用戶端明確設定標頭。 標頭名稱為 `X-XSRF-TOKEN` 。 伺服器應該偵測到此標頭，並驗證其內容。
 
-若要讓 ASP.NET Core API 在應用程式啟動時使用此慣例：
+ASP.NET Core API 在應用程式啟動時使用此慣例：
 
 * 設定您的應用程式，以在呼叫的中提供權杖 cookie `XSRF-TOKEN` 。
 * 設定 antiforgery 服務以尋找名為的標頭 `X-XSRF-TOKEN` 。

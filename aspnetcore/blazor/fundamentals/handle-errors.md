@@ -20,12 +20,12 @@ no-loc:
 - SignalR
 uid: blazor/fundamentals/handle-errors
 zone_pivot_groups: blazor-hosting-models
-ms.openlocfilehash: d4c8054afc3818d58bc2a047a0aa74613ae6047b
-ms.sourcegitcommit: 1436bd4d70937d6ec3140da56d96caab33c4320b
+ms.openlocfilehash: 1c080bedb5735e1c7498f600de17c81f237ce2c7
+ms.sourcegitcommit: 4bbc69f51c59bed1a96aa46f9f5dca2f2a2634cb
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 03/06/2021
-ms.locfileid: "102395093"
+ms.lasthandoff: 03/25/2021
+ms.locfileid: "105554875"
 ---
 # <a name="handle-errors-in-aspnet-core-blazor-apps"></a>處理 ASP.NET Core 應用程式中的錯誤 Blazor
 
@@ -69,7 +69,7 @@ ms.locfileid: "102395093"
 
 ## <a name="log-errors-with-a-persistent-provider"></a>使用持續性提供者記錄錯誤
 
-如果發生未處理的例外狀況，則會將例外狀況記錄到 <xref:Microsoft.Extensions.Logging.ILogger> 服務容器中設定的實例。 根據預設， Blazor 應用程式會使用主控台記錄提供者來記錄主控台輸出。 請考慮將錯誤資訊傳送至後端 web API，以使用記錄提供者搭配記錄檔大小管理和記錄檔輪替，以記錄到伺服器上的永久位置。 此外，後端 web API 應用程式可以使用應用程式效能管理 (APM) 服務（例如[Azure Application Insights (Azure 監視器) &dagger; ](/azure/azure-monitor/app/app-insights-overview)）記錄從用戶端接收的錯誤資訊。
+如果發生未處理的例外狀況，則會將例外狀況記錄到 <xref:Microsoft.Extensions.Logging.ILogger> 服務容器中設定的實例。 根據預設， Blazor 應用程式會使用主控台記錄提供者來記錄主控台輸出。 請考慮將錯誤資訊傳送至後端 web API，以使用記錄提供者搭配記錄檔大小管理和記錄檔輪替，以記錄到伺服器上的永久位置。 此外，後端 web API 應用程式可以使用應用程式效能管理 (APM) 服務（例如[Azure 應用程式 Insights (Azure 監視器) &dagger; ](/azure/azure-monitor/app/app-insights-overview)）記錄從用戶端接收的錯誤資訊。
 
 您必須決定要記錄哪些事件，以及記錄事件的嚴重性層級。 惡意使用者可能可以刻意觸發錯誤。 例如，請勿從 `ProductId` 顯示產品詳細資料的元件 URL 中提供未知的錯誤記錄事件。 並非所有錯誤都應該視為記錄的事件。
 
@@ -79,9 +79,9 @@ ms.locfileid: "102395093"
 * <xref:fundamentals/error-handling>&Dagger;
 * <xref:web-api/index>
 
-&dagger;支援應用程式的原生 [Application Insights](/azure/azure-monitor/app/app-insights-overview) 功能 Blazor WebAssembly 和 Blazor [Google Analytics](https://analytics.google.com/analytics/web/) 的原生架構支援可能會在這些技術的未來版本中提供。 如需詳細資訊，請參閱 [在 WASM 用戶端中支援 App Insights Blazor (Microsoft/ApplicationInsights-dotnet #2143) ](https://github.com/microsoft/ApplicationInsights-dotnet/issues/2143) 和 [Web 分析和診斷 (包含)  (dotnet/aspnetcore #5461 ](https://github.com/dotnet/aspnetcore/issues/5461)) 的連結。 在此同時，用戶端應用程式 Blazor WebAssembly 可以使用具有[JS Interop](xref:blazor/call-javascript-from-dotnet)的[application insights JavaScript SDK](/azure/azure-monitor/app/javascript) ，直接將錯誤記錄到來自用戶端應用程式的 application insights。
+&dagger;支援應用程式的原生 [Application Insights](/azure/azure-monitor/app/app-insights-overview) 功能 Blazor WebAssembly 和 Blazor [Google Analytics](https://analytics.google.com/analytics/web/) 的原生架構支援可能會在這些技術的未來版本中提供。 如需詳細資訊，請參閱 [在 WASM 用戶端中支援 App Insights Blazor (Microsoft/ApplicationInsights-dotnet #2143) ](https://github.com/microsoft/ApplicationInsights-dotnet/issues/2143) 和 [Web 分析和診斷 (包含)  (dotnet/aspnetcore #5461 ](https://github.com/dotnet/aspnetcore/issues/5461)) 的連結。 在此同時，用戶端 Blazor WebAssembly 應用程式可以使用 [APPLICATION INSIGHTS JavaScript SDK](/azure/azure-monitor/app/javascript) 搭配 [JS interop](xref:blazor/call-javascript-from-dotnet) ，直接將錯誤記錄至用戶端應用程式 Application Insights。
 
-&Dagger;適用于應用程式的 web API 後端應用程式的伺服器端 ASP.NET Core 應用程式 Blazor 。 用戶端應用程式會將錯誤資訊設陷並傳送至 web API，而該 API 會將錯誤資訊記錄至持續性記錄提供者。
+&Dagger;適用于應用程式之 web API 後端應用程式的伺服器端 ASP.NET Core 應用程式 Blazor 。 用戶端應用程式會將錯誤資訊設陷並傳送至 web API，而該 API 會將錯誤資訊記錄至持續性記錄提供者。
 
 ## <a name="places-where-errors-may-occur"></a>可能發生錯誤的位置
 
@@ -105,7 +105,7 @@ ms.locfileid: "102395093"
 
 <h3 id="lifecycle-methods-webassembly">生命週期方法</h3>
 
-在元件的存留期內，會叫用 Blazor [生命週期方法](xref:blazor/components/lifecycle#lifecycle-methods)。 若要讓元件處理生命週期方法中的錯誤，請新增錯誤處理邏輯。
+在元件的存留期內，會叫用 Blazor [生命週期方法](xref:blazor/components/lifecycle)。 若要讓元件處理生命週期方法中的錯誤，請新增錯誤處理邏輯。
 
 在下列範例中，會 <xref:Microsoft.AspNetCore.Components.ComponentBase.OnParametersSetAsync%2A> 呼叫方法來取得產品：
 
@@ -244,7 +244,7 @@ ms.locfileid: "102395093"
 * <xref:fundamentals/error-handling>&dagger;
 * <xref:web-api/index>
 
-&dagger;適用于用戶端應用程式用於記錄的後端 ASP.NET Core web API 應用程式 Blazor WebAssembly 。
+&dagger;適用于用戶端 Blazor WebAssembly 應用程式用來進行記錄的後端 ASP.NET Core WEB API 應用程式。
 
 ::: zone-end
 
@@ -339,7 +339,7 @@ Blazor 將大部分未處理的例外狀況視為嚴重的重大例外狀況。 
 
 ## <a name="log-errors-with-a-persistent-provider"></a>使用持續性提供者記錄錯誤
 
-如果發生未處理的例外狀況，則會將例外狀況記錄到 <xref:Microsoft.Extensions.Logging.ILogger> 服務容器中設定的實例。 根據預設， Blazor 應用程式會使用主控台記錄提供者來記錄主控台輸出。 請考慮使用記錄管理檔大小和記錄檔的提供者，在伺服器上記錄更永久的位置。 或者，應用程式可以使用應用程式效能管理 (APM) 服務，例如 [Azure Application Insights (Azure 監視器) ](/azure/azure-monitor/app/app-insights-overview)。
+如果發生未處理的例外狀況，則會將例外狀況記錄到 <xref:Microsoft.Extensions.Logging.ILogger> 服務容器中設定的實例。 根據預設， Blazor 應用程式會使用主控台記錄提供者來記錄主控台輸出。 請考慮使用記錄管理檔大小和記錄檔的提供者，在伺服器上記錄更永久的位置。 或者，應用程式可以使用應用程式效能管理 (APM) 服務，例如 [Azure 應用程式 Insights (Azure 監視器) ](/azure/azure-monitor/app/app-insights-overview)。
 
 在開發期間， Blazor Server 應用程式通常會將例外狀況的完整詳細資料傳送至瀏覽器的主控台，以協助進行偵錯工具。 在生產環境中，不會將詳細錯誤傳送給用戶端，但會在伺服器上記錄例外狀況的完整詳細資料。
 
@@ -350,7 +350,7 @@ Blazor 將大部分未處理的例外狀況視為嚴重的重大例外狀況。 
 * <xref:blazor/fundamentals/logging>
 * <xref:fundamentals/error-handling>&dagger;
 
-&dagger;適用于應用程式的 web API 後端應用程式的伺服器端 ASP.NET Core 應用程式 Blazor 。
+&dagger;適用于應用程式之 web API 後端應用程式的伺服器端 ASP.NET Core 應用程式 Blazor 。
 
 ## <a name="places-where-errors-may-occur"></a>可能發生錯誤的位置
 
@@ -375,7 +375,7 @@ Blazor Server當任何已執行的函式或任何屬性的 setter 擲回 `[Injec
 
 <h3 id="lifecycle-methods-server">生命週期方法</h3>
 
-在元件的存留期內，會叫用 Blazor [生命週期方法](xref:blazor/components/lifecycle#lifecycle-methods)。 如果任何生命週期方法會以同步或非同步方式擲回例外狀況，則例外狀況對電路而言是嚴重的 Blazor Server 。 若要讓元件處理生命週期方法中的錯誤，請新增錯誤處理邏輯。
+在元件的存留期內，會叫用 Blazor [生命週期方法](xref:blazor/components/lifecycle)。 如果任何生命週期方法會以同步或非同步方式擲回例外狀況，則例外狀況對電路而言是嚴重的 Blazor Server 。 若要讓元件處理生命週期方法中的錯誤，請新增錯誤處理邏輯。
 
 在下列範例中，會 <xref:Microsoft.AspNetCore.Components.ComponentBase.OnParametersSetAsync%2A> 呼叫方法來取得產品：
 
@@ -533,6 +533,6 @@ Blazor 您可以使用 [元件標記](xref:mvc/views/tag-helpers/builtin-th/comp
 * <xref:blazor/fundamentals/logging>
 * <xref:fundamentals/error-handling>&dagger;
 
-&dagger;適用于應用程式的 web API 後端應用程式的伺服器端 ASP.NET Core 應用程式 Blazor 。
+&dagger;適用于應用程式之 web API 後端應用程式的伺服器端 ASP.NET Core 應用程式 Blazor 。
 
 ::: zone-end

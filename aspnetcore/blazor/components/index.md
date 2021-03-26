@@ -19,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/components/index
-ms.openlocfilehash: f44eef1ebf98958e6e6ab78b4a50b24b32e2ad1e
-ms.sourcegitcommit: 1f35de0ca9ba13ea63186c4dc387db4fb8e541e0
+ms.openlocfilehash: f8bd8817a7950c8fa260febabf39a386d6b5e556
+ms.sourcegitcommit: 4bbc69f51c59bed1a96aa46f9f5dca2f2a2634cb
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 03/20/2021
-ms.locfileid: "104711343"
+ms.lasthandoff: 03/25/2021
+ms.locfileid: "105555028"
 ---
 # <a name="create-and-use-aspnet-core-razor-components"></a>建立和使用 ASP.NET Core Razor 元件
 
@@ -248,32 +248,6 @@ namespace BlazorSample
 
 ## <a name="parameters"></a>參數
 
-### <a name="route-parameters"></a>路由參數
-
-元件可以從指示詞中提供的路由範本接收路由參數 [`@page`][9] 。 路由器會使用路由參數來填入對應的元件參數。
-
-::: moniker range=">= aspnetcore-5.0"
-
-支援選擇性參數。 在下列範例中， `text` 選擇性參數會將路由區段的值指派給元件的 `Text` 屬性。 如果區段不存在，的值 `Text` 會設定為 `fantastic` 。
-
-`Pages/RouteParameter.razor`:
-
-[!code-razor[](~/blazor/common/samples/5.x/BlazorSample_WebAssembly/Pages/components-index/RouteParameter.razor?highlight=1,6-7)]
-
-::: moniker-end
-
-::: moniker range="< aspnetcore-5.0"
-
-`Pages/RouteParameter.razor`:
-
-[!code-razor[](~/blazor/common/samples/3.x/BlazorSample_WebAssembly/Pages/components-index/RouteParameter.razor?highlight=2,7-8)]
-
-不支援選擇性參數，因此 [`@page`][9] 在上述範例中會套用兩個指示詞。 第一個可讓您在不使用參數的情況下流覽至元件。 第二個指示詞會 [`@page`][9] 接收 `{text}` route 參數，並將值指派給 `Text` 屬性。
-
-::: moniker-end
-
-如需捕捉所有路由參數的詳細資訊 (`{*pageRoute}`) ，以在多個資料夾界限之間取得路徑，請參閱 <xref:blazor/fundamentals/routing#catch-all-route-parameters> 。
-
 ### <a name="component-parameters"></a>元件參數
 
 元件可以有 *元件參數*，這些參數是使用元件類別上的公用簡單或複雜屬性（ [ `[Parameter]` attribute](xref:Microsoft.AspNetCore.Components.ParameterAttribute)）來定義的。 使用這些屬性來指定標記中元件的引數。
@@ -383,7 +357,7 @@ public string Title { get; set; } = "Panel Title from Child";
   
   > ' Await ' 運算子只能在非同步方法中使用。 請考慮以 ' async ' 修飾元標記此方法，並將其傳回類型變更為 ' Task '。
 
-  為了取得 `Title` 上述範例 asychronously 中的參數值，元件可以使用[ `OnInitializedAsync` 生命週期事件](xref:blazor/components/lifecycle#component-initialization-methods)，如下列範例所示：
+  為了取得 `Title` 上述範例 asychronously 中的參數值，元件可以使用[ `OnInitializedAsync` 生命週期事件](xref:blazor/components/lifecycle#component-initialization-methods-oninitializedasync)，如下列範例所示：
   
   ```razor
   <ChildComponent Title="@title">
@@ -486,7 +460,33 @@ public DateTime StartData { get; set; }
 * 將參數屬性保留為純自動屬性，以代表提供的原始資料。
 * 建立其他屬性或方法，以根據參數屬性提供已轉換的資料。
 
-`OnParametersSetAsync`如果您想要在每次收到新資料時轉換接收的參數，您可以覆寫。
+[`OnParametersSetAsync`](xref:blazor/components/lifecycle#after-parameters-are-set-onparameterssetasync)如果您想要在每次收到新資料時轉換接收的參數，您可以覆寫。
+
+### <a name="route-parameters"></a>路由參數
+
+元件可以從指示詞中提供的路由範本接收路由參數 [`@page`][9] 。 路由器會使用路由參數來填入對應的元件參數。
+
+::: moniker range=">= aspnetcore-5.0"
+
+支援選擇性參數。 在下列範例中， `text` 選擇性參數會將路由區段的值指派給元件的 `Text` 屬性。 如果區段不存在，的值 `Text` 會設定為 `fantastic` 。
+
+`Pages/RouteParameter.razor`:
+
+[!code-razor[](~/blazor/common/samples/5.x/BlazorSample_WebAssembly/Pages/components-index/RouteParameter.razor?highlight=1,6-7)]
+
+::: moniker-end
+
+::: moniker range="< aspnetcore-5.0"
+
+`Pages/RouteParameter.razor`:
+
+[!code-razor[](~/blazor/common/samples/3.x/BlazorSample_WebAssembly/Pages/components-index/RouteParameter.razor?highlight=2,7-8)]
+
+不支援選擇性參數，因此 [`@page`][9] 在上述範例中會套用兩個指示詞。 第一個可讓您在不使用參數的情況下流覽至元件。 第二個指示詞會 [`@page`][9] 接收 `{text}` route 參數，並將值指派給 `Text` 屬性。
+
+::: moniker-end
+
+如需捕捉所有路由參數的詳細資訊 (`{*pageRoute}`) ，以在多個資料夾界限之間取得路徑，請參閱 <xref:blazor/fundamentals/routing#catch-all-route-parameters> 。
 
 ## <a name="child-content"></a>子內容
 
@@ -698,9 +698,9 @@ public IDictionary<string, object> AdditionalAttributes { get; set; }
 > [!IMPORTANT]
 > `loginDialog`變數只會在呈現元件之後填入，且其輸出會包含 `MyLoginDialog` 元素。 在呈現元件之前，不需要參考任何專案。
 >
-> 若要在元件完成轉譯之後操作元件參考，請使用[ `OnAfterRenderAsync` 或 `OnAfterRender` 方法](xref:blazor/components/lifecycle#after-component-render)。
+> 若要在元件完成轉譯之後操作元件參考，請使用[ `OnAfterRender` 或 `OnAfterRenderAsync` 方法](xref:blazor/components/lifecycle#after-component-render-onafterrenderasync)。
 >
-> 若要在事件處理常式中使用參考變數，請使用 lambda 運算式，或在[ `OnAfterRenderAsync` 或 `OnAfterRender` 方法](xref:blazor/components/lifecycle#after-component-render)中指派事件處理常式委派。 這可確保在指派事件處理常式之前，會先指派參考變數。
+> 若要在事件處理常式中使用參考變數，請使用 lambda 運算式，或在[ `OnAfterRender` 或 `OnAfterRenderAsync` 方法](xref:blazor/components/lifecycle#after-component-render-onafterrenderasync)中指派事件處理常式委派。 這可確保在指派事件處理常式之前，會先指派參考變數。
 >
 > ```razor
 > <button type="button" 
@@ -955,7 +955,7 @@ Blazor架構通常會施加安全的父系對子參數指派：
 下列修訂的 `Expander` 元件：
 
 * 接受 `Expanded` 來自父系的元件參數值。
-* 將元件參數值指派給 `expanded` [OnInitialized 事件](xref:blazor/components/lifecycle#component-initialization-methods)中 () 的私用欄位。
+* 將元件參數值指派給 `expanded` [OnInitialized 事件](xref:blazor/components/lifecycle#component-initialization-methods-oninitializedasync)中 () 的私用欄位。
 * 使用私用欄位來維護其內部切換狀態，以示範如何避免直接寫入參數。
 
 ```razor

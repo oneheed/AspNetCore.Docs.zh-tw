@@ -1,5 +1,5 @@
 ---
-title: ASP.NET 核心 Blazor WebAssembly 額外的安全性案例
+title: ASP.NET Core Blazor WebAssembly 額外的安全性案例
 author: guardrex
 description: 瞭解如何設定 Blazor WebAssembly 額外的安全性案例。
 monikerRange: '>= aspnetcore-3.1'
@@ -19,14 +19,14 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/security/webassembly/additional-scenarios
-ms.openlocfilehash: c2b2a6f049846dc2e4894b4cab8b0a1aa34762f9
-ms.sourcegitcommit: 1436bd4d70937d6ec3140da56d96caab33c4320b
+ms.openlocfilehash: ad172cb8d6a44db67feafed0245c33952dd5a30a
+ms.sourcegitcommit: 4bbc69f51c59bed1a96aa46f9f5dca2f2a2634cb
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 03/06/2021
-ms.locfileid: "102394846"
+ms.lasthandoff: 03/25/2021
+ms.locfileid: "105554690"
 ---
-# <a name="aspnet-core-blazor-webassembly-additional-security-scenarios"></a>ASP.NET 核心 Blazor WebAssembly 額外的安全性案例
+# <a name="aspnet-core-blazor-webassembly-additional-security-scenarios"></a>ASP.NET Core Blazor WebAssembly 額外的安全性案例
 
 ## <a name="attach-tokens-to-outgoing-requests"></a>將權杖附加至傳出要求
 
@@ -399,7 +399,7 @@ IP 發出給使用者的權杖通常會在短時間內有效（大約一小時�
 
 當令牌要求失敗時，您必須決定是否要儲存任何目前的狀態，然後再執行重新導向。 有幾種方法存在，並增加複雜度：
 
-* 將目前的頁面狀態儲存在會話儲存體中。 在[ `OnInitializedAsync` 生命週期事件](xref:blazor/components/lifecycle#component-initialization-methods) (<xref:Microsoft.AspNetCore.Components.ComponentBase.OnInitializedAsync%2A>) 期間，檢查是否可還原狀態後再繼續。
+* 將目前的頁面狀態儲存在會話儲存體中。 在[ `OnInitializedAsync` 生命週期事件](xref:blazor/components/lifecycle#component-initialization-methods-oninitializedasync) (<xref:Microsoft.AspNetCore.Components.ComponentBase.OnInitializedAsync%2A>) 期間，檢查是否可還原狀態後再繼續。
 * 新增查詢字串參數，並使用該參數做為應用程式的信號，以指示應用程式需要重新以提供先前儲存的狀態。
 * 新增具有唯一識別碼的查詢字串參數，以在會話儲存體中儲存資料，而不會與其他專案發生風險衝突。
 
@@ -596,7 +596,7 @@ public class ApplicationAuthenticationState : RemoteAuthenticationState
 }
 ```
 
-此範例會使用 Azure Active Directory (AAD) 進行驗證。 在 `Program.Main` (`Program.cs`) ：
+此範例使用 Azure Active Directory (AAD) 進行驗證。 在 `Program.Main` (`Program.cs`) ：
 
 * `ApplicationAuthenticationState`設定為 Microsoft 驗證程式庫 (MSAL) `RemoteAuthenticationState` 類型。
 * 狀態容器是在服務容器中註冊。
@@ -972,9 +972,9 @@ Identity使用協力廠商登入提供者進行設定。 取得協力廠商 API 
 * 伺服器可以儲存重新整理權杖，並確保應用程式不會失去協力廠商資源的存取權。
 * 應用程式無法從伺服器洩漏存取權杖，可能包含更多敏感性許可權。
 
-## <a name="use-openid-connect-oidc-v20-endpoints"></a>使用 OpenID Connect (OIDC) 2.0 版端點
+## <a name="use-openid-connect-oidc-v20-endpoints"></a>使用 OpenID Connect (OIDC) v2.0 端點
 
-驗證程式庫和[ Blazor 專案範本](xref:blazor/project-structure)會使用 OPENID connect (OIDC) 1.0 版端點。 若要使用 v2.0 端點，請設定 JWT 持有人 <xref:Microsoft.AspNetCore.Builder.JwtBearerOptions.Authority?displayProperty=nameWithType> 選項。 在下列範例中，會將區段附加至屬性，以針對 v2.0 設定 AAD `v2.0` <xref:Microsoft.AspNetCore.Builder.JwtBearerOptions.Authority> ：
+驗證程式庫和[ Blazor 專案範本](xref:blazor/project-structure)使用 OpenID Connect (OIDC) v1.0 端點。 若要使用 v2.0 端點，請設定 JWT 持有人 <xref:Microsoft.AspNetCore.Builder.JwtBearerOptions.Authority?displayProperty=nameWithType> 選項。 在下列範例中，會將區段附加至屬性，以針對 v2.0 設定 AAD `v2.0` <xref:Microsoft.AspNetCore.Builder.JwtBearerOptions.Authority> ：
 
 ```csharp
 builder.Services.Configure<JwtBearerOptions>(
@@ -1080,8 +1080,8 @@ Server response: <strong>@serverResponse</strong>
 
 如果應用程式需要 [適用于 JavaScript 的 Microsoft 驗證程式庫 ](https://www.npmjs.com/package/@azure/msal-browser)自訂版本 (MSAL.js) ，請執行下列步驟：
 
-1. 確認系統具有最新的開發人員 .NET SDK，或從 .Net Core SDK 取得並安裝最新的開發人員 SDK [：安裝程式和二進位](https://github.com/dotnet/installer#installers-and-binaries)檔。 此案例不需要設定內部 NuGet 摘要。
-1. 設定 GitHub 存放 `dotnet/aspnetcore` 庫，以在 [Build ASP.NET Core from Source](https://github.com/dotnet/aspnetcore/blob/main/docs/BuildFromSource.md)的檔進行開發。 分叉和複製或下載 [dotnet/Aspnetcore GitHub 存放庫](https://github.com/dotnet/aspnetcore)的 ZIP 封存。
+1. 確認系統具有最新的開發人員 .NET SDK，或從 [.NET Core SDK：安裝程式和二進位](https://github.com/dotnet/installer#installers-and-binaries)檔取得並安裝最新的開發人員 SDK。 此案例不需要設定內部 NuGet 摘要。
+1. 設定 GitHub 存放 `dotnet/aspnetcore` 庫，以根據 [組建 ASP.NET Core 來源](https://github.com/dotnet/aspnetcore/blob/main/docs/BuildFromSource.md)的檔進行開發。 分叉和複製或下載 [dotnet/Aspnetcore GitHub 存放庫](https://github.com/dotnet/aspnetcore)的 ZIP 封存。
 1. 開啟檔案 `src/Components/WebAssembly/Authentication.Msal/src/Interop/package.json` ，並設定所需的版本 `@azure/msal-browser` 。 如需已發行的版本清單，請造訪 [ `@azure/msal-browser` npm 網站](https://www.npmjs.com/package/@azure/msal-browser)，然後選取 [**版本**] 索引標籤。
 1. `Authentication.Msal` `src/Components/WebAssembly/Authentication.Msal/src` 使用命令 shell 中的命令，在資料夾中建立專案 `yarn build` 。
 1. 如果應用程式使用 [壓縮的資產 (Brotli/Gzip) ](xref:blazor/host-and-deploy/webassembly#compression)，請壓縮 `Interop/dist/Release/AuthenticationService.js` 檔案。

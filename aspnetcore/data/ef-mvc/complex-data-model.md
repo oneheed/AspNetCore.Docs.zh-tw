@@ -19,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: data/ef-mvc/complex-data-model
-ms.openlocfilehash: a881ff28d41a272ade559c60efbd884f2a3c4e3e
-ms.sourcegitcommit: 54fe1ae5e7d068e27376d562183ef9ddc7afc432
+ms.openlocfilehash: bbb783b8547ffec0cfad124f7c0e8f1a21e1e727
+ms.sourcegitcommit: 4bbc69f51c59bed1a96aa46f9f5dca2f2a2634cb
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 03/10/2021
-ms.locfileid: "102587784"
+ms.lasthandoff: 03/25/2021
+ms.locfileid: "105555067"
 ---
 # <a name="tutorial-create-a-complex-data-model---aspnet-mvc-with-ef-core"></a>教學課程：建立複雜的資料模型-使用 EF Core ASP.NET MVC
 
@@ -230,7 +230,7 @@ public OfficeAssignment OfficeAssignment { get; set; }
 
 ### <a name="the-key-attribute"></a>Key 屬性
 
-在 Instructor 和 OfficeAssignment 實體之間存在一對零或一關聯性。 辦公室指派只有在有指派的講師時才會存在，因此其主索引鍵也是其繫結到 Instructor 實體的外部索引鍵。 但 Entity Framework 無法自動將 InstructorID 識別為此實體的主索引鍵，因為其名稱並未遵循 ID 或 classnameID 命名慣例。 因此，必須使用 `Key` 屬性將其識別為 PK：
+和實體之間有一對零或一關聯性 `Instructor` `OfficeAssignment` 。 辦公室指派只存在於指派給的講師，因此其主要金鑰也是實體的外鍵 `Instructor` 。 但 Entity Framework 無法自動辨識 `InstructorID` 為此實體的主要金鑰，因為其名稱不遵循 `ID` 或 `classnameID` 命名慣例。 因此，必須使用 `Key` 屬性將其識別為 PK：
 
 ```csharp
 [Key]
@@ -257,7 +257,7 @@ Instructor 實體具有一個可為 Null 的 `OfficeAssignment` 導覽屬性 (�
 
 課程實體有一個外部索引鍵屬性 (`DepartmentID`)，該索引鍵指向了相關的 Department 實體，並且其擁有一個 `Department` 導覽屬性。
 
-當您針對相關實體具有一個導覽屬性時，Entity Framework 便不需要您為資料模型新增一個外部索引鍵屬性。  每當需要的時候，EF 便會自動在資料庫中建立外部索引鍵，並為他們建立[陰影屬性](/ef/core/modeling/shadow-properties)。 但在資料模型中擁有外部索引鍵，可讓更新變得更為簡單和有效率。 例如，當您擷取了一個要編輯的課程實體，若您沒有載入它，Department 實體便會為 Null，因此當您要更新課程實體時，您必須先擷取 Department 實體。 當外部索引鍵屬性 `DepartmentID` 包含在資料模型中時，您便不需要在更新前擷取 Department 實體。
+當您針對相關實體具有一個導覽屬性時，Entity Framework 便不需要您為資料模型新增一個外部索引鍵屬性。  每當需要的時候，EF 便會自動在資料庫中建立外部索引鍵，並為他們建立[陰影屬性](/ef/core/modeling/shadow-properties)。 但在資料模型中擁有外部索引鍵，可讓更新變得更為簡單和有效率。 例如，當您提取 `Course` 要編輯的實體時，  `Department` 如果您未載入實體，則該實體為 null，因此當您更新 `Course` 實體時，您必須先提取該 `Department` 實體。 當外鍵屬性 `DepartmentID` 包含在資料模型中時，您不需要在 `Department` 更新之前提取實體。
 
 ### <a name="the-databasegenerated-attribute"></a>DatabaseGenerated 屬性
 
@@ -269,13 +269,13 @@ Instructor 實體具有一個可為 Null 的 `OfficeAssignment` 導覽屬性 (�
 public int CourseID { get; set; }
 ```
 
-根據預設，Entity Framework 會假設主索引鍵的值是由資料庫產生。 這是您在大多數案例下所希望的情況。 然而，針對 Course 實體，您會使用使用者定義的課程號碼，例如讓一個部門使用 1000 系列，另一個部門則使用 2000 系列等等。
+根據預設，Entity Framework 會假設主索引鍵的值是由資料庫產生。 這是您在大多數案例下所希望的情況。 不過，對於 `Course` 實體，您將會使用使用者指定的課程編號，例如一個部門的1000系列、另一個部門的2000系列等等。
 
 如果是用於記錄資料列建立或更新的資料庫資料行，則 `DatabaseGenerated` 屬性也能用於產生預設值。  如需詳細資訊，請參閱[產生的屬性](/ef/core/modeling/generated-properties)。
 
 ### <a name="foreign-key-and-navigation-properties"></a>外部索引鍵及導覽屬性
 
-Course 實體中的外部索引鍵屬性和導覽屬性反映了下列關聯性：
+實體中的外鍵屬性和導覽屬性 `Course` 反映了下列關聯性：
 
 課程會指派給一個部門，因此基於上述理由，會有一個 `DepartmentID` 外部索引鍵和一個 `Department` 導覽屬性。
 
@@ -306,7 +306,7 @@ public ICollection<CourseAssignment> CourseAssignments { get; set; }
 
 ### <a name="the-column-attribute"></a>Column 屬性
 
-先前您使用了 `Column` 屬性來變更資料行的名稱對應。 在 Department 實體的程式碼中，`Column` 屬性則會用於變更 SQL 資料類型對應，讓資料行在資料庫中會使用 SQL Server 的貨幣類型進行定義：
+先前您使用了 `Column` 屬性來變更資料行的名稱對應。 在實體的程式碼中 `Department` ， `Column` 屬性是用來變更 SQL 資料類型對應，因此將使用資料庫中的 SQL Server 類型來定義資料行 `money` ：
 
 ```csharp
 [Column(TypeName="money")]
@@ -333,7 +333,7 @@ public ICollection<Course> Courses { get; set; }
 ```
 
 > [!NOTE]
-> 根據慣例，Entity Framework 會為不可為 Null 的外部索引鍵和多對多關聯性啟用串聯刪除。 這可能會導致循環串聯刪除規則，並在您嘗試新增移轉時造成例外狀況。 例如，若您未將 Department.InstructorID 屬性定義成可為 Null，EF 就會設定串聯刪除規則，在您刪除講師時刪除部門，而這可能是您不願見到的情況。 若您的商務規則要求 `InstructorID` 屬性不可為 Null，則您將必須使用 Fluent API 陳述式來在關聯性上停用串聯刪除：
+> 根據慣例，Entity Framework 會為不可為 Null 的外部索引鍵和多對多關聯性啟用串聯刪除。 這可能會導致循環串聯刪除規則，並在您嘗試新增移轉時造成例外狀況。 例如，如果您未將屬性定義 `Department.InstructorID` 為可為 null，EF 會設定串聯刪除規則，以在您刪除講師時刪除部門，這並不是您想要的情況。 若您的商務規則要求 `InstructorID` 屬性不可為 Null，則您將必須使用 Fluent API 陳述式來在關聯性上停用串聯刪除：
 >
 > ```csharp
 > modelBuilder.Entity<Department>()
@@ -370,7 +370,7 @@ public Student Student { get; set; }
 
 ## <a name="many-to-many-relationships"></a>多對多關聯性
 
-Student 和 Course 實體之間存在一個多對多關聯性，且 Enrollment 實體的功能便是多對多聯結資料表，其在資料庫中帶有 *承載*。 「帶有承載」的意思是 Enrollment 資料表除了聯結資料表的外部索引鍵之外，還包含了額外的資料 (在此案例中為主索引鍵和 Grade 屬性)。
+和實體之間有多對多關聯性，而實體函式則是 `Student` `Course` `Enrollment` *包含* 資料庫中承載的多對多聯結資料表。 「具有承載」表示 `Enrollment` 資料表包含聯結資料表外鍵以外的其他資料 (在此案例中，主要索引鍵和 `Grade` 屬性) 。
 
 下列圖例展示了在實體圖表中這些關聯性的樣子。 (此圖表使用了 EF 6.x 的 Entity Framework Power Tools 產生。建立圖表不是此教學課程的一部分，其僅作為展示之用。)
 
@@ -378,7 +378,7 @@ Student 和 Course 實體之間存在一個多對多關聯性，且 Enrollment �
 
 每個關聯性線條都在其中一端有一個「1」，並在另外一端有一個「星號 (*)」，顯示其為一對多關聯性。
 
-若 Enrollment 資料表並未包含年級資訊，則其便只需要包含兩個外部索引鍵 (CourseID 和 StudentID)。 在此案例下，其在資料庫中將會是不具有承載的多對多聯結資料表 (或純聯結資料表)。 Instructor 和 Course 實體具有此類型的多對多關聯性，並且您的下一步驟便是建立一個實體類別作為不具有承載的聯結資料表。
+如果 `Enrollment` 資料表不包含等級資訊，則只需要包含兩個外鍵 `CourseID` 和 `StudentID` 。 在此案例下，其在資料庫中將會是不具有承載的多對多聯結資料表 (或純聯結資料表)。 `Instructor`和 `Course` 實體具有這種類型的多對多關聯性，而下一個步驟是建立實體類別，做為不含承載的聯結資料表。
 
 (EF 6.x 支援多對多關聯性的隱含聯結資料表，但 EF Core 並不支援。 如需詳細資訊，請參閱 [EF Core GitHub 存放庫中的討論](https://github.com/aspnet/EntityFramework/issues/1368)。)
 
@@ -396,7 +396,7 @@ Student 和 Course 實體之間存在一個多對多關聯性，且 Enrollment �
 
 ### <a name="composite-key"></a>複合索引鍵
 
-由於外部索引鍵不可為 Null，並且當一起使用時便可唯一識別資料表的每一個資料列，因此您不需要擁有一個個別的主索引鍵。 *InstructorID* 和 *CourseID* 屬性可作為複合主索引鍵發揮功能。 針對 EF 識別複合主索引鍵的唯一方法便是使用 *Fluent API* (您無法使用屬性完成這項操作)。 您會在下節中了解如何設定複合主索引鍵。
+由於外部索引鍵不可為 Null，並且當一起使用時便可唯一識別資料表的每一個資料列，因此您不需要擁有一個個別的主索引鍵。 `InstructorID`和 `CourseID` 屬性應該會以複合主鍵的形式運作。 針對 EF 識別複合主索引鍵的唯一方法便是使用 *Fluent API* (您無法使用屬性完成這項操作)。 您會在下節中了解如何設定複合主索引鍵。
 
 複合索引鍵可確保當您針對一個課程擁有多個資料列，且針對一位講師擁有多個資料列時，您無法針對相同的講師和課程擁有多個資料列。 由於 `Enrollment` 聯結實體定義了其自身的主索引鍵，因此這種種類的重複項目是可能的。 若要避免這種重複的項目，您可以在外部索引鍵欄位上新增一個唯一的索引，或使用與 `CourseAssignment` 相似的主複合索引鍵來設定 `Enrollment`。 如需詳細資訊，請參閱[索引](/ef/core/modeling/indexes)。
 
@@ -433,7 +433,7 @@ protected override void OnModelCreating(ModelBuilder modelBuilder)
 
 ![實體圖表](complex-data-model/_static/diagram.png)
 
-除了一對多關聯性線條外 (1 到 \*)，您也可以在 Instructor 和 OfficeAssignment 實體間看到一對零或一關聯性線條 (1 到 0..1)，以及介於 Instructor 和 Department 實體間的零或一對多關聯性線條 (0..1 到 *)。
+除了一對多關聯性線 (1 到 \*) ，您可以在這裡看到一對一或一關聯性線條 (1 到 0 ..1) 介於 `Instructor` 和 `OfficeAssignment` 實體之間，以及在講師與部門實體之間 (0 ..1 到 * ) 之間的零或一對多關聯性線之間的關聯性。
 
 ## <a name="seed-database-with-test-data"></a>將測試資料植入資料庫
 
@@ -462,7 +462,7 @@ Done. To undo this action, use 'ef migrations remove'
 
 > ALTER TABLE 陳述式與 FOREIGN KEY 條件約束 "FK_dbo.Course_dbo.Department_DepartmentID" 發生衝突。 衝突發生在 "ContoseUniversity" 資料庫、"dbo.Department" 資料表、"DepartmentID" 資料行中。
 
-有時候當您使用現有資料執行移轉時，您必須將 Stub 資料插入資料庫中以滿足外部索引鍵條件約束。 `Up` 方法中產生的程式碼會新增一個不可為 Null 的 DepartmentID 外部索引鍵至 Course 資料表。 若在程式碼執行時 Course 資料表中已有資料列，則 `AddColumn` 作業會失敗，因為 SQL Server 無法得知要在不可為 Null 的資料行中填入何值。 針對此教學課程，您會在一個新的資料庫中執行移轉，但在生產環境下的應用程式中，您必須讓移轉能夠處理現有的資料，因此下列指引顯示了如何進行處理的範例。
+有時候當您使用現有資料執行移轉時，您必須將 Stub 資料插入資料庫中以滿足外部索引鍵條件約束。 方法中產生的程式碼會在 `Up` 資料表中加入不可為 null 的 `DepartmentID` 外鍵 `Course` 。 若在程式碼執行時 Course 資料表中已有資料列，則 `AddColumn` 作業會失敗，因為 SQL Server 無法得知要在不可為 Null 的資料行中填入何值。 針對此教學課程，您會在一個新的資料庫中執行移轉，但在生產環境下的應用程式中，您必須讓移轉能夠處理現有的資料，因此下列指引顯示了如何進行處理的範例。
 
 若要使用現有資料完成移轉，您必須變更程式碼，給予新的資料行預設值，然後建立名為 "Temp" 的 Stub 部門，以作為預設部門。 其結果為現有的 Course 資料列便會在執行 `Up` 方法後與 "Temp" 部門產生關聯。
 
@@ -476,7 +476,7 @@ Done. To undo this action, use 'ef migrations remove'
 
   [!code-csharp[](intro/samples/cu/Migrations/20170215234014_ComplexDataModel.cs?name=snippet_CreateDefaultValue&highlight=22-32)]
 
-在生產環境的應用程式中，您會撰寫程式碼或指令碼以新增 Department 資料列，並使 Course 資料列與新的 Department 資料列產生關聯。 屆時您便不再需要為 Course.DepartmentID 資料行設定 "Temp" 部門或預設值。
+在生產環境的應用程式中，您會撰寫程式碼或指令碼以新增 Department 資料列，並使 Course 資料列與新的 Department 資料列產生關聯。 然後，您就不再需要 "Temp" 部門或資料行的預設值 `Course.DepartmentID` 。
 
 儲存您的變更，並建置專案。
 

@@ -1,5 +1,5 @@
 ---
-title: 從 ASP.NET Core 中的 .NET 方法呼叫 JavaScript 函數 Blazor
+title: 從 ASP.NET Core 中的 .NET 方法呼叫 JavaScript 函式 Blazor
 author: guardrex
 description: 瞭解如何在應用程式中叫用 .NET 方法的 JavaScript 函式 Blazor 。
 monikerRange: '>= aspnetcore-3.1'
@@ -19,14 +19,14 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/call-javascript-from-dotnet
-ms.openlocfilehash: ab342f6bdc5da68f2a2ee8d9aee29911a050056d
-ms.sourcegitcommit: 54fe1ae5e7d068e27376d562183ef9ddc7afc432
+ms.openlocfilehash: 28da7890685dd8f7ee0bfb6aaf7e1ebe79c460cc
+ms.sourcegitcommit: 4bbc69f51c59bed1a96aa46f9f5dca2f2a2634cb
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 03/10/2021
-ms.locfileid: "102586614"
+ms.lasthandoff: 03/25/2021
+ms.locfileid: "105554706"
 ---
-# <a name="call-javascript-functions-from-net-methods-in-aspnet-core-blazor"></a>從 ASP.NET Core 中的 .NET 方法呼叫 JavaScript 函數 Blazor
+# <a name="call-javascript-functions-from-net-methods-in-aspnet-core-blazor"></a>從 ASP.NET Core 中的 .NET 方法呼叫 JavaScript 函式 Blazor
 
 Blazor應用程式可以從 javascript 函式的 .net 方法和 .net 方法中叫用 javascript 函式。 這些案例稱為 *JavaScript 互通性* (*JS interop*) 。
 
@@ -248,7 +248,7 @@ public static async Task TriggerClickEvent(this ElementReference elementRef,
 [!code-razor[](call-javascript-from-dotnet/samples_snapshot/component2.razor?highlight=15)]
 
 > [!IMPORTANT]
-> `exampleButton`變數只會在呈現元件之後填入。 如果將擴展 <xref:Microsoft.AspNetCore.Components.ElementReference> 傳遞至 javascript 程式碼，javascript 程式碼會收到的值 `null` 。 若要在元件完成轉譯後操作元素參考，請使用[ `OnAfterRenderAsync` 或 `OnAfterRender` 元件生命週期方法](xref:blazor/components/lifecycle#after-component-render)。
+> `exampleButton`變數只會在呈現元件之後填入。 如果將擴展 <xref:Microsoft.AspNetCore.Components.ElementReference> 傳遞至 javascript 程式碼，javascript 程式碼會收到的值 `null` 。 若要在元件完成轉譯後操作元素參考，請使用[ `OnAfterRenderAsync` 或 `OnAfterRender` 元件生命週期方法](xref:blazor/components/lifecycle#after-component-render-onafterrenderasync)。
 
 使用泛型型別並傳回值時，請使用 <xref:System.Threading.Tasks.ValueTask%601> ：
 
@@ -819,4 +819,4 @@ window.exampleJSObjectReferenceNotDisposedInCSharp = () => {
 ## <a name="additional-resources"></a>其他資源
 
 * <xref:blazor/call-dotnet-from-javascript>
-* [ `InteropComponent.razor` 範例 (Dotnet/AspNetCore GitHub 存放庫 `main` 分支) ](https://github.com/dotnet/AspNetCore/blob/main/src/Components/test/testassets/BasicTestApp/InteropComponent.razor)： `main` 分支代表下一版 ASP.NET Core 的產品單位目前開發。 若要選取不同版本的分支 (例如 `release/5.0`) ，請使用 [ **切換分支或標記** ] 下拉式清單來選取分支。
+* [ `InteropComponent.razor` 範例 (Dotnet/AspNetCore GitHub 存放庫 `main` 分支) ](https://github.com/dotnet/AspNetCore/blob/main/src/Components/test/testassets/BasicTestApp/InteropComponent.razor)： `main` 分支代表下一版 ASP.NET Core 的目前開發產品單位。 若要選取不同版本的分支 (例如 `release/5.0`) ，請使用 [ **切換分支或標記** ] 下拉式清單來選取分支。

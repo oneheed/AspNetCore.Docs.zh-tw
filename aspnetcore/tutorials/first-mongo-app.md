@@ -19,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: tutorials/first-mongo-app
-ms.openlocfilehash: 489a15f2011e44ffd9f9bfe7d5410b7d79a10632
-ms.sourcegitcommit: 54fe1ae5e7d068e27376d562183ef9ddc7afc432
+ms.openlocfilehash: 69d484e30c091bc7cb996281bcbb9f6120eb6b51
+ms.sourcegitcommit: 4bbc69f51c59bed1a96aa46f9f5dca2f2a2634cb
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 03/10/2021
-ms.locfileid: "102587602"
+ms.lasthandoff: 03/25/2021
+ms.locfileid: "105554638"
 ---
 # <a name="create-a-web-api-with-aspnet-core-and-mongodb"></a>使用 ASP.NET Core 與 MongoDB 建立 Web API
 
@@ -50,7 +50,7 @@ ms.locfileid: "102587602"
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
 * [.NET Core SDK 3.0 或更新版本](https://dotnet.microsoft.com/download/dotnet-core)
-* [Visual Studio 2019](https://visualstudio.microsoft.com/downloads/?utm_medium=microsoft&utm_source=docs.microsoft.com&utm_campaign=inline+link&utm_content=download+vs2019) 與 **ASP.NET 和 網頁程式開發** 工作負載
+* **ASP.NET 和 網頁程式開發** 工作負載的 [Visual Studio 2019](https://visualstudio.microsoft.com/downloads/?utm_medium=microsoft&utm_source=docs.microsoft.com&utm_campaign=inline+link&utm_content=download+vs2019)
 * [MongoDB](https://docs.mongodb.com/manual/tutorial/install-mongodb-on-windows/)
 
 # <a name="visual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code)
@@ -191,7 +191,7 @@ ms.locfileid: "102587602"
 
 # <a name="visual-studio-for-mac"></a>[Visual Studio for Mac](#tab/visual-studio-mac)
 
-1. 在8.6 版之前的 Visual Studio for Mac 中，   >    >  從側邊欄選取 [從新的解決方案 **.net Core**  >  **應用程式**]。 在8.6 版或更新版本中，  >    >  從側邊欄選取 [檔案新的方案 **Web] 和 [主控台**  >  **應用程式**]。
+1. 在8.6 版之前的 Visual Studio for Mac 中，   >    >  從側邊欄選取 [將新的解決方案 **.net Core**  >  **應用程式** 新增]。 在8.6 版或更新版本中，  >    >  從側邊欄選取 [檔案新的方案 **Web] 和 [主控台**  >  **應用程式**]。
 1. 選取 [ **ASP.NET Core** > **API** c #] 專案範本，然後選取 **[下一步]**。
 1. 從 [**目標 Framework** ] 下拉式清單中選取 [ **.Net Core 3.1** ]，然後選取 **[下一步]**。
 1. 在 [專案名稱] 中輸入 *BooksApi*，然後選取 [建立]。
@@ -400,7 +400,7 @@ ms.locfileid: "102587602"
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
 * [.NET Core SDK 2.2](https://dotnet.microsoft.com/download/dotnet-core)
-* [Visual Studio 2019](https://visualstudio.microsoft.com/downloads/?utm_medium=microsoft&utm_source=docs.microsoft.com&utm_campaign=inline+link&utm_content=download+vs2019) 與 **ASP.NET 和 網頁程式開發** 工作負載
+* **ASP.NET 和 網頁程式開發** 工作負載的 [Visual Studio 2019](https://visualstudio.microsoft.com/downloads/?utm_medium=microsoft&utm_source=docs.microsoft.com&utm_campaign=inline+link&utm_content=download+vs2019)
 * [MongoDB](https://docs.mongodb.com/manual/tutorial/install-mongodb-on-windows/)
 
 # <a name="visual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code)
@@ -541,7 +541,7 @@ ms.locfileid: "102587602"
 
 # <a name="visual-studio-for-mac"></a>[Visual Studio for Mac](#tab/visual-studio-mac)
 
-1. 在8.6 版之前的 Visual Studio for Mac 中，   >    >  從側邊欄選取 [從新的解決方案 **.net Core**  >  **應用程式**]。 在8.6 版或更新版本中，  >    >  從側邊欄選取 [檔案新的方案 **Web] 和 [主控台**  >  **應用程式**]。
+1. 在8.6 版之前的 Visual Studio for Mac 中，   >    >  從側邊欄選取 [將新的解決方案 **.net Core**  >  **應用程式** 新增]。 在8.6 版或更新版本中，  >    >  從側邊欄選取 [檔案新的方案 **Web] 和 [主控台**  >  **應用程式**]。
 1. 選取 [ASP.NET Core Web API] C# 專案範本，然後選取 [下一步]。
 1. 從 [目標 Framework] 下拉式清單選取 [.NET Core 2.2]，然後選取 [下一步]。
 1. 在 [專案名稱] 中輸入 *BooksApi*，然後選取 [建立]。
@@ -634,7 +634,7 @@ ms.locfileid: "102587602"
 
 `BookService` 類別使用下列 `MongoDB.Driver` 成員來對資料庫執行 CRUD 作業：
 
-* [MongoClient](https://api.mongodb.com/csharp/current/html/T_MongoDB_Driver_MongoClient.htm)：讀取用於執行資料庫作業的伺服器實例。 此類別的建構函式是使用 MongoDB 連接字串提供：
+* [MongoClient](https://api.mongodb.com/csharp/current/html/T_MongoDB_Driver_MongoClient.htm)：讀取用於執行資料庫作業的伺服器實例。 此類別的函式會隨附于 MongoDB 連接字串：
 
   [!code-csharp[](first-mongo-app/samples/2.x/SampleApp/Services/BookService.cs?name=snippet_BookServiceConstructor&highlight=3)]
 
@@ -739,4 +739,4 @@ ms.locfileid: "102587602"
 * [本文的 YouTube 版本](https://www.youtube.com/watch?v=7uJt_sOenyo&feature=youtu.be)
 * <xref:web-api/index>
 * <xref:web-api/action-return-types>
-* [Microsoft 瞭解：使用 ASP.NET Core 建立 web API](/learn/modules/build-web-api-aspnet-core/)
+* [Microsoft Learn：使用 ASP.NET Core 建立 web API](/learn/modules/build-web-api-aspnet-core/)

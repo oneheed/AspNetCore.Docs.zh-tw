@@ -11,90 +11,78 @@ no-loc:
 - Let's Encrypt
 - Razor
 - SignalR
-ms.openlocfilehash: c152524e0acd3803bd3b8078f667cce01180e25d
-ms.sourcegitcommit: a49c47d5a573379effee5c6b6e36f5c302aa756b
+ms.openlocfilehash: f28a272c2e55e1fd6620ed4a23ef8cadcfad1ce9
+ms.sourcegitcommit: 4bbc69f51c59bed1a96aa46f9f5dca2f2a2634cb
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 02/16/2021
-ms.locfileid: "100551494"
+ms.lasthandoff: 03/25/2021
+ms.locfileid: "105554705"
 ---
-當 Blazor Server 應用程式進行預先處理時，無法執行某些動作（例如呼叫 JavaScript），因為尚未建立與瀏覽器的連接。 元件在資源清單時可能需要以不同的方式呈現。
+*本節適用于已 Blazor Server Blazor WebAssembly 構成元件的託管應用程式 Razor 。*
 
-您可以使用 [OnAfterRenderAsync 元件生命週期事件](xref:blazor/components/lifecycle#after-component-render)，來延遲 JavaScript interop 呼叫，直到建立與瀏覽器的連線為止。 只有在完全轉譯應用程式並建立用戶端連接之後，才會呼叫此事件。
+當應用程式進行預載入時，無法執行某些動作，例如呼叫 JavaScript。 元件在資源清單時可能需要以不同的方式呈現。
 
-```cshtml
-@using Microsoft.JSInterop
-@inject IJSRuntime JSRuntime
+若要延遲 JavaScript interop 呼叫，直到這類呼叫保證可以運作的一點，請覆寫[ `OnAfterRender{Async}` 生命週期事件](xref:blazor/components/lifecycle#after-component-render-onafterrenderasync)。 只有在應用程式完全呈現之後，才會呼叫此事件。
 
-<div @ref="divElement">Text during render</div>
+`Pages/PrerenderedInterop1.razor`:
 
-@code {
-    private ElementReference divElement;
+::: moniker range=">= aspnetcore-5.0"
 
-    protected override async Task OnAfterRenderAsync(bool firstRender)
-    {
-        if (firstRender)
-        {
-            await JSRuntime.InvokeVoidAsync(
-                "setElementText", divElement, "Text after render");
-        }
-    }
-}
-```
+[!code-razor[](~/blazor/common/samples/5.x/BlazorSample_WebAssembly/Pages/prerendering/PrerenderedInterop1.razor)]
 
-針對上述的範例程式碼，請在 `setElementText` `<head>` `wwwroot/index.html` (Blazor WebAssembly) 或 `Pages/_Host.cshtml` () 的元素內提供 JavaScript 函式 Blazor Server 。 呼叫函式時，會傳回 <xref:Microsoft.JSInterop.JSRuntimeExtensions.InvokeVoidAsync%2A?displayProperty=nameWithType> ，而且不會傳回值：
+::: moniker-end
+
+::: moniker range="< aspnetcore-5.0"
+
+[!code-razor[](~/blazor/common/samples/3.x/BlazorSample_WebAssembly/Pages/prerendering/PrerenderedInterop1.razor)]
+
+::: moniker-end
+
+針對上述的範例程式碼，請在 `setElementText1` `<head>` `wwwroot/index.html` (Blazor WebAssembly) 或 `Pages/_Host.cshtml` () 的元素內提供 JavaScript 函式 Blazor Server 。 呼叫函式時，會傳回 <xref:Microsoft.JSInterop.JSRuntimeExtensions.InvokeVoidAsync%2A?displayProperty=nameWithType> ，而且不會傳回值：
 
 ```html
 <script>
-  window.setElementText = (element, text) => element.innerText = text;
+  window.setElementText1 = (element, text) => element.innerText = text;
 </script>
 ```
 
 > [!WARNING]
-> 上述範例僅針對示範目的，直接修改檔物件模型 (DOM) 。 在大部分的情況下，不建議直接修改具有 JavaScript 的 DOM，因為 JavaScript 可能會干擾 Blazor 變更追蹤。
+> **上述範例僅針對示範目的，直接修改檔物件模型 (DOM) 。** 在大部分的情況下，不建議直接修改具有 JavaScript 的 DOM，因為 JavaScript 可能會干擾 Blazor 變更追蹤。
 
-下列元件示範如何使用 JavaScript interop 做為元件初始化邏輯的一部分，而這種方式與可呈現的方式相容。 元件顯示可以從內部觸發轉譯更新 <xref:Microsoft.AspNetCore.Components.ComponentBase.OnAfterRenderAsync%2A> 。 開發人員必須避免在此案例中建立無限迴圈。
+> [!NOTE]
+> 上述範例會干擾具有全域方法的用戶端。 若要在生產應用程式中提供更好的方法，請參閱[ Blazor JavaScript 隔離和物件參考](xref:blazor/call-javascript-from-dotnet#blazor-javascript-isolation-and-object-references)。
+>
+> 範例：
+>
+> ```javascript
+> export setElementText1 = (element, text) => element.innerText = text;
+> ```
+
+下列元件示範如何使用 JavaScript interop 做為元件初始化邏輯的一部分，而這種方式與可呈現的方式相容。 元件顯示可以從內部觸發轉譯更新 <xref:Microsoft.AspNetCore.Components.ComponentBase.OnAfterRenderAsync%2A> 。 開發人員必須小心避免在此案例中建立無限迴圈。
 
 在 <xref:Microsoft.JSInterop.JSRuntime.InvokeAsync%2A?displayProperty=nameWithType> 中呼叫的位置， `ElementRef` 只會用於中， <xref:Microsoft.AspNetCore.Components.ComponentBase.OnAfterRenderAsync%2A> 而不會用於任何較早的生命週期方法，因為在轉譯元件之後，才會有 JavaScript 元素。
 
-呼叫[StateHasChanged](xref:blazor/components/lifecycle#state-changes)來 rerender 元件，並以從 JavaScript interop 呼叫取得的新狀態 (如需詳細資訊，請參閱 <xref:blazor/components/rendering>) 。 程式碼不會建立無限迴圈，因為 `StateHasChanged` 只有在是時才會呼叫 `infoFromJs` `null` 。
+[`StateHasChanged`](xref:blazor/components/lifecycle#state-changes-statehaschanged) 呼叫以 rerender 具有從 JavaScript interop 呼叫取得之新狀態的元件 (如需詳細資訊，請參閱 <xref:blazor/components/rendering>) 。 程式碼不會建立無限迴圈，因為 `StateHasChanged` 只有在是時才會呼叫 `infoFromJs` `null` 。
 
-```cshtml
-@page "/prerendered-interop"
-@using Microsoft.AspNetCore.Components
-@using Microsoft.JSInterop
-@inject IJSRuntime JSRuntime
+`Pages/PrerenderedInterop2.razor`:
 
-<p>
-    Get value via JS interop call:
-    <strong id="val-get-by-interop">@(infoFromJs ?? "No value yet")</strong>
-</p>
+::: moniker range=">= aspnetcore-5.0"
 
-Set value via JS interop call:
-<div id="val-set-by-interop" @ref="divElement"></div>
+[!code-razor[](~/blazor/common/samples/5.x/BlazorSample_WebAssembly/Pages/prerendering/PrerenderedInterop2.razor)]
 
-@code {
-    private string infoFromJs;
-    private ElementReference divElement;
+::: moniker-end
 
-    protected override async Task OnAfterRenderAsync(bool firstRender)
-    {
-        if (firstRender && infoFromJs == null)
-        {
-            infoFromJs = await JSRuntime.InvokeAsync<string>(
-                "setElementText", divElement, "Hello from interop call!");
+::: moniker range="< aspnetcore-5.0"
 
-            StateHasChanged();
-        }
-    }
-}
-```
+[!code-razor[](~/blazor/common/samples/3.x/BlazorSample_WebAssembly/Pages/prerendering/PrerenderedInterop2.razor)]
 
-針對上述的範例程式碼，請在 `setElementText` `<head>` `wwwroot/index.html` (Blazor WebAssembly) 或 `Pages/_Host.cshtml` () 的元素內提供 JavaScript 函式 Blazor Server 。 呼叫函式時，會傳回 <xref:Microsoft.JSInterop.IJSRuntime.InvokeAsync%2A?displayProperty=nameWithType> 值：
+::: moniker-end
+
+針對上述的範例程式碼，請在 `setElementText2` `<head>` `wwwroot/index.html` (Blazor WebAssembly) 或 `Pages/_Host.cshtml` () 的元素內提供 JavaScript 函式 Blazor Server 。 呼叫函式時，會傳回 <xref:Microsoft.JSInterop.IJSRuntime.InvokeAsync%2A?displayProperty=nameWithType> 值：
 
 ```html
 <script>
-  window.setElementText = (element, text) => {
+  window.setElementText2 = (element, text) => {
     element.innerText = text;
     return text;
   };
@@ -102,4 +90,16 @@ Set value via JS interop call:
 ```
 
 > [!WARNING]
-> 上述範例僅針對示範目的，直接修改檔物件模型 (DOM) 。 在大部分的情況下，不建議直接修改具有 JavaScript 的 DOM，因為 JavaScript 可能會干擾 Blazor 變更追蹤。
+> **上述範例僅針對示範目的，直接修改檔物件模型 (DOM) 。** 在大部分的情況下，不建議直接修改具有 JavaScript 的 DOM，因為 JavaScript 可能會干擾 Blazor 變更追蹤。
+
+> [!NOTE]
+> 上述範例會干擾具有全域方法的用戶端。 若要在生產應用程式中提供更好的方法，請參閱[ Blazor JavaScript 隔離和物件參考](xref:blazor/call-javascript-from-dotnet#blazor-javascript-isolation-and-object-references)。
+>
+> 範例：
+>
+> ```javascript
+> export setElementText2 = (element, text) => {
+>   element.innerText = text;
+>   return text;
+> };
+> ```

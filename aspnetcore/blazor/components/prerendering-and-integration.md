@@ -1,5 +1,5 @@
 ---
-title: ASP.NET 核心元件的已呈現和整合 Razor
+title: ASP.NET Core 元件的已呈現和整合 Razor
 author: guardrex
 description: 深入瞭解 Razor 應用程式的元件整合案例 Blazor ，包括伺服器上的元件的可呈現 Razor 。
 monikerRange: '>= aspnetcore-3.1'
@@ -20,14 +20,14 @@ no-loc:
 - SignalR
 uid: blazor/components/prerendering-and-integration
 zone_pivot_groups: blazor-hosting-models
-ms.openlocfilehash: a0c5cc0bdc78f2ea70b8c128616ad09328ccf87d
-ms.sourcegitcommit: 54fe1ae5e7d068e27376d562183ef9ddc7afc432
+ms.openlocfilehash: 5fda5f4b9f0e5111679936fbce3051a2c8390857
+ms.sourcegitcommit: 4bbc69f51c59bed1a96aa46f9f5dca2f2a2634cb
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 03/10/2021
-ms.locfileid: "102587381"
+ms.lasthandoff: 03/25/2021
+ms.locfileid: "105554963"
 ---
-# <a name="prerender-and-integrate-aspnet-core-razor-components"></a>ASP.NET 核心元件的已呈現和整合 Razor
+# <a name="prerender-and-integrate-aspnet-core-razor-components"></a>ASP.NET Core 元件的已呈現和整合 Razor
 
 ::: zone pivot="webassembly"
 
@@ -39,7 +39,7 @@ Razor 元件可以整合到 Razor 託管解決方案中的頁面和 MVC 應用�
 
 若要設定應用程式的預先安裝 Blazor WebAssembly ：
 
-1. Blazor WebAssembly在 ASP.NET Core 應用程式中裝載應用程式。 獨立 Blazor WebAssembly 應用程式可以新增至 ASP.NET Core 方案，或者您可以使用 Blazor WebAssembly 從[ Blazor WebAssembly 專案範本](xref:blazor/project-structure)建立的託管應用程式。
+1. Blazor WebAssembly在 ASP.NET Core 應用程式中裝載應用程式。 獨立 Blazor WebAssembly 應用程式可以新增至 ASP.NET Core 解決方案，或者您可以使用 Blazor WebAssembly 從[ Blazor WebAssembly 專案範本](xref:blazor/project-structure)建立的託管應用程式。
 
 1. `wwwroot/index.html`從用戶端專案中移除預設靜態檔案 Blazor WebAssembly 。
 
@@ -53,7 +53,7 @@ Razor 元件可以整合到 Razor 託管解決方案中的頁面和 MVC 應用�
 
    * 將命名空間設定為伺服器應用程式的 `Pages` 資料夾 (例如 `@namespace BlazorHosted.Server.Pages`) 。
    * 設定 [`@using`](xref:mvc/views/razor#using) 用戶端專案的指示詞 (例如 `@using BlazorHosted.Client`) 。
-   * 更新樣式表單連結以指向 WebAssembly 應用程式的樣式表單。 在下列範例中，用戶端應用程式的命名空間為 `BlazorHosted.Client` ：
+   * 更新 **兩** 個樣式表單連結，以指向 WebAssembly 應用程式的樣式表單。 在下列範例中，用戶端應用程式的命名空間為 `BlazorHosted.Client` ：
 
      ```cshtml
      <link href="css/app.css" rel="stylesheet" />
@@ -214,7 +214,7 @@ builder.RootComponents.Add<Counter>("#my-counter");
 
 ::: moniker range="< aspnetcore-5.0"
 
-Razor Razor Blazor WebAssembly .Net 5 或更新版本的 ASP.NET Core 支援將元件整合至裝載方案中的頁面和 MVC 應用程式。 請選取此文章的 .NET 5 或更新版本。
+在 Razor Razor Blazor WebAssembly .net 5 或更新版本的 ASP.NET Core 中，支援將元件整合至裝載方案中的頁面和 MVC 應用程式。 請選取此文章的 .NET 5 或更新版本。
 
 ::: moniker-end
 

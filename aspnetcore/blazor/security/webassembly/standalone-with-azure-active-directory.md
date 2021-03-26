@@ -19,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/security/webassembly/standalone-with-azure-active-directory
-ms.openlocfilehash: 21d6e6fd9859cf4daf28e0bc3cf70562192844dd
-ms.sourcegitcommit: 1166b0ff3828418559510c661e8240e5c5717bb7
+ms.openlocfilehash: 4f3c07f2698dd68fbb80c5f34a3f3df62225e3b3
+ms.sourcegitcommit: 4bbc69f51c59bed1a96aa46f9f5dca2f2a2634cb
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 02/12/2021
-ms.locfileid: "100280921"
+ms.lasthandoff: 03/25/2021
+ms.locfileid: "105554677"
 ---
 # <a name="secure-an-aspnet-core-blazor-webassembly-standalone-app-with-azure-active-directory"></a>使用 Azure Active Directory 保護 ASP.NET Core 的 Blazor WebAssembly 獨立應用程式
 
@@ -39,12 +39,13 @@ ms.locfileid: "100280921"
 >
 > 如果您想要在更新 IDE 之前，使用 Visual Studio 建立解決方案和 Azure 應用程式註冊，請參閱本文 **_的每一節_** ，並確認或更新應用程式的設定，以及在 Visual Studio 建立解決方案之後，應用程式的註冊。
 
-在 Azure 入口網站的 **Azure Active Directory** > **應用程式註冊** 區域中註冊 AAD 應用程式：
+註冊 AAD 應用程式：
 
+1. 流覽至 Azure 入口網站中的 **Azure Active Directory** 。 選取提要欄位中的 **應用程式註冊** 。 選取 [ **新增註冊** ] 按鈕。
 1. 提供應用程式的 **名稱** (例如 **Blazor 獨立 AAD**) 。
 1. 選擇 **支援的帳戶類型**。 您可以 **只在此體驗中選取此組織目錄中的帳戶** 。
 1. 將 [重新 **導向 uri** ] 下拉式清單設定為 **單一頁面應用程式 (SPA)** 並提供下列重新導向 uri： `https://localhost:{PORT}/authentication/login-callback` 。 在 Kestrel 上執行應用程式的預設連接埠是 5001。 如果應用程式是在不同的 Kestrel 埠上執行，請使用應用程式的埠。 針對 IIS Express，可在 [ **調試** 程式] 面板的應用程式屬性中找到應用程式隨機產生的埠。 由於應用程式目前不存在，且 IIS Express 埠未知，因此在建立應用程式之後，請返回此步驟，並更新重新導向 URI。 本主題稍後會出現一個批註，提醒 IIS Express 使用者更新重新導向 URI。
-1. 清除 [授 **與系統** > **管理員同意 openid 和 offline_access 許可權** ] 核取方塊。
+1. 如果您要使用未 [驗證的發行者網域](/azure/active-directory/develop/howto-configure-publisher-domain)，請 **清除 [** 授與系統  >  **管理員同意 openid 和 offline_access 許可權**] 核取方塊。 如果發行者網域經過驗證，就不會出現這個核取方塊。
 1. 選取 [註冊]。
 
 記錄下列資訊：
@@ -63,12 +64,13 @@ ms.locfileid: "100280921"
 
 ::: moniker range="< aspnetcore-5.0"
 
-在 Azure 入口網站的 **Azure Active Directory** > **應用程式註冊** 區域中註冊 AAD 應用程式：
+註冊 AAD 應用程式：
 
+1. 流覽至 Azure 入口網站中的 **Azure Active Directory** 。 選取提要欄位中的 **應用程式註冊** 。 選取 [ **新增註冊** ] 按鈕。
 1. 提供應用程式的 **名稱** (例如 **Blazor 獨立 AAD**) 。
 1. 選擇 **支援的帳戶類型**。 您可以 **只在此體驗中選取此組織目錄中的帳戶** 。
 1. 將 [重新 **導向 URI** ] 下拉式清單保持設定為 [ **Web** ]，並提供下列重新導向 uri： `https://localhost:{PORT}/authentication/login-callback` 。 在 Kestrel 上執行應用程式的預設連接埠是 5001。 如果應用程式是在不同的 Kestrel 埠上執行，請使用應用程式的埠。 針對 IIS Express，可在 [ **調試** 程式] 面板的應用程式屬性中找到應用程式隨機產生的埠。 由於應用程式目前不存在，且 IIS Express 埠未知，因此在建立應用程式之後，請返回此步驟，並更新重新導向 URI。 本主題稍後會出現一個批註，提醒 IIS Express 使用者更新重新導向 URI。
-1. 清除 [授 **與系統** > **管理員同意 openid 和 offline_access 許可權** ] 核取方塊。
+1. 如果您要使用未 [驗證的發行者網域](/azure/active-directory/develop/howto-configure-publisher-domain)，請 **清除 [** 授與系統  >  **管理員同意 openid 和 offline_access 許可權**] 核取方塊。 如果發行者網域經過驗證，就不會出現這個核取方塊。
 1. 選取 [註冊]。
 
 記錄下列資訊：
@@ -117,7 +119,9 @@ dotnet new blazorwasm -au SingleOrg --client-id "{CLIENT ID}" -o {APP NAME} --te
 * 使用 AAD 使用者帳戶登入應用程式。
 * 要求 Microsoft Api 的存取權杖。 如需詳細資訊，請參閱
   * [存取權杖範圍](#access-token-scopes)
-  * [快速入門：設定應用程式以公開 Web api](/azure/active-directory/develop/quickstart-configure-app-expose-web-apis)。
+  * [快速入門：設定應用程式以公開 Web API](/azure/active-directory/develop/quickstart-configure-app-expose-web-apis)
+  * [使用 AAD 所裝載：存取權杖範圍 (包含 AAD `App ID URI` 範圍格式的指引) ](xref:blazor/security/webassembly/hosted-with-azure-active-directory#access-token-scopes)
+  * [Microsoft Graph API 的存取權杖範圍](xref:blazor/security/webassembly/graph-api)
 
 ## <a name="authentication-package"></a>驗證套件
 

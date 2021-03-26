@@ -18,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: security/data-protection/configuration/overview
-ms.openlocfilehash: 048f6d6d57d3cc5d64004e18b18a3347ee92e450
-ms.sourcegitcommit: d64bf0cbe763beda22a7728c7f10d07fc5e19262
+ms.openlocfilehash: 8c00deb49709bd2ec2a5824c841fa3600f99b204
+ms.sourcegitcommit: 4bbc69f51c59bed1a96aa46f9f5dca2f2a2634cb
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 11/03/2020
-ms.locfileid: "93234565"
+ms.lasthandoff: 03/25/2021
+ms.locfileid: "105554664"
 ---
 # <a name="configure-aspnet-core-data-protection"></a>設定 ASP.NET Core 資料保護
 
@@ -121,7 +121,7 @@ public void ConfigureServices(IServiceCollection services)
 {
     services.AddDataProtection()
         .PersistKeysToFileSystem(new DirectoryInfo(@"\\server\share\directory\"))
-        .ProtectKeysWithCertificate("thumbprint");
+        .ProtectKeysWithCertificate(Configuration["Thumbprint"]);
 }
 ```
 
@@ -135,7 +135,7 @@ public void ConfigureServices(IServiceCollection services)
     services.AddDataProtection()
         .PersistKeysToFileSystem(new DirectoryInfo(@"\\server\share\directory\"))
         .ProtectKeysWithCertificate(
-            new X509Certificate2("certificate.pfx", "password"));
+            new X509Certificate2("certificate.pfx", Configuration["Thumbprint"]));
 }
 ```
 
@@ -155,10 +155,10 @@ public void ConfigureServices(IServiceCollection services)
     services.AddDataProtection()
         .PersistKeysToFileSystem(new DirectoryInfo(@"\\server\share\directory\"))
         .ProtectKeysWithCertificate(
-            new X509Certificate2("certificate.pfx", "password"));
+            new X509Certificate2("certificate.pfx", Configuration["MyPasswordKey"));
         .UnprotectKeysWithAnyCertificate(
-            new X509Certificate2("certificate_old_1.pfx", "password_1"),
-            new X509Certificate2("certificate_old_2.pfx", "password_2"));
+            new X509Certificate2("certificate_old_1.pfx", Configuration["MyPasswordKey_1"),
+            new X509Certificate2("certificate_old_2.pfx", Configuration["MyPasswordKey_2"));
 }
 ```
 
@@ -184,7 +184,7 @@ public void ConfigureServices(IServiceCollection services)
 
 * <xref:Microsoft.AspNetCore.DataProtection.DataProtectionBuilderExtensions.SetApplicationName*>在每個具有相同值的應用程式中設定。
 * 在應用程式中使用相同版本的資料保護 API 堆疊。 在應用程式的專案檔案中，執行下列 **其中一** 項：
-  * 透過 [AspNetCore 應用程式中繼套件](xref:fundamentals/metapackage-app)參考相同的共用架構版本。
+  * 透過 [Microsoft.AspNetCore.App 中繼套件](xref:fundamentals/metapackage-app)參考相同的共用架構版本。
   * 參考相同的 [資料保護套件](xref:security/data-protection/introduction#package-layout) 版本。
 
 ```csharp

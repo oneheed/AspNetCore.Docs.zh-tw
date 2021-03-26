@@ -19,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/components/rendering
-ms.openlocfilehash: 1d244434cd3aa7e1a49839cc0c6cecb61abbcdff
-ms.sourcegitcommit: 1f35de0ca9ba13ea63186c4dc387db4fb8e541e0
+ms.openlocfilehash: 76b88d5443cdef8ad01d6c357b4136896ede0067
+ms.sourcegitcommit: 4bbc69f51c59bed1a96aa46f9f5dca2f2a2634cb
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 03/20/2021
-ms.locfileid: "104711330"
+ms.lasthandoff: 03/25/2021
+ms.locfileid: "105554937"
 ---
 # <a name="aspnet-core-blazor-component-rendering"></a>ASP.NET Core Blazor 元件轉譯
 
@@ -37,7 +37,7 @@ ms.locfileid: "104711330"
 * 從父元件套用一組更新的 [參數](xref:blazor/components/data-binding#binding-with-component-parameters) 之後。
 * 套用串聯 [參數](xref:blazor/components/cascading-values-and-parameters)的更新值之後。
 * 在事件的通知之後，叫用它自己的其中一個 [事件處理常式](xref:blazor/components/event-handling)。
-* 呼叫自己的 <xref:Microsoft.AspNetCore.Components.ComponentBase.StateHasChanged%2A> 方法之後 (請參閱[ Blazor 生命週期：狀態變更](xref:blazor/components/lifecycle#state-changes)) 。
+* 呼叫自己的 <xref:Microsoft.AspNetCore.Components.ComponentBase.StateHasChanged%2A> 方法之後 (請參閱 <xref:blazor/components/lifecycle#state-changes-statehaschanged>) 。
 
 <xref:Microsoft.AspNetCore.Components.ComponentBase>如果下列任一條件成立，則繼承自 skip 轉譯中的元件，因為參數更新：
 
@@ -59,7 +59,7 @@ ms.locfileid: "104711330"
 程式碼不應該 <xref:Microsoft.AspNetCore.Components.ComponentBase.StateHasChanged%2A> 在下列情況呼叫：
 
 * 定期處理事件，無論是同步或非同步，因為都會 <xref:Microsoft.AspNetCore.Components.ComponentBase> 觸發大部分例行事件處理常式的轉譯。
-* 執行一般的生命週期邏輯（例如 [`OnInitialized`](xref:blazor/components/lifecycle#component-initialization-methods) 或），而 [`OnParametersSetAsync`](xref:blazor/components/lifecycle#after-parameters-are-set) 不論是 synchonrously 還是非同步，因為會 <xref:Microsoft.AspNetCore.Components.ComponentBase> 觸發一般生命週期事件的轉譯。
+* 執行一般的生命週期邏輯（例如 [`OnInitialized`](xref:blazor/components/lifecycle#component-initialization-methods-oninitializedasync) 或），而 [`OnParametersSetAsync`](xref:blazor/components/lifecycle#after-parameters-are-set-onparameterssetasync) 不論是 synchonrously 還是非同步，因為會 <xref:Microsoft.AspNetCore.Components.ComponentBase> 觸發一般生命週期事件的轉譯。
 
 不過，在本文的 <xref:Microsoft.AspNetCore.Components.ComponentBase.StateHasChanged%2A> 下列各節所述的案例中，可能有意義：
 

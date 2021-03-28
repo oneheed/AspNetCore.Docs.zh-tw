@@ -5,7 +5,7 @@ description: 了解如何為 ASP.NET Core 基礎結構 (例如應用程式和資
 monikerRange: '>= aspnetcore-2.2'
 ms.author: riande
 ms.custom: mvc
-ms.date: 06/22/2020
+ms.date: 03/23/2021
 no-loc:
 - appsettings.json
 - ASP.NET Core Identity
@@ -19,18 +19,18 @@ no-loc:
 - Razor
 - SignalR
 uid: host-and-deploy/health-checks
-ms.openlocfilehash: 272f1f098ca90434f26d6c057859a00b5519602e
-ms.sourcegitcommit: 54fe1ae5e7d068e27376d562183ef9ddc7afc432
+ms.openlocfilehash: 5282ca2e96fbe5526a020aea0d845dd6e4dd4fb9
+ms.sourcegitcommit: 7b6781051d341a1daaf46c6a4368fa8a5701db81
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 03/10/2021
-ms.locfileid: "102588902"
+ms.lasthandoff: 03/28/2021
+ms.locfileid: "105638665"
 ---
 # <a name="health-checks-in-aspnet-core"></a>ASP.NET Core 中的健康狀態檢查
 
 依 [Glenn Condron](https://github.com/glennc)
 
-::: moniker range=">= aspnetcore-3.0"
+::: moniker range=">= aspnetcore-5.0"
 
 ASP.NET Core 提供健康狀態檢查中介軟體和程式庫，以報告應用程式基礎結構元件的健康情況。
 
@@ -42,35 +42,35 @@ ASP.NET Core 提供健康狀態檢查中介軟體和程式庫，以報告應用�
 
 [查看或下載範例程式碼](https://github.com/dotnet/AspNetCore.Docs/tree/main/aspnetcore/host-and-deploy/health-checks/samples) ([如何下載](xref:index#how-to-download-a-sample)) 
 
-範例應用程式包含本主題中所述的案例範例。 若要在指定的案例中執行範例應用程式，請在命令殼層中使用來自專案資料夾的 [dotnet run](/dotnet/core/tools/dotnet-run) 命令。 如需如何使用範例應用程式的詳細資訊，請參閱範例應用程式的 *README.md* 檔案和本主題中的案例描述。
+範例應用程式包含本主題中所述的案例範例。 若要在指定的案例中執行範例應用程式，請在命令殼層中使用來自專案資料夾的 [dotnet run](/dotnet/core/tools/dotnet-run) 命令。 `README.md`如需如何使用範例應用程式的詳細資訊，請參閱本主題中的範例應用程式檔案和案例描述。
 
 ## <a name="prerequisites"></a>必要條件
 
 健康狀態檢查通常會搭配使用外部監視服務或容器協調器，來檢查應用程式的狀態。 將健康狀態檢查新增至應用程式之前，請決定要使用的監控系統。 監控系統會指定要建立哪些健康狀態檢查類型，以及如何設定其端點。
 
-ASP.NET Core 應用程式會隱含參考 [AspNetCore HealthChecks](https://www.nuget.org/packages/Microsoft.AspNetCore.Diagnostics.HealthChecks) 套件。 若要使用 Entity Framework Core 執行健康情況檢查，請將套件參考新增至 [HealthChecks. microsoft.entityframeworkcore](https://www.nuget.org/packages/Microsoft.Extensions.Diagnostics.HealthChecks.EntityFrameworkCore) 套件。
+[`Microsoft.AspNetCore.Diagnostics.HealthChecks`](https://www.nuget.org/packages/Microsoft.AspNetCore.Diagnostics.HealthChecks)ASP.NET Core 的應用程式會隱含參考此套件。 若要使用 Entity Framework Core 執行健康情況檢查，請新增封裝的參考 [`Microsoft.Extensions.Diagnostics.HealthChecks.EntityFrameworkCore`](https://www.nuget.org/packages/Microsoft.Extensions.Diagnostics.HealthChecks.EntityFrameworkCore) 。
 
-範例應用程式提供啟動程式碼，來示範數個案例的健康狀態檢查。 [資料庫探查](#database-probe)案例會使用 [AspNetCore.Diagnostics.HealthChecks](https://github.com/Xabaril/AspNetCore.Diagnostics.HealthChecks) \(英文\) 來檢查資料庫連線的健康情況。 [DbContext 探查](#entity-framework-core-dbcontext-probe)案例使用 EF Core `DbContext` 來檢查資料庫。 為了探索資料庫案例，範例應用程式會：
+範例應用程式提供啟動程式碼，來示範數個案例的健康狀態檢查。 [資料庫探查](#database-probe)案例會使用來檢查資料庫連接的健全狀況 [`AspNetCore.Diagnostics.HealthChecks`](https://github.com/Xabaril/AspNetCore.Diagnostics.HealthChecks) 。 [DbContext 探查](#entity-framework-core-dbcontext-probe)案例使用 EF Core `DbContext` 來檢查資料庫。 為了探索資料庫案例，範例應用程式會：
 
-* 建立資料庫，並在檔案中提供其連接字串 *appsettings.json* 。
+* 建立資料庫，並在檔案中提供其連接字串 `appsettings.json` 。
 * 在其專案檔中具有下列套件參考：
-  * [AspNetCore.HealthChecks.SqlServer](https://www.nuget.org/packages/AspNetCore.HealthChecks.SqlServer/)
-  * [Microsoft.Extensions.Diagnostics.HealthChecks.EntityFrameworkCore](https://www.nuget.org/packages/Microsoft.Extensions.Diagnostics.HealthChecks.EntityFrameworkCore/)
+  * [`AspNetCore.HealthChecks.SqlServer`](https://www.nuget.org/packages/AspNetCore.HealthChecks.SqlServer)
+  * [`Microsoft.Extensions.Diagnostics.HealthChecks.EntityFrameworkCore`](https://www.nuget.org/packages/Microsoft.Extensions.Diagnostics.HealthChecks.EntityFrameworkCore)
 
 > [!NOTE]
-> [AspNetCore](https://github.com/Xabaril/AspNetCore.Diagnostics.HealthChecks) 不會由 Microsoft 維護或支援 HealthChecks。
+> [`AspNetCore.Diagnostics.HealthChecks`](https://github.com/Xabaril/AspNetCore.Diagnostics.HealthChecks) Microsoft 不會維護或支援。
 
-另一個健康狀態檢查案例示範如何將健康狀態檢查篩選至管理連接埠。 範例應用程式會要求您建立 *Properties/launchSettings.json* 檔案，其中包含管理 URL 和管理連接埠。 如需詳細資訊，請參閱[依連接埠篩選](#filter-by-port)一節。
+另一個健康狀態檢查案例示範如何將健康狀態檢查篩選至管理連接埠。 範例應用程式會要求您建立 `Properties/launchSettings.json` 包含管理 URL 和管理埠的檔案。 如需詳細資訊，請參閱[依連接埠篩選](#filter-by-port)一節。
 
 ## <a name="basic-health-probe"></a>基本健康狀態探查
 
 對於許多應用程式，報告應用程式是否可處理要求的基本健康狀態探查組態 (「活躍度」)，便足以探索應用程式的狀態。
 
-基本設定會註冊健康情況檢查服務並呼叫健康情況檢查中介軟體，以在具有健康回應的 URL 端點回應。 預設並未登錄特定健康狀態檢查來測試任何特定相依性或子系統。 如果應用程式能夠在健康狀態端點 URL 做出回應，則視為狀況良好。 預設回應寫入器會將狀態 (<xref:Microsoft.Extensions.Diagnostics.HealthChecks.HealthStatus>) 以純文字回應形式回寫到用戶端，指出狀態為 [HealthStatus.Healthy](xref:Microsoft.Extensions.Diagnostics.HealthChecks.HealthStatus)[HealthStatus.Degraded](xref:Microsoft.Extensions.Diagnostics.HealthChecks.HealthStatus) 或 [HealthStatus.Unhealthy](xref:Microsoft.Extensions.Diagnostics.HealthChecks.HealthStatus)。
+基本設定會註冊健康情況檢查服務並呼叫健康情況檢查中介軟體，以在具有健康回應的 URL 端點回應。 預設並未登錄特定健康狀態檢查來測試任何特定相依性或子系統。 如果應用程式能夠在健康狀態端點 URL 做出回應，則視為狀況良好。 預設回應寫入器會將狀態 (<xref:Microsoft.Extensions.Diagnostics.HealthChecks.HealthStatus>) ，以純文字回應的形式寫入用戶端，表示 [`HealthStatus.Healthy`](xref:Microsoft.Extensions.Diagnostics.HealthChecks.HealthStatus) [`HealthStatus.Degraded`](xref:Microsoft.Extensions.Diagnostics.HealthChecks.HealthStatus) 或 [`HealthStatus.Unhealthy`](xref:Microsoft.Extensions.Diagnostics.HealthChecks.HealthStatus) 狀態。
 
-在 `Startup.ConfigureServices` 中，使用 <xref:Microsoft.Extensions.DependencyInjection.HealthCheckServiceCollectionExtensions.AddHealthChecks*> 登錄健康狀態檢查服務。 藉由在中呼叫來建立健康情況檢查端點 `MapHealthChecks` `Startup.Configure` 。
+在 `Startup.ConfigureServices` 中，使用 <xref:Microsoft.Extensions.DependencyInjection.HealthCheckServiceCollectionExtensions.AddHealthChecks%2A> 登錄健康狀態檢查服務。 藉由在中呼叫來建立健康情況檢查端點 `MapHealthChecks` `Startup.Configure` 。
 
-在範例應用程式中，健康狀態檢查端點是在 `/health` (*BasicStartup.cs*) 建立：
+在範例應用程式中，健康狀態檢查端點是在 `/health` (`BasicStartup.cs`) 建立的：
 
 ```csharp
 public class BasicStartup
@@ -108,9 +108,9 @@ HEALTHCHECK CMD curl --fail http://localhost:5000/health || exit
 
 ## <a name="create-health-checks"></a>建立健康狀態檢查
 
-健康狀態檢查是藉由實作 <xref:Microsoft.Extensions.Diagnostics.HealthChecks.IHealthCheck> 介面來建立。 <xref:Microsoft.Extensions.Diagnostics.HealthChecks.IHealthCheck.CheckHealthAsync*> 方法會傳回 <xref:Microsoft.Extensions.Diagnostics.HealthChecks.HealthCheckResult>，指出健康狀態為 `Healthy`、`Degraded` 或 `Unhealthy`。 結果會寫成具有可設定狀態碼的純文字回應 ([健康狀態檢查選項](#health-check-options)一節中將說明如何進行組態)。 <xref:Microsoft.Extensions.Diagnostics.HealthChecks.HealthCheckResult> 也可以傳回選擇性索引鍵/值組。
+健康狀態檢查是藉由實作 <xref:Microsoft.Extensions.Diagnostics.HealthChecks.IHealthCheck> 介面來建立。 <xref:Microsoft.Extensions.Diagnostics.HealthChecks.IHealthCheck.CheckHealthAsync%2A> 方法會傳回 <xref:Microsoft.Extensions.Diagnostics.HealthChecks.HealthCheckResult>，指出健康狀態為 `Healthy`、`Degraded` 或 `Unhealthy`。 結果會寫成具有可設定狀態碼的純文字回應 ([健康狀態檢查選項](#health-check-options)一節中將說明如何進行組態)。 <xref:Microsoft.Extensions.Diagnostics.HealthChecks.HealthCheckResult> 也可以傳回選擇性索引鍵/值組。
 
-下列 `ExampleHealthCheck` 類別示範健康情況檢查的版面配置。 健康情況檢查邏輯會放置在 `CheckHealthAsync` 方法中。 下列範例會將虛擬變數（）設定 `healthCheckResultHealthy` 為 `true` 。 如果的值 `healthCheckResultHealthy` 設定為 `false` ，則會傳回 [HealthCheckResult 狀況不良](xref:Microsoft.Extensions.Diagnostics.HealthChecks.HealthCheckResult.Unhealthy*) 狀態。
+下列 `ExampleHealthCheck` 類別示範健康情況檢查的版面配置。 健康情況檢查邏輯會放置在 `CheckHealthAsync` 方法中。 下列範例會將虛擬變數（）設定 `healthCheckResultHealthy` 為 `true` 。 如果的值 `healthCheckResultHealthy` 設定為 `false` ，則 <xref:Microsoft.Extensions.Diagnostics.HealthChecks.HealthCheckRegistration.FailureStatus?displayProperty=nameWithType> 會傳回狀態。
 
 ```csharp
 public class ExampleHealthCheck : IHealthCheck
@@ -128,21 +128,24 @@ public class ExampleHealthCheck : IHealthCheck
         }
 
         return Task.FromResult(
-            HealthCheckResult.Unhealthy("An unhealthy result."));
+            new HealthCheckResult(context.Registration.FailureStatus, 
+            "An unhealthy result."));
     }
 }
 ```
 
+如果 <xref:Microsoft.Extensions.Diagnostics.HealthChecks.IHealthCheck.CheckHealthAsync%2A> 在檢查期間擲回例外狀況，則 <xref:Microsoft.Extensions.Diagnostics.HealthChecks.HealthReportEntry> 會傳回新的，其 <xref:Microsoft.Extensions.Diagnostics.HealthChecks.HealthReportEntry.Status?displayProperty=nameWithType> 設定為 <xref:Microsoft.Extensions.Diagnostics.HealthChecks.HealthCheckRegistration.FailureStatus> ，由 <xref:Microsoft.Extensions.DependencyInjection.HealthChecksBuilderAddCheckExtensions.AddCheck%2A> (查看 [ [註冊健康情況檢查服務](#register-health-check-services) ] 區段) 並包含一開始導致檢查失敗的 [內部例外](xref:Microsoft.Extensions.Diagnostics.HealthChecks.HealthReportEntry.Exception) 狀況。 <xref:Microsoft.Extensions.Diagnostics.HealthChecks.HealthReportEntry.Description>會設定為例外狀況的訊息。
+
 ## <a name="register-health-check-services"></a>登錄健康狀態檢查服務
 
-此 `ExampleHealthCheck` 類型會新增至具有下列功能的健康情況檢查服務 <xref:Microsoft.Extensions.DependencyInjection.HealthChecksBuilderAddCheckExtensions.AddCheck*> `Startup.ConfigureServices` ：
+此 `ExampleHealthCheck` 類型會新增至具有下列功能的健康情況檢查服務 <xref:Microsoft.Extensions.DependencyInjection.HealthChecksBuilderAddCheckExtensions.AddCheck%2A> `Startup.ConfigureServices` ：
 
 ```csharp
 services.AddHealthChecks()
     .AddCheck<ExampleHealthCheck>("example_health_check");
 ```
 
-下列範例中所顯示的 <xref:Microsoft.Extensions.DependencyInjection.HealthChecksBuilderAddCheckExtensions.AddCheck*> 多載會設定在健康狀態檢查報告失敗時所要報告的失敗狀態 (<xref:Microsoft.Extensions.Diagnostics.HealthChecks.HealthStatus>)。 如果將失敗狀態設定為 `null` (預設)，則會回報 [HealthStatus.Unhealthy](xref:Microsoft.Extensions.Diagnostics.HealthChecks.HealthStatus)。 此多載對程式庫作者很有用。若健康狀態檢查實作採用此設定，則當健康狀態檢查失敗時，應用程式就會強制程式庫指出失敗狀態。
+下列範例中所顯示的 <xref:Microsoft.Extensions.DependencyInjection.HealthChecksBuilderAddCheckExtensions.AddCheck%2A> 多載會設定在健康狀態檢查報告失敗時所要報告的失敗狀態 (<xref:Microsoft.Extensions.Diagnostics.HealthChecks.HealthStatus>)。 如果失敗狀態設定為 `null` (預設) ， [`HealthStatus.Unhealthy`](xref:Microsoft.Extensions.Diagnostics.HealthChecks.HealthStatus) 則會回報。 此多載對程式庫作者很有用。若健康狀態檢查實作採用此設定，則當健康狀態檢查失敗時，應用程式就會強制程式庫指出失敗狀態。
 
 您可以使用「標籤」來篩選健康狀態檢查 ([篩選健康狀態檢查](#filter-health-checks)一節中將進一步說明)。
 
@@ -154,7 +157,7 @@ services.AddHealthChecks()
         tags: new[] { "example" });
 ```
 
-<xref:Microsoft.Extensions.DependencyInjection.HealthChecksBuilderAddCheckExtensions.AddCheck*> 也可以執行匿名函式。 在下列範例中，健康狀態檢查名稱指定為 `Example`，且檢查一律會傳回狀況良好狀態：
+<xref:Microsoft.Extensions.DependencyInjection.HealthChecksBuilderAddCheckExtensions.AddCheck%2A> 也可以執行匿名函式。 在下列範例中，健康狀態檢查名稱指定為 `Example`，且檢查一律會傳回狀況良好狀態：
 
 ```csharp
 services.AddHealthChecks()
@@ -162,7 +165,7 @@ services.AddHealthChecks()
         HealthCheckResult.Healthy("Example is OK!"), tags: new[] { "example" });
 ```
 
-呼叫 <xref:Microsoft.Extensions.DependencyInjection.HealthChecksBuilderAddCheckExtensions.AddTypeActivatedCheck*> 以將引數傳遞至健康情況檢查執行。 在下列範例中， `TestHealthCheckWithArgs` 會接受一個整數和一個在呼叫時使用的字串 <xref:Microsoft.Extensions.Diagnostics.HealthChecks.IHealthCheck.CheckHealthAsync*> ：
+呼叫 <xref:Microsoft.Extensions.DependencyInjection.HealthChecksBuilderAddCheckExtensions.AddTypeActivatedCheck%2A> 以將引數傳遞至健康情況檢查執行。 在下列範例中， `TestHealthCheckWithArgs` 會接受一個整數和一個在呼叫時使用的字串 <xref:Microsoft.Extensions.Diagnostics.HealthChecks.IHealthCheck.CheckHealthAsync%2A> ：
 
 ```csharp
 private class TestHealthCheckWithArgs : IHealthCheck
@@ -312,7 +315,7 @@ app.UseEndpoints(endpoints =>
 
 ### <a name="customize-output"></a>自訂輸出
 
-在中 `Startup.Configure` ，將 [HealthCheckOptions. ResponseWriter](xref:Microsoft.AspNetCore.Diagnostics.HealthChecks.HealthCheckOptions.ResponseWriter) 選項設定為用於寫入回應的委派：
+在中 `Startup.Configure` ，將 [`HealthCheckOptions.ResponseWriter`](xref:Microsoft.AspNetCore.Diagnostics.HealthChecks.HealthCheckOptions.ResponseWriter) 選項設定為用於寫入回應的委派：
 
 ```csharp
 app.UseEndpoints(endpoints =>
@@ -324,17 +327,17 @@ app.UseEndpoints(endpoints =>
 });
 ```
 
-預設委派會使用 [HealthReport.Status](xref:Microsoft.Extensions.Diagnostics.HealthChecks.HealthReport.Status)的字串值撰寫最基本的純文字回應。 下列自訂委派會輸出自訂 JSON 回應。
+預設委派會以的字串值寫入最短的純文字回應 [`HealthReport.Status`](xref:Microsoft.Extensions.Diagnostics.HealthChecks.HealthReport.Status) 。 下列自訂委派會輸出自訂 JSON 回應。
 
 範例應用程式中的第一個範例會示範如何使用 <xref:System.Text.Json?displayProperty=fullName> ：
 
-[!code-csharp[](health-checks/samples/3.x/HealthChecksSample/CustomWriterStartup.cs?name=snippet_WriteResponse_SystemTextJson)]
+[!code-csharp[](health-checks/samples/5.x/HealthChecksSample/CustomWriterStartup.cs?name=snippet_WriteResponse_SystemTextJson)]
 
-第二個範例示範如何 [ 在上使用Newtonsoft.Js](https://www.nuget.org/packages/Newtonsoft.Json/)：
+第二個範例示範如何使用 [`Newtonsoft.Json`](https://www.nuget.org/packages/Newtonsoft.Json) ：
 
-[!code-csharp[](health-checks/samples/3.x/HealthChecksSample/CustomWriterStartup.cs?name=snippet_WriteResponse_NewtonSoftJson)]
+[!code-csharp[](health-checks/samples/5.x/HealthChecksSample/CustomWriterStartup.cs?name=snippet_WriteResponse_NewtonSoftJson)]
 
-在範例應用程式中，將 `SYSTEM_TEXT_JSON` *CustomWriterStartup.cs* 中的 [預處理器](xref:index#preprocessor-directives-in-sample-code)指示詞批註為，以啟用的 `Newtonsoft.Json` 版本 `WriteResponse` 。
+在範例應用程式中，將中的 `SYSTEM_TEXT_JSON` [預處理器](xref:index#preprocessor-directives-in-sample-code) 指示詞批註 `CustomWriterStartup.cs` 為，以啟用的 `Newtonsoft.Json` 版本 `WriteResponse` 。
 
 健康情況檢查 API 不會提供複雜 JSON 傳回格式的內建支援，因為格式是您選擇的監視系統所特有。 視需要自訂上述範例中的回應。 如需有關 JSON 序列化的詳細資訊 `System.Text.Json` ，請參閱 [如何在 .net 中序列化和還原序列化 json](/dotnet/standard/serialization/system-text-json-how-to)。
 
@@ -342,20 +345,20 @@ app.UseEndpoints(endpoints =>
 
 健康狀態檢查可指定資料庫查詢以布林測試方式來執行，藉此指出資料庫是否正常回應。
 
-範例應用程式會使用 [AspNetCore.Diagnostics.HealthChecks](https://github.com/Xabaril/AspNetCore.Diagnostics.HealthChecks) \(英文\) (此為適用於 ASP.NET Core 應用程式的健康情況檢查程式庫)，在 SQL Server 資料庫上執行健康情況檢查。 `AspNetCore.Diagnostics.HealthChecks` 會對資料庫執行 `SELECT 1` 查詢，以確認資料庫連線狀況良好。
+範例應用程式會使用 [`AspNetCore.Diagnostics.HealthChecks`](https://github.com/Xabaril/AspNetCore.Diagnostics.HealthChecks) ASP.NET Core 應用程式的健康情況檢查程式庫，對 SQL Server 資料庫執行健康情況檢查。 `AspNetCore.Diagnostics.HealthChecks` 會對資料庫執行 `SELECT 1` 查詢，以確認資料庫連線狀況良好。
 
 > [!WARNING]
 > 使用查詢檢查資料庫連線時，請選擇快速傳回的查詢。 查詢方法具有多載資料庫而降低其效能的風險。 在大部分情況下，不需要執行測試查詢。 只要成功建立資料庫連線就已足夠。 如果您發現有必要執行查詢，請選擇簡單的 SELECT 查詢，例如 `SELECT 1`。
 
-包含 [AspNetCore.HealthChecks.SqlServer](https://www.nuget.org/packages/AspNetCore.HealthChecks.SqlServer/) 的套件參考。
+包含的封裝參考 [`AspNetCore.HealthChecks.SqlServer`](https://www.nuget.org/packages/AspNetCore.HealthChecks.SqlServer) 。
 
-在範例應用程式的檔案中提供有效的資料庫連接字串 *appsettings.json* 。 應用程式使用名為 `HealthCheckSample` 的 SQL Server 資料庫：
+在範例應用程式的檔案中提供有效的資料庫連接字串 `appsettings.json` 。 應用程式使用名為 `HealthCheckSample` 的 SQL Server 資料庫：
 
-[!code-json[](health-checks/samples/3.x/HealthChecksSample/appsettings.json?highlight=3)]
+[!code-json[](health-checks/samples/5.x/HealthChecksSample/appsettings.json?highlight=3)]
 
-在 `Startup.ConfigureServices` 中，使用 <xref:Microsoft.Extensions.DependencyInjection.HealthCheckServiceCollectionExtensions.AddHealthChecks*> 登錄健康狀態檢查服務。 範例應用程式會使用資料庫的連接字串 (*DbHealthStartup.cs*) 來呼叫 `AddSqlServer` 方法：
+在 `Startup.ConfigureServices` 中，使用 <xref:Microsoft.Extensions.DependencyInjection.HealthCheckServiceCollectionExtensions.AddHealthChecks%2A> 登錄健康狀態檢查服務。 範例應用程式會 `AddSqlServer` 使用資料庫的連接字串呼叫方法， (`DbHealthStartup.cs`) ：
 
-[!code-csharp[](health-checks/samples/3.x/HealthChecksSample/DbHealthStartup.cs?name=snippet_ConfigureServices)]
+[!code-csharp[](health-checks/samples/5.x/HealthChecksSample/DbHealthStartup.cs?name=snippet_ConfigureServices)]
 
 健康情況檢查端點是在中呼叫來建立的 `MapHealthChecks` `Startup.Configure` ：
 
@@ -373,14 +376,14 @@ dotnet run --scenario db
 ```
 
 > [!NOTE]
-> [AspNetCore](https://github.com/Xabaril/AspNetCore.Diagnostics.HealthChecks) 不會由 Microsoft 維護或支援 HealthChecks。
+> [`AspNetCore.Diagnostics.HealthChecks`](https://github.com/Xabaril/AspNetCore.Diagnostics.HealthChecks) Microsoft 不會維護或支援。
 
 ## <a name="entity-framework-core-dbcontext-probe"></a>Entity Framework Core DbContext 探查
 
 `DbContext` 檢查會確認應用程式是否可與針對 EF Core `DbContext` 設定的資料庫通訊。 應用程式支援 `DbContext` 檢查：
 
 * 使用 [Entity Framework (EF) Core](/ef/core/)。
-* 包含 [Microsoft.Extensions.Diagnostics.HealthChecks.EntityFrameworkCore](https://www.nuget.org/packages/Microsoft.Extensions.Diagnostics.HealthChecks.EntityFrameworkCore/) 的套件參考。
+* 包含的封裝參考 [`Microsoft.Extensions.Diagnostics.HealthChecks.EntityFrameworkCore`](https://www.nuget.org/packages/Microsoft.Extensions.Diagnostics.HealthChecks.EntityFrameworkCore) 。
 
 `AddDbContextCheck<TContext>` 會登錄 `DbContext` 的健康狀態檢查。 `DbContext` 會以 `TContext` 形式提供給方法。 多載可用來設定失敗狀態、標籤和自訂測試查詢。
 
@@ -389,9 +392,9 @@ dotnet run --scenario db
 * `DbContextHealthCheck` 會呼叫 EF Core 的 `CanConnectAsync` 方法。 您可以自訂使用 `AddDbContextCheck` 方法多載檢查健康狀態時所要執行的作業。
 * 健康狀態檢查的名稱是 `TContext` 類型的名稱。
 
-在範例應用程式中， `AppDbContext` 會 `AddDbContextCheck` 在 `Startup.ConfigureServices` (*DbCoNtextHealthStartup.cs*) 中提供並註冊為服務：
+在範例應用程式中， `AppDbContext` 會提供給 `AddDbContextCheck` () 中的服務，並將其註冊為服務 `Startup.ConfigureServices` `DbContextHealthStartup.cs` ：
 
-[!code-csharp[](health-checks/samples/3.x/HealthChecksSample/DbContextHealthStartup.cs?name=snippet_ConfigureServices)]
+[!code-csharp[](health-checks/samples/5.x/HealthChecksSample/DbContextHealthStartup.cs?name=snippet_ConfigureServices)]
 
 健康情況檢查端點是在中呼叫來建立的 `MapHealthChecks` `Startup.Configure` ：
 
@@ -453,22 +456,22 @@ Unhealthy
 
 請考慮下列範例：應用程式必須先下載大型設定檔，才能開始處理要求。 如果初始下載失敗，我們不想要重新開機應用程式，因為應用程式可以重試下載檔案數次。 我們會使用 *活動探查* 來描述進程的活動，而不會執行其他檢查。 我們也想要避免在設定檔下載成功之前將要求傳送至應用程式。 我們會使用 *就緒探查* 來表示「未就緒」狀態，直到下載成功，而且應用程式已準備好接收要求。
 
-範例應用程式包含健康狀態檢查，會在[託管服務](xref:fundamentals/host/hosted-services)中長時間執行的啟動工作完成時回報。 `StartupHostedServiceHealthCheck` 會公開屬性 `StartupTaskCompleted`。託管服務可在其長時間執行的工作完成時，將此屬性設定為 `true` (*StartupHostedServiceHealthCheck.cs*)：
+範例應用程式包含健康狀態檢查，會在[託管服務](xref:fundamentals/host/hosted-services)中長時間執行的啟動工作完成時回報。 會 `StartupHostedServiceHealthCheck` 公開一個屬性，也就是裝載的服務在長時間執行的工作 `StartupTaskCompleted` `true` 完成 () 時可以設定的屬性 `StartupHostedServiceHealthCheck.cs` ：
 
-[!code-csharp[](health-checks/samples/3.x/HealthChecksSample/StartupHostedServiceHealthCheck.cs?name=snippet1&highlight=7-11)]
+[!code-csharp[](health-checks/samples/5.x/HealthChecksSample/StartupHostedServiceHealthCheck.cs?name=snippet1&highlight=7-11)]
 
-[託管服務](xref:fundamentals/host/hosted-services) (*Services/StartupHostedService*) 會啟動長時間執行的背景工作。 工作完成時，`StartupHostedServiceHealthCheck.StartupTaskCompleted` 會設定為 `true`：
+長時間執行的背景工作是由 [託管服務](xref:fundamentals/host/hosted-services) () 所啟動 `Services/StartupHostedService` 。 工作完成時，`StartupHostedServiceHealthCheck.StartupTaskCompleted` 會設定為 `true`：
 
-[!code-csharp[](health-checks/samples/3.x/HealthChecksSample/Services/StartupHostedService.cs?name=snippet1&highlight=18-20)]
+[!code-csharp[](health-checks/samples/5.x/HealthChecksSample/Services/StartupHostedService.cs?name=snippet1&highlight=18-20)]
 
-健康狀態檢查是 `Startup.ConfigureServices` 中使用 <xref:Microsoft.Extensions.DependencyInjection.HealthChecksBuilderAddCheckExtensions.AddCheck*> 隨託管服務一起登錄。 由於託管服務必須在健康狀態檢查上設定此屬性，因此也會在服務容器 (*LivenessProbeStartup.cs*) 中登錄健康狀態檢查：
+健康狀態檢查是 `Startup.ConfigureServices` 中使用 <xref:Microsoft.Extensions.DependencyInjection.HealthChecksBuilderAddCheckExtensions.AddCheck%2A> 隨託管服務一起登錄。 因為託管服務必須設定健康情況檢查的屬性，所以健康情況檢查也會在服務容器中註冊 (`LivenessProbeStartup.cs`) ：
 
-[!code-csharp[](health-checks/samples/3.x/HealthChecksSample/LivenessProbeStartup.cs?name=snippet_ConfigureServices)]
+[!code-csharp[](health-checks/samples/5.x/HealthChecksSample/LivenessProbeStartup.cs?name=snippet_ConfigureServices)]
 
 健康情況檢查端點是藉由在中呼叫來建立 `MapHealthChecks` `Startup.Configure` 。 在範例應用程式中，健康狀態檢查端點是在下列位置建立：
 
 * `/health/ready` 適用于準備檢查。 整備度檢查使用 `ready` 標籤來篩選健康狀態檢查。
-* `/health/live` 適用于活動檢查。 活動檢查會藉 `StartupHostedServiceHealthCheck` 由 `false` 在 [HealthCheckOptions](xref:Microsoft.AspNetCore.Diagnostics.HealthChecks.HealthCheckOptions.Predicate) 中傳回以篩選出， (如需詳細資訊，請參閱 [篩選健康情況檢查](#filter-health-checks)) 
+* `/health/live` 適用于活動檢查。 活動檢查會 `StartupHostedServiceHealthCheck` `false` 在 (中傳回以篩選出 [`HealthCheckOptions.Predicate`](xref:Microsoft.AspNetCore.Diagnostics.HealthChecks.HealthCheckOptions.Predicate) 詳細資訊，請參閱 [篩選健康情況檢查](#filter-health-checks)) 
 
 在下列範例程式碼中：
 
@@ -496,7 +499,7 @@ app.UseEndpoints(endpoints =>
 dotnet run --scenario liveness
 ```
 
-在瀏覽器中，瀏覽 `/health/ready` 數次，直到經過 15 秒。 健康狀態檢查在前 15 秒會回報 *Unhealthy*。 15 秒之後，端點會回報 *Healthy*，這反映託管服務長時間執行的工作已完成。
+在瀏覽器中，瀏覽 `/health/ready` 數次，直到經過 15 秒。 健康狀態檢查報告前 15 秒為 `Unhealthy`。 15 秒之後，端點會報告 `Healthy`，以反映託管服務長時間執行的工作已完成。
 
 此範例也會建立一個以 2 秒延遲執行第一次整備檢查的「健康狀態檢查發行者」(<xref:Microsoft.Extensions.Diagnostics.HealthChecks.IHealthCheckPublisher> 實作)。 如需詳細資訊，請參閱[健康狀態檢查發行者](#health-check-publisher)一節。
 
@@ -527,15 +530,15 @@ spec:
 
 範例應用程式示範透過自訂回應寫入器的記憶體健康狀態檢查。
 
-如果應用程式使用超過指定的記憶體閾值 (在範例應用程式中為 1 GB)，`MemoryHealthCheck` 會報告降級的狀態。 <xref:Microsoft.Extensions.Diagnostics.HealthChecks.HealthCheckResult> 包含應用程式的記憶體回收行程 (GC) 資訊 (*MemoryHealthCheck.cs*)：
+如果應用程式使用超過指定的記憶體閾值 (在範例應用程式中為 1 GB)，`MemoryHealthCheck` 會報告降級的狀態。 <xref:Microsoft.Extensions.Diagnostics.HealthChecks.HealthCheckResult>包含應用程式 () 的垃圾收集行程 (GC) 資訊 `MemoryHealthCheck.cs` ：
 
-[!code-csharp[](health-checks/samples/3.x/HealthChecksSample/MemoryHealthCheck.cs?name=snippet1)]
+[!code-csharp[](health-checks/samples/5.x/HealthChecksSample/MemoryHealthCheck.cs?name=snippet1)]
 
-在 `Startup.ConfigureServices` 中，使用 <xref:Microsoft.Extensions.DependencyInjection.HealthCheckServiceCollectionExtensions.AddHealthChecks*> 登錄健康狀態檢查服務。 `MemoryHealthCheck` 會登錄為服務，而不是將健康狀態檢查傳遞至 <xref:Microsoft.Extensions.DependencyInjection.HealthChecksBuilderAddCheckExtensions.AddCheck*> 以啟用檢查。 所有 <xref:Microsoft.Extensions.Diagnostics.HealthChecks.IHealthCheck> 登錄的服務都可供健康狀態檢查服務和中介軟體使用。 建議將健康狀態檢查服務登錄為單一服務。
+在 `Startup.ConfigureServices` 中，使用 <xref:Microsoft.Extensions.DependencyInjection.HealthCheckServiceCollectionExtensions.AddHealthChecks%2A> 登錄健康狀態檢查服務。 `MemoryHealthCheck` 會登錄為服務，而不是將健康狀態檢查傳遞至 <xref:Microsoft.Extensions.DependencyInjection.HealthChecksBuilderAddCheckExtensions.AddCheck%2A> 以啟用檢查。 所有 <xref:Microsoft.Extensions.Diagnostics.HealthChecks.IHealthCheck> 登錄的服務都可供健康狀態檢查服務和中介軟體使用。 建議將健康狀態檢查服務登錄為單一服務。
 
-在範例應用程式的 *CustomWriterStartup.cs* 中：
+在 `CustomWriterStartup.cs` 範例應用程式中：
 
-[!code-csharp[](health-checks/samples/3.x/HealthChecksSample/CustomWriterStartup.cs?name=snippet_ConfigureServices&highlight=4)]
+[!code-csharp[](health-checks/samples/5.x/HealthChecksSample/CustomWriterStartup.cs?name=snippet_ConfigureServices&highlight=4)]
 
 健康情況檢查端點是藉由在中呼叫來建立 `MapHealthChecks` `Startup.Configure` 。 `WriteResponse`當健康狀態檢查執行時，會將委派提供給 <的 AspNetCore. HealthChecks. HealthCheckOptions. ResponseWriter> 屬性以輸出自訂 JSON 回應：
 
@@ -558,19 +561,19 @@ dotnet run --scenario writer
 ```
 
 > [!NOTE]
-> [AspNetCore.Diagnostics.HealthChecks](https://github.com/Xabaril/AspNetCore.Diagnostics.HealthChecks) \(英文\) 隨附計量型健康情況檢查案例，包括磁碟儲存體和最大值活躍度檢查。
+> [`AspNetCore.Diagnostics.HealthChecks`](https://github.com/Xabaril/AspNetCore.Diagnostics.HealthChecks) 包含以計量為基礎的健康情況檢查案例，包括磁片儲存體和最大值活動檢查。
 >
-> [AspNetCore](https://github.com/Xabaril/AspNetCore.Diagnostics.HealthChecks) 不會由 Microsoft 維護或支援 HealthChecks。
+> [`AspNetCore.Diagnostics.HealthChecks`](https://github.com/Xabaril/AspNetCore.Diagnostics.HealthChecks) Microsoft 不會維護或支援。
 
 ## <a name="filter-by-port"></a>依連接埠篩選
 
 `RequireHost` `MapHealthChecks` 使用指定埠的 URL 模式呼叫，以將健康情況檢查要求限制為指定的埠。 這通常會用於容器環境，以公開監視服務的連接埠。
 
-範例應用程式使用[環境變數組態提供者](xref:fundamentals/configuration/index#environment-variables)來設定連接埠。 連接埠是在 *launchSettings.json* 檔案中設定，並透過環境變數傳遞至組態提供者。 您也必須將伺服器設定為在管理連接埠上接聽要求。
+範例應用程式使用[環境變數組態提供者](xref:fundamentals/configuration/index#environment-variables)來設定連接埠。 埠是在檔案中設定 `launchSettings.json` ，並透過環境變數傳遞至設定提供者。 您也必須將伺服器設定為在管理連接埠上接聽要求。
 
-若要使用範例應用程式示範管理連接埠組態，請在 *Properties* 資料夾中建立 *launchSettings.json* 檔案。
+若要使用範例應用程式來示範管理埠設定，請 `launchSettings.json` 在資料夾中建立檔案 `Properties` 。
 
-範例應用程式中檔案的下列 *屬性/launchSettings.js* 不包含在範例應用程式的專案檔中，必須手動建立：
+範例應用 `Properties/launchSettings.json` 程式中的下列檔案未包含在範例應用程式的專案檔中，必須以手動方式建立：
 
 ```json
 {
@@ -590,7 +593,7 @@ dotnet run --scenario writer
 }
 ```
 
-在 `Startup.ConfigureServices` 中，使用 <xref:Microsoft.Extensions.DependencyInjection.HealthCheckServiceCollectionExtensions.AddHealthChecks*> 登錄健康狀態檢查服務。 藉由在中呼叫來建立健康情況檢查端點 `MapHealthChecks` `Startup.Configure` 。
+在 `Startup.ConfigureServices` 中，使用 <xref:Microsoft.Extensions.DependencyInjection.HealthCheckServiceCollectionExtensions.AddHealthChecks%2A> 登錄健康狀態檢查服務。 藉由在中呼叫來建立健康情況檢查端點 `MapHealthChecks` `Startup.Configure` 。
 
 在範例應用程式中，對 `RequireHost` 中端點的呼叫會 `Startup.Configure` 從設定中指定管理埠：
 
@@ -620,9 +623,9 @@ app.UseEndpoints(endpoints =>
 ```
 
 > [!NOTE]
-> 您可以在程式碼中明確設定管理埠，以避免在範例應用程式中建立檔案 *launchSettings.js* 。 在建立的 *Program.cs* 中 <xref:Microsoft.Extensions.Hosting.HostBuilder> ，新增對的呼叫， <xref:Microsoft.AspNetCore.Server.Kestrel.Core.KestrelServerOptions.ListenAnyIP*> 並提供應用程式的管理埠端點。 在 `Configure` *ManagementPortStartup.cs* 中，使用下列內容指定管理埠 `RequireHost` ：
+> 您可以在 `launchSettings.json` 程式碼中明確設定管理埠，以避免在範例應用程式中建立檔案。 在 `Program.cs` 建立的位置中 <xref:Microsoft.Extensions.Hosting.HostBuilder> ，新增對的呼叫， <xref:Microsoft.AspNetCore.Server.Kestrel.Core.KestrelServerOptions.ListenAnyIP%2A> 並提供應用程式的管理埠端點。 在 `Configure` 中 `ManagementPortStartup.cs` ，使用下列內容指定管理埠 `RequireHost` ：
 >
-> *Program.cs*：
+> `Program.cs`:
 >
 > ```csharp
 > return new HostBuilder()
@@ -638,7 +641,7 @@ app.UseEndpoints(endpoints =>
 >     .Build();
 > ```
 >
-> *ManagementPortStartup.cs*：
+> `ManagementPortStartup.cs`:
 >
 > ```csharp
 > app.UseEndpoints(endpoints =>
@@ -716,7 +719,7 @@ dotnet run --scenario port
    * 健康狀態檢查名稱 (`name`)。 如果為 `null`，則會使用 `example_health_check`。
    * 健康狀態檢查的字串資料點 (`data1`)。
    * 健康狀態檢查的整數資料點 (`data2`)。 如果為 `null`，則會使用 `1`。
-   * 失敗狀態 (<xref:Microsoft.Extensions.Diagnostics.HealthChecks.HealthStatus>)。 預設為 `null`。 如果為 `null`，就會針對失敗狀態回報 [HealthStatus.Unhealthy](xref:Microsoft.Extensions.Diagnostics.HealthChecks.HealthStatus)。
+   * 失敗狀態 (<xref:Microsoft.Extensions.Diagnostics.HealthChecks.HealthStatus>)。 預設為 `null`。 如果為 `null` ， [`HealthStatus.Unhealthy`](xref:Microsoft.Extensions.Diagnostics.HealthChecks.HealthStatus) 則回報失敗狀態。
    * 標籤 (`IEnumerable<string>`)。
 
    ```csharp
@@ -763,8 +766,777 @@ Task PublishAsync(HealthReport report, CancellationToken cancellationToken);
 
 在範例應用程式中，`ReadinessPublisher` 是一個 <xref:Microsoft.Extensions.Diagnostics.HealthChecks.IHealthCheckPublisher> 實作。 記錄層級的每個檢查都會記錄健全狀況檢查狀態：
 
-* <xref:Microsoft.Extensions.Logging.LoggerExtensions.LogInformation*>如果健康狀態檢查狀態為， () 資訊 <xref:Microsoft.Extensions.Diagnostics.HealthChecks.HealthStatus.Healthy> 。
-* <xref:Microsoft.Extensions.Logging.LoggerExtensions.LogError*>當狀態為或時，)  (<xref:Microsoft.Extensions.Diagnostics.HealthChecks.HealthStatus.Degraded> 錯誤 <xref:Microsoft.Extensions.Diagnostics.HealthChecks.HealthStatus.Unhealthy> 。
+* <xref:Microsoft.Extensions.Logging.LoggerExtensions.LogInformation%2A>如果健康狀態檢查狀態為， () 資訊 <xref:Microsoft.Extensions.Diagnostics.HealthChecks.HealthStatus.Healthy> 。
+* <xref:Microsoft.Extensions.Logging.LoggerExtensions.LogError%2A>當狀態為或時，)  (<xref:Microsoft.Extensions.Diagnostics.HealthChecks.HealthStatus.Degraded> 錯誤 <xref:Microsoft.Extensions.Diagnostics.HealthChecks.HealthStatus.Unhealthy> 。
+
+[!code-csharp[](health-checks/samples/5.x/HealthChecksSample/ReadinessPublisher.cs?name=snippet_ReadinessPublisher&highlight=18-27)]
+
+在範例應用程式的 `LivenessProbeStartup` 範例中，`StartupHostedService` 整備檢查具有 2 秒的啟動延遲，且每 30 秒會執行一次檢查。 為了啟用 <xref:Microsoft.Extensions.Diagnostics.HealthChecks.IHealthCheckPublisher> 實作，此範例會在[相依性插入 (DI)](xref:fundamentals/dependency-injection) 容器中將 `ReadinessPublisher` 註冊為單一服務：
+
+[!code-csharp[](health-checks/samples/5.x/HealthChecksSample/LivenessProbeStartup.cs?name=snippet_ConfigureServices)]
+
+> [!NOTE]
+> [`AspNetCore.Diagnostics.HealthChecks`](https://github.com/Xabaril/AspNetCore.Diagnostics.HealthChecks) 包含數個系統的發行者，包括 [Application Insights](/azure/application-insights/app-insights-overview)。
+>
+> [`AspNetCore.Diagnostics.HealthChecks`](https://github.com/Xabaril/AspNetCore.Diagnostics.HealthChecks) Microsoft 不會維護或支援。
+
+## <a name="restrict-health-checks-with-mapwhen"></a>利用 MapWhen 限制健康情況檢查
+
+使用 <xref:Microsoft.AspNetCore.Builder.MapWhenExtensions.MapWhen%2A> 來有條件地將健康情況檢查端點的要求管線分支。
+
+在下列範例中， `MapWhen` 如果收到端點的 GET 要求，則會將要求管線分支以啟用健康情況檢查中介軟體 `api/HealthCheck` ：
+
+```csharp
+app.MapWhen(
+    context => context.Request.Method == HttpMethod.Get.Method && 
+        context.Request.Path.StartsWith("/api/HealthCheck"),
+    builder => builder.UseHealthChecks());
+
+app.UseEndpoints(endpoints =>
+{
+    endpoints.MapRazorPages();
+});
+```
+
+如需詳細資訊，請參閱<xref:fundamentals/middleware/index#branch-the-middleware-pipeline>。
+
+::: moniker-end
+
+::: moniker range=">= aspnetcore-3.0 < aspnetcore-5.0"
+
+ASP.NET Core 提供健康狀態檢查中介軟體和程式庫，以報告應用程式基礎結構元件的健康情況。
+
+應用程式會將健康狀態檢查公開為 HTTP 端點。 您可以針對各種即時監控案例來設定健康狀態檢查端點：
+
+* 容器協調器和負載平衡器可以使用健康狀態探查，來檢查應用程式的狀態。 例如，容器協調器可能會暫停輪流部署或重新啟動容器，來回應失敗的健康狀態檢查。 負載平衡器可能會將流量從失敗的執行個體路由傳送至狀況良好的執行個體，來回應狀況不良的應用程式。
+* 您可以監控所使用記憶體、磁碟及其他實體伺服器資源的健康狀態。
+* 健康狀態檢查可以測試應用程式的相依性 (例如資料庫和外部服務端點)，確認其是否可用且正常運作。
+
+[查看或下載範例程式碼](https://github.com/dotnet/AspNetCore.Docs/tree/main/aspnetcore/host-and-deploy/health-checks/samples) ([如何下載](xref:index#how-to-download-a-sample)) 
+
+範例應用程式包含本主題中所述的案例範例。 若要在指定的案例中執行範例應用程式，請在命令殼層中使用來自專案資料夾的 [dotnet run](/dotnet/core/tools/dotnet-run) 命令。 `README.md`如需如何使用範例應用程式的詳細資訊，請參閱本主題中的範例應用程式檔案和案例描述。
+
+## <a name="prerequisites"></a>必要條件
+
+健康狀態檢查通常會搭配使用外部監視服務或容器協調器，來檢查應用程式的狀態。 將健康狀態檢查新增至應用程式之前，請決定要使用的監控系統。 監控系統會指定要建立哪些健康狀態檢查類型，以及如何設定其端點。
+
+[`Microsoft.AspNetCore.Diagnostics.HealthChecks`](https://www.nuget.org/packages/Microsoft.AspNetCore.Diagnostics.HealthChecks)ASP.NET Core 的應用程式會隱含參考此套件。 若要使用 Entity Framework Core 執行健康情況檢查，請將封裝參考新增至 [`Microsoft.Extensions.Diagnostics.HealthChecks.EntityFrameworkCore`](https://www.nuget.org/packages/Microsoft.Extensions.Diagnostics.HealthChecks.EntityFrameworkCore) 套件。
+
+範例應用程式提供啟動程式碼，來示範數個案例的健康狀態檢查。 [資料庫探查](#database-probe)案例會使用來檢查資料庫連接的健全狀況 [`AspNetCore.Diagnostics.HealthChecks`](https://github.com/Xabaril/AspNetCore.Diagnostics.HealthChecks) 。 [DbContext 探查](#entity-framework-core-dbcontext-probe)案例使用 EF Core `DbContext` 來檢查資料庫。 為了探索資料庫案例，範例應用程式會：
+
+* 建立資料庫，並在檔案中提供其連接字串 `appsettings.json` 。
+* 在其專案檔中具有下列套件參考：
+  * [`AspNetCore.HealthChecks.SqlServer`](https://www.nuget.org/packages/AspNetCore.HealthChecks.SqlServer)
+  * [`Microsoft.Extensions.Diagnostics.HealthChecks.EntityFrameworkCore`](https://www.nuget.org/packages/Microsoft.Extensions.Diagnostics.HealthChecks.EntityFrameworkCore)
+
+> [!NOTE]
+> [`AspNetCore.Diagnostics.HealthChecks`](https://github.com/Xabaril/AspNetCore.Diagnostics.HealthChecks) Microsoft 不會維護或支援。
+
+另一個健康狀態檢查案例示範如何將健康狀態檢查篩選至管理連接埠。 範例應用程式會要求您建立 `Properties/launchSettings.json` 包含管理 URL 和管理埠的檔案。 如需詳細資訊，請參閱[依連接埠篩選](#filter-by-port)一節。
+
+## <a name="basic-health-probe"></a>基本健康狀態探查
+
+對於許多應用程式，報告應用程式是否可處理要求的基本健康狀態探查組態 (「活躍度」)，便足以探索應用程式的狀態。
+
+基本設定會註冊健康情況檢查服務並呼叫健康情況檢查中介軟體，以在具有健康回應的 URL 端點回應。 預設並未登錄特定健康狀態檢查來測試任何特定相依性或子系統。 如果應用程式能夠在健康狀態端點 URL 做出回應，則視為狀況良好。 預設回應寫入器會將狀態 (<xref:Microsoft.Extensions.Diagnostics.HealthChecks.HealthStatus>) 作為純文字回應寫入用戶端，表示 [`HealthStatus.Healthy`](xref:Microsoft.Extensions.Diagnostics.HealthChecks.HealthStatus) 、 [`HealthStatus.Degraded`](xref:Microsoft.Extensions.Diagnostics.HealthChecks.HealthStatus) 或 [`HealthStatus.Unhealthy`](xref:Microsoft.Extensions.Diagnostics.HealthChecks.HealthStatus) 狀態。
+
+在 `Startup.ConfigureServices` 中，使用 <xref:Microsoft.Extensions.DependencyInjection.HealthCheckServiceCollectionExtensions.AddHealthChecks%2A> 登錄健康狀態檢查服務。 藉由在中呼叫來建立健康情況檢查端點 `MapHealthChecks` `Startup.Configure` 。
+
+在範例應用程式中，健康狀態檢查端點是在 `/health` (`BasicStartup.cs`) 建立的：
+
+```csharp
+public class BasicStartup
+{
+    public void ConfigureServices(IServiceCollection services)
+    {
+        services.AddHealthChecks();
+    }
+
+    public void Configure(IApplicationBuilder app)
+    {
+        app.UseRouting();
+
+        app.UseEndpoints(endpoints =>
+        {
+            endpoints.MapHealthChecks("/health");
+        });
+    }
+}
+```
+
+若要使用範例應用程式執行基本組態案例，請在命令殼層中執行來自專案資料夾的下列命令：
+
+```dotnetcli
+dotnet run --scenario basic
+```
+
+### <a name="docker-example"></a>Docker 範例
+
+[Docker](xref:host-and-deploy/docker/index) 提供內建 `HEALTHCHECK` 指示詞，可用來檢查使用基本健康狀態檢查組態的應用程式狀態：
+
+```
+HEALTHCHECK CMD curl --fail http://localhost:5000/health || exit
+```
+
+## <a name="create-health-checks"></a>建立健康狀態檢查
+
+健康狀態檢查是藉由實作 <xref:Microsoft.Extensions.Diagnostics.HealthChecks.IHealthCheck> 介面來建立。 <xref:Microsoft.Extensions.Diagnostics.HealthChecks.IHealthCheck.CheckHealthAsync%2A> 方法會傳回 <xref:Microsoft.Extensions.Diagnostics.HealthChecks.HealthCheckResult>，指出健康狀態為 `Healthy`、`Degraded` 或 `Unhealthy`。 結果會寫成具有可設定狀態碼的純文字回應 ([健康狀態檢查選項](#health-check-options)一節中將說明如何進行組態)。 <xref:Microsoft.Extensions.Diagnostics.HealthChecks.HealthCheckResult> 也可以傳回選擇性索引鍵/值組。
+
+下列 `ExampleHealthCheck` 類別示範健康情況檢查的版面配置。 健康情況檢查邏輯會放置在 `CheckHealthAsync` 方法中。 下列範例會將虛擬變數（）設定 `healthCheckResultHealthy` 為 `true` 。 如果的值 `healthCheckResultHealthy` 設定為 `false` ，則 [`HealthCheckResult.Unhealthy`](xref:Microsoft.Extensions.Diagnostics.HealthChecks.HealthCheckResult.Unhealthy%2A) 會傳回狀態。
+
+```csharp
+public class ExampleHealthCheck : IHealthCheck
+{
+    public Task<HealthCheckResult> CheckHealthAsync(
+        HealthCheckContext context,
+        CancellationToken cancellationToken = default(CancellationToken))
+    {
+        var healthCheckResultHealthy = true;
+
+        if (healthCheckResultHealthy)
+        {
+            return Task.FromResult(
+                HealthCheckResult.Healthy("A healthy result."));
+        }
+
+        return Task.FromResult(
+            HealthCheckResult.Unhealthy("An unhealthy result."));
+    }
+}
+```
+
+## <a name="register-health-check-services"></a>登錄健康狀態檢查服務
+
+此 `ExampleHealthCheck` 類型會新增至具有下列功能的健康情況檢查服務 <xref:Microsoft.Extensions.DependencyInjection.HealthChecksBuilderAddCheckExtensions.AddCheck%2A> `Startup.ConfigureServices` ：
+
+```csharp
+services.AddHealthChecks()
+    .AddCheck<ExampleHealthCheck>("example_health_check");
+```
+
+下列範例中所顯示的 <xref:Microsoft.Extensions.DependencyInjection.HealthChecksBuilderAddCheckExtensions.AddCheck%2A> 多載會設定在健康狀態檢查報告失敗時所要報告的失敗狀態 (<xref:Microsoft.Extensions.Diagnostics.HealthChecks.HealthStatus>)。 如果失敗狀態設定為 `null` (預設) ， [`HealthStatus.Unhealthy`](xref:Microsoft.Extensions.Diagnostics.HealthChecks.HealthStatus) 則會回報。 此多載對程式庫作者很有用。若健康狀態檢查實作採用此設定，則當健康狀態檢查失敗時，應用程式就會強制程式庫指出失敗狀態。
+
+您可以使用「標籤」來篩選健康狀態檢查 ([篩選健康狀態檢查](#filter-health-checks)一節中將進一步說明)。
+
+```csharp
+services.AddHealthChecks()
+    .AddCheck<ExampleHealthCheck>(
+        "example_health_check",
+        failureStatus: HealthStatus.Degraded,
+        tags: new[] { "example" });
+```
+
+<xref:Microsoft.Extensions.DependencyInjection.HealthChecksBuilderAddCheckExtensions.AddCheck%2A> 也可以執行匿名函式。 在下列範例中，健康狀態檢查名稱指定為 `Example`，且檢查一律會傳回狀況良好狀態：
+
+```csharp
+services.AddHealthChecks()
+    .AddCheck("Example", () =>
+        HealthCheckResult.Healthy("Example is OK!"), tags: new[] { "example" });
+```
+
+呼叫 <xref:Microsoft.Extensions.DependencyInjection.HealthChecksBuilderAddCheckExtensions.AddTypeActivatedCheck%2A> 以將引數傳遞至健康情況檢查執行。 在下列範例中， `TestHealthCheckWithArgs` 會接受一個整數和一個在呼叫時使用的字串 <xref:Microsoft.Extensions.Diagnostics.HealthChecks.IHealthCheck.CheckHealthAsync%2A> ：
+
+```csharp
+private class TestHealthCheckWithArgs : IHealthCheck
+{
+    public TestHealthCheckWithArgs(int i, string s)
+    {
+        I = i;
+        S = s;
+    }
+
+    public int I { get; set; }
+
+    public string S { get; set; }
+
+    public Task<HealthCheckResult> CheckHealthAsync(HealthCheckContext context, 
+        CancellationToken cancellationToken = default)
+    {
+        ...
+    }
+}
+```
+
+`TestHealthCheckWithArgs` 的註冊方式是 `AddTypeActivatedCheck` 以傳遞至實作為的整數和字串來呼叫：
+
+```csharp
+services.AddHealthChecks()
+    .AddTypeActivatedCheck<TestHealthCheckWithArgs>(
+        "test", 
+        failureStatus: HealthStatus.Degraded, 
+        tags: new[] { "example" }, 
+        args: new object[] { 5, "string" });
+```
+
+## <a name="use-health-checks-routing"></a>使用健康情況檢查路由
+
+在中 `Startup.Configure` ， `MapHealthChecks` 使用端點 URL 或相對路徑呼叫端點產生器：
+
+```csharp
+app.UseEndpoints(endpoints =>
+{
+    endpoints.MapHealthChecks("/health");
+});
+```
+
+### <a name="require-host"></a>需要主機
+
+呼叫 `RequireHost` 以指定一或多個允許的主機作為健康情況檢查端點。 主機應該是 Unicode，而不是 punycode，而且可能包含埠。 如果未提供集合，則會接受任何主機。
+
+```csharp
+app.UseEndpoints(endpoints =>
+{
+    endpoints.MapHealthChecks("/health").RequireHost("www.contoso.com:5001");
+});
+```
+
+如需詳細資訊，請參閱[依連接埠篩選](#filter-by-port)一節。
+
+### <a name="require-authorization"></a>需要授權
+
+呼叫 `RequireAuthorization` 以在健康情況檢查要求端點上執行授權中介軟體。 `RequireAuthorization`多載接受一或多個授權原則。 如果未提供原則，則會使用預設授權原則。
+
+```csharp
+app.UseEndpoints(endpoints =>
+{
+    endpoints.MapHealthChecks("/health").RequireAuthorization();
+});
+```
+
+### <a name="enable-cross-origin-requests-cors"></a>啟用跨原始來源要求 (CORS)
+
+雖然以手動方式從瀏覽器執行健康情況檢查不是常見的使用案例，但您可以藉由呼叫健康情況檢查端點來啟用 CORS 中介軟體 `RequireCors` 。 多載會 `RequireCors` 接受 CORS 原則產生器委派 (`CorsPolicyBuilder`) 或原則名稱。 如果未提供原則，則會使用預設 CORS 原則。 如需詳細資訊，請參閱<xref:security/cors>。
+
+## <a name="health-check-options"></a>健康狀態檢查選項
+
+<xref:Microsoft.AspNetCore.Diagnostics.HealthChecks.HealthCheckOptions> 讓您有機會自訂健康狀態檢查行為：
+
+* [篩選健康狀態檢查](#filter-health-checks)
+* [自訂 HTTP 狀態碼](#customize-the-http-status-code)
+* [隱藏快取標頭](#suppress-cache-headers)
+* [自訂輸出](#customize-output)
+
+### <a name="filter-health-checks"></a>篩選健康狀態檢查
+
+依預設，健康狀態檢查中介軟體會執行所有已註冊的健康情況檢查。 若要執行健康狀態檢查子集，請對 <xref:Microsoft.AspNetCore.Diagnostics.HealthChecks.HealthCheckOptions.Predicate> 選項提供傳回布林值的函式。 在下列範例中，會依函式條件陳述式中的標籤 (`bar_tag`) 篩選出 `Bar` 健康狀態檢查。只有在健康狀態檢查的 <xref:Microsoft.Extensions.Diagnostics.HealthChecks.HealthCheckRegistration.Tags> 屬性符合 `foo_tag` 或 `baz_tag` 時，才傳回 `true`：
+
+在 `Startup.ConfigureServices` 中：
+
+```csharp
+services.AddHealthChecks()
+    .AddCheck("Foo", () =>
+        HealthCheckResult.Healthy("Foo is OK!"), tags: new[] { "foo_tag" })
+    .AddCheck("Bar", () =>
+        HealthCheckResult.Unhealthy("Bar is unhealthy!"), tags: new[] { "bar_tag" })
+    .AddCheck("Baz", () =>
+        HealthCheckResult.Healthy("Baz is OK!"), tags: new[] { "baz_tag" });
+```
+
+在中 `Startup.Configure` ，會 `Predicate` 篩選出「Bar」健康情況檢查。 只有 Foo 和 Baz execute.：
+
+```csharp
+app.UseEndpoints(endpoints =>
+{
+    endpoints.MapHealthChecks("/health", new HealthCheckOptions()
+    {
+        Predicate = (check) => check.Tags.Contains("foo_tag") ||
+            check.Tags.Contains("baz_tag")
+    });
+});
+```
+
+### <a name="customize-the-http-status-code"></a>自訂 HTTP 狀態碼
+
+您可以使用 <xref:Microsoft.AspNetCore.Diagnostics.HealthChecks.HealthCheckOptions.ResultStatusCodes> 來自訂健康狀態與 HTTP 狀態碼的對應。 下列 <xref:Microsoft.AspNetCore.Http.StatusCodes> 指派是中介軟體所使用的預設值。 請變更狀態碼值以符合您的需求。
+
+在 `Startup.Configure` 中：
+
+```csharp
+app.UseEndpoints(endpoints =>
+{
+    endpoints.MapHealthChecks("/health", new HealthCheckOptions()
+    {
+        ResultStatusCodes =
+        {
+            [HealthStatus.Healthy] = StatusCodes.Status200OK,
+            [HealthStatus.Degraded] = StatusCodes.Status200OK,
+            [HealthStatus.Unhealthy] = StatusCodes.Status503ServiceUnavailable
+        }
+    });
+});
+```
+
+### <a name="suppress-cache-headers"></a>隱藏快取標頭
+
+<xref:Microsoft.AspNetCore.Diagnostics.HealthChecks.HealthCheckOptions.AllowCachingResponses> 控制健全狀況檢查中介軟體是否會將 HTTP 標頭新增至探查回應，以防止回應快取。 如果值為 `false` (預設)，則中介軟體會設定或覆寫 `Cache-Control`、`Expires` 和 `Pragma` 標頭，以防止回應快取。 如果值為 `true`，則中介軟體不會修改回應的快取標頭。
+
+在 `Startup.Configure` 中：
+
+```csharp
+app.UseEndpoints(endpoints =>
+{
+    endpoints.MapHealthChecks("/health", new HealthCheckOptions()
+    {
+        AllowCachingResponses = false
+    });
+});
+```
+
+### <a name="customize-output"></a>自訂輸出
+
+在中 `Startup.Configure` ，將 [`HealthCheckOptions.ResponseWriter`](xref:Microsoft.AspNetCore.Diagnostics.HealthChecks.HealthCheckOptions.ResponseWriter) 選項設定為用於寫入回應的委派：
+
+```csharp
+app.UseEndpoints(endpoints =>
+{
+    endpoints.MapHealthChecks("/health", new HealthCheckOptions()
+    {
+        ResponseWriter = WriteResponse
+    });
+});
+```
+
+預設委派會以的字串值寫入最短的純文字回應 [`HealthReport.Status`](xref:Microsoft.Extensions.Diagnostics.HealthChecks.HealthReport.Status) 。 下列自訂委派會輸出自訂 JSON 回應。
+
+範例應用程式中的第一個範例會示範如何使用 <xref:System.Text.Json?displayProperty=fullName> ：
+
+[!code-csharp[](health-checks/samples/3.x/HealthChecksSample/CustomWriterStartup.cs?name=snippet_WriteResponse_SystemTextJson)]
+
+第二個範例示範如何 [ 在上使用Newtonsoft.Js](https://www.nuget.org/packages/Newtonsoft.Json)：
+
+[!code-csharp[](health-checks/samples/3.x/HealthChecksSample/CustomWriterStartup.cs?name=snippet_WriteResponse_NewtonSoftJson)]
+
+在範例應用程式中，將中的 `SYSTEM_TEXT_JSON` [預處理器](xref:index#preprocessor-directives-in-sample-code) 指示詞批註 `CustomWriterStartup.cs` 為，以啟用的 `Newtonsoft.Json` 版本 `WriteResponse` 。
+
+健康情況檢查 API 不會提供複雜 JSON 傳回格式的內建支援，因為格式是您選擇的監視系統所特有。 視需要自訂上述範例中的回應。 如需有關 JSON 序列化的詳細資訊 `System.Text.Json` ，請參閱 [如何在 .net 中序列化和還原序列化 json](/dotnet/standard/serialization/system-text-json-how-to)。
+
+## <a name="database-probe"></a>資料庫探查
+
+健康狀態檢查可指定資料庫查詢以布林測試方式來執行，藉此指出資料庫是否正常回應。
+
+範例應用程式會使用 [`AspNetCore.Diagnostics.HealthChecks`](https://github.com/Xabaril/AspNetCore.Diagnostics.HealthChecks) ASP.NET Core 應用程式的健康情況檢查程式庫，對 SQL Server 資料庫執行健康情況檢查。 `AspNetCore.Diagnostics.HealthChecks` 會對資料庫執行 `SELECT 1` 查詢，以確認資料庫連線狀況良好。
+
+> [!WARNING]
+> 使用查詢檢查資料庫連線時，請選擇快速傳回的查詢。 查詢方法具有多載資料庫而降低其效能的風險。 在大部分情況下，不需要執行測試查詢。 只要成功建立資料庫連線就已足夠。 如果您發現有必要執行查詢，請選擇簡單的 SELECT 查詢，例如 `SELECT 1`。
+
+包含的封裝參考 [`AspNetCore.HealthChecks.SqlServer`](https://www.nuget.org/packages/AspNetCore.HealthChecks.SqlServer) 。
+
+在範例應用程式的檔案中提供有效的資料庫連接字串 `appsettings.json` 。 應用程式使用名為 `HealthCheckSample` 的 SQL Server 資料庫：
+
+[!code-json[](health-checks/samples/3.x/HealthChecksSample/appsettings.json?highlight=3)]
+
+在 `Startup.ConfigureServices` 中，使用 <xref:Microsoft.Extensions.DependencyInjection.HealthCheckServiceCollectionExtensions.AddHealthChecks%2A> 登錄健康狀態檢查服務。 範例應用程式會 `AddSqlServer` 使用資料庫的連接字串呼叫方法， (`DbHealthStartup.cs`) ：
+
+[!code-csharp[](health-checks/samples/3.x/HealthChecksSample/DbHealthStartup.cs?name=snippet_ConfigureServices)]
+
+健康情況檢查端點是在中呼叫來建立的 `MapHealthChecks` `Startup.Configure` ：
+
+```csharp
+app.UseEndpoints(endpoints =>
+{
+    endpoints.MapHealthChecks("/health");
+}
+```
+
+若要使用範例應用程式執行資料庫探查案例，請在命令殼層中執行來自專案資料夾的下列命令：
+
+```dotnetcli
+dotnet run --scenario db
+```
+
+> [!NOTE]
+> [`AspNetCore.Diagnostics.HealthChecks`](https://github.com/Xabaril/AspNetCore.Diagnostics.HealthChecks) Microsoft 不會維護或支援。
+
+## <a name="entity-framework-core-dbcontext-probe"></a>Entity Framework Core DbContext 探查
+
+`DbContext` 檢查會確認應用程式是否可與針對 EF Core `DbContext` 設定的資料庫通訊。 應用程式支援 `DbContext` 檢查：
+
+* 使用 [Entity Framework (EF) Core](/ef/core/)。
+* 包含的封裝參考 [`Microsoft.Extensions.Diagnostics.HealthChecks.EntityFrameworkCore`](https://www.nuget.org/packages/Microsoft.Extensions.Diagnostics.HealthChecks.EntityFrameworkCore) 。
+
+`AddDbContextCheck<TContext>` 會登錄 `DbContext` 的健康狀態檢查。 `DbContext` 會以 `TContext` 形式提供給方法。 多載可用來設定失敗狀態、標籤和自訂測試查詢。
+
+依照預設：
+
+* `DbContextHealthCheck` 會呼叫 EF Core 的 `CanConnectAsync` 方法。 您可以自訂使用 `AddDbContextCheck` 方法多載檢查健康狀態時所要執行的作業。
+* 健康狀態檢查的名稱是 `TContext` 類型的名稱。
+
+在範例應用程式中， `AppDbContext` 會提供給 `AddDbContextCheck` () 中的服務，並將其註冊為服務 `Startup.ConfigureServices` `DbContextHealthStartup.cs` ：
+
+[!code-csharp[](health-checks/samples/3.x/HealthChecksSample/DbContextHealthStartup.cs?name=snippet_ConfigureServices)]
+
+健康情況檢查端點是在中呼叫來建立的 `MapHealthChecks` `Startup.Configure` ：
+
+```csharp
+app.UseEndpoints(endpoints =>
+{
+    endpoints.MapHealthChecks("/health");
+}
+```
+
+若要使用範例應用程式來執行 `DbContext` 探查案例，請確認 SQL Server 執行個體中沒有連接字串所指定的資料庫。 如果資料庫存在，請予以刪除。
+
+在命令殼層中執行來自專案資料夾的下列命令：
+
+```dotnetcli
+dotnet run --scenario dbcontext
+```
+
+在應用程式執行之後，對瀏覽器中的 `/health` 端點提出要求來檢查健康狀態。 資料庫和 `AppDbContext` 不存在，因此應用程式會提供下列回應：
+
+```
+Unhealthy
+```
+
+觸發範例應用程式以建立資料庫。 對 `/createdatabase` 提出要求。 應用程式會回應：
+
+```
+Creating the database...
+Done!
+Navigate to /health to see the health status.
+```
+
+對 `/health` 端點提出要求。 資料庫和內容存在，因此應用程式會回應：
+
+```
+Healthy
+```
+
+觸發範例應用程式以刪除資料庫。 對 `/deletedatabase` 提出要求。 應用程式會回應：
+
+```
+Deleting the database...
+Done!
+Navigate to /health to see the health status.
+```
+
+對 `/health` 端點提出要求。 應用程式會提供狀況不良回應：
+
+```
+Unhealthy
+```
+
+## <a name="separate-readiness-and-liveness-probes"></a>個別的整備度與活躍度探查
+
+在某些主控案例中，使用一組健康狀態檢查來區分兩個應用程式狀態：
+
+* *準備就緒* 表示應用程式是否正常執行，但尚未準備好接收要求。
+* *活動* 指出應用程式是否已損毀且必須重新開機。
+
+請考慮下列範例：應用程式必須先下載大型設定檔，才能開始處理要求。 如果初始下載失敗，我們不想要重新開機應用程式，因為應用程式可以重試下載檔案數次。 我們會使用 *活動探查* 來描述進程的活動，而不會執行其他檢查。 我們也想要避免在設定檔下載成功之前將要求傳送至應用程式。 我們會使用 *就緒探查* 來表示「未就緒」狀態，直到下載成功，而且應用程式已準備好接收要求。
+
+範例應用程式包含健康狀態檢查，會在[託管服務](xref:fundamentals/host/hosted-services)中長時間執行的啟動工作完成時回報。 會 `StartupHostedServiceHealthCheck` 公開一個屬性，也就是裝載的服務在長時間執行的工作 `StartupTaskCompleted` `true` 完成 () 時可以設定的屬性 `StartupHostedServiceHealthCheck.cs` ：
+
+[!code-csharp[](health-checks/samples/3.x/HealthChecksSample/StartupHostedServiceHealthCheck.cs?name=snippet1&highlight=7-11)]
+
+長時間執行的背景工作是由 [託管服務](xref:fundamentals/host/hosted-services) () 所啟動 `Services/StartupHostedService` 。 工作完成時，`StartupHostedServiceHealthCheck.StartupTaskCompleted` 會設定為 `true`：
+
+[!code-csharp[](health-checks/samples/3.x/HealthChecksSample/Services/StartupHostedService.cs?name=snippet1&highlight=18-20)]
+
+健康狀態檢查是 `Startup.ConfigureServices` 中使用 <xref:Microsoft.Extensions.DependencyInjection.HealthChecksBuilderAddCheckExtensions.AddCheck%2A> 隨託管服務一起登錄。 因為託管服務必須設定健康情況檢查的屬性，所以健康情況檢查也會在服務容器中註冊 (`LivenessProbeStartup.cs`) ：
+
+[!code-csharp[](health-checks/samples/3.x/HealthChecksSample/LivenessProbeStartup.cs?name=snippet_ConfigureServices)]
+
+健康情況檢查端點是藉由在中呼叫來建立 `MapHealthChecks` `Startup.Configure` 。 在範例應用程式中，健康狀態檢查端點是在下列位置建立：
+
+* `/health/ready` 適用于準備檢查。 整備度檢查使用 `ready` 標籤來篩選健康狀態檢查。
+* `/health/live` 適用于活動檢查。 活動檢查會 `StartupHostedServiceHealthCheck` `false` 在 (中傳回以篩選出 [`HealthCheckOptions.Predicate`](xref:Microsoft.AspNetCore.Diagnostics.HealthChecks.HealthCheckOptions.Predicate) 詳細資訊，請參閱 [篩選健康情況檢查](#filter-health-checks)) 
+
+在下列範例程式碼中：
+
+* 準備就緒檢查會將所有已註冊的檢查都使用「就緒」標記。
+* 會 `Predicate` 排除所有檢查並傳回 200-確定。
+
+```csharp
+app.UseEndpoints(endpoints =>
+{
+    endpoints.MapHealthChecks("/health/ready", new HealthCheckOptions()
+    {
+        Predicate = (check) => check.Tags.Contains("ready"),
+    });
+
+    endpoints.MapHealthChecks("/health/live", new HealthCheckOptions()
+    {
+        Predicate = (_) => false
+    });
+}
+```
+
+若要使用範例應用程式執行整備度/活躍度組態案例，請在命令殼層中執行來自專案資料夾的下列命令：
+
+```dotnetcli
+dotnet run --scenario liveness
+```
+
+在瀏覽器中，瀏覽 `/health/ready` 數次，直到經過 15 秒。 健康狀態檢查報告前 15 秒為 `Unhealthy`。 15 秒之後，端點會報告 `Healthy`，以反映託管服務長時間執行的工作已完成。
+
+此範例也會建立一個以 2 秒延遲執行第一次整備檢查的「健康狀態檢查發行者」(<xref:Microsoft.Extensions.Diagnostics.HealthChecks.IHealthCheckPublisher> 實作)。 如需詳細資訊，請參閱[健康狀態檢查發行者](#health-check-publisher)一節。
+
+### <a name="kubernetes-example"></a>Kubernetes 範例
+
+使用個別的整備度與活躍度檢查在 [Kubernetes](https://kubernetes.io/) 之類的環境中很有用。 在 Kubernetes 中，應用程式可能需要執行耗時的啟動工作才能接受要求 (例如基礎資料庫可用性測試)。 使用個別的檢查可讓協調器區分應用程式是否為正常運作但尚未準備好，或應用程式是否無法啟動。 如需 Kubernetes 中整備度與活躍度探查的詳細資訊，請參閱 Kubernetes 文件中的 [Configure Liveness and Readiness Probes](https://kubernetes.io/docs/tasks/configure-pod-container/configure-liveness-readiness-probes/) (設定活躍度與整備度探查)。
+
+下列範例示範 Kubernetes 整備度探查組態：
+
+```yml
+spec:
+  template:
+  spec:
+    readinessProbe:
+      # an http probe
+      httpGet:
+        path: /health/ready
+        port: 80
+      # length of time to wait for a pod to initialize
+      # after pod startup, before applying health checking
+      initialDelaySeconds: 30
+      timeoutSeconds: 1
+    ports:
+      - containerPort: 80
+```
+
+## <a name="metric-based-probe-with-a-custom-response-writer"></a>透過自訂回應寫入器的計量型探查
+
+範例應用程式示範透過自訂回應寫入器的記憶體健康狀態檢查。
+
+如果應用程式使用超過指定的記憶體閾值 (在範例應用程式中為 1 GB)，`MemoryHealthCheck` 會報告降級的狀態。 <xref:Microsoft.Extensions.Diagnostics.HealthChecks.HealthCheckResult>包含應用程式 () 的垃圾收集行程 (GC) 資訊 `MemoryHealthCheck.cs` ：
+
+[!code-csharp[](health-checks/samples/3.x/HealthChecksSample/MemoryHealthCheck.cs?name=snippet1)]
+
+在 `Startup.ConfigureServices` 中，使用 <xref:Microsoft.Extensions.DependencyInjection.HealthCheckServiceCollectionExtensions.AddHealthChecks%2A> 登錄健康狀態檢查服務。 `MemoryHealthCheck` 會登錄為服務，而不是將健康狀態檢查傳遞至 <xref:Microsoft.Extensions.DependencyInjection.HealthChecksBuilderAddCheckExtensions.AddCheck%2A> 以啟用檢查。 所有 <xref:Microsoft.Extensions.Diagnostics.HealthChecks.IHealthCheck> 登錄的服務都可供健康狀態檢查服務和中介軟體使用。 建議將健康狀態檢查服務登錄為單一服務。
+
+在 `CustomWriterStartup.cs` 範例應用程式中：
+
+[!code-csharp[](health-checks/samples/3.x/HealthChecksSample/CustomWriterStartup.cs?name=snippet_ConfigureServices&highlight=4)]
+
+健康情況檢查端點是藉由在中呼叫來建立 `MapHealthChecks` `Startup.Configure` 。 `WriteResponse`當健康狀態檢查執行時，會將委派提供給 <的 AspNetCore. HealthChecks. HealthCheckOptions. ResponseWriter> 屬性以輸出自訂 JSON 回應：
+
+```csharp
+app.UseEndpoints(endpoints =>
+{
+    endpoints.MapHealthChecks("/health", new HealthCheckOptions()
+    {
+        ResponseWriter = WriteResponse
+    });
+}
+```
+
+委派會將 `WriteResponse` 格式化為 `CompositeHealthCheckResult` json 物件，並產生健康情況檢查回應的 json 輸出。 如需詳細資訊，請參閱 [自訂輸出](#customize-output) 一節。
+
+若要使用範例應用程式透過自訂回應寫入器輸出執行計量型探查，請在命令殼層中執行來自專案資料夾的下列命令：
+
+```dotnetcli
+dotnet run --scenario writer
+```
+
+> [!NOTE]
+> [`AspNetCore.Diagnostics.HealthChecks`](https://github.com/Xabaril/AspNetCore.Diagnostics.HealthChecks) 包含以計量為基礎的健康情況檢查案例，包括磁片儲存體和最大值活動檢查。
+>
+> [`AspNetCore.Diagnostics.HealthChecks`](https://github.com/Xabaril/AspNetCore.Diagnostics.HealthChecks) Microsoft 不會維護或支援。
+
+## <a name="filter-by-port"></a>依連接埠篩選
+
+`RequireHost` `MapHealthChecks` 使用指定埠的 URL 模式呼叫，以將健康情況檢查要求限制為指定的埠。 這通常會用於容器環境，以公開監視服務的連接埠。
+
+範例應用程式使用[環境變數組態提供者](xref:fundamentals/configuration/index#environment-variables)來設定連接埠。 埠是在檔案中設定 `launchSettings.json` ，並透過環境變數傳遞至設定提供者。 您也必須將伺服器設定為在管理連接埠上接聽要求。
+
+若要使用範例應用程式來示範管理埠設定，請 `launchSettings.json` 在資料夾中建立檔案 `Properties` 。
+
+範例應用 `Properties/launchSettings.json` 程式中的下列檔案未包含在範例應用程式的專案檔中，必須以手動方式建立：
+
+```json
+{
+  "profiles": {
+    "SampleApp": {
+      "commandName": "Project",
+      "commandLineArgs": "",
+      "launchBrowser": true,
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Development",
+        "ASPNETCORE_URLS": "http://localhost:5000/;http://localhost:5001/",
+        "ASPNETCORE_MANAGEMENTPORT": "5001"
+      },
+      "applicationUrl": "http://localhost:5000/"
+    }
+  }
+}
+```
+
+在 `Startup.ConfigureServices` 中，使用 <xref:Microsoft.Extensions.DependencyInjection.HealthCheckServiceCollectionExtensions.AddHealthChecks%2A> 登錄健康狀態檢查服務。 藉由在中呼叫來建立健康情況檢查端點 `MapHealthChecks` `Startup.Configure` 。
+
+在範例應用程式中，對 `RequireHost` 中端點的呼叫會 `Startup.Configure` 從設定中指定管理埠：
+
+```csharp
+endpoints.MapHealthChecks("/health")
+    .RequireHost($"*:{Configuration["ManagementPort"]}");
+```
+
+端點是在的範例應用程式中建立的 `Startup.Configure` 。 在下列範例程式碼中：
+
+* 準備就緒檢查會將所有已註冊的檢查都使用「就緒」標記。
+* 會 `Predicate` 排除所有檢查並傳回 200-確定。
+
+```csharp
+app.UseEndpoints(endpoints =>
+{
+    endpoints.MapHealthChecks("/health/ready", new HealthCheckOptions()
+    {
+        Predicate = (check) => check.Tags.Contains("ready"),
+    });
+
+    endpoints.MapHealthChecks("/health/live", new HealthCheckOptions()
+    {
+        Predicate = (_) => false
+    });
+}
+```
+
+> [!NOTE]
+> 您可以在 `launchSettings.json` 程式碼中明確設定管理埠，以避免在範例應用程式中建立檔案。 在 `Program.cs` 建立的位置中 <xref:Microsoft.Extensions.Hosting.HostBuilder> ，新增對的呼叫， <xref:Microsoft.AspNetCore.Server.Kestrel.Core.KestrelServerOptions.ListenAnyIP%2A> 並提供應用程式的管理埠端點。 在 `Configure` 中 `ManagementPortStartup.cs` ，使用下列內容指定管理埠 `RequireHost` ：
+>
+> `Program.cs`:
+>
+> ```csharp
+> return new HostBuilder()
+>     .ConfigureWebHostDefaults(webBuilder =>
+>     {
+>         webBuilder.UseKestrel()
+>             .ConfigureKestrel(serverOptions =>
+>             {
+>                 serverOptions.ListenAnyIP(5001);
+>             })
+>             .UseStartup(startupType);
+>     })
+>     .Build();
+> ```
+>
+> `ManagementPortStartup.cs`:
+>
+> ```csharp
+> app.UseEndpoints(endpoints =>
+> {
+>     endpoints.MapHealthChecks("/health").RequireHost("*:5001");
+> });
+> ```
+
+若要使用範例應用程式執行管理連接埠組態案例，請在命令殼層中執行來自專案資料夾的下列命令：
+
+```dotnetcli
+dotnet run --scenario port
+```
+
+## <a name="distribute-a-health-check-library"></a>發佈健康狀態檢查程式庫
+
+若要發佈健康狀態檢查作為程式庫：
+
+1. 寫入健康狀態檢查，將 <xref:Microsoft.Extensions.Diagnostics.HealthChecks.IHealthCheck> 介面當做獨立類別來實作。 此類別可能依賴[相依性插入 (DI)](xref:fundamentals/dependency-injection)、類型啟用和[具名選項](xref:fundamentals/configuration/options)來存取組態資料。
+
+   在健康狀態檢查邏輯中 `CheckHealthAsync` ：
+
+   * `data1` 和 `data2` 在方法中用來執行探查的健康情況檢查邏輯。
+   * `AccessViolationException` 會進行處理。
+
+   當 <xref:System.AccessViolationException> 發生時， <xref:Microsoft.Extensions.Diagnostics.HealthChecks.HealthCheckRegistration.FailureStatus> 會傳回， <xref:Microsoft.Extensions.Diagnostics.HealthChecks.HealthCheckResult> 以允許使用者設定健康情況檢查失敗狀態。
+
+   ```csharp
+   using System;
+   using System.Threading;
+   using System.Threading.Tasks;
+   using Microsoft.Extensions.Diagnostics.HealthChecks;
+
+   namespace SampleApp
+   {
+       public class ExampleHealthCheck : IHealthCheck
+       {
+           private readonly string _data1;
+           private readonly int? _data2;
+
+           public ExampleHealthCheck(string data1, int? data2)
+           {
+               _data1 = data1 ?? throw new ArgumentNullException(nameof(data1));
+               _data2 = data2 ?? throw new ArgumentNullException(nameof(data2));
+           }
+
+           public async Task<HealthCheckResult> CheckHealthAsync(
+               HealthCheckContext context, CancellationToken cancellationToken)
+           {
+               try
+               {
+                   return HealthCheckResult.Healthy();
+               }
+               catch (AccessViolationException ex)
+               {
+                   return new HealthCheckResult(
+                       context.Registration.FailureStatus,
+                       description: "An access violation occurred during the check.",
+                       exception: ex,
+                       data: null);
+               }
+           }
+       }
+   }
+   ```
+
+1. 使用取用應用程式在其 `Startup.Configure` 方法中呼叫的參數，來寫入延伸模組。 在下列範例中，假設健康狀態檢查方法簽章如下：
+
+   ```csharp
+   ExampleHealthCheck(string, string, int )
+   ```
+
+   上述簽章指出 `ExampleHealthCheck` 需要額外的資料，才能處理健康狀態檢查探查邏輯。 此資料會提供給委派，以在使用延伸模組登錄健康狀態檢查時，用來建立健康狀態檢查執行個體。 在下列範例中，呼叫者會選擇性地指定：
+
+   * 健康狀態檢查名稱 (`name`)。 如果為 `null`，則會使用 `example_health_check`。
+   * 健康狀態檢查的字串資料點 (`data1`)。
+   * 健康狀態檢查的整數資料點 (`data2`)。 如果為 `null`，則會使用 `1`。
+   * 失敗狀態 (<xref:Microsoft.Extensions.Diagnostics.HealthChecks.HealthStatus>)。 預設為 `null`。 如果為 `null` ， [`HealthStatus.Unhealthy`](xref:Microsoft.Extensions.Diagnostics.HealthChecks.HealthStatus) 則回報失敗狀態。
+   * 標籤 (`IEnumerable<string>`)。
+
+   ```csharp
+   using System.Collections.Generic;
+   using Microsoft.Extensions.Diagnostics.HealthChecks;
+
+   public static class ExampleHealthCheckBuilderExtensions
+   {
+       const string DefaultName = "example_health_check";
+
+       public static IHealthChecksBuilder AddExampleHealthCheck(
+           this IHealthChecksBuilder builder,
+           string name = default,
+           string data1,
+           int data2 = 1,
+           HealthStatus? failureStatus = default,
+           IEnumerable<string> tags = default)
+       {
+           return builder.Add(new HealthCheckRegistration(
+               name ?? DefaultName,
+               sp => new ExampleHealthCheck(data1, data2),
+               failureStatus,
+               tags));
+       }
+   }
+   ```
+
+## <a name="health-check-publisher"></a>健康狀態檢查發行者
+
+當 <xref:Microsoft.Extensions.Diagnostics.HealthChecks.IHealthCheckPublisher> 新增至服務容器時，健康狀態檢查系統會定期執行健康狀態檢查，並呼叫 `PublishAsync` 傳回結果。 這對推送型健康狀態監控系統案例很有用，其預期每個處理序會定期呼叫監控系統來判斷健康狀態。
+
+<xref:Microsoft.Extensions.Diagnostics.HealthChecks.IHealthCheckPublisher> 介面有單一方法：
+
+```csharp
+Task PublishAsync(HealthReport report, CancellationToken cancellationToken);
+```
+
+<xref:Microsoft.Extensions.Diagnostics.HealthChecks.HealthCheckPublisherOptions> 可讓您設定：
+
+* <xref:Microsoft.Extensions.Diagnostics.HealthChecks.HealthCheckPublisherOptions.Delay>：在執行實例之前，應用程式啟動後所套用的初始延遲 <xref:Microsoft.Extensions.Diagnostics.HealthChecks.IHealthCheckPublisher> 。 在啟動後就會套用延遲，但不會套用至後續的反覆項目。 預設值是五秒鐘。
+* <xref:Microsoft.Extensions.Diagnostics.HealthChecks.HealthCheckPublisherOptions.Period>：執行的期間 <xref:Microsoft.Extensions.Diagnostics.HealthChecks.IHealthCheckPublisher> 。 預設值為 30 秒。
+* <xref:Microsoft.Extensions.Diagnostics.HealthChecks.HealthCheckPublisherOptions.Predicate>：如果 <xref:Microsoft.Extensions.Diagnostics.HealthChecks.HealthCheckPublisherOptions.Predicate> `null` (預設) ，健全狀況檢查發行者服務會執行所有已註冊的健康情況檢查。 若要執行一部分的健康狀態檢查，請提供可篩選該組檢查的函式。 每個期間都會評估該述詞。
+* <xref:Microsoft.Extensions.Diagnostics.HealthChecks.HealthCheckPublisherOptions.Timeout>：針對所有實例執行健康情況檢查的超時時間 <xref:Microsoft.Extensions.Diagnostics.HealthChecks.IHealthCheckPublisher> 。 若要在沒有逾時的情況下執行，請使用 <xref:System.Threading.Timeout.InfiniteTimeSpan>。 預設值為 30 秒。
+
+在範例應用程式中，`ReadinessPublisher` 是一個 <xref:Microsoft.Extensions.Diagnostics.HealthChecks.IHealthCheckPublisher> 實作。 記錄層級的每個檢查都會記錄健全狀況檢查狀態：
+
+* <xref:Microsoft.Extensions.Logging.LoggerExtensions.LogInformation%2A>如果健康狀態檢查狀態為， () 資訊 <xref:Microsoft.Extensions.Diagnostics.HealthChecks.HealthStatus.Healthy> 。
+* <xref:Microsoft.Extensions.Logging.LoggerExtensions.LogError%2A>當狀態為或時，)  (<xref:Microsoft.Extensions.Diagnostics.HealthChecks.HealthStatus.Degraded> 錯誤 <xref:Microsoft.Extensions.Diagnostics.HealthChecks.HealthStatus.Unhealthy> 。
 
 [!code-csharp[](health-checks/samples/3.x/HealthChecksSample/ReadinessPublisher.cs?name=snippet_ReadinessPublisher&highlight=18-27)]
 
@@ -773,13 +1545,13 @@ Task PublishAsync(HealthReport report, CancellationToken cancellationToken);
 [!code-csharp[](health-checks/samples/3.x/HealthChecksSample/LivenessProbeStartup.cs?name=snippet_ConfigureServices)]
 
 > [!NOTE]
-> [AspNetCore.Diagnostics.HealthChecks](https://github.com/Xabaril/AspNetCore.Diagnostics.HealthChecks) \(英文\) 隨附數個系統的發行者，包括 [Application Insights](/azure/application-insights/app-insights-overview)。
+> [`AspNetCore.Diagnostics.HealthChecks`](https://github.com/Xabaril/AspNetCore.Diagnostics.HealthChecks) 包含數個系統的發行者，包括 [Application Insights](/azure/application-insights/app-insights-overview)。
 >
-> [AspNetCore](https://github.com/Xabaril/AspNetCore.Diagnostics.HealthChecks) 不會由 Microsoft 維護或支援 HealthChecks。
+> [`AspNetCore.Diagnostics.HealthChecks`](https://github.com/Xabaril/AspNetCore.Diagnostics.HealthChecks) Microsoft 不會維護或支援。
 
 ## <a name="restrict-health-checks-with-mapwhen"></a>利用 MapWhen 限制健康情況檢查
 
-使用 <xref:Microsoft.AspNetCore.Builder.MapWhenExtensions.MapWhen*> 來有條件地將健康情況檢查端點的要求管線分支。
+使用 <xref:Microsoft.AspNetCore.Builder.MapWhenExtensions.MapWhen%2A> 來有條件地將健康情況檢查端點的要求管線分支。
 
 在下列範例中， `MapWhen` 如果收到端點的 GET 要求，則會將要求管線分支以啟用健康情況檢查中介軟體 `api/HealthCheck` ：
 
@@ -817,17 +1589,17 @@ ASP.NET Core 提供健康狀態檢查中介軟體和程式庫，以報告應用�
 
 健康狀態檢查通常會搭配使用外部監視服務或容器協調器，來檢查應用程式的狀態。 將健康狀態檢查新增至應用程式之前，請決定要使用的監控系統。 監控系統會指定要建立哪些健康狀態檢查類型，以及如何設定其端點。
 
-參考 [Microsoft.AspNetCore.App 中繼套件](xref:fundamentals/metapackage-app)，或新增 [Microsoft.AspNetCore.Diagnostics.HealthChecks](https://www.nuget.org/packages/Microsoft.AspNetCore.Diagnostics.HealthChecks) 套件的套件參考。
+參考[ `Microsoft.AspNetCore.App` 中繼套件](xref:fundamentals/metapackage-app)或將封裝參考加入 [`Microsoft.AspNetCore.Diagnostics.HealthChecks`](https://www.nuget.org/packages/Microsoft.AspNetCore.Diagnostics.HealthChecks) 封裝。
 
-範例應用程式提供啟動程式碼，來示範數個案例的健康狀態檢查。 [資料庫探查](#database-probe)案例會使用 [AspNetCore.Diagnostics.HealthChecks](https://github.com/Xabaril/AspNetCore.Diagnostics.HealthChecks) \(英文\) 來檢查資料庫連線的健康情況。 [DbContext 探查](#entity-framework-core-dbcontext-probe)案例使用 EF Core `DbContext` 來檢查資料庫。 為了探索資料庫案例，範例應用程式會：
+範例應用程式提供啟動程式碼，來示範數個案例的健康狀態檢查。 [資料庫探查](#database-probe)案例會使用來檢查資料庫連接的健全狀況 [`AspNetCore.Diagnostics.HealthChecks`](https://github.com/Xabaril/AspNetCore.Diagnostics.HealthChecks) 。 [DbContext 探查](#entity-framework-core-dbcontext-probe)案例使用 EF Core `DbContext` 來檢查資料庫。 為了探索資料庫案例，範例應用程式會：
 
 * 建立資料庫，並在檔案中提供其連接字串 *appsettings.json* 。
 * 在其專案檔中具有下列套件參考：
-  * [AspNetCore.HealthChecks.SqlServer](https://www.nuget.org/packages/AspNetCore.HealthChecks.SqlServer/)
-  * [Microsoft.Extensions.Diagnostics.HealthChecks.EntityFrameworkCore](https://www.nuget.org/packages/Microsoft.Extensions.Diagnostics.HealthChecks.EntityFrameworkCore/)
+  * [`AspNetCore.HealthChecks.SqlServer`](https://www.nuget.org/packages/AspNetCore.HealthChecks.SqlServer)
+  * [`Microsoft.Extensions.Diagnostics.HealthChecks.EntityFrameworkCore`](https://www.nuget.org/packages/Microsoft.Extensions.Diagnostics.HealthChecks.EntityFrameworkCore)
 
 > [!NOTE]
-> [AspNetCore](https://github.com/Xabaril/AspNetCore.Diagnostics.HealthChecks) 不會由 Microsoft 維護或支援 HealthChecks。
+> [`AspNetCore.Diagnostics.HealthChecks`](https://github.com/Xabaril/AspNetCore.Diagnostics.HealthChecks) Microsoft 不會維護或支援。
 
 另一個健康狀態檢查案例示範如何將健康狀態檢查篩選至管理連接埠。 範例應用程式會要求您建立 *Properties/launchSettings.json* 檔案，其中包含管理 URL 和管理連接埠。 如需詳細資訊，請參閱[依連接埠篩選](#filter-by-port)一節。
 
@@ -835,9 +1607,9 @@ ASP.NET Core 提供健康狀態檢查中介軟體和程式庫，以報告應用�
 
 對於許多應用程式，報告應用程式是否可處理要求的基本健康狀態探查組態 (「活躍度」)，便足以探索應用程式的狀態。
 
-基本設定會註冊健康情況檢查服務並呼叫健康情況檢查中介軟體，以在具有健康回應的 URL 端點回應。 預設並未登錄特定健康狀態檢查來測試任何特定相依性或子系統。 如果應用程式能夠在健康狀態端點 URL 做出回應，則視為狀況良好。 預設回應寫入器會將狀態 (<xref:Microsoft.Extensions.Diagnostics.HealthChecks.HealthStatus>) 以純文字回應形式回寫到用戶端，指出狀態為 [HealthStatus.Healthy](xref:Microsoft.Extensions.Diagnostics.HealthChecks.HealthStatus)[HealthStatus.Degraded](xref:Microsoft.Extensions.Diagnostics.HealthChecks.HealthStatus) 或 [HealthStatus.Unhealthy](xref:Microsoft.Extensions.Diagnostics.HealthChecks.HealthStatus)。
+基本設定會註冊健康情況檢查服務並呼叫健康情況檢查中介軟體，以在具有健康回應的 URL 端點回應。 預設並未登錄特定健康狀態檢查來測試任何特定相依性或子系統。 如果應用程式能夠在健康狀態端點 URL 做出回應，則視為狀況良好。 預設回應寫入器會將狀態 (<xref:Microsoft.Extensions.Diagnostics.HealthChecks.HealthStatus>) 作為純文字回應寫入用戶端，表示 [`HealthStatus.Healthy`](xref:Microsoft.Extensions.Diagnostics.HealthChecks.HealthStatus) 、 [`HealthStatus.Degraded`](xref:Microsoft.Extensions.Diagnostics.HealthChecks.HealthStatus) 或 [`HealthStatus.Unhealthy`](xref:Microsoft.Extensions.Diagnostics.HealthChecks.HealthStatus) 狀態。
 
-在 `Startup.ConfigureServices` 中，使用 <xref:Microsoft.Extensions.DependencyInjection.HealthCheckServiceCollectionExtensions.AddHealthChecks*> 登錄健康狀態檢查服務。 <xref:Microsoft.AspNetCore.Builder.HealthCheckApplicationBuilderExtensions.UseHealthChecks*>在的要求處理管線中新增健康狀態檢查中介軟體的端點 `Startup.Configure` 。
+在 `Startup.ConfigureServices` 中，使用 <xref:Microsoft.Extensions.DependencyInjection.HealthCheckServiceCollectionExtensions.AddHealthChecks%2A> 登錄健康狀態檢查服務。 <xref:Microsoft.AspNetCore.Builder.HealthCheckApplicationBuilderExtensions.UseHealthChecks%2A>在的要求處理管線中新增健康狀態檢查中介軟體的端點 `Startup.Configure` 。
 
 在範例應用程式中，健康狀態檢查端點是在 `/health` (*BasicStartup.cs*) 建立：
 
@@ -872,11 +1644,11 @@ HEALTHCHECK CMD curl --fail http://localhost:5000/health || exit
 
 ## <a name="create-health-checks"></a>建立健康狀態檢查
 
-健康狀態檢查是藉由實作 <xref:Microsoft.Extensions.Diagnostics.HealthChecks.IHealthCheck> 介面來建立。 <xref:Microsoft.Extensions.Diagnostics.HealthChecks.IHealthCheck.CheckHealthAsync*> 方法會傳回 <xref:Microsoft.Extensions.Diagnostics.HealthChecks.HealthCheckResult>，指出健康狀態為 `Healthy`、`Degraded` 或 `Unhealthy`。 結果會寫成具有可設定狀態碼的純文字回應 ([健康狀態檢查選項](#health-check-options)一節中將說明如何進行組態)。 <xref:Microsoft.Extensions.Diagnostics.HealthChecks.HealthCheckResult> 也可以傳回選擇性索引鍵/值組。
+健康狀態檢查是藉由實作 <xref:Microsoft.Extensions.Diagnostics.HealthChecks.IHealthCheck> 介面來建立。 <xref:Microsoft.Extensions.Diagnostics.HealthChecks.IHealthCheck.CheckHealthAsync%2A> 方法會傳回 <xref:Microsoft.Extensions.Diagnostics.HealthChecks.HealthCheckResult>，指出健康狀態為 `Healthy`、`Degraded` 或 `Unhealthy`。 結果會寫成具有可設定狀態碼的純文字回應 ([健康狀態檢查選項](#health-check-options)一節中將說明如何進行組態)。 <xref:Microsoft.Extensions.Diagnostics.HealthChecks.HealthCheckResult> 也可以傳回選擇性索引鍵/值組。
 
 ### <a name="example-health-check"></a>範例健康狀態檢查
 
-下列 `ExampleHealthCheck` 類別示範健康情況檢查的版面配置。 健康情況檢查邏輯會放置在 `CheckHealthAsync` 方法中。 下列範例會將虛擬變數（）設定 `healthCheckResultHealthy` 為 `true` 。 如果的值 `healthCheckResultHealthy` 設定為 `false` ，則會傳回 [HealthCheckResult 狀況不良](xref:Microsoft.Extensions.Diagnostics.HealthChecks.HealthCheckResult.Unhealthy*) 狀態。
+下列 `ExampleHealthCheck` 類別示範健康情況檢查的版面配置。 健康情況檢查邏輯會放置在 `CheckHealthAsync` 方法中。 下列範例會將虛擬變數（）設定 `healthCheckResultHealthy` 為 `true` 。 如果的值 `healthCheckResultHealthy` 設定為 `false` ，則 [`HealthCheckResult.Unhealthy`](xref:Microsoft.Extensions.Diagnostics.HealthChecks.HealthCheckResult.Unhealthy%2A) 會傳回狀態。
 
 ```csharp
 public class ExampleHealthCheck : IHealthCheck
@@ -901,14 +1673,14 @@ public class ExampleHealthCheck : IHealthCheck
 
 ### <a name="register-health-check-services"></a>登錄健康狀態檢查服務
 
-此 `ExampleHealthCheck` 類型會新增至中的健康情況檢查服務 `Startup.ConfigureServices` <xref:Microsoft.Extensions.DependencyInjection.HealthChecksBuilderAddCheckExtensions.AddCheck*> ：
+此 `ExampleHealthCheck` 類型會新增至中的健康情況檢查服務 `Startup.ConfigureServices` <xref:Microsoft.Extensions.DependencyInjection.HealthChecksBuilderAddCheckExtensions.AddCheck%2A> ：
 
 ```csharp
 services.AddHealthChecks()
     .AddCheck<ExampleHealthCheck>("example_health_check");
 ```
 
-下列範例中所顯示的 <xref:Microsoft.Extensions.DependencyInjection.HealthChecksBuilderAddCheckExtensions.AddCheck*> 多載會設定在健康狀態檢查報告失敗時所要報告的失敗狀態 (<xref:Microsoft.Extensions.Diagnostics.HealthChecks.HealthStatus>)。 如果將失敗狀態設定為 `null` (預設)，則會回報 [HealthStatus.Unhealthy](xref:Microsoft.Extensions.Diagnostics.HealthChecks.HealthStatus)。 此多載對程式庫作者很有用。若健康狀態檢查實作採用此設定，則當健康狀態檢查失敗時，應用程式就會強制程式庫指出失敗狀態。
+下列範例中所顯示的 <xref:Microsoft.Extensions.DependencyInjection.HealthChecksBuilderAddCheckExtensions.AddCheck%2A> 多載會設定在健康狀態檢查報告失敗時所要報告的失敗狀態 (<xref:Microsoft.Extensions.Diagnostics.HealthChecks.HealthStatus>)。 如果失敗狀態設定為 `null` (預設) ， [`HealthStatus.Unhealthy`](xref:Microsoft.Extensions.Diagnostics.HealthChecks.HealthStatus) 則會回報。 此多載對程式庫作者很有用。若健康狀態檢查實作採用此設定，則當健康狀態檢查失敗時，應用程式就會強制程式庫指出失敗狀態。
 
 您可以使用「標籤」來篩選健康狀態檢查 ([篩選健康狀態檢查](#filter-health-checks)一節中將進一步說明)。
 
@@ -920,7 +1692,7 @@ services.AddHealthChecks()
         tags: new[] { "example" });
 ```
 
-<xref:Microsoft.Extensions.DependencyInjection.HealthChecksBuilderAddCheckExtensions.AddCheck*> 也可以執行匿名函式。 在下列 `Startup.ConfigureServices` 範例中，健康狀態檢查名稱會指定為 `Example` ，且檢查一律會傳回狀況良好的狀態：
+<xref:Microsoft.Extensions.DependencyInjection.HealthChecksBuilderAddCheckExtensions.AddCheck%2A> 也可以執行匿名函式。 在下列 `Startup.ConfigureServices` 範例中，健康狀態檢查名稱會指定為 `Example` ，且檢查一律會傳回狀況良好的狀態：
 
 ```csharp
 services.AddHealthChecks()
@@ -930,13 +1702,13 @@ services.AddHealthChecks()
 
 ### <a name="use-health-checks-middleware"></a>使用健康狀態檢查中介軟體
 
-在 `Startup.Configure` 中，使用端點 URL 或相對路徑呼叫處理管線中的 <xref:Microsoft.AspNetCore.Builder.HealthCheckApplicationBuilderExtensions.UseHealthChecks*>：
+在 `Startup.Configure` 中，使用端點 URL 或相對路徑呼叫處理管線中的 <xref:Microsoft.AspNetCore.Builder.HealthCheckApplicationBuilderExtensions.UseHealthChecks%2A>：
 
 ```csharp
 app.UseHealthChecks("/health");
 ```
 
-如果健康狀態檢查應該接聽特定連接埠，請使用 <xref:Microsoft.AspNetCore.Builder.HealthCheckApplicationBuilderExtensions.UseHealthChecks*> 的多載來設定連接埠 ([依連接埠篩選](#filter-by-port)一節中將進一步說明)：
+如果健康狀態檢查應該接聽特定連接埠，請使用 <xref:Microsoft.AspNetCore.Builder.HealthCheckApplicationBuilderExtensions.UseHealthChecks%2A> 的多載來設定連接埠 ([依連接埠篩選](#filter-by-port)一節中將進一步說明)：
 
 ```csharp
 app.UseHealthChecks("/health", port: 8000);
@@ -1021,7 +1793,7 @@ app.UseHealthChecks("/health", new HealthCheckOptions()
 
 ### <a name="customize-output"></a>自訂輸出
 
-<xref:Microsoft.AspNetCore.Diagnostics.HealthChecks.HealthCheckOptions.ResponseWriter> 選項會取得或設定用來寫入回應的委派。 預設委派會使用 [HealthReport.Status](xref:Microsoft.Extensions.Diagnostics.HealthChecks.HealthReport.Status)的字串值撰寫最基本的純文字回應。
+<xref:Microsoft.AspNetCore.Diagnostics.HealthChecks.HealthCheckOptions.ResponseWriter> 選項會取得或設定用來寫入回應的委派。 預設委派會以的字串值寫入最短的純文字回應 [`HealthReport.Status`](xref:Microsoft.Extensions.Diagnostics.HealthChecks.HealthReport.Status) 。
 
 在 `Startup.Configure` 中：
 
@@ -1035,7 +1807,7 @@ app.UseHealthChecks("/health", new HealthCheckOptions()
 });
 ```
 
-預設委派會使用 [HealthReport.Status](xref:Microsoft.Extensions.Diagnostics.HealthChecks.HealthReport.Status)的字串值撰寫最基本的純文字回應。 下列自訂委派會 `WriteResponse` 輸出自訂 JSON 回應：
+預設委派會以的字串值寫入最短的純文字回應 [`HealthReport.Status`](xref:Microsoft.Extensions.Diagnostics.HealthChecks.HealthReport.Status) 。 下列自訂委派會 `WriteResponse` 輸出自訂 JSON 回應：
 
 ```csharp
 private static Task WriteResponse(HttpContext httpContext, HealthReport result)
@@ -1061,18 +1833,18 @@ private static Task WriteResponse(HttpContext httpContext, HealthReport result)
 
 健康狀態檢查可指定資料庫查詢以布林測試方式來執行，藉此指出資料庫是否正常回應。
 
-範例應用程式會使用 [AspNetCore.Diagnostics.HealthChecks](https://github.com/Xabaril/AspNetCore.Diagnostics.HealthChecks) \(英文\) (此為適用於 ASP.NET Core 應用程式的健康情況檢查程式庫)，在 SQL Server 資料庫上執行健康情況檢查。 `AspNetCore.Diagnostics.HealthChecks` 會對資料庫執行 `SELECT 1` 查詢，以確認資料庫連線狀況良好。
+範例應用程式會使用 [`AspNetCore.Diagnostics.HealthChecks`](https://github.com/Xabaril/AspNetCore.Diagnostics.HealthChecks) ASP.NET Core 應用程式的健康情況檢查程式庫，對 SQL Server 資料庫執行健康情況檢查。 `AspNetCore.Diagnostics.HealthChecks` 會對資料庫執行 `SELECT 1` 查詢，以確認資料庫連線狀況良好。
 
 > [!WARNING]
 > 使用查詢檢查資料庫連線時，請選擇快速傳回的查詢。 查詢方法具有多載資料庫而降低其效能的風險。 在大部分情況下，不需要執行測試查詢。 只要成功建立資料庫連線就已足夠。 如果您發現有必要執行查詢，請選擇簡單的 SELECT 查詢，例如 `SELECT 1`。
 
-包含 [AspNetCore.HealthChecks.SqlServer](https://www.nuget.org/packages/AspNetCore.HealthChecks.SqlServer/) 的套件參考。
+包含的封裝參考 [`AspNetCore.HealthChecks.SqlServer`](https://www.nuget.org/packages/AspNetCore.HealthChecks.SqlServer) 。
 
 在範例應用程式的檔案中提供有效的資料庫連接字串 *appsettings.json* 。 應用程式使用名為 `HealthCheckSample` 的 SQL Server 資料庫：
 
 [!code-json[](health-checks/samples/2.x/HealthChecksSample/appsettings.json?highlight=3)]
 
-在 `Startup.ConfigureServices` 中，使用 <xref:Microsoft.Extensions.DependencyInjection.HealthCheckServiceCollectionExtensions.AddHealthChecks*> 登錄健康狀態檢查服務。 範例應用程式會使用資料庫的連接字串 (*DbHealthStartup.cs*) 來呼叫 `AddSqlServer` 方法：
+在 `Startup.ConfigureServices` 中，使用 <xref:Microsoft.Extensions.DependencyInjection.HealthCheckServiceCollectionExtensions.AddHealthChecks%2A> 登錄健康狀態檢查服務。 範例應用程式會使用資料庫的連接字串 (*DbHealthStartup.cs*) 來呼叫 `AddSqlServer` 方法：
 
 [!code-csharp[](health-checks/samples/2.x/HealthChecksSample/DbHealthStartup.cs?name=snippet_ConfigureServices)]
 
@@ -1089,14 +1861,14 @@ dotnet run --scenario db
 ```
 
 > [!NOTE]
-> [AspNetCore](https://github.com/Xabaril/AspNetCore.Diagnostics.HealthChecks) 不會由 Microsoft 維護或支援 HealthChecks。
+> [`AspNetCore.Diagnostics.HealthChecks`](https://github.com/Xabaril/AspNetCore.Diagnostics.HealthChecks) Microsoft 不會維護或支援。
 
 ## <a name="entity-framework-core-dbcontext-probe"></a>Entity Framework Core DbContext 探查
 
 `DbContext` 檢查會確認應用程式是否可與針對 EF Core `DbContext` 設定的資料庫通訊。 應用程式支援 `DbContext` 檢查：
 
 * 使用 [Entity Framework (EF) Core](/ef/core/)。
-* 包含 [Microsoft.Extensions.Diagnostics.HealthChecks.EntityFrameworkCore](https://www.nuget.org/packages/Microsoft.Extensions.Diagnostics.HealthChecks.EntityFrameworkCore/) 的套件參考。
+* 包含的封裝參考 [`Microsoft.Extensions.Diagnostics.HealthChecks.EntityFrameworkCore`](https://www.nuget.org/packages/Microsoft.Extensions.Diagnostics.HealthChecks.EntityFrameworkCore) 。
 
 `AddDbContextCheck<TContext>` 會登錄 `DbContext` 的健康狀態檢查。 `DbContext` 會以 `TContext` 形式提供給方法。 多載可用來設定失敗狀態、標籤和自訂測試查詢。
 
@@ -1105,7 +1877,7 @@ dotnet run --scenario db
 * `DbContextHealthCheck` 會呼叫 EF Core 的 `CanConnectAsync` 方法。 您可以自訂使用 `AddDbContextCheck` 方法多載檢查健康狀態時所要執行的作業。
 * 健康狀態檢查的名稱是 `TContext` 類型的名稱。
 
-在範例應用程式中， `AppDbContext` 會 `AddDbContextCheck` 在 `Startup.ConfigureServices` (*DbCoNtextHealthStartup.cs*) 中提供並註冊為服務：
+在範例應用程式中， `AppDbContext` 會在 `AddDbContextCheck` `Startup.ConfigureServices` (*DbCoNtextHealthStartup*) 中提供並註冊為服務：
 
 [!code-csharp[](health-checks/samples/2.x/HealthChecksSample/DbContextHealthStartup.cs?name=snippet_ConfigureServices)]
 
@@ -1174,11 +1946,11 @@ Unhealthy
 
 [!code-csharp[](health-checks/samples/2.x/HealthChecksSample/Services/StartupHostedService.cs?name=snippet1&highlight=18-20)]
 
-健康狀態檢查是 `Startup.ConfigureServices` 中使用 <xref:Microsoft.Extensions.DependencyInjection.HealthChecksBuilderAddCheckExtensions.AddCheck*> 隨託管服務一起登錄。 由於託管服務必須在健康狀態檢查上設定此屬性，因此也會在服務容器 (*LivenessProbeStartup.cs*) 中登錄健康狀態檢查：
+健康狀態檢查是 `Startup.ConfigureServices` 中使用 <xref:Microsoft.Extensions.DependencyInjection.HealthChecksBuilderAddCheckExtensions.AddCheck%2A> 隨託管服務一起登錄。 由於託管服務必須在健康狀態檢查上設定此屬性，因此也會在服務容器 (*LivenessProbeStartup.cs*) 中登錄健康狀態檢查：
 
 [!code-csharp[](health-checks/samples/2.x/HealthChecksSample/LivenessProbeStartup.cs?name=snippet_ConfigureServices)]
 
-在的應用程式處理管線中呼叫健康情況檢查中介軟體 `Startup.Configure` 。 在範例應用程式中，健康狀態檢查端點是在 `/health/ready` (針對整備度檢查) 和 `/health/live` (針對活躍度檢查) 建立。 整備度檢查使用 `ready` 標籤來篩選健康狀態檢查。 活躍度檢查會藉由在 [HealthCheckOptions.Predicate](xref:Microsoft.AspNetCore.Diagnostics.HealthChecks.HealthCheckOptions.Predicate) 中傳回 `false` 來篩選掉 `StartupHostedServiceHealthCheck` (如需詳細資訊，請參閱[篩選健康狀態檢查](#filter-health-checks))：
+在的應用程式處理管線中呼叫健康情況檢查中介軟體 `Startup.Configure` 。 在範例應用程式中，健康狀態檢查端點是在 `/health/ready` (針對整備度檢查) 和 `/health/live` (針對活躍度檢查) 建立。 整備度檢查使用 `ready` 標籤來篩選健康狀態檢查。 活動檢查會 `StartupHostedServiceHealthCheck` `false` 在 (中傳回以篩選出 [`HealthCheckOptions.Predicate`](xref:Microsoft.AspNetCore.Diagnostics.HealthChecks.HealthCheckOptions.Predicate) 詳細資訊，請參閱 [篩選健康情況檢查](#filter-health-checks)) ：
 
 ```csharp
 app.UseHealthChecks("/health/ready", new HealthCheckOptions()
@@ -1233,9 +2005,9 @@ spec:
 
 [!code-csharp[](health-checks/samples/2.x/HealthChecksSample/MemoryHealthCheck.cs?name=snippet1)]
 
-在 `Startup.ConfigureServices` 中，使用 <xref:Microsoft.Extensions.DependencyInjection.HealthCheckServiceCollectionExtensions.AddHealthChecks*> 登錄健康狀態檢查服務。 `MemoryHealthCheck` 會登錄為服務，而不是將健康狀態檢查傳遞至 <xref:Microsoft.Extensions.DependencyInjection.HealthChecksBuilderAddCheckExtensions.AddCheck*> 以啟用檢查。 所有 <xref:Microsoft.Extensions.Diagnostics.HealthChecks.IHealthCheck> 登錄的服務都可供健康狀態檢查服務和中介軟體使用。 建議將健康狀態檢查服務登錄為單一服務。
+在 `Startup.ConfigureServices` 中，使用 <xref:Microsoft.Extensions.DependencyInjection.HealthCheckServiceCollectionExtensions.AddHealthChecks%2A> 登錄健康狀態檢查服務。 `MemoryHealthCheck` 會登錄為服務，而不是將健康狀態檢查傳遞至 <xref:Microsoft.Extensions.DependencyInjection.HealthChecksBuilderAddCheckExtensions.AddCheck%2A> 以啟用檢查。 所有 <xref:Microsoft.Extensions.Diagnostics.HealthChecks.IHealthCheck> 登錄的服務都可供健康狀態檢查服務和中介軟體使用。 建議將健康狀態檢查服務登錄為單一服務。
 
-在範例應用程式中 (*CustomWriterStartup.cs*) ：
+在範例應用程式中 (*CustomWriterStartup .cs*) ：
 
 [!code-csharp[](health-checks/samples/2.x/HealthChecksSample/CustomWriterStartup.cs?name=snippet_ConfigureServices&highlight=4)]
 
@@ -1263,13 +2035,13 @@ dotnet run --scenario writer
 ```
 
 > [!NOTE]
-> [AspNetCore.Diagnostics.HealthChecks](https://github.com/Xabaril/AspNetCore.Diagnostics.HealthChecks) \(英文\) 隨附計量型健康情況檢查案例，包括磁碟儲存體和最大值活躍度檢查。
+> [`AspNetCore.Diagnostics.HealthChecks`](https://github.com/Xabaril/AspNetCore.Diagnostics.HealthChecks) 包含以計量為基礎的健康情況檢查案例，包括磁片儲存體和最大值活動檢查。
 >
-> [AspNetCore](https://github.com/Xabaril/AspNetCore.Diagnostics.HealthChecks) 不會由 Microsoft 維護或支援 HealthChecks。
+> [`AspNetCore.Diagnostics.HealthChecks`](https://github.com/Xabaril/AspNetCore.Diagnostics.HealthChecks) Microsoft 不會維護或支援。
 
 ## <a name="filter-by-port"></a>依連接埠篩選
 
-呼叫 <xref:Microsoft.AspNetCore.Builder.HealthCheckApplicationBuilderExtensions.UseHealthChecks*> 並提供連接埠會限制對指定的連接埠提出健康狀態檢查要求。 這通常會用於容器環境，以公開監視服務的連接埠。
+呼叫 <xref:Microsoft.AspNetCore.Builder.HealthCheckApplicationBuilderExtensions.UseHealthChecks%2A> 並提供連接埠會限制對指定的連接埠提出健康狀態檢查要求。 這通常會用於容器環境，以公開監視服務的連接埠。
 
 範例應用程式使用[環境變數組態提供者](xref:fundamentals/configuration/index#environment-variables-configuration-provider)來設定連接埠。 連接埠是在 *launchSettings.json* 檔案中設定，並透過環境變數傳遞至組態提供者。 您也必須將伺服器設定為在管理連接埠上接聽要求。
 
@@ -1295,14 +2067,14 @@ dotnet run --scenario writer
 }
 ```
 
-在 `Startup.ConfigureServices` 中，使用 <xref:Microsoft.Extensions.DependencyInjection.HealthCheckServiceCollectionExtensions.AddHealthChecks*> 登錄健康狀態檢查服務。 呼叫 <xref:Microsoft.AspNetCore.Builder.HealthCheckApplicationBuilderExtensions.UseHealthChecks*> 會指定管理連接埠 (*ManagementPortStartup.cs*)：
+在 `Startup.ConfigureServices` 中，使用 <xref:Microsoft.Extensions.DependencyInjection.HealthCheckServiceCollectionExtensions.AddHealthChecks%2A> 登錄健康狀態檢查服務。 呼叫 <xref:Microsoft.AspNetCore.Builder.HealthCheckApplicationBuilderExtensions.UseHealthChecks%2A> 會指定管理連接埠 (*ManagementPortStartup.cs*)：
 
 [!code-csharp[](health-checks/samples/2.x/HealthChecksSample/ManagementPortStartup.cs?name=snippet1&highlight=17)]
 
 > [!NOTE]
-> 您可以在程式碼中明確設定 URL 和管理連接埠，避免在範例應用程式中建立 *launchSettings.json* 檔案。 在 <xref:Microsoft.AspNetCore.Hosting.WebHostBuilder> 建立所在的 *Program.cs* 中，新增 <xref:Microsoft.AspNetCore.Hosting.HostingAbstractionsWebHostBuilderExtensions.UseUrls*> 呼叫並提供應用程式的正常回應端點和管理連接埠端點。 在 <xref:Microsoft.AspNetCore.Builder.HealthCheckApplicationBuilderExtensions.UseHealthChecks*> 呼叫所在的 *ManagementPortStartup.cs* 中，明確指定管理連接埠。
+> 您可以在程式碼中明確設定 URL 和管理連接埠，避免在範例應用程式中建立 *launchSettings.json* 檔案。 在 <xref:Microsoft.AspNetCore.Hosting.WebHostBuilder> 建立所在的 *Program.cs* 中，新增 <xref:Microsoft.AspNetCore.Hosting.HostingAbstractionsWebHostBuilderExtensions.UseUrls%2A> 呼叫並提供應用程式的正常回應端點和管理連接埠端點。 在 <xref:Microsoft.AspNetCore.Builder.HealthCheckApplicationBuilderExtensions.UseHealthChecks%2A> 呼叫所在的 *ManagementPortStartup.cs* 中，明確指定管理連接埠。
 >
-> *Program.cs*：
+> *Program .cs*：
 >
 > ```csharp
 > return new WebHostBuilder()
@@ -1391,7 +2163,7 @@ dotnet run --scenario port
    * 健康狀態檢查名稱 (`name`)。 如果為 `null`，則會使用 `example_health_check`。
    * 健康狀態檢查的字串資料點 (`data1`)。
    * 健康狀態檢查的整數資料點 (`data2`)。 如果為 `null`，則會使用 `1`。
-   * 失敗狀態 (<xref:Microsoft.Extensions.Diagnostics.HealthChecks.HealthStatus>)。 預設為 `null`。 如果為 `null`，就會針對失敗狀態回報 [HealthStatus.Unhealthy](xref:Microsoft.Extensions.Diagnostics.HealthChecks.HealthStatus)。
+   * 失敗狀態 (<xref:Microsoft.Extensions.Diagnostics.HealthChecks.HealthStatus>)。 預設為 `null`。 如果為 `null` ， [`HealthStatus.Unhealthy`](xref:Microsoft.Extensions.Diagnostics.HealthChecks.HealthStatus) 則回報失敗狀態。
    * 標籤 (`IEnumerable<string>`)。
 
    ```csharp
@@ -1441,8 +2213,8 @@ Task PublishAsync(HealthReport report, CancellationToken cancellationToken);
 
 在範例應用程式中，`ReadinessPublisher` 是一個 <xref:Microsoft.Extensions.Diagnostics.HealthChecks.IHealthCheckPublisher> 實作。 每個檢查的健康狀態檢查狀態都會記錄為：
 
-* <xref:Microsoft.Extensions.Logging.LoggerExtensions.LogInformation*>如果健康狀態檢查狀態為， () 資訊 <xref:Microsoft.Extensions.Diagnostics.HealthChecks.HealthStatus.Healthy> 。
-* <xref:Microsoft.Extensions.Logging.LoggerExtensions.LogError*>當狀態為或時，)  (<xref:Microsoft.Extensions.Diagnostics.HealthChecks.HealthStatus.Degraded> 錯誤 <xref:Microsoft.Extensions.Diagnostics.HealthChecks.HealthStatus.Unhealthy> 。
+* <xref:Microsoft.Extensions.Logging.LoggerExtensions.LogInformation%2A>如果健康狀態檢查狀態為， () 資訊 <xref:Microsoft.Extensions.Diagnostics.HealthChecks.HealthStatus.Healthy> 。
+* <xref:Microsoft.Extensions.Logging.LoggerExtensions.LogError%2A>當狀態為或時，)  (<xref:Microsoft.Extensions.Diagnostics.HealthChecks.HealthStatus.Degraded> 錯誤 <xref:Microsoft.Extensions.Diagnostics.HealthChecks.HealthStatus.Unhealthy> 。
 
 [!code-csharp[](health-checks/samples/2.x/HealthChecksSample/ReadinessPublisher.cs?name=snippet_ReadinessPublisher&highlight=18-27)]
 
@@ -1464,13 +2236,13 @@ Task PublishAsync(HealthReport report, CancellationToken cancellationToken);
 > ```
 
 > [!NOTE]
-> [AspNetCore.Diagnostics.HealthChecks](https://github.com/Xabaril/AspNetCore.Diagnostics.HealthChecks) \(英文\) 隨附數個系統的發行者，包括 [Application Insights](/azure/application-insights/app-insights-overview)。
+> [`AspNetCore.Diagnostics.HealthChecks`](https://github.com/Xabaril/AspNetCore.Diagnostics.HealthChecks) 包含數個系統的發行者，包括 [Application Insights](/azure/application-insights/app-insights-overview)。
 >
-> [AspNetCore](https://github.com/Xabaril/AspNetCore.Diagnostics.HealthChecks) 不會由 Microsoft 維護或支援 HealthChecks。
+> [`AspNetCore.Diagnostics.HealthChecks`](https://github.com/Xabaril/AspNetCore.Diagnostics.HealthChecks) Microsoft 不會維護或支援。
 
 ## <a name="restrict-health-checks-with-mapwhen"></a>利用 MapWhen 限制健康情況檢查
 
-使用 <xref:Microsoft.AspNetCore.Builder.MapWhenExtensions.MapWhen*> 來有條件地將健康情況檢查端點的要求管線分支。
+使用 <xref:Microsoft.AspNetCore.Builder.MapWhenExtensions.MapWhen%2A> 來有條件地將健康情況檢查端點的要求管線分支。
 
 在下列範例中， `MapWhen` 如果收到端點的 GET 要求，則會將要求管線分支以啟用健康情況檢查中介軟體 `api/HealthCheck` ：
 

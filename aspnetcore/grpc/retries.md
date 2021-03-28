@@ -18,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: grpc/retries
-ms.openlocfilehash: 4fda4968102740af8d1a7f37dcc588abd24ab70e
-ms.sourcegitcommit: b81327f1a62e9857d9e51fb34775f752261a88ae
+ms.openlocfilehash: 116c201d728c3631f2be107b95e4fa38db35f074
+ms.sourcegitcommit: 7b6781051d341a1daaf46c6a4368fa8a5701db81
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 03/25/2021
-ms.locfileid: "105050993"
+ms.lasthandoff: 03/28/2021
+ms.locfileid: "105638831"
 ---
 # <a name="transient-fault-handling-with-grpc-retries"></a>使用 gRPC 重試進行暫時性錯誤處理
 
@@ -103,7 +103,11 @@ Console.WriteLine("From server: " + response.Message);
 
 ### <a name="when-retries-are-valid"></a>當重試有效時
 
-如果失敗狀態碼符合已設定的狀態碼，且先前的嘗試次數小於最大嘗試次數，則會重試呼叫。 在某些情況下，重試 gRPC 呼叫是不正確。 這些案例會在已認可呼叫時發生。
+呼叫會在下列情況重試：
+
+* 失敗狀態碼符合中的值 `RetryableStatusCodes` 。
+* 先前的嘗試次數小於 `MaxAttempts` 。
+* 呼叫尚未經過認可。
 
 GRPC 呼叫會在兩個案例中認可：
 
@@ -116,8 +120,8 @@ GRPC 呼叫會在兩個案例中認可：
 
 串流呼叫可以與 gRPC 重試搭配使用，但同時使用時，有一些重要的考慮：
 
-* **伺服器串流**（ **雙向串流**：從伺服器傳回多個訊息的串流 rpc）將不會在收到第一則訊息之後重試。
-* **用戶端串流**（ **雙向串流**）：如果外寄訊息超過用戶端的緩衝區大小上限，則傳送多個訊息至伺服器的串流 rpc 將不會重試。
+* **伺服器串流**（ **雙向串流**：從伺服器傳回多個訊息的串流 rpc）將不會在收到第一則訊息之後重試。 應用程式必須新增額外的邏輯，以手動重新建立伺服器和雙向串流呼叫。
+* **用戶端串流**（ **雙向串流**）：如果外寄訊息超過用戶端的緩衝區大小上限，則傳送多個訊息至伺服器的串流 rpc 將不會重試。 您可以使用設定來增加緩衝區大小上限。
 
 如需詳細資訊，請參閱 [何時有效重試](#when-retries-are-valid)。
 

@@ -19,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: data/ef-mvc/inheritance
-ms.openlocfilehash: 299e00b223d287c4e2ece3d1e250581e2a7565e5
-ms.sourcegitcommit: 54fe1ae5e7d068e27376d562183ef9ddc7afc432
+ms.openlocfilehash: ece1e7160ade170c88972f6cd3ad28d545ea5678
+ms.sourcegitcommit: 7b6781051d341a1daaf46c6a4368fa8a5701db81
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 03/10/2021
-ms.locfileid: "102586367"
+ms.lasthandoff: 03/28/2021
+ms.locfileid: "105638766"
 ---
 # <a name="tutorial-implement-inheritance---aspnet-mvc-with-ef-core"></a>教學課程：執行繼承-使用 EF Core ASP.NET MVC
 
@@ -56,22 +56,22 @@ School 資料模型中的 `Instructor` 和 `Student` 類別有數個完全相同
 
 ![衍生自 Person 類別的 Student 和 Instructor 類別](inheritance/_static/inheritance.png)
 
-有幾種方式可以在資料庫中表示此繼承結構。 您擁有的 Person 資料表可能在單一資料表中同時包含學生和講師的資訊。 有些資料行僅適用於講師 (HireDate)，有些只適用於學生 (EnrollmentDate)，有些則兩者通用 (LastName、FirstName)。 一般而言，您必須有指出每個資料列代表哪種類型的鑑別子資料行。 例如，鑑別子資料行的 "Instructor" 代表講師，而 "Student" 代表學生。
+有幾種方式可以在資料庫中表示此繼承結構。 您可以有一個 `Person` 資料表，其中包含與學生和講師在單一資料表中的相關資訊。 有些資料行僅適用於講師 (HireDate)，有些只適用於學生 (EnrollmentDate)，有些則兩者通用 (LastName、FirstName)。 一般而言，您必須有指出每個資料列代表哪種類型的鑑別子資料行。 例如，鑑別子資料行的 "Instructor" 代表講師，而 "Student" 代表學生。
 
 ![單表 (Table-per-hierarchy) 範例](inheritance/_static/tph.png)
 
-從單一資料庫資料表產生實體繼承結構的這種模式稱為單表 (TPH) 繼承。
+從單一資料庫資料表產生實體繼承結構的這種模式稱為「每個階層的資料表」， *(TPH)* 繼承。
 
-替代方法是讓資料庫看起來更像繼承結構。 比方說，您可以只在 Person 資料表中包含名稱欄位，而在個別的 Instructor 和 Student 資料表中包含日期欄位。
+替代方法是讓資料庫看起來更像繼承結構。 例如，您可能只有資料表中的名稱欄位 `Person` ，而且具有不同 `Instructor` `Student` 的資料表和 [日期] 欄位。
 
 > [!WARNING]
-> EF Core 3.x 不支援 (TPT) 的每個類型資料表，但已在 [Ef core 5.0](/ef/core/what-is-new/ef-core-5.0/plan)中執行。
+> EF Core 3.x 不支援每一類型的 (TPT) 資料表，不過它已經在 [EF Core 5.0](/ef/core/what-is-new/ef-core-5.0/plan)中執行。
 
 ![一類一表 (Table-Per-Type) 繼承](inheritance/_static/tpt.png)
 
-針對每個實體類別建立資料庫資料表的這種模式稱為一類一表 (TPT) 繼承。
+為每個實體類別建立資料庫資料表的這種模式稱為「 *每一類型的資料表」 (TPT)* 繼承。
 
-還有另一個選項是將所有的非抽象類型對應至個別資料表。 類別的所有屬性 (包括繼承的屬性) 都會對應至對應資料表的資料行。 這個模式稱為一實體類一表 (TPC) 繼承。 如果您已針對 Person、Student 和 Instructor 類別實作 TPC 繼承 (如上所示)，Student 和 Instructor 資料表在實作繼承之後，看起來與實作之前一樣。
+還有另一個選項是將所有的非抽象類型對應至個別資料表。 類別的所有屬性 (包括繼承的屬性) 都會對應至對應資料表的資料行。 這個模式稱為「 *每個實體的資料表」類別 (TPC)* 繼承。 如果您已 `Person` `Student` 如先前所示，為、和類別實作 TPC 繼承 `Instructor` ，則 `Student` 和 `Instructor` 資料表在執行繼承時，看起來會與之前相同。
 
 比起 TPT 繼承模式，TPC 和 TPH 繼承模式通常會提供更好的效能，因為 TPT 模式可能會導致複雜的聯結查詢。
 

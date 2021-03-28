@@ -18,16 +18,16 @@ no-loc:
 - Razor
 - SignalR
 uid: security/anti-request-forgery
-ms.openlocfilehash: 08414bb4c4d168b672eed2cb7e6a490511ec93d4
-ms.sourcegitcommit: 4bbc69f51c59bed1a96aa46f9f5dca2f2a2634cb
+ms.openlocfilehash: a46fb997719acd95204470c14a4e9eb8546d88dc
+ms.sourcegitcommit: 7b6781051d341a1daaf46c6a4368fa8a5701db81
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 03/25/2021
-ms.locfileid: "105555054"
+ms.lasthandoff: 03/28/2021
+ms.locfileid: "105638779"
 ---
 # <a name="prevent-cross-site-request-forgery-xsrfcsrf-attacks-in-aspnet-core"></a>防止跨網站偽造要求 (XSRF/CSRF) 攻擊 ASP.NET Core
 
-依 [Rick Anderson](https://twitter.com/RickAndMSFT)、 [Fiyaz Hasan](https://twitter.com/FiyazBinHasan)和 [Steve Smith](https://ardalis.com/)
+[Fiyaz Hasan](https://twitter.com/FiyazBinHasan)、 [Rick Anderson](https://twitter.com/RickAndMSFT)和[Steve Smith](https://ardalis.com/)
 
 跨網站要求偽造 (也稱為 XSRF 或 CSRF) 是針對 web 裝載的應用程式進行攻擊，而惡意的 web 應用程式可能會影響用戶端瀏覽器與信任該瀏覽器的 web 應用程式之間的互動。 這些攻擊是可能的，因為 web 瀏覽器會在每個網站要求時自動傳送某些類型的驗證權杖。 這種形式的惡意探索也稱為單鍵 *攻擊* 或 *會話騎* ，因為攻擊會利用使用者先前經過驗證的會話。
 
@@ -174,11 +174,11 @@ Cookie以驗證為基礎的驗證是一種常見的驗證形式。 以權杖為�
 權杖是唯一且無法預期的。 此權杖也可以用來確保一連串要求的正確排序 (例如，確定要求順序：頁面 1 > 第2頁 > 第3頁) 。 ASP.NET Core MVC 和 Pages 範本中的所有表單都會 Razor 產生 antiforgery 權杖。 下列對等的 view 範例會產生 antiforgery 權杖：
 
 ```cshtml
-<form asp-controller="Manage" asp-action="ChangeCode" method="post">
+<form asp-controller="Todo" asp-action="Create" method="post">
     ...
 </form>
 
-@using (Html.BeginForm("ChangeCode", "Manage"))
+@using (Html.BeginForm("Create", "Todo"))
 {
     ...
 }
@@ -419,12 +419,12 @@ function getCookie(cname) {
     var name = cname + "=";
     var decodedCookie = decodeURIComponent(document.cookie);
     var ca = decodedCookie.split(';');
-    for(var i = 0; i <ca.length; i++) {
+    for (var i = 0; i < ca.length; i++) {
         var c = ca[i];
-        while (c.charAt(0) == ' ') {
+        while (c.charAt(0) === ' ') {
             c = c.substring(1);
         }
-        if (c.indexOf(name) == 0) {
+        if (c.indexOf(name) === 0) {
             return c.substring(name.length, c.length);
         }
     }
@@ -434,19 +434,19 @@ function getCookie(cname) {
 var csrfToken = getCookie("CSRF-TOKEN");
 
 var xhttp = new XMLHttpRequest();
-xhttp.onreadystatechange = function() {
-    if (xhttp.readyState == XMLHttpRequest.DONE) {
-        if (xhttp.status == 200) {
-            alert(xhttp.responseText);
+xhttp.onreadystatechange = function () {
+    if (xhttp.readyState === XMLHttpRequest.DONE) {
+        if (xhttp.status === 204) {
+            alert('Todo item is created successfully.');
         } else {
             alert('There was an error processing the AJAX request.');
         }
     }
 };
-xhttp.open('POST', '/api/token/changeCode', true);
+xhttp.open('POST', '/api/items', true);
 xhttp.setRequestHeader("Content-type", "application/json");
 xhttp.setRequestHeader("X-CSRF-TOKEN", csrfToken);
-xhttp.send(JSON.stringify({ "newCode": $CREDENTIAL_PLACEHOLDER$ }));
+xhttp.send(JSON.stringify({ "name": "Learn C#" }));
 ```
 
 ### <a name="angularjs"></a>AngularJS

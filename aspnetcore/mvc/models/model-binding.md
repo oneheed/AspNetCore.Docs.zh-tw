@@ -18,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: mvc/models/model-binding
-ms.openlocfilehash: 5eaedf6dbe5df59848b9cf8a5bda67add48db2a6
-ms.sourcegitcommit: 54fe1ae5e7d068e27376d562183ef9ddc7afc432
+ms.openlocfilehash: 5b3892a13da5c72f9ac76428febc73afaaa9fc06
+ms.sourcegitcommit: 7b6781051d341a1daaf46c6a4368fa8a5701db81
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 03/10/2021
-ms.locfileid: "102586939"
+ms.lasthandoff: 03/28/2021
+ms.locfileid: "105638727"
 ---
 # <a name="model-binding-in-aspnet-core"></a>ASP.NET Core 中的資料繫結
 
@@ -424,10 +424,10 @@ public class Instructor
 
 模型系結需要複雜類型具有無參數的函式。 和型輸入格式子都支援還原序列化 `System.Text.Json` `Newtonsoft.Json` 沒有無參數函式的類別。 
 
-C # 9 引進了一種記錄類型，這是在網路上簡潔表示資料的絕佳方式。 ASP.NET Core 新增了模型系結的支援，以及使用單一的函式驗證記錄類型：
+C # 9 引進了一種記錄類型，這是在網路上簡潔表示資料的絕佳方式。 ASP.NET Core 使用單一的函式加入模型系結和驗證記錄類型的支援：
 
 ```csharp
-public record Person([Required] string Name, [Range(0, 150)] int Age);
+public record Person([Required] string Name, [Range(0, 150)] int Age, [BindNever] int Id);
 
 public class PersonController
 {
@@ -451,7 +451,7 @@ Name: <input asp-for="Name" />
 Age: <input asp-for="Age" />
 ```
 
-驗證記錄類型時，執行時間會特別在參數上搜尋驗證中繼資料，而不是在屬性上搜尋。
+驗證記錄類型時，執行時間會特別針對參數（而不是在屬性上）搜尋系結和驗證中繼資料。
 
 ::: moniker-end
 
@@ -461,14 +461,14 @@ Age: <input asp-for="Age" />
 
 ## <a name="globalization-behavior-of-model-binding-route-data-and-query-strings"></a>模型系結路由資料和查詢字串的全球化行為
 
-ASP.NET 核心路由值提供者和查詢字串值提供者：
+ASP.NET Core 路由值提供者和查詢字串值提供者：
 
 * 將值視為不變的文化特性。
 * 預期 Url 的文化特性不變。
 
 相反地，來自表單資料的值會進行區分文化特性的轉換。 這是設計的，因此可以跨地區設定共用 Url。
 
-讓 ASP.NET 核心路由值提供者和查詢字串值提供者進行區分文化特性的轉換：
+若要讓 ASP.NET Core 路由值提供者和查詢字串值提供者進行區分文化特性的轉換：
 
 * 繼承自 <xref:Microsoft.AspNetCore.Mvc.ModelBinding.IValueProviderFactory>
 * 從[QueryStringValueProviderFactory](https://github.com/dotnet/AspNetCore/blob/main/src/Mvc/Mvc.Core/src/ModelBinding/QueryStringValueProviderFactory.cs)或[RouteValueValueProviderFactory](https://github.com/dotnet/AspNetCore/blob/main/src/Mvc/Mvc.Core/src/ModelBinding/RouteValueProviderFactory.cs)複製程式碼
@@ -496,7 +496,7 @@ HTTP 要求包含上傳的檔案。  也支援多個檔案的 `IEnumerable<IForm
 
 ## <a name="input-formatters"></a>輸入格式器
 
-要求主體中的資料可以是 JSON、XML 或其他格式。 模型繫結會使用設定處理特定內容類型的「輸入格式器」，來剖析此資料。 根據預設，ASP.NET Core 包含用來處理 JSON 資料的 JSON 型輸入格式器。 您可以新增其他內容類型的格式器。
+要求主體中的資料可以是 JSON、XML 或其他格式。 模型繫結會使用設定處理特定內容類型的「輸入格式器」，來剖析此資料。 根據預設，ASP.NET Core 包含以 JSON 為基礎的輸入格式器，用來處理 JSON 資料。 您可以新增其他內容類型的格式器。
 
 ASP.NET Core 選取以 [Consumes](xref:Microsoft.AspNetCore.Mvc.ConsumesAttribute) 屬性為基礎的輸入格式器。 若無任何屬性，則它會使用 [Content-Type 標頭](https://www.w3.org/Protocols/rfc1341/4_Content-Type.html)。
 
@@ -948,14 +948,14 @@ public IActionResult OnPost([Bind("LastName,FirstMidName,HireDate")] Instructor 
 
 ## <a name="globalization-behavior-of-model-binding-route-data-and-query-strings"></a>模型系結路由資料和查詢字串的全球化行為
 
-ASP.NET 核心路由值提供者和查詢字串值提供者：
+ASP.NET Core 路由值提供者和查詢字串值提供者：
 
 * 將值視為不變的文化特性。
 * 預期 Url 的文化特性不變。
 
 相反地，來自表單資料的值會進行區分文化特性的轉換。 這是設計的，因此可以跨地區設定共用 Url。
 
-讓 ASP.NET 核心路由值提供者和查詢字串值提供者進行區分文化特性的轉換：
+若要讓 ASP.NET Core 路由值提供者和查詢字串值提供者進行區分文化特性的轉換：
 
 * 繼承自 <xref:Microsoft.AspNetCore.Mvc.ModelBinding.IValueProviderFactory>
 * 從[QueryStringValueProviderFactory](https://github.com/dotnet/AspNetCore/blob/main/src/Mvc/Mvc.Core/src/ModelBinding/QueryStringValueProviderFactory.cs)或[RouteValueValueProviderFactory](https://github.com/dotnet/AspNetCore/blob/main/src/Mvc/Mvc.Core/src/ModelBinding/RouteValueProviderFactory.cs)複製程式碼
@@ -983,7 +983,7 @@ HTTP 要求包含上傳的檔案。  也支援多個檔案的 `IEnumerable<IForm
 
 ## <a name="input-formatters"></a>輸入格式器
 
-要求主體中的資料可以是 JSON、XML 或其他格式。 模型繫結會使用設定處理特定內容類型的「輸入格式器」，來剖析此資料。 根據預設，ASP.NET Core 包含用來處理 JSON 資料的 JSON 型輸入格式器。 您可以新增其他內容類型的格式器。
+要求主體中的資料可以是 JSON、XML 或其他格式。 模型繫結會使用設定處理特定內容類型的「輸入格式器」，來剖析此資料。 根據預設，ASP.NET Core 包含以 JSON 為基礎的輸入格式器，用來處理 JSON 資料。 您可以新增其他內容類型的格式器。
 
 ASP.NET Core 選取以 [Consumes](xref:Microsoft.AspNetCore.Mvc.ConsumesAttribute) 屬性為基礎的輸入格式器。 若無任何屬性，則它會使用 [Content-Type 標頭](https://www.w3.org/Protocols/rfc1341/4_Content-Type.html)。
 

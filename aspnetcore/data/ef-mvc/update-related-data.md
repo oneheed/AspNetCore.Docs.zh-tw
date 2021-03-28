@@ -19,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: data/ef-mvc/update-related-data
-ms.openlocfilehash: dadfceca2431ace558700ae06417f01c99751419
-ms.sourcegitcommit: 54fe1ae5e7d068e27376d562183ef9ddc7afc432
+ms.openlocfilehash: c2fcc3730fa8bb117c5547b6168afa27ee039d52
+ms.sourcegitcommit: 7b6781051d341a1daaf46c6a4368fa8a5701db81
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 03/10/2021
-ms.locfileid: "102588278"
+ms.lasthandoff: 03/28/2021
+ms.locfileid: "105638740"
 ---
 # <a name="tutorial-update-related-data---aspnet-mvc-with-ef-core"></a>教學課程：使用 EF Core 更新相關資料-ASP.NET MVC
 
@@ -51,7 +51,7 @@ ms.locfileid: "102588278"
 
 ## <a name="customize-courses-pages"></a>自訂 Courses 頁面
 
-當新的課程實體建立時，其必須要與現有的部門具有關聯性。 若要達成此目的，Scaffold 程式碼包含了控制器方法和 [建立] 和 [編輯] 檢視，當中包含了一個可選取部門的下拉式清單。 下拉式清單會設定 `Course.DepartmentID` 外部索引鍵屬性，以讓 Entity Framework 使用適當的 Department 實體載入 `Department` 導覽屬性。 您將使用 Scaffold 程式碼，但會稍微對其進行一些變更以新增錯誤處理及排序下拉式清單。
+建立新的 `Course` 實體時，它必須與現有的部門具有關聯性。 若要達成此目的，Scaffold 程式碼包含了控制器方法和 [建立] 和 [編輯] 檢視，當中包含了一個可選取部門的下拉式清單。 下拉式清單 `Course.DepartmentID` 會設定外鍵屬性，而這就是 `Department` 使用適當實體載入導覽屬性的所有 Entity Framework 需求 `Department` 。 您將使用 Scaffold 程式碼，但會稍微對其進行一些變更以新增錯誤處理及排序下拉式清單。
 
 在 *CoursesController.cs* 中，刪除四個 Create 及 Edit 方法，並以下列程式碼取代：
 
@@ -123,13 +123,13 @@ HttpGet `Edit` 方法會根據已指派給正在編輯之課程的部門識別�
 
 ## <a name="add-instructors-edit-page"></a>新增 Instructors [編輯] 頁面
 
-當您編輯講師記錄時，您可能會想要更新講師的辦公室指派。 Instructor 實體與 OfficeAssignment 實體具有一對零或一關聯性，表示您的程式碼必須處理下列狀況：
+當您編輯講師記錄時，您可能會想要更新講師的辦公室指派。 `Instructor`實體與實體具有一對零或一關聯性 `OfficeAssignment` ，這表示您的程式碼必須處理下列情況：
 
-* 若使用者清除了原先擁有值的辦公室指派，刪除 OfficeAssignment 實體。
+* 如果使用者清除辦公室指派，且原先具有值，請刪除 `OfficeAssignment` 實體。
 
-* 若使用者輸入了辦公室指派的值，而該指派原先是空白的，請建立新的 OfficeAssignment 實體。
+* 如果使用者輸入辦公室指派值，而且最初是空的，請建立新的 `OfficeAssignment` 實體。
 
-* 若使用者變更辦公室指派的值，請變更現有 OfficeAssignment 實體中的值。
+* 如果使用者變更了辦公室指派的值，請變更現有實體中的值 `OfficeAssignment` 。
 
 ### <a name="update-the-instructors-controller"></a>更新 Instructor 控制器
 
@@ -145,9 +145,9 @@ HttpGet `Edit` 方法會根據已指派給正在編輯之課程的部門識別�
 
 * 將方法名稱變更為 `EditPost`，因為簽章目前與 HttpGet `Edit` 方法相同 (`ActionName` 屬性指出 `/Edit/` URL 仍在使用中)。
 
-* 針對 `OfficeAssignment` 導覽屬性使用積極式載入從資料庫中取得目前的 Instructor 實體。 這與您在 HttpGet `Edit` 方法中所做的事情一樣。
+* 針對 `OfficeAssignment` 導覽屬性使用積極式載入從資料庫中取得目前的 `Instructor` 實體。 這與您在 HttpGet `Edit` 方法中所做的事情一樣。
 
-* 使用從模型繫結器取得的值更新擷取的 Instructor 實體。 多載可 `TryUpdateModel` 讓您宣告要包含的屬性。 這可防止大量指派，如同在[第二個教學課程](crud.md)中所解釋的。
+* 使用從模型繫結器取得的值更新擷取的 `Instructor` 實體。 多載可 `TryUpdateModel` 讓您宣告要包含的屬性。 這可防止大量指派，如同在[第二個教學課程](crud.md)中所解釋的。
 
     <!-- Snippets don't play well with <ul> [!code-csharp[](intro/samples/cu/Controllers/InstructorsController.cs?range=241-244)] -->
 
@@ -158,7 +158,7 @@ HttpGet `Edit` 方法會根據已指派給正在編輯之課程的部門識別�
         i => i.FirstMidName, i => i.LastName, i => i.HireDate, i => i.OfficeAssignment))
     ```
 
-* 若辦公室位置為空白，將 Instructor.OfficeAssignment 屬性設為 Null，以刪除在 OfficeAssignment 資料表中的相關資料列。
+* 如果辦公室位置是空白的，則 `Instructor.OfficeAssignment` 會將屬性設定為 null，如此就會刪除資料表中的相關資料列 `OfficeAssignment` 。
 
     <!-- Snippets don't play well with <ul>  "intro/samples/cu/Controllers/InstructorsController.cs"} -->
 
@@ -187,7 +187,7 @@ HttpGet `Edit` 方法會根據已指派給正在編輯之課程的部門識別�
 
 ![Instructor [編輯] 頁面與課程](update-related-data/_static/instructor-edit-courses.png)
 
-Course 與 Instructor 實體的關係為多對多。 若要新增和移除關聯性，您必須在 CourseAssignments 聯結實體集中新增和移除實體。
+和實體之間的關聯性 `Course` `Instructor` 是多對多。 若要加入和移除關聯性，您可以在 `CourseAssignments` 聯結實體集中加入和移除實體。
 
 可讓您變更講師指派之課程的 UI 為一組核取方塊。 資料庫中每個課程的核取方塊都會顯示，而該名講師目前受指派的課程會已選取狀態顯示。 使用者可選取或清除核取方塊來變更課程指派。 若課程數量要大上許多，您可能會想要使用不同的方法來在檢視中呈現資料，但您操縱聯結實體以建立或刪除關聯性的方法是相同的。
 
@@ -205,7 +205,7 @@ Course 與 Instructor 實體的關係為多對多。 若要新增和移除關聯
 
 程式碼會為 `Courses` 導覽屬性新增積極式載入，然後使用 `AssignedCourseData` 檢視模型類別來呼叫新的 `PopulateAssignedCourseData` 方法以提供資訊給核取方塊陣列。
 
-`PopulateAssignedCourseData` 方法中的程式碼會讀取所有的 Course 實體以使用檢視模型類別載入課程清單。 針對每個課程，程式碼會檢查課程是否存在於講師的 `Courses` 導覽屬性中。 為了在檢查課程是否已指派給講師的過程中更有效率，指派給講師的課程會放入一個 `HashSet` 集合中。 `Assigned` 屬性會針對已指派給講師的課程設定為 true。 檢視會使用這個屬性，來判斷哪一個核取方塊必須顯示為已選取。 最後，清單會傳遞至位於 `ViewData` 的檢視中。
+方法中的程式碼會 `PopulateAssignedCourseData` 讀取所有 `Course` 的實體，以便使用 view 模型類別來載入課程清單。 針對每個課程，程式碼會檢查課程是否存在於講師的 `Courses` 導覽屬性中。 為了在檢查課程是否已指派給講師的過程中更有效率，指派給講師的課程會放入一個 `HashSet` 集合中。 `Assigned` 屬性會針對已指派給講師的課程設定為 true。 檢視會使用這個屬性，來判斷哪一個核取方塊必須顯示為已選取。 最後，清單會傳遞至位於 `ViewData` 的檢視中。
 
 接下來，新增當使用者按一下 [儲存] 時要執行的程式碼。 使用下列程式碼取代 `EditPost` 方法，然後新增一個方法，該方法會更新 Instructor 實體的 `Courses` 導覽屬性。
 
@@ -282,7 +282,7 @@ HttpPost `Create` 方法會在檢查驗證錯誤並將新的講師新增到資�
 instructor.CourseAssignments = new List<CourseAssignment>();
 ```
 
-作為在控制器程式碼中完成這項操作的替代方案，您可以在 Instructor 模型中藉由將屬性 getter 變更為在不存在時自動建立集合來完成，如以下範例所示：
+除了在控制器程式碼中執行這項作業，您也可以藉 `Instructor` 由將屬性 getter 變更為自動建立集合（如果不存在），在模型中執行此動作，如下列範例所示：
 
 ```csharp
 private ICollection<CourseAssignment> _courseAssignments;

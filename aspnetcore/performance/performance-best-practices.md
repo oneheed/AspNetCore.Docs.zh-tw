@@ -18,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: performance/performance-best-practices
-ms.openlocfilehash: a3fc398569fafefc0b4634e80433a5d4e0e1b4ff
-ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
+ms.openlocfilehash: 09d3c555570a9e0ebb78275e73d64e2553fd04cf
+ms.sourcegitcommit: 7b6781051d341a1daaf46c6a4368fa8a5701db81
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 10/30/2020
-ms.locfileid: "93060998"
+ms.lasthandoff: 03/28/2021
+ms.locfileid: "105638792"
 ---
 # <a name="aspnet-core-performance-best-practices"></a>ASP.NET Core 效能最佳做法
 
@@ -45,13 +45,13 @@ ASP.NET Core 應用程式應設計為同時處理許多要求。 非同步 Api �
 
 ASP.NET Core 應用程式中常見的效能問題是封鎖可能為非同步呼叫。 許多同步封鎖呼叫會導致 [執行緒集](/archive/blogs/vancem/diagnosing-net-core-threadpool-starvation-with-perfview-why-my-service-is-not-saturating-all-cores-or-seems-to-stall) 區耗盡和降級的回應時間。
 
-**請勿** ：
+**請勿**：
 
 * 藉由呼叫 [task. Wait](/dotnet/api/system.threading.tasks.task.wait) 或 task 來封鎖非同步執行。 [結果](/dotnet/api/system.threading.tasks.task-1.result)。
 * 取得通用程式碼路徑中的鎖定。 當架構為平行執行程式碼時，ASP.NET Core 應用程式的效能最高。
 * 呼叫工作 [。執行](/dotnet/api/system.threading.tasks.task.run) 並立即等待它。 ASP.NET Core 已在一般執行緒集區執行緒上執行應用程式程式碼，因此呼叫工作。執行只會導致額外的不必要執行緒集區排程。 即使已排程的程式碼會封鎖執行緒，但工作卻無法防止這種情況。
 
-**執行** ：
+**執行**：
 
 * 使 [熱程式碼路徑](#understand-hot-code-paths) 成為非同步。
 * 如果有可用的非同步 API，則以非同步方式呼叫資料存取、i/o 和長時間執行的作業 Api。 請勿 **使用** 工作 [。執行](/dotnet/api/system.threading.tasks.task.run) 以將同步 API 設為非同步。
@@ -67,7 +67,7 @@ ASP.NET Core 應用程式中常見的效能問題是封鎖可能為非同步呼�
 
 ## <a name="minimize-large-object-allocations"></a>最小化大型物件分配
 
-[.Net Core 垃圾收集](/dotnet/standard/garbage-collection/)行程會在 ASP.NET Core 應用程式中自動管理記憶體的配置和釋放。 自動垃圾收集通常表示開發人員不需要擔心釋放記憶體的方式或時間。 不過，清除未參考的物件會花費 CPU 時間，因此開發人員應該盡可能減少在經常性程式 [代碼路徑](#understand-hot-code-paths)中設定物件。 垃圾收集在 ( # A0 85 K 位元組) 的大型物件上特別耗費資源。 大型物件儲存在 [大型物件堆積](/dotnet/standard/garbage-collection/large-object-heap) 上，需要完整的 (層代 2) 垃圾收集來進行清除。 與層代0和層代1回收不同的是，層代2回收需要暫時暫停應用程式執行。 頻繁配置和取消配置大型物件可能會造成不一致的效能。
+[.Net Core 垃圾收集](/dotnet/standard/garbage-collection/)行程會在 ASP.NET Core 應用程式中自動管理記憶體的配置和釋放。 自動垃圾收集通常表示開發人員不需要擔心釋放記憶體的方式或時間。 不過，清除未參考的物件會花費 CPU 時間，因此開發人員應該盡可能減少在經常性程式 [代碼路徑](#understand-hot-code-paths)中設定物件。 垃圾收集在 (> 85 K 位元組) 的大型物件上特別耗費資源。 大型物件儲存在 [大型物件堆積](/dotnet/standard/garbage-collection/large-object-heap) 上，需要完整的 (層代 2) 垃圾收集來進行清除。 與層代0和層代1回收不同的是，層代2回收需要暫時暫停應用程式執行。 頻繁配置和取消配置大型物件可能會造成不一致的效能。
 
 建議：
 
@@ -91,9 +91,9 @@ ASP.NET Core 應用程式中常見的效能問題是封鎖可能為非同步呼�
 
 * **請** 以非同步方式呼叫所有資料存取 api。
 * **請勿** 取出超過所需的資料。 撰寫查詢，只傳回目前 HTTP 要求所需的資料。
-* 如果可接受稍微過期的資料， **請考慮快** 取從資料庫或遠端服務取出的經常存取資料。 視案例而定，使用 [MemoryCache](xref:performance/caching/memory) 或 [microsoft.web.distributedcache](xref:performance/caching/distributed)。 如需詳細資訊，請參閱<xref:performance/caching/response>。
+* 如果可接受稍微過期的資料，**請考慮快** 取從資料庫或遠端服務取出的經常存取資料。 視案例而定，使用 [MemoryCache](xref:performance/caching/memory) 或 [microsoft.web.distributedcache](xref:performance/caching/distributed)。 如需詳細資訊，請參閱<xref:performance/caching/response>。
 * **儘量減少** 網路往返。 目標是在單一呼叫中取出所需的資料，而不是使用數個呼叫。
-* 針對唯讀用途存取資料時， **請** 使用 Entity Framework Core 中的 [無追蹤查詢](/ef/core/querying/tracking#no-tracking-queries)。 EF Core 可以更有效率地傳回無追蹤查詢的結果。
+* 針對唯讀用途存取資料時，**請** 使用 Entity Framework Core 中的 [無追蹤查詢](/ef/core/querying/tracking#no-tracking-queries)。 EF Core 可以更有效率地傳回無追蹤查詢的結果。
 * 使用、或語句來 **篩選和** 匯總 LINQ 查詢 (`.Where` `.Select` `.Sum` ，例如) ，以便讓資料庫進行篩選。
 * 請 **注意，** EF Core 會在用戶端上解析某些查詢運算子，而這可能會導致執行效率不佳的查詢。 如需詳細資訊，請參閱 [用戶端評估效能問題](/ef/core/querying/client-eval#client-evaluation-performance-issues)。
 * **請勿** 在集合上使用投影查詢，這可能會導致執行「N + 1」 SQL 查詢。 如需詳細資訊，請參閱相互 [關聯子查詢的優化](/ef/core/what-is-new/ef-core-2.1#optimization-of-correlated-subqueries)。
@@ -118,7 +118,7 @@ ASP.NET Core 應用程式中常見的效能問題是封鎖可能為非同步呼�
 
 ## <a name="keep-common-code-paths-fast"></a>快速保持通用程式碼路徑
 
-您希望所有的程式碼都能快速進行。 經常呼叫的程式碼路徑是最重要的，可進行優化。 它們包括：
+您希望所有的程式碼都能快速進行。 經常呼叫的程式碼路徑是最重要的，可進行優化。 這些包括：
 
 * 應用程式要求處理管線中的中介軟體元件，特別是在管線早期執行的中介軟體。 這些元件對效能會有很大的影響。
 * 針對每個要求執行的程式碼，或針對每個要求多次執行的程式碼。 例如，自訂記錄、授權處理常式或暫時性服務的初始化。
@@ -147,7 +147,7 @@ ASP.NET Core 應用程式中常見的效能問題是封鎖可能為非同步呼�
 
 建議：
 
-* **請** 使用 ASP.NET Core 的 [內建支援](xref:client-side/bundling-and-minification) 來組合和縮小用戶端資產。
+* **請使用** 包裝 [和縮制指導方針](xref:client-side/bundling-and-minification)，其中提及相容的工具，並顯示如何使用 ASP.NET Core 的 `environment` 標記來處理 `Development` 和 `Production` 環境。
 * **請考慮其他** 協力廠商工具（例如 [Webpack](https://webpack.js.org/)），以進行複雜的用戶端資產管理。
 
 ## <a name="compress-responses"></a>壓縮回應
@@ -166,7 +166,7 @@ ASP.NET Core 的每個新版本都包含效能改進。 .NET Core 和 ASP.NET Co
 
 * **請勿** 使用擲回或攔截例外狀況作為一般程式流程的方法，尤其是在經常性程式 [代碼路徑](#understand-hot-code-paths)中。
 * **請** 在應用程式中包含邏輯，以偵測並處理會造成例外狀況的條件。
-* 針對不尋常或非預期的狀況， **請** 擲回或攔截例外狀況。
+* 針對不尋常或非預期的狀況，**請** 擲回或攔截例外狀況。
 
 應用程式診斷工具（例如 Application Insights）有助於識別應用程式中可能會影響效能的常見例外狀況。
 
@@ -252,7 +252,7 @@ ASP.NET Core 3.0 預設會使用 <xref:System.Text.Json> JSON 序列化。 <xref
 
 ## <a name="do-not-store-ihttpcontextaccessorhttpcontext-in-a-field"></a>請勿將 >iHTTPcoNtextaccessor 儲存在欄位中
 
-[IHttpContextAccessor.HttpContext](xref:Microsoft.AspNetCore.Http.IHttpContextAccessor.HttpContext) `HttpContext` 從要求執行緒存取時，>iHTTPcoNtextaccessor 會傳回使用中要求的。 `IHttpContextAccessor.HttpContext`**不** 應儲存在欄位或變數中。
+[](xref:Microsoft.AspNetCore.Http.IHttpContextAccessor.HttpContext) `HttpContext` 從要求執行緒存取時，>iHTTPcoNtextaccessor 會傳回使用中要求的。 `IHttpContextAccessor.HttpContext`**不** 應儲存在欄位或變數中。
 
 請勿這樣 **做：** 下列範例會將儲存 `HttpContext` 在欄位中，然後稍後再嘗試使用它。
 
@@ -361,7 +361,7 @@ ASP.NET Core 不會緩衝 HTTP 回應主體。 第一次寫入回應時：
 
 [!code-csharp[](performance-best-practices/samples/3.0/Startup22.cs?name=snippet3)]
 
-## <a name="do-not-call-next-if-you-have-already-started-writing-to-the-response-body"></a>如果您已開始寫入至回應主體，請不要呼叫下一個 ( # A1
+## <a name="do-not-call-next-if-you-have-already-started-writing-to-the-response-body"></a>如果您已開始寫入至回應主體，請不要呼叫下一個 () 
 
 只有當元件可以處理和操作回應時，才會被呼叫。
 

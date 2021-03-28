@@ -19,18 +19,18 @@ no-loc:
 - Razor
 - SignalR
 uid: data/ef-mvc/concurrency
-ms.openlocfilehash: cc93069899953d04d1df4e79a282c349a163b06e
-ms.sourcegitcommit: 54fe1ae5e7d068e27376d562183ef9ddc7afc432
+ms.openlocfilehash: 013527216adb799a32370a85e048fbb06792338d
+ms.sourcegitcommit: 7b6781051d341a1daaf46c6a4368fa8a5701db81
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 03/10/2021
-ms.locfileid: "102586770"
+ms.lasthandoff: 03/28/2021
+ms.locfileid: "105638805"
 ---
 # <a name="tutorial-handle-concurrency---aspnet-mvc-with-ef-core"></a>教學課程：使用 EF Core 處理並行 ASP.NET MVC
 
 在先前的教學課程中，您學會了如何更新資料。 本教學課程會顯示如何在多位使用者同時更新相同實體時處理衝突。
 
-您會建立操作 Department 實體的網頁，並處理並行錯誤。 下列圖例顯示了 [編輯] 和 [刪除] 頁面，包括一些發生並行衝突時會顯示的訊息。
+您將建立可使用 `Department` 實體並處理並行錯誤的網頁。 下列圖例顯示了 [編輯] 和 [刪除] 頁面，包括一些發生並行衝突時會顯示的訊息。
 
 ![Department [編輯] 頁面](concurrency/_static/edit-error.png)
 
@@ -148,13 +148,13 @@ Scaffold Departments 控制器和檢視，如同您先前為 Students、Courses 
 
 ## <a name="update-index-view"></a>更新 [索引] 檢視
 
-Scaffolding 引擎會在 [索引] 檢視中建立 RowVersion 資料行，但該欄位不應該顯示出來。
+此樣板引擎在索引視圖中建立了一個資料 `RowVersion` 行，但該欄位不應該顯示。
 
 請以下列程式碼取代 *Views/Departments/Index.cshtml* 中的程式碼。
 
 [!code-cshtml[](intro/samples/cu/Views/Departments/Index.cshtml?highlight=4,7,44)]
 
-這會將標題變更為"Departments"，刪除 RowVersion 資料行，並為系統管理員顯示完整的名稱而非只有名字。
+這會將標題變更為「部門」、刪除資料 `RowVersion` 行，並顯示系統管理員的完整名稱，而非名字。
 
 ## <a name="update-edit-methods"></a>更新 [編輯] 方法
 
@@ -166,7 +166,7 @@ Scaffolding 引擎會在 [索引] 檢視中建立 RowVersion 資料行，但該�
 
 [!code-csharp[](intro/samples/cu/Controllers/DepartmentsController.cs?name=snippet_EditPost)]
 
-程式碼開始時便會嘗試讀取要更新的部門。 若 `FirstOrDefaultAsync` 方法傳回 Null，則該部門便已遭其他使用者刪除。 在此情況下，程式碼會使用 POST 表單的值建立部門實體，使 [編輯] 頁面仍然可以重新顯示，並加上錯誤訊息。 或者，若您選擇只顯示錯誤訊息，而不重新顯示部門欄位，則您也可以不需要重新建立部門實體。
+程式碼開始時便會嘗試讀取要更新的部門。 若 `FirstOrDefaultAsync` 方法傳回 Null，則該部門便已遭其他使用者刪除。 在這種情況下，程式碼會使用張貼的表單值來建立 `Department` 實體，以便可以重新顯示 [編輯] 頁面，並顯示錯誤訊息。 或者， `Department` 如果您只顯示錯誤訊息，而不重新顯示部門欄位，就不需要重新建立實體。
 
 檢視會在隱藏欄位中儲存原始的 `RowVersion` 值，並且此方法會在 `rowVersion` 參數中接收該值。 在您呼叫 `SaveChanges` 之前，您必須將該原始 `RowVersion` 屬性值放入實體的 `OriginalValues` 集合中。
 
@@ -234,7 +234,7 @@ _context.Entry(departmentToUpdate).Property("RowVersion").OriginalValue = rowVer
 
 [!code-csharp[](intro/samples/cu/Controllers/DepartmentsController.cs?name=snippet_DeleteGet&highlight=1,10,14-17,21-29)]
 
-方法會接受一個選用的參數，該參數會指示頁面是否已在發生並行錯誤之後重新顯示。 若此旗標為 true，且指定的部門已不存在，表示該部門已遭其他使用者刪除。 在此情況下，程式碼會重新導向至索引頁面。  若此旗標為 true，但指定的部門仍然存在，表示該部門已遭其他使用者變更。 在此情況下，程式碼會使用 `ViewData` 傳送一個錯誤訊息到檢視。
+方法會接受一個選用的參數，該參數會指示頁面是否已在發生並行錯誤之後重新顯示。 若此旗標為 true，且指定的部門已不存在，表示該部門已遭其他使用者刪除。 在此情況下，程式碼會重新導向至索引頁面。  如果此旗標為 true，且部門存在，則由另一位使用者變更。 在此情況下，程式碼會使用 `ViewData` 傳送一個錯誤訊息到檢視。
 
 以下列程式碼取代 HttpPost `Delete` 方法 (名為 `DeleteConfirmed`) 中的程式碼：
 
@@ -246,7 +246,7 @@ _context.Entry(departmentToUpdate).Property("RowVersion").OriginalValue = rowVer
 public async Task<IActionResult> DeleteConfirmed(int id)
 ```
 
-您已將此參數變更為由模型繫結器建立的 Department 實體執行個體。 這可讓 EF 除了記錄金鑰外，也能存取 RowVersion 屬性值。
+您已將此參數變更為模型系結器所 `Department` 建立的實體實例。 這可讓 EF 存取 RowVers'ion 屬性值，以及記錄索引鍵。
 
 ```csharp
 public async Task<IActionResult> Delete(Department department)

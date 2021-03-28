@@ -18,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: data/ef-mvc/read-related-data
-ms.openlocfilehash: 9ea3bd7aaa075ae4601af51c7cc90f28a884a096
-ms.sourcegitcommit: 54fe1ae5e7d068e27376d562183ef9ddc7afc432
+ms.openlocfilehash: bf6fe42ae87637d0e8b9ce17d5d0c05d28b24501
+ms.sourcegitcommit: 7b6781051d341a1daaf46c6a4368fa8a5701db81
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 03/10/2021
-ms.locfileid: "102587888"
+ms.lasthandoff: 03/28/2021
+ms.locfileid: "105638753"
 ---
 # <a name="tutorial-read-related-data---aspnet-mvc-with-ef-core"></a>教學課程：使用 EF Core 讀取相關資料-ASP.NET MVC
 
@@ -51,7 +51,7 @@ ms.locfileid: "102587888"
 
 Entity Framework 等物件關聯式對應 (ORM) 有幾種方式可以將相關資料載入到實體的導覽屬性：
 
-* 積極式載入。 讀取實體時，將會同時擷取其相關資料。 這通常會導致單一聯結查詢，其可擷取所有需要的資料。 您可以使用 `Include` 和 `ThenInclude` 方法，在 Entity Framework Core 中指定積極式載入。
+* [積極式載入：](/ef/core/querying/related-data) 讀取實體時，會一併抓取相關的資料。 這通常會導致單一聯結查詢，其可擷取所有需要的資料。 您可以使用 `Include` 和 `ThenInclude` 方法，在 Entity Framework Core 中指定積極式載入。
 
   ![積極式載入範例](read-related-data/_static/eager-loading.png)
 
@@ -59,11 +59,11 @@ Entity Framework 等物件關聯式對應 (ORM) 有幾種方式可以將相關�
 
   ![個別查詢範例](read-related-data/_static/separate-queries.png)
 
-* 明確式載入。 第一次讀取實體時，不會擷取相關資料。 您可以撰寫程式碼，以擷取需要的相關資料。 如同使用個別查詢的積極式載入，明確式載入會導致多個查詢傳送至資料庫。 不同之處在於，使用明確式載入時，程式碼會指定要載入的導覽屬性。 在 Entity Framework Core 1.1 中，您可以使用 `Load` 方法以執行明確式載入。 例如：
+* [明確載入：](/ef/core/querying/related-data) 第一次讀取實體時，不會抓取相關的資料。 您可以撰寫程式碼，以擷取需要的相關資料。 如同使用個別查詢的積極式載入，明確式載入會導致多個查詢傳送至資料庫。 不同之處在於，使用明確式載入時，程式碼會指定要載入的導覽屬性。 在 Entity Framework Core 1.1 中，您可以使用 `Load` 方法以執行明確式載入。 例如：
 
   ![明確式載入範例](read-related-data/_static/explicit-loading.png)
 
-* 消極式載入。 第一次讀取實體時，不會擷取相關資料。 不過，第一次嘗試存取導覽屬性時，將會自動擷取該導覽屬性所需的資料。 每當您第一次嘗試從導覽屬性取得資料時，就會傳送查詢到資料庫。 Entity Framework Core 1.0 不支援消極式載入。
+* 消極式[載入：](/ef/core/querying/related-data)第一次讀取實體時，不會抓取相關的資料。 不過，第一次嘗試存取導覽屬性時，將會自動擷取該導覽屬性所需的資料。 每當您第一次嘗試從導覽屬性取得資料時，就會傳送查詢到資料庫。 Entity Framework Core 1.0 不支援消極式載入。
 
 ### <a name="performance-considerations"></a>效能考量
 
@@ -73,9 +73,9 @@ Entity Framework 等物件關聯式對應 (ORM) 有幾種方式可以將相關�
 
 ## <a name="create-a-courses-page"></a>建立 Courses 頁面
 
-Course 實體包括一個導覽屬性，其中包含已指派課程之部門的 Department 實體。 若要在課程清單中顯示所指派部門的名稱，您需要從位於 `Course.Department` 導覽屬性的 Department 實體中取得 Name 屬性。
+`Course`實體包含導覽屬性，其中包含 `Department` 指派給課程的部門實體。 若要在課程清單中顯示所指派部門的名稱，您需要 `Name` 從 `Department` 導覽屬性中的實體取得屬性 `Course.Department` 。
 
-針對 Course 實體類型建立名為 CoursesController 的控制器，並對 **使用 Entity Framework 執行檢視的 MVC 控制器** 框架使用先前針對學生控制器使用的相同選項，如下圖所示：
+使用您稍早針對進行的 Entity Framework scaffolder （如下圖所示），為實體型別建立一個名為的控制器 `CoursesController` `Course` 、使用 **具有 Views 的 MVC 控制器** 的相同選項， `StudentsController` 如下圖所示：
 
 ![新增課程控制器](read-related-data/_static/add-courses-controller.png)
 
@@ -91,11 +91,11 @@ Course 實體包括一個導覽屬性，其中包含已指派課程之部門的 
 
 您已對包含 Scaffold 的程式碼進行下列變更：
 
-* 已將標題從「索引」) 變更為「課程」。
+* 已將標題從 **索引** 變更為 **課程**。
 
 * 新增顯示 `CourseID` 屬性值的 [編號] 資料行。 主索引鍵預設不會進行 Scaffold，因為它們對終端使用者通常沒有任何意義。 不過，在此情況下主索引鍵有意義，因此您想要顯示它。
 
-* 變更 [部門] 資料行來顯示部門名稱。 此程式碼會顯示已載入到 `Department` 導覽屬性之 Department 實體的 `Name` 屬性：
+* 變更 [部門] 資料行來顯示部門名稱。 此程式碼會顯示已載入到 `Department` 導覽屬性之 `Department` 實體的 `Name` 屬性：
 
   ```html
   @Html.DisplayFor(modelItem => item.Department.Name)
@@ -107,17 +107,17 @@ Course 實體包括一個導覽屬性，其中包含已指派課程之部門的 
 
 ## <a name="create-an-instructors-page"></a>建立 Instructors 頁面
 
-在本節中，您將建立 Instructor 實體的控制器和檢視，以顯示 Instructors 頁面：
+在本節中，您將建立實體的控制器和查看， `Instructor` 以顯示講師頁面：
 
 ![Instructors [索引] 頁面](read-related-data/_static/instructors-index.png)
 
 此頁面將以下列方式讀取和顯示相關資料：
 
-* 講師清單會顯示來自 OfficeAssignment 實體的相關資料。 Instructor 與 OfficeAssignment 實體具有一對零或一關聯性。 您將針對 OfficeAssignment 實體使用積極式載入。 如上所述，當您需要主要資料表中所有擷取資料列的相關資料時，積極式載入通常更有效率。 在此情況下，您可能想要顯示所有已呈現講師的辦公室指派。
+* 講師清單會顯示實體中的相關資料 `OfficeAssignment` 。 `Instructor` 與 `OfficeAssignment` 實體具有一對零或一關聯性。 您將針對實體使用積極式載入 `OfficeAssignment` 。 如上所述，當您需要主要資料表中所有擷取資料列的相關資料時，積極式載入通常更有效率。 在此情況下，您可能想要顯示所有已呈現講師的辦公室指派。
 
-* 當使用者選取講師時，將會顯示相關的 Course 實體。 Instructor 與 Course 實體具有多對多關聯性。 您將針對 Course 實體和其相關的 Department 實體使用積極式載入。 在此情況下，個別查詢可能更有效率，因為您只需要所選取講師的課程。 不過，這個範例會示範如何在本身處於導覽屬性內的實體中，針對導覽屬性使用積極式載入。
+* 當使用者選取講師時，將會顯示相關的 `Course` 實體。 `Instructor` 與 `Course` 實體具有多對多關聯性。 您將針對 `Course` 實體及其相關實體使用積極式載入 `Department` 。 在此情況下，個別查詢可能更有效率，因為您只需要所選取講師的課程。 不過，這個範例會示範如何在本身處於導覽屬性內的實體中，針對導覽屬性使用積極式載入。
 
-* 當使用者選取課程時，將會顯示來自 Enrollments 實體集的相關資料。 Course 與 Enrollment 實體具有一對多關聯性。 您將針對 Enrollment 實體和其相關的 Student 實體使用個別查詢。
+* 當使用者選取課程時， `Enrollments` 會顯示來自實體集的相關資料。 `Course` 與 `Enrollment` 實體具有一對多關聯性。 您將針對 `Enrollment` 實體及其相關實體使用個別的查詢 `Student` 。
 
 ### <a name="create-a-view-model-for-the-instructor-index-view"></a>建立 Instructor [索引] 檢視的檢視模型
 
@@ -147,9 +147,11 @@ Instructors 頁面會顯示下列三個不同資料表的資料。 因此，您�
 
 [!code-csharp[](intro/samples/cu/Controllers/InstructorsController.cs?name=snippet_ThenInclude)]
 
-由於檢視一律需要 OfficeAssignment 實體，因此在相同查詢中擷取該實體更有效率。 在網頁上選取講師時需要 Course 實體，因此只有在選取課程時的頁面顯示頻率高於未選取時，單一查詢才優於多個查詢。
+由於視圖一律需要 `OfficeAssignment` 實體，因此在相同的查詢中提取該實體會更有效率。 在網頁上選取講師時需要 Course 實體，因此只有在選取課程時的頁面顯示頻率高於未選取時，單一查詢才優於多個查詢。
 
 此程式碼會重複 `CourseAssignments` 和 `Course`，因為您需要來自 `Course` 的兩個屬性。 `ThenInclude` 呼叫的第一個字串會取得 `CourseAssignment.Course`、`Course.Enrollments` 和 `Enrollment.Student`。
+
+您可以在這裡深入瞭解如何包含多個層級的相關資料 [。](/ef/core/querying/related-data/eager#including-multiple-levels)
 
 [!code-csharp[](intro/samples/cu/Controllers/InstructorsController.cs?name=snippet_ThenInclude&highlight=3-6)]
 
@@ -157,13 +159,13 @@ Instructors 頁面會顯示下列三個不同資料表的資料。 因此，您�
 
 [!code-csharp[](intro/samples/cu/Controllers/InstructorsController.cs?name=snippet_ThenInclude&highlight=7-9)]
 
-下列程式碼會在已選取講師時執行。 選取的講師會從檢視模型的講師清單中擷取。 檢視模型的 `Courses` 屬性則使用 Course 實體從該講師的 `CourseAssignments` 導覽屬性載入。
+下列程式碼會在已選取講師時執行。 選取的講師會從檢視模型的講師清單中擷取。 `Courses`然後，會使用 `Course` 來自該講師導覽屬性的實體載入視圖模型的屬性 `CourseAssignments` 。
 
 [!code-csharp[](intro/samples/cu/Controllers/InstructorsController.cs?range=56-62)]
 
-`Where` 方法會傳回集合，但在此情況下，傳遞至該方法的準則將導致只傳回單一 Instructor 實體。 `Single` 方法會將集合轉換單一 Instructor 實體，這可讓您存取該實體的 `CourseAssignments` 屬性。 `CourseAssignments` 屬性包含 `CourseAssignment` 實體，您只想要來自該實體的相關 `Course` 實體。
+`Where` 方法會傳回集合，但在此情況下，傳遞至該方法的準則將導致只傳回單一 Instructor 實體。 `Single`方法會將集合轉換成單一 `Instructor` 實體，讓您存取該實體的 `CourseAssignments` 屬性。 `CourseAssignments` 屬性包含 `CourseAssignment` 實體，您只想要來自該實體的相關 `Course` 實體。
 
-當您知道集合只會有一個項目時，就可以在集合上使用 `Single` 方法。 如果傳遞的集合是空的或有多個項目，Single 方法會擲回例外狀況。 替代方式是 `SingleOrDefault`，它會在集合是空的時傳回預設值 (在此情況下為 Null)。 不過，在此情況下仍然會造成例外狀況 (由於嘗試在 Null 參考上尋找 `Courses` 屬性)，而例外狀況訊息會不太清楚地指出問題的原因。 當您呼叫 `Single` 方法時，也可以傳入 Where 條件，而不是分別呼叫 `Where` 方法：
+當您知道集合只會有一個項目時，就可以在集合上使用 `Single` 方法。 `Single`如果傳遞給它的集合是空的，或如果有多個專案，則方法會擲回例外狀況。 替代方式是 `SingleOrDefault`，它會在集合是空的時傳回預設值 (在此情況下為 Null)。 不過，在此情況下仍然會造成例外狀況 (由於嘗試在 Null 參考上尋找 `Courses` 屬性)，而例外狀況訊息會不太清楚地指出問題的原因。 當您呼叫 `Single` 方法時，也可以傳入 Where 條件，而不是分別呼叫 `Where` 方法：
 
 ```csharp
 .Single(i => i.ID == id.Value)
@@ -236,9 +238,9 @@ Instructors 頁面會顯示下列三個不同資料表的資料。 因此，您�
 
 在您剛才新增的程式碼區塊之後，新增下列程式碼。 這會在選取課程時，顯示已註冊該課程的學生清單。
 
-[!code-cshtml[](intro/samples/cu/Views/Instructors/Index1.cshtml?range=103-125)]
+[!code-cshtml[](intro/samples/cu/Views/Instructors/Index1.cshtml?range=101-125)]
 
-此程式碼會讀取檢視模型的 Enrollments 屬性，以顯示已註冊課程的學生清單。
+此程式碼會讀取 `Enrollments` 視圖模型的屬性，以便顯示在課程中註冊的學生清單。
 
 再次重新整理頁面，然後選取講師。 接著選取課程，以查看已註冊學生和其年級的清單。
 
@@ -248,11 +250,11 @@ Instructors 頁面會顯示下列三個不同資料表的資料。 因此，您�
 
 當您在 *InstructorsController.cs* 中擷取講師清單時，已針對 `CourseAssignments` 導覽屬性指定積極式載入。
 
-假設您預期使用者很少想要查看所選取講師和課程中的註冊項目。 在此情況下，您可能想要只在要求時才載入註冊資料。 若要查看如何執行明確式載入的範例，請以下列程式碼取代 `Index` 方法，這會移除 Enrollments 的積極式載入，並明確地載入該屬性。 程式碼變更已醒目提示。
+假設您預期使用者很少想要查看所選取講師和課程中的註冊項目。 在此情況下，您可能想要只在要求時才載入註冊資料。 若要查看如何執行明確載入的範例，請以 `Index` 下列程式碼取代方法，此程式碼會移除的積極式載入， `Enrollments` 並明確地載入該屬性。 程式碼變更已醒目提示。
 
 [!code-csharp[](intro/samples/cu/Controllers/InstructorsController.cs?name=snippet_ExplicitLoading&highlight=23-29)]
 
-新的程式碼會從擷取 Instructor 實體的程式碼中，捨棄用於註冊資料的 *ThenInclude* 方法呼叫。 它也會捨棄 `AsNoTracking`。  如果選取了講師和課程，醒示提示的程式碼就會針對所選取的課程擷取 Enrollment 實體，並針對每個 Enrollment 擷取 Student 實體。
+新的程式碼 `ThenInclude` 會從抓取講師實體的程式碼中，卸載註冊資料的方法呼叫。 它也會捨棄 `AsNoTracking`。  如果選取講師和課程，反白顯示的程式碼就會抓取 `Enrollment` 所選課程的實體，以及 `Student` 每個專案的實體 `Enrollment` 。
 
 執行應用程式，並立即移至 Instructors [索引] 頁面；雖然您已變更資料的擷取方式，但您會發現頁面上顯示的內容沒有任何差異。
 

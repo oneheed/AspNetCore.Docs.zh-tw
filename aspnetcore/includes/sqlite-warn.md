@@ -11,20 +11,20 @@ no-loc:
 - Let's Encrypt
 - Razor
 - SignalR
-ms.openlocfilehash: cf20722e8c8669fb17af8db032d4064ca2be2f4c
-ms.sourcegitcommit: a49c47d5a573379effee5c6b6e36f5c302aa756b
+ms.openlocfilehash: 0cb1b72cf0e2d76b7f5752ce1314c70ff7789418
+ms.sourcegitcommit: fafcf015d64aa2388bacee16ba38799daf06a4f0
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 02/16/2021
-ms.locfileid: "100551425"
+ms.lasthandoff: 03/30/2021
+ms.locfileid: "105957494"
 ---
 > [!NOTE]
 > 
 > **SQLite 限制**
 >
-> 本教學課程盡可能使用 Entity Framework Core「移轉」功能。 移轉可更新資料庫結構描述，以符合資料模型中的變更。 不過，移轉只會執行資料庫引擎支援的變更種類，而 SQLite 的結構描述變更功能會受到限制。 例如，其支援新增資料行，但不支援移除資料行。 如果您建立移轉來移除資料行，`ef migrations add` 命令會成功；但 `ef database update` 命令會失敗。 
+> 本教學課程盡可能使用 Entity Framework Core「移轉」[](/ef/core/managing-schemas/migrations/?tabs=dotnet-core-cli)功能。 移轉可更新資料庫結構描述，以符合資料模型中的變更。 不過，移轉只會執行資料庫引擎支援的變更種類，而 SQLite 的結構描述變更功能會受到限制。 例如，其支援新增資料行，但不支援移除資料行。 如果您建立移轉來移除資料行，`ef migrations add` 命令會成功；但 `ef database update` 命令會失敗。 
 >
-> SQLite 限制的因應措施是手動撰寫移轉程式碼，以在資料表有所變更時執行資料表重建。 程式碼會進入 `Up` 和 `Down` 方法以進行移轉，且其中會涉及：
+> SQLite 限制的因應措施是手動撰寫移轉程式碼，以在資料表有所變更時執行資料表重建。 程式碼會進入 `Up` 和 `Down` 方法以進行遷移，並包括：
 >
 > * 建立新的資料表。
 > * 將資料從舊的資料表複製到新的資料表。

@@ -1,9 +1,9 @@
 ---
-title: 第2部分： Razor ASP.NET core 中有 EF Core 的頁面-CRUD
+title: 第2部分： Razor ASP.NET Core 中有 EF Core 的頁面-CRUD
 author: rick-anderson
-description: 第2部分的 Razor 頁面和 Entity Framework 教學課程系列。
+description: 頁面第2部分 Razor 和 Entity Framework 教學課程系列。
 ms.author: riande
-ms.date: 07/22/2019
+ms.date: 3/3/2021
 no-loc:
 - appsettings.json
 - ASP.NET Core Identity
@@ -17,16 +17,16 @@ no-loc:
 - Razor
 - SignalR
 uid: data/ef-rp/crud
-ms.openlocfilehash: c424f2a46fb62af6283ffa3a02c4134bbe35ffc9
-ms.sourcegitcommit: 3982ff9dabb5b12aeb0a61cde2686b5253364f5d
+ms.openlocfilehash: 4b9a7fcd6eb23af7f7c679ab0faa512634273e00
+ms.sourcegitcommit: fafcf015d64aa2388bacee16ba38799daf06a4f0
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 03/04/2021
-ms.locfileid: "102118924"
+ms.lasthandoff: 03/30/2021
+ms.locfileid: "105957456"
 ---
-# <a name="part-2-razor-pages-with-ef-core-in-aspnet-core---crud"></a>第2部分： Razor ASP.NET core 中有 EF Core 的頁面-CRUD
+# <a name="part-2-razor-pages-with-ef-core-in-aspnet-core---crud"></a>第2部分： Razor ASP.NET Core 中有 EF Core 的頁面-CRUD
 
-作者：[Tom Dykstra](https://github.com/tdykstra)、[Jon P Smith](https://twitter.com/thereformedprog)、[Rick Anderson](https://twitter.com/RickAndMSFT)
+由 [Tom Dykstra](https://github.com/tdykstra)、 [Jeremy Likness](https://twitter.com/jeremylikness)和 [Jon P Smith](https://twitter.com/thereformedprog)
 
 [!INCLUDE [about the series](~/includes/RP-EF/intro.md)]
 
@@ -36,15 +36,15 @@ ms.locfileid: "102118924"
 
 ## <a name="no-repository"></a>沒有任何存放庫
 
-某些開發人員會使用服務層或儲存機制模式，在 UI (Razor 頁面) 和資料存取層之間建立抽象層。 本教學課程不會這麼做。 為降低複雜性並將教學課程聚焦於 EF Core，EF Core 程式碼會直接新增至頁面模型類別中。 
+某些開發人員會使用服務層或儲存機制模式，在 UI (Razor 頁面) 和資料存取層之間建立抽象層。 本教學課程不會這麼做。 為降低複雜性並將教學課程聚焦於 EF Core，EF Core 程式碼會直接新增至頁面模型類別中。
 
 ## <a name="update-the-details-page"></a>更新 [詳細資料] 頁面
 
-Students 頁面的 Scaffold 程式碼不包含註冊資料。 在本節中，您會將註冊新增至 [詳細資料] 頁面。
+Students 頁面的 Scaffold 程式碼不包含註冊資料。 在本節中，會將註冊新增至 `Details` 頁面。
 
 ### <a name="read-enrollments"></a>讀取註冊
 
-若要在頁面上顯示學生的註冊資料，您必須讀取該資料。 *Pages/Students/Details.cshtml.cs* 中的 scaffold 程式碼只會讀取 Students 資料，而不包含 Enrollment 資料：
+若要在頁面上顯示學生的註冊資料，必須讀取註冊資料。 *Pages/student/Details* 中的 scaffold 程式碼 `Student` 會讀取資料，而不會讀取 `Enrollment` 資料：
 
 [!code-csharp[Main](intro/samples/cu30snapshots/2-crud/Pages/Students/Details1.cshtml.cs?name=snippet_OnGetAsync&highlight=8)]
 
@@ -62,7 +62,7 @@ Students 頁面的 Scaffold 程式碼不包含註冊資料。 在本節中，您
 
 [!code-cshtml[Main](intro/samples/cu30/Pages/Students/Details.cshtml?highlight=32-53)]
 
-上述程式碼會以迴圈逐一巡覽 `Enrollments` 導覽屬性中的實體。 針對每個註冊，會顯示課程標題及成績。 課程標題會從儲存於 Enrollments 實體之 `Course` 導覽屬性中的課程 (Course) 實體擷取。
+上述程式碼會以迴圈逐一巡覽 `Enrollments` 導覽屬性中的實體。 針對每個註冊，會顯示課程標題及成績。 課程標題是從 `Course` 註冊實體的導覽屬性中儲存的實體中取出 `Course` 。
 
 執行應用程式，選取 [Students] 索引標籤，然後按一下學生的 [詳細資料] 連結。 將會顯示所選取學生的課程及成績清單。
 
@@ -173,11 +173,16 @@ Students 頁面的 Scaffold 程式碼不包含註冊資料。 在本節中，您
 
 在本節中，當呼叫失敗時，會執行自訂錯誤訊息 `SaveChanges` 。
 
-使用下列程式碼取代 *Pages/Students/Delete.cshtml.cs* 中的程式碼。 所做的變更已醒目提示：
+以下列程式碼取代 *Pages/student/Delete. .cs* 中的程式碼：
 
-[!code-csharp[Main](intro/samples/cu50/Pages/Students/Delete.cshtml.cs?name=snippet_All&highlight=12-14,22,30-33,45-99)]
+[!code-csharp[Main](intro/samples/cu50/Pages/Students/Delete.cshtml.cs)]
 
-上述程式碼會將選擇性參數 `saveChangesError` 新增至 `OnGetAsync` 方法簽章。 `saveChangesError` 會顯示出此方法是否已在刪除學生物件失敗後呼叫。 刪除作業可能會因為暫時性的網路問題而失敗。 資料庫位於雲端時，較可能發生暫時性的網路錯誤。 `saveChangesError`參數是 `false` `OnGetAsync` 從 UI 呼叫刪除頁面時。 當 `OnGetAsync` `OnPostAsync` 因為刪除作業失敗而呼叫時， `saveChangesError` 參數為 `true` 。
+上述程式碼：
+
+* 新增 [記錄](xref:fundamentals/logging/index)。
+* 將選擇性參數新增 `saveChangesError` 至方法簽章 `OnGetAsync` 。 `saveChangesError` 會顯示出此方法是否已在刪除學生物件失敗後呼叫。
+
+刪除作業可能會因為暫時性的網路問題而失敗。 資料庫位於雲端時，較可能發生暫時性的網路錯誤。 `saveChangesError`參數是 `false` `OnGetAsync` 從 UI 呼叫刪除頁面時。 當 `OnGetAsync` `OnPostAsync` 因為刪除作業失敗而呼叫時， `saveChangesError` 參數為 `true` 。
 
 `OnPostAsync` 方法會擷取選取的實體，然後呼叫 [Remove](/dotnet/api/microsoft.entityframeworkcore.dbcontext.remove#Microsoft_EntityFrameworkCore_DbContext_Remove_System_Object_) 方法來將實體的狀態設定為 `Deleted`。 當 `SaveChanges` 呼叫時， `DELETE` 會產生 SQL 命令。 如果 `Remove` 失敗：
 
@@ -186,7 +191,7 @@ Students 頁面的 Scaffold 程式碼不包含註冊資料。 在本節中，您
 
 將錯誤訊息加入至 *Pages/student/Delete。 cshtml*：
 
-[!code-cshtml[Main](intro/samples/cu30/Pages/Students/Delete.cshtml?highlight=10)]
+[!code-cshtml[Main](intro/samples/cu50/Pages/Students/Delete.cshtml?highlight=10)]
 
 執行應用程式並刪除學生以測試 [刪除] 頁面。
 
@@ -296,7 +301,7 @@ Students 頁面的 Scaffold 程式碼不包含註冊資料。 在本節中，會
 
 [SetValues](/dotnet/api/microsoft.entityframeworkcore.changetracking.propertyvalues.setvalues#Microsoft_EntityFrameworkCore_ChangeTracking_PropertyValues_SetValues_System_Object_) 會設定這個物件的值，方法是藉由從其他 [PropertyValues](/dotnet/api/microsoft.entityframeworkcore.changetracking.propertyvalues) 物件中讀取值。 `SetValues` 使用屬性名稱比對。 檢視模型類型不需要與模型類型相關，只需要有符合的屬性。
 
-使用 `StudentVM` 需要 [Create.cshtml](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/data/ef-rp/intro/samples/cu30snapshots/2-crud/Pages/Students/CreateVM.cshtml) 更新為使用 `StudentVM` 而不是 `Student`。
+使用 `StudentVM` 需要 [Create.cshtml](https://github.com/dotnet/AspNetCore.Docs/tree/main/aspnetcore/data/ef-rp/intro/samples/cu30snapshots/2-crud/Pages/Students/CreateVM.cshtml) 更新為使用 `StudentVM` 而不是 `Student`。
 
 ## <a name="update-the-edit-page"></a>更新 [編輯] 頁面
 
@@ -502,7 +507,7 @@ Students [索引] 頁面的 Scaffold 程式碼不包含 `Enrollments` 屬性。 
 
 [SetValues](/dotnet/api/microsoft.entityframeworkcore.changetracking.propertyvalues.setvalues#Microsoft_EntityFrameworkCore_ChangeTracking_PropertyValues_SetValues_System_Object_) 會設定這個物件的值，方法是藉由從其他 [PropertyValues](/dotnet/api/microsoft.entityframeworkcore.changetracking.propertyvalues) 物件中讀取值。 `SetValues` 使用屬性名稱比對。 檢視模型類型不需要與模型類型相關，只需要有符合的屬性。
 
-使用 `StudentVM` 需要 [CreateVM.cshtml](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/data/ef-rp/intro/samples/cu21/Pages/Students/CreateVM.cshtml) 更新為使用 `StudentVM`，而不是使用 `Student`。
+使用 `StudentVM` 需要 [CreateVM.cshtml](https://github.com/dotnet/AspNetCore.Docs/tree/main/aspnetcore/data/ef-rp/intro/samples/cu21/Pages/Students/CreateVM.cshtml) 更新為使用 `StudentVM`，而不是使用 `Student`。
 
 在 Razor 頁面中， `PageModel` 衍生類別是視圖模型。
 

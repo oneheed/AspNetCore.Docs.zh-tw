@@ -1,5 +1,5 @@
 ---
-title: ASP.NET 核心樣板 Blazor 化元件
+title: ASP.NET Core 樣板 Blazor 化元件
 author: guardrex
 description: 瞭解樣板化元件如何接受一或多個 UI 範本作為參數，然後將其當做元件轉譯邏輯的一部分來使用。
 monikerRange: '>= aspnetcore-3.1'
@@ -19,14 +19,14 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/components/templated-components
-ms.openlocfilehash: 6c94218f3808baca18f23a53688bafdd6354e760
-ms.sourcegitcommit: 54fe1ae5e7d068e27376d562183ef9ddc7afc432
+ms.openlocfilehash: d58bd87ba2b39ad7e6d57560a200c69e7937ec0d
+ms.sourcegitcommit: fafcf015d64aa2388bacee16ba38799daf06a4f0
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 03/10/2021
-ms.locfileid: "102589474"
+ms.lasthandoff: 03/30/2021
+ms.locfileid: "105957726"
 ---
-# <a name="aspnet-core-blazor-templated-components"></a>ASP.NET 核心樣板 Blazor 化元件
+# <a name="aspnet-core-blazor-templated-components"></a>ASP.NET Core 樣板 Blazor 化元件
 
 樣板化元件是接受一或多個 UI 範本作為參數的元件，可接著用來作為元件轉譯邏輯的一部分。 樣板化元件可讓您撰寫比一般元件更容易重複使用的較高層級元件。 其中一些範例包括：
 
@@ -111,10 +111,86 @@ ms.locfileid: "102589474"
 
 ::: moniker-end
 
-## <a name="generic-type-constraints"></a>泛型型別條件約束
+## <a name="infer-generic-types-based-on-ancestor-components"></a>根據上階元件推斷泛型型別
+
+::: moniker range=">= aspnetcore-6.0"
+
+上階元件可以使用屬性，以名稱將類型參數串聯至子系 `CascadingTypeParameter` 。 這個屬性可讓泛型型別推斷以具有相同名稱之類型參數的子系自動使用指定的型別參數。
+
+例如，下列元件會 `Chart` 接收股票價格資料，並將名為的泛型型別參數以其子元件的形式進行級聯 `TLineData` 。
+
+`Shared/Chart.razor`:
+
+```razor
+@typeparam TLineData
+@attribute [CascadingTypeParameter(nameof(TLineData))]
+
+...
+
+@code {
+    [Parameter]
+    public IEnumerable<TLineData> Data { get; set; }
+
+    [Parameter]
+    public RenderFragment ChildContent { get; set; }
+}
+```
+
+`Shared/Line.razor`:
+
+```razor
+@typeparam TLineData
+
+...
+
+@code {
+    [Parameter]
+    public string Title { get; set; }
+
+    [Parameter]
+    public decimal Value { get; set; }
+
+    [Parameter]
+    public IEnumerable<TLineData> Data { get; set; }
+}
+```
+
+`Chart`使用元件時，不會 `TLineData` 針對圖表的每個 `Line` 元件指定。
+
+`Pages/StockPriceHistory.razor`:
+
+```razor
+@page "/stock-price-history"
+
+<Chart Data="stockPriceHistory.GroupBy(x => x.Date)">
+    <Line Title="Open" Value="day => day.Values.First()" />
+    <Line Title="High" Value="day => day.Values.Max()" />
+    <Line Title="Low" Value="day => day.Values.Min()" />
+    <Line Title="Close" Value="day => day.Values.Last()" />
+</Chart>
+```
 
 > [!NOTE]
-> 未來的版本將支援泛型型別條件約束。 如需詳細資訊，請參閱 [允許泛型型別條件約束 (dotnet/aspnetcore #8433) ](https://github.com/dotnet/aspnetcore/issues/8433)。
+> RazorVisual Studio Code 中的支援尚未更新為支援這項功能，因此您可能會收到錯誤的錯誤，即使專案正確建立也是一樣。 即將推出的工具版本將會解決此問題。
+
+藉由將 `@attribute [CascadingTypeParameter(...)]` 指定的泛型型別引數加入至元件，下階會自動使用指定的泛型型別引數：
+
+* 會在相同檔中做為元件的子內容進行嵌套 `.razor` 。
+* 也請 [`@typeparam`](xref:mvc/views/razor#typeparam) 使用完全相同的名稱來宣告。
+* 請不要為類型參數提供或推斷另一個值。 如果有提供或推斷另一個值，其優先順序會高於串聯的泛型型別。
+
+當接收串聯型別參數時，元件會從最接近具有相符名稱的上階取得參數值 `CascadingTypeParameter` 。 在特定子樹中，會覆寫串聯的泛型型別參數。
+
+比對只會依名稱執行。 因此，我們建議您避免使用泛型名稱進行串聯的泛型型別參數，例如 `T` 或 `TItem` 。 如果開發人員選擇串聯型別參數，則會隱含地暗示它的名稱是唯一的，而不會與不相關元件中的其他串聯型別參數衝突。
+
+::: moniker-end
+
+::: moniker range="< aspnetcore-6.0"
+
+> [!NOTE]
+> ASP.NET Core 6.0 或更新版本支援推斷的泛型型別。 如需詳細資訊，請參閱本文的版本，而不是 ASP.NET Core 5.0。
+
+::: moniker-end
 
 ## <a name="additional-resources"></a>其他資源
 

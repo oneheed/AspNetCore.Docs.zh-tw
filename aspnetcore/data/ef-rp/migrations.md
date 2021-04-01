@@ -17,14 +17,14 @@ no-loc:
 - Razor
 - SignalR
 uid: data/ef-rp/migrations
-ms.openlocfilehash: e6d1b9f041e892aaa37840c28fdb3153bf098b0d
-ms.sourcegitcommit: 3593c4efa707edeaaceffbfa544f99f41fc62535
+ms.openlocfilehash: 7f1741e06a6e43fd80176113fbe4f249f6eeaa2b
+ms.sourcegitcommit: fafcf015d64aa2388bacee16ba38799daf06a4f0
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 01/04/2021
-ms.locfileid: "93061102"
+ms.lasthandoff: 03/30/2021
+ms.locfileid: "105957495"
 ---
-# <a name="part-4-no-locrazor-pages-with-ef-core-migrations-in-aspnet-core"></a>第4部分： Razor ASP.NET Core 中有 EF Core 遷移的頁面
+# <a name="part-4-razor-pages-with-ef-core-migrations-in-aspnet-core"></a>第4部分： Razor ASP.NET Core 中有 EF Core 遷移的頁面
 
 作者：[Tom Dykstra](https://github.com/tdykstra)、[Jon P Smith](https://twitter.com/thereformedprog)、[Rick Anderson](https://twitter.com/RickAndMSFT)
 
@@ -34,9 +34,9 @@ ms.locfileid: "93061102"
 
 本教學課程介紹用於管理資料模型變更的 EF Core 移轉功能。
 
-開發新的應用程式時，資料模型經常變更。 每次模型變更時，模型就與資料庫不同步。 本教學課程系列從設定 Entity Framework 來建立不存在的資料庫開始。 每次資料模型變更時，您都必須卸除資料庫。 下次執行應用程式時，對 `EnsureCreated` 的呼叫會重新建立資料庫，以符合新的資料模型。 然後，`DbInitializer` 類別會執行以植入新的資料庫。
+開發新的應用程式時，資料模型經常變更。 每次模型變更時，模型就與資料庫不同步。 本教學課程系列從設定 Entity Framework 來建立不存在的資料庫開始。 每次資料模型變更時，就必須卸載資料庫。 下次執行應用程式時，對 `EnsureCreated` 的呼叫會重新建立資料庫，以符合新的資料模型。 然後，`DbInitializer` 類別會執行以植入新的資料庫。
 
-在您將應用程式部署到生產環境之前，這種讓資料庫與資料模型保持同步的方法效果不錯。 當應用程式在生產環境中執行時，它通常會儲存需要維護的資料。 應用程式不能每次進行變更 (例如新增資料行) 時都從測試資料庫開始。 為了解決上述問題，EF Core 移轉功能可讓 EF Core 更新資料庫結構描述，而不是建立新的資料庫。
+這種讓資料庫與資料模型保持同步的方法，在應用程式需要部署到生產環境之前，都能順利運作。 當應用程式在生產環境中執行時，它通常會儲存需要維護的資料。 應用程式不能每次進行變更 (例如新增資料行) 時，都從測試資料庫開始。 EF Core 的遷移功能可解決此問題，方法是讓 EF Core 更新資料庫架構，而不是建立新的資料庫。
 
 移轉會更新結構描述並保留現有的資料，而不是在資料模型變更時卸除並重新建立資料庫。
 
@@ -79,6 +79,7 @@ Drop-Database
 ```powershell
 Add-Migration InitialCreate
 Update-Database
+ 
 ```
 
 # <a name="visual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code)
@@ -88,9 +89,24 @@ Update-Database
 ```dotnetcli
 dotnet ef migrations add InitialCreate
 dotnet ef database update
+ 
 ```
 
 ---
+
+### <a name="remove-ensurecreated"></a>移除 EnsureCreated
+
+本教學課程系列使用 [EnsureCreated](/dotnet/api/microsoft.entityframeworkcore.infrastructure.databasefacade.ensurecreated#Microsoft_EntityFrameworkCore_Infrastructure_DatabaseFacade_EnsureCreated) 來啟動。 `EnsureCreated` 不會建立移轉記錄資料表，因此無法用於移轉。 其設計目的是用來測試或快速原型化經常卸除並重新建立資料庫的位置。
+
+從這裡開始，教學課程會使用移轉。
+
+在 *Program .cs* 中，刪除下列這一行：
+
+```csharp
+context.Database.EnsureCreated();
+```
+
+執行應用程式，並確認資料庫已植入。
 
 ## <a name="up-and-down-methods"></a>Up 和 Down 方法
 
@@ -100,36 +116,25 @@ EF Core `migrations add` 命令已產生用來建立資料庫的程式碼。 此
 
 上述程式碼適用於初始移轉。 程式碼：
 
-* 由 `migrations add InitialCreate` 命令所產生。 
+* 由 `migrations add InitialCreate` 命令所產生。
 * 由 `database update` 命令執行。
 * 會為資料庫內容類別所指定的資料模型建立資料庫。
 
-移轉名稱參數 (在範例中為 "InitialCreate") 用於檔案名稱。 移轉名稱可以是任何有效的檔案名稱。 建議您選擇某個單字或片語，以摘要說明移轉中所要完成的作業。 例如，新增了部門資料表的移轉可能稱為 "AddDepartmentTable"。
+範例) 中 (的遷移名稱參數 `InitialCreate` 會用於檔案名。 移轉名稱可以是任何有效的檔案名稱。 建議您選擇某個單字或片語，以摘要說明移轉中所要完成的作業。 例如，新增了部門資料表的移轉可能稱為 "AddDepartmentTable"。
 
 ## <a name="the-migrations-history-table"></a>移轉記錄資料表
 
-* 使用 SSOX 或您的 SQLite 工具來檢查資料庫。
+* 使用 SSOX 或 SQLite 工具來檢查資料庫。
 * 請注意已新增 `__EFMigrationsHistory` 資料表。 `__EFMigrationsHistory` 資料表會追蹤哪些移轉已套用至資料庫。
 * 檢視 `__EFMigrationsHistory` 資料表中的資料。 第一次移轉時會顯示一個資料列。
 
 ## <a name="the-data-model-snapshot"></a>資料模型快照集
 
-移轉會在 *Migrations/SchoolContextModelSnapshot.cs* 中建立目前資料模型的「快照集」。 當您新增移轉時，EF 會比較目前資料模型與快照集檔案，以判斷變更的內容。
+移轉會在 *Migrations/SchoolContextModelSnapshot.cs* 中建立目前資料模型的「快照集」。 加入 [新增] 時，EF 會比較目前的資料模型與快照集檔案，以判斷變更了哪些內容。
 
-由於快照集檔案會追蹤資料模型的狀態，您無法藉由刪除 `<timestamp>_<migrationname>.cs` 檔案來刪除移轉。 若要退出最新的移轉，您必須使用 `migrations remove` 命令。 該命令會刪除移轉，並確保能正確地重設快照集。 如需詳細資訊，請參閱 [dotnet ef 遷移移除](/ef/core/miscellaneous/cli/dotnet#dotnet-ef-migrations-remove)。
+因為快照集檔案會追蹤資料模型的狀態，所以無法藉由刪除檔案來刪除遷移 `<timestamp>_<migrationname>.cs` 。 若要備份最近的遷移，請使用 [`migrations remove`](/ef/core/managing-schemas/migrations/managing#remove-a-migration) 命令。 `migrations remove` 會刪除移轉，並確保正確地重設快照集。 如需詳細資訊，請參閱 [dotnet ef 遷移移除](/ef/core/miscellaneous/cli/dotnet#dotnet-ef-migrations-remove)。
 
-## <a name="remove-ensurecreated"></a>移除 EnsureCreated
-
-本教學課程系列使用 `EnsureCreated` 來開始。 `EnsureCreated` 不會建立移轉記錄資料表，因此無法用於移轉。 其設計目的是用來測試或快速原型化經常卸除並重新建立資料庫的位置。
-
-從這裡開始，教學課程會使用移轉。
-
-在 *Data/dbinitializer.cs* 中，將下列程式程式碼標記為註解：
-
-```csharp
-context.Database.EnsureCreated();
-```
-執行應用程式，並確認資料庫已植入。
+請參閱 [重設所有遷移 ](/ef/core/miscellaneous/cli/dotnet#resetting-all-migrations) 以移除所有遷移
 
 ## <a name="applying-migrations-in-production"></a>在生產環境中套用移轉
 
@@ -155,9 +160,10 @@ Login failed for user 'user name'.
 ### <a name="additional-resources"></a>其他資源
 
 * [EF Core CLI](/ef/core/miscellaneous/cli/dotnet)。
+* [dotnet ef 遷移 CLI 命令](/ef/core/miscellaneous/cli/dotnet)
 * [套件管理員主控台 (Visual Studio)](/ef/core/miscellaneous/cli/powershell)
 
-## <a name="next-steps"></a>後續步驟
+## <a name="next-steps"></a>下一步
 
 下一個教學課程會建立資料模型，並新增實體屬性和新實體。
 
@@ -172,7 +178,7 @@ Login failed for user 'user name'.
 在本教學課程中，會使用 EF Core 移轉功能來管理資料模型變更。
 
 若您遇到無法解決的問題，請下載[完整應用程式](
-https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/data/ef-rp/intro/samples)。
+https://github.com/dotnet/AspNetCore.Docs/tree/main/aspnetcore/data/ef-rp/intro/samples)。
 
 開發新的應用程式時，資料模型經常變更。 每次模型變更時，模型就與資料庫不同步。 本教學課程從設定 Entity Framework 來建立不存在的資料庫開始。 每次資料模型變更時：
 
@@ -180,7 +186,7 @@ https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/data/ef-rp/intr
 * EF 會建立一個符合模型的新資料庫。
 * 應用程式會將測試資料植入資料庫。
 
-在您將應用程式部署到生產環境之前，這種讓資料庫與資料模型保持同步的方法效果不錯。 當應用程式在生產環境中執行時，它通常會儲存需要維護的資料。 應用程式不能每次進行變更 (例如新增資料行) 時，都從測試資料庫開始。 EF Core 移轉功能可解決這個問題，方法是啟用 EF Core 以更新資料庫結構描述，來代替建立新的資料庫。
+這種讓資料庫與資料模型保持同步的方法，在應用程式需要部署到生產環境之前，都能順利運作。 當應用程式在生產環境中執行時，它通常會儲存需要維護的資料。 應用程式不能每次進行變更 (例如新增資料行) 時，都從測試資料庫開始。 EF Core 移轉功能可解決這個問題，方法是啟用 EF Core 以更新資料庫結構描述，來代替建立新的資料庫。
 
 移轉會更新結構描述，並保留現有的資料，而不是在資料模型變更時，卸除並重新建立資料庫。
 
@@ -236,7 +242,7 @@ EF Core 命令 `migrations add` 已產生用來建立資料庫的程式碼。 �
 
 [!code-csharp[](intro/samples/cu21/Migrations/20180626224812_InitialCreate.cs?range=7-24,77-88)]
 
-Migrations 會呼叫 `Up` 方法，以實作移轉所需的資料模型變更。 當您輸入命令以復原更新時，移轉會呼叫 `Down` 方法。
+Migrations 會呼叫 `Up` 方法，以實作移轉所需的資料模型變更。 當您輸入命令以復原更新時，遷移會呼叫 `Down` 方法。
 
 上述程式碼適用於初始移轉。 該程式碼是在執行 `migrations add InitialCreate` 命令時建立。 移轉名稱參數 (在範例中為 "InitialCreate") 用於檔案名稱。 移轉名稱可以是任何有效的檔案名稱。 建議您選擇某個單字或片語，以摘要說明移轉中所要完成的作業。 例如，新增了部門資料表的移轉可能稱為 "AddDepartmentTable"。
 
@@ -308,7 +314,7 @@ EF Core 使用 `__MigrationsHistory` 資料表來查看是否有任何需要執�
 ## <a name="troubleshooting"></a>疑難排解
 
 下載[完整應用程式](
-https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/data/ef-rp/intro/samples/cu21snapshots/cu-part4-migrations)。
+https://github.com/dotnet/AspNetCore.Docs/tree/main/aspnetcore/data/ef-rp/intro/samples/cu21snapshots/cu-part4-migrations)。
 
 應用程式會產生下列例外狀況：
 
@@ -333,4 +339,3 @@ Login failed for user 'user name'.
 > [下一步](xref:data/ef-rp/complex-data-model)
 
 ::: moniker-end
-

@@ -1,7 +1,7 @@
 ---
 title: ASP.NET Core 簡介
 author: rick-anderson
-description: 取得 ASP.NET Core 的簡介，這是一種跨平臺、高效能的開放原始碼架構，可用於建立現代化、已啟用雲端的、網際網路連線的應用程式。
+description: 取得 ASP.NET Core 的簡介，這是一種跨平臺、高效能的開放原始碼架構，可用於建立現代化、具備雲端功能、連線到網際網路的應用程式。
 ms.author: riande
 ms.custom: mvc
 ms.date: 04/17/2020
@@ -18,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: index
-ms.openlocfilehash: 3e41336d084e25319f8b1ab4c4ab3175b758d23d
-ms.sourcegitcommit: 54fe1ae5e7d068e27376d562183ef9ddc7afc432
+ms.openlocfilehash: dfe6ab1a5d6473527620d14077403b69a5f0a84e
+ms.sourcegitcommit: fafcf015d64aa2388bacee16ba38799daf06a4f0
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 03/10/2021
-ms.locfileid: "102588798"
+ms.lasthandoff: 03/30/2021
+ms.locfileid: "105957637"
 ---
 # <a name="introduction-to-aspnet-core"></a>ASP.NET Core 簡介
 
@@ -31,7 +31,7 @@ ms.locfileid: "102588798"
 
 ::: moniker range=">= aspnetcore-3.0"
 
-ASP.NET Core 是跨平臺、高效能的 [開放原始](https://github.com/dotnet/aspnetcore) 碼架構，可用於建立現代化、已啟用雲端的、網際網路連線的應用程式。 利用 ASP.NET Core，您可以：
+ASP.NET Core 是一種跨平臺、高效能的 [開放原始](https://github.com/dotnet/aspnetcore) 碼架構，可用於建立現代化、具備雲端功能的網際網路連線應用程式。 利用 ASP.NET Core，您可以：
 
 * 建立 web 應用程式和服務、 [物聯網 (IoT) ](https://www.microsoft.com/internet-of-things/) 應用程式和行動後端。
 * 在 Windows、macOS 和 Linux 上使用您最愛的開發工具。
@@ -40,7 +40,7 @@ ASP.NET Core 是跨平臺、高效能的 [開放原始](https://github.com/dotne
 
 ## <a name="why-choose-aspnet-core"></a>為什麼要選擇 ASP.NET Core？
 
-數百萬名開發人員使用或使用 [ASP.NET](/aspnet/overview) 4.x 來建立 web 應用程式。 ASP.NET Core 是 ASP.NET 4.x 的重新設計，包括架構變更，這些變更會導致更精簡、更模組化的架構。
+數百萬名開發人員使用或使用 [ASP.NET](/aspnet/overview) 4.x 來建立 web 應用程式。 ASP.NET Core 是 ASP.NET 4.x 的重新設計，包括會導致更精簡、更模組化架構的架構變更。
 
 [!INCLUDE[](~/includes/benefits.md)]
 
@@ -62,9 +62,9 @@ ASP.NET Core 與熱門的用戶端架構和程式庫緊密整合，包括 [Blazo
 
 <a name="target-framework"></a>
 
-## <a name="aspnet-core-target-frameworks"></a>ASP.NET 核心目標 framework
+## <a name="aspnet-core-target-frameworks"></a>ASP.NET Core 目標 framework
 
-ASP.NET Core 3.x 和更新版本只能以 .NET Core 為目標。 一般而言，ASP.NET Core 是由 [.Net Standard](/dotnet/standard/net-standard) 程式庫所組成。 使用 .NET Standard 2.0 撰寫的程式庫可在[任何實作 .NET Standard 2.0 的 .NET 平台](/dotnet/standard/net-standard#net-implementation-support)上執行。
+ASP.NET Core 3.x 和更新版本只能以 .NET Core 為目標。 一般來說，ASP.NET Core 是由 [.NET Standard](/dotnet/standard/net-standard) 程式庫所組成。 使用 .NET Standard 2.0 撰寫的程式庫可在[任何實作 .NET Standard 2.0 的 .NET 平台](/dotnet/standard/net-standard#net-implementation-support)上執行。
 
 將目標指向 .NET Core 有多個好處，而這些好處也隨著版本更新越來越多。 NET Core 較 .NET Framework 多的好處包含：
 
@@ -93,14 +93,14 @@ ASP.NET Core 3.x 和更新版本只能以 .NET Core 為目標。 一般而言，
 
    |狀況  |教學課程  |
    |----------|----------|
-   |新開發        |[Razor 使用 Entity Framework Core 的頁面](xref:data/ef-rp/intro) |
+   |新開發        |[Razor 具有 Entity Framework Core 的頁面](xref:data/ef-rp/intro) |
    |維護 MVC 應用程式 |[搭配 Entity Framework Core 的 MVC](xref:data/ef-mvc/intro) |
 
-1. 閱讀適用于所有應用程式類型的 ASP.NET 核心 [基礎](xref:fundamentals/index) 概念總覽。
+1. 閱讀適用于所有應用程式類型的 ASP.NET Core [基礎](xref:fundamentals/index) 概念總覽。
 
 1. 流覽目錄以尋找感興趣的其他主題。
 
-&dagger;另外還有 [互動式 WEB API 教學](/learn/modules/build-web-api-net-core)課程。 不需要本機安裝開發工具。 程式碼會在您的瀏覽器中于 [Azure Cloud Shell](https://azure.microsoft.com/features/cloud-shell/) 中執行，並使用 [捲曲](https://curl.haxx.se/) 來進行測試。
+&dagger;另外還有 [互動式 WEB API 教學](/learn/modules/build-web-api-net-core)課程。 不需要本機安裝開發工具。 程式碼會在您的瀏覽器中執行 [Azure Cloud Shell](https://azure.microsoft.com/features/cloud-shell/) ，並使用 [捲曲](https://curl.haxx.se/) 來進行測試。
 
 ## <a name="migrate-from-net-framework"></a>從 .NET Framework 遷移
 
@@ -110,7 +110,7 @@ ASP.NET Core 3.x 和更新版本只能以 .NET Core 為目標。 一般而言，
 
 ::: moniker range="< aspnetcore-3.0"
 
-ASP.NET Core 是跨平臺、高效能的 [開放原始](https://github.com/dotnet/aspnetcore) 碼架構，可用於建立現代化、已啟用雲端的、網際網路連線的應用程式。 利用 ASP.NET Core，您可以：
+ASP.NET Core 是一種跨平臺、高效能的 [開放原始](https://github.com/dotnet/aspnetcore) 碼架構，可用於建立現代化、具備雲端功能的網際網路連線應用程式。 利用 ASP.NET Core，您可以：
 
 * 建立 web 應用程式和服務、 [物聯網 (IoT) ](https://www.microsoft.com/internet-of-things/) 應用程式和行動後端。
 * 在 Windows、macOS 和 Linux 上使用您最愛的開發工具。
@@ -160,7 +160,7 @@ ASP.NET Core 3.0 及更新版本只可在.NET Core 上執行。 如需此變更�
 * 新的 API
 * 開放原始碼
 
-為了協助關閉從 .NET Framework 到 .NET Core 的 API 間距， [Windows 相容性套件](/dotnet/core/porting/windows-compat-pack) 提供了數千個僅限 Windows 的 api，可在 .net core 中使用。 這些 API 並不適用於 .NET Core 1.x。
+為了協助您關閉 API 間距，從 .NET Framework 到 .NET Core， [Windows 相容性套件](/dotnet/core/porting/windows-compat-pack) 提供了數千個僅限 Windows 的 api，可在 .net core 中使用。 這些 API 並不適用於 .NET Core 1.x。
 
 ## <a name="recommended-learning-path"></a>建議學習路徑
 
@@ -179,10 +179,10 @@ ASP.NET Core 3.0 及更新版本只可在.NET Core 上執行。 如需此變更�
 
    |狀況  |教學課程  |
    |----------|----------|
-   | 針對全新開發        |[Razor 使用 Entity Framework Core 的頁面](xref:data/ef-rp/intro) |
+   | 針對全新開發        |[Razor 具有 Entity Framework Core 的頁面](xref:data/ef-rp/intro) |
    | 針對維護 MVC 應用程式 |[搭配 Entity Framework Core 的 MVC](xref:data/ef-mvc/intro) |
 
-1. 閱讀適用于所有應用程式類型的 ASP.NET 核心 [基礎](xref:fundamentals/index) 概念總覽。
+1. 閱讀適用于所有應用程式類型的 ASP.NET Core [基礎](xref:fundamentals/index) 概念總覽。
 
 1. 瀏覽其他您感興趣主題的目錄。
 
@@ -245,6 +245,10 @@ Host.CreateDefaultBuilder(args)
 您可以放心地忽略 (或移除 `#region` 程式碼) 的和 `#endregion` 指示詞。 如果您打算執行主題中所述的範例案例，請不要改變這些指示詞內的程式碼。 您可以在試驗其他案例時自由改變程式碼。
 
 如需詳細資訊，請參閱 [Contribute to the ASP.NET documentation: Code snippets](https://github.com/dotnet/AspNetCore.Docs/blob/main/CONTRIBUTING.md#code-snippets) (參與 ASP.NET 文件：程式碼片段)。
+
+## <a name="breaking-changes-and-security-advisories"></a>重大變更和資訊安全諮詢
+
+[!INCLUDE[](~/includes/announcements.md)]
 
 ## <a name="next-steps"></a>後續步驟
 

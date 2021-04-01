@@ -4,7 +4,7 @@ author: rick-anderson
 description: 頁面第3部分 Razor 和 Entity Framework 教學課程系列。
 ms.author: riande
 ms.custom: mvc
-ms.date: 07/22/2019
+ms.date: 3/3/2021
 no-loc:
 - appsettings.json
 - ASP.NET Core Identity
@@ -18,16 +18,16 @@ no-loc:
 - Razor
 - SignalR
 uid: data/ef-rp/sort-filter-page
-ms.openlocfilehash: 51a1e2a90259898262ac655b7a0e8a55d766f0c7
-ms.sourcegitcommit: 3593c4efa707edeaaceffbfa544f99f41fc62535
+ms.openlocfilehash: e4490c7c2e5fa2e615583be8567df6377445a079
+ms.sourcegitcommit: fafcf015d64aa2388bacee16ba38799daf06a4f0
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 01/04/2021
-ms.locfileid: "93061037"
+ms.lasthandoff: 03/30/2021
+ms.locfileid: "105957742"
 ---
-# <a name="part-3-no-locrazor-pages-with-ef-core-in-aspnet-core---sort-filter-paging"></a>第3部分： Razor 有 EF Core 在 ASP.NET Core 排序、篩選、分頁中的頁面
+# <a name="part-3-razor-pages-with-ef-core-in-aspnet-core---sort-filter-paging"></a>第3部分： Razor 有 EF Core 在 ASP.NET Core 排序、篩選、分頁中的頁面
 
-作者：[Tom Dykstra](https://github.com/tdykstra)、[Rick Anderson](https://twitter.com/RickAndMSFT)、[Jon P Smith](https://twitter.com/thereformedprog)
+由 [Tom Dykstra](https://github.com/tdykstra)、 [Jeremy Likness](https://twitter.com/jeremylikness)和 [Jon P Smith](https://twitter.com/thereformedprog)
 
 [!INCLUDE [about the series](~/includes/RP-EF/intro.md)]
 
@@ -62,7 +62,7 @@ ms.locfileid: "93061037"
 
 [!code-csharp[Main](intro/samples/cu30snapshots/3-sorting/Pages/Students/Index1.cshtml.cs?name=snippet_Ternary)]
 
-程式碼會使用 c # [條件運算子？：](/dotnet/csharp/language-reference/operators/conditional-operator)。 `?:`運算子是三元運算子，它會採用三個運算元。 第一行指定當 `sortOrder` 是 null 或空白時， `NameSort` 會設定為 `name_desc` 。 如果 `sortOrder` 為 **_not_* _ null 或空白， `NameSort` 則會設為空字串。
+程式碼會使用 c # [條件運算子？：](/dotnet/csharp/language-reference/operators/conditional-operator)。 `?:`運算子是三元運算子，它會採用三個運算元。 第一行指定當 `sortOrder` 是 null 或空白時， `NameSort` 會設定為 `name_desc` 。 如果 `sortOrder`***不是*** null 或空白，則 `NameSort` 設為空字串。
 
 這兩個陳述式讓頁面能夠設定資料行標題超連結，如下所示：
 
@@ -85,7 +85,7 @@ ms.locfileid: "93061037"
 
 ### <a name="add-column-heading-hyperlinks-to-the-student-index-page"></a>將資料行標題超連結新增至 Student 的 [索引] 頁面
 
-將 _Students/Index.cshtml * 中的程式碼取代為下列程式碼。 所做的變更已醒目提示。
+使用下列程式碼取代 *Students/Index.cshtml* 中的程式碼。 所做的變更已醒目提示。
 
 [!code-cshtml[Main](intro/samples/cu30snapshots/3-sorting/Pages/Students/Index1.cshtml?highlight=5,8,17-19,22,25-27,33)]
 
@@ -139,7 +139,7 @@ Where(s => s.LastName.ToUpper().Contains(searchString.ToUpper())`
 
 如需詳細資訊，請參閱 [How to use case-insensitive query with Sqlite provider](https://github.com/aspnet/EntityFrameworkCore/issues/11414) (如何搭配 Sqlite 提供者使用不區分大小寫查詢)。
 
-### <a name="update-the-no-locrazor-page"></a>更新 Razor 頁面
+### <a name="update-the-razor-page"></a>更新 Razor 頁面
 
 取代 *Pages/student/Index. cshtml* 中的程式碼，以加入 [ **搜尋** ] 按鈕。
 
@@ -173,17 +173,23 @@ https://localhost:5001/Students?SearchString=an
 
 在專案資料夾中，以下列程式碼建立 `PaginatedList.cs`：
 
-[!code-csharp[Main](intro/samples/cu30/PaginatedList.cs)]
+[!code-csharp[Main](intro/samples/cu50/PaginatedList.cs)]
 
 上述程式碼中的 `CreateAsync` 方法會採用頁面大小和頁面數，並會將適當的 `Skip` 和 `Take` 陳述式套用至 `IQueryable`。 在 `IQueryable` 上呼叫 `ToListAsync` 時，會傳回僅包含所要求頁面的清單。 `HasPreviousPage` 和 `HasNextPage` 屬性可用來啟用或停用 **Previous** 和 **Next** 分頁按鈕。
 
 `CreateAsync` 方法為建立 `PaginatedList<T>` 之用。 建構函式無法建立 `PaginatedList<T>` 物件，建構函式也無法執行非同步程式碼。
 
-### <a name="add-paging-to-the-pagemodel-class"></a>將分頁新增至 PageModel 類別
+### <a name="add-page-size-to-configuration"></a>將頁面大小新增至設定
+
+新增 `PageSize` 至 *appsettings.json* [配置](xref:fundamentals/configuration/index) 檔：
+
+[!code-json[Main](intro/samples/cu50/appsettings.json?highlight=2)]
+
+### <a name="add-paging-to-indexmodel"></a>將分頁新增至 IndexModel
 
 取代 *Students/Index.cshtml.cs* 中的程式碼以新增分頁。
 
-[!code-csharp[Main](intro/samples/cu30/Pages/Students/Index.cshtml.cs?name=snippet_All&highlight=15-20,23-30,57-59)]
+[!code-csharp[Main](intro/samples/cu50/Pages/Students/Index.cshtml.cs?name=snippet_All&highlight=5,15-20,28-43,70-72)]
 
 上述程式碼：
 
@@ -192,7 +198,7 @@ https://localhost:5001/Students?SearchString=an
 * 將排序次序儲存在 `CurrentSort` 屬性中。
 * 當有新的搜尋字串時，將頁面索引重設為 1。
 * 會使用 `PaginatedList` 類別來取得 Students 實體。
-* 設定 `pageSize` 為3。 實際的應用程式會使用 [設定來設定](xref:fundamentals/configuration/index) 頁面大小值。
+* 設定 `pageSize` 為3， [](xref:fundamentals/configuration/index)如果設定失敗，則設定為4。
 
 遇下列情況時，`OnGetAsync` 接收的所有參數都會成為 Null：
 
@@ -217,19 +223,19 @@ https://localhost:5001/Students?SearchString=an
 
   在 `PaginatedList.CreateAsync` 呼叫中，`pageIndex` 之後的兩個問號代表 [Null 聯合運算子](/dotnet/csharp/language-reference/operators/null-conditional-operator)。 Null 聯合運算子會針對可為 Null 的型別定義一個預設值。 如果運算式 `pageIndex ?? 1` 具有值，則運算式會傳回的值 `pageIndex` ，否則會傳回1。
 
-### <a name="add-paging-links-to-the-no-locrazor-page"></a>將分頁連結新增至 Razor 頁面
+### <a name="add-paging-links"></a>新增分頁連結
 
 以下列程式碼取代 student */Index. cshtml* 中的程式碼。 所做的變更已醒目提示：
 
-[!code-cshtml[Main](intro/samples/cu30/Pages/Students/Index.cshtml?highlight=29-32,38-41,69-87)]
+[!code-cshtml[Main](intro/samples/cu50/Pages/Students/Index.cshtml?highlight=29-32,38-41,69-87)]
 
 資料行頁首連結會使用查詢字串，將目前的搜尋字串傳遞至 `OnGetAsync` 方法：
 
-[!code-cshtml[Main](intro/samples/cu30/Pages/Students/Index.cshtml?range=29-32)]
+[!code-cshtml[Main](intro/samples/cu50/Pages/Students/Index.cshtml?range=29-32)]
 
 分頁按鈕會透過標籤協助程式來顯示：
 
-[!code-cshtml[Main](intro/samples/cu30/Pages/Students/Index.cshtml?range=73-87)]
+[!code-cshtml[Main](intro/samples/cu50/Pages/Students/Index.cshtml?range=73-87)]
 
 執行應用程式並巡覽至學生頁面。
 
@@ -238,12 +244,12 @@ https://localhost:5001/Students?SearchString=an
 
 ![有分頁連結的 Students [索引] 頁面](sort-filter-page/_static/paging30.png)
 
-## <a name="add-grouping"></a>新增分組
+## <a name="grouping"></a>群組
 
-本節將建立 [關於] 頁面，其中會顯示每個註冊日期的已註冊學生人數。 此更新會使用群組，並包含下列步驟：
+此區段會建立一個 `About` 頁面，其中顯示已註冊每個註冊日期的學生人數。 此更新會使用群組，並包含下列步驟：
 
-* 針對 [ **About （關於** ）] 頁面所使用的資料建立視圖模型。
-* 更新 About 頁面以使用檢視模型。
+* 建立頁面所使用資料的視圖模型 `About` 。
+* 將 `About` 頁面更新為使用視圖模型。
 
 ### <a name="create-the-view-model"></a>建立檢視模型
 
@@ -251,19 +257,19 @@ https://localhost:5001/Students?SearchString=an
 
 使用下列程式碼建立 *SchoolViewModels/EnrollmentDateGroup.cs*：
 
-[!code-csharp[Main](intro/samples/cu30/Models/SchoolViewModels/EnrollmentDateGroup.cs)]
+[!code-csharp[Main](intro/samples/cu50/Models/SchoolViewModels/EnrollmentDateGroup.cs)]
 
-### <a name="create-the-no-locrazor-page"></a>建立 Razor 頁面
+### <a name="create-the-razor-page"></a>建立 Razor 頁面
 
 使用下列程式碼建立 *Pages/About.cshtml* 檔案：
 
-[!code-cshtml[Main](intro/samples/cu30/Pages/About.cshtml)]
+[!code-cshtml[Main](intro/samples/cu50/Pages/About.cshtml)]
 
 ### <a name="create-the-page-model"></a>建立頁面模型
 
 以下列程式碼更新 *Pages/About.cshtml.cs* 檔案：
 
-[!code-csharp[Main](intro/samples/cu30/Pages/About.cshtml.cs)]
+[!code-csharp[Main](intro/samples/cu50/Pages/About.cshtml.cs)]
 
 LINQ 陳述式會依註冊日期將學生實體組成群組、計算每個群組中的實體數目、將結果儲存在 `EnrollmentDateGroup` 檢視模型物件的集合中。
 
@@ -271,7 +277,7 @@ LINQ 陳述式會依註冊日期將學生實體組成群組、計算每個群組
 
 ![About 頁面](sort-filter-page/_static/about30.png)
 
-## <a name="next-steps"></a>後續步驟
+## <a name="next-steps"></a>下一步
 
 在下一個教學課程中，應用程式將會使用移轉來更新資料模型。
 
@@ -289,7 +295,7 @@ LINQ 陳述式會依註冊日期將學生實體組成群組、計算每個群組
 
 ![Students [索引] 頁面](sort-filter-page/_static/paging.png)
 
-若您遇到無法解決的問題，請下載[完整應用程式](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/data/ef-rp/intro/samples)。
+若您遇到無法解決的問題，請下載[完整應用程式](https://github.com/dotnet/AspNetCore.Docs/tree/main/aspnetcore/data/ef-rp/intro/samples)。
 
 ## <a name="add-sorting-to-the-index-page"></a>將排序新增至索引頁面
 
@@ -473,7 +479,7 @@ http://localhost:5000/Students?SearchString=an
 
 在 `PaginatedList.CreateAsync` 中的兩個問號代表 [null 聯合運算子](/dotnet/csharp/language-reference/operators/null-conditional-operator)。 Null 聯合運算子會針對可為 Null 的型別定義一個預設值。 運算式 `(pageIndex ?? 1)` 表示，如果 `pageIndex` 有一個值就將該值傳回。 如果 `pageIndex` 沒有值，則傳回 1。
 
-## <a name="add-paging-links-to-the-student-no-locrazor-page"></a>將分頁連結新增至學生 Razor 頁面
+## <a name="add-paging-links-to-the-student-razor-page"></a>將分頁連結新增至學生 Razor 頁面
 
 更新 *Students/Index.cshtml* 中的標記。 所做的變更已醒目提示：
 
@@ -527,7 +533,7 @@ ASP.NET Core 2.2 中的 Web 範本不包括 [關於] 頁面。 如果您使用 A
 
 LINQ 陳述式會依註冊日期將學生實體組成群組、計算每個群組中的實體數目、將結果儲存在 `EnrollmentDateGroup` 檢視模型物件的集合中。
 
-### <a name="modify-the-about-no-locrazor-page"></a>修改 [About （關於）] Razor 頁面
+### <a name="modify-the-about-razor-page"></a>修改 [About （關於）] Razor 頁面
 
 以下列程式碼取代 *Pages/About.cshtml* 檔案中的程式碼：
 
@@ -535,7 +541,7 @@ LINQ 陳述式會依註冊日期將學生實體組成群組、計算每個群組
 
 執行應用程式並巡覽至 About 頁面。 每個註冊日期的學生人數將會顯示在資料表中。
 
-如果您遇到無法解決的問題，請下載[已完成的應用程式](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/data/ef-rp/intro/samples/StageSnapShots/cu-part3-sorting)。
+如果您遇到無法解決的問題，請下載[已完成的應用程式](https://github.com/dotnet/AspNetCore.Docs/tree/main/aspnetcore/data/ef-rp/intro/samples/StageSnapShots/cu-part3-sorting)。
 
 ![About 頁面](sort-filter-page/_static/about.png)
 

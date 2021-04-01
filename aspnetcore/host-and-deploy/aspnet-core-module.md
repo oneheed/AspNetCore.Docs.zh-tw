@@ -1,7 +1,7 @@
 ---
 title: ASP.NET Core 模組
 author: rick-anderson
-description: 深入瞭解使用 IIS 裝載 ASP.NET Core 應用程式的 ASP.NET 核心模組。
+description: 深入瞭解使用 IIS 裝載 ASP.NET Core 應用程式的 ASP.NET Core 模組。
 monikerRange: '>= aspnetcore-2.1'
 ms.author: riande
 ms.custom: mvc
@@ -19,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: host-and-deploy/aspnet-core-module
-ms.openlocfilehash: 8574bc06b7c27fbb8caf834754188dba67bcb4e3
-ms.sourcegitcommit: acfe51c35497a204f75c2a61125c9408c04493e6
+ms.openlocfilehash: fd9c5bf94385d76aed22a09bd4cd248f1c1dcb6e
+ms.sourcegitcommit: fafcf015d64aa2388bacee16ba38799daf06a4f0
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 03/10/2021
-ms.locfileid: "102605691"
+ms.lasthandoff: 03/30/2021
+ms.locfileid: "105957674"
 ---
 # <a name="aspnet-core-module"></a>ASP.NET Core 模組
 
@@ -34,18 +34,22 @@ ms.locfileid: "102605691"
 
 ASP.NET Core 模組是一種原生 IIS 模組，可插入 IIS 管線，讓 ASP.NET Core 應用程式能與 IIS 搭配運作。 使用 IIS 執行 ASP.NET Core 應用程式，方法是： 
 
-* 將 ASP.NET Core 應用程式裝載在 IIS 背景工作進程內 (`w3wp.exe`) ，稱為同 [進程裝載模型](xref:host-and-deploy/iis/in-process-hosting)。
+* 將 ASP.NET Core 應用程式裝載在 IIS 背景工作進程 (`w3wp.exe`) 中，稱為內含 [式裝載模型](xref:host-and-deploy/iis/in-process-hosting)。
 * 將 web 要求轉送到執行 Kestrel 伺服器的後端 ASP.NET Core 應用程式，稱為 [跨進程裝載模型](xref:host-and-deploy/iis/out-of-process-hosting)。
 
 每個裝載模型之間都有取捨。 依預設，會使用同進程裝載模型，因為效能和診斷效能較佳。
 
 ## <a name="install-aspnet-core-module"></a>安裝 ASP.NET Core 模組
 
+ASP.NET Core 模組會與 .net core [裝載](xref:host-and-deploy/iis/hosting-bundle)套件組合中的 .Net core 執行時間一起安裝。 ASP.NET Core 模組向前及向後相容于 .NET 的 LTS 版本。
+
+[!INCLUDE[](~/includes/announcements.md)]
+
 使用下列連結下載安裝程式：
 
 [目前的 .NET Core 裝載套件組合安裝程式 (直接下載)](https://dotnet.microsoft.com/permalink/dotnetcore-current-windows-runtime-bundle-installer)
 
-如需有關如何安裝 ASP.NET Core 模組或安裝不同模組版本的詳細資訊，請參閱 [安裝 .Net Core 裝載](xref:host-and-deploy/iis/hosting-bundle)套件組合。
+如需詳細資訊（包括安裝較舊版本的模組），請參閱 <xref:host-and-deploy/iis/hosting-bundle> 。
 
 如需將 ASP.NET Core 應用程式發佈至 IIS 伺服器的教學課程體驗，請參閱<xref:tutorials/publish-to-iis>。
 
@@ -71,7 +75,7 @@ ASP.NET Core 模組是一種原生 IIS 模組，可外掛至 IIS 管線以便：
 
 ### <a name="in-process-hosting-model"></a>同處理序裝載模型
 
-ASP.NET Core 應用程式預設為同進程裝載模型。
+ASP.NET Core apps 預設為同進程裝載模型。
 
 同處理序裝載時具有下列特性：
 
@@ -85,13 +89,13 @@ ASP.NET Core 應用程式預設為同進程裝載模型。
 
 * 不支援在應用程式之間共用應用程式集區。 每個應用程式使用一個應用程式集區。
 
-* 使用[Web Deploy](/iis/publish/using-web-deploy/introduction-to-web-deploy)或手動將檔案放[ `app_offline.htm` 入部署](xref:host-and-deploy/iis/index#locked-deployment-files)時，如果有開啟的連線，應用程式可能不會立即關機。 例如，WebSocket 連線可能會延遲應用程式關機。
+* 使用[Web Deploy](/iis/publish/using-web-deploy/introduction-to-web-deploy)或[ `app_offline.htm` 以手動方式將檔案放入部署](xref:host-and-deploy/iis/index#locked-deployment-files)時，如果有開啟的連線，應用程式可能不會立即關機。 例如，WebSocket 連線可能會延遲應用程式關機。
 
 * 應用程式的架構 (位元) 和已安裝的執行階段 (x64 或 x86) 必須符合應用程式集區的架構。
 
 * 偵測到用戶端中斷連線。 [`HttpContext.RequestAborted`](xref:Microsoft.AspNetCore.Http.HttpContext.RequestAborted*)當用戶端中斷連線時，解除標記就會取消。
 
-* 在 ASP.NET Core 2.2.1 或更早版本中，會傳回 <xref:System.IO.Directory.GetCurrentDirectory*> IIS 所啟動之進程的背景工作目錄，而不是應用程式的目錄 (例如 `C:\Windows\System32\inetsrv` `w3wp.exe`) 。
+* 在 ASP.NET Core 2.2.1 或更早版本中，會傳回 <xref:System.IO.Directory.GetCurrentDirectory*> IIS （而不是應用程式的 (目錄）啟動之進程的背景工作角色，例如 `C:\Windows\System32\inetsrv` `w3wp.exe`) 。
 
   如需設定應用程式目前的目錄的範例程式碼，請參閱[ `CurrentDirectoryHelpers` 類別](https://github.com/dotnet/AspNetCore.Docs/tree/main/aspnetcore/host-and-deploy/aspnet-core-module/samples_snapshot/3.x/CurrentDirectoryHelpers.cs)。 呼叫 `SetCurrentDirectory` 方法。 後續呼叫 <xref:System.IO.Directory.GetCurrentDirectory*> 會提供應用程式的目錄。
 
@@ -153,13 +157,15 @@ ASP.NET Core 模組也可以：
 
 ## <a name="how-to-install-and-use-the-aspnet-core-module"></a>如何安裝和使用 ASP.NET Core 模組
 
-如需如何安裝 ASP.NET Core 模組的指示，請參閱[安裝 .NET Core 裝載套件組合](xref:host-and-deploy/iis/index#install-the-net-core-hosting-bundle)。
+如需如何安裝 ASP.NET Core 模組的指示，請參閱[安裝 .NET Core 裝載套件組合](xref:host-and-deploy/iis/index#install-the-net-core-hosting-bundle)。 ASP.NET Core 模組向前及向後相容于 .NET 的 LTS 版本。
+
+[!INCLUDE[](~/includes/announcements.md)]
 
 ## <a name="configuration-with-webconfig"></a>使用 web.config 進行設定
 
 設定 ASP.NET Core 模組時，是使用網站 *web.config* 檔案中 `system.webServer` 節點的 `aspNetCore` 區段來設定。
 
-下列檔案 `web.config` 是針對與 [framework 相依的部署](/dotnet/articles/core/deploying/#framework-dependent-deployments-fdd) 所發佈，並設定 ASP.NET 核心模組來處理網站要求：
+下列檔案 `web.config` 是針對與 [framework 相依的部署](/dotnet/articles/core/deploying/#framework-dependent-deployments-fdd) 所發佈，並設定 ASP.NET Core 模組來處理網站要求：
 
 ```xml
 <?xml version="1.0" encoding="utf-8"?>
@@ -254,9 +260,9 @@ ASP.NET Core 模組也可以：
 
 ## `app_offline.htm`
 
-如果 `app_offline.htm` 在應用程式的根目錄中偵測到名稱為的檔案，ASP.NET Core 模組會嘗試以正常方式關閉應用程式，並停止處理傳入的要求。 如果在經過 `shutdownTimeLimit` 中所定義的秒數之後，應用程式仍然在執行，ASP.NET Core Module 就會終止執行中的處理序。
+如果 `app_offline.htm` 在應用程式的根目錄中偵測到具有名稱的檔案，ASP.NET Core 模組會嘗試以正常方式關閉應用程式，並停止處理傳入的要求。 如果在經過 `shutdownTimeLimit` 中所定義的秒數之後，應用程式仍然在執行，ASP.NET Core Module 就會終止執行中的處理序。
 
-當檔案 `app_offline.htm` 存在時，ASP.NET Core 模組會傳回該檔案的內容，以回應要求 `app_offline.htm` 。 移除檔案時 `app_offline.htm` ，下一個要求會啟動應用程式。
+當檔案 `app_offline.htm` 存在時，ASP.NET Core 模組會藉由傳回檔案的內容來回應要求 `app_offline.htm` 。 移除檔案時 `app_offline.htm` ，下一個要求會啟動應用程式。
 
 使用跨處理序裝載模型時，若未開啟連線，應用程式可能無法立即關閉。 例如，WebSocket 連線可能會延遲應用程式關機。
 
@@ -278,7 +284,7 @@ ASP.NET Core 模組也可以：
 
 除非發生處理序回收/重新啟動，否則不會輪替記錄檔。 主機服務提供者必須負責限制記錄檔所使用的磁碟空間。
 
-只有在 IIS 上裝載時，或使用 [Visual Studio 的 iis 開發階段支援](xref:host-and-deploy/iis/development-time-iis-support)時，才會使用 stdout 記錄檔來疑難排解應用程式啟動問題，而不是在本機進行偵錯工具並使用 iis Express 執行應用程式時進行疑難排解。
+只有在 IIS 上裝載時，或使用 [VISUAL STUDIO iis 的開發階段支援來](xref:host-and-deploy/iis/development-time-iis-support)針對應用程式啟動問題進行疑難排解時，才建議使用 stdout 記錄檔，而不是在本機進行偵錯工具並使用 IIS Express 執行應用程式。
 
 請勿將 stdout 記錄檔用來進行一般應用程式記錄。 針對 ASP.NET Core 應用程式中的例行性記錄，請使用會限制記錄檔大小並輪替記錄檔的記錄程式庫。 如需詳細資訊，請參閱[協力廠商記錄提供者](xref:fundamentals/logging/index#third-party-logging-providers)。
 
@@ -299,7 +305,7 @@ ASP.NET Core 模組也可以：
 
 針對 Azure App Service 部署發行應用程式時，Web SDK 會將 `stdoutLogFile` 值設定為 `\\?\%home%\LogFiles\stdout` 。 `%home`環境變數是針對 Azure App Service 所裝載的應用程式預先定義。
 
-若要建立記錄篩選規則，請參閱 ASP.NET 核心記錄檔[集的設定和](xref:fundamentals/logging/index#log-filtering)[記錄篩選](xref:fundamentals/logging/index#log-filtering)區段。
+若要建立記錄篩選規則，請參閱 ASP.NET Core 記錄檔[集的設定和](xref:fundamentals/logging/index#log-filtering)[記錄篩選](xref:fundamentals/logging/index#log-filtering)區段。
 
 如需路徑格式的詳細資訊，請參閱 [Windows 系統上的檔案路徑格式](/dotnet/standard/io/file-path-formats)。
 
@@ -447,7 +453,7 @@ dotnet-hosting-{VERSION}.exe OPT_NO_SHARED_CONFIG_CHECK=1
 
 **IIS Express**
 
-* Visualstudio： `{APPLICATION ROOT}\.vs\config\applicationHost.config`
+* Visual Studio： `{APPLICATION ROOT}\.vs\config\applicationHost.config`
 
 * *iisexpress.exe* Cli： `%USERPROFILE%\Documents\IISExpress\config\applicationhost.config`
 
@@ -568,7 +574,9 @@ ASP.NET Core 模組也可以：
 
 ## <a name="how-to-install-and-use-the-aspnet-core-module"></a>如何安裝和使用 ASP.NET Core 模組
 
-如需如何安裝 ASP.NET Core 模組的指示，請參閱[安裝 .NET Core 裝載套件組合](xref:host-and-deploy/iis/index#install-the-net-core-hosting-bundle)。
+如需如何安裝 ASP.NET Core 模組的指示，請參閱[安裝 .NET Core 裝載套件組合](xref:host-and-deploy/iis/index#install-the-net-core-hosting-bundle)。 ASP.NET Core 模組向前及向後相容于 .NET 的 LTS 版本。
+
+[!INCLUDE[](~/includes/announcements.md)]
 
 ## <a name="configuration-with-webconfig"></a>使用 web.config 進行設定
 
@@ -669,9 +677,9 @@ ASP.NET Core 模組也可以：
 
 ## <a name="app_offlinehtm"></a>app_offline.htm
 
-如果 `app_offline.htm` 在應用程式的根目錄中偵測到名稱為的檔案，ASP.NET Core 模組會嘗試以正常方式關閉應用程式，並停止處理傳入的要求。 如果在經過 `shutdownTimeLimit` 中所定義的秒數之後，應用程式仍然在執行，ASP.NET Core Module 就會終止執行中的處理序。
+如果 `app_offline.htm` 在應用程式的根目錄中偵測到具有名稱的檔案，ASP.NET Core 模組會嘗試以正常方式關閉應用程式，並停止處理傳入的要求。 如果在經過 `shutdownTimeLimit` 中所定義的秒數之後，應用程式仍然在執行，ASP.NET Core Module 就會終止執行中的處理序。
 
-當檔案 `app_offline.htm` 存在時，ASP.NET Core 模組會傳回該檔案的內容，以回應要求 `app_offline.htm` 。 移除檔案時 `app_offline.htm` ，下一個要求會啟動應用程式。
+當檔案 `app_offline.htm` 存在時，ASP.NET Core 模組會藉由傳回檔案的內容來回應要求 `app_offline.htm` 。 移除檔案時 `app_offline.htm` ，下一個要求會啟動應用程式。
 
 使用跨處理序裝載模型時，若未開啟連線，應用程式可能無法立即關閉。 例如，WebSocket 連線可能會延遲應用程式關閉。
 
@@ -693,7 +701,7 @@ ASP.NET Core 模組也可以：
 
 除非發生處理序回收/重新啟動，否則不會輪替記錄檔。 主機服務提供者必須負責限制記錄檔所使用的磁碟空間。
 
-只有在 IIS 上裝載時，或使用 [Visual Studio 的 iis 開發階段支援](xref:host-and-deploy/iis/development-time-iis-support)時，才會使用 stdout 記錄檔來疑難排解應用程式啟動問題，而不是在本機進行偵錯工具並使用 iis Express 執行應用程式時進行疑難排解。
+只有在 IIS 上裝載時，或使用 [VISUAL STUDIO iis 的開發階段支援來](xref:host-and-deploy/iis/development-time-iis-support)針對應用程式啟動問題進行疑難排解時，才建議使用 stdout 記錄檔，而不是在本機進行偵錯工具並使用 IIS Express 執行應用程式。
 
 請勿將 stdout 記錄檔用來進行一般應用程式記錄。 針對 ASP.NET Core 應用程式中的例行性記錄，請使用會限制記錄檔大小並輪替記錄檔的記錄程式庫。 如需詳細資訊，請參閱[協力廠商記錄提供者](xref:fundamentals/logging/index#third-party-logging-providers)。
 
@@ -842,7 +850,7 @@ dotnet-hosting-{VERSION}.exe OPT_NO_SHARED_CONFIG_CHECK=1
 
 **IIS Express**
 
-* Visualstudio： `{APPLICATION ROOT}\.vs\config\applicationHost.config`
+* Visual Studio： `{APPLICATION ROOT}\.vs\config\applicationHost.config`
 
 * *iisexpress.exe* Cli： `%USERPROFILE%\Documents\IISExpress\config\applicationhost.config`
 
@@ -982,7 +990,7 @@ ASP.NET Core 模組也可以：
 
 除非發生處理序回收/重新啟動，否則不會輪替記錄檔。 主機服務提供者必須負責限制記錄檔所使用的磁碟空間。
 
-只有在 IIS 上裝載時，或使用 [Visual Studio 的 iis 開發階段支援](xref:host-and-deploy/iis/development-time-iis-support)時，才會使用 stdout 記錄檔來疑難排解應用程式啟動問題，而不是在本機進行偵錯工具並使用 iis Express 執行應用程式時進行疑難排解。
+只有在 IIS 上裝載時，或使用 [VISUAL STUDIO iis 的開發階段支援來](xref:host-and-deploy/iis/development-time-iis-support)針對應用程式啟動問題進行疑難排解時，才建議使用 stdout 記錄檔，而不是在本機進行偵錯工具並使用 IIS Express 執行應用程式。
 
 請勿將 stdout 記錄檔用來進行一般應用程式記錄。 針對 ASP.NET Core 應用程式中的例行性記錄，請使用會限制記錄檔大小並輪替記錄檔的記錄程式庫。 如需詳細資訊，請參閱[協力廠商記錄提供者](xref:fundamentals/logging/index#third-party-logging-providers)。
 
@@ -1000,7 +1008,7 @@ ASP.NET Core 模組也可以：
 
 針對 Azure App Service 部署發行應用程式時，Web SDK 會將 `stdoutLogFile` 值設定為 `\\?\%home%\LogFiles\stdout` 。 `%home`環境變數是針對 Azure App Service 所裝載的應用程式預先定義。
 
-若要建立記錄篩選規則，請參閱 ASP.NET 核心記錄檔[集的設定和](xref:fundamentals/logging/index#log-filtering)[記錄篩選](xref:fundamentals/logging/index#log-filtering)區段。
+若要建立記錄篩選規則，請參閱 ASP.NET Core 記錄檔[集的設定和](xref:fundamentals/logging/index#log-filtering)[記錄篩選](xref:fundamentals/logging/index#log-filtering)區段。
 
 如需路徑格式的詳細資訊，請參閱 [Windows 系統上的檔案路徑格式](/dotnet/standard/io/file-path-formats)。
 
@@ -1078,5 +1086,5 @@ ASP.NET Core 模組安裝程式會以 **TrustedInstaller** 帳戶的權限執行
 
 * <xref:host-and-deploy/iis/index>
 * <xref:host-and-deploy/azure-apps/index>
-* [ASP.NET 核心模組參考來源 [預設分支 (主要) ]](https://github.com/dotnet/aspnetcore/tree/main/src/Servers/IIS/AspNetCoreModuleV2)：使用 [ **分支** ] 下拉式清單來選取特定版本 (例如 `release/3.1`) 。
+* [ASP.NET Core 模組參考來源 [預設分支 (主要) ]](https://github.com/dotnet/aspnetcore/tree/main/src/Servers/IIS/AspNetCoreModuleV2)：使用 [ **分支** ] 下拉式清單來選取特定版本 (例如， `release/3.1`) 。
 * <xref:host-and-deploy/iis/modules>

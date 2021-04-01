@@ -17,456 +17,681 @@ no-loc:
 - Razor
 - SignalR
 uid: data/ef-rp/update-related-data
-ms.openlocfilehash: 3ec88a862697c540a1a98e733c31d76922f81f7c
-ms.sourcegitcommit: 3593c4efa707edeaaceffbfa544f99f41fc62535
+ms.openlocfilehash: 14080174d35326aa4f412fa0ecd106b5b1bac7c4
+ms.sourcegitcommit: fafcf015d64aa2388bacee16ba38799daf06a4f0
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 01/04/2021
-ms.locfileid: "93060530"
+ms.lasthandoff: 03/30/2021
+ms.locfileid: "105957583"
 ---
-# <a name="part-7-no-locrazor-pages-with-ef-core-in-aspnet-core---update-related-data"></a><span data-ttu-id="0d9d2-103">第7部分： Razor ASP.NET Core 更新相關資料中有 EF Core 的頁面</span><span class="sxs-lookup"><span data-stu-id="0d9d2-103">Part 7, Razor Pages with EF Core in ASP.NET Core - Update Related Data</span></span>
+# <a name="part-7-razor-pages-with-ef-core-in-aspnet-core---update-related-data"></a><span data-ttu-id="5f21c-103">第7部分： Razor ASP.NET Core 更新相關資料中有 EF Core 的頁面</span><span class="sxs-lookup"><span data-stu-id="5f21c-103">Part 7, Razor Pages with EF Core in ASP.NET Core - Update Related Data</span></span>
 
-<span data-ttu-id="0d9d2-104">由 [Tom Dykstra](https://github.com/tdykstra)和 [Rick Anderson](https://twitter.com/RickAndMSFT)</span><span class="sxs-lookup"><span data-stu-id="0d9d2-104">By [Tom Dykstra](https://github.com/tdykstra), and [Rick Anderson](https://twitter.com/RickAndMSFT)</span></span>
+<span data-ttu-id="5f21c-104">作者：[Tom Dykstra](https://github.com/tdykstra)、[Jon P Smith](https://twitter.com/thereformedprog)、[Rick Anderson](https://twitter.com/RickAndMSFT)</span><span class="sxs-lookup"><span data-stu-id="5f21c-104">By [Tom Dykstra](https://github.com/tdykstra), [Jon P Smith](https://twitter.com/thereformedprog), and [Rick Anderson](https://twitter.com/RickAndMSFT)</span></span>
 
 [!INCLUDE [about the series](../../includes/RP-EF/intro.md)]
 
-::: moniker range=">= aspnetcore-3.0"
+::: moniker range=">= aspnetcore-5.0"
 
-<span data-ttu-id="0d9d2-105">本教學課程會示範如何更新相關資料。</span><span class="sxs-lookup"><span data-stu-id="0d9d2-105">This tutorial shows how to update related data.</span></span> <span data-ttu-id="0d9d2-106">下圖顯示一些已完成的頁面。</span><span class="sxs-lookup"><span data-stu-id="0d9d2-106">The following illustrations show some of the completed pages.</span></span>
+<span data-ttu-id="5f21c-105">本教學課程會示範如何更新相關資料。</span><span class="sxs-lookup"><span data-stu-id="5f21c-105">This tutorial shows how to update related data.</span></span> <span data-ttu-id="5f21c-106">下圖顯示一些已完成的頁面。</span><span class="sxs-lookup"><span data-stu-id="5f21c-106">The following illustrations show some of the completed pages.</span></span>
 
-<span data-ttu-id="0d9d2-107">![課程 [編輯] 頁面](update-related-data/_static/course-edit30.png)
-![講師 [編輯] 頁面](update-related-data/_static/instructor-edit-courses30.png)</span><span class="sxs-lookup"><span data-stu-id="0d9d2-107">![Course Edit page](update-related-data/_static/course-edit30.png)
+<span data-ttu-id="5f21c-107">![課程 [編輯] 頁面](update-related-data/_static/course-edit30.png)
+![講師 [編輯] 頁面](update-related-data/_static/instructor-edit-courses30.png)</span><span class="sxs-lookup"><span data-stu-id="5f21c-107">![Course Edit page](update-related-data/_static/course-edit30.png)
 ![Instructor Edit page](update-related-data/_static/instructor-edit-courses30.png)</span></span>
 
-## <a name="update-the-course-create-and-edit-pages"></a><span data-ttu-id="0d9d2-108">更新 Course Create 和 Edit 頁面</span><span class="sxs-lookup"><span data-stu-id="0d9d2-108">Update the Course Create and Edit pages</span></span>
+## <a name="update-the-course-create-and-edit-pages"></a><span data-ttu-id="5f21c-108">更新 Course Create 和 Edit 頁面</span><span class="sxs-lookup"><span data-stu-id="5f21c-108">Update the Course Create and Edit pages</span></span>
 
-<span data-ttu-id="0d9d2-109">Course Create 和 Edit 頁面的 scaffold 程式碼包含一個 Department 下拉式清單，其顯示 Department 識別碼 (整數)。</span><span class="sxs-lookup"><span data-stu-id="0d9d2-109">The scaffolded code for the Course Create and Edit pages has a Department drop-down list that shows Department ID (an integer).</span></span> <span data-ttu-id="0d9d2-110">下拉式清單應該會顯示 Department 名稱，因此這兩個頁面需要部門名稱的清單。</span><span class="sxs-lookup"><span data-stu-id="0d9d2-110">The drop-down should show the Department name, so both of these pages need a list of department names.</span></span> <span data-ttu-id="0d9d2-111">若要提供該清單，請使用 Create 和 Edit 頁面的基底類別。</span><span class="sxs-lookup"><span data-stu-id="0d9d2-111">To provide that list, use a base class for the Create and Edit pages.</span></span>
+<span data-ttu-id="5f21c-109">課程的 [建立] 和 [編輯] 頁面的 scaffold 程式碼具有 [部門] 下拉式清單，其中顯示 `DepartmentID` `int` 。</span><span class="sxs-lookup"><span data-stu-id="5f21c-109">The scaffolded code for the Course Create and Edit pages has a Department drop-down list that shows `DepartmentID`, an `int`.</span></span> <span data-ttu-id="5f21c-110">下拉式清單應該會顯示 Department 名稱，因此這兩個頁面需要部門名稱的清單。</span><span class="sxs-lookup"><span data-stu-id="5f21c-110">The drop-down should show the Department name, so both of these pages need a list of department names.</span></span> <span data-ttu-id="5f21c-111">若要提供該清單，請使用 Create 和 Edit 頁面的基底類別。</span><span class="sxs-lookup"><span data-stu-id="5f21c-111">To provide that list, use a base class for the Create and Edit pages.</span></span>
 
-### <a name="create-a-base-class-for-course-create-and-edit"></a><span data-ttu-id="0d9d2-112">建立 Course Create 和 Edit 的基底類別</span><span class="sxs-lookup"><span data-stu-id="0d9d2-112">Create a base class for Course Create and Edit</span></span>
+### <a name="create-a-base-class-for-course-create-and-edit"></a><span data-ttu-id="5f21c-112">建立 Course Create 和 Edit 的基底類別</span><span class="sxs-lookup"><span data-stu-id="5f21c-112">Create a base class for Course Create and Edit</span></span>
 
-<span data-ttu-id="0d9d2-113">使用下列程式碼建立 *Pages/Courses/DepartmentNamePageModel.cs* 檔案：</span><span class="sxs-lookup"><span data-stu-id="0d9d2-113">Create a *Pages/Courses/DepartmentNamePageModel.cs* file with the following code:</span></span>
+<span data-ttu-id="5f21c-113">使用下列程式碼建立 *Pages/Courses/DepartmentNamePageModel.cs* 檔案：</span><span class="sxs-lookup"><span data-stu-id="5f21c-113">Create a *Pages/Courses/DepartmentNamePageModel.cs* file with the following code:</span></span>
 
-[!code-csharp[](intro/samples/cu30/Pages/Courses/DepartmentNamePageModel.cs)]
+[!code-csharp[](intro/samples/cu50/Pages/Courses/DepartmentNamePageModel.cs)]
 
-<span data-ttu-id="0d9d2-114">上述程式碼會建立 [SelectList](/dotnet/api/microsoft.aspnetcore.mvc.rendering.selectlist) 以包含部門名稱的清單。</span><span class="sxs-lookup"><span data-stu-id="0d9d2-114">The preceding code creates a [SelectList](/dotnet/api/microsoft.aspnetcore.mvc.rendering.selectlist) to contain the list of department names.</span></span> <span data-ttu-id="0d9d2-115">如果指定了 `selectedDepartment`，就會在 `SelectList` 中選取該部門。</span><span class="sxs-lookup"><span data-stu-id="0d9d2-115">If `selectedDepartment` is specified, that department is selected in the `SelectList`.</span></span>
+<span data-ttu-id="5f21c-114">上述程式碼會建立 [SelectList](/dotnet/api/microsoft.aspnetcore.mvc.rendering.selectlist) 以包含部門名稱的清單。</span><span class="sxs-lookup"><span data-stu-id="5f21c-114">The preceding code creates a [SelectList](/dotnet/api/microsoft.aspnetcore.mvc.rendering.selectlist) to contain the list of department names.</span></span> <span data-ttu-id="5f21c-115">如果指定了 `selectedDepartment`，就會在 `SelectList` 中選取該部門。</span><span class="sxs-lookup"><span data-stu-id="5f21c-115">If `selectedDepartment` is specified, that department is selected in the `SelectList`.</span></span>
 
-<span data-ttu-id="0d9d2-116">*Create* 和 *Edit* 頁面模型類別將衍生自 `DepartmentNamePageModel`。</span><span class="sxs-lookup"><span data-stu-id="0d9d2-116">The Create and Edit page model classes will derive from `DepartmentNamePageModel`.</span></span>
+<span data-ttu-id="5f21c-116">*Create* 和 *Edit* 頁面模型類別將衍生自 `DepartmentNamePageModel`。</span><span class="sxs-lookup"><span data-stu-id="5f21c-116">The Create and Edit page model classes will derive from `DepartmentNamePageModel`.</span></span>
 
-### <a name="update-the-course-create-page-model"></a><span data-ttu-id="0d9d2-117">更新 Course Create 頁面模型</span><span class="sxs-lookup"><span data-stu-id="0d9d2-117">Update the Course Create page model</span></span>
+### <a name="update-the-course-create-page-model"></a><span data-ttu-id="5f21c-117">更新 Course Create 頁面模型</span><span class="sxs-lookup"><span data-stu-id="5f21c-117">Update the Course Create page model</span></span>
 
-<span data-ttu-id="0d9d2-118">Course 會指派給 Department。</span><span class="sxs-lookup"><span data-stu-id="0d9d2-118">A Course is assigned to a Department.</span></span> <span data-ttu-id="0d9d2-119">Create 和 Edit 頁面的基底類別會提供 `SelectList` 以用來選取部門。</span><span class="sxs-lookup"><span data-stu-id="0d9d2-119">The base class for the Create and Edit pages provides a `SelectList` for selecting the department.</span></span> <span data-ttu-id="0d9d2-120">使用 `SelectList` 的下拉式清單會設定 `Course.DepartmentID` 外部索引鍵 (FK) 屬性。</span><span class="sxs-lookup"><span data-stu-id="0d9d2-120">The drop-down list that uses the `SelectList` sets the `Course.DepartmentID` foreign key (FK) property.</span></span> <span data-ttu-id="0d9d2-121">EF Core 則使用 `Course.DepartmentID` FK 來載入 `Department` 導覽屬性。</span><span class="sxs-lookup"><span data-stu-id="0d9d2-121">EF Core uses the `Course.DepartmentID` FK to load the `Department` navigation property.</span></span>
+<span data-ttu-id="5f21c-118">Course 會指派給 Department。</span><span class="sxs-lookup"><span data-stu-id="5f21c-118">A Course is assigned to a Department.</span></span> <span data-ttu-id="5f21c-119">Create 和 Edit 頁面的基底類別會提供 `SelectList` 以用來選取部門。</span><span class="sxs-lookup"><span data-stu-id="5f21c-119">The base class for the Create and Edit pages provides a `SelectList` for selecting the department.</span></span> <span data-ttu-id="5f21c-120">使用 `SelectList` 的下拉式清單會設定 `Course.DepartmentID` 外部索引鍵 (FK) 屬性。</span><span class="sxs-lookup"><span data-stu-id="5f21c-120">The drop-down list that uses the `SelectList` sets the `Course.DepartmentID` foreign key (FK) property.</span></span> <span data-ttu-id="5f21c-121">EF Core 則使用 `Course.DepartmentID` FK 來載入 `Department` 導覽屬性。</span><span class="sxs-lookup"><span data-stu-id="5f21c-121">EF Core uses the `Course.DepartmentID` FK to load the `Department` navigation property.</span></span>
 
 ![建立課程](update-related-data/_static/ddl30.png)
 
-<span data-ttu-id="0d9d2-123">使用下列程式碼更新 *Pages/Courses/Create.cshtml.cs*：</span><span class="sxs-lookup"><span data-stu-id="0d9d2-123">Update *Pages/Courses/Create.cshtml.cs* with the following code:</span></span>
+<span data-ttu-id="5f21c-123">使用下列程式碼更新 *Pages/Courses/Create.cshtml.cs*：</span><span class="sxs-lookup"><span data-stu-id="5f21c-123">Update *Pages/Courses/Create.cshtml.cs* with the following code:</span></span>
+
+[!code-csharp[](intro/samples/cu50/Pages/Courses/Create.cshtml.cs?highlight=7,18,27-41)]
+
+[!INCLUDE[loc comments](~/includes/code-comments-loc.md)]
+
+<span data-ttu-id="5f21c-124">上述程式碼：</span><span class="sxs-lookup"><span data-stu-id="5f21c-124">The preceding code:</span></span>
+
+* <span data-ttu-id="5f21c-125">衍生自 `DepartmentNamePageModel`。</span><span class="sxs-lookup"><span data-stu-id="5f21c-125">Derives from `DepartmentNamePageModel`.</span></span>
+* <span data-ttu-id="5f21c-126">使用 <xref:Microsoft.AspNetCore.Mvc.ControllerBase.TryUpdateModelAsync%2A> 來防止[大量指派](xref:data/ef-rp/crud#overposting) (overposting)。</span><span class="sxs-lookup"><span data-stu-id="5f21c-126">Uses <xref:Microsoft.AspNetCore.Mvc.ControllerBase.TryUpdateModelAsync%2A> to prevent [overposting](xref:data/ef-rp/crud#overposting).</span></span>
+* <span data-ttu-id="5f21c-127">移除 `ViewData["DepartmentID"]`。</span><span class="sxs-lookup"><span data-stu-id="5f21c-127">Removes `ViewData["DepartmentID"]`.</span></span> <span data-ttu-id="5f21c-128">`DepartmentNameSL` `SelectList` 是強型別模型，而且會由 Razor 頁面使用。</span><span class="sxs-lookup"><span data-stu-id="5f21c-128">The `DepartmentNameSL` `SelectList` is a strongly typed model and will be used by the Razor page.</span></span> <span data-ttu-id="5f21c-129">強型別的模型優先於弱型別。</span><span class="sxs-lookup"><span data-stu-id="5f21c-129">Strongly typed models are preferred over weakly typed.</span></span> <span data-ttu-id="5f21c-130">如需詳細資訊，請參閱[弱型別資料 (ViewData 和 ViewBag)](xref:mvc/views/overview#VD_VB)。</span><span class="sxs-lookup"><span data-stu-id="5f21c-130">For more information, see [Weakly typed data (ViewData and ViewBag)](xref:mvc/views/overview#VD_VB).</span></span>
+
+### <a name="update-the-course-create-razor-page"></a><span data-ttu-id="5f21c-131">更新課程的 [建立] Razor 頁面</span><span class="sxs-lookup"><span data-stu-id="5f21c-131">Update the Course Create Razor page</span></span>
+
+<span data-ttu-id="5f21c-132">使用下列程式碼更新 *Pages/Courses/Create.cshtml*：</span><span class="sxs-lookup"><span data-stu-id="5f21c-132">Update *Pages/Courses/Create.cshtml* with the following code:</span></span>
+
+[!code-cshtml[](intro/samples/cu50/Pages/Courses/Create.cshtml?highlight=29-34)]
+
+<span data-ttu-id="5f21c-133">上述程式碼會進行下列變更：</span><span class="sxs-lookup"><span data-stu-id="5f21c-133">The preceding code makes the following changes:</span></span>
+
+* <span data-ttu-id="5f21c-134">將標題從 **DepartmentID** 變更為 **Department**。</span><span class="sxs-lookup"><span data-stu-id="5f21c-134">Changes the caption from **DepartmentID** to **Department**.</span></span>
+* <span data-ttu-id="5f21c-135">以 `DepartmentNameSL` (來自基底類別) 取代 `"ViewBag.DepartmentID"`。</span><span class="sxs-lookup"><span data-stu-id="5f21c-135">Replaces `"ViewBag.DepartmentID"` with `DepartmentNameSL` (from the base class).</span></span>
+* <span data-ttu-id="5f21c-136">新增 [選取部門] 選項。</span><span class="sxs-lookup"><span data-stu-id="5f21c-136">Adds the "Select Department" option.</span></span> <span data-ttu-id="5f21c-137">此變更會在尚未選取任何部門時，在下拉式清單中轉譯「選取部門」而非第一個部門。</span><span class="sxs-lookup"><span data-stu-id="5f21c-137">This change renders "Select Department" in the drop-down when no department has been selected yet, rather than the first department.</span></span>
+* <span data-ttu-id="5f21c-138">未選取部門時，請新增驗證訊息。</span><span class="sxs-lookup"><span data-stu-id="5f21c-138">Adds a validation message when the department isn't selected.</span></span>
+
+<span data-ttu-id="5f21c-139">此 Razor 頁面會使用 [選取標記](xref:mvc/views/working-with-forms#the-select-tag-helper)協助程式：</span><span class="sxs-lookup"><span data-stu-id="5f21c-139">The Razor Page uses the [Select Tag Helper](xref:mvc/views/working-with-forms#the-select-tag-helper):</span></span>
+
+[!code-cshtml[](intro/samples/cu/Pages/Courses/Create.cshtml?range=28-35&highlight=3-6)]
+
+<span data-ttu-id="5f21c-140">測試 *Create* 頁面。</span><span class="sxs-lookup"><span data-stu-id="5f21c-140">Test the Create page.</span></span> <span data-ttu-id="5f21c-141">*Create* 頁面會顯示部門名稱，而不是部門識別碼。</span><span class="sxs-lookup"><span data-stu-id="5f21c-141">The Create page displays the department name rather than the department ID.</span></span>
+
+### <a name="update-the-course-edit-page-model"></a><span data-ttu-id="5f21c-142">更新 Course Edit 頁面模型</span><span class="sxs-lookup"><span data-stu-id="5f21c-142">Update the Course Edit page model</span></span>
+
+<span data-ttu-id="5f21c-143">使用下列程式碼更新 *Pages/Courses/Edit.cshtml.cs*：</span><span class="sxs-lookup"><span data-stu-id="5f21c-143">Update *Pages/Courses/Edit.cshtml.cs* with the following code:</span></span>
+
+[!code-csharp[](intro/samples/cu50/Pages/Courses/Edit.cshtml.cs?highlight=8,28,35,36,40-66)]
+
+<span data-ttu-id="5f21c-144">這些變更類似於 *Create* 頁面模型中所做的變更。</span><span class="sxs-lookup"><span data-stu-id="5f21c-144">The changes are similar to those made in the Create page model.</span></span> <span data-ttu-id="5f21c-145">在上述程式碼中，`PopulateDepartmentsDropDownList` 會傳遞部門識別碼，其在下拉式清單中選取部門。</span><span class="sxs-lookup"><span data-stu-id="5f21c-145">In the preceding code, `PopulateDepartmentsDropDownList` passes in the department ID, which selects that department in the drop-down list.</span></span>
+
+### <a name="update-the-course-edit-razor-page"></a><span data-ttu-id="5f21c-146">更新課程的 [編輯] Razor 頁面</span><span class="sxs-lookup"><span data-stu-id="5f21c-146">Update the Course Edit Razor page</span></span>
+
+<span data-ttu-id="5f21c-147">使用下列程式碼更新 *Pages/Courses/Edit.cshtml*：</span><span class="sxs-lookup"><span data-stu-id="5f21c-147">Update *Pages/Courses/Edit.cshtml* with the following code:</span></span>
+
+[!code-cshtml[](intro/samples/cu50/Pages/Courses/Edit.cshtml?highlight=17-20,32-35)]
+
+<span data-ttu-id="5f21c-148">上述程式碼會進行下列變更：</span><span class="sxs-lookup"><span data-stu-id="5f21c-148">The preceding code makes the following changes:</span></span>
+
+* <span data-ttu-id="5f21c-149">顯示課程識別碼。</span><span class="sxs-lookup"><span data-stu-id="5f21c-149">Displays the course ID.</span></span> <span data-ttu-id="5f21c-150">通常不會顯示實體的主索引鍵 (PK)。</span><span class="sxs-lookup"><span data-stu-id="5f21c-150">Generally the Primary Key (PK) of an entity isn't displayed.</span></span> <span data-ttu-id="5f21c-151">PK 對使用者來說通常是沒有意義的。</span><span class="sxs-lookup"><span data-stu-id="5f21c-151">PKs are usually meaningless to users.</span></span> <span data-ttu-id="5f21c-152">在此情況下，PK 是課程編號。</span><span class="sxs-lookup"><span data-stu-id="5f21c-152">In this case, the PK is the course number.</span></span>
+* <span data-ttu-id="5f21c-153">將 Department 下拉式清單的標題從 **DepartmentID** 變更為 **Department**。</span><span class="sxs-lookup"><span data-stu-id="5f21c-153">Changes the caption for the Department drop-down from **DepartmentID** to **Department**.</span></span>
+* <span data-ttu-id="5f21c-154">取代 `"ViewBag.DepartmentID"` 為 `DepartmentNameSL` 基類中的。</span><span class="sxs-lookup"><span data-stu-id="5f21c-154">Replaces `"ViewBag.DepartmentID"` with `DepartmentNameSL`, which is in the base class.</span></span>
+
+<span data-ttu-id="5f21c-155">此頁面包含課程編號的隱藏欄位 (`<input type="hidden">`)。</span><span class="sxs-lookup"><span data-stu-id="5f21c-155">The page contains a hidden field (`<input type="hidden">`) for the course number.</span></span> <span data-ttu-id="5f21c-156">新增 `<label>` 標籤協助程式與 `asp-for="Course.CourseID"` 無法免除隱藏欄位的需求。</span><span class="sxs-lookup"><span data-stu-id="5f21c-156">Adding a `<label>` tag helper with `asp-for="Course.CourseID"` doesn't eliminate the need for the hidden field.</span></span> <span data-ttu-id="5f21c-157">`<input type="hidden">` 當使用者選取 [ **儲存**] 時，要包含在張貼的資料中的課程號碼需要。</span><span class="sxs-lookup"><span data-stu-id="5f21c-157">`<input type="hidden">` is required for the course number to be included in the posted data when the user selects **Save**.</span></span>
+
+## <a name="update-the-course-page-models"></a><span data-ttu-id="5f21c-158">更新 Course 頁面模型</span><span class="sxs-lookup"><span data-stu-id="5f21c-158">Update the Course page models</span></span>
+
+<span data-ttu-id="5f21c-159">不需要追蹤時，[AsNoTracking](/dotnet/api/microsoft.entityframeworkcore.entityframeworkqueryableextensions.asnotracking#Microsoft_EntityFrameworkCore_EntityFrameworkQueryableExtensions_AsNoTracking__1_System_Linq_IQueryable___0__) 可以改善效能。</span><span class="sxs-lookup"><span data-stu-id="5f21c-159">[AsNoTracking](/dotnet/api/microsoft.entityframeworkcore.entityframeworkqueryableextensions.asnotracking#Microsoft_EntityFrameworkCore_EntityFrameworkQueryableExtensions_AsNoTracking__1_System_Linq_IQueryable___0__) can improve performance when tracking isn't required.</span></span>
+
+<span data-ttu-id="5f21c-160">藉由新增至方法，來更新 *Pages/課程/刪除. cshtml* 和 *Pages/Details. .cs* `AsNoTracking` `OnGetAsync` ：</span><span class="sxs-lookup"><span data-stu-id="5f21c-160">Update *Pages/Courses/Delete.cshtml.cs* and *Pages/Courses/Details.cshtml.cs* by adding `AsNoTracking` to the `OnGetAsync` methods:</span></span>
+
+[!code-csharp[](intro/samples/cu50/Pages/Courses/Delete.cshtml.cs?highlight=8-11&name=snippet)]
+
+### <a name="update-the-course-razor-pages"></a><span data-ttu-id="5f21c-161">更新課程 Razor 頁面</span><span class="sxs-lookup"><span data-stu-id="5f21c-161">Update the Course Razor pages</span></span>
+
+<span data-ttu-id="5f21c-162">使用下列程式碼更新 *Pages/Courses/Delete.cshtml*：</span><span class="sxs-lookup"><span data-stu-id="5f21c-162">Update *Pages/Courses/Delete.cshtml* with the following code:</span></span>
+
+[!code-cshtml[](intro/samples/cu50/Pages/Courses/Delete.cshtml?highlight=15-20,37)]
+
+<span data-ttu-id="5f21c-163">對 *Details* 頁面進行相同的變更。</span><span class="sxs-lookup"><span data-stu-id="5f21c-163">Make the same changes to the Details page.</span></span>
+
+[!code-cshtml[](intro/samples/cu50/Pages/Courses/Details.cshtml?highlight=14-19,36)]
+
+## <a name="test-the-course-pages"></a><span data-ttu-id="5f21c-164">測試 Course 頁面</span><span class="sxs-lookup"><span data-stu-id="5f21c-164">Test the Course pages</span></span>
+
+<span data-ttu-id="5f21c-165">測試建立、編輯、詳細資料和刪除頁面。</span><span class="sxs-lookup"><span data-stu-id="5f21c-165">Test the create, edit, details, and delete pages.</span></span>
+
+## <a name="update-the-instructor-create-and-edit-pages"></a><span data-ttu-id="5f21c-166">更新講師 Create 和 Edit 頁面</span><span class="sxs-lookup"><span data-stu-id="5f21c-166">Update the instructor Create and Edit pages</span></span>
+
+<span data-ttu-id="5f21c-167">講師可教授任何數量的課程。</span><span class="sxs-lookup"><span data-stu-id="5f21c-167">Instructors may teach any number of courses.</span></span> <span data-ttu-id="5f21c-168">下圖顯示講師的 Edit 頁面，其中包含一個課程核取方塊的陣列。</span><span class="sxs-lookup"><span data-stu-id="5f21c-168">The following image shows the instructor Edit page with an array of course checkboxes.</span></span>
+
+![Instructor [編輯] 頁面與課程](update-related-data/_static/instructor-edit-courses30.png)
+
+<span data-ttu-id="5f21c-170">核取方塊可讓您變更指派給講師的課程。</span><span class="sxs-lookup"><span data-stu-id="5f21c-170">The checkboxes enable changes to courses an instructor is assigned to.</span></span> <span data-ttu-id="5f21c-171">資料庫中的每個課程都會顯示一個核取方塊。</span><span class="sxs-lookup"><span data-stu-id="5f21c-171">A checkbox is displayed for every course in the database.</span></span> <span data-ttu-id="5f21c-172">指派給講師的課程會處於選取狀態。</span><span class="sxs-lookup"><span data-stu-id="5f21c-172">Courses that the instructor is assigned to are selected.</span></span> <span data-ttu-id="5f21c-173">使用者可以選取或清除核取方塊來變更課程指派。</span><span class="sxs-lookup"><span data-stu-id="5f21c-173">The user can select or clear checkboxes to change course assignments.</span></span> <span data-ttu-id="5f21c-174">若課程數要多上許多，則使用不同 UI 的效能可能會更好。</span><span class="sxs-lookup"><span data-stu-id="5f21c-174">If the number of courses were much greater, a different UI might work better.</span></span> <span data-ttu-id="5f21c-175">但此處所顯示管理多對多關聯性的方法不會變更。</span><span class="sxs-lookup"><span data-stu-id="5f21c-175">But the method of managing a many-to-many relationship shown here wouldn't change.</span></span> <span data-ttu-id="5f21c-176">若要建立或刪除關聯性，您可以操作聯結實體。</span><span class="sxs-lookup"><span data-stu-id="5f21c-176">To create or delete relationships, you manipulate a join entity.</span></span>
+
+### <a name="create-a-class-for-assigned-courses-data"></a><span data-ttu-id="5f21c-177">建立受指派課程資料的類別</span><span class="sxs-lookup"><span data-stu-id="5f21c-177">Create a class for assigned courses data</span></span>
+
+<span data-ttu-id="5f21c-178">以下列程式碼建立 *SchoolViewModels/AssignedCourseData.cs*：</span><span class="sxs-lookup"><span data-stu-id="5f21c-178">Create *SchoolViewModels/AssignedCourseData.cs* with the following code:</span></span>
+
+[!code-csharp[](intro/samples/cu50/Models/SchoolViewModels/AssignedCourseData.cs)]
+
+<span data-ttu-id="5f21c-179">`AssignedCourseData` 類別包含資料，用來建立指派給講師課程的核取方塊。</span><span class="sxs-lookup"><span data-stu-id="5f21c-179">The `AssignedCourseData` class contains data to create the check boxes for courses assigned to an instructor.</span></span>
+
+### <a name="create-an-instructor-page-model-base-class"></a><span data-ttu-id="5f21c-180">建立 Instructor 頁面模型基底類別</span><span class="sxs-lookup"><span data-stu-id="5f21c-180">Create an Instructor page model base class</span></span>
+
+<span data-ttu-id="5f21c-181">建立 *Pages/Instructors/InstructorCoursesPageModel.cs* 基底類別：</span><span class="sxs-lookup"><span data-stu-id="5f21c-181">Create the *Pages/Instructors/InstructorCoursesPageModel.cs* base class:</span></span>
+
+[!code-csharp[](intro/samples/cu50/Pages/Instructors/InstructorCoursesPageModel.cs?name=snippet_All)]
+
+<span data-ttu-id="5f21c-182">`InstructorCoursesPageModel`是編輯和建立頁面模型的基類。</span><span class="sxs-lookup"><span data-stu-id="5f21c-182">The `InstructorCoursesPageModel` is the base class for the Edit and Create page models.</span></span> <span data-ttu-id="5f21c-183">`PopulateAssignedCourseData` 會讀取所有 `Course` 實體來擴展 `AssignedCourseDataList`。</span><span class="sxs-lookup"><span data-stu-id="5f21c-183">`PopulateAssignedCourseData` reads all `Course` entities to populate `AssignedCourseDataList`.</span></span> <span data-ttu-id="5f21c-184">對於每個課程，此程式碼設定 `CourseID`、標題以及是否將講師指派給課程。</span><span class="sxs-lookup"><span data-stu-id="5f21c-184">For each course, the code sets the `CourseID`, title, and whether or not the instructor is assigned to the course.</span></span> <span data-ttu-id="5f21c-185">[HashSet](/dotnet/api/system.collections.generic.hashset-1) 會用來進行有效率的查閱。</span><span class="sxs-lookup"><span data-stu-id="5f21c-185">A [HashSet](/dotnet/api/system.collections.generic.hashset-1) is used for efficient lookups.</span></span>
+
+### <a name="handle-office-location"></a><span data-ttu-id="5f21c-186">處理辦公室位置</span><span class="sxs-lookup"><span data-stu-id="5f21c-186">Handle office location</span></span>
+
+<span data-ttu-id="5f21c-187">另一個編輯頁面必須處理的關聯性是 Instructor 實體針對 `OfficeAssignment` 實體所具有一對零或一對一關聯性。</span><span class="sxs-lookup"><span data-stu-id="5f21c-187">Another relationship the edit page has to handle is the one-to-zero-or-one relationship that the Instructor entity has with the `OfficeAssignment` entity.</span></span> <span data-ttu-id="5f21c-188">講師編輯程式碼必須處理下列案例：</span><span class="sxs-lookup"><span data-stu-id="5f21c-188">The instructor edit code must handle the following scenarios:</span></span> 
+
+* <span data-ttu-id="5f21c-189">如果使用者清除辦公室指派，請刪除 `OfficeAssignment` 實體。</span><span class="sxs-lookup"><span data-stu-id="5f21c-189">If the user clears the office assignment, delete the `OfficeAssignment` entity.</span></span>
+* <span data-ttu-id="5f21c-190">如果使用者輸入辦公室指派，但它是空的，請建立新的 `OfficeAssignment` 實體。</span><span class="sxs-lookup"><span data-stu-id="5f21c-190">If the user enters an office assignment and it was empty, create a new `OfficeAssignment` entity.</span></span>
+* <span data-ttu-id="5f21c-191">如果使用者變更辦公室指派，請更新 `OfficeAssignment` 實體。</span><span class="sxs-lookup"><span data-stu-id="5f21c-191">If the user changes the office assignment, update the `OfficeAssignment` entity.</span></span>
+
+## <a name="update-the-instructor-edit-page-model"></a><span data-ttu-id="5f21c-192">更新 Instructor Edit 頁面模型</span><span class="sxs-lookup"><span data-stu-id="5f21c-192">Update the Instructor Edit page model</span></span>
+
+<span data-ttu-id="5f21c-193">使用下列程式碼更新 *Pages/Instructors/Edit.cshtml.cs*：</span><span class="sxs-lookup"><span data-stu-id="5f21c-193">Update *Pages/Instructors/Edit.cshtml.cs* with the following code:</span></span>
+
+[!code-csharp[](intro/samples/cu50/Pages/Instructors/Edit.cshtml.cs?name=snippet_All)]
+
+<span data-ttu-id="5f21c-194">上述程式碼：</span><span class="sxs-lookup"><span data-stu-id="5f21c-194">The preceding code:</span></span>
+
+* <span data-ttu-id="5f21c-195">使用 `OfficeAssignment`、`CourseAssignment` 和 `CourseAssignment.Course` 導覽屬性的積極式載入，從資料庫取得目前的 `Instructor` 實體。</span><span class="sxs-lookup"><span data-stu-id="5f21c-195">Gets the current `Instructor` entity from the database using eager loading for the `OfficeAssignment`, `CourseAssignment`, and `CourseAssignment.Course` navigation properties.</span></span>
+* <span data-ttu-id="5f21c-196">使用從模型繫結器取得的值更新擷取的 `Instructor` 實體。</span><span class="sxs-lookup"><span data-stu-id="5f21c-196">Updates the retrieved `Instructor` entity with values from the model binder.</span></span> <span data-ttu-id="5f21c-197"><xref:Microsoft.AspNetCore.Mvc.ControllerBase.TryUpdateModelAsync%2A> 會防止[大量指派](xref:data/ef-rp/crud#overposting) (overposting)。</span><span class="sxs-lookup"><span data-stu-id="5f21c-197"><xref:Microsoft.AspNetCore.Mvc.ControllerBase.TryUpdateModelAsync%2A> prevents [overposting](xref:data/ef-rp/crud#overposting).</span></span>
+* <span data-ttu-id="5f21c-198">如果辦公室位置為空白，請將 `Instructor.OfficeAssignment` 設定為 Null。</span><span class="sxs-lookup"><span data-stu-id="5f21c-198">If the office location is blank, sets `Instructor.OfficeAssignment` to null.</span></span> <span data-ttu-id="5f21c-199">當 `Instructor.OfficeAssignment` 為 Null 時，將會刪除 `OfficeAssignment` 資料表中的相關資料列。</span><span class="sxs-lookup"><span data-stu-id="5f21c-199">When `Instructor.OfficeAssignment` is null, the related row in the `OfficeAssignment` table is deleted.</span></span>
+* <span data-ttu-id="5f21c-200">在 `OnGetAsync` 中呼叫 `PopulateAssignedCourseData` 來使用 `AssignedCourseData` 檢視模型類別，以提供資訊給核取方塊。</span><span class="sxs-lookup"><span data-stu-id="5f21c-200">Calls `PopulateAssignedCourseData` in `OnGetAsync` to provide information for the checkboxes using the `AssignedCourseData` view model class.</span></span>
+* <span data-ttu-id="5f21c-201">在 `OnPostAsync` 中呼叫 `UpdateInstructorCourses` 來將核取方塊的資訊套用到正在編輯的 Instructor 實體。</span><span class="sxs-lookup"><span data-stu-id="5f21c-201">Calls `UpdateInstructorCourses` in `OnPostAsync` to apply information from the checkboxes to the Instructor entity being edited.</span></span>
+* <span data-ttu-id="5f21c-202">若 <xref:Microsoft.AspNetCore.Mvc.ControllerBase.TryUpdateModelAsync%2A> 失敗，則在 `OnPostAsync` 中呼叫 `PopulateAssignedCourseData` 和 `UpdateInstructorCourses`。</span><span class="sxs-lookup"><span data-stu-id="5f21c-202">Calls `PopulateAssignedCourseData` and `UpdateInstructorCourses` in `OnPostAsync` if <xref:Microsoft.AspNetCore.Mvc.ControllerBase.TryUpdateModelAsync%2A> fails.</span></span> <span data-ttu-id="5f21c-203">這些方法呼叫會在重新顯示並附帶錯誤訊息時，還原在頁面上輸入的已指派課程資料。</span><span class="sxs-lookup"><span data-stu-id="5f21c-203">These method calls restore the assigned course data entered on the page when it is redisplayed with an error message.</span></span>
+
+<span data-ttu-id="5f21c-204">因為 Razor 頁面沒有課程實體的集合，所以模型系結器無法自動更新 `Courses` 導覽屬性。</span><span class="sxs-lookup"><span data-stu-id="5f21c-204">Since the Razor page doesn't have a collection of Course entities, the model binder can't automatically update the `Courses` navigation property.</span></span> <span data-ttu-id="5f21c-205">不使用模型系結器來更新 `Courses` 導覽屬性，而是在新的方法中完成 `UpdateInstructorCourses` 。</span><span class="sxs-lookup"><span data-stu-id="5f21c-205">Instead of using the model binder to update the `Courses` navigation property, that's done in the new `UpdateInstructorCourses` method.</span></span> <span data-ttu-id="5f21c-206">因此您必須從模型繫結器中排除 `Courses` 屬性。</span><span class="sxs-lookup"><span data-stu-id="5f21c-206">Therefore you need to exclude the `Courses` property from model binding.</span></span> <span data-ttu-id="5f21c-207">這並不需要對呼叫的程式碼進行任何變更， <xref:Microsoft.AspNetCore.Mvc.ControllerBase.TryUpdateModelAsync%2A> 因為您是使用具有宣告屬性的多載，而 `Courses` 不是在包含清單中。</span><span class="sxs-lookup"><span data-stu-id="5f21c-207">This doesn't require any change to the code that calls <xref:Microsoft.AspNetCore.Mvc.ControllerBase.TryUpdateModelAsync%2A> because you're using the overload with declared properties and `Courses` isn't in the include list.</span></span>
+
+<span data-ttu-id="5f21c-208">如果未選取任何核取方塊，則中的程式碼會 `UpdateInstructorCourses` `instructorToUpdate.Courses` 使用空集合初始化，並傳回：</span><span class="sxs-lookup"><span data-stu-id="5f21c-208">If no check boxes were selected, the code in `UpdateInstructorCourses` initializes the `instructorToUpdate.Courses` with an empty collection and returns:</span></span>
+
+[!code-csharp[](intro/samples/cu50/Pages/Instructors/Edit.cshtml.cs?name=snippet_IfNull)]
+
+<span data-ttu-id="5f21c-209">然後程式碼會以迴圈逐一巡覽資料庫中的所有課程，並檢查每個已指派給講師的課程，以及在頁面中選取的課程。</span><span class="sxs-lookup"><span data-stu-id="5f21c-209">The code then loops through all courses in the database and checks each course against the ones currently assigned to the instructor versus the ones that were selected in the page.</span></span> <span data-ttu-id="5f21c-210">為了協助達成有效率的搜尋，後者的兩個集合會儲存在 `HashSet` 物件中。</span><span class="sxs-lookup"><span data-stu-id="5f21c-210">To facilitate efficient lookups, the latter two collections are stored in `HashSet` objects.</span></span>
+
+<span data-ttu-id="5f21c-211">如果已選取課程的核取方塊，但課程 ***不在*** `Instructor.Courses` 導覽屬性中，則會將課程新增至導覽屬性中的集合。</span><span class="sxs-lookup"><span data-stu-id="5f21c-211">If the check box for a course is selected but the course is ***not*** in the `Instructor.Courses` navigation property, the course is added to the collection in the navigation property.</span></span>
+
+[!code-csharp[](intro/samples/cu50/Pages/Instructors/Edit.cshtml.cs?name=snippet_UpdateCourses)]
+
+<span data-ttu-id="5f21c-212">如果 ***未*** 選取課程的核取方塊，但課程在 `Instructor.Courses` 導覽屬性中，則會從導覽屬性中移除課程。</span><span class="sxs-lookup"><span data-stu-id="5f21c-212">If the check box for a course is ***not*** selected, but the course is in the `Instructor.Courses` navigation property, the course is removed from the navigation property.</span></span>
+
+[!code-csharp[](intro/samples/cu50/Pages/Instructors/Edit.cshtml.cs?name=snippet_UpdateCoursesElse)]
+
+### <a name="update-the-instructor-edit-razor-page"></a><span data-ttu-id="5f21c-213">更新講師 [編輯] Razor 頁面</span><span class="sxs-lookup"><span data-stu-id="5f21c-213">Update the Instructor Edit Razor page</span></span>
+
+<span data-ttu-id="5f21c-214">使用下列程式碼更新 *Pages/Instructors/Edit.cshtml*：</span><span class="sxs-lookup"><span data-stu-id="5f21c-214">Update *Pages/Instructors/Edit.cshtml* with the following code:</span></span>
+
+[!code-cshtml[](intro/samples/cu50/Pages/Instructors/Edit.cshtml?highlight=29-59)]
+
+<span data-ttu-id="5f21c-215">上述程式碼會建立一個 HTML 資料表，該資料表中有三個資料行。</span><span class="sxs-lookup"><span data-stu-id="5f21c-215">The preceding code creates an HTML table that has three columns.</span></span> <span data-ttu-id="5f21c-216">每個資料行都有一個核取方塊和包含課程號碼及標題的標題。</span><span class="sxs-lookup"><span data-stu-id="5f21c-216">Each column has a checkbox and a caption containing the course number and title.</span></span> <span data-ttu-id="5f21c-217">核取方塊全部都具有相同的名稱 ("selectedCourses")。</span><span class="sxs-lookup"><span data-stu-id="5f21c-217">The checkboxes all have the same name ("selectedCourses").</span></span> <span data-ttu-id="5f21c-218">使用相同的名稱可告知模型繫結器將它們視為一個群組。</span><span class="sxs-lookup"><span data-stu-id="5f21c-218">Using the same name informs the model binder to treat them as a group.</span></span> <span data-ttu-id="5f21c-219">每個核取方塊的 Value 屬性都會設為 `CourseID`。</span><span class="sxs-lookup"><span data-stu-id="5f21c-219">The value attribute of each checkbox is set to `CourseID`.</span></span> <span data-ttu-id="5f21c-220">張貼頁面時，模型繫結器會傳遞陣列，該陣列當中只包含已選取核取方塊的 `CourseID` 值。</span><span class="sxs-lookup"><span data-stu-id="5f21c-220">When the page is posted, the model binder passes an array that consists of the `CourseID` values for only the checkboxes that are selected.</span></span>
+
+<span data-ttu-id="5f21c-221">一開始轉譯核取方塊時，指派給講師的課程會呈現選取狀態。</span><span class="sxs-lookup"><span data-stu-id="5f21c-221">When the checkboxes are initially rendered, courses assigned to the instructor are selected.</span></span>
+
+<span data-ttu-id="5f21c-222">注意：這裡所用來編輯講師課程資料的方法在課程的數量有限時運作相當良好。</span><span class="sxs-lookup"><span data-stu-id="5f21c-222">Note: The approach taken here to edit instructor course data works well when there's a limited number of courses.</span></span> <span data-ttu-id="5f21c-223">針對更大的集合，不同的 UI 和不同的更新方法可能更有用且更有效率。</span><span class="sxs-lookup"><span data-stu-id="5f21c-223">For collections that are much larger, a different UI and a different updating method would be more useable and efficient.</span></span>
+
+<span data-ttu-id="5f21c-224">執行應用程式並測試更新後的 Instructors Edit 頁面。</span><span class="sxs-lookup"><span data-stu-id="5f21c-224">Run the app and test the updated Instructors Edit page.</span></span> <span data-ttu-id="5f21c-225">變更一些課程指派。</span><span class="sxs-lookup"><span data-stu-id="5f21c-225">Change some course assignments.</span></span> <span data-ttu-id="5f21c-226">所做的變更會反映在 [索引] 頁面上。</span><span class="sxs-lookup"><span data-stu-id="5f21c-226">The changes are reflected on the Index page.</span></span>
+
+### <a name="update-the-instructor-create-page"></a><span data-ttu-id="5f21c-227">更新 Instructor Create 頁面</span><span class="sxs-lookup"><span data-stu-id="5f21c-227">Update the Instructor Create page</span></span>
+
+<span data-ttu-id="5f21c-228">更新講師建立頁面模型，並使用類似于 [編輯] 頁面的程式碼：</span><span class="sxs-lookup"><span data-stu-id="5f21c-228">Update the Instructor Create page model and with code similar to the Edit page:</span></span>
+
+[!code-csharp[](intro/samples/cu50/Pages/Instructors/Create.cshtml.cs?name=snippet_all)]
+
+<span data-ttu-id="5f21c-229">上述程式碼：</span><span class="sxs-lookup"><span data-stu-id="5f21c-229">The preceding code:</span></span>
+
+  * <span data-ttu-id="5f21c-230">新增警告和錯誤訊息的 [記錄](xref:fundamentals/logging/index) 。</span><span class="sxs-lookup"><span data-stu-id="5f21c-230">Adds [logging](xref:fundamentals/logging/index) for warning and error messages.</span></span>
+  * <span data-ttu-id="5f21c-231">呼叫 <xref:Microsoft.EntityFrameworkCore.EntityFrameworkQueryableExtensions.Load%2A> ，以在一個資料庫呼叫中提取所有課程。</span><span class="sxs-lookup"><span data-stu-id="5f21c-231">Calls <xref:Microsoft.EntityFrameworkCore.EntityFrameworkQueryableExtensions.Load%2A>, which fetches all the Courses in one database call.</span></span> <span data-ttu-id="5f21c-232">針對較小的集合，這是使用時的優化 <xref:Microsoft.EntityFrameworkCore.DbContext.FindAsync%2A> 。</span><span class="sxs-lookup"><span data-stu-id="5f21c-232">For small collections this is an optimization when using <xref:Microsoft.EntityFrameworkCore.DbContext.FindAsync%2A>.</span></span> <span data-ttu-id="5f21c-233">`FindAsync` 傳回未要求資料庫的追蹤實體。</span><span class="sxs-lookup"><span data-stu-id="5f21c-233">`FindAsync` returns the tracked entity without a request to the database.</span></span>
+
+    [!code-csharp[](intro/samples/cu50/Pages/Instructors/Create.cshtml.cs?name=snippet_find&highlight=9,15,34)]
+
+  * <span data-ttu-id="5f21c-234">`_context.Instructors.Add(newInstructor)``Instructor`使用[多對多](/ef/core/modeling/relationships#many-to-many)關聯性建立新的，而不需要明確地對應聯結資料表。</span><span class="sxs-lookup"><span data-stu-id="5f21c-234">`_context.Instructors.Add(newInstructor)` creates a new `Instructor` using [many-to-many](/ef/core/modeling/relationships#many-to-many) relationships without explicitly mapping the join table.</span></span> <span data-ttu-id="5f21c-235">[EF 5.0 已新增多對多](/ef/core/what-is-new/ef-core-5.0/whatsnew)。</span><span class="sxs-lookup"><span data-stu-id="5f21c-235">[Many-to-many was added in EF 5.0](/ef/core/what-is-new/ef-core-5.0/whatsnew).</span></span>
+
+<span data-ttu-id="5f21c-236">測試講師 *Create* 頁面。</span><span class="sxs-lookup"><span data-stu-id="5f21c-236">Test the instructor Create page.</span></span>
+
+<span data-ttu-id="5f21c-237">Razor使用與編輯頁面類似的程式碼來更新講師建立頁面：</span><span class="sxs-lookup"><span data-stu-id="5f21c-237">Update the Instructor Create Razor page with code similar to the Edit page:</span></span>
+
+[!code-cshtml[](intro/samples/cu50/Pages/Instructors/Create.cshtml)]
+
+## <a name="update-the-instructor-delete-page"></a><span data-ttu-id="5f21c-238">更新 Instructor Delete 頁面</span><span class="sxs-lookup"><span data-stu-id="5f21c-238">Update the Instructor Delete page</span></span>
+
+<span data-ttu-id="5f21c-239">使用下列程式碼更新 *Pages/Instructors/Delete.cshtml.cs*：</span><span class="sxs-lookup"><span data-stu-id="5f21c-239">Update *Pages/Instructors/Delete.cshtml.cs* with the following code:</span></span>
+
+[!code-csharp[](intro/samples/cu50/Pages/Instructors/Delete.cshtml.cs?highlight=45-61)]
+
+<span data-ttu-id="5f21c-240">上述程式碼會進行下列變更：</span><span class="sxs-lookup"><span data-stu-id="5f21c-240">The preceding code makes the following changes:</span></span>
+
+* <span data-ttu-id="5f21c-241">為 `Courses` 導覽屬性使用積極式載入。</span><span class="sxs-lookup"><span data-stu-id="5f21c-241">Uses eager loading for the `Courses` navigation property.</span></span> <span data-ttu-id="5f21c-242">必須包含 `Courses`，否則刪除講師時不會刪除它們。</span><span class="sxs-lookup"><span data-stu-id="5f21c-242">`Courses` must be included or they aren't deleted when the instructor is deleted.</span></span> <span data-ttu-id="5f21c-243">若要避免需要讀取們，您可以在資料庫中設定串聯刪除。</span><span class="sxs-lookup"><span data-stu-id="5f21c-243">To avoid needing to read them, configure cascade delete in the database.</span></span>
+
+* <span data-ttu-id="5f21c-244">若要刪除的講師已指派為任何部門的系統管理員，請先從部門中移除講師的指派。</span><span class="sxs-lookup"><span data-stu-id="5f21c-244">If the instructor to be deleted is assigned as administrator of any departments, removes the instructor assignment from those departments.</span></span>
+
+<span data-ttu-id="5f21c-245">執行應用程式及測試 Delete 頁面。</span><span class="sxs-lookup"><span data-stu-id="5f21c-245">Run the app and test the Delete page.</span></span>
+
+## <a name="next-steps"></a><span data-ttu-id="5f21c-246">下一步</span><span class="sxs-lookup"><span data-stu-id="5f21c-246">Next steps</span></span>
+
+> [!div class="step-by-step"]
+> <span data-ttu-id="5f21c-247">[上一個教學](xref:data/ef-rp/read-related-data) 
+>  課程[下一個教學](xref:data/ef-rp/concurrency)課程</span><span class="sxs-lookup"><span data-stu-id="5f21c-247">[Previous tutorial](xref:data/ef-rp/read-related-data)
+[Next tutorial](xref:data/ef-rp/concurrency)</span></span>
+
+::: moniker-end
+
+::: moniker range=">= aspnetcore-3.0 < aspnetcore-5.0"
+
+
+<span data-ttu-id="5f21c-248">本教學課程會示範如何更新相關資料。</span><span class="sxs-lookup"><span data-stu-id="5f21c-248">This tutorial shows how to update related data.</span></span> <span data-ttu-id="5f21c-249">下圖顯示一些已完成的頁面。</span><span class="sxs-lookup"><span data-stu-id="5f21c-249">The following illustrations show some of the completed pages.</span></span>
+
+<span data-ttu-id="5f21c-250">![課程 [編輯] 頁面](update-related-data/_static/course-edit30.png)
+![講師 [編輯] 頁面](update-related-data/_static/instructor-edit-courses30.png)</span><span class="sxs-lookup"><span data-stu-id="5f21c-250">![Course Edit page](update-related-data/_static/course-edit30.png)
+![Instructor Edit page](update-related-data/_static/instructor-edit-courses30.png)</span></span>
+
+## <a name="update-the-course-create-and-edit-pages"></a><span data-ttu-id="5f21c-251">更新 Course Create 和 Edit 頁面</span><span class="sxs-lookup"><span data-stu-id="5f21c-251">Update the Course Create and Edit pages</span></span>
+
+<span data-ttu-id="5f21c-252">Course Create 和 Edit 頁面的 scaffold 程式碼包含一個 Department 下拉式清單，其顯示 Department 識別碼 (整數)。</span><span class="sxs-lookup"><span data-stu-id="5f21c-252">The scaffolded code for the Course Create and Edit pages has a Department drop-down list that shows Department ID (an integer).</span></span> <span data-ttu-id="5f21c-253">下拉式清單應該會顯示 Department 名稱，因此這兩個頁面需要部門名稱的清單。</span><span class="sxs-lookup"><span data-stu-id="5f21c-253">The drop-down should show the Department name, so both of these pages need a list of department names.</span></span> <span data-ttu-id="5f21c-254">若要提供該清單，請使用 Create 和 Edit 頁面的基底類別。</span><span class="sxs-lookup"><span data-stu-id="5f21c-254">To provide that list, use a base class for the Create and Edit pages.</span></span>
+
+### <a name="create-a-base-class-for-course-create-and-edit"></a><span data-ttu-id="5f21c-255">建立 Course Create 和 Edit 的基底類別</span><span class="sxs-lookup"><span data-stu-id="5f21c-255">Create a base class for Course Create and Edit</span></span>
+
+<span data-ttu-id="5f21c-256">使用下列程式碼建立 *Pages/Courses/DepartmentNamePageModel.cs* 檔案：</span><span class="sxs-lookup"><span data-stu-id="5f21c-256">Create a *Pages/Courses/DepartmentNamePageModel.cs* file with the following code:</span></span>
+
+[!code-csharp[](intro/samples/cu30/Pages/Courses/DepartmentNamePageModel.cs)]
+
+<span data-ttu-id="5f21c-257">上述程式碼會建立 [SelectList](/dotnet/api/microsoft.aspnetcore.mvc.rendering.selectlist) 以包含部門名稱的清單。</span><span class="sxs-lookup"><span data-stu-id="5f21c-257">The preceding code creates a [SelectList](/dotnet/api/microsoft.aspnetcore.mvc.rendering.selectlist) to contain the list of department names.</span></span> <span data-ttu-id="5f21c-258">如果指定了 `selectedDepartment`，就會在 `SelectList` 中選取該部門。</span><span class="sxs-lookup"><span data-stu-id="5f21c-258">If `selectedDepartment` is specified, that department is selected in the `SelectList`.</span></span>
+
+<span data-ttu-id="5f21c-259">*Create* 和 *Edit* 頁面模型類別將衍生自 `DepartmentNamePageModel`。</span><span class="sxs-lookup"><span data-stu-id="5f21c-259">The Create and Edit page model classes will derive from `DepartmentNamePageModel`.</span></span>
+
+### <a name="update-the-course-create-page-model"></a><span data-ttu-id="5f21c-260">更新 Course Create 頁面模型</span><span class="sxs-lookup"><span data-stu-id="5f21c-260">Update the Course Create page model</span></span>
+
+<span data-ttu-id="5f21c-261">Course 會指派給 Department。</span><span class="sxs-lookup"><span data-stu-id="5f21c-261">A Course is assigned to a Department.</span></span> <span data-ttu-id="5f21c-262">Create 和 Edit 頁面的基底類別會提供 `SelectList` 以用來選取部門。</span><span class="sxs-lookup"><span data-stu-id="5f21c-262">The base class for the Create and Edit pages provides a `SelectList` for selecting the department.</span></span> <span data-ttu-id="5f21c-263">使用 `SelectList` 的下拉式清單會設定 `Course.DepartmentID` 外部索引鍵 (FK) 屬性。</span><span class="sxs-lookup"><span data-stu-id="5f21c-263">The drop-down list that uses the `SelectList` sets the `Course.DepartmentID` foreign key (FK) property.</span></span> <span data-ttu-id="5f21c-264">EF Core 則使用 `Course.DepartmentID` FK 來載入 `Department` 導覽屬性。</span><span class="sxs-lookup"><span data-stu-id="5f21c-264">EF Core uses the `Course.DepartmentID` FK to load the `Department` navigation property.</span></span>
+
+![建立課程](update-related-data/_static/ddl30.png)
+
+<span data-ttu-id="5f21c-266">使用下列程式碼更新 *Pages/Courses/Create.cshtml.cs*：</span><span class="sxs-lookup"><span data-stu-id="5f21c-266">Update *Pages/Courses/Create.cshtml.cs* with the following code:</span></span>
 
 [!code-csharp[](intro/samples/cu30/Pages/Courses/Create.cshtml.cs?highlight=7,18,27-41)]
 
 [!INCLUDE[about the series](~/includes/code-comments-loc.md)]
 
-<span data-ttu-id="0d9d2-124">上述程式碼：</span><span class="sxs-lookup"><span data-stu-id="0d9d2-124">The preceding code:</span></span>
+<span data-ttu-id="5f21c-267">上述程式碼：</span><span class="sxs-lookup"><span data-stu-id="5f21c-267">The preceding code:</span></span>
 
-* <span data-ttu-id="0d9d2-125">衍生自 `DepartmentNamePageModel`。</span><span class="sxs-lookup"><span data-stu-id="0d9d2-125">Derives from `DepartmentNamePageModel`.</span></span>
-* <span data-ttu-id="0d9d2-126">使用 `TryUpdateModelAsync` 來防止[大量指派](xref:data/ef-rp/crud#overposting) (overposting)。</span><span class="sxs-lookup"><span data-stu-id="0d9d2-126">Uses `TryUpdateModelAsync` to prevent [overposting](xref:data/ef-rp/crud#overposting).</span></span>
-* <span data-ttu-id="0d9d2-127">移除 `ViewData["DepartmentID"]`。</span><span class="sxs-lookup"><span data-stu-id="0d9d2-127">Removes `ViewData["DepartmentID"]`.</span></span> <span data-ttu-id="0d9d2-128">`DepartmentNameSL` 基類是強型別模型，而且會由 Razor 頁面使用。</span><span class="sxs-lookup"><span data-stu-id="0d9d2-128">`DepartmentNameSL` from the base class is a strongly typed model and will be used by the Razor page.</span></span> <span data-ttu-id="0d9d2-129">強型別的模型優先於弱型別。</span><span class="sxs-lookup"><span data-stu-id="0d9d2-129">Strongly typed models are preferred over weakly typed.</span></span> <span data-ttu-id="0d9d2-130">如需詳細資訊，請參閱[弱型別資料 (ViewData 和 ViewBag)](xref:mvc/views/overview#VD_VB)。</span><span class="sxs-lookup"><span data-stu-id="0d9d2-130">For more information, see [Weakly typed data (ViewData and ViewBag)](xref:mvc/views/overview#VD_VB).</span></span>
+* <span data-ttu-id="5f21c-268">衍生自 `DepartmentNamePageModel`。</span><span class="sxs-lookup"><span data-stu-id="5f21c-268">Derives from `DepartmentNamePageModel`.</span></span>
+* <span data-ttu-id="5f21c-269">使用 `TryUpdateModelAsync` 來防止[大量指派](xref:data/ef-rp/crud#overposting) (overposting)。</span><span class="sxs-lookup"><span data-stu-id="5f21c-269">Uses `TryUpdateModelAsync` to prevent [overposting](xref:data/ef-rp/crud#overposting).</span></span>
+* <span data-ttu-id="5f21c-270">移除 `ViewData["DepartmentID"]`。</span><span class="sxs-lookup"><span data-stu-id="5f21c-270">Removes `ViewData["DepartmentID"]`.</span></span> <span data-ttu-id="5f21c-271">`DepartmentNameSL` 基類是強型別模型，而且會由 Razor 頁面使用。</span><span class="sxs-lookup"><span data-stu-id="5f21c-271">`DepartmentNameSL` from the base class is a strongly typed model and will be used by the Razor page.</span></span> <span data-ttu-id="5f21c-272">強型別的模型優先於弱型別。</span><span class="sxs-lookup"><span data-stu-id="5f21c-272">Strongly typed models are preferred over weakly typed.</span></span> <span data-ttu-id="5f21c-273">如需詳細資訊，請參閱[弱型別資料 (ViewData 和 ViewBag)](xref:mvc/views/overview#VD_VB)。</span><span class="sxs-lookup"><span data-stu-id="5f21c-273">For more information, see [Weakly typed data (ViewData and ViewBag)](xref:mvc/views/overview#VD_VB).</span></span>
 
-### <a name="update-the-course-create-no-locrazor-page"></a><span data-ttu-id="0d9d2-131">更新課程的 [建立] Razor 頁面</span><span class="sxs-lookup"><span data-stu-id="0d9d2-131">Update the Course Create Razor page</span></span>
+### <a name="update-the-course-create-razor-page"></a><span data-ttu-id="5f21c-274">更新課程的 [建立] Razor 頁面</span><span class="sxs-lookup"><span data-stu-id="5f21c-274">Update the Course Create Razor page</span></span>
 
-<span data-ttu-id="0d9d2-132">使用下列程式碼更新 *Pages/Courses/Create.cshtml*：</span><span class="sxs-lookup"><span data-stu-id="0d9d2-132">Update *Pages/Courses/Create.cshtml* with the following code:</span></span>
+<span data-ttu-id="5f21c-275">使用下列程式碼更新 *Pages/Courses/Create.cshtml*：</span><span class="sxs-lookup"><span data-stu-id="5f21c-275">Update *Pages/Courses/Create.cshtml* with the following code:</span></span>
 
 [!code-cshtml[](intro/samples/cu30/Pages/Courses/Create.cshtml?highlight=29-34)]
 
-<span data-ttu-id="0d9d2-133">上述程式碼會進行下列變更：</span><span class="sxs-lookup"><span data-stu-id="0d9d2-133">The preceding code makes the following changes:</span></span>
+<span data-ttu-id="5f21c-276">上述程式碼會進行下列變更：</span><span class="sxs-lookup"><span data-stu-id="5f21c-276">The preceding code makes the following changes:</span></span>
 
-* <span data-ttu-id="0d9d2-134">將標題從 **DepartmentID** 變更為 **Department**。</span><span class="sxs-lookup"><span data-stu-id="0d9d2-134">Changes the caption from **DepartmentID** to **Department**.</span></span>
-* <span data-ttu-id="0d9d2-135">以 `DepartmentNameSL` (來自基底類別) 取代 `"ViewBag.DepartmentID"`。</span><span class="sxs-lookup"><span data-stu-id="0d9d2-135">Replaces `"ViewBag.DepartmentID"` with `DepartmentNameSL` (from the base class).</span></span>
-* <span data-ttu-id="0d9d2-136">新增 [選取部門] 選項。</span><span class="sxs-lookup"><span data-stu-id="0d9d2-136">Adds the "Select Department" option.</span></span> <span data-ttu-id="0d9d2-137">此變更會在尚未選取任何部門時，在下拉式清單中轉譯「選取部門」而非第一個部門。</span><span class="sxs-lookup"><span data-stu-id="0d9d2-137">This change renders "Select Department" in the drop-down when no department has been selected yet, rather than the first department.</span></span>
-* <span data-ttu-id="0d9d2-138">未選取部門時，請新增驗證訊息。</span><span class="sxs-lookup"><span data-stu-id="0d9d2-138">Adds a validation message when the department isn't selected.</span></span>
+* <span data-ttu-id="5f21c-277">將標題從 **DepartmentID** 變更為 **Department**。</span><span class="sxs-lookup"><span data-stu-id="5f21c-277">Changes the caption from **DepartmentID** to **Department**.</span></span>
+* <span data-ttu-id="5f21c-278">以 `DepartmentNameSL` (來自基底類別) 取代 `"ViewBag.DepartmentID"`。</span><span class="sxs-lookup"><span data-stu-id="5f21c-278">Replaces `"ViewBag.DepartmentID"` with `DepartmentNameSL` (from the base class).</span></span>
+* <span data-ttu-id="5f21c-279">新增 [選取部門] 選項。</span><span class="sxs-lookup"><span data-stu-id="5f21c-279">Adds the "Select Department" option.</span></span> <span data-ttu-id="5f21c-280">此變更會在尚未選取任何部門時，在下拉式清單中轉譯「選取部門」而非第一個部門。</span><span class="sxs-lookup"><span data-stu-id="5f21c-280">This change renders "Select Department" in the drop-down when no department has been selected yet, rather than the first department.</span></span>
+* <span data-ttu-id="5f21c-281">未選取部門時，請新增驗證訊息。</span><span class="sxs-lookup"><span data-stu-id="5f21c-281">Adds a validation message when the department isn't selected.</span></span>
 
-<span data-ttu-id="0d9d2-139">此 Razor 頁面會使用 [選取標記](xref:mvc/views/working-with-forms#the-select-tag-helper)協助程式：</span><span class="sxs-lookup"><span data-stu-id="0d9d2-139">The Razor Page uses the [Select Tag Helper](xref:mvc/views/working-with-forms#the-select-tag-helper):</span></span>
+<span data-ttu-id="5f21c-282">此 Razor 頁面會使用 [選取標記](xref:mvc/views/working-with-forms#the-select-tag-helper)協助程式：</span><span class="sxs-lookup"><span data-stu-id="5f21c-282">The Razor Page uses the [Select Tag Helper](xref:mvc/views/working-with-forms#the-select-tag-helper):</span></span>
 
 [!code-cshtml[](intro/samples/cu/Pages/Courses/Create.cshtml?range=28-35&highlight=3-6)]
 
-<span data-ttu-id="0d9d2-140">測試 *Create* 頁面。</span><span class="sxs-lookup"><span data-stu-id="0d9d2-140">Test the Create page.</span></span> <span data-ttu-id="0d9d2-141">*Create* 頁面會顯示部門名稱，而不是部門識別碼。</span><span class="sxs-lookup"><span data-stu-id="0d9d2-141">The Create page displays the department name rather than the department ID.</span></span>
+<span data-ttu-id="5f21c-283">測試 *Create* 頁面。</span><span class="sxs-lookup"><span data-stu-id="5f21c-283">Test the Create page.</span></span> <span data-ttu-id="5f21c-284">*Create* 頁面會顯示部門名稱，而不是部門識別碼。</span><span class="sxs-lookup"><span data-stu-id="5f21c-284">The Create page displays the department name rather than the department ID.</span></span>
 
-### <a name="update-the-course-edit-page-model"></a><span data-ttu-id="0d9d2-142">更新 Course Edit 頁面模型</span><span class="sxs-lookup"><span data-stu-id="0d9d2-142">Update the Course Edit page model</span></span>
+### <a name="update-the-course-edit-page-model"></a><span data-ttu-id="5f21c-285">更新 Course Edit 頁面模型</span><span class="sxs-lookup"><span data-stu-id="5f21c-285">Update the Course Edit page model</span></span>
 
-<span data-ttu-id="0d9d2-143">使用下列程式碼更新 *Pages/Courses/Edit.cshtml.cs*：</span><span class="sxs-lookup"><span data-stu-id="0d9d2-143">Update *Pages/Courses/Edit.cshtml.cs* with the following code:</span></span>
+<span data-ttu-id="5f21c-286">使用下列程式碼更新 *Pages/Courses/Edit.cshtml.cs*：</span><span class="sxs-lookup"><span data-stu-id="5f21c-286">Update *Pages/Courses/Edit.cshtml.cs* with the following code:</span></span>
 
 [!code-csharp[](intro/samples/cu30/Pages/Courses/Edit.cshtml.cs?highlight=8,28,35,36,40-66)]
 
-<span data-ttu-id="0d9d2-144">這些變更類似於 *Create* 頁面模型中所做的變更。</span><span class="sxs-lookup"><span data-stu-id="0d9d2-144">The changes are similar to those made in the Create page model.</span></span> <span data-ttu-id="0d9d2-145">在上述程式碼中，`PopulateDepartmentsDropDownList` 會傳遞部門識別碼，其在下拉式清單中選取部門。</span><span class="sxs-lookup"><span data-stu-id="0d9d2-145">In the preceding code, `PopulateDepartmentsDropDownList` passes in the department ID, which selects that department in the drop-down list.</span></span>
+<span data-ttu-id="5f21c-287">這些變更類似於 *Create* 頁面模型中所做的變更。</span><span class="sxs-lookup"><span data-stu-id="5f21c-287">The changes are similar to those made in the Create page model.</span></span> <span data-ttu-id="5f21c-288">在上述程式碼中，`PopulateDepartmentsDropDownList` 會傳遞部門識別碼，其在下拉式清單中選取部門。</span><span class="sxs-lookup"><span data-stu-id="5f21c-288">In the preceding code, `PopulateDepartmentsDropDownList` passes in the department ID, which selects that department in the drop-down list.</span></span>
 
-### <a name="update-the-course-edit-no-locrazor-page"></a><span data-ttu-id="0d9d2-146">更新課程的 [編輯] Razor 頁面</span><span class="sxs-lookup"><span data-stu-id="0d9d2-146">Update the Course Edit Razor page</span></span>
+### <a name="update-the-course-edit-razor-page"></a><span data-ttu-id="5f21c-289">更新課程的 [編輯] Razor 頁面</span><span class="sxs-lookup"><span data-stu-id="5f21c-289">Update the Course Edit Razor page</span></span>
 
-<span data-ttu-id="0d9d2-147">使用下列程式碼更新 *Pages/Courses/Edit.cshtml*：</span><span class="sxs-lookup"><span data-stu-id="0d9d2-147">Update *Pages/Courses/Edit.cshtml* with the following code:</span></span>
+<span data-ttu-id="5f21c-290">使用下列程式碼更新 *Pages/Courses/Edit.cshtml*：</span><span class="sxs-lookup"><span data-stu-id="5f21c-290">Update *Pages/Courses/Edit.cshtml* with the following code:</span></span>
 
 [!code-cshtml[](intro/samples/cu30/Pages/Courses/Edit.cshtml?highlight=17-20,32-35)]
 
-<span data-ttu-id="0d9d2-148">上述程式碼會進行下列變更：</span><span class="sxs-lookup"><span data-stu-id="0d9d2-148">The preceding code makes the following changes:</span></span>
+<span data-ttu-id="5f21c-291">上述程式碼會進行下列變更：</span><span class="sxs-lookup"><span data-stu-id="5f21c-291">The preceding code makes the following changes:</span></span>
 
-* <span data-ttu-id="0d9d2-149">顯示課程識別碼。</span><span class="sxs-lookup"><span data-stu-id="0d9d2-149">Displays the course ID.</span></span> <span data-ttu-id="0d9d2-150">通常不會顯示實體的主索引鍵 (PK)。</span><span class="sxs-lookup"><span data-stu-id="0d9d2-150">Generally the Primary Key (PK) of an entity isn't displayed.</span></span> <span data-ttu-id="0d9d2-151">PK 對使用者來說通常是沒有意義的。</span><span class="sxs-lookup"><span data-stu-id="0d9d2-151">PKs are usually meaningless to users.</span></span> <span data-ttu-id="0d9d2-152">在此情況下，PK 是課程編號。</span><span class="sxs-lookup"><span data-stu-id="0d9d2-152">In this case, the PK is the course number.</span></span>
-* <span data-ttu-id="0d9d2-153">將 Department 下拉式清單的標題從 **DepartmentID** 變更為 **Department**。</span><span class="sxs-lookup"><span data-stu-id="0d9d2-153">Changes the caption for the Department drop-down from **DepartmentID** to **Department**.</span></span>
-* <span data-ttu-id="0d9d2-154">以 `DepartmentNameSL` (來自基底類別) 取代 `"ViewBag.DepartmentID"`。</span><span class="sxs-lookup"><span data-stu-id="0d9d2-154">Replaces `"ViewBag.DepartmentID"` with `DepartmentNameSL` (from the base class).</span></span>
+* <span data-ttu-id="5f21c-292">顯示課程識別碼。</span><span class="sxs-lookup"><span data-stu-id="5f21c-292">Displays the course ID.</span></span> <span data-ttu-id="5f21c-293">通常不會顯示實體的主索引鍵 (PK)。</span><span class="sxs-lookup"><span data-stu-id="5f21c-293">Generally the Primary Key (PK) of an entity isn't displayed.</span></span> <span data-ttu-id="5f21c-294">PK 對使用者來說通常是沒有意義的。</span><span class="sxs-lookup"><span data-stu-id="5f21c-294">PKs are usually meaningless to users.</span></span> <span data-ttu-id="5f21c-295">在此情況下，PK 是課程編號。</span><span class="sxs-lookup"><span data-stu-id="5f21c-295">In this case, the PK is the course number.</span></span>
+* <span data-ttu-id="5f21c-296">將 Department 下拉式清單的標題從 **DepartmentID** 變更為 **Department**。</span><span class="sxs-lookup"><span data-stu-id="5f21c-296">Changes the caption for the Department drop-down from **DepartmentID** to **Department**.</span></span>
+* <span data-ttu-id="5f21c-297">以 `DepartmentNameSL` (來自基底類別) 取代 `"ViewBag.DepartmentID"`。</span><span class="sxs-lookup"><span data-stu-id="5f21c-297">Replaces `"ViewBag.DepartmentID"` with `DepartmentNameSL` (from the base class).</span></span>
 
-<span data-ttu-id="0d9d2-155">此頁面包含課程編號的隱藏欄位 (`<input type="hidden">`)。</span><span class="sxs-lookup"><span data-stu-id="0d9d2-155">The page contains a hidden field (`<input type="hidden">`) for the course number.</span></span> <span data-ttu-id="0d9d2-156">新增 `<label>` 標籤協助程式與 `asp-for="Course.CourseID"` 無法免除隱藏欄位的需求。</span><span class="sxs-lookup"><span data-stu-id="0d9d2-156">Adding a `<label>` tag helper with `asp-for="Course.CourseID"` doesn't eliminate the need for the hidden field.</span></span> <span data-ttu-id="0d9d2-157">當使用者按一下 [儲存]  時，需要有 `<input type="hidden">` 才能將課程編號包含在張貼資料中。</span><span class="sxs-lookup"><span data-stu-id="0d9d2-157">`<input type="hidden">` is required for the course number to be included in the posted data when the user clicks **Save**.</span></span>
+<span data-ttu-id="5f21c-298">此頁面包含課程編號的隱藏欄位 (`<input type="hidden">`)。</span><span class="sxs-lookup"><span data-stu-id="5f21c-298">The page contains a hidden field (`<input type="hidden">`) for the course number.</span></span> <span data-ttu-id="5f21c-299">新增 `<label>` 標籤協助程式與 `asp-for="Course.CourseID"` 無法免除隱藏欄位的需求。</span><span class="sxs-lookup"><span data-stu-id="5f21c-299">Adding a `<label>` tag helper with `asp-for="Course.CourseID"` doesn't eliminate the need for the hidden field.</span></span> <span data-ttu-id="5f21c-300">當使用者按一下 [儲存]  時，需要有 `<input type="hidden">` 才能將課程編號包含在張貼資料中。</span><span class="sxs-lookup"><span data-stu-id="5f21c-300">`<input type="hidden">` is required for the course number to be included in the posted data when the user clicks **Save**.</span></span>
 
-## <a name="update-the-course-details-and-delete-pages"></a><span data-ttu-id="0d9d2-158">更新 Course Detail 和 Delete 頁面</span><span class="sxs-lookup"><span data-stu-id="0d9d2-158">Update the Course Details and Delete pages</span></span>
+## <a name="update-the-course-details-and-delete-pages"></a><span data-ttu-id="5f21c-301">更新 Course Detail 和 Delete 頁面</span><span class="sxs-lookup"><span data-stu-id="5f21c-301">Update the Course Details and Delete pages</span></span>
 
-<span data-ttu-id="0d9d2-159">不需要追蹤時，[AsNoTracking](/dotnet/api/microsoft.entityframeworkcore.entityframeworkqueryableextensions.asnotracking#Microsoft_EntityFrameworkCore_EntityFrameworkQueryableExtensions_AsNoTracking__1_System_Linq_IQueryable___0__) 可以改善效能。</span><span class="sxs-lookup"><span data-stu-id="0d9d2-159">[AsNoTracking](/dotnet/api/microsoft.entityframeworkcore.entityframeworkqueryableextensions.asnotracking#Microsoft_EntityFrameworkCore_EntityFrameworkQueryableExtensions_AsNoTracking__1_System_Linq_IQueryable___0__) can improve performance when tracking isn't required.</span></span>
+<span data-ttu-id="5f21c-302">不需要追蹤時，[AsNoTracking](/dotnet/api/microsoft.entityframeworkcore.entityframeworkqueryableextensions.asnotracking#Microsoft_EntityFrameworkCore_EntityFrameworkQueryableExtensions_AsNoTracking__1_System_Linq_IQueryable___0__) 可以改善效能。</span><span class="sxs-lookup"><span data-stu-id="5f21c-302">[AsNoTracking](/dotnet/api/microsoft.entityframeworkcore.entityframeworkqueryableextensions.asnotracking#Microsoft_EntityFrameworkCore_EntityFrameworkQueryableExtensions_AsNoTracking__1_System_Linq_IQueryable___0__) can improve performance when tracking isn't required.</span></span>
 
-### <a name="update-the-course-page-models"></a><span data-ttu-id="0d9d2-160">更新 Course 頁面模型</span><span class="sxs-lookup"><span data-stu-id="0d9d2-160">Update the Course page models</span></span>
+### <a name="update-the-course-page-models"></a><span data-ttu-id="5f21c-303">更新 Course 頁面模型</span><span class="sxs-lookup"><span data-stu-id="5f21c-303">Update the Course page models</span></span>
 
-<span data-ttu-id="0d9d2-161">使用下列程式碼更新 *Pages/Courses/Delete.cshtml.cs* 來新增 `AsNoTracking`：</span><span class="sxs-lookup"><span data-stu-id="0d9d2-161">Update *Pages/Courses/Delete.cshtml.cs* with the following code to add `AsNoTracking`:</span></span>
+<span data-ttu-id="5f21c-304">使用下列程式碼更新 *Pages/Courses/Delete.cshtml.cs* 來新增 `AsNoTracking`：</span><span class="sxs-lookup"><span data-stu-id="5f21c-304">Update *Pages/Courses/Delete.cshtml.cs* with the following code to add `AsNoTracking`:</span></span>
 
 [!code-csharp[](intro/samples/cu30/Pages/Courses/Delete.cshtml.cs?highlight=29)]
 
-<span data-ttu-id="0d9d2-162">在 *Pages/Courses/Details.cshtml.cs* 檔案中進行相同的變更：</span><span class="sxs-lookup"><span data-stu-id="0d9d2-162">Make the same change in the *Pages/Courses/Details.cshtml.cs* file:</span></span>
+<span data-ttu-id="5f21c-305">在 *Pages/Courses/Details.cshtml.cs* 檔案中進行相同的變更：</span><span class="sxs-lookup"><span data-stu-id="5f21c-305">Make the same change in the *Pages/Courses/Details.cshtml.cs* file:</span></span>
 
 [!code-csharp[](intro/samples/cu30/Pages/Courses/Details.cshtml.cs?highlight=28)]
 
-### <a name="update-the-course-no-locrazor-pages"></a><span data-ttu-id="0d9d2-163">更新課程 Razor 頁面</span><span class="sxs-lookup"><span data-stu-id="0d9d2-163">Update the Course Razor pages</span></span>
+### <a name="update-the-course-razor-pages"></a><span data-ttu-id="5f21c-306">更新課程 Razor 頁面</span><span class="sxs-lookup"><span data-stu-id="5f21c-306">Update the Course Razor pages</span></span>
 
-<span data-ttu-id="0d9d2-164">使用下列程式碼更新 *Pages/Courses/Delete.cshtml*：</span><span class="sxs-lookup"><span data-stu-id="0d9d2-164">Update *Pages/Courses/Delete.cshtml* with the following code:</span></span>
+<span data-ttu-id="5f21c-307">使用下列程式碼更新 *Pages/Courses/Delete.cshtml*：</span><span class="sxs-lookup"><span data-stu-id="5f21c-307">Update *Pages/Courses/Delete.cshtml* with the following code:</span></span>
 
 [!code-cshtml[](intro/samples/cu30/Pages/Courses/Delete.cshtml?highlight=15-20,37)]
 
-<span data-ttu-id="0d9d2-165">對 *Details* 頁面進行相同的變更。</span><span class="sxs-lookup"><span data-stu-id="0d9d2-165">Make the same changes to the Details page.</span></span>
+<span data-ttu-id="5f21c-308">對 *Details* 頁面進行相同的變更。</span><span class="sxs-lookup"><span data-stu-id="5f21c-308">Make the same changes to the Details page.</span></span>
 
 [!code-cshtml[](intro/samples/cu30/Pages/Courses/Details.cshtml?highlight=14-19,36)]
 
-## <a name="test-the-course-pages"></a><span data-ttu-id="0d9d2-166">測試 Course 頁面</span><span class="sxs-lookup"><span data-stu-id="0d9d2-166">Test the Course pages</span></span>
+## <a name="test-the-course-pages"></a><span data-ttu-id="5f21c-309">測試 Course 頁面</span><span class="sxs-lookup"><span data-stu-id="5f21c-309">Test the Course pages</span></span>
 
-<span data-ttu-id="0d9d2-167">測試建立、編輯、詳細資料和刪除頁面。</span><span class="sxs-lookup"><span data-stu-id="0d9d2-167">Test the create, edit, details, and delete pages.</span></span>
+<span data-ttu-id="5f21c-310">測試建立、編輯、詳細資料和刪除頁面。</span><span class="sxs-lookup"><span data-stu-id="5f21c-310">Test the create, edit, details, and delete pages.</span></span>
 
-## <a name="update-the-instructor-create-and-edit-pages"></a><span data-ttu-id="0d9d2-168">更新講師 Create 和 Edit 頁面</span><span class="sxs-lookup"><span data-stu-id="0d9d2-168">Update the instructor Create and Edit pages</span></span>
+## <a name="update-the-instructor-create-and-edit-pages"></a><span data-ttu-id="5f21c-311">更新講師 Create 和 Edit 頁面</span><span class="sxs-lookup"><span data-stu-id="5f21c-311">Update the instructor Create and Edit pages</span></span>
 
-<span data-ttu-id="0d9d2-169">講師可教授任何數量的課程。</span><span class="sxs-lookup"><span data-stu-id="0d9d2-169">Instructors may teach any number of courses.</span></span> <span data-ttu-id="0d9d2-170">下圖顯示講師的 Edit 頁面，其中包含一個課程核取方塊的陣列。</span><span class="sxs-lookup"><span data-stu-id="0d9d2-170">The following image shows the instructor Edit page with an array of course checkboxes.</span></span>
+<span data-ttu-id="5f21c-312">講師可教授任何數量的課程。</span><span class="sxs-lookup"><span data-stu-id="5f21c-312">Instructors may teach any number of courses.</span></span> <span data-ttu-id="5f21c-313">下圖顯示講師的 Edit 頁面，其中包含一個課程核取方塊的陣列。</span><span class="sxs-lookup"><span data-stu-id="5f21c-313">The following image shows the instructor Edit page with an array of course checkboxes.</span></span>
 
 ![Instructor [編輯] 頁面與課程](update-related-data/_static/instructor-edit-courses30.png)
 
-<span data-ttu-id="0d9d2-172">核取方塊可讓您變更指派給講師的課程。</span><span class="sxs-lookup"><span data-stu-id="0d9d2-172">The checkboxes enable changes to courses an instructor is assigned to.</span></span> <span data-ttu-id="0d9d2-173">資料庫中的每個課程都會顯示一個核取方塊。</span><span class="sxs-lookup"><span data-stu-id="0d9d2-173">A checkbox is displayed for every course in the database.</span></span> <span data-ttu-id="0d9d2-174">指派給講師的課程會處於選取狀態。</span><span class="sxs-lookup"><span data-stu-id="0d9d2-174">Courses that the instructor is assigned to are selected.</span></span> <span data-ttu-id="0d9d2-175">使用者可以選取或清除核取方塊來變更課程指派。</span><span class="sxs-lookup"><span data-stu-id="0d9d2-175">The user can select or clear checkboxes to change course assignments.</span></span> <span data-ttu-id="0d9d2-176">若課程數要多上許多，則使用不同 UI 的效能可能會更好。</span><span class="sxs-lookup"><span data-stu-id="0d9d2-176">If the number of courses were much greater, a different UI might work better.</span></span> <span data-ttu-id="0d9d2-177">但此處所顯示管理多對多關聯性的方法不會變更。</span><span class="sxs-lookup"><span data-stu-id="0d9d2-177">But the method of managing a many-to-many relationship shown here wouldn't change.</span></span> <span data-ttu-id="0d9d2-178">若要建立或刪除關聯性，您可以操作聯結實體。</span><span class="sxs-lookup"><span data-stu-id="0d9d2-178">To create or delete relationships, you manipulate a join entity.</span></span>
+<span data-ttu-id="5f21c-315">核取方塊可讓您變更指派給講師的課程。</span><span class="sxs-lookup"><span data-stu-id="5f21c-315">The checkboxes enable changes to courses an instructor is assigned to.</span></span> <span data-ttu-id="5f21c-316">資料庫中的每個課程都會顯示一個核取方塊。</span><span class="sxs-lookup"><span data-stu-id="5f21c-316">A checkbox is displayed for every course in the database.</span></span> <span data-ttu-id="5f21c-317">指派給講師的課程會處於選取狀態。</span><span class="sxs-lookup"><span data-stu-id="5f21c-317">Courses that the instructor is assigned to are selected.</span></span> <span data-ttu-id="5f21c-318">使用者可以選取或清除核取方塊來變更課程指派。</span><span class="sxs-lookup"><span data-stu-id="5f21c-318">The user can select or clear checkboxes to change course assignments.</span></span> <span data-ttu-id="5f21c-319">若課程數要多上許多，則使用不同 UI 的效能可能會更好。</span><span class="sxs-lookup"><span data-stu-id="5f21c-319">If the number of courses were much greater, a different UI might work better.</span></span> <span data-ttu-id="5f21c-320">但此處所顯示管理多對多關聯性的方法不會變更。</span><span class="sxs-lookup"><span data-stu-id="5f21c-320">But the method of managing a many-to-many relationship shown here wouldn't change.</span></span> <span data-ttu-id="5f21c-321">若要建立或刪除關聯性，您可以操作聯結實體。</span><span class="sxs-lookup"><span data-stu-id="5f21c-321">To create or delete relationships, you manipulate a join entity.</span></span>
 
-### <a name="create-a-class-for-assigned-courses-data"></a><span data-ttu-id="0d9d2-179">建立受指派課程資料的類別</span><span class="sxs-lookup"><span data-stu-id="0d9d2-179">Create a class for assigned courses data</span></span>
+### <a name="create-a-class-for-assigned-courses-data"></a><span data-ttu-id="5f21c-322">建立受指派課程資料的類別</span><span class="sxs-lookup"><span data-stu-id="5f21c-322">Create a class for assigned courses data</span></span>
 
-<span data-ttu-id="0d9d2-180">以下列程式碼建立 *SchoolViewModels/AssignedCourseData.cs*：</span><span class="sxs-lookup"><span data-stu-id="0d9d2-180">Create *SchoolViewModels/AssignedCourseData.cs* with the following code:</span></span>
+<span data-ttu-id="5f21c-323">以下列程式碼建立 *SchoolViewModels/AssignedCourseData.cs*：</span><span class="sxs-lookup"><span data-stu-id="5f21c-323">Create *SchoolViewModels/AssignedCourseData.cs* with the following code:</span></span>
 
 [!code-csharp[](intro/samples/cu30/Models/SchoolViewModels/AssignedCourseData.cs)]
 
-<span data-ttu-id="0d9d2-181">`AssignedCourseData` 類別包含資料，用來建立指派給講師課程的核取方塊。</span><span class="sxs-lookup"><span data-stu-id="0d9d2-181">The `AssignedCourseData` class contains data to create the check boxes for courses assigned to an instructor.</span></span>
+<span data-ttu-id="5f21c-324">`AssignedCourseData` 類別包含資料，用來建立指派給講師課程的核取方塊。</span><span class="sxs-lookup"><span data-stu-id="5f21c-324">The `AssignedCourseData` class contains data to create the check boxes for courses assigned to an instructor.</span></span>
 
-### <a name="create-an-instructor-page-model-base-class"></a><span data-ttu-id="0d9d2-182">建立 Instructor 頁面模型基底類別</span><span class="sxs-lookup"><span data-stu-id="0d9d2-182">Create an Instructor page model base class</span></span>
+### <a name="create-an-instructor-page-model-base-class"></a><span data-ttu-id="5f21c-325">建立 Instructor 頁面模型基底類別</span><span class="sxs-lookup"><span data-stu-id="5f21c-325">Create an Instructor page model base class</span></span>
 
-<span data-ttu-id="0d9d2-183">建立 *Pages/Instructors/InstructorCoursesPageModel.cs* 基底類別：</span><span class="sxs-lookup"><span data-stu-id="0d9d2-183">Create the *Pages/Instructors/InstructorCoursesPageModel.cs* base class:</span></span>
+<span data-ttu-id="5f21c-326">建立 *Pages/Instructors/InstructorCoursesPageModel.cs* 基底類別：</span><span class="sxs-lookup"><span data-stu-id="5f21c-326">Create the *Pages/Instructors/InstructorCoursesPageModel.cs* base class:</span></span>
 
 [!code-csharp[](intro/samples/cu30/Pages/Instructors/InstructorCoursesPageModel.cs?name=snippet_All)]
 
-<span data-ttu-id="0d9d2-184">`InstructorCoursesPageModel` 是您將用於 *Edit* 和 *Create* 頁面模型的基底類別。</span><span class="sxs-lookup"><span data-stu-id="0d9d2-184">The `InstructorCoursesPageModel` is the base class you will use for the Edit and Create page models.</span></span> <span data-ttu-id="0d9d2-185">`PopulateAssignedCourseData` 會讀取所有 `Course` 實體來擴展 `AssignedCourseDataList`。</span><span class="sxs-lookup"><span data-stu-id="0d9d2-185">`PopulateAssignedCourseData` reads all `Course` entities to populate `AssignedCourseDataList`.</span></span> <span data-ttu-id="0d9d2-186">對於每個課程，此程式碼設定 `CourseID`、標題以及是否將講師指派給課程。</span><span class="sxs-lookup"><span data-stu-id="0d9d2-186">For each course, the code sets the `CourseID`, title, and whether or not the instructor is assigned to the course.</span></span> <span data-ttu-id="0d9d2-187">[HashSet](/dotnet/api/system.collections.generic.hashset-1) 會用來進行有效率的查閱。</span><span class="sxs-lookup"><span data-stu-id="0d9d2-187">A [HashSet](/dotnet/api/system.collections.generic.hashset-1) is used for efficient lookups.</span></span>
+<span data-ttu-id="5f21c-327">`InstructorCoursesPageModel` 是您將用於 *Edit* 和 *Create* 頁面模型的基底類別。</span><span class="sxs-lookup"><span data-stu-id="5f21c-327">The `InstructorCoursesPageModel` is the base class you will use for the Edit and Create page models.</span></span> <span data-ttu-id="5f21c-328">`PopulateAssignedCourseData` 會讀取所有 `Course` 實體來擴展 `AssignedCourseDataList`。</span><span class="sxs-lookup"><span data-stu-id="5f21c-328">`PopulateAssignedCourseData` reads all `Course` entities to populate `AssignedCourseDataList`.</span></span> <span data-ttu-id="5f21c-329">對於每個課程，此程式碼設定 `CourseID`、標題以及是否將講師指派給課程。</span><span class="sxs-lookup"><span data-stu-id="5f21c-329">For each course, the code sets the `CourseID`, title, and whether or not the instructor is assigned to the course.</span></span> <span data-ttu-id="5f21c-330">[HashSet](/dotnet/api/system.collections.generic.hashset-1) 會用來進行有效率的查閱。</span><span class="sxs-lookup"><span data-stu-id="5f21c-330">A [HashSet](/dotnet/api/system.collections.generic.hashset-1) is used for efficient lookups.</span></span>
 
-<span data-ttu-id="0d9d2-188">因為 Razor 頁面沒有課程實體的集合，所以模型系結器無法自動更新 `CourseAssignments` 導覽屬性。</span><span class="sxs-lookup"><span data-stu-id="0d9d2-188">Since the Razor page doesn't have a collection of Course entities, the model binder can't automatically update the `CourseAssignments` navigation property.</span></span> <span data-ttu-id="0d9d2-189">相較於使用模型繫結器更新 `CourseAssignments` 導覽屬性，您會在新的 `UpdateInstructorCourses` 方法中進行相同的操作。</span><span class="sxs-lookup"><span data-stu-id="0d9d2-189">Instead of using the model binder to update the `CourseAssignments` navigation property, you do that in the new `UpdateInstructorCourses` method.</span></span> <span data-ttu-id="0d9d2-190">因此您必須從模型繫結器中排除 `CourseAssignments` 屬性。</span><span class="sxs-lookup"><span data-stu-id="0d9d2-190">Therefore you need to exclude the `CourseAssignments` property from model binding.</span></span> <span data-ttu-id="0d9d2-191">這並不需要對呼叫的程式碼進行任何變更， `TryUpdateModel` 因為您是使用具有宣告屬性的多載，而 `CourseAssignments` 不是在包含清單中。</span><span class="sxs-lookup"><span data-stu-id="0d9d2-191">This doesn't require any change to the code that calls `TryUpdateModel` because you're using the overload with declared properties and `CourseAssignments` isn't in the include list.</span></span>
+<span data-ttu-id="5f21c-331">因為 Razor 頁面沒有課程實體的集合，所以模型系結器無法自動更新 `CourseAssignments` 導覽屬性。</span><span class="sxs-lookup"><span data-stu-id="5f21c-331">Since the Razor page doesn't have a collection of Course entities, the model binder can't automatically update the `CourseAssignments` navigation property.</span></span> <span data-ttu-id="5f21c-332">相較於使用模型繫結器更新 `CourseAssignments` 導覽屬性，您會在新的 `UpdateInstructorCourses` 方法中進行相同的操作。</span><span class="sxs-lookup"><span data-stu-id="5f21c-332">Instead of using the model binder to update the `CourseAssignments` navigation property, you do that in the new `UpdateInstructorCourses` method.</span></span> <span data-ttu-id="5f21c-333">因此您必須從模型繫結器中排除 `CourseAssignments` 屬性。</span><span class="sxs-lookup"><span data-stu-id="5f21c-333">Therefore you need to exclude the `CourseAssignments` property from model binding.</span></span> <span data-ttu-id="5f21c-334">這並不需要對呼叫的程式碼進行任何變更， `TryUpdateModel` 因為您是使用具有宣告屬性的多載，而 `CourseAssignments` 不是在包含清單中。</span><span class="sxs-lookup"><span data-stu-id="5f21c-334">This doesn't require any change to the code that calls `TryUpdateModel` because you're using the overload with declared properties and `CourseAssignments` isn't in the include list.</span></span>
 
-<span data-ttu-id="0d9d2-192">若沒有選取任何核取方塊，`UpdateInstructorCourses` 中的程式碼會使用空集合初始化 `CourseAssignments` 導覽屬性並傳回：</span><span class="sxs-lookup"><span data-stu-id="0d9d2-192">If no check boxes were selected, the code in `UpdateInstructorCourses` initializes the `CourseAssignments` navigation property with an empty collection and returns:</span></span>
+<span data-ttu-id="5f21c-335">若沒有選取任何核取方塊，`UpdateInstructorCourses` 中的程式碼會使用空集合初始化 `CourseAssignments` 導覽屬性並傳回：</span><span class="sxs-lookup"><span data-stu-id="5f21c-335">If no check boxes were selected, the code in `UpdateInstructorCourses` initializes the `CourseAssignments` navigation property with an empty collection and returns:</span></span>
 
 [!code-csharp[](intro/samples/cu30/Pages/Instructors/InstructorCoursesPageModel.cs?name=snippet_IfNull)]
 
-<span data-ttu-id="0d9d2-193">然後程式碼會以迴圈逐一巡覽資料庫中的所有課程，並檢查每個已指派給講師的課程，以及在頁面中選取的課程。</span><span class="sxs-lookup"><span data-stu-id="0d9d2-193">The code then loops through all courses in the database and checks each course against the ones currently assigned to the instructor versus the ones that were selected in the page.</span></span> <span data-ttu-id="0d9d2-194">為了協助達成有效率的搜尋，後者的兩個集合會儲存在 `HashSet` 物件中。</span><span class="sxs-lookup"><span data-stu-id="0d9d2-194">To facilitate efficient lookups, the latter two collections are stored in `HashSet` objects.</span></span>
+<span data-ttu-id="5f21c-336">然後程式碼會以迴圈逐一巡覽資料庫中的所有課程，並檢查每個已指派給講師的課程，以及在頁面中選取的課程。</span><span class="sxs-lookup"><span data-stu-id="5f21c-336">The code then loops through all courses in the database and checks each course against the ones currently assigned to the instructor versus the ones that were selected in the page.</span></span> <span data-ttu-id="5f21c-337">為了協助達成有效率的搜尋，後者的兩個集合會儲存在 `HashSet` 物件中。</span><span class="sxs-lookup"><span data-stu-id="5f21c-337">To facilitate efficient lookups, the latter two collections are stored in `HashSet` objects.</span></span>
 
-<span data-ttu-id="0d9d2-195">若課程的核取方塊已被選取，但課程並未位於 `Instructor.CourseAssignments` 導覽屬性中，則課程便會新增至導覽屬性的集合中。</span><span class="sxs-lookup"><span data-stu-id="0d9d2-195">If the check box for a course was selected but the course isn't in the `Instructor.CourseAssignments` navigation property, the course is added to the collection in the navigation property.</span></span>
+<span data-ttu-id="5f21c-338">若課程的核取方塊已被選取，但課程並未位於 `Instructor.CourseAssignments` 導覽屬性中，則課程便會新增至導覽屬性的集合中。</span><span class="sxs-lookup"><span data-stu-id="5f21c-338">If the check box for a course was selected but the course isn't in the `Instructor.CourseAssignments` navigation property, the course is added to the collection in the navigation property.</span></span>
 
 [!code-csharp[](intro/samples/cu30/Pages/Instructors/InstructorCoursesPageModel.cs?name=snippet_UpdateCourses)]
 
-<span data-ttu-id="0d9d2-196">若課程的核取方塊未被選取，但課程卻位於 `Instructor.CourseAssignments` 導覽屬性中，則課程便會從導覽屬性的集合中移除。</span><span class="sxs-lookup"><span data-stu-id="0d9d2-196">If the check box for a course wasn't selected, but the course is in the `Instructor.CourseAssignments` navigation property, the course is removed from the navigation property.</span></span>
+<span data-ttu-id="5f21c-339">若課程的核取方塊未被選取，但課程卻位於 `Instructor.CourseAssignments` 導覽屬性中，則課程便會從導覽屬性的集合中移除。</span><span class="sxs-lookup"><span data-stu-id="5f21c-339">If the check box for a course wasn't selected, but the course is in the `Instructor.CourseAssignments` navigation property, the course is removed from the navigation property.</span></span>
 
 [!code-csharp[](intro/samples/cu30/Pages/Instructors/InstructorCoursesPageModel.cs?name=snippet_UpdateCoursesElse)]
 
-### <a name="handle-office-location"></a><span data-ttu-id="0d9d2-197">處理辦公室位置</span><span class="sxs-lookup"><span data-stu-id="0d9d2-197">Handle office location</span></span>
+### <a name="handle-office-location"></a><span data-ttu-id="5f21c-340">處理辦公室位置</span><span class="sxs-lookup"><span data-stu-id="5f21c-340">Handle office location</span></span>
 
-<span data-ttu-id="0d9d2-198">另一個編輯頁面必須處理的關聯性是 Instructor 實體針對 `OfficeAssignment` 實體所具有一對零或一對一關聯性。</span><span class="sxs-lookup"><span data-stu-id="0d9d2-198">Another relationship the edit page has to handle is the one-to-zero-or-one relationship that the Instructor entity has with the `OfficeAssignment` entity.</span></span> <span data-ttu-id="0d9d2-199">講師編輯程式碼必須處理下列案例：</span><span class="sxs-lookup"><span data-stu-id="0d9d2-199">The instructor edit code must handle the following scenarios:</span></span> 
+<span data-ttu-id="5f21c-341">另一個編輯頁面必須處理的關聯性是 Instructor 實體針對 `OfficeAssignment` 實體所具有一對零或一對一關聯性。</span><span class="sxs-lookup"><span data-stu-id="5f21c-341">Another relationship the edit page has to handle is the one-to-zero-or-one relationship that the Instructor entity has with the `OfficeAssignment` entity.</span></span> <span data-ttu-id="5f21c-342">講師編輯程式碼必須處理下列案例：</span><span class="sxs-lookup"><span data-stu-id="5f21c-342">The instructor edit code must handle the following scenarios:</span></span> 
 
-* <span data-ttu-id="0d9d2-200">如果使用者清除辦公室指派，請刪除 `OfficeAssignment` 實體。</span><span class="sxs-lookup"><span data-stu-id="0d9d2-200">If the user clears the office assignment, delete the `OfficeAssignment` entity.</span></span>
-* <span data-ttu-id="0d9d2-201">如果使用者輸入辦公室指派，但它是空的，請建立新的 `OfficeAssignment` 實體。</span><span class="sxs-lookup"><span data-stu-id="0d9d2-201">If the user enters an office assignment and it was empty, create a new `OfficeAssignment` entity.</span></span>
-* <span data-ttu-id="0d9d2-202">如果使用者變更辦公室指派，請更新 `OfficeAssignment` 實體。</span><span class="sxs-lookup"><span data-stu-id="0d9d2-202">If the user changes the office assignment, update the `OfficeAssignment` entity.</span></span>
+* <span data-ttu-id="5f21c-343">如果使用者清除辦公室指派，請刪除 `OfficeAssignment` 實體。</span><span class="sxs-lookup"><span data-stu-id="5f21c-343">If the user clears the office assignment, delete the `OfficeAssignment` entity.</span></span>
+* <span data-ttu-id="5f21c-344">如果使用者輸入辦公室指派，但它是空的，請建立新的 `OfficeAssignment` 實體。</span><span class="sxs-lookup"><span data-stu-id="5f21c-344">If the user enters an office assignment and it was empty, create a new `OfficeAssignment` entity.</span></span>
+* <span data-ttu-id="5f21c-345">如果使用者變更辦公室指派，請更新 `OfficeAssignment` 實體。</span><span class="sxs-lookup"><span data-stu-id="5f21c-345">If the user changes the office assignment, update the `OfficeAssignment` entity.</span></span>
 
-### <a name="update-the-instructor-edit-page-model"></a><span data-ttu-id="0d9d2-203">更新 Instructor Edit 頁面模型</span><span class="sxs-lookup"><span data-stu-id="0d9d2-203">Update the Instructor Edit page model</span></span>
+### <a name="update-the-instructor-edit-page-model"></a><span data-ttu-id="5f21c-346">更新 Instructor Edit 頁面模型</span><span class="sxs-lookup"><span data-stu-id="5f21c-346">Update the Instructor Edit page model</span></span>
 
-<span data-ttu-id="0d9d2-204">使用下列程式碼更新 *Pages/Instructors/Edit.cshtml.cs*：</span><span class="sxs-lookup"><span data-stu-id="0d9d2-204">Update *Pages/Instructors/Edit.cshtml.cs* with the following code:</span></span>
+<span data-ttu-id="5f21c-347">使用下列程式碼更新 *Pages/Instructors/Edit.cshtml.cs*：</span><span class="sxs-lookup"><span data-stu-id="5f21c-347">Update *Pages/Instructors/Edit.cshtml.cs* with the following code:</span></span>
 
-[!code-csharp[](intro/samples/cu30/Pages/Instructors/Edit.cshtml.cs?name=snippet_All&highlight=9,28-32,38,42-77)]
+[!code-csharp[](intro/samples/cu30/Pages/Instructors/Edit.cshtml.cs?name=snippet_All)]
 
-<span data-ttu-id="0d9d2-205">上述程式碼：</span><span class="sxs-lookup"><span data-stu-id="0d9d2-205">The preceding code:</span></span>
+<span data-ttu-id="5f21c-348">上述程式碼：</span><span class="sxs-lookup"><span data-stu-id="5f21c-348">The preceding code:</span></span>
 
-* <span data-ttu-id="0d9d2-206">使用 `OfficeAssignment`、`CourseAssignment` 和 `CourseAssignment.Course` 導覽屬性的積極式載入，從資料庫取得目前的 `Instructor` 實體。</span><span class="sxs-lookup"><span data-stu-id="0d9d2-206">Gets the current `Instructor` entity from the database using eager loading for the `OfficeAssignment`, `CourseAssignment`, and `CourseAssignment.Course` navigation properties.</span></span>
-* <span data-ttu-id="0d9d2-207">使用從模型繫結器取得的值更新擷取的 `Instructor` 實體。</span><span class="sxs-lookup"><span data-stu-id="0d9d2-207">Updates the retrieved `Instructor` entity with values from the model binder.</span></span> <span data-ttu-id="0d9d2-208">`TryUpdateModel` 會防止[大量指派](xref:data/ef-rp/crud#overposting) (overposting)。</span><span class="sxs-lookup"><span data-stu-id="0d9d2-208">`TryUpdateModel` prevents [overposting](xref:data/ef-rp/crud#overposting).</span></span>
-* <span data-ttu-id="0d9d2-209">如果辦公室位置為空白，請將 `Instructor.OfficeAssignment` 設定為 Null。</span><span class="sxs-lookup"><span data-stu-id="0d9d2-209">If the office location is blank, sets `Instructor.OfficeAssignment` to null.</span></span> <span data-ttu-id="0d9d2-210">當 `Instructor.OfficeAssignment` 為 Null 時，將會刪除 `OfficeAssignment` 資料表中的相關資料列。</span><span class="sxs-lookup"><span data-stu-id="0d9d2-210">When `Instructor.OfficeAssignment` is null, the related row in the `OfficeAssignment` table is deleted.</span></span>
-* <span data-ttu-id="0d9d2-211">在 `OnGetAsync` 中呼叫 `PopulateAssignedCourseData` 來使用 `AssignedCourseData` 檢視模型類別，以提供資訊給核取方塊。</span><span class="sxs-lookup"><span data-stu-id="0d9d2-211">Calls `PopulateAssignedCourseData` in `OnGetAsync` to provide information for the checkboxes using the `AssignedCourseData` view model class.</span></span>
-* <span data-ttu-id="0d9d2-212">在 `OnPostAsync` 中呼叫 `UpdateInstructorCourses` 來將核取方塊的資訊套用到正在編輯的 Instructor 實體。</span><span class="sxs-lookup"><span data-stu-id="0d9d2-212">Calls `UpdateInstructorCourses` in `OnPostAsync` to apply information from the checkboxes to the Instructor entity being edited.</span></span>
-* <span data-ttu-id="0d9d2-213">若 `TryUpdateModel` 失敗，則在 `OnPostAsync` 中呼叫 `PopulateAssignedCourseData` 和 `UpdateInstructorCourses`。</span><span class="sxs-lookup"><span data-stu-id="0d9d2-213">Calls `PopulateAssignedCourseData` and `UpdateInstructorCourses` in `OnPostAsync` if `TryUpdateModel` fails.</span></span> <span data-ttu-id="0d9d2-214">這些方法呼叫會在重新顯示並附帶錯誤訊息時，還原在頁面上輸入的已指派課程資料。</span><span class="sxs-lookup"><span data-stu-id="0d9d2-214">These method calls restore the assigned course data entered on the page when it is redisplayed with an error message.</span></span>
+* <span data-ttu-id="5f21c-349">使用 `OfficeAssignment`、`CourseAssignment` 和 `CourseAssignment.Course` 導覽屬性的積極式載入，從資料庫取得目前的 `Instructor` 實體。</span><span class="sxs-lookup"><span data-stu-id="5f21c-349">Gets the current `Instructor` entity from the database using eager loading for the `OfficeAssignment`, `CourseAssignment`, and `CourseAssignment.Course` navigation properties.</span></span>
+* <span data-ttu-id="5f21c-350">使用從模型繫結器取得的值更新擷取的 `Instructor` 實體。</span><span class="sxs-lookup"><span data-stu-id="5f21c-350">Updates the retrieved `Instructor` entity with values from the model binder.</span></span> <span data-ttu-id="5f21c-351">`TryUpdateModel` 會防止[大量指派](xref:data/ef-rp/crud#overposting) (overposting)。</span><span class="sxs-lookup"><span data-stu-id="5f21c-351">`TryUpdateModel` prevents [overposting](xref:data/ef-rp/crud#overposting).</span></span>
+* <span data-ttu-id="5f21c-352">如果辦公室位置為空白，請將 `Instructor.OfficeAssignment` 設定為 Null。</span><span class="sxs-lookup"><span data-stu-id="5f21c-352">If the office location is blank, sets `Instructor.OfficeAssignment` to null.</span></span> <span data-ttu-id="5f21c-353">當 `Instructor.OfficeAssignment` 為 Null 時，將會刪除 `OfficeAssignment` 資料表中的相關資料列。</span><span class="sxs-lookup"><span data-stu-id="5f21c-353">When `Instructor.OfficeAssignment` is null, the related row in the `OfficeAssignment` table is deleted.</span></span>
+* <span data-ttu-id="5f21c-354">在 `OnGetAsync` 中呼叫 `PopulateAssignedCourseData` 來使用 `AssignedCourseData` 檢視模型類別，以提供資訊給核取方塊。</span><span class="sxs-lookup"><span data-stu-id="5f21c-354">Calls `PopulateAssignedCourseData` in `OnGetAsync` to provide information for the checkboxes using the `AssignedCourseData` view model class.</span></span>
+* <span data-ttu-id="5f21c-355">在 `OnPostAsync` 中呼叫 `UpdateInstructorCourses` 來將核取方塊的資訊套用到正在編輯的 Instructor 實體。</span><span class="sxs-lookup"><span data-stu-id="5f21c-355">Calls `UpdateInstructorCourses` in `OnPostAsync` to apply information from the checkboxes to the Instructor entity being edited.</span></span>
+* <span data-ttu-id="5f21c-356">若 `TryUpdateModel` 失敗，則在 `OnPostAsync` 中呼叫 `PopulateAssignedCourseData` 和 `UpdateInstructorCourses`。</span><span class="sxs-lookup"><span data-stu-id="5f21c-356">Calls `PopulateAssignedCourseData` and `UpdateInstructorCourses` in `OnPostAsync` if `TryUpdateModel` fails.</span></span> <span data-ttu-id="5f21c-357">這些方法呼叫會在重新顯示並附帶錯誤訊息時，還原在頁面上輸入的已指派課程資料。</span><span class="sxs-lookup"><span data-stu-id="5f21c-357">These method calls restore the assigned course data entered on the page when it is redisplayed with an error message.</span></span>
 
-### <a name="update-the-instructor-edit-no-locrazor-page"></a><span data-ttu-id="0d9d2-215">更新講師 [編輯] Razor 頁面</span><span class="sxs-lookup"><span data-stu-id="0d9d2-215">Update the Instructor Edit Razor page</span></span>
+### <a name="update-the-instructor-edit-razor-page"></a><span data-ttu-id="5f21c-358">更新講師 [編輯] Razor 頁面</span><span class="sxs-lookup"><span data-stu-id="5f21c-358">Update the Instructor Edit Razor page</span></span>
 
-<span data-ttu-id="0d9d2-216">使用下列程式碼更新 *Pages/Instructors/Edit.cshtml*：</span><span class="sxs-lookup"><span data-stu-id="0d9d2-216">Update *Pages/Instructors/Edit.cshtml* with the following code:</span></span>
+<span data-ttu-id="5f21c-359">使用下列程式碼更新 *Pages/Instructors/Edit.cshtml*：</span><span class="sxs-lookup"><span data-stu-id="5f21c-359">Update *Pages/Instructors/Edit.cshtml* with the following code:</span></span>
 
 [!code-cshtml[](intro/samples/cu30/Pages/Instructors/Edit.cshtml?highlight=29-59)]
 
-<span data-ttu-id="0d9d2-217">上述程式碼會建立一個 HTML 資料表，該資料表中有三個資料行。</span><span class="sxs-lookup"><span data-stu-id="0d9d2-217">The preceding code creates an HTML table that has three columns.</span></span> <span data-ttu-id="0d9d2-218">每個資料行都有一個核取方塊和包含課程號碼及標題的標題。</span><span class="sxs-lookup"><span data-stu-id="0d9d2-218">Each column has a checkbox and a caption containing the course number and title.</span></span> <span data-ttu-id="0d9d2-219">核取方塊全部都具有相同的名稱 ("selectedCourses")。</span><span class="sxs-lookup"><span data-stu-id="0d9d2-219">The checkboxes all have the same name ("selectedCourses").</span></span> <span data-ttu-id="0d9d2-220">使用相同的名稱可告知模型繫結器將它們視為一個群組。</span><span class="sxs-lookup"><span data-stu-id="0d9d2-220">Using the same name informs the model binder to treat them as a group.</span></span> <span data-ttu-id="0d9d2-221">每個核取方塊的 Value 屬性都會設為 `CourseID`。</span><span class="sxs-lookup"><span data-stu-id="0d9d2-221">The value attribute of each checkbox is set to `CourseID`.</span></span> <span data-ttu-id="0d9d2-222">張貼頁面時，模型繫結器會傳遞陣列，該陣列當中只包含已選取核取方塊的 `CourseID` 值。</span><span class="sxs-lookup"><span data-stu-id="0d9d2-222">When the page is posted, the model binder passes an array that consists of the `CourseID` values for only the checkboxes that are selected.</span></span>
+<span data-ttu-id="5f21c-360">上述程式碼會建立一個 HTML 資料表，該資料表中有三個資料行。</span><span class="sxs-lookup"><span data-stu-id="5f21c-360">The preceding code creates an HTML table that has three columns.</span></span> <span data-ttu-id="5f21c-361">每個資料行都有一個核取方塊和包含課程號碼及標題的標題。</span><span class="sxs-lookup"><span data-stu-id="5f21c-361">Each column has a checkbox and a caption containing the course number and title.</span></span> <span data-ttu-id="5f21c-362">核取方塊全部都具有相同的名稱 ("selectedCourses")。</span><span class="sxs-lookup"><span data-stu-id="5f21c-362">The checkboxes all have the same name ("selectedCourses").</span></span> <span data-ttu-id="5f21c-363">使用相同的名稱可告知模型繫結器將它們視為一個群組。</span><span class="sxs-lookup"><span data-stu-id="5f21c-363">Using the same name informs the model binder to treat them as a group.</span></span> <span data-ttu-id="5f21c-364">每個核取方塊的 Value 屬性都會設為 `CourseID`。</span><span class="sxs-lookup"><span data-stu-id="5f21c-364">The value attribute of each checkbox is set to `CourseID`.</span></span> <span data-ttu-id="5f21c-365">張貼頁面時，模型繫結器會傳遞陣列，該陣列當中只包含已選取核取方塊的 `CourseID` 值。</span><span class="sxs-lookup"><span data-stu-id="5f21c-365">When the page is posted, the model binder passes an array that consists of the `CourseID` values for only the checkboxes that are selected.</span></span>
 
-<span data-ttu-id="0d9d2-223">一開始轉譯核取方塊時，指派給講師的課程會呈現選取狀態。</span><span class="sxs-lookup"><span data-stu-id="0d9d2-223">When the checkboxes are initially rendered, courses assigned to the instructor are selected.</span></span>
+<span data-ttu-id="5f21c-366">一開始轉譯核取方塊時，指派給講師的課程會呈現選取狀態。</span><span class="sxs-lookup"><span data-stu-id="5f21c-366">When the checkboxes are initially rendered, courses assigned to the instructor are selected.</span></span>
 
-<span data-ttu-id="0d9d2-224">注意：這裡所用來編輯講師課程資料的方法在課程的數量有限時運作相當良好。</span><span class="sxs-lookup"><span data-stu-id="0d9d2-224">Note: The approach taken here to edit instructor course data works well when there's a limited number of courses.</span></span> <span data-ttu-id="0d9d2-225">針對更大的集合，不同的 UI 和不同的更新方法可能更有用且更有效率。</span><span class="sxs-lookup"><span data-stu-id="0d9d2-225">For collections that are much larger, a different UI and a different updating method would be more useable and efficient.</span></span>
+<span data-ttu-id="5f21c-367">注意：這裡所用來編輯講師課程資料的方法在課程的數量有限時運作相當良好。</span><span class="sxs-lookup"><span data-stu-id="5f21c-367">Note: The approach taken here to edit instructor course data works well when there's a limited number of courses.</span></span> <span data-ttu-id="5f21c-368">針對更大的集合，不同的 UI 和不同的更新方法可能更有用且更有效率。</span><span class="sxs-lookup"><span data-stu-id="5f21c-368">For collections that are much larger, a different UI and a different updating method would be more useable and efficient.</span></span>
 
-<span data-ttu-id="0d9d2-226">執行應用程式並測試更新後的 Instructors Edit 頁面。</span><span class="sxs-lookup"><span data-stu-id="0d9d2-226">Run the app and test the updated Instructors Edit page.</span></span> <span data-ttu-id="0d9d2-227">變更一些課程指派。</span><span class="sxs-lookup"><span data-stu-id="0d9d2-227">Change some course assignments.</span></span> <span data-ttu-id="0d9d2-228">所做的變更會反映在 [索引] 頁面上。</span><span class="sxs-lookup"><span data-stu-id="0d9d2-228">The changes are reflected on the Index page.</span></span>
+<span data-ttu-id="5f21c-369">執行應用程式並測試更新後的 Instructors Edit 頁面。</span><span class="sxs-lookup"><span data-stu-id="5f21c-369">Run the app and test the updated Instructors Edit page.</span></span> <span data-ttu-id="5f21c-370">變更一些課程指派。</span><span class="sxs-lookup"><span data-stu-id="5f21c-370">Change some course assignments.</span></span> <span data-ttu-id="5f21c-371">所做的變更會反映在 [索引] 頁面上。</span><span class="sxs-lookup"><span data-stu-id="5f21c-371">The changes are reflected on the Index page.</span></span>
 
-### <a name="update-the-instructor-create-page"></a><span data-ttu-id="0d9d2-229">更新 Instructor Create 頁面</span><span class="sxs-lookup"><span data-stu-id="0d9d2-229">Update the Instructor Create page</span></span>
+### <a name="update-the-instructor-create-page"></a><span data-ttu-id="5f21c-372">更新 Instructor Create 頁面</span><span class="sxs-lookup"><span data-stu-id="5f21c-372">Update the Instructor Create page</span></span>
 
-<span data-ttu-id="0d9d2-230">使用與編輯頁面類似的程式碼，更新講師建立頁面模型和 Razor 頁面：</span><span class="sxs-lookup"><span data-stu-id="0d9d2-230">Update the Instructor Create page model and Razor page with code similar to the Edit page:</span></span>
+<span data-ttu-id="5f21c-373">使用與編輯頁面類似的程式碼，更新講師建立頁面模型和 Razor 頁面：</span><span class="sxs-lookup"><span data-stu-id="5f21c-373">Update the Instructor Create page model and Razor page with code similar to the Edit page:</span></span>
 
 [!code-csharp[](intro/samples/cu30/Pages/Instructors/Create.cshtml.cs)]
 
 [!code-cshtml[](intro/samples/cu30/Pages/Instructors/Create.cshtml)]
 
-<span data-ttu-id="0d9d2-231">測試講師 *Create* 頁面。</span><span class="sxs-lookup"><span data-stu-id="0d9d2-231">Test the instructor Create page.</span></span>
+<span data-ttu-id="5f21c-374">測試講師 *Create* 頁面。</span><span class="sxs-lookup"><span data-stu-id="5f21c-374">Test the instructor Create page.</span></span>
 
-## <a name="update-the-instructor-delete-page"></a><span data-ttu-id="0d9d2-232">更新 Instructor Delete 頁面</span><span class="sxs-lookup"><span data-stu-id="0d9d2-232">Update the Instructor Delete page</span></span>
+## <a name="update-the-instructor-delete-page"></a><span data-ttu-id="5f21c-375">更新 Instructor Delete 頁面</span><span class="sxs-lookup"><span data-stu-id="5f21c-375">Update the Instructor Delete page</span></span>
 
-<span data-ttu-id="0d9d2-233">使用下列程式碼更新 *Pages/Instructors/Delete.cshtml.cs*：</span><span class="sxs-lookup"><span data-stu-id="0d9d2-233">Update *Pages/Instructors/Delete.cshtml.cs* with the following code:</span></span>
+<span data-ttu-id="5f21c-376">使用下列程式碼更新 *Pages/Instructors/Delete.cshtml.cs*：</span><span class="sxs-lookup"><span data-stu-id="5f21c-376">Update *Pages/Instructors/Delete.cshtml.cs* with the following code:</span></span>
 
 [!code-csharp[](intro/samples/cu30/Pages/Instructors/Delete.cshtml.cs?highlight=45-61)]
 
-<span data-ttu-id="0d9d2-234">上述程式碼會進行下列變更：</span><span class="sxs-lookup"><span data-stu-id="0d9d2-234">The preceding code makes the following changes:</span></span>
+<span data-ttu-id="5f21c-377">上述程式碼會進行下列變更：</span><span class="sxs-lookup"><span data-stu-id="5f21c-377">The preceding code makes the following changes:</span></span>
 
-* <span data-ttu-id="0d9d2-235">為 `CourseAssignments` 導覽屬性使用積極式載入。</span><span class="sxs-lookup"><span data-stu-id="0d9d2-235">Uses eager loading for the `CourseAssignments` navigation property.</span></span> <span data-ttu-id="0d9d2-236">必須包含 `CourseAssignments`，否則刪除講師時不會刪除它們。</span><span class="sxs-lookup"><span data-stu-id="0d9d2-236">`CourseAssignments` must be included or they aren't deleted when the instructor is deleted.</span></span> <span data-ttu-id="0d9d2-237">若要避免需要讀取們，您可以在資料庫中設定串聯刪除。</span><span class="sxs-lookup"><span data-stu-id="0d9d2-237">To avoid needing to read them, configure cascade delete in the database.</span></span>
+* <span data-ttu-id="5f21c-378">為 `CourseAssignments` 導覽屬性使用積極式載入。</span><span class="sxs-lookup"><span data-stu-id="5f21c-378">Uses eager loading for the `CourseAssignments` navigation property.</span></span> <span data-ttu-id="5f21c-379">必須包含 `CourseAssignments`，否則刪除講師時不會刪除它們。</span><span class="sxs-lookup"><span data-stu-id="5f21c-379">`CourseAssignments` must be included or they aren't deleted when the instructor is deleted.</span></span> <span data-ttu-id="5f21c-380">若要避免需要讀取們，您可以在資料庫中設定串聯刪除。</span><span class="sxs-lookup"><span data-stu-id="5f21c-380">To avoid needing to read them, configure cascade delete in the database.</span></span>
 
-* <span data-ttu-id="0d9d2-238">若要刪除的講師已指派為任何部門的系統管理員，請先從部門中移除講師的指派。</span><span class="sxs-lookup"><span data-stu-id="0d9d2-238">If the instructor to be deleted is assigned as administrator of any departments, removes the instructor assignment from those departments.</span></span>
+* <span data-ttu-id="5f21c-381">若要刪除的講師已指派為任何部門的系統管理員，請先從部門中移除講師的指派。</span><span class="sxs-lookup"><span data-stu-id="5f21c-381">If the instructor to be deleted is assigned as administrator of any departments, removes the instructor assignment from those departments.</span></span>
 
-<span data-ttu-id="0d9d2-239">執行應用程式及測試 Delete 頁面。</span><span class="sxs-lookup"><span data-stu-id="0d9d2-239">Run the app and test the Delete page.</span></span>
+<span data-ttu-id="5f21c-382">執行應用程式及測試 Delete 頁面。</span><span class="sxs-lookup"><span data-stu-id="5f21c-382">Run the app and test the Delete page.</span></span>
 
-## <a name="next-steps"></a><span data-ttu-id="0d9d2-240">後續步驟</span><span class="sxs-lookup"><span data-stu-id="0d9d2-240">Next steps</span></span>
+## <a name="next-steps"></a><span data-ttu-id="5f21c-383">下一步</span><span class="sxs-lookup"><span data-stu-id="5f21c-383">Next steps</span></span>
 
 > [!div class="step-by-step"]
-> <span data-ttu-id="0d9d2-241">[上一個教學](xref:data/ef-rp/read-related-data) 
->  課程[下一個教學](xref:data/ef-rp/concurrency)課程</span><span class="sxs-lookup"><span data-stu-id="0d9d2-241">[Previous tutorial](xref:data/ef-rp/read-related-data)
+> <span data-ttu-id="5f21c-384">[上一個教學](xref:data/ef-rp/read-related-data) 
+>  課程[下一個教學](xref:data/ef-rp/concurrency)課程</span><span class="sxs-lookup"><span data-stu-id="5f21c-384">[Previous tutorial](xref:data/ef-rp/read-related-data)
 [Next tutorial](xref:data/ef-rp/concurrency)</span></span>
 
 ::: moniker-end
 
 ::: moniker range="< aspnetcore-3.0"
 
-<span data-ttu-id="0d9d2-242">本教學課程將示範如何更新相關資料。</span><span class="sxs-lookup"><span data-stu-id="0d9d2-242">This tutorial demonstrates updating related data.</span></span> <span data-ttu-id="0d9d2-243">若您遇到無法解決的問題，請[下載或檢視完整應用程式。](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/data/ef-rp/intro/samples)</span><span class="sxs-lookup"><span data-stu-id="0d9d2-243">If you run into problems you can't solve, [download or view the completed app.](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/data/ef-rp/intro/samples)</span></span> <span data-ttu-id="0d9d2-244">[下載指示](xref:index#how-to-download-a-sample)。</span><span class="sxs-lookup"><span data-stu-id="0d9d2-244">[Download instructions](xref:index#how-to-download-a-sample).</span></span>
+<span data-ttu-id="5f21c-385">本教學課程將示範如何更新相關資料。</span><span class="sxs-lookup"><span data-stu-id="5f21c-385">This tutorial demonstrates updating related data.</span></span> <span data-ttu-id="5f21c-386">若您遇到無法解決的問題，請[下載或檢視完整應用程式。](https://github.com/dotnet/AspNetCore.Docs/tree/main/aspnetcore/data/ef-rp/intro/samples)</span><span class="sxs-lookup"><span data-stu-id="5f21c-386">If you run into problems you can't solve, [download or view the completed app.](https://github.com/dotnet/AspNetCore.Docs/tree/main/aspnetcore/data/ef-rp/intro/samples)</span></span> <span data-ttu-id="5f21c-387">[下載指示](xref:index#how-to-download-a-sample)。</span><span class="sxs-lookup"><span data-stu-id="5f21c-387">[Download instructions](xref:index#how-to-download-a-sample).</span></span>
 
-<span data-ttu-id="0d9d2-245">下圖顯示一些完成的頁面。</span><span class="sxs-lookup"><span data-stu-id="0d9d2-245">The following illustrations shows some of the completed pages.</span></span>
+<span data-ttu-id="5f21c-388">下圖顯示一些完成的頁面。</span><span class="sxs-lookup"><span data-stu-id="5f21c-388">The following illustrations shows some of the completed pages.</span></span>
 
-<span data-ttu-id="0d9d2-246">![課程 [編輯] 頁面](update-related-data/_static/course-edit.png)
-![講師 [編輯] 頁面](update-related-data/_static/instructor-edit-courses.png)</span><span class="sxs-lookup"><span data-stu-id="0d9d2-246">![Course Edit page](update-related-data/_static/course-edit.png)
+<span data-ttu-id="5f21c-389">![課程 [編輯] 頁面](update-related-data/_static/course-edit.png)
+![講師 [編輯] 頁面](update-related-data/_static/instructor-edit-courses.png)</span><span class="sxs-lookup"><span data-stu-id="5f21c-389">![Course Edit page](update-related-data/_static/course-edit.png)
 ![Instructor Edit page](update-related-data/_static/instructor-edit-courses.png)</span></span>
 
-<span data-ttu-id="0d9d2-247">檢查並測試 *Create* 與 *Edit* 課程頁面。</span><span class="sxs-lookup"><span data-stu-id="0d9d2-247">Examine and test the Create and Edit course pages.</span></span> <span data-ttu-id="0d9d2-248">建立新的課程。</span><span class="sxs-lookup"><span data-stu-id="0d9d2-248">Create a new course.</span></span> <span data-ttu-id="0d9d2-249">部門是依照其主索引鍵 (整數) 來進行選取，而不是它的名稱。</span><span class="sxs-lookup"><span data-stu-id="0d9d2-249">The department is selected by its primary key (an integer), not its name.</span></span> <span data-ttu-id="0d9d2-250">編輯新的課程。</span><span class="sxs-lookup"><span data-stu-id="0d9d2-250">Edit the new course.</span></span> <span data-ttu-id="0d9d2-251">當您完成測試時，請刪除新的課程。</span><span class="sxs-lookup"><span data-stu-id="0d9d2-251">When you have finished testing, delete the new course.</span></span>
+<span data-ttu-id="5f21c-390">檢查並測試 *Create* 與 *Edit* 課程頁面。</span><span class="sxs-lookup"><span data-stu-id="5f21c-390">Examine and test the Create and Edit course pages.</span></span> <span data-ttu-id="5f21c-391">建立新的課程。</span><span class="sxs-lookup"><span data-stu-id="5f21c-391">Create a new course.</span></span> <span data-ttu-id="5f21c-392">部門是依照其主索引鍵 (整數) 來進行選取，而不是它的名稱。</span><span class="sxs-lookup"><span data-stu-id="5f21c-392">The department is selected by its primary key (an integer), not its name.</span></span> <span data-ttu-id="5f21c-393">編輯新的課程。</span><span class="sxs-lookup"><span data-stu-id="5f21c-393">Edit the new course.</span></span> <span data-ttu-id="5f21c-394">當您完成測試時，請刪除新的課程。</span><span class="sxs-lookup"><span data-stu-id="5f21c-394">When you have finished testing, delete the new course.</span></span>
 
-## <a name="create-a-base-class-to-share-common-code"></a><span data-ttu-id="0d9d2-252">建立要共用通用程式碼的基底類別</span><span class="sxs-lookup"><span data-stu-id="0d9d2-252">Create a base class to share common code</span></span>
+## <a name="create-a-base-class-to-share-common-code"></a><span data-ttu-id="5f21c-395">建立要共用通用程式碼的基底類別</span><span class="sxs-lookup"><span data-stu-id="5f21c-395">Create a base class to share common code</span></span>
 
-<span data-ttu-id="0d9d2-253">`Courses/Create` 和 `Courses/Edit` 頁面每個都需要部門名稱的清單。</span><span class="sxs-lookup"><span data-stu-id="0d9d2-253">The Courses/Create and Courses/Edit pages each need a list of department names.</span></span> <span data-ttu-id="0d9d2-254">請針對 *Create* 和 *Edit* 頁面建立 *Pages/Courses/DepartmentNamePageModel.cshtml.cs* 基底類別：</span><span class="sxs-lookup"><span data-stu-id="0d9d2-254">Create the *Pages/Courses/DepartmentNamePageModel.cshtml.cs* base class for the Create and Edit pages:</span></span>
+<span data-ttu-id="5f21c-396">`Courses/Create` 和 `Courses/Edit` 頁面每個都需要部門名稱的清單。</span><span class="sxs-lookup"><span data-stu-id="5f21c-396">The Courses/Create and Courses/Edit pages each need a list of department names.</span></span> <span data-ttu-id="5f21c-397">請針對 *Create* 和 *Edit* 頁面建立 *Pages/Courses/DepartmentNamePageModel.cshtml.cs* 基底類別：</span><span class="sxs-lookup"><span data-stu-id="5f21c-397">Create the *Pages/Courses/DepartmentNamePageModel.cshtml.cs* base class for the Create and Edit pages:</span></span>
 
 [!code-csharp[](intro/samples/cu/Pages/Courses/DepartmentNamePageModel.cshtml.cs?highlight=9,11,20-21)]
 
-<span data-ttu-id="0d9d2-255">上述程式碼會建立 [SelectList](/dotnet/api/microsoft.aspnetcore.mvc.rendering.selectlist) 以包含部門名稱的清單。</span><span class="sxs-lookup"><span data-stu-id="0d9d2-255">The preceding code creates a [SelectList](/dotnet/api/microsoft.aspnetcore.mvc.rendering.selectlist) to contain the list of department names.</span></span> <span data-ttu-id="0d9d2-256">如果指定了 `selectedDepartment`，就會在 `SelectList` 中選取該部門。</span><span class="sxs-lookup"><span data-stu-id="0d9d2-256">If `selectedDepartment` is specified, that department is selected in the `SelectList`.</span></span>
+<span data-ttu-id="5f21c-398">上述程式碼會建立 [SelectList](/dotnet/api/microsoft.aspnetcore.mvc.rendering.selectlist) 以包含部門名稱的清單。</span><span class="sxs-lookup"><span data-stu-id="5f21c-398">The preceding code creates a [SelectList](/dotnet/api/microsoft.aspnetcore.mvc.rendering.selectlist) to contain the list of department names.</span></span> <span data-ttu-id="5f21c-399">如果指定了 `selectedDepartment`，就會在 `SelectList` 中選取該部門。</span><span class="sxs-lookup"><span data-stu-id="5f21c-399">If `selectedDepartment` is specified, that department is selected in the `SelectList`.</span></span>
 
-<span data-ttu-id="0d9d2-257">*Create* 和 *Edit* 頁面模型類別將衍生自 `DepartmentNamePageModel`。</span><span class="sxs-lookup"><span data-stu-id="0d9d2-257">The Create and Edit page model classes will derive from `DepartmentNamePageModel`.</span></span>
+<span data-ttu-id="5f21c-400">*Create* 和 *Edit* 頁面模型類別將衍生自 `DepartmentNamePageModel`。</span><span class="sxs-lookup"><span data-stu-id="5f21c-400">The Create and Edit page model classes will derive from `DepartmentNamePageModel`.</span></span>
 
-## <a name="customize-the-courses-pages"></a><span data-ttu-id="0d9d2-258">自訂 [課程] 頁面</span><span class="sxs-lookup"><span data-stu-id="0d9d2-258">Customize the Courses Pages</span></span>
+## <a name="customize-the-courses-pages"></a><span data-ttu-id="5f21c-401">自訂 [課程] 頁面</span><span class="sxs-lookup"><span data-stu-id="5f21c-401">Customize the Courses Pages</span></span>
 
-<span data-ttu-id="0d9d2-259">當新的課程實體建立時，其必須要與現有的部門具有關聯性。</span><span class="sxs-lookup"><span data-stu-id="0d9d2-259">When a new course entity is created, it must have a relationship to an existing department.</span></span> <span data-ttu-id="0d9d2-260">為了在建立課程新增部門，*Create* 和 *Edit* 的基底類別包含用來選取部門的下拉式清單。</span><span class="sxs-lookup"><span data-stu-id="0d9d2-260">To add a department while creating a course, the base class for Create and Edit contains a drop-down list for selecting the department.</span></span> <span data-ttu-id="0d9d2-261">下拉式清單會設定 `Course.DepartmentID` 外部索引鍵 (FK) 屬性。</span><span class="sxs-lookup"><span data-stu-id="0d9d2-261">The drop-down list sets the `Course.DepartmentID` foreign key (FK) property.</span></span> <span data-ttu-id="0d9d2-262">EF Core 則使用 `Course.DepartmentID` FK 來載入 `Department` 導覽屬性。</span><span class="sxs-lookup"><span data-stu-id="0d9d2-262">EF Core uses the `Course.DepartmentID` FK to load the `Department` navigation property.</span></span>
+<span data-ttu-id="5f21c-402">當新的課程實體建立時，其必須要與現有的部門具有關聯性。</span><span class="sxs-lookup"><span data-stu-id="5f21c-402">When a new course entity is created, it must have a relationship to an existing department.</span></span> <span data-ttu-id="5f21c-403">為了在建立課程新增部門，*Create* 和 *Edit* 的基底類別包含用來選取部門的下拉式清單。</span><span class="sxs-lookup"><span data-stu-id="5f21c-403">To add a department while creating a course, the base class for Create and Edit contains a drop-down list for selecting the department.</span></span> <span data-ttu-id="5f21c-404">下拉式清單會設定 `Course.DepartmentID` 外部索引鍵 (FK) 屬性。</span><span class="sxs-lookup"><span data-stu-id="5f21c-404">The drop-down list sets the `Course.DepartmentID` foreign key (FK) property.</span></span> <span data-ttu-id="5f21c-405">EF Core 則使用 `Course.DepartmentID` FK 來載入 `Department` 導覽屬性。</span><span class="sxs-lookup"><span data-stu-id="5f21c-405">EF Core uses the `Course.DepartmentID` FK to load the `Department` navigation property.</span></span>
 
 ![建立課程](update-related-data/_static/ddl.png)
 
-<span data-ttu-id="0d9d2-264">以下列程式碼更新 [建立] 頁面模型：</span><span class="sxs-lookup"><span data-stu-id="0d9d2-264">Update the Create page model with the following code:</span></span>
+<span data-ttu-id="5f21c-407">以下列程式碼更新 [建立] 頁面模型：</span><span class="sxs-lookup"><span data-stu-id="5f21c-407">Update the Create page model with the following code:</span></span>
 
 [!code-csharp[](intro/samples/cu/Pages/Courses/Create.cshtml.cs?highlight=7,18,32-999)]
 
-<span data-ttu-id="0d9d2-265">上述程式碼：</span><span class="sxs-lookup"><span data-stu-id="0d9d2-265">The preceding code:</span></span>
+<span data-ttu-id="5f21c-408">上述程式碼：</span><span class="sxs-lookup"><span data-stu-id="5f21c-408">The preceding code:</span></span>
 
-* <span data-ttu-id="0d9d2-266">衍生自 `DepartmentNamePageModel`。</span><span class="sxs-lookup"><span data-stu-id="0d9d2-266">Derives from `DepartmentNamePageModel`.</span></span>
-* <span data-ttu-id="0d9d2-267">使用 `TryUpdateModelAsync` 來防止[大量指派](xref:data/ef-rp/crud#overposting) (overposting)。</span><span class="sxs-lookup"><span data-stu-id="0d9d2-267">Uses `TryUpdateModelAsync` to prevent [overposting](xref:data/ef-rp/crud#overposting).</span></span>
-* <span data-ttu-id="0d9d2-268">以 `DepartmentNameSL` (來自基底類別) 取代 `ViewData["DepartmentID"]`。</span><span class="sxs-lookup"><span data-stu-id="0d9d2-268">Replaces `ViewData["DepartmentID"]` with `DepartmentNameSL` (from the base class).</span></span>
+* <span data-ttu-id="5f21c-409">衍生自 `DepartmentNamePageModel`。</span><span class="sxs-lookup"><span data-stu-id="5f21c-409">Derives from `DepartmentNamePageModel`.</span></span>
+* <span data-ttu-id="5f21c-410">使用 `TryUpdateModelAsync` 來防止[大量指派](xref:data/ef-rp/crud#overposting) (overposting)。</span><span class="sxs-lookup"><span data-stu-id="5f21c-410">Uses `TryUpdateModelAsync` to prevent [overposting](xref:data/ef-rp/crud#overposting).</span></span>
+* <span data-ttu-id="5f21c-411">以 `DepartmentNameSL` (來自基底類別) 取代 `ViewData["DepartmentID"]`。</span><span class="sxs-lookup"><span data-stu-id="5f21c-411">Replaces `ViewData["DepartmentID"]` with `DepartmentNameSL` (from the base class).</span></span>
 
-<span data-ttu-id="0d9d2-269">`ViewData["DepartmentID"]` 已取代為強型別的 `DepartmentNameSL`。</span><span class="sxs-lookup"><span data-stu-id="0d9d2-269">`ViewData["DepartmentID"]` is replaced with the strongly typed `DepartmentNameSL`.</span></span> <span data-ttu-id="0d9d2-270">強型別的模型優先於弱型別。</span><span class="sxs-lookup"><span data-stu-id="0d9d2-270">Strongly typed models are preferred over weakly typed.</span></span> <span data-ttu-id="0d9d2-271">如需詳細資訊，請參閱[弱型別資料 (ViewData 和 ViewBag)](xref:mvc/views/overview#VD_VB)。</span><span class="sxs-lookup"><span data-stu-id="0d9d2-271">For more information, see [Weakly typed data (ViewData and ViewBag)](xref:mvc/views/overview#VD_VB).</span></span>
+<span data-ttu-id="5f21c-412">`ViewData["DepartmentID"]` 已取代為強型別的 `DepartmentNameSL`。</span><span class="sxs-lookup"><span data-stu-id="5f21c-412">`ViewData["DepartmentID"]` is replaced with the strongly typed `DepartmentNameSL`.</span></span> <span data-ttu-id="5f21c-413">強型別的模型優先於弱型別。</span><span class="sxs-lookup"><span data-stu-id="5f21c-413">Strongly typed models are preferred over weakly typed.</span></span> <span data-ttu-id="5f21c-414">如需詳細資訊，請參閱[弱型別資料 (ViewData 和 ViewBag)](xref:mvc/views/overview#VD_VB)。</span><span class="sxs-lookup"><span data-stu-id="5f21c-414">For more information, see [Weakly typed data (ViewData and ViewBag)](xref:mvc/views/overview#VD_VB).</span></span>
 
-### <a name="update-the-courses-create-page"></a><span data-ttu-id="0d9d2-272">更新 Courses 的 *Create* 頁面</span><span class="sxs-lookup"><span data-stu-id="0d9d2-272">Update the Courses Create page</span></span>
+### <a name="update-the-courses-create-page"></a><span data-ttu-id="5f21c-415">更新 Courses 的 *Create* 頁面</span><span class="sxs-lookup"><span data-stu-id="5f21c-415">Update the Courses Create page</span></span>
 
-<span data-ttu-id="0d9d2-273">使用下列程式碼更新 *Pages/Courses/Create.cshtml*：</span><span class="sxs-lookup"><span data-stu-id="0d9d2-273">Update *Pages/Courses/Create.cshtml* with the following code:</span></span>
+<span data-ttu-id="5f21c-416">使用下列程式碼更新 *Pages/Courses/Create.cshtml*：</span><span class="sxs-lookup"><span data-stu-id="5f21c-416">Update *Pages/Courses/Create.cshtml* with the following code:</span></span>
 
 [!code-cshtml[](intro/samples/cu/Pages/Courses/Create.cshtml?highlight=29-34)]
 
-<span data-ttu-id="0d9d2-274">上述標記會進行下列變更：</span><span class="sxs-lookup"><span data-stu-id="0d9d2-274">The preceding markup makes the following changes:</span></span>
+<span data-ttu-id="5f21c-417">上述標記會進行下列變更：</span><span class="sxs-lookup"><span data-stu-id="5f21c-417">The preceding markup makes the following changes:</span></span>
 
-* <span data-ttu-id="0d9d2-275">將標題從 **DepartmentID** 變更為 **Department**。</span><span class="sxs-lookup"><span data-stu-id="0d9d2-275">Changes the caption from **DepartmentID** to **Department**.</span></span>
-* <span data-ttu-id="0d9d2-276">以 `DepartmentNameSL` (來自基底類別) 取代 `"ViewBag.DepartmentID"`。</span><span class="sxs-lookup"><span data-stu-id="0d9d2-276">Replaces `"ViewBag.DepartmentID"` with `DepartmentNameSL` (from the base class).</span></span>
-* <span data-ttu-id="0d9d2-277">新增 [選取部門] 選項。</span><span class="sxs-lookup"><span data-stu-id="0d9d2-277">Adds the "Select Department" option.</span></span> <span data-ttu-id="0d9d2-278">這項變更會呈現 [選取部門] ，而不是第一個部門。</span><span class="sxs-lookup"><span data-stu-id="0d9d2-278">This change renders "Select Department" rather than the first department.</span></span>
-* <span data-ttu-id="0d9d2-279">未選取部門時，請新增驗證訊息。</span><span class="sxs-lookup"><span data-stu-id="0d9d2-279">Adds a validation message when the department isn't selected.</span></span>
+* <span data-ttu-id="5f21c-418">將標題從 **DepartmentID** 變更為 **Department**。</span><span class="sxs-lookup"><span data-stu-id="5f21c-418">Changes the caption from **DepartmentID** to **Department**.</span></span>
+* <span data-ttu-id="5f21c-419">以 `DepartmentNameSL` (來自基底類別) 取代 `"ViewBag.DepartmentID"`。</span><span class="sxs-lookup"><span data-stu-id="5f21c-419">Replaces `"ViewBag.DepartmentID"` with `DepartmentNameSL` (from the base class).</span></span>
+* <span data-ttu-id="5f21c-420">新增 [選取部門] 選項。</span><span class="sxs-lookup"><span data-stu-id="5f21c-420">Adds the "Select Department" option.</span></span> <span data-ttu-id="5f21c-421">這項變更會呈現 [選取部門] ，而不是第一個部門。</span><span class="sxs-lookup"><span data-stu-id="5f21c-421">This change renders "Select Department" rather than the first department.</span></span>
+* <span data-ttu-id="5f21c-422">未選取部門時，請新增驗證訊息。</span><span class="sxs-lookup"><span data-stu-id="5f21c-422">Adds a validation message when the department isn't selected.</span></span>
 
-<span data-ttu-id="0d9d2-280">此 Razor 頁面會使用 [選取標記](xref:mvc/views/working-with-forms#the-select-tag-helper)協助程式：</span><span class="sxs-lookup"><span data-stu-id="0d9d2-280">The Razor Page uses the [Select Tag Helper](xref:mvc/views/working-with-forms#the-select-tag-helper):</span></span>
+<span data-ttu-id="5f21c-423">此 Razor 頁面會使用 [選取標記](xref:mvc/views/working-with-forms#the-select-tag-helper)協助程式：</span><span class="sxs-lookup"><span data-stu-id="5f21c-423">The Razor Page uses the [Select Tag Helper](xref:mvc/views/working-with-forms#the-select-tag-helper):</span></span>
 
 [!code-cshtml[](intro/samples/cu/Pages/Courses/Create.cshtml?range=28-35&highlight=3-6)]
 
-<span data-ttu-id="0d9d2-281">測試 *Create* 頁面。</span><span class="sxs-lookup"><span data-stu-id="0d9d2-281">Test the Create page.</span></span> <span data-ttu-id="0d9d2-282">*Create* 頁面會顯示部門名稱，而不是部門識別碼。</span><span class="sxs-lookup"><span data-stu-id="0d9d2-282">The Create page displays the department name rather than the department ID.</span></span>
+<span data-ttu-id="5f21c-424">測試 *Create* 頁面。</span><span class="sxs-lookup"><span data-stu-id="5f21c-424">Test the Create page.</span></span> <span data-ttu-id="5f21c-425">*Create* 頁面會顯示部門名稱，而不是部門識別碼。</span><span class="sxs-lookup"><span data-stu-id="5f21c-425">The Create page displays the department name rather than the department ID.</span></span>
 
-### <a name="update-the-courses-edit-page"></a><span data-ttu-id="0d9d2-283">更新 Courses 的 *Edit* 頁面。</span><span class="sxs-lookup"><span data-stu-id="0d9d2-283">Update the Courses Edit page.</span></span>
+### <a name="update-the-courses-edit-page"></a><span data-ttu-id="5f21c-426">更新 Courses 的 *Edit* 頁面。</span><span class="sxs-lookup"><span data-stu-id="5f21c-426">Update the Courses Edit page.</span></span>
 
-<span data-ttu-id="0d9d2-284">使用下列程式碼取代 *Pages/Courses/Edit.cshtml.cs* 中的程式碼：</span><span class="sxs-lookup"><span data-stu-id="0d9d2-284">Replace the code in *Pages/Courses/Edit.cshtml.cs* with the following code:</span></span>
+<span data-ttu-id="5f21c-427">使用下列程式碼取代 *Pages/Courses/Edit.cshtml.cs* 中的程式碼：</span><span class="sxs-lookup"><span data-stu-id="5f21c-427">Replace the code in *Pages/Courses/Edit.cshtml.cs* with the following code:</span></span>
 
 [!code-csharp[](intro/samples/cu/Pages/Courses/Edit.cshtml.cs?highlight=8,28,35,36,40,47-999)]
 
-<span data-ttu-id="0d9d2-285">這些變更類似於 *Create* 頁面模型中所做的變更。</span><span class="sxs-lookup"><span data-stu-id="0d9d2-285">The changes are similar to those made in the Create page model.</span></span> <span data-ttu-id="0d9d2-286">在上述程式碼中，`PopulateDepartmentsDropDownList` 會傳入部門識別碼，以選取下拉式清單中指定的部門。</span><span class="sxs-lookup"><span data-stu-id="0d9d2-286">In the preceding code, `PopulateDepartmentsDropDownList` passes in the department ID, which select the department specified in the drop-down list.</span></span>
+<span data-ttu-id="5f21c-428">這些變更類似於 *Create* 頁面模型中所做的變更。</span><span class="sxs-lookup"><span data-stu-id="5f21c-428">The changes are similar to those made in the Create page model.</span></span> <span data-ttu-id="5f21c-429">在上述程式碼中，`PopulateDepartmentsDropDownList` 會傳入部門識別碼，以選取下拉式清單中指定的部門。</span><span class="sxs-lookup"><span data-stu-id="5f21c-429">In the preceding code, `PopulateDepartmentsDropDownList` passes in the department ID, which select the department specified in the drop-down list.</span></span>
 
-<span data-ttu-id="0d9d2-287">以下列標記更新 *Pages/Courses/Edit.cshtml*：</span><span class="sxs-lookup"><span data-stu-id="0d9d2-287">Update *Pages/Courses/Edit.cshtml* with the following markup:</span></span>
+<span data-ttu-id="5f21c-430">以下列標記更新 *Pages/Courses/Edit.cshtml*：</span><span class="sxs-lookup"><span data-stu-id="5f21c-430">Update *Pages/Courses/Edit.cshtml* with the following markup:</span></span>
 
 [!code-cshtml[](intro/samples/cu/Pages/Courses/Edit.cshtml?highlight=17-20,32-35)]
 
-<span data-ttu-id="0d9d2-288">上述標記會進行下列變更：</span><span class="sxs-lookup"><span data-stu-id="0d9d2-288">The preceding markup makes the following changes:</span></span>
+<span data-ttu-id="5f21c-431">上述標記會進行下列變更：</span><span class="sxs-lookup"><span data-stu-id="5f21c-431">The preceding markup makes the following changes:</span></span>
 
-* <span data-ttu-id="0d9d2-289">顯示課程識別碼。</span><span class="sxs-lookup"><span data-stu-id="0d9d2-289">Displays the course ID.</span></span> <span data-ttu-id="0d9d2-290">通常不會顯示實體的主索引鍵 (PK)。</span><span class="sxs-lookup"><span data-stu-id="0d9d2-290">Generally the Primary Key (PK) of an entity isn't displayed.</span></span> <span data-ttu-id="0d9d2-291">PK 對使用者來說通常是沒有意義的。</span><span class="sxs-lookup"><span data-stu-id="0d9d2-291">PKs are usually meaningless to users.</span></span> <span data-ttu-id="0d9d2-292">在此情況下，PK 是課程編號。</span><span class="sxs-lookup"><span data-stu-id="0d9d2-292">In this case, the PK is the course number.</span></span>
-* <span data-ttu-id="0d9d2-293">將標題從 **DepartmentID** 變更為 **Department**。</span><span class="sxs-lookup"><span data-stu-id="0d9d2-293">Changes the caption from **DepartmentID** to **Department**.</span></span>
-* <span data-ttu-id="0d9d2-294">以 `DepartmentNameSL` (來自基底類別) 取代 `"ViewBag.DepartmentID"`。</span><span class="sxs-lookup"><span data-stu-id="0d9d2-294">Replaces `"ViewBag.DepartmentID"` with `DepartmentNameSL` (from the base class).</span></span>
+* <span data-ttu-id="5f21c-432">顯示課程識別碼。</span><span class="sxs-lookup"><span data-stu-id="5f21c-432">Displays the course ID.</span></span> <span data-ttu-id="5f21c-433">通常不會顯示實體的主索引鍵 (PK)。</span><span class="sxs-lookup"><span data-stu-id="5f21c-433">Generally the Primary Key (PK) of an entity isn't displayed.</span></span> <span data-ttu-id="5f21c-434">PK 對使用者來說通常是沒有意義的。</span><span class="sxs-lookup"><span data-stu-id="5f21c-434">PKs are usually meaningless to users.</span></span> <span data-ttu-id="5f21c-435">在此情況下，PK 是課程編號。</span><span class="sxs-lookup"><span data-stu-id="5f21c-435">In this case, the PK is the course number.</span></span>
+* <span data-ttu-id="5f21c-436">將標題從 **DepartmentID** 變更為 **Department**。</span><span class="sxs-lookup"><span data-stu-id="5f21c-436">Changes the caption from **DepartmentID** to **Department**.</span></span>
+* <span data-ttu-id="5f21c-437">以 `DepartmentNameSL` (來自基底類別) 取代 `"ViewBag.DepartmentID"`。</span><span class="sxs-lookup"><span data-stu-id="5f21c-437">Replaces `"ViewBag.DepartmentID"` with `DepartmentNameSL` (from the base class).</span></span>
 
-<span data-ttu-id="0d9d2-295">此頁面包含課程編號的隱藏欄位 (`<input type="hidden">`)。</span><span class="sxs-lookup"><span data-stu-id="0d9d2-295">The page contains a hidden field (`<input type="hidden">`) for the course number.</span></span> <span data-ttu-id="0d9d2-296">新增 `<label>` 標籤協助程式與 `asp-for="Course.CourseID"` 無法免除隱藏欄位的需求。</span><span class="sxs-lookup"><span data-stu-id="0d9d2-296">Adding a `<label>` tag helper with `asp-for="Course.CourseID"` doesn't eliminate the need for the hidden field.</span></span> <span data-ttu-id="0d9d2-297">當使用者按一下 [儲存]  時，需要有 `<input type="hidden">` 才能將課程編號包含在張貼資料中。</span><span class="sxs-lookup"><span data-stu-id="0d9d2-297">`<input type="hidden">` is required for the course number to be included in the posted data when the user clicks **Save**.</span></span>
+<span data-ttu-id="5f21c-438">此頁面包含課程編號的隱藏欄位 (`<input type="hidden">`)。</span><span class="sxs-lookup"><span data-stu-id="5f21c-438">The page contains a hidden field (`<input type="hidden">`) for the course number.</span></span> <span data-ttu-id="5f21c-439">新增 `<label>` 標籤協助程式與 `asp-for="Course.CourseID"` 無法免除隱藏欄位的需求。</span><span class="sxs-lookup"><span data-stu-id="5f21c-439">Adding a `<label>` tag helper with `asp-for="Course.CourseID"` doesn't eliminate the need for the hidden field.</span></span> <span data-ttu-id="5f21c-440">當使用者按一下 [儲存]  時，需要有 `<input type="hidden">` 才能將課程編號包含在張貼資料中。</span><span class="sxs-lookup"><span data-stu-id="5f21c-440">`<input type="hidden">` is required for the course number to be included in the posted data when the user clicks **Save**.</span></span>
 
-<span data-ttu-id="0d9d2-298">測試更新過的程式碼。</span><span class="sxs-lookup"><span data-stu-id="0d9d2-298">Test the updated code.</span></span> <span data-ttu-id="0d9d2-299">建立、編輯和刪除課程。</span><span class="sxs-lookup"><span data-stu-id="0d9d2-299">Create, edit, and delete a course.</span></span>
+<span data-ttu-id="5f21c-441">測試更新過的程式碼。</span><span class="sxs-lookup"><span data-stu-id="5f21c-441">Test the updated code.</span></span> <span data-ttu-id="5f21c-442">建立、編輯和刪除課程。</span><span class="sxs-lookup"><span data-stu-id="5f21c-442">Create, edit, and delete a course.</span></span>
 
-## <a name="add-asnotracking-to-the-details-and-delete-page-models"></a><span data-ttu-id="0d9d2-300">將 AsNoTracking 新增至 *Details* 和 *Delete* 頁面模型</span><span class="sxs-lookup"><span data-stu-id="0d9d2-300">Add AsNoTracking to the Details and Delete page models</span></span>
+## <a name="add-asnotracking-to-the-details-and-delete-page-models"></a><span data-ttu-id="5f21c-443">將 AsNoTracking 新增至 *Details* 和 *Delete* 頁面模型</span><span class="sxs-lookup"><span data-stu-id="5f21c-443">Add AsNoTracking to the Details and Delete page models</span></span>
 
-<span data-ttu-id="0d9d2-301">不需要追蹤時，[AsNoTracking](/dotnet/api/microsoft.entityframeworkcore.entityframeworkqueryableextensions.asnotracking#Microsoft_EntityFrameworkCore_EntityFrameworkQueryableExtensions_AsNoTracking__1_System_Linq_IQueryable___0__) 可以改善效能。</span><span class="sxs-lookup"><span data-stu-id="0d9d2-301">[AsNoTracking](/dotnet/api/microsoft.entityframeworkcore.entityframeworkqueryableextensions.asnotracking#Microsoft_EntityFrameworkCore_EntityFrameworkQueryableExtensions_AsNoTracking__1_System_Linq_IQueryable___0__) can improve performance when tracking isn't required.</span></span> <span data-ttu-id="0d9d2-302">將 `AsNoTracking` 新增至 *Delete* 和 *Details* 頁面模型。</span><span class="sxs-lookup"><span data-stu-id="0d9d2-302">Add `AsNoTracking` to the Delete and Details page model.</span></span> <span data-ttu-id="0d9d2-303">下列程式碼顯示已更新的 *Delete* 頁面模型：</span><span class="sxs-lookup"><span data-stu-id="0d9d2-303">The following code shows the updated Delete page model:</span></span>
+<span data-ttu-id="5f21c-444">不需要追蹤時，[AsNoTracking](/dotnet/api/microsoft.entityframeworkcore.entityframeworkqueryableextensions.asnotracking#Microsoft_EntityFrameworkCore_EntityFrameworkQueryableExtensions_AsNoTracking__1_System_Linq_IQueryable___0__) 可以改善效能。</span><span class="sxs-lookup"><span data-stu-id="5f21c-444">[AsNoTracking](/dotnet/api/microsoft.entityframeworkcore.entityframeworkqueryableextensions.asnotracking#Microsoft_EntityFrameworkCore_EntityFrameworkQueryableExtensions_AsNoTracking__1_System_Linq_IQueryable___0__) can improve performance when tracking isn't required.</span></span> <span data-ttu-id="5f21c-445">將 `AsNoTracking` 新增至 *Delete* 和 *Details* 頁面模型。</span><span class="sxs-lookup"><span data-stu-id="5f21c-445">Add `AsNoTracking` to the Delete and Details page model.</span></span> <span data-ttu-id="5f21c-446">下列程式碼顯示已更新的 *Delete* 頁面模型：</span><span class="sxs-lookup"><span data-stu-id="5f21c-446">The following code shows the updated Delete page model:</span></span>
 
 [!code-csharp[](intro/samples/cu/Pages/Courses/Delete.cshtml.cs?name=snippet&highlight=21,23,40,41)]
 
-<span data-ttu-id="0d9d2-304">在 *Pages/Courses/Details.cshtml.cs* 檔案中更新 `OnGetAsync` 方法：</span><span class="sxs-lookup"><span data-stu-id="0d9d2-304">Update the `OnGetAsync` method in the *Pages/Courses/Details.cshtml.cs* file:</span></span>
+<span data-ttu-id="5f21c-447">在 *Pages/Courses/Details.cshtml.cs* 檔案中更新 `OnGetAsync` 方法：</span><span class="sxs-lookup"><span data-stu-id="5f21c-447">Update the `OnGetAsync` method in the *Pages/Courses/Details.cshtml.cs* file:</span></span>
 
 [!code-csharp[](intro/samples/cu/Pages/Courses/Details.cshtml.cs?name=snippet)]
 
-### <a name="modify-the-delete-and-details-pages"></a><span data-ttu-id="0d9d2-305">修改 *Delete* 和 *Details* 頁面</span><span class="sxs-lookup"><span data-stu-id="0d9d2-305">Modify the Delete and Details pages</span></span>
+### <a name="modify-the-delete-and-details-pages"></a><span data-ttu-id="5f21c-448">修改 *Delete* 和 *Details* 頁面</span><span class="sxs-lookup"><span data-stu-id="5f21c-448">Modify the Delete and Details pages</span></span>
 
-<span data-ttu-id="0d9d2-306">以下列標記更新 [刪除] Razor 頁面：</span><span class="sxs-lookup"><span data-stu-id="0d9d2-306">Update the Delete Razor page with the following markup:</span></span>
+<span data-ttu-id="5f21c-449">以下列標記更新 [刪除] Razor 頁面：</span><span class="sxs-lookup"><span data-stu-id="5f21c-449">Update the Delete Razor page with the following markup:</span></span>
 
 [!code-cshtml[](intro/samples/cu/Pages/Courses/Delete.cshtml?highlight=15-20)]
 
-<span data-ttu-id="0d9d2-307">對 *Details* 頁面進行相同的變更。</span><span class="sxs-lookup"><span data-stu-id="0d9d2-307">Make the same changes to the Details page.</span></span>
+<span data-ttu-id="5f21c-450">對 *Details* 頁面進行相同的變更。</span><span class="sxs-lookup"><span data-stu-id="5f21c-450">Make the same changes to the Details page.</span></span>
 
-### <a name="test-the-course-pages"></a><span data-ttu-id="0d9d2-308">測試 Course 頁面</span><span class="sxs-lookup"><span data-stu-id="0d9d2-308">Test the Course pages</span></span>
+### <a name="test-the-course-pages"></a><span data-ttu-id="5f21c-451">測試 Course 頁面</span><span class="sxs-lookup"><span data-stu-id="5f21c-451">Test the Course pages</span></span>
 
-<span data-ttu-id="0d9d2-309">測試建立、編輯、詳細資料和刪除。</span><span class="sxs-lookup"><span data-stu-id="0d9d2-309">Test create, edit, details, and delete.</span></span>
+<span data-ttu-id="5f21c-452">測試建立、編輯、詳細資料和刪除。</span><span class="sxs-lookup"><span data-stu-id="5f21c-452">Test create, edit, details, and delete.</span></span>
 
-## <a name="update-the-instructor-pages"></a><span data-ttu-id="0d9d2-310">更新講師頁面</span><span class="sxs-lookup"><span data-stu-id="0d9d2-310">Update the instructor pages</span></span>
+## <a name="update-the-instructor-pages"></a><span data-ttu-id="5f21c-453">更新講師頁面</span><span class="sxs-lookup"><span data-stu-id="5f21c-453">Update the instructor pages</span></span>
 
-<span data-ttu-id="0d9d2-311">下列各節會更新講師頁面。</span><span class="sxs-lookup"><span data-stu-id="0d9d2-311">The following sections update the instructor pages.</span></span>
+<span data-ttu-id="5f21c-454">下列各節會更新講師頁面。</span><span class="sxs-lookup"><span data-stu-id="5f21c-454">The following sections update the instructor pages.</span></span>
 
-### <a name="add-office-location"></a><span data-ttu-id="0d9d2-312">新增辦公室位置</span><span class="sxs-lookup"><span data-stu-id="0d9d2-312">Add office location</span></span>
+### <a name="add-office-location"></a><span data-ttu-id="5f21c-455">新增辦公室位置</span><span class="sxs-lookup"><span data-stu-id="5f21c-455">Add office location</span></span>
 
-<span data-ttu-id="0d9d2-313">當您編輯講師記錄時，可能會想要更新講師的辦公室指派。</span><span class="sxs-lookup"><span data-stu-id="0d9d2-313">When editing an instructor record, you may want to update the instructor's office assignment.</span></span> <span data-ttu-id="0d9d2-314">`Instructor` 實體與 `OfficeAssignment` 實體具有一對零或一的關聯性。</span><span class="sxs-lookup"><span data-stu-id="0d9d2-314">The `Instructor` entity has a one-to-zero-or-one relationship with the `OfficeAssignment` entity.</span></span> <span data-ttu-id="0d9d2-315">必須處理講師程式碼：</span><span class="sxs-lookup"><span data-stu-id="0d9d2-315">The instructor code must handle:</span></span>
+<span data-ttu-id="5f21c-456">當您編輯講師記錄時，可能會想要更新講師的辦公室指派。</span><span class="sxs-lookup"><span data-stu-id="5f21c-456">When editing an instructor record, you may want to update the instructor's office assignment.</span></span> <span data-ttu-id="5f21c-457">`Instructor` 實體與 `OfficeAssignment` 實體具有一對零或一的關聯性。</span><span class="sxs-lookup"><span data-stu-id="5f21c-457">The `Instructor` entity has a one-to-zero-or-one relationship with the `OfficeAssignment` entity.</span></span> <span data-ttu-id="5f21c-458">必須處理講師程式碼：</span><span class="sxs-lookup"><span data-stu-id="5f21c-458">The instructor code must handle:</span></span>
 
-* <span data-ttu-id="0d9d2-316">如果使用者清除辦公室指派，請刪除 `OfficeAssignment` 實體。</span><span class="sxs-lookup"><span data-stu-id="0d9d2-316">If the user clears the office assignment, delete the `OfficeAssignment` entity.</span></span>
-* <span data-ttu-id="0d9d2-317">如果使用者輸入辦公室指派，但它是空的，請建立新的 `OfficeAssignment` 實體。</span><span class="sxs-lookup"><span data-stu-id="0d9d2-317">If the user enters an office assignment and it was empty, create a new `OfficeAssignment` entity.</span></span>
-* <span data-ttu-id="0d9d2-318">如果使用者變更辦公室指派，請更新 `OfficeAssignment` 實體。</span><span class="sxs-lookup"><span data-stu-id="0d9d2-318">If the user changes the office assignment, update the `OfficeAssignment` entity.</span></span>
+* <span data-ttu-id="5f21c-459">如果使用者清除辦公室指派，請刪除 `OfficeAssignment` 實體。</span><span class="sxs-lookup"><span data-stu-id="5f21c-459">If the user clears the office assignment, delete the `OfficeAssignment` entity.</span></span>
+* <span data-ttu-id="5f21c-460">如果使用者輸入辦公室指派，但它是空的，請建立新的 `OfficeAssignment` 實體。</span><span class="sxs-lookup"><span data-stu-id="5f21c-460">If the user enters an office assignment and it was empty, create a new `OfficeAssignment` entity.</span></span>
+* <span data-ttu-id="5f21c-461">如果使用者變更辦公室指派，請更新 `OfficeAssignment` 實體。</span><span class="sxs-lookup"><span data-stu-id="5f21c-461">If the user changes the office assignment, update the `OfficeAssignment` entity.</span></span>
 
-<span data-ttu-id="0d9d2-319">以下列程式碼更新講師 [編輯] 頁面模型：</span><span class="sxs-lookup"><span data-stu-id="0d9d2-319">Update the instructors Edit page model with the following code:</span></span>
+<span data-ttu-id="5f21c-462">以下列程式碼更新講師 [編輯] 頁面模型：</span><span class="sxs-lookup"><span data-stu-id="5f21c-462">Update the instructors Edit page model with the following code:</span></span>
 
 [!code-csharp[](intro/samples/cu/Pages/Instructors/Edit1.cshtml.cs?name=snippet&highlight=20-23,32,39-999)]
 
-<span data-ttu-id="0d9d2-320">上述程式碼：</span><span class="sxs-lookup"><span data-stu-id="0d9d2-320">The preceding code:</span></span>
+<span data-ttu-id="5f21c-463">上述程式碼：</span><span class="sxs-lookup"><span data-stu-id="5f21c-463">The preceding code:</span></span>
 
-* <span data-ttu-id="0d9d2-321">針對 `OfficeAssignment` 導覽屬性使用積極式載入從資料庫中取得目前的 `Instructor` 實體。</span><span class="sxs-lookup"><span data-stu-id="0d9d2-321">Gets the current `Instructor` entity from the database using eager loading for the `OfficeAssignment` navigation property.</span></span>
-* <span data-ttu-id="0d9d2-322">使用從模型繫結器取得的值更新擷取的 `Instructor` 實體。</span><span class="sxs-lookup"><span data-stu-id="0d9d2-322">Updates the retrieved `Instructor` entity with values from the model binder.</span></span> <span data-ttu-id="0d9d2-323">`TryUpdateModel` 會防止[大量指派](xref:data/ef-rp/crud#overposting) (overposting)。</span><span class="sxs-lookup"><span data-stu-id="0d9d2-323">`TryUpdateModel` prevents [overposting](xref:data/ef-rp/crud#overposting).</span></span>
-* <span data-ttu-id="0d9d2-324">如果辦公室位置為空白，請將 `Instructor.OfficeAssignment` 設定為 Null。</span><span class="sxs-lookup"><span data-stu-id="0d9d2-324">If the office location is blank, sets `Instructor.OfficeAssignment` to null.</span></span> <span data-ttu-id="0d9d2-325">當 `Instructor.OfficeAssignment` 為 Null 時，將會刪除 `OfficeAssignment` 資料表中的相關資料列。</span><span class="sxs-lookup"><span data-stu-id="0d9d2-325">When `Instructor.OfficeAssignment` is null, the related row in the `OfficeAssignment` table is deleted.</span></span>
+* <span data-ttu-id="5f21c-464">針對 `OfficeAssignment` 導覽屬性使用積極式載入從資料庫中取得目前的 `Instructor` 實體。</span><span class="sxs-lookup"><span data-stu-id="5f21c-464">Gets the current `Instructor` entity from the database using eager loading for the `OfficeAssignment` navigation property.</span></span>
+* <span data-ttu-id="5f21c-465">使用從模型繫結器取得的值更新擷取的 `Instructor` 實體。</span><span class="sxs-lookup"><span data-stu-id="5f21c-465">Updates the retrieved `Instructor` entity with values from the model binder.</span></span> <span data-ttu-id="5f21c-466">`TryUpdateModel` 會防止[大量指派](xref:data/ef-rp/crud#overposting) (overposting)。</span><span class="sxs-lookup"><span data-stu-id="5f21c-466">`TryUpdateModel` prevents [overposting](xref:data/ef-rp/crud#overposting).</span></span>
+* <span data-ttu-id="5f21c-467">如果辦公室位置為空白，請將 `Instructor.OfficeAssignment` 設定為 Null。</span><span class="sxs-lookup"><span data-stu-id="5f21c-467">If the office location is blank, sets `Instructor.OfficeAssignment` to null.</span></span> <span data-ttu-id="5f21c-468">當 `Instructor.OfficeAssignment` 為 Null 時，將會刪除 `OfficeAssignment` 資料表中的相關資料列。</span><span class="sxs-lookup"><span data-stu-id="5f21c-468">When `Instructor.OfficeAssignment` is null, the related row in the `OfficeAssignment` table is deleted.</span></span>
 
-### <a name="update-the-instructor-edit-page"></a><span data-ttu-id="0d9d2-326">更新講師 [編輯] 頁面</span><span class="sxs-lookup"><span data-stu-id="0d9d2-326">Update the instructor Edit page</span></span>
+### <a name="update-the-instructor-edit-page"></a><span data-ttu-id="5f21c-469">更新講師 [編輯] 頁面</span><span class="sxs-lookup"><span data-stu-id="5f21c-469">Update the instructor Edit page</span></span>
 
-<span data-ttu-id="0d9d2-327">使用辦公室位置更新 *Pages/Instructors/Edit.cshtml*：</span><span class="sxs-lookup"><span data-stu-id="0d9d2-327">Update *Pages/Instructors/Edit.cshtml* with the office location:</span></span>
+<span data-ttu-id="5f21c-470">使用辦公室位置更新 *Pages/Instructors/Edit.cshtml*：</span><span class="sxs-lookup"><span data-stu-id="5f21c-470">Update *Pages/Instructors/Edit.cshtml* with the office location:</span></span>
 
 [!code-cshtml[](intro/samples/cu/Pages/Instructors/Edit1.cshtml?highlight=29-33)]
 
-<span data-ttu-id="0d9d2-328">請確認您可以變更講師辦公室位置。</span><span class="sxs-lookup"><span data-stu-id="0d9d2-328">Verify you can change an instructors office location.</span></span>
+<span data-ttu-id="5f21c-471">請確認您可以變更講師辦公室位置。</span><span class="sxs-lookup"><span data-stu-id="5f21c-471">Verify you can change an instructors office location.</span></span>
 
-## <a name="add-course-assignments-to-the-instructor-edit-page"></a><span data-ttu-id="0d9d2-329">將課程指派新增至講師 [編輯] 頁面</span><span class="sxs-lookup"><span data-stu-id="0d9d2-329">Add Course assignments to the instructor Edit page</span></span>
+## <a name="add-course-assignments-to-the-instructor-edit-page"></a><span data-ttu-id="5f21c-472">將課程指派新增至講師 [編輯] 頁面</span><span class="sxs-lookup"><span data-stu-id="5f21c-472">Add Course assignments to the instructor Edit page</span></span>
 
-<span data-ttu-id="0d9d2-330">講師可教授任何數量的課程。</span><span class="sxs-lookup"><span data-stu-id="0d9d2-330">Instructors may teach any number of courses.</span></span> <span data-ttu-id="0d9d2-331">在本節中，您可以新增變更課程指派的能力。</span><span class="sxs-lookup"><span data-stu-id="0d9d2-331">In this section, you add the ability to change course assignments.</span></span> <span data-ttu-id="0d9d2-332">下圖顯示已更新的講師 [編輯] 頁面：</span><span class="sxs-lookup"><span data-stu-id="0d9d2-332">The following image shows the updated instructor Edit page:</span></span>
+<span data-ttu-id="5f21c-473">講師可教授任何數量的課程。</span><span class="sxs-lookup"><span data-stu-id="5f21c-473">Instructors may teach any number of courses.</span></span> <span data-ttu-id="5f21c-474">在本節中，您可以新增變更課程指派的能力。</span><span class="sxs-lookup"><span data-stu-id="5f21c-474">In this section, you add the ability to change course assignments.</span></span> <span data-ttu-id="5f21c-475">下圖顯示已更新的講師 [編輯] 頁面：</span><span class="sxs-lookup"><span data-stu-id="5f21c-475">The following image shows the updated instructor Edit page:</span></span>
 
 ![Instructor [編輯] 頁面與課程](update-related-data/_static/instructor-edit-courses.png)
 
-<span data-ttu-id="0d9d2-334">`Course` 和 `Instructor` 具有多對多關聯性。</span><span class="sxs-lookup"><span data-stu-id="0d9d2-334">`Course` and `Instructor` has a many-to-many relationship.</span></span> <span data-ttu-id="0d9d2-335">若要新增和移除關聯性，您必須在 `CourseAssignments` 聯結實體集中新增和移除實體。</span><span class="sxs-lookup"><span data-stu-id="0d9d2-335">To add and remove relationships, you add and remove entities from the `CourseAssignments` join entity set.</span></span>
+<span data-ttu-id="5f21c-477">`Course` 和 `Instructor` 具有多對多關聯性。</span><span class="sxs-lookup"><span data-stu-id="5f21c-477">`Course` and `Instructor` has a many-to-many relationship.</span></span> <span data-ttu-id="5f21c-478">若要新增和移除關聯性，您必須在 `CourseAssignments` 聯結實體集中新增和移除實體。</span><span class="sxs-lookup"><span data-stu-id="5f21c-478">To add and remove relationships, you add and remove entities from the `CourseAssignments` join entity set.</span></span>
 
-<span data-ttu-id="0d9d2-336">核取方塊可變更指派給講師的課程。</span><span class="sxs-lookup"><span data-stu-id="0d9d2-336">Check boxes enable changes to courses an instructor is assigned to.</span></span> <span data-ttu-id="0d9d2-337">資料庫中的每個課程各顯示一個核取方塊。</span><span class="sxs-lookup"><span data-stu-id="0d9d2-337">A check box is displayed for every course in the database.</span></span> <span data-ttu-id="0d9d2-338">已核取指派給講師的課程。</span><span class="sxs-lookup"><span data-stu-id="0d9d2-338">Courses that the instructor is assigned to are checked.</span></span> <span data-ttu-id="0d9d2-339">使用者可選取或清除核取方塊來變更課程指派。</span><span class="sxs-lookup"><span data-stu-id="0d9d2-339">The user can select or clear check boxes to change course assignments.</span></span> <span data-ttu-id="0d9d2-340">如果課程數目大上許多：</span><span class="sxs-lookup"><span data-stu-id="0d9d2-340">If the number of courses were much greater:</span></span>
+<span data-ttu-id="5f21c-479">核取方塊可變更指派給講師的課程。</span><span class="sxs-lookup"><span data-stu-id="5f21c-479">Check boxes enable changes to courses an instructor is assigned to.</span></span> <span data-ttu-id="5f21c-480">資料庫中的每個課程各顯示一個核取方塊。</span><span class="sxs-lookup"><span data-stu-id="5f21c-480">A check box is displayed for every course in the database.</span></span> <span data-ttu-id="5f21c-481">已核取指派給講師的課程。</span><span class="sxs-lookup"><span data-stu-id="5f21c-481">Courses that the instructor is assigned to are checked.</span></span> <span data-ttu-id="5f21c-482">使用者可選取或清除核取方塊來變更課程指派。</span><span class="sxs-lookup"><span data-stu-id="5f21c-482">The user can select or clear check boxes to change course assignments.</span></span> <span data-ttu-id="5f21c-483">如果課程數目大上許多：</span><span class="sxs-lookup"><span data-stu-id="5f21c-483">If the number of courses were much greater:</span></span>
 
-* <span data-ttu-id="0d9d2-341">您可能會使用不同的使用者介面來顯示課程。</span><span class="sxs-lookup"><span data-stu-id="0d9d2-341">You'd probably use a different user interface to display the courses.</span></span>
-* <span data-ttu-id="0d9d2-342">操作聯結實體來建立或刪除關聯性的方法不會變更。</span><span class="sxs-lookup"><span data-stu-id="0d9d2-342">The method of manipulating a join entity to create or delete relationships wouldn't change.</span></span>
+* <span data-ttu-id="5f21c-484">您可能會使用不同的使用者介面來顯示課程。</span><span class="sxs-lookup"><span data-stu-id="5f21c-484">You'd probably use a different user interface to display the courses.</span></span>
+* <span data-ttu-id="5f21c-485">操作聯結實體來建立或刪除關聯性的方法不會變更。</span><span class="sxs-lookup"><span data-stu-id="5f21c-485">The method of manipulating a join entity to create or delete relationships wouldn't change.</span></span>
 
-### <a name="add-classes-to-support-create-and-edit-instructor-pages"></a><span data-ttu-id="0d9d2-343">新增類別來支援 *Create* 和 *Edit* 講師頁面</span><span class="sxs-lookup"><span data-stu-id="0d9d2-343">Add classes to support Create and Edit instructor pages</span></span>
+### <a name="add-classes-to-support-create-and-edit-instructor-pages"></a><span data-ttu-id="5f21c-486">新增類別來支援 *Create* 和 *Edit* 講師頁面</span><span class="sxs-lookup"><span data-stu-id="5f21c-486">Add classes to support Create and Edit instructor pages</span></span>
 
-<span data-ttu-id="0d9d2-344">以下列程式碼建立 *SchoolViewModels/AssignedCourseData.cs*：</span><span class="sxs-lookup"><span data-stu-id="0d9d2-344">Create *SchoolViewModels/AssignedCourseData.cs* with the following code:</span></span>
+<span data-ttu-id="5f21c-487">以下列程式碼建立 *SchoolViewModels/AssignedCourseData.cs*：</span><span class="sxs-lookup"><span data-stu-id="5f21c-487">Create *SchoolViewModels/AssignedCourseData.cs* with the following code:</span></span>
 
 [!code-csharp[](intro/samples/cu/Models/SchoolViewModels/AssignedCourseData.cs)]
 
-<span data-ttu-id="0d9d2-345">`AssignedCourseData` 類別包含資料，用來建立講師所指派課程的核取方塊。</span><span class="sxs-lookup"><span data-stu-id="0d9d2-345">The `AssignedCourseData` class contains data to create the check boxes for assigned courses by an instructor.</span></span>
+<span data-ttu-id="5f21c-488">`AssignedCourseData` 類別包含資料，用來建立講師所指派課程的核取方塊。</span><span class="sxs-lookup"><span data-stu-id="5f21c-488">The `AssignedCourseData` class contains data to create the check boxes for assigned courses by an instructor.</span></span>
 
-<span data-ttu-id="0d9d2-346">建立 *Pages/Instructors/InstructorCoursesPageModel.cshtml.cs* 基底類別：</span><span class="sxs-lookup"><span data-stu-id="0d9d2-346">Create the *Pages/Instructors/InstructorCoursesPageModel.cshtml.cs* base class:</span></span>
+<span data-ttu-id="5f21c-489">建立 *Pages/Instructors/InstructorCoursesPageModel.cshtml.cs* 基底類別：</span><span class="sxs-lookup"><span data-stu-id="5f21c-489">Create the *Pages/Instructors/InstructorCoursesPageModel.cshtml.cs* base class:</span></span>
 
 [!code-csharp[](intro/samples/cu/Pages/Instructors/InstructorCoursesPageModel.cshtml.cs)]
 
-<span data-ttu-id="0d9d2-347">`InstructorCoursesPageModel` 是您將用於 *Edit* 和 *Create* 頁面模型的基底類別。</span><span class="sxs-lookup"><span data-stu-id="0d9d2-347">The `InstructorCoursesPageModel` is the base class you will use for the Edit and Create page models.</span></span> <span data-ttu-id="0d9d2-348">`PopulateAssignedCourseData` 會讀取所有 `Course` 實體來擴展 `AssignedCourseDataList`。</span><span class="sxs-lookup"><span data-stu-id="0d9d2-348">`PopulateAssignedCourseData` reads all `Course` entities to populate `AssignedCourseDataList`.</span></span> <span data-ttu-id="0d9d2-349">對於每個課程，此程式碼設定 `CourseID`、標題以及是否將講師指派給課程。</span><span class="sxs-lookup"><span data-stu-id="0d9d2-349">For each course, the code sets the `CourseID`, title, and whether or not the instructor is assigned to the course.</span></span> <span data-ttu-id="0d9d2-350">[HashSet](/dotnet/api/system.collections.generic.hashset-1) 用來建立有效查閱。</span><span class="sxs-lookup"><span data-stu-id="0d9d2-350">A [HashSet](/dotnet/api/system.collections.generic.hashset-1) is used to create efficient lookups.</span></span>
+<span data-ttu-id="5f21c-490">`InstructorCoursesPageModel` 是您將用於 *Edit* 和 *Create* 頁面模型的基底類別。</span><span class="sxs-lookup"><span data-stu-id="5f21c-490">The `InstructorCoursesPageModel` is the base class you will use for the Edit and Create page models.</span></span> <span data-ttu-id="5f21c-491">`PopulateAssignedCourseData` 會讀取所有 `Course` 實體來擴展 `AssignedCourseDataList`。</span><span class="sxs-lookup"><span data-stu-id="5f21c-491">`PopulateAssignedCourseData` reads all `Course` entities to populate `AssignedCourseDataList`.</span></span> <span data-ttu-id="5f21c-492">對於每個課程，此程式碼設定 `CourseID`、標題以及是否將講師指派給課程。</span><span class="sxs-lookup"><span data-stu-id="5f21c-492">For each course, the code sets the `CourseID`, title, and whether or not the instructor is assigned to the course.</span></span> <span data-ttu-id="5f21c-493">[HashSet](/dotnet/api/system.collections.generic.hashset-1) 用來建立有效查閱。</span><span class="sxs-lookup"><span data-stu-id="5f21c-493">A [HashSet](/dotnet/api/system.collections.generic.hashset-1) is used to create efficient lookups.</span></span>
 
-### <a name="instructors-edit-page-model"></a><span data-ttu-id="0d9d2-351">講師 *Edit* 頁面模型</span><span class="sxs-lookup"><span data-stu-id="0d9d2-351">Instructors Edit page model</span></span>
+### <a name="instructors-edit-page-model"></a><span data-ttu-id="5f21c-494">講師 *Edit* 頁面模型</span><span class="sxs-lookup"><span data-stu-id="5f21c-494">Instructors Edit page model</span></span>
 
-<span data-ttu-id="0d9d2-352">以下列程式碼更新講師 [編輯] 頁面模型：</span><span class="sxs-lookup"><span data-stu-id="0d9d2-352">Update the instructor Edit page model with the following code:</span></span>
+<span data-ttu-id="5f21c-495">以下列程式碼更新講師 [編輯] 頁面模型：</span><span class="sxs-lookup"><span data-stu-id="5f21c-495">Update the instructor Edit page model with the following code:</span></span>
 
 [!code-csharp[](intro/samples/cu/Pages/Instructors/Edit.cshtml.cs?name=snippet&highlight=1,20-24,30,34,41-999)]
 
-<span data-ttu-id="0d9d2-353">上述程式碼會處理辦公室指派變更。</span><span class="sxs-lookup"><span data-stu-id="0d9d2-353">The preceding code handles office assignment changes.</span></span>
+<span data-ttu-id="5f21c-496">上述程式碼會處理辦公室指派變更。</span><span class="sxs-lookup"><span data-stu-id="5f21c-496">The preceding code handles office assignment changes.</span></span>
 
-<span data-ttu-id="0d9d2-354">更新講師 Razor 觀點：</span><span class="sxs-lookup"><span data-stu-id="0d9d2-354">Update the instructor Razor View:</span></span>
+<span data-ttu-id="5f21c-497">更新講師 Razor 觀點：</span><span class="sxs-lookup"><span data-stu-id="5f21c-497">Update the instructor Razor View:</span></span>
 
 [!code-cshtml[](intro/samples/cu/Pages/Instructors/Edit.cshtml?highlight=34-59)]
 
 <a id="notepad"></a>
 > [!NOTE]
-> <span data-ttu-id="0d9d2-355">當您將程式碼貼上到 Visual Studio 時，分行符號可能會產生變更，致使程式碼失效。</span><span class="sxs-lookup"><span data-stu-id="0d9d2-355">When you paste the code in Visual Studio, line breaks are changed in a way that breaks the code.</span></span> <span data-ttu-id="0d9d2-356">按 Ctrl+Z 來復原自動格式化。</span><span class="sxs-lookup"><span data-stu-id="0d9d2-356">Press Ctrl+Z one time to undo the automatic formatting.</span></span> <span data-ttu-id="0d9d2-357">Ctrl+Z 會修正分行符號，使它們看起來就跟您在這裡看到的一樣。</span><span class="sxs-lookup"><span data-stu-id="0d9d2-357">Ctrl+Z fixes the line breaks so that they look like what you see here.</span></span> <span data-ttu-id="0d9d2-358">縮排不一定要是完美的，但 `@:</tr><tr>`、`@:<td>`、`@:</td>` 和 `@:</tr>` 必須要如顯示般各自在獨立的一行上。</span><span class="sxs-lookup"><span data-stu-id="0d9d2-358">The indentation doesn't have to be perfect, but the `@:</tr><tr>`, `@:<td>`, `@:</td>`, and `@:</tr>` lines must each be on a single line as shown.</span></span> <span data-ttu-id="0d9d2-359">當選取新的程式碼區塊時，按 Tab 鍵三次來讓新的程式碼對準現有的程式碼。</span><span class="sxs-lookup"><span data-stu-id="0d9d2-359">With the block of new code selected, press Tab three times to line up the new code with the existing code.</span></span> <span data-ttu-id="0d9d2-360">[使用此連結](https://developercommunity.visualstudio.com/content/problem/147795/razor-editor-malforms-pasted-markup-and-creates-in.html)票選或檢閱這個錯誤的狀態。</span><span class="sxs-lookup"><span data-stu-id="0d9d2-360">Vote on or review the status of this bug [with this link](https://developercommunity.visualstudio.com/content/problem/147795/razor-editor-malforms-pasted-markup-and-creates-in.html).</span></span>
+> <span data-ttu-id="5f21c-498">當您將程式碼貼上到 Visual Studio 時，分行符號可能會產生變更，致使程式碼失效。</span><span class="sxs-lookup"><span data-stu-id="5f21c-498">When you paste the code in Visual Studio, line breaks are changed in a way that breaks the code.</span></span> <span data-ttu-id="5f21c-499">按 Ctrl+Z 來復原自動格式化。</span><span class="sxs-lookup"><span data-stu-id="5f21c-499">Press Ctrl+Z one time to undo the automatic formatting.</span></span> <span data-ttu-id="5f21c-500">Ctrl+Z 會修正分行符號，使它們看起來就跟您在這裡看到的一樣。</span><span class="sxs-lookup"><span data-stu-id="5f21c-500">Ctrl+Z fixes the line breaks so that they look like what you see here.</span></span> <span data-ttu-id="5f21c-501">縮排不一定要是完美的，但 `@:</tr><tr>`、`@:<td>`、`@:</td>` 和 `@:</tr>` 必須要如顯示般各自在獨立的一行上。</span><span class="sxs-lookup"><span data-stu-id="5f21c-501">The indentation doesn't have to be perfect, but the `@:</tr><tr>`, `@:<td>`, `@:</td>`, and `@:</tr>` lines must each be on a single line as shown.</span></span> <span data-ttu-id="5f21c-502">當選取新的程式碼區塊時，按 Tab 鍵三次來讓新的程式碼對準現有的程式碼。</span><span class="sxs-lookup"><span data-stu-id="5f21c-502">With the block of new code selected, press Tab three times to line up the new code with the existing code.</span></span> <span data-ttu-id="5f21c-503">[使用此連結](https://developercommunity.visualstudio.com/content/problem/147795/razor-editor-malforms-pasted-markup-and-creates-in.html)票選或檢閱這個錯誤的狀態。</span><span class="sxs-lookup"><span data-stu-id="5f21c-503">Vote on or review the status of this bug [with this link](https://developercommunity.visualstudio.com/content/problem/147795/razor-editor-malforms-pasted-markup-and-creates-in.html).</span></span>
 
-<span data-ttu-id="0d9d2-361">上述程式碼會建立一個 HTML 資料表，該資料表中有三個資料行。</span><span class="sxs-lookup"><span data-stu-id="0d9d2-361">The preceding code creates an HTML table that has three columns.</span></span> <span data-ttu-id="0d9d2-362">每個資料行都有一個核取方塊，以及內含課程編號和標題 (title) 的標題 (caption)。</span><span class="sxs-lookup"><span data-stu-id="0d9d2-362">Each column has a check box and a caption containing the course number and title.</span></span> <span data-ttu-id="0d9d2-363">所有核取方塊都具有相同的名稱 ("selectedCourses")。</span><span class="sxs-lookup"><span data-stu-id="0d9d2-363">The check boxes all have the same name ("selectedCourses").</span></span> <span data-ttu-id="0d9d2-364">使用相同的名稱可告知模型繫結器將它們視為一個群組。</span><span class="sxs-lookup"><span data-stu-id="0d9d2-364">Using the same name informs the model binder to treat them as a group.</span></span> <span data-ttu-id="0d9d2-365">每個核取方塊的 Value 屬性都會設定為 `CourseID`。</span><span class="sxs-lookup"><span data-stu-id="0d9d2-365">The value attribute of each check box is set to `CourseID`.</span></span> <span data-ttu-id="0d9d2-366">當頁面發佈時，模型繫結器便會傳遞只包含所選取核取方塊之 `CourseID` 值的陣列。</span><span class="sxs-lookup"><span data-stu-id="0d9d2-366">When the page is posted, the model binder passes an array that consists of the `CourseID` values for only the check boxes that are selected.</span></span>
+<span data-ttu-id="5f21c-504">上述程式碼會建立一個 HTML 資料表，該資料表中有三個資料行。</span><span class="sxs-lookup"><span data-stu-id="5f21c-504">The preceding code creates an HTML table that has three columns.</span></span> <span data-ttu-id="5f21c-505">每個資料行都有一個核取方塊，以及內含課程編號和標題 (title) 的標題 (caption)。</span><span class="sxs-lookup"><span data-stu-id="5f21c-505">Each column has a check box and a caption containing the course number and title.</span></span> <span data-ttu-id="5f21c-506">所有核取方塊都具有相同的名稱 ("selectedCourses")。</span><span class="sxs-lookup"><span data-stu-id="5f21c-506">The check boxes all have the same name ("selectedCourses").</span></span> <span data-ttu-id="5f21c-507">使用相同的名稱可告知模型繫結器將它們視為一個群組。</span><span class="sxs-lookup"><span data-stu-id="5f21c-507">Using the same name informs the model binder to treat them as a group.</span></span> <span data-ttu-id="5f21c-508">每個核取方塊的 Value 屬性都會設定為 `CourseID`。</span><span class="sxs-lookup"><span data-stu-id="5f21c-508">The value attribute of each check box is set to `CourseID`.</span></span> <span data-ttu-id="5f21c-509">當頁面發佈時，模型繫結器便會傳遞只包含所選取核取方塊之 `CourseID` 值的陣列。</span><span class="sxs-lookup"><span data-stu-id="5f21c-509">When the page is posted, the model binder passes an array that consists of the `CourseID` values for only the check boxes that are selected.</span></span>
 
-<span data-ttu-id="0d9d2-367">一開始呈現核取方塊時，指派給講師的課程已核取屬性。</span><span class="sxs-lookup"><span data-stu-id="0d9d2-367">When the check boxes are initially rendered, courses assigned to the instructor have checked attributes.</span></span>
+<span data-ttu-id="5f21c-510">一開始呈現核取方塊時，指派給講師的課程已核取屬性。</span><span class="sxs-lookup"><span data-stu-id="5f21c-510">When the check boxes are initially rendered, courses assigned to the instructor have checked attributes.</span></span>
 
-<span data-ttu-id="0d9d2-368">執行應用程式，並測試已更新的講師 [編輯] 頁面。</span><span class="sxs-lookup"><span data-stu-id="0d9d2-368">Run the app and test the updated instructors Edit page.</span></span> <span data-ttu-id="0d9d2-369">變更一些課程指派。</span><span class="sxs-lookup"><span data-stu-id="0d9d2-369">Change some course assignments.</span></span> <span data-ttu-id="0d9d2-370">所做的變更會反映在 [索引] 頁面上。</span><span class="sxs-lookup"><span data-stu-id="0d9d2-370">The changes are reflected on the Index page.</span></span>
+<span data-ttu-id="5f21c-511">執行應用程式，並測試已更新的講師 [編輯] 頁面。</span><span class="sxs-lookup"><span data-stu-id="5f21c-511">Run the app and test the updated instructors Edit page.</span></span> <span data-ttu-id="5f21c-512">變更一些課程指派。</span><span class="sxs-lookup"><span data-stu-id="5f21c-512">Change some course assignments.</span></span> <span data-ttu-id="5f21c-513">所做的變更會反映在 [索引] 頁面上。</span><span class="sxs-lookup"><span data-stu-id="5f21c-513">The changes are reflected on the Index page.</span></span>
 
-<span data-ttu-id="0d9d2-371">注意：這裡所用來編輯講師課程資料的方法在課程的數量有限時運作相當良好。</span><span class="sxs-lookup"><span data-stu-id="0d9d2-371">Note: The approach taken here to edit instructor course data works well when there's a limited number of courses.</span></span> <span data-ttu-id="0d9d2-372">針對更大的集合，不同的 UI 和不同的更新方法可能更有用且更有效率。</span><span class="sxs-lookup"><span data-stu-id="0d9d2-372">For collections that are much larger, a different UI and a different updating method would be more useable and efficient.</span></span>
+<span data-ttu-id="5f21c-514">注意：這裡所用來編輯講師課程資料的方法在課程的數量有限時運作相當良好。</span><span class="sxs-lookup"><span data-stu-id="5f21c-514">Note: The approach taken here to edit instructor course data works well when there's a limited number of courses.</span></span> <span data-ttu-id="5f21c-515">針對更大的集合，不同的 UI 和不同的更新方法可能更有用且更有效率。</span><span class="sxs-lookup"><span data-stu-id="5f21c-515">For collections that are much larger, a different UI and a different updating method would be more useable and efficient.</span></span>
 
-### <a name="update-the-instructors-create-page"></a><span data-ttu-id="0d9d2-373">更新講師 *Create* 頁面</span><span class="sxs-lookup"><span data-stu-id="0d9d2-373">Update the instructors Create page</span></span>
+### <a name="update-the-instructors-create-page"></a><span data-ttu-id="5f21c-516">更新講師 *Create* 頁面</span><span class="sxs-lookup"><span data-stu-id="5f21c-516">Update the instructors Create page</span></span>
 
-<span data-ttu-id="0d9d2-374">以下列程式碼更新講師 *Create* 頁面模型：</span><span class="sxs-lookup"><span data-stu-id="0d9d2-374">Update the instructor Create page model with the following code:</span></span>
+<span data-ttu-id="5f21c-517">以下列程式碼更新講師 *Create* 頁面模型：</span><span class="sxs-lookup"><span data-stu-id="5f21c-517">Update the instructor Create page model with the following code:</span></span>
 
 [!code-csharp[](intro/samples/cu/Pages/Instructors/Create.cshtml.cs)]
 
-<span data-ttu-id="0d9d2-375">上述程式碼類似於 *Pages/Instructors/Edit.cshtml.cs* 程式碼。</span><span class="sxs-lookup"><span data-stu-id="0d9d2-375">The preceding code is similar to the *Pages/Instructors/Edit.cshtml.cs* code.</span></span>
+<span data-ttu-id="5f21c-518">上述程式碼類似於 *Pages/Instructors/Edit.cshtml.cs* 程式碼。</span><span class="sxs-lookup"><span data-stu-id="5f21c-518">The preceding code is similar to the *Pages/Instructors/Edit.cshtml.cs* code.</span></span>
 
-<span data-ttu-id="0d9d2-376">Razor以下列標記更新講師建立頁面：</span><span class="sxs-lookup"><span data-stu-id="0d9d2-376">Update the instructor Create Razor page with the following markup:</span></span>
+<span data-ttu-id="5f21c-519">Razor以下列標記更新講師建立頁面：</span><span class="sxs-lookup"><span data-stu-id="5f21c-519">Update the instructor Create Razor page with the following markup:</span></span>
 
 [!code-cshtml[](intro/samples/cu/Pages/Instructors/Create.cshtml?highlight=32-62)]
 
-<span data-ttu-id="0d9d2-377">測試講師 *Create* 頁面。</span><span class="sxs-lookup"><span data-stu-id="0d9d2-377">Test the instructor Create page.</span></span>
+<span data-ttu-id="5f21c-520">測試講師 *Create* 頁面。</span><span class="sxs-lookup"><span data-stu-id="5f21c-520">Test the instructor Create page.</span></span>
 
-## <a name="update-the-delete-page"></a><span data-ttu-id="0d9d2-378">更新 [刪除] 頁面</span><span class="sxs-lookup"><span data-stu-id="0d9d2-378">Update the Delete page</span></span>
+## <a name="update-the-delete-page"></a><span data-ttu-id="5f21c-521">更新 [刪除] 頁面</span><span class="sxs-lookup"><span data-stu-id="5f21c-521">Update the Delete page</span></span>
 
-<span data-ttu-id="0d9d2-379">以下列程式碼更新 [刪除] 頁面模型：</span><span class="sxs-lookup"><span data-stu-id="0d9d2-379">Update the Delete page model with the following code:</span></span>
+<span data-ttu-id="5f21c-522">以下列程式碼更新 [刪除] 頁面模型：</span><span class="sxs-lookup"><span data-stu-id="5f21c-522">Update the Delete page model with the following code:</span></span>
 
 [!code-csharp[](intro/samples/cu/Pages/Instructors/Delete.cshtml.cs?highlight=5,40-999)]
 
-<span data-ttu-id="0d9d2-380">上述程式碼會進行下列變更：</span><span class="sxs-lookup"><span data-stu-id="0d9d2-380">The preceding code makes the following changes:</span></span>
+<span data-ttu-id="5f21c-523">上述程式碼會進行下列變更：</span><span class="sxs-lookup"><span data-stu-id="5f21c-523">The preceding code makes the following changes:</span></span>
 
-* <span data-ttu-id="0d9d2-381">為 `CourseAssignments` 導覽屬性使用積極式載入。</span><span class="sxs-lookup"><span data-stu-id="0d9d2-381">Uses eager loading for the `CourseAssignments` navigation property.</span></span> <span data-ttu-id="0d9d2-382">必須包含 `CourseAssignments`，否則刪除講師時不會刪除它們。</span><span class="sxs-lookup"><span data-stu-id="0d9d2-382">`CourseAssignments` must be included or they aren't deleted when the instructor is deleted.</span></span> <span data-ttu-id="0d9d2-383">若要避免需要讀取們，您可以在資料庫中設定串聯刪除。</span><span class="sxs-lookup"><span data-stu-id="0d9d2-383">To avoid needing to read them, configure cascade delete in the database.</span></span>
+* <span data-ttu-id="5f21c-524">為 `CourseAssignments` 導覽屬性使用積極式載入。</span><span class="sxs-lookup"><span data-stu-id="5f21c-524">Uses eager loading for the `CourseAssignments` navigation property.</span></span> <span data-ttu-id="5f21c-525">必須包含 `CourseAssignments`，否則刪除講師時不會刪除它們。</span><span class="sxs-lookup"><span data-stu-id="5f21c-525">`CourseAssignments` must be included or they aren't deleted when the instructor is deleted.</span></span> <span data-ttu-id="5f21c-526">若要避免需要讀取們，您可以在資料庫中設定串聯刪除。</span><span class="sxs-lookup"><span data-stu-id="5f21c-526">To avoid needing to read them, configure cascade delete in the database.</span></span>
 
-* <span data-ttu-id="0d9d2-384">若要刪除的講師已指派為任何部門的系統管理員，請先從部門中移除講師的指派。</span><span class="sxs-lookup"><span data-stu-id="0d9d2-384">If the instructor to be deleted is assigned as administrator of any departments, removes the instructor assignment from those departments.</span></span>
+* <span data-ttu-id="5f21c-527">若要刪除的講師已指派為任何部門的系統管理員，請先從部門中移除講師的指派。</span><span class="sxs-lookup"><span data-stu-id="5f21c-527">If the instructor to be deleted is assigned as administrator of any departments, removes the instructor assignment from those departments.</span></span>
 
-## <a name="additional-resources"></a><span data-ttu-id="0d9d2-385">其他資源</span><span class="sxs-lookup"><span data-stu-id="0d9d2-385">Additional resources</span></span>
+## <a name="additional-resources"></a><span data-ttu-id="5f21c-528">其他資源</span><span class="sxs-lookup"><span data-stu-id="5f21c-528">Additional resources</span></span>
 
-* [<span data-ttu-id="0d9d2-386">這個教學課程的 YouTube 版本 (第 1 部分)</span><span class="sxs-lookup"><span data-stu-id="0d9d2-386">YouTube version of this tutorial (Part 1)</span></span>](https://www.youtube.com/watch?v=Csh6gkmwc9E)
-* [<span data-ttu-id="0d9d2-387">這個教學課程的 YouTube 版本 (第 2 部分)</span><span class="sxs-lookup"><span data-stu-id="0d9d2-387">YouTube version of this tutorial (Part 2)</span></span>](https://www.youtube.com/watch?v=mOAankB_Zgc)
+* [<span data-ttu-id="5f21c-529">這個教學課程的 YouTube 版本 (第 1 部分)</span><span class="sxs-lookup"><span data-stu-id="5f21c-529">YouTube version of this tutorial (Part 1)</span></span>](https://www.youtube.com/watch?v=Csh6gkmwc9E)
+* [<span data-ttu-id="5f21c-530">這個教學課程的 YouTube 版本 (第 2 部分)</span><span class="sxs-lookup"><span data-stu-id="5f21c-530">YouTube version of this tutorial (Part 2)</span></span>](https://www.youtube.com/watch?v=mOAankB_Zgc)
 
 > [!div class="step-by-step"]
-> <span data-ttu-id="0d9d2-388">[上一個](xref:data/ef-rp/read-related-data) 
-> [下一步](xref:data/ef-rp/concurrency)</span><span class="sxs-lookup"><span data-stu-id="0d9d2-388">[Previous](xref:data/ef-rp/read-related-data)
+> <span data-ttu-id="5f21c-531">[上一個](xref:data/ef-rp/read-related-data) 
+> [下一步](xref:data/ef-rp/concurrency)</span><span class="sxs-lookup"><span data-stu-id="5f21c-531">[Previous](xref:data/ef-rp/read-related-data)
 [Next](xref:data/ef-rp/concurrency)</span></span>
 
 ::: moniker-end

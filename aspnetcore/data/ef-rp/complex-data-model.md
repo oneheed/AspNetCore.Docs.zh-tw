@@ -18,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: data/ef-rp/complex-data-model
-ms.openlocfilehash: 029decea6ce3d39442f50c76fdf089f6052b2bb0
-ms.sourcegitcommit: fafcf015d64aa2388bacee16ba38799daf06a4f0
+ms.openlocfilehash: 23ac7fa83d6ee313e6695e3829a50ae94c967572
+ms.sourcegitcommit: 4864500b0f43e33dc0445ce632bfbe1e43e79320
 ms.translationtype: MT
 ms.contentlocale: zh-TW
 ms.lasthandoff: 03/30/2021
-ms.locfileid: "105957524"
+ms.locfileid: "105994152"
 ---
 <!-- Removed from V 5.0, CourseAssignment -->
 
@@ -43,6 +43,20 @@ ms.locfileid: "105957524"
 已完成的資料模型如下圖所示：
 
 ![實體圖表](complex-data-model/_static/EF.png)
+
+以下是使用 [Dataedo](https://dataedo.com/)建立的資料庫關係圖：
+
+<!--Image added in https://github.com/dotnet/AspNetCore.Docs/pull/21922  -->
+
+![Dataedo 圖](intro/_static/5/AzureSQL_DB_ERD_madeIn_Dataedo.png)
+
+若要使用 Dataedo 建立資料庫關係圖：
+
+* [將應用程式部署至 Azure](/azure/app-service/tutorial-dotnetcore-sqldb-app)
+* 在您的電腦上下載並安裝 [Dataedo](https://dataedo.com/) 。
+* [在5分鐘內依照指示產生 Azure SQL Database 的檔](https://dataedo.com/tutorials/generate-documentation-for-azure-sql-database)
+
+在上述的 Dataedo 圖中， `CourseInstructor` 是 Entity Framework 所建立的聯結資料表。 如需詳細資訊，請參閱 [多對多](/ef/core/modeling/relationships#many-to-many)
 
 ## <a name="the-student-entity"></a>Student 實體
 

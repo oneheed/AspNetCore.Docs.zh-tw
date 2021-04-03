@@ -20,28 +20,28 @@ no-loc:
 - SignalR
 uid: blazor/fundamentals/signalr
 zone_pivot_groups: blazor-hosting-models
-ms.openlocfilehash: ecac21c1f6f7cea0a221e1a78161b915ee2c755f
-ms.sourcegitcommit: 1f35de0ca9ba13ea63186c4dc387db4fb8e541e0
+ms.openlocfilehash: e5f3eee1e9aaadc55645b23086c0a53c068669cf
+ms.sourcegitcommit: 7923a9ec594690f01e0c9c6df3416c239e6745fb
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 03/20/2021
-ms.locfileid: "104711057"
+ms.lasthandoff: 03/31/2021
+ms.locfileid: "106081321"
 ---
-# <a name="aspnet-core-blazor-signalr-guidance"></a><span data-ttu-id="243cb-103">ASP.NET Core Blazor SignalR 指導方針</span><span class="sxs-lookup"><span data-stu-id="243cb-103">ASP.NET Core Blazor SignalR guidance</span></span>
+# <a name="aspnet-core-blazor-signalr-guidance"></a><span data-ttu-id="aaab7-103">ASP.NET Core Blazor SignalR 指導方針</span><span class="sxs-lookup"><span data-stu-id="aaab7-103">ASP.NET Core Blazor SignalR guidance</span></span>
 
 ::: zone pivot="webassembly"
 
-<span data-ttu-id="243cb-104">本文說明如何 SignalR 在應用程式中設定及管理連線 Blazor 。</span><span class="sxs-lookup"><span data-stu-id="243cb-104">This article explains how to configure and manage SignalR connections in Blazor apps.</span></span>
+<span data-ttu-id="aaab7-104">本文說明如何 SignalR 在應用程式中設定及管理連線 Blazor 。</span><span class="sxs-lookup"><span data-stu-id="aaab7-104">This article explains how to configure and manage SignalR connections in Blazor apps.</span></span>
 
-<span data-ttu-id="243cb-105">如需 ASP.NET Core 設定的一般指引 SignalR ，請參閱檔區域中的主題 <xref:signalr/introduction> 。</span><span class="sxs-lookup"><span data-stu-id="243cb-105">For general guidance on ASP.NET Core SignalR configuration, see the topics in the <xref:signalr/introduction> area of the documentation.</span></span> <span data-ttu-id="243cb-106">若要設定 SignalR [加入至裝載的 Blazor WebAssembly 解決方案](xref:tutorials/signalr-blazor)，請參閱 <xref:signalr/configuration#configure-server-options> 。</span><span class="sxs-lookup"><span data-stu-id="243cb-106">To configure SignalR [added to a hosted Blazor WebAssembly solution](xref:tutorials/signalr-blazor), see <xref:signalr/configuration#configure-server-options>.</span></span>
+<span data-ttu-id="aaab7-105">如需 ASP.NET Core 設定的一般指引 SignalR ，請參閱檔區域中的主題 <xref:signalr/introduction> 。</span><span class="sxs-lookup"><span data-stu-id="aaab7-105">For general guidance on ASP.NET Core SignalR configuration, see the topics in the <xref:signalr/introduction> area of the documentation.</span></span> <span data-ttu-id="aaab7-106">若要設定 SignalR [加入至裝載的 Blazor WebAssembly 解決方案](xref:tutorials/signalr-blazor)，請參閱 <xref:signalr/configuration#configure-server-options> 。</span><span class="sxs-lookup"><span data-stu-id="aaab7-106">To configure SignalR [added to a hosted Blazor WebAssembly solution](xref:tutorials/signalr-blazor), see <xref:signalr/configuration#configure-server-options>.</span></span>
 
-## <a name="signalr-cross-origin-negotiation-for-authentication"></a><span data-ttu-id="243cb-107">SignalR 驗證的跨原始來源協商</span><span class="sxs-lookup"><span data-stu-id="243cb-107">SignalR cross-origin negotiation for authentication</span></span>
+## <a name="signalr-cross-origin-negotiation-for-authentication"></a><span data-ttu-id="aaab7-107">SignalR 驗證的跨原始來源協商</span><span class="sxs-lookup"><span data-stu-id="aaab7-107">SignalR cross-origin negotiation for authentication</span></span>
 
-<span data-ttu-id="243cb-108">設定 SignalR 的基礎用戶端以傳送認證，例如 cookie s 或 HTTP 驗證標頭：</span><span class="sxs-lookup"><span data-stu-id="243cb-108">To configure SignalR's underlying client to send credentials, such as cookies or HTTP authentication headers:</span></span>
+<span data-ttu-id="aaab7-108">設定 SignalR 的基礎用戶端以傳送認證，例如 cookie s 或 HTTP 驗證標頭：</span><span class="sxs-lookup"><span data-stu-id="aaab7-108">To configure SignalR's underlying client to send credentials, such as cookies or HTTP authentication headers:</span></span>
 
-* <span data-ttu-id="243cb-109">使用 <xref:Microsoft.AspNetCore.Components.WebAssembly.Http.WebAssemblyHttpRequestMessageExtensions.SetBrowserRequestCredentials%2A> 設定 <xref:Microsoft.AspNetCore.Components.WebAssembly.Http.BrowserRequestCredentials.Include> 跨原始來源 [`fetch`](https://developer.mozilla.org/docs/Web/API/Fetch_API/Using_Fetch) 要求。</span><span class="sxs-lookup"><span data-stu-id="243cb-109">Use <xref:Microsoft.AspNetCore.Components.WebAssembly.Http.WebAssemblyHttpRequestMessageExtensions.SetBrowserRequestCredentials%2A> to set <xref:Microsoft.AspNetCore.Components.WebAssembly.Http.BrowserRequestCredentials.Include> on cross-origin [`fetch`](https://developer.mozilla.org/docs/Web/API/Fetch_API/Using_Fetch) requests.</span></span>
+* <span data-ttu-id="aaab7-109">使用 <xref:Microsoft.AspNetCore.Components.WebAssembly.Http.WebAssemblyHttpRequestMessageExtensions.SetBrowserRequestCredentials%2A> 設定 <xref:Microsoft.AspNetCore.Components.WebAssembly.Http.BrowserRequestCredentials.Include> 跨原始來源 [`fetch`](https://developer.mozilla.org/docs/Web/API/Fetch_API/Using_Fetch) 要求。</span><span class="sxs-lookup"><span data-stu-id="aaab7-109">Use <xref:Microsoft.AspNetCore.Components.WebAssembly.Http.WebAssemblyHttpRequestMessageExtensions.SetBrowserRequestCredentials%2A> to set <xref:Microsoft.AspNetCore.Components.WebAssembly.Http.BrowserRequestCredentials.Include> on cross-origin [`fetch`](https://developer.mozilla.org/docs/Web/API/Fetch_API/Using_Fetch) requests.</span></span>
 
-  <span data-ttu-id="243cb-110">`IncludeRequestCredentialsMessageHandler.cs`:</span><span class="sxs-lookup"><span data-stu-id="243cb-110">`IncludeRequestCredentialsMessageHandler.cs`:</span></span>
+  <span data-ttu-id="aaab7-110">`IncludeRequestCredentialsMessageHandler.cs`:</span><span class="sxs-lookup"><span data-stu-id="aaab7-110">`IncludeRequestCredentialsMessageHandler.cs`:</span></span>
 
   ```csharp
   using System.Net.Http;
@@ -60,7 +60,7 @@ ms.locfileid: "104711057"
   }
   ```
 
-* <span data-ttu-id="243cb-111">建立中樞連線時，請將指派給 <xref:System.Net.Http.HttpMessageHandler> <xref:Microsoft.AspNetCore.Http.Connections.Client.HttpConnectionOptions.HttpMessageHandlerFactory> 選項：</span><span class="sxs-lookup"><span data-stu-id="243cb-111">Where a hub connection is built, assign the <xref:System.Net.Http.HttpMessageHandler> to the <xref:Microsoft.AspNetCore.Http.Connections.Client.HttpConnectionOptions.HttpMessageHandlerFactory> option:</span></span>
+* <span data-ttu-id="aaab7-111">建立中樞連線時，請將指派給 <xref:System.Net.Http.HttpMessageHandler> <xref:Microsoft.AspNetCore.Http.Connections.Client.HttpConnectionOptions.HttpMessageHandlerFactory> 選項：</span><span class="sxs-lookup"><span data-stu-id="aaab7-111">Where a hub connection is built, assign the <xref:System.Net.Http.HttpMessageHandler> to the <xref:Microsoft.AspNetCore.Http.Connections.Client.HttpConnectionOptions.HttpMessageHandlerFactory> option:</span></span>
 
   ```csharp
   HubConnectionBuilder hubConnecton;
@@ -75,22 +75,22 @@ ms.locfileid: "104711057"
       }).Build();
   ```
 
-  <span data-ttu-id="243cb-112">上述範例會將中樞連線 URL 設定為的絕對 URI 位址 `/chathub` ，也就是元件 () 的[ SignalR with Blazor 教學](xref:tutorials/signalr-blazor)課程中所使用的 url `Index` `Pages/Index.razor` 。</span><span class="sxs-lookup"><span data-stu-id="243cb-112">The preceding example configures the hub connection URL to the absolute URI address at `/chathub`, which is the URL used in the [SignalR with Blazor tutorial](xref:tutorials/signalr-blazor) in the `Index` component (`Pages/Index.razor`).</span></span> <span data-ttu-id="243cb-113">URI 也可以透過字串（例如，或透過設定）來設定 `https://signalr.example.com` 。 [](xref:blazor/fundamentals/configuration)</span><span class="sxs-lookup"><span data-stu-id="243cb-113">The URI can also be set via a string, for example `https://signalr.example.com`, or via [configuration](xref:blazor/fundamentals/configuration).</span></span>
+  <span data-ttu-id="aaab7-112">上述範例會將中樞連線 URL 設定為的絕對 URI 位址 `/chathub` ，也就是元件 () 的[ SignalR with Blazor 教學](xref:tutorials/signalr-blazor)課程中所使用的 url `Index` `Pages/Index.razor` 。</span><span class="sxs-lookup"><span data-stu-id="aaab7-112">The preceding example configures the hub connection URL to the absolute URI address at `/chathub`, which is the URL used in the [SignalR with Blazor tutorial](xref:tutorials/signalr-blazor) in the `Index` component (`Pages/Index.razor`).</span></span> <span data-ttu-id="aaab7-113">URI 也可以透過字串（例如，或透過設定）來設定 `https://signalr.example.com` 。 [](xref:blazor/fundamentals/configuration)</span><span class="sxs-lookup"><span data-stu-id="aaab7-113">The URI can also be set via a string, for example `https://signalr.example.com`, or via [configuration](xref:blazor/fundamentals/configuration).</span></span>
 
-<span data-ttu-id="243cb-114">如需詳細資訊，請參閱<xref:signalr/configuration#configure-additional-options>。</span><span class="sxs-lookup"><span data-stu-id="243cb-114">For more information, see <xref:signalr/configuration#configure-additional-options>.</span></span>
+<span data-ttu-id="aaab7-114">如需詳細資訊，請參閱<xref:signalr/configuration#configure-additional-options>。</span><span class="sxs-lookup"><span data-stu-id="aaab7-114">For more information, see <xref:signalr/configuration#configure-additional-options>.</span></span>
 
 ::: moniker range=">= aspnetcore-5.0"
 
-## <a name="render-mode"></a><span data-ttu-id="243cb-115">轉譯模式</span><span class="sxs-lookup"><span data-stu-id="243cb-115">Render mode</span></span>
+## <a name="render-mode"></a><span data-ttu-id="aaab7-115">轉譯模式</span><span class="sxs-lookup"><span data-stu-id="aaab7-115">Render mode</span></span>
 
-<span data-ttu-id="243cb-116">如果 Blazor WebAssembly 使用的應用程式 SignalR 已設定為在伺服器上預先建立，則會在建立伺服器的用戶端連接之前發生預先呈現。</span><span class="sxs-lookup"><span data-stu-id="243cb-116">If a Blazor WebAssembly app that uses SignalR is configured to prerender on the server, prerendering occurs before the client connection to the server is established.</span></span> <span data-ttu-id="243cb-117">如需詳細資訊，請參閱下列文章：</span><span class="sxs-lookup"><span data-stu-id="243cb-117">For more information, see the following articles:</span></span>
+<span data-ttu-id="aaab7-116">如果 Blazor WebAssembly 使用的應用程式 SignalR 已設定為在伺服器上預先建立，則會在建立伺服器的用戶端連接之前發生預先呈現。</span><span class="sxs-lookup"><span data-stu-id="aaab7-116">If a Blazor WebAssembly app that uses SignalR is configured to prerender on the server, prerendering occurs before the client connection to the server is established.</span></span> <span data-ttu-id="aaab7-117">如需詳細資訊，請參閱下列文章：</span><span class="sxs-lookup"><span data-stu-id="aaab7-117">For more information, see the following articles:</span></span>
 
 * <xref:mvc/views/tag-helpers/builtin-th/component-tag-helper>
 * <xref:blazor/components/prerendering-and-integration>
 
 ::: moniker-end
 
-## <a name="additional-resources"></a><span data-ttu-id="243cb-118">其他資源</span><span class="sxs-lookup"><span data-stu-id="243cb-118">Additional resources</span></span>
+## <a name="additional-resources"></a><span data-ttu-id="aaab7-118">其他資源</span><span class="sxs-lookup"><span data-stu-id="aaab7-118">Additional resources</span></span>
 
 * <xref:signalr/introduction>
 * <xref:signalr/configuration>
@@ -99,25 +99,25 @@ ms.locfileid: "104711057"
 
 ::: zone pivot="server"
 
-<span data-ttu-id="243cb-119">本文說明如何 SignalR 在應用程式中設定及管理連線 Blazor 。</span><span class="sxs-lookup"><span data-stu-id="243cb-119">This article explains how to configure and manage SignalR connections in Blazor apps.</span></span>
+<span data-ttu-id="aaab7-119">本文說明如何 SignalR 在應用程式中設定及管理連線 Blazor 。</span><span class="sxs-lookup"><span data-stu-id="aaab7-119">This article explains how to configure and manage SignalR connections in Blazor apps.</span></span>
 
-<span data-ttu-id="243cb-120">如需 ASP.NET Core 設定的一般指引 SignalR ，請參閱檔區域中的主題 <xref:signalr/introduction> 。</span><span class="sxs-lookup"><span data-stu-id="243cb-120">For general guidance on ASP.NET Core SignalR configuration, see the topics in the <xref:signalr/introduction> area of the documentation.</span></span> <span data-ttu-id="243cb-121">若要設定 SignalR [加入至裝載的 Blazor WebAssembly 解決方案](xref:tutorials/signalr-blazor)，請參閱 <xref:signalr/configuration#configure-server-options> 。</span><span class="sxs-lookup"><span data-stu-id="243cb-121">To configure SignalR [added to a hosted Blazor WebAssembly solution](xref:tutorials/signalr-blazor), see <xref:signalr/configuration#configure-server-options>.</span></span>
+<span data-ttu-id="aaab7-120">如需 ASP.NET Core 設定的一般指引 SignalR ，請參閱檔區域中的主題 <xref:signalr/introduction> 。</span><span class="sxs-lookup"><span data-stu-id="aaab7-120">For general guidance on ASP.NET Core SignalR configuration, see the topics in the <xref:signalr/introduction> area of the documentation.</span></span> <span data-ttu-id="aaab7-121">若要設定 SignalR [加入至裝載的 Blazor WebAssembly 解決方案](xref:tutorials/signalr-blazor)，請參閱 <xref:signalr/configuration#configure-server-options> 。</span><span class="sxs-lookup"><span data-stu-id="aaab7-121">To configure SignalR [added to a hosted Blazor WebAssembly solution](xref:tutorials/signalr-blazor), see <xref:signalr/configuration#configure-server-options>.</span></span>
 
-## <a name="circuit-handler-options"></a><span data-ttu-id="243cb-122">線路處理常式選項</span><span class="sxs-lookup"><span data-stu-id="243cb-122">Circuit handler options</span></span>
+## <a name="circuit-handler-options"></a><span data-ttu-id="aaab7-122">線路處理常式選項</span><span class="sxs-lookup"><span data-stu-id="aaab7-122">Circuit handler options</span></span>
 
-<span data-ttu-id="243cb-123">Blazor Server使用 <xref:Microsoft.AspNetCore.Components.Server.CircuitOptions> 下表所示的來設定電路。</span><span class="sxs-lookup"><span data-stu-id="243cb-123">Configure the Blazor Server circuit with the <xref:Microsoft.AspNetCore.Components.Server.CircuitOptions> shown in the following table.</span></span>
+<span data-ttu-id="aaab7-123">Blazor Server使用 <xref:Microsoft.AspNetCore.Components.Server.CircuitOptions> 下表所示的來設定電路。</span><span class="sxs-lookup"><span data-stu-id="aaab7-123">Configure the Blazor Server circuit with the <xref:Microsoft.AspNetCore.Components.Server.CircuitOptions> shown in the following table.</span></span>
 
-| <span data-ttu-id="243cb-124">選項</span><span class="sxs-lookup"><span data-stu-id="243cb-124">Option</span></span> | <span data-ttu-id="243cb-125">預設</span><span class="sxs-lookup"><span data-stu-id="243cb-125">Default</span></span> | <span data-ttu-id="243cb-126">描述</span><span class="sxs-lookup"><span data-stu-id="243cb-126">Description</span></span> |
+| <span data-ttu-id="aaab7-124">選項</span><span class="sxs-lookup"><span data-stu-id="aaab7-124">Option</span></span> | <span data-ttu-id="aaab7-125">預設</span><span class="sxs-lookup"><span data-stu-id="aaab7-125">Default</span></span> | <span data-ttu-id="aaab7-126">描述</span><span class="sxs-lookup"><span data-stu-id="aaab7-126">Description</span></span> |
 | --- | --- | --- |
-| <xref:Microsoft.AspNetCore.Components.Server.CircuitOptions.DetailedErrors> | `false` | <span data-ttu-id="243cb-127">當線路上發生未處理的例外狀況，或透過 JS interop 的 .NET 方法叫用導致例外狀況時，將詳細的例外狀況訊息傳送至 JavaScript。</span><span class="sxs-lookup"><span data-stu-id="243cb-127">Send detailed exception messages to JavaScript when an unhandled exception occurs on the circuit or when a .NET method invocation through JS interop results in an exception.</span></span> |
-| <xref:Microsoft.AspNetCore.Components.Server.CircuitOptions.DisconnectedCircuitMaxRetained> | <span data-ttu-id="243cb-128">100</span><span class="sxs-lookup"><span data-stu-id="243cb-128">100</span></span> | <span data-ttu-id="243cb-129">伺服器一次保存在記憶體中的中斷連接電路數目上限。</span><span class="sxs-lookup"><span data-stu-id="243cb-129">Maximum number of disconnected circuits that the server holds in memory at a time.</span></span> |
-| <xref:Microsoft.AspNetCore.Components.Server.CircuitOptions.DisconnectedCircuitRetentionPeriod> | <span data-ttu-id="243cb-130">3 分鐘</span><span class="sxs-lookup"><span data-stu-id="243cb-130">3 minutes</span></span> | <span data-ttu-id="243cb-131">中斷連接的電路在中斷之前保留在記憶體中的最大時間量。</span><span class="sxs-lookup"><span data-stu-id="243cb-131">Maximum amount of time a disconnected circuit is held in memory before being torn down.</span></span> |
-| <xref:Microsoft.AspNetCore.Components.Server.CircuitOptions.JSInteropDefaultCallTimeout> | <span data-ttu-id="243cb-132">1 分鐘</span><span class="sxs-lookup"><span data-stu-id="243cb-132">1 minute</span></span> | <span data-ttu-id="243cb-133">在將非同步 JavaScript 函式呼叫計時之前，伺服器所等待的最大時間量。</span><span class="sxs-lookup"><span data-stu-id="243cb-133">Maximum amount of time the server waits before timing out an asynchronous JavaScript function invocation.</span></span> |
-| <xref:Microsoft.AspNetCore.Components.Server.CircuitOptions.MaxBufferedUnacknowledgedRenderBatches> | <span data-ttu-id="243cb-134">10</span><span class="sxs-lookup"><span data-stu-id="243cb-134">10</span></span> | <span data-ttu-id="243cb-135">伺服器在指定時間為每個迴圈保留記憶體中的未認可轉譯批次數目上限，以支援健全的重新連接。</span><span class="sxs-lookup"><span data-stu-id="243cb-135">Maximum number of unacknowledged render batches the server keeps in memory per circuit at a given time to support robust reconnection.</span></span> <span data-ttu-id="243cb-136">達到此限制之後，伺服器會停止產生新的轉譯批次，直到用戶端認可一或多個批次為止。</span><span class="sxs-lookup"><span data-stu-id="243cb-136">After reaching the limit, the server stops producing new render batches until one or more batches are acknowledged by the client.</span></span> |
+| <xref:Microsoft.AspNetCore.Components.Server.CircuitOptions.DetailedErrors> | `false` | <span data-ttu-id="aaab7-127">當線路上發生未處理的例外狀況，或透過 JS interop 的 .NET 方法叫用導致例外狀況時，將詳細的例外狀況訊息傳送至 JavaScript。</span><span class="sxs-lookup"><span data-stu-id="aaab7-127">Send detailed exception messages to JavaScript when an unhandled exception occurs on the circuit or when a .NET method invocation through JS interop results in an exception.</span></span> |
+| <xref:Microsoft.AspNetCore.Components.Server.CircuitOptions.DisconnectedCircuitMaxRetained> | <span data-ttu-id="aaab7-128">100</span><span class="sxs-lookup"><span data-stu-id="aaab7-128">100</span></span> | <span data-ttu-id="aaab7-129">伺服器一次保存在記憶體中的中斷連接電路數目上限。</span><span class="sxs-lookup"><span data-stu-id="aaab7-129">Maximum number of disconnected circuits that the server holds in memory at a time.</span></span> |
+| <xref:Microsoft.AspNetCore.Components.Server.CircuitOptions.DisconnectedCircuitRetentionPeriod> | <span data-ttu-id="aaab7-130">3 分鐘</span><span class="sxs-lookup"><span data-stu-id="aaab7-130">3 minutes</span></span> | <span data-ttu-id="aaab7-131">中斷連接的電路在中斷之前保留在記憶體中的最大時間量。</span><span class="sxs-lookup"><span data-stu-id="aaab7-131">Maximum amount of time a disconnected circuit is held in memory before being torn down.</span></span> |
+| <xref:Microsoft.AspNetCore.Components.Server.CircuitOptions.JSInteropDefaultCallTimeout> | <span data-ttu-id="aaab7-132">1 分鐘</span><span class="sxs-lookup"><span data-stu-id="aaab7-132">1 minute</span></span> | <span data-ttu-id="aaab7-133">在將非同步 JavaScript 函式呼叫計時之前，伺服器所等待的最大時間量。</span><span class="sxs-lookup"><span data-stu-id="aaab7-133">Maximum amount of time the server waits before timing out an asynchronous JavaScript function invocation.</span></span> |
+| <xref:Microsoft.AspNetCore.Components.Server.CircuitOptions.MaxBufferedUnacknowledgedRenderBatches> | <span data-ttu-id="aaab7-134">10</span><span class="sxs-lookup"><span data-stu-id="aaab7-134">10</span></span> | <span data-ttu-id="aaab7-135">伺服器在指定時間為每個迴圈保留記憶體中的未認可轉譯批次數目上限，以支援健全的重新連接。</span><span class="sxs-lookup"><span data-stu-id="aaab7-135">Maximum number of unacknowledged render batches the server keeps in memory per circuit at a given time to support robust reconnection.</span></span> <span data-ttu-id="aaab7-136">達到此限制之後，伺服器會停止產生新的轉譯批次，直到用戶端認可一或多個批次為止。</span><span class="sxs-lookup"><span data-stu-id="aaab7-136">After reaching the limit, the server stops producing new render batches until one or more batches are acknowledged by the client.</span></span> |
 
-<span data-ttu-id="243cb-137">在中設定選項 `Startup.ConfigureServices` 委派的選項 <xref:Microsoft.Extensions.DependencyInjection.ComponentServiceCollectionExtensions.AddServerSideBlazor%2A> 。</span><span class="sxs-lookup"><span data-stu-id="243cb-137">Configure the options in `Startup.ConfigureServices` with an options delegate to <xref:Microsoft.Extensions.DependencyInjection.ComponentServiceCollectionExtensions.AddServerSideBlazor%2A>.</span></span> <span data-ttu-id="243cb-138">下列範例會指派上表所示的預設選項值。</span><span class="sxs-lookup"><span data-stu-id="243cb-138">The following example assigns the default option values shown in the preceding table.</span></span> <span data-ttu-id="243cb-139">確認 `Startup.cs` 使用 <xref:System> 命名空間 (`using System;`) 。</span><span class="sxs-lookup"><span data-stu-id="243cb-139">Confirm that `Startup.cs` uses the <xref:System> namespace (`using System;`).</span></span>
+<span data-ttu-id="aaab7-137">在中設定選項 `Startup.ConfigureServices` 委派的選項 <xref:Microsoft.Extensions.DependencyInjection.ComponentServiceCollectionExtensions.AddServerSideBlazor%2A> 。</span><span class="sxs-lookup"><span data-stu-id="aaab7-137">Configure the options in `Startup.ConfigureServices` with an options delegate to <xref:Microsoft.Extensions.DependencyInjection.ComponentServiceCollectionExtensions.AddServerSideBlazor%2A>.</span></span> <span data-ttu-id="aaab7-138">下列範例會指派上表所示的預設選項值。</span><span class="sxs-lookup"><span data-stu-id="aaab7-138">The following example assigns the default option values shown in the preceding table.</span></span> <span data-ttu-id="aaab7-139">確認 `Startup.cs` 使用 <xref:System> 命名空間 (`using System;`) 。</span><span class="sxs-lookup"><span data-stu-id="aaab7-139">Confirm that `Startup.cs` uses the <xref:System> namespace (`using System;`).</span></span>
 
-<span data-ttu-id="243cb-140">`Startup.ConfigureServices`:</span><span class="sxs-lookup"><span data-stu-id="243cb-140">`Startup.ConfigureServices`:</span></span>
+<span data-ttu-id="aaab7-140">`Startup.ConfigureServices`:</span><span class="sxs-lookup"><span data-stu-id="aaab7-140">`Startup.ConfigureServices`:</span></span>
 
 ```csharp
 services.AddServerSideBlazor(options =>
@@ -130,9 +130,9 @@ services.AddServerSideBlazor(options =>
 });
 ```
 
-<span data-ttu-id="243cb-141">若要設定 <xref:Microsoft.AspNetCore.SignalR.HubConnectionContext> ，請使用 <xref:Microsoft.AspNetCore.SignalR.HubConnectionContextOptions> with <xref:Microsoft.Extensions.DependencyInjection.ServerSideBlazorBuilderExtensions.AddHubOptions%2A> 。</span><span class="sxs-lookup"><span data-stu-id="243cb-141">To configure the <xref:Microsoft.AspNetCore.SignalR.HubConnectionContext>, use <xref:Microsoft.AspNetCore.SignalR.HubConnectionContextOptions> with <xref:Microsoft.Extensions.DependencyInjection.ServerSideBlazorBuilderExtensions.AddHubOptions%2A>.</span></span> <span data-ttu-id="243cb-142">如需選項描述，請參閱 <xref:signalr/configuration#configure-server-options> 。</span><span class="sxs-lookup"><span data-stu-id="243cb-142">For option descriptions, see <xref:signalr/configuration#configure-server-options>.</span></span> <span data-ttu-id="243cb-143">下列範例會指派預設選項值。</span><span class="sxs-lookup"><span data-stu-id="243cb-143">The following example assigns the default option values.</span></span> <span data-ttu-id="243cb-144">確認 `Startup.cs` 使用 <xref:System> 命名空間 (`using System;`) 。</span><span class="sxs-lookup"><span data-stu-id="243cb-144">Confirm that `Startup.cs` uses the <xref:System> namespace (`using System;`).</span></span>
+<span data-ttu-id="aaab7-141">若要設定 <xref:Microsoft.AspNetCore.SignalR.HubConnectionContext> ，請使用 <xref:Microsoft.AspNetCore.SignalR.HubConnectionContextOptions> with <xref:Microsoft.Extensions.DependencyInjection.ServerSideBlazorBuilderExtensions.AddHubOptions%2A> 。</span><span class="sxs-lookup"><span data-stu-id="aaab7-141">To configure the <xref:Microsoft.AspNetCore.SignalR.HubConnectionContext>, use <xref:Microsoft.AspNetCore.SignalR.HubConnectionContextOptions> with <xref:Microsoft.Extensions.DependencyInjection.ServerSideBlazorBuilderExtensions.AddHubOptions%2A>.</span></span> <span data-ttu-id="aaab7-142">如需選項描述，請參閱 <xref:signalr/configuration#configure-server-options> 。</span><span class="sxs-lookup"><span data-stu-id="aaab7-142">For option descriptions, see <xref:signalr/configuration#configure-server-options>.</span></span> <span data-ttu-id="aaab7-143">下列範例會指派預設選項值。</span><span class="sxs-lookup"><span data-stu-id="aaab7-143">The following example assigns the default option values.</span></span> <span data-ttu-id="aaab7-144">確認 `Startup.cs` 使用 <xref:System> 命名空間 (`using System;`) 。</span><span class="sxs-lookup"><span data-stu-id="aaab7-144">Confirm that `Startup.cs` uses the <xref:System> namespace (`using System;`).</span></span>
 
-<span data-ttu-id="243cb-145">`Startup.ConfigureServices`:</span><span class="sxs-lookup"><span data-stu-id="243cb-145">`Startup.ConfigureServices`:</span></span>
+<span data-ttu-id="aaab7-145">`Startup.ConfigureServices`:</span><span class="sxs-lookup"><span data-stu-id="aaab7-145">`Startup.ConfigureServices`:</span></span>
 
 ```csharp
 services.AddServerSideBlazor()
@@ -148,13 +148,13 @@ services.AddServerSideBlazor()
     });
 ```
 
-## <a name="reflect-the-connection-state-in-the-ui"></a><span data-ttu-id="243cb-146">反映 UI 中的連接狀態</span><span class="sxs-lookup"><span data-stu-id="243cb-146">Reflect the connection state in the UI</span></span>
+## <a name="reflect-the-connection-state-in-the-ui"></a><span data-ttu-id="aaab7-146">反映 UI 中的連接狀態</span><span class="sxs-lookup"><span data-stu-id="aaab7-146">Reflect the connection state in the UI</span></span>
 
-<span data-ttu-id="243cb-147">當用戶端偵測到連線已遺失時，當用戶端嘗試重新連接時，會對使用者顯示預設的 UI。</span><span class="sxs-lookup"><span data-stu-id="243cb-147">When the client detects that the connection has been lost, a default UI is displayed to the user while the client attempts to reconnect.</span></span> <span data-ttu-id="243cb-148">如果重新連接失敗，就會提供使用者重試的選項。</span><span class="sxs-lookup"><span data-stu-id="243cb-148">If reconnection fails, the user is provided the option to retry.</span></span>
+<span data-ttu-id="aaab7-147">當用戶端偵測到連線已遺失時，當用戶端嘗試重新連接時，會對使用者顯示預設的 UI。</span><span class="sxs-lookup"><span data-stu-id="aaab7-147">When the client detects that the connection has been lost, a default UI is displayed to the user while the client attempts to reconnect.</span></span> <span data-ttu-id="aaab7-148">如果重新連接失敗，就會提供使用者重試的選項。</span><span class="sxs-lookup"><span data-stu-id="aaab7-148">If reconnection fails, the user is provided the option to retry.</span></span>
 
-<span data-ttu-id="243cb-149">若要自訂 UI，請在頁面的中，使用的來定義專案 `id` `components-reconnect-modal` `<body>` `_Host.cshtml` Razor 。</span><span class="sxs-lookup"><span data-stu-id="243cb-149">To customize the UI, define an element with an `id` of `components-reconnect-modal` in the `<body>` of the `_Host.cshtml` Razor page.</span></span>
+<span data-ttu-id="aaab7-149">若要自訂 UI，請在頁面的中，使用的來定義專案 `id` `components-reconnect-modal` `<body>` `_Host.cshtml` Razor 。</span><span class="sxs-lookup"><span data-stu-id="aaab7-149">To customize the UI, define an element with an `id` of `components-reconnect-modal` in the `<body>` of the `_Host.cshtml` Razor page.</span></span>
 
-<span data-ttu-id="243cb-150">`Pages/_Host.cshtml`:</span><span class="sxs-lookup"><span data-stu-id="243cb-150">`Pages/_Host.cshtml`:</span></span>
+<span data-ttu-id="aaab7-150">`Pages/_Host.cshtml`:</span><span class="sxs-lookup"><span data-stu-id="aaab7-150">`Pages/_Host.cshtml`:</span></span>
 
 ```cshtml
 <div id="components-reconnect-modal">
@@ -162,9 +162,9 @@ services.AddServerSideBlazor()
 </div>
 ```
 
-<span data-ttu-id="243cb-151">將下列 CSS 樣式新增至網站的樣式表單。</span><span class="sxs-lookup"><span data-stu-id="243cb-151">Add the following CSS styles to the site's stylesheet.</span></span>
+<span data-ttu-id="aaab7-151">將下列 CSS 樣式新增至網站的樣式表單。</span><span class="sxs-lookup"><span data-stu-id="aaab7-151">Add the following CSS styles to the site's stylesheet.</span></span>
 
-<span data-ttu-id="243cb-152">`wwwroot/css/site.css`:</span><span class="sxs-lookup"><span data-stu-id="243cb-152">`wwwroot/css/site.css`:</span></span>
+<span data-ttu-id="aaab7-152">`wwwroot/css/site.css`:</span><span class="sxs-lookup"><span data-stu-id="aaab7-152">`wwwroot/css/site.css`:</span></span>
 
 ```css
 #components-reconnect-modal {
@@ -176,31 +176,31 @@ services.AddServerSideBlazor()
 }
 ```
 
-<span data-ttu-id="243cb-153">下表描述架構套用至元素的 CSS 類別 `components-reconnect-modal` Blazor 。</span><span class="sxs-lookup"><span data-stu-id="243cb-153">The following table describes the CSS classes applied to the `components-reconnect-modal` element by the Blazor framework.</span></span>
+<span data-ttu-id="aaab7-153">下表描述架構套用至元素的 CSS 類別 `components-reconnect-modal` Blazor 。</span><span class="sxs-lookup"><span data-stu-id="aaab7-153">The following table describes the CSS classes applied to the `components-reconnect-modal` element by the Blazor framework.</span></span>
 
-| <span data-ttu-id="243cb-154">CSS 類別</span><span class="sxs-lookup"><span data-stu-id="243cb-154">CSS class</span></span>                       | <span data-ttu-id="243cb-155">表示&hellip;</span><span class="sxs-lookup"><span data-stu-id="243cb-155">Indicates&hellip;</span></span> |
+| <span data-ttu-id="aaab7-154">CSS 類別</span><span class="sxs-lookup"><span data-stu-id="aaab7-154">CSS class</span></span>                       | <span data-ttu-id="aaab7-155">表示&hellip;</span><span class="sxs-lookup"><span data-stu-id="aaab7-155">Indicates&hellip;</span></span> |
 | ------------------------------- | ----------------- |
-| `components-reconnect-show`     | <span data-ttu-id="243cb-156">遺失的連接。</span><span class="sxs-lookup"><span data-stu-id="243cb-156">A lost connection.</span></span> <span data-ttu-id="243cb-157">用戶端正在嘗試重新連接。</span><span class="sxs-lookup"><span data-stu-id="243cb-157">The client is attempting to reconnect.</span></span> <span data-ttu-id="243cb-158">顯示強制回應。</span><span class="sxs-lookup"><span data-stu-id="243cb-158">Show the modal.</span></span> |
-| `components-reconnect-hide`     | <span data-ttu-id="243cb-159">系統會重新建立與伺服器之間的使用中連接。</span><span class="sxs-lookup"><span data-stu-id="243cb-159">An active connection is re-established to the server.</span></span> <span data-ttu-id="243cb-160">隱形模式。</span><span class="sxs-lookup"><span data-stu-id="243cb-160">Hide the modal.</span></span> |
-| `components-reconnect-failed`   | <span data-ttu-id="243cb-161">重新連接失敗，可能是因為網路失敗。</span><span class="sxs-lookup"><span data-stu-id="243cb-161">Reconnection failed, probably due to a network failure.</span></span> <span data-ttu-id="243cb-162">若要嘗試重新連接，請 `window.Blazor.reconnect()` 在 JavaScript 中呼叫。</span><span class="sxs-lookup"><span data-stu-id="243cb-162">To attempt reconnection, call `window.Blazor.reconnect()` in JavaScript.</span></span> |
-| `components-reconnect-rejected` | <span data-ttu-id="243cb-163">重新連線遭到拒絕。</span><span class="sxs-lookup"><span data-stu-id="243cb-163">Reconnection rejected.</span></span> <span data-ttu-id="243cb-164">伺服器已達到但拒絕連線，而且伺服器上的使用者狀態遺失。</span><span class="sxs-lookup"><span data-stu-id="243cb-164">The server was reached but refused the connection, and the user's state on the server is lost.</span></span> <span data-ttu-id="243cb-165">若要重載應用程式，請 `location.reload()` 在 JavaScript 中呼叫。</span><span class="sxs-lookup"><span data-stu-id="243cb-165">To reload the app, call `location.reload()` in JavaScript.</span></span> <span data-ttu-id="243cb-166">此連接狀態可能會在下列情況下產生：</span><span class="sxs-lookup"><span data-stu-id="243cb-166">This connection state may result when:</span></span><ul><li><span data-ttu-id="243cb-167">伺服器端線路發生損毀。</span><span class="sxs-lookup"><span data-stu-id="243cb-167">A crash in the server-side circuit occurs.</span></span></li><li><span data-ttu-id="243cb-168">用戶端已中斷連線到足夠的時間，讓伺服器卸載使用者的狀態。</span><span class="sxs-lookup"><span data-stu-id="243cb-168">The client is disconnected long enough for the server to drop the user's state.</span></span> <span data-ttu-id="243cb-169">系統會處置使用者元件的實例。</span><span class="sxs-lookup"><span data-stu-id="243cb-169">Instances of the user's components are disposed.</span></span></li><li><span data-ttu-id="243cb-170">伺服器會重新開機，或回收應用程式的背景工作進程。</span><span class="sxs-lookup"><span data-stu-id="243cb-170">The server is restarted, or the app's worker process is recycled.</span></span></li></ul> |
+| `components-reconnect-show`     | <span data-ttu-id="aaab7-156">遺失的連接。</span><span class="sxs-lookup"><span data-stu-id="aaab7-156">A lost connection.</span></span> <span data-ttu-id="aaab7-157">用戶端正在嘗試重新連接。</span><span class="sxs-lookup"><span data-stu-id="aaab7-157">The client is attempting to reconnect.</span></span> <span data-ttu-id="aaab7-158">顯示強制回應。</span><span class="sxs-lookup"><span data-stu-id="aaab7-158">Show the modal.</span></span> |
+| `components-reconnect-hide`     | <span data-ttu-id="aaab7-159">系統會重新建立與伺服器之間的使用中連接。</span><span class="sxs-lookup"><span data-stu-id="aaab7-159">An active connection is re-established to the server.</span></span> <span data-ttu-id="aaab7-160">隱形模式。</span><span class="sxs-lookup"><span data-stu-id="aaab7-160">Hide the modal.</span></span> |
+| `components-reconnect-failed`   | <span data-ttu-id="aaab7-161">重新連接失敗，可能是因為網路失敗。</span><span class="sxs-lookup"><span data-stu-id="aaab7-161">Reconnection failed, probably due to a network failure.</span></span> <span data-ttu-id="aaab7-162">若要嘗試重新連接，請 `window.Blazor.reconnect()` 在 JavaScript 中呼叫。</span><span class="sxs-lookup"><span data-stu-id="aaab7-162">To attempt reconnection, call `window.Blazor.reconnect()` in JavaScript.</span></span> |
+| `components-reconnect-rejected` | <span data-ttu-id="aaab7-163">重新連線遭到拒絕。</span><span class="sxs-lookup"><span data-stu-id="aaab7-163">Reconnection rejected.</span></span> <span data-ttu-id="aaab7-164">伺服器已達到但拒絕連線，而且伺服器上的使用者狀態遺失。</span><span class="sxs-lookup"><span data-stu-id="aaab7-164">The server was reached but refused the connection, and the user's state on the server is lost.</span></span> <span data-ttu-id="aaab7-165">若要重載應用程式，請 `location.reload()` 在 JavaScript 中呼叫。</span><span class="sxs-lookup"><span data-stu-id="aaab7-165">To reload the app, call `location.reload()` in JavaScript.</span></span> <span data-ttu-id="aaab7-166">此連接狀態可能會在下列情況下產生：</span><span class="sxs-lookup"><span data-stu-id="aaab7-166">This connection state may result when:</span></span><ul><li><span data-ttu-id="aaab7-167">伺服器端線路發生損毀。</span><span class="sxs-lookup"><span data-stu-id="aaab7-167">A crash in the server-side circuit occurs.</span></span></li><li><span data-ttu-id="aaab7-168">用戶端已中斷連線到足夠的時間，讓伺服器卸載使用者的狀態。</span><span class="sxs-lookup"><span data-stu-id="aaab7-168">The client is disconnected long enough for the server to drop the user's state.</span></span> <span data-ttu-id="aaab7-169">系統會處置使用者元件的實例。</span><span class="sxs-lookup"><span data-stu-id="aaab7-169">Instances of the user's components are disposed.</span></span></li><li><span data-ttu-id="aaab7-170">伺服器會重新開機，或回收應用程式的背景工作進程。</span><span class="sxs-lookup"><span data-stu-id="aaab7-170">The server is restarted, or the app's worker process is recycled.</span></span></li></ul> |
 
-## <a name="render-mode"></a><span data-ttu-id="243cb-171">轉譯模式</span><span class="sxs-lookup"><span data-stu-id="243cb-171">Render mode</span></span>
+## <a name="render-mode"></a><span data-ttu-id="aaab7-171">轉譯模式</span><span class="sxs-lookup"><span data-stu-id="aaab7-171">Render mode</span></span>
 
-<span data-ttu-id="243cb-172">根據預設， Blazor Server 應用程式會先在伺服器上預先呈現 UI，然後再建立與伺服器的用戶端連接。</span><span class="sxs-lookup"><span data-stu-id="243cb-172">By default, Blazor Server apps prerender the UI on the server before the client connection to the server is established.</span></span> <span data-ttu-id="243cb-173">如需詳細資訊，請參閱<xref:mvc/views/tag-helpers/builtin-th/component-tag-helper>。</span><span class="sxs-lookup"><span data-stu-id="243cb-173">For more information, see <xref:mvc/views/tag-helpers/builtin-th/component-tag-helper>.</span></span>
+<span data-ttu-id="aaab7-172">根據預設， Blazor Server 應用程式會先在伺服器上預先呈現 UI，然後再建立與伺服器的用戶端連接。</span><span class="sxs-lookup"><span data-stu-id="aaab7-172">By default, Blazor Server apps prerender the UI on the server before the client connection to the server is established.</span></span> <span data-ttu-id="aaab7-173">如需詳細資訊，請參閱<xref:mvc/views/tag-helpers/builtin-th/component-tag-helper>。</span><span class="sxs-lookup"><span data-stu-id="aaab7-173">For more information, see <xref:mvc/views/tag-helpers/builtin-th/component-tag-helper>.</span></span>
 
-## <a name="initialize-the-blazor-circuit"></a><span data-ttu-id="243cb-174">初始化 Blazor 線路</span><span class="sxs-lookup"><span data-stu-id="243cb-174">Initialize the Blazor circuit</span></span>
+## <a name="initialize-the-blazor-circuit"></a><span data-ttu-id="aaab7-174">初始化 Blazor 線路</span><span class="sxs-lookup"><span data-stu-id="aaab7-174">Initialize the Blazor circuit</span></span>
 
-<span data-ttu-id="243cb-175">Blazor Server在檔案中設定應用程式[ SignalR 線路](xref:blazor/hosting-models#circuits)的手動啟動 `Pages/_Host.cshtml` ：</span><span class="sxs-lookup"><span data-stu-id="243cb-175">Configure the manual start of a Blazor Server app's [SignalR circuit](xref:blazor/hosting-models#circuits) in the `Pages/_Host.cshtml` file:</span></span>
+<span data-ttu-id="aaab7-175">Blazor Server在檔案中設定應用程式[ SignalR 線路](xref:blazor/hosting-models#circuits)的手動啟動 `Pages/_Host.cshtml` ：</span><span class="sxs-lookup"><span data-stu-id="aaab7-175">Configure the manual start of a Blazor Server app's [SignalR circuit](xref:blazor/hosting-models#circuits) in the `Pages/_Host.cshtml` file:</span></span>
 
-* <span data-ttu-id="243cb-176">將 `autostart="false"` 屬性新增至 `<script>` 腳本的標記 `blazor.server.js` 。</span><span class="sxs-lookup"><span data-stu-id="243cb-176">Add an `autostart="false"` attribute to the `<script>` tag for the `blazor.server.js` script.</span></span>
-* <span data-ttu-id="243cb-177">將在腳本標記之後呼叫的腳本放在 `Blazor.start` `blazor.server.js` 結尾 `</body>` 標記內。</span><span class="sxs-lookup"><span data-stu-id="243cb-177">Place a script that calls `Blazor.start` after the `blazor.server.js` script's tag and inside the closing `</body>` tag.</span></span>
+* <span data-ttu-id="aaab7-176">將 `autostart="false"` 屬性新增至 `<script>` 腳本的標記 `blazor.server.js` 。</span><span class="sxs-lookup"><span data-stu-id="aaab7-176">Add an `autostart="false"` attribute to the `<script>` tag for the `blazor.server.js` script.</span></span>
+* <span data-ttu-id="aaab7-177">將在腳本標記之後呼叫的腳本放在 `Blazor.start` `blazor.server.js` 結尾 `</body>` 標記內。</span><span class="sxs-lookup"><span data-stu-id="aaab7-177">Place a script that calls `Blazor.start` after the `blazor.server.js` script's tag and inside the closing `</body>` tag.</span></span>
 
-<span data-ttu-id="243cb-178">`autostart`停用時，不相依于電路的應用程式任何層面都能正常運作。</span><span class="sxs-lookup"><span data-stu-id="243cb-178">When `autostart` is disabled, any aspect of the app that doesn't depend on the circuit works normally.</span></span> <span data-ttu-id="243cb-179">例如，用戶端路由可運作。</span><span class="sxs-lookup"><span data-stu-id="243cb-179">For example, client-side routing is operational.</span></span> <span data-ttu-id="243cb-180">不過，與電路相依的任何層面在 `Blazor.start` 呼叫之前都不會運作。</span><span class="sxs-lookup"><span data-stu-id="243cb-180">However, any aspect that depends on the circuit isn't operational until `Blazor.start` is called.</span></span> <span data-ttu-id="243cb-181">沒有已建立的線路，應用程式行為無法預期。</span><span class="sxs-lookup"><span data-stu-id="243cb-181">App behavior is unpredictable without an established circuit.</span></span> <span data-ttu-id="243cb-182">例如，當線路中斷連線時，元件方法無法執行。</span><span class="sxs-lookup"><span data-stu-id="243cb-182">For example, component methods fail to execute while the circuit is disconnected.</span></span>
+<span data-ttu-id="aaab7-178">`autostart`停用時，不相依于電路的應用程式任何層面都能正常運作。</span><span class="sxs-lookup"><span data-stu-id="aaab7-178">When `autostart` is disabled, any aspect of the app that doesn't depend on the circuit works normally.</span></span> <span data-ttu-id="aaab7-179">例如，用戶端路由可運作。</span><span class="sxs-lookup"><span data-stu-id="aaab7-179">For example, client-side routing is operational.</span></span> <span data-ttu-id="aaab7-180">不過，與電路相依的任何層面在 `Blazor.start` 呼叫之前都不會運作。</span><span class="sxs-lookup"><span data-stu-id="aaab7-180">However, any aspect that depends on the circuit isn't operational until `Blazor.start` is called.</span></span> <span data-ttu-id="aaab7-181">沒有已建立的線路，應用程式行為無法預期。</span><span class="sxs-lookup"><span data-stu-id="aaab7-181">App behavior is unpredictable without an established circuit.</span></span> <span data-ttu-id="aaab7-182">例如，當線路中斷連線時，元件方法無法執行。</span><span class="sxs-lookup"><span data-stu-id="aaab7-182">For example, component methods fail to execute while the circuit is disconnected.</span></span>
 
-### <a name="initialize-blazor-when-the-document-is-ready"></a><span data-ttu-id="243cb-183">在 Blazor 檔就緒時初始化</span><span class="sxs-lookup"><span data-stu-id="243cb-183">Initialize Blazor when the document is ready</span></span>
+### <a name="initialize-blazor-when-the-document-is-ready"></a><span data-ttu-id="aaab7-183">在 Blazor 檔就緒時初始化</span><span class="sxs-lookup"><span data-stu-id="aaab7-183">Initialize Blazor when the document is ready</span></span>
 
-<span data-ttu-id="243cb-184">`Pages/_Host.cshtml`:</span><span class="sxs-lookup"><span data-stu-id="243cb-184">`Pages/_Host.cshtml`:</span></span>
+<span data-ttu-id="aaab7-184">`Pages/_Host.cshtml`:</span><span class="sxs-lookup"><span data-stu-id="aaab7-184">`Pages/_Host.cshtml`:</span></span>
 
 ```cshtml
 <body>
@@ -215,11 +215,11 @@ services.AddServerSideBlazor()
 </body>
 ```
 
-### <a name="chain-to-the-promise-that-results-from-a-manual-start"></a><span data-ttu-id="243cb-185">`Promise`從手動開始到該結果的鏈</span><span class="sxs-lookup"><span data-stu-id="243cb-185">Chain to the `Promise` that results from a manual start</span></span>
+### <a name="chain-to-the-promise-that-results-from-a-manual-start"></a><span data-ttu-id="aaab7-185">`Promise`從手動開始到該結果的鏈</span><span class="sxs-lookup"><span data-stu-id="aaab7-185">Chain to the `Promise` that results from a manual start</span></span>
 
-<span data-ttu-id="243cb-186">若要執行其他工作（例如 JS interop 初始化），請使用 [`then`](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Promise/then) 來與 [`Promise`](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Promise) 手動 Blazor 應用程式啟動的結果連結。</span><span class="sxs-lookup"><span data-stu-id="243cb-186">To perform additional tasks, such as JS interop initialization, use [`then`](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Promise/then) to chain to the [`Promise`](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Promise) that results from a manual Blazor app start.</span></span>
+<span data-ttu-id="aaab7-186">若要執行其他工作（例如 JS interop 初始化），請使用 [`then`](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Promise/then) 來與 [`Promise`](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Promise) 手動 Blazor 應用程式啟動的結果連結。</span><span class="sxs-lookup"><span data-stu-id="aaab7-186">To perform additional tasks, such as JS interop initialization, use [`then`](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Promise/then) to chain to the [`Promise`](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Promise) that results from a manual Blazor app start.</span></span>
 
-<span data-ttu-id="243cb-187">`Pages/_Host.cshtml`:</span><span class="sxs-lookup"><span data-stu-id="243cb-187">`Pages/_Host.cshtml`:</span></span>
+<span data-ttu-id="aaab7-187">`Pages/_Host.cshtml`:</span><span class="sxs-lookup"><span data-stu-id="aaab7-187">`Pages/_Host.cshtml`:</span></span>
 
 ```cshtml
 <body>
@@ -234,11 +234,11 @@ services.AddServerSideBlazor()
 </body>
 ```
 
-### <a name="configure-signalr-client-logging"></a><span data-ttu-id="243cb-188">設定 SignalR 用戶端記錄</span><span class="sxs-lookup"><span data-stu-id="243cb-188">Configure SignalR client logging</span></span>
+### <a name="configure-signalr-client-logging"></a><span data-ttu-id="aaab7-188">設定 SignalR 用戶端記錄</span><span class="sxs-lookup"><span data-stu-id="aaab7-188">Configure SignalR client logging</span></span>
 
-<span data-ttu-id="243cb-189">在用戶端產生器上，傳入 `configureSignalR` `configureLogging` 以記錄層級呼叫的設定物件。</span><span class="sxs-lookup"><span data-stu-id="243cb-189">On the client builder, pass in the `configureSignalR` configuration object that calls `configureLogging` with the log level.</span></span>
+<span data-ttu-id="aaab7-189">在用戶端產生器上，傳入 `configureSignalR` `configureLogging` 以記錄層級呼叫的設定物件。</span><span class="sxs-lookup"><span data-stu-id="aaab7-189">On the client builder, pass in the `configureSignalR` configuration object that calls `configureLogging` with the log level.</span></span>
 
-<span data-ttu-id="243cb-190">`Pages/_Host.cshtml`:</span><span class="sxs-lookup"><span data-stu-id="243cb-190">`Pages/_Host.cshtml`:</span></span>
+<span data-ttu-id="aaab7-190">`Pages/_Host.cshtml`:</span><span class="sxs-lookup"><span data-stu-id="aaab7-190">`Pages/_Host.cshtml`:</span></span>
 
 ```cshtml
 <body>
@@ -255,23 +255,23 @@ services.AddServerSideBlazor()
 </body>
 ```
 
-<span data-ttu-id="243cb-191">在上述範例中， `information` 相當於的記錄層級 <xref:Microsoft.Extensions.Logging.LogLevel.Information?displayProperty=nameWithType> 。</span><span class="sxs-lookup"><span data-stu-id="243cb-191">In the preceding example, `information` is equivalent to a log level of <xref:Microsoft.Extensions.Logging.LogLevel.Information?displayProperty=nameWithType>.</span></span>
+<span data-ttu-id="aaab7-191">在上述範例中， `information` 相當於的記錄層級 <xref:Microsoft.Extensions.Logging.LogLevel.Information?displayProperty=nameWithType> 。</span><span class="sxs-lookup"><span data-stu-id="aaab7-191">In the preceding example, `information` is equivalent to a log level of <xref:Microsoft.Extensions.Logging.LogLevel.Information?displayProperty=nameWithType>.</span></span>
 
-### <a name="modify-the-reconnection-handler"></a><span data-ttu-id="243cb-192">修改重新連接處理常式</span><span class="sxs-lookup"><span data-stu-id="243cb-192">Modify the reconnection handler</span></span>
+### <a name="modify-the-reconnection-handler"></a><span data-ttu-id="aaab7-192">修改重新連接處理常式</span><span class="sxs-lookup"><span data-stu-id="aaab7-192">Modify the reconnection handler</span></span>
 
-<span data-ttu-id="243cb-193">您可以針對自訂行為修改重新連接處理常式的線路線上活動，例如：</span><span class="sxs-lookup"><span data-stu-id="243cb-193">The reconnection handler's circuit connection events can be modified for custom behaviors, such as:</span></span>
+<span data-ttu-id="aaab7-193">您可以針對自訂行為修改重新連接處理常式的線路線上活動，例如：</span><span class="sxs-lookup"><span data-stu-id="aaab7-193">The reconnection handler's circuit connection events can be modified for custom behaviors, such as:</span></span>
 
-* <span data-ttu-id="243cb-194">以在中斷連接時通知使用者。</span><span class="sxs-lookup"><span data-stu-id="243cb-194">To notify the user if the connection is dropped.</span></span>
-* <span data-ttu-id="243cb-195">若要從用戶端執行記錄 (線上路連線時) 。</span><span class="sxs-lookup"><span data-stu-id="243cb-195">To perform logging (from the client) when a circuit is connected.</span></span>
+* <span data-ttu-id="aaab7-194">以在中斷連接時通知使用者。</span><span class="sxs-lookup"><span data-stu-id="aaab7-194">To notify the user if the connection is dropped.</span></span>
+* <span data-ttu-id="aaab7-195">若要從用戶端執行記錄 (線上路連線時) 。</span><span class="sxs-lookup"><span data-stu-id="aaab7-195">To perform logging (from the client) when a circuit is connected.</span></span>
 
-<span data-ttu-id="243cb-196">若要修改連接事件，請註冊下列連線變更的回呼：</span><span class="sxs-lookup"><span data-stu-id="243cb-196">To modify the connection events, register callbacks for the following connection changes:</span></span>
+<span data-ttu-id="aaab7-196">若要修改連接事件，請註冊下列連線變更的回呼：</span><span class="sxs-lookup"><span data-stu-id="aaab7-196">To modify the connection events, register callbacks for the following connection changes:</span></span>
 
-* <span data-ttu-id="243cb-197">中斷的連接使用 `onConnectionDown` 。</span><span class="sxs-lookup"><span data-stu-id="243cb-197">Dropped connections use `onConnectionDown`.</span></span>
-* <span data-ttu-id="243cb-198">已建立/重新建立的連接使用 `onConnectionUp` 。</span><span class="sxs-lookup"><span data-stu-id="243cb-198">Established/re-established connections use `onConnectionUp`.</span></span>
+* <span data-ttu-id="aaab7-197">中斷的連接使用 `onConnectionDown` 。</span><span class="sxs-lookup"><span data-stu-id="aaab7-197">Dropped connections use `onConnectionDown`.</span></span>
+* <span data-ttu-id="aaab7-198">已建立/重新建立的連接使用 `onConnectionUp` 。</span><span class="sxs-lookup"><span data-stu-id="aaab7-198">Established/re-established connections use `onConnectionUp`.</span></span>
 
-<span data-ttu-id="243cb-199">**`onConnectionDown`和都 `onConnectionUp` 必須指定。**</span><span class="sxs-lookup"><span data-stu-id="243cb-199">**Both `onConnectionDown` and `onConnectionUp` must be specified.**</span></span>
+<span data-ttu-id="aaab7-199">**`onConnectionDown`和都 `onConnectionUp` 必須指定。**</span><span class="sxs-lookup"><span data-stu-id="aaab7-199">**Both `onConnectionDown` and `onConnectionUp` must be specified.**</span></span>
 
-<span data-ttu-id="243cb-200">`Pages/_Host.cshtml`:</span><span class="sxs-lookup"><span data-stu-id="243cb-200">`Pages/_Host.cshtml`:</span></span>
+<span data-ttu-id="aaab7-200">`Pages/_Host.cshtml`:</span><span class="sxs-lookup"><span data-stu-id="aaab7-200">`Pages/_Host.cshtml`:</span></span>
 
 ```cshtml
 <body>
@@ -289,11 +289,11 @@ services.AddServerSideBlazor()
 </body>
 ```
 
-### <a name="adjust-the-reconnection-retry-count-and-interval"></a><span data-ttu-id="243cb-201">調整重新連接重試計數和間隔</span><span class="sxs-lookup"><span data-stu-id="243cb-201">Adjust the reconnection retry count and interval</span></span>
+### <a name="adjust-the-reconnection-retry-count-and-interval"></a><span data-ttu-id="aaab7-201">調整重新連接重試計數和間隔</span><span class="sxs-lookup"><span data-stu-id="aaab7-201">Adjust the reconnection retry count and interval</span></span>
 
-<span data-ttu-id="243cb-202">若要調整重新連接重試計數和間隔，請將重試次數 (`maxRetries`) 和每次重試嘗試所允許的期間（以毫秒為單位） (`retryIntervalMilliseconds`) 。</span><span class="sxs-lookup"><span data-stu-id="243cb-202">To adjust the reconnection retry count and interval, set the number of retries (`maxRetries`) and period in milliseconds permitted for each retry attempt (`retryIntervalMilliseconds`).</span></span>
+<span data-ttu-id="aaab7-202">若要調整重新連接重試計數和間隔，請將重試次數 (`maxRetries`) 和每次重試嘗試所允許的期間（以毫秒為單位） (`retryIntervalMilliseconds`) 。</span><span class="sxs-lookup"><span data-stu-id="aaab7-202">To adjust the reconnection retry count and interval, set the number of retries (`maxRetries`) and period in milliseconds permitted for each retry attempt (`retryIntervalMilliseconds`).</span></span>
 
-<span data-ttu-id="243cb-203">`Pages/_Host.cshtml`:</span><span class="sxs-lookup"><span data-stu-id="243cb-203">`Pages/_Host.cshtml`:</span></span>
+<span data-ttu-id="aaab7-203">`Pages/_Host.cshtml`:</span><span class="sxs-lookup"><span data-stu-id="aaab7-203">`Pages/_Host.cshtml`:</span></span>
 
 ```cshtml
 <body>
@@ -311,11 +311,11 @@ services.AddServerSideBlazor()
 </body>
 ```
 
-## <a name="hide-or-replace-the-reconnection-display"></a><span data-ttu-id="243cb-204">隱藏或取代重新連接顯示</span><span class="sxs-lookup"><span data-stu-id="243cb-204">Hide or replace the reconnection display</span></span>
+## <a name="hide-or-replace-the-reconnection-display"></a><span data-ttu-id="aaab7-204">隱藏或取代重新連接顯示</span><span class="sxs-lookup"><span data-stu-id="aaab7-204">Hide or replace the reconnection display</span></span>
 
-<span data-ttu-id="243cb-205">若要隱藏重新連接顯示，請將重新連接處理常式設定 `_reconnectionDisplay` 為空的物件 (`{}` 或 `new Object()`) 。</span><span class="sxs-lookup"><span data-stu-id="243cb-205">To hide the reconnection display, set the reconnection handler's `_reconnectionDisplay` to an empty object (`{}` or `new Object()`).</span></span>
+<span data-ttu-id="aaab7-205">若要隱藏重新連接顯示，請將重新連接處理常式設定 `_reconnectionDisplay` 為空的物件 (`{}` 或 `new Object()`) 。</span><span class="sxs-lookup"><span data-stu-id="aaab7-205">To hide the reconnection display, set the reconnection handler's `_reconnectionDisplay` to an empty object (`{}` or `new Object()`).</span></span>
 
-<span data-ttu-id="243cb-206">`Pages/_Host.cshtml`:</span><span class="sxs-lookup"><span data-stu-id="243cb-206">`Pages/_Host.cshtml`:</span></span>
+<span data-ttu-id="aaab7-206">`Pages/_Host.cshtml`:</span><span class="sxs-lookup"><span data-stu-id="aaab7-206">`Pages/_Host.cshtml`:</span></span>
 
 ```cshtml
 <body>
@@ -332,20 +332,20 @@ services.AddServerSideBlazor()
 </body>
 ```
 
-<span data-ttu-id="243cb-207">若要取代重新連接顯示，請 `_reconnectionDisplay` 在上述範例中設定為要顯示的元素：</span><span class="sxs-lookup"><span data-stu-id="243cb-207">To replace the reconnection display, set `_reconnectionDisplay` in the preceding example to the element for display:</span></span>
+<span data-ttu-id="aaab7-207">若要取代重新連接顯示，請 `_reconnectionDisplay` 在上述範例中設定為要顯示的元素：</span><span class="sxs-lookup"><span data-stu-id="aaab7-207">To replace the reconnection display, set `_reconnectionDisplay` in the preceding example to the element for display:</span></span>
 
 ```javascript
 Blazor.defaultReconnectionHandler._reconnectionDisplay = 
   document.getElementById("{ELEMENT ID}");
 ```
 
-<span data-ttu-id="243cb-208">預留位置 `{ELEMENT ID}` 是要顯示之 HTML 元素的識別碼。</span><span class="sxs-lookup"><span data-stu-id="243cb-208">The placeholder `{ELEMENT ID}` is the ID of the HTML element to display.</span></span>
+<span data-ttu-id="aaab7-208">預留位置 `{ELEMENT ID}` 是要顯示之 HTML 元素的識別碼。</span><span class="sxs-lookup"><span data-stu-id="aaab7-208">The placeholder `{ELEMENT ID}` is the ID of the HTML element to display.</span></span>
 
 ::: moniker range=">= aspnetcore-5.0"
 
-<span data-ttu-id="243cb-209">在網站 CSS 中為強制回應專案設定屬性，以自訂重新連接顯示之前的延遲 `transition-delay` 。</span><span class="sxs-lookup"><span data-stu-id="243cb-209">Customize the delay before the reconnection display appears by setting the `transition-delay` property in the site's CSS for the modal element.</span></span> <span data-ttu-id="243cb-210">下列範例會將500毫秒 (預設) 的轉換延遲設定為1000毫秒 (1 秒) 。</span><span class="sxs-lookup"><span data-stu-id="243cb-210">The following example sets the transition delay from 500 ms (default) to 1,000 ms (1 second).</span></span>
+<span data-ttu-id="aaab7-209">在網站 CSS 中為強制回應專案設定屬性，以自訂重新連接顯示之前的延遲 `transition-delay` 。</span><span class="sxs-lookup"><span data-stu-id="aaab7-209">Customize the delay before the reconnection display appears by setting the `transition-delay` property in the site's CSS for the modal element.</span></span> <span data-ttu-id="aaab7-210">下列範例會將500毫秒 (預設) 的轉換延遲設定為1000毫秒 (1 秒) 。</span><span class="sxs-lookup"><span data-stu-id="aaab7-210">The following example sets the transition delay from 500 ms (default) to 1,000 ms (1 second).</span></span>
 
-<span data-ttu-id="243cb-211">`wwwroot/css/site.css`:</span><span class="sxs-lookup"><span data-stu-id="243cb-211">`wwwroot/css/site.css`:</span></span>
+<span data-ttu-id="aaab7-211">`wwwroot/css/site.css`:</span><span class="sxs-lookup"><span data-stu-id="aaab7-211">`wwwroot/css/site.css`:</span></span>
 
 ```css
 #components-reconnect-modal {
@@ -353,9 +353,9 @@ Blazor.defaultReconnectionHandler._reconnectionDisplay =
 }
 ```
 
-## <a name="disconnect-the-blazor-circuit-from-the-client"></a><span data-ttu-id="243cb-212">中斷與 Blazor 用戶端的線路連線</span><span class="sxs-lookup"><span data-stu-id="243cb-212">Disconnect the Blazor circuit from the client</span></span>
+## <a name="disconnect-the-blazor-circuit-from-the-client"></a><span data-ttu-id="aaab7-212">中斷與 Blazor 用戶端的線路連線</span><span class="sxs-lookup"><span data-stu-id="aaab7-212">Disconnect the Blazor circuit from the client</span></span>
 
-<span data-ttu-id="243cb-213">依預設， Blazor 當觸發[ `unload` 頁面事件](https://developer.mozilla.org/docs/Web/API/Window/unload_event)時，電路會中斷連線。</span><span class="sxs-lookup"><span data-stu-id="243cb-213">By default, a Blazor circuit is disconnected when the [`unload` page event](https://developer.mozilla.org/docs/Web/API/Window/unload_event) is triggered.</span></span> <span data-ttu-id="243cb-214">若要中斷用戶端上其他案例的線路連接，請 `Blazor.disconnect` 在適當的事件處理常式中叫用。</span><span class="sxs-lookup"><span data-stu-id="243cb-214">To disconnect the circuit for other scenarios on the client, invoke `Blazor.disconnect` in the appropriate event handler.</span></span> <span data-ttu-id="243cb-215">在下列範例中，當 ([ `pagehide` 事件](https://developer.mozilla.org/docs/Web/API/Window/pagehide_event)) 隱藏頁面時，電路會中斷連線：</span><span class="sxs-lookup"><span data-stu-id="243cb-215">In the following example, the circuit is disconnected when the page is hidden ([`pagehide` event](https://developer.mozilla.org/docs/Web/API/Window/pagehide_event)):</span></span>
+<span data-ttu-id="aaab7-213">依預設， Blazor 當觸發[ `unload` 頁面事件](https://developer.mozilla.org/docs/Web/API/Window/unload_event)時，電路會中斷連線。</span><span class="sxs-lookup"><span data-stu-id="aaab7-213">By default, a Blazor circuit is disconnected when the [`unload` page event](https://developer.mozilla.org/docs/Web/API/Window/unload_event) is triggered.</span></span> <span data-ttu-id="aaab7-214">若要中斷用戶端上其他案例的線路連接，請 `Blazor.disconnect` 在適當的事件處理常式中叫用。</span><span class="sxs-lookup"><span data-stu-id="aaab7-214">To disconnect the circuit for other scenarios on the client, invoke `Blazor.disconnect` in the appropriate event handler.</span></span> <span data-ttu-id="aaab7-215">在下列範例中，當 ([ `pagehide` 事件](https://developer.mozilla.org/docs/Web/API/Window/pagehide_event)) 隱藏頁面時，電路會中斷連線：</span><span class="sxs-lookup"><span data-stu-id="aaab7-215">In the following example, the circuit is disconnected when the page is hidden ([`pagehide` event](https://developer.mozilla.org/docs/Web/API/Window/pagehide_event)):</span></span>
 
 ```javascript
 window.addEventListener('pagehide', () => {
@@ -365,11 +365,11 @@ window.addEventListener('pagehide', () => {
 
 ::: moniker-end
 
-## <a name="blazor-server-circuit-handler"></a><span data-ttu-id="243cb-216">Blazor Server 電路處理常式</span><span class="sxs-lookup"><span data-stu-id="243cb-216">Blazor Server circuit handler</span></span>
+## <a name="blazor-server-circuit-handler"></a><span data-ttu-id="aaab7-216">Blazor Server 電路處理常式</span><span class="sxs-lookup"><span data-stu-id="aaab7-216">Blazor Server circuit handler</span></span>
 
-<span data-ttu-id="243cb-217">Blazor Server 允許程式碼定義迴圈 *處理常式*，以允許在使用者的線路狀態變更時執行程式碼。</span><span class="sxs-lookup"><span data-stu-id="243cb-217">Blazor Server allows code to define a *circuit handler*, which allows running code on changes to the state of a user's circuit.</span></span> <span data-ttu-id="243cb-218">在 <xref:Microsoft.AspNetCore.Components.Server.Circuits.CircuitHandler> 應用程式的服務容器中衍生類別並將其註冊，會實作為電路處理常式。</span><span class="sxs-lookup"><span data-stu-id="243cb-218">A circuit handler is implemented by deriving from <xref:Microsoft.AspNetCore.Components.Server.Circuits.CircuitHandler> and registering the class in the app's service container.</span></span> <span data-ttu-id="243cb-219">下列的電路處理常式範例會追蹤開啟 SignalR 的連接。</span><span class="sxs-lookup"><span data-stu-id="243cb-219">The following example of a circuit handler tracks open SignalR connections.</span></span>
+<span data-ttu-id="aaab7-217">Blazor Server 允許程式碼定義迴圈 *處理常式*，以允許在使用者的線路狀態變更時執行程式碼。</span><span class="sxs-lookup"><span data-stu-id="aaab7-217">Blazor Server allows code to define a *circuit handler*, which allows running code on changes to the state of a user's circuit.</span></span> <span data-ttu-id="aaab7-218">在 <xref:Microsoft.AspNetCore.Components.Server.Circuits.CircuitHandler> 應用程式的服務容器中衍生類別並將其註冊，會實作為電路處理常式。</span><span class="sxs-lookup"><span data-stu-id="aaab7-218">A circuit handler is implemented by deriving from <xref:Microsoft.AspNetCore.Components.Server.Circuits.CircuitHandler> and registering the class in the app's service container.</span></span> <span data-ttu-id="aaab7-219">下列的電路處理常式範例會追蹤開啟 SignalR 的連接。</span><span class="sxs-lookup"><span data-stu-id="aaab7-219">The following example of a circuit handler tracks open SignalR connections.</span></span>
 
-<span data-ttu-id="243cb-220">`TrackingCircuitHandler.cs`:</span><span class="sxs-lookup"><span data-stu-id="243cb-220">`TrackingCircuitHandler.cs`:</span></span>
+<span data-ttu-id="aaab7-220">`TrackingCircuitHandler.cs`:</span><span class="sxs-lookup"><span data-stu-id="aaab7-220">`TrackingCircuitHandler.cs`:</span></span>
 
 ::: moniker range=">= aspnetcore-5.0"
 
@@ -383,9 +383,9 @@ window.addEventListener('pagehide', () => {
 
 ::: moniker-end
 
-<span data-ttu-id="243cb-221">線路處理常式是使用 DI 註冊的。</span><span class="sxs-lookup"><span data-stu-id="243cb-221">Circuit handlers are registered using DI.</span></span> <span data-ttu-id="243cb-222">系統會為每個線路的實例建立範圍實例。</span><span class="sxs-lookup"><span data-stu-id="243cb-222">Scoped instances are created per instance of a circuit.</span></span> <span data-ttu-id="243cb-223">使用 `TrackingCircuitHandler` 上述範例中的，會建立單一服務，因為必須追蹤所有線路的狀態。</span><span class="sxs-lookup"><span data-stu-id="243cb-223">Using the `TrackingCircuitHandler` in the preceding example, a singleton service is created because the state of all circuits must be tracked.</span></span>
+<span data-ttu-id="aaab7-221">線路處理常式是使用 DI 註冊的。</span><span class="sxs-lookup"><span data-stu-id="aaab7-221">Circuit handlers are registered using DI.</span></span> <span data-ttu-id="aaab7-222">系統會為每個線路的實例建立範圍實例。</span><span class="sxs-lookup"><span data-stu-id="aaab7-222">Scoped instances are created per instance of a circuit.</span></span> <span data-ttu-id="aaab7-223">使用 `TrackingCircuitHandler` 上述範例中的，會建立單一服務，因為必須追蹤所有線路的狀態。</span><span class="sxs-lookup"><span data-stu-id="aaab7-223">Using the `TrackingCircuitHandler` in the preceding example, a singleton service is created because the state of all circuits must be tracked.</span></span>
 
-<span data-ttu-id="243cb-224">`Startup.cs`:</span><span class="sxs-lookup"><span data-stu-id="243cb-224">`Startup.cs`:</span></span>
+<span data-ttu-id="aaab7-224">`Startup.cs`:</span><span class="sxs-lookup"><span data-stu-id="aaab7-224">`Startup.cs`:</span></span>
 
 ```csharp
 public void ConfigureServices(IServiceCollection services)
@@ -395,15 +395,19 @@ public void ConfigureServices(IServiceCollection services)
 }
 ```
 
-<span data-ttu-id="243cb-225">如果自訂電路處理常式的方法擲回未處理的例外狀況，則例外狀況對線路而言是嚴重的 Blazor Server 。</span><span class="sxs-lookup"><span data-stu-id="243cb-225">If a custom circuit handler's methods throw an unhandled exception, the exception is fatal to the Blazor Server circuit.</span></span> <span data-ttu-id="243cb-226">若要容忍處理常式程式碼或呼叫方法中的例外狀況，請將程式碼包裝在一或多個語句中， [`try-catch`](/dotnet/csharp/language-reference/keywords/try-catch) 並提供錯誤處理和記錄。</span><span class="sxs-lookup"><span data-stu-id="243cb-226">To tolerate exceptions in a handler's code or called methods, wrap the code in one or more [`try-catch`](/dotnet/csharp/language-reference/keywords/try-catch) statements with error handling and logging.</span></span>
+<span data-ttu-id="aaab7-225">如果自訂電路處理常式的方法擲回未處理的例外狀況，則例外狀況對線路而言是嚴重的 Blazor Server 。</span><span class="sxs-lookup"><span data-stu-id="aaab7-225">If a custom circuit handler's methods throw an unhandled exception, the exception is fatal to the Blazor Server circuit.</span></span> <span data-ttu-id="aaab7-226">若要容忍處理常式程式碼或呼叫方法中的例外狀況，請將程式碼包裝在一或多個語句中， [`try-catch`](/dotnet/csharp/language-reference/keywords/try-catch) 並提供錯誤處理和記錄。</span><span class="sxs-lookup"><span data-stu-id="aaab7-226">To tolerate exceptions in a handler's code or called methods, wrap the code in one or more [`try-catch`](/dotnet/csharp/language-reference/keywords/try-catch) statements with error handling and logging.</span></span>
 
-<span data-ttu-id="243cb-227">當線路因為使用者已中斷連線而結束，且架構正在清除電路狀態時，架構會處置電路的 DI 範圍。</span><span class="sxs-lookup"><span data-stu-id="243cb-227">When a circuit ends because a user has disconnected and the framework is cleaning up the circuit state, the framework disposes of the circuit's DI scope.</span></span> <span data-ttu-id="243cb-228">處置範圍會處置任何執行的線路範圍 DI 服務 <xref:System.IDisposable?displayProperty=fullName> 。</span><span class="sxs-lookup"><span data-stu-id="243cb-228">Disposing the scope disposes any circuit-scoped DI services that implement <xref:System.IDisposable?displayProperty=fullName>.</span></span> <span data-ttu-id="243cb-229">如果任何 DI 服務在處置期間擲回未處理的例外狀況，則架構會記錄例外狀況。</span><span class="sxs-lookup"><span data-stu-id="243cb-229">If any DI service throws an unhandled exception during disposal, the framework logs the exception.</span></span>
+<span data-ttu-id="aaab7-227">當線路因為使用者已中斷連線而結束，且架構正在清除電路狀態時，架構會處置電路的 DI 範圍。</span><span class="sxs-lookup"><span data-stu-id="aaab7-227">When a circuit ends because a user has disconnected and the framework is cleaning up the circuit state, the framework disposes of the circuit's DI scope.</span></span> <span data-ttu-id="aaab7-228">處置範圍會處置任何執行的線路範圍 DI 服務 <xref:System.IDisposable?displayProperty=fullName> 。</span><span class="sxs-lookup"><span data-stu-id="aaab7-228">Disposing the scope disposes any circuit-scoped DI services that implement <xref:System.IDisposable?displayProperty=fullName>.</span></span> <span data-ttu-id="aaab7-229">如果任何 DI 服務在處置期間擲回未處理的例外狀況，則架構會記錄例外狀況。</span><span class="sxs-lookup"><span data-stu-id="aaab7-229">If any DI service throws an unhandled exception during disposal, the framework logs the exception.</span></span>
 
-## <a name="additional-resources"></a><span data-ttu-id="243cb-230">其他資源</span><span class="sxs-lookup"><span data-stu-id="243cb-230">Additional resources</span></span>
+## <a name="azure-signalr-service"></a><span data-ttu-id="aaab7-230">Azure SignalR 服務</span><span class="sxs-lookup"><span data-stu-id="aaab7-230">Azure SignalR Service</span></span>
+
+<span data-ttu-id="aaab7-231">建議您針對 Microsoft Azure 中裝載的應用程式使用 [Azure SignalR 服務](xref:signalr/scale#azure-signalr-service) Blazor Server 。</span><span class="sxs-lookup"><span data-stu-id="aaab7-231">We recommend using the [Azure SignalR Service](xref:signalr/scale#azure-signalr-service) for Blazor Server apps hosted in Microsoft Azure.</span></span> <span data-ttu-id="aaab7-232">服務可讓您將 Blazor Server 應用程式相應增加為大量的並行 SignalR 連接。</span><span class="sxs-lookup"><span data-stu-id="aaab7-232">The service allows for scaling up a Blazor Server app to a large number of concurrent SignalR connections.</span></span> <span data-ttu-id="aaab7-233">此外， SignalR 服務的全球接觸和高效能資料中心大幅有助於降低因地理位置而造成的延遲。</span><span class="sxs-lookup"><span data-stu-id="aaab7-233">In addition, the SignalR Service's global reach and high-performance data centers significantly aid in reducing latency due to geography.</span></span> <span data-ttu-id="aaab7-234">如需 Azure 服務的可呈現支援 SignalR ，請將應用程式設定為使用「 *粘滯話*」。</span><span class="sxs-lookup"><span data-stu-id="aaab7-234">For prerendering support with the Azure SignalR Service, configure the app to use *sticky sessions*.</span></span> <span data-ttu-id="aaab7-235">如需詳細資訊，請參閱<xref:blazor/host-and-deploy/server>。</span><span class="sxs-lookup"><span data-stu-id="aaab7-235">For more information, see <xref:blazor/host-and-deploy/server>.</span></span>
+
+## <a name="additional-resources"></a><span data-ttu-id="aaab7-236">其他資源</span><span class="sxs-lookup"><span data-stu-id="aaab7-236">Additional resources</span></span>
 
 * <xref:signalr/introduction>
 * <xref:signalr/configuration>
 * <xref:blazor/security/server/threat-mitigation>
-* [<span data-ttu-id="243cb-231">Blazor Server 重新連接事件和元件生命週期事件</span><span class="sxs-lookup"><span data-stu-id="243cb-231">Blazor Server reconnection events and component lifecycle events</span></span>](xref:blazor/components/lifecycle#blazor-server-reconnection-events)
+* [<span data-ttu-id="aaab7-237">Blazor Server 重新連接事件和元件生命週期事件</span><span class="sxs-lookup"><span data-stu-id="aaab7-237">Blazor Server reconnection events and component lifecycle events</span></span>](xref:blazor/components/lifecycle#blazor-server-reconnection-events)
 
 ::: zone-end

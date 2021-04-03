@@ -19,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: host-and-deploy/linux-nginx
-ms.openlocfilehash: 230a2dc9ddf196b69a10df1a8632bb32f280c98e
-ms.sourcegitcommit: 1f35de0ca9ba13ea63186c4dc387db4fb8e541e0
+ms.openlocfilehash: 732be8c878f74fc2edb1ceb81a6e50e1f4a10b09
+ms.sourcegitcommit: f67ba959d3cbfe33b32fa6a5eae1a5ae9de18167
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 03/20/2021
-ms.locfileid: "104711291"
+ms.lasthandoff: 04/02/2021
+ms.locfileid: "106179739"
 ---
 # <a name="host-aspnet-core-on-linux-with-nginx"></a>在 Linux 上使用 Nginx 裝載 ASP.NET Core
 
@@ -44,7 +44,7 @@ ms.locfileid: "104711291"
 * 確保 Web 應用程式在啟動時以精靈的形式執行。
 * 設定程序管理工具以協助重新啟動 Web 應用程式。
 
-## <a name="prerequisites"></a>Prerequisites
+## <a name="prerequisites"></a>必要條件
 
 * 以 sudo 權限使用標準使用者帳戶存取 Ubuntu 16.04 伺服器。
 * 安裝在伺服器上的最新非預覽版 [.net 運行](/dotnet/core/install/linux) 時間。
@@ -149,7 +149,7 @@ server {
     listen        80;
     server_name   example.com *.example.com;
     location / {
-        proxy_pass         http://localhost:5000;
+        proxy_pass         http://127.0.0.1:5000;
         proxy_http_version 1.1;
         proxy_set_header   Upgrade $http_upgrade;
         proxy_set_header   Connection keep-alive;
@@ -175,13 +175,13 @@ server {
 
 ::: moniker range=">= aspnetcore-5.0"
 
-使用上述設定檔和預設伺服器時，Nginx 會在連接埠 80 接受主機標頭為 `example.com` 或 `*.example.com` 的公用流量。 不符合這些主機的要求將不會轉送至 Kestrel。 Nginx 會將相符的要求轉送至位於 `http://localhost:5000` 的 Kestrel。 如需詳細資訊，請參閱 [nginx 處理要求的方式](https://nginx.org/docs/http/request_processing.html)。 若要變更 Kestrel 的 IP/連接埠，請參閱 [Kestrel：端點組態](xref:fundamentals/servers/kestrel/endpoints)。
+使用上述設定檔和預設伺服器時，Nginx 會在連接埠 80 接受主機標頭為 `example.com` 或 `*.example.com` 的公用流量。 不符合這些主機的要求將不會轉送至 Kestrel。 Nginx 會將相符的要求轉送至位於 `http://127.0.0.1:5000` 的 Kestrel。 如需詳細資訊，請參閱 [nginx 處理要求的方式](https://nginx.org/docs/http/request_processing.html)。 若要變更 Kestrel 的 IP/連接埠，請參閱 [Kestrel：端點組態](xref:fundamentals/servers/kestrel/endpoints)。
 
 ::: moniker-end
 
 ::: moniker range="< aspnetcore-5.0"
 
-使用上述設定檔和預設伺服器時，Nginx 會在連接埠 80 接受主機標頭為 `example.com` 或 `*.example.com` 的公用流量。 不符合這些主機的要求將不會轉送至 Kestrel。 Nginx 會將相符的要求轉送至位於 `http://localhost:5000` 的 Kestrel。 如需詳細資訊，請參閱 [nginx 處理要求的方式](https://nginx.org/docs/http/request_processing.html)。 若要變更 Kestrel 的 IP/連接埠，請參閱 [Kestrel：端點組態](xref:fundamentals/servers/kestrel#endpoint-configuration)。
+使用上述設定檔和預設伺服器時，Nginx 會在連接埠 80 接受主機標頭為 `example.com` 或 `*.example.com` 的公用流量。 不符合這些主機的要求將不會轉送至 Kestrel。 Nginx 會將相符的要求轉送至位於 `http://127.0.0.1:5000` 的 Kestrel。 如需詳細資訊，請參閱 [nginx 處理要求的方式](https://nginx.org/docs/http/request_processing.html)。 若要變更 Kestrel 的 IP/連接埠，請參閱 [Kestrel：端點組態](xref:fundamentals/servers/kestrel#endpoint-configuration)。
 
 ::: moniker-end
 

@@ -1,5 +1,5 @@
 ---
-title: ASP.NET 核心相依性 Blazor 插入
+title: ASP.NET Core 相依性 Blazor 插入
 author: guardrex
 description: 瞭解 Blazor 應用程式如何將服務插入至元件。
 monikerRange: '>= aspnetcore-3.1'
@@ -20,14 +20,14 @@ no-loc:
 - SignalR
 uid: blazor/fundamentals/dependency-injection
 zone_pivot_groups: blazor-hosting-models
-ms.openlocfilehash: aefeac2f3a68a669b7c84cbeee2f6a4ec0621f6f
-ms.sourcegitcommit: a1db01b4d3bd8c57d7a9c94ce122a6db68002d66
+ms.openlocfilehash: ab3b526e73a567ac1d77ab500459d457a65deb69
+ms.sourcegitcommit: 7923a9ec594690f01e0c9c6df3416c239e6745fb
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 03/04/2021
-ms.locfileid: "102109672"
+ms.lasthandoff: 03/31/2021
+ms.locfileid: "106081334"
 ---
-# <a name="aspnet-core-blazor-dependency-injection"></a>ASP.NET 核心相依性 Blazor 插入
+# <a name="aspnet-core-blazor-dependency-injection"></a>ASP.NET Core 相依性 Blazor 插入
 
 依 [Rainer Stropek](https://www.timecockpit.com) 和 [Mike Rousos](https://github.com/mjrousos)
 
@@ -312,7 +312,7 @@ public class Program
         builder.Services.AddScoped(sp =>
             new HttpClient
             {
-                BaseAddress = new Uri(builder.HostEnvironment.BaseAddress)
+                BaseAddress = new(builder.HostEnvironment.BaseAddress)
             });
 
         var host = builder.Build();

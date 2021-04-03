@@ -19,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/components/lifecycle
-ms.openlocfilehash: 529d9f6712e96eeea52cbf11efeb6116fdb34b75
-ms.sourcegitcommit: 4bbc69f51c59bed1a96aa46f9f5dca2f2a2634cb
+ms.openlocfilehash: 12cc308f08be0961f1b14579753d653927bcf683
+ms.sourcegitcommit: 7923a9ec594690f01e0c9c6df3416c239e6745fb
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 03/25/2021
-ms.locfileid: "105554981"
+ms.lasthandoff: 03/31/2021
+ms.locfileid: "106081555"
 ---
 # <a name="aspnet-core-razor-component-lifecycle"></a>ASP.NET Core Razor 元件生命週期
 
@@ -38,8 +38,8 @@ Razor元件會處理 Razor 一組同步和非同步生命週期方法中的元�
 
 1. 如果第一次在要求時轉譯元件：
    * 建立元件的實例。
-   * 執行屬性插入。 執行 [`SetParametersAsync`](#before-parameters-are-set-setparametersasync) 。
-   * 呼叫 [`OnInitialized{Async}`](#component-initialization-methods-oninitializedasync) 。 如果傳回不完整 <xref:System.Threading.Tasks.Task> 的，則 <xref:System.Threading.Tasks.Task> 會等待，然後元件會保存。
+   * 執行屬性插入。 執行 [`SetParametersAsync`](#when-parameters-are-set-setparametersasync) 。
+   * 呼叫 [`OnInitialized{Async}`](#component-initialization-oninitializedasync) 。 如果傳回不完整 <xref:System.Threading.Tasks.Task> 的，則 <xref:System.Threading.Tasks.Task> 會等待，然後元件會保存。
 1. 呼叫 [`OnParametersSet{Async}`](#after-parameters-are-set-onparameterssetasync) 。 如果傳回不完整 <xref:System.Threading.Tasks.Task> 的，則 <xref:System.Threading.Tasks.Task> 會等待，然後元件會保存。
 1. 針對所有同步工作和完整的呈現 <xref:System.Threading.Tasks.Task> 。
 
@@ -66,7 +66,7 @@ Razor元件會處理 Razor 一組同步和非同步生命週期方法中的元�
 
 開發人員呼叫以 [`StateHasChanged`](#state-changes-statehaschanged) 產生轉譯。 如需詳細資訊，請參閱<xref:blazor/components/rendering>。
 
-## <a name="before-parameters-are-set-setparametersasync"></a>設定參數之前 (`SetParametersAsync`) 
+## <a name="when-parameters-are-set-setparametersasync"></a>當參數 (設定時 `SetParametersAsync`) 
 
 <xref:Microsoft.AspNetCore.Components.ComponentBase.SetParametersAsync%2A> 在轉譯樹狀結構中或從路由參數，設定元件的父系所提供的參數。
 
@@ -96,7 +96,7 @@ Razor元件會處理 Razor 一組同步和非同步生命週期方法中的元�
 
 ::: moniker-end
 
-## <a name="component-initialization-methods-oninitializedasync"></a>元件初始化方法 (`OnInitialized{Async}`) 
+## <a name="component-initialization-oninitializedasync"></a>元件初始化 (`OnInitialized{Async}`) 
 
 <xref:Microsoft.AspNetCore.Components.ComponentBase.OnInitialized%2A><xref:Microsoft.AspNetCore.Components.ComponentBase.OnInitializedAsync%2A>當元件在中收到其初始參數之後初始化時，就會叫用和 <xref:Microsoft.AspNetCore.Components.ComponentBase.SetParametersAsync%2A> 。
 
@@ -280,7 +280,7 @@ protected override async Task OnAfterRenderAsync(bool firstRender)
 
 ## <a name="stateful-reconnection-after-prerendering"></a>以具狀態重新連接後重新連線
 
-在 Blazor Server 應用程式中 <xref:Microsoft.AspNetCore.Mvc.TagHelpers.ComponentTagHelper.RenderMode> ，當為時 <xref:Microsoft.AspNetCore.Mvc.Rendering.RenderMode.ServerPrerendered> ，元件最初會以靜態方式轉譯為頁面的一部分。 當瀏覽器將 SignalR 連接重新建立回伺服器之後，就會 *再次* 轉譯該元件並進行互動。 如果 [`OnInitialized{Async}`](#component-initialization-methods-oninitializedasync) 有初始化元件的生命週期方法，方法會執行 *兩次*：
+在 Blazor Server 應用程式中 <xref:Microsoft.AspNetCore.Mvc.TagHelpers.ComponentTagHelper.RenderMode> ，當為時 <xref:Microsoft.AspNetCore.Mvc.Rendering.RenderMode.ServerPrerendered> ，元件最初會以靜態方式轉譯為頁面的一部分。 當瀏覽器將 SignalR 連接重新建立回伺服器之後，就會 *再次* 轉譯該元件並進行互動。 如果 [`OnInitialized{Async}`](#component-initialization-oninitializedasync) 有初始化元件的生命週期方法，方法會執行 *兩次*：
 
 * 以靜態方式資源清單元件時。
 * 建立伺服器連接之後。
@@ -313,7 +313,7 @@ protected override async Task OnAfterRenderAsync(bool firstRender)
 
 ## <a name="component-disposal-with-idisposable"></a>元件處置方式 `IDisposable`
 
-如果元件已執行 <xref:System.IDisposable> ，則在從 UI 中移除元件時，架構會呼叫 [處置方法](/dotnet/standard/garbage-collection/implementing-dispose) ，而無法釋放非受控資源。 處置可以在任何時間進行，包括 [元件初始化](#component-initialization-methods-oninitializedasync)期間。 下列元件會使用指示詞來 <xref:System.IDisposable> [`@implements`](xref:mvc/views/razor#implements) Razor 執行：
+如果元件已執行 <xref:System.IDisposable> ，則在從 UI 中移除元件時，架構會呼叫 [處置方法](/dotnet/standard/garbage-collection/implementing-dispose) ，而無法釋放非受控資源。 處置可以在任何時間進行，包括 [元件初始化](#component-initialization-oninitializedasync)期間。 下列元件會使用指示詞來 <xref:System.IDisposable> [`@implements`](xref:mvc/views/razor#implements) Razor 執行：
 
 ```razor
 @using System
@@ -387,6 +387,26 @@ public async ValueTask DisposeAsync()
 
 * 匿名 lambda 方法方法 (不需要明確處置) ：
 
+  ::: moniker range=">= aspnetcore-5.0"
+
+  ```csharp
+  private void HandleFieldChanged(object sender, FieldChangedEventArgs e)
+  {
+      formInvalid = !editContext.Validate();
+      StateHasChanged();
+  }
+
+  protected override void OnInitialized()
+  {
+      editContext = new(starship);
+      editContext.OnFieldChanged += (s, e) => HandleFieldChanged((editContext)s, e);
+  }
+  ```
+
+  ::: moniker-end
+
+  ::: moniker range="< aspnetcore-5.0"
+
   ```csharp
   private void HandleFieldChanged(object sender, FieldChangedEventArgs e)
   {
@@ -401,7 +421,33 @@ public async ValueTask DisposeAsync()
   }
   ```
 
+  ::: moniker-end
+
 * 匿名 lambda 運算式方法 (不需要明確處置) ：
+
+  ::: moniker range=">= aspnetcore-5.0"
+
+  ```csharp
+  private ValidationMessageStore messageStore;
+
+  [CascadingParameter]
+  private EditContext CurrentEditContext { get; set; }
+
+  protected override void OnInitialized()
+  {
+      ...
+
+      messageStore = new(CurrentEditContext);
+
+      CurrentEditContext.OnValidationRequested += (s, e) => messageStore.Clear();
+      CurrentEditContext.OnFieldChanged += (s, e) => 
+          messageStore.Clear(e.FieldIdentifier);
+  }
+  ```
+
+  ::: moniker-end
+
+  ::: moniker range="< aspnetcore-5.0"
 
   ```csharp
   private ValidationMessageStore messageStore;
@@ -420,6 +466,8 @@ public async ValueTask DisposeAsync()
           messageStore.Clear(e.FieldIdentifier);
   }
   ```
+
+  ::: moniker-end
 
   本文中會顯示上述程式碼中具有匿名 lambda 運算式的完整範例 <xref:blazor/forms-validation#validator-components> 。
 

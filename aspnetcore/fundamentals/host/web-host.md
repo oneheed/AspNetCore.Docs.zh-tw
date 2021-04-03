@@ -19,20 +19,20 @@ no-loc:
 - Razor
 - SignalR
 uid: fundamentals/host/web-host
-ms.openlocfilehash: fa9b1941d6dcda30855a4729dfa1cd78f897d9b6
-ms.sourcegitcommit: a1db01b4d3bd8c57d7a9c94ce122a6db68002d66
+ms.openlocfilehash: f619aecfa2e33046de85c2521257c48d63f8b6e0
+ms.sourcegitcommit: 7923a9ec594690f01e0c9c6df3416c239e6745fb
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 03/04/2021
-ms.locfileid: "102109971"
+ms.lasthandoff: 03/31/2021
+ms.locfileid: "106081607"
 ---
 # <a name="aspnet-core-web-host"></a>ASP.NET Core Web 主機
 
-ASP.NET Core 應用程式會設定並啟動 *主機*。 主機負責應用程式啟動和存留期管理。 至少，主機會設定伺服器和要求處理管線。 主機也可以設定記錄、相依性插入和設定。
+ASP.NET Core 的應用程式會設定並啟動 *主機*。 主機負責應用程式啟動和存留期管理。 至少，主機會設定伺服器和要求處理管線。 主機也可以設定記錄、相依性插入和設定。
 
 ::: moniker range=">= aspnetcore-3.0"
 
-此文章涵蓋 Web 主機，而且我們僅因為回溯相容性而繼續提供它。 ASP.NET 核心範本會建立 [.Net 泛型主機](<xref:fundamentals/host/generic-host>)，建議用於所有的應用程式類型。
+此文章涵蓋 Web 主機，而且我們僅因為回溯相容性而繼續提供它。 ASP.NET Core 範本會建立 [.Net 泛型主機](<xref:fundamentals/host/generic-host>)，建議用於所有的應用程式類型。
 
 ::: moniker-end
 
@@ -46,7 +46,7 @@ ASP.NET Core 應用程式會設定並啟動 *主機*。 主機負責應用程式
 
 使用 ([IWebHostBuilder](/dotnet/api/microsoft.aspnetcore.hosting.iwebhostbuilder)) 的執行個體建立主機。 這通常在應用程式的進入點執行，也就是 `Main` 方法。
 
-在專案範本中， `Main` 位於 *Program.cs*。 一般的應用程式會呼叫 [CreateDefaultBuilder](/dotnet/api/microsoft.aspnetcore.webhost.createdefaultbuilder) 來開始設定主機：
+在專案範本中， `Main` 位於 *程式 .cs* 中。 一般的應用程式會呼叫 [CreateDefaultBuilder](/dotnet/api/microsoft.aspnetcore.webhost.createdefaultbuilder) 來開始設定主機：
 
 ```csharp
 public class Program
@@ -83,7 +83,7 @@ public class Program
   * 環境變數。
   * 命令列引數。
 * 設定主控台和偵錯輸出的[記錄](xref:fundamentals/logging/index)。 記錄包括在或 appsettings 的記錄設定區段中指定的 [記錄篩選](xref:fundamentals/logging/index#log-filtering) 規則 *appsettings.json* *。環境}. json* 檔案。
-* 在使用 [ASP.NET Core 模組](xref:host-and-deploy/aspnet-core-module)的 iis 後方執行時，會 `CreateDefaultBuilder` 啟用 [iis 整合](xref:host-and-deploy/iis/index)，以設定應用程式的基底位址和埠。 IIS 整合也會設定應用程式以[擷取啟動錯誤](#capture-startup-errors)。 如需 IIS 預設選項，請參閱 <xref:host-and-deploy/iis/index#iis-options>。
+* 使用 [ASP.NET Core 模組](xref:host-and-deploy/aspnet-core-module)在 iis 後方執行時，會 `CreateDefaultBuilder` 啟用 [iis 整合](xref:host-and-deploy/iis/index)，以設定應用程式的基底位址和埠。 IIS 整合也會設定應用程式以[擷取啟動錯誤](#capture-startup-errors)。 如需 IIS 預設選項，請參閱 <xref:host-and-deploy/iis/index#iis-options>。
 * 如果應用程式的環境是「開發」，請將 [ServiceProviderOptions.ValidateScopes](/dotnet/api/microsoft.extensions.dependencyinjection.serviceprovideroptions.validatescopes) 設定為 `true`。 如需詳細資訊，請參閱[範圍驗證](#scope-validation)。
 
 `CreateDefaultBuilder` 所定義的組態可以透過 [ConfigureAppConfiguration](/dotnet/api/microsoft.aspnetcore.hosting.webhostbuilderextensions.configureappconfiguration)、[ConfigureLogging](/dotnet/api/microsoft.aspnetcore.hosting.webhostbuilderextensions.configurelogging)，以及 [IWebHostBuilder](/dotnet/api/microsoft.aspnetcore.hosting.iwebhostbuilder) 的其他方法和擴充方法加以覆寫及擴增。 數個範例如下：
@@ -278,10 +278,11 @@ WebHost.CreateDefaultBuilder(args)
 
 設定 HTTPS 重新導向連接埠。 用於[強制 HTTPS](xref:security/enforcing-ssl)。
 
-**機碼**：https_port **類型**：*字串*
-**預設值**：未設定預設值。
-**設定使用**： `UseSetting` 
- **環境變數**：`ASPNETCORE_HTTPS_PORT`
+機 **碼**： HTTPs_port  
+**類型**： *字串*  
+**預設** 值：未設定預設值。  
+**設定使用**： `UseSetting`  
+**環境變數**： `ASPNETCORE_HTTPS_PORT`
 
 ```csharp
 WebHost.CreateDefaultBuilder(args)

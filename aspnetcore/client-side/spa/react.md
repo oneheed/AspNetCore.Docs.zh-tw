@@ -19,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: spa/react
-ms.openlocfilehash: 6c3539d96329489189f49a3af0c718791824be6b
-ms.sourcegitcommit: 3593c4efa707edeaaceffbfa544f99f41fc62535
+ms.openlocfilehash: c3b7119590d568455f9e0410d1c2d4076f8f2443
+ms.sourcegitcommit: 7354c2029164702d075fd3786d96a92c6d49bc6e
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 01/04/2021
-ms.locfileid: "93054446"
+ms.lasthandoff: 04/01/2021
+ms.locfileid: "106164236"
 ---
 # <a name="use-the-react-project-template-with-aspnet-core"></a>React 專案範本與 ASP.NET Core 搭配使用
 
@@ -36,7 +36,7 @@ ms.locfileid: "93054446"
 
 ## <a name="create-a-new-app"></a>建立新的應用程式
 
-如已安裝 ASP.NET Core 2.1，就沒有必要安裝 React 專案範本。
+如果您已安裝 ASP.NET Core 2.1 或更新版本，就不需要安裝回應專案範本。
 
 進入命令提示字元，然後在空目錄中使用 `dotnet new react` 命令以建立新的專案。 例如，下列命令會在 *my-new-app* 目錄中建立應用程式並切換到該目錄：
 

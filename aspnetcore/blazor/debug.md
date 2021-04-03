@@ -19,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/debug
-ms.openlocfilehash: 5d6cf70d411c0631a59852e03deada1bcf6dfa21
-ms.sourcegitcommit: 4bbc69f51c59bed1a96aa46f9f5dca2f2a2634cb
+ms.openlocfilehash: 3d3325583bd5442b2289c19b61bb69ef7a21ddd4
+ms.sourcegitcommit: 7923a9ec594690f01e0c9c6df3416c239e6745fb
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 03/25/2021
-ms.locfileid: "105554950"
+ms.lasthandoff: 03/31/2021
+ms.locfileid: "106081503"
 ---
 # <a name="debug-aspnet-core-blazor-webassembly"></a>Debug ASP.NET Core Blazor WebAssembly
 
@@ -46,7 +46,7 @@ Blazor WebAssembly 您可以使用以 Chromium 為基礎的瀏覽器中的瀏覽
 目前，您 *不能*：
 
 * 中斷未處理的例外狀況。
-* 在應用程式啟動期間，在執行 debug proxy 之前叫用中斷點。 這包括 () 中的中斷點 `Program.Main` `Program.cs` ，以及應用程式所要求的第一個頁面所載入之元件[ `OnInitialized{Async}` 方法](xref:blazor/components/lifecycle#component-initialization-methods-oninitializedasync)中的中斷點。
+* 在應用程式啟動期間，在執行 debug proxy 之前叫用中斷點。 這包括 () 中的中斷點 `Program.Main` `Program.cs` ，以及應用程式所要求的第一個頁面所載入之元件[ `OnInitialized{Async}` 生命週期方法](xref:blazor/components/lifecycle#component-initialization-oninitializedasync)中的中斷點。
 * 在非本機案例中進行 Debug (例如 [Windows 子系統 Linux 版 (WSL) ](/windows/wsl/) 或 [Visual Studio Codespaces](/visualstudio/codespaces/overview/what-is-vsonline)) 。
 * `*Server*`在偵錯工具期間自動重建託管解決方案的後端應用程式 Blazor WebAssembly ，例如藉由執行應用程式與 [`dotnet watch run`](xref:tutorials/dotnet-watch) 。
 
@@ -117,7 +117,7 @@ Visual Studio for Mac 需要8.8 版 (組建 1532) 或更新版本：
 1. 再按一次 <kbd>F5</kbd> ，讓繼續執行，並查看在瀏覽器中轉譯的氣象預報表格。
 
 > [!NOTE]
-> 在執行 debug proxy 之前， **不** 會在應用程式啟動期間叫用中斷點。 這包括 () 中的中斷點 `Program.Main` `Program.cs` ，以及應用程式所要求的第一個頁面所載入之元件[ `OnInitialized{Async}` 方法](xref:blazor/components/lifecycle#component-initialization-methods-oninitializedasync)中的中斷點。
+> 在執行 debug proxy 之前， **不** 會在應用程式啟動期間叫用中斷點。 這包括 () 中的中斷點 `Program.Main` `Program.cs` ，以及應用程式所要求的第一個頁面所載入之元件[ `OnInitialized{Async}` 生命週期方法](xref:blazor/components/lifecycle#component-initialization-oninitializedasync)中的中斷點。
 
 如果應用程式裝載于不同的 [應用程式基底路徑](xref:blazor/host-and-deploy/index#app-base-path) `/` ，請更新中的下列屬性， `Properties/launchSettings.json` 以反映應用程式的基底路徑：
 
@@ -198,7 +198,7 @@ Visual Studio for Mac 需要8.8 版 (組建 1532) 或更新版本：
 1. 在瀏覽器中，流覽至 `Counter` 頁面，然後選取 [按 **我** ] 按鈕以點擊中斷點。
 
 > [!NOTE]
-> 在執行 debug proxy 之前， **不** 會在應用程式啟動期間叫用中斷點。 這包括 () 中的中斷點 `Program.Main` `Program.cs` ，以及應用程式所要求的第一個頁面所載入之元件[ `OnInitialized{Async}` 方法](xref:blazor/components/lifecycle#component-initialization-methods-oninitializedasync)中的中斷點。
+> 在執行 debug proxy 之前， **不** 會在應用程式啟動期間叫用中斷點。 這包括 () 中的中斷點 `Program.Main` `Program.cs` ，以及應用程式所要求的第一個頁面所載入之元件[ `OnInitialized{Async}` 生命週期方法](xref:blazor/components/lifecycle#component-initialization-oninitializedasync)中的中斷點。
 
 ## <a name="debug-hosted-blazor-webassembly"></a>主控的調試 Blazor WebAssembly
 
@@ -233,7 +233,7 @@ Visual Studio for Mac 需要8.8 版 (組建 1532) 或更新版本：
 
 下列啟動設定選項支援 `blazorwasm` debug 型別 (`.vscode/launch.json`) 。
 
-| 選項    | Description |
+| 選項    | 描述 |
 | --------- | ----------- |
 | `request` | 用 `launch` 來啟動偵錯工具，並將其附加至 Blazor WebAssembly 應用程式，或將偵測 `attach` 會話附加至已在執行中的應用程式。 |
 | `url`     | 在瀏覽器中要在瀏覽器中開啟的 URL。 預設值為 `https://localhost:5001`。 |
@@ -314,7 +314,7 @@ Visual Studio for Mac 需要8.8 版 (組建 1532) 或更新版本：
 1. 再按一次<kbd>&#8984;</kbd> + <kbd>&#8617;</kbd> ，讓執行繼續執行，並查看在瀏覽器中轉譯的氣象預報表格。
 
 > [!NOTE]
-> 在執行 debug proxy 之前， **不** 會在應用程式啟動期間叫用中斷點。 這包括 () 中的中斷點 `Program.Main` `Program.cs` ，以及應用程式所要求的第一個頁面所載入之元件[ `OnInitialized{Async}` 方法](xref:blazor/components/lifecycle#component-initialization-methods-oninitializedasync)中的中斷點。
+> 在執行 debug proxy 之前， **不** 會在應用程式啟動期間叫用中斷點。 這包括 () 中的中斷點 `Program.Main` `Program.cs` ，以及應用程式所要求的第一個頁面所載入之元件[ `OnInitialized{Async}` 生命週期方法](xref:blazor/components/lifecycle#component-initialization-oninitializedasync)中的中斷點。
 
 如需詳細資訊，請參閱 [使用 Visual Studio for Mac 的調試](/visualstudio/mac/debugging)程式。
 
@@ -384,7 +384,7 @@ Blazor 提供可執行 [Chrome DevTools 通訊協定](https://chromedevtools.git
 
 ### <a name="breakpoints-in-oninitializedasync-not-hit"></a>`OnInitialized{Async}`未命中的中斷點
 
-Blazor架構的偵錯工具 proxy 需要短暫的時間才能啟動，因此可能不會叫用[ `OnInitialized{Async}` 生命週期方法](xref:blazor/components/lifecycle#component-initialization-methods-oninitializedasync)中的中斷點。 建議您在方法主體的開頭加上延遲，以便在叫用中斷點之前，讓 debug proxy 有一些時間啟動。 您可以根據[ `if` 編譯器](/dotnet/csharp/language-reference/preprocessor-directives/preprocessor-if)指示詞加入延遲，以確保應用程式的發行組建不會有延遲。
+Blazor架構的偵錯工具 proxy 需要短暫的時間才能啟動，因此可能不會叫用[ `OnInitialized{Async}` 生命週期方法](xref:blazor/components/lifecycle#component-initialization-oninitializedasync)中的中斷點。 建議您在方法主體的開頭加上延遲，以便在叫用中斷點之前，讓 debug proxy 有一些時間啟動。 您可以根據[ `if` 編譯器](/dotnet/csharp/language-reference/preprocessor-directives/preprocessor-if)指示詞加入延遲，以確保應用程式的發行組建不會有延遲。
 
 <xref:Microsoft.AspNetCore.Components.ComponentBase.OnInitialized%2A>:
 

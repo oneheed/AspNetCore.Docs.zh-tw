@@ -19,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: fundamentals/servers/kestrel/endpoints
-ms.openlocfilehash: f9d82409f4b31a5564c7cdfa48beb303d784e213
-ms.sourcegitcommit: 83524f739dd25fbfa95ee34e95342afb383b49fe
+ms.openlocfilehash: d1b682b12e2cdcaf2a77b17f726ac569c46cf095
+ms.sourcegitcommit: f67ba959d3cbfe33b32fa6a5eae1a5ae9de18167
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 01/29/2021
-ms.locfileid: "99057144"
+ms.lasthandoff: 04/02/2021
+ms.locfileid: "106179726"
 ---
 # <a name="configure-endpoints-for-the-aspnet-core-kestrel-web-server"></a>設定 ASP.NET Core Kestrel web 伺服器的端點
 
@@ -288,7 +288,14 @@ webBuilder.ConfigureKestrel(serverOptions =>
 
 [伺服器名稱指示 (SNI)](https://tools.ietf.org/html/rfc6066#section-3) 可以用於在相同的 IP 位址和連接埠上裝載多個網域。 SNI 若要運作，用戶端會在 TLS 信號交換期間傳送安全工作階段的主機名稱給伺服器，讓伺服器可以提供正確的憑證。 用戶端在 TLS 信號交換之後的安全工作階段期間，會使用所提供的憑證與伺服器進行加密通訊。
 
-Kestrel 透過 `ServerCertificateSelector` 回呼來支援 SNI。 回呼會針對每個連線叫用一次，允許應用程式檢查主機名稱並選取適當的憑證。 下列回呼程式碼可以在專案的 Program.cs 檔的 `ConfigureWebHostDefaults` 方法呼叫中使用 ：
+您可以透過兩種方式來設定 SNI：
+
+* 在程式碼中建立端點，並使用回呼的主機名稱來選取憑證 <xref:Microsoft.AspNetCore.Server.Kestrel.Https.HttpsConnectionAdapterOptions.ServerCertificateSelector%2A> 。
+* 在 [設定中設定](xref:fundamentals/configuration/index)主機名稱和 HTTPS 選項之間的對應。 例如，檔案中的 JSON `appsettings.json` 。
+
+### <a name="sni-with-servercertificateselector"></a>SNI 與 `ServerCertificateSelector`
+
+Kestrel 透過 `ServerCertificateSelector` 回呼來支援 SNI。 回呼會針對每個連線叫用一次，允許應用程式檢查主機名稱並選取適當的憑證。 下列回呼程式碼可以在 `ConfigureWebHostDefaults` 專案的 *程式 .cs* 檔案的方法呼叫中使用：
 
 ```csharp
 //using System.Security.Cryptography.X509Certificates;
@@ -330,7 +337,69 @@ webBuilder.ConfigureKestrel(serverOptions =>
 });
 ```
 
-SNI 支援需要：
+### <a name="sni-in-configuration"></a>設定中的 SNI
+
+Kestrel 支援在 configuration 中定義的 SNI。 您可以使用 `Sni` 包含主機名稱和 HTTPS 選項之間對應的物件來設定端點。 連接主機名稱符合選項，且用於該連接。
+
+下列設定會新增名為 `MySniEndpoint` 的端點，該端點會使用 SNI 根據主機名稱選取 HTTPS 選項：
+
+```json
+{
+  "Kestrel": {
+    "Endpoints": {
+      "MySniEndpoint": {
+        "Url": "https://*",
+        "SslProtocols": ["Tls11", "Tls12"],
+        "Sni": {
+          "a.example.org": {
+            "Protocols": "Http1AndHttp2",
+            "SslProtocols": ["Tls11", "Tls12", "Tls13"],
+            "Certificate": {
+              "Subject": "<subject; required>",
+              "Store": "<certificate store; required>",
+            },
+            "ClientCertificateMode" : "NoCertificate"
+          },
+          "*.example.org": {
+            "Certificate": {
+              "Path": "<path to .pfx file>",
+              "Password": "<certificate password>"
+            }
+          },
+          "*": {
+            // At least one subproperty needs to exist per SNI section or it
+            // cannot be discovered via IConfiguration
+            "Protocols": "Http1",
+          }
+        }
+      }
+    },
+    "Certificates": {
+      "Default": {
+        "Path": "<path to .pfx file>",
+        "Password": "<certificate password>"
+      }
+    }
+  }
+}
+```
+
+可由 SNI 覆寫的 HTTPS 選項：
+
+* `Certificate` 設定 [憑證來源](#certificate-sources)。
+* `Protocols` 設定允許的 [HTTP 通訊協定](xref:Microsoft.AspNetCore.Server.Kestrel.Core.HttpProtocols)。
+* `SslProtocols` 設定允許的 [SSL 通訊協定](xref:System.Security.Authentication.SslProtocols)。
+* `ClientCertificateMode` 設定 [用戶端憑證需求](xref:Microsoft.AspNetCore.Server.Kestrel.Https.ClientCertificateMode)。
+
+主機名稱支援萬用字元對應：
+
+* 完全相符。 例如，會 `a.example.org` 符合 `a.example.org` 。
+* 萬用字元前置詞。 如果有多個萬用字元相符專案，則會選擇最長的模式。 例如， `*.example.org` 符合 `b.example.org` 和 `c.example.org` 。
+* 完整萬用字元。 `*` 符合所有其他專案，包括未使用 SNI 但未傳送主機名稱的用戶端。
+
+相符的 SNI 設定會套用至連接的端點，並覆寫端點上的值。 如果連接不符合設定的 SNI 主機名稱，則會拒絕連接。
+
+### <a name="sni-requirements"></a>SNI 需求
 
 * 在目標 framework `netcoreapp2.1` 或更新版本上執行。 在 `net461` 或更新版本中，會叫用回呼，但 `name` 一律為 `null` 。 如果用戶端不在 TLS 信號交換中提供主機名稱參數，則 `name` 也是 `null`。
 * 所有網站都在相同的 Kestrel 執行個體上執行。 在不使用反向 Proxy 的情況下，Kestrel 不支援跨多個執行個體共用 IP 位址和連接埠。
@@ -350,6 +419,7 @@ webBuilder.ConfigureKestrel(serverOptions =>
 ```
 
 預設值為 `SslProtocols.None` ，會讓 Kestrel 使用作業系統預設值選擇最適合的通訊協定。 除非您有特定的原因要選取通訊協定，否則請使用預設值。
+
 ## <a name="connection-logging"></a>連接記錄
 
 呼叫 <xref:Microsoft.AspNetCore.Hosting.ListenOptionsConnectionLoggingExtensions.UseConnectionLogging%2A> 以發出連接上位元組層級通訊的 Debug 層級記錄。 連線記錄有助於疑難排解低層級通訊中的問題，例如在 TLS 加密期間和 proxy 後方。 如果 `UseConnectionLogging` 之前放置 `UseHttps` ，則會記錄加密的流量。 如果 `UseConnectionLogging` 放置在之後 `UseHttps` ，則會記錄解密的流量。 這是內建的 [連接中介軟體](#connection-middleware)。

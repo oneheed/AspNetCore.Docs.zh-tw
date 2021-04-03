@@ -19,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/components/rendering
-ms.openlocfilehash: 76b88d5443cdef8ad01d6c357b4136896ede0067
-ms.sourcegitcommit: 4bbc69f51c59bed1a96aa46f9f5dca2f2a2634cb
+ms.openlocfilehash: c3f2b54ad9dce22423071f7c36476a220c448e88
+ms.sourcegitcommit: 7923a9ec594690f01e0c9c6df3416c239e6745fb
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 03/25/2021
-ms.locfileid: "105554937"
+ms.lasthandoff: 03/31/2021
+ms.locfileid: "106081490"
 ---
 # <a name="aspnet-core-blazor-component-rendering"></a>ASP.NET Core Blazor 元件轉譯
 
@@ -59,7 +59,7 @@ ms.locfileid: "105554937"
 程式碼不應該 <xref:Microsoft.AspNetCore.Components.ComponentBase.StateHasChanged%2A> 在下列情況呼叫：
 
 * 定期處理事件，無論是同步或非同步，因為都會 <xref:Microsoft.AspNetCore.Components.ComponentBase> 觸發大部分例行事件處理常式的轉譯。
-* 執行一般的生命週期邏輯（例如 [`OnInitialized`](xref:blazor/components/lifecycle#component-initialization-methods-oninitializedasync) 或），而 [`OnParametersSetAsync`](xref:blazor/components/lifecycle#after-parameters-are-set-onparameterssetasync) 不論是 synchonrously 還是非同步，因為會 <xref:Microsoft.AspNetCore.Components.ComponentBase> 觸發一般生命週期事件的轉譯。
+* 執行一般的生命週期邏輯（例如 [`OnInitialized`](xref:blazor/components/lifecycle#component-initialization-oninitializedasync) 或），而 [`OnParametersSetAsync`](xref:blazor/components/lifecycle#after-parameters-are-set-onparameterssetasync) 不論是 synchonrously 還是非同步，因為會 <xref:Microsoft.AspNetCore.Components.ComponentBase> 觸發一般生命週期事件的轉譯。
 
 不過，在本文的 <xref:Microsoft.AspNetCore.Components.ComponentBase.StateHasChanged%2A> 下列各節所述的案例中，可能有意義：
 

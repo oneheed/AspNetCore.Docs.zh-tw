@@ -20,12 +20,12 @@ no-loc:
 - SignalR
 uid: blazor/fundamentals/handle-errors
 zone_pivot_groups: blazor-hosting-models
-ms.openlocfilehash: 1c080bedb5735e1c7498f600de17c81f237ce2c7
-ms.sourcegitcommit: 4bbc69f51c59bed1a96aa46f9f5dca2f2a2634cb
+ms.openlocfilehash: c7eec0e8a72bac79d16ff8ed19da061de618533c
+ms.sourcegitcommit: 7923a9ec594690f01e0c9c6df3416c239e6745fb
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 03/25/2021
-ms.locfileid: "105554875"
+ms.lasthandoff: 03/31/2021
+ms.locfileid: "106081399"
 ---
 # <a name="handle-errors-in-aspnet-core-blazor-apps"></a>處理 ASP.NET Core 應用程式中的錯誤 Blazor
 
@@ -148,6 +148,20 @@ ms.locfileid: "105554875"
 
 上述程式碼假設 `person` 不是 `null` 。 程式碼的結構通常會保證物件存在於轉譯元件時。 在這些情況下，不需要檢查轉譯 `null` 邏輯。 在先前的範例中， `person` 可能保證存在，因為 `person` 會在元件具現化時建立，如下列範例所示：
 
+::: moniker range=">= aspnetcore-5.0"
+
+```razor
+@code {
+    private Person person = new();
+
+    ...
+}
+```
+
+::: moniker-end
+
+::: moniker range="< aspnetcore-5.0"
+
 ```razor
 @code {
     private Person person = new Person();
@@ -155,6 +169,8 @@ ms.locfileid: "105554875"
     ...
 }
 ```
+
+::: moniker-end
 
 <h3 id="event-handlers-webassembly">事件處理常式</h3>
 
@@ -418,6 +434,20 @@ Blazor Server當任何已執行的函式或任何屬性的 setter 擲回 `[Injec
 
 上述程式碼假設 `person` 不是 `null` 。 程式碼的結構通常會保證物件存在於轉譯元件時。 在這些情況下，不需要檢查轉譯 `null` 邏輯。 在先前的範例中， `person` 可能保證存在，因為 `person` 會在元件具現化時建立，如下列範例所示：
 
+::: moniker range=">= aspnetcore-5.0"
+
+```razor
+@code {
+    private Person person = new();
+
+    ...
+}
+```
+
+::: moniker-end
+
+::: moniker range="< aspnetcore-5.0"
+
 ```razor
 @code {
     private Person person = new Person();
@@ -425,6 +455,8 @@ Blazor Server當任何已執行的函式或任何屬性的 setter 擲回 `[Injec
     ...
 }
 ```
+
+::: moniker-end
 
 <h3 id="event-handlers-server">事件處理常式</h3>
 

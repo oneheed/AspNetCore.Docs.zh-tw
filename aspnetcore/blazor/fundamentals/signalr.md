@@ -20,12 +20,12 @@ no-loc:
 - SignalR
 uid: blazor/fundamentals/signalr
 zone_pivot_groups: blazor-hosting-models
-ms.openlocfilehash: ecac21c1f6f7cea0a221e1a78161b915ee2c755f
-ms.sourcegitcommit: 1f35de0ca9ba13ea63186c4dc387db4fb8e541e0
+ms.openlocfilehash: e5f3eee1e9aaadc55645b23086c0a53c068669cf
+ms.sourcegitcommit: 7923a9ec594690f01e0c9c6df3416c239e6745fb
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 03/20/2021
-ms.locfileid: "104711057"
+ms.lasthandoff: 03/31/2021
+ms.locfileid: "106081321"
 ---
 # <a name="aspnet-core-blazor-signalr-guidance"></a>ASP.NET Core Blazor SignalR 指導方針
 
@@ -398,6 +398,10 @@ public void ConfigureServices(IServiceCollection services)
 如果自訂電路處理常式的方法擲回未處理的例外狀況，則例外狀況對線路而言是嚴重的 Blazor Server 。 若要容忍處理常式程式碼或呼叫方法中的例外狀況，請將程式碼包裝在一或多個語句中， [`try-catch`](/dotnet/csharp/language-reference/keywords/try-catch) 並提供錯誤處理和記錄。
 
 當線路因為使用者已中斷連線而結束，且架構正在清除電路狀態時，架構會處置電路的 DI 範圍。 處置範圍會處置任何執行的線路範圍 DI 服務 <xref:System.IDisposable?displayProperty=fullName> 。 如果任何 DI 服務在處置期間擲回未處理的例外狀況，則架構會記錄例外狀況。
+
+## <a name="azure-signalr-service"></a>Azure SignalR 服務
+
+建議您針對 Microsoft Azure 中裝載的應用程式使用 [Azure SignalR 服務](xref:signalr/scale#azure-signalr-service) Blazor Server 。 服務可讓您將 Blazor Server 應用程式相應增加為大量的並行 SignalR 連接。 此外， SignalR 服務的全球接觸和高效能資料中心大幅有助於降低因地理位置而造成的延遲。 如需 Azure 服務的可呈現支援 SignalR ，請將應用程式設定為使用「 *粘滯話*」。 如需詳細資訊，請參閱<xref:blazor/host-and-deploy/server>。
 
 ## <a name="additional-resources"></a>其他資源
 

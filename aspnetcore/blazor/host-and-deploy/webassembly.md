@@ -19,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/host-and-deploy/webassembly
-ms.openlocfilehash: bb45b763fb24b5270c92b3ffd18f3fbc3ba1093b
-ms.sourcegitcommit: 54fe1ae5e7d068e27376d562183ef9ddc7afc432
+ms.openlocfilehash: 53b31bfb5aafb67e8544b146209b221de37c3cc4
+ms.sourcegitcommit: 7354c2029164702d075fd3786d96a92c6d49bc6e
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 03/10/2021
-ms.locfileid: "102589422"
+ms.lasthandoff: 04/01/2021
+ms.locfileid: "106164262"
 ---
 # <a name="host-and-deploy-aspnet-core-blazor-webassembly"></a>裝載和部署 ASP.NET Core Blazor WebAssembly
 
@@ -127,9 +127,9 @@ dotnet publish -p:BlazorEnableCompression=false
 
 ## <a name="hosted-deployment-with-aspnet-core"></a>搭配 ASP.NET Core 的已裝載部署
 
-*託管部署* Blazor WebAssembly 可從 web 伺服器上執行的 [ASP.NET Core 應用](xref:index)程式，將應用程式提供給瀏覽器。
+*託管部署* Blazor WebAssembly 可從 web 伺服器上執行的 [ASP.NET Core 應用程式](xref:index)，將應用程式提供給瀏覽器。
 
-用戶端 Blazor WebAssembly 應用程式會 `/bin/Release/{TARGET FRAMEWORK}/publish/wwwroot` 與伺服器應用程式的任何其他靜態 web 資產一起發行至伺服器應用程式的資料夾中。 這兩個應用程式會一起部署。 需要有能夠裝載 ASP.NET Core 應用程式的網頁伺服器。 針對裝載的部署，當使用命令) **Blazor WebAssembly** 搭配使用命令 `blazorwasm` [`dotnet new`](/dotnet/core/tools/dotnet-new) **`Hosted`**) 時 (選取的選項時，Visual Studio 會包含應用程式專案範本 (範本 `-ho|--hosted` `dotnet new` 。
+用戶端 Blazor WebAssembly 應用程式會 `/bin/Release/{TARGET FRAMEWORK}/publish/wwwroot` 與伺服器應用程式的任何其他靜態 web 資產一起發行至伺服器應用程式的資料夾中。 這兩個應用程式會一起部署。 需要有能夠裝載 ASP.NET Core 應用程式的網頁伺服器。 針對裝載的部署，當使用命令) 時，Visual Studio 包含 **Blazor WebAssembly 應用程式** 專案範本 (`blazorwasm` 範本， [`dotnet new`](/dotnet/core/tools/dotnet-new) **`Hosted`** (`-ho|--hosted` 使用命令) 時所選取的選項 `dotnet new` 。
 
 如需詳細資訊，請參閱下列文章：
 
@@ -144,7 +144,7 @@ dotnet publish -p:BlazorEnableCompression=false
 託管 Blazor 解決方案可提供多個 Blazor WebAssembly 應用程式。
 
 > [!NOTE]
-> 本章節中的範例會參考 Visual Studio *解決方案* 的使用方式，但不需要使用 visual Studio 和 visual studio 解決方案來處理託管應用程式案例中的多個用戶端應用程式 Blazor WebAssembly 。 如果您不是使用 Visual Studio，請略過檔案 `{SOLUTION NAME}.sln` 和針對 Visual studio 建立的任何其他檔案。
+> 本章節中的範例會參考 Visual Studio *解決方案* 的使用方式，但不需要使用 Visual Studio 和 Visual Studio 解決方案來處理託管應用程式案例中的多個用戶端應用程式 Blazor WebAssembly 。 如果您未使用 Visual Studio，請略過檔案 `{SOLUTION NAME}.sln` 和針對 Visual Studio 所建立的任何其他檔案。
 
 在下例中︰
 
@@ -465,9 +465,13 @@ An alternative to using the [`Link` component](xref:blazor/fundamentals/signalr#
 
 ### <a name="azure-app-service"></a>Azure App Service
 
-Blazor WebAssembly 應用程式可部署至 Windows 上的 Azure App Service，該服務會在 [IIS](#iis)上裝載應用程式。
+Blazor WebAssembly 您可以將應用程式部署至 Windows 上的 Azure App 服務，這會在 [IIS](#iis)上裝載應用程式。
 
 Blazor WebAssembly目前不支援將獨立應用程式部署至適用于 Linux 的 Azure App Service。 目前無法使用 Linux 伺服器映射來裝載應用程式。 正在進行工作，以啟用此案例。
+
+### <a name="azure-static-web-app"></a>Azure 靜態 web 應用程式
+
+如需詳細資訊，請參閱 [教學課程：使用 Blazor Azure 靜態建立靜態 web 應用程式 Web Apps](/azure/static-web-apps/deploy-blazor)。
 
 ### <a name="iis"></a>IIS
 
@@ -550,7 +554,7 @@ Blazor發行專案時， `web.config` 會使用下列 IIS 設定來建立檔案�
 
 #### <a name="brotli-and-gzip-compression"></a>Brotli 和 Gzip 壓縮
 
-*本節僅適用于獨立的 Blazor WebAssembly 應用程式。託管 Blazor 應用程式會使用預設的 ASP.NET Core 應用程式 `web.config` 檔，而不是本節所連結的檔案。*
+*本節僅適用于獨立的 Blazor WebAssembly 應用程式。裝載 Blazor 的應用程式會使用預設的 ASP.NET Core 應用程式 `web.config` 檔，而不是本節所連結的檔案。*
 
 您可以透過設定 IIS `web.config` ，為獨立應用程式提供 Brotli 或 Gzip 壓縮 Blazor 的資產 Blazor WebAssembly 。 如需範例設定檔，請參閱 [`web.config`](https://github.com/dotnet/AspNetCore.Docs/blob/main/aspnetcore/blazor/host-and-deploy/webassembly/_samples/web.config?raw=true) 。
 
@@ -569,7 +573,7 @@ Blazor發行專案時， `web.config` 會使用下列 IIS 設定來建立檔案�
 
 ### <a name="azure-storage"></a>Azure 儲存體
 
-[Azure 儲存體](/azure/storage/) 靜態檔案裝載允許無伺服器 Blazor 應用程式裝載。 支援自訂網域名稱、Azure 內容傳遞網路 (CDN) 及 HTTPS。
+[Azure 儲存體](/azure/storage/) 的靜態檔案裝載允許無伺服器 Blazor 應用程式裝載。 支援自訂網域名稱、Azure 內容傳遞網路 (CDN) 及 HTTPS。
 
 當 Blob 服務針對儲存體帳戶上的靜態網站裝載啟用時：
 
@@ -581,7 +585,7 @@ Blazor發行專案時， `web.config` 會使用下列 IIS 設定來建立檔案�
 * 設定您的工具，在部署檔案時) 設定正確的 MIME 類型 (`Content-Type` 標頭。
 * 在部署應用程式之後，變更檔案的 MIME 類型 (`Content-Type` 標頭) 。
 
-  在儲存體 Explorer 中，針對每個檔案 (Azure 入口網站) ：
+  在儲存體總管 (Azure 入口網站每個檔案的) ：
   
   1. 以滑鼠右鍵按一下檔案，然後選取 [ **屬性**]。
   1. 設定 **ContentType** ，然後選取 [ **儲存** ] 按鈕。
@@ -706,7 +710,7 @@ http {
   "commandLineArgs": "--contentroot=/content-root-path"
   ```
 
-* 在 Visual Studio 中，于 [**屬性**]  >  **調試**  >  **程式引數** 中指定引數。 在 Visual Studio 屬性頁中設定引數，會將引數新增至檔案 `launchSettings.json` 。
+* 在 Visual Studio 中，于 [**屬性**]  >  **調試**  >  **程式引數** 中指定引數。 在 [Visual Studio] 屬性頁中設定引數，會將引數新增至檔案 `launchSettings.json` 。
 
   ```console
   --contentroot=/content-root-path
@@ -731,7 +735,7 @@ http {
   "commandLineArgs": "--pathbase=/relative-URL-path"
   ```
 
-* 在 Visual Studio 中，于 [**屬性**]  >  **調試**  >  **程式引數** 中指定引數。 在 Visual Studio 屬性頁中設定引數，會將引數新增至檔案 `launchSettings.json` 。
+* 在 Visual Studio 中，于 [**屬性**]  >  **調試**  >  **程式引數** 中指定引數。 在 [Visual Studio] 屬性頁中設定引數，會將引數新增至檔案 `launchSettings.json` 。
 
   ```console
   --pathbase=/relative-URL-path
@@ -753,7 +757,7 @@ http {
   "commandLineArgs": "--urls=http://127.0.0.1:0"
   ```
 
-* 在 Visual Studio 中，于 [**屬性**]  >  **調試**  >  **程式引數** 中指定引數。 在 Visual Studio 屬性頁中設定引數，會將引數新增至檔案 `launchSettings.json` 。
+* 在 Visual Studio 中，于 [**屬性**]  >  **調試**  >  **程式引數** 中指定引數。 在 [Visual Studio] 屬性頁中設定引數，會將引數新增至檔案 `launchSettings.json` 。
 
   ```console
   --urls=http://127.0.0.1:0
@@ -785,7 +789,7 @@ Blazor 在每個發行組建上執行中繼語言 (IL) 連結，以從輸出元�
 
 `loadBootResource` 參數會出現在下表中。
 
-| 參數    | Description |
+| 參數    | 描述 |
 | ------------ | ----------- |
 | `type`       | 資源類型。 運算子類型： `assembly` 、 `pdb` 、 `dotnetjs` 、 `dotnetwasm` 、 `timezonedata` |
 | `name`       | 資源名稱。 |

@@ -19,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/components/data-binding
-ms.openlocfilehash: 5f1e9963a7b62b90ee492bebe9bfc357a8090caf
-ms.sourcegitcommit: b81327f1a62e9857d9e51fb34775f752261a88ae
+ms.openlocfilehash: 6e2d295289d268ef306cae53a6fbdbaac309cb87
+ms.sourcegitcommit: 7923a9ec594690f01e0c9c6df3416c239e6745fb
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 03/25/2021
-ms.locfileid: "105051032"
+ms.lasthandoff: 03/31/2021
+ms.locfileid: "106081542"
 ---
 # <a name="aspnet-core-blazor-data-binding"></a>ASP.NET Core Blazor 資料系結
 
@@ -157,7 +157,7 @@ private DateTimeOffset? dateOffset;
 
 ## <a name="custom-binding-formats"></a>自訂系結格式
 
-[C # `get` 和 `set` 存取](/dotnet/csharp/programming-guide/classes-and-structs/using-properties) 子可以用來建立自訂系結格式行為，如下列元件所示 `DecimalBinding` 。 元件 pesudo 會透過 `<input>` `string` 屬性 () ，將一個或多個小數位數的十進位或負數值系結至元素 `DecimalValue` 。
+[C # `get` 和 `set` 存取](/dotnet/csharp/programming-guide/classes-and-structs/using-properties) 子可以用來建立自訂系結格式行為，如下列元件所示 `DecimalBinding` 。 元件會透過 `<input>` `string` 屬性 () ，將一個正或負的十進位與最多三個小數位數系結至元素 `DecimalValue` 。
 
 `Pages/DecimalBinding.razor`:
 

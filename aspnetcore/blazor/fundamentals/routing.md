@@ -19,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/fundamentals/routing
-ms.openlocfilehash: 960da99b6ed2ab0d71d13c443239b0f19ac88a49
-ms.sourcegitcommit: 4bbc69f51c59bed1a96aa46f9f5dca2f2a2634cb
+ms.openlocfilehash: cfc540e00593c9a886b342cfe5998498b6500c31
+ms.sourcegitcommit: 7923a9ec594690f01e0c9c6df3416c239e6745fb
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 03/25/2021
-ms.locfileid: "105554859"
+ms.lasthandoff: 03/31/2021
+ms.locfileid: "106081412"
 ---
 # <a name="aspnet-core-blazor-routing"></a>ASP.NET Core Blazor 路由
 
@@ -162,7 +162,7 @@ ms.locfileid: "105554859"
 
 ::: moniker-end
 
-使用 [`OnParametersSet`](xref:blazor/components/lifecycle#after-parameters-are-set-onparameterssetasync) 取代 [`OnInitialized`](xref:blazor/components/lifecycle#component-initialization-methods-oninitializedasync) 來允許使用不同的選擇性參數值，將應用程式流覽至相同的元件。 根據上述範例， `OnParametersSet` 當使用者應該要能夠從移至或移至時，請使用 `/RouteParameter` `/RouteParameter/amazing` `/RouteParameter/amazing` `/RouteParameter` ：
+使用 [`OnParametersSet`](xref:blazor/components/lifecycle#after-parameters-are-set-onparameterssetasync) 取代 [`OnInitialized{Async}`](xref:blazor/components/lifecycle#component-initialization-oninitializedasync) 來允許使用不同的選擇性參數值，將應用程式流覽至相同的元件。 根據上述範例， `OnParametersSet` 當使用者應該要能夠從移至或移至時，請使用 `/RouteParameter` `/RouteParameter/amazing` `/RouteParameter/amazing` `/RouteParameter` ：
 
 ```csharp
 protected override void OnParametersSet()
@@ -198,14 +198,14 @@ protected override void OnParametersSet()
 
 | 條件約束 | 範例           | 範例相符項目                                                                  | 非變異值<br>culture<br>比對 |
 | ---------- | ----------------- | -------------------------------------------------------------------------------- | :------------------------------: |
-| `bool`     | `{active:bool}`   | `true`, `FALSE`                                                                  | No                               |
-| `datetime` | `{dob:datetime}`  | `2016-12-31`, `2016-12-31 7:32pm`                                                | Yes                              |
-| `decimal`  | `{price:decimal}` | `49.99`, `-1,000.01`                                                             | Yes                              |
-| `double`   | `{weight:double}` | `1.234`, `-1,001.01e8`                                                           | Yes                              |
-| `float`    | `{weight:float}`  | `1.234`, `-1,001.01e8`                                                           | Yes                              |
-| `guid`     | `{id:guid}`       | `CD2C1638-1638-72D5-1638-DEADBEEF1638`, `{CD2C1638-1638-72D5-1638-DEADBEEF1638}` | No                               |
-| `int`      | `{id:int}`        | `123456789`, `-123456789`                                                        | Yes                              |
-| `long`     | `{ticks:long}`    | `123456789`, `-123456789`                                                        | Yes                              |
+| `bool`     | `{active:bool}`   | `true`, `FALSE`                                                                  | 否                               |
+| `datetime` | `{dob:datetime}`  | `2016-12-31`, `2016-12-31 7:32pm`                                                | 是                              |
+| `decimal`  | `{price:decimal}` | `49.99`, `-1,000.01`                                                             | 是                              |
+| `double`   | `{weight:double}` | `1.234`, `-1,001.01e8`                                                           | 是                              |
+| `float`    | `{weight:float}`  | `1.234`, `-1,001.01e8`                                                           | 是                              |
+| `guid`     | `{id:guid}`       | `CD2C1638-1638-72D5-1638-DEADBEEF1638`, `{CD2C1638-1638-72D5-1638-DEADBEEF1638}` | 否                               |
+| `int`      | `{id:int}`        | `123456789`, `-123456789`                                                        | 是                              |
+| `long`     | `{ticks:long}`    | `123456789`, `-123456789`                                                        | 是                              |
 
 > [!WARNING]
 > 確認 URL 可以轉換成 CLR 類型的路由條件約束 (例如 `int` 或 <xref:System.DateTime>) 一律使用不因國別而異的文化特性。 這些條件約束假設 URL 不可當地語系化。

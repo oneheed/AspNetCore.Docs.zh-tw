@@ -19,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/components/index
-ms.openlocfilehash: f8bd8817a7950c8fa260febabf39a386d6b5e556
-ms.sourcegitcommit: 4bbc69f51c59bed1a96aa46f9f5dca2f2a2634cb
+ms.openlocfilehash: d1cfc17bb444abea99cdf6570862ed8d37810c94
+ms.sourcegitcommit: 7923a9ec594690f01e0c9c6df3416c239e6745fb
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 03/25/2021
-ms.locfileid: "105555028"
+ms.lasthandoff: 03/31/2021
+ms.locfileid: "106081529"
 ---
 # <a name="create-and-use-aspnet-core-razor-components"></a>建立和使用 ASP.NET Core Razor 元件
 
@@ -311,7 +311,46 @@ public string Title { get; set; } = "Panel Title from Child";
   * `person`物件的 `Name` 屬性。
 
   `Pages/ParentComponent.razor`:
+
+  ::: moniker range=">= aspnetcore-5.0"
+
+  ```razor
+  <ChildComponent Title="@title">
+      Title from field.
+  </ChildComponent>
   
+  <ChildComponent Title="@GetTitle()">
+      Title from method.
+  </ChildComponent>
+  
+  <ChildComponent Title="@DateTime.Now.ToLongDateString()">
+      Title from implicit Razor expression.
+  </ChildComponent>
+  
+  <ChildComponent Title="@person.Name">
+      Title from implicit Razor expression.
+  </ChildComponent>
+  
+  @code {
+      private string title = "Panel Title from Parent";
+      private Person person = new();
+      
+      private string GetTitle()
+      {
+          return "Panel Title from Parent";
+      }
+      
+      private class Person
+      {
+          public string Name { get; set; } = "Dr. Who";
+      }
+  }
+  ```
+
+  ::: moniker-end
+
+  ::: moniker range="< aspnetcore-5.0"
+
   ```razor
   <ChildComponent Title="@title">
       Title from field.
@@ -344,6 +383,8 @@ public string Title { get; set; } = "Panel Title from Child";
       }
   }
   ```
+
+  ::: moniker-end
   
   不同于 Razor () 的頁面 `.cshtml` ，轉譯 Blazor 元件時無法在運算式中執行非同步工作 Razor 。 這是因為 Blazor 是針對呈現互動式 ui 所設計。 在互動式 UI 中，畫面必須一律顯示一些東西，因此封鎖轉譯流程沒有意義。 相反地，非同步工作是在其中一個 [非同步生命週期事件](xref:blazor/components/lifecycle)中執行。 在每個非同步生命週期事件之後，元件可能會再次轉譯。 Razor**不** 支援下列語法：
   
@@ -357,7 +398,7 @@ public string Title { get; set; } = "Panel Title from Child";
   
   > ' Await ' 運算子只能在非同步方法中使用。 請考慮以 ' async ' 修飾元標記此方法，並將其傳回類型變更為 ' Task '。
 
-  為了取得 `Title` 上述範例 asychronously 中的參數值，元件可以使用[ `OnInitializedAsync` 生命週期事件](xref:blazor/components/lifecycle#component-initialization-methods-oninitializedasync)，如下列範例所示：
+  為了取得 `Title` 上述範例 asychronously 中的參數值，元件可以使用[ `OnInitializedAsync` 生命週期事件](xref:blazor/components/lifecycle#component-initialization-oninitializedasync)，如下列範例所示：
   
   ```razor
   <ChildComponent Title="@title">
@@ -421,12 +462,35 @@ public string Title { get; set; } = "Panel Title from Child";
   > 元件屬性不支援複雜的內容 (混合的 c # 和標記) 。
   
   若要支援所組成值的指派，請使用方法、欄位或屬性。 下列範例會在 c # 方法中執行 "SKU-" 的 concatination 和產品的存貨編號 `GetTitle` ：
-  
+
+  ::: moniker range=">= aspnetcore-5.0"
+
   ```razor
   <ChildComponent Title="@GetTitle()">
       Composed title from method.
   </ChildComponent>
-  
+
+  @code {
+      private Product product = new();
+
+      private string GetTitle() => $"SKU-{product.SKU}";
+      
+      private class Product
+      {
+          public string SKU { get; set; } = "12345";
+      }
+  }
+  ```
+
+  ::: moniker-end
+
+  ::: moniker range="< aspnetcore-5.0"
+
+  ```razor
+  <ChildComponent Title="@GetTitle()">
+      Composed title from method.
+  </ChildComponent>
+
   @code {
       private Product product = new Product();
 
@@ -438,7 +502,9 @@ public string Title { get; set; } = "Panel Title from Child";
       }
   }
   ```
-  
+
+  ::: moniker-end
+
 如需詳細資訊，請參閱<xref:mvc/views/razor>。
 
 > [!WARNING]
@@ -955,7 +1021,7 @@ Blazor架構通常會施加安全的父系對子參數指派：
 下列修訂的 `Expander` 元件：
 
 * 接受 `Expanded` 來自父系的元件參數值。
-* 將元件參數值指派給 `expanded` [OnInitialized 事件](xref:blazor/components/lifecycle#component-initialization-methods-oninitializedasync)中 () 的私用欄位。
+* 將元件參數值指派給在 `expanded` [ `OnInitialized` 事件](xref:blazor/components/lifecycle#component-initialization-oninitializedasync)中 () 的私用欄位。
 * 使用私用欄位來維護其內部切換狀態，以示範如何避免直接寫入參數。
 
 ```razor

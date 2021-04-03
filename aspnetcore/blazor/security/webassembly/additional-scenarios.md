@@ -19,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/security/webassembly/additional-scenarios
-ms.openlocfilehash: ad172cb8d6a44db67feafed0245c33952dd5a30a
-ms.sourcegitcommit: 4bbc69f51c59bed1a96aa46f9f5dca2f2a2634cb
+ms.openlocfilehash: 7320a9ec93b25d26fbf2ecbecfdd9a4ced908289
+ms.sourcegitcommit: 7923a9ec594690f01e0c9c6df3416c239e6745fb
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 03/25/2021
-ms.locfileid: "105554690"
+ms.lasthandoff: 03/31/2021
+ms.locfileid: "106081360"
 ---
 # <a name="aspnet-core-blazor-webassembly-additional-security-scenarios"></a>ASP.NET Core Blazor WebAssembly 額外的安全性案例
 
@@ -399,7 +399,7 @@ IP 發出給使用者的權杖通常會在短時間內有效（大約一小時�
 
 當令牌要求失敗時，您必須決定是否要儲存任何目前的狀態，然後再執行重新導向。 有幾種方法存在，並增加複雜度：
 
-* 將目前的頁面狀態儲存在會話儲存體中。 在[ `OnInitializedAsync` 生命週期事件](xref:blazor/components/lifecycle#component-initialization-methods-oninitializedasync) (<xref:Microsoft.AspNetCore.Components.ComponentBase.OnInitializedAsync%2A>) 期間，檢查是否可還原狀態後再繼續。
+* 將目前的頁面狀態儲存在會話儲存體中。 在[ `OnInitializedAsync` 生命週期方法](xref:blazor/components/lifecycle#component-initialization-oninitializedasync) (<xref:Microsoft.AspNetCore.Components.ComponentBase.OnInitializedAsync%2A>) 期間，檢查是否可還原狀態後再繼續。
 * 新增查詢字串參數，並使用該參數做為應用程式的信號，以指示應用程式需要重新以提供先前儲存的狀態。
 * 新增具有唯一識別碼的查詢字串參數，以在會話儲存體中儲存資料，而不會與其他專案發生風險衝突。
 

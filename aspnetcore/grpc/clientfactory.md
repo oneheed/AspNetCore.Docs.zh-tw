@@ -4,7 +4,7 @@ author: jamesnk
 description: 瞭解如何使用用戶端 factory 建立 gRPC 用戶端。
 monikerRange: '>= aspnetcore-3.0'
 ms.author: jamesnk
-ms.date: 03/19/2021
+ms.date: 04/01/2021
 no-loc:
 - appsettings.json
 - ASP.NET Core Identity
@@ -18,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: grpc/clientfactory
-ms.openlocfilehash: ea5181bd44a5deafdc6634b31b9efeda2884b58c
-ms.sourcegitcommit: 1f35de0ca9ba13ea63186c4dc387db4fb8e541e0
+ms.openlocfilehash: ba03efe902f8510eaa81bbafaf948ef25a8e351a
+ms.sourcegitcommit: f67ba959d3cbfe33b32fa6a5eae1a5ae9de18167
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 03/20/2021
-ms.locfileid: "104711499"
+ms.lasthandoff: 04/02/2021
+ms.locfileid: "106179713"
 ---
 # <a name="grpc-client-factory-integration-in-net"></a>.NET 中的 gRPC 用戶端工廠整合
 
@@ -114,6 +114,8 @@ services
         o.Credentials = new CustomCredentials();
     });
 ```
+
+GRPC 攔截器或通道認證可以用來傳送 `Authorization` 每個要求的中繼資料。 如需設定驗證的詳細資訊，請參閱 [使用 gRPC 用戶端 Factory 傳送持有人權杖](xref:grpc/authn-and-authz#bearer-token-with-grpc-client-factory)。
 
 ## <a name="deadline-and-cancellation-propagation"></a>期限和取消傳播
 

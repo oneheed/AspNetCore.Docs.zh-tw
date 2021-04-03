@@ -1,7 +1,7 @@
 ---
 title: 裝載和部署 ASP.NET Core Blazor Server
 author: guardrex
-description: 瞭解如何 Blazor Server 使用 ASP.NET Core 裝載和部署應用程式。
+description: 瞭解如何使用 ASP.NET Core 來裝載和部署 Blazor Server 應用程式。
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
@@ -19,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/host-and-deploy/server
-ms.openlocfilehash: bac6f4a6595558f32779286bcc09c266663a2d24
-ms.sourcegitcommit: 1436bd4d70937d6ec3140da56d96caab33c4320b
+ms.openlocfilehash: fd5ea02be9396b2c1418ac82b6a4be79ec2b4849
+ms.sourcegitcommit: 7923a9ec594690f01e0c9c6df3416c239e6745fb
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 03/06/2021
-ms.locfileid: "102394976"
+ms.lasthandoff: 03/31/2021
+ms.locfileid: "106081347"
 ---
 # <a name="host-and-deploy-blazor-server"></a>裝載和部署 Blazor Server
 
@@ -36,7 +36,7 @@ ms.locfileid: "102394976"
 
 使用[ Blazor Server 裝載模型](xref:blazor/hosting-models#blazor-server)， Blazor 會在伺服器上從 ASP.NET Core 應用程式內執行。 UI 更新、事件處理及 JavaScript 呼叫會透過連接來處理 [SignalR](xref:signalr/introduction) 。
 
-需要能夠裝載 ASP.NET Core 應用程式的網路伺服器。 使用命令) 時，Visual Studio 會包含 **Blazor Server 應用程式** 專案範本 (`blazorserverside` 範本 [`dotnet new`](/dotnet/core/tools/dotnet-new) 。 如需專案範本的詳細資訊 Blazor ，請參閱 <xref:blazor/project-structure> 。
+需要能夠裝載 ASP.NET Core 應用程式的網路伺服器。 使用命令) 時，Visual Studio 包含 **Blazor Server 應用程式** 專案範本 (`blazorserverside` 範本 [`dotnet new`](/dotnet/core/tools/dotnet-new) 。 如需專案範本的詳細資訊 Blazor ，請參閱 <xref:blazor/project-structure> 。
 
 ## <a name="scalability"></a>延展性
 
@@ -54,13 +54,13 @@ ms.locfileid: "102394976"
 
 如需建立安全且可擴充的 Blazor 伺服器應用程式的指引，請參閱 <xref:blazor/security/server/threat-mitigation> 。
 
-每個線路都使用大約 250 KB 的記憶體，以取得基本的 *Hello World* 樣式應用程式。 電路的大小取決於應用程式的程式碼，以及與每個元件相關聯的狀態維護需求。 建議您在開發期間測量應用程式和基礎結構的資源需求，但下列基準可作為規劃部署目標的起點：如果您希望應用程式支援5000的並行使用者，請考慮將至少 1.3 GB 的伺服器記憶體預算為應用程式 (或 ~ 每位使用者) ~ 273 KB。
+針對基本的 *Hello World* 樣式應用程式，每個線路會使用大約 250 KB 的記憶體。 電路的大小取決於應用程式的程式碼，以及與每個元件相關聯的狀態維護需求。 建議您在開發期間測量應用程式和基礎結構的資源需求，但下列基準可作為規劃部署目標的起點：如果您希望應用程式支援5000的並行使用者，請考慮將至少 1.3 GB 的伺服器記憶體預算為應用程式 (或 ~ 每位使用者) ~ 273 KB。
 
 ### <a name="signalr-configuration"></a>SignalR 配置
 
 Blazor Server 應用程式會使用 ASP.NET Core SignalR 與瀏覽器進行通訊。 [ SignalR 的裝載和調整條件](xref:signalr/publish-to-azure-web-app)適用于 Blazor Server 應用程式。
 
-Blazor 使用 Websocket 作為傳輸的最佳方式 SignalR ，是因為延遲、可靠性和 [安全性](xref:signalr/security)較低。 SignalR當 websocket 無法使用時，或當應用程式明確設定為使用長時間輪詢時，就會使用長時間輪詢。 部署至 Azure App Service 時，請將應用程式設定為使用 Azure 入口網站設定中服務的 Websocket。 如需設定 Azure App Service 應用程式的詳細資訊，請參閱[ SignalR 發佈指導方針](xref:signalr/publish-to-azure-web-app)。
+Blazor 使用 Websocket 作為傳輸的最佳方式 SignalR ，是因為延遲、可靠性和 [安全性](xref:signalr/security)較低。 SignalR當 websocket 無法使用時，或當應用程式明確設定為使用長時間輪詢時，就會使用長時間輪詢。 部署至 Azure App Service 時，請將應用程式設定為在服務的 Azure 入口網站設定中使用 Websocket。 如需設定應用程式以進行 Azure App Service 的詳細資訊，請參閱[ SignalR 發佈指導方針](xref:signalr/publish-to-azure-web-app)。
 
 #### <a name="azure-signalr-service"></a>Azure SignalR 服務
 
@@ -104,11 +104,11 @@ Blazor 使用 Websocket 作為傳輸的最佳方式 SignalR ，是因為延遲�
 
 若要 SignalR 在 Visual Studio 中布建應用程式的 Azure 服務：
 
-1. 在 Visual Studio 中建立應用程式的 Azure 應用程式發行設定檔 Blazor Server 。
+1. 在應用程式的 Visual Studio 中建立 Azure 應用程式發佈設定檔 Blazor Server 。
 1. 將 **Azure SignalR 服務** 相依性新增至設定檔。 如果 Azure 訂用帳戶沒有預先存在的 Azure SignalR 服務實例可指派給該應用程式，請選取 [ **建立新的 azure SignalR 服務實例** ] 以布建新的服務實例。
 1. 將應用程式發佈至 Azure。
 
-SignalR在 Visual Studio 中布建 Azure 服務會自動 [啟用「*粘滯話*](#configuration) 」，並將 SignalR 連接字串新增至 app Service 的設定。
+SignalR在 Visual Studio 中布建 Azure 服務會自動 [啟用 *粘滯會話*](#configuration) ，並將 SignalR 連接字串新增至 app Service 的設定。
 
 #### <a name="iis"></a>IIS
 

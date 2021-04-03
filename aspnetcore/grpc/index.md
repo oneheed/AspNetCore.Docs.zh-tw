@@ -4,7 +4,7 @@ author: juntaoluo
 description: 了解搭配 Kestrel 伺服器及 ASP.NET Core 堆疊的 gRPC 服務。
 monikerRange: '>= aspnetcore-3.0'
 ms.author: johluo
-ms.date: 09/20/2019
+ms.date: 03/29/2021
 no-loc:
 - appsettings.json
 - ASP.NET Core Identity
@@ -18,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: grpc/index
-ms.openlocfilehash: 5820049aba90a2fbd06a23756b12ac9656c3b2c4
-ms.sourcegitcommit: 83524f739dd25fbfa95ee34e95342afb383b49fe
+ms.openlocfilehash: e4648641f79961d6e3c66ecf0b7629732afd2723
+ms.sourcegitcommit: 7354c2029164702d075fd3786d96a92c6d49bc6e
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 01/29/2021
-ms.locfileid: "99057508"
+ms.lasthandoff: 04/01/2021
+ms.locfileid: "106164288"
 ---
 # <a name="introduction-to-grpc-on-net"></a>.NET 上的 gRPC 簡介
 
@@ -80,7 +80,13 @@ message HelloReply {
 
 ## <a name="grpc-services-on-aspnet-core"></a>ASP.NET Core 上的 gRPC 服務
 
-gRPC 服務可以裝載在 ASP.NET Core 上。 服務與熱門的 ASP.NET Core 功能完全整合，例如記錄、相依性插入 (DI) 、驗證和授權。
+gRPC 服務可以裝載在 ASP.NET Core 上。 服務具有與 ASP.NET Core 功能的完整整合，例如記錄、相依性插入 (DI) 、驗證和授權。
+
+### <a name="add-grpc-services-to-an-aspnet-core-app"></a>將 gRPC 服務新增至 ASP.NET Core 應用程式
+
+gRPC 需要 [gRPC. AspNetCore](https://www.nuget.org/packages/Grpc.AspNetCore) 套件。 如需在 .NET 應用程式中設定 gRPC 的詳細資訊，請參閱 [設定 gRPC](xref:grpc/aspnetcore#configure-grpc)。
+
+### <a name="the-grpc-service-project-template"></a>GRPC 服務專案範本
 
 GRPC 服務專案範本提供入門服務：
 
@@ -106,7 +112,7 @@ public class GreeterService : Greeter.GreeterBase
 }
 ```
 
-`GreeterService`繼承自從 `GreeterBase` `Greeter` *\* proto* 檔案中的服務產生的類型。 服務可供 *Startup.cs* 中的用戶端存取：
+`GreeterService`繼承自從 `GreeterBase` `Greeter` *\* proto* 檔案中的服務產生的類型。 啟動中的用戶端可以存取此服務 *。 .cs*：
 
 ```csharp
 app.UseEndpoints(endpoints =>

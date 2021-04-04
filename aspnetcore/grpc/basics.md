@@ -18,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: grpc/basics
-ms.openlocfilehash: 4968ac889cd3b4e0780ce73dc729d0107a416932
-ms.sourcegitcommit: 3593c4efa707edeaaceffbfa544f99f41fc62535
+ms.openlocfilehash: 37f3b0c902d272cf8970265c8e964a1b2a7ddf00
+ms.sourcegitcommit: 7e593abc85602429d94a20603936a4725838aeea
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 01/04/2021
-ms.locfileid: "93061011"
+ms.lasthandoff: 04/04/2021
+ms.locfileid: "106293433"
 ---
 # <a name="grpc-services-with-c"></a>使用 C gRPC 服務\#
 
@@ -76,7 +76,7 @@ gRPC 使用合約優先的方法來開發 API。 根據預設， (protobuf) 的�
 
 用戶端專案應該直接參考 `Grpc.Tools` 使用 gRPC 用戶端所需的其他套件。 在執行時間不需要工具套件，因此相依性會標示為 `PrivateAssets="All"` ：
 
-[!code-xml[](~/tutorials/grpc/grpc-start/sample/GrpcGreeterClient/GrpcGreeterClient.csproj?highlight=3&range=9-11)]
+[!code-xml[](~/tutorials/grpc/grpc-start/sample/GrpcGreeterClient/GrpcGreeterClient.csproj?highlight=3&range=9-14)]
 
 ## <a name="generated-c-assets"></a>產生的 c # 資產
 

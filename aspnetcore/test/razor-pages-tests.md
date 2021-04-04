@@ -19,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: test/razor-pages-tests
-ms.openlocfilehash: a67f51561d0a165db04418f2040ffe68e3ebe8ce
-ms.sourcegitcommit: 54fe1ae5e7d068e27376d562183ef9ddc7afc432
+ms.openlocfilehash: 7f63426bdfc3492e2d529af8cf19cc539db4371c
+ms.sourcegitcommit: 7e593abc85602429d94a20603936a4725838aeea
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 03/10/2021
-ms.locfileid: "102588486"
+ms.lasthandoff: 04/04/2021
+ms.locfileid: "106293430"
 ---
 # <a name="razor-pages-unit-tests-in-aspnet-core"></a>Razor ASP.NET Core 中的頁面單元測試
 
@@ -47,12 +47,12 @@ ASP.NET Core 支援 Razor 頁面應用程式的單元測試。 資料存取層 (
 
 範例專案是由兩個應用程式所組成：
 
-| 應用程式         | 專案資料夾                     | Description |
+| 應用程式         | 專案資料夾                     | 描述 |
 | ----------- | ---------------------------------- | ----------- |
 | 訊息應用程式 | *src/ Razor PagesTestSample*         | 可讓使用者新增訊息、刪除一則訊息、刪除所有訊息，以及分析訊息 (尋找每個訊息的平均單字數目) 。 |
 | 測試應用程式    | *測試/ Razor PagesTestSample* | 用來對訊息應用程式的 DAL 和索引頁面模型進行單元測試。 |
 
-您可以使用 IDE 的內建測試功能來執行測試，例如 [Visual studio](/visualstudio/test/unit-test-your-code) 或 [Visual studio for Mac](/dotnet/core/tutorials/using-on-mac-vs-full-solution)。 如果使用 [Visual Studio Code](https://code.visualstudio.com/) 或命令列，請在 [ *測試/ Razor PagesTestSample* ] 資料夾的命令提示字元中執行下列命令：
+您可以使用 IDE 的內建測試功能來執行測試，例如 [Visual Studio](/visualstudio/test/unit-test-your-code) 或 [Visual Studio for Mac](/dotnet/core/tutorials/using-on-mac-vs-full-solution)。 如果使用 [Visual Studio Code](https://code.visualstudio.com/) 或命令列，請在 [ *測試/ Razor PagesTestSample* ] 資料夾的命令提示字元中執行下列命令：
 
 ```dotnetcli
 dotnet test
@@ -64,7 +64,7 @@ dotnet test
 
 * 應用程式的 [索引] 頁面 (*Pages/index. cshtml* 和 *pages/index. CSHTML*) 提供 UI 和頁面模型方法來控制訊息的新增、刪除和分析， (尋找每個訊息) 的平均單字數。
 * 訊息是由 `Message` 類別 (*Data/message .cs*) 所描述，其中包含兩個屬性： `Id` (索引鍵) 和 `Text` (訊息) 。 `Text`屬性是必要的，且限制為200個字元。
-* 訊息是使用 [Entity Framework 的記憶體內部資料庫](/ef/core/providers/in-memory/) 來儲存&#8224;。
+* 訊息是使用 [Entity Framework 的記憶體內部資料庫](/ef/core/providers/in-memory/)&#8224; 來儲存。
 * 應用程式在其資料庫內容類別中包含 DAL， `AppDbContext` (*Data/AppDbCoNtext .cs*) 。 DAL 方法會標示為 `virtual` ，可讓您模擬要在測試中使用的方法。
 * 如果應用程式啟動時資料庫是空的，則會使用三個訊息來初始化訊息存放區。 這些 *植* 入的訊息也會在測試中使用。
 
@@ -76,9 +76,9 @@ dotnet test
 
 測試應用程式是 [ *測試/ Razor PagesTestSample* ] 資料夾內的主控台應用程式。
 
-| 測試應用程式資料夾 | Description |
+| 測試應用程式資料夾 | 描述 |
 | --------------- | ----------- |
-| *UnitTests*     | <ul><li>*DataAccessLayerTest.cs* 包含 DAL 的單元測試。</li><li>*IndexPageTests.cs* 包含索引頁面模型的單元測試。</li></ul> |
+| *UnitTests*     | <ul><li>*DataAccessLayerTest* 包含 DAL 的單元測試。</li><li>*IndexPageTests* 包含索引頁面模型的單元測試。</li></ul> |
 | *公用程式*     | 包含 `TestDbContextOptions` 用來為每個 DAL 單元測試建立新資料庫內容選項的方法，以便將資料庫重設為每個測試的基準條件。 |
 
 測試架構為 [xUnit](https://xunit.github.io/)。 物件模擬架構為 [Moq](https://github.com/moq/moq4)。
@@ -231,12 +231,12 @@ ASP.NET Core 支援 Razor 頁面應用程式的單元測試。 資料存取層 (
 
 範例專案是由兩個應用程式所組成：
 
-| 應用程式         | 專案資料夾                     | Description |
+| 應用程式         | 專案資料夾                     | 描述 |
 | ----------- | ---------------------------------- | ----------- |
 | 訊息應用程式 | *src/ Razor PagesTestSample*         | 可讓使用者新增訊息、刪除一則訊息、刪除所有訊息，以及分析訊息 (尋找每個訊息的平均單字數目) 。 |
 | 測試應用程式    | *測試/ Razor PagesTestSample* | 用來對訊息應用程式的 DAL 和索引頁面模型進行單元測試。 |
 
-您可以使用 IDE 的內建測試功能來執行測試，例如 [Visual studio](/visualstudio/test/unit-test-your-code) 或 [Visual studio for Mac](/dotnet/core/tutorials/using-on-mac-vs-full-solution)。 如果使用 [Visual Studio Code](https://code.visualstudio.com/) 或命令列，請在 [ *測試/ Razor PagesTestSample* ] 資料夾的命令提示字元中執行下列命令：
+您可以使用 IDE 的內建測試功能來執行測試，例如 [Visual Studio](/visualstudio/test/unit-test-your-code) 或 [Visual Studio for Mac](/dotnet/core/tutorials/using-on-mac-vs-full-solution)。 如果使用 [Visual Studio Code](https://code.visualstudio.com/) 或命令列，請在 [ *測試/ Razor PagesTestSample* ] 資料夾的命令提示字元中執行下列命令：
 
 ```dotnetcli
 dotnet test
@@ -248,7 +248,7 @@ dotnet test
 
 * 應用程式的 [索引] 頁面 (*Pages/index. cshtml* 和 *pages/index. CSHTML*) 提供 UI 和頁面模型方法來控制訊息的新增、刪除和分析， (尋找每個訊息) 的平均單字數。
 * 訊息是由 `Message` 類別 (*Data/message .cs*) 所描述，其中包含兩個屬性： `Id` (索引鍵) 和 `Text` (訊息) 。 `Text`屬性是必要的，且限制為200個字元。
-* 訊息是使用 [Entity Framework 的記憶體內部資料庫](/ef/core/providers/in-memory/) 來儲存&#8224;。
+* 訊息是使用 [Entity Framework 的記憶體內部資料庫](/ef/core/providers/in-memory/)&#8224; 來儲存。
 * 應用程式在其資料庫內容類別中包含 DAL， `AppDbContext` (*Data/AppDbCoNtext .cs*) 。 DAL 方法會標示為 `virtual` ，可讓您模擬要在測試中使用的方法。
 * 如果應用程式啟動時資料庫是空的，則會使用三個訊息來初始化訊息存放區。 這些 *植* 入的訊息也會在測試中使用。
 
@@ -260,9 +260,9 @@ dotnet test
 
 測試應用程式是 [ *測試/ Razor PagesTestSample* ] 資料夾內的主控台應用程式。
 
-| 測試應用程式資料夾 | Description |
+| 測試應用程式資料夾 | 描述 |
 | --------------- | ----------- |
-| *UnitTests*     | <ul><li>*DataAccessLayerTest.cs* 包含 DAL 的單元測試。</li><li>*IndexPageTests.cs* 包含索引頁面模型的單元測試。</li></ul> |
+| *UnitTests*     | <ul><li>*DataAccessLayerTest* 包含 DAL 的單元測試。</li><li>*IndexPageTests* 包含索引頁面模型的單元測試。</li></ul> |
 | *公用程式*     | 包含 `TestDbContextOptions` 用來為每個 DAL 單元測試建立新資料庫內容選項的方法，以便將資料庫重設為每個測試的基準條件。 |
 
 測試架構為 [xUnit](https://xunit.github.io/)。 物件模擬架構為 [Moq](https://github.com/moq/moq4)。
@@ -390,7 +390,7 @@ using (var db = new AppDbContext(Utilities.TestDbContextOptions()))
 * <xref:test/integration-tests>
 * [xUnit.net](https://xunit.github.io/)
 * [使用 Visual Studio for Mac 在 macOS 上建置完整的 .NET Core 方案](/dotnet/core/tutorials/using-on-mac-vs-full-solution)
-* [開始使用 xUnit.net：搭配使用 .NET Core 與 .NET SDK 命令列](https://xunit.github.io/docs/getting-started-dotnet-core)
+* [開始使用 xUnit.net：搭配使用 .NET Core 與 .NET SDK 命令列](https://xunit.net/docs/getting-started/netcore/cmdline)
 * [Moq](https://github.com/moq/moq4)
 * [Moq 快速入門](https://github.com/Moq/moq4/wiki/Quickstart)
 * [JustMockLite](https://github.com/telerik/JustMockLite)：適用于 .net 開發人員的模擬架構。  (*不會受到 Microsoft 的維護或支援*) 

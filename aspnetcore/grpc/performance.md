@@ -109,7 +109,7 @@ var channel = GrpcChannel.ForAddress("https://localhost", new GrpcChannelOptions
 
 對應用戶端負載平衡是一種技術，可將負載平衡狀態儲存在中央位置。 用戶端會定期查詢中央位置，以取得負載平衡決策時要使用的資訊。
 
-`Grpc.Net.Client` 目前不支援用戶端負載平衡。 如果 .NET 需要用戶端負載平衡，則 Grpc 是不錯的選擇[。](https://www.nuget.org/packages/Grpc.Core)
+`Grpc.Net.Client` 目前不支援用戶端負載平衡。 如果 .NET 需要用戶端負載平衡，則 [Grpc.Core](https://www.nuget.org/packages/Grpc.Core) 是不錯的選擇。
 
 ### <a name="proxy-load-balancing"></a>Proxy 負載平衡
 

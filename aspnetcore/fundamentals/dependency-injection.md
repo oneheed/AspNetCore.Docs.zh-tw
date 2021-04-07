@@ -17,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: fundamentals/dependency-injection
-ms.openlocfilehash: ce6804a58c5b17b57732713acc3aeca15042da0a
-ms.sourcegitcommit: 54fe1ae5e7d068e27376d562183ef9ddc7afc432
+ms.openlocfilehash: 0b545294cd44159544360a8e2414de912f3465e6
+ms.sourcegitcommit: 0abfe496fed8e9470037c8128efa8a50069ccd52
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 03/10/2021
-ms.locfileid: "102589708"
+ms.lasthandoff: 04/07/2021
+ms.locfileid: "106563833"
 ---
 # <a name="dependency-injection-in-aspnet-core"></a>.NET Core 中的相依性插入
 
@@ -151,7 +151,7 @@ public void Configure(IApplicationBuilder app, ILogger<Startup> logger)
 
 ## <a name="register-groups-of-services-with-extension-methods"></a>使用擴充方法來註冊服務群組
 
-ASP.NET Core framework 會使用註冊一組相關服務的慣例。 慣例是使用單一 `Add{GROUP_NAME}` 擴充方法來註冊架構功能所需的所有服務。 例如， <xref:Microsoft.Extensions.DependencyInjection.MvcServiceCollectionExtensions.AddControllers%2A> 擴充方法會註冊 MVC 控制器所需的服務。
+ASP.NET Core 架構使用註冊一組相關服務的慣例。 慣例是使用單一 `Add{GROUP_NAME}` 擴充方法來註冊架構功能所需的所有服務。 例如， <xref:Microsoft.Extensions.DependencyInjection.MvcServiceCollectionExtensions.AddControllers%2A> 擴充方法會註冊 MVC 控制器所需的服務。
 
 下列程式碼是由 Razor 使用個別使用者帳戶的 Pages 範本所產生，並示範如何使用擴充方法和來將其他服務新增至容器 <xref:Microsoft.Extensions.DependencyInjection.EntityFrameworkServiceCollectionExtensions.AddDbContext%2A> <xref:Microsoft.Extensions.DependencyInjection.IdentityServiceCollectionUIExtensions.AddDefaultIdentity%2A> ：
 
@@ -204,7 +204,7 @@ public class MyService
 
 ## <a name="entity-framework-contexts"></a>Entity Framework 內容
 
-根據預設，會使用限 [域存留期](#service-lifetimes) 將 Entity Framework 內容新增至服務容器，因為 web 應用程式資料庫作業的範圍通常是用戶端要求。 若要使用不同的存留期，請使用多載來指定存留期 <xref:Microsoft.Extensions.DependencyInjection.EntityFrameworkServiceCollectionExtensions.AddDbContext%2A> 。 給定存留期的服務不應使用存留期短于服務存留期的資料庫內容。
+根據預設，Entity Framework 內容會使用限 [域存留期](#service-lifetimes) 新增至服務容器，因為 web 應用程式資料庫作業的範圍通常是用戶端要求。 若要使用不同的存留期，請使用多載來指定存留期 <xref:Microsoft.Extensions.DependencyInjection.EntityFrameworkServiceCollectionExtensions.AddDbContext%2A> 。 給定存留期的服務不應使用存留期短于服務存留期的資料庫內容。
 
 ## <a name="lifetime-and-registration-options"></a>留期和註冊選項
 
@@ -260,7 +260,7 @@ public class MyService
 
 ## <a name="request-services"></a>要求服務
 
-ASP.NET 核心要求內可用的服務會透過 [RequestServices](xref:Microsoft.AspNetCore.Http.HttpContext.RequestServices) 集合公開。 從要求內要求服務時，會從集合解析服務及其相依性 `RequestServices` 。
+ASP.NET Core 要求內可用的服務會透過 [RequestServices](xref:Microsoft.AspNetCore.Http.HttpContext.RequestServices) 集合公開。 從要求內要求服務時，會從集合解析服務及其相依性 `RequestServices` 。
 
 架構會為每個要求建立一個範圍，並 `RequestServices` 公開範圍服務提供者。 只要要求為作用中狀態，所有範圍的服務都有效。
 
@@ -375,7 +375,7 @@ DI 是靜態/全域物件存取模式的「替代」選項。 如果您將 DI �
 
 ## <a name="recommended-patterns-for-multi-tenancy-in-di"></a>DI 中多租使用者的建議模式
 
-[Orchard core](https://github.com/OrchardCMS/OrchardCore) 是一種應用程式架構，可在 ASP.NET Core 上建立模組化、多租使用者應用程式。 如需詳細資訊，請參閱 [Orchard Core 檔](https://docs.orchardcore.net/en/dev/)。
+[Orchard Core](https://github.com/OrchardCMS/OrchardCore) 是一種應用程式架構，可在 ASP.NET Core 上建立模組化、多租使用者應用程式。 如需詳細資訊，請參閱 [Orchard Core 檔](https://docs.orchardcore.net/en/dev/)。
 
 如需如何使用 Orchard Core Framework 來建立模組化和多租使用者應用程式的範例，請參閱 [Orchard core 範例](https://github.com/OrchardCMS/OrchardCore.Samples) ，而不需要任何 CMS 專屬的功能。
 
@@ -548,7 +548,7 @@ public void Configure(IApplicationBuilder app, IOptions<MyOptions> options)
 
 ## <a name="framework-provided-services"></a>架構提供的服務
 
-`Startup.ConfigureServices`方法負責定義應用程式所使用的服務，包括平臺功能，例如 Entity Framework Core 和 ASP.NET CORE MVC。 一開始， `IServiceCollection` 提供給的是 `ConfigureServices` 由架構定義的服務，視 [主機的設定方式](xref:fundamentals/index#host)而定。 以 ASP.NET Core 範本為基礎的應用程式在架構中註冊了數百項服務並不罕見。 下表列出架構註冊服務的小型範例。
+`Startup.ConfigureServices`方法負責定義應用程式所使用的服務，包括平臺功能，例如 Entity Framework Core 和 ASP.NET CORE MVC。 一開始， `IServiceCollection` 提供給的是 `ConfigureServices` 由架構定義的服務，視 [主機的設定方式](xref:fundamentals/index#host)而定。 以 ASP.NET Core 範本為基礎的應用程式並不罕見，因為這是由架構所註冊的數百項服務。 下表列出架構註冊服務的小型範例。
 
 | 服務類型 | 存留期 |
 | ------------ | -------- |
@@ -783,7 +783,7 @@ services.TryAddEnumerable(ServiceDescriptor.Singleton<IMyDep1, MyDep>());
 
 ## <a name="call-services-from-main"></a>從主要呼叫服務
 
-使用 [IServiceScopeFactory.CreateScope](xref:Microsoft.Extensions.DependencyInjection.IServiceScopeFactory.CreateScope*) 建立 <xref:Microsoft.Extensions.DependencyInjection.IServiceScope>，以解析應用程式範圍中的範圍服務。 此法可用於在開機時存取範圍服務，以執行初始化工作。 下列範例示範如何在 `Program.Main` 中取得 `MyScopedService`：
+使用建立 <xref:Microsoft.Extensions.DependencyInjection.IServiceScope> <xref:Microsoft.Extensions.DependencyInjection.IServiceScopeFactory.CreateScope%2A?displayProperty=nameWithType> 來解析應用程式範圍內的範圍服務。 在啟動時使用正確的服務存留期來存取範圍服務，這種方法會很有用，以執行初始化工作。 下列範例示範如何在 `Program.Main` 中取得 `MyScopedService`：
 
 ```csharp
 using System;
@@ -823,6 +823,8 @@ public class Program
             .UseStartup<Startup>();
 }
 ```
+
+不需要建立暫時性服務的範圍，包括 `ILogger` 前述範例中的， (請參閱： <xref:fundamentals/logging/index#create-logs-in-main>) 。 從根解析時，Transients 不會將不經意解析為 singleton，因為已設定範圍的服務。 Transients 會在要求時建立。 如果暫時性服務可以處置，則會在處置之前以容器為基礎。 如需範例，請參閱 <xref:fundamentals/http-requests#use-ihttpclientfactory-in-a-console-app>。
 
 ## <a name="scope-validation"></a>範圍驗證
 
@@ -944,7 +946,7 @@ public void ConfigureServices(IServiceCollection services)
 * `Func<T>` 支援延遲初始設定
 * 以慣例為基礎的註冊
 
-下列協力廠商容器可與 ASP.NET Core 應用程式搭配使用：
+下列協力廠商容器可搭配 ASP.NET Core apps 使用：
 
 * [Autofac](https://autofac.readthedocs.io/en/latest/integration/aspnetcore.html)
 * [DryIoc](https://www.nuget.org/packages/DryIoc.Microsoft.DependencyInjection)

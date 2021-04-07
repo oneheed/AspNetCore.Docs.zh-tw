@@ -1,6 +1,6 @@
 ---
 title: ASP.NET Core 中以資源為基礎的授權
-author: scottaddie
+author: rick-anderson
 description: 瞭解當授權屬性不足夠時，如何在 ASP.NET Core 應用程式中執行以資源為基礎的授權。
 ms.author: scaddie
 ms.custom: mvc
@@ -18,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: security/authorization/resourcebased
-ms.openlocfilehash: 61c97be03709f63f57a6383ab0c51ca9a511fbbb
-ms.sourcegitcommit: 54fe1ae5e7d068e27376d562183ef9ddc7afc432
+ms.openlocfilehash: ea1e0f719737732ccf47b3366e6089d5a653d6ab
+ms.sourcegitcommit: 0abfe496fed8e9470037c8128efa8a50069ccd52
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 03/10/2021
-ms.locfileid: "102585769"
+ms.lasthandoff: 04/07/2021
+ms.locfileid: "106563971"
 ---
 # <a name="resource-based-authorization-in-aspnet-core"></a>ASP.NET Core 中以資源為基礎的授權
 
@@ -43,7 +43,7 @@ ms.locfileid: "102585769"
 [檢視或下載範例程式碼](https://github.com/dotnet/AspNetCore.Docs/tree/main/aspnetcore/security/authorization/resourcebased/samples/1_1) ([如何下載](xref:index#how-to-download-a-sample))。
 ::: moniker-end
 
-使用以[授權保護的使用者資料建立 ASP.NET Core 應用程式](xref:security/authorization/secure-data)，包含使用以資源為基礎之授權的範例應用程式。
+使用以[授權保護的使用者資料建立 ASP.NET Core 應用程式](xref:security/authorization/secure-data)包含使用以資源為基礎之授權的範例應用程式。
 
 ## <a name="use-imperative-authorization"></a>使用命令式授權
 

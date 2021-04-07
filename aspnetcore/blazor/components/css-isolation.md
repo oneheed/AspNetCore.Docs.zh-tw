@@ -19,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/components/css-isolation
-ms.openlocfilehash: 0748f606314963788e6733ca2ae2ca2123d839b3
-ms.sourcegitcommit: e311cfb77f26a0a23681019bd334929d1aaeda20
+ms.openlocfilehash: adad39a5ca1f263ad619076e4da33a7e7b315cf5
+ms.sourcegitcommit: 0abfe496fed8e9470037c8128efa8a50069ccd52
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 02/03/2021
-ms.locfileid: "99529978"
+ms.lasthandoff: 04/07/2021
+ms.locfileid: "106563726"
 ---
 # <a name="aspnet-core-blazor-css-isolation"></a>ASP.NET Core Blazor CSS 隔離
 
@@ -227,7 +227,7 @@ CSS 隔離的設計是為了現成可用，但會提供一些 advanced 案例的
 <link href="_content/ClassLib/ClassLib.bundle.scp.css" rel="stylesheet">
 ```
 
-如需 RCLs 和元件程式庫的詳細資訊，請參閱：
+如需 RCLs 和類別庫的詳細資訊 Razor ，請參閱下列文章：
 
+* <xref:blazor/components/class-libraries>
 * <xref:razor-pages/ui-class>
-* <xref:blazor/components/class-libraries>.

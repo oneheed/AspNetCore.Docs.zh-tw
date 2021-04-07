@@ -1,6 +1,6 @@
 ---
 title: 從 ASP.NET Core 1.x 遷移至 2.0
-author: scottaddie
+author: rick-anderson
 description: 本文概述將 ASP.NET Core 1.x 專案移轉至 ASP.NET Core 2.0 的必要條件和最常見步驟。
 ms.author: scaddie
 ms.custom: mvc
@@ -18,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: migration/1x-to-2x/index
-ms.openlocfilehash: 6d67924d87cdbe72cb08c5305dfe45c5b22b31bc
-ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
+ms.openlocfilehash: 9a175c8a3cd960404006aad559b2ca65b5a8c1e1
+ms.sourcegitcommit: 0abfe496fed8e9470037c8128efa8a50069ccd52
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 10/30/2020
-ms.locfileid: "93057111"
+ms.lasthandoff: 04/07/2021
+ms.locfileid: "106564220"
 ---
 # <a name="migrate-from-aspnet-core-1x-to-20"></a>從 ASP.NET Core 1.x 遷移至 2.0
 
@@ -70,7 +70,7 @@ ms.locfileid: "93057111"
 
 1.x 專案中的 *.csproj* 檔案列出專案所使用的每個 NuGet 套件。
 
-在以 .NET Core 2.0 為目標的 ASP.NET Core 2.0 專案中， *.csproj* 檔案中的單一 [中繼套件](xref:fundamentals/metapackage) metapackage 參考會取代套件的集合：
+在以 .NET Core 2.0 為目標的 ASP.NET Core 2.0 專案中，*.csproj* 檔案中的單一 [中繼套件](xref:fundamentals/metapackage) metapackage 參考會取代套件的集合：
 
 [!code-xml[](../1x-to-2x/samples/AspNetCoreDotNetCore2App/AspNetCoreDotNetCore2App/AspNetCoreDotNetCore2App.csproj?range=8-10)]
 
@@ -108,11 +108,11 @@ ms.locfileid: "93057111"
 
 ## <a name="update-main-method-in-programcs"></a>更新 Program.cs 中的 Main 方法
 
-在 1.x 專案中， *Program.cs* 的 `Main` 方法看起來像這樣：
+在 1.x 專案中，*Program.cs* 的 `Main` 方法看起來像這樣：
 
 [!code-csharp[](../1x-to-2x/samples/AspNetCoreDotNetCore1App/AspNetCoreDotNetCore1App/Program.cs?name=snippet_ProgramCs&highlight=8-19)]
 
-在 2.0 專案中， *Program.cs* 的 `Main` 方法已經過簡化：
+在 2.0 專案中，*Program.cs* 的 `Main` 方法已經過簡化：
 
 [!code-csharp[](../1x-to-2x/samples/AspNetCoreDotNetCore2App/AspNetCoreDotNetCore2App/Program.cs?highlight=8-11)]
 
@@ -168,7 +168,7 @@ Unable to create an object of type '<Context>'. Add an implementation of 'IDesig
 
 <a name="view-compilation"></a>
 
-## <a name="review-no-locrazor-view-compilation-setting"></a>審核 Razor 視圖編譯設定
+## <a name="review-razor-view-compilation-setting"></a>審核 Razor 視圖編譯設定
 
 更快速的應用程式啟動時間和較小的發行組合對您而言極為重要。 基於這些理由，ASP.NET Core 2.0 中預設會啟用[ Razor view 編譯](xref:mvc/views/view-compilation)。
 
@@ -202,7 +202,7 @@ Unable to create an object of type '<Context>'. Add an implementation of 'IDesig
 
 <a name="auth-and-identity"></a>
 
-## <a name="adopt-authenticationno-locidentity-improvements"></a>採用驗證/ Identity 改進
+## <a name="adopt-authenticationidentity-improvements"></a>採用驗證/ Identity 改進
 
 ASP.NET Core 2.0 有新的驗證模型和的許多重大變更 ASP.NET Core Identity 。 如果您已在啟用個別使用者帳戶的情況下建立您的專案，或您已手動新增驗證或 Identity ，請參閱 [遷移驗證以及 Identity ASP.NET Core 2.0](xref:migration/1x-to-2x/identity-2x)。
 

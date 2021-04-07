@@ -1,6 +1,6 @@
 ---
 title: ASP.NET Core 中的標籤協助程式元件
-author: scottaddie
+author: rick-anderson
 description: 了解何謂標籤協助程式元件，以及如何在 ASP.NET Core 中使用。
 monikerRange: '>= aspnetcore-2.0'
 ms.author: scaddie
@@ -18,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: mvc/views/tag-helpers/th-components
-ms.openlocfilehash: fb0bda0cf8d225df4c58ae43f81ed0dce10c1adc
-ms.sourcegitcommit: 54fe1ae5e7d068e27376d562183ef9ddc7afc432
+ms.openlocfilehash: e99c2c2e5c0702dc9f1b5b79a1b8e3392a4a389d
+ms.sourcegitcommit: 0abfe496fed8e9470037c8128efa8a50069ccd52
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 03/10/2021
-ms.locfileid: "102587147"
+ms.lasthandoff: 04/07/2021
+ms.locfileid: "106564030"
 ---
 # <a name="tag-helper-components-in-aspnet-core"></a>ASP.NET Core 中的標籤協助程式元件
 

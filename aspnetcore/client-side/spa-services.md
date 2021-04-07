@@ -1,6 +1,6 @@
 ---
 title: 使用 JavaScript 服務在 ASP.NET Core 中建立單一頁面應用程式
-author: scottaddie
+author: rick-anderson
 description: 瞭解使用 JavaScript 服務建立單一頁面應用程式 (SPA) ASP.NET Core 支援的優點。
 monikerRange: '>= aspnetcore-2.1'
 ms.author: scaddie
@@ -19,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: client-side/spa-services
-ms.openlocfilehash: 1b9f5b4b4e066cdd3dd5fbfa666c7a087949979f
-ms.sourcegitcommit: 3593c4efa707edeaaceffbfa544f99f41fc62535
+ms.openlocfilehash: c0f18c1466bb140c82c9dfb41d773a6c68181168
+ms.sourcegitcommit: 0abfe496fed8e9470037c8128efa8a50069ccd52
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 01/04/2021
-ms.locfileid: "93054641"
+ms.lasthandoff: 04/07/2021
+ms.locfileid: "106563810"
 ---
 # <a name="use-javascript-services-to-create-single-page-applications-in-aspnet-core"></a>使用 JavaScript 服務在 ASP.NET Core 中建立單一頁面應用程式
 
@@ -161,7 +161,7 @@ npm i -D aspnet-webpack
 
 ### <a name="webpack-dev-middleware-configuration"></a>Webpack Dev 中介軟體設定
 
-Webpack Dev 中介軟體會透過 *Startup.cs* 檔的方法中的下列程式碼註冊至 HTTP 要求管線 `Configure` ：
+Webpack Dev 中介軟體會透過下列程式碼，在 *啟動 .cs* 檔案的方法中註冊至 HTTP 要求管線 `Configure` ：
 
 [!code-csharp[](../client-side/spa-services/sample/SpaServicesSampleApp/Startup.cs?name=snippet_WebpackMiddlewareRegistration&highlight=4)]
 

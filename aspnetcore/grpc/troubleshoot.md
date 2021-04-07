@@ -19,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: grpc/troubleshoot
-ms.openlocfilehash: 1fd89059183300993c7fa78aa8dab1bda247a530
-ms.sourcegitcommit: 54fe1ae5e7d068e27376d562183ef9ddc7afc432
+ms.openlocfilehash: 5b10b1b547e691bbdd16ff1c418a9119442bc998
+ms.sourcegitcommit: 0abfe496fed8e9470037c8128efa8a50069ccd52
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 03/10/2021
-ms.locfileid: "102586978"
+ms.lasthandoff: 04/07/2021
+ms.locfileid: "106564259"
 ---
 # <a name="troubleshoot-grpc-on-net-core"></a>針對 .NET Core 上的 gRPC 進行疑難排解
 
@@ -108,13 +108,13 @@ var client = new Greet.GreeterClient(channel);
 
 ## <a name="unable-to-start-aspnet-core-grpc-app-on-macos"></a>無法在 macOS 上啟動 ASP.NET Core gRPC 應用程式
 
-Kestrel 在 macOS 和舊版 Windows （例如 Windows 7）上不支援具有 TLS 的 HTTP/2。 ASP.NET Core gRPC 範本和範例預設會使用 TLS。 當您嘗試啟動 gRPC 伺服器時，將會看到下列錯誤訊息：
+Kestrel 在 macOS 和舊版 Windows （例如 Windows 7）上不支援具有 TLS 的 HTTP/2。 ASP.NET Core 的 gRPC 範本和範例預設會使用 TLS。 當您嘗試啟動 gRPC 伺服器時，將會看到下列錯誤訊息：
 
 > 無法 https://localhost:5001 在 IPv4 回送介面上系結至： macOS 因為缺少 ALPN 支援，所以不支援透過 TLS 的 HTTP/2。
 
 若要解決此問題，請將 Kestrel 和 gRPC 用戶端設定為使用 *沒有* TLS 的 HTTP/2。 您應該只在開發期間執行此動作。 不使用 TLS 會導致傳送 gRPC 的訊息，而不加密。
 
-Kestrel 必須在 *Program.cs* 中設定不含 TLS 的 HTTP/2 端點：
+Kestrel 必須在 *Program* 中設定不含 TLS 的 HTTP/2 端點：
 
 ```csharp
 public static IHostBuilder CreateHostBuilder(string[] args) =>
@@ -142,7 +142,7 @@ public static IHostBuilder CreateHostBuilder(string[] args) =>
 GRPC 用戶端也必須設定為不使用 TLS。 如需詳細資訊，請參閱 [使用 .Net Core 用戶端呼叫不安全的 gRPC 服務](#call-insecure-grpc-services-with-net-core-client)。
 
 > [!WARNING]
-> 只有在應用程式開發期間，才應該使用沒有 TLS 的 HTTP/2。 生產環境應用程式應該一律使用傳輸安全性。 如需詳細資訊，請參閱 [gRPC for ASP.NET Core 中的安全性考慮](xref:grpc/security#transport-security)。
+> 只有在應用程式開發期間，才應該使用沒有 TLS 的 HTTP/2。 生產環境應用程式應該一律使用傳輸安全性。 如需詳細資訊，請參閱 [gRPC 中的安全性考慮，以瞭解 ASP.NET Core](xref:grpc/security#transport-security)。
 
 ## <a name="grpc-c-assets-are-not-code-generated-from-proto-files"></a>gRPC c # 資產不是從 proto 檔案產生的程式碼
 
@@ -184,5 +184,56 @@ WPF 專案有 [已知的問題](https://github.com/dotnet/wpf/issues/810) ，導
 3. 在 WPF 應用程式中，加入新專案的參考。
 
 WPF 應用程式可以從新的類別庫專案使用 gRPC 產生的類型。
+
+## <a name="calling-grpc-services-hosted-in-a-sub-directory"></a>呼叫子目錄中裝載的 gRPC 服務
+
+進行 gRPC 呼叫時，會忽略 gRPC 通道位址的路徑元件。 例如， `GrpcChannel.ForAddress("https://localhost:5001/ignored_path")` `ignored_path` 在路由傳送服務的 gRPC 呼叫時，不會使用。
+
+因為 gRPC 具有標準化的規範位址結構，所以會忽略位址路徑。 GRPC 位址會結合封裝、服務和方法名稱： `https://localhost:5001/PackageName.ServiceName/MethodName` 。
+
+在某些案例中，應用程式必須包含具有 gRPC 呼叫的路徑。 例如，當 ASP.NET Core gRPC 應用程式裝載在 IIS 目錄中，且目錄必須包含在要求中時。 當需要路徑時，可以使用下列自訂指定，將它新增至 gRPC 呼叫 `SubdirectoryHandler` ：
+
+```csharp
+/// <summary>
+/// A delegating handler that adds a subdirectory to the URI of gRPC requests.
+/// </summary>
+public class SubdirectoryHandler : DelegatingHandler
+{
+    private readonly string _subdirectory;
+
+    public SubdirectoryHandler(HttpMessageHandler innerHandler, string subdirectory)
+        : base(innerHandler)
+    {
+        _subdirectory = subdirectory;
+    }
+
+    protected override Task<HttpResponseMessage> SendAsync(
+        HttpRequestMessage request, CancellationToken cancellationToken)
+    {
+        var url = $"{request.RequestUri.Scheme}://{request.RequestUri.Host}";
+        url += $"{_subdirectory}{request.RequestUri.AbsolutePath}";
+        request.RequestUri = new Uri(url, UriKind.Absolute);
+
+        return base.SendAsync(request, cancellationToken);
+    }
+}
+```
+
+`SubdirectoryHandler` 會在建立 gRPC 通道時使用。
+
+```csharp
+var handler = new SubdirectoryHandler(new HttpClientHandler(), "/MyApp");
+
+var channel = GrpcChannel.ForAddress("https://localhost:5001", new GrpcChannelOptions { HttpHandler = handler });
+var client = new Greet.GreeterClient(channel);
+
+var reply = await client.SayHelloAsync(new HelloRequest { Name = ".NET" });
+```
+
+上述程式碼：
+
+* `SubdirectoryHandler`使用路徑建立 `/MyApp` 。
+* 設定要使用的通道 `SubdirectoryHandler` 。
+* 使用呼叫 gRPC 服務 `SayHelloAsync` 。 GRPC 呼叫會傳送至 `https://localhost:5001/MyApp/greet.Greeter/SayHello` 。
 
 [!INCLUDE[](~/includes/gRPCazure.md)]

@@ -19,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: fundamentals/http-requests
-ms.openlocfilehash: 2bc093af63f305dd9808e37011223043646852d5
-ms.sourcegitcommit: 54fe1ae5e7d068e27376d562183ef9ddc7afc432
+ms.openlocfilehash: 2f0f7c5172e47ea4e44358191788c8153cbc2be5
+ms.sourcegitcommit: 0abfe496fed8e9470037c8128efa8a50069ccd52
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 03/10/2021
-ms.locfileid: "102588044"
+ms.lasthandoff: 04/07/2021
+ms.locfileid: "106563771"
 ---
 # <a name="make-http-requests-using-ihttpclientfactory-in-aspnet-core"></a>在 ASP.NET Core 中使用 IHttpClientFactory 發出 HTTP 要求
 
@@ -428,7 +428,7 @@ public class ValuesController : ControllerBase
 
 ## <a name="header-propagation-middleware"></a>標頭傳播中介軟體
 
-標頭傳播是 ASP.NET 核心中介軟體，可將來自傳入要求的 HTTP 標頭傳播至傳出 HTTP 用戶端要求。 若要使用標頭傳播：
+標頭傳播是 ASP.NET Core 中介軟體，用來將傳入要求的 HTTP 標頭傳播至傳出 HTTP 用戶端要求。 若要使用標頭傳播：
 
 * 參考 [AspNetCore. HeaderPropagation](https://www.nuget.org/packages/Microsoft.AspNetCore.HeaderPropagation) 套件。
 * 設定中介軟體和 `HttpClient` `Startup` ：
@@ -1048,15 +1048,15 @@ public class ValuesController : ControllerBase
 
 * <xref:System.Net.Http.IHttpClientFactory> 已在[泛型主機的](xref:fundamentals/host/generic-host)服務容器中註冊。
 * `MyService` 會從服務建立用戶端 Factory 執行個體，其可用來建立 `HttpClient`。 `HttpClient` 會用來擷取網頁。
-* `Main` 會建立範圍來執行服務的 `GetPage` 方法，並將網頁內容的前 500 個字元寫入至主控台。
+* `GetPage`會執行服務的方法，將網頁內容的前500個字元寫入至主控台。 如需從呼叫服務的詳細資訊 `Program.Main` ，請參閱 <xref:fundamentals/dependency-injection#call-services-from-main> 。
 
-[!code-csharp[](http-requests/samples/2.x/HttpClientFactoryConsoleSample/Program.cs?highlight=14-15,20,26-27,59-62)]
+[!code-csharp[](http-requests/samples/2.x/HttpClientFactoryConsoleSample/Program.cs?highlight=14-15,22)]
 
 ## <a name="header-propagation-middleware"></a>標頭傳播中介軟體
 
 標頭傳播是一個支援仲介的中介軟體，可將來自傳入要求的 HTTP 標頭傳播至連出的 HTTP 用戶端要求。 若要使用標頭傳播：
 
-* 參考封裝 [HeaderPropagation](https://www.nuget.org/packages/HeaderPropagation)的「支援的社區」埠。 ASP.NET Core 3.1 和更新版本支援 [AspNetCore HeaderPropagation](https://www.nuget.org/packages/Microsoft.AspNetCore.HeaderPropagation)。
+* 參考封裝 [HeaderPropagation](https://www.nuget.org/packages/HeaderPropagation)的「支援的社區」埠。 ASP.NET Core 3.1 和更新版本支援 [AspNetCore. HeaderPropagation](https://www.nuget.org/packages/Microsoft.AspNetCore.HeaderPropagation)。
 
 * 設定中介軟體和 `HttpClient` `Startup` ：
 

@@ -19,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: tutorials/razor-pages/model
-ms.openlocfilehash: 1173113b8bb035212cb9b84e7763970b9d5092a3
-ms.sourcegitcommit: 1f35de0ca9ba13ea63186c4dc387db4fb8e541e0
+ms.openlocfilehash: 28d1a99e57a07a8d63cbbb7f0ecc7f84d1adf446
+ms.sourcegitcommit: 0abfe496fed8e9470037c8128efa8a50069ccd52
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 03/20/2021
-ms.locfileid: "104711606"
+ms.lasthandoff: 04/07/2021
+ms.locfileid: "106564303"
 ---
 # <a name="part-2-add-a-model-to-a-razor-pages-app-in-aspnet-core"></a>第2部分：在 ASP.NET Core 中將模型新增至 Razor 頁面應用程式
 
@@ -146,13 +146,13 @@ ms.locfileid: "104711606"
 * 若 **為 Windows**：請執行下列命令：
 
   ```dotnetcli
-  dotnet-aspnet-codegenerator razorpage -m Movie -dc RazorPagesMovieContext -udl -outDir Pages\Movies --referenceScriptLibraries
+  dotnet aspnet-codegenerator razorpage -m Movie -dc RazorPagesMovieContext -udl -outDir Pages\Movies --referenceScriptLibraries
   ```
 
 * **針對 macOS 與 Linux**：執行下列命令：
 
   ```dotnetcli
-  dotnet-aspnet-codegenerator razorpage -m Movie -dc RazorPagesMovieContext -udl -outDir Pages/Movies --referenceScriptLibraries
+  dotnet aspnet-codegenerator razorpage -m Movie -dc RazorPagesMovieContext -udl -outDir Pages/Movies --referenceScriptLibraries
   ```
 
 <a name="codegenerator"></a> 下表詳細說明 ASP.NET Core 程式碼產生器選項。
@@ -168,7 +168,7 @@ ms.locfileid: "104711606"
 使用 `-h` 選項來取得命令的說明 `aspnet-codegenerator razorpage` ：
 
 ```dotnetcli
-dotnet-aspnet-codegenerator razorpage -h
+dotnet aspnet-codegenerator razorpage -h
 ```
 
 如需詳細資訊，請參閱 [dotnet-aspnet-codegenerator](xref:fundamentals/tools/dotnet-aspnet-codegenerator)。

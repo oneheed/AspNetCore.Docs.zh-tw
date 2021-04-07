@@ -1,6 +1,6 @@
 ---
 title: ASP.NET Core 的部分標記協助程式
-author: scottaddie
+author: rick-anderson
 description: 了解 ASP.NET Core 部分標記協助程式和其每個屬性在呈現部分檢視時所扮演的角色。
 monikerRange: '>= aspnetcore-2.1'
 ms.author: scaddie
@@ -19,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: mvc/views/tag-helpers/builtin-th/partial-tag-helper
-ms.openlocfilehash: 184901ad0bb6188ed908d41dabf2433c5ca7c1ce
-ms.sourcegitcommit: 54fe1ae5e7d068e27376d562183ef9ddc7afc432
+ms.openlocfilehash: 4d1c2e2759168b4b1cbccd4ca430fe52dcd028b0
+ms.sourcegitcommit: 0abfe496fed8e9470037c8128efa8a50069ccd52
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 03/10/2021
-ms.locfileid: "102587160"
+ms.lasthandoff: 04/07/2021
+ms.locfileid: "106564206"
 ---
 # <a name="partial-tag-helper-in-aspnet-core"></a>ASP.NET Core 的部分標記協助程式
 

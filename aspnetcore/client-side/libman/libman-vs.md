@@ -1,7 +1,7 @@
 ---
-title: 在 Visual Studio 中搭配使用 LibMan 與 ASP.NET Core
-author: scottaddie
-description: 瞭解如何在使用 Visual Studio 的 ASP.NET Core 專案中使用 LibMan。
+title: 在 Visual Studio 中使用 LibMan 搭配 ASP.NET Core
+author: rick-anderson
+description: 瞭解如何在具有 Visual Studio 的 ASP.NET Core 專案中使用 LibMan。
 ms.author: scaddie
 ms.custom: mvc
 ms.date: 08/20/2018
@@ -18,18 +18,18 @@ no-loc:
 - Razor
 - SignalR
 uid: client-side/libman/libman-vs
-ms.openlocfilehash: ae2bc34edaea2df6f329e47b00c7c02cc59d03bd
-ms.sourcegitcommit: 54fe1ae5e7d068e27376d562183ef9ddc7afc432
+ms.openlocfilehash: 8aabdd3fc8b4e9ebeabec482514768d23a152263
+ms.sourcegitcommit: 0abfe496fed8e9470037c8128efa8a50069ccd52
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 03/10/2021
-ms.locfileid: "102589266"
+ms.lasthandoff: 04/07/2021
+ms.locfileid: "106563871"
 ---
-# <a name="use-libman-with-aspnet-core-in-visual-studio"></a>在 Visual Studio 中搭配使用 LibMan 與 ASP.NET Core
+# <a name="use-libman-with-aspnet-core-in-visual-studio"></a>在 Visual Studio 中使用 LibMan 搭配 ASP.NET Core
 
 作者：[Scott Addie](https://twitter.com/Scott_Addie)
 
-Visual Studio 內建支援 ASP.NET Core 專案中的 [LibMan](xref:client-side/libman/index) ，包括：
+Visual Studio 在 ASP.NET Core 專案中有內建的 [LibMan](xref:client-side/libman/index) 支援，包括：
 
 * 支援在組建上設定和執行 LibMan 還原作業。
 * 用於觸發 LibMan 還原和清除作業的功能表項目。
@@ -40,7 +40,7 @@ Visual Studio 內建支援 ASP.NET Core 專案中的 [LibMan](xref:client-side/l
 
 ## <a name="prerequisites"></a>必要條件
 
-* [Visual Studio 2019](https://visualstudio.microsoft.com/downloads/?utm_medium=microsoft&utm_source=docs.microsoft.com&utm_campaign=inline+link&utm_content=download+vs2019) 與 **ASP.NET 和 網頁程式開發** 工作負載
+* **ASP.NET 和 網頁程式開發** 工作負載的 [Visual Studio 2019](https://visualstudio.microsoft.com/downloads/?utm_medium=microsoft&utm_source=docs.microsoft.com&utm_campaign=inline+link&utm_content=download+vs2019)
 
 ## <a name="add-library-files"></a>新增程式庫檔案
 
@@ -53,7 +53,7 @@ Visual Studio 內建支援 ASP.NET Core 專案中的 [LibMan](xref:client-side/l
 
 請依照下列步驟安裝用戶端程式庫：
 
-* 在 [ **方案 Explorer**] 中，以滑鼠右鍵按一下要加入檔案的專案資料夾。 選擇 [**新增**  >  **客戶** 端程式庫]。 [ **新增 Client-Side 程式庫** ] 對話方塊隨即出現：
+* 在 **方案總管** 中，以滑鼠右鍵按一下要加入檔案的專案資料夾。 選擇 [**新增**  >  **客戶** 端程式庫]。 [ **新增 Client-Side 程式庫** ] 對話方塊隨即出現：
 
   ![新增 Client-Side 程式庫對話方塊](_static/add-library-dialog.png)
 
@@ -96,12 +96,12 @@ Visual Studio 內建支援 ASP.NET Core 專案中的 [LibMan](xref:client-side/l
 
 ### <a name="manually-configure-libman-manifest-file-entries"></a>手動設定 LibMan 資訊清單檔案專案
 
-Visual Studio 中的所有 LibMan 作業都是以專案根目錄 LibMan 資訊清單的內容為基礎， (*在) 上libman.js* 。 您可以手動編輯 *libman.js* ，以設定專案的程式庫檔案。 一旦儲存 *libman.js上的* Visual Studio，Visual Studio 就會還原所有程式庫檔案。
+Visual Studio 中的所有 LibMan 作業都是以專案根目錄 LibMan 資訊清單的內容為基礎，) *上 (libman.js* 。 您可以手動編輯 *libman.js* ，以設定專案的程式庫檔案。 Visual Studio 儲存 *libman.js上的* 所有程式庫檔案。
 
 若要開啟 *libman.json* 進行編輯，有下列選項：
 
-* 在 [**方案瀏覽器**] 中，按兩下 [ *on]libman.js* 。
-* 以滑鼠右鍵按一下 [ **方案瀏覽器** ] 中的專案，然後選取 [ **管理 Client-Side 程式庫**]。 **&#8224;**
+* 在 **方案總管** 中，按兩下檔案 *libman.js* 。
+* 以滑鼠右鍵按一下 **方案總管** 中的專案，然後選取 [ **管理 Client-Side 程式庫**]。 **&#8224;**
 * 從 Visual Studio 的 [**專案**] 功能表中選取 [**管理 Client-Side 程式庫**]。 **&#8224;**
 
 **&#8224;** 如果專案根目錄中還沒有 *libman.js* 的檔案，則會以預設專案範本內容建立。
@@ -121,9 +121,9 @@ Visual Studio 提供豐富的 JSON 編輯支援，例如顏色標示、格式化
 
 ## <a name="restore-library-files"></a>還原程式庫檔案
 
-若要從 Visual Studio 中還原程式庫檔案，專案根目錄中的檔案上必須有有效的 *libman.js* 。 還原的檔案會放在專案中的每個程式庫所指定的位置。
+若要從 Visual Studio 內還原程式庫檔案，專案根目錄中的檔案上必須有有效的 *libman.js* 。 還原的檔案會放在專案中的每個程式庫所指定的位置。
 
-您可以透過下列兩種方式，在 ASP.NET Core 專案中還原程式庫檔案：
+您可以用兩種方式在 ASP.NET Core 專案中還原程式庫檔案：
 
 1. [在組建期間還原檔](#restore-files-during-build)
 1. [手動還原檔](#restore-files-manually)
@@ -134,7 +134,7 @@ LibMan 可將定義的程式庫檔案還原為組建程式的一部分。 依預
 
 若要啟用並測試還原的組建行為：
 
-* 在 [**方案瀏覽器**] 中，以滑鼠右鍵按一下 *libman.js* ，然後在內容功能表中選取 [**在組建上啟用還原 Client-Side 程式庫**]。
+* 以滑鼠右鍵按一下 **方案總管** 中的 [ *libman.js* ]，然後從內容功能表中選取 [從 **組建還原 Client-Side 程式庫**]。
 * 當系統提示您安裝 NuGet 套件時，請按一下 [ **是]** 按鈕。 LibraryManager 會將 [組建](https://www.nuget.org/packages/Microsoft.Web.LibraryManager.Build/) NuGet 套件新增至專案：
 
   [!code-xml[](samples/LibManSample/LibManSample.csproj?name=snippet_RestoreOnBuildPackage)]
@@ -163,15 +163,15 @@ LibMan 可將定義的程式庫檔案還原為組建程式的一部分。 依預
 手動還原程式庫檔案：
 
 * 針對方案中的所有專案：
-  * 在 [ **方案 Explorer**] 中，以滑鼠右鍵按一下方案名稱。
+  * 以滑鼠右鍵按一下 **方案總管** 中的方案名稱。
   * 選取 [ **還原 Client-Side 程式庫** ] 選項。
 * 針對特定專案：
-  * 在 [**方案 Explorer**] 中，以滑鼠右鍵按一下 [檔案 *libman.js* 。
+  * 在 **方案總管** 中，以滑鼠右鍵按一下檔案 *libman.js* 。
   * 選取 [ **還原 Client-Side 程式庫** ] 選項。
 
 當還原作業正在執行時：
 
-* Visual Studio 狀態列上的工作狀態中心 (的 TSC) 圖示將會進行動畫處理，並會 *開始讀取還原* 作業。 按一下圖示會開啟工具提示，其中列出已知的背景工作。
+* Visual Studio 狀態列上的工作狀態中心 (TSC) 圖示將會進行動畫處理，並會 *開始讀取還原* 作業。 按一下圖示會開啟工具提示，其中列出已知的背景工作。
 * 訊息將會傳送至 [**輸出**] 視窗的狀態列和連結 **庫管理員** 摘要。 例如：
 
   ```console
@@ -189,7 +189,7 @@ LibMan 可將定義的程式庫檔案還原為組建程式的一部分。 依預
 
 若要執行 *清除* 作業，這會刪除先前在 Visual Studio 中還原的程式庫檔案：
 
-* 在 [**方案 Explorer**] 中，以滑鼠右鍵按一下 [檔案 *libman.js* 。
+* 在 **方案總管** 中，以滑鼠右鍵按一下檔案 *libman.js* 。
 * 選取 [ **清除 Client-Side 程式庫** ] 選項。
 
 為了避免意外移除非程式庫檔案，清除作業並不會刪除整個目錄。 它只會移除先前還原中包含的檔案。

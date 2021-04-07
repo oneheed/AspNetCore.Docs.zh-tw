@@ -19,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/test
-ms.openlocfilehash: 1a7b1114934f4fe7006d60bdbd0f06792d2c6935
-ms.sourcegitcommit: 1436bd4d70937d6ec3140da56d96caab33c4320b
+ms.openlocfilehash: c9f7355f9152418ce6181d69aa0f43c1951a160e
+ms.sourcegitcommit: 0abfe496fed8e9470037c8128efa8a50069ccd52
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 03/06/2021
-ms.locfileid: "102394547"
+ms.lasthandoff: 04/07/2021
+ms.locfileid: "106563566"
 ---
 # <a name="test-components-in-aspnet-core-blazor"></a>ASP.NET Core 中的測試元件 Blazor
 
@@ -82,7 +82,7 @@ E2E 測試牽涉到啟動多個進程、網路和磁片 i/o，以及通常會導
 | 具有簡單 JS interop 邏輯的元件 | 單元測試 | 元件通常是透過 JS interop 來查詢 DOM 或觸發動畫。 在此案例中，通常偏好單元測試，因為它可以直接透過介面模擬 JS 互動 <xref:Microsoft.JSInterop.IJSRuntime> 。 |
 | 相依于複雜 JS 程式碼的元件 | 單元測試和個別的 JS 測試 | 如果元件使用 JS interop 來呼叫大型或複雜的 JS 程式庫 Blazor ，但元件和 js 程式庫之間的互動很簡單，那麼最好的方法就是將元件和 js 程式庫或程式碼視為兩個不同的部分，並個別測試。 Blazor使用單元測試程式庫測試元件，並使用 js 測試程式庫測試 js。 |
 | 邏輯相依于瀏覽器 DOM 之 JS 操作的元件 | E2E 測試 | 當元件的功能相依于 JS 以及其對 DOM 的操作時，請 Blazor 在 E2E 測試中同時確認 JS 和程式碼。 這是 Blazor framework 開發人員使用的瀏覽器轉譯邏輯所採用的方法 Blazor ，其具有緊密結合的 c # 和 JS 程式碼。 C # 和 JS 程式碼必須一起運作，才能 Blazor 在瀏覽器中正確呈現元件。
-| 相依于具有硬式相依性之協力廠商元件程式庫的元件 | E2E 測試 | 當元件的功能相依于具有難以模擬相依性的協力廠商元件庫時（例如 JS interop），E2E 測試可能是測試元件的唯一選項。 |
+| 相依于具有難以模擬相依性之協力廠商類別庫的元件 | E2E 測試 | 當元件的功能相依于具有難以模擬相依性的協力廠商類別庫時（例如 JS interop），E2E 測試可能是測試元件的唯一選項。 |
 
 ## <a name="test-components-with-bunit"></a>使用 bUnit 測試元件
 
@@ -154,4 +154,4 @@ public void CounterShouldIncrementWhenSelected()
 
 ## <a name="additional-resources"></a>其他資源
 
-* [開始使用 bUnit](https://bunit.egilhansen.com/docs/getting-started/)： bUnit 指示包含有關建立測試專案、參考測試架構封裝，以及建立和執行測試的指引。
+* [使用 bUnit 的開始使用](https://bunit.egilhansen.com/docs/getting-started/)： bUnit 指示包括建立測試專案、參考測試架構封裝，以及建立和執行測試的指引。

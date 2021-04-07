@@ -1,6 +1,6 @@
 ---
 title: 在 ASP.NET Core 中組合和縮短靜態資產
-author: scottaddie
+author: rick-anderson
 description: 瞭解如何藉由套用配套和縮制技術，將 ASP.NET Core web 應用程式中的靜態資源優化。
 ms.author: scaddie
 ms.custom: mvc
@@ -18,18 +18,18 @@ no-loc:
 - Razor
 - SignalR
 uid: client-side/bundling-and-minification
-ms.openlocfilehash: d594bbf277907e22b0299b0451e480e9d533d506
-ms.sourcegitcommit: 00368bb6a5420983beaced5b62dabc1f94abdeba
+ms.openlocfilehash: 12701d02ed38e68c1833ee51d9ea87337d17065a
+ms.sourcegitcommit: 0abfe496fed8e9470037c8128efa8a50069ccd52
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 03/16/2021
-ms.locfileid: "103557799"
+ms.lasthandoff: 04/07/2021
+ms.locfileid: "106563591"
 ---
 # <a name="bundle-and-minify-static-assets-in-aspnet-core"></a>在 ASP.NET Core 中組合和縮短靜態資產
 
 [Scott Addie](https://twitter.com/Scott_Addie)和[David 松樹](https://twitter.com/davidpine7)
 
-本文說明套用配套和縮制的優點，包括如何搭配 ASP.NET Core web 應用程式使用這些功能。
+本文說明套用配套和縮制的優點，包括這些功能如何搭配 ASP.NET Core 的 web 應用程式來使用。
 
 ## <a name="what-is-bundling-and-minification"></a>什麼是組合和縮制
 
@@ -88,7 +88,7 @@ AddAltToImg=function(t,a){var r=$(t,a);r.attr("alt",r.attr("id").replace(/ID/,""
 
 ## <a name="choose-a-bundling-and-minification-strategy"></a>選擇捆綁和縮制策略
 
-ASP.NET Core 與 WebOptimizer （開放原始碼包裝和縮制解決方案）相容。 如需安裝指示和範例專案，請參閱 [WebOptimizer](https://github.com/ligershark/WebOptimizer)。 ASP.NET Core 不提供原生包裝和縮制解決方案。
+ASP.NET Core 與 WebOptimizer 相容，這是一個開放原始碼的包裝和縮制解決方案。 如需安裝指示和範例專案，請參閱 [WebOptimizer](https://github.com/ligershark/WebOptimizer)。 ASP.NET Core 不提供原生包裝和縮制解決方案。
 
 協力廠商工具（例如 [Gulp](https://gulpjs.com) 和 [Webpack](https://webpack.js.org)）可為組合和縮制提供工作流程自動化，以及 linting 和映射優化。 藉由使用設計階段組合和縮制，縮減檔會在應用程式部署之前建立。 在部署之前進行包裝和縮小，可提供降低伺服器負載的優點。 不過，請務必瞭解設計階段組合和縮制會增加組建複雜性，而且只適用于靜態檔案。
 

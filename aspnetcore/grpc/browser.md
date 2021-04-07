@@ -41,7 +41,7 @@ ms.locfileid: "104711265"
 有兩個選項可讓您選擇如何將 gRPC 新增至 ASP.NET Core 應用程式：
 
 * 在 ASP.NET Core 中支援 gRPC-Web 與 gRPC HTTP/2。 此選項會使用封裝所提供的中介軟體 `Grpc.AspNetCore.Web` 。
-* 使用 [Envoy proxy 的](https://www.envoyproxy.io/) gRPC web 支援將 gRPC 轉譯成 gRPC HTTP/2。 接著會將已轉譯的呼叫轉送至 ASP.NET Core 應用程式。
+* 使用 [Envoy proxy](https://www.envoyproxy.io/) 的 gRPC web 支援將 gRPC 轉譯成 gRPC HTTP/2。 接著會將已轉譯的呼叫轉送至 ASP.NET Core 應用程式。
 
 每種方法都有優缺點。 如果應用程式的環境已經使用 Envoy 作為 proxy，也可以使用 Envoy 來提供 gRPC Web 支援。 針對僅需要 ASP.NET Core 的 gRPC Web 基本解決方案， `Grpc.AspNetCore.Web` 是不錯的選擇。
 
@@ -51,8 +51,8 @@ ASP.NET Core 中裝載的 gRPC 服務可以設定為支援 gRPC Web 和 HTTP/2 g
 
 若要使用 ASP.NET Core gRPC 服務來啟用 gRPC-Web：
 
-* 將參考新增至 [Grpc. AspNetCore. Web](https://www.nuget.org/packages/Grpc.AspNetCore.Web) 封裝。
-* 將應用程式新增至 Startup，以將應用程式設定為使用 gRPC Web `UseGrpcWeb` `EnableGrpcWeb` *。 .cs*：
+* 將參考新增至 [Grpc.AspNetCore.Web](https://www.nuget.org/packages/Grpc.AspNetCore.Web) 封裝。
+* 通過將`UseGrpcWeb`、`EnableGrpcWeb`新增至 *Startup.cs*，以將應用程式設定為使用 gRPC Web：
 
 [!code-csharp[](~/grpc/browser/sample/Startup.cs?name=snippet_1&highlight=10,14)]
 
@@ -111,8 +111,8 @@ ASP.NET Core 中裝載的 gRPC 服務可以設定為支援 gRPC Web 和 HTTP/2 g
 
 若要使用 gRPC-Web：
 
-* 將參考新增至 [Grpc .net. Web](https://www.nuget.org/packages/Grpc.Net.Client.Web) 封裝。
-* 確定 [Grpc .net](https://www.nuget.org/packages/Grpc.Net.Client) 的參考是2.29.0 或更高。
+* 將參考新增至 [Grpc.Net.Client.Web](https://www.nuget.org/packages/Grpc.Net.Client.Web) 封裝。
+* 確定 [Grpc.Net.Client](https://www.nuget.org/packages/Grpc.Net.Client) 的參考是2.29.0 或更高。
 * 將通道設定為使用 `GrpcWebHandler` ：
 
 [!code-csharp[](~/grpc/browser/sample/Handler.cs?name=snippet_1)]
@@ -140,8 +140,8 @@ ASP.NET Core 中裝載的 gRPC 服務可以設定為支援 gRPC Web 和 HTTP/2 g
 若要使用 gRPC-Web 搭配用戶端 factory：
 
 * 將套件參考新增至下列封裝的專案檔：
-  * [Grpc .Net](https://www.nuget.org/packages/Grpc.Net.Client.Web)
-  * [Grpc .Net. ClientFactory](https://www.nuget.org/packages/Grpc.Net.ClientFactory)
+  * [Grpc.Net.Client.Web](https://www.nuget.org/packages/Grpc.Net.Client.Web)
+  * [Grpc.Net.ClientFactory](https://www.nuget.org/packages/Grpc.Net.ClientFactory)
 * 使用泛型擴充方法 (DI) 註冊相依性插入的 gRPC 用戶端 `AddGrpcClient` 。 在 Blazor WebAssembly 應用程式中，服務是在中向 DI 註冊的 `Program.cs` 。
 * `GrpcWebHandler`使用 <xref:Microsoft.Extensions.DependencyInjection.HttpClientBuilderExtensions.ConfigurePrimaryHttpMessageHandler%2A> 擴充方法進行設定。
 

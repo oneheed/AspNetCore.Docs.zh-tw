@@ -1,7 +1,7 @@
 ---
-title: ASP.NET Core 與 Entity Framework 6
+title: ASP.NET Core 和 Entity Framework 6
 author: rick-anderson
-description: Entity Framework 6.3 和更新版本可與 ASP.NET Core 3.1 和更新版本搭配使用。
+description: Entity Framework 6.3 和更新版本適用于 ASP.NET Core 3.1 和更新版本。
 ms.author: riande
 ms.custom: mvc
 ms.date: 7/14/2020
@@ -16,21 +16,21 @@ no-loc:
 - Razor
 - SignalR
 uid: data/entity-framework-6
-ms.openlocfilehash: 44211ac7fa2acc7a7a9471ef362cff02f94fa2b6
-ms.sourcegitcommit: 54fe1ae5e7d068e27376d562183ef9ddc7afc432
+ms.openlocfilehash: b25c6bf414c82ce4cdf617a435434ecd9b746542
+ms.sourcegitcommit: 32203a42260e70d007c17a2b748b1bd5b9b662c1
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 03/10/2021
-ms.locfileid: "102588265"
+ms.lasthandoff: 04/13/2021
+ms.locfileid: "107298595"
 ---
-# <a name="aspnet-core-and-entity-framework-6"></a>ASP.NET Core 與 Entity Framework 6
+# <a name="aspnet-core-and-entity-framework-6"></a>ASP.NET Core 和 Entity Framework 6
 ::: moniker range=">= aspnetcore-3.0"
 
 依 [派翠克 Goode](https://github.com/attrib75)
 
 ## <a name="using-entity-framework-6-with-aspnet-core"></a>搭配使用 Entity Framework 6 與 ASP.NET Core
 
-[Entity Framework Core](/ef/) 應該用於新的開發。 [下載範例](https://github.com/dotnet/AspNetCore.Docs/tree/main/aspnetcore/data/entity-framework-6/3.xsample)使用[Entity FRAMEWORK 6 (EF6) ](/ef/ef6)，可用來將現有的應用程式遷移至 ASP.NET Core。
+[Entity Framework Core](/ef/) 應該用於新的開發。 [下載範例](https://github.com/dotnet/AspNetCore.Docs/tree/main/aspnetcore/data/entity-framework-6/3.xsample)使用[ENTITY FRAMEWORK 6 (EF6) ](/ef/ef6)，可用來將現有的應用程式遷移至 ASP.NET Core。
 
 ## <a name="additional-resources"></a>其他資源
 
@@ -56,7 +56,7 @@ ms.locfileid: "102588265"
 
 ## <a name="reference-full-framework-and-ef6-in-the-aspnet-core-project"></a>在 ASP.NET Core 專案中參考完整 Framework 和 EF6 
 
-您的 ASP.NET Core 專案需要以 .NET Framework 為目標，並參考 EF6。 例如，ASP.NET Core 專案的 *.csproj* 檔案看起來類似下列範例 (只顯示檔案的相關部分)。    
+您的 ASP.NET Core 專案必須以 .NET Framework 和參考 EF6 為目標。 例如，ASP.NET Core 專案的 *.csproj* 檔案看起來類似下列範例 (只顯示檔案的相關部分)。    
 
 [!code-xml[](entity-framework-6/sample/MVCCore/MVCCore.csproj?range=3-9&highlight=2)]   
 

@@ -18,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: grpc/performance
-ms.openlocfilehash: 5d19ace2e844f2159c1ba0e8bc92960bcf00d54e
-ms.sourcegitcommit: 54fe1ae5e7d068e27376d562183ef9ddc7afc432
+ms.openlocfilehash: 09d959b7fee0b431bb36d5449402a442b2f453ae
+ms.sourcegitcommit: 68df2a4d236f9f3299622ed38c75bb51cbdb4856
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 03/10/2021
-ms.locfileid: "102586991"
+ms.lasthandoff: 04/09/2021
+ms.locfileid: "107225536"
 ---
 # <a name="performance-best-practices-with-grpc"></a>使用 gRPC 的效能最佳作法
 
@@ -206,7 +206,7 @@ while (true)
 2. `RequestStream.WriteAsync` 對多重執行緒而言不安全。 一次只能將一個訊息寫入資料流程。 從多個執行緒透過單一資料流程傳送訊息時，需要生產者/取用者佇列 <xref:System.Threading.Channels.Channel%601> ，例如整理訊息。
 3. GRPC 串流方法僅限於接收一種訊息類型，以及傳送一種訊息類型。 例如， `rpc StreamingCall(stream RequestMessage) returns (stream ResponseMessage)` 接收 `RequestMessage` 和傳送 `ResponseMessage` 。 Protobuf 支援使用和的未知或條件式訊息 `Any` ， `oneof` 可解決這項限制。
 
-## <a name="send-binary-payloads"></a>傳送二進位承載
+## <a name="binary-payloads"></a>二進位裝載
 
 Protobuf 具有純量數值型別的支援二進位承載 `bytes` 。 C # 中產生的屬性會使用 `ByteString` 做為屬性類型。
 
@@ -218,7 +218,13 @@ message PayloadResponse {
 }  
 ```
 
-`ByteString` 使用建立實例 `ByteString.CopyFrom(byte[] data)` 。 這個方法會配置新的 `ByteString` 和新的 `byte[]` 。 資料會複製到新的位元組陣列。
+Protobuf 是一種二進位格式，可有效率地將大型二進位裝載序列化為極短的負擔。  以文字為基礎的格式（例如 JSON [）需要編碼位元組至 base64](https://en.wikipedia.org/wiki/Base64) ，並且將33% 新增至訊息大小。
+
+使用大型承載時， `ByteString` 有一些最佳作法可避免不必要的複製和配置，如下所述。
+
+### <a name="send-binary-payloads"></a>傳送二進位承載
+
+`ByteString` 通常會使用建立實例 `ByteString.CopyFrom(byte[] data)` 。 這個方法會配置新的 `ByteString` 和新的 `byte[]` 。 資料會複製到新的位元組陣列。
 
 使用建立實例可以避免額外的配置和複本 `UnsafeByteOperations.UnsafeWrap(ReadOnlyMemory<byte> bytes)` `ByteString` 。
 
@@ -232,3 +238,46 @@ payload.Data = UnsafeByteOperations.UnsafeWrap(data);
 位元組不會隨一起複製， `UnsafeByteOperations.UnsafeWrap` 因此 `ByteString` 在使用中時不得修改它們。
 
 `UnsafeByteOperations.UnsafeWrap` 需要 [Google. Protobuf](https://www.nuget.org/packages/Google.Protobuf/) 版本3.15.0 或更新版本。
+
+### <a name="read-binary-payloads"></a>讀取二進位承載
+
+您可以 `ByteString` 使用 `ByteString.Memory` 和屬性，有效率地從實例讀取資料 `ByteString.Span` 。
+
+```csharp
+var byteString = UnsafeByteOperations.UnsafeWrap(new byte[] { 0, 1, 2 });
+var data = byteString.Span;
+
+for (var i = 0; i < data.Length; i++)
+{
+    Console.WriteLine(data[i]);
+}
+```
+
+這些屬性可讓程式碼直接從沒有配置或複本的中讀取資料 `ByteString` 。
+
+大部分的 .NET Api 都有和多載 `ReadOnlyMemory<byte>` `byte[]` ，因此 `ByteString.Memory` 是使用基礎資料的建議方式。 不過，在某些情況下，應用程式可能需要以位元組陣列的形式取得資料。 如果需要位元組陣列，則 <xref:System.Runtime.InteropServices.MemoryMarshal.TryGetArray%2A?displayProperty=nameWithType> 可以使用方法從取得陣列， `ByteString` 而不需要配置新的資料複本。
+
+```csharp
+var byteString = GetByteString();
+
+ByteArrayContent content;
+if (MemoryMarshal.TryGetArray(byteString.Memory, out var segment))
+{
+    // Success. Use the ByteString's underlying array.
+    content = new ByteArrayContent(segment.Array, segment.Offset, segment.Count);
+}
+else
+{
+    // TryGetArray didn't succeed. Fall back to creating a copy of the data with ToByteArray.
+    content = new ByteArrayContent(byteString.ToByteArray());
+}
+
+var httpRequest = new HttpRequestMessage();
+httpRequest.Content = content;
+```
+
+上述程式碼：
+
+* 嘗試從取得陣列 `ByteString.Memory` <xref:System.Runtime.InteropServices.MemoryMarshal.TryGetArray%2A?displayProperty=nameWithType> 。
+* 如果成功抓取，則使用 `ArraySegment<byte>` 。 區段具有陣列、位移和計數的參考。
+* 否則，會切換回以配置新的陣列 `ByteString.ToByteArray()` 。

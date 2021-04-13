@@ -3,7 +3,7 @@ title: ASP.NET Core SignalR JAVA 用戶端
 author: mikaelm12
 description: 瞭解如何使用 ASP.NET Core SignalR JAVA 用戶端。
 monikerRange: '>= aspnetcore-2.2'
-ms.author: mimengis
+ms.author: bradyg
 ms.custom: mvc
 ms.date: 11/12/2019
 no-loc:
@@ -19,18 +19,18 @@ no-loc:
 - Razor
 - SignalR
 uid: signalr/java-client
-ms.openlocfilehash: bdfaf50895612e739eb5ca068a76755f97cf24c2
-ms.sourcegitcommit: 54fe1ae5e7d068e27376d562183ef9ddc7afc432
+ms.openlocfilehash: 0354821694d3f3422458c1986749fb9cc25d6276
+ms.sourcegitcommit: 68df2a4d236f9f3299622ed38c75bb51cbdb4856
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 03/10/2021
-ms.locfileid: "102588070"
+ms.lasthandoff: 04/09/2021
+ms.locfileid: "107225549"
 ---
 # <a name="aspnet-core-signalr-java-client"></a>ASP.NET Core SignalR JAVA 用戶端
 
 依 [Mikael Mengistu](https://twitter.com/MikaelM_12)
 
-JAVA 用戶端可 SignalR 從 java 程式碼（包括 Android 應用程式）連接到 ASP.NET Core 伺服器。 JAVA 用戶端和 [JavaScript 客戶](xref:signalr/javascript-client) 端和 [.net 客戶](xref:signalr/dotnet-client)端一樣，可讓您即時接收和傳送訊息至中樞。 JAVA 用戶端可在 ASP.NET Core 2.2 和更新版本中使用。
+JAVA 用戶端可 SignalR 從 java 程式碼（包括 Android 應用程式）連接到 ASP.NET Core 的伺服器。 JAVA 用戶端和 [JavaScript 客戶](xref:signalr/javascript-client) 端和 [.net 客戶](xref:signalr/dotnet-client)端一樣，可讓您即時接收和傳送訊息至中樞。 JAVA 用戶端可在 ASP.NET Core 2.2 和更新版本中使用。
 
 本文中參考的 JAVA 主控台應用程式範例會使用 SignalR java 用戶端。
 
@@ -91,7 +91,7 @@ SLF4J: See http://www.slf4j.org/codes.html#StaticLoggerBinder for further detail
 
 ## <a name="android-development-notes"></a>Android 開發附注
 
-關於 Android SDK 與 SignalR 用戶端功能的相容性，請在指定目標 ANDROID sdk 版本時，考慮下列專案：
+在 Android SDK 用戶端功能的相容性方面 SignalR ，指定目標 Android SDK 版本時，請考慮下列專案：
 
 * SignalRJAVA 用戶端會在 ANDROID API 層級16和更新版本上執行。
 * 透過 Azure 服務連接 SignalR 將需要 ANDROID API 層級20和更新版本，因為 [azure SignalR 服務](/azure/azure-signalr/signalr-overview) 需要 TLS 1.2 且不支援 sha-1 型加密套件。 Android 在 API 層級20中 [新增了 SHA-256 (和以上) 加密套件的支援](https://developer.android.com/reference/javax/net/ssl/SSLSocket) 。

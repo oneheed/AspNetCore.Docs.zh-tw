@@ -463,7 +463,7 @@ webBuilder.UseWebRoot("public");
 
 在建置的 <xref:Microsoft.Extensions.Hosting.IHost> 實作上呼叫方法來啟動和停止應用程式。 這些方法會影響所有在服務容器中註冊的 <xref:Microsoft.Extensions.Hosting.IHostedService> 實作。
 
-### <a name="run"></a>執行
+### <a name="run"></a>Run
 
 <xref:Microsoft.Extensions.Hosting.HostingAbstractionsHostExtensions.Run*> 會執行應用程式並封鎖呼叫執行緒，直到主機關閉為止。
 
@@ -475,7 +475,7 @@ webBuilder.UseWebRoot("public");
 
 <xref:Microsoft.Extensions.Hosting.HostingHostBuilderExtensions.RunConsoleAsync*>啟用主控台支援、建立並啟動主機，以及等候<kbd>Ctrl</kbd> + <kbd>C</kbd>/SIGINT 或 SIGTERM 關閉。
 
-### <a name="start"></a>開始
+### <a name="start"></a>Start
 
 <xref:Microsoft.Extensions.Hosting.HostingAbstractionsHostExtensions.Start*> 會同步啟動主機。
 
